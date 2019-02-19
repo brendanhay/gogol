@@ -66,7 +66,8 @@ type SettingsSearchApplicationsListResource =
 -- | Lists all search applications.
 --
 -- /See:/ 'settingsSearchApplicationsList' smart constructor.
-data SettingsSearchApplicationsList = SettingsSearchApplicationsList'
+data SettingsSearchApplicationsList =
+  SettingsSearchApplicationsList'
     { _ssalXgafv                       :: !(Maybe Xgafv)
     , _ssalUploadProtocol              :: !(Maybe Text)
     , _ssalAccessToken                 :: !(Maybe Text)
@@ -75,7 +76,8 @@ data SettingsSearchApplicationsList = SettingsSearchApplicationsList'
     , _ssalPageToken                   :: !(Maybe Text)
     , _ssalPageSize                    :: !(Maybe (Textual Int32))
     , _ssalCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SettingsSearchApplicationsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ data SettingsSearchApplicationsList = SettingsSearchApplicationsList'
 settingsSearchApplicationsList
     :: SettingsSearchApplicationsList
 settingsSearchApplicationsList =
-    SettingsSearchApplicationsList'
+  SettingsSearchApplicationsList'
     { _ssalXgafv = Nothing
     , _ssalUploadProtocol = Nothing
     , _ssalAccessToken = Nothing

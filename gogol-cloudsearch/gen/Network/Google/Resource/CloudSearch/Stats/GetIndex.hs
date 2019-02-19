@@ -72,7 +72,8 @@ type StatsGetIndexResource =
 -- | Gets indexed item statistics aggreggated across all data sources.
 --
 -- /See:/ 'statsGetIndex' smart constructor.
-data StatsGetIndex = StatsGetIndex'
+data StatsGetIndex =
+  StatsGetIndex'
     { _sgiFromDateMonth  :: !(Maybe (Textual Int32))
     , _sgiXgafv          :: !(Maybe Xgafv)
     , _sgiUploadProtocol :: !(Maybe Text)
@@ -84,7 +85,8 @@ data StatsGetIndex = StatsGetIndex'
     , _sgiToDateYear     :: !(Maybe (Textual Int32))
     , _sgiToDateMonth    :: !(Maybe (Textual Int32))
     , _sgiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatsGetIndex' with the minimum fields required to make a request.
 --
@@ -114,7 +116,7 @@ data StatsGetIndex = StatsGetIndex'
 statsGetIndex
     :: StatsGetIndex
 statsGetIndex =
-    StatsGetIndex'
+  StatsGetIndex'
     { _sgiFromDateMonth = Nothing
     , _sgiXgafv = Nothing
     , _sgiUploadProtocol = Nothing

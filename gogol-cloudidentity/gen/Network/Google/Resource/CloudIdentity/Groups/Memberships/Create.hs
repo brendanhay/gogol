@@ -62,7 +62,8 @@ type GroupsMembershipsCreateResource =
 -- | Creates a Membership.
 --
 -- /See:/ 'groupsMembershipsCreate' smart constructor.
-data GroupsMembershipsCreate = GroupsMembershipsCreate'
+data GroupsMembershipsCreate =
+  GroupsMembershipsCreate'
     { _gmcParent         :: !Text
     , _gmcXgafv          :: !(Maybe Xgafv)
     , _gmcUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,8 @@ data GroupsMembershipsCreate = GroupsMembershipsCreate'
     , _gmcUploadType     :: !(Maybe Text)
     , _gmcPayload        :: !Membership
     , _gmcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsMembershipsCreate' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ groupsMembershipsCreate
     -> Membership -- ^ 'gmcPayload'
     -> GroupsMembershipsCreate
 groupsMembershipsCreate pGmcParent_ pGmcPayload_ =
-    GroupsMembershipsCreate'
+  GroupsMembershipsCreate'
     { _gmcParent = pGmcParent_
     , _gmcXgafv = Nothing
     , _gmcUploadProtocol = Nothing

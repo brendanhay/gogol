@@ -63,7 +63,8 @@ type AppsServicesDeleteResource =
 -- | Deletes the specified service and all enclosed versions.
 --
 -- /See:/ 'appsServicesDelete' smart constructor.
-data AppsServicesDelete = AppsServicesDelete'
+data AppsServicesDelete =
+  AppsServicesDelete'
     { _asdXgafv          :: !(Maybe Xgafv)
     , _asdUploadProtocol :: !(Maybe Text)
     , _asdAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data AppsServicesDelete = AppsServicesDelete'
     , _asdAppsId         :: !Text
     , _asdServicesId     :: !Text
     , _asdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsServicesDelete' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ appsServicesDelete
     -> Text -- ^ 'asdServicesId'
     -> AppsServicesDelete
 appsServicesDelete pAsdAppsId_ pAsdServicesId_ =
-    AppsServicesDelete'
+  AppsServicesDelete'
     { _asdXgafv = Nothing
     , _asdUploadProtocol = Nothing
     , _asdAccessToken = Nothing

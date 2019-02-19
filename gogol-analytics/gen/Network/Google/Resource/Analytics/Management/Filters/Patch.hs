@@ -57,11 +57,13 @@ type ManagementFiltersPatchResource =
 -- | Updates an existing filter. This method supports patch semantics.
 --
 -- /See:/ 'managementFiltersPatch' smart constructor.
-data ManagementFiltersPatch = ManagementFiltersPatch'
+data ManagementFiltersPatch =
+  ManagementFiltersPatch'
     { _mfpFilterId  :: !Text
     , _mfpPayload   :: !Filter
     , _mfpAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementFiltersPatch' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ managementFiltersPatch
     -> Text -- ^ 'mfpAccountId'
     -> ManagementFiltersPatch
 managementFiltersPatch pMfpFilterId_ pMfpPayload_ pMfpAccountId_ =
-    ManagementFiltersPatch'
+  ManagementFiltersPatch'
     { _mfpFilterId = pMfpFilterId_
     , _mfpPayload = pMfpPayload_
     , _mfpAccountId = pMfpAccountId_

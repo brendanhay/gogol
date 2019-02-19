@@ -66,12 +66,14 @@ type URLCrawlErrorscountsQueryResource =
 -- category and platform.
 --
 -- /See:/ 'urlCrawlErrorscountsQuery' smart constructor.
-data URLCrawlErrorscountsQuery = URLCrawlErrorscountsQuery'
+data URLCrawlErrorscountsQuery =
+  URLCrawlErrorscountsQuery'
     { _uceqPlatform         :: !(Maybe URLCrawlErrorscountsQueryPlatform)
     , _uceqCategory         :: !(Maybe URLCrawlErrorscountsQueryCategory)
     , _uceqSiteURL          :: !Text
     , _uceqLatestCountsOnly :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLCrawlErrorscountsQuery' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ urlCrawlErrorscountsQuery
     :: Text -- ^ 'uceqSiteURL'
     -> URLCrawlErrorscountsQuery
 urlCrawlErrorscountsQuery pUceqSiteURL_ =
-    URLCrawlErrorscountsQuery'
+  URLCrawlErrorscountsQuery'
     { _uceqPlatform = Nothing
     , _uceqCategory = Nothing
     , _uceqSiteURL = pUceqSiteURL_

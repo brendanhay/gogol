@@ -60,11 +60,13 @@ type RollingUpdatesPauseResource =
 -- effect if invoked when the state of the update is PAUSED.
 --
 -- /See:/ 'rollingUpdatesPause' smart constructor.
-data RollingUpdatesPause = RollingUpdatesPause'
+data RollingUpdatesPause =
+  RollingUpdatesPause'
     { _rupRollingUpdate :: !Text
     , _rupProject       :: !Text
     , _rupZone          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdatesPause' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ rollingUpdatesPause
     -> Text -- ^ 'rupZone'
     -> RollingUpdatesPause
 rollingUpdatesPause pRupRollingUpdate_ pRupProject_ pRupZone_ =
-    RollingUpdatesPause'
+  RollingUpdatesPause'
     { _rupRollingUpdate = pRupRollingUpdate_
     , _rupProject = pRupProject_
     , _rupZone = pRupZone_

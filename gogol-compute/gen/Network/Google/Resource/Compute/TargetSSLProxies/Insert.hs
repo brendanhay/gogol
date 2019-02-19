@@ -60,11 +60,13 @@ type TargetSSLProxiesInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'targetSSLProxiesInsert' smart constructor.
-data TargetSSLProxiesInsert = TargetSSLProxiesInsert'
+data TargetSSLProxiesInsert =
+  TargetSSLProxiesInsert'
     { _tspiRequestId :: !(Maybe Text)
     , _tspiProject   :: !Text
     , _tspiPayload   :: !TargetSSLProxy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxiesInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ targetSSLProxiesInsert
     -> TargetSSLProxy -- ^ 'tspiPayload'
     -> TargetSSLProxiesInsert
 targetSSLProxiesInsert pTspiProject_ pTspiPayload_ =
-    TargetSSLProxiesInsert'
+  TargetSSLProxiesInsert'
     { _tspiRequestId = Nothing
     , _tspiProject = pTspiProject_
     , _tspiPayload = pTspiPayload_

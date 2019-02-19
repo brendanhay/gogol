@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ReportsFilesList' request conforms to.
 type ReportsFilesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -63,14 +63,16 @@ type ReportsFilesListResource =
 -- | Lists files for a report.
 --
 -- /See:/ 'reportsFilesList' smart constructor.
-data ReportsFilesList = ReportsFilesList'
+data ReportsFilesList =
+  ReportsFilesList'
     { _rflReportId   :: !(Textual Int64)
     , _rflProFileId  :: !(Textual Int64)
     , _rflSortOrder  :: !ReportsFilesListSortOrder
     , _rflPageToken  :: !(Maybe Text)
     , _rflSortField  :: !ReportsFilesListSortField
     , _rflMaxResults :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsFilesList' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ reportsFilesList
     -> Int64 -- ^ 'rflProFileId'
     -> ReportsFilesList
 reportsFilesList pRflReportId_ pRflProFileId_ =
-    ReportsFilesList'
+  ReportsFilesList'
     { _rflReportId = _Coerce # pRflReportId_
     , _rflProFileId = _Coerce # pRflProFileId_
     , _rflSortOrder = RFLSODescending

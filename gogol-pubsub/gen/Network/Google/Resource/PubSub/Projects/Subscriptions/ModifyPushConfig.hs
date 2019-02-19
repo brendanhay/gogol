@@ -72,7 +72,8 @@ type ProjectsSubscriptionsModifyPushConfigResource =
 -- \`PushConfig\`.
 --
 -- /See:/ 'projectsSubscriptionsModifyPushConfig' smart constructor.
-data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConfig'
+data ProjectsSubscriptionsModifyPushConfig =
+  ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv          :: !(Maybe Xgafv)
     , _psmpcUploadProtocol :: !(Maybe Text)
     , _psmpcAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConf
     , _psmpcPayload        :: !ModifyPushConfigRequest
     , _psmpcSubscription   :: !Text
     , _psmpcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsModifyPushConfig' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsSubscriptionsModifyPushConfig
     -> Text -- ^ 'psmpcSubscription'
     -> ProjectsSubscriptionsModifyPushConfig
 projectsSubscriptionsModifyPushConfig pPsmpcPayload_ pPsmpcSubscription_ =
-    ProjectsSubscriptionsModifyPushConfig'
+  ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv = Nothing
     , _psmpcUploadProtocol = Nothing
     , _psmpcAccessToken = Nothing
@@ -156,7 +158,8 @@ psmpcCallback
       (\ s a -> s{_psmpcCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsModifyPushConfig where
+           ProjectsSubscriptionsModifyPushConfig
+         where
         type Rs ProjectsSubscriptionsModifyPushConfig = Empty
         type Scopes ProjectsSubscriptionsModifyPushConfig =
              '["https://www.googleapis.com/auth/cloud-platform",

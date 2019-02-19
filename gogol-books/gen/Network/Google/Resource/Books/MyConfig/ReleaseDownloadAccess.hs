@@ -59,12 +59,14 @@ type MyConfigReleaseDownloadAccessResource =
 -- | Release downloaded content access restriction.
 --
 -- /See:/ 'myConfigReleaseDownloadAccess' smart constructor.
-data MyConfigReleaseDownloadAccess = MyConfigReleaseDownloadAccess'
+data MyConfigReleaseDownloadAccess =
+  MyConfigReleaseDownloadAccess'
     { _mcrdaCpksver   :: !Text
     , _mcrdaLocale    :: !(Maybe Text)
     , _mcrdaVolumeIds :: ![Text]
     , _mcrdaSource    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyConfigReleaseDownloadAccess' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ myConfigReleaseDownloadAccess
     -> [Text] -- ^ 'mcrdaVolumeIds'
     -> MyConfigReleaseDownloadAccess
 myConfigReleaseDownloadAccess pMcrdaCpksver_ pMcrdaVolumeIds_ =
-    MyConfigReleaseDownloadAccess'
+  MyConfigReleaseDownloadAccess'
     { _mcrdaCpksver = pMcrdaCpksver_
     , _mcrdaLocale = Nothing
     , _mcrdaVolumeIds = _Coerce # pMcrdaVolumeIds_

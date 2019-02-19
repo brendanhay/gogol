@@ -24,10 +24,12 @@ import           Network.Google.Sheets.Types.Sum
 -- sorting.
 --
 -- /See:/ 'pivotGroupSortValueBucket' smart constructor.
-data PivotGroupSortValueBucket = PivotGroupSortValueBucket'
+data PivotGroupSortValueBucket =
+  PivotGroupSortValueBucket'
     { _pgsvbBuckets     :: !(Maybe [ExtendedValue])
     , _pgsvbValuesIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PivotGroupSortValueBucket' with the minimum fields required to make a request.
 --
@@ -39,10 +41,8 @@ data PivotGroupSortValueBucket = PivotGroupSortValueBucket'
 pivotGroupSortValueBucket
     :: PivotGroupSortValueBucket
 pivotGroupSortValueBucket =
-    PivotGroupSortValueBucket'
-    { _pgsvbBuckets = Nothing
-    , _pgsvbValuesIndex = Nothing
-    }
+  PivotGroupSortValueBucket'
+    {_pgsvbBuckets = Nothing, _pgsvbValuesIndex = Nothing}
 
 -- | Determines the bucket from which values are chosen to sort. For example,
 -- in a pivot table with one row group & two column groups, the row group
@@ -84,11 +84,13 @@ instance ToJSON PivotGroupSortValueBucket where
 -- | Data within a range of the spreadsheet.
 --
 -- /See:/ 'valueRange' smart constructor.
-data ValueRange = ValueRange'
+data ValueRange =
+  ValueRange'
     { _vrValues         :: !(Maybe [[JSONValue]])
     , _vrRange          :: !(Maybe Text)
     , _vrMajorDimension :: !(Maybe ValueRangeMajorDimension)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ValueRange' with the minimum fields required to make a request.
 --
@@ -102,11 +104,8 @@ data ValueRange = ValueRange'
 valueRange
     :: ValueRange
 valueRange =
-    ValueRange'
-    { _vrValues = Nothing
-    , _vrRange = Nothing
-    , _vrMajorDimension = Nothing
-    }
+  ValueRange'
+    {_vrValues = Nothing, _vrRange = Nothing, _vrMajorDimension = Nothing}
 
 -- | The data that was read or to be written. This is an array of arrays, the
 -- outer array representing all the data and each inner array representing
@@ -162,10 +161,12 @@ instance ToJSON ValueRange where
 -- | Sorts data in rows based on a sort order per column.
 --
 -- /See:/ 'sortRangeRequest' smart constructor.
-data SortRangeRequest = SortRangeRequest'
+data SortRangeRequest =
+  SortRangeRequest'
     { _srrSortSpecs :: !(Maybe [SortSpec])
     , _srrRange     :: !(Maybe GridRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SortRangeRequest' with the minimum fields required to make a request.
 --
@@ -177,10 +178,7 @@ data SortRangeRequest = SortRangeRequest'
 sortRangeRequest
     :: SortRangeRequest
 sortRangeRequest =
-    SortRangeRequest'
-    { _srrSortSpecs = Nothing
-    , _srrRange = Nothing
-    }
+  SortRangeRequest' {_srrSortSpecs = Nothing, _srrRange = Nothing}
 
 -- | The sort order per column. Later specifications are used when values are
 -- equal in the earlier specifications.
@@ -211,9 +209,11 @@ instance ToJSON SortRangeRequest where
 -- | Removes the named range with the given ID from the spreadsheet.
 --
 -- /See:/ 'deleteNamedRangeRequest' smart constructor.
-newtype DeleteNamedRangeRequest = DeleteNamedRangeRequest'
+newtype DeleteNamedRangeRequest =
+  DeleteNamedRangeRequest'
     { _dnrrNamedRangeId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteNamedRangeRequest' with the minimum fields required to make a request.
 --
@@ -222,10 +222,7 @@ newtype DeleteNamedRangeRequest = DeleteNamedRangeRequest'
 -- * 'dnrrNamedRangeId'
 deleteNamedRangeRequest
     :: DeleteNamedRangeRequest
-deleteNamedRangeRequest =
-    DeleteNamedRangeRequest'
-    { _dnrrNamedRangeId = Nothing
-    }
+deleteNamedRangeRequest = DeleteNamedRangeRequest' {_dnrrNamedRangeId = Nothing}
 
 -- | The ID of the named range to delete.
 dnrrNamedRangeId :: Lens' DeleteNamedRangeRequest (Maybe Text)
@@ -248,10 +245,12 @@ instance ToJSON DeleteNamedRangeRequest where
 -- | Updates properties of the named range with the specified namedRangeId.
 --
 -- /See:/ 'updateNamedRangeRequest' smart constructor.
-data UpdateNamedRangeRequest = UpdateNamedRangeRequest'
+data UpdateNamedRangeRequest =
+  UpdateNamedRangeRequest'
     { _unrrNamedRange :: !(Maybe NamedRange)
     , _unrrFields     :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateNamedRangeRequest' with the minimum fields required to make a request.
 --
@@ -263,10 +262,7 @@ data UpdateNamedRangeRequest = UpdateNamedRangeRequest'
 updateNamedRangeRequest
     :: UpdateNamedRangeRequest
 updateNamedRangeRequest =
-    UpdateNamedRangeRequest'
-    { _unrrNamedRange = Nothing
-    , _unrrFields = Nothing
-    }
+  UpdateNamedRangeRequest' {_unrrNamedRange = Nothing, _unrrFields = Nothing}
 
 -- | The named range to update with the new properties.
 unrrNamedRange :: Lens' UpdateNamedRangeRequest (Maybe NamedRange)
@@ -298,9 +294,11 @@ instance ToJSON UpdateNamedRangeRequest where
 -- | The data included in a domain or series.
 --
 -- /See:/ 'chartData' smart constructor.
-newtype ChartData = ChartData'
+newtype ChartData =
+  ChartData'
     { _cdSourceRange :: Maybe ChartSourceRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChartData' with the minimum fields required to make a request.
 --
@@ -309,10 +307,7 @@ newtype ChartData = ChartData'
 -- * 'cdSourceRange'
 chartData
     :: ChartData
-chartData =
-    ChartData'
-    { _cdSourceRange = Nothing
-    }
+chartData = ChartData' {_cdSourceRange = Nothing}
 
 -- | The source ranges of the data.
 cdSourceRange :: Lens' ChartData (Maybe ChartSourceRange)
@@ -333,9 +328,11 @@ instance ToJSON ChartData where
 -- | The request for clearing more than one range of values in a spreadsheet.
 --
 -- /See:/ 'batchClearValuesRequest' smart constructor.
-newtype BatchClearValuesRequest = BatchClearValuesRequest'
+newtype BatchClearValuesRequest =
+  BatchClearValuesRequest'
     { _bcvrRanges :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchClearValuesRequest' with the minimum fields required to make a request.
 --
@@ -344,10 +341,7 @@ newtype BatchClearValuesRequest = BatchClearValuesRequest'
 -- * 'bcvrRanges'
 batchClearValuesRequest
     :: BatchClearValuesRequest
-batchClearValuesRequest =
-    BatchClearValuesRequest'
-    { _bcvrRanges = Nothing
-    }
+batchClearValuesRequest = BatchClearValuesRequest' {_bcvrRanges = Nothing}
 
 -- | The ranges to clear, in A1 notation.
 bcvrRanges :: Lens' BatchClearValuesRequest [Text]
@@ -370,9 +364,11 @@ instance ToJSON BatchClearValuesRequest where
 -- | The response from creating developer metadata.
 --
 -- /See:/ 'createDeveloperMetadataResponse' smart constructor.
-newtype CreateDeveloperMetadataResponse = CreateDeveloperMetadataResponse'
+newtype CreateDeveloperMetadataResponse =
+  CreateDeveloperMetadataResponse'
     { _cdmrDeveloperMetadata :: Maybe DeveloperMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDeveloperMetadataResponse' with the minimum fields required to make a request.
 --
@@ -382,9 +378,7 @@ newtype CreateDeveloperMetadataResponse = CreateDeveloperMetadataResponse'
 createDeveloperMetadataResponse
     :: CreateDeveloperMetadataResponse
 createDeveloperMetadataResponse =
-    CreateDeveloperMetadataResponse'
-    { _cdmrDeveloperMetadata = Nothing
-    }
+  CreateDeveloperMetadataResponse' {_cdmrDeveloperMetadata = Nothing}
 
 -- | The developer metadata that was created.
 cdmrDeveloperMetadata :: Lens' CreateDeveloperMetadataResponse (Maybe DeveloperMetadata)
@@ -420,9 +414,11 @@ instance ToJSON CreateDeveloperMetadataResponse where
 -- +--------------+--------------+
 --
 -- /See:/ 'dateTimeRule' smart constructor.
-newtype DateTimeRule = DateTimeRule'
+newtype DateTimeRule =
+  DateTimeRule'
     { _dtrType :: Maybe DateTimeRuleType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DateTimeRule' with the minimum fields required to make a request.
 --
@@ -431,10 +427,7 @@ newtype DateTimeRule = DateTimeRule'
 -- * 'dtrType'
 dateTimeRule
     :: DateTimeRule
-dateTimeRule =
-    DateTimeRule'
-    { _dtrType = Nothing
-    }
+dateTimeRule = DateTimeRule' {_dtrType = Nothing}
 
 -- | The type of date-time grouping to apply.
 dtrType :: Lens' DateTimeRule (Maybe DateTimeRuleType)
@@ -452,14 +445,16 @@ instance ToJSON DateTimeRule where
 -- | Properties of a spreadsheet.
 --
 -- /See:/ 'spreadsheetProperties' smart constructor.
-data SpreadsheetProperties = SpreadsheetProperties'
+data SpreadsheetProperties =
+  SpreadsheetProperties'
     { _spDefaultFormat                :: !(Maybe CellFormat)
     , _spLocale                       :: !(Maybe Text)
     , _spIterativeCalculationSettings :: !(Maybe IterativeCalculationSettings)
     , _spAutoRecalc                   :: !(Maybe SpreadsheetPropertiesAutoRecalc)
     , _spTitle                        :: !(Maybe Text)
     , _spTimeZone                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetProperties' with the minimum fields required to make a request.
 --
@@ -479,7 +474,7 @@ data SpreadsheetProperties = SpreadsheetProperties'
 spreadsheetProperties
     :: SpreadsheetProperties
 spreadsheetProperties =
-    SpreadsheetProperties'
+  SpreadsheetProperties'
     { _spDefaultFormat = Nothing
     , _spLocale = Nothing
     , _spIterativeCalculationSettings = Nothing
@@ -554,12 +549,14 @@ instance ToJSON SpreadsheetProperties where
 -- | The borders of the cell.
 --
 -- /See:/ 'bOrders' smart constructor.
-data BOrders = BOrders'
+data BOrders =
+  BOrders'
     { _boBottom :: !(Maybe BOrder)
     , _boLeft   :: !(Maybe BOrder)
     , _boRight  :: !(Maybe BOrder)
     , _boTop    :: !(Maybe BOrder)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BOrders' with the minimum fields required to make a request.
 --
@@ -575,7 +572,7 @@ data BOrders = BOrders'
 bOrders
     :: BOrders
 bOrders =
-    BOrders'
+  BOrders'
     { _boBottom = Nothing
     , _boLeft = Nothing
     , _boRight = Nothing
@@ -619,9 +616,11 @@ instance ToJSON BOrders where
 -- a spreadsheet.
 --
 -- /See:/ 'batchClearValuesByDataFilterRequest' smart constructor.
-newtype BatchClearValuesByDataFilterRequest = BatchClearValuesByDataFilterRequest'
+newtype BatchClearValuesByDataFilterRequest =
+  BatchClearValuesByDataFilterRequest'
     { _bcvbdfrDataFilters :: Maybe [DataFilter]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchClearValuesByDataFilterRequest' with the minimum fields required to make a request.
 --
@@ -631,9 +630,7 @@ newtype BatchClearValuesByDataFilterRequest = BatchClearValuesByDataFilterReques
 batchClearValuesByDataFilterRequest
     :: BatchClearValuesByDataFilterRequest
 batchClearValuesByDataFilterRequest =
-    BatchClearValuesByDataFilterRequest'
-    { _bcvbdfrDataFilters = Nothing
-    }
+  BatchClearValuesByDataFilterRequest' {_bcvbdfrDataFilters = Nothing}
 
 -- | The DataFilters used to determine which ranges to clear.
 bcvbdfrDataFilters :: Lens' BatchClearValuesByDataFilterRequest [DataFilter]
@@ -662,10 +659,12 @@ instance ToJSON BatchClearValuesByDataFilterRequest
 -- index of the next run. When updating, all fields must be set.
 --
 -- /See:/ 'textFormatRun' smart constructor.
-data TextFormatRun = TextFormatRun'
+data TextFormatRun =
+  TextFormatRun'
     { _tfrFormat     :: !(Maybe TextFormat)
     , _tfrStartIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextFormatRun' with the minimum fields required to make a request.
 --
@@ -676,11 +675,7 @@ data TextFormatRun = TextFormatRun'
 -- * 'tfrStartIndex'
 textFormatRun
     :: TextFormatRun
-textFormatRun =
-    TextFormatRun'
-    { _tfrFormat = Nothing
-    , _tfrStartIndex = Nothing
-    }
+textFormatRun = TextFormatRun' {_tfrFormat = Nothing, _tfrStartIndex = Nothing}
 
 -- | The format of this run. Absent values inherit the cell\'s format.
 tfrFormat :: Lens' TextFormatRun (Maybe TextFormat)
@@ -715,9 +710,11 @@ instance ToJSON TextFormatRun where
 -- C:C.
 --
 -- /See:/ 'deleteDimensionGroupRequest' smart constructor.
-newtype DeleteDimensionGroupRequest = DeleteDimensionGroupRequest'
+newtype DeleteDimensionGroupRequest =
+  DeleteDimensionGroupRequest'
     { _ddgrRange :: Maybe DimensionRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDimensionGroupRequest' with the minimum fields required to make a request.
 --
@@ -727,9 +724,7 @@ newtype DeleteDimensionGroupRequest = DeleteDimensionGroupRequest'
 deleteDimensionGroupRequest
     :: DeleteDimensionGroupRequest
 deleteDimensionGroupRequest =
-    DeleteDimensionGroupRequest'
-    { _ddgrRange = Nothing
-    }
+  DeleteDimensionGroupRequest' {_ddgrRange = Nothing}
 
 -- | The range of the group to be deleted.
 ddgrRange :: Lens' DeleteDimensionGroupRequest (Maybe DimensionRange)
@@ -749,10 +744,12 @@ instance ToJSON DeleteDimensionGroupRequest where
 -- | Updates the state of the specified group.
 --
 -- /See:/ 'updateDimensionGroupRequest' smart constructor.
-data UpdateDimensionGroupRequest = UpdateDimensionGroupRequest'
+data UpdateDimensionGroupRequest =
+  UpdateDimensionGroupRequest'
     { _udgrDimensionGroup :: !(Maybe DimensionGroup)
     , _udgrFields         :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDimensionGroupRequest' with the minimum fields required to make a request.
 --
@@ -764,10 +761,8 @@ data UpdateDimensionGroupRequest = UpdateDimensionGroupRequest'
 updateDimensionGroupRequest
     :: UpdateDimensionGroupRequest
 updateDimensionGroupRequest =
-    UpdateDimensionGroupRequest'
-    { _udgrDimensionGroup = Nothing
-    , _udgrFields = Nothing
-    }
+  UpdateDimensionGroupRequest'
+    {_udgrDimensionGroup = Nothing, _udgrFields = Nothing}
 
 -- | The group whose state should be updated. The range and depth of the
 -- group should specify a valid group on the sheet, and all other fields
@@ -804,9 +799,11 @@ instance ToJSON UpdateDimensionGroupRequest where
 -- EmbeddedObjectPosition.newSheet.
 --
 -- /See:/ 'addSheetRequest' smart constructor.
-newtype AddSheetRequest = AddSheetRequest'
+newtype AddSheetRequest =
+  AddSheetRequest'
     { _asrProperties :: Maybe SheetProperties
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddSheetRequest' with the minimum fields required to make a request.
 --
@@ -815,10 +812,7 @@ newtype AddSheetRequest = AddSheetRequest'
 -- * 'asrProperties'
 addSheetRequest
     :: AddSheetRequest
-addSheetRequest =
-    AddSheetRequest'
-    { _asrProperties = Nothing
-    }
+addSheetRequest = AddSheetRequest' {_asrProperties = Nothing}
 
 -- | The properties the new sheet should have. All properties are optional.
 -- The sheetId field is optional; if one is not set, an id will be randomly
@@ -842,10 +836,12 @@ instance ToJSON AddSheetRequest where
 -- | A sort order associated with a specific column or row.
 --
 -- /See:/ 'sortSpec' smart constructor.
-data SortSpec = SortSpec'
+data SortSpec =
+  SortSpec'
     { _ssSortOrder      :: !(Maybe SortSpecSortOrder)
     , _ssDimensionIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SortSpec' with the minimum fields required to make a request.
 --
@@ -856,11 +852,7 @@ data SortSpec = SortSpec'
 -- * 'ssDimensionIndex'
 sortSpec
     :: SortSpec
-sortSpec =
-    SortSpec'
-    { _ssSortOrder = Nothing
-    , _ssDimensionIndex = Nothing
-    }
+sortSpec = SortSpec' {_ssSortOrder = Nothing, _ssDimensionIndex = Nothing}
 
 -- | The order data should be sorted.
 ssSortOrder :: Lens' SortSpec (Maybe SortSpecSortOrder)
@@ -893,11 +885,13 @@ instance ToJSON SortSpec where
 -- expanded as a unit on the sheet.
 --
 -- /See:/ 'dimensionGroup' smart constructor.
-data DimensionGroup = DimensionGroup'
+data DimensionGroup =
+  DimensionGroup'
     { _dgCollapsed :: !(Maybe Bool)
     , _dgRange     :: !(Maybe DimensionRange)
     , _dgDepth     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DimensionGroup' with the minimum fields required to make a request.
 --
@@ -911,11 +905,8 @@ data DimensionGroup = DimensionGroup'
 dimensionGroup
     :: DimensionGroup
 dimensionGroup =
-    DimensionGroup'
-    { _dgCollapsed = Nothing
-    , _dgRange = Nothing
-    , _dgDepth = Nothing
-    }
+  DimensionGroup'
+    {_dgCollapsed = Nothing, _dgRange = Nothing, _dgDepth = Nothing}
 
 -- | This field is true if this group is collapsed. A collapsed group remains
 -- collapsed if an overlapping group at a shallower depth is expanded. A
@@ -958,12 +949,14 @@ instance ToJSON DimensionGroup where
 -- | Copies data from the source to the destination.
 --
 -- /See:/ 'copyPasteRequest' smart constructor.
-data CopyPasteRequest = CopyPasteRequest'
+data CopyPasteRequest =
+  CopyPasteRequest'
     { _cprDestination      :: !(Maybe GridRange)
     , _cprSource           :: !(Maybe GridRange)
     , _cprPasteOrientation :: !(Maybe CopyPasteRequestPasteOrientation)
     , _cprPasteType        :: !(Maybe CopyPasteRequestPasteType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CopyPasteRequest' with the minimum fields required to make a request.
 --
@@ -979,7 +972,7 @@ data CopyPasteRequest = CopyPasteRequest'
 copyPasteRequest
     :: CopyPasteRequest
 copyPasteRequest =
-    CopyPasteRequest'
+  CopyPasteRequest'
     { _cprDestination = Nothing
     , _cprSource = Nothing
     , _cprPasteOrientation = Nothing
@@ -1046,13 +1039,15 @@ instance ToJSON CopyPasteRequest where
 -- usually rendered in the UI as \`#REF!\`.
 --
 -- /See:/ 'gridRange' smart constructor.
-data GridRange = GridRange'
+data GridRange =
+  GridRange'
     { _grEndColumnIndex   :: !(Maybe (Textual Int32))
     , _grStartColumnIndex :: !(Maybe (Textual Int32))
     , _grEndRowIndex      :: !(Maybe (Textual Int32))
     , _grStartRowIndex    :: !(Maybe (Textual Int32))
     , _grSheetId          :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GridRange' with the minimum fields required to make a request.
 --
@@ -1070,7 +1065,7 @@ data GridRange = GridRange'
 gridRange
     :: GridRange
 gridRange =
-    GridRange'
+  GridRange'
     { _grEndColumnIndex = Nothing
     , _grStartColumnIndex = Nothing
     , _grEndRowIndex = Nothing
@@ -1136,9 +1131,11 @@ instance ToJSON GridRange where
 -- | The result of adding a filter view.
 --
 -- /See:/ 'addFilterViewResponse' smart constructor.
-newtype AddFilterViewResponse = AddFilterViewResponse'
+newtype AddFilterViewResponse =
+  AddFilterViewResponse'
     { _afvrFilter :: Maybe FilterView
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddFilterViewResponse' with the minimum fields required to make a request.
 --
@@ -1147,10 +1144,7 @@ newtype AddFilterViewResponse = AddFilterViewResponse'
 -- * 'afvrFilter'
 addFilterViewResponse
     :: AddFilterViewResponse
-addFilterViewResponse =
-    AddFilterViewResponse'
-    { _afvrFilter = Nothing
-    }
+addFilterViewResponse = AddFilterViewResponse' {_afvrFilter = Nothing}
 
 -- | The newly added filter view.
 afvrFilter :: Lens' AddFilterViewResponse (Maybe FilterView)
@@ -1171,10 +1165,12 @@ instance ToJSON AddFilterViewResponse where
 -- filters.
 --
 -- /See:/ 'booleanCondition' smart constructor.
-data BooleanCondition = BooleanCondition'
+data BooleanCondition =
+  BooleanCondition'
     { _bcValues :: !(Maybe [ConditionValue])
     , _bcType   :: !(Maybe BooleanConditionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BooleanCondition' with the minimum fields required to make a request.
 --
@@ -1185,11 +1181,7 @@ data BooleanCondition = BooleanCondition'
 -- * 'bcType'
 booleanCondition
     :: BooleanCondition
-booleanCondition =
-    BooleanCondition'
-    { _bcValues = Nothing
-    , _bcType = Nothing
-    }
+booleanCondition = BooleanCondition' {_bcValues = Nothing, _bcType = Nothing}
 
 -- | The values of the condition. The number of supported values depends on
 -- the condition type. Some support zero values, others one or two values,
@@ -1222,9 +1214,11 @@ instance ToJSON BooleanCondition where
 -- the cells in that dimension.
 --
 -- /See:/ 'autoResizeDimensionsRequest' smart constructor.
-newtype AutoResizeDimensionsRequest = AutoResizeDimensionsRequest'
+newtype AutoResizeDimensionsRequest =
+  AutoResizeDimensionsRequest'
     { _ardrDimensions :: Maybe DimensionRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoResizeDimensionsRequest' with the minimum fields required to make a request.
 --
@@ -1234,9 +1228,7 @@ newtype AutoResizeDimensionsRequest = AutoResizeDimensionsRequest'
 autoResizeDimensionsRequest
     :: AutoResizeDimensionsRequest
 autoResizeDimensionsRequest =
-    AutoResizeDimensionsRequest'
-    { _ardrDimensions = Nothing
-    }
+  AutoResizeDimensionsRequest' {_ardrDimensions = Nothing}
 
 -- | The dimensions to automatically resize.
 ardrDimensions :: Lens' AutoResizeDimensionsRequest (Maybe DimensionRange)
@@ -1259,7 +1251,8 @@ instance ToJSON AutoResizeDimensionsRequest where
 -- | A </chart/interactive/docs/gallery/bubblechart bubble chart>.
 --
 -- /See:/ 'bubbleChartSpec' smart constructor.
-data BubbleChartSpec = BubbleChartSpec'
+data BubbleChartSpec =
+  BubbleChartSpec'
     { _bcsBubbleTextStyle     :: !(Maybe TextFormat)
     , _bcsBubbleBOrderColor   :: !(Maybe Color)
     , _bcsLegendPosition      :: !(Maybe BubbleChartSpecLegendPosition)
@@ -1271,7 +1264,8 @@ data BubbleChartSpec = BubbleChartSpec'
     , _bcsBubbleMaxRadiusSize :: !(Maybe (Textual Int32))
     , _bcsBubbleOpacity       :: !(Maybe (Textual Double))
     , _bcsBubbleSizes         :: !(Maybe ChartData)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BubbleChartSpec' with the minimum fields required to make a request.
 --
@@ -1301,7 +1295,7 @@ data BubbleChartSpec = BubbleChartSpec'
 bubbleChartSpec
     :: BubbleChartSpec
 bubbleChartSpec =
-    BubbleChartSpec'
+  BubbleChartSpec'
     { _bcsBubbleTextStyle = Nothing
     , _bcsBubbleBOrderColor = Nothing
     , _bcsLegendPosition = Nothing
@@ -1430,10 +1424,12 @@ instance ToJSON BubbleChartSpec where
 -- | Deletes a range of cells, shifting other cells into the deleted area.
 --
 -- /See:/ 'deleteRangeRequest' smart constructor.
-data DeleteRangeRequest = DeleteRangeRequest'
+data DeleteRangeRequest =
+  DeleteRangeRequest'
     { _drrShiftDimension :: !(Maybe DeleteRangeRequestShiftDimension)
     , _drrRange          :: !(Maybe GridRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRangeRequest' with the minimum fields required to make a request.
 --
@@ -1445,10 +1441,7 @@ data DeleteRangeRequest = DeleteRangeRequest'
 deleteRangeRequest
     :: DeleteRangeRequest
 deleteRangeRequest =
-    DeleteRangeRequest'
-    { _drrShiftDimension = Nothing
-    , _drrRange = Nothing
-    }
+  DeleteRangeRequest' {_drrShiftDimension = Nothing, _drrRange = Nothing}
 
 -- | The dimension from which deleted cells will be replaced with. If ROWS,
 -- existing cells will be shifted upward to replace the deleted cells. If
@@ -1480,7 +1473,8 @@ instance ToJSON DeleteRangeRequest where
 -- | A sheet in a spreadsheet.
 --
 -- /See:/ 'sheet' smart constructor.
-data Sheet = Sheet'
+data Sheet =
+  Sheet'
     { _sColumnGroups       :: !(Maybe [DimensionGroup])
     , _sData               :: !(Maybe [GridData])
     , _sMerges             :: !(Maybe [GridRange])
@@ -1493,7 +1487,8 @@ data Sheet = Sheet'
     , _sConditionalFormats :: !(Maybe [ConditionalFormatRule])
     , _sFilterViews        :: !(Maybe [FilterView])
     , _sProperties         :: !(Maybe SheetProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Sheet' with the minimum fields required to make a request.
 --
@@ -1525,7 +1520,7 @@ data Sheet = Sheet'
 sheet
     :: Sheet
 sheet =
-    Sheet'
+  Sheet'
     { _sColumnGroups = Nothing
     , _sData = Nothing
     , _sMerges = Nothing
@@ -1668,11 +1663,13 @@ instance ToJSON Sheet where
 -- | A coordinate in a sheet. All indexes are zero-based.
 --
 -- /See:/ 'gridCoordinate' smart constructor.
-data GridCoordinate = GridCoordinate'
+data GridCoordinate =
+  GridCoordinate'
     { _gcColumnIndex :: !(Maybe (Textual Int32))
     , _gcRowIndex    :: !(Maybe (Textual Int32))
     , _gcSheetId     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GridCoordinate' with the minimum fields required to make a request.
 --
@@ -1686,11 +1683,8 @@ data GridCoordinate = GridCoordinate'
 gridCoordinate
     :: GridCoordinate
 gridCoordinate =
-    GridCoordinate'
-    { _gcColumnIndex = Nothing
-    , _gcRowIndex = Nothing
-    , _gcSheetId = Nothing
-    }
+  GridCoordinate'
+    {_gcColumnIndex = Nothing, _gcRowIndex = Nothing, _gcSheetId = Nothing}
 
 -- | The column index of the coordinate.
 gcColumnIndex :: Lens' GridCoordinate (Maybe Int32)
@@ -1730,10 +1724,12 @@ instance ToJSON GridCoordinate where
 -- | The response when clearing a range of values in a spreadsheet.
 --
 -- /See:/ 'clearValuesResponse' smart constructor.
-data ClearValuesResponse = ClearValuesResponse'
+data ClearValuesResponse =
+  ClearValuesResponse'
     { _cvrClearedRange  :: !(Maybe Text)
     , _cvrSpreadsheetId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClearValuesResponse' with the minimum fields required to make a request.
 --
@@ -1745,10 +1741,7 @@ data ClearValuesResponse = ClearValuesResponse'
 clearValuesResponse
     :: ClearValuesResponse
 clearValuesResponse =
-    ClearValuesResponse'
-    { _cvrClearedRange = Nothing
-    , _cvrSpreadsheetId = Nothing
-    }
+  ClearValuesResponse' {_cvrClearedRange = Nothing, _cvrSpreadsheetId = Nothing}
 
 -- | The range (in A1 notation) that was cleared. (If the request was for an
 -- unbounded range or a ranger larger than the bounds of the sheet, this
@@ -1782,9 +1775,11 @@ instance ToJSON ClearValuesResponse where
 -- | Clears the basic filter, if any exists on the sheet.
 --
 -- /See:/ 'clearBasicFilterRequest' smart constructor.
-newtype ClearBasicFilterRequest = ClearBasicFilterRequest'
+newtype ClearBasicFilterRequest =
+  ClearBasicFilterRequest'
     { _cbfrSheetId :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClearBasicFilterRequest' with the minimum fields required to make a request.
 --
@@ -1793,10 +1788,7 @@ newtype ClearBasicFilterRequest = ClearBasicFilterRequest'
 -- * 'cbfrSheetId'
 clearBasicFilterRequest
     :: ClearBasicFilterRequest
-clearBasicFilterRequest =
-    ClearBasicFilterRequest'
-    { _cbfrSheetId = Nothing
-    }
+clearBasicFilterRequest = ClearBasicFilterRequest' {_cbfrSheetId = Nothing}
 
 -- | The sheet ID on which the basic filter should be cleared.
 cbfrSheetId :: Lens' ClearBasicFilterRequest (Maybe Int32)
@@ -1819,11 +1811,13 @@ instance ToJSON ClearBasicFilterRequest where
 -- chart or image).
 --
 -- /See:/ 'updateEmbeddedObjectPositionRequest' smart constructor.
-data UpdateEmbeddedObjectPositionRequest = UpdateEmbeddedObjectPositionRequest'
+data UpdateEmbeddedObjectPositionRequest =
+  UpdateEmbeddedObjectPositionRequest'
     { _ueoprNewPosition :: !(Maybe EmbeddedObjectPosition)
     , _ueoprObjectId    :: !(Maybe (Textual Int32))
     , _ueoprFields      :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateEmbeddedObjectPositionRequest' with the minimum fields required to make a request.
 --
@@ -1837,7 +1831,7 @@ data UpdateEmbeddedObjectPositionRequest = UpdateEmbeddedObjectPositionRequest'
 updateEmbeddedObjectPositionRequest
     :: UpdateEmbeddedObjectPositionRequest
 updateEmbeddedObjectPositionRequest =
-    UpdateEmbeddedObjectPositionRequest'
+  UpdateEmbeddedObjectPositionRequest'
     { _ueoprNewPosition = Nothing
     , _ueoprObjectId = Nothing
     , _ueoprFields = Nothing
@@ -1889,10 +1883,12 @@ instance ToJSON UpdateEmbeddedObjectPositionRequest
 -- | A rule that may or may not match, depending on the condition.
 --
 -- /See:/ 'booleanRule' smart constructor.
-data BooleanRule = BooleanRule'
+data BooleanRule =
+  BooleanRule'
     { _brFormat    :: !(Maybe CellFormat)
     , _brCondition :: !(Maybe BooleanCondition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BooleanRule' with the minimum fields required to make a request.
 --
@@ -1903,11 +1899,7 @@ data BooleanRule = BooleanRule'
 -- * 'brCondition'
 booleanRule
     :: BooleanRule
-booleanRule =
-    BooleanRule'
-    { _brFormat = Nothing
-    , _brCondition = Nothing
-    }
+booleanRule = BooleanRule' {_brFormat = Nothing, _brCondition = Nothing}
 
 -- | The format to apply. Conditional formatting can only apply a subset of
 -- formatting: bold, italic, strikethrough, foreground color & background
@@ -1939,10 +1931,12 @@ instance ToJSON BooleanRule where
 -- spreadsheet selected by DataFilters.
 --
 -- /See:/ 'batchGetValuesByDataFilterResponse' smart constructor.
-data BatchGetValuesByDataFilterResponse = BatchGetValuesByDataFilterResponse'
+data BatchGetValuesByDataFilterResponse =
+  BatchGetValuesByDataFilterResponse'
     { _bgvbdfrSpreadsheetId :: !(Maybe Text)
     , _bgvbdfrValueRanges   :: !(Maybe [MatchedValueRange])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchGetValuesByDataFilterResponse' with the minimum fields required to make a request.
 --
@@ -1954,10 +1948,8 @@ data BatchGetValuesByDataFilterResponse = BatchGetValuesByDataFilterResponse'
 batchGetValuesByDataFilterResponse
     :: BatchGetValuesByDataFilterResponse
 batchGetValuesByDataFilterResponse =
-    BatchGetValuesByDataFilterResponse'
-    { _bgvbdfrSpreadsheetId = Nothing
-    , _bgvbdfrValueRanges = Nothing
-    }
+  BatchGetValuesByDataFilterResponse'
+    {_bgvbdfrSpreadsheetId = Nothing, _bgvbdfrValueRanges = Nothing}
 
 -- | The ID of the spreadsheet the data was retrieved from.
 bgvbdfrSpreadsheetId :: Lens' BatchGetValuesByDataFilterResponse (Maybe Text)
@@ -1993,11 +1985,13 @@ instance ToJSON BatchGetValuesByDataFilterResponse
 -- | A combination of a source range and how to extend that source.
 --
 -- /See:/ 'sourceAndDestination' smart constructor.
-data SourceAndDestination = SourceAndDestination'
+data SourceAndDestination =
+  SourceAndDestination'
     { _sadDimension  :: !(Maybe SourceAndDestinationDimension)
     , _sadSource     :: !(Maybe GridRange)
     , _sadFillLength :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceAndDestination' with the minimum fields required to make a request.
 --
@@ -2011,11 +2005,8 @@ data SourceAndDestination = SourceAndDestination'
 sourceAndDestination
     :: SourceAndDestination
 sourceAndDestination =
-    SourceAndDestination'
-    { _sadDimension = Nothing
-    , _sadSource = Nothing
-    , _sadFillLength = Nothing
-    }
+  SourceAndDestination'
+    {_sadDimension = Nothing, _sadSource = Nothing, _sadFillLength = Nothing}
 
 -- | The dimension that data should be filled into.
 sadDimension :: Lens' SourceAndDestination (Maybe SourceAndDestinationDimension)
@@ -2056,13 +2047,15 @@ instance ToJSON SourceAndDestination where
 -- | Inserts data into the spreadsheet starting at the specified coordinate.
 --
 -- /See:/ 'pasteDataRequest' smart constructor.
-data PasteDataRequest = PasteDataRequest'
+data PasteDataRequest =
+  PasteDataRequest'
     { _pdrData       :: !(Maybe Text)
     , _pdrCoordinate :: !(Maybe GridCoordinate)
     , _pdrHTML       :: !(Maybe Bool)
     , _pdrType       :: !(Maybe PasteDataRequestType)
     , _pdrDelimiter  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PasteDataRequest' with the minimum fields required to make a request.
 --
@@ -2080,7 +2073,7 @@ data PasteDataRequest = PasteDataRequest'
 pasteDataRequest
     :: PasteDataRequest
 pasteDataRequest =
-    PasteDataRequest'
+  PasteDataRequest'
     { _pdrData = Nothing
     , _pdrCoordinate = Nothing
     , _pdrHTML = Nothing
@@ -2134,11 +2127,13 @@ instance ToJSON PasteDataRequest where
 -- rows into the sheet if necessary.
 --
 -- /See:/ 'appendCellsRequest' smart constructor.
-data AppendCellsRequest = AppendCellsRequest'
+data AppendCellsRequest =
+  AppendCellsRequest'
     { _acrRows    :: !(Maybe [RowData])
     , _acrSheetId :: !(Maybe (Textual Int32))
     , _acrFields  :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppendCellsRequest' with the minimum fields required to make a request.
 --
@@ -2152,11 +2147,8 @@ data AppendCellsRequest = AppendCellsRequest'
 appendCellsRequest
     :: AppendCellsRequest
 appendCellsRequest =
-    AppendCellsRequest'
-    { _acrRows = Nothing
-    , _acrSheetId = Nothing
-    , _acrFields = Nothing
-    }
+  AppendCellsRequest'
+    {_acrRows = Nothing, _acrSheetId = Nothing, _acrFields = Nothing}
 
 -- | The data to append.
 acrRows :: Lens' AppendCellsRequest [RowData]
@@ -2197,13 +2189,15 @@ instance ToJSON AppendCellsRequest where
 -- | The result of the find\/replace.
 --
 -- /See:/ 'findReplaceResponse' smart constructor.
-data FindReplaceResponse = FindReplaceResponse'
+data FindReplaceResponse =
+  FindReplaceResponse'
     { _frrValuesChanged      :: !(Maybe (Textual Int32))
     , _frrFormulasChanged    :: !(Maybe (Textual Int32))
     , _frrRowsChanged        :: !(Maybe (Textual Int32))
     , _frrSheetsChanged      :: !(Maybe (Textual Int32))
     , _frrOccurrencesChanged :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FindReplaceResponse' with the minimum fields required to make a request.
 --
@@ -2221,7 +2215,7 @@ data FindReplaceResponse = FindReplaceResponse'
 findReplaceResponse
     :: FindReplaceResponse
 findReplaceResponse =
-    FindReplaceResponse'
+  FindReplaceResponse'
     { _frrValuesChanged = Nothing
     , _frrFormulasChanged = Nothing
     , _frrRowsChanged = Nothing
@@ -2291,9 +2285,11 @@ instance ToJSON FindReplaceResponse where
 -- | The result of adding a group.
 --
 -- /See:/ 'addDimensionGroupResponse' smart constructor.
-newtype AddDimensionGroupResponse = AddDimensionGroupResponse'
+newtype AddDimensionGroupResponse =
+  AddDimensionGroupResponse'
     { _adgrDimensionGroups :: Maybe [DimensionGroup]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddDimensionGroupResponse' with the minimum fields required to make a request.
 --
@@ -2303,9 +2299,7 @@ newtype AddDimensionGroupResponse = AddDimensionGroupResponse'
 addDimensionGroupResponse
     :: AddDimensionGroupResponse
 addDimensionGroupResponse =
-    AddDimensionGroupResponse'
-    { _adgrDimensionGroups = Nothing
-    }
+  AddDimensionGroupResponse' {_adgrDimensionGroups = Nothing}
 
 -- | All groups of a dimension after adding a group to that dimension.
 adgrDimensionGroups :: Lens' AddDimensionGroupResponse [DimensionGroup]
@@ -2331,13 +2325,15 @@ instance ToJSON AddDimensionGroupResponse where
 -- | A </chart/interactive/docs/gallery/piechart pie chart>.
 --
 -- /See:/ 'pieChartSpec' smart constructor.
-data PieChartSpec = PieChartSpec'
+data PieChartSpec =
+  PieChartSpec'
     { _pcsPieHole          :: !(Maybe (Textual Double))
     , _pcsLegendPosition   :: !(Maybe PieChartSpecLegendPosition)
     , _pcsDomain           :: !(Maybe ChartData)
     , _pcsSeries           :: !(Maybe ChartData)
     , _pcsThreeDimensional :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PieChartSpec' with the minimum fields required to make a request.
 --
@@ -2355,7 +2351,7 @@ data PieChartSpec = PieChartSpec'
 pieChartSpec
     :: PieChartSpec
 pieChartSpec =
-    PieChartSpec'
+  PieChartSpec'
     { _pcsPieHole = Nothing
     , _pcsLegendPosition = Nothing
     , _pcsDomain = Nothing
@@ -2414,14 +2410,16 @@ instance ToJSON PieChartSpec where
 -- | The response when updating a range of values in a spreadsheet.
 --
 -- /See:/ 'batchUpdateValuesByDataFilterResponse' smart constructor.
-data BatchUpdateValuesByDataFilterResponse = BatchUpdateValuesByDataFilterResponse'
+data BatchUpdateValuesByDataFilterResponse =
+  BatchUpdateValuesByDataFilterResponse'
     { _buvbdfrTotalUpdatedColumns :: !(Maybe (Textual Int32))
     , _buvbdfrResponses           :: !(Maybe [UpdateValuesByDataFilterResponse])
     , _buvbdfrSpreadsheetId       :: !(Maybe Text)
     , _buvbdfrTotalUpdatedSheets  :: !(Maybe (Textual Int32))
     , _buvbdfrTotalUpdatedCells   :: !(Maybe (Textual Int32))
     , _buvbdfrTotalUpdatedRows    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdateValuesByDataFilterResponse' with the minimum fields required to make a request.
 --
@@ -2441,7 +2439,7 @@ data BatchUpdateValuesByDataFilterResponse = BatchUpdateValuesByDataFilterRespon
 batchUpdateValuesByDataFilterResponse
     :: BatchUpdateValuesByDataFilterResponse
 batchUpdateValuesByDataFilterResponse =
-    BatchUpdateValuesByDataFilterResponse'
+  BatchUpdateValuesByDataFilterResponse'
     { _buvbdfrTotalUpdatedColumns = Nothing
     , _buvbdfrResponses = Nothing
     , _buvbdfrSpreadsheetId = Nothing
@@ -2495,7 +2493,8 @@ buvbdfrTotalUpdatedRows
       . mapping _Coerce
 
 instance FromJSON
-         BatchUpdateValuesByDataFilterResponse where
+           BatchUpdateValuesByDataFilterResponse
+         where
         parseJSON
           = withObject "BatchUpdateValuesByDataFilterResponse"
               (\ o ->
@@ -2526,11 +2525,13 @@ instance ToJSON BatchUpdateValuesByDataFilterResponse
 -- | The response when updating a range of values in a spreadsheet.
 --
 -- /See:/ 'appendValuesResponse' smart constructor.
-data AppendValuesResponse = AppendValuesResponse'
+data AppendValuesResponse =
+  AppendValuesResponse'
     { _avrSpreadsheetId :: !(Maybe Text)
     , _avrUpdates       :: !(Maybe UpdateValuesResponse)
     , _avrTableRange    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppendValuesResponse' with the minimum fields required to make a request.
 --
@@ -2544,7 +2545,7 @@ data AppendValuesResponse = AppendValuesResponse'
 appendValuesResponse
     :: AppendValuesResponse
 appendValuesResponse =
-    AppendValuesResponse'
+  AppendValuesResponse'
     { _avrSpreadsheetId = Nothing
     , _avrUpdates = Nothing
     , _avrTableRange = Nothing
@@ -2587,12 +2588,14 @@ instance ToJSON AppendValuesResponse where
 -- | A data validation rule.
 --
 -- /See:/ 'dataValidationRule' smart constructor.
-data DataValidationRule = DataValidationRule'
+data DataValidationRule =
+  DataValidationRule'
     { _dvrShowCustomUi :: !(Maybe Bool)
     , _dvrInputMessage :: !(Maybe Text)
     , _dvrStrict       :: !(Maybe Bool)
     , _dvrCondition    :: !(Maybe BooleanCondition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataValidationRule' with the minimum fields required to make a request.
 --
@@ -2608,7 +2611,7 @@ data DataValidationRule = DataValidationRule'
 dataValidationRule
     :: DataValidationRule
 dataValidationRule =
-    DataValidationRule'
+  DataValidationRule'
     { _dvrShowCustomUi = Nothing
     , _dvrInputMessage = Nothing
     , _dvrStrict = Nothing
@@ -2659,14 +2662,16 @@ instance ToJSON DataValidationRule where
 -- | A filter view.
 --
 -- /See:/ 'filterView' smart constructor.
-data FilterView = FilterView'
+data FilterView =
+  FilterView'
     { _fvSortSpecs    :: !(Maybe [SortSpec])
     , _fvNamedRangeId :: !(Maybe Text)
     , _fvRange        :: !(Maybe GridRange)
     , _fvFilterViewId :: !(Maybe (Textual Int32))
     , _fvTitle        :: !(Maybe Text)
     , _fvCriteria     :: !(Maybe FilterViewCriteria)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilterView' with the minimum fields required to make a request.
 --
@@ -2686,7 +2691,7 @@ data FilterView = FilterView'
 filterView
     :: FilterView
 filterView =
-    FilterView'
+  FilterView'
     { _fvSortSpecs = Nothing
     , _fvNamedRangeId = Nothing
     , _fvRange = Nothing
@@ -2802,12 +2807,14 @@ instance ToJSON FilterView where
 -- ...
 --
 -- /See:/ 'color' smart constructor.
-data Color = Color'
+data Color =
+  Color'
     { _cRed   :: !(Maybe (Textual Double))
     , _cAlpha :: !(Maybe (Textual Double))
     , _cGreen :: !(Maybe (Textual Double))
     , _cBlue  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Color' with the minimum fields required to make a request.
 --
@@ -2823,12 +2830,8 @@ data Color = Color'
 color
     :: Color
 color =
-    Color'
-    { _cRed = Nothing
-    , _cAlpha = Nothing
-    , _cGreen = Nothing
-    , _cBlue = Nothing
-    }
+  Color'
+    {_cRed = Nothing, _cAlpha = Nothing, _cGreen = Nothing, _cBlue = Nothing}
 
 -- | The amount of red in the color as a value in the interval [0, 1].
 cRed :: Lens' Color (Maybe Double)
@@ -2880,9 +2883,11 @@ instance ToJSON Color where
 -- | Deletes a particular filter view.
 --
 -- /See:/ 'deleteFilterViewRequest' smart constructor.
-newtype DeleteFilterViewRequest = DeleteFilterViewRequest'
+newtype DeleteFilterViewRequest =
+  DeleteFilterViewRequest'
     { _dfvrFilterId :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFilterViewRequest' with the minimum fields required to make a request.
 --
@@ -2891,10 +2896,7 @@ newtype DeleteFilterViewRequest = DeleteFilterViewRequest'
 -- * 'dfvrFilterId'
 deleteFilterViewRequest
     :: DeleteFilterViewRequest
-deleteFilterViewRequest =
-    DeleteFilterViewRequest'
-    { _dfvrFilterId = Nothing
-    }
+deleteFilterViewRequest = DeleteFilterViewRequest' {_dfvrFilterId = Nothing}
 
 -- | The ID of the filter to delete.
 dfvrFilterId :: Lens' DeleteFilterViewRequest (Maybe Int32)
@@ -2916,10 +2918,12 @@ instance ToJSON DeleteFilterViewRequest where
 -- | Updates properties of the filter view.
 --
 -- /See:/ 'updateFilterViewRequest' smart constructor.
-data UpdateFilterViewRequest = UpdateFilterViewRequest'
+data UpdateFilterViewRequest =
+  UpdateFilterViewRequest'
     { _ufvrFilter :: !(Maybe FilterView)
     , _ufvrFields :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateFilterViewRequest' with the minimum fields required to make a request.
 --
@@ -2931,10 +2935,7 @@ data UpdateFilterViewRequest = UpdateFilterViewRequest'
 updateFilterViewRequest
     :: UpdateFilterViewRequest
 updateFilterViewRequest =
-    UpdateFilterViewRequest'
-    { _ufvrFilter = Nothing
-    , _ufvrFields = Nothing
-    }
+  UpdateFilterViewRequest' {_ufvrFilter = Nothing, _ufvrFields = Nothing}
 
 -- | The new properties of the filter view.
 ufvrFilter :: Lens' UpdateFilterViewRequest (Maybe FilterView)
@@ -2967,13 +2968,15 @@ instance ToJSON UpdateFilterViewRequest where
 -- \"High Price\", \"Low Price\" and \"Close Price\".
 --
 -- /See:/ 'basicChartSeries' smart constructor.
-data BasicChartSeries = BasicChartSeries'
+data BasicChartSeries =
+  BasicChartSeries'
     { _bTargetAxis :: !(Maybe BasicChartSeriesTargetAxis)
     , _bColor      :: !(Maybe Color)
     , _bSeries     :: !(Maybe ChartData)
     , _bType       :: !(Maybe BasicChartSeriesType)
     , _bLineStyle  :: !(Maybe LineStyle)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicChartSeries' with the minimum fields required to make a request.
 --
@@ -2991,7 +2994,7 @@ data BasicChartSeries = BasicChartSeries'
 basicChartSeries
     :: BasicChartSeries
 basicChartSeries =
-    BasicChartSeries'
+  BasicChartSeries'
     { _bTargetAxis = Nothing
     , _bColor = Nothing
     , _bSeries = Nothing
@@ -3057,11 +3060,13 @@ instance ToJSON BasicChartSeries where
 -- PivotGroup that has a rule and a PivotGroup that does not.
 --
 -- /See:/ 'pivotGroupRule' smart constructor.
-data PivotGroupRule = PivotGroupRule'
+data PivotGroupRule =
+  PivotGroupRule'
     { _pgrDateTimeRule  :: !(Maybe DateTimeRule)
     , _pgrManualRule    :: !(Maybe ManualRule)
     , _pgrHistogramRule :: !(Maybe HistogramRule)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PivotGroupRule' with the minimum fields required to make a request.
 --
@@ -3075,7 +3080,7 @@ data PivotGroupRule = PivotGroupRule'
 pivotGroupRule
     :: PivotGroupRule
 pivotGroupRule =
-    PivotGroupRule'
+  PivotGroupRule'
     { _pgrDateTimeRule = Nothing
     , _pgrManualRule = Nothing
     , _pgrHistogramRule = Nothing
@@ -3118,9 +3123,11 @@ instance ToJSON PivotGroupRule where
 -- | Adds a new protected range.
 --
 -- /See:/ 'addProtectedRangeRequest' smart constructor.
-newtype AddProtectedRangeRequest = AddProtectedRangeRequest'
+newtype AddProtectedRangeRequest =
+  AddProtectedRangeRequest'
     { _aprrProtectedRange :: Maybe ProtectedRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddProtectedRangeRequest' with the minimum fields required to make a request.
 --
@@ -3130,9 +3137,7 @@ newtype AddProtectedRangeRequest = AddProtectedRangeRequest'
 addProtectedRangeRequest
     :: AddProtectedRangeRequest
 addProtectedRangeRequest =
-    AddProtectedRangeRequest'
-    { _aprrProtectedRange = Nothing
-    }
+  AddProtectedRangeRequest' {_aprrProtectedRange = Nothing}
 
 -- | The protected range to be added. The protectedRangeId field is optional;
 -- if one is not set, an id will be randomly generated. (It is an error to
@@ -3166,11 +3171,13 @@ instance ToJSON AddProtectedRangeRequest where
 -- to prevent both the row and the column from incrementing.
 --
 -- /See:/ 'repeatCellRequest' smart constructor.
-data RepeatCellRequest = RepeatCellRequest'
+data RepeatCellRequest =
+  RepeatCellRequest'
     { _rcrCell   :: !(Maybe CellData)
     , _rcrRange  :: !(Maybe GridRange)
     , _rcrFields :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RepeatCellRequest' with the minimum fields required to make a request.
 --
@@ -3184,11 +3191,8 @@ data RepeatCellRequest = RepeatCellRequest'
 repeatCellRequest
     :: RepeatCellRequest
 repeatCellRequest =
-    RepeatCellRequest'
-    { _rcrCell = Nothing
-    , _rcrRange = Nothing
-    , _rcrFields = Nothing
-    }
+  RepeatCellRequest'
+    {_rcrCell = Nothing, _rcrRange = Nothing, _rcrFields = Nothing}
 
 -- | The data to write.
 rcrCell :: Lens' RepeatCellRequest (Maybe CellData)
@@ -3224,10 +3228,12 @@ instance ToJSON RepeatCellRequest where
 -- | The value of the condition.
 --
 -- /See:/ 'conditionValue' smart constructor.
-data ConditionValue = ConditionValue'
+data ConditionValue =
+  ConditionValue'
     { _cvRelativeDate     :: !(Maybe ConditionValueRelativeDate)
     , _cvUserEnteredValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConditionValue' with the minimum fields required to make a request.
 --
@@ -3239,10 +3245,7 @@ data ConditionValue = ConditionValue'
 conditionValue
     :: ConditionValue
 conditionValue =
-    ConditionValue'
-    { _cvRelativeDate = Nothing
-    , _cvUserEnteredValue = Nothing
-    }
+  ConditionValue' {_cvRelativeDate = Nothing, _cvUserEnteredValue = Nothing}
 
 -- | A relative date (based on the current date). Valid only if the type is
 -- DATE_BEFORE, DATE_AFTER, DATE_ON_OR_BEFORE or DATE_ON_OR_AFTER. Relative
@@ -3279,9 +3282,11 @@ instance ToJSON ConditionValue where
 -- | Deletes the dimensions from the sheet.
 --
 -- /See:/ 'deleteDimensionRequest' smart constructor.
-newtype DeleteDimensionRequest = DeleteDimensionRequest'
+newtype DeleteDimensionRequest =
+  DeleteDimensionRequest'
     { _ddrRange :: Maybe DimensionRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDimensionRequest' with the minimum fields required to make a request.
 --
@@ -3290,10 +3295,7 @@ newtype DeleteDimensionRequest = DeleteDimensionRequest'
 -- * 'ddrRange'
 deleteDimensionRequest
     :: DeleteDimensionRequest
-deleteDimensionRequest =
-    DeleteDimensionRequest'
-    { _ddrRange = Nothing
-    }
+deleteDimensionRequest = DeleteDimensionRequest' {_ddrRange = Nothing}
 
 -- | The dimensions to delete from the sheet.
 ddrRange :: Lens' DeleteDimensionRequest (Maybe DimensionRange)
@@ -3312,8 +3314,8 @@ instance ToJSON DeleteDimensionRequest where
 --
 -- /See:/ 'clearValuesRequest' smart constructor.
 data ClearValuesRequest =
-    ClearValuesRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ClearValuesRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClearValuesRequest' with the minimum fields required to make a request.
 --
@@ -3332,7 +3334,8 @@ instance ToJSON ClearValuesRequest where
 -- | Finds and replaces data in cells over a range, sheet, or all sheets.
 --
 -- /See:/ 'findReplaceRequest' smart constructor.
-data FindReplaceRequest = FindReplaceRequest'
+data FindReplaceRequest =
+  FindReplaceRequest'
     { _frrMatchCase       :: !(Maybe Bool)
     , _frrAllSheets       :: !(Maybe Bool)
     , _frrIncludeFormulas :: !(Maybe Bool)
@@ -3342,7 +3345,8 @@ data FindReplaceRequest = FindReplaceRequest'
     , _frrFind            :: !(Maybe Text)
     , _frrSearchByRegex   :: !(Maybe Bool)
     , _frrReplacement     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FindReplaceRequest' with the minimum fields required to make a request.
 --
@@ -3368,7 +3372,7 @@ data FindReplaceRequest = FindReplaceRequest'
 findReplaceRequest
     :: FindReplaceRequest
 findReplaceRequest =
-    FindReplaceRequest'
+  FindReplaceRequest'
     { _frrMatchCase = Nothing
     , _frrAllSheets = Nothing
     , _frrIncludeFormulas = Nothing
@@ -3467,10 +3471,12 @@ instance ToJSON FindReplaceRequest where
 -- | Moves one or more rows or columns.
 --
 -- /See:/ 'moveDimensionRequest' smart constructor.
-data MoveDimensionRequest = MoveDimensionRequest'
+data MoveDimensionRequest =
+  MoveDimensionRequest'
     { _mdrDestinationIndex :: !(Maybe (Textual Int32))
     , _mdrSource           :: !(Maybe DimensionRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MoveDimensionRequest' with the minimum fields required to make a request.
 --
@@ -3482,10 +3488,7 @@ data MoveDimensionRequest = MoveDimensionRequest'
 moveDimensionRequest
     :: MoveDimensionRequest
 moveDimensionRequest =
-    MoveDimensionRequest'
-    { _mdrDestinationIndex = Nothing
-    , _mdrSource = Nothing
-    }
+  MoveDimensionRequest' {_mdrDestinationIndex = Nothing, _mdrSource = Nothing}
 
 -- | The zero-based start index of where to move the source data to, based on
 -- the coordinates *before* the source data is removed from the grid.
@@ -3526,12 +3529,14 @@ instance ToJSON MoveDimensionRequest where
 -- by a set of DataFilters.
 --
 -- /See:/ 'batchGetValuesByDataFilterRequest' smart constructor.
-data BatchGetValuesByDataFilterRequest = BatchGetValuesByDataFilterRequest'
+data BatchGetValuesByDataFilterRequest =
+  BatchGetValuesByDataFilterRequest'
     { _bgvbdfrValueRenderOption    :: !(Maybe BatchGetValuesByDataFilterRequestValueRenderOption)
     , _bgvbdfrDataFilters          :: !(Maybe [DataFilter])
     , _bgvbdfrDateTimeRenderOption :: !(Maybe BatchGetValuesByDataFilterRequestDateTimeRenderOption)
     , _bgvbdfrMajorDimension       :: !(Maybe BatchGetValuesByDataFilterRequestMajorDimension)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchGetValuesByDataFilterRequest' with the minimum fields required to make a request.
 --
@@ -3547,7 +3552,7 @@ data BatchGetValuesByDataFilterRequest = BatchGetValuesByDataFilterRequest'
 batchGetValuesByDataFilterRequest
     :: BatchGetValuesByDataFilterRequest
 batchGetValuesByDataFilterRequest =
-    BatchGetValuesByDataFilterRequest'
+  BatchGetValuesByDataFilterRequest'
     { _bgvbdfrValueRenderOption = Nothing
     , _bgvbdfrDataFilters = Nothing
     , _bgvbdfrDateTimeRenderOption = Nothing
@@ -3617,11 +3622,13 @@ instance ToJSON BatchGetValuesByDataFilterRequest
 -- contents as compared to the values of the interpolation points.
 --
 -- /See:/ 'gradientRule' smart constructor.
-data GradientRule = GradientRule'
+data GradientRule =
+  GradientRule'
     { _grMidpoint :: !(Maybe InterpolationPoint)
     , _grMaxpoint :: !(Maybe InterpolationPoint)
     , _grMinpoint :: !(Maybe InterpolationPoint)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GradientRule' with the minimum fields required to make a request.
 --
@@ -3635,11 +3642,8 @@ data GradientRule = GradientRule'
 gradientRule
     :: GradientRule
 gradientRule =
-    GradientRule'
-    { _grMidpoint = Nothing
-    , _grMaxpoint = Nothing
-    , _grMinpoint = Nothing
-    }
+  GradientRule'
+    {_grMidpoint = Nothing, _grMaxpoint = Nothing, _grMinpoint = Nothing}
 
 -- | An optional midway interpolation point.
 grMidpoint :: Lens' GradientRule (Maybe InterpolationPoint)
@@ -3675,11 +3679,13 @@ instance ToJSON GradientRule where
 -- | Moves data from the source to the destination.
 --
 -- /See:/ 'cutPasteRequest' smart constructor.
-data CutPasteRequest = CutPasteRequest'
+data CutPasteRequest =
+  CutPasteRequest'
     { _cDestination :: !(Maybe GridCoordinate)
     , _cSource      :: !(Maybe GridRange)
     , _cPasteType   :: !(Maybe CutPasteRequestPasteType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CutPasteRequest' with the minimum fields required to make a request.
 --
@@ -3693,11 +3699,8 @@ data CutPasteRequest = CutPasteRequest'
 cutPasteRequest
     :: CutPasteRequest
 cutPasteRequest =
-    CutPasteRequest'
-    { _cDestination = Nothing
-    , _cSource = Nothing
-    , _cPasteType = Nothing
-    }
+  CutPasteRequest'
+    {_cDestination = Nothing, _cSource = Nothing, _cPasteType = Nothing}
 
 -- | The top-left coordinate where the data should be pasted.
 cDestination :: Lens' CutPasteRequest (Maybe GridCoordinate)
@@ -3733,9 +3736,11 @@ instance ToJSON CutPasteRequest where
 -- | The result of updating an embedded object\'s position.
 --
 -- /See:/ 'updateEmbeddedObjectPositionResponse' smart constructor.
-newtype UpdateEmbeddedObjectPositionResponse = UpdateEmbeddedObjectPositionResponse'
+newtype UpdateEmbeddedObjectPositionResponse =
+  UpdateEmbeddedObjectPositionResponse'
     { _ueoprPosition :: Maybe EmbeddedObjectPosition
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateEmbeddedObjectPositionResponse' with the minimum fields required to make a request.
 --
@@ -3745,9 +3750,7 @@ newtype UpdateEmbeddedObjectPositionResponse = UpdateEmbeddedObjectPositionRespo
 updateEmbeddedObjectPositionResponse
     :: UpdateEmbeddedObjectPositionResponse
 updateEmbeddedObjectPositionResponse =
-    UpdateEmbeddedObjectPositionResponse'
-    { _ueoprPosition = Nothing
-    }
+  UpdateEmbeddedObjectPositionResponse' {_ueoprPosition = Nothing}
 
 -- | The new position of the embedded object.
 ueoprPosition :: Lens' UpdateEmbeddedObjectPositionResponse (Maybe EmbeddedObjectPosition)
@@ -3756,7 +3759,8 @@ ueoprPosition
       (\ s a -> s{_ueoprPosition = a})
 
 instance FromJSON
-         UpdateEmbeddedObjectPositionResponse where
+           UpdateEmbeddedObjectPositionResponse
+         where
         parseJSON
           = withObject "UpdateEmbeddedObjectPositionResponse"
               (\ o ->
@@ -3772,11 +3776,13 @@ instance ToJSON UpdateEmbeddedObjectPositionResponse
 -- | A custom subtotal column for a waterfall chart series.
 --
 -- /See:/ 'waterfallChartCustomSubtotal' smart constructor.
-data WaterfallChartCustomSubtotal = WaterfallChartCustomSubtotal'
+data WaterfallChartCustomSubtotal =
+  WaterfallChartCustomSubtotal'
     { _wccsDataIsSubtotal :: !(Maybe Bool)
     , _wccsSubtotalIndex  :: !(Maybe (Textual Int32))
     , _wccsLabel          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WaterfallChartCustomSubtotal' with the minimum fields required to make a request.
 --
@@ -3790,7 +3796,7 @@ data WaterfallChartCustomSubtotal = WaterfallChartCustomSubtotal'
 waterfallChartCustomSubtotal
     :: WaterfallChartCustomSubtotal
 waterfallChartCustomSubtotal =
-    WaterfallChartCustomSubtotal'
+  WaterfallChartCustomSubtotal'
     { _wccsDataIsSubtotal = Nothing
     , _wccsSubtotalIndex = Nothing
     , _wccsLabel = Nothing
@@ -3841,7 +3847,8 @@ instance ToJSON WaterfallChartCustomSubtotal where
 -- | A single response from an update.
 --
 -- /See:/ 'response' smart constructor.
-data Response = Response'
+data Response =
+  Response'
     { _rAddFilterView                :: !(Maybe AddFilterViewResponse)
     , _rCreateDeveloperMetadata      :: !(Maybe CreateDeveloperMetadataResponse)
     , _rDuplicateFilterView          :: !(Maybe DuplicateFilterViewResponse)
@@ -3859,7 +3866,8 @@ data Response = Response'
     , _rAddBanding                   :: !(Maybe AddBandingResponse)
     , _rDuplicateSheet               :: !(Maybe DuplicateSheetResponse)
     , _rAddDimensionGroup            :: !(Maybe AddDimensionGroupResponse)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Response' with the minimum fields required to make a request.
 --
@@ -3901,7 +3909,7 @@ data Response = Response'
 response
     :: Response
 response =
-    Response'
+  Response'
     { _rAddFilterView = Nothing
     , _rCreateDeveloperMetadata = Nothing
     , _rDuplicateFilterView = Nothing
@@ -4074,10 +4082,12 @@ instance ToJSON Response where
 -- | Criteria for showing\/hiding rows in a filter or filter view.
 --
 -- /See:/ 'filterCriteria' smart constructor.
-data FilterCriteria = FilterCriteria'
+data FilterCriteria =
+  FilterCriteria'
     { _fcHiddenValues :: !(Maybe [Text])
     , _fcCondition    :: !(Maybe BooleanCondition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilterCriteria' with the minimum fields required to make a request.
 --
@@ -4089,10 +4099,7 @@ data FilterCriteria = FilterCriteria'
 filterCriteria
     :: FilterCriteria
 filterCriteria =
-    FilterCriteria'
-    { _fcHiddenValues = Nothing
-    , _fcCondition = Nothing
-    }
+  FilterCriteria' {_fcHiddenValues = Nothing, _fcCondition = Nothing}
 
 -- | Values that should be hidden.
 fcHiddenValues :: Lens' FilterCriteria [Text]
@@ -4127,10 +4134,12 @@ instance ToJSON FilterCriteria where
 -- | An error in a cell.
 --
 -- /See:/ 'errorValue' smart constructor.
-data ErrorValue = ErrorValue'
+data ErrorValue =
+  ErrorValue'
     { _evType    :: !(Maybe ErrorValueType)
     , _evMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ErrorValue' with the minimum fields required to make a request.
 --
@@ -4141,11 +4150,7 @@ data ErrorValue = ErrorValue'
 -- * 'evMessage'
 errorValue
     :: ErrorValue
-errorValue =
-    ErrorValue'
-    { _evType = Nothing
-    , _evMessage = Nothing
-    }
+errorValue = ErrorValue' {_evType = Nothing, _evMessage = Nothing}
 
 -- | The type of error.
 evType :: Lens' ErrorValue (Maybe ErrorValueType)
@@ -4174,12 +4179,14 @@ instance ToJSON ErrorValue where
 -- conditional format rule to another index.
 --
 -- /See:/ 'updateConditionalFormatRuleRequest' smart constructor.
-data UpdateConditionalFormatRuleRequest = UpdateConditionalFormatRuleRequest'
+data UpdateConditionalFormatRuleRequest =
+  UpdateConditionalFormatRuleRequest'
     { _ucfrrRule     :: !(Maybe ConditionalFormatRule)
     , _ucfrrNewIndex :: !(Maybe (Textual Int32))
     , _ucfrrSheetId  :: !(Maybe (Textual Int32))
     , _ucfrrIndex    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateConditionalFormatRuleRequest' with the minimum fields required to make a request.
 --
@@ -4195,7 +4202,7 @@ data UpdateConditionalFormatRuleRequest = UpdateConditionalFormatRuleRequest'
 updateConditionalFormatRuleRequest
     :: UpdateConditionalFormatRuleRequest
 updateConditionalFormatRuleRequest =
-    UpdateConditionalFormatRuleRequest'
+  UpdateConditionalFormatRuleRequest'
     { _ucfrrRule = Nothing
     , _ucfrrNewIndex = Nothing
     , _ucfrrSheetId = Nothing
@@ -4251,10 +4258,12 @@ instance ToJSON UpdateConditionalFormatRuleRequest
 -- rules\' indexes are decremented.
 --
 -- /See:/ 'deleteConditionalFormatRuleRequest' smart constructor.
-data DeleteConditionalFormatRuleRequest = DeleteConditionalFormatRuleRequest'
+data DeleteConditionalFormatRuleRequest =
+  DeleteConditionalFormatRuleRequest'
     { _dcfrrSheetId :: !(Maybe (Textual Int32))
     , _dcfrrIndex   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteConditionalFormatRuleRequest' with the minimum fields required to make a request.
 --
@@ -4266,10 +4275,8 @@ data DeleteConditionalFormatRuleRequest = DeleteConditionalFormatRuleRequest'
 deleteConditionalFormatRuleRequest
     :: DeleteConditionalFormatRuleRequest
 deleteConditionalFormatRuleRequest =
-    DeleteConditionalFormatRuleRequest'
-    { _dcfrrSheetId = Nothing
-    , _dcfrrIndex = Nothing
-    }
+  DeleteConditionalFormatRuleRequest'
+    {_dcfrrSheetId = Nothing, _dcfrrIndex = Nothing}
 
 -- | The sheet the rule is being deleted from.
 dcfrrSheetId :: Lens' DeleteConditionalFormatRuleRequest (Maybe Int32)
@@ -4307,11 +4314,13 @@ instance ToJSON DeleteConditionalFormatRuleRequest
 -- update.
 --
 -- /See:/ 'updateDeveloperMetadataRequest' smart constructor.
-data UpdateDeveloperMetadataRequest = UpdateDeveloperMetadataRequest'
+data UpdateDeveloperMetadataRequest =
+  UpdateDeveloperMetadataRequest'
     { _udmrDataFilters       :: !(Maybe [DataFilter])
     , _udmrDeveloperMetadata :: !(Maybe DeveloperMetadata)
     , _udmrFields            :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDeveloperMetadataRequest' with the minimum fields required to make a request.
 --
@@ -4325,7 +4334,7 @@ data UpdateDeveloperMetadataRequest = UpdateDeveloperMetadataRequest'
 updateDeveloperMetadataRequest
     :: UpdateDeveloperMetadataRequest
 updateDeveloperMetadataRequest =
-    UpdateDeveloperMetadataRequest'
+  UpdateDeveloperMetadataRequest'
     { _udmrDataFilters = Nothing
     , _udmrDeveloperMetadata = Nothing
     , _udmrFields = Nothing
@@ -4374,9 +4383,11 @@ instance ToJSON UpdateDeveloperMetadataRequest where
 -- | A request to delete developer metadata.
 --
 -- /See:/ 'deleteDeveloperMetadataRequest' smart constructor.
-newtype DeleteDeveloperMetadataRequest = DeleteDeveloperMetadataRequest'
+newtype DeleteDeveloperMetadataRequest =
+  DeleteDeveloperMetadataRequest'
     { _ddmrDataFilter :: Maybe DataFilter
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDeveloperMetadataRequest' with the minimum fields required to make a request.
 --
@@ -4386,9 +4397,7 @@ newtype DeleteDeveloperMetadataRequest = DeleteDeveloperMetadataRequest'
 deleteDeveloperMetadataRequest
     :: DeleteDeveloperMetadataRequest
 deleteDeveloperMetadataRequest =
-    DeleteDeveloperMetadataRequest'
-    { _ddmrDataFilter = Nothing
-    }
+  DeleteDeveloperMetadataRequest' {_ddmrDataFilter = Nothing}
 
 -- | The data filter describing the criteria used to select which developer
 -- metadata entry to delete.
@@ -4413,14 +4422,16 @@ instance ToJSON DeleteDeveloperMetadataRequest where
 -- | A waterfall chart.
 --
 -- /See:/ 'waterfallChartSpec' smart constructor.
-data WaterfallChartSpec = WaterfallChartSpec'
+data WaterfallChartSpec =
+  WaterfallChartSpec'
     { _wcsStackedType        :: !(Maybe WaterfallChartSpecStackedType)
     , _wcsConnectorLineStyle :: !(Maybe LineStyle)
     , _wcsDomain             :: !(Maybe WaterfallChartDomain)
     , _wcsSeries             :: !(Maybe [WaterfallChartSeries])
     , _wcsHideConnectorLines :: !(Maybe Bool)
     , _wcsFirstValueIsTotal  :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WaterfallChartSpec' with the minimum fields required to make a request.
 --
@@ -4440,7 +4451,7 @@ data WaterfallChartSpec = WaterfallChartSpec'
 waterfallChartSpec
     :: WaterfallChartSpec
 waterfallChartSpec =
-    WaterfallChartSpec'
+  WaterfallChartSpec'
     { _wcsStackedType = Nothing
     , _wcsConnectorLineStyle = Nothing
     , _wcsDomain = Nothing
@@ -4511,13 +4522,15 @@ instance ToJSON WaterfallChartSpec where
 -- | The location an object is overlaid on top of a grid.
 --
 -- /See:/ 'overlayPosition' smart constructor.
-data OverlayPosition = OverlayPosition'
+data OverlayPosition =
+  OverlayPosition'
     { _opHeightPixels  :: !(Maybe (Textual Int32))
     , _opOffSetYPixels :: !(Maybe (Textual Int32))
     , _opAnchorCell    :: !(Maybe GridCoordinate)
     , _opWidthPixels   :: !(Maybe (Textual Int32))
     , _opOffSetXPixels :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OverlayPosition' with the minimum fields required to make a request.
 --
@@ -4535,7 +4548,7 @@ data OverlayPosition = OverlayPosition'
 overlayPosition
     :: OverlayPosition
 overlayPosition =
-    OverlayPosition'
+  OverlayPosition'
     { _opHeightPixels = Nothing
     , _opOffSetYPixels = Nothing
     , _opAnchorCell = Nothing
@@ -4601,9 +4614,11 @@ instance ToJSON OverlayPosition where
 -- | Deletes the embedded object with the given ID.
 --
 -- /See:/ 'deleteEmbeddedObjectRequest' smart constructor.
-newtype DeleteEmbeddedObjectRequest = DeleteEmbeddedObjectRequest'
+newtype DeleteEmbeddedObjectRequest =
+  DeleteEmbeddedObjectRequest'
     { _deorObjectId :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteEmbeddedObjectRequest' with the minimum fields required to make a request.
 --
@@ -4613,9 +4628,7 @@ newtype DeleteEmbeddedObjectRequest = DeleteEmbeddedObjectRequest'
 deleteEmbeddedObjectRequest
     :: DeleteEmbeddedObjectRequest
 deleteEmbeddedObjectRequest =
-    DeleteEmbeddedObjectRequest'
-    { _deorObjectId = Nothing
-    }
+  DeleteEmbeddedObjectRequest' {_deorObjectId = Nothing}
 
 -- | The ID of the embedded object to delete.
 deorObjectId :: Lens' DeleteEmbeddedObjectRequest (Maybe Int32)
@@ -4637,12 +4650,14 @@ instance ToJSON DeleteEmbeddedObjectRequest where
 -- | A location where metadata may be associated in a spreadsheet.
 --
 -- /See:/ 'developerMetadataLocation' smart constructor.
-data DeveloperMetadataLocation = DeveloperMetadataLocation'
+data DeveloperMetadataLocation =
+  DeveloperMetadataLocation'
     { _dmlSpreadsheet    :: !(Maybe Bool)
     , _dmlDimensionRange :: !(Maybe DimensionRange)
     , _dmlSheetId        :: !(Maybe (Textual Int32))
     , _dmlLocationType   :: !(Maybe DeveloperMetadataLocationLocationType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeveloperMetadataLocation' with the minimum fields required to make a request.
 --
@@ -4658,7 +4673,7 @@ data DeveloperMetadataLocation = DeveloperMetadataLocation'
 developerMetadataLocation
     :: DeveloperMetadataLocation
 developerMetadataLocation =
-    DeveloperMetadataLocation'
+  DeveloperMetadataLocation'
     { _dmlSpreadsheet = Nothing
     , _dmlDimensionRange = Nothing
     , _dmlSheetId = Nothing
@@ -4712,7 +4727,8 @@ instance ToJSON DeveloperMetadataLocation where
 -- | Properties of a sheet.
 --
 -- /See:/ 'sheetProperties' smart constructor.
-data SheetProperties = SheetProperties'
+data SheetProperties =
+  SheetProperties'
     { _sTabColor       :: !(Maybe Color)
     , _sGridProperties :: !(Maybe GridProperties)
     , _sSheetType      :: !(Maybe SheetPropertiesSheetType)
@@ -4721,7 +4737,8 @@ data SheetProperties = SheetProperties'
     , _sTitle          :: !(Maybe Text)
     , _sRightToLeft    :: !(Maybe Bool)
     , _sIndex          :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SheetProperties' with the minimum fields required to make a request.
 --
@@ -4745,7 +4762,7 @@ data SheetProperties = SheetProperties'
 sheetProperties
     :: SheetProperties
 sheetProperties =
-    SheetProperties'
+  SheetProperties'
     { _sTabColor = Nothing
     , _sGridProperties = Nothing
     , _sSheetType = Nothing
@@ -4840,9 +4857,11 @@ instance ToJSON SheetProperties where
 -- the column index, and the value is the criteria for that column.
 --
 -- /See:/ 'filterViewCriteria' smart constructor.
-newtype FilterViewCriteria = FilterViewCriteria'
+newtype FilterViewCriteria =
+  FilterViewCriteria'
     { _fvcAddtional :: HashMap Text FilterCriteria
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilterViewCriteria' with the minimum fields required to make a request.
 --
@@ -4853,9 +4872,7 @@ filterViewCriteria
     :: HashMap Text FilterCriteria -- ^ 'fvcAddtional'
     -> FilterViewCriteria
 filterViewCriteria pFvcAddtional_ =
-    FilterViewCriteria'
-    { _fvcAddtional = _Coerce # pFvcAddtional_
-    }
+  FilterViewCriteria' {_fvcAddtional = _Coerce # pFvcAddtional_}
 
 fvcAddtional :: Lens' FilterViewCriteria (HashMap Text FilterCriteria)
 fvcAddtional
@@ -4873,14 +4890,16 @@ instance ToJSON FilterViewCriteria where
 -- | The response when updating a range of values in a spreadsheet.
 --
 -- /See:/ 'batchUpdateValuesResponse' smart constructor.
-data BatchUpdateValuesResponse = BatchUpdateValuesResponse'
+data BatchUpdateValuesResponse =
+  BatchUpdateValuesResponse'
     { _buvrTotalUpdatedColumns :: !(Maybe (Textual Int32))
     , _buvrResponses           :: !(Maybe [UpdateValuesResponse])
     , _buvrSpreadsheetId       :: !(Maybe Text)
     , _buvrTotalUpdatedSheets  :: !(Maybe (Textual Int32))
     , _buvrTotalUpdatedCells   :: !(Maybe (Textual Int32))
     , _buvrTotalUpdatedRows    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdateValuesResponse' with the minimum fields required to make a request.
 --
@@ -4900,7 +4919,7 @@ data BatchUpdateValuesResponse = BatchUpdateValuesResponse'
 batchUpdateValuesResponse
     :: BatchUpdateValuesResponse
 batchUpdateValuesResponse =
-    BatchUpdateValuesResponse'
+  BatchUpdateValuesResponse'
     { _buvrTotalUpdatedColumns = Nothing
     , _buvrResponses = Nothing
     , _buvrSpreadsheetId = Nothing
@@ -4982,10 +5001,12 @@ instance ToJSON BatchUpdateValuesResponse where
 -- | Updates properties of the sheet with the specified sheetId.
 --
 -- /See:/ 'updateSheetPropertiesRequest' smart constructor.
-data UpdateSheetPropertiesRequest = UpdateSheetPropertiesRequest'
+data UpdateSheetPropertiesRequest =
+  UpdateSheetPropertiesRequest'
     { _usprFields     :: !(Maybe GFieldMask)
     , _usprProperties :: !(Maybe SheetProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSheetPropertiesRequest' with the minimum fields required to make a request.
 --
@@ -4997,10 +5018,8 @@ data UpdateSheetPropertiesRequest = UpdateSheetPropertiesRequest'
 updateSheetPropertiesRequest
     :: UpdateSheetPropertiesRequest
 updateSheetPropertiesRequest =
-    UpdateSheetPropertiesRequest'
-    { _usprFields = Nothing
-    , _usprProperties = Nothing
-    }
+  UpdateSheetPropertiesRequest'
+    {_usprFields = Nothing, _usprProperties = Nothing}
 
 -- | The fields that should be updated. At least one field must be specified.
 -- The root \`properties\` is implied and should not be specified. A single
@@ -5032,14 +5051,16 @@ instance ToJSON UpdateSheetPropertiesRequest where
 -- | Resource that represents a spreadsheet.
 --
 -- /See:/ 'spreadsheet' smart constructor.
-data Spreadsheet = Spreadsheet'
+data Spreadsheet =
+  Spreadsheet'
     { _sprSheets            :: !(Maybe [Sheet])
     , _sprNamedRanges       :: !(Maybe [NamedRange])
     , _sprSpreadsheetId     :: !(Maybe Text)
     , _sprSpreadsheetURL    :: !(Maybe Text)
     , _sprDeveloperMetadata :: !(Maybe [DeveloperMetadata])
     , _sprProperties        :: !(Maybe SpreadsheetProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Spreadsheet' with the minimum fields required to make a request.
 --
@@ -5059,7 +5080,7 @@ data Spreadsheet = Spreadsheet'
 spreadsheet
     :: Spreadsheet
 spreadsheet =
-    Spreadsheet'
+  Spreadsheet'
     { _sprSheets = Nothing
     , _sprNamedRanges = Nothing
     , _sprSpreadsheetId = Nothing
@@ -5135,10 +5156,12 @@ instance ToJSON Spreadsheet where
 -- | A </chart/interactive/docs/gallery/candlestickchart candlestick chart>.
 --
 -- /See:/ 'candlestickChartSpec' smart constructor.
-data CandlestickChartSpec = CandlestickChartSpec'
+data CandlestickChartSpec =
+  CandlestickChartSpec'
     { _ccsData   :: !(Maybe [CandlestickData])
     , _ccsDomain :: !(Maybe CandlestickDomain)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CandlestickChartSpec' with the minimum fields required to make a request.
 --
@@ -5150,10 +5173,7 @@ data CandlestickChartSpec = CandlestickChartSpec'
 candlestickChartSpec
     :: CandlestickChartSpec
 candlestickChartSpec =
-    CandlestickChartSpec'
-    { _ccsData = Nothing
-    , _ccsDomain = Nothing
-    }
+  CandlestickChartSpec' {_ccsData = Nothing, _ccsDomain = Nothing}
 
 -- | The Candlestick chart data. Only one CandlestickData is supported.
 ccsData :: Lens' CandlestickChartSpec [CandlestickData]
@@ -5185,10 +5205,12 @@ instance ToJSON CandlestickChartSpec where
 -- | Inserts rows or columns in a sheet at a particular index.
 --
 -- /See:/ 'insertDimensionRequest' smart constructor.
-data InsertDimensionRequest = InsertDimensionRequest'
+data InsertDimensionRequest =
+  InsertDimensionRequest'
     { _idrRange             :: !(Maybe DimensionRange)
     , _idrInheritFromBefore :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InsertDimensionRequest' with the minimum fields required to make a request.
 --
@@ -5200,10 +5222,7 @@ data InsertDimensionRequest = InsertDimensionRequest'
 insertDimensionRequest
     :: InsertDimensionRequest
 insertDimensionRequest =
-    InsertDimensionRequest'
-    { _idrRange = Nothing
-    , _idrInheritFromBefore = Nothing
-    }
+  InsertDimensionRequest' {_idrRange = Nothing, _idrInheritFromBefore = Nothing}
 
 -- | The dimensions to insert. Both the start and end indexes must be
 -- bounded.
@@ -5242,9 +5261,11 @@ instance ToJSON InsertDimensionRequest where
 -- | A reply to a developer metadata search request.
 --
 -- /See:/ 'searchDeveloperMetadataResponse' smart constructor.
-newtype SearchDeveloperMetadataResponse = SearchDeveloperMetadataResponse'
+newtype SearchDeveloperMetadataResponse =
+  SearchDeveloperMetadataResponse'
     { _sdmrMatchedDeveloperMetadata :: Maybe [MatchedDeveloperMetadata]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchDeveloperMetadataResponse' with the minimum fields required to make a request.
 --
@@ -5254,9 +5275,7 @@ newtype SearchDeveloperMetadataResponse = SearchDeveloperMetadataResponse'
 searchDeveloperMetadataResponse
     :: SearchDeveloperMetadataResponse
 searchDeveloperMetadataResponse =
-    SearchDeveloperMetadataResponse'
-    { _sdmrMatchedDeveloperMetadata = Nothing
-    }
+  SearchDeveloperMetadataResponse' {_sdmrMatchedDeveloperMetadata = Nothing}
 
 -- | The metadata matching the criteria of the search request.
 sdmrMatchedDeveloperMetadata :: Lens' SearchDeveloperMetadataResponse [MatchedDeveloperMetadata]
@@ -5285,11 +5304,13 @@ instance ToJSON SearchDeveloperMetadataResponse where
 -- the gradient color scale according to the color, type and value chosen.
 --
 -- /See:/ 'interpolationPoint' smart constructor.
-data InterpolationPoint = InterpolationPoint'
+data InterpolationPoint =
+  InterpolationPoint'
     { _ipColor :: !(Maybe Color)
     , _ipValue :: !(Maybe Text)
     , _ipType  :: !(Maybe InterpolationPointType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterpolationPoint' with the minimum fields required to make a request.
 --
@@ -5303,11 +5324,8 @@ data InterpolationPoint = InterpolationPoint'
 interpolationPoint
     :: InterpolationPoint
 interpolationPoint =
-    InterpolationPoint'
-    { _ipColor = Nothing
-    , _ipValue = Nothing
-    , _ipType = Nothing
-    }
+  InterpolationPoint'
+    {_ipColor = Nothing, _ipValue = Nothing, _ipType = Nothing}
 
 -- | The color this interpolation point should use.
 ipColor :: Lens' InterpolationPoint (Maybe Color)
@@ -5340,7 +5358,8 @@ instance ToJSON InterpolationPoint where
 -- | Data about a specific cell.
 --
 -- /See:/ 'cellData' smart constructor.
-data CellData = CellData'
+data CellData =
+  CellData'
     { _cdTextFormatRuns    :: !(Maybe [TextFormatRun])
     , _cdNote              :: !(Maybe Text)
     , _cdUserEnteredValue  :: !(Maybe ExtendedValue)
@@ -5351,7 +5370,8 @@ data CellData = CellData'
     , _cdDataValidation    :: !(Maybe DataValidationRule)
     , _cdHyperlink         :: !(Maybe Text)
     , _cdEffectiveValue    :: !(Maybe ExtendedValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CellData' with the minimum fields required to make a request.
 --
@@ -5379,7 +5399,7 @@ data CellData = CellData'
 cellData
     :: CellData
 cellData =
-    CellData'
+  CellData'
     { _cdTextFormatRuns = Nothing
     , _cdNote = Nothing
     , _cdUserEnteredValue = Nothing
@@ -5508,9 +5528,11 @@ instance ToJSON CellData where
 -- | Source ranges for a chart.
 --
 -- /See:/ 'chartSourceRange' smart constructor.
-newtype ChartSourceRange = ChartSourceRange'
+newtype ChartSourceRange =
+  ChartSourceRange'
     { _csrSources :: Maybe [GridRange]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChartSourceRange' with the minimum fields required to make a request.
 --
@@ -5519,10 +5541,7 @@ newtype ChartSourceRange = ChartSourceRange'
 -- * 'csrSources'
 chartSourceRange
     :: ChartSourceRange
-chartSourceRange =
-    ChartSourceRange'
-    { _csrSources = Nothing
-    }
+chartSourceRange = ChartSourceRange' {_csrSources = Nothing}
 
 -- | The ranges of data for a series or domain. Exactly one dimension must
 -- have a length of 1, and all sources in the list must have the same
@@ -5552,9 +5571,11 @@ instance ToJSON ChartSourceRange where
 -- | The result of adding a named range.
 --
 -- /See:/ 'addNamedRangeResponse' smart constructor.
-newtype AddNamedRangeResponse = AddNamedRangeResponse'
+newtype AddNamedRangeResponse =
+  AddNamedRangeResponse'
     { _anrrNamedRange :: Maybe NamedRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddNamedRangeResponse' with the minimum fields required to make a request.
 --
@@ -5563,10 +5584,7 @@ newtype AddNamedRangeResponse = AddNamedRangeResponse'
 -- * 'anrrNamedRange'
 addNamedRangeResponse
     :: AddNamedRangeResponse
-addNamedRangeResponse =
-    AddNamedRangeResponse'
-    { _anrrNamedRange = Nothing
-    }
+addNamedRangeResponse = AddNamedRangeResponse' {_anrrNamedRange = Nothing}
 
 -- | The named range to add.
 anrrNamedRange :: Lens' AddNamedRangeResponse (Maybe NamedRange)
@@ -5588,10 +5606,12 @@ instance ToJSON AddNamedRangeResponse where
 -- | The domain of a waterfall chart.
 --
 -- /See:/ 'waterfallChartDomain' smart constructor.
-data WaterfallChartDomain = WaterfallChartDomain'
+data WaterfallChartDomain =
+  WaterfallChartDomain'
     { _wcdReversed :: !(Maybe Bool)
     , _wcdData     :: !(Maybe ChartData)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WaterfallChartDomain' with the minimum fields required to make a request.
 --
@@ -5603,10 +5623,7 @@ data WaterfallChartDomain = WaterfallChartDomain'
 waterfallChartDomain
     :: WaterfallChartDomain
 waterfallChartDomain =
-    WaterfallChartDomain'
-    { _wcdReversed = Nothing
-    , _wcdData = Nothing
-    }
+  WaterfallChartDomain' {_wcdReversed = Nothing, _wcdData = Nothing}
 
 -- | True to reverse the order of the domain values (horizontal axis).
 wcdReversed :: Lens' WaterfallChartDomain (Maybe Bool)
@@ -5634,9 +5651,11 @@ instance ToJSON WaterfallChartDomain where
 -- | The result of adding a chart to a spreadsheet.
 --
 -- /See:/ 'addChartResponse' smart constructor.
-newtype AddChartResponse = AddChartResponse'
+newtype AddChartResponse =
+  AddChartResponse'
     { _acrChart :: Maybe EmbeddedChart
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddChartResponse' with the minimum fields required to make a request.
 --
@@ -5645,10 +5664,7 @@ newtype AddChartResponse = AddChartResponse'
 -- * 'acrChart'
 addChartResponse
     :: AddChartResponse
-addChartResponse =
-    AddChartResponse'
-    { _acrChart = Nothing
-    }
+addChartResponse = AddChartResponse' {_acrChart = Nothing}
 
 -- | The newly added chart.
 acrChart :: Lens' AddChartResponse (Maybe EmbeddedChart)
@@ -5668,10 +5684,12 @@ instance ToJSON AddChartResponse where
 -- UpdateEmbeddedObjectPositionRequest.)
 --
 -- /See:/ 'updateChartSpecRequest' smart constructor.
-data UpdateChartSpecRequest = UpdateChartSpecRequest'
+data UpdateChartSpecRequest =
+  UpdateChartSpecRequest'
     { _ucsrSpec    :: !(Maybe ChartSpec)
     , _ucsrChartId :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateChartSpecRequest' with the minimum fields required to make a request.
 --
@@ -5683,10 +5701,7 @@ data UpdateChartSpecRequest = UpdateChartSpecRequest'
 updateChartSpecRequest
     :: UpdateChartSpecRequest
 updateChartSpecRequest =
-    UpdateChartSpecRequest'
-    { _ucsrSpec = Nothing
-    , _ucsrChartId = Nothing
-    }
+  UpdateChartSpecRequest' {_ucsrSpec = Nothing, _ucsrChartId = Nothing}
 
 -- | The specification to apply to the chart.
 ucsrSpec :: Lens' UpdateChartSpecRequest (Maybe ChartSpec)
@@ -5715,9 +5730,11 @@ instance ToJSON UpdateChartSpecRequest where
 -- | Sets the basic filter associated with a sheet.
 --
 -- /See:/ 'setBasicFilterRequest' smart constructor.
-newtype SetBasicFilterRequest = SetBasicFilterRequest'
+newtype SetBasicFilterRequest =
+  SetBasicFilterRequest'
     { _sbfrFilter :: Maybe BasicFilter
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetBasicFilterRequest' with the minimum fields required to make a request.
 --
@@ -5726,10 +5743,7 @@ newtype SetBasicFilterRequest = SetBasicFilterRequest'
 -- * 'sbfrFilter'
 setBasicFilterRequest
     :: SetBasicFilterRequest
-setBasicFilterRequest =
-    SetBasicFilterRequest'
-    { _sbfrFilter = Nothing
-    }
+setBasicFilterRequest = SetBasicFilterRequest' {_sbfrFilter = Nothing}
 
 -- | The filter to set.
 sbfrFilter :: Lens' SetBasicFilterRequest (Maybe BasicFilter)
@@ -5749,10 +5763,12 @@ instance ToJSON SetBasicFilterRequest where
 -- iterative calculation.
 --
 -- /See:/ 'iterativeCalculationSettings' smart constructor.
-data IterativeCalculationSettings = IterativeCalculationSettings'
+data IterativeCalculationSettings =
+  IterativeCalculationSettings'
     { _icsMaxIterations        :: !(Maybe (Textual Int32))
     , _icsConvergenceThreshold :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IterativeCalculationSettings' with the minimum fields required to make a request.
 --
@@ -5764,10 +5780,8 @@ data IterativeCalculationSettings = IterativeCalculationSettings'
 iterativeCalculationSettings
     :: IterativeCalculationSettings
 iterativeCalculationSettings =
-    IterativeCalculationSettings'
-    { _icsMaxIterations = Nothing
-    , _icsConvergenceThreshold = Nothing
-    }
+  IterativeCalculationSettings'
+    {_icsMaxIterations = Nothing, _icsConvergenceThreshold = Nothing}
 
 -- | When iterative calculation is enabled, the maximum number of calculation
 -- rounds to perform.
@@ -5805,14 +5819,16 @@ instance ToJSON IterativeCalculationSettings where
 -- spreadsheet.
 --
 -- /See:/ 'updateValuesByDataFilterResponse' smart constructor.
-data UpdateValuesByDataFilterResponse = UpdateValuesByDataFilterResponse'
+data UpdateValuesByDataFilterResponse =
+  UpdateValuesByDataFilterResponse'
     { _uvbdfrUpdatedCells   :: !(Maybe (Textual Int32))
     , _uvbdfrUpdatedRows    :: !(Maybe (Textual Int32))
     , _uvbdfrUpdatedRange   :: !(Maybe Text)
     , _uvbdfrUpdatedData    :: !(Maybe ValueRange)
     , _uvbdfrUpdatedColumns :: !(Maybe (Textual Int32))
     , _uvbdfrDataFilter     :: !(Maybe DataFilter)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateValuesByDataFilterResponse' with the minimum fields required to make a request.
 --
@@ -5832,7 +5848,7 @@ data UpdateValuesByDataFilterResponse = UpdateValuesByDataFilterResponse'
 updateValuesByDataFilterResponse
     :: UpdateValuesByDataFilterResponse
 updateValuesByDataFilterResponse =
-    UpdateValuesByDataFilterResponse'
+  UpdateValuesByDataFilterResponse'
     { _uvbdfrUpdatedCells = Nothing
     , _uvbdfrUpdatedRows = Nothing
     , _uvbdfrUpdatedRange = Nothing
@@ -5909,7 +5925,8 @@ instance ToJSON UpdateValuesByDataFilterResponse
 -- | Properties of a grid.
 --
 -- /See:/ 'gridProperties' smart constructor.
-data GridProperties = GridProperties'
+data GridProperties =
+  GridProperties'
     { _gpFrozenColumnCount       :: !(Maybe (Textual Int32))
     , _gpColumnCount             :: !(Maybe (Textual Int32))
     , _gpColumnGroupControlAfter :: !(Maybe Bool)
@@ -5917,7 +5934,8 @@ data GridProperties = GridProperties'
     , _gpFrozenRowCount          :: !(Maybe (Textual Int32))
     , _gpRowGroupControlAfter    :: !(Maybe Bool)
     , _gpRowCount                :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GridProperties' with the minimum fields required to make a request.
 --
@@ -5939,7 +5957,7 @@ data GridProperties = GridProperties'
 gridProperties
     :: GridProperties
 gridProperties =
-    GridProperties'
+  GridProperties'
     { _gpFrozenColumnCount = Nothing
     , _gpColumnCount = Nothing
     , _gpColumnGroupControlAfter = Nothing
@@ -6028,13 +6046,15 @@ instance ToJSON GridProperties where
 -- explicitly.
 --
 -- /See:/ 'histogramChartSpec' smart constructor.
-data HistogramChartSpec = HistogramChartSpec'
+data HistogramChartSpec =
+  HistogramChartSpec'
     { _hcsLegendPosition    :: !(Maybe HistogramChartSpecLegendPosition)
     , _hcsSeries            :: !(Maybe [HistogramSeries])
     , _hcsShowItemDividers  :: !(Maybe Bool)
     , _hcsOutlierPercentile :: !(Maybe (Textual Double))
     , _hcsBucketSize        :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramChartSpec' with the minimum fields required to make a request.
 --
@@ -6052,7 +6072,7 @@ data HistogramChartSpec = HistogramChartSpec'
 histogramChartSpec
     :: HistogramChartSpec
 histogramChartSpec =
-    HistogramChartSpec'
+  HistogramChartSpec'
     { _hcsLegendPosition = Nothing
     , _hcsSeries = Nothing
     , _hcsShowItemDividers = Nothing
@@ -6130,9 +6150,11 @@ instance ToJSON HistogramChartSpec where
 -- the column index, and the value is the criteria for that column.
 --
 -- /See:/ 'basicFilterCriteria' smart constructor.
-newtype BasicFilterCriteria = BasicFilterCriteria'
+newtype BasicFilterCriteria =
+  BasicFilterCriteria'
     { _bfcAddtional :: HashMap Text FilterCriteria
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicFilterCriteria' with the minimum fields required to make a request.
 --
@@ -6143,9 +6165,7 @@ basicFilterCriteria
     :: HashMap Text FilterCriteria -- ^ 'bfcAddtional'
     -> BasicFilterCriteria
 basicFilterCriteria pBfcAddtional_ =
-    BasicFilterCriteria'
-    { _bfcAddtional = _Coerce # pBfcAddtional_
-    }
+  BasicFilterCriteria' {_bfcAddtional = _Coerce # pBfcAddtional_}
 
 bfcAddtional :: Lens' BasicFilterCriteria (HashMap Text FilterCriteria)
 bfcAddtional
@@ -6163,9 +6183,11 @@ instance ToJSON BasicFilterCriteria where
 -- | Adds a new banded range to the spreadsheet.
 --
 -- /See:/ 'addBandingRequest' smart constructor.
-newtype AddBandingRequest = AddBandingRequest'
+newtype AddBandingRequest =
+  AddBandingRequest'
     { _abrBandedRange :: Maybe BandedRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddBandingRequest' with the minimum fields required to make a request.
 --
@@ -6174,10 +6196,7 @@ newtype AddBandingRequest = AddBandingRequest'
 -- * 'abrBandedRange'
 addBandingRequest
     :: AddBandingRequest
-addBandingRequest =
-    AddBandingRequest'
-    { _abrBandedRange = Nothing
-    }
+addBandingRequest = AddBandingRequest' {_abrBandedRange = Nothing}
 
 -- | The banded range to add. The bandedRangeId field is optional; if one is
 -- not set, an id will be randomly generated. (It is an error to specify
@@ -6200,11 +6219,13 @@ instance ToJSON AddBandingRequest where
 -- | Updates properties of dimensions within the specified range.
 --
 -- /See:/ 'updateDimensionPropertiesRequest' smart constructor.
-data UpdateDimensionPropertiesRequest = UpdateDimensionPropertiesRequest'
+data UpdateDimensionPropertiesRequest =
+  UpdateDimensionPropertiesRequest'
     { _udprRange      :: !(Maybe DimensionRange)
     , _udprFields     :: !(Maybe GFieldMask)
     , _udprProperties :: !(Maybe DimensionProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDimensionPropertiesRequest' with the minimum fields required to make a request.
 --
@@ -6218,11 +6239,8 @@ data UpdateDimensionPropertiesRequest = UpdateDimensionPropertiesRequest'
 updateDimensionPropertiesRequest
     :: UpdateDimensionPropertiesRequest
 updateDimensionPropertiesRequest =
-    UpdateDimensionPropertiesRequest'
-    { _udprRange = Nothing
-    , _udprFields = Nothing
-    , _udprProperties = Nothing
-    }
+  UpdateDimensionPropertiesRequest'
+    {_udprRange = Nothing, _udprFields = Nothing, _udprProperties = Nothing}
 
 -- | The rows or columns to update.
 udprRange :: Lens' UpdateDimensionPropertiesRequest (Maybe DimensionRange)
@@ -6268,9 +6286,11 @@ instance ToJSON UpdateDimensionPropertiesRequest
 -- whereas the key \`1\` is for column \`D\`.
 --
 -- /See:/ 'pivotTableCriteria' smart constructor.
-newtype PivotTableCriteria = PivotTableCriteria'
+newtype PivotTableCriteria =
+  PivotTableCriteria'
     { _ptcAddtional :: HashMap Text PivotFilterCriteria
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PivotTableCriteria' with the minimum fields required to make a request.
 --
@@ -6281,9 +6301,7 @@ pivotTableCriteria
     :: HashMap Text PivotFilterCriteria -- ^ 'ptcAddtional'
     -> PivotTableCriteria
 pivotTableCriteria pPtcAddtional_ =
-    PivotTableCriteria'
-    { _ptcAddtional = _Coerce # pPtcAddtional_
-    }
+  PivotTableCriteria' {_ptcAddtional = _Coerce # pPtcAddtional_}
 
 ptcAddtional :: Lens' PivotTableCriteria (HashMap Text PivotFilterCriteria)
 ptcAddtional
@@ -6301,11 +6319,13 @@ instance ToJSON PivotTableCriteria where
 -- | Fills in more data based on existing data.
 --
 -- /See:/ 'autoFillRequest' smart constructor.
-data AutoFillRequest = AutoFillRequest'
+data AutoFillRequest =
+  AutoFillRequest'
     { _afrSourceAndDestination :: !(Maybe SourceAndDestination)
     , _afrUseAlternateSeries   :: !(Maybe Bool)
     , _afrRange                :: !(Maybe GridRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoFillRequest' with the minimum fields required to make a request.
 --
@@ -6319,7 +6339,7 @@ data AutoFillRequest = AutoFillRequest'
 autoFillRequest
     :: AutoFillRequest
 autoFillRequest =
-    AutoFillRequest'
+  AutoFillRequest'
     { _afrSourceAndDestination = Nothing
     , _afrUseAlternateSeries = Nothing
     , _afrRange = Nothing
@@ -6374,7 +6394,8 @@ instance ToJSON AutoFillRequest where
 -- combination of fields may be specified.
 --
 -- /See:/ 'developerMetadataLookup' smart constructor.
-data DeveloperMetadataLookup = DeveloperMetadataLookup'
+data DeveloperMetadataLookup =
+  DeveloperMetadataLookup'
     { _dLocationMatchingStrategy :: !(Maybe DeveloperMetadataLookupLocationMatchingStrategy)
     , _dMetadataId               :: !(Maybe (Textual Int32))
     , _dVisibility               :: !(Maybe DeveloperMetadataLookupVisibility)
@@ -6382,7 +6403,8 @@ data DeveloperMetadataLookup = DeveloperMetadataLookup'
     , _dLocationType             :: !(Maybe DeveloperMetadataLookupLocationType)
     , _dMetadataLocation         :: !(Maybe DeveloperMetadataLocation)
     , _dMetadataValue            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeveloperMetadataLookup' with the minimum fields required to make a request.
 --
@@ -6404,7 +6426,7 @@ data DeveloperMetadataLookup = DeveloperMetadataLookup'
 developerMetadataLookup
     :: DeveloperMetadataLookup
 developerMetadataLookup =
-    DeveloperMetadataLookup'
+  DeveloperMetadataLookup'
     { _dLocationMatchingStrategy = Nothing
     , _dMetadataId = Nothing
     , _dVisibility = Nothing
@@ -6505,12 +6527,14 @@ instance ToJSON DeveloperMetadataLookup where
 -- | Duplicates the contents of a sheet.
 --
 -- /See:/ 'duplicateSheetRequest' smart constructor.
-data DuplicateSheetRequest = DuplicateSheetRequest'
+data DuplicateSheetRequest =
+  DuplicateSheetRequest'
     { _dsrNewSheetName     :: !(Maybe Text)
     , _dsrInsertSheetIndex :: !(Maybe (Textual Int32))
     , _dsrSourceSheetId    :: !(Maybe (Textual Int32))
     , _dsrNewSheetId       :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DuplicateSheetRequest' with the minimum fields required to make a request.
 --
@@ -6526,7 +6550,7 @@ data DuplicateSheetRequest = DuplicateSheetRequest'
 duplicateSheetRequest
     :: DuplicateSheetRequest
 duplicateSheetRequest =
-    DuplicateSheetRequest'
+  DuplicateSheetRequest'
     { _dsrNewSheetName = Nothing
     , _dsrInsertSheetIndex = Nothing
     , _dsrSourceSheetId = Nothing
@@ -6584,10 +6608,12 @@ instance ToJSON DuplicateSheetRequest where
 -- | The rotation applied to text in a cell.
 --
 -- /See:/ 'textRotation' smart constructor.
-data TextRotation = TextRotation'
+data TextRotation =
+  TextRotation'
     { _trAngle    :: !(Maybe (Textual Int32))
     , _trVertical :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextRotation' with the minimum fields required to make a request.
 --
@@ -6598,11 +6624,7 @@ data TextRotation = TextRotation'
 -- * 'trVertical'
 textRotation
     :: TextRotation
-textRotation =
-    TextRotation'
-    { _trAngle = Nothing
-    , _trVertical = Nothing
-    }
+textRotation = TextRotation' {_trAngle = Nothing, _trVertical = Nothing}
 
 -- | The angle between the standard orientation and the desired orientation.
 -- Measured in degrees. Valid values are between -90 and 90. Positive
@@ -6638,9 +6660,11 @@ instance ToJSON TextRotation where
 -- | The result of a filter view being duplicated.
 --
 -- /See:/ 'duplicateFilterViewResponse' smart constructor.
-newtype DuplicateFilterViewResponse = DuplicateFilterViewResponse'
+newtype DuplicateFilterViewResponse =
+  DuplicateFilterViewResponse'
     { _dfvrFilter :: Maybe FilterView
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DuplicateFilterViewResponse' with the minimum fields required to make a request.
 --
@@ -6650,9 +6674,7 @@ newtype DuplicateFilterViewResponse = DuplicateFilterViewResponse'
 duplicateFilterViewResponse
     :: DuplicateFilterViewResponse
 duplicateFilterViewResponse =
-    DuplicateFilterViewResponse'
-    { _dfvrFilter = Nothing
-    }
+  DuplicateFilterViewResponse' {_dfvrFilter = Nothing}
 
 -- | The newly created filter.
 dfvrFilter :: Lens' DuplicateFilterViewResponse (Maybe FilterView)
@@ -6672,13 +6694,15 @@ instance ToJSON DuplicateFilterViewResponse where
 -- | The request for updating more than one range of values in a spreadsheet.
 --
 -- /See:/ 'batchUpdateValuesRequest' smart constructor.
-data BatchUpdateValuesRequest = BatchUpdateValuesRequest'
+data BatchUpdateValuesRequest =
+  BatchUpdateValuesRequest'
     { _buvrData                         :: !(Maybe [ValueRange])
     , _buvrValueInputOption             :: !(Maybe BatchUpdateValuesRequestValueInputOption)
     , _buvrIncludeValuesInResponse      :: !(Maybe Bool)
     , _buvrResponseDateTimeRenderOption :: !(Maybe BatchUpdateValuesRequestResponseDateTimeRenderOption)
     , _buvrResponseValueRenderOption    :: !(Maybe BatchUpdateValuesRequestResponseValueRenderOption)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdateValuesRequest' with the minimum fields required to make a request.
 --
@@ -6696,7 +6720,7 @@ data BatchUpdateValuesRequest = BatchUpdateValuesRequest'
 batchUpdateValuesRequest
     :: BatchUpdateValuesRequest
 batchUpdateValuesRequest =
-    BatchUpdateValuesRequest'
+  BatchUpdateValuesRequest'
     { _buvrData = Nothing
     , _buvrValueInputOption = Nothing
     , _buvrIncludeValuesInResponse = Nothing
@@ -6772,11 +6796,13 @@ instance ToJSON BatchUpdateValuesRequest where
 -- | A range of values whose location is specified by a DataFilter.
 --
 -- /See:/ 'dataFilterValueRange' smart constructor.
-data DataFilterValueRange = DataFilterValueRange'
+data DataFilterValueRange =
+  DataFilterValueRange'
     { _dfvrValues         :: !(Maybe [[JSONValue]])
     , _dfvrDataFilter     :: !(Maybe DataFilter)
     , _dfvrMajorDimension :: !(Maybe DataFilterValueRangeMajorDimension)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataFilterValueRange' with the minimum fields required to make a request.
 --
@@ -6790,7 +6816,7 @@ data DataFilterValueRange = DataFilterValueRange'
 dataFilterValueRange
     :: DataFilterValueRange
 dataFilterValueRange =
-    DataFilterValueRange'
+  DataFilterValueRange'
     { _dfvrValues = Nothing
     , _dfvrDataFilter = Nothing
     , _dfvrMajorDimension = Nothing
@@ -6839,9 +6865,11 @@ instance ToJSON DataFilterValueRange where
 -- | Adds a chart to a sheet in the spreadsheet.
 --
 -- /See:/ 'addChartRequest' smart constructor.
-newtype AddChartRequest = AddChartRequest'
+newtype AddChartRequest =
+  AddChartRequest'
     { _aChart :: Maybe EmbeddedChart
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddChartRequest' with the minimum fields required to make a request.
 --
@@ -6850,10 +6878,7 @@ newtype AddChartRequest = AddChartRequest'
 -- * 'aChart'
 addChartRequest
     :: AddChartRequest
-addChartRequest =
-    AddChartRequest'
-    { _aChart = Nothing
-    }
+addChartRequest = AddChartRequest' {_aChart = Nothing}
 
 -- | The chart that should be added to the spreadsheet, including the
 -- position where it should be placed. The chartId field is optional; if
@@ -6874,11 +6899,13 @@ instance ToJSON AddChartRequest where
 -- | A named range.
 --
 -- /See:/ 'namedRange' smart constructor.
-data NamedRange = NamedRange'
+data NamedRange =
+  NamedRange'
     { _nrNamedRangeId :: !(Maybe Text)
     , _nrName         :: !(Maybe Text)
     , _nrRange        :: !(Maybe GridRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NamedRange' with the minimum fields required to make a request.
 --
@@ -6892,11 +6919,7 @@ data NamedRange = NamedRange'
 namedRange
     :: NamedRange
 namedRange =
-    NamedRange'
-    { _nrNamedRangeId = Nothing
-    , _nrName = Nothing
-    , _nrRange = Nothing
-    }
+  NamedRange' {_nrNamedRangeId = Nothing, _nrName = Nothing, _nrRange = Nothing}
 
 -- | The ID of the named range.
 nrNamedRangeId :: Lens' NamedRange (Maybe Text)
@@ -6930,10 +6953,12 @@ instance ToJSON NamedRange where
 -- | Merges all cells in the range.
 --
 -- /See:/ 'mergeCellsRequest' smart constructor.
-data MergeCellsRequest = MergeCellsRequest'
+data MergeCellsRequest =
+  MergeCellsRequest'
     { _mcrMergeType :: !(Maybe MergeCellsRequestMergeType)
     , _mcrRange     :: !(Maybe GridRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MergeCellsRequest' with the minimum fields required to make a request.
 --
@@ -6945,10 +6970,7 @@ data MergeCellsRequest = MergeCellsRequest'
 mergeCellsRequest
     :: MergeCellsRequest
 mergeCellsRequest =
-    MergeCellsRequest'
-    { _mcrMergeType = Nothing
-    , _mcrRange = Nothing
-    }
+  MergeCellsRequest' {_mcrMergeType = Nothing, _mcrRange = Nothing}
 
 -- | How the cells should be merged.
 mcrMergeType :: Lens' MergeCellsRequest (Maybe MergeCellsRequestMergeType)
@@ -6988,9 +7010,11 @@ instance ToJSON MergeCellsRequest where
 -- +-----------+-------------------+
 --
 -- /See:/ 'manualRule' smart constructor.
-newtype ManualRule = ManualRule'
+newtype ManualRule =
+  ManualRule'
     { _mrGroups :: Maybe [ManualRuleGroup]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManualRule' with the minimum fields required to make a request.
 --
@@ -6999,10 +7023,7 @@ newtype ManualRule = ManualRule'
 -- * 'mrGroups'
 manualRule
     :: ManualRule
-manualRule =
-    ManualRule'
-    { _mrGroups = Nothing
-    }
+manualRule = ManualRule' {_mrGroups = Nothing}
 
 -- | The list of group names and the corresponding items from the source data
 -- that map to each group name.
@@ -7024,9 +7045,11 @@ instance ToJSON ManualRule where
 -- | Position settings for text.
 --
 -- /See:/ 'textPosition' smart constructor.
-newtype TextPosition = TextPosition'
+newtype TextPosition =
+  TextPosition'
     { _tpHorizontalAlignment :: Maybe TextPositionHorizontalAlignment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextPosition' with the minimum fields required to make a request.
 --
@@ -7035,10 +7058,7 @@ newtype TextPosition = TextPosition'
 -- * 'tpHorizontalAlignment'
 textPosition
     :: TextPosition
-textPosition =
-    TextPosition'
-    { _tpHorizontalAlignment = Nothing
-    }
+textPosition = TextPosition' {_tpHorizontalAlignment = Nothing}
 
 -- | Horizontal alignment setting for the piece of text.
 tpHorizontalAlignment :: Lens' TextPosition (Maybe TextPositionHorizontalAlignment)
@@ -7062,11 +7082,13 @@ instance ToJSON TextPosition where
 -- | A border along a cell.
 --
 -- /See:/ 'bOrder' smart constructor.
-data BOrder = BOrder'
+data BOrder =
+  BOrder'
     { _boStyle :: !(Maybe BOrderStyle)
     , _boColor :: !(Maybe Color)
     , _boWidth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BOrder' with the minimum fields required to make a request.
 --
@@ -7079,12 +7101,7 @@ data BOrder = BOrder'
 -- * 'boWidth'
 bOrder
     :: BOrder
-bOrder =
-    BOrder'
-    { _boStyle = Nothing
-    , _boColor = Nothing
-    , _boWidth = Nothing
-    }
+bOrder = BOrder' {_boStyle = Nothing, _boColor = Nothing, _boWidth = Nothing}
 
 -- | The style of the border.
 boStyle :: Lens' BOrder (Maybe BOrderStyle)
@@ -7121,9 +7138,11 @@ instance ToJSON BOrder where
 -- specified criteria.
 --
 -- /See:/ 'searchDeveloperMetadataRequest' smart constructor.
-newtype SearchDeveloperMetadataRequest = SearchDeveloperMetadataRequest'
+newtype SearchDeveloperMetadataRequest =
+  SearchDeveloperMetadataRequest'
     { _sdmrDataFilters :: Maybe [DataFilter]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchDeveloperMetadataRequest' with the minimum fields required to make a request.
 --
@@ -7133,9 +7152,7 @@ newtype SearchDeveloperMetadataRequest = SearchDeveloperMetadataRequest'
 searchDeveloperMetadataRequest
     :: SearchDeveloperMetadataRequest
 searchDeveloperMetadataRequest =
-    SearchDeveloperMetadataRequest'
-    { _sdmrDataFilters = Nothing
-    }
+  SearchDeveloperMetadataRequest' {_sdmrDataFilters = Nothing}
 
 -- | The data filters describing the criteria used to determine which
 -- DeveloperMetadata entries to return. DeveloperMetadata matching any of
@@ -7163,9 +7180,11 @@ instance ToJSON SearchDeveloperMetadataRequest where
 -- | The series of a CandlestickData.
 --
 -- /See:/ 'candlestickSeries' smart constructor.
-newtype CandlestickSeries = CandlestickSeries'
+newtype CandlestickSeries =
+  CandlestickSeries'
     { _csData :: Maybe ChartData
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CandlestickSeries' with the minimum fields required to make a request.
 --
@@ -7174,10 +7193,7 @@ newtype CandlestickSeries = CandlestickSeries'
 -- * 'csData'
 candlestickSeries
     :: CandlestickSeries
-candlestickSeries =
-    CandlestickSeries'
-    { _csData = Nothing
-    }
+candlestickSeries = CandlestickSeries' {_csData = Nothing}
 
 -- | The data of the CandlestickSeries.
 csData :: Lens' CandlestickSeries (Maybe ChartData)
@@ -7195,13 +7211,15 @@ instance ToJSON CandlestickSeries where
 -- | The kinds of value that a cell in a spreadsheet can have.
 --
 -- /See:/ 'extendedValue' smart constructor.
-data ExtendedValue = ExtendedValue'
+data ExtendedValue =
+  ExtendedValue'
     { _evBoolValue    :: !(Maybe Bool)
     , _evNumberValue  :: !(Maybe (Textual Double))
     , _evErrorValue   :: !(Maybe ErrorValue)
     , _evStringValue  :: !(Maybe Text)
     , _evFormulaValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExtendedValue' with the minimum fields required to make a request.
 --
@@ -7219,7 +7237,7 @@ data ExtendedValue = ExtendedValue'
 extendedValue
     :: ExtendedValue
 extendedValue =
-    ExtendedValue'
+  ExtendedValue'
     { _evBoolValue = Nothing
     , _evNumberValue = Nothing
     , _evErrorValue = Nothing
@@ -7282,9 +7300,11 @@ instance ToJSON ExtendedValue where
 -- | Adds a named range to the spreadsheet.
 --
 -- /See:/ 'addNamedRangeRequest' smart constructor.
-newtype AddNamedRangeRequest = AddNamedRangeRequest'
+newtype AddNamedRangeRequest =
+  AddNamedRangeRequest'
     { _aNamedRange :: Maybe NamedRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddNamedRangeRequest' with the minimum fields required to make a request.
 --
@@ -7293,10 +7313,7 @@ newtype AddNamedRangeRequest = AddNamedRangeRequest'
 -- * 'aNamedRange'
 addNamedRangeRequest
     :: AddNamedRangeRequest
-addNamedRangeRequest =
-    AddNamedRangeRequest'
-    { _aNamedRange = Nothing
-    }
+addNamedRangeRequest = AddNamedRangeRequest' {_aNamedRange = Nothing}
 
 -- | The named range to add. The namedRangeId field is optional; if one is
 -- not set, an id will be randomly generated. (It is an error to specify
@@ -7319,9 +7336,11 @@ instance ToJSON AddNamedRangeRequest where
 -- | Criteria for showing\/hiding rows in a pivot table.
 --
 -- /See:/ 'pivotFilterCriteria' smart constructor.
-newtype PivotFilterCriteria = PivotFilterCriteria'
+newtype PivotFilterCriteria =
+  PivotFilterCriteria'
     { _pfcVisibleValues :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PivotFilterCriteria' with the minimum fields required to make a request.
 --
@@ -7330,10 +7349,7 @@ newtype PivotFilterCriteria = PivotFilterCriteria'
 -- * 'pfcVisibleValues'
 pivotFilterCriteria
     :: PivotFilterCriteria
-pivotFilterCriteria =
-    PivotFilterCriteria'
-    { _pfcVisibleValues = Nothing
-    }
+pivotFilterCriteria = PivotFilterCriteria' {_pfcVisibleValues = Nothing}
 
 -- | Values that should be included. Values not listed here are excluded.
 pfcVisibleValues :: Lens' PivotFilterCriteria [Text]
@@ -7361,12 +7377,14 @@ instance ToJSON PivotFilterCriteria where
 -- exclusive. Missing indexes indicate the range is unbounded on that side.
 --
 -- /See:/ 'dimensionRange' smart constructor.
-data DimensionRange = DimensionRange'
+data DimensionRange =
+  DimensionRange'
     { _drDimension  :: !(Maybe DimensionRangeDimension)
     , _drEndIndex   :: !(Maybe (Textual Int32))
     , _drSheetId    :: !(Maybe (Textual Int32))
     , _drStartIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DimensionRange' with the minimum fields required to make a request.
 --
@@ -7382,7 +7400,7 @@ data DimensionRange = DimensionRange'
 dimensionRange
     :: DimensionRange
 dimensionRange =
-    DimensionRange'
+  DimensionRange'
     { _drDimension = Nothing
     , _drEndIndex = Nothing
     , _drSheetId = Nothing
@@ -7433,10 +7451,12 @@ instance ToJSON DimensionRange where
 -- | Updates properties of a spreadsheet.
 --
 -- /See:/ 'updateSpreadsheetPropertiesRequest' smart constructor.
-data UpdateSpreadsheetPropertiesRequest = UpdateSpreadsheetPropertiesRequest'
+data UpdateSpreadsheetPropertiesRequest =
+  UpdateSpreadsheetPropertiesRequest'
     { _uFields     :: !(Maybe GFieldMask)
     , _uProperties :: !(Maybe SpreadsheetProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSpreadsheetPropertiesRequest' with the minimum fields required to make a request.
 --
@@ -7448,10 +7468,8 @@ data UpdateSpreadsheetPropertiesRequest = UpdateSpreadsheetPropertiesRequest'
 updateSpreadsheetPropertiesRequest
     :: UpdateSpreadsheetPropertiesRequest
 updateSpreadsheetPropertiesRequest =
-    UpdateSpreadsheetPropertiesRequest'
-    { _uFields = Nothing
-    , _uProperties = Nothing
-    }
+  UpdateSpreadsheetPropertiesRequest'
+    {_uFields = Nothing, _uProperties = Nothing}
 
 -- | The fields that should be updated. At least one field must be specified.
 -- The root \'properties\' is implied and should not be specified. A single
@@ -7483,10 +7501,12 @@ instance ToJSON UpdateSpreadsheetPropertiesRequest
 -- | The domain of a CandlestickChart.
 --
 -- /See:/ 'candlestickDomain' smart constructor.
-data CandlestickDomain = CandlestickDomain'
+data CandlestickDomain =
+  CandlestickDomain'
     { _cdReversed :: !(Maybe Bool)
     , _cdData     :: !(Maybe ChartData)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CandlestickDomain' with the minimum fields required to make a request.
 --
@@ -7498,10 +7518,7 @@ data CandlestickDomain = CandlestickDomain'
 candlestickDomain
     :: CandlestickDomain
 candlestickDomain =
-    CandlestickDomain'
-    { _cdReversed = Nothing
-    , _cdData = Nothing
-    }
+  CandlestickDomain' {_cdReversed = Nothing, _cdData = Nothing}
 
 -- | True to reverse the order of the domain values (horizontal axis).
 cdReversed :: Lens' CandlestickDomain (Maybe Bool)
@@ -7529,9 +7546,11 @@ instance ToJSON CandlestickDomain where
 -- | The result of adding a new protected range.
 --
 -- /See:/ 'addProtectedRangeResponse' smart constructor.
-newtype AddProtectedRangeResponse = AddProtectedRangeResponse'
+newtype AddProtectedRangeResponse =
+  AddProtectedRangeResponse'
     { _aProtectedRange :: Maybe ProtectedRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddProtectedRangeResponse' with the minimum fields required to make a request.
 --
@@ -7541,9 +7560,7 @@ newtype AddProtectedRangeResponse = AddProtectedRangeResponse'
 addProtectedRangeResponse
     :: AddProtectedRangeResponse
 addProtectedRangeResponse =
-    AddProtectedRangeResponse'
-    { _aProtectedRange = Nothing
-    }
+  AddProtectedRangeResponse' {_aProtectedRange = Nothing}
 
 -- | The newly added protected range.
 aProtectedRange :: Lens' AddProtectedRangeResponse (Maybe ProtectedRange)
@@ -7567,11 +7584,13 @@ instance ToJSON AddProtectedRangeResponse where
 -- | Appends rows or columns to the end of a sheet.
 --
 -- /See:/ 'appendDimensionRequest' smart constructor.
-data AppendDimensionRequest = AppendDimensionRequest'
+data AppendDimensionRequest =
+  AppendDimensionRequest'
     { _adrLength    :: !(Maybe (Textual Int32))
     , _adrDimension :: !(Maybe AppendDimensionRequestDimension)
     , _adrSheetId   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppendDimensionRequest' with the minimum fields required to make a request.
 --
@@ -7585,11 +7604,8 @@ data AppendDimensionRequest = AppendDimensionRequest'
 appendDimensionRequest
     :: AppendDimensionRequest
 appendDimensionRequest =
-    AppendDimensionRequest'
-    { _adrLength = Nothing
-    , _adrDimension = Nothing
-    , _adrSheetId = Nothing
-    }
+  AppendDimensionRequest'
+    {_adrLength = Nothing, _adrDimension = Nothing, _adrSheetId = Nothing}
 
 -- | The number of rows or columns to append.
 adrLength :: Lens' AppendDimensionRequest (Maybe Int32)
@@ -7627,13 +7643,15 @@ instance ToJSON AppendDimensionRequest where
 -- | The definition of how a value in a pivot table should be calculated.
 --
 -- /See:/ 'pivotValue' smart constructor.
-data PivotValue = PivotValue'
+data PivotValue =
+  PivotValue'
     { _pvSourceColumnOffSet    :: !(Maybe (Textual Int32))
     , _pvFormula               :: !(Maybe Text)
     , _pvName                  :: !(Maybe Text)
     , _pvCalculatedDisplayType :: !(Maybe PivotValueCalculatedDisplayType)
     , _pvSummarizeFunction     :: !(Maybe PivotValueSummarizeFunction)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PivotValue' with the minimum fields required to make a request.
 --
@@ -7651,7 +7669,7 @@ data PivotValue = PivotValue'
 pivotValue
     :: PivotValue
 pivotValue =
-    PivotValue'
+  PivotValue'
     { _pvSourceColumnOffSet = Nothing
     , _pvFormula = Nothing
     , _pvName = Nothing
@@ -7722,9 +7740,11 @@ instance ToJSON PivotValue where
 -- | Unmerges cells in the given range.
 --
 -- /See:/ 'unmergeCellsRequest' smart constructor.
-newtype UnmergeCellsRequest = UnmergeCellsRequest'
+newtype UnmergeCellsRequest =
+  UnmergeCellsRequest'
     { _ucrRange :: Maybe GridRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnmergeCellsRequest' with the minimum fields required to make a request.
 --
@@ -7733,10 +7753,7 @@ newtype UnmergeCellsRequest = UnmergeCellsRequest'
 -- * 'ucrRange'
 unmergeCellsRequest
     :: UnmergeCellsRequest
-unmergeCellsRequest =
-    UnmergeCellsRequest'
-    { _ucrRange = Nothing
-    }
+unmergeCellsRequest = UnmergeCellsRequest' {_ucrRange = Nothing}
 
 -- | The range within which all cells should be unmerged. If the range spans
 -- multiple merges, all will be unmerged. The range must not partially span
@@ -7756,9 +7773,11 @@ instance ToJSON UnmergeCellsRequest where
 -- | Deletes the requested sheet.
 --
 -- /See:/ 'deleteSheetRequest' smart constructor.
-newtype DeleteSheetRequest = DeleteSheetRequest'
+newtype DeleteSheetRequest =
+  DeleteSheetRequest'
     { _dsrSheetId :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteSheetRequest' with the minimum fields required to make a request.
 --
@@ -7767,10 +7786,7 @@ newtype DeleteSheetRequest = DeleteSheetRequest'
 -- * 'dsrSheetId'
 deleteSheetRequest
     :: DeleteSheetRequest
-deleteSheetRequest =
-    DeleteSheetRequest'
-    { _dsrSheetId = Nothing
-    }
+deleteSheetRequest = DeleteSheetRequest' {_dsrSheetId = Nothing}
 
 -- | The ID of the sheet to delete.
 dsrSheetId :: Lens' DeleteSheetRequest (Maybe Int32)
@@ -7803,9 +7819,11 @@ instance ToJSON DeleteSheetRequest where
 -- depth 1] and [C:D, depth 2].
 --
 -- /See:/ 'addDimensionGroupRequest' smart constructor.
-newtype AddDimensionGroupRequest = AddDimensionGroupRequest'
+newtype AddDimensionGroupRequest =
+  AddDimensionGroupRequest'
     { _adgrRange :: Maybe DimensionRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddDimensionGroupRequest' with the minimum fields required to make a request.
 --
@@ -7814,10 +7832,7 @@ newtype AddDimensionGroupRequest = AddDimensionGroupRequest'
 -- * 'adgrRange'
 addDimensionGroupRequest
     :: AddDimensionGroupRequest
-addDimensionGroupRequest =
-    AddDimensionGroupRequest'
-    { _adgrRange = Nothing
-    }
+addDimensionGroupRequest = AddDimensionGroupRequest' {_adgrRange = Nothing}
 
 -- | The range over which to create a group.
 adgrRange :: Lens' AddDimensionGroupRequest (Maybe DimensionRange)
@@ -7837,10 +7852,12 @@ instance ToJSON AddDimensionGroupRequest where
 -- | Styles for a waterfall chart column.
 --
 -- /See:/ 'waterfallChartColumnStyle' smart constructor.
-data WaterfallChartColumnStyle = WaterfallChartColumnStyle'
+data WaterfallChartColumnStyle =
+  WaterfallChartColumnStyle'
     { _wColor :: !(Maybe Color)
     , _wLabel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WaterfallChartColumnStyle' with the minimum fields required to make a request.
 --
@@ -7852,10 +7869,7 @@ data WaterfallChartColumnStyle = WaterfallChartColumnStyle'
 waterfallChartColumnStyle
     :: WaterfallChartColumnStyle
 waterfallChartColumnStyle =
-    WaterfallChartColumnStyle'
-    { _wColor = Nothing
-    , _wLabel = Nothing
-    }
+  WaterfallChartColumnStyle' {_wColor = Nothing, _wLabel = Nothing}
 
 -- | The color of the column.
 wColor :: Lens' WaterfallChartColumnStyle (Maybe Color)
@@ -7882,12 +7896,14 @@ instance ToJSON WaterfallChartColumnStyle where
 -- high values for a series.
 --
 -- /See:/ 'candlestickData' smart constructor.
-data CandlestickData = CandlestickData'
+data CandlestickData =
+  CandlestickData'
     { _cdLowSeries   :: !(Maybe CandlestickSeries)
     , _cdHighSeries  :: !(Maybe CandlestickSeries)
     , _cdOpenSeries  :: !(Maybe CandlestickSeries)
     , _cdCloseSeries :: !(Maybe CandlestickSeries)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CandlestickData' with the minimum fields required to make a request.
 --
@@ -7903,7 +7919,7 @@ data CandlestickData = CandlestickData'
 candlestickData
     :: CandlestickData
 candlestickData =
-    CandlestickData'
+  CandlestickData'
     { _cdLowSeries = Nothing
     , _cdHighSeries = Nothing
     , _cdOpenSeries = Nothing
@@ -7958,12 +7974,14 @@ instance ToJSON CandlestickData where
 -- | A banded (alternating colors) range in a sheet.
 --
 -- /See:/ 'bandedRange' smart constructor.
-data BandedRange = BandedRange'
+data BandedRange =
+  BandedRange'
     { _brBandedRangeId    :: !(Maybe (Textual Int32))
     , _brRowProperties    :: !(Maybe BandingProperties)
     , _brRange            :: !(Maybe GridRange)
     , _brColumnProperties :: !(Maybe BandingProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BandedRange' with the minimum fields required to make a request.
 --
@@ -7979,7 +7997,7 @@ data BandedRange = BandedRange'
 bandedRange
     :: BandedRange
 bandedRange =
-    BandedRange'
+  BandedRange'
     { _brBandedRangeId = Nothing
     , _brRowProperties = Nothing
     , _brRange = Nothing
@@ -8039,7 +8057,8 @@ instance ToJSON BandedRange where
 -- clear a border, explicitly set the style to NONE.
 --
 -- /See:/ 'updateBOrdersRequest' smart constructor.
-data UpdateBOrdersRequest = UpdateBOrdersRequest'
+data UpdateBOrdersRequest =
+  UpdateBOrdersRequest'
     { _uborBottom          :: !(Maybe BOrder)
     , _uborInnerHorizontal :: !(Maybe BOrder)
     , _uborLeft            :: !(Maybe BOrder)
@@ -8047,7 +8066,8 @@ data UpdateBOrdersRequest = UpdateBOrdersRequest'
     , _uborRange           :: !(Maybe GridRange)
     , _uborRight           :: !(Maybe BOrder)
     , _uborTop             :: !(Maybe BOrder)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateBOrdersRequest' with the minimum fields required to make a request.
 --
@@ -8069,7 +8089,7 @@ data UpdateBOrdersRequest = UpdateBOrdersRequest'
 updateBOrdersRequest
     :: UpdateBOrdersRequest
 updateBOrdersRequest =
-    UpdateBOrdersRequest'
+  UpdateBOrdersRequest'
     { _uborBottom = Nothing
     , _uborInnerHorizontal = Nothing
     , _uborLeft = Nothing
@@ -8141,13 +8161,15 @@ instance ToJSON UpdateBOrdersRequest where
 -- | The request for updating more than one range of values in a spreadsheet.
 --
 -- /See:/ 'batchUpdateValuesByDataFilterRequest' smart constructor.
-data BatchUpdateValuesByDataFilterRequest = BatchUpdateValuesByDataFilterRequest'
+data BatchUpdateValuesByDataFilterRequest =
+  BatchUpdateValuesByDataFilterRequest'
     { _buvbdfrData                         :: !(Maybe [DataFilterValueRange])
     , _buvbdfrValueInputOption             :: !(Maybe BatchUpdateValuesByDataFilterRequestValueInputOption)
     , _buvbdfrIncludeValuesInResponse      :: !(Maybe Bool)
     , _buvbdfrResponseDateTimeRenderOption :: !(Maybe BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption)
     , _buvbdfrResponseValueRenderOption    :: !(Maybe BatchUpdateValuesByDataFilterRequestResponseValueRenderOption)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdateValuesByDataFilterRequest' with the minimum fields required to make a request.
 --
@@ -8165,7 +8187,7 @@ data BatchUpdateValuesByDataFilterRequest = BatchUpdateValuesByDataFilterRequest
 batchUpdateValuesByDataFilterRequest
     :: BatchUpdateValuesByDataFilterRequest
 batchUpdateValuesByDataFilterRequest =
-    BatchUpdateValuesByDataFilterRequest'
+  BatchUpdateValuesByDataFilterRequest'
     { _buvbdfrData = Nothing
     , _buvbdfrValueInputOption = Nothing
     , _buvbdfrIncludeValuesInResponse = Nothing
@@ -8218,7 +8240,8 @@ buvbdfrResponseValueRenderOption
       (\ s a -> s{_buvbdfrResponseValueRenderOption = a})
 
 instance FromJSON
-         BatchUpdateValuesByDataFilterRequest where
+           BatchUpdateValuesByDataFilterRequest
+         where
         parseJSON
           = withObject "BatchUpdateValuesByDataFilterRequest"
               (\ o ->
@@ -8246,11 +8269,13 @@ instance ToJSON BatchUpdateValuesByDataFilterRequest
 -- | A chart embedded in a sheet.
 --
 -- /See:/ 'embeddedChart' smart constructor.
-data EmbeddedChart = EmbeddedChart'
+data EmbeddedChart =
+  EmbeddedChart'
     { _ecSpec     :: !(Maybe ChartSpec)
     , _ecPosition :: !(Maybe EmbeddedObjectPosition)
     , _ecChartId  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EmbeddedChart' with the minimum fields required to make a request.
 --
@@ -8264,11 +8289,8 @@ data EmbeddedChart = EmbeddedChart'
 embeddedChart
     :: EmbeddedChart
 embeddedChart =
-    EmbeddedChart'
-    { _ecSpec = Nothing
-    , _ecPosition = Nothing
-    , _ecChartId = Nothing
-    }
+  EmbeddedChart'
+    {_ecSpec = Nothing, _ecPosition = Nothing, _ecChartId = Nothing}
 
 -- | The specification of the chart.
 ecSpec :: Lens' EmbeddedChart (Maybe ChartSpec)
@@ -8304,9 +8326,11 @@ instance ToJSON EmbeddedChart where
 -- | Data about each cell in a row.
 --
 -- /See:/ 'rowData' smart constructor.
-newtype RowData = RowData'
+newtype RowData =
+  RowData'
     { _rdValues :: Maybe [CellData]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RowData' with the minimum fields required to make a request.
 --
@@ -8315,10 +8339,7 @@ newtype RowData = RowData'
 -- * 'rdValues'
 rowData
     :: RowData
-rowData =
-    RowData'
-    { _rdValues = Nothing
-    }
+rowData = RowData' {_rdValues = Nothing}
 
 -- | The values in the row, one per column.
 rdValues :: Lens' RowData [CellData]
@@ -8339,11 +8360,13 @@ instance ToJSON RowData where
 -- | The editors of a protected range.
 --
 -- /See:/ 'editors' smart constructor.
-data Editors = Editors'
+data Editors =
+  Editors'
     { _eGroups             :: !(Maybe [Text])
     , _eUsers              :: !(Maybe [Text])
     , _eDomainUsersCanEdit :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Editors' with the minimum fields required to make a request.
 --
@@ -8357,11 +8380,8 @@ data Editors = Editors'
 editors
     :: Editors
 editors =
-    Editors'
-    { _eGroups = Nothing
-    , _eUsers = Nothing
-    , _eDomainUsersCanEdit = Nothing
-    }
+  Editors'
+    {_eGroups = Nothing, _eUsers = Nothing, _eDomainUsersCanEdit = Nothing}
 
 -- | The email addresses of groups with edit access to the protected range.
 eGroups :: Lens' Editors [Text]
@@ -8403,14 +8423,16 @@ instance ToJSON Editors where
 -- | A pivot table.
 --
 -- /See:/ 'pivotTable' smart constructor.
-data PivotTable = PivotTable'
+data PivotTable =
+  PivotTable'
     { _ptValues      :: !(Maybe [PivotValue])
     , _ptValueLayout :: !(Maybe PivotTableValueLayout)
     , _ptRows        :: !(Maybe [PivotGroup])
     , _ptSource      :: !(Maybe GridRange)
     , _ptColumns     :: !(Maybe [PivotGroup])
     , _ptCriteria    :: !(Maybe PivotTableCriteria)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PivotTable' with the minimum fields required to make a request.
 --
@@ -8430,7 +8452,7 @@ data PivotTable = PivotTable'
 pivotTable
     :: PivotTable
 pivotTable =
-    PivotTable'
+  PivotTable'
     { _ptValues = Nothing
     , _ptValueLayout = Nothing
     , _ptRows = Nothing
@@ -8504,11 +8526,13 @@ instance ToJSON PivotTable where
 -- | The position of an embedded object such as a chart.
 --
 -- /See:/ 'embeddedObjectPosition' smart constructor.
-data EmbeddedObjectPosition = EmbeddedObjectPosition'
+data EmbeddedObjectPosition =
+  EmbeddedObjectPosition'
     { _eopOverlayPosition :: !(Maybe OverlayPosition)
     , _eopSheetId         :: !(Maybe (Textual Int32))
     , _eopNewSheet        :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EmbeddedObjectPosition' with the minimum fields required to make a request.
 --
@@ -8522,7 +8546,7 @@ data EmbeddedObjectPosition = EmbeddedObjectPosition'
 embeddedObjectPosition
     :: EmbeddedObjectPosition
 embeddedObjectPosition =
-    EmbeddedObjectPosition'
+  EmbeddedObjectPosition'
     { _eopOverlayPosition = Nothing
     , _eopSheetId = Nothing
     , _eopNewSheet = Nothing
@@ -8566,11 +8590,13 @@ instance ToJSON EmbeddedObjectPosition where
 -- | The default filter associated with a sheet.
 --
 -- /See:/ 'basicFilter' smart constructor.
-data BasicFilter = BasicFilter'
+data BasicFilter =
+  BasicFilter'
     { _bfSortSpecs :: !(Maybe [SortSpec])
     , _bfRange     :: !(Maybe GridRange)
     , _bfCriteria  :: !(Maybe BasicFilterCriteria)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicFilter' with the minimum fields required to make a request.
 --
@@ -8584,11 +8610,8 @@ data BasicFilter = BasicFilter'
 basicFilter
     :: BasicFilter
 basicFilter =
-    BasicFilter'
-    { _bfSortSpecs = Nothing
-    , _bfRange = Nothing
-    , _bfCriteria = Nothing
-    }
+  BasicFilter'
+    {_bfSortSpecs = Nothing, _bfRange = Nothing, _bfCriteria = Nothing}
 
 -- | The sort order per column. Later specifications are used when values are
 -- equal in the earlier specifications.
@@ -8628,11 +8651,13 @@ instance ToJSON BasicFilter where
 -- each cell.
 --
 -- /See:/ 'textToColumnsRequest' smart constructor.
-data TextToColumnsRequest = TextToColumnsRequest'
+data TextToColumnsRequest =
+  TextToColumnsRequest'
     { _ttcrDelimiterType :: !(Maybe TextToColumnsRequestDelimiterType)
     , _ttcrSource        :: !(Maybe GridRange)
     , _ttcrDelimiter     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextToColumnsRequest' with the minimum fields required to make a request.
 --
@@ -8646,7 +8671,7 @@ data TextToColumnsRequest = TextToColumnsRequest'
 textToColumnsRequest
     :: TextToColumnsRequest
 textToColumnsRequest =
-    TextToColumnsRequest'
+  TextToColumnsRequest'
     { _ttcrDelimiterType = Nothing
     , _ttcrSource = Nothing
     , _ttcrDelimiter = Nothing
@@ -8688,10 +8713,12 @@ instance ToJSON TextToColumnsRequest where
 -- | The request for retrieving a Spreadsheet.
 --
 -- /See:/ 'getSpreadsheetByDataFilterRequest' smart constructor.
-data GetSpreadsheetByDataFilterRequest = GetSpreadsheetByDataFilterRequest'
+data GetSpreadsheetByDataFilterRequest =
+  GetSpreadsheetByDataFilterRequest'
     { _gsbdfrDataFilters     :: !(Maybe [DataFilter])
     , _gsbdfrIncludeGridData :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSpreadsheetByDataFilterRequest' with the minimum fields required to make a request.
 --
@@ -8703,10 +8730,8 @@ data GetSpreadsheetByDataFilterRequest = GetSpreadsheetByDataFilterRequest'
 getSpreadsheetByDataFilterRequest
     :: GetSpreadsheetByDataFilterRequest
 getSpreadsheetByDataFilterRequest =
-    GetSpreadsheetByDataFilterRequest'
-    { _gsbdfrDataFilters = Nothing
-    , _gsbdfrIncludeGridData = Nothing
-    }
+  GetSpreadsheetByDataFilterRequest'
+    {_gsbdfrDataFilters = Nothing, _gsbdfrIncludeGridData = Nothing}
 
 -- | The DataFilters used to select which ranges to retrieve from the
 -- spreadsheet.
@@ -8744,12 +8769,14 @@ instance ToJSON GetSpreadsheetByDataFilterRequest
 -- | The request for updating any aspect of a spreadsheet.
 --
 -- /See:/ 'batchUpdateSpreadsheetRequest' smart constructor.
-data BatchUpdateSpreadsheetRequest = BatchUpdateSpreadsheetRequest'
+data BatchUpdateSpreadsheetRequest =
+  BatchUpdateSpreadsheetRequest'
     { _busrResponseIncludeGridData      :: !(Maybe Bool)
     , _busrResponseRanges               :: !(Maybe [Text])
     , _busrRequests                     :: !(Maybe [Request'])
     , _busrIncludeSpreadsheetInResponse :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdateSpreadsheetRequest' with the minimum fields required to make a request.
 --
@@ -8765,7 +8792,7 @@ data BatchUpdateSpreadsheetRequest = BatchUpdateSpreadsheetRequest'
 batchUpdateSpreadsheetRequest
     :: BatchUpdateSpreadsheetRequest
 batchUpdateSpreadsheetRequest =
-    BatchUpdateSpreadsheetRequest'
+  BatchUpdateSpreadsheetRequest'
     { _busrResponseIncludeGridData = Nothing
     , _busrResponseRanges = Nothing
     , _busrRequests = Nothing
@@ -8829,14 +8856,16 @@ instance ToJSON BatchUpdateSpreadsheetRequest where
 -- | The response when updating a range of values in a spreadsheet.
 --
 -- /See:/ 'updateValuesResponse' smart constructor.
-data UpdateValuesResponse = UpdateValuesResponse'
+data UpdateValuesResponse =
+  UpdateValuesResponse'
     { _uvrUpdatedCells   :: !(Maybe (Textual Int32))
     , _uvrSpreadsheetId  :: !(Maybe Text)
     , _uvrUpdatedRows    :: !(Maybe (Textual Int32))
     , _uvrUpdatedRange   :: !(Maybe Text)
     , _uvrUpdatedData    :: !(Maybe ValueRange)
     , _uvrUpdatedColumns :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateValuesResponse' with the minimum fields required to make a request.
 --
@@ -8856,7 +8885,7 @@ data UpdateValuesResponse = UpdateValuesResponse'
 updateValuesResponse
     :: UpdateValuesResponse
 updateValuesResponse =
-    UpdateValuesResponse'
+  UpdateValuesResponse'
     { _uvrUpdatedCells = Nothing
     , _uvrSpreadsheetId = Nothing
     , _uvrUpdatedRows = Nothing
@@ -8931,9 +8960,11 @@ instance ToJSON UpdateValuesResponse where
 -- | The result of deleting a group.
 --
 -- /See:/ 'deleteDimensionGroupResponse' smart constructor.
-newtype DeleteDimensionGroupResponse = DeleteDimensionGroupResponse'
+newtype DeleteDimensionGroupResponse =
+  DeleteDimensionGroupResponse'
     { _ddgrDimensionGroups :: Maybe [DimensionGroup]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDimensionGroupResponse' with the minimum fields required to make a request.
 --
@@ -8943,9 +8974,7 @@ newtype DeleteDimensionGroupResponse = DeleteDimensionGroupResponse'
 deleteDimensionGroupResponse
     :: DeleteDimensionGroupResponse
 deleteDimensionGroupResponse =
-    DeleteDimensionGroupResponse'
-    { _ddgrDimensionGroups = Nothing
-    }
+  DeleteDimensionGroupResponse' {_ddgrDimensionGroups = Nothing}
 
 -- | All groups of a dimension after deleting a group from that dimension.
 ddgrDimensionGroups :: Lens' DeleteDimensionGroupResponse [DimensionGroup]
@@ -8971,9 +9000,11 @@ instance ToJSON DeleteDimensionGroupResponse where
 -- | The request to copy a sheet across spreadsheets.
 --
 -- /See:/ 'copySheetToAnotherSpreadsheetRequest' smart constructor.
-newtype CopySheetToAnotherSpreadsheetRequest = CopySheetToAnotherSpreadsheetRequest'
+newtype CopySheetToAnotherSpreadsheetRequest =
+  CopySheetToAnotherSpreadsheetRequest'
     { _cstasrDestinationSpreadsheetId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CopySheetToAnotherSpreadsheetRequest' with the minimum fields required to make a request.
 --
@@ -8983,9 +9014,8 @@ newtype CopySheetToAnotherSpreadsheetRequest = CopySheetToAnotherSpreadsheetRequ
 copySheetToAnotherSpreadsheetRequest
     :: CopySheetToAnotherSpreadsheetRequest
 copySheetToAnotherSpreadsheetRequest =
-    CopySheetToAnotherSpreadsheetRequest'
-    { _cstasrDestinationSpreadsheetId = Nothing
-    }
+  CopySheetToAnotherSpreadsheetRequest'
+    {_cstasrDestinationSpreadsheetId = Nothing}
 
 -- | The ID of the spreadsheet to copy the sheet to.
 cstasrDestinationSpreadsheetId :: Lens' CopySheetToAnotherSpreadsheetRequest (Maybe Text)
@@ -8994,7 +9024,8 @@ cstasrDestinationSpreadsheetId
       (\ s a -> s{_cstasrDestinationSpreadsheetId = a})
 
 instance FromJSON
-         CopySheetToAnotherSpreadsheetRequest where
+           CopySheetToAnotherSpreadsheetRequest
+         where
         parseJSON
           = withObject "CopySheetToAnotherSpreadsheetRequest"
               (\ o ->
@@ -9012,9 +9043,11 @@ instance ToJSON CopySheetToAnotherSpreadsheetRequest
 -- | Adds a filter view.
 --
 -- /See:/ 'addFilterViewRequest' smart constructor.
-newtype AddFilterViewRequest = AddFilterViewRequest'
+newtype AddFilterViewRequest =
+  AddFilterViewRequest'
     { _aFilter :: Maybe FilterView
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddFilterViewRequest' with the minimum fields required to make a request.
 --
@@ -9023,10 +9056,7 @@ newtype AddFilterViewRequest = AddFilterViewRequest'
 -- * 'aFilter'
 addFilterViewRequest
     :: AddFilterViewRequest
-addFilterViewRequest =
-    AddFilterViewRequest'
-    { _aFilter = Nothing
-    }
+addFilterViewRequest = AddFilterViewRequest' {_aFilter = Nothing}
 
 -- | The filter to add. The filterViewId field is optional; if one is not
 -- set, an id will be randomly generated. (It is an error to specify the ID
@@ -9046,10 +9076,12 @@ instance ToJSON AddFilterViewRequest where
 -- | Metadata about a value in a pivot grouping.
 --
 -- /See:/ 'pivotGroupValueMetadata' smart constructor.
-data PivotGroupValueMetadata = PivotGroupValueMetadata'
+data PivotGroupValueMetadata =
+  PivotGroupValueMetadata'
     { _pgvmValue     :: !(Maybe ExtendedValue)
     , _pgvmCollapsed :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PivotGroupValueMetadata' with the minimum fields required to make a request.
 --
@@ -9061,10 +9093,7 @@ data PivotGroupValueMetadata = PivotGroupValueMetadata'
 pivotGroupValueMetadata
     :: PivotGroupValueMetadata
 pivotGroupValueMetadata =
-    PivotGroupValueMetadata'
-    { _pgvmValue = Nothing
-    , _pgvmCollapsed = Nothing
-    }
+  PivotGroupValueMetadata' {_pgvmValue = Nothing, _pgvmCollapsed = Nothing}
 
 -- | The calculated value the metadata corresponds to. (Note that
 -- formulaValue is not valid, because the values will be calculated.)
@@ -9096,10 +9125,12 @@ instance ToJSON PivotGroupValueMetadata where
 -- in a spreadsheet.
 --
 -- /See:/ 'batchClearValuesByDataFilterResponse' smart constructor.
-data BatchClearValuesByDataFilterResponse = BatchClearValuesByDataFilterResponse'
+data BatchClearValuesByDataFilterResponse =
+  BatchClearValuesByDataFilterResponse'
     { _bcvbdfrClearedRanges :: !(Maybe [Text])
     , _bcvbdfrSpreadsheetId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchClearValuesByDataFilterResponse' with the minimum fields required to make a request.
 --
@@ -9111,10 +9142,8 @@ data BatchClearValuesByDataFilterResponse = BatchClearValuesByDataFilterResponse
 batchClearValuesByDataFilterResponse
     :: BatchClearValuesByDataFilterResponse
 batchClearValuesByDataFilterResponse =
-    BatchClearValuesByDataFilterResponse'
-    { _bcvbdfrClearedRanges = Nothing
-    , _bcvbdfrSpreadsheetId = Nothing
-    }
+  BatchClearValuesByDataFilterResponse'
+    {_bcvbdfrClearedRanges = Nothing, _bcvbdfrSpreadsheetId = Nothing}
 
 -- | The ranges that were cleared, in A1 notation. (If the requests were for
 -- an unbounded range or a ranger larger than the bounds of the sheet, this
@@ -9134,7 +9163,8 @@ bcvbdfrSpreadsheetId
       (\ s a -> s{_bcvbdfrSpreadsheetId = a})
 
 instance FromJSON
-         BatchClearValuesByDataFilterResponse where
+           BatchClearValuesByDataFilterResponse
+         where
         parseJSON
           = withObject "BatchClearValuesByDataFilterResponse"
               (\ o ->
@@ -9153,14 +9183,16 @@ instance ToJSON BatchClearValuesByDataFilterResponse
 -- | A single series of data for a waterfall chart.
 --
 -- /See:/ 'waterfallChartSeries' smart constructor.
-data WaterfallChartSeries = WaterfallChartSeries'
+data WaterfallChartSeries =
+  WaterfallChartSeries'
     { _wcsData                 :: !(Maybe ChartData)
     , _wcsCustomSubtotals      :: !(Maybe [WaterfallChartCustomSubtotal])
     , _wcsNegativeColumnsStyle :: !(Maybe WaterfallChartColumnStyle)
     , _wcsHideTrailingSubtotal :: !(Maybe Bool)
     , _wcsSubtotalColumnsStyle :: !(Maybe WaterfallChartColumnStyle)
     , _wcsPositiveColumnsStyle :: !(Maybe WaterfallChartColumnStyle)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WaterfallChartSeries' with the minimum fields required to make a request.
 --
@@ -9180,7 +9212,7 @@ data WaterfallChartSeries = WaterfallChartSeries'
 waterfallChartSeries
     :: WaterfallChartSeries
 waterfallChartSeries =
-    WaterfallChartSeries'
+  WaterfallChartSeries'
     { _wcsData = Nothing
     , _wcsCustomSubtotals = Nothing
     , _wcsNegativeColumnsStyle = Nothing
@@ -9259,12 +9291,14 @@ instance ToJSON WaterfallChartSeries where
 -- | Updates all cells in a range with new data.
 --
 -- /See:/ 'updateCellsRequest' smart constructor.
-data UpdateCellsRequest = UpdateCellsRequest'
+data UpdateCellsRequest =
+  UpdateCellsRequest'
     { _updStart  :: !(Maybe GridCoordinate)
     , _updRows   :: !(Maybe [RowData])
     , _updRange  :: !(Maybe GridRange)
     , _updFields :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateCellsRequest' with the minimum fields required to make a request.
 --
@@ -9280,7 +9314,7 @@ data UpdateCellsRequest = UpdateCellsRequest'
 updateCellsRequest
     :: UpdateCellsRequest
 updateCellsRequest =
-    UpdateCellsRequest'
+  UpdateCellsRequest'
     { _updStart = Nothing
     , _updRows = Nothing
     , _updRange = Nothing
@@ -9332,7 +9366,8 @@ instance ToJSON UpdateCellsRequest where
 -- | The format of a cell.
 --
 -- /See:/ 'cellFormat' smart constructor.
-data CellFormat = CellFormat'
+data CellFormat =
+  CellFormat'
     { _cfBOrders              :: !(Maybe BOrders)
     , _cfVerticalAlignment    :: !(Maybe CellFormatVerticalAlignment)
     , _cfBackgRoundColor      :: !(Maybe Color)
@@ -9344,7 +9379,8 @@ data CellFormat = CellFormat'
     , _cfTextFormat           :: !(Maybe TextFormat)
     , _cfHorizontalAlignment  :: !(Maybe CellFormatHorizontalAlignment)
     , _cfPadding              :: !(Maybe Padding)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CellFormat' with the minimum fields required to make a request.
 --
@@ -9374,7 +9410,7 @@ data CellFormat = CellFormat'
 cellFormat
     :: CellFormat
 cellFormat =
-    CellFormat'
+  CellFormat'
     { _cfBOrders = Nothing
     , _cfVerticalAlignment = Nothing
     , _cfBackgRoundColor = Nothing
@@ -9488,9 +9524,11 @@ instance ToJSON CellFormat where
 -- | Deletes the protected range with the given ID.
 --
 -- /See:/ 'deleteProtectedRangeRequest' smart constructor.
-newtype DeleteProtectedRangeRequest = DeleteProtectedRangeRequest'
+newtype DeleteProtectedRangeRequest =
+  DeleteProtectedRangeRequest'
     { _dprrProtectedRangeId :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteProtectedRangeRequest' with the minimum fields required to make a request.
 --
@@ -9500,9 +9538,7 @@ newtype DeleteProtectedRangeRequest = DeleteProtectedRangeRequest'
 deleteProtectedRangeRequest
     :: DeleteProtectedRangeRequest
 deleteProtectedRangeRequest =
-    DeleteProtectedRangeRequest'
-    { _dprrProtectedRangeId = Nothing
-    }
+  DeleteProtectedRangeRequest' {_dprrProtectedRangeId = Nothing}
 
 -- | The ID of the protected range to delete.
 dprrProtectedRangeId :: Lens' DeleteProtectedRangeRequest (Maybe Int32)
@@ -9527,10 +9563,12 @@ instance ToJSON DeleteProtectedRangeRequest where
 -- | Updates an existing protected range with the specified protectedRangeId.
 --
 -- /See:/ 'updateProtectedRangeRequest' smart constructor.
-data UpdateProtectedRangeRequest = UpdateProtectedRangeRequest'
+data UpdateProtectedRangeRequest =
+  UpdateProtectedRangeRequest'
     { _uprrProtectedRange :: !(Maybe ProtectedRange)
     , _uprrFields         :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateProtectedRangeRequest' with the minimum fields required to make a request.
 --
@@ -9542,10 +9580,8 @@ data UpdateProtectedRangeRequest = UpdateProtectedRangeRequest'
 updateProtectedRangeRequest
     :: UpdateProtectedRangeRequest
 updateProtectedRangeRequest =
-    UpdateProtectedRangeRequest'
-    { _uprrProtectedRange = Nothing
-    , _uprrFields = Nothing
-    }
+  UpdateProtectedRangeRequest'
+    {_uprrProtectedRange = Nothing, _uprrFields = Nothing}
 
 -- | The protected range to update with the new properties.
 uprrProtectedRange :: Lens' UpdateProtectedRangeRequest (Maybe ProtectedRange)
@@ -9577,9 +9613,11 @@ instance ToJSON UpdateProtectedRangeRequest where
 -- | The result of adding a sheet.
 --
 -- /See:/ 'addSheetResponse' smart constructor.
-newtype AddSheetResponse = AddSheetResponse'
+newtype AddSheetResponse =
+  AddSheetResponse'
     { _aProperties :: Maybe SheetProperties
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddSheetResponse' with the minimum fields required to make a request.
 --
@@ -9588,10 +9626,7 @@ newtype AddSheetResponse = AddSheetResponse'
 -- * 'aProperties'
 addSheetResponse
     :: AddSheetResponse
-addSheetResponse =
-    AddSheetResponse'
-    { _aProperties = Nothing
-    }
+addSheetResponse = AddSheetResponse' {_aProperties = Nothing}
 
 -- | The properties of the newly added sheet.
 aProperties :: Lens' AddSheetResponse (Maybe SheetProperties)
@@ -9611,7 +9646,8 @@ instance ToJSON AddSheetResponse where
 -- | A protected range.
 --
 -- /See:/ 'protectedRange' smart constructor.
-data ProtectedRange = ProtectedRange'
+data ProtectedRange =
+  ProtectedRange'
     { _prProtectedRangeId      :: !(Maybe (Textual Int32))
     , _prWarningOnly           :: !(Maybe Bool)
     , _prNamedRangeId          :: !(Maybe Text)
@@ -9620,7 +9656,8 @@ data ProtectedRange = ProtectedRange'
     , _prUnprotectedRanges     :: !(Maybe [GridRange])
     , _prRequestingUserCanEdit :: !(Maybe Bool)
     , _prDescription           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProtectedRange' with the minimum fields required to make a request.
 --
@@ -9644,7 +9681,7 @@ data ProtectedRange = ProtectedRange'
 protectedRange
     :: ProtectedRange
 protectedRange =
-    ProtectedRange'
+  ProtectedRange'
     { _prProtectedRangeId = Nothing
     , _prWarningOnly = Nothing
     , _prNamedRangeId = Nothing
@@ -9747,12 +9784,14 @@ instance ToJSON ProtectedRange where
 -- position.
 --
 -- /See:/ 'basicChartAxis' smart constructor.
-data BasicChartAxis = BasicChartAxis'
+data BasicChartAxis =
+  BasicChartAxis'
     { _bcaTitleTextPosition :: !(Maybe TextPosition)
     , _bcaFormat            :: !(Maybe TextFormat)
     , _bcaTitle             :: !(Maybe Text)
     , _bcaPosition          :: !(Maybe BasicChartAxisPosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicChartAxis' with the minimum fields required to make a request.
 --
@@ -9768,7 +9807,7 @@ data BasicChartAxis = BasicChartAxis'
 basicChartAxis
     :: BasicChartAxis
 basicChartAxis =
-    BasicChartAxis'
+  BasicChartAxis'
     { _bcaTitleTextPosition = Nothing
     , _bcaFormat = Nothing
     , _bcaTitle = Nothing
@@ -9818,13 +9857,15 @@ instance ToJSON BasicChartAxis where
 -- | Data in the grid, as well as metadata about the dimensions.
 --
 -- /See:/ 'gridData' smart constructor.
-data GridData = GridData'
+data GridData =
+  GridData'
     { _gdRowMetadata    :: !(Maybe [DimensionProperties])
     , _gdStartRow       :: !(Maybe (Textual Int32))
     , _gdRowData        :: !(Maybe [RowData])
     , _gdColumnMetadata :: !(Maybe [DimensionProperties])
     , _gdStartColumn    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GridData' with the minimum fields required to make a request.
 --
@@ -9842,7 +9883,7 @@ data GridData = GridData'
 gridData
     :: GridData
 gridData =
-    GridData'
+  GridData'
     { _gdRowMetadata = Nothing
     , _gdStartRow = Nothing
     , _gdRowData = Nothing
@@ -9914,10 +9955,12 @@ instance ToJSON GridData where
 -- | The number format of a cell.
 --
 -- /See:/ 'numberFormat' smart constructor.
-data NumberFormat = NumberFormat'
+data NumberFormat =
+  NumberFormat'
     { _nfPattern :: !(Maybe Text)
     , _nfType    :: !(Maybe NumberFormatType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NumberFormat' with the minimum fields required to make a request.
 --
@@ -9928,11 +9971,7 @@ data NumberFormat = NumberFormat'
 -- * 'nfType'
 numberFormat
     :: NumberFormat
-numberFormat =
-    NumberFormat'
-    { _nfPattern = Nothing
-    , _nfType = Nothing
-    }
+numberFormat = NumberFormat' {_nfPattern = Nothing, _nfType = Nothing}
 
 -- | Pattern string used for formatting. If not set, a default pattern based
 -- on the user\'s locale will be used if necessary for the given type. See
@@ -9963,11 +10002,13 @@ instance ToJSON NumberFormat where
 -- | The reply for batch updating a spreadsheet.
 --
 -- /See:/ 'batchUpdateSpreadsheetResponse' smart constructor.
-data BatchUpdateSpreadsheetResponse = BatchUpdateSpreadsheetResponse'
+data BatchUpdateSpreadsheetResponse =
+  BatchUpdateSpreadsheetResponse'
     { _busrSpreadsheetId      :: !(Maybe Text)
     , _busrReplies            :: !(Maybe [Response])
     , _busrUpdatedSpreadsheet :: !(Maybe Spreadsheet)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdateSpreadsheetResponse' with the minimum fields required to make a request.
 --
@@ -9981,7 +10022,7 @@ data BatchUpdateSpreadsheetResponse = BatchUpdateSpreadsheetResponse'
 batchUpdateSpreadsheetResponse
     :: BatchUpdateSpreadsheetResponse
 batchUpdateSpreadsheetResponse =
-    BatchUpdateSpreadsheetResponse'
+  BatchUpdateSpreadsheetResponse'
     { _busrSpreadsheetId = Nothing
     , _busrReplies = Nothing
     , _busrUpdatedSpreadsheet = Nothing
@@ -10032,11 +10073,13 @@ instance ToJSON BatchUpdateSpreadsheetResponse where
 -- request.
 --
 -- /See:/ 'dataFilter' smart constructor.
-data DataFilter = DataFilter'
+data DataFilter =
+  DataFilter'
     { _dfGridRange               :: !(Maybe GridRange)
     , _dfA1Range                 :: !(Maybe Text)
     , _dfDeveloperMetadataLookup :: !(Maybe DeveloperMetadataLookup)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataFilter' with the minimum fields required to make a request.
 --
@@ -10050,7 +10093,7 @@ data DataFilter = DataFilter'
 dataFilter
     :: DataFilter
 dataFilter =
-    DataFilter'
+  DataFilter'
     { _dfGridRange = Nothing
     , _dfA1Range = Nothing
     , _dfDeveloperMetadataLookup = Nothing
@@ -10094,10 +10137,12 @@ instance ToJSON DataFilter where
 -- validation in a range, call this with no rule specified.
 --
 -- /See:/ 'setDataValidationRequest' smart constructor.
-data SetDataValidationRequest = SetDataValidationRequest'
+data SetDataValidationRequest =
+  SetDataValidationRequest'
     { _sdvrRule  :: !(Maybe DataValidationRule)
     , _sdvrRange :: !(Maybe GridRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetDataValidationRequest' with the minimum fields required to make a request.
 --
@@ -10109,10 +10154,7 @@ data SetDataValidationRequest = SetDataValidationRequest'
 setDataValidationRequest
     :: SetDataValidationRequest
 setDataValidationRequest =
-    SetDataValidationRequest'
-    { _sdvrRule = Nothing
-    , _sdvrRange = Nothing
-    }
+  SetDataValidationRequest' {_sdvrRule = Nothing, _sdvrRange = Nothing}
 
 -- | The data validation rule to set on each cell in the range, or empty to
 -- clear the data validation in the range.
@@ -10151,12 +10193,14 @@ instance ToJSON SetDataValidationRequest where
 -- is not set.
 --
 -- /See:/ 'bandingProperties' smart constructor.
-data BandingProperties = BandingProperties'
+data BandingProperties =
+  BandingProperties'
     { _bpSecondBandColor :: !(Maybe Color)
     , _bpHeaderColor     :: !(Maybe Color)
     , _bpFooterColor     :: !(Maybe Color)
     , _bpFirstBandColor  :: !(Maybe Color)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BandingProperties' with the minimum fields required to make a request.
 --
@@ -10172,7 +10216,7 @@ data BandingProperties = BandingProperties'
 bandingProperties
     :: BandingProperties
 bandingProperties =
-    BandingProperties'
+  BandingProperties'
     { _bpSecondBandColor = Nothing
     , _bpHeaderColor = Nothing
     , _bpFooterColor = Nothing
@@ -10231,9 +10275,11 @@ instance ToJSON BandingProperties where
 -- | Duplicates a particular filter view.
 --
 -- /See:/ 'duplicateFilterViewRequest' smart constructor.
-newtype DuplicateFilterViewRequest = DuplicateFilterViewRequest'
+newtype DuplicateFilterViewRequest =
+  DuplicateFilterViewRequest'
     { _dFilterId :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DuplicateFilterViewRequest' with the minimum fields required to make a request.
 --
@@ -10242,10 +10288,7 @@ newtype DuplicateFilterViewRequest = DuplicateFilterViewRequest'
 -- * 'dFilterId'
 duplicateFilterViewRequest
     :: DuplicateFilterViewRequest
-duplicateFilterViewRequest =
-    DuplicateFilterViewRequest'
-    { _dFilterId = Nothing
-    }
+duplicateFilterViewRequest = DuplicateFilterViewRequest' {_dFilterId = Nothing}
 
 -- | The ID of the filter being duplicated.
 dFilterId :: Lens' DuplicateFilterViewRequest (Maybe Int32)
@@ -10266,7 +10309,8 @@ instance ToJSON DuplicateFilterViewRequest where
 -- | A single grouping (either row or column) in a pivot table.
 --
 -- /See:/ 'pivotGroup' smart constructor.
-data PivotGroup = PivotGroup'
+data PivotGroup =
+  PivotGroup'
     { _pgRepeatHeadings     :: !(Maybe Bool)
     , _pgValueMetadata      :: !(Maybe [PivotGroupValueMetadata])
     , _pgSourceColumnOffSet :: !(Maybe (Textual Int32))
@@ -10275,7 +10319,8 @@ data PivotGroup = PivotGroup'
     , _pgValueBucket        :: !(Maybe PivotGroupSortValueBucket)
     , _pgLabel              :: !(Maybe Text)
     , _pgGroupRule          :: !(Maybe PivotGroupRule)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PivotGroup' with the minimum fields required to make a request.
 --
@@ -10299,7 +10344,7 @@ data PivotGroup = PivotGroup'
 pivotGroup
     :: PivotGroup
 pivotGroup =
-    PivotGroup'
+  PivotGroup'
     { _pgRepeatHeadings = Nothing
     , _pgValueMetadata = Nothing
     , _pgSourceColumnOffSet = Nothing
@@ -10408,9 +10453,11 @@ instance ToJSON PivotGroup where
 -- | The result of adding a banded range.
 --
 -- /See:/ 'addBandingResponse' smart constructor.
-newtype AddBandingResponse = AddBandingResponse'
+newtype AddBandingResponse =
+  AddBandingResponse'
     { _aBandedRange :: Maybe BandedRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddBandingResponse' with the minimum fields required to make a request.
 --
@@ -10419,10 +10466,7 @@ newtype AddBandingResponse = AddBandingResponse'
 -- * 'aBandedRange'
 addBandingResponse
     :: AddBandingResponse
-addBandingResponse =
-    AddBandingResponse'
-    { _aBandedRange = Nothing
-    }
+addBandingResponse = AddBandingResponse' {_aBandedRange = Nothing}
 
 -- | The banded range that was added.
 aBandedRange :: Lens' AddBandingResponse (Maybe BandedRange)
@@ -10451,14 +10495,16 @@ instance ToJSON AddBandingResponse where
 -- contain \"CEO\", \"President\", \"VP Sales\".
 --
 -- /See:/ 'orgChartSpec' smart constructor.
-data OrgChartSpec = OrgChartSpec'
+data OrgChartSpec =
+  OrgChartSpec'
     { _ocsNodeColor         :: !(Maybe Color)
     , _ocsNodeSize          :: !(Maybe OrgChartSpecNodeSize)
     , _ocsTooltips          :: !(Maybe ChartData)
     , _ocsSelectedNodeColor :: !(Maybe Color)
     , _ocsLabels            :: !(Maybe ChartData)
     , _ocsParentLabels      :: !(Maybe ChartData)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrgChartSpec' with the minimum fields required to make a request.
 --
@@ -10478,7 +10524,7 @@ data OrgChartSpec = OrgChartSpec'
 orgChartSpec
     :: OrgChartSpec
 orgChartSpec =
-    OrgChartSpec'
+  OrgChartSpec'
     { _ocsNodeColor = Nothing
     , _ocsNodeSize = Nothing
     , _ocsTooltips = Nothing
@@ -10549,9 +10595,11 @@ instance ToJSON OrgChartSpec where
 -- | Randomizes the order of the rows in a range.
 --
 -- /See:/ 'randomizeRangeRequest' smart constructor.
-newtype RandomizeRangeRequest = RandomizeRangeRequest'
+newtype RandomizeRangeRequest =
+  RandomizeRangeRequest'
     { _rrrRange :: Maybe GridRange
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RandomizeRangeRequest' with the minimum fields required to make a request.
 --
@@ -10560,10 +10608,7 @@ newtype RandomizeRangeRequest = RandomizeRangeRequest'
 -- * 'rrrRange'
 randomizeRangeRequest
     :: RandomizeRangeRequest
-randomizeRangeRequest =
-    RandomizeRangeRequest'
-    { _rrrRange = Nothing
-    }
+randomizeRangeRequest = RandomizeRangeRequest' {_rrrRange = Nothing}
 
 -- | The range to randomize.
 rrrRange :: Lens' RandomizeRangeRequest (Maybe GridRange)
@@ -10581,10 +10626,12 @@ instance ToJSON RandomizeRangeRequest where
 -- | A histogram series containing the series color and data.
 --
 -- /See:/ 'histogramSeries' smart constructor.
-data HistogramSeries = HistogramSeries'
+data HistogramSeries =
+  HistogramSeries'
     { _hsBarColor :: !(Maybe Color)
     , _hsData     :: !(Maybe ChartData)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramSeries' with the minimum fields required to make a request.
 --
@@ -10595,11 +10642,7 @@ data HistogramSeries = HistogramSeries'
 -- * 'hsData'
 histogramSeries
     :: HistogramSeries
-histogramSeries =
-    HistogramSeries'
-    { _hsBarColor = Nothing
-    , _hsData = Nothing
-    }
+histogramSeries = HistogramSeries' {_hsBarColor = Nothing, _hsData = Nothing}
 
 -- | The color of the column representing this series in each bucket. This
 -- field is optional.
@@ -10628,7 +10671,8 @@ instance ToJSON HistogramSeries where
 -- | A </chart/interactive/docs/gallery/treemap Treemap chart>.
 --
 -- /See:/ 'treemapChartSpec' smart constructor.
-data TreemapChartSpec = TreemapChartSpec'
+data TreemapChartSpec =
+  TreemapChartSpec'
     { _tcsHintedLevels :: !(Maybe (Textual Int32))
     , _tcsMaxValue     :: !(Maybe (Textual Double))
     , _tcsHeaderColor  :: !(Maybe Color)
@@ -10641,7 +10685,8 @@ data TreemapChartSpec = TreemapChartSpec'
     , _tcsTextFormat   :: !(Maybe TextFormat)
     , _tcsMinValue     :: !(Maybe (Textual Double))
     , _tcsParentLabels :: !(Maybe ChartData)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TreemapChartSpec' with the minimum fields required to make a request.
 --
@@ -10673,7 +10718,7 @@ data TreemapChartSpec = TreemapChartSpec'
 treemapChartSpec
     :: TreemapChartSpec
 treemapChartSpec =
-    TreemapChartSpec'
+  TreemapChartSpec'
     { _tcsHintedLevels = Nothing
     , _tcsMaxValue = Nothing
     , _tcsHeaderColor = Nothing
@@ -10822,11 +10867,13 @@ instance ToJSON TreemapChartSpec where
 -- | A rule describing a conditional format.
 --
 -- /See:/ 'conditionalFormatRule' smart constructor.
-data ConditionalFormatRule = ConditionalFormatRule'
+data ConditionalFormatRule =
+  ConditionalFormatRule'
     { _cfrBooleanRule  :: !(Maybe BooleanRule)
     , _cfrGradientRule :: !(Maybe GradientRule)
     , _cfrRanges       :: !(Maybe [GridRange])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConditionalFormatRule' with the minimum fields required to make a request.
 --
@@ -10840,7 +10887,7 @@ data ConditionalFormatRule = ConditionalFormatRule'
 conditionalFormatRule
     :: ConditionalFormatRule
 conditionalFormatRule =
-    ConditionalFormatRule'
+  ConditionalFormatRule'
     { _cfrBooleanRule = Nothing
     , _cfrGradientRule = Nothing
     , _cfrRanges = Nothing
@@ -10886,7 +10933,8 @@ instance ToJSON ConditionalFormatRule where
 -- charts this supports.
 --
 -- /See:/ 'basicChartSpec' smart constructor.
-data BasicChartSpec = BasicChartSpec'
+data BasicChartSpec =
+  BasicChartSpec'
     { _basHeaderCount      :: !(Maybe (Textual Int32))
     , _basLineSmoothing    :: !(Maybe Bool)
     , _basInterpolateNulls :: !(Maybe Bool)
@@ -10898,7 +10946,8 @@ data BasicChartSpec = BasicChartSpec'
     , _basThreeDimensional :: !(Maybe Bool)
     , _basDomains          :: !(Maybe [BasicChartDomain])
     , _basAxis             :: !(Maybe [BasicChartAxis])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicChartSpec' with the minimum fields required to make a request.
 --
@@ -10928,7 +10977,7 @@ data BasicChartSpec = BasicChartSpec'
 basicChartSpec
     :: BasicChartSpec
 basicChartSpec =
-    BasicChartSpec'
+  BasicChartSpec'
     { _basHeaderCount = Nothing
     , _basLineSmoothing = Nothing
     , _basInterpolateNulls = Nothing
@@ -11054,10 +11103,12 @@ instance ToJSON BasicChartSpec where
 -- placed in the group with this name.
 --
 -- /See:/ 'manualRuleGroup' smart constructor.
-data ManualRuleGroup = ManualRuleGroup'
+data ManualRuleGroup =
+  ManualRuleGroup'
     { _mrgItems     :: !(Maybe [ExtendedValue])
     , _mrgGroupName :: !(Maybe ExtendedValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManualRuleGroup' with the minimum fields required to make a request.
 --
@@ -11069,10 +11120,7 @@ data ManualRuleGroup = ManualRuleGroup'
 manualRuleGroup
     :: ManualRuleGroup
 manualRuleGroup =
-    ManualRuleGroup'
-    { _mrgItems = Nothing
-    , _mrgGroupName = Nothing
-    }
+  ManualRuleGroup' {_mrgItems = Nothing, _mrgGroupName = Nothing}
 
 -- | The items in the source data that should be placed into this group. Each
 -- item may be a string, number, or boolean. Items may appear in at most
@@ -11108,10 +11156,12 @@ instance ToJSON ManualRuleGroup where
 -- rules\' indexes are incremented.
 --
 -- /See:/ 'addConditionalFormatRuleRequest' smart constructor.
-data AddConditionalFormatRuleRequest = AddConditionalFormatRuleRequest'
+data AddConditionalFormatRuleRequest =
+  AddConditionalFormatRuleRequest'
     { _acfrrRule  :: !(Maybe ConditionalFormatRule)
     , _acfrrIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddConditionalFormatRuleRequest' with the minimum fields required to make a request.
 --
@@ -11123,10 +11173,7 @@ data AddConditionalFormatRuleRequest = AddConditionalFormatRuleRequest'
 addConditionalFormatRuleRequest
     :: AddConditionalFormatRuleRequest
 addConditionalFormatRuleRequest =
-    AddConditionalFormatRuleRequest'
-    { _acfrrRule = Nothing
-    , _acfrrIndex = Nothing
-    }
+  AddConditionalFormatRuleRequest' {_acfrrRule = Nothing, _acfrrIndex = Nothing}
 
 -- | The rule to add.
 acfrrRule :: Lens' AddConditionalFormatRuleRequest (Maybe ConditionalFormatRule)
@@ -11165,13 +11212,15 @@ instance ToJSON AddConditionalFormatRuleRequest where
 -- too.
 --
 -- /See:/ 'developerMetadata' smart constructor.
-data DeveloperMetadata = DeveloperMetadata'
+data DeveloperMetadata =
+  DeveloperMetadata'
     { _dmLocation      :: !(Maybe DeveloperMetadataLocation)
     , _dmMetadataId    :: !(Maybe (Textual Int32))
     , _dmVisibility    :: !(Maybe DeveloperMetadataVisibility)
     , _dmMetadataKey   :: !(Maybe Text)
     , _dmMetadataValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeveloperMetadata' with the minimum fields required to make a request.
 --
@@ -11189,7 +11238,7 @@ data DeveloperMetadata = DeveloperMetadata'
 developerMetadata
     :: DeveloperMetadata
 developerMetadata =
-    DeveloperMetadata'
+  DeveloperMetadata'
     { _dmLocation = Nothing
     , _dmMetadataId = Nothing
     , _dmVisibility = Nothing
@@ -11252,12 +11301,14 @@ instance ToJSON DeveloperMetadata where
 -- | A color scale for a treemap chart.
 --
 -- /See:/ 'treemapChartColorScale' smart constructor.
-data TreemapChartColorScale = TreemapChartColorScale'
+data TreemapChartColorScale =
+  TreemapChartColorScale'
     { _tccsMinValueColor :: !(Maybe Color)
     , _tccsNoDataColor   :: !(Maybe Color)
     , _tccsMaxValueColor :: !(Maybe Color)
     , _tccsMidValueColor :: !(Maybe Color)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TreemapChartColorScale' with the minimum fields required to make a request.
 --
@@ -11273,7 +11324,7 @@ data TreemapChartColorScale = TreemapChartColorScale'
 treemapChartColorScale
     :: TreemapChartColorScale
 treemapChartColorScale =
-    TreemapChartColorScale'
+  TreemapChartColorScale'
     { _tccsMinValueColor = Nothing
     , _tccsNoDataColor = Nothing
     , _tccsMaxValueColor = Nothing
@@ -11329,9 +11380,11 @@ instance ToJSON TreemapChartColorScale where
 -- | The result of duplicating a sheet.
 --
 -- /See:/ 'duplicateSheetResponse' smart constructor.
-newtype DuplicateSheetResponse = DuplicateSheetResponse'
+newtype DuplicateSheetResponse =
+  DuplicateSheetResponse'
     { _dsrProperties :: Maybe SheetProperties
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DuplicateSheetResponse' with the minimum fields required to make a request.
 --
@@ -11340,10 +11393,7 @@ newtype DuplicateSheetResponse = DuplicateSheetResponse'
 -- * 'dsrProperties'
 duplicateSheetResponse
     :: DuplicateSheetResponse
-duplicateSheetResponse =
-    DuplicateSheetResponse'
-    { _dsrProperties = Nothing
-    }
+duplicateSheetResponse = DuplicateSheetResponse' {_dsrProperties = Nothing}
 
 -- | The properties of the duplicate sheet.
 dsrProperties :: Lens' DuplicateSheetResponse (Maybe SheetProperties)
@@ -11366,7 +11416,8 @@ instance ToJSON DuplicateSheetResponse where
 -- field isn\'t specified.
 --
 -- /See:/ 'textFormat' smart constructor.
-data TextFormat = TextFormat'
+data TextFormat =
+  TextFormat'
     { _tfFontFamily      :: !(Maybe Text)
     , _tfForegRoundColor :: !(Maybe Color)
     , _tfFontSize        :: !(Maybe (Textual Int32))
@@ -11374,7 +11425,8 @@ data TextFormat = TextFormat'
     , _tfItalic          :: !(Maybe Bool)
     , _tfBold            :: !(Maybe Bool)
     , _tfStrikethrough   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextFormat' with the minimum fields required to make a request.
 --
@@ -11396,7 +11448,7 @@ data TextFormat = TextFormat'
 textFormat
     :: TextFormat
 textFormat =
-    TextFormat'
+  TextFormat'
     { _tfFontFamily = Nothing
     , _tfForegRoundColor = Nothing
     , _tfFontSize = Nothing
@@ -11468,9 +11520,11 @@ instance ToJSON TextFormat where
 -- | A request to create developer metadata.
 --
 -- /See:/ 'createDeveloperMetadataRequest' smart constructor.
-newtype CreateDeveloperMetadataRequest = CreateDeveloperMetadataRequest'
+newtype CreateDeveloperMetadataRequest =
+  CreateDeveloperMetadataRequest'
     { _cDeveloperMetadata :: Maybe DeveloperMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDeveloperMetadataRequest' with the minimum fields required to make a request.
 --
@@ -11480,9 +11534,7 @@ newtype CreateDeveloperMetadataRequest = CreateDeveloperMetadataRequest'
 createDeveloperMetadataRequest
     :: CreateDeveloperMetadataRequest
 createDeveloperMetadataRequest =
-    CreateDeveloperMetadataRequest'
-    { _cDeveloperMetadata = Nothing
-    }
+  CreateDeveloperMetadataRequest' {_cDeveloperMetadata = Nothing}
 
 -- | The developer metadata to create.
 cDeveloperMetadata :: Lens' CreateDeveloperMetadataRequest (Maybe DeveloperMetadata)
@@ -11507,10 +11559,12 @@ instance ToJSON CreateDeveloperMetadataRequest where
 -- | The response when clearing a range of values in a spreadsheet.
 --
 -- /See:/ 'batchClearValuesResponse' smart constructor.
-data BatchClearValuesResponse = BatchClearValuesResponse'
+data BatchClearValuesResponse =
+  BatchClearValuesResponse'
     { _bcvrClearedRanges :: !(Maybe [Text])
     , _bcvrSpreadsheetId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchClearValuesResponse' with the minimum fields required to make a request.
 --
@@ -11522,10 +11576,8 @@ data BatchClearValuesResponse = BatchClearValuesResponse'
 batchClearValuesResponse
     :: BatchClearValuesResponse
 batchClearValuesResponse =
-    BatchClearValuesResponse'
-    { _bcvrClearedRanges = Nothing
-    , _bcvrSpreadsheetId = Nothing
-    }
+  BatchClearValuesResponse'
+    {_bcvrClearedRanges = Nothing, _bcvrSpreadsheetId = Nothing}
 
 -- | The ranges that were cleared, in A1 notation. (If the requests were for
 -- an unbounded range or a ranger larger than the bounds of the sheet, this
@@ -11562,10 +11614,12 @@ instance ToJSON BatchClearValuesResponse where
 -- | A value range that was matched by one or more data filers.
 --
 -- /See:/ 'matchedValueRange' smart constructor.
-data MatchedValueRange = MatchedValueRange'
+data MatchedValueRange =
+  MatchedValueRange'
     { _mvrValueRange  :: !(Maybe ValueRange)
     , _mvrDataFilters :: !(Maybe [DataFilter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MatchedValueRange' with the minimum fields required to make a request.
 --
@@ -11577,10 +11631,7 @@ data MatchedValueRange = MatchedValueRange'
 matchedValueRange
     :: MatchedValueRange
 matchedValueRange =
-    MatchedValueRange'
-    { _mvrValueRange = Nothing
-    , _mvrDataFilters = Nothing
-    }
+  MatchedValueRange' {_mvrValueRange = Nothing, _mvrDataFilters = Nothing}
 
 -- | The values matched by the DataFilter.
 mvrValueRange :: Lens' MatchedValueRange (Maybe ValueRange)
@@ -11615,10 +11666,12 @@ instance ToJSON MatchedValueRange where
 -- this would be the date.
 --
 -- /See:/ 'basicChartDomain' smart constructor.
-data BasicChartDomain = BasicChartDomain'
+data BasicChartDomain =
+  BasicChartDomain'
     { _bcdReversed :: !(Maybe Bool)
     , _bcdDomain   :: !(Maybe ChartData)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicChartDomain' with the minimum fields required to make a request.
 --
@@ -11630,10 +11683,7 @@ data BasicChartDomain = BasicChartDomain'
 basicChartDomain
     :: BasicChartDomain
 basicChartDomain =
-    BasicChartDomain'
-    { _bcdReversed = Nothing
-    , _bcdDomain = Nothing
-    }
+  BasicChartDomain' {_bcdReversed = Nothing, _bcdDomain = Nothing}
 
 -- | True to reverse the order of the domain values (horizontal axis).
 bcdReversed :: Lens' BasicChartDomain (Maybe Bool)
@@ -11681,11 +11731,13 @@ instance ToJSON BasicChartDomain where
 -- +-------------+-------------------+
 --
 -- /See:/ 'histogramRule' smart constructor.
-data HistogramRule = HistogramRule'
+data HistogramRule =
+  HistogramRule'
     { _hrStart    :: !(Maybe (Textual Double))
     , _hrInterval :: !(Maybe (Textual Double))
     , _hrEnd      :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramRule' with the minimum fields required to make a request.
 --
@@ -11699,11 +11751,7 @@ data HistogramRule = HistogramRule'
 histogramRule
     :: HistogramRule
 histogramRule =
-    HistogramRule'
-    { _hrStart = Nothing
-    , _hrInterval = Nothing
-    , _hrEnd = Nothing
-    }
+  HistogramRule' {_hrStart = Nothing, _hrInterval = Nothing, _hrEnd = Nothing}
 
 -- | The minimum value at which items are placed into buckets of constant
 -- size. Values below start are lumped into a single bucket. This field is
@@ -11747,10 +11795,12 @@ instance ToJSON HistogramRule where
 -- original request that matched it.
 --
 -- /See:/ 'matchedDeveloperMetadata' smart constructor.
-data MatchedDeveloperMetadata = MatchedDeveloperMetadata'
+data MatchedDeveloperMetadata =
+  MatchedDeveloperMetadata'
     { _mdmDataFilters       :: !(Maybe [DataFilter])
     , _mdmDeveloperMetadata :: !(Maybe DeveloperMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MatchedDeveloperMetadata' with the minimum fields required to make a request.
 --
@@ -11762,10 +11812,8 @@ data MatchedDeveloperMetadata = MatchedDeveloperMetadata'
 matchedDeveloperMetadata
     :: MatchedDeveloperMetadata
 matchedDeveloperMetadata =
-    MatchedDeveloperMetadata'
-    { _mdmDataFilters = Nothing
-    , _mdmDeveloperMetadata = Nothing
-    }
+  MatchedDeveloperMetadata'
+    {_mdmDataFilters = Nothing, _mdmDeveloperMetadata = Nothing}
 
 -- | All filters matching the returned developer metadata.
 mdmDataFilters :: Lens' MatchedDeveloperMetadata [DataFilter]
@@ -11799,10 +11847,12 @@ instance ToJSON MatchedDeveloperMetadata where
 -- | Inserts cells into a range, shifting the existing cells over or down.
 --
 -- /See:/ 'insertRangeRequest' smart constructor.
-data InsertRangeRequest = InsertRangeRequest'
+data InsertRangeRequest =
+  InsertRangeRequest'
     { _irrShiftDimension :: !(Maybe InsertRangeRequestShiftDimension)
     , _irrRange          :: !(Maybe GridRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InsertRangeRequest' with the minimum fields required to make a request.
 --
@@ -11814,10 +11864,7 @@ data InsertRangeRequest = InsertRangeRequest'
 insertRangeRequest
     :: InsertRangeRequest
 insertRangeRequest =
-    InsertRangeRequest'
-    { _irrShiftDimension = Nothing
-    , _irrRange = Nothing
-    }
+  InsertRangeRequest' {_irrShiftDimension = Nothing, _irrRange = Nothing}
 
 -- | The dimension which will be shifted when inserting cells. If ROWS,
 -- existing cells will be shifted down. If COLUMNS, existing cells will be
@@ -11849,12 +11896,14 @@ instance ToJSON InsertRangeRequest where
 -- every field must be specified.
 --
 -- /See:/ 'padding' smart constructor.
-data Padding = Padding'
+data Padding =
+  Padding'
     { _pBottom :: !(Maybe (Textual Int32))
     , _pLeft   :: !(Maybe (Textual Int32))
     , _pRight  :: !(Maybe (Textual Int32))
     , _pTop    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Padding' with the minimum fields required to make a request.
 --
@@ -11870,12 +11919,8 @@ data Padding = Padding'
 padding
     :: Padding
 padding =
-    Padding'
-    { _pBottom = Nothing
-    , _pLeft = Nothing
-    , _pRight = Nothing
-    , _pTop = Nothing
-    }
+  Padding'
+    {_pBottom = Nothing, _pLeft = Nothing, _pRight = Nothing, _pTop = Nothing}
 
 -- | The bottom padding of the cell.
 pBottom :: Lens' Padding (Maybe Int32)
@@ -11920,7 +11965,8 @@ instance ToJSON Padding where
 -- | The specifications of a chart.
 --
 -- /See:/ 'chartSpec' smart constructor.
-data ChartSpec = ChartSpec'
+data ChartSpec =
+  ChartSpec'
     { _csTitleTextPosition       :: !(Maybe TextPosition)
     , _csFontName                :: !(Maybe Text)
     , _csSubtitleTextPosition    :: !(Maybe TextPosition)
@@ -11940,7 +11986,8 @@ data ChartSpec = ChartSpec'
     , _csTreemapChart            :: !(Maybe TreemapChartSpec)
     , _csBasicChart              :: !(Maybe BasicChartSpec)
     , _csHiddenDimensionStrategy :: !(Maybe ChartSpecHiddenDimensionStrategy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChartSpec' with the minimum fields required to make a request.
 --
@@ -11986,7 +12033,7 @@ data ChartSpec = ChartSpec'
 chartSpec
     :: ChartSpec
 chartSpec =
-    ChartSpec'
+  ChartSpec'
     { _csTitleTextPosition = Nothing
     , _csFontName = Nothing
     , _csSubtitleTextPosition = Nothing
@@ -12172,12 +12219,14 @@ instance ToJSON ChartSpec where
 -- | Properties about a dimension.
 --
 -- /See:/ 'dimensionProperties' smart constructor.
-data DimensionProperties = DimensionProperties'
+data DimensionProperties =
+  DimensionProperties'
     { _dpHiddenByFilter    :: !(Maybe Bool)
     , _dpPixelSize         :: !(Maybe (Textual Int32))
     , _dpHiddenByUser      :: !(Maybe Bool)
     , _dpDeveloperMetadata :: !(Maybe [DeveloperMetadata])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DimensionProperties' with the minimum fields required to make a request.
 --
@@ -12193,7 +12242,7 @@ data DimensionProperties = DimensionProperties'
 dimensionProperties
     :: DimensionProperties
 dimensionProperties =
-    DimensionProperties'
+  DimensionProperties'
     { _dpHiddenByFilter = Nothing
     , _dpPixelSize = Nothing
     , _dpHiddenByUser = Nothing
@@ -12247,10 +12296,12 @@ instance ToJSON DimensionProperties where
 -- | Updates properties of the supplied banded range.
 --
 -- /See:/ 'updateBandingRequest' smart constructor.
-data UpdateBandingRequest = UpdateBandingRequest'
+data UpdateBandingRequest =
+  UpdateBandingRequest'
     { _ubrBandedRange :: !(Maybe BandedRange)
     , _ubrFields      :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateBandingRequest' with the minimum fields required to make a request.
 --
@@ -12262,10 +12313,7 @@ data UpdateBandingRequest = UpdateBandingRequest'
 updateBandingRequest
     :: UpdateBandingRequest
 updateBandingRequest =
-    UpdateBandingRequest'
-    { _ubrBandedRange = Nothing
-    , _ubrFields = Nothing
-    }
+  UpdateBandingRequest' {_ubrBandedRange = Nothing, _ubrFields = Nothing}
 
 -- | The banded range to update with the new properties.
 ubrBandedRange :: Lens' UpdateBandingRequest (Maybe BandedRange)
@@ -12298,10 +12346,12 @@ instance ToJSON UpdateBandingRequest where
 -- spreadsheet.
 --
 -- /See:/ 'batchGetValuesResponse' smart constructor.
-data BatchGetValuesResponse = BatchGetValuesResponse'
+data BatchGetValuesResponse =
+  BatchGetValuesResponse'
     { _bgvrSpreadsheetId :: !(Maybe Text)
     , _bgvrValueRanges   :: !(Maybe [ValueRange])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchGetValuesResponse' with the minimum fields required to make a request.
 --
@@ -12313,10 +12363,8 @@ data BatchGetValuesResponse = BatchGetValuesResponse'
 batchGetValuesResponse
     :: BatchGetValuesResponse
 batchGetValuesResponse =
-    BatchGetValuesResponse'
-    { _bgvrSpreadsheetId = Nothing
-    , _bgvrValueRanges = Nothing
-    }
+  BatchGetValuesResponse'
+    {_bgvrSpreadsheetId = Nothing, _bgvrValueRanges = Nothing}
 
 -- | The ID of the spreadsheet the data was retrieved from.
 bgvrSpreadsheetId :: Lens' BatchGetValuesResponse (Maybe Text)
@@ -12351,9 +12399,11 @@ instance ToJSON BatchGetValuesResponse where
 -- | Removes the banded range with the given ID from the spreadsheet.
 --
 -- /See:/ 'deleteBandingRequest' smart constructor.
-newtype DeleteBandingRequest = DeleteBandingRequest'
+newtype DeleteBandingRequest =
+  DeleteBandingRequest'
     { _dbrBandedRangeId :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBandingRequest' with the minimum fields required to make a request.
 --
@@ -12362,10 +12412,7 @@ newtype DeleteBandingRequest = DeleteBandingRequest'
 -- * 'dbrBandedRangeId'
 deleteBandingRequest
     :: DeleteBandingRequest
-deleteBandingRequest =
-    DeleteBandingRequest'
-    { _dbrBandedRangeId = Nothing
-    }
+deleteBandingRequest = DeleteBandingRequest' {_dbrBandedRangeId = Nothing}
 
 -- | The ID of the banded range to delete.
 dbrBandedRangeId :: Lens' DeleteBandingRequest (Maybe Int32)
@@ -12389,9 +12436,11 @@ instance ToJSON DeleteBandingRequest where
 -- | The response from deleting developer metadata.
 --
 -- /See:/ 'deleteDeveloperMetadataResponse' smart constructor.
-newtype DeleteDeveloperMetadataResponse = DeleteDeveloperMetadataResponse'
+newtype DeleteDeveloperMetadataResponse =
+  DeleteDeveloperMetadataResponse'
     { _ddmrDeletedDeveloperMetadata :: Maybe [DeveloperMetadata]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDeveloperMetadataResponse' with the minimum fields required to make a request.
 --
@@ -12401,9 +12450,7 @@ newtype DeleteDeveloperMetadataResponse = DeleteDeveloperMetadataResponse'
 deleteDeveloperMetadataResponse
     :: DeleteDeveloperMetadataResponse
 deleteDeveloperMetadataResponse =
-    DeleteDeveloperMetadataResponse'
-    { _ddmrDeletedDeveloperMetadata = Nothing
-    }
+  DeleteDeveloperMetadataResponse' {_ddmrDeletedDeveloperMetadata = Nothing}
 
 -- | The metadata that was deleted.
 ddmrDeletedDeveloperMetadata :: Lens' DeleteDeveloperMetadataResponse [DeveloperMetadata]
@@ -12431,9 +12478,11 @@ instance ToJSON DeleteDeveloperMetadataResponse where
 -- | The response from updating developer metadata.
 --
 -- /See:/ 'updateDeveloperMetadataResponse' smart constructor.
-newtype UpdateDeveloperMetadataResponse = UpdateDeveloperMetadataResponse'
+newtype UpdateDeveloperMetadataResponse =
+  UpdateDeveloperMetadataResponse'
     { _uDeveloperMetadata :: Maybe [DeveloperMetadata]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDeveloperMetadataResponse' with the minimum fields required to make a request.
 --
@@ -12443,9 +12492,7 @@ newtype UpdateDeveloperMetadataResponse = UpdateDeveloperMetadataResponse'
 updateDeveloperMetadataResponse
     :: UpdateDeveloperMetadataResponse
 updateDeveloperMetadataResponse =
-    UpdateDeveloperMetadataResponse'
-    { _uDeveloperMetadata = Nothing
-    }
+  UpdateDeveloperMetadataResponse' {_uDeveloperMetadata = Nothing}
 
 -- | The updated developer metadata.
 uDeveloperMetadata :: Lens' UpdateDeveloperMetadataResponse [DeveloperMetadata]
@@ -12472,7 +12519,8 @@ instance ToJSON UpdateDeveloperMetadataResponse where
 -- | A single kind of update to apply to a spreadsheet.
 --
 -- /See:/ 'request'' smart constructor.
-data Request' = Request''
+data Request' =
+  Request''
     { _reqAddFilterView                :: !(Maybe AddFilterViewRequest)
     , _reqDeleteProtectedRange         :: !(Maybe DeleteProtectedRangeRequest)
     , _reqUpdateProtectedRange         :: !(Maybe UpdateProtectedRangeRequest)
@@ -12529,7 +12577,8 @@ data Request' = Request''
     , _reqUpdateBOrders                :: !(Maybe UpdateBOrdersRequest)
     , _reqAppendDimension              :: !(Maybe AppendDimensionRequest)
     , _reqSetDataValidation            :: !(Maybe SetDataValidationRequest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Request' with the minimum fields required to make a request.
 --
@@ -12649,7 +12698,7 @@ data Request' = Request''
 request'
     :: Request'
 request' =
-    Request''
+  Request''
     { _reqAddFilterView = Nothing
     , _reqDeleteProtectedRange = Nothing
     , _reqUpdateProtectedRange = Nothing
@@ -13181,10 +13230,12 @@ instance ToJSON Request' where
 -- | Properties that describe the style of a line.
 --
 -- /See:/ 'lineStyle' smart constructor.
-data LineStyle = LineStyle'
+data LineStyle =
+  LineStyle'
     { _lsWidth :: !(Maybe (Textual Int32))
     , _lsType  :: !(Maybe LineStyleType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LineStyle' with the minimum fields required to make a request.
 --
@@ -13195,11 +13246,7 @@ data LineStyle = LineStyle'
 -- * 'lsType'
 lineStyle
     :: LineStyle
-lineStyle =
-    LineStyle'
-    { _lsWidth = Nothing
-    , _lsType = Nothing
-    }
+lineStyle = LineStyle' {_lsWidth = Nothing, _lsType = Nothing}
 
 -- | The thickness of the line, in px.
 lsWidth :: Lens' LineStyle (Maybe Int32)
@@ -13226,9 +13273,11 @@ instance ToJSON LineStyle where
 -- | The result of deleting a conditional format rule.
 --
 -- /See:/ 'deleteConditionalFormatRuleResponse' smart constructor.
-newtype DeleteConditionalFormatRuleResponse = DeleteConditionalFormatRuleResponse'
+newtype DeleteConditionalFormatRuleResponse =
+  DeleteConditionalFormatRuleResponse'
     { _dcfrrRule :: Maybe ConditionalFormatRule
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteConditionalFormatRuleResponse' with the minimum fields required to make a request.
 --
@@ -13238,9 +13287,7 @@ newtype DeleteConditionalFormatRuleResponse = DeleteConditionalFormatRuleRespons
 deleteConditionalFormatRuleResponse
     :: DeleteConditionalFormatRuleResponse
 deleteConditionalFormatRuleResponse =
-    DeleteConditionalFormatRuleResponse'
-    { _dcfrrRule = Nothing
-    }
+  DeleteConditionalFormatRuleResponse' {_dcfrrRule = Nothing}
 
 -- | The rule that was deleted.
 dcfrrRule :: Lens' DeleteConditionalFormatRuleResponse (Maybe ConditionalFormatRule)
@@ -13263,12 +13310,14 @@ instance ToJSON DeleteConditionalFormatRuleResponse
 -- | The result of updating a conditional format rule.
 --
 -- /See:/ 'updateConditionalFormatRuleResponse' smart constructor.
-data UpdateConditionalFormatRuleResponse = UpdateConditionalFormatRuleResponse'
+data UpdateConditionalFormatRuleResponse =
+  UpdateConditionalFormatRuleResponse'
     { _uNewRule  :: !(Maybe ConditionalFormatRule)
     , _uNewIndex :: !(Maybe (Textual Int32))
     , _uOldIndex :: !(Maybe (Textual Int32))
     , _uOldRule  :: !(Maybe ConditionalFormatRule)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateConditionalFormatRuleResponse' with the minimum fields required to make a request.
 --
@@ -13284,7 +13333,7 @@ data UpdateConditionalFormatRuleResponse = UpdateConditionalFormatRuleResponse'
 updateConditionalFormatRuleResponse
     :: UpdateConditionalFormatRuleResponse
 updateConditionalFormatRuleResponse =
-    UpdateConditionalFormatRuleResponse'
+  UpdateConditionalFormatRuleResponse'
     { _uNewRule = Nothing
     , _uNewIndex = Nothing
     , _uOldIndex = Nothing

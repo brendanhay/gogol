@@ -73,7 +73,8 @@ type BeaconsDecommissionResource =
 -- the Google Developers Console project.
 --
 -- /See:/ 'beaconsDecommission' smart constructor.
-data BeaconsDecommission = BeaconsDecommission'
+data BeaconsDecommission =
+  BeaconsDecommission'
     { _bddXgafv          :: !(Maybe Xgafv)
     , _bddUploadProtocol :: !(Maybe Text)
     , _bddAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data BeaconsDecommission = BeaconsDecommission'
     , _bddUploadType     :: !(Maybe Text)
     , _bddProjectId      :: !(Maybe Text)
     , _bddCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeaconsDecommission' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ beaconsDecommission
     :: Text -- ^ 'bddBeaconName'
     -> BeaconsDecommission
 beaconsDecommission pBddBeaconName_ =
-    BeaconsDecommission'
+  BeaconsDecommission'
     { _bddXgafv = Nothing
     , _bddUploadProtocol = Nothing
     , _bddAccessToken = Nothing

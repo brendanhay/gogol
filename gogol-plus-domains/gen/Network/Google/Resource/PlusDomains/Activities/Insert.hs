@@ -56,11 +56,13 @@ type ActivitiesInsertResource =
 -- | Create a new activity for the authenticated user.
 --
 -- /See:/ 'activitiesInsert' smart constructor.
-data ActivitiesInsert = ActivitiesInsert'
+data ActivitiesInsert =
+  ActivitiesInsert'
     { _aiPayload :: !Activity
     , _aiUserId  :: !Text
     , _aiPreview :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivitiesInsert' with the minimum fields required to make a request.
 --
@@ -76,11 +78,8 @@ activitiesInsert
     -> Text -- ^ 'aiUserId'
     -> ActivitiesInsert
 activitiesInsert pAiPayload_ pAiUserId_ =
-    ActivitiesInsert'
-    { _aiPayload = pAiPayload_
-    , _aiUserId = pAiUserId_
-    , _aiPreview = Nothing
-    }
+  ActivitiesInsert'
+    {_aiPayload = pAiPayload_, _aiUserId = pAiUserId_, _aiPreview = Nothing}
 
 -- | Multipart request metadata.
 aiPayload :: Lens' ActivitiesInsert Activity

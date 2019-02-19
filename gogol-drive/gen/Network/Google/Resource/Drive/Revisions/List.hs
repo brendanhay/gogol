@@ -56,11 +56,13 @@ type RevisionsListResource =
 -- | Lists a file\'s revisions.
 --
 -- /See:/ 'revisionsList' smart constructor.
-data RevisionsList = RevisionsList'
+data RevisionsList =
+  RevisionsList'
     { _rllPageToken :: !(Maybe Text)
     , _rllFileId    :: !Text
     , _rllPageSize  :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RevisionsList' with the minimum fields required to make a request.
 --
@@ -75,11 +77,8 @@ revisionsList
     :: Text -- ^ 'rllFileId'
     -> RevisionsList
 revisionsList pRllFileId_ =
-    RevisionsList'
-    { _rllPageToken = Nothing
-    , _rllFileId = pRllFileId_
-    , _rllPageSize = 200
-    }
+  RevisionsList'
+    {_rllPageToken = Nothing, _rllFileId = pRllFileId_, _rllPageSize = 200}
 
 -- | The token for continuing a previous list request on the next page. This
 -- should be set to the value of \'nextPageToken\' from the previous

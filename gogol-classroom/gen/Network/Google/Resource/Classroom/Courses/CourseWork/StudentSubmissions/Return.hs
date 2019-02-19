@@ -96,7 +96,8 @@ type CoursesCourseWorkStudentSubmissionsReturnResource
 -- requested course, course work, or student submission does not exist.
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsReturn' smart constructor.
-data CoursesCourseWorkStudentSubmissionsReturn = CoursesCourseWorkStudentSubmissionsReturn'
+data CoursesCourseWorkStudentSubmissionsReturn =
+  CoursesCourseWorkStudentSubmissionsReturn'
     { _ccwssrXgafv          :: !(Maybe Xgafv)
     , _ccwssrUploadProtocol :: !(Maybe Text)
     , _ccwssrCourseId       :: !Text
@@ -106,7 +107,8 @@ data CoursesCourseWorkStudentSubmissionsReturn = CoursesCourseWorkStudentSubmiss
     , _ccwssrId             :: !Text
     , _ccwssrCallback       :: !(Maybe Text)
     , _ccwssrCourseWorkId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsReturn' with the minimum fields required to make a request.
 --
@@ -136,7 +138,7 @@ coursesCourseWorkStudentSubmissionsReturn
     -> Text -- ^ 'ccwssrCourseWorkId'
     -> CoursesCourseWorkStudentSubmissionsReturn
 coursesCourseWorkStudentSubmissionsReturn pCcwssrCourseId_ pCcwssrPayload_ pCcwssrId_ pCcwssrCourseWorkId_ =
-    CoursesCourseWorkStudentSubmissionsReturn'
+  CoursesCourseWorkStudentSubmissionsReturn'
     { _ccwssrXgafv = Nothing
     , _ccwssrUploadProtocol = Nothing
     , _ccwssrCourseId = pCcwssrCourseId_
@@ -201,7 +203,8 @@ ccwssrCourseWorkId
       (\ s a -> s{_ccwssrCourseWorkId = a})
 
 instance GoogleRequest
-         CoursesCourseWorkStudentSubmissionsReturn where
+           CoursesCourseWorkStudentSubmissionsReturn
+         where
         type Rs CoursesCourseWorkStudentSubmissionsReturn =
              Empty
         type Scopes CoursesCourseWorkStudentSubmissionsReturn

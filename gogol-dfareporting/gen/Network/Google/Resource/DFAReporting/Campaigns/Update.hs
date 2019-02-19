@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CampaignsUpdate' request conforms to.
 type CampaignsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -54,10 +54,12 @@ type CampaignsUpdateResource =
 -- | Updates an existing campaign.
 --
 -- /See:/ 'campaignsUpdate' smart constructor.
-data CampaignsUpdate = CampaignsUpdate'
+data CampaignsUpdate =
+  CampaignsUpdate'
     { _cuProFileId :: !(Textual Int64)
     , _cuPayload   :: !Campaign
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CampaignsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ campaignsUpdate
     -> Campaign -- ^ 'cuPayload'
     -> CampaignsUpdate
 campaignsUpdate pCuProFileId_ pCuPayload_ =
-    CampaignsUpdate'
-    { _cuProFileId = _Coerce # pCuProFileId_
-    , _cuPayload = pCuPayload_
-    }
+  CampaignsUpdate'
+    {_cuProFileId = _Coerce # pCuProFileId_, _cuPayload = pCuPayload_}
 
 -- | User profile ID associated with this request.
 cuProFileId :: Lens' CampaignsUpdate Int64

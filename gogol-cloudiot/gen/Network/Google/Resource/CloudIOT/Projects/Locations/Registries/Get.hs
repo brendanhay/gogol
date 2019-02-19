@@ -60,14 +60,16 @@ type ProjectsLocationsRegistriesGetResource =
 -- | Gets a device registry configuration.
 --
 -- /See:/ 'projectsLocationsRegistriesGet' smart constructor.
-data ProjectsLocationsRegistriesGet = ProjectsLocationsRegistriesGet'
+data ProjectsLocationsRegistriesGet =
+  ProjectsLocationsRegistriesGet'
     { _plrgXgafv          :: !(Maybe Xgafv)
     , _plrgUploadProtocol :: !(Maybe Text)
     , _plrgAccessToken    :: !(Maybe Text)
     , _plrgUploadType     :: !(Maybe Text)
     , _plrgName           :: !Text
     , _plrgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsLocationsRegistriesGet
     :: Text -- ^ 'plrgName'
     -> ProjectsLocationsRegistriesGet
 projectsLocationsRegistriesGet pPlrgName_ =
-    ProjectsLocationsRegistriesGet'
+  ProjectsLocationsRegistriesGet'
     { _plrgXgafv = Nothing
     , _plrgUploadProtocol = Nothing
     , _plrgAccessToken = Nothing

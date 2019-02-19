@@ -66,7 +66,8 @@ type SettingsDatasourcesListResource =
 -- | Lists data sources.
 --
 -- /See:/ 'settingsDatasourcesList' smart constructor.
-data SettingsDatasourcesList = SettingsDatasourcesList'
+data SettingsDatasourcesList =
+  SettingsDatasourcesList'
     { _sdlXgafv                       :: !(Maybe Xgafv)
     , _sdlUploadProtocol              :: !(Maybe Text)
     , _sdlAccessToken                 :: !(Maybe Text)
@@ -75,7 +76,8 @@ data SettingsDatasourcesList = SettingsDatasourcesList'
     , _sdlPageToken                   :: !(Maybe Text)
     , _sdlPageSize                    :: !(Maybe (Textual Int32))
     , _sdlCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SettingsDatasourcesList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ data SettingsDatasourcesList = SettingsDatasourcesList'
 settingsDatasourcesList
     :: SettingsDatasourcesList
 settingsDatasourcesList =
-    SettingsDatasourcesList'
+  SettingsDatasourcesList'
     { _sdlXgafv = Nothing
     , _sdlUploadProtocol = Nothing
     , _sdlAccessToken = Nothing

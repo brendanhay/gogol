@@ -67,14 +67,16 @@ type ProjectsGetBillingInfoResource =
 -- ).
 --
 -- /See:/ 'projectsGetBillingInfo' smart constructor.
-data ProjectsGetBillingInfo = ProjectsGetBillingInfo'
+data ProjectsGetBillingInfo =
+  ProjectsGetBillingInfo'
     { _pgbiXgafv          :: !(Maybe Xgafv)
     , _pgbiUploadProtocol :: !(Maybe Text)
     , _pgbiAccessToken    :: !(Maybe Text)
     , _pgbiUploadType     :: !(Maybe Text)
     , _pgbiName           :: !Text
     , _pgbiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGetBillingInfo' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsGetBillingInfo
     :: Text -- ^ 'pgbiName'
     -> ProjectsGetBillingInfo
 projectsGetBillingInfo pPgbiName_ =
-    ProjectsGetBillingInfo'
+  ProjectsGetBillingInfo'
     { _pgbiXgafv = Nothing
     , _pgbiUploadProtocol = Nothing
     , _pgbiAccessToken = Nothing

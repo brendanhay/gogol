@@ -73,11 +73,13 @@ type MediaInsertResource =
 -- videos are less than 15 minutes in length.
 --
 -- /See:/ 'mediaInsert' smart constructor.
-data MediaInsert = MediaInsert'
+data MediaInsert =
+  MediaInsert'
     { _miCollection :: !MediaInsertCollection
     , _miPayload    :: !Media
     , _miUserId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MediaInsert' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ mediaInsert
     -> Text -- ^ 'miUserId'
     -> MediaInsert
 mediaInsert pMiCollection_ pMiPayload_ pMiUserId_ =
-    MediaInsert'
+  MediaInsert'
     { _miCollection = pMiCollection_
     , _miPayload = pMiPayload_
     , _miUserId = pMiUserId_

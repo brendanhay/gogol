@@ -249,4 +249,4 @@ doubleClickBidsService
 
 -- | View and manage your reports in DoubleClick Bid Manager
 doubleClickBidManagerScope :: Proxy '["https://www.googleapis.com/auth/doubleclickbidmanager"]
-doubleClickBidManagerScope = Proxy;
+doubleClickBidManagerScope = Proxy

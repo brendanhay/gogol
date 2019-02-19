@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesList' request conforms to.
 type ContentCategoriesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -69,7 +69,8 @@ type ContentCategoriesListResource =
 -- supports paging.
 --
 -- /See:/ 'contentCategoriesList' smart constructor.
-data ContentCategoriesList = ContentCategoriesList'
+data ContentCategoriesList =
+  ContentCategoriesList'
     { _cclSearchString :: !(Maybe Text)
     , _cclIds          :: !(Maybe [Textual Int64])
     , _cclProFileId    :: !(Textual Int64)
@@ -77,7 +78,8 @@ data ContentCategoriesList = ContentCategoriesList'
     , _cclPageToken    :: !(Maybe Text)
     , _cclSortField    :: !ContentCategoriesListSortField
     , _cclMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContentCategoriesList' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ contentCategoriesList
     :: Int64 -- ^ 'cclProFileId'
     -> ContentCategoriesList
 contentCategoriesList pCclProFileId_ =
-    ContentCategoriesList'
+  ContentCategoriesList'
     { _cclSearchString = Nothing
     , _cclIds = Nothing
     , _cclProFileId = _Coerce # pCclProFileId_

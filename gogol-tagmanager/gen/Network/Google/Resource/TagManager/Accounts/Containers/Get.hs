@@ -50,9 +50,11 @@ type AccountsContainersGetResource =
 -- | Gets a Container.
 --
 -- /See:/ 'accountsContainersGet' smart constructor.
-newtype AccountsContainersGet = AccountsContainersGet'
+newtype AccountsContainersGet =
+  AccountsContainersGet'
     { _acgPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersGet' with the minimum fields required to make a request.
 --
@@ -62,10 +64,7 @@ newtype AccountsContainersGet = AccountsContainersGet'
 accountsContainersGet
     :: Text -- ^ 'acgPath'
     -> AccountsContainersGet
-accountsContainersGet pAcgPath_ =
-    AccountsContainersGet'
-    { _acgPath = pAcgPath_
-    }
+accountsContainersGet pAcgPath_ = AccountsContainersGet' {_acgPath = pAcgPath_}
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}

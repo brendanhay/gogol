@@ -79,7 +79,8 @@ type CoursesAnnouncementsDeleteResource =
 -- deleted. * \`NOT_FOUND\` if no course exists with the requested ID.
 --
 -- /See:/ 'coursesAnnouncementsDelete' smart constructor.
-data CoursesAnnouncementsDelete = CoursesAnnouncementsDelete'
+data CoursesAnnouncementsDelete =
+  CoursesAnnouncementsDelete'
     { _cXgafv          :: !(Maybe Xgafv)
     , _cUploadProtocol :: !(Maybe Text)
     , _cCourseId       :: !Text
@@ -87,7 +88,8 @@ data CoursesAnnouncementsDelete = CoursesAnnouncementsDelete'
     , _cUploadType     :: !(Maybe Text)
     , _cId             :: !Text
     , _cCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesAnnouncementsDelete' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ coursesAnnouncementsDelete
     -> Text -- ^ 'cId'
     -> CoursesAnnouncementsDelete
 coursesAnnouncementsDelete pCCourseId_ pCId_ =
-    CoursesAnnouncementsDelete'
+  CoursesAnnouncementsDelete'
     { _cXgafv = Nothing
     , _cUploadProtocol = Nothing
     , _cCourseId = pCCourseId_

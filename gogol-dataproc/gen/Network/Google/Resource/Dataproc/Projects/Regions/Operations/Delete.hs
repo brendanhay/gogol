@@ -65,14 +65,16 @@ type ProjectsRegionsOperationsDeleteResource =
 -- google.rpc.Code.UNIMPLEMENTED.
 --
 -- /See:/ 'projectsRegionsOperationsDelete' smart constructor.
-data ProjectsRegionsOperationsDelete = ProjectsRegionsOperationsDelete'
+data ProjectsRegionsOperationsDelete =
+  ProjectsRegionsOperationsDelete'
     { _prodXgafv          :: !(Maybe Xgafv)
     , _prodUploadProtocol :: !(Maybe Text)
     , _prodAccessToken    :: !(Maybe Text)
     , _prodUploadType     :: !(Maybe Text)
     , _prodName           :: !Text
     , _prodCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsOperationsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ projectsRegionsOperationsDelete
     :: Text -- ^ 'prodName'
     -> ProjectsRegionsOperationsDelete
 projectsRegionsOperationsDelete pProdName_ =
-    ProjectsRegionsOperationsDelete'
+  ProjectsRegionsOperationsDelete'
     { _prodXgafv = Nothing
     , _prodUploadProtocol = Nothing
     , _prodAccessToken = Nothing
@@ -135,7 +137,8 @@ prodCallback
   = lens _prodCallback (\ s a -> s{_prodCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsOperationsDelete where
+           ProjectsRegionsOperationsDelete
+         where
         type Rs ProjectsRegionsOperationsDelete = Empty
         type Scopes ProjectsRegionsOperationsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]

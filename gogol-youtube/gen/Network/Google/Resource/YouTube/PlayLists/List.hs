@@ -72,7 +72,8 @@ type PlayListsListResource =
 -- owns, or you can retrieve one or more playlists by their unique IDs.
 --
 -- /See:/ 'playListsList' smart constructor.
-data PlayListsList = PlayListsList'
+data PlayListsList =
+  PlayListsList'
     { _pllPart                          :: !Text
     , _pllMine                          :: !(Maybe Bool)
     , _pllChannelId                     :: !(Maybe Text)
@@ -82,7 +83,8 @@ data PlayListsList = PlayListsList'
     , _pllId                            :: !(Maybe Text)
     , _pllPageToken                     :: !(Maybe Text)
     , _pllMaxResults                    :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListsList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ playListsList
     :: Text -- ^ 'pllPart'
     -> PlayListsList
 playListsList pPllPart_ =
-    PlayListsList'
+  PlayListsList'
     { _pllPart = pPllPart_
     , _pllMine = Nothing
     , _pllChannelId = Nothing

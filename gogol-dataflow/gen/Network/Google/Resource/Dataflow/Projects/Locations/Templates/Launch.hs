@@ -75,7 +75,8 @@ type ProjectsLocationsTemplatesLaunchResource =
 -- | Launch a template.
 --
 -- /See:/ 'projectsLocationsTemplatesLaunch' smart constructor.
-data ProjectsLocationsTemplatesLaunch = ProjectsLocationsTemplatesLaunch'
+data ProjectsLocationsTemplatesLaunch =
+  ProjectsLocationsTemplatesLaunch'
     { _pltlXgafv                          :: !(Maybe Xgafv)
     , _pltlValidateOnly                   :: !(Maybe Bool)
     , _pltlUploadProtocol                 :: !(Maybe Text)
@@ -88,7 +89,8 @@ data ProjectsLocationsTemplatesLaunch = ProjectsLocationsTemplatesLaunch'
     , _pltlProjectId                      :: !Text
     , _pltlCallback                       :: !(Maybe Text)
     , _pltlDynamicTemplateGcsPath         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsTemplatesLaunch' with the minimum fields required to make a request.
 --
@@ -123,7 +125,7 @@ projectsLocationsTemplatesLaunch
     -> Text -- ^ 'pltlProjectId'
     -> ProjectsLocationsTemplatesLaunch
 projectsLocationsTemplatesLaunch pPltlLocation_ pPltlPayload_ pPltlProjectId_ =
-    ProjectsLocationsTemplatesLaunch'
+  ProjectsLocationsTemplatesLaunch'
     { _pltlXgafv = Nothing
     , _pltlValidateOnly = Nothing
     , _pltlUploadProtocol = Nothing
@@ -210,7 +212,8 @@ pltlDynamicTemplateGcsPath
       (\ s a -> s{_pltlDynamicTemplateGcsPath = a})
 
 instance GoogleRequest
-         ProjectsLocationsTemplatesLaunch where
+           ProjectsLocationsTemplatesLaunch
+         where
         type Rs ProjectsLocationsTemplatesLaunch =
              LaunchTemplateResponse
         type Scopes ProjectsLocationsTemplatesLaunch =

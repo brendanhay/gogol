@@ -70,7 +70,8 @@ type ProjectsInstancesTestIAMPermissionsResource =
 -- Project. Otherwise returns an empty set of permissions.
 --
 -- /See:/ 'projectsInstancesTestIAMPermissions' smart constructor.
-data ProjectsInstancesTestIAMPermissions = ProjectsInstancesTestIAMPermissions'
+data ProjectsInstancesTestIAMPermissions =
+  ProjectsInstancesTestIAMPermissions'
     { _pitipXgafv          :: !(Maybe Xgafv)
     , _pitipUploadProtocol :: !(Maybe Text)
     , _pitipAccessToken    :: !(Maybe Text)
@@ -78,7 +79,8 @@ data ProjectsInstancesTestIAMPermissions = ProjectsInstancesTestIAMPermissions'
     , _pitipPayload        :: !TestIAMPermissionsRequest
     , _pitipResource       :: !Text
     , _pitipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsInstancesTestIAMPermissions
     -> Text -- ^ 'pitipResource'
     -> ProjectsInstancesTestIAMPermissions
 projectsInstancesTestIAMPermissions pPitipPayload_ pPitipResource_ =
-    ProjectsInstancesTestIAMPermissions'
+  ProjectsInstancesTestIAMPermissions'
     { _pitipXgafv = Nothing
     , _pitipUploadProtocol = Nothing
     , _pitipAccessToken = Nothing
@@ -155,7 +157,8 @@ pitipCallback
       (\ s a -> s{_pitipCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesTestIAMPermissions where
+           ProjectsInstancesTestIAMPermissions
+         where
         type Rs ProjectsInstancesTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsInstancesTestIAMPermissions =

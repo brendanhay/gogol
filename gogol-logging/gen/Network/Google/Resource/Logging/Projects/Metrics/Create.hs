@@ -62,7 +62,8 @@ type ProjectsMetricsCreateResource =
 -- | Creates a logs-based metric.
 --
 -- /See:/ 'projectsMetricsCreate' smart constructor.
-data ProjectsMetricsCreate = ProjectsMetricsCreate'
+data ProjectsMetricsCreate =
+  ProjectsMetricsCreate'
     { _pmcParent         :: !Text
     , _pmcXgafv          :: !(Maybe Xgafv)
     , _pmcUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsMetricsCreate = ProjectsMetricsCreate'
     , _pmcUploadType     :: !(Maybe Text)
     , _pmcPayload        :: !LogMetric
     , _pmcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsMetricsCreate' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsMetricsCreate
     -> LogMetric -- ^ 'pmcPayload'
     -> ProjectsMetricsCreate
 projectsMetricsCreate pPmcParent_ pPmcPayload_ =
-    ProjectsMetricsCreate'
+  ProjectsMetricsCreate'
     { _pmcParent = pPmcParent_
     , _pmcXgafv = Nothing
     , _pmcUploadProtocol = Nothing

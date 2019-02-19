@@ -68,7 +68,8 @@ type ConversionPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'conversionPatch' smart constructor.
-data ConversionPatch = ConversionPatch'
+data ConversionPatch =
+  ConversionPatch'
     { _cpEngineAccountId :: !(Textual Int64)
     , _cpAgencyId        :: !(Textual Int64)
     , _cpAdvertiserId    :: !(Textual Int64)
@@ -77,7 +78,8 @@ data ConversionPatch = ConversionPatch'
     , _cpStartDate       :: !(Textual Int32)
     , _cpStartRow        :: !(Textual Word32)
     , _cpRowCount        :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConversionPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ conversionPatch
     -> Int32 -- ^ 'cpRowCount'
     -> ConversionPatch
 conversionPatch pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpPayload_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
-    ConversionPatch'
+  ConversionPatch'
     { _cpEngineAccountId = _Coerce # pCpEngineAccountId_
     , _cpAgencyId = _Coerce # pCpAgencyId_
     , _cpAdvertiserId = _Coerce # pCpAdvertiserId_

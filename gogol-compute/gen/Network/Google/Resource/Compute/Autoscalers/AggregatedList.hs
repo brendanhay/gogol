@@ -62,13 +62,15 @@ type AutoscalersAggregatedListResource =
 -- | Retrieves an aggregated list of autoscalers.
 --
 -- /See:/ 'autoscalersAggregatedList' smart constructor.
-data AutoscalersAggregatedList = AutoscalersAggregatedList'
+data AutoscalersAggregatedList =
+  AutoscalersAggregatedList'
     { _autOrderBy    :: !(Maybe Text)
     , _autProject    :: !Text
     , _autFilter     :: !(Maybe Text)
     , _autPageToken  :: !(Maybe Text)
     , _autMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalersAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ autoscalersAggregatedList
     :: Text -- ^ 'autProject'
     -> AutoscalersAggregatedList
 autoscalersAggregatedList pAutProject_ =
-    AutoscalersAggregatedList'
+  AutoscalersAggregatedList'
     { _autOrderBy = Nothing
     , _autProject = pAutProject_
     , _autFilter = Nothing

@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'InventoryItemsGet' request conforms to.
 type InventoryItemsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -57,11 +57,13 @@ type InventoryItemsGetResource =
 -- | Gets one inventory item by ID.
 --
 -- /See:/ 'inventoryItemsGet' smart constructor.
-data InventoryItemsGet = InventoryItemsGet'
+data InventoryItemsGet =
+  InventoryItemsGet'
     { _iigProFileId :: !(Textual Int64)
     , _iigId        :: !(Textual Int64)
     , _iigProjectId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InventoryItemsGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ inventoryItemsGet
     -> Int64 -- ^ 'iigProjectId'
     -> InventoryItemsGet
 inventoryItemsGet pIigProFileId_ pIigId_ pIigProjectId_ =
-    InventoryItemsGet'
+  InventoryItemsGet'
     { _iigProFileId = _Coerce # pIigProFileId_
     , _iigId = _Coerce # pIigId_
     , _iigProjectId = _Coerce # pIigProjectId_

@@ -63,14 +63,16 @@ type DocumentsAnalyzeEntitySentimentResource =
 -- sentiment associated with each entity and its mentions.
 --
 -- /See:/ 'documentsAnalyzeEntitySentiment' smart constructor.
-data DocumentsAnalyzeEntitySentiment = DocumentsAnalyzeEntitySentiment'
+data DocumentsAnalyzeEntitySentiment =
+  DocumentsAnalyzeEntitySentiment'
     { _daesXgafv          :: !(Maybe Xgafv)
     , _daesUploadProtocol :: !(Maybe Text)
     , _daesAccessToken    :: !(Maybe Text)
     , _daesUploadType     :: !(Maybe Text)
     , _daesPayload        :: !AnalyzeEntitySentimentRequest
     , _daesCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentsAnalyzeEntitySentiment' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ documentsAnalyzeEntitySentiment
     :: AnalyzeEntitySentimentRequest -- ^ 'daesPayload'
     -> DocumentsAnalyzeEntitySentiment
 documentsAnalyzeEntitySentiment pDaesPayload_ =
-    DocumentsAnalyzeEntitySentiment'
+  DocumentsAnalyzeEntitySentiment'
     { _daesXgafv = Nothing
     , _daesUploadProtocol = Nothing
     , _daesAccessToken = Nothing
@@ -134,7 +136,8 @@ daesCallback
   = lens _daesCallback (\ s a -> s{_daesCallback = a})
 
 instance GoogleRequest
-         DocumentsAnalyzeEntitySentiment where
+           DocumentsAnalyzeEntitySentiment
+         where
         type Rs DocumentsAnalyzeEntitySentiment =
              AnalyzeEntitySentimentResponse
         type Scopes DocumentsAnalyzeEntitySentiment =

@@ -59,14 +59,16 @@ type ProjectsSinksGetResource =
 -- | Gets a sink.
 --
 -- /See:/ 'projectsSinksGet' smart constructor.
-data ProjectsSinksGet = ProjectsSinksGet'
+data ProjectsSinksGet =
+  ProjectsSinksGet'
     { _psgXgafv          :: !(Maybe Xgafv)
     , _psgUploadProtocol :: !(Maybe Text)
     , _psgAccessToken    :: !(Maybe Text)
     , _psgUploadType     :: !(Maybe Text)
     , _psgSinkName       :: !Text
     , _psgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSinksGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsSinksGet
     :: Text -- ^ 'psgSinkName'
     -> ProjectsSinksGet
 projectsSinksGet pPsgSinkName_ =
-    ProjectsSinksGet'
+  ProjectsSinksGet'
     { _psgXgafv = Nothing
     , _psgUploadProtocol = Nothing
     , _psgAccessToken = Nothing

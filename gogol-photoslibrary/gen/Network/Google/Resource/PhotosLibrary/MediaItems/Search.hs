@@ -75,7 +75,8 @@ type MediaItemsSearchResource =
 -- are set, then this will result in an error.
 --
 -- /See:/ 'mediaItemsSearch' smart constructor.
-data MediaItemsSearch = MediaItemsSearch'
+data MediaItemsSearch =
+  MediaItemsSearch'
     { _misXgafv          :: !(Maybe Xgafv)
     , _misUploadProtocol :: !(Maybe Text)
     , _misPp             :: !Bool
@@ -84,7 +85,8 @@ data MediaItemsSearch = MediaItemsSearch'
     , _misPayload        :: !SearchMediaItemsRequest
     , _misBearerToken    :: !(Maybe Text)
     , _misCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MediaItemsSearch' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ mediaItemsSearch
     :: SearchMediaItemsRequest -- ^ 'misPayload'
     -> MediaItemsSearch
 mediaItemsSearch pMisPayload_ =
-    MediaItemsSearch'
+  MediaItemsSearch'
     { _misXgafv = Nothing
     , _misUploadProtocol = Nothing
     , _misPp = True

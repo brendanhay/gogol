@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdsGet' request conforms to.
 type AdsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
@@ -54,10 +54,12 @@ type AdsGetResource =
 -- | Gets one ad by ID.
 --
 -- /See:/ 'adsGet' smart constructor.
-data AdsGet = AdsGet'
+data AdsGet =
+  AdsGet'
     { _adsProFileId :: !(Textual Int64)
     , _adsId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ adsGet
     -> Int64 -- ^ 'adsId'
     -> AdsGet
 adsGet pAdsProFileId_ pAdsId_ =
-    AdsGet'
-    { _adsProFileId = _Coerce # pAdsProFileId_
-    , _adsId = _Coerce # pAdsId_
-    }
+  AdsGet' {_adsProFileId = _Coerce # pAdsProFileId_, _adsId = _Coerce # pAdsId_}
 
 -- | User profile ID associated with this request.
 adsProFileId :: Lens' AdsGet Int64

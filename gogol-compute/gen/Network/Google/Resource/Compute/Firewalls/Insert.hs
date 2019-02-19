@@ -59,11 +59,13 @@ type FirewallsInsertResource =
 -- in the request.
 --
 -- /See:/ 'firewallsInsert' smart constructor.
-data FirewallsInsert = FirewallsInsert'
+data FirewallsInsert =
+  FirewallsInsert'
     { _fiRequestId :: !(Maybe Text)
     , _fiProject   :: !Text
     , _fiPayload   :: !Firewall
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FirewallsInsert' with the minimum fields required to make a request.
 --
@@ -79,11 +81,8 @@ firewallsInsert
     -> Firewall -- ^ 'fiPayload'
     -> FirewallsInsert
 firewallsInsert pFiProject_ pFiPayload_ =
-    FirewallsInsert'
-    { _fiRequestId = Nothing
-    , _fiProject = pFiProject_
-    , _fiPayload = pFiPayload_
-    }
+  FirewallsInsert'
+    {_fiRequestId = Nothing, _fiProject = pFiProject_, _fiPayload = pFiPayload_}
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

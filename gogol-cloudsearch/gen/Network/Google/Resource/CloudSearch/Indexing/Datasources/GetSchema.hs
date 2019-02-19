@@ -63,7 +63,8 @@ type IndexingDatasourcesGetSchemaResource =
 -- | Gets the schema of a data source.
 --
 -- /See:/ 'indexingDatasourcesGetSchema' smart constructor.
-data IndexingDatasourcesGetSchema = IndexingDatasourcesGetSchema'
+data IndexingDatasourcesGetSchema =
+  IndexingDatasourcesGetSchema'
     { _idgsXgafv                       :: !(Maybe Xgafv)
     , _idgsUploadProtocol              :: !(Maybe Text)
     , _idgsAccessToken                 :: !(Maybe Text)
@@ -71,7 +72,8 @@ data IndexingDatasourcesGetSchema = IndexingDatasourcesGetSchema'
     , _idgsName                        :: !Text
     , _idgsDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _idgsCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IndexingDatasourcesGetSchema' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ indexingDatasourcesGetSchema
     :: Text -- ^ 'idgsName'
     -> IndexingDatasourcesGetSchema
 indexingDatasourcesGetSchema pIdgsName_ =
-    IndexingDatasourcesGetSchema'
+  IndexingDatasourcesGetSchema'
     { _idgsXgafv = Nothing
     , _idgsUploadProtocol = Nothing
     , _idgsAccessToken = Nothing

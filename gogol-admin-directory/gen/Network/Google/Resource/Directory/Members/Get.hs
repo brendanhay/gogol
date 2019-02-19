@@ -55,10 +55,12 @@ type MembersGetResource =
 -- | Retrieve Group Member
 --
 -- /See:/ 'membersGet' smart constructor.
-data MembersGet = MembersGet'
+data MembersGet =
+  MembersGet'
     { _mgMemberKey :: !Text
     , _mgGroupKey  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MembersGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ membersGet
     -> Text -- ^ 'mgGroupKey'
     -> MembersGet
 membersGet pMgMemberKey_ pMgGroupKey_ =
-    MembersGet'
-    { _mgMemberKey = pMgMemberKey_
-    , _mgGroupKey = pMgGroupKey_
-    }
+  MembersGet' {_mgMemberKey = pMgMemberKey_, _mgGroupKey = pMgGroupKey_}
 
 -- | Email or immutable ID of the member
 mgMemberKey :: Lens' MembersGet Text

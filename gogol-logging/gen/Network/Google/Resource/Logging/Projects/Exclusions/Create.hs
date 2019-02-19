@@ -67,7 +67,8 @@ type ProjectsExclusionsCreateResource =
 -- exclusions in a resource.
 --
 -- /See:/ 'projectsExclusionsCreate' smart constructor.
-data ProjectsExclusionsCreate = ProjectsExclusionsCreate'
+data ProjectsExclusionsCreate =
+  ProjectsExclusionsCreate'
     { _pecParent         :: !Text
     , _pecXgafv          :: !(Maybe Xgafv)
     , _pecUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsExclusionsCreate = ProjectsExclusionsCreate'
     , _pecUploadType     :: !(Maybe Text)
     , _pecPayload        :: !LogExclusion
     , _pecCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsExclusionsCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsExclusionsCreate
     -> LogExclusion -- ^ 'pecPayload'
     -> ProjectsExclusionsCreate
 projectsExclusionsCreate pPecParent_ pPecPayload_ =
-    ProjectsExclusionsCreate'
+  ProjectsExclusionsCreate'
     { _pecParent = pPecParent_
     , _pecXgafv = Nothing
     , _pecUploadProtocol = Nothing

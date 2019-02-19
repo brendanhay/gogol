@@ -81,7 +81,8 @@ type ReportsQueryResource =
 -- | Retrieve your YouTube Analytics reports.
 --
 -- /See:/ 'reportsQuery' smart constructor.
-data ReportsQuery = ReportsQuery'
+data ReportsQuery =
+  ReportsQuery'
     { _rqXgafv                        :: !(Maybe Xgafv)
     , _rqMetrics                      :: !(Maybe Text)
     , _rqUploadProtocol               :: !(Maybe Text)
@@ -98,7 +99,8 @@ data ReportsQuery = ReportsQuery'
     , _rqStartIndex                   :: !(Maybe (Textual Int32))
     , _rqMaxResults                   :: !(Maybe (Textual Int32))
     , _rqCallback                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsQuery' with the minimum fields required to make a request.
 --
@@ -138,7 +140,7 @@ data ReportsQuery = ReportsQuery'
 reportsQuery
     :: ReportsQuery
 reportsQuery =
-    ReportsQuery'
+  ReportsQuery'
     { _rqXgafv = Nothing
     , _rqMetrics = Nothing
     , _rqUploadProtocol = Nothing

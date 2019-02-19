@@ -98,7 +98,8 @@ type ProjectsSnapshotsCreateResource =
 -- for REST API requests, you must specify a name in the request.
 --
 -- /See:/ 'projectsSnapshotsCreate' smart constructor.
-data ProjectsSnapshotsCreate = ProjectsSnapshotsCreate'
+data ProjectsSnapshotsCreate =
+  ProjectsSnapshotsCreate'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
@@ -106,7 +107,8 @@ data ProjectsSnapshotsCreate = ProjectsSnapshotsCreate'
     , _pPayload        :: !CreateSnapshotRequest
     , _pName           :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSnapshotsCreate' with the minimum fields required to make a request.
 --
@@ -130,7 +132,7 @@ projectsSnapshotsCreate
     -> Text -- ^ 'pName'
     -> ProjectsSnapshotsCreate
 projectsSnapshotsCreate pPPayload_ pPName_ =
-    ProjectsSnapshotsCreate'
+  ProjectsSnapshotsCreate'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing

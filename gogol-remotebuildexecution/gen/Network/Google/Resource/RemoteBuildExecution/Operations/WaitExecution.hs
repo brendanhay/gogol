@@ -75,7 +75,8 @@ type OperationsWaitExecutionResource =
 -- the execution.
 --
 -- /See:/ 'operationsWaitExecution' smart constructor.
-data OperationsWaitExecution = OperationsWaitExecution'
+data OperationsWaitExecution =
+  OperationsWaitExecution'
     { _oweXgafv          :: !(Maybe Xgafv)
     , _oweUploadProtocol :: !(Maybe Text)
     , _oweAccessToken    :: !(Maybe Text)
@@ -83,7 +84,8 @@ data OperationsWaitExecution = OperationsWaitExecution'
     , _owePayload        :: !BuildBazelRemoteExecutionV2WaitExecutionRequest
     , _oweName           :: !Text
     , _oweCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationsWaitExecution' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ operationsWaitExecution
     -> Text -- ^ 'oweName'
     -> OperationsWaitExecution
 operationsWaitExecution pOwePayload_ pOweName_ =
-    OperationsWaitExecution'
+  OperationsWaitExecution'
     { _oweXgafv = Nothing
     , _oweUploadProtocol = Nothing
     , _oweAccessToken = Nothing

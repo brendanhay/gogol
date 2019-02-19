@@ -76,14 +76,16 @@ type ProjectsInstancesDatabasesOperationsCancelResource
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
 -- /See:/ 'projectsInstancesDatabasesOperationsCancel' smart constructor.
-data ProjectsInstancesDatabasesOperationsCancel = ProjectsInstancesDatabasesOperationsCancel'
+data ProjectsInstancesDatabasesOperationsCancel =
+  ProjectsInstancesDatabasesOperationsCancel'
     { _pidocXgafv          :: !(Maybe Xgafv)
     , _pidocUploadProtocol :: !(Maybe Text)
     , _pidocAccessToken    :: !(Maybe Text)
     , _pidocUploadType     :: !(Maybe Text)
     , _pidocName           :: !Text
     , _pidocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesOperationsCancel' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsInstancesDatabasesOperationsCancel
     :: Text -- ^ 'pidocName'
     -> ProjectsInstancesDatabasesOperationsCancel
 projectsInstancesDatabasesOperationsCancel pPidocName_ =
-    ProjectsInstancesDatabasesOperationsCancel'
+  ProjectsInstancesDatabasesOperationsCancel'
     { _pidocXgafv = Nothing
     , _pidocUploadProtocol = Nothing
     , _pidocAccessToken = Nothing
@@ -148,7 +150,8 @@ pidocCallback
       (\ s a -> s{_pidocCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesOperationsCancel where
+           ProjectsInstancesDatabasesOperationsCancel
+         where
         type Rs ProjectsInstancesDatabasesOperationsCancel =
              Empty
         type Scopes

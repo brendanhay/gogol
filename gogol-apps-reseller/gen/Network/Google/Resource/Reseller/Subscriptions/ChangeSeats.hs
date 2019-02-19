@@ -58,11 +58,13 @@ type SubscriptionsChangeSeatsResource =
 -- | Update a subscription\'s user license settings.
 --
 -- /See:/ 'subscriptionsChangeSeats' smart constructor.
-data SubscriptionsChangeSeats = SubscriptionsChangeSeats'
+data SubscriptionsChangeSeats =
+  SubscriptionsChangeSeats'
     { _scsPayload        :: !Seats
     , _scsCustomerId     :: !Text
     , _scsSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionsChangeSeats' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ subscriptionsChangeSeats
     -> Text -- ^ 'scsSubscriptionId'
     -> SubscriptionsChangeSeats
 subscriptionsChangeSeats pScsPayload_ pScsCustomerId_ pScsSubscriptionId_ =
-    SubscriptionsChangeSeats'
+  SubscriptionsChangeSeats'
     { _scsPayload = pScsPayload_
     , _scsCustomerId = pScsCustomerId_
     , _scsSubscriptionId = pScsSubscriptionId_

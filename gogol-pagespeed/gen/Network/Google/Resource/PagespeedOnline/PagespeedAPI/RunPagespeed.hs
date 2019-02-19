@@ -70,14 +70,16 @@ type PagespeedAPIRunPagespeedResource =
 -- other information.
 --
 -- /See:/ 'pagespeedAPIRunPagespeed' smart constructor.
-data PagespeedAPIRunPagespeed = PagespeedAPIRunPagespeed'
+data PagespeedAPIRunPagespeed =
+  PagespeedAPIRunPagespeed'
     { _parpUtmCampaign :: !(Maybe Text)
     , _parpLocale      :: !(Maybe Text)
     , _parpCategory    :: !(Maybe [PagespeedAPIRunPagespeedCategory])
     , _parpURL         :: !Text
     , _parpStrategy    :: !(Maybe PagespeedAPIRunPagespeedStrategy)
     , _parpUtmSource   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PagespeedAPIRunPagespeed' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ pagespeedAPIRunPagespeed
     :: Text -- ^ 'parpURL'
     -> PagespeedAPIRunPagespeed
 pagespeedAPIRunPagespeed pParpURL_ =
-    PagespeedAPIRunPagespeed'
+  PagespeedAPIRunPagespeed'
     { _parpUtmCampaign = Nothing
     , _parpLocale = Nothing
     , _parpCategory = Nothing

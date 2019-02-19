@@ -65,7 +65,8 @@ type EncodedFullHashesGetResource =
 -- |
 --
 -- /See:/ 'encodedFullHashesGet' smart constructor.
-data EncodedFullHashesGet = EncodedFullHashesGet'
+data EncodedFullHashesGet =
+  EncodedFullHashesGet'
     { _efhgClientId       :: !(Maybe Text)
     , _efhgXgafv          :: !(Maybe Xgafv)
     , _efhgUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data EncodedFullHashesGet = EncodedFullHashesGet'
     , _efhgUploadType     :: !(Maybe Text)
     , _efhgClientVersion  :: !(Maybe Text)
     , _efhgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EncodedFullHashesGet' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ encodedFullHashesGet
     :: ByteString -- ^ 'efhgEncodedRequest'
     -> EncodedFullHashesGet
 encodedFullHashesGet pEfhgEncodedRequest_ =
-    EncodedFullHashesGet'
+  EncodedFullHashesGet'
     { _efhgClientId = Nothing
     , _efhgXgafv = Nothing
     , _efhgUploadProtocol = Nothing

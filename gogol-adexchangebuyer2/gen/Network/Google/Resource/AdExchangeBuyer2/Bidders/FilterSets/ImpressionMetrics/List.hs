@@ -65,7 +65,8 @@ type BiddersFilterSetsImpressionMetricsListResource =
 -- | Lists all metrics that are measured in terms of number of impressions.
 --
 -- /See:/ 'biddersFilterSetsImpressionMetricsList' smart constructor.
-data BiddersFilterSetsImpressionMetricsList = BiddersFilterSetsImpressionMetricsList'
+data BiddersFilterSetsImpressionMetricsList =
+  BiddersFilterSetsImpressionMetricsList'
     { _bfsimlXgafv          :: !(Maybe Xgafv)
     , _bfsimlUploadProtocol :: !(Maybe Text)
     , _bfsimlFilterSetName  :: !Text
@@ -74,7 +75,8 @@ data BiddersFilterSetsImpressionMetricsList = BiddersFilterSetsImpressionMetrics
     , _bfsimlPageToken      :: !(Maybe Text)
     , _bfsimlPageSize       :: !(Maybe (Textual Int32))
     , _bfsimlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BiddersFilterSetsImpressionMetricsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ biddersFilterSetsImpressionMetricsList
     :: Text -- ^ 'bfsimlFilterSetName'
     -> BiddersFilterSetsImpressionMetricsList
 biddersFilterSetsImpressionMetricsList pBfsimlFilterSetName_ =
-    BiddersFilterSetsImpressionMetricsList'
+  BiddersFilterSetsImpressionMetricsList'
     { _bfsimlXgafv = Nothing
     , _bfsimlUploadProtocol = Nothing
     , _bfsimlFilterSetName = pBfsimlFilterSetName_
@@ -169,7 +171,8 @@ bfsimlCallback
       (\ s a -> s{_bfsimlCallback = a})
 
 instance GoogleRequest
-         BiddersFilterSetsImpressionMetricsList where
+           BiddersFilterSetsImpressionMetricsList
+         where
         type Rs BiddersFilterSetsImpressionMetricsList =
              ListImpressionMetricsResponse
         type Scopes BiddersFilterSetsImpressionMetricsList =

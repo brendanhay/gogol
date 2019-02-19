@@ -68,10 +68,12 @@ type UsersDataSourcesCreateResource =
 -- when read by any other developer reading public data types.
 --
 -- /See:/ 'usersDataSourcesCreate' smart constructor.
-data UsersDataSourcesCreate = UsersDataSourcesCreate'
+data UsersDataSourcesCreate =
+  UsersDataSourcesCreate'
     { _udscPayload :: !DataSource
     , _udscUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDataSourcesCreate' with the minimum fields required to make a request.
 --
@@ -85,10 +87,8 @@ usersDataSourcesCreate
     -> Text -- ^ 'udscUserId'
     -> UsersDataSourcesCreate
 usersDataSourcesCreate pUdscPayload_ pUdscUserId_ =
-    UsersDataSourcesCreate'
-    { _udscPayload = pUdscPayload_
-    , _udscUserId = pUdscUserId_
-    }
+  UsersDataSourcesCreate'
+    {_udscPayload = pUdscPayload_, _udscUserId = pUdscUserId_}
 
 -- | Multipart request metadata.
 udscPayload :: Lens' UsersDataSourcesCreate DataSource

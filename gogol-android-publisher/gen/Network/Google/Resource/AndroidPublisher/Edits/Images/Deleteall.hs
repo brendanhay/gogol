@@ -60,12 +60,14 @@ type EditsImagesDeleteallResource =
 -- | Deletes all images for the specified language and image type.
 --
 -- /See:/ 'editsImagesDeleteall' smart constructor.
-data EditsImagesDeleteall = EditsImagesDeleteall'
+data EditsImagesDeleteall =
+  EditsImagesDeleteall'
     { _ediPackageName :: !Text
     , _ediImageType   :: !EditsImagesDeleteallImageType
     , _ediLanguage    :: !Text
     , _ediEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsImagesDeleteall' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ editsImagesDeleteall
     -> Text -- ^ 'ediEditId'
     -> EditsImagesDeleteall
 editsImagesDeleteall pEdiPackageName_ pEdiImageType_ pEdiLanguage_ pEdiEditId_ =
-    EditsImagesDeleteall'
+  EditsImagesDeleteall'
     { _ediPackageName = pEdiPackageName_
     , _ediImageType = pEdiImageType_
     , _ediLanguage = pEdiLanguage_

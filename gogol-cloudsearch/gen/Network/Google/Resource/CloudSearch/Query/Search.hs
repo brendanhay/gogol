@@ -68,14 +68,16 @@ type QuerySearchResource =
 -- that you have indexed from a third party.
 --
 -- /See:/ 'querySearch' smart constructor.
-data QuerySearch = QuerySearch'
+data QuerySearch =
+  QuerySearch'
     { _qXgafv          :: !(Maybe Xgafv)
     , _qUploadProtocol :: !(Maybe Text)
     , _qAccessToken    :: !(Maybe Text)
     , _qUploadType     :: !(Maybe Text)
     , _qPayload        :: !SearchRequest
     , _qCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuerySearch' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ querySearch
     :: SearchRequest -- ^ 'qPayload'
     -> QuerySearch
 querySearch pQPayload_ =
-    QuerySearch'
+  QuerySearch'
     { _qXgafv = Nothing
     , _qUploadProtocol = Nothing
     , _qAccessToken = Nothing

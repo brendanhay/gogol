@@ -64,13 +64,15 @@ type ManagementProFileUserLinksListResource =
 -- | Lists profile-user links for a given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksList' smart constructor.
-data ManagementProFileUserLinksList = ManagementProFileUserLinksList'
+data ManagementProFileUserLinksList =
+  ManagementProFileUserLinksList'
     { _mpfullWebPropertyId :: !Text
     , _mpfullProFileId     :: !Text
     , _mpfullAccountId     :: !Text
     , _mpfullStartIndex    :: !(Maybe (Textual Int32))
     , _mpfullMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementProFileUserLinksList' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ managementProFileUserLinksList
     -> Text -- ^ 'mpfullAccountId'
     -> ManagementProFileUserLinksList
 managementProFileUserLinksList pMpfullWebPropertyId_ pMpfullProFileId_ pMpfullAccountId_ =
-    ManagementProFileUserLinksList'
+  ManagementProFileUserLinksList'
     { _mpfullWebPropertyId = pMpfullWebPropertyId_
     , _mpfullProFileId = pMpfullProFileId_
     , _mpfullAccountId = pMpfullAccountId_

@@ -71,7 +71,8 @@ type BillingAccountsSinksPatchResource =
 -- unique_writer_identity field.
 --
 -- /See:/ 'billingAccountsSinksPatch' smart constructor.
-data BillingAccountsSinksPatch = BillingAccountsSinksPatch'
+data BillingAccountsSinksPatch =
+  BillingAccountsSinksPatch'
     { _baspXgafv                :: !(Maybe Xgafv)
     , _baspUniqueWriterIdentity :: !(Maybe Bool)
     , _baspUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,8 @@ data BillingAccountsSinksPatch = BillingAccountsSinksPatch'
     , _baspPayload              :: !LogSink
     , _baspSinkName             :: !Text
     , _baspCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsSinksPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ billingAccountsSinksPatch
     -> Text -- ^ 'baspSinkName'
     -> BillingAccountsSinksPatch
 billingAccountsSinksPatch pBaspPayload_ pBaspSinkName_ =
-    BillingAccountsSinksPatch'
+  BillingAccountsSinksPatch'
     { _baspXgafv = Nothing
     , _baspUniqueWriterIdentity = Nothing
     , _baspUploadProtocol = Nothing

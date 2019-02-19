@@ -55,10 +55,12 @@ type SchemasGetResource =
 -- | Retrieve schema
 --
 -- /See:/ 'schemasGet' smart constructor.
-data SchemasGet = SchemasGet'
+data SchemasGet =
+  SchemasGet'
     { _sgCustomerId :: !Text
     , _sgSchemaKey  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SchemasGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ schemasGet
     -> Text -- ^ 'sgSchemaKey'
     -> SchemasGet
 schemasGet pSgCustomerId_ pSgSchemaKey_ =
-    SchemasGet'
-    { _sgCustomerId = pSgCustomerId_
-    , _sgSchemaKey = pSgSchemaKey_
-    }
+  SchemasGet' {_sgCustomerId = pSgCustomerId_, _sgSchemaKey = pSgSchemaKey_}
 
 -- | Immutable ID of the G Suite account
 sgCustomerId :: Lens' SchemasGet Text

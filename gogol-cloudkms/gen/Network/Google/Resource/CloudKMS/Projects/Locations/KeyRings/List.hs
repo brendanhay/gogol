@@ -65,7 +65,8 @@ type ProjectsLocationsKeyRingsListResource =
 -- | Lists KeyRings.
 --
 -- /See:/ 'projectsLocationsKeyRingsList' smart constructor.
-data ProjectsLocationsKeyRingsList = ProjectsLocationsKeyRingsList'
+data ProjectsLocationsKeyRingsList =
+  ProjectsLocationsKeyRingsList'
     { _plkrlParent         :: !Text
     , _plkrlXgafv          :: !(Maybe Xgafv)
     , _plkrlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsKeyRingsList = ProjectsLocationsKeyRingsList'
     , _plkrlPageToken      :: !(Maybe Text)
     , _plkrlPageSize       :: !(Maybe (Textual Int32))
     , _plkrlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsKeyRingsList
     :: Text -- ^ 'plkrlParent'
     -> ProjectsLocationsKeyRingsList
 projectsLocationsKeyRingsList pPlkrlParent_ =
-    ProjectsLocationsKeyRingsList'
+  ProjectsLocationsKeyRingsList'
     { _plkrlParent = pPlkrlParent_
     , _plkrlXgafv = Nothing
     , _plkrlUploadProtocol = Nothing

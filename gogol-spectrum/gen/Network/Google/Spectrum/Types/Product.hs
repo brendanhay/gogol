@@ -23,9 +23,11 @@ import           Network.Google.Spectrum.Types.Sum
 -- | A region is represented using the polygonal shape.
 --
 -- /See:/ 'geoLocationPolygon' smart constructor.
-newtype GeoLocationPolygon = GeoLocationPolygon'
+newtype GeoLocationPolygon =
+  GeoLocationPolygon'
     { _glpExterior :: Maybe [GeoLocationPoint]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GeoLocationPolygon' with the minimum fields required to make a request.
 --
@@ -34,10 +36,7 @@ newtype GeoLocationPolygon = GeoLocationPolygon'
 -- * 'glpExterior'
 geoLocationPolygon
     :: GeoLocationPolygon
-geoLocationPolygon =
-    GeoLocationPolygon'
-    { _glpExterior = Nothing
-    }
+geoLocationPolygon = GeoLocationPolygon' {_glpExterior = Nothing}
 
 -- | When the geolocation describes a region, the exterior field refers to a
 -- list of latitude\/longitude points that represent the vertices of a
@@ -72,10 +71,12 @@ instance ToJSON GeoLocationPolygon where
 -- | A single geolocation on the globe.
 --
 -- /See:/ 'geoLocationPoint' smart constructor.
-data GeoLocationPoint = GeoLocationPoint'
+data GeoLocationPoint =
+  GeoLocationPoint'
     { _glpLatitude  :: !(Maybe (Textual Double))
     , _glpLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GeoLocationPoint' with the minimum fields required to make a request.
 --
@@ -87,10 +88,7 @@ data GeoLocationPoint = GeoLocationPoint'
 geoLocationPoint
     :: GeoLocationPoint
 geoLocationPoint =
-    GeoLocationPoint'
-    { _glpLatitude = Nothing
-    , _glpLongitude = Nothing
-    }
+  GeoLocationPoint' {_glpLatitude = Nothing, _glpLongitude = Nothing}
 
 -- | A required floating-point number that expresses the latitude in degrees
 -- using the WGS84 datum. For details on this encoding, see the National
@@ -126,13 +124,15 @@ instance ToJSON GeoLocationPoint where
 -- the requesting device.
 --
 -- /See:/ 'pawsInitResponse' smart constructor.
-data PawsInitResponse = PawsInitResponse'
+data PawsInitResponse =
+  PawsInitResponse'
     { _pirKind           :: !Text
     , _pirVersion        :: !(Maybe Text)
     , _pirRulesetInfo    :: !(Maybe RulesetInfo)
     , _pirType           :: !(Maybe Text)
     , _pirDatabaseChange :: !(Maybe DBUpdateSpec)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsInitResponse' with the minimum fields required to make a request.
 --
@@ -150,7 +150,7 @@ data PawsInitResponse = PawsInitResponse'
 pawsInitResponse
     :: PawsInitResponse
 pawsInitResponse =
-    PawsInitResponse'
+  PawsInitResponse'
     { _pirKind = "spectrum#pawsInitResponse"
     , _pirVersion = Nothing
     , _pirRulesetInfo = Nothing
@@ -218,12 +218,14 @@ instance ToJSON PawsInitResponse where
 -- request and is otherwise empty.
 --
 -- /See:/ 'pawsRegisterResponse' smart constructor.
-data PawsRegisterResponse = PawsRegisterResponse'
+data PawsRegisterResponse =
+  PawsRegisterResponse'
     { _prrKind           :: !Text
     , _prrVersion        :: !(Maybe Text)
     , _prrType           :: !(Maybe Text)
     , _prrDatabaseChange :: !(Maybe DBUpdateSpec)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsRegisterResponse' with the minimum fields required to make a request.
 --
@@ -239,7 +241,7 @@ data PawsRegisterResponse = PawsRegisterResponse'
 pawsRegisterResponse
     :: PawsRegisterResponse
 pawsRegisterResponse =
-    PawsRegisterResponse'
+  PawsRegisterResponse'
     { _prrKind = "spectrum#pawsRegisterResponse"
     , _prrVersion = Nothing
     , _prrType = Nothing
@@ -294,13 +296,15 @@ instance ToJSON PawsRegisterResponse where
 -- of the Device and parameters required by the regulatory domain.
 --
 -- /See:/ 'pawsNotifySpectrumUseRequest' smart constructor.
-data PawsNotifySpectrumUseRequest = PawsNotifySpectrumUseRequest'
+data PawsNotifySpectrumUseRequest =
+  PawsNotifySpectrumUseRequest'
     { _pnsurSpectra    :: !(Maybe [SpectrumMessage])
     , _pnsurLocation   :: !(Maybe GeoLocation)
     , _pnsurVersion    :: !(Maybe Text)
     , _pnsurType       :: !(Maybe Text)
     , _pnsurDeviceDesc :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsNotifySpectrumUseRequest' with the minimum fields required to make a request.
 --
@@ -318,7 +322,7 @@ data PawsNotifySpectrumUseRequest = PawsNotifySpectrumUseRequest'
 pawsNotifySpectrumUseRequest
     :: PawsNotifySpectrumUseRequest
 pawsNotifySpectrumUseRequest =
-    PawsNotifySpectrumUseRequest'
+  PawsNotifySpectrumUseRequest'
     { _pnsurSpectra = Nothing
     , _pnsurLocation = Nothing
     , _pnsurVersion = Nothing
@@ -397,13 +401,15 @@ instance ToJSON PawsNotifySpectrumUseRequest where
 -- Address fields - tel: Telephone numbers - email: Email addresses
 --
 -- /See:/ 'vcard' smart constructor.
-data Vcard = Vcard'
+data Vcard =
+  Vcard'
     { _vEmail :: !(Maybe VcardTypedText)
     , _vAdr   :: !(Maybe VcardAddress)
     , _vOrg   :: !(Maybe VcardTypedText)
     , _vTel   :: !(Maybe VcardTelephone)
     , _vFn    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Vcard' with the minimum fields required to make a request.
 --
@@ -421,7 +427,7 @@ data Vcard = Vcard'
 vcard
     :: Vcard
 vcard =
-    Vcard'
+  Vcard'
     { _vEmail = Nothing
     , _vAdr = Nothing
     , _vOrg = Nothing
@@ -470,9 +476,11 @@ instance ToJSON Vcard where
 -- upcoming change to the database URI.
 --
 -- /See:/ 'dbUpdateSpec' smart constructor.
-newtype DBUpdateSpec = DBUpdateSpec'
+newtype DBUpdateSpec =
+  DBUpdateSpec'
     { _dusDatabases :: Maybe [DatabaseSpec]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DBUpdateSpec' with the minimum fields required to make a request.
 --
@@ -481,10 +489,7 @@ newtype DBUpdateSpec = DBUpdateSpec'
 -- * 'dusDatabases'
 dbUpdateSpec
     :: DBUpdateSpec
-dbUpdateSpec =
-    DBUpdateSpec'
-    { _dusDatabases = Nothing
-    }
+dbUpdateSpec = DBUpdateSpec' {_dusDatabases = Nothing}
 
 -- | A required list of one or more databases. A device should update its
 -- preconfigured list of databases to replace (only) the database that
@@ -509,7 +514,8 @@ instance ToJSON DBUpdateSpec where
 -- | The request message for a batch available spectrum query protocol.
 --
 -- /See:/ 'pawsGetSpectrumBatchRequest' smart constructor.
-data PawsGetSpectrumBatchRequest = PawsGetSpectrumBatchRequest'
+data PawsGetSpectrumBatchRequest =
+  PawsGetSpectrumBatchRequest'
     { _pgsbrAntenna          :: !(Maybe AntennaCharacteristics)
     , _pgsbrMasterDeviceDesc :: !(Maybe DeviceDescriptor)
     , _pgsbrOwner            :: !(Maybe DeviceOwner)
@@ -519,7 +525,8 @@ data PawsGetSpectrumBatchRequest = PawsGetSpectrumBatchRequest'
     , _pgsbrLocations        :: !(Maybe [GeoLocation])
     , _pgsbrCapabilities     :: !(Maybe DeviceCapabilities)
     , _pgsbrDeviceDesc       :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatchRequest' with the minimum fields required to make a request.
 --
@@ -545,7 +552,7 @@ data PawsGetSpectrumBatchRequest = PawsGetSpectrumBatchRequest'
 pawsGetSpectrumBatchRequest
     :: PawsGetSpectrumBatchRequest
 pawsGetSpectrumBatchRequest =
-    PawsGetSpectrumBatchRequest'
+  PawsGetSpectrumBatchRequest'
     { _pgsbrAntenna = Nothing
     , _pgsbrMasterDeviceDesc = Nothing
     , _pgsbrOwner = Nothing
@@ -678,10 +685,12 @@ instance ToJSON PawsGetSpectrumBatchRequest where
 -- | The schedule of spectrum profiles available at a particular geolocation.
 --
 -- /See:/ 'geoSpectrumSchedule' smart constructor.
-data GeoSpectrumSchedule = GeoSpectrumSchedule'
+data GeoSpectrumSchedule =
+  GeoSpectrumSchedule'
     { _gssLocation          :: !(Maybe GeoLocation)
     , _gssSpectrumSchedules :: !(Maybe [SpectrumSchedule])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GeoSpectrumSchedule' with the minimum fields required to make a request.
 --
@@ -693,10 +702,7 @@ data GeoSpectrumSchedule = GeoSpectrumSchedule'
 geoSpectrumSchedule
     :: GeoSpectrumSchedule
 geoSpectrumSchedule =
-    GeoSpectrumSchedule'
-    { _gssLocation = Nothing
-    , _gssSpectrumSchedules = Nothing
-    }
+  GeoSpectrumSchedule' {_gssLocation = Nothing, _gssSpectrumSchedules = Nothing}
 
 -- | The geolocation identifies the location at which the spectrum schedule
 -- applies. It will always be present.
@@ -733,9 +739,11 @@ instance ToJSON GeoSpectrumSchedule where
 -- | The structure used to represent an organization and an email address.
 --
 -- /See:/ 'vcardTypedText' smart constructor.
-newtype VcardTypedText = VcardTypedText'
+newtype VcardTypedText =
+  VcardTypedText'
     { _vttText :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VcardTypedText' with the minimum fields required to make a request.
 --
@@ -744,10 +752,7 @@ newtype VcardTypedText = VcardTypedText'
 -- * 'vttText'
 vcardTypedText
     :: VcardTypedText
-vcardTypedText =
-    VcardTypedText'
-    { _vttText = Nothing
-    }
+vcardTypedText = VcardTypedText' {_vttText = Nothing}
 
 -- | The text string associated with this item. For example, for an org
 -- field: ACME, inc. For an email field: smith\'example.com.
@@ -767,10 +772,12 @@ instance ToJSON VcardTypedText where
 -- profile to define a time period in which the profile is valid.
 --
 -- /See:/ 'spectrumSchedule' smart constructor.
-data SpectrumSchedule = SpectrumSchedule'
+data SpectrumSchedule =
+  SpectrumSchedule'
     { _ssSpectra   :: !(Maybe [SpectrumMessage])
     , _ssEventTime :: !(Maybe EventTime)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpectrumSchedule' with the minimum fields required to make a request.
 --
@@ -782,10 +789,7 @@ data SpectrumSchedule = SpectrumSchedule'
 spectrumSchedule
     :: SpectrumSchedule
 spectrumSchedule =
-    SpectrumSchedule'
-    { _ssSpectra = Nothing
-    , _ssEventTime = Nothing
-    }
+  SpectrumSchedule' {_ssSpectra = Nothing, _ssEventTime = Nothing}
 
 -- | A list of spectrum messages representing the usable profile. It will
 -- always be present, but may be empty when there is no available spectrum.
@@ -818,9 +822,11 @@ instance ToJSON SpectrumSchedule where
 -- | The structure used to represent a telephone number.
 --
 -- /See:/ 'vcardTelephone' smart constructor.
-newtype VcardTelephone = VcardTelephone'
+newtype VcardTelephone =
+  VcardTelephone'
     { _vtURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VcardTelephone' with the minimum fields required to make a request.
 --
@@ -829,10 +835,7 @@ newtype VcardTelephone = VcardTelephone'
 -- * 'vtURI'
 vcardTelephone
     :: VcardTelephone
-vcardTelephone =
-    VcardTelephone'
-    { _vtURI = Nothing
-    }
+vcardTelephone = VcardTelephone' {_vtURI = Nothing}
 
 -- | A nested telephone URI of the form: tel:+1-123-456-7890.
 vtURI :: Lens' VcardTelephone (Maybe Text)
@@ -857,10 +860,12 @@ instance ToJSON VcardTelephone where
 -- maximum lengths for each field.
 --
 -- /See:/ 'deviceOwner' smart constructor.
-data DeviceOwner = DeviceOwner'
+data DeviceOwner =
+  DeviceOwner'
     { _doOperator :: !(Maybe Vcard)
     , _doOwner    :: !(Maybe Vcard)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceOwner' with the minimum fields required to make a request.
 --
@@ -871,11 +876,7 @@ data DeviceOwner = DeviceOwner'
 -- * 'doOwner'
 deviceOwner
     :: DeviceOwner
-deviceOwner =
-    DeviceOwner'
-    { _doOperator = Nothing
-    , _doOwner = Nothing
-    }
+deviceOwner = DeviceOwner' {_doOperator = Nothing, _doOwner = Nothing}
 
 -- | The vCard contact information for the device operator is optional, but
 -- may be required by specific regulatory domains.
@@ -908,10 +909,12 @@ instance ToJSON DeviceOwner where
 -- must be expressed using UTC.
 --
 -- /See:/ 'eventTime' smart constructor.
-data EventTime = EventTime'
+data EventTime =
+  EventTime'
     { _etStartTime :: !(Maybe Text)
     , _etStopTime  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventTime' with the minimum fields required to make a request.
 --
@@ -922,11 +925,7 @@ data EventTime = EventTime'
 -- * 'etStopTime'
 eventTime
     :: EventTime
-eventTime =
-    EventTime'
-    { _etStartTime = Nothing
-    , _etStopTime = Nothing
-    }
+eventTime = EventTime' {_etStartTime = Nothing, _etStopTime = Nothing}
 
 -- | The inclusive start of the event. It will be present.
 etStartTime :: Lens' EventTime (Maybe Text)
@@ -956,7 +955,8 @@ instance ToJSON EventTime where
 -- include the device\'s geolocation.
 --
 -- /See:/ 'pawsGetSpectrumRequest' smart constructor.
-data PawsGetSpectrumRequest = PawsGetSpectrumRequest'
+data PawsGetSpectrumRequest =
+  PawsGetSpectrumRequest'
     { _pgsrAntenna          :: !(Maybe AntennaCharacteristics)
     , _pgsrMasterDeviceDesc :: !(Maybe DeviceDescriptor)
     , _pgsrLocation         :: !(Maybe GeoLocation)
@@ -966,7 +966,8 @@ data PawsGetSpectrumRequest = PawsGetSpectrumRequest'
     , _pgsrType             :: !(Maybe Text)
     , _pgsrCapabilities     :: !(Maybe DeviceCapabilities)
     , _pgsrDeviceDesc       :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsGetSpectrumRequest' with the minimum fields required to make a request.
 --
@@ -992,7 +993,7 @@ data PawsGetSpectrumRequest = PawsGetSpectrumRequest'
 pawsGetSpectrumRequest
     :: PawsGetSpectrumRequest
 pawsGetSpectrumRequest =
-    PawsGetSpectrumRequest'
+  PawsGetSpectrumRequest'
     { _pgsrAntenna = Nothing
     , _pgsrMasterDeviceDesc = Nothing
     , _pgsrLocation = Nothing
@@ -1120,11 +1121,13 @@ instance ToJSON PawsGetSpectrumRequest where
 -- domain.
 --
 -- /See:/ 'antennaCharacteristics' smart constructor.
-data AntennaCharacteristics = AntennaCharacteristics'
+data AntennaCharacteristics =
+  AntennaCharacteristics'
     { _acHeight            :: !(Maybe (Textual Double))
     , _acHeightType        :: !(Maybe Text)
     , _acHeightUncertainty :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AntennaCharacteristics' with the minimum fields required to make a request.
 --
@@ -1138,7 +1141,7 @@ data AntennaCharacteristics = AntennaCharacteristics'
 antennaCharacteristics
     :: AntennaCharacteristics
 antennaCharacteristics =
-    AntennaCharacteristics'
+  AntennaCharacteristics'
     { _acHeight = Nothing
     , _acHeightType = Nothing
     , _acHeightUncertainty = Nothing
@@ -1186,13 +1189,15 @@ instance ToJSON AntennaCharacteristics where
 -- | The device validation response message.
 --
 -- /See:/ 'pawsVerifyDeviceResponse' smart constructor.
-data PawsVerifyDeviceResponse = PawsVerifyDeviceResponse'
+data PawsVerifyDeviceResponse =
+  PawsVerifyDeviceResponse'
     { _pvdrDeviceValidities :: !(Maybe [DeviceValidity])
     , _pvdrKind             :: !Text
     , _pvdrVersion          :: !(Maybe Text)
     , _pvdrType             :: !(Maybe Text)
     , _pvdrDatabaseChange   :: !(Maybe DBUpdateSpec)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsVerifyDeviceResponse' with the minimum fields required to make a request.
 --
@@ -1210,7 +1215,7 @@ data PawsVerifyDeviceResponse = PawsVerifyDeviceResponse'
 pawsVerifyDeviceResponse
     :: PawsVerifyDeviceResponse
 pawsVerifyDeviceResponse =
-    PawsVerifyDeviceResponse'
+  PawsVerifyDeviceResponse'
     { _pvdrDeviceValidities = Nothing
     , _pvdrKind = "spectrum#pawsVerifyDeviceResponse"
     , _pvdrVersion = Nothing
@@ -1279,14 +1284,16 @@ instance ToJSON PawsVerifyDeviceResponse where
 -- | The structure used to represent a street address.
 --
 -- /See:/ 'vcardAddress' smart constructor.
-data VcardAddress = VcardAddress'
+data VcardAddress =
+  VcardAddress'
     { _vaPobox    :: !(Maybe Text)
     , _vaCountry  :: !(Maybe Text)
     , _vaStreet   :: !(Maybe Text)
     , _vaLocality :: !(Maybe Text)
     , _vaCode     :: !(Maybe Text)
     , _vaRegion   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VcardAddress' with the minimum fields required to make a request.
 --
@@ -1306,7 +1313,7 @@ data VcardAddress = VcardAddress'
 vcardAddress
     :: VcardAddress
 vcardAddress =
-    VcardAddress'
+  VcardAddress'
     { _vaPobox = Nothing
     , _vaCountry = Nothing
     , _vaStreet = Nothing
@@ -1368,7 +1375,8 @@ instance ToJSON VcardAddress where
 -- schedule of available spectrum for the device at multiple locations.
 --
 -- /See:/ 'pawsGetSpectrumBatchResponse' smart constructor.
-data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse'
+data PawsGetSpectrumBatchResponse =
+  PawsGetSpectrumBatchResponse'
     { _pNeedsSpectrumReport  :: !(Maybe Bool)
     , _pKind                 :: !Text
     , _pGeoSpectrumSchedules :: !(Maybe [GeoSpectrumSchedule])
@@ -1380,7 +1388,8 @@ data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse'
     , _pTimestamp            :: !(Maybe Text)
     , _pDeviceDesc           :: !(Maybe DeviceDescriptor)
     , _pMaxTotalBwHz         :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatchResponse' with the minimum fields required to make a request.
 --
@@ -1410,7 +1419,7 @@ data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse'
 pawsGetSpectrumBatchResponse
     :: PawsGetSpectrumBatchResponse
 pawsGetSpectrumBatchResponse =
-    PawsGetSpectrumBatchResponse'
+  PawsGetSpectrumBatchResponse'
     { _pNeedsSpectrumReport = Nothing
     , _pKind = "spectrum#pawsGetSpectrumBatchResponse"
     , _pGeoSpectrumSchedules = Nothing
@@ -1566,11 +1575,13 @@ instance ToJSON PawsGetSpectrumBatchResponse where
 -- valid to operate in the regulatory domain.
 --
 -- /See:/ 'deviceValidity' smart constructor.
-data DeviceValidity = DeviceValidity'
+data DeviceValidity =
+  DeviceValidity'
     { _dvIsValid    :: !(Maybe Bool)
     , _dvReason     :: !(Maybe Text)
     , _dvDeviceDesc :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceValidity' with the minimum fields required to make a request.
 --
@@ -1584,11 +1595,8 @@ data DeviceValidity = DeviceValidity'
 deviceValidity
     :: DeviceValidity
 deviceValidity =
-    DeviceValidity'
-    { _dvIsValid = Nothing
-    , _dvReason = Nothing
-    , _dvDeviceDesc = Nothing
-    }
+  DeviceValidity'
+    {_dvIsValid = Nothing, _dvReason = Nothing, _dvDeviceDesc = Nothing}
 
 -- | The validity status: true if the device is valid for operation, false
 -- otherwise. It will always be present.
@@ -1627,12 +1635,14 @@ instance ToJSON DeviceValidity where
 -- | A \"point\" with uncertainty is represented using the Ellipse shape.
 --
 -- /See:/ 'geoLocationEllipse' smart constructor.
-data GeoLocationEllipse = GeoLocationEllipse'
+data GeoLocationEllipse =
+  GeoLocationEllipse'
     { _gleSemiMajorAxis :: !(Maybe (Textual Double))
     , _gleCenter        :: !(Maybe GeoLocationPoint)
     , _gleOrientation   :: !(Maybe (Textual Double))
     , _gleSemiMinorAxis :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GeoLocationEllipse' with the minimum fields required to make a request.
 --
@@ -1648,7 +1658,7 @@ data GeoLocationEllipse = GeoLocationEllipse'
 geoLocationEllipse
     :: GeoLocationEllipse
 geoLocationEllipse =
-    GeoLocationEllipse'
+  GeoLocationEllipse'
     { _gleSemiMajorAxis = Nothing
     , _gleCenter = Nothing
     , _gleOrientation = Nothing
@@ -1713,12 +1723,14 @@ instance ToJSON GeoLocationEllipse where
 -- communicated using the initialization and available-spectrum processes.
 --
 -- /See:/ 'rulesetInfo' smart constructor.
-data RulesetInfo = RulesetInfo'
+data RulesetInfo =
+  RulesetInfo'
     { _riRulesetIds        :: !(Maybe [Text])
     , _riMaxPollingSecs    :: !(Maybe (Textual Int32))
     , _riMaxLocationChange :: !(Maybe (Textual Double))
     , _riAuthority         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RulesetInfo' with the minimum fields required to make a request.
 --
@@ -1734,7 +1746,7 @@ data RulesetInfo = RulesetInfo'
 rulesetInfo
     :: RulesetInfo
 rulesetInfo =
-    RulesetInfo'
+  RulesetInfo'
     { _riRulesetIds = Nothing
     , _riMaxPollingSecs = Nothing
     , _riMaxLocationChange = Nothing
@@ -1816,14 +1828,16 @@ instance ToJSON RulesetInfo where
 -- parameters.
 --
 -- /See:/ 'pawsRegisterRequest' smart constructor.
-data PawsRegisterRequest = PawsRegisterRequest'
+data PawsRegisterRequest =
+  PawsRegisterRequest'
     { _pawAntenna     :: !(Maybe AntennaCharacteristics)
     , _pawLocation    :: !(Maybe GeoLocation)
     , _pawDeviceOwner :: !(Maybe DeviceOwner)
     , _pawVersion     :: !(Maybe Text)
     , _pawType        :: !(Maybe Text)
     , _pawDeviceDesc  :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsRegisterRequest' with the minimum fields required to make a request.
 --
@@ -1843,7 +1857,7 @@ data PawsRegisterRequest = PawsRegisterRequest'
 pawsRegisterRequest
     :: PawsRegisterRequest
 pawsRegisterRequest =
-    PawsRegisterRequest'
+  PawsRegisterRequest'
     { _pawAntenna = Nothing
     , _pawLocation = Nothing
     , _pawDeviceOwner = Nothing
@@ -1909,11 +1923,13 @@ instance ToJSON PawsRegisterRequest where
 -- | An empty response to the notification.
 --
 -- /See:/ 'pawsNotifySpectrumUseResponse' smart constructor.
-data PawsNotifySpectrumUseResponse = PawsNotifySpectrumUseResponse'
+data PawsNotifySpectrumUseResponse =
+  PawsNotifySpectrumUseResponse'
     { _pnsurnKind    :: !Text
     , _pnsurnVersion :: !(Maybe Text)
     , _pnsurnType    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsNotifySpectrumUseResponse' with the minimum fields required to make a request.
 --
@@ -1927,7 +1943,7 @@ data PawsNotifySpectrumUseResponse = PawsNotifySpectrumUseResponse'
 pawsNotifySpectrumUseResponse
     :: PawsNotifySpectrumUseResponse
 pawsNotifySpectrumUseResponse =
-    PawsNotifySpectrumUseResponse'
+  PawsNotifySpectrumUseResponse'
     { _pnsurnKind = "spectrum#pawsNotifySpectrumUseResponse"
     , _pnsurnVersion = Nothing
     , _pnsurnType = Nothing
@@ -1972,10 +1988,12 @@ instance ToJSON PawsNotifySpectrumUseResponse where
 -- | This message contains the name and URI of a database.
 --
 -- /See:/ 'databaseSpec' smart constructor.
-data DatabaseSpec = DatabaseSpec'
+data DatabaseSpec =
+  DatabaseSpec'
     { _dsURI  :: !(Maybe Text)
     , _dsName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DatabaseSpec' with the minimum fields required to make a request.
 --
@@ -1986,11 +2004,7 @@ data DatabaseSpec = DatabaseSpec'
 -- * 'dsName'
 databaseSpec
     :: DatabaseSpec
-databaseSpec =
-    DatabaseSpec'
-    { _dsURI = Nothing
-    , _dsName = Nothing
-    }
+databaseSpec = DatabaseSpec' {_dsURI = Nothing, _dsName = Nothing}
 
 -- | The corresponding URI of the database.
 dsURI :: Lens' DatabaseSpec (Maybe Text)
@@ -2016,10 +2030,12 @@ instance ToJSON DatabaseSpec where
 -- ranges and permissible power levels for each range.
 --
 -- /See:/ 'spectrumMessage' smart constructor.
-data SpectrumMessage = SpectrumMessage'
+data SpectrumMessage =
+  SpectrumMessage'
     { _smBandwidth       :: !(Maybe (Textual Double))
     , _smFrequencyRanges :: !(Maybe [FrequencyRange])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpectrumMessage' with the minimum fields required to make a request.
 --
@@ -2031,10 +2047,7 @@ data SpectrumMessage = SpectrumMessage'
 spectrumMessage
     :: SpectrumMessage
 spectrumMessage =
-    SpectrumMessage'
-    { _smBandwidth = Nothing
-    , _smFrequencyRanges = Nothing
-    }
+  SpectrumMessage' {_smBandwidth = Nothing, _smFrequencyRanges = Nothing}
 
 -- | The bandwidth (in Hertz) for which permissible power levels are
 -- specified. For example, FCC regulation would require only one spectrum
@@ -2074,11 +2087,13 @@ instance ToJSON SpectrumMessage where
 -- | This parameter is used to specify the geolocation of the device.
 --
 -- /See:/ 'geoLocation' smart constructor.
-data GeoLocation = GeoLocation'
+data GeoLocation =
+  GeoLocation'
     { _glConfidence :: !(Maybe (Textual Int32))
     , _glPoint      :: !(Maybe GeoLocationEllipse)
     , _glRegion     :: !(Maybe GeoLocationPolygon)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GeoLocation' with the minimum fields required to make a request.
 --
@@ -2092,11 +2107,8 @@ data GeoLocation = GeoLocation'
 geoLocation
     :: GeoLocation
 geoLocation =
-    GeoLocation'
-    { _glConfidence = Nothing
-    , _glPoint = Nothing
-    , _glRegion = Nothing
-    }
+  GeoLocation'
+    {_glConfidence = Nothing, _glPoint = Nothing, _glRegion = Nothing}
 
 -- | The location confidence level, as an integer percentage, may be
 -- required, depending on the regulatory domain. When the parameter is
@@ -2142,12 +2154,14 @@ instance ToJSON GeoLocation where
 -- power level and channel identifier.
 --
 -- /See:/ 'frequencyRange' smart constructor.
-data FrequencyRange = FrequencyRange'
+data FrequencyRange =
+  FrequencyRange'
     { _frStopHz      :: !(Maybe (Textual Double))
     , _frMaxPowerDBm :: !(Maybe (Textual Double))
     , _frChannelId   :: !(Maybe Text)
     , _frStartHz     :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FrequencyRange' with the minimum fields required to make a request.
 --
@@ -2163,7 +2177,7 @@ data FrequencyRange = FrequencyRange'
 frequencyRange
     :: FrequencyRange
 frequencyRange =
-    FrequencyRange'
+  FrequencyRange'
     { _frStopHz = Nothing
     , _frMaxPowerDBm = Nothing
     , _frChannelId = Nothing
@@ -2225,7 +2239,8 @@ instance ToJSON FrequencyRange where
 -- schedule of available spectrum for the device.
 --
 -- /See:/ 'pawsGetSpectrumResponse' smart constructor.
-data PawsGetSpectrumResponse = PawsGetSpectrumResponse'
+data PawsGetSpectrumResponse =
+  PawsGetSpectrumResponse'
     { _pgsrgNeedsSpectrumReport :: !(Maybe Bool)
     , _pgsrgSpectrumSchedules   :: !(Maybe [SpectrumSchedule])
     , _pgsrgKind                :: !Text
@@ -2237,7 +2252,8 @@ data PawsGetSpectrumResponse = PawsGetSpectrumResponse'
     , _pgsrgTimestamp           :: !(Maybe Text)
     , _pgsrgDeviceDesc          :: !(Maybe DeviceDescriptor)
     , _pgsrgMaxTotalBwHz        :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsGetSpectrumResponse' with the minimum fields required to make a request.
 --
@@ -2267,7 +2283,7 @@ data PawsGetSpectrumResponse = PawsGetSpectrumResponse'
 pawsGetSpectrumResponse
     :: PawsGetSpectrumResponse
 pawsGetSpectrumResponse =
-    PawsGetSpectrumResponse'
+  PawsGetSpectrumResponse'
     { _pgsrgNeedsSpectrumReport = Nothing
     , _pgsrgSpectrumSchedules = Nothing
     , _pgsrgKind = "spectrum#pawsGetSpectrumResponse"
@@ -2422,11 +2438,13 @@ instance ToJSON PawsGetSpectrumResponse where
 -- | The device validation request message.
 --
 -- /See:/ 'pawsVerifyDeviceRequest' smart constructor.
-data PawsVerifyDeviceRequest = PawsVerifyDeviceRequest'
+data PawsVerifyDeviceRequest =
+  PawsVerifyDeviceRequest'
     { _pvdrvVersion     :: !(Maybe Text)
     , _pvdrvDeviceDescs :: !(Maybe [DeviceDescriptor])
     , _pvdrvType        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsVerifyDeviceRequest' with the minimum fields required to make a request.
 --
@@ -2440,11 +2458,8 @@ data PawsVerifyDeviceRequest = PawsVerifyDeviceRequest'
 pawsVerifyDeviceRequest
     :: PawsVerifyDeviceRequest
 pawsVerifyDeviceRequest =
-    PawsVerifyDeviceRequest'
-    { _pvdrvVersion = Nothing
-    , _pvdrvDeviceDescs = Nothing
-    , _pvdrvType = Nothing
-    }
+  PawsVerifyDeviceRequest'
+    {_pvdrvVersion = Nothing, _pvdrvDeviceDescs = Nothing, _pvdrvType = Nothing}
 
 -- | The PAWS version. Must be exactly 1.0. Required field.
 pvdrvVersion :: Lens' PawsVerifyDeviceRequest (Maybe Text)
@@ -2489,7 +2504,8 @@ instance ToJSON PawsVerifyDeviceRequest where
 -- by regulatory domains.
 --
 -- /See:/ 'deviceDescriptor' smart constructor.
-data DeviceDescriptor = DeviceDescriptor'
+data DeviceDescriptor =
+  DeviceDescriptor'
     { _ddEtsiEnDeviceEmissionsClass :: !(Maybe Text)
     , _ddRulesetIds                 :: !(Maybe [Text])
     , _ddModelId                    :: !(Maybe Text)
@@ -2500,7 +2516,8 @@ data DeviceDescriptor = DeviceDescriptor'
     , _ddFccTvbdDeviceType          :: !(Maybe Text)
     , _ddEtsiEnDeviceCategory       :: !(Maybe Text)
     , _ddSerialNumber               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceDescriptor' with the minimum fields required to make a request.
 --
@@ -2528,7 +2545,7 @@ data DeviceDescriptor = DeviceDescriptor'
 deviceDescriptor
     :: DeviceDescriptor
 deviceDescriptor =
-    DeviceDescriptor'
+  DeviceDescriptor'
     { _ddEtsiEnDeviceEmissionsClass = Nothing
     , _ddRulesetIds = Nothing
     , _ddModelId = Nothing
@@ -2661,12 +2678,14 @@ instance ToJSON DeviceDescriptor where
 -- exchange of capabilities with the database.
 --
 -- /See:/ 'pawsInitRequest' smart constructor.
-data PawsInitRequest = PawsInitRequest'
+data PawsInitRequest =
+  PawsInitRequest'
     { _piriLocation   :: !(Maybe GeoLocation)
     , _piriVersion    :: !(Maybe Text)
     , _piriType       :: !(Maybe Text)
     , _piriDeviceDesc :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsInitRequest' with the minimum fields required to make a request.
 --
@@ -2682,7 +2701,7 @@ data PawsInitRequest = PawsInitRequest'
 pawsInitRequest
     :: PawsInitRequest
 pawsInitRequest =
-    PawsInitRequest'
+  PawsInitRequest'
     { _piriLocation = Nothing
     , _piriVersion = Nothing
     , _piriType = Nothing
@@ -2737,9 +2756,11 @@ instance ToJSON PawsInitRequest where
 -- device capabilities it will ignore the parameter altogether.
 --
 -- /See:/ 'deviceCapabilities' smart constructor.
-newtype DeviceCapabilities = DeviceCapabilities'
+newtype DeviceCapabilities =
+  DeviceCapabilities'
     { _dcFrequencyRanges :: Maybe [FrequencyRange]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceCapabilities' with the minimum fields required to make a request.
 --
@@ -2748,10 +2769,7 @@ newtype DeviceCapabilities = DeviceCapabilities'
 -- * 'dcFrequencyRanges'
 deviceCapabilities
     :: DeviceCapabilities
-deviceCapabilities =
-    DeviceCapabilities'
-    { _dcFrequencyRanges = Nothing
-    }
+deviceCapabilities = DeviceCapabilities' {_dcFrequencyRanges = Nothing}
 
 -- | An optional list of frequency ranges supported by the device. Each
 -- element must contain start and stop frequencies in which the device can

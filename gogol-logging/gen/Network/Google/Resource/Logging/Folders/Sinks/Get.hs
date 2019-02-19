@@ -59,14 +59,16 @@ type FoldersSinksGetResource =
 -- | Gets a sink.
 --
 -- /See:/ 'foldersSinksGet' smart constructor.
-data FoldersSinksGet = FoldersSinksGet'
+data FoldersSinksGet =
+  FoldersSinksGet'
     { _fsgXgafv          :: !(Maybe Xgafv)
     , _fsgUploadProtocol :: !(Maybe Text)
     , _fsgAccessToken    :: !(Maybe Text)
     , _fsgUploadType     :: !(Maybe Text)
     , _fsgSinkName       :: !Text
     , _fsgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersSinksGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ foldersSinksGet
     :: Text -- ^ 'fsgSinkName'
     -> FoldersSinksGet
 foldersSinksGet pFsgSinkName_ =
-    FoldersSinksGet'
+  FoldersSinksGet'
     { _fsgXgafv = Nothing
     , _fsgUploadProtocol = Nothing
     , _fsgAccessToken = Nothing

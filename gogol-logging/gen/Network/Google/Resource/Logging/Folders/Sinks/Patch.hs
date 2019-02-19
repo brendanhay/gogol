@@ -71,7 +71,8 @@ type FoldersSinksPatchResource =
 -- unique_writer_identity field.
 --
 -- /See:/ 'foldersSinksPatch' smart constructor.
-data FoldersSinksPatch = FoldersSinksPatch'
+data FoldersSinksPatch =
+  FoldersSinksPatch'
     { _fspXgafv                :: !(Maybe Xgafv)
     , _fspUniqueWriterIdentity :: !(Maybe Bool)
     , _fspUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,8 @@ data FoldersSinksPatch = FoldersSinksPatch'
     , _fspPayload              :: !LogSink
     , _fspSinkName             :: !Text
     , _fspCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersSinksPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ foldersSinksPatch
     -> Text -- ^ 'fspSinkName'
     -> FoldersSinksPatch
 foldersSinksPatch pFspPayload_ pFspSinkName_ =
-    FoldersSinksPatch'
+  FoldersSinksPatch'
     { _fspXgafv = Nothing
     , _fspUniqueWriterIdentity = Nothing
     , _fspUploadProtocol = Nothing

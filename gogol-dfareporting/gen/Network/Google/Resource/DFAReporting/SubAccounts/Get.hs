@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsGet' request conforms to.
 type SubAccountsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -54,10 +54,12 @@ type SubAccountsGetResource =
 -- | Gets one subaccount by ID.
 --
 -- /See:/ 'subAccountsGet' smart constructor.
-data SubAccountsGet = SubAccountsGet'
+data SubAccountsGet =
+  SubAccountsGet'
     { _sagProFileId :: !(Textual Int64)
     , _sagId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubAccountsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ subAccountsGet
     -> Int64 -- ^ 'sagId'
     -> SubAccountsGet
 subAccountsGet pSagProFileId_ pSagId_ =
-    SubAccountsGet'
-    { _sagProFileId = _Coerce # pSagProFileId_
-    , _sagId = _Coerce # pSagId_
-    }
+  SubAccountsGet'
+    {_sagProFileId = _Coerce # pSagProFileId_, _sagId = _Coerce # pSagId_}
 
 -- | User profile ID associated with this request.
 sagProFileId :: Lens' SubAccountsGet Int64

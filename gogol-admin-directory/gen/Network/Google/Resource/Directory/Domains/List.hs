@@ -53,9 +53,11 @@ type DomainsListResource =
 -- | Lists the domains of the customer.
 --
 -- /See:/ 'domainsList' smart constructor.
-newtype DomainsList = DomainsList'
+newtype DomainsList =
+  DomainsList'
     { _dlCustomer :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DomainsList' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype DomainsList = DomainsList'
 domainsList
     :: Text -- ^ 'dlCustomer'
     -> DomainsList
-domainsList pDlCustomer_ =
-    DomainsList'
-    { _dlCustomer = pDlCustomer_
-    }
+domainsList pDlCustomer_ = DomainsList' {_dlCustomer = pDlCustomer_}
 
 -- | Immutable ID of the G Suite account.
 dlCustomer :: Lens' DomainsList Text

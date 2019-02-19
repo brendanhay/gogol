@@ -53,10 +53,12 @@ type TableListResource =
 -- | Retrieves a list of tables a user owns.
 --
 -- /See:/ 'tableList'' smart constructor.
-data TableList' = TableList''
+data TableList' =
+  TableList''
     { _tPageToken  :: !(Maybe Text)
     , _tMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableList'' with the minimum fields required to make a request.
 --
@@ -67,11 +69,7 @@ data TableList' = TableList''
 -- * 'tMaxResults'
 tableList'
     :: TableList'
-tableList' =
-    TableList''
-    { _tPageToken = Nothing
-    , _tMaxResults = Nothing
-    }
+tableList' = TableList'' {_tPageToken = Nothing, _tMaxResults = Nothing}
 
 -- | Continuation token specifying which result page to return.
 tPageToken :: Lens' TableList' (Maybe Text)

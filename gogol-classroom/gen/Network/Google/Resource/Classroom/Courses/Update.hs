@@ -70,7 +70,8 @@ type CoursesUpdateResource =
 -- following request errors: * CourseNotModifiable
 --
 -- /See:/ 'coursesUpdate' smart constructor.
-data CoursesUpdate = CoursesUpdate'
+data CoursesUpdate =
+  CoursesUpdate'
     { _cuXgafv          :: !(Maybe Xgafv)
     , _cuUploadProtocol :: !(Maybe Text)
     , _cuAccessToken    :: !(Maybe Text)
@@ -78,7 +79,8 @@ data CoursesUpdate = CoursesUpdate'
     , _cuPayload        :: !Course
     , _cuId             :: !Text
     , _cuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesUpdate' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ coursesUpdate
     -> Text -- ^ 'cuId'
     -> CoursesUpdate
 coursesUpdate pCuPayload_ pCuId_ =
-    CoursesUpdate'
+  CoursesUpdate'
     { _cuXgafv = Nothing
     , _cuUploadProtocol = Nothing
     , _cuAccessToken = Nothing

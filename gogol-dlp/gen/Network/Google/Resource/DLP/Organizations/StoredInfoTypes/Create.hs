@@ -68,7 +68,8 @@ type OrganizationsStoredInfoTypesCreateResource =
 -- learn more.
 --
 -- /See:/ 'organizationsStoredInfoTypesCreate' smart constructor.
-data OrganizationsStoredInfoTypesCreate = OrganizationsStoredInfoTypesCreate'
+data OrganizationsStoredInfoTypesCreate =
+  OrganizationsStoredInfoTypesCreate'
     { _ositcParent         :: !Text
     , _ositcXgafv          :: !(Maybe Xgafv)
     , _ositcUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data OrganizationsStoredInfoTypesCreate = OrganizationsStoredInfoTypesCreate'
     , _ositcUploadType     :: !(Maybe Text)
     , _ositcPayload        :: !GooglePrivacyDlpV2CreateStoredInfoTypeRequest
     , _ositcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsStoredInfoTypesCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ organizationsStoredInfoTypesCreate
     -> GooglePrivacyDlpV2CreateStoredInfoTypeRequest -- ^ 'ositcPayload'
     -> OrganizationsStoredInfoTypesCreate
 organizationsStoredInfoTypesCreate pOsitcParent_ pOsitcPayload_ =
-    OrganizationsStoredInfoTypesCreate'
+  OrganizationsStoredInfoTypesCreate'
     { _ositcParent = pOsitcParent_
     , _ositcXgafv = Nothing
     , _ositcUploadProtocol = Nothing
@@ -151,7 +153,8 @@ ositcCallback
       (\ s a -> s{_ositcCallback = a})
 
 instance GoogleRequest
-         OrganizationsStoredInfoTypesCreate where
+           OrganizationsStoredInfoTypesCreate
+         where
         type Rs OrganizationsStoredInfoTypesCreate =
              GooglePrivacyDlpV2StoredInfoType
         type Scopes OrganizationsStoredInfoTypesCreate =

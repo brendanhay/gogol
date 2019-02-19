@@ -57,11 +57,13 @@ type DatabasesDeleteResource =
 -- | Deletes a database from a Cloud SQL instance.
 --
 -- /See:/ 'databasesDelete' smart constructor.
-data DatabasesDelete = DatabasesDelete'
+data DatabasesDelete =
+  DatabasesDelete'
     { _ddProject  :: !Text
     , _ddDatabase :: !Text
     , _ddInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DatabasesDelete' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ databasesDelete
     -> Text -- ^ 'ddInstance'
     -> DatabasesDelete
 databasesDelete pDdProject_ pDdDatabase_ pDdInstance_ =
-    DatabasesDelete'
+  DatabasesDelete'
     { _ddProject = pDdProject_
     , _ddDatabase = pDdDatabase_
     , _ddInstance = pDdInstance_

@@ -85,4 +85,4 @@ uRLShortenerService
 
 -- | Manage your goo.gl short URLs
 urlShortenerScope :: Proxy '["https://www.googleapis.com/auth/urlshortener"]
-urlShortenerScope = Proxy;
+urlShortenerScope = Proxy

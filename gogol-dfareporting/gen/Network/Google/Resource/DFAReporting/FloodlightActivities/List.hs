@@ -57,7 +57,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesList' request conforms to.
 type FloodlightActivitiesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -94,7 +94,8 @@ type FloodlightActivitiesListResource =
 -- method supports paging.
 --
 -- /See:/ 'floodlightActivitiesList' smart constructor.
-data FloodlightActivitiesList = FloodlightActivitiesList'
+data FloodlightActivitiesList =
+  FloodlightActivitiesList'
     { _falTagString                        :: !(Maybe Text)
     , _falFloodlightActivityGroupTagString :: !(Maybe Text)
     , _falFloodlightConfigurationId        :: !(Maybe (Textual Int64))
@@ -109,7 +110,8 @@ data FloodlightActivitiesList = FloodlightActivitiesList'
     , _falPageToken                        :: !(Maybe Text)
     , _falSortField                        :: !FloodlightActivitiesListSortField
     , _falMaxResults                       :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FloodlightActivitiesList' with the minimum fields required to make a request.
 --
@@ -146,7 +148,7 @@ floodlightActivitiesList
     :: Int64 -- ^ 'falProFileId'
     -> FloodlightActivitiesList
 floodlightActivitiesList pFalProFileId_ =
-    FloodlightActivitiesList'
+  FloodlightActivitiesList'
     { _falTagString = Nothing
     , _falFloodlightActivityGroupTagString = Nothing
     , _falFloodlightConfigurationId = Nothing

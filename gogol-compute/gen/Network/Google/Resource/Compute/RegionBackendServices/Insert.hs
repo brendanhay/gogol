@@ -66,12 +66,14 @@ type RegionBackendServicesInsertResource =
 -- Read Restrictions and Guidelines for more information.
 --
 -- /See:/ 'regionBackendServicesInsert' smart constructor.
-data RegionBackendServicesInsert = RegionBackendServicesInsert'
+data RegionBackendServicesInsert =
+  RegionBackendServicesInsert'
     { _rbsiRequestId :: !(Maybe Text)
     , _rbsiProject   :: !Text
     , _rbsiPayload   :: !BackendService
     , _rbsiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionBackendServicesInsert' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ regionBackendServicesInsert
     -> Text -- ^ 'rbsiRegion'
     -> RegionBackendServicesInsert
 regionBackendServicesInsert pRbsiProject_ pRbsiPayload_ pRbsiRegion_ =
-    RegionBackendServicesInsert'
+  RegionBackendServicesInsert'
     { _rbsiRequestId = Nothing
     , _rbsiProject = pRbsiProject_
     , _rbsiPayload = pRbsiPayload_

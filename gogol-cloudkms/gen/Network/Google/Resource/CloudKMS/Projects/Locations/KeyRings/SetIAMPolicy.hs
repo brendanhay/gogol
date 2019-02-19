@@ -64,7 +64,8 @@ type ProjectsLocationsKeyRingsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsLocationsKeyRingsSetIAMPolicy' smart constructor.
-data ProjectsLocationsKeyRingsSetIAMPolicy = ProjectsLocationsKeyRingsSetIAMPolicy'
+data ProjectsLocationsKeyRingsSetIAMPolicy =
+  ProjectsLocationsKeyRingsSetIAMPolicy'
     { _plkrsipXgafv          :: !(Maybe Xgafv)
     , _plkrsipUploadProtocol :: !(Maybe Text)
     , _plkrsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsLocationsKeyRingsSetIAMPolicy = ProjectsLocationsKeyRingsSetIAMPoli
     , _plkrsipPayload        :: !SetIAMPolicyRequest
     , _plkrsipResource       :: !Text
     , _plkrsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsLocationsKeyRingsSetIAMPolicy
     -> Text -- ^ 'plkrsipResource'
     -> ProjectsLocationsKeyRingsSetIAMPolicy
 projectsLocationsKeyRingsSetIAMPolicy pPlkrsipPayload_ pPlkrsipResource_ =
-    ProjectsLocationsKeyRingsSetIAMPolicy'
+  ProjectsLocationsKeyRingsSetIAMPolicy'
     { _plkrsipXgafv = Nothing
     , _plkrsipUploadProtocol = Nothing
     , _plkrsipAccessToken = Nothing
@@ -149,7 +151,8 @@ plkrsipCallback
       (\ s a -> s{_plkrsipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsSetIAMPolicy where
+           ProjectsLocationsKeyRingsSetIAMPolicy
+         where
         type Rs ProjectsLocationsKeyRingsSetIAMPolicy =
              Policy
         type Scopes ProjectsLocationsKeyRingsSetIAMPolicy =

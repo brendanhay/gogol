@@ -86,7 +86,8 @@ type AccountsProductsUpdateResource =
 -- the original state of the product.
 --
 -- /See:/ 'accountsProductsUpdate' smart constructor.
-data AccountsProductsUpdate = AccountsProductsUpdate'
+data AccountsProductsUpdate =
+  AccountsProductsUpdate'
     { _apuParent         :: !Text
     , _apuXgafv          :: !(Maybe Xgafv)
     , _apuUploadProtocol :: !(Maybe Text)
@@ -95,7 +96,8 @@ data AccountsProductsUpdate = AccountsProductsUpdate'
     , _apuPayload        :: !Attributes
     , _apuName           :: !Text
     , _apuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsProductsUpdate' with the minimum fields required to make a request.
 --
@@ -122,7 +124,7 @@ accountsProductsUpdate
     -> Text -- ^ 'apuName'
     -> AccountsProductsUpdate
 accountsProductsUpdate pApuParent_ pApuPayload_ pApuName_ =
-    AccountsProductsUpdate'
+  AccountsProductsUpdate'
     { _apuParent = pApuParent_
     , _apuXgafv = Nothing
     , _apuUploadProtocol = Nothing

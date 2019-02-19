@@ -23,12 +23,14 @@ import           Network.Google.Prelude
 -- | An error event which is returned by the Error Reporting system.
 --
 -- /See:/ 'errorEvent' smart constructor.
-data ErrorEvent = ErrorEvent'
+data ErrorEvent =
+  ErrorEvent'
     { _eeContext        :: !(Maybe ErrorContext)
     , _eeEventTime      :: !(Maybe DateTime')
     , _eeServiceContext :: !(Maybe ServiceContext)
     , _eeMessage        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ErrorEvent' with the minimum fields required to make a request.
 --
@@ -44,7 +46,7 @@ data ErrorEvent = ErrorEvent'
 errorEvent
     :: ErrorEvent
 errorEvent =
-    ErrorEvent'
+  ErrorEvent'
     { _eeContext = Nothing
     , _eeEventTime = Nothing
     , _eeServiceContext = Nothing
@@ -99,12 +101,14 @@ instance ToJSON ErrorEvent where
 -- logs.
 --
 -- /See:/ 'errorContext' smart constructor.
-data ErrorContext = ErrorContext'
+data ErrorContext =
+  ErrorContext'
     { _ecHTTPRequest      :: !(Maybe HTTPRequestContext)
     , _ecUser             :: !(Maybe Text)
     , _ecSourceReferences :: !(Maybe [SourceReference])
     , _ecReportLocation   :: !(Maybe SourceLocation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ErrorContext' with the minimum fields required to make a request.
 --
@@ -120,7 +124,7 @@ data ErrorContext = ErrorContext'
 errorContext
     :: ErrorContext
 errorContext =
-    ErrorContext'
+  ErrorContext'
     { _ecHTTPRequest = Nothing
     , _ecUser = Nothing
     , _ecSourceReferences = Nothing
@@ -181,11 +185,13 @@ instance ToJSON ErrorContext where
 -- | Description of a group of similar error events.
 --
 -- /See:/ 'errorGroup' smart constructor.
-data ErrorGroup = ErrorGroup'
+data ErrorGroup =
+  ErrorGroup'
     { _egTrackingIssues :: !(Maybe [TrackingIssue])
     , _egName           :: !(Maybe Text)
     , _egGroupId        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ErrorGroup' with the minimum fields required to make a request.
 --
@@ -199,11 +205,8 @@ data ErrorGroup = ErrorGroup'
 errorGroup
     :: ErrorGroup
 errorGroup =
-    ErrorGroup'
-    { _egTrackingIssues = Nothing
-    , _egName = Nothing
-    , _egGroupId = Nothing
-    }
+  ErrorGroup'
+    {_egTrackingIssues = Nothing, _egName = Nothing, _egGroupId = Nothing}
 
 -- | Associated tracking issues.
 egTrackingIssues :: Lens' ErrorGroup [TrackingIssue]
@@ -245,8 +248,8 @@ instance ToJSON ErrorGroup where
 --
 -- /See:/ 'deleteEventsResponse' smart constructor.
 data DeleteEventsResponse =
-    DeleteEventsResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  DeleteEventsResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteEventsResponse' with the minimum fields required to make a request.
 --
@@ -265,12 +268,14 @@ instance ToJSON DeleteEventsResponse where
 -- | An error event which is reported to the Error Reporting system.
 --
 -- /See:/ 'reportedErrorEvent' smart constructor.
-data ReportedErrorEvent = ReportedErrorEvent'
+data ReportedErrorEvent =
+  ReportedErrorEvent'
     { _reeContext        :: !(Maybe ErrorContext)
     , _reeEventTime      :: !(Maybe DateTime')
     , _reeServiceContext :: !(Maybe ServiceContext)
     , _reeMessage        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportedErrorEvent' with the minimum fields required to make a request.
 --
@@ -286,7 +291,7 @@ data ReportedErrorEvent = ReportedErrorEvent'
 reportedErrorEvent
     :: ReportedErrorEvent
 reportedErrorEvent =
-    ReportedErrorEvent'
+  ReportedErrorEvent'
     { _reeContext = Nothing
     , _reeEventTime = Nothing
     , _reeServiceContext = Nothing
@@ -358,14 +363,16 @@ instance ToJSON ReportedErrorEvent where
 -- report has been generated automatically from Google App Engine logs.
 --
 -- /See:/ 'hTTPRequestContext' smart constructor.
-data HTTPRequestContext = HTTPRequestContext'
+data HTTPRequestContext =
+  HTTPRequestContext'
     { _httprcRemoteIP           :: !(Maybe Text)
     , _httprcURL                :: !(Maybe Text)
     , _httprcReferrer           :: !(Maybe Text)
     , _httprcMethod             :: !(Maybe Text)
     , _httprcResponseStatusCode :: !(Maybe (Textual Int32))
     , _httprcUserAgent          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPRequestContext' with the minimum fields required to make a request.
 --
@@ -385,7 +392,7 @@ data HTTPRequestContext = HTTPRequestContext'
 hTTPRequestContext
     :: HTTPRequestContext
 hTTPRequestContext =
-    HTTPRequestContext'
+  HTTPRequestContext'
     { _httprcRemoteIP = Nothing
     , _httprcURL = Nothing
     , _httprcReferrer = Nothing
@@ -457,9 +464,11 @@ instance ToJSON HTTPRequestContext where
 -- | Information related to tracking the progress on resolving the error.
 --
 -- /See:/ 'trackingIssue' smart constructor.
-newtype TrackingIssue = TrackingIssue'
+newtype TrackingIssue =
+  TrackingIssue'
     { _tiURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrackingIssue' with the minimum fields required to make a request.
 --
@@ -468,10 +477,7 @@ newtype TrackingIssue = TrackingIssue'
 -- * 'tiURL'
 trackingIssue
     :: TrackingIssue
-trackingIssue =
-    TrackingIssue'
-    { _tiURL = Nothing
-    }
+trackingIssue = TrackingIssue' {_tiURL = Nothing}
 
 -- | A URL pointing to a related entry in an issue tracking system. Example:
 -- https:\/\/github.com\/user\/project\/issues\/4
@@ -490,11 +496,13 @@ instance ToJSON TrackingIssue where
 -- | Contains a set of requested error events.
 --
 -- /See:/ 'listEventsResponse' smart constructor.
-data ListEventsResponse = ListEventsResponse'
+data ListEventsResponse =
+  ListEventsResponse'
     { _lerNextPageToken  :: !(Maybe Text)
     , _lerTimeRangeBegin :: !(Maybe DateTime')
     , _lerErrorEvents    :: !(Maybe [ErrorEvent])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListEventsResponse' with the minimum fields required to make a request.
 --
@@ -508,7 +516,7 @@ data ListEventsResponse = ListEventsResponse'
 listEventsResponse
     :: ListEventsResponse
 listEventsResponse =
-    ListEventsResponse'
+  ListEventsResponse'
     { _lerNextPageToken = Nothing
     , _lerTimeRangeBegin = Nothing
     , _lerErrorEvents = Nothing
@@ -558,7 +566,8 @@ instance ToJSON ListEventsResponse where
 -- such as a given time period and\/or service filter.
 --
 -- /See:/ 'errorGroupStats' smart constructor.
-data ErrorGroupStats = ErrorGroupStats'
+data ErrorGroupStats =
+  ErrorGroupStats'
     { _egsAffectedServices    :: !(Maybe [ServiceContext])
     , _egsGroup               :: !(Maybe ErrorGroup)
     , _egsFirstSeenTime       :: !(Maybe DateTime')
@@ -568,7 +577,8 @@ data ErrorGroupStats = ErrorGroupStats'
     , _egsNumAffectedServices :: !(Maybe (Textual Int32))
     , _egsLastSeenTime        :: !(Maybe DateTime')
     , _egsRepresentative      :: !(Maybe ErrorEvent)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ErrorGroupStats' with the minimum fields required to make a request.
 --
@@ -594,7 +604,7 @@ data ErrorGroupStats = ErrorGroupStats'
 errorGroupStats
     :: ErrorGroupStats
 errorGroupStats =
-    ErrorGroupStats'
+  ErrorGroupStats'
     { _egsAffectedServices = Nothing
     , _egsGroup = Nothing
     , _egsFirstSeenTime = Nothing
@@ -721,11 +731,13 @@ instance ToJSON ErrorGroupStats where
 -- | Contains a set of requested error group stats.
 --
 -- /See:/ 'listGroupStatsResponse' smart constructor.
-data ListGroupStatsResponse = ListGroupStatsResponse'
+data ListGroupStatsResponse =
+  ListGroupStatsResponse'
     { _lgsrNextPageToken   :: !(Maybe Text)
     , _lgsrTimeRangeBegin  :: !(Maybe DateTime')
     , _lgsrErrorGroupStats :: !(Maybe [ErrorGroupStats])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGroupStatsResponse' with the minimum fields required to make a request.
 --
@@ -739,7 +751,7 @@ data ListGroupStatsResponse = ListGroupStatsResponse'
 listGroupStatsResponse
     :: ListGroupStatsResponse
 listGroupStatsResponse =
-    ListGroupStatsResponse'
+  ListGroupStatsResponse'
     { _lgsrNextPageToken = Nothing
     , _lgsrTimeRangeBegin = Nothing
     , _lgsrErrorGroupStats = Nothing
@@ -791,11 +803,13 @@ instance ToJSON ListGroupStatsResponse where
 -- time and multiple versions can run in parallel.
 --
 -- /See:/ 'serviceContext' smart constructor.
-data ServiceContext = ServiceContext'
+data ServiceContext =
+  ServiceContext'
     { _scResourceType :: !(Maybe Text)
     , _scService      :: !(Maybe Text)
     , _scVersion      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServiceContext' with the minimum fields required to make a request.
 --
@@ -809,11 +823,8 @@ data ServiceContext = ServiceContext'
 serviceContext
     :: ServiceContext
 serviceContext =
-    ServiceContext'
-    { _scResourceType = Nothing
-    , _scService = Nothing
-    , _scVersion = Nothing
-    }
+  ServiceContext'
+    {_scResourceType = Nothing, _scService = Nothing, _scVersion = Nothing}
 
 -- | Type of the MonitoredResource. List of possible values:
 -- https:\/\/cloud.google.com\/monitoring\/api\/resources Value is set
@@ -862,11 +873,13 @@ instance ToJSON ServiceContext where
 -- since the error events are sampled before counting them.
 --
 -- /See:/ 'timedCount' smart constructor.
-data TimedCount = TimedCount'
+data TimedCount =
+  TimedCount'
     { _tcStartTime :: !(Maybe DateTime')
     , _tcCount     :: !(Maybe (Textual Int64))
     , _tcEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimedCount' with the minimum fields required to make a request.
 --
@@ -880,11 +893,7 @@ data TimedCount = TimedCount'
 timedCount
     :: TimedCount
 timedCount =
-    TimedCount'
-    { _tcStartTime = Nothing
-    , _tcCount = Nothing
-    , _tcEndTime = Nothing
-    }
+  TimedCount' {_tcStartTime = Nothing, _tcCount = Nothing, _tcEndTime = Nothing}
 
 -- | Start of the time period to which \`count\` refers (included).
 tcStartTime :: Lens' TimedCount (Maybe UTCTime)
@@ -927,11 +936,13 @@ instance ToJSON TimedCount where
 -- case.
 --
 -- /See:/ 'sourceLocation' smart constructor.
-data SourceLocation = SourceLocation'
+data SourceLocation =
+  SourceLocation'
     { _slLineNumber   :: !(Maybe (Textual Int32))
     , _slFilePath     :: !(Maybe Text)
     , _slFunctionName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
 --
@@ -945,11 +956,8 @@ data SourceLocation = SourceLocation'
 sourceLocation
     :: SourceLocation
 sourceLocation =
-    SourceLocation'
-    { _slLineNumber = Nothing
-    , _slFilePath = Nothing
-    , _slFunctionName = Nothing
-    }
+  SourceLocation'
+    {_slLineNumber = Nothing, _slFilePath = Nothing, _slFunctionName = Nothing}
 
 -- | 1-based. 0 indicates that the line number is unknown.
 slLineNumber :: Lens' SourceLocation (Maybe Int32)
@@ -991,10 +999,12 @@ instance ToJSON SourceLocation where
 -- and deploy an application.
 --
 -- /See:/ 'sourceReference' smart constructor.
-data SourceReference = SourceReference'
+data SourceReference =
+  SourceReference'
     { _srRepository :: !(Maybe Text)
     , _srRevisionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceReference' with the minimum fields required to make a request.
 --
@@ -1006,10 +1016,7 @@ data SourceReference = SourceReference'
 sourceReference
     :: SourceReference
 sourceReference =
-    SourceReference'
-    { _srRepository = Nothing
-    , _srRevisionId = Nothing
-    }
+  SourceReference' {_srRepository = Nothing, _srRevisionId = Nothing}
 
 -- | Optional. A URI string identifying the repository. Example:
 -- \"https:\/\/github.com\/GoogleCloudPlatform\/kubernetes.git\"
@@ -1042,8 +1049,8 @@ instance ToJSON SourceReference where
 --
 -- /See:/ 'reportErrorEventResponse' smart constructor.
 data ReportErrorEventResponse =
-    ReportErrorEventResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ReportErrorEventResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportErrorEventResponse' with the minimum fields required to make a request.
 --

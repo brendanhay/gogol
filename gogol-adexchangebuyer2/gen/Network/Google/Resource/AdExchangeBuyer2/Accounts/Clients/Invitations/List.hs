@@ -71,7 +71,8 @@ type AccountsClientsInvitationsListResource =
 -- ID.
 --
 -- /See:/ 'accountsClientsInvitationsList' smart constructor.
-data AccountsClientsInvitationsList = AccountsClientsInvitationsList'
+data AccountsClientsInvitationsList =
+  AccountsClientsInvitationsList'
     { _acilXgafv           :: !(Maybe Xgafv)
     , _acilUploadProtocol  :: !(Maybe Text)
     , _acilAccessToken     :: !(Maybe Text)
@@ -81,7 +82,8 @@ data AccountsClientsInvitationsList = AccountsClientsInvitationsList'
     , _acilPageToken       :: !(Maybe Text)
     , _acilPageSize        :: !(Maybe (Textual Int32))
     , _acilCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsClientsInvitationsList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ accountsClientsInvitationsList
     -> Text -- ^ 'acilClientAccountId'
     -> AccountsClientsInvitationsList
 accountsClientsInvitationsList pAcilAccountId_ pAcilClientAccountId_ =
-    AccountsClientsInvitationsList'
+  AccountsClientsInvitationsList'
     { _acilXgafv = Nothing
     , _acilUploadProtocol = Nothing
     , _acilAccessToken = Nothing

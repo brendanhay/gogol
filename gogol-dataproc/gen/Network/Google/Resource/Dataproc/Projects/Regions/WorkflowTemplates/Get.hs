@@ -64,7 +64,8 @@ type ProjectsRegionsWorkflowTemplatesGetResource =
 -- instantiated template by specifying optional version parameter.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesGet' smart constructor.
-data ProjectsRegionsWorkflowTemplatesGet = ProjectsRegionsWorkflowTemplatesGet'
+data ProjectsRegionsWorkflowTemplatesGet =
+  ProjectsRegionsWorkflowTemplatesGet'
     { _prwtgXgafv          :: !(Maybe Xgafv)
     , _prwtgUploadProtocol :: !(Maybe Text)
     , _prwtgAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsRegionsWorkflowTemplatesGet = ProjectsRegionsWorkflowTemplatesGet'
     , _prwtgName           :: !Text
     , _prwtgVersion        :: !(Maybe (Textual Int32))
     , _prwtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsRegionsWorkflowTemplatesGet
     :: Text -- ^ 'prwtgName'
     -> ProjectsRegionsWorkflowTemplatesGet
 projectsRegionsWorkflowTemplatesGet pPrwtgName_ =
-    ProjectsRegionsWorkflowTemplatesGet'
+  ProjectsRegionsWorkflowTemplatesGet'
     { _prwtgXgafv = Nothing
     , _prwtgUploadProtocol = Nothing
     , _prwtgAccessToken = Nothing
@@ -150,7 +152,8 @@ prwtgCallback
       (\ s a -> s{_prwtgCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsWorkflowTemplatesGet where
+           ProjectsRegionsWorkflowTemplatesGet
+         where
         type Rs ProjectsRegionsWorkflowTemplatesGet =
              WorkflowTemplate
         type Scopes ProjectsRegionsWorkflowTemplatesGet =

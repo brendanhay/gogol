@@ -60,12 +60,14 @@ type PoolsListResource =
 -- | List all replica pools.
 --
 -- /See:/ 'poolsList' smart constructor.
-data PoolsList = PoolsList'
+data PoolsList =
+  PoolsList'
     { _plZone        :: !Text
     , _plProjectName :: !Text
     , _plPageToken   :: !(Maybe Text)
     , _plMaxResults  :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PoolsList' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ poolsList
     -> Text -- ^ 'plProjectName'
     -> PoolsList
 poolsList pPlZone_ pPlProjectName_ =
-    PoolsList'
+  PoolsList'
     { _plZone = pPlZone_
     , _plProjectName = pPlProjectName_
     , _plPageToken = Nothing

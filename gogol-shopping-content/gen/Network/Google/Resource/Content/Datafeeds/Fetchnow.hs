@@ -55,10 +55,12 @@ type DatafeedsFetchnowResource =
 -- | Invokes a fetch for the datafeed in your Merchant Center account.
 --
 -- /See:/ 'datafeedsFetchnow' smart constructor.
-data DatafeedsFetchnow = DatafeedsFetchnow'
+data DatafeedsFetchnow =
+  DatafeedsFetchnow'
     { _dfMerchantId :: !(Textual Word64)
     , _dfDatafeedId :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DatafeedsFetchnow' with the minimum fields required to make a request.
 --
@@ -72,7 +74,7 @@ datafeedsFetchnow
     -> Word64 -- ^ 'dfDatafeedId'
     -> DatafeedsFetchnow
 datafeedsFetchnow pDfMerchantId_ pDfDatafeedId_ =
-    DatafeedsFetchnow'
+  DatafeedsFetchnow'
     { _dfMerchantId = _Coerce # pDfMerchantId_
     , _dfDatafeedId = _Coerce # pDfDatafeedId_
     }

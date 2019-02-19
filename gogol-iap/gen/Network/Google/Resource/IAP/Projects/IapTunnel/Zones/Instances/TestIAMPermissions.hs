@@ -69,7 +69,8 @@ type ProjectsIapTunnelZonesInstancesTestIAMPermissionsResource
 -- https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing_access_via_the_api
 --
 -- /See:/ 'projectsIapTunnelZonesInstancesTestIAMPermissions' smart constructor.
-data ProjectsIapTunnelZonesInstancesTestIAMPermissions = ProjectsIapTunnelZonesInstancesTestIAMPermissions'
+data ProjectsIapTunnelZonesInstancesTestIAMPermissions =
+  ProjectsIapTunnelZonesInstancesTestIAMPermissions'
     { _pitzitipXgafv          :: !(Maybe Xgafv)
     , _pitzitipUploadProtocol :: !(Maybe Text)
     , _pitzitipAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsIapTunnelZonesInstancesTestIAMPermissions = ProjectsIapTunnelZonesI
     , _pitzitipPayload        :: !TestIAMPermissionsRequest
     , _pitzitipResource       :: !Text
     , _pitzitipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsIapTunnelZonesInstancesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsIapTunnelZonesInstancesTestIAMPermissions
     -> Text -- ^ 'pitzitipResource'
     -> ProjectsIapTunnelZonesInstancesTestIAMPermissions
 projectsIapTunnelZonesInstancesTestIAMPermissions pPitzitipPayload_ pPitzitipResource_ =
-    ProjectsIapTunnelZonesInstancesTestIAMPermissions'
+  ProjectsIapTunnelZonesInstancesTestIAMPermissions'
     { _pitzitipXgafv = Nothing
     , _pitzitipUploadProtocol = Nothing
     , _pitzitipAccessToken = Nothing
@@ -156,7 +158,7 @@ pitzitipCallback
       (\ s a -> s{_pitzitipCallback = a})
 
 instance GoogleRequest
-         ProjectsIapTunnelZonesInstancesTestIAMPermissions
+           ProjectsIapTunnelZonesInstancesTestIAMPermissions
          where
         type Rs
                ProjectsIapTunnelZonesInstancesTestIAMPermissions

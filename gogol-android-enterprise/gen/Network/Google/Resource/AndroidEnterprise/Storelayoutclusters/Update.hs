@@ -61,12 +61,14 @@ type StorelayoutclustersUpdateResource =
 -- | Updates a cluster.
 --
 -- /See:/ 'storelayoutclustersUpdate' smart constructor.
-data StorelayoutclustersUpdate = StorelayoutclustersUpdate'
+data StorelayoutclustersUpdate =
+  StorelayoutclustersUpdate'
     { _suuEnterpriseId :: !Text
     , _suuPageId       :: !Text
     , _suuPayload      :: !StoreCluster
     , _suuClusterId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StorelayoutclustersUpdate' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ storelayoutclustersUpdate
     -> Text -- ^ 'suuClusterId'
     -> StorelayoutclustersUpdate
 storelayoutclustersUpdate pSuuEnterpriseId_ pSuuPageId_ pSuuPayload_ pSuuClusterId_ =
-    StorelayoutclustersUpdate'
+  StorelayoutclustersUpdate'
     { _suuEnterpriseId = pSuuEnterpriseId_
     , _suuPageId = pSuuPageId_
     , _suuPayload = pSuuPayload_

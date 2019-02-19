@@ -77,7 +77,8 @@ type ProjectsTracesListResource =
 -- | Returns of a list of traces that match the specified filter conditions.
 --
 -- /See:/ 'projectsTracesList' smart constructor.
-data ProjectsTracesList = ProjectsTracesList'
+data ProjectsTracesList =
+  ProjectsTracesList'
     { _ptlParent         :: !Text
     , _ptlXgafv          :: !(Maybe Xgafv)
     , _ptlUploadProtocol :: !(Maybe Text)
@@ -92,7 +93,8 @@ data ProjectsTracesList = ProjectsTracesList'
     , _ptlPageToken      :: !(Maybe Text)
     , _ptlPageSize       :: !(Maybe (Textual Int32))
     , _ptlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTracesList' with the minimum fields required to make a request.
 --
@@ -129,7 +131,7 @@ projectsTracesList
     :: Text -- ^ 'ptlParent'
     -> ProjectsTracesList
 projectsTracesList pPtlParent_ =
-    ProjectsTracesList'
+  ProjectsTracesList'
     { _ptlParent = pPtlParent_
     , _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing

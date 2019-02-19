@@ -61,11 +61,13 @@ type DeploymentsCancelPreviewResource =
 -- deployment.
 --
 -- /See:/ 'deploymentsCancelPreview' smart constructor.
-data DeploymentsCancelPreview = DeploymentsCancelPreview'
+data DeploymentsCancelPreview =
+  DeploymentsCancelPreview'
     { _dcpProject    :: !Text
     , _dcpPayload    :: !DeploymentsCancelPreviewRequest
     , _dcpDeployment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeploymentsCancelPreview' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ deploymentsCancelPreview
     -> Text -- ^ 'dcpDeployment'
     -> DeploymentsCancelPreview
 deploymentsCancelPreview pDcpProject_ pDcpPayload_ pDcpDeployment_ =
-    DeploymentsCancelPreview'
+  DeploymentsCancelPreview'
     { _dcpProject = pDcpProject_
     , _dcpPayload = pDcpPayload_
     , _dcpDeployment = pDcpDeployment_

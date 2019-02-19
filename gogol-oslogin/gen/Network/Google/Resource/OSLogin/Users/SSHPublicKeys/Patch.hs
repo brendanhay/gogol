@@ -66,7 +66,8 @@ type UsersSSHPublicKeysPatchResource =
 -- method supports patch semantics.
 --
 -- /See:/ 'usersSSHPublicKeysPatch' smart constructor.
-data UsersSSHPublicKeysPatch = UsersSSHPublicKeysPatch'
+data UsersSSHPublicKeysPatch =
+  UsersSSHPublicKeysPatch'
     { _uspkpXgafv          :: !(Maybe Xgafv)
     , _uspkpUploadProtocol :: !(Maybe Text)
     , _uspkpUpdateMask     :: !(Maybe GFieldMask)
@@ -75,7 +76,8 @@ data UsersSSHPublicKeysPatch = UsersSSHPublicKeysPatch'
     , _uspkpPayload        :: !SSHPublicKey
     , _uspkpName           :: !Text
     , _uspkpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSSHPublicKeysPatch' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ usersSSHPublicKeysPatch
     -> Text -- ^ 'uspkpName'
     -> UsersSSHPublicKeysPatch
 usersSSHPublicKeysPatch pUspkpPayload_ pUspkpName_ =
-    UsersSSHPublicKeysPatch'
+  UsersSSHPublicKeysPatch'
     { _uspkpXgafv = Nothing
     , _uspkpUploadProtocol = Nothing
     , _uspkpUpdateMask = Nothing

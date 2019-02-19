@@ -61,12 +61,14 @@ type ManagementCustomDataSourcesListResource =
 -- | List custom data sources to which the user has access.
 --
 -- /See:/ 'managementCustomDataSourcesList' smart constructor.
-data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList'
+data ManagementCustomDataSourcesList =
+  ManagementCustomDataSourcesList'
     { _mcdslWebPropertyId :: !Text
     , _mcdslAccountId     :: !Text
     , _mcdslStartIndex    :: !(Maybe (Textual Int32))
     , _mcdslMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementCustomDataSourcesList' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ managementCustomDataSourcesList
     -> Text -- ^ 'mcdslAccountId'
     -> ManagementCustomDataSourcesList
 managementCustomDataSourcesList pMcdslWebPropertyId_ pMcdslAccountId_ =
-    ManagementCustomDataSourcesList'
+  ManagementCustomDataSourcesList'
     { _mcdslWebPropertyId = pMcdslWebPropertyId_
     , _mcdslAccountId = pMcdslAccountId_
     , _mcdslStartIndex = Nothing
@@ -120,7 +122,8 @@ mcdslMaxResults
       . mapping _Coerce
 
 instance GoogleRequest
-         ManagementCustomDataSourcesList where
+           ManagementCustomDataSourcesList
+         where
         type Rs ManagementCustomDataSourcesList =
              CustomDataSources
         type Scopes ManagementCustomDataSourcesList =

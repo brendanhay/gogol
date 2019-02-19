@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'ReportsCompatibleFieldsQuery' request conforms to.
 type ReportsCompatibleFieldsQueryResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -61,10 +61,12 @@ type ReportsCompatibleFieldsQueryResource =
 -- input report and user permissions.
 --
 -- /See:/ 'reportsCompatibleFieldsQuery' smart constructor.
-data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery'
+data ReportsCompatibleFieldsQuery =
+  ReportsCompatibleFieldsQuery'
     { _rcfqProFileId :: !(Textual Int64)
     , _rcfqPayload   :: !Report
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsCompatibleFieldsQuery' with the minimum fields required to make a request.
 --
@@ -78,10 +80,8 @@ reportsCompatibleFieldsQuery
     -> Report -- ^ 'rcfqPayload'
     -> ReportsCompatibleFieldsQuery
 reportsCompatibleFieldsQuery pRcfqProFileId_ pRcfqPayload_ =
-    ReportsCompatibleFieldsQuery'
-    { _rcfqProFileId = _Coerce # pRcfqProFileId_
-    , _rcfqPayload = pRcfqPayload_
-    }
+  ReportsCompatibleFieldsQuery'
+    {_rcfqProFileId = _Coerce # pRcfqProFileId_, _rcfqPayload = pRcfqPayload_}
 
 -- | The DFA user profile ID.
 rcfqProFileId :: Lens' ReportsCompatibleFieldsQuery Int64

@@ -71,7 +71,8 @@ type BucketsUpdateResource =
 -- after writing, but configuration changes may take time to propagate.
 --
 -- /See:/ 'bucketsUpdate' smart constructor.
-data BucketsUpdate = BucketsUpdate'
+data BucketsUpdate =
+  BucketsUpdate'
     { _buIfMetagenerationMatch      :: !(Maybe (Textual Int64))
     , _buPredefinedACL              :: !(Maybe BucketsUpdatePredefinedACL)
     , _buBucket                     :: !Text
@@ -80,7 +81,8 @@ data BucketsUpdate = BucketsUpdate'
     , _buUserProject                :: !(Maybe Text)
     , _buIfMetagenerationNotMatch   :: !(Maybe (Textual Int64))
     , _buProjection                 :: !(Maybe BucketsUpdateProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketsUpdate' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ bucketsUpdate
     -> Bucket -- ^ 'buPayload'
     -> BucketsUpdate
 bucketsUpdate pBuBucket_ pBuPayload_ =
-    BucketsUpdate'
+  BucketsUpdate'
     { _buIfMetagenerationMatch = Nothing
     , _buPredefinedACL = Nothing
     , _buBucket = pBuBucket_

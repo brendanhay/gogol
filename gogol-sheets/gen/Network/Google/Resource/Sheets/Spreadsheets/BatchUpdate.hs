@@ -87,7 +87,8 @@ type SpreadsheetsBatchUpdateResource =
 -- should reflect your changes.
 --
 -- /See:/ 'spreadsheetsBatchUpdate' smart constructor.
-data SpreadsheetsBatchUpdate = SpreadsheetsBatchUpdate'
+data SpreadsheetsBatchUpdate =
+  SpreadsheetsBatchUpdate'
     { _sbuXgafv          :: !(Maybe Xgafv)
     , _sbuUploadProtocol :: !(Maybe Text)
     , _sbuAccessToken    :: !(Maybe Text)
@@ -95,7 +96,8 @@ data SpreadsheetsBatchUpdate = SpreadsheetsBatchUpdate'
     , _sbuUploadType     :: !(Maybe Text)
     , _sbuPayload        :: !BatchUpdateSpreadsheetRequest
     , _sbuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsBatchUpdate' with the minimum fields required to make a request.
 --
@@ -119,7 +121,7 @@ spreadsheetsBatchUpdate
     -> BatchUpdateSpreadsheetRequest -- ^ 'sbuPayload'
     -> SpreadsheetsBatchUpdate
 spreadsheetsBatchUpdate pSbuSpreadsheetId_ pSbuPayload_ =
-    SpreadsheetsBatchUpdate'
+  SpreadsheetsBatchUpdate'
     { _sbuXgafv = Nothing
     , _sbuUploadProtocol = Nothing
     , _sbuAccessToken = Nothing

@@ -61,12 +61,14 @@ type QuestsListResource =
 -- authenticated player.
 --
 -- /See:/ 'questsList' smart constructor.
-data QuestsList = QuestsList'
+data QuestsList =
+  QuestsList'
     { _qlLanguage   :: !(Maybe Text)
     , _qlPageToken  :: !(Maybe Text)
     , _qlPlayerId   :: !Text
     , _qlMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuestsList' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ questsList
     :: Text -- ^ 'qlPlayerId'
     -> QuestsList
 questsList pQlPlayerId_ =
-    QuestsList'
+  QuestsList'
     { _qlLanguage = Nothing
     , _qlPageToken = Nothing
     , _qlPlayerId = pQlPlayerId_

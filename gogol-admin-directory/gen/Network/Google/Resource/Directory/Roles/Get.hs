@@ -55,10 +55,12 @@ type RolesGetResource =
 -- | Retrieves a role.
 --
 -- /See:/ 'rolesGet' smart constructor.
-data RolesGet = RolesGet'
+data RolesGet =
+  RolesGet'
     { _rgRoleId   :: !Text
     , _rgCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RolesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ rolesGet
     -> Text -- ^ 'rgCustomer'
     -> RolesGet
 rolesGet pRgRoleId_ pRgCustomer_ =
-    RolesGet'
-    { _rgRoleId = pRgRoleId_
-    , _rgCustomer = pRgCustomer_
-    }
+  RolesGet' {_rgRoleId = pRgRoleId_, _rgCustomer = pRgCustomer_}
 
 -- | Immutable ID of the role.
 rgRoleId :: Lens' RolesGet Text

@@ -63,7 +63,8 @@ type AccountsProductsGetResource =
 -- | Gets the requested product by ID.
 --
 -- /See:/ 'accountsProductsGet' smart constructor.
-data AccountsProductsGet = AccountsProductsGet'
+data AccountsProductsGet =
+  AccountsProductsGet'
     { _apgXgafv          :: !(Maybe Xgafv)
     , _apgUploadProtocol :: !(Maybe Text)
     , _apgAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data AccountsProductsGet = AccountsProductsGet'
     , _apgAccountId      :: !Text
     , _apgProductId      :: !Text
     , _apgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsProductsGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ accountsProductsGet
     -> Text -- ^ 'apgProductId'
     -> AccountsProductsGet
 accountsProductsGet pApgAccountId_ pApgProductId_ =
-    AccountsProductsGet'
+  AccountsProductsGet'
     { _apgXgafv = Nothing
     , _apgUploadProtocol = Nothing
     , _apgAccessToken = Nothing

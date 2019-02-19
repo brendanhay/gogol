@@ -59,14 +59,16 @@ type ProjectsReposGetResource =
 -- | Returns information about a repo.
 --
 -- /See:/ 'projectsReposGet' smart constructor.
-data ProjectsReposGet = ProjectsReposGet'
+data ProjectsReposGet =
+  ProjectsReposGet'
     { _prgXgafv          :: !(Maybe Xgafv)
     , _prgUploadProtocol :: !(Maybe Text)
     , _prgAccessToken    :: !(Maybe Text)
     , _prgUploadType     :: !(Maybe Text)
     , _prgName           :: !Text
     , _prgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReposGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsReposGet
     :: Text -- ^ 'prgName'
     -> ProjectsReposGet
 projectsReposGet pPrgName_ =
-    ProjectsReposGet'
+  ProjectsReposGet'
     { _prgXgafv = Nothing
     , _prgUploadProtocol = Nothing
     , _prgAccessToken = Nothing

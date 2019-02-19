@@ -56,10 +56,12 @@ type WebResourcePatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'webResourcePatch' smart constructor.
-data WebResourcePatch = WebResourcePatch'
+data WebResourcePatch =
+  WebResourcePatch'
     { _wrpPayload :: !SiteVerificationWebResourceResource
     , _wrpId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebResourcePatch' with the minimum fields required to make a request.
 --
@@ -73,10 +75,7 @@ webResourcePatch
     -> Text -- ^ 'wrpId'
     -> WebResourcePatch
 webResourcePatch pWrpPayload_ pWrpId_ =
-    WebResourcePatch'
-    { _wrpPayload = pWrpPayload_
-    , _wrpId = pWrpId_
-    }
+  WebResourcePatch' {_wrpPayload = pWrpPayload_, _wrpId = pWrpId_}
 
 -- | Multipart request metadata.
 wrpPayload :: Lens' WebResourcePatch SiteVerificationWebResourceResource

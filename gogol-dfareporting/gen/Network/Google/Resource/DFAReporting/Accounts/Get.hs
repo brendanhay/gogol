@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountsGet' request conforms to.
 type AccountsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
@@ -54,10 +54,12 @@ type AccountsGetResource =
 -- | Gets one account by ID.
 --
 -- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet'
+data AccountsGet =
+  AccountsGet'
     { _aggProFileId :: !(Textual Int64)
     , _aggId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsGet
     -> Int64 -- ^ 'aggId'
     -> AccountsGet
 accountsGet pAggProFileId_ pAggId_ =
-    AccountsGet'
-    { _aggProFileId = _Coerce # pAggProFileId_
-    , _aggId = _Coerce # pAggId_
-    }
+  AccountsGet'
+    {_aggProFileId = _Coerce # pAggProFileId_, _aggId = _Coerce # pAggId_}
 
 -- | User profile ID associated with this request.
 aggProFileId :: Lens' AccountsGet Int64

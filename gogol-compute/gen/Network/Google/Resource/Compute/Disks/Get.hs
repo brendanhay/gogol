@@ -59,11 +59,13 @@ type DisksGetResource =
 -- disks by making a list() request.
 --
 -- /See:/ 'disksGet' smart constructor.
-data DisksGet = DisksGet'
+data DisksGet =
+  DisksGet'
     { _dgProject :: !Text
     , _dgDisk    :: !Text
     , _dgZone    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisksGet' with the minimum fields required to make a request.
 --
@@ -80,11 +82,7 @@ disksGet
     -> Text -- ^ 'dgZone'
     -> DisksGet
 disksGet pDgProject_ pDgDisk_ pDgZone_ =
-    DisksGet'
-    { _dgProject = pDgProject_
-    , _dgDisk = pDgDisk_
-    , _dgZone = pDgZone_
-    }
+  DisksGet' {_dgProject = pDgProject_, _dgDisk = pDgDisk_, _dgZone = pDgZone_}
 
 -- | Project ID for this request.
 dgProject :: Lens' DisksGet Text

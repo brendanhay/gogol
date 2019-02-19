@@ -65,7 +65,8 @@ type CustomersDevicesListResource =
 -- | Lists a customer\'s devices.
 --
 -- /See:/ 'customersDevicesList' smart constructor.
-data CustomersDevicesList = CustomersDevicesList'
+data CustomersDevicesList =
+  CustomersDevicesList'
     { _cParent         :: !Text
     , _cXgafv          :: !(Maybe Xgafv)
     , _cUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data CustomersDevicesList = CustomersDevicesList'
     , _cPageToken      :: !(Maybe Text)
     , _cPageSize       :: !(Maybe (Textual Int64))
     , _cCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersDevicesList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ customersDevicesList
     :: Text -- ^ 'cParent'
     -> CustomersDevicesList
 customersDevicesList pCParent_ =
-    CustomersDevicesList'
+  CustomersDevicesList'
     { _cParent = pCParent_
     , _cXgafv = Nothing
     , _cUploadProtocol = Nothing

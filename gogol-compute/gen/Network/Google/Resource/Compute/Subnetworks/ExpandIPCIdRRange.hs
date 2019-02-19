@@ -63,13 +63,15 @@ type SubnetworksExpandIPCIdRRangeResource =
 -- | Expands the IP CIDR range of the subnetwork to a specified value.
 --
 -- /See:/ 'subnetworksExpandIPCIdRRange' smart constructor.
-data SubnetworksExpandIPCIdRRange = SubnetworksExpandIPCIdRRange'
+data SubnetworksExpandIPCIdRRange =
+  SubnetworksExpandIPCIdRRange'
     { _seicirrRequestId  :: !(Maybe Text)
     , _seicirrProject    :: !Text
     , _seicirrPayload    :: !SubnetworksExpandIPCIdRRangeRequest
     , _seicirrSubnetwork :: !Text
     , _seicirrRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksExpandIPCIdRRange' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ subnetworksExpandIPCIdRRange
     -> Text -- ^ 'seicirrRegion'
     -> SubnetworksExpandIPCIdRRange
 subnetworksExpandIPCIdRRange pSeicirrProject_ pSeicirrPayload_ pSeicirrSubnetwork_ pSeicirrRegion_ =
-    SubnetworksExpandIPCIdRRange'
+  SubnetworksExpandIPCIdRRange'
     { _seicirrRequestId = Nothing
     , _seicirrProject = pSeicirrProject_
     , _seicirrPayload = pSeicirrPayload_

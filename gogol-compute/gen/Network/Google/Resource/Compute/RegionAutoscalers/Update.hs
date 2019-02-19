@@ -63,13 +63,15 @@ type RegionAutoscalersUpdateResource =
 -- in the request.
 --
 -- /See:/ 'regionAutoscalersUpdate' smart constructor.
-data RegionAutoscalersUpdate = RegionAutoscalersUpdate'
+data RegionAutoscalersUpdate =
+  RegionAutoscalersUpdate'
     { _rauRequestId  :: !(Maybe Text)
     , _rauProject    :: !Text
     , _rauPayload    :: !Autoscaler
     , _rauAutoscaler :: !(Maybe Text)
     , _rauRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionAutoscalersUpdate' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ regionAutoscalersUpdate
     -> Text -- ^ 'rauRegion'
     -> RegionAutoscalersUpdate
 regionAutoscalersUpdate pRauProject_ pRauPayload_ pRauRegion_ =
-    RegionAutoscalersUpdate'
+  RegionAutoscalersUpdate'
     { _rauRequestId = Nothing
     , _rauProject = pRauProject_
     , _rauPayload = pRauPayload_

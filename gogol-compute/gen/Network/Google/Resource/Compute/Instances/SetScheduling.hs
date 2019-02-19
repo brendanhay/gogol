@@ -62,13 +62,15 @@ type InstancesSetSchedulingResource =
 -- | Sets an instance\'s scheduling options.
 --
 -- /See:/ 'instancesSetScheduling' smart constructor.
-data InstancesSetScheduling = InstancesSetScheduling'
+data InstancesSetScheduling =
+  InstancesSetScheduling'
     { _issRequestId :: !(Maybe Text)
     , _issProject   :: !Text
     , _issZone      :: !Text
     , _issPayload   :: !Scheduling
     , _issInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetScheduling' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ instancesSetScheduling
     -> Text -- ^ 'issInstance'
     -> InstancesSetScheduling
 instancesSetScheduling pIssProject_ pIssZone_ pIssPayload_ pIssInstance_ =
-    InstancesSetScheduling'
+  InstancesSetScheduling'
     { _issRequestId = Nothing
     , _issProject = pIssProject_
     , _issZone = pIssZone_

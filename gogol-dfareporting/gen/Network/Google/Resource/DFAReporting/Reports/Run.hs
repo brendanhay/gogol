@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsRun' request conforms to.
 type ReportsRunResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -57,11 +57,13 @@ type ReportsRunResource =
 -- | Runs a report.
 --
 -- /See:/ 'reportsRun' smart constructor.
-data ReportsRun = ReportsRun'
+data ReportsRun =
+  ReportsRun'
     { _rrSynchronous :: !Bool
     , _rrReportId    :: !(Textual Int64)
     , _rrProFileId   :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsRun' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ reportsRun
     -> Int64 -- ^ 'rrProFileId'
     -> ReportsRun
 reportsRun pRrReportId_ pRrProFileId_ =
-    ReportsRun'
+  ReportsRun'
     { _rrSynchronous = False
     , _rrReportId = _Coerce # pRrReportId_
     , _rrProFileId = _Coerce # pRrProFileId_

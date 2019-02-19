@@ -63,11 +63,13 @@ type InstancesPatchResource =
 -- semantics.
 --
 -- /See:/ 'instancesPatch' smart constructor.
-data InstancesPatch = InstancesPatch'
+data InstancesPatch =
+  InstancesPatch'
     { _ipProject  :: !Text
     , _ipPayload  :: !DatabaseInstance
     , _ipInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesPatch' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ instancesPatch
     -> Text -- ^ 'ipInstance'
     -> InstancesPatch
 instancesPatch pIpProject_ pIpPayload_ pIpInstance_ =
-    InstancesPatch'
+  InstancesPatch'
     { _ipProject = pIpProject_
     , _ipPayload = pIpPayload_
     , _ipInstance = pIpInstance_

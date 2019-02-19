@@ -62,12 +62,14 @@ type ManagementUnSampledReportsGetResource =
 -- | Returns a single unsampled report.
 --
 -- /See:/ 'managementUnSampledReportsGet' smart constructor.
-data ManagementUnSampledReportsGet = ManagementUnSampledReportsGet'
+data ManagementUnSampledReportsGet =
+  ManagementUnSampledReportsGet'
     { _musrgWebPropertyId     :: !Text
     , _musrgProFileId         :: !Text
     , _musrgAccountId         :: !Text
     , _musrgUnSampledReportId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementUnSampledReportsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ managementUnSampledReportsGet
     -> Text -- ^ 'musrgUnSampledReportId'
     -> ManagementUnSampledReportsGet
 managementUnSampledReportsGet pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccountId_ pMusrgUnSampledReportId_ =
-    ManagementUnSampledReportsGet'
+  ManagementUnSampledReportsGet'
     { _musrgWebPropertyId = pMusrgWebPropertyId_
     , _musrgProFileId = pMusrgProFileId_
     , _musrgAccountId = pMusrgAccountId_

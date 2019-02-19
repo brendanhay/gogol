@@ -81,9 +81,11 @@ type EnterprisesPullNotificationSetResource =
 -- may return more notifications once they become available.
 --
 -- /See:/ 'enterprisesPullNotificationSet' smart constructor.
-newtype EnterprisesPullNotificationSet = EnterprisesPullNotificationSet'
+newtype EnterprisesPullNotificationSet =
+  EnterprisesPullNotificationSet'
     { _epnsRequestMode :: Maybe EnterprisesPullNotificationSetRequestMode
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesPullNotificationSet' with the minimum fields required to make a request.
 --
@@ -93,9 +95,7 @@ newtype EnterprisesPullNotificationSet = EnterprisesPullNotificationSet'
 enterprisesPullNotificationSet
     :: EnterprisesPullNotificationSet
 enterprisesPullNotificationSet =
-    EnterprisesPullNotificationSet'
-    { _epnsRequestMode = Nothing
-    }
+  EnterprisesPullNotificationSet' {_epnsRequestMode = Nothing}
 
 -- | The request mode for pulling notifications. Specifying
 -- waitForNotifications will cause the request to block and wait until one

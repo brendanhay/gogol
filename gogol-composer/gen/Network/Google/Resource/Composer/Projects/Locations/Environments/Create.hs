@@ -62,7 +62,8 @@ type ProjectsLocationsEnvironmentsCreateResource =
 -- | Create a new environment.
 --
 -- /See:/ 'projectsLocationsEnvironmentsCreate' smart constructor.
-data ProjectsLocationsEnvironmentsCreate = ProjectsLocationsEnvironmentsCreate'
+data ProjectsLocationsEnvironmentsCreate =
+  ProjectsLocationsEnvironmentsCreate'
     { _plecParent         :: !Text
     , _plecXgafv          :: !(Maybe Xgafv)
     , _plecUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsLocationsEnvironmentsCreate = ProjectsLocationsEnvironmentsCreate'
     , _plecUploadType     :: !(Maybe Text)
     , _plecPayload        :: !Environment
     , _plecCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsEnvironmentsCreate' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsLocationsEnvironmentsCreate
     -> Environment -- ^ 'plecPayload'
     -> ProjectsLocationsEnvironmentsCreate
 projectsLocationsEnvironmentsCreate pPlecParent_ pPlecPayload_ =
-    ProjectsLocationsEnvironmentsCreate'
+  ProjectsLocationsEnvironmentsCreate'
     { _plecParent = pPlecParent_
     , _plecXgafv = Nothing
     , _plecUploadProtocol = Nothing
@@ -144,7 +146,8 @@ plecCallback
   = lens _plecCallback (\ s a -> s{_plecCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsEnvironmentsCreate where
+           ProjectsLocationsEnvironmentsCreate
+         where
         type Rs ProjectsLocationsEnvironmentsCreate =
              Operation
         type Scopes ProjectsLocationsEnvironmentsCreate =

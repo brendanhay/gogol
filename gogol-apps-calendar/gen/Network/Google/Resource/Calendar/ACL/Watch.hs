@@ -63,14 +63,16 @@ type ACLWatchResource =
 -- | Watch for changes to ACL resources.
 --
 -- /See:/ 'aclWatch' smart constructor.
-data ACLWatch = ACLWatch'
+data ACLWatch =
+  ACLWatch'
     { _awSyncToken   :: !(Maybe Text)
     , _awCalendarId  :: !Text
     , _awShowDeleted :: !(Maybe Bool)
     , _awPayload     :: !Channel
     , _awPageToken   :: !(Maybe Text)
     , _awMaxResults  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ACLWatch' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ aclWatch
     -> Channel -- ^ 'awPayload'
     -> ACLWatch
 aclWatch pAwCalendarId_ pAwPayload_ =
-    ACLWatch'
+  ACLWatch'
     { _awSyncToken = Nothing
     , _awCalendarId = pAwCalendarId_
     , _awShowDeleted = Nothing

@@ -61,13 +61,15 @@ type OrderreportsListdisbursementsResource =
 -- | Retrieves a report for disbursements from your Merchant Center account.
 --
 -- /See:/ 'orderreportsListdisbursements' smart constructor.
-data OrderreportsListdisbursements = OrderreportsListdisbursements'
+data OrderreportsListdisbursements =
+  OrderreportsListdisbursements'
     { _olDisbursementEndDate   :: !(Maybe Text)
     , _olMerchantId            :: !(Textual Word64)
     , _olPageToken             :: !(Maybe Text)
     , _olDisbursementStartDate :: !Text
     , _olMaxResults            :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrderreportsListdisbursements' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ orderreportsListdisbursements
     -> Text -- ^ 'olDisbursementStartDate'
     -> OrderreportsListdisbursements
 orderreportsListdisbursements pOlMerchantId_ pOlDisbursementStartDate_ =
-    OrderreportsListdisbursements'
+  OrderreportsListdisbursements'
     { _olDisbursementEndDate = Nothing
     , _olMerchantId = _Coerce # pOlMerchantId_
     , _olPageToken = Nothing

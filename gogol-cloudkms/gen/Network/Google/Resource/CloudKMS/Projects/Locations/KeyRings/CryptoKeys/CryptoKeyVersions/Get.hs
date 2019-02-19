@@ -61,14 +61,16 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetResource
 -- | Returns metadata for a given CryptoKeyVersion.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet'
+data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet =
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet'
     { _plkrckckvgXgafv          :: !(Maybe Xgafv)
     , _plkrckckvgUploadProtocol :: !(Maybe Text)
     , _plkrckckvgAccessToken    :: !(Maybe Text)
     , _plkrckckvgUploadType     :: !(Maybe Text)
     , _plkrckckvgName           :: !Text
     , _plkrckckvgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet
     :: Text -- ^ 'plkrckckvgName'
     -> ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet
 projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet pPlkrckckvgName_ =
-    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet'
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet'
     { _plkrckckvgXgafv = Nothing
     , _plkrckckvgUploadProtocol = Nothing
     , _plkrckckvgAccessToken = Nothing
@@ -135,7 +137,7 @@ plkrckckvgCallback
       (\ s a -> s{_plkrckckvgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet
+           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet

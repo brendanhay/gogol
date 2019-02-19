@@ -59,14 +59,16 @@ type ProjectsTransferConfigsRunsDeleteResource =
 -- | Deletes the specified transfer run.
 --
 -- /See:/ 'projectsTransferConfigsRunsDelete' smart constructor.
-data ProjectsTransferConfigsRunsDelete = ProjectsTransferConfigsRunsDelete'
+data ProjectsTransferConfigsRunsDelete =
+  ProjectsTransferConfigsRunsDelete'
     { _ptcrdXgafv          :: !(Maybe Xgafv)
     , _ptcrdUploadProtocol :: !(Maybe Text)
     , _ptcrdAccessToken    :: !(Maybe Text)
     , _ptcrdUploadType     :: !(Maybe Text)
     , _ptcrdName           :: !Text
     , _ptcrdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTransferConfigsRunsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsTransferConfigsRunsDelete
     :: Text -- ^ 'ptcrdName'
     -> ProjectsTransferConfigsRunsDelete
 projectsTransferConfigsRunsDelete pPtcrdName_ =
-    ProjectsTransferConfigsRunsDelete'
+  ProjectsTransferConfigsRunsDelete'
     { _ptcrdXgafv = Nothing
     , _ptcrdUploadProtocol = Nothing
     , _ptcrdAccessToken = Nothing
@@ -132,7 +134,8 @@ ptcrdCallback
       (\ s a -> s{_ptcrdCallback = a})
 
 instance GoogleRequest
-         ProjectsTransferConfigsRunsDelete where
+           ProjectsTransferConfigsRunsDelete
+         where
         type Rs ProjectsTransferConfigsRunsDelete = Empty
         type Scopes ProjectsTransferConfigsRunsDelete =
              '["https://www.googleapis.com/auth/bigquery",

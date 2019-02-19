@@ -71,14 +71,16 @@ type InstancesUpdateAccessConfigResource =
 -- rules.
 --
 -- /See:/ 'instancesUpdateAccessConfig' smart constructor.
-data InstancesUpdateAccessConfig = InstancesUpdateAccessConfig'
+data InstancesUpdateAccessConfig =
+  InstancesUpdateAccessConfig'
     { _iuacRequestId        :: !(Maybe Text)
     , _iuacProject          :: !Text
     , _iuacNetworkInterface :: !Text
     , _iuacZone             :: !Text
     , _iuacPayload          :: !AccessConfig
     , _iuacInstance         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesUpdateAccessConfig' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ instancesUpdateAccessConfig
     -> Text -- ^ 'iuacInstance'
     -> InstancesUpdateAccessConfig
 instancesUpdateAccessConfig pIuacProject_ pIuacNetworkInterface_ pIuacZone_ pIuacPayload_ pIuacInstance_ =
-    InstancesUpdateAccessConfig'
+  InstancesUpdateAccessConfig'
     { _iuacRequestId = Nothing
     , _iuacProject = pIuacProject_
     , _iuacNetworkInterface = pIuacNetworkInterface_

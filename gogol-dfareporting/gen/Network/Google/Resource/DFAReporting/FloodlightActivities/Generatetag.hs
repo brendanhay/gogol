@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesGeneratetag' request conforms to.
 type FloodlightActivitiesGeneratetagResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -56,10 +56,12 @@ type FloodlightActivitiesGeneratetagResource =
 -- | Generates a tag for a floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesGeneratetag' smart constructor.
-data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag'
+data FloodlightActivitiesGeneratetag =
+  FloodlightActivitiesGeneratetag'
     { _fagFloodlightActivityId :: !(Maybe (Textual Int64))
     , _fagProFileId            :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FloodlightActivitiesGeneratetag' with the minimum fields required to make a request.
 --
@@ -72,7 +74,7 @@ floodlightActivitiesGeneratetag
     :: Int64 -- ^ 'fagProFileId'
     -> FloodlightActivitiesGeneratetag
 floodlightActivitiesGeneratetag pFagProFileId_ =
-    FloodlightActivitiesGeneratetag'
+  FloodlightActivitiesGeneratetag'
     { _fagFloodlightActivityId = Nothing
     , _fagProFileId = _Coerce # pFagProFileId_
     }
@@ -91,7 +93,8 @@ fagProFileId
       . _Coerce
 
 instance GoogleRequest
-         FloodlightActivitiesGeneratetag where
+           FloodlightActivitiesGeneratetag
+         where
         type Rs FloodlightActivitiesGeneratetag =
              FloodlightActivitiesGenerateTagResponse
         type Scopes FloodlightActivitiesGeneratetag =

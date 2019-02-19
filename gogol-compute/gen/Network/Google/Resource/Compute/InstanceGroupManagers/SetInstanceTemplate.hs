@@ -69,13 +69,15 @@ type InstanceGroupManagersSetInstanceTemplateResource
 -- change unless you recreate them.
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplate' smart constructor.
-data InstanceGroupManagersSetInstanceTemplate = InstanceGroupManagersSetInstanceTemplate'
+data InstanceGroupManagersSetInstanceTemplate =
+  InstanceGroupManagersSetInstanceTemplate'
     { _igmsitRequestId            :: !(Maybe Text)
     , _igmsitProject              :: !Text
     , _igmsitInstanceGroupManager :: !Text
     , _igmsitZone                 :: !Text
     , _igmsitPayload              :: !InstanceGroupManagersSetInstanceTemplateRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetInstanceTemplate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ instanceGroupManagersSetInstanceTemplate
     -> InstanceGroupManagersSetInstanceTemplateRequest -- ^ 'igmsitPayload'
     -> InstanceGroupManagersSetInstanceTemplate
 instanceGroupManagersSetInstanceTemplate pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ pIgmsitPayload_ =
-    InstanceGroupManagersSetInstanceTemplate'
+  InstanceGroupManagersSetInstanceTemplate'
     { _igmsitRequestId = Nothing
     , _igmsitProject = pIgmsitProject_
     , _igmsitInstanceGroupManager = pIgmsitInstanceGroupManager_
@@ -144,7 +146,8 @@ igmsitPayload
       (\ s a -> s{_igmsitPayload = a})
 
 instance GoogleRequest
-         InstanceGroupManagersSetInstanceTemplate where
+           InstanceGroupManagersSetInstanceTemplate
+         where
         type Rs InstanceGroupManagersSetInstanceTemplate =
              Operation
         type Scopes InstanceGroupManagersSetInstanceTemplate

@@ -73,7 +73,8 @@ type PostsListResource =
 -- | Retrieves a list of posts, possibly filtered.
 --
 -- /See:/ 'postsList' smart constructor.
-data PostsList = PostsList'
+data PostsList =
+  PostsList'
     { _pllStatus      :: !(Maybe [PostsListStatus])
     , _pllOrderBy     :: !PostsListOrderBy
     , _pllFetchImages :: !(Maybe Bool)
@@ -85,7 +86,8 @@ data PostsList = PostsList'
     , _pllLabels      :: !(Maybe Text)
     , _pllPageToken   :: !(Maybe Text)
     , _pllMaxResults  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostsList' with the minimum fields required to make a request.
 --
@@ -116,7 +118,7 @@ postsList
     :: Text -- ^ 'pllBlogId'
     -> PostsList
 postsList pPllBlogId_ =
-    PostsList'
+  PostsList'
     { _pllStatus = Nothing
     , _pllOrderBy = Published
     , _pllFetchImages = Nothing

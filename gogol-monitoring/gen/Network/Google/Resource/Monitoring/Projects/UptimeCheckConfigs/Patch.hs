@@ -70,7 +70,8 @@ type ProjectsUptimeCheckConfigsPatchResource =
 -- \"updateMask\". Returns the updated configuration.
 --
 -- /See:/ 'projectsUptimeCheckConfigsPatch' smart constructor.
-data ProjectsUptimeCheckConfigsPatch = ProjectsUptimeCheckConfigsPatch'
+data ProjectsUptimeCheckConfigsPatch =
+  ProjectsUptimeCheckConfigsPatch'
     { _puccpXgafv          :: !(Maybe Xgafv)
     , _puccpUploadProtocol :: !(Maybe Text)
     , _puccpUpdateMask     :: !(Maybe GFieldMask)
@@ -79,7 +80,8 @@ data ProjectsUptimeCheckConfigsPatch = ProjectsUptimeCheckConfigsPatch'
     , _puccpPayload        :: !UptimeCheckConfig
     , _puccpName           :: !Text
     , _puccpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsUptimeCheckConfigsPatch' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsUptimeCheckConfigsPatch
     -> Text -- ^ 'puccpName'
     -> ProjectsUptimeCheckConfigsPatch
 projectsUptimeCheckConfigsPatch pPuccpPayload_ pPuccpName_ =
-    ProjectsUptimeCheckConfigsPatch'
+  ProjectsUptimeCheckConfigsPatch'
     { _puccpXgafv = Nothing
     , _puccpUploadProtocol = Nothing
     , _puccpUpdateMask = Nothing
@@ -169,7 +171,8 @@ puccpCallback
       (\ s a -> s{_puccpCallback = a})
 
 instance GoogleRequest
-         ProjectsUptimeCheckConfigsPatch where
+           ProjectsUptimeCheckConfigsPatch
+         where
         type Rs ProjectsUptimeCheckConfigsPatch =
              UptimeCheckConfig
         type Scopes ProjectsUptimeCheckConfigsPatch =

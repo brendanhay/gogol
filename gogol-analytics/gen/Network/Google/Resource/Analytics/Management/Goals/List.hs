@@ -63,13 +63,15 @@ type ManagementGoalsListResource =
 -- | Lists goals to which the user has access.
 --
 -- /See:/ 'managementGoalsList' smart constructor.
-data ManagementGoalsList = ManagementGoalsList'
+data ManagementGoalsList =
+  ManagementGoalsList'
     { _mglWebPropertyId :: !Text
     , _mglProFileId     :: !Text
     , _mglAccountId     :: !Text
     , _mglStartIndex    :: !(Maybe (Textual Int32))
     , _mglMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementGoalsList' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ managementGoalsList
     -> Text -- ^ 'mglAccountId'
     -> ManagementGoalsList
 managementGoalsList pMglWebPropertyId_ pMglProFileId_ pMglAccountId_ =
-    ManagementGoalsList'
+  ManagementGoalsList'
     { _mglWebPropertyId = pMglWebPropertyId_
     , _mglProFileId = pMglProFileId_
     , _mglAccountId = pMglAccountId_

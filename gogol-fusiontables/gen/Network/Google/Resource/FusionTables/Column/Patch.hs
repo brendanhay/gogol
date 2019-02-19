@@ -58,11 +58,13 @@ type ColumnPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'columnPatch' smart constructor.
-data ColumnPatch = ColumnPatch'
+data ColumnPatch =
+  ColumnPatch'
     { _cpPayload  :: !Column
     , _cpTableId  :: !Text
     , _cpColumnId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ColumnPatch' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ columnPatch
     -> Text -- ^ 'cpColumnId'
     -> ColumnPatch
 columnPatch pCpPayload_ pCpTableId_ pCpColumnId_ =
-    ColumnPatch'
+  ColumnPatch'
     { _cpPayload = pCpPayload_
     , _cpTableId = pCpTableId_
     , _cpColumnId = pCpColumnId_

@@ -58,12 +58,14 @@ type UsersSessionsUpdateResource =
 -- | Updates or insert a given session.
 --
 -- /See:/ 'usersSessionsUpdate' smart constructor.
-data UsersSessionsUpdate = UsersSessionsUpdate'
+data UsersSessionsUpdate =
+  UsersSessionsUpdate'
     { _usuPayload           :: !Session
     , _usuUserId            :: !Text
     , _usuCurrentTimeMillis :: !(Maybe (Textual Int64))
     , _usuSessionId         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSessionsUpdate' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ usersSessionsUpdate
     -> Text -- ^ 'usuSessionId'
     -> UsersSessionsUpdate
 usersSessionsUpdate pUsuPayload_ pUsuUserId_ pUsuSessionId_ =
-    UsersSessionsUpdate'
+  UsersSessionsUpdate'
     { _usuPayload = pUsuPayload_
     , _usuUserId = pUsuUserId_
     , _usuCurrentTimeMillis = Nothing

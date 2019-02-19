@@ -79,7 +79,8 @@ type PeopleConnectionsListResource =
 -- The request throws a 400 error if \'personFields\' is not specified.
 --
 -- /See:/ 'peopleConnectionsList' smart constructor.
-data PeopleConnectionsList = PeopleConnectionsList'
+data PeopleConnectionsList =
+  PeopleConnectionsList'
     { _pclSyncToken               :: !(Maybe Text)
     , _pclXgafv                   :: !(Maybe Xgafv)
     , _pclUploadProtocol          :: !(Maybe Text)
@@ -93,7 +94,8 @@ data PeopleConnectionsList = PeopleConnectionsList'
     , _pclPageToken               :: !(Maybe Text)
     , _pclPageSize                :: !(Maybe (Textual Int32))
     , _pclCallback                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PeopleConnectionsList' with the minimum fields required to make a request.
 --
@@ -128,7 +130,7 @@ peopleConnectionsList
     :: Text -- ^ 'pclResourceName'
     -> PeopleConnectionsList
 peopleConnectionsList pPclResourceName_ =
-    PeopleConnectionsList'
+  PeopleConnectionsList'
     { _pclSyncToken = Nothing
     , _pclXgafv = Nothing
     , _pclUploadProtocol = Nothing

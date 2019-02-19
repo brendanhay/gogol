@@ -82,7 +82,8 @@ type ProjectsLocationsWorkflowTemplatesInstantiateInlineResource
 -- successful completion, Operation.response will be Empty.
 --
 -- /See:/ 'projectsLocationsWorkflowTemplatesInstantiateInline' smart constructor.
-data ProjectsLocationsWorkflowTemplatesInstantiateInline = ProjectsLocationsWorkflowTemplatesInstantiateInline'
+data ProjectsLocationsWorkflowTemplatesInstantiateInline =
+  ProjectsLocationsWorkflowTemplatesInstantiateInline'
     { _plwtiiParent         :: !Text
     , _plwtiiXgafv          :: !(Maybe Xgafv)
     , _plwtiiRequestId      :: !(Maybe Text)
@@ -91,7 +92,8 @@ data ProjectsLocationsWorkflowTemplatesInstantiateInline = ProjectsLocationsWork
     , _plwtiiUploadType     :: !(Maybe Text)
     , _plwtiiPayload        :: !WorkflowTemplate
     , _plwtiiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesInstantiateInline' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ projectsLocationsWorkflowTemplatesInstantiateInline
     -> WorkflowTemplate -- ^ 'plwtiiPayload'
     -> ProjectsLocationsWorkflowTemplatesInstantiateInline
 projectsLocationsWorkflowTemplatesInstantiateInline pPlwtiiParent_ pPlwtiiPayload_ =
-    ProjectsLocationsWorkflowTemplatesInstantiateInline'
+  ProjectsLocationsWorkflowTemplatesInstantiateInline'
     { _plwtiiParent = pPlwtiiParent_
     , _plwtiiXgafv = Nothing
     , _plwtiiRequestId = Nothing
@@ -183,7 +185,7 @@ plwtiiCallback
       (\ s a -> s{_plwtiiCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkflowTemplatesInstantiateInline
+           ProjectsLocationsWorkflowTemplatesInstantiateInline
          where
         type Rs
                ProjectsLocationsWorkflowTemplatesInstantiateInline

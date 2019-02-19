@@ -61,10 +61,12 @@ type AchievementsSetStepsAtLeastResource =
 -- achievement is not modified.
 --
 -- /See:/ 'achievementsSetStepsAtLeast' smart constructor.
-data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast'
+data AchievementsSetStepsAtLeast =
+  AchievementsSetStepsAtLeast'
     { _assalAchievementId :: !Text
     , _assalSteps         :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AchievementsSetStepsAtLeast' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ achievementsSetStepsAtLeast
     -> Int32 -- ^ 'assalSteps'
     -> AchievementsSetStepsAtLeast
 achievementsSetStepsAtLeast pAssalAchievementId_ pAssalSteps_ =
-    AchievementsSetStepsAtLeast'
+  AchievementsSetStepsAtLeast'
     { _assalAchievementId = pAssalAchievementId_
     , _assalSteps = _Coerce # pAssalSteps_
     }

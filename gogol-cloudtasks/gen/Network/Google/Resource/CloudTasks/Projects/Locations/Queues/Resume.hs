@@ -74,7 +74,8 @@ type ProjectsLocationsQueuesResumeResource =
 -- Risks](https:\/\/cloud.google.com\/tasks\/docs\/manage-cloud-task-scaling).
 --
 -- /See:/ 'projectsLocationsQueuesResume' smart constructor.
-data ProjectsLocationsQueuesResume = ProjectsLocationsQueuesResume'
+data ProjectsLocationsQueuesResume =
+  ProjectsLocationsQueuesResume'
     { _plqrXgafv          :: !(Maybe Xgafv)
     , _plqrUploadProtocol :: !(Maybe Text)
     , _plqrAccessToken    :: !(Maybe Text)
@@ -82,7 +83,8 @@ data ProjectsLocationsQueuesResume = ProjectsLocationsQueuesResume'
     , _plqrPayload        :: !ResumeQueueRequest
     , _plqrName           :: !Text
     , _plqrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsQueuesResume' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ projectsLocationsQueuesResume
     -> Text -- ^ 'plqrName'
     -> ProjectsLocationsQueuesResume
 projectsLocationsQueuesResume pPlqrPayload_ pPlqrName_ =
-    ProjectsLocationsQueuesResume'
+  ProjectsLocationsQueuesResume'
     { _plqrXgafv = Nothing
     , _plqrUploadProtocol = Nothing
     , _plqrAccessToken = Nothing

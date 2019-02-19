@@ -65,7 +65,8 @@ type SitesDomainsListResource =
 -- | Lists the domains for the specified site.
 --
 -- /See:/ 'sitesDomainsList' smart constructor.
-data SitesDomainsList = SitesDomainsList'
+data SitesDomainsList =
+  SitesDomainsList'
     { _sdlParent         :: !Text
     , _sdlXgafv          :: !(Maybe Xgafv)
     , _sdlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data SitesDomainsList = SitesDomainsList'
     , _sdlPageToken      :: !(Maybe Text)
     , _sdlPageSize       :: !(Maybe (Textual Int32))
     , _sdlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesDomainsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ sitesDomainsList
     :: Text -- ^ 'sdlParent'
     -> SitesDomainsList
 sitesDomainsList pSdlParent_ =
-    SitesDomainsList'
+  SitesDomainsList'
     { _sdlParent = pSdlParent_
     , _sdlXgafv = Nothing
     , _sdlUploadProtocol = Nothing

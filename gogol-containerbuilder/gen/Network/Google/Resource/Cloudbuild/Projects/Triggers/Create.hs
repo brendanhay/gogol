@@ -64,7 +64,8 @@ type ProjectsTriggersCreateResource =
 -- | Creates a new \`BuildTrigger\`. This API is experimental.
 --
 -- /See:/ 'projectsTriggersCreate' smart constructor.
-data ProjectsTriggersCreate = ProjectsTriggersCreate'
+data ProjectsTriggersCreate =
+  ProjectsTriggersCreate'
     { _ptcXgafv          :: !(Maybe Xgafv)
     , _ptcUploadProtocol :: !(Maybe Text)
     , _ptcAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsTriggersCreate = ProjectsTriggersCreate'
     , _ptcPayload        :: !BuildTrigger
     , _ptcProjectId      :: !Text
     , _ptcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTriggersCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsTriggersCreate
     -> Text -- ^ 'ptcProjectId'
     -> ProjectsTriggersCreate
 projectsTriggersCreate pPtcPayload_ pPtcProjectId_ =
-    ProjectsTriggersCreate'
+  ProjectsTriggersCreate'
     { _ptcXgafv = Nothing
     , _ptcUploadProtocol = Nothing
     , _ptcAccessToken = Nothing

@@ -54,9 +54,11 @@ type CommentsMarkAsSpamResource =
 -- flagged as spam.
 --
 -- /See:/ 'commentsMarkAsSpam' smart constructor.
-newtype CommentsMarkAsSpam = CommentsMarkAsSpam'
+newtype CommentsMarkAsSpam =
+  CommentsMarkAsSpam'
     { _cmasId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentsMarkAsSpam' with the minimum fields required to make a request.
 --
@@ -66,10 +68,7 @@ newtype CommentsMarkAsSpam = CommentsMarkAsSpam'
 commentsMarkAsSpam
     :: Text -- ^ 'cmasId'
     -> CommentsMarkAsSpam
-commentsMarkAsSpam pCmasId_ =
-    CommentsMarkAsSpam'
-    { _cmasId = pCmasId_
-    }
+commentsMarkAsSpam pCmasId_ = CommentsMarkAsSpam' {_cmasId = pCmasId_}
 
 -- | The id parameter specifies a comma-separated list of IDs of comments
 -- that the caller believes should be classified as spam.

@@ -69,12 +69,14 @@ type ProjectsHistoriesListResource =
 -- malformed - NOT_FOUND - if the History does not exist
 --
 -- /See:/ 'projectsHistoriesList' smart constructor.
-data ProjectsHistoriesList = ProjectsHistoriesList'
+data ProjectsHistoriesList =
+  ProjectsHistoriesList'
     { _phlFilterByName :: !(Maybe Text)
     , _phlPageToken    :: !(Maybe Text)
     , _phlProjectId    :: !Text
     , _phlPageSize     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsHistoriesList' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ projectsHistoriesList
     :: Text -- ^ 'phlProjectId'
     -> ProjectsHistoriesList
 projectsHistoriesList pPhlProjectId_ =
-    ProjectsHistoriesList'
+  ProjectsHistoriesList'
     { _phlFilterByName = Nothing
     , _phlPageToken = Nothing
     , _phlProjectId = pPhlProjectId_

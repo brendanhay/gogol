@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ReportsInsert' request conforms to.
 type ReportsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -54,10 +54,12 @@ type ReportsInsertResource =
 -- | Creates a report.
 --
 -- /See:/ 'reportsInsert' smart constructor.
-data ReportsInsert = ReportsInsert'
+data ReportsInsert =
+  ReportsInsert'
     { _riProFileId :: !(Textual Int64)
     , _riPayload   :: !Report
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ reportsInsert
     -> Report -- ^ 'riPayload'
     -> ReportsInsert
 reportsInsert pRiProFileId_ pRiPayload_ =
-    ReportsInsert'
-    { _riProFileId = _Coerce # pRiProFileId_
-    , _riPayload = pRiPayload_
-    }
+  ReportsInsert'
+    {_riProFileId = _Coerce # pRiProFileId_, _riPayload = pRiPayload_}
 
 -- | The DFA user profile ID.
 riProFileId :: Lens' ReportsInsert Int64

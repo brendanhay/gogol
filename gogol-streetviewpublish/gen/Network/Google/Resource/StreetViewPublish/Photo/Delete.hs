@@ -66,14 +66,16 @@ type PhotoDeleteResource =
 -- photo ID does not exist.
 --
 -- /See:/ 'photoDelete' smart constructor.
-data PhotoDelete = PhotoDelete'
+data PhotoDelete =
+  PhotoDelete'
     { _pdXgafv          :: !(Maybe Xgafv)
     , _pdUploadProtocol :: !(Maybe Text)
     , _pdAccessToken    :: !(Maybe Text)
     , _pdUploadType     :: !(Maybe Text)
     , _pdPhotoId        :: !Text
     , _pdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PhotoDelete' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ photoDelete
     :: Text -- ^ 'pdPhotoId'
     -> PhotoDelete
 photoDelete pPdPhotoId_ =
-    PhotoDelete'
+  PhotoDelete'
     { _pdXgafv = Nothing
     , _pdUploadProtocol = Nothing
     , _pdAccessToken = Nothing

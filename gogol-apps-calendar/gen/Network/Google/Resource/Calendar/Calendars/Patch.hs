@@ -53,10 +53,12 @@ type CalendarsPatchResource =
 -- | Updates metadata for a calendar. This method supports patch semantics.
 --
 -- /See:/ 'calendarsPatch' smart constructor.
-data CalendarsPatch = CalendarsPatch'
+data CalendarsPatch =
+  CalendarsPatch'
     { _cpCalendarId :: !Text
     , _cpPayload    :: !Calendar
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CalendarsPatch' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ calendarsPatch
     -> Calendar -- ^ 'cpPayload'
     -> CalendarsPatch
 calendarsPatch pCpCalendarId_ pCpPayload_ =
-    CalendarsPatch'
-    { _cpCalendarId = pCpCalendarId_
-    , _cpPayload = pCpPayload_
-    }
+  CalendarsPatch' {_cpCalendarId = pCpCalendarId_, _cpPayload = pCpPayload_}
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

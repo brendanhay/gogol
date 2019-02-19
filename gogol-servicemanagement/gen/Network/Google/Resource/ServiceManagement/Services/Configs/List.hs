@@ -68,7 +68,8 @@ type ServicesConfigsListResource =
 -- from the newest to the oldest.
 --
 -- /See:/ 'servicesConfigsList' smart constructor.
-data ServicesConfigsList = ServicesConfigsList'
+data ServicesConfigsList =
+  ServicesConfigsList'
     { _sclXgafv          :: !(Maybe Xgafv)
     , _sclUploadProtocol :: !(Maybe Text)
     , _sclAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ServicesConfigsList = ServicesConfigsList'
     , _sclPageToken      :: !(Maybe Text)
     , _sclPageSize       :: !(Maybe (Textual Int32))
     , _sclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesConfigsList' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ servicesConfigsList
     :: Text -- ^ 'sclServiceName'
     -> ServicesConfigsList
 servicesConfigsList pSclServiceName_ =
-    ServicesConfigsList'
+  ServicesConfigsList'
     { _sclXgafv = Nothing
     , _sclUploadProtocol = Nothing
     , _sclAccessToken = Nothing

@@ -54,10 +54,12 @@ type VideosRateResource =
 -- | Add a like or dislike rating to a video or remove a rating from a video.
 --
 -- /See:/ 'videosRate' smart constructor.
-data VideosRate = VideosRate'
+data VideosRate =
+  VideosRate'
     { _vrRating :: !VideosRateRating
     , _vrId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideosRate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ videosRate
     -> Text -- ^ 'vrId'
     -> VideosRate
 videosRate pVrRating_ pVrId_ =
-    VideosRate'
-    { _vrRating = pVrRating_
-    , _vrId = pVrId_
-    }
+  VideosRate' {_vrRating = pVrRating_, _vrId = pVrId_}
 
 -- | Specifies the rating to record.
 vrRating :: Lens' VideosRate VideosRateRating

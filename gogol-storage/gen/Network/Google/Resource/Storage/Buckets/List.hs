@@ -61,14 +61,16 @@ type BucketsListResource =
 -- | Retrieves a list of buckets for a given project.
 --
 -- /See:/ 'bucketsList' smart constructor.
-data BucketsList = BucketsList'
+data BucketsList =
+  BucketsList'
     { _blProject     :: !Text
     , _blPrefix      :: !(Maybe Text)
     , _blUserProject :: !(Maybe Text)
     , _blProjection  :: !(Maybe BucketsListProjection)
     , _blPageToken   :: !(Maybe Text)
     , _blMaxResults  :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketsList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ bucketsList
     :: Text -- ^ 'blProject'
     -> BucketsList
 bucketsList pBlProject_ =
-    BucketsList'
+  BucketsList'
     { _blProject = pBlProject_
     , _blPrefix = Nothing
     , _blUserProject = Nothing

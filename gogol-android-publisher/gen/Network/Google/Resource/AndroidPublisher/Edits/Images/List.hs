@@ -60,12 +60,14 @@ type EditsImagesListResource =
 -- | Lists all images for the specified language and image type.
 --
 -- /See:/ 'editsImagesList' smart constructor.
-data EditsImagesList = EditsImagesList'
+data EditsImagesList =
+  EditsImagesList'
     { _eilPackageName :: !Text
     , _eilImageType   :: !EditsImagesListImageType
     , _eilLanguage    :: !Text
     , _eilEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsImagesList' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ editsImagesList
     -> Text -- ^ 'eilEditId'
     -> EditsImagesList
 editsImagesList pEilPackageName_ pEilImageType_ pEilLanguage_ pEilEditId_ =
-    EditsImagesList'
+  EditsImagesList'
     { _eilPackageName = pEilPackageName_
     , _eilImageType = pEilImageType_
     , _eilLanguage = pEilLanguage_

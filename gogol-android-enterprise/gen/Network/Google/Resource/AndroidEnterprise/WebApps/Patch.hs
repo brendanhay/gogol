@@ -56,11 +56,13 @@ type WebAppsPatchResource =
 -- | Updates an existing web app. This method supports patch semantics.
 --
 -- /See:/ 'webAppsPatch' smart constructor.
-data WebAppsPatch = WebAppsPatch'
+data WebAppsPatch =
+  WebAppsPatch'
     { _wapWebAppId     :: !Text
     , _wapEnterpriseId :: !Text
     , _wapPayload      :: !WebApp
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebAppsPatch' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ webAppsPatch
     -> WebApp -- ^ 'wapPayload'
     -> WebAppsPatch
 webAppsPatch pWapWebAppId_ pWapEnterpriseId_ pWapPayload_ =
-    WebAppsPatch'
+  WebAppsPatch'
     { _wapWebAppId = pWapWebAppId_
     , _wapEnterpriseId = pWapEnterpriseId_
     , _wapPayload = pWapPayload_

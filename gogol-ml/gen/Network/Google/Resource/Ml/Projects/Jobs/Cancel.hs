@@ -62,7 +62,8 @@ type ProjectsJobsCancelResource =
 -- | Cancels a running job.
 --
 -- /See:/ 'projectsJobsCancel' smart constructor.
-data ProjectsJobsCancel = ProjectsJobsCancel'
+data ProjectsJobsCancel =
+  ProjectsJobsCancel'
     { _pjcXgafv          :: !(Maybe Xgafv)
     , _pjcUploadProtocol :: !(Maybe Text)
     , _pjcAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsJobsCancel = ProjectsJobsCancel'
     , _pjcPayload        :: !GoogleCloudMlV1__CancelJobRequest
     , _pjcName           :: !Text
     , _pjcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsCancel' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsJobsCancel
     -> Text -- ^ 'pjcName'
     -> ProjectsJobsCancel
 projectsJobsCancel pPjcPayload_ pPjcName_ =
-    ProjectsJobsCancel'
+  ProjectsJobsCancel'
     { _pjcXgafv = Nothing
     , _pjcUploadProtocol = Nothing
     , _pjcAccessToken = Nothing

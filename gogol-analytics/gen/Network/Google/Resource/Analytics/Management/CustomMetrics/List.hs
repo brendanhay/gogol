@@ -60,12 +60,14 @@ type ManagementCustomMetricsListResource =
 -- | Lists custom metrics to which the user has access.
 --
 -- /See:/ 'managementCustomMetricsList' smart constructor.
-data ManagementCustomMetricsList = ManagementCustomMetricsList'
+data ManagementCustomMetricsList =
+  ManagementCustomMetricsList'
     { _mcmlWebPropertyId :: !Text
     , _mcmlAccountId     :: !Text
     , _mcmlStartIndex    :: !(Maybe (Textual Int32))
     , _mcmlMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsList' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ managementCustomMetricsList
     -> Text -- ^ 'mcmlAccountId'
     -> ManagementCustomMetricsList
 managementCustomMetricsList pMcmlWebPropertyId_ pMcmlAccountId_ =
-    ManagementCustomMetricsList'
+  ManagementCustomMetricsList'
     { _mcmlWebPropertyId = pMcmlWebPropertyId_
     , _mcmlAccountId = pMcmlAccountId_
     , _mcmlStartIndex = Nothing

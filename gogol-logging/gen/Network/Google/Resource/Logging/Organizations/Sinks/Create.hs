@@ -70,7 +70,8 @@ type OrganizationsSinksCreateResource =
 -- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ 'organizationsSinksCreate' smart constructor.
-data OrganizationsSinksCreate = OrganizationsSinksCreate'
+data OrganizationsSinksCreate =
+  OrganizationsSinksCreate'
     { _oscParent               :: !Text
     , _oscXgafv                :: !(Maybe Xgafv)
     , _oscUniqueWriterIdentity :: !(Maybe Bool)
@@ -79,7 +80,8 @@ data OrganizationsSinksCreate = OrganizationsSinksCreate'
     , _oscUploadType           :: !(Maybe Text)
     , _oscPayload              :: !LogSink
     , _oscCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsSinksCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ organizationsSinksCreate
     -> LogSink -- ^ 'oscPayload'
     -> OrganizationsSinksCreate
 organizationsSinksCreate pOscParent_ pOscPayload_ =
-    OrganizationsSinksCreate'
+  OrganizationsSinksCreate'
     { _oscParent = pOscParent_
     , _oscXgafv = Nothing
     , _oscUniqueWriterIdentity = Nothing

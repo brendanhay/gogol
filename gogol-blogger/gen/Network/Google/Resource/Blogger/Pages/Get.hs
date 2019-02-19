@@ -56,11 +56,13 @@ type PagesGetResource =
 -- | Gets one blog page by ID.
 --
 -- /See:/ 'pagesGet' smart constructor.
-data PagesGet = PagesGet'
+data PagesGet =
+  PagesGet'
     { _pgBlogId :: !Text
     , _pgPageId :: !Text
     , _pgView   :: !(Maybe PagesGetView)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PagesGet' with the minimum fields required to make a request.
 --
@@ -76,11 +78,7 @@ pagesGet
     -> Text -- ^ 'pgPageId'
     -> PagesGet
 pagesGet pPgBlogId_ pPgPageId_ =
-    PagesGet'
-    { _pgBlogId = pPgBlogId_
-    , _pgPageId = pPgPageId_
-    , _pgView = Nothing
-    }
+  PagesGet' {_pgBlogId = pPgBlogId_, _pgPageId = pPgPageId_, _pgView = Nothing}
 
 -- | ID of the blog containing the page.
 pgBlogId :: Lens' PagesGet Text

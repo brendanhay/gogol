@@ -61,12 +61,14 @@ type ImagesInsertResource =
 -- request.
 --
 -- /See:/ 'imagesInsert' smart constructor.
-data ImagesInsert = ImagesInsert'
+data ImagesInsert =
+  ImagesInsert'
     { _iiRequestId   :: !(Maybe Text)
     , _iiProject     :: !Text
     , _iiPayload     :: !Image
     , _iiForceCreate :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImagesInsert' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ imagesInsert
     -> Image -- ^ 'iiPayload'
     -> ImagesInsert
 imagesInsert pIiProject_ pIiPayload_ =
-    ImagesInsert'
+  ImagesInsert'
     { _iiRequestId = Nothing
     , _iiProject = pIiProject_
     , _iiPayload = pIiPayload_

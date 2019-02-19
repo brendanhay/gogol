@@ -63,7 +63,8 @@ type ProjectsRollbackResource =
 -- | Rolls back a transaction.
 --
 -- /See:/ 'projectsRollback' smart constructor.
-data ProjectsRollback = ProjectsRollback'
+data ProjectsRollback =
+  ProjectsRollback'
     { _prXgafv          :: !(Maybe Xgafv)
     , _prUploadProtocol :: !(Maybe Text)
     , _prAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsRollback = ProjectsRollback'
     , _prPayload        :: !RollbackRequest
     , _prProjectId      :: !Text
     , _prCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRollback' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsRollback
     -> Text -- ^ 'prProjectId'
     -> ProjectsRollback
 projectsRollback pPrPayload_ pPrProjectId_ =
-    ProjectsRollback'
+  ProjectsRollback'
     { _prXgafv = Nothing
     , _prUploadProtocol = Nothing
     , _prAccessToken = Nothing

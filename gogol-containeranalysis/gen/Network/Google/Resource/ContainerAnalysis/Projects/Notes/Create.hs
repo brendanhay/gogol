@@ -64,7 +64,8 @@ type ProjectsNotesCreateResource =
 -- | Creates a new note.
 --
 -- /See:/ 'projectsNotesCreate' smart constructor.
-data ProjectsNotesCreate = ProjectsNotesCreate'
+data ProjectsNotesCreate =
+  ProjectsNotesCreate'
     { _pncParent         :: !Text
     , _pncXgafv          :: !(Maybe Xgafv)
     , _pncUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsNotesCreate = ProjectsNotesCreate'
     , _pncPayload        :: !Note
     , _pncNoteId         :: !(Maybe Text)
     , _pncCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsNotesCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsNotesCreate
     -> Note -- ^ 'pncPayload'
     -> ProjectsNotesCreate
 projectsNotesCreate pPncParent_ pPncPayload_ =
-    ProjectsNotesCreate'
+  ProjectsNotesCreate'
     { _pncParent = pPncParent_
     , _pncXgafv = Nothing
     , _pncUploadProtocol = Nothing

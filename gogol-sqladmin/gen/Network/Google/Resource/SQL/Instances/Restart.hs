@@ -55,10 +55,12 @@ type InstancesRestartResource =
 -- | Restarts a Cloud SQL instance.
 --
 -- /See:/ 'instancesRestart' smart constructor.
-data InstancesRestart = InstancesRestart'
+data InstancesRestart =
+  InstancesRestart'
     { _irProject  :: !Text
     , _irInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesRestart' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ instancesRestart
     -> Text -- ^ 'irInstance'
     -> InstancesRestart
 instancesRestart pIrProject_ pIrInstance_ =
-    InstancesRestart'
-    { _irProject = pIrProject_
-    , _irInstance = pIrInstance_
-    }
+  InstancesRestart' {_irProject = pIrProject_, _irInstance = pIrInstance_}
 
 -- | Project ID of the project that contains the instance to be restarted.
 irProject :: Lens' InstancesRestart Text

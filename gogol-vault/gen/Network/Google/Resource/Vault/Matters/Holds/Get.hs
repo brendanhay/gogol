@@ -65,7 +65,8 @@ type MattersHoldsGetResource =
 -- | Gets a hold by ID.
 --
 -- /See:/ 'mattersHoldsGet' smart constructor.
-data MattersHoldsGet = MattersHoldsGet'
+data MattersHoldsGet =
+  MattersHoldsGet'
     { _mhgXgafv          :: !(Maybe Xgafv)
     , _mhgUploadProtocol :: !(Maybe Text)
     , _mhgHoldId         :: !Text
@@ -74,7 +75,8 @@ data MattersHoldsGet = MattersHoldsGet'
     , _mhgMatterId       :: !Text
     , _mhgView           :: !(Maybe Text)
     , _mhgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersHoldsGet' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ mattersHoldsGet
     -> Text -- ^ 'mhgMatterId'
     -> MattersHoldsGet
 mattersHoldsGet pMhgHoldId_ pMhgMatterId_ =
-    MattersHoldsGet'
+  MattersHoldsGet'
     { _mhgXgafv = Nothing
     , _mhgUploadProtocol = Nothing
     , _mhgHoldId = pMhgHoldId_

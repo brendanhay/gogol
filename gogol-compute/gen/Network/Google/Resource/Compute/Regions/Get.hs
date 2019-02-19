@@ -56,10 +56,12 @@ type RegionsGetResource =
 -- by making a list() request.
 --
 -- /See:/ 'regionsGet' smart constructor.
-data RegionsGet = RegionsGet'
+data RegionsGet =
+  RegionsGet'
     { _rgProject :: !Text
     , _rgRegion  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionsGet' with the minimum fields required to make a request.
 --
@@ -73,10 +75,7 @@ regionsGet
     -> Text -- ^ 'rgRegion'
     -> RegionsGet
 regionsGet pRgProject_ pRgRegion_ =
-    RegionsGet'
-    { _rgProject = pRgProject_
-    , _rgRegion = pRgRegion_
-    }
+  RegionsGet' {_rgProject = pRgProject_, _rgRegion = pRgRegion_}
 
 -- | Project ID for this request.
 rgProject :: Lens' RegionsGet Text

@@ -69,7 +69,8 @@ type AlbumsListResource =
 -- Photos app.
 --
 -- /See:/ 'albumsList' smart constructor.
-data AlbumsList = AlbumsList'
+data AlbumsList =
+  AlbumsList'
     { _alXgafv          :: !(Maybe Xgafv)
     , _alUploadProtocol :: !(Maybe Text)
     , _alPp             :: !Bool
@@ -79,7 +80,8 @@ data AlbumsList = AlbumsList'
     , _alPageToken      :: !(Maybe Text)
     , _alPageSize       :: !(Maybe (Textual Int32))
     , _alCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlbumsList' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ data AlbumsList = AlbumsList'
 albumsList
     :: AlbumsList
 albumsList =
-    AlbumsList'
+  AlbumsList'
     { _alXgafv = Nothing
     , _alUploadProtocol = Nothing
     , _alPp = True

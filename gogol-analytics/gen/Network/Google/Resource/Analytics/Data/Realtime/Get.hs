@@ -62,14 +62,16 @@ type DataRealtimeGetResource =
 -- | Returns real time data for a view (profile).
 --
 -- /See:/ 'dataRealtimeGet' smart constructor.
-data DataRealtimeGet = DataRealtimeGet'
+data DataRealtimeGet =
+  DataRealtimeGet'
     { _drgMetrics    :: !Text
     , _drgFilters    :: !(Maybe Text)
     , _drgIds        :: !Text
     , _drgSort       :: !(Maybe Text)
     , _drgDimensions :: !(Maybe Text)
     , _drgMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataRealtimeGet' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ dataRealtimeGet
     -> Text -- ^ 'drgIds'
     -> DataRealtimeGet
 dataRealtimeGet pDrgMetrics_ pDrgIds_ =
-    DataRealtimeGet'
+  DataRealtimeGet'
     { _drgMetrics = pDrgMetrics_
     , _drgFilters = Nothing
     , _drgIds = pDrgIds_

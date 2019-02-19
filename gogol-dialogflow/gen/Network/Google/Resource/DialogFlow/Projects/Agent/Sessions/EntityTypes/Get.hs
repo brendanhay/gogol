@@ -60,14 +60,16 @@ type ProjectsAgentSessionsEntityTypesGetResource =
 -- | Retrieves the specified session entity type.
 --
 -- /See:/ 'projectsAgentSessionsEntityTypesGet' smart constructor.
-data ProjectsAgentSessionsEntityTypesGet = ProjectsAgentSessionsEntityTypesGet'
+data ProjectsAgentSessionsEntityTypesGet =
+  ProjectsAgentSessionsEntityTypesGet'
     { _paSetgXgafv          :: !(Maybe Xgafv)
     , _paSetgUploadProtocol :: !(Maybe Text)
     , _paSetgAccessToken    :: !(Maybe Text)
     , _paSetgUploadType     :: !(Maybe Text)
     , _paSetgName           :: !Text
     , _paSetgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsAgentSessionsEntityTypesGet
     :: Text -- ^ 'paSetgName'
     -> ProjectsAgentSessionsEntityTypesGet
 projectsAgentSessionsEntityTypesGet pPaSetgName_ =
-    ProjectsAgentSessionsEntityTypesGet'
+  ProjectsAgentSessionsEntityTypesGet'
     { _paSetgXgafv = Nothing
     , _paSetgUploadProtocol = Nothing
     , _paSetgAccessToken = Nothing
@@ -133,7 +135,8 @@ paSetgCallback
       (\ s a -> s{_paSetgCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsEntityTypesGet where
+           ProjectsAgentSessionsEntityTypesGet
+         where
         type Rs ProjectsAgentSessionsEntityTypesGet =
              GoogleCloudDialogflowV2SessionEntityType
         type Scopes ProjectsAgentSessionsEntityTypesGet =

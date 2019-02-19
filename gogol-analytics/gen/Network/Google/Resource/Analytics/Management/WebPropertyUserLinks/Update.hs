@@ -61,12 +61,14 @@ type ManagementWebPropertyUserLinksUpdateResource =
 -- | Updates permissions for an existing user on the given web property.
 --
 -- /See:/ 'managementWebPropertyUserLinksUpdate' smart constructor.
-data ManagementWebPropertyUserLinksUpdate = ManagementWebPropertyUserLinksUpdate'
+data ManagementWebPropertyUserLinksUpdate =
+  ManagementWebPropertyUserLinksUpdate'
     { _mwpuluWebPropertyId :: !Text
     , _mwpuluPayload       :: !EntityUserLink
     , _mwpuluAccountId     :: !Text
     , _mwpuluLinkId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksUpdate' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ managementWebPropertyUserLinksUpdate
     -> Text -- ^ 'mwpuluLinkId'
     -> ManagementWebPropertyUserLinksUpdate
 managementWebPropertyUserLinksUpdate pMwpuluWebPropertyId_ pMwpuluPayload_ pMwpuluAccountId_ pMwpuluLinkId_ =
-    ManagementWebPropertyUserLinksUpdate'
+  ManagementWebPropertyUserLinksUpdate'
     { _mwpuluWebPropertyId = pMwpuluWebPropertyId_
     , _mwpuluPayload = pMwpuluPayload_
     , _mwpuluAccountId = pMwpuluAccountId_
@@ -117,7 +119,8 @@ mwpuluLinkId
   = lens _mwpuluLinkId (\ s a -> s{_mwpuluLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyUserLinksUpdate where
+           ManagementWebPropertyUserLinksUpdate
+         where
         type Rs ManagementWebPropertyUserLinksUpdate =
              EntityUserLink
         type Scopes ManagementWebPropertyUserLinksUpdate =

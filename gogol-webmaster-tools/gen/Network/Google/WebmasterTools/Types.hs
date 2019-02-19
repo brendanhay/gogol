@@ -174,8 +174,8 @@ webmasterToolsService
 
 -- | View and manage Search Console data for your verified sites
 webmastersScope :: Proxy '["https://www.googleapis.com/auth/webmasters"]
-webmastersScope = Proxy;
+webmastersScope = Proxy
 
 -- | View Search Console data for your verified sites
 webmastersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/webmasters.readonly"]
-webmastersReadOnlyScope = Proxy;
+webmastersReadOnlyScope = Proxy

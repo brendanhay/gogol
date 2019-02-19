@@ -59,11 +59,13 @@ type DatabasesGetResource =
 -- Cloud SQL instance.
 --
 -- /See:/ 'databasesGet' smart constructor.
-data DatabasesGet = DatabasesGet'
+data DatabasesGet =
+  DatabasesGet'
     { _dgProject  :: !Text
     , _dgDatabase :: !Text
     , _dgInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DatabasesGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ databasesGet
     -> Text -- ^ 'dgInstance'
     -> DatabasesGet
 databasesGet pDgProject_ pDgDatabase_ pDgInstance_ =
-    DatabasesGet'
+  DatabasesGet'
     { _dgProject = pDgProject_
     , _dgDatabase = pDgDatabase_
     , _dgInstance = pDgInstance_

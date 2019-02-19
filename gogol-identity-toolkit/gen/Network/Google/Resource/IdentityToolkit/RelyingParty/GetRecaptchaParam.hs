@@ -51,8 +51,8 @@ type RelyingPartyGetRecaptchaParamResource =
 --
 -- /See:/ 'relyingPartyGetRecaptchaParam' smart constructor.
 data RelyingPartyGetRecaptchaParam =
-    RelyingPartyGetRecaptchaParam'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  RelyingPartyGetRecaptchaParam'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyGetRecaptchaParam' with the minimum fields required to make a request.
 --

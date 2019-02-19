@@ -56,11 +56,13 @@ type TurnBasedMatchesGetResource =
 -- | Get the data for a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesGet' smart constructor.
-data TurnBasedMatchesGet = TurnBasedMatchesGet'
+data TurnBasedMatchesGet =
+  TurnBasedMatchesGet'
     { _tbmgIncludeMatchData :: !(Maybe Bool)
     , _tbmgLanguage         :: !(Maybe Text)
     , _tbmgMatchId          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesGet' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ turnBasedMatchesGet
     :: Text -- ^ 'tbmgMatchId'
     -> TurnBasedMatchesGet
 turnBasedMatchesGet pTbmgMatchId_ =
-    TurnBasedMatchesGet'
+  TurnBasedMatchesGet'
     { _tbmgIncludeMatchData = Nothing
     , _tbmgLanguage = Nothing
     , _tbmgMatchId = pTbmgMatchId_

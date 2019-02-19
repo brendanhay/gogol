@@ -70,7 +70,8 @@ type AccessPoliciesPatchResource =
 -- will be returned in \`metadata\` as a BadRequest proto.
 --
 -- /See:/ 'accessPoliciesPatch' smart constructor.
-data AccessPoliciesPatch = AccessPoliciesPatch'
+data AccessPoliciesPatch =
+  AccessPoliciesPatch'
     { _appXgafv          :: !(Maybe Xgafv)
     , _appUploadProtocol :: !(Maybe Text)
     , _appUpdateMask     :: !(Maybe GFieldMask)
@@ -79,7 +80,8 @@ data AccessPoliciesPatch = AccessPoliciesPatch'
     , _appPayload        :: !AccessPolicy
     , _appName           :: !Text
     , _appCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesPatch' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ accessPoliciesPatch
     -> Text -- ^ 'appName'
     -> AccessPoliciesPatch
 accessPoliciesPatch pAppPayload_ pAppName_ =
-    AccessPoliciesPatch'
+  AccessPoliciesPatch'
     { _appXgafv = Nothing
     , _appUploadProtocol = Nothing
     , _appUpdateMask = Nothing

@@ -76,7 +76,8 @@ type ProjectsBatchGetAssetsHistoryResource =
 -- in the output history.
 --
 -- /See:/ 'projectsBatchGetAssetsHistory' smart constructor.
-data ProjectsBatchGetAssetsHistory = ProjectsBatchGetAssetsHistory'
+data ProjectsBatchGetAssetsHistory =
+  ProjectsBatchGetAssetsHistory'
     { _pbgahParent                  :: !Text
     , _pbgahXgafv                   :: !(Maybe Xgafv)
     , _pbgahReadTimeWindowEndTime   :: !(Maybe DateTime')
@@ -87,7 +88,8 @@ data ProjectsBatchGetAssetsHistory = ProjectsBatchGetAssetsHistory'
     , _pbgahReadTimeWindowStartTime :: !(Maybe DateTime')
     , _pbgahContentType             :: !(Maybe Text)
     , _pbgahCallback                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsBatchGetAssetsHistory' with the minimum fields required to make a request.
 --
@@ -116,7 +118,7 @@ projectsBatchGetAssetsHistory
     :: Text -- ^ 'pbgahParent'
     -> ProjectsBatchGetAssetsHistory
 projectsBatchGetAssetsHistory pPbgahParent_ =
-    ProjectsBatchGetAssetsHistory'
+  ProjectsBatchGetAssetsHistory'
     { _pbgahParent = pPbgahParent_
     , _pbgahXgafv = Nothing
     , _pbgahReadTimeWindowEndTime = Nothing

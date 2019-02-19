@@ -57,11 +57,13 @@ type RoutesDeleteResource =
 -- | Deletes the specified Route resource.
 --
 -- /See:/ 'routesDelete' smart constructor.
-data RoutesDelete = RoutesDelete'
+data RoutesDelete =
+  RoutesDelete'
     { _rdRequestId :: !(Maybe Text)
     , _rdProject   :: !Text
     , _rdRoute     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutesDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +79,8 @@ routesDelete
     -> Text -- ^ 'rdRoute'
     -> RoutesDelete
 routesDelete pRdProject_ pRdRoute_ =
-    RoutesDelete'
-    { _rdRequestId = Nothing
-    , _rdProject = pRdProject_
-    , _rdRoute = pRdRoute_
-    }
+  RoutesDelete'
+    {_rdRequestId = Nothing, _rdProject = pRdProject_, _rdRoute = pRdRoute_}
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

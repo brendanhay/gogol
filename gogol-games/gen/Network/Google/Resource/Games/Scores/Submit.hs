@@ -59,12 +59,14 @@ type ScoresSubmitResource =
 -- | Submits a score to the specified leaderboard.
 --
 -- /See:/ 'scoresSubmit' smart constructor.
-data ScoresSubmit = ScoresSubmit'
+data ScoresSubmit =
+  ScoresSubmit'
     { _ssScoreTag      :: !(Maybe Text)
     , _ssScore         :: !(Textual Int64)
     , _ssLeaderboardId :: !Text
     , _ssLanguage      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ScoresSubmit' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ scoresSubmit
     -> Text -- ^ 'ssLeaderboardId'
     -> ScoresSubmit
 scoresSubmit pSsScore_ pSsLeaderboardId_ =
-    ScoresSubmit'
+  ScoresSubmit'
     { _ssScoreTag = Nothing
     , _ssScore = _Coerce # pSsScore_
     , _ssLeaderboardId = pSsLeaderboardId_

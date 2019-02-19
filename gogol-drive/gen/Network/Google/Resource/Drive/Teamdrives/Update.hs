@@ -55,11 +55,13 @@ type TeamdrivesUpdateResource =
 -- | Updates a Team Drive\'s metadata
 --
 -- /See:/ 'teamdrivesUpdate' smart constructor.
-data TeamdrivesUpdate = TeamdrivesUpdate'
+data TeamdrivesUpdate =
+  TeamdrivesUpdate'
     { _tuPayload              :: !TeamDrive
     , _tuTeamDriveId          :: !Text
     , _tuUseDomainAdminAccess :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TeamdrivesUpdate' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ teamdrivesUpdate
     -> Text -- ^ 'tuTeamDriveId'
     -> TeamdrivesUpdate
 teamdrivesUpdate pTuPayload_ pTuTeamDriveId_ =
-    TeamdrivesUpdate'
+  TeamdrivesUpdate'
     { _tuPayload = pTuPayload_
     , _tuTeamDriveId = pTuTeamDriveId_
     , _tuUseDomainAdminAccess = False

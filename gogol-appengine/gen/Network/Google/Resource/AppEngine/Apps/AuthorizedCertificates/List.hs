@@ -68,7 +68,8 @@ type AppsAuthorizedCertificatesListResource =
 -- | Lists all SSL certificates the user is authorized to administer.
 --
 -- /See:/ 'appsAuthorizedCertificatesList' smart constructor.
-data AppsAuthorizedCertificatesList = AppsAuthorizedCertificatesList'
+data AppsAuthorizedCertificatesList =
+  AppsAuthorizedCertificatesList'
     { _aaclXgafv          :: !(Maybe Xgafv)
     , _aaclUploadProtocol :: !(Maybe Text)
     , _aaclAccessToken    :: !(Maybe Text)
@@ -78,7 +79,8 @@ data AppsAuthorizedCertificatesList = AppsAuthorizedCertificatesList'
     , _aaclPageToken      :: !(Maybe Text)
     , _aaclPageSize       :: !(Maybe (Textual Int32))
     , _aaclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsAuthorizedCertificatesList' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ appsAuthorizedCertificatesList
     :: Text -- ^ 'aaclAppsId'
     -> AppsAuthorizedCertificatesList
 appsAuthorizedCertificatesList pAaclAppsId_ =
-    AppsAuthorizedCertificatesList'
+  AppsAuthorizedCertificatesList'
     { _aaclXgafv = Nothing
     , _aaclUploadProtocol = Nothing
     , _aaclAccessToken = Nothing

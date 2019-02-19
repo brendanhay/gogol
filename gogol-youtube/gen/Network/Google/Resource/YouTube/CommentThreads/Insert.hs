@@ -56,10 +56,12 @@ type CommentThreadsInsertResource =
 -- use the comments.insert method instead.
 --
 -- /See:/ 'commentThreadsInsert' smart constructor.
-data CommentThreadsInsert = CommentThreadsInsert'
+data CommentThreadsInsert =
+  CommentThreadsInsert'
     { _ctiPart    :: !Text
     , _ctiPayload :: !CommentThread
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentThreadsInsert' with the minimum fields required to make a request.
 --
@@ -73,10 +75,7 @@ commentThreadsInsert
     -> CommentThread -- ^ 'ctiPayload'
     -> CommentThreadsInsert
 commentThreadsInsert pCtiPart_ pCtiPayload_ =
-    CommentThreadsInsert'
-    { _ctiPart = pCtiPart_
-    , _ctiPayload = pCtiPayload_
-    }
+  CommentThreadsInsert' {_ctiPart = pCtiPart_, _ctiPayload = pCtiPayload_}
 
 -- | The part parameter identifies the properties that the API response will
 -- include. Set the parameter value to snippet. The snippet part has a

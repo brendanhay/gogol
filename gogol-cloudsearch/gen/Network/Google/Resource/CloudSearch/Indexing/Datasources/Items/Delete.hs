@@ -69,7 +69,8 @@ type IndexingDatasourcesItemsDeleteResource =
 -- | Deletes Item resource for the specified resource name.
 --
 -- /See:/ 'indexingDatasourcesItemsDelete' smart constructor.
-data IndexingDatasourcesItemsDelete = IndexingDatasourcesItemsDelete'
+data IndexingDatasourcesItemsDelete =
+  IndexingDatasourcesItemsDelete'
     { _ididXgafv                       :: !(Maybe Xgafv)
     , _ididUploadProtocol              :: !(Maybe Text)
     , _ididAccessToken                 :: !(Maybe Text)
@@ -80,7 +81,8 @@ data IndexingDatasourcesItemsDelete = IndexingDatasourcesItemsDelete'
     , _ididVersion                     :: !(Maybe Bytes)
     , _ididDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _ididCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IndexingDatasourcesItemsDelete' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ indexingDatasourcesItemsDelete
     :: Text -- ^ 'ididName'
     -> IndexingDatasourcesItemsDelete
 indexingDatasourcesItemsDelete pIdidName_ =
-    IndexingDatasourcesItemsDelete'
+  IndexingDatasourcesItemsDelete'
     { _ididXgafv = Nothing
     , _ididUploadProtocol = Nothing
     , _ididAccessToken = Nothing

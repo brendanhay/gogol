@@ -64,14 +64,16 @@ type NodeTemplatesListResource =
 -- | Retrieves a list of node templates available to the specified project.
 --
 -- /See:/ 'nodeTemplatesList' smart constructor.
-data NodeTemplatesList = NodeTemplatesList'
+data NodeTemplatesList =
+  NodeTemplatesList'
     { _ntlOrderBy    :: !(Maybe Text)
     , _ntlProject    :: !Text
     , _ntlFilter     :: !(Maybe Text)
     , _ntlRegion     :: !Text
     , _ntlPageToken  :: !(Maybe Text)
     , _ntlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplatesList' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ nodeTemplatesList
     -> Text -- ^ 'ntlRegion'
     -> NodeTemplatesList
 nodeTemplatesList pNtlProject_ pNtlRegion_ =
-    NodeTemplatesList'
+  NodeTemplatesList'
     { _ntlOrderBy = Nothing
     , _ntlProject = pNtlProject_
     , _ntlFilter = Nothing

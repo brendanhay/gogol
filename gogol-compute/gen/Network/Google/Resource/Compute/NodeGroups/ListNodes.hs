@@ -67,7 +67,8 @@ type NodeGroupsListNodesResource =
 -- | Lists nodes in the node group.
 --
 -- /See:/ 'nodeGroupsListNodes'' smart constructor.
-data NodeGroupsListNodes' = NodeGroupsListNodes''
+data NodeGroupsListNodes' =
+  NodeGroupsListNodes''
     { _nglnNodeGroup  :: !Text
     , _nglnOrderBy    :: !(Maybe Text)
     , _nglnProject    :: !Text
@@ -75,7 +76,8 @@ data NodeGroupsListNodes' = NodeGroupsListNodes''
     , _nglnFilter     :: !(Maybe Text)
     , _nglnPageToken  :: !(Maybe Text)
     , _nglnMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsListNodes'' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ nodeGroupsListNodes'
     -> Text -- ^ 'nglnZone'
     -> NodeGroupsListNodes'
 nodeGroupsListNodes' pNglnNodeGroup_ pNglnProject_ pNglnZone_ =
-    NodeGroupsListNodes''
+  NodeGroupsListNodes''
     { _nglnNodeGroup = pNglnNodeGroup_
     , _nglnOrderBy = Nothing
     , _nglnProject = pNglnProject_

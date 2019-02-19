@@ -56,10 +56,12 @@ type AchievementConfigurationsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'achievementConfigurationsPatch' smart constructor.
-data AchievementConfigurationsPatch = AchievementConfigurationsPatch'
+data AchievementConfigurationsPatch =
+  AchievementConfigurationsPatch'
     { _acpAchievementId :: !Text
     , _acpPayload       :: !AchievementConfiguration
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AchievementConfigurationsPatch' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ achievementConfigurationsPatch
     -> AchievementConfiguration -- ^ 'acpPayload'
     -> AchievementConfigurationsPatch
 achievementConfigurationsPatch pAcpAchievementId_ pAcpPayload_ =
-    AchievementConfigurationsPatch'
-    { _acpAchievementId = pAcpAchievementId_
-    , _acpPayload = pAcpPayload_
-    }
+  AchievementConfigurationsPatch'
+    {_acpAchievementId = pAcpAchievementId_, _acpPayload = pAcpPayload_}
 
 -- | The ID of the achievement used by this method.
 acpAchievementId :: Lens' AchievementConfigurationsPatch Text

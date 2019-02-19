@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementsGet' request conforms to.
 type PlacementsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -54,10 +54,12 @@ type PlacementsGetResource =
 -- | Gets one placement by ID.
 --
 -- /See:/ 'placementsGet' smart constructor.
-data PlacementsGet = PlacementsGet'
+data PlacementsGet =
+  PlacementsGet'
     { _pgProFileId :: !(Textual Int64)
     , _pgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlacementsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ placementsGet
     -> Int64 -- ^ 'pgId'
     -> PlacementsGet
 placementsGet pPgProFileId_ pPgId_ =
-    PlacementsGet'
-    { _pgProFileId = _Coerce # pPgProFileId_
-    , _pgId = _Coerce # pPgId_
-    }
+  PlacementsGet'
+    {_pgProFileId = _Coerce # pPgProFileId_, _pgId = _Coerce # pPgId_}
 
 -- | User profile ID associated with this request.
 pgProFileId :: Lens' PlacementsGet Int64

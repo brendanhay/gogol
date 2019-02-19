@@ -56,9 +56,11 @@ type VerificationCodesListResource =
 -- specified user.
 --
 -- /See:/ 'verificationCodesList' smart constructor.
-newtype VerificationCodesList = VerificationCodesList'
+newtype VerificationCodesList =
+  VerificationCodesList'
     { _vclUserKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VerificationCodesList' with the minimum fields required to make a request.
 --
@@ -69,9 +71,7 @@ verificationCodesList
     :: Text -- ^ 'vclUserKey'
     -> VerificationCodesList
 verificationCodesList pVclUserKey_ =
-    VerificationCodesList'
-    { _vclUserKey = pVclUserKey_
-    }
+  VerificationCodesList' {_vclUserKey = pVclUserKey_}
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.

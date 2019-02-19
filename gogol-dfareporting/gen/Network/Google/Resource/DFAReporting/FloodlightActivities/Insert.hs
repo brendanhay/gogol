@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesInsert' request conforms to.
 type FloodlightActivitiesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -55,10 +55,12 @@ type FloodlightActivitiesInsertResource =
 -- | Inserts a new floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesInsert' smart constructor.
-data FloodlightActivitiesInsert = FloodlightActivitiesInsert'
+data FloodlightActivitiesInsert =
+  FloodlightActivitiesInsert'
     { _faiProFileId :: !(Textual Int64)
     , _faiPayload   :: !FloodlightActivity
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FloodlightActivitiesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ floodlightActivitiesInsert
     -> FloodlightActivity -- ^ 'faiPayload'
     -> FloodlightActivitiesInsert
 floodlightActivitiesInsert pFaiProFileId_ pFaiPayload_ =
-    FloodlightActivitiesInsert'
-    { _faiProFileId = _Coerce # pFaiProFileId_
-    , _faiPayload = pFaiPayload_
-    }
+  FloodlightActivitiesInsert'
+    {_faiProFileId = _Coerce # pFaiProFileId_, _faiPayload = pFaiPayload_}
 
 -- | User profile ID associated with this request.
 faiProFileId :: Lens' FloodlightActivitiesInsert Int64

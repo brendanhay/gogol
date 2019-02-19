@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'MetrosList' request conforms to.
 type MetrosListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "metros" :>
@@ -53,9 +53,11 @@ type MetrosListResource =
 -- | Retrieves a list of metros.
 --
 -- /See:/ 'metrosList' smart constructor.
-newtype MetrosList = MetrosList'
+newtype MetrosList =
+  MetrosList'
     { _mlProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetrosList' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype MetrosList = MetrosList'
 metrosList
     :: Int64 -- ^ 'mlProFileId'
     -> MetrosList
-metrosList pMlProFileId_ =
-    MetrosList'
-    { _mlProFileId = _Coerce # pMlProFileId_
-    }
+metrosList pMlProFileId_ = MetrosList' {_mlProFileId = _Coerce # pMlProFileId_}
 
 -- | User profile ID associated with this request.
 mlProFileId :: Lens' MetrosList Int64

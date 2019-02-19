@@ -18,6 +18,47 @@ module Network.Google.VideoIntelligence.Types.Sum where
 
 import           Network.Google.Prelude hiding (Bytes)
 
+-- | What labels should be detected with LABEL_DETECTION, in addition to
+-- video-level labels or segment-level labels. If unspecified, defaults to
+-- \`SHOT_MODE\`.
+data GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode
+    = LabelDetectionModeUnspecified
+      -- ^ @LABEL_DETECTION_MODE_UNSPECIFIED@
+      -- Unspecified.
+    | ShotMode
+      -- ^ @SHOT_MODE@
+      -- Detect shot-level labels.
+    | FrameMode
+      -- ^ @FRAME_MODE@
+      -- Detect frame-level labels.
+    | ShotAndFrameMode
+      -- ^ @SHOT_AND_FRAME_MODE@
+      -- Detect both shot-level and frame-level labels.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode
+
+instance FromHttpApiData GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode where
+    parseQueryParam = \case
+        "LABEL_DETECTION_MODE_UNSPECIFIED" -> Right LabelDetectionModeUnspecified
+        "SHOT_MODE" -> Right ShotMode
+        "FRAME_MODE" -> Right FrameMode
+        "SHOT_AND_FRAME_MODE" -> Right ShotAndFrameMode
+        x -> Left ("Unable to parse GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode from: " <> x)
+
+instance ToHttpApiData GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode where
+    toQueryParam = \case
+        LabelDetectionModeUnspecified -> "LABEL_DETECTION_MODE_UNSPECIFIED"
+        ShotMode -> "SHOT_MODE"
+        FrameMode -> "FRAME_MODE"
+        ShotAndFrameMode -> "SHOT_AND_FRAME_MODE"
+
+instance FromJSON GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode where
+    parseJSON = parseJSONText "GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode"
+
+instance ToJSON GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode where
+    toJSON = toJSONText
+
 -- | Likelihood of the pornography content..
 data GoogleCloudVideointelligenceV1_ExplicitContentFramePornographyLikelihood
     = LikelihoodUnspecified
@@ -114,47 +155,6 @@ instance FromJSON GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFramePorn
     parseJSON = parseJSONText "GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFramePornographyLikelihood"
 
 instance ToJSON GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFramePornographyLikelihood where
-    toJSON = toJSONText
-
--- | What labels should be detected with LABEL_DETECTION, in addition to
--- video-level labels or segment-level labels. If unspecified, defaults to
--- \`SHOT_MODE\`.
-data GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode
-    = LabelDetectionModeUnspecified
-      -- ^ @LABEL_DETECTION_MODE_UNSPECIFIED@
-      -- Unspecified.
-    | ShotMode
-      -- ^ @SHOT_MODE@
-      -- Detect shot-level labels.
-    | FrameMode
-      -- ^ @FRAME_MODE@
-      -- Detect frame-level labels.
-    | ShotAndFrameMode
-      -- ^ @SHOT_AND_FRAME_MODE@
-      -- Detect both shot-level and frame-level labels.
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode
-
-instance FromHttpApiData GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode where
-    parseQueryParam = \case
-        "LABEL_DETECTION_MODE_UNSPECIFIED" -> Right LabelDetectionModeUnspecified
-        "SHOT_MODE" -> Right ShotMode
-        "FRAME_MODE" -> Right FrameMode
-        "SHOT_AND_FRAME_MODE" -> Right ShotAndFrameMode
-        x -> Left ("Unable to parse GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode from: " <> x)
-
-instance ToHttpApiData GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode where
-    toQueryParam = \case
-        LabelDetectionModeUnspecified -> "LABEL_DETECTION_MODE_UNSPECIFIED"
-        ShotMode -> "SHOT_MODE"
-        FrameMode -> "FRAME_MODE"
-        ShotAndFrameMode -> "SHOT_AND_FRAME_MODE"
-
-instance FromJSON GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode where
-    parseJSON = parseJSONText "GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode"
-
-instance ToJSON GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode where
     toJSON = toJSONText
 
 -- | Likelihood of the pornography content..

@@ -60,11 +60,13 @@ type TargetHTTPSProxiesInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'targetHTTPSProxiesInsert' smart constructor.
-data TargetHTTPSProxiesInsert = TargetHTTPSProxiesInsert'
+data TargetHTTPSProxiesInsert =
+  TargetHTTPSProxiesInsert'
     { _thpiRequestId :: !(Maybe Text)
     , _thpiProject   :: !Text
     , _thpiPayload   :: !TargetHTTPSProxy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxiesInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ targetHTTPSProxiesInsert
     -> TargetHTTPSProxy -- ^ 'thpiPayload'
     -> TargetHTTPSProxiesInsert
 targetHTTPSProxiesInsert pThpiProject_ pThpiPayload_ =
-    TargetHTTPSProxiesInsert'
+  TargetHTTPSProxiesInsert'
     { _thpiRequestId = Nothing
     , _thpiProject = pThpiProject_
     , _thpiPayload = pThpiPayload_

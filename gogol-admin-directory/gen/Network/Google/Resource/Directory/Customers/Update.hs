@@ -54,10 +54,12 @@ type CustomersUpdateResource =
 -- | Updates a customer.
 --
 -- /See:/ 'customersUpdate' smart constructor.
-data CustomersUpdate = CustomersUpdate'
+data CustomersUpdate =
+  CustomersUpdate'
     { _cuCustomerKey :: !Text
     , _cuPayload     :: !Customer
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ customersUpdate
     -> Customer -- ^ 'cuPayload'
     -> CustomersUpdate
 customersUpdate pCuCustomerKey_ pCuPayload_ =
-    CustomersUpdate'
-    { _cuCustomerKey = pCuCustomerKey_
-    , _cuPayload = pCuPayload_
-    }
+  CustomersUpdate' {_cuCustomerKey = pCuCustomerKey_, _cuPayload = pCuPayload_}
 
 -- | Id of the customer to be updated
 cuCustomerKey :: Lens' CustomersUpdate Text

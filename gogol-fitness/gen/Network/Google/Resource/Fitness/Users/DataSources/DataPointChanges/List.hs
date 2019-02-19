@@ -60,12 +60,14 @@ type UsersDataSourcesDataPointChangesListResource =
 -- | Queries for user\'s data point changes for a particular data source.
 --
 -- /See:/ 'usersDataSourcesDataPointChangesList' smart constructor.
-data UsersDataSourcesDataPointChangesList = UsersDataSourcesDataPointChangesList'
+data UsersDataSourcesDataPointChangesList =
+  UsersDataSourcesDataPointChangesList'
     { _udsdpclDataSourceId :: !Text
     , _udsdpclUserId       :: !Text
     , _udsdpclLimit        :: !(Maybe (Textual Int32))
     , _udsdpclPageToken    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDataSourcesDataPointChangesList' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ usersDataSourcesDataPointChangesList
     -> Text -- ^ 'udsdpclUserId'
     -> UsersDataSourcesDataPointChangesList
 usersDataSourcesDataPointChangesList pUdsdpclDataSourceId_ pUdsdpclUserId_ =
-    UsersDataSourcesDataPointChangesList'
+  UsersDataSourcesDataPointChangesList'
     { _udsdpclDataSourceId = pUdsdpclDataSourceId_
     , _udsdpclUserId = pUdsdpclUserId_
     , _udsdpclLimit = Nothing
@@ -119,7 +121,8 @@ udsdpclPageToken
       (\ s a -> s{_udsdpclPageToken = a})
 
 instance GoogleRequest
-         UsersDataSourcesDataPointChangesList where
+           UsersDataSourcesDataPointChangesList
+         where
         type Rs UsersDataSourcesDataPointChangesList =
              ListDataPointChangesResponse
         type Scopes UsersDataSourcesDataPointChangesList =

@@ -57,11 +57,13 @@ type DevicesGetResource =
 -- | Retrieves the details of a device.
 --
 -- /See:/ 'devicesGet' smart constructor.
-data DevicesGet = DevicesGet'
+data DevicesGet =
+  DevicesGet'
     { _dgEnterpriseId :: !Text
     , _dgUserId       :: !Text
     , _dgDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DevicesGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ devicesGet
     -> Text -- ^ 'dgDeviceId'
     -> DevicesGet
 devicesGet pDgEnterpriseId_ pDgUserId_ pDgDeviceId_ =
-    DevicesGet'
+  DevicesGet'
     { _dgEnterpriseId = pDgEnterpriseId_
     , _dgUserId = pDgUserId_
     , _dgDeviceId = pDgDeviceId_

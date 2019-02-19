@@ -75,7 +75,8 @@ type DebuggerDebuggeesBreakpointsListResource =
 -- | Lists all breakpoints for the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsList' smart constructor.
-data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList'
+data DebuggerDebuggeesBreakpointsList =
+  DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv           :: !(Maybe Xgafv)
     , _ddblIncludeInactive :: !(Maybe Bool)
     , _ddblUploadProtocol  :: !(Maybe Text)
@@ -88,7 +89,8 @@ data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList'
     , _ddblDebuggeeId      :: !Text
     , _ddblClientVersion   :: !(Maybe Text)
     , _ddblCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DebuggerDebuggeesBreakpointsList' with the minimum fields required to make a request.
 --
@@ -121,7 +123,7 @@ debuggerDebuggeesBreakpointsList
     :: Text -- ^ 'ddblDebuggeeId'
     -> DebuggerDebuggeesBreakpointsList
 debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsList'
+  DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv = Nothing
     , _ddblIncludeInactive = Nothing
     , _ddblUploadProtocol = Nothing
@@ -216,7 +218,8 @@ ddblCallback
   = lens _ddblCallback (\ s a -> s{_ddblCallback = a})
 
 instance GoogleRequest
-         DebuggerDebuggeesBreakpointsList where
+           DebuggerDebuggeesBreakpointsList
+         where
         type Rs DebuggerDebuggeesBreakpointsList =
              ListBreakpointsResponse
         type Scopes DebuggerDebuggeesBreakpointsList =

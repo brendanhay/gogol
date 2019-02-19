@@ -64,11 +64,13 @@ type SSLCertsCreateEphemeralResource =
 -- the database.
 --
 -- /See:/ 'sslCertsCreateEphemeral' smart constructor.
-data SSLCertsCreateEphemeral = SSLCertsCreateEphemeral'
+data SSLCertsCreateEphemeral =
+  SSLCertsCreateEphemeral'
     { _scceProject  :: !Text
     , _sccePayload  :: !SSLCertsCreateEphemeralRequest
     , _scceInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLCertsCreateEphemeral' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ sslCertsCreateEphemeral
     -> Text -- ^ 'scceInstance'
     -> SSLCertsCreateEphemeral
 sslCertsCreateEphemeral pScceProject_ pSccePayload_ pScceInstance_ =
-    SSLCertsCreateEphemeral'
+  SSLCertsCreateEphemeral'
     { _scceProject = pScceProject_
     , _sccePayload = pSccePayload_
     , _scceInstance = pScceInstance_

@@ -58,11 +58,13 @@ type InstancesTruncateLogResource =
 -- | Truncate MySQL general and slow query log tables
 --
 -- /See:/ 'instancesTruncateLog' smart constructor.
-data InstancesTruncateLog = InstancesTruncateLog'
+data InstancesTruncateLog =
+  InstancesTruncateLog'
     { _itlProject  :: !Text
     , _itlPayload  :: !InstancesTruncateLogRequest
     , _itlInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesTruncateLog' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ instancesTruncateLog
     -> Text -- ^ 'itlInstance'
     -> InstancesTruncateLog
 instancesTruncateLog pItlProject_ pItlPayload_ pItlInstance_ =
-    InstancesTruncateLog'
+  InstancesTruncateLog'
     { _itlProject = pItlProject_
     , _itlPayload = pItlPayload_
     , _itlInstance = pItlInstance_

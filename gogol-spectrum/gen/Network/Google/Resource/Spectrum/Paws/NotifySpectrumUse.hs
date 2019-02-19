@@ -59,9 +59,11 @@ type PawsNotifySpectrumUseResource =
 -- require notification, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsNotifySpectrumUse' smart constructor.
-newtype PawsNotifySpectrumUse = PawsNotifySpectrumUse'
+newtype PawsNotifySpectrumUse =
+  PawsNotifySpectrumUse'
     { _pnsuPayload :: PawsNotifySpectrumUseRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsNotifySpectrumUse' with the minimum fields required to make a request.
 --
@@ -72,9 +74,7 @@ pawsNotifySpectrumUse
     :: PawsNotifySpectrumUseRequest -- ^ 'pnsuPayload'
     -> PawsNotifySpectrumUse
 pawsNotifySpectrumUse pPnsuPayload_ =
-    PawsNotifySpectrumUse'
-    { _pnsuPayload = pPnsuPayload_
-    }
+  PawsNotifySpectrumUse' {_pnsuPayload = pPnsuPayload_}
 
 -- | Multipart request metadata.
 pnsuPayload :: Lens' PawsNotifySpectrumUse PawsNotifySpectrumUseRequest

@@ -86,7 +86,8 @@ type AccountsOrdersListResource =
 -- this method.
 --
 -- /See:/ 'accountsOrdersList' smart constructor.
-data AccountsOrdersList = AccountsOrdersList'
+data AccountsOrdersList =
+  AccountsOrdersList'
     { _aolStatus         :: !(Maybe [Text])
     , _aolPphNames       :: !(Maybe [Text])
     , _aolXgafv          :: !(Maybe Xgafv)
@@ -103,7 +104,8 @@ data AccountsOrdersList = AccountsOrdersList'
     , _aolPageToken      :: !(Maybe Text)
     , _aolPageSize       :: !(Maybe (Textual Int32))
     , _aolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsOrdersList' with the minimum fields required to make a request.
 --
@@ -144,7 +146,7 @@ accountsOrdersList
     :: Text -- ^ 'aolAccountId'
     -> AccountsOrdersList
 accountsOrdersList pAolAccountId_ =
-    AccountsOrdersList'
+  AccountsOrdersList'
     { _aolStatus = Nothing
     , _aolPphNames = Nothing
     , _aolXgafv = Nothing

@@ -67,7 +67,8 @@ type ProjectsLocationsQueuesTasksCreateResource =
 -- maximum task size is 100KB.
 --
 -- /See:/ 'projectsLocationsQueuesTasksCreate' smart constructor.
-data ProjectsLocationsQueuesTasksCreate = ProjectsLocationsQueuesTasksCreate'
+data ProjectsLocationsQueuesTasksCreate =
+  ProjectsLocationsQueuesTasksCreate'
     { _plqtcParent         :: !Text
     , _plqtcXgafv          :: !(Maybe Xgafv)
     , _plqtcUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsLocationsQueuesTasksCreate = ProjectsLocationsQueuesTasksCreate'
     , _plqtcUploadType     :: !(Maybe Text)
     , _plqtcPayload        :: !CreateTaskRequest
     , _plqtcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsQueuesTasksCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsQueuesTasksCreate
     -> CreateTaskRequest -- ^ 'plqtcPayload'
     -> ProjectsLocationsQueuesTasksCreate
 projectsLocationsQueuesTasksCreate pPlqtcParent_ pPlqtcPayload_ =
-    ProjectsLocationsQueuesTasksCreate'
+  ProjectsLocationsQueuesTasksCreate'
     { _plqtcParent = pPlqtcParent_
     , _plqtcXgafv = Nothing
     , _plqtcUploadProtocol = Nothing
@@ -151,7 +153,8 @@ plqtcCallback
       (\ s a -> s{_plqtcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsQueuesTasksCreate where
+           ProjectsLocationsQueuesTasksCreate
+         where
         type Rs ProjectsLocationsQueuesTasksCreate = Task
         type Scopes ProjectsLocationsQueuesTasksCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

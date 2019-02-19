@@ -62,11 +62,13 @@ type DataSetsDeleteResource =
 -- another dataset with the same name.
 --
 -- /See:/ 'dataSetsDelete' smart constructor.
-data DataSetsDelete = DataSetsDelete'
+data DataSetsDelete =
+  DataSetsDelete'
     { _dsdDataSetId      :: !Text
     , _dsdProjectId      :: !Text
     , _dsdDeleteContents :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetsDelete' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ dataSetsDelete
     -> Text -- ^ 'dsdProjectId'
     -> DataSetsDelete
 dataSetsDelete pDsdDataSetId_ pDsdProjectId_ =
-    DataSetsDelete'
+  DataSetsDelete'
     { _dsdDataSetId = pDsdDataSetId_
     , _dsdProjectId = pDsdProjectId_
     , _dsdDeleteContents = Nothing

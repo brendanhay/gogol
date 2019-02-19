@@ -58,12 +58,14 @@ type SuperChatEventsListResource =
 -- | Lists Super Chat events for a channel.
 --
 -- /See:/ 'superChatEventsList' smart constructor.
-data SuperChatEventsList = SuperChatEventsList'
+data SuperChatEventsList =
+  SuperChatEventsList'
     { _scelPart       :: !Text
     , _scelHl         :: !(Maybe Text)
     , _scelPageToken  :: !(Maybe Text)
     , _scelMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SuperChatEventsList' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ superChatEventsList
     :: Text -- ^ 'scelPart'
     -> SuperChatEventsList
 superChatEventsList pScelPart_ =
-    SuperChatEventsList'
+  SuperChatEventsList'
     { _scelPart = pScelPart_
     , _scelHl = Nothing
     , _scelPageToken = Nothing

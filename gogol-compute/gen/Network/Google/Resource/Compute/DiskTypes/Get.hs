@@ -59,11 +59,13 @@ type DiskTypesGetResource =
 -- making a list() request.
 --
 -- /See:/ 'diskTypesGet' smart constructor.
-data DiskTypesGet = DiskTypesGet'
+data DiskTypesGet =
+  DiskTypesGet'
     { _dtgProject  :: !Text
     , _dtgZone     :: !Text
     , _dtgDiskType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypesGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ diskTypesGet
     -> Text -- ^ 'dtgDiskType'
     -> DiskTypesGet
 diskTypesGet pDtgProject_ pDtgZone_ pDtgDiskType_ =
-    DiskTypesGet'
+  DiskTypesGet'
     { _dtgProject = pDtgProject_
     , _dtgZone = pDtgZone_
     , _dtgDiskType = pDtgDiskType_

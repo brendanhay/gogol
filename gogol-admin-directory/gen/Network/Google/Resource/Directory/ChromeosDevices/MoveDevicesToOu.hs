@@ -60,11 +60,13 @@ type ChromeosDevicesMoveDevicesToOuResource =
 -- | Move or insert multiple Chrome OS Devices to organizational unit
 --
 -- /See:/ 'chromeosDevicesMoveDevicesToOu' smart constructor.
-data ChromeosDevicesMoveDevicesToOu = ChromeosDevicesMoveDevicesToOu'
+data ChromeosDevicesMoveDevicesToOu =
+  ChromeosDevicesMoveDevicesToOu'
     { _cdmdtoPayload     :: !ChromeOSMoveDevicesToOu
     , _cdmdtoOrgUnitPath :: !Text
     , _cdmdtoCustomerId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChromeosDevicesMoveDevicesToOu' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ chromeosDevicesMoveDevicesToOu
     -> Text -- ^ 'cdmdtoCustomerId'
     -> ChromeosDevicesMoveDevicesToOu
 chromeosDevicesMoveDevicesToOu pCdmdtoPayload_ pCdmdtoOrgUnitPath_ pCdmdtoCustomerId_ =
-    ChromeosDevicesMoveDevicesToOu'
+  ChromeosDevicesMoveDevicesToOu'
     { _cdmdtoPayload = pCdmdtoPayload_
     , _cdmdtoOrgUnitPath = pCdmdtoOrgUnitPath_
     , _cdmdtoCustomerId = pCdmdtoCustomerId_

@@ -59,14 +59,16 @@ type ProjectsAlertPoliciesDeleteResource =
 -- | Deletes an alerting policy.
 --
 -- /See:/ 'projectsAlertPoliciesDelete' smart constructor.
-data ProjectsAlertPoliciesDelete = ProjectsAlertPoliciesDelete'
+data ProjectsAlertPoliciesDelete =
+  ProjectsAlertPoliciesDelete'
     { _papdXgafv          :: !(Maybe Xgafv)
     , _papdUploadProtocol :: !(Maybe Text)
     , _papdAccessToken    :: !(Maybe Text)
     , _papdUploadType     :: !(Maybe Text)
     , _papdName           :: !Text
     , _papdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAlertPoliciesDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsAlertPoliciesDelete
     :: Text -- ^ 'papdName'
     -> ProjectsAlertPoliciesDelete
 projectsAlertPoliciesDelete pPapdName_ =
-    ProjectsAlertPoliciesDelete'
+  ProjectsAlertPoliciesDelete'
     { _papdXgafv = Nothing
     , _papdUploadProtocol = Nothing
     , _papdAccessToken = Nothing

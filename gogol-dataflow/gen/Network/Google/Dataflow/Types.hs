@@ -1368,16 +1368,16 @@ dataflowService
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
-computeScope = Proxy;
+computeScope = Proxy
 
 -- | View your email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy;
+userInfoEmailScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View your Google Compute Engine resources
 computeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-computeReadOnlyScope = Proxy;
+computeReadOnlyScope = Proxy

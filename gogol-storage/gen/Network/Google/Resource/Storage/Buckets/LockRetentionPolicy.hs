@@ -56,11 +56,13 @@ type BucketsLockRetentionPolicyResource =
 -- | Locks retention policy on a bucket.
 --
 -- /See:/ 'bucketsLockRetentionPolicy' smart constructor.
-data BucketsLockRetentionPolicy = BucketsLockRetentionPolicy'
+data BucketsLockRetentionPolicy =
+  BucketsLockRetentionPolicy'
     { _blrpIfMetagenerationMatch :: !(Textual Int64)
     , _blrpBucket                :: !Text
     , _blrpUserProject           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketsLockRetentionPolicy' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ bucketsLockRetentionPolicy
     -> Text -- ^ 'blrpBucket'
     -> BucketsLockRetentionPolicy
 bucketsLockRetentionPolicy pBlrpIfMetagenerationMatch_ pBlrpBucket_ =
-    BucketsLockRetentionPolicy'
+  BucketsLockRetentionPolicy'
     { _blrpIfMetagenerationMatch = _Coerce # pBlrpIfMetagenerationMatch_
     , _blrpBucket = pBlrpBucket_
     , _blrpUserProject = Nothing

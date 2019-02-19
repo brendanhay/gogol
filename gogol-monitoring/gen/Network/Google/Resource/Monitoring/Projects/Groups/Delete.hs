@@ -59,14 +59,16 @@ type ProjectsGroupsDeleteResource =
 -- | Deletes an existing group.
 --
 -- /See:/ 'projectsGroupsDelete' smart constructor.
-data ProjectsGroupsDelete = ProjectsGroupsDelete'
+data ProjectsGroupsDelete =
+  ProjectsGroupsDelete'
     { _pgdXgafv          :: !(Maybe Xgafv)
     , _pgdUploadProtocol :: !(Maybe Text)
     , _pgdAccessToken    :: !(Maybe Text)
     , _pgdUploadType     :: !(Maybe Text)
     , _pgdName           :: !Text
     , _pgdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGroupsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsGroupsDelete
     :: Text -- ^ 'pgdName'
     -> ProjectsGroupsDelete
 projectsGroupsDelete pPgdName_ =
-    ProjectsGroupsDelete'
+  ProjectsGroupsDelete'
     { _pgdXgafv = Nothing
     , _pgdUploadProtocol = Nothing
     , _pgdAccessToken = Nothing

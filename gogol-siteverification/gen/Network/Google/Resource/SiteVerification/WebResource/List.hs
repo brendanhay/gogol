@@ -50,8 +50,8 @@ type WebResourceListResource =
 --
 -- /See:/ 'webResourceList' smart constructor.
 data WebResourceList =
-    WebResourceList'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  WebResourceList'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebResourceList' with the minimum fields required to make a request.
 --

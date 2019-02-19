@@ -55,11 +55,13 @@ type AccountsContainersWorkspacesFoldersUpdateResource
 -- | Updates a GTM Folder.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersUpdate' smart constructor.
-data AccountsContainersWorkspacesFoldersUpdate = AccountsContainersWorkspacesFoldersUpdate'
+data AccountsContainersWorkspacesFoldersUpdate =
+  AccountsContainersWorkspacesFoldersUpdate'
     { _acwfuPath        :: !Text
     , _acwfuFingerprint :: !(Maybe Text)
     , _acwfuPayload     :: !Folder
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersUpdate' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ accountsContainersWorkspacesFoldersUpdate
     -> Folder -- ^ 'acwfuPayload'
     -> AccountsContainersWorkspacesFoldersUpdate
 accountsContainersWorkspacesFoldersUpdate pAcwfuPath_ pAcwfuPayload_ =
-    AccountsContainersWorkspacesFoldersUpdate'
+  AccountsContainersWorkspacesFoldersUpdate'
     { _acwfuPath = pAcwfuPath_
     , _acwfuFingerprint = Nothing
     , _acwfuPayload = pAcwfuPayload_
@@ -100,7 +102,8 @@ acwfuPayload
   = lens _acwfuPayload (\ s a -> s{_acwfuPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesFoldersUpdate where
+           AccountsContainersWorkspacesFoldersUpdate
+         where
         type Rs AccountsContainersWorkspacesFoldersUpdate =
              Folder
         type Scopes AccountsContainersWorkspacesFoldersUpdate

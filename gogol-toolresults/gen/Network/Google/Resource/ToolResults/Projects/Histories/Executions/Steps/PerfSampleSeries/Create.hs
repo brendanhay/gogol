@@ -69,13 +69,15 @@ type ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateResource
 -- given Step - NOT_FOUND - The containing Step does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsPerfSampleSeriesCreate' smart constructor.
-data ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate = ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate'
+data ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate =
+  ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate'
     { _phespsscExecutionId :: !Text
     , _phespsscStepId      :: !Text
     , _phespsscPayload     :: !PerfSampleSeries
     , _phespsscHistoryId   :: !Text
     , _phespsscProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsHistoriesExecutionsStepsPerfSampleSeriesCreate
     -> Text -- ^ 'phespsscProjectId'
     -> ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate
 projectsHistoriesExecutionsStepsPerfSampleSeriesCreate pPhespsscExecutionId_ pPhespsscStepId_ pPhespsscPayload_ pPhespsscHistoryId_ pPhespsscProjectId_ =
-    ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate'
+  ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate'
     { _phespsscExecutionId = pPhespsscExecutionId_
     , _phespsscStepId = pPhespsscStepId_
     , _phespsscPayload = pPhespsscPayload_
@@ -137,7 +139,7 @@ phespsscProjectId
       (\ s a -> s{_phespsscProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate
+           ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate
          where
         type Rs
                ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreate

@@ -58,11 +58,13 @@ type InterconnectAttachmentsGetResource =
 -- | Returns the specified interconnect attachment.
 --
 -- /See:/ 'interconnectAttachmentsGet' smart constructor.
-data InterconnectAttachmentsGet = InterconnectAttachmentsGet'
+data InterconnectAttachmentsGet =
+  InterconnectAttachmentsGet'
     { _iagProject                :: !Text
     , _iagRegion                 :: !Text
     , _iagInterconnectAttachment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentsGet' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ interconnectAttachmentsGet
     -> Text -- ^ 'iagInterconnectAttachment'
     -> InterconnectAttachmentsGet
 interconnectAttachmentsGet pIagProject_ pIagRegion_ pIagInterconnectAttachment_ =
-    InterconnectAttachmentsGet'
+  InterconnectAttachmentsGet'
     { _iagProject = pIagProject_
     , _iagRegion = pIagRegion_
     , _iagInterconnectAttachment = pIagInterconnectAttachment_

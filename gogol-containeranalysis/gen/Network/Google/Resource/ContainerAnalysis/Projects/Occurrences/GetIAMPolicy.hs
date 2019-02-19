@@ -74,7 +74,8 @@ type ProjectsOccurrencesGetIAMPolicyResource =
 -- occurrences.
 --
 -- /See:/ 'projectsOccurrencesGetIAMPolicy' smart constructor.
-data ProjectsOccurrencesGetIAMPolicy = ProjectsOccurrencesGetIAMPolicy'
+data ProjectsOccurrencesGetIAMPolicy =
+  ProjectsOccurrencesGetIAMPolicy'
     { _pogipXgafv          :: !(Maybe Xgafv)
     , _pogipUploadProtocol :: !(Maybe Text)
     , _pogipAccessToken    :: !(Maybe Text)
@@ -82,7 +83,8 @@ data ProjectsOccurrencesGetIAMPolicy = ProjectsOccurrencesGetIAMPolicy'
     , _pogipPayload        :: !GetIAMPolicyRequest
     , _pogipResource       :: !Text
     , _pogipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsOccurrencesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ projectsOccurrencesGetIAMPolicy
     -> Text -- ^ 'pogipResource'
     -> ProjectsOccurrencesGetIAMPolicy
 projectsOccurrencesGetIAMPolicy pPogipPayload_ pPogipResource_ =
-    ProjectsOccurrencesGetIAMPolicy'
+  ProjectsOccurrencesGetIAMPolicy'
     { _pogipXgafv = Nothing
     , _pogipUploadProtocol = Nothing
     , _pogipAccessToken = Nothing
@@ -158,7 +160,8 @@ pogipCallback
       (\ s a -> s{_pogipCallback = a})
 
 instance GoogleRequest
-         ProjectsOccurrencesGetIAMPolicy where
+           ProjectsOccurrencesGetIAMPolicy
+         where
         type Rs ProjectsOccurrencesGetIAMPolicy = Policy
         type Scopes ProjectsOccurrencesGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

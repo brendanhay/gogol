@@ -55,11 +55,13 @@ type VideosUpdateResource =
 -- | Updates a video\'s metadata.
 --
 -- /See:/ 'videosUpdate' smart constructor.
-data VideosUpdate = VideosUpdate'
+data VideosUpdate =
+  VideosUpdate'
     { _vuPart                   :: !Text
     , _vuPayload                :: !Video
     , _vuOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideosUpdate' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ videosUpdate
     -> Video -- ^ 'vuPayload'
     -> VideosUpdate
 videosUpdate pVuPart_ pVuPayload_ =
-    VideosUpdate'
+  VideosUpdate'
     { _vuPart = pVuPart_
     , _vuPayload = pVuPayload_
     , _vuOnBehalfOfContentOwner = Nothing

@@ -70,7 +70,8 @@ type ProjectsLocationsTransferConfigsRunsListResource
 -- | Returns information about running and completed jobs.
 --
 -- /See:/ 'projectsLocationsTransferConfigsRunsList' smart constructor.
-data ProjectsLocationsTransferConfigsRunsList = ProjectsLocationsTransferConfigsRunsList'
+data ProjectsLocationsTransferConfigsRunsList =
+  ProjectsLocationsTransferConfigsRunsList'
     { _pltcrlRunAttempt     :: !(Maybe Text)
     , _pltcrlParent         :: !Text
     , _pltcrlStates         :: !(Maybe [Text])
@@ -81,7 +82,8 @@ data ProjectsLocationsTransferConfigsRunsList = ProjectsLocationsTransferConfigs
     , _pltcrlPageToken      :: !(Maybe Text)
     , _pltcrlPageSize       :: !(Maybe (Textual Int32))
     , _pltcrlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsTransferConfigsRunsList' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ projectsLocationsTransferConfigsRunsList
     :: Text -- ^ 'pltcrlParent'
     -> ProjectsLocationsTransferConfigsRunsList
 projectsLocationsTransferConfigsRunsList pPltcrlParent_ =
-    ProjectsLocationsTransferConfigsRunsList'
+  ProjectsLocationsTransferConfigsRunsList'
     { _pltcrlRunAttempt = Nothing
     , _pltcrlParent = pPltcrlParent_
     , _pltcrlStates = Nothing
@@ -190,7 +192,8 @@ pltcrlCallback
       (\ s a -> s{_pltcrlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTransferConfigsRunsList where
+           ProjectsLocationsTransferConfigsRunsList
+         where
         type Rs ProjectsLocationsTransferConfigsRunsList =
              ListTransferRunsResponse
         type Scopes ProjectsLocationsTransferConfigsRunsList

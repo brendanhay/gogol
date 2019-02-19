@@ -56,11 +56,13 @@ type TemplateListResource =
 -- | Retrieves a list of templates.
 --
 -- /See:/ 'templateList'' smart constructor.
-data TemplateList' = TemplateList''
+data TemplateList' =
+  TemplateList''
     { _tllPageToken  :: !(Maybe Text)
     , _tllTableId    :: !Text
     , _tllMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TemplateList'' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ templateList'
     :: Text -- ^ 'tllTableId'
     -> TemplateList'
 templateList' pTllTableId_ =
-    TemplateList''
+  TemplateList''
     { _tllPageToken = Nothing
     , _tllTableId = pTllTableId_
     , _tllMaxResults = Nothing

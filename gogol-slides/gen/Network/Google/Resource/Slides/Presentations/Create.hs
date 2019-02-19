@@ -69,14 +69,16 @@ type PresentationsCreateResource =
 -- created presentation.
 --
 -- /See:/ 'presentationsCreate' smart constructor.
-data PresentationsCreate = PresentationsCreate'
+data PresentationsCreate =
+  PresentationsCreate'
     { _pcXgafv          :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
     , _pcAccessToken    :: !(Maybe Text)
     , _pcUploadType     :: !(Maybe Text)
     , _pcPayload        :: !Presentation
     , _pcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PresentationsCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ presentationsCreate
     :: Presentation -- ^ 'pcPayload'
     -> PresentationsCreate
 presentationsCreate pPcPayload_ =
-    PresentationsCreate'
+  PresentationsCreate'
     { _pcXgafv = Nothing
     , _pcUploadProtocol = Nothing
     , _pcAccessToken = Nothing

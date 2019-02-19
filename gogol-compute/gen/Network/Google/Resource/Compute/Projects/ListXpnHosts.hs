@@ -65,14 +65,16 @@ type ProjectsListXpnHostsResource =
 -- organization.
 --
 -- /See:/ 'projectsListXpnHosts' smart constructor.
-data ProjectsListXpnHosts = ProjectsListXpnHosts'
+data ProjectsListXpnHosts =
+  ProjectsListXpnHosts'
     { _plxhProject    :: !Text
     , _plxhPayload    :: !ProjectsListXpnHostsRequest
     , _plxhOrderBy    :: !(Maybe Text)
     , _plxhFilter     :: !(Maybe Text)
     , _plxhPageToken  :: !(Maybe Text)
     , _plxhMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsListXpnHosts' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsListXpnHosts
     -> ProjectsListXpnHostsRequest -- ^ 'plxhPayload'
     -> ProjectsListXpnHosts
 projectsListXpnHosts pPlxhProject_ pPlxhPayload_ =
-    ProjectsListXpnHosts'
+  ProjectsListXpnHosts'
     { _plxhProject = pPlxhProject_
     , _plxhPayload = pPlxhPayload_
     , _plxhOrderBy = Nothing

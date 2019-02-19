@@ -92,7 +92,8 @@ type ProjectsReleasesCreateResource =
 -- a \`Release\` may be updated using the UpdateRelease method.
 --
 -- /See:/ 'projectsReleasesCreate' smart constructor.
-data ProjectsReleasesCreate = ProjectsReleasesCreate'
+data ProjectsReleasesCreate =
+  ProjectsReleasesCreate'
     { _prcrXgafv          :: !(Maybe Xgafv)
     , _prcrUploadProtocol :: !(Maybe Text)
     , _prcrAccessToken    :: !(Maybe Text)
@@ -100,7 +101,8 @@ data ProjectsReleasesCreate = ProjectsReleasesCreate'
     , _prcrPayload        :: !Release
     , _prcrName           :: !Text
     , _prcrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReleasesCreate' with the minimum fields required to make a request.
 --
@@ -124,7 +126,7 @@ projectsReleasesCreate
     -> Text -- ^ 'prcrName'
     -> ProjectsReleasesCreate
 projectsReleasesCreate pPrcrPayload_ pPrcrName_ =
-    ProjectsReleasesCreate'
+  ProjectsReleasesCreate'
     { _prcrXgafv = Nothing
     , _prcrUploadProtocol = Nothing
     , _prcrAccessToken = Nothing

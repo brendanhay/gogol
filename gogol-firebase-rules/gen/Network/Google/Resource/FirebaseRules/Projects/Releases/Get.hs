@@ -59,14 +59,16 @@ type ProjectsReleasesGetResource =
 -- | Get a \`Release\` by name.
 --
 -- /See:/ 'projectsReleasesGet' smart constructor.
-data ProjectsReleasesGet = ProjectsReleasesGet'
+data ProjectsReleasesGet =
+  ProjectsReleasesGet'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
     , _pUploadType     :: !(Maybe Text)
     , _pName           :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReleasesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsReleasesGet
     :: Text -- ^ 'pName'
     -> ProjectsReleasesGet
 projectsReleasesGet pPName_ =
-    ProjectsReleasesGet'
+  ProjectsReleasesGet'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing

@@ -69,7 +69,8 @@ type ProjectsBuildsCreateResource =
 -- \`FAILURE\`).
 --
 -- /See:/ 'projectsBuildsCreate' smart constructor.
-data ProjectsBuildsCreate = ProjectsBuildsCreate'
+data ProjectsBuildsCreate =
+  ProjectsBuildsCreate'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsBuildsCreate = ProjectsBuildsCreate'
     , _pPayload        :: !Build
     , _pProjectId      :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsBuildsCreate' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsBuildsCreate
     -> Text -- ^ 'pProjectId'
     -> ProjectsBuildsCreate
 projectsBuildsCreate pPPayload_ pPProjectId_ =
-    ProjectsBuildsCreate'
+  ProjectsBuildsCreate'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing

@@ -66,7 +66,8 @@ type ProjectsNotificationChannelsSendVerificationCodeResource
 -- then be supplied in VerifyNotificationChannel to verify the channel.
 --
 -- /See:/ 'projectsNotificationChannelsSendVerificationCode' smart constructor.
-data ProjectsNotificationChannelsSendVerificationCode = ProjectsNotificationChannelsSendVerificationCode'
+data ProjectsNotificationChannelsSendVerificationCode =
+  ProjectsNotificationChannelsSendVerificationCode'
     { _pncsvcXgafv          :: !(Maybe Xgafv)
     , _pncsvcUploadProtocol :: !(Maybe Text)
     , _pncsvcAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsNotificationChannelsSendVerificationCode = ProjectsNotificationChan
     , _pncsvcPayload        :: !SendNotificationChannelVerificationCodeRequest
     , _pncsvcName           :: !Text
     , _pncsvcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsNotificationChannelsSendVerificationCode' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsNotificationChannelsSendVerificationCode
     -> Text -- ^ 'pncsvcName'
     -> ProjectsNotificationChannelsSendVerificationCode
 projectsNotificationChannelsSendVerificationCode pPncsvcPayload_ pPncsvcName_ =
-    ProjectsNotificationChannelsSendVerificationCode'
+  ProjectsNotificationChannelsSendVerificationCode'
     { _pncsvcXgafv = Nothing
     , _pncsvcUploadProtocol = Nothing
     , _pncsvcAccessToken = Nothing
@@ -149,7 +151,7 @@ pncsvcCallback
       (\ s a -> s{_pncsvcCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelsSendVerificationCode
+           ProjectsNotificationChannelsSendVerificationCode
          where
         type Rs
                ProjectsNotificationChannelsSendVerificationCode

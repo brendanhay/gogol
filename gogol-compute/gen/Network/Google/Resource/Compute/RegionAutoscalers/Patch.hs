@@ -65,13 +65,15 @@ type RegionAutoscalersPatchResource =
 -- merge patch format and processing rules.
 --
 -- /See:/ 'regionAutoscalersPatch' smart constructor.
-data RegionAutoscalersPatch = RegionAutoscalersPatch'
+data RegionAutoscalersPatch =
+  RegionAutoscalersPatch'
     { _rapRequestId  :: !(Maybe Text)
     , _rapProject    :: !Text
     , _rapPayload    :: !Autoscaler
     , _rapAutoscaler :: !(Maybe Text)
     , _rapRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionAutoscalersPatch' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ regionAutoscalersPatch
     -> Text -- ^ 'rapRegion'
     -> RegionAutoscalersPatch
 regionAutoscalersPatch pRapProject_ pRapPayload_ pRapRegion_ =
-    RegionAutoscalersPatch'
+  RegionAutoscalersPatch'
     { _rapRequestId = Nothing
     , _rapProject = pRapProject_
     , _rapPayload = pRapPayload_

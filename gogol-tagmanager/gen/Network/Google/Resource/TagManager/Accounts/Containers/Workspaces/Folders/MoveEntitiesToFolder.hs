@@ -59,13 +59,15 @@ type AccountsContainersWorkspacesFoldersMoveEntitiesToFolderResource
 -- | Moves entities to a GTM Folder.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersMoveEntitiesToFolder' smart constructor.
-data AccountsContainersWorkspacesFoldersMoveEntitiesToFolder = AccountsContainersWorkspacesFoldersMoveEntitiesToFolder'
+data AccountsContainersWorkspacesFoldersMoveEntitiesToFolder =
+  AccountsContainersWorkspacesFoldersMoveEntitiesToFolder'
     { _acwfmetfPath       :: !Text
     , _acwfmetfTriggerId  :: !(Maybe [Text])
     , _acwfmetfVariableId :: !(Maybe [Text])
     , _acwfmetfPayload    :: !Folder
     , _acwfmetfTagId      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersMoveEntitiesToFolder' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ accountsContainersWorkspacesFoldersMoveEntitiesToFolder
     -> Folder -- ^ 'acwfmetfPayload'
     -> AccountsContainersWorkspacesFoldersMoveEntitiesToFolder
 accountsContainersWorkspacesFoldersMoveEntitiesToFolder pAcwfmetfPath_ pAcwfmetfPayload_ =
-    AccountsContainersWorkspacesFoldersMoveEntitiesToFolder'
+  AccountsContainersWorkspacesFoldersMoveEntitiesToFolder'
     { _acwfmetfPath = pAcwfmetfPath_
     , _acwfmetfTriggerId = Nothing
     , _acwfmetfVariableId = Nothing
@@ -130,7 +132,7 @@ acwfmetfTagId
       . _Coerce
 
 instance GoogleRequest
-         AccountsContainersWorkspacesFoldersMoveEntitiesToFolder
+           AccountsContainersWorkspacesFoldersMoveEntitiesToFolder
          where
         type Rs
                AccountsContainersWorkspacesFoldersMoveEntitiesToFolder

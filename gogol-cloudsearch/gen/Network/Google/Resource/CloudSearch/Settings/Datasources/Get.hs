@@ -62,7 +62,8 @@ type SettingsDatasourcesGetResource =
 -- | Gets a data source.
 --
 -- /See:/ 'settingsDatasourcesGet' smart constructor.
-data SettingsDatasourcesGet = SettingsDatasourcesGet'
+data SettingsDatasourcesGet =
+  SettingsDatasourcesGet'
     { _sdgXgafv                       :: !(Maybe Xgafv)
     , _sdgUploadProtocol              :: !(Maybe Text)
     , _sdgAccessToken                 :: !(Maybe Text)
@@ -70,7 +71,8 @@ data SettingsDatasourcesGet = SettingsDatasourcesGet'
     , _sdgName                        :: !Text
     , _sdgDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _sdgCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SettingsDatasourcesGet' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ settingsDatasourcesGet
     :: Text -- ^ 'sdgName'
     -> SettingsDatasourcesGet
 settingsDatasourcesGet pSdgName_ =
-    SettingsDatasourcesGet'
+  SettingsDatasourcesGet'
     { _sdgXgafv = Nothing
     , _sdgUploadProtocol = Nothing
     , _sdgAccessToken = Nothing

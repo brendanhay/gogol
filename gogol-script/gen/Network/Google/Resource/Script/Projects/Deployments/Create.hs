@@ -64,7 +64,8 @@ type ProjectsDeploymentsCreateResource =
 -- | Creates a deployment of an Apps Script project.
 --
 -- /See:/ 'projectsDeploymentsCreate' smart constructor.
-data ProjectsDeploymentsCreate = ProjectsDeploymentsCreate'
+data ProjectsDeploymentsCreate =
+  ProjectsDeploymentsCreate'
     { _pdcXgafv          :: !(Maybe Xgafv)
     , _pdcUploadProtocol :: !(Maybe Text)
     , _pdcAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsDeploymentsCreate = ProjectsDeploymentsCreate'
     , _pdcPayload        :: !DeploymentConfig
     , _pdcScriptId       :: !Text
     , _pdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDeploymentsCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsDeploymentsCreate
     -> Text -- ^ 'pdcScriptId'
     -> ProjectsDeploymentsCreate
 projectsDeploymentsCreate pPdcPayload_ pPdcScriptId_ =
-    ProjectsDeploymentsCreate'
+  ProjectsDeploymentsCreate'
     { _pdcXgafv = Nothing
     , _pdcUploadProtocol = Nothing
     , _pdcAccessToken = Nothing

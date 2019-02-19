@@ -70,7 +70,8 @@ type AccountsProductsListResource =
 -- specified PQL query).
 --
 -- /See:/ 'accountsProductsList' smart constructor.
-data AccountsProductsList = AccountsProductsList'
+data AccountsProductsList =
+  AccountsProductsList'
     { _aplpXgafv          :: !(Maybe Xgafv)
     , _aplpUploadProtocol :: !(Maybe Text)
     , _aplpAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data AccountsProductsList = AccountsProductsList'
     , _aplpPageToken      :: !(Maybe Text)
     , _aplpPageSize       :: !(Maybe (Textual Int32))
     , _aplpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsProductsList' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ accountsProductsList
     :: Text -- ^ 'aplpAccountId'
     -> AccountsProductsList
 accountsProductsList pAplpAccountId_ =
-    AccountsProductsList'
+  AccountsProductsList'
     { _aplpXgafv = Nothing
     , _aplpUploadProtocol = Nothing
     , _aplpAccessToken = Nothing

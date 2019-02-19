@@ -63,7 +63,8 @@ type ProjectsNotesBatchCreateResource =
 -- | Creates new notes in batch.
 --
 -- /See:/ 'projectsNotesBatchCreate' smart constructor.
-data ProjectsNotesBatchCreate = ProjectsNotesBatchCreate'
+data ProjectsNotesBatchCreate =
+  ProjectsNotesBatchCreate'
     { _pnbcParent         :: !Text
     , _pnbcXgafv          :: !(Maybe Xgafv)
     , _pnbcUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsNotesBatchCreate = ProjectsNotesBatchCreate'
     , _pnbcUploadType     :: !(Maybe Text)
     , _pnbcPayload        :: !BatchCreateNotesRequest
     , _pnbcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsNotesBatchCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsNotesBatchCreate
     -> BatchCreateNotesRequest -- ^ 'pnbcPayload'
     -> ProjectsNotesBatchCreate
 projectsNotesBatchCreate pPnbcParent_ pPnbcPayload_ =
-    ProjectsNotesBatchCreate'
+  ProjectsNotesBatchCreate'
     { _pnbcParent = pPnbcParent_
     , _pnbcXgafv = Nothing
     , _pnbcUploadProtocol = Nothing

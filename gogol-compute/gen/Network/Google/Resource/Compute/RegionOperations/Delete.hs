@@ -57,11 +57,13 @@ type RegionOperationsDeleteResource =
 -- | Deletes the specified region-specific Operations resource.
 --
 -- /See:/ 'regionOperationsDelete' smart constructor.
-data RegionOperationsDelete = RegionOperationsDelete'
+data RegionOperationsDelete =
+  RegionOperationsDelete'
     { _rodProject   :: !Text
     , _rodOperation :: !Text
     , _rodRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionOperationsDelete' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ regionOperationsDelete
     -> Text -- ^ 'rodRegion'
     -> RegionOperationsDelete
 regionOperationsDelete pRodProject_ pRodOperation_ pRodRegion_ =
-    RegionOperationsDelete'
+  RegionOperationsDelete'
     { _rodProject = pRodProject_
     , _rodOperation = pRodOperation_
     , _rodRegion = pRodRegion_

@@ -22,7 +22,8 @@ import           Network.Google.YouTube.Types.Sum
 
 --
 -- /See:/ 'liveChatMessageAuthorDetails' smart constructor.
-data LiveChatMessageAuthorDetails = LiveChatMessageAuthorDetails'
+data LiveChatMessageAuthorDetails =
+  LiveChatMessageAuthorDetails'
     { _lcmadIsVerified      :: !(Maybe Bool)
     , _lcmadIsChatOwner     :: !(Maybe Bool)
     , _lcmadChannelId       :: !(Maybe Text)
@@ -31,7 +32,8 @@ data LiveChatMessageAuthorDetails = LiveChatMessageAuthorDetails'
     , _lcmadDisplayName     :: !(Maybe Text)
     , _lcmadIsChatSponsor   :: !(Maybe Bool)
     , _lcmadChannelURL      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatMessageAuthorDetails' with the minimum fields required to make a request.
 --
@@ -55,7 +57,7 @@ data LiveChatMessageAuthorDetails = LiveChatMessageAuthorDetails'
 liveChatMessageAuthorDetails
     :: LiveChatMessageAuthorDetails
 liveChatMessageAuthorDetails =
-    LiveChatMessageAuthorDetails'
+  LiveChatMessageAuthorDetails'
     { _lcmadIsVerified = Nothing
     , _lcmadIsChatOwner = Nothing
     , _lcmadChannelId = Nothing
@@ -144,12 +146,14 @@ instance ToJSON LiveChatMessageAuthorDetails where
 -- description, channel ID and thumbnails.
 --
 -- /See:/ 'subscriptionSubscriberSnippet' smart constructor.
-data SubscriptionSubscriberSnippet = SubscriptionSubscriberSnippet'
+data SubscriptionSubscriberSnippet =
+  SubscriptionSubscriberSnippet'
     { _sssChannelId   :: !(Maybe Text)
     , _sssThumbnails  :: !(Maybe ThumbnailDetails)
     , _sssTitle       :: !(Maybe Text)
     , _sssDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionSubscriberSnippet' with the minimum fields required to make a request.
 --
@@ -165,7 +169,7 @@ data SubscriptionSubscriberSnippet = SubscriptionSubscriberSnippet'
 subscriptionSubscriberSnippet
     :: SubscriptionSubscriberSnippet
 subscriptionSubscriberSnippet =
-    SubscriptionSubscriberSnippet'
+  SubscriptionSubscriberSnippet'
     { _sssChannelId = Nothing
     , _sssThumbnails = Nothing
     , _sssTitle = Nothing
@@ -214,11 +218,13 @@ instance ToJSON SubscriptionSubscriberSnippet where
 -- | Describes information necessary for ingesting an RTMP or an HTTP stream.
 --
 -- /See:/ 'ingestionInfo' smart constructor.
-data IngestionInfo = IngestionInfo'
+data IngestionInfo =
+  IngestionInfo'
     { _iiBackupIngestionAddress :: !(Maybe Text)
     , _iiIngestionAddress       :: !(Maybe Text)
     , _iiStreamName             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IngestionInfo' with the minimum fields required to make a request.
 --
@@ -232,7 +238,7 @@ data IngestionInfo = IngestionInfo'
 ingestionInfo
     :: IngestionInfo
 ingestionInfo =
-    IngestionInfo'
+  IngestionInfo'
     { _iiBackupIngestionAddress = Nothing
     , _iiIngestionAddress = Nothing
     , _iiStreamName = Nothing
@@ -283,12 +289,14 @@ instance ToJSON IngestionInfo where
 -- YouTube Partners during the audit process.
 --
 -- /See:/ 'channelAuditDetails' smart constructor.
-data ChannelAuditDetails = ChannelAuditDetails'
+data ChannelAuditDetails =
+  ChannelAuditDetails'
     { _cadContentIdClaimsGoodStanding     :: !(Maybe Bool)
     , _cadOverallGoodStanding             :: !(Maybe Bool)
     , _cadCopyrightStrikesGoodStanding    :: !(Maybe Bool)
     , _cadCommUnityGuidelinesGoodStanding :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelAuditDetails' with the minimum fields required to make a request.
 --
@@ -304,7 +312,7 @@ data ChannelAuditDetails = ChannelAuditDetails'
 channelAuditDetails
     :: ChannelAuditDetails
 channelAuditDetails =
-    ChannelAuditDetails'
+  ChannelAuditDetails'
     { _cadContentIdClaimsGoodStanding = Nothing
     , _cadOverallGoodStanding = Nothing
     , _cadCopyrightStrikesGoodStanding = Nothing
@@ -366,11 +374,13 @@ instance ToJSON ChannelAuditDetails where
 -- | A thumbnail is an image representing a YouTube resource.
 --
 -- /See:/ 'thumbnail' smart constructor.
-data Thumbnail = Thumbnail'
+data Thumbnail =
+  Thumbnail'
     { _tHeight :: !(Maybe (Textual Word32))
     , _tURL    :: !(Maybe Text)
     , _tWidth  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
 --
@@ -383,12 +393,7 @@ data Thumbnail = Thumbnail'
 -- * 'tWidth'
 thumbnail
     :: Thumbnail
-thumbnail =
-    Thumbnail'
-    { _tHeight = Nothing
-    , _tURL = Nothing
-    , _tWidth = Nothing
-    }
+thumbnail = Thumbnail' {_tHeight = Nothing, _tURL = Nothing, _tWidth = Nothing}
 
 -- | (Optional) Height of the thumbnail image.
 tHeight :: Lens' Thumbnail (Maybe Word32)
@@ -423,9 +428,11 @@ instance ToJSON Thumbnail where
 
 --
 -- /See:/ 'liveChatTextMessageDetails' smart constructor.
-newtype LiveChatTextMessageDetails = LiveChatTextMessageDetails'
+newtype LiveChatTextMessageDetails =
+  LiveChatTextMessageDetails'
     { _lctmdMessageText :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatTextMessageDetails' with the minimum fields required to make a request.
 --
@@ -435,9 +442,7 @@ newtype LiveChatTextMessageDetails = LiveChatTextMessageDetails'
 liveChatTextMessageDetails
     :: LiveChatTextMessageDetails
 liveChatTextMessageDetails =
-    LiveChatTextMessageDetails'
-    { _lctmdMessageText = Nothing
-    }
+  LiveChatTextMessageDetails' {_lctmdMessageText = Nothing}
 
 -- | The user\'s message.
 lctmdMessageText :: Lens' LiveChatTextMessageDetails (Maybe Text)
@@ -461,11 +466,13 @@ instance ToJSON LiveChatTextMessageDetails where
 -- | Information that identifies the recommended resource.
 --
 -- /See:/ 'activityContentDetailsRecommendation' smart constructor.
-data ActivityContentDetailsRecommendation = ActivityContentDetailsRecommendation'
+data ActivityContentDetailsRecommendation =
+  ActivityContentDetailsRecommendation'
     { _acdrResourceId     :: !(Maybe ResourceId)
     , _acdrSeedResourceId :: !(Maybe ResourceId)
     , _acdrReason         :: !(Maybe ActivityContentDetailsRecommendationReason)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsRecommendation' with the minimum fields required to make a request.
 --
@@ -479,7 +486,7 @@ data ActivityContentDetailsRecommendation = ActivityContentDetailsRecommendation
 activityContentDetailsRecommendation
     :: ActivityContentDetailsRecommendation
 activityContentDetailsRecommendation =
-    ActivityContentDetailsRecommendation'
+  ActivityContentDetailsRecommendation'
     { _acdrResourceId = Nothing
     , _acdrSeedResourceId = Nothing
     , _acdrReason = Nothing
@@ -505,7 +512,8 @@ acdrReason
   = lens _acdrReason (\ s a -> s{_acdrReason = a})
 
 instance FromJSON
-         ActivityContentDetailsRecommendation where
+           ActivityContentDetailsRecommendation
+         where
         parseJSON
           = withObject "ActivityContentDetailsRecommendation"
               (\ o ->
@@ -524,9 +532,11 @@ instance ToJSON ActivityContentDetailsRecommendation
 
 --
 -- /See:/ 'liveChatMessageRetractedDetails' smart constructor.
-newtype LiveChatMessageRetractedDetails = LiveChatMessageRetractedDetails'
+newtype LiveChatMessageRetractedDetails =
+  LiveChatMessageRetractedDetails'
     { _lcmrdRetractedMessageId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatMessageRetractedDetails' with the minimum fields required to make a request.
 --
@@ -536,9 +546,7 @@ newtype LiveChatMessageRetractedDetails = LiveChatMessageRetractedDetails'
 liveChatMessageRetractedDetails
     :: LiveChatMessageRetractedDetails
 liveChatMessageRetractedDetails =
-    LiveChatMessageRetractedDetails'
-    { _lcmrdRetractedMessageId = Nothing
-    }
+  LiveChatMessageRetractedDetails' {_lcmrdRetractedMessageId = Nothing}
 
 lcmrdRetractedMessageId :: Lens' LiveChatMessageRetractedDetails (Maybe Text)
 lcmrdRetractedMessageId
@@ -562,7 +570,8 @@ instance ToJSON LiveChatMessageRetractedDetails where
 
 --
 -- /See:/ 'playListListResponse' smart constructor.
-data PlayListListResponse = PlayListListResponse'
+data PlayListListResponse =
+  PlayListListResponse'
     { _pllrEtag            :: !(Maybe Text)
     , _pllrTokenPagination :: !(Maybe TokenPagination)
     , _pllrNextPageToken   :: !(Maybe Text)
@@ -572,7 +581,8 @@ data PlayListListResponse = PlayListListResponse'
     , _pllrVisitorId       :: !(Maybe Text)
     , _pllrEventId         :: !(Maybe Text)
     , _pllrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListListResponse' with the minimum fields required to make a request.
 --
@@ -598,7 +608,7 @@ data PlayListListResponse = PlayListListResponse'
 playListListResponse
     :: PlayListListResponse
 playListListResponse =
-    PlayListListResponse'
+  PlayListListResponse'
     { _pllrEtag = Nothing
     , _pllrTokenPagination = Nothing
     , _pllrNextPageToken = Nothing
@@ -692,7 +702,8 @@ instance ToJSON PlayListListResponse where
 -- position.
 --
 -- /See:/ 'channelSectionSnippet' smart constructor.
-data ChannelSectionSnippet = ChannelSectionSnippet'
+data ChannelSectionSnippet =
+  ChannelSectionSnippet'
     { _cssStyle           :: !(Maybe ChannelSectionSnippetStyle)
     , _cssChannelId       :: !(Maybe Text)
     , _cssLocalized       :: !(Maybe ChannelSectionLocalization)
@@ -700,7 +711,8 @@ data ChannelSectionSnippet = ChannelSectionSnippet'
     , _cssType            :: !(Maybe ChannelSectionSnippetType)
     , _cssPosition        :: !(Maybe (Textual Word32))
     , _cssDefaultLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelSectionSnippet' with the minimum fields required to make a request.
 --
@@ -722,7 +734,7 @@ data ChannelSectionSnippet = ChannelSectionSnippet'
 channelSectionSnippet
     :: ChannelSectionSnippet
 channelSectionSnippet =
-    ChannelSectionSnippet'
+  ChannelSectionSnippet'
     { _cssStyle = Nothing
     , _cssChannelId = Nothing
     , _cssLocalized = Nothing
@@ -794,11 +806,13 @@ instance ToJSON ChannelSectionSnippet where
 -- | JSON template for the status part of a channel.
 --
 -- /See:/ 'channelStatus' smart constructor.
-data ChannelStatus = ChannelStatus'
+data ChannelStatus =
+  ChannelStatus'
     { _csIsLinked          :: !(Maybe Bool)
     , _csLongUploadsStatus :: !(Maybe ChannelStatusLongUploadsStatus)
     , _csPrivacyStatus     :: !(Maybe ChannelStatusPrivacyStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelStatus' with the minimum fields required to make a request.
 --
@@ -812,7 +826,7 @@ data ChannelStatus = ChannelStatus'
 channelStatus
     :: ChannelStatus
 channelStatus =
-    ChannelStatus'
+  ChannelStatus'
     { _csIsLinked = Nothing
     , _csLongUploadsStatus = Nothing
     , _csPrivacyStatus = Nothing
@@ -854,9 +868,11 @@ instance ToJSON ChannelStatus where
 
 --
 -- /See:/ 'liveChatPollClosedDetails' smart constructor.
-newtype LiveChatPollClosedDetails = LiveChatPollClosedDetails'
+newtype LiveChatPollClosedDetails =
+  LiveChatPollClosedDetails'
     { _lcpcdPollId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatPollClosedDetails' with the minimum fields required to make a request.
 --
@@ -865,10 +881,7 @@ newtype LiveChatPollClosedDetails = LiveChatPollClosedDetails'
 -- * 'lcpcdPollId'
 liveChatPollClosedDetails
     :: LiveChatPollClosedDetails
-liveChatPollClosedDetails =
-    LiveChatPollClosedDetails'
-    { _lcpcdPollId = Nothing
-    }
+liveChatPollClosedDetails = LiveChatPollClosedDetails' {_lcpcdPollId = Nothing}
 
 -- | The id of the poll that was closed.
 lcpcdPollId :: Lens' LiveChatPollClosedDetails (Maybe Text)
@@ -888,12 +901,14 @@ instance ToJSON LiveChatPollClosedDetails where
 -- | Describes a single promoted item.
 --
 -- /See:/ 'promotedItem' smart constructor.
-data PromotedItem = PromotedItem'
+data PromotedItem =
+  PromotedItem'
     { _piCustomMessage          :: !(Maybe Text)
     , _piPromotedByContentOwner :: !(Maybe Bool)
     , _piId                     :: !(Maybe PromotedItemId)
     , _piTiming                 :: !(Maybe InvideoTiming)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PromotedItem' with the minimum fields required to make a request.
 --
@@ -909,7 +924,7 @@ data PromotedItem = PromotedItem'
 promotedItem
     :: PromotedItem
 promotedItem =
-    PromotedItem'
+  PromotedItem'
     { _piCustomMessage = Nothing
     , _piPromotedByContentOwner = Nothing
     , _piId = Nothing
@@ -961,13 +976,15 @@ instance ToJSON PromotedItem where
 
 --
 -- /See:/ 'liveStreamSnippet' smart constructor.
-data LiveStreamSnippet = LiveStreamSnippet'
+data LiveStreamSnippet =
+  LiveStreamSnippet'
     { _lssPublishedAt     :: !(Maybe DateTime')
     , _lssChannelId       :: !(Maybe Text)
     , _lssIsDefaultStream :: !(Maybe Bool)
     , _lssTitle           :: !(Maybe Text)
     , _lssDescription     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStreamSnippet' with the minimum fields required to make a request.
 --
@@ -985,7 +1002,7 @@ data LiveStreamSnippet = LiveStreamSnippet'
 liveStreamSnippet
     :: LiveStreamSnippet
 liveStreamSnippet =
-    LiveStreamSnippet'
+  LiveStreamSnippet'
     { _lssPublishedAt = Nothing
     , _lssChannelId = Nothing
     , _lssIsDefaultStream = Nothing
@@ -1050,12 +1067,14 @@ instance ToJSON LiveStreamSnippet where
 -- video, it does not have its own persistent data.
 --
 -- /See:/ 'searchResult' smart constructor.
-data SearchResult = SearchResult'
+data SearchResult =
+  SearchResult'
     { _srEtag    :: !(Maybe Text)
     , _srSnippet :: !(Maybe SearchResultSnippet)
     , _srKind    :: !Text
     , _srId      :: !(Maybe ResourceId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchResult' with the minimum fields required to make a request.
 --
@@ -1071,7 +1090,7 @@ data SearchResult = SearchResult'
 searchResult
     :: SearchResult
 searchResult =
-    SearchResult'
+  SearchResult'
     { _srEtag = Nothing
     , _srSnippet = Nothing
     , _srKind = "youtube#searchResult"
@@ -1121,8 +1140,8 @@ instance ToJSON SearchResult where
 --
 -- /See:/ 'tokenPagination' smart constructor.
 data TokenPagination =
-    TokenPagination'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  TokenPagination'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
@@ -1142,12 +1161,14 @@ instance ToJSON TokenPagination where
 -- resource.
 --
 -- /See:/ 'resourceId' smart constructor.
-data ResourceId = ResourceId'
+data ResourceId =
+  ResourceId'
     { _riKind       :: !(Maybe Text)
     , _riChannelId  :: !(Maybe Text)
     , _riVideoId    :: !(Maybe Text)
     , _riPlayListId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
 --
@@ -1163,7 +1184,7 @@ data ResourceId = ResourceId'
 resourceId
     :: ResourceId
 resourceId =
-    ResourceId'
+  ResourceId'
     { _riKind = Nothing
     , _riChannelId = Nothing
     , _riVideoId = Nothing
@@ -1215,7 +1236,8 @@ instance ToJSON ResourceId where
 
 --
 -- /See:/ 'searchListResponse' smart constructor.
-data SearchListResponse = SearchListResponse'
+data SearchListResponse =
+  SearchListResponse'
     { _slrEtag            :: !(Maybe Text)
     , _slrTokenPagination :: !(Maybe TokenPagination)
     , _slrNextPageToken   :: !(Maybe Text)
@@ -1226,7 +1248,8 @@ data SearchListResponse = SearchListResponse'
     , _slrVisitorId       :: !(Maybe Text)
     , _slrEventId         :: !(Maybe Text)
     , _slrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchListResponse' with the minimum fields required to make a request.
 --
@@ -1254,7 +1277,7 @@ data SearchListResponse = SearchListResponse'
 searchListResponse
     :: SearchListResponse
 searchListResponse =
-    SearchListResponse'
+  SearchListResponse'
     { _slrEtag = Nothing
     , _slrTokenPagination = Nothing
     , _slrNextPageToken = Nothing
@@ -1353,9 +1376,11 @@ instance ToJSON SearchListResponse where
 
 --
 -- /See:/ 'playListStatus' smart constructor.
-newtype PlayListStatus = PlayListStatus'
+newtype PlayListStatus =
+  PlayListStatus'
     { _plsPrivacyStatus :: Maybe PlayListStatusPrivacyStatus
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListStatus' with the minimum fields required to make a request.
 --
@@ -1364,10 +1389,7 @@ newtype PlayListStatus = PlayListStatus'
 -- * 'plsPrivacyStatus'
 playListStatus
     :: PlayListStatus
-playListStatus =
-    PlayListStatus'
-    { _plsPrivacyStatus = Nothing
-    }
+playListStatus = PlayListStatus' {_plsPrivacyStatus = Nothing}
 
 -- | The playlist\'s privacy status.
 plsPrivacyStatus :: Lens' PlayListStatus (Maybe PlayListStatusPrivacyStatus)
@@ -1388,7 +1410,8 @@ instance ToJSON PlayListStatus where
 
 --
 -- /See:/ 'liveChatMessageListResponse' smart constructor.
-data LiveChatMessageListResponse = LiveChatMessageListResponse'
+data LiveChatMessageListResponse =
+  LiveChatMessageListResponse'
     { _lcmlrOfflineAt             :: !(Maybe DateTime')
     , _lcmlrEtag                  :: !(Maybe Text)
     , _lcmlrTokenPagination       :: !(Maybe TokenPagination)
@@ -1399,7 +1422,8 @@ data LiveChatMessageListResponse = LiveChatMessageListResponse'
     , _lcmlrVisitorId             :: !(Maybe Text)
     , _lcmlrPollingIntervalMillis :: !(Maybe (Textual Word32))
     , _lcmlrEventId               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatMessageListResponse' with the minimum fields required to make a request.
 --
@@ -1427,7 +1451,7 @@ data LiveChatMessageListResponse = LiveChatMessageListResponse'
 liveChatMessageListResponse
     :: LiveChatMessageListResponse
 liveChatMessageListResponse =
-    LiveChatMessageListResponse'
+  LiveChatMessageListResponse'
     { _lcmlrOfflineAt = Nothing
     , _lcmlrEtag = Nothing
     , _lcmlrTokenPagination = Nothing
@@ -1536,7 +1560,8 @@ instance ToJSON LiveChatMessageListResponse where
 
 --
 -- /See:/ 'channelListResponse' smart constructor.
-data ChannelListResponse = ChannelListResponse'
+data ChannelListResponse =
+  ChannelListResponse'
     { _clrEtag            :: !(Maybe Text)
     , _clrTokenPagination :: !(Maybe TokenPagination)
     , _clrNextPageToken   :: !(Maybe Text)
@@ -1546,7 +1571,8 @@ data ChannelListResponse = ChannelListResponse'
     , _clrVisitorId       :: !(Maybe Text)
     , _clrEventId         :: !(Maybe Text)
     , _clrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelListResponse' with the minimum fields required to make a request.
 --
@@ -1572,7 +1598,7 @@ data ChannelListResponse = ChannelListResponse'
 channelListResponse
     :: ChannelListResponse
 channelListResponse =
-    ChannelListResponse'
+  ChannelListResponse'
     { _clrEtag = Nothing
     , _clrTokenPagination = Nothing
     , _clrNextPageToken = Nothing
@@ -1663,12 +1689,14 @@ instance ToJSON ChannelListResponse where
 
 --
 -- /See:/ 'channelProFileDetails' smart constructor.
-data ChannelProFileDetails = ChannelProFileDetails'
+data ChannelProFileDetails =
+  ChannelProFileDetails'
     { _cpfdChannelId       :: !(Maybe Text)
     , _cpfdProFileImageURL :: !(Maybe Text)
     , _cpfdDisplayName     :: !(Maybe Text)
     , _cpfdChannelURL      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelProFileDetails' with the minimum fields required to make a request.
 --
@@ -1684,7 +1712,7 @@ data ChannelProFileDetails = ChannelProFileDetails'
 channelProFileDetails
     :: ChannelProFileDetails
 channelProFileDetails =
-    ChannelProFileDetails'
+  ChannelProFileDetails'
     { _cpfdChannelId = Nothing
     , _cpfdProFileImageURL = Nothing
     , _cpfdDisplayName = Nothing
@@ -1735,7 +1763,8 @@ instance ToJSON ChannelProFileDetails where
 
 --
 -- /See:/ 'superChatEventListResponse' smart constructor.
-data SuperChatEventListResponse = SuperChatEventListResponse'
+data SuperChatEventListResponse =
+  SuperChatEventListResponse'
     { _scelrEtag            :: !(Maybe Text)
     , _scelrTokenPagination :: !(Maybe TokenPagination)
     , _scelrNextPageToken   :: !(Maybe Text)
@@ -1744,7 +1773,8 @@ data SuperChatEventListResponse = SuperChatEventListResponse'
     , _scelrItems           :: !(Maybe [SuperChatEvent])
     , _scelrVisitorId       :: !(Maybe Text)
     , _scelrEventId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SuperChatEventListResponse' with the minimum fields required to make a request.
 --
@@ -1768,7 +1798,7 @@ data SuperChatEventListResponse = SuperChatEventListResponse'
 superChatEventListResponse
     :: SuperChatEventListResponse
 superChatEventListResponse =
-    SuperChatEventListResponse'
+  SuperChatEventListResponse'
     { _scelrEtag = Nothing
     , _scelrTokenPagination = Nothing
     , _scelrNextPageToken = Nothing
@@ -1855,13 +1885,15 @@ instance ToJSON SuperChatEventListResponse where
 
 --
 -- /See:/ 'videoAbuseReportReasonListResponse' smart constructor.
-data VideoAbuseReportReasonListResponse = VideoAbuseReportReasonListResponse'
+data VideoAbuseReportReasonListResponse =
+  VideoAbuseReportReasonListResponse'
     { _varrlrEtag      :: !(Maybe Text)
     , _varrlrKind      :: !Text
     , _varrlrItems     :: !(Maybe [VideoAbuseReportReason])
     , _varrlrVisitorId :: !(Maybe Text)
     , _varrlrEventId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoAbuseReportReasonListResponse' with the minimum fields required to make a request.
 --
@@ -1879,7 +1911,7 @@ data VideoAbuseReportReasonListResponse = VideoAbuseReportReasonListResponse'
 videoAbuseReportReasonListResponse
     :: VideoAbuseReportReasonListResponse
 videoAbuseReportReasonListResponse =
-    VideoAbuseReportReasonListResponse'
+  VideoAbuseReportReasonListResponse'
     { _varrlrEtag = Nothing
     , _varrlrKind = "youtube#videoAbuseReportReasonListResponse"
     , _varrlrItems = Nothing
@@ -1943,11 +1975,13 @@ instance ToJSON VideoAbuseReportReasonListResponse
 
 --
 -- /See:/ 'liveChatUserBannedMessageDetails' smart constructor.
-data LiveChatUserBannedMessageDetails = LiveChatUserBannedMessageDetails'
+data LiveChatUserBannedMessageDetails =
+  LiveChatUserBannedMessageDetails'
     { _lcubmdBanType            :: !(Maybe LiveChatUserBannedMessageDetailsBanType)
     , _lcubmdBannedUserDetails  :: !(Maybe ChannelProFileDetails)
     , _lcubmdBanDurationSeconds :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatUserBannedMessageDetails' with the minimum fields required to make a request.
 --
@@ -1961,7 +1995,7 @@ data LiveChatUserBannedMessageDetails = LiveChatUserBannedMessageDetails'
 liveChatUserBannedMessageDetails
     :: LiveChatUserBannedMessageDetails
 liveChatUserBannedMessageDetails =
-    LiveChatUserBannedMessageDetails'
+  LiveChatUserBannedMessageDetails'
     { _lcubmdBanType = Nothing
     , _lcubmdBannedUserDetails = Nothing
     , _lcubmdBanDurationSeconds = Nothing
@@ -2010,7 +2044,8 @@ instance ToJSON LiveChatUserBannedMessageDetails
 -- | Detailed settings of a broadcast.
 --
 -- /See:/ 'liveBroadcastContentDetails' smart constructor.
-data LiveBroadcastContentDetails = LiveBroadcastContentDetails'
+data LiveBroadcastContentDetails =
+  LiveBroadcastContentDetails'
     { _lbcdEnableContentEncryption     :: !(Maybe Bool)
     , _lbcdEnableLowLatency            :: !(Maybe Bool)
     , _lbcdLatencyPreference           :: !(Maybe LiveBroadcastContentDetailsLatencyPreference)
@@ -2027,7 +2062,8 @@ data LiveBroadcastContentDetails = LiveBroadcastContentDetails'
     , _lbcdEnableAutoStart             :: !(Maybe Bool)
     , _lbcdBoundStreamLastUpdateTimeMs :: !(Maybe DateTime')
     , _lbcdEnableDvr                   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcastContentDetails' with the minimum fields required to make a request.
 --
@@ -2067,7 +2103,7 @@ data LiveBroadcastContentDetails = LiveBroadcastContentDetails'
 liveBroadcastContentDetails
     :: LiveBroadcastContentDetails
 liveBroadcastContentDetails =
-    LiveBroadcastContentDetails'
+  LiveBroadcastContentDetails'
     { _lbcdEnableContentEncryption = Nothing
     , _lbcdEnableLowLatency = Nothing
     , _lbcdLatencyPreference = Nothing
@@ -2259,7 +2295,8 @@ instance ToJSON LiveBroadcastContentDetails where
 
 --
 -- /See:/ 'channelSection' smart constructor.
-data ChannelSection = ChannelSection'
+data ChannelSection =
+  ChannelSection'
     { _csEtag           :: !(Maybe Text)
     , _csSnippet        :: !(Maybe ChannelSectionSnippet)
     , _csKind           :: !Text
@@ -2267,7 +2304,8 @@ data ChannelSection = ChannelSection'
     , _csTargeting      :: !(Maybe ChannelSectionTargeting)
     , _csId             :: !(Maybe Text)
     , _csLocalizations  :: !(Maybe ChannelSectionLocalizations)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelSection' with the minimum fields required to make a request.
 --
@@ -2289,7 +2327,7 @@ data ChannelSection = ChannelSection'
 channelSection
     :: ChannelSection
 channelSection =
-    ChannelSection'
+  ChannelSection'
     { _csEtag = Nothing
     , _csSnippet = Nothing
     , _csKind = "youtube#channelSection"
@@ -2364,13 +2402,15 @@ instance ToJSON ChannelSection where
 
 --
 -- /See:/ 'channelContentDetailsRelatedPlayLists' smart constructor.
-data ChannelContentDetailsRelatedPlayLists = ChannelContentDetailsRelatedPlayLists'
+data ChannelContentDetailsRelatedPlayLists =
+  ChannelContentDetailsRelatedPlayLists'
     { _ccdrplFavorites    :: !(Maybe Text)
     , _ccdrplWatchHistory :: !(Maybe Text)
     , _ccdrplWatchLater   :: !(Maybe Text)
     , _ccdrplUploads      :: !(Maybe Text)
     , _ccdrplLikes        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelContentDetailsRelatedPlayLists' with the minimum fields required to make a request.
 --
@@ -2388,7 +2428,7 @@ data ChannelContentDetailsRelatedPlayLists = ChannelContentDetailsRelatedPlayLis
 channelContentDetailsRelatedPlayLists
     :: ChannelContentDetailsRelatedPlayLists
 channelContentDetailsRelatedPlayLists =
-    ChannelContentDetailsRelatedPlayLists'
+  ChannelContentDetailsRelatedPlayLists'
     { _ccdrplFavorites = Nothing
     , _ccdrplWatchHistory = Nothing
     , _ccdrplWatchLater = Nothing
@@ -2436,7 +2476,8 @@ ccdrplLikes
   = lens _ccdrplLikes (\ s a -> s{_ccdrplLikes = a})
 
 instance FromJSON
-         ChannelContentDetailsRelatedPlayLists where
+           ChannelContentDetailsRelatedPlayLists
+         where
         parseJSON
           = withObject "ChannelContentDetailsRelatedPlayLists"
               (\ o ->
@@ -2460,7 +2501,8 @@ instance ToJSON ChannelContentDetailsRelatedPlayLists
 -- | A live stream describes a live ingestion point.
 --
 -- /See:/ 'liveStream' smart constructor.
-data LiveStream = LiveStream'
+data LiveStream =
+  LiveStream'
     { _lsStatus         :: !(Maybe LiveStreamStatus)
     , _lsEtag           :: !(Maybe Text)
     , _lsSnippet        :: !(Maybe LiveStreamSnippet)
@@ -2468,7 +2510,8 @@ data LiveStream = LiveStream'
     , _lsContentDetails :: !(Maybe LiveStreamContentDetails)
     , _lsId             :: !(Maybe Text)
     , _lsCdn            :: !(Maybe CdnSettings)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStream' with the minimum fields required to make a request.
 --
@@ -2490,7 +2533,7 @@ data LiveStream = LiveStream'
 liveStream
     :: LiveStream
 liveStream =
-    LiveStream'
+  LiveStream'
     { _lsStatus = Nothing
     , _lsEtag = Nothing
     , _lsSnippet = Nothing
@@ -2562,9 +2605,11 @@ instance ToJSON LiveStream where
 -- | Information about a video that was marked as a favorite video.
 --
 -- /See:/ 'activityContentDetailsFavorite' smart constructor.
-newtype ActivityContentDetailsFavorite = ActivityContentDetailsFavorite'
+newtype ActivityContentDetailsFavorite =
+  ActivityContentDetailsFavorite'
     { _acdfResourceId :: Maybe ResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsFavorite' with the minimum fields required to make a request.
 --
@@ -2574,9 +2619,7 @@ newtype ActivityContentDetailsFavorite = ActivityContentDetailsFavorite'
 activityContentDetailsFavorite
     :: ActivityContentDetailsFavorite
 activityContentDetailsFavorite =
-    ActivityContentDetailsFavorite'
-    { _acdfResourceId = Nothing
-    }
+  ActivityContentDetailsFavorite' {_acdfResourceId = Nothing}
 
 -- | The resourceId object contains information that identifies the resource
 -- that was marked as a favorite.
@@ -2601,7 +2644,8 @@ instance ToJSON ActivityContentDetailsFavorite where
 -- | Details about the content of a YouTube Video.
 --
 -- /See:/ 'videoContentDetails' smart constructor.
-data VideoContentDetails = VideoContentDetails'
+data VideoContentDetails =
+  VideoContentDetails'
     { _vcdCountryRestriction :: !(Maybe AccessPolicy)
     , _vcdHasCustomThumbnail :: !(Maybe Bool)
     , _vcdDefinition         :: !(Maybe VideoContentDetailsDefinition)
@@ -2612,7 +2656,8 @@ data VideoContentDetails = VideoContentDetails'
     , _vcdDuration           :: !(Maybe Text)
     , _vcdContentRating      :: !(Maybe ContentRating)
     , _vcdLicensedContent    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoContentDetails' with the minimum fields required to make a request.
 --
@@ -2640,7 +2685,7 @@ data VideoContentDetails = VideoContentDetails'
 videoContentDetails
     :: VideoContentDetails
 videoContentDetails =
-    VideoContentDetails'
+  VideoContentDetails'
     { _vcdCountryRestriction = Nothing
     , _vcdHasCustomThumbnail = Nothing
     , _vcdDefinition = Nothing
@@ -2761,7 +2806,8 @@ instance ToJSON VideoContentDetails where
 -- | Branding properties for images associated with the channel.
 --
 -- /See:/ 'imageSettings' smart constructor.
-data ImageSettings = ImageSettings'
+data ImageSettings =
+  ImageSettings'
     { _isBannerMobileLowImageURL           :: !(Maybe Text)
     , _isBannerTabletExtraHdImageURL       :: !(Maybe Text)
     , _isSmallBrandedBannerImageImapScript :: !(Maybe LocalizedProperty)
@@ -2784,7 +2830,8 @@ data ImageSettings = ImageSettings'
     , _isLargeBrandedBannerImageImapScript :: !(Maybe LocalizedProperty)
     , _isBannerTabletLowImageURL           :: !(Maybe Text)
     , _isBannerTabletHdImageURL            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImageSettings' with the minimum fields required to make a request.
 --
@@ -2836,7 +2883,7 @@ data ImageSettings = ImageSettings'
 imageSettings
     :: ImageSettings
 imageSettings =
-    ImageSettings'
+  ImageSettings'
     { _isBannerMobileLowImageURL = Nothing
     , _isBannerTabletExtraHdImageURL = Nothing
     , _isSmallBrandedBannerImageImapScript = Nothing
@@ -3076,11 +3123,13 @@ instance ToJSON ImageSettings where
 -- | Freebase topic information related to the video.
 --
 -- /See:/ 'videoTopicDetails' smart constructor.
-data VideoTopicDetails = VideoTopicDetails'
+data VideoTopicDetails =
+  VideoTopicDetails'
     { _vtdTopicIds         :: !(Maybe [Text])
     , _vtdRelevantTopicIds :: !(Maybe [Text])
     , _vtdTopicCategories  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoTopicDetails' with the minimum fields required to make a request.
 --
@@ -3094,7 +3143,7 @@ data VideoTopicDetails = VideoTopicDetails'
 videoTopicDetails
     :: VideoTopicDetails
 videoTopicDetails =
-    VideoTopicDetails'
+  VideoTopicDetails'
     { _vtdTopicIds = Nothing
     , _vtdRelevantTopicIds = Nothing
     , _vtdTopicCategories = Nothing
@@ -3150,9 +3199,11 @@ instance ToJSON VideoTopicDetails where
 -- | Information about a resource that received a comment.
 --
 -- /See:/ 'activityContentDetailsComment' smart constructor.
-newtype ActivityContentDetailsComment = ActivityContentDetailsComment'
+newtype ActivityContentDetailsComment =
+  ActivityContentDetailsComment'
     { _acdcResourceId :: Maybe ResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsComment' with the minimum fields required to make a request.
 --
@@ -3162,9 +3213,7 @@ newtype ActivityContentDetailsComment = ActivityContentDetailsComment'
 activityContentDetailsComment
     :: ActivityContentDetailsComment
 activityContentDetailsComment =
-    ActivityContentDetailsComment'
-    { _acdcResourceId = Nothing
-    }
+  ActivityContentDetailsComment' {_acdcResourceId = Nothing}
 
 -- | The resourceId object contains information that identifies the resource
 -- associated with the comment.
@@ -3187,12 +3236,14 @@ instance ToJSON ActivityContentDetailsComment where
 
 --
 -- /See:/ 'liveBroadcastStatus' smart constructor.
-data LiveBroadcastStatus = LiveBroadcastStatus'
+data LiveBroadcastStatus =
+  LiveBroadcastStatus'
     { _lbsLiveBroadcastPriority :: !(Maybe LiveBroadcastStatusLiveBroadcastPriority)
     , _lbsRecordingStatus       :: !(Maybe LiveBroadcastStatusRecordingStatus)
     , _lbsLifeCycleStatus       :: !(Maybe LiveBroadcastStatusLifeCycleStatus)
     , _lbsPrivacyStatus         :: !(Maybe LiveBroadcastStatusPrivacyStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcastStatus' with the minimum fields required to make a request.
 --
@@ -3208,7 +3259,7 @@ data LiveBroadcastStatus = LiveBroadcastStatus'
 liveBroadcastStatus
     :: LiveBroadcastStatus
 liveBroadcastStatus =
-    LiveBroadcastStatus'
+  LiveBroadcastStatus'
     { _lbsLiveBroadcastPriority = Nothing
     , _lbsRecordingStatus = Nothing
     , _lbsLifeCycleStatus = Nothing
@@ -3267,9 +3318,11 @@ instance ToJSON LiveBroadcastStatus where
 -- | Information about the uploaded video.
 --
 -- /See:/ 'activityContentDetailsUpload' smart constructor.
-newtype ActivityContentDetailsUpload = ActivityContentDetailsUpload'
+newtype ActivityContentDetailsUpload =
+  ActivityContentDetailsUpload'
     { _acduVideoId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsUpload' with the minimum fields required to make a request.
 --
@@ -3279,9 +3332,7 @@ newtype ActivityContentDetailsUpload = ActivityContentDetailsUpload'
 activityContentDetailsUpload
     :: ActivityContentDetailsUpload
 activityContentDetailsUpload =
-    ActivityContentDetailsUpload'
-    { _acduVideoId = Nothing
-    }
+  ActivityContentDetailsUpload' {_acduVideoId = Nothing}
 
 -- | The ID that YouTube uses to uniquely identify the uploaded video.
 acduVideoId :: Lens' ActivityContentDetailsUpload (Maybe Text)
@@ -3302,11 +3353,13 @@ instance ToJSON ActivityContentDetailsUpload where
 -- | Information about a new playlist item.
 --
 -- /See:/ 'activityContentDetailsPlayListItem' smart constructor.
-data ActivityContentDetailsPlayListItem = ActivityContentDetailsPlayListItem'
+data ActivityContentDetailsPlayListItem =
+  ActivityContentDetailsPlayListItem'
     { _acdpliResourceId     :: !(Maybe ResourceId)
     , _acdpliPlayListId     :: !(Maybe Text)
     , _acdpliPlayListItemId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsPlayListItem' with the minimum fields required to make a request.
 --
@@ -3320,7 +3373,7 @@ data ActivityContentDetailsPlayListItem = ActivityContentDetailsPlayListItem'
 activityContentDetailsPlayListItem
     :: ActivityContentDetailsPlayListItem
 activityContentDetailsPlayListItem =
-    ActivityContentDetailsPlayListItem'
+  ActivityContentDetailsPlayListItem'
     { _acdpliResourceId = Nothing
     , _acdpliPlayListId = Nothing
     , _acdpliPlayListItemId = Nothing
@@ -3366,13 +3419,15 @@ instance ToJSON ActivityContentDetailsPlayListItem
 -- | Details about a social network post.
 --
 -- /See:/ 'activityContentDetailsSocial' smart constructor.
-data ActivityContentDetailsSocial = ActivityContentDetailsSocial'
+data ActivityContentDetailsSocial =
+  ActivityContentDetailsSocial'
     { _acdsResourceId   :: !(Maybe ResourceId)
     , _acdsImageURL     :: !(Maybe Text)
     , _acdsAuthor       :: !(Maybe Text)
     , _acdsReferenceURL :: !(Maybe Text)
     , _acdsType         :: !(Maybe ActivityContentDetailsSocialType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsSocial' with the minimum fields required to make a request.
 --
@@ -3390,7 +3445,7 @@ data ActivityContentDetailsSocial = ActivityContentDetailsSocial'
 activityContentDetailsSocial
     :: ActivityContentDetailsSocial
 activityContentDetailsSocial =
-    ActivityContentDetailsSocial'
+  ActivityContentDetailsSocial'
     { _acdsResourceId = Nothing
     , _acdsImageURL = Nothing
     , _acdsAuthor = Nothing
@@ -3448,12 +3503,14 @@ instance ToJSON ActivityContentDetailsSocial where
 -- | A liveChatBan resource represents a ban for a YouTube live chat.
 --
 -- /See:/ 'liveChatBan' smart constructor.
-data LiveChatBan = LiveChatBan'
+data LiveChatBan =
+  LiveChatBan'
     { _lcbEtag    :: !(Maybe Text)
     , _lcbSnippet :: !(Maybe LiveChatBanSnippet)
     , _lcbKind    :: !Text
     , _lcbId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatBan' with the minimum fields required to make a request.
 --
@@ -3469,7 +3526,7 @@ data LiveChatBan = LiveChatBan'
 liveChatBan
     :: LiveChatBan
 liveChatBan =
-    LiveChatBan'
+  LiveChatBan'
     { _lcbEtag = Nothing
     , _lcbSnippet = Nothing
     , _lcbKind = "youtube#liveChatBan"
@@ -3514,9 +3571,11 @@ instance ToJSON LiveChatBan where
 -- | Information about a channel that a user subscribed to.
 --
 -- /See:/ 'activityContentDetailsSubscription' smart constructor.
-newtype ActivityContentDetailsSubscription = ActivityContentDetailsSubscription'
+newtype ActivityContentDetailsSubscription =
+  ActivityContentDetailsSubscription'
     { _aResourceId :: Maybe ResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsSubscription' with the minimum fields required to make a request.
 --
@@ -3526,9 +3585,7 @@ newtype ActivityContentDetailsSubscription = ActivityContentDetailsSubscription'
 activityContentDetailsSubscription
     :: ActivityContentDetailsSubscription
 activityContentDetailsSubscription =
-    ActivityContentDetailsSubscription'
-    { _aResourceId = Nothing
-    }
+  ActivityContentDetailsSubscription' {_aResourceId = Nothing}
 
 -- | The resourceId object contains information that identifies the resource
 -- that the user subscribed to.
@@ -3553,9 +3610,11 @@ instance ToJSON ActivityContentDetailsSubscription
 -- | Information about a resource that received a positive (like) rating.
 --
 -- /See:/ 'activityContentDetailsLike' smart constructor.
-newtype ActivityContentDetailsLike = ActivityContentDetailsLike'
+newtype ActivityContentDetailsLike =
+  ActivityContentDetailsLike'
     { _acdlResourceId :: Maybe ResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsLike' with the minimum fields required to make a request.
 --
@@ -3565,9 +3624,7 @@ newtype ActivityContentDetailsLike = ActivityContentDetailsLike'
 activityContentDetailsLike
     :: ActivityContentDetailsLike
 activityContentDetailsLike =
-    ActivityContentDetailsLike'
-    { _acdlResourceId = Nothing
-    }
+  ActivityContentDetailsLike' {_acdlResourceId = Nothing}
 
 -- | The resourceId object contains information that identifies the rated
 -- resource.
@@ -3589,9 +3646,11 @@ instance ToJSON ActivityContentDetailsLike where
 
 --
 -- /See:/ 'playListContentDetails' smart constructor.
-newtype PlayListContentDetails = PlayListContentDetails'
+newtype PlayListContentDetails =
+  PlayListContentDetails'
     { _plcdItemCount :: Maybe (Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListContentDetails' with the minimum fields required to make a request.
 --
@@ -3600,10 +3659,7 @@ newtype PlayListContentDetails = PlayListContentDetails'
 -- * 'plcdItemCount'
 playListContentDetails
     :: PlayListContentDetails
-playListContentDetails =
-    PlayListContentDetails'
-    { _plcdItemCount = Nothing
-    }
+playListContentDetails = PlayListContentDetails' {_plcdItemCount = Nothing}
 
 -- | The number of videos in the playlist.
 plcdItemCount :: Lens' PlayListContentDetails (Maybe Word32)
@@ -3625,13 +3681,15 @@ instance ToJSON PlayListContentDetails where
 
 --
 -- /See:/ 'liveChatSuperChatDetails' smart constructor.
-data LiveChatSuperChatDetails = LiveChatSuperChatDetails'
+data LiveChatSuperChatDetails =
+  LiveChatSuperChatDetails'
     { _lcscdUserComment         :: !(Maybe Text)
     , _lcscdAmountMicros        :: !(Maybe (Textual Word64))
     , _lcscdAmountDisplayString :: !(Maybe Text)
     , _lcscdCurrency            :: !(Maybe Text)
     , _lcscdTier                :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatSuperChatDetails' with the minimum fields required to make a request.
 --
@@ -3649,7 +3707,7 @@ data LiveChatSuperChatDetails = LiveChatSuperChatDetails'
 liveChatSuperChatDetails
     :: LiveChatSuperChatDetails
 liveChatSuperChatDetails =
-    LiveChatSuperChatDetails'
+  LiveChatSuperChatDetails'
     { _lcscdUserComment = Nothing
     , _lcscdAmountMicros = Nothing
     , _lcscdAmountDisplayString = Nothing
@@ -3715,10 +3773,12 @@ instance ToJSON LiveChatSuperChatDetails where
 -- available and number of resources returned in a single page.
 --
 -- /See:/ 'pageInfo' smart constructor.
-data PageInfo = PageInfo'
+data PageInfo =
+  PageInfo'
     { _piResultsPerPage :: !(Maybe (Textual Int32))
     , _piTotalResults   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
@@ -3729,11 +3789,7 @@ data PageInfo = PageInfo'
 -- * 'piTotalResults'
 pageInfo
     :: PageInfo
-pageInfo =
-    PageInfo'
-    { _piResultsPerPage = Nothing
-    , _piTotalResults = Nothing
-    }
+pageInfo = PageInfo' {_piResultsPerPage = Nothing, _piTotalResults = Nothing}
 
 -- | The number of results included in the API response.
 piResultsPerPage :: Lens' PageInfo (Maybe Int32)
@@ -3766,7 +3822,8 @@ instance ToJSON PageInfo where
 -- | Basic details about a video category, such as its localized title.
 --
 -- /See:/ 'videoStatus' smart constructor.
-data VideoStatus = VideoStatus'
+data VideoStatus =
+  VideoStatus'
     { _vsFailureReason       :: !(Maybe VideoStatusFailureReason)
     , _vsPublicStatsViewable :: !(Maybe Bool)
     , _vsRejectionReason     :: !(Maybe VideoStatusRejectionReason)
@@ -3775,7 +3832,8 @@ data VideoStatus = VideoStatus'
     , _vsPrivacyStatus       :: !(Maybe VideoStatusPrivacyStatus)
     , _vsEmbeddable          :: !(Maybe Bool)
     , _vsLicense             :: !(Maybe VideoStatusLicense)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoStatus' with the minimum fields required to make a request.
 --
@@ -3799,7 +3857,7 @@ data VideoStatus = VideoStatus'
 videoStatus
     :: VideoStatus
 videoStatus =
-    VideoStatus'
+  VideoStatus'
     { _vsFailureReason = Nothing
     , _vsPublicStatsViewable = Nothing
     , _vsRejectionReason = Nothing
@@ -3896,7 +3954,8 @@ instance ToJSON VideoStatus where
 -- content length, digitization time, or geotagging information.
 --
 -- /See:/ 'videoFileDetails' smart constructor.
-data VideoFileDetails = VideoFileDetails'
+data VideoFileDetails =
+  VideoFileDetails'
     { _vfdBitrateBps   :: !(Maybe (Textual Word64))
     , _vfdCreationTime :: !(Maybe Text)
     , _vfdDurationMs   :: !(Maybe (Textual Word64))
@@ -3906,7 +3965,8 @@ data VideoFileDetails = VideoFileDetails'
     , _vfdVideoStreams :: !(Maybe [VideoFileDetailsVideoStream])
     , _vfdAudioStreams :: !(Maybe [VideoFileDetailsAudioStream])
     , _vfdFileName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoFileDetails' with the minimum fields required to make a request.
 --
@@ -3932,7 +3992,7 @@ data VideoFileDetails = VideoFileDetails'
 videoFileDetails
     :: VideoFileDetails
 videoFileDetails =
-    VideoFileDetails'
+  VideoFileDetails'
     { _vfdBitrateBps = Nothing
     , _vfdCreationTime = Nothing
     , _vfdDurationMs = Nothing
@@ -4041,13 +4101,15 @@ instance ToJSON VideoFileDetails where
 
 --
 -- /See:/ 'thumbnailSetResponse' smart constructor.
-data ThumbnailSetResponse = ThumbnailSetResponse'
+data ThumbnailSetResponse =
+  ThumbnailSetResponse'
     { _tsrEtag      :: !(Maybe Text)
     , _tsrKind      :: !Text
     , _tsrItems     :: !(Maybe [ThumbnailDetails])
     , _tsrVisitorId :: !(Maybe Text)
     , _tsrEventId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ThumbnailSetResponse' with the minimum fields required to make a request.
 --
@@ -4065,7 +4127,7 @@ data ThumbnailSetResponse = ThumbnailSetResponse'
 thumbnailSetResponse
     :: ThumbnailSetResponse
 thumbnailSetResponse =
-    ThumbnailSetResponse'
+  ThumbnailSetResponse'
     { _tsrEtag = Nothing
     , _tsrKind = "youtube#thumbnailSetResponse"
     , _tsrItems = Nothing
@@ -4121,7 +4183,8 @@ instance ToJSON ThumbnailSetResponse where
 
 --
 -- /See:/ 'liveBroadcastListResponse' smart constructor.
-data LiveBroadcastListResponse = LiveBroadcastListResponse'
+data LiveBroadcastListResponse =
+  LiveBroadcastListResponse'
     { _lblrEtag            :: !(Maybe Text)
     , _lblrTokenPagination :: !(Maybe TokenPagination)
     , _lblrNextPageToken   :: !(Maybe Text)
@@ -4131,7 +4194,8 @@ data LiveBroadcastListResponse = LiveBroadcastListResponse'
     , _lblrVisitorId       :: !(Maybe Text)
     , _lblrEventId         :: !(Maybe Text)
     , _lblrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcastListResponse' with the minimum fields required to make a request.
 --
@@ -4157,7 +4221,7 @@ data LiveBroadcastListResponse = LiveBroadcastListResponse'
 liveBroadcastListResponse
     :: LiveBroadcastListResponse
 liveBroadcastListResponse =
-    LiveBroadcastListResponse'
+  LiveBroadcastListResponse'
     { _lblrEtag = Nothing
     , _lblrTokenPagination = Nothing
     , _lblrNextPageToken = Nothing
@@ -4252,9 +4316,11 @@ instance ToJSON LiveBroadcastListResponse where
 -- | Details about the content of a channel.
 --
 -- /See:/ 'channelContentDetails' smart constructor.
-newtype ChannelContentDetails = ChannelContentDetails'
+newtype ChannelContentDetails =
+  ChannelContentDetails'
     { _ccdRelatedPlayLists :: Maybe ChannelContentDetailsRelatedPlayLists
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelContentDetails' with the minimum fields required to make a request.
 --
@@ -4263,10 +4329,7 @@ newtype ChannelContentDetails = ChannelContentDetails'
 -- * 'ccdRelatedPlayLists'
 channelContentDetails
     :: ChannelContentDetails
-channelContentDetails =
-    ChannelContentDetails'
-    { _ccdRelatedPlayLists = Nothing
-    }
+channelContentDetails = ChannelContentDetails' {_ccdRelatedPlayLists = Nothing}
 
 ccdRelatedPlayLists :: Lens' ChannelContentDetails (Maybe ChannelContentDetailsRelatedPlayLists)
 ccdRelatedPlayLists
@@ -4289,9 +4352,11 @@ instance ToJSON ChannelContentDetails where
 -- | Details about a resource which was added to a channel.
 --
 -- /See:/ 'activityContentDetailsChannelItem' smart constructor.
-newtype ActivityContentDetailsChannelItem = ActivityContentDetailsChannelItem'
+newtype ActivityContentDetailsChannelItem =
+  ActivityContentDetailsChannelItem'
     { _acdciResourceId :: Maybe ResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsChannelItem' with the minimum fields required to make a request.
 --
@@ -4301,9 +4366,7 @@ newtype ActivityContentDetailsChannelItem = ActivityContentDetailsChannelItem'
 activityContentDetailsChannelItem
     :: ActivityContentDetailsChannelItem
 activityContentDetailsChannelItem =
-    ActivityContentDetailsChannelItem'
-    { _acdciResourceId = Nothing
-    }
+  ActivityContentDetailsChannelItem' {_acdciResourceId = Nothing}
 
 -- | The resourceId object contains information that identifies the resource
 -- that was added to the channel.
@@ -4328,7 +4391,8 @@ instance ToJSON ActivityContentDetailsChannelItem
 
 --
 -- /See:/ 'videoListResponse' smart constructor.
-data VideoListResponse = VideoListResponse'
+data VideoListResponse =
+  VideoListResponse'
     { _vlrEtag            :: !(Maybe Text)
     , _vlrTokenPagination :: !(Maybe TokenPagination)
     , _vlrNextPageToken   :: !(Maybe Text)
@@ -4338,7 +4402,8 @@ data VideoListResponse = VideoListResponse'
     , _vlrVisitorId       :: !(Maybe Text)
     , _vlrEventId         :: !(Maybe Text)
     , _vlrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoListResponse' with the minimum fields required to make a request.
 --
@@ -4364,7 +4429,7 @@ data VideoListResponse = VideoListResponse'
 videoListResponse
     :: VideoListResponse
 videoListResponse =
-    VideoListResponse'
+  VideoListResponse'
     { _vlrEtag = Nothing
     , _vlrTokenPagination = Nothing
     , _vlrNextPageToken = Nothing
@@ -4456,9 +4521,11 @@ instance ToJSON VideoListResponse where
 -- | Details about monetization of a YouTube Video.
 --
 -- /See:/ 'videoMonetizationDetails' smart constructor.
-newtype VideoMonetizationDetails = VideoMonetizationDetails'
+newtype VideoMonetizationDetails =
+  VideoMonetizationDetails'
     { _vmdAccess :: Maybe AccessPolicy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoMonetizationDetails' with the minimum fields required to make a request.
 --
@@ -4467,10 +4534,7 @@ newtype VideoMonetizationDetails = VideoMonetizationDetails'
 -- * 'vmdAccess'
 videoMonetizationDetails
     :: VideoMonetizationDetails
-videoMonetizationDetails =
-    VideoMonetizationDetails'
-    { _vmdAccess = Nothing
-    }
+videoMonetizationDetails = VideoMonetizationDetails' {_vmdAccess = Nothing}
 
 -- | The value of access indicates whether the video can be monetized or not.
 vmdAccess :: Lens' VideoMonetizationDetails (Maybe AccessPolicy)
@@ -4490,10 +4554,12 @@ instance ToJSON VideoMonetizationDetails where
 -- | A single tag suggestion with it\'s relevance information.
 --
 -- /See:/ 'videoSuggestionsTagSuggestion' smart constructor.
-data VideoSuggestionsTagSuggestion = VideoSuggestionsTagSuggestion'
+data VideoSuggestionsTagSuggestion =
+  VideoSuggestionsTagSuggestion'
     { _vstsTag               :: !(Maybe Text)
     , _vstsCategoryRestricts :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoSuggestionsTagSuggestion' with the minimum fields required to make a request.
 --
@@ -4505,10 +4571,8 @@ data VideoSuggestionsTagSuggestion = VideoSuggestionsTagSuggestion'
 videoSuggestionsTagSuggestion
     :: VideoSuggestionsTagSuggestion
 videoSuggestionsTagSuggestion =
-    VideoSuggestionsTagSuggestion'
-    { _vstsTag = Nothing
-    , _vstsCategoryRestricts = Nothing
-    }
+  VideoSuggestionsTagSuggestion'
+    {_vstsTag = Nothing, _vstsCategoryRestricts = Nothing}
 
 -- | The keyword tag suggested for the video.
 vstsTag :: Lens' VideoSuggestionsTagSuggestion (Maybe Text)
@@ -4543,7 +4607,8 @@ instance ToJSON VideoSuggestionsTagSuggestion where
 
 --
 -- /See:/ 'liveChatModeratorListResponse' smart constructor.
-data LiveChatModeratorListResponse = LiveChatModeratorListResponse'
+data LiveChatModeratorListResponse =
+  LiveChatModeratorListResponse'
     { _lEtag            :: !(Maybe Text)
     , _lTokenPagination :: !(Maybe TokenPagination)
     , _lNextPageToken   :: !(Maybe Text)
@@ -4553,7 +4618,8 @@ data LiveChatModeratorListResponse = LiveChatModeratorListResponse'
     , _lVisitorId       :: !(Maybe Text)
     , _lEventId         :: !(Maybe Text)
     , _lPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatModeratorListResponse' with the minimum fields required to make a request.
 --
@@ -4579,7 +4645,7 @@ data LiveChatModeratorListResponse = LiveChatModeratorListResponse'
 liveChatModeratorListResponse
     :: LiveChatModeratorListResponse
 liveChatModeratorListResponse =
-    LiveChatModeratorListResponse'
+  LiveChatModeratorListResponse'
     { _lEtag = Nothing
     , _lTokenPagination = Nothing
     , _lNextPageToken = Nothing
@@ -4671,7 +4737,8 @@ instance ToJSON LiveChatModeratorListResponse where
 -- thumbnails, activity type and group.
 --
 -- /See:/ 'activitySnippet' smart constructor.
-data ActivitySnippet = ActivitySnippet'
+data ActivitySnippet =
+  ActivitySnippet'
     { _asPublishedAt  :: !(Maybe DateTime')
     , _asChannelTitle :: !(Maybe Text)
     , _asChannelId    :: !(Maybe Text)
@@ -4680,7 +4747,8 @@ data ActivitySnippet = ActivitySnippet'
     , _asTitle        :: !(Maybe Text)
     , _asType         :: !(Maybe ActivitySnippetType)
     , _asDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivitySnippet' with the minimum fields required to make a request.
 --
@@ -4704,7 +4772,7 @@ data ActivitySnippet = ActivitySnippet'
 activitySnippet
     :: ActivitySnippet
 activitySnippet =
-    ActivitySnippet'
+  ActivitySnippet'
     { _asPublishedAt = Nothing
     , _asChannelTitle = Nothing
     , _asChannelId = Nothing
@@ -4795,10 +4863,12 @@ instance ToJSON ActivitySnippet where
 -- | Freebase topic information related to the channel.
 --
 -- /See:/ 'channelTopicDetails' smart constructor.
-data ChannelTopicDetails = ChannelTopicDetails'
+data ChannelTopicDetails =
+  ChannelTopicDetails'
     { _ctdTopicIds        :: !(Maybe [Text])
     , _ctdTopicCategories :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelTopicDetails' with the minimum fields required to make a request.
 --
@@ -4810,10 +4880,7 @@ data ChannelTopicDetails = ChannelTopicDetails'
 channelTopicDetails
     :: ChannelTopicDetails
 channelTopicDetails =
-    ChannelTopicDetails'
-    { _ctdTopicIds = Nothing
-    , _ctdTopicCategories = Nothing
-    }
+  ChannelTopicDetails' {_ctdTopicIds = Nothing, _ctdTopicCategories = Nothing}
 
 -- | A list of Freebase topic IDs associated with the channel. You can
 -- retrieve information about each topic using the Freebase Topic API.
@@ -4848,11 +4915,13 @@ instance ToJSON ChannelTopicDetails where
 
 --
 -- /See:/ 'liveChatPollEditedDetails' smart constructor.
-data LiveChatPollEditedDetails = LiveChatPollEditedDetails'
+data LiveChatPollEditedDetails =
+  LiveChatPollEditedDetails'
     { _lcpedPrompt :: !(Maybe Text)
     , _lcpedItems  :: !(Maybe [LiveChatPollItem])
     , _lcpedId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatPollEditedDetails' with the minimum fields required to make a request.
 --
@@ -4866,11 +4935,8 @@ data LiveChatPollEditedDetails = LiveChatPollEditedDetails'
 liveChatPollEditedDetails
     :: LiveChatPollEditedDetails
 liveChatPollEditedDetails =
-    LiveChatPollEditedDetails'
-    { _lcpedPrompt = Nothing
-    , _lcpedItems = Nothing
-    , _lcpedId = Nothing
-    }
+  LiveChatPollEditedDetails'
+    {_lcpedPrompt = Nothing, _lcpedItems = Nothing, _lcpedId = Nothing}
 
 lcpedPrompt :: Lens' LiveChatPollEditedDetails (Maybe Text)
 lcpedPrompt
@@ -4903,7 +4969,8 @@ instance ToJSON LiveChatPollEditedDetails where
 
 --
 -- /See:/ 'videoCategoryListResponse' smart constructor.
-data VideoCategoryListResponse = VideoCategoryListResponse'
+data VideoCategoryListResponse =
+  VideoCategoryListResponse'
     { _vclrEtag            :: !(Maybe Text)
     , _vclrTokenPagination :: !(Maybe TokenPagination)
     , _vclrNextPageToken   :: !(Maybe Text)
@@ -4913,7 +4980,8 @@ data VideoCategoryListResponse = VideoCategoryListResponse'
     , _vclrVisitorId       :: !(Maybe Text)
     , _vclrEventId         :: !(Maybe Text)
     , _vclrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoCategoryListResponse' with the minimum fields required to make a request.
 --
@@ -4939,7 +5007,7 @@ data VideoCategoryListResponse = VideoCategoryListResponse'
 videoCategoryListResponse
     :: VideoCategoryListResponse
 videoCategoryListResponse =
-    VideoCategoryListResponse'
+  VideoCategoryListResponse'
     { _vclrEtag = Nothing
     , _vclrTokenPagination = Nothing
     , _vclrNextPageToken = Nothing
@@ -5037,7 +5105,8 @@ instance ToJSON VideoCategoryListResponse where
 -- Video resource parts.
 --
 -- /See:/ 'videoProcessingDetails' smart constructor.
-data VideoProcessingDetails = VideoProcessingDetails'
+data VideoProcessingDetails =
+  VideoProcessingDetails'
     { _vpdProcessingFailureReason       :: !(Maybe VideoProcessingDetailsProcessingFailureReason)
     , _vpdProcessingIssuesAvailability  :: !(Maybe Text)
     , _vpdProcessingProgress            :: !(Maybe VideoProcessingDetailsProcessingProgress)
@@ -5046,7 +5115,8 @@ data VideoProcessingDetails = VideoProcessingDetails'
     , _vpdProcessingStatus              :: !(Maybe VideoProcessingDetailsProcessingStatus)
     , _vpdEditorSuggestionsAvailability :: !(Maybe Text)
     , _vpdFileDetailsAvailability       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoProcessingDetails' with the minimum fields required to make a request.
 --
@@ -5070,7 +5140,7 @@ data VideoProcessingDetails = VideoProcessingDetails'
 videoProcessingDetails
     :: VideoProcessingDetails
 videoProcessingDetails =
-    VideoProcessingDetails'
+  VideoProcessingDetails'
     { _vpdProcessingFailureReason = Nothing
     , _vpdProcessingIssuesAvailability = Nothing
     , _vpdProcessingProgress = Nothing
@@ -5182,14 +5252,16 @@ instance ToJSON VideoProcessingDetails where
 -- | Basic details about a comment thread.
 --
 -- /See:/ 'commentThreadSnippet' smart constructor.
-data CommentThreadSnippet = CommentThreadSnippet'
+data CommentThreadSnippet =
+  CommentThreadSnippet'
     { _ctsIsPublic        :: !(Maybe Bool)
     , _ctsChannelId       :: !(Maybe Text)
     , _ctsCanReply        :: !(Maybe Bool)
     , _ctsVideoId         :: !(Maybe Text)
     , _ctsTotalReplyCount :: !(Maybe (Textual Word32))
     , _ctsTopLevelComment :: !(Maybe Comment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentThreadSnippet' with the minimum fields required to make a request.
 --
@@ -5209,7 +5281,7 @@ data CommentThreadSnippet = CommentThreadSnippet'
 commentThreadSnippet
     :: CommentThreadSnippet
 commentThreadSnippet =
-    CommentThreadSnippet'
+  CommentThreadSnippet'
     { _ctsIsPublic = Nothing
     , _ctsChannelId = Nothing
     , _ctsCanReply = Nothing
@@ -5280,13 +5352,15 @@ instance ToJSON CommentThreadSnippet where
 
 --
 -- /See:/ 'channelSectionListResponse' smart constructor.
-data ChannelSectionListResponse = ChannelSectionListResponse'
+data ChannelSectionListResponse =
+  ChannelSectionListResponse'
     { _cslrEtag      :: !(Maybe Text)
     , _cslrKind      :: !Text
     , _cslrItems     :: !(Maybe [ChannelSection])
     , _cslrVisitorId :: !(Maybe Text)
     , _cslrEventId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelSectionListResponse' with the minimum fields required to make a request.
 --
@@ -5304,7 +5378,7 @@ data ChannelSectionListResponse = ChannelSectionListResponse'
 channelSectionListResponse
     :: ChannelSectionListResponse
 channelSectionListResponse =
-    ChannelSectionListResponse'
+  ChannelSectionListResponse'
     { _cslrEtag = Nothing
     , _cslrKind = "youtube#channelSectionListResponse"
     , _cslrItems = Nothing
@@ -5365,12 +5439,14 @@ instance ToJSON ChannelSectionListResponse where
 -- channel.
 --
 -- /See:/ 'superChatEvent' smart constructor.
-data SuperChatEvent = SuperChatEvent'
+data SuperChatEvent =
+  SuperChatEvent'
     { _sceEtag    :: !(Maybe Text)
     , _sceSnippet :: !(Maybe SuperChatEventSnippet)
     , _sceKind    :: !Text
     , _sceId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SuperChatEvent' with the minimum fields required to make a request.
 --
@@ -5386,7 +5462,7 @@ data SuperChatEvent = SuperChatEvent'
 superChatEvent
     :: SuperChatEvent
 superChatEvent =
-    SuperChatEvent'
+  SuperChatEvent'
     { _sceEtag = Nothing
     , _sceSnippet = Nothing
     , _sceKind = "youtube#superChatEvent"
@@ -5433,12 +5509,14 @@ instance ToJSON SuperChatEvent where
 -- video.ReportAbuse.
 --
 -- /See:/ 'videoAbuseReportReason' smart constructor.
-data VideoAbuseReportReason = VideoAbuseReportReason'
+data VideoAbuseReportReason =
+  VideoAbuseReportReason'
     { _varrEtag    :: !(Maybe Text)
     , _varrSnippet :: !(Maybe VideoAbuseReportReasonSnippet)
     , _varrKind    :: !Text
     , _varrId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoAbuseReportReason' with the minimum fields required to make a request.
 --
@@ -5454,7 +5532,7 @@ data VideoAbuseReportReason = VideoAbuseReportReason'
 videoAbuseReportReason
     :: VideoAbuseReportReason
 videoAbuseReportReason =
-    VideoAbuseReportReason'
+  VideoAbuseReportReason'
     { _varrEtag = Nothing
     , _varrSnippet = Nothing
     , _varrKind = "youtube#videoAbuseReportReason"
@@ -5499,12 +5577,14 @@ instance ToJSON VideoAbuseReportReason where
 
 --
 -- /See:/ 'liveStreamConfigurationIssue' smart constructor.
-data LiveStreamConfigurationIssue = LiveStreamConfigurationIssue'
+data LiveStreamConfigurationIssue =
+  LiveStreamConfigurationIssue'
     { _lsciSeverity    :: !(Maybe LiveStreamConfigurationIssueSeverity)
     , _lsciReason      :: !(Maybe Text)
     , _lsciType        :: !(Maybe LiveStreamConfigurationIssueType)
     , _lsciDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStreamConfigurationIssue' with the minimum fields required to make a request.
 --
@@ -5520,7 +5600,7 @@ data LiveStreamConfigurationIssue = LiveStreamConfigurationIssue'
 liveStreamConfigurationIssue
     :: LiveStreamConfigurationIssue
 liveStreamConfigurationIssue =
-    LiveStreamConfigurationIssue'
+  LiveStreamConfigurationIssue'
     { _lsciSeverity = Nothing
     , _lsciReason = Nothing
     , _lsciType = Nothing
@@ -5569,13 +5649,15 @@ instance ToJSON LiveStreamConfigurationIssue where
 -- Chat.
 --
 -- /See:/ 'liveChatMessage' smart constructor.
-data LiveChatMessage = LiveChatMessage'
+data LiveChatMessage =
+  LiveChatMessage'
     { _lcmEtag          :: !(Maybe Text)
     , _lcmSnippet       :: !(Maybe LiveChatMessageSnippet)
     , _lcmKind          :: !Text
     , _lcmAuthorDetails :: !(Maybe LiveChatMessageAuthorDetails)
     , _lcmId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatMessage' with the minimum fields required to make a request.
 --
@@ -5593,7 +5675,7 @@ data LiveChatMessage = LiveChatMessage'
 liveChatMessage
     :: LiveChatMessage
 liveChatMessage =
-    LiveChatMessage'
+  LiveChatMessage'
     { _lcmEtag = Nothing
     , _lcmSnippet = Nothing
     , _lcmKind = "youtube#liveChatMessage"
@@ -5649,7 +5731,8 @@ instance ToJSON LiveChatMessage where
 -- | A channel resource contains information about a YouTube channel.
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel'
+data Channel =
+  Channel'
     { _chaStatus              :: !(Maybe ChannelStatus)
     , _chaEtag                :: !(Maybe Text)
     , _chaAuditDetails        :: !(Maybe ChannelAuditDetails)
@@ -5664,7 +5747,8 @@ data Channel = Channel'
     , _chaInvideoPromotion    :: !(Maybe InvideoPromotion)
     , _chaStatistics          :: !(Maybe ChannelStatistics)
     , _chaLocalizations       :: !(Maybe ChannelLocalizations)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
@@ -5700,7 +5784,7 @@ data Channel = Channel'
 channel
     :: Channel
 channel =
-    Channel'
+  Channel'
     { _chaStatus = Nothing
     , _chaEtag = Nothing
     , _chaAuditDetails = Nothing
@@ -5845,11 +5929,13 @@ instance ToJSON Channel where
 -- | ChannelSection targeting setting.
 --
 -- /See:/ 'channelSectionTargeting' smart constructor.
-data ChannelSectionTargeting = ChannelSectionTargeting'
+data ChannelSectionTargeting =
+  ChannelSectionTargeting'
     { _cstRegions   :: !(Maybe [Text])
     , _cstCountries :: !(Maybe [Text])
     , _cstLanguages :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelSectionTargeting' with the minimum fields required to make a request.
 --
@@ -5863,11 +5949,8 @@ data ChannelSectionTargeting = ChannelSectionTargeting'
 channelSectionTargeting
     :: ChannelSectionTargeting
 channelSectionTargeting =
-    ChannelSectionTargeting'
-    { _cstRegions = Nothing
-    , _cstCountries = Nothing
-    , _cstLanguages = Nothing
-    }
+  ChannelSectionTargeting'
+    {_cstRegions = Nothing, _cstCountries = Nothing, _cstLanguages = Nothing}
 
 -- | The region the channel section is targeting.
 cstRegions :: Lens' ChannelSectionTargeting [Text]
@@ -5909,7 +5992,8 @@ instance ToJSON ChannelSectionTargeting where
 
 --
 -- /See:/ 'liveStreamListResponse' smart constructor.
-data LiveStreamListResponse = LiveStreamListResponse'
+data LiveStreamListResponse =
+  LiveStreamListResponse'
     { _lslrEtag            :: !(Maybe Text)
     , _lslrTokenPagination :: !(Maybe TokenPagination)
     , _lslrNextPageToken   :: !(Maybe Text)
@@ -5919,7 +6003,8 @@ data LiveStreamListResponse = LiveStreamListResponse'
     , _lslrVisitorId       :: !(Maybe Text)
     , _lslrEventId         :: !(Maybe Text)
     , _lslrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStreamListResponse' with the minimum fields required to make a request.
 --
@@ -5945,7 +6030,7 @@ data LiveStreamListResponse = LiveStreamListResponse'
 liveStreamListResponse
     :: LiveStreamListResponse
 liveStreamListResponse =
-    LiveStreamListResponse'
+  LiveStreamListResponse'
     { _lslrEtag = Nothing
     , _lslrTokenPagination = Nothing
     , _lslrNextPageToken = Nothing
@@ -6039,9 +6124,11 @@ instance ToJSON LiveStreamListResponse where
 -- | Localizations for different languages
 --
 -- /See:/ 'channelLocalizations' smart constructor.
-newtype ChannelLocalizations = ChannelLocalizations'
+newtype ChannelLocalizations =
+  ChannelLocalizations'
     { _clAddtional :: HashMap Text ChannelLocalization
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelLocalizations' with the minimum fields required to make a request.
 --
@@ -6052,9 +6139,7 @@ channelLocalizations
     :: HashMap Text ChannelLocalization -- ^ 'clAddtional'
     -> ChannelLocalizations
 channelLocalizations pClAddtional_ =
-    ChannelLocalizations'
-    { _clAddtional = _Coerce # pClAddtional_
-    }
+  ChannelLocalizations' {_clAddtional = _Coerce # pClAddtional_}
 
 -- | The language tag, using string since map_key require simple types.
 clAddtional :: Lens' ChannelLocalizations (HashMap Text ChannelLocalization)
@@ -6075,7 +6160,8 @@ instance ToJSON ChannelLocalizations where
 -- thumbnails.
 --
 -- /See:/ 'playListSnippet' smart constructor.
-data PlayListSnippet = PlayListSnippet'
+data PlayListSnippet =
+  PlayListSnippet'
     { _plsPublishedAt     :: !(Maybe DateTime')
     , _plsChannelTitle    :: !(Maybe Text)
     , _plsChannelId       :: !(Maybe Text)
@@ -6085,7 +6171,8 @@ data PlayListSnippet = PlayListSnippet'
     , _plsDescription     :: !(Maybe Text)
     , _plsTags            :: !(Maybe [Text])
     , _plsDefaultLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListSnippet' with the minimum fields required to make a request.
 --
@@ -6111,7 +6198,7 @@ data PlayListSnippet = PlayListSnippet'
 playListSnippet
     :: PlayListSnippet
 playListSnippet =
-    PlayListSnippet'
+  PlayListSnippet'
     { _plsPublishedAt = Nothing
     , _plsChannelTitle = Nothing
     , _plsChannelId = Nothing
@@ -6208,13 +6295,15 @@ instance ToJSON PlayListSnippet where
 
 --
 -- /See:/ 'videoGetRatingResponse' smart constructor.
-data VideoGetRatingResponse = VideoGetRatingResponse'
+data VideoGetRatingResponse =
+  VideoGetRatingResponse'
     { _vgrrEtag      :: !(Maybe Text)
     , _vgrrKind      :: !Text
     , _vgrrItems     :: !(Maybe [VideoRating])
     , _vgrrVisitorId :: !(Maybe Text)
     , _vgrrEventId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoGetRatingResponse' with the minimum fields required to make a request.
 --
@@ -6232,7 +6321,7 @@ data VideoGetRatingResponse = VideoGetRatingResponse'
 videoGetRatingResponse
     :: VideoGetRatingResponse
 videoGetRatingResponse =
-    VideoGetRatingResponse'
+  VideoGetRatingResponse'
     { _vgrrEtag = Nothing
     , _vgrrKind = "youtube#videoGetRatingResponse"
     , _vgrrItems = Nothing
@@ -6290,7 +6379,8 @@ instance ToJSON VideoGetRatingResponse where
 
 --
 -- /See:/ 'superChatEventSnippet' smart constructor.
-data SuperChatEventSnippet = SuperChatEventSnippet'
+data SuperChatEventSnippet =
+  SuperChatEventSnippet'
     { _scesDisplayString      :: !(Maybe Text)
     , _scesSupporterDetails   :: !(Maybe ChannelProFileDetails)
     , _scesCreatedAt          :: !(Maybe DateTime')
@@ -6301,7 +6391,8 @@ data SuperChatEventSnippet = SuperChatEventSnippet'
     , _scesNonprofit          :: !(Maybe Nonprofit)
     , _scesCurrency           :: !(Maybe Text)
     , _scesIsSuperChatForGood :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SuperChatEventSnippet' with the minimum fields required to make a request.
 --
@@ -6329,7 +6420,7 @@ data SuperChatEventSnippet = SuperChatEventSnippet'
 superChatEventSnippet
     :: SuperChatEventSnippet
 superChatEventSnippet =
-    SuperChatEventSnippet'
+  SuperChatEventSnippet'
     { _scesDisplayString = Nothing
     , _scesSupporterDetails = Nothing
     , _scesCreatedAt = Nothing
@@ -6444,10 +6535,12 @@ instance ToJSON SuperChatEventSnippet where
 -- | Basic details about a video category, such as its localized title.
 --
 -- /See:/ 'videoAbuseReportReasonSnippet' smart constructor.
-data VideoAbuseReportReasonSnippet = VideoAbuseReportReasonSnippet'
+data VideoAbuseReportReasonSnippet =
+  VideoAbuseReportReasonSnippet'
     { _varrsSecondaryReasons :: !(Maybe [VideoAbuseReportSecondaryReason])
     , _varrsLabel            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoAbuseReportReasonSnippet' with the minimum fields required to make a request.
 --
@@ -6459,10 +6552,8 @@ data VideoAbuseReportReasonSnippet = VideoAbuseReportReasonSnippet'
 videoAbuseReportReasonSnippet
     :: VideoAbuseReportReasonSnippet
 videoAbuseReportReasonSnippet =
-    VideoAbuseReportReasonSnippet'
-    { _varrsSecondaryReasons = Nothing
-    , _varrsLabel = Nothing
-    }
+  VideoAbuseReportReasonSnippet'
+    {_varrsSecondaryReasons = Nothing, _varrsLabel = Nothing}
 
 -- | The secondary reasons associated with this reason, if any are available.
 -- (There might be 0 or more.)
@@ -6497,12 +6588,14 @@ instance ToJSON VideoAbuseReportReasonSnippet where
 -- is associated with exactly one YouTube video.
 --
 -- /See:/ 'caption' smart constructor.
-data Caption = Caption'
+data Caption =
+  Caption'
     { _capEtag    :: !(Maybe Text)
     , _capSnippet :: !(Maybe CaptionSnippet)
     , _capKind    :: !Text
     , _capId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Caption' with the minimum fields required to make a request.
 --
@@ -6518,7 +6611,7 @@ data Caption = Caption'
 caption
     :: Caption
 caption =
-    Caption'
+  Caption'
     { _capEtag = Nothing
     , _capSnippet = Nothing
     , _capKind = "youtube#caption"
@@ -6563,10 +6656,12 @@ instance ToJSON Caption where
 -- | DEPRECATED Region restriction of the video.
 --
 -- /See:/ 'videoContentDetailsRegionRestriction' smart constructor.
-data VideoContentDetailsRegionRestriction = VideoContentDetailsRegionRestriction'
+data VideoContentDetailsRegionRestriction =
+  VideoContentDetailsRegionRestriction'
     { _vcdrrAllowed :: !(Maybe [Text])
     , _vcdrrBlocked :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoContentDetailsRegionRestriction' with the minimum fields required to make a request.
 --
@@ -6578,10 +6673,8 @@ data VideoContentDetailsRegionRestriction = VideoContentDetailsRegionRestriction
 videoContentDetailsRegionRestriction
     :: VideoContentDetailsRegionRestriction
 videoContentDetailsRegionRestriction =
-    VideoContentDetailsRegionRestriction'
-    { _vcdrrAllowed = Nothing
-    , _vcdrrBlocked = Nothing
-    }
+  VideoContentDetailsRegionRestriction'
+    {_vcdrrAllowed = Nothing, _vcdrrBlocked = Nothing}
 
 -- | A list of region codes that identify countries where the video is
 -- viewable. If this property is present and a country is not listed in its
@@ -6606,7 +6699,8 @@ vcdrrBlocked
       . _Coerce
 
 instance FromJSON
-         VideoContentDetailsRegionRestriction where
+           VideoContentDetailsRegionRestriction
+         where
         parseJSON
           = withObject "VideoContentDetailsRegionRestriction"
               (\ o ->
@@ -6625,11 +6719,13 @@ instance ToJSON VideoContentDetailsRegionRestriction
 -- | Describes a temporal position of a visual widget inside a video.
 --
 -- /See:/ 'invideoTiming' smart constructor.
-data InvideoTiming = InvideoTiming'
+data InvideoTiming =
+  InvideoTiming'
     { _itDurationMs :: !(Maybe (Textual Word64))
     , _itOffSetMs   :: !(Maybe (Textual Word64))
     , _itType       :: !(Maybe InvideoTimingType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InvideoTiming' with the minimum fields required to make a request.
 --
@@ -6643,11 +6739,8 @@ data InvideoTiming = InvideoTiming'
 invideoTiming
     :: InvideoTiming
 invideoTiming =
-    InvideoTiming'
-    { _itDurationMs = Nothing
-    , _itOffSetMs = Nothing
-    , _itType = Nothing
-    }
+  InvideoTiming'
+    {_itDurationMs = Nothing, _itOffSetMs = Nothing, _itType = Nothing}
 
 -- | Defines the duration in milliseconds for which the promotion should be
 -- displayed. If missing, the client should use the default.
@@ -6691,9 +6784,11 @@ instance ToJSON InvideoTiming where
 -- | Localizations for different languages
 --
 -- /See:/ 'playListLocalizations' smart constructor.
-newtype PlayListLocalizations = PlayListLocalizations'
+newtype PlayListLocalizations =
+  PlayListLocalizations'
     { _pllAddtional :: HashMap Text PlayListLocalization
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListLocalizations' with the minimum fields required to make a request.
 --
@@ -6704,9 +6799,7 @@ playListLocalizations
     :: HashMap Text PlayListLocalization -- ^ 'pllAddtional'
     -> PlayListLocalizations
 playListLocalizations pPllAddtional_ =
-    PlayListLocalizations'
-    { _pllAddtional = _Coerce # pPllAddtional_
-    }
+  PlayListLocalizations' {_pllAddtional = _Coerce # pPllAddtional_}
 
 -- | The language tag, using string since map_key require simple types.
 pllAddtional :: Lens' PlayListLocalizations (HashMap Text PlayListLocalization)
@@ -6726,11 +6819,13 @@ instance ToJSON PlayListLocalizations where
 -- | Video processing progress and completion time estimate.
 --
 -- /See:/ 'videoProcessingDetailsProcessingProgress' smart constructor.
-data VideoProcessingDetailsProcessingProgress = VideoProcessingDetailsProcessingProgress'
+data VideoProcessingDetailsProcessingProgress =
+  VideoProcessingDetailsProcessingProgress'
     { _vpdppTimeLeftMs     :: !(Maybe (Textual Word64))
     , _vpdppPartsTotal     :: !(Maybe (Textual Word64))
     , _vpdppPartsProcessed :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoProcessingDetailsProcessingProgress' with the minimum fields required to make a request.
 --
@@ -6744,7 +6839,7 @@ data VideoProcessingDetailsProcessingProgress = VideoProcessingDetailsProcessing
 videoProcessingDetailsProcessingProgress
     :: VideoProcessingDetailsProcessingProgress
 videoProcessingDetailsProcessingProgress =
-    VideoProcessingDetailsProcessingProgress'
+  VideoProcessingDetailsProcessingProgress'
     { _vpdppTimeLeftMs = Nothing
     , _vpdppPartsTotal = Nothing
     , _vpdppPartsProcessed = Nothing
@@ -6781,7 +6876,8 @@ vpdppPartsProcessed
       . mapping _Coerce
 
 instance FromJSON
-         VideoProcessingDetailsProcessingProgress where
+           VideoProcessingDetailsProcessingProgress
+         where
         parseJSON
           = withObject
               "VideoProcessingDetailsProcessingProgress"
@@ -6791,7 +6887,8 @@ instance FromJSON
                      (o .:? "partsProcessed"))
 
 instance ToJSON
-         VideoProcessingDetailsProcessingProgress where
+           VideoProcessingDetailsProcessingProgress
+         where
         toJSON VideoProcessingDetailsProcessingProgress'{..}
           = object
               (catMaybes
@@ -6803,7 +6900,8 @@ instance ToJSON
 -- thumbnails.
 --
 -- /See:/ 'channelSnippet' smart constructor.
-data ChannelSnippet = ChannelSnippet'
+data ChannelSnippet =
+  ChannelSnippet'
     { _csPublishedAt     :: !(Maybe DateTime')
     , _csCountry         :: !(Maybe Text)
     , _csThumbnails      :: !(Maybe ThumbnailDetails)
@@ -6812,7 +6910,8 @@ data ChannelSnippet = ChannelSnippet'
     , _csTitle           :: !(Maybe Text)
     , _csDescription     :: !(Maybe Text)
     , _csDefaultLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelSnippet' with the minimum fields required to make a request.
 --
@@ -6836,7 +6935,7 @@ data ChannelSnippet = ChannelSnippet'
 channelSnippet
     :: ChannelSnippet
 channelSnippet =
-    ChannelSnippet'
+  ChannelSnippet'
     { _csPublishedAt = Nothing
     , _csCountry = Nothing
     , _csThumbnails = Nothing
@@ -6922,13 +7021,15 @@ instance ToJSON ChannelSnippet where
 -- | Internal representation of thumbnails for a YouTube resource.
 --
 -- /See:/ 'thumbnailDetails' smart constructor.
-data ThumbnailDetails = ThumbnailDetails'
+data ThumbnailDetails =
+  ThumbnailDetails'
     { _tdMedium   :: !(Maybe Thumbnail)
     , _tdMaxres   :: !(Maybe Thumbnail)
     , _tdDefault  :: !(Maybe Thumbnail)
     , _tdStandard :: !(Maybe Thumbnail)
     , _tdHigh     :: !(Maybe Thumbnail)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ThumbnailDetails' with the minimum fields required to make a request.
 --
@@ -6946,7 +7047,7 @@ data ThumbnailDetails = ThumbnailDetails'
 thumbnailDetails
     :: ThumbnailDetails
 thumbnailDetails =
-    ThumbnailDetails'
+  ThumbnailDetails'
     { _tdMedium = Nothing
     , _tdMaxres = Nothing
     , _tdDefault = Nothing
@@ -6999,11 +7100,13 @@ instance ToJSON ThumbnailDetails where
 -- | Settings and Info of the monitor stream
 --
 -- /See:/ 'monitorStreamInfo' smart constructor.
-data MonitorStreamInfo = MonitorStreamInfo'
+data MonitorStreamInfo =
+  MonitorStreamInfo'
     { _msiBroadcastStreamDelayMs :: !(Maybe (Textual Word32))
     , _msiEmbedHTML              :: !(Maybe Text)
     , _msiEnableMonitorStream    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitorStreamInfo' with the minimum fields required to make a request.
 --
@@ -7017,7 +7120,7 @@ data MonitorStreamInfo = MonitorStreamInfo'
 monitorStreamInfo
     :: MonitorStreamInfo
 monitorStreamInfo =
-    MonitorStreamInfo'
+  MonitorStreamInfo'
     { _msiBroadcastStreamDelayMs = Nothing
     , _msiEmbedHTML = Nothing
     , _msiEnableMonitorStream = Nothing
@@ -7070,7 +7173,8 @@ instance ToJSON MonitorStreamInfo where
 
 --
 -- /See:/ 'liveChatMessageSnippet' smart constructor.
-data LiveChatMessageSnippet = LiveChatMessageSnippet'
+data LiveChatMessageSnippet =
+  LiveChatMessageSnippet'
     { _lcmsMessageDeletedDetails   :: !(Maybe LiveChatMessageDeletedDetails)
     , _lcmsLiveChatId              :: !(Maybe Text)
     , _lcmsPublishedAt             :: !(Maybe DateTime')
@@ -7087,7 +7191,8 @@ data LiveChatMessageSnippet = LiveChatMessageSnippet'
     , _lcmsFanFundingEventDetails  :: !(Maybe LiveChatFanFundingEventDetails)
     , _lcmsHasDisplayContent       :: !(Maybe Bool)
     , _lcmsDisplayMessage          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatMessageSnippet' with the minimum fields required to make a request.
 --
@@ -7127,7 +7232,7 @@ data LiveChatMessageSnippet = LiveChatMessageSnippet'
 liveChatMessageSnippet
     :: LiveChatMessageSnippet
 liveChatMessageSnippet =
-    LiveChatMessageSnippet'
+  LiveChatMessageSnippet'
     { _lcmsMessageDeletedDetails = Nothing
     , _lcmsLiveChatId = Nothing
     , _lcmsPublishedAt = Nothing
@@ -7297,12 +7402,14 @@ instance ToJSON LiveChatMessageSnippet where
 -- | A i18nRegion resource identifies a region where YouTube is available.
 --
 -- /See:/ 'i18nRegion' smart constructor.
-data I18nRegion = I18nRegion'
+data I18nRegion =
+  I18nRegion'
     { _irEtag    :: !(Maybe Text)
     , _irSnippet :: !(Maybe I18nRegionSnippet)
     , _irKind    :: !Text
     , _irId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'I18nRegion' with the minimum fields required to make a request.
 --
@@ -7318,7 +7425,7 @@ data I18nRegion = I18nRegion'
 i18nRegion
     :: I18nRegion
 i18nRegion =
-    I18nRegion'
+  I18nRegion'
     { _irEtag = Nothing
     , _irSnippet = Nothing
     , _irKind = "youtube#i18nRegion"
@@ -7365,13 +7472,15 @@ instance ToJSON I18nRegion where
 -- the channel, etc.
 --
 -- /See:/ 'channelStatistics' smart constructor.
-data ChannelStatistics = ChannelStatistics'
+data ChannelStatistics =
+  ChannelStatistics'
     { _csCommentCount          :: !(Maybe (Textual Word64))
     , _csSubscriberCount       :: !(Maybe (Textual Word64))
     , _csVideoCount            :: !(Maybe (Textual Word64))
     , _csHiddenSubscriberCount :: !(Maybe Bool)
     , _csViewCount             :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelStatistics' with the minimum fields required to make a request.
 --
@@ -7389,7 +7498,7 @@ data ChannelStatistics = ChannelStatistics'
 channelStatistics
     :: ChannelStatistics
 channelStatistics =
-    ChannelStatistics'
+  ChannelStatistics'
     { _csCommentCount = Nothing
     , _csSubscriberCount = Nothing
     , _csVideoCount = Nothing
@@ -7452,12 +7561,14 @@ instance ToJSON ChannelStatistics where
 
 --
 -- /See:/ 'liveChatFanFundingEventDetails' smart constructor.
-data LiveChatFanFundingEventDetails = LiveChatFanFundingEventDetails'
+data LiveChatFanFundingEventDetails =
+  LiveChatFanFundingEventDetails'
     { _lcffedUserComment         :: !(Maybe Text)
     , _lcffedAmountMicros        :: !(Maybe (Textual Word64))
     , _lcffedAmountDisplayString :: !(Maybe Text)
     , _lcffedCurrency            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatFanFundingEventDetails' with the minimum fields required to make a request.
 --
@@ -7473,7 +7584,7 @@ data LiveChatFanFundingEventDetails = LiveChatFanFundingEventDetails'
 liveChatFanFundingEventDetails
     :: LiveChatFanFundingEventDetails
 liveChatFanFundingEventDetails =
-    LiveChatFanFundingEventDetails'
+  LiveChatFanFundingEventDetails'
     { _lcffedUserComment = Nothing
     , _lcffedAmountMicros = Nothing
     , _lcffedAmountDisplayString = Nothing
@@ -7530,7 +7641,8 @@ instance ToJSON LiveChatFanFundingEventDetails where
 -- channel that was subscribed to, etc.
 --
 -- /See:/ 'activityContentDetails' smart constructor.
-data ActivityContentDetails = ActivityContentDetails'
+data ActivityContentDetails =
+  ActivityContentDetails'
     { _acdPromotedItem   :: !(Maybe ActivityContentDetailsPromotedItem)
     , _acdChannelItem    :: !(Maybe ActivityContentDetailsChannelItem)
     , _acdBulletin       :: !(Maybe ActivityContentDetailsBulletin)
@@ -7542,7 +7654,8 @@ data ActivityContentDetails = ActivityContentDetails'
     , _acdPlayListItem   :: !(Maybe ActivityContentDetailsPlayListItem)
     , _acdLike           :: !(Maybe ActivityContentDetailsLike)
     , _acdRecommendation :: !(Maybe ActivityContentDetailsRecommendation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetails' with the minimum fields required to make a request.
 --
@@ -7572,7 +7685,7 @@ data ActivityContentDetails = ActivityContentDetails'
 activityContentDetails
     :: ActivityContentDetails
 activityContentDetails =
-    ActivityContentDetails'
+  ActivityContentDetails'
     { _acdPromotedItem = Nothing
     , _acdChannelItem = Nothing
     , _acdBulletin = Nothing
@@ -7698,12 +7811,14 @@ instance ToJSON ActivityContentDetails where
 -- associated with uploaded videos.
 --
 -- /See:/ 'videoCategory' smart constructor.
-data VideoCategory = VideoCategory'
+data VideoCategory =
+  VideoCategory'
     { _vcEtag    :: !(Maybe Text)
     , _vcSnippet :: !(Maybe VideoCategorySnippet)
     , _vcKind    :: !Text
     , _vcId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoCategory' with the minimum fields required to make a request.
 --
@@ -7719,7 +7834,7 @@ data VideoCategory = VideoCategory'
 videoCategory
     :: VideoCategory
 videoCategory =
-    VideoCategory'
+  VideoCategory'
     { _vcEtag = Nothing
     , _vcSnippet = Nothing
     , _vcKind = "youtube#videoCategory"
@@ -7765,9 +7880,11 @@ instance ToJSON VideoCategory where
 -- | List with all localizations.
 --
 -- /See:/ 'videoLocalizations' smart constructor.
-newtype VideoLocalizations = VideoLocalizations'
+newtype VideoLocalizations =
+  VideoLocalizations'
     { _vlAddtional :: HashMap Text VideoLocalization
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoLocalizations' with the minimum fields required to make a request.
 --
@@ -7778,9 +7895,7 @@ videoLocalizations
     :: HashMap Text VideoLocalization -- ^ 'vlAddtional'
     -> VideoLocalizations
 videoLocalizations pVlAddtional_ =
-    VideoLocalizations'
-    { _vlAddtional = _Coerce # pVlAddtional_
-    }
+  VideoLocalizations' {_vlAddtional = _Coerce # pVlAddtional_}
 
 -- | The language tag, using string since map_key require simple types.
 vlAddtional :: Lens' VideoLocalizations (HashMap Text VideoLocalization)
@@ -7799,10 +7914,12 @@ instance ToJSON VideoLocalizations where
 -- | Details about a channelsection, including playlists and channels.
 --
 -- /See:/ 'channelSectionContentDetails' smart constructor.
-data ChannelSectionContentDetails = ChannelSectionContentDetails'
+data ChannelSectionContentDetails =
+  ChannelSectionContentDetails'
     { _cscdChannels  :: !(Maybe [Text])
     , _cscdPlayLists :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelSectionContentDetails' with the minimum fields required to make a request.
 --
@@ -7814,10 +7931,8 @@ data ChannelSectionContentDetails = ChannelSectionContentDetails'
 channelSectionContentDetails
     :: ChannelSectionContentDetails
 channelSectionContentDetails =
-    ChannelSectionContentDetails'
-    { _cscdChannels = Nothing
-    , _cscdPlayLists = Nothing
-    }
+  ChannelSectionContentDetails'
+    {_cscdChannels = Nothing, _cscdPlayLists = Nothing}
 
 -- | The channel ids for type multiple_channels.
 cscdChannels :: Lens' ChannelSectionContentDetails [Text]
@@ -7853,7 +7968,8 @@ instance ToJSON ChannelSectionContentDetails where
 -- | A video resource represents a YouTube video.
 --
 -- /See:/ 'video' smart constructor.
-data Video = Video'
+data Video =
+  Video'
     { _vStatus               :: !(Maybe VideoStatus)
     , _vEtag                 :: !(Maybe Text)
     , _vProjectDetails       :: !(Maybe VideoProjectDetails)
@@ -7872,7 +7988,8 @@ data Video = Video'
     , _vPlayer               :: !(Maybe VideoPlayer)
     , _vProcessingDetails    :: !(Maybe VideoProcessingDetails)
     , _vMonetizationDetails  :: !(Maybe VideoMonetizationDetails)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Video' with the minimum fields required to make a request.
 --
@@ -7916,7 +8033,7 @@ data Video = Video'
 video
     :: Video
 video =
-    Video'
+  Video'
     { _vStatus = Nothing
     , _vEtag = Nothing
     , _vProjectDetails = Nothing
@@ -8105,7 +8222,8 @@ instance ToJSON Video where
 -- live video, on YouTube.
 --
 -- /See:/ 'liveBroadcast' smart constructor.
-data LiveBroadcast = LiveBroadcast'
+data LiveBroadcast =
+  LiveBroadcast'
     { _lbStatus         :: !(Maybe LiveBroadcastStatus)
     , _lbEtag           :: !(Maybe Text)
     , _lbSnippet        :: !(Maybe LiveBroadcastSnippet)
@@ -8113,7 +8231,8 @@ data LiveBroadcast = LiveBroadcast'
     , _lbContentDetails :: !(Maybe LiveBroadcastContentDetails)
     , _lbId             :: !(Maybe Text)
     , _lbStatistics     :: !(Maybe LiveBroadcastStatistics)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcast' with the minimum fields required to make a request.
 --
@@ -8135,7 +8254,7 @@ data LiveBroadcast = LiveBroadcast'
 liveBroadcast
     :: LiveBroadcast
 liveBroadcast =
-    LiveBroadcast'
+  LiveBroadcast'
     { _lbStatus = Nothing
     , _lbEtag = Nothing
     , _lbSnippet = Nothing
@@ -8212,10 +8331,12 @@ instance ToJSON LiveBroadcast where
 -- | Nonprofit information.
 --
 -- /See:/ 'nonprofit' smart constructor.
-data Nonprofit = Nonprofit'
+data Nonprofit =
+  Nonprofit'
     { _nNonprofitId        :: !(Maybe NonprofitId)
     , _nNonprofitLegalName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Nonprofit' with the minimum fields required to make a request.
 --
@@ -8226,11 +8347,7 @@ data Nonprofit = Nonprofit'
 -- * 'nNonprofitLegalName'
 nonprofit
     :: Nonprofit
-nonprofit =
-    Nonprofit'
-    { _nNonprofitId = Nothing
-    , _nNonprofitLegalName = Nothing
-    }
+nonprofit = Nonprofit' {_nNonprofitId = Nothing, _nNonprofitLegalName = Nothing}
 
 -- | Id of the nonprofit.
 nNonprofitId :: Lens' Nonprofit (Maybe NonprofitId)
@@ -8263,12 +8380,14 @@ instance ToJSON Nonprofit where
 -- remove message, etc.
 --
 -- /See:/ 'liveChatModerator' smart constructor.
-data LiveChatModerator = LiveChatModerator'
+data LiveChatModerator =
+  LiveChatModerator'
     { _livEtag    :: !(Maybe Text)
     , _livSnippet :: !(Maybe LiveChatModeratorSnippet)
     , _livKind    :: !Text
     , _livId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatModerator' with the minimum fields required to make a request.
 --
@@ -8284,7 +8403,7 @@ data LiveChatModerator = LiveChatModerator'
 liveChatModerator
     :: LiveChatModerator
 liveChatModerator =
-    LiveChatModerator'
+  LiveChatModerator'
     { _livEtag = Nothing
     , _livSnippet = Nothing
     , _livKind = "youtube#liveChatModerator"
@@ -8329,10 +8448,12 @@ instance ToJSON LiveChatModerator where
 -- | Detailed settings of a stream.
 --
 -- /See:/ 'liveStreamContentDetails' smart constructor.
-data LiveStreamContentDetails = LiveStreamContentDetails'
+data LiveStreamContentDetails =
+  LiveStreamContentDetails'
     { _lscdClosedCaptionsIngestionURL :: !(Maybe Text)
     , _lscdIsReusable                 :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStreamContentDetails' with the minimum fields required to make a request.
 --
@@ -8344,10 +8465,8 @@ data LiveStreamContentDetails = LiveStreamContentDetails'
 liveStreamContentDetails
     :: LiveStreamContentDetails
 liveStreamContentDetails =
-    LiveStreamContentDetails'
-    { _lscdClosedCaptionsIngestionURL = Nothing
-    , _lscdIsReusable = Nothing
-    }
+  LiveStreamContentDetails'
+    {_lscdClosedCaptionsIngestionURL = Nothing, _lscdIsReusable = Nothing}
 
 -- | The ingestion URL where the closed captions of this stream are sent.
 lscdClosedCaptionsIngestionURL :: Lens' LiveStreamContentDetails (Maybe Text)
@@ -8390,10 +8509,12 @@ instance ToJSON LiveStreamContentDetails where
 
 --
 -- /See:/ 'liveChatModeratorSnippet' smart constructor.
-data LiveChatModeratorSnippet = LiveChatModeratorSnippet'
+data LiveChatModeratorSnippet =
+  LiveChatModeratorSnippet'
     { _lLiveChatId       :: !(Maybe Text)
     , _lModeratorDetails :: !(Maybe ChannelProFileDetails)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatModeratorSnippet' with the minimum fields required to make a request.
 --
@@ -8405,10 +8526,8 @@ data LiveChatModeratorSnippet = LiveChatModeratorSnippet'
 liveChatModeratorSnippet
     :: LiveChatModeratorSnippet
 liveChatModeratorSnippet =
-    LiveChatModeratorSnippet'
-    { _lLiveChatId = Nothing
-    , _lModeratorDetails = Nothing
-    }
+  LiveChatModeratorSnippet'
+    {_lLiveChatId = Nothing, _lModeratorDetails = Nothing}
 
 -- | The ID of the live chat this moderator can act on.
 lLiveChatId :: Lens' LiveChatModeratorSnippet (Maybe Text)
@@ -8438,10 +8557,12 @@ instance ToJSON LiveChatModeratorSnippet where
 -- | A pair Property \/ Value.
 --
 -- /See:/ 'propertyValue' smart constructor.
-data PropertyValue = PropertyValue'
+data PropertyValue =
+  PropertyValue'
     { _pvProperty :: !(Maybe Text)
     , _pvValue    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PropertyValue' with the minimum fields required to make a request.
 --
@@ -8452,11 +8573,7 @@ data PropertyValue = PropertyValue'
 -- * 'pvValue'
 propertyValue
     :: PropertyValue
-propertyValue =
-    PropertyValue'
-    { _pvProperty = Nothing
-    , _pvValue = Nothing
-    }
+propertyValue = PropertyValue' {_pvProperty = Nothing, _pvValue = Nothing}
 
 -- | A property.
 pvProperty :: Lens' PropertyValue (Maybe Text)
@@ -8485,7 +8602,8 @@ instance ToJSON PropertyValue where
 -- thumbnails and category.
 --
 -- /See:/ 'videoSnippet' smart constructor.
-data VideoSnippet = VideoSnippet'
+data VideoSnippet =
+  VideoSnippet'
     { _vsDefaultAudioLanguage :: !(Maybe Text)
     , _vsPublishedAt          :: !(Maybe DateTime')
     , _vsChannelTitle         :: !(Maybe Text)
@@ -8498,7 +8616,8 @@ data VideoSnippet = VideoSnippet'
     , _vsDescription          :: !(Maybe Text)
     , _vsTags                 :: !(Maybe [Text])
     , _vsDefaultLanguage      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoSnippet' with the minimum fields required to make a request.
 --
@@ -8530,7 +8649,7 @@ data VideoSnippet = VideoSnippet'
 videoSnippet
     :: VideoSnippet
 videoSnippet =
-    VideoSnippet'
+  VideoSnippet'
     { _vsDefaultAudioLanguage = Nothing
     , _vsPublishedAt = Nothing
     , _vsChannelTitle = Nothing
@@ -8660,7 +8779,8 @@ instance ToJSON VideoSnippet where
 
 --
 -- /See:/ 'liveBroadcastSnippet' smart constructor.
-data LiveBroadcastSnippet = LiveBroadcastSnippet'
+data LiveBroadcastSnippet =
+  LiveBroadcastSnippet'
     { _lbsActualEndTime      :: !(Maybe DateTime')
     , _lbsLiveChatId         :: !(Maybe Text)
     , _lbsPublishedAt        :: !(Maybe DateTime')
@@ -8672,7 +8792,8 @@ data LiveBroadcastSnippet = LiveBroadcastSnippet'
     , _lbsActualStartTime    :: !(Maybe DateTime')
     , _lbsIsDefaultBroadcast :: !(Maybe Bool)
     , _lbsDescription        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcastSnippet' with the minimum fields required to make a request.
 --
@@ -8702,7 +8823,7 @@ data LiveBroadcastSnippet = LiveBroadcastSnippet'
 liveBroadcastSnippet
     :: LiveBroadcastSnippet
 liveBroadcastSnippet =
-    LiveBroadcastSnippet'
+  LiveBroadcastSnippet'
     { _lbsActualEndTime = Nothing
     , _lbsLiveChatId = Nothing
     , _lbsPublishedAt = Nothing
@@ -8835,10 +8956,12 @@ instance ToJSON LiveBroadcastSnippet where
 -- | Rights management policy for YouTube resources.
 --
 -- /See:/ 'accessPolicy' smart constructor.
-data AccessPolicy = AccessPolicy'
+data AccessPolicy =
+  AccessPolicy'
     { _apException :: !(Maybe [Text])
     , _apAllowed   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPolicy' with the minimum fields required to make a request.
 --
@@ -8849,11 +8972,7 @@ data AccessPolicy = AccessPolicy'
 -- * 'apAllowed'
 accessPolicy
     :: AccessPolicy
-accessPolicy =
-    AccessPolicy'
-    { _apException = Nothing
-    , _apAllowed = Nothing
-    }
+accessPolicy = AccessPolicy' {_apException = Nothing, _apAllowed = Nothing}
 
 -- | A list of region codes that identify countries where the default policy
 -- do not apply.
@@ -8888,11 +9007,13 @@ instance ToJSON AccessPolicy where
 -- benefits.
 --
 -- /See:/ 'sponsor' smart constructor.
-data Sponsor = Sponsor'
+data Sponsor =
+  Sponsor'
     { _sEtag    :: !(Maybe Text)
     , _sSnippet :: !(Maybe SponsorSnippet)
     , _sKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Sponsor' with the minimum fields required to make a request.
 --
@@ -8906,11 +9027,7 @@ data Sponsor = Sponsor'
 sponsor
     :: Sponsor
 sponsor =
-    Sponsor'
-    { _sEtag = Nothing
-    , _sSnippet = Nothing
-    , _sKind = "youtube#sponsor"
-    }
+  Sponsor' {_sEtag = Nothing, _sSnippet = Nothing, _sKind = "youtube#sponsor"}
 
 -- | Etag of this resource.
 sEtag :: Lens' Sponsor (Maybe Text)
@@ -8943,9 +9060,11 @@ instance ToJSON Sponsor where
 
 --
 -- /See:/ 'liveChatMessageDeletedDetails' smart constructor.
-newtype LiveChatMessageDeletedDetails = LiveChatMessageDeletedDetails'
+newtype LiveChatMessageDeletedDetails =
+  LiveChatMessageDeletedDetails'
     { _lcmddDeletedMessageId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatMessageDeletedDetails' with the minimum fields required to make a request.
 --
@@ -8955,9 +9074,7 @@ newtype LiveChatMessageDeletedDetails = LiveChatMessageDeletedDetails'
 liveChatMessageDeletedDetails
     :: LiveChatMessageDeletedDetails
 liveChatMessageDeletedDetails =
-    LiveChatMessageDeletedDetails'
-    { _lcmddDeletedMessageId = Nothing
-    }
+  LiveChatMessageDeletedDetails' {_lcmddDeletedMessageId = Nothing}
 
 lcmddDeletedMessageId :: Lens' LiveChatMessageDeletedDetails (Maybe Text)
 lcmddDeletedMessageId
@@ -8979,7 +9096,8 @@ instance ToJSON LiveChatMessageDeletedDetails where
 
 --
 -- /See:/ 'commentThreadListResponse' smart constructor.
-data CommentThreadListResponse = CommentThreadListResponse'
+data CommentThreadListResponse =
+  CommentThreadListResponse'
     { _ctlrEtag            :: !(Maybe Text)
     , _ctlrTokenPagination :: !(Maybe TokenPagination)
     , _ctlrNextPageToken   :: !(Maybe Text)
@@ -8988,7 +9106,8 @@ data CommentThreadListResponse = CommentThreadListResponse'
     , _ctlrItems           :: !(Maybe [CommentThread])
     , _ctlrVisitorId       :: !(Maybe Text)
     , _ctlrEventId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentThreadListResponse' with the minimum fields required to make a request.
 --
@@ -9012,7 +9131,7 @@ data CommentThreadListResponse = CommentThreadListResponse'
 commentThreadListResponse
     :: CommentThreadListResponse
 commentThreadListResponse =
-    CommentThreadListResponse'
+  CommentThreadListResponse'
     { _ctlrEtag = Nothing
     , _ctlrTokenPagination = Nothing
     , _ctlrNextPageToken = Nothing
@@ -9097,11 +9216,13 @@ instance ToJSON CommentThreadListResponse where
 -- | Branding properties for the watch. All deprecated.
 --
 -- /See:/ 'watchSettings' smart constructor.
-data WatchSettings = WatchSettings'
+data WatchSettings =
+  WatchSettings'
     { _wsFeaturedPlayListId :: !(Maybe Text)
     , _wsBackgRoundColor    :: !(Maybe Text)
     , _wsTextColor          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WatchSettings' with the minimum fields required to make a request.
 --
@@ -9115,7 +9236,7 @@ data WatchSettings = WatchSettings'
 watchSettings
     :: WatchSettings
 watchSettings =
-    WatchSettings'
+  WatchSettings'
     { _wsFeaturedPlayListId = Nothing
     , _wsBackgRoundColor = Nothing
     , _wsTextColor = Nothing
@@ -9159,13 +9280,15 @@ instance ToJSON WatchSettings where
 -- | Brief description of the live stream cdn settings.
 --
 -- /See:/ 'cdnSettings' smart constructor.
-data CdnSettings = CdnSettings'
+data CdnSettings =
+  CdnSettings'
     { _csIngestionInfo :: !(Maybe IngestionInfo)
     , _csFrameRate     :: !(Maybe CdnSettingsFrameRate)
     , _csFormat        :: !(Maybe Text)
     , _csResolution    :: !(Maybe CdnSettingsResolution)
     , _csIngestionType :: !(Maybe CdnSettingsIngestionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CdnSettings' with the minimum fields required to make a request.
 --
@@ -9183,7 +9306,7 @@ data CdnSettings = CdnSettings'
 cdnSettings
     :: CdnSettings
 cdnSettings =
-    CdnSettings'
+  CdnSettings'
     { _csIngestionInfo = Nothing
     , _csFrameRate = Nothing
     , _csFormat = Nothing
@@ -9240,9 +9363,11 @@ instance ToJSON CdnSettings where
 
 --
 -- /See:/ 'nonprofitId' smart constructor.
-newtype NonprofitId = NonprofitId'
+newtype NonprofitId =
+  NonprofitId'
     { _niValue :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NonprofitId' with the minimum fields required to make a request.
 --
@@ -9251,10 +9376,7 @@ newtype NonprofitId = NonprofitId'
 -- * 'niValue'
 nonprofitId
     :: NonprofitId
-nonprofitId =
-    NonprofitId'
-    { _niValue = Nothing
-    }
+nonprofitId = NonprofitId' {_niValue = Nothing}
 
 niValue :: Lens' NonprofitId (Maybe Text)
 niValue = lens _niValue (\ s a -> s{_niValue = a})
@@ -9273,10 +9395,12 @@ instance ToJSON NonprofitId where
 -- broadcasts.
 --
 -- /See:/ 'liveBroadcastStatistics' smart constructor.
-data LiveBroadcastStatistics = LiveBroadcastStatistics'
+data LiveBroadcastStatistics =
+  LiveBroadcastStatistics'
     { _lbsTotalChatCount    :: !(Maybe (Textual Word64))
     , _lbsConcurrentViewers :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcastStatistics' with the minimum fields required to make a request.
 --
@@ -9288,10 +9412,8 @@ data LiveBroadcastStatistics = LiveBroadcastStatistics'
 liveBroadcastStatistics
     :: LiveBroadcastStatistics
 liveBroadcastStatistics =
-    LiveBroadcastStatistics'
-    { _lbsTotalChatCount = Nothing
-    , _lbsConcurrentViewers = Nothing
-    }
+  LiveBroadcastStatistics'
+    {_lbsTotalChatCount = Nothing, _lbsConcurrentViewers = Nothing}
 
 -- | The total number of live chat messages currently on the broadcast. The
 -- property and its value will be present if the broadcast is public, has
@@ -9336,11 +9458,13 @@ instance ToJSON LiveBroadcastStatistics where
 -- | Basic details about a video category, such as its localized title.
 --
 -- /See:/ 'videoCategorySnippet' smart constructor.
-data VideoCategorySnippet = VideoCategorySnippet'
+data VideoCategorySnippet =
+  VideoCategorySnippet'
     { _vcsAssignable :: !(Maybe Bool)
     , _vcsChannelId  :: !Text
     , _vcsTitle      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoCategorySnippet' with the minimum fields required to make a request.
 --
@@ -9354,7 +9478,7 @@ data VideoCategorySnippet = VideoCategorySnippet'
 videoCategorySnippet
     :: VideoCategorySnippet
 videoCategorySnippet =
-    VideoCategorySnippet'
+  VideoCategorySnippet'
     { _vcsAssignable = Nothing
     , _vcsChannelId = "UCBR8-60-B28hp2BmDPdntcQ"
     , _vcsTitle = Nothing
@@ -9395,12 +9519,14 @@ instance ToJSON VideoCategorySnippet where
 -- YouTube.
 --
 -- /See:/ 'i18nLanguage' smart constructor.
-data I18nLanguage = I18nLanguage'
+data I18nLanguage =
+  I18nLanguage'
     { _ilEtag    :: !(Maybe Text)
     , _ilSnippet :: !(Maybe I18nLanguageSnippet)
     , _ilKind    :: !Text
     , _ilId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'I18nLanguage' with the minimum fields required to make a request.
 --
@@ -9416,7 +9542,7 @@ data I18nLanguage = I18nLanguage'
 i18nLanguage
     :: I18nLanguage
 i18nLanguage =
-    I18nLanguage'
+  I18nLanguage'
     { _ilEtag = Nothing
     , _ilSnippet = Nothing
     , _ilKind = "youtube#i18nLanguage"
@@ -9463,13 +9589,15 @@ instance ToJSON I18nLanguage where
 -- viewed or liked.
 --
 -- /See:/ 'videoStatistics' smart constructor.
-data VideoStatistics = VideoStatistics'
+data VideoStatistics =
+  VideoStatistics'
     { _vsLikeCount     :: !(Maybe (Textual Word64))
     , _vsCommentCount  :: !(Maybe (Textual Word64))
     , _vsFavoriteCount :: !(Maybe (Textual Word64))
     , _vsDislikeCount  :: !(Maybe (Textual Word64))
     , _vsViewCount     :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoStatistics' with the minimum fields required to make a request.
 --
@@ -9487,7 +9615,7 @@ data VideoStatistics = VideoStatistics'
 videoStatistics
     :: VideoStatistics
 videoStatistics =
-    VideoStatistics'
+  VideoStatistics'
     { _vsLikeCount = Nothing
     , _vsCommentCount = Nothing
     , _vsFavoriteCount = Nothing
@@ -9553,7 +9681,8 @@ instance ToJSON VideoStatistics where
 
 --
 -- /See:/ 'activityListResponse' smart constructor.
-data ActivityListResponse = ActivityListResponse'
+data ActivityListResponse =
+  ActivityListResponse'
     { _alrEtag            :: !(Maybe Text)
     , _alrTokenPagination :: !(Maybe TokenPagination)
     , _alrNextPageToken   :: !(Maybe Text)
@@ -9563,7 +9692,8 @@ data ActivityListResponse = ActivityListResponse'
     , _alrVisitorId       :: !(Maybe Text)
     , _alrEventId         :: !(Maybe Text)
     , _alrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityListResponse' with the minimum fields required to make a request.
 --
@@ -9589,7 +9719,7 @@ data ActivityListResponse = ActivityListResponse'
 activityListResponse
     :: ActivityListResponse
 activityListResponse =
-    ActivityListResponse'
+  ActivityListResponse'
     { _alrEtag = Nothing
     , _alrTokenPagination = Nothing
     , _alrNextPageToken = Nothing
@@ -9681,9 +9811,11 @@ instance ToJSON ActivityListResponse where
 -- | Details about a channel bulletin post.
 --
 -- /See:/ 'activityContentDetailsBulletin' smart constructor.
-newtype ActivityContentDetailsBulletin = ActivityContentDetailsBulletin'
+newtype ActivityContentDetailsBulletin =
+  ActivityContentDetailsBulletin'
     { _acdbResourceId :: Maybe ResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsBulletin' with the minimum fields required to make a request.
 --
@@ -9693,9 +9825,7 @@ newtype ActivityContentDetailsBulletin = ActivityContentDetailsBulletin'
 activityContentDetailsBulletin
     :: ActivityContentDetailsBulletin
 activityContentDetailsBulletin =
-    ActivityContentDetailsBulletin'
-    { _acdbResourceId = Nothing
-    }
+  ActivityContentDetailsBulletin' {_acdbResourceId = Nothing}
 
 -- | The resourceId object contains information that identifies the resource
 -- associated with a bulletin post.
@@ -9719,13 +9849,15 @@ instance ToJSON ActivityContentDetailsBulletin where
 
 --
 -- /See:/ 'videoAbuseReport' smart constructor.
-data VideoAbuseReport = VideoAbuseReport'
+data VideoAbuseReport =
+  VideoAbuseReport'
     { _varSecondaryReasonId :: !(Maybe Text)
     , _varReasonId          :: !(Maybe Text)
     , _varVideoId           :: !(Maybe Text)
     , _varLanguage          :: !(Maybe Text)
     , _varComments          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoAbuseReport' with the minimum fields required to make a request.
 --
@@ -9743,7 +9875,7 @@ data VideoAbuseReport = VideoAbuseReport'
 videoAbuseReport
     :: VideoAbuseReport
 videoAbuseReport =
-    VideoAbuseReport'
+  VideoAbuseReport'
     { _varSecondaryReasonId = Nothing
     , _varReasonId = Nothing
     , _varVideoId = Nothing
@@ -9801,12 +9933,14 @@ instance ToJSON VideoAbuseReport where
 -- | Information about an audio stream.
 --
 -- /See:/ 'videoFileDetailsAudioStream' smart constructor.
-data VideoFileDetailsAudioStream = VideoFileDetailsAudioStream'
+data VideoFileDetailsAudioStream =
+  VideoFileDetailsAudioStream'
     { _vfdasBitrateBps   :: !(Maybe (Textual Word64))
     , _vfdasVendor       :: !(Maybe Text)
     , _vfdasCodec        :: !(Maybe Text)
     , _vfdasChannelCount :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoFileDetailsAudioStream' with the minimum fields required to make a request.
 --
@@ -9822,7 +9956,7 @@ data VideoFileDetailsAudioStream = VideoFileDetailsAudioStream'
 videoFileDetailsAudioStream
     :: VideoFileDetailsAudioStream
 videoFileDetailsAudioStream =
-    VideoFileDetailsAudioStream'
+  VideoFileDetailsAudioStream'
     { _vfdasBitrateBps = Nothing
     , _vfdasVendor = Nothing
     , _vfdasCodec = Nothing
@@ -9874,13 +10008,15 @@ instance ToJSON VideoFileDetailsAudioStream where
 
 --
 -- /See:/ 'i18nRegionListResponse' smart constructor.
-data I18nRegionListResponse = I18nRegionListResponse'
+data I18nRegionListResponse =
+  I18nRegionListResponse'
     { _irlrEtag      :: !(Maybe Text)
     , _irlrKind      :: !Text
     , _irlrItems     :: !(Maybe [I18nRegion])
     , _irlrVisitorId :: !(Maybe Text)
     , _irlrEventId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'I18nRegionListResponse' with the minimum fields required to make a request.
 --
@@ -9898,7 +10034,7 @@ data I18nRegionListResponse = I18nRegionListResponse'
 i18nRegionListResponse
     :: I18nRegionListResponse
 i18nRegionListResponse =
-    I18nRegionListResponse'
+  I18nRegionListResponse'
     { _irlrEtag = Nothing
     , _irlrKind = "youtube#i18nRegionListResponse"
     , _irlrItems = Nothing
@@ -9959,10 +10095,12 @@ instance ToJSON I18nRegionListResponse where
 -- | Basic details about a guide category.
 --
 -- /See:/ 'guideCategorySnippet' smart constructor.
-data GuideCategorySnippet = GuideCategorySnippet'
+data GuideCategorySnippet =
+  GuideCategorySnippet'
     { _gcsChannelId :: !Text
     , _gcsTitle     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GuideCategorySnippet' with the minimum fields required to make a request.
 --
@@ -9974,10 +10112,8 @@ data GuideCategorySnippet = GuideCategorySnippet'
 guideCategorySnippet
     :: GuideCategorySnippet
 guideCategorySnippet =
-    GuideCategorySnippet'
-    { _gcsChannelId = "UCBR8-60-B28hp2BmDPdntcQ"
-    , _gcsTitle = Nothing
-    }
+  GuideCategorySnippet'
+    {_gcsChannelId = "UCBR8-60-B28hp2BmDPdntcQ", _gcsTitle = Nothing}
 
 gcsChannelId :: Lens' GuideCategorySnippet Text
 gcsChannelId
@@ -10004,13 +10140,15 @@ instance ToJSON GuideCategorySnippet where
 
 --
 -- /See:/ 'captionListResponse' smart constructor.
-data CaptionListResponse = CaptionListResponse'
+data CaptionListResponse =
+  CaptionListResponse'
     { _cEtag      :: !(Maybe Text)
     , _cKind      :: !Text
     , _cItems     :: !(Maybe [Caption])
     , _cVisitorId :: !(Maybe Text)
     , _cEventId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CaptionListResponse' with the minimum fields required to make a request.
 --
@@ -10028,7 +10166,7 @@ data CaptionListResponse = CaptionListResponse'
 captionListResponse
     :: CaptionListResponse
 captionListResponse =
-    CaptionListResponse'
+  CaptionListResponse'
     { _cEtag = Nothing
     , _cKind = "youtube#captionListResponse"
     , _cItems = Nothing
@@ -10083,9 +10221,11 @@ instance ToJSON CaptionListResponse where
 -- | Information about the playlist item\'s privacy status.
 --
 -- /See:/ 'playListItemStatus' smart constructor.
-newtype PlayListItemStatus = PlayListItemStatus'
+newtype PlayListItemStatus =
+  PlayListItemStatus'
     { _plisPrivacyStatus :: Maybe PlayListItemStatusPrivacyStatus
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListItemStatus' with the minimum fields required to make a request.
 --
@@ -10094,10 +10234,7 @@ newtype PlayListItemStatus = PlayListItemStatus'
 -- * 'plisPrivacyStatus'
 playListItemStatus
     :: PlayListItemStatus
-playListItemStatus =
-    PlayListItemStatus'
-    { _plisPrivacyStatus = Nothing
-    }
+playListItemStatus = PlayListItemStatus' {_plisPrivacyStatus = Nothing}
 
 -- | This resource\'s privacy status.
 plisPrivacyStatus :: Lens' PlayListItemStatus (Maybe PlayListItemStatusPrivacyStatus)
@@ -10121,10 +10258,12 @@ instance ToJSON PlayListItemStatus where
 -- a union of various position types, out of which only will be set one.
 --
 -- /See:/ 'invideoPosition' smart constructor.
-data InvideoPosition = InvideoPosition'
+data InvideoPosition =
+  InvideoPosition'
     { _ipCornerPosition :: !(Maybe InvideoPositionCornerPosition)
     , _ipType           :: !(Maybe InvideoPositionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InvideoPosition' with the minimum fields required to make a request.
 --
@@ -10136,10 +10275,7 @@ data InvideoPosition = InvideoPosition'
 invideoPosition
     :: InvideoPosition
 invideoPosition =
-    InvideoPosition'
-    { _ipCornerPosition = Nothing
-    , _ipType = Nothing
-    }
+  InvideoPosition' {_ipCornerPosition = Nothing, _ipType = Nothing}
 
 -- | Describes in which corner of the video the visual widget will appear.
 ipCornerPosition :: Lens' InvideoPosition (Maybe InvideoPositionCornerPosition)
@@ -10167,11 +10303,13 @@ instance ToJSON InvideoPosition where
 
 --
 -- /See:/ 'liveStreamHealthStatus' smart constructor.
-data LiveStreamHealthStatus = LiveStreamHealthStatus'
+data LiveStreamHealthStatus =
+  LiveStreamHealthStatus'
     { _lshsStatus                :: !(Maybe LiveStreamHealthStatusStatus)
     , _lshsConfigurationIssues   :: !(Maybe [LiveStreamConfigurationIssue])
     , _lshsLastUpdateTimeSeconds :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStreamHealthStatus' with the minimum fields required to make a request.
 --
@@ -10185,7 +10323,7 @@ data LiveStreamHealthStatus = LiveStreamHealthStatus'
 liveStreamHealthStatus
     :: LiveStreamHealthStatus
 liveStreamHealthStatus =
-    LiveStreamHealthStatus'
+  LiveStreamHealthStatus'
     { _lshsStatus = Nothing
     , _lshsConfigurationIssues = Nothing
     , _lshsLastUpdateTimeSeconds = Nothing
@@ -10233,9 +10371,11 @@ instance ToJSON LiveStreamHealthStatus where
 -- | Localizations for different languages
 --
 -- /See:/ 'channelSectionLocalizations' smart constructor.
-newtype ChannelSectionLocalizations = ChannelSectionLocalizations'
+newtype ChannelSectionLocalizations =
+  ChannelSectionLocalizations'
     { _cslAddtional :: HashMap Text ChannelSectionLocalization
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelSectionLocalizations' with the minimum fields required to make a request.
 --
@@ -10246,9 +10386,7 @@ channelSectionLocalizations
     :: HashMap Text ChannelSectionLocalization -- ^ 'cslAddtional'
     -> ChannelSectionLocalizations
 channelSectionLocalizations pCslAddtional_ =
-    ChannelSectionLocalizations'
-    { _cslAddtional = _Coerce # pCslAddtional_
-    }
+  ChannelSectionLocalizations' {_cslAddtional = _Coerce # pCslAddtional_}
 
 -- | The language tag, using string since map_key require simple types.
 cslAddtional :: Lens' ChannelSectionLocalizations (HashMap Text ChannelSectionLocalization)
@@ -10267,7 +10405,8 @@ instance ToJSON ChannelSectionLocalizations where
 
 --
 -- /See:/ 'subscriptionListResponse' smart constructor.
-data SubscriptionListResponse = SubscriptionListResponse'
+data SubscriptionListResponse =
+  SubscriptionListResponse'
     { _subEtag            :: !(Maybe Text)
     , _subTokenPagination :: !(Maybe TokenPagination)
     , _subNextPageToken   :: !(Maybe Text)
@@ -10277,7 +10416,8 @@ data SubscriptionListResponse = SubscriptionListResponse'
     , _subVisitorId       :: !(Maybe Text)
     , _subEventId         :: !(Maybe Text)
     , _subPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionListResponse' with the minimum fields required to make a request.
 --
@@ -10303,7 +10443,7 @@ data SubscriptionListResponse = SubscriptionListResponse'
 subscriptionListResponse
     :: SubscriptionListResponse
 subscriptionListResponse =
-    SubscriptionListResponse'
+  SubscriptionListResponse'
     { _subEtag = Nothing
     , _subTokenPagination = Nothing
     , _subNextPageToken = Nothing
@@ -10396,10 +10536,12 @@ instance ToJSON SubscriptionListResponse where
 -- | Localized versions of certain video properties (e.g. title).
 --
 -- /See:/ 'videoLocalization' smart constructor.
-data VideoLocalization = VideoLocalization'
+data VideoLocalization =
+  VideoLocalization'
     { _vlTitle       :: !(Maybe Text)
     , _vlDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoLocalization' with the minimum fields required to make a request.
 --
@@ -10411,10 +10553,7 @@ data VideoLocalization = VideoLocalization'
 videoLocalization
     :: VideoLocalization
 videoLocalization =
-    VideoLocalization'
-    { _vlTitle = Nothing
-    , _vlDescription = Nothing
-    }
+  VideoLocalization' {_vlTitle = Nothing, _vlDescription = Nothing}
 
 -- | Localized version of the video\'s title.
 vlTitle :: Lens' VideoLocalization (Maybe Text)
@@ -10442,7 +10581,8 @@ instance ToJSON VideoLocalization where
 
 --
 -- /See:/ 'commentListResponse' smart constructor.
-data CommentListResponse = CommentListResponse'
+data CommentListResponse =
+  CommentListResponse'
     { _comEtag            :: !(Maybe Text)
     , _comTokenPagination :: !(Maybe TokenPagination)
     , _comNextPageToken   :: !(Maybe Text)
@@ -10451,7 +10591,8 @@ data CommentListResponse = CommentListResponse'
     , _comItems           :: !(Maybe [Comment])
     , _comVisitorId       :: !(Maybe Text)
     , _comEventId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentListResponse' with the minimum fields required to make a request.
 --
@@ -10475,7 +10616,7 @@ data CommentListResponse = CommentListResponse'
 commentListResponse
     :: CommentListResponse
 commentListResponse =
-    CommentListResponse'
+  CommentListResponse'
     { _comEtag = Nothing
     , _comTokenPagination = Nothing
     , _comNextPageToken = Nothing
@@ -10557,11 +10698,13 @@ instance ToJSON CommentListResponse where
 -- | Player to be used for a video playback.
 --
 -- /See:/ 'videoPlayer' smart constructor.
-data VideoPlayer = VideoPlayer'
+data VideoPlayer =
+  VideoPlayer'
     { _vpEmbedHeight :: !(Maybe (Textual Int64))
     , _vpEmbedWidth  :: !(Maybe (Textual Int64))
     , _vpEmbedHTML   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoPlayer' with the minimum fields required to make a request.
 --
@@ -10575,11 +10718,8 @@ data VideoPlayer = VideoPlayer'
 videoPlayer
     :: VideoPlayer
 videoPlayer =
-    VideoPlayer'
-    { _vpEmbedHeight = Nothing
-    , _vpEmbedWidth = Nothing
-    , _vpEmbedHTML = Nothing
-    }
+  VideoPlayer'
+    {_vpEmbedHeight = Nothing, _vpEmbedWidth = Nothing, _vpEmbedHTML = Nothing}
 
 vpEmbedHeight :: Lens' VideoPlayer (Maybe Int64)
 vpEmbedHeight
@@ -10619,12 +10759,14 @@ instance ToJSON VideoPlayer where
 -- types.
 --
 -- /See:/ 'promotedItemId' smart constructor.
-data PromotedItemId = PromotedItemId'
+data PromotedItemId =
+  PromotedItemId'
     { _piiRecentlyUploadedBy :: !(Maybe Text)
     , _piiVideoId            :: !(Maybe Text)
     , _piiWebsiteURL         :: !(Maybe Text)
     , _piiType               :: !(Maybe PromotedItemIdType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PromotedItemId' with the minimum fields required to make a request.
 --
@@ -10640,7 +10782,7 @@ data PromotedItemId = PromotedItemId'
 promotedItemId
     :: PromotedItemId
 promotedItemId =
-    PromotedItemId'
+  PromotedItemId'
     { _piiRecentlyUploadedBy = Nothing
     , _piiVideoId = Nothing
     , _piiWebsiteURL = Nothing
@@ -10695,10 +10837,12 @@ instance ToJSON PromotedItemId where
 
 --
 -- /See:/ 'localizedString' smart constructor.
-data LocalizedString = LocalizedString'
+data LocalizedString =
+  LocalizedString'
     { _lsValue    :: !(Maybe Text)
     , _lsLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocalizedString' with the minimum fields required to make a request.
 --
@@ -10709,11 +10853,7 @@ data LocalizedString = LocalizedString'
 -- * 'lsLanguage'
 localizedString
     :: LocalizedString
-localizedString =
-    LocalizedString'
-    { _lsValue = Nothing
-    , _lsLanguage = Nothing
-    }
+localizedString = LocalizedString' {_lsValue = Nothing, _lsLanguage = Nothing}
 
 lsValue :: Lens' LocalizedString (Maybe Text)
 lsValue = lens _lsValue (\ s a -> s{_lsValue = a})
@@ -10738,7 +10878,8 @@ instance ToJSON LocalizedString where
 
 --
 -- /See:/ 'playListItemListResponse' smart constructor.
-data PlayListItemListResponse = PlayListItemListResponse'
+data PlayListItemListResponse =
+  PlayListItemListResponse'
     { _plilrEtag            :: !(Maybe Text)
     , _plilrTokenPagination :: !(Maybe TokenPagination)
     , _plilrNextPageToken   :: !(Maybe Text)
@@ -10748,7 +10889,8 @@ data PlayListItemListResponse = PlayListItemListResponse'
     , _plilrVisitorId       :: !(Maybe Text)
     , _plilrEventId         :: !(Maybe Text)
     , _plilrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListItemListResponse' with the minimum fields required to make a request.
 --
@@ -10774,7 +10916,7 @@ data PlayListItemListResponse = PlayListItemListResponse'
 playListItemListResponse
     :: PlayListItemListResponse
 playListItemListResponse =
-    PlayListItemListResponse'
+  PlayListItemListResponse'
     { _plilrEtag = Nothing
     , _plilrTokenPagination = Nothing
     , _plilrNextPageToken = Nothing
@@ -10875,12 +11017,14 @@ instance ToJSON PlayListItemListResponse where
 -- assign a video category but only YouTube can assign a channel category.
 --
 -- /See:/ 'guideCategory' smart constructor.
-data GuideCategory = GuideCategory'
+data GuideCategory =
+  GuideCategory'
     { _gcEtag    :: !(Maybe Text)
     , _gcSnippet :: !(Maybe GuideCategorySnippet)
     , _gcKind    :: !Text
     , _gcId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GuideCategory' with the minimum fields required to make a request.
 --
@@ -10896,7 +11040,7 @@ data GuideCategory = GuideCategory'
 guideCategory
     :: GuideCategory
 guideCategory =
-    GuideCategory'
+  GuideCategory'
     { _gcEtag = Nothing
     , _gcSnippet = Nothing
     , _gcKind = "youtube#guideCategory"
@@ -10943,7 +11087,8 @@ instance ToJSON GuideCategory where
 -- thumbnails of the item referenced by the search result.
 --
 -- /See:/ 'searchResultSnippet' smart constructor.
-data SearchResultSnippet = SearchResultSnippet'
+data SearchResultSnippet =
+  SearchResultSnippet'
     { _srsPublishedAt          :: !(Maybe DateTime')
     , _srsChannelTitle         :: !(Maybe Text)
     , _srsChannelId            :: !(Maybe Text)
@@ -10951,7 +11096,8 @@ data SearchResultSnippet = SearchResultSnippet'
     , _srsTitle                :: !(Maybe Text)
     , _srsLiveBroadcastContent :: !(Maybe SearchResultSnippetLiveBroadcastContent)
     , _srsDescription          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchResultSnippet' with the minimum fields required to make a request.
 --
@@ -10973,7 +11119,7 @@ data SearchResultSnippet = SearchResultSnippet'
 searchResultSnippet
     :: SearchResultSnippet
 searchResultSnippet =
-    SearchResultSnippet'
+  SearchResultSnippet'
     { _srsPublishedAt = Nothing
     , _srsChannelTitle = Nothing
     , _srsChannelId = Nothing
@@ -11058,10 +11204,12 @@ instance ToJSON SearchResultSnippet where
 
 --
 -- /See:/ 'liveChatPollItem' smart constructor.
-data LiveChatPollItem = LiveChatPollItem'
+data LiveChatPollItem =
+  LiveChatPollItem'
     { _lcpiItemId      :: !(Maybe Text)
     , _lcpiDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatPollItem' with the minimum fields required to make a request.
 --
@@ -11073,10 +11221,7 @@ data LiveChatPollItem = LiveChatPollItem'
 liveChatPollItem
     :: LiveChatPollItem
 liveChatPollItem =
-    LiveChatPollItem'
-    { _lcpiItemId = Nothing
-    , _lcpiDescription = Nothing
-    }
+  LiveChatPollItem' {_lcpiItemId = Nothing, _lcpiDescription = Nothing}
 
 lcpiItemId :: Lens' LiveChatPollItem (Maybe Text)
 lcpiItemId
@@ -11104,7 +11249,8 @@ instance ToJSON LiveChatPollItem where
 
 --
 -- /See:/ 'sponsorListResponse' smart constructor.
-data SponsorListResponse = SponsorListResponse'
+data SponsorListResponse =
+  SponsorListResponse'
     { _spoEtag            :: !(Maybe Text)
     , _spoTokenPagination :: !(Maybe TokenPagination)
     , _spoNextPageToken   :: !(Maybe Text)
@@ -11113,7 +11259,8 @@ data SponsorListResponse = SponsorListResponse'
     , _spoItems           :: !(Maybe [Sponsor])
     , _spoVisitorId       :: !(Maybe Text)
     , _spoEventId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SponsorListResponse' with the minimum fields required to make a request.
 --
@@ -11137,7 +11284,7 @@ data SponsorListResponse = SponsorListResponse'
 sponsorListResponse
     :: SponsorListResponse
 sponsorListResponse =
-    SponsorListResponse'
+  SponsorListResponse'
     { _spoEtag = Nothing
     , _spoTokenPagination = Nothing
     , _spoNextPageToken = Nothing
@@ -11225,13 +11372,15 @@ instance ToJSON SponsorListResponse where
 -- action, such as the video that was rated or uploaded.
 --
 -- /See:/ 'activity' smart constructor.
-data Activity = Activity'
+data Activity =
+  Activity'
     { _aEtag           :: !(Maybe Text)
     , _aSnippet        :: !(Maybe ActivitySnippet)
     , _aKind           :: !Text
     , _aContentDetails :: !(Maybe ActivityContentDetails)
     , _aId             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Activity' with the minimum fields required to make a request.
 --
@@ -11249,7 +11398,7 @@ data Activity = Activity'
 activity
     :: Activity
 activity =
-    Activity'
+  Activity'
     { _aEtag = Nothing
     , _aSnippet = Nothing
     , _aKind = "youtube#activity"
@@ -11308,12 +11457,14 @@ instance ToJSON Activity where
 -- items. A campaign belongs to a single channel_id.
 --
 -- /See:/ 'invideoPromotion' smart constructor.
-data InvideoPromotion = InvideoPromotion'
+data InvideoPromotion =
+  InvideoPromotion'
     { _ipUseSmartTiming :: !(Maybe Bool)
     , _ipItems          :: !(Maybe [PromotedItem])
     , _ipDefaultTiming  :: !(Maybe InvideoTiming)
     , _ipPosition       :: !(Maybe InvideoPosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InvideoPromotion' with the minimum fields required to make a request.
 --
@@ -11329,7 +11480,7 @@ data InvideoPromotion = InvideoPromotion'
 invideoPromotion
     :: InvideoPromotion
 invideoPromotion =
-    InvideoPromotion'
+  InvideoPromotion'
     { _ipUseSmartTiming = Nothing
     , _ipItems = Nothing
     , _ipDefaultTiming = Nothing
@@ -11386,13 +11537,15 @@ instance ToJSON InvideoPromotion where
 
 --
 -- /See:/ 'invideoBranding' smart constructor.
-data InvideoBranding = InvideoBranding'
+data InvideoBranding =
+  InvideoBranding'
     { _ibImageURL        :: !(Maybe Text)
     , _ibTargetChannelId :: !(Maybe Text)
     , _ibTiming          :: !(Maybe InvideoTiming)
     , _ibImageBytes      :: !(Maybe Bytes)
     , _ibPosition        :: !(Maybe InvideoPosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InvideoBranding' with the minimum fields required to make a request.
 --
@@ -11410,7 +11563,7 @@ data InvideoBranding = InvideoBranding'
 invideoBranding
     :: InvideoBranding
 invideoBranding =
-    InvideoBranding'
+  InvideoBranding'
     { _ibImageURL = Nothing
     , _ibTargetChannelId = Nothing
     , _ibTiming = Nothing
@@ -11463,11 +11616,13 @@ instance ToJSON InvideoBranding where
 -- call.
 --
 -- /See:/ 'channelBannerResource' smart constructor.
-data ChannelBannerResource = ChannelBannerResource'
+data ChannelBannerResource =
+  ChannelBannerResource'
     { _cbrEtag :: !(Maybe Text)
     , _cbrKind :: !Text
     , _cbrURL  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelBannerResource' with the minimum fields required to make a request.
 --
@@ -11481,7 +11636,7 @@ data ChannelBannerResource = ChannelBannerResource'
 channelBannerResource
     :: ChannelBannerResource
 channelBannerResource =
-    ChannelBannerResource'
+  ChannelBannerResource'
     { _cbrEtag = Nothing
     , _cbrKind = "youtube#channelBannerResource"
     , _cbrURL = Nothing
@@ -11518,13 +11673,15 @@ instance ToJSON ChannelBannerResource where
 
 --
 -- /See:/ 'i18nLanguageListResponse' smart constructor.
-data I18nLanguageListResponse = I18nLanguageListResponse'
+data I18nLanguageListResponse =
+  I18nLanguageListResponse'
     { _illrEtag      :: !(Maybe Text)
     , _illrKind      :: !Text
     , _illrItems     :: !(Maybe [I18nLanguage])
     , _illrVisitorId :: !(Maybe Text)
     , _illrEventId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'I18nLanguageListResponse' with the minimum fields required to make a request.
 --
@@ -11542,7 +11699,7 @@ data I18nLanguageListResponse = I18nLanguageListResponse'
 i18nLanguageListResponse
     :: I18nLanguageListResponse
 i18nLanguageListResponse =
-    I18nLanguageListResponse'
+  I18nLanguageListResponse'
     { _illrEtag = Nothing
     , _illrKind = "youtube#i18nLanguageListResponse"
     , _illrItems = Nothing
@@ -11601,9 +11758,11 @@ instance ToJSON I18nLanguageListResponse where
 
 --
 -- /See:/ 'playListPlayer' smart constructor.
-newtype PlayListPlayer = PlayListPlayer'
+newtype PlayListPlayer =
+  PlayListPlayer'
     { _plpEmbedHTML :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListPlayer' with the minimum fields required to make a request.
 --
@@ -11612,10 +11771,7 @@ newtype PlayListPlayer = PlayListPlayer'
 -- * 'plpEmbedHTML'
 playListPlayer
     :: PlayListPlayer
-playListPlayer =
-    PlayListPlayer'
-    { _plpEmbedHTML = Nothing
-    }
+playListPlayer = PlayListPlayer' {_plpEmbedHTML = Nothing}
 
 -- | An
 -- tag that embeds a player that will play the playlist.
@@ -11636,12 +11792,14 @@ instance ToJSON PlayListPlayer where
 -- | Branding properties of a YouTube channel.
 --
 -- /See:/ 'channelBrandingSettings' smart constructor.
-data ChannelBrandingSettings = ChannelBrandingSettings'
+data ChannelBrandingSettings =
+  ChannelBrandingSettings'
     { _cbsImage   :: !(Maybe ImageSettings)
     , _cbsHints   :: !(Maybe [PropertyValue])
     , _cbsChannel :: !(Maybe ChannelSettings)
     , _cbsWatch   :: !(Maybe WatchSettings)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelBrandingSettings' with the minimum fields required to make a request.
 --
@@ -11657,7 +11815,7 @@ data ChannelBrandingSettings = ChannelBrandingSettings'
 channelBrandingSettings
     :: ChannelBrandingSettings
 channelBrandingSettings =
-    ChannelBrandingSettings'
+  ChannelBrandingSettings'
     { _cbsImage = Nothing
     , _cbsHints = Nothing
     , _cbsChannel = Nothing
@@ -11707,13 +11865,15 @@ instance ToJSON ChannelBrandingSettings where
 -- itself and some of the replies.
 --
 -- /See:/ 'commentThread' smart constructor.
-data CommentThread = CommentThread'
+data CommentThread =
+  CommentThread'
     { _ctEtag    :: !(Maybe Text)
     , _ctSnippet :: !(Maybe CommentThreadSnippet)
     , _ctKind    :: !Text
     , _ctReplies :: !(Maybe CommentThreadReplies)
     , _ctId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentThread' with the minimum fields required to make a request.
 --
@@ -11731,7 +11891,7 @@ data CommentThread = CommentThread'
 commentThread
     :: CommentThread
 commentThread =
-    CommentThread'
+  CommentThread'
     { _ctEtag = Nothing
     , _ctSnippet = Nothing
     , _ctKind = "youtube#commentThread"
@@ -11786,10 +11946,12 @@ instance ToJSON CommentThread where
 -- | Playlist localization setting
 --
 -- /See:/ 'playListLocalization' smart constructor.
-data PlayListLocalization = PlayListLocalization'
+data PlayListLocalization =
+  PlayListLocalization'
     { _pllTitle       :: !(Maybe Text)
     , _pllDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListLocalization' with the minimum fields required to make a request.
 --
@@ -11801,10 +11963,7 @@ data PlayListLocalization = PlayListLocalization'
 playListLocalization
     :: PlayListLocalization
 playListLocalization =
-    PlayListLocalization'
-    { _pllTitle = Nothing
-    , _pllDescription = Nothing
-    }
+  PlayListLocalization' {_pllTitle = Nothing, _pllDescription = Nothing}
 
 -- | The localized strings for playlist\'s title.
 pllTitle :: Lens' PlayListLocalization (Maybe Text)
@@ -11832,12 +11991,14 @@ instance ToJSON PlayListLocalization where
 
 --
 -- /See:/ 'liveChatBanSnippet' smart constructor.
-data LiveChatBanSnippet = LiveChatBanSnippet'
+data LiveChatBanSnippet =
+  LiveChatBanSnippet'
     { _lcbsLiveChatId         :: !(Maybe Text)
     , _lcbsBannedUserDetails  :: !(Maybe ChannelProFileDetails)
     , _lcbsBanDurationSeconds :: !(Maybe (Textual Word64))
     , _lcbsType               :: !(Maybe LiveChatBanSnippetType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatBanSnippet' with the minimum fields required to make a request.
 --
@@ -11853,7 +12014,7 @@ data LiveChatBanSnippet = LiveChatBanSnippet'
 liveChatBanSnippet
     :: LiveChatBanSnippet
 liveChatBanSnippet =
-    LiveChatBanSnippet'
+  LiveChatBanSnippet'
     { _lcbsLiveChatId = Nothing
     , _lcbsBannedUserDetails = Nothing
     , _lcbsBanDurationSeconds = Nothing
@@ -11904,11 +12065,13 @@ instance ToJSON LiveChatBanSnippet where
 -- | Details about the content to witch a subscription refers.
 --
 -- /See:/ 'subscriptionContentDetails' smart constructor.
-data SubscriptionContentDetails = SubscriptionContentDetails'
+data SubscriptionContentDetails =
+  SubscriptionContentDetails'
     { _scdActivityType   :: !(Maybe SubscriptionContentDetailsActivityType)
     , _scdTotalItemCount :: !(Maybe (Textual Word32))
     , _scdNewItemCount   :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionContentDetails' with the minimum fields required to make a request.
 --
@@ -11922,7 +12085,7 @@ data SubscriptionContentDetails = SubscriptionContentDetails'
 subscriptionContentDetails
     :: SubscriptionContentDetails
 subscriptionContentDetails =
-    SubscriptionContentDetails'
+  SubscriptionContentDetails'
     { _scdActivityType = Nothing
     , _scdTotalItemCount = Nothing
     , _scdNewItemCount = Nothing
@@ -11970,9 +12133,11 @@ instance ToJSON SubscriptionContentDetails where
 -- pings that need to be respected by the channel.
 --
 -- /See:/ 'channelConversionPings' smart constructor.
-newtype ChannelConversionPings = ChannelConversionPings'
+newtype ChannelConversionPings =
+  ChannelConversionPings'
     { _ccpPings :: Maybe [ChannelConversionPing]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelConversionPings' with the minimum fields required to make a request.
 --
@@ -11981,10 +12146,7 @@ newtype ChannelConversionPings = ChannelConversionPings'
 -- * 'ccpPings'
 channelConversionPings
     :: ChannelConversionPings
-channelConversionPings =
-    ChannelConversionPings'
-    { _ccpPings = Nothing
-    }
+channelConversionPings = ChannelConversionPings' {_ccpPings = Nothing}
 
 -- | Pings that the app shall fire (authenticated by biscotti cookie). Each
 -- ping has a context, in which the app must fire the ping, and a url
@@ -12008,11 +12170,13 @@ instance ToJSON ChannelConversionPings where
 
 --
 -- /See:/ 'localizedProperty' smart constructor.
-data LocalizedProperty = LocalizedProperty'
+data LocalizedProperty =
+  LocalizedProperty'
     { _lpDefault         :: !(Maybe Text)
     , _lpLocalized       :: !(Maybe [LocalizedString])
     , _lpDefaultLanguage :: !(Maybe LanguageTag)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocalizedProperty' with the minimum fields required to make a request.
 --
@@ -12026,11 +12190,8 @@ data LocalizedProperty = LocalizedProperty'
 localizedProperty
     :: LocalizedProperty
 localizedProperty =
-    LocalizedProperty'
-    { _lpDefault = Nothing
-    , _lpLocalized = Nothing
-    , _lpDefaultLanguage = Nothing
-    }
+  LocalizedProperty'
+    {_lpDefault = Nothing, _lpLocalized = Nothing, _lpDefaultLanguage = Nothing}
 
 lpDefault :: Lens' LocalizedProperty (Maybe Text)
 lpDefault
@@ -12067,10 +12228,12 @@ instance ToJSON LocalizedProperty where
 -- | Channel localization setting
 --
 -- /See:/ 'channelLocalization' smart constructor.
-data ChannelLocalization = ChannelLocalization'
+data ChannelLocalization =
+  ChannelLocalization'
     { _clTitle       :: !(Maybe Text)
     , _clDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelLocalization' with the minimum fields required to make a request.
 --
@@ -12082,10 +12245,7 @@ data ChannelLocalization = ChannelLocalization'
 channelLocalization
     :: ChannelLocalization
 channelLocalization =
-    ChannelLocalization'
-    { _clTitle = Nothing
-    , _clDescription = Nothing
-    }
+  ChannelLocalization' {_clTitle = Nothing, _clDescription = Nothing}
 
 -- | The localized strings for channel\'s title.
 clTitle :: Lens' ChannelLocalization (Maybe Text)
@@ -12113,13 +12273,15 @@ instance ToJSON ChannelLocalization where
 
 --
 -- /See:/ 'playListItemContentDetails' smart constructor.
-data PlayListItemContentDetails = PlayListItemContentDetails'
+data PlayListItemContentDetails =
+  PlayListItemContentDetails'
     { _plicdStartAt          :: !(Maybe Text)
     , _plicdNote             :: !(Maybe Text)
     , _plicdVideoPublishedAt :: !(Maybe DateTime')
     , _plicdVideoId          :: !(Maybe Text)
     , _plicdEndAt            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListItemContentDetails' with the minimum fields required to make a request.
 --
@@ -12137,7 +12299,7 @@ data PlayListItemContentDetails = PlayListItemContentDetails'
 playListItemContentDetails
     :: PlayListItemContentDetails
 playListItemContentDetails =
-    PlayListItemContentDetails'
+  PlayListItemContentDetails'
     { _plicdStartAt = Nothing
     , _plicdNote = Nothing
     , _plicdVideoPublishedAt = Nothing
@@ -12204,11 +12366,13 @@ instance ToJSON PlayListItemContentDetails where
 
 --
 -- /See:/ 'videoAgeGating' smart constructor.
-data VideoAgeGating = VideoAgeGating'
+data VideoAgeGating =
+  VideoAgeGating'
     { _vagAlcoholContent  :: !(Maybe Bool)
     , _vagRestricted      :: !(Maybe Bool)
     , _vagVideoGameRating :: !(Maybe VideoAgeGatingVideoGameRating)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoAgeGating' with the minimum fields required to make a request.
 --
@@ -12222,7 +12386,7 @@ data VideoAgeGating = VideoAgeGating'
 videoAgeGating
     :: VideoAgeGating
 videoAgeGating =
-    VideoAgeGating'
+  VideoAgeGating'
     { _vagAlcoholContent = Nothing
     , _vagRestricted = Nothing
     , _vagVideoGameRating = Nothing
@@ -12269,9 +12433,11 @@ instance ToJSON VideoAgeGating where
 
 --
 -- /See:/ 'languageTag' smart constructor.
-newtype LanguageTag = LanguageTag'
+newtype LanguageTag =
+  LanguageTag'
     { _ltValue :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LanguageTag' with the minimum fields required to make a request.
 --
@@ -12280,10 +12446,7 @@ newtype LanguageTag = LanguageTag'
 -- * 'ltValue'
 languageTag
     :: LanguageTag
-languageTag =
-    LanguageTag'
-    { _ltValue = Nothing
-    }
+languageTag = LanguageTag' {_ltValue = Nothing}
 
 ltValue :: Lens' LanguageTag (Maybe Text)
 ltValue = lens _ltValue (\ s a -> s{_ltValue = a})
@@ -12299,11 +12462,13 @@ instance ToJSON LanguageTag where
 
 --
 -- /See:/ 'liveChatPollOpenedDetails' smart constructor.
-data LiveChatPollOpenedDetails = LiveChatPollOpenedDetails'
+data LiveChatPollOpenedDetails =
+  LiveChatPollOpenedDetails'
     { _lcpodPrompt :: !(Maybe Text)
     , _lcpodItems  :: !(Maybe [LiveChatPollItem])
     , _lcpodId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatPollOpenedDetails' with the minimum fields required to make a request.
 --
@@ -12317,11 +12482,8 @@ data LiveChatPollOpenedDetails = LiveChatPollOpenedDetails'
 liveChatPollOpenedDetails
     :: LiveChatPollOpenedDetails
 liveChatPollOpenedDetails =
-    LiveChatPollOpenedDetails'
-    { _lcpodPrompt = Nothing
-    , _lcpodItems = Nothing
-    , _lcpodId = Nothing
-    }
+  LiveChatPollOpenedDetails'
+    {_lcpodPrompt = Nothing, _lcpodItems = Nothing, _lcpodId = Nothing}
 
 lcpodPrompt :: Lens' LiveChatPollOpenedDetails (Maybe Text)
 lcpodPrompt
@@ -12355,7 +12517,8 @@ instance ToJSON LiveChatPollOpenedDetails where
 -- | Information about a video stream.
 --
 -- /See:/ 'videoFileDetailsVideoStream' smart constructor.
-data VideoFileDetailsVideoStream = VideoFileDetailsVideoStream'
+data VideoFileDetailsVideoStream =
+  VideoFileDetailsVideoStream'
     { _vfdvsHeightPixels :: !(Maybe (Textual Word32))
     , _vfdvsBitrateBps   :: !(Maybe (Textual Word64))
     , _vfdvsVendor       :: !(Maybe Text)
@@ -12364,7 +12527,8 @@ data VideoFileDetailsVideoStream = VideoFileDetailsVideoStream'
     , _vfdvsCodec        :: !(Maybe Text)
     , _vfdvsAspectRatio  :: !(Maybe (Textual Double))
     , _vfdvsWidthPixels  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoFileDetailsVideoStream' with the minimum fields required to make a request.
 --
@@ -12388,7 +12552,7 @@ data VideoFileDetailsVideoStream = VideoFileDetailsVideoStream'
 videoFileDetailsVideoStream
     :: VideoFileDetailsVideoStream
 videoFileDetailsVideoStream =
-    VideoFileDetailsVideoStream'
+  VideoFileDetailsVideoStream'
     { _vfdvsHeightPixels = Nothing
     , _vfdvsBitrateBps = Nothing
     , _vfdvsVendor = Nothing
@@ -12485,10 +12649,12 @@ instance ToJSON VideoFileDetailsVideoStream where
 -- identifying the ping.
 --
 -- /See:/ 'channelConversionPing' smart constructor.
-data ChannelConversionPing = ChannelConversionPing'
+data ChannelConversionPing =
+  ChannelConversionPing'
     { _ccpContext       :: !(Maybe ChannelConversionPingContext)
     , _ccpConversionURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelConversionPing' with the minimum fields required to make a request.
 --
@@ -12500,10 +12666,7 @@ data ChannelConversionPing = ChannelConversionPing'
 channelConversionPing
     :: ChannelConversionPing
 channelConversionPing =
-    ChannelConversionPing'
-    { _ccpContext = Nothing
-    , _ccpConversionURL = Nothing
-    }
+  ChannelConversionPing' {_ccpContext = Nothing, _ccpConversionURL = Nothing}
 
 -- | Defines the context of the ping.
 ccpContext :: Lens' ChannelConversionPing (Maybe ChannelConversionPingContext)
@@ -12555,14 +12718,16 @@ instance ToJSON ChannelConversionPing where
 -- playlist for that user\'s channel.
 --
 -- /See:/ 'playListItem' smart constructor.
-data PlayListItem = PlayListItem'
+data PlayListItem =
+  PlayListItem'
     { _pliStatus         :: !(Maybe PlayListItemStatus)
     , _pliEtag           :: !(Maybe Text)
     , _pliSnippet        :: !(Maybe PlayListItemSnippet)
     , _pliKind           :: !Text
     , _pliContentDetails :: !(Maybe PlayListItemContentDetails)
     , _pliId             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListItem' with the minimum fields required to make a request.
 --
@@ -12582,7 +12747,7 @@ data PlayListItem = PlayListItem'
 playListItem
     :: PlayListItem
 playListItem =
-    PlayListItem'
+  PlayListItem'
     { _pliStatus = Nothing
     , _pliEtag = Nothing
     , _pliSnippet = Nothing
@@ -12648,7 +12813,8 @@ instance ToJSON PlayListItem where
 
 --
 -- /See:/ 'guideCategoryListResponse' smart constructor.
-data GuideCategoryListResponse = GuideCategoryListResponse'
+data GuideCategoryListResponse =
+  GuideCategoryListResponse'
     { _gclrEtag            :: !(Maybe Text)
     , _gclrTokenPagination :: !(Maybe TokenPagination)
     , _gclrNextPageToken   :: !(Maybe Text)
@@ -12658,7 +12824,8 @@ data GuideCategoryListResponse = GuideCategoryListResponse'
     , _gclrVisitorId       :: !(Maybe Text)
     , _gclrEventId         :: !(Maybe Text)
     , _gclrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GuideCategoryListResponse' with the minimum fields required to make a request.
 --
@@ -12684,7 +12851,7 @@ data GuideCategoryListResponse = GuideCategoryListResponse'
 guideCategoryListResponse
     :: GuideCategoryListResponse
 guideCategoryListResponse =
-    GuideCategoryListResponse'
+  GuideCategoryListResponse'
     { _gclrEtag = Nothing
     , _gclrTokenPagination = Nothing
     , _gclrNextPageToken = Nothing
@@ -12781,7 +12948,8 @@ instance ToJSON GuideCategoryListResponse where
 -- | Basic details about a caption track, such as its language and name.
 --
 -- /See:/ 'captionSnippet' smart constructor.
-data CaptionSnippet = CaptionSnippet'
+data CaptionSnippet =
+  CaptionSnippet'
     { _csFailureReason  :: !(Maybe CaptionSnippetFailureReason)
     , _csStatus         :: !(Maybe CaptionSnippetStatus)
     , _csLastUpdated    :: !(Maybe DateTime')
@@ -12795,7 +12963,8 @@ data CaptionSnippet = CaptionSnippet'
     , _csIsAutoSynced   :: !(Maybe Bool)
     , _csIsEasyReader   :: !(Maybe Bool)
     , _csAudioTrackType :: !(Maybe CaptionSnippetAudioTrackType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CaptionSnippet' with the minimum fields required to make a request.
 --
@@ -12829,7 +12998,7 @@ data CaptionSnippet = CaptionSnippet'
 captionSnippet
     :: CaptionSnippet
 captionSnippet =
-    CaptionSnippet'
+  CaptionSnippet'
     { _csFailureReason = Nothing
     , _csStatus = Nothing
     , _csLastUpdated = Nothing
@@ -12968,12 +13137,14 @@ instance ToJSON CaptionSnippet where
 -- | A comment represents a single YouTube comment.
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment'
+data Comment =
+  Comment'
     { _ccEtag    :: !(Maybe Text)
     , _ccSnippet :: !(Maybe CommentSnippet)
     , _ccKind    :: !Text
     , _ccId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
@@ -12989,7 +13160,7 @@ data Comment = Comment'
 comment
     :: Comment
 comment =
-    Comment'
+  Comment'
     { _ccEtag = Nothing
     , _ccSnippet = Nothing
     , _ccKind = "youtube#comment"
@@ -13035,10 +13206,12 @@ instance ToJSON Comment where
 -- human-readable name.
 --
 -- /See:/ 'i18nRegionSnippet' smart constructor.
-data I18nRegionSnippet = I18nRegionSnippet'
+data I18nRegionSnippet =
+  I18nRegionSnippet'
     { _irsName :: !(Maybe Text)
     , _irsGl   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'I18nRegionSnippet' with the minimum fields required to make a request.
 --
@@ -13049,11 +13222,7 @@ data I18nRegionSnippet = I18nRegionSnippet'
 -- * 'irsGl'
 i18nRegionSnippet
     :: I18nRegionSnippet
-i18nRegionSnippet =
-    I18nRegionSnippet'
-    { _irsName = Nothing
-    , _irsGl = Nothing
-    }
+i18nRegionSnippet = I18nRegionSnippet' {_irsName = Nothing, _irsGl = Nothing}
 
 -- | The human-readable name of the region.
 irsName :: Lens' I18nRegionSnippet (Maybe Text)
@@ -13083,14 +13252,16 @@ instance ToJSON I18nRegionSnippet where
 -- video.
 --
 -- /See:/ 'subscription' smart constructor.
-data Subscription = Subscription'
+data Subscription =
+  Subscription'
     { _ssEtag              :: !(Maybe Text)
     , _ssSubscriberSnippet :: !(Maybe SubscriptionSubscriberSnippet)
     , _ssSnippet           :: !(Maybe SubscriptionSnippet)
     , _ssKind              :: !Text
     , _ssContentDetails    :: !(Maybe SubscriptionContentDetails)
     , _ssId                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
@@ -13110,7 +13281,7 @@ data Subscription = Subscription'
 subscription
     :: Subscription
 subscription =
-    Subscription'
+  Subscription'
     { _ssEtag = Nothing
     , _ssSubscriberSnippet = Nothing
     , _ssSnippet = Nothing
@@ -13177,11 +13348,13 @@ instance ToJSON Subscription where
 -- | Recording information associated with the video.
 --
 -- /See:/ 'videoRecordingDetails' smart constructor.
-data VideoRecordingDetails = VideoRecordingDetails'
+data VideoRecordingDetails =
+  VideoRecordingDetails'
     { _vrdLocation            :: !(Maybe GeoPoint)
     , _vrdLocationDescription :: !(Maybe Text)
     , _vrdRecordingDate       :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoRecordingDetails' with the minimum fields required to make a request.
 --
@@ -13195,7 +13368,7 @@ data VideoRecordingDetails = VideoRecordingDetails'
 videoRecordingDetails
     :: VideoRecordingDetails
 videoRecordingDetails =
-    VideoRecordingDetails'
+  VideoRecordingDetails'
     { _vrdLocation = Nothing
     , _vrdLocationDescription = Nothing
     , _vrdRecordingDate = Nothing
@@ -13239,10 +13412,12 @@ instance ToJSON VideoRecordingDetails where
 
 --
 -- /See:/ 'videoRating' smart constructor.
-data VideoRating = VideoRating'
+data VideoRating =
+  VideoRating'
     { _vRating  :: !(Maybe VideoRatingRating)
     , _vVideoId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoRating' with the minimum fields required to make a request.
 --
@@ -13253,11 +13428,7 @@ data VideoRating = VideoRating'
 -- * 'vVideoId'
 videoRating
     :: VideoRating
-videoRating =
-    VideoRating'
-    { _vRating = Nothing
-    , _vVideoId = Nothing
-    }
+videoRating = VideoRating' {_vRating = Nothing, _vVideoId = Nothing}
 
 vRating :: Lens' VideoRating (Maybe VideoRatingRating)
 vRating = lens _vRating (\ s a -> s{_vRating = a})
@@ -13282,7 +13453,8 @@ instance ToJSON VideoRating where
 -- | Basic details about a comment, such as its author and text.
 --
 -- /See:/ 'commentSnippet' smart constructor.
-data CommentSnippet = CommentSnippet'
+data CommentSnippet =
+  CommentSnippet'
     { _cViewerRating          :: !(Maybe CommentSnippetViewerRating)
     , _cPublishedAt           :: !(Maybe DateTime')
     , _cAuthorChannelURL      :: !(Maybe Text)
@@ -13298,7 +13470,8 @@ data CommentSnippet = CommentSnippet'
     , _cAuthorChannelId       :: !(Maybe JSONValue)
     , _cCanRate               :: !(Maybe Bool)
     , _cParentId              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentSnippet' with the minimum fields required to make a request.
 --
@@ -13336,7 +13509,7 @@ data CommentSnippet = CommentSnippet'
 commentSnippet
     :: CommentSnippet
 commentSnippet =
-    CommentSnippet'
+  CommentSnippet'
     { _cViewerRating = Nothing
     , _cPublishedAt = Nothing
     , _cAuthorChannelURL = Nothing
@@ -13493,10 +13666,12 @@ instance ToJSON CommentSnippet where
 -- | Brief description of the live stream status.
 --
 -- /See:/ 'liveStreamStatus' smart constructor.
-data LiveStreamStatus = LiveStreamStatus'
+data LiveStreamStatus =
+  LiveStreamStatus'
     { _lssStreamStatus :: !(Maybe LiveStreamStatusStreamStatus)
     , _lssHealthStatus :: !(Maybe LiveStreamHealthStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStreamStatus' with the minimum fields required to make a request.
 --
@@ -13508,10 +13683,7 @@ data LiveStreamStatus = LiveStreamStatus'
 liveStreamStatus
     :: LiveStreamStatus
 liveStreamStatus =
-    LiveStreamStatus'
-    { _lssStreamStatus = Nothing
-    , _lssHealthStatus = Nothing
-    }
+  LiveStreamStatus' {_lssStreamStatus = Nothing, _lssHealthStatus = Nothing}
 
 lssStreamStatus :: Lens' LiveStreamStatus (Maybe LiveStreamStatusStreamStatus)
 lssStreamStatus
@@ -13542,13 +13714,15 @@ instance ToJSON LiveStreamStatus where
 -- encoding hints, tag suggestions, and editor suggestions.
 --
 -- /See:/ 'videoSuggestions' smart constructor.
-data VideoSuggestions = VideoSuggestions'
+data VideoSuggestions =
+  VideoSuggestions'
     { _vsProcessingErrors   :: !(Maybe [VideoSuggestionsProcessingErrorsItem])
     , _vsProcessingHints    :: !(Maybe [VideoSuggestionsProcessingHintsItem])
     , _vsEditorSuggestions  :: !(Maybe [VideoSuggestionsEditorSuggestionsItem])
     , _vsProcessingWarnings :: !(Maybe [VideoSuggestionsProcessingWarningsItem])
     , _vsTagSuggestions     :: !(Maybe [VideoSuggestionsTagSuggestion])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoSuggestions' with the minimum fields required to make a request.
 --
@@ -13566,7 +13740,7 @@ data VideoSuggestions = VideoSuggestions'
 videoSuggestions
     :: VideoSuggestions
 videoSuggestions =
-    VideoSuggestions'
+  VideoSuggestions'
     { _vsProcessingErrors = Nothing
     , _vsProcessingHints = Nothing
     , _vsEditorSuggestions = Nothing
@@ -13651,7 +13825,8 @@ instance ToJSON VideoSuggestions where
 -- thumbnails.
 --
 -- /See:/ 'playListItemSnippet' smart constructor.
-data PlayListItemSnippet = PlayListItemSnippet'
+data PlayListItemSnippet =
+  PlayListItemSnippet'
     { _plisResourceId   :: !(Maybe ResourceId)
     , _plisPublishedAt  :: !(Maybe DateTime')
     , _plisChannelTitle :: !(Maybe Text)
@@ -13661,7 +13836,8 @@ data PlayListItemSnippet = PlayListItemSnippet'
     , _plisPlayListId   :: !(Maybe Text)
     , _plisDescription  :: !(Maybe Text)
     , _plisPosition     :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListItemSnippet' with the minimum fields required to make a request.
 --
@@ -13687,7 +13863,7 @@ data PlayListItemSnippet = PlayListItemSnippet'
 playListItemSnippet
     :: PlayListItemSnippet
 playListItemSnippet =
-    PlayListItemSnippet'
+  PlayListItemSnippet'
     { _plisResourceId = Nothing
     , _plisPublishedAt = Nothing
     , _plisChannelTitle = Nothing
@@ -13792,9 +13968,11 @@ instance ToJSON PlayListItemSnippet where
 -- | Project specific details about the content of a YouTube Video.
 --
 -- /See:/ 'videoProjectDetails' smart constructor.
-newtype VideoProjectDetails = VideoProjectDetails'
+newtype VideoProjectDetails =
+  VideoProjectDetails'
     { _vpdTags :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoProjectDetails' with the minimum fields required to make a request.
 --
@@ -13803,10 +13981,7 @@ newtype VideoProjectDetails = VideoProjectDetails'
 -- * 'vpdTags'
 videoProjectDetails
     :: VideoProjectDetails
-videoProjectDetails =
-    VideoProjectDetails'
-    { _vpdTags = Nothing
-    }
+videoProjectDetails = VideoProjectDetails' {_vpdTags = Nothing}
 
 -- | A list of project tags associated with the video during the upload.
 vpdTags :: Lens' VideoProjectDetails [Text]
@@ -13828,7 +14003,8 @@ instance ToJSON VideoProjectDetails where
 -- shows. NEXT_ID: 71
 --
 -- /See:/ 'contentRating' smart constructor.
-data ContentRating = ContentRating'
+data ContentRating =
+  ContentRating'
     { _crFpbRatingReasons       :: !(Maybe [ContentRatingFpbRatingReasonsItem])
     , _crPefilmRating           :: !(Maybe ContentRatingPefilmRating)
     , _crCccRating              :: !(Maybe ContentRatingCccRating)
@@ -13899,7 +14075,8 @@ data ContentRating = ContentRating'
     , _crSkfilmRating           :: !(Maybe ContentRatingSkfilmRating)
     , _crOflcRating             :: !(Maybe ContentRatingOflcRating)
     , _crKmrbRating             :: !(Maybe ContentRatingKmrbRating)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContentRating' with the minimum fields required to make a request.
 --
@@ -14047,7 +14224,7 @@ data ContentRating = ContentRating'
 contentRating
     :: ContentRating
 contentRating =
-    ContentRating'
+  ContentRating'
     { _crFpbRatingReasons = Nothing
     , _crPefilmRating = Nothing
     , _crCccRating = Nothing
@@ -14718,7 +14895,8 @@ instance ToJSON ContentRating where
 -- calling the playlistItems.insert and playlistItems.delete methods.
 --
 -- /See:/ 'playList' smart constructor.
-data PlayList = PlayList'
+data PlayList =
+  PlayList'
     { _plStatus         :: !(Maybe PlayListStatus)
     , _plEtag           :: !(Maybe Text)
     , _plSnippet        :: !(Maybe PlayListSnippet)
@@ -14727,7 +14905,8 @@ data PlayList = PlayList'
     , _plId             :: !(Maybe Text)
     , _plLocalizations  :: !(Maybe PlayListLocalizations)
     , _plPlayer         :: !(Maybe PlayListPlayer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayList' with the minimum fields required to make a request.
 --
@@ -14751,7 +14930,7 @@ data PlayList = PlayList'
 playList
     :: PlayList
 playList =
-    PlayList'
+  PlayList'
     { _plStatus = Nothing
     , _plEtag = Nothing
     , _plSnippet = Nothing
@@ -14831,7 +15010,8 @@ instance ToJSON PlayList where
 -- | Branding properties for the channel view.
 --
 -- /See:/ 'channelSettings' smart constructor.
-data ChannelSettings = ChannelSettings'
+data ChannelSettings =
+  ChannelSettings'
     { _cShowRelatedChannels        :: !(Maybe Bool)
     , _cDefaultTab                 :: !(Maybe Text)
     , _cFeaturedChannelsTitle      :: !(Maybe Text)
@@ -14846,7 +15026,8 @@ data ChannelSettings = ChannelSettings'
     , _cTitle                      :: !(Maybe Text)
     , _cDescription                :: !(Maybe Text)
     , _cDefaultLanguage            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelSettings' with the minimum fields required to make a request.
 --
@@ -14882,7 +15063,7 @@ data ChannelSettings = ChannelSettings'
 channelSettings
     :: ChannelSettings
 channelSettings =
-    ChannelSettings'
+  ChannelSettings'
     { _cShowRelatedChannels = Nothing
     , _cDefaultTab = Nothing
     , _cFeaturedChannelsTitle = Nothing
@@ -15026,7 +15207,8 @@ instance ToJSON ChannelSettings where
 -- thumbnails of the subscribed item.
 --
 -- /See:/ 'subscriptionSnippet' smart constructor.
-data SubscriptionSnippet = SubscriptionSnippet'
+data SubscriptionSnippet =
+  SubscriptionSnippet'
     { _ssResourceId   :: !(Maybe ResourceId)
     , _ssPublishedAt  :: !(Maybe DateTime')
     , _ssChannelTitle :: !(Maybe Text)
@@ -15034,7 +15216,8 @@ data SubscriptionSnippet = SubscriptionSnippet'
     , _ssThumbnails   :: !(Maybe ThumbnailDetails)
     , _ssTitle        :: !(Maybe Text)
     , _ssDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionSnippet' with the minimum fields required to make a request.
 --
@@ -15056,7 +15239,7 @@ data SubscriptionSnippet = SubscriptionSnippet'
 subscriptionSnippet
     :: SubscriptionSnippet
 subscriptionSnippet =
-    SubscriptionSnippet'
+  SubscriptionSnippet'
     { _ssResourceId = Nothing
     , _ssPublishedAt = Nothing
     , _ssChannelTitle = Nothing
@@ -15135,14 +15318,16 @@ instance ToJSON SubscriptionSnippet where
 -- | Details about the live streaming metadata.
 --
 -- /See:/ 'videoLiveStreamingDetails' smart constructor.
-data VideoLiveStreamingDetails = VideoLiveStreamingDetails'
+data VideoLiveStreamingDetails =
+  VideoLiveStreamingDetails'
     { _vlsdActualEndTime      :: !(Maybe DateTime')
     , _vlsdConcurrentViewers  :: !(Maybe (Textual Word64))
     , _vlsdScheduledEndTime   :: !(Maybe DateTime')
     , _vlsdScheduledStartTime :: !(Maybe DateTime')
     , _vlsdActualStartTime    :: !(Maybe DateTime')
     , _vlsdActiveLiveChatId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoLiveStreamingDetails' with the minimum fields required to make a request.
 --
@@ -15162,7 +15347,7 @@ data VideoLiveStreamingDetails = VideoLiveStreamingDetails'
 videoLiveStreamingDetails
     :: VideoLiveStreamingDetails
 videoLiveStreamingDetails =
-    VideoLiveStreamingDetails'
+  VideoLiveStreamingDetails'
     { _vlsdActualEndTime = Nothing
     , _vlsdConcurrentViewers = Nothing
     , _vlsdScheduledEndTime = Nothing
@@ -15258,7 +15443,8 @@ instance ToJSON VideoLiveStreamingDetails where
 -- | Details about a resource which is being promoted.
 --
 -- /See:/ 'activityContentDetailsPromotedItem' smart constructor.
-data ActivityContentDetailsPromotedItem = ActivityContentDetailsPromotedItem'
+data ActivityContentDetailsPromotedItem =
+  ActivityContentDetailsPromotedItem'
     { _acdpiDestinationURL      :: !(Maybe Text)
     , _acdpiClickTrackingURL    :: !(Maybe Text)
     , _acdpiForecastingURL      :: !(Maybe [Text])
@@ -15269,7 +15455,8 @@ data ActivityContentDetailsPromotedItem = ActivityContentDetailsPromotedItem'
     , _acdpiCreativeViewURL     :: !(Maybe Text)
     , _acdpiImpressionURL       :: !(Maybe [Text])
     , _acdpiCustomCtaButtonText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivityContentDetailsPromotedItem' with the minimum fields required to make a request.
 --
@@ -15297,7 +15484,7 @@ data ActivityContentDetailsPromotedItem = ActivityContentDetailsPromotedItem'
 activityContentDetailsPromotedItem
     :: ActivityContentDetailsPromotedItem
 activityContentDetailsPromotedItem =
-    ActivityContentDetailsPromotedItem'
+  ActivityContentDetailsPromotedItem'
     { _acdpiDestinationURL = Nothing
     , _acdpiClickTrackingURL = Nothing
     , _acdpiForecastingURL = Nothing
@@ -15415,12 +15602,14 @@ instance ToJSON ActivityContentDetailsPromotedItem
 
 --
 -- /See:/ 'sponsorSnippet' smart constructor.
-data SponsorSnippet = SponsorSnippet'
+data SponsorSnippet =
+  SponsorSnippet'
     { _sCumulativeDurationMonths :: !(Maybe (Textual Int32))
     , _sChannelId                :: !(Maybe Text)
     , _sSponsorDetails           :: !(Maybe ChannelProFileDetails)
     , _sSponsorSince             :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SponsorSnippet' with the minimum fields required to make a request.
 --
@@ -15436,7 +15625,7 @@ data SponsorSnippet = SponsorSnippet'
 sponsorSnippet
     :: SponsorSnippet
 sponsorSnippet =
-    SponsorSnippet'
+  SponsorSnippet'
     { _sCumulativeDurationMonths = Nothing
     , _sChannelId = Nothing
     , _sSponsorDetails = Nothing
@@ -15492,11 +15681,13 @@ instance ToJSON SponsorSnippet where
 -- | Geographical coordinates of a point, in WGS84.
 --
 -- /See:/ 'geoPoint' smart constructor.
-data GeoPoint = GeoPoint'
+data GeoPoint =
+  GeoPoint'
     { _gpLatitude  :: !(Maybe (Textual Double))
     , _gpAltitude  :: !(Maybe (Textual Double))
     , _gpLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GeoPoint' with the minimum fields required to make a request.
 --
@@ -15510,11 +15701,8 @@ data GeoPoint = GeoPoint'
 geoPoint
     :: GeoPoint
 geoPoint =
-    GeoPoint'
-    { _gpLatitude = Nothing
-    , _gpAltitude = Nothing
-    , _gpLongitude = Nothing
-    }
+  GeoPoint'
+    {_gpLatitude = Nothing, _gpAltitude = Nothing, _gpLongitude = Nothing}
 
 -- | Latitude in degrees.
 gpLatitude :: Lens' GeoPoint (Maybe Double)
@@ -15553,9 +15741,11 @@ instance ToJSON GeoPoint where
 -- | Comments written in (direct or indirect) reply to the top level comment.
 --
 -- /See:/ 'commentThreadReplies' smart constructor.
-newtype CommentThreadReplies = CommentThreadReplies'
+newtype CommentThreadReplies =
+  CommentThreadReplies'
     { _ctrComments :: Maybe [Comment]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentThreadReplies' with the minimum fields required to make a request.
 --
@@ -15564,10 +15754,7 @@ newtype CommentThreadReplies = CommentThreadReplies'
 -- * 'ctrComments'
 commentThreadReplies
     :: CommentThreadReplies
-commentThreadReplies =
-    CommentThreadReplies'
-    { _ctrComments = Nothing
-    }
+commentThreadReplies = CommentThreadReplies' {_ctrComments = Nothing}
 
 -- | A limited number of replies. Unless the number of replies returned
 -- equals total_reply_count in the snippet the returned replies are only a
@@ -15593,9 +15780,11 @@ instance ToJSON CommentThreadReplies where
 -- | ChannelSection localization setting
 --
 -- /See:/ 'channelSectionLocalization' smart constructor.
-newtype ChannelSectionLocalization = ChannelSectionLocalization'
+newtype ChannelSectionLocalization =
+  ChannelSectionLocalization'
     { _cslTitle :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelSectionLocalization' with the minimum fields required to make a request.
 --
@@ -15604,10 +15793,7 @@ newtype ChannelSectionLocalization = ChannelSectionLocalization'
 -- * 'cslTitle'
 channelSectionLocalization
     :: ChannelSectionLocalization
-channelSectionLocalization =
-    ChannelSectionLocalization'
-    { _cslTitle = Nothing
-    }
+channelSectionLocalization = ChannelSectionLocalization' {_cslTitle = Nothing}
 
 -- | The localized strings for channel section\'s title.
 cslTitle :: Lens' ChannelSectionLocalization (Maybe Text)
@@ -15625,10 +15811,12 @@ instance ToJSON ChannelSectionLocalization where
 
 --
 -- /See:/ 'videoAbuseReportSecondaryReason' smart constructor.
-data VideoAbuseReportSecondaryReason = VideoAbuseReportSecondaryReason'
+data VideoAbuseReportSecondaryReason =
+  VideoAbuseReportSecondaryReason'
     { _varsrId    :: !(Maybe Text)
     , _varsrLabel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoAbuseReportSecondaryReason' with the minimum fields required to make a request.
 --
@@ -15640,10 +15828,7 @@ data VideoAbuseReportSecondaryReason = VideoAbuseReportSecondaryReason'
 videoAbuseReportSecondaryReason
     :: VideoAbuseReportSecondaryReason
 videoAbuseReportSecondaryReason =
-    VideoAbuseReportSecondaryReason'
-    { _varsrId = Nothing
-    , _varsrLabel = Nothing
-    }
+  VideoAbuseReportSecondaryReason' {_varsrId = Nothing, _varsrLabel = Nothing}
 
 -- | The ID of this abuse report secondary reason.
 varsrId :: Lens' VideoAbuseReportSecondaryReason (Maybe Text)
@@ -15673,10 +15858,12 @@ instance ToJSON VideoAbuseReportSecondaryReason where
 -- relevant for YouTube Partners linked with the channel.
 --
 -- /See:/ 'channelContentOwnerDetails' smart constructor.
-data ChannelContentOwnerDetails = ChannelContentOwnerDetails'
+data ChannelContentOwnerDetails =
+  ChannelContentOwnerDetails'
     { _ccodTimeLinked   :: !(Maybe DateTime')
     , _ccodContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelContentOwnerDetails' with the minimum fields required to make a request.
 --
@@ -15688,10 +15875,8 @@ data ChannelContentOwnerDetails = ChannelContentOwnerDetails'
 channelContentOwnerDetails
     :: ChannelContentOwnerDetails
 channelContentOwnerDetails =
-    ChannelContentOwnerDetails'
-    { _ccodTimeLinked = Nothing
-    , _ccodContentOwner = Nothing
-    }
+  ChannelContentOwnerDetails'
+    {_ccodTimeLinked = Nothing, _ccodContentOwner = Nothing}
 
 -- | The date and time of when the channel was linked to the content owner.
 -- The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -15725,10 +15910,12 @@ instance ToJSON ChannelContentOwnerDetails where
 -- human-readable name.
 --
 -- /See:/ 'i18nLanguageSnippet' smart constructor.
-data I18nLanguageSnippet = I18nLanguageSnippet'
+data I18nLanguageSnippet =
+  I18nLanguageSnippet'
     { _ilsHl   :: !(Maybe Text)
     , _ilsName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'I18nLanguageSnippet' with the minimum fields required to make a request.
 --
@@ -15740,10 +15927,7 @@ data I18nLanguageSnippet = I18nLanguageSnippet'
 i18nLanguageSnippet
     :: I18nLanguageSnippet
 i18nLanguageSnippet =
-    I18nLanguageSnippet'
-    { _ilsHl = Nothing
-    , _ilsName = Nothing
-    }
+  I18nLanguageSnippet' {_ilsHl = Nothing, _ilsName = Nothing}
 
 -- | A short BCP-47 code that uniquely identifies a language.
 ilsHl :: Lens' I18nLanguageSnippet (Maybe Text)
@@ -15768,10 +15952,12 @@ instance ToJSON I18nLanguageSnippet where
 
 --
 -- /See:/ 'liveChatPollVotedDetails' smart constructor.
-data LiveChatPollVotedDetails = LiveChatPollVotedDetails'
+data LiveChatPollVotedDetails =
+  LiveChatPollVotedDetails'
     { _lcpvdPollId :: !(Maybe Text)
     , _lcpvdItemId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatPollVotedDetails' with the minimum fields required to make a request.
 --
@@ -15783,10 +15969,7 @@ data LiveChatPollVotedDetails = LiveChatPollVotedDetails'
 liveChatPollVotedDetails
     :: LiveChatPollVotedDetails
 liveChatPollVotedDetails =
-    LiveChatPollVotedDetails'
-    { _lcpvdPollId = Nothing
-    , _lcpvdItemId = Nothing
-    }
+  LiveChatPollVotedDetails' {_lcpvdPollId = Nothing, _lcpvdItemId = Nothing}
 
 -- | The poll the user voted on.
 lcpvdPollId :: Lens' LiveChatPollVotedDetails (Maybe Text)

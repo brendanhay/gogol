@@ -69,7 +69,8 @@ type RolesListResource =
 -- | Lists the Roles defined on a resource.
 --
 -- /See:/ 'rolesList' smart constructor.
-data RolesList = RolesList'
+data RolesList =
+  RolesList'
     { _rlParent         :: !(Maybe Text)
     , _rlXgafv          :: !(Maybe Xgafv)
     , _rlUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,8 @@ data RolesList = RolesList'
     , _rlPageToken      :: !(Maybe Text)
     , _rlPageSize       :: !(Maybe (Textual Int32))
     , _rlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RolesList' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ data RolesList = RolesList'
 rolesList
     :: RolesList
 rolesList =
-    RolesList'
+  RolesList'
     { _rlParent = Nothing
     , _rlXgafv = Nothing
     , _rlUploadProtocol = Nothing

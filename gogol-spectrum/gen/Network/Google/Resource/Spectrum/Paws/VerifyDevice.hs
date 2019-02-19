@@ -57,9 +57,11 @@ type PawsVerifyDeviceResource =
 -- configurations, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsVerifyDevice' smart constructor.
-newtype PawsVerifyDevice = PawsVerifyDevice'
+newtype PawsVerifyDevice =
+  PawsVerifyDevice'
     { _pvdPayload :: PawsVerifyDeviceRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsVerifyDevice' with the minimum fields required to make a request.
 --
@@ -69,10 +71,7 @@ newtype PawsVerifyDevice = PawsVerifyDevice'
 pawsVerifyDevice
     :: PawsVerifyDeviceRequest -- ^ 'pvdPayload'
     -> PawsVerifyDevice
-pawsVerifyDevice pPvdPayload_ =
-    PawsVerifyDevice'
-    { _pvdPayload = pPvdPayload_
-    }
+pawsVerifyDevice pPvdPayload_ = PawsVerifyDevice' {_pvdPayload = pPvdPayload_}
 
 -- | Multipart request metadata.
 pvdPayload :: Lens' PawsVerifyDevice PawsVerifyDeviceRequest

@@ -65,14 +65,16 @@ type RolesQueryGrantableRolesResource =
 -- that resource.
 --
 -- /See:/ 'rolesQueryGrantableRoles' smart constructor.
-data RolesQueryGrantableRoles = RolesQueryGrantableRoles'
+data RolesQueryGrantableRoles =
+  RolesQueryGrantableRoles'
     { _rqgrXgafv          :: !(Maybe Xgafv)
     , _rqgrUploadProtocol :: !(Maybe Text)
     , _rqgrAccessToken    :: !(Maybe Text)
     , _rqgrUploadType     :: !(Maybe Text)
     , _rqgrPayload        :: !QueryGrantableRolesRequest
     , _rqgrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RolesQueryGrantableRoles' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ rolesQueryGrantableRoles
     :: QueryGrantableRolesRequest -- ^ 'rqgrPayload'
     -> RolesQueryGrantableRoles
 rolesQueryGrantableRoles pRqgrPayload_ =
-    RolesQueryGrantableRoles'
+  RolesQueryGrantableRoles'
     { _rqgrXgafv = Nothing
     , _rqgrUploadProtocol = Nothing
     , _rqgrAccessToken = Nothing

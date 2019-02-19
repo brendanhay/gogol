@@ -64,10 +64,12 @@ type UsersGenerateAuthenticationTokenResource =
 -- EMM-managed accounts.
 --
 -- /See:/ 'usersGenerateAuthenticationToken' smart constructor.
-data UsersGenerateAuthenticationToken = UsersGenerateAuthenticationToken'
+data UsersGenerateAuthenticationToken =
+  UsersGenerateAuthenticationToken'
     { _ugatEnterpriseId :: !Text
     , _ugatUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersGenerateAuthenticationToken' with the minimum fields required to make a request.
 --
@@ -81,10 +83,8 @@ usersGenerateAuthenticationToken
     -> Text -- ^ 'ugatUserId'
     -> UsersGenerateAuthenticationToken
 usersGenerateAuthenticationToken pUgatEnterpriseId_ pUgatUserId_ =
-    UsersGenerateAuthenticationToken'
-    { _ugatEnterpriseId = pUgatEnterpriseId_
-    , _ugatUserId = pUgatUserId_
-    }
+  UsersGenerateAuthenticationToken'
+    {_ugatEnterpriseId = pUgatEnterpriseId_, _ugatUserId = pUgatUserId_}
 
 -- | The ID of the enterprise.
 ugatEnterpriseId :: Lens' UsersGenerateAuthenticationToken Text
@@ -98,7 +98,8 @@ ugatUserId
   = lens _ugatUserId (\ s a -> s{_ugatUserId = a})
 
 instance GoogleRequest
-         UsersGenerateAuthenticationToken where
+           UsersGenerateAuthenticationToken
+         where
         type Rs UsersGenerateAuthenticationToken =
              AuthenticationToken
         type Scopes UsersGenerateAuthenticationToken =

@@ -55,11 +55,13 @@ type CaptionsDeleteResource =
 -- | Deletes a specified caption track.
 --
 -- /See:/ 'captionsDelete' smart constructor.
-data CaptionsDelete = CaptionsDelete'
+data CaptionsDelete =
+  CaptionsDelete'
     { _cddOnBehalfOf             :: !(Maybe Text)
     , _cddOnBehalfOfContentOwner :: !(Maybe Text)
     , _cddId                     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CaptionsDelete' with the minimum fields required to make a request.
 --
@@ -74,7 +76,7 @@ captionsDelete
     :: Text -- ^ 'cddId'
     -> CaptionsDelete
 captionsDelete pCddId_ =
-    CaptionsDelete'
+  CaptionsDelete'
     { _cddOnBehalfOf = Nothing
     , _cddOnBehalfOfContentOwner = Nothing
     , _cddId = pCddId_

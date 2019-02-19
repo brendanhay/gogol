@@ -64,14 +64,16 @@ type ObjectAccessControlsPatchResource =
 -- | Patches an ACL entry on the specified object.
 --
 -- /See:/ 'objectAccessControlsPatch' smart constructor.
-data ObjectAccessControlsPatch = ObjectAccessControlsPatch'
+data ObjectAccessControlsPatch =
+  ObjectAccessControlsPatch'
     { _oacpBucket      :: !Text
     , _oacpPayload     :: !ObjectAccessControl
     , _oacpUserProject :: !(Maybe Text)
     , _oacpObject      :: !Text
     , _oacpEntity      :: !Text
     , _oacpGeneration  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ObjectAccessControlsPatch' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ objectAccessControlsPatch
     -> Text -- ^ 'oacpEntity'
     -> ObjectAccessControlsPatch
 objectAccessControlsPatch pOacpBucket_ pOacpPayload_ pOacpObject_ pOacpEntity_ =
-    ObjectAccessControlsPatch'
+  ObjectAccessControlsPatch'
     { _oacpBucket = pOacpBucket_
     , _oacpPayload = pOacpPayload_
     , _oacpUserProject = Nothing

@@ -56,10 +56,12 @@ type UsersMessagesDeleteResource =
 -- operation cannot be undone. Prefer messages.trash instead.
 --
 -- /See:/ 'usersMessagesDelete' smart constructor.
-data UsersMessagesDelete = UsersMessagesDelete'
+data UsersMessagesDelete =
+  UsersMessagesDelete'
     { _umdUserId :: !Text
     , _umdId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersMessagesDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ usersMessagesDelete
     :: Text -- ^ 'umdId'
     -> UsersMessagesDelete
 usersMessagesDelete pUmdId_ =
-    UsersMessagesDelete'
-    { _umdUserId = "me"
-    , _umdId = pUmdId_
-    }
+  UsersMessagesDelete' {_umdUserId = "me", _umdId = pUmdId_}
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

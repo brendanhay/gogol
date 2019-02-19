@@ -58,12 +58,14 @@ type LiveBroadcastsInsertResource =
 -- | Creates a broadcast.
 --
 -- /See:/ 'liveBroadcastsInsert' smart constructor.
-data LiveBroadcastsInsert = LiveBroadcastsInsert'
+data LiveBroadcastsInsert =
+  LiveBroadcastsInsert'
     { _lbiPart                          :: !Text
     , _lbiPayload                       :: !LiveBroadcast
     , _lbiOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcastsInsert' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ liveBroadcastsInsert
     -> LiveBroadcast -- ^ 'lbiPayload'
     -> LiveBroadcastsInsert
 liveBroadcastsInsert pLbiPart_ pLbiPayload_ =
-    LiveBroadcastsInsert'
+  LiveBroadcastsInsert'
     { _lbiPart = pLbiPart_
     , _lbiPayload = pLbiPayload_
     , _lbiOnBehalfOfContentOwner = Nothing

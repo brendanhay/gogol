@@ -63,7 +63,8 @@ type ProjectsDeploymentsDeleteResource =
 -- | Deletes a deployment of an Apps Script project.
 --
 -- /See:/ 'projectsDeploymentsDelete' smart constructor.
-data ProjectsDeploymentsDelete = ProjectsDeploymentsDelete'
+data ProjectsDeploymentsDelete =
+  ProjectsDeploymentsDelete'
     { _pddDeploymentId   :: !Text
     , _pddXgafv          :: !(Maybe Xgafv)
     , _pddUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsDeploymentsDelete = ProjectsDeploymentsDelete'
     , _pddUploadType     :: !(Maybe Text)
     , _pddScriptId       :: !Text
     , _pddCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDeploymentsDelete' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsDeploymentsDelete
     -> Text -- ^ 'pddScriptId'
     -> ProjectsDeploymentsDelete
 projectsDeploymentsDelete pPddDeploymentId_ pPddScriptId_ =
-    ProjectsDeploymentsDelete'
+  ProjectsDeploymentsDelete'
     { _pddDeploymentId = pPddDeploymentId_
     , _pddXgafv = Nothing
     , _pddUploadProtocol = Nothing

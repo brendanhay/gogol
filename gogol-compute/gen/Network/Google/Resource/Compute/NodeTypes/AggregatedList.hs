@@ -62,13 +62,15 @@ type NodeTypesAggregatedListResource =
 -- | Retrieves an aggregated list of node types.
 --
 -- /See:/ 'nodeTypesAggregatedList' smart constructor.
-data NodeTypesAggregatedList = NodeTypesAggregatedList'
+data NodeTypesAggregatedList =
+  NodeTypesAggregatedList'
     { _ntalOrderBy    :: !(Maybe Text)
     , _ntalProject    :: !Text
     , _ntalFilter     :: !(Maybe Text)
     , _ntalPageToken  :: !(Maybe Text)
     , _ntalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypesAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ nodeTypesAggregatedList
     :: Text -- ^ 'ntalProject'
     -> NodeTypesAggregatedList
 nodeTypesAggregatedList pNtalProject_ =
-    NodeTypesAggregatedList'
+  NodeTypesAggregatedList'
     { _ntalOrderBy = Nothing
     , _ntalProject = pNtalProject_
     , _ntalFilter = Nothing

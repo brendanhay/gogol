@@ -76,13 +76,15 @@ type CaptionsDownloadResource =
 -- tlang parameter.
 --
 -- /See:/ 'captionsDownload' smart constructor.
-data CaptionsDownload = CaptionsDownload'
+data CaptionsDownload =
+  CaptionsDownload'
     { _capaOnBehalfOf             :: !(Maybe Text)
     , _capaTlang                  :: !(Maybe Text)
     , _capaOnBehalfOfContentOwner :: !(Maybe Text)
     , _capaId                     :: !Text
     , _capaTfmt                   :: !(Maybe CaptionsDownloadTfmt)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CaptionsDownload' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ captionsDownload
     :: Text -- ^ 'capaId'
     -> CaptionsDownload
 captionsDownload pCapaId_ =
-    CaptionsDownload'
+  CaptionsDownload'
     { _capaOnBehalfOf = Nothing
     , _capaTlang = Nothing
     , _capaOnBehalfOfContentOwner = Nothing
@@ -169,7 +171,8 @@ instance GoogleRequest CaptionsDownload where
                       mempty
 
 instance GoogleRequest
-         (MediaDownload CaptionsDownload) where
+           (MediaDownload CaptionsDownload)
+         where
         type Rs (MediaDownload CaptionsDownload) = Stream
         type Scopes (MediaDownload CaptionsDownload) =
              Scopes CaptionsDownload

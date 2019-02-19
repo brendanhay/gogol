@@ -481,33 +481,33 @@ driveService
 
 -- | View metadata for files in your Google Drive
 driveMetadataReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata.readonly"]
-driveMetadataReadOnlyScope = Proxy;
+driveMetadataReadOnlyScope = Proxy
 
 -- | View the photos, videos and albums in your Google Photos
 drivePhotosReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.photos.readonly"]
-drivePhotosReadOnlyScope = Proxy;
+drivePhotosReadOnlyScope = Proxy
 
 -- | View and manage its own configuration data in your Google Drive
 driveAppDataScope :: Proxy '["https://www.googleapis.com/auth/drive.appdata"]
-driveAppDataScope = Proxy;
+driveAppDataScope = Proxy
 
 -- | See and download all your Google Drive files
 driveReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-driveReadOnlyScope = Proxy;
+driveReadOnlyScope = Proxy
 
 -- | See, edit, create, and delete all of your Google Drive files
 driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Proxy;
+driveScope = Proxy
 
 -- | View and manage Google Drive files and folders that you have opened or
 -- created with this app
 driveFileScope :: Proxy '["https://www.googleapis.com/auth/drive.file"]
-driveFileScope = Proxy;
+driveFileScope = Proxy
 
 -- | View and manage metadata of files in your Google Drive
 driveMetadataScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata"]
-driveMetadataScope = Proxy;
+driveMetadataScope = Proxy
 
 -- | Modify your Google Apps Script scripts\' behavior
 driveScriptsScope :: Proxy '["https://www.googleapis.com/auth/drive.scripts"]
-driveScriptsScope = Proxy;
+driveScriptsScope = Proxy

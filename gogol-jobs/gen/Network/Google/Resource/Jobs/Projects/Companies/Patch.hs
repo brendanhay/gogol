@@ -66,7 +66,8 @@ type ProjectsCompaniesPatchResource =
 -- only then re-create them.
 --
 -- /See:/ 'projectsCompaniesPatch' smart constructor.
-data ProjectsCompaniesPatch = ProjectsCompaniesPatch'
+data ProjectsCompaniesPatch =
+  ProjectsCompaniesPatch'
     { _pcpXgafv          :: !(Maybe Xgafv)
     , _pcpUploadProtocol :: !(Maybe Text)
     , _pcpAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsCompaniesPatch = ProjectsCompaniesPatch'
     , _pcpPayload        :: !UpdateCompanyRequest
     , _pcpName           :: !Text
     , _pcpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsCompaniesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsCompaniesPatch
     -> Text -- ^ 'pcpName'
     -> ProjectsCompaniesPatch
 projectsCompaniesPatch pPcpPayload_ pPcpName_ =
-    ProjectsCompaniesPatch'
+  ProjectsCompaniesPatch'
     { _pcpXgafv = Nothing
     , _pcpUploadProtocol = Nothing
     , _pcpAccessToken = Nothing

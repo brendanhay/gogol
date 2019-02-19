@@ -68,7 +68,8 @@ type ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfigResource
 -- and its metadata.
 --
 -- /See:/ 'projectsLocationsRegistriesDevicesModifyCloudToDeviceConfig' smart constructor.
-data ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig = ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig'
+data ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig =
+  ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig'
     { _plrdmctdcXgafv          :: !(Maybe Xgafv)
     , _plrdmctdcUploadProtocol :: !(Maybe Text)
     , _plrdmctdcAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig = ProjectsLocat
     , _plrdmctdcPayload        :: !ModifyCloudToDeviceConfigRequest
     , _plrdmctdcName           :: !Text
     , _plrdmctdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsLocationsRegistriesDevicesModifyCloudToDeviceConfig
     -> Text -- ^ 'plrdmctdcName'
     -> ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig
 projectsLocationsRegistriesDevicesModifyCloudToDeviceConfig pPlrdmctdcPayload_ pPlrdmctdcName_ =
-    ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig'
+  ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig'
     { _plrdmctdcXgafv = Nothing
     , _plrdmctdcUploadProtocol = Nothing
     , _plrdmctdcAccessToken = Nothing
@@ -156,7 +158,7 @@ plrdmctdcCallback
       (\ s a -> s{_plrdmctdcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig
+           ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig
          where
         type Rs
                ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig

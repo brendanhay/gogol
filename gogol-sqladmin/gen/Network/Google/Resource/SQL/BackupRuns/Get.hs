@@ -57,11 +57,13 @@ type BackupRunsGetResource =
 -- | Retrieves a resource containing information about a backup run.
 --
 -- /See:/ 'backupRunsGet' smart constructor.
-data BackupRunsGet = BackupRunsGet'
+data BackupRunsGet =
+  BackupRunsGet'
     { _brgProject  :: !Text
     , _brgId       :: !(Textual Int64)
     , _brgInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackupRunsGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ backupRunsGet
     -> Text -- ^ 'brgInstance'
     -> BackupRunsGet
 backupRunsGet pBrgProject_ pBrgId_ pBrgInstance_ =
-    BackupRunsGet'
+  BackupRunsGet'
     { _brgProject = pBrgProject_
     , _brgId = _Coerce # pBrgId_
     , _brgInstance = pBrgInstance_

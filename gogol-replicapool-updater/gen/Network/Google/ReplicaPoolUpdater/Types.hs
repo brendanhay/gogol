@@ -175,16 +175,16 @@ replicaPoolUpdaterService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View and manage replica pools
 replicapoolScope :: Proxy '["https://www.googleapis.com/auth/replicapool"]
-replicapoolScope = Proxy;
+replicapoolScope = Proxy
 
 -- | View replica pools
 replicapoolReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
-replicapoolReadOnlyScope = Proxy;
+replicapoolReadOnlyScope = Proxy

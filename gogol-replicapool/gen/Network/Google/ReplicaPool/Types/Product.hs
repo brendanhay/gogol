@@ -23,13 +23,15 @@ import           Network.Google.ReplicaPool.Types.Sum
 -- | The current status of a Replica.
 --
 -- /See:/ 'replicaStatus' smart constructor.
-data ReplicaStatus = ReplicaStatus'
+data ReplicaStatus =
+  ReplicaStatus'
     { _rsState           :: !(Maybe Text)
     , _rsTemplateVersion :: !(Maybe Text)
     , _rsVMLink          :: !(Maybe Text)
     , _rsVMStartTime     :: !(Maybe Text)
     , _rsDetails         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplicaStatus' with the minimum fields required to make a request.
 --
@@ -47,7 +49,7 @@ data ReplicaStatus = ReplicaStatus'
 replicaStatus
     :: ReplicaStatus
 replicaStatus =
-    ReplicaStatus'
+  ReplicaStatus'
     { _rsState = Nothing
     , _rsTemplateVersion = Nothing
     , _rsVMLink = Nothing
@@ -105,10 +107,12 @@ instance ToJSON ReplicaStatus where
 -- | Specifies how to attach a disk to a Replica.
 --
 -- /See:/ 'diskAttachment' smart constructor.
-data DiskAttachment = DiskAttachment'
+data DiskAttachment =
+  DiskAttachment'
     { _daDeviceName :: !(Maybe Text)
     , _daIndex      :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskAttachment' with the minimum fields required to make a request.
 --
@@ -119,11 +123,7 @@ data DiskAttachment = DiskAttachment'
 -- * 'daIndex'
 diskAttachment
     :: DiskAttachment
-diskAttachment =
-    DiskAttachment'
-    { _daDeviceName = Nothing
-    , _daIndex = Nothing
-    }
+diskAttachment = DiskAttachment' {_daDeviceName = Nothing, _daIndex = Nothing}
 
 -- | The device name of this disk.
 daDeviceName :: Lens' DiskAttachment (Maybe Text)
@@ -153,9 +153,11 @@ instance ToJSON DiskAttachment where
 
 --
 -- /See:/ 'poolsDeleteRequest' smart constructor.
-newtype PoolsDeleteRequest = PoolsDeleteRequest'
+newtype PoolsDeleteRequest =
+  PoolsDeleteRequest'
     { _pdrAbandonInstances :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PoolsDeleteRequest' with the minimum fields required to make a request.
 --
@@ -164,10 +166,7 @@ newtype PoolsDeleteRequest = PoolsDeleteRequest'
 -- * 'pdrAbandonInstances'
 poolsDeleteRequest
     :: PoolsDeleteRequest
-poolsDeleteRequest =
-    PoolsDeleteRequest'
-    { _pdrAbandonInstances = Nothing
-    }
+poolsDeleteRequest = PoolsDeleteRequest' {_pdrAbandonInstances = Nothing}
 
 -- | If there are instances you would like to keep, you can specify them
 -- here. These instances won\'t be deleted, but the associated replica
@@ -194,7 +193,8 @@ instance ToJSON PoolsDeleteRequest where
 
 --
 -- /See:/ 'healthCheck' smart constructor.
-data HealthCheck = HealthCheck'
+data HealthCheck =
+  HealthCheck'
     { _hcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _hcPath               :: !(Maybe Text)
     , _hcCheckIntervalSec   :: !(Maybe (Textual Int32))
@@ -204,7 +204,8 @@ data HealthCheck = HealthCheck'
     , _hcDescription        :: !(Maybe Text)
     , _hcUnhealthyThreshold :: !(Maybe (Textual Int32))
     , _hcPort               :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
 --
@@ -230,7 +231,7 @@ data HealthCheck = HealthCheck'
 healthCheck
     :: HealthCheck
 healthCheck =
-    HealthCheck'
+  HealthCheck'
     { _hcHealthyThreshold = Nothing
     , _hcPath = Nothing
     , _hcCheckIntervalSec = Nothing
@@ -330,10 +331,12 @@ instance ToJSON HealthCheck where
 -- corresponding Compute Engine Instance resource.
 --
 -- /See:/ 'tag' smart constructor.
-data Tag = Tag'
+data Tag =
+  Tag'
     { _tFingerPrint :: !(Maybe Text)
     , _tItems       :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Tag' with the minimum fields required to make a request.
 --
@@ -344,11 +347,7 @@ data Tag = Tag'
 -- * 'tItems'
 tag
     :: Tag
-tag =
-    Tag'
-    { _tFingerPrint = Nothing
-    , _tItems = Nothing
-    }
+tag = Tag' {_tFingerPrint = Nothing, _tItems = Nothing}
 
 -- | The fingerprint of the tag. Required for updating the list of tags.
 tFingerPrint :: Lens' Tag (Maybe Text)
@@ -378,11 +377,13 @@ instance ToJSON Tag where
 -- | Initialization parameters for creating a new disk.
 --
 -- /See:/ 'newDiskInitializeParams' smart constructor.
-data NewDiskInitializeParams = NewDiskInitializeParams'
+data NewDiskInitializeParams =
+  NewDiskInitializeParams'
     { _ndipSourceImage :: !(Maybe Text)
     , _ndipDiskSizeGb  :: !(Maybe (Textual Int64))
     , _ndipDiskType    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NewDiskInitializeParams' with the minimum fields required to make a request.
 --
@@ -396,7 +397,7 @@ data NewDiskInitializeParams = NewDiskInitializeParams'
 newDiskInitializeParams
     :: NewDiskInitializeParams
 newDiskInitializeParams =
-    NewDiskInitializeParams'
+  NewDiskInitializeParams'
     { _ndipSourceImage = Nothing
     , _ndipDiskSizeGb = Nothing
     , _ndipDiskType = Nothing
@@ -448,10 +449,12 @@ instance ToJSON NewDiskInitializeParams where
 -- to the metadata on the corresponding Compute Engine resource.
 --
 -- /See:/ 'metadataItem' smart constructor.
-data MetadataItem = MetadataItem'
+data MetadataItem =
+  MetadataItem'
     { _miValue :: !(Maybe Text)
     , _miKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetadataItem' with the minimum fields required to make a request.
 --
@@ -462,11 +465,7 @@ data MetadataItem = MetadataItem'
 -- * 'miKey'
 metadataItem
     :: MetadataItem
-metadataItem =
-    MetadataItem'
-    { _miValue = Nothing
-    , _miKey = Nothing
-    }
+metadataItem = MetadataItem' {_miValue = Nothing, _miKey = Nothing}
 
 -- | A metadata value.
 miValue :: Lens' MetadataItem (Maybe Text)
@@ -493,11 +492,13 @@ instance ToJSON MetadataItem where
 -- directly create replicas.
 --
 -- /See:/ 'replica' smart constructor.
-data Replica = Replica'
+data Replica =
+  Replica'
     { _rStatus   :: !(Maybe ReplicaStatus)
     , _rSelfLink :: !(Maybe Text)
     , _rName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Replica' with the minimum fields required to make a request.
 --
@@ -510,12 +511,7 @@ data Replica = Replica'
 -- * 'rName'
 replica
     :: Replica
-replica =
-    Replica'
-    { _rStatus = Nothing
-    , _rSelfLink = Nothing
-    , _rName = Nothing
-    }
+replica = Replica' {_rStatus = Nothing, _rSelfLink = Nothing, _rName = Nothing}
 
 -- | [Output Only] Last known status of the Replica.
 rStatus :: Lens' Replica (Maybe ReplicaStatus)
@@ -550,11 +546,13 @@ instance ToJSON Replica where
 -- NetworkInterface on the corresponding Compute Engine resource.
 --
 -- /See:/ 'networkInterface' smart constructor.
-data NetworkInterface = NetworkInterface'
+data NetworkInterface =
+  NetworkInterface'
     { _niNetwork       :: !(Maybe Text)
     , _niNetworkIP     :: !(Maybe Text)
     , _niAccessConfigs :: !(Maybe [AccessConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkInterface' with the minimum fields required to make a request.
 --
@@ -568,11 +566,8 @@ data NetworkInterface = NetworkInterface'
 networkInterface
     :: NetworkInterface
 networkInterface =
-    NetworkInterface'
-    { _niNetwork = Nothing
-    , _niNetworkIP = Nothing
-    , _niAccessConfigs = Nothing
-    }
+  NetworkInterface'
+    {_niNetwork = Nothing, _niNetworkIP = Nothing, _niAccessConfigs = Nothing}
 
 -- | Name the Network resource to which this interface applies.
 niNetwork :: Lens' NetworkInterface (Maybe Text)
@@ -614,10 +609,12 @@ instance ToJSON NetworkInterface where
 -- the Pool in READ_ONLY mode.
 --
 -- /See:/ 'existingDisk' smart constructor.
-data ExistingDisk = ExistingDisk'
+data ExistingDisk =
+  ExistingDisk'
     { _edAttachment :: !(Maybe DiskAttachment)
     , _edSource     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExistingDisk' with the minimum fields required to make a request.
 --
@@ -628,11 +625,7 @@ data ExistingDisk = ExistingDisk'
 -- * 'edSource'
 existingDisk
     :: ExistingDisk
-existingDisk =
-    ExistingDisk'
-    { _edAttachment = Nothing
-    , _edSource = Nothing
-    }
+existingDisk = ExistingDisk' {_edAttachment = Nothing, _edSource = Nothing}
 
 -- | How the disk will be attached to the Replica.
 edAttachment :: Lens' ExistingDisk (Maybe DiskAttachment)
@@ -661,11 +654,13 @@ instance ToJSON ExistingDisk where
 -- | An action that gets executed during initialization of the replicas.
 --
 -- /See:/ 'action' smart constructor.
-data Action = Action'
+data Action =
+  Action'
     { _aCommands            :: !(Maybe [Text])
     , _aTimeoutMilliSeconds :: !(Maybe (Textual Int32))
     , _aEnvVariables        :: !(Maybe [EnvVariable])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Action' with the minimum fields required to make a request.
 --
@@ -679,7 +674,7 @@ data Action = Action'
 action
     :: Action
 action =
-    Action'
+  Action'
     { _aCommands = Nothing
     , _aTimeoutMilliSeconds = Nothing
     , _aEnvVariables = Nothing
@@ -732,7 +727,8 @@ instance ToJSON Action where
 
 --
 -- /See:/ 'pool' smart constructor.
-data Pool = Pool'
+data Pool =
+  Pool'
     { _pResourceViews      :: !(Maybe [Text])
     , _pNumReplicas        :: !(Maybe (Textual Int32))
     , _pTargetPool         :: !(Maybe Text)
@@ -748,7 +744,8 @@ data Pool = Pool'
     , _pTargetPools        :: !(Maybe [Text])
     , _pDescription        :: !(Maybe Text)
     , _pHealthChecks       :: !(Maybe [HealthCheck])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Pool' with the minimum fields required to make a request.
 --
@@ -786,7 +783,7 @@ data Pool = Pool'
 pool
     :: Pool
 pool =
-    Pool'
+  Pool'
     { _pResourceViews = Nothing
     , _pNumReplicas = Nothing
     , _pTargetPool = Nothing
@@ -953,10 +950,12 @@ instance ToJSON Pool where
 -- resource.
 --
 -- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount'
+data ServiceAccount =
+  ServiceAccount'
     { _saEmail  :: !(Maybe Text)
     , _saScopes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
@@ -967,11 +966,7 @@ data ServiceAccount = ServiceAccount'
 -- * 'saScopes'
 serviceAccount
     :: ServiceAccount
-serviceAccount =
-    ServiceAccount'
-    { _saEmail = Nothing
-    , _saScopes = Nothing
-    }
+serviceAccount = ServiceAccount' {_saEmail = Nothing, _saScopes = Nothing}
 
 -- | The service account email address, for example:
 -- 123845678986\'project.gserviceaccount.com
@@ -1004,7 +999,8 @@ instance ToJSON ServiceAccount where
 -- are identical to the corresponding Compute Engine resource.
 --
 -- /See:/ 'vMParams' smart constructor.
-data VMParams = VMParams'
+data VMParams =
+  VMParams'
     { _vmpServiceAccounts   :: !(Maybe [ServiceAccount])
     , _vmpNetworkInterfaces :: !(Maybe [NetworkInterface])
     , _vmpBaseInstanceName  :: !(Maybe Text)
@@ -1016,7 +1012,8 @@ data VMParams = VMParams'
     , _vmpDescription       :: !(Maybe Text)
     , _vmpDisksToCreate     :: !(Maybe [NewDisk])
     , _vmpTags              :: !(Maybe Tag)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VMParams' with the minimum fields required to make a request.
 --
@@ -1046,7 +1043,7 @@ data VMParams = VMParams'
 vMParams
     :: VMParams
 vMParams =
-    VMParams'
+  VMParams'
     { _vmpServiceAccounts = Nothing
     , _vmpNetworkInterfaces = Nothing
     , _vmpBaseInstanceName = Nothing
@@ -1175,10 +1172,12 @@ instance ToJSON VMParams where
 
 --
 -- /See:/ 'replicasListResponse' smart constructor.
-data ReplicasListResponse = ReplicasListResponse'
+data ReplicasListResponse =
+  ReplicasListResponse'
     { _rlrNextPageToken :: !(Maybe Text)
     , _rlrResources     :: !(Maybe [Replica])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplicasListResponse' with the minimum fields required to make a request.
 --
@@ -1190,10 +1189,7 @@ data ReplicasListResponse = ReplicasListResponse'
 replicasListResponse
     :: ReplicasListResponse
 replicasListResponse =
-    ReplicasListResponse'
-    { _rlrNextPageToken = Nothing
-    , _rlrResources = Nothing
-    }
+  ReplicasListResponse' {_rlrNextPageToken = Nothing, _rlrResources = Nothing}
 
 rlrNextPageToken :: Lens' ReplicasListResponse (Maybe Text)
 rlrNextPageToken
@@ -1225,10 +1221,12 @@ instance ToJSON ReplicasListResponse where
 -- corresponding Compute Engine resource.
 --
 -- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata'
+data Metadata =
+  Metadata'
     { _mFingerPrint :: !(Maybe Text)
     , _mItems       :: !(Maybe [MetadataItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
@@ -1239,11 +1237,7 @@ data Metadata = Metadata'
 -- * 'mItems'
 metadata
     :: Metadata
-metadata =
-    Metadata'
-    { _mFingerPrint = Nothing
-    , _mItems = Nothing
-    }
+metadata = Metadata' {_mFingerPrint = Nothing, _mItems = Nothing}
 
 -- | The fingerprint of the metadata. Required for updating the metadata
 -- entries for this instance.
@@ -1274,12 +1268,14 @@ instance ToJSON Metadata where
 -- | The template used for creating replicas in the pool.
 --
 -- /See:/ 'template' smart constructor.
-data Template = Template'
+data Template =
+  Template'
     { _tAction       :: !(Maybe Action)
     , _tVMParams     :: !(Maybe VMParams)
     , _tVersion      :: !(Maybe Text)
     , _tHealthChecks :: !(Maybe [HealthCheck])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Template' with the minimum fields required to make a request.
 --
@@ -1295,7 +1291,7 @@ data Template = Template'
 template
     :: Template
 template =
-    Template'
+  Template'
     { _tAction = Nothing
     , _tVMParams = Nothing
     , _tVersion = Nothing
@@ -1352,11 +1348,13 @@ instance ToJSON Template where
 -- | An environment variable to set for an action.
 --
 -- /See:/ 'envVariable' smart constructor.
-data EnvVariable = EnvVariable'
+data EnvVariable =
+  EnvVariable'
     { _evValue  :: !(Maybe Text)
     , _evName   :: !(Maybe Text)
     , _evHidden :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnvVariable' with the minimum fields required to make a request.
 --
@@ -1370,11 +1368,7 @@ data EnvVariable = EnvVariable'
 envVariable
     :: EnvVariable
 envVariable =
-    EnvVariable'
-    { _evValue = Nothing
-    , _evName = Nothing
-    , _evHidden = Nothing
-    }
+  EnvVariable' {_evValue = Nothing, _evName = Nothing, _evHidden = Nothing}
 
 -- | The value of the variable.
 evValue :: Lens' EnvVariable (Maybe Text)
@@ -1405,9 +1399,11 @@ instance ToJSON EnvVariable where
 
 --
 -- /See:/ 'replicasDeleteRequest' smart constructor.
-newtype ReplicasDeleteRequest = ReplicasDeleteRequest'
+newtype ReplicasDeleteRequest =
+  ReplicasDeleteRequest'
     { _rdrAbandonInstance :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplicasDeleteRequest' with the minimum fields required to make a request.
 --
@@ -1416,10 +1412,7 @@ newtype ReplicasDeleteRequest = ReplicasDeleteRequest'
 -- * 'rdrAbandonInstance'
 replicasDeleteRequest
     :: ReplicasDeleteRequest
-replicasDeleteRequest =
-    ReplicasDeleteRequest'
-    { _rdrAbandonInstance = Nothing
-    }
+replicasDeleteRequest = ReplicasDeleteRequest' {_rdrAbandonInstance = Nothing}
 
 -- | Whether the instance resource represented by this replica should be
 -- deleted or abandoned. If abandoned, the replica will be deleted but the
@@ -1446,11 +1439,13 @@ instance ToJSON ReplicasDeleteRequest where
 -- corresponding Compute Engine resource.
 --
 -- /See:/ 'accessConfig' smart constructor.
-data AccessConfig = AccessConfig'
+data AccessConfig =
+  AccessConfig'
     { _acName  :: !(Maybe Text)
     , _acNATIP :: !(Maybe Text)
     , _acType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessConfig' with the minimum fields required to make a request.
 --
@@ -1464,11 +1459,7 @@ data AccessConfig = AccessConfig'
 accessConfig
     :: AccessConfig
 accessConfig =
-    AccessConfig'
-    { _acName = Nothing
-    , _acNATIP = Nothing
-    , _acType = Nothing
-    }
+  AccessConfig' {_acName = Nothing, _acNATIP = Nothing, _acType = Nothing}
 
 -- | Name of this access configuration.
 acName :: Lens' AccessConfig (Maybe Text)
@@ -1501,10 +1492,12 @@ instance ToJSON AccessConfig where
 -- | A label to apply to this replica pool.
 --
 -- /See:/ 'label' smart constructor.
-data Label = Label'
+data Label =
+  Label'
     { _lValue :: !(Maybe Text)
     , _lKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Label' with the minimum fields required to make a request.
 --
@@ -1515,11 +1508,7 @@ data Label = Label'
 -- * 'lKey'
 label
     :: Label
-label =
-    Label'
-    { _lValue = Nothing
-    , _lKey = Nothing
-    }
+label = Label' {_lValue = Nothing, _lKey = Nothing}
 
 -- | The value of this label.
 lValue :: Lens' Label (Maybe Text)
@@ -1542,10 +1531,12 @@ instance ToJSON Label where
 
 --
 -- /See:/ 'poolsListResponse' smart constructor.
-data PoolsListResponse = PoolsListResponse'
+data PoolsListResponse =
+  PoolsListResponse'
     { _plrNextPageToken :: !(Maybe Text)
     , _plrResources     :: !(Maybe [Pool])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PoolsListResponse' with the minimum fields required to make a request.
 --
@@ -1557,10 +1548,7 @@ data PoolsListResponse = PoolsListResponse'
 poolsListResponse
     :: PoolsListResponse
 poolsListResponse =
-    PoolsListResponse'
-    { _plrNextPageToken = Nothing
-    , _plrResources = Nothing
-    }
+  PoolsListResponse' {_plrNextPageToken = Nothing, _plrResources = Nothing}
 
 plrNextPageToken :: Lens' PoolsListResponse (Maybe Text)
 plrNextPageToken
@@ -1593,12 +1581,14 @@ instance ToJSON PoolsListResponse where
 -- that is created and attached to that Replica in READ_WRITE mode.
 --
 -- /See:/ 'newDisk' smart constructor.
-data NewDisk = NewDisk'
+data NewDisk =
+  NewDisk'
     { _ndBoot             :: !(Maybe Bool)
     , _ndAutoDelete       :: !(Maybe Bool)
     , _ndAttachment       :: !(Maybe DiskAttachment)
     , _ndInitializeParams :: !(Maybe NewDiskInitializeParams)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NewDisk' with the minimum fields required to make a request.
 --
@@ -1614,7 +1604,7 @@ data NewDisk = NewDisk'
 newDisk
     :: NewDisk
 newDisk =
-    NewDisk'
+  NewDisk'
     { _ndBoot = Nothing
     , _ndAutoDelete = Nothing
     , _ndAttachment = Nothing

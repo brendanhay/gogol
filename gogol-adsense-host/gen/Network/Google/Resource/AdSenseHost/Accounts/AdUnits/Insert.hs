@@ -59,11 +59,13 @@ type AccountsAdUnitsInsertResource =
 -- account.
 --
 -- /See:/ 'accountsAdUnitsInsert' smart constructor.
-data AccountsAdUnitsInsert = AccountsAdUnitsInsert'
+data AccountsAdUnitsInsert =
+  AccountsAdUnitsInsert'
     { _aauiPayload    :: !AdUnit
     , _aauiAdClientId :: !Text
     , _aauiAccountId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsAdUnitsInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ accountsAdUnitsInsert
     -> Text -- ^ 'aauiAccountId'
     -> AccountsAdUnitsInsert
 accountsAdUnitsInsert pAauiPayload_ pAauiAdClientId_ pAauiAccountId_ =
-    AccountsAdUnitsInsert'
+  AccountsAdUnitsInsert'
     { _aauiPayload = pAauiPayload_
     , _aauiAdClientId = pAauiAdClientId_
     , _aauiAccountId = pAauiAccountId_

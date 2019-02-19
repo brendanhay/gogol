@@ -69,7 +69,8 @@ type MattersHoldsUpdateResource =
 -- covers individual accounts. Accounts listed in the hold will be ignored.
 --
 -- /See:/ 'mattersHoldsUpdate' smart constructor.
-data MattersHoldsUpdate = MattersHoldsUpdate'
+data MattersHoldsUpdate =
+  MattersHoldsUpdate'
     { _mhuXgafv          :: !(Maybe Xgafv)
     , _mhuUploadProtocol :: !(Maybe Text)
     , _mhuHoldId         :: !Text
@@ -78,7 +79,8 @@ data MattersHoldsUpdate = MattersHoldsUpdate'
     , _mhuPayload        :: !Hold
     , _mhuMatterId       :: !Text
     , _mhuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersHoldsUpdate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ mattersHoldsUpdate
     -> Text -- ^ 'mhuMatterId'
     -> MattersHoldsUpdate
 mattersHoldsUpdate pMhuHoldId_ pMhuPayload_ pMhuMatterId_ =
-    MattersHoldsUpdate'
+  MattersHoldsUpdate'
     { _mhuXgafv = Nothing
     , _mhuUploadProtocol = Nothing
     , _mhuHoldId = pMhuHoldId_

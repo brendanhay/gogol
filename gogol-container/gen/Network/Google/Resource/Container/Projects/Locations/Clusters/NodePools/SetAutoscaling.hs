@@ -63,7 +63,8 @@ type ProjectsLocationsClustersNodePoolsSetAutoscalingResource
 -- | Sets the autoscaling settings for a specific node pool.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsSetAutoscaling' smart constructor.
-data ProjectsLocationsClustersNodePoolsSetAutoscaling = ProjectsLocationsClustersNodePoolsSetAutoscaling'
+data ProjectsLocationsClustersNodePoolsSetAutoscaling =
+  ProjectsLocationsClustersNodePoolsSetAutoscaling'
     { _plcnpsaXgafv          :: !(Maybe Xgafv)
     , _plcnpsaUploadProtocol :: !(Maybe Text)
     , _plcnpsaAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsLocationsClustersNodePoolsSetAutoscaling = ProjectsLocationsCluster
     , _plcnpsaPayload        :: !SetNodePoolAutoscalingRequest
     , _plcnpsaName           :: !Text
     , _plcnpsaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsSetAutoscaling' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsLocationsClustersNodePoolsSetAutoscaling
     -> Text -- ^ 'plcnpsaName'
     -> ProjectsLocationsClustersNodePoolsSetAutoscaling
 projectsLocationsClustersNodePoolsSetAutoscaling pPlcnpsaPayload_ pPlcnpsaName_ =
-    ProjectsLocationsClustersNodePoolsSetAutoscaling'
+  ProjectsLocationsClustersNodePoolsSetAutoscaling'
     { _plcnpsaXgafv = Nothing
     , _plcnpsaUploadProtocol = Nothing
     , _plcnpsaAccessToken = Nothing
@@ -148,7 +150,7 @@ plcnpsaCallback
       (\ s a -> s{_plcnpsaCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersNodePoolsSetAutoscaling
+           ProjectsLocationsClustersNodePoolsSetAutoscaling
          where
         type Rs
                ProjectsLocationsClustersNodePoolsSetAutoscaling

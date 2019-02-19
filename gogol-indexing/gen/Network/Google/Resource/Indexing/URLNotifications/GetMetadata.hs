@@ -68,14 +68,16 @@ type URLNotificationsGetMetadataResource =
 -- API.
 --
 -- /See:/ 'urlNotificationsGetMetadata' smart constructor.
-data URLNotificationsGetMetadata = URLNotificationsGetMetadata'
+data URLNotificationsGetMetadata =
+  URLNotificationsGetMetadata'
     { _ungmXgafv          :: !(Maybe Xgafv)
     , _ungmUploadProtocol :: !(Maybe Text)
     , _ungmAccessToken    :: !(Maybe Text)
     , _ungmURL            :: !(Maybe Text)
     , _ungmUploadType     :: !(Maybe Text)
     , _ungmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLNotificationsGetMetadata' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ data URLNotificationsGetMetadata = URLNotificationsGetMetadata'
 urlNotificationsGetMetadata
     :: URLNotificationsGetMetadata
 urlNotificationsGetMetadata =
-    URLNotificationsGetMetadata'
+  URLNotificationsGetMetadata'
     { _ungmXgafv = Nothing
     , _ungmUploadProtocol = Nothing
     , _ungmAccessToken = Nothing

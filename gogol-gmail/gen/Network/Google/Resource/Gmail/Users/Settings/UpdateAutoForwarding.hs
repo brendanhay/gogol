@@ -62,10 +62,12 @@ type UsersSettingsUpdateAutoForwardingResource =
 -- have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsUpdateAutoForwarding' smart constructor.
-data UsersSettingsUpdateAutoForwarding = UsersSettingsUpdateAutoForwarding'
+data UsersSettingsUpdateAutoForwarding =
+  UsersSettingsUpdateAutoForwarding'
     { _usuafPayload :: !AutoForwarding
     , _usuafUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsUpdateAutoForwarding' with the minimum fields required to make a request.
 --
@@ -78,10 +80,8 @@ usersSettingsUpdateAutoForwarding
     :: AutoForwarding -- ^ 'usuafPayload'
     -> UsersSettingsUpdateAutoForwarding
 usersSettingsUpdateAutoForwarding pUsuafPayload_ =
-    UsersSettingsUpdateAutoForwarding'
-    { _usuafPayload = pUsuafPayload_
-    , _usuafUserId = "me"
-    }
+  UsersSettingsUpdateAutoForwarding'
+    {_usuafPayload = pUsuafPayload_, _usuafUserId = "me"}
 
 -- | Multipart request metadata.
 usuafPayload :: Lens' UsersSettingsUpdateAutoForwarding AutoForwarding
@@ -95,7 +95,8 @@ usuafUserId
   = lens _usuafUserId (\ s a -> s{_usuafUserId = a})
 
 instance GoogleRequest
-         UsersSettingsUpdateAutoForwarding where
+           UsersSettingsUpdateAutoForwarding
+         where
         type Rs UsersSettingsUpdateAutoForwarding =
              AutoForwarding
         type Scopes UsersSettingsUpdateAutoForwarding =

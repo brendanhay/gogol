@@ -79,7 +79,8 @@ type LayersAnnotationDataListResource =
 -- | Gets the annotation data for a volume and layer.
 --
 -- /See:/ 'layersAnnotationDataList' smart constructor.
-data LayersAnnotationDataList = LayersAnnotationDataList'
+data LayersAnnotationDataList =
+  LayersAnnotationDataList'
     { _ladlW                :: !(Maybe (Textual Int32))
     , _ladlScale            :: !(Maybe (Textual Int32))
     , _ladlLocale           :: !(Maybe Text)
@@ -93,7 +94,8 @@ data LayersAnnotationDataList = LayersAnnotationDataList'
     , _ladlPageToken        :: !(Maybe Text)
     , _ladlLayerId          :: !Text
     , _ladlMaxResults       :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LayersAnnotationDataList' with the minimum fields required to make a request.
 --
@@ -130,7 +132,7 @@ layersAnnotationDataList
     -> Text -- ^ 'ladlLayerId'
     -> LayersAnnotationDataList
 layersAnnotationDataList pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
-    LayersAnnotationDataList'
+  LayersAnnotationDataList'
     { _ladlW = Nothing
     , _ladlScale = Nothing
     , _ladlLocale = Nothing

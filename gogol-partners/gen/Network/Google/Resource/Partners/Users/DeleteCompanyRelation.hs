@@ -89,7 +89,8 @@ type UsersDeleteCompanyRelationResource =
 -- company.
 --
 -- /See:/ 'usersDeleteCompanyRelation' smart constructor.
-data UsersDeleteCompanyRelation = UsersDeleteCompanyRelation'
+data UsersDeleteCompanyRelation =
+  UsersDeleteCompanyRelation'
     { _udcrXgafv                                       :: !(Maybe Xgafv)
     , _udcrUploadProtocol                              :: !(Maybe Text)
     , _udcrAccessToken                                 :: !(Maybe Text)
@@ -103,7 +104,8 @@ data UsersDeleteCompanyRelation = UsersDeleteCompanyRelation'
     , _udcrRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _udcrRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _udcrCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDeleteCompanyRelation' with the minimum fields required to make a request.
 --
@@ -138,7 +140,7 @@ usersDeleteCompanyRelation
     :: Text -- ^ 'udcrUserId'
     -> UsersDeleteCompanyRelation
 usersDeleteCompanyRelation pUdcrUserId_ =
-    UsersDeleteCompanyRelation'
+  UsersDeleteCompanyRelation'
     { _udcrXgafv = Nothing
     , _udcrUploadProtocol = Nothing
     , _udcrAccessToken = Nothing

@@ -73,7 +73,8 @@ type ServicesTenancyUnitsListResource =
 -- project information after the project is created.
 --
 -- /See:/ 'servicesTenancyUnitsList' smart constructor.
-data ServicesTenancyUnitsList = ServicesTenancyUnitsList'
+data ServicesTenancyUnitsList =
+  ServicesTenancyUnitsList'
     { _stulParent         :: !Text
     , _stulXgafv          :: !(Maybe Xgafv)
     , _stulUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,8 @@ data ServicesTenancyUnitsList = ServicesTenancyUnitsList'
     , _stulPageToken      :: !(Maybe Text)
     , _stulPageSize       :: !(Maybe (Textual Int32))
     , _stulCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesTenancyUnitsList' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ servicesTenancyUnitsList
     :: Text -- ^ 'stulParent'
     -> ServicesTenancyUnitsList
 servicesTenancyUnitsList pStulParent_ =
-    ServicesTenancyUnitsList'
+  ServicesTenancyUnitsList'
     { _stulParent = pStulParent_
     , _stulXgafv = Nothing
     , _stulUploadProtocol = Nothing

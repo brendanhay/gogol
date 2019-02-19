@@ -88,7 +88,8 @@ type ProjectsInstancesDatabasesSessionsCreateResource
 -- query periodically, e.g., \`\"SELECT 1\"\`.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsCreate' smart constructor.
-data ProjectsInstancesDatabasesSessionsCreate = ProjectsInstancesDatabasesSessionsCreate'
+data ProjectsInstancesDatabasesSessionsCreate =
+  ProjectsInstancesDatabasesSessionsCreate'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pDatabase       :: !Text
@@ -96,7 +97,8 @@ data ProjectsInstancesDatabasesSessionsCreate = ProjectsInstancesDatabasesSessio
     , _pUploadType     :: !(Maybe Text)
     , _pPayload        :: !CreateSessionRequest
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsCreate' with the minimum fields required to make a request.
 --
@@ -120,7 +122,7 @@ projectsInstancesDatabasesSessionsCreate
     -> CreateSessionRequest -- ^ 'pPayload'
     -> ProjectsInstancesDatabasesSessionsCreate
 projectsInstancesDatabasesSessionsCreate pPDatabase_ pPPayload_ =
-    ProjectsInstancesDatabasesSessionsCreate'
+  ProjectsInstancesDatabasesSessionsCreate'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pDatabase = pPDatabase_
@@ -165,7 +167,8 @@ pCallback
   = lens _pCallback (\ s a -> s{_pCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsCreate where
+           ProjectsInstancesDatabasesSessionsCreate
+         where
         type Rs ProjectsInstancesDatabasesSessionsCreate =
              Session
         type Scopes ProjectsInstancesDatabasesSessionsCreate

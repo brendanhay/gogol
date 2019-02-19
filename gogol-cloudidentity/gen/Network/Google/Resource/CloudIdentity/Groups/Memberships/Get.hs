@@ -59,14 +59,16 @@ type GroupsMembershipsGetResource =
 -- | Retrieves a Membership.
 --
 -- /See:/ 'groupsMembershipsGet' smart constructor.
-data GroupsMembershipsGet = GroupsMembershipsGet'
+data GroupsMembershipsGet =
+  GroupsMembershipsGet'
     { _gmgXgafv          :: !(Maybe Xgafv)
     , _gmgUploadProtocol :: !(Maybe Text)
     , _gmgAccessToken    :: !(Maybe Text)
     , _gmgUploadType     :: !(Maybe Text)
     , _gmgName           :: !Text
     , _gmgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsMembershipsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ groupsMembershipsGet
     :: Text -- ^ 'gmgName'
     -> GroupsMembershipsGet
 groupsMembershipsGet pGmgName_ =
-    GroupsMembershipsGet'
+  GroupsMembershipsGet'
     { _gmgXgafv = Nothing
     , _gmgUploadProtocol = Nothing
     , _gmgAccessToken = Nothing

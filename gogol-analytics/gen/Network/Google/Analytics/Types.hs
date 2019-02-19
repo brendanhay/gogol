@@ -1175,29 +1175,29 @@ analyticsService
 
 -- | Manage Google Analytics Account users by email address
 analyticsManageUsersScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users"]
-analyticsManageUsersScope = Proxy;
+analyticsManageUsersScope = Proxy
 
 -- | Create a new Google Analytics account along with its default property
 -- and view
 analyticsProvisionScope :: Proxy '["https://www.googleapis.com/auth/analytics.provision"]
-analyticsProvisionScope = Proxy;
+analyticsProvisionScope = Proxy
 
 -- | View Google Analytics user permissions
 analyticsManageUsersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users.readonly"]
-analyticsManageUsersReadOnlyScope = Proxy;
+analyticsManageUsersReadOnlyScope = Proxy
 
 -- | View and manage your Google Analytics data
 analyticsScope :: Proxy '["https://www.googleapis.com/auth/analytics"]
-analyticsScope = Proxy;
+analyticsScope = Proxy
 
 -- | View your Google Analytics data
 analyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
-analyticsReadOnlyScope = Proxy;
+analyticsReadOnlyScope = Proxy
 
 -- | Manage Google Analytics user deletion requests
 analyticsUserDeletionScope :: Proxy '["https://www.googleapis.com/auth/analytics.user.deletion"]
-analyticsUserDeletionScope = Proxy;
+analyticsUserDeletionScope = Proxy
 
 -- | Edit Google Analytics management entities
 analyticsEditScope :: Proxy '["https://www.googleapis.com/auth/analytics.edit"]
-analyticsEditScope = Proxy;
+analyticsEditScope = Proxy

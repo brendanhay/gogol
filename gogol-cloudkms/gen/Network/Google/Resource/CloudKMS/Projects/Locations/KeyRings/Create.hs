@@ -64,7 +64,8 @@ type ProjectsLocationsKeyRingsCreateResource =
 -- | Create a new KeyRing in a given Project and Location.
 --
 -- /See:/ 'projectsLocationsKeyRingsCreate' smart constructor.
-data ProjectsLocationsKeyRingsCreate = ProjectsLocationsKeyRingsCreate'
+data ProjectsLocationsKeyRingsCreate =
+  ProjectsLocationsKeyRingsCreate'
     { _plkrcParent         :: !Text
     , _plkrcXgafv          :: !(Maybe Xgafv)
     , _plkrcUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsLocationsKeyRingsCreate = ProjectsLocationsKeyRingsCreate'
     , _plkrcPayload        :: !KeyRing
     , _plkrcKeyRingId      :: !(Maybe Text)
     , _plkrcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsKeyRingsCreate
     -> KeyRing -- ^ 'plkrcPayload'
     -> ProjectsLocationsKeyRingsCreate
 projectsLocationsKeyRingsCreate pPlkrcParent_ pPlkrcPayload_ =
-    ProjectsLocationsKeyRingsCreate'
+  ProjectsLocationsKeyRingsCreate'
     { _plkrcParent = pPlkrcParent_
     , _plkrcXgafv = Nothing
     , _plkrcUploadProtocol = Nothing
@@ -158,7 +160,8 @@ plkrcCallback
       (\ s a -> s{_plkrcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCreate where
+           ProjectsLocationsKeyRingsCreate
+         where
         type Rs ProjectsLocationsKeyRingsCreate = KeyRing
         type Scopes ProjectsLocationsKeyRingsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

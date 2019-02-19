@@ -53,9 +53,11 @@ type RelyingPartyGetOOBConfirmationCodeResource =
 -- | Get a code for user action confirmation.
 --
 -- /See:/ 'relyingPartyGetOOBConfirmationCode' smart constructor.
-newtype RelyingPartyGetOOBConfirmationCode = RelyingPartyGetOOBConfirmationCode'
+newtype RelyingPartyGetOOBConfirmationCode =
+  RelyingPartyGetOOBConfirmationCode'
     { _rpgoobccPayload :: RelyingParty
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyGetOOBConfirmationCode' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ relyingPartyGetOOBConfirmationCode
     :: RelyingParty -- ^ 'rpgoobccPayload'
     -> RelyingPartyGetOOBConfirmationCode
 relyingPartyGetOOBConfirmationCode pRpgoobccPayload_ =
-    RelyingPartyGetOOBConfirmationCode'
-    { _rpgoobccPayload = pRpgoobccPayload_
-    }
+  RelyingPartyGetOOBConfirmationCode' {_rpgoobccPayload = pRpgoobccPayload_}
 
 -- | Multipart request metadata.
 rpgoobccPayload :: Lens' RelyingPartyGetOOBConfirmationCode RelyingParty
@@ -77,7 +77,8 @@ rpgoobccPayload
       (\ s a -> s{_rpgoobccPayload = a})
 
 instance GoogleRequest
-         RelyingPartyGetOOBConfirmationCode where
+           RelyingPartyGetOOBConfirmationCode
+         where
         type Rs RelyingPartyGetOOBConfirmationCode =
              GetOOBConfirmationCodeResponse
         type Scopes RelyingPartyGetOOBConfirmationCode =

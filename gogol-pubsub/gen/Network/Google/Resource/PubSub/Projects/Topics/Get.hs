@@ -59,14 +59,16 @@ type ProjectsTopicsGetResource =
 -- | Gets the configuration of a topic.
 --
 -- /See:/ 'projectsTopicsGet' smart constructor.
-data ProjectsTopicsGet = ProjectsTopicsGet'
+data ProjectsTopicsGet =
+  ProjectsTopicsGet'
     { _ptgXgafv          :: !(Maybe Xgafv)
     , _ptgUploadProtocol :: !(Maybe Text)
     , _ptgAccessToken    :: !(Maybe Text)
     , _ptgUploadType     :: !(Maybe Text)
     , _ptgTopic          :: !Text
     , _ptgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTopicsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsTopicsGet
     :: Text -- ^ 'ptgTopic'
     -> ProjectsTopicsGet
 projectsTopicsGet pPtgTopic_ =
-    ProjectsTopicsGet'
+  ProjectsTopicsGet'
     { _ptgXgafv = Nothing
     , _ptgUploadProtocol = Nothing
     , _ptgAccessToken = Nothing

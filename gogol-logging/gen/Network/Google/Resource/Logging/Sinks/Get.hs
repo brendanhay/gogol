@@ -59,14 +59,16 @@ type SinksGetResource =
 -- | Gets a sink.
 --
 -- /See:/ 'sinksGet' smart constructor.
-data SinksGet = SinksGet'
+data SinksGet =
+  SinksGet'
     { _sgXgafv          :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
     , _sgAccessToken    :: !(Maybe Text)
     , _sgUploadType     :: !(Maybe Text)
     , _sgSinkName       :: !Text
     , _sgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SinksGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ sinksGet
     :: Text -- ^ 'sgSinkName'
     -> SinksGet
 sinksGet pSgSinkName_ =
-    SinksGet'
+  SinksGet'
     { _sgXgafv = Nothing
     , _sgUploadProtocol = Nothing
     , _sgAccessToken = Nothing

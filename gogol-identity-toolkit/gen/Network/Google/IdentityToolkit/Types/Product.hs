@@ -22,10 +22,12 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'uploadAccountResponseErrorItem' smart constructor.
-data UploadAccountResponseErrorItem = UploadAccountResponseErrorItem'
+data UploadAccountResponseErrorItem =
+  UploadAccountResponseErrorItem'
     { _uareiMessage :: !(Maybe Text)
     , _uareiIndex   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UploadAccountResponseErrorItem' with the minimum fields required to make a request.
 --
@@ -37,10 +39,8 @@ data UploadAccountResponseErrorItem = UploadAccountResponseErrorItem'
 uploadAccountResponseErrorItem
     :: UploadAccountResponseErrorItem
 uploadAccountResponseErrorItem =
-    UploadAccountResponseErrorItem'
-    { _uareiMessage = Nothing
-    , _uareiIndex = Nothing
-    }
+  UploadAccountResponseErrorItem'
+    {_uareiMessage = Nothing, _uareiIndex = Nothing}
 
 -- | Detailed error message for the account info.
 uareiMessage :: Lens' UploadAccountResponseErrorItem (Maybe Text)
@@ -70,7 +70,8 @@ instance ToJSON UploadAccountResponseErrorItem where
 
 --
 -- /See:/ 'userInfoProviderUserInfoItem' smart constructor.
-data UserInfoProviderUserInfoItem = UserInfoProviderUserInfoItem'
+data UserInfoProviderUserInfoItem =
+  UserInfoProviderUserInfoItem'
     { _uipuiiProviderId  :: !(Maybe Text)
     , _uipuiiEmail       :: !(Maybe Text)
     , _uipuiiPhotoURL    :: !(Maybe Text)
@@ -79,7 +80,8 @@ data UserInfoProviderUserInfoItem = UserInfoProviderUserInfoItem'
     , _uipuiiDisplayName :: !(Maybe Text)
     , _uipuiiScreenName  :: !(Maybe Text)
     , _uipuiiRawId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserInfoProviderUserInfoItem' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ data UserInfoProviderUserInfoItem = UserInfoProviderUserInfoItem'
 userInfoProviderUserInfoItem
     :: UserInfoProviderUserInfoItem
 userInfoProviderUserInfoItem =
-    UserInfoProviderUserInfoItem'
+  UserInfoProviderUserInfoItem'
     { _uipuiiProviderId = Nothing
     , _uipuiiEmail = Nothing
     , _uipuiiPhotoURL = Nothing
@@ -191,13 +193,15 @@ instance ToJSON UserInfoProviderUserInfoItem where
 -- | Response from verifying a custom token
 --
 -- /See:/ 'verifyCustomTokenResponse' smart constructor.
-data VerifyCustomTokenResponse = VerifyCustomTokenResponse'
+data VerifyCustomTokenResponse =
+  VerifyCustomTokenResponse'
     { _vctrIsNewUser    :: !(Maybe Bool)
     , _vctrKind         :: !Text
     , _vctrRefreshToken :: !(Maybe Text)
     , _vctrExpiresIn    :: !(Maybe (Textual Int64))
     , _vctrIdToken      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VerifyCustomTokenResponse' with the minimum fields required to make a request.
 --
@@ -215,7 +219,7 @@ data VerifyCustomTokenResponse = VerifyCustomTokenResponse'
 verifyCustomTokenResponse
     :: VerifyCustomTokenResponse
 verifyCustomTokenResponse =
-    VerifyCustomTokenResponse'
+  VerifyCustomTokenResponse'
     { _vctrIsNewUser = Nothing
     , _vctrKind = "identitytoolkit#VerifyCustomTokenResponse"
     , _vctrRefreshToken = Nothing
@@ -277,7 +281,8 @@ instance ToJSON VerifyCustomTokenResponse where
 -- | Response for Identitytoolkit-VerifyPhoneNumber
 --
 -- /See:/ 'identitytoolkitRelyingPartyVerifyPhoneNumberResponse' smart constructor.
-data IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse = IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse'
+data IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse =
+  IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse'
     { _irpvpnrIsNewUser                  :: !(Maybe Bool)
     , _irpvpnrTemporaryProof             :: !(Maybe Text)
     , _irpvpnrVerificationProofExpiresIn :: !(Maybe (Textual Int64))
@@ -288,7 +293,8 @@ data IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse = IdentitytoolkitRelyi
     , _irpvpnrExpiresIn                  :: !(Maybe (Textual Int64))
     , _irpvpnrLocalId                    :: !(Maybe Text)
     , _irpvpnrIdToken                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse' with the minimum fields required to make a request.
 --
@@ -316,7 +322,7 @@ data IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse = IdentitytoolkitRelyi
 identitytoolkitRelyingPartyVerifyPhoneNumberResponse
     :: IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse
 identitytoolkitRelyingPartyVerifyPhoneNumberResponse =
-    IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse'
+  IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse'
     { _irpvpnrIsNewUser = Nothing
     , _irpvpnrTemporaryProof = Nothing
     , _irpvpnrVerificationProofExpiresIn = Nothing
@@ -383,7 +389,7 @@ irpvpnrIdToken
       (\ s a -> s{_irpvpnrIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse
+           IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse
          where
         parseJSON
           = withObject
@@ -402,7 +408,7 @@ instance FromJSON
                      <*> (o .:? "idToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse
+           IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse
          where
         toJSON
           IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse'{..}
@@ -425,14 +431,16 @@ instance ToJSON
 -- | Template for a single idp configuration.
 --
 -- /See:/ 'idpConfig' smart constructor.
-data IdpConfig = IdpConfig'
+data IdpConfig =
+  IdpConfig'
     { _icClientId             :: !(Maybe Text)
     , _icEnabled              :: !(Maybe Bool)
     , _icWhiteListedAudiences :: !(Maybe [Text])
     , _icSecret               :: !(Maybe Text)
     , _icExperimentPercent    :: !(Maybe (Textual Int32))
     , _icProvider             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdpConfig' with the minimum fields required to make a request.
 --
@@ -452,7 +460,7 @@ data IdpConfig = IdpConfig'
 idpConfig
     :: IdpConfig
 idpConfig =
-    IdpConfig'
+  IdpConfig'
     { _icClientId = Nothing
     , _icEnabled = Nothing
     , _icWhiteListedAudiences = Nothing
@@ -522,7 +530,8 @@ instance ToJSON IdpConfig where
 -- | Template for an individual account info.
 --
 -- /See:/ 'userInfo' smart constructor.
-data UserInfo = UserInfo'
+data UserInfo =
+  UserInfo'
     { _uiEmail             :: !(Maybe Text)
     , _uiLastLoginAt       :: !(Maybe (Textual Int64))
     , _uiPhotoURL          :: !(Maybe Text)
@@ -542,7 +551,8 @@ data UserInfo = UserInfo'
     , _uiLocalId           :: !(Maybe Text)
     , _uiRawPassword       :: !(Maybe Text)
     , _uiScreenName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserInfo' with the minimum fields required to make a request.
 --
@@ -588,7 +598,7 @@ data UserInfo = UserInfo'
 userInfo
     :: UserInfo
 userInfo =
-    UserInfo'
+  UserInfo'
     { _uiEmail = Nothing
     , _uiLastLoginAt = Nothing
     , _uiPhotoURL = Nothing
@@ -773,9 +783,11 @@ instance ToJSON UserInfo where
 -- | Response of setting the project configuration.
 --
 -- /See:/ 'identitytoolkitRelyingPartySetProjectConfigResponse' smart constructor.
-newtype IdentitytoolkitRelyingPartySetProjectConfigResponse = IdentitytoolkitRelyingPartySetProjectConfigResponse'
+newtype IdentitytoolkitRelyingPartySetProjectConfigResponse =
+  IdentitytoolkitRelyingPartySetProjectConfigResponse'
     { _irpspcrProjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySetProjectConfigResponse' with the minimum fields required to make a request.
 --
@@ -785,9 +797,8 @@ newtype IdentitytoolkitRelyingPartySetProjectConfigResponse = IdentitytoolkitRel
 identitytoolkitRelyingPartySetProjectConfigResponse
     :: IdentitytoolkitRelyingPartySetProjectConfigResponse
 identitytoolkitRelyingPartySetProjectConfigResponse =
-    IdentitytoolkitRelyingPartySetProjectConfigResponse'
-    { _irpspcrProjectId = Nothing
-    }
+  IdentitytoolkitRelyingPartySetProjectConfigResponse'
+    {_irpspcrProjectId = Nothing}
 
 -- | Project ID of the relying party.
 irpspcrProjectId :: Lens' IdentitytoolkitRelyingPartySetProjectConfigResponse (Maybe Text)
@@ -796,7 +807,7 @@ irpspcrProjectId
       (\ s a -> s{_irpspcrProjectId = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartySetProjectConfigResponse
+           IdentitytoolkitRelyingPartySetProjectConfigResponse
          where
         parseJSON
           = withObject
@@ -806,7 +817,7 @@ instance FromJSON
                    <$> (o .:? "projectId"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartySetProjectConfigResponse
+           IdentitytoolkitRelyingPartySetProjectConfigResponse
          where
         toJSON
           IdentitytoolkitRelyingPartySetProjectConfigResponse'{..}
@@ -816,12 +827,14 @@ instance ToJSON
 -- | Request to verify a custom token
 --
 -- /See:/ 'identitytoolkitRelyingPartyVerifyCustomTokenRequest' smart constructor.
-data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest = IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
+data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest =
+  IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
     { _irpvctrInstanceId             :: !(Maybe Text)
     , _irpvctrDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _irpvctrToken                  :: !(Maybe Text)
     , _irpvctrReturnSecureToken      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyCustomTokenRequest' with the minimum fields required to make a request.
 --
@@ -837,7 +850,7 @@ data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest = IdentitytoolkitRelyin
 identitytoolkitRelyingPartyVerifyCustomTokenRequest
     :: IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
 identitytoolkitRelyingPartyVerifyCustomTokenRequest =
-    IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
+  IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
     { _irpvctrInstanceId = Nothing
     , _irpvctrDelegatedProjectNumber = Nothing
     , _irpvctrToken = Nothing
@@ -870,7 +883,7 @@ irpvctrReturnSecureToken
       (\ s a -> s{_irpvctrReturnSecureToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
+           IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
          where
         parseJSON
           = withObject
@@ -884,7 +897,7 @@ instance FromJSON
                      <*> (o .:? "returnSecureToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
+           IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
          where
         toJSON
           IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'{..}
@@ -899,12 +912,14 @@ instance ToJSON
 
 --
 -- /See:/ 'setAccountInfoResponseProviderUserInfoItem' smart constructor.
-data SetAccountInfoResponseProviderUserInfoItem = SetAccountInfoResponseProviderUserInfoItem'
+data SetAccountInfoResponseProviderUserInfoItem =
+  SetAccountInfoResponseProviderUserInfoItem'
     { _sairpuiiProviderId  :: !(Maybe Text)
     , _sairpuiiPhotoURL    :: !(Maybe Text)
     , _sairpuiiFederatedId :: !(Maybe Text)
     , _sairpuiiDisplayName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetAccountInfoResponseProviderUserInfoItem' with the minimum fields required to make a request.
 --
@@ -920,7 +935,7 @@ data SetAccountInfoResponseProviderUserInfoItem = SetAccountInfoResponseProvider
 setAccountInfoResponseProviderUserInfoItem
     :: SetAccountInfoResponseProviderUserInfoItem
 setAccountInfoResponseProviderUserInfoItem =
-    SetAccountInfoResponseProviderUserInfoItem'
+  SetAccountInfoResponseProviderUserInfoItem'
     { _sairpuiiProviderId = Nothing
     , _sairpuiiPhotoURL = Nothing
     , _sairpuiiFederatedId = Nothing
@@ -954,7 +969,8 @@ sairpuiiDisplayName
       (\ s a -> s{_sairpuiiDisplayName = a})
 
 instance FromJSON
-         SetAccountInfoResponseProviderUserInfoItem where
+           SetAccountInfoResponseProviderUserInfoItem
+         where
         parseJSON
           = withObject
               "SetAccountInfoResponseProviderUserInfoItem"
@@ -965,7 +981,8 @@ instance FromJSON
                      <*> (o .:? "displayName"))
 
 instance ToJSON
-         SetAccountInfoResponseProviderUserInfoItem where
+           SetAccountInfoResponseProviderUserInfoItem
+         where
         toJSON
           SetAccountInfoResponseProviderUserInfoItem'{..}
           = object
@@ -981,9 +998,11 @@ instance ToJSON
 -- state, oauth_token.
 --
 -- /See:/ 'identitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter' smart constructor.
-newtype IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter = IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter'
+newtype IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter =
+  IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter'
     { _irpcaurcpAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter' with the minimum fields required to make a request.
 --
@@ -994,9 +1013,8 @@ identitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
     :: HashMap Text Text -- ^ 'irpcaurcpAddtional'
     -> IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
 identitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter pIrpcaurcpAddtional_ =
-    IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter'
-    { _irpcaurcpAddtional = _Coerce # pIrpcaurcpAddtional_
-    }
+  IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter'
+    {_irpcaurcpAddtional = _Coerce # pIrpcaurcpAddtional_}
 
 -- | The customized query parameter.
 irpcaurcpAddtional :: Lens' IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter (HashMap Text Text)
@@ -1006,7 +1024,7 @@ irpcaurcpAddtional
       . _Coerce
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
+           IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
          where
         parseJSON
           = withObject
@@ -1016,14 +1034,15 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
+           IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
          where
         toJSON = toJSON . _irpcaurcpAddtional
 
 -- | Request to verify the password.
 --
 -- /See:/ 'identitytoolkitRelyingPartyVerifyPasswordRequest' smart constructor.
-data IdentitytoolkitRelyingPartyVerifyPasswordRequest = IdentitytoolkitRelyingPartyVerifyPasswordRequest'
+data IdentitytoolkitRelyingPartyVerifyPasswordRequest =
+  IdentitytoolkitRelyingPartyVerifyPasswordRequest'
     { _irpvprEmail                  :: !(Maybe Text)
     , _irpvprInstanceId             :: !(Maybe Text)
     , _irpvprCaptchaChallenge       :: !(Maybe Text)
@@ -1035,7 +1054,8 @@ data IdentitytoolkitRelyingPartyVerifyPasswordRequest = IdentitytoolkitRelyingPa
     , _irpvprCaptchaResponse        :: !(Maybe Text)
     , _irpvprIdToken                :: !(Maybe Text)
     , _irpvprPendingIdToken         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyPasswordRequest' with the minimum fields required to make a request.
 --
@@ -1065,7 +1085,7 @@ data IdentitytoolkitRelyingPartyVerifyPasswordRequest = IdentitytoolkitRelyingPa
 identitytoolkitRelyingPartyVerifyPasswordRequest
     :: IdentitytoolkitRelyingPartyVerifyPasswordRequest
 identitytoolkitRelyingPartyVerifyPasswordRequest =
-    IdentitytoolkitRelyingPartyVerifyPasswordRequest'
+  IdentitytoolkitRelyingPartyVerifyPasswordRequest'
     { _irpvprEmail = Nothing
     , _irpvprInstanceId = Nothing
     , _irpvprCaptchaChallenge = Nothing
@@ -1151,7 +1171,7 @@ irpvprPendingIdToken
       (\ s a -> s{_irpvprPendingIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyVerifyPasswordRequest
+           IdentitytoolkitRelyingPartyVerifyPasswordRequest
          where
         parseJSON
           = withObject
@@ -1170,7 +1190,7 @@ instance FromJSON
                      <*> (o .:? "pendingIdToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyVerifyPasswordRequest
+           IdentitytoolkitRelyingPartyVerifyPasswordRequest
          where
         toJSON
           IdentitytoolkitRelyingPartyVerifyPasswordRequest'{..}
@@ -1194,12 +1214,14 @@ instance ToJSON
 -- | Request for Identitytoolkit-SendVerificationCode
 --
 -- /See:/ 'identitytoolkitRelyingPartySendVerificationCodeRequest' smart constructor.
-data IdentitytoolkitRelyingPartySendVerificationCodeRequest = IdentitytoolkitRelyingPartySendVerificationCodeRequest'
+data IdentitytoolkitRelyingPartySendVerificationCodeRequest =
+  IdentitytoolkitRelyingPartySendVerificationCodeRequest'
     { _irpsvcrPhoneNumber    :: !(Maybe Text)
     , _irpsvcrRecaptchaToken :: !(Maybe Text)
     , _irpsvcrIosSecret      :: !(Maybe Text)
     , _irpsvcrIosReceipt     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySendVerificationCodeRequest' with the minimum fields required to make a request.
 --
@@ -1215,7 +1237,7 @@ data IdentitytoolkitRelyingPartySendVerificationCodeRequest = IdentitytoolkitRel
 identitytoolkitRelyingPartySendVerificationCodeRequest
     :: IdentitytoolkitRelyingPartySendVerificationCodeRequest
 identitytoolkitRelyingPartySendVerificationCodeRequest =
-    IdentitytoolkitRelyingPartySendVerificationCodeRequest'
+  IdentitytoolkitRelyingPartySendVerificationCodeRequest'
     { _irpsvcrPhoneNumber = Nothing
     , _irpsvcrRecaptchaToken = Nothing
     , _irpsvcrIosSecret = Nothing
@@ -1247,7 +1269,7 @@ irpsvcrIosReceipt
       (\ s a -> s{_irpsvcrIosReceipt = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartySendVerificationCodeRequest
+           IdentitytoolkitRelyingPartySendVerificationCodeRequest
          where
         parseJSON
           = withObject
@@ -1260,7 +1282,7 @@ instance FromJSON
                      <*> (o .:? "iosReceipt"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartySendVerificationCodeRequest
+           IdentitytoolkitRelyingPartySendVerificationCodeRequest
          where
         toJSON
           IdentitytoolkitRelyingPartySendVerificationCodeRequest'{..}
@@ -1275,7 +1297,8 @@ instance ToJSON
 -- user reauth.
 --
 -- /See:/ 'signupNewUserResponse' smart constructor.
-data SignupNewUserResponse = SignupNewUserResponse'
+data SignupNewUserResponse =
+  SignupNewUserResponse'
     { _snurEmail        :: !(Maybe Text)
     , _snurKind         :: !Text
     , _snurRefreshToken :: !(Maybe Text)
@@ -1283,7 +1306,8 @@ data SignupNewUserResponse = SignupNewUserResponse'
     , _snurDisplayName  :: !(Maybe Text)
     , _snurLocalId      :: !(Maybe Text)
     , _snurIdToken      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SignupNewUserResponse' with the minimum fields required to make a request.
 --
@@ -1305,7 +1329,7 @@ data SignupNewUserResponse = SignupNewUserResponse'
 signupNewUserResponse
     :: SignupNewUserResponse
 signupNewUserResponse =
-    SignupNewUserResponse'
+  SignupNewUserResponse'
     { _snurEmail = Nothing
     , _snurKind = "identitytoolkit#SignupNewUserResponse"
     , _snurRefreshToken = Nothing
@@ -1383,7 +1407,8 @@ instance ToJSON SignupNewUserResponse where
 -- | Request to set the project configuration.
 --
 -- /See:/ 'identitytoolkitRelyingPartySetProjectConfigRequest' smart constructor.
-data IdentitytoolkitRelyingPartySetProjectConfigRequest = IdentitytoolkitRelyingPartySetProjectConfigRequest'
+data IdentitytoolkitRelyingPartySetProjectConfigRequest =
+  IdentitytoolkitRelyingPartySetProjectConfigRequest'
     { _irpspcrAuthorizedDomains           :: !(Maybe [Text])
     , _irpspcrAPIKey                      :: !(Maybe Text)
     , _irpspcrIdpConfig                   :: !(Maybe [IdpConfig])
@@ -1395,7 +1420,8 @@ data IdentitytoolkitRelyingPartySetProjectConfigRequest = IdentitytoolkitRelying
     , _irpspcrAllowPasswordUser           :: !(Maybe Bool)
     , _irpspcrResetPasswordTemplate       :: !(Maybe EmailTemplate)
     , _irpspcrUseEmailSending             :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySetProjectConfigRequest' with the minimum fields required to make a request.
 --
@@ -1425,7 +1451,7 @@ data IdentitytoolkitRelyingPartySetProjectConfigRequest = IdentitytoolkitRelying
 identitytoolkitRelyingPartySetProjectConfigRequest
     :: IdentitytoolkitRelyingPartySetProjectConfigRequest
 identitytoolkitRelyingPartySetProjectConfigRequest =
-    IdentitytoolkitRelyingPartySetProjectConfigRequest'
+  IdentitytoolkitRelyingPartySetProjectConfigRequest'
     { _irpspcrAuthorizedDomains = Nothing
     , _irpspcrAPIKey = Nothing
     , _irpspcrIdpConfig = Nothing
@@ -1512,7 +1538,7 @@ irpspcrUseEmailSending
       (\ s a -> s{_irpspcrUseEmailSending = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartySetProjectConfigRequest
+           IdentitytoolkitRelyingPartySetProjectConfigRequest
          where
         parseJSON
           = withObject
@@ -1533,7 +1559,7 @@ instance FromJSON
                      <*> (o .:? "useEmailSending"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartySetProjectConfigRequest
+           IdentitytoolkitRelyingPartySetProjectConfigRequest
          where
         toJSON
           IdentitytoolkitRelyingPartySetProjectConfigRequest'{..}
@@ -1562,7 +1588,8 @@ instance ToJSON
 -- | Request to set the account information.
 --
 -- /See:/ 'identitytoolkitRelyingPartySetAccountInfoRequest' smart constructor.
-data IdentitytoolkitRelyingPartySetAccountInfoRequest = IdentitytoolkitRelyingPartySetAccountInfoRequest'
+data IdentitytoolkitRelyingPartySetAccountInfoRequest =
+  IdentitytoolkitRelyingPartySetAccountInfoRequest'
     { _irpsairUpgradeToFederatedLogin :: !(Maybe Bool)
     , _irpsairEmail                   :: !(Maybe Text)
     , _irpsairInstanceId              :: !(Maybe Text)
@@ -1586,7 +1613,8 @@ data IdentitytoolkitRelyingPartySetAccountInfoRequest = IdentitytoolkitRelyingPa
     , _irpsairLocalId                 :: !(Maybe Text)
     , _irpsairIdToken                 :: !(Maybe Text)
     , _irpsairProvider                :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySetAccountInfoRequest' with the minimum fields required to make a request.
 --
@@ -1640,7 +1668,7 @@ data IdentitytoolkitRelyingPartySetAccountInfoRequest = IdentitytoolkitRelyingPa
 identitytoolkitRelyingPartySetAccountInfoRequest
     :: IdentitytoolkitRelyingPartySetAccountInfoRequest
 identitytoolkitRelyingPartySetAccountInfoRequest =
-    IdentitytoolkitRelyingPartySetAccountInfoRequest'
+  IdentitytoolkitRelyingPartySetAccountInfoRequest'
     { _irpsairUpgradeToFederatedLogin = Nothing
     , _irpsairEmail = Nothing
     , _irpsairInstanceId = Nothing
@@ -1815,7 +1843,7 @@ irpsairProvider
       . _Coerce
 
 instance FromJSON
-         IdentitytoolkitRelyingPartySetAccountInfoRequest
+           IdentitytoolkitRelyingPartySetAccountInfoRequest
          where
         parseJSON
           = withObject
@@ -1846,7 +1874,7 @@ instance FromJSON
                      <*> (o .:? "provider" .!= mempty))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartySetAccountInfoRequest
+           IdentitytoolkitRelyingPartySetAccountInfoRequest
          where
         toJSON
           IdentitytoolkitRelyingPartySetAccountInfoRequest'{..}
@@ -1882,7 +1910,8 @@ instance ToJSON
 -- | Request to verify the IDP assertion.
 --
 -- /See:/ 'identitytoolkitRelyingPartyVerifyAssertionRequest' smart constructor.
-data IdentitytoolkitRelyingPartyVerifyAssertionRequest = IdentitytoolkitRelyingPartyVerifyAssertionRequest'
+data IdentitytoolkitRelyingPartyVerifyAssertionRequest =
+  IdentitytoolkitRelyingPartyVerifyAssertionRequest'
     { _irpvarReturnIdpCredential    :: !(Maybe Bool)
     , _irpvarInstanceId             :: !(Maybe Text)
     , _irpvarTenantProjectNumber    :: !(Maybe (Textual Word64))
@@ -1896,7 +1925,8 @@ data IdentitytoolkitRelyingPartyVerifyAssertionRequest = IdentitytoolkitRelyingP
     , _irpvarAutoCreate             :: !(Maybe Bool)
     , _irpvarIdToken                :: !(Maybe Text)
     , _irpvarPendingIdToken         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyAssertionRequest' with the minimum fields required to make a request.
 --
@@ -1930,7 +1960,7 @@ data IdentitytoolkitRelyingPartyVerifyAssertionRequest = IdentitytoolkitRelyingP
 identitytoolkitRelyingPartyVerifyAssertionRequest
     :: IdentitytoolkitRelyingPartyVerifyAssertionRequest
 identitytoolkitRelyingPartyVerifyAssertionRequest =
-    IdentitytoolkitRelyingPartyVerifyAssertionRequest'
+  IdentitytoolkitRelyingPartyVerifyAssertionRequest'
     { _irpvarReturnIdpCredential = Nothing
     , _irpvarInstanceId = Nothing
     , _irpvarTenantProjectNumber = Nothing
@@ -2036,7 +2066,7 @@ irpvarPendingIdToken
       (\ s a -> s{_irpvarPendingIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyVerifyAssertionRequest
+           IdentitytoolkitRelyingPartyVerifyAssertionRequest
          where
         parseJSON
           = withObject
@@ -2059,7 +2089,7 @@ instance FromJSON
                      <*> (o .:? "pendingIdToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyVerifyAssertionRequest
+           IdentitytoolkitRelyingPartyVerifyAssertionRequest
          where
         toJSON
           IdentitytoolkitRelyingPartyVerifyAssertionRequest'{..}
@@ -2087,7 +2117,8 @@ instance ToJSON
 -- | Response of email signIn.
 --
 -- /See:/ 'emailLinkSigninResponse' smart constructor.
-data EmailLinkSigninResponse = EmailLinkSigninResponse'
+data EmailLinkSigninResponse =
+  EmailLinkSigninResponse'
     { _elsrEmail        :: !(Maybe Text)
     , _elsrIsNewUser    :: !(Maybe Bool)
     , _elsrKind         :: !Text
@@ -2095,7 +2126,8 @@ data EmailLinkSigninResponse = EmailLinkSigninResponse'
     , _elsrExpiresIn    :: !(Maybe (Textual Int64))
     , _elsrLocalId      :: !(Maybe Text)
     , _elsrIdToken      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EmailLinkSigninResponse' with the minimum fields required to make a request.
 --
@@ -2117,7 +2149,7 @@ data EmailLinkSigninResponse = EmailLinkSigninResponse'
 emailLinkSigninResponse
     :: EmailLinkSigninResponse
 emailLinkSigninResponse =
-    EmailLinkSigninResponse'
+  EmailLinkSigninResponse'
     { _elsrEmail = Nothing
     , _elsrIsNewUser = Nothing
     , _elsrKind = "identitytoolkit#EmailLinkSigninResponse"
@@ -2193,9 +2225,11 @@ instance ToJSON EmailLinkSigninResponse where
 -- | Respone of deleting account.
 --
 -- /See:/ 'deleteAccountResponse' smart constructor.
-newtype DeleteAccountResponse = DeleteAccountResponse'
+newtype DeleteAccountResponse =
+  DeleteAccountResponse'
     { _darKind :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAccountResponse' with the minimum fields required to make a request.
 --
@@ -2205,9 +2239,7 @@ newtype DeleteAccountResponse = DeleteAccountResponse'
 deleteAccountResponse
     :: DeleteAccountResponse
 deleteAccountResponse =
-    DeleteAccountResponse'
-    { _darKind = "identitytoolkit#DeleteAccountResponse"
-    }
+  DeleteAccountResponse' {_darKind = "identitytoolkit#DeleteAccountResponse"}
 
 -- | The fixed string \"identitytoolkit#DeleteAccountResponse\".
 darKind :: Lens' DeleteAccountResponse Text
@@ -2228,9 +2260,11 @@ instance ToJSON DeleteAccountResponse where
 -- | Response of signing out user.
 --
 -- /See:/ 'identitytoolkitRelyingPartySignOutUserResponse' smart constructor.
-newtype IdentitytoolkitRelyingPartySignOutUserResponse = IdentitytoolkitRelyingPartySignOutUserResponse'
+newtype IdentitytoolkitRelyingPartySignOutUserResponse =
+  IdentitytoolkitRelyingPartySignOutUserResponse'
     { _irpsourLocalId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySignOutUserResponse' with the minimum fields required to make a request.
 --
@@ -2240,9 +2274,7 @@ newtype IdentitytoolkitRelyingPartySignOutUserResponse = IdentitytoolkitRelyingP
 identitytoolkitRelyingPartySignOutUserResponse
     :: IdentitytoolkitRelyingPartySignOutUserResponse
 identitytoolkitRelyingPartySignOutUserResponse =
-    IdentitytoolkitRelyingPartySignOutUserResponse'
-    { _irpsourLocalId = Nothing
-    }
+  IdentitytoolkitRelyingPartySignOutUserResponse' {_irpsourLocalId = Nothing}
 
 -- | The local ID of the user.
 irpsourLocalId :: Lens' IdentitytoolkitRelyingPartySignOutUserResponse (Maybe Text)
@@ -2251,7 +2283,8 @@ irpsourLocalId
       (\ s a -> s{_irpsourLocalId = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartySignOutUserResponse where
+           IdentitytoolkitRelyingPartySignOutUserResponse
+         where
         parseJSON
           = withObject
               "IdentitytoolkitRelyingPartySignOutUserResponse"
@@ -2260,7 +2293,8 @@ instance FromJSON
                    (o .:? "localId"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartySignOutUserResponse where
+           IdentitytoolkitRelyingPartySignOutUserResponse
+         where
         toJSON
           IdentitytoolkitRelyingPartySignOutUserResponse'{..}
           = object
@@ -2269,11 +2303,13 @@ instance ToJSON
 -- | Response of downloading accounts in batch.
 --
 -- /See:/ 'downloadAccountResponse' smart constructor.
-data DownloadAccountResponse = DownloadAccountResponse'
+data DownloadAccountResponse =
+  DownloadAccountResponse'
     { _dNextPageToken :: !(Maybe Text)
     , _dUsers         :: !(Maybe [UserInfo])
     , _dKind          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DownloadAccountResponse' with the minimum fields required to make a request.
 --
@@ -2287,7 +2323,7 @@ data DownloadAccountResponse = DownloadAccountResponse'
 downloadAccountResponse
     :: DownloadAccountResponse
 downloadAccountResponse =
-    DownloadAccountResponse'
+  DownloadAccountResponse'
     { _dNextPageToken = Nothing
     , _dUsers = Nothing
     , _dKind = "identitytoolkit#DownloadAccountResponse"
@@ -2331,7 +2367,8 @@ instance ToJSON DownloadAccountResponse where
 -- | Response of getting the project configuration.
 --
 -- /See:/ 'identitytoolkitRelyingPartyGetProjectConfigResponse' smart constructor.
-data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyingPartyGetProjectConfigResponse'
+data IdentitytoolkitRelyingPartyGetProjectConfigResponse =
+  IdentitytoolkitRelyingPartyGetProjectConfigResponse'
     { _irpgpcrAuthorizedDomains           :: !(Maybe [Text])
     , _irpgpcrAPIKey                      :: !(Maybe Text)
     , _irpgpcrIdpConfig                   :: !(Maybe [IdpConfig])
@@ -2344,7 +2381,8 @@ data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyin
     , _irpgpcrProjectId                   :: !(Maybe Text)
     , _irpgpcrUseEmailSending             :: !(Maybe Bool)
     , _irpgpcrDynamicLinksDomain          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetProjectConfigResponse' with the minimum fields required to make a request.
 --
@@ -2376,7 +2414,7 @@ data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyin
 identitytoolkitRelyingPartyGetProjectConfigResponse
     :: IdentitytoolkitRelyingPartyGetProjectConfigResponse
 identitytoolkitRelyingPartyGetProjectConfigResponse =
-    IdentitytoolkitRelyingPartyGetProjectConfigResponse'
+  IdentitytoolkitRelyingPartyGetProjectConfigResponse'
     { _irpgpcrAuthorizedDomains = Nothing
     , _irpgpcrAPIKey = Nothing
     , _irpgpcrIdpConfig = Nothing
@@ -2467,7 +2505,7 @@ irpgpcrDynamicLinksDomain
       (\ s a -> s{_irpgpcrDynamicLinksDomain = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyGetProjectConfigResponse
+           IdentitytoolkitRelyingPartyGetProjectConfigResponse
          where
         parseJSON
           = withObject
@@ -2489,7 +2527,7 @@ instance FromJSON
                      <*> (o .:? "dynamicLinksDomain"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyGetProjectConfigResponse
+           IdentitytoolkitRelyingPartyGetProjectConfigResponse
          where
         toJSON
           IdentitytoolkitRelyingPartyGetProjectConfigResponse'{..}
@@ -2519,12 +2557,14 @@ instance ToJSON
 -- | Response of resetting the password.
 --
 -- /See:/ 'resetPasswordResponse' smart constructor.
-data ResetPasswordResponse = ResetPasswordResponse'
+data ResetPasswordResponse =
+  ResetPasswordResponse'
     { _rprEmail       :: !(Maybe Text)
     , _rprKind        :: !Text
     , _rprRequestType :: !(Maybe Text)
     , _rprNewEmail    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResetPasswordResponse' with the minimum fields required to make a request.
 --
@@ -2540,7 +2580,7 @@ data ResetPasswordResponse = ResetPasswordResponse'
 resetPasswordResponse
     :: ResetPasswordResponse
 resetPasswordResponse =
-    ResetPasswordResponse'
+  ResetPasswordResponse'
     { _rprEmail = Nothing
     , _rprKind = "identitytoolkit#ResetPasswordResponse"
     , _rprRequestType = Nothing
@@ -2590,10 +2630,12 @@ instance ToJSON ResetPasswordResponse where
 -- | Respone of uploading accounts in batch.
 --
 -- /See:/ 'uploadAccountResponse' smart constructor.
-data UploadAccountResponse = UploadAccountResponse'
+data UploadAccountResponse =
+  UploadAccountResponse'
     { _uarKind  :: !Text
     , _uarError :: !(Maybe [UploadAccountResponseErrorItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UploadAccountResponse' with the minimum fields required to make a request.
 --
@@ -2605,10 +2647,8 @@ data UploadAccountResponse = UploadAccountResponse'
 uploadAccountResponse
     :: UploadAccountResponse
 uploadAccountResponse =
-    UploadAccountResponse'
-    { _uarKind = "identitytoolkit#UploadAccountResponse"
-    , _uarError = Nothing
-    }
+  UploadAccountResponse'
+    {_uarKind = "identitytoolkit#UploadAccountResponse", _uarError = Nothing}
 
 -- | The fixed string \"identitytoolkit#UploadAccountResponse\".
 uarKind :: Lens' UploadAccountResponse Text
@@ -2640,7 +2680,8 @@ instance ToJSON UploadAccountResponse where
 -- | Response of creating the IDP authentication URL.
 --
 -- /See:/ 'createAuthURIResponse' smart constructor.
-data CreateAuthURIResponse = CreateAuthURIResponse'
+data CreateAuthURIResponse =
+  CreateAuthURIResponse'
     { _caurProviderId          :: !(Maybe Text)
     , _caurKind                :: !Text
     , _caurAllProviders        :: !(Maybe [Text])
@@ -2650,7 +2691,8 @@ data CreateAuthURIResponse = CreateAuthURIResponse'
     , _caurRegistered          :: !(Maybe Bool)
     , _caurSessionId           :: !(Maybe Text)
     , _caurForExistingProvider :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateAuthURIResponse' with the minimum fields required to make a request.
 --
@@ -2676,7 +2718,7 @@ data CreateAuthURIResponse = CreateAuthURIResponse'
 createAuthURIResponse
     :: CreateAuthURIResponse
 createAuthURIResponse =
-    CreateAuthURIResponse'
+  CreateAuthURIResponse'
     { _caurProviderId = Nothing
     , _caurKind = "identitytoolkit#CreateAuthUriResponse"
     , _caurAllProviders = Nothing
@@ -2778,9 +2820,11 @@ instance ToJSON CreateAuthURIResponse where
 -- | Respone of getting public keys.
 --
 -- /See:/ 'identitytoolkitRelyingPartyGetPublicKeysResponse' smart constructor.
-newtype IdentitytoolkitRelyingPartyGetPublicKeysResponse = IdentitytoolkitRelyingPartyGetPublicKeysResponse'
+newtype IdentitytoolkitRelyingPartyGetPublicKeysResponse =
+  IdentitytoolkitRelyingPartyGetPublicKeysResponse'
     { _irpgpkrAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetPublicKeysResponse' with the minimum fields required to make a request.
 --
@@ -2791,9 +2835,8 @@ identitytoolkitRelyingPartyGetPublicKeysResponse
     :: HashMap Text Text -- ^ 'irpgpkrAddtional'
     -> IdentitytoolkitRelyingPartyGetPublicKeysResponse
 identitytoolkitRelyingPartyGetPublicKeysResponse pIrpgpkrAddtional_ =
-    IdentitytoolkitRelyingPartyGetPublicKeysResponse'
-    { _irpgpkrAddtional = _Coerce # pIrpgpkrAddtional_
-    }
+  IdentitytoolkitRelyingPartyGetPublicKeysResponse'
+    {_irpgpkrAddtional = _Coerce # pIrpgpkrAddtional_}
 
 irpgpkrAddtional :: Lens' IdentitytoolkitRelyingPartyGetPublicKeysResponse (HashMap Text Text)
 irpgpkrAddtional
@@ -2802,7 +2845,7 @@ irpgpkrAddtional
       . _Coerce
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyGetPublicKeysResponse
+           IdentitytoolkitRelyingPartyGetPublicKeysResponse
          where
         parseJSON
           = withObject
@@ -2812,7 +2855,7 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyGetPublicKeysResponse
+           IdentitytoolkitRelyingPartyGetPublicKeysResponse
          where
         toJSON = toJSON . _irpgpkrAddtional
 
@@ -2820,7 +2863,8 @@ instance ToJSON
 -- email etc.)
 --
 -- /See:/ 'relyingParty' smart constructor.
-data RelyingParty = RelyingParty'
+data RelyingParty =
+  RelyingParty'
     { _rpIOSBundleId           :: !(Maybe Text)
     , _rpEmail                 :: !(Maybe Text)
     , _rpContinueURL           :: !(Maybe Text)
@@ -2836,7 +2880,8 @@ data RelyingParty = RelyingParty'
     , _rpChallenge             :: !(Maybe Text)
     , _rpIdToken               :: !(Maybe Text)
     , _rpAndroidPackageName    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingParty' with the minimum fields required to make a request.
 --
@@ -2874,7 +2919,7 @@ data RelyingParty = RelyingParty'
 relyingParty
     :: RelyingParty
 relyingParty =
-    RelyingParty'
+  RelyingParty'
     { _rpIOSBundleId = Nothing
     , _rpEmail = Nothing
     , _rpContinueURL = Nothing
@@ -3020,13 +3065,15 @@ instance ToJSON RelyingParty where
 -- | Request to get the account information.
 --
 -- /See:/ 'identitytoolkitRelyingPartyGetAccountInfoRequest' smart constructor.
-data IdentitytoolkitRelyingPartyGetAccountInfoRequest = IdentitytoolkitRelyingPartyGetAccountInfoRequest'
+data IdentitytoolkitRelyingPartyGetAccountInfoRequest =
+  IdentitytoolkitRelyingPartyGetAccountInfoRequest'
     { _irpgairEmail                  :: !(Maybe [Text])
     , _irpgairDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _irpgairPhoneNumber            :: !(Maybe [Text])
     , _irpgairLocalId                :: !(Maybe [Text])
     , _irpgairIdToken                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetAccountInfoRequest' with the minimum fields required to make a request.
 --
@@ -3044,7 +3091,7 @@ data IdentitytoolkitRelyingPartyGetAccountInfoRequest = IdentitytoolkitRelyingPa
 identitytoolkitRelyingPartyGetAccountInfoRequest
     :: IdentitytoolkitRelyingPartyGetAccountInfoRequest
 identitytoolkitRelyingPartyGetAccountInfoRequest =
-    IdentitytoolkitRelyingPartyGetAccountInfoRequest'
+  IdentitytoolkitRelyingPartyGetAccountInfoRequest'
     { _irpgairEmail = Nothing
     , _irpgairDelegatedProjectNumber = Nothing
     , _irpgairPhoneNumber = Nothing
@@ -3090,7 +3137,7 @@ irpgairIdToken
       (\ s a -> s{_irpgairIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyGetAccountInfoRequest
+           IdentitytoolkitRelyingPartyGetAccountInfoRequest
          where
         parseJSON
           = withObject
@@ -3104,7 +3151,7 @@ instance FromJSON
                      <*> (o .:? "idToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyGetAccountInfoRequest
+           IdentitytoolkitRelyingPartyGetAccountInfoRequest
          where
         toJSON
           IdentitytoolkitRelyingPartyGetAccountInfoRequest'{..}
@@ -3120,14 +3167,16 @@ instance ToJSON
 -- | Template for an email template.
 --
 -- /See:/ 'emailTemplate' smart constructor.
-data EmailTemplate = EmailTemplate'
+data EmailTemplate =
+  EmailTemplate'
     { _etSubject         :: !(Maybe Text)
     , _etBody            :: !(Maybe Text)
     , _etFormat          :: !(Maybe Text)
     , _etFromDisplayName :: !(Maybe Text)
     , _etFrom            :: !(Maybe Text)
     , _etReplyTo         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EmailTemplate' with the minimum fields required to make a request.
 --
@@ -3147,7 +3196,7 @@ data EmailTemplate = EmailTemplate'
 emailTemplate
     :: EmailTemplate
 emailTemplate =
-    EmailTemplate'
+  EmailTemplate'
     { _etSubject = Nothing
     , _etBody = Nothing
     , _etFormat = Nothing
@@ -3208,7 +3257,8 @@ instance ToJSON EmailTemplate where
 -- | Request to upload user account in batch.
 --
 -- /See:/ 'identitytoolkitRelyingPartyUploadAccountRequest' smart constructor.
-data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPartyUploadAccountRequest'
+data IdentitytoolkitRelyingPartyUploadAccountRequest =
+  IdentitytoolkitRelyingPartyUploadAccountRequest'
     { _irpuarBlockSize              :: !(Maybe (Textual Int32))
     , _irpuarUsers                  :: !(Maybe [UserInfo])
     , _irpuarMemoryCost             :: !(Maybe (Textual Int32))
@@ -3223,7 +3273,8 @@ data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPar
     , _irpuarSignerKey              :: !(Maybe Bytes)
     , _irpuarRounds                 :: !(Maybe (Textual Int32))
     , _irpuarTargetProjectId        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyUploadAccountRequest' with the minimum fields required to make a request.
 --
@@ -3259,7 +3310,7 @@ data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartyUploadAccountRequest
     :: IdentitytoolkitRelyingPartyUploadAccountRequest
 identitytoolkitRelyingPartyUploadAccountRequest =
-    IdentitytoolkitRelyingPartyUploadAccountRequest'
+  IdentitytoolkitRelyingPartyUploadAccountRequest'
     { _irpuarBlockSize = Nothing
     , _irpuarUsers = Nothing
     , _irpuarMemoryCost = Nothing
@@ -3369,7 +3420,8 @@ irpuarTargetProjectId
       (\ s a -> s{_irpuarTargetProjectId = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyUploadAccountRequest where
+           IdentitytoolkitRelyingPartyUploadAccountRequest
+         where
         parseJSON
           = withObject
               "IdentitytoolkitRelyingPartyUploadAccountRequest"
@@ -3390,7 +3442,8 @@ instance FromJSON
                      <*> (o .:? "targetProjectId"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyUploadAccountRequest where
+           IdentitytoolkitRelyingPartyUploadAccountRequest
+         where
         toJSON
           IdentitytoolkitRelyingPartyUploadAccountRequest'{..}
           = object
@@ -3414,12 +3467,14 @@ instance ToJSON
 -- | Request to reset the password.
 --
 -- /See:/ 'identitytoolkitRelyingPartyResetPasswordRequest' smart constructor.
-data IdentitytoolkitRelyingPartyResetPasswordRequest = IdentitytoolkitRelyingPartyResetPasswordRequest'
+data IdentitytoolkitRelyingPartyResetPasswordRequest =
+  IdentitytoolkitRelyingPartyResetPasswordRequest'
     { _irprprEmail       :: !(Maybe Text)
     , _irprprNewPassword :: !(Maybe Text)
     , _irprprOOBCode     :: !(Maybe Text)
     , _irprprOldPassword :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyResetPasswordRequest' with the minimum fields required to make a request.
 --
@@ -3435,7 +3490,7 @@ data IdentitytoolkitRelyingPartyResetPasswordRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartyResetPasswordRequest
     :: IdentitytoolkitRelyingPartyResetPasswordRequest
 identitytoolkitRelyingPartyResetPasswordRequest =
-    IdentitytoolkitRelyingPartyResetPasswordRequest'
+  IdentitytoolkitRelyingPartyResetPasswordRequest'
     { _irprprEmail = Nothing
     , _irprprNewPassword = Nothing
     , _irprprOOBCode = Nothing
@@ -3466,7 +3521,8 @@ irprprOldPassword
       (\ s a -> s{_irprprOldPassword = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyResetPasswordRequest where
+           IdentitytoolkitRelyingPartyResetPasswordRequest
+         where
         parseJSON
           = withObject
               "IdentitytoolkitRelyingPartyResetPasswordRequest"
@@ -3477,7 +3533,8 @@ instance FromJSON
                      <*> (o .:? "oldPassword"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyResetPasswordRequest where
+           IdentitytoolkitRelyingPartyResetPasswordRequest
+         where
         toJSON
           IdentitytoolkitRelyingPartyResetPasswordRequest'{..}
           = object
@@ -3490,7 +3547,8 @@ instance ToJSON
 -- | Request to get the IDP authentication URL.
 --
 -- /See:/ 'identitytoolkitRelyingPartyCreateAuthURIRequest' smart constructor.
-data IdentitytoolkitRelyingPartyCreateAuthURIRequest = IdentitytoolkitRelyingPartyCreateAuthURIRequest'
+data IdentitytoolkitRelyingPartyCreateAuthURIRequest =
+  IdentitytoolkitRelyingPartyCreateAuthURIRequest'
     { _irpcaurProviderId          :: !(Maybe Text)
     , _irpcaurClientId            :: !(Maybe Text)
     , _irpcaurContext             :: !(Maybe Text)
@@ -3507,7 +3565,8 @@ data IdentitytoolkitRelyingPartyCreateAuthURIRequest = IdentitytoolkitRelyingPar
     , _irpcaurOAuthScope          :: !(Maybe Text)
     , _irpcaurSessionId           :: !(Maybe Text)
     , _irpcaurOpenidRealm         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyCreateAuthURIRequest' with the minimum fields required to make a request.
 --
@@ -3547,7 +3606,7 @@ data IdentitytoolkitRelyingPartyCreateAuthURIRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartyCreateAuthURIRequest
     :: IdentitytoolkitRelyingPartyCreateAuthURIRequest
 identitytoolkitRelyingPartyCreateAuthURIRequest =
-    IdentitytoolkitRelyingPartyCreateAuthURIRequest'
+  IdentitytoolkitRelyingPartyCreateAuthURIRequest'
     { _irpcaurProviderId = Nothing
     , _irpcaurClientId = Nothing
     , _irpcaurContext = Nothing
@@ -3678,7 +3737,8 @@ irpcaurOpenidRealm
       (\ s a -> s{_irpcaurOpenidRealm = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyCreateAuthURIRequest where
+           IdentitytoolkitRelyingPartyCreateAuthURIRequest
+         where
         parseJSON
           = withObject
               "IdentitytoolkitRelyingPartyCreateAuthURIRequest"
@@ -3701,7 +3761,8 @@ instance FromJSON
                      <*> (o .:? "openidRealm"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyCreateAuthURIRequest where
+           IdentitytoolkitRelyingPartyCreateAuthURIRequest
+         where
         toJSON
           IdentitytoolkitRelyingPartyCreateAuthURIRequest'{..}
           = object
@@ -3727,9 +3788,11 @@ instance ToJSON
 -- | Response for Identitytoolkit-SendVerificationCode
 --
 -- /See:/ 'identitytoolkitRelyingPartySendVerificationCodeResponse' smart constructor.
-newtype IdentitytoolkitRelyingPartySendVerificationCodeResponse = IdentitytoolkitRelyingPartySendVerificationCodeResponse'
+newtype IdentitytoolkitRelyingPartySendVerificationCodeResponse =
+  IdentitytoolkitRelyingPartySendVerificationCodeResponse'
     { _irpsvcrSessionInfo :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySendVerificationCodeResponse' with the minimum fields required to make a request.
 --
@@ -3739,9 +3802,8 @@ newtype IdentitytoolkitRelyingPartySendVerificationCodeResponse = Identitytoolki
 identitytoolkitRelyingPartySendVerificationCodeResponse
     :: IdentitytoolkitRelyingPartySendVerificationCodeResponse
 identitytoolkitRelyingPartySendVerificationCodeResponse =
-    IdentitytoolkitRelyingPartySendVerificationCodeResponse'
-    { _irpsvcrSessionInfo = Nothing
-    }
+  IdentitytoolkitRelyingPartySendVerificationCodeResponse'
+    {_irpsvcrSessionInfo = Nothing}
 
 -- | Encrypted session information
 irpsvcrSessionInfo :: Lens' IdentitytoolkitRelyingPartySendVerificationCodeResponse (Maybe Text)
@@ -3750,7 +3812,7 @@ irpsvcrSessionInfo
       (\ s a -> s{_irpsvcrSessionInfo = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartySendVerificationCodeResponse
+           IdentitytoolkitRelyingPartySendVerificationCodeResponse
          where
         parseJSON
           = withObject
@@ -3760,7 +3822,7 @@ instance FromJSON
                    <$> (o .:? "sessionInfo"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartySendVerificationCodeResponse
+           IdentitytoolkitRelyingPartySendVerificationCodeResponse
          where
         toJSON
           IdentitytoolkitRelyingPartySendVerificationCodeResponse'{..}
@@ -3771,10 +3833,12 @@ instance ToJSON
 -- | Response of getting account information.
 --
 -- /See:/ 'getAccountInfoResponse' smart constructor.
-data GetAccountInfoResponse = GetAccountInfoResponse'
+data GetAccountInfoResponse =
+  GetAccountInfoResponse'
     { _gairUsers :: !(Maybe [UserInfo])
     , _gairKind  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAccountInfoResponse' with the minimum fields required to make a request.
 --
@@ -3786,10 +3850,8 @@ data GetAccountInfoResponse = GetAccountInfoResponse'
 getAccountInfoResponse
     :: GetAccountInfoResponse
 getAccountInfoResponse =
-    GetAccountInfoResponse'
-    { _gairUsers = Nothing
-    , _gairKind = "identitytoolkit#GetAccountInfoResponse"
-    }
+  GetAccountInfoResponse'
+    {_gairUsers = Nothing, _gairKind = "identitytoolkit#GetAccountInfoResponse"}
 
 -- | The info of the users.
 gairUsers :: Lens' GetAccountInfoResponse [UserInfo]
@@ -3821,7 +3883,8 @@ instance ToJSON GetAccountInfoResponse where
 -- | Request for Identitytoolkit-VerifyPhoneNumber
 --
 -- /See:/ 'identitytoolkitRelyingPartyVerifyPhoneNumberRequest' smart constructor.
-data IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest = IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest'
+data IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest =
+  IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest'
     { _iTemporaryProof    :: !(Maybe Text)
     , _iVerificationProof :: !(Maybe Text)
     , _iOperation         :: !(Maybe Text)
@@ -3829,7 +3892,8 @@ data IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest = IdentitytoolkitRelyin
     , _iPhoneNumber       :: !(Maybe Text)
     , _iCode              :: !(Maybe Text)
     , _iIdToken           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest' with the minimum fields required to make a request.
 --
@@ -3851,7 +3915,7 @@ data IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest = IdentitytoolkitRelyin
 identitytoolkitRelyingPartyVerifyPhoneNumberRequest
     :: IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest
 identitytoolkitRelyingPartyVerifyPhoneNumberRequest =
-    IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest'
+  IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest'
     { _iTemporaryProof = Nothing
     , _iVerificationProof = Nothing
     , _iOperation = Nothing
@@ -3892,7 +3956,7 @@ iIdToken :: Lens' IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest (Maybe Tex
 iIdToken = lens _iIdToken (\ s a -> s{_iIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest
+           IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest
          where
         parseJSON
           = withObject
@@ -3909,7 +3973,7 @@ instance FromJSON
                      <*> (o .:? "idToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest
+           IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest
          where
         toJSON
           IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest'{..}
@@ -3926,11 +3990,13 @@ instance ToJSON
 -- | Request to sign in with email.
 --
 -- /See:/ 'identitytoolkitRelyingPartyEmailLinkSigninRequest' smart constructor.
-data IdentitytoolkitRelyingPartyEmailLinkSigninRequest = IdentitytoolkitRelyingPartyEmailLinkSigninRequest'
+data IdentitytoolkitRelyingPartyEmailLinkSigninRequest =
+  IdentitytoolkitRelyingPartyEmailLinkSigninRequest'
     { _irpelsrEmail   :: !(Maybe Text)
     , _irpelsrOOBCode :: !(Maybe Text)
     , _irpelsrIdToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyEmailLinkSigninRequest' with the minimum fields required to make a request.
 --
@@ -3944,7 +4010,7 @@ data IdentitytoolkitRelyingPartyEmailLinkSigninRequest = IdentitytoolkitRelyingP
 identitytoolkitRelyingPartyEmailLinkSigninRequest
     :: IdentitytoolkitRelyingPartyEmailLinkSigninRequest
 identitytoolkitRelyingPartyEmailLinkSigninRequest =
-    IdentitytoolkitRelyingPartyEmailLinkSigninRequest'
+  IdentitytoolkitRelyingPartyEmailLinkSigninRequest'
     { _irpelsrEmail = Nothing
     , _irpelsrOOBCode = Nothing
     , _irpelsrIdToken = Nothing
@@ -3968,7 +4034,7 @@ irpelsrIdToken
       (\ s a -> s{_irpelsrIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyEmailLinkSigninRequest
+           IdentitytoolkitRelyingPartyEmailLinkSigninRequest
          where
         parseJSON
           = withObject
@@ -3980,7 +4046,7 @@ instance FromJSON
                      (o .:? "idToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyEmailLinkSigninRequest
+           IdentitytoolkitRelyingPartyEmailLinkSigninRequest
          where
         toJSON
           IdentitytoolkitRelyingPartyEmailLinkSigninRequest'{..}
@@ -3993,11 +4059,13 @@ instance ToJSON
 -- | Request to delete account.
 --
 -- /See:/ 'identitytoolkitRelyingPartyDeleteAccountRequest' smart constructor.
-data IdentitytoolkitRelyingPartyDeleteAccountRequest = IdentitytoolkitRelyingPartyDeleteAccountRequest'
+data IdentitytoolkitRelyingPartyDeleteAccountRequest =
+  IdentitytoolkitRelyingPartyDeleteAccountRequest'
     { _irpdarDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _irpdarLocalId                :: !(Maybe Text)
     , _irpdarIdToken                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyDeleteAccountRequest' with the minimum fields required to make a request.
 --
@@ -4011,7 +4079,7 @@ data IdentitytoolkitRelyingPartyDeleteAccountRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartyDeleteAccountRequest
     :: IdentitytoolkitRelyingPartyDeleteAccountRequest
 identitytoolkitRelyingPartyDeleteAccountRequest =
-    IdentitytoolkitRelyingPartyDeleteAccountRequest'
+  IdentitytoolkitRelyingPartyDeleteAccountRequest'
     { _irpdarDelegatedProjectNumber = Nothing
     , _irpdarLocalId = Nothing
     , _irpdarIdToken = Nothing
@@ -4038,7 +4106,8 @@ irpdarIdToken
       (\ s a -> s{_irpdarIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyDeleteAccountRequest where
+           IdentitytoolkitRelyingPartyDeleteAccountRequest
+         where
         parseJSON
           = withObject
               "IdentitytoolkitRelyingPartyDeleteAccountRequest"
@@ -4049,7 +4118,8 @@ instance FromJSON
                      <*> (o .:? "idToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyDeleteAccountRequest where
+           IdentitytoolkitRelyingPartyDeleteAccountRequest
+         where
         toJSON
           IdentitytoolkitRelyingPartyDeleteAccountRequest'{..}
           = object
@@ -4063,11 +4133,13 @@ instance ToJSON
 -- email etc.).
 --
 -- /See:/ 'getOOBConfirmationCodeResponse' smart constructor.
-data GetOOBConfirmationCodeResponse = GetOOBConfirmationCodeResponse'
+data GetOOBConfirmationCodeResponse =
+  GetOOBConfirmationCodeResponse'
     { _goobccrEmail   :: !(Maybe Text)
     , _goobccrKind    :: !Text
     , _goobccrOOBCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOOBConfirmationCodeResponse' with the minimum fields required to make a request.
 --
@@ -4081,7 +4153,7 @@ data GetOOBConfirmationCodeResponse = GetOOBConfirmationCodeResponse'
 getOOBConfirmationCodeResponse
     :: GetOOBConfirmationCodeResponse
 getOOBConfirmationCodeResponse =
-    GetOOBConfirmationCodeResponse'
+  GetOOBConfirmationCodeResponse'
     { _goobccrEmail = Nothing
     , _goobccrKind = "identitytoolkit#GetOobConfirmationCodeResponse"
     , _goobccrOOBCode = Nothing
@@ -4125,12 +4197,14 @@ instance ToJSON GetOOBConfirmationCodeResponse where
 -- | Request to download user account in batch.
 --
 -- /See:/ 'identitytoolkitRelyingPartyDownloadAccountRequest' smart constructor.
-data IdentitytoolkitRelyingPartyDownloadAccountRequest = IdentitytoolkitRelyingPartyDownloadAccountRequest'
+data IdentitytoolkitRelyingPartyDownloadAccountRequest =
+  IdentitytoolkitRelyingPartyDownloadAccountRequest'
     { _iNextPageToken          :: !(Maybe Text)
     , _iDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _iMaxResults             :: !(Maybe (Textual Word32))
     , _iTargetProjectId        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyDownloadAccountRequest' with the minimum fields required to make a request.
 --
@@ -4146,7 +4220,7 @@ data IdentitytoolkitRelyingPartyDownloadAccountRequest = IdentitytoolkitRelyingP
 identitytoolkitRelyingPartyDownloadAccountRequest
     :: IdentitytoolkitRelyingPartyDownloadAccountRequest
 identitytoolkitRelyingPartyDownloadAccountRequest =
-    IdentitytoolkitRelyingPartyDownloadAccountRequest'
+  IdentitytoolkitRelyingPartyDownloadAccountRequest'
     { _iNextPageToken = Nothing
     , _iDelegatedProjectNumber = Nothing
     , _iMaxResults = Nothing
@@ -4182,7 +4256,7 @@ iTargetProjectId
       (\ s a -> s{_iTargetProjectId = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartyDownloadAccountRequest
+           IdentitytoolkitRelyingPartyDownloadAccountRequest
          where
         parseJSON
           = withObject
@@ -4196,7 +4270,7 @@ instance FromJSON
                      <*> (o .:? "targetProjectId"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartyDownloadAccountRequest
+           IdentitytoolkitRelyingPartyDownloadAccountRequest
          where
         toJSON
           IdentitytoolkitRelyingPartyDownloadAccountRequest'{..}
@@ -4211,7 +4285,8 @@ instance ToJSON
 -- | Request of verifying the password.
 --
 -- /See:/ 'verifyPasswordResponse' smart constructor.
-data VerifyPasswordResponse = VerifyPasswordResponse'
+data VerifyPasswordResponse =
+  VerifyPasswordResponse'
     { _vprEmail                  :: !(Maybe Text)
     , _vprPhotoURL               :: !(Maybe Text)
     , _vprOAuthAccessToken       :: !(Maybe Text)
@@ -4224,7 +4299,8 @@ data VerifyPasswordResponse = VerifyPasswordResponse'
     , _vprRegistered             :: !(Maybe Bool)
     , _vprIdToken                :: !(Maybe Text)
     , _vprOAuthAuthorizationCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VerifyPasswordResponse' with the minimum fields required to make a request.
 --
@@ -4256,7 +4332,7 @@ data VerifyPasswordResponse = VerifyPasswordResponse'
 verifyPasswordResponse
     :: VerifyPasswordResponse
 verifyPasswordResponse =
-    VerifyPasswordResponse'
+  VerifyPasswordResponse'
     { _vprEmail = Nothing
     , _vprPhotoURL = Nothing
     , _vprOAuthAccessToken = Nothing
@@ -4380,7 +4456,8 @@ instance ToJSON VerifyPasswordResponse where
 -- | Respone of setting the account information.
 --
 -- /See:/ 'setAccountInfoResponse' smart constructor.
-data SetAccountInfoResponse = SetAccountInfoResponse'
+data SetAccountInfoResponse =
+  SetAccountInfoResponse'
     { _sairEmail            :: !(Maybe Text)
     , _sairPhotoURL         :: !(Maybe Text)
     , _sairKind             :: !Text
@@ -4393,7 +4470,8 @@ data SetAccountInfoResponse = SetAccountInfoResponse'
     , _sairLocalId          :: !(Maybe Text)
     , _sairNewEmail         :: !(Maybe Text)
     , _sairIdToken          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetAccountInfoResponse' with the minimum fields required to make a request.
 --
@@ -4425,7 +4503,7 @@ data SetAccountInfoResponse = SetAccountInfoResponse'
 setAccountInfoResponse
     :: SetAccountInfoResponse
 setAccountInfoResponse =
-    SetAccountInfoResponse'
+  SetAccountInfoResponse'
     { _sairEmail = Nothing
     , _sairPhotoURL = Nothing
     , _sairKind = "identitytoolkit#SetAccountInfoResponse"
@@ -4549,7 +4627,8 @@ instance ToJSON SetAccountInfoResponse where
 -- reauth.
 --
 -- /See:/ 'identitytoolkitRelyingPartySignupNewUserRequest' smart constructor.
-data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPartySignupNewUserRequest'
+data IdentitytoolkitRelyingPartySignupNewUserRequest =
+  IdentitytoolkitRelyingPartySignupNewUserRequest'
     { _irpsnurEmail               :: !(Maybe Text)
     , _irpsnurInstanceId          :: !(Maybe Text)
     , _irpsnurPhotoURL            :: !(Maybe Text)
@@ -4564,7 +4643,8 @@ data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPar
     , _irpsnurDisplayName         :: !(Maybe Text)
     , _irpsnurLocalId             :: !(Maybe Text)
     , _irpsnurIdToken             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySignupNewUserRequest' with the minimum fields required to make a request.
 --
@@ -4600,7 +4680,7 @@ data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartySignupNewUserRequest
     :: IdentitytoolkitRelyingPartySignupNewUserRequest
 identitytoolkitRelyingPartySignupNewUserRequest =
-    IdentitytoolkitRelyingPartySignupNewUserRequest'
+  IdentitytoolkitRelyingPartySignupNewUserRequest'
     { _irpsnurEmail = Nothing
     , _irpsnurInstanceId = Nothing
     , _irpsnurPhotoURL = Nothing
@@ -4704,7 +4784,8 @@ irpsnurIdToken
       (\ s a -> s{_irpsnurIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartySignupNewUserRequest where
+           IdentitytoolkitRelyingPartySignupNewUserRequest
+         where
         parseJSON
           = withObject
               "IdentitytoolkitRelyingPartySignupNewUserRequest"
@@ -4725,7 +4806,8 @@ instance FromJSON
                      <*> (o .:? "idToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartySignupNewUserRequest where
+           IdentitytoolkitRelyingPartySignupNewUserRequest
+         where
         toJSON
           IdentitytoolkitRelyingPartySignupNewUserRequest'{..}
           = object
@@ -4749,7 +4831,8 @@ instance ToJSON
 -- | Response of verifying the IDP assertion.
 --
 -- /See:/ 'verifyAssertionResponse' smart constructor.
-data VerifyAssertionResponse = VerifyAssertionResponse'
+data VerifyAssertionResponse =
+  VerifyAssertionResponse'
     { _varProviderId             :: !(Maybe Text)
     , _varFullName               :: !(Maybe Text)
     , _varEmail                  :: !(Maybe Text)
@@ -4789,7 +4872,8 @@ data VerifyAssertionResponse = VerifyAssertionResponse'
     , _varErrorMessage           :: !(Maybe Text)
     , _varIdToken                :: !(Maybe Text)
     , _varOAuthAuthorizationCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VerifyAssertionResponse' with the minimum fields required to make a request.
 --
@@ -4875,7 +4959,7 @@ data VerifyAssertionResponse = VerifyAssertionResponse'
 verifyAssertionResponse
     :: VerifyAssertionResponse
 verifyAssertionResponse =
-    VerifyAssertionResponse'
+  VerifyAssertionResponse'
     { _varProviderId = Nothing
     , _varFullName = Nothing
     , _varEmail = Nothing
@@ -5246,10 +5330,12 @@ instance ToJSON VerifyAssertionResponse where
 -- | Request to sign out user.
 --
 -- /See:/ 'identitytoolkitRelyingPartySignOutUserRequest' smart constructor.
-data IdentitytoolkitRelyingPartySignOutUserRequest = IdentitytoolkitRelyingPartySignOutUserRequest'
+data IdentitytoolkitRelyingPartySignOutUserRequest =
+  IdentitytoolkitRelyingPartySignOutUserRequest'
     { _iInstanceId :: !(Maybe Text)
     , _iLocalId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySignOutUserRequest' with the minimum fields required to make a request.
 --
@@ -5261,10 +5347,8 @@ data IdentitytoolkitRelyingPartySignOutUserRequest = IdentitytoolkitRelyingParty
 identitytoolkitRelyingPartySignOutUserRequest
     :: IdentitytoolkitRelyingPartySignOutUserRequest
 identitytoolkitRelyingPartySignOutUserRequest =
-    IdentitytoolkitRelyingPartySignOutUserRequest'
-    { _iInstanceId = Nothing
-    , _iLocalId = Nothing
-    }
+  IdentitytoolkitRelyingPartySignOutUserRequest'
+    {_iInstanceId = Nothing, _iLocalId = Nothing}
 
 -- | Instance id token of the app.
 iInstanceId :: Lens' IdentitytoolkitRelyingPartySignOutUserRequest (Maybe Text)
@@ -5276,7 +5360,8 @@ iLocalId :: Lens' IdentitytoolkitRelyingPartySignOutUserRequest (Maybe Text)
 iLocalId = lens _iLocalId (\ s a -> s{_iLocalId = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingPartySignOutUserRequest where
+           IdentitytoolkitRelyingPartySignOutUserRequest
+         where
         parseJSON
           = withObject
               "IdentitytoolkitRelyingPartySignOutUserRequest"
@@ -5285,7 +5370,8 @@ instance FromJSON
                    (o .:? "instanceId") <*> (o .:? "localId"))
 
 instance ToJSON
-         IdentitytoolkitRelyingPartySignOutUserRequest where
+           IdentitytoolkitRelyingPartySignOutUserRequest
+         where
         toJSON
           IdentitytoolkitRelyingPartySignOutUserRequest'{..}
           = object
@@ -5296,11 +5382,13 @@ instance ToJSON
 -- | Response of getting recaptcha param.
 --
 -- /See:/ 'getRecaptchaParamResponse' smart constructor.
-data GetRecaptchaParamResponse = GetRecaptchaParamResponse'
+data GetRecaptchaParamResponse =
+  GetRecaptchaParamResponse'
     { _grprRecaptchaSiteKey :: !(Maybe Text)
     , _grprKind             :: !Text
     , _grprRecaptchaStoken  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRecaptchaParamResponse' with the minimum fields required to make a request.
 --
@@ -5314,7 +5402,7 @@ data GetRecaptchaParamResponse = GetRecaptchaParamResponse'
 getRecaptchaParamResponse
     :: GetRecaptchaParamResponse
 getRecaptchaParamResponse =
-    GetRecaptchaParamResponse'
+  GetRecaptchaParamResponse'
     { _grprRecaptchaSiteKey = Nothing
     , _grprKind = "identitytoolkit#GetRecaptchaParamResponse"
     , _grprRecaptchaStoken = Nothing

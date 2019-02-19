@@ -67,7 +67,8 @@ type ProjectsLocationsRegistriesGroupsTestIAMPermissionsResource
 -- not a NOT_FOUND error.
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsTestIAMPermissions' smart constructor.
-data ProjectsLocationsRegistriesGroupsTestIAMPermissions = ProjectsLocationsRegistriesGroupsTestIAMPermissions'
+data ProjectsLocationsRegistriesGroupsTestIAMPermissions =
+  ProjectsLocationsRegistriesGroupsTestIAMPermissions'
     { _plrgtipXgafv          :: !(Maybe Xgafv)
     , _plrgtipUploadProtocol :: !(Maybe Text)
     , _plrgtipAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsLocationsRegistriesGroupsTestIAMPermissions = ProjectsLocationsRegi
     , _plrgtipPayload        :: !TestIAMPermissionsRequest
     , _plrgtipResource       :: !Text
     , _plrgtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsRegistriesGroupsTestIAMPermissions
     -> Text -- ^ 'plrgtipResource'
     -> ProjectsLocationsRegistriesGroupsTestIAMPermissions
 projectsLocationsRegistriesGroupsTestIAMPermissions pPlrgtipPayload_ pPlrgtipResource_ =
-    ProjectsLocationsRegistriesGroupsTestIAMPermissions'
+  ProjectsLocationsRegistriesGroupsTestIAMPermissions'
     { _plrgtipXgafv = Nothing
     , _plrgtipUploadProtocol = Nothing
     , _plrgtipAccessToken = Nothing
@@ -153,7 +155,7 @@ plrgtipCallback
       (\ s a -> s{_plrgtipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsTestIAMPermissions
+           ProjectsLocationsRegistriesGroupsTestIAMPermissions
          where
         type Rs
                ProjectsLocationsRegistriesGroupsTestIAMPermissions

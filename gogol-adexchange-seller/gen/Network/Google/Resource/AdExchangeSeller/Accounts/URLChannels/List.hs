@@ -61,12 +61,14 @@ type AccountsURLChannelsListResource =
 -- account.
 --
 -- /See:/ 'accountsURLChannelsList' smart constructor.
-data AccountsURLChannelsList = AccountsURLChannelsList'
+data AccountsURLChannelsList =
+  AccountsURLChannelsList'
     { _auclAdClientId :: !Text
     , _auclAccountId  :: !Text
     , _auclPageToken  :: !(Maybe Text)
     , _auclMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsURLChannelsList' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ accountsURLChannelsList
     -> Text -- ^ 'auclAccountId'
     -> AccountsURLChannelsList
 accountsURLChannelsList pAuclAdClientId_ pAuclAccountId_ =
-    AccountsURLChannelsList'
+  AccountsURLChannelsList'
     { _auclAdClientId = pAuclAdClientId_
     , _auclAccountId = pAuclAccountId_
     , _auclPageToken = Nothing

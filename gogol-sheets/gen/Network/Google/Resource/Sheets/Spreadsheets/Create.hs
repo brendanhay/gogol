@@ -61,14 +61,16 @@ type SpreadsheetsCreateResource =
 -- | Creates a spreadsheet, returning the newly created spreadsheet.
 --
 -- /See:/ 'spreadsheetsCreate' smart constructor.
-data SpreadsheetsCreate = SpreadsheetsCreate'
+data SpreadsheetsCreate =
+  SpreadsheetsCreate'
     { _scXgafv          :: !(Maybe Xgafv)
     , _scUploadProtocol :: !(Maybe Text)
     , _scAccessToken    :: !(Maybe Text)
     , _scUploadType     :: !(Maybe Text)
     , _scPayload        :: !Spreadsheet
     , _scCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsCreate' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ spreadsheetsCreate
     :: Spreadsheet -- ^ 'scPayload'
     -> SpreadsheetsCreate
 spreadsheetsCreate pScPayload_ =
-    SpreadsheetsCreate'
+  SpreadsheetsCreate'
     { _scXgafv = Nothing
     , _scUploadProtocol = Nothing
     , _scAccessToken = Nothing

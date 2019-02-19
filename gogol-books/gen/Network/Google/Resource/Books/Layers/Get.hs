@@ -58,12 +58,14 @@ type LayersGetResource =
 -- | Gets the layer summary for a volume.
 --
 -- /See:/ 'layersGet' smart constructor.
-data LayersGet = LayersGet'
+data LayersGet =
+  LayersGet'
     { _lgContentVersion :: !(Maybe Text)
     , _lgVolumeId       :: !Text
     , _lgSource         :: !(Maybe Text)
     , _lgSummaryId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LayersGet' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ layersGet
     -> Text -- ^ 'lgSummaryId'
     -> LayersGet
 layersGet pLgVolumeId_ pLgSummaryId_ =
-    LayersGet'
+  LayersGet'
     { _lgContentVersion = Nothing
     , _lgVolumeId = pLgVolumeId_
     , _lgSource = Nothing

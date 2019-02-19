@@ -51,9 +51,11 @@ type AccountsContainersWorkspacesVariablesDeleteResource
 -- | Deletes a GTM Variable.
 --
 -- /See:/ 'accountsContainersWorkspacesVariablesDelete' smart constructor.
-newtype AccountsContainersWorkspacesVariablesDelete = AccountsContainersWorkspacesVariablesDelete'
+newtype AccountsContainersWorkspacesVariablesDelete =
+  AccountsContainersWorkspacesVariablesDelete'
     { _acwvdPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesVariablesDelete' with the minimum fields required to make a request.
 --
@@ -64,9 +66,7 @@ accountsContainersWorkspacesVariablesDelete
     :: Text -- ^ 'acwvdPath'
     -> AccountsContainersWorkspacesVariablesDelete
 accountsContainersWorkspacesVariablesDelete pAcwvdPath_ =
-    AccountsContainersWorkspacesVariablesDelete'
-    { _acwvdPath = pAcwvdPath_
-    }
+  AccountsContainersWorkspacesVariablesDelete' {_acwvdPath = pAcwvdPath_}
 
 -- | GTM Variable\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/variables\/{variable_id}
@@ -75,7 +75,8 @@ acwvdPath
   = lens _acwvdPath (\ s a -> s{_acwvdPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesVariablesDelete where
+           AccountsContainersWorkspacesVariablesDelete
+         where
         type Rs AccountsContainersWorkspacesVariablesDelete =
              ()
         type Scopes

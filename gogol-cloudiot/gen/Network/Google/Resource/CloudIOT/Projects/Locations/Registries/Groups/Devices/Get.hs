@@ -62,7 +62,8 @@ type ProjectsLocationsRegistriesGroupsDevicesGetResource
 -- | Gets details about a device.
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsDevicesGet' smart constructor.
-data ProjectsLocationsRegistriesGroupsDevicesGet = ProjectsLocationsRegistriesGroupsDevicesGet'
+data ProjectsLocationsRegistriesGroupsDevicesGet =
+  ProjectsLocationsRegistriesGroupsDevicesGet'
     { _plrgdgXgafv          :: !(Maybe Xgafv)
     , _plrgdgUploadProtocol :: !(Maybe Text)
     , _plrgdgAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsLocationsRegistriesGroupsDevicesGet = ProjectsLocationsRegistriesGr
     , _plrgdgFieldMask      :: !(Maybe GFieldMask)
     , _plrgdgName           :: !Text
     , _plrgdgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsDevicesGet' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ projectsLocationsRegistriesGroupsDevicesGet
     :: Text -- ^ 'plrgdgName'
     -> ProjectsLocationsRegistriesGroupsDevicesGet
 projectsLocationsRegistriesGroupsDevicesGet pPlrgdgName_ =
-    ProjectsLocationsRegistriesGroupsDevicesGet'
+  ProjectsLocationsRegistriesGroupsDevicesGet'
     { _plrgdgXgafv = Nothing
     , _plrgdgUploadProtocol = Nothing
     , _plrgdgAccessToken = Nothing
@@ -148,7 +150,8 @@ plrgdgCallback
       (\ s a -> s{_plrgdgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsDevicesGet where
+           ProjectsLocationsRegistriesGroupsDevicesGet
+         where
         type Rs ProjectsLocationsRegistriesGroupsDevicesGet =
              Device
         type Scopes

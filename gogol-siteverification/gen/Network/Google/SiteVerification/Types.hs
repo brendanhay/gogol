@@ -72,8 +72,8 @@ siteVerificationService
 
 -- | Manage your new site verifications with Google
 siteVerificationVerifyOnlyScope :: Proxy '["https://www.googleapis.com/auth/siteverification.verify_only"]
-siteVerificationVerifyOnlyScope = Proxy;
+siteVerificationVerifyOnlyScope = Proxy
 
 -- | Manage the list of sites and domains you control
 siteVerificationScope :: Proxy '["https://www.googleapis.com/auth/siteverification"]
-siteVerificationScope = Proxy;
+siteVerificationScope = Proxy

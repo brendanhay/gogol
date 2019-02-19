@@ -56,9 +56,11 @@ type EnterprisesSendTestPushNotificationResource =
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
 -- /See:/ 'enterprisesSendTestPushNotification' smart constructor.
-newtype EnterprisesSendTestPushNotification = EnterprisesSendTestPushNotification'
+newtype EnterprisesSendTestPushNotification =
+  EnterprisesSendTestPushNotification'
     { _estpnEnterpriseId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesSendTestPushNotification' with the minimum fields required to make a request.
 --
@@ -69,9 +71,8 @@ enterprisesSendTestPushNotification
     :: Text -- ^ 'estpnEnterpriseId'
     -> EnterprisesSendTestPushNotification
 enterprisesSendTestPushNotification pEstpnEnterpriseId_ =
-    EnterprisesSendTestPushNotification'
-    { _estpnEnterpriseId = pEstpnEnterpriseId_
-    }
+  EnterprisesSendTestPushNotification'
+    {_estpnEnterpriseId = pEstpnEnterpriseId_}
 
 -- | The ID of the enterprise.
 estpnEnterpriseId :: Lens' EnterprisesSendTestPushNotification Text
@@ -80,7 +81,8 @@ estpnEnterpriseId
       (\ s a -> s{_estpnEnterpriseId = a})
 
 instance GoogleRequest
-         EnterprisesSendTestPushNotification where
+           EnterprisesSendTestPushNotification
+         where
         type Rs EnterprisesSendTestPushNotification =
              EnterprisesSendTestPushNotificationResponse
         type Scopes EnterprisesSendTestPushNotification =

@@ -64,14 +64,16 @@ type ProjectsModelsDeleteResource =
 -- [projects.models.versions.delete](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/delete).
 --
 -- /See:/ 'projectsModelsDelete' smart constructor.
-data ProjectsModelsDelete = ProjectsModelsDelete'
+data ProjectsModelsDelete =
+  ProjectsModelsDelete'
     { _pmdXgafv          :: !(Maybe Xgafv)
     , _pmdUploadProtocol :: !(Maybe Text)
     , _pmdAccessToken    :: !(Maybe Text)
     , _pmdUploadType     :: !(Maybe Text)
     , _pmdName           :: !Text
     , _pmdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsModelsDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ projectsModelsDelete
     :: Text -- ^ 'pmdName'
     -> ProjectsModelsDelete
 projectsModelsDelete pPmdName_ =
-    ProjectsModelsDelete'
+  ProjectsModelsDelete'
     { _pmdXgafv = Nothing
     , _pmdUploadProtocol = Nothing
     , _pmdAccessToken = Nothing

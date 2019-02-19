@@ -57,11 +57,13 @@ type EntitlementsGetResource =
 -- | Retrieves details of an entitlement.
 --
 -- /See:/ 'entitlementsGet' smart constructor.
-data EntitlementsGet = EntitlementsGet'
+data EntitlementsGet =
+  EntitlementsGet'
     { _egEntitlementId :: !Text
     , _egEnterpriseId  :: !Text
     , _egUserId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntitlementsGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ entitlementsGet
     -> Text -- ^ 'egUserId'
     -> EntitlementsGet
 entitlementsGet pEgEntitlementId_ pEgEnterpriseId_ pEgUserId_ =
-    EntitlementsGet'
+  EntitlementsGet'
     { _egEntitlementId = pEgEntitlementId_
     , _egEnterpriseId = pEgEnterpriseId_
     , _egUserId = pEgUserId_

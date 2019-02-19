@@ -60,11 +60,13 @@ type InstancesDemoteMasterResource =
 -- external database server.
 --
 -- /See:/ 'instancesDemoteMaster' smart constructor.
-data InstancesDemoteMaster = InstancesDemoteMaster'
+data InstancesDemoteMaster =
+  InstancesDemoteMaster'
     { _idmProject  :: !Text
     , _idmPayload  :: !InstancesDemoteMasterRequest
     , _idmInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesDemoteMaster' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ instancesDemoteMaster
     -> Text -- ^ 'idmInstance'
     -> InstancesDemoteMaster
 instancesDemoteMaster pIdmProject_ pIdmPayload_ pIdmInstance_ =
-    InstancesDemoteMaster'
+  InstancesDemoteMaster'
     { _idmProject = pIdmProject_
     , _idmPayload = pIdmPayload_
     , _idmInstance = pIdmInstance_

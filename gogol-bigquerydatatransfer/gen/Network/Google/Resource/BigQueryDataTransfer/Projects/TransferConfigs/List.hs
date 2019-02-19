@@ -67,7 +67,8 @@ type ProjectsTransferConfigsListResource =
 -- | Returns information about all data transfers in the project.
 --
 -- /See:/ 'projectsTransferConfigsList' smart constructor.
-data ProjectsTransferConfigsList = ProjectsTransferConfigsList'
+data ProjectsTransferConfigsList =
+  ProjectsTransferConfigsList'
     { _ptclParent         :: !Text
     , _ptclXgafv          :: !(Maybe Xgafv)
     , _ptclUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsTransferConfigsList = ProjectsTransferConfigsList'
     , _ptclDataSourceIds  :: !(Maybe [Text])
     , _ptclPageSize       :: !(Maybe (Textual Int32))
     , _ptclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTransferConfigsList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsTransferConfigsList
     :: Text -- ^ 'ptclParent'
     -> ProjectsTransferConfigsList
 projectsTransferConfigsList pPtclParent_ =
-    ProjectsTransferConfigsList'
+  ProjectsTransferConfigsList'
     { _ptclParent = pPtclParent_
     , _ptclXgafv = Nothing
     , _ptclUploadProtocol = Nothing

@@ -66,7 +66,8 @@ type ProjectsServicesDisableResource =
 -- security leaks. Operation
 --
 -- /See:/ 'projectsServicesDisable' smart constructor.
-data ProjectsServicesDisable = ProjectsServicesDisable'
+data ProjectsServicesDisable =
+  ProjectsServicesDisable'
     { _psdXgafv          :: !(Maybe Xgafv)
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsServicesDisable = ProjectsServicesDisable'
     , _psdPayload        :: !DisableServiceRequest
     , _psdName           :: !Text
     , _psdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServicesDisable' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsServicesDisable
     -> Text -- ^ 'psdName'
     -> ProjectsServicesDisable
 projectsServicesDisable pPsdPayload_ pPsdName_ =
-    ProjectsServicesDisable'
+  ProjectsServicesDisable'
     { _psdXgafv = Nothing
     , _psdUploadProtocol = Nothing
     , _psdAccessToken = Nothing

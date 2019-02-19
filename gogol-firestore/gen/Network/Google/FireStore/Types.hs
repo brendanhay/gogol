@@ -622,8 +622,8 @@ fireStoreService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View and manage your Google Cloud Datastore data
 datastoreScope :: Proxy '["https://www.googleapis.com/auth/datastore"]
-datastoreScope = Proxy;
+datastoreScope = Proxy

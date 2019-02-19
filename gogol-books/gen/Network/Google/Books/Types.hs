@@ -992,4 +992,4 @@ booksService
 
 -- | Manage your books
 booksScope :: Proxy '["https://www.googleapis.com/auth/books"]
-booksScope = Proxy;
+booksScope = Proxy

@@ -64,14 +64,16 @@ type ProjectsOperationsManualRecognitionTasksGetResource
 -- API service.
 --
 -- /See:/ 'projectsOperationsManualRecognitionTasksGet' smart constructor.
-data ProjectsOperationsManualRecognitionTasksGet = ProjectsOperationsManualRecognitionTasksGet'
+data ProjectsOperationsManualRecognitionTasksGet =
+  ProjectsOperationsManualRecognitionTasksGet'
     { _pomrtgXgafv          :: !(Maybe Xgafv)
     , _pomrtgUploadProtocol :: !(Maybe Text)
     , _pomrtgAccessToken    :: !(Maybe Text)
     , _pomrtgUploadType     :: !(Maybe Text)
     , _pomrtgName           :: !Text
     , _pomrtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsOperationsManualRecognitionTasksGet' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ projectsOperationsManualRecognitionTasksGet
     :: Text -- ^ 'pomrtgName'
     -> ProjectsOperationsManualRecognitionTasksGet
 projectsOperationsManualRecognitionTasksGet pPomrtgName_ =
-    ProjectsOperationsManualRecognitionTasksGet'
+  ProjectsOperationsManualRecognitionTasksGet'
     { _pomrtgXgafv = Nothing
     , _pomrtgUploadProtocol = Nothing
     , _pomrtgAccessToken = Nothing
@@ -136,7 +138,8 @@ pomrtgCallback
       (\ s a -> s{_pomrtgCallback = a})
 
 instance GoogleRequest
-         ProjectsOperationsManualRecognitionTasksGet where
+           ProjectsOperationsManualRecognitionTasksGet
+         where
         type Rs ProjectsOperationsManualRecognitionTasksGet =
              Operation
         type Scopes

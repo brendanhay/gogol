@@ -5230,24 +5230,24 @@ computeService
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
-computeScope = Proxy;
+computeScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View your data in Google Cloud Storage
 storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-storageReadOnlyScope = Proxy;
+storageReadOnlyScope = Proxy
 
 -- | Manage your data in Google Cloud Storage
 storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-storageReadWriteScope = Proxy;
+storageReadWriteScope = Proxy
 
 -- | View your Google Compute Engine resources
 computeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-computeReadOnlyScope = Proxy;
+computeReadOnlyScope = Proxy
 
 -- | Manage your data and permissions in Google Cloud Storage
 storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-storageFullControlScope = Proxy;
+storageFullControlScope = Proxy

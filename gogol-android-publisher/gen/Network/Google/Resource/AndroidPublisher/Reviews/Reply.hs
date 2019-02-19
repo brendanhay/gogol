@@ -57,11 +57,13 @@ type ReviewsReplyResource =
 -- | Reply to a single review, or update an existing reply.
 --
 -- /See:/ 'reviewsReply' smart constructor.
-data ReviewsReply = ReviewsReply'
+data ReviewsReply =
+  ReviewsReply'
     { _rrReviewId    :: !Text
     , _rrPackageName :: !Text
     , _rrPayload     :: !ReviewsReplyRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReviewsReply' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ reviewsReply
     -> ReviewsReplyRequest -- ^ 'rrPayload'
     -> ReviewsReply
 reviewsReply pRrReviewId_ pRrPackageName_ pRrPayload_ =
-    ReviewsReply'
+  ReviewsReply'
     { _rrReviewId = pRrReviewId_
     , _rrPackageName = pRrPackageName_
     , _rrPayload = pRrPayload_

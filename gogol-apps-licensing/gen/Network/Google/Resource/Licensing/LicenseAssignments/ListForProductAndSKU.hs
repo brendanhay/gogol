@@ -63,13 +63,15 @@ type LicenseAssignmentsListForProductAndSKUResource =
 -- | List license assignments for given product and sku of the customer.
 --
 -- /See:/ 'licenseAssignmentsListForProductAndSKU' smart constructor.
-data LicenseAssignmentsListForProductAndSKU = LicenseAssignmentsListForProductAndSKU'
+data LicenseAssignmentsListForProductAndSKU =
+  LicenseAssignmentsListForProductAndSKU'
     { _lalfpaskuSKUId      :: !Text
     , _lalfpaskuCustomerId :: !Text
     , _lalfpaskuPageToken  :: !Text
     , _lalfpaskuProductId  :: !Text
     , _lalfpaskuMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseAssignmentsListForProductAndSKU' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ licenseAssignmentsListForProductAndSKU
     -> Text -- ^ 'lalfpaskuProductId'
     -> LicenseAssignmentsListForProductAndSKU
 licenseAssignmentsListForProductAndSKU pLalfpaskuSKUId_ pLalfpaskuCustomerId_ pLalfpaskuProductId_ =
-    LicenseAssignmentsListForProductAndSKU'
+  LicenseAssignmentsListForProductAndSKU'
     { _lalfpaskuSKUId = pLalfpaskuSKUId_
     , _lalfpaskuCustomerId = pLalfpaskuCustomerId_
     , _lalfpaskuPageToken = ""
@@ -133,7 +135,8 @@ lalfpaskuMaxResults
       . _Coerce
 
 instance GoogleRequest
-         LicenseAssignmentsListForProductAndSKU where
+           LicenseAssignmentsListForProductAndSKU
+         where
         type Rs LicenseAssignmentsListForProductAndSKU =
              LicenseAssignmentList
         type Scopes LicenseAssignmentsListForProductAndSKU =

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SitesInsert' request conforms to.
 type SitesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -54,10 +54,12 @@ type SitesInsertResource =
 -- | Inserts a new site.
 --
 -- /See:/ 'sitesInsert' smart constructor.
-data SitesInsert = SitesInsert'
+data SitesInsert =
+  SitesInsert'
     { _sProFileId :: !(Textual Int64)
     , _sPayload   :: !Site
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ sitesInsert
     -> Site -- ^ 'sPayload'
     -> SitesInsert
 sitesInsert pSProFileId_ pSPayload_ =
-    SitesInsert'
-    { _sProFileId = _Coerce # pSProFileId_
-    , _sPayload = pSPayload_
-    }
+  SitesInsert' {_sProFileId = _Coerce # pSProFileId_, _sPayload = pSPayload_}
 
 -- | User profile ID associated with this request.
 sProFileId :: Lens' SitesInsert Int64

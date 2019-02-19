@@ -64,7 +64,8 @@ type ProjectsLocationsWorkflowTemplatesCreateResource
 -- | Creates new workflow template.
 --
 -- /See:/ 'projectsLocationsWorkflowTemplatesCreate' smart constructor.
-data ProjectsLocationsWorkflowTemplatesCreate = ProjectsLocationsWorkflowTemplatesCreate'
+data ProjectsLocationsWorkflowTemplatesCreate =
+  ProjectsLocationsWorkflowTemplatesCreate'
     { _plwtcParent         :: !Text
     , _plwtcXgafv          :: !(Maybe Xgafv)
     , _plwtcUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsLocationsWorkflowTemplatesCreate = ProjectsLocationsWorkflowTemplat
     , _plwtcUploadType     :: !(Maybe Text)
     , _plwtcPayload        :: !WorkflowTemplate
     , _plwtcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsLocationsWorkflowTemplatesCreate
     -> WorkflowTemplate -- ^ 'plwtcPayload'
     -> ProjectsLocationsWorkflowTemplatesCreate
 projectsLocationsWorkflowTemplatesCreate pPlwtcParent_ pPlwtcPayload_ =
-    ProjectsLocationsWorkflowTemplatesCreate'
+  ProjectsLocationsWorkflowTemplatesCreate'
     { _plwtcParent = pPlwtcParent_
     , _plwtcXgafv = Nothing
     , _plwtcUploadProtocol = Nothing
@@ -148,7 +150,8 @@ plwtcCallback
       (\ s a -> s{_plwtcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkflowTemplatesCreate where
+           ProjectsLocationsWorkflowTemplatesCreate
+         where
         type Rs ProjectsLocationsWorkflowTemplatesCreate =
              WorkflowTemplate
         type Scopes ProjectsLocationsWorkflowTemplatesCreate

@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersPatch' request conforms to.
 type AdvertisersPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -57,11 +57,13 @@ type AdvertisersPatchResource =
 -- | Updates an existing advertiser. This method supports patch semantics.
 --
 -- /See:/ 'advertisersPatch' smart constructor.
-data AdvertisersPatch = AdvertisersPatch'
+data AdvertisersPatch =
+  AdvertisersPatch'
     { _apProFileId :: !(Textual Int64)
     , _apPayload   :: !Advertiser
     , _apId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdvertisersPatch' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ advertisersPatch
     -> Int64 -- ^ 'apId'
     -> AdvertisersPatch
 advertisersPatch pApProFileId_ pApPayload_ pApId_ =
-    AdvertisersPatch'
+  AdvertisersPatch'
     { _apProFileId = _Coerce # pApProFileId_
     , _apPayload = pApPayload_
     , _apId = _Coerce # pApId_

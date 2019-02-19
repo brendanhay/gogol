@@ -67,7 +67,8 @@ type AlbumsAddEnrichmentResource =
 -- | Adds an enrichment to a specified position in a defined album.
 --
 -- /See:/ 'albumsAddEnrichment' smart constructor.
-data AlbumsAddEnrichment = AlbumsAddEnrichment'
+data AlbumsAddEnrichment =
+  AlbumsAddEnrichment'
     { _aaeXgafv          :: !(Maybe Xgafv)
     , _aaeAlbumId        :: !Text
     , _aaeUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data AlbumsAddEnrichment = AlbumsAddEnrichment'
     , _aaePayload        :: !AddEnrichmentToAlbumRequest
     , _aaeBearerToken    :: !(Maybe Text)
     , _aaeCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlbumsAddEnrichment' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ albumsAddEnrichment
     -> AddEnrichmentToAlbumRequest -- ^ 'aaePayload'
     -> AlbumsAddEnrichment
 albumsAddEnrichment pAaeAlbumId_ pAaePayload_ =
-    AlbumsAddEnrichment'
+  AlbumsAddEnrichment'
     { _aaeXgafv = Nothing
     , _aaeAlbumId = pAaeAlbumId_
     , _aaeUploadProtocol = Nothing

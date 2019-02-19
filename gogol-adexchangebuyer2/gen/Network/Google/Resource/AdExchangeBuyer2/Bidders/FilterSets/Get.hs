@@ -61,14 +61,16 @@ type BiddersFilterSetsGetResource =
 -- account ID.
 --
 -- /See:/ 'biddersFilterSetsGet' smart constructor.
-data BiddersFilterSetsGet = BiddersFilterSetsGet'
+data BiddersFilterSetsGet =
+  BiddersFilterSetsGet'
     { _bfsgXgafv          :: !(Maybe Xgafv)
     , _bfsgUploadProtocol :: !(Maybe Text)
     , _bfsgAccessToken    :: !(Maybe Text)
     , _bfsgUploadType     :: !(Maybe Text)
     , _bfsgName           :: !Text
     , _bfsgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BiddersFilterSetsGet' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ biddersFilterSetsGet
     :: Text -- ^ 'bfsgName'
     -> BiddersFilterSetsGet
 biddersFilterSetsGet pBfsgName_ =
-    BiddersFilterSetsGet'
+  BiddersFilterSetsGet'
     { _bfsgXgafv = Nothing
     , _bfsgUploadProtocol = Nothing
     , _bfsgAccessToken = Nothing

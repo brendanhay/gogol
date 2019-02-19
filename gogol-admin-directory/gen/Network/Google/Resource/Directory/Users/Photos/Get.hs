@@ -54,9 +54,11 @@ type UsersPhotosGetResource =
 -- | Retrieve photo of a user
 --
 -- /See:/ 'usersPhotosGet' smart constructor.
-newtype UsersPhotosGet = UsersPhotosGet'
+newtype UsersPhotosGet =
+  UsersPhotosGet'
     { _upgUserKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersPhotosGet' with the minimum fields required to make a request.
 --
@@ -66,10 +68,7 @@ newtype UsersPhotosGet = UsersPhotosGet'
 usersPhotosGet
     :: Text -- ^ 'upgUserKey'
     -> UsersPhotosGet
-usersPhotosGet pUpgUserKey_ =
-    UsersPhotosGet'
-    { _upgUserKey = pUpgUserKey_
-    }
+usersPhotosGet pUpgUserKey_ = UsersPhotosGet' {_upgUserKey = pUpgUserKey_}
 
 -- | Email or immutable ID of the user
 upgUserKey :: Lens' UsersPhotosGet Text

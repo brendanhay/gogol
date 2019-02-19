@@ -54,10 +54,12 @@ type GroupsUpdateResource =
 -- | Update Group
 --
 -- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate'
+data GroupsUpdate =
+  GroupsUpdate'
     { _guGroupKey :: !Text
     , _guPayload  :: !Group
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ groupsUpdate
     -> Group -- ^ 'guPayload'
     -> GroupsUpdate
 groupsUpdate pGuGroupKey_ pGuPayload_ =
-    GroupsUpdate'
-    { _guGroupKey = pGuGroupKey_
-    , _guPayload = pGuPayload_
-    }
+  GroupsUpdate' {_guGroupKey = pGuGroupKey_, _guPayload = pGuPayload_}
 
 -- | Email or immutable ID of the group. If ID, it should match with id of
 -- group object

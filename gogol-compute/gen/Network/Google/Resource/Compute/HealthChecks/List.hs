@@ -64,13 +64,15 @@ type HealthChecksListResource =
 -- project.
 --
 -- /See:/ 'healthChecksList' smart constructor.
-data HealthChecksList = HealthChecksList'
+data HealthChecksList =
+  HealthChecksList'
     { _hclOrderBy    :: !(Maybe Text)
     , _hclProject    :: !Text
     , _hclFilter     :: !(Maybe Text)
     , _hclPageToken  :: !(Maybe Text)
     , _hclMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthChecksList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ healthChecksList
     :: Text -- ^ 'hclProject'
     -> HealthChecksList
 healthChecksList pHclProject_ =
-    HealthChecksList'
+  HealthChecksList'
     { _hclOrderBy = Nothing
     , _hclProject = pHclProject_
     , _hclFilter = Nothing

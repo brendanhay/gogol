@@ -55,10 +55,12 @@ type TokensDeleteResource =
 -- | Delete all access tokens issued by a user for an application.
 --
 -- /See:/ 'tokensDelete' smart constructor.
-data TokensDelete = TokensDelete'
+data TokensDelete =
+  TokensDelete'
     { _tdClientId :: !Text
     , _tdUserKey  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TokensDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ tokensDelete
     -> Text -- ^ 'tdUserKey'
     -> TokensDelete
 tokensDelete pTdClientId_ pTdUserKey_ =
-    TokensDelete'
-    { _tdClientId = pTdClientId_
-    , _tdUserKey = pTdUserKey_
-    }
+  TokensDelete' {_tdClientId = pTdClientId_, _tdUserKey = pTdUserKey_}
 
 -- | The Client ID of the application the token is issued to.
 tdClientId :: Lens' TokensDelete Text

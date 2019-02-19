@@ -82,7 +82,8 @@ type CoursesCourseWorkListResource =
 -- \`NOT_FOUND\` if the requested course does not exist.
 --
 -- /See:/ 'coursesCourseWorkList' smart constructor.
-data CoursesCourseWorkList = CoursesCourseWorkList'
+data CoursesCourseWorkList =
+  CoursesCourseWorkList'
     { _ccwlXgafv            :: !(Maybe Xgafv)
     , _ccwlUploadProtocol   :: !(Maybe Text)
     , _ccwlOrderBy          :: !(Maybe Text)
@@ -93,7 +94,8 @@ data CoursesCourseWorkList = CoursesCourseWorkList'
     , _ccwlPageToken        :: !(Maybe Text)
     , _ccwlPageSize         :: !(Maybe (Textual Int32))
     , _ccwlCallback         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesCourseWorkList' with the minimum fields required to make a request.
 --
@@ -122,7 +124,7 @@ coursesCourseWorkList
     :: Text -- ^ 'ccwlCourseId'
     -> CoursesCourseWorkList
 coursesCourseWorkList pCcwlCourseId_ =
-    CoursesCourseWorkList'
+  CoursesCourseWorkList'
     { _ccwlXgafv = Nothing
     , _ccwlUploadProtocol = Nothing
     , _ccwlOrderBy = Nothing

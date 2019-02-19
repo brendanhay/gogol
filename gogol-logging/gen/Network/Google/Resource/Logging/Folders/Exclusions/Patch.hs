@@ -64,7 +64,8 @@ type FoldersExclusionsPatchResource =
 -- | Changes one or more properties of an existing exclusion.
 --
 -- /See:/ 'foldersExclusionsPatch' smart constructor.
-data FoldersExclusionsPatch = FoldersExclusionsPatch'
+data FoldersExclusionsPatch =
+  FoldersExclusionsPatch'
     { _fepXgafv          :: !(Maybe Xgafv)
     , _fepUploadProtocol :: !(Maybe Text)
     , _fepUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,8 @@ data FoldersExclusionsPatch = FoldersExclusionsPatch'
     , _fepPayload        :: !LogExclusion
     , _fepName           :: !Text
     , _fepCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersExclusionsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ foldersExclusionsPatch
     -> Text -- ^ 'fepName'
     -> FoldersExclusionsPatch
 foldersExclusionsPatch pFepPayload_ pFepName_ =
-    FoldersExclusionsPatch'
+  FoldersExclusionsPatch'
     { _fepXgafv = Nothing
     , _fepUploadProtocol = Nothing
     , _fepUpdateMask = Nothing

@@ -52,9 +52,11 @@ type AccountsContainersWorkspacesGetStatusResource =
 -- | Finds conflicting and modified entities in the workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesGetStatus' smart constructor.
-newtype AccountsContainersWorkspacesGetStatus = AccountsContainersWorkspacesGetStatus'
+newtype AccountsContainersWorkspacesGetStatus =
+  AccountsContainersWorkspacesGetStatus'
     { _acwgsPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesGetStatus' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ accountsContainersWorkspacesGetStatus
     :: Text -- ^ 'acwgsPath'
     -> AccountsContainersWorkspacesGetStatus
 accountsContainersWorkspacesGetStatus pAcwgsPath_ =
-    AccountsContainersWorkspacesGetStatus'
-    { _acwgsPath = pAcwgsPath_
-    }
+  AccountsContainersWorkspacesGetStatus' {_acwgsPath = pAcwgsPath_}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -76,7 +76,8 @@ acwgsPath
   = lens _acwgsPath (\ s a -> s{_acwgsPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesGetStatus where
+           AccountsContainersWorkspacesGetStatus
+         where
         type Rs AccountsContainersWorkspacesGetStatus =
              GetWorkspaceStatusResponse
         type Scopes AccountsContainersWorkspacesGetStatus =

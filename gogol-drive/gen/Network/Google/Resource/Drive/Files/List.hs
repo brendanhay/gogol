@@ -69,7 +69,8 @@ type FilesListResource =
 -- | Lists or searches files.
 --
 -- /See:/ 'filesList' smart constructor.
-data FilesList = FilesList'
+data FilesList =
+  FilesList'
     { _flCorpora               :: !(Maybe Text)
     , _flOrderBy               :: !(Maybe Text)
     , _flIncludeTeamDriveItems :: !Bool
@@ -80,7 +81,8 @@ data FilesList = FilesList'
     , _flPageToken             :: !(Maybe Text)
     , _flPageSize              :: !(Textual Int32)
     , _flSupportsTeamDrives    :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilesList' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ data FilesList = FilesList'
 filesList
     :: FilesList
 filesList =
-    FilesList'
+  FilesList'
     { _flCorpora = Nothing
     , _flOrderBy = Nothing
     , _flIncludeTeamDriveItems = False

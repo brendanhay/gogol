@@ -57,11 +57,13 @@ type AccountsClaimwebsiteResource =
 -- | Claims the website of a Merchant Center sub-account.
 --
 -- /See:/ 'accountsClaimwebsite' smart constructor.
-data AccountsClaimwebsite = AccountsClaimwebsite'
+data AccountsClaimwebsite =
+  AccountsClaimwebsite'
     { _acMerchantId :: !(Textual Word64)
     , _acAccountId  :: !(Textual Word64)
     , _acOverwrite  :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsClaimwebsite' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ accountsClaimwebsite
     -> Word64 -- ^ 'acAccountId'
     -> AccountsClaimwebsite
 accountsClaimwebsite pAcMerchantId_ pAcAccountId_ =
-    AccountsClaimwebsite'
+  AccountsClaimwebsite'
     { _acMerchantId = _Coerce # pAcMerchantId_
     , _acAccountId = _Coerce # pAcAccountId_
     , _acOverwrite = Nothing

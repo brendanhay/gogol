@@ -53,10 +53,12 @@ type CalendarsUpdateResource =
 -- | Updates metadata for a calendar.
 --
 -- /See:/ 'calendarsUpdate' smart constructor.
-data CalendarsUpdate = CalendarsUpdate'
+data CalendarsUpdate =
+  CalendarsUpdate'
     { _cuCalendarId :: !Text
     , _cuPayload    :: !Calendar
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CalendarsUpdate' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ calendarsUpdate
     -> Calendar -- ^ 'cuPayload'
     -> CalendarsUpdate
 calendarsUpdate pCuCalendarId_ pCuPayload_ =
-    CalendarsUpdate'
-    { _cuCalendarId = pCuCalendarId_
-    , _cuPayload = pCuPayload_
-    }
+  CalendarsUpdate' {_cuCalendarId = pCuCalendarId_, _cuPayload = pCuPayload_}
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

@@ -63,13 +63,15 @@ type InstanceGroupsSetNamedPortsResource =
 -- | Sets the named ports for the specified instance group.
 --
 -- /See:/ 'instanceGroupsSetNamedPorts' smart constructor.
-data InstanceGroupsSetNamedPorts = InstanceGroupsSetNamedPorts'
+data InstanceGroupsSetNamedPorts =
+  InstanceGroupsSetNamedPorts'
     { _igsnpRequestId     :: !(Maybe Text)
     , _igsnpProject       :: !Text
     , _igsnpZone          :: !Text
     , _igsnpPayload       :: !InstanceGroupsSetNamedPortsRequest
     , _igsnpInstanceGroup :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsSetNamedPorts' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ instanceGroupsSetNamedPorts
     -> Text -- ^ 'igsnpInstanceGroup'
     -> InstanceGroupsSetNamedPorts
 instanceGroupsSetNamedPorts pIgsnpProject_ pIgsnpZone_ pIgsnpPayload_ pIgsnpInstanceGroup_ =
-    InstanceGroupsSetNamedPorts'
+  InstanceGroupsSetNamedPorts'
     { _igsnpRequestId = Nothing
     , _igsnpProject = pIgsnpProject_
     , _igsnpZone = pIgsnpZone_

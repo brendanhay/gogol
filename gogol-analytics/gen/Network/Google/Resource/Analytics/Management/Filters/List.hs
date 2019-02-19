@@ -57,11 +57,13 @@ type ManagementFiltersListResource =
 -- | Lists all filters for an account
 --
 -- /See:/ 'managementFiltersList' smart constructor.
-data ManagementFiltersList = ManagementFiltersList'
+data ManagementFiltersList =
+  ManagementFiltersList'
     { _mflAccountId  :: !Text
     , _mflStartIndex :: !(Maybe (Textual Int32))
     , _mflMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementFiltersList' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ managementFiltersList
     :: Text -- ^ 'mflAccountId'
     -> ManagementFiltersList
 managementFiltersList pMflAccountId_ =
-    ManagementFiltersList'
+  ManagementFiltersList'
     { _mflAccountId = pMflAccountId_
     , _mflStartIndex = Nothing
     , _mflMaxResults = Nothing

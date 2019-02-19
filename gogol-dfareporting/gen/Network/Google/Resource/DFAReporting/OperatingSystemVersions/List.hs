@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemVersionsList' request conforms to.
 type OperatingSystemVersionsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystemVersions" :>
@@ -53,9 +53,11 @@ type OperatingSystemVersionsListResource =
 -- | Retrieves a list of operating system versions.
 --
 -- /See:/ 'operatingSystemVersionsList' smart constructor.
-newtype OperatingSystemVersionsList = OperatingSystemVersionsList'
+newtype OperatingSystemVersionsList =
+  OperatingSystemVersionsList'
     { _osvlProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperatingSystemVersionsList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ operatingSystemVersionsList
     :: Int64 -- ^ 'osvlProFileId'
     -> OperatingSystemVersionsList
 operatingSystemVersionsList pOsvlProFileId_ =
-    OperatingSystemVersionsList'
-    { _osvlProFileId = _Coerce # pOsvlProFileId_
-    }
+  OperatingSystemVersionsList' {_osvlProFileId = _Coerce # pOsvlProFileId_}
 
 -- | User profile ID associated with this request.
 osvlProFileId :: Lens' OperatingSystemVersionsList Int64

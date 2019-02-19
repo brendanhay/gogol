@@ -62,13 +62,15 @@ type InstancesSetDeletionProtectionResource =
 -- | Sets deletion protection on the instance.
 --
 -- /See:/ 'instancesSetDeletionProtection' smart constructor.
-data InstancesSetDeletionProtection = InstancesSetDeletionProtection'
+data InstancesSetDeletionProtection =
+  InstancesSetDeletionProtection'
     { _isdpRequestId          :: !(Maybe Text)
     , _isdpDeletionProtection :: !Bool
     , _isdpProject            :: !Text
     , _isdpZone               :: !Text
     , _isdpResource           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetDeletionProtection' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ instancesSetDeletionProtection
     -> Text -- ^ 'isdpResource'
     -> InstancesSetDeletionProtection
 instancesSetDeletionProtection pIsdpProject_ pIsdpZone_ pIsdpResource_ =
-    InstancesSetDeletionProtection'
+  InstancesSetDeletionProtection'
     { _isdpRequestId = Nothing
     , _isdpDeletionProtection = True
     , _isdpProject = pIsdpProject_

@@ -55,10 +55,12 @@ type ChangesGetStartPageTokenResource =
 -- | Gets the starting pageToken for listing future changes.
 --
 -- /See:/ 'changesGetStartPageToken' smart constructor.
-data ChangesGetStartPageToken = ChangesGetStartPageToken'
+data ChangesGetStartPageToken =
+  ChangesGetStartPageToken'
     { _cgsptTeamDriveId        :: !(Maybe Text)
     , _cgsptSupportsTeamDrives :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChangesGetStartPageToken' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ data ChangesGetStartPageToken = ChangesGetStartPageToken'
 changesGetStartPageToken
     :: ChangesGetStartPageToken
 changesGetStartPageToken =
-    ChangesGetStartPageToken'
-    { _cgsptTeamDriveId = Nothing
-    , _cgsptSupportsTeamDrives = False
-    }
+  ChangesGetStartPageToken'
+    {_cgsptTeamDriveId = Nothing, _cgsptSupportsTeamDrives = False}
 
 -- | The ID of the Team Drive for which the starting pageToken for listing
 -- future changes from that Team Drive will be returned.

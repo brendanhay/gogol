@@ -23,9 +23,11 @@ import           Network.Google.Prelude
 -- | Resource labels to represent user provided metadata.
 --
 -- /See:/ 'instanceLabels' smart constructor.
-newtype InstanceLabels = InstanceLabels'
+newtype InstanceLabels =
+  InstanceLabels'
     { _ilAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceLabels' with the minimum fields required to make a request.
 --
@@ -36,9 +38,7 @@ instanceLabels
     :: HashMap Text Text -- ^ 'ilAddtional'
     -> InstanceLabels
 instanceLabels pIlAddtional_ =
-    InstanceLabels'
-    { _ilAddtional = _Coerce # pIlAddtional_
-    }
+  InstanceLabels' {_ilAddtional = _Coerce # pIlAddtional_}
 
 ilAddtional :: Lens' InstanceLabels (HashMap Text Text)
 ilAddtional
@@ -90,11 +90,13 @@ instance ToJSON InstanceLabels where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -107,12 +109,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -156,9 +153,11 @@ instance ToJSON Status where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema = OperationSchema'
+newtype OperationSchema =
+  OperationSchema'
     { _osAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
@@ -169,9 +168,7 @@ operationSchema
     :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
-    OperationSchema'
-    { _osAddtional = _Coerce # pOsAddtional_
-    }
+  OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -190,10 +187,12 @@ instance ToJSON OperationSchema where
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
-data ListLocationsResponse = ListLocationsResponse'
+data ListLocationsResponse =
+  ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -205,10 +204,7 @@ data ListLocationsResponse = ListLocationsResponse'
 listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
-    ListLocationsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLocations = Nothing
-    }
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -241,10 +237,12 @@ instance ToJSON ListLocationsResponse where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -256,10 +254,8 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -294,8 +290,8 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'cancelOperationRequest' smart constructor.
 data CancelOperationRequest =
-    CancelOperationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
@@ -314,13 +310,15 @@ instance ToJSON CancelOperationRequest where
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lName        :: !(Maybe Text)
     , _lMetadata    :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
     , _lLabels      :: !(Maybe LocationLabels)
     , _lLocationId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -338,7 +336,7 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lName = Nothing
     , _lMetadata = Nothing
     , _lDisplayName = Nothing
@@ -397,13 +395,15 @@ instance ToJSON Location where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -421,7 +421,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -492,8 +492,8 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -509,9 +509,11 @@ instance ToJSON Empty where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -522,9 +524,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -543,10 +543,12 @@ instance ToJSON StatusDetailsItem where
 -- | File share configuration for the instance.
 --
 -- /See:/ 'fileShareConfig' smart constructor.
-data FileShareConfig = FileShareConfig'
+data FileShareConfig =
+  FileShareConfig'
     { _fscName       :: !(Maybe Text)
     , _fscCapacityGb :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileShareConfig' with the minimum fields required to make a request.
 --
@@ -558,10 +560,7 @@ data FileShareConfig = FileShareConfig'
 fileShareConfig
     :: FileShareConfig
 fileShareConfig =
-    FileShareConfig'
-    { _fscName = Nothing
-    , _fscCapacityGb = Nothing
-    }
+  FileShareConfig' {_fscName = Nothing, _fscCapacityGb = Nothing}
 
 -- | The name of the file share (must be 16 characters or less).
 fscName :: Lens' FileShareConfig (Maybe Text)
@@ -592,12 +591,14 @@ instance ToJSON FileShareConfig where
 -- | Network configuration for the instance.
 --
 -- /See:/ 'networkConfig' smart constructor.
-data NetworkConfig = NetworkConfig'
+data NetworkConfig =
+  NetworkConfig'
     { _ncModes           :: !(Maybe [Text])
     , _ncNetwork         :: !(Maybe Text)
     , _ncReservedIPRange :: !(Maybe Text)
     , _ncIPAddresses     :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkConfig' with the minimum fields required to make a request.
 --
@@ -613,7 +614,7 @@ data NetworkConfig = NetworkConfig'
 networkConfig
     :: NetworkConfig
 networkConfig =
-    NetworkConfig'
+  NetworkConfig'
     { _ncModes = Nothing
     , _ncNetwork = Nothing
     , _ncReservedIPRange = Nothing
@@ -677,9 +678,11 @@ instance ToJSON NetworkConfig where
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
 -- /See:/ 'locationLabels' smart constructor.
-newtype LocationLabels = LocationLabels'
+newtype LocationLabels =
+  LocationLabels'
     { _llAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
@@ -690,9 +693,7 @@ locationLabels
     :: HashMap Text Text -- ^ 'llAddtional'
     -> LocationLabels
 locationLabels pLlAddtional_ =
-    LocationLabels'
-    { _llAddtional = _Coerce # pLlAddtional_
-    }
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -711,9 +712,11 @@ instance ToJSON LocationLabels where
 -- given location.
 --
 -- /See:/ 'locationMetadata' smart constructor.
-newtype LocationMetadata = LocationMetadata'
+newtype LocationMetadata =
+  LocationMetadata'
     { _lmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
@@ -724,9 +727,7 @@ locationMetadata
     :: HashMap Text JSONValue -- ^ 'lmAddtional'
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
-    LocationMetadata'
-    { _lmAddtional = _Coerce # pLmAddtional_
-    }
+  LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -745,7 +746,8 @@ instance ToJSON LocationMetadata where
 -- | Represents the metadata of the long-running operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata = OperationMetadata'
+data OperationMetadata =
+  OperationMetadata'
     { _omAPIVersion      :: !(Maybe Text)
     , _omEndTime         :: !(Maybe DateTime')
     , _omStatusDetail    :: !(Maybe Text)
@@ -753,7 +755,8 @@ data OperationMetadata = OperationMetadata'
     , _omCancelRequested :: !(Maybe Bool)
     , _omTarget          :: !(Maybe Text)
     , _omCreateTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -775,7 +778,7 @@ data OperationMetadata = OperationMetadata'
 operationMetadata
     :: OperationMetadata
 operationMetadata =
-    OperationMetadata'
+  OperationMetadata'
     { _omAPIVersion = Nothing
     , _omEndTime = Nothing
     , _omStatusDetail = Nothing
@@ -853,11 +856,13 @@ instance ToJSON OperationMetadata where
 -- | ListInstancesResponse is the result of ListInstancesRequest.
 --
 -- /See:/ 'listInstancesResponse' smart constructor.
-data ListInstancesResponse = ListInstancesResponse'
+data ListInstancesResponse =
+  ListInstancesResponse'
     { _lirNextPageToken :: !(Maybe Text)
     , _lirUnreachable   :: !(Maybe [Text])
     , _lirInstances     :: !(Maybe [Instance])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
@@ -871,7 +876,7 @@ data ListInstancesResponse = ListInstancesResponse'
 listInstancesResponse
     :: ListInstancesResponse
 listInstancesResponse =
-    ListInstancesResponse'
+  ListInstancesResponse'
     { _lirNextPageToken = Nothing
     , _lirUnreachable = Nothing
     , _lirInstances = Nothing
@@ -931,9 +936,11 @@ instance ToJSON ListInstancesResponse where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -944,9 +951,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -965,7 +970,8 @@ instance ToJSON OperationResponse where
 -- | A Cloud Filestore instance.
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance'
+data Instance =
+  Instance'
     { _iEtag          :: !(Maybe Text)
     , _iState         :: !(Maybe InstanceState)
     , _iNetworks      :: !(Maybe [NetworkConfig])
@@ -976,7 +982,8 @@ data Instance = Instance'
     , _iLabels        :: !(Maybe InstanceLabels)
     , _iDescription   :: !(Maybe Text)
     , _iCreateTime    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -1004,7 +1011,7 @@ data Instance = Instance'
 instance'
     :: Instance
 instance' =
-    Instance'
+  Instance'
     { _iEtag = Nothing
     , _iState = Nothing
     , _iNetworks = Nothing

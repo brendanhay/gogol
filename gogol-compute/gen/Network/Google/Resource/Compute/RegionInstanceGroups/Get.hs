@@ -57,11 +57,13 @@ type RegionInstanceGroupsGetResource =
 -- | Returns the specified instance group resource.
 --
 -- /See:/ 'regionInstanceGroupsGet' smart constructor.
-data RegionInstanceGroupsGet = RegionInstanceGroupsGet'
+data RegionInstanceGroupsGet =
+  RegionInstanceGroupsGet'
     { _riggProject       :: !Text
     , _riggRegion        :: !Text
     , _riggInstanceGroup :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupsGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ regionInstanceGroupsGet
     -> Text -- ^ 'riggInstanceGroup'
     -> RegionInstanceGroupsGet
 regionInstanceGroupsGet pRiggProject_ pRiggRegion_ pRiggInstanceGroup_ =
-    RegionInstanceGroupsGet'
+  RegionInstanceGroupsGet'
     { _riggProject = pRiggProject_
     , _riggRegion = pRiggRegion_
     , _riggInstanceGroup = pRiggInstanceGroup_

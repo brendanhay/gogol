@@ -53,10 +53,12 @@ type LiaSettingsGetResource =
 -- | Retrieves the LIA settings of the account.
 --
 -- /See:/ 'liaSettingsGet' smart constructor.
-data LiaSettingsGet = LiaSettingsGet'
+data LiaSettingsGet =
+  LiaSettingsGet'
     { _lsgMerchantId :: !(Textual Word64)
     , _lsgAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiaSettingsGet' with the minimum fields required to make a request.
 --
@@ -70,7 +72,7 @@ liaSettingsGet
     -> Word64 -- ^ 'lsgAccountId'
     -> LiaSettingsGet
 liaSettingsGet pLsgMerchantId_ pLsgAccountId_ =
-    LiaSettingsGet'
+  LiaSettingsGet'
     { _lsgMerchantId = _Coerce # pLsgMerchantId_
     , _lsgAccountId = _Coerce # pLsgAccountId_
     }

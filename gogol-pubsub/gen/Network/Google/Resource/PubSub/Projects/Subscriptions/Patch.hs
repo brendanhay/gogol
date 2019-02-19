@@ -64,7 +64,8 @@ type ProjectsSubscriptionsPatchResource =
 -- subscription, such as its topic, are not modifiable.
 --
 -- /See:/ 'projectsSubscriptionsPatch' smart constructor.
-data ProjectsSubscriptionsPatch = ProjectsSubscriptionsPatch'
+data ProjectsSubscriptionsPatch =
+  ProjectsSubscriptionsPatch'
     { _pspXgafv          :: !(Maybe Xgafv)
     , _pspUploadProtocol :: !(Maybe Text)
     , _pspAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsSubscriptionsPatch = ProjectsSubscriptionsPatch'
     , _pspPayload        :: !UpdateSubscriptionRequest
     , _pspName           :: !Text
     , _pspCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsPatch' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsSubscriptionsPatch
     -> Text -- ^ 'pspName'
     -> ProjectsSubscriptionsPatch
 projectsSubscriptionsPatch pPspPayload_ pPspName_ =
-    ProjectsSubscriptionsPatch'
+  ProjectsSubscriptionsPatch'
     { _pspXgafv = Nothing
     , _pspUploadProtocol = Nothing
     , _pspAccessToken = Nothing

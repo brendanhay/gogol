@@ -63,11 +63,13 @@ type TurnBasedMatchesRematchResource =
 -- created match; it will be the caller\'s turn.
 --
 -- /See:/ 'turnBasedMatchesRematch' smart constructor.
-data TurnBasedMatchesRematch = TurnBasedMatchesRematch'
+data TurnBasedMatchesRematch =
+  TurnBasedMatchesRematch'
     { _tbmrRequestId :: !(Maybe (Textual Int64))
     , _tbmrLanguage  :: !(Maybe Text)
     , _tbmrMatchId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesRematch' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ turnBasedMatchesRematch
     :: Text -- ^ 'tbmrMatchId'
     -> TurnBasedMatchesRematch
 turnBasedMatchesRematch pTbmrMatchId_ =
-    TurnBasedMatchesRematch'
+  TurnBasedMatchesRematch'
     { _tbmrRequestId = Nothing
     , _tbmrLanguage = Nothing
     , _tbmrMatchId = pTbmrMatchId_

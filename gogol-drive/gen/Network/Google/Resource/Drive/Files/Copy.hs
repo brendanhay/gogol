@@ -64,14 +64,16 @@ type FilesCopyResource =
 -- semantics.
 --
 -- /See:/ 'filesCopy' smart constructor.
-data FilesCopy = FilesCopy'
+data FilesCopy =
+  FilesCopy'
     { _fPayload                 :: !File
     , _fOCRLanguage             :: !(Maybe Text)
     , _fKeepRevisionForever     :: !Bool
     , _fIgnoreDefaultVisibility :: !Bool
     , _fFileId                  :: !Text
     , _fSupportsTeamDrives      :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilesCopy' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ filesCopy
     -> Text -- ^ 'fFileId'
     -> FilesCopy
 filesCopy pFPayload_ pFFileId_ =
-    FilesCopy'
+  FilesCopy'
     { _fPayload = pFPayload_
     , _fOCRLanguage = Nothing
     , _fKeepRevisionForever = False

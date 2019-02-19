@@ -155,7 +155,8 @@ type CompaniesListResource =
 -- | Lists companies.
 --
 -- /See:/ 'companiesList' smart constructor.
-data CompaniesList = CompaniesList'
+data CompaniesList =
+  CompaniesList'
     { _clLanguageCodes                               :: !(Maybe [Text])
     , _clXgafv                                       :: !(Maybe Xgafv)
     , _clMaxMonthlyBudgetUnits                       :: !(Maybe (Textual Int64))
@@ -186,7 +187,8 @@ data CompaniesList = CompaniesList'
     , _clMinMonthlyBudgetUnits                       :: !(Maybe (Textual Int64))
     , _clRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _clCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompaniesList' with the minimum fields required to make a request.
 --
@@ -254,7 +256,7 @@ data CompaniesList = CompaniesList'
 companiesList
     :: CompaniesList
 companiesList =
-    CompaniesList'
+  CompaniesList'
     { _clLanguageCodes = Nothing
     , _clXgafv = Nothing
     , _clMaxMonthlyBudgetUnits = Nothing

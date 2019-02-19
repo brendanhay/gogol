@@ -141,7 +141,8 @@ type CSEListResource =
 -- search engine used for the search, and the search results.
 --
 -- /See:/ 'cSEList' smart constructor.
-data CSEList = CSEList'
+data CSEList =
+  CSEList'
     { _cselImgDominantColor :: !(Maybe CSEListImgDominantColor)
     , _cselSiteSearchFilter :: !(Maybe CSEListSiteSearchFilter)
     , _cselC2coff           :: !(Maybe Text)
@@ -173,7 +174,8 @@ data CSEList = CSEList'
     , _cselSafe             :: !CSEListSafe
     , _cselHq               :: !(Maybe Text)
     , _cselHighRange        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CSEList' with the minimum fields required to make a request.
 --
@@ -244,7 +246,7 @@ cSEList
     :: Text -- ^ 'cselQ'
     -> CSEList
 cSEList pCselQ_ =
-    CSEList'
+  CSEList'
     { _cselImgDominantColor = Nothing
     , _cselSiteSearchFilter = Nothing
     , _cselC2coff = Nothing

@@ -58,12 +58,14 @@ type PermissionsDeleteResource =
 -- | Deletes a permission.
 --
 -- /See:/ 'permissionsDelete' smart constructor.
-data PermissionsDelete = PermissionsDelete'
+data PermissionsDelete =
+  PermissionsDelete'
     { _pdUseDomainAdminAccess :: !Bool
     , _pdFileId               :: !Text
     , _pdSupportsTeamDrives   :: !Bool
     , _pdPermissionId         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PermissionsDelete' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ permissionsDelete
     -> Text -- ^ 'pdPermissionId'
     -> PermissionsDelete
 permissionsDelete pPdFileId_ pPdPermissionId_ =
-    PermissionsDelete'
+  PermissionsDelete'
     { _pdUseDomainAdminAccess = False
     , _pdFileId = pPdFileId_
     , _pdSupportsTeamDrives = False

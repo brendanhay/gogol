@@ -72,11 +72,13 @@ type ProductsGenerateApprovalURLResource =
 -- only be used to display permissions for up to 1 day.
 --
 -- /See:/ 'productsGenerateApprovalURL' smart constructor.
-data ProductsGenerateApprovalURL = ProductsGenerateApprovalURL'
+data ProductsGenerateApprovalURL =
+  ProductsGenerateApprovalURL'
     { _pgauLanguageCode :: !(Maybe Text)
     , _pgauEnterpriseId :: !Text
     , _pgauProductId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsGenerateApprovalURL' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ productsGenerateApprovalURL
     -> Text -- ^ 'pgauProductId'
     -> ProductsGenerateApprovalURL
 productsGenerateApprovalURL pPgauEnterpriseId_ pPgauProductId_ =
-    ProductsGenerateApprovalURL'
+  ProductsGenerateApprovalURL'
     { _pgauLanguageCode = Nothing
     , _pgauEnterpriseId = pPgauEnterpriseId_
     , _pgauProductId = pPgauProductId_

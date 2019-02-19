@@ -72,7 +72,8 @@ type ProjectsSnapshotsTestIAMPermissionsResource =
 -- warning.
 --
 -- /See:/ 'projectsSnapshotsTestIAMPermissions' smart constructor.
-data ProjectsSnapshotsTestIAMPermissions = ProjectsSnapshotsTestIAMPermissions'
+data ProjectsSnapshotsTestIAMPermissions =
+  ProjectsSnapshotsTestIAMPermissions'
     { _pstipXgafv          :: !(Maybe Xgafv)
     , _pstipUploadProtocol :: !(Maybe Text)
     , _pstipAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsSnapshotsTestIAMPermissions = ProjectsSnapshotsTestIAMPermissions'
     , _pstipPayload        :: !TestIAMPermissionsRequest
     , _pstipResource       :: !Text
     , _pstipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSnapshotsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsSnapshotsTestIAMPermissions
     -> Text -- ^ 'pstipResource'
     -> ProjectsSnapshotsTestIAMPermissions
 projectsSnapshotsTestIAMPermissions pPstipPayload_ pPstipResource_ =
-    ProjectsSnapshotsTestIAMPermissions'
+  ProjectsSnapshotsTestIAMPermissions'
     { _pstipXgafv = Nothing
     , _pstipUploadProtocol = Nothing
     , _pstipAccessToken = Nothing
@@ -157,7 +159,8 @@ pstipCallback
       (\ s a -> s{_pstipCallback = a})
 
 instance GoogleRequest
-         ProjectsSnapshotsTestIAMPermissions where
+           ProjectsSnapshotsTestIAMPermissions
+         where
         type Rs ProjectsSnapshotsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsSnapshotsTestIAMPermissions =

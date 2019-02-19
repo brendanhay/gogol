@@ -69,14 +69,16 @@ type AccessPoliciesCreateResource =
 -- a BadRequest proto.
 --
 -- /See:/ 'accessPoliciesCreate' smart constructor.
-data AccessPoliciesCreate = AccessPoliciesCreate'
+data AccessPoliciesCreate =
+  AccessPoliciesCreate'
     { _apcXgafv          :: !(Maybe Xgafv)
     , _apcUploadProtocol :: !(Maybe Text)
     , _apcAccessToken    :: !(Maybe Text)
     , _apcUploadType     :: !(Maybe Text)
     , _apcPayload        :: !AccessPolicy
     , _apcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ accessPoliciesCreate
     :: AccessPolicy -- ^ 'apcPayload'
     -> AccessPoliciesCreate
 accessPoliciesCreate pApcPayload_ =
-    AccessPoliciesCreate'
+  AccessPoliciesCreate'
     { _apcXgafv = Nothing
     , _apcUploadProtocol = Nothing
     , _apcAccessToken = Nothing

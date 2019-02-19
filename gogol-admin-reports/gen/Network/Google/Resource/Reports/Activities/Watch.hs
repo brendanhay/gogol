@@ -78,7 +78,8 @@ type ActivitiesWatchResource =
 -- | Push changes to activities
 --
 -- /See:/ 'activitiesWatch' smart constructor.
-data ActivitiesWatch = ActivitiesWatch'
+data ActivitiesWatch =
+  ActivitiesWatch'
     { _awStartTime       :: !(Maybe Text)
     , _awFilters         :: !(Maybe Text)
     , _awPayload         :: !Channel
@@ -91,7 +92,8 @@ data ActivitiesWatch = ActivitiesWatch'
     , _awUserKey         :: !Text
     , _awMaxResults      :: !(Maybe (Textual Int32))
     , _awOrgUnitId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivitiesWatch' with the minimum fields required to make a request.
 --
@@ -126,7 +128,7 @@ activitiesWatch
     -> Text -- ^ 'awUserKey'
     -> ActivitiesWatch
 activitiesWatch pAwPayload_ pAwApplicationName_ pAwUserKey_ =
-    ActivitiesWatch'
+  ActivitiesWatch'
     { _awStartTime = Nothing
     , _awFilters = Nothing
     , _awPayload = pAwPayload_

@@ -67,10 +67,12 @@ type EnterprisesSetStoreLayoutResource =
 -- \"custom\" and setting a homepage), the basic store layout is disabled.
 --
 -- /See:/ 'enterprisesSetStoreLayout' smart constructor.
-data EnterprisesSetStoreLayout = EnterprisesSetStoreLayout'
+data EnterprisesSetStoreLayout =
+  EnterprisesSetStoreLayout'
     { _esslEnterpriseId :: !Text
     , _esslPayload      :: !StoreLayout
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesSetStoreLayout' with the minimum fields required to make a request.
 --
@@ -84,10 +86,8 @@ enterprisesSetStoreLayout
     -> StoreLayout -- ^ 'esslPayload'
     -> EnterprisesSetStoreLayout
 enterprisesSetStoreLayout pEsslEnterpriseId_ pEsslPayload_ =
-    EnterprisesSetStoreLayout'
-    { _esslEnterpriseId = pEsslEnterpriseId_
-    , _esslPayload = pEsslPayload_
-    }
+  EnterprisesSetStoreLayout'
+    {_esslEnterpriseId = pEsslEnterpriseId_, _esslPayload = pEsslPayload_}
 
 -- | The ID of the enterprise.
 esslEnterpriseId :: Lens' EnterprisesSetStoreLayout Text

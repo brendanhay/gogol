@@ -54,10 +54,12 @@ type ManagementSegmentsListResource =
 -- | Lists segments to which the user has access.
 --
 -- /See:/ 'managementSegmentsList' smart constructor.
-data ManagementSegmentsList = ManagementSegmentsList'
+data ManagementSegmentsList =
+  ManagementSegmentsList'
     { _mslStartIndex :: !(Maybe (Textual Int32))
     , _mslMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementSegmentsList' with the minimum fields required to make a request.
 --
@@ -69,10 +71,7 @@ data ManagementSegmentsList = ManagementSegmentsList'
 managementSegmentsList
     :: ManagementSegmentsList
 managementSegmentsList =
-    ManagementSegmentsList'
-    { _mslStartIndex = Nothing
-    , _mslMaxResults = Nothing
-    }
+  ManagementSegmentsList' {_mslStartIndex = Nothing, _mslMaxResults = Nothing}
 
 -- | An index of the first segment to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.

@@ -51,9 +51,11 @@ type AccountsUserPermissionsGetResource =
 -- | Gets a user\'s Account & Container access.
 --
 -- /See:/ 'accountsUserPermissionsGet' smart constructor.
-newtype AccountsUserPermissionsGet = AccountsUserPermissionsGet'
+newtype AccountsUserPermissionsGet =
+  AccountsUserPermissionsGet'
     { _aupgPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsUserPermissionsGet' with the minimum fields required to make a request.
 --
@@ -64,9 +66,7 @@ accountsUserPermissionsGet
     :: Text -- ^ 'aupgPath'
     -> AccountsUserPermissionsGet
 accountsUserPermissionsGet pAupgPath_ =
-    AccountsUserPermissionsGet'
-    { _aupgPath = pAupgPath_
-    }
+  AccountsUserPermissionsGet' {_aupgPath = pAupgPath_}
 
 -- | GTM UserPermission\'s API relative path. Example:
 -- accounts\/{account_id}\/user_permissions\/{user_permission_id}

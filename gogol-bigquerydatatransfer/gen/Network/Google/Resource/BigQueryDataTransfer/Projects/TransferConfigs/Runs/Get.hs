@@ -59,14 +59,16 @@ type ProjectsTransferConfigsRunsGetResource =
 -- | Returns information about the particular transfer run.
 --
 -- /See:/ 'projectsTransferConfigsRunsGet' smart constructor.
-data ProjectsTransferConfigsRunsGet = ProjectsTransferConfigsRunsGet'
+data ProjectsTransferConfigsRunsGet =
+  ProjectsTransferConfigsRunsGet'
     { _ptcrgXgafv          :: !(Maybe Xgafv)
     , _ptcrgUploadProtocol :: !(Maybe Text)
     , _ptcrgAccessToken    :: !(Maybe Text)
     , _ptcrgUploadType     :: !(Maybe Text)
     , _ptcrgName           :: !Text
     , _ptcrgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTransferConfigsRunsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsTransferConfigsRunsGet
     :: Text -- ^ 'ptcrgName'
     -> ProjectsTransferConfigsRunsGet
 projectsTransferConfigsRunsGet pPtcrgName_ =
-    ProjectsTransferConfigsRunsGet'
+  ProjectsTransferConfigsRunsGet'
     { _ptcrgXgafv = Nothing
     , _ptcrgUploadProtocol = Nothing
     , _ptcrgAccessToken = Nothing

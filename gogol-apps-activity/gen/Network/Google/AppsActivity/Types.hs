@@ -131,4 +131,4 @@ appsActivityService
 
 -- | View the activity history of your Google apps
 activityScope :: Proxy '["https://www.googleapis.com/auth/activity"]
-activityScope = Proxy;
+activityScope = Proxy

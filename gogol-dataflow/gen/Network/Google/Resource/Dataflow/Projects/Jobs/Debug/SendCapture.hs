@@ -68,7 +68,8 @@ type ProjectsJobsDebugSendCaptureResource =
 -- | Send encoded debug capture data for component.
 --
 -- /See:/ 'projectsJobsDebugSendCapture' smart constructor.
-data ProjectsJobsDebugSendCapture = ProjectsJobsDebugSendCapture'
+data ProjectsJobsDebugSendCapture =
+  ProjectsJobsDebugSendCapture'
     { _pjdscXgafv          :: !(Maybe Xgafv)
     , _pjdscJobId          :: !Text
     , _pjdscUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsJobsDebugSendCapture = ProjectsJobsDebugSendCapture'
     , _pjdscPayload        :: !SendDebugCaptureRequest
     , _pjdscProjectId      :: !Text
     , _pjdscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsDebugSendCapture' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsJobsDebugSendCapture
     -> Text -- ^ 'pjdscProjectId'
     -> ProjectsJobsDebugSendCapture
 projectsJobsDebugSendCapture pPjdscJobId_ pPjdscPayload_ pPjdscProjectId_ =
-    ProjectsJobsDebugSendCapture'
+  ProjectsJobsDebugSendCapture'
     { _pjdscXgafv = Nothing
     , _pjdscJobId = pPjdscJobId_
     , _pjdscUploadProtocol = Nothing

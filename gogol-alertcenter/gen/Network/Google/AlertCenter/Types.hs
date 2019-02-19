@@ -238,4 +238,4 @@ alertCenterService
 
 -- | See and delete your domain\'s G Suite alerts, and send alert feedback
 appsAlertsScope :: Proxy '["https://www.googleapis.com/auth/apps.alerts"]
-appsAlertsScope = Proxy;
+appsAlertsScope = Proxy

@@ -63,7 +63,8 @@ type ProjectsLocationsClustersNodePoolsUpdateResource
 -- | Updates the version and\/or image type for a specific node pool.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsUpdate' smart constructor.
-data ProjectsLocationsClustersNodePoolsUpdate = ProjectsLocationsClustersNodePoolsUpdate'
+data ProjectsLocationsClustersNodePoolsUpdate =
+  ProjectsLocationsClustersNodePoolsUpdate'
     { _plcnpuXgafv          :: !(Maybe Xgafv)
     , _plcnpuUploadProtocol :: !(Maybe Text)
     , _plcnpuAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsLocationsClustersNodePoolsUpdate = ProjectsLocationsClustersNodePoo
     , _plcnpuPayload        :: !UpdateNodePoolRequest
     , _plcnpuName           :: !Text
     , _plcnpuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsUpdate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsLocationsClustersNodePoolsUpdate
     -> Text -- ^ 'plcnpuName'
     -> ProjectsLocationsClustersNodePoolsUpdate
 projectsLocationsClustersNodePoolsUpdate pPlcnpuPayload_ pPlcnpuName_ =
-    ProjectsLocationsClustersNodePoolsUpdate'
+  ProjectsLocationsClustersNodePoolsUpdate'
     { _plcnpuXgafv = Nothing
     , _plcnpuUploadProtocol = Nothing
     , _plcnpuAccessToken = Nothing
@@ -148,7 +150,8 @@ plcnpuCallback
       (\ s a -> s{_plcnpuCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersNodePoolsUpdate where
+           ProjectsLocationsClustersNodePoolsUpdate
+         where
         type Rs ProjectsLocationsClustersNodePoolsUpdate =
              Operation
         type Scopes ProjectsLocationsClustersNodePoolsUpdate

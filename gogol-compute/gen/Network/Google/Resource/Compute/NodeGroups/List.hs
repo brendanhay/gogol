@@ -65,14 +65,16 @@ type NodeGroupsListResource =
 -- Note: use nodeGroups.listNodes for more details about each group.
 --
 -- /See:/ 'nodeGroupsList' smart constructor.
-data NodeGroupsList = NodeGroupsList'
+data NodeGroupsList =
+  NodeGroupsList'
     { _nglOrderBy    :: !(Maybe Text)
     , _nglProject    :: !Text
     , _nglZone       :: !Text
     , _nglFilter     :: !(Maybe Text)
     , _nglPageToken  :: !(Maybe Text)
     , _nglMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsList' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ nodeGroupsList
     -> Text -- ^ 'nglZone'
     -> NodeGroupsList
 nodeGroupsList pNglProject_ pNglZone_ =
-    NodeGroupsList'
+  NodeGroupsList'
     { _nglOrderBy = Nothing
     , _nglProject = pNglProject_
     , _nglZone = pNglZone_

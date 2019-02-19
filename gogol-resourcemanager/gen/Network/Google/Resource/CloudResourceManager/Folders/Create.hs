@@ -96,7 +96,8 @@ type FoldersCreateResource =
 -- \`resourcemanager.folders.create\` permission on the identified parent.
 --
 -- /See:/ 'foldersCreate' smart constructor.
-data FoldersCreate = FoldersCreate'
+data FoldersCreate =
+  FoldersCreate'
     { _fcParent         :: !(Maybe Text)
     , _fcXgafv          :: !(Maybe Xgafv)
     , _fcUploadProtocol :: !(Maybe Text)
@@ -104,7 +105,8 @@ data FoldersCreate = FoldersCreate'
     , _fcUploadType     :: !(Maybe Text)
     , _fcPayload        :: !Folder
     , _fcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersCreate' with the minimum fields required to make a request.
 --
@@ -127,7 +129,7 @@ foldersCreate
     :: Folder -- ^ 'fcPayload'
     -> FoldersCreate
 foldersCreate pFcPayload_ =
-    FoldersCreate'
+  FoldersCreate'
     { _fcParent = Nothing
     , _fcXgafv = Nothing
     , _fcUploadProtocol = Nothing

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsInsert' request conforms to.
 type AdvertiserGroupsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -55,10 +55,12 @@ type AdvertiserGroupsInsertResource =
 -- | Inserts a new advertiser group.
 --
 -- /See:/ 'advertiserGroupsInsert' smart constructor.
-data AdvertiserGroupsInsert = AdvertiserGroupsInsert'
+data AdvertiserGroupsInsert =
+  AdvertiserGroupsInsert'
     { _agiProFileId :: !(Textual Int64)
     , _agiPayload   :: !AdvertiserGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdvertiserGroupsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ advertiserGroupsInsert
     -> AdvertiserGroup -- ^ 'agiPayload'
     -> AdvertiserGroupsInsert
 advertiserGroupsInsert pAgiProFileId_ pAgiPayload_ =
-    AdvertiserGroupsInsert'
-    { _agiProFileId = _Coerce # pAgiProFileId_
-    , _agiPayload = pAgiPayload_
-    }
+  AdvertiserGroupsInsert'
+    {_agiProFileId = _Coerce # pAgiProFileId_, _agiPayload = pAgiPayload_}
 
 -- | User profile ID associated with this request.
 agiProFileId :: Lens' AdvertiserGroupsInsert Int64

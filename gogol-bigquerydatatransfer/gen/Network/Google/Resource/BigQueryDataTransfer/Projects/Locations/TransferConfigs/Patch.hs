@@ -68,7 +68,8 @@ type ProjectsLocationsTransferConfigsPatchResource =
 -- they are not updated.
 --
 -- /See:/ 'projectsLocationsTransferConfigsPatch' smart constructor.
-data ProjectsLocationsTransferConfigsPatch = ProjectsLocationsTransferConfigsPatch'
+data ProjectsLocationsTransferConfigsPatch =
+  ProjectsLocationsTransferConfigsPatch'
     { _pltcpXgafv             :: !(Maybe Xgafv)
     , _pltcpUploadProtocol    :: !(Maybe Text)
     , _pltcpUpdateMask        :: !(Maybe GFieldMask)
@@ -78,7 +79,8 @@ data ProjectsLocationsTransferConfigsPatch = ProjectsLocationsTransferConfigsPat
     , _pltcpPayload           :: !TransferConfig
     , _pltcpName              :: !Text
     , _pltcpCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsTransferConfigsPatch' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ projectsLocationsTransferConfigsPatch
     -> Text -- ^ 'pltcpName'
     -> ProjectsLocationsTransferConfigsPatch
 projectsLocationsTransferConfigsPatch pPltcpPayload_ pPltcpName_ =
-    ProjectsLocationsTransferConfigsPatch'
+  ProjectsLocationsTransferConfigsPatch'
     { _pltcpXgafv = Nothing
     , _pltcpUploadProtocol = Nothing
     , _pltcpUpdateMask = Nothing
@@ -189,7 +191,8 @@ pltcpCallback
       (\ s a -> s{_pltcpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTransferConfigsPatch where
+           ProjectsLocationsTransferConfigsPatch
+         where
         type Rs ProjectsLocationsTransferConfigsPatch =
              TransferConfig
         type Scopes ProjectsLocationsTransferConfigsPatch =

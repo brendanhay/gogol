@@ -64,7 +64,8 @@ type ProjectsPolicySetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsPolicySetIAMPolicy' smart constructor.
-data ProjectsPolicySetIAMPolicy = ProjectsPolicySetIAMPolicy'
+data ProjectsPolicySetIAMPolicy =
+  ProjectsPolicySetIAMPolicy'
     { _ppsipXgafv          :: !(Maybe Xgafv)
     , _ppsipUploadProtocol :: !(Maybe Text)
     , _ppsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsPolicySetIAMPolicy = ProjectsPolicySetIAMPolicy'
     , _ppsipPayload        :: !SetIAMPolicyRequest
     , _ppsipResource       :: !Text
     , _ppsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsPolicySetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsPolicySetIAMPolicy
     -> Text -- ^ 'ppsipResource'
     -> ProjectsPolicySetIAMPolicy
 projectsPolicySetIAMPolicy pPpsipPayload_ pPpsipResource_ =
-    ProjectsPolicySetIAMPolicy'
+  ProjectsPolicySetIAMPolicy'
     { _ppsipXgafv = Nothing
     , _ppsipUploadProtocol = Nothing
     , _ppsipAccessToken = Nothing

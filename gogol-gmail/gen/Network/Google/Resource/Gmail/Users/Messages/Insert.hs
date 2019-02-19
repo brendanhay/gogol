@@ -79,12 +79,14 @@ type UsersMessagesInsertResource =
 -- message.
 --
 -- /See:/ 'usersMessagesInsert' smart constructor.
-data UsersMessagesInsert = UsersMessagesInsert'
+data UsersMessagesInsert =
+  UsersMessagesInsert'
     { _uPayload            :: !Message
     , _uUserId             :: !Text
     , _uDeleted            :: !Bool
     , _uInternalDateSource :: !UsersMessagesInsertInternalDateSource
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersMessagesInsert' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ usersMessagesInsert
     :: Message -- ^ 'uPayload'
     -> UsersMessagesInsert
 usersMessagesInsert pUPayload_ =
-    UsersMessagesInsert'
+  UsersMessagesInsert'
     { _uPayload = pUPayload_
     , _uUserId = "me"
     , _uDeleted = False
@@ -146,7 +148,8 @@ instance GoogleRequest UsersMessagesInsert where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload UsersMessagesInsert) where
+           (MediaUpload UsersMessagesInsert)
+         where
         type Rs (MediaUpload UsersMessagesInsert) = Message
         type Scopes (MediaUpload UsersMessagesInsert) =
              Scopes UsersMessagesInsert

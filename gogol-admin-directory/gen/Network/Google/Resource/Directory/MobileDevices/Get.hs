@@ -58,11 +58,13 @@ type MobileDevicesGetResource =
 -- | Retrieve Mobile Device
 --
 -- /See:/ 'mobileDevicesGet' smart constructor.
-data MobileDevicesGet = MobileDevicesGet'
+data MobileDevicesGet =
+  MobileDevicesGet'
     { _mdgResourceId :: !Text
     , _mdgCustomerId :: !Text
     , _mdgProjection :: !(Maybe MobileDevicesGetProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileDevicesGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ mobileDevicesGet
     -> Text -- ^ 'mdgCustomerId'
     -> MobileDevicesGet
 mobileDevicesGet pMdgResourceId_ pMdgCustomerId_ =
-    MobileDevicesGet'
+  MobileDevicesGet'
     { _mdgResourceId = pMdgResourceId_
     , _mdgCustomerId = pMdgCustomerId_
     , _mdgProjection = Nothing

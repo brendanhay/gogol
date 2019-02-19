@@ -56,10 +56,12 @@ type MyLibraryBookshelvesGetResource =
 -- authenticated user.
 --
 -- /See:/ 'myLibraryBookshelvesGet' smart constructor.
-data MyLibraryBookshelvesGet = MyLibraryBookshelvesGet'
+data MyLibraryBookshelvesGet =
+  MyLibraryBookshelvesGet'
     { _mlbgShelf  :: !Text
     , _mlbgSource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyLibraryBookshelvesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ myLibraryBookshelvesGet
     :: Text -- ^ 'mlbgShelf'
     -> MyLibraryBookshelvesGet
 myLibraryBookshelvesGet pMlbgShelf_ =
-    MyLibraryBookshelvesGet'
-    { _mlbgShelf = pMlbgShelf_
-    , _mlbgSource = Nothing
-    }
+  MyLibraryBookshelvesGet' {_mlbgShelf = pMlbgShelf_, _mlbgSource = Nothing}
 
 -- | ID of bookshelf to retrieve.
 mlbgShelf :: Lens' MyLibraryBookshelvesGet Text

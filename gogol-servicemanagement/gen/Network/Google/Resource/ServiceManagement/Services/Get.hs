@@ -63,14 +63,16 @@ type ServicesGetResource =
 -- public.
 --
 -- /See:/ 'servicesGet' smart constructor.
-data ServicesGet = ServicesGet'
+data ServicesGet =
+  ServicesGet'
     { _sgXgafv          :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
     , _sgAccessToken    :: !(Maybe Text)
     , _sgUploadType     :: !(Maybe Text)
     , _sgServiceName    :: !Text
     , _sgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesGet' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ servicesGet
     :: Text -- ^ 'sgServiceName'
     -> ServicesGet
 servicesGet pSgServiceName_ =
-    ServicesGet'
+  ServicesGet'
     { _sgXgafv = Nothing
     , _sgUploadProtocol = Nothing
     , _sgAccessToken = Nothing

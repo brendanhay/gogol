@@ -54,10 +54,12 @@ type AccountsContainersListResource =
 -- | Lists all Containers that belongs to a GTM Account.
 --
 -- /See:/ 'accountsContainersList' smart constructor.
-data AccountsContainersList = AccountsContainersList'
+data AccountsContainersList =
+  AccountsContainersList'
     { _aclParent    :: !Text
     , _aclPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersList' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ accountsContainersList
     :: Text -- ^ 'aclParent'
     -> AccountsContainersList
 accountsContainersList pAclParent_ =
-    AccountsContainersList'
-    { _aclParent = pAclParent_
-    , _aclPageToken = Nothing
-    }
+  AccountsContainersList' {_aclParent = pAclParent_, _aclPageToken = Nothing}
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}.
 aclParent :: Lens' AccountsContainersList Text

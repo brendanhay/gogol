@@ -61,13 +61,15 @@ type ViolatingSitesListResource =
 -- \"Warning\".
 --
 -- /See:/ 'violatingSitesList' smart constructor.
-data ViolatingSitesList = ViolatingSitesList'
+data ViolatingSitesList =
+  ViolatingSitesList'
     { _vslXgafv          :: !(Maybe Xgafv)
     , _vslUploadProtocol :: !(Maybe Text)
     , _vslAccessToken    :: !(Maybe Text)
     , _vslUploadType     :: !(Maybe Text)
     , _vslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ViolatingSitesList' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ data ViolatingSitesList = ViolatingSitesList'
 violatingSitesList
     :: ViolatingSitesList
 violatingSitesList =
-    ViolatingSitesList'
+  ViolatingSitesList'
     { _vslXgafv = Nothing
     , _vslUploadProtocol = Nothing
     , _vslAccessToken = Nothing

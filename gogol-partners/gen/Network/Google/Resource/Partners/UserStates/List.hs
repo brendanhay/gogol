@@ -84,7 +84,8 @@ type UserStatesListResource =
 -- | Lists states for current user.
 --
 -- /See:/ 'userStatesList' smart constructor.
-data UserStatesList = UserStatesList'
+data UserStatesList =
+  UserStatesList'
     { _uslXgafv                                       :: !(Maybe Xgafv)
     , _uslUploadProtocol                              :: !(Maybe Text)
     , _uslAccessToken                                 :: !(Maybe Text)
@@ -97,7 +98,8 @@ data UserStatesList = UserStatesList'
     , _uslRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _uslRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _uslCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserStatesList' with the minimum fields required to make a request.
 --
@@ -129,7 +131,7 @@ data UserStatesList = UserStatesList'
 userStatesList
     :: UserStatesList
 userStatesList =
-    UserStatesList'
+  UserStatesList'
     { _uslXgafv = Nothing
     , _uslUploadProtocol = Nothing
     , _uslAccessToken = Nothing

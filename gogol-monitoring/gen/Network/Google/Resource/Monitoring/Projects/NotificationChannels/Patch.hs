@@ -66,7 +66,8 @@ type ProjectsNotificationChannelsPatchResource =
 -- remain unchanged.
 --
 -- /See:/ 'projectsNotificationChannelsPatch' smart constructor.
-data ProjectsNotificationChannelsPatch = ProjectsNotificationChannelsPatch'
+data ProjectsNotificationChannelsPatch =
+  ProjectsNotificationChannelsPatch'
     { _pncpXgafv          :: !(Maybe Xgafv)
     , _pncpUploadProtocol :: !(Maybe Text)
     , _pncpUpdateMask     :: !(Maybe GFieldMask)
@@ -75,7 +76,8 @@ data ProjectsNotificationChannelsPatch = ProjectsNotificationChannelsPatch'
     , _pncpPayload        :: !NotificationChannel
     , _pncpName           :: !Text
     , _pncpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsNotificationChannelsPatch' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsNotificationChannelsPatch
     -> Text -- ^ 'pncpName'
     -> ProjectsNotificationChannelsPatch
 projectsNotificationChannelsPatch pPncpPayload_ pPncpName_ =
-    ProjectsNotificationChannelsPatch'
+  ProjectsNotificationChannelsPatch'
     { _pncpXgafv = Nothing
     , _pncpUploadProtocol = Nothing
     , _pncpUpdateMask = Nothing
@@ -158,7 +160,8 @@ pncpCallback
   = lens _pncpCallback (\ s a -> s{_pncpCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelsPatch where
+           ProjectsNotificationChannelsPatch
+         where
         type Rs ProjectsNotificationChannelsPatch =
              NotificationChannel
         type Scopes ProjectsNotificationChannelsPatch =

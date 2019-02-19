@@ -65,14 +65,16 @@ type OperationsDeleteResource =
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
 -- /See:/ 'operationsDelete' smart constructor.
-data OperationsDelete = OperationsDelete'
+data OperationsDelete =
+  OperationsDelete'
     { _odXgafv          :: !(Maybe Xgafv)
     , _odUploadProtocol :: !(Maybe Text)
     , _odAccessToken    :: !(Maybe Text)
     , _odUploadType     :: !(Maybe Text)
     , _odName           :: !Text
     , _odCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ operationsDelete
     :: Text -- ^ 'odName'
     -> OperationsDelete
 operationsDelete pOdName_ =
-    OperationsDelete'
+  OperationsDelete'
     { _odXgafv = Nothing
     , _odUploadProtocol = Nothing
     , _odAccessToken = Nothing

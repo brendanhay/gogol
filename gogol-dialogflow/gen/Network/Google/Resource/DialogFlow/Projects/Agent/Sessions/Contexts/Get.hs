@@ -60,14 +60,16 @@ type ProjectsAgentSessionsContextsGetResource =
 -- | Retrieves the specified context.
 --
 -- /See:/ 'projectsAgentSessionsContextsGet' smart constructor.
-data ProjectsAgentSessionsContextsGet = ProjectsAgentSessionsContextsGet'
+data ProjectsAgentSessionsContextsGet =
+  ProjectsAgentSessionsContextsGet'
     { _pascgXgafv          :: !(Maybe Xgafv)
     , _pascgUploadProtocol :: !(Maybe Text)
     , _pascgAccessToken    :: !(Maybe Text)
     , _pascgUploadType     :: !(Maybe Text)
     , _pascgName           :: !Text
     , _pascgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentSessionsContextsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsAgentSessionsContextsGet
     :: Text -- ^ 'pascgName'
     -> ProjectsAgentSessionsContextsGet
 projectsAgentSessionsContextsGet pPascgName_ =
-    ProjectsAgentSessionsContextsGet'
+  ProjectsAgentSessionsContextsGet'
     { _pascgXgafv = Nothing
     , _pascgUploadProtocol = Nothing
     , _pascgAccessToken = Nothing
@@ -133,7 +135,8 @@ pascgCallback
       (\ s a -> s{_pascgCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsContextsGet where
+           ProjectsAgentSessionsContextsGet
+         where
         type Rs ProjectsAgentSessionsContextsGet =
              GoogleCloudDialogflowV2Context
         type Scopes ProjectsAgentSessionsContextsGet =

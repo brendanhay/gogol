@@ -59,11 +59,13 @@ type UsersSettingsSendAsSmimeInfoSetDefaultResource =
 -- | Sets the default S\/MIME config for the specified send-as alias.
 --
 -- /See:/ 'usersSettingsSendAsSmimeInfoSetDefault' smart constructor.
-data UsersSettingsSendAsSmimeInfoSetDefault = UsersSettingsSendAsSmimeInfoSetDefault'
+data UsersSettingsSendAsSmimeInfoSetDefault =
+  UsersSettingsSendAsSmimeInfoSetDefault'
     { _ussasisdUserId      :: !Text
     , _ussasisdSendAsEmail :: !Text
     , _ussasisdId          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsSendAsSmimeInfoSetDefault' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ usersSettingsSendAsSmimeInfoSetDefault
     -> Text -- ^ 'ussasisdId'
     -> UsersSettingsSendAsSmimeInfoSetDefault
 usersSettingsSendAsSmimeInfoSetDefault pUssasisdSendAsEmail_ pUssasisdId_ =
-    UsersSettingsSendAsSmimeInfoSetDefault'
+  UsersSettingsSendAsSmimeInfoSetDefault'
     { _ussasisdUserId = "me"
     , _ussasisdSendAsEmail = pUssasisdSendAsEmail_
     , _ussasisdId = pUssasisdId_
@@ -105,7 +107,8 @@ ussasisdId
   = lens _ussasisdId (\ s a -> s{_ussasisdId = a})
 
 instance GoogleRequest
-         UsersSettingsSendAsSmimeInfoSetDefault where
+           UsersSettingsSendAsSmimeInfoSetDefault
+         where
         type Rs UsersSettingsSendAsSmimeInfoSetDefault = ()
         type Scopes UsersSettingsSendAsSmimeInfoSetDefault =
              '["https://www.googleapis.com/auth/gmail.settings.basic",

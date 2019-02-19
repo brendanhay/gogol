@@ -68,7 +68,8 @@ type ProjectsIapTunnelSetIAMPolicyResource =
 -- https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing_access_via_the_api
 --
 -- /See:/ 'projectsIapTunnelSetIAMPolicy' smart constructor.
-data ProjectsIapTunnelSetIAMPolicy = ProjectsIapTunnelSetIAMPolicy'
+data ProjectsIapTunnelSetIAMPolicy =
+  ProjectsIapTunnelSetIAMPolicy'
     { _pitsipXgafv          :: !(Maybe Xgafv)
     , _pitsipUploadProtocol :: !(Maybe Text)
     , _pitsipAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsIapTunnelSetIAMPolicy = ProjectsIapTunnelSetIAMPolicy'
     , _pitsipPayload        :: !SetIAMPolicyRequest
     , _pitsipResource       :: !Text
     , _pitsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsIapTunnelSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsIapTunnelSetIAMPolicy
     -> Text -- ^ 'pitsipResource'
     -> ProjectsIapTunnelSetIAMPolicy
 projectsIapTunnelSetIAMPolicy pPitsipPayload_ pPitsipResource_ =
-    ProjectsIapTunnelSetIAMPolicy'
+  ProjectsIapTunnelSetIAMPolicy'
     { _pitsipXgafv = Nothing
     , _pitsipUploadProtocol = Nothing
     , _pitsipAccessToken = Nothing

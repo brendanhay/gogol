@@ -69,7 +69,8 @@ type ScoresListWindowResource =
 -- score.
 --
 -- /See:/ 'scoresListWindow' smart constructor.
-data ScoresListWindow = ScoresListWindow'
+data ScoresListWindow =
+  ScoresListWindow'
     { _slwCollection        :: !ScoresListWindowCollection
     , _slwTimeSpan          :: !ScoresListWindowTimeSpan
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
@@ -78,7 +79,8 @@ data ScoresListWindow = ScoresListWindow'
     , _slwResultsAbove      :: !(Maybe (Textual Int32))
     , _slwPageToken         :: !(Maybe Text)
     , _slwMaxResults        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ScoresListWindow' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ scoresListWindow
     -> Text -- ^ 'slwLeaderboardId'
     -> ScoresListWindow
 scoresListWindow pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
-    ScoresListWindow'
+  ScoresListWindow'
     { _slwCollection = pSlwCollection_
     , _slwTimeSpan = pSlwTimeSpan_
     , _slwReturnTopIfAbsent = Nothing

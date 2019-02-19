@@ -63,11 +63,13 @@ type UsersSetAvailableProductSetResource =
 -- whitelisted.
 --
 -- /See:/ 'usersSetAvailableProductSet' smart constructor.
-data UsersSetAvailableProductSet = UsersSetAvailableProductSet'
+data UsersSetAvailableProductSet =
+  UsersSetAvailableProductSet'
     { _usapsEnterpriseId :: !Text
     , _usapsPayload      :: !ProductSet
     , _usapsUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSetAvailableProductSet' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ usersSetAvailableProductSet
     -> Text -- ^ 'usapsUserId'
     -> UsersSetAvailableProductSet
 usersSetAvailableProductSet pUsapsEnterpriseId_ pUsapsPayload_ pUsapsUserId_ =
-    UsersSetAvailableProductSet'
+  UsersSetAvailableProductSet'
     { _usapsEnterpriseId = pUsapsEnterpriseId_
     , _usapsPayload = pUsapsPayload_
     , _usapsUserId = pUsapsUserId_

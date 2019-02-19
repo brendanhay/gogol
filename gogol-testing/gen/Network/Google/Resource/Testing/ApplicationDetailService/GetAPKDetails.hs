@@ -62,14 +62,16 @@ type ApplicationDetailServiceGetAPKDetailsResource =
 -- | Gets the details of an Android application APK.
 --
 -- /See:/ 'applicationDetailServiceGetAPKDetails' smart constructor.
-data ApplicationDetailServiceGetAPKDetails = ApplicationDetailServiceGetAPKDetails'
+data ApplicationDetailServiceGetAPKDetails =
+  ApplicationDetailServiceGetAPKDetails'
     { _adsgapkdXgafv          :: !(Maybe Xgafv)
     , _adsgapkdUploadProtocol :: !(Maybe Text)
     , _adsgapkdAccessToken    :: !(Maybe Text)
     , _adsgapkdUploadType     :: !(Maybe Text)
     , _adsgapkdPayload        :: !FileReference
     , _adsgapkdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApplicationDetailServiceGetAPKDetails' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ applicationDetailServiceGetAPKDetails
     :: FileReference -- ^ 'adsgapkdPayload'
     -> ApplicationDetailServiceGetAPKDetails
 applicationDetailServiceGetAPKDetails pAdsgapkdPayload_ =
-    ApplicationDetailServiceGetAPKDetails'
+  ApplicationDetailServiceGetAPKDetails'
     { _adsgapkdXgafv = Nothing
     , _adsgapkdUploadProtocol = Nothing
     , _adsgapkdAccessToken = Nothing
@@ -136,7 +138,8 @@ adsgapkdCallback
       (\ s a -> s{_adsgapkdCallback = a})
 
 instance GoogleRequest
-         ApplicationDetailServiceGetAPKDetails where
+           ApplicationDetailServiceGetAPKDetails
+         where
         type Rs ApplicationDetailServiceGetAPKDetails =
              GetAPKDetailsResponse
         type Scopes ApplicationDetailServiceGetAPKDetails =

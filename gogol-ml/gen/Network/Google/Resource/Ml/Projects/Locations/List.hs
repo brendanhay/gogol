@@ -65,7 +65,8 @@ type ProjectsLocationsListResource =
 -- | List all locations that provides at least one type of CMLE capability.
 --
 -- /See:/ 'projectsLocationsList' smart constructor.
-data ProjectsLocationsList = ProjectsLocationsList'
+data ProjectsLocationsList =
+  ProjectsLocationsList'
     { _pllParent         :: !Text
     , _pllXgafv          :: !(Maybe Xgafv)
     , _pllUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsList = ProjectsLocationsList'
     , _pllPageToken      :: !(Maybe Text)
     , _pllPageSize       :: !(Maybe (Textual Int32))
     , _pllCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsList
     :: Text -- ^ 'pllParent'
     -> ProjectsLocationsList
 projectsLocationsList pPllParent_ =
-    ProjectsLocationsList'
+  ProjectsLocationsList'
     { _pllParent = pPllParent_
     , _pllXgafv = Nothing
     , _pllUploadProtocol = Nothing

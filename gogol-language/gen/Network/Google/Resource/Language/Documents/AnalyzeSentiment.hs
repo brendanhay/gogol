@@ -61,14 +61,16 @@ type DocumentsAnalyzeSentimentResource =
 -- | Analyzes the sentiment of the provided text.
 --
 -- /See:/ 'documentsAnalyzeSentiment' smart constructor.
-data DocumentsAnalyzeSentiment = DocumentsAnalyzeSentiment'
+data DocumentsAnalyzeSentiment =
+  DocumentsAnalyzeSentiment'
     { _dasXgafv          :: !(Maybe Xgafv)
     , _dasUploadProtocol :: !(Maybe Text)
     , _dasAccessToken    :: !(Maybe Text)
     , _dasUploadType     :: !(Maybe Text)
     , _dasPayload        :: !AnalyzeSentimentRequest
     , _dasCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentsAnalyzeSentiment' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ documentsAnalyzeSentiment
     :: AnalyzeSentimentRequest -- ^ 'dasPayload'
     -> DocumentsAnalyzeSentiment
 documentsAnalyzeSentiment pDasPayload_ =
-    DocumentsAnalyzeSentiment'
+  DocumentsAnalyzeSentiment'
     { _dasXgafv = Nothing
     , _dasUploadProtocol = Nothing
     , _dasAccessToken = Nothing

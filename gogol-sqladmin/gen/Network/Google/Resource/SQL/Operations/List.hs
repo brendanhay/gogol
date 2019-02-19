@@ -61,12 +61,14 @@ type OperationsListResource =
 -- Cloud SQL instance in the reverse chronological order of the start time.
 --
 -- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList'
+data OperationsList =
+  OperationsList'
     { _olProject    :: !Text
     , _olPageToken  :: !(Maybe Text)
     , _olMaxResults :: !(Maybe (Textual Word32))
     , _olInstance   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ operationsList
     -> Text -- ^ 'olInstance'
     -> OperationsList
 operationsList pOlProject_ pOlInstance_ =
-    OperationsList'
+  OperationsList'
     { _olProject = pOlProject_
     , _olPageToken = Nothing
     , _olMaxResults = Nothing

@@ -68,7 +68,8 @@ type ProjectsZonesOperationsGetResource =
 -- | Gets the specified operation.
 --
 -- /See:/ 'projectsZonesOperationsGet' smart constructor.
-data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet'
+data ProjectsZonesOperationsGet =
+  ProjectsZonesOperationsGet'
     { _pzogXgafv          :: !(Maybe Xgafv)
     , _pzogUploadProtocol :: !(Maybe Text)
     , _pzogAccessToken    :: !(Maybe Text)
@@ -78,7 +79,8 @@ data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet'
     , _pzogProjectId      :: !Text
     , _pzogOperationId    :: !Text
     , _pzogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesOperationsGet' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ projectsZonesOperationsGet
     -> Text -- ^ 'pzogOperationId'
     -> ProjectsZonesOperationsGet
 projectsZonesOperationsGet pPzogZone_ pPzogProjectId_ pPzogOperationId_ =
-    ProjectsZonesOperationsGet'
+  ProjectsZonesOperationsGet'
     { _pzogXgafv = Nothing
     , _pzogUploadProtocol = Nothing
     , _pzogAccessToken = Nothing

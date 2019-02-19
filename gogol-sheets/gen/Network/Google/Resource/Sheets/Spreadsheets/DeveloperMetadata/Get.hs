@@ -68,7 +68,8 @@ type SpreadsheetsDeveloperMetadataGetResource =
 -- metadataId.
 --
 -- /See:/ 'spreadsheetsDeveloperMetadataGet' smart constructor.
-data SpreadsheetsDeveloperMetadataGet = SpreadsheetsDeveloperMetadataGet'
+data SpreadsheetsDeveloperMetadataGet =
+  SpreadsheetsDeveloperMetadataGet'
     { _sdmgXgafv          :: !(Maybe Xgafv)
     , _sdmgUploadProtocol :: !(Maybe Text)
     , _sdmgMetadataId     :: !(Textual Int32)
@@ -76,7 +77,8 @@ data SpreadsheetsDeveloperMetadataGet = SpreadsheetsDeveloperMetadataGet'
     , _sdmgSpreadsheetId  :: !Text
     , _sdmgUploadType     :: !(Maybe Text)
     , _sdmgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsDeveloperMetadataGet' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ spreadsheetsDeveloperMetadataGet
     -> Text -- ^ 'sdmgSpreadsheetId'
     -> SpreadsheetsDeveloperMetadataGet
 spreadsheetsDeveloperMetadataGet pSdmgMetadataId_ pSdmgSpreadsheetId_ =
-    SpreadsheetsDeveloperMetadataGet'
+  SpreadsheetsDeveloperMetadataGet'
     { _sdmgXgafv = Nothing
     , _sdmgUploadProtocol = Nothing
     , _sdmgMetadataId = _Coerce # pSdmgMetadataId_
@@ -152,7 +154,8 @@ sdmgCallback
   = lens _sdmgCallback (\ s a -> s{_sdmgCallback = a})
 
 instance GoogleRequest
-         SpreadsheetsDeveloperMetadataGet where
+           SpreadsheetsDeveloperMetadataGet
+         where
         type Rs SpreadsheetsDeveloperMetadataGet =
              DeveloperMetadata
         type Scopes SpreadsheetsDeveloperMetadataGet =

@@ -68,7 +68,8 @@ type IndexingDatasourcesItemsUnreserveResource =
 -- connector has been restarted.
 --
 -- /See:/ 'indexingDatasourcesItemsUnreserve' smart constructor.
-data IndexingDatasourcesItemsUnreserve = IndexingDatasourcesItemsUnreserve'
+data IndexingDatasourcesItemsUnreserve =
+  IndexingDatasourcesItemsUnreserve'
     { _idiuXgafv          :: !(Maybe Xgafv)
     , _idiuUploadProtocol :: !(Maybe Text)
     , _idiuAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data IndexingDatasourcesItemsUnreserve = IndexingDatasourcesItemsUnreserve'
     , _idiuPayload        :: !UnreserveItemsRequest
     , _idiuName           :: !Text
     , _idiuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IndexingDatasourcesItemsUnreserve' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ indexingDatasourcesItemsUnreserve
     -> Text -- ^ 'idiuName'
     -> IndexingDatasourcesItemsUnreserve
 indexingDatasourcesItemsUnreserve pIdiuPayload_ pIdiuName_ =
-    IndexingDatasourcesItemsUnreserve'
+  IndexingDatasourcesItemsUnreserve'
     { _idiuXgafv = Nothing
     , _idiuUploadProtocol = Nothing
     , _idiuAccessToken = Nothing
@@ -149,7 +151,8 @@ idiuCallback
   = lens _idiuCallback (\ s a -> s{_idiuCallback = a})
 
 instance GoogleRequest
-         IndexingDatasourcesItemsUnreserve where
+           IndexingDatasourcesItemsUnreserve
+         where
         type Rs IndexingDatasourcesItemsUnreserve = Operation
         type Scopes IndexingDatasourcesItemsUnreserve =
              '["https://www.googleapis.com/auth/cloud_search",

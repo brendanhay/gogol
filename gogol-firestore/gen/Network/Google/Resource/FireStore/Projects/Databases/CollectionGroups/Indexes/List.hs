@@ -69,7 +69,8 @@ type ProjectsDatabasesCollectionGroupsIndexesListResource
 -- | Lists composite indexes.
 --
 -- /See:/ 'projectsDatabasesCollectionGroupsIndexesList' smart constructor.
-data ProjectsDatabasesCollectionGroupsIndexesList = ProjectsDatabasesCollectionGroupsIndexesList'
+data ProjectsDatabasesCollectionGroupsIndexesList =
+  ProjectsDatabasesCollectionGroupsIndexesList'
     { _pdcgilParent         :: !Text
     , _pdcgilXgafv          :: !(Maybe Xgafv)
     , _pdcgilUploadProtocol :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsDatabasesCollectionGroupsIndexesList = ProjectsDatabasesCollectionG
     , _pdcgilPageToken      :: !(Maybe Text)
     , _pdcgilPageSize       :: !(Maybe (Textual Int32))
     , _pdcgilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsIndexesList' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ projectsDatabasesCollectionGroupsIndexesList
     :: Text -- ^ 'pdcgilParent'
     -> ProjectsDatabasesCollectionGroupsIndexesList
 projectsDatabasesCollectionGroupsIndexesList pPdcgilParent_ =
-    ProjectsDatabasesCollectionGroupsIndexesList'
+  ProjectsDatabasesCollectionGroupsIndexesList'
     { _pdcgilParent = pPdcgilParent_
     , _pdcgilXgafv = Nothing
     , _pdcgilUploadProtocol = Nothing
@@ -174,7 +176,8 @@ pdcgilCallback
       (\ s a -> s{_pdcgilCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesCollectionGroupsIndexesList where
+           ProjectsDatabasesCollectionGroupsIndexesList
+         where
         type Rs ProjectsDatabasesCollectionGroupsIndexesList
              = GoogleFirestoreAdminV1ListIndexesResponse
         type Scopes

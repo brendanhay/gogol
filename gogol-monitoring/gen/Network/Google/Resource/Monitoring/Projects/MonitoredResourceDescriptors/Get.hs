@@ -63,14 +63,16 @@ type ProjectsMonitoredResourceDescriptorsGetResource
 -- require a Stackdriver account.
 --
 -- /See:/ 'projectsMonitoredResourceDescriptorsGet' smart constructor.
-data ProjectsMonitoredResourceDescriptorsGet = ProjectsMonitoredResourceDescriptorsGet'
+data ProjectsMonitoredResourceDescriptorsGet =
+  ProjectsMonitoredResourceDescriptorsGet'
     { _pmrdgXgafv          :: !(Maybe Xgafv)
     , _pmrdgUploadProtocol :: !(Maybe Text)
     , _pmrdgAccessToken    :: !(Maybe Text)
     , _pmrdgUploadType     :: !(Maybe Text)
     , _pmrdgName           :: !Text
     , _pmrdgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsMonitoredResourceDescriptorsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ projectsMonitoredResourceDescriptorsGet
     :: Text -- ^ 'pmrdgName'
     -> ProjectsMonitoredResourceDescriptorsGet
 projectsMonitoredResourceDescriptorsGet pPmrdgName_ =
-    ProjectsMonitoredResourceDescriptorsGet'
+  ProjectsMonitoredResourceDescriptorsGet'
     { _pmrdgXgafv = Nothing
     , _pmrdgUploadProtocol = Nothing
     , _pmrdgAccessToken = Nothing
@@ -137,7 +139,8 @@ pmrdgCallback
       (\ s a -> s{_pmrdgCallback = a})
 
 instance GoogleRequest
-         ProjectsMonitoredResourceDescriptorsGet where
+           ProjectsMonitoredResourceDescriptorsGet
+         where
         type Rs ProjectsMonitoredResourceDescriptorsGet =
              MonitoredResourceDescriptor
         type Scopes ProjectsMonitoredResourceDescriptorsGet =

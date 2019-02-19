@@ -54,10 +54,12 @@ type CustomersPatchResource =
 -- | Updates a customer. This method supports patch semantics.
 --
 -- /See:/ 'customersPatch' smart constructor.
-data CustomersPatch = CustomersPatch'
+data CustomersPatch =
+  CustomersPatch'
     { _cpCustomerKey :: !Text
     , _cpPayload     :: !Customer
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersPatch' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ customersPatch
     -> Customer -- ^ 'cpPayload'
     -> CustomersPatch
 customersPatch pCpCustomerKey_ pCpPayload_ =
-    CustomersPatch'
-    { _cpCustomerKey = pCpCustomerKey_
-    , _cpPayload = pCpPayload_
-    }
+  CustomersPatch' {_cpCustomerKey = pCpCustomerKey_, _cpPayload = pCpPayload_}
 
 -- | Id of the customer to be updated
 cpCustomerKey :: Lens' CustomersPatch Text

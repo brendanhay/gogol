@@ -64,7 +64,8 @@ type PartnersDevicesFindByIdentifierResource =
 -- | Finds devices by hardware identifiers, such as IMEI.
 --
 -- /See:/ 'partnersDevicesFindByIdentifier' smart constructor.
-data PartnersDevicesFindByIdentifier = PartnersDevicesFindByIdentifier'
+data PartnersDevicesFindByIdentifier =
+  PartnersDevicesFindByIdentifier'
     { _pdfbiXgafv          :: !(Maybe Xgafv)
     , _pdfbiUploadProtocol :: !(Maybe Text)
     , _pdfbiAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data PartnersDevicesFindByIdentifier = PartnersDevicesFindByIdentifier'
     , _pdfbiUploadType     :: !(Maybe Text)
     , _pdfbiPayload        :: !FindDevicesByDeviceIdentifierRequest
     , _pdfbiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartnersDevicesFindByIdentifier' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ partnersDevicesFindByIdentifier
     -> FindDevicesByDeviceIdentifierRequest -- ^ 'pdfbiPayload'
     -> PartnersDevicesFindByIdentifier
 partnersDevicesFindByIdentifier pPdfbiPartnerId_ pPdfbiPayload_ =
-    PartnersDevicesFindByIdentifier'
+  PartnersDevicesFindByIdentifier'
     { _pdfbiXgafv = Nothing
     , _pdfbiUploadProtocol = Nothing
     , _pdfbiAccessToken = Nothing
@@ -148,7 +150,8 @@ pdfbiCallback
       (\ s a -> s{_pdfbiCallback = a})
 
 instance GoogleRequest
-         PartnersDevicesFindByIdentifier where
+           PartnersDevicesFindByIdentifier
+         where
         type Rs PartnersDevicesFindByIdentifier =
              FindDevicesByDeviceIdentifierResponse
         type Scopes PartnersDevicesFindByIdentifier = '[]

@@ -63,13 +63,15 @@ type AchievementsListResource =
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsList' smart constructor.
-data AchievementsList = AchievementsList'
+data AchievementsList =
+  AchievementsList'
     { _alState      :: !(Maybe AchievementsListState)
     , _alLanguage   :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
     , _alPlayerId   :: !Text
     , _alMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AchievementsList' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ achievementsList
     :: Text -- ^ 'alPlayerId'
     -> AchievementsList
 achievementsList pAlPlayerId_ =
-    AchievementsList'
+  AchievementsList'
     { _alState = Nothing
     , _alLanguage = Nothing
     , _alPageToken = Nothing

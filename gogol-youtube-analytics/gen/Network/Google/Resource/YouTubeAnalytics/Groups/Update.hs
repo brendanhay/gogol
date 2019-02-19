@@ -62,7 +62,8 @@ type GroupsUpdateResource =
 -- | Modifies a group. For example, you could change a group\'s title.
 --
 -- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate'
+data GroupsUpdate =
+  GroupsUpdate'
     { _guXgafv                  :: !(Maybe Xgafv)
     , _guUploadProtocol         :: !(Maybe Text)
     , _guAccessToken            :: !(Maybe Text)
@@ -70,7 +71,8 @@ data GroupsUpdate = GroupsUpdate'
     , _guPayload                :: !Group
     , _guOnBehalfOfContentOwner :: !(Maybe Text)
     , _guCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsUpdate' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ groupsUpdate
     :: Group -- ^ 'guPayload'
     -> GroupsUpdate
 groupsUpdate pGuPayload_ =
-    GroupsUpdate'
+  GroupsUpdate'
     { _guXgafv = Nothing
     , _guUploadProtocol = Nothing
     , _guAccessToken = Nothing

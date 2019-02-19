@@ -62,7 +62,8 @@ type ProjectsRolesUndeleteResource =
 -- | Undelete a Role, bringing it back in its previous state.
 --
 -- /See:/ 'projectsRolesUndelete' smart constructor.
-data ProjectsRolesUndelete = ProjectsRolesUndelete'
+data ProjectsRolesUndelete =
+  ProjectsRolesUndelete'
     { _pruXgafv          :: !(Maybe Xgafv)
     , _pruUploadProtocol :: !(Maybe Text)
     , _pruAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsRolesUndelete = ProjectsRolesUndelete'
     , _pruPayload        :: !UndeleteRoleRequest
     , _pruName           :: !Text
     , _pruCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRolesUndelete' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsRolesUndelete
     -> Text -- ^ 'pruName'
     -> ProjectsRolesUndelete
 projectsRolesUndelete pPruPayload_ pPruName_ =
-    ProjectsRolesUndelete'
+  ProjectsRolesUndelete'
     { _pruXgafv = Nothing
     , _pruUploadProtocol = Nothing
     , _pruAccessToken = Nothing

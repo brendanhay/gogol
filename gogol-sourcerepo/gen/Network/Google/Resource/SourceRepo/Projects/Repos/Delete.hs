@@ -59,14 +59,16 @@ type ProjectsReposDeleteResource =
 -- | Deletes a repo.
 --
 -- /See:/ 'projectsReposDelete' smart constructor.
-data ProjectsReposDelete = ProjectsReposDelete'
+data ProjectsReposDelete =
+  ProjectsReposDelete'
     { _prdXgafv          :: !(Maybe Xgafv)
     , _prdUploadProtocol :: !(Maybe Text)
     , _prdAccessToken    :: !(Maybe Text)
     , _prdUploadType     :: !(Maybe Text)
     , _prdName           :: !Text
     , _prdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReposDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsReposDelete
     :: Text -- ^ 'prdName'
     -> ProjectsReposDelete
 projectsReposDelete pPrdName_ =
-    ProjectsReposDelete'
+  ProjectsReposDelete'
     { _prdXgafv = Nothing
     , _prdUploadProtocol = Nothing
     , _prdAccessToken = Nothing

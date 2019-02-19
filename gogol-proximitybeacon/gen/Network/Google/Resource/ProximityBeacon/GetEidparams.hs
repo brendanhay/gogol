@@ -71,13 +71,15 @@ type GetEidparamsResource =
 -- an Eddystone-EID beacon.
 --
 -- /See:/ 'getEidparams' smart constructor.
-data GetEidparams = GetEidparams'
+data GetEidparams =
+  GetEidparams'
     { _geXgafv          :: !(Maybe Xgafv)
     , _geUploadProtocol :: !(Maybe Text)
     , _geAccessToken    :: !(Maybe Text)
     , _geUploadType     :: !(Maybe Text)
     , _geCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetEidparams' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ data GetEidparams = GetEidparams'
 getEidparams
     :: GetEidparams
 getEidparams =
-    GetEidparams'
+  GetEidparams'
     { _geXgafv = Nothing
     , _geUploadProtocol = Nothing
     , _geAccessToken = Nothing

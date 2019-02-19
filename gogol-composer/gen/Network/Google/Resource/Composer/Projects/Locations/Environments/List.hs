@@ -65,7 +65,8 @@ type ProjectsLocationsEnvironmentsListResource =
 -- | List environments.
 --
 -- /See:/ 'projectsLocationsEnvironmentsList' smart constructor.
-data ProjectsLocationsEnvironmentsList = ProjectsLocationsEnvironmentsList'
+data ProjectsLocationsEnvironmentsList =
+  ProjectsLocationsEnvironmentsList'
     { _plelParent         :: !Text
     , _plelXgafv          :: !(Maybe Xgafv)
     , _plelUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsEnvironmentsList = ProjectsLocationsEnvironmentsList'
     , _plelPageToken      :: !(Maybe Text)
     , _plelPageSize       :: !(Maybe (Textual Int32))
     , _plelCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsEnvironmentsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsEnvironmentsList
     :: Text -- ^ 'plelParent'
     -> ProjectsLocationsEnvironmentsList
 projectsLocationsEnvironmentsList pPlelParent_ =
-    ProjectsLocationsEnvironmentsList'
+  ProjectsLocationsEnvironmentsList'
     { _plelParent = pPlelParent_
     , _plelXgafv = Nothing
     , _plelUploadProtocol = Nothing
@@ -157,7 +159,8 @@ plelCallback
   = lens _plelCallback (\ s a -> s{_plelCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsEnvironmentsList where
+           ProjectsLocationsEnvironmentsList
+         where
         type Rs ProjectsLocationsEnvironmentsList =
              ListEnvironmentsResponse
         type Scopes ProjectsLocationsEnvironmentsList =

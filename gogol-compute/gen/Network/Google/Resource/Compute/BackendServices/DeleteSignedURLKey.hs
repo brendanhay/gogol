@@ -62,12 +62,14 @@ type BackendServicesDeleteSignedURLKeyResource =
 -- service.
 --
 -- /See:/ 'backendServicesDeleteSignedURLKey' smart constructor.
-data BackendServicesDeleteSignedURLKey = BackendServicesDeleteSignedURLKey'
+data BackendServicesDeleteSignedURLKey =
+  BackendServicesDeleteSignedURLKey'
     { _bsdsukRequestId      :: !(Maybe Text)
     , _bsdsukProject        :: !Text
     , _bsdsukKeyName        :: !Text
     , _bsdsukBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServicesDeleteSignedURLKey' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ backendServicesDeleteSignedURLKey
     -> Text -- ^ 'bsdsukBackendService'
     -> BackendServicesDeleteSignedURLKey
 backendServicesDeleteSignedURLKey pBsdsukProject_ pBsdsukKeyName_ pBsdsukBackendService_ =
-    BackendServicesDeleteSignedURLKey'
+  BackendServicesDeleteSignedURLKey'
     { _bsdsukRequestId = Nothing
     , _bsdsukProject = pBsdsukProject_
     , _bsdsukKeyName = pBsdsukKeyName_
@@ -128,7 +130,8 @@ bsdsukBackendService
       (\ s a -> s{_bsdsukBackendService = a})
 
 instance GoogleRequest
-         BackendServicesDeleteSignedURLKey where
+           BackendServicesDeleteSignedURLKey
+         where
         type Rs BackendServicesDeleteSignedURLKey = Operation
         type Scopes BackendServicesDeleteSignedURLKey =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -67,7 +67,8 @@ type ChangesListResource =
 -- | Lists the changes for a user or Team Drive.
 --
 -- /See:/ 'changesList' smart constructor.
-data ChangesList = ChangesList'
+data ChangesList =
+  ChangesList'
     { _clIncludeTeamDriveItems :: !Bool
     , _clIncludeCorpusRemovals :: !Bool
     , _clTeamDriveId           :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ChangesList = ChangesList'
     , _clPageSize              :: !(Textual Int32)
     , _clIncludeRemoved        :: !Bool
     , _clSupportsTeamDrives    :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChangesList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ changesList
     :: Text -- ^ 'clPageToken'
     -> ChangesList
 changesList pClPageToken_ =
-    ChangesList'
+  ChangesList'
     { _clIncludeTeamDriveItems = False
     , _clIncludeCorpusRemovals = False
     , _clTeamDriveId = Nothing

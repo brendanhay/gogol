@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsPatch' request conforms to.
 type FloodlightActivityGroupsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>
@@ -59,11 +59,13 @@ type FloodlightActivityGroupsPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'floodlightActivityGroupsPatch' smart constructor.
-data FloodlightActivityGroupsPatch = FloodlightActivityGroupsPatch'
+data FloodlightActivityGroupsPatch =
+  FloodlightActivityGroupsPatch'
     { _fagpProFileId :: !(Textual Int64)
     , _fagpPayload   :: !FloodlightActivityGroup
     , _fagpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsPatch' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ floodlightActivityGroupsPatch
     -> Int64 -- ^ 'fagpId'
     -> FloodlightActivityGroupsPatch
 floodlightActivityGroupsPatch pFagpProFileId_ pFagpPayload_ pFagpId_ =
-    FloodlightActivityGroupsPatch'
+  FloodlightActivityGroupsPatch'
     { _fagpProFileId = _Coerce # pFagpProFileId_
     , _fagpPayload = pFagpPayload_
     , _fagpId = _Coerce # pFagpId_

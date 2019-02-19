@@ -64,7 +64,8 @@ type ProjectsSnapshotsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsSnapshotsSetIAMPolicy' smart constructor.
-data ProjectsSnapshotsSetIAMPolicy = ProjectsSnapshotsSetIAMPolicy'
+data ProjectsSnapshotsSetIAMPolicy =
+  ProjectsSnapshotsSetIAMPolicy'
     { _pssiampXgafv          :: !(Maybe Xgafv)
     , _pssiampUploadProtocol :: !(Maybe Text)
     , _pssiampAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsSnapshotsSetIAMPolicy = ProjectsSnapshotsSetIAMPolicy'
     , _pssiampPayload        :: !SetIAMPolicyRequest
     , _pssiampResource       :: !Text
     , _pssiampCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSnapshotsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsSnapshotsSetIAMPolicy
     -> Text -- ^ 'pssiampResource'
     -> ProjectsSnapshotsSetIAMPolicy
 projectsSnapshotsSetIAMPolicy pPssiampPayload_ pPssiampResource_ =
-    ProjectsSnapshotsSetIAMPolicy'
+  ProjectsSnapshotsSetIAMPolicy'
     { _pssiampXgafv = Nothing
     , _pssiampUploadProtocol = Nothing
     , _pssiampAccessToken = Nothing

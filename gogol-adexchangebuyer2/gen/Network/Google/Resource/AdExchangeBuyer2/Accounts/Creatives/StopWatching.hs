@@ -68,7 +68,8 @@ type AccountsCreativesStopWatchingResource =
 -- the topics when the creative changes status.
 --
 -- /See:/ 'accountsCreativesStopWatching' smart constructor.
-data AccountsCreativesStopWatching = AccountsCreativesStopWatching'
+data AccountsCreativesStopWatching =
+  AccountsCreativesStopWatching'
     { _acswXgafv          :: !(Maybe Xgafv)
     , _acswUploadProtocol :: !(Maybe Text)
     , _acswAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data AccountsCreativesStopWatching = AccountsCreativesStopWatching'
     , _acswPayload        :: !StopWatchingCreativeRequest
     , _acswAccountId      :: !Text
     , _acswCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsCreativesStopWatching' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ accountsCreativesStopWatching
     -> Text -- ^ 'acswAccountId'
     -> AccountsCreativesStopWatching
 accountsCreativesStopWatching pAcswCreativeId_ pAcswPayload_ pAcswAccountId_ =
-    AccountsCreativesStopWatching'
+  AccountsCreativesStopWatching'
     { _acswXgafv = Nothing
     , _acswUploadProtocol = Nothing
     , _acswAccessToken = Nothing

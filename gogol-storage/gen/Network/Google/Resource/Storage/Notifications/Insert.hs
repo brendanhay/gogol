@@ -57,11 +57,13 @@ type NotificationsInsertResource =
 -- | Creates a notification subscription for a given bucket.
 --
 -- /See:/ 'notificationsInsert' smart constructor.
-data NotificationsInsert = NotificationsInsert'
+data NotificationsInsert =
+  NotificationsInsert'
     { _niBucket      :: !Text
     , _niPayload     :: !Notification
     , _niUserProject :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationsInsert' with the minimum fields required to make a request.
 --
@@ -77,11 +79,8 @@ notificationsInsert
     -> Notification -- ^ 'niPayload'
     -> NotificationsInsert
 notificationsInsert pNiBucket_ pNiPayload_ =
-    NotificationsInsert'
-    { _niBucket = pNiBucket_
-    , _niPayload = pNiPayload_
-    , _niUserProject = Nothing
-    }
+  NotificationsInsert'
+    {_niBucket = pNiBucket_, _niPayload = pNiPayload_, _niUserProject = Nothing}
 
 -- | The parent bucket of the notification.
 niBucket :: Lens' NotificationsInsert Text

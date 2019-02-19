@@ -66,14 +66,16 @@ type TargetVPNGatewaysListResource =
 -- project and region.
 --
 -- /See:/ 'targetVPNGatewaysList' smart constructor.
-data TargetVPNGatewaysList = TargetVPNGatewaysList'
+data TargetVPNGatewaysList =
+  TargetVPNGatewaysList'
     { _tvglOrderBy    :: !(Maybe Text)
     , _tvglProject    :: !Text
     , _tvglFilter     :: !(Maybe Text)
     , _tvglRegion     :: !Text
     , _tvglPageToken  :: !(Maybe Text)
     , _tvglMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysList' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ targetVPNGatewaysList
     -> Text -- ^ 'tvglRegion'
     -> TargetVPNGatewaysList
 targetVPNGatewaysList pTvglProject_ pTvglRegion_ =
-    TargetVPNGatewaysList'
+  TargetVPNGatewaysList'
     { _tvglOrderBy = Nothing
     , _tvglProject = pTvglProject_
     , _tvglFilter = Nothing

@@ -73,7 +73,8 @@ type CoursesTeachersDeleteResource =
 -- primary teacher of this course.
 --
 -- /See:/ 'coursesTeachersDelete' smart constructor.
-data CoursesTeachersDelete = CoursesTeachersDelete'
+data CoursesTeachersDelete =
+  CoursesTeachersDelete'
     { _ctdXgafv          :: !(Maybe Xgafv)
     , _ctdUploadProtocol :: !(Maybe Text)
     , _ctdCourseId       :: !Text
@@ -81,7 +82,8 @@ data CoursesTeachersDelete = CoursesTeachersDelete'
     , _ctdUploadType     :: !(Maybe Text)
     , _ctdUserId         :: !Text
     , _ctdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesTeachersDelete' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ coursesTeachersDelete
     -> Text -- ^ 'ctdUserId'
     -> CoursesTeachersDelete
 coursesTeachersDelete pCtdCourseId_ pCtdUserId_ =
-    CoursesTeachersDelete'
+  CoursesTeachersDelete'
     { _ctdXgafv = Nothing
     , _ctdUploadProtocol = Nothing
     , _ctdCourseId = pCtdCourseId_

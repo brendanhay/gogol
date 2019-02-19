@@ -22,12 +22,14 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'adClients' smart constructor.
-data AdClients = AdClients'
+data AdClients =
+  AdClients'
     { _acEtag          :: !(Maybe Text)
     , _acNextPageToken :: !(Maybe Text)
     , _acKind          :: !Text
     , _acItems         :: !(Maybe [AdClient])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdClients' with the minimum fields required to make a request.
 --
@@ -43,7 +45,7 @@ data AdClients = AdClients'
 adClients
     :: AdClients
 adClients =
-    AdClients'
+  AdClients'
     { _acEtag = Nothing
     , _acNextPageToken = Nothing
     , _acKind = "adsensehost#adClients"
@@ -90,7 +92,8 @@ instance ToJSON AdClients where
 
 --
 -- /See:/ 'associationSession' smart constructor.
-data AssociationSession = AssociationSession'
+data AssociationSession =
+  AssociationSession'
     { _asStatus        :: !(Maybe Text)
     , _asKind          :: !Text
     , _asWebsiteLocale :: !(Maybe Text)
@@ -100,7 +103,8 @@ data AssociationSession = AssociationSession'
     , _asId            :: !(Maybe Text)
     , _asWebsiteURL    :: !(Maybe Text)
     , _asRedirectURL   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssociationSession' with the minimum fields required to make a request.
 --
@@ -126,7 +130,7 @@ data AssociationSession = AssociationSession'
 associationSession
     :: AssociationSession
 associationSession =
-    AssociationSession'
+  AssociationSession'
     { _asStatus = Nothing
     , _asKind = "adsensehost#associationSession"
     , _asWebsiteLocale = Nothing
@@ -221,11 +225,13 @@ instance ToJSON AssociationSession where
 
 --
 -- /See:/ 'accounts' smart constructor.
-data Accounts = Accounts'
+data Accounts =
+  Accounts'
     { _aEtag  :: !(Maybe Text)
     , _aKind  :: !Text
     , _aItems :: !(Maybe [Account])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Accounts' with the minimum fields required to make a request.
 --
@@ -239,11 +245,8 @@ data Accounts = Accounts'
 accounts
     :: Accounts
 accounts =
-    Accounts'
-    { _aEtag = Nothing
-    , _aKind = "adsensehost#accounts"
-    , _aItems = Nothing
-    }
+  Accounts'
+    {_aEtag = Nothing, _aKind = "adsensehost#accounts", _aItems = Nothing}
 
 -- | ETag of this response for caching purposes.
 aEtag :: Lens' Accounts (Maybe Text)
@@ -277,12 +280,14 @@ instance ToJSON Accounts where
 
 --
 -- /See:/ 'adUnits' smart constructor.
-data AdUnits = AdUnits'
+data AdUnits =
+  AdUnits'
     { _auEtag          :: !(Maybe Text)
     , _auNextPageToken :: !(Maybe Text)
     , _auKind          :: !Text
     , _auItems         :: !(Maybe [AdUnit])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdUnits' with the minimum fields required to make a request.
 --
@@ -298,7 +303,7 @@ data AdUnits = AdUnits'
 adUnits
     :: AdUnits
 adUnits =
-    AdUnits'
+  AdUnits'
     { _auEtag = Nothing
     , _auNextPageToken = Nothing
     , _auKind = "adsensehost#adUnits"
@@ -345,12 +350,14 @@ instance ToJSON AdUnits where
 
 --
 -- /See:/ 'urlChannels' smart constructor.
-data URLChannels = URLChannels'
+data URLChannels =
+  URLChannels'
     { _ucEtag          :: !(Maybe Text)
     , _ucNextPageToken :: !(Maybe Text)
     , _ucKind          :: !Text
     , _ucItems         :: !(Maybe [URLChannel])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLChannels' with the minimum fields required to make a request.
 --
@@ -366,7 +373,7 @@ data URLChannels = URLChannels'
 urlChannels
     :: URLChannels
 urlChannels =
-    URLChannels'
+  URLChannels'
     { _ucEtag = Nothing
     , _ucNextPageToken = Nothing
     , _ucKind = "adsensehost#urlChannels"
@@ -414,12 +421,14 @@ instance ToJSON URLChannels where
 
 --
 -- /See:/ 'customChannels' smart constructor.
-data CustomChannels = CustomChannels'
+data CustomChannels =
+  CustomChannels'
     { _ccEtag          :: !(Maybe Text)
     , _ccNextPageToken :: !(Maybe Text)
     , _ccKind          :: !Text
     , _ccItems         :: !(Maybe [CustomChannel])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomChannels' with the minimum fields required to make a request.
 --
@@ -435,7 +444,7 @@ data CustomChannels = CustomChannels'
 customChannels
     :: CustomChannels
 customChannels =
-    CustomChannels'
+  CustomChannels'
     { _ccEtag = Nothing
     , _ccNextPageToken = Nothing
     , _ccKind = "adsensehost#customChannels"
@@ -483,7 +492,8 @@ instance ToJSON CustomChannels where
 
 --
 -- /See:/ 'adUnit' smart constructor.
-data AdUnit = AdUnit'
+data AdUnit =
+  AdUnit'
     { _auuStatus                   :: !(Maybe Text)
     , _auuMobileContentAdsSettings :: !(Maybe AdUnitMobileContentAdsSettings)
     , _auuKind                     :: !Text
@@ -492,7 +502,8 @@ data AdUnit = AdUnit'
     , _auuContentAdsSettings       :: !(Maybe AdUnitContentAdsSettings)
     , _auuCode                     :: !(Maybe Text)
     , _auuId                       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdUnit' with the minimum fields required to make a request.
 --
@@ -516,7 +527,7 @@ data AdUnit = AdUnit'
 adUnit
     :: AdUnit
 adUnit =
-    AdUnit'
+  AdUnit'
     { _auuStatus = Nothing
     , _auuMobileContentAdsSettings = Nothing
     , _auuKind = "adsensehost#adUnit"
@@ -601,7 +612,8 @@ instance ToJSON AdUnit where
 
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report'
+data Report =
+  Report'
     { _rKind             :: !Text
     , _rAverages         :: !(Maybe [Text])
     , _rWarnings         :: !(Maybe [Text])
@@ -609,7 +621,8 @@ data Report = Report'
     , _rTotals           :: !(Maybe [Text])
     , _rHeaders          :: !(Maybe [ReportHeadersItem])
     , _rTotalMatchedRows :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
@@ -631,7 +644,7 @@ data Report = Report'
 report
     :: Report
 report =
-    Report'
+  Report'
     { _rKind = "adsensehost#report"
     , _rAverages = Nothing
     , _rWarnings = Nothing
@@ -721,10 +734,12 @@ instance ToJSON Report where
 -- | The font which is included in the style.
 --
 -- /See:/ 'adStyleFont' smart constructor.
-data AdStyleFont = AdStyleFont'
+data AdStyleFont =
+  AdStyleFont'
     { _asfSize   :: !(Maybe Text)
     , _asfFamily :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdStyleFont' with the minimum fields required to make a request.
 --
@@ -735,11 +750,7 @@ data AdStyleFont = AdStyleFont'
 -- * 'asfFamily'
 adStyleFont
     :: AdStyleFont
-adStyleFont =
-    AdStyleFont'
-    { _asfSize = Nothing
-    , _asfFamily = Nothing
-    }
+adStyleFont = AdStyleFont' {_asfSize = Nothing, _asfFamily = Nothing}
 
 -- | The size of the font. Possible values are: ACCOUNT_DEFAULT_SIZE,
 -- ADSENSE_DEFAULT_SIZE, SMALL, MEDIUM and LARGE.
@@ -767,12 +778,14 @@ instance ToJSON AdStyleFont where
 
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account'
+data Account =
+  Account'
     { _accStatus :: !(Maybe Text)
     , _accKind   :: !Text
     , _accName   :: !(Maybe Text)
     , _accId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -788,7 +801,7 @@ data Account = Account'
 account
     :: Account
 account =
-    Account'
+  Account'
     { _accStatus = Nothing
     , _accKind = "adsensehost#account"
     , _accName = Nothing
@@ -833,12 +846,14 @@ instance ToJSON Account where
 -- | Settings specific to WAP mobile content ads (AFMC - deprecated).
 --
 -- /See:/ 'adUnitMobileContentAdsSettings' smart constructor.
-data AdUnitMobileContentAdsSettings = AdUnitMobileContentAdsSettings'
+data AdUnitMobileContentAdsSettings =
+  AdUnitMobileContentAdsSettings'
     { _aumcasSize              :: !(Maybe Text)
     , _aumcasScriptingLanguage :: !(Maybe Text)
     , _aumcasMarkupLanguage    :: !(Maybe Text)
     , _aumcasType              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdUnitMobileContentAdsSettings' with the minimum fields required to make a request.
 --
@@ -854,7 +869,7 @@ data AdUnitMobileContentAdsSettings = AdUnitMobileContentAdsSettings'
 adUnitMobileContentAdsSettings
     :: AdUnitMobileContentAdsSettings
 adUnitMobileContentAdsSettings =
-    AdUnitMobileContentAdsSettings'
+  AdUnitMobileContentAdsSettings'
     { _aumcasSize = Nothing
     , _aumcasScriptingLanguage = Nothing
     , _aumcasMarkupLanguage = Nothing
@@ -908,13 +923,15 @@ instance ToJSON AdUnitMobileContentAdsSettings where
 -- leading hash.
 --
 -- /See:/ 'adStyleColors' smart constructor.
-data AdStyleColors = AdStyleColors'
+data AdStyleColors =
+  AdStyleColors'
     { _ascText       :: !(Maybe Text)
     , _ascURL        :: !(Maybe Text)
     , _ascBOrder     :: !(Maybe Text)
     , _ascTitle      :: !(Maybe Text)
     , _ascBackgRound :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdStyleColors' with the minimum fields required to make a request.
 --
@@ -932,7 +949,7 @@ data AdStyleColors = AdStyleColors'
 adStyleColors
     :: AdStyleColors
 adStyleColors =
-    AdStyleColors'
+  AdStyleColors'
     { _ascText = Nothing
     , _ascURL = Nothing
     , _ascBOrder = Nothing
@@ -984,11 +1001,13 @@ instance ToJSON AdStyleColors where
 -- | The backup option to be used in instances where no ad is available.
 --
 -- /See:/ 'adUnitContentAdsSettingsBackupOption' smart constructor.
-data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption'
+data AdUnitContentAdsSettingsBackupOption =
+  AdUnitContentAdsSettingsBackupOption'
     { _aucasboColor :: !(Maybe Text)
     , _aucasboURL   :: !(Maybe Text)
     , _aucasboType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdUnitContentAdsSettingsBackupOption' with the minimum fields required to make a request.
 --
@@ -1002,11 +1021,8 @@ data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption
 adUnitContentAdsSettingsBackupOption
     :: AdUnitContentAdsSettingsBackupOption
 adUnitContentAdsSettingsBackupOption =
-    AdUnitContentAdsSettingsBackupOption'
-    { _aucasboColor = Nothing
-    , _aucasboURL = Nothing
-    , _aucasboType = Nothing
-    }
+  AdUnitContentAdsSettingsBackupOption'
+    {_aucasboColor = Nothing, _aucasboURL = Nothing, _aucasboType = Nothing}
 
 -- | Color to use when type is set to COLOR. These are represented as six
 -- hexadecimal characters, similar to HTML color codes, but without the
@@ -1026,7 +1042,8 @@ aucasboType
   = lens _aucasboType (\ s a -> s{_aucasboType = a})
 
 instance FromJSON
-         AdUnitContentAdsSettingsBackupOption where
+           AdUnitContentAdsSettingsBackupOption
+         where
         parseJSON
           = withObject "AdUnitContentAdsSettingsBackupOption"
               (\ o ->
@@ -1044,13 +1061,15 @@ instance ToJSON AdUnitContentAdsSettingsBackupOption
 
 --
 -- /See:/ 'adClient' smart constructor.
-data AdClient = AdClient'
+data AdClient =
+  AdClient'
     { _adKind              :: !Text
     , _adArcOptIn          :: !(Maybe Bool)
     , _adSupportsReporting :: !(Maybe Bool)
     , _adId                :: !(Maybe Text)
     , _adProductCode       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdClient' with the minimum fields required to make a request.
 --
@@ -1068,7 +1087,7 @@ data AdClient = AdClient'
 adClient
     :: AdClient
 adClient =
-    AdClient'
+  AdClient'
     { _adKind = "adsensehost#adClient"
     , _adArcOptIn = Nothing
     , _adSupportsReporting = Nothing
@@ -1125,11 +1144,13 @@ instance ToJSON AdClient where
 
 --
 -- /See:/ 'reportHeadersItem' smart constructor.
-data ReportHeadersItem = ReportHeadersItem'
+data ReportHeadersItem =
+  ReportHeadersItem'
     { _rhiName     :: !(Maybe Text)
     , _rhiCurrency :: !(Maybe Text)
     , _rhiType     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportHeadersItem' with the minimum fields required to make a request.
 --
@@ -1143,11 +1164,8 @@ data ReportHeadersItem = ReportHeadersItem'
 reportHeadersItem
     :: ReportHeadersItem
 reportHeadersItem =
-    ReportHeadersItem'
-    { _rhiName = Nothing
-    , _rhiCurrency = Nothing
-    , _rhiType = Nothing
-    }
+  ReportHeadersItem'
+    {_rhiName = Nothing, _rhiCurrency = Nothing, _rhiType = Nothing}
 
 -- | The name of the header.
 rhiName :: Lens' ReportHeadersItem (Maybe Text)
@@ -1182,12 +1200,14 @@ instance ToJSON ReportHeadersItem where
 
 --
 -- /See:/ 'adStyle' smart constructor.
-data AdStyle = AdStyle'
+data AdStyle =
+  AdStyle'
     { _assCorners :: !(Maybe Text)
     , _assKind    :: !Text
     , _assFont    :: !(Maybe AdStyleFont)
     , _assColors  :: !(Maybe AdStyleColors)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdStyle' with the minimum fields required to make a request.
 --
@@ -1203,7 +1223,7 @@ data AdStyle = AdStyle'
 adStyle
     :: AdStyle
 adStyle =
-    AdStyle'
+  AdStyle'
     { _assCorners = Nothing
     , _assKind = "adsensehost#adStyle"
     , _assFont = Nothing
@@ -1251,12 +1271,14 @@ instance ToJSON AdStyle where
 
 --
 -- /See:/ 'customChannel' smart constructor.
-data CustomChannel = CustomChannel'
+data CustomChannel =
+  CustomChannel'
     { _cKind :: !Text
     , _cName :: !(Maybe Text)
     , _cCode :: !(Maybe Text)
     , _cId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomChannel' with the minimum fields required to make a request.
 --
@@ -1272,7 +1294,7 @@ data CustomChannel = CustomChannel'
 customChannel
     :: CustomChannel
 customChannel =
-    CustomChannel'
+  CustomChannel'
     { _cKind = "adsensehost#customChannel"
     , _cName = Nothing
     , _cCode = Nothing
@@ -1316,11 +1338,13 @@ instance ToJSON CustomChannel where
 
 --
 -- /See:/ 'urlChannel' smart constructor.
-data URLChannel = URLChannel'
+data URLChannel =
+  URLChannel'
     { _urlcKind       :: !Text
     , _urlcId         :: !(Maybe Text)
     , _urlcURLPattern :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLChannel' with the minimum fields required to make a request.
 --
@@ -1334,7 +1358,7 @@ data URLChannel = URLChannel'
 urlChannel
     :: URLChannel
 urlChannel =
-    URLChannel'
+  URLChannel'
     { _urlcKind = "adsensehost#urlChannel"
     , _urlcId = Nothing
     , _urlcURLPattern = Nothing
@@ -1375,10 +1399,12 @@ instance ToJSON URLChannel where
 
 --
 -- /See:/ 'adCode' smart constructor.
-data AdCode = AdCode'
+data AdCode =
+  AdCode'
     { _aaKind   :: !Text
     , _aaAdCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdCode' with the minimum fields required to make a request.
 --
@@ -1389,11 +1415,7 @@ data AdCode = AdCode'
 -- * 'aaAdCode'
 adCode
     :: AdCode
-adCode =
-    AdCode'
-    { _aaKind = "adsensehost#adCode"
-    , _aaAdCode = Nothing
-    }
+adCode = AdCode' {_aaKind = "adsensehost#adCode", _aaAdCode = Nothing}
 
 -- | Kind this is, in this case adsensehost#adCode.
 aaKind :: Lens' AdCode Text
@@ -1422,11 +1444,13 @@ instance ToJSON AdCode where
 -- (AFMC - deprecated).
 --
 -- /See:/ 'adUnitContentAdsSettings' smart constructor.
-data AdUnitContentAdsSettings = AdUnitContentAdsSettings'
+data AdUnitContentAdsSettings =
+  AdUnitContentAdsSettings'
     { _aucasBackupOption :: !(Maybe AdUnitContentAdsSettingsBackupOption)
     , _aucasSize         :: !(Maybe Text)
     , _aucasType         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdUnitContentAdsSettings' with the minimum fields required to make a request.
 --
@@ -1440,11 +1464,8 @@ data AdUnitContentAdsSettings = AdUnitContentAdsSettings'
 adUnitContentAdsSettings
     :: AdUnitContentAdsSettings
 adUnitContentAdsSettings =
-    AdUnitContentAdsSettings'
-    { _aucasBackupOption = Nothing
-    , _aucasSize = Nothing
-    , _aucasType = Nothing
-    }
+  AdUnitContentAdsSettings'
+    {_aucasBackupOption = Nothing, _aucasSize = Nothing, _aucasType = Nothing}
 
 -- | The backup option to be used in instances where no ad is available.
 aucasBackupOption :: Lens' AdUnitContentAdsSettings (Maybe AdUnitContentAdsSettingsBackupOption)

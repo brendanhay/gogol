@@ -63,13 +63,15 @@ type ReplicasListResource =
 -- | Lists all replicas in a pool.
 --
 -- /See:/ 'replicasList' smart constructor.
-data ReplicasList = ReplicasList'
+data ReplicasList =
+  ReplicasList'
     { _rlPoolName    :: !Text
     , _rlZone        :: !Text
     , _rlProjectName :: !Text
     , _rlPageToken   :: !(Maybe Text)
     , _rlMaxResults  :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplicasList' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ replicasList
     -> Text -- ^ 'rlProjectName'
     -> ReplicasList
 replicasList pRlPoolName_ pRlZone_ pRlProjectName_ =
-    ReplicasList'
+  ReplicasList'
     { _rlPoolName = pRlPoolName_
     , _rlZone = pRlZone_
     , _rlProjectName = pRlProjectName_

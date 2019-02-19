@@ -77,7 +77,8 @@ type ProjectsDatabasesCollectionGroupsFieldsListResource
 -- \`indexConfig.usesAncestorConfig:false\`.
 --
 -- /See:/ 'projectsDatabasesCollectionGroupsFieldsList' smart constructor.
-data ProjectsDatabasesCollectionGroupsFieldsList = ProjectsDatabasesCollectionGroupsFieldsList'
+data ProjectsDatabasesCollectionGroupsFieldsList =
+  ProjectsDatabasesCollectionGroupsFieldsList'
     { _pdcgflParent         :: !Text
     , _pdcgflXgafv          :: !(Maybe Xgafv)
     , _pdcgflUploadProtocol :: !(Maybe Text)
@@ -87,7 +88,8 @@ data ProjectsDatabasesCollectionGroupsFieldsList = ProjectsDatabasesCollectionGr
     , _pdcgflPageToken      :: !(Maybe Text)
     , _pdcgflPageSize       :: !(Maybe (Textual Int32))
     , _pdcgflCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsFieldsList' with the minimum fields required to make a request.
 --
@@ -114,7 +116,7 @@ projectsDatabasesCollectionGroupsFieldsList
     :: Text -- ^ 'pdcgflParent'
     -> ProjectsDatabasesCollectionGroupsFieldsList
 projectsDatabasesCollectionGroupsFieldsList pPdcgflParent_ =
-    ProjectsDatabasesCollectionGroupsFieldsList'
+  ProjectsDatabasesCollectionGroupsFieldsList'
     { _pdcgflParent = pPdcgflParent_
     , _pdcgflXgafv = Nothing
     , _pdcgflUploadProtocol = Nothing
@@ -186,7 +188,8 @@ pdcgflCallback
       (\ s a -> s{_pdcgflCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesCollectionGroupsFieldsList where
+           ProjectsDatabasesCollectionGroupsFieldsList
+         where
         type Rs ProjectsDatabasesCollectionGroupsFieldsList =
              GoogleFirestoreAdminV1ListFieldsResponse
         type Scopes

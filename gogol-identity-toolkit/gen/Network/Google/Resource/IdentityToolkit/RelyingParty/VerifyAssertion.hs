@@ -54,9 +54,11 @@ type RelyingPartyVerifyAssertionResource =
 -- | Verifies the assertion returned by the IdP.
 --
 -- /See:/ 'relyingPartyVerifyAssertion' smart constructor.
-newtype RelyingPartyVerifyAssertion = RelyingPartyVerifyAssertion'
+newtype RelyingPartyVerifyAssertion =
+  RelyingPartyVerifyAssertion'
     { _rpvaPayload :: IdentitytoolkitRelyingPartyVerifyAssertionRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyVerifyAssertion' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ relyingPartyVerifyAssertion
     :: IdentitytoolkitRelyingPartyVerifyAssertionRequest -- ^ 'rpvaPayload'
     -> RelyingPartyVerifyAssertion
 relyingPartyVerifyAssertion pRpvaPayload_ =
-    RelyingPartyVerifyAssertion'
-    { _rpvaPayload = pRpvaPayload_
-    }
+  RelyingPartyVerifyAssertion' {_rpvaPayload = pRpvaPayload_}
 
 -- | Multipart request metadata.
 rpvaPayload :: Lens' RelyingPartyVerifyAssertion IdentitytoolkitRelyingPartyVerifyAssertionRequest

@@ -53,9 +53,11 @@ type AccountsPreferredDealsListResource =
 -- | List the preferred deals for this Ad Exchange account.
 --
 -- /See:/ 'accountsPreferredDealsList' smart constructor.
-newtype AccountsPreferredDealsList = AccountsPreferredDealsList'
+newtype AccountsPreferredDealsList =
+  AccountsPreferredDealsList'
     { _apdlAccountId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsPreferredDealsList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ accountsPreferredDealsList
     :: Text -- ^ 'apdlAccountId'
     -> AccountsPreferredDealsList
 accountsPreferredDealsList pApdlAccountId_ =
-    AccountsPreferredDealsList'
-    { _apdlAccountId = pApdlAccountId_
-    }
+  AccountsPreferredDealsList' {_apdlAccountId = pApdlAccountId_}
 
 -- | Account owning the deals.
 apdlAccountId :: Lens' AccountsPreferredDealsList Text

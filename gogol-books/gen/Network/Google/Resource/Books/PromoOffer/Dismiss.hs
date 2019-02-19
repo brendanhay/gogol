@@ -64,7 +64,8 @@ type PromoOfferDismissResource =
 -- |
 --
 -- /See:/ 'promoOfferDismiss' smart constructor.
-data PromoOfferDismiss = PromoOfferDismiss'
+data PromoOfferDismiss =
+  PromoOfferDismiss'
     { _podManufacturer :: !(Maybe Text)
     , _podSerial       :: !(Maybe Text)
     , _podDevice       :: !(Maybe Text)
@@ -72,7 +73,8 @@ data PromoOfferDismiss = PromoOfferDismiss'
     , _podOfferId      :: !(Maybe Text)
     , _podProduct      :: !(Maybe Text)
     , _podAndroidId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PromoOfferDismiss' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ data PromoOfferDismiss = PromoOfferDismiss'
 promoOfferDismiss
     :: PromoOfferDismiss
 promoOfferDismiss =
-    PromoOfferDismiss'
+  PromoOfferDismiss'
     { _podManufacturer = Nothing
     , _podSerial = Nothing
     , _podDevice = Nothing

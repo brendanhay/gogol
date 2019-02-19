@@ -69,7 +69,8 @@ type CustomersDevicesApplyConfigurationResource =
 -- reset.
 --
 -- /See:/ 'customersDevicesApplyConfiguration' smart constructor.
-data CustomersDevicesApplyConfiguration = CustomersDevicesApplyConfiguration'
+data CustomersDevicesApplyConfiguration =
+  CustomersDevicesApplyConfiguration'
     { _cdacParent         :: !Text
     , _cdacXgafv          :: !(Maybe Xgafv)
     , _cdacUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data CustomersDevicesApplyConfiguration = CustomersDevicesApplyConfiguration'
     , _cdacUploadType     :: !(Maybe Text)
     , _cdacPayload        :: !CustomerApplyConfigurationRequest
     , _cdacCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersDevicesApplyConfiguration' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ customersDevicesApplyConfiguration
     -> CustomerApplyConfigurationRequest -- ^ 'cdacPayload'
     -> CustomersDevicesApplyConfiguration
 customersDevicesApplyConfiguration pCdacParent_ pCdacPayload_ =
-    CustomersDevicesApplyConfiguration'
+  CustomersDevicesApplyConfiguration'
     { _cdacParent = pCdacParent_
     , _cdacXgafv = Nothing
     , _cdacUploadProtocol = Nothing
@@ -151,7 +153,8 @@ cdacCallback
   = lens _cdacCallback (\ s a -> s{_cdacCallback = a})
 
 instance GoogleRequest
-         CustomersDevicesApplyConfiguration where
+           CustomersDevicesApplyConfiguration
+         where
         type Rs CustomersDevicesApplyConfiguration = Empty
         type Scopes CustomersDevicesApplyConfiguration = '[]
         requestClient CustomersDevicesApplyConfiguration'{..}

@@ -53,9 +53,11 @@ type TimelineAttachmentsListResource =
 -- | Returns a list of attachments for a timeline item.
 --
 -- /See:/ 'timelineAttachmentsList' smart constructor.
-newtype TimelineAttachmentsList = TimelineAttachmentsList'
+newtype TimelineAttachmentsList =
+  TimelineAttachmentsList'
     { _talItemId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimelineAttachmentsList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ timelineAttachmentsList
     :: Text -- ^ 'talItemId'
     -> TimelineAttachmentsList
 timelineAttachmentsList pTalItemId_ =
-    TimelineAttachmentsList'
-    { _talItemId = pTalItemId_
-    }
+  TimelineAttachmentsList' {_talItemId = pTalItemId_}
 
 -- | The ID of the timeline item whose attachments should be listed.
 talItemId :: Lens' TimelineAttachmentsList Text

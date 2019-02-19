@@ -66,7 +66,8 @@ type ProjectsModelsVersionsPatchResource =
 -- fields are \`description\` and \`autoScaling.minNodes\`.
 --
 -- /See:/ 'projectsModelsVersionsPatch' smart constructor.
-data ProjectsModelsVersionsPatch = ProjectsModelsVersionsPatch'
+data ProjectsModelsVersionsPatch =
+  ProjectsModelsVersionsPatch'
     { _pmvpXgafv          :: !(Maybe Xgafv)
     , _pmvpUploadProtocol :: !(Maybe Text)
     , _pmvpUpdateMask     :: !(Maybe GFieldMask)
@@ -75,7 +76,8 @@ data ProjectsModelsVersionsPatch = ProjectsModelsVersionsPatch'
     , _pmvpPayload        :: !GoogleCloudMlV1__Version
     , _pmvpName           :: !Text
     , _pmvpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsModelsVersionsPatch' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsModelsVersionsPatch
     -> Text -- ^ 'pmvpName'
     -> ProjectsModelsVersionsPatch
 projectsModelsVersionsPatch pPmvpPayload_ pPmvpName_ =
-    ProjectsModelsVersionsPatch'
+  ProjectsModelsVersionsPatch'
     { _pmvpXgafv = Nothing
     , _pmvpUploadProtocol = Nothing
     , _pmvpUpdateMask = Nothing

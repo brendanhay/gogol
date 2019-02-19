@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsUpdate' request conforms to.
 type CreativeFieldsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -55,10 +55,12 @@ type CreativeFieldsUpdateResource =
 -- | Updates an existing creative field.
 --
 -- /See:/ 'creativeFieldsUpdate' smart constructor.
-data CreativeFieldsUpdate = CreativeFieldsUpdate'
+data CreativeFieldsUpdate =
+  CreativeFieldsUpdate'
     { _cfuProFileId :: !(Textual Int64)
     , _cfuPayload   :: !CreativeField
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeFieldsUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ creativeFieldsUpdate
     -> CreativeField -- ^ 'cfuPayload'
     -> CreativeFieldsUpdate
 creativeFieldsUpdate pCfuProFileId_ pCfuPayload_ =
-    CreativeFieldsUpdate'
-    { _cfuProFileId = _Coerce # pCfuProFileId_
-    , _cfuPayload = pCfuPayload_
-    }
+  CreativeFieldsUpdate'
+    {_cfuProFileId = _Coerce # pCfuProFileId_, _cfuPayload = pCfuPayload_}
 
 -- | User profile ID associated with this request.
 cfuProFileId :: Lens' CreativeFieldsUpdate Int64

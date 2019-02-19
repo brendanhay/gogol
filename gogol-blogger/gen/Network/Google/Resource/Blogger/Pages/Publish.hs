@@ -55,10 +55,12 @@ type PagesPublishResource =
 -- | Publishes a draft page.
 --
 -- /See:/ 'pagesPublish' smart constructor.
-data PagesPublish = PagesPublish'
+data PagesPublish =
+  PagesPublish'
     { _pagaBlogId :: !Text
     , _pagaPageId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PagesPublish' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ pagesPublish
     -> Text -- ^ 'pagaPageId'
     -> PagesPublish
 pagesPublish pPagaBlogId_ pPagaPageId_ =
-    PagesPublish'
-    { _pagaBlogId = pPagaBlogId_
-    , _pagaPageId = pPagaPageId_
-    }
+  PagesPublish' {_pagaBlogId = pPagaBlogId_, _pagaPageId = pPagaPageId_}
 
 -- | The ID of the blog.
 pagaBlogId :: Lens' PagesPublish Text

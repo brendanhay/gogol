@@ -65,11 +65,13 @@ type SnapshotsDeleteResource =
 -- corresponding snapshot. For more information, see Deleting snapshots.
 --
 -- /See:/ 'snapshotsDelete' smart constructor.
-data SnapshotsDelete = SnapshotsDelete'
+data SnapshotsDelete =
+  SnapshotsDelete'
     { _sddRequestId :: !(Maybe Text)
     , _sddSnapshot  :: !Text
     , _sddProject   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SnapshotsDelete' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ snapshotsDelete
     -> Text -- ^ 'sddProject'
     -> SnapshotsDelete
 snapshotsDelete pSddSnapshot_ pSddProject_ =
-    SnapshotsDelete'
+  SnapshotsDelete'
     { _sddRequestId = Nothing
     , _sddSnapshot = pSddSnapshot_
     , _sddProject = pSddProject_

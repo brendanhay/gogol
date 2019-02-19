@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativeAssetsInsert' request conforms to.
 type CreativeAssetsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeAssets" :>
@@ -57,7 +57,7 @@ type CreativeAssetsInsertResource =
        :<|>
        "upload" :>
          "dfareporting" :>
-           "v3.2" :>
+           "v3.3" :>
              "userprofiles" :>
                Capture "profileId" (Textual Int64) :>
                  "creativeAssets" :>
@@ -71,11 +71,13 @@ type CreativeAssetsInsertResource =
 -- | Inserts a new creative asset.
 --
 -- /See:/ 'creativeAssetsInsert' smart constructor.
-data CreativeAssetsInsert = CreativeAssetsInsert'
+data CreativeAssetsInsert =
+  CreativeAssetsInsert'
     { _caiAdvertiserId :: !(Textual Int64)
     , _caiProFileId    :: !(Textual Int64)
     , _caiPayload      :: !CreativeAssetMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeAssetsInsert' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ creativeAssetsInsert
     -> CreativeAssetMetadata -- ^ 'caiPayload'
     -> CreativeAssetsInsert
 creativeAssetsInsert pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ =
-    CreativeAssetsInsert'
+  CreativeAssetsInsert'
     { _caiAdvertiserId = _Coerce # pCaiAdvertiserId_
     , _caiProFileId = _Coerce # pCaiProFileId_
     , _caiPayload = pCaiPayload_
@@ -130,7 +132,8 @@ instance GoogleRequest CreativeAssetsInsert where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload CreativeAssetsInsert) where
+           (MediaUpload CreativeAssetsInsert)
+         where
         type Rs (MediaUpload CreativeAssetsInsert) =
              CreativeAssetMetadata
         type Scopes (MediaUpload CreativeAssetsInsert) =

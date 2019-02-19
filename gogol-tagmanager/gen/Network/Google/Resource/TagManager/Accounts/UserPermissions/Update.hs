@@ -53,10 +53,12 @@ type AccountsUserPermissionsUpdateResource =
 -- | Updates a user\'s Account & Container access.
 --
 -- /See:/ 'accountsUserPermissionsUpdate' smart constructor.
-data AccountsUserPermissionsUpdate = AccountsUserPermissionsUpdate'
+data AccountsUserPermissionsUpdate =
+  AccountsUserPermissionsUpdate'
     { _aupuPath    :: !Text
     , _aupuPayload :: !UserPermission
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsUserPermissionsUpdate' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ accountsUserPermissionsUpdate
     -> UserPermission -- ^ 'aupuPayload'
     -> AccountsUserPermissionsUpdate
 accountsUserPermissionsUpdate pAupuPath_ pAupuPayload_ =
-    AccountsUserPermissionsUpdate'
-    { _aupuPath = pAupuPath_
-    , _aupuPayload = pAupuPayload_
-    }
+  AccountsUserPermissionsUpdate'
+    {_aupuPath = pAupuPath_, _aupuPayload = pAupuPayload_}
 
 -- | GTM UserPermission\'s API relative path. Example:
 -- accounts\/{account_id}\/user_permissions\/{user_permission_id}

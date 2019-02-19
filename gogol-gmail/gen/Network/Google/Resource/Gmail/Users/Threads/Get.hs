@@ -58,12 +58,14 @@ type UsersThreadsGetResource =
 -- | Gets the specified thread.
 --
 -- /See:/ 'usersThreadsGet' smart constructor.
-data UsersThreadsGet = UsersThreadsGet'
+data UsersThreadsGet =
+  UsersThreadsGet'
     { _utgFormat          :: !UsersThreadsGetFormat
     , _utgUserId          :: !Text
     , _utgId              :: !Text
     , _utgMetadataHeaders :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersThreadsGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ usersThreadsGet
     :: Text -- ^ 'utgId'
     -> UsersThreadsGet
 usersThreadsGet pUtgId_ =
-    UsersThreadsGet'
+  UsersThreadsGet'
     { _utgFormat = UTGFFull
     , _utgUserId = "me"
     , _utgId = pUtgId_

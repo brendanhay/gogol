@@ -70,12 +70,14 @@ type ProjectsHistoriesExecutionsListResource =
 -- malformed - NOT_FOUND - if the containing History does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsList' smart constructor.
-data ProjectsHistoriesExecutionsList = ProjectsHistoriesExecutionsList'
+data ProjectsHistoriesExecutionsList =
+  ProjectsHistoriesExecutionsList'
     { _phelHistoryId :: !Text
     , _phelPageToken :: !(Maybe Text)
     , _phelProjectId :: !Text
     , _phelPageSize  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsList' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ projectsHistoriesExecutionsList
     -> Text -- ^ 'phelProjectId'
     -> ProjectsHistoriesExecutionsList
 projectsHistoriesExecutionsList pPhelHistoryId_ pPhelProjectId_ =
-    ProjectsHistoriesExecutionsList'
+  ProjectsHistoriesExecutionsList'
     { _phelHistoryId = pPhelHistoryId_
     , _phelPageToken = Nothing
     , _phelProjectId = pPhelProjectId_
@@ -127,7 +129,8 @@ phelPageSize
       . mapping _Coerce
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsList where
+           ProjectsHistoriesExecutionsList
+         where
         type Rs ProjectsHistoriesExecutionsList =
              ListExecutionsResponse
         type Scopes ProjectsHistoriesExecutionsList =

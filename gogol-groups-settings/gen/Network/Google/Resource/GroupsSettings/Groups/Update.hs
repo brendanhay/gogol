@@ -53,10 +53,12 @@ type GroupsUpdateResource =
 -- | Updates an existing resource.
 --
 -- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate'
+data GroupsUpdate =
+  GroupsUpdate'
     { _guPayload       :: !Groups
     , _guGroupUniqueId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsUpdate' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ groupsUpdate
     -> Text -- ^ 'guGroupUniqueId'
     -> GroupsUpdate
 groupsUpdate pGuPayload_ pGuGroupUniqueId_ =
-    GroupsUpdate'
-    { _guPayload = pGuPayload_
-    , _guGroupUniqueId = pGuGroupUniqueId_
-    }
+  GroupsUpdate' {_guPayload = pGuPayload_, _guGroupUniqueId = pGuGroupUniqueId_}
 
 -- | Multipart request metadata.
 guPayload :: Lens' GroupsUpdate Groups

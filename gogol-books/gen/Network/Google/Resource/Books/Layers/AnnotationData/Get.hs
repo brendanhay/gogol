@@ -72,7 +72,8 @@ type LayersAnnotationDataGetResource =
 -- | Gets the annotation data.
 --
 -- /See:/ 'layersAnnotationDataGet' smart constructor.
-data LayersAnnotationDataGet = LayersAnnotationDataGet'
+data LayersAnnotationDataGet =
+  LayersAnnotationDataGet'
     { _ladgW                   :: !(Maybe (Textual Int32))
     , _ladgScale               :: !(Maybe (Textual Int32))
     , _ladgLocale              :: !(Maybe Text)
@@ -83,7 +84,8 @@ data LayersAnnotationDataGet = LayersAnnotationDataGet'
     , _ladgSource              :: !(Maybe Text)
     , _ladgH                   :: !(Maybe (Textual Int32))
     , _ladgLayerId             :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LayersAnnotationDataGet' with the minimum fields required to make a request.
 --
@@ -115,7 +117,7 @@ layersAnnotationDataGet
     -> Text -- ^ 'ladgLayerId'
     -> LayersAnnotationDataGet
 layersAnnotationDataGet pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeId_ pLadgLayerId_ =
-    LayersAnnotationDataGet'
+  LayersAnnotationDataGet'
     { _ladgW = Nothing
     , _ladgScale = Nothing
     , _ladgLocale = Nothing

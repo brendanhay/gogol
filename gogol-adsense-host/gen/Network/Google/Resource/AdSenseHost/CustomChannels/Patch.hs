@@ -59,11 +59,13 @@ type CustomChannelsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'customChannelsPatch' smart constructor.
-data CustomChannelsPatch = CustomChannelsPatch'
+data CustomChannelsPatch =
+  CustomChannelsPatch'
     { _ccpCustomChannelId :: !Text
     , _ccpPayload         :: !CustomChannel
     , _ccpAdClientId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomChannelsPatch' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ customChannelsPatch
     -> Text -- ^ 'ccpAdClientId'
     -> CustomChannelsPatch
 customChannelsPatch pCcpCustomChannelId_ pCcpPayload_ pCcpAdClientId_ =
-    CustomChannelsPatch'
+  CustomChannelsPatch'
     { _ccpCustomChannelId = pCcpCustomChannelId_
     , _ccpPayload = pCcpPayload_
     , _ccpAdClientId = pCcpAdClientId_

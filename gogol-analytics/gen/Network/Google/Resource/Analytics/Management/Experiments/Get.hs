@@ -61,12 +61,14 @@ type ManagementExperimentsGetResource =
 -- | Returns an experiment to which the user has access.
 --
 -- /See:/ 'managementExperimentsGet' smart constructor.
-data ManagementExperimentsGet = ManagementExperimentsGet'
+data ManagementExperimentsGet =
+  ManagementExperimentsGet'
     { _megWebPropertyId :: !Text
     , _megProFileId     :: !Text
     , _megAccountId     :: !Text
     , _megExperimentId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementExperimentsGet' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ managementExperimentsGet
     -> Text -- ^ 'megExperimentId'
     -> ManagementExperimentsGet
 managementExperimentsGet pMegWebPropertyId_ pMegProFileId_ pMegAccountId_ pMegExperimentId_ =
-    ManagementExperimentsGet'
+  ManagementExperimentsGet'
     { _megWebPropertyId = pMegWebPropertyId_
     , _megProFileId = pMegProFileId_
     , _megAccountId = pMegAccountId_

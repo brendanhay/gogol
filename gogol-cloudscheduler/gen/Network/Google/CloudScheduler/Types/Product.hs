@@ -57,11 +57,13 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -74,12 +76,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -121,8 +118,8 @@ instance ToJSON Status where
 --
 -- /See:/ 'pauseJobRequest' smart constructor.
 data PauseJobRequest =
-    PauseJobRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  PauseJobRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PauseJobRequest' with the minimum fields required to make a request.
 --
@@ -141,10 +138,12 @@ instance ToJSON PauseJobRequest where
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
-data ListLocationsResponse = ListLocationsResponse'
+data ListLocationsResponse =
+  ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -156,10 +155,7 @@ data ListLocationsResponse = ListLocationsResponse'
 listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
-    ListLocationsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLocations = Nothing
-    }
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -193,8 +189,8 @@ instance ToJSON ListLocationsResponse where
 --
 -- /See:/ 'resumeJobRequest' smart constructor.
 data ResumeJobRequest =
-    ResumeJobRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ResumeJobRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResumeJobRequest' with the minimum fields required to make a request.
 --
@@ -231,9 +227,11 @@ instance ToJSON ResumeJobRequest where
 -- contain job-specific information, are also be sent to the job handler.
 --
 -- /See:/ 'appEngineHTTPTargetHeaders' smart constructor.
-newtype AppEngineHTTPTargetHeaders = AppEngineHTTPTargetHeaders'
+newtype AppEngineHTTPTargetHeaders =
+  AppEngineHTTPTargetHeaders'
     { _aehttpthAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppEngineHTTPTargetHeaders' with the minimum fields required to make a request.
 --
@@ -244,9 +242,8 @@ appEngineHTTPTargetHeaders
     :: HashMap Text Text -- ^ 'aehttpthAddtional'
     -> AppEngineHTTPTargetHeaders
 appEngineHTTPTargetHeaders pAehttpthAddtional_ =
-    AppEngineHTTPTargetHeaders'
-    { _aehttpthAddtional = _Coerce # pAehttpthAddtional_
-    }
+  AppEngineHTTPTargetHeaders'
+    {_aehttpthAddtional = _Coerce # pAehttpthAddtional_}
 
 aehttpthAddtional :: Lens' AppEngineHTTPTargetHeaders (HashMap Text Text)
 aehttpthAddtional
@@ -269,13 +266,15 @@ instance ToJSON AppEngineHTTPTargetHeaders where
 -- backoff according to the settings in RetryConfig.
 --
 -- /See:/ 'retryConfig' smart constructor.
-data RetryConfig = RetryConfig'
+data RetryConfig =
+  RetryConfig'
     { _rcMaxDoublings       :: !(Maybe (Textual Int32))
     , _rcMaxRetryDuration   :: !(Maybe GDuration)
     , _rcMinBackoffDuration :: !(Maybe GDuration)
     , _rcRetryCount         :: !(Maybe (Textual Int32))
     , _rcMaxBackoffDuration :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RetryConfig' with the minimum fields required to make a request.
 --
@@ -293,7 +292,7 @@ data RetryConfig = RetryConfig'
 retryConfig
     :: RetryConfig
 retryConfig =
-    RetryConfig'
+  RetryConfig'
     { _rcMaxDoublings = Nothing
     , _rcMaxRetryDuration = Nothing
     , _rcMinBackoffDuration = Nothing
@@ -381,13 +380,15 @@ instance ToJSON RetryConfig where
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lName        :: !(Maybe Text)
     , _lMetadata    :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
     , _lLabels      :: !(Maybe LocationLabels)
     , _lLocationId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -405,7 +406,7 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lName = Nothing
     , _lMetadata = Nothing
     , _lDisplayName = Nothing
@@ -468,8 +469,8 @@ instance ToJSON Location where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -487,9 +488,11 @@ instance ToJSON Empty where
 -- non-empty data, or at least one attribute.
 --
 -- /See:/ 'pubsubTargetAttributes' smart constructor.
-newtype PubsubTargetAttributes = PubsubTargetAttributes'
+newtype PubsubTargetAttributes =
+  PubsubTargetAttributes'
     { _ptaAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PubsubTargetAttributes' with the minimum fields required to make a request.
 --
@@ -500,9 +503,7 @@ pubsubTargetAttributes
     :: HashMap Text Text -- ^ 'ptaAddtional'
     -> PubsubTargetAttributes
 pubsubTargetAttributes pPtaAddtional_ =
-    PubsubTargetAttributes'
-    { _ptaAddtional = _Coerce # pPtaAddtional_
-    }
+  PubsubTargetAttributes' {_ptaAddtional = _Coerce # pPtaAddtional_}
 
 ptaAddtional :: Lens' PubsubTargetAttributes (HashMap Text Text)
 ptaAddtional
@@ -531,9 +532,11 @@ instance ToJSON PubsubTargetAttributes where
 -- internal use only. The total size of headers must be less than 80KB.
 --
 -- /See:/ 'hTTPTargetHeaders' smart constructor.
-newtype HTTPTargetHeaders = HTTPTargetHeaders'
+newtype HTTPTargetHeaders =
+  HTTPTargetHeaders'
     { _httpthAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPTargetHeaders' with the minimum fields required to make a request.
 --
@@ -544,9 +547,7 @@ hTTPTargetHeaders
     :: HashMap Text Text -- ^ 'httpthAddtional'
     -> HTTPTargetHeaders
 hTTPTargetHeaders pHttpthAddtional_ =
-    HTTPTargetHeaders'
-    { _httpthAddtional = _Coerce # pHttpthAddtional_
-    }
+  HTTPTargetHeaders' {_httpthAddtional = _Coerce # pHttpthAddtional_}
 
 httpthAddtional :: Lens' HTTPTargetHeaders (HashMap Text Text)
 httpthAddtional
@@ -572,12 +573,14 @@ instance ToJSON HTTPTargetHeaders where
 -- information about message limits.
 --
 -- /See:/ 'pubsubMessage' smart constructor.
-data PubsubMessage = PubsubMessage'
+data PubsubMessage =
+  PubsubMessage'
     { _pmData        :: !(Maybe Bytes)
     , _pmPublishTime :: !(Maybe DateTime')
     , _pmAttributes  :: !(Maybe PubsubMessageAttributes)
     , _pmMessageId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PubsubMessage' with the minimum fields required to make a request.
 --
@@ -593,7 +596,7 @@ data PubsubMessage = PubsubMessage'
 pubsubMessage
     :: PubsubMessage
 pubsubMessage =
-    PubsubMessage'
+  PubsubMessage'
     { _pmData = Nothing
     , _pmPublishTime = Nothing
     , _pmAttributes = Nothing
@@ -650,9 +653,11 @@ instance ToJSON PubsubMessage where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -663,9 +668,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -691,13 +694,15 @@ instance ToJSON StatusDetailsItem where
 -- deadline, constitutes a failed attempt.
 --
 -- /See:/ 'appEngineHTTPTarget' smart constructor.
-data AppEngineHTTPTarget = AppEngineHTTPTarget'
+data AppEngineHTTPTarget =
+  AppEngineHTTPTarget'
     { _aehttptHTTPMethod       :: !(Maybe AppEngineHTTPTargetHTTPMethod)
     , _aehttptRelativeURI      :: !(Maybe Text)
     , _aehttptBody             :: !(Maybe Bytes)
     , _aehttptHeaders          :: !(Maybe AppEngineHTTPTargetHeaders)
     , _aehttptAppEngineRouting :: !(Maybe AppEngineRouting)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppEngineHTTPTarget' with the minimum fields required to make a request.
 --
@@ -715,7 +720,7 @@ data AppEngineHTTPTarget = AppEngineHTTPTarget'
 appEngineHTTPTarget
     :: AppEngineHTTPTarget
 appEngineHTTPTarget =
-    AppEngineHTTPTarget'
+  AppEngineHTTPTarget'
     { _aehttptHTTPMethod = Nothing
     , _aehttptRelativeURI = Nothing
     , _aehttptBody = Nothing
@@ -807,12 +812,14 @@ instance ToJSON AppEngineHTTPTarget where
 -- request is considered.
 --
 -- /See:/ 'hTTPTarget' smart constructor.
-data HTTPTarget = HTTPTarget'
+data HTTPTarget =
+  HTTPTarget'
     { _httptHTTPMethod :: !(Maybe HTTPTargetHTTPMethod)
     , _httptBody       :: !(Maybe Bytes)
     , _httptURI        :: !(Maybe Text)
     , _httptHeaders    :: !(Maybe HTTPTargetHeaders)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPTarget' with the minimum fields required to make a request.
 --
@@ -828,7 +835,7 @@ data HTTPTarget = HTTPTarget'
 hTTPTarget
     :: HTTPTarget
 hTTPTarget =
-    HTTPTarget'
+  HTTPTarget'
     { _httptHTTPMethod = Nothing
     , _httptBody = Nothing
     , _httptURI = Nothing
@@ -894,8 +901,8 @@ instance ToJSON HTTPTarget where
 --
 -- /See:/ 'runJobRequest' smart constructor.
 data RunJobRequest =
-    RunJobRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  RunJobRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RunJobRequest' with the minimum fields required to make a request.
 --
@@ -914,7 +921,8 @@ instance ToJSON RunJobRequest where
 -- | Configuration for a job. The maximum allowed size for a job is 100KB.
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job'
+data Job =
+  Job'
     { _jStatus              :: !(Maybe Status)
     , _jState               :: !(Maybe JobState)
     , _jLastAttemptTime     :: !(Maybe DateTime')
@@ -928,7 +936,8 @@ data Job = Job'
     , _jUserUpdateTime      :: !(Maybe DateTime')
     , _jTimeZone            :: !(Maybe Text)
     , _jDescription         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -962,7 +971,7 @@ data Job = Job'
 job
     :: Job
 job =
-    Job'
+  Job'
     { _jStatus = Nothing
     , _jState = Nothing
     , _jLastAttemptTime = Nothing
@@ -1118,9 +1127,11 @@ instance ToJSON Job where
 -- | Optional attributes for this message.
 --
 -- /See:/ 'pubsubMessageAttributes' smart constructor.
-newtype PubsubMessageAttributes = PubsubMessageAttributes'
+newtype PubsubMessageAttributes =
+  PubsubMessageAttributes'
     { _pmaAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PubsubMessageAttributes' with the minimum fields required to make a request.
 --
@@ -1131,9 +1142,7 @@ pubsubMessageAttributes
     :: HashMap Text Text -- ^ 'pmaAddtional'
     -> PubsubMessageAttributes
 pubsubMessageAttributes pPmaAddtional_ =
-    PubsubMessageAttributes'
-    { _pmaAddtional = _Coerce # pPmaAddtional_
-    }
+  PubsubMessageAttributes' {_pmaAddtional = _Coerce # pPmaAddtional_}
 
 pmaAddtional :: Lens' PubsubMessageAttributes (HashMap Text Text)
 pmaAddtional
@@ -1153,11 +1162,13 @@ instance ToJSON PubsubMessageAttributes where
 -- the given Pub\/Sub topic.
 --
 -- /See:/ 'pubsubTarget' smart constructor.
-data PubsubTarget = PubsubTarget'
+data PubsubTarget =
+  PubsubTarget'
     { _ptData       :: !(Maybe Bytes)
     , _ptTopicName  :: !(Maybe Text)
     , _ptAttributes :: !(Maybe PubsubTargetAttributes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PubsubTarget' with the minimum fields required to make a request.
 --
@@ -1171,11 +1182,8 @@ data PubsubTarget = PubsubTarget'
 pubsubTarget
     :: PubsubTarget
 pubsubTarget =
-    PubsubTarget'
-    { _ptData = Nothing
-    , _ptTopicName = Nothing
-    , _ptAttributes = Nothing
-    }
+  PubsubTarget'
+    {_ptData = Nothing, _ptTopicName = Nothing, _ptAttributes = Nothing}
 
 -- | The message payload for PubsubMessage. Pubsub message must contain
 -- either non-empty data, or at least one attribute.
@@ -1219,10 +1227,12 @@ instance ToJSON PubsubTarget where
 -- | Response message for listing jobs using ListJobs.
 --
 -- /See:/ 'listJobsResponse' smart constructor.
-data ListJobsResponse = ListJobsResponse'
+data ListJobsResponse =
+  ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
     , _ljrJobs          :: !(Maybe [Job])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
 --
@@ -1234,10 +1244,7 @@ data ListJobsResponse = ListJobsResponse'
 listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
-    ListJobsResponse'
-    { _ljrNextPageToken = Nothing
-    , _ljrJobs = Nothing
-    }
+  ListJobsResponse' {_ljrNextPageToken = Nothing, _ljrJobs = Nothing}
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- page_token field in the subsequent call to ListJobs to retrieve the next
@@ -1274,9 +1281,11 @@ instance ToJSON ListJobsResponse where
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
 -- /See:/ 'locationLabels' smart constructor.
-newtype LocationLabels = LocationLabels'
+newtype LocationLabels =
+  LocationLabels'
     { _llAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
@@ -1287,9 +1296,7 @@ locationLabels
     :: HashMap Text Text -- ^ 'llAddtional'
     -> LocationLabels
 locationLabels pLlAddtional_ =
-    LocationLabels'
-    { _llAddtional = _Coerce # pLlAddtional_
-    }
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1308,9 +1315,11 @@ instance ToJSON LocationLabels where
 -- given location.
 --
 -- /See:/ 'locationMetadata' smart constructor.
-newtype LocationMetadata = LocationMetadata'
+newtype LocationMetadata =
+  LocationMetadata'
     { _lmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
@@ -1321,9 +1330,7 @@ locationMetadata
     :: HashMap Text JSONValue -- ^ 'lmAddtional'
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
-    LocationMetadata'
-    { _lmAddtional = _Coerce # pLmAddtional_
-    }
+  LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -1350,12 +1357,14 @@ instance ToJSON LocationMetadata where
 -- routing](https:\/\/cloud.google.com\/appengine\/docs\/flexible\/python\/how-requests-are-routed).
 --
 -- /See:/ 'appEngineRouting' smart constructor.
-data AppEngineRouting = AppEngineRouting'
+data AppEngineRouting =
+  AppEngineRouting'
     { _aerService  :: !(Maybe Text)
     , _aerVersion  :: !(Maybe Text)
     , _aerHost     :: !(Maybe Text)
     , _aerInstance :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppEngineRouting' with the minimum fields required to make a request.
 --
@@ -1371,7 +1380,7 @@ data AppEngineRouting = AppEngineRouting'
 appEngineRouting
     :: AppEngineRouting
 appEngineRouting =
-    AppEngineRouting'
+  AppEngineRouting'
     { _aerService = Nothing
     , _aerVersion = Nothing
     , _aerHost = Nothing

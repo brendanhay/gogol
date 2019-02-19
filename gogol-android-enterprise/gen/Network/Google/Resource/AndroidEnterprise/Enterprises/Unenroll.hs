@@ -52,9 +52,11 @@ type EnterprisesUnenrollResource =
 -- | Unenrolls an enterprise from the calling EMM.
 --
 -- /See:/ 'enterprisesUnenroll' smart constructor.
-newtype EnterprisesUnenroll = EnterprisesUnenroll'
+newtype EnterprisesUnenroll =
+  EnterprisesUnenroll'
     { _entEnterpriseId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesUnenroll' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ enterprisesUnenroll
     :: Text -- ^ 'entEnterpriseId'
     -> EnterprisesUnenroll
 enterprisesUnenroll pEntEnterpriseId_ =
-    EnterprisesUnenroll'
-    { _entEnterpriseId = pEntEnterpriseId_
-    }
+  EnterprisesUnenroll' {_entEnterpriseId = pEntEnterpriseId_}
 
 -- | The ID of the enterprise.
 entEnterpriseId :: Lens' EnterprisesUnenroll Text

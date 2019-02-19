@@ -61,13 +61,15 @@ type PermissionsListResource =
 -- | Lists a file\'s or Team Drive\'s permissions.
 --
 -- /See:/ 'permissionsList' smart constructor.
-data PermissionsList = PermissionsList'
+data PermissionsList =
+  PermissionsList'
     { _plPageToken            :: !(Maybe Text)
     , _plUseDomainAdminAccess :: !Bool
     , _plFileId               :: !Text
     , _plPageSize             :: !(Maybe (Textual Int32))
     , _plSupportsTeamDrives   :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PermissionsList' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ permissionsList
     :: Text -- ^ 'plFileId'
     -> PermissionsList
 permissionsList pPlFileId_ =
-    PermissionsList'
+  PermissionsList'
     { _plPageToken = Nothing
     , _plUseDomainAdminAccess = False
     , _plFileId = pPlFileId_

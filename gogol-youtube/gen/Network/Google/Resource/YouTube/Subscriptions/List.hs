@@ -74,7 +74,8 @@ type SubscriptionsListResource =
 -- | Returns subscription resources that match the API request criteria.
 --
 -- /See:/ 'subscriptionsList' smart constructor.
-data SubscriptionsList = SubscriptionsList'
+data SubscriptionsList =
+  SubscriptionsList'
     { _subPart                          :: !Text
     , _subMine                          :: !(Maybe Bool)
     , _subChannelId                     :: !(Maybe Text)
@@ -87,7 +88,8 @@ data SubscriptionsList = SubscriptionsList'
     , _subPageToken                     :: !(Maybe Text)
     , _subOrder                         :: !SubscriptionsListOrder
     , _subMaxResults                    :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
@@ -120,7 +122,7 @@ subscriptionsList
     :: Text -- ^ 'subPart'
     -> SubscriptionsList
 subscriptionsList pSubPart_ =
-    SubscriptionsList'
+  SubscriptionsList'
     { _subPart = pSubPart_
     , _subMine = Nothing
     , _subChannelId = Nothing

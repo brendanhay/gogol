@@ -66,14 +66,16 @@ type ProjectsModelsVersionsDeleteResource =
 -- version of the model unless it is the only remaining version.
 --
 -- /See:/ 'projectsModelsVersionsDelete' smart constructor.
-data ProjectsModelsVersionsDelete = ProjectsModelsVersionsDelete'
+data ProjectsModelsVersionsDelete =
+  ProjectsModelsVersionsDelete'
     { _pmvdXgafv          :: !(Maybe Xgafv)
     , _pmvdUploadProtocol :: !(Maybe Text)
     , _pmvdAccessToken    :: !(Maybe Text)
     , _pmvdUploadType     :: !(Maybe Text)
     , _pmvdName           :: !Text
     , _pmvdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsModelsVersionsDelete' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsModelsVersionsDelete
     :: Text -- ^ 'pmvdName'
     -> ProjectsModelsVersionsDelete
 projectsModelsVersionsDelete pPmvdName_ =
-    ProjectsModelsVersionsDelete'
+  ProjectsModelsVersionsDelete'
     { _pmvdXgafv = Nothing
     , _pmvdUploadProtocol = Nothing
     , _pmvdAccessToken = Nothing

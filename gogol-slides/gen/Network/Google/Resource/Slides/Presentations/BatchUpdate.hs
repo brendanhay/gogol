@@ -89,7 +89,8 @@ type PresentationsBatchUpdateResource =
 -- your request are guaranteed to be applied together atomically.
 --
 -- /See:/ 'presentationsBatchUpdate' smart constructor.
-data PresentationsBatchUpdate = PresentationsBatchUpdate'
+data PresentationsBatchUpdate =
+  PresentationsBatchUpdate'
     { _pbuXgafv          :: !(Maybe Xgafv)
     , _pbuUploadProtocol :: !(Maybe Text)
     , _pbuAccessToken    :: !(Maybe Text)
@@ -97,7 +98,8 @@ data PresentationsBatchUpdate = PresentationsBatchUpdate'
     , _pbuPresentationId :: !Text
     , _pbuPayload        :: !BatchUpdatePresentationRequest
     , _pbuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PresentationsBatchUpdate' with the minimum fields required to make a request.
 --
@@ -121,7 +123,7 @@ presentationsBatchUpdate
     -> BatchUpdatePresentationRequest -- ^ 'pbuPayload'
     -> PresentationsBatchUpdate
 presentationsBatchUpdate pPbuPresentationId_ pPbuPayload_ =
-    PresentationsBatchUpdate'
+  PresentationsBatchUpdate'
     { _pbuXgafv = Nothing
     , _pbuUploadProtocol = Nothing
     , _pbuAccessToken = Nothing

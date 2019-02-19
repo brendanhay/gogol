@@ -73,7 +73,8 @@ type AppsFirewallIngressRulesBatchUpdateResource =
 -- the list.
 --
 -- /See:/ 'appsFirewallIngressRulesBatchUpdate' smart constructor.
-data AppsFirewallIngressRulesBatchUpdate = AppsFirewallIngressRulesBatchUpdate'
+data AppsFirewallIngressRulesBatchUpdate =
+  AppsFirewallIngressRulesBatchUpdate'
     { _afirbuXgafv          :: !(Maybe Xgafv)
     , _afirbuUploadProtocol :: !(Maybe Text)
     , _afirbuAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data AppsFirewallIngressRulesBatchUpdate = AppsFirewallIngressRulesBatchUpdate'
     , _afirbuPayload        :: !BatchUpdateIngressRulesRequest
     , _afirbuAppsId         :: !Text
     , _afirbuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsFirewallIngressRulesBatchUpdate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ appsFirewallIngressRulesBatchUpdate
     -> Text -- ^ 'afirbuAppsId'
     -> AppsFirewallIngressRulesBatchUpdate
 appsFirewallIngressRulesBatchUpdate pAfirbuPayload_ pAfirbuAppsId_ =
-    AppsFirewallIngressRulesBatchUpdate'
+  AppsFirewallIngressRulesBatchUpdate'
     { _afirbuXgafv = Nothing
     , _afirbuUploadProtocol = Nothing
     , _afirbuAccessToken = Nothing
@@ -157,7 +159,8 @@ afirbuCallback
       (\ s a -> s{_afirbuCallback = a})
 
 instance GoogleRequest
-         AppsFirewallIngressRulesBatchUpdate where
+           AppsFirewallIngressRulesBatchUpdate
+         where
         type Rs AppsFirewallIngressRulesBatchUpdate =
              BatchUpdateIngressRulesResponse
         type Scopes AppsFirewallIngressRulesBatchUpdate =

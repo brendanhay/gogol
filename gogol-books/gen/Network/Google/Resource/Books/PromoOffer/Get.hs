@@ -62,14 +62,16 @@ type PromoOfferGetResource =
 -- | Returns a list of promo offers available to the user
 --
 -- /See:/ 'promoOfferGet' smart constructor.
-data PromoOfferGet = PromoOfferGet'
+data PromoOfferGet =
+  PromoOfferGet'
     { _pogManufacturer :: !(Maybe Text)
     , _pogSerial       :: !(Maybe Text)
     , _pogDevice       :: !(Maybe Text)
     , _pogModel        :: !(Maybe Text)
     , _pogProduct      :: !(Maybe Text)
     , _pogAndroidId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PromoOfferGet' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ data PromoOfferGet = PromoOfferGet'
 promoOfferGet
     :: PromoOfferGet
 promoOfferGet =
-    PromoOfferGet'
+  PromoOfferGet'
     { _pogManufacturer = Nothing
     , _pogSerial = Nothing
     , _pogDevice = Nothing

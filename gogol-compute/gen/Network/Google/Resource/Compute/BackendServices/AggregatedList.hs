@@ -64,13 +64,15 @@ type BackendServicesAggregatedListResource =
 -- available to the specified project.
 --
 -- /See:/ 'backendServicesAggregatedList' smart constructor.
-data BackendServicesAggregatedList = BackendServicesAggregatedList'
+data BackendServicesAggregatedList =
+  BackendServicesAggregatedList'
     { _bsalOrderBy    :: !(Maybe Text)
     , _bsalProject    :: !Text
     , _bsalFilter     :: !(Maybe Text)
     , _bsalPageToken  :: !(Maybe Text)
     , _bsalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServicesAggregatedList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ backendServicesAggregatedList
     :: Text -- ^ 'bsalProject'
     -> BackendServicesAggregatedList
 backendServicesAggregatedList pBsalProject_ =
-    BackendServicesAggregatedList'
+  BackendServicesAggregatedList'
     { _bsalOrderBy = Nothing
     , _bsalProject = pBsalProject_
     , _bsalFilter = Nothing

@@ -79,7 +79,8 @@ type ProjectsLocationsClustersCreateResource =
 -- by the cluster.
 --
 -- /See:/ 'projectsLocationsClustersCreate' smart constructor.
-data ProjectsLocationsClustersCreate = ProjectsLocationsClustersCreate'
+data ProjectsLocationsClustersCreate =
+  ProjectsLocationsClustersCreate'
     { _plccParent         :: !Text
     , _plccXgafv          :: !(Maybe Xgafv)
     , _plccUploadProtocol :: !(Maybe Text)
@@ -87,7 +88,8 @@ data ProjectsLocationsClustersCreate = ProjectsLocationsClustersCreate'
     , _plccUploadType     :: !(Maybe Text)
     , _plccPayload        :: !CreateClusterRequest
     , _plccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersCreate' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ projectsLocationsClustersCreate
     -> CreateClusterRequest -- ^ 'plccPayload'
     -> ProjectsLocationsClustersCreate
 projectsLocationsClustersCreate pPlccParent_ pPlccPayload_ =
-    ProjectsLocationsClustersCreate'
+  ProjectsLocationsClustersCreate'
     { _plccParent = pPlccParent_
     , _plccXgafv = Nothing
     , _plccUploadProtocol = Nothing
@@ -161,7 +163,8 @@ plccCallback
   = lens _plccCallback (\ s a -> s{_plccCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersCreate where
+           ProjectsLocationsClustersCreate
+         where
         type Rs ProjectsLocationsClustersCreate = Operation
         type Scopes ProjectsLocationsClustersCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

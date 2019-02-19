@@ -56,11 +56,13 @@ type NotificationsDeleteResource =
 -- | Permanently deletes a notification subscription.
 --
 -- /See:/ 'notificationsDelete' smart constructor.
-data NotificationsDelete = NotificationsDelete'
+data NotificationsDelete =
+  NotificationsDelete'
     { _ndNotification :: !Text
     , _ndBucket       :: !Text
     , _ndUserProject  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationsDelete' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ notificationsDelete
     -> Text -- ^ 'ndBucket'
     -> NotificationsDelete
 notificationsDelete pNdNotification_ pNdBucket_ =
-    NotificationsDelete'
+  NotificationsDelete'
     { _ndNotification = pNdNotification_
     , _ndBucket = pNdBucket_
     , _ndUserProject = Nothing

@@ -74,7 +74,8 @@ type TestIAMPermissionsResource =
 -- warning.
 --
 -- /See:/ 'testIAMPermissions' smart constructor.
-data TestIAMPermissions = TestIAMPermissions'
+data TestIAMPermissions =
+  TestIAMPermissions'
     { _tipXgafv          :: !(Maybe Xgafv)
     , _tipUploadProtocol :: !(Maybe Text)
     , _tipAccessToken    :: !(Maybe Text)
@@ -82,7 +83,8 @@ data TestIAMPermissions = TestIAMPermissions'
     , _tipPayload        :: !GoogleIAMV1__TestIAMPermissionsRequest
     , _tipResource       :: !Text
     , _tipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ testIAMPermissions
     -> Text -- ^ 'tipResource'
     -> TestIAMPermissions
 testIAMPermissions pTipPayload_ pTipResource_ =
-    TestIAMPermissions'
+  TestIAMPermissions'
     { _tipXgafv = Nothing
     , _tipUploadProtocol = Nothing
     , _tipAccessToken = Nothing

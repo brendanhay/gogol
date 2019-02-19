@@ -57,11 +57,13 @@ type SecurityPoliciesDeleteResource =
 -- | Deletes the specified policy.
 --
 -- /See:/ 'securityPoliciesDelete' smart constructor.
-data SecurityPoliciesDelete = SecurityPoliciesDelete'
+data SecurityPoliciesDelete =
+  SecurityPoliciesDelete'
     { _spdpRequestId      :: !(Maybe Text)
     , _spdpProject        :: !Text
     , _spdpSecurityPolicy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPoliciesDelete' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ securityPoliciesDelete
     -> Text -- ^ 'spdpSecurityPolicy'
     -> SecurityPoliciesDelete
 securityPoliciesDelete pSpdpProject_ pSpdpSecurityPolicy_ =
-    SecurityPoliciesDelete'
+  SecurityPoliciesDelete'
     { _spdpRequestId = Nothing
     , _spdpProject = pSpdpProject_
     , _spdpSecurityPolicy = pSpdpSecurityPolicy_

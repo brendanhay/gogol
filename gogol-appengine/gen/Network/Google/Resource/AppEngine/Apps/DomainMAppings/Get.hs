@@ -63,7 +63,8 @@ type AppsDomainMAppingsGetResource =
 -- | Gets the specified domain mapping.
 --
 -- /See:/ 'appsDomainMAppingsGet' smart constructor.
-data AppsDomainMAppingsGet = AppsDomainMAppingsGet'
+data AppsDomainMAppingsGet =
+  AppsDomainMAppingsGet'
     { _admagXgafv            :: !(Maybe Xgafv)
     , _admagUploadProtocol   :: !(Maybe Text)
     , _admagAccessToken      :: !(Maybe Text)
@@ -71,7 +72,8 @@ data AppsDomainMAppingsGet = AppsDomainMAppingsGet'
     , _admagAppsId           :: !Text
     , _admagDomainMAppingsId :: !Text
     , _admagCallback         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsDomainMAppingsGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ appsDomainMAppingsGet
     -> Text -- ^ 'admagDomainMAppingsId'
     -> AppsDomainMAppingsGet
 appsDomainMAppingsGet pAdmagAppsId_ pAdmagDomainMAppingsId_ =
-    AppsDomainMAppingsGet'
+  AppsDomainMAppingsGet'
     { _admagXgafv = Nothing
     , _admagUploadProtocol = Nothing
     , _admagAccessToken = Nothing

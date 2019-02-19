@@ -56,10 +56,12 @@ type DomainAliasesInsertResource =
 -- | Inserts a Domain alias of the customer.
 --
 -- /See:/ 'domainAliasesInsert' smart constructor.
-data DomainAliasesInsert = DomainAliasesInsert'
+data DomainAliasesInsert =
+  DomainAliasesInsert'
     { _daiPayload  :: !DomainAlias
     , _daiCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DomainAliasesInsert' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ domainAliasesInsert
     -> Text -- ^ 'daiCustomer'
     -> DomainAliasesInsert
 domainAliasesInsert pDaiPayload_ pDaiCustomer_ =
-    DomainAliasesInsert'
-    { _daiPayload = pDaiPayload_
-    , _daiCustomer = pDaiCustomer_
-    }
+  DomainAliasesInsert'
+    {_daiPayload = pDaiPayload_, _daiCustomer = pDaiCustomer_}
 
 -- | Multipart request metadata.
 daiPayload :: Lens' DomainAliasesInsert DomainAlias

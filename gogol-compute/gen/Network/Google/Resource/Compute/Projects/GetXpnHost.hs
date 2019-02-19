@@ -54,9 +54,11 @@ type ProjectsGetXpnHostResource =
 -- empty if no link exists.
 --
 -- /See:/ 'projectsGetXpnHost' smart constructor.
-newtype ProjectsGetXpnHost = ProjectsGetXpnHost'
+newtype ProjectsGetXpnHost =
+  ProjectsGetXpnHost'
     { _pgxhProject :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGetXpnHost' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ projectsGetXpnHost
     :: Text -- ^ 'pgxhProject'
     -> ProjectsGetXpnHost
 projectsGetXpnHost pPgxhProject_ =
-    ProjectsGetXpnHost'
-    { _pgxhProject = pPgxhProject_
-    }
+  ProjectsGetXpnHost' {_pgxhProject = pPgxhProject_}
 
 -- | Project ID for this request.
 pgxhProject :: Lens' ProjectsGetXpnHost Text

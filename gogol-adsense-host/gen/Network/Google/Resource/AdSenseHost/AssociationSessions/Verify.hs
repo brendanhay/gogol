@@ -55,9 +55,11 @@ type AssociationSessionsVerifyResource =
 -- from AdSense signup.
 --
 -- /See:/ 'associationSessionsVerify' smart constructor.
-newtype AssociationSessionsVerify = AssociationSessionsVerify'
+newtype AssociationSessionsVerify =
+  AssociationSessionsVerify'
     { _asvToken :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssociationSessionsVerify' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ associationSessionsVerify
     :: Text -- ^ 'asvToken'
     -> AssociationSessionsVerify
 associationSessionsVerify pAsvToken_ =
-    AssociationSessionsVerify'
-    { _asvToken = pAsvToken_
-    }
+  AssociationSessionsVerify' {_asvToken = pAsvToken_}
 
 -- | The token returned to the association callback URL.
 asvToken :: Lens' AssociationSessionsVerify Text

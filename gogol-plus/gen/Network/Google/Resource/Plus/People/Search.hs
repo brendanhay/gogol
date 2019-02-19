@@ -57,12 +57,14 @@ type PeopleSearchResource =
 -- | Search all public profiles.
 --
 -- /See:/ 'peopleSearch' smart constructor.
-data PeopleSearch = PeopleSearch'
+data PeopleSearch =
+  PeopleSearch'
     { _psQuery      :: !Text
     , _psLanguage   :: !Text
     , _psPageToken  :: !(Maybe Text)
     , _psMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PeopleSearch' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ peopleSearch
     :: Text -- ^ 'psQuery'
     -> PeopleSearch
 peopleSearch pPsQuery_ =
-    PeopleSearch'
+  PeopleSearch'
     { _psQuery = pPsQuery_
     , _psLanguage = "en-US"
     , _psPageToken = Nothing

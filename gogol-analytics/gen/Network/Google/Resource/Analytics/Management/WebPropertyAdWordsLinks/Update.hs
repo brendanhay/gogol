@@ -62,12 +62,14 @@ type ManagementWebPropertyAdWordsLinksUpdateResource
 -- | Updates an existing webProperty-AdWords link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksUpdate' smart constructor.
-data ManagementWebPropertyAdWordsLinksUpdate = ManagementWebPropertyAdWordsLinksUpdate'
+data ManagementWebPropertyAdWordsLinksUpdate =
+  ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluWebPropertyId            :: !Text
     , _mwpawluPayload                  :: !EntityAdWordsLink
     , _mwpawluAccountId                :: !Text
     , _mwpawluWebPropertyAdWordsLinkId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksUpdate' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ managementWebPropertyAdWordsLinksUpdate
     -> Text -- ^ 'mwpawluWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksUpdate
 managementWebPropertyAdWordsLinksUpdate pMwpawluWebPropertyId_ pMwpawluPayload_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksUpdate'
+  ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluWebPropertyId = pMwpawluWebPropertyId_
     , _mwpawluPayload = pMwpawluPayload_
     , _mwpawluAccountId = pMwpawluAccountId_
@@ -119,7 +121,8 @@ mwpawluWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawluWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksUpdate where
+           ManagementWebPropertyAdWordsLinksUpdate
+         where
         type Rs ManagementWebPropertyAdWordsLinksUpdate =
              EntityAdWordsLink
         type Scopes ManagementWebPropertyAdWordsLinksUpdate =

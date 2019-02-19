@@ -61,12 +61,14 @@ type EditsListingsPatchResource =
 -- semantics.
 --
 -- /See:/ 'editsListingsPatch' smart constructor.
-data EditsListingsPatch = EditsListingsPatch'
+data EditsListingsPatch =
+  EditsListingsPatch'
     { _elpPackageName :: !Text
     , _elpPayload     :: !Listing
     , _elpLanguage    :: !Text
     , _elpEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsListingsPatch' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ editsListingsPatch
     -> Text -- ^ 'elpEditId'
     -> EditsListingsPatch
 editsListingsPatch pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
-    EditsListingsPatch'
+  EditsListingsPatch'
     { _elpPackageName = pElpPackageName_
     , _elpPayload = pElpPayload_
     , _elpLanguage = pElpLanguage_

@@ -55,10 +55,12 @@ type UsersMakeAdminResource =
 -- | change admin status of a user
 --
 -- /See:/ 'usersMakeAdmin' smart constructor.
-data UsersMakeAdmin = UsersMakeAdmin'
+data UsersMakeAdmin =
+  UsersMakeAdmin'
     { _umaPayload :: !UserMakeAdmin
     , _umaUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersMakeAdmin' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ usersMakeAdmin
     -> Text -- ^ 'umaUserKey'
     -> UsersMakeAdmin
 usersMakeAdmin pUmaPayload_ pUmaUserKey_ =
-    UsersMakeAdmin'
-    { _umaPayload = pUmaPayload_
-    , _umaUserKey = pUmaUserKey_
-    }
+  UsersMakeAdmin' {_umaPayload = pUmaPayload_, _umaUserKey = pUmaUserKey_}
 
 -- | Multipart request metadata.
 umaPayload :: Lens' UsersMakeAdmin UserMakeAdmin

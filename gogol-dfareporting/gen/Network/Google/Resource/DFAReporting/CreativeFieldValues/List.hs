@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesList' request conforms to.
 type CreativeFieldValuesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -74,7 +74,8 @@ type CreativeFieldValuesListResource =
 -- method supports paging.
 --
 -- /See:/ 'creativeFieldValuesList' smart constructor.
-data CreativeFieldValuesList = CreativeFieldValuesList'
+data CreativeFieldValuesList =
+  CreativeFieldValuesList'
     { _cfvlCreativeFieldId :: !(Textual Int64)
     , _cfvlSearchString    :: !(Maybe Text)
     , _cfvlIds             :: !(Maybe [Textual Int64])
@@ -83,7 +84,8 @@ data CreativeFieldValuesList = CreativeFieldValuesList'
     , _cfvlPageToken       :: !(Maybe Text)
     , _cfvlSortField       :: !CreativeFieldValuesListSortField
     , _cfvlMaxResults      :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeFieldValuesList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ creativeFieldValuesList
     -> Int64 -- ^ 'cfvlProFileId'
     -> CreativeFieldValuesList
 creativeFieldValuesList pCfvlCreativeFieldId_ pCfvlProFileId_ =
-    CreativeFieldValuesList'
+  CreativeFieldValuesList'
     { _cfvlCreativeFieldId = _Coerce # pCfvlCreativeFieldId_
     , _cfvlSearchString = Nothing
     , _cfvlIds = Nothing

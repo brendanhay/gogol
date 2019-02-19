@@ -63,14 +63,16 @@ type BillingAccountsLogsDeleteResource =
 -- might not be deleted.
 --
 -- /See:/ 'billingAccountsLogsDelete' smart constructor.
-data BillingAccountsLogsDelete = BillingAccountsLogsDelete'
+data BillingAccountsLogsDelete =
+  BillingAccountsLogsDelete'
     { _baldXgafv          :: !(Maybe Xgafv)
     , _baldUploadProtocol :: !(Maybe Text)
     , _baldAccessToken    :: !(Maybe Text)
     , _baldUploadType     :: !(Maybe Text)
     , _baldLogName        :: !Text
     , _baldCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsLogsDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ billingAccountsLogsDelete
     :: Text -- ^ 'baldLogName'
     -> BillingAccountsLogsDelete
 billingAccountsLogsDelete pBaldLogName_ =
-    BillingAccountsLogsDelete'
+  BillingAccountsLogsDelete'
     { _baldXgafv = Nothing
     , _baldUploadProtocol = Nothing
     , _baldAccessToken = Nothing

@@ -54,10 +54,12 @@ type TableCopyResource =
 -- | Copies a table.
 --
 -- /See:/ 'tableCopy' smart constructor.
-data TableCopy = TableCopy'
+data TableCopy =
+  TableCopy'
     { _tcTableId          :: !Text
     , _tcCopyPresentation :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableCopy' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ tableCopy
     :: Text -- ^ 'tcTableId'
     -> TableCopy
 tableCopy pTcTableId_ =
-    TableCopy'
-    { _tcTableId = pTcTableId_
-    , _tcCopyPresentation = Nothing
-    }
+  TableCopy' {_tcTableId = pTcTableId_, _tcCopyPresentation = Nothing}
 
 -- | ID of the table that is being copied.
 tcTableId :: Lens' TableCopy Text

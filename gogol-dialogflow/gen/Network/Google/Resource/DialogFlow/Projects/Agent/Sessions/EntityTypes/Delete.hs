@@ -60,14 +60,16 @@ type ProjectsAgentSessionsEntityTypesDeleteResource =
 -- | Deletes the specified session entity type.
 --
 -- /See:/ 'projectsAgentSessionsEntityTypesDelete' smart constructor.
-data ProjectsAgentSessionsEntityTypesDelete = ProjectsAgentSessionsEntityTypesDelete'
+data ProjectsAgentSessionsEntityTypesDelete =
+  ProjectsAgentSessionsEntityTypesDelete'
     { _paSetdXgafv          :: !(Maybe Xgafv)
     , _paSetdUploadProtocol :: !(Maybe Text)
     , _paSetdAccessToken    :: !(Maybe Text)
     , _paSetdUploadType     :: !(Maybe Text)
     , _paSetdName           :: !Text
     , _paSetdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesDelete' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsAgentSessionsEntityTypesDelete
     :: Text -- ^ 'paSetdName'
     -> ProjectsAgentSessionsEntityTypesDelete
 projectsAgentSessionsEntityTypesDelete pPaSetdName_ =
-    ProjectsAgentSessionsEntityTypesDelete'
+  ProjectsAgentSessionsEntityTypesDelete'
     { _paSetdXgafv = Nothing
     , _paSetdUploadProtocol = Nothing
     , _paSetdAccessToken = Nothing
@@ -133,7 +135,8 @@ paSetdCallback
       (\ s a -> s{_paSetdCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsEntityTypesDelete where
+           ProjectsAgentSessionsEntityTypesDelete
+         where
         type Rs ProjectsAgentSessionsEntityTypesDelete =
              GoogleProtobufEmpty
         type Scopes ProjectsAgentSessionsEntityTypesDelete =

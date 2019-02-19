@@ -59,14 +59,16 @@ type ProjectsAttestorsDeleteResource =
 -- | Deletes an attestor. Returns NOT_FOUND if the attestor does not exist.
 --
 -- /See:/ 'projectsAttestorsDelete' smart constructor.
-data ProjectsAttestorsDelete = ProjectsAttestorsDelete'
+data ProjectsAttestorsDelete =
+  ProjectsAttestorsDelete'
     { _padXgafv          :: !(Maybe Xgafv)
     , _padUploadProtocol :: !(Maybe Text)
     , _padAccessToken    :: !(Maybe Text)
     , _padUploadType     :: !(Maybe Text)
     , _padName           :: !Text
     , _padCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAttestorsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsAttestorsDelete
     :: Text -- ^ 'padName'
     -> ProjectsAttestorsDelete
 projectsAttestorsDelete pPadName_ =
-    ProjectsAttestorsDelete'
+  ProjectsAttestorsDelete'
     { _padXgafv = Nothing
     , _padUploadProtocol = Nothing
     , _padAccessToken = Nothing

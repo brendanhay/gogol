@@ -54,11 +54,13 @@ type AccountsUpdateResource =
 -- | Updates a GTM Account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate'
+data AccountsUpdate =
+  AccountsUpdate'
     { _auPath        :: !Text
     , _auFingerprint :: !(Maybe Text)
     , _auPayload     :: !Account
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
@@ -74,11 +76,8 @@ accountsUpdate
     -> Account -- ^ 'auPayload'
     -> AccountsUpdate
 accountsUpdate pAuPath_ pAuPayload_ =
-    AccountsUpdate'
-    { _auPath = pAuPath_
-    , _auFingerprint = Nothing
-    , _auPayload = pAuPayload_
-    }
+  AccountsUpdate'
+    {_auPath = pAuPath_, _auFingerprint = Nothing, _auPayload = pAuPayload_}
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
 auPath :: Lens' AccountsUpdate Text

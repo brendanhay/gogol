@@ -57,11 +57,13 @@ type EditsDetailsUpdateResource =
 -- | Updates app details for this edit.
 --
 -- /See:/ 'editsDetailsUpdate' smart constructor.
-data EditsDetailsUpdate = EditsDetailsUpdate'
+data EditsDetailsUpdate =
+  EditsDetailsUpdate'
     { _eduPackageName :: !Text
     , _eduPayload     :: !AppDetails
     , _eduEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsDetailsUpdate' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ editsDetailsUpdate
     -> Text -- ^ 'eduEditId'
     -> EditsDetailsUpdate
 editsDetailsUpdate pEduPackageName_ pEduPayload_ pEduEditId_ =
-    EditsDetailsUpdate'
+  EditsDetailsUpdate'
     { _eduPackageName = pEduPackageName_
     , _eduPayload = pEduPayload_
     , _eduEditId = pEduEditId_

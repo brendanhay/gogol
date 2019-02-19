@@ -62,12 +62,14 @@ type HTTPSHealthChecksUpdateResource =
 -- data included in the request.
 --
 -- /See:/ 'httpsHealthChecksUpdate' smart constructor.
-data HTTPSHealthChecksUpdate = HTTPSHealthChecksUpdate'
+data HTTPSHealthChecksUpdate =
+  HTTPSHealthChecksUpdate'
     { _hhcuRequestId        :: !(Maybe Text)
     , _hhcuProject          :: !Text
     , _hhcuPayload          :: !HTTPSHealthCheck
     , _hhcuHTTPSHealthCheck :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPSHealthChecksUpdate' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ httpsHealthChecksUpdate
     -> Text -- ^ 'hhcuHTTPSHealthCheck'
     -> HTTPSHealthChecksUpdate
 httpsHealthChecksUpdate pHhcuProject_ pHhcuPayload_ pHhcuHTTPSHealthCheck_ =
-    HTTPSHealthChecksUpdate'
+  HTTPSHealthChecksUpdate'
     { _hhcuRequestId = Nothing
     , _hhcuProject = pHhcuProject_
     , _hhcuPayload = pHhcuPayload_

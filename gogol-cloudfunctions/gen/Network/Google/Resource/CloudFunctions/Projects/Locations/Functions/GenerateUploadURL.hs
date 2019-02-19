@@ -84,7 +84,8 @@ type ProjectsLocationsFunctionsGenerateUploadURLResource
 -- \`x-goog-content-length-range: 0,104857600\`
 --
 -- /See:/ 'projectsLocationsFunctionsGenerateUploadURL' smart constructor.
-data ProjectsLocationsFunctionsGenerateUploadURL = ProjectsLocationsFunctionsGenerateUploadURL'
+data ProjectsLocationsFunctionsGenerateUploadURL =
+  ProjectsLocationsFunctionsGenerateUploadURL'
     { _plfguuParent         :: !Text
     , _plfguuXgafv          :: !(Maybe Xgafv)
     , _plfguuUploadProtocol :: !(Maybe Text)
@@ -92,7 +93,8 @@ data ProjectsLocationsFunctionsGenerateUploadURL = ProjectsLocationsFunctionsGen
     , _plfguuUploadType     :: !(Maybe Text)
     , _plfguuPayload        :: !GenerateUploadURLRequest
     , _plfguuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsFunctionsGenerateUploadURL' with the minimum fields required to make a request.
 --
@@ -116,7 +118,7 @@ projectsLocationsFunctionsGenerateUploadURL
     -> GenerateUploadURLRequest -- ^ 'plfguuPayload'
     -> ProjectsLocationsFunctionsGenerateUploadURL
 projectsLocationsFunctionsGenerateUploadURL pPlfguuParent_ pPlfguuPayload_ =
-    ProjectsLocationsFunctionsGenerateUploadURL'
+  ProjectsLocationsFunctionsGenerateUploadURL'
     { _plfguuParent = pPlfguuParent_
     , _plfguuXgafv = Nothing
     , _plfguuUploadProtocol = Nothing
@@ -169,7 +171,8 @@ plfguuCallback
       (\ s a -> s{_plfguuCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsFunctionsGenerateUploadURL where
+           ProjectsLocationsFunctionsGenerateUploadURL
+         where
         type Rs ProjectsLocationsFunctionsGenerateUploadURL =
              GenerateUploadURLResponse
         type Scopes

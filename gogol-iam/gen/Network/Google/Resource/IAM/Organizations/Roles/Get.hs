@@ -59,14 +59,16 @@ type OrganizationsRolesGetResource =
 -- | Gets a Role definition.
 --
 -- /See:/ 'organizationsRolesGet' smart constructor.
-data OrganizationsRolesGet = OrganizationsRolesGet'
+data OrganizationsRolesGet =
+  OrganizationsRolesGet'
     { _orgXgafv          :: !(Maybe Xgafv)
     , _orgUploadProtocol :: !(Maybe Text)
     , _orgAccessToken    :: !(Maybe Text)
     , _orgUploadType     :: !(Maybe Text)
     , _orgName           :: !Text
     , _orgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsRolesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ organizationsRolesGet
     :: Text -- ^ 'orgName'
     -> OrganizationsRolesGet
 organizationsRolesGet pOrgName_ =
-    OrganizationsRolesGet'
+  OrganizationsRolesGet'
     { _orgXgafv = Nothing
     , _orgUploadProtocol = Nothing
     , _orgAccessToken = Nothing

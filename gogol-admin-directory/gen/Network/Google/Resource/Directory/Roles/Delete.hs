@@ -55,10 +55,12 @@ type RolesDeleteResource =
 -- | Deletes a role.
 --
 -- /See:/ 'rolesDelete' smart constructor.
-data RolesDelete = RolesDelete'
+data RolesDelete =
+  RolesDelete'
     { _rdRoleId   :: !Text
     , _rdCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RolesDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ rolesDelete
     -> Text -- ^ 'rdCustomer'
     -> RolesDelete
 rolesDelete pRdRoleId_ pRdCustomer_ =
-    RolesDelete'
-    { _rdRoleId = pRdRoleId_
-    , _rdCustomer = pRdCustomer_
-    }
+  RolesDelete' {_rdRoleId = pRdRoleId_, _rdCustomer = pRdCustomer_}
 
 -- | Immutable ID of the role.
 rdRoleId :: Lens' RolesDelete Text

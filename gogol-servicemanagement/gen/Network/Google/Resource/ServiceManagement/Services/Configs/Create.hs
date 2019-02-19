@@ -73,7 +73,8 @@ type ServicesConfigsCreateResource =
 -- rest will be deleted eventually.
 --
 -- /See:/ 'servicesConfigsCreate' smart constructor.
-data ServicesConfigsCreate = ServicesConfigsCreate'
+data ServicesConfigsCreate =
+  ServicesConfigsCreate'
     { _sccXgafv          :: !(Maybe Xgafv)
     , _sccUploadProtocol :: !(Maybe Text)
     , _sccAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ServicesConfigsCreate = ServicesConfigsCreate'
     , _sccPayload        :: !Service
     , _sccServiceName    :: !Text
     , _sccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesConfigsCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ servicesConfigsCreate
     -> Text -- ^ 'sccServiceName'
     -> ServicesConfigsCreate
 servicesConfigsCreate pSccPayload_ pSccServiceName_ =
-    ServicesConfigsCreate'
+  ServicesConfigsCreate'
     { _sccXgafv = Nothing
     , _sccUploadProtocol = Nothing
     , _sccAccessToken = Nothing

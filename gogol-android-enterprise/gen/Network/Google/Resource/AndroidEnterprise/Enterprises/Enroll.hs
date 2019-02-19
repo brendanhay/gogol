@@ -54,10 +54,12 @@ type EnterprisesEnrollResource =
 -- | Enrolls an enterprise with the calling EMM.
 --
 -- /See:/ 'enterprisesEnroll' smart constructor.
-data EnterprisesEnroll = EnterprisesEnroll'
+data EnterprisesEnroll =
+  EnterprisesEnroll'
     { _eeToken   :: !Text
     , _eePayload :: !Enterprise
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesEnroll' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ enterprisesEnroll
     -> Enterprise -- ^ 'eePayload'
     -> EnterprisesEnroll
 enterprisesEnroll pEeToken_ pEePayload_ =
-    EnterprisesEnroll'
-    { _eeToken = pEeToken_
-    , _eePayload = pEePayload_
-    }
+  EnterprisesEnroll' {_eeToken = pEeToken_, _eePayload = pEePayload_}
 
 -- | The token provided by the enterprise to register the EMM.
 eeToken :: Lens' EnterprisesEnroll Text

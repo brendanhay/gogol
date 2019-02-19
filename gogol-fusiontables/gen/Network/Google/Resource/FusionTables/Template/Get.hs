@@ -54,10 +54,12 @@ type TemplateGetResource =
 -- | Retrieves a specific template by its id
 --
 -- /See:/ 'templateGet' smart constructor.
-data TemplateGet = TemplateGet'
+data TemplateGet =
+  TemplateGet'
     { _temeTemplateId :: !(Textual Int32)
     , _temeTableId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TemplateGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ templateGet
     -> Text -- ^ 'temeTableId'
     -> TemplateGet
 templateGet pTemeTemplateId_ pTemeTableId_ =
-    TemplateGet'
-    { _temeTemplateId = _Coerce # pTemeTemplateId_
-    , _temeTableId = pTemeTableId_
-    }
+  TemplateGet'
+    {_temeTemplateId = _Coerce # pTemeTemplateId_, _temeTableId = pTemeTableId_}
 
 -- | Identifier for the template that is being requested
 temeTemplateId :: Lens' TemplateGet Int32

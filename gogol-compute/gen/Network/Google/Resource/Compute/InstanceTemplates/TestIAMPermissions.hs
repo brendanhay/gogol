@@ -59,11 +59,13 @@ type InstanceTemplatesTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'instanceTemplatesTestIAMPermissions' smart constructor.
-data InstanceTemplatesTestIAMPermissions = InstanceTemplatesTestIAMPermissions'
+data InstanceTemplatesTestIAMPermissions =
+  InstanceTemplatesTestIAMPermissions'
     { _ittipProject  :: !Text
     , _ittipPayload  :: !TestPermissionsRequest
     , _ittipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceTemplatesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ instanceTemplatesTestIAMPermissions
     -> Text -- ^ 'ittipResource'
     -> InstanceTemplatesTestIAMPermissions
 instanceTemplatesTestIAMPermissions pIttipProject_ pIttipPayload_ pIttipResource_ =
-    InstanceTemplatesTestIAMPermissions'
+  InstanceTemplatesTestIAMPermissions'
     { _ittipProject = pIttipProject_
     , _ittipPayload = pIttipPayload_
     , _ittipResource = pIttipResource_
@@ -103,7 +105,8 @@ ittipResource
       (\ s a -> s{_ittipResource = a})
 
 instance GoogleRequest
-         InstanceTemplatesTestIAMPermissions where
+           InstanceTemplatesTestIAMPermissions
+         where
         type Rs InstanceTemplatesTestIAMPermissions =
              TestPermissionsResponse
         type Scopes InstanceTemplatesTestIAMPermissions =

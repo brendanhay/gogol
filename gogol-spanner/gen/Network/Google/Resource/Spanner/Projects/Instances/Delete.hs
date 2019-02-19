@@ -67,14 +67,16 @@ type ProjectsInstancesDeleteResource =
 -- permanently deleted.
 --
 -- /See:/ 'projectsInstancesDelete' smart constructor.
-data ProjectsInstancesDelete = ProjectsInstancesDelete'
+data ProjectsInstancesDelete =
+  ProjectsInstancesDelete'
     { _pidXgafv          :: !(Maybe Xgafv)
     , _pidUploadProtocol :: !(Maybe Text)
     , _pidAccessToken    :: !(Maybe Text)
     , _pidUploadType     :: !(Maybe Text)
     , _pidName           :: !Text
     , _pidCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDelete' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsInstancesDelete
     :: Text -- ^ 'pidName'
     -> ProjectsInstancesDelete
 projectsInstancesDelete pPidName_ =
-    ProjectsInstancesDelete'
+  ProjectsInstancesDelete'
     { _pidXgafv = Nothing
     , _pidUploadProtocol = Nothing
     , _pidAccessToken = Nothing

@@ -98,7 +98,8 @@ type CoursesCourseWorkStudentSubmissionsReclaimResource
 -- exist.
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsReclaim' smart constructor.
-data CoursesCourseWorkStudentSubmissionsReclaim = CoursesCourseWorkStudentSubmissionsReclaim'
+data CoursesCourseWorkStudentSubmissionsReclaim =
+  CoursesCourseWorkStudentSubmissionsReclaim'
     { _ccwssrcXgafv          :: !(Maybe Xgafv)
     , _ccwssrcUploadProtocol :: !(Maybe Text)
     , _ccwssrcCourseId       :: !Text
@@ -108,7 +109,8 @@ data CoursesCourseWorkStudentSubmissionsReclaim = CoursesCourseWorkStudentSubmis
     , _ccwssrcId             :: !Text
     , _ccwssrcCallback       :: !(Maybe Text)
     , _ccwssrcCourseWorkId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsReclaim' with the minimum fields required to make a request.
 --
@@ -138,7 +140,7 @@ coursesCourseWorkStudentSubmissionsReclaim
     -> Text -- ^ 'ccwssrcCourseWorkId'
     -> CoursesCourseWorkStudentSubmissionsReclaim
 coursesCourseWorkStudentSubmissionsReclaim pCcwssrcCourseId_ pCcwssrcPayload_ pCcwssrcId_ pCcwssrcCourseWorkId_ =
-    CoursesCourseWorkStudentSubmissionsReclaim'
+  CoursesCourseWorkStudentSubmissionsReclaim'
     { _ccwssrcXgafv = Nothing
     , _ccwssrcUploadProtocol = Nothing
     , _ccwssrcCourseId = pCcwssrcCourseId_
@@ -204,7 +206,8 @@ ccwssrcCourseWorkId
       (\ s a -> s{_ccwssrcCourseWorkId = a})
 
 instance GoogleRequest
-         CoursesCourseWorkStudentSubmissionsReclaim where
+           CoursesCourseWorkStudentSubmissionsReclaim
+         where
         type Rs CoursesCourseWorkStudentSubmissionsReclaim =
              Empty
         type Scopes

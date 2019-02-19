@@ -56,11 +56,13 @@ type AccountsSavedadstylesListResource =
 -- | List all saved ad styles in the specified account.
 --
 -- /See:/ 'accountsSavedadstylesList' smart constructor.
-data AccountsSavedadstylesList = AccountsSavedadstylesList'
+data AccountsSavedadstylesList =
+  AccountsSavedadstylesList'
     { _aslAccountId  :: !Text
     , _aslPageToken  :: !(Maybe Text)
     , _aslMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsSavedadstylesList' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ accountsSavedadstylesList
     :: Text -- ^ 'aslAccountId'
     -> AccountsSavedadstylesList
 accountsSavedadstylesList pAslAccountId_ =
-    AccountsSavedadstylesList'
+  AccountsSavedadstylesList'
     { _aslAccountId = pAslAccountId_
     , _aslPageToken = Nothing
     , _aslMaxResults = Nothing

@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'AccountPermissionGroupsList' request conforms to.
 type AccountPermissionGroupsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountPermissionGroups" :>
@@ -53,9 +53,11 @@ type AccountPermissionGroupsListResource =
 -- | Retrieves the list of account permission groups.
 --
 -- /See:/ 'accountPermissionGroupsList' smart constructor.
-newtype AccountPermissionGroupsList = AccountPermissionGroupsList'
+newtype AccountPermissionGroupsList =
+  AccountPermissionGroupsList'
     { _apglProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountPermissionGroupsList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ accountPermissionGroupsList
     :: Int64 -- ^ 'apglProFileId'
     -> AccountPermissionGroupsList
 accountPermissionGroupsList pApglProFileId_ =
-    AccountPermissionGroupsList'
-    { _apglProFileId = _Coerce # pApglProFileId_
-    }
+  AccountPermissionGroupsList' {_apglProFileId = _Coerce # pApglProFileId_}
 
 -- | User profile ID associated with this request.
 apglProFileId :: Lens' AccountPermissionGroupsList Int64

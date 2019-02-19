@@ -61,14 +61,16 @@ type ProjectsSnapshotsGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsSnapshotsGetIAMPolicy' smart constructor.
-data ProjectsSnapshotsGetIAMPolicy = ProjectsSnapshotsGetIAMPolicy'
+data ProjectsSnapshotsGetIAMPolicy =
+  ProjectsSnapshotsGetIAMPolicy'
     { _psgipXgafv          :: !(Maybe Xgafv)
     , _psgipUploadProtocol :: !(Maybe Text)
     , _psgipAccessToken    :: !(Maybe Text)
     , _psgipUploadType     :: !(Maybe Text)
     , _psgipResource       :: !Text
     , _psgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSnapshotsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsSnapshotsGetIAMPolicy
     :: Text -- ^ 'psgipResource'
     -> ProjectsSnapshotsGetIAMPolicy
 projectsSnapshotsGetIAMPolicy pPsgipResource_ =
-    ProjectsSnapshotsGetIAMPolicy'
+  ProjectsSnapshotsGetIAMPolicy'
     { _psgipXgafv = Nothing
     , _psgipUploadProtocol = Nothing
     , _psgipAccessToken = Nothing

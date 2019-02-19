@@ -51,9 +51,11 @@ type AlertsListResource =
 -- | List the alerts for this AdSense account.
 --
 -- /See:/ 'alertsList' smart constructor.
-newtype AlertsList = AlertsList'
+newtype AlertsList =
+  AlertsList'
     { _alLocale :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlertsList' with the minimum fields required to make a request.
 --
@@ -62,10 +64,7 @@ newtype AlertsList = AlertsList'
 -- * 'alLocale'
 alertsList
     :: AlertsList
-alertsList =
-    AlertsList'
-    { _alLocale = Nothing
-    }
+alertsList = AlertsList' {_alLocale = Nothing}
 
 -- | The locale to use for translating alert messages. The account locale
 -- will be used if this is not supplied. The AdSense default (English) will

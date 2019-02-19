@@ -59,12 +59,14 @@ type AddressesDeleteResource =
 -- | Deletes the specified address resource.
 --
 -- /See:/ 'addressesDelete' smart constructor.
-data AddressesDelete = AddressesDelete'
+data AddressesDelete =
+  AddressesDelete'
     { _adddRequestId :: !(Maybe Text)
     , _adddProject   :: !Text
     , _adddAddress   :: !Text
     , _adddRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressesDelete' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ addressesDelete
     -> Text -- ^ 'adddRegion'
     -> AddressesDelete
 addressesDelete pAdddProject_ pAdddAddress_ pAdddRegion_ =
-    AddressesDelete'
+  AddressesDelete'
     { _adddRequestId = Nothing
     , _adddProject = pAdddProject_
     , _adddAddress = pAdddAddress_

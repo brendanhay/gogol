@@ -63,12 +63,14 @@ type GlobalForwardingRulesSetTargetResource =
 -- should be of the same type as the old target.
 --
 -- /See:/ 'globalForwardingRulesSetTarget' smart constructor.
-data GlobalForwardingRulesSetTarget = GlobalForwardingRulesSetTarget'
+data GlobalForwardingRulesSetTarget =
+  GlobalForwardingRulesSetTarget'
     { _gfrstRequestId      :: !(Maybe Text)
     , _gfrstProject        :: !Text
     , _gfrstForwardingRule :: !Text
     , _gfrstPayload        :: !TargetReference
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesSetTarget' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ globalForwardingRulesSetTarget
     -> TargetReference -- ^ 'gfrstPayload'
     -> GlobalForwardingRulesSetTarget
 globalForwardingRulesSetTarget pGfrstProject_ pGfrstForwardingRule_ pGfrstPayload_ =
-    GlobalForwardingRulesSetTarget'
+  GlobalForwardingRulesSetTarget'
     { _gfrstRequestId = Nothing
     , _gfrstProject = pGfrstProject_
     , _gfrstForwardingRule = pGfrstForwardingRule_

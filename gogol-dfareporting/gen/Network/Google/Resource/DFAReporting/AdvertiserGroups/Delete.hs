@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsDelete' request conforms to.
 type AdvertiserGroupsDeleteResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -54,10 +54,12 @@ type AdvertiserGroupsDeleteResource =
 -- | Deletes an existing advertiser group.
 --
 -- /See:/ 'advertiserGroupsDelete' smart constructor.
-data AdvertiserGroupsDelete = AdvertiserGroupsDelete'
+data AdvertiserGroupsDelete =
+  AdvertiserGroupsDelete'
     { _agdProFileId :: !(Textual Int64)
     , _agdId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdvertiserGroupsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ advertiserGroupsDelete
     -> Int64 -- ^ 'agdId'
     -> AdvertiserGroupsDelete
 advertiserGroupsDelete pAgdProFileId_ pAgdId_ =
-    AdvertiserGroupsDelete'
-    { _agdProFileId = _Coerce # pAgdProFileId_
-    , _agdId = _Coerce # pAgdId_
-    }
+  AdvertiserGroupsDelete'
+    {_agdProFileId = _Coerce # pAgdProFileId_, _agdId = _Coerce # pAgdId_}
 
 -- | User profile ID associated with this request.
 agdProFileId :: Lens' AdvertiserGroupsDelete Int64

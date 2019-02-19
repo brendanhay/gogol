@@ -60,11 +60,13 @@ type NodeTemplatesGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'nodeTemplatesGetIAMPolicy' smart constructor.
-data NodeTemplatesGetIAMPolicy = NodeTemplatesGetIAMPolicy'
+data NodeTemplatesGetIAMPolicy =
+  NodeTemplatesGetIAMPolicy'
     { _ntgipProject  :: !Text
     , _ntgipResource :: !Text
     , _ntgipRegion   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplatesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ nodeTemplatesGetIAMPolicy
     -> Text -- ^ 'ntgipRegion'
     -> NodeTemplatesGetIAMPolicy
 nodeTemplatesGetIAMPolicy pNtgipProject_ pNtgipResource_ pNtgipRegion_ =
-    NodeTemplatesGetIAMPolicy'
+  NodeTemplatesGetIAMPolicy'
     { _ntgipProject = pNtgipProject_
     , _ntgipResource = pNtgipResource_
     , _ntgipRegion = pNtgipRegion_

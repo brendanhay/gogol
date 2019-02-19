@@ -54,11 +54,13 @@ type AccountsContainersWorkspacesUpdateResource =
 -- | Updates a Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesUpdate' smart constructor.
-data AccountsContainersWorkspacesUpdate = AccountsContainersWorkspacesUpdate'
+data AccountsContainersWorkspacesUpdate =
+  AccountsContainersWorkspacesUpdate'
     { _acwuPath        :: !Text
     , _acwuFingerprint :: !(Maybe Text)
     , _acwuPayload     :: !Workspace
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesUpdate' with the minimum fields required to make a request.
 --
@@ -74,7 +76,7 @@ accountsContainersWorkspacesUpdate
     -> Workspace -- ^ 'acwuPayload'
     -> AccountsContainersWorkspacesUpdate
 accountsContainersWorkspacesUpdate pAcwuPath_ pAcwuPayload_ =
-    AccountsContainersWorkspacesUpdate'
+  AccountsContainersWorkspacesUpdate'
     { _acwuPath = pAcwuPath_
     , _acwuFingerprint = Nothing
     , _acwuPayload = pAcwuPayload_
@@ -98,7 +100,8 @@ acwuPayload
   = lens _acwuPayload (\ s a -> s{_acwuPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesUpdate where
+           AccountsContainersWorkspacesUpdate
+         where
         type Rs AccountsContainersWorkspacesUpdate =
              Workspace
         type Scopes AccountsContainersWorkspacesUpdate =

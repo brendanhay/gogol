@@ -57,11 +57,13 @@ type EditsListingsGetResource =
 -- | Fetches information about a localized store listing.
 --
 -- /See:/ 'editsListingsGet' smart constructor.
-data EditsListingsGet = EditsListingsGet'
+data EditsListingsGet =
+  EditsListingsGet'
     { _elgPackageName :: !Text
     , _elgLanguage    :: !Text
     , _elgEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsListingsGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ editsListingsGet
     -> Text -- ^ 'elgEditId'
     -> EditsListingsGet
 editsListingsGet pElgPackageName_ pElgLanguage_ pElgEditId_ =
-    EditsListingsGet'
+  EditsListingsGet'
     { _elgPackageName = pElgPackageName_
     , _elgLanguage = pElgLanguage_
     , _elgEditId = pElgEditId_

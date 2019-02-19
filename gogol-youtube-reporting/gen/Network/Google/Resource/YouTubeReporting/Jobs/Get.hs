@@ -62,7 +62,8 @@ type JobsGetResource =
 -- | Gets a job.
 --
 -- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet'
+data JobsGet =
+  JobsGet'
     { _jgXgafv                  :: !(Maybe Xgafv)
     , _jgJobId                  :: !Text
     , _jgUploadProtocol         :: !(Maybe Text)
@@ -70,7 +71,8 @@ data JobsGet = JobsGet'
     , _jgUploadType             :: !(Maybe Text)
     , _jgOnBehalfOfContentOwner :: !(Maybe Text)
     , _jgCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobsGet' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ jobsGet
     :: Text -- ^ 'jgJobId'
     -> JobsGet
 jobsGet pJgJobId_ =
-    JobsGet'
+  JobsGet'
     { _jgXgafv = Nothing
     , _jgJobId = pJgJobId_
     , _jgUploadProtocol = Nothing

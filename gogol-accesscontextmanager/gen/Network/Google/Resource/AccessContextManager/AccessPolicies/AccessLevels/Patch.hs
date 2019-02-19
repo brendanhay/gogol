@@ -70,7 +70,8 @@ type AccessPoliciesAccessLevelsPatchResource =
 -- result in an error response for the first error encountered.
 --
 -- /See:/ 'accessPoliciesAccessLevelsPatch' smart constructor.
-data AccessPoliciesAccessLevelsPatch = AccessPoliciesAccessLevelsPatch'
+data AccessPoliciesAccessLevelsPatch =
+  AccessPoliciesAccessLevelsPatch'
     { _apalpXgafv          :: !(Maybe Xgafv)
     , _apalpUploadProtocol :: !(Maybe Text)
     , _apalpUpdateMask     :: !(Maybe GFieldMask)
@@ -79,7 +80,8 @@ data AccessPoliciesAccessLevelsPatch = AccessPoliciesAccessLevelsPatch'
     , _apalpPayload        :: !AccessLevel
     , _apalpName           :: !Text
     , _apalpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesAccessLevelsPatch' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ accessPoliciesAccessLevelsPatch
     -> Text -- ^ 'apalpName'
     -> AccessPoliciesAccessLevelsPatch
 accessPoliciesAccessLevelsPatch pApalpPayload_ pApalpName_ =
-    AccessPoliciesAccessLevelsPatch'
+  AccessPoliciesAccessLevelsPatch'
     { _apalpXgafv = Nothing
     , _apalpUploadProtocol = Nothing
     , _apalpUpdateMask = Nothing
@@ -165,7 +167,8 @@ apalpCallback
       (\ s a -> s{_apalpCallback = a})
 
 instance GoogleRequest
-         AccessPoliciesAccessLevelsPatch where
+           AccessPoliciesAccessLevelsPatch
+         where
         type Rs AccessPoliciesAccessLevelsPatch = Operation
         type Scopes AccessPoliciesAccessLevelsPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]

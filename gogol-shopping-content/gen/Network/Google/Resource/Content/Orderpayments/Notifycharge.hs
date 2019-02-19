@@ -57,11 +57,13 @@ type OrderpaymentsNotifychargeResource =
 -- | Notify about charge on user\'s selected payments method.
 --
 -- /See:/ 'orderpaymentsNotifycharge' smart constructor.
-data OrderpaymentsNotifycharge = OrderpaymentsNotifycharge'
+data OrderpaymentsNotifycharge =
+  OrderpaymentsNotifycharge'
     { _onnMerchantId :: !(Textual Word64)
     , _onnPayload    :: !OrderpaymentsNotifyChargeRequest
     , _onnOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrderpaymentsNotifycharge' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ orderpaymentsNotifycharge
     -> Text -- ^ 'onnOrderId'
     -> OrderpaymentsNotifycharge
 orderpaymentsNotifycharge pOnnMerchantId_ pOnnPayload_ pOnnOrderId_ =
-    OrderpaymentsNotifycharge'
+  OrderpaymentsNotifycharge'
     { _onnMerchantId = _Coerce # pOnnMerchantId_
     , _onnPayload = pOnnPayload_
     , _onnOrderId = pOnnOrderId_

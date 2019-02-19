@@ -64,14 +64,16 @@ type ChangesListResource =
 -- | Enumerate Changes to a ResourceRecordSet collection.
 --
 -- /See:/ 'changesList' smart constructor.
-data ChangesList = ChangesList'
+data ChangesList =
+  ChangesList'
     { _clProject     :: !Text
     , _clSortOrder   :: !(Maybe Text)
     , _clPageToken   :: !(Maybe Text)
     , _clManagedZone :: !Text
     , _clMaxResults  :: !(Maybe (Textual Int32))
     , _clSortBy      :: !ChangesListSortBy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChangesList' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ changesList
     -> Text -- ^ 'clManagedZone'
     -> ChangesList
 changesList pClProject_ pClManagedZone_ =
-    ChangesList'
+  ChangesList'
     { _clProject = pClProject_
     , _clSortOrder = Nothing
     , _clPageToken = Nothing

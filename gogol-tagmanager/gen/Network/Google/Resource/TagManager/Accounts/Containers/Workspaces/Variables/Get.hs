@@ -51,9 +51,11 @@ type AccountsContainersWorkspacesVariablesGetResource
 -- | Gets a GTM Variable.
 --
 -- /See:/ 'accountsContainersWorkspacesVariablesGet' smart constructor.
-newtype AccountsContainersWorkspacesVariablesGet = AccountsContainersWorkspacesVariablesGet'
+newtype AccountsContainersWorkspacesVariablesGet =
+  AccountsContainersWorkspacesVariablesGet'
     { _acwvgPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesVariablesGet' with the minimum fields required to make a request.
 --
@@ -64,9 +66,7 @@ accountsContainersWorkspacesVariablesGet
     :: Text -- ^ 'acwvgPath'
     -> AccountsContainersWorkspacesVariablesGet
 accountsContainersWorkspacesVariablesGet pAcwvgPath_ =
-    AccountsContainersWorkspacesVariablesGet'
-    { _acwvgPath = pAcwvgPath_
-    }
+  AccountsContainersWorkspacesVariablesGet' {_acwvgPath = pAcwvgPath_}
 
 -- | GTM Variable\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/variables\/{variable_id}
@@ -75,7 +75,8 @@ acwvgPath
   = lens _acwvgPath (\ s a -> s{_acwvgPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesVariablesGet where
+           AccountsContainersWorkspacesVariablesGet
+         where
         type Rs AccountsContainersWorkspacesVariablesGet =
              Variable
         type Scopes AccountsContainersWorkspacesVariablesGet

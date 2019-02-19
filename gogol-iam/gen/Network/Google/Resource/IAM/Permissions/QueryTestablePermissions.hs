@@ -63,14 +63,16 @@ type PermissionsQueryTestablePermissionsResource =
 -- if it can be tested for an identity on a resource.
 --
 -- /See:/ 'permissionsQueryTestablePermissions' smart constructor.
-data PermissionsQueryTestablePermissions = PermissionsQueryTestablePermissions'
+data PermissionsQueryTestablePermissions =
+  PermissionsQueryTestablePermissions'
     { _pqtpXgafv          :: !(Maybe Xgafv)
     , _pqtpUploadProtocol :: !(Maybe Text)
     , _pqtpAccessToken    :: !(Maybe Text)
     , _pqtpUploadType     :: !(Maybe Text)
     , _pqtpPayload        :: !QueryTestablePermissionsRequest
     , _pqtpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PermissionsQueryTestablePermissions' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ permissionsQueryTestablePermissions
     :: QueryTestablePermissionsRequest -- ^ 'pqtpPayload'
     -> PermissionsQueryTestablePermissions
 permissionsQueryTestablePermissions pPqtpPayload_ =
-    PermissionsQueryTestablePermissions'
+  PermissionsQueryTestablePermissions'
     { _pqtpXgafv = Nothing
     , _pqtpUploadProtocol = Nothing
     , _pqtpAccessToken = Nothing
@@ -134,7 +136,8 @@ pqtpCallback
   = lens _pqtpCallback (\ s a -> s{_pqtpCallback = a})
 
 instance GoogleRequest
-         PermissionsQueryTestablePermissions where
+           PermissionsQueryTestablePermissions
+         where
         type Rs PermissionsQueryTestablePermissions =
              QueryTestablePermissionsResponse
         type Scopes PermissionsQueryTestablePermissions =

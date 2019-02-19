@@ -57,10 +57,12 @@ type RoutesGetResource =
 -- making a list() request.
 --
 -- /See:/ 'routesGet' smart constructor.
-data RoutesGet = RoutesGet'
+data RoutesGet =
+  RoutesGet'
     { _rrProject :: !Text
     , _rrRoute   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutesGet' with the minimum fields required to make a request.
 --
@@ -74,10 +76,7 @@ routesGet
     -> Text -- ^ 'rrRoute'
     -> RoutesGet
 routesGet pRrProject_ pRrRoute_ =
-    RoutesGet'
-    { _rrProject = pRrProject_
-    , _rrRoute = pRrRoute_
-    }
+  RoutesGet' {_rrProject = pRrProject_, _rrRoute = pRrRoute_}
 
 -- | Project ID for this request.
 rrProject :: Lens' RoutesGet Text

@@ -72,7 +72,8 @@ type ProjectsDeidentifyTemplatesListResource =
 -- more.
 --
 -- /See:/ 'projectsDeidentifyTemplatesList' smart constructor.
-data ProjectsDeidentifyTemplatesList = ProjectsDeidentifyTemplatesList'
+data ProjectsDeidentifyTemplatesList =
+  ProjectsDeidentifyTemplatesList'
     { _pdtlParent         :: !Text
     , _pdtlXgafv          :: !(Maybe Xgafv)
     , _pdtlUploadProtocol :: !(Maybe Text)
@@ -82,7 +83,8 @@ data ProjectsDeidentifyTemplatesList = ProjectsDeidentifyTemplatesList'
     , _pdtlPageToken      :: !(Maybe Text)
     , _pdtlPageSize       :: !(Maybe (Textual Int32))
     , _pdtlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDeidentifyTemplatesList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsDeidentifyTemplatesList
     :: Text -- ^ 'pdtlParent'
     -> ProjectsDeidentifyTemplatesList
 projectsDeidentifyTemplatesList pPdtlParent_ =
-    ProjectsDeidentifyTemplatesList'
+  ProjectsDeidentifyTemplatesList'
     { _pdtlParent = pPdtlParent_
     , _pdtlXgafv = Nothing
     , _pdtlUploadProtocol = Nothing
@@ -182,7 +184,8 @@ pdtlCallback
   = lens _pdtlCallback (\ s a -> s{_pdtlCallback = a})
 
 instance GoogleRequest
-         ProjectsDeidentifyTemplatesList where
+           ProjectsDeidentifyTemplatesList
+         where
         type Rs ProjectsDeidentifyTemplatesList =
              GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
         type Scopes ProjectsDeidentifyTemplatesList =

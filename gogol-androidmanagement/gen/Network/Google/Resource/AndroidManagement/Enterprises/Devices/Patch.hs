@@ -63,7 +63,8 @@ type EnterprisesDevicesPatchResource =
 -- | Updates a device.
 --
 -- /See:/ 'enterprisesDevicesPatch' smart constructor.
-data EnterprisesDevicesPatch = EnterprisesDevicesPatch'
+data EnterprisesDevicesPatch =
+  EnterprisesDevicesPatch'
     { _edpXgafv          :: !(Maybe Xgafv)
     , _edpUploadProtocol :: !(Maybe Text)
     , _edpUpdateMask     :: !(Maybe GFieldMask)
@@ -72,7 +73,8 @@ data EnterprisesDevicesPatch = EnterprisesDevicesPatch'
     , _edpPayload        :: !Device
     , _edpName           :: !Text
     , _edpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesDevicesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ enterprisesDevicesPatch
     -> Text -- ^ 'edpName'
     -> EnterprisesDevicesPatch
 enterprisesDevicesPatch pEdpPayload_ pEdpName_ =
-    EnterprisesDevicesPatch'
+  EnterprisesDevicesPatch'
     { _edpXgafv = Nothing
     , _edpUploadProtocol = Nothing
     , _edpUpdateMask = Nothing

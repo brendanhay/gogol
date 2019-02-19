@@ -80,7 +80,8 @@ type AccountsProposalsListResource =
 -- specifying the ChildSeat\'s accountId in the request path.
 --
 -- /See:/ 'accountsProposalsList' smart constructor.
-data AccountsProposalsList = AccountsProposalsList'
+data AccountsProposalsList =
+  AccountsProposalsList'
     { _aplXgafv          :: !(Maybe Xgafv)
     , _aplUploadProtocol :: !(Maybe Text)
     , _aplAccessToken    :: !(Maybe Text)
@@ -91,7 +92,8 @@ data AccountsProposalsList = AccountsProposalsList'
     , _aplPageToken      :: !(Maybe Text)
     , _aplPageSize       :: !(Maybe (Textual Int32))
     , _aplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsProposalsList' with the minimum fields required to make a request.
 --
@@ -120,7 +122,7 @@ accountsProposalsList
     :: Text -- ^ 'aplAccountId'
     -> AccountsProposalsList
 accountsProposalsList pAplAccountId_ =
-    AccountsProposalsList'
+  AccountsProposalsList'
     { _aplXgafv = Nothing
     , _aplUploadProtocol = Nothing
     , _aplAccessToken = Nothing

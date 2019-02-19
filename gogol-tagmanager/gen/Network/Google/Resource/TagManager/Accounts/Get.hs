@@ -50,9 +50,11 @@ type AccountsGetResource =
 -- | Gets a GTM Account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-newtype AccountsGet = AccountsGet'
+newtype AccountsGet =
+  AccountsGet'
     { _agPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
@@ -62,10 +64,7 @@ newtype AccountsGet = AccountsGet'
 accountsGet
     :: Text -- ^ 'agPath'
     -> AccountsGet
-accountsGet pAgPath_ =
-    AccountsGet'
-    { _agPath = pAgPath_
-    }
+accountsGet pAgPath_ = AccountsGet' {_agPath = pAgPath_}
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
 agPath :: Lens' AccountsGet Text

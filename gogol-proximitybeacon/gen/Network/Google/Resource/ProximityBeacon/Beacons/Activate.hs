@@ -73,7 +73,8 @@ type BeaconsActivateResource =
 -- the Google Developers Console project.
 --
 -- /See:/ 'beaconsActivate' smart constructor.
-data BeaconsActivate = BeaconsActivate'
+data BeaconsActivate =
+  BeaconsActivate'
     { _baXgafv          :: !(Maybe Xgafv)
     , _baUploadProtocol :: !(Maybe Text)
     , _baAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data BeaconsActivate = BeaconsActivate'
     , _baUploadType     :: !(Maybe Text)
     , _baProjectId      :: !(Maybe Text)
     , _baCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeaconsActivate' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ beaconsActivate
     :: Text -- ^ 'baBeaconName'
     -> BeaconsActivate
 beaconsActivate pBaBeaconName_ =
-    BeaconsActivate'
+  BeaconsActivate'
     { _baXgafv = Nothing
     , _baUploadProtocol = Nothing
     , _baAccessToken = Nothing

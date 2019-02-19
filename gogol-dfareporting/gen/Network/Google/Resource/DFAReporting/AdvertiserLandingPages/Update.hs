@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserLandingPagesUpdate' request conforms to.
 type AdvertiserLandingPagesUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserLandingPages" :>
@@ -55,10 +55,12 @@ type AdvertiserLandingPagesUpdateResource =
 -- | Updates an existing landing page.
 --
 -- /See:/ 'advertiserLandingPagesUpdate' smart constructor.
-data AdvertiserLandingPagesUpdate = AdvertiserLandingPagesUpdate'
+data AdvertiserLandingPagesUpdate =
+  AdvertiserLandingPagesUpdate'
     { _alpuProFileId :: !(Textual Int64)
     , _alpuPayload   :: !LandingPage
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdvertiserLandingPagesUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ advertiserLandingPagesUpdate
     -> LandingPage -- ^ 'alpuPayload'
     -> AdvertiserLandingPagesUpdate
 advertiserLandingPagesUpdate pAlpuProFileId_ pAlpuPayload_ =
-    AdvertiserLandingPagesUpdate'
-    { _alpuProFileId = _Coerce # pAlpuProFileId_
-    , _alpuPayload = pAlpuPayload_
-    }
+  AdvertiserLandingPagesUpdate'
+    {_alpuProFileId = _Coerce # pAlpuProFileId_, _alpuPayload = pAlpuPayload_}
 
 -- | User profile ID associated with this request.
 alpuProFileId :: Lens' AdvertiserLandingPagesUpdate Int64

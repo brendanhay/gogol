@@ -61,11 +61,13 @@ type PurchasesSubscriptionsGetResource =
 -- expiry time.
 --
 -- /See:/ 'purchasesSubscriptionsGet' smart constructor.
-data PurchasesSubscriptionsGet = PurchasesSubscriptionsGet'
+data PurchasesSubscriptionsGet =
+  PurchasesSubscriptionsGet'
     { _psgPackageName    :: !Text
     , _psgToken          :: !Text
     , _psgSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsGet' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ purchasesSubscriptionsGet
     -> Text -- ^ 'psgSubscriptionId'
     -> PurchasesSubscriptionsGet
 purchasesSubscriptionsGet pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
-    PurchasesSubscriptionsGet'
+  PurchasesSubscriptionsGet'
     { _psgPackageName = pPsgPackageName_
     , _psgToken = pPsgToken_
     , _psgSubscriptionId = pPsgSubscriptionId_

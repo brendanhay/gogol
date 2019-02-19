@@ -69,7 +69,8 @@ type ProjectsMetricDescriptorsListResource =
 -- require a Stackdriver account.
 --
 -- /See:/ 'projectsMetricDescriptorsList' smart constructor.
-data ProjectsMetricDescriptorsList = ProjectsMetricDescriptorsList'
+data ProjectsMetricDescriptorsList =
+  ProjectsMetricDescriptorsList'
     { _pmdlXgafv          :: !(Maybe Xgafv)
     , _pmdlUploadProtocol :: !(Maybe Text)
     , _pmdlAccessToken    :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsMetricDescriptorsList = ProjectsMetricDescriptorsList'
     , _pmdlPageToken      :: !(Maybe Text)
     , _pmdlPageSize       :: !(Maybe (Textual Int32))
     , _pmdlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsMetricDescriptorsList' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ projectsMetricDescriptorsList
     :: Text -- ^ 'pmdlName'
     -> ProjectsMetricDescriptorsList
 projectsMetricDescriptorsList pPmdlName_ =
-    ProjectsMetricDescriptorsList'
+  ProjectsMetricDescriptorsList'
     { _pmdlXgafv = Nothing
     , _pmdlUploadProtocol = Nothing
     , _pmdlAccessToken = Nothing

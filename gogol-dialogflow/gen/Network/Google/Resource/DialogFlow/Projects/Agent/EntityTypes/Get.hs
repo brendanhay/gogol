@@ -62,7 +62,8 @@ type ProjectsAgentEntityTypesGetResource =
 -- | Retrieves the specified entity type.
 --
 -- /See:/ 'projectsAgentEntityTypesGet' smart constructor.
-data ProjectsAgentEntityTypesGet = ProjectsAgentEntityTypesGet'
+data ProjectsAgentEntityTypesGet =
+  ProjectsAgentEntityTypesGet'
     { _paetgXgafv          :: !(Maybe Xgafv)
     , _paetgLanguageCode   :: !(Maybe Text)
     , _paetgUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsAgentEntityTypesGet = ProjectsAgentEntityTypesGet'
     , _paetgUploadType     :: !(Maybe Text)
     , _paetgName           :: !Text
     , _paetgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentEntityTypesGet' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ projectsAgentEntityTypesGet
     :: Text -- ^ 'paetgName'
     -> ProjectsAgentEntityTypesGet
 projectsAgentEntityTypesGet pPaetgName_ =
-    ProjectsAgentEntityTypesGet'
+  ProjectsAgentEntityTypesGet'
     { _paetgXgafv = Nothing
     , _paetgLanguageCode = Nothing
     , _paetgUploadProtocol = Nothing

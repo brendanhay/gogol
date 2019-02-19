@@ -176,4 +176,4 @@ playMoviesPartnerService
 
 -- | View the digital assets you publish on Google Play Movies and TV
 playmoviesPartnerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-playmoviesPartnerReadOnlyScope = Proxy;
+playmoviesPartnerReadOnlyScope = Proxy

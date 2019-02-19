@@ -61,11 +61,13 @@ type NodeGroupsGetResource =
 -- Use nodeGroups.listNodes instead.
 --
 -- /See:/ 'nodeGroupsGet' smart constructor.
-data NodeGroupsGet = NodeGroupsGet'
+data NodeGroupsGet =
+  NodeGroupsGet'
     { _nggNodeGroup :: !Text
     , _nggProject   :: !Text
     , _nggZone      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsGet' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ nodeGroupsGet
     -> Text -- ^ 'nggZone'
     -> NodeGroupsGet
 nodeGroupsGet pNggNodeGroup_ pNggProject_ pNggZone_ =
-    NodeGroupsGet'
+  NodeGroupsGet'
     { _nggNodeGroup = pNggNodeGroup_
     , _nggProject = pNggProject_
     , _nggZone = pNggZone_

@@ -33,9 +33,11 @@ import           Network.Google.Prelude
 -- example of a region is \"us-central1\" or \"us-central\".
 --
 -- /See:/ 'deploymentLabels' smart constructor.
-newtype DeploymentLabels = DeploymentLabels'
+newtype DeploymentLabels =
+  DeploymentLabels'
     { _dlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeploymentLabels' with the minimum fields required to make a request.
 --
@@ -46,9 +48,7 @@ deploymentLabels
     :: HashMap Text Text -- ^ 'dlAddtional'
     -> DeploymentLabels
 deploymentLabels pDlAddtional_ =
-    DeploymentLabels'
-    { _dlAddtional = _Coerce # pDlAddtional_
-    }
+  DeploymentLabels' {_dlAddtional = _Coerce # pDlAddtional_}
 
 dlAddtional :: Lens' DeploymentLabels (HashMap Text Text)
 dlAddtional
@@ -66,14 +66,16 @@ instance ToJSON DeploymentLabels where
 -- | Profile resource.
 --
 -- /See:/ 'proFile' smart constructor.
-data ProFile = ProFile'
+data ProFile =
+  ProFile'
     { _pfProFileBytes :: !(Maybe Bytes)
     , _pfName         :: !(Maybe Text)
     , _pfLabels       :: !(Maybe ProFileLabels)
     , _pfProFileType  :: !(Maybe ProFileProFileType)
     , _pfDuration     :: !(Maybe GDuration)
     , _pfDeployment   :: !(Maybe Deployment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProFile' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ data ProFile = ProFile'
 proFile
     :: ProFile
 proFile =
-    ProFile'
+  ProFile'
     { _pfProFileBytes = Nothing
     , _pfName = Nothing
     , _pfLabels = Nothing
@@ -172,10 +174,12 @@ instance ToJSON ProFile where
 -- collected.
 --
 -- /See:/ 'createProFileRequest' smart constructor.
-data CreateProFileRequest = CreateProFileRequest'
+data CreateProFileRequest =
+  CreateProFileRequest'
     { _cpfrProFileType :: !(Maybe [Text])
     , _cpfrDeployment  :: !(Maybe Deployment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateProFileRequest' with the minimum fields required to make a request.
 --
@@ -187,10 +191,7 @@ data CreateProFileRequest = CreateProFileRequest'
 createProFileRequest
     :: CreateProFileRequest
 createProFileRequest =
-    CreateProFileRequest'
-    { _cpfrProFileType = Nothing
-    , _cpfrDeployment = Nothing
-    }
+  CreateProFileRequest' {_cpfrProFileType = Nothing, _cpfrDeployment = Nothing}
 
 -- | One or more profile types that the agent is capable of providing.
 cpfrProFileType :: Lens' CreateProFileRequest [Text]
@@ -226,9 +227,11 @@ instance ToJSON CreateProFileRequest where
 -- documentation on deployment labels for validation rules and limits.
 --
 -- /See:/ 'proFileLabels' smart constructor.
-newtype ProFileLabels = ProFileLabels'
+newtype ProFileLabels =
+  ProFileLabels'
     { _pflAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProFileLabels' with the minimum fields required to make a request.
 --
@@ -239,9 +242,7 @@ proFileLabels
     :: HashMap Text Text -- ^ 'pflAddtional'
     -> ProFileLabels
 proFileLabels pPflAddtional_ =
-    ProFileLabels'
-    { _pflAddtional = _Coerce # pPflAddtional_
-    }
+  ProFileLabels' {_pflAddtional = _Coerce # pPflAddtional_}
 
 pflAddtional :: Lens' ProFileLabels (HashMap Text Text)
 pflAddtional
@@ -259,11 +260,13 @@ instance ToJSON ProFileLabels where
 -- | Deployment contains the deployment identification information.
 --
 -- /See:/ 'deployment' smart constructor.
-data Deployment = Deployment'
+data Deployment =
+  Deployment'
     { _dLabels    :: !(Maybe DeploymentLabels)
     , _dProjectId :: !(Maybe Text)
     , _dTarget    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
@@ -277,11 +280,7 @@ data Deployment = Deployment'
 deployment
     :: Deployment
 deployment =
-    Deployment'
-    { _dLabels = Nothing
-    , _dProjectId = Nothing
-    , _dTarget = Nothing
-    }
+  Deployment' {_dLabels = Nothing, _dProjectId = Nothing, _dTarget = Nothing}
 
 -- | Labels identify the deployment within the user universe and same target.
 -- Validation regex for label names:

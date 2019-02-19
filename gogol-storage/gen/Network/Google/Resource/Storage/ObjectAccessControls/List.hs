@@ -60,12 +60,14 @@ type ObjectAccessControlsListResource =
 -- | Retrieves ACL entries on the specified object.
 --
 -- /See:/ 'objectAccessControlsList' smart constructor.
-data ObjectAccessControlsList = ObjectAccessControlsList'
+data ObjectAccessControlsList =
+  ObjectAccessControlsList'
     { _oaclBucket      :: !Text
     , _oaclUserProject :: !(Maybe Text)
     , _oaclObject      :: !Text
     , _oaclGeneration  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ObjectAccessControlsList' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ objectAccessControlsList
     -> Text -- ^ 'oaclObject'
     -> ObjectAccessControlsList
 objectAccessControlsList pOaclBucket_ pOaclObject_ =
-    ObjectAccessControlsList'
+  ObjectAccessControlsList'
     { _oaclBucket = pOaclBucket_
     , _oaclUserProject = Nothing
     , _oaclObject = pOaclObject_

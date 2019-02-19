@@ -55,9 +55,11 @@ type PrivilegesListResource =
 -- | Retrieves a paginated list of all privileges for a customer.
 --
 -- /See:/ 'privilegesList' smart constructor.
-newtype PrivilegesList = PrivilegesList'
+newtype PrivilegesList =
+  PrivilegesList'
     { _plCustomer :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PrivilegesList' with the minimum fields required to make a request.
 --
@@ -67,10 +69,7 @@ newtype PrivilegesList = PrivilegesList'
 privilegesList
     :: Text -- ^ 'plCustomer'
     -> PrivilegesList
-privilegesList pPlCustomer_ =
-    PrivilegesList'
-    { _plCustomer = pPlCustomer_
-    }
+privilegesList pPlCustomer_ = PrivilegesList' {_plCustomer = pPlCustomer_}
 
 -- | Immutable ID of the G Suite account.
 plCustomer :: Lens' PrivilegesList Text

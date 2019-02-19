@@ -58,11 +58,13 @@ type StorelayoutclustersGetResource =
 -- | Retrieves details of a cluster.
 --
 -- /See:/ 'storelayoutclustersGet' smart constructor.
-data StorelayoutclustersGet = StorelayoutclustersGet'
+data StorelayoutclustersGet =
+  StorelayoutclustersGet'
     { _stoEnterpriseId :: !Text
     , _stoPageId       :: !Text
     , _stoClusterId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StorelayoutclustersGet' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ storelayoutclustersGet
     -> Text -- ^ 'stoClusterId'
     -> StorelayoutclustersGet
 storelayoutclustersGet pStoEnterpriseId_ pStoPageId_ pStoClusterId_ =
-    StorelayoutclustersGet'
+  StorelayoutclustersGet'
     { _stoEnterpriseId = pStoEnterpriseId_
     , _stoPageId = pStoPageId_
     , _stoClusterId = pStoClusterId_

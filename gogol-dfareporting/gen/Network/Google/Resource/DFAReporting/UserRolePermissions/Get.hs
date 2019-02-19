@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolePermissionsGet' request conforms to.
 type UserRolePermissionsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRolePermissions" :>
@@ -55,10 +55,12 @@ type UserRolePermissionsGetResource =
 -- | Gets one user role permission by ID.
 --
 -- /See:/ 'userRolePermissionsGet' smart constructor.
-data UserRolePermissionsGet = UserRolePermissionsGet'
+data UserRolePermissionsGet =
+  UserRolePermissionsGet'
     { _uProFileId :: !(Textual Int64)
     , _uId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserRolePermissionsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ userRolePermissionsGet
     -> Int64 -- ^ 'uId'
     -> UserRolePermissionsGet
 userRolePermissionsGet pUProFileId_ pUId_ =
-    UserRolePermissionsGet'
-    { _uProFileId = _Coerce # pUProFileId_
-    , _uId = _Coerce # pUId_
-    }
+  UserRolePermissionsGet'
+    {_uProFileId = _Coerce # pUProFileId_, _uId = _Coerce # pUId_}
 
 -- | User profile ID associated with this request.
 uProFileId :: Lens' UserRolePermissionsGet Int64

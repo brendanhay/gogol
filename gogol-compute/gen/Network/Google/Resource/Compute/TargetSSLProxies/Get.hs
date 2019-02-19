@@ -58,10 +58,12 @@ type TargetSSLProxiesGetResource =
 -- target SSL proxies by making a list() request.
 --
 -- /See:/ 'targetSSLProxiesGet' smart constructor.
-data TargetSSLProxiesGet = TargetSSLProxiesGet'
+data TargetSSLProxiesGet =
+  TargetSSLProxiesGet'
     { _tspgProject        :: !Text
     , _tspgTargetSSLProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxiesGet' with the minimum fields required to make a request.
 --
@@ -75,10 +77,8 @@ targetSSLProxiesGet
     -> Text -- ^ 'tspgTargetSSLProxy'
     -> TargetSSLProxiesGet
 targetSSLProxiesGet pTspgProject_ pTspgTargetSSLProxy_ =
-    TargetSSLProxiesGet'
-    { _tspgProject = pTspgProject_
-    , _tspgTargetSSLProxy = pTspgTargetSSLProxy_
-    }
+  TargetSSLProxiesGet'
+    {_tspgProject = pTspgProject_, _tspgTargetSSLProxy = pTspgTargetSSLProxy_}
 
 -- | Project ID for this request.
 tspgProject :: Lens' TargetSSLProxiesGet Text

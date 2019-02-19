@@ -82,7 +82,8 @@ type EnterprisesDevicesOperationsListResource =
 -- the parent resource, without the operations collection id.
 --
 -- /See:/ 'enterprisesDevicesOperationsList' smart constructor.
-data EnterprisesDevicesOperationsList = EnterprisesDevicesOperationsList'
+data EnterprisesDevicesOperationsList =
+  EnterprisesDevicesOperationsList'
     { _edolXgafv          :: !(Maybe Xgafv)
     , _edolUploadProtocol :: !(Maybe Text)
     , _edolAccessToken    :: !(Maybe Text)
@@ -92,7 +93,8 @@ data EnterprisesDevicesOperationsList = EnterprisesDevicesOperationsList'
     , _edolPageToken      :: !(Maybe Text)
     , _edolPageSize       :: !(Maybe (Textual Int32))
     , _edolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesDevicesOperationsList' with the minimum fields required to make a request.
 --
@@ -119,7 +121,7 @@ enterprisesDevicesOperationsList
     :: Text -- ^ 'edolName'
     -> EnterprisesDevicesOperationsList
 enterprisesDevicesOperationsList pEdolName_ =
-    EnterprisesDevicesOperationsList'
+  EnterprisesDevicesOperationsList'
     { _edolXgafv = Nothing
     , _edolUploadProtocol = Nothing
     , _edolAccessToken = Nothing
@@ -181,7 +183,8 @@ edolCallback
   = lens _edolCallback (\ s a -> s{_edolCallback = a})
 
 instance GoogleRequest
-         EnterprisesDevicesOperationsList where
+           EnterprisesDevicesOperationsList
+         where
         type Rs EnterprisesDevicesOperationsList =
              ListOperationsResponse
         type Scopes EnterprisesDevicesOperationsList =

@@ -62,12 +62,14 @@ type ManagementProFileFilterLinksGetResource =
 -- | Returns a single profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksGet' smart constructor.
-data ManagementProFileFilterLinksGet = ManagementProFileFilterLinksGet'
+data ManagementProFileFilterLinksGet =
+  ManagementProFileFilterLinksGet'
     { _mpfflgWebPropertyId :: !Text
     , _mpfflgProFileId     :: !Text
     , _mpfflgAccountId     :: !Text
     , _mpfflgLinkId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ managementProFileFilterLinksGet
     -> Text -- ^ 'mpfflgLinkId'
     -> ManagementProFileFilterLinksGet
 managementProFileFilterLinksGet pMpfflgWebPropertyId_ pMpfflgProFileId_ pMpfflgAccountId_ pMpfflgLinkId_ =
-    ManagementProFileFilterLinksGet'
+  ManagementProFileFilterLinksGet'
     { _mpfflgWebPropertyId = pMpfflgWebPropertyId_
     , _mpfflgProFileId = pMpfflgProFileId_
     , _mpfflgAccountId = pMpfflgAccountId_
@@ -118,7 +120,8 @@ mpfflgLinkId
   = lens _mpfflgLinkId (\ s a -> s{_mpfflgLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileFilterLinksGet where
+           ManagementProFileFilterLinksGet
+         where
         type Rs ManagementProFileFilterLinksGet =
              ProFileFilterLink
         type Scopes ManagementProFileFilterLinksGet =

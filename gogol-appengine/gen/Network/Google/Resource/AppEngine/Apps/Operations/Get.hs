@@ -67,7 +67,8 @@ type AppsOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'appsOperationsGet' smart constructor.
-data AppsOperationsGet = AppsOperationsGet'
+data AppsOperationsGet =
+  AppsOperationsGet'
     { _aogXgafv          :: !(Maybe Xgafv)
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data AppsOperationsGet = AppsOperationsGet'
     , _aogAppsId         :: !Text
     , _aogOperationsId   :: !Text
     , _aogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsOperationsGet' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ appsOperationsGet
     -> Text -- ^ 'aogOperationsId'
     -> AppsOperationsGet
 appsOperationsGet pAogAppsId_ pAogOperationsId_ =
-    AppsOperationsGet'
+  AppsOperationsGet'
     { _aogXgafv = Nothing
     , _aogUploadProtocol = Nothing
     , _aogAccessToken = Nothing

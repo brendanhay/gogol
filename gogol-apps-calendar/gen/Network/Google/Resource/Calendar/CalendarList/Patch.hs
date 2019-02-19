@@ -60,11 +60,13 @@ type CalendarListPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'calendarListPatch' smart constructor.
-data CalendarListPatch = CalendarListPatch'
+data CalendarListPatch =
+  CalendarListPatch'
     { _clpCalendarId     :: !Text
     , _clpPayload        :: !CalendarListEntry
     , _clpColorRgbFormat :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CalendarListPatch' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ calendarListPatch
     -> CalendarListEntry -- ^ 'clpPayload'
     -> CalendarListPatch
 calendarListPatch pClpCalendarId_ pClpPayload_ =
-    CalendarListPatch'
+  CalendarListPatch'
     { _clpCalendarId = pClpCalendarId_
     , _clpPayload = pClpPayload_
     , _clpColorRgbFormat = Nothing

@@ -62,13 +62,15 @@ type AddressesAggregatedListResource =
 -- | Retrieves an aggregated list of addresses.
 --
 -- /See:/ 'addressesAggregatedList' smart constructor.
-data AddressesAggregatedList = AddressesAggregatedList'
+data AddressesAggregatedList =
+  AddressesAggregatedList'
     { _aalOrderBy    :: !(Maybe Text)
     , _aalProject    :: !Text
     , _aalFilter     :: !(Maybe Text)
     , _aalPageToken  :: !(Maybe Text)
     , _aalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressesAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ addressesAggregatedList
     :: Text -- ^ 'aalProject'
     -> AddressesAggregatedList
 addressesAggregatedList pAalProject_ =
-    AddressesAggregatedList'
+  AddressesAggregatedList'
     { _aalOrderBy = Nothing
     , _aalProject = pAalProject_
     , _aalFilter = Nothing

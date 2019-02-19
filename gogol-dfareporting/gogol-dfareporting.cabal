@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v3.2@
+    This library is compatible with version @v3.3@
     of the API.
 
 source-repository head
@@ -117,8 +117,6 @@ library
         , Network.Google.Resource.DFAReporting.Creatives.Patch
         , Network.Google.Resource.DFAReporting.Creatives.Update
         , Network.Google.Resource.DFAReporting.DimensionValues.Query
-        , Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
-        , Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
         , Network.Google.Resource.DFAReporting.DirectorySites.Get
         , Network.Google.Resource.DFAReporting.DirectorySites.Insert
         , Network.Google.Resource.DFAReporting.DirectorySites.List

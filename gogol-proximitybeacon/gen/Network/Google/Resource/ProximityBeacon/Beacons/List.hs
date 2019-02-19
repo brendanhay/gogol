@@ -77,7 +77,8 @@ type BeaconsListResource =
 -- permissions in the Google Developers Console project.
 --
 -- /See:/ 'beaconsList' smart constructor.
-data BeaconsList = BeaconsList'
+data BeaconsList =
+  BeaconsList'
     { _blXgafv          :: !(Maybe Xgafv)
     , _blUploadProtocol :: !(Maybe Text)
     , _blAccessToken    :: !(Maybe Text)
@@ -87,7 +88,8 @@ data BeaconsList = BeaconsList'
     , _blProjectId      :: !(Maybe Text)
     , _blPageSize       :: !(Maybe (Textual Int32))
     , _blCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeaconsList' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ data BeaconsList = BeaconsList'
 beaconsList
     :: BeaconsList
 beaconsList =
-    BeaconsList'
+  BeaconsList'
     { _blXgafv = Nothing
     , _blUploadProtocol = Nothing
     , _blAccessToken = Nothing

@@ -70,7 +70,8 @@ type ProjectsLocationsJobsGetMetricsResource =
 -- | Request the job status.
 --
 -- /See:/ 'projectsLocationsJobsGetMetrics' smart constructor.
-data ProjectsLocationsJobsGetMetrics = ProjectsLocationsJobsGetMetrics'
+data ProjectsLocationsJobsGetMetrics =
+  ProjectsLocationsJobsGetMetrics'
     { _pljgmXgafv          :: !(Maybe Xgafv)
     , _pljgmJobId          :: !Text
     , _pljgmUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsLocationsJobsGetMetrics = ProjectsLocationsJobsGetMetrics'
     , _pljgmUploadType     :: !(Maybe Text)
     , _pljgmProjectId      :: !Text
     , _pljgmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsGetMetrics' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsLocationsJobsGetMetrics
     -> Text -- ^ 'pljgmProjectId'
     -> ProjectsLocationsJobsGetMetrics
 projectsLocationsJobsGetMetrics pPljgmJobId_ pPljgmLocation_ pPljgmProjectId_ =
-    ProjectsLocationsJobsGetMetrics'
+  ProjectsLocationsJobsGetMetrics'
     { _pljgmXgafv = Nothing
     , _pljgmJobId = pPljgmJobId_
     , _pljgmUploadProtocol = Nothing
@@ -176,7 +178,8 @@ pljgmCallback
       (\ s a -> s{_pljgmCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsJobsGetMetrics where
+           ProjectsLocationsJobsGetMetrics
+         where
         type Rs ProjectsLocationsJobsGetMetrics = JobMetrics
         type Scopes ProjectsLocationsJobsGetMetrics =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -57,10 +57,12 @@ type ImagesGetResource =
 -- list() request.
 --
 -- /See:/ 'imagesGet' smart constructor.
-data ImagesGet = ImagesGet'
+data ImagesGet =
+  ImagesGet'
     { _imaImage   :: !Text
     , _imaProject :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImagesGet' with the minimum fields required to make a request.
 --
@@ -74,10 +76,7 @@ imagesGet
     -> Text -- ^ 'imaProject'
     -> ImagesGet
 imagesGet pImaImage_ pImaProject_ =
-    ImagesGet'
-    { _imaImage = pImaImage_
-    , _imaProject = pImaProject_
-    }
+  ImagesGet' {_imaImage = pImaImage_, _imaProject = pImaProject_}
 
 -- | Name of the image resource to return.
 imaImage :: Lens' ImagesGet Text

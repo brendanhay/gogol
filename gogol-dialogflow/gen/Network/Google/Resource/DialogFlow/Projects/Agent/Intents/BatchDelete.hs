@@ -64,7 +64,8 @@ type ProjectsAgentIntentsBatchDeleteResource =
 -- | Deletes intents in the specified agent. Operation
 --
 -- /See:/ 'projectsAgentIntentsBatchDelete' smart constructor.
-data ProjectsAgentIntentsBatchDelete = ProjectsAgentIntentsBatchDelete'
+data ProjectsAgentIntentsBatchDelete =
+  ProjectsAgentIntentsBatchDelete'
     { _paibdParent         :: !Text
     , _paibdXgafv          :: !(Maybe Xgafv)
     , _paibdUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsAgentIntentsBatchDelete = ProjectsAgentIntentsBatchDelete'
     , _paibdUploadType     :: !(Maybe Text)
     , _paibdPayload        :: !GoogleCloudDialogflowV2BatchDeleteIntentsRequest
     , _paibdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentIntentsBatchDelete' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsAgentIntentsBatchDelete
     -> GoogleCloudDialogflowV2BatchDeleteIntentsRequest -- ^ 'paibdPayload'
     -> ProjectsAgentIntentsBatchDelete
 projectsAgentIntentsBatchDelete pPaibdParent_ pPaibdPayload_ =
-    ProjectsAgentIntentsBatchDelete'
+  ProjectsAgentIntentsBatchDelete'
     { _paibdParent = pPaibdParent_
     , _paibdXgafv = Nothing
     , _paibdUploadProtocol = Nothing
@@ -147,7 +149,8 @@ paibdCallback
       (\ s a -> s{_paibdCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentIntentsBatchDelete where
+           ProjectsAgentIntentsBatchDelete
+         where
         type Rs ProjectsAgentIntentsBatchDelete =
              GoogleLongrunningOperation
         type Scopes ProjectsAgentIntentsBatchDelete =

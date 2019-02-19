@@ -63,14 +63,16 @@ type OrganizationsLogsDeleteResource =
 -- might not be deleted.
 --
 -- /See:/ 'organizationsLogsDelete' smart constructor.
-data OrganizationsLogsDelete = OrganizationsLogsDelete'
+data OrganizationsLogsDelete =
+  OrganizationsLogsDelete'
     { _oldXgafv          :: !(Maybe Xgafv)
     , _oldUploadProtocol :: !(Maybe Text)
     , _oldAccessToken    :: !(Maybe Text)
     , _oldUploadType     :: !(Maybe Text)
     , _oldLogName        :: !Text
     , _oldCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsLogsDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ organizationsLogsDelete
     :: Text -- ^ 'oldLogName'
     -> OrganizationsLogsDelete
 organizationsLogsDelete pOldLogName_ =
-    OrganizationsLogsDelete'
+  OrganizationsLogsDelete'
     { _oldXgafv = Nothing
     , _oldUploadProtocol = Nothing
     , _oldAccessToken = Nothing

@@ -67,7 +67,8 @@ type ProjectsInstancesListResource =
 -- | Lists all instances in the given project.
 --
 -- /See:/ 'projectsInstancesList' smart constructor.
-data ProjectsInstancesList = ProjectsInstancesList'
+data ProjectsInstancesList =
+  ProjectsInstancesList'
     { _pilParent         :: !Text
     , _pilXgafv          :: !(Maybe Xgafv)
     , _pilUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsInstancesList = ProjectsInstancesList'
     , _pilPageToken      :: !(Maybe Text)
     , _pilPageSize       :: !(Maybe (Textual Int32))
     , _pilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsInstancesList
     :: Text -- ^ 'pilParent'
     -> ProjectsInstancesList
 projectsInstancesList pPilParent_ =
-    ProjectsInstancesList'
+  ProjectsInstancesList'
     { _pilParent = pPilParent_
     , _pilXgafv = Nothing
     , _pilUploadProtocol = Nothing

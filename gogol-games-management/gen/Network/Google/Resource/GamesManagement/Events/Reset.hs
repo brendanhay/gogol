@@ -58,9 +58,11 @@ type EventsResetResource =
 -- player that use the event will also be reset.
 --
 -- /See:/ 'eventsReset' smart constructor.
-newtype EventsReset = EventsReset'
+newtype EventsReset =
+  EventsReset'
     { _erEventId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventsReset' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ newtype EventsReset = EventsReset'
 eventsReset
     :: Text -- ^ 'erEventId'
     -> EventsReset
-eventsReset pErEventId_ =
-    EventsReset'
-    { _erEventId = pErEventId_
-    }
+eventsReset pErEventId_ = EventsReset' {_erEventId = pErEventId_}
 
 -- | The ID of the event.
 erEventId :: Lens' EventsReset Text

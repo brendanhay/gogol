@@ -27,10 +27,12 @@ import           Network.Google.Prelude
 -- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng'
+data LatLng =
+  LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -41,11 +43,7 @@ data LatLng = LatLng'
 -- * 'llLongitude'
 latLng
     :: LatLng
-latLng =
-    LatLng'
-    { _llLatitude = Nothing
-    , _llLongitude = Nothing
-    }
+latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -76,11 +74,13 @@ instance ToJSON LatLng where
 -- | Application related details of a job posting.
 --
 -- /See:/ 'applicationInfo' smart constructor.
-data ApplicationInfo = ApplicationInfo'
+data ApplicationInfo =
+  ApplicationInfo'
     { _aiURIs        :: !(Maybe [Text])
     , _aiEmails      :: !(Maybe [Text])
     , _aiInstruction :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApplicationInfo' with the minimum fields required to make a request.
 --
@@ -94,11 +94,8 @@ data ApplicationInfo = ApplicationInfo'
 applicationInfo
     :: ApplicationInfo
 applicationInfo =
-    ApplicationInfo'
-    { _aiURIs = Nothing
-    , _aiEmails = Nothing
-    , _aiInstruction = Nothing
-    }
+  ApplicationInfo'
+    {_aiURIs = Nothing, _aiEmails = Nothing, _aiInstruction = Nothing}
 
 -- | Optional but at least one of uris, emails or instruction must be
 -- specified. Use this URI field to direct an applicant to a website, for
@@ -150,13 +147,15 @@ instance ToJSON ApplicationInfo where
 -- | Output only. Job entry with metadata inside SearchJobsResponse.
 --
 -- /See:/ 'matchingJob' smart constructor.
-data MatchingJob = MatchingJob'
+data MatchingJob =
+  MatchingJob'
     { _mjJobTitleSnippet   :: !(Maybe Text)
     , _mjJobSummary        :: !(Maybe Text)
     , _mjCommuteInfo       :: !(Maybe CommuteInfo)
     , _mjSearchTextSnippet :: !(Maybe Text)
     , _mjJob               :: !(Maybe Job)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MatchingJob' with the minimum fields required to make a request.
 --
@@ -174,7 +173,7 @@ data MatchingJob = MatchingJob'
 matchingJob
     :: MatchingJob
 matchingJob =
-    MatchingJob'
+  MatchingJob'
     { _mjJobTitleSnippet = Nothing
     , _mjJobSummary = Nothing
     , _mjCommuteInfo = Nothing
@@ -240,12 +239,14 @@ instance ToJSON MatchingJob where
 -- performance of the service.
 --
 -- /See:/ 'requestMetadata' smart constructor.
-data RequestMetadata = RequestMetadata'
+data RequestMetadata =
+  RequestMetadata'
     { _rmDomain     :: !(Maybe Text)
     , _rmUserId     :: !(Maybe Text)
     , _rmSessionId  :: !(Maybe Text)
     , _rmDeviceInfo :: !(Maybe DeviceInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RequestMetadata' with the minimum fields required to make a request.
 --
@@ -261,7 +262,7 @@ data RequestMetadata = RequestMetadata'
 requestMetadata
     :: RequestMetadata
 requestMetadata =
-    RequestMetadata'
+  RequestMetadata'
     { _rmDomain = Nothing
     , _rmUserId = Nothing
     , _rmSessionId = Nothing
@@ -329,10 +330,12 @@ instance ToJSON RequestMetadata where
 -- | Input only. Request for updating a specified company.
 --
 -- /See:/ 'updateCompanyRequest' smart constructor.
-data UpdateCompanyRequest = UpdateCompanyRequest'
+data UpdateCompanyRequest =
+  UpdateCompanyRequest'
     { _ucrUpdateMask :: !(Maybe GFieldMask)
     , _ucrCompany    :: !(Maybe Company)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateCompanyRequest' with the minimum fields required to make a request.
 --
@@ -344,10 +347,7 @@ data UpdateCompanyRequest = UpdateCompanyRequest'
 updateCompanyRequest
     :: UpdateCompanyRequest
 updateCompanyRequest =
-    UpdateCompanyRequest'
-    { _ucrUpdateMask = Nothing
-    , _ucrCompany = Nothing
-    }
+  UpdateCompanyRequest' {_ucrUpdateMask = Nothing, _ucrCompany = Nothing}
 
 -- | Optional but strongly recommended for the best service experience. If
 -- update_mask is provided, only the specified fields in company are
@@ -382,10 +382,12 @@ instance ToJSON UpdateCompanyRequest where
 -- | Input only. Update job request.
 --
 -- /See:/ 'updateJobRequest' smart constructor.
-data UpdateJobRequest = UpdateJobRequest'
+data UpdateJobRequest =
+  UpdateJobRequest'
     { _ujrUpdateMask :: !(Maybe GFieldMask)
     , _ujrJob        :: !(Maybe Job)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateJobRequest' with the minimum fields required to make a request.
 --
@@ -397,10 +399,7 @@ data UpdateJobRequest = UpdateJobRequest'
 updateJobRequest
     :: UpdateJobRequest
 updateJobRequest =
-    UpdateJobRequest'
-    { _ujrUpdateMask = Nothing
-    , _ujrJob = Nothing
-    }
+  UpdateJobRequest' {_ujrUpdateMask = Nothing, _ujrJob = Nothing}
 
 -- | Optional but strongly recommended to be provided for the best service
 -- experience. If update_mask is provided, only the specified fields in job
@@ -433,10 +432,12 @@ instance ToJSON UpdateJobRequest where
 -- | Represents count of jobs within one bucket.
 --
 -- /See:/ 'bucketizedCount' smart constructor.
-data BucketizedCount = BucketizedCount'
+data BucketizedCount =
+  BucketizedCount'
     { _bcCount :: !(Maybe (Textual Int32))
     , _bcRange :: !(Maybe BucketRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketizedCount' with the minimum fields required to make a request.
 --
@@ -447,11 +448,7 @@ data BucketizedCount = BucketizedCount'
 -- * 'bcRange'
 bucketizedCount
     :: BucketizedCount
-bucketizedCount =
-    BucketizedCount'
-    { _bcCount = Nothing
-    , _bcRange = Nothing
-    }
+bucketizedCount = BucketizedCount' {_bcCount = Nothing, _bcRange = Nothing}
 
 -- | Number of jobs whose numeric field value fall into \`range\`.
 bcCount :: Lens' BucketizedCount (Maybe Int32)
@@ -481,11 +478,13 @@ instance ToJSON BucketizedCount where
 -- | Job compensation details.
 --
 -- /See:/ 'compensationInfo' smart constructor.
-data CompensationInfo = CompensationInfo'
+data CompensationInfo =
+  CompensationInfo'
     { _ciAnnualizedTotalCompensationRange :: !(Maybe CompensationRange)
     , _ciEntries                          :: !(Maybe [CompensationEntry])
     , _ciAnnualizedBaseCompensationRange  :: !(Maybe CompensationRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompensationInfo' with the minimum fields required to make a request.
 --
@@ -499,7 +498,7 @@ data CompensationInfo = CompensationInfo'
 compensationInfo
     :: CompensationInfo
 compensationInfo =
-    CompensationInfo'
+  CompensationInfo'
     { _ciAnnualizedTotalCompensationRange = Nothing
     , _ciEntries = Nothing
     , _ciAnnualizedBaseCompensationRange = Nothing
@@ -554,9 +553,11 @@ instance ToJSON CompensationInfo where
 -- | Input only. The Request of the CreateCompany method.
 --
 -- /See:/ 'createCompanyRequest' smart constructor.
-newtype CreateCompanyRequest = CreateCompanyRequest'
+newtype CreateCompanyRequest =
+  CreateCompanyRequest'
     { _ccrCompany :: Maybe Company
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCompanyRequest' with the minimum fields required to make a request.
 --
@@ -565,10 +566,7 @@ newtype CreateCompanyRequest = CreateCompanyRequest'
 -- * 'ccrCompany'
 createCompanyRequest
     :: CreateCompanyRequest
-createCompanyRequest =
-    CreateCompanyRequest'
-    { _ccrCompany = Nothing
-    }
+createCompanyRequest = CreateCompanyRequest' {_ccrCompany = Nothing}
 
 -- | Required. The company to be created.
 ccrCompany :: Lens' CreateCompanyRequest (Maybe Company)
@@ -587,9 +585,11 @@ instance ToJSON CreateCompanyRequest where
 -- | Input Only. The histogram request.
 --
 -- /See:/ 'histogramQuery' smart constructor.
-newtype HistogramQuery = HistogramQuery'
+newtype HistogramQuery =
+  HistogramQuery'
     { _hqHistogramQuery :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramQuery' with the minimum fields required to make a request.
 --
@@ -598,10 +598,7 @@ newtype HistogramQuery = HistogramQuery'
 -- * 'hqHistogramQuery'
 histogramQuery
     :: HistogramQuery
-histogramQuery =
-    HistogramQuery'
-    { _hqHistogramQuery = Nothing
-    }
+histogramQuery = HistogramQuery' {_hqHistogramQuery = Nothing}
 
 -- | An expression specifies a histogram request against matching resources
 -- (for example, jobs) for searches. Expression syntax is a aggregation
@@ -683,9 +680,11 @@ instance ToJSON HistogramQuery where
 -- | Input only. Create job request.
 --
 -- /See:/ 'createJobRequest' smart constructor.
-newtype CreateJobRequest = CreateJobRequest'
+newtype CreateJobRequest =
+  CreateJobRequest'
     { _cjrJob :: Maybe Job
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateJobRequest' with the minimum fields required to make a request.
 --
@@ -694,10 +693,7 @@ newtype CreateJobRequest = CreateJobRequest'
 -- * 'cjrJob'
 createJobRequest
     :: CreateJobRequest
-createJobRequest =
-    CreateJobRequest'
-    { _cjrJob = Nothing
-    }
+createJobRequest = CreateJobRequest' {_cjrJob = Nothing}
 
 -- | Required. The Job to be created.
 cjrJob :: Lens' CreateJobRequest (Maybe Job)
@@ -715,11 +711,13 @@ instance ToJSON CreateJobRequest where
 -- | Output only. Resource that represents completion results.
 --
 -- /See:/ 'completionResult' smart constructor.
-data CompletionResult = CompletionResult'
+data CompletionResult =
+  CompletionResult'
     { _crSuggestion :: !(Maybe Text)
     , _crImageURI   :: !(Maybe Text)
     , _crType       :: !(Maybe CompletionResultType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompletionResult' with the minimum fields required to make a request.
 --
@@ -733,11 +731,8 @@ data CompletionResult = CompletionResult'
 completionResult
     :: CompletionResult
 completionResult =
-    CompletionResult'
-    { _crSuggestion = Nothing
-    , _crImageURI = Nothing
-    , _crType = Nothing
-    }
+  CompletionResult'
+    {_crSuggestion = Nothing, _crImageURI = Nothing, _crType = Nothing}
 
 -- | The suggestion for the query.
 crSuggestion :: Lens' CompletionResult (Maybe Text)
@@ -773,12 +768,14 @@ instance ToJSON CompletionResult where
 -- information.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lLatLng        :: !(Maybe LatLng)
     , _lLocationType  :: !(Maybe LocationLocationType)
     , _lPostalAddress :: !(Maybe PostalAddress)
     , _lRadiusInMiles :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -794,7 +791,7 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lLatLng = Nothing
     , _lLocationType = Nothing
     , _lPostalAddress = Nothing
@@ -860,8 +857,8 @@ instance ToJSON Location where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -883,14 +880,16 @@ instance ToJSON Empty where
 -- by the client.
 --
 -- /See:/ 'clientEvent' smart constructor.
-data ClientEvent = ClientEvent'
+data ClientEvent =
+  ClientEvent'
     { _ceRequestId     :: !(Maybe Text)
     , _ceExtraInfo     :: !(Maybe ClientEventExtraInfo)
     , _ceJobEvent      :: !(Maybe JobEvent)
     , _ceParentEventId :: !(Maybe Text)
     , _ceCreateTime    :: !(Maybe DateTime')
     , _ceEventId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClientEvent' with the minimum fields required to make a request.
 --
@@ -910,7 +909,7 @@ data ClientEvent = ClientEvent'
 clientEvent
     :: ClientEvent
 clientEvent =
-    ClientEvent'
+  ClientEvent'
     { _ceRequestId = Nothing
     , _ceExtraInfo = Nothing
     , _ceJobEvent = Nothing
@@ -987,10 +986,12 @@ instance ToJSON ClientEvent where
 -- | Input only. Compensation based histogram request.
 --
 -- /See:/ 'compensationHistogramRequest' smart constructor.
-data CompensationHistogramRequest = CompensationHistogramRequest'
+data CompensationHistogramRequest =
+  CompensationHistogramRequest'
     { _chrBucketingOption :: !(Maybe NumericBucketingOption)
     , _chrType            :: !(Maybe CompensationHistogramRequestType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompensationHistogramRequest' with the minimum fields required to make a request.
 --
@@ -1002,10 +1003,8 @@ data CompensationHistogramRequest = CompensationHistogramRequest'
 compensationHistogramRequest
     :: CompensationHistogramRequest
 compensationHistogramRequest =
-    CompensationHistogramRequest'
-    { _chrBucketingOption = Nothing
-    , _chrType = Nothing
-    }
+  CompensationHistogramRequest'
+    {_chrBucketingOption = Nothing, _chrType = Nothing}
 
 -- | Required. Numeric histogram options, like buckets, whether include min
 -- or max value.
@@ -1037,11 +1036,13 @@ instance ToJSON CompensationHistogramRequest where
 -- | Represents an amount of money with its currency type.
 --
 -- /See:/ 'money' smart constructor.
-data Money = Money'
+data Money =
+  Money'
     { _mCurrencyCode :: !(Maybe Text)
     , _mNanos        :: !(Maybe (Textual Int32))
     , _mUnits        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
@@ -1054,12 +1055,7 @@ data Money = Money'
 -- * 'mUnits'
 money
     :: Money
-money =
-    Money'
-    { _mCurrencyCode = Nothing
-    , _mNanos = Nothing
-    , _mUnits = Nothing
-    }
+money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
 
 -- | The 3-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -1103,11 +1099,13 @@ instance ToJSON Money where
 -- | Output only. The List companies response object.
 --
 -- /See:/ 'listCompaniesResponse' smart constructor.
-data ListCompaniesResponse = ListCompaniesResponse'
+data ListCompaniesResponse =
+  ListCompaniesResponse'
     { _lcrNextPageToken :: !(Maybe Text)
     , _lcrCompanies     :: !(Maybe [Company])
     , _lcrMetadata      :: !(Maybe ResponseMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCompaniesResponse' with the minimum fields required to make a request.
 --
@@ -1121,7 +1119,7 @@ data ListCompaniesResponse = ListCompaniesResponse'
 listCompaniesResponse
     :: ListCompaniesResponse
 listCompaniesResponse =
-    ListCompaniesResponse'
+  ListCompaniesResponse'
     { _lcrNextPageToken = Nothing
     , _lcrCompanies = Nothing
     , _lcrMetadata = Nothing
@@ -1166,14 +1164,16 @@ instance ToJSON ListCompaniesResponse where
 -- | Input only. Parameters needed for commute search.
 --
 -- /See:/ 'commuteFilter' smart constructor.
-data CommuteFilter = CommuteFilter'
+data CommuteFilter =
+  CommuteFilter'
     { _cfCommuteMethod           :: !(Maybe CommuteFilterCommuteMethod)
     , _cfAllowImpreciseAddresses :: !(Maybe Bool)
     , _cfTravelDuration          :: !(Maybe GDuration)
     , _cfStartCoordinates        :: !(Maybe LatLng)
     , _cfRoadTraffic             :: !(Maybe CommuteFilterRoadTraffic)
     , _cfDePartureTime           :: !(Maybe TimeOfDay')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommuteFilter' with the minimum fields required to make a request.
 --
@@ -1193,7 +1193,7 @@ data CommuteFilter = CommuteFilter'
 commuteFilter
     :: CommuteFilter
 commuteFilter =
-    CommuteFilter'
+  CommuteFilter'
     { _cfCommuteMethod = Nothing
     , _cfAllowImpreciseAddresses = Nothing
     , _cfTravelDuration = Nothing
@@ -1276,9 +1276,11 @@ instance ToJSON CommuteFilter where
 -- | Input only. Batch delete jobs request.
 --
 -- /See:/ 'batchDeleteJobsRequest' smart constructor.
-newtype BatchDeleteJobsRequest = BatchDeleteJobsRequest'
+newtype BatchDeleteJobsRequest =
+  BatchDeleteJobsRequest'
     { _bdjrFilter :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchDeleteJobsRequest' with the minimum fields required to make a request.
 --
@@ -1287,10 +1289,7 @@ newtype BatchDeleteJobsRequest = BatchDeleteJobsRequest'
 -- * 'bdjrFilter'
 batchDeleteJobsRequest
     :: BatchDeleteJobsRequest
-batchDeleteJobsRequest =
-    BatchDeleteJobsRequest'
-    { _bdjrFilter = Nothing
-    }
+batchDeleteJobsRequest = BatchDeleteJobsRequest' {_bdjrFilter = Nothing}
 
 -- | Required. The filter string specifies the jobs to be deleted. Supported
 -- operator: =, AND The fields eligible for filtering are: *
@@ -1321,9 +1320,11 @@ instance ToJSON BatchDeleteJobsRequest where
 -- all keys is 50KB.
 --
 -- /See:/ 'jobCustomAttributes' smart constructor.
-newtype JobCustomAttributes = JobCustomAttributes'
+newtype JobCustomAttributes =
+  JobCustomAttributes'
     { _jcaAddtional :: HashMap Text CustomAttribute
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobCustomAttributes' with the minimum fields required to make a request.
 --
@@ -1334,9 +1335,7 @@ jobCustomAttributes
     :: HashMap Text CustomAttribute -- ^ 'jcaAddtional'
     -> JobCustomAttributes
 jobCustomAttributes pJcaAddtional_ =
-    JobCustomAttributes'
-    { _jcaAddtional = _Coerce # pJcaAddtional_
-    }
+  JobCustomAttributes' {_jcaAddtional = _Coerce # pJcaAddtional_}
 
 jcaAddtional :: Lens' JobCustomAttributes (HashMap Text CustomAttribute)
 jcaAddtional
@@ -1355,10 +1354,12 @@ instance ToJSON JobCustomAttributes where
 -- implements Cloud Talent Solution.
 --
 -- /See:/ 'jobEvent' smart constructor.
-data JobEvent = JobEvent'
+data JobEvent =
+  JobEvent'
     { _jeJobs :: !(Maybe [Text])
     , _jeType :: !(Maybe JobEventType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobEvent' with the minimum fields required to make a request.
 --
@@ -1369,11 +1370,7 @@ data JobEvent = JobEvent'
 -- * 'jeType'
 jobEvent
     :: JobEvent
-jobEvent =
-    JobEvent'
-    { _jeJobs = Nothing
-    , _jeType = Nothing
-    }
+jobEvent = JobEvent' {_jeJobs = Nothing, _jeType = Nothing}
 
 -- | Required. The job name(s) associated with this event. For example, if
 -- this is an impression event, this field contains the identifiers of all
@@ -1404,7 +1401,8 @@ instance ToJSON JobEvent where
 -- | Input only. The Request body of the \`SearchJobs\` call.
 --
 -- /See:/ 'searchJobsRequest' smart constructor.
-data SearchJobsRequest = SearchJobsRequest'
+data SearchJobsRequest =
+  SearchJobsRequest'
     { _sjrRequestMetadata          :: !(Maybe RequestMetadata)
     , _sjrJobView                  :: !(Maybe SearchJobsRequestJobView)
     , _sjrOrderBy                  :: !(Maybe Text)
@@ -1420,7 +1418,8 @@ data SearchJobsRequest = SearchJobsRequest'
     , _sjrDisableKeywordMatch      :: !(Maybe Bool)
     , _sjrPageSize                 :: !(Maybe (Textual Int32))
     , _sjrHistogramFacets          :: !(Maybe HistogramFacets)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchJobsRequest' with the minimum fields required to make a request.
 --
@@ -1458,7 +1457,7 @@ data SearchJobsRequest = SearchJobsRequest'
 searchJobsRequest
     :: SearchJobsRequest
 searchJobsRequest =
-    SearchJobsRequest'
+  SearchJobsRequest'
     { _sjrRequestMetadata = Nothing
     , _sjrJobView = Nothing
     , _sjrOrderBy = Nothing
@@ -1684,9 +1683,11 @@ instance ToJSON SearchJobsRequest where
 -- \`0-1000\`, \`MIN-0\`, and \`0-MAX\`.
 --
 -- /See:/ 'histogramQueryResultHistogram' smart constructor.
-newtype HistogramQueryResultHistogram = HistogramQueryResultHistogram'
+newtype HistogramQueryResultHistogram =
+  HistogramQueryResultHistogram'
     { _hqrhAddtional :: HashMap Text (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramQueryResultHistogram' with the minimum fields required to make a request.
 --
@@ -1697,9 +1698,7 @@ histogramQueryResultHistogram
     :: HashMap Text Int64 -- ^ 'hqrhAddtional'
     -> HistogramQueryResultHistogram
 histogramQueryResultHistogram pHqrhAddtional_ =
-    HistogramQueryResultHistogram'
-    { _hqrhAddtional = _Coerce # pHqrhAddtional_
-    }
+  HistogramQueryResultHistogram' {_hqrhAddtional = _Coerce # pHqrhAddtional_}
 
 hqrhAddtional :: Lens' HistogramQueryResultHistogram (HashMap Text Int64)
 hqrhAddtional
@@ -1721,10 +1720,12 @@ instance ToJSON HistogramQueryResultHistogram where
 -- searches.
 --
 -- /See:/ 'histogramQueryResult' smart constructor.
-data HistogramQueryResult = HistogramQueryResult'
+data HistogramQueryResult =
+  HistogramQueryResult'
     { _hqrHistogramQuery :: !(Maybe Text)
     , _hqrHistogram      :: !(Maybe HistogramQueryResultHistogram)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramQueryResult' with the minimum fields required to make a request.
 --
@@ -1736,10 +1737,7 @@ data HistogramQueryResult = HistogramQueryResult'
 histogramQueryResult
     :: HistogramQueryResult
 histogramQueryResult =
-    HistogramQueryResult'
-    { _hqrHistogramQuery = Nothing
-    , _hqrHistogram = Nothing
-    }
+  HistogramQueryResult' {_hqrHistogramQuery = Nothing, _hqrHistogram = Nothing}
 
 -- | Requested histogram expression.
 hqrHistogramQuery :: Lens' HistogramQueryResult (Maybe Text)
@@ -1777,11 +1775,13 @@ instance ToJSON HistogramQueryResult where
 -- defined.
 --
 -- /See:/ 'customAttributeHistogramRequest' smart constructor.
-data CustomAttributeHistogramRequest = CustomAttributeHistogramRequest'
+data CustomAttributeHistogramRequest =
+  CustomAttributeHistogramRequest'
     { _cahrLongValueHistogramBucketingOption :: !(Maybe NumericBucketingOption)
     , _cahrKey                               :: !(Maybe Text)
     , _cahrStringValueHistogram              :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomAttributeHistogramRequest' with the minimum fields required to make a request.
 --
@@ -1795,7 +1795,7 @@ data CustomAttributeHistogramRequest = CustomAttributeHistogramRequest'
 customAttributeHistogramRequest
     :: CustomAttributeHistogramRequest
 customAttributeHistogramRequest =
-    CustomAttributeHistogramRequest'
+  CustomAttributeHistogramRequest'
     { _cahrLongValueHistogramBucketingOption = Nothing
     , _cahrKey = Nothing
     , _cahrStringValueHistogram = Nothing
@@ -1847,9 +1847,11 @@ instance ToJSON CustomAttributeHistogramRequest where
 -- debugging information.
 --
 -- /See:/ 'responseMetadata' smart constructor.
-newtype ResponseMetadata = ResponseMetadata'
+newtype ResponseMetadata =
+  ResponseMetadata'
     { _rmRequestId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResponseMetadata' with the minimum fields required to make a request.
 --
@@ -1858,10 +1860,7 @@ newtype ResponseMetadata = ResponseMetadata'
 -- * 'rmRequestId'
 responseMetadata
     :: ResponseMetadata
-responseMetadata =
-    ResponseMetadata'
-    { _rmRequestId = Nothing
-    }
+responseMetadata = ResponseMetadata' {_rmRequestId = Nothing}
 
 -- | A unique id associated with this call. This id is logged for tracking
 -- purposes.
@@ -1882,10 +1881,12 @@ instance ToJSON ResponseMetadata where
 -- | Output only. Commute details related to this job.
 --
 -- /See:/ 'commuteInfo' smart constructor.
-data CommuteInfo = CommuteInfo'
+data CommuteInfo =
+  CommuteInfo'
     { _ciTravelDuration :: !(Maybe GDuration)
     , _ciJobLocation    :: !(Maybe Location)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommuteInfo' with the minimum fields required to make a request.
 --
@@ -1897,10 +1898,7 @@ data CommuteInfo = CommuteInfo'
 commuteInfo
     :: CommuteInfo
 commuteInfo =
-    CommuteInfo'
-    { _ciTravelDuration = Nothing
-    , _ciJobLocation = Nothing
-    }
+  CommuteInfo' {_ciTravelDuration = Nothing, _ciJobLocation = Nothing}
 
 -- | The number of seconds required to travel to the job location from the
 -- query location. A duration of 0 seconds indicates that the job is not
@@ -1935,11 +1933,13 @@ instance ToJSON CommuteInfo where
 -- | Output only. Custom attribute histogram result.
 --
 -- /See:/ 'customAttributeHistogramResult' smart constructor.
-data CustomAttributeHistogramResult = CustomAttributeHistogramResult'
+data CustomAttributeHistogramResult =
+  CustomAttributeHistogramResult'
     { _cStringValueHistogramResult :: !(Maybe CustomAttributeHistogramResultStringValueHistogramResult)
     , _cLongValueHistogramResult   :: !(Maybe NumericBucketingResult)
     , _cKey                        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomAttributeHistogramResult' with the minimum fields required to make a request.
 --
@@ -1953,7 +1953,7 @@ data CustomAttributeHistogramResult = CustomAttributeHistogramResult'
 customAttributeHistogramResult
     :: CustomAttributeHistogramResult
 customAttributeHistogramResult =
-    CustomAttributeHistogramResult'
+  CustomAttributeHistogramResult'
     { _cStringValueHistogramResult = Nothing
     , _cLongValueHistogramResult = Nothing
     , _cKey = Nothing
@@ -2000,10 +2000,12 @@ instance ToJSON CustomAttributeHistogramResult where
 -- | Represents starting and ending value of a range in double.
 --
 -- /See:/ 'bucketRange' smart constructor.
-data BucketRange = BucketRange'
+data BucketRange =
+  BucketRange'
     { _brTo   :: !(Maybe (Textual Double))
     , _brFrom :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketRange' with the minimum fields required to make a request.
 --
@@ -2014,11 +2016,7 @@ data BucketRange = BucketRange'
 -- * 'brFrom'
 bucketRange
     :: BucketRange
-bucketRange =
-    BucketRange'
-    { _brTo = Nothing
-    , _brFrom = Nothing
-    }
+bucketRange = BucketRange' {_brTo = Nothing, _brFrom = Nothing}
 
 -- | Ending value of the bucket range.
 brTo :: Lens' BucketRange (Maybe Double)
@@ -2047,11 +2045,13 @@ instance ToJSON BucketRange where
 -- | Output only. Custom numeric bucketing result.
 --
 -- /See:/ 'numericBucketingResult' smart constructor.
-data NumericBucketingResult = NumericBucketingResult'
+data NumericBucketingResult =
+  NumericBucketingResult'
     { _nbrMaxValue :: !(Maybe (Textual Double))
     , _nbrCounts   :: !(Maybe [BucketizedCount])
     , _nbrMinValue :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NumericBucketingResult' with the minimum fields required to make a request.
 --
@@ -2065,11 +2065,8 @@ data NumericBucketingResult = NumericBucketingResult'
 numericBucketingResult
     :: NumericBucketingResult
 numericBucketingResult =
-    NumericBucketingResult'
-    { _nbrMaxValue = Nothing
-    , _nbrCounts = Nothing
-    , _nbrMinValue = Nothing
-    }
+  NumericBucketingResult'
+    {_nbrMaxValue = Nothing, _nbrCounts = Nothing, _nbrMinValue = Nothing}
 
 -- | Stores the maximum value of the numeric field. Is populated only if
 -- [NumericBucketingOption.requires_min_max] is set to true.
@@ -2112,10 +2109,12 @@ instance ToJSON NumericBucketingResult where
 -- | Output only. Derived details about the job posting.
 --
 -- /See:/ 'jobDerivedInfo' smart constructor.
-data JobDerivedInfo = JobDerivedInfo'
+data JobDerivedInfo =
+  JobDerivedInfo'
     { _jdiJobCategories :: !(Maybe [Text])
     , _jdiLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobDerivedInfo' with the minimum fields required to make a request.
 --
@@ -2127,10 +2126,7 @@ data JobDerivedInfo = JobDerivedInfo'
 jobDerivedInfo
     :: JobDerivedInfo
 jobDerivedInfo =
-    JobDerivedInfo'
-    { _jdiJobCategories = Nothing
-    , _jdiLocations = Nothing
-    }
+  JobDerivedInfo' {_jdiJobCategories = Nothing, _jdiLocations = Nothing}
 
 -- | Job categories derived from Job.title and Job.description.
 jdiJobCategories :: Lens' JobDerivedInfo [Text]
@@ -2166,9 +2162,11 @@ instance ToJSON JobDerivedInfo where
 -- | Derived details about the company.
 --
 -- /See:/ 'companyDerivedInfo' smart constructor.
-newtype CompanyDerivedInfo = CompanyDerivedInfo'
+newtype CompanyDerivedInfo =
+  CompanyDerivedInfo'
     { _cdiHeadquartersLocation :: Maybe Location
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompanyDerivedInfo' with the minimum fields required to make a request.
 --
@@ -2177,10 +2175,7 @@ newtype CompanyDerivedInfo = CompanyDerivedInfo'
 -- * 'cdiHeadquartersLocation'
 companyDerivedInfo
     :: CompanyDerivedInfo
-companyDerivedInfo =
-    CompanyDerivedInfo'
-    { _cdiHeadquartersLocation = Nothing
-    }
+companyDerivedInfo = CompanyDerivedInfo' {_cdiHeadquartersLocation = Nothing}
 
 -- | A structured headquarters location of the company, resolved from
 -- Company.hq_location if provided.
@@ -2206,12 +2201,14 @@ instance ToJSON CompanyDerivedInfo where
 -- | Input only. Filter on job compensation type and amount.
 --
 -- /See:/ 'compensationFilter' smart constructor.
-data CompensationFilter = CompensationFilter'
+data CompensationFilter =
+  CompensationFilter'
     { _cfIncludeJobsWithUnspecifiedCompensationRange :: !(Maybe Bool)
     , _cfRange                                       :: !(Maybe CompensationRange)
     , _cfUnits                                       :: !(Maybe [Text])
     , _cfType                                        :: !(Maybe CompensationFilterType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompensationFilter' with the minimum fields required to make a request.
 --
@@ -2227,7 +2224,7 @@ data CompensationFilter = CompensationFilter'
 compensationFilter
     :: CompensationFilter
 compensationFilter =
-    CompensationFilter'
+  CompensationFilter'
     { _cfIncludeJobsWithUnspecifiedCompensationRange = Nothing
     , _cfRange = Nothing
     , _cfUnits = Nothing
@@ -2282,7 +2279,8 @@ instance ToJSON CompensationFilter where
 -- for employing applicants for the job position.
 --
 -- /See:/ 'company' smart constructor.
-data Company = Company'
+data Company =
+  Company'
     { _cHiringAgency                         :: !(Maybe Bool)
     , _cCareerSiteURI                        :: !(Maybe Text)
     , _cEeoText                              :: !(Maybe Text)
@@ -2296,7 +2294,8 @@ data Company = Company'
     , _cDisplayName                          :: !(Maybe Text)
     , _cExternalId                           :: !(Maybe Text)
     , _cDerivedInfo                          :: !(Maybe CompanyDerivedInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Company' with the minimum fields required to make a request.
 --
@@ -2330,7 +2329,7 @@ data Company = Company'
 company
     :: Company
 company =
-    Company'
+  Company'
     { _cHiringAgency = Nothing
     , _cCareerSiteURI = Nothing
     , _cEeoText = Nothing
@@ -2476,11 +2475,13 @@ instance ToJSON Company where
 -- | Custom attribute values that are either filterable or non-filterable.
 --
 -- /See:/ 'customAttribute' smart constructor.
-data CustomAttribute = CustomAttribute'
+data CustomAttribute =
+  CustomAttribute'
     { _caLongValues   :: !(Maybe [Textual Int64])
     , _caFilterable   :: !(Maybe Bool)
     , _caStringValues :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomAttribute' with the minimum fields required to make a request.
 --
@@ -2494,7 +2495,7 @@ data CustomAttribute = CustomAttribute'
 customAttribute
     :: CustomAttribute
 customAttribute =
-    CustomAttribute'
+  CustomAttribute'
     { _caLongValues = Nothing
     , _caFilterable = Nothing
     , _caStringValues = Nothing
@@ -2552,7 +2553,8 @@ instance ToJSON CustomAttribute where
 -- the hiring entity responsible for the job.
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job'
+data Job =
+  Job'
     { _jDePartment         :: !(Maybe Text)
     , _jApplicationInfo    :: !(Maybe ApplicationInfo)
     , _jLanguageCode       :: !(Maybe Text)
@@ -2583,7 +2585,8 @@ data Job = Job'
     , _jDescription        :: !(Maybe Text)
     , _jRequisitionId      :: !(Maybe Text)
     , _jPostingCreateTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -2651,7 +2654,7 @@ data Job = Job'
 job
     :: Job
 job =
-    Job'
+  Job'
     { _jDePartment = Nothing
     , _jApplicationInfo = Nothing
     , _jLanguageCode = Nothing
@@ -3038,11 +3041,13 @@ instance ToJSON Job where
 -- SearchJobsRequest.
 --
 -- /See:/ 'histogramResults' smart constructor.
-data HistogramResults = HistogramResults'
+data HistogramResults =
+  HistogramResults'
     { _hrSimpleHistogramResults          :: !(Maybe [HistogramResult])
     , _hrCustomAttributeHistogramResults :: !(Maybe [CustomAttributeHistogramResult])
     , _hrCompensationHistogramResults    :: !(Maybe [CompensationHistogramResult])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramResults' with the minimum fields required to make a request.
 --
@@ -3056,7 +3061,7 @@ data HistogramResults = HistogramResults'
 histogramResults
     :: HistogramResults
 histogramResults =
-    HistogramResults'
+  HistogramResults'
     { _hrSimpleHistogramResults = Nothing
     , _hrCustomAttributeHistogramResults = Nothing
     , _hrCompensationHistogramResults = Nothing
@@ -3113,13 +3118,15 @@ instance ToJSON HistogramResults where
 -- | Input only. Geographic region of the search.
 --
 -- /See:/ 'locationFilter' smart constructor.
-data LocationFilter = LocationFilter'
+data LocationFilter =
+  LocationFilter'
     { _lfLatLng                :: !(Maybe LatLng)
     , _lfDistanceInMiles       :: !(Maybe (Textual Double))
     , _lfRegionCode            :: !(Maybe Text)
     , _lfTelecommutePreference :: !(Maybe LocationFilterTelecommutePreference)
     , _lfAddress               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationFilter' with the minimum fields required to make a request.
 --
@@ -3137,7 +3144,7 @@ data LocationFilter = LocationFilter'
 locationFilter
     :: LocationFilter
 locationFilter =
-    LocationFilter'
+  LocationFilter'
     { _lfLatLng = Nothing
     , _lfDistanceInMiles = Nothing
     , _lfRegionCode = Nothing
@@ -3218,11 +3225,13 @@ instance ToJSON LocationFilter where
 -- | Output only. List jobs response.
 --
 -- /See:/ 'listJobsResponse' smart constructor.
-data ListJobsResponse = ListJobsResponse'
+data ListJobsResponse =
+  ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
     , _ljrJobs          :: !(Maybe [Job])
     , _ljrMetadata      :: !(Maybe ResponseMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
 --
@@ -3236,11 +3245,8 @@ data ListJobsResponse = ListJobsResponse'
 listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
-    ListJobsResponse'
-    { _ljrNextPageToken = Nothing
-    , _ljrJobs = Nothing
-    , _ljrMetadata = Nothing
-    }
+  ListJobsResponse'
+    {_ljrNextPageToken = Nothing, _ljrJobs = Nothing, _ljrMetadata = Nothing}
 
 -- | A token to retrieve the next page of results.
 ljrNextPageToken :: Lens' ListJobsResponse (Maybe Text)
@@ -3280,10 +3286,12 @@ instance ToJSON ListJobsResponse where
 -- | Output only. Compensation based histogram result.
 --
 -- /See:/ 'compensationHistogramResult' smart constructor.
-data CompensationHistogramResult = CompensationHistogramResult'
+data CompensationHistogramResult =
+  CompensationHistogramResult'
     { _cResult :: !(Maybe NumericBucketingResult)
     , _cType   :: !(Maybe CompensationHistogramResultType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompensationHistogramResult' with the minimum fields required to make a request.
 --
@@ -3295,10 +3303,7 @@ data CompensationHistogramResult = CompensationHistogramResult'
 compensationHistogramResult
     :: CompensationHistogramResult
 compensationHistogramResult =
-    CompensationHistogramResult'
-    { _cResult = Nothing
-    , _cType = Nothing
-    }
+  CompensationHistogramResult' {_cResult = Nothing, _cType = Nothing}
 
 -- | Histogram result.
 cResult :: Lens' CompensationHistogramResult (Maybe NumericBucketingResult)
@@ -3324,7 +3329,8 @@ instance ToJSON CompensationHistogramResult where
 -- | Input only. The query required to perform a search query.
 --
 -- /See:/ 'jobQuery' smart constructor.
-data JobQuery = JobQuery'
+data JobQuery =
+  JobQuery'
     { _jqLanguageCodes         :: !(Maybe [Text])
     , _jqDisableSpellCheck     :: !(Maybe Bool)
     , _jqCustomAttributeFilter :: !(Maybe Text)
@@ -3338,7 +3344,8 @@ data JobQuery = JobQuery'
     , _jqCompanyNames          :: !(Maybe [Text])
     , _jqEmploymentTypes       :: !(Maybe [Text])
     , _jqExcludedJobs          :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobQuery' with the minimum fields required to make a request.
 --
@@ -3372,7 +3379,7 @@ data JobQuery = JobQuery'
 jobQuery
     :: JobQuery
 jobQuery =
-    JobQuery'
+  JobQuery'
     { _jqLanguageCodes = Nothing
     , _jqDisableSpellCheck = Nothing
     , _jqCustomAttributeFilter = Nothing
@@ -3578,9 +3585,11 @@ instance ToJSON JobQuery where
 -- | The report event request.
 --
 -- /See:/ 'createClientEventRequest' smart constructor.
-newtype CreateClientEventRequest = CreateClientEventRequest'
+newtype CreateClientEventRequest =
+  CreateClientEventRequest'
     { _ccerClientEvent :: Maybe ClientEvent
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateClientEventRequest' with the minimum fields required to make a request.
 --
@@ -3590,9 +3599,7 @@ newtype CreateClientEventRequest = CreateClientEventRequest'
 createClientEventRequest
     :: CreateClientEventRequest
 createClientEventRequest =
-    CreateClientEventRequest'
-    { _ccerClientEvent = Nothing
-    }
+  CreateClientEventRequest' {_ccerClientEvent = Nothing}
 
 -- | Required. Events issued when end user interacts with customer\'s
 -- application that uses Cloud Talent Solution.
@@ -3615,10 +3622,12 @@ instance ToJSON CreateClientEventRequest where
 -- | Output only. Spell check result.
 --
 -- /See:/ 'spellingCorrection' smart constructor.
-data SpellingCorrection = SpellingCorrection'
+data SpellingCorrection =
+  SpellingCorrection'
     { _scCorrected     :: !(Maybe Bool)
     , _scCorrectedText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpellingCorrection' with the minimum fields required to make a request.
 --
@@ -3630,10 +3639,7 @@ data SpellingCorrection = SpellingCorrection'
 spellingCorrection
     :: SpellingCorrection
 spellingCorrection =
-    SpellingCorrection'
-    { _scCorrected = Nothing
-    , _scCorrectedText = Nothing
-    }
+  SpellingCorrection' {_scCorrected = Nothing, _scCorrectedText = Nothing}
 
 -- | Indicates if the query was corrected by the spell checker.
 scCorrected :: Lens' SpellingCorrection (Maybe Bool)
@@ -3663,10 +3669,12 @@ instance ToJSON SpellingCorrection where
 -- | Output only. Response of auto-complete query.
 --
 -- /See:/ 'completeQueryResponse' smart constructor.
-data CompleteQueryResponse = CompleteQueryResponse'
+data CompleteQueryResponse =
+  CompleteQueryResponse'
     { _cqrMetadata          :: !(Maybe ResponseMetadata)
     , _cqrCompletionResults :: !(Maybe [CompletionResult])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompleteQueryResponse' with the minimum fields required to make a request.
 --
@@ -3678,10 +3686,8 @@ data CompleteQueryResponse = CompleteQueryResponse'
 completeQueryResponse
     :: CompleteQueryResponse
 completeQueryResponse =
-    CompleteQueryResponse'
-    { _cqrMetadata = Nothing
-    , _cqrCompletionResults = Nothing
-    }
+  CompleteQueryResponse'
+    {_cqrMetadata = Nothing, _cqrCompletionResults = Nothing}
 
 -- | Additional information for the API invocation, such as the request
 -- tracking id.
@@ -3718,12 +3724,14 @@ instance ToJSON CompleteQueryResponse where
 -- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'timeOfDay' smart constructor.
-data TimeOfDay' = TimeOfDay''
+data TimeOfDay' =
+  TimeOfDay''
     { _todNanos   :: !(Maybe (Textual Int32))
     , _todHours   :: !(Maybe (Textual Int32))
     , _todMinutes :: !(Maybe (Textual Int32))
     , _todSeconds :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
 --
@@ -3739,7 +3747,7 @@ data TimeOfDay' = TimeOfDay''
 timeOfDay
     :: TimeOfDay'
 timeOfDay =
-    TimeOfDay''
+  TimeOfDay''
     { _todNanos = Nothing
     , _todHours = Nothing
     , _todMinutes = Nothing
@@ -3799,14 +3807,16 @@ instance ToJSON TimeOfDay' where
 -- expected_units_per_year.
 --
 -- /See:/ 'compensationEntry' smart constructor.
-data CompensationEntry = CompensationEntry'
+data CompensationEntry =
+  CompensationEntry'
     { _ceAmount               :: !(Maybe Money)
     , _ceExpectedUnitsPerYear :: !(Maybe (Textual Double))
     , _ceRange                :: !(Maybe CompensationRange)
     , _ceType                 :: !(Maybe CompensationEntryType)
     , _ceDescription          :: !(Maybe Text)
     , _ceUnit                 :: !(Maybe CompensationEntryUnit)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompensationEntry' with the minimum fields required to make a request.
 --
@@ -3826,7 +3836,7 @@ data CompensationEntry = CompensationEntry'
 compensationEntry
     :: CompensationEntry
 compensationEntry =
-    CompensationEntry'
+  CompensationEntry'
     { _ceAmount = Nothing
     , _ceExpectedUnitsPerYear = Nothing
     , _ceRange = Nothing
@@ -3895,10 +3905,12 @@ instance ToJSON CompensationEntry where
 -- | Compensation range.
 --
 -- /See:/ 'compensationRange' smart constructor.
-data CompensationRange = CompensationRange'
+data CompensationRange =
+  CompensationRange'
     { _crMaxCompensation :: !(Maybe Money)
     , _crMinCompensation :: !(Maybe Money)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompensationRange' with the minimum fields required to make a request.
 --
@@ -3910,10 +3922,8 @@ data CompensationRange = CompensationRange'
 compensationRange
     :: CompensationRange
 compensationRange =
-    CompensationRange'
-    { _crMaxCompensation = Nothing
-    , _crMinCompensation = Nothing
-    }
+  CompensationRange'
+    {_crMaxCompensation = Nothing, _crMinCompensation = Nothing}
 
 -- | Optional. The maximum amount of compensation. If left empty, the value
 -- is set to a maximal compensation value and the currency code is set to
@@ -3949,10 +3959,12 @@ instance ToJSON CompensationRange where
 -- | Input only. Custom ranking information for SearchJobsRequest.
 --
 -- /See:/ 'customRankingInfo' smart constructor.
-data CustomRankingInfo = CustomRankingInfo'
+data CustomRankingInfo =
+  CustomRankingInfo'
     { _criImportanceLevel   :: !(Maybe CustomRankingInfoImportanceLevel)
     , _criRankingExpression :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomRankingInfo' with the minimum fields required to make a request.
 --
@@ -3964,10 +3976,8 @@ data CustomRankingInfo = CustomRankingInfo'
 customRankingInfo
     :: CustomRankingInfo
 customRankingInfo =
-    CustomRankingInfo'
-    { _criImportanceLevel = Nothing
-    , _criRankingExpression = Nothing
-    }
+  CustomRankingInfo'
+    {_criImportanceLevel = Nothing, _criRankingExpression = Nothing}
 
 -- | Required. Controls over how important the score of
 -- CustomRankingInfo.ranking_expression gets applied to job\'s final
@@ -4010,10 +4020,12 @@ instance ToJSON CustomRankingInfo where
 -- | Input only. Options for job processing.
 --
 -- /See:/ 'processingOptions' smart constructor.
-data ProcessingOptions = ProcessingOptions'
+data ProcessingOptions =
+  ProcessingOptions'
     { _poHTMLSanitization               :: !(Maybe ProcessingOptionsHTMLSanitization)
     , _poDisableStreetAddressResolution :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProcessingOptions' with the minimum fields required to make a request.
 --
@@ -4025,10 +4037,8 @@ data ProcessingOptions = ProcessingOptions'
 processingOptions
     :: ProcessingOptions
 processingOptions =
-    ProcessingOptions'
-    { _poHTMLSanitization = Nothing
-    , _poDisableStreetAddressResolution = Nothing
-    }
+  ProcessingOptions'
+    {_poHTMLSanitization = Nothing, _poDisableStreetAddressResolution = Nothing}
 
 -- | Optional. Option for job HTML content sanitization. Applied fields are:
 -- * description * applicationInfo.instruction * incentives *
@@ -4077,7 +4087,8 @@ instance ToJSON ProcessingOptions where
 -- https:\/\/support.google.com\/business\/answer\/6397478
 --
 -- /See:/ 'postalAddress' smart constructor.
-data PostalAddress = PostalAddress'
+data PostalAddress =
+  PostalAddress'
     { _paLanguageCode       :: !(Maybe Text)
     , _paSortingCode        :: !(Maybe Text)
     , _paRegionCode         :: !(Maybe Text)
@@ -4089,7 +4100,8 @@ data PostalAddress = PostalAddress'
     , _paAddressLines       :: !(Maybe [Text])
     , _paRevision           :: !(Maybe (Textual Int32))
     , _paOrganization       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostalAddress' with the minimum fields required to make a request.
 --
@@ -4119,7 +4131,7 @@ data PostalAddress = PostalAddress'
 postalAddress
     :: PostalAddress
 postalAddress =
-    PostalAddress'
+  PostalAddress'
     { _paLanguageCode = Nothing
     , _paSortingCode = Nothing
     , _paRegionCode = Nothing
@@ -4286,10 +4298,12 @@ instance ToJSON PostalAddress where
 -- the quality of the search results across devices.
 --
 -- /See:/ 'deviceInfo' smart constructor.
-data DeviceInfo = DeviceInfo'
+data DeviceInfo =
+  DeviceInfo'
     { _diId         :: !(Maybe Text)
     , _diDeviceType :: !(Maybe DeviceInfoDeviceType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceInfo' with the minimum fields required to make a request.
 --
@@ -4300,11 +4314,7 @@ data DeviceInfo = DeviceInfo'
 -- * 'diDeviceType'
 deviceInfo
     :: DeviceInfo
-deviceInfo =
-    DeviceInfo'
-    { _diId = Nothing
-    , _diDeviceType = Nothing
-    }
+deviceInfo = DeviceInfo' {_diId = Nothing, _diDeviceType = Nothing}
 
 -- | Optional. A device-specific ID. The ID must be a unique identifier that
 -- distinguishes the device from other devices.
@@ -4334,10 +4344,12 @@ instance ToJSON DeviceInfo where
 -- search response.
 --
 -- /See:/ 'numericBucketingOption' smart constructor.
-data NumericBucketingOption = NumericBucketingOption'
+data NumericBucketingOption =
+  NumericBucketingOption'
     { _nboBucketBounds   :: !(Maybe [Textual Double])
     , _nboRequiresMinMax :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NumericBucketingOption' with the minimum fields required to make a request.
 --
@@ -4349,10 +4361,8 @@ data NumericBucketingOption = NumericBucketingOption'
 numericBucketingOption
     :: NumericBucketingOption
 numericBucketingOption =
-    NumericBucketingOption'
-    { _nboBucketBounds = Nothing
-    , _nboRequiresMinMax = Nothing
-    }
+  NumericBucketingOption'
+    {_nboBucketBounds = Nothing, _nboRequiresMinMax = Nothing}
 
 -- | Required. Two adjacent values form a histogram bucket. Values should be
 -- in ascending order. For example, if [5, 10, 15] are provided, four
@@ -4390,11 +4400,13 @@ instance ToJSON NumericBucketingOption where
 -- | Input only. Histogram facets to be specified in SearchJobsRequest.
 --
 -- /See:/ 'histogramFacets' smart constructor.
-data HistogramFacets = HistogramFacets'
+data HistogramFacets =
+  HistogramFacets'
     { _hfCompensationHistogramFacets    :: !(Maybe [CompensationHistogramRequest])
     , _hfCustomAttributeHistogramFacets :: !(Maybe [CustomAttributeHistogramRequest])
     , _hfSimpleHistogramFacets          :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramFacets' with the minimum fields required to make a request.
 --
@@ -4408,7 +4420,7 @@ data HistogramFacets = HistogramFacets'
 histogramFacets
     :: HistogramFacets
 histogramFacets =
-    HistogramFacets'
+  HistogramFacets'
     { _hfCompensationHistogramFacets = Nothing
     , _hfCustomAttributeHistogramFacets = Nothing
     , _hfSimpleHistogramFacets = Nothing
@@ -4467,10 +4479,12 @@ instance ToJSON HistogramFacets where
 -- jobs for that filter.
 --
 -- /See:/ 'histogramResult' smart constructor.
-data HistogramResult = HistogramResult'
+data HistogramResult =
+  HistogramResult'
     { _hrValues     :: !(Maybe HistogramResultValues)
     , _hrSearchType :: !(Maybe HistogramResultSearchType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramResult' with the minimum fields required to make a request.
 --
@@ -4482,10 +4496,7 @@ data HistogramResult = HistogramResult'
 histogramResult
     :: HistogramResult
 histogramResult =
-    HistogramResult'
-    { _hrValues = Nothing
-    , _hrSearchType = Nothing
-    }
+  HistogramResult' {_hrValues = Nothing, _hrSearchType = Nothing}
 
 -- | A map from the values of field to the number of jobs with that value in
 -- this search result. Key: search type (filter names, such as the
@@ -4517,9 +4528,11 @@ instance ToJSON HistogramResult where
 -- \`key\` to the number of jobs with that value in this histogram result.
 --
 -- /See:/ 'customAttributeHistogramResultStringValueHistogramResult' smart constructor.
-newtype CustomAttributeHistogramResultStringValueHistogramResult = CustomAttributeHistogramResultStringValueHistogramResult'
+newtype CustomAttributeHistogramResultStringValueHistogramResult =
+  CustomAttributeHistogramResultStringValueHistogramResult'
     { _cahrsvhrAddtional :: HashMap Text (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomAttributeHistogramResultStringValueHistogramResult' with the minimum fields required to make a request.
 --
@@ -4530,9 +4543,8 @@ customAttributeHistogramResultStringValueHistogramResult
     :: HashMap Text Int32 -- ^ 'cahrsvhrAddtional'
     -> CustomAttributeHistogramResultStringValueHistogramResult
 customAttributeHistogramResultStringValueHistogramResult pCahrsvhrAddtional_ =
-    CustomAttributeHistogramResultStringValueHistogramResult'
-    { _cahrsvhrAddtional = _Coerce # pCahrsvhrAddtional_
-    }
+  CustomAttributeHistogramResultStringValueHistogramResult'
+    {_cahrsvhrAddtional = _Coerce # pCahrsvhrAddtional_}
 
 cahrsvhrAddtional :: Lens' CustomAttributeHistogramResultStringValueHistogramResult (HashMap Text Int32)
 cahrsvhrAddtional
@@ -4541,7 +4553,7 @@ cahrsvhrAddtional
       . _Coerce
 
 instance FromJSON
-         CustomAttributeHistogramResultStringValueHistogramResult
+           CustomAttributeHistogramResultStringValueHistogramResult
          where
         parseJSON
           = withObject
@@ -4551,7 +4563,7 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         CustomAttributeHistogramResultStringValueHistogramResult
+           CustomAttributeHistogramResultStringValueHistogramResult
          where
         toJSON = toJSON . _cahrsvhrAddtional
 
@@ -4561,9 +4573,11 @@ instance ToJSON
 -- The maximum total size of all keys and values is 2 KB.
 --
 -- /See:/ 'clientEventExtraInfo' smart constructor.
-newtype ClientEventExtraInfo = ClientEventExtraInfo'
+newtype ClientEventExtraInfo =
+  ClientEventExtraInfo'
     { _ceeiAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClientEventExtraInfo' with the minimum fields required to make a request.
 --
@@ -4574,9 +4588,7 @@ clientEventExtraInfo
     :: HashMap Text Text -- ^ 'ceeiAddtional'
     -> ClientEventExtraInfo
 clientEventExtraInfo pCeeiAddtional_ =
-    ClientEventExtraInfo'
-    { _ceeiAddtional = _Coerce # pCeeiAddtional_
-    }
+  ClientEventExtraInfo' {_ceeiAddtional = _Coerce # pCeeiAddtional_}
 
 ceeiAddtional :: Lens' ClientEventExtraInfo (HashMap Text Text)
 ceeiAddtional
@@ -4596,7 +4608,8 @@ instance ToJSON ClientEventExtraInfo where
 -- | Output only. Response for SearchJob method.
 --
 -- /See:/ 'searchJobsResponse' smart constructor.
-data SearchJobsResponse = SearchJobsResponse'
+data SearchJobsResponse =
+  SearchJobsResponse'
     { _sjrNextPageToken           :: !(Maybe Text)
     , _sjrEstimatedTotalSize      :: !(Maybe (Textual Int32))
     , _sjrHistogramQueryResults   :: !(Maybe [HistogramQueryResult])
@@ -4607,7 +4620,8 @@ data SearchJobsResponse = SearchJobsResponse'
     , _sjrMetadata                :: !(Maybe ResponseMetadata)
     , _sjrBroadenedQueryJobsCount :: !(Maybe (Textual Int32))
     , _sjrSpellCorrection         :: !(Maybe SpellingCorrection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchJobsResponse' with the minimum fields required to make a request.
 --
@@ -4635,7 +4649,7 @@ data SearchJobsResponse = SearchJobsResponse'
 searchJobsResponse
     :: SearchJobsResponse
 searchJobsResponse =
-    SearchJobsResponse'
+  SearchJobsResponse'
     { _sjrNextPageToken = Nothing
     , _sjrEstimatedTotalSize = Nothing
     , _sjrHistogramQueryResults = Nothing
@@ -4771,9 +4785,11 @@ instance ToJSON SearchJobsResponse where
 -- search.
 --
 -- /See:/ 'histogramResultValues' smart constructor.
-newtype HistogramResultValues = HistogramResultValues'
+newtype HistogramResultValues =
+  HistogramResultValues'
     { _hrvAddtional :: HashMap Text (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistogramResultValues' with the minimum fields required to make a request.
 --
@@ -4784,9 +4800,7 @@ histogramResultValues
     :: HashMap Text Int32 -- ^ 'hrvAddtional'
     -> HistogramResultValues
 histogramResultValues pHrvAddtional_ =
-    HistogramResultValues'
-    { _hrvAddtional = _Coerce # pHrvAddtional_
-    }
+  HistogramResultValues' {_hrvAddtional = _Coerce # pHrvAddtional_}
 
 hrvAddtional :: Lens' HistogramResultValues (HashMap Text Int32)
 hrvAddtional
@@ -4805,10 +4819,12 @@ instance ToJSON HistogramResultValues where
 -- | Message representing a period of time between two timestamps.
 --
 -- /See:/ 'timestampRange' smart constructor.
-data TimestampRange = TimestampRange'
+data TimestampRange =
+  TimestampRange'
     { _trStartTime :: !(Maybe DateTime')
     , _trEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimestampRange' with the minimum fields required to make a request.
 --
@@ -4819,11 +4835,7 @@ data TimestampRange = TimestampRange'
 -- * 'trEndTime'
 timestampRange
     :: TimestampRange
-timestampRange =
-    TimestampRange'
-    { _trStartTime = Nothing
-    , _trEndTime = Nothing
-    }
+timestampRange = TimestampRange' {_trStartTime = Nothing, _trEndTime = Nothing}
 
 -- | Begin of the period.
 trStartTime :: Lens' TimestampRange (Maybe UTCTime)

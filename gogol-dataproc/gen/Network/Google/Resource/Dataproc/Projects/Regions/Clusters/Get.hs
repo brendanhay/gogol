@@ -66,7 +66,8 @@ type ProjectsRegionsClustersGetResource =
 -- | Gets the resource representation for a cluster in a project.
 --
 -- /See:/ 'projectsRegionsClustersGet' smart constructor.
-data ProjectsRegionsClustersGet = ProjectsRegionsClustersGet'
+data ProjectsRegionsClustersGet =
+  ProjectsRegionsClustersGet'
     { _prcgXgafv          :: !(Maybe Xgafv)
     , _prcgUploadProtocol :: !(Maybe Text)
     , _prcgAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsRegionsClustersGet = ProjectsRegionsClustersGet'
     , _prcgRegion         :: !Text
     , _prcgProjectId      :: !Text
     , _prcgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsClustersGet' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsRegionsClustersGet
     -> Text -- ^ 'prcgProjectId'
     -> ProjectsRegionsClustersGet
 projectsRegionsClustersGet pPrcgClusterName_ pPrcgRegion_ pPrcgProjectId_ =
-    ProjectsRegionsClustersGet'
+  ProjectsRegionsClustersGet'
     { _prcgXgafv = Nothing
     , _prcgUploadProtocol = Nothing
     , _prcgAccessToken = Nothing

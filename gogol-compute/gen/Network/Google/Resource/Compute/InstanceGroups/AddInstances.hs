@@ -67,13 +67,15 @@ type InstanceGroupsAddInstancesResource =
 -- Read Adding instances for more information.
 --
 -- /See:/ 'instanceGroupsAddInstances' smart constructor.
-data InstanceGroupsAddInstances = InstanceGroupsAddInstances'
+data InstanceGroupsAddInstances =
+  InstanceGroupsAddInstances'
     { _igaiRequestId     :: !(Maybe Text)
     , _igaiProject       :: !Text
     , _igaiZone          :: !Text
     , _igaiPayload       :: !InstanceGroupsAddInstancesRequest
     , _igaiInstanceGroup :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsAddInstances' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ instanceGroupsAddInstances
     -> Text -- ^ 'igaiInstanceGroup'
     -> InstanceGroupsAddInstances
 instanceGroupsAddInstances pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceGroup_ =
-    InstanceGroupsAddInstances'
+  InstanceGroupsAddInstances'
     { _igaiRequestId = Nothing
     , _igaiProject = pIgaiProject_
     , _igaiZone = pIgaiZone_

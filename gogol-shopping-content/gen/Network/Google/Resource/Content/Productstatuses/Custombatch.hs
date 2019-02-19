@@ -53,9 +53,11 @@ type ProductstatusesCustombatchResource =
 -- | Gets the statuses of multiple products in a single request.
 --
 -- /See:/ 'productstatusesCustombatch' smart constructor.
-newtype ProductstatusesCustombatch = ProductstatusesCustombatch'
+newtype ProductstatusesCustombatch =
+  ProductstatusesCustombatch'
     { _proPayload :: ProductstatusesCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductstatusesCustombatch' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ productstatusesCustombatch
     :: ProductstatusesCustomBatchRequest -- ^ 'proPayload'
     -> ProductstatusesCustombatch
 productstatusesCustombatch pProPayload_ =
-    ProductstatusesCustombatch'
-    { _proPayload = pProPayload_
-    }
+  ProductstatusesCustombatch' {_proPayload = pProPayload_}
 
 -- | Multipart request metadata.
 proPayload :: Lens' ProductstatusesCustombatch ProductstatusesCustomBatchRequest

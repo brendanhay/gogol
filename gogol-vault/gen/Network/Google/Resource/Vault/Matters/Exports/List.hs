@@ -66,7 +66,8 @@ type MattersExportsListResource =
 -- | Lists Exports.
 --
 -- /See:/ 'mattersExportsList' smart constructor.
-data MattersExportsList = MattersExportsList'
+data MattersExportsList =
+  MattersExportsList'
     { _melXgafv          :: !(Maybe Xgafv)
     , _melUploadProtocol :: !(Maybe Text)
     , _melAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data MattersExportsList = MattersExportsList'
     , _melPageToken      :: !(Maybe Text)
     , _melPageSize       :: !(Maybe (Textual Int32))
     , _melCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersExportsList' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ mattersExportsList
     :: Text -- ^ 'melMatterId'
     -> MattersExportsList
 mattersExportsList pMelMatterId_ =
-    MattersExportsList'
+  MattersExportsList'
     { _melXgafv = Nothing
     , _melUploadProtocol = Nothing
     , _melAccessToken = Nothing

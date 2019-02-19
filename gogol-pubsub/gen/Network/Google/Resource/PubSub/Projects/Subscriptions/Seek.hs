@@ -80,7 +80,8 @@ type ProjectsSubscriptionsSeekResource =
 -- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'projectsSubscriptionsSeek' smart constructor.
-data ProjectsSubscriptionsSeek = ProjectsSubscriptionsSeek'
+data ProjectsSubscriptionsSeek =
+  ProjectsSubscriptionsSeek'
     { _pssXgafv          :: !(Maybe Xgafv)
     , _pssUploadProtocol :: !(Maybe Text)
     , _pssAccessToken    :: !(Maybe Text)
@@ -88,7 +89,8 @@ data ProjectsSubscriptionsSeek = ProjectsSubscriptionsSeek'
     , _pssPayload        :: !SeekRequest
     , _pssSubscription   :: !Text
     , _pssCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsSeek' with the minimum fields required to make a request.
 --
@@ -112,7 +114,7 @@ projectsSubscriptionsSeek
     -> Text -- ^ 'pssSubscription'
     -> ProjectsSubscriptionsSeek
 projectsSubscriptionsSeek pPssPayload_ pPssSubscription_ =
-    ProjectsSubscriptionsSeek'
+  ProjectsSubscriptionsSeek'
     { _pssXgafv = Nothing
     , _pssUploadProtocol = Nothing
     , _pssAccessToken = Nothing

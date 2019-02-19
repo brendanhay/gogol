@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsInsert' request conforms to.
 type EventTagsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -54,10 +54,12 @@ type EventTagsInsertResource =
 -- | Inserts a new event tag.
 --
 -- /See:/ 'eventTagsInsert' smart constructor.
-data EventTagsInsert = EventTagsInsert'
+data EventTagsInsert =
+  EventTagsInsert'
     { _etiProFileId :: !(Textual Int64)
     , _etiPayload   :: !EventTag
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventTagsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ eventTagsInsert
     -> EventTag -- ^ 'etiPayload'
     -> EventTagsInsert
 eventTagsInsert pEtiProFileId_ pEtiPayload_ =
-    EventTagsInsert'
-    { _etiProFileId = _Coerce # pEtiProFileId_
-    , _etiPayload = pEtiPayload_
-    }
+  EventTagsInsert'
+    {_etiProFileId = _Coerce # pEtiProFileId_, _etiPayload = pEtiPayload_}
 
 -- | User profile ID associated with this request.
 etiProFileId :: Lens' EventTagsInsert Int64

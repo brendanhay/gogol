@@ -66,7 +66,8 @@ type AppsServicesVersionsCreateResource =
 -- | Deploys code and resource files to a new version.
 --
 -- /See:/ 'appsServicesVersionsCreate' smart constructor.
-data AppsServicesVersionsCreate = AppsServicesVersionsCreate'
+data AppsServicesVersionsCreate =
+  AppsServicesVersionsCreate'
     { _asvcXgafv          :: !(Maybe Xgafv)
     , _asvcUploadProtocol :: !(Maybe Text)
     , _asvcAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data AppsServicesVersionsCreate = AppsServicesVersionsCreate'
     , _asvcAppsId         :: !Text
     , _asvcServicesId     :: !Text
     , _asvcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsServicesVersionsCreate' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ appsServicesVersionsCreate
     -> Text -- ^ 'asvcServicesId'
     -> AppsServicesVersionsCreate
 appsServicesVersionsCreate pAsvcPayload_ pAsvcAppsId_ pAsvcServicesId_ =
-    AppsServicesVersionsCreate'
+  AppsServicesVersionsCreate'
     { _asvcXgafv = Nothing
     , _asvcUploadProtocol = Nothing
     , _asvcAccessToken = Nothing

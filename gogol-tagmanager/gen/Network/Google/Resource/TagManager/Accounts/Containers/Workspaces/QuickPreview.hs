@@ -54,9 +54,11 @@ type AccountsContainersWorkspacesQuickPreviewResource
 -- entities in the provided workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesQuickPreview' smart constructor.
-newtype AccountsContainersWorkspacesQuickPreview = AccountsContainersWorkspacesQuickPreview'
+newtype AccountsContainersWorkspacesQuickPreview =
+  AccountsContainersWorkspacesQuickPreview'
     { _acwqpPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesQuickPreview' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ accountsContainersWorkspacesQuickPreview
     :: Text -- ^ 'acwqpPath'
     -> AccountsContainersWorkspacesQuickPreview
 accountsContainersWorkspacesQuickPreview pAcwqpPath_ =
-    AccountsContainersWorkspacesQuickPreview'
-    { _acwqpPath = pAcwqpPath_
-    }
+  AccountsContainersWorkspacesQuickPreview' {_acwqpPath = pAcwqpPath_}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -78,7 +78,8 @@ acwqpPath
   = lens _acwqpPath (\ s a -> s{_acwqpPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesQuickPreview where
+           AccountsContainersWorkspacesQuickPreview
+         where
         type Rs AccountsContainersWorkspacesQuickPreview =
              QuickPreviewResponse
         type Scopes AccountsContainersWorkspacesQuickPreview

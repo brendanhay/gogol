@@ -63,13 +63,15 @@ type TargetPoolsRemoveHealthCheckResource =
 -- | Removes health check URL from a target pool.
 --
 -- /See:/ 'targetPoolsRemoveHealthCheck' smart constructor.
-data TargetPoolsRemoveHealthCheck = TargetPoolsRemoveHealthCheck'
+data TargetPoolsRemoveHealthCheck =
+  TargetPoolsRemoveHealthCheck'
     { _tprhcRequestId  :: !(Maybe Text)
     , _tprhcProject    :: !Text
     , _tprhcTargetPool :: !Text
     , _tprhcPayload    :: !TargetPoolsRemoveHealthCheckRequest
     , _tprhcRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveHealthCheck' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ targetPoolsRemoveHealthCheck
     -> Text -- ^ 'tprhcRegion'
     -> TargetPoolsRemoveHealthCheck
 targetPoolsRemoveHealthCheck pTprhcProject_ pTprhcTargetPool_ pTprhcPayload_ pTprhcRegion_ =
-    TargetPoolsRemoveHealthCheck'
+  TargetPoolsRemoveHealthCheck'
     { _tprhcRequestId = Nothing
     , _tprhcProject = pTprhcProject_
     , _tprhcTargetPool = pTprhcTargetPool_

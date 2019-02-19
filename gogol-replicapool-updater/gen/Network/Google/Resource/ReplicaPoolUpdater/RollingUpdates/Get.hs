@@ -57,11 +57,13 @@ type RollingUpdatesGetResource =
 -- | Returns information about an update.
 --
 -- /See:/ 'rollingUpdatesGet' smart constructor.
-data RollingUpdatesGet = RollingUpdatesGet'
+data RollingUpdatesGet =
+  RollingUpdatesGet'
     { _rugRollingUpdate :: !Text
     , _rugProject       :: !Text
     , _rugZone          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdatesGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ rollingUpdatesGet
     -> Text -- ^ 'rugZone'
     -> RollingUpdatesGet
 rollingUpdatesGet pRugRollingUpdate_ pRugProject_ pRugZone_ =
-    RollingUpdatesGet'
+  RollingUpdatesGet'
     { _rugRollingUpdate = pRugRollingUpdate_
     , _rugProject = pRugProject_
     , _rugZone = pRugZone_

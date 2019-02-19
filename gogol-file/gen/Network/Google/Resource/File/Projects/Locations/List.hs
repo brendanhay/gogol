@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @file.projects.locations.list@ method which the
 -- 'ProjectsLocationsList' request conforms to.
 type ProjectsLocationsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          "locations" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -67,7 +67,8 @@ type ProjectsLocationsListResource =
 -- | Lists information about the supported locations for this service.
 --
 -- /See:/ 'projectsLocationsList' smart constructor.
-data ProjectsLocationsList = ProjectsLocationsList'
+data ProjectsLocationsList =
+  ProjectsLocationsList'
     { _pllXgafv          :: !(Maybe Xgafv)
     , _pllUploadProtocol :: !(Maybe Text)
     , _pllAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsLocationsList = ProjectsLocationsList'
     , _pllPageToken      :: !(Maybe Text)
     , _pllPageSize       :: !(Maybe (Textual Int32))
     , _pllCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsLocationsList
     :: Text -- ^ 'pllName'
     -> ProjectsLocationsList
 projectsLocationsList pPllName_ =
-    ProjectsLocationsList'
+  ProjectsLocationsList'
     { _pllXgafv = Nothing
     , _pllUploadProtocol = Nothing
     , _pllAccessToken = Nothing

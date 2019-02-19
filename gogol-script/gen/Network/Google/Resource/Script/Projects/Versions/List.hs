@@ -66,7 +66,8 @@ type ProjectsVersionsListResource =
 -- | List the versions of a script project.
 --
 -- /See:/ 'projectsVersionsList' smart constructor.
-data ProjectsVersionsList = ProjectsVersionsList'
+data ProjectsVersionsList =
+  ProjectsVersionsList'
     { _pvlXgafv          :: !(Maybe Xgafv)
     , _pvlUploadProtocol :: !(Maybe Text)
     , _pvlAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsVersionsList = ProjectsVersionsList'
     , _pvlPageToken      :: !(Maybe Text)
     , _pvlPageSize       :: !(Maybe (Textual Int32))
     , _pvlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsVersionsList' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsVersionsList
     :: Text -- ^ 'pvlScriptId'
     -> ProjectsVersionsList
 projectsVersionsList pPvlScriptId_ =
-    ProjectsVersionsList'
+  ProjectsVersionsList'
     { _pvlXgafv = Nothing
     , _pvlUploadProtocol = Nothing
     , _pvlAccessToken = Nothing

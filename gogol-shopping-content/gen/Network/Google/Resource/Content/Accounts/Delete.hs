@@ -55,11 +55,13 @@ type AccountsDeleteResource =
 -- | Deletes a Merchant Center sub-account.
 --
 -- /See:/ 'accountsDelete' smart constructor.
-data AccountsDelete = AccountsDelete'
+data AccountsDelete =
+  AccountsDelete'
     { _adMerchantId :: !(Textual Word64)
     , _adForce      :: !Bool
     , _adAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsDelete' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ accountsDelete
     -> Word64 -- ^ 'adAccountId'
     -> AccountsDelete
 accountsDelete pAdMerchantId_ pAdAccountId_ =
-    AccountsDelete'
+  AccountsDelete'
     { _adMerchantId = _Coerce # pAdMerchantId_
     , _adForce = False
     , _adAccountId = _Coerce # pAdAccountId_

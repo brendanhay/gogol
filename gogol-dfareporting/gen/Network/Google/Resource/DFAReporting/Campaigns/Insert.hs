@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CampaignsInsert' request conforms to.
 type CampaignsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -54,10 +54,12 @@ type CampaignsInsertResource =
 -- | Inserts a new campaign.
 --
 -- /See:/ 'campaignsInsert' smart constructor.
-data CampaignsInsert = CampaignsInsert'
+data CampaignsInsert =
+  CampaignsInsert'
     { _camProFileId :: !(Textual Int64)
     , _camPayload   :: !Campaign
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CampaignsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ campaignsInsert
     -> Campaign -- ^ 'camPayload'
     -> CampaignsInsert
 campaignsInsert pCamProFileId_ pCamPayload_ =
-    CampaignsInsert'
-    { _camProFileId = _Coerce # pCamProFileId_
-    , _camPayload = pCamPayload_
-    }
+  CampaignsInsert'
+    {_camProFileId = _Coerce # pCamProFileId_, _camPayload = pCamPayload_}
 
 -- | User profile ID associated with this request.
 camProFileId :: Lens' CampaignsInsert Int64

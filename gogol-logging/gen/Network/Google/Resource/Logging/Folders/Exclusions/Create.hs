@@ -67,7 +67,8 @@ type FoldersExclusionsCreateResource =
 -- exclusions in a resource.
 --
 -- /See:/ 'foldersExclusionsCreate' smart constructor.
-data FoldersExclusionsCreate = FoldersExclusionsCreate'
+data FoldersExclusionsCreate =
+  FoldersExclusionsCreate'
     { _fecParent         :: !Text
     , _fecXgafv          :: !(Maybe Xgafv)
     , _fecUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,8 @@ data FoldersExclusionsCreate = FoldersExclusionsCreate'
     , _fecUploadType     :: !(Maybe Text)
     , _fecPayload        :: !LogExclusion
     , _fecCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersExclusionsCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ foldersExclusionsCreate
     -> LogExclusion -- ^ 'fecPayload'
     -> FoldersExclusionsCreate
 foldersExclusionsCreate pFecParent_ pFecPayload_ =
-    FoldersExclusionsCreate'
+  FoldersExclusionsCreate'
     { _fecParent = pFecParent_
     , _fecXgafv = Nothing
     , _fecUploadProtocol = Nothing

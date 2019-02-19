@@ -66,7 +66,8 @@ type ProjectsRegionsJobsGetResource =
 -- | Gets the resource representation for a job in a project.
 --
 -- /See:/ 'projectsRegionsJobsGet' smart constructor.
-data ProjectsRegionsJobsGet = ProjectsRegionsJobsGet'
+data ProjectsRegionsJobsGet =
+  ProjectsRegionsJobsGet'
     { _prjgXgafv          :: !(Maybe Xgafv)
     , _prjgJobId          :: !Text
     , _prjgUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsRegionsJobsGet = ProjectsRegionsJobsGet'
     , _prjgRegion         :: !Text
     , _prjgProjectId      :: !Text
     , _prjgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsJobsGet' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsRegionsJobsGet
     -> Text -- ^ 'prjgProjectId'
     -> ProjectsRegionsJobsGet
 projectsRegionsJobsGet pPrjgJobId_ pPrjgRegion_ pPrjgProjectId_ =
-    ProjectsRegionsJobsGet'
+  ProjectsRegionsJobsGet'
     { _prjgXgafv = Nothing
     , _prjgJobId = pPrjgJobId_
     , _prjgUploadProtocol = Nothing

@@ -70,7 +70,8 @@ type MattersHoldsRemoveHeldAccountsResource =
 -- accounts, the hold will not apply to any accounts.
 --
 -- /See:/ 'mattersHoldsRemoveHeldAccounts' smart constructor.
-data MattersHoldsRemoveHeldAccounts = MattersHoldsRemoveHeldAccounts'
+data MattersHoldsRemoveHeldAccounts =
+  MattersHoldsRemoveHeldAccounts'
     { _mhrhaXgafv          :: !(Maybe Xgafv)
     , _mhrhaUploadProtocol :: !(Maybe Text)
     , _mhrhaHoldId         :: !Text
@@ -79,7 +80,8 @@ data MattersHoldsRemoveHeldAccounts = MattersHoldsRemoveHeldAccounts'
     , _mhrhaPayload        :: !RemoveHeldAccountsRequest
     , _mhrhaMatterId       :: !Text
     , _mhrhaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersHoldsRemoveHeldAccounts' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ mattersHoldsRemoveHeldAccounts
     -> Text -- ^ 'mhrhaMatterId'
     -> MattersHoldsRemoveHeldAccounts
 mattersHoldsRemoveHeldAccounts pMhrhaHoldId_ pMhrhaPayload_ pMhrhaMatterId_ =
-    MattersHoldsRemoveHeldAccounts'
+  MattersHoldsRemoveHeldAccounts'
     { _mhrhaXgafv = Nothing
     , _mhrhaUploadProtocol = Nothing
     , _mhrhaHoldId = pMhrhaHoldId_

@@ -62,13 +62,15 @@ type InstancesDetachDiskResource =
 -- | Detaches a disk from an instance.
 --
 -- /See:/ 'instancesDetachDisk' smart constructor.
-data InstancesDetachDisk = InstancesDetachDisk'
+data InstancesDetachDisk =
+  InstancesDetachDisk'
     { _idddRequestId  :: !(Maybe Text)
     , _idddProject    :: !Text
     , _idddZone       :: !Text
     , _idddDeviceName :: !Text
     , _idddInstance   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesDetachDisk' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ instancesDetachDisk
     -> Text -- ^ 'idddInstance'
     -> InstancesDetachDisk
 instancesDetachDisk pIdddProject_ pIdddZone_ pIdddDeviceName_ pIdddInstance_ =
-    InstancesDetachDisk'
+  InstancesDetachDisk'
     { _idddRequestId = Nothing
     , _idddProject = pIdddProject_
     , _idddZone = pIdddZone_

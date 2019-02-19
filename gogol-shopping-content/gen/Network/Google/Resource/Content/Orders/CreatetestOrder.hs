@@ -54,10 +54,12 @@ type OrdersCreatetestOrderResource =
 -- | Sandbox only. Creates a test order.
 --
 -- /See:/ 'ordersCreatetestOrder' smart constructor.
-data OrdersCreatetestOrder = OrdersCreatetestOrder'
+data OrdersCreatetestOrder =
+  OrdersCreatetestOrder'
     { _ococMerchantId :: !(Textual Word64)
     , _ococPayload    :: !OrdersCreateTestOrderRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersCreatetestOrder' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ ordersCreatetestOrder
     -> OrdersCreateTestOrderRequest -- ^ 'ococPayload'
     -> OrdersCreatetestOrder
 ordersCreatetestOrder pOcocMerchantId_ pOcocPayload_ =
-    OrdersCreatetestOrder'
-    { _ococMerchantId = _Coerce # pOcocMerchantId_
-    , _ococPayload = pOcocPayload_
-    }
+  OrdersCreatetestOrder'
+    {_ococMerchantId = _Coerce # pOcocMerchantId_, _ococPayload = pOcocPayload_}
 
 -- | The ID of the account that should manage the order. This cannot be a
 -- multi-client account.

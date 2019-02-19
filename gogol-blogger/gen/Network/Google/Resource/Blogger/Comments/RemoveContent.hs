@@ -58,11 +58,13 @@ type CommentsRemoveContentResource =
 -- | Removes the content of a comment.
 --
 -- /See:/ 'commentsRemoveContent' smart constructor.
-data CommentsRemoveContent = CommentsRemoveContent'
+data CommentsRemoveContent =
+  CommentsRemoveContent'
     { _crcBlogId    :: !Text
     , _crcPostId    :: !Text
     , _crcCommentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentsRemoveContent' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ commentsRemoveContent
     -> Text -- ^ 'crcCommentId'
     -> CommentsRemoveContent
 commentsRemoveContent pCrcBlogId_ pCrcPostId_ pCrcCommentId_ =
-    CommentsRemoveContent'
+  CommentsRemoveContent'
     { _crcBlogId = pCrcBlogId_
     , _crcPostId = pCrcPostId_
     , _crcCommentId = pCrcCommentId_

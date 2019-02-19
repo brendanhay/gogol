@@ -55,11 +55,13 @@ type ProductstatusesGetResource =
 -- | Gets the status of a product from your Merchant Center account.
 --
 -- /See:/ 'productstatusesGet' smart constructor.
-data ProductstatusesGet = ProductstatusesGet'
+data ProductstatusesGet =
+  ProductstatusesGet'
     { _pgMerchantId   :: !(Textual Word64)
     , _pgDestinations :: !(Maybe [Text])
     , _pgProductId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductstatusesGet' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ productstatusesGet
     -> Text -- ^ 'pgProductId'
     -> ProductstatusesGet
 productstatusesGet pPgMerchantId_ pPgProductId_ =
-    ProductstatusesGet'
+  ProductstatusesGet'
     { _pgMerchantId = _Coerce # pPgMerchantId_
     , _pgDestinations = Nothing
     , _pgProductId = pPgProductId_

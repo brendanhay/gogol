@@ -58,10 +58,12 @@ type ImagesGetFromFamilyResource =
 -- deprecated.
 --
 -- /See:/ 'imagesGetFromFamily' smart constructor.
-data ImagesGetFromFamily = ImagesGetFromFamily'
+data ImagesGetFromFamily =
+  ImagesGetFromFamily'
     { _igffProject :: !Text
     , _igffFamily  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImagesGetFromFamily' with the minimum fields required to make a request.
 --
@@ -75,10 +77,8 @@ imagesGetFromFamily
     -> Text -- ^ 'igffFamily'
     -> ImagesGetFromFamily
 imagesGetFromFamily pIgffProject_ pIgffFamily_ =
-    ImagesGetFromFamily'
-    { _igffProject = pIgffProject_
-    , _igffFamily = pIgffFamily_
-    }
+  ImagesGetFromFamily'
+    {_igffProject = pIgffProject_, _igffFamily = pIgffFamily_}
 
 -- | Project ID for this request.
 igffProject :: Lens' ImagesGetFromFamily Text

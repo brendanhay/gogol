@@ -63,13 +63,15 @@ type ReplicasDeleteResource =
 -- | Deletes a replica from the pool.
 --
 -- /See:/ 'replicasDelete' smart constructor.
-data ReplicasDelete = ReplicasDelete'
+data ReplicasDelete =
+  ReplicasDelete'
     { _rdPoolName    :: !Text
     , _rdZone        :: !Text
     , _rdPayload     :: !ReplicasDeleteRequest
     , _rdReplicaName :: !Text
     , _rdProjectName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplicasDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ replicasDelete
     -> Text -- ^ 'rdProjectName'
     -> ReplicasDelete
 replicasDelete pRdPoolName_ pRdZone_ pRdPayload_ pRdReplicaName_ pRdProjectName_ =
-    ReplicasDelete'
+  ReplicasDelete'
     { _rdPoolName = pRdPoolName_
     , _rdZone = pRdZone_
     , _rdPayload = pRdPayload_

@@ -77,7 +77,8 @@ type ProjectsJobsMessagesListResource =
 -- | Request the job status.
 --
 -- /See:/ 'projectsJobsMessagesList' smart constructor.
-data ProjectsJobsMessagesList = ProjectsJobsMessagesList'
+data ProjectsJobsMessagesList =
+  ProjectsJobsMessagesList'
     { _pjmlXgafv             :: !(Maybe Xgafv)
     , _pjmlJobId             :: !Text
     , _pjmlUploadProtocol    :: !(Maybe Text)
@@ -91,7 +92,8 @@ data ProjectsJobsMessagesList = ProjectsJobsMessagesList'
     , _pjmlProjectId         :: !Text
     , _pjmlPageSize          :: !(Maybe (Textual Int32))
     , _pjmlCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsMessagesList' with the minimum fields required to make a request.
 --
@@ -127,7 +129,7 @@ projectsJobsMessagesList
     -> Text -- ^ 'pjmlProjectId'
     -> ProjectsJobsMessagesList
 projectsJobsMessagesList pPjmlJobId_ pPjmlProjectId_ =
-    ProjectsJobsMessagesList'
+  ProjectsJobsMessagesList'
     { _pjmlXgafv = Nothing
     , _pjmlJobId = pPjmlJobId_
     , _pjmlUploadProtocol = Nothing

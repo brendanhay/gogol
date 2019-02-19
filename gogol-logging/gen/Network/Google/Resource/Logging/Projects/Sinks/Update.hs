@@ -71,7 +71,8 @@ type ProjectsSinksUpdateResource =
 -- unique_writer_identity field.
 --
 -- /See:/ 'projectsSinksUpdate' smart constructor.
-data ProjectsSinksUpdate = ProjectsSinksUpdate'
+data ProjectsSinksUpdate =
+  ProjectsSinksUpdate'
     { _psuXgafv                :: !(Maybe Xgafv)
     , _psuUniqueWriterIdentity :: !(Maybe Bool)
     , _psuUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsSinksUpdate = ProjectsSinksUpdate'
     , _psuPayload              :: !LogSink
     , _psuSinkName             :: !Text
     , _psuCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSinksUpdate' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsSinksUpdate
     -> Text -- ^ 'psuSinkName'
     -> ProjectsSinksUpdate
 projectsSinksUpdate pPsuPayload_ pPsuSinkName_ =
-    ProjectsSinksUpdate'
+  ProjectsSinksUpdate'
     { _psuXgafv = Nothing
     , _psuUniqueWriterIdentity = Nothing
     , _psuUploadProtocol = Nothing

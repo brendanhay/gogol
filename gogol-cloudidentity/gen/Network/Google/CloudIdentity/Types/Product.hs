@@ -22,9 +22,11 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'lookupMembershipNameResponse' smart constructor.
-newtype LookupMembershipNameResponse = LookupMembershipNameResponse'
+newtype LookupMembershipNameResponse =
+  LookupMembershipNameResponse'
     { _lmnrName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LookupMembershipNameResponse' with the minimum fields required to make a request.
 --
@@ -34,9 +36,7 @@ newtype LookupMembershipNameResponse = LookupMembershipNameResponse'
 lookupMembershipNameResponse
     :: LookupMembershipNameResponse
 lookupMembershipNameResponse =
-    LookupMembershipNameResponse'
-    { _lmnrName = Nothing
-    }
+  LookupMembershipNameResponse' {_lmnrName = Nothing}
 
 -- | [Resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
@@ -94,11 +94,13 @@ instance ToJSON LookupMembershipNameResponse where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -111,12 +113,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -157,7 +154,8 @@ instance ToJSON Status where
 -- | Resource representing a Group.
 --
 -- /See:/ 'group'' smart constructor.
-data Group = Group'
+data Group =
+  Group'
     { _gParent      :: !(Maybe Text)
     , _gGroupKey    :: !(Maybe EntityKey)
     , _gUpdateTime  :: !(Maybe DateTime')
@@ -166,7 +164,8 @@ data Group = Group'
     , _gLabels      :: !(Maybe GroupLabels)
     , _gDescription :: !(Maybe Text)
     , _gCreateTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
@@ -190,7 +189,7 @@ data Group = Group'
 group'
     :: Group
 group' =
-    Group'
+  Group'
     { _gParent = Nothing
     , _gGroupKey = Nothing
     , _gUpdateTime = Nothing
@@ -281,13 +280,15 @@ instance ToJSON Group where
 -- | Resource representing a Membership within a Group
 --
 -- /See:/ 'membership' smart constructor.
-data Membership = Membership'
+data Membership =
+  Membership'
     { _mRoles              :: !(Maybe [MembershipRole])
     , _mUpdateTime         :: !(Maybe DateTime')
     , _mName               :: !(Maybe Text)
     , _mPreferredMemberKey :: !(Maybe EntityKey)
     , _mCreateTime         :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Membership' with the minimum fields required to make a request.
 --
@@ -305,7 +306,7 @@ data Membership = Membership'
 membership
     :: Membership
 membership =
-    Membership'
+  Membership'
     { _mRoles = Nothing
     , _mUpdateTime = Nothing
     , _mName = Nothing
@@ -374,13 +375,15 @@ instance ToJSON Membership where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -398,7 +401,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -464,10 +467,12 @@ instance ToJSON Operation where
 -- | Response message for ListGroups operation.
 --
 -- /See:/ 'listGroupsResponse' smart constructor.
-data ListGroupsResponse = ListGroupsResponse'
+data ListGroupsResponse =
+  ListGroupsResponse'
     { _lgrGroups        :: !(Maybe [Group])
     , _lgrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGroupsResponse' with the minimum fields required to make a request.
 --
@@ -479,10 +484,7 @@ data ListGroupsResponse = ListGroupsResponse'
 listGroupsResponse
     :: ListGroupsResponse
 listGroupsResponse =
-    ListGroupsResponse'
-    { _lgrGroups = Nothing
-    , _lgrNextPageToken = Nothing
-    }
+  ListGroupsResponse' {_lgrGroups = Nothing, _lgrNextPageToken = Nothing}
 
 -- | Groups returned in response to list request. The results are not sorted.
 lgrGroups :: Lens' ListGroupsResponse [Group]
@@ -515,9 +517,11 @@ instance ToJSON ListGroupsResponse where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -528,9 +532,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -549,9 +551,11 @@ instance ToJSON StatusDetailsItem where
 -- | Resource representing a role within a Membership.
 --
 -- /See:/ 'membershipRole' smart constructor.
-newtype MembershipRole = MembershipRole'
+newtype MembershipRole =
+  MembershipRole'
     { _mrName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MembershipRole' with the minimum fields required to make a request.
 --
@@ -560,10 +564,7 @@ newtype MembershipRole = MembershipRole'
 -- * 'mrName'
 membershipRole
     :: MembershipRole
-membershipRole =
-    MembershipRole'
-    { _mrName = Nothing
-    }
+membershipRole = MembershipRole' {_mrName = Nothing}
 
 -- | MembershipRole in string format. Currently supported MembershipRoles:
 -- \`\"MEMBER\"\`.
@@ -581,9 +582,11 @@ instance ToJSON MembershipRole where
 
 --
 -- /See:/ 'lookupGroupNameResponse' smart constructor.
-newtype LookupGroupNameResponse = LookupGroupNameResponse'
+newtype LookupGroupNameResponse =
+  LookupGroupNameResponse'
     { _lgnrName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LookupGroupNameResponse' with the minimum fields required to make a request.
 --
@@ -592,10 +595,7 @@ newtype LookupGroupNameResponse = LookupGroupNameResponse'
 -- * 'lgnrName'
 lookupGroupNameResponse
     :: LookupGroupNameResponse
-lookupGroupNameResponse =
-    LookupGroupNameResponse'
-    { _lgnrName = Nothing
-    }
+lookupGroupNameResponse = LookupGroupNameResponse' {_lgnrName = Nothing}
 
 -- | [Resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
@@ -615,10 +615,12 @@ instance ToJSON LookupGroupNameResponse where
 
 --
 -- /See:/ 'searchGroupsResponse' smart constructor.
-data SearchGroupsResponse = SearchGroupsResponse'
+data SearchGroupsResponse =
+  SearchGroupsResponse'
     { _sgrGroups        :: !(Maybe [Group])
     , _sgrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchGroupsResponse' with the minimum fields required to make a request.
 --
@@ -630,10 +632,7 @@ data SearchGroupsResponse = SearchGroupsResponse'
 searchGroupsResponse
     :: SearchGroupsResponse
 searchGroupsResponse =
-    SearchGroupsResponse'
-    { _sgrGroups = Nothing
-    , _sgrNextPageToken = Nothing
-    }
+  SearchGroupsResponse' {_sgrGroups = Nothing, _sgrNextPageToken = Nothing}
 
 -- | List of Groups satisfying the search query.
 sgrGroups :: Lens' SearchGroupsResponse [Group]
@@ -669,10 +668,12 @@ instance ToJSON SearchGroupsResponse where
 -- but the combination of a namespace and an ID must be unique.
 --
 -- /See:/ 'entityKey' smart constructor.
-data EntityKey = EntityKey'
+data EntityKey =
+  EntityKey'
     { _ekNamespace :: !(Maybe Text)
     , _ekId        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntityKey' with the minimum fields required to make a request.
 --
@@ -683,11 +684,7 @@ data EntityKey = EntityKey'
 -- * 'ekId'
 entityKey
     :: EntityKey
-entityKey =
-    EntityKey'
-    { _ekNamespace = Nothing
-    , _ekId = Nothing
-    }
+entityKey = EntityKey' {_ekNamespace = Nothing, _ekId = Nothing}
 
 -- | Namespaces provide isolation for IDs, so an ID only needs to be unique
 -- within its namespace. Namespaces are currently only created as part of
@@ -721,9 +718,11 @@ instance ToJSON EntityKey where
 -- label value as empty.
 --
 -- /See:/ 'groupLabels' smart constructor.
-newtype GroupLabels = GroupLabels'
+newtype GroupLabels =
+  GroupLabels'
     { _glAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupLabels' with the minimum fields required to make a request.
 --
@@ -734,9 +733,7 @@ groupLabels
     :: HashMap Text Text -- ^ 'glAddtional'
     -> GroupLabels
 groupLabels pGlAddtional_ =
-    GroupLabels'
-    { _glAddtional = _Coerce # pGlAddtional_
-    }
+  GroupLabels' {_glAddtional = _Coerce # pGlAddtional_}
 
 glAddtional :: Lens' GroupLabels (HashMap Text Text)
 glAddtional
@@ -753,10 +750,12 @@ instance ToJSON GroupLabels where
 
 --
 -- /See:/ 'listMembershipsResponse' smart constructor.
-data ListMembershipsResponse = ListMembershipsResponse'
+data ListMembershipsResponse =
+  ListMembershipsResponse'
     { _lmrNextPageToken :: !(Maybe Text)
     , _lmrMemberships   :: !(Maybe [Membership])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMembershipsResponse' with the minimum fields required to make a request.
 --
@@ -768,10 +767,8 @@ data ListMembershipsResponse = ListMembershipsResponse'
 listMembershipsResponse
     :: ListMembershipsResponse
 listMembershipsResponse =
-    ListMembershipsResponse'
-    { _lmrNextPageToken = Nothing
-    , _lmrMemberships = Nothing
-    }
+  ListMembershipsResponse'
+    {_lmrNextPageToken = Nothing, _lmrMemberships = Nothing}
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results available for listing.
@@ -809,9 +806,11 @@ instance ToJSON ListMembershipsResponse where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -822,9 +821,7 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -850,9 +847,11 @@ instance ToJSON OperationMetadata where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -863,9 +862,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)

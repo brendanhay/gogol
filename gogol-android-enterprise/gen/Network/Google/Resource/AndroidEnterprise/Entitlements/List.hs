@@ -56,10 +56,12 @@ type EntitlementsListResource =
 -- | Lists all entitlements for the specified user. Only the ID is set.
 --
 -- /See:/ 'entitlementsList' smart constructor.
-data EntitlementsList = EntitlementsList'
+data EntitlementsList =
+  EntitlementsList'
     { _elEnterpriseId :: !Text
     , _elUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntitlementsList' with the minimum fields required to make a request.
 --
@@ -73,10 +75,7 @@ entitlementsList
     -> Text -- ^ 'elUserId'
     -> EntitlementsList
 entitlementsList pElEnterpriseId_ pElUserId_ =
-    EntitlementsList'
-    { _elEnterpriseId = pElEnterpriseId_
-    , _elUserId = pElUserId_
-    }
+  EntitlementsList' {_elEnterpriseId = pElEnterpriseId_, _elUserId = pElUserId_}
 
 -- | The ID of the enterprise.
 elEnterpriseId :: Lens' EntitlementsList Text

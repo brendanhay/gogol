@@ -59,12 +59,14 @@ type DefaultObjectAccessControlsPatchResource =
 -- | Patches a default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsPatch' smart constructor.
-data DefaultObjectAccessControlsPatch = DefaultObjectAccessControlsPatch'
+data DefaultObjectAccessControlsPatch =
+  DefaultObjectAccessControlsPatch'
     { _doacpBucket      :: !Text
     , _doacpPayload     :: !ObjectAccessControl
     , _doacpUserProject :: !(Maybe Text)
     , _doacpEntity      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsPatch' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ defaultObjectAccessControlsPatch
     -> Text -- ^ 'doacpEntity'
     -> DefaultObjectAccessControlsPatch
 defaultObjectAccessControlsPatch pDoacpBucket_ pDoacpPayload_ pDoacpEntity_ =
-    DefaultObjectAccessControlsPatch'
+  DefaultObjectAccessControlsPatch'
     { _doacpBucket = pDoacpBucket_
     , _doacpPayload = pDoacpPayload_
     , _doacpUserProject = Nothing
@@ -115,7 +117,8 @@ doacpEntity
   = lens _doacpEntity (\ s a -> s{_doacpEntity = a})
 
 instance GoogleRequest
-         DefaultObjectAccessControlsPatch where
+           DefaultObjectAccessControlsPatch
+         where
         type Rs DefaultObjectAccessControlsPatch =
              ObjectAccessControl
         type Scopes DefaultObjectAccessControlsPatch =

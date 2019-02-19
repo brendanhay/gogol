@@ -50,9 +50,11 @@ type AccountsContainersWorkspacesTagsGetResource =
 -- | Gets a GTM Tag.
 --
 -- /See:/ 'accountsContainersWorkspacesTagsGet' smart constructor.
-newtype AccountsContainersWorkspacesTagsGet = AccountsContainersWorkspacesTagsGet'
+newtype AccountsContainersWorkspacesTagsGet =
+  AccountsContainersWorkspacesTagsGet'
     { _acwtgPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesTagsGet' with the minimum fields required to make a request.
 --
@@ -63,9 +65,7 @@ accountsContainersWorkspacesTagsGet
     :: Text -- ^ 'acwtgPath'
     -> AccountsContainersWorkspacesTagsGet
 accountsContainersWorkspacesTagsGet pAcwtgPath_ =
-    AccountsContainersWorkspacesTagsGet'
-    { _acwtgPath = pAcwtgPath_
-    }
+  AccountsContainersWorkspacesTagsGet' {_acwtgPath = pAcwtgPath_}
 
 -- | GTM Tag\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/tags\/{tag_id}
@@ -74,7 +74,8 @@ acwtgPath
   = lens _acwtgPath (\ s a -> s{_acwtgPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTagsGet where
+           AccountsContainersWorkspacesTagsGet
+         where
         type Rs AccountsContainersWorkspacesTagsGet = Tag
         type Scopes AccountsContainersWorkspacesTagsGet =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",

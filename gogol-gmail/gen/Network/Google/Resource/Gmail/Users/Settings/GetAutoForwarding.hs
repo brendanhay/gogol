@@ -54,9 +54,11 @@ type UsersSettingsGetAutoForwardingResource =
 -- | Gets the auto-forwarding setting for the specified account.
 --
 -- /See:/ 'usersSettingsGetAutoForwarding' smart constructor.
-newtype UsersSettingsGetAutoForwarding = UsersSettingsGetAutoForwarding'
+newtype UsersSettingsGetAutoForwarding =
+  UsersSettingsGetAutoForwarding'
     { _usgafUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsGetAutoForwarding' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ newtype UsersSettingsGetAutoForwarding = UsersSettingsGetAutoForwarding'
 usersSettingsGetAutoForwarding
     :: UsersSettingsGetAutoForwarding
 usersSettingsGetAutoForwarding =
-    UsersSettingsGetAutoForwarding'
-    { _usgafUserId = "me"
-    }
+  UsersSettingsGetAutoForwarding' {_usgafUserId = "me"}
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

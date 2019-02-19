@@ -74,13 +74,15 @@ type ProjectsHistoriesExecutionsStepsPublishXUnitXMLFilesResource
 -- NOT_FOUND - if the containing Execution does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsPublishXUnitXMLFiles' smart constructor.
-data ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles = ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles'
+data ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles =
+  ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles'
     { _phespxuxfExecutionId :: !Text
     , _phespxuxfStepId      :: !Text
     , _phespxuxfPayload     :: !PublishXUnitXMLFilesRequest
     , _phespxuxfHistoryId   :: !Text
     , _phespxuxfProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsHistoriesExecutionsStepsPublishXUnitXMLFiles
     -> Text -- ^ 'phespxuxfProjectId'
     -> ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles
 projectsHistoriesExecutionsStepsPublishXUnitXMLFiles pPhespxuxfExecutionId_ pPhespxuxfStepId_ pPhespxuxfPayload_ pPhespxuxfHistoryId_ pPhespxuxfProjectId_ =
-    ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles'
+  ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles'
     { _phespxuxfExecutionId = pPhespxuxfExecutionId_
     , _phespxuxfStepId = pPhespxuxfStepId_
     , _phespxuxfPayload = pPhespxuxfPayload_
@@ -142,7 +144,7 @@ phespxuxfProjectId
       (\ s a -> s{_phespxuxfProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles
+           ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles
          where
         type Rs
                ProjectsHistoriesExecutionsStepsPublishXUnitXMLFiles

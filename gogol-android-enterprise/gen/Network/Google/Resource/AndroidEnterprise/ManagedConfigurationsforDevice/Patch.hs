@@ -65,13 +65,15 @@ type ManagedConfigurationsforDevicePatchResource =
 -- specified device. This method supports patch semantics.
 --
 -- /See:/ 'managedConfigurationsforDevicePatch' smart constructor.
-data ManagedConfigurationsforDevicePatch = ManagedConfigurationsforDevicePatch'
+data ManagedConfigurationsforDevicePatch =
+  ManagedConfigurationsforDevicePatch'
     { _mcdpEnterpriseId                    :: !Text
     , _mcdpPayload                         :: !ManagedConfiguration
     , _mcdpUserId                          :: !Text
     , _mcdpDeviceId                        :: !Text
     , _mcdpManagedConfigurationForDeviceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsforDevicePatch' with the minimum fields required to make a request.
 --
@@ -94,12 +96,13 @@ managedConfigurationsforDevicePatch
     -> Text -- ^ 'mcdpManagedConfigurationForDeviceId'
     -> ManagedConfigurationsforDevicePatch
 managedConfigurationsforDevicePatch pMcdpEnterpriseId_ pMcdpPayload_ pMcdpUserId_ pMcdpDeviceId_ pMcdpManagedConfigurationForDeviceId_ =
-    ManagedConfigurationsforDevicePatch'
+  ManagedConfigurationsforDevicePatch'
     { _mcdpEnterpriseId = pMcdpEnterpriseId_
     , _mcdpPayload = pMcdpPayload_
     , _mcdpUserId = pMcdpUserId_
     , _mcdpDeviceId = pMcdpDeviceId_
-    , _mcdpManagedConfigurationForDeviceId = pMcdpManagedConfigurationForDeviceId_
+    , _mcdpManagedConfigurationForDeviceId =
+        pMcdpManagedConfigurationForDeviceId_
     }
 
 -- | The ID of the enterprise.
@@ -132,7 +135,8 @@ mcdpManagedConfigurationForDeviceId
          s{_mcdpManagedConfigurationForDeviceId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforDevicePatch where
+           ManagedConfigurationsforDevicePatch
+         where
         type Rs ManagedConfigurationsforDevicePatch =
              ManagedConfiguration
         type Scopes ManagedConfigurationsforDevicePatch =

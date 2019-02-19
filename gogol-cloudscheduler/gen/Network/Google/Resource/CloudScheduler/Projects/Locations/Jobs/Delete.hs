@@ -59,14 +59,16 @@ type ProjectsLocationsJobsDeleteResource =
 -- | Deletes a job.
 --
 -- /See:/ 'projectsLocationsJobsDelete' smart constructor.
-data ProjectsLocationsJobsDelete = ProjectsLocationsJobsDelete'
+data ProjectsLocationsJobsDelete =
+  ProjectsLocationsJobsDelete'
     { _pljdXgafv          :: !(Maybe Xgafv)
     , _pljdUploadProtocol :: !(Maybe Text)
     , _pljdAccessToken    :: !(Maybe Text)
     , _pljdUploadType     :: !(Maybe Text)
     , _pljdName           :: !Text
     , _pljdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsLocationsJobsDelete
     :: Text -- ^ 'pljdName'
     -> ProjectsLocationsJobsDelete
 projectsLocationsJobsDelete pPljdName_ =
-    ProjectsLocationsJobsDelete'
+  ProjectsLocationsJobsDelete'
     { _pljdXgafv = Nothing
     , _pljdUploadProtocol = Nothing
     , _pljdAccessToken = Nothing

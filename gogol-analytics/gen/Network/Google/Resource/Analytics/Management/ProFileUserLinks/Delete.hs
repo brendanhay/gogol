@@ -61,12 +61,14 @@ type ManagementProFileUserLinksDeleteResource =
 -- | Removes a user from the given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksDelete' smart constructor.
-data ManagementProFileUserLinksDelete = ManagementProFileUserLinksDelete'
+data ManagementProFileUserLinksDelete =
+  ManagementProFileUserLinksDelete'
     { _mpfuldWebPropertyId :: !Text
     , _mpfuldProFileId     :: !Text
     , _mpfuldAccountId     :: !Text
     , _mpfuldLinkId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementProFileUserLinksDelete' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ managementProFileUserLinksDelete
     -> Text -- ^ 'mpfuldLinkId'
     -> ManagementProFileUserLinksDelete
 managementProFileUserLinksDelete pMpfuldWebPropertyId_ pMpfuldProFileId_ pMpfuldAccountId_ pMpfuldLinkId_ =
-    ManagementProFileUserLinksDelete'
+  ManagementProFileUserLinksDelete'
     { _mpfuldWebPropertyId = pMpfuldWebPropertyId_
     , _mpfuldProFileId = pMpfuldProFileId_
     , _mpfuldAccountId = pMpfuldAccountId_
@@ -117,7 +119,8 @@ mpfuldLinkId
   = lens _mpfuldLinkId (\ s a -> s{_mpfuldLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileUserLinksDelete where
+           ManagementProFileUserLinksDelete
+         where
         type Rs ManagementProFileUserLinksDelete = ()
         type Scopes ManagementProFileUserLinksDelete =
              '["https://www.googleapis.com/auth/analytics.manage.users"]

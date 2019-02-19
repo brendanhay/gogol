@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'MobileAppsGet' request conforms to.
 type MobileAppsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "mobileApps" :>
@@ -54,10 +54,12 @@ type MobileAppsGetResource =
 -- | Gets one mobile app by ID.
 --
 -- /See:/ 'mobileAppsGet' smart constructor.
-data MobileAppsGet = MobileAppsGet'
+data MobileAppsGet =
+  MobileAppsGet'
     { _magProFileId :: !(Textual Int64)
     , _magId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileAppsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ mobileAppsGet
     -> Text -- ^ 'magId'
     -> MobileAppsGet
 mobileAppsGet pMagProFileId_ pMagId_ =
-    MobileAppsGet'
-    { _magProFileId = _Coerce # pMagProFileId_
-    , _magId = pMagId_
-    }
+  MobileAppsGet' {_magProFileId = _Coerce # pMagProFileId_, _magId = pMagId_}
 
 -- | User profile ID associated with this request.
 magProFileId :: Lens' MobileAppsGet Int64

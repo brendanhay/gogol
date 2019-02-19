@@ -61,10 +61,12 @@ type UsersListResource =
 -- Users.insert call.
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList'
+data UsersList =
+  UsersList'
     { _ulEmail        :: !Text
     , _ulEnterpriseId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
@@ -78,10 +80,7 @@ usersList
     -> Text -- ^ 'ulEnterpriseId'
     -> UsersList
 usersList pUlEmail_ pUlEnterpriseId_ =
-    UsersList'
-    { _ulEmail = pUlEmail_
-    , _ulEnterpriseId = pUlEnterpriseId_
-    }
+  UsersList' {_ulEmail = pUlEmail_, _ulEnterpriseId = pUlEnterpriseId_}
 
 -- | The exact primary email address of the user to look up.
 ulEmail :: Lens' UsersList Text

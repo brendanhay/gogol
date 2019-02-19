@@ -63,14 +63,16 @@ type ProjectsUptimeCheckConfigsDeleteResource =
 -- other dependent configs that would be rendered invalid by the deletion.
 --
 -- /See:/ 'projectsUptimeCheckConfigsDelete' smart constructor.
-data ProjectsUptimeCheckConfigsDelete = ProjectsUptimeCheckConfigsDelete'
+data ProjectsUptimeCheckConfigsDelete =
+  ProjectsUptimeCheckConfigsDelete'
     { _puccdXgafv          :: !(Maybe Xgafv)
     , _puccdUploadProtocol :: !(Maybe Text)
     , _puccdAccessToken    :: !(Maybe Text)
     , _puccdUploadType     :: !(Maybe Text)
     , _puccdName           :: !Text
     , _puccdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsUptimeCheckConfigsDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ projectsUptimeCheckConfigsDelete
     :: Text -- ^ 'puccdName'
     -> ProjectsUptimeCheckConfigsDelete
 projectsUptimeCheckConfigsDelete pPuccdName_ =
-    ProjectsUptimeCheckConfigsDelete'
+  ProjectsUptimeCheckConfigsDelete'
     { _puccdXgafv = Nothing
     , _puccdUploadProtocol = Nothing
     , _puccdAccessToken = Nothing
@@ -136,7 +138,8 @@ puccdCallback
       (\ s a -> s{_puccdCallback = a})
 
 instance GoogleRequest
-         ProjectsUptimeCheckConfigsDelete where
+           ProjectsUptimeCheckConfigsDelete
+         where
         type Rs ProjectsUptimeCheckConfigsDelete = Empty
         type Scopes ProjectsUptimeCheckConfigsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -62,14 +62,16 @@ type GetCapabilitiesResource =
 -- | GetCapabilities returns the server capabilities configuration.
 --
 -- /See:/ 'getCapabilities' smart constructor.
-data GetCapabilities = GetCapabilities'
+data GetCapabilities =
+  GetCapabilities'
     { _gcXgafv          :: !(Maybe Xgafv)
     , _gcUploadProtocol :: !(Maybe Text)
     , _gcAccessToken    :: !(Maybe Text)
     , _gcUploadType     :: !(Maybe Text)
     , _gcInstanceName   :: !Text
     , _gcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCapabilities' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ getCapabilities
     :: Text -- ^ 'gcInstanceName'
     -> GetCapabilities
 getCapabilities pGcInstanceName_ =
-    GetCapabilities'
+  GetCapabilities'
     { _gcXgafv = Nothing
     , _gcUploadProtocol = Nothing
     , _gcAccessToken = Nothing

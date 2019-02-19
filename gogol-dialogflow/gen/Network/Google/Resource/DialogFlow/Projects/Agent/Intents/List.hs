@@ -70,7 +70,8 @@ type ProjectsAgentIntentsListResource =
 -- | Returns the list of all intents in the specified agent.
 --
 -- /See:/ 'projectsAgentIntentsList' smart constructor.
-data ProjectsAgentIntentsList = ProjectsAgentIntentsList'
+data ProjectsAgentIntentsList =
+  ProjectsAgentIntentsList'
     { _pailParent         :: !Text
     , _pailXgafv          :: !(Maybe Xgafv)
     , _pailLanguageCode   :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsAgentIntentsList = ProjectsAgentIntentsList'
     , _pailPageToken      :: !(Maybe Text)
     , _pailPageSize       :: !(Maybe (Textual Int32))
     , _pailCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentIntentsList' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ projectsAgentIntentsList
     :: Text -- ^ 'pailParent'
     -> ProjectsAgentIntentsList
 projectsAgentIntentsList pPailParent_ =
-    ProjectsAgentIntentsList'
+  ProjectsAgentIntentsList'
     { _pailParent = pPailParent_
     , _pailXgafv = Nothing
     , _pailLanguageCode = Nothing

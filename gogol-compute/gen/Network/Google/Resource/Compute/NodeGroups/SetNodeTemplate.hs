@@ -63,13 +63,15 @@ type NodeGroupsSetNodeTemplateResource =
 -- | Updates the node template of the node group.
 --
 -- /See:/ 'nodeGroupsSetNodeTemplate' smart constructor.
-data NodeGroupsSetNodeTemplate = NodeGroupsSetNodeTemplate'
+data NodeGroupsSetNodeTemplate =
+  NodeGroupsSetNodeTemplate'
     { _ngsntRequestId :: !(Maybe Text)
     , _ngsntNodeGroup :: !Text
     , _ngsntProject   :: !Text
     , _ngsntZone      :: !Text
     , _ngsntPayload   :: !NodeGroupsSetNodeTemplateRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsSetNodeTemplate' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ nodeGroupsSetNodeTemplate
     -> NodeGroupsSetNodeTemplateRequest -- ^ 'ngsntPayload'
     -> NodeGroupsSetNodeTemplate
 nodeGroupsSetNodeTemplate pNgsntNodeGroup_ pNgsntProject_ pNgsntZone_ pNgsntPayload_ =
-    NodeGroupsSetNodeTemplate'
+  NodeGroupsSetNodeTemplate'
     { _ngsntRequestId = Nothing
     , _ngsntNodeGroup = pNgsntNodeGroup_
     , _ngsntProject = pNgsntProject_

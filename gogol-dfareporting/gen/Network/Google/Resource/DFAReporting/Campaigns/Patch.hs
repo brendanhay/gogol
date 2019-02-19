@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CampaignsPatch' request conforms to.
 type CampaignsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -56,11 +56,13 @@ type CampaignsPatchResource =
 -- | Updates an existing campaign. This method supports patch semantics.
 --
 -- /See:/ 'campaignsPatch' smart constructor.
-data CampaignsPatch = CampaignsPatch'
+data CampaignsPatch =
+  CampaignsPatch'
     { _cpProFileId :: !(Textual Int64)
     , _cpPayload   :: !Campaign
     , _cpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CampaignsPatch' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ campaignsPatch
     -> Int64 -- ^ 'cpId'
     -> CampaignsPatch
 campaignsPatch pCpProFileId_ pCpPayload_ pCpId_ =
-    CampaignsPatch'
+  CampaignsPatch'
     { _cpProFileId = _Coerce # pCpProFileId_
     , _cpPayload = pCpPayload_
     , _cpId = _Coerce # pCpId_

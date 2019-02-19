@@ -55,10 +55,12 @@ type OrgUnitsDeleteResource =
 -- | Remove organizational unit
 --
 -- /See:/ 'orgUnitsDelete' smart constructor.
-data OrgUnitsDelete = OrgUnitsDelete'
+data OrgUnitsDelete =
+  OrgUnitsDelete'
     { _oudOrgUnitPath :: ![Text]
     , _oudCustomerId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrgUnitsDelete' with the minimum fields required to make a request.
 --
@@ -72,7 +74,7 @@ orgUnitsDelete
     -> Text -- ^ 'oudCustomerId'
     -> OrgUnitsDelete
 orgUnitsDelete pOudOrgUnitPath_ pOudCustomerId_ =
-    OrgUnitsDelete'
+  OrgUnitsDelete'
     { _oudOrgUnitPath = _Coerce # pOudOrgUnitPath_
     , _oudCustomerId = pOudCustomerId_
     }

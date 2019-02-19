@@ -61,12 +61,14 @@ type TargetHTTPSProxiesSetSSLCertificatesResource =
 -- | Replaces SslCertificates for TargetHttpsProxy.
 --
 -- /See:/ 'targetHTTPSProxiesSetSSLCertificates' smart constructor.
-data TargetHTTPSProxiesSetSSLCertificates = TargetHTTPSProxiesSetSSLCertificates'
+data TargetHTTPSProxiesSetSSLCertificates =
+  TargetHTTPSProxiesSetSSLCertificates'
     { _thpsscRequestId        :: !(Maybe Text)
     , _thpsscProject          :: !Text
     , _thpsscPayload          :: !TargetHTTPSProxiesSetSSLCertificatesRequest
     , _thpsscTargetHTTPSProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxiesSetSSLCertificates' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ targetHTTPSProxiesSetSSLCertificates
     -> Text -- ^ 'thpsscTargetHTTPSProxy'
     -> TargetHTTPSProxiesSetSSLCertificates
 targetHTTPSProxiesSetSSLCertificates pThpsscProject_ pThpsscPayload_ pThpsscTargetHTTPSProxy_ =
-    TargetHTTPSProxiesSetSSLCertificates'
+  TargetHTTPSProxiesSetSSLCertificates'
     { _thpsscRequestId = Nothing
     , _thpsscProject = pThpsscProject_
     , _thpsscPayload = pThpsscPayload_
@@ -127,7 +129,8 @@ thpsscTargetHTTPSProxy
       (\ s a -> s{_thpsscTargetHTTPSProxy = a})
 
 instance GoogleRequest
-         TargetHTTPSProxiesSetSSLCertificates where
+           TargetHTTPSProxiesSetSSLCertificates
+         where
         type Rs TargetHTTPSProxiesSetSSLCertificates =
              Operation
         type Scopes TargetHTTPSProxiesSetSSLCertificates =

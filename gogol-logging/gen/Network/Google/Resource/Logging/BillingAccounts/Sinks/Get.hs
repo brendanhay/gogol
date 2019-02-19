@@ -59,14 +59,16 @@ type BillingAccountsSinksGetResource =
 -- | Gets a sink.
 --
 -- /See:/ 'billingAccountsSinksGet' smart constructor.
-data BillingAccountsSinksGet = BillingAccountsSinksGet'
+data BillingAccountsSinksGet =
+  BillingAccountsSinksGet'
     { _basgXgafv          :: !(Maybe Xgafv)
     , _basgUploadProtocol :: !(Maybe Text)
     , _basgAccessToken    :: !(Maybe Text)
     , _basgUploadType     :: !(Maybe Text)
     , _basgSinkName       :: !Text
     , _basgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsSinksGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ billingAccountsSinksGet
     :: Text -- ^ 'basgSinkName'
     -> BillingAccountsSinksGet
 billingAccountsSinksGet pBasgSinkName_ =
-    BillingAccountsSinksGet'
+  BillingAccountsSinksGet'
     { _basgXgafv = Nothing
     , _basgUploadProtocol = Nothing
     , _basgAccessToken = Nothing

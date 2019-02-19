@@ -63,13 +63,15 @@ type NodeGroupsDeleteNodesResource =
 -- | Deletes specified nodes from the node group.
 --
 -- /See:/ 'nodeGroupsDeleteNodes' smart constructor.
-data NodeGroupsDeleteNodes = NodeGroupsDeleteNodes'
+data NodeGroupsDeleteNodes =
+  NodeGroupsDeleteNodes'
     { _ngdnRequestId :: !(Maybe Text)
     , _ngdnNodeGroup :: !Text
     , _ngdnProject   :: !Text
     , _ngdnZone      :: !Text
     , _ngdnPayload   :: !NodeGroupsDeleteNodesRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsDeleteNodes' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ nodeGroupsDeleteNodes
     -> NodeGroupsDeleteNodesRequest -- ^ 'ngdnPayload'
     -> NodeGroupsDeleteNodes
 nodeGroupsDeleteNodes pNgdnNodeGroup_ pNgdnProject_ pNgdnZone_ pNgdnPayload_ =
-    NodeGroupsDeleteNodes'
+  NodeGroupsDeleteNodes'
     { _ngdnRequestId = Nothing
     , _ngdnNodeGroup = pNgdnNodeGroup_
     , _ngdnProject = pNgdnProject_

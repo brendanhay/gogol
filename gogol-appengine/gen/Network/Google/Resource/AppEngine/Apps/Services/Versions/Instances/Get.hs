@@ -70,7 +70,8 @@ type AppsServicesVersionsInstancesGetResource =
 -- | Gets instance information.
 --
 -- /See:/ 'appsServicesVersionsInstancesGet' smart constructor.
-data AppsServicesVersionsInstancesGet = AppsServicesVersionsInstancesGet'
+data AppsServicesVersionsInstancesGet =
+  AppsServicesVersionsInstancesGet'
     { _asvigXgafv          :: !(Maybe Xgafv)
     , _asvigInstancesId    :: !Text
     , _asvigUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,8 @@ data AppsServicesVersionsInstancesGet = AppsServicesVersionsInstancesGet'
     , _asvigAppsId         :: !Text
     , _asvigServicesId     :: !Text
     , _asvigCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsServicesVersionsInstancesGet' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ appsServicesVersionsInstancesGet
     -> Text -- ^ 'asvigServicesId'
     -> AppsServicesVersionsInstancesGet
 appsServicesVersionsInstancesGet pAsvigInstancesId_ pAsvigVersionsId_ pAsvigAppsId_ pAsvigServicesId_ =
-    AppsServicesVersionsInstancesGet'
+  AppsServicesVersionsInstancesGet'
     { _asvigXgafv = Nothing
     , _asvigInstancesId = pAsvigInstancesId_
     , _asvigUploadProtocol = Nothing
@@ -176,7 +178,8 @@ asvigCallback
       (\ s a -> s{_asvigCallback = a})
 
 instance GoogleRequest
-         AppsServicesVersionsInstancesGet where
+           AppsServicesVersionsInstancesGet
+         where
         type Rs AppsServicesVersionsInstancesGet = Instance
         type Scopes AppsServicesVersionsInstancesGet =
              '["https://www.googleapis.com/auth/appengine.admin",

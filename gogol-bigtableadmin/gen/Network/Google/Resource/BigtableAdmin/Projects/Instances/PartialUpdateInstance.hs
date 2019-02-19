@@ -67,7 +67,8 @@ type ProjectsInstancesPartialUpdateInstanceResource =
 -- Instance.
 --
 -- /See:/ 'projectsInstancesPartialUpdateInstance' smart constructor.
-data ProjectsInstancesPartialUpdateInstance = ProjectsInstancesPartialUpdateInstance'
+data ProjectsInstancesPartialUpdateInstance =
+  ProjectsInstancesPartialUpdateInstance'
     { _pipuiXgafv          :: !(Maybe Xgafv)
     , _pipuiUploadProtocol :: !(Maybe Text)
     , _pipuiUpdateMask     :: !(Maybe GFieldMask)
@@ -76,7 +77,8 @@ data ProjectsInstancesPartialUpdateInstance = ProjectsInstancesPartialUpdateInst
     , _pipuiPayload        :: !Instance
     , _pipuiName           :: !Text
     , _pipuiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesPartialUpdateInstance' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsInstancesPartialUpdateInstance
     -> Text -- ^ 'pipuiName'
     -> ProjectsInstancesPartialUpdateInstance
 projectsInstancesPartialUpdateInstance pPipuiPayload_ pPipuiName_ =
-    ProjectsInstancesPartialUpdateInstance'
+  ProjectsInstancesPartialUpdateInstance'
     { _pipuiXgafv = Nothing
     , _pipuiUploadProtocol = Nothing
     , _pipuiUpdateMask = Nothing
@@ -161,7 +163,8 @@ pipuiCallback
       (\ s a -> s{_pipuiCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesPartialUpdateInstance where
+           ProjectsInstancesPartialUpdateInstance
+         where
         type Rs ProjectsInstancesPartialUpdateInstance =
              Operation
         type Scopes ProjectsInstancesPartialUpdateInstance =

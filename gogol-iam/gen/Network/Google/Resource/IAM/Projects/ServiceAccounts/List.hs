@@ -65,7 +65,8 @@ type ProjectsServiceAccountsListResource =
 -- | Lists ServiceAccounts for a project.
 --
 -- /See:/ 'projectsServiceAccountsList' smart constructor.
-data ProjectsServiceAccountsList = ProjectsServiceAccountsList'
+data ProjectsServiceAccountsList =
+  ProjectsServiceAccountsList'
     { _psalXgafv          :: !(Maybe Xgafv)
     , _psalUploadProtocol :: !(Maybe Text)
     , _psalAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsServiceAccountsList = ProjectsServiceAccountsList'
     , _psalPageToken      :: !(Maybe Text)
     , _psalPageSize       :: !(Maybe (Textual Int32))
     , _psalCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsServiceAccountsList
     :: Text -- ^ 'psalName'
     -> ProjectsServiceAccountsList
 projectsServiceAccountsList pPsalName_ =
-    ProjectsServiceAccountsList'
+  ProjectsServiceAccountsList'
     { _psalXgafv = Nothing
     , _psalUploadProtocol = Nothing
     , _psalAccessToken = Nothing

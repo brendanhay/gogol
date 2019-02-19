@@ -56,11 +56,13 @@ type RevisionsUpdateResource =
 -- | Updates a revision with patch semantics.
 --
 -- /See:/ 'revisionsUpdate' smart constructor.
-data RevisionsUpdate = RevisionsUpdate'
+data RevisionsUpdate =
+  RevisionsUpdate'
     { _revPayload    :: !Revision
     , _revFileId     :: !Text
     , _revRevisionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RevisionsUpdate' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ revisionsUpdate
     -> Text -- ^ 'revRevisionId'
     -> RevisionsUpdate
 revisionsUpdate pRevPayload_ pRevFileId_ pRevRevisionId_ =
-    RevisionsUpdate'
+  RevisionsUpdate'
     { _revPayload = pRevPayload_
     , _revFileId = pRevFileId_
     , _revRevisionId = pRevRevisionId_

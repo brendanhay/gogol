@@ -54,10 +54,12 @@ type ACLGetResource =
 -- | Returns an access control rule.
 --
 -- /See:/ 'aclGet' smart constructor.
-data ACLGet = ACLGet'
+data ACLGet =
+  ACLGet'
     { _agCalendarId :: !Text
     , _agRuleId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ACLGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ aclGet
     -> Text -- ^ 'agRuleId'
     -> ACLGet
 aclGet pAgCalendarId_ pAgRuleId_ =
-    ACLGet'
-    { _agCalendarId = pAgCalendarId_
-    , _agRuleId = pAgRuleId_
-    }
+  ACLGet' {_agCalendarId = pAgCalendarId_, _agRuleId = pAgRuleId_}
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

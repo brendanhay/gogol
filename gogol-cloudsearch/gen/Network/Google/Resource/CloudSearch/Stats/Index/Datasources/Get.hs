@@ -74,7 +74,8 @@ type StatsIndexDatasourcesGetResource =
 -- | Gets indexed item statistics for a single data source.
 --
 -- /See:/ 'statsIndexDatasourcesGet' smart constructor.
-data StatsIndexDatasourcesGet = StatsIndexDatasourcesGet'
+data StatsIndexDatasourcesGet =
+  StatsIndexDatasourcesGet'
     { _sidgFromDateMonth  :: !(Maybe (Textual Int32))
     , _sidgXgafv          :: !(Maybe Xgafv)
     , _sidgUploadProtocol :: !(Maybe Text)
@@ -87,7 +88,8 @@ data StatsIndexDatasourcesGet = StatsIndexDatasourcesGet'
     , _sidgToDateYear     :: !(Maybe (Textual Int32))
     , _sidgToDateMonth    :: !(Maybe (Textual Int32))
     , _sidgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatsIndexDatasourcesGet' with the minimum fields required to make a request.
 --
@@ -120,7 +122,7 @@ statsIndexDatasourcesGet
     :: Text -- ^ 'sidgName'
     -> StatsIndexDatasourcesGet
 statsIndexDatasourcesGet pSidgName_ =
-    StatsIndexDatasourcesGet'
+  StatsIndexDatasourcesGet'
     { _sidgFromDateMonth = Nothing
     , _sidgXgafv = Nothing
     , _sidgUploadProtocol = Nothing

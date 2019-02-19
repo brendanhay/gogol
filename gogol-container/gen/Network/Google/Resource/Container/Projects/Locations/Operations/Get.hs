@@ -65,7 +65,8 @@ type ProjectsLocationsOperationsGetResource =
 -- | Gets the specified operation.
 --
 -- /See:/ 'projectsLocationsOperationsGet' smart constructor.
-data ProjectsLocationsOperationsGet = ProjectsLocationsOperationsGet'
+data ProjectsLocationsOperationsGet =
+  ProjectsLocationsOperationsGet'
     { _plogXgafv          :: !(Maybe Xgafv)
     , _plogUploadProtocol :: !(Maybe Text)
     , _plogAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsLocationsOperationsGet = ProjectsLocationsOperationsGet'
     , _plogProjectId      :: !(Maybe Text)
     , _plogOperationId    :: !(Maybe Text)
     , _plogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsOperationsGet' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsLocationsOperationsGet
     :: Text -- ^ 'plogName'
     -> ProjectsLocationsOperationsGet
 projectsLocationsOperationsGet pPlogName_ =
-    ProjectsLocationsOperationsGet'
+  ProjectsLocationsOperationsGet'
     { _plogXgafv = Nothing
     , _plogUploadProtocol = Nothing
     , _plogAccessToken = Nothing

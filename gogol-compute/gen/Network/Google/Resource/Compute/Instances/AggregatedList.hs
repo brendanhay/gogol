@@ -64,13 +64,15 @@ type InstancesAggregatedListResource =
 -- all regions and zones.
 --
 -- /See:/ 'instancesAggregatedList' smart constructor.
-data InstancesAggregatedList = InstancesAggregatedList'
+data InstancesAggregatedList =
+  InstancesAggregatedList'
     { _ialaOrderBy    :: !(Maybe Text)
     , _ialaProject    :: !Text
     , _ialaFilter     :: !(Maybe Text)
     , _ialaPageToken  :: !(Maybe Text)
     , _ialaMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesAggregatedList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ instancesAggregatedList
     :: Text -- ^ 'ialaProject'
     -> InstancesAggregatedList
 instancesAggregatedList pIalaProject_ =
-    InstancesAggregatedList'
+  InstancesAggregatedList'
     { _ialaOrderBy = Nothing
     , _ialaProject = pIalaProject_
     , _ialaFilter = Nothing

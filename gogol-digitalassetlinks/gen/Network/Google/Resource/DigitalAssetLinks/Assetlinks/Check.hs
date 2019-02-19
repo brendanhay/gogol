@@ -115,7 +115,8 @@ type AssetlinksCheckResource =
 -- specification](https:\/\/github.com\/google\/digitalassetlinks\/blob\/master\/well-known\/details.md).
 --
 -- /See:/ 'assetlinksCheck' smart constructor.
-data AssetlinksCheck = AssetlinksCheck'
+data AssetlinksCheck =
+  AssetlinksCheck'
     { _acXgafv                                        :: !(Maybe Xgafv)
     , _acSourceAndroidAppCertificateSha256Fingerprint :: !(Maybe Text)
     , _acSourceAndroidAppPackageName                  :: !(Maybe Text)
@@ -128,7 +129,8 @@ data AssetlinksCheck = AssetlinksCheck'
     , _acTargetAndroidAppPackageName                  :: !(Maybe Text)
     , _acSourceWebSite                                :: !(Maybe Text)
     , _acCallback                                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssetlinksCheck' with the minimum fields required to make a request.
 --
@@ -160,7 +162,7 @@ data AssetlinksCheck = AssetlinksCheck'
 assetlinksCheck
     :: AssetlinksCheck
 assetlinksCheck =
-    AssetlinksCheck'
+  AssetlinksCheck'
     { _acXgafv = Nothing
     , _acSourceAndroidAppCertificateSha256Fingerprint = Nothing
     , _acSourceAndroidAppPackageName = Nothing

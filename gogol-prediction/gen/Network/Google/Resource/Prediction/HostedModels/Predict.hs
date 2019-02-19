@@ -57,11 +57,13 @@ type HostedModelsPredictResource =
 -- | Submit input and request an output against a hosted model.
 --
 -- /See:/ 'hostedModelsPredict' smart constructor.
-data HostedModelsPredict = HostedModelsPredict'
+data HostedModelsPredict =
+  HostedModelsPredict'
     { _hmpProject         :: !Text
     , _hmpPayload         :: !Input
     , _hmpHostedModelName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HostedModelsPredict' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ hostedModelsPredict
     -> Text -- ^ 'hmpHostedModelName'
     -> HostedModelsPredict
 hostedModelsPredict pHmpProject_ pHmpPayload_ pHmpHostedModelName_ =
-    HostedModelsPredict'
+  HostedModelsPredict'
     { _hmpProject = pHmpProject_
     , _hmpPayload = pHmpPayload_
     , _hmpHostedModelName = pHmpHostedModelName_

@@ -72,7 +72,8 @@ type OrganizationsDeidentifyTemplatesListResource =
 -- more.
 --
 -- /See:/ 'organizationsDeidentifyTemplatesList' smart constructor.
-data OrganizationsDeidentifyTemplatesList = OrganizationsDeidentifyTemplatesList'
+data OrganizationsDeidentifyTemplatesList =
+  OrganizationsDeidentifyTemplatesList'
     { _odtlParent         :: !Text
     , _odtlXgafv          :: !(Maybe Xgafv)
     , _odtlUploadProtocol :: !(Maybe Text)
@@ -82,7 +83,8 @@ data OrganizationsDeidentifyTemplatesList = OrganizationsDeidentifyTemplatesList
     , _odtlPageToken      :: !(Maybe Text)
     , _odtlPageSize       :: !(Maybe (Textual Int32))
     , _odtlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsDeidentifyTemplatesList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ organizationsDeidentifyTemplatesList
     :: Text -- ^ 'odtlParent'
     -> OrganizationsDeidentifyTemplatesList
 organizationsDeidentifyTemplatesList pOdtlParent_ =
-    OrganizationsDeidentifyTemplatesList'
+  OrganizationsDeidentifyTemplatesList'
     { _odtlParent = pOdtlParent_
     , _odtlXgafv = Nothing
     , _odtlUploadProtocol = Nothing
@@ -182,7 +184,8 @@ odtlCallback
   = lens _odtlCallback (\ s a -> s{_odtlCallback = a})
 
 instance GoogleRequest
-         OrganizationsDeidentifyTemplatesList where
+           OrganizationsDeidentifyTemplatesList
+         where
         type Rs OrganizationsDeidentifyTemplatesList =
              GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
         type Scopes OrganizationsDeidentifyTemplatesList =

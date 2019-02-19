@@ -54,9 +54,11 @@ type RelyingPartyDeleteAccountResource =
 -- | Delete user account.
 --
 -- /See:/ 'relyingPartyDeleteAccount' smart constructor.
-newtype RelyingPartyDeleteAccount = RelyingPartyDeleteAccount'
+newtype RelyingPartyDeleteAccount =
+  RelyingPartyDeleteAccount'
     { _rPayload :: IdentitytoolkitRelyingPartyDeleteAccountRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyDeleteAccount' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ relyingPartyDeleteAccount
     :: IdentitytoolkitRelyingPartyDeleteAccountRequest -- ^ 'rPayload'
     -> RelyingPartyDeleteAccount
 relyingPartyDeleteAccount pRPayload_ =
-    RelyingPartyDeleteAccount'
-    { _rPayload = pRPayload_
-    }
+  RelyingPartyDeleteAccount' {_rPayload = pRPayload_}
 
 -- | Multipart request metadata.
 rPayload :: Lens' RelyingPartyDeleteAccount IdentitytoolkitRelyingPartyDeleteAccountRequest

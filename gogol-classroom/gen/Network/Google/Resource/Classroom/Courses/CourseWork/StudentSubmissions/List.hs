@@ -95,7 +95,8 @@ type CoursesCourseWorkStudentSubmissionsListResource
 -- requested course does not exist.
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsList' smart constructor.
-data CoursesCourseWorkStudentSubmissionsList = CoursesCourseWorkStudentSubmissionsList'
+data CoursesCourseWorkStudentSubmissionsList =
+  CoursesCourseWorkStudentSubmissionsList'
     { _ccwsslStates         :: !(Maybe [Text])
     , _ccwsslXgafv          :: !(Maybe Xgafv)
     , _ccwsslLate           :: !(Maybe Text)
@@ -108,7 +109,8 @@ data CoursesCourseWorkStudentSubmissionsList = CoursesCourseWorkStudentSubmissio
     , _ccwsslPageSize       :: !(Maybe (Textual Int32))
     , _ccwsslCallback       :: !(Maybe Text)
     , _ccwsslCourseWorkId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsList' with the minimum fields required to make a request.
 --
@@ -142,7 +144,7 @@ coursesCourseWorkStudentSubmissionsList
     -> Text -- ^ 'ccwsslCourseWorkId'
     -> CoursesCourseWorkStudentSubmissionsList
 coursesCourseWorkStudentSubmissionsList pCcwsslCourseId_ pCcwsslCourseWorkId_ =
-    CoursesCourseWorkStudentSubmissionsList'
+  CoursesCourseWorkStudentSubmissionsList'
     { _ccwsslStates = Nothing
     , _ccwsslXgafv = Nothing
     , _ccwsslLate = Nothing
@@ -243,7 +245,8 @@ ccwsslCourseWorkId
       (\ s a -> s{_ccwsslCourseWorkId = a})
 
 instance GoogleRequest
-         CoursesCourseWorkStudentSubmissionsList where
+           CoursesCourseWorkStudentSubmissionsList
+         where
         type Rs CoursesCourseWorkStudentSubmissionsList =
              ListStudentSubmissionsResponse
         type Scopes CoursesCourseWorkStudentSubmissionsList =

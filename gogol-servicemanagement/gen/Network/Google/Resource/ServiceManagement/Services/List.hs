@@ -77,7 +77,8 @@ type ServicesListResource =
 -- \"project:{PROJECT-ID}\".
 --
 -- /See:/ 'servicesList' smart constructor.
-data ServicesList = ServicesList'
+data ServicesList =
+  ServicesList'
     { _slXgafv             :: !(Maybe Xgafv)
     , _slUploadProtocol    :: !(Maybe Text)
     , _slAccessToken       :: !(Maybe Text)
@@ -87,7 +88,8 @@ data ServicesList = ServicesList'
     , _slConsumerId        :: !(Maybe Text)
     , _slPageSize          :: !(Maybe (Textual Int32))
     , _slCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesList' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ data ServicesList = ServicesList'
 servicesList
     :: ServicesList
 servicesList =
-    ServicesList'
+  ServicesList'
     { _slXgafv = Nothing
     , _slUploadProtocol = Nothing
     , _slAccessToken = Nothing

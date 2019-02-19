@@ -59,12 +59,14 @@ type EditsListingsUpdateResource =
 -- | Creates or updates a localized store listing.
 --
 -- /See:/ 'editsListingsUpdate' smart constructor.
-data EditsListingsUpdate = EditsListingsUpdate'
+data EditsListingsUpdate =
+  EditsListingsUpdate'
     { _eluPackageName :: !Text
     , _eluPayload     :: !Listing
     , _eluLanguage    :: !Text
     , _eluEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsListingsUpdate' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ editsListingsUpdate
     -> Text -- ^ 'eluEditId'
     -> EditsListingsUpdate
 editsListingsUpdate pEluPackageName_ pEluPayload_ pEluLanguage_ pEluEditId_ =
-    EditsListingsUpdate'
+  EditsListingsUpdate'
     { _eluPackageName = pEluPackageName_
     , _eluPayload = pEluPayload_
     , _eluLanguage = pEluLanguage_

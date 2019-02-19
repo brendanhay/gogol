@@ -52,9 +52,11 @@ type TransfersGetResource =
 -- | Retrieves a data transfer request by its resource ID.
 --
 -- /See:/ 'transfersGet' smart constructor.
-newtype TransfersGet = TransfersGet'
+newtype TransfersGet =
+  TransfersGet'
     { _tgDataTransferId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransfersGet' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ transfersGet
     :: Text -- ^ 'tgDataTransferId'
     -> TransfersGet
 transfersGet pTgDataTransferId_ =
-    TransfersGet'
-    { _tgDataTransferId = pTgDataTransferId_
-    }
+  TransfersGet' {_tgDataTransferId = pTgDataTransferId_}
 
 -- | ID of the resource to be retrieved. This is returned in the response
 -- from the insert method.

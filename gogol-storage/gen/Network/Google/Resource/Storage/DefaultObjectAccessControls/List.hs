@@ -60,12 +60,14 @@ type DefaultObjectAccessControlsListResource =
 -- | Retrieves default object ACL entries on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsList' smart constructor.
-data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList'
+data DefaultObjectAccessControlsList =
+  DefaultObjectAccessControlsList'
     { _doaclIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _doaclBucket                   :: !Text
     , _doaclUserProject              :: !(Maybe Text)
     , _doaclIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsList' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ defaultObjectAccessControlsList
     :: Text -- ^ 'doaclBucket'
     -> DefaultObjectAccessControlsList
 defaultObjectAccessControlsList pDoaclBucket_ =
-    DefaultObjectAccessControlsList'
+  DefaultObjectAccessControlsList'
     { _doaclIfMetagenerationMatch = Nothing
     , _doaclBucket = pDoaclBucket_
     , _doaclUserProject = Nothing
@@ -118,7 +120,8 @@ doaclIfMetagenerationNotMatch
       . mapping _Coerce
 
 instance GoogleRequest
-         DefaultObjectAccessControlsList where
+           DefaultObjectAccessControlsList
+         where
         type Rs DefaultObjectAccessControlsList =
              ObjectAccessControls
         type Scopes DefaultObjectAccessControlsList =

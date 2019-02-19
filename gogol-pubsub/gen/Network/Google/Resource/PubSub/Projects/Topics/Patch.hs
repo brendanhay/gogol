@@ -64,7 +64,8 @@ type ProjectsTopicsPatchResource =
 -- not modifiable.
 --
 -- /See:/ 'projectsTopicsPatch' smart constructor.
-data ProjectsTopicsPatch = ProjectsTopicsPatch'
+data ProjectsTopicsPatch =
+  ProjectsTopicsPatch'
     { _ptpXgafv          :: !(Maybe Xgafv)
     , _ptpUploadProtocol :: !(Maybe Text)
     , _ptpAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsTopicsPatch = ProjectsTopicsPatch'
     , _ptpPayload        :: !UpdateTopicRequest
     , _ptpName           :: !Text
     , _ptpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTopicsPatch' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsTopicsPatch
     -> Text -- ^ 'ptpName'
     -> ProjectsTopicsPatch
 projectsTopicsPatch pPtpPayload_ pPtpName_ =
-    ProjectsTopicsPatch'
+  ProjectsTopicsPatch'
     { _ptpXgafv = Nothing
     , _ptpUploadProtocol = Nothing
     , _ptpAccessToken = Nothing

@@ -65,7 +65,8 @@ type ProjectsScanConfigsListResource =
 -- | Lists ScanConfigs under a given project.
 --
 -- /See:/ 'projectsScanConfigsList' smart constructor.
-data ProjectsScanConfigsList = ProjectsScanConfigsList'
+data ProjectsScanConfigsList =
+  ProjectsScanConfigsList'
     { _psclParent         :: !Text
     , _psclXgafv          :: !(Maybe Xgafv)
     , _psclUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsScanConfigsList = ProjectsScanConfigsList'
     , _psclPageToken      :: !(Maybe Text)
     , _psclPageSize       :: !(Maybe (Textual Int32))
     , _psclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsScanConfigsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsScanConfigsList
     :: Text -- ^ 'psclParent'
     -> ProjectsScanConfigsList
 projectsScanConfigsList pPsclParent_ =
-    ProjectsScanConfigsList'
+  ProjectsScanConfigsList'
     { _psclParent = pPsclParent_
     , _psclXgafv = Nothing
     , _psclUploadProtocol = Nothing

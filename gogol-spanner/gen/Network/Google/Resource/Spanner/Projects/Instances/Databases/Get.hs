@@ -59,14 +59,16 @@ type ProjectsInstancesDatabasesGetResource =
 -- | Gets the state of a Cloud Spanner database.
 --
 -- /See:/ 'projectsInstancesDatabasesGet' smart constructor.
-data ProjectsInstancesDatabasesGet = ProjectsInstancesDatabasesGet'
+data ProjectsInstancesDatabasesGet =
+  ProjectsInstancesDatabasesGet'
     { _pidgXgafv          :: !(Maybe Xgafv)
     , _pidgUploadProtocol :: !(Maybe Text)
     , _pidgAccessToken    :: !(Maybe Text)
     , _pidgUploadType     :: !(Maybe Text)
     , _pidgName           :: !Text
     , _pidgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsInstancesDatabasesGet
     :: Text -- ^ 'pidgName'
     -> ProjectsInstancesDatabasesGet
 projectsInstancesDatabasesGet pPidgName_ =
-    ProjectsInstancesDatabasesGet'
+  ProjectsInstancesDatabasesGet'
     { _pidgXgafv = Nothing
     , _pidgUploadProtocol = Nothing
     , _pidgAccessToken = Nothing

@@ -62,13 +62,15 @@ type AcceleratorTypesAggregatedListResource =
 -- | Retrieves an aggregated list of accelerator types.
 --
 -- /See:/ 'acceleratorTypesAggregatedList' smart constructor.
-data AcceleratorTypesAggregatedList = AcceleratorTypesAggregatedList'
+data AcceleratorTypesAggregatedList =
+  AcceleratorTypesAggregatedList'
     { _atalOrderBy    :: !(Maybe Text)
     , _atalProject    :: !Text
     , _atalFilter     :: !(Maybe Text)
     , _atalPageToken  :: !(Maybe Text)
     , _atalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypesAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ acceleratorTypesAggregatedList
     :: Text -- ^ 'atalProject'
     -> AcceleratorTypesAggregatedList
 acceleratorTypesAggregatedList pAtalProject_ =
-    AcceleratorTypesAggregatedList'
+  AcceleratorTypesAggregatedList'
     { _atalOrderBy = Nothing
     , _atalProject = pAtalProject_
     , _atalFilter = Nothing

@@ -104,7 +104,8 @@ type ObjectsInsertResource =
 -- | Stores a new object and metadata.
 --
 -- /See:/ 'objectsInsert' smart constructor.
-data ObjectsInsert = ObjectsInsert'
+data ObjectsInsert =
+  ObjectsInsert'
     { _oiIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _oiIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _oiIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -117,7 +118,8 @@ data ObjectsInsert = ObjectsInsert'
     , _oiContentEncoding          :: !(Maybe Text)
     , _oiKmsKeyName               :: !(Maybe Text)
     , _oiProjection               :: !(Maybe ObjectsInsertProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ObjectsInsert' with the minimum fields required to make a request.
 --
@@ -151,7 +153,7 @@ objectsInsert
     -> Object -- ^ 'oiPayload'
     -> ObjectsInsert
 objectsInsert pOiBucket_ pOiPayload_ =
-    ObjectsInsert'
+  ObjectsInsert'
     { _oiIfMetagenerationMatch = Nothing
     , _oiIfGenerationNotMatch = Nothing
     , _oiIfGenerationMatch = Nothing

@@ -58,11 +58,13 @@ type RegionInstanceGroupManagersGetResource =
 -- | Returns all of the details about the specified managed instance group.
 --
 -- /See:/ 'regionInstanceGroupManagersGet' smart constructor.
-data RegionInstanceGroupManagersGet = RegionInstanceGroupManagersGet'
+data RegionInstanceGroupManagersGet =
+  RegionInstanceGroupManagersGet'
     { _rigmgProject              :: !Text
     , _rigmgInstanceGroupManager :: !Text
     , _rigmgRegion               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersGet' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ regionInstanceGroupManagersGet
     -> Text -- ^ 'rigmgRegion'
     -> RegionInstanceGroupManagersGet
 regionInstanceGroupManagersGet pRigmgProject_ pRigmgInstanceGroupManager_ pRigmgRegion_ =
-    RegionInstanceGroupManagersGet'
+  RegionInstanceGroupManagersGet'
     { _rigmgProject = pRigmgProject_
     , _rigmgInstanceGroupManager = pRigmgInstanceGroupManager_
     , _rigmgRegion = pRigmgRegion_

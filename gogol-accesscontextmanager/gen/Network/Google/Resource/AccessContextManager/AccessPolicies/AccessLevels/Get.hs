@@ -61,7 +61,8 @@ type AccessPoliciesAccessLevelsGetResource =
 -- | Get an Access Level by resource name.
 --
 -- /See:/ 'accessPoliciesAccessLevelsGet' smart constructor.
-data AccessPoliciesAccessLevelsGet = AccessPoliciesAccessLevelsGet'
+data AccessPoliciesAccessLevelsGet =
+  AccessPoliciesAccessLevelsGet'
     { _apalgXgafv             :: !(Maybe Xgafv)
     , _apalgUploadProtocol    :: !(Maybe Text)
     , _apalgAccessToken       :: !(Maybe Text)
@@ -69,7 +70,8 @@ data AccessPoliciesAccessLevelsGet = AccessPoliciesAccessLevelsGet'
     , _apalgAccessLevelFormat :: !(Maybe Text)
     , _apalgName              :: !Text
     , _apalgCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesAccessLevelsGet' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ accessPoliciesAccessLevelsGet
     :: Text -- ^ 'apalgName'
     -> AccessPoliciesAccessLevelsGet
 accessPoliciesAccessLevelsGet pApalgName_ =
-    AccessPoliciesAccessLevelsGet'
+  AccessPoliciesAccessLevelsGet'
     { _apalgXgafv = Nothing
     , _apalgUploadProtocol = Nothing
     , _apalgAccessToken = Nothing

@@ -59,12 +59,14 @@ type CloudLoadingAddBookResource =
 -- |
 --
 -- /See:/ 'cloudLoadingAddBook' smart constructor.
-data CloudLoadingAddBook = CloudLoadingAddBook'
+data CloudLoadingAddBook =
+  CloudLoadingAddBook'
     { _clabMimeType          :: !(Maybe Text)
     , _clabUploadClientToken :: !(Maybe Text)
     , _clabName              :: !(Maybe Text)
     , _clabDriveDocumentId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CloudLoadingAddBook' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ data CloudLoadingAddBook = CloudLoadingAddBook'
 cloudLoadingAddBook
     :: CloudLoadingAddBook
 cloudLoadingAddBook =
-    CloudLoadingAddBook'
+  CloudLoadingAddBook'
     { _clabMimeType = Nothing
     , _clabUploadClientToken = Nothing
     , _clabName = Nothing

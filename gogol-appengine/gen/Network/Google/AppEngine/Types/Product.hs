@@ -24,12 +24,14 @@ import           Network.Google.Prelude
 -- flexible environment.
 --
 -- /See:/ 'networkUtilization' smart constructor.
-data NetworkUtilization = NetworkUtilization'
+data NetworkUtilization =
+  NetworkUtilization'
     { _nuTargetReceivedBytesPerSecond   :: !(Maybe (Textual Int32))
     , _nuTargetSentPacketsPerSecond     :: !(Maybe (Textual Int32))
     , _nuTargetReceivedPacketsPerSecond :: !(Maybe (Textual Int32))
     , _nuTargetSentBytesPerSecond       :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkUtilization' with the minimum fields required to make a request.
 --
@@ -45,7 +47,7 @@ data NetworkUtilization = NetworkUtilization'
 networkUtilization
     :: NetworkUtilization
 networkUtilization =
-    NetworkUtilization'
+  NetworkUtilization'
     { _nuTargetReceivedBytesPerSecond = Nothing
     , _nuTargetSentPacketsPerSecond = Nothing
     , _nuTargetReceivedPacketsPerSecond = Nothing
@@ -139,11 +141,13 @@ instance ToJSON NetworkUtilization where
 -- needed for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -156,12 +160,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -205,9 +204,11 @@ instance ToJSON Status where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema = OperationSchema'
+newtype OperationSchema =
+  OperationSchema'
     { _osAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
@@ -218,9 +219,7 @@ operationSchema
     :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
-    OperationSchema'
-    { _osAddtional = _Coerce # pOsAddtional_
-    }
+  OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -240,9 +239,11 @@ instance ToJSON OperationSchema where
 -- given location.
 --
 -- /See:/ 'locationSchema' smart constructor.
-newtype LocationSchema = LocationSchema'
+newtype LocationSchema =
+  LocationSchema'
     { _lsAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationSchema' with the minimum fields required to make a request.
 --
@@ -253,9 +254,7 @@ locationSchema
     :: HashMap Text JSONValue -- ^ 'lsAddtional'
     -> LocationSchema
 locationSchema pLsAddtional_ =
-    LocationSchema'
-    { _lsAddtional = _Coerce # pLsAddtional_
-    }
+  LocationSchema' {_lsAddtional = _Coerce # pLsAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 lsAddtional :: Lens' LocationSchema (HashMap Text JSONValue)
@@ -276,10 +275,12 @@ instance ToJSON LocationSchema where
 -- (https:\/\/www.google.com\/webmasters\/verification\/home).
 --
 -- /See:/ 'authorizedDomain' smart constructor.
-data AuthorizedDomain = AuthorizedDomain'
+data AuthorizedDomain =
+  AuthorizedDomain'
     { _adName :: !(Maybe Text)
     , _adId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuthorizedDomain' with the minimum fields required to make a request.
 --
@@ -290,11 +291,7 @@ data AuthorizedDomain = AuthorizedDomain'
 -- * 'adId'
 authorizedDomain
     :: AuthorizedDomain
-authorizedDomain =
-    AuthorizedDomain'
-    { _adName = Nothing
-    , _adId = Nothing
-    }
+authorizedDomain = AuthorizedDomain' {_adName = Nothing, _adId = Nothing}
 
 -- | Full path to the AuthorizedDomain resource in the API. Example:
 -- apps\/myapp\/authorizedDomains\/example.com.\'OutputOnly
@@ -324,10 +321,12 @@ instance ToJSON AuthorizedDomain where
 -- versions.
 --
 -- /See:/ 'trafficSplit' smart constructor.
-data TrafficSplit = TrafficSplit'
+data TrafficSplit =
+  TrafficSplit'
     { _tsShardBy     :: !(Maybe TrafficSplitShardBy)
     , _tsAllocations :: !(Maybe TrafficSplitAllocations)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrafficSplit' with the minimum fields required to make a request.
 --
@@ -338,11 +337,7 @@ data TrafficSplit = TrafficSplit'
 -- * 'tsAllocations'
 trafficSplit
     :: TrafficSplit
-trafficSplit =
-    TrafficSplit'
-    { _tsShardBy = Nothing
-    , _tsAllocations = Nothing
-    }
+trafficSplit = TrafficSplit' {_tsShardBy = Nothing, _tsAllocations = Nothing}
 
 -- | Mechanism used to determine which version a request is sent to. The
 -- traffic selection algorithm will be stable for either type until
@@ -381,9 +376,11 @@ instance ToJSON TrafficSplit where
 -- | Executes a script to handle the request that matches the URL pattern.
 --
 -- /See:/ 'scriptHandler' smart constructor.
-newtype ScriptHandler = ScriptHandler'
+newtype ScriptHandler =
+  ScriptHandler'
     { _shScriptPath :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ScriptHandler' with the minimum fields required to make a request.
 --
@@ -392,10 +389,7 @@ newtype ScriptHandler = ScriptHandler'
 -- * 'shScriptPath'
 scriptHandler
     :: ScriptHandler
-scriptHandler =
-    ScriptHandler'
-    { _shScriptPath = Nothing
-    }
+scriptHandler = ScriptHandler' {_shScriptPath = Nothing}
 
 -- | Path to the script from the application root directory.
 shScriptPath :: Lens' ScriptHandler (Maybe Text)
@@ -415,10 +409,12 @@ instance ToJSON ScriptHandler where
 -- | Response message for Services.ListServices.
 --
 -- /See:/ 'listServicesResponse' smart constructor.
-data ListServicesResponse = ListServicesResponse'
+data ListServicesResponse =
+  ListServicesResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrServices      :: !(Maybe [Service])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListServicesResponse' with the minimum fields required to make a request.
 --
@@ -430,10 +426,7 @@ data ListServicesResponse = ListServicesResponse'
 listServicesResponse
     :: ListServicesResponse
 listServicesResponse =
-    ListServicesResponse'
-    { _lsrNextPageToken = Nothing
-    , _lsrServices = Nothing
-    }
+  ListServicesResponse' {_lsrNextPageToken = Nothing, _lsrServices = Nothing}
 
 -- | Continuation token for fetching the next page of results.
 lsrNextPageToken :: Lens' ListServicesResponse (Maybe Text)
@@ -468,7 +461,8 @@ instance ToJSON ListServicesResponse where
 -- uploaded with the version, such as images, CSS, or JavaScript.
 --
 -- /See:/ 'urlMap' smart constructor.
-data URLMap = URLMap'
+data URLMap =
+  URLMap'
     { _umScript                   :: !(Maybe ScriptHandler)
     , _umSecurityLevel            :: !(Maybe URLMapSecurityLevel)
     , _umAPIEndpoint              :: !(Maybe APIEndpointHandler)
@@ -477,7 +471,8 @@ data URLMap = URLMap'
     , _umAuthFailAction           :: !(Maybe URLMapAuthFailAction)
     , _umStaticFiles              :: !(Maybe StaticFilesHandler)
     , _umLogin                    :: !(Maybe URLMapLogin)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMap' with the minimum fields required to make a request.
 --
@@ -501,7 +496,7 @@ data URLMap = URLMap'
 urlMap
     :: URLMap
 urlMap =
-    URLMap'
+  URLMap'
     { _umScript = Nothing
     , _umSecurityLevel = Nothing
     , _umAPIEndpoint = Nothing
@@ -593,10 +588,12 @@ instance ToJSON URLMap where
 -- | Third-party Python runtime library that is required by the application.
 --
 -- /See:/ 'library' smart constructor.
-data Library = Library'
+data Library =
+  Library'
     { _lName    :: !(Maybe Text)
     , _lVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Library' with the minimum fields required to make a request.
 --
@@ -607,11 +604,7 @@ data Library = Library'
 -- * 'lVersion'
 library
     :: Library
-library =
-    Library'
-    { _lName = Nothing
-    , _lVersion = Nothing
-    }
+library = Library' {_lName = Nothing, _lVersion = Nothing}
 
 -- | Name of the library. Example: \"django\".
 lName :: Lens' Library (Maybe Text)
@@ -637,11 +630,13 @@ instance ToJSON Library where
 -- | A DNS resource record.
 --
 -- /See:/ 'resourceRecord' smart constructor.
-data ResourceRecord = ResourceRecord'
+data ResourceRecord =
+  ResourceRecord'
     { _rrRrData :: !(Maybe Text)
     , _rrName   :: !(Maybe Text)
     , _rrType   :: !(Maybe ResourceRecordType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourceRecord' with the minimum fields required to make a request.
 --
@@ -655,11 +650,7 @@ data ResourceRecord = ResourceRecord'
 resourceRecord
     :: ResourceRecord
 resourceRecord =
-    ResourceRecord'
-    { _rrRrData = Nothing
-    , _rrName = Nothing
-    , _rrType = Nothing
-    }
+  ResourceRecord' {_rrRrData = Nothing, _rrName = Nothing, _rrType = Nothing}
 
 -- | Data for this record. Values vary by record type, as defined in RFC 1035
 -- (section 5) and RFC 1034 (section 3.6.1).
@@ -693,10 +684,12 @@ instance ToJSON ResourceRecord where
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
-data ListLocationsResponse = ListLocationsResponse'
+data ListLocationsResponse =
+  ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -708,10 +701,7 @@ data ListLocationsResponse = ListLocationsResponse'
 listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
-    ListLocationsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLocations = Nothing
-    }
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -745,12 +735,14 @@ instance ToJSON ListLocationsResponse where
 -- environment.
 --
 -- /See:/ 'diskUtilization' smart constructor.
-data DiskUtilization = DiskUtilization'
+data DiskUtilization =
+  DiskUtilization'
     { _duTargetReadBytesPerSecond  :: !(Maybe (Textual Int32))
     , _duTargetReadOpsPerSecond    :: !(Maybe (Textual Int32))
     , _duTargetWriteOpsPerSecond   :: !(Maybe (Textual Int32))
     , _duTargetWriteBytesPerSecond :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskUtilization' with the minimum fields required to make a request.
 --
@@ -766,7 +758,7 @@ data DiskUtilization = DiskUtilization'
 diskUtilization
     :: DiskUtilization
 diskUtilization =
-    DiskUtilization'
+  DiskUtilization'
     { _duTargetReadBytesPerSecond = Nothing
     , _duTargetReadOpsPerSecond = Nothing
     , _duTargetWriteOpsPerSecond = Nothing
@@ -827,10 +819,12 @@ instance ToJSON DiskUtilization where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -842,10 +836,8 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -881,7 +873,8 @@ instance ToJSON ListOperationsResponse where
 -- App Engine flexible environment.
 --
 -- /See:/ 'healthCheck' smart constructor.
-data HealthCheck = HealthCheck'
+data HealthCheck =
+  HealthCheck'
     { _hcHealthyThreshold   :: !(Maybe (Textual Word32))
     , _hcDisableHealthCheck :: !(Maybe Bool)
     , _hcCheckInterval      :: !(Maybe GDuration)
@@ -889,7 +882,8 @@ data HealthCheck = HealthCheck'
     , _hcHost               :: !(Maybe Text)
     , _hcTimeout            :: !(Maybe GDuration)
     , _hcUnhealthyThreshold :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
 --
@@ -911,7 +905,7 @@ data HealthCheck = HealthCheck'
 healthCheck
     :: HealthCheck
 healthCheck =
-    HealthCheck'
+  HealthCheck'
     { _hcHealthyThreshold = Nothing
     , _hcDisableHealthCheck = Nothing
     , _hcCheckInterval = Nothing
@@ -999,7 +993,8 @@ instance ToJSON HealthCheck where
 -- authorized domains.
 --
 -- /See:/ 'authorizedCertificate' smart constructor.
-data AuthorizedCertificate = AuthorizedCertificate'
+data AuthorizedCertificate =
+  AuthorizedCertificate'
     { _acManagedCertificate    :: !(Maybe ManagedCertificate)
     , _acCertificateRawData    :: !(Maybe CertificateRawData)
     , _acDomainNames           :: !(Maybe [Text])
@@ -1009,7 +1004,8 @@ data AuthorizedCertificate = AuthorizedCertificate'
     , _acId                    :: !(Maybe Text)
     , _acExpireTime            :: !(Maybe DateTime')
     , _acVisibleDomainMAppings :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuthorizedCertificate' with the minimum fields required to make a request.
 --
@@ -1035,7 +1031,7 @@ data AuthorizedCertificate = AuthorizedCertificate'
 authorizedCertificate
     :: AuthorizedCertificate
 authorizedCertificate =
-    AuthorizedCertificate'
+  AuthorizedCertificate'
     { _acManagedCertificate = Nothing
     , _acCertificateRawData = Nothing
     , _acDomainNames = Nothing
@@ -1161,13 +1157,15 @@ instance ToJSON AuthorizedCertificate where
 -- configuration for API handlers.
 --
 -- /See:/ 'apiConfigHandler' smart constructor.
-data APIConfigHandler = APIConfigHandler'
+data APIConfigHandler =
+  APIConfigHandler'
     { _achScript         :: !(Maybe Text)
     , _achSecurityLevel  :: !(Maybe APIConfigHandlerSecurityLevel)
     , _achURL            :: !(Maybe Text)
     , _achAuthFailAction :: !(Maybe APIConfigHandlerAuthFailAction)
     , _achLogin          :: !(Maybe APIConfigHandlerLogin)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'APIConfigHandler' with the minimum fields required to make a request.
 --
@@ -1185,7 +1183,7 @@ data APIConfigHandler = APIConfigHandler'
 apiConfigHandler
     :: APIConfigHandler
 apiConfigHandler =
-    APIConfigHandler'
+  APIConfigHandler'
     { _achScript = Nothing
     , _achSecurityLevel = Nothing
     , _achURL = Nothing
@@ -1243,9 +1241,11 @@ instance ToJSON APIConfigHandler where
 -- requests if view=FULL is set.
 --
 -- /See:/ 'versionEnvVariables' smart constructor.
-newtype VersionEnvVariables = VersionEnvVariables'
+newtype VersionEnvVariables =
+  VersionEnvVariables'
     { _vevAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VersionEnvVariables' with the minimum fields required to make a request.
 --
@@ -1256,9 +1256,7 @@ versionEnvVariables
     :: HashMap Text Text -- ^ 'vevAddtional'
     -> VersionEnvVariables
 versionEnvVariables pVevAddtional_ =
-    VersionEnvVariables'
-    { _vevAddtional = _Coerce # pVevAddtional_
-    }
+  VersionEnvVariables' {_vevAddtional = _Coerce # pVevAddtional_}
 
 vevAddtional :: Lens' VersionEnvVariables (HashMap Text Text)
 vevAddtional
@@ -1277,7 +1275,8 @@ instance ToJSON VersionEnvVariables where
 -- Engine application.
 --
 -- /See:/ 'application' smart constructor.
-data Application = Application'
+data Application =
+  Application'
     { _aDefaultHostname         :: !(Maybe Text)
     , _aDefaultCookieExpiration :: !(Maybe GDuration)
     , _aIap                     :: !(Maybe IdentityAwareProxy)
@@ -1291,7 +1290,8 @@ data Application = Application'
     , _aId                      :: !(Maybe Text)
     , _aLocationId              :: !(Maybe Text)
     , _aServingStatus           :: !(Maybe ApplicationServingStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -1325,7 +1325,7 @@ data Application = Application'
 application
     :: Application
 application =
-    Application'
+  Application'
     { _aDefaultHostname = Nothing
     , _aDefaultCookieExpiration = Nothing
     , _aIap = Nothing
@@ -1469,9 +1469,11 @@ instance ToJSON Application where
 -- runtime features.
 --
 -- /See:/ 'versionBetaSettings' smart constructor.
-newtype VersionBetaSettings = VersionBetaSettings'
+newtype VersionBetaSettings =
+  VersionBetaSettings'
     { _vbsAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VersionBetaSettings' with the minimum fields required to make a request.
 --
@@ -1482,9 +1484,7 @@ versionBetaSettings
     :: HashMap Text Text -- ^ 'vbsAddtional'
     -> VersionBetaSettings
 versionBetaSettings pVbsAddtional_ =
-    VersionBetaSettings'
-    { _vbsAddtional = _Coerce # pVbsAddtional_
-    }
+  VersionBetaSettings' {_vbsAddtional = _Coerce # pVbsAddtional_}
 
 vbsAddtional :: Lens' VersionBetaSettings (HashMap Text Text)
 vbsAddtional
@@ -1508,11 +1508,13 @@ instance ToJSON VersionBetaSettings where
 -- of that service.
 --
 -- /See:/ 'service' smart constructor.
-data Service = Service'
+data Service =
+  Service'
     { _sSplit :: !(Maybe TrafficSplit)
     , _sName  :: !(Maybe Text)
     , _sId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
@@ -1525,12 +1527,7 @@ data Service = Service'
 -- * 'sId'
 service
     :: Service
-service =
-    Service'
-    { _sSplit = Nothing
-    , _sName = Nothing
-    , _sId = Nothing
-    }
+service = Service' {_sSplit = Nothing, _sName = Nothing, _sId = Nothing}
 
 -- | Mapping that defines fractional HTTP traffic diversion to different
 -- versions within the service.
@@ -1569,12 +1566,14 @@ instance ToJSON Service where
 -- (https:\/\/cloud.google.com\/service-management\/overview).
 --
 -- /See:/ 'endpointsAPIService' smart constructor.
-data EndpointsAPIService = EndpointsAPIService'
+data EndpointsAPIService =
+  EndpointsAPIService'
     { _easDisableTraceSampling :: !(Maybe Bool)
     , _easName                 :: !(Maybe Text)
     , _easConfigId             :: !(Maybe Text)
     , _easRolloutStrategy      :: !(Maybe EndpointsAPIServiceRolloutStrategy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EndpointsAPIService' with the minimum fields required to make a request.
 --
@@ -1590,7 +1589,7 @@ data EndpointsAPIService = EndpointsAPIService'
 endpointsAPIService
     :: EndpointsAPIService
 endpointsAPIService =
-    EndpointsAPIService'
+  EndpointsAPIService'
     { _easDisableTraceSampling = Nothing
     , _easName = Nothing
     , _easConfigId = Nothing
@@ -1653,13 +1652,15 @@ instance ToJSON EndpointsAPIService where
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _locName        :: !(Maybe Text)
     , _locMetadata    :: !(Maybe LocationSchema)
     , _locDisplayName :: !(Maybe Text)
     , _locLabels      :: !(Maybe LocationLabels)
     , _locLocationId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -1677,7 +1678,7 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _locName = Nothing
     , _locMetadata = Nothing
     , _locDisplayName = Nothing
@@ -1739,13 +1740,15 @@ instance ToJSON Location where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -1763,7 +1766,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -1828,10 +1831,12 @@ instance ToJSON Operation where
 -- | The zip file information for a zip deployment.
 --
 -- /See:/ 'zipInfo' smart constructor.
-data ZipInfo = ZipInfo'
+data ZipInfo =
+  ZipInfo'
     { _ziFilesCount :: !(Maybe (Textual Int32))
     , _ziSourceURL  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ZipInfo' with the minimum fields required to make a request.
 --
@@ -1842,11 +1847,7 @@ data ZipInfo = ZipInfo'
 -- * 'ziSourceURL'
 zipInfo
     :: ZipInfo
-zipInfo =
-    ZipInfo'
-    { _ziFilesCount = Nothing
-    , _ziSourceURL = Nothing
-    }
+zipInfo = ZipInfo' {_ziFilesCount = Nothing, _ziSourceURL = Nothing}
 
 -- | An estimate of the number of files in a zip for a zip deployment. If
 -- set, must be greater than or equal to the actual number of files. Used
@@ -1886,8 +1887,8 @@ instance ToJSON ZipInfo where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -1904,11 +1905,13 @@ instance ToJSON Empty where
 -- | Rules to match an HTTP request and dispatch that request to a service.
 --
 -- /See:/ 'urlDispatchRule' smart constructor.
-data URLDispatchRule = URLDispatchRule'
+data URLDispatchRule =
+  URLDispatchRule'
     { _udrPath    :: !(Maybe Text)
     , _udrService :: !(Maybe Text)
     , _udrDomain  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLDispatchRule' with the minimum fields required to make a request.
 --
@@ -1922,11 +1925,8 @@ data URLDispatchRule = URLDispatchRule'
 urlDispatchRule
     :: URLDispatchRule
 urlDispatchRule =
-    URLDispatchRule'
-    { _udrPath = Nothing
-    , _udrService = Nothing
-    , _udrDomain = Nothing
-    }
+  URLDispatchRule'
+    {_udrPath = Nothing, _udrService = Nothing, _udrDomain = Nothing}
 
 -- | Pathname within the host. Must start with a \"\/\". A single \"*\" can
 -- be included at the end of the path.The sum of the lengths of the domain
@@ -1966,7 +1966,8 @@ instance ToJSON URLDispatchRule where
 -- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'operationMetadataV1Beta' smart constructor.
-data OperationMetadataV1Beta = OperationMetadataV1Beta'
+data OperationMetadataV1Beta =
+  OperationMetadataV1Beta'
     { _omvbEphemeralMessage      :: !(Maybe Text)
     , _omvbInsertTime            :: !(Maybe DateTime')
     , _omvbUser                  :: !(Maybe Text)
@@ -1975,7 +1976,8 @@ data OperationMetadataV1Beta = OperationMetadataV1Beta'
     , _omvbWarning               :: !(Maybe [Text])
     , _omvbCreateVersionMetadata :: !(Maybe CreateVersionMetadataV1Beta)
     , _omvbTarget                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadataV1Beta' with the minimum fields required to make a request.
 --
@@ -1999,7 +2001,7 @@ data OperationMetadataV1Beta = OperationMetadataV1Beta'
 operationMetadataV1Beta
     :: OperationMetadataV1Beta
 operationMetadataV1Beta =
-    OperationMetadataV1Beta'
+  OperationMetadataV1Beta'
     { _omvbEphemeralMessage = Nothing
     , _omvbInsertTime = Nothing
     , _omvbUser = Nothing
@@ -2088,10 +2090,12 @@ instance ToJSON OperationMetadataV1Beta where
 -- | Response message for AuthorizedDomains.ListAuthorizedDomains.
 --
 -- /See:/ 'listAuthorizedDomainsResponse' smart constructor.
-data ListAuthorizedDomainsResponse = ListAuthorizedDomainsResponse'
+data ListAuthorizedDomainsResponse =
+  ListAuthorizedDomainsResponse'
     { _ladrNextPageToken :: !(Maybe Text)
     , _ladrDomains       :: !(Maybe [AuthorizedDomain])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAuthorizedDomainsResponse' with the minimum fields required to make a request.
 --
@@ -2103,10 +2107,8 @@ data ListAuthorizedDomainsResponse = ListAuthorizedDomainsResponse'
 listAuthorizedDomainsResponse
     :: ListAuthorizedDomainsResponse
 listAuthorizedDomainsResponse =
-    ListAuthorizedDomainsResponse'
-    { _ladrNextPageToken = Nothing
-    , _ladrDomains = Nothing
-    }
+  ListAuthorizedDomainsResponse'
+    {_ladrNextPageToken = Nothing, _ladrDomains = Nothing}
 
 -- | Continuation token for fetching the next page of results.
 ladrNextPageToken :: Lens' ListAuthorizedDomainsResponse (Maybe Text)
@@ -2139,9 +2141,11 @@ instance ToJSON ListAuthorizedDomainsResponse where
 -- | The entrypoint for the application.
 --
 -- /See:/ 'entrypoint' smart constructor.
-newtype Entrypoint = Entrypoint'
+newtype Entrypoint =
+  Entrypoint'
     { _eShell :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Entrypoint' with the minimum fields required to make a request.
 --
@@ -2150,10 +2154,7 @@ newtype Entrypoint = Entrypoint'
 -- * 'eShell'
 entrypoint
     :: Entrypoint
-entrypoint =
-    Entrypoint'
-    { _eShell = Nothing
-    }
+entrypoint = Entrypoint' {_eShell = Nothing}
 
 -- | The format should be a shell command that can be fed to bash -c.
 eShell :: Lens' Entrypoint (Maybe Text)
@@ -2171,10 +2172,12 @@ instance ToJSON Entrypoint where
 -- | Response message for Versions.ListVersions.
 --
 -- /See:/ 'listVersionsResponse' smart constructor.
-data ListVersionsResponse = ListVersionsResponse'
+data ListVersionsResponse =
+  ListVersionsResponse'
     { _lvrNextPageToken :: !(Maybe Text)
     , _lvrVersions      :: !(Maybe [Version])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListVersionsResponse' with the minimum fields required to make a request.
 --
@@ -2186,10 +2189,7 @@ data ListVersionsResponse = ListVersionsResponse'
 listVersionsResponse
     :: ListVersionsResponse
 listVersionsResponse =
-    ListVersionsResponse'
-    { _lvrNextPageToken = Nothing
-    , _lvrVersions = Nothing
-    }
+  ListVersionsResponse' {_lvrNextPageToken = Nothing, _lvrVersions = Nothing}
 
 -- | Continuation token for fetching the next page of results.
 lvrNextPageToken :: Lens' ListVersionsResponse (Maybe Text)
@@ -2222,10 +2222,12 @@ instance ToJSON ListVersionsResponse where
 -- | A certificate managed by App Engine.
 --
 -- /See:/ 'managedCertificate' smart constructor.
-data ManagedCertificate = ManagedCertificate'
+data ManagedCertificate =
+  ManagedCertificate'
     { _mcStatus          :: !(Maybe ManagedCertificateStatus)
     , _mcLastRenewalTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedCertificate' with the minimum fields required to make a request.
 --
@@ -2237,10 +2239,7 @@ data ManagedCertificate = ManagedCertificate'
 managedCertificate
     :: ManagedCertificate
 managedCertificate =
-    ManagedCertificate'
-    { _mcStatus = Nothing
-    , _mcLastRenewalTime = Nothing
-    }
+  ManagedCertificate' {_mcStatus = Nothing, _mcLastRenewalTime = Nothing}
 
 -- | Status of certificate management. Refers to the most recent certificate
 -- acquisition or renewal attempt.\'OutputOnly
@@ -2275,9 +2274,11 @@ instance ToJSON ManagedCertificate where
 -- google.appengine.v1alpha.CreateVersionRequest.
 --
 -- /See:/ 'createVersionMetadataV1Alpha' smart constructor.
-newtype CreateVersionMetadataV1Alpha = CreateVersionMetadataV1Alpha'
+newtype CreateVersionMetadataV1Alpha =
+  CreateVersionMetadataV1Alpha'
     { _cvmvaCloudBuildId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateVersionMetadataV1Alpha' with the minimum fields required to make a request.
 --
@@ -2287,9 +2288,7 @@ newtype CreateVersionMetadataV1Alpha = CreateVersionMetadataV1Alpha'
 createVersionMetadataV1Alpha
     :: CreateVersionMetadataV1Alpha
 createVersionMetadataV1Alpha =
-    CreateVersionMetadataV1Alpha'
-    { _cvmvaCloudBuildId = Nothing
-    }
+  CreateVersionMetadataV1Alpha' {_cvmvaCloudBuildId = Nothing}
 
 -- | The Cloud Build ID if one was created as part of the version create.
 -- \'OutputOnly
@@ -2315,11 +2314,13 @@ instance ToJSON CreateVersionMetadataV1Alpha where
 -- source file that is deployed must be specified separately.
 --
 -- /See:/ 'fileInfo' smart constructor.
-data FileInfo = FileInfo'
+data FileInfo =
+  FileInfo'
     { _fiSha1Sum   :: !(Maybe Text)
     , _fiMimeType  :: !(Maybe Text)
     , _fiSourceURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileInfo' with the minimum fields required to make a request.
 --
@@ -2333,11 +2334,8 @@ data FileInfo = FileInfo'
 fileInfo
     :: FileInfo
 fileInfo =
-    FileInfo'
-    { _fiSha1Sum = Nothing
-    , _fiMimeType = Nothing
-    , _fiSourceURL = Nothing
-    }
+  FileInfo'
+    {_fiSha1Sum = Nothing, _fiMimeType = Nothing, _fiSourceURL = Nothing}
 
 -- | The SHA1 hash of the file, in hex.
 fiSha1Sum :: Lens' FileInfo (Maybe Text)
@@ -2378,7 +2376,8 @@ instance ToJSON FileInfo where
 -- other application metrics.
 --
 -- /See:/ 'automaticScaling' smart constructor.
-data AutomaticScaling = AutomaticScaling'
+data AutomaticScaling =
+  AutomaticScaling'
     { _asNetworkUtilization        :: !(Maybe NetworkUtilization)
     , _asMaxTotalInstances         :: !(Maybe (Textual Int32))
     , _asMinIdleInstances          :: !(Maybe (Textual Int32))
@@ -2392,7 +2391,8 @@ data AutomaticScaling = AutomaticScaling'
     , _asRequestUtilization        :: !(Maybe RequestUtilization)
     , _asMaxPendingLatency         :: !(Maybe GDuration)
     , _asStandardSchedulerSettings :: !(Maybe StandardSchedulerSettings)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutomaticScaling' with the minimum fields required to make a request.
 --
@@ -2426,7 +2426,7 @@ data AutomaticScaling = AutomaticScaling'
 automaticScaling
     :: AutomaticScaling
 automaticScaling =
-    AutomaticScaling'
+  AutomaticScaling'
     { _asNetworkUtilization = Nothing
     , _asMaxTotalInstances = Nothing
     , _asMinIdleInstances = Nothing
@@ -2583,13 +2583,15 @@ instance ToJSON AutomaticScaling where
 -- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'operationMetadataV1Beta5' smart constructor.
-data OperationMetadataV1Beta5 = OperationMetadataV1Beta5'
+data OperationMetadataV1Beta5 =
+  OperationMetadataV1Beta5'
     { _oInsertTime :: !(Maybe DateTime')
     , _oUser       :: !(Maybe Text)
     , _oMethod     :: !(Maybe Text)
     , _oEndTime    :: !(Maybe DateTime')
     , _oTarget     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadataV1Beta5' with the minimum fields required to make a request.
 --
@@ -2607,7 +2609,7 @@ data OperationMetadataV1Beta5 = OperationMetadataV1Beta5'
 operationMetadataV1Beta5
     :: OperationMetadataV1Beta5
 operationMetadataV1Beta5 =
-    OperationMetadataV1Beta5'
+  OperationMetadataV1Beta5'
     { _oInsertTime = Nothing
     , _oUser = Nothing
     , _oMethod = Nothing
@@ -2664,11 +2666,13 @@ instance ToJSON OperationMetadataV1Beta5 where
 -- Engine flexible environment.
 --
 -- /See:/ 'volume' smart constructor.
-data Volume = Volume'
+data Volume =
+  Volume'
     { _vSizeGb     :: !(Maybe (Textual Double))
     , _vName       :: !(Maybe Text)
     , _vVolumeType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Volume' with the minimum fields required to make a request.
 --
@@ -2681,12 +2685,7 @@ data Volume = Volume'
 -- * 'vVolumeType'
 volume
     :: Volume
-volume =
-    Volume'
-    { _vSizeGb = Nothing
-    , _vName = Nothing
-    , _vVolumeType = Nothing
-    }
+volume = Volume' {_vSizeGb = Nothing, _vName = Nothing, _vVolumeType = Nothing}
 
 -- | Volume size in gigabytes.
 vSizeGb :: Lens' Volume (Maybe Double)
@@ -2721,9 +2720,11 @@ instance ToJSON Volume where
 -- | Uses Google Cloud Endpoints to handle requests.
 --
 -- /See:/ 'apiEndpointHandler' smart constructor.
-newtype APIEndpointHandler = APIEndpointHandler'
+newtype APIEndpointHandler =
+  APIEndpointHandler'
     { _aehScriptPath :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'APIEndpointHandler' with the minimum fields required to make a request.
 --
@@ -2732,10 +2733,7 @@ newtype APIEndpointHandler = APIEndpointHandler'
 -- * 'aehScriptPath'
 apiEndpointHandler
     :: APIEndpointHandler
-apiEndpointHandler =
-    APIEndpointHandler'
-    { _aehScriptPath = Nothing
-    }
+apiEndpointHandler = APIEndpointHandler' {_aehScriptPath = Nothing}
 
 -- | Path to the script from the application root directory.
 aehScriptPath :: Lens' APIEndpointHandler (Maybe Text)
@@ -2755,9 +2753,11 @@ instance ToJSON APIEndpointHandler where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -2768,9 +2768,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2789,10 +2787,12 @@ instance ToJSON StatusDetailsItem where
 -- | Response message for Firewall.ListIngressRules.
 --
 -- /See:/ 'listIngressRulesResponse' smart constructor.
-data ListIngressRulesResponse = ListIngressRulesResponse'
+data ListIngressRulesResponse =
+  ListIngressRulesResponse'
     { _lirrNextPageToken :: !(Maybe Text)
     , _lirrIngressRules  :: !(Maybe [FirewallRule])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListIngressRulesResponse' with the minimum fields required to make a request.
 --
@@ -2804,10 +2804,8 @@ data ListIngressRulesResponse = ListIngressRulesResponse'
 listIngressRulesResponse
     :: ListIngressRulesResponse
 listIngressRulesResponse =
-    ListIngressRulesResponse'
-    { _lirrNextPageToken = Nothing
-    , _lirrIngressRules = Nothing
-    }
+  ListIngressRulesResponse'
+    {_lirrNextPageToken = Nothing, _lirrIngressRules = Nothing}
 
 -- | Continuation token for fetching the next page of results.
 lirrNextPageToken :: Lens' ListIngressRulesResponse (Maybe Text)
@@ -2842,12 +2840,14 @@ instance ToJSON ListIngressRulesResponse where
 -- environment.
 --
 -- /See:/ 'network' smart constructor.
-data Network = Network'
+data Network =
+  Network'
     { _nSubnetworkName :: !(Maybe Text)
     , _nForwardedPorts :: !(Maybe [Text])
     , _nInstanceTag    :: !(Maybe Text)
     , _nName           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
@@ -2863,7 +2863,7 @@ data Network = Network'
 network
     :: Network
 network =
-    Network'
+  Network'
     { _nSubnetworkName = Nothing
     , _nForwardedPorts = Nothing
     , _nInstanceTag = Nothing
@@ -2933,7 +2933,8 @@ instance ToJSON Network where
 -- are removed from traffic rotation.
 --
 -- /See:/ 'readinessCheck' smart constructor.
-data ReadinessCheck = ReadinessCheck'
+data ReadinessCheck =
+  ReadinessCheck'
     { _rcSuccessThreshold :: !(Maybe (Textual Word32))
     , _rcFailureThreshold :: !(Maybe (Textual Word32))
     , _rcPath             :: !(Maybe Text)
@@ -2941,7 +2942,8 @@ data ReadinessCheck = ReadinessCheck'
     , _rcAppStartTimeout  :: !(Maybe GDuration)
     , _rcHost             :: !(Maybe Text)
     , _rcTimeout          :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReadinessCheck' with the minimum fields required to make a request.
 --
@@ -2963,7 +2965,7 @@ data ReadinessCheck = ReadinessCheck'
 readinessCheck
     :: ReadinessCheck
 readinessCheck =
-    ReadinessCheck'
+  ReadinessCheck'
     { _rcSuccessThreshold = Nothing
     , _rcFailureThreshold = Nothing
     , _rcPath = Nothing
@@ -3047,9 +3049,11 @@ instance ToJSON ReadinessCheck where
 -- | Request message for Firewall.BatchUpdateIngressRules.
 --
 -- /See:/ 'batchUpdateIngressRulesRequest' smart constructor.
-newtype BatchUpdateIngressRulesRequest = BatchUpdateIngressRulesRequest'
+newtype BatchUpdateIngressRulesRequest =
+  BatchUpdateIngressRulesRequest'
     { _buirrIngressRules :: Maybe [FirewallRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdateIngressRulesRequest' with the minimum fields required to make a request.
 --
@@ -3059,9 +3063,7 @@ newtype BatchUpdateIngressRulesRequest = BatchUpdateIngressRulesRequest'
 batchUpdateIngressRulesRequest
     :: BatchUpdateIngressRulesRequest
 batchUpdateIngressRulesRequest =
-    BatchUpdateIngressRulesRequest'
-    { _buirrIngressRules = Nothing
-    }
+  BatchUpdateIngressRulesRequest' {_buirrIngressRules = Nothing}
 
 -- | A list of FirewallRules to replace the existing set.
 buirrIngressRules :: Lens' BatchUpdateIngressRulesRequest [FirewallRule]
@@ -3088,9 +3090,11 @@ instance ToJSON BatchUpdateIngressRulesRequest where
 -- | Request message for Instances.DebugInstance.
 --
 -- /See:/ 'debugInstanceRequest' smart constructor.
-newtype DebugInstanceRequest = DebugInstanceRequest'
+newtype DebugInstanceRequest =
+  DebugInstanceRequest'
     { _dirSSHKey :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DebugInstanceRequest' with the minimum fields required to make a request.
 --
@@ -3099,10 +3103,7 @@ newtype DebugInstanceRequest = DebugInstanceRequest'
 -- * 'dirSSHKey'
 debugInstanceRequest
     :: DebugInstanceRequest
-debugInstanceRequest =
-    DebugInstanceRequest'
-    { _dirSSHKey = Nothing
-    }
+debugInstanceRequest = DebugInstanceRequest' {_dirSSHKey = Nothing}
 
 -- | Public SSH key to add to the instance. Examples: [USERNAME]:ssh-rsa
 -- [KEY_VALUE] [USERNAME] [USERNAME]:ssh-rsa [KEY_VALUE] google-ssh
@@ -3125,9 +3126,11 @@ instance ToJSON DebugInstanceRequest where
 -- | HTTP headers to use for all responses from these URLs.
 --
 -- /See:/ 'staticFilesHandlerHTTPHeaders' smart constructor.
-newtype StaticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders'
+newtype StaticFilesHandlerHTTPHeaders =
+  StaticFilesHandlerHTTPHeaders'
     { _sfhhttphAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StaticFilesHandlerHTTPHeaders' with the minimum fields required to make a request.
 --
@@ -3138,9 +3141,8 @@ staticFilesHandlerHTTPHeaders
     :: HashMap Text Text -- ^ 'sfhhttphAddtional'
     -> StaticFilesHandlerHTTPHeaders
 staticFilesHandlerHTTPHeaders pSfhhttphAddtional_ =
-    StaticFilesHandlerHTTPHeaders'
-    { _sfhhttphAddtional = _Coerce # pSfhhttphAddtional_
-    }
+  StaticFilesHandlerHTTPHeaders'
+    {_sfhhttphAddtional = _Coerce # pSfhhttphAddtional_}
 
 sfhhttphAddtional :: Lens' StaticFilesHandlerHTTPHeaders (HashMap Text Text)
 sfhhttphAddtional
@@ -3161,12 +3163,14 @@ instance ToJSON StaticFilesHandlerHTTPHeaders where
 -- | Machine resources for a version.
 --
 -- /See:/ 'resources' smart constructor.
-data Resources = Resources'
+data Resources =
+  Resources'
     { _rMemoryGb :: !(Maybe (Textual Double))
     , _rDiskGb   :: !(Maybe (Textual Double))
     , _rVolumes  :: !(Maybe [Volume])
     , _rCPU      :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Resources' with the minimum fields required to make a request.
 --
@@ -3182,7 +3186,7 @@ data Resources = Resources'
 resources
     :: Resources
 resources =
-    Resources'
+  Resources'
     { _rMemoryGb = Nothing
     , _rDiskGb = Nothing
     , _rVolumes = Nothing
@@ -3235,9 +3239,11 @@ instance ToJSON Resources where
 -- define behaviors that are user configurable.
 --
 -- /See:/ 'featureSettings' smart constructor.
-newtype FeatureSettings = FeatureSettings'
+newtype FeatureSettings =
+  FeatureSettings'
     { _fsSplitHealthChecks :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FeatureSettings' with the minimum fields required to make a request.
 --
@@ -3246,10 +3252,7 @@ newtype FeatureSettings = FeatureSettings'
 -- * 'fsSplitHealthChecks'
 featureSettings
     :: FeatureSettings
-featureSettings =
-    FeatureSettings'
-    { _fsSplitHealthChecks = Nothing
-    }
+featureSettings = FeatureSettings' {_fsSplitHealthChecks = Nothing}
 
 -- | Boolean value indicating if split health checks should be used instead
 -- of the legacy health checks. At an app.yaml level, this means defaulting
@@ -3276,10 +3279,12 @@ instance ToJSON FeatureSettings where
 -- | An SSL certificate obtained from a certificate authority.
 --
 -- /See:/ 'certificateRawData' smart constructor.
-data CertificateRawData = CertificateRawData'
+data CertificateRawData =
+  CertificateRawData'
     { _crdPrivateKey        :: !(Maybe Text)
     , _crdPublicCertificate :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CertificateRawData' with the minimum fields required to make a request.
 --
@@ -3291,10 +3296,8 @@ data CertificateRawData = CertificateRawData'
 certificateRawData
     :: CertificateRawData
 certificateRawData =
-    CertificateRawData'
-    { _crdPrivateKey = Nothing
-    , _crdPublicCertificate = Nothing
-    }
+  CertificateRawData'
+    {_crdPrivateKey = Nothing, _crdPublicCertificate = Nothing}
 
 -- | Unencrypted PEM encoded RSA private key. This field is set once on
 -- certificate creation and then encrypted. The key size must be 2048 bits
@@ -3334,12 +3337,14 @@ instance ToJSON CertificateRawData where
 -- | A domain serving an App Engine application.
 --
 -- /See:/ 'domainMApping' smart constructor.
-data DomainMApping = DomainMApping'
+data DomainMApping =
+  DomainMApping'
     { _dmaResourceRecords :: !(Maybe [ResourceRecord])
     , _dmaName            :: !(Maybe Text)
     , _dmaId              :: !(Maybe Text)
     , _dmaSSLSettings     :: !(Maybe SSLSettings)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DomainMApping' with the minimum fields required to make a request.
 --
@@ -3355,7 +3360,7 @@ data DomainMApping = DomainMApping'
 domainMApping
     :: DomainMApping
 domainMApping =
-    DomainMApping'
+  DomainMApping'
     { _dmaResourceRecords = Nothing
     , _dmaName = Nothing
     , _dmaId = Nothing
@@ -3412,9 +3417,11 @@ instance ToJSON DomainMApping where
 -- credentials supplied with this call.
 --
 -- /See:/ 'deploymentFiles' smart constructor.
-newtype DeploymentFiles = DeploymentFiles'
+newtype DeploymentFiles =
+  DeploymentFiles'
     { _dfAddtional :: HashMap Text FileInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeploymentFiles' with the minimum fields required to make a request.
 --
@@ -3425,9 +3432,7 @@ deploymentFiles
     :: HashMap Text FileInfo -- ^ 'dfAddtional'
     -> DeploymentFiles
 deploymentFiles pDfAddtional_ =
-    DeploymentFiles'
-    { _dfAddtional = _Coerce # pDfAddtional_
-    }
+  DeploymentFiles' {_dfAddtional = _Coerce # pDfAddtional_}
 
 dfAddtional :: Lens' DeploymentFiles (HashMap Text FileInfo)
 dfAddtional
@@ -3445,9 +3450,11 @@ instance ToJSON DeploymentFiles where
 -- | Response message for Firewall.UpdateAllIngressRules.
 --
 -- /See:/ 'batchUpdateIngressRulesResponse' smart constructor.
-newtype BatchUpdateIngressRulesResponse = BatchUpdateIngressRulesResponse'
+newtype BatchUpdateIngressRulesResponse =
+  BatchUpdateIngressRulesResponse'
     { _bIngressRules :: Maybe [FirewallRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdateIngressRulesResponse' with the minimum fields required to make a request.
 --
@@ -3457,9 +3464,7 @@ newtype BatchUpdateIngressRulesResponse = BatchUpdateIngressRulesResponse'
 batchUpdateIngressRulesResponse
     :: BatchUpdateIngressRulesResponse
 batchUpdateIngressRulesResponse =
-    BatchUpdateIngressRulesResponse'
-    { _bIngressRules = Nothing
-    }
+  BatchUpdateIngressRulesResponse' {_bIngressRules = Nothing}
 
 -- | The full list of ingress FirewallRules for this application.
 bIngressRules :: Lens' BatchUpdateIngressRulesResponse [FirewallRule]
@@ -3485,10 +3490,12 @@ instance ToJSON BatchUpdateIngressRulesResponse where
 -- | Target scaling by CPU usage.
 --
 -- /See:/ 'cpuUtilization' smart constructor.
-data CPUUtilization = CPUUtilization'
+data CPUUtilization =
+  CPUUtilization'
     { _cuAggregationWindowLength :: !(Maybe GDuration)
     , _cuTargetUtilization       :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CPUUtilization' with the minimum fields required to make a request.
 --
@@ -3500,10 +3507,8 @@ data CPUUtilization = CPUUtilization'
 cpuUtilization
     :: CPUUtilization
 cpuUtilization =
-    CPUUtilization'
-    { _cuAggregationWindowLength = Nothing
-    , _cuTargetUtilization = Nothing
-    }
+  CPUUtilization'
+    {_cuAggregationWindowLength = Nothing, _cuTargetUtilization = Nothing}
 
 -- | Period of time over which CPU utilization is calculated.
 cuAggregationWindowLength :: Lens' CPUUtilization (Maybe Scientific)
@@ -3540,9 +3545,11 @@ instance ToJSON CPUUtilization where
 -- google.appengine.v1.CreateVersionRequest.
 --
 -- /See:/ 'createVersionMetadataV1' smart constructor.
-newtype CreateVersionMetadataV1 = CreateVersionMetadataV1'
+newtype CreateVersionMetadataV1 =
+  CreateVersionMetadataV1'
     { _cvmvCloudBuildId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateVersionMetadataV1' with the minimum fields required to make a request.
 --
@@ -3551,10 +3558,7 @@ newtype CreateVersionMetadataV1 = CreateVersionMetadataV1'
 -- * 'cvmvCloudBuildId'
 createVersionMetadataV1
     :: CreateVersionMetadataV1
-createVersionMetadataV1 =
-    CreateVersionMetadataV1'
-    { _cvmvCloudBuildId = Nothing
-    }
+createVersionMetadataV1 = CreateVersionMetadataV1' {_cvmvCloudBuildId = Nothing}
 
 -- | The Cloud Build ID if one was created as part of the version create.
 -- \'OutputOnly
@@ -3585,9 +3589,11 @@ instance ToJSON CreateVersionMetadataV1 where
 -- supported for cookie-based splits.
 --
 -- /See:/ 'trafficSplitAllocations' smart constructor.
-newtype TrafficSplitAllocations = TrafficSplitAllocations'
+newtype TrafficSplitAllocations =
+  TrafficSplitAllocations'
     { _tsaAddtional :: HashMap Text (Textual Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrafficSplitAllocations' with the minimum fields required to make a request.
 --
@@ -3598,9 +3604,7 @@ trafficSplitAllocations
     :: HashMap Text Double -- ^ 'tsaAddtional'
     -> TrafficSplitAllocations
 trafficSplitAllocations pTsaAddtional_ =
-    TrafficSplitAllocations'
-    { _tsaAddtional = _Coerce # pTsaAddtional_
-    }
+  TrafficSplitAllocations' {_tsaAddtional = _Coerce # pTsaAddtional_}
 
 tsaAddtional :: Lens' TrafficSplitAllocations (HashMap Text Double)
 tsaAddtional
@@ -3621,10 +3625,12 @@ instance ToJSON TrafficSplitAllocations where
 -- creating a version using source code directly.
 --
 -- /See:/ 'cloudBuildOptions' smart constructor.
-data CloudBuildOptions = CloudBuildOptions'
+data CloudBuildOptions =
+  CloudBuildOptions'
     { _cboCloudBuildTimeout :: !(Maybe GDuration)
     , _cboAppYamlPath       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CloudBuildOptions' with the minimum fields required to make a request.
 --
@@ -3636,10 +3642,8 @@ data CloudBuildOptions = CloudBuildOptions'
 cloudBuildOptions
     :: CloudBuildOptions
 cloudBuildOptions =
-    CloudBuildOptions'
-    { _cboCloudBuildTimeout = Nothing
-    , _cboAppYamlPath = Nothing
-    }
+  CloudBuildOptions'
+    {_cboCloudBuildTimeout = Nothing, _cboAppYamlPath = Nothing}
 
 -- | The Cloud Build timeout used as part of any dependent builds performed
 -- by version creation. Defaults to 10 minutes.
@@ -3677,9 +3681,11 @@ instance ToJSON CloudBuildOptions where
 -- complex initialization and rely on the state of its memory over time.
 --
 -- /See:/ 'manualScaling' smart constructor.
-newtype ManualScaling = ManualScaling'
+newtype ManualScaling =
+  ManualScaling'
     { _msInstances :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManualScaling' with the minimum fields required to make a request.
 --
@@ -3688,10 +3694,7 @@ newtype ManualScaling = ManualScaling'
 -- * 'msInstances'
 manualScaling
     :: ManualScaling
-manualScaling =
-    ManualScaling'
-    { _msInstances = Nothing
-    }
+manualScaling = ManualScaling' {_msInstances = Nothing}
 
 -- | Number of instances to assign to the service at the start. This number
 -- can later be altered by using the Modules API
@@ -3718,10 +3721,12 @@ instance ToJSON ManualScaling where
 -- intermittent or driven by user activity.
 --
 -- /See:/ 'basicScaling' smart constructor.
-data BasicScaling = BasicScaling'
+data BasicScaling =
+  BasicScaling'
     { _bsMaxInstances :: !(Maybe (Textual Int32))
     , _bsIdleTimeout  :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicScaling' with the minimum fields required to make a request.
 --
@@ -3733,10 +3738,7 @@ data BasicScaling = BasicScaling'
 basicScaling
     :: BasicScaling
 basicScaling =
-    BasicScaling'
-    { _bsMaxInstances = Nothing
-    , _bsIdleTimeout = Nothing
-    }
+  BasicScaling' {_bsMaxInstances = Nothing, _bsIdleTimeout = Nothing}
 
 -- | Maximum number of instances to create for this version.
 bsMaxInstances :: Lens' BasicScaling (Maybe Int32)
@@ -3770,7 +3772,8 @@ instance ToJSON BasicScaling where
 -- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'operationMetadataV1' smart constructor.
-data OperationMetadataV1 = OperationMetadataV1'
+data OperationMetadataV1 =
+  OperationMetadataV1'
     { _omvEphemeralMessage      :: !(Maybe Text)
     , _omvInsertTime            :: !(Maybe DateTime')
     , _omvUser                  :: !(Maybe Text)
@@ -3779,7 +3782,8 @@ data OperationMetadataV1 = OperationMetadataV1'
     , _omvWarning               :: !(Maybe [Text])
     , _omvCreateVersionMetadata :: !(Maybe CreateVersionMetadataV1)
     , _omvTarget                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadataV1' with the minimum fields required to make a request.
 --
@@ -3803,7 +3807,7 @@ data OperationMetadataV1 = OperationMetadataV1'
 operationMetadataV1
     :: OperationMetadataV1
 operationMetadataV1 =
-    OperationMetadataV1'
+  OperationMetadataV1'
     { _omvEphemeralMessage = Nothing
     , _omvInsertTime = Nothing
     , _omvUser = Nothing
@@ -3893,7 +3897,8 @@ instance ToJSON OperationMetadataV1 where
 -- files that are deployed into a service.
 --
 -- /See:/ 'version' smart constructor.
-data Version = Version'
+data Version =
+  Version'
     { _verRuntime                   :: !(Maybe Text)
     , _verNobuildFilesRegex         :: !(Maybe Text)
     , _verInstanceClass             :: !(Maybe Text)
@@ -3930,7 +3935,8 @@ data Version = Version'
     , _verLibraries                 :: !(Maybe [Library])
     , _verVersionURL                :: !(Maybe Text)
     , _verDeployment                :: !(Maybe Deployment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
@@ -4010,7 +4016,7 @@ data Version = Version'
 version
     :: Version
 version =
-    Version'
+  Version'
     { _verRuntime = Nothing
     , _verNobuildFilesRegex = Nothing
     , _verInstanceClass = Nothing
@@ -4395,12 +4401,14 @@ instance ToJSON Version where
 -- | Identity-Aware Proxy
 --
 -- /See:/ 'identityAwareProxy' smart constructor.
-data IdentityAwareProxy = IdentityAwareProxy'
+data IdentityAwareProxy =
+  IdentityAwareProxy'
     { _iapEnabled                  :: !(Maybe Bool)
     , _iapOAuth2ClientSecretSha256 :: !(Maybe Text)
     , _iapOAuth2ClientSecret       :: !(Maybe Text)
     , _iapOAuth2ClientId           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IdentityAwareProxy' with the minimum fields required to make a request.
 --
@@ -4416,7 +4424,7 @@ data IdentityAwareProxy = IdentityAwareProxy'
 identityAwareProxy
     :: IdentityAwareProxy
 identityAwareProxy =
-    IdentityAwareProxy'
+  IdentityAwareProxy'
     { _iapEnabled = Nothing
     , _iapOAuth2ClientSecretSha256 = Nothing
     , _iapOAuth2ClientSecret = Nothing
@@ -4477,7 +4485,8 @@ instance ToJSON IdentityAwareProxy where
 -- URLs serve them.
 --
 -- /See:/ 'staticFilesHandler' smart constructor.
-data StaticFilesHandler = StaticFilesHandler'
+data StaticFilesHandler =
+  StaticFilesHandler'
     { _sfhHTTPHeaders         :: !(Maybe StaticFilesHandlerHTTPHeaders)
     , _sfhPath                :: !(Maybe Text)
     , _sfhRequireMatchingFile :: !(Maybe Bool)
@@ -4485,7 +4494,8 @@ data StaticFilesHandler = StaticFilesHandler'
     , _sfhMimeType            :: !(Maybe Text)
     , _sfhApplicationReadable :: !(Maybe Bool)
     , _sfhUploadPathRegex     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StaticFilesHandler' with the minimum fields required to make a request.
 --
@@ -4507,7 +4517,7 @@ data StaticFilesHandler = StaticFilesHandler'
 staticFilesHandler
     :: StaticFilesHandler
 staticFilesHandler =
-    StaticFilesHandler'
+  StaticFilesHandler'
     { _sfhHTTPHeaders = Nothing
     , _sfhPath = Nothing
     , _sfhRequireMatchingFile = Nothing
@@ -4597,11 +4607,13 @@ instance ToJSON StaticFilesHandler where
 -- | Custom static error page to be served when an error occurs.
 --
 -- /See:/ 'errorHandler' smart constructor.
-data ErrorHandler = ErrorHandler'
+data ErrorHandler =
+  ErrorHandler'
     { _ehMimeType   :: !(Maybe Text)
     , _ehErrorCode  :: !(Maybe ErrorHandlerErrorCode)
     , _ehStaticFile :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ErrorHandler' with the minimum fields required to make a request.
 --
@@ -4615,11 +4627,8 @@ data ErrorHandler = ErrorHandler'
 errorHandler
     :: ErrorHandler
 errorHandler =
-    ErrorHandler'
-    { _ehMimeType = Nothing
-    , _ehErrorCode = Nothing
-    , _ehStaticFile = Nothing
-    }
+  ErrorHandler'
+    {_ehMimeType = Nothing, _ehErrorCode = Nothing, _ehStaticFile = Nothing}
 
 -- | MIME type of file. Defaults to text\/html.
 ehMimeType :: Lens' ErrorHandler (Maybe Text)
@@ -4656,9 +4665,11 @@ instance ToJSON ErrorHandler where
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
 -- /See:/ 'locationLabels' smart constructor.
-newtype LocationLabels = LocationLabels'
+newtype LocationLabels =
+  LocationLabels'
     { _llAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
@@ -4669,9 +4680,7 @@ locationLabels
     :: HashMap Text Text -- ^ 'llAddtional'
     -> LocationLabels
 locationLabels pLlAddtional_ =
-    LocationLabels'
-    { _llAddtional = _Coerce # pLlAddtional_
-    }
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -4689,10 +4698,12 @@ instance ToJSON LocationLabels where
 -- | Response message for AuthorizedCertificates.ListAuthorizedCertificates.
 --
 -- /See:/ 'listAuthorizedCertificatesResponse' smart constructor.
-data ListAuthorizedCertificatesResponse = ListAuthorizedCertificatesResponse'
+data ListAuthorizedCertificatesResponse =
+  ListAuthorizedCertificatesResponse'
     { _lacrNextPageToken :: !(Maybe Text)
     , _lacrCertificates  :: !(Maybe [AuthorizedCertificate])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAuthorizedCertificatesResponse' with the minimum fields required to make a request.
 --
@@ -4704,10 +4715,8 @@ data ListAuthorizedCertificatesResponse = ListAuthorizedCertificatesResponse'
 listAuthorizedCertificatesResponse
     :: ListAuthorizedCertificatesResponse
 listAuthorizedCertificatesResponse =
-    ListAuthorizedCertificatesResponse'
-    { _lacrNextPageToken = Nothing
-    , _lacrCertificates = Nothing
-    }
+  ListAuthorizedCertificatesResponse'
+    {_lacrNextPageToken = Nothing, _lacrCertificates = Nothing}
 
 -- | Continuation token for fetching the next page of results.
 lacrNextPageToken :: Lens' ListAuthorizedCertificatesResponse (Maybe Text)
@@ -4744,12 +4753,14 @@ instance ToJSON ListAuthorizedCertificatesResponse
 -- provides an action to take on matched requests.
 --
 -- /See:/ 'firewallRule' smart constructor.
-data FirewallRule = FirewallRule'
+data FirewallRule =
+  FirewallRule'
     { _frPriority    :: !(Maybe (Textual Int32))
     , _frAction      :: !(Maybe FirewallRuleAction)
     , _frSourceRange :: !(Maybe Text)
     , _frDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FirewallRule' with the minimum fields required to make a request.
 --
@@ -4765,7 +4776,7 @@ data FirewallRule = FirewallRule'
 firewallRule
     :: FirewallRule
 firewallRule =
-    FirewallRule'
+  FirewallRule'
     { _frPriority = Nothing
     , _frAction = Nothing
     , _frSourceRange = Nothing
@@ -4829,10 +4840,12 @@ instance ToJSON FirewallRule where
 -- | Metadata for the given google.cloud.location.Location.
 --
 -- /See:/ 'locationMetadata' smart constructor.
-data LocationMetadata = LocationMetadata'
+data LocationMetadata =
+  LocationMetadata'
     { _lmStandardEnvironmentAvailable :: !(Maybe Bool)
     , _lmFlexibleEnvironmentAvailable :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
@@ -4844,7 +4857,7 @@ data LocationMetadata = LocationMetadata'
 locationMetadata
     :: LocationMetadata
 locationMetadata =
-    LocationMetadata'
+  LocationMetadata'
     { _lmStandardEnvironmentAvailable = Nothing
     , _lmFlexibleEnvironmentAvailable = Nothing
     }
@@ -4883,14 +4896,16 @@ instance ToJSON LocationMetadata where
 -- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata = OperationMetadata'
+data OperationMetadata =
+  OperationMetadata'
     { _omInsertTime    :: !(Maybe DateTime')
     , _omUser          :: !(Maybe Text)
     , _omMethod        :: !(Maybe Text)
     , _omEndTime       :: !(Maybe DateTime')
     , _omOperationType :: !(Maybe Text)
     , _omTarget        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -4910,7 +4925,7 @@ data OperationMetadata = OperationMetadata'
 operationMetadata
     :: OperationMetadata
 operationMetadata =
-    OperationMetadata'
+  OperationMetadata'
     { _omInsertTime = Nothing
     , _omUser = Nothing
     , _omMethod = Nothing
@@ -4976,10 +4991,12 @@ instance ToJSON OperationMetadata where
 -- | Response message for Instances.ListInstances.
 --
 -- /See:/ 'listInstancesResponse' smart constructor.
-data ListInstancesResponse = ListInstancesResponse'
+data ListInstancesResponse =
+  ListInstancesResponse'
     { _lirNextPageToken :: !(Maybe Text)
     , _lirInstances     :: !(Maybe [Instance])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
@@ -4991,10 +5008,7 @@ data ListInstancesResponse = ListInstancesResponse'
 listInstancesResponse
     :: ListInstancesResponse
 listInstancesResponse =
-    ListInstancesResponse'
-    { _lirNextPageToken = Nothing
-    , _lirInstances = Nothing
-    }
+  ListInstancesResponse' {_lirNextPageToken = Nothing, _lirInstances = Nothing}
 
 -- | Continuation token for fetching the next page of results.
 lirNextPageToken :: Lens' ListInstancesResponse (Maybe Text)
@@ -5027,7 +5041,8 @@ instance ToJSON ListInstancesResponse where
 -- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'operationMetadataV1Alpha' smart constructor.
-data OperationMetadataV1Alpha = OperationMetadataV1Alpha'
+data OperationMetadataV1Alpha =
+  OperationMetadataV1Alpha'
     { _omvaEphemeralMessage      :: !(Maybe Text)
     , _omvaInsertTime            :: !(Maybe DateTime')
     , _omvaUser                  :: !(Maybe Text)
@@ -5036,7 +5051,8 @@ data OperationMetadataV1Alpha = OperationMetadataV1Alpha'
     , _omvaWarning               :: !(Maybe [Text])
     , _omvaCreateVersionMetadata :: !(Maybe CreateVersionMetadataV1Alpha)
     , _omvaTarget                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadataV1Alpha' with the minimum fields required to make a request.
 --
@@ -5060,7 +5076,7 @@ data OperationMetadataV1Alpha = OperationMetadataV1Alpha'
 operationMetadataV1Alpha
     :: OperationMetadataV1Alpha
 operationMetadataV1Alpha =
-    OperationMetadataV1Alpha'
+  OperationMetadataV1Alpha'
     { _omvaEphemeralMessage = Nothing
     , _omvaInsertTime = Nothing
     , _omvaUser = Nothing
@@ -5150,7 +5166,8 @@ instance ToJSON OperationMetadataV1Alpha where
 -- killed and replaced with new instances.
 --
 -- /See:/ 'livenessCheck' smart constructor.
-data LivenessCheck = LivenessCheck'
+data LivenessCheck =
+  LivenessCheck'
     { _lcSuccessThreshold :: !(Maybe (Textual Word32))
     , _lcFailureThreshold :: !(Maybe (Textual Word32))
     , _lcPath             :: !(Maybe Text)
@@ -5158,7 +5175,8 @@ data LivenessCheck = LivenessCheck'
     , _lcHost             :: !(Maybe Text)
     , _lcInitialDelay     :: !(Maybe GDuration)
     , _lcTimeout          :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LivenessCheck' with the minimum fields required to make a request.
 --
@@ -5180,7 +5198,7 @@ data LivenessCheck = LivenessCheck'
 livenessCheck
     :: LivenessCheck
 livenessCheck =
-    LivenessCheck'
+  LivenessCheck'
     { _lcSuccessThreshold = Nothing
     , _lcFailureThreshold = Nothing
     , _lcPath = Nothing
@@ -5264,10 +5282,12 @@ instance ToJSON LivenessCheck where
 -- flexible environment.
 --
 -- /See:/ 'requestUtilization' smart constructor.
-data RequestUtilization = RequestUtilization'
+data RequestUtilization =
+  RequestUtilization'
     { _ruTargetConcurrentRequests    :: !(Maybe (Textual Int32))
     , _ruTargetRequestCountPerSecond :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RequestUtilization' with the minimum fields required to make a request.
 --
@@ -5279,7 +5299,7 @@ data RequestUtilization = RequestUtilization'
 requestUtilization
     :: RequestUtilization
 requestUtilization =
-    RequestUtilization'
+  RequestUtilization'
     { _ruTargetConcurrentRequests = Nothing
     , _ruTargetRequestCountPerSecond = Nothing
     }
@@ -5319,8 +5339,8 @@ instance ToJSON RequestUtilization where
 --
 -- /See:/ 'repairApplicationRequest' smart constructor.
 data RepairApplicationRequest =
-    RepairApplicationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  RepairApplicationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RepairApplicationRequest' with the minimum fields required to make a request.
 --
@@ -5345,9 +5365,11 @@ instance ToJSON RepairApplicationRequest where
 -- TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -5358,9 +5380,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -5380,9 +5400,11 @@ instance ToJSON OperationResponse where
 -- google.appengine.v1beta.CreateVersionRequest.
 --
 -- /See:/ 'createVersionMetadataV1Beta' smart constructor.
-newtype CreateVersionMetadataV1Beta = CreateVersionMetadataV1Beta'
+newtype CreateVersionMetadataV1Beta =
+  CreateVersionMetadataV1Beta'
     { _cvmvbCloudBuildId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateVersionMetadataV1Beta' with the minimum fields required to make a request.
 --
@@ -5392,9 +5414,7 @@ newtype CreateVersionMetadataV1Beta = CreateVersionMetadataV1Beta'
 createVersionMetadataV1Beta
     :: CreateVersionMetadataV1Beta
 createVersionMetadataV1Beta =
-    CreateVersionMetadataV1Beta'
-    { _cvmvbCloudBuildId = Nothing
-    }
+  CreateVersionMetadataV1Beta' {_cvmvbCloudBuildId = Nothing}
 
 -- | The Cloud Build ID if one was created as part of the version create.
 -- \'OutputOnly
@@ -5419,10 +5439,12 @@ instance ToJSON CreateVersionMetadataV1Beta where
 -- | Response message for DomainMappings.ListDomainMappings.
 --
 -- /See:/ 'listDomainMAppingsResponse' smart constructor.
-data ListDomainMAppingsResponse = ListDomainMAppingsResponse'
+data ListDomainMAppingsResponse =
+  ListDomainMAppingsResponse'
     { _ldmarDomainMAppings :: !(Maybe [DomainMApping])
     , _ldmarNextPageToken  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDomainMAppingsResponse' with the minimum fields required to make a request.
 --
@@ -5434,10 +5456,8 @@ data ListDomainMAppingsResponse = ListDomainMAppingsResponse'
 listDomainMAppingsResponse
     :: ListDomainMAppingsResponse
 listDomainMAppingsResponse =
-    ListDomainMAppingsResponse'
-    { _ldmarDomainMAppings = Nothing
-    , _ldmarNextPageToken = Nothing
-    }
+  ListDomainMAppingsResponse'
+    {_ldmarDomainMAppings = Nothing, _ldmarNextPageToken = Nothing}
 
 -- | The domain mappings for the application.
 ldmarDomainMAppings :: Lens' ListDomainMAppingsResponse [DomainMApping]
@@ -5471,12 +5491,14 @@ instance ToJSON ListDomainMAppingsResponse where
 -- | Scheduler settings for standard environment.
 --
 -- /See:/ 'standardSchedulerSettings' smart constructor.
-data StandardSchedulerSettings = StandardSchedulerSettings'
+data StandardSchedulerSettings =
+  StandardSchedulerSettings'
     { _sssTargetCPUUtilization        :: !(Maybe (Textual Double))
     , _sssMinInstances                :: !(Maybe (Textual Int32))
     , _sssMaxInstances                :: !(Maybe (Textual Int32))
     , _sssTargetThroughputUtilization :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StandardSchedulerSettings' with the minimum fields required to make a request.
 --
@@ -5492,7 +5514,7 @@ data StandardSchedulerSettings = StandardSchedulerSettings'
 standardSchedulerSettings
     :: StandardSchedulerSettings
 standardSchedulerSettings =
-    StandardSchedulerSettings'
+  StandardSchedulerSettings'
     { _sssTargetCPUUtilization = Nothing
     , _sssMinInstances = Nothing
     , _sssMaxInstances = Nothing
@@ -5555,9 +5577,11 @@ instance ToJSON StandardSchedulerSettings where
 -- in the App Engine flexible environment.
 --
 -- /See:/ 'containerInfo' smart constructor.
-newtype ContainerInfo = ContainerInfo'
+newtype ContainerInfo =
+  ContainerInfo'
     { _ciImage :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContainerInfo' with the minimum fields required to make a request.
 --
@@ -5566,10 +5590,7 @@ newtype ContainerInfo = ContainerInfo'
 -- * 'ciImage'
 containerInfo
     :: ContainerInfo
-containerInfo =
-    ContainerInfo'
-    { _ciImage = Nothing
-    }
+containerInfo = ContainerInfo' {_ciImage = Nothing}
 
 -- | URI to the hosted container image in Google Container Registry. The URI
 -- must be fully qualified and include a tag or digest. Examples:
@@ -5591,7 +5612,8 @@ instance ToJSON ContainerInfo where
 -- automatically scale an application.
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance'
+data Instance =
+  Instance'
     { _iMemoryUsage      :: !(Maybe (Textual Int64))
     , _iVMStatus         :: !(Maybe Text)
     , _iVMZoneName       :: !(Maybe Text)
@@ -5608,7 +5630,8 @@ data Instance = Instance'
     , _iErrors           :: !(Maybe (Textual Int32))
     , _iAverageLatency   :: !(Maybe (Textual Int32))
     , _iAppEngineRelease :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -5648,7 +5671,7 @@ data Instance = Instance'
 instance'
     :: Instance
 instance' =
-    Instance'
+  Instance'
     { _iMemoryUsage = Nothing
     , _iVMStatus = Nothing
     , _iVMZoneName = Nothing
@@ -5802,11 +5825,13 @@ instance ToJSON Instance where
 -- | SSL configuration for a DomainMapping resource.
 --
 -- /See:/ 'sslSettings' smart constructor.
-data SSLSettings = SSLSettings'
+data SSLSettings =
+  SSLSettings'
     { _ssSSLManagementType           :: !(Maybe SSLSettingsSSLManagementType)
     , _ssCertificateId               :: !(Maybe Text)
     , _ssPendingManagedCertificateId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLSettings' with the minimum fields required to make a request.
 --
@@ -5820,7 +5845,7 @@ data SSLSettings = SSLSettings'
 sslSettings
     :: SSLSettings
 sslSettings =
-    SSLSettings'
+  SSLSettings'
     { _ssSSLManagementType = Nothing
     , _ssCertificateId = Nothing
     , _ssPendingManagedCertificateId = Nothing
@@ -5880,12 +5905,14 @@ instance ToJSON SSLSettings where
 -- | Code and application artifacts used to deploy a version to App Engine.
 --
 -- /See:/ 'deployment' smart constructor.
-data Deployment = Deployment'
+data Deployment =
+  Deployment'
     { _dZip               :: !(Maybe ZipInfo)
     , _dCloudBuildOptions :: !(Maybe CloudBuildOptions)
     , _dContainer         :: !(Maybe ContainerInfo)
     , _dFiles             :: !(Maybe DeploymentFiles)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
@@ -5901,7 +5928,7 @@ data Deployment = Deployment'
 deployment
     :: Deployment
 deployment =
-    Deployment'
+  Deployment'
     { _dZip = Nothing
     , _dCloudBuildOptions = Nothing
     , _dContainer = Nothing

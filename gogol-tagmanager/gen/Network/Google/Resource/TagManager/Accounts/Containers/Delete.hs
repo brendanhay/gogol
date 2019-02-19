@@ -50,9 +50,11 @@ type AccountsContainersDeleteResource =
 -- | Deletes a Container.
 --
 -- /See:/ 'accountsContainersDelete' smart constructor.
-newtype AccountsContainersDelete = AccountsContainersDelete'
+newtype AccountsContainersDelete =
+  AccountsContainersDelete'
     { _acdPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersDelete' with the minimum fields required to make a request.
 --
@@ -63,9 +65,7 @@ accountsContainersDelete
     :: Text -- ^ 'acdPath'
     -> AccountsContainersDelete
 accountsContainersDelete pAcdPath_ =
-    AccountsContainersDelete'
-    { _acdPath = pAcdPath_
-    }
+  AccountsContainersDelete' {_acdPath = pAcdPath_}
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}

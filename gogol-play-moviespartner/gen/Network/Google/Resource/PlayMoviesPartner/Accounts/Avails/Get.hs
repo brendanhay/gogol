@@ -67,7 +67,8 @@ type AccountsAvailsGetResource =
 -- | Get an Avail given its avail group id and avail id.
 --
 -- /See:/ 'accountsAvailsGet' smart constructor.
-data AccountsAvailsGet = AccountsAvailsGet'
+data AccountsAvailsGet =
+  AccountsAvailsGet'
     { _aagXgafv          :: !(Maybe Xgafv)
     , _aagUploadProtocol :: !(Maybe Text)
     , _aagPp             :: !Bool
@@ -77,7 +78,8 @@ data AccountsAvailsGet = AccountsAvailsGet'
     , _aagAccountId      :: !Text
     , _aagBearerToken    :: !(Maybe Text)
     , _aagCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsAvailsGet' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ accountsAvailsGet
     -> Text -- ^ 'aagAccountId'
     -> AccountsAvailsGet
 accountsAvailsGet pAagAvailId_ pAagAccountId_ =
-    AccountsAvailsGet'
+  AccountsAvailsGet'
     { _aagXgafv = Nothing
     , _aagUploadProtocol = Nothing
     , _aagPp = True

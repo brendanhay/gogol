@@ -56,10 +56,12 @@ type CustomersPatchResource =
 -- semantics.
 --
 -- /See:/ 'customersPatch' smart constructor.
-data CustomersPatch = CustomersPatch'
+data CustomersPatch =
+  CustomersPatch'
     { _cpPayload    :: !Customer
     , _cpCustomerId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersPatch' with the minimum fields required to make a request.
 --
@@ -73,10 +75,7 @@ customersPatch
     -> Text -- ^ 'cpCustomerId'
     -> CustomersPatch
 customersPatch pCpPayload_ pCpCustomerId_ =
-    CustomersPatch'
-    { _cpPayload = pCpPayload_
-    , _cpCustomerId = pCpCustomerId_
-    }
+  CustomersPatch' {_cpPayload = pCpPayload_, _cpCustomerId = pCpCustomerId_}
 
 -- | Multipart request metadata.
 cpPayload :: Lens' CustomersPatch Customer

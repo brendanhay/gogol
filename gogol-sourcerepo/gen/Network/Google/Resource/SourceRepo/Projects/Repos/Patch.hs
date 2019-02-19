@@ -62,7 +62,8 @@ type ProjectsReposPatchResource =
 -- | Updates information about a repo.
 --
 -- /See:/ 'projectsReposPatch' smart constructor.
-data ProjectsReposPatch = ProjectsReposPatch'
+data ProjectsReposPatch =
+  ProjectsReposPatch'
     { _prpXgafv          :: !(Maybe Xgafv)
     , _prpUploadProtocol :: !(Maybe Text)
     , _prpAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsReposPatch = ProjectsReposPatch'
     , _prpPayload        :: !UpdateRepoRequest
     , _prpName           :: !Text
     , _prpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReposPatch' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsReposPatch
     -> Text -- ^ 'prpName'
     -> ProjectsReposPatch
 projectsReposPatch pPrpPayload_ pPrpName_ =
-    ProjectsReposPatch'
+  ProjectsReposPatch'
     { _prpXgafv = Nothing
     , _prpUploadProtocol = Nothing
     , _prpAccessToken = Nothing

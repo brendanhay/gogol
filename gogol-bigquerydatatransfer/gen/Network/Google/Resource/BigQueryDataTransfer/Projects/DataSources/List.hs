@@ -67,7 +67,8 @@ type ProjectsDataSourcesListResource =
 -- used for UI rendering.
 --
 -- /See:/ 'projectsDataSourcesList' smart constructor.
-data ProjectsDataSourcesList = ProjectsDataSourcesList'
+data ProjectsDataSourcesList =
+  ProjectsDataSourcesList'
     { _pdslParent         :: !Text
     , _pdslXgafv          :: !(Maybe Xgafv)
     , _pdslUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsDataSourcesList = ProjectsDataSourcesList'
     , _pdslPageToken      :: !(Maybe Text)
     , _pdslPageSize       :: !(Maybe (Textual Int32))
     , _pdslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDataSourcesList' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsDataSourcesList
     :: Text -- ^ 'pdslParent'
     -> ProjectsDataSourcesList
 projectsDataSourcesList pPdslParent_ =
-    ProjectsDataSourcesList'
+  ProjectsDataSourcesList'
     { _pdslParent = pPdslParent_
     , _pdslXgafv = Nothing
     , _pdslUploadProtocol = Nothing

@@ -67,13 +67,15 @@ type LiveBroadcastsBindResource =
 -- broadcast.
 --
 -- /See:/ 'liveBroadcastsBind' smart constructor.
-data LiveBroadcastsBind = LiveBroadcastsBind'
+data LiveBroadcastsBind =
+  LiveBroadcastsBind'
     { _lbbPart                          :: !Text
     , _lbbOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbbOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbbId                            :: !Text
     , _lbbStreamId                      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcastsBind' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ liveBroadcastsBind
     -> Text -- ^ 'lbbId'
     -> LiveBroadcastsBind
 liveBroadcastsBind pLbbPart_ pLbbId_ =
-    LiveBroadcastsBind'
+  LiveBroadcastsBind'
     { _lbbPart = pLbbPart_
     , _lbbOnBehalfOfContentOwner = Nothing
     , _lbbOnBehalfOfContentOwnerChannel = Nothing

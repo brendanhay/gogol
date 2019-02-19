@@ -68,7 +68,8 @@ type ProjectsIapWebSetIAMPolicyResource =
 -- https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing_access_via_the_api
 --
 -- /See:/ 'projectsIapWebSetIAMPolicy' smart constructor.
-data ProjectsIapWebSetIAMPolicy = ProjectsIapWebSetIAMPolicy'
+data ProjectsIapWebSetIAMPolicy =
+  ProjectsIapWebSetIAMPolicy'
     { _piwsipXgafv          :: !(Maybe Xgafv)
     , _piwsipUploadProtocol :: !(Maybe Text)
     , _piwsipAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsIapWebSetIAMPolicy = ProjectsIapWebSetIAMPolicy'
     , _piwsipPayload        :: !SetIAMPolicyRequest
     , _piwsipResource       :: !Text
     , _piwsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsIapWebSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsIapWebSetIAMPolicy
     -> Text -- ^ 'piwsipResource'
     -> ProjectsIapWebSetIAMPolicy
 projectsIapWebSetIAMPolicy pPiwsipPayload_ pPiwsipResource_ =
-    ProjectsIapWebSetIAMPolicy'
+  ProjectsIapWebSetIAMPolicy'
     { _piwsipXgafv = Nothing
     , _piwsipUploadProtocol = Nothing
     , _piwsipAccessToken = Nothing

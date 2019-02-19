@@ -67,7 +67,8 @@ type ProjectsRegionsJobsSubmitResource =
 -- | Submits a job to a cluster.
 --
 -- /See:/ 'projectsRegionsJobsSubmit' smart constructor.
-data ProjectsRegionsJobsSubmit = ProjectsRegionsJobsSubmit'
+data ProjectsRegionsJobsSubmit =
+  ProjectsRegionsJobsSubmit'
     { _prjsXgafv          :: !(Maybe Xgafv)
     , _prjsUploadProtocol :: !(Maybe Text)
     , _prjsAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsRegionsJobsSubmit = ProjectsRegionsJobsSubmit'
     , _prjsRegion         :: !Text
     , _prjsProjectId      :: !Text
     , _prjsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsJobsSubmit' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsRegionsJobsSubmit
     -> Text -- ^ 'prjsProjectId'
     -> ProjectsRegionsJobsSubmit
 projectsRegionsJobsSubmit pPrjsPayload_ pPrjsRegion_ pPrjsProjectId_ =
-    ProjectsRegionsJobsSubmit'
+  ProjectsRegionsJobsSubmit'
     { _prjsXgafv = Nothing
     , _prjsUploadProtocol = Nothing
     , _prjsAccessToken = Nothing

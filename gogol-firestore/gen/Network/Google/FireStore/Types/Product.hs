@@ -28,12 +28,14 @@ import           Network.Google.Prelude
 -- only an up-to-date token, to use in the next request.
 --
 -- /See:/ 'writeRequest' smart constructor.
-data WriteRequest = WriteRequest'
+data WriteRequest =
+  WriteRequest'
     { _wrStreamToken :: !(Maybe Bytes)
     , _wrLabels      :: !(Maybe WriteRequestLabels)
     , _wrWrites      :: !(Maybe [Write])
     , _wrStreamId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WriteRequest' with the minimum fields required to make a request.
 --
@@ -49,7 +51,7 @@ data WriteRequest = WriteRequest'
 writeRequest
     :: WriteRequest
 writeRequest =
-    WriteRequest'
+  WriteRequest'
     { _wrStreamToken = Nothing
     , _wrLabels = Nothing
     , _wrWrites = Nothing
@@ -114,10 +116,12 @@ instance ToJSON WriteRequest where
 -- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng'
+data LatLng =
+  LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -128,11 +132,7 @@ data LatLng = LatLng'
 -- * 'llLongitude'
 latLng
     :: LatLng
-latLng =
-    LatLng'
-    { _llLatitude = Nothing
-    , _llLongitude = Nothing
-    }
+latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -163,10 +163,12 @@ instance ToJSON LatLng where
 -- | The result of applying a write.
 --
 -- /See:/ 'writeResult' smart constructor.
-data WriteResult = WriteResult'
+data WriteResult =
+  WriteResult'
     { _wrUpdateTime       :: !(Maybe DateTime')
     , _wrTransformResults :: !(Maybe [Value])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WriteResult' with the minimum fields required to make a request.
 --
@@ -178,10 +180,7 @@ data WriteResult = WriteResult'
 writeResult
     :: WriteResult
 writeResult =
-    WriteResult'
-    { _wrUpdateTime = Nothing
-    , _wrTransformResults = Nothing
-    }
+  WriteResult' {_wrUpdateTime = Nothing, _wrTransformResults = Nothing}
 
 -- | The last update time of the document after applying the write. Not set
 -- after a \`delete\`. If the write did not actually change the document,
@@ -220,10 +219,12 @@ instance ToJSON WriteResult where
 -- with the same id.
 --
 -- /See:/ 'googleFirestoreAdminV1Field' smart constructor.
-data GoogleFirestoreAdminV1Field = GoogleFirestoreAdminV1Field'
+data GoogleFirestoreAdminV1Field =
+  GoogleFirestoreAdminV1Field'
     { _gfavfIndexConfig :: !(Maybe GoogleFirestoreAdminV1IndexConfig)
     , _gfavfName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1Field' with the minimum fields required to make a request.
 --
@@ -235,10 +236,8 @@ data GoogleFirestoreAdminV1Field = GoogleFirestoreAdminV1Field'
 googleFirestoreAdminV1Field
     :: GoogleFirestoreAdminV1Field
 googleFirestoreAdminV1Field =
-    GoogleFirestoreAdminV1Field'
-    { _gfavfIndexConfig = Nothing
-    , _gfavfName = Nothing
-    }
+  GoogleFirestoreAdminV1Field'
+    {_gfavfIndexConfig = Nothing, _gfavfName = Nothing}
 
 -- | The index configuration for this field. If unset, field indexing will
 -- revert to the configuration defined by the \`ancestor_field\`. To
@@ -289,10 +288,12 @@ instance ToJSON GoogleFirestoreAdminV1Field where
 -- | Options for creating a new transaction.
 --
 -- /See:/ 'transactionOptions' smart constructor.
-data TransactionOptions = TransactionOptions'
+data TransactionOptions =
+  TransactionOptions'
     { _toReadWrite :: !(Maybe ReadWrite)
     , _toReadOnly  :: !(Maybe ReadOnly)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransactionOptions' with the minimum fields required to make a request.
 --
@@ -304,10 +305,7 @@ data TransactionOptions = TransactionOptions'
 transactionOptions
     :: TransactionOptions
 transactionOptions =
-    TransactionOptions'
-    { _toReadWrite = Nothing
-    , _toReadOnly = Nothing
-    }
+  TransactionOptions' {_toReadWrite = Nothing, _toReadOnly = Nothing}
 
 -- | The transaction can be used for both read and write operations.
 toReadWrite :: Lens' TransactionOptions (Maybe ReadWrite)
@@ -370,11 +368,13 @@ instance ToJSON TransactionOptions where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -387,12 +387,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -436,9 +431,11 @@ instance ToJSON Status where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'googleLongrunningOperationMetadata' smart constructor.
-newtype GoogleLongrunningOperationMetadata = GoogleLongrunningOperationMetadata'
+newtype GoogleLongrunningOperationMetadata =
+  GoogleLongrunningOperationMetadata'
     { _glomAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleLongrunningOperationMetadata' with the minimum fields required to make a request.
 --
@@ -449,9 +446,8 @@ googleLongrunningOperationMetadata
     :: HashMap Text JSONValue -- ^ 'glomAddtional'
     -> GoogleLongrunningOperationMetadata
 googleLongrunningOperationMetadata pGlomAddtional_ =
-    GoogleLongrunningOperationMetadata'
-    { _glomAddtional = _Coerce # pGlomAddtional_
-    }
+  GoogleLongrunningOperationMetadata'
+    {_glomAddtional = _Coerce # pGlomAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunningOperationMetadata (HashMap Text JSONValue)
@@ -475,10 +471,12 @@ instance ToJSON GoogleLongrunningOperationMetadata
 -- | A precondition on a document, used for conditional operations.
 --
 -- /See:/ 'precondition' smart constructor.
-data Precondition = Precondition'
+data Precondition =
+  Precondition'
     { _pExists     :: !(Maybe Bool)
     , _pUpdateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Precondition' with the minimum fields required to make a request.
 --
@@ -489,11 +487,7 @@ data Precondition = Precondition'
 -- * 'pUpdateTime'
 precondition
     :: Precondition
-precondition =
-    Precondition'
-    { _pExists = Nothing
-    , _pUpdateTime = Nothing
-    }
+precondition = Precondition' {_pExists = Nothing, _pUpdateTime = Nothing}
 
 -- | When set to \`true\`, the target document must exist. When set to
 -- \`false\`, the target document must not exist.
@@ -524,9 +518,11 @@ instance ToJSON Precondition where
 -- | Options for a transaction that can be used to read and write documents.
 --
 -- /See:/ 'readWrite' smart constructor.
-newtype ReadWrite = ReadWrite'
+newtype ReadWrite =
+  ReadWrite'
     { _rwRetryTransaction :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReadWrite' with the minimum fields required to make a request.
 --
@@ -535,10 +531,7 @@ newtype ReadWrite = ReadWrite'
 -- * 'rwRetryTransaction'
 readWrite
     :: ReadWrite
-readWrite =
-    ReadWrite'
-    { _rwRetryTransaction = Nothing
-    }
+readWrite = ReadWrite' {_rwRetryTransaction = Nothing}
 
 -- | An optional transaction to retry.
 rwRetryTransaction :: Lens' ReadWrite (Maybe ByteString)
@@ -561,9 +554,11 @@ instance ToJSON ReadWrite where
 -- | The request for Firestore.Rollback.
 --
 -- /See:/ 'rollbackRequest' smart constructor.
-newtype RollbackRequest = RollbackRequest'
+newtype RollbackRequest =
+  RollbackRequest'
     { _rrTransaction :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
 --
@@ -572,10 +567,7 @@ newtype RollbackRequest = RollbackRequest'
 -- * 'rrTransaction'
 rollbackRequest
     :: RollbackRequest
-rollbackRequest =
-    RollbackRequest'
-    { _rrTransaction = Nothing
-    }
+rollbackRequest = RollbackRequest' {_rrTransaction = Nothing}
 
 -- | The transaction to roll back.
 rrTransaction :: Lens' RollbackRequest (Maybe ByteString)
@@ -597,10 +589,12 @@ instance ToJSON RollbackRequest where
 -- | The request for FirestoreAdmin.ExportDocuments.
 --
 -- /See:/ 'googleFirestoreAdminV1ExportDocumentsRequest' smart constructor.
-data GoogleFirestoreAdminV1ExportDocumentsRequest = GoogleFirestoreAdminV1ExportDocumentsRequest'
+data GoogleFirestoreAdminV1ExportDocumentsRequest =
+  GoogleFirestoreAdminV1ExportDocumentsRequest'
     { _gfavedrCollectionIds   :: !(Maybe [Text])
     , _gfavedrOutputURIPrefix :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1ExportDocumentsRequest' with the minimum fields required to make a request.
 --
@@ -612,10 +606,8 @@ data GoogleFirestoreAdminV1ExportDocumentsRequest = GoogleFirestoreAdminV1Export
 googleFirestoreAdminV1ExportDocumentsRequest
     :: GoogleFirestoreAdminV1ExportDocumentsRequest
 googleFirestoreAdminV1ExportDocumentsRequest =
-    GoogleFirestoreAdminV1ExportDocumentsRequest'
-    { _gfavedrCollectionIds = Nothing
-    , _gfavedrOutputURIPrefix = Nothing
-    }
+  GoogleFirestoreAdminV1ExportDocumentsRequest'
+    {_gfavedrCollectionIds = Nothing, _gfavedrOutputURIPrefix = Nothing}
 
 -- | Which collection ids to export. Unspecified means all collections.
 gfavedrCollectionIds :: Lens' GoogleFirestoreAdminV1ExportDocumentsRequest [Text]
@@ -639,7 +631,8 @@ gfavedrOutputURIPrefix
       (\ s a -> s{_gfavedrOutputURIPrefix = a})
 
 instance FromJSON
-         GoogleFirestoreAdminV1ExportDocumentsRequest where
+           GoogleFirestoreAdminV1ExportDocumentsRequest
+         where
         parseJSON
           = withObject
               "GoogleFirestoreAdminV1ExportDocumentsRequest"
@@ -649,7 +642,8 @@ instance FromJSON
                      (o .:? "outputUriPrefix"))
 
 instance ToJSON
-         GoogleFirestoreAdminV1ExportDocumentsRequest where
+           GoogleFirestoreAdminV1ExportDocumentsRequest
+         where
         toJSON
           GoogleFirestoreAdminV1ExportDocumentsRequest'{..}
           = object
@@ -660,13 +654,15 @@ instance ToJSON
 -- | Targets being watched have changed.
 --
 -- /See:/ 'targetChange' smart constructor.
-data TargetChange = TargetChange'
+data TargetChange =
+  TargetChange'
     { _tcReadTime         :: !(Maybe DateTime')
     , _tcResumeToken      :: !(Maybe Bytes)
     , _tcCause            :: !(Maybe Status)
     , _tcTargetChangeType :: !(Maybe TargetChangeTargetChangeType)
     , _tcTargetIds        :: !(Maybe [Textual Int32])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetChange' with the minimum fields required to make a request.
 --
@@ -684,7 +680,7 @@ data TargetChange = TargetChange'
 targetChange
     :: TargetChange
 targetChange =
-    TargetChange'
+  TargetChange'
     { _tcReadTime = Nothing
     , _tcResumeToken = Nothing
     , _tcCause = Nothing
@@ -758,10 +754,12 @@ instance ToJSON TargetChange where
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
-data ListLocationsResponse = ListLocationsResponse'
+data ListLocationsResponse =
+  ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -773,10 +771,7 @@ data ListLocationsResponse = ListLocationsResponse'
 listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
-    ListLocationsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLocations = Nothing
-    }
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -809,10 +804,12 @@ instance ToJSON ListLocationsResponse where
 -- | A position in a query result set.
 --
 -- /See:/ 'cursor' smart constructor.
-data Cursor = Cursor'
+data Cursor =
+  Cursor'
     { _cValues :: !(Maybe [Value])
     , _cBefore :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Cursor' with the minimum fields required to make a request.
 --
@@ -823,11 +820,7 @@ data Cursor = Cursor'
 -- * 'cBefore'
 cursor
     :: Cursor
-cursor =
-    Cursor'
-    { _cValues = Nothing
-    , _cBefore = Nothing
-    }
+cursor = Cursor' {_cValues = Nothing, _cBefore = Nothing}
 
 -- | The values that represent a position, in the order they appear in the
 -- order by clause of a query. Can contain fewer values than specified in
@@ -860,7 +853,8 @@ instance ToJSON Cursor where
 -- FirestoreAdmin.ImportDocuments.
 --
 -- /See:/ 'googleFirestoreAdminV1ImportDocumentsMetadata' smart constructor.
-data GoogleFirestoreAdminV1ImportDocumentsMetadata = GoogleFirestoreAdminV1ImportDocumentsMetadata'
+data GoogleFirestoreAdminV1ImportDocumentsMetadata =
+  GoogleFirestoreAdminV1ImportDocumentsMetadata'
     { _gfavidmProgressBytes     :: !(Maybe GoogleFirestoreAdminV1Progress)
     , _gfavidmStartTime         :: !(Maybe DateTime')
     , _gfavidmInputURIPrefix    :: !(Maybe Text)
@@ -868,7 +862,8 @@ data GoogleFirestoreAdminV1ImportDocumentsMetadata = GoogleFirestoreAdminV1Impor
     , _gfavidmProgressDocuments :: !(Maybe GoogleFirestoreAdminV1Progress)
     , _gfavidmEndTime           :: !(Maybe DateTime')
     , _gfavidmOperationState    :: !(Maybe GoogleFirestoreAdminV1ImportDocumentsMetadataOperationState)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1ImportDocumentsMetadata' with the minimum fields required to make a request.
 --
@@ -890,7 +885,7 @@ data GoogleFirestoreAdminV1ImportDocumentsMetadata = GoogleFirestoreAdminV1Impor
 googleFirestoreAdminV1ImportDocumentsMetadata
     :: GoogleFirestoreAdminV1ImportDocumentsMetadata
 googleFirestoreAdminV1ImportDocumentsMetadata =
-    GoogleFirestoreAdminV1ImportDocumentsMetadata'
+  GoogleFirestoreAdminV1ImportDocumentsMetadata'
     { _gfavidmProgressBytes = Nothing
     , _gfavidmStartTime = Nothing
     , _gfavidmInputURIPrefix = Nothing
@@ -948,7 +943,8 @@ gfavidmOperationState
       (\ s a -> s{_gfavidmOperationState = a})
 
 instance FromJSON
-         GoogleFirestoreAdminV1ImportDocumentsMetadata where
+           GoogleFirestoreAdminV1ImportDocumentsMetadata
+         where
         parseJSON
           = withObject
               "GoogleFirestoreAdminV1ImportDocumentsMetadata"
@@ -962,7 +958,8 @@ instance FromJSON
                      <*> (o .:? "operationState"))
 
 instance ToJSON
-         GoogleFirestoreAdminV1ImportDocumentsMetadata where
+           GoogleFirestoreAdminV1ImportDocumentsMetadata
+         where
         toJSON
           GoogleFirestoreAdminV1ImportDocumentsMetadata'{..}
           = object
@@ -979,9 +976,11 @@ instance ToJSON
 -- | The request for Firestore.BeginTransaction.
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
-newtype BeginTransactionRequest = BeginTransactionRequest'
+newtype BeginTransactionRequest =
+  BeginTransactionRequest'
     { _btrOptions :: Maybe TransactionOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
 --
@@ -990,10 +989,7 @@ newtype BeginTransactionRequest = BeginTransactionRequest'
 -- * 'btrOptions'
 beginTransactionRequest
     :: BeginTransactionRequest
-beginTransactionRequest =
-    BeginTransactionRequest'
-    { _btrOptions = Nothing
-    }
+beginTransactionRequest = BeginTransactionRequest' {_btrOptions = Nothing}
 
 -- | The options for the transaction. Defaults to a read-write transaction.
 btrOptions :: Lens' BeginTransactionRequest (Maybe TransactionOptions)
@@ -1013,12 +1009,14 @@ instance ToJSON BeginTransactionRequest where
 -- | The request for Firestore.RunQuery.
 --
 -- /See:/ 'runQueryRequest' smart constructor.
-data RunQueryRequest = RunQueryRequest'
+data RunQueryRequest =
+  RunQueryRequest'
     { _rqrReadTime        :: !(Maybe DateTime')
     , _rqrNewTransaction  :: !(Maybe TransactionOptions)
     , _rqrStructuredQuery :: !(Maybe StructuredQuery)
     , _rqrTransaction     :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
 --
@@ -1034,7 +1032,7 @@ data RunQueryRequest = RunQueryRequest'
 runQueryRequest
     :: RunQueryRequest
 runQueryRequest =
-    RunQueryRequest'
+  RunQueryRequest'
     { _rqrReadTime = Nothing
     , _rqrNewTransaction = Nothing
     , _rqrStructuredQuery = Nothing
@@ -1090,10 +1088,12 @@ instance ToJSON RunQueryRequest where
 -- | Information about an index configuration change.
 --
 -- /See:/ 'googleFirestoreAdminV1IndexConfigDelta' smart constructor.
-data GoogleFirestoreAdminV1IndexConfigDelta = GoogleFirestoreAdminV1IndexConfigDelta'
+data GoogleFirestoreAdminV1IndexConfigDelta =
+  GoogleFirestoreAdminV1IndexConfigDelta'
     { _gfavicdIndex      :: !(Maybe GoogleFirestoreAdminV1Index)
     , _gfavicdChangeType :: !(Maybe GoogleFirestoreAdminV1IndexConfigDeltaChangeType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1IndexConfigDelta' with the minimum fields required to make a request.
 --
@@ -1105,10 +1105,8 @@ data GoogleFirestoreAdminV1IndexConfigDelta = GoogleFirestoreAdminV1IndexConfigD
 googleFirestoreAdminV1IndexConfigDelta
     :: GoogleFirestoreAdminV1IndexConfigDelta
 googleFirestoreAdminV1IndexConfigDelta =
-    GoogleFirestoreAdminV1IndexConfigDelta'
-    { _gfavicdIndex = Nothing
-    , _gfavicdChangeType = Nothing
-    }
+  GoogleFirestoreAdminV1IndexConfigDelta'
+    {_gfavicdIndex = Nothing, _gfavicdChangeType = Nothing}
 
 -- | The index being changed.
 gfavicdIndex :: Lens' GoogleFirestoreAdminV1IndexConfigDelta (Maybe GoogleFirestoreAdminV1Index)
@@ -1122,7 +1120,8 @@ gfavicdChangeType
       (\ s a -> s{_gfavicdChangeType = a})
 
 instance FromJSON
-         GoogleFirestoreAdminV1IndexConfigDelta where
+           GoogleFirestoreAdminV1IndexConfigDelta
+         where
         parseJSON
           = withObject "GoogleFirestoreAdminV1IndexConfigDelta"
               (\ o ->
@@ -1130,7 +1129,8 @@ instance FromJSON
                    (o .:? "index") <*> (o .:? "changeType"))
 
 instance ToJSON
-         GoogleFirestoreAdminV1IndexConfigDelta where
+           GoogleFirestoreAdminV1IndexConfigDelta
+         where
         toJSON GoogleFirestoreAdminV1IndexConfigDelta'{..}
           = object
               (catMaybes
@@ -1140,12 +1140,14 @@ instance ToJSON
 -- | The index configuration for this field.
 --
 -- /See:/ 'googleFirestoreAdminV1IndexConfig' smart constructor.
-data GoogleFirestoreAdminV1IndexConfig = GoogleFirestoreAdminV1IndexConfig'
+data GoogleFirestoreAdminV1IndexConfig =
+  GoogleFirestoreAdminV1IndexConfig'
     { _gfavicAncestorField      :: !(Maybe Text)
     , _gfavicReverting          :: !(Maybe Bool)
     , _gfavicIndexes            :: !(Maybe [GoogleFirestoreAdminV1Index])
     , _gfavicUsesAncestorConfig :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1IndexConfig' with the minimum fields required to make a request.
 --
@@ -1161,7 +1163,7 @@ data GoogleFirestoreAdminV1IndexConfig = GoogleFirestoreAdminV1IndexConfig'
 googleFirestoreAdminV1IndexConfig
     :: GoogleFirestoreAdminV1IndexConfig
 googleFirestoreAdminV1IndexConfig =
-    GoogleFirestoreAdminV1IndexConfig'
+  GoogleFirestoreAdminV1IndexConfig'
     { _gfavicAncestorField = Nothing
     , _gfavicReverting = Nothing
     , _gfavicIndexes = Nothing
@@ -1228,11 +1230,13 @@ instance ToJSON GoogleFirestoreAdminV1IndexConfig
 -- the value_mode describes how the field value is indexed.
 --
 -- /See:/ 'googleFirestoreAdminV1IndexField' smart constructor.
-data GoogleFirestoreAdminV1IndexField = GoogleFirestoreAdminV1IndexField'
+data GoogleFirestoreAdminV1IndexField =
+  GoogleFirestoreAdminV1IndexField'
     { _gfavifFieldPath   :: !(Maybe Text)
     , _gfavifArrayConfig :: !(Maybe GoogleFirestoreAdminV1IndexFieldArrayConfig)
     , _gfavifOrder       :: !(Maybe GoogleFirestoreAdminV1IndexFieldOrder)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1IndexField' with the minimum fields required to make a request.
 --
@@ -1246,7 +1250,7 @@ data GoogleFirestoreAdminV1IndexField = GoogleFirestoreAdminV1IndexField'
 googleFirestoreAdminV1IndexField
     :: GoogleFirestoreAdminV1IndexField
 googleFirestoreAdminV1IndexField =
-    GoogleFirestoreAdminV1IndexField'
+  GoogleFirestoreAdminV1IndexField'
     { _gfavifFieldPath = Nothing
     , _gfavifArrayConfig = Nothing
     , _gfavifOrder = Nothing
@@ -1292,13 +1296,15 @@ instance ToJSON GoogleFirestoreAdminV1IndexField
 -- | A write on a document.
 --
 -- /See:/ 'write' smart constructor.
-data Write = Write'
+data Write =
+  Write'
     { _wTransform       :: !(Maybe DocumentTransform)
     , _wUpdateMask      :: !(Maybe DocumentMask)
     , _wCurrentDocument :: !(Maybe Precondition)
     , _wDelete          :: !(Maybe Text)
     , _wUpdate          :: !(Maybe Document)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Write' with the minimum fields required to make a request.
 --
@@ -1316,7 +1322,7 @@ data Write = Write'
 write
     :: Write
 write =
-    Write'
+  Write'
     { _wTransform = Nothing
     , _wUpdateMask = Nothing
     , _wCurrentDocument = Nothing
@@ -1382,13 +1388,15 @@ instance ToJSON Write where
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lName        :: !(Maybe Text)
     , _lMetadata    :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
     , _lLabels      :: !(Maybe LocationLabels)
     , _lLocationId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -1406,7 +1414,7 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lName = Nothing
     , _lMetadata = Nothing
     , _lDisplayName = Nothing
@@ -1469,8 +1477,8 @@ instance ToJSON Location where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -1487,12 +1495,14 @@ instance ToJSON Empty where
 -- | The streamed response for Firestore.BatchGetDocuments.
 --
 -- /See:/ 'batchGetDocumentsResponse' smart constructor.
-data BatchGetDocumentsResponse = BatchGetDocumentsResponse'
+data BatchGetDocumentsResponse =
+  BatchGetDocumentsResponse'
     { _bgdrReadTime    :: !(Maybe DateTime')
     , _bgdrFound       :: !(Maybe Document)
     , _bgdrTransaction :: !(Maybe Bytes)
     , _bgdrMissing     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchGetDocumentsResponse' with the minimum fields required to make a request.
 --
@@ -1508,7 +1518,7 @@ data BatchGetDocumentsResponse = BatchGetDocumentsResponse'
 batchGetDocumentsResponse
     :: BatchGetDocumentsResponse
 batchGetDocumentsResponse =
-    BatchGetDocumentsResponse'
+  BatchGetDocumentsResponse'
     { _bgdrReadTime = Nothing
     , _bgdrFound = Nothing
     , _bgdrTransaction = Nothing
@@ -1564,10 +1574,12 @@ instance ToJSON BatchGetDocumentsResponse where
 -- | A filter that merges multiple other filters using the given operator.
 --
 -- /See:/ 'compositeFilter' smart constructor.
-data CompositeFilter = CompositeFilter'
+data CompositeFilter =
+  CompositeFilter'
     { _cfOp      :: !(Maybe CompositeFilterOp)
     , _cfFilters :: !(Maybe [Filter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompositeFilter' with the minimum fields required to make a request.
 --
@@ -1578,11 +1590,7 @@ data CompositeFilter = CompositeFilter'
 -- * 'cfFilters'
 compositeFilter
     :: CompositeFilter
-compositeFilter =
-    CompositeFilter'
-    { _cfOp = Nothing
-    , _cfFilters = Nothing
-    }
+compositeFilter = CompositeFilter' {_cfOp = Nothing, _cfFilters = Nothing}
 
 -- | The operator for combining multiple filters.
 cfOp :: Lens' CompositeFilter (Maybe CompositeFilterOp)
@@ -1611,9 +1619,11 @@ instance ToJSON CompositeFilter where
 -- | A target specified by a set of documents names.
 --
 -- /See:/ 'documentsTarget' smart constructor.
-newtype DocumentsTarget = DocumentsTarget'
+newtype DocumentsTarget =
+  DocumentsTarget'
     { _dtDocuments :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentsTarget' with the minimum fields required to make a request.
 --
@@ -1622,10 +1632,7 @@ newtype DocumentsTarget = DocumentsTarget'
 -- * 'dtDocuments'
 documentsTarget
     :: DocumentsTarget
-documentsTarget =
-    DocumentsTarget'
-    { _dtDocuments = Nothing
-    }
+documentsTarget = DocumentsTarget' {_dtDocuments = Nothing}
 
 -- | The names of the documents to retrieve. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}\`.
@@ -1651,9 +1658,11 @@ instance ToJSON DocumentsTarget where
 -- | Labels associated with this target change.
 --
 -- /See:/ 'listenRequestLabels' smart constructor.
-newtype ListenRequestLabels = ListenRequestLabels'
+newtype ListenRequestLabels =
+  ListenRequestLabels'
     { _lrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListenRequestLabels' with the minimum fields required to make a request.
 --
@@ -1664,9 +1673,7 @@ listenRequestLabels
     :: HashMap Text Text -- ^ 'lrlAddtional'
     -> ListenRequestLabels
 listenRequestLabels pLrlAddtional_ =
-    ListenRequestLabels'
-    { _lrlAddtional = _Coerce # pLrlAddtional_
-    }
+  ListenRequestLabels' {_lrlAddtional = _Coerce # pLrlAddtional_}
 
 lrlAddtional :: Lens' ListenRequestLabels (HashMap Text Text)
 lrlAddtional
@@ -1685,12 +1692,14 @@ instance ToJSON ListenRequestLabels where
 -- documents in a database.
 --
 -- /See:/ 'googleFirestoreAdminV1Index' smart constructor.
-data GoogleFirestoreAdminV1Index = GoogleFirestoreAdminV1Index'
+data GoogleFirestoreAdminV1Index =
+  GoogleFirestoreAdminV1Index'
     { _gfaviState      :: !(Maybe GoogleFirestoreAdminV1IndexState)
     , _gfaviQueryScope :: !(Maybe GoogleFirestoreAdminV1IndexQueryScope)
     , _gfaviName       :: !(Maybe Text)
     , _gfaviFields     :: !(Maybe [GoogleFirestoreAdminV1IndexField])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1Index' with the minimum fields required to make a request.
 --
@@ -1706,7 +1715,7 @@ data GoogleFirestoreAdminV1Index = GoogleFirestoreAdminV1Index'
 googleFirestoreAdminV1Index
     :: GoogleFirestoreAdminV1Index
 googleFirestoreAdminV1Index =
-    GoogleFirestoreAdminV1Index'
+  GoogleFirestoreAdminV1Index'
     { _gfaviState = Nothing
     , _gfaviQueryScope = Nothing
     , _gfaviName = Nothing
@@ -1773,9 +1782,11 @@ instance ToJSON GoogleFirestoreAdminV1Index where
 -- | The response for Firestore.BeginTransaction.
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
-newtype BeginTransactionResponse = BeginTransactionResponse'
+newtype BeginTransactionResponse =
+  BeginTransactionResponse'
     { _btrTransaction :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeginTransactionResponse' with the minimum fields required to make a request.
 --
@@ -1784,10 +1795,7 @@ newtype BeginTransactionResponse = BeginTransactionResponse'
 -- * 'btrTransaction'
 beginTransactionResponse
     :: BeginTransactionResponse
-beginTransactionResponse =
-    BeginTransactionResponse'
-    { _btrTransaction = Nothing
-    }
+beginTransactionResponse = BeginTransactionResponse' {_btrTransaction = Nothing}
 
 -- | The transaction that was started.
 btrTransaction :: Lens' BeginTransactionResponse (Maybe ByteString)
@@ -1810,12 +1818,14 @@ instance ToJSON BeginTransactionResponse where
 -- | The response for Firestore.RunQuery.
 --
 -- /See:/ 'runQueryResponse' smart constructor.
-data RunQueryResponse = RunQueryResponse'
+data RunQueryResponse =
+  RunQueryResponse'
     { _rReadTime       :: !(Maybe DateTime')
     , _rSkippedResults :: !(Maybe (Textual Int32))
     , _rTransaction    :: !(Maybe Bytes)
     , _rDocument       :: !(Maybe Document)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RunQueryResponse' with the minimum fields required to make a request.
 --
@@ -1831,7 +1841,7 @@ data RunQueryResponse = RunQueryResponse'
 runQueryResponse
     :: RunQueryResponse
 runQueryResponse =
-    RunQueryResponse'
+  RunQueryResponse'
     { _rReadTime = Nothing
     , _rSkippedResults = Nothing
     , _rTransaction = Nothing
@@ -1893,7 +1903,8 @@ instance ToJSON RunQueryResponse where
 -- FirestoreAdmin.ExportDocuments.
 --
 -- /See:/ 'googleFirestoreAdminV1ExportDocumentsMetadata' smart constructor.
-data GoogleFirestoreAdminV1ExportDocumentsMetadata = GoogleFirestoreAdminV1ExportDocumentsMetadata'
+data GoogleFirestoreAdminV1ExportDocumentsMetadata =
+  GoogleFirestoreAdminV1ExportDocumentsMetadata'
     { _gfavedmProgressBytes     :: !(Maybe GoogleFirestoreAdminV1Progress)
     , _gfavedmStartTime         :: !(Maybe DateTime')
     , _gfavedmCollectionIds     :: !(Maybe [Text])
@@ -1901,7 +1912,8 @@ data GoogleFirestoreAdminV1ExportDocumentsMetadata = GoogleFirestoreAdminV1Expor
     , _gfavedmEndTime           :: !(Maybe DateTime')
     , _gfavedmOperationState    :: !(Maybe GoogleFirestoreAdminV1ExportDocumentsMetadataOperationState)
     , _gfavedmOutputURIPrefix   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1ExportDocumentsMetadata' with the minimum fields required to make a request.
 --
@@ -1923,7 +1935,7 @@ data GoogleFirestoreAdminV1ExportDocumentsMetadata = GoogleFirestoreAdminV1Expor
 googleFirestoreAdminV1ExportDocumentsMetadata
     :: GoogleFirestoreAdminV1ExportDocumentsMetadata
 googleFirestoreAdminV1ExportDocumentsMetadata =
-    GoogleFirestoreAdminV1ExportDocumentsMetadata'
+  GoogleFirestoreAdminV1ExportDocumentsMetadata'
     { _gfavedmProgressBytes = Nothing
     , _gfavedmStartTime = Nothing
     , _gfavedmCollectionIds = Nothing
@@ -1981,7 +1993,8 @@ gfavedmOutputURIPrefix
       (\ s a -> s{_gfavedmOutputURIPrefix = a})
 
 instance FromJSON
-         GoogleFirestoreAdminV1ExportDocumentsMetadata where
+           GoogleFirestoreAdminV1ExportDocumentsMetadata
+         where
         parseJSON
           = withObject
               "GoogleFirestoreAdminV1ExportDocumentsMetadata"
@@ -1995,7 +2008,8 @@ instance FromJSON
                      <*> (o .:? "outputUriPrefix"))
 
 instance ToJSON
-         GoogleFirestoreAdminV1ExportDocumentsMetadata where
+           GoogleFirestoreAdminV1ExportDocumentsMetadata
+         where
         toJSON
           GoogleFirestoreAdminV1ExportDocumentsMetadata'{..}
           = object
@@ -2013,10 +2027,12 @@ instance ToJSON
 -- must be interpreted based on where Progress is used.
 --
 -- /See:/ 'googleFirestoreAdminV1Progress' smart constructor.
-data GoogleFirestoreAdminV1Progress = GoogleFirestoreAdminV1Progress'
+data GoogleFirestoreAdminV1Progress =
+  GoogleFirestoreAdminV1Progress'
     { _gfavpCompletedWork :: !(Maybe (Textual Int64))
     , _gfavpEstimatedWork :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1Progress' with the minimum fields required to make a request.
 --
@@ -2028,10 +2044,8 @@ data GoogleFirestoreAdminV1Progress = GoogleFirestoreAdminV1Progress'
 googleFirestoreAdminV1Progress
     :: GoogleFirestoreAdminV1Progress
 googleFirestoreAdminV1Progress =
-    GoogleFirestoreAdminV1Progress'
-    { _gfavpCompletedWork = Nothing
-    , _gfavpEstimatedWork = Nothing
-    }
+  GoogleFirestoreAdminV1Progress'
+    {_gfavpCompletedWork = Nothing, _gfavpEstimatedWork = Nothing}
 
 -- | The amount of work completed.
 gfavpCompletedWork :: Lens' GoogleFirestoreAdminV1Progress (Maybe Int64)
@@ -2068,9 +2082,11 @@ instance ToJSON GoogleFirestoreAdminV1Progress where
 -- takes in account the dynamic nature of Value.
 --
 -- /See:/ 'documentMask' smart constructor.
-newtype DocumentMask = DocumentMask'
+newtype DocumentMask =
+  DocumentMask'
     { _dmFieldPaths :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentMask' with the minimum fields required to make a request.
 --
@@ -2079,10 +2095,7 @@ newtype DocumentMask = DocumentMask'
 -- * 'dmFieldPaths'
 documentMask
     :: DocumentMask
-documentMask =
-    DocumentMask'
-    { _dmFieldPaths = Nothing
-    }
+documentMask = DocumentMask' {_dmFieldPaths = Nothing}
 
 -- | The list of field paths in the mask. See Document.fields for a field
 -- path syntax reference.
@@ -2106,10 +2119,12 @@ instance ToJSON DocumentMask where
 -- | A target specified by a query.
 --
 -- /See:/ 'queryTarget' smart constructor.
-data QueryTarget = QueryTarget'
+data QueryTarget =
+  QueryTarget'
     { _qtParent          :: !(Maybe Text)
     , _qtStructuredQuery :: !(Maybe StructuredQuery)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryTarget' with the minimum fields required to make a request.
 --
@@ -2120,11 +2135,7 @@ data QueryTarget = QueryTarget'
 -- * 'qtStructuredQuery'
 queryTarget
     :: QueryTarget
-queryTarget =
-    QueryTarget'
-    { _qtParent = Nothing
-    , _qtStructuredQuery = Nothing
-    }
+queryTarget = QueryTarget' {_qtParent = Nothing, _qtStructuredQuery = Nothing}
 
 -- | The parent resource name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or
@@ -2158,7 +2169,8 @@ instance ToJSON QueryTarget where
 -- | A message that can hold any of the supported value types.
 --
 -- /See:/ 'value' smart constructor.
-data Value = Value'
+data Value =
+  Value'
     { _vGeoPointValue  :: !(Maybe LatLng)
     , _vBytesValue     :: !(Maybe Bytes)
     , _vIntegerValue   :: !(Maybe (Textual Int64))
@@ -2170,7 +2182,8 @@ data Value = Value'
     , _vArrayValue     :: !(Maybe ArrayValue)
     , _vReferenceValue :: !(Maybe Text)
     , _vNullValue      :: !(Maybe ValueNullValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
@@ -2200,7 +2213,7 @@ data Value = Value'
 value
     :: Value
 value =
-    Value'
+  Value'
     { _vGeoPointValue = Nothing
     , _vBytesValue = Nothing
     , _vIntegerValue = Nothing
@@ -2318,9 +2331,11 @@ instance ToJSON Value where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -2331,9 +2346,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2352,10 +2365,12 @@ instance ToJSON StatusDetailsItem where
 -- | A transformation of a document.
 --
 -- /See:/ 'documentTransform' smart constructor.
-data DocumentTransform = DocumentTransform'
+data DocumentTransform =
+  DocumentTransform'
     { _dtDocument        :: !(Maybe Text)
     , _dtFieldTransforms :: !(Maybe [FieldTransform])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentTransform' with the minimum fields required to make a request.
 --
@@ -2367,10 +2382,7 @@ data DocumentTransform = DocumentTransform'
 documentTransform
     :: DocumentTransform
 documentTransform =
-    DocumentTransform'
-    { _dtDocument = Nothing
-    , _dtFieldTransforms = Nothing
-    }
+  DocumentTransform' {_dtDocument = Nothing, _dtFieldTransforms = Nothing}
 
 -- | The name of the document to transform.
 dtDocument :: Lens' DocumentTransform (Maybe Text)
@@ -2404,7 +2416,8 @@ instance ToJSON DocumentTransform where
 -- | A Firestore query.
 --
 -- /See:/ 'structuredQuery' smart constructor.
-data StructuredQuery = StructuredQuery'
+data StructuredQuery =
+  StructuredQuery'
     { _sqWhere   :: !(Maybe Filter)
     , _sqOrderBy :: !(Maybe [Order])
     , _sqStartAt :: !(Maybe Cursor)
@@ -2413,7 +2426,8 @@ data StructuredQuery = StructuredQuery'
     , _sqEndAt   :: !(Maybe Cursor)
     , _sqLimit   :: !(Maybe (Textual Int32))
     , _sqSelect  :: !(Maybe Projection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StructuredQuery' with the minimum fields required to make a request.
 --
@@ -2437,7 +2451,7 @@ data StructuredQuery = StructuredQuery'
 structuredQuery
     :: StructuredQuery
 structuredQuery =
-    StructuredQuery'
+  StructuredQuery'
     { _sqWhere = Nothing
     , _sqOrderBy = Nothing
     , _sqStartAt = Nothing
@@ -2529,10 +2543,12 @@ instance ToJSON StructuredQuery where
 -- | A digest of all the documents that match a given target.
 --
 -- /See:/ 'existenceFilter' smart constructor.
-data ExistenceFilter = ExistenceFilter'
+data ExistenceFilter =
+  ExistenceFilter'
     { _efTargetId :: !(Maybe (Textual Int32))
     , _efCount    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExistenceFilter' with the minimum fields required to make a request.
 --
@@ -2543,11 +2559,7 @@ data ExistenceFilter = ExistenceFilter'
 -- * 'efCount'
 existenceFilter
     :: ExistenceFilter
-existenceFilter =
-    ExistenceFilter'
-    { _efTargetId = Nothing
-    , _efCount = Nothing
-    }
+existenceFilter = ExistenceFilter' {_efTargetId = Nothing, _efCount = Nothing}
 
 -- | The target ID to which this filter applies.
 efTargetId :: Lens' ExistenceFilter (Maybe Int32)
@@ -2580,10 +2592,12 @@ instance ToJSON ExistenceFilter where
 -- | The response for FirestoreAdmin.ListFields.
 --
 -- /See:/ 'googleFirestoreAdminV1ListFieldsResponse' smart constructor.
-data GoogleFirestoreAdminV1ListFieldsResponse = GoogleFirestoreAdminV1ListFieldsResponse'
+data GoogleFirestoreAdminV1ListFieldsResponse =
+  GoogleFirestoreAdminV1ListFieldsResponse'
     { _gfavlfrNextPageToken :: !(Maybe Text)
     , _gfavlfrFields        :: !(Maybe [GoogleFirestoreAdminV1Field])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1ListFieldsResponse' with the minimum fields required to make a request.
 --
@@ -2595,10 +2609,8 @@ data GoogleFirestoreAdminV1ListFieldsResponse = GoogleFirestoreAdminV1ListFields
 googleFirestoreAdminV1ListFieldsResponse
     :: GoogleFirestoreAdminV1ListFieldsResponse
 googleFirestoreAdminV1ListFieldsResponse =
-    GoogleFirestoreAdminV1ListFieldsResponse'
-    { _gfavlfrNextPageToken = Nothing
-    , _gfavlfrFields = Nothing
-    }
+  GoogleFirestoreAdminV1ListFieldsResponse'
+    {_gfavlfrNextPageToken = Nothing, _gfavlfrFields = Nothing}
 
 -- | A page token that may be used to request another page of results. If
 -- blank, this is the last page.
@@ -2616,7 +2628,8 @@ gfavlfrFields
       . _Coerce
 
 instance FromJSON
-         GoogleFirestoreAdminV1ListFieldsResponse where
+           GoogleFirestoreAdminV1ListFieldsResponse
+         where
         parseJSON
           = withObject
               "GoogleFirestoreAdminV1ListFieldsResponse"
@@ -2626,7 +2639,8 @@ instance FromJSON
                      (o .:? "fields" .!= mempty))
 
 instance ToJSON
-         GoogleFirestoreAdminV1ListFieldsResponse where
+           GoogleFirestoreAdminV1ListFieldsResponse
+         where
         toJSON GoogleFirestoreAdminV1ListFieldsResponse'{..}
           = object
               (catMaybes
@@ -2636,10 +2650,12 @@ instance ToJSON
 -- | The request for FirestoreAdmin.ImportDocuments.
 --
 -- /See:/ 'googleFirestoreAdminV1ImportDocumentsRequest' smart constructor.
-data GoogleFirestoreAdminV1ImportDocumentsRequest = GoogleFirestoreAdminV1ImportDocumentsRequest'
+data GoogleFirestoreAdminV1ImportDocumentsRequest =
+  GoogleFirestoreAdminV1ImportDocumentsRequest'
     { _gfavidrInputURIPrefix :: !(Maybe Text)
     , _gfavidrCollectionIds  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1ImportDocumentsRequest' with the minimum fields required to make a request.
 --
@@ -2651,10 +2667,8 @@ data GoogleFirestoreAdminV1ImportDocumentsRequest = GoogleFirestoreAdminV1Import
 googleFirestoreAdminV1ImportDocumentsRequest
     :: GoogleFirestoreAdminV1ImportDocumentsRequest
 googleFirestoreAdminV1ImportDocumentsRequest =
-    GoogleFirestoreAdminV1ImportDocumentsRequest'
-    { _gfavidrInputURIPrefix = Nothing
-    , _gfavidrCollectionIds = Nothing
-    }
+  GoogleFirestoreAdminV1ImportDocumentsRequest'
+    {_gfavidrInputURIPrefix = Nothing, _gfavidrCollectionIds = Nothing}
 
 -- | Location of the exported files. This must match the output_uri_prefix of
 -- an ExportDocumentsResponse from an export that has completed
@@ -2675,7 +2689,8 @@ gfavidrCollectionIds
       . _Coerce
 
 instance FromJSON
-         GoogleFirestoreAdminV1ImportDocumentsRequest where
+           GoogleFirestoreAdminV1ImportDocumentsRequest
+         where
         parseJSON
           = withObject
               "GoogleFirestoreAdminV1ImportDocumentsRequest"
@@ -2685,7 +2700,8 @@ instance FromJSON
                      (o .:? "collectionIds" .!= mempty))
 
 instance ToJSON
-         GoogleFirestoreAdminV1ImportDocumentsRequest where
+           GoogleFirestoreAdminV1ImportDocumentsRequest
+         where
         toJSON
           GoogleFirestoreAdminV1ImportDocumentsRequest'{..}
           = object
@@ -2697,42 +2713,44 @@ instance ToJSON
 --
 -- /See:/ 'googleFirestoreAdminV1LocationMetadata' smart constructor.
 data GoogleFirestoreAdminV1LocationMetadata =
-    GoogleFirestoreAdminV1LocationMetadata'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleFirestoreAdminV1LocationMetadata'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1LocationMetadata' with the minimum fields required to make a request.
 --
 googleFirestoreAdminV1LocationMetadata
     :: GoogleFirestoreAdminV1LocationMetadata
-googleFirestoreAdminV1LocationMetadata =
-    GoogleFirestoreAdminV1LocationMetadata'
+googleFirestoreAdminV1LocationMetadata = GoogleFirestoreAdminV1LocationMetadata'
 
 instance FromJSON
-         GoogleFirestoreAdminV1LocationMetadata where
+           GoogleFirestoreAdminV1LocationMetadata
+         where
         parseJSON
           = withObject "GoogleFirestoreAdminV1LocationMetadata"
               (\ o -> pure GoogleFirestoreAdminV1LocationMetadata')
 
 instance ToJSON
-         GoogleFirestoreAdminV1LocationMetadata where
+           GoogleFirestoreAdminV1LocationMetadata
+         where
         toJSON = const emptyObject
 
 -- | The request message for Operations.CancelOperation.
 --
 -- /See:/ 'googleLongrunningCancelOperationRequest' smart constructor.
 data GoogleLongrunningCancelOperationRequest =
-    GoogleLongrunningCancelOperationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleLongrunningCancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleLongrunningCancelOperationRequest' with the minimum fields required to make a request.
 --
 googleLongrunningCancelOperationRequest
     :: GoogleLongrunningCancelOperationRequest
 googleLongrunningCancelOperationRequest =
-    GoogleLongrunningCancelOperationRequest'
+  GoogleLongrunningCancelOperationRequest'
 
 instance FromJSON
-         GoogleLongrunningCancelOperationRequest where
+           GoogleLongrunningCancelOperationRequest
+         where
         parseJSON
           = withObject
               "GoogleLongrunningCancelOperationRequest"
@@ -2740,16 +2758,19 @@ instance FromJSON
                  pure GoogleLongrunningCancelOperationRequest')
 
 instance ToJSON
-         GoogleLongrunningCancelOperationRequest where
+           GoogleLongrunningCancelOperationRequest
+         where
         toJSON = const emptyObject
 
 -- | The response from Firestore.ListCollectionIds.
 --
 -- /See:/ 'listCollectionIdsResponse' smart constructor.
-data ListCollectionIdsResponse = ListCollectionIdsResponse'
+data ListCollectionIdsResponse =
+  ListCollectionIdsResponse'
     { _lcirNextPageToken :: !(Maybe Text)
     , _lcirCollectionIds :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCollectionIdsResponse' with the minimum fields required to make a request.
 --
@@ -2761,10 +2782,8 @@ data ListCollectionIdsResponse = ListCollectionIdsResponse'
 listCollectionIdsResponse
     :: ListCollectionIdsResponse
 listCollectionIdsResponse =
-    ListCollectionIdsResponse'
-    { _lcirNextPageToken = Nothing
-    , _lcirCollectionIds = Nothing
-    }
+  ListCollectionIdsResponse'
+    {_lcirNextPageToken = Nothing, _lcirCollectionIds = Nothing}
 
 -- | A page token that may be used to continue the list.
 lcirNextPageToken :: Lens' ListCollectionIdsResponse (Maybe Text)
@@ -2798,9 +2817,11 @@ instance ToJSON ListCollectionIdsResponse where
 -- | A reference to a field, such as \`max(messages.time) as max_time\`.
 --
 -- /See:/ 'fieldReference' smart constructor.
-newtype FieldReference = FieldReference'
+newtype FieldReference =
+  FieldReference'
     { _frFieldPath :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FieldReference' with the minimum fields required to make a request.
 --
@@ -2809,10 +2830,7 @@ newtype FieldReference = FieldReference'
 -- * 'frFieldPath'
 fieldReference
     :: FieldReference
-fieldReference =
-    FieldReference'
-    { _frFieldPath = Nothing
-    }
+fieldReference = FieldReference' {_frFieldPath = Nothing}
 
 frFieldPath :: Lens' FieldReference (Maybe Text)
 frFieldPath
@@ -2836,11 +2854,13 @@ instance ToJSON FieldReference where
 -- targets are affected.
 --
 -- /See:/ 'documentRemove' smart constructor.
-data DocumentRemove = DocumentRemove'
+data DocumentRemove =
+  DocumentRemove'
     { _drReadTime         :: !(Maybe DateTime')
     , _drDocument         :: !(Maybe Text)
     , _drRemovedTargetIds :: !(Maybe [Textual Int32])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentRemove' with the minimum fields required to make a request.
 --
@@ -2854,7 +2874,7 @@ data DocumentRemove = DocumentRemove'
 documentRemove
     :: DocumentRemove
 documentRemove =
-    DocumentRemove'
+  DocumentRemove'
     { _drReadTime = Nothing
     , _drDocument = Nothing
     , _drRemovedTargetIds = Nothing
@@ -2902,11 +2922,13 @@ instance ToJSON DocumentRemove where
 -- change, if multiple targets are affected.
 --
 -- /See:/ 'documentChange' smart constructor.
-data DocumentChange = DocumentChange'
+data DocumentChange =
+  DocumentChange'
     { _dcDocument         :: !(Maybe Document)
     , _dcTargetIds        :: !(Maybe [Textual Int32])
     , _dcRemovedTargetIds :: !(Maybe [Textual Int32])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentChange' with the minimum fields required to make a request.
 --
@@ -2920,7 +2942,7 @@ data DocumentChange = DocumentChange'
 documentChange
     :: DocumentChange
 documentChange =
-    DocumentChange'
+  DocumentChange'
     { _dcDocument = Nothing
     , _dcTargetIds = Nothing
     , _dcRemovedTargetIds = Nothing
@@ -2967,7 +2989,8 @@ instance ToJSON DocumentChange where
 -- FirestoreAdmin.UpdateField.
 --
 -- /See:/ 'googleFirestoreAdminV1FieldOperationMetadata' smart constructor.
-data GoogleFirestoreAdminV1FieldOperationMetadata = GoogleFirestoreAdminV1FieldOperationMetadata'
+data GoogleFirestoreAdminV1FieldOperationMetadata =
+  GoogleFirestoreAdminV1FieldOperationMetadata'
     { _gfavfomProgressBytes     :: !(Maybe GoogleFirestoreAdminV1Progress)
     , _gfavfomState             :: !(Maybe GoogleFirestoreAdminV1FieldOperationMetadataState)
     , _gfavfomField             :: !(Maybe Text)
@@ -2975,7 +2998,8 @@ data GoogleFirestoreAdminV1FieldOperationMetadata = GoogleFirestoreAdminV1FieldO
     , _gfavfomProgressDocuments :: !(Maybe GoogleFirestoreAdminV1Progress)
     , _gfavfomIndexConfigDeltas :: !(Maybe [GoogleFirestoreAdminV1IndexConfigDelta])
     , _gfavfomEndTime           :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1FieldOperationMetadata' with the minimum fields required to make a request.
 --
@@ -2997,7 +3021,7 @@ data GoogleFirestoreAdminV1FieldOperationMetadata = GoogleFirestoreAdminV1FieldO
 googleFirestoreAdminV1FieldOperationMetadata
     :: GoogleFirestoreAdminV1FieldOperationMetadata
 googleFirestoreAdminV1FieldOperationMetadata =
-    GoogleFirestoreAdminV1FieldOperationMetadata'
+  GoogleFirestoreAdminV1FieldOperationMetadata'
     { _gfavfomProgressBytes = Nothing
     , _gfavfomState = Nothing
     , _gfavfomField = Nothing
@@ -3054,7 +3078,8 @@ gfavfomEndTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleFirestoreAdminV1FieldOperationMetadata where
+           GoogleFirestoreAdminV1FieldOperationMetadata
+         where
         parseJSON
           = withObject
               "GoogleFirestoreAdminV1FieldOperationMetadata"
@@ -3068,7 +3093,8 @@ instance FromJSON
                      <*> (o .:? "endTime"))
 
 instance ToJSON
-         GoogleFirestoreAdminV1FieldOperationMetadata where
+           GoogleFirestoreAdminV1FieldOperationMetadata
+         where
         toJSON
           GoogleFirestoreAdminV1FieldOperationMetadata'{..}
           = object
@@ -3086,10 +3112,12 @@ instance ToJSON
 -- | The response for FirestoreAdmin.ListIndexes.
 --
 -- /See:/ 'googleFirestoreAdminV1ListIndexesResponse' smart constructor.
-data GoogleFirestoreAdminV1ListIndexesResponse = GoogleFirestoreAdminV1ListIndexesResponse'
+data GoogleFirestoreAdminV1ListIndexesResponse =
+  GoogleFirestoreAdminV1ListIndexesResponse'
     { _gfavlirNextPageToken :: !(Maybe Text)
     , _gfavlirIndexes       :: !(Maybe [GoogleFirestoreAdminV1Index])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1ListIndexesResponse' with the minimum fields required to make a request.
 --
@@ -3101,10 +3129,8 @@ data GoogleFirestoreAdminV1ListIndexesResponse = GoogleFirestoreAdminV1ListIndex
 googleFirestoreAdminV1ListIndexesResponse
     :: GoogleFirestoreAdminV1ListIndexesResponse
 googleFirestoreAdminV1ListIndexesResponse =
-    GoogleFirestoreAdminV1ListIndexesResponse'
-    { _gfavlirNextPageToken = Nothing
-    , _gfavlirIndexes = Nothing
-    }
+  GoogleFirestoreAdminV1ListIndexesResponse'
+    {_gfavlirNextPageToken = Nothing, _gfavlirIndexes = Nothing}
 
 -- | A page token that may be used to request another page of results. If
 -- blank, this is the last page.
@@ -3122,7 +3148,8 @@ gfavlirIndexes
       . _Coerce
 
 instance FromJSON
-         GoogleFirestoreAdminV1ListIndexesResponse where
+           GoogleFirestoreAdminV1ListIndexesResponse
+         where
         parseJSON
           = withObject
               "GoogleFirestoreAdminV1ListIndexesResponse"
@@ -3132,7 +3159,8 @@ instance FromJSON
                      (o .:? "indexes" .!= mempty))
 
 instance ToJSON
-         GoogleFirestoreAdminV1ListIndexesResponse where
+           GoogleFirestoreAdminV1ListIndexesResponse
+         where
         toJSON GoogleFirestoreAdminV1ListIndexesResponse'{..}
           = object
               (catMaybes
@@ -3142,9 +3170,11 @@ instance ToJSON
 -- | A map value.
 --
 -- /See:/ 'mapValue' smart constructor.
-newtype MapValue = MapValue'
+newtype MapValue =
+  MapValue'
     { _mvFields :: Maybe MapValueFields
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MapValue' with the minimum fields required to make a request.
 --
@@ -3153,10 +3183,7 @@ newtype MapValue = MapValue'
 -- * 'mvFields'
 mapValue
     :: MapValue
-mapValue =
-    MapValue'
-    { _mvFields = Nothing
-    }
+mapValue = MapValue' {_mvFields = Nothing}
 
 -- | The map\'s fields. The map keys represent field names. Field names
 -- matching the regular expression \`__.*__\` are reserved. Reserved field
@@ -3177,13 +3204,15 @@ instance ToJSON MapValue where
 -- | The request for Firestore.BatchGetDocuments.
 --
 -- /See:/ 'batchGetDocumentsRequest' smart constructor.
-data BatchGetDocumentsRequest = BatchGetDocumentsRequest'
+data BatchGetDocumentsRequest =
+  BatchGetDocumentsRequest'
     { _bReadTime       :: !(Maybe DateTime')
     , _bNewTransaction :: !(Maybe TransactionOptions)
     , _bTransaction    :: !(Maybe Bytes)
     , _bDocuments      :: !(Maybe [Text])
     , _bMask           :: !(Maybe DocumentMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchGetDocumentsRequest' with the minimum fields required to make a request.
 --
@@ -3201,7 +3230,7 @@ data BatchGetDocumentsRequest = BatchGetDocumentsRequest'
 batchGetDocumentsRequest
     :: BatchGetDocumentsRequest
 batchGetDocumentsRequest =
-    BatchGetDocumentsRequest'
+  BatchGetDocumentsRequest'
     { _bReadTime = Nothing
     , _bNewTransaction = Nothing
     , _bTransaction = Nothing
@@ -3269,12 +3298,14 @@ instance ToJSON BatchGetDocumentsRequest where
 -- | A Firestore document. Must not exceed 1 MiB - 4 bytes.
 --
 -- /See:/ 'document' smart constructor.
-data Document = Document'
+data Document =
+  Document'
     { _dUpdateTime :: !(Maybe DateTime')
     , _dName       :: !(Maybe Text)
     , _dCreateTime :: !(Maybe DateTime')
     , _dFields     :: !(Maybe DocumentFields)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Document' with the minimum fields required to make a request.
 --
@@ -3290,7 +3321,7 @@ data Document = Document'
 document
     :: Document
 document =
-    Document'
+  Document'
     { _dUpdateTime = Nothing
     , _dName = Nothing
     , _dCreateTime = Nothing
@@ -3361,9 +3392,11 @@ instance ToJSON Document where
 -- | An array value.
 --
 -- /See:/ 'arrayValue' smart constructor.
-newtype ArrayValue = ArrayValue'
+newtype ArrayValue =
+  ArrayValue'
     { _avValues :: Maybe [Value]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ArrayValue' with the minimum fields required to make a request.
 --
@@ -3372,10 +3405,7 @@ newtype ArrayValue = ArrayValue'
 -- * 'avValues'
 arrayValue
     :: ArrayValue
-arrayValue =
-    ArrayValue'
-    { _avValues = Nothing
-    }
+arrayValue = ArrayValue' {_avValues = Nothing}
 
 -- | Values in the array.
 avValues :: Lens' ArrayValue [Value]
@@ -3396,10 +3426,12 @@ instance ToJSON ArrayValue where
 -- | The response for Firestore.Commit.
 --
 -- /See:/ 'commitResponse' smart constructor.
-data CommitResponse = CommitResponse'
+data CommitResponse =
+  CommitResponse'
     { _crCommitTime   :: !(Maybe DateTime')
     , _crWriteResults :: !(Maybe [WriteResult])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitResponse' with the minimum fields required to make a request.
 --
@@ -3411,10 +3443,7 @@ data CommitResponse = CommitResponse'
 commitResponse
     :: CommitResponse
 commitResponse =
-    CommitResponse'
-    { _crCommitTime = Nothing
-    , _crWriteResults = Nothing
-    }
+  CommitResponse' {_crCommitTime = Nothing, _crWriteResults = Nothing}
 
 -- | The time at which the commit occurred.
 crCommitTime :: Lens' CommitResponse (Maybe UTCTime)
@@ -3449,13 +3478,15 @@ instance ToJSON CommitResponse where
 -- | The response for Firestore.Listen.
 --
 -- /See:/ 'listenResponse' smart constructor.
-data ListenResponse = ListenResponse'
+data ListenResponse =
+  ListenResponse'
     { _lrTargetChange   :: !(Maybe TargetChange)
     , _lrDocumentRemove :: !(Maybe DocumentRemove)
     , _lrDocumentChange :: !(Maybe DocumentChange)
     , _lrFilter         :: !(Maybe ExistenceFilter)
     , _lrDocumentDelete :: !(Maybe DocumentDelete)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListenResponse' with the minimum fields required to make a request.
 --
@@ -3473,7 +3504,7 @@ data ListenResponse = ListenResponse'
 listenResponse
     :: ListenResponse
 listenResponse =
-    ListenResponse'
+  ListenResponse'
     { _lrTargetChange = Nothing
     , _lrDocumentRemove = Nothing
     , _lrDocumentChange = Nothing
@@ -3535,11 +3566,13 @@ instance ToJSON ListenResponse where
 -- | A filter on a specific field.
 --
 -- /See:/ 'fieldFilter' smart constructor.
-data FieldFilter = FieldFilter'
+data FieldFilter =
+  FieldFilter'
     { _ffOp    :: !(Maybe FieldFilterOp)
     , _ffField :: !(Maybe FieldReference)
     , _ffValue :: !(Maybe Value)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FieldFilter' with the minimum fields required to make a request.
 --
@@ -3553,11 +3586,7 @@ data FieldFilter = FieldFilter'
 fieldFilter
     :: FieldFilter
 fieldFilter =
-    FieldFilter'
-    { _ffOp = Nothing
-    , _ffField = Nothing
-    , _ffValue = Nothing
-    }
+  FieldFilter' {_ffOp = Nothing, _ffField = Nothing, _ffValue = Nothing}
 
 -- | The operator to filter by.
 ffOp :: Lens' FieldFilter (Maybe FieldFilterOp)
@@ -3595,9 +3624,11 @@ instance ToJSON FieldFilter where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'googleLongrunningOperationResponse' smart constructor.
-newtype GoogleLongrunningOperationResponse = GoogleLongrunningOperationResponse'
+newtype GoogleLongrunningOperationResponse =
+  GoogleLongrunningOperationResponse'
     { _glorAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleLongrunningOperationResponse' with the minimum fields required to make a request.
 --
@@ -3608,9 +3639,8 @@ googleLongrunningOperationResponse
     :: HashMap Text JSONValue -- ^ 'glorAddtional'
     -> GoogleLongrunningOperationResponse
 googleLongrunningOperationResponse pGlorAddtional_ =
-    GoogleLongrunningOperationResponse'
-    { _glorAddtional = _Coerce # pGlorAddtional_
-    }
+  GoogleLongrunningOperationResponse'
+    {_glorAddtional = _Coerce # pGlorAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunningOperationResponse (HashMap Text JSONValue)
@@ -3634,10 +3664,12 @@ instance ToJSON GoogleLongrunningOperationResponse
 -- | The response for Firestore.ListDocuments.
 --
 -- /See:/ 'listDocumentsResponse' smart constructor.
-data ListDocumentsResponse = ListDocumentsResponse'
+data ListDocumentsResponse =
+  ListDocumentsResponse'
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDocuments     :: !(Maybe [Document])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDocumentsResponse' with the minimum fields required to make a request.
 --
@@ -3649,10 +3681,7 @@ data ListDocumentsResponse = ListDocumentsResponse'
 listDocumentsResponse
     :: ListDocumentsResponse
 listDocumentsResponse =
-    ListDocumentsResponse'
-    { _ldrNextPageToken = Nothing
-    , _ldrDocuments = Nothing
-    }
+  ListDocumentsResponse' {_ldrNextPageToken = Nothing, _ldrDocuments = Nothing}
 
 -- | The next page token.
 ldrNextPageToken :: Lens' ListDocumentsResponse (Maybe Text)
@@ -3685,9 +3714,11 @@ instance ToJSON ListDocumentsResponse where
 -- | Returned in the google.longrunning.Operation response field.
 --
 -- /See:/ 'googleFirestoreAdminV1ExportDocumentsResponse' smart constructor.
-newtype GoogleFirestoreAdminV1ExportDocumentsResponse = GoogleFirestoreAdminV1ExportDocumentsResponse'
+newtype GoogleFirestoreAdminV1ExportDocumentsResponse =
+  GoogleFirestoreAdminV1ExportDocumentsResponse'
     { _gOutputURIPrefix :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1ExportDocumentsResponse' with the minimum fields required to make a request.
 --
@@ -3697,9 +3728,7 @@ newtype GoogleFirestoreAdminV1ExportDocumentsResponse = GoogleFirestoreAdminV1Ex
 googleFirestoreAdminV1ExportDocumentsResponse
     :: GoogleFirestoreAdminV1ExportDocumentsResponse
 googleFirestoreAdminV1ExportDocumentsResponse =
-    GoogleFirestoreAdminV1ExportDocumentsResponse'
-    { _gOutputURIPrefix = Nothing
-    }
+  GoogleFirestoreAdminV1ExportDocumentsResponse' {_gOutputURIPrefix = Nothing}
 
 -- | Location of the output files. This can be used to begin an import into
 -- Cloud Firestore (this project or another project) after the operation
@@ -3710,7 +3739,8 @@ gOutputURIPrefix
       (\ s a -> s{_gOutputURIPrefix = a})
 
 instance FromJSON
-         GoogleFirestoreAdminV1ExportDocumentsResponse where
+           GoogleFirestoreAdminV1ExportDocumentsResponse
+         where
         parseJSON
           = withObject
               "GoogleFirestoreAdminV1ExportDocumentsResponse"
@@ -3719,7 +3749,8 @@ instance FromJSON
                    (o .:? "outputUriPrefix"))
 
 instance ToJSON
-         GoogleFirestoreAdminV1ExportDocumentsResponse where
+           GoogleFirestoreAdminV1ExportDocumentsResponse
+         where
         toJSON
           GoogleFirestoreAdminV1ExportDocumentsResponse'{..}
           = object
@@ -3729,9 +3760,11 @@ instance ToJSON
 -- | The projection of document\'s fields to return.
 --
 -- /See:/ 'projection' smart constructor.
-newtype Projection = Projection'
+newtype Projection =
+  Projection'
     { _pFields :: Maybe [FieldReference]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Projection' with the minimum fields required to make a request.
 --
@@ -3740,10 +3773,7 @@ newtype Projection = Projection'
 -- * 'pFields'
 projection
     :: Projection
-projection =
-    Projection'
-    { _pFields = Nothing
-    }
+projection = Projection' {_pFields = Nothing}
 
 -- | The fields to return. If empty, all fields are returned. To only return
 -- the name of the document, use \`[\'__name__\']\`.
@@ -3764,11 +3794,13 @@ instance ToJSON Projection where
 -- | A filter.
 --
 -- /See:/ 'filter'' smart constructor.
-data Filter = Filter'
+data Filter =
+  Filter'
     { _fCompositeFilter :: !(Maybe CompositeFilter)
     , _fFieldFilter     :: !(Maybe FieldFilter)
     , _fUnaryFilter     :: !(Maybe UnaryFilter)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
@@ -3782,7 +3814,7 @@ data Filter = Filter'
 filter'
     :: Filter
 filter' =
-    Filter'
+  Filter'
     { _fCompositeFilter = Nothing
     , _fFieldFilter = Nothing
     , _fUnaryFilter = Nothing
@@ -3824,14 +3856,16 @@ instance ToJSON Filter where
 -- FirestoreAdmin.CreateIndex.
 --
 -- /See:/ 'googleFirestoreAdminV1IndexOperationMetadata' smart constructor.
-data GoogleFirestoreAdminV1IndexOperationMetadata = GoogleFirestoreAdminV1IndexOperationMetadata'
+data GoogleFirestoreAdminV1IndexOperationMetadata =
+  GoogleFirestoreAdminV1IndexOperationMetadata'
     { _gfaviomProgressBytes     :: !(Maybe GoogleFirestoreAdminV1Progress)
     , _gfaviomState             :: !(Maybe GoogleFirestoreAdminV1IndexOperationMetadataState)
     , _gfaviomStartTime         :: !(Maybe DateTime')
     , _gfaviomProgressDocuments :: !(Maybe GoogleFirestoreAdminV1Progress)
     , _gfaviomEndTime           :: !(Maybe DateTime')
     , _gfaviomIndex             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleFirestoreAdminV1IndexOperationMetadata' with the minimum fields required to make a request.
 --
@@ -3851,7 +3885,7 @@ data GoogleFirestoreAdminV1IndexOperationMetadata = GoogleFirestoreAdminV1IndexO
 googleFirestoreAdminV1IndexOperationMetadata
     :: GoogleFirestoreAdminV1IndexOperationMetadata
 googleFirestoreAdminV1IndexOperationMetadata =
-    GoogleFirestoreAdminV1IndexOperationMetadata'
+  GoogleFirestoreAdminV1IndexOperationMetadata'
     { _gfaviomProgressBytes = Nothing
     , _gfaviomState = Nothing
     , _gfaviomStartTime = Nothing
@@ -3899,7 +3933,8 @@ gfaviomIndex
   = lens _gfaviomIndex (\ s a -> s{_gfaviomIndex = a})
 
 instance FromJSON
-         GoogleFirestoreAdminV1IndexOperationMetadata where
+           GoogleFirestoreAdminV1IndexOperationMetadata
+         where
         parseJSON
           = withObject
               "GoogleFirestoreAdminV1IndexOperationMetadata"
@@ -3912,7 +3947,8 @@ instance FromJSON
                      <*> (o .:? "index"))
 
 instance ToJSON
-         GoogleFirestoreAdminV1IndexOperationMetadata where
+           GoogleFirestoreAdminV1IndexOperationMetadata
+         where
         toJSON
           GoogleFirestoreAdminV1IndexOperationMetadata'{..}
           = object
@@ -3929,9 +3965,11 @@ instance ToJSON
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
 -- /See:/ 'locationLabels' smart constructor.
-newtype LocationLabels = LocationLabels'
+newtype LocationLabels =
+  LocationLabels'
     { _llAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
@@ -3942,9 +3980,7 @@ locationLabels
     :: HashMap Text Text -- ^ 'llAddtional'
     -> LocationLabels
 locationLabels pLlAddtional_ =
-    LocationLabels'
-    { _llAddtional = _Coerce # pLlAddtional_
-    }
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -3962,11 +3998,13 @@ instance ToJSON LocationLabels where
 -- | A request for Firestore.Listen
 --
 -- /See:/ 'listenRequest' smart constructor.
-data ListenRequest = ListenRequest'
+data ListenRequest =
+  ListenRequest'
     { _lrRemoveTarget :: !(Maybe (Textual Int32))
     , _lrLabels       :: !(Maybe ListenRequestLabels)
     , _lrAddTarget    :: !(Maybe Target)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListenRequest' with the minimum fields required to make a request.
 --
@@ -3980,11 +4018,8 @@ data ListenRequest = ListenRequest'
 listenRequest
     :: ListenRequest
 listenRequest =
-    ListenRequest'
-    { _lrRemoveTarget = Nothing
-    , _lrLabels = Nothing
-    , _lrAddTarget = Nothing
-    }
+  ListenRequest'
+    {_lrRemoveTarget = Nothing, _lrLabels = Nothing, _lrAddTarget = Nothing}
 
 -- | The ID of a target to remove from this stream.
 lrRemoveTarget :: Lens' ListenRequest (Maybe Int32)
@@ -4021,10 +4056,12 @@ instance ToJSON ListenRequest where
 -- | The request for Firestore.Commit.
 --
 -- /See:/ 'commitRequest' smart constructor.
-data CommitRequest = CommitRequest'
+data CommitRequest =
+  CommitRequest'
     { _crTransaction :: !(Maybe Bytes)
     , _crWrites      :: !(Maybe [Write])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
 --
@@ -4035,11 +4072,7 @@ data CommitRequest = CommitRequest'
 -- * 'crWrites'
 commitRequest
     :: CommitRequest
-commitRequest =
-    CommitRequest'
-    { _crTransaction = Nothing
-    , _crWrites = Nothing
-    }
+commitRequest = CommitRequest' {_crTransaction = Nothing, _crWrites = Nothing}
 
 -- | If set, applies all writes in this transaction, and commits it.
 crTransaction :: Lens' CommitRequest (Maybe ByteString)
@@ -4074,9 +4107,11 @@ instance ToJSON CommitRequest where
 -- given location.
 --
 -- /See:/ 'locationMetadata' smart constructor.
-newtype LocationMetadata = LocationMetadata'
+newtype LocationMetadata =
+  LocationMetadata'
     { _lmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
@@ -4087,9 +4122,7 @@ locationMetadata
     :: HashMap Text JSONValue -- ^ 'lmAddtional'
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
-    LocationMetadata'
-    { _lmAddtional = _Coerce # pLmAddtional_
-    }
+  LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -4108,10 +4141,12 @@ instance ToJSON LocationMetadata where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'googleLongrunningListOperationsResponse' smart constructor.
-data GoogleLongrunningListOperationsResponse = GoogleLongrunningListOperationsResponse'
+data GoogleLongrunningListOperationsResponse =
+  GoogleLongrunningListOperationsResponse'
     { _gllorNextPageToken :: !(Maybe Text)
     , _gllorOperations    :: !(Maybe [GoogleLongrunningOperation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleLongrunningListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -4123,10 +4158,8 @@ data GoogleLongrunningListOperationsResponse = GoogleLongrunningListOperationsRe
 googleLongrunningListOperationsResponse
     :: GoogleLongrunningListOperationsResponse
 googleLongrunningListOperationsResponse =
-    GoogleLongrunningListOperationsResponse'
-    { _gllorNextPageToken = Nothing
-    , _gllorOperations = Nothing
-    }
+  GoogleLongrunningListOperationsResponse'
+    {_gllorNextPageToken = Nothing, _gllorOperations = Nothing}
 
 -- | The standard List next-page token.
 gllorNextPageToken :: Lens' GoogleLongrunningListOperationsResponse (Maybe Text)
@@ -4143,7 +4176,8 @@ gllorOperations
       . _Coerce
 
 instance FromJSON
-         GoogleLongrunningListOperationsResponse where
+           GoogleLongrunningListOperationsResponse
+         where
         parseJSON
           = withObject
               "GoogleLongrunningListOperationsResponse"
@@ -4153,7 +4187,8 @@ instance FromJSON
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON
-         GoogleLongrunningListOperationsResponse where
+           GoogleLongrunningListOperationsResponse
+         where
         toJSON GoogleLongrunningListOperationsResponse'{..}
           = object
               (catMaybes
@@ -4163,10 +4198,12 @@ instance ToJSON
 -- | A selection of a collection, such as \`messages as m1\`.
 --
 -- /See:/ 'collectionSelector' smart constructor.
-data CollectionSelector = CollectionSelector'
+data CollectionSelector =
+  CollectionSelector'
     { _csAllDescendants :: !(Maybe Bool)
     , _csCollectionId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CollectionSelector' with the minimum fields required to make a request.
 --
@@ -4178,10 +4215,7 @@ data CollectionSelector = CollectionSelector'
 collectionSelector
     :: CollectionSelector
 collectionSelector =
-    CollectionSelector'
-    { _csAllDescendants = Nothing
-    , _csCollectionId = Nothing
-    }
+  CollectionSelector' {_csAllDescendants = Nothing, _csCollectionId = Nothing}
 
 -- | When false, selects only collections that are immediate children of the
 -- \`parent\` specified in the containing \`RunQueryRequest\`. When true,
@@ -4214,10 +4248,12 @@ instance ToJSON CollectionSelector where
 -- | The request for Firestore.ListCollectionIds.
 --
 -- /See:/ 'listCollectionIdsRequest' smart constructor.
-data ListCollectionIdsRequest = ListCollectionIdsRequest'
+data ListCollectionIdsRequest =
+  ListCollectionIdsRequest'
     { _lcirPageToken :: !(Maybe Text)
     , _lcirPageSize  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCollectionIdsRequest' with the minimum fields required to make a request.
 --
@@ -4229,10 +4265,7 @@ data ListCollectionIdsRequest = ListCollectionIdsRequest'
 listCollectionIdsRequest
     :: ListCollectionIdsRequest
 listCollectionIdsRequest =
-    ListCollectionIdsRequest'
-    { _lcirPageToken = Nothing
-    , _lcirPageSize = Nothing
-    }
+  ListCollectionIdsRequest' {_lcirPageToken = Nothing, _lcirPageSize = Nothing}
 
 -- | A page token. Must be a value from ListCollectionIdsResponse.
 lcirPageToken :: Lens' ListCollectionIdsRequest (Maybe Text)
@@ -4263,12 +4296,14 @@ instance ToJSON ListCollectionIdsRequest where
 -- | The response for Firestore.Write.
 --
 -- /See:/ 'writeResponse' smart constructor.
-data WriteResponse = WriteResponse'
+data WriteResponse =
+  WriteResponse'
     { _wStreamToken  :: !(Maybe Bytes)
     , _wCommitTime   :: !(Maybe DateTime')
     , _wWriteResults :: !(Maybe [WriteResult])
     , _wStreamId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WriteResponse' with the minimum fields required to make a request.
 --
@@ -4284,7 +4319,7 @@ data WriteResponse = WriteResponse'
 writeResponse
     :: WriteResponse
 writeResponse =
-    WriteResponse'
+  WriteResponse'
     { _wStreamToken = Nothing
     , _wCommitTime = Nothing
     , _wWriteResults = Nothing
@@ -4341,10 +4376,12 @@ instance ToJSON WriteResponse where
 -- | An order on a field.
 --
 -- /See:/ 'order' smart constructor.
-data Order = Order'
+data Order =
+  Order'
     { _oField     :: !(Maybe FieldReference)
     , _oDirection :: !(Maybe OrderDirection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
@@ -4355,11 +4392,7 @@ data Order = Order'
 -- * 'oDirection'
 order
     :: Order
-order =
-    Order'
-    { _oField = Nothing
-    , _oDirection = Nothing
-    }
+order = Order' {_oField = Nothing, _oDirection = Nothing}
 
 -- | The field to order by.
 oField :: Lens' Order (Maybe FieldReference)
@@ -4389,11 +4422,13 @@ instance ToJSON Order where
 -- multiple targets are affected.
 --
 -- /See:/ 'documentDelete' smart constructor.
-data DocumentDelete = DocumentDelete'
+data DocumentDelete =
+  DocumentDelete'
     { _ddReadTime         :: !(Maybe DateTime')
     , _ddDocument         :: !(Maybe Text)
     , _ddRemovedTargetIds :: !(Maybe [Textual Int32])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentDelete' with the minimum fields required to make a request.
 --
@@ -4407,7 +4442,7 @@ data DocumentDelete = DocumentDelete'
 documentDelete
     :: DocumentDelete
 documentDelete =
-    DocumentDelete'
+  DocumentDelete'
     { _ddReadTime = Nothing
     , _ddDocument = Nothing
     , _ddRemovedTargetIds = Nothing
@@ -4452,12 +4487,14 @@ instance ToJSON DocumentDelete where
 -- | A transformation of a field of the document.
 --
 -- /See:/ 'fieldTransform' smart constructor.
-data FieldTransform = FieldTransform'
+data FieldTransform =
+  FieldTransform'
     { _ftFieldPath             :: !(Maybe Text)
     , _ftAppendMissingElements :: !(Maybe ArrayValue)
     , _ftSetToServerValue      :: !(Maybe FieldTransformSetToServerValue)
     , _ftRemoveAllFromArray    :: !(Maybe ArrayValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FieldTransform' with the minimum fields required to make a request.
 --
@@ -4473,7 +4510,7 @@ data FieldTransform = FieldTransform'
 fieldTransform
     :: FieldTransform
 fieldTransform =
-    FieldTransform'
+  FieldTransform'
     { _ftFieldPath = Nothing
     , _ftAppendMissingElements = Nothing
     , _ftSetToServerValue = Nothing
@@ -4543,9 +4580,11 @@ instance ToJSON FieldTransform where
 -- represented as UTF-8, must not exceed 1,500 bytes and cannot be empty.
 --
 -- /See:/ 'mapValueFields' smart constructor.
-newtype MapValueFields = MapValueFields'
+newtype MapValueFields =
+  MapValueFields'
     { _mvfAddtional :: HashMap Text Value
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MapValueFields' with the minimum fields required to make a request.
 --
@@ -4556,9 +4595,7 @@ mapValueFields
     :: HashMap Text Value -- ^ 'mvfAddtional'
     -> MapValueFields
 mapValueFields pMvfAddtional_ =
-    MapValueFields'
-    { _mvfAddtional = _Coerce # pMvfAddtional_
-    }
+  MapValueFields' {_mvfAddtional = _Coerce # pMvfAddtional_}
 
 mvfAddtional :: Lens' MapValueFields (HashMap Text Value)
 mvfAddtional
@@ -4592,9 +4629,11 @@ instance ToJSON MapValueFields where
 -- represents \`\` bak\`tik \`\`.
 --
 -- /See:/ 'documentFields' smart constructor.
-newtype DocumentFields = DocumentFields'
+newtype DocumentFields =
+  DocumentFields'
     { _dfAddtional :: HashMap Text Value
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentFields' with the minimum fields required to make a request.
 --
@@ -4605,9 +4644,7 @@ documentFields
     :: HashMap Text Value -- ^ 'dfAddtional'
     -> DocumentFields
 documentFields pDfAddtional_ =
-    DocumentFields'
-    { _dfAddtional = _Coerce # pDfAddtional_
-    }
+  DocumentFields' {_dfAddtional = _Coerce # pDfAddtional_}
 
 dfAddtional :: Lens' DocumentFields (HashMap Text Value)
 dfAddtional
@@ -4625,9 +4662,11 @@ instance ToJSON DocumentFields where
 -- | Options for a transaction that can only be used to read documents.
 --
 -- /See:/ 'readOnly' smart constructor.
-newtype ReadOnly = ReadOnly'
+newtype ReadOnly =
+  ReadOnly'
     { _roReadTime :: Maybe DateTime'
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReadOnly' with the minimum fields required to make a request.
 --
@@ -4636,10 +4675,7 @@ newtype ReadOnly = ReadOnly'
 -- * 'roReadTime'
 readOnly
     :: ReadOnly
-readOnly =
-    ReadOnly'
-    { _roReadTime = Nothing
-    }
+readOnly = ReadOnly' {_roReadTime = Nothing}
 
 -- | Reads documents at the given time. This may not be older than 60
 -- seconds.
@@ -4661,14 +4697,16 @@ instance ToJSON ReadOnly where
 -- | A specification of a set of documents to listen to.
 --
 -- /See:/ 'target' smart constructor.
-data Target = Target'
+data Target =
+  Target'
     { _tTargetId    :: !(Maybe (Textual Int32))
     , _tOnce        :: !(Maybe Bool)
     , _tReadTime    :: !(Maybe DateTime')
     , _tResumeToken :: !(Maybe Bytes)
     , _tDocuments   :: !(Maybe DocumentsTarget)
     , _tQuery       :: !(Maybe QueryTarget)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Target' with the minimum fields required to make a request.
 --
@@ -4688,7 +4726,7 @@ data Target = Target'
 target
     :: Target
 target =
-    Target'
+  Target'
     { _tTargetId = Nothing
     , _tOnce = Nothing
     , _tReadTime = Nothing
@@ -4759,9 +4797,11 @@ instance ToJSON Target where
 -- | Labels associated with this write request.
 --
 -- /See:/ 'writeRequestLabels' smart constructor.
-newtype WriteRequestLabels = WriteRequestLabels'
+newtype WriteRequestLabels =
+  WriteRequestLabels'
     { _wrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WriteRequestLabels' with the minimum fields required to make a request.
 --
@@ -4772,9 +4812,7 @@ writeRequestLabels
     :: HashMap Text Text -- ^ 'wrlAddtional'
     -> WriteRequestLabels
 writeRequestLabels pWrlAddtional_ =
-    WriteRequestLabels'
-    { _wrlAddtional = _Coerce # pWrlAddtional_
-    }
+  WriteRequestLabels' {_wrlAddtional = _Coerce # pWrlAddtional_}
 
 wrlAddtional :: Lens' WriteRequestLabels (HashMap Text Text)
 wrlAddtional
@@ -4793,13 +4831,15 @@ instance ToJSON WriteRequestLabels where
 -- a network API call.
 --
 -- /See:/ 'googleLongrunningOperation' smart constructor.
-data GoogleLongrunningOperation = GoogleLongrunningOperation'
+data GoogleLongrunningOperation =
+  GoogleLongrunningOperation'
     { _gloDone     :: !(Maybe Bool)
     , _gloError    :: !(Maybe Status)
     , _gloResponse :: !(Maybe GoogleLongrunningOperationResponse)
     , _gloName     :: !(Maybe Text)
     , _gloMetadata :: !(Maybe GoogleLongrunningOperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleLongrunningOperation' with the minimum fields required to make a request.
 --
@@ -4817,7 +4857,7 @@ data GoogleLongrunningOperation = GoogleLongrunningOperation'
 googleLongrunningOperation
     :: GoogleLongrunningOperation
 googleLongrunningOperation =
-    GoogleLongrunningOperation'
+  GoogleLongrunningOperation'
     { _gloDone = Nothing
     , _gloError = Nothing
     , _gloResponse = Nothing
@@ -4884,10 +4924,12 @@ instance ToJSON GoogleLongrunningOperation where
 -- | A filter with a single operand.
 --
 -- /See:/ 'unaryFilter' smart constructor.
-data UnaryFilter = UnaryFilter'
+data UnaryFilter =
+  UnaryFilter'
     { _ufOp    :: !(Maybe UnaryFilterOp)
     , _ufField :: !(Maybe FieldReference)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnaryFilter' with the minimum fields required to make a request.
 --
@@ -4898,11 +4940,7 @@ data UnaryFilter = UnaryFilter'
 -- * 'ufField'
 unaryFilter
     :: UnaryFilter
-unaryFilter =
-    UnaryFilter'
-    { _ufOp = Nothing
-    , _ufField = Nothing
-    }
+unaryFilter = UnaryFilter' {_ufOp = Nothing, _ufField = Nothing}
 
 -- | The unary operator to apply.
 ufOp :: Lens' UnaryFilter (Maybe UnaryFilterOp)

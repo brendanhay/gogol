@@ -63,14 +63,16 @@ type CustomersDpcsListResource =
 -- enrollment.
 --
 -- /See:/ 'customersDpcsList' smart constructor.
-data CustomersDpcsList = CustomersDpcsList'
+data CustomersDpcsList =
+  CustomersDpcsList'
     { _cdlParent         :: !Text
     , _cdlXgafv          :: !(Maybe Xgafv)
     , _cdlUploadProtocol :: !(Maybe Text)
     , _cdlAccessToken    :: !(Maybe Text)
     , _cdlUploadType     :: !(Maybe Text)
     , _cdlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersDpcsList' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ customersDpcsList
     :: Text -- ^ 'cdlParent'
     -> CustomersDpcsList
 customersDpcsList pCdlParent_ =
-    CustomersDpcsList'
+  CustomersDpcsList'
     { _cdlParent = pCdlParent_
     , _cdlXgafv = Nothing
     , _cdlUploadProtocol = Nothing

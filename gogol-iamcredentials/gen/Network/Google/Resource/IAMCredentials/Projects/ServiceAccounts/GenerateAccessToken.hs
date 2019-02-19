@@ -63,7 +63,8 @@ type ProjectsServiceAccountsGenerateAccessTokenResource
 -- | Generates an OAuth 2.0 access token for a service account.
 --
 -- /See:/ 'projectsServiceAccountsGenerateAccessToken' smart constructor.
-data ProjectsServiceAccountsGenerateAccessToken = ProjectsServiceAccountsGenerateAccessToken'
+data ProjectsServiceAccountsGenerateAccessToken =
+  ProjectsServiceAccountsGenerateAccessToken'
     { _psagatXgafv          :: !(Maybe Xgafv)
     , _psagatUploadProtocol :: !(Maybe Text)
     , _psagatAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsServiceAccountsGenerateAccessToken = ProjectsServiceAccountsGenerat
     , _psagatPayload        :: !GenerateAccessTokenRequest
     , _psagatName           :: !Text
     , _psagatCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsGenerateAccessToken' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsServiceAccountsGenerateAccessToken
     -> Text -- ^ 'psagatName'
     -> ProjectsServiceAccountsGenerateAccessToken
 projectsServiceAccountsGenerateAccessToken pPsagatPayload_ pPsagatName_ =
-    ProjectsServiceAccountsGenerateAccessToken'
+  ProjectsServiceAccountsGenerateAccessToken'
     { _psagatXgafv = Nothing
     , _psagatUploadProtocol = Nothing
     , _psagatAccessToken = Nothing
@@ -148,7 +150,8 @@ psagatCallback
       (\ s a -> s{_psagatCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsGenerateAccessToken where
+           ProjectsServiceAccountsGenerateAccessToken
+         where
         type Rs ProjectsServiceAccountsGenerateAccessToken =
              GenerateAccessTokenResponse
         type Scopes

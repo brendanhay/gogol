@@ -67,7 +67,8 @@ type AccessPoliciesAccessLevelsListResource =
 -- | List all Access Levels for an access policy.
 --
 -- /See:/ 'accessPoliciesAccessLevelsList' smart constructor.
-data AccessPoliciesAccessLevelsList = AccessPoliciesAccessLevelsList'
+data AccessPoliciesAccessLevelsList =
+  AccessPoliciesAccessLevelsList'
     { _apallParent            :: !Text
     , _apallXgafv             :: !(Maybe Xgafv)
     , _apallUploadProtocol    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data AccessPoliciesAccessLevelsList = AccessPoliciesAccessLevelsList'
     , _apallPageToken         :: !(Maybe Text)
     , _apallPageSize          :: !(Maybe (Textual Int32))
     , _apallCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesAccessLevelsList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ accessPoliciesAccessLevelsList
     :: Text -- ^ 'apallParent'
     -> AccessPoliciesAccessLevelsList
 accessPoliciesAccessLevelsList pApallParent_ =
-    AccessPoliciesAccessLevelsList'
+  AccessPoliciesAccessLevelsList'
     { _apallParent = pApallParent_
     , _apallXgafv = Nothing
     , _apallUploadProtocol = Nothing

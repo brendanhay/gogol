@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'MobileCarriersList' request conforms to.
 type MobileCarriersListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "mobileCarriers" :>
@@ -53,9 +53,11 @@ type MobileCarriersListResource =
 -- | Retrieves a list of mobile carriers.
 --
 -- /See:/ 'mobileCarriersList' smart constructor.
-newtype MobileCarriersList = MobileCarriersList'
+newtype MobileCarriersList =
+  MobileCarriersList'
     { _mclProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileCarriersList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ mobileCarriersList
     :: Int64 -- ^ 'mclProFileId'
     -> MobileCarriersList
 mobileCarriersList pMclProFileId_ =
-    MobileCarriersList'
-    { _mclProFileId = _Coerce # pMclProFileId_
-    }
+  MobileCarriersList' {_mclProFileId = _Coerce # pMclProFileId_}
 
 -- | User profile ID associated with this request.
 mclProFileId :: Lens' MobileCarriersList Int64

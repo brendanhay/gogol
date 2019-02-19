@@ -64,7 +64,8 @@ type ProjectsIndexesGetResource =
 -- | Gets an index.
 --
 -- /See:/ 'projectsIndexesGet' smart constructor.
-data ProjectsIndexesGet = ProjectsIndexesGet'
+data ProjectsIndexesGet =
+  ProjectsIndexesGet'
     { _pigXgafv          :: !(Maybe Xgafv)
     , _pigUploadProtocol :: !(Maybe Text)
     , _pigAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsIndexesGet = ProjectsIndexesGet'
     , _pigProjectId      :: !Text
     , _pigIndexId        :: !Text
     , _pigCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsIndexesGet' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsIndexesGet
     -> Text -- ^ 'pigIndexId'
     -> ProjectsIndexesGet
 projectsIndexesGet pPigProjectId_ pPigIndexId_ =
-    ProjectsIndexesGet'
+  ProjectsIndexesGet'
     { _pigXgafv = Nothing
     , _pigUploadProtocol = Nothing
     , _pigAccessToken = Nothing

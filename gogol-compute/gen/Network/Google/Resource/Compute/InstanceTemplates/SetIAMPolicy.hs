@@ -61,11 +61,13 @@ type InstanceTemplatesSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'instanceTemplatesSetIAMPolicy' smart constructor.
-data InstanceTemplatesSetIAMPolicy = InstanceTemplatesSetIAMPolicy'
+data InstanceTemplatesSetIAMPolicy =
+  InstanceTemplatesSetIAMPolicy'
     { _itsipProject  :: !Text
     , _itsipPayload  :: !GlobalSetPolicyRequest
     , _itsipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceTemplatesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ instanceTemplatesSetIAMPolicy
     -> Text -- ^ 'itsipResource'
     -> InstanceTemplatesSetIAMPolicy
 instanceTemplatesSetIAMPolicy pItsipProject_ pItsipPayload_ pItsipResource_ =
-    InstanceTemplatesSetIAMPolicy'
+  InstanceTemplatesSetIAMPolicy'
     { _itsipProject = pItsipProject_
     , _itsipPayload = pItsipPayload_
     , _itsipResource = pItsipResource_

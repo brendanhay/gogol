@@ -63,7 +63,8 @@ type AppsServicesGetResource =
 -- | Gets the current configuration of the specified service.
 --
 -- /See:/ 'appsServicesGet' smart constructor.
-data AppsServicesGet = AppsServicesGet'
+data AppsServicesGet =
+  AppsServicesGet'
     { _asgXgafv          :: !(Maybe Xgafv)
     , _asgUploadProtocol :: !(Maybe Text)
     , _asgAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data AppsServicesGet = AppsServicesGet'
     , _asgAppsId         :: !Text
     , _asgServicesId     :: !Text
     , _asgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsServicesGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ appsServicesGet
     -> Text -- ^ 'asgServicesId'
     -> AppsServicesGet
 appsServicesGet pAsgAppsId_ pAsgServicesId_ =
-    AppsServicesGet'
+  AppsServicesGet'
     { _asgXgafv = Nothing
     , _asgUploadProtocol = Nothing
     , _asgAccessToken = Nothing

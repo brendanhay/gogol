@@ -72,7 +72,8 @@ type SpreadsheetsValuesClearResource =
 -- kept.
 --
 -- /See:/ 'spreadsheetsValuesClear' smart constructor.
-data SpreadsheetsValuesClear = SpreadsheetsValuesClear'
+data SpreadsheetsValuesClear =
+  SpreadsheetsValuesClear'
     { _svcXgafv          :: !(Maybe Xgafv)
     , _svcUploadProtocol :: !(Maybe Text)
     , _svcAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data SpreadsheetsValuesClear = SpreadsheetsValuesClear'
     , _svcPayload        :: !ClearValuesRequest
     , _svcRange          :: !Text
     , _svcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsValuesClear' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ spreadsheetsValuesClear
     -> Text -- ^ 'svcRange'
     -> SpreadsheetsValuesClear
 spreadsheetsValuesClear pSvcSpreadsheetId_ pSvcPayload_ pSvcRange_ =
-    SpreadsheetsValuesClear'
+  SpreadsheetsValuesClear'
     { _svcXgafv = Nothing
     , _svcUploadProtocol = Nothing
     , _svcAccessToken = Nothing

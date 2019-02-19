@@ -63,13 +63,15 @@ type RoutersUpdateResource =
 -- request.
 --
 -- /See:/ 'routersUpdate' smart constructor.
-data RoutersUpdate = RoutersUpdate'
+data RoutersUpdate =
+  RoutersUpdate'
     { _ruRequestId :: !(Maybe Text)
     , _ruProject   :: !Text
     , _ruRouter    :: !Text
     , _ruPayload   :: !Router
     , _ruRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutersUpdate' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ routersUpdate
     -> Text -- ^ 'ruRegion'
     -> RoutersUpdate
 routersUpdate pRuProject_ pRuRouter_ pRuPayload_ pRuRegion_ =
-    RoutersUpdate'
+  RoutersUpdate'
     { _ruRequestId = Nothing
     , _ruProject = pRuProject_
     , _ruRouter = pRuRouter_

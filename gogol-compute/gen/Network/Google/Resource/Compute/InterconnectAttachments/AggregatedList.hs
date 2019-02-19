@@ -62,13 +62,15 @@ type InterconnectAttachmentsAggregatedListResource =
 -- | Retrieves an aggregated list of interconnect attachments.
 --
 -- /See:/ 'interconnectAttachmentsAggregatedList' smart constructor.
-data InterconnectAttachmentsAggregatedList = InterconnectAttachmentsAggregatedList'
+data InterconnectAttachmentsAggregatedList =
+  InterconnectAttachmentsAggregatedList'
     { _iaalOrderBy    :: !(Maybe Text)
     , _iaalProject    :: !Text
     , _iaalFilter     :: !(Maybe Text)
     , _iaalPageToken  :: !(Maybe Text)
     , _iaalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentsAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ interconnectAttachmentsAggregatedList
     :: Text -- ^ 'iaalProject'
     -> InterconnectAttachmentsAggregatedList
 interconnectAttachmentsAggregatedList pIaalProject_ =
-    InterconnectAttachmentsAggregatedList'
+  InterconnectAttachmentsAggregatedList'
     { _iaalOrderBy = Nothing
     , _iaalProject = pIaalProject_
     , _iaalFilter = Nothing
@@ -151,7 +153,8 @@ iaalMaxResults
       . _Coerce
 
 instance GoogleRequest
-         InterconnectAttachmentsAggregatedList where
+           InterconnectAttachmentsAggregatedList
+         where
         type Rs InterconnectAttachmentsAggregatedList =
              InterconnectAttachmentAggregatedList
         type Scopes InterconnectAttachmentsAggregatedList =

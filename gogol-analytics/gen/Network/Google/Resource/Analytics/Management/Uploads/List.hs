@@ -63,13 +63,15 @@ type ManagementUploadsListResource =
 -- | List uploads to which the user has access.
 --
 -- /See:/ 'managementUploadsList' smart constructor.
-data ManagementUploadsList = ManagementUploadsList'
+data ManagementUploadsList =
+  ManagementUploadsList'
     { _mulWebPropertyId      :: !Text
     , _mulCustomDataSourceId :: !Text
     , _mulAccountId          :: !Text
     , _mulStartIndex         :: !(Maybe (Textual Int32))
     , _mulMaxResults         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementUploadsList' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ managementUploadsList
     -> Text -- ^ 'mulAccountId'
     -> ManagementUploadsList
 managementUploadsList pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ =
-    ManagementUploadsList'
+  ManagementUploadsList'
     { _mulWebPropertyId = pMulWebPropertyId_
     , _mulCustomDataSourceId = pMulCustomDataSourceId_
     , _mulAccountId = pMulAccountId_

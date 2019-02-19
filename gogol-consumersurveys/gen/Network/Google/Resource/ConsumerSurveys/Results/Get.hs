@@ -67,10 +67,12 @@ type ResultsGetResource =
 -- argument to get results.
 --
 -- /See:/ 'resultsGet' smart constructor.
-data ResultsGet = ResultsGet'
+data ResultsGet =
+  ResultsGet'
     { _rgSurveyURLId :: !Text
     , _rgPayload     :: !ResultsGetRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResultsGet' with the minimum fields required to make a request.
 --
@@ -84,10 +86,7 @@ resultsGet
     -> ResultsGetRequest -- ^ 'rgPayload'
     -> ResultsGet
 resultsGet pRgSurveyURLId_ pRgPayload_ =
-    ResultsGet'
-    { _rgSurveyURLId = pRgSurveyURLId_
-    , _rgPayload = pRgPayload_
-    }
+  ResultsGet' {_rgSurveyURLId = pRgSurveyURLId_, _rgPayload = pRgPayload_}
 
 -- | External URL ID for the survey.
 rgSurveyURLId :: Lens' ResultsGet Text

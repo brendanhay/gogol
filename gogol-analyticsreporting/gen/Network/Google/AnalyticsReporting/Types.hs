@@ -339,8 +339,8 @@ analyticsReportingService
 
 -- | View and manage your Google Analytics data
 analyticsScope :: Proxy '["https://www.googleapis.com/auth/analytics"]
-analyticsScope = Proxy;
+analyticsScope = Proxy
 
 -- | View your Google Analytics data
 analyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
-analyticsReadOnlyScope = Proxy;
+analyticsReadOnlyScope = Proxy

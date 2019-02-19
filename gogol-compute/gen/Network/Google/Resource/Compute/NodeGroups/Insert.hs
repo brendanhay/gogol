@@ -63,13 +63,15 @@ type NodeGroupsInsertResource =
 -- included in the request.
 --
 -- /See:/ 'nodeGroupsInsert' smart constructor.
-data NodeGroupsInsert = NodeGroupsInsert'
+data NodeGroupsInsert =
+  NodeGroupsInsert'
     { _ngiRequestId        :: !(Maybe Text)
     , _ngiProject          :: !Text
     , _ngiInitialNodeCount :: !(Textual Int32)
     , _ngiZone             :: !Text
     , _ngiPayload          :: !NodeGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsInsert' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ nodeGroupsInsert
     -> NodeGroup -- ^ 'ngiPayload'
     -> NodeGroupsInsert
 nodeGroupsInsert pNgiProject_ pNgiInitialNodeCount_ pNgiZone_ pNgiPayload_ =
-    NodeGroupsInsert'
+  NodeGroupsInsert'
     { _ngiRequestId = Nothing
     , _ngiProject = pNgiProject_
     , _ngiInitialNodeCount = _Coerce # pNgiInitialNodeCount_

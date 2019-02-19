@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountPermissionGroupsGet' request conforms to.
 type AccountPermissionGroupsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountPermissionGroups" :>
@@ -55,10 +55,12 @@ type AccountPermissionGroupsGetResource =
 -- | Gets one account permission group by ID.
 --
 -- /See:/ 'accountPermissionGroupsGet' smart constructor.
-data AccountPermissionGroupsGet = AccountPermissionGroupsGet'
+data AccountPermissionGroupsGet =
+  AccountPermissionGroupsGet'
     { _apggProFileId :: !(Textual Int64)
     , _apggId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountPermissionGroupsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ accountPermissionGroupsGet
     -> Int64 -- ^ 'apggId'
     -> AccountPermissionGroupsGet
 accountPermissionGroupsGet pApggProFileId_ pApggId_ =
-    AccountPermissionGroupsGet'
-    { _apggProFileId = _Coerce # pApggProFileId_
-    , _apggId = _Coerce # pApggId_
-    }
+  AccountPermissionGroupsGet'
+    {_apggProFileId = _Coerce # pApggProFileId_, _apggId = _Coerce # pApggId_}
 
 -- | User profile ID associated with this request.
 apggProFileId :: Lens' AccountPermissionGroupsGet Int64

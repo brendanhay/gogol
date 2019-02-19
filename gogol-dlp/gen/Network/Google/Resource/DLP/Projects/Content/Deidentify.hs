@@ -78,7 +78,8 @@ type ProjectsContentDeidentifyResource =
 -- updated.
 --
 -- /See:/ 'projectsContentDeidentify' smart constructor.
-data ProjectsContentDeidentify = ProjectsContentDeidentify'
+data ProjectsContentDeidentify =
+  ProjectsContentDeidentify'
     { _pcdParent         :: !Text
     , _pcdXgafv          :: !(Maybe Xgafv)
     , _pcdUploadProtocol :: !(Maybe Text)
@@ -86,7 +87,8 @@ data ProjectsContentDeidentify = ProjectsContentDeidentify'
     , _pcdUploadType     :: !(Maybe Text)
     , _pcdPayload        :: !GooglePrivacyDlpV2DeidentifyContentRequest
     , _pcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsContentDeidentify' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ projectsContentDeidentify
     -> GooglePrivacyDlpV2DeidentifyContentRequest -- ^ 'pcdPayload'
     -> ProjectsContentDeidentify
 projectsContentDeidentify pPcdParent_ pPcdPayload_ =
-    ProjectsContentDeidentify'
+  ProjectsContentDeidentify'
     { _pcdParent = pPcdParent_
     , _pcdXgafv = Nothing
     , _pcdUploadProtocol = Nothing

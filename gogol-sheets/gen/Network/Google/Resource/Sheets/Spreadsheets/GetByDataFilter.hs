@@ -85,7 +85,8 @@ type SpreadsheetsGetByDataFilterResource =
 -- retrieve only the specific fields of the spreadsheet that you want.
 --
 -- /See:/ 'spreadsheetsGetByDataFilter' smart constructor.
-data SpreadsheetsGetByDataFilter = SpreadsheetsGetByDataFilter'
+data SpreadsheetsGetByDataFilter =
+  SpreadsheetsGetByDataFilter'
     { _sgbdfXgafv          :: !(Maybe Xgafv)
     , _sgbdfUploadProtocol :: !(Maybe Text)
     , _sgbdfAccessToken    :: !(Maybe Text)
@@ -93,7 +94,8 @@ data SpreadsheetsGetByDataFilter = SpreadsheetsGetByDataFilter'
     , _sgbdfUploadType     :: !(Maybe Text)
     , _sgbdfPayload        :: !GetSpreadsheetByDataFilterRequest
     , _sgbdfCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsGetByDataFilter' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ spreadsheetsGetByDataFilter
     -> GetSpreadsheetByDataFilterRequest -- ^ 'sgbdfPayload'
     -> SpreadsheetsGetByDataFilter
 spreadsheetsGetByDataFilter pSgbdfSpreadsheetId_ pSgbdfPayload_ =
-    SpreadsheetsGetByDataFilter'
+  SpreadsheetsGetByDataFilter'
     { _sgbdfXgafv = Nothing
     , _sgbdfUploadProtocol = Nothing
     , _sgbdfAccessToken = Nothing

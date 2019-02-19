@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsInsert' request conforms to.
 type SubAccountsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -54,10 +54,12 @@ type SubAccountsInsertResource =
 -- | Inserts a new subaccount.
 --
 -- /See:/ 'subAccountsInsert' smart constructor.
-data SubAccountsInsert = SubAccountsInsert'
+data SubAccountsInsert =
+  SubAccountsInsert'
     { _saiProFileId :: !(Textual Int64)
     , _saiPayload   :: !SubAccount
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubAccountsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ subAccountsInsert
     -> SubAccount -- ^ 'saiPayload'
     -> SubAccountsInsert
 subAccountsInsert pSaiProFileId_ pSaiPayload_ =
-    SubAccountsInsert'
-    { _saiProFileId = _Coerce # pSaiProFileId_
-    , _saiPayload = pSaiPayload_
-    }
+  SubAccountsInsert'
+    {_saiProFileId = _Coerce # pSaiProFileId_, _saiPayload = pSaiPayload_}
 
 -- | User profile ID associated with this request.
 saiProFileId :: Lens' SubAccountsInsert Int64

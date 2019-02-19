@@ -1913,4 +1913,4 @@ shoppingContentService
 
 -- | Manage your product listings and accounts for Google Shopping
 contentScope :: Proxy '["https://www.googleapis.com/auth/content"]
-contentScope = Proxy;
+contentScope = Proxy

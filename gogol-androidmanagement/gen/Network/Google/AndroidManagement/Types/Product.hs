@@ -56,11 +56,13 @@ import           Network.Google.Prelude
 -- needed for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -73,12 +75,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -119,10 +116,12 @@ instance ToJSON Status where
 -- | Response to a request to list policies for a given enterprise.
 --
 -- /See:/ 'listPoliciesResponse' smart constructor.
-data ListPoliciesResponse = ListPoliciesResponse'
+data ListPoliciesResponse =
+  ListPoliciesResponse'
     { _lprNextPageToken :: !(Maybe Text)
     , _lprPolicies      :: !(Maybe [Policy])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPoliciesResponse' with the minimum fields required to make a request.
 --
@@ -134,10 +133,7 @@ data ListPoliciesResponse = ListPoliciesResponse'
 listPoliciesResponse
     :: ListPoliciesResponse
 listPoliciesResponse =
-    ListPoliciesResponse'
-    { _lprNextPageToken = Nothing
-    , _lprPolicies = Nothing
-    }
+  ListPoliciesResponse' {_lprNextPageToken = Nothing, _lprPolicies = Nothing}
 
 -- | If there are more results, a token to retrieve next page of results.
 lprNextPageToken :: Lens' ListPoliciesResponse (Maybe Text)
@@ -170,10 +166,12 @@ instance ToJSON ListPoliciesResponse where
 -- | Information about device memory and storage.
 --
 -- /See:/ 'memoryInfo' smart constructor.
-data MemoryInfo = MemoryInfo'
+data MemoryInfo =
+  MemoryInfo'
     { _miTotalInternalStorage :: !(Maybe (Textual Int64))
     , _miTotalRam             :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MemoryInfo' with the minimum fields required to make a request.
 --
@@ -185,10 +183,7 @@ data MemoryInfo = MemoryInfo'
 memoryInfo
     :: MemoryInfo
 memoryInfo =
-    MemoryInfo'
-    { _miTotalInternalStorage = Nothing
-    , _miTotalRam = Nothing
-    }
+  MemoryInfo' {_miTotalInternalStorage = Nothing, _miTotalRam = Nothing}
 
 -- | Total internal storage on device in bytes.
 miTotalInternalStorage :: Lens' MemoryInfo (Maybe Int64)
@@ -222,9 +217,11 @@ instance ToJSON MemoryInfo where
 -- | A list of package names.
 --
 -- /See:/ 'packageNameList' smart constructor.
-newtype PackageNameList = PackageNameList'
+newtype PackageNameList =
+  PackageNameList'
     { _pnlPackageNames :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PackageNameList' with the minimum fields required to make a request.
 --
@@ -233,10 +230,7 @@ newtype PackageNameList = PackageNameList'
 -- * 'pnlPackageNames'
 packageNameList
     :: PackageNameList
-packageNameList =
-    PackageNameList'
-    { _pnlPackageNames = Nothing
-    }
+packageNameList = PackageNameList' {_pnlPackageNames = Nothing}
 
 -- | A list of package names.
 pnlPackageNames :: Lens' PackageNameList [Text]
@@ -262,7 +256,8 @@ instance ToJSON PackageNameList where
 -- | A command.
 --
 -- /See:/ 'command' smart constructor.
-data Command = Command'
+data Command =
+  Command'
     { _cResetPasswordFlags :: !(Maybe [Text])
     , _cNewPassword        :: !(Maybe Text)
     , _cUserName           :: !(Maybe Text)
@@ -270,7 +265,8 @@ data Command = Command'
     , _cType               :: !(Maybe CommandType)
     , _cDuration           :: !(Maybe GDuration)
     , _cCreateTime         :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Command' with the minimum fields required to make a request.
 --
@@ -292,7 +288,7 @@ data Command = Command'
 command
     :: Command
 command =
-    Command'
+  Command'
     { _cResetPasswordFlags = Nothing
     , _cNewPassword = Nothing
     , _cUserName = Nothing
@@ -376,10 +372,12 @@ instance ToJSON Command where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -391,10 +389,8 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -428,7 +424,8 @@ instance ToJSON ListOperationsResponse where
 -- | Device display information.
 --
 -- /See:/ 'display' smart constructor.
-data Display = Display'
+data Display =
+  Display'
     { _dHeight      :: !(Maybe (Textual Int32))
     , _dState       :: !(Maybe DisplayState)
     , _dWidth       :: !(Maybe (Textual Int32))
@@ -436,7 +433,8 @@ data Display = Display'
     , _dRefreshRate :: !(Maybe (Textual Int32))
     , _dDisplayId   :: !(Maybe (Textual Int32))
     , _dDensity     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Display' with the minimum fields required to make a request.
 --
@@ -458,7 +456,7 @@ data Display = Display'
 display
     :: Display
 display =
-    Display'
+  Display'
     { _dHeight = Nothing
     , _dState = Nothing
     , _dWidth = Nothing
@@ -532,10 +530,12 @@ instance ToJSON Display where
 -- | Configuration for an always-on VPN connection.
 --
 -- /See:/ 'alwaysOnVPNPackage' smart constructor.
-data AlwaysOnVPNPackage = AlwaysOnVPNPackage'
+data AlwaysOnVPNPackage =
+  AlwaysOnVPNPackage'
     { _aovpLockdownEnabled :: !(Maybe Bool)
     , _aovpPackageName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlwaysOnVPNPackage' with the minimum fields required to make a request.
 --
@@ -547,10 +547,8 @@ data AlwaysOnVPNPackage = AlwaysOnVPNPackage'
 alwaysOnVPNPackage
     :: AlwaysOnVPNPackage
 alwaysOnVPNPackage =
-    AlwaysOnVPNPackage'
-    { _aovpLockdownEnabled = Nothing
-    , _aovpPackageName = Nothing
-    }
+  AlwaysOnVPNPackage'
+    {_aovpLockdownEnabled = Nothing, _aovpPackageName = Nothing}
 
 -- | Disallows networking when the VPN is not connected.
 aovpLockdownEnabled :: Lens' AlwaysOnVPNPackage (Maybe Bool)
@@ -582,9 +580,11 @@ instance ToJSON AlwaysOnVPNPackage where
 -- information.
 --
 -- /See:/ 'policyOpenNetworkConfiguration' smart constructor.
-newtype PolicyOpenNetworkConfiguration = PolicyOpenNetworkConfiguration'
+newtype PolicyOpenNetworkConfiguration =
+  PolicyOpenNetworkConfiguration'
     { _poncAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PolicyOpenNetworkConfiguration' with the minimum fields required to make a request.
 --
@@ -595,9 +595,7 @@ policyOpenNetworkConfiguration
     :: HashMap Text JSONValue -- ^ 'poncAddtional'
     -> PolicyOpenNetworkConfiguration
 policyOpenNetworkConfiguration pPoncAddtional_ =
-    PolicyOpenNetworkConfiguration'
-    { _poncAddtional = _Coerce # pPoncAddtional_
-    }
+  PolicyOpenNetworkConfiguration' {_poncAddtional = _Coerce # pPoncAddtional_}
 
 -- | Properties of the object.
 poncAddtional :: Lens' PolicyOpenNetworkConfiguration (HashMap Text JSONValue)
@@ -621,7 +619,8 @@ instance ToJSON PolicyOpenNetworkConfiguration where
 -- thresholds available in hardwareInfo to determine hardware health.
 --
 -- /See:/ 'hardwareStatus' smart constructor.
-data HardwareStatus = HardwareStatus'
+data HardwareStatus =
+  HardwareStatus'
     { _hsCPUTemperatures     :: !(Maybe [Textual Double])
     , _hsBatteryTemperatures :: !(Maybe [Textual Double])
     , _hsGpuTemperatures     :: !(Maybe [Textual Double])
@@ -629,7 +628,8 @@ data HardwareStatus = HardwareStatus'
     , _hsSkinTemperatures    :: !(Maybe [Textual Double])
     , _hsCPUUsages           :: !(Maybe [Textual Double])
     , _hsCreateTime          :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HardwareStatus' with the minimum fields required to make a request.
 --
@@ -651,7 +651,7 @@ data HardwareStatus = HardwareStatus'
 hardwareStatus
     :: HardwareStatus
 hardwareStatus =
-    HardwareStatus'
+  HardwareStatus'
     { _hsCPUTemperatures = Nothing
     , _hsBatteryTemperatures = Nothing
     , _hsGpuTemperatures = Nothing
@@ -745,12 +745,14 @@ instance ToJSON HardwareStatus where
 -- | Information about an app.
 --
 -- /See:/ 'application' smart constructor.
-data Application = Application'
+data Application =
+  Application'
     { _aManagedProperties :: !(Maybe [ManagedProperty])
     , _aName              :: !(Maybe Text)
     , _aPermissions       :: !(Maybe [ApplicationPermission])
     , _aTitle             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -766,7 +768,7 @@ data Application = Application'
 application
     :: Application
 application =
-    Application'
+  Application'
     { _aManagedProperties = Nothing
     , _aName = Nothing
     , _aPermissions = Nothing
@@ -820,7 +822,8 @@ instance ToJSON Application where
 -- | Managed property.
 --
 -- /See:/ 'managedProperty' smart constructor.
-data ManagedProperty = ManagedProperty'
+data ManagedProperty =
+  ManagedProperty'
     { _mpEntries          :: !(Maybe [ManagedPropertyEntry])
     , _mpNestedProperties :: !(Maybe [ManagedProperty])
     , _mpKey              :: !(Maybe Text)
@@ -828,7 +831,8 @@ data ManagedProperty = ManagedProperty'
     , _mpTitle            :: !(Maybe Text)
     , _mpType             :: !(Maybe ManagedPropertyType)
     , _mpDescription      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedProperty' with the minimum fields required to make a request.
 --
@@ -850,7 +854,7 @@ data ManagedProperty = ManagedProperty'
 managedProperty
     :: ManagedProperty
 managedProperty =
-    ManagedProperty'
+  ManagedProperty'
     { _mpEntries = Nothing
     , _mpNestedProperties = Nothing
     , _mpKey = Nothing
@@ -932,12 +936,14 @@ instance ToJSON ManagedProperty where
 -- field.
 --
 -- /See:/ 'proxyInfo' smart constructor.
-data ProxyInfo = ProxyInfo'
+data ProxyInfo =
+  ProxyInfo'
     { _piPacURI        :: !(Maybe Text)
     , _piHost          :: !(Maybe Text)
     , _piExcludedHosts :: !(Maybe [Text])
     , _piPort          :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProxyInfo' with the minimum fields required to make a request.
 --
@@ -953,7 +959,7 @@ data ProxyInfo = ProxyInfo'
 proxyInfo
     :: ProxyInfo
 proxyInfo =
-    ProxyInfo'
+  ProxyInfo'
     { _piPacURI = Nothing
     , _piHost = Nothing
     , _piExcludedHosts = Nothing
@@ -1005,11 +1011,13 @@ instance ToJSON ProxyInfo where
 -- filter.
 --
 -- /See:/ 'persistentPreferredActivity' smart constructor.
-data PersistentPreferredActivity = PersistentPreferredActivity'
+data PersistentPreferredActivity =
+  PersistentPreferredActivity'
     { _ppaActions          :: !(Maybe [Text])
     , _ppaCategories       :: !(Maybe [Text])
     , _ppaReceiverActivity :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PersistentPreferredActivity' with the minimum fields required to make a request.
 --
@@ -1023,7 +1031,7 @@ data PersistentPreferredActivity = PersistentPreferredActivity'
 persistentPreferredActivity
     :: PersistentPreferredActivity
 persistentPreferredActivity =
-    PersistentPreferredActivity'
+  PersistentPreferredActivity'
     { _ppaActions = Nothing
     , _ppaCategories = Nothing
     , _ppaReceiverActivity = Nothing
@@ -1080,13 +1088,15 @@ instance ToJSON PersistentPreferredActivity where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -1104,7 +1114,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -1174,8 +1184,8 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -1193,10 +1203,12 @@ instance ToJSON Empty where
 -- Android Device Policy and verified against the hash.
 --
 -- /See:/ 'externalData' smart constructor.
-data ExternalData = ExternalData'
+data ExternalData =
+  ExternalData'
     { _edURL        :: !(Maybe Text)
     , _edSha256Hash :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExternalData' with the minimum fields required to make a request.
 --
@@ -1207,11 +1219,7 @@ data ExternalData = ExternalData'
 -- * 'edSha256Hash'
 externalData
     :: ExternalData
-externalData =
-    ExternalData'
-    { _edURL = Nothing
-    , _edSha256Hash = Nothing
-    }
+externalData = ExternalData' {_edURL = Nothing, _edSha256Hash = Nothing}
 
 -- | The absolute URL to the data, which must use either the http or https
 -- scheme. Android Device Policy doesn\'t provide any credentials in the
@@ -1247,9 +1255,11 @@ instance ToJSON ExternalData where
 -- only be one rule with this type of condition per policy.
 --
 -- /See:/ 'apiLevelCondition' smart constructor.
-newtype APILevelCondition = APILevelCondition'
+newtype APILevelCondition =
+  APILevelCondition'
     { _alcMinAPILevel :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'APILevelCondition' with the minimum fields required to make a request.
 --
@@ -1258,10 +1268,7 @@ newtype APILevelCondition = APILevelCondition'
 -- * 'alcMinAPILevel'
 apiLevelCondition
     :: APILevelCondition
-apiLevelCondition =
-    APILevelCondition'
-    { _alcMinAPILevel = Nothing
-    }
+apiLevelCondition = APILevelCondition' {_alcMinAPILevel = Nothing}
 
 -- | The minimum desired Android Framework API level. If the device doesn\'t
 -- meet the minimum requirement, this condition is satisfied. Must be
@@ -1285,7 +1292,8 @@ instance ToJSON APILevelCondition where
 -- | Information about security related device settings on device.
 --
 -- /See:/ 'deviceSettings' smart constructor.
-data DeviceSettings = DeviceSettings'
+data DeviceSettings =
+  DeviceSettings'
     { _dsIsEncrypted                :: !(Maybe Bool)
     , _dsAdbEnabled                 :: !(Maybe Bool)
     , _dsIsDeviceSecure             :: !(Maybe Bool)
@@ -1293,7 +1301,8 @@ data DeviceSettings = DeviceSettings'
     , _dsDevelopmentSettingsEnabled :: !(Maybe Bool)
     , _dsEncryptionStatus           :: !(Maybe DeviceSettingsEncryptionStatus)
     , _dsUnknownSourcesEnabled      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceSettings' with the minimum fields required to make a request.
 --
@@ -1315,7 +1324,7 @@ data DeviceSettings = DeviceSettings'
 deviceSettings
     :: DeviceSettings
 deviceSettings =
-    DeviceSettings'
+  DeviceSettings'
     { _dsIsEncrypted = Nothing
     , _dsAdbEnabled = Nothing
     , _dsIsDeviceSecure = Nothing
@@ -1400,9 +1409,11 @@ instance ToJSON DeviceSettings where
 -- configuration.
 --
 -- /See:/ 'managedConfigurationTemplateConfigurationVariables' smart constructor.
-newtype ManagedConfigurationTemplateConfigurationVariables = ManagedConfigurationTemplateConfigurationVariables'
+newtype ManagedConfigurationTemplateConfigurationVariables =
+  ManagedConfigurationTemplateConfigurationVariables'
     { _mctcvAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationTemplateConfigurationVariables' with the minimum fields required to make a request.
 --
@@ -1413,9 +1424,8 @@ managedConfigurationTemplateConfigurationVariables
     :: HashMap Text Text -- ^ 'mctcvAddtional'
     -> ManagedConfigurationTemplateConfigurationVariables
 managedConfigurationTemplateConfigurationVariables pMctcvAddtional_ =
-    ManagedConfigurationTemplateConfigurationVariables'
-    { _mctcvAddtional = _Coerce # pMctcvAddtional_
-    }
+  ManagedConfigurationTemplateConfigurationVariables'
+    {_mctcvAddtional = _Coerce # pMctcvAddtional_}
 
 mctcvAddtional :: Lens' ManagedConfigurationTemplateConfigurationVariables (HashMap Text Text)
 mctcvAddtional
@@ -1424,7 +1434,7 @@ mctcvAddtional
       . _Coerce
 
 instance FromJSON
-         ManagedConfigurationTemplateConfigurationVariables
+           ManagedConfigurationTemplateConfigurationVariables
          where
         parseJSON
           = withObject
@@ -1434,7 +1444,7 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         ManagedConfigurationTemplateConfigurationVariables
+           ManagedConfigurationTemplateConfigurationVariables
          where
         toJSON = toJSON . _mctcvAddtional
 
@@ -1443,7 +1453,8 @@ instance ToJSON
 -- device\'s policy.
 --
 -- /See:/ 'hardwareInfo' smart constructor.
-data HardwareInfo = HardwareInfo'
+data HardwareInfo =
+  HardwareInfo'
     { _hiCPUThrottlingTemperatures     :: !(Maybe [Textual Double])
     , _hiManufacturer                  :: !(Maybe Text)
     , _hiBrand                         :: !(Maybe Text)
@@ -1458,7 +1469,8 @@ data HardwareInfo = HardwareInfo'
     , _hiSerialNumber                  :: !(Maybe Text)
     , _hiDeviceBasebandVersion         :: !(Maybe Text)
     , _hiHardware                      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HardwareInfo' with the minimum fields required to make a request.
 --
@@ -1494,7 +1506,7 @@ data HardwareInfo = HardwareInfo'
 hardwareInfo
     :: HardwareInfo
 hardwareInfo =
-    HardwareInfo'
+  HardwareInfo'
     { _hiCPUThrottlingTemperatures = Nothing
     , _hiManufacturer = Nothing
     , _hiBrand = Nothing
@@ -1665,7 +1677,8 @@ instance ToJSON HardwareInfo where
 -- read-only and can\'t be modified by enterprises.devices.patch.
 --
 -- /See:/ 'device' smart constructor.
-data Device = Device'
+data Device =
+  Device'
     { _devMemoryInfo                     :: !(Maybe MemoryInfo)
     , _devPolicyCompliant                :: !(Maybe Bool)
     , _devApplicationReports             :: !(Maybe [ApplicationReport])
@@ -1696,7 +1709,8 @@ data Device = Device'
     , _devSoftwareInfo                   :: !(Maybe SoftwareInfo)
     , _devEnrollmentTime                 :: !(Maybe DateTime')
     , _devDisplays                       :: !(Maybe [Display])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
@@ -1764,7 +1778,7 @@ data Device = Device'
 device
     :: Device
 device =
-    Device'
+  Device'
     { _devMemoryInfo = Nothing
     , _devPolicyCompliant = Nothing
     , _devApplicationReports = Nothing
@@ -2099,9 +2113,11 @@ instance ToJSON Device where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -2112,9 +2128,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2133,10 +2147,12 @@ instance ToJSON StatusDetailsItem where
 -- | An entry of a managed property.
 --
 -- /See:/ 'managedPropertyEntry' smart constructor.
-data ManagedPropertyEntry = ManagedPropertyEntry'
+data ManagedPropertyEntry =
+  ManagedPropertyEntry'
     { _mpeValue :: !(Maybe Text)
     , _mpeName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedPropertyEntry' with the minimum fields required to make a request.
 --
@@ -2148,10 +2164,7 @@ data ManagedPropertyEntry = ManagedPropertyEntry'
 managedPropertyEntry
     :: ManagedPropertyEntry
 managedPropertyEntry =
-    ManagedPropertyEntry'
-    { _mpeValue = Nothing
-    , _mpeName = Nothing
-    }
+  ManagedPropertyEntry' {_mpeValue = Nothing, _mpeName = Nothing}
 
 -- | The machine-readable value of the entry, which should be used in the
 -- configuration. Not localized.
@@ -2180,11 +2193,13 @@ instance ToJSON ManagedPropertyEntry where
 -- authenticate the device to a server.
 --
 -- /See:/ 'choosePrivateKeyRule' smart constructor.
-data ChoosePrivateKeyRule = ChoosePrivateKeyRule'
+data ChoosePrivateKeyRule =
+  ChoosePrivateKeyRule'
     { _cpkrPrivateKeyAlias :: !(Maybe Text)
     , _cpkrURLPattern      :: !(Maybe Text)
     , _cpkrPackageNames    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChoosePrivateKeyRule' with the minimum fields required to make a request.
 --
@@ -2198,7 +2213,7 @@ data ChoosePrivateKeyRule = ChoosePrivateKeyRule'
 choosePrivateKeyRule
     :: ChoosePrivateKeyRule
 choosePrivateKeyRule =
-    ChoosePrivateKeyRule'
+  ChoosePrivateKeyRule'
     { _cpkrPrivateKeyAlias = Nothing
     , _cpkrURLPattern = Nothing
     , _cpkrPackageNames = Nothing
@@ -2252,9 +2267,11 @@ instance ToJSON ChoosePrivateKeyRule where
 -- such as en-US, es-ES, or fr.
 --
 -- /See:/ 'userFacingMessageLocalizedMessages' smart constructor.
-newtype UserFacingMessageLocalizedMessages = UserFacingMessageLocalizedMessages'
+newtype UserFacingMessageLocalizedMessages =
+  UserFacingMessageLocalizedMessages'
     { _ufmlmAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserFacingMessageLocalizedMessages' with the minimum fields required to make a request.
 --
@@ -2265,9 +2282,8 @@ userFacingMessageLocalizedMessages
     :: HashMap Text Text -- ^ 'ufmlmAddtional'
     -> UserFacingMessageLocalizedMessages
 userFacingMessageLocalizedMessages pUfmlmAddtional_ =
-    UserFacingMessageLocalizedMessages'
-    { _ufmlmAddtional = _Coerce # pUfmlmAddtional_
-    }
+  UserFacingMessageLocalizedMessages'
+    {_ufmlmAddtional = _Coerce # pUfmlmAddtional_}
 
 ufmlmAddtional :: Lens' UserFacingMessageLocalizedMessages (HashMap Text Text)
 ufmlmAddtional
@@ -2290,9 +2306,11 @@ instance ToJSON UserFacingMessageLocalizedMessages
 -- | A user belonging to an enterprise.
 --
 -- /See:/ 'user' smart constructor.
-newtype User = User'
+newtype User =
+  User'
     { _uAccountIdentifier :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -2301,10 +2319,7 @@ newtype User = User'
 -- * 'uAccountIdentifier'
 user
     :: User
-user =
-    User'
-    { _uAccountIdentifier = Nothing
-    }
+user = User' {_uAccountIdentifier = Nothing}
 
 -- | A unique identifier you create for this user, such as user342 or
 -- asset#44418. This field must be set when the user is created and can\'t
@@ -2330,11 +2345,13 @@ instance ToJSON User where
 -- | Configuration for managing system updates
 --
 -- /See:/ 'systemUpdate' smart constructor.
-data SystemUpdate = SystemUpdate'
+data SystemUpdate =
+  SystemUpdate'
     { _suEndMinutes   :: !(Maybe (Textual Int32))
     , _suStartMinutes :: !(Maybe (Textual Int32))
     , _suType         :: !(Maybe SystemUpdateType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SystemUpdate' with the minimum fields required to make a request.
 --
@@ -2348,11 +2365,8 @@ data SystemUpdate = SystemUpdate'
 systemUpdate
     :: SystemUpdate
 systemUpdate =
-    SystemUpdate'
-    { _suEndMinutes = Nothing
-    , _suStartMinutes = Nothing
-    , _suType = Nothing
-    }
+  SystemUpdate'
+    {_suEndMinutes = Nothing, _suStartMinutes = Nothing, _suType = Nothing}
 
 -- | If the type is WINDOWED, the end of the maintenance window, measured as
 -- the number of minutes after midnight in device\'s local time. This value
@@ -2397,7 +2411,8 @@ instance ToJSON SystemUpdate where
 -- | Information reported about an installed app.
 --
 -- /See:/ 'applicationReport' smart constructor.
-data ApplicationReport = ApplicationReport'
+data ApplicationReport =
+  ApplicationReport'
     { _arVersionCode                :: !(Maybe (Textual Int32))
     , _arSigningKeyCertFingerprints :: !(Maybe [Text])
     , _arState                      :: !(Maybe ApplicationReportState)
@@ -2408,7 +2423,8 @@ data ApplicationReport = ApplicationReport'
     , _arEvents                     :: !(Maybe [ApplicationEvent])
     , _arDisplayName                :: !(Maybe Text)
     , _arInstallerPackageName       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApplicationReport' with the minimum fields required to make a request.
 --
@@ -2436,7 +2452,7 @@ data ApplicationReport = ApplicationReport'
 applicationReport
     :: ApplicationReport
 applicationReport =
-    ApplicationReport'
+  ApplicationReport'
     { _arVersionCode = Nothing
     , _arSigningKeyCertFingerprints = Nothing
     , _arState = Nothing
@@ -2553,7 +2569,8 @@ instance ToJSON ApplicationReport where
 -- | An enrollment token.
 --
 -- /See:/ 'enrollmentToken' smart constructor.
-data EnrollmentToken = EnrollmentToken'
+data EnrollmentToken =
+  EnrollmentToken'
     { _etPolicyName          :: !(Maybe Text)
     , _etValue               :: !(Maybe Text)
     , _etQrCode              :: !(Maybe Text)
@@ -2563,7 +2580,8 @@ data EnrollmentToken = EnrollmentToken'
     , _etOneTimeOnly         :: !(Maybe Bool)
     , _etExpirationTimestamp :: !(Maybe DateTime')
     , _etDuration            :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnrollmentToken' with the minimum fields required to make a request.
 --
@@ -2589,7 +2607,7 @@ data EnrollmentToken = EnrollmentToken'
 enrollmentToken
     :: EnrollmentToken
 enrollmentToken =
-    EnrollmentToken'
+  EnrollmentToken'
     { _etPolicyName = Nothing
     , _etValue = Nothing
     , _etQrCode = Nothing
@@ -2704,21 +2722,30 @@ instance ToJSON EnrollmentToken where
 -- app. Each field name in the managed configuration must match the key
 -- field of the ManagedProperty. The field value must be compatible with
 -- the type of the ManagedProperty:
--- >   -------------- ------------------
--- >   /type/         /JSON value/
--- >   BOOL           true or false
--- >   STRING         string
--- >   INTEGER        number
--- >   CHOICE         string
--- >   MULTISELECT    array of strings
--- >   HIDDEN         string
--- >   BUNDLE_ARRAY   array of objects
--- >   -------------- ------------------
+-- > +--------------+------------------+
+-- > | /type/       | /JSON value/     |
+-- > +--------------+------------------+
+-- > | BOOL         | true or false    |
+-- > +--------------+------------------+
+-- > | STRING       | string           |
+-- > +--------------+------------------+
+-- > | INTEGER      | number           |
+-- > +--------------+------------------+
+-- > | CHOICE       | string           |
+-- > +--------------+------------------+
+-- > | MULTISELECT  | array of strings |
+-- > +--------------+------------------+
+-- > | HIDDEN       | string           |
+-- > +--------------+------------------+
+-- > | BUNDLE_ARRAY | array of objects |
+-- > +--------------+------------------+
 --
 -- /See:/ 'applicationPolicyManagedConfiguration' smart constructor.
-newtype ApplicationPolicyManagedConfiguration = ApplicationPolicyManagedConfiguration'
+newtype ApplicationPolicyManagedConfiguration =
+  ApplicationPolicyManagedConfiguration'
     { _apmcAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApplicationPolicyManagedConfiguration' with the minimum fields required to make a request.
 --
@@ -2729,9 +2756,8 @@ applicationPolicyManagedConfiguration
     :: HashMap Text JSONValue -- ^ 'apmcAddtional'
     -> ApplicationPolicyManagedConfiguration
 applicationPolicyManagedConfiguration pApmcAddtional_ =
-    ApplicationPolicyManagedConfiguration'
-    { _apmcAddtional = _Coerce # pApmcAddtional_
-    }
+  ApplicationPolicyManagedConfiguration'
+    {_apmcAddtional = _Coerce # pApmcAddtional_}
 
 -- | Properties of the object.
 apmcAddtional :: Lens' ApplicationPolicyManagedConfiguration (HashMap Text JSONValue)
@@ -2741,7 +2767,8 @@ apmcAddtional
       . _Coerce
 
 instance FromJSON
-         ApplicationPolicyManagedConfiguration where
+           ApplicationPolicyManagedConfiguration
+         where
         parseJSON
           = withObject "ApplicationPolicyManagedConfiguration"
               (\ o ->
@@ -2755,7 +2782,8 @@ instance ToJSON ApplicationPolicyManagedConfiguration
 -- | Settings controlling the behavior of status reports.
 --
 -- /See:/ 'statusReportingSettings' smart constructor.
-data StatusReportingSettings = StatusReportingSettings'
+data StatusReportingSettings =
+  StatusReportingSettings'
     { _srsSoftwareInfoEnabled          :: !(Maybe Bool)
     , _srsHardwareStatusEnabled        :: !(Maybe Bool)
     , _srsPowerManagementEventsEnabled :: !(Maybe Bool)
@@ -2764,7 +2792,8 @@ data StatusReportingSettings = StatusReportingSettings'
     , _srsMemoryInfoEnabled            :: !(Maybe Bool)
     , _srsNetworkInfoEnabled           :: !(Maybe Bool)
     , _srsDeviceSettingsEnabled        :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusReportingSettings' with the minimum fields required to make a request.
 --
@@ -2788,7 +2817,7 @@ data StatusReportingSettings = StatusReportingSettings'
 statusReportingSettings
     :: StatusReportingSettings
 statusReportingSettings =
-    StatusReportingSettings'
+  StatusReportingSettings'
     { _srsSoftwareInfoEnabled = Nothing
     , _srsHardwareStatusEnabled = Nothing
     , _srsPowerManagementEventsEnabled = Nothing
@@ -2882,7 +2911,8 @@ instance ToJSON StatusReportingSettings where
 -- | Policy for an individual app.
 --
 -- /See:/ 'applicationPolicy' smart constructor.
-data ApplicationPolicy = ApplicationPolicy'
+data ApplicationPolicy =
+  ApplicationPolicy'
     { _apDelegatedScopes              :: !(Maybe [Text])
     , _apPackageName                  :: !(Maybe Text)
     , _apManagedConfiguration         :: !(Maybe ApplicationPolicyManagedConfiguration)
@@ -2893,7 +2923,8 @@ data ApplicationPolicy = ApplicationPolicy'
     , _apManagedConfigurationTemplate :: !(Maybe ManagedConfigurationTemplate)
     , _apMinimumVersionCode           :: !(Maybe (Textual Int32))
     , _apInstallType                  :: !(Maybe ApplicationPolicyInstallType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApplicationPolicy' with the minimum fields required to make a request.
 --
@@ -2921,7 +2952,7 @@ data ApplicationPolicy = ApplicationPolicy'
 applicationPolicy
     :: ApplicationPolicy
 applicationPolicy =
-    ApplicationPolicy'
+  ApplicationPolicy'
     { _apDelegatedScopes = Nothing
     , _apPackageName = Nothing
     , _apManagedConfiguration = Nothing
@@ -2954,16 +2985,23 @@ apPackageName
 -- app. Each field name in the managed configuration must match the key
 -- field of the ManagedProperty. The field value must be compatible with
 -- the type of the ManagedProperty:
--- >   -------------- ------------------
--- >   /type/         /JSON value/
--- >   BOOL           true or false
--- >   STRING         string
--- >   INTEGER        number
--- >   CHOICE         string
--- >   MULTISELECT    array of strings
--- >   HIDDEN         string
--- >   BUNDLE_ARRAY   array of objects
--- >   -------------- ------------------
+-- > +--------------+------------------+
+-- > | /type/       | /JSON value/     |
+-- > +--------------+------------------+
+-- > | BOOL         | true or false    |
+-- > +--------------+------------------+
+-- > | STRING       | string           |
+-- > +--------------+------------------+
+-- > | INTEGER      | number           |
+-- > +--------------+------------------+
+-- > | CHOICE       | string           |
+-- > +--------------+------------------+
+-- > | MULTISELECT  | array of strings |
+-- > +--------------+------------------+
+-- > | HIDDEN       | string           |
+-- > +--------------+------------------+
+-- > | BUNDLE_ARRAY | array of objects |
+-- > +--------------+------------------+
 apManagedConfiguration :: Lens' ApplicationPolicy (Maybe ApplicationPolicyManagedConfiguration)
 apManagedConfiguration
   = lens _apManagedConfiguration
@@ -3064,10 +3102,12 @@ instance ToJSON ApplicationPolicy where
 -- | Response to a request to list devices for a given enterprise.
 --
 -- /See:/ 'listDevicesResponse' smart constructor.
-data ListDevicesResponse = ListDevicesResponse'
+data ListDevicesResponse =
+  ListDevicesResponse'
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDevices       :: !(Maybe [Device])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDevicesResponse' with the minimum fields required to make a request.
 --
@@ -3079,10 +3119,7 @@ data ListDevicesResponse = ListDevicesResponse'
 listDevicesResponse
     :: ListDevicesResponse
 listDevicesResponse =
-    ListDevicesResponse'
-    { _ldrNextPageToken = Nothing
-    , _ldrDevices = Nothing
-    }
+  ListDevicesResponse' {_ldrNextPageToken = Nothing, _ldrDevices = Nothing}
 
 -- | If there are more results, a token to retrieve next page of results.
 ldrNextPageToken :: Lens' ListDevicesResponse (Maybe Text)
@@ -3116,10 +3153,12 @@ instance ToJSON ListDevicesResponse where
 -- configurations iframe.
 --
 -- /See:/ 'managedConfigurationTemplate' smart constructor.
-data ManagedConfigurationTemplate = ManagedConfigurationTemplate'
+data ManagedConfigurationTemplate =
+  ManagedConfigurationTemplate'
     { _mctTemplateId             :: !(Maybe Text)
     , _mctConfigurationVariables :: !(Maybe ManagedConfigurationTemplateConfigurationVariables)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationTemplate' with the minimum fields required to make a request.
 --
@@ -3131,10 +3170,8 @@ data ManagedConfigurationTemplate = ManagedConfigurationTemplate'
 managedConfigurationTemplate
     :: ManagedConfigurationTemplate
 managedConfigurationTemplate =
-    ManagedConfigurationTemplate'
-    { _mctTemplateId = Nothing
-    , _mctConfigurationVariables = Nothing
-    }
+  ManagedConfigurationTemplate'
+    {_mctTemplateId = Nothing, _mctConfigurationVariables = Nothing}
 
 -- | The ID of the managed configurations template.
 mctTemplateId :: Lens' ManagedConfigurationTemplate (Maybe Text)
@@ -3168,7 +3205,8 @@ instance ToJSON ManagedConfigurationTemplate where
 -- | The configuration applied to an enterprise.
 --
 -- /See:/ 'enterprise' smart constructor.
-data Enterprise = Enterprise'
+data Enterprise =
+  Enterprise'
     { _eAppAutoApprovalEnabled   :: !(Maybe Bool)
     , _eEnabledNotificationTypes :: !(Maybe [Text])
     , _eSigninDetails            :: !(Maybe [SigninDetail])
@@ -3178,7 +3216,8 @@ data Enterprise = Enterprise'
     , _eLogo                     :: !(Maybe ExternalData)
     , _eTermsAndConditions       :: !(Maybe [TermsAndConditions])
     , _ePrimaryColor             :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Enterprise' with the minimum fields required to make a request.
 --
@@ -3204,7 +3243,7 @@ data Enterprise = Enterprise'
 enterprise
     :: Enterprise
 enterprise =
-    Enterprise'
+  Enterprise'
     { _eAppAutoApprovalEnabled = Nothing
     , _eEnabledNotificationTypes = Nothing
     , _eSigninDetails = Nothing
@@ -3318,11 +3357,13 @@ instance ToJSON Enterprise where
 -- | An event related to memory and storage measurements.
 --
 -- /See:/ 'memoryEvent' smart constructor.
-data MemoryEvent = MemoryEvent'
+data MemoryEvent =
+  MemoryEvent'
     { _meByteCount  :: !(Maybe (Textual Int64))
     , _meEventType  :: !(Maybe MemoryEventEventType)
     , _meCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MemoryEvent' with the minimum fields required to make a request.
 --
@@ -3336,11 +3377,8 @@ data MemoryEvent = MemoryEvent'
 memoryEvent
     :: MemoryEvent
 memoryEvent =
-    MemoryEvent'
-    { _meByteCount = Nothing
-    , _meEventType = Nothing
-    , _meCreateTime = Nothing
-    }
+  MemoryEvent'
+    {_meByteCount = Nothing, _meEventType = Nothing, _meCreateTime = Nothing}
 
 -- | The number of free bytes in the medium, or for
 -- EXTERNAL_STORAGE_DETECTED, the total capacity in bytes of the storage
@@ -3380,10 +3418,12 @@ instance ToJSON MemoryEvent where
 -- | Configuration for an Android permission and its grant state.
 --
 -- /See:/ 'permissionGrant' smart constructor.
-data PermissionGrant = PermissionGrant'
+data PermissionGrant =
+  PermissionGrant'
     { _pgPolicy     :: !(Maybe PermissionGrantPolicy)
     , _pgPermission :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PermissionGrant' with the minimum fields required to make a request.
 --
@@ -3395,10 +3435,7 @@ data PermissionGrant = PermissionGrant'
 permissionGrant
     :: PermissionGrant
 permissionGrant =
-    PermissionGrant'
-    { _pgPolicy = Nothing
-    , _pgPermission = Nothing
-    }
+  PermissionGrant' {_pgPolicy = Nothing, _pgPermission = Nothing}
 
 -- | The policy for granting the permission.
 pgPolicy :: Lens' PermissionGrant (Maybe PermissionGrantPolicy)
@@ -3427,11 +3464,13 @@ instance ToJSON PermissionGrant where
 -- | A resource containing sign in details for an enterprise.
 --
 -- /See:/ 'signinDetail' smart constructor.
-data SigninDetail = SigninDetail'
+data SigninDetail =
+  SigninDetail'
     { _sdSigninURL             :: !(Maybe Text)
     , _sdQrCode                :: !(Maybe Text)
     , _sdSigninEnrollmentToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SigninDetail' with the minimum fields required to make a request.
 --
@@ -3445,7 +3484,7 @@ data SigninDetail = SigninDetail'
 signinDetail
     :: SigninDetail
 signinDetail =
-    SigninDetail'
+  SigninDetail'
     { _sdSigninURL = Nothing
     , _sdQrCode = Nothing
     , _sdSigninEnrollmentToken = Nothing
@@ -3496,10 +3535,12 @@ instance ToJSON SigninDetail where
 -- | An enterprise signup URL.
 --
 -- /See:/ 'signupURL' smart constructor.
-data SignupURL = SignupURL'
+data SignupURL =
+  SignupURL'
     { _suURL  :: !(Maybe Text)
     , _suName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SignupURL' with the minimum fields required to make a request.
 --
@@ -3510,11 +3551,7 @@ data SignupURL = SignupURL'
 -- * 'suName'
 signupURL
     :: SignupURL
-signupURL =
-    SignupURL'
-    { _suURL = Nothing
-    , _suName = Nothing
-    }
+signupURL = SignupURL' {_suURL = Nothing, _suName = Nothing}
 
 -- | A URL where an enterprise admin can register their enterprise. The page
 -- can\'t be rendered in an iframe.
@@ -3541,12 +3578,14 @@ instance ToJSON SignupURL where
 -- | Device network info.
 --
 -- /See:/ 'networkInfo' smart constructor.
-data NetworkInfo = NetworkInfo'
+data NetworkInfo =
+  NetworkInfo'
     { _niNetworkOperatorName :: !(Maybe Text)
     , _niMeid                :: !(Maybe Text)
     , _niImei                :: !(Maybe Text)
     , _niWifiMACAddress      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkInfo' with the minimum fields required to make a request.
 --
@@ -3562,7 +3601,7 @@ data NetworkInfo = NetworkInfo'
 networkInfo
     :: NetworkInfo
 networkInfo =
-    NetworkInfo'
+  NetworkInfo'
     { _niNetworkOperatorName = Nothing
     , _niMeid = Nothing
     , _niImei = Nothing
@@ -3610,11 +3649,13 @@ instance ToJSON NetworkInfo where
 -- | A power management event.
 --
 -- /See:/ 'powerManagementEvent' smart constructor.
-data PowerManagementEvent = PowerManagementEvent'
+data PowerManagementEvent =
+  PowerManagementEvent'
     { _pmeBatteryLevel :: !(Maybe (Textual Double))
     , _pmeEventType    :: !(Maybe PowerManagementEventEventType)
     , _pmeCreateTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PowerManagementEvent' with the minimum fields required to make a request.
 --
@@ -3628,7 +3669,7 @@ data PowerManagementEvent = PowerManagementEvent'
 powerManagementEvent
     :: PowerManagementEvent
 powerManagementEvent =
-    PowerManagementEvent'
+  PowerManagementEvent'
     { _pmeBatteryLevel = Nothing
     , _pmeEventType = Nothing
     , _pmeCreateTime = Nothing
@@ -3673,7 +3714,8 @@ instance ToJSON PowerManagementEvent where
 -- of a managed device and the apps installed on it.
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pBluetoothConfigDisabled            :: !(Maybe Bool)
     , _pUnmuteMicrophoneDisabled           :: !(Maybe Bool)
     , _pMountPhysicalMediaDisabled         :: !(Maybe Bool)
@@ -3748,7 +3790,8 @@ data Policy = Policy'
     , _pApplications                       :: !(Maybe [ApplicationPolicy])
     , _pPasswordPolicies                   :: !(Maybe [PasswordRequirements])
     , _pFactoryResetDisabled               :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -3904,7 +3947,7 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pBluetoothConfigDisabled = Nothing
     , _pUnmuteMicrophoneDisabled = Nothing
     , _pMountPhysicalMediaDisabled = Nothing
@@ -4720,11 +4763,13 @@ instance ToJSON Policy where
 -- NonComplianceDetail fields.
 --
 -- /See:/ 'nonComplianceDetailCondition' smart constructor.
-data NonComplianceDetailCondition = NonComplianceDetailCondition'
+data NonComplianceDetailCondition =
+  NonComplianceDetailCondition'
     { _ncdcPackageName         :: !(Maybe Text)
     , _ncdcNonComplianceReason :: !(Maybe NonComplianceDetailConditionNonComplianceReason)
     , _ncdcSettingName         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NonComplianceDetailCondition' with the minimum fields required to make a request.
 --
@@ -4738,7 +4783,7 @@ data NonComplianceDetailCondition = NonComplianceDetailCondition'
 nonComplianceDetailCondition
     :: NonComplianceDetailCondition
 nonComplianceDetailCondition =
-    NonComplianceDetailCondition'
+  NonComplianceDetailCondition'
     { _ncdcPackageName = Nothing
     , _ncdcNonComplianceReason = Nothing
     , _ncdcSettingName = Nothing
@@ -4790,9 +4835,11 @@ instance ToJSON NonComplianceDetailCondition where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -4803,9 +4850,7 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -4824,12 +4869,14 @@ instance ToJSON OperationMetadata where
 -- | A web token used to access the managed Google Play iframe.
 --
 -- /See:/ 'webToken' smart constructor.
-data WebToken = WebToken'
+data WebToken =
+  WebToken'
     { _wtParentFrameURL :: !(Maybe Text)
     , _wtValue          :: !(Maybe Text)
     , _wtName           :: !(Maybe Text)
     , _wtPermissions    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebToken' with the minimum fields required to make a request.
 --
@@ -4845,7 +4892,7 @@ data WebToken = WebToken'
 webToken
     :: WebToken
 webToken =
-    WebToken'
+  WebToken'
     { _wtParentFrameURL = Nothing
     , _wtValue = Nothing
     , _wtName = Nothing
@@ -4905,12 +4952,14 @@ instance ToJSON WebToken where
 -- optionally be taken as well, depending on the field values in the rule.
 --
 -- /See:/ 'complianceRule' smart constructor.
-data ComplianceRule = ComplianceRule'
+data ComplianceRule =
+  ComplianceRule'
     { _crAPILevelCondition            :: !(Maybe APILevelCondition)
     , _crDisableApps                  :: !(Maybe Bool)
     , _crPackageNamesToDisable        :: !(Maybe [Text])
     , _crNonComplianceDetailCondition :: !(Maybe NonComplianceDetailCondition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ComplianceRule' with the minimum fields required to make a request.
 --
@@ -4926,7 +4975,7 @@ data ComplianceRule = ComplianceRule'
 complianceRule
     :: ComplianceRule
 complianceRule =
-    ComplianceRule'
+  ComplianceRule'
     { _crAPILevelCondition = Nothing
     , _crDisableApps = Nothing
     , _crPackageNamesToDisable = Nothing
@@ -4988,7 +5037,8 @@ instance ToJSON ComplianceRule where
 -- | Requirements for the password used to unlock a device.
 --
 -- /See:/ 'passwordRequirements' smart constructor.
-data PasswordRequirements = PasswordRequirements'
+data PasswordRequirements =
+  PasswordRequirements'
     { _prPasswordMinimumSymbols        :: !(Maybe (Textual Int32))
     , _prMaximumFailedPasswordsForWipe :: !(Maybe (Textual Int32))
     , _prPasswordExpirationTimeout     :: !(Maybe GDuration)
@@ -5001,7 +5051,8 @@ data PasswordRequirements = PasswordRequirements'
     , _prPasswordMinimumLength         :: !(Maybe (Textual Int32))
     , _prPasswordScope                 :: !(Maybe PasswordRequirementsPasswordScope)
     , _prPasswordMinimumLowerCase      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PasswordRequirements' with the minimum fields required to make a request.
 --
@@ -5033,7 +5084,7 @@ data PasswordRequirements = PasswordRequirements'
 passwordRequirements
     :: PasswordRequirements
 passwordRequirements =
-    PasswordRequirements'
+  PasswordRequirements'
     { _prPasswordMinimumSymbols = Nothing
     , _prMaximumFailedPasswordsForWipe = Nothing
     , _prPasswordExpirationTimeout = Nothing
@@ -5190,14 +5241,16 @@ instance ToJSON PasswordRequirements where
 -- | Provides detail about non-compliance with a policy setting.
 --
 -- /See:/ 'nonComplianceDetail' smart constructor.
-data NonComplianceDetail = NonComplianceDetail'
+data NonComplianceDetail =
+  NonComplianceDetail'
     { _ncdFieldPath                 :: !(Maybe Text)
     , _ncdPackageName               :: !(Maybe Text)
     , _ncdInstallationFailureReason :: !(Maybe NonComplianceDetailInstallationFailureReason)
     , _ncdNonComplianceReason       :: !(Maybe NonComplianceDetailNonComplianceReason)
     , _ncdSettingName               :: !(Maybe Text)
     , _ncdCurrentValue              :: !(Maybe JSONValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NonComplianceDetail' with the minimum fields required to make a request.
 --
@@ -5217,7 +5270,7 @@ data NonComplianceDetail = NonComplianceDetail'
 nonComplianceDetail
     :: NonComplianceDetail
 nonComplianceDetail =
-    NonComplianceDetail'
+  NonComplianceDetail'
     { _ncdFieldPath = Nothing
     , _ncdPackageName = Nothing
     , _ncdInstallationFailureReason = Nothing
@@ -5301,10 +5354,12 @@ instance ToJSON NonComplianceDetail where
 -- | An app-related event.
 --
 -- /See:/ 'applicationEvent' smart constructor.
-data ApplicationEvent = ApplicationEvent'
+data ApplicationEvent =
+  ApplicationEvent'
     { _aeEventType  :: !(Maybe ApplicationEventEventType)
     , _aeCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApplicationEvent' with the minimum fields required to make a request.
 --
@@ -5316,10 +5371,7 @@ data ApplicationEvent = ApplicationEvent'
 applicationEvent
     :: ApplicationEvent
 applicationEvent =
-    ApplicationEvent'
-    { _aeEventType = Nothing
-    , _aeCreateTime = Nothing
-    }
+  ApplicationEvent' {_aeEventType = Nothing, _aeCreateTime = Nothing}
 
 -- | App event type.
 aeEventType :: Lens' ApplicationEvent (Maybe ApplicationEventEventType)
@@ -5349,10 +5401,12 @@ instance ToJSON ApplicationEvent where
 -- | A terms and conditions page to be accepted during provisioning.
 --
 -- /See:/ 'termsAndConditions' smart constructor.
-data TermsAndConditions = TermsAndConditions'
+data TermsAndConditions =
+  TermsAndConditions'
     { _tacContent :: !(Maybe UserFacingMessage)
     , _tacHeader  :: !(Maybe UserFacingMessage)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TermsAndConditions' with the minimum fields required to make a request.
 --
@@ -5364,10 +5418,7 @@ data TermsAndConditions = TermsAndConditions'
 termsAndConditions
     :: TermsAndConditions
 termsAndConditions =
-    TermsAndConditions'
-    { _tacContent = Nothing
-    , _tacHeader = Nothing
-    }
+  TermsAndConditions' {_tacContent = Nothing, _tacHeader = Nothing}
 
 -- | A well-formatted HTML string. It will be parsed on the client with
 -- android.text.Html#fromHtml.
@@ -5403,9 +5454,11 @@ instance ToJSON TermsAndConditions where
 -- TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -5416,9 +5469,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -5438,10 +5489,12 @@ instance ToJSON OperationResponse where
 -- length is 4096 characters.
 --
 -- /See:/ 'userFacingMessage' smart constructor.
-data UserFacingMessage = UserFacingMessage'
+data UserFacingMessage =
+  UserFacingMessage'
     { _ufmLocalizedMessages :: !(Maybe UserFacingMessageLocalizedMessages)
     , _ufmDefaultMessage    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserFacingMessage' with the minimum fields required to make a request.
 --
@@ -5453,10 +5506,8 @@ data UserFacingMessage = UserFacingMessage'
 userFacingMessage
     :: UserFacingMessage
 userFacingMessage =
-    UserFacingMessage'
-    { _ufmLocalizedMessages = Nothing
-    , _ufmDefaultMessage = Nothing
-    }
+  UserFacingMessage'
+    {_ufmLocalizedMessages = Nothing, _ufmDefaultMessage = Nothing}
 
 -- | A map containing pairs, where locale is a well-formed BCP 47 language
 -- (https:\/\/www.w3.org\/International\/articles\/language-tags\/) code,
@@ -5492,7 +5543,8 @@ instance ToJSON UserFacingMessage where
 -- | Information about device software.
 --
 -- /See:/ 'softwareInfo' smart constructor.
-data SoftwareInfo = SoftwareInfo'
+data SoftwareInfo =
+  SoftwareInfo'
     { _siSecurityPatchLevel             :: !(Maybe Text)
     , _siAndroidDevicePolicyVersionName :: !(Maybe Text)
     , _siDeviceKernelVersion            :: !(Maybe Text)
@@ -5503,7 +5555,8 @@ data SoftwareInfo = SoftwareInfo'
     , _siPrimaryLanguageCode            :: !(Maybe Text)
     , _siAndroidBuildNumber             :: !(Maybe Text)
     , _siAndroidVersion                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SoftwareInfo' with the minimum fields required to make a request.
 --
@@ -5531,7 +5584,7 @@ data SoftwareInfo = SoftwareInfo'
 softwareInfo
     :: SoftwareInfo
 softwareInfo =
-    SoftwareInfo'
+  SoftwareInfo'
     { _siSecurityPatchLevel = Nothing
     , _siAndroidDevicePolicyVersionName = Nothing
     , _siDeviceKernelVersion = Nothing
@@ -5649,11 +5702,13 @@ instance ToJSON SoftwareInfo where
 -- | A permission required by the app.
 --
 -- /See:/ 'applicationPermission' smart constructor.
-data ApplicationPermission = ApplicationPermission'
+data ApplicationPermission =
+  ApplicationPermission'
     { _apName         :: !(Maybe Text)
     , _apDescription  :: !(Maybe Text)
     , _apPermissionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApplicationPermission' with the minimum fields required to make a request.
 --
@@ -5667,11 +5722,8 @@ data ApplicationPermission = ApplicationPermission'
 applicationPermission
     :: ApplicationPermission
 applicationPermission =
-    ApplicationPermission'
-    { _apName = Nothing
-    , _apDescription = Nothing
-    , _apPermissionId = Nothing
-    }
+  ApplicationPermission'
+    {_apName = Nothing, _apDescription = Nothing, _apPermissionId = Nothing}
 
 -- | The name of the permission. Localized.
 apName :: Lens' ApplicationPermission (Maybe Text)

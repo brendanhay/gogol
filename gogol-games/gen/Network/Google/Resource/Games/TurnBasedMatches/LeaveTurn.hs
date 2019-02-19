@@ -61,12 +61,14 @@ type TurnBasedMatchesLeaveTurnResource =
 -- canceling the match.
 --
 -- /See:/ 'turnBasedMatchesLeaveTurn' smart constructor.
-data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn'
+data TurnBasedMatchesLeaveTurn =
+  TurnBasedMatchesLeaveTurn'
     { _tbmltLanguage             :: !(Maybe Text)
     , _tbmltPendingParticipantId :: !(Maybe Text)
     , _tbmltMatchId              :: !Text
     , _tbmltMatchVersion         :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesLeaveTurn' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ turnBasedMatchesLeaveTurn
     -> Int32 -- ^ 'tbmltMatchVersion'
     -> TurnBasedMatchesLeaveTurn
 turnBasedMatchesLeaveTurn pTbmltMatchId_ pTbmltMatchVersion_ =
-    TurnBasedMatchesLeaveTurn'
+  TurnBasedMatchesLeaveTurn'
     { _tbmltLanguage = Nothing
     , _tbmltPendingParticipantId = Nothing
     , _tbmltMatchId = pTbmltMatchId_

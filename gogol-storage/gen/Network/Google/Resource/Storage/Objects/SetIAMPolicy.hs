@@ -61,13 +61,15 @@ type ObjectsSetIAMPolicyResource =
 -- | Updates an IAM policy for the specified object.
 --
 -- /See:/ 'objectsSetIAMPolicy' smart constructor.
-data ObjectsSetIAMPolicy = ObjectsSetIAMPolicy'
+data ObjectsSetIAMPolicy =
+  ObjectsSetIAMPolicy'
     { _osipBucket      :: !Text
     , _osipPayload     :: !Policy
     , _osipUserProject :: !(Maybe Text)
     , _osipObject      :: !Text
     , _osipGeneration  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ObjectsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ objectsSetIAMPolicy
     -> Text -- ^ 'osipObject'
     -> ObjectsSetIAMPolicy
 objectsSetIAMPolicy pOsipBucket_ pOsipPayload_ pOsipObject_ =
-    ObjectsSetIAMPolicy'
+  ObjectsSetIAMPolicy'
     { _osipBucket = pOsipBucket_
     , _osipPayload = pOsipPayload_
     , _osipUserProject = Nothing

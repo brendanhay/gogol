@@ -63,13 +63,15 @@ type GlobalOperationsListResource =
 -- project.
 --
 -- /See:/ 'globalOperationsList' smart constructor.
-data GlobalOperationsList = GlobalOperationsList'
+data GlobalOperationsList =
+  GlobalOperationsList'
     { _golOrderBy    :: !(Maybe Text)
     , _golProject    :: !Text
     , _golFilter     :: !(Maybe Text)
     , _golPageToken  :: !(Maybe Text)
     , _golMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GlobalOperationsList' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ globalOperationsList
     :: Text -- ^ 'golProject'
     -> GlobalOperationsList
 globalOperationsList pGolProject_ =
-    GlobalOperationsList'
+  GlobalOperationsList'
     { _golOrderBy = Nothing
     , _golProject = pGolProject_
     , _golFilter = Nothing

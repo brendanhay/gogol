@@ -55,9 +55,11 @@ type PawsGetSpectrumBatchResource =
 -- method always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsGetSpectrumBatch' smart constructor.
-newtype PawsGetSpectrumBatch = PawsGetSpectrumBatch'
+newtype PawsGetSpectrumBatch =
+  PawsGetSpectrumBatch'
     { _pgsbPayload :: PawsGetSpectrumBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatch' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ pawsGetSpectrumBatch
     :: PawsGetSpectrumBatchRequest -- ^ 'pgsbPayload'
     -> PawsGetSpectrumBatch
 pawsGetSpectrumBatch pPgsbPayload_ =
-    PawsGetSpectrumBatch'
-    { _pgsbPayload = pPgsbPayload_
-    }
+  PawsGetSpectrumBatch' {_pgsbPayload = pPgsbPayload_}
 
 -- | Multipart request metadata.
 pgsbPayload :: Lens' PawsGetSpectrumBatch PawsGetSpectrumBatchRequest

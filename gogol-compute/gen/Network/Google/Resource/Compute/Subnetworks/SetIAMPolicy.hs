@@ -63,12 +63,14 @@ type SubnetworksSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'subnetworksSetIAMPolicy' smart constructor.
-data SubnetworksSetIAMPolicy = SubnetworksSetIAMPolicy'
+data SubnetworksSetIAMPolicy =
+  SubnetworksSetIAMPolicy'
     { _ssiampProject  :: !Text
     , _ssiampPayload  :: !RegionSetPolicyRequest
     , _ssiampResource :: !Text
     , _ssiampRegion   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ subnetworksSetIAMPolicy
     -> Text -- ^ 'ssiampRegion'
     -> SubnetworksSetIAMPolicy
 subnetworksSetIAMPolicy pSsiampProject_ pSsiampPayload_ pSsiampResource_ pSsiampRegion_ =
-    SubnetworksSetIAMPolicy'
+  SubnetworksSetIAMPolicy'
     { _ssiampProject = pSsiampProject_
     , _ssiampPayload = pSsiampPayload_
     , _ssiampResource = pSsiampResource_

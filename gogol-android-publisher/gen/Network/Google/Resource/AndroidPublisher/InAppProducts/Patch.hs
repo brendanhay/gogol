@@ -61,12 +61,14 @@ type InAppProductsPatchResource =
 -- semantics.
 --
 -- /See:/ 'inAppProductsPatch' smart constructor.
-data InAppProductsPatch = InAppProductsPatch'
+data InAppProductsPatch =
+  InAppProductsPatch'
     { _iAppAutoConvertMissingPrices :: !(Maybe Bool)
     , _iAppPackageName              :: !Text
     , _iAppPayload                  :: !InAppProduct
     , _iAppSKU                      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InAppProductsPatch' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ inAppProductsPatch
     -> Text -- ^ 'iAppSKU'
     -> InAppProductsPatch
 inAppProductsPatch pIAppPackageName_ pIAppPayload_ pIAppSKU_ =
-    InAppProductsPatch'
+  InAppProductsPatch'
     { _iAppAutoConvertMissingPrices = Nothing
     , _iAppPackageName = pIAppPackageName_
     , _iAppPayload = pIAppPayload_

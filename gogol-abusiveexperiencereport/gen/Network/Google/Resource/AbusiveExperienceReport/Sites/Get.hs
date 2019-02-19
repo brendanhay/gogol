@@ -60,14 +60,16 @@ type SitesGetResource =
 -- | Gets a summary of the abusive experience rating of a site.
 --
 -- /See:/ 'sitesGet' smart constructor.
-data SitesGet = SitesGet'
+data SitesGet =
+  SitesGet'
     { _sgXgafv          :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
     , _sgAccessToken    :: !(Maybe Text)
     , _sgUploadType     :: !(Maybe Text)
     , _sgName           :: !Text
     , _sgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ sitesGet
     :: Text -- ^ 'sgName'
     -> SitesGet
 sitesGet pSgName_ =
-    SitesGet'
+  SitesGet'
     { _sgXgafv = Nothing
     , _sgUploadProtocol = Nothing
     , _sgAccessToken = Nothing

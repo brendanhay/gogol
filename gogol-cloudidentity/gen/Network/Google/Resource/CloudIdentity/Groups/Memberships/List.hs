@@ -67,7 +67,8 @@ type GroupsMembershipsListResource =
 -- | List Memberships within a Group.
 --
 -- /See:/ 'groupsMembershipsList' smart constructor.
-data GroupsMembershipsList = GroupsMembershipsList'
+data GroupsMembershipsList =
+  GroupsMembershipsList'
     { _groParent         :: !Text
     , _groXgafv          :: !(Maybe Xgafv)
     , _groUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data GroupsMembershipsList = GroupsMembershipsList'
     , _groPageToken      :: !(Maybe Text)
     , _groPageSize       :: !(Maybe (Textual Int32))
     , _groCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsMembershipsList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ groupsMembershipsList
     :: Text -- ^ 'groParent'
     -> GroupsMembershipsList
 groupsMembershipsList pGroParent_ =
-    GroupsMembershipsList'
+  GroupsMembershipsList'
     { _groParent = pGroParent_
     , _groXgafv = Nothing
     , _groUploadProtocol = Nothing

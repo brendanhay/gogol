@@ -62,11 +62,13 @@ type DataSetsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'dataSetsPatch' smart constructor.
-data DataSetsPatch = DataSetsPatch'
+data DataSetsPatch =
+  DataSetsPatch'
     { _dspPayload   :: !DataSet
     , _dspDataSetId :: !Text
     , _dspProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetsPatch' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ dataSetsPatch
     -> Text -- ^ 'dspProjectId'
     -> DataSetsPatch
 dataSetsPatch pDspPayload_ pDspDataSetId_ pDspProjectId_ =
-    DataSetsPatch'
+  DataSetsPatch'
     { _dspPayload = pDspPayload_
     , _dspDataSetId = pDspDataSetId_
     , _dspProjectId = pDspProjectId_

@@ -54,10 +54,12 @@ type ShippingSettingsGetResource =
 -- | Retrieves the shipping settings of the account.
 --
 -- /See:/ 'shippingSettingsGet' smart constructor.
-data ShippingSettingsGet = ShippingSettingsGet'
+data ShippingSettingsGet =
+  ShippingSettingsGet'
     { _shiMerchantId :: !(Textual Word64)
     , _shiAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShippingSettingsGet' with the minimum fields required to make a request.
 --
@@ -71,7 +73,7 @@ shippingSettingsGet
     -> Word64 -- ^ 'shiAccountId'
     -> ShippingSettingsGet
 shippingSettingsGet pShiMerchantId_ pShiAccountId_ =
-    ShippingSettingsGet'
+  ShippingSettingsGet'
     { _shiMerchantId = _Coerce # pShiMerchantId_
     , _shiAccountId = _Coerce # pShiAccountId_
     }

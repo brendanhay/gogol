@@ -64,7 +64,8 @@ type AppsFirewallIngressRulesGetResource =
 -- | Gets the specified firewall rule.
 --
 -- /See:/ 'appsFirewallIngressRulesGet' smart constructor.
-data AppsFirewallIngressRulesGet = AppsFirewallIngressRulesGet'
+data AppsFirewallIngressRulesGet =
+  AppsFirewallIngressRulesGet'
     { _afirgXgafv          :: !(Maybe Xgafv)
     , _afirgUploadProtocol :: !(Maybe Text)
     , _afirgAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data AppsFirewallIngressRulesGet = AppsFirewallIngressRulesGet'
     , _afirgIngressRulesId :: !Text
     , _afirgAppsId         :: !Text
     , _afirgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsFirewallIngressRulesGet' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ appsFirewallIngressRulesGet
     -> Text -- ^ 'afirgAppsId'
     -> AppsFirewallIngressRulesGet
 appsFirewallIngressRulesGet pAfirgIngressRulesId_ pAfirgAppsId_ =
-    AppsFirewallIngressRulesGet'
+  AppsFirewallIngressRulesGet'
     { _afirgXgafv = Nothing
     , _afirgUploadProtocol = Nothing
     , _afirgAccessToken = Nothing

@@ -386,36 +386,36 @@ bigtableAdminService
 
 -- | Administer your Cloud Bigtable clusters
 bigtableAdminClusterScope :: Proxy '["https://www.googleapis.com/auth/bigtable.admin.cluster"]
-bigtableAdminClusterScope = Proxy;
+bigtableAdminClusterScope = Proxy
 
 -- | Administer your Cloud Bigtable tables
 cloudBigtableAdminTableScope :: Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin.table"]
-cloudBigtableAdminTableScope = Proxy;
+cloudBigtableAdminTableScope = Proxy
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | Administer your Cloud Bigtable tables and clusters
 bigtableAdminScope :: Proxy '["https://www.googleapis.com/auth/bigtable.admin"]
-bigtableAdminScope = Proxy;
+bigtableAdminScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | Administer your Cloud Bigtable tables and clusters
 cloudBigtableAdminScope :: Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin"]
-cloudBigtableAdminScope = Proxy;
+cloudBigtableAdminScope = Proxy
 
 -- | Administer your Cloud Bigtable clusters
 cloudBigtableAdminClusterScope :: Proxy '["https://www.googleapis.com/auth/cloud-bigtable.admin.cluster"]
-cloudBigtableAdminClusterScope = Proxy;
+cloudBigtableAdminClusterScope = Proxy
 
 -- | Administer your Cloud Bigtable tables
 bigtableAdminTableScope :: Proxy '["https://www.googleapis.com/auth/bigtable.admin.table"]
-bigtableAdminTableScope = Proxy;
+bigtableAdminTableScope = Proxy
 
 -- | Administer your Cloud Bigtable clusters
 bigtableAdminInstanceScope :: Proxy '["https://www.googleapis.com/auth/bigtable.admin.instance"]
-bigtableAdminInstanceScope = Proxy;
+bigtableAdminInstanceScope = Proxy

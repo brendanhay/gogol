@@ -61,7 +61,8 @@ type ProjectsInstancesClustersUpdateResource =
 -- | Updates a cluster within an instance.
 --
 -- /See:/ 'projectsInstancesClustersUpdate' smart constructor.
-data ProjectsInstancesClustersUpdate = ProjectsInstancesClustersUpdate'
+data ProjectsInstancesClustersUpdate =
+  ProjectsInstancesClustersUpdate'
     { _picuXgafv          :: !(Maybe Xgafv)
     , _picuUploadProtocol :: !(Maybe Text)
     , _picuAccessToken    :: !(Maybe Text)
@@ -69,7 +70,8 @@ data ProjectsInstancesClustersUpdate = ProjectsInstancesClustersUpdate'
     , _picuPayload        :: !Cluster
     , _picuName           :: !Text
     , _picuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesClustersUpdate' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ projectsInstancesClustersUpdate
     -> Text -- ^ 'picuName'
     -> ProjectsInstancesClustersUpdate
 projectsInstancesClustersUpdate pPicuPayload_ pPicuName_ =
-    ProjectsInstancesClustersUpdate'
+  ProjectsInstancesClustersUpdate'
     { _picuXgafv = Nothing
     , _picuUploadProtocol = Nothing
     , _picuAccessToken = Nothing
@@ -142,7 +144,8 @@ picuCallback
   = lens _picuCallback (\ s a -> s{_picuCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesClustersUpdate where
+           ProjectsInstancesClustersUpdate
+         where
         type Rs ProjectsInstancesClustersUpdate = Operation
         type Scopes ProjectsInstancesClustersUpdate =
              '["https://www.googleapis.com/auth/bigtable.admin",

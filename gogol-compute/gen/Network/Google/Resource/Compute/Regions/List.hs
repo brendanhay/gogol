@@ -62,13 +62,15 @@ type RegionsListResource =
 -- project.
 --
 -- /See:/ 'regionsList' smart constructor.
-data RegionsList = RegionsList'
+data RegionsList =
+  RegionsList'
     { _regOrderBy    :: !(Maybe Text)
     , _regProject    :: !Text
     , _regFilter     :: !(Maybe Text)
     , _regPageToken  :: !(Maybe Text)
     , _regMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionsList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ regionsList
     :: Text -- ^ 'regProject'
     -> RegionsList
 regionsList pRegProject_ =
-    RegionsList'
+  RegionsList'
     { _regOrderBy = Nothing
     , _regProject = pRegProject_
     , _regFilter = Nothing

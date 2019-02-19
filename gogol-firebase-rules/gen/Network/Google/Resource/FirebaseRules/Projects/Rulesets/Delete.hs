@@ -61,14 +61,16 @@ type ProjectsRulesetsDeleteResource =
 -- by a \`Release\` the operation will fail.
 --
 -- /See:/ 'projectsRulesetsDelete' smart constructor.
-data ProjectsRulesetsDelete = ProjectsRulesetsDelete'
+data ProjectsRulesetsDelete =
+  ProjectsRulesetsDelete'
     { _proXgafv          :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
     , _proAccessToken    :: !(Maybe Text)
     , _proUploadType     :: !(Maybe Text)
     , _proName           :: !Text
     , _proCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRulesetsDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsRulesetsDelete
     :: Text -- ^ 'proName'
     -> ProjectsRulesetsDelete
 projectsRulesetsDelete pProName_ =
-    ProjectsRulesetsDelete'
+  ProjectsRulesetsDelete'
     { _proXgafv = Nothing
     , _proUploadProtocol = Nothing
     , _proAccessToken = Nothing

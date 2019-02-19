@@ -65,7 +65,8 @@ type BillingAccountsExclusionsListResource =
 -- | Lists all the exclusions in a parent resource.
 --
 -- /See:/ 'billingAccountsExclusionsList' smart constructor.
-data BillingAccountsExclusionsList = BillingAccountsExclusionsList'
+data BillingAccountsExclusionsList =
+  BillingAccountsExclusionsList'
     { _baelParent         :: !Text
     , _baelXgafv          :: !(Maybe Xgafv)
     , _baelUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data BillingAccountsExclusionsList = BillingAccountsExclusionsList'
     , _baelPageToken      :: !(Maybe Text)
     , _baelPageSize       :: !(Maybe (Textual Int32))
     , _baelCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsExclusionsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ billingAccountsExclusionsList
     :: Text -- ^ 'baelParent'
     -> BillingAccountsExclusionsList
 billingAccountsExclusionsList pBaelParent_ =
-    BillingAccountsExclusionsList'
+  BillingAccountsExclusionsList'
     { _baelParent = pBaelParent_
     , _baelXgafv = Nothing
     , _baelUploadProtocol = Nothing

@@ -54,10 +54,12 @@ type UsersDeleteResource =
 -- | Deleted an EMM-managed user.
 --
 -- /See:/ 'usersDelete' smart constructor.
-data UsersDelete = UsersDelete'
+data UsersDelete =
+  UsersDelete'
     { _udEnterpriseId :: !Text
     , _udUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ usersDelete
     -> Text -- ^ 'udUserId'
     -> UsersDelete
 usersDelete pUdEnterpriseId_ pUdUserId_ =
-    UsersDelete'
-    { _udEnterpriseId = pUdEnterpriseId_
-    , _udUserId = pUdUserId_
-    }
+  UsersDelete' {_udEnterpriseId = pUdEnterpriseId_, _udUserId = pUdUserId_}
 
 -- | The ID of the enterprise.
 udEnterpriseId :: Lens' UsersDelete Text

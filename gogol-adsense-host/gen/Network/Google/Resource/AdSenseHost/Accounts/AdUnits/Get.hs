@@ -57,11 +57,13 @@ type AccountsAdUnitsGetResource =
 -- | Get the specified host ad unit in this AdSense account.
 --
 -- /See:/ 'accountsAdUnitsGet' smart constructor.
-data AccountsAdUnitsGet = AccountsAdUnitsGet'
+data AccountsAdUnitsGet =
+  AccountsAdUnitsGet'
     { _aaugAdUnitId   :: !Text
     , _aaugAdClientId :: !Text
     , _aaugAccountId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsAdUnitsGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ accountsAdUnitsGet
     -> Text -- ^ 'aaugAccountId'
     -> AccountsAdUnitsGet
 accountsAdUnitsGet pAaugAdUnitId_ pAaugAdClientId_ pAaugAccountId_ =
-    AccountsAdUnitsGet'
+  AccountsAdUnitsGet'
     { _aaugAdUnitId = pAaugAdUnitId_
     , _aaugAdClientId = pAaugAdClientId_
     , _aaugAccountId = pAaugAccountId_

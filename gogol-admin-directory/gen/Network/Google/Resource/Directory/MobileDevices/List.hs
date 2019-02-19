@@ -68,7 +68,8 @@ type MobileDevicesListResource =
 -- | Retrieve all Mobile Devices of a customer (paginated)
 --
 -- /See:/ 'mobileDevicesList' smart constructor.
-data MobileDevicesList = MobileDevicesList'
+data MobileDevicesList =
+  MobileDevicesList'
     { _mdlOrderBy    :: !(Maybe MobileDevicesListOrderBy)
     , _mdlCustomerId :: !Text
     , _mdlSortOrder  :: !(Maybe MobileDevicesListSortOrder)
@@ -76,7 +77,8 @@ data MobileDevicesList = MobileDevicesList'
     , _mdlProjection :: !(Maybe MobileDevicesListProjection)
     , _mdlPageToken  :: !(Maybe Text)
     , _mdlMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileDevicesList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ mobileDevicesList
     :: Text -- ^ 'mdlCustomerId'
     -> MobileDevicesList
 mobileDevicesList pMdlCustomerId_ =
-    MobileDevicesList'
+  MobileDevicesList'
     { _mdlOrderBy = Nothing
     , _mdlCustomerId = pMdlCustomerId_
     , _mdlSortOrder = Nothing

@@ -90,7 +90,8 @@ type ActionResultsUpdateResource =
 -- insufficient storage space to add the entry to the cache.
 --
 -- /See:/ 'actionResultsUpdate' smart constructor.
-data ActionResultsUpdate = ActionResultsUpdate'
+data ActionResultsUpdate =
+  ActionResultsUpdate'
     { _aruSizeBytes                  :: !(Textual Int64)
     , _aruXgafv                      :: !(Maybe Xgafv)
     , _aruHash                       :: !Text
@@ -101,7 +102,8 @@ data ActionResultsUpdate = ActionResultsUpdate'
     , _aruResultsCachePolicyPriority :: !(Maybe (Textual Int32))
     , _aruInstanceName               :: !Text
     , _aruCallback                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActionResultsUpdate' with the minimum fields required to make a request.
 --
@@ -133,7 +135,7 @@ actionResultsUpdate
     -> Text -- ^ 'aruInstanceName'
     -> ActionResultsUpdate
 actionResultsUpdate pAruSizeBytes_ pAruHash_ pAruPayload_ pAruInstanceName_ =
-    ActionResultsUpdate'
+  ActionResultsUpdate'
     { _aruSizeBytes = _Coerce # pAruSizeBytes_
     , _aruXgafv = Nothing
     , _aruHash = pAruHash_

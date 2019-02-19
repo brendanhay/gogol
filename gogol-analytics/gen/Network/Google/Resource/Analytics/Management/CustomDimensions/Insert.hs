@@ -59,11 +59,13 @@ type ManagementCustomDimensionsInsertResource =
 -- | Create a new custom dimension.
 --
 -- /See:/ 'managementCustomDimensionsInsert' smart constructor.
-data ManagementCustomDimensionsInsert = ManagementCustomDimensionsInsert'
+data ManagementCustomDimensionsInsert =
+  ManagementCustomDimensionsInsert'
     { _mcdiWebPropertyId :: !Text
     , _mcdiPayload       :: !CustomDimension
     , _mcdiAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ managementCustomDimensionsInsert
     -> Text -- ^ 'mcdiAccountId'
     -> ManagementCustomDimensionsInsert
 managementCustomDimensionsInsert pMcdiWebPropertyId_ pMcdiPayload_ pMcdiAccountId_ =
-    ManagementCustomDimensionsInsert'
+  ManagementCustomDimensionsInsert'
     { _mcdiWebPropertyId = pMcdiWebPropertyId_
     , _mcdiPayload = pMcdiPayload_
     , _mcdiAccountId = pMcdiAccountId_
@@ -104,7 +106,8 @@ mcdiAccountId
       (\ s a -> s{_mcdiAccountId = a})
 
 instance GoogleRequest
-         ManagementCustomDimensionsInsert where
+           ManagementCustomDimensionsInsert
+         where
         type Rs ManagementCustomDimensionsInsert =
              CustomDimension
         type Scopes ManagementCustomDimensionsInsert =

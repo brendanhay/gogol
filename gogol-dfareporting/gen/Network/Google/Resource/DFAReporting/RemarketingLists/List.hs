@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsList' request conforms to.
 type RemarketingListsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
@@ -73,7 +73,8 @@ type RemarketingListsListResource =
 -- supports paging.
 --
 -- /See:/ 'remarketingListsList' smart constructor.
-data RemarketingListsList = RemarketingListsList'
+data RemarketingListsList =
+  RemarketingListsList'
     { _rllFloodlightActivityId :: !(Maybe (Textual Int64))
     , _rllAdvertiserId         :: !(Textual Int64)
     , _rllProFileId            :: !(Textual Int64)
@@ -83,7 +84,8 @@ data RemarketingListsList = RemarketingListsList'
     , _rllPageToken            :: !(Maybe Text)
     , _rllSortField            :: !RemarketingListsListSortField
     , _rllMaxResults           :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RemarketingListsList' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ remarketingListsList
     -> Int64 -- ^ 'rllProFileId'
     -> RemarketingListsList
 remarketingListsList pRllAdvertiserId_ pRllProFileId_ =
-    RemarketingListsList'
+  RemarketingListsList'
     { _rllFloodlightActivityId = Nothing
     , _rllAdvertiserId = _Coerce # pRllAdvertiserId_
     , _rllProFileId = _Coerce # pRllProFileId_

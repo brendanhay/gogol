@@ -63,14 +63,16 @@ type ProjectsInstancesOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'projectsInstancesOperationsGet' smart constructor.
-data ProjectsInstancesOperationsGet = ProjectsInstancesOperationsGet'
+data ProjectsInstancesOperationsGet =
+  ProjectsInstancesOperationsGet'
     { _piogXgafv          :: !(Maybe Xgafv)
     , _piogUploadProtocol :: !(Maybe Text)
     , _piogAccessToken    :: !(Maybe Text)
     , _piogUploadType     :: !(Maybe Text)
     , _piogName           :: !Text
     , _piogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesOperationsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ projectsInstancesOperationsGet
     :: Text -- ^ 'piogName'
     -> ProjectsInstancesOperationsGet
 projectsInstancesOperationsGet pPiogName_ =
-    ProjectsInstancesOperationsGet'
+  ProjectsInstancesOperationsGet'
     { _piogXgafv = Nothing
     , _piogUploadProtocol = Nothing
     , _piogAccessToken = Nothing

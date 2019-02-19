@@ -74,7 +74,8 @@ type AccountsProposalsPauseResource =
 -- not finalized or renegotiating.
 --
 -- /See:/ 'accountsProposalsPause' smart constructor.
-data AccountsProposalsPause = AccountsProposalsPause'
+data AccountsProposalsPause =
+  AccountsProposalsPause'
     { _appXgafv          :: !(Maybe Xgafv)
     , _appUploadProtocol :: !(Maybe Text)
     , _appAccessToken    :: !(Maybe Text)
@@ -83,7 +84,8 @@ data AccountsProposalsPause = AccountsProposalsPause'
     , _appProposalId     :: !Text
     , _appAccountId      :: !Text
     , _appCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsProposalsPause' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ accountsProposalsPause
     -> Text -- ^ 'appAccountId'
     -> AccountsProposalsPause
 accountsProposalsPause pAppPayload_ pAppProposalId_ pAppAccountId_ =
-    AccountsProposalsPause'
+  AccountsProposalsPause'
     { _appXgafv = Nothing
     , _appUploadProtocol = Nothing
     , _appAccessToken = Nothing

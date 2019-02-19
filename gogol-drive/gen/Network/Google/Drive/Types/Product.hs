@@ -23,12 +23,14 @@ import           Network.Google.Prelude
 -- | A list of files.
 --
 -- /See:/ 'fileList' smart constructor.
-data FileList = FileList'
+data FileList =
+  FileList'
     { _flNextPageToken    :: !(Maybe Text)
     , _flIncompleteSearch :: !(Maybe Bool)
     , _flKind             :: !Text
     , _flFiles            :: !(Maybe [File])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileList' with the minimum fields required to make a request.
 --
@@ -44,7 +46,7 @@ data FileList = FileList'
 fileList
     :: FileList
 fileList =
-    FileList'
+  FileList'
     { _flNextPageToken = Nothing
     , _flIncompleteSearch = Nothing
     , _flKind = "drive#fileList"
@@ -104,7 +106,8 @@ instance ToJSON FileList where
 -- | Capabilities the current user has on this Team Drive.
 --
 -- /See:/ 'teamDriveCapabilities' smart constructor.
-data TeamDriveCapabilities = TeamDriveCapabilities'
+data TeamDriveCapabilities =
+  TeamDriveCapabilities'
     { _tdcCanRename                                        :: !(Maybe Bool)
     , _tdcCanChangeTeamMembersOnlyRestriction              :: !(Maybe Bool)
     , _tdcCanComment                                       :: !(Maybe Bool)
@@ -124,7 +127,8 @@ data TeamDriveCapabilities = TeamDriveCapabilities'
     , _tdcCanDeleteChildren                                :: !(Maybe Bool)
     , _tdcCanCopy                                          :: !(Maybe Bool)
     , _tdcCanShare                                         :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TeamDriveCapabilities' with the minimum fields required to make a request.
 --
@@ -170,7 +174,7 @@ data TeamDriveCapabilities = TeamDriveCapabilities'
 teamDriveCapabilities
     :: TeamDriveCapabilities
 teamDriveCapabilities =
-    TeamDriveCapabilities'
+  TeamDriveCapabilities'
     { _tdcCanRename = Nothing
     , _tdcCanChangeTeamMembersOnlyRestriction = Nothing
     , _tdcCanComment = Nothing
@@ -379,10 +383,12 @@ instance ToJSON TeamDriveCapabilities where
 -- the location of the comment.
 --
 -- /See:/ 'commentQuotedFileContent' smart constructor.
-data CommentQuotedFileContent = CommentQuotedFileContent'
+data CommentQuotedFileContent =
+  CommentQuotedFileContent'
     { _cqfcValue    :: !(Maybe Text)
     , _cqfcMimeType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentQuotedFileContent' with the minimum fields required to make a request.
 --
@@ -394,10 +400,7 @@ data CommentQuotedFileContent = CommentQuotedFileContent'
 commentQuotedFileContent
     :: CommentQuotedFileContent
 commentQuotedFileContent =
-    CommentQuotedFileContent'
-    { _cqfcValue = Nothing
-    , _cqfcMimeType = Nothing
-    }
+  CommentQuotedFileContent' {_cqfcValue = Nothing, _cqfcMimeType = Nothing}
 
 -- | The quoted content itself. This is interpreted as plain text if set
 -- through the API.
@@ -428,12 +431,14 @@ instance ToJSON CommentQuotedFileContent where
 -- bytes.
 --
 -- /See:/ 'aboutStorageQuota' smart constructor.
-data AboutStorageQuota = AboutStorageQuota'
+data AboutStorageQuota =
+  AboutStorageQuota'
     { _asqUsageInDriveTrash :: !(Maybe (Textual Int64))
     , _asqLimit             :: !(Maybe (Textual Int64))
     , _asqUsage             :: !(Maybe (Textual Int64))
     , _asqUsageInDrive      :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AboutStorageQuota' with the minimum fields required to make a request.
 --
@@ -449,7 +454,7 @@ data AboutStorageQuota = AboutStorageQuota'
 aboutStorageQuota
     :: AboutStorageQuota
 aboutStorageQuota =
-    AboutStorageQuota'
+  AboutStorageQuota'
     { _asqUsageInDriveTrash = Nothing
     , _asqLimit = Nothing
     , _asqUsage = Nothing
@@ -504,7 +509,8 @@ instance ToJSON AboutStorageQuota where
 -- | A reply to a comment on a file.
 --
 -- /See:/ 'reply' smart constructor.
-data Reply = Reply'
+data Reply =
+  Reply'
     { _rHTMLContent  :: !(Maybe Text)
     , _rModifiedTime :: !(Maybe DateTime')
     , _rCreatedTime  :: !(Maybe DateTime')
@@ -514,7 +520,8 @@ data Reply = Reply'
     , _rAuthor       :: !(Maybe User)
     , _rId           :: !(Maybe Text)
     , _rDeleted      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Reply' with the minimum fields required to make a request.
 --
@@ -540,7 +547,7 @@ data Reply = Reply'
 reply
     :: Reply
 reply =
-    Reply'
+  Reply'
     { _rHTMLContent = Nothing
     , _rModifiedTime = Nothing
     , _rCreatedTime = Nothing
@@ -627,9 +634,11 @@ instance ToJSON Reply where
 -- | A map of source MIME type to possible targets for all supported imports.
 --
 -- /See:/ 'aboutImportFormats' smart constructor.
-newtype AboutImportFormats = AboutImportFormats'
+newtype AboutImportFormats =
+  AboutImportFormats'
     { _aifAddtional :: HashMap Text [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AboutImportFormats' with the minimum fields required to make a request.
 --
@@ -640,9 +649,7 @@ aboutImportFormats
     :: HashMap Text [Text] -- ^ 'aifAddtional'
     -> AboutImportFormats
 aboutImportFormats pAifAddtional_ =
-    AboutImportFormats'
-    { _aifAddtional = _Coerce # pAifAddtional_
-    }
+  AboutImportFormats' {_aifAddtional = _Coerce # pAifAddtional_}
 
 aifAddtional :: Lens' AboutImportFormats (HashMap Text [Text])
 aifAddtional
@@ -661,7 +668,8 @@ instance ToJSON AboutImportFormats where
 -- corresponds to a fine-grained action that a user may take.
 --
 -- /See:/ 'fileCapabilities' smart constructor.
-data FileCapabilities = FileCapabilities'
+data FileCapabilities =
+  FileCapabilities'
     { _fcCanRename                             :: !(Maybe Bool)
     , _fcCanComment                            :: !(Maybe Bool)
     , _fcCanMoveChildrenWithinTeamDrive        :: !(Maybe Bool)
@@ -686,7 +694,8 @@ data FileCapabilities = FileCapabilities'
     , _fcCanMoveItemOutOfTeamDrive             :: !(Maybe Bool)
     , _fcCanCopy                               :: !(Maybe Bool)
     , _fcCanShare                              :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileCapabilities' with the minimum fields required to make a request.
 --
@@ -742,7 +751,7 @@ data FileCapabilities = FileCapabilities'
 fileCapabilities
     :: FileCapabilities
 fileCapabilities =
-    FileCapabilities'
+  FileCapabilities'
     { _fcCanRename = Nothing
     , _fcCanComment = Nothing
     , _fcCanMoveChildrenWithinTeamDrive = Nothing
@@ -1002,11 +1011,13 @@ instance ToJSON FileCapabilities where
 -- | A list of replies to a comment on a file.
 --
 -- /See:/ 'replyList' smart constructor.
-data ReplyList = ReplyList'
+data ReplyList =
+  ReplyList'
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
     , _rlReplies       :: !(Maybe [Reply])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplyList' with the minimum fields required to make a request.
 --
@@ -1020,7 +1031,7 @@ data ReplyList = ReplyList'
 replyList
     :: ReplyList
 replyList =
-    ReplyList'
+  ReplyList'
     { _rlNextPageToken = Nothing
     , _rlKind = "drive#replyList"
     , _rlReplies = Nothing
@@ -1069,10 +1080,12 @@ instance ToJSON ReplyList where
 -- generate a standard thumbnail.
 --
 -- /See:/ 'fileContentHintsThumbnail' smart constructor.
-data FileContentHintsThumbnail = FileContentHintsThumbnail'
+data FileContentHintsThumbnail =
+  FileContentHintsThumbnail'
     { _fchtImage    :: !(Maybe Bytes)
     , _fchtMimeType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileContentHintsThumbnail' with the minimum fields required to make a request.
 --
@@ -1084,10 +1097,7 @@ data FileContentHintsThumbnail = FileContentHintsThumbnail'
 fileContentHintsThumbnail
     :: FileContentHintsThumbnail
 fileContentHintsThumbnail =
-    FileContentHintsThumbnail'
-    { _fchtImage = Nothing
-    , _fchtMimeType = Nothing
-    }
+  FileContentHintsThumbnail' {_fchtImage = Nothing, _fchtMimeType = Nothing}
 
 -- | The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).
 fchtImage :: Lens' FileContentHintsThumbnail (Maybe ByteString)
@@ -1117,11 +1127,13 @@ instance ToJSON FileContentHintsThumbnail where
 -- | A list of Team Drives.
 --
 -- /See:/ 'teamDriveList' smart constructor.
-data TeamDriveList = TeamDriveList'
+data TeamDriveList =
+  TeamDriveList'
     { _tdlNextPageToken :: !(Maybe Text)
     , _tdlTeamDrives    :: !(Maybe [TeamDrive])
     , _tdlKind          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TeamDriveList' with the minimum fields required to make a request.
 --
@@ -1135,7 +1147,7 @@ data TeamDriveList = TeamDriveList'
 teamDriveList
     :: TeamDriveList
 teamDriveList =
-    TeamDriveList'
+  TeamDriveList'
     { _tdlNextPageToken = Nothing
     , _tdlTeamDrives = Nothing
     , _tdlKind = "drive#teamDriveList"
@@ -1184,7 +1196,8 @@ instance ToJSON TeamDriveList where
 -- | An notification channel used to watch for resource changes.
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel'
+data Channel =
+  Channel'
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
@@ -1195,7 +1208,8 @@ data Channel = Channel'
     , _cParams      :: !(Maybe ChannelParams)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
@@ -1223,7 +1237,7 @@ data Channel = Channel'
 channel
     :: Channel
 channel =
-    Channel'
+  Channel'
     { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
@@ -1315,11 +1329,13 @@ instance ToJSON Channel where
 
 --
 -- /See:/ 'aboutTeamDriveThemesItem' smart constructor.
-data AboutTeamDriveThemesItem = AboutTeamDriveThemesItem'
+data AboutTeamDriveThemesItem =
+  AboutTeamDriveThemesItem'
     { _atdtiColorRgb            :: !(Maybe Text)
     , _atdtiBackgRoundImageLink :: !(Maybe Text)
     , _atdtiId                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AboutTeamDriveThemesItem' with the minimum fields required to make a request.
 --
@@ -1333,7 +1349,7 @@ data AboutTeamDriveThemesItem = AboutTeamDriveThemesItem'
 aboutTeamDriveThemesItem
     :: AboutTeamDriveThemesItem
 aboutTeamDriveThemesItem =
-    AboutTeamDriveThemesItem'
+  AboutTeamDriveThemesItem'
     { _atdtiColorRgb = Nothing
     , _atdtiBackgRoundImageLink = Nothing
     , _atdtiId = Nothing
@@ -1376,12 +1392,14 @@ instance ToJSON AboutTeamDriveThemesItem where
 -- Team Drive.
 --
 -- /See:/ 'teamDriveRestrictions' smart constructor.
-data TeamDriveRestrictions = TeamDriveRestrictions'
+data TeamDriveRestrictions =
+  TeamDriveRestrictions'
     { _tdrTeamMembersOnly              :: !(Maybe Bool)
     , _tdrAdminManagedRestrictions     :: !(Maybe Bool)
     , _tdrCopyRequiresWriterPermission :: !(Maybe Bool)
     , _tdrDomainUsersOnly              :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TeamDriveRestrictions' with the minimum fields required to make a request.
 --
@@ -1397,7 +1415,7 @@ data TeamDriveRestrictions = TeamDriveRestrictions'
 teamDriveRestrictions
     :: TeamDriveRestrictions
 teamDriveRestrictions =
-    TeamDriveRestrictions'
+  TeamDriveRestrictions'
     { _tdrTeamMembersOnly = Nothing
     , _tdrAdminManagedRestrictions = Nothing
     , _tdrCopyRequiresWriterPermission = Nothing
@@ -1463,12 +1481,14 @@ instance ToJSON TeamDriveRestrictions where
 -- specified, all fields of the backgroundImageFile must be set.
 --
 -- /See:/ 'teamDriveBackgRoundImageFile' smart constructor.
-data TeamDriveBackgRoundImageFile = TeamDriveBackgRoundImageFile'
+data TeamDriveBackgRoundImageFile =
+  TeamDriveBackgRoundImageFile'
     { _tdbrifXCoordinate :: !(Maybe (Textual Double))
     , _tdbrifYCoordinate :: !(Maybe (Textual Double))
     , _tdbrifWidth       :: !(Maybe (Textual Double))
     , _tdbrifId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TeamDriveBackgRoundImageFile' with the minimum fields required to make a request.
 --
@@ -1484,7 +1504,7 @@ data TeamDriveBackgRoundImageFile = TeamDriveBackgRoundImageFile'
 teamDriveBackgRoundImageFile
     :: TeamDriveBackgRoundImageFile
 teamDriveBackgRoundImageFile =
-    TeamDriveBackgRoundImageFile'
+  TeamDriveBackgRoundImageFile'
     { _tdbrifXCoordinate = Nothing
     , _tdbrifYCoordinate = Nothing
     , _tdbrifWidth = Nothing
@@ -1549,11 +1569,13 @@ instance ToJSON TeamDriveBackgRoundImageFile where
 -- immediately upon upload.
 --
 -- /See:/ 'fileVideoMediaMetadata' smart constructor.
-data FileVideoMediaMetadata = FileVideoMediaMetadata'
+data FileVideoMediaMetadata =
+  FileVideoMediaMetadata'
     { _fvmmHeight         :: !(Maybe (Textual Int32))
     , _fvmmWidth          :: !(Maybe (Textual Int32))
     , _fvmmDurationMillis :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileVideoMediaMetadata' with the minimum fields required to make a request.
 --
@@ -1567,11 +1589,8 @@ data FileVideoMediaMetadata = FileVideoMediaMetadata'
 fileVideoMediaMetadata
     :: FileVideoMediaMetadata
 fileVideoMediaMetadata =
-    FileVideoMediaMetadata'
-    { _fvmmHeight = Nothing
-    , _fvmmWidth = Nothing
-    , _fvmmDurationMillis = Nothing
-    }
+  FileVideoMediaMetadata'
+    {_fvmmHeight = Nothing, _fvmmWidth = Nothing, _fvmmDurationMillis = Nothing}
 
 -- | The height of the video in pixels.
 fvmmHeight :: Lens' FileVideoMediaMetadata (Maybe Int32)
@@ -1613,9 +1632,11 @@ instance ToJSON FileVideoMediaMetadata where
 -- requests.
 --
 -- /See:/ 'fileAppProperties' smart constructor.
-newtype FileAppProperties = FileAppProperties'
+newtype FileAppProperties =
+  FileAppProperties'
     { _fapAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileAppProperties' with the minimum fields required to make a request.
 --
@@ -1626,9 +1647,7 @@ fileAppProperties
     :: HashMap Text Text -- ^ 'fapAddtional'
     -> FileAppProperties
 fileAppProperties pFapAddtional_ =
-    FileAppProperties'
-    { _fapAddtional = _Coerce # pFapAddtional_
-    }
+  FileAppProperties' {_fapAddtional = _Coerce # pFapAddtional_}
 
 fapAddtional :: Lens' FileAppProperties (HashMap Text Text)
 fapAddtional
@@ -1646,7 +1665,8 @@ instance ToJSON FileAppProperties where
 -- | A change to a file or Team Drive.
 --
 -- /See:/ 'change' smart constructor.
-data Change = Change'
+data Change =
+  Change'
     { _chaRemoved     :: !(Maybe Bool)
     , _chaTime        :: !(Maybe DateTime')
     , _chaKind        :: !Text
@@ -1655,7 +1675,8 @@ data Change = Change'
     , _chaType        :: !(Maybe Text)
     , _chaFileId      :: !(Maybe Text)
     , _chaFile        :: !(Maybe File)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Change' with the minimum fields required to make a request.
 --
@@ -1679,7 +1700,7 @@ data Change = Change'
 change
     :: Change
 change =
-    Change'
+  Change'
     { _chaRemoved = Nothing
     , _chaTime = Nothing
     , _chaKind = "drive#change"
@@ -1762,7 +1783,8 @@ instance ToJSON Change where
 -- | Representation of a Team Drive.
 --
 -- /See:/ 'teamDrive' smart constructor.
-data TeamDrive = TeamDrive'
+data TeamDrive =
+  TeamDrive'
     { _tdThemeId             :: !(Maybe Text)
     , _tdBackgRoundImageFile :: !(Maybe TeamDriveBackgRoundImageFile)
     , _tdColorRgb            :: !(Maybe Text)
@@ -1773,7 +1795,8 @@ data TeamDrive = TeamDrive'
     , _tdRestrictions        :: !(Maybe TeamDriveRestrictions)
     , _tdId                  :: !(Maybe Text)
     , _tdCapabilities        :: !(Maybe TeamDriveCapabilities)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TeamDrive' with the minimum fields required to make a request.
 --
@@ -1801,7 +1824,7 @@ data TeamDrive = TeamDrive'
 teamDrive
     :: TeamDrive
 teamDrive =
-    TeamDrive'
+  TeamDrive'
     { _tdThemeId = Nothing
     , _tdBackgRoundImageFile = Nothing
     , _tdColorRgb = Nothing
@@ -1914,9 +1937,11 @@ instance ToJSON TeamDrive where
 -- | A map of source MIME type to possible targets for all supported exports.
 --
 -- /See:/ 'aboutExportFormats' smart constructor.
-newtype AboutExportFormats = AboutExportFormats'
+newtype AboutExportFormats =
+  AboutExportFormats'
     { _aefAddtional :: HashMap Text [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AboutExportFormats' with the minimum fields required to make a request.
 --
@@ -1927,9 +1952,7 @@ aboutExportFormats
     :: HashMap Text [Text] -- ^ 'aefAddtional'
     -> AboutExportFormats
 aboutExportFormats pAefAddtional_ =
-    AboutExportFormats'
-    { _aefAddtional = _Coerce # pAefAddtional_
-    }
+  AboutExportFormats' {_aefAddtional = _Coerce # pAefAddtional_}
 
 aefAddtional :: Lens' AboutExportFormats (HashMap Text [Text])
 aefAddtional
@@ -1947,14 +1970,16 @@ instance ToJSON AboutExportFormats where
 -- | Information about a Drive user.
 --
 -- /See:/ 'user' smart constructor.
-data User = User'
+data User =
+  User'
     { _uPhotoLink    :: !(Maybe Text)
     , _uMe           :: !(Maybe Bool)
     , _uKind         :: !Text
     , _uEmailAddress :: !(Maybe Text)
     , _uDisplayName  :: !(Maybe Text)
     , _uPermissionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -1974,7 +1999,7 @@ data User = User'
 user
     :: User
 user =
-    User'
+  User'
     { _uPhotoLink = Nothing
     , _uMe = Nothing
     , _uKind = "drive#user"
@@ -2040,12 +2065,14 @@ instance ToJSON User where
 -- | A list of changes for a user.
 --
 -- /See:/ 'changeList' smart constructor.
-data ChangeList = ChangeList'
+data ChangeList =
+  ChangeList'
     { _clNewStartPageToken :: !(Maybe Text)
     , _clNextPageToken     :: !(Maybe Text)
     , _clChanges           :: !(Maybe [Change])
     , _clKind              :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChangeList' with the minimum fields required to make a request.
 --
@@ -2061,7 +2088,7 @@ data ChangeList = ChangeList'
 changeList
     :: ChangeList
 changeList =
-    ChangeList'
+  ChangeList'
     { _clNewStartPageToken = Nothing
     , _clNextPageToken = Nothing
     , _clChanges = Nothing
@@ -2119,9 +2146,11 @@ instance ToJSON ChangeList where
 -- | Links for exporting Google Docs to specific formats.
 --
 -- /See:/ 'revisionExportLinks' smart constructor.
-newtype RevisionExportLinks = RevisionExportLinks'
+newtype RevisionExportLinks =
+  RevisionExportLinks'
     { _relAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RevisionExportLinks' with the minimum fields required to make a request.
 --
@@ -2132,9 +2161,7 @@ revisionExportLinks
     :: HashMap Text Text -- ^ 'relAddtional'
     -> RevisionExportLinks
 revisionExportLinks pRelAddtional_ =
-    RevisionExportLinks'
-    { _relAddtional = _Coerce # pRelAddtional_
-    }
+  RevisionExportLinks' {_relAddtional = _Coerce # pRelAddtional_}
 
 -- | A mapping from export format to URL
 relAddtional :: Lens' RevisionExportLinks (HashMap Text Text)
@@ -2154,10 +2181,12 @@ instance ToJSON RevisionExportLinks where
 -- never populated in responses.
 --
 -- /See:/ 'fileContentHints' smart constructor.
-data FileContentHints = FileContentHints'
+data FileContentHints =
+  FileContentHints'
     { _fchThumbnail     :: !(Maybe FileContentHintsThumbnail)
     , _fchIndexableText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileContentHints' with the minimum fields required to make a request.
 --
@@ -2169,10 +2198,7 @@ data FileContentHints = FileContentHints'
 fileContentHints
     :: FileContentHints
 fileContentHints =
-    FileContentHints'
-    { _fchThumbnail = Nothing
-    , _fchIndexableText = Nothing
-    }
+  FileContentHints' {_fchThumbnail = Nothing, _fchIndexableText = Nothing}
 
 -- | A thumbnail for the file. This will only be used if Drive cannot
 -- generate a standard thumbnail.
@@ -2204,9 +2230,11 @@ instance ToJSON FileContentHints where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-newtype ChannelParams = ChannelParams'
+newtype ChannelParams =
+  ChannelParams'
     { _cpAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
@@ -2217,9 +2245,7 @@ channelParams
     :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
-    ChannelParams'
-    { _cpAddtional = _Coerce # pCpAddtional_
-    }
+  ChannelParams' {_cpAddtional = _Coerce # pCpAddtional_}
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
@@ -2239,9 +2265,11 @@ instance ToJSON ChannelParams where
 -- Entries with null values are cleared in update and copy requests.
 --
 -- /See:/ 'fileProperties' smart constructor.
-newtype FileProperties = FileProperties'
+newtype FileProperties =
+  FileProperties'
     { _fpAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileProperties' with the minimum fields required to make a request.
 --
@@ -2252,9 +2280,7 @@ fileProperties
     :: HashMap Text Text -- ^ 'fpAddtional'
     -> FileProperties
 fileProperties pFpAddtional_ =
-    FileProperties'
-    { _fpAddtional = _Coerce # pFpAddtional_
-    }
+  FileProperties' {_fpAddtional = _Coerce # pFpAddtional_}
 
 fpAddtional :: Lens' FileProperties (HashMap Text Text)
 fpAddtional
@@ -2272,9 +2298,11 @@ instance ToJSON FileProperties where
 -- | A map of maximum import sizes by MIME type, in bytes.
 --
 -- /See:/ 'aboutMaxImportSizes' smart constructor.
-newtype AboutMaxImportSizes = AboutMaxImportSizes'
+newtype AboutMaxImportSizes =
+  AboutMaxImportSizes'
     { _amisAddtional :: HashMap Text (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AboutMaxImportSizes' with the minimum fields required to make a request.
 --
@@ -2285,9 +2313,7 @@ aboutMaxImportSizes
     :: HashMap Text Int64 -- ^ 'amisAddtional'
     -> AboutMaxImportSizes
 aboutMaxImportSizes pAmisAddtional_ =
-    AboutMaxImportSizes'
-    { _amisAddtional = _Coerce # pAmisAddtional_
-    }
+  AboutMaxImportSizes' {_amisAddtional = _Coerce # pAmisAddtional_}
 
 amisAddtional :: Lens' AboutMaxImportSizes (HashMap Text Int64)
 amisAddtional
@@ -2306,7 +2332,8 @@ instance ToJSON AboutMaxImportSizes where
 -- | Information about the user, the user\'s Drive, and system capabilities.
 --
 -- /See:/ 'about' smart constructor.
-data About = About'
+data About =
+  About'
     { _aExportFormats       :: !(Maybe AboutExportFormats)
     , _aMaxImportSizes      :: !(Maybe AboutMaxImportSizes)
     , _aCanCreateTeamDrives :: !(Maybe Bool)
@@ -2318,7 +2345,8 @@ data About = About'
     , _aMaxUploadSize       :: !(Maybe (Textual Int64))
     , _aTeamDriveThemes     :: !(Maybe [AboutTeamDriveThemesItem])
     , _aFolderColorPalette  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'About' with the minimum fields required to make a request.
 --
@@ -2348,7 +2376,7 @@ data About = About'
 about
     :: About
 about =
-    About'
+  About'
     { _aExportFormats = Nothing
     , _aMaxImportSizes = Nothing
     , _aCanCreateTeamDrives = Nothing
@@ -2466,11 +2494,13 @@ instance ToJSON About where
 -- | Geographic location information stored in the image.
 --
 -- /See:/ 'fileImageMediaMetadataLocation' smart constructor.
-data FileImageMediaMetadataLocation = FileImageMediaMetadataLocation'
+data FileImageMediaMetadataLocation =
+  FileImageMediaMetadataLocation'
     { _fimmlLatitude  :: !(Maybe (Textual Double))
     , _fimmlAltitude  :: !(Maybe (Textual Double))
     , _fimmlLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileImageMediaMetadataLocation' with the minimum fields required to make a request.
 --
@@ -2484,7 +2514,7 @@ data FileImageMediaMetadataLocation = FileImageMediaMetadataLocation'
 fileImageMediaMetadataLocation
     :: FileImageMediaMetadataLocation
 fileImageMediaMetadataLocation =
-    FileImageMediaMetadataLocation'
+  FileImageMediaMetadataLocation'
     { _fimmlLatitude = Nothing
     , _fimmlAltitude = Nothing
     , _fimmlLongitude = Nothing
@@ -2530,10 +2560,12 @@ instance ToJSON FileImageMediaMetadataLocation where
 
 --
 -- /See:/ 'startPageToken' smart constructor.
-data StartPageToken = StartPageToken'
+data StartPageToken =
+  StartPageToken'
     { _sptKind           :: !Text
     , _sptStartPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartPageToken' with the minimum fields required to make a request.
 --
@@ -2545,10 +2577,8 @@ data StartPageToken = StartPageToken'
 startPageToken
     :: StartPageToken
 startPageToken =
-    StartPageToken'
-    { _sptKind = "drive#startPageToken"
-    , _sptStartPageToken = Nothing
-    }
+  StartPageToken'
+    {_sptKind = "drive#startPageToken", _sptStartPageToken = Nothing}
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"drive#startPageToken\".
@@ -2579,7 +2609,8 @@ instance ToJSON StartPageToken where
 -- | Additional metadata about image media, if available.
 --
 -- /See:/ 'fileImageMediaMetadata' smart constructor.
-data FileImageMediaMetadata = FileImageMediaMetadata'
+data FileImageMediaMetadata =
+  FileImageMediaMetadata'
     { _fimmRotation         :: !(Maybe (Textual Int32))
     , _fimmHeight           :: !(Maybe (Textual Int32))
     , _fimmSubjectDistance  :: !(Maybe (Textual Int32))
@@ -2601,7 +2632,8 @@ data FileImageMediaMetadata = FileImageMediaMetadata'
     , _fimmExposureMode     :: !(Maybe Text)
     , _fimmSensor           :: !(Maybe Text)
     , _fimmColorSpace       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileImageMediaMetadata' with the minimum fields required to make a request.
 --
@@ -2651,7 +2683,7 @@ data FileImageMediaMetadata = FileImageMediaMetadata'
 fileImageMediaMetadata
     :: FileImageMediaMetadata
 fileImageMediaMetadata =
-    FileImageMediaMetadata'
+  FileImageMediaMetadata'
     { _fimmRotation = Nothing
     , _fimmHeight = Nothing
     , _fimmSubjectDistance = Nothing
@@ -2857,7 +2889,8 @@ instance ToJSON FileImageMediaMetadata where
 -- | A comment on a file.
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment'
+data Comment =
+  Comment'
     { _comHTMLContent       :: !(Maybe Text)
     , _comModifiedTime      :: !(Maybe DateTime')
     , _comCreatedTime       :: !(Maybe DateTime')
@@ -2870,7 +2903,8 @@ data Comment = Comment'
     , _comAuthor            :: !(Maybe User)
     , _comId                :: !(Maybe Text)
     , _comDeleted           :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
@@ -2902,7 +2936,7 @@ data Comment = Comment'
 comment
     :: Comment
 comment =
-    Comment'
+  Comment'
     { _comHTMLContent = Nothing
     , _comModifiedTime = Nothing
     , _comCreatedTime = Nothing
@@ -3026,7 +3060,8 @@ instance ToJSON Comment where
 -- | The metadata for a revision to a file.
 --
 -- /See:/ 'revision' smart constructor.
-data Revision = Revision'
+data Revision =
+  Revision'
     { _revModifiedTime           :: !(Maybe DateTime')
     , _revSize                   :: !(Maybe (Textual Int64))
     , _revOriginalFilename       :: !(Maybe Text)
@@ -3040,7 +3075,8 @@ data Revision = Revision'
     , _revExportLinks            :: !(Maybe RevisionExportLinks)
     , _revPublishedOutsideDomain :: !(Maybe Bool)
     , _revId                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Revision' with the minimum fields required to make a request.
 --
@@ -3074,7 +3110,7 @@ data Revision = Revision'
 revision
     :: Revision
 revision =
-    Revision'
+  Revision'
     { _revModifiedTime = Nothing
     , _revSize = Nothing
     , _revOriginalFilename = Nothing
@@ -3215,7 +3251,8 @@ instance ToJSON Revision where
 -- the world access to a file or a folder hierarchy.
 --
 -- /See:/ 'permission' smart constructor.
-data Permission = Permission'
+data Permission =
+  Permission'
     { _pPhotoLink                  :: !(Maybe Text)
     , _pTeamDrivePermissionDetails :: !(Maybe [PermissionTeamDrivePermissionDetailsItem])
     , _pKind                       :: !Text
@@ -3228,7 +3265,8 @@ data Permission = Permission'
     , _pDeleted                    :: !(Maybe Bool)
     , _pType                       :: !(Maybe Text)
     , _pExpirationTime             :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
@@ -3260,7 +3298,7 @@ data Permission = Permission'
 permission
     :: Permission
 permission =
-    Permission'
+  Permission'
     { _pPhotoLink = Nothing
     , _pTeamDrivePermissionDetails = Nothing
     , _pKind = "drive#permission"
@@ -3385,7 +3423,8 @@ instance ToJSON Permission where
 -- | The metadata for a file.
 --
 -- /See:/ 'file' smart constructor.
-data File = File'
+data File =
+  File'
     { _fOwnedByMe                    :: !(Maybe Bool)
     , _fThumbnailLink                :: !(Maybe Text)
     , _fFullFileExtension            :: !(Maybe Text)
@@ -3440,7 +3479,8 @@ data File = File'
     , _fWebContentLink               :: !(Maybe Text)
     , _fContentHints                 :: !(Maybe FileContentHints)
     , _fProperties                   :: !(Maybe FileProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
@@ -3556,7 +3596,7 @@ data File = File'
 file
     :: File
 file =
-    File'
+  File'
     { _fOwnedByMe = Nothing
     , _fThumbnailLink = Nothing
     , _fFullFileExtension = Nothing
@@ -4102,12 +4142,14 @@ instance ToJSON File where
 
 --
 -- /See:/ 'permissionTeamDrivePermissionDetailsItem' smart constructor.
-data PermissionTeamDrivePermissionDetailsItem = PermissionTeamDrivePermissionDetailsItem'
+data PermissionTeamDrivePermissionDetailsItem =
+  PermissionTeamDrivePermissionDetailsItem'
     { _ptdpdiInherited               :: !(Maybe Bool)
     , _ptdpdiTeamDrivePermissionType :: !(Maybe Text)
     , _ptdpdiRole                    :: !(Maybe Text)
     , _ptdpdiInheritedFrom           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PermissionTeamDrivePermissionDetailsItem' with the minimum fields required to make a request.
 --
@@ -4123,7 +4165,7 @@ data PermissionTeamDrivePermissionDetailsItem = PermissionTeamDrivePermissionDet
 permissionTeamDrivePermissionDetailsItem
     :: PermissionTeamDrivePermissionDetailsItem
 permissionTeamDrivePermissionDetailsItem =
-    PermissionTeamDrivePermissionDetailsItem'
+  PermissionTeamDrivePermissionDetailsItem'
     { _ptdpdiInherited = Nothing
     , _ptdpdiTeamDrivePermissionType = Nothing
     , _ptdpdiRole = Nothing
@@ -4159,7 +4201,8 @@ ptdpdiInheritedFrom
       (\ s a -> s{_ptdpdiInheritedFrom = a})
 
 instance FromJSON
-         PermissionTeamDrivePermissionDetailsItem where
+           PermissionTeamDrivePermissionDetailsItem
+         where
         parseJSON
           = withObject
               "PermissionTeamDrivePermissionDetailsItem"
@@ -4171,7 +4214,8 @@ instance FromJSON
                      <*> (o .:? "inheritedFrom"))
 
 instance ToJSON
-         PermissionTeamDrivePermissionDetailsItem where
+           PermissionTeamDrivePermissionDetailsItem
+         where
         toJSON PermissionTeamDrivePermissionDetailsItem'{..}
           = object
               (catMaybes
@@ -4184,11 +4228,13 @@ instance ToJSON
 -- | A list of generated file IDs which can be provided in create requests.
 --
 -- /See:/ 'generatedIds' smart constructor.
-data GeneratedIds = GeneratedIds'
+data GeneratedIds =
+  GeneratedIds'
     { _giSpace :: !(Maybe Text)
     , _giKind  :: !Text
     , _giIds   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GeneratedIds' with the minimum fields required to make a request.
 --
@@ -4202,11 +4248,8 @@ data GeneratedIds = GeneratedIds'
 generatedIds
     :: GeneratedIds
 generatedIds =
-    GeneratedIds'
-    { _giSpace = Nothing
-    , _giKind = "drive#generatedIds"
-    , _giIds = Nothing
-    }
+  GeneratedIds'
+    {_giSpace = Nothing, _giKind = "drive#generatedIds", _giIds = Nothing}
 
 -- | The type of file that can be created with these IDs.
 giSpace :: Lens' GeneratedIds (Maybe Text)
@@ -4242,9 +4285,11 @@ instance ToJSON GeneratedIds where
 -- | Links for exporting Google Docs to specific formats.
 --
 -- /See:/ 'fileExportLinks' smart constructor.
-newtype FileExportLinks = FileExportLinks'
+newtype FileExportLinks =
+  FileExportLinks'
     { _felAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileExportLinks' with the minimum fields required to make a request.
 --
@@ -4255,9 +4300,7 @@ fileExportLinks
     :: HashMap Text Text -- ^ 'felAddtional'
     -> FileExportLinks
 fileExportLinks pFelAddtional_ =
-    FileExportLinks'
-    { _felAddtional = _Coerce # pFelAddtional_
-    }
+  FileExportLinks' {_felAddtional = _Coerce # pFelAddtional_}
 
 -- | A mapping from export format to URL
 felAddtional :: Lens' FileExportLinks (HashMap Text Text)
@@ -4276,11 +4319,13 @@ instance ToJSON FileExportLinks where
 -- | A list of comments on a file.
 --
 -- /See:/ 'commentList' smart constructor.
-data CommentList = CommentList'
+data CommentList =
+  CommentList'
     { _cllNextPageToken :: !(Maybe Text)
     , _cllKind          :: !Text
     , _cllComments      :: !(Maybe [Comment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentList' with the minimum fields required to make a request.
 --
@@ -4294,7 +4339,7 @@ data CommentList = CommentList'
 commentList
     :: CommentList
 commentList =
-    CommentList'
+  CommentList'
     { _cllNextPageToken = Nothing
     , _cllKind = "drive#commentList"
     , _cllComments = Nothing
@@ -4342,11 +4387,13 @@ instance ToJSON CommentList where
 -- | A list of revisions of a file.
 --
 -- /See:/ 'revisionList' smart constructor.
-data RevisionList = RevisionList'
+data RevisionList =
+  RevisionList'
     { _rllNextPageToken :: !(Maybe Text)
     , _rllKind          :: !Text
     , _rllRevisions     :: !(Maybe [Revision])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RevisionList' with the minimum fields required to make a request.
 --
@@ -4360,7 +4407,7 @@ data RevisionList = RevisionList'
 revisionList
     :: RevisionList
 revisionList =
-    RevisionList'
+  RevisionList'
     { _rllNextPageToken = Nothing
     , _rllKind = "drive#revisionList"
     , _rllRevisions = Nothing
@@ -4408,11 +4455,13 @@ instance ToJSON RevisionList where
 -- | A list of permissions for a file.
 --
 -- /See:/ 'permissionList' smart constructor.
-data PermissionList = PermissionList'
+data PermissionList =
+  PermissionList'
     { _plNextPageToken :: !(Maybe Text)
     , _plKind          :: !Text
     , _plPermissions   :: !(Maybe [Permission])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PermissionList' with the minimum fields required to make a request.
 --
@@ -4426,7 +4475,7 @@ data PermissionList = PermissionList'
 permissionList
     :: PermissionList
 permissionList =
-    PermissionList'
+  PermissionList'
     { _plNextPageToken = Nothing
     , _plKind = "drive#permissionList"
     , _plPermissions = Nothing

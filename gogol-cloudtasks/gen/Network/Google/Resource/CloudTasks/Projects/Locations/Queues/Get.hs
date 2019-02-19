@@ -59,14 +59,16 @@ type ProjectsLocationsQueuesGetResource =
 -- | Gets a queue.
 --
 -- /See:/ 'projectsLocationsQueuesGet' smart constructor.
-data ProjectsLocationsQueuesGet = ProjectsLocationsQueuesGet'
+data ProjectsLocationsQueuesGet =
+  ProjectsLocationsQueuesGet'
     { _plqgXgafv          :: !(Maybe Xgafv)
     , _plqgUploadProtocol :: !(Maybe Text)
     , _plqgAccessToken    :: !(Maybe Text)
     , _plqgUploadType     :: !(Maybe Text)
     , _plqgName           :: !Text
     , _plqgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsQueuesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsLocationsQueuesGet
     :: Text -- ^ 'plqgName'
     -> ProjectsLocationsQueuesGet
 projectsLocationsQueuesGet pPlqgName_ =
-    ProjectsLocationsQueuesGet'
+  ProjectsLocationsQueuesGet'
     { _plqgXgafv = Nothing
     , _plqgUploadProtocol = Nothing
     , _plqgAccessToken = Nothing

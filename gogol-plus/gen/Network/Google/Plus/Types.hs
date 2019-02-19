@@ -475,16 +475,16 @@ plusService
 
 -- | View your basic profile info
 userInfoProFileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-userInfoProFileScope = Proxy;
+userInfoProFileScope = Proxy
 
 -- | Know the list of people in your circles, your age range, and language
 plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
-plusLoginScope = Proxy;
+plusLoginScope = Proxy
 
 -- | View your email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy;
+userInfoEmailScope = Proxy
 
 -- | Know who you are on Google
 plusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
-plusMeScope = Proxy;
+plusMeScope = Proxy

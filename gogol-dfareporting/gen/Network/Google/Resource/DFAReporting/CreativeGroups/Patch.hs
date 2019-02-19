@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsPatch' request conforms to.
 type CreativeGroupsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -59,11 +59,13 @@ type CreativeGroupsPatchResource =
 -- semantics.
 --
 -- /See:/ 'creativeGroupsPatch' smart constructor.
-data CreativeGroupsPatch = CreativeGroupsPatch'
+data CreativeGroupsPatch =
+  CreativeGroupsPatch'
     { _cgpProFileId :: !(Textual Int64)
     , _cgpPayload   :: !CreativeGroup
     , _cgpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeGroupsPatch' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ creativeGroupsPatch
     -> Int64 -- ^ 'cgpId'
     -> CreativeGroupsPatch
 creativeGroupsPatch pCgpProFileId_ pCgpPayload_ pCgpId_ =
-    CreativeGroupsPatch'
+  CreativeGroupsPatch'
     { _cgpProFileId = _Coerce # pCgpProFileId_
     , _cgpPayload = pCgpPayload_
     , _cgpId = _Coerce # pCgpId_

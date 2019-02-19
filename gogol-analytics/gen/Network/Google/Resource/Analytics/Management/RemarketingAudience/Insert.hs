@@ -59,11 +59,13 @@ type ManagementRemarketingAudienceInsertResource =
 -- | Creates a new remarketing audience.
 --
 -- /See:/ 'managementRemarketingAudienceInsert' smart constructor.
-data ManagementRemarketingAudienceInsert = ManagementRemarketingAudienceInsert'
+data ManagementRemarketingAudienceInsert =
+  ManagementRemarketingAudienceInsert'
     { _mraiWebPropertyId :: !Text
     , _mraiPayload       :: !RemarketingAudience
     , _mraiAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementRemarketingAudienceInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ managementRemarketingAudienceInsert
     -> Text -- ^ 'mraiAccountId'
     -> ManagementRemarketingAudienceInsert
 managementRemarketingAudienceInsert pMraiWebPropertyId_ pMraiPayload_ pMraiAccountId_ =
-    ManagementRemarketingAudienceInsert'
+  ManagementRemarketingAudienceInsert'
     { _mraiWebPropertyId = pMraiWebPropertyId_
     , _mraiPayload = pMraiPayload_
     , _mraiAccountId = pMraiAccountId_
@@ -104,7 +106,8 @@ mraiAccountId
       (\ s a -> s{_mraiAccountId = a})
 
 instance GoogleRequest
-         ManagementRemarketingAudienceInsert where
+           ManagementRemarketingAudienceInsert
+         where
         type Rs ManagementRemarketingAudienceInsert =
              RemarketingAudience
         type Scopes ManagementRemarketingAudienceInsert =

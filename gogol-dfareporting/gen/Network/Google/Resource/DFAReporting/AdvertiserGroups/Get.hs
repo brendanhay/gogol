@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsGet' request conforms to.
 type AdvertiserGroupsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -55,10 +55,12 @@ type AdvertiserGroupsGetResource =
 -- | Gets one advertiser group by ID.
 --
 -- /See:/ 'advertiserGroupsGet' smart constructor.
-data AdvertiserGroupsGet = AdvertiserGroupsGet'
+data AdvertiserGroupsGet =
+  AdvertiserGroupsGet'
     { _agggProFileId :: !(Textual Int64)
     , _agggId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdvertiserGroupsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ advertiserGroupsGet
     -> Int64 -- ^ 'agggId'
     -> AdvertiserGroupsGet
 advertiserGroupsGet pAgggProFileId_ pAgggId_ =
-    AdvertiserGroupsGet'
-    { _agggProFileId = _Coerce # pAgggProFileId_
-    , _agggId = _Coerce # pAgggId_
-    }
+  AdvertiserGroupsGet'
+    {_agggProFileId = _Coerce # pAgggProFileId_, _agggId = _Coerce # pAgggId_}
 
 -- | User profile ID associated with this request.
 agggProFileId :: Lens' AdvertiserGroupsGet Int64

@@ -62,7 +62,8 @@ type AlertsGetResource =
 -- | Gets the specified alert.
 --
 -- /See:/ 'alertsGet' smart constructor.
-data AlertsGet = AlertsGet'
+data AlertsGet =
+  AlertsGet'
     { _agXgafv          :: !(Maybe Xgafv)
     , _agUploadProtocol :: !(Maybe Text)
     , _agAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data AlertsGet = AlertsGet'
     , _agUploadType     :: !(Maybe Text)
     , _agCustomerId     :: !(Maybe Text)
     , _agCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlertsGet' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ alertsGet
     :: Text -- ^ 'agAlertId'
     -> AlertsGet
 alertsGet pAgAlertId_ =
-    AlertsGet'
+  AlertsGet'
     { _agXgafv = Nothing
     , _agUploadProtocol = Nothing
     , _agAccessToken = Nothing

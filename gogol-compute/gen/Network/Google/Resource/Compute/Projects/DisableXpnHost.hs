@@ -54,10 +54,12 @@ type ProjectsDisableXpnHostResource =
 -- | Disable this project as a shared VPC host project.
 --
 -- /See:/ 'projectsDisableXpnHost' smart constructor.
-data ProjectsDisableXpnHost = ProjectsDisableXpnHost'
+data ProjectsDisableXpnHost =
+  ProjectsDisableXpnHost'
     { _pdxhRequestId :: !(Maybe Text)
     , _pdxhProject   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDisableXpnHost' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ projectsDisableXpnHost
     :: Text -- ^ 'pdxhProject'
     -> ProjectsDisableXpnHost
 projectsDisableXpnHost pPdxhProject_ =
-    ProjectsDisableXpnHost'
-    { _pdxhRequestId = Nothing
-    , _pdxhProject = pPdxhProject_
-    }
+  ProjectsDisableXpnHost'
+    {_pdxhRequestId = Nothing, _pdxhProject = pPdxhProject_}
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

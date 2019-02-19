@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @file.projects.locations.get@ method which the
 -- 'ProjectsLocationsGet' request conforms to.
 type ProjectsLocationsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -59,14 +59,16 @@ type ProjectsLocationsGetResource =
 -- | Gets information about a location.
 --
 -- /See:/ 'projectsLocationsGet' smart constructor.
-data ProjectsLocationsGet = ProjectsLocationsGet'
+data ProjectsLocationsGet =
+  ProjectsLocationsGet'
     { _plgXgafv          :: !(Maybe Xgafv)
     , _plgUploadProtocol :: !(Maybe Text)
     , _plgAccessToken    :: !(Maybe Text)
     , _plgUploadType     :: !(Maybe Text)
     , _plgName           :: !Text
     , _plgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsLocationsGet
     :: Text -- ^ 'plgName'
     -> ProjectsLocationsGet
 projectsLocationsGet pPlgName_ =
-    ProjectsLocationsGet'
+  ProjectsLocationsGet'
     { _plgXgafv = Nothing
     , _plgUploadProtocol = Nothing
     , _plgAccessToken = Nothing

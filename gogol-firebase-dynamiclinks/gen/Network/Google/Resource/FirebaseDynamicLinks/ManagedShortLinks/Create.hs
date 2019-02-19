@@ -77,14 +77,16 @@ type ManagedShortLinksCreateResource =
 -- request must be owned by requester\'s Firebase project.
 --
 -- /See:/ 'managedShortLinksCreate' smart constructor.
-data ManagedShortLinksCreate = ManagedShortLinksCreate'
+data ManagedShortLinksCreate =
+  ManagedShortLinksCreate'
     { _mslcXgafv          :: !(Maybe Xgafv)
     , _mslcUploadProtocol :: !(Maybe Text)
     , _mslcAccessToken    :: !(Maybe Text)
     , _mslcUploadType     :: !(Maybe Text)
     , _mslcPayload        :: !CreateManagedShortLinkRequest
     , _mslcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedShortLinksCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ managedShortLinksCreate
     :: CreateManagedShortLinkRequest -- ^ 'mslcPayload'
     -> ManagedShortLinksCreate
 managedShortLinksCreate pMslcPayload_ =
-    ManagedShortLinksCreate'
+  ManagedShortLinksCreate'
     { _mslcXgafv = Nothing
     , _mslcUploadProtocol = Nothing
     , _mslcAccessToken = Nothing

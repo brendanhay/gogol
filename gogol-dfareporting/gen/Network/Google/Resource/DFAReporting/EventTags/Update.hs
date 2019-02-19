@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsUpdate' request conforms to.
 type EventTagsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -54,10 +54,12 @@ type EventTagsUpdateResource =
 -- | Updates an existing event tag.
 --
 -- /See:/ 'eventTagsUpdate' smart constructor.
-data EventTagsUpdate = EventTagsUpdate'
+data EventTagsUpdate =
+  EventTagsUpdate'
     { _etuProFileId :: !(Textual Int64)
     , _etuPayload   :: !EventTag
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventTagsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ eventTagsUpdate
     -> EventTag -- ^ 'etuPayload'
     -> EventTagsUpdate
 eventTagsUpdate pEtuProFileId_ pEtuPayload_ =
-    EventTagsUpdate'
-    { _etuProFileId = _Coerce # pEtuProFileId_
-    , _etuPayload = pEtuPayload_
-    }
+  EventTagsUpdate'
+    {_etuProFileId = _Coerce # pEtuProFileId_, _etuPayload = pEtuPayload_}
 
 -- | User profile ID associated with this request.
 etuProFileId :: Lens' EventTagsUpdate Int64

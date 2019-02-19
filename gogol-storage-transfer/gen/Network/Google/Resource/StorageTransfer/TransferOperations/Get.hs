@@ -63,14 +63,16 @@ type TransferOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'transferOperationsGet' smart constructor.
-data TransferOperationsGet = TransferOperationsGet'
+data TransferOperationsGet =
+  TransferOperationsGet'
     { _togXgafv          :: !(Maybe Xgafv)
     , _togUploadProtocol :: !(Maybe Text)
     , _togAccessToken    :: !(Maybe Text)
     , _togUploadType     :: !(Maybe Text)
     , _togName           :: !Text
     , _togCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferOperationsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ transferOperationsGet
     :: Text -- ^ 'togName'
     -> TransferOperationsGet
 transferOperationsGet pTogName_ =
-    TransferOperationsGet'
+  TransferOperationsGet'
     { _togXgafv = Nothing
     , _togUploadProtocol = Nothing
     , _togAccessToken = Nothing

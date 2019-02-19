@@ -73,7 +73,8 @@ type ProjectsZonesClustersNodePoolsSetSizeResource =
 -- | Sets the size for a specific node pool.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsSetSize' smart constructor.
-data ProjectsZonesClustersNodePoolsSetSize = ProjectsZonesClustersNodePoolsSetSize'
+data ProjectsZonesClustersNodePoolsSetSize =
+  ProjectsZonesClustersNodePoolsSetSize'
     { _pzcnpssXgafv          :: !(Maybe Xgafv)
     , _pzcnpssUploadProtocol :: !(Maybe Text)
     , _pzcnpssAccessToken    :: !(Maybe Text)
@@ -84,7 +85,8 @@ data ProjectsZonesClustersNodePoolsSetSize = ProjectsZonesClustersNodePoolsSetSi
     , _pzcnpssClusterId      :: !Text
     , _pzcnpssProjectId      :: !Text
     , _pzcnpssCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsSetSize' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ projectsZonesClustersNodePoolsSetSize
     -> Text -- ^ 'pzcnpssProjectId'
     -> ProjectsZonesClustersNodePoolsSetSize
 projectsZonesClustersNodePoolsSetSize pPzcnpssZone_ pPzcnpssPayload_ pPzcnpssNodePoolId_ pPzcnpssClusterId_ pPzcnpssProjectId_ =
-    ProjectsZonesClustersNodePoolsSetSize'
+  ProjectsZonesClustersNodePoolsSetSize'
     { _pzcnpssXgafv = Nothing
     , _pzcnpssUploadProtocol = Nothing
     , _pzcnpssAccessToken = Nothing
@@ -195,7 +197,8 @@ pzcnpssCallback
       (\ s a -> s{_pzcnpssCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersNodePoolsSetSize where
+           ProjectsZonesClustersNodePoolsSetSize
+         where
         type Rs ProjectsZonesClustersNodePoolsSetSize =
              Operation
         type Scopes ProjectsZonesClustersNodePoolsSetSize =

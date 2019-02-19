@@ -53,10 +53,12 @@ type AccountsInsertResource =
 -- | Creates a Merchant Center sub-account.
 --
 -- /See:/ 'accountsInsert' smart constructor.
-data AccountsInsert = AccountsInsert'
+data AccountsInsert =
+  AccountsInsert'
     { _aMerchantId :: !(Textual Word64)
     , _aPayload    :: !Account
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsInsert' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ accountsInsert
     -> Account -- ^ 'aPayload'
     -> AccountsInsert
 accountsInsert pAMerchantId_ pAPayload_ =
-    AccountsInsert'
-    { _aMerchantId = _Coerce # pAMerchantId_
-    , _aPayload = pAPayload_
-    }
+  AccountsInsert'
+    {_aMerchantId = _Coerce # pAMerchantId_, _aPayload = pAPayload_}
 
 -- | The ID of the managing account. This must be a multi-client account.
 aMerchantId :: Lens' AccountsInsert Word64

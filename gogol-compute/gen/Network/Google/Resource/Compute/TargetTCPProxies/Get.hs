@@ -58,10 +58,12 @@ type TargetTCPProxiesGetResource =
 -- target TCP proxies by making a list() request.
 --
 -- /See:/ 'targetTCPProxiesGet' smart constructor.
-data TargetTCPProxiesGet = TargetTCPProxiesGet'
+data TargetTCPProxiesGet =
+  TargetTCPProxiesGet'
     { _ttpgProject        :: !Text
     , _ttpgTargetTCPProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxiesGet' with the minimum fields required to make a request.
 --
@@ -75,10 +77,8 @@ targetTCPProxiesGet
     -> Text -- ^ 'ttpgTargetTCPProxy'
     -> TargetTCPProxiesGet
 targetTCPProxiesGet pTtpgProject_ pTtpgTargetTCPProxy_ =
-    TargetTCPProxiesGet'
-    { _ttpgProject = pTtpgProject_
-    , _ttpgTargetTCPProxy = pTtpgTargetTCPProxy_
-    }
+  TargetTCPProxiesGet'
+    {_ttpgProject = pTtpgProject_, _ttpgTargetTCPProxy = pTtpgTargetTCPProxy_}
 
 -- | Project ID for this request.
 ttpgProject :: Lens' TargetTCPProxiesGet Text

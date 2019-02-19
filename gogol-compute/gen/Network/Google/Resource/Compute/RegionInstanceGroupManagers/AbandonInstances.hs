@@ -89,13 +89,15 @@ type RegionInstanceGroupManagersAbandonInstancesResource
 -- per request.
 --
 -- /See:/ 'regionInstanceGroupManagersAbandonInstances' smart constructor.
-data RegionInstanceGroupManagersAbandonInstances = RegionInstanceGroupManagersAbandonInstances'
+data RegionInstanceGroupManagersAbandonInstances =
+  RegionInstanceGroupManagersAbandonInstances'
     { _rigmaiRequestId            :: !(Maybe Text)
     , _rigmaiProject              :: !Text
     , _rigmaiInstanceGroupManager :: !Text
     , _rigmaiPayload              :: !RegionInstanceGroupManagersAbandonInstancesRequest
     , _rigmaiRegion               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersAbandonInstances' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ regionInstanceGroupManagersAbandonInstances
     -> Text -- ^ 'rigmaiRegion'
     -> RegionInstanceGroupManagersAbandonInstances
 regionInstanceGroupManagersAbandonInstances pRigmaiProject_ pRigmaiInstanceGroupManager_ pRigmaiPayload_ pRigmaiRegion_ =
-    RegionInstanceGroupManagersAbandonInstances'
+  RegionInstanceGroupManagersAbandonInstances'
     { _rigmaiRequestId = Nothing
     , _rigmaiProject = pRigmaiProject_
     , _rigmaiInstanceGroupManager = pRigmaiInstanceGroupManager_
@@ -164,7 +166,8 @@ rigmaiRegion
   = lens _rigmaiRegion (\ s a -> s{_rigmaiRegion = a})
 
 instance GoogleRequest
-         RegionInstanceGroupManagersAbandonInstances where
+           RegionInstanceGroupManagersAbandonInstances
+         where
         type Rs RegionInstanceGroupManagersAbandonInstances =
              Operation
         type Scopes

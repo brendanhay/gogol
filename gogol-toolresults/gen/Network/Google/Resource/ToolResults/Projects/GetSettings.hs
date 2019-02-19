@@ -57,9 +57,11 @@ type ProjectsGetSettingsResource =
 -- not authorized to read from project
 --
 -- /See:/ 'projectsGetSettings' smart constructor.
-newtype ProjectsGetSettings = ProjectsGetSettings'
+newtype ProjectsGetSettings =
+  ProjectsGetSettings'
     { _pgsProjectId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGetSettings' with the minimum fields required to make a request.
 --
@@ -70,9 +72,7 @@ projectsGetSettings
     :: Text -- ^ 'pgsProjectId'
     -> ProjectsGetSettings
 projectsGetSettings pPgsProjectId_ =
-    ProjectsGetSettings'
-    { _pgsProjectId = pPgsProjectId_
-    }
+  ProjectsGetSettings' {_pgsProjectId = pPgsProjectId_}
 
 -- | A Project id. Required.
 pgsProjectId :: Lens' ProjectsGetSettings Text

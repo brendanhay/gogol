@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsPatch' request conforms to.
 type AdvertiserGroupsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -59,11 +59,13 @@ type AdvertiserGroupsPatchResource =
 -- semantics.
 --
 -- /See:/ 'advertiserGroupsPatch' smart constructor.
-data AdvertiserGroupsPatch = AdvertiserGroupsPatch'
+data AdvertiserGroupsPatch =
+  AdvertiserGroupsPatch'
     { _agpProFileId :: !(Textual Int64)
     , _agpPayload   :: !AdvertiserGroup
     , _agpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdvertiserGroupsPatch' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ advertiserGroupsPatch
     -> Int64 -- ^ 'agpId'
     -> AdvertiserGroupsPatch
 advertiserGroupsPatch pAgpProFileId_ pAgpPayload_ pAgpId_ =
-    AdvertiserGroupsPatch'
+  AdvertiserGroupsPatch'
     { _agpProFileId = _Coerce # pAgpProFileId_
     , _agpPayload = pAgpPayload_
     , _agpId = _Coerce # pAgpId_

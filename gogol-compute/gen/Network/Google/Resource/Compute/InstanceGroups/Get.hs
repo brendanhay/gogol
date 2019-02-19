@@ -59,11 +59,13 @@ type InstanceGroupsGetResource =
 -- groups by making a list() request.
 --
 -- /See:/ 'instanceGroupsGet' smart constructor.
-data InstanceGroupsGet = InstanceGroupsGet'
+data InstanceGroupsGet =
+  InstanceGroupsGet'
     { _iggProject       :: !Text
     , _iggZone          :: !Text
     , _iggInstanceGroup :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ instanceGroupsGet
     -> Text -- ^ 'iggInstanceGroup'
     -> InstanceGroupsGet
 instanceGroupsGet pIggProject_ pIggZone_ pIggInstanceGroup_ =
-    InstanceGroupsGet'
+  InstanceGroupsGet'
     { _iggProject = pIggProject_
     , _iggZone = pIggZone_
     , _iggInstanceGroup = pIggInstanceGroup_

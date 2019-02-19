@@ -63,7 +63,8 @@ type ProjectsServiceAccountsKeysListResource =
 -- | Lists ServiceAccountKeys.
 --
 -- /See:/ 'projectsServiceAccountsKeysList' smart constructor.
-data ProjectsServiceAccountsKeysList = ProjectsServiceAccountsKeysList'
+data ProjectsServiceAccountsKeysList =
+  ProjectsServiceAccountsKeysList'
     { _psaklKeyTypes       :: !(Maybe [Text])
     , _psaklXgafv          :: !(Maybe Xgafv)
     , _psaklUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsServiceAccountsKeysList = ProjectsServiceAccountsKeysList'
     , _psaklUploadType     :: !(Maybe Text)
     , _psaklName           :: !Text
     , _psaklCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsKeysList' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsServiceAccountsKeysList
     :: Text -- ^ 'psaklName'
     -> ProjectsServiceAccountsKeysList
 projectsServiceAccountsKeysList pPsaklName_ =
-    ProjectsServiceAccountsKeysList'
+  ProjectsServiceAccountsKeysList'
     { _psaklKeyTypes = Nothing
     , _psaklXgafv = Nothing
     , _psaklUploadProtocol = Nothing
@@ -153,7 +155,8 @@ psaklCallback
       (\ s a -> s{_psaklCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsKeysList where
+           ProjectsServiceAccountsKeysList
+         where
         type Rs ProjectsServiceAccountsKeysList =
              ListServiceAccountKeysResponse
         type Scopes ProjectsServiceAccountsKeysList =

@@ -59,11 +59,13 @@ type ResourcesFeaturesRenameResource =
 -- | Renames a feature.
 --
 -- /See:/ 'resourcesFeaturesRename' smart constructor.
-data ResourcesFeaturesRename = ResourcesFeaturesRename'
+data ResourcesFeaturesRename =
+  ResourcesFeaturesRename'
     { _rfrPayload  :: !FeatureRename
     , _rfrCustomer :: !Text
     , _rfrOldName  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesFeaturesRename' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ resourcesFeaturesRename
     -> Text -- ^ 'rfrOldName'
     -> ResourcesFeaturesRename
 resourcesFeaturesRename pRfrPayload_ pRfrCustomer_ pRfrOldName_ =
-    ResourcesFeaturesRename'
+  ResourcesFeaturesRename'
     { _rfrPayload = pRfrPayload_
     , _rfrCustomer = pRfrCustomer_
     , _rfrOldName = pRfrOldName_

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
@@ -54,10 +54,12 @@ type AccountsUpdateResource =
 -- | Updates an existing account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate'
+data AccountsUpdate =
+  AccountsUpdate'
     { _auuProFileId :: !(Textual Int64)
     , _auuPayload   :: !Account
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsUpdate
     -> Account -- ^ 'auuPayload'
     -> AccountsUpdate
 accountsUpdate pAuuProFileId_ pAuuPayload_ =
-    AccountsUpdate'
-    { _auuProFileId = _Coerce # pAuuProFileId_
-    , _auuPayload = pAuuPayload_
-    }
+  AccountsUpdate'
+    {_auuProFileId = _Coerce # pAuuProFileId_, _auuPayload = pAuuPayload_}
 
 -- | User profile ID associated with this request.
 auuProFileId :: Lens' AccountsUpdate Int64

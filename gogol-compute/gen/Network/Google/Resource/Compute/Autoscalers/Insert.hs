@@ -61,12 +61,14 @@ type AutoscalersInsertResource =
 -- in the request.
 --
 -- /See:/ 'autoscalersInsert' smart constructor.
-data AutoscalersInsert = AutoscalersInsert'
+data AutoscalersInsert =
+  AutoscalersInsert'
     { _aiiRequestId :: !(Maybe Text)
     , _aiiProject   :: !Text
     , _aiiZone      :: !Text
     , _aiiPayload   :: !Autoscaler
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalersInsert' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ autoscalersInsert
     -> Autoscaler -- ^ 'aiiPayload'
     -> AutoscalersInsert
 autoscalersInsert pAiiProject_ pAiiZone_ pAiiPayload_ =
-    AutoscalersInsert'
+  AutoscalersInsert'
     { _aiiRequestId = Nothing
     , _aiiProject = pAiiProject_
     , _aiiZone = pAiiZone_

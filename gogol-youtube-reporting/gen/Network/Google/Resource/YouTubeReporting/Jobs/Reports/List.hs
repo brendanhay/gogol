@@ -76,7 +76,8 @@ type JobsReportsListResource =
 -- does not exist.
 --
 -- /See:/ 'jobsReportsList' smart constructor.
-data JobsReportsList = JobsReportsList'
+data JobsReportsList =
+  JobsReportsList'
     { _jrlCreatedAfter           :: !(Maybe DateTime')
     , _jrlXgafv                  :: !(Maybe Xgafv)
     , _jrlJobId                  :: !Text
@@ -89,7 +90,8 @@ data JobsReportsList = JobsReportsList'
     , _jrlPageToken              :: !(Maybe Text)
     , _jrlPageSize               :: !(Maybe (Textual Int32))
     , _jrlCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobsReportsList' with the minimum fields required to make a request.
 --
@@ -122,7 +124,7 @@ jobsReportsList
     :: Text -- ^ 'jrlJobId'
     -> JobsReportsList
 jobsReportsList pJrlJobId_ =
-    JobsReportsList'
+  JobsReportsList'
     { _jrlCreatedAfter = Nothing
     , _jrlXgafv = Nothing
     , _jrlJobId = pJrlJobId_

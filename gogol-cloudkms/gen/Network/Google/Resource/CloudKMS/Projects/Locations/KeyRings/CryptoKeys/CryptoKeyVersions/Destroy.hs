@@ -73,7 +73,8 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroyResource
 -- may be called to reverse the process.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy'
+data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy =
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy'
     { _plkrckckvdXgafv          :: !(Maybe Xgafv)
     , _plkrckckvdUploadProtocol :: !(Maybe Text)
     , _plkrckckvdAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy = ProjectsLocat
     , _plkrckckvdPayload        :: !DestroyCryptoKeyVersionRequest
     , _plkrckckvdName           :: !Text
     , _plkrckckvdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy
     -> Text -- ^ 'plkrckckvdName'
     -> ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy
 projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy pPlkrckckvdPayload_ pPlkrckckvdName_ =
-    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy'
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy'
     { _plkrckckvdXgafv = Nothing
     , _plkrckckvdUploadProtocol = Nothing
     , _plkrckckvdAccessToken = Nothing
@@ -158,7 +160,7 @@ plkrckckvdCallback
       (\ s a -> s{_plkrckckvdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy
+           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy

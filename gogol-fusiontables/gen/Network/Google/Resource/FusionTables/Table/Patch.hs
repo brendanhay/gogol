@@ -59,11 +59,13 @@ type TablePatchResource =
 -- semantics.
 --
 -- /See:/ 'tablePatch' smart constructor.
-data TablePatch = TablePatch'
+data TablePatch =
+  TablePatch'
     { _tpPayload               :: !Table
     , _tpReplaceViewDefinition :: !(Maybe Bool)
     , _tpTableId               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TablePatch' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ tablePatch
     -> Text -- ^ 'tpTableId'
     -> TablePatch
 tablePatch pTpPayload_ pTpTableId_ =
-    TablePatch'
+  TablePatch'
     { _tpPayload = pTpPayload_
     , _tpReplaceViewDefinition = Nothing
     , _tpTableId = pTpTableId_

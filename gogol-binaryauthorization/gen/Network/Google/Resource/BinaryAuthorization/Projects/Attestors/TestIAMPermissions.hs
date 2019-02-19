@@ -72,7 +72,8 @@ type ProjectsAttestorsTestIAMPermissionsResource =
 -- warning.
 --
 -- /See:/ 'projectsAttestorsTestIAMPermissions' smart constructor.
-data ProjectsAttestorsTestIAMPermissions = ProjectsAttestorsTestIAMPermissions'
+data ProjectsAttestorsTestIAMPermissions =
+  ProjectsAttestorsTestIAMPermissions'
     { _patipXgafv          :: !(Maybe Xgafv)
     , _patipUploadProtocol :: !(Maybe Text)
     , _patipAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsAttestorsTestIAMPermissions = ProjectsAttestorsTestIAMPermissions'
     , _patipPayload        :: !TestIAMPermissionsRequest
     , _patipResource       :: !Text
     , _patipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAttestorsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsAttestorsTestIAMPermissions
     -> Text -- ^ 'patipResource'
     -> ProjectsAttestorsTestIAMPermissions
 projectsAttestorsTestIAMPermissions pPatipPayload_ pPatipResource_ =
-    ProjectsAttestorsTestIAMPermissions'
+  ProjectsAttestorsTestIAMPermissions'
     { _patipXgafv = Nothing
     , _patipUploadProtocol = Nothing
     , _patipAccessToken = Nothing
@@ -157,7 +159,8 @@ patipCallback
       (\ s a -> s{_patipCallback = a})
 
 instance GoogleRequest
-         ProjectsAttestorsTestIAMPermissions where
+           ProjectsAttestorsTestIAMPermissions
+         where
         type Rs ProjectsAttestorsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsAttestorsTestIAMPermissions =

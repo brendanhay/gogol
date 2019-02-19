@@ -67,7 +67,8 @@ type ProjectsLocationsWorkerMessagesResource =
 -- | Send a worker_message to the service.
 --
 -- /See:/ 'projectsLocationsWorkerMessages' smart constructor.
-data ProjectsLocationsWorkerMessages = ProjectsLocationsWorkerMessages'
+data ProjectsLocationsWorkerMessages =
+  ProjectsLocationsWorkerMessages'
     { _plwmXgafv          :: !(Maybe Xgafv)
     , _plwmUploadProtocol :: !(Maybe Text)
     , _plwmLocation       :: !Text
@@ -76,7 +77,8 @@ data ProjectsLocationsWorkerMessages = ProjectsLocationsWorkerMessages'
     , _plwmPayload        :: !SendWorkerMessagesRequest
     , _plwmProjectId      :: !Text
     , _plwmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsWorkerMessages' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsLocationsWorkerMessages
     -> Text -- ^ 'plwmProjectId'
     -> ProjectsLocationsWorkerMessages
 projectsLocationsWorkerMessages pPlwmLocation_ pPlwmPayload_ pPlwmProjectId_ =
-    ProjectsLocationsWorkerMessages'
+  ProjectsLocationsWorkerMessages'
     { _plwmXgafv = Nothing
     , _plwmUploadProtocol = Nothing
     , _plwmLocation = pPlwmLocation_
@@ -159,7 +161,8 @@ plwmCallback
   = lens _plwmCallback (\ s a -> s{_plwmCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkerMessages where
+           ProjectsLocationsWorkerMessages
+         where
         type Rs ProjectsLocationsWorkerMessages =
              SendWorkerMessagesResponse
         type Scopes ProjectsLocationsWorkerMessages =

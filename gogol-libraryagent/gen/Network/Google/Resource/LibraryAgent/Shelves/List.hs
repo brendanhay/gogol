@@ -66,7 +66,8 @@ type ShelvesListResource =
 -- shelves will not necessarily be added to the end of this list.
 --
 -- /See:/ 'shelvesList' smart constructor.
-data ShelvesList = ShelvesList'
+data ShelvesList =
+  ShelvesList'
     { _slXgafv          :: !(Maybe Xgafv)
     , _slUploadProtocol :: !(Maybe Text)
     , _slAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ShelvesList = ShelvesList'
     , _slPageToken      :: !(Maybe Text)
     , _slPageSize       :: !(Maybe (Textual Int32))
     , _slCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShelvesList' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ data ShelvesList = ShelvesList'
 shelvesList
     :: ShelvesList
 shelvesList =
-    ShelvesList'
+  ShelvesList'
     { _slXgafv = Nothing
     , _slUploadProtocol = Nothing
     , _slAccessToken = Nothing

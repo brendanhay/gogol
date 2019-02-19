@@ -63,14 +63,16 @@ type AccessPoliciesAccessLevelsDeleteResource =
 -- removed from long-lasting storage.
 --
 -- /See:/ 'accessPoliciesAccessLevelsDelete' smart constructor.
-data AccessPoliciesAccessLevelsDelete = AccessPoliciesAccessLevelsDelete'
+data AccessPoliciesAccessLevelsDelete =
+  AccessPoliciesAccessLevelsDelete'
     { _apaldXgafv          :: !(Maybe Xgafv)
     , _apaldUploadProtocol :: !(Maybe Text)
     , _apaldAccessToken    :: !(Maybe Text)
     , _apaldUploadType     :: !(Maybe Text)
     , _apaldName           :: !Text
     , _apaldCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesAccessLevelsDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ accessPoliciesAccessLevelsDelete
     :: Text -- ^ 'apaldName'
     -> AccessPoliciesAccessLevelsDelete
 accessPoliciesAccessLevelsDelete pApaldName_ =
-    AccessPoliciesAccessLevelsDelete'
+  AccessPoliciesAccessLevelsDelete'
     { _apaldXgafv = Nothing
     , _apaldUploadProtocol = Nothing
     , _apaldAccessToken = Nothing
@@ -136,7 +138,8 @@ apaldCallback
       (\ s a -> s{_apaldCallback = a})
 
 instance GoogleRequest
-         AccessPoliciesAccessLevelsDelete where
+           AccessPoliciesAccessLevelsDelete
+         where
         type Rs AccessPoliciesAccessLevelsDelete = Operation
         type Scopes AccessPoliciesAccessLevelsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]

@@ -71,14 +71,16 @@ type EntriesWriteResource =
 -- folders)
 --
 -- /See:/ 'entriesWrite' smart constructor.
-data EntriesWrite = EntriesWrite'
+data EntriesWrite =
+  EntriesWrite'
     { _ewXgafv          :: !(Maybe Xgafv)
     , _ewUploadProtocol :: !(Maybe Text)
     , _ewAccessToken    :: !(Maybe Text)
     , _ewUploadType     :: !(Maybe Text)
     , _ewPayload        :: !WriteLogEntriesRequest
     , _ewCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntriesWrite' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ entriesWrite
     :: WriteLogEntriesRequest -- ^ 'ewPayload'
     -> EntriesWrite
 entriesWrite pEwPayload_ =
-    EntriesWrite'
+  EntriesWrite'
     { _ewXgafv = Nothing
     , _ewUploadProtocol = Nothing
     , _ewAccessToken = Nothing

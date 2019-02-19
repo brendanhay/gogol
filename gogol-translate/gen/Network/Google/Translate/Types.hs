@@ -96,8 +96,8 @@ translateService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | Translate text from one language to another using Google Translate
 cloudTranslationScope :: Proxy '["https://www.googleapis.com/auth/cloud-translation"]
-cloudTranslationScope = Proxy;
+cloudTranslationScope = Proxy

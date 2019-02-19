@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- 'OrdersList' request conforms to.
 type OrdersListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -72,7 +72,8 @@ type OrdersListResource =
 -- paging.
 --
 -- /See:/ 'ordersList' smart constructor.
-data OrdersList = OrdersList'
+data OrdersList =
+  OrdersList'
     { _olSearchString :: !(Maybe Text)
     , _olIds          :: !(Maybe [Textual Int64])
     , _olProFileId    :: !(Textual Int64)
@@ -82,7 +83,8 @@ data OrdersList = OrdersList'
     , _olSortField    :: !OrdersListSortField
     , _olSiteId       :: !(Maybe [Textual Int64])
     , _olMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersList' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ ordersList
     -> Int64 -- ^ 'olProjectId'
     -> OrdersList
 ordersList pOlProFileId_ pOlProjectId_ =
-    OrdersList'
+  OrdersList'
     { _olSearchString = Nothing
     , _olIds = Nothing
     , _olProFileId = _Coerce # pOlProFileId_

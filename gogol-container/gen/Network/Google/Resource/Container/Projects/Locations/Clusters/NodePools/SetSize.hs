@@ -63,7 +63,8 @@ type ProjectsLocationsClustersNodePoolsSetSizeResource
 -- | Sets the size for a specific node pool.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsSetSize' smart constructor.
-data ProjectsLocationsClustersNodePoolsSetSize = ProjectsLocationsClustersNodePoolsSetSize'
+data ProjectsLocationsClustersNodePoolsSetSize =
+  ProjectsLocationsClustersNodePoolsSetSize'
     { _plcnpssXgafv          :: !(Maybe Xgafv)
     , _plcnpssUploadProtocol :: !(Maybe Text)
     , _plcnpssAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsLocationsClustersNodePoolsSetSize = ProjectsLocationsClustersNodePo
     , _plcnpssPayload        :: !SetNodePoolSizeRequest
     , _plcnpssName           :: !Text
     , _plcnpssCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsSetSize' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsLocationsClustersNodePoolsSetSize
     -> Text -- ^ 'plcnpssName'
     -> ProjectsLocationsClustersNodePoolsSetSize
 projectsLocationsClustersNodePoolsSetSize pPlcnpssPayload_ pPlcnpssName_ =
-    ProjectsLocationsClustersNodePoolsSetSize'
+  ProjectsLocationsClustersNodePoolsSetSize'
     { _plcnpssXgafv = Nothing
     , _plcnpssUploadProtocol = Nothing
     , _plcnpssAccessToken = Nothing
@@ -148,7 +150,8 @@ plcnpssCallback
       (\ s a -> s{_plcnpssCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersNodePoolsSetSize where
+           ProjectsLocationsClustersNodePoolsSetSize
+         where
         type Rs ProjectsLocationsClustersNodePoolsSetSize =
              Operation
         type Scopes ProjectsLocationsClustersNodePoolsSetSize

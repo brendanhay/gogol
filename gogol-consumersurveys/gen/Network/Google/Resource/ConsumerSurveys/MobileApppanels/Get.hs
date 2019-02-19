@@ -52,9 +52,11 @@ type MobileApppanelsGetResource =
 -- | Retrieves a MobileAppPanel that is available to the authenticated user.
 --
 -- /See:/ 'mobileApppanelsGet' smart constructor.
-newtype MobileApppanelsGet = MobileApppanelsGet'
+newtype MobileApppanelsGet =
+  MobileApppanelsGet'
     { _magPanelId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileApppanelsGet' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ mobileApppanelsGet
     :: Text -- ^ 'magPanelId'
     -> MobileApppanelsGet
 mobileApppanelsGet pMagPanelId_ =
-    MobileApppanelsGet'
-    { _magPanelId = pMagPanelId_
-    }
+  MobileApppanelsGet' {_magPanelId = pMagPanelId_}
 
 -- | External URL ID for the panel.
 magPanelId :: Lens' MobileApppanelsGet Text

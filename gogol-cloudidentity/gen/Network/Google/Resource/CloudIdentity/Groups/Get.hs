@@ -59,14 +59,16 @@ type GroupsGetResource =
 -- | Retrieves a Group.
 --
 -- /See:/ 'groupsGet' smart constructor.
-data GroupsGet = GroupsGet'
+data GroupsGet =
+  GroupsGet'
     { _ggXgafv          :: !(Maybe Xgafv)
     , _ggUploadProtocol :: !(Maybe Text)
     , _ggAccessToken    :: !(Maybe Text)
     , _ggUploadType     :: !(Maybe Text)
     , _ggName           :: !Text
     , _ggCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ groupsGet
     :: Text -- ^ 'ggName'
     -> GroupsGet
 groupsGet pGgName_ =
-    GroupsGet'
+  GroupsGet'
     { _ggXgafv = Nothing
     , _ggUploadProtocol = Nothing
     , _ggAccessToken = Nothing

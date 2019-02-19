@@ -57,10 +57,12 @@ type ManagementAccountSummariesListResource =
 -- accounts\/properties\/profiles) to which the user has access.
 --
 -- /See:/ 'managementAccountSummariesList' smart constructor.
-data ManagementAccountSummariesList = ManagementAccountSummariesList'
+data ManagementAccountSummariesList =
+  ManagementAccountSummariesList'
     { _maslStartIndex :: !(Maybe (Textual Int32))
     , _maslMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementAccountSummariesList' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ data ManagementAccountSummariesList = ManagementAccountSummariesList'
 managementAccountSummariesList
     :: ManagementAccountSummariesList
 managementAccountSummariesList =
-    ManagementAccountSummariesList'
-    { _maslStartIndex = Nothing
-    , _maslMaxResults = Nothing
-    }
+  ManagementAccountSummariesList'
+    {_maslStartIndex = Nothing, _maslMaxResults = Nothing}
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.

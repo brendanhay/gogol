@@ -52,9 +52,11 @@ type CustomersGetResource =
 -- | Retrieves a customer.
 --
 -- /See:/ 'customersGet' smart constructor.
-newtype CustomersGet = CustomersGet'
+newtype CustomersGet =
+  CustomersGet'
     { _cgCustomerKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersGet' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype CustomersGet = CustomersGet'
 customersGet
     :: Text -- ^ 'cgCustomerKey'
     -> CustomersGet
-customersGet pCgCustomerKey_ =
-    CustomersGet'
-    { _cgCustomerKey = pCgCustomerKey_
-    }
+customersGet pCgCustomerKey_ = CustomersGet' {_cgCustomerKey = pCgCustomerKey_}
 
 -- | Id of the customer to be retrieved
 cgCustomerKey :: Lens' CustomersGet Text

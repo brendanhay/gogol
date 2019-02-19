@@ -58,10 +58,12 @@ type StatesClearResource =
 -- in a conflict error on version mismatch.
 --
 -- /See:/ 'statesClear' smart constructor.
-data StatesClear = StatesClear'
+data StatesClear =
+  StatesClear'
     { _scStateKey           :: !(Textual Int32)
     , _scCurrentDataVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatesClear' with the minimum fields required to make a request.
 --
@@ -74,10 +76,8 @@ statesClear
     :: Int32 -- ^ 'scStateKey'
     -> StatesClear
 statesClear pScStateKey_ =
-    StatesClear'
-    { _scStateKey = _Coerce # pScStateKey_
-    , _scCurrentDataVersion = Nothing
-    }
+  StatesClear'
+    {_scStateKey = _Coerce # pScStateKey_, _scCurrentDataVersion = Nothing}
 
 -- | The key for the data to be retrieved.
 scStateKey :: Lens' StatesClear Int32

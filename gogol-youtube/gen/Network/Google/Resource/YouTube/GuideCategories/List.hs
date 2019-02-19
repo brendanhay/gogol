@@ -60,12 +60,14 @@ type GuideCategoriesListResource =
 -- channels.
 --
 -- /See:/ 'guideCategoriesList' smart constructor.
-data GuideCategoriesList = GuideCategoriesList'
+data GuideCategoriesList =
+  GuideCategoriesList'
     { _gclPart       :: !Text
     , _gclRegionCode :: !(Maybe Text)
     , _gclHl         :: !Text
     , _gclId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GuideCategoriesList' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ guideCategoriesList
     :: Text -- ^ 'gclPart'
     -> GuideCategoriesList
 guideCategoriesList pGclPart_ =
-    GuideCategoriesList'
+  GuideCategoriesList'
     { _gclPart = pGclPart_
     , _gclRegionCode = Nothing
     , _gclHl = "en-US"

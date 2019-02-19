@@ -56,11 +56,13 @@ type AudiencesListResource =
 -- | List all of the audiences to which a user can share.
 --
 -- /See:/ 'audiencesList' smart constructor.
-data AudiencesList = AudiencesList'
+data AudiencesList =
+  AudiencesList'
     { _aUserId     :: !Text
     , _aPageToken  :: !(Maybe Text)
     , _aMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AudiencesList' with the minimum fields required to make a request.
 --
@@ -75,11 +77,8 @@ audiencesList
     :: Text -- ^ 'aUserId'
     -> AudiencesList
 audiencesList pAUserId_ =
-    AudiencesList'
-    { _aUserId = pAUserId_
-    , _aPageToken = Nothing
-    , _aMaxResults = 20
-    }
+  AudiencesList'
+    {_aUserId = pAUserId_, _aPageToken = Nothing, _aMaxResults = 20}
 
 -- | The ID of the user to get audiences for. The special value \"me\" can be
 -- used to indicate the authenticated user.

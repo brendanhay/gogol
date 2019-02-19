@@ -59,14 +59,16 @@ type ProjectsLocationsInstancesGetResource =
 -- | Gets the details of a specific Redis instance.
 --
 -- /See:/ 'projectsLocationsInstancesGet' smart constructor.
-data ProjectsLocationsInstancesGet = ProjectsLocationsInstancesGet'
+data ProjectsLocationsInstancesGet =
+  ProjectsLocationsInstancesGet'
     { _pligXgafv          :: !(Maybe Xgafv)
     , _pligUploadProtocol :: !(Maybe Text)
     , _pligAccessToken    :: !(Maybe Text)
     , _pligUploadType     :: !(Maybe Text)
     , _pligName           :: !Text
     , _pligCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsInstancesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsLocationsInstancesGet
     :: Text -- ^ 'pligName'
     -> ProjectsLocationsInstancesGet
 projectsLocationsInstancesGet pPligName_ =
-    ProjectsLocationsInstancesGet'
+  ProjectsLocationsInstancesGet'
     { _pligXgafv = Nothing
     , _pligUploadProtocol = Nothing
     , _pligAccessToken = Nothing

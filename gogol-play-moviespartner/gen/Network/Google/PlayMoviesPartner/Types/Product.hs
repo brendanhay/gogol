@@ -27,7 +27,8 @@ import           Network.Google.Prelude
 -- the Titles they own. Post-production houses cannot see any Avails.
 --
 -- /See:/ 'avail' smart constructor.
-data Avail = Avail'
+data Avail =
+  Avail'
     { _aAltId                     :: !(Maybe Text)
     , _aPphNames                  :: !(Maybe [Text])
     , _aCaptionExemption          :: !(Maybe Text)
@@ -61,7 +62,8 @@ data Avail = Avail'
     , _aProductId                 :: !(Maybe Text)
     , _aSeasonAltId               :: !(Maybe Text)
     , _aTitleInternalAlias        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Avail' with the minimum fields required to make a request.
 --
@@ -135,7 +137,7 @@ data Avail = Avail'
 avail
     :: Avail
 avail =
-    Avail'
+  Avail'
     { _aAltId = Nothing
     , _aPphNames = Nothing
     , _aCaptionExemption = Nothing
@@ -466,11 +468,13 @@ instance ToJSON Avail where
 -- | Response to the \'ListAvails\' method.
 --
 -- /See:/ 'listAvailsResponse' smart constructor.
-data ListAvailsResponse = ListAvailsResponse'
+data ListAvailsResponse =
+  ListAvailsResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larAvails        :: !(Maybe [Avail])
     , _larTotalSize     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAvailsResponse' with the minimum fields required to make a request.
 --
@@ -484,11 +488,8 @@ data ListAvailsResponse = ListAvailsResponse'
 listAvailsResponse
     :: ListAvailsResponse
 listAvailsResponse =
-    ListAvailsResponse'
-    { _larNextPageToken = Nothing
-    , _larAvails = Nothing
-    , _larTotalSize = Nothing
-    }
+  ListAvailsResponse'
+    {_larNextPageToken = Nothing, _larAvails = Nothing, _larTotalSize = Nothing}
 
 -- | See _List methods rules_ for info about this field.
 larNextPageToken :: Lens' ListAvailsResponse (Maybe Text)
@@ -529,11 +530,13 @@ instance ToJSON ListAvailsResponse where
 -- | Response to the \'ListOrders\' method.
 --
 -- /See:/ 'listOrdersResponse' smart constructor.
-data ListOrdersResponse = ListOrdersResponse'
+data ListOrdersResponse =
+  ListOrdersResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorTotalSize     :: !(Maybe (Textual Int32))
     , _lorOrders        :: !(Maybe [Order])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOrdersResponse' with the minimum fields required to make a request.
 --
@@ -547,11 +550,8 @@ data ListOrdersResponse = ListOrdersResponse'
 listOrdersResponse
     :: ListOrdersResponse
 listOrdersResponse =
-    ListOrdersResponse'
-    { _lorNextPageToken = Nothing
-    , _lorTotalSize = Nothing
-    , _lorOrders = Nothing
-    }
+  ListOrdersResponse'
+    {_lorNextPageToken = Nothing, _lorTotalSize = Nothing, _lorOrders = Nothing}
 
 -- | See _List methods rules_ for info about this field.
 lorNextPageToken :: Lens' ListOrdersResponse (Maybe Text)
@@ -591,11 +591,13 @@ instance ToJSON ListOrdersResponse where
 -- | Response to the \'ListStoreInfos\' method.
 --
 -- /See:/ 'listStoreInfosResponse' smart constructor.
-data ListStoreInfosResponse = ListStoreInfosResponse'
+data ListStoreInfosResponse =
+  ListStoreInfosResponse'
     { _lsirNextPageToken :: !(Maybe Text)
     , _lsirTotalSize     :: !(Maybe (Textual Int32))
     , _lsirStoreInfos    :: !(Maybe [StoreInfo])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStoreInfosResponse' with the minimum fields required to make a request.
 --
@@ -609,7 +611,7 @@ data ListStoreInfosResponse = ListStoreInfosResponse'
 listStoreInfosResponse
     :: ListStoreInfosResponse
 listStoreInfosResponse =
-    ListStoreInfosResponse'
+  ListStoreInfosResponse'
     { _lsirNextPageToken = Nothing
     , _lsirTotalSize = Nothing
     , _lsirStoreInfos = Nothing
@@ -658,7 +660,8 @@ instance ToJSON ListStoreInfosResponse where
 -- also be identified by partners using its \`custom_id\` (when provided).
 --
 -- /See:/ 'order' smart constructor.
-data Order = Order'
+data Order =
+  Order'
     { _oStatus                 :: !(Maybe OrderStatus)
     , _oShowName               :: !(Maybe Text)
     , _oPphName                :: !(Maybe Text)
@@ -682,7 +685,8 @@ data Order = Order'
     , _oNormalizedPriority     :: !(Maybe OrderNormalizedPriority)
     , _oOrderId                :: !(Maybe Text)
     , _oEpisodeName            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
@@ -736,7 +740,7 @@ data Order = Order'
 order
     :: Order
 order =
-    Order'
+  Order'
     { _oStatus = Nothing
     , _oShowName = Nothing
     , _oPphName = Nothing
@@ -962,7 +966,8 @@ instance ToJSON Order where
 -- identify a specific title or edit in a country.
 --
 -- /See:/ 'storeInfo' smart constructor.
-data StoreInfo = StoreInfo'
+data StoreInfo =
+  StoreInfo'
     { _siTitleLevelEidr :: !(Maybe Text)
     , _siPphNames       :: !(Maybe [Text])
     , _siShowName       :: !(Maybe Text)
@@ -988,7 +993,8 @@ data StoreInfo = StoreInfo'
     , _siHasAudio51     :: !(Maybe Bool)
     , _siSeasonId       :: !(Maybe Text)
     , _siShowId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StoreInfo' with the minimum fields required to make a request.
 --
@@ -1046,7 +1052,7 @@ data StoreInfo = StoreInfo'
 storeInfo
     :: StoreInfo
 storeInfo =
-    StoreInfo'
+  StoreInfo'
     { _siTitleLevelEidr = Nothing
     , _siPphNames = Nothing
     , _siShowName = Nothing

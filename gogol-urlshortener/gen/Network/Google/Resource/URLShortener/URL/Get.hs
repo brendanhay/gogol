@@ -53,10 +53,12 @@ type URLGetResource =
 -- | Expands a short URL or gets creation time and analytics.
 --
 -- /See:/ 'urlGet' smart constructor.
-data URLGet = URLGet'
+data URLGet =
+  URLGet'
     { _ugProjection :: !(Maybe URLGetProjection)
     , _ugShortURL   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLGet' with the minimum fields required to make a request.
 --
@@ -69,10 +71,7 @@ urlGet
     :: Text -- ^ 'ugShortURL'
     -> URLGet
 urlGet pUgShortURL_ =
-    URLGet'
-    { _ugProjection = Nothing
-    , _ugShortURL = pUgShortURL_
-    }
+  URLGet' {_ugProjection = Nothing, _ugShortURL = pUgShortURL_}
 
 -- | Additional information to return.
 ugProjection :: Lens' URLGet (Maybe URLGetProjection)

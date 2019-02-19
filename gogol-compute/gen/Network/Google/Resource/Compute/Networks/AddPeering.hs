@@ -61,12 +61,14 @@ type NetworksAddPeeringResource =
 -- | Adds a peering to the specified network.
 --
 -- /See:/ 'networksAddPeering' smart constructor.
-data NetworksAddPeering = NetworksAddPeering'
+data NetworksAddPeering =
+  NetworksAddPeering'
     { _napRequestId :: !(Maybe Text)
     , _napProject   :: !Text
     , _napNetwork   :: !Text
     , _napPayload   :: !NetworksAddPeeringRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworksAddPeering' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ networksAddPeering
     -> NetworksAddPeeringRequest -- ^ 'napPayload'
     -> NetworksAddPeering
 networksAddPeering pNapProject_ pNapNetwork_ pNapPayload_ =
-    NetworksAddPeering'
+  NetworksAddPeering'
     { _napRequestId = Nothing
     , _napProject = pNapProject_
     , _napNetwork = pNapNetwork_

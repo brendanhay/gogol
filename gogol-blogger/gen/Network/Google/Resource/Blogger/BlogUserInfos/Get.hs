@@ -56,11 +56,13 @@ type BlogUserInfosGetResource =
 -- | Gets one blog and user info pair by blogId and userId.
 --
 -- /See:/ 'blogUserInfosGet' smart constructor.
-data BlogUserInfosGet = BlogUserInfosGet'
+data BlogUserInfosGet =
+  BlogUserInfosGet'
     { _buigBlogId   :: !Text
     , _buigUserId   :: !Text
     , _buigMaxPosts :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BlogUserInfosGet' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ blogUserInfosGet
     -> Text -- ^ 'buigUserId'
     -> BlogUserInfosGet
 blogUserInfosGet pBuigBlogId_ pBuigUserId_ =
-    BlogUserInfosGet'
+  BlogUserInfosGet'
     { _buigBlogId = pBuigBlogId_
     , _buigUserId = pBuigUserId_
     , _buigMaxPosts = Nothing

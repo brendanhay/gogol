@@ -193,12 +193,12 @@ firebaseRulesService
 
 -- | View and administer all your Firebase data and settings
 firebaseScope :: Proxy '["https://www.googleapis.com/auth/firebase"]
-firebaseScope = Proxy;
+firebaseScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View all your Firebase data and settings
 firebaseReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/firebase.readonly"]
-firebaseReadOnlyScope = Proxy;
+firebaseReadOnlyScope = Proxy

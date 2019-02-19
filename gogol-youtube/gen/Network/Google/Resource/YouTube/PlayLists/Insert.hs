@@ -57,12 +57,14 @@ type PlayListsInsertResource =
 -- | Creates a playlist.
 --
 -- /See:/ 'playListsInsert' smart constructor.
-data PlayListsInsert = PlayListsInsert'
+data PlayListsInsert =
+  PlayListsInsert'
     { _pliPart                          :: !Text
     , _pliPayload                       :: !PlayList
     , _pliOnBehalfOfContentOwner        :: !(Maybe Text)
     , _pliOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListsInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ playListsInsert
     -> PlayList -- ^ 'pliPayload'
     -> PlayListsInsert
 playListsInsert pPliPart_ pPliPayload_ =
-    PlayListsInsert'
+  PlayListsInsert'
     { _pliPart = pPliPart_
     , _pliPayload = pPliPayload_
     , _pliOnBehalfOfContentOwner = Nothing

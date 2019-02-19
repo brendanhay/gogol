@@ -65,7 +65,8 @@ type ProjectsInstancesTablesCreateResource =
 -- with a full set of initial column families, specified in the request.
 --
 -- /See:/ 'projectsInstancesTablesCreate' smart constructor.
-data ProjectsInstancesTablesCreate = ProjectsInstancesTablesCreate'
+data ProjectsInstancesTablesCreate =
+  ProjectsInstancesTablesCreate'
     { _pitcParent         :: !Text
     , _pitcXgafv          :: !(Maybe Xgafv)
     , _pitcUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsInstancesTablesCreate = ProjectsInstancesTablesCreate'
     , _pitcUploadType     :: !(Maybe Text)
     , _pitcPayload        :: !CreateTableRequest
     , _pitcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesTablesCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsInstancesTablesCreate
     -> CreateTableRequest -- ^ 'pitcPayload'
     -> ProjectsInstancesTablesCreate
 projectsInstancesTablesCreate pPitcParent_ pPitcPayload_ =
-    ProjectsInstancesTablesCreate'
+  ProjectsInstancesTablesCreate'
     { _pitcParent = pPitcParent_
     , _pitcXgafv = Nothing
     , _pitcUploadProtocol = Nothing

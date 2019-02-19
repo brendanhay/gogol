@@ -58,12 +58,14 @@ type AdUnitsListResource =
 -- | List all ad units in the specified ad client for this AdSense account.
 --
 -- /See:/ 'adUnitsList' smart constructor.
-data AdUnitsList = AdUnitsList'
+data AdUnitsList =
+  AdUnitsList'
     { _aulIncludeInactive :: !(Maybe Bool)
     , _aulAdClientId      :: !Text
     , _aulPageToken       :: !(Maybe Text)
     , _aulMaxResults      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdUnitsList' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ adUnitsList
     :: Text -- ^ 'aulAdClientId'
     -> AdUnitsList
 adUnitsList pAulAdClientId_ =
-    AdUnitsList'
+  AdUnitsList'
     { _aulIncludeInactive = Nothing
     , _aulAdClientId = pAulAdClientId_
     , _aulPageToken = Nothing

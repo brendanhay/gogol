@@ -61,12 +61,14 @@ type DatabasesPatchResource =
 -- Cloud SQL instance. This method supports patch semantics.
 --
 -- /See:/ 'databasesPatch' smart constructor.
-data DatabasesPatch = DatabasesPatch'
+data DatabasesPatch =
+  DatabasesPatch'
     { _dpProject  :: !Text
     , _dpDatabase :: !Text
     , _dpPayload  :: !Database
     , _dpInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DatabasesPatch' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ databasesPatch
     -> Text -- ^ 'dpInstance'
     -> DatabasesPatch
 databasesPatch pDpProject_ pDpDatabase_ pDpPayload_ pDpInstance_ =
-    DatabasesPatch'
+  DatabasesPatch'
     { _dpProject = pDpProject_
     , _dpDatabase = pDpDatabase_
     , _dpPayload = pDpPayload_

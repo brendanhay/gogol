@@ -59,14 +59,16 @@ type EnterprisesGetResource =
 -- | Gets an enterprise.
 --
 -- /See:/ 'enterprisesGet' smart constructor.
-data EnterprisesGet = EnterprisesGet'
+data EnterprisesGet =
+  EnterprisesGet'
     { _egXgafv          :: !(Maybe Xgafv)
     , _egUploadProtocol :: !(Maybe Text)
     , _egAccessToken    :: !(Maybe Text)
     , _egUploadType     :: !(Maybe Text)
     , _egName           :: !Text
     , _egCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ enterprisesGet
     :: Text -- ^ 'egName'
     -> EnterprisesGet
 enterprisesGet pEgName_ =
-    EnterprisesGet'
+  EnterprisesGet'
     { _egXgafv = Nothing
     , _egUploadProtocol = Nothing
     , _egAccessToken = Nothing

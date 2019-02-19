@@ -55,10 +55,12 @@ type TurnBasedMatchesJoinResource =
 -- | Join a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesJoin' smart constructor.
-data TurnBasedMatchesJoin = TurnBasedMatchesJoin'
+data TurnBasedMatchesJoin =
+  TurnBasedMatchesJoin'
     { _tbmjLanguage :: !(Maybe Text)
     , _tbmjMatchId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesJoin' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ turnBasedMatchesJoin
     :: Text -- ^ 'tbmjMatchId'
     -> TurnBasedMatchesJoin
 turnBasedMatchesJoin pTbmjMatchId_ =
-    TurnBasedMatchesJoin'
-    { _tbmjLanguage = Nothing
-    , _tbmjMatchId = pTbmjMatchId_
-    }
+  TurnBasedMatchesJoin' {_tbmjLanguage = Nothing, _tbmjMatchId = pTbmjMatchId_}
 
 -- | The preferred language to use for strings returned by this method.
 tbmjLanguage :: Lens' TurnBasedMatchesJoin (Maybe Text)

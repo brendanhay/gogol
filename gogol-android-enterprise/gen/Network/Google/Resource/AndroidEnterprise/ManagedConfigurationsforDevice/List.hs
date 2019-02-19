@@ -62,11 +62,13 @@ type ManagedConfigurationsforDeviceListResource =
 -- device. Only the ID is set.
 --
 -- /See:/ 'managedConfigurationsforDeviceList' smart constructor.
-data ManagedConfigurationsforDeviceList = ManagedConfigurationsforDeviceList'
+data ManagedConfigurationsforDeviceList =
+  ManagedConfigurationsforDeviceList'
     { _mcdlEnterpriseId :: !Text
     , _mcdlUserId       :: !Text
     , _mcdlDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsforDeviceList' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ managedConfigurationsforDeviceList
     -> Text -- ^ 'mcdlDeviceId'
     -> ManagedConfigurationsforDeviceList
 managedConfigurationsforDeviceList pMcdlEnterpriseId_ pMcdlUserId_ pMcdlDeviceId_ =
-    ManagedConfigurationsforDeviceList'
+  ManagedConfigurationsforDeviceList'
     { _mcdlEnterpriseId = pMcdlEnterpriseId_
     , _mcdlUserId = pMcdlUserId_
     , _mcdlDeviceId = pMcdlDeviceId_
@@ -106,7 +108,8 @@ mcdlDeviceId
   = lens _mcdlDeviceId (\ s a -> s{_mcdlDeviceId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforDeviceList where
+           ManagedConfigurationsforDeviceList
+         where
         type Rs ManagedConfigurationsforDeviceList =
              ManagedConfigurationsForDeviceListResponse
         type Scopes ManagedConfigurationsforDeviceList =

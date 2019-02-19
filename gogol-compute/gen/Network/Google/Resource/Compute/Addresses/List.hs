@@ -63,14 +63,16 @@ type AddressesListResource =
 -- | Retrieves a list of addresses contained within the specified region.
 --
 -- /See:/ 'addressesList' smart constructor.
-data AddressesList = AddressesList'
+data AddressesList =
+  AddressesList'
     { _alOrderBy    :: !(Maybe Text)
     , _alProject    :: !Text
     , _alFilter     :: !(Maybe Text)
     , _alRegion     :: !Text
     , _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressesList' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ addressesList
     -> Text -- ^ 'alRegion'
     -> AddressesList
 addressesList pAlProject_ pAlRegion_ =
-    AddressesList'
+  AddressesList'
     { _alOrderBy = Nothing
     , _alProject = pAlProject_
     , _alFilter = Nothing

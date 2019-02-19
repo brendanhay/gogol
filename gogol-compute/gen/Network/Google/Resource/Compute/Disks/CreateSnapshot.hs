@@ -64,14 +64,16 @@ type DisksCreateSnapshotResource =
 -- | Creates a snapshot of a specified persistent disk.
 --
 -- /See:/ 'disksCreateSnapshot' smart constructor.
-data DisksCreateSnapshot = DisksCreateSnapshot'
+data DisksCreateSnapshot =
+  DisksCreateSnapshot'
     { _dcsGuestFlush :: !(Maybe Bool)
     , _dcsRequestId  :: !(Maybe Text)
     , _dcsProject    :: !Text
     , _dcsDisk       :: !Text
     , _dcsZone       :: !Text
     , _dcsPayload    :: !Snapshot
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisksCreateSnapshot' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ disksCreateSnapshot
     -> Snapshot -- ^ 'dcsPayload'
     -> DisksCreateSnapshot
 disksCreateSnapshot pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
-    DisksCreateSnapshot'
+  DisksCreateSnapshot'
     { _dcsGuestFlush = Nothing
     , _dcsRequestId = Nothing
     , _dcsProject = pDcsProject_

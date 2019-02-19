@@ -56,10 +56,12 @@ type SubscriptionsSuspendResource =
 -- | Suspends an active subscription.
 --
 -- /See:/ 'subscriptionsSuspend' smart constructor.
-data SubscriptionsSuspend = SubscriptionsSuspend'
+data SubscriptionsSuspend =
+  SubscriptionsSuspend'
     { _ssCustomerId     :: !Text
     , _ssSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionsSuspend' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ subscriptionsSuspend
     -> Text -- ^ 'ssSubscriptionId'
     -> SubscriptionsSuspend
 subscriptionsSuspend pSsCustomerId_ pSsSubscriptionId_ =
-    SubscriptionsSuspend'
-    { _ssCustomerId = pSsCustomerId_
-    , _ssSubscriptionId = pSsSubscriptionId_
-    }
+  SubscriptionsSuspend'
+    {_ssCustomerId = pSsCustomerId_, _ssSubscriptionId = pSsSubscriptionId_}
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a

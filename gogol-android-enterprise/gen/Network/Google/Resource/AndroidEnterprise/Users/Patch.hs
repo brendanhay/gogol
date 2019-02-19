@@ -64,11 +64,13 @@ type UsersPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'usersPatch' smart constructor.
-data UsersPatch = UsersPatch'
+data UsersPatch =
+  UsersPatch'
     { _upEnterpriseId :: !Text
     , _upPayload      :: !User
     , _upUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersPatch' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ usersPatch
     -> Text -- ^ 'upUserId'
     -> UsersPatch
 usersPatch pUpEnterpriseId_ pUpPayload_ pUpUserId_ =
-    UsersPatch'
+  UsersPatch'
     { _upEnterpriseId = pUpEnterpriseId_
     , _upPayload = pUpPayload_
     , _upUserId = pUpUserId_

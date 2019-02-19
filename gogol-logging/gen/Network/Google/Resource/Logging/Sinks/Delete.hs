@@ -61,14 +61,16 @@ type SinksDeleteResource =
 -- service account is also deleted.
 --
 -- /See:/ 'sinksDelete' smart constructor.
-data SinksDelete = SinksDelete'
+data SinksDelete =
+  SinksDelete'
     { _sdXgafv          :: !(Maybe Xgafv)
     , _sdUploadProtocol :: !(Maybe Text)
     , _sdAccessToken    :: !(Maybe Text)
     , _sdUploadType     :: !(Maybe Text)
     , _sdSinkName       :: !Text
     , _sdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SinksDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ sinksDelete
     :: Text -- ^ 'sdSinkName'
     -> SinksDelete
 sinksDelete pSdSinkName_ =
-    SinksDelete'
+  SinksDelete'
     { _sdXgafv = Nothing
     , _sdUploadProtocol = Nothing
     , _sdAccessToken = Nothing

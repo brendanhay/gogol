@@ -59,14 +59,16 @@ type ExclusionsDeleteResource =
 -- | Deletes an exclusion.
 --
 -- /See:/ 'exclusionsDelete' smart constructor.
-data ExclusionsDelete = ExclusionsDelete'
+data ExclusionsDelete =
+  ExclusionsDelete'
     { _edXgafv          :: !(Maybe Xgafv)
     , _edUploadProtocol :: !(Maybe Text)
     , _edAccessToken    :: !(Maybe Text)
     , _edUploadType     :: !(Maybe Text)
     , _edName           :: !Text
     , _edCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExclusionsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ exclusionsDelete
     :: Text -- ^ 'edName'
     -> ExclusionsDelete
 exclusionsDelete pEdName_ =
-    ExclusionsDelete'
+  ExclusionsDelete'
     { _edXgafv = Nothing
     , _edUploadProtocol = Nothing
     , _edAccessToken = Nothing

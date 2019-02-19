@@ -59,11 +59,13 @@ type DatabasesInsertResource =
 -- Cloud SQL instance.
 --
 -- /See:/ 'databasesInsert' smart constructor.
-data DatabasesInsert = DatabasesInsert'
+data DatabasesInsert =
+  DatabasesInsert'
     { _diProject  :: !Text
     , _diPayload  :: !Database
     , _diInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DatabasesInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ databasesInsert
     -> Text -- ^ 'diInstance'
     -> DatabasesInsert
 databasesInsert pDiProject_ pDiPayload_ pDiInstance_ =
-    DatabasesInsert'
+  DatabasesInsert'
     { _diProject = pDiProject_
     , _diPayload = pDiPayload_
     , _diInstance = pDiInstance_

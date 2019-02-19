@@ -57,11 +57,13 @@ type BudgetUpdateResource =
 -- accountId and billingId, with the budget amount in the request.
 --
 -- /See:/ 'budgetUpdate' smart constructor.
-data BudgetUpdate = BudgetUpdate'
+data BudgetUpdate =
+  BudgetUpdate'
     { _buPayload   :: !Budget
     , _buAccountId :: !(Textual Int64)
     , _buBillingId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BudgetUpdate' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ budgetUpdate
     -> Int64 -- ^ 'buBillingId'
     -> BudgetUpdate
 budgetUpdate pBuPayload_ pBuAccountId_ pBuBillingId_ =
-    BudgetUpdate'
+  BudgetUpdate'
     { _buPayload = pBuPayload_
     , _buAccountId = _Coerce # pBuAccountId_
     , _buBillingId = _Coerce # pBuBillingId_

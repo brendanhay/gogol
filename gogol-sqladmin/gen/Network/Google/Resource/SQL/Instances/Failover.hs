@@ -58,11 +58,13 @@ type InstancesFailoverResource =
 -- | Failover the instance to its failover replica instance.
 --
 -- /See:/ 'instancesFailover' smart constructor.
-data InstancesFailover = InstancesFailover'
+data InstancesFailover =
+  InstancesFailover'
     { _ifProject  :: !Text
     , _ifPayload  :: !InstancesFailoverRequest
     , _ifInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesFailover' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ instancesFailover
     -> Text -- ^ 'ifInstance'
     -> InstancesFailover
 instancesFailover pIfProject_ pIfPayload_ pIfInstance_ =
-    InstancesFailover'
+  InstancesFailover'
     { _ifProject = pIfProject_
     , _ifPayload = pIfPayload_
     , _ifInstance = pIfInstance_

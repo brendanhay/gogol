@@ -64,13 +64,15 @@ type BackendBucketsListResource =
 -- project.
 --
 -- /See:/ 'backendBucketsList' smart constructor.
-data BackendBucketsList = BackendBucketsList'
+data BackendBucketsList =
+  BackendBucketsList'
     { _bblOrderBy    :: !(Maybe Text)
     , _bblProject    :: !Text
     , _bblFilter     :: !(Maybe Text)
     , _bblPageToken  :: !(Maybe Text)
     , _bblMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendBucketsList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ backendBucketsList
     :: Text -- ^ 'bblProject'
     -> BackendBucketsList
 backendBucketsList pBblProject_ =
-    BackendBucketsList'
+  BackendBucketsList'
     { _bblOrderBy = Nothing
     , _bblProject = pBblProject_
     , _bblFilter = Nothing

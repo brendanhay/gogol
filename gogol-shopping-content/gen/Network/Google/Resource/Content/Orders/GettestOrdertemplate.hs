@@ -60,11 +60,13 @@ type OrdersGettestOrdertemplateResource =
 -- create a new order in sandbox.
 --
 -- /See:/ 'ordersGettestOrdertemplate' smart constructor.
-data OrdersGettestOrdertemplate = OrdersGettestOrdertemplate'
+data OrdersGettestOrdertemplate =
+  OrdersGettestOrdertemplate'
     { _ogoMerchantId   :: !(Textual Word64)
     , _ogoTemplateName :: !OrdersGettestOrdertemplateTemplateName
     , _ogoCountry      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersGettestOrdertemplate' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ ordersGettestOrdertemplate
     -> OrdersGettestOrdertemplateTemplateName -- ^ 'ogoTemplateName'
     -> OrdersGettestOrdertemplate
 ordersGettestOrdertemplate pOgoMerchantId_ pOgoTemplateName_ =
-    OrdersGettestOrdertemplate'
+  OrdersGettestOrdertemplate'
     { _ogoMerchantId = _Coerce # pOgoMerchantId_
     , _ogoTemplateName = pOgoTemplateName_
     , _ogoCountry = Nothing

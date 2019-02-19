@@ -54,9 +54,11 @@ type VerificationCodesInvalidateResource =
 -- | Invalidate the current backup verification codes for the user.
 --
 -- /See:/ 'verificationCodesInvalidate' smart constructor.
-newtype VerificationCodesInvalidate = VerificationCodesInvalidate'
+newtype VerificationCodesInvalidate =
+  VerificationCodesInvalidate'
     { _vciUserKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VerificationCodesInvalidate' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ verificationCodesInvalidate
     :: Text -- ^ 'vciUserKey'
     -> VerificationCodesInvalidate
 verificationCodesInvalidate pVciUserKey_ =
-    VerificationCodesInvalidate'
-    { _vciUserKey = pVciUserKey_
-    }
+  VerificationCodesInvalidate' {_vciUserKey = pVciUserKey_}
 
 -- | Email or immutable ID of the user
 vciUserKey :: Lens' VerificationCodesInvalidate Text

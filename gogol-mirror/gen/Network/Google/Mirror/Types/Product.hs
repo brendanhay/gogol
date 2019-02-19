@@ -24,10 +24,12 @@ import           Network.Google.Prelude
 -- user.
 --
 -- /See:/ 'notificationConfig' smart constructor.
-data NotificationConfig = NotificationConfig'
+data NotificationConfig =
+  NotificationConfig'
     { _ncDeliveryTime :: !(Maybe DateTime')
     , _ncLevel        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
 --
@@ -39,10 +41,7 @@ data NotificationConfig = NotificationConfig'
 notificationConfig
     :: NotificationConfig
 notificationConfig =
-    NotificationConfig'
-    { _ncDeliveryTime = Nothing
-    , _ncLevel = Nothing
-    }
+  NotificationConfig' {_ncDeliveryTime = Nothing, _ncLevel = Nothing}
 
 -- | The time at which the notification should be delivered.
 ncDeliveryTime :: Lens' NotificationConfig (Maybe UTCTime)
@@ -74,9 +73,11 @@ instance ToJSON NotificationConfig where
 -- | A single menu command that is part of a Contact.
 --
 -- /See:/ 'command' smart constructor.
-newtype Command = Command'
+newtype Command =
+  Command'
     { _cType :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Command' with the minimum fields required to make a request.
 --
@@ -85,10 +86,7 @@ newtype Command = Command'
 -- * 'cType'
 command
     :: Command
-command =
-    Command'
-    { _cType = Nothing
-    }
+command = Command' {_cType = Nothing}
 
 -- | The type of operation this command corresponds to. Allowed values are: -
 -- TAKE_A_NOTE - Shares a timeline item with the transcription of user
@@ -111,10 +109,12 @@ instance ToJSON Command where
 -- requests on the locations collection.
 --
 -- /See:/ 'locationsListResponse' smart constructor.
-data LocationsListResponse = LocationsListResponse'
+data LocationsListResponse =
+  LocationsListResponse'
     { _llrKind  :: !Text
     , _llrItems :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationsListResponse' with the minimum fields required to make a request.
 --
@@ -126,10 +126,8 @@ data LocationsListResponse = LocationsListResponse'
 locationsListResponse
     :: LocationsListResponse
 locationsListResponse =
-    LocationsListResponse'
-    { _llrKind = "mirror#locationsList"
-    , _llrItems = Nothing
-    }
+  LocationsListResponse'
+    {_llrKind = "mirror#locationsList", _llrItems = Nothing}
 
 -- | The type of resource. This is always mirror#locationsList.
 llrKind :: Lens' LocationsListResponse Text
@@ -160,7 +158,8 @@ instance ToJSON LocationsListResponse where
 -- | A geographic location that can be associated with a timeline item.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lKind        :: !Text
     , _lLatitude    :: !(Maybe (Textual Double))
     , _lAddress     :: !(Maybe Text)
@@ -169,7 +168,8 @@ data Location = Location'
     , _lAccuracy    :: !(Maybe (Textual Double))
     , _lLongitude   :: !(Maybe (Textual Double))
     , _lTimestamp   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -193,7 +193,7 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lKind = "mirror#location"
     , _lLatitude = Nothing
     , _lAddress = Nothing
@@ -276,14 +276,16 @@ instance ToJSON Location where
 -- | A notification delivered by the API.
 --
 -- /See:/ 'notification' smart constructor.
-data Notification = Notification'
+data Notification =
+  Notification'
     { _nOperation   :: !(Maybe Text)
     , _nItemId      :: !(Maybe Text)
     , _nCollection  :: !(Maybe Text)
     , _nUserActions :: !(Maybe [UserAction])
     , _nVerifyToken :: !(Maybe Text)
     , _nUserToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
@@ -303,7 +305,7 @@ data Notification = Notification'
 notification
     :: Notification
 notification =
-    Notification'
+  Notification'
     { _nOperation = Nothing
     , _nItemId = Nothing
     , _nCollection = Nothing
@@ -370,7 +372,8 @@ instance ToJSON Notification where
 -- | A person or group that can be used as a creator or a contact.
 --
 -- /See:/ 'contact' smart constructor.
-data Contact = Contact'
+data Contact =
+  Contact'
     { _conAcceptCommands  :: !(Maybe [Command])
     , _conSharingFeatures :: !(Maybe [Text])
     , _conImageURLs       :: !(Maybe [Text])
@@ -383,7 +386,8 @@ data Contact = Contact'
     , _conId              :: !(Maybe Text)
     , _conType            :: !(Maybe Text)
     , _conSpeakableName   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Contact' with the minimum fields required to make a request.
 --
@@ -415,7 +419,7 @@ data Contact = Contact'
 contact
     :: Contact
 contact =
-    Contact'
+  Contact'
     { _conAcceptCommands = Nothing
     , _conSharingFeatures = Nothing
     , _conImageURLs = Nothing
@@ -558,10 +562,12 @@ instance ToJSON Contact where
 
 --
 -- /See:/ 'authToken' smart constructor.
-data AuthToken = AuthToken'
+data AuthToken =
+  AuthToken'
     { _atAuthToken :: !(Maybe Text)
     , _atType      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuthToken' with the minimum fields required to make a request.
 --
@@ -572,11 +578,7 @@ data AuthToken = AuthToken'
 -- * 'atType'
 authToken
     :: AuthToken
-authToken =
-    AuthToken'
-    { _atAuthToken = Nothing
-    , _atType = Nothing
-    }
+authToken = AuthToken' {_atAuthToken = Nothing, _atType = Nothing}
 
 atAuthToken :: Lens' AuthToken (Maybe Text)
 atAuthToken
@@ -603,10 +605,12 @@ instance ToJSON AuthToken where
 -- requests on the attachments collection.
 --
 -- /See:/ 'attachmentsListResponse' smart constructor.
-data AttachmentsListResponse = AttachmentsListResponse'
+data AttachmentsListResponse =
+  AttachmentsListResponse'
     { _alrKind  :: !Text
     , _alrItems :: !(Maybe [Attachment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachmentsListResponse' with the minimum fields required to make a request.
 --
@@ -618,10 +622,8 @@ data AttachmentsListResponse = AttachmentsListResponse'
 attachmentsListResponse
     :: AttachmentsListResponse
 attachmentsListResponse =
-    AttachmentsListResponse'
-    { _alrKind = "mirror#attachmentsList"
-    , _alrItems = Nothing
-    }
+  AttachmentsListResponse'
+    {_alrKind = "mirror#attachmentsList", _alrItems = Nothing}
 
 -- | The type of resource. This is always mirror#attachmentsList.
 alrKind :: Lens' AttachmentsListResponse Text
@@ -652,14 +654,16 @@ instance ToJSON AttachmentsListResponse where
 -- | A custom menu item that can be presented to the user by a timeline item.
 --
 -- /See:/ 'menuItem' smart constructor.
-data MenuItem = MenuItem'
+data MenuItem =
+  MenuItem'
     { _miValues             :: !(Maybe [MenuValue])
     , _miRemoveWhenSelected :: !(Maybe Bool)
     , _miAction             :: !(Maybe Text)
     , _miPayload            :: !(Maybe Text)
     , _miContextualCommand  :: !(Maybe Text)
     , _miId                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MenuItem' with the minimum fields required to make a request.
 --
@@ -679,7 +683,7 @@ data MenuItem = MenuItem'
 menuItem
     :: MenuItem
 menuItem =
-    MenuItem'
+  MenuItem'
     { _miValues = Nothing
     , _miRemoveWhenSelected = Nothing
     , _miAction = Nothing
@@ -786,11 +790,13 @@ instance ToJSON MenuItem where
 -- | A setting for Glass.
 --
 -- /See:/ 'setting' smart constructor.
-data Setting = Setting'
+data Setting =
+  Setting'
     { _sKind  :: !Text
     , _sValue :: !(Maybe Text)
     , _sId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Setting' with the minimum fields required to make a request.
 --
@@ -804,11 +810,7 @@ data Setting = Setting'
 setting
     :: Setting
 setting =
-    Setting'
-    { _sKind = "mirror#setting"
-    , _sValue = Nothing
-    , _sId = Nothing
-    }
+  Setting' {_sKind = "mirror#setting", _sValue = Nothing, _sId = Nothing}
 
 -- | The type of resource. This is always mirror#setting.
 sKind :: Lens' Setting Text
@@ -846,12 +848,14 @@ instance ToJSON Setting where
 -- timeline item.
 --
 -- /See:/ 'attachment' smart constructor.
-data Attachment = Attachment'
+data Attachment =
+  Attachment'
     { _aContentURL          :: !(Maybe Text)
     , _aId                  :: !(Maybe Text)
     , _aIsProcessingContent :: !(Maybe Bool)
     , _aContentType         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Attachment' with the minimum fields required to make a request.
 --
@@ -867,7 +871,7 @@ data Attachment = Attachment'
 attachment
     :: Attachment
 attachment =
-    Attachment'
+  Attachment'
     { _aContentURL = Nothing
     , _aId = Nothing
     , _aIsProcessingContent = Nothing
@@ -917,12 +921,14 @@ instance ToJSON Attachment where
 -- | Represents an account passed into the Account Manager on Glass.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account'
+data Account =
+  Account'
     { _aAuthTokens :: !(Maybe [AuthToken])
     , _aUserData   :: !(Maybe [UserData])
     , _aPassword   :: !(Maybe Text)
     , _aFeatures   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -938,7 +944,7 @@ data Account = Account'
 account
     :: Account
 account =
-    Account'
+  Account'
     { _aAuthTokens = Nothing
     , _aUserData = Nothing
     , _aPassword = Nothing
@@ -988,10 +994,12 @@ instance ToJSON Account where
 
 --
 -- /See:/ 'userData' smart constructor.
-data UserData = UserData'
+data UserData =
+  UserData'
     { _udValue :: !(Maybe Text)
     , _udKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserData' with the minimum fields required to make a request.
 --
@@ -1002,11 +1010,7 @@ data UserData = UserData'
 -- * 'udKey'
 userData
     :: UserData
-userData =
-    UserData'
-    { _udValue = Nothing
-    , _udKey = Nothing
-    }
+userData = UserData' {_udValue = Nothing, _udKey = Nothing}
 
 udValue :: Lens' UserData (Maybe Text)
 udValue = lens _udValue (\ s a -> s{_udValue = a})
@@ -1029,10 +1033,12 @@ instance ToJSON UserData where
 -- | Represents an action taken by the user that triggered a notification.
 --
 -- /See:/ 'userAction' smart constructor.
-data UserAction = UserAction'
+data UserAction =
+  UserAction'
     { _uaPayload :: !(Maybe Text)
     , _uaType    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserAction' with the minimum fields required to make a request.
 --
@@ -1043,11 +1049,7 @@ data UserAction = UserAction'
 -- * 'uaType'
 userAction
     :: UserAction
-userAction =
-    UserAction'
-    { _uaPayload = Nothing
-    , _uaType = Nothing
-    }
+userAction = UserAction' {_uaPayload = Nothing, _uaType = Nothing}
 
 -- | An optional payload for the action. For actions of type CUSTOM, this is
 -- the ID of the custom menu item that was selected.
@@ -1083,11 +1085,13 @@ instance ToJSON UserAction where
 -- requests on the timeline collection.
 --
 -- /See:/ 'timelineListResponse' smart constructor.
-data TimelineListResponse = TimelineListResponse'
+data TimelineListResponse =
+  TimelineListResponse'
     { _tlrNextPageToken :: !(Maybe Text)
     , _tlrKind          :: !Text
     , _tlrItems         :: !(Maybe [TimelineItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimelineListResponse' with the minimum fields required to make a request.
 --
@@ -1101,7 +1105,7 @@ data TimelineListResponse = TimelineListResponse'
 timelineListResponse
     :: TimelineListResponse
 timelineListResponse =
-    TimelineListResponse'
+  TimelineListResponse'
     { _tlrNextPageToken = Nothing
     , _tlrKind = "mirror#timeline"
     , _tlrItems = Nothing
@@ -1146,10 +1150,12 @@ instance ToJSON TimelineListResponse where
 -- server to GET requests on the contacts collection.
 --
 -- /See:/ 'contactsListResponse' smart constructor.
-data ContactsListResponse = ContactsListResponse'
+data ContactsListResponse =
+  ContactsListResponse'
     { _clrKind  :: !Text
     , _clrItems :: !(Maybe [Contact])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContactsListResponse' with the minimum fields required to make a request.
 --
@@ -1161,10 +1167,7 @@ data ContactsListResponse = ContactsListResponse'
 contactsListResponse
     :: ContactsListResponse
 contactsListResponse =
-    ContactsListResponse'
-    { _clrKind = "mirror#contacts"
-    , _clrItems = Nothing
-    }
+  ContactsListResponse' {_clrKind = "mirror#contacts", _clrItems = Nothing}
 
 -- | The type of resource. This is always mirror#contacts.
 clrKind :: Lens' ContactsListResponse Text
@@ -1195,11 +1198,13 @@ instance ToJSON ContactsListResponse where
 -- | A single value that is part of a MenuItem.
 --
 -- /See:/ 'menuValue' smart constructor.
-data MenuValue = MenuValue'
+data MenuValue =
+  MenuValue'
     { _mvState       :: !(Maybe Text)
     , _mvDisplayName :: !(Maybe Text)
     , _mvIconURL     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MenuValue' with the minimum fields required to make a request.
 --
@@ -1213,11 +1218,8 @@ data MenuValue = MenuValue'
 menuValue
     :: MenuValue
 menuValue =
-    MenuValue'
-    { _mvState = Nothing
-    , _mvDisplayName = Nothing
-    , _mvIconURL = Nothing
-    }
+  MenuValue'
+    {_mvState = Nothing, _mvDisplayName = Nothing, _mvIconURL = Nothing}
 
 -- | The state that this value applies to. Allowed values are: - DEFAULT -
 -- Default value shown when displayed in the menuItems list. - PENDING -
@@ -1259,7 +1261,8 @@ instance ToJSON MenuValue where
 -- | A subscription to events on a collection.
 --
 -- /See:/ 'subscription' smart constructor.
-data Subscription = Subscription'
+data Subscription =
+  Subscription'
     { _subCallbackURL  :: !(Maybe Text)
     , _subOperation    :: !(Maybe [Text])
     , _subNotification :: !(Maybe Notification)
@@ -1269,7 +1272,8 @@ data Subscription = Subscription'
     , _subUserToken    :: !(Maybe Text)
     , _subId           :: !(Maybe Text)
     , _subUpdated      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
@@ -1295,7 +1299,7 @@ data Subscription = Subscription'
 subscription
     :: Subscription
 subscription =
-    Subscription'
+  Subscription'
     { _subCallbackURL = Nothing
     , _subOperation = Nothing
     , _subNotification = Nothing
@@ -1401,7 +1405,8 @@ instance ToJSON Subscription where
 -- structure, described below.
 --
 -- /See:/ 'timelineItem' smart constructor.
-data TimelineItem = TimelineItem'
+data TimelineItem =
+  TimelineItem'
     { _tiCreator       :: !(Maybe Contact)
     , _tiDisplayTime   :: !(Maybe DateTime')
     , _tiEtag          :: !(Maybe Text)
@@ -1428,7 +1433,8 @@ data TimelineItem = TimelineItem'
     , _tiRecipients    :: !(Maybe [Contact])
     , _tiTitle         :: !(Maybe Text)
     , _tiInReplyTo     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimelineItem' with the minimum fields required to make a request.
 --
@@ -1488,7 +1494,7 @@ data TimelineItem = TimelineItem'
 timelineItem
     :: TimelineItem
 timelineItem =
-    TimelineItem'
+  TimelineItem'
     { _tiCreator = Nothing
     , _tiDisplayTime = Nothing
     , _tiEtag = Nothing
@@ -1781,10 +1787,12 @@ instance ToJSON TimelineItem where
 -- requests on the subscription collection.
 --
 -- /See:/ 'subscriptionsListResponse' smart constructor.
-data SubscriptionsListResponse = SubscriptionsListResponse'
+data SubscriptionsListResponse =
+  SubscriptionsListResponse'
     { _slrKind  :: !Text
     , _slrItems :: !(Maybe [Subscription])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionsListResponse' with the minimum fields required to make a request.
 --
@@ -1796,10 +1804,8 @@ data SubscriptionsListResponse = SubscriptionsListResponse'
 subscriptionsListResponse
     :: SubscriptionsListResponse
 subscriptionsListResponse =
-    SubscriptionsListResponse'
-    { _slrKind = "mirror#subscriptionsList"
-    , _slrItems = Nothing
-    }
+  SubscriptionsListResponse'
+    {_slrKind = "mirror#subscriptionsList", _slrItems = Nothing}
 
 -- | The type of resource. This is always mirror#subscriptionsList.
 slrKind :: Lens' SubscriptionsListResponse Text

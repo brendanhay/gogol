@@ -61,13 +61,15 @@ type DevicesPatchResource =
 -- | Updates the device policy. This method supports patch semantics.
 --
 -- /See:/ 'devicesPatch' smart constructor.
-data DevicesPatch = DevicesPatch'
+data DevicesPatch =
+  DevicesPatch'
     { _dpUpdateMask   :: !(Maybe Text)
     , _dpEnterpriseId :: !Text
     , _dpPayload      :: !Device
     , _dpUserId       :: !Text
     , _dpDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DevicesPatch' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ devicesPatch
     -> Text -- ^ 'dpDeviceId'
     -> DevicesPatch
 devicesPatch pDpEnterpriseId_ pDpPayload_ pDpUserId_ pDpDeviceId_ =
-    DevicesPatch'
+  DevicesPatch'
     { _dpUpdateMask = Nothing
     , _dpEnterpriseId = pDpEnterpriseId_
     , _dpPayload = pDpPayload_

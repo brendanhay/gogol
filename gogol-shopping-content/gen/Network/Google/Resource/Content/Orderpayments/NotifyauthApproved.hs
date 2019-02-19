@@ -61,11 +61,13 @@ type OrderpaymentsNotifyauthApprovedResource =
 -- amount.
 --
 -- /See:/ 'orderpaymentsNotifyauthApproved' smart constructor.
-data OrderpaymentsNotifyauthApproved = OrderpaymentsNotifyauthApproved'
+data OrderpaymentsNotifyauthApproved =
+  OrderpaymentsNotifyauthApproved'
     { _onaMerchantId :: !(Textual Word64)
     , _onaPayload    :: !OrderpaymentsNotifyAuthApprovedRequest
     , _onaOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrderpaymentsNotifyauthApproved' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ orderpaymentsNotifyauthApproved
     -> Text -- ^ 'onaOrderId'
     -> OrderpaymentsNotifyauthApproved
 orderpaymentsNotifyauthApproved pOnaMerchantId_ pOnaPayload_ pOnaOrderId_ =
-    OrderpaymentsNotifyauthApproved'
+  OrderpaymentsNotifyauthApproved'
     { _onaMerchantId = _Coerce # pOnaMerchantId_
     , _onaPayload = pOnaPayload_
     , _onaOrderId = pOnaOrderId_
@@ -107,7 +109,8 @@ onaOrderId
   = lens _onaOrderId (\ s a -> s{_onaOrderId = a})
 
 instance GoogleRequest
-         OrderpaymentsNotifyauthApproved where
+           OrderpaymentsNotifyauthApproved
+         where
         type Rs OrderpaymentsNotifyauthApproved =
              OrderpaymentsNotifyAuthApprovedResponse
         type Scopes OrderpaymentsNotifyauthApproved =

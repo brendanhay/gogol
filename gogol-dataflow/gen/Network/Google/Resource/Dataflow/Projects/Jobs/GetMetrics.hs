@@ -69,7 +69,8 @@ type ProjectsJobsGetMetricsResource =
 -- | Request the job status.
 --
 -- /See:/ 'projectsJobsGetMetrics' smart constructor.
-data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics'
+data ProjectsJobsGetMetrics =
+  ProjectsJobsGetMetrics'
     { _pjgmXgafv          :: !(Maybe Xgafv)
     , _pjgmJobId          :: !Text
     , _pjgmUploadProtocol :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics'
     , _pjgmUploadType     :: !(Maybe Text)
     , _pjgmProjectId      :: !Text
     , _pjgmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsGetMetrics' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ projectsJobsGetMetrics
     -> Text -- ^ 'pjgmProjectId'
     -> ProjectsJobsGetMetrics
 projectsJobsGetMetrics pPjgmJobId_ pPjgmProjectId_ =
-    ProjectsJobsGetMetrics'
+  ProjectsJobsGetMetrics'
     { _pjgmXgafv = Nothing
     , _pjgmJobId = pPjgmJobId_
     , _pjgmUploadProtocol = Nothing

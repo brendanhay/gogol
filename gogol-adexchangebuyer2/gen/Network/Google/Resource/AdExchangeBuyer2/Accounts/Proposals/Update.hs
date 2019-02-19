@@ -85,7 +85,8 @@ type AccountsProposalsUpdateResource =
 -- at head.
 --
 -- /See:/ 'accountsProposalsUpdate' smart constructor.
-data AccountsProposalsUpdate = AccountsProposalsUpdate'
+data AccountsProposalsUpdate =
+  AccountsProposalsUpdate'
     { _apuXgafv          :: !(Maybe Xgafv)
     , _apuUploadProtocol :: !(Maybe Text)
     , _apuAccessToken    :: !(Maybe Text)
@@ -94,7 +95,8 @@ data AccountsProposalsUpdate = AccountsProposalsUpdate'
     , _apuProposalId     :: !Text
     , _apuAccountId      :: !Text
     , _apuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsProposalsUpdate' with the minimum fields required to make a request.
 --
@@ -121,7 +123,7 @@ accountsProposalsUpdate
     -> Text -- ^ 'apuAccountId'
     -> AccountsProposalsUpdate
 accountsProposalsUpdate pApuPayload_ pApuProposalId_ pApuAccountId_ =
-    AccountsProposalsUpdate'
+  AccountsProposalsUpdate'
     { _apuXgafv = Nothing
     , _apuUploadProtocol = Nothing
     , _apuAccessToken = Nothing

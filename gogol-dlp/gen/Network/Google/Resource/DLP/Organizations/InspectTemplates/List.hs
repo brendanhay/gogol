@@ -70,7 +70,8 @@ type OrganizationsInspectTemplatesListResource =
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'organizationsInspectTemplatesList' smart constructor.
-data OrganizationsInspectTemplatesList = OrganizationsInspectTemplatesList'
+data OrganizationsInspectTemplatesList =
+  OrganizationsInspectTemplatesList'
     { _oitlParent         :: !Text
     , _oitlXgafv          :: !(Maybe Xgafv)
     , _oitlUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,8 @@ data OrganizationsInspectTemplatesList = OrganizationsInspectTemplatesList'
     , _oitlPageToken      :: !(Maybe Text)
     , _oitlPageSize       :: !(Maybe (Textual Int32))
     , _oitlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsInspectTemplatesList' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ organizationsInspectTemplatesList
     :: Text -- ^ 'oitlParent'
     -> OrganizationsInspectTemplatesList
 organizationsInspectTemplatesList pOitlParent_ =
-    OrganizationsInspectTemplatesList'
+  OrganizationsInspectTemplatesList'
     { _oitlParent = pOitlParent_
     , _oitlXgafv = Nothing
     , _oitlUploadProtocol = Nothing
@@ -180,7 +182,8 @@ oitlCallback
   = lens _oitlCallback (\ s a -> s{_oitlCallback = a})
 
 instance GoogleRequest
-         OrganizationsInspectTemplatesList where
+           OrganizationsInspectTemplatesList
+         where
         type Rs OrganizationsInspectTemplatesList =
              GooglePrivacyDlpV2ListInspectTemplatesResponse
         type Scopes OrganizationsInspectTemplatesList =

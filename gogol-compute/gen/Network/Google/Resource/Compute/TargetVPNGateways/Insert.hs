@@ -62,12 +62,14 @@ type TargetVPNGatewaysInsertResource =
 -- the data included in the request.
 --
 -- /See:/ 'targetVPNGatewaysInsert' smart constructor.
-data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert'
+data TargetVPNGatewaysInsert =
+  TargetVPNGatewaysInsert'
     { _tvgiRequestId :: !(Maybe Text)
     , _tvgiProject   :: !Text
     , _tvgiPayload   :: !TargetVPNGateway
     , _tvgiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysInsert' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ targetVPNGatewaysInsert
     -> Text -- ^ 'tvgiRegion'
     -> TargetVPNGatewaysInsert
 targetVPNGatewaysInsert pTvgiProject_ pTvgiPayload_ pTvgiRegion_ =
-    TargetVPNGatewaysInsert'
+  TargetVPNGatewaysInsert'
     { _tvgiRequestId = Nothing
     , _tvgiProject = pTvgiProject_
     , _tvgiPayload = pTvgiPayload_

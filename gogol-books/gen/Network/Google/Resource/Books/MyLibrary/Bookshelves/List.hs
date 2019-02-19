@@ -52,9 +52,11 @@ type MyLibraryBookshelvesListResource =
 -- | Retrieves a list of bookshelves belonging to the authenticated user.
 --
 -- /See:/ 'myLibraryBookshelvesList' smart constructor.
-newtype MyLibraryBookshelvesList = MyLibraryBookshelvesList'
+newtype MyLibraryBookshelvesList =
+  MyLibraryBookshelvesList'
     { _mlblSource :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyLibraryBookshelvesList' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype MyLibraryBookshelvesList = MyLibraryBookshelvesList'
 -- * 'mlblSource'
 myLibraryBookshelvesList
     :: MyLibraryBookshelvesList
-myLibraryBookshelvesList =
-    MyLibraryBookshelvesList'
-    { _mlblSource = Nothing
-    }
+myLibraryBookshelvesList = MyLibraryBookshelvesList' {_mlblSource = Nothing}
 
 -- | String to identify the originator of this request.
 mlblSource :: Lens' MyLibraryBookshelvesList (Maybe Text)

@@ -63,12 +63,14 @@ type PostUserInfosGetResource =
 -- rights, specific to the user.
 --
 -- /See:/ 'postUserInfosGet' smart constructor.
-data PostUserInfosGet = PostUserInfosGet'
+data PostUserInfosGet =
+  PostUserInfosGet'
     { _puigBlogId      :: !Text
     , _puigMaxComments :: !(Maybe (Textual Word32))
     , _puigUserId      :: !Text
     , _puigPostId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostUserInfosGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ postUserInfosGet
     -> Text -- ^ 'puigPostId'
     -> PostUserInfosGet
 postUserInfosGet pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
-    PostUserInfosGet'
+  PostUserInfosGet'
     { _puigBlogId = pPuigBlogId_
     , _puigMaxComments = Nothing
     , _puigUserId = pPuigUserId_

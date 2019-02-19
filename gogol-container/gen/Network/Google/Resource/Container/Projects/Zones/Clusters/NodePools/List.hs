@@ -70,7 +70,8 @@ type ProjectsZonesClustersNodePoolsListResource =
 -- | Lists the node pools for a cluster.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsList' smart constructor.
-data ProjectsZonesClustersNodePoolsList = ProjectsZonesClustersNodePoolsList'
+data ProjectsZonesClustersNodePoolsList =
+  ProjectsZonesClustersNodePoolsList'
     { _pzcnplParent         :: !(Maybe Text)
     , _pzcnplXgafv          :: !(Maybe Xgafv)
     , _pzcnplUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsZonesClustersNodePoolsList = ProjectsZonesClustersNodePoolsList'
     , _pzcnplClusterId      :: !Text
     , _pzcnplProjectId      :: !Text
     , _pzcnplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsZonesClustersNodePoolsList
     -> Text -- ^ 'pzcnplProjectId'
     -> ProjectsZonesClustersNodePoolsList
 projectsZonesClustersNodePoolsList pPzcnplZone_ pPzcnplClusterId_ pPzcnplProjectId_ =
-    ProjectsZonesClustersNodePoolsList'
+  ProjectsZonesClustersNodePoolsList'
     { _pzcnplParent = Nothing
     , _pzcnplXgafv = Nothing
     , _pzcnplUploadProtocol = Nothing
@@ -180,7 +182,8 @@ pzcnplCallback
       (\ s a -> s{_pzcnplCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersNodePoolsList where
+           ProjectsZonesClustersNodePoolsList
+         where
         type Rs ProjectsZonesClustersNodePoolsList =
              ListNodePoolsResponse
         type Scopes ProjectsZonesClustersNodePoolsList =

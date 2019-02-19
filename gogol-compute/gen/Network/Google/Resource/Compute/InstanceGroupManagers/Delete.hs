@@ -63,12 +63,14 @@ type InstanceGroupManagersDeleteResource =
 -- service. Read Deleting an instance group for more information.
 --
 -- /See:/ 'instanceGroupManagersDelete' smart constructor.
-data InstanceGroupManagersDelete = InstanceGroupManagersDelete'
+data InstanceGroupManagersDelete =
+  InstanceGroupManagersDelete'
     { _igmdRequestId            :: !(Maybe Text)
     , _igmdProject              :: !Text
     , _igmdInstanceGroupManager :: !Text
     , _igmdZone                 :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ instanceGroupManagersDelete
     -> Text -- ^ 'igmdZone'
     -> InstanceGroupManagersDelete
 instanceGroupManagersDelete pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
-    InstanceGroupManagersDelete'
+  InstanceGroupManagersDelete'
     { _igmdRequestId = Nothing
     , _igmdProject = pIgmdProject_
     , _igmdInstanceGroupManager = pIgmdInstanceGroupManager_

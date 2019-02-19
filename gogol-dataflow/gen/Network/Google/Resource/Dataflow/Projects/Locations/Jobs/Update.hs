@@ -68,7 +68,8 @@ type ProjectsLocationsJobsUpdateResource =
 -- | Updates the state of an existing Cloud Dataflow job.
 --
 -- /See:/ 'projectsLocationsJobsUpdate' smart constructor.
-data ProjectsLocationsJobsUpdate = ProjectsLocationsJobsUpdate'
+data ProjectsLocationsJobsUpdate =
+  ProjectsLocationsJobsUpdate'
     { _pljuXgafv          :: !(Maybe Xgafv)
     , _pljuJobId          :: !Text
     , _pljuUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,8 @@ data ProjectsLocationsJobsUpdate = ProjectsLocationsJobsUpdate'
     , _pljuPayload        :: !Job
     , _pljuProjectId      :: !Text
     , _pljuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsUpdate' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ projectsLocationsJobsUpdate
     -> Text -- ^ 'pljuProjectId'
     -> ProjectsLocationsJobsUpdate
 projectsLocationsJobsUpdate pPljuJobId_ pPljuLocation_ pPljuPayload_ pPljuProjectId_ =
-    ProjectsLocationsJobsUpdate'
+  ProjectsLocationsJobsUpdate'
     { _pljuXgafv = Nothing
     , _pljuJobId = pPljuJobId_
     , _pljuUploadProtocol = Nothing

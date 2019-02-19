@@ -68,7 +68,8 @@ type ProjectsAttestorsCreateResource =
 -- is malformed, ALREADY_EXISTS if the attestor already exists.
 --
 -- /See:/ 'projectsAttestorsCreate' smart constructor.
-data ProjectsAttestorsCreate = ProjectsAttestorsCreate'
+data ProjectsAttestorsCreate =
+  ProjectsAttestorsCreate'
     { _pacParent         :: !Text
     , _pacXgafv          :: !(Maybe Xgafv)
     , _pacUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsAttestorsCreate = ProjectsAttestorsCreate'
     , _pacPayload        :: !Attestor
     , _pacAttestorId     :: !(Maybe Text)
     , _pacCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAttestorsCreate' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsAttestorsCreate
     -> Attestor -- ^ 'pacPayload'
     -> ProjectsAttestorsCreate
 projectsAttestorsCreate pPacParent_ pPacPayload_ =
-    ProjectsAttestorsCreate'
+  ProjectsAttestorsCreate'
     { _pacParent = pPacParent_
     , _pacXgafv = Nothing
     , _pacUploadProtocol = Nothing

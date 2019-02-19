@@ -59,11 +59,13 @@ type SnapshotsTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'snapshotsTestIAMPermissions' smart constructor.
-data SnapshotsTestIAMPermissions = SnapshotsTestIAMPermissions'
+data SnapshotsTestIAMPermissions =
+  SnapshotsTestIAMPermissions'
     { _stipProject  :: !Text
     , _stipPayload  :: !TestPermissionsRequest
     , _stipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SnapshotsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ snapshotsTestIAMPermissions
     -> Text -- ^ 'stipResource'
     -> SnapshotsTestIAMPermissions
 snapshotsTestIAMPermissions pStipProject_ pStipPayload_ pStipResource_ =
-    SnapshotsTestIAMPermissions'
+  SnapshotsTestIAMPermissions'
     { _stipProject = pStipProject_
     , _stipPayload = pStipPayload_
     , _stipResource = pStipResource_

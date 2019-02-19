@@ -57,11 +57,13 @@ type MyLibraryReadingPositionsGetResource =
 -- | Retrieves my reading position information for a volume.
 --
 -- /See:/ 'myLibraryReadingPositionsGet' smart constructor.
-data MyLibraryReadingPositionsGet = MyLibraryReadingPositionsGet'
+data MyLibraryReadingPositionsGet =
+  MyLibraryReadingPositionsGet'
     { _mlrpgContentVersion :: !(Maybe Text)
     , _mlrpgVolumeId       :: !Text
     , _mlrpgSource         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyLibraryReadingPositionsGet' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ myLibraryReadingPositionsGet
     :: Text -- ^ 'mlrpgVolumeId'
     -> MyLibraryReadingPositionsGet
 myLibraryReadingPositionsGet pMlrpgVolumeId_ =
-    MyLibraryReadingPositionsGet'
+  MyLibraryReadingPositionsGet'
     { _mlrpgContentVersion = Nothing
     , _mlrpgVolumeId = pMlrpgVolumeId_
     , _mlrpgSource = Nothing

@@ -64,7 +64,8 @@ type ProjectsAgentExportResource =
 -- | Exports the specified agent to a ZIP file. Operation
 --
 -- /See:/ 'projectsAgentExport' smart constructor.
-data ProjectsAgentExport = ProjectsAgentExport'
+data ProjectsAgentExport =
+  ProjectsAgentExport'
     { _paeParent         :: !Text
     , _paeXgafv          :: !(Maybe Xgafv)
     , _paeUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsAgentExport = ProjectsAgentExport'
     , _paeUploadType     :: !(Maybe Text)
     , _paePayload        :: !GoogleCloudDialogflowV2ExportAgentRequest
     , _paeCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentExport' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsAgentExport
     -> GoogleCloudDialogflowV2ExportAgentRequest -- ^ 'paePayload'
     -> ProjectsAgentExport
 projectsAgentExport pPaeParent_ pPaePayload_ =
-    ProjectsAgentExport'
+  ProjectsAgentExport'
     { _paeParent = pPaeParent_
     , _paeXgafv = Nothing
     , _paeUploadProtocol = Nothing

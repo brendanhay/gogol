@@ -69,7 +69,8 @@ type ProjectsIapWebServicesTestIAMPermissionsResource
 -- https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing_access_via_the_api
 --
 -- /See:/ 'projectsIapWebServicesTestIAMPermissions' smart constructor.
-data ProjectsIapWebServicesTestIAMPermissions = ProjectsIapWebServicesTestIAMPermissions'
+data ProjectsIapWebServicesTestIAMPermissions =
+  ProjectsIapWebServicesTestIAMPermissions'
     { _piwstipXgafv          :: !(Maybe Xgafv)
     , _piwstipUploadProtocol :: !(Maybe Text)
     , _piwstipAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsIapWebServicesTestIAMPermissions = ProjectsIapWebServicesTestIAMPer
     , _piwstipPayload        :: !TestIAMPermissionsRequest
     , _piwstipResource       :: !Text
     , _piwstipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsIapWebServicesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsIapWebServicesTestIAMPermissions
     -> Text -- ^ 'piwstipResource'
     -> ProjectsIapWebServicesTestIAMPermissions
 projectsIapWebServicesTestIAMPermissions pPiwstipPayload_ pPiwstipResource_ =
-    ProjectsIapWebServicesTestIAMPermissions'
+  ProjectsIapWebServicesTestIAMPermissions'
     { _piwstipXgafv = Nothing
     , _piwstipUploadProtocol = Nothing
     , _piwstipAccessToken = Nothing
@@ -155,7 +157,8 @@ piwstipCallback
       (\ s a -> s{_piwstipCallback = a})
 
 instance GoogleRequest
-         ProjectsIapWebServicesTestIAMPermissions where
+           ProjectsIapWebServicesTestIAMPermissions
+         where
         type Rs ProjectsIapWebServicesTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsIapWebServicesTestIAMPermissions

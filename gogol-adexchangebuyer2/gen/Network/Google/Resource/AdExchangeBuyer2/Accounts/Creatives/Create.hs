@@ -65,7 +65,8 @@ type AccountsCreativesCreateResource =
 -- | Creates a creative.
 --
 -- /See:/ 'accountsCreativesCreate' smart constructor.
-data AccountsCreativesCreate = AccountsCreativesCreate'
+data AccountsCreativesCreate =
+  AccountsCreativesCreate'
     { _acccXgafv           :: !(Maybe Xgafv)
     , _acccUploadProtocol  :: !(Maybe Text)
     , _acccAccessToken     :: !(Maybe Text)
@@ -74,7 +75,8 @@ data AccountsCreativesCreate = AccountsCreativesCreate'
     , _acccAccountId       :: !Text
     , _acccDuplicateIdMode :: !(Maybe Text)
     , _acccCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsCreativesCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ accountsCreativesCreate
     -> Text -- ^ 'acccAccountId'
     -> AccountsCreativesCreate
 accountsCreativesCreate pAcccPayload_ pAcccAccountId_ =
-    AccountsCreativesCreate'
+  AccountsCreativesCreate'
     { _acccXgafv = Nothing
     , _acccUploadProtocol = Nothing
     , _acccAccessToken = Nothing

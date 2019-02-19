@@ -61,14 +61,16 @@ type VoicesListResource =
 -- | Returns a list of Voice supported for synthesis.
 --
 -- /See:/ 'voicesList' smart constructor.
-data VoicesList = VoicesList'
+data VoicesList =
+  VoicesList'
     { _vlXgafv          :: !(Maybe Xgafv)
     , _vlLanguageCode   :: !(Maybe Text)
     , _vlUploadProtocol :: !(Maybe Text)
     , _vlAccessToken    :: !(Maybe Text)
     , _vlUploadType     :: !(Maybe Text)
     , _vlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VoicesList' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ data VoicesList = VoicesList'
 voicesList
     :: VoicesList
 voicesList =
-    VoicesList'
+  VoicesList'
     { _vlXgafv = Nothing
     , _vlLanguageCode = Nothing
     , _vlUploadProtocol = Nothing

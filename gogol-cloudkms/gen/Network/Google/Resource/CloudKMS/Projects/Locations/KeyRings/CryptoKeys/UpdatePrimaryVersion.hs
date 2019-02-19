@@ -65,7 +65,8 @@ type ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersionResource
 -- an error if called on an asymmetric key.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion = ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion'
+data ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion =
+  ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion'
     { _plkrckupvXgafv          :: !(Maybe Xgafv)
     , _plkrckupvUploadProtocol :: !(Maybe Text)
     , _plkrckupvAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion = ProjectsLocations
     , _plkrckupvPayload        :: !UpdateCryptoKeyPrimaryVersionRequest
     , _plkrckupvName           :: !Text
     , _plkrckupvCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion
     -> Text -- ^ 'plkrckupvName'
     -> ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion
 projectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion pPlkrckupvPayload_ pPlkrckupvName_ =
-    ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion'
+  ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion'
     { _plkrckupvXgafv = Nothing
     , _plkrckupvUploadProtocol = Nothing
     , _plkrckupvAccessToken = Nothing
@@ -150,7 +152,7 @@ plkrckupvCallback
       (\ s a -> s{_plkrckupvCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion
+           ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion

@@ -56,11 +56,13 @@ type AchievementDefinitionsListResource =
 -- | Lists all the achievement definitions for your application.
 --
 -- /See:/ 'achievementDefinitionsList' smart constructor.
-data AchievementDefinitionsList = AchievementDefinitionsList'
+data AchievementDefinitionsList =
+  AchievementDefinitionsList'
     { _adlLanguage   :: !(Maybe Text)
     , _adlPageToken  :: !(Maybe Text)
     , _adlMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AchievementDefinitionsList' with the minimum fields required to make a request.
 --
@@ -74,11 +76,8 @@ data AchievementDefinitionsList = AchievementDefinitionsList'
 achievementDefinitionsList
     :: AchievementDefinitionsList
 achievementDefinitionsList =
-    AchievementDefinitionsList'
-    { _adlLanguage = Nothing
-    , _adlPageToken = Nothing
-    , _adlMaxResults = Nothing
-    }
+  AchievementDefinitionsList'
+    {_adlLanguage = Nothing, _adlPageToken = Nothing, _adlMaxResults = Nothing}
 
 -- | The preferred language to use for strings returned by this method.
 adlLanguage :: Lens' AchievementDefinitionsList (Maybe Text)

@@ -57,11 +57,13 @@ type OrdersRejectreturnlineitemResource =
 -- | Rejects return on an line item.
 --
 -- /See:/ 'ordersRejectreturnlineitem' smart constructor.
-data OrdersRejectreturnlineitem = OrdersRejectreturnlineitem'
+data OrdersRejectreturnlineitem =
+  OrdersRejectreturnlineitem'
     { _orrMerchantId :: !(Textual Word64)
     , _orrPayload    :: !OrdersRejectReturnLineItemRequest
     , _orrOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersRejectreturnlineitem' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ ordersRejectreturnlineitem
     -> Text -- ^ 'orrOrderId'
     -> OrdersRejectreturnlineitem
 ordersRejectreturnlineitem pOrrMerchantId_ pOrrPayload_ pOrrOrderId_ =
-    OrdersRejectreturnlineitem'
+  OrdersRejectreturnlineitem'
     { _orrMerchantId = _Coerce # pOrrMerchantId_
     , _orrPayload = pOrrPayload_
     , _orrOrderId = pOrrOrderId_

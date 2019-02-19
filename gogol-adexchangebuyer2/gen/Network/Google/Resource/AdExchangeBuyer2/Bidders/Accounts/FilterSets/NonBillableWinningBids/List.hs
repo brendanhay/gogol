@@ -68,7 +68,8 @@ type BiddersAccountsFilterSetsNonBillableWinningBidsListResource
 -- number of bids not billed for each reason.
 --
 -- /See:/ 'biddersAccountsFilterSetsNonBillableWinningBidsList' smart constructor.
-data BiddersAccountsFilterSetsNonBillableWinningBidsList = BiddersAccountsFilterSetsNonBillableWinningBidsList'
+data BiddersAccountsFilterSetsNonBillableWinningBidsList =
+  BiddersAccountsFilterSetsNonBillableWinningBidsList'
     { _bafsnbwblXgafv          :: !(Maybe Xgafv)
     , _bafsnbwblUploadProtocol :: !(Maybe Text)
     , _bafsnbwblFilterSetName  :: !Text
@@ -77,7 +78,8 @@ data BiddersAccountsFilterSetsNonBillableWinningBidsList = BiddersAccountsFilter
     , _bafsnbwblPageToken      :: !(Maybe Text)
     , _bafsnbwblPageSize       :: !(Maybe (Textual Int32))
     , _bafsnbwblCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BiddersAccountsFilterSetsNonBillableWinningBidsList' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ biddersAccountsFilterSetsNonBillableWinningBidsList
     :: Text -- ^ 'bafsnbwblFilterSetName'
     -> BiddersAccountsFilterSetsNonBillableWinningBidsList
 biddersAccountsFilterSetsNonBillableWinningBidsList pBafsnbwblFilterSetName_ =
-    BiddersAccountsFilterSetsNonBillableWinningBidsList'
+  BiddersAccountsFilterSetsNonBillableWinningBidsList'
     { _bafsnbwblXgafv = Nothing
     , _bafsnbwblUploadProtocol = Nothing
     , _bafsnbwblFilterSetName = pBafsnbwblFilterSetName_
@@ -173,7 +175,7 @@ bafsnbwblCallback
       (\ s a -> s{_bafsnbwblCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsNonBillableWinningBidsList
+           BiddersAccountsFilterSetsNonBillableWinningBidsList
          where
         type Rs
                BiddersAccountsFilterSetsNonBillableWinningBidsList

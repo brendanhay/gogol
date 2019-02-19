@@ -51,9 +51,11 @@ type AdClientsGetResource =
 -- | Get information about one of the ad clients in the Host AdSense account.
 --
 -- /See:/ 'adClientsGet' smart constructor.
-newtype AdClientsGet = AdClientsGet'
+newtype AdClientsGet =
+  AdClientsGet'
     { _acgAdClientId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdClientsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype AdClientsGet = AdClientsGet'
 adClientsGet
     :: Text -- ^ 'acgAdClientId'
     -> AdClientsGet
-adClientsGet pAcgAdClientId_ =
-    AdClientsGet'
-    { _acgAdClientId = pAcgAdClientId_
-    }
+adClientsGet pAcgAdClientId_ = AdClientsGet' {_acgAdClientId = pAcgAdClientId_}
 
 -- | Ad client to get.
 acgAdClientId :: Lens' AdClientsGet Text

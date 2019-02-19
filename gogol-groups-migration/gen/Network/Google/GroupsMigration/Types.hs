@@ -41,4 +41,4 @@ groupsMigrationService
 
 -- | Manage messages in groups on your domain
 appsGroupsMigrationScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.migration"]
-appsGroupsMigrationScope = Proxy;
+appsGroupsMigrationScope = Proxy

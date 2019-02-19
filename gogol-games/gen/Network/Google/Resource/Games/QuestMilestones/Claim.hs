@@ -61,11 +61,13 @@ type QuestMilestonesClaimResource =
 -- authorized user.
 --
 -- /See:/ 'questMilestonesClaim' smart constructor.
-data QuestMilestonesClaim = QuestMilestonesClaim'
+data QuestMilestonesClaim =
+  QuestMilestonesClaim'
     { _qmcRequestId   :: !(Textual Int64)
     , _qmcMilestoneId :: !Text
     , _qmcQuestId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuestMilestonesClaim' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ questMilestonesClaim
     -> Text -- ^ 'qmcQuestId'
     -> QuestMilestonesClaim
 questMilestonesClaim pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
-    QuestMilestonesClaim'
+  QuestMilestonesClaim'
     { _qmcRequestId = _Coerce # pQmcRequestId_
     , _qmcMilestoneId = pQmcMilestoneId_
     , _qmcQuestId = pQmcQuestId_

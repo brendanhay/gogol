@@ -23,9 +23,11 @@ import           Network.Google.Prelude
 -- | Response for registering a debuggee.
 --
 -- /See:/ 'registerDebuggeeResponse' smart constructor.
-newtype RegisterDebuggeeResponse = RegisterDebuggeeResponse'
+newtype RegisterDebuggeeResponse =
+  RegisterDebuggeeResponse'
     { _rdrDebuggee :: Maybe Debuggee
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterDebuggeeResponse' with the minimum fields required to make a request.
 --
@@ -34,10 +36,7 @@ newtype RegisterDebuggeeResponse = RegisterDebuggeeResponse'
 -- * 'rdrDebuggee'
 registerDebuggeeResponse
     :: RegisterDebuggeeResponse
-registerDebuggeeResponse =
-    RegisterDebuggeeResponse'
-    { _rdrDebuggee = Nothing
-    }
+registerDebuggeeResponse = RegisterDebuggeeResponse' {_rdrDebuggee = Nothing}
 
 -- | Debuggee resource. The field \`id\` is guaranteed to be set (in addition
 -- to the echoed fields). If the field \`is_disabled\` is set to \`true\`,
@@ -64,12 +63,14 @@ instance ToJSON RegisterDebuggeeResponse where
 -- directory.
 --
 -- /See:/ 'sourceContext' smart constructor.
-data SourceContext = SourceContext'
+data SourceContext =
+  SourceContext'
     { _scCloudWorkspace :: !(Maybe CloudWorkspaceSourceContext)
     , _scCloudRepo      :: !(Maybe CloudRepoSourceContext)
     , _scGerrit         :: !(Maybe GerritSourceContext)
     , _scGit            :: !(Maybe GitSourceContext)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data SourceContext = SourceContext'
 sourceContext
     :: SourceContext
 sourceContext =
-    SourceContext'
+  SourceContext'
     { _scCloudWorkspace = Nothing
     , _scCloudRepo = Nothing
     , _scGerrit = Nothing
@@ -131,9 +132,11 @@ instance ToJSON SourceContext where
 -- | Response for setting a breakpoint.
 --
 -- /See:/ 'setBreakpointResponse' smart constructor.
-newtype SetBreakpointResponse = SetBreakpointResponse'
+newtype SetBreakpointResponse =
+  SetBreakpointResponse'
     { _sbrBreakpoint :: Maybe Breakpoint
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetBreakpointResponse' with the minimum fields required to make a request.
 --
@@ -142,10 +145,7 @@ newtype SetBreakpointResponse = SetBreakpointResponse'
 -- * 'sbrBreakpoint'
 setBreakpointResponse
     :: SetBreakpointResponse
-setBreakpointResponse =
-    SetBreakpointResponse'
-    { _sbrBreakpoint = Nothing
-    }
+setBreakpointResponse = SetBreakpointResponse' {_sbrBreakpoint = Nothing}
 
 -- | Breakpoint resource. The field \`id\` is guaranteed to be set (in
 -- addition to the echoed fileds).
@@ -173,8 +173,8 @@ instance ToJSON SetBreakpointResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -193,8 +193,8 @@ instance ToJSON Empty where
 --
 -- /See:/ 'updateActiveBreakpointResponse' smart constructor.
 data UpdateActiveBreakpointResponse =
-    UpdateActiveBreakpointResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  UpdateActiveBreakpointResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateActiveBreakpointResponse' with the minimum fields required to make a request.
 --
@@ -214,13 +214,15 @@ instance ToJSON UpdateActiveBreakpointResponse where
 -- | A SourceContext referring to a Gerrit project.
 --
 -- /See:/ 'gerritSourceContext' smart constructor.
-data GerritSourceContext = GerritSourceContext'
+data GerritSourceContext =
+  GerritSourceContext'
     { _gscGerritProject :: !(Maybe Text)
     , _gscAliasName     :: !(Maybe Text)
     , _gscRevisionId    :: !(Maybe Text)
     , _gscHostURI       :: !(Maybe Text)
     , _gscAliasContext  :: !(Maybe AliasContext)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GerritSourceContext' with the minimum fields required to make a request.
 --
@@ -238,7 +240,7 @@ data GerritSourceContext = GerritSourceContext'
 gerritSourceContext
     :: GerritSourceContext
 gerritSourceContext =
-    GerritSourceContext'
+  GerritSourceContext'
     { _gscGerritProject = Nothing
     , _gscAliasName = Nothing
     , _gscRevisionId = Nothing
@@ -299,10 +301,12 @@ instance ToJSON GerritSourceContext where
 -- | A unique identifier for a cloud repo.
 --
 -- /See:/ 'repoId' smart constructor.
-data RepoId = RepoId'
+data RepoId =
+  RepoId'
     { _riUid           :: !(Maybe Text)
     , _riProjectRepoId :: !(Maybe ProjectRepoId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RepoId' with the minimum fields required to make a request.
 --
@@ -313,11 +317,7 @@ data RepoId = RepoId'
 -- * 'riProjectRepoId'
 repoId
     :: RepoId
-repoId =
-    RepoId'
-    { _riUid = Nothing
-    , _riProjectRepoId = Nothing
-    }
+repoId = RepoId' {_riUid = Nothing, _riProjectRepoId = Nothing}
 
 -- | A server-assigned, globally unique identifier.
 riUid :: Lens' RepoId (Maybe Text)
@@ -346,9 +346,11 @@ instance ToJSON RepoId where
 -- | Labels with user defined metadata.
 --
 -- /See:/ 'extendedSourceContextLabels' smart constructor.
-newtype ExtendedSourceContextLabels = ExtendedSourceContextLabels'
+newtype ExtendedSourceContextLabels =
+  ExtendedSourceContextLabels'
     { _esclAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExtendedSourceContextLabels' with the minimum fields required to make a request.
 --
@@ -359,9 +361,7 @@ extendedSourceContextLabels
     :: HashMap Text Text -- ^ 'esclAddtional'
     -> ExtendedSourceContextLabels
 extendedSourceContextLabels pEsclAddtional_ =
-    ExtendedSourceContextLabels'
-    { _esclAddtional = _Coerce # pEsclAddtional_
-    }
+  ExtendedSourceContextLabels' {_esclAddtional = _Coerce # pEsclAddtional_}
 
 esclAddtional :: Lens' ExtendedSourceContextLabels (HashMap Text Text)
 esclAddtional
@@ -382,10 +382,12 @@ instance ToJSON ExtendedSourceContextLabels where
 -- winged-cargo-31) and a repo name within that project.
 --
 -- /See:/ 'projectRepoId' smart constructor.
-data ProjectRepoId = ProjectRepoId'
+data ProjectRepoId =
+  ProjectRepoId'
     { _priRepoName  :: !(Maybe Text)
     , _priProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectRepoId' with the minimum fields required to make a request.
 --
@@ -396,11 +398,7 @@ data ProjectRepoId = ProjectRepoId'
 -- * 'priProjectId'
 projectRepoId
     :: ProjectRepoId
-projectRepoId =
-    ProjectRepoId'
-    { _priRepoName = Nothing
-    , _priProjectId = Nothing
-    }
+projectRepoId = ProjectRepoId' {_priRepoName = Nothing, _priProjectId = Nothing}
 
 -- | The name of the repo. Leave empty for the default repo.
 priRepoName :: Lens' ProjectRepoId (Maybe Text)
@@ -429,10 +427,12 @@ instance ToJSON ProjectRepoId where
 -- | Represents a message with parameters.
 --
 -- /See:/ 'formatMessage' smart constructor.
-data FormatMessage = FormatMessage'
+data FormatMessage =
+  FormatMessage'
     { _fmFormat     :: !(Maybe Text)
     , _fmParameters :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FormatMessage' with the minimum fields required to make a request.
 --
@@ -443,18 +443,13 @@ data FormatMessage = FormatMessage'
 -- * 'fmParameters'
 formatMessage
     :: FormatMessage
-formatMessage =
-    FormatMessage'
-    { _fmFormat = Nothing
-    , _fmParameters = Nothing
-    }
+formatMessage = FormatMessage' {_fmFormat = Nothing, _fmParameters = Nothing}
 
 -- | Format template for the message. The \`format\` uses placeholders
--- \`$0\`,
--- \`$1\`, etc. to reference parameters. \`$$\` can be used to denote the \`$\`
--- character. Examples: * \`Failed to load \'$0\' which helps debug $1 the
--- first time it is loaded. Again, $0 is very important.\` * \`Please pay
--- $$10 to use $0 instead of $1.\`
+-- \`$0\`, \`$1\`, etc. to reference parameters. \`$$\` can be used to
+-- denote the \`$\` character. Examples: * \`Failed to load \'$0\' which
+-- helps debug $1 the first time it is loaded. Again, $0 is very
+-- important.\` * \`Please pay $$10 to use $0 instead of $1.\`
 fmFormat :: Lens' FormatMessage (Maybe Text)
 fmFormat = lens _fmFormat (\ s a -> s{_fmFormat = a})
 
@@ -482,7 +477,8 @@ instance ToJSON FormatMessage where
 -- | Represents the breakpoint specification, status and results.
 --
 -- /See:/ 'breakpoint' smart constructor.
-data Breakpoint = Breakpoint'
+data Breakpoint =
+  Breakpoint'
     { _bStatus               :: !(Maybe StatusMessage)
     , _bLogLevel             :: !(Maybe BreakpointLogLevel)
     , _bLocation             :: !(Maybe SourceLocation)
@@ -499,7 +495,8 @@ data Breakpoint = Breakpoint'
     , _bEvaluatedExpressions :: !(Maybe [Variable])
     , _bCreateTime           :: !(Maybe DateTime')
     , _bIsFinalState         :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Breakpoint' with the minimum fields required to make a request.
 --
@@ -539,7 +536,7 @@ data Breakpoint = Breakpoint'
 breakpoint
     :: Breakpoint
 breakpoint =
-    Breakpoint'
+  Breakpoint'
     { _bStatus = Nothing
     , _bLogLevel = Nothing
     , _bLocation = Nothing
@@ -732,9 +729,11 @@ instance ToJSON Breakpoint where
 -- displayed to the user.
 --
 -- /See:/ 'breakpointLabels' smart constructor.
-newtype BreakpointLabels = BreakpointLabels'
+newtype BreakpointLabels =
+  BreakpointLabels'
     { _blAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BreakpointLabels' with the minimum fields required to make a request.
 --
@@ -745,9 +744,7 @@ breakpointLabels
     :: HashMap Text Text -- ^ 'blAddtional'
     -> BreakpointLabels
 breakpointLabels pBlAddtional_ =
-    BreakpointLabels'
-    { _blAddtional = _Coerce # pBlAddtional_
-    }
+  BreakpointLabels' {_blAddtional = _Coerce # pBlAddtional_}
 
 blAddtional :: Lens' BreakpointLabels (HashMap Text Text)
 blAddtional
@@ -765,9 +762,11 @@ instance ToJSON BreakpointLabels where
 -- | Response for getting breakpoint information.
 --
 -- /See:/ 'getBreakpointResponse' smart constructor.
-newtype GetBreakpointResponse = GetBreakpointResponse'
+newtype GetBreakpointResponse =
+  GetBreakpointResponse'
     { _gbrBreakpoint :: Maybe Breakpoint
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBreakpointResponse' with the minimum fields required to make a request.
 --
@@ -776,10 +775,7 @@ newtype GetBreakpointResponse = GetBreakpointResponse'
 -- * 'gbrBreakpoint'
 getBreakpointResponse
     :: GetBreakpointResponse
-getBreakpointResponse =
-    GetBreakpointResponse'
-    { _gbrBreakpoint = Nothing
-    }
+getBreakpointResponse = GetBreakpointResponse' {_gbrBreakpoint = Nothing}
 
 -- | Complete breakpoint state. The fields \`id\` and \`location\` are
 -- guaranteed to be set.
@@ -839,14 +835,16 @@ instance ToJSON GetBreakpointResponse where
 -- may or may not support it.
 --
 -- /See:/ 'variable' smart constructor.
-data Variable = Variable'
+data Variable =
+  Variable'
     { _vStatus        :: !(Maybe StatusMessage)
     , _vVarTableIndex :: !(Maybe (Textual Int32))
     , _vMembers       :: !(Maybe [Variable])
     , _vValue         :: !(Maybe Text)
     , _vName          :: !(Maybe Text)
     , _vType          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Variable' with the minimum fields required to make a request.
 --
@@ -866,7 +864,7 @@ data Variable = Variable'
 variable
     :: Variable
 variable =
-    Variable'
+  Variable'
     { _vStatus = Nothing
     , _vVarTableIndex = Nothing
     , _vMembers = Nothing
@@ -946,10 +944,12 @@ instance ToJSON Variable where
 -- | Response for listing breakpoints.
 --
 -- /See:/ 'listBreakpointsResponse' smart constructor.
-data ListBreakpointsResponse = ListBreakpointsResponse'
+data ListBreakpointsResponse =
+  ListBreakpointsResponse'
     { _lbrNextWaitToken :: !(Maybe Text)
     , _lbrBreakpoints   :: !(Maybe [Breakpoint])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListBreakpointsResponse' with the minimum fields required to make a request.
 --
@@ -961,10 +961,8 @@ data ListBreakpointsResponse = ListBreakpointsResponse'
 listBreakpointsResponse
     :: ListBreakpointsResponse
 listBreakpointsResponse =
-    ListBreakpointsResponse'
-    { _lbrNextWaitToken = Nothing
-    , _lbrBreakpoints = Nothing
-    }
+  ListBreakpointsResponse'
+    {_lbrNextWaitToken = Nothing, _lbrBreakpoints = Nothing}
 
 -- | A wait token that can be used in the next call to \`list\` (REST) or
 -- \`ListBreakpoints\` (RPC) to block until the list of breakpoints has
@@ -1003,9 +1001,11 @@ instance ToJSON ListBreakpointsResponse where
 -- | Response for listing debuggees.
 --
 -- /See:/ 'listDebuggeesResponse' smart constructor.
-newtype ListDebuggeesResponse = ListDebuggeesResponse'
+newtype ListDebuggeesResponse =
+  ListDebuggeesResponse'
     { _ldrDebuggees :: Maybe [Debuggee]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDebuggeesResponse' with the minimum fields required to make a request.
 --
@@ -1014,10 +1014,7 @@ newtype ListDebuggeesResponse = ListDebuggeesResponse'
 -- * 'ldrDebuggees'
 listDebuggeesResponse
     :: ListDebuggeesResponse
-listDebuggeesResponse =
-    ListDebuggeesResponse'
-    { _ldrDebuggees = Nothing
-    }
+listDebuggeesResponse = ListDebuggeesResponse' {_ldrDebuggees = Nothing}
 
 -- | List of debuggees accessible to the calling user. The fields
 -- \`debuggee.id\` and \`description\` are guaranteed to be set. The
@@ -1044,9 +1041,11 @@ instance ToJSON ListDebuggeesResponse where
 -- | Request to update an active breakpoint.
 --
 -- /See:/ 'updateActiveBreakpointRequest' smart constructor.
-newtype UpdateActiveBreakpointRequest = UpdateActiveBreakpointRequest'
+newtype UpdateActiveBreakpointRequest =
+  UpdateActiveBreakpointRequest'
     { _uabrBreakpoint :: Maybe Breakpoint
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateActiveBreakpointRequest' with the minimum fields required to make a request.
 --
@@ -1056,9 +1055,7 @@ newtype UpdateActiveBreakpointRequest = UpdateActiveBreakpointRequest'
 updateActiveBreakpointRequest
     :: UpdateActiveBreakpointRequest
 updateActiveBreakpointRequest =
-    UpdateActiveBreakpointRequest'
-    { _uabrBreakpoint = Nothing
-    }
+  UpdateActiveBreakpointRequest' {_uabrBreakpoint = Nothing}
 
 -- | Updated breakpoint information. The field \`id\` must be set. The agent
 -- must echo all Breakpoint specification fields in the update.
@@ -1086,11 +1083,13 @@ instance ToJSON UpdateActiveBreakpointRequest where
 -- the message \`Location not found\`.
 --
 -- /See:/ 'statusMessage' smart constructor.
-data StatusMessage = StatusMessage'
+data StatusMessage =
+  StatusMessage'
     { _smRefersTo    :: !(Maybe StatusMessageRefersTo)
     , _smIsError     :: !(Maybe Bool)
     , _smDescription :: !(Maybe FormatMessage)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusMessage' with the minimum fields required to make a request.
 --
@@ -1104,11 +1103,8 @@ data StatusMessage = StatusMessage'
 statusMessage
     :: StatusMessage
 statusMessage =
-    StatusMessage'
-    { _smRefersTo = Nothing
-    , _smIsError = Nothing
-    , _smDescription = Nothing
-    }
+  StatusMessage'
+    {_smRefersTo = Nothing, _smIsError = Nothing, _smDescription = Nothing}
 
 -- | Reference to which the message applies.
 smRefersTo :: Lens' StatusMessage (Maybe StatusMessageRefersTo)
@@ -1145,11 +1141,13 @@ instance ToJSON StatusMessage where
 -- | Response for listing active breakpoints.
 --
 -- /See:/ 'listActiveBreakpointsResponse' smart constructor.
-data ListActiveBreakpointsResponse = ListActiveBreakpointsResponse'
+data ListActiveBreakpointsResponse =
+  ListActiveBreakpointsResponse'
     { _labrNextWaitToken :: !(Maybe Text)
     , _labrBreakpoints   :: !(Maybe [Breakpoint])
     , _labrWaitExpired   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListActiveBreakpointsResponse' with the minimum fields required to make a request.
 --
@@ -1163,7 +1161,7 @@ data ListActiveBreakpointsResponse = ListActiveBreakpointsResponse'
 listActiveBreakpointsResponse
     :: ListActiveBreakpointsResponse
 listActiveBreakpointsResponse =
-    ListActiveBreakpointsResponse'
+  ListActiveBreakpointsResponse'
     { _labrNextWaitToken = Nothing
     , _labrBreakpoints = Nothing
     , _labrWaitExpired = Nothing
@@ -1214,10 +1212,12 @@ instance ToJSON ListActiveBreakpointsResponse where
 -- details describing the context.
 --
 -- /See:/ 'extendedSourceContext' smart constructor.
-data ExtendedSourceContext = ExtendedSourceContext'
+data ExtendedSourceContext =
+  ExtendedSourceContext'
     { _escContext :: !(Maybe SourceContext)
     , _escLabels  :: !(Maybe ExtendedSourceContextLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExtendedSourceContext' with the minimum fields required to make a request.
 --
@@ -1229,10 +1229,7 @@ data ExtendedSourceContext = ExtendedSourceContext'
 extendedSourceContext
     :: ExtendedSourceContext
 extendedSourceContext =
-    ExtendedSourceContext'
-    { _escContext = Nothing
-    , _escLabels = Nothing
-    }
+  ExtendedSourceContext' {_escContext = Nothing, _escLabels = Nothing}
 
 -- | Any source context.
 escContext :: Lens' ExtendedSourceContext (Maybe SourceContext)
@@ -1262,10 +1259,12 @@ instance ToJSON ExtendedSourceContext where
 -- repository (e.g. GitHub).
 --
 -- /See:/ 'gitSourceContext' smart constructor.
-data GitSourceContext = GitSourceContext'
+data GitSourceContext =
+  GitSourceContext'
     { _gURL        :: !(Maybe Text)
     , _gRevisionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GitSourceContext' with the minimum fields required to make a request.
 --
@@ -1276,11 +1275,7 @@ data GitSourceContext = GitSourceContext'
 -- * 'gRevisionId'
 gitSourceContext
     :: GitSourceContext
-gitSourceContext =
-    GitSourceContext'
-    { _gURL = Nothing
-    , _gRevisionId = Nothing
-    }
+gitSourceContext = GitSourceContext' {_gURL = Nothing, _gRevisionId = Nothing}
 
 -- | Git repository URL.
 gURL :: Lens' GitSourceContext (Maybe Text)
@@ -1308,11 +1303,13 @@ instance ToJSON GitSourceContext where
 -- | Represents a location in the source code.
 --
 -- /See:/ 'sourceLocation' smart constructor.
-data SourceLocation = SourceLocation'
+data SourceLocation =
+  SourceLocation'
     { _slPath   :: !(Maybe Text)
     , _slLine   :: !(Maybe (Textual Int32))
     , _slColumn :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
 --
@@ -1326,11 +1323,7 @@ data SourceLocation = SourceLocation'
 sourceLocation
     :: SourceLocation
 sourceLocation =
-    SourceLocation'
-    { _slPath = Nothing
-    , _slLine = Nothing
-    , _slColumn = Nothing
-    }
+  SourceLocation' {_slPath = Nothing, _slLine = Nothing, _slColumn = Nothing}
 
 -- | Path to the source file within the source context of the target binary.
 slPath :: Lens' SourceLocation (Maybe Text)
@@ -1368,12 +1361,14 @@ instance ToJSON SourceLocation where
 -- | Represents a stack frame context.
 --
 -- /See:/ 'stackFrame' smart constructor.
-data StackFrame = StackFrame'
+data StackFrame =
+  StackFrame'
     { _sfFunction  :: !(Maybe Text)
     , _sfLocation  :: !(Maybe SourceLocation)
     , _sfArguments :: !(Maybe [Variable])
     , _sfLocals    :: !(Maybe [Variable])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StackFrame' with the minimum fields required to make a request.
 --
@@ -1389,7 +1384,7 @@ data StackFrame = StackFrame'
 stackFrame
     :: StackFrame
 stackFrame =
-    StackFrame'
+  StackFrame'
     { _sfFunction = Nothing
     , _sfLocation = Nothing
     , _sfArguments = Nothing
@@ -1444,12 +1439,14 @@ instance ToJSON StackFrame where
 -- (a repo hosted by the Google Cloud Platform).
 --
 -- /See:/ 'cloudRepoSourceContext' smart constructor.
-data CloudRepoSourceContext = CloudRepoSourceContext'
+data CloudRepoSourceContext =
+  CloudRepoSourceContext'
     { _crscRepoId       :: !(Maybe RepoId)
     , _crscAliasName    :: !(Maybe Text)
     , _crscRevisionId   :: !(Maybe Text)
     , _crscAliasContext :: !(Maybe AliasContext)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CloudRepoSourceContext' with the minimum fields required to make a request.
 --
@@ -1465,7 +1462,7 @@ data CloudRepoSourceContext = CloudRepoSourceContext'
 cloudRepoSourceContext
     :: CloudRepoSourceContext
 cloudRepoSourceContext =
-    CloudRepoSourceContext'
+  CloudRepoSourceContext'
     { _crscRepoId = Nothing
     , _crscAliasName = Nothing
     , _crscRevisionId = Nothing
@@ -1517,9 +1514,11 @@ instance ToJSON CloudRepoSourceContext where
 -- displayed to the user.
 --
 -- /See:/ 'debuggeeLabels' smart constructor.
-newtype DebuggeeLabels = DebuggeeLabels'
+newtype DebuggeeLabels =
+  DebuggeeLabels'
     { _dlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DebuggeeLabels' with the minimum fields required to make a request.
 --
@@ -1530,9 +1529,7 @@ debuggeeLabels
     :: HashMap Text Text -- ^ 'dlAddtional'
     -> DebuggeeLabels
 debuggeeLabels pDlAddtional_ =
-    DebuggeeLabels'
-    { _dlAddtional = _Coerce # pDlAddtional_
-    }
+  DebuggeeLabels' {_dlAddtional = _Coerce # pDlAddtional_}
 
 dlAddtional :: Lens' DebuggeeLabels (HashMap Text Text)
 dlAddtional
@@ -1554,7 +1551,8 @@ instance ToJSON DebuggeeLabels where
 -- such by using exactly the same Debuggee message value when registering.
 --
 -- /See:/ 'debuggee' smart constructor.
-data Debuggee = Debuggee'
+data Debuggee =
+  Debuggee'
     { _dStatus            :: !(Maybe StatusMessage)
     , _dUniquifier        :: !(Maybe Text)
     , _dProject           :: !(Maybe Text)
@@ -1566,7 +1564,8 @@ data Debuggee = Debuggee'
     , _dDescription       :: !(Maybe Text)
     , _dIsInactive        :: !(Maybe Bool)
     , _dSourceContexts    :: !(Maybe [SourceContext])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Debuggee' with the minimum fields required to make a request.
 --
@@ -1596,7 +1595,7 @@ data Debuggee = Debuggee'
 debuggee
     :: Debuggee
 debuggee =
-    Debuggee'
+  Debuggee'
     { _dStatus = Nothing
     , _dUniquifier = Nothing
     , _dProject = Nothing
@@ -1720,10 +1719,12 @@ instance ToJSON Debuggee where
 -- snapshot.
 --
 -- /See:/ 'cloudWorkspaceSourceContext' smart constructor.
-data CloudWorkspaceSourceContext = CloudWorkspaceSourceContext'
+data CloudWorkspaceSourceContext =
+  CloudWorkspaceSourceContext'
     { _cwscWorkspaceId :: !(Maybe CloudWorkspaceId)
     , _cwscSnapshotId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CloudWorkspaceSourceContext' with the minimum fields required to make a request.
 --
@@ -1735,10 +1736,8 @@ data CloudWorkspaceSourceContext = CloudWorkspaceSourceContext'
 cloudWorkspaceSourceContext
     :: CloudWorkspaceSourceContext
 cloudWorkspaceSourceContext =
-    CloudWorkspaceSourceContext'
-    { _cwscWorkspaceId = Nothing
-    , _cwscSnapshotId = Nothing
-    }
+  CloudWorkspaceSourceContext'
+    {_cwscWorkspaceId = Nothing, _cwscSnapshotId = Nothing}
 
 -- | The ID of the workspace.
 cwscWorkspaceId :: Lens' CloudWorkspaceSourceContext (Maybe CloudWorkspaceId)
@@ -1770,9 +1769,11 @@ instance ToJSON CloudWorkspaceSourceContext where
 -- | Request to register a debuggee.
 --
 -- /See:/ 'registerDebuggeeRequest' smart constructor.
-newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest'
+newtype RegisterDebuggeeRequest =
+  RegisterDebuggeeRequest'
     { _rDebuggee :: Maybe Debuggee
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterDebuggeeRequest' with the minimum fields required to make a request.
 --
@@ -1781,10 +1782,7 @@ newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest'
 -- * 'rDebuggee'
 registerDebuggeeRequest
     :: RegisterDebuggeeRequest
-registerDebuggeeRequest =
-    RegisterDebuggeeRequest'
-    { _rDebuggee = Nothing
-    }
+registerDebuggeeRequest = RegisterDebuggeeRequest' {_rDebuggee = Nothing}
 
 -- | Debuggee information to register. The fields \`project\`,
 -- \`uniquifier\`, \`description\` and \`agent_version\` of the debuggee
@@ -1806,10 +1804,12 @@ instance ToJSON RegisterDebuggeeRequest where
 -- | An alias to a repo revision.
 --
 -- /See:/ 'aliasContext' smart constructor.
-data AliasContext = AliasContext'
+data AliasContext =
+  AliasContext'
     { _acKind :: !(Maybe AliasContextKind)
     , _acName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AliasContext' with the minimum fields required to make a request.
 --
@@ -1820,11 +1820,7 @@ data AliasContext = AliasContext'
 -- * 'acName'
 aliasContext
     :: AliasContext
-aliasContext =
-    AliasContext'
-    { _acKind = Nothing
-    , _acName = Nothing
-    }
+aliasContext = AliasContext' {_acKind = Nothing, _acName = Nothing}
 
 -- | The alias kind.
 acKind :: Lens' AliasContext (Maybe AliasContextKind)
@@ -1851,10 +1847,12 @@ instance ToJSON AliasContext where
 -- stored before they are committed.
 --
 -- /See:/ 'cloudWorkspaceId' smart constructor.
-data CloudWorkspaceId = CloudWorkspaceId'
+data CloudWorkspaceId =
+  CloudWorkspaceId'
     { _cwiRepoId :: !(Maybe RepoId)
     , _cwiName   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CloudWorkspaceId' with the minimum fields required to make a request.
 --
@@ -1865,11 +1863,7 @@ data CloudWorkspaceId = CloudWorkspaceId'
 -- * 'cwiName'
 cloudWorkspaceId
     :: CloudWorkspaceId
-cloudWorkspaceId =
-    CloudWorkspaceId'
-    { _cwiRepoId = Nothing
-    , _cwiName = Nothing
-    }
+cloudWorkspaceId = CloudWorkspaceId' {_cwiRepoId = Nothing, _cwiName = Nothing}
 
 -- | The ID of the repo containing the workspace.
 cwiRepoId :: Lens' CloudWorkspaceId (Maybe RepoId)

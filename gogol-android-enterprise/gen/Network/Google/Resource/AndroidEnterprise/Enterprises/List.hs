@@ -60,9 +60,11 @@ type EnterprisesListResource =
 -- Enterprises.generateSignupUrl call.
 --
 -- /See:/ 'enterprisesList' smart constructor.
-newtype EnterprisesList = EnterprisesList'
+newtype EnterprisesList =
+  EnterprisesList'
     { _elDomain :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesList' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ newtype EnterprisesList = EnterprisesList'
 enterprisesList
     :: Text -- ^ 'elDomain'
     -> EnterprisesList
-enterprisesList pElDomain_ =
-    EnterprisesList'
-    { _elDomain = pElDomain_
-    }
+enterprisesList pElDomain_ = EnterprisesList' {_elDomain = pElDomain_}
 
 -- | The exact primary domain name of the enterprise to look up.
 elDomain :: Lens' EnterprisesList Text

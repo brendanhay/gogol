@@ -56,11 +56,13 @@ type TemplateUpdateResource =
 -- | Updates an existing template
 --
 -- /See:/ 'templateUpdate' smart constructor.
-data TemplateUpdate = TemplateUpdate'
+data TemplateUpdate =
+  TemplateUpdate'
     { _tuTemplateId :: !(Textual Int32)
     , _tuPayload    :: !Template
     , _tuTableId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TemplateUpdate' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ templateUpdate
     -> Text -- ^ 'tuTableId'
     -> TemplateUpdate
 templateUpdate pTuTemplateId_ pTuPayload_ pTuTableId_ =
-    TemplateUpdate'
+  TemplateUpdate'
     { _tuTemplateId = _Coerce # pTuTemplateId_
     , _tuPayload = pTuPayload_
     , _tuTableId = pTuTableId_

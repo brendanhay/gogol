@@ -52,9 +52,11 @@ type UsersGetProFileResource =
 -- | Gets the current user\'s Gmail profile.
 --
 -- /See:/ 'usersGetProFile' smart constructor.
-newtype UsersGetProFile = UsersGetProFile'
+newtype UsersGetProFile =
+  UsersGetProFile'
     { _ugpfUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersGetProFile' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype UsersGetProFile = UsersGetProFile'
 -- * 'ugpfUserId'
 usersGetProFile
     :: UsersGetProFile
-usersGetProFile =
-    UsersGetProFile'
-    { _ugpfUserId = "me"
-    }
+usersGetProFile = UsersGetProFile' {_ugpfUserId = "me"}
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

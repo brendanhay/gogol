@@ -56,10 +56,12 @@ type MarketplaceDealsDeleteResource =
 -- | Delete the specified deals from the proposal
 --
 -- /See:/ 'marketplaceDealsDelete' smart constructor.
-data MarketplaceDealsDelete = MarketplaceDealsDelete'
+data MarketplaceDealsDelete =
+  MarketplaceDealsDelete'
     { _mddPayload    :: !DeleteOrderDealsRequest
     , _mddProposalId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MarketplaceDealsDelete' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ marketplaceDealsDelete
     -> Text -- ^ 'mddProposalId'
     -> MarketplaceDealsDelete
 marketplaceDealsDelete pMddPayload_ pMddProposalId_ =
-    MarketplaceDealsDelete'
-    { _mddPayload = pMddPayload_
-    , _mddProposalId = pMddProposalId_
-    }
+  MarketplaceDealsDelete'
+    {_mddPayload = pMddPayload_, _mddProposalId = pMddProposalId_}
 
 -- | Multipart request metadata.
 mddPayload :: Lens' MarketplaceDealsDelete DeleteOrderDealsRequest

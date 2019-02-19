@@ -59,11 +59,13 @@ type NodeTemplatesGetResource =
 -- templates by making a list() request.
 --
 -- /See:/ 'nodeTemplatesGet' smart constructor.
-data NodeTemplatesGet = NodeTemplatesGet'
+data NodeTemplatesGet =
+  NodeTemplatesGet'
     { _nodProject      :: !Text
     , _nodNodeTemplate :: !Text
     , _nodRegion       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplatesGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ nodeTemplatesGet
     -> Text -- ^ 'nodRegion'
     -> NodeTemplatesGet
 nodeTemplatesGet pNodProject_ pNodNodeTemplate_ pNodRegion_ =
-    NodeTemplatesGet'
+  NodeTemplatesGet'
     { _nodProject = pNodProject_
     , _nodNodeTemplate = pNodNodeTemplate_
     , _nodRegion = pNodRegion_

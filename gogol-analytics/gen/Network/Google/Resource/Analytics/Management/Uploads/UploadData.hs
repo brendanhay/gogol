@@ -74,11 +74,13 @@ type ManagementUploadsUploadDataResource =
 -- | Upload data for a custom data source.
 --
 -- /See:/ 'managementUploadsUploadData' smart constructor.
-data ManagementUploadsUploadData = ManagementUploadsUploadData'
+data ManagementUploadsUploadData =
+  ManagementUploadsUploadData'
     { _muudWebPropertyId      :: !Text
     , _muudCustomDataSourceId :: !Text
     , _muudAccountId          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementUploadsUploadData' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ managementUploadsUploadData
     -> Text -- ^ 'muudAccountId'
     -> ManagementUploadsUploadData
 managementUploadsUploadData pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudAccountId_ =
-    ManagementUploadsUploadData'
+  ManagementUploadsUploadData'
     { _muudWebPropertyId = pMuudWebPropertyId_
     , _muudCustomDataSourceId = pMuudCustomDataSourceId_
     , _muudAccountId = pMuudAccountId_
@@ -136,7 +138,8 @@ instance GoogleRequest ManagementUploadsUploadData
                       mempty
 
 instance GoogleRequest
-         (MediaUpload ManagementUploadsUploadData) where
+           (MediaUpload ManagementUploadsUploadData)
+         where
         type Rs (MediaUpload ManagementUploadsUploadData) =
              Upload
         type Scopes (MediaUpload ManagementUploadsUploadData)

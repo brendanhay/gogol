@@ -62,12 +62,14 @@ type ManagementProFilesPatchResource =
 -- semantics.
 --
 -- /See:/ 'managementProFilesPatch' smart constructor.
-data ManagementProFilesPatch = ManagementProFilesPatch'
+data ManagementProFilesPatch =
+  ManagementProFilesPatch'
     { _mpfpWebPropertyId :: !Text
     , _mpfpProFileId     :: !Text
     , _mpfpPayload       :: !ProFile
     , _mpfpAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementProFilesPatch' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ managementProFilesPatch
     -> Text -- ^ 'mpfpAccountId'
     -> ManagementProFilesPatch
 managementProFilesPatch pMpfpWebPropertyId_ pMpfpProFileId_ pMpfpPayload_ pMpfpAccountId_ =
-    ManagementProFilesPatch'
+  ManagementProFilesPatch'
     { _mpfpWebPropertyId = pMpfpWebPropertyId_
     , _mpfpProFileId = pMpfpProFileId_
     , _mpfpPayload = pMpfpPayload_

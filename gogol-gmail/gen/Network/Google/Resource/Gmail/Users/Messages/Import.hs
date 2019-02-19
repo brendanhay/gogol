@@ -87,14 +87,16 @@ type UsersMessagesImportResource =
 -- not send a message.
 --
 -- /See:/ 'usersMessagesImport' smart constructor.
-data UsersMessagesImport = UsersMessagesImport'
+data UsersMessagesImport =
+  UsersMessagesImport'
     { _umiPayload            :: !Message
     , _umiUserId             :: !Text
     , _umiProcessForCalendar :: !Bool
     , _umiDeleted            :: !Bool
     , _umiNeverMarkSpam      :: !Bool
     , _umiInternalDateSource :: !UsersMessagesImportInternalDateSource
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersMessagesImport' with the minimum fields required to make a request.
 --
@@ -115,7 +117,7 @@ usersMessagesImport
     :: Message -- ^ 'umiPayload'
     -> UsersMessagesImport
 usersMessagesImport pUmiPayload_ =
-    UsersMessagesImport'
+  UsersMessagesImport'
     { _umiPayload = pUmiPayload_
     , _umiUserId = "me"
     , _umiProcessForCalendar = False
@@ -181,7 +183,8 @@ instance GoogleRequest UsersMessagesImport where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload UsersMessagesImport) where
+           (MediaUpload UsersMessagesImport)
+         where
         type Rs (MediaUpload UsersMessagesImport) = Message
         type Scopes (MediaUpload UsersMessagesImport) =
              Scopes UsersMessagesImport

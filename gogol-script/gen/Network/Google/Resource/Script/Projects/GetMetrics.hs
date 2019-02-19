@@ -67,7 +67,8 @@ type ProjectsGetMetricsResource =
 -- users.
 --
 -- /See:/ 'projectsGetMetrics' smart constructor.
-data ProjectsGetMetrics = ProjectsGetMetrics'
+data ProjectsGetMetrics =
+  ProjectsGetMetrics'
     { _pgmXgafv                     :: !(Maybe Xgafv)
     , _pgmUploadProtocol            :: !(Maybe Text)
     , _pgmAccessToken               :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsGetMetrics = ProjectsGetMetrics'
     , _pgmScriptId                  :: !Text
     , _pgmMetricsFilterDeploymentId :: !(Maybe Text)
     , _pgmCallback                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGetMetrics' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsGetMetrics
     :: Text -- ^ 'pgmScriptId'
     -> ProjectsGetMetrics
 projectsGetMetrics pPgmScriptId_ =
-    ProjectsGetMetrics'
+  ProjectsGetMetrics'
     { _pgmXgafv = Nothing
     , _pgmUploadProtocol = Nothing
     , _pgmAccessToken = Nothing

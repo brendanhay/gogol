@@ -59,14 +59,16 @@ type ProjectsServiceAccountsDeleteResource =
 -- | Deletes a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsDelete' smart constructor.
-data ProjectsServiceAccountsDelete = ProjectsServiceAccountsDelete'
+data ProjectsServiceAccountsDelete =
+  ProjectsServiceAccountsDelete'
     { _psadXgafv          :: !(Maybe Xgafv)
     , _psadUploadProtocol :: !(Maybe Text)
     , _psadAccessToken    :: !(Maybe Text)
     , _psadUploadType     :: !(Maybe Text)
     , _psadName           :: !Text
     , _psadCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsServiceAccountsDelete
     :: Text -- ^ 'psadName'
     -> ProjectsServiceAccountsDelete
 projectsServiceAccountsDelete pPsadName_ =
-    ProjectsServiceAccountsDelete'
+  ProjectsServiceAccountsDelete'
     { _psadXgafv = Nothing
     , _psadUploadProtocol = Nothing
     , _psadAccessToken = Nothing

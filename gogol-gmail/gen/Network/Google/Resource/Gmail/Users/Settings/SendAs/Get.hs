@@ -57,10 +57,12 @@ type UsersSettingsSendAsGetResource =
 -- specified address is not a member of the collection.
 --
 -- /See:/ 'usersSettingsSendAsGet' smart constructor.
-data UsersSettingsSendAsGet = UsersSettingsSendAsGet'
+data UsersSettingsSendAsGet =
+  UsersSettingsSendAsGet'
     { _ussagUserId      :: !Text
     , _ussagSendAsEmail :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsSendAsGet' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ usersSettingsSendAsGet
     :: Text -- ^ 'ussagSendAsEmail'
     -> UsersSettingsSendAsGet
 usersSettingsSendAsGet pUssagSendAsEmail_ =
-    UsersSettingsSendAsGet'
-    { _ussagUserId = "me"
-    , _ussagSendAsEmail = pUssagSendAsEmail_
-    }
+  UsersSettingsSendAsGet'
+    {_ussagUserId = "me", _ussagSendAsEmail = pUssagSendAsEmail_}
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

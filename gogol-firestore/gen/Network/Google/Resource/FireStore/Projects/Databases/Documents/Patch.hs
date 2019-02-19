@@ -69,7 +69,8 @@ type ProjectsDatabasesDocumentsPatchResource =
 -- | Updates or inserts a document.
 --
 -- /See:/ 'projectsDatabasesDocumentsPatch' smart constructor.
-data ProjectsDatabasesDocumentsPatch = ProjectsDatabasesDocumentsPatch'
+data ProjectsDatabasesDocumentsPatch =
+  ProjectsDatabasesDocumentsPatch'
     { _pddpXgafv                     :: !(Maybe Xgafv)
     , _pddpUpdateMaskFieldPaths      :: !(Maybe [Text])
     , _pddpUploadProtocol            :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsDatabasesDocumentsPatch = ProjectsDatabasesDocumentsPatch'
     , _pddpName                      :: !Text
     , _pddpMaskFieldPaths            :: !(Maybe [Text])
     , _pddpCallback                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsPatch' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ projectsDatabasesDocumentsPatch
     -> Text -- ^ 'pddpName'
     -> ProjectsDatabasesDocumentsPatch
 projectsDatabasesDocumentsPatch pPddpPayload_ pPddpName_ =
-    ProjectsDatabasesDocumentsPatch'
+  ProjectsDatabasesDocumentsPatch'
     { _pddpXgafv = Nothing
     , _pddpUpdateMaskFieldPaths = Nothing
     , _pddpUploadProtocol = Nothing
@@ -199,7 +201,8 @@ pddpCallback
   = lens _pddpCallback (\ s a -> s{_pddpCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsPatch where
+           ProjectsDatabasesDocumentsPatch
+         where
         type Rs ProjectsDatabasesDocumentsPatch = Document
         type Scopes ProjectsDatabasesDocumentsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",

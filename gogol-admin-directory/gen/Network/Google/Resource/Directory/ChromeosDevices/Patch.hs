@@ -63,12 +63,14 @@ type ChromeosDevicesPatchResource =
 -- | Update Chrome OS Device. This method supports patch semantics.
 --
 -- /See:/ 'chromeosDevicesPatch' smart constructor.
-data ChromeosDevicesPatch = ChromeosDevicesPatch'
+data ChromeosDevicesPatch =
+  ChromeosDevicesPatch'
     { _cdpPayload    :: !ChromeOSDevice
     , _cdpCustomerId :: !Text
     , _cdpDeviceId   :: !Text
     , _cdpProjection :: !(Maybe ChromeosDevicesPatchProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChromeosDevicesPatch' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ chromeosDevicesPatch
     -> Text -- ^ 'cdpDeviceId'
     -> ChromeosDevicesPatch
 chromeosDevicesPatch pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
-    ChromeosDevicesPatch'
+  ChromeosDevicesPatch'
     { _cdpPayload = pCdpPayload_
     , _cdpCustomerId = pCdpCustomerId_
     , _cdpDeviceId = pCdpDeviceId_

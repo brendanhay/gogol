@@ -55,10 +55,12 @@ type GroupsAliasesDeleteResource =
 -- | Remove a alias for the group
 --
 -- /See:/ 'groupsAliasesDelete' smart constructor.
-data GroupsAliasesDelete = GroupsAliasesDelete'
+data GroupsAliasesDelete =
+  GroupsAliasesDelete'
     { _gadGroupKey :: !Text
     , _gadAlias    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsAliasesDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ groupsAliasesDelete
     -> Text -- ^ 'gadAlias'
     -> GroupsAliasesDelete
 groupsAliasesDelete pGadGroupKey_ pGadAlias_ =
-    GroupsAliasesDelete'
-    { _gadGroupKey = pGadGroupKey_
-    , _gadAlias = pGadAlias_
-    }
+  GroupsAliasesDelete' {_gadGroupKey = pGadGroupKey_, _gadAlias = pGadAlias_}
 
 -- | Email or immutable ID of the group
 gadGroupKey :: Lens' GroupsAliasesDelete Text

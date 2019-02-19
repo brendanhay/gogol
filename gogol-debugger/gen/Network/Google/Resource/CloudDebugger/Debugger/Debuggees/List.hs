@@ -66,7 +66,8 @@ type DebuggerDebuggeesListResource =
 -- | Lists all the debuggees that the user has access to.
 --
 -- /See:/ 'debuggerDebuggeesList' smart constructor.
-data DebuggerDebuggeesList = DebuggerDebuggeesList'
+data DebuggerDebuggeesList =
+  DebuggerDebuggeesList'
     { _ddlXgafv           :: !(Maybe Xgafv)
     , _ddlIncludeInactive :: !(Maybe Bool)
     , _ddlUploadProtocol  :: !(Maybe Text)
@@ -75,7 +76,8 @@ data DebuggerDebuggeesList = DebuggerDebuggeesList'
     , _ddlUploadType      :: !(Maybe Text)
     , _ddlClientVersion   :: !(Maybe Text)
     , _ddlCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DebuggerDebuggeesList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ data DebuggerDebuggeesList = DebuggerDebuggeesList'
 debuggerDebuggeesList
     :: DebuggerDebuggeesList
 debuggerDebuggeesList =
-    DebuggerDebuggeesList'
+  DebuggerDebuggeesList'
     { _ddlXgafv = Nothing
     , _ddlIncludeInactive = Nothing
     , _ddlUploadProtocol = Nothing

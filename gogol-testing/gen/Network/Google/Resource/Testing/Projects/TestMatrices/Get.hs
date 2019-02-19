@@ -69,7 +69,8 @@ type ProjectsTestMatricesGetResource =
 -- malformed - NOT_FOUND - if the Test Matrix does not exist
 --
 -- /See:/ 'projectsTestMatricesGet' smart constructor.
-data ProjectsTestMatricesGet = ProjectsTestMatricesGet'
+data ProjectsTestMatricesGet =
+  ProjectsTestMatricesGet'
     { _ptmgXgafv          :: !(Maybe Xgafv)
     , _ptmgUploadProtocol :: !(Maybe Text)
     , _ptmgTestMatrixId   :: !Text
@@ -77,7 +78,8 @@ data ProjectsTestMatricesGet = ProjectsTestMatricesGet'
     , _ptmgUploadType     :: !(Maybe Text)
     , _ptmgProjectId      :: !Text
     , _ptmgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTestMatricesGet' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsTestMatricesGet
     -> Text -- ^ 'ptmgProjectId'
     -> ProjectsTestMatricesGet
 projectsTestMatricesGet pPtmgTestMatrixId_ pPtmgProjectId_ =
-    ProjectsTestMatricesGet'
+  ProjectsTestMatricesGet'
     { _ptmgXgafv = Nothing
     , _ptmgUploadProtocol = Nothing
     , _ptmgTestMatrixId = pPtmgTestMatrixId_

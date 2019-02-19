@@ -77,7 +77,8 @@ type ProjectsContentInspectResource =
 -- https:\/\/cloud.google.com\/dlp\/docs\/inspecting-text,
 --
 -- /See:/ 'projectsContentInspect' smart constructor.
-data ProjectsContentInspect = ProjectsContentInspect'
+data ProjectsContentInspect =
+  ProjectsContentInspect'
     { _pciParent         :: !Text
     , _pciXgafv          :: !(Maybe Xgafv)
     , _pciUploadProtocol :: !(Maybe Text)
@@ -85,7 +86,8 @@ data ProjectsContentInspect = ProjectsContentInspect'
     , _pciUploadType     :: !(Maybe Text)
     , _pciPayload        :: !GooglePrivacyDlpV2InspectContentRequest
     , _pciCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsContentInspect' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsContentInspect
     -> GooglePrivacyDlpV2InspectContentRequest -- ^ 'pciPayload'
     -> ProjectsContentInspect
 projectsContentInspect pPciParent_ pPciPayload_ =
-    ProjectsContentInspect'
+  ProjectsContentInspect'
     { _pciParent = pPciParent_
     , _pciXgafv = Nothing
     , _pciUploadProtocol = Nothing

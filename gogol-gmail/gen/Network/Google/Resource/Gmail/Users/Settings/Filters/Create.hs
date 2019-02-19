@@ -55,10 +55,12 @@ type UsersSettingsFiltersCreateResource =
 -- | Creates a filter.
 --
 -- /See:/ 'usersSettingsFiltersCreate' smart constructor.
-data UsersSettingsFiltersCreate = UsersSettingsFiltersCreate'
+data UsersSettingsFiltersCreate =
+  UsersSettingsFiltersCreate'
     { _usfcPayload :: !Filter
     , _usfcUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsFiltersCreate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ usersSettingsFiltersCreate
     :: Filter -- ^ 'usfcPayload'
     -> UsersSettingsFiltersCreate
 usersSettingsFiltersCreate pUsfcPayload_ =
-    UsersSettingsFiltersCreate'
-    { _usfcPayload = pUsfcPayload_
-    , _usfcUserId = "me"
-    }
+  UsersSettingsFiltersCreate' {_usfcPayload = pUsfcPayload_, _usfcUserId = "me"}
 
 -- | Multipart request metadata.
 usfcPayload :: Lens' UsersSettingsFiltersCreate Filter

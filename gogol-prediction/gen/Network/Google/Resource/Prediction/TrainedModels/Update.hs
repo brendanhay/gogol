@@ -56,11 +56,13 @@ type TrainedModelsUpdateResource =
 -- | Add new data to a trained model.
 --
 -- /See:/ 'trainedModelsUpdate' smart constructor.
-data TrainedModelsUpdate = TrainedModelsUpdate'
+data TrainedModelsUpdate =
+  TrainedModelsUpdate'
     { _tmuProject :: !Text
     , _tmuPayload :: !Update
     , _tmuId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrainedModelsUpdate' with the minimum fields required to make a request.
 --
@@ -77,11 +79,8 @@ trainedModelsUpdate
     -> Text -- ^ 'tmuId'
     -> TrainedModelsUpdate
 trainedModelsUpdate pTmuProject_ pTmuPayload_ pTmuId_ =
-    TrainedModelsUpdate'
-    { _tmuProject = pTmuProject_
-    , _tmuPayload = pTmuPayload_
-    , _tmuId = pTmuId_
-    }
+  TrainedModelsUpdate'
+    {_tmuProject = pTmuProject_, _tmuPayload = pTmuPayload_, _tmuId = pTmuId_}
 
 -- | The project associated with the model.
 tmuProject :: Lens' TrainedModelsUpdate Text

@@ -84,7 +84,8 @@ type SpreadsheetsGetResource =
 -- ranges. Ranges are specified using A1 notation.
 --
 -- /See:/ 'spreadsheetsGet' smart constructor.
-data SpreadsheetsGet = SpreadsheetsGet'
+data SpreadsheetsGet =
+  SpreadsheetsGet'
     { _sgXgafv           :: !(Maybe Xgafv)
     , _sgUploadProtocol  :: !(Maybe Text)
     , _sgAccessToken     :: !(Maybe Text)
@@ -93,7 +94,8 @@ data SpreadsheetsGet = SpreadsheetsGet'
     , _sgRanges          :: !(Maybe [Text])
     , _sgIncludeGridData :: !(Maybe Bool)
     , _sgCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsGet' with the minimum fields required to make a request.
 --
@@ -118,7 +120,7 @@ spreadsheetsGet
     :: Text -- ^ 'sgSpreadsheetId'
     -> SpreadsheetsGet
 spreadsheetsGet pSgSpreadsheetId_ =
-    SpreadsheetsGet'
+  SpreadsheetsGet'
     { _sgXgafv = Nothing
     , _sgUploadProtocol = Nothing
     , _sgAccessToken = Nothing

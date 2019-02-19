@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsUpdate' request conforms to.
 type CreativeGroupsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -55,10 +55,12 @@ type CreativeGroupsUpdateResource =
 -- | Updates an existing creative group.
 --
 -- /See:/ 'creativeGroupsUpdate' smart constructor.
-data CreativeGroupsUpdate = CreativeGroupsUpdate'
+data CreativeGroupsUpdate =
+  CreativeGroupsUpdate'
     { _cguProFileId :: !(Textual Int64)
     , _cguPayload   :: !CreativeGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeGroupsUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ creativeGroupsUpdate
     -> CreativeGroup -- ^ 'cguPayload'
     -> CreativeGroupsUpdate
 creativeGroupsUpdate pCguProFileId_ pCguPayload_ =
-    CreativeGroupsUpdate'
-    { _cguProFileId = _Coerce # pCguProFileId_
-    , _cguPayload = pCguPayload_
-    }
+  CreativeGroupsUpdate'
+    {_cguProFileId = _Coerce # pCguProFileId_, _cguPayload = pCguPayload_}
 
 -- | User profile ID associated with this request.
 cguProFileId :: Lens' CreativeGroupsUpdate Int64

@@ -60,11 +60,13 @@ type ManagementWebPropertyAdWordsLinksInsertResource
 -- | Creates a webProperty-AdWords link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksInsert' smart constructor.
-data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinksInsert'
+data ManagementWebPropertyAdWordsLinksInsert =
+  ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliWebPropertyId :: !Text
     , _mwpawliPayload       :: !EntityAdWordsLink
     , _mwpawliAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksInsert' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ managementWebPropertyAdWordsLinksInsert
     -> Text -- ^ 'mwpawliAccountId'
     -> ManagementWebPropertyAdWordsLinksInsert
 managementWebPropertyAdWordsLinksInsert pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ =
-    ManagementWebPropertyAdWordsLinksInsert'
+  ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliWebPropertyId = pMwpawliWebPropertyId_
     , _mwpawliPayload = pMwpawliPayload_
     , _mwpawliAccountId = pMwpawliAccountId_
@@ -106,7 +108,8 @@ mwpawliAccountId
       (\ s a -> s{_mwpawliAccountId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksInsert where
+           ManagementWebPropertyAdWordsLinksInsert
+         where
         type Rs ManagementWebPropertyAdWordsLinksInsert =
              EntityAdWordsLink
         type Scopes ManagementWebPropertyAdWordsLinksInsert =

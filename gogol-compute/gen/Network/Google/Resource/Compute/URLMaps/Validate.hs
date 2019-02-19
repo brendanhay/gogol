@@ -63,11 +63,13 @@ type URLMapsValidateResource =
 -- UrlMap.
 --
 -- /See:/ 'urlMapsValidate' smart constructor.
-data URLMapsValidate = URLMapsValidate'
+data URLMapsValidate =
+  URLMapsValidate'
     { _umvURLMap  :: !Text
     , _umvProject :: !Text
     , _umvPayload :: !URLMapsValidateRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapsValidate' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ urlMapsValidate
     -> URLMapsValidateRequest -- ^ 'umvPayload'
     -> URLMapsValidate
 urlMapsValidate pUmvURLMap_ pUmvProject_ pUmvPayload_ =
-    URLMapsValidate'
+  URLMapsValidate'
     { _umvURLMap = pUmvURLMap_
     , _umvProject = pUmvProject_
     , _umvPayload = pUmvPayload_

@@ -57,9 +57,11 @@ type ApplicationsVerifyResource =
 -- was granted for.
 --
 -- /See:/ 'applicationsVerify' smart constructor.
-newtype ApplicationsVerify = ApplicationsVerify'
+newtype ApplicationsVerify =
+  ApplicationsVerify'
     { _avApplicationId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApplicationsVerify' with the minimum fields required to make a request.
 --
@@ -70,9 +72,7 @@ applicationsVerify
     :: Text -- ^ 'avApplicationId'
     -> ApplicationsVerify
 applicationsVerify pAvApplicationId_ =
-    ApplicationsVerify'
-    { _avApplicationId = pAvApplicationId_
-    }
+  ApplicationsVerify' {_avApplicationId = pAvApplicationId_}
 
 -- | The application ID from the Google Play developer console.
 avApplicationId :: Lens' ApplicationsVerify Text

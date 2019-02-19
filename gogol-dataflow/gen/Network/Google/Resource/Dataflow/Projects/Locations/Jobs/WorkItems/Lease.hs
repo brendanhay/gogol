@@ -70,7 +70,8 @@ type ProjectsLocationsJobsWorkItemsLeaseResource =
 -- | Leases a dataflow WorkItem to run.
 --
 -- /See:/ 'projectsLocationsJobsWorkItemsLease' smart constructor.
-data ProjectsLocationsJobsWorkItemsLease = ProjectsLocationsJobsWorkItemsLease'
+data ProjectsLocationsJobsWorkItemsLease =
+  ProjectsLocationsJobsWorkItemsLease'
     { _pljwilXgafv          :: !(Maybe Xgafv)
     , _pljwilJobId          :: !Text
     , _pljwilUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsLocationsJobsWorkItemsLease = ProjectsLocationsJobsWorkItemsLease'
     , _pljwilPayload        :: !LeaseWorkItemRequest
     , _pljwilProjectId      :: !Text
     , _pljwilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsWorkItemsLease' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ projectsLocationsJobsWorkItemsLease
     -> Text -- ^ 'pljwilProjectId'
     -> ProjectsLocationsJobsWorkItemsLease
 projectsLocationsJobsWorkItemsLease pPljwilJobId_ pPljwilLocation_ pPljwilPayload_ pPljwilProjectId_ =
-    ProjectsLocationsJobsWorkItemsLease'
+  ProjectsLocationsJobsWorkItemsLease'
     { _pljwilXgafv = Nothing
     , _pljwilJobId = pPljwilJobId_
     , _pljwilUploadProtocol = Nothing
@@ -175,7 +177,8 @@ pljwilCallback
       (\ s a -> s{_pljwilCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsJobsWorkItemsLease where
+           ProjectsLocationsJobsWorkItemsLease
+         where
         type Rs ProjectsLocationsJobsWorkItemsLease =
              LeaseWorkItemResponse
         type Scopes ProjectsLocationsJobsWorkItemsLease =

@@ -64,14 +64,16 @@ type ProjectsDeidentifyTemplatesDeleteResource =
 -- more.
 --
 -- /See:/ 'projectsDeidentifyTemplatesDelete' smart constructor.
-data ProjectsDeidentifyTemplatesDelete = ProjectsDeidentifyTemplatesDelete'
+data ProjectsDeidentifyTemplatesDelete =
+  ProjectsDeidentifyTemplatesDelete'
     { _pdtdXgafv          :: !(Maybe Xgafv)
     , _pdtdUploadProtocol :: !(Maybe Text)
     , _pdtdAccessToken    :: !(Maybe Text)
     , _pdtdUploadType     :: !(Maybe Text)
     , _pdtdName           :: !Text
     , _pdtdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDeidentifyTemplatesDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ projectsDeidentifyTemplatesDelete
     :: Text -- ^ 'pdtdName'
     -> ProjectsDeidentifyTemplatesDelete
 projectsDeidentifyTemplatesDelete pPdtdName_ =
-    ProjectsDeidentifyTemplatesDelete'
+  ProjectsDeidentifyTemplatesDelete'
     { _pdtdXgafv = Nothing
     , _pdtdUploadProtocol = Nothing
     , _pdtdAccessToken = Nothing
@@ -136,7 +138,8 @@ pdtdCallback
   = lens _pdtdCallback (\ s a -> s{_pdtdCallback = a})
 
 instance GoogleRequest
-         ProjectsDeidentifyTemplatesDelete where
+           ProjectsDeidentifyTemplatesDelete
+         where
         type Rs ProjectsDeidentifyTemplatesDelete =
              GoogleProtobufEmpty
         type Scopes ProjectsDeidentifyTemplatesDelete =

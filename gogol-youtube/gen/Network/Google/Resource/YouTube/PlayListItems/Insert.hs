@@ -56,11 +56,13 @@ type PlayListItemsInsertResource =
 -- | Adds a resource to a playlist.
 --
 -- /See:/ 'playListItemsInsert' smart constructor.
-data PlayListItemsInsert = PlayListItemsInsert'
+data PlayListItemsInsert =
+  PlayListItemsInsert'
     { _pliiPart                   :: !Text
     , _pliiPayload                :: !PlayListItem
     , _pliiOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListItemsInsert' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ playListItemsInsert
     -> PlayListItem -- ^ 'pliiPayload'
     -> PlayListItemsInsert
 playListItemsInsert pPliiPart_ pPliiPayload_ =
-    PlayListItemsInsert'
+  PlayListItemsInsert'
     { _pliiPart = pPliiPart_
     , _pliiPayload = pPliiPayload_
     , _pliiOnBehalfOfContentOwner = Nothing

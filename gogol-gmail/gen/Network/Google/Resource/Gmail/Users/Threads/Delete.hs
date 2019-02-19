@@ -56,10 +56,12 @@ type UsersThreadsDeleteResource =
 -- cannot be undone. Prefer threads.trash instead.
 --
 -- /See:/ 'usersThreadsDelete' smart constructor.
-data UsersThreadsDelete = UsersThreadsDelete'
+data UsersThreadsDelete =
+  UsersThreadsDelete'
     { _utdUserId :: !Text
     , _utdId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersThreadsDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ usersThreadsDelete
     :: Text -- ^ 'utdId'
     -> UsersThreadsDelete
 usersThreadsDelete pUtdId_ =
-    UsersThreadsDelete'
-    { _utdUserId = "me"
-    , _utdId = pUtdId_
-    }
+  UsersThreadsDelete' {_utdUserId = "me", _utdId = pUtdId_}
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

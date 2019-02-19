@@ -54,9 +54,11 @@ type RelyingPartyResetPasswordResource =
 -- | Reset password for a user.
 --
 -- /See:/ 'relyingPartyResetPassword' smart constructor.
-newtype RelyingPartyResetPassword = RelyingPartyResetPassword'
+newtype RelyingPartyResetPassword =
+  RelyingPartyResetPassword'
     { _rprpPayload :: IdentitytoolkitRelyingPartyResetPasswordRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyResetPassword' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ relyingPartyResetPassword
     :: IdentitytoolkitRelyingPartyResetPasswordRequest -- ^ 'rprpPayload'
     -> RelyingPartyResetPassword
 relyingPartyResetPassword pRprpPayload_ =
-    RelyingPartyResetPassword'
-    { _rprpPayload = pRprpPayload_
-    }
+  RelyingPartyResetPassword' {_rprpPayload = pRprpPayload_}
 
 -- | Multipart request metadata.
 rprpPayload :: Lens' RelyingPartyResetPassword IdentitytoolkitRelyingPartyResetPasswordRequest

@@ -75,7 +75,8 @@ type PresentationsPagesGetThumbnailResource =
 -- purposes.
 --
 -- /See:/ 'presentationsPagesGetThumbnail' smart constructor.
-data PresentationsPagesGetThumbnail = PresentationsPagesGetThumbnail'
+data PresentationsPagesGetThumbnail =
+  PresentationsPagesGetThumbnail'
     { _ppgtXgafv                            :: !(Maybe Xgafv)
     , _ppgtThumbnailPropertiesMimeType      :: !(Maybe Text)
     , _ppgtThumbnailPropertiesThumbnailSize :: !(Maybe Text)
@@ -85,7 +86,8 @@ data PresentationsPagesGetThumbnail = PresentationsPagesGetThumbnail'
     , _ppgtUploadType                       :: !(Maybe Text)
     , _ppgtPresentationId                   :: !Text
     , _ppgtCallback                         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PresentationsPagesGetThumbnail' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ presentationsPagesGetThumbnail
     -> Text -- ^ 'ppgtPresentationId'
     -> PresentationsPagesGetThumbnail
 presentationsPagesGetThumbnail pPpgtPageObjectId_ pPpgtPresentationId_ =
-    PresentationsPagesGetThumbnail'
+  PresentationsPagesGetThumbnail'
     { _ppgtXgafv = Nothing
     , _ppgtThumbnailPropertiesMimeType = Nothing
     , _ppgtThumbnailPropertiesThumbnailSize = Nothing

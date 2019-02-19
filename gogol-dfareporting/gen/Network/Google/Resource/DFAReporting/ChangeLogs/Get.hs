@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ChangeLogsGet' request conforms to.
 type ChangeLogsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "changeLogs" :>
@@ -54,10 +54,12 @@ type ChangeLogsGetResource =
 -- | Gets one change log by ID.
 --
 -- /See:/ 'changeLogsGet' smart constructor.
-data ChangeLogsGet = ChangeLogsGet'
+data ChangeLogsGet =
+  ChangeLogsGet'
     { _clgProFileId :: !(Textual Int64)
     , _clgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChangeLogsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ changeLogsGet
     -> Int64 -- ^ 'clgId'
     -> ChangeLogsGet
 changeLogsGet pClgProFileId_ pClgId_ =
-    ChangeLogsGet'
-    { _clgProFileId = _Coerce # pClgProFileId_
-    , _clgId = _Coerce # pClgId_
-    }
+  ChangeLogsGet'
+    {_clgProFileId = _Coerce # pClgProFileId_, _clgId = _Coerce # pClgId_}
 
 -- | User profile ID associated with this request.
 clgProFileId :: Lens' ChangeLogsGet Int64

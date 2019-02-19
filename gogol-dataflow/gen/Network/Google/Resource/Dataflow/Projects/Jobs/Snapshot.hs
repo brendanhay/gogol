@@ -66,7 +66,8 @@ type ProjectsJobsSnapshotResource =
 -- | Snapshot the state of a streaming job.
 --
 -- /See:/ 'projectsJobsSnapshot' smart constructor.
-data ProjectsJobsSnapshot = ProjectsJobsSnapshot'
+data ProjectsJobsSnapshot =
+  ProjectsJobsSnapshot'
     { _pjsXgafv          :: !(Maybe Xgafv)
     , _pjsJobId          :: !Text
     , _pjsUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsJobsSnapshot = ProjectsJobsSnapshot'
     , _pjsPayload        :: !SnapshotJobRequest
     , _pjsProjectId      :: !Text
     , _pjsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsSnapshot' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsJobsSnapshot
     -> Text -- ^ 'pjsProjectId'
     -> ProjectsJobsSnapshot
 projectsJobsSnapshot pPjsJobId_ pPjsPayload_ pPjsProjectId_ =
-    ProjectsJobsSnapshot'
+  ProjectsJobsSnapshot'
     { _pjsXgafv = Nothing
     , _pjsJobId = pPjsJobId_
     , _pjsUploadProtocol = Nothing

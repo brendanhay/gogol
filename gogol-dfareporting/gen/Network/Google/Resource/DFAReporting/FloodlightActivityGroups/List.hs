@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsList' request conforms to.
 type FloodlightActivityGroupsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>
@@ -81,7 +81,8 @@ type FloodlightActivityGroupsListResource =
 -- method supports paging.
 --
 -- /See:/ 'floodlightActivityGroupsList' smart constructor.
-data FloodlightActivityGroupsList = FloodlightActivityGroupsList'
+data FloodlightActivityGroupsList =
+  FloodlightActivityGroupsList'
     { _faglFloodlightConfigurationId :: !(Maybe (Textual Int64))
     , _faglAdvertiserId              :: !(Maybe (Textual Int64))
     , _faglSearchString              :: !(Maybe Text)
@@ -92,7 +93,8 @@ data FloodlightActivityGroupsList = FloodlightActivityGroupsList'
     , _faglSortField                 :: !FloodlightActivityGroupsListSortField
     , _faglType                      :: !(Maybe FloodlightActivityGroupsListType)
     , _faglMaxResults                :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsList' with the minimum fields required to make a request.
 --
@@ -121,7 +123,7 @@ floodlightActivityGroupsList
     :: Int64 -- ^ 'faglProFileId'
     -> FloodlightActivityGroupsList
 floodlightActivityGroupsList pFaglProFileId_ =
-    FloodlightActivityGroupsList'
+  FloodlightActivityGroupsList'
     { _faglFloodlightConfigurationId = Nothing
     , _faglAdvertiserId = Nothing
     , _faglSearchString = Nothing

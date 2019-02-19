@@ -57,11 +57,13 @@ type OrdersCreatetestreturnResource =
 -- | Sandbox only. Creates a test return.
 --
 -- /See:/ 'ordersCreatetestreturn' smart constructor.
-data OrdersCreatetestreturn = OrdersCreatetestreturn'
+data OrdersCreatetestreturn =
+  OrdersCreatetestreturn'
     { _occMerchantId :: !(Textual Word64)
     , _occPayload    :: !OrdersCreateTestReturnRequest
     , _occOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersCreatetestreturn' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ ordersCreatetestreturn
     -> Text -- ^ 'occOrderId'
     -> OrdersCreatetestreturn
 ordersCreatetestreturn pOccMerchantId_ pOccPayload_ pOccOrderId_ =
-    OrdersCreatetestreturn'
+  OrdersCreatetestreturn'
     { _occMerchantId = _Coerce # pOccMerchantId_
     , _occPayload = pOccPayload_
     , _occOrderId = pOccOrderId_

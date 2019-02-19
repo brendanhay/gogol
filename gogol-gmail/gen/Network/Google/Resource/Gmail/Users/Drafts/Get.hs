@@ -56,11 +56,13 @@ type UsersDraftsGetResource =
 -- | Gets the specified draft.
 --
 -- /See:/ 'usersDraftsGet' smart constructor.
-data UsersDraftsGet = UsersDraftsGet'
+data UsersDraftsGet =
+  UsersDraftsGet'
     { _udgFormat :: !UsersDraftsGetFormat
     , _udgUserId :: !Text
     , _udgId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDraftsGet' with the minimum fields required to make a request.
 --
@@ -75,11 +77,7 @@ usersDraftsGet
     :: Text -- ^ 'udgId'
     -> UsersDraftsGet
 usersDraftsGet pUdgId_ =
-    UsersDraftsGet'
-    { _udgFormat = UDGFFull
-    , _udgUserId = "me"
-    , _udgId = pUdgId_
-    }
+  UsersDraftsGet' {_udgFormat = UDGFFull, _udgUserId = "me", _udgId = pUdgId_}
 
 -- | The format to return the draft in.
 udgFormat :: Lens' UsersDraftsGet UsersDraftsGetFormat

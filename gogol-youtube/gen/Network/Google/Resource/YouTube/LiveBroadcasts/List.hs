@@ -74,7 +74,8 @@ type LiveBroadcastsListResource =
 -- parameters.
 --
 -- /See:/ 'liveBroadcastsList' smart constructor.
-data LiveBroadcastsList = LiveBroadcastsList'
+data LiveBroadcastsList =
+  LiveBroadcastsList'
     { _lblPart                          :: !Text
     , _lblMine                          :: !(Maybe Bool)
     , _lblBroadcastStatus               :: !(Maybe LiveBroadcastsListBroadcastStatus)
@@ -84,7 +85,8 @@ data LiveBroadcastsList = LiveBroadcastsList'
     , _lblId                            :: !(Maybe Text)
     , _lblPageToken                     :: !(Maybe Text)
     , _lblMaxResults                    :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcastsList' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ liveBroadcastsList
     :: Text -- ^ 'lblPart'
     -> LiveBroadcastsList
 liveBroadcastsList pLblPart_ =
-    LiveBroadcastsList'
+  LiveBroadcastsList'
     { _lblPart = pLblPart_
     , _lblMine = Nothing
     , _lblBroadcastStatus = Nothing

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolesUpdate' request conforms to.
 type UserRolesUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -54,10 +54,12 @@ type UserRolesUpdateResource =
 -- | Updates an existing user role.
 --
 -- /See:/ 'userRolesUpdate' smart constructor.
-data UserRolesUpdate = UserRolesUpdate'
+data UserRolesUpdate =
+  UserRolesUpdate'
     { _uruProFileId :: !(Textual Int64)
     , _uruPayload   :: !UserRole
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserRolesUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ userRolesUpdate
     -> UserRole -- ^ 'uruPayload'
     -> UserRolesUpdate
 userRolesUpdate pUruProFileId_ pUruPayload_ =
-    UserRolesUpdate'
-    { _uruProFileId = _Coerce # pUruProFileId_
-    , _uruPayload = pUruPayload_
-    }
+  UserRolesUpdate'
+    {_uruProFileId = _Coerce # pUruProFileId_, _uruPayload = pUruPayload_}
 
 -- | User profile ID associated with this request.
 uruProFileId :: Lens' UserRolesUpdate Int64

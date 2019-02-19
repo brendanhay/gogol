@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementsInsert' request conforms to.
 type PlacementsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -54,10 +54,12 @@ type PlacementsInsertResource =
 -- | Inserts a new placement.
 --
 -- /See:/ 'placementsInsert' smart constructor.
-data PlacementsInsert = PlacementsInsert'
+data PlacementsInsert =
+  PlacementsInsert'
     { _piProFileId :: !(Textual Int64)
     , _piPayload   :: !Placement
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlacementsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ placementsInsert
     -> Placement -- ^ 'piPayload'
     -> PlacementsInsert
 placementsInsert pPiProFileId_ pPiPayload_ =
-    PlacementsInsert'
-    { _piProFileId = _Coerce # pPiProFileId_
-    , _piPayload = pPiPayload_
-    }
+  PlacementsInsert'
+    {_piProFileId = _Coerce # pPiProFileId_, _piPayload = pPiPayload_}
 
 -- | User profile ID associated with this request.
 piProFileId :: Lens' PlacementsInsert Int64

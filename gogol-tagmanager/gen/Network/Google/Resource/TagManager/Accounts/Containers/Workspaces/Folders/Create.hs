@@ -54,10 +54,12 @@ type AccountsContainersWorkspacesFoldersCreateResource
 -- | Creates a GTM Folder.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersCreate' smart constructor.
-data AccountsContainersWorkspacesFoldersCreate = AccountsContainersWorkspacesFoldersCreate'
+data AccountsContainersWorkspacesFoldersCreate =
+  AccountsContainersWorkspacesFoldersCreate'
     { _acwfcParent  :: !Text
     , _acwfcPayload :: !Folder
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersCreate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsContainersWorkspacesFoldersCreate
     -> Folder -- ^ 'acwfcPayload'
     -> AccountsContainersWorkspacesFoldersCreate
 accountsContainersWorkspacesFoldersCreate pAcwfcParent_ pAcwfcPayload_ =
-    AccountsContainersWorkspacesFoldersCreate'
-    { _acwfcParent = pAcwfcParent_
-    , _acwfcPayload = pAcwfcPayload_
-    }
+  AccountsContainersWorkspacesFoldersCreate'
+    {_acwfcParent = pAcwfcParent_, _acwfcPayload = pAcwfcPayload_}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -88,7 +88,8 @@ acwfcPayload
   = lens _acwfcPayload (\ s a -> s{_acwfcPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesFoldersCreate where
+           AccountsContainersWorkspacesFoldersCreate
+         where
         type Rs AccountsContainersWorkspacesFoldersCreate =
              Folder
         type Scopes AccountsContainersWorkspacesFoldersCreate

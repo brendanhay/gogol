@@ -72,7 +72,8 @@ type CoursesTeachersListResource =
 -- access errors.
 --
 -- /See:/ 'coursesTeachersList' smart constructor.
-data CoursesTeachersList = CoursesTeachersList'
+data CoursesTeachersList =
+  CoursesTeachersList'
     { _ctlXgafv          :: !(Maybe Xgafv)
     , _ctlUploadProtocol :: !(Maybe Text)
     , _ctlCourseId       :: !Text
@@ -81,7 +82,8 @@ data CoursesTeachersList = CoursesTeachersList'
     , _ctlPageToken      :: !(Maybe Text)
     , _ctlPageSize       :: !(Maybe (Textual Int32))
     , _ctlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesTeachersList' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ coursesTeachersList
     :: Text -- ^ 'ctlCourseId'
     -> CoursesTeachersList
 coursesTeachersList pCtlCourseId_ =
-    CoursesTeachersList'
+  CoursesTeachersList'
     { _ctlXgafv = Nothing
     , _ctlUploadProtocol = Nothing
     , _ctlCourseId = pCtlCourseId_

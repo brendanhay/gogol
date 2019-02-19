@@ -61,14 +61,16 @@ type BiddersFilterSetsDeleteResource =
 -- ID.
 --
 -- /See:/ 'biddersFilterSetsDelete' smart constructor.
-data BiddersFilterSetsDelete = BiddersFilterSetsDelete'
+data BiddersFilterSetsDelete =
+  BiddersFilterSetsDelete'
     { _bfsdXgafv          :: !(Maybe Xgafv)
     , _bfsdUploadProtocol :: !(Maybe Text)
     , _bfsdAccessToken    :: !(Maybe Text)
     , _bfsdUploadType     :: !(Maybe Text)
     , _bfsdName           :: !Text
     , _bfsdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BiddersFilterSetsDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ biddersFilterSetsDelete
     :: Text -- ^ 'bfsdName'
     -> BiddersFilterSetsDelete
 biddersFilterSetsDelete pBfsdName_ =
-    BiddersFilterSetsDelete'
+  BiddersFilterSetsDelete'
     { _bfsdXgafv = Nothing
     , _bfsdUploadProtocol = Nothing
     , _bfsdAccessToken = Nothing

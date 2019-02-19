@@ -68,7 +68,8 @@ type OrganizationsExportAssetsResource =
 -- track of the export.
 --
 -- /See:/ 'organizationsExportAssets' smart constructor.
-data OrganizationsExportAssets = OrganizationsExportAssets'
+data OrganizationsExportAssets =
+  OrganizationsExportAssets'
     { _oeaParent         :: !Text
     , _oeaXgafv          :: !(Maybe Xgafv)
     , _oeaUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data OrganizationsExportAssets = OrganizationsExportAssets'
     , _oeaUploadType     :: !(Maybe Text)
     , _oeaPayload        :: !ExportAssetsRequest
     , _oeaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsExportAssets' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ organizationsExportAssets
     -> ExportAssetsRequest -- ^ 'oeaPayload'
     -> OrganizationsExportAssets
 organizationsExportAssets pOeaParent_ pOeaPayload_ =
-    OrganizationsExportAssets'
+  OrganizationsExportAssets'
     { _oeaParent = pOeaParent_
     , _oeaXgafv = Nothing
     , _oeaUploadProtocol = Nothing

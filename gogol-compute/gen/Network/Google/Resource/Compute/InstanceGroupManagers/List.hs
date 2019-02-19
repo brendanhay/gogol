@@ -66,14 +66,16 @@ type InstanceGroupManagersListResource =
 -- the specified project and zone.
 --
 -- /See:/ 'instanceGroupManagersList' smart constructor.
-data InstanceGroupManagersList = InstanceGroupManagersList'
+data InstanceGroupManagersList =
+  InstanceGroupManagersList'
     { _igmlOrderBy    :: !(Maybe Text)
     , _igmlProject    :: !Text
     , _igmlZone       :: !Text
     , _igmlFilter     :: !(Maybe Text)
     , _igmlPageToken  :: !(Maybe Text)
     , _igmlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersList' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ instanceGroupManagersList
     -> Text -- ^ 'igmlZone'
     -> InstanceGroupManagersList
 instanceGroupManagersList pIgmlProject_ pIgmlZone_ =
-    InstanceGroupManagersList'
+  InstanceGroupManagersList'
     { _igmlOrderBy = Nothing
     , _igmlProject = pIgmlProject_
     , _igmlZone = pIgmlZone_

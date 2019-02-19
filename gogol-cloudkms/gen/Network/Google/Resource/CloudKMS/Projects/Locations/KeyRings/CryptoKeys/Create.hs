@@ -67,7 +67,8 @@ type ProjectsLocationsKeyRingsCryptoKeysCreateResource
 -- CryptoKey.version_template.algorithm are required.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCreate' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysCreate = ProjectsLocationsKeyRingsCryptoKeysCreate'
+data ProjectsLocationsKeyRingsCryptoKeysCreate =
+  ProjectsLocationsKeyRingsCryptoKeysCreate'
     { _plkrckcParent         :: !Text
     , _plkrckcXgafv          :: !(Maybe Xgafv)
     , _plkrckcUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsLocationsKeyRingsCryptoKeysCreate = ProjectsLocationsKeyRingsCrypto
     , _plkrckcPayload        :: !CryptoKey
     , _plkrckcCryptoKeyId    :: !(Maybe Text)
     , _plkrckcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCreate' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsLocationsKeyRingsCryptoKeysCreate
     -> CryptoKey -- ^ 'plkrckcPayload'
     -> ProjectsLocationsKeyRingsCryptoKeysCreate
 projectsLocationsKeyRingsCryptoKeysCreate pPlkrckcParent_ pPlkrckcPayload_ =
-    ProjectsLocationsKeyRingsCryptoKeysCreate'
+  ProjectsLocationsKeyRingsCryptoKeysCreate'
     { _plkrckcParent = pPlkrckcParent_
     , _plkrckcXgafv = Nothing
     , _plkrckcUploadProtocol = Nothing
@@ -162,7 +164,8 @@ plkrckcCallback
       (\ s a -> s{_plkrckcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysCreate where
+           ProjectsLocationsKeyRingsCryptoKeysCreate
+         where
         type Rs ProjectsLocationsKeyRingsCryptoKeysCreate =
              CryptoKey
         type Scopes ProjectsLocationsKeyRingsCryptoKeysCreate

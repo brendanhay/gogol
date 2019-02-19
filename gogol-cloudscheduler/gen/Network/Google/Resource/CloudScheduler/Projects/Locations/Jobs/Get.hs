@@ -59,14 +59,16 @@ type ProjectsLocationsJobsGetResource =
 -- | Gets a job.
 --
 -- /See:/ 'projectsLocationsJobsGet' smart constructor.
-data ProjectsLocationsJobsGet = ProjectsLocationsJobsGet'
+data ProjectsLocationsJobsGet =
+  ProjectsLocationsJobsGet'
     { _pljgXgafv          :: !(Maybe Xgafv)
     , _pljgUploadProtocol :: !(Maybe Text)
     , _pljgAccessToken    :: !(Maybe Text)
     , _pljgUploadType     :: !(Maybe Text)
     , _pljgName           :: !Text
     , _pljgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsLocationsJobsGet
     :: Text -- ^ 'pljgName'
     -> ProjectsLocationsJobsGet
 projectsLocationsJobsGet pPljgName_ =
-    ProjectsLocationsJobsGet'
+  ProjectsLocationsJobsGet'
     { _pljgXgafv = Nothing
     , _pljgUploadProtocol = Nothing
     , _pljgAccessToken = Nothing

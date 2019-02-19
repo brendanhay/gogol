@@ -65,10 +65,12 @@ type AccountsCustomAppsCreateResource =
 -- | Create and publish a new custom app.
 --
 -- /See:/ 'accountsCustomAppsCreate' smart constructor.
-data AccountsCustomAppsCreate = AccountsCustomAppsCreate'
+data AccountsCustomAppsCreate =
+  AccountsCustomAppsCreate'
     { _acacPayload :: !CustomApp
     , _acacAccount :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsCustomAppsCreate' with the minimum fields required to make a request.
 --
@@ -82,10 +84,8 @@ accountsCustomAppsCreate
     -> Int64 -- ^ 'acacAccount'
     -> AccountsCustomAppsCreate
 accountsCustomAppsCreate pAcacPayload_ pAcacAccount_ =
-    AccountsCustomAppsCreate'
-    { _acacPayload = pAcacPayload_
-    , _acacAccount = _Coerce # pAcacAccount_
-    }
+  AccountsCustomAppsCreate'
+    {_acacPayload = pAcacPayload_, _acacAccount = _Coerce # pAcacAccount_}
 
 -- | Multipart request metadata.
 acacPayload :: Lens' AccountsCustomAppsCreate CustomApp
@@ -111,7 +111,8 @@ instance GoogleRequest AccountsCustomAppsCreate where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload AccountsCustomAppsCreate) where
+           (MediaUpload AccountsCustomAppsCreate)
+         where
         type Rs (MediaUpload AccountsCustomAppsCreate) =
              CustomApp
         type Scopes (MediaUpload AccountsCustomAppsCreate) =

@@ -54,10 +54,12 @@ type WebAppsDeleteResource =
 -- | Deletes an existing web app.
 --
 -- /See:/ 'webAppsDelete' smart constructor.
-data WebAppsDelete = WebAppsDelete'
+data WebAppsDelete =
+  WebAppsDelete'
     { _wadWebAppId     :: !Text
     , _wadEnterpriseId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebAppsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ webAppsDelete
     -> Text -- ^ 'wadEnterpriseId'
     -> WebAppsDelete
 webAppsDelete pWadWebAppId_ pWadEnterpriseId_ =
-    WebAppsDelete'
-    { _wadWebAppId = pWadWebAppId_
-    , _wadEnterpriseId = pWadEnterpriseId_
-    }
+  WebAppsDelete'
+    {_wadWebAppId = pWadWebAppId_, _wadEnterpriseId = pWadEnterpriseId_}
 
 -- | The ID of the web app.
 wadWebAppId :: Lens' WebAppsDelete Text

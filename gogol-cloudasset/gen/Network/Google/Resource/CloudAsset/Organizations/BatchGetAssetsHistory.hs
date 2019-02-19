@@ -76,7 +76,8 @@ type OrganizationsBatchGetAssetsHistoryResource =
 -- in the output history.
 --
 -- /See:/ 'organizationsBatchGetAssetsHistory' smart constructor.
-data OrganizationsBatchGetAssetsHistory = OrganizationsBatchGetAssetsHistory'
+data OrganizationsBatchGetAssetsHistory =
+  OrganizationsBatchGetAssetsHistory'
     { _obgahParent                  :: !Text
     , _obgahXgafv                   :: !(Maybe Xgafv)
     , _obgahReadTimeWindowEndTime   :: !(Maybe DateTime')
@@ -87,7 +88,8 @@ data OrganizationsBatchGetAssetsHistory = OrganizationsBatchGetAssetsHistory'
     , _obgahReadTimeWindowStartTime :: !(Maybe DateTime')
     , _obgahContentType             :: !(Maybe Text)
     , _obgahCallback                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsBatchGetAssetsHistory' with the minimum fields required to make a request.
 --
@@ -116,7 +118,7 @@ organizationsBatchGetAssetsHistory
     :: Text -- ^ 'obgahParent'
     -> OrganizationsBatchGetAssetsHistory
 organizationsBatchGetAssetsHistory pObgahParent_ =
-    OrganizationsBatchGetAssetsHistory'
+  OrganizationsBatchGetAssetsHistory'
     { _obgahParent = pObgahParent_
     , _obgahXgafv = Nothing
     , _obgahReadTimeWindowEndTime = Nothing
@@ -201,7 +203,8 @@ obgahCallback
       (\ s a -> s{_obgahCallback = a})
 
 instance GoogleRequest
-         OrganizationsBatchGetAssetsHistory where
+           OrganizationsBatchGetAssetsHistory
+         where
         type Rs OrganizationsBatchGetAssetsHistory =
              BatchGetAssetsHistoryResponse
         type Scopes OrganizationsBatchGetAssetsHistory =

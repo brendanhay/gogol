@@ -58,11 +58,13 @@ type ManagementWebPropertiesPatchResource =
 -- | Updates an existing web property. This method supports patch semantics.
 --
 -- /See:/ 'managementWebPropertiesPatch' smart constructor.
-data ManagementWebPropertiesPatch = ManagementWebPropertiesPatch'
+data ManagementWebPropertiesPatch =
+  ManagementWebPropertiesPatch'
     { _mwppWebPropertyId :: !Text
     , _mwppPayload       :: !WebProperty
     , _mwppAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesPatch' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ managementWebPropertiesPatch
     -> Text -- ^ 'mwppAccountId'
     -> ManagementWebPropertiesPatch
 managementWebPropertiesPatch pMwppWebPropertyId_ pMwppPayload_ pMwppAccountId_ =
-    ManagementWebPropertiesPatch'
+  ManagementWebPropertiesPatch'
     { _mwppWebPropertyId = pMwppWebPropertyId_
     , _mwppPayload = pMwppPayload_
     , _mwppAccountId = pMwppAccountId_

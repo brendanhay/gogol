@@ -66,7 +66,8 @@ type ProjectsInstancesTablesDropRowRangeResource =
 -- match a particular prefix.
 --
 -- /See:/ 'projectsInstancesTablesDropRowRange' smart constructor.
-data ProjectsInstancesTablesDropRowRange = ProjectsInstancesTablesDropRowRange'
+data ProjectsInstancesTablesDropRowRange =
+  ProjectsInstancesTablesDropRowRange'
     { _pitdrrXgafv          :: !(Maybe Xgafv)
     , _pitdrrUploadProtocol :: !(Maybe Text)
     , _pitdrrAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsInstancesTablesDropRowRange = ProjectsInstancesTablesDropRowRange'
     , _pitdrrPayload        :: !DropRowRangeRequest
     , _pitdrrName           :: !Text
     , _pitdrrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesTablesDropRowRange' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsInstancesTablesDropRowRange
     -> Text -- ^ 'pitdrrName'
     -> ProjectsInstancesTablesDropRowRange
 projectsInstancesTablesDropRowRange pPitdrrPayload_ pPitdrrName_ =
-    ProjectsInstancesTablesDropRowRange'
+  ProjectsInstancesTablesDropRowRange'
     { _pitdrrXgafv = Nothing
     , _pitdrrUploadProtocol = Nothing
     , _pitdrrAccessToken = Nothing
@@ -151,7 +153,8 @@ pitdrrCallback
       (\ s a -> s{_pitdrrCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesTablesDropRowRange where
+           ProjectsInstancesTablesDropRowRange
+         where
         type Rs ProjectsInstancesTablesDropRowRange = Empty
         type Scopes ProjectsInstancesTablesDropRowRange =
              '["https://www.googleapis.com/auth/bigtable.admin",

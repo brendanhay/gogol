@@ -62,7 +62,8 @@ type ProjectsLocationsNodesReimageResource =
 -- | Reimages a node\'s OS.
 --
 -- /See:/ 'projectsLocationsNodesReimage' smart constructor.
-data ProjectsLocationsNodesReimage = ProjectsLocationsNodesReimage'
+data ProjectsLocationsNodesReimage =
+  ProjectsLocationsNodesReimage'
     { _plnrXgafv          :: !(Maybe Xgafv)
     , _plnrUploadProtocol :: !(Maybe Text)
     , _plnrAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsLocationsNodesReimage = ProjectsLocationsNodesReimage'
     , _plnrPayload        :: !ReimageNodeRequest
     , _plnrName           :: !Text
     , _plnrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsNodesReimage' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsLocationsNodesReimage
     -> Text -- ^ 'plnrName'
     -> ProjectsLocationsNodesReimage
 projectsLocationsNodesReimage pPlnrPayload_ pPlnrName_ =
-    ProjectsLocationsNodesReimage'
+  ProjectsLocationsNodesReimage'
     { _plnrXgafv = Nothing
     , _plnrUploadProtocol = Nothing
     , _plnrAccessToken = Nothing

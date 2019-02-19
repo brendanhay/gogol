@@ -151,7 +151,8 @@ type CSESiterestrictListResource =
 -- set of url patterns.
 --
 -- /See:/ 'cSESiterestrictList' smart constructor.
-data CSESiterestrictList = CSESiterestrictList'
+data CSESiterestrictList =
+  CSESiterestrictList'
     { _cseslImgDominantColor :: !(Maybe CSESiterestrictListImgDominantColor)
     , _cseslSiteSearchFilter :: !(Maybe CSESiterestrictListSiteSearchFilter)
     , _cseslC2coff           :: !(Maybe Text)
@@ -183,7 +184,8 @@ data CSESiterestrictList = CSESiterestrictList'
     , _cseslSafe             :: !CSESiterestrictListSafe
     , _cseslHq               :: !(Maybe Text)
     , _cseslHighRange        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CSESiterestrictList' with the minimum fields required to make a request.
 --
@@ -254,7 +256,7 @@ cSESiterestrictList
     :: Text -- ^ 'cseslQ'
     -> CSESiterestrictList
 cSESiterestrictList pCseslQ_ =
-    CSESiterestrictList'
+  CSESiterestrictList'
     { _cseslImgDominantColor = Nothing
     , _cseslSiteSearchFilter = Nothing
     , _cseslC2coff = Nothing

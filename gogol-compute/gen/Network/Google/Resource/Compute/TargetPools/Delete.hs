@@ -59,12 +59,14 @@ type TargetPoolsDeleteResource =
 -- | Deletes the specified target pool.
 --
 -- /See:/ 'targetPoolsDelete' smart constructor.
-data TargetPoolsDelete = TargetPoolsDelete'
+data TargetPoolsDelete =
+  TargetPoolsDelete'
     { _tpdRequestId  :: !(Maybe Text)
     , _tpdProject    :: !Text
     , _tpdTargetPool :: !Text
     , _tpdRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsDelete' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ targetPoolsDelete
     -> Text -- ^ 'tpdRegion'
     -> TargetPoolsDelete
 targetPoolsDelete pTpdProject_ pTpdTargetPool_ pTpdRegion_ =
-    TargetPoolsDelete'
+  TargetPoolsDelete'
     { _tpdRequestId = Nothing
     , _tpdProject = pTpdProject_
     , _tpdTargetPool = pTpdTargetPool_

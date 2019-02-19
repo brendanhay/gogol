@@ -59,11 +59,13 @@ type NetworksInsertResource =
 -- the request.
 --
 -- /See:/ 'networksInsert' smart constructor.
-data NetworksInsert = NetworksInsert'
+data NetworksInsert =
+  NetworksInsert'
     { _niRequestId :: !(Maybe Text)
     , _niProject   :: !Text
     , _niPayload   :: !Network
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworksInsert' with the minimum fields required to make a request.
 --
@@ -79,11 +81,8 @@ networksInsert
     -> Network -- ^ 'niPayload'
     -> NetworksInsert
 networksInsert pNiProject_ pNiPayload_ =
-    NetworksInsert'
-    { _niRequestId = Nothing
-    , _niProject = pNiProject_
-    , _niPayload = pNiPayload_
-    }
+  NetworksInsert'
+    {_niRequestId = Nothing, _niProject = pNiProject_, _niPayload = pNiPayload_}
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

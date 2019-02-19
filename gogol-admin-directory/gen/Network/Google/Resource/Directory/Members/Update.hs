@@ -57,11 +57,13 @@ type MembersUpdateResource =
 -- | Update membership of a user in the specified group.
 --
 -- /See:/ 'membersUpdate' smart constructor.
-data MembersUpdate = MembersUpdate'
+data MembersUpdate =
+  MembersUpdate'
     { _muMemberKey :: !Text
     , _muGroupKey  :: !Text
     , _muPayload   :: !Member
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MembersUpdate' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ membersUpdate
     -> Member -- ^ 'muPayload'
     -> MembersUpdate
 membersUpdate pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
-    MembersUpdate'
+  MembersUpdate'
     { _muMemberKey = pMuMemberKey_
     , _muGroupKey = pMuGroupKey_
     , _muPayload = pMuPayload_

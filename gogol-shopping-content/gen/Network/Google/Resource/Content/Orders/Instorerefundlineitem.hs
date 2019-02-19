@@ -59,11 +59,13 @@ type OrdersInstorerefundlineitemResource =
 -- outside of Google payments processing (e.g. cash refund done in store).
 --
 -- /See:/ 'ordersInstorerefundlineitem' smart constructor.
-data OrdersInstorerefundlineitem = OrdersInstorerefundlineitem'
+data OrdersInstorerefundlineitem =
+  OrdersInstorerefundlineitem'
     { _oiMerchantId :: !(Textual Word64)
     , _oiPayload    :: !OrdersInStoreRefundLineItemRequest
     , _oiOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersInstorerefundlineitem' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ ordersInstorerefundlineitem
     -> Text -- ^ 'oiOrderId'
     -> OrdersInstorerefundlineitem
 ordersInstorerefundlineitem pOiMerchantId_ pOiPayload_ pOiOrderId_ =
-    OrdersInstorerefundlineitem'
+  OrdersInstorerefundlineitem'
     { _oiMerchantId = _Coerce # pOiMerchantId_
     , _oiPayload = pOiPayload_
     , _oiOrderId = pOiOrderId_

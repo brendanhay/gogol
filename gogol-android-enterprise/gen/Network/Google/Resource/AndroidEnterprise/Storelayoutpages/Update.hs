@@ -57,11 +57,13 @@ type StorelayoutpagesUpdateResource =
 -- | Updates the content of a store page.
 --
 -- /See:/ 'storelayoutpagesUpdate' smart constructor.
-data StorelayoutpagesUpdate = StorelayoutpagesUpdate'
+data StorelayoutpagesUpdate =
+  StorelayoutpagesUpdate'
     { _suEnterpriseId :: !Text
     , _suPageId       :: !Text
     , _suPayload      :: !StorePage
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StorelayoutpagesUpdate' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ storelayoutpagesUpdate
     -> StorePage -- ^ 'suPayload'
     -> StorelayoutpagesUpdate
 storelayoutpagesUpdate pSuEnterpriseId_ pSuPageId_ pSuPayload_ =
-    StorelayoutpagesUpdate'
+  StorelayoutpagesUpdate'
     { _suEnterpriseId = pSuEnterpriseId_
     , _suPageId = pSuPageId_
     , _suPayload = pSuPayload_

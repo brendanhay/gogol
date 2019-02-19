@@ -54,10 +54,12 @@ type PagesDeleteResource =
 -- | Delete a page by ID.
 --
 -- /See:/ 'pagesDelete' smart constructor.
-data PagesDelete = PagesDelete'
+data PagesDelete =
+  PagesDelete'
     { _pddBlogId :: !Text
     , _pddPageId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PagesDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ pagesDelete
     -> Text -- ^ 'pddPageId'
     -> PagesDelete
 pagesDelete pPddBlogId_ pPddPageId_ =
-    PagesDelete'
-    { _pddBlogId = pPddBlogId_
-    , _pddPageId = pPddPageId_
-    }
+  PagesDelete' {_pddBlogId = pPddBlogId_, _pddPageId = pPddPageId_}
 
 -- | The ID of the Blog.
 pddBlogId :: Lens' PagesDelete Text

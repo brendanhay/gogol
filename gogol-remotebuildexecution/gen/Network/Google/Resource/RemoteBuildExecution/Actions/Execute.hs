@@ -142,7 +142,8 @@ type ActionsExecuteResource =
 -- \`\"blobs\/{hash}\/{size}\"\` indicating the digest of the missing blob.
 --
 -- /See:/ 'actionsExecute' smart constructor.
-data ActionsExecute = ActionsExecute'
+data ActionsExecute =
+  ActionsExecute'
     { _aeXgafv          :: !(Maybe Xgafv)
     , _aeUploadProtocol :: !(Maybe Text)
     , _aeAccessToken    :: !(Maybe Text)
@@ -150,7 +151,8 @@ data ActionsExecute = ActionsExecute'
     , _aePayload        :: !BuildBazelRemoteExecutionV2ExecuteRequest
     , _aeInstanceName   :: !Text
     , _aeCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActionsExecute' with the minimum fields required to make a request.
 --
@@ -174,7 +176,7 @@ actionsExecute
     -> Text -- ^ 'aeInstanceName'
     -> ActionsExecute
 actionsExecute pAePayload_ pAeInstanceName_ =
-    ActionsExecute'
+  ActionsExecute'
     { _aeXgafv = Nothing
     , _aeUploadProtocol = Nothing
     , _aeAccessToken = Nothing

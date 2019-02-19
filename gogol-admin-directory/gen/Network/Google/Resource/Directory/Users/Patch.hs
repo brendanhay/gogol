@@ -54,10 +54,12 @@ type UsersPatchResource =
 -- | update user. This method supports patch semantics.
 --
 -- /See:/ 'usersPatch' smart constructor.
-data UsersPatch = UsersPatch'
+data UsersPatch =
+  UsersPatch'
     { _upPayload :: !User
     , _upUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersPatch' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ usersPatch
     -> Text -- ^ 'upUserKey'
     -> UsersPatch
 usersPatch pUpPayload_ pUpUserKey_ =
-    UsersPatch'
-    { _upPayload = pUpPayload_
-    , _upUserKey = pUpUserKey_
-    }
+  UsersPatch' {_upPayload = pUpPayload_, _upUserKey = pUpUserKey_}
 
 -- | Multipart request metadata.
 upPayload :: Lens' UsersPatch User

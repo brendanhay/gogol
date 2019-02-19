@@ -60,11 +60,13 @@ type SSLCertificatesInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'sslCertificatesInsert' smart constructor.
-data SSLCertificatesInsert = SSLCertificatesInsert'
+data SSLCertificatesInsert =
+  SSLCertificatesInsert'
     { _sciRequestId :: !(Maybe Text)
     , _sciProject   :: !Text
     , _sciPayload   :: !SSLCertificate
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLCertificatesInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ sslCertificatesInsert
     -> SSLCertificate -- ^ 'sciPayload'
     -> SSLCertificatesInsert
 sslCertificatesInsert pSciProject_ pSciPayload_ =
-    SSLCertificatesInsert'
+  SSLCertificatesInsert'
     { _sciRequestId = Nothing
     , _sciProject = pSciProject_
     , _sciPayload = pSciPayload_

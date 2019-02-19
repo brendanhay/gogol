@@ -62,7 +62,8 @@ type ProjectsReleasesGetExecutableResource =
 -- | Get the \`Release\` executable to use when enforcing rules.
 --
 -- /See:/ 'projectsReleasesGetExecutable' smart constructor.
-data ProjectsReleasesGetExecutable = ProjectsReleasesGetExecutable'
+data ProjectsReleasesGetExecutable =
+  ProjectsReleasesGetExecutable'
     { _prgeXgafv             :: !(Maybe Xgafv)
     , _prgeUploadProtocol    :: !(Maybe Text)
     , _prgeAccessToken       :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsReleasesGetExecutable = ProjectsReleasesGetExecutable'
     , _prgeName              :: !Text
     , _prgeExecutableVersion :: !(Maybe Text)
     , _prgeCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReleasesGetExecutable' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ projectsReleasesGetExecutable
     :: Text -- ^ 'prgeName'
     -> ProjectsReleasesGetExecutable
 projectsReleasesGetExecutable pPrgeName_ =
-    ProjectsReleasesGetExecutable'
+  ProjectsReleasesGetExecutable'
     { _prgeXgafv = Nothing
     , _prgeUploadProtocol = Nothing
     , _prgeAccessToken = Nothing

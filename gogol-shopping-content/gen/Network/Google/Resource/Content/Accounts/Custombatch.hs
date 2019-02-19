@@ -55,9 +55,11 @@ type AccountsCustombatchResource =
 -- (sub-)accounts in a single request.
 --
 -- /See:/ 'accountsCustombatch' smart constructor.
-newtype AccountsCustombatch = AccountsCustombatch'
+newtype AccountsCustombatch =
+  AccountsCustombatch'
     { _accPayload :: AccountsCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsCustombatch' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ accountsCustombatch
     :: AccountsCustomBatchRequest -- ^ 'accPayload'
     -> AccountsCustombatch
 accountsCustombatch pAccPayload_ =
-    AccountsCustombatch'
-    { _accPayload = pAccPayload_
-    }
+  AccountsCustombatch' {_accPayload = pAccPayload_}
 
 -- | Multipart request metadata.
 accPayload :: Lens' AccountsCustombatch AccountsCustomBatchRequest

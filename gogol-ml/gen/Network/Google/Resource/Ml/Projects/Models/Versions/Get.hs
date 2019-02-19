@@ -68,14 +68,16 @@ type ProjectsModelsVersionsGetResource =
 -- versions of a model.
 --
 -- /See:/ 'projectsModelsVersionsGet' smart constructor.
-data ProjectsModelsVersionsGet = ProjectsModelsVersionsGet'
+data ProjectsModelsVersionsGet =
+  ProjectsModelsVersionsGet'
     { _pmvgXgafv          :: !(Maybe Xgafv)
     , _pmvgUploadProtocol :: !(Maybe Text)
     , _pmvgAccessToken    :: !(Maybe Text)
     , _pmvgUploadType     :: !(Maybe Text)
     , _pmvgName           :: !Text
     , _pmvgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsModelsVersionsGet' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsModelsVersionsGet
     :: Text -- ^ 'pmvgName'
     -> ProjectsModelsVersionsGet
 projectsModelsVersionsGet pPmvgName_ =
-    ProjectsModelsVersionsGet'
+  ProjectsModelsVersionsGet'
     { _pmvgXgafv = Nothing
     , _pmvgUploadProtocol = Nothing
     , _pmvgAccessToken = Nothing

@@ -59,14 +59,16 @@ type ProjectsServiceAccountsGetIAMPolicyResource =
 -- | Returns the IAM access control policy for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsGetIAMPolicy' smart constructor.
-data ProjectsServiceAccountsGetIAMPolicy = ProjectsServiceAccountsGetIAMPolicy'
+data ProjectsServiceAccountsGetIAMPolicy =
+  ProjectsServiceAccountsGetIAMPolicy'
     { _psagipXgafv          :: !(Maybe Xgafv)
     , _psagipUploadProtocol :: !(Maybe Text)
     , _psagipAccessToken    :: !(Maybe Text)
     , _psagipUploadType     :: !(Maybe Text)
     , _psagipResource       :: !Text
     , _psagipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsServiceAccountsGetIAMPolicy
     :: Text -- ^ 'psagipResource'
     -> ProjectsServiceAccountsGetIAMPolicy
 projectsServiceAccountsGetIAMPolicy pPsagipResource_ =
-    ProjectsServiceAccountsGetIAMPolicy'
+  ProjectsServiceAccountsGetIAMPolicy'
     { _psagipXgafv = Nothing
     , _psagipUploadProtocol = Nothing
     , _psagipAccessToken = Nothing
@@ -133,7 +135,8 @@ psagipCallback
       (\ s a -> s{_psagipCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsGetIAMPolicy where
+           ProjectsServiceAccountsGetIAMPolicy
+         where
         type Rs ProjectsServiceAccountsGetIAMPolicy = Policy
         type Scopes ProjectsServiceAccountsGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

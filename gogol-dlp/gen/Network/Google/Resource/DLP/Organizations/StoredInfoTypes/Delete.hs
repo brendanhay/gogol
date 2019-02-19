@@ -64,14 +64,16 @@ type OrganizationsStoredInfoTypesDeleteResource =
 -- learn more.
 --
 -- /See:/ 'organizationsStoredInfoTypesDelete' smart constructor.
-data OrganizationsStoredInfoTypesDelete = OrganizationsStoredInfoTypesDelete'
+data OrganizationsStoredInfoTypesDelete =
+  OrganizationsStoredInfoTypesDelete'
     { _ositdXgafv          :: !(Maybe Xgafv)
     , _ositdUploadProtocol :: !(Maybe Text)
     , _ositdAccessToken    :: !(Maybe Text)
     , _ositdUploadType     :: !(Maybe Text)
     , _ositdName           :: !Text
     , _ositdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsStoredInfoTypesDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ organizationsStoredInfoTypesDelete
     :: Text -- ^ 'ositdName'
     -> OrganizationsStoredInfoTypesDelete
 organizationsStoredInfoTypesDelete pOsitdName_ =
-    OrganizationsStoredInfoTypesDelete'
+  OrganizationsStoredInfoTypesDelete'
     { _ositdXgafv = Nothing
     , _ositdUploadProtocol = Nothing
     , _ositdAccessToken = Nothing
@@ -138,7 +140,8 @@ ositdCallback
       (\ s a -> s{_ositdCallback = a})
 
 instance GoogleRequest
-         OrganizationsStoredInfoTypesDelete where
+           OrganizationsStoredInfoTypesDelete
+         where
         type Rs OrganizationsStoredInfoTypesDelete =
              GoogleProtobufEmpty
         type Scopes OrganizationsStoredInfoTypesDelete =

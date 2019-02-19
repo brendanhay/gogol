@@ -55,9 +55,11 @@ type TokensListResource =
 -- applications.
 --
 -- /See:/ 'tokensList' smart constructor.
-newtype TokensList = TokensList'
+newtype TokensList =
+  TokensList'
     { _tlUserKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TokensList' with the minimum fields required to make a request.
 --
@@ -67,10 +69,7 @@ newtype TokensList = TokensList'
 tokensList
     :: Text -- ^ 'tlUserKey'
     -> TokensList
-tokensList pTlUserKey_ =
-    TokensList'
-    { _tlUserKey = pTlUserKey_
-    }
+tokensList pTlUserKey_ = TokensList' {_tlUserKey = pTlUserKey_}
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.

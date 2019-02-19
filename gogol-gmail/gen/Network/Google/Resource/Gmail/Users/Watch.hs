@@ -55,10 +55,12 @@ type UsersWatchResource =
 -- | Set up or update a push notification watch on the given user mailbox.
 --
 -- /See:/ 'usersWatch' smart constructor.
-data UsersWatch = UsersWatch'
+data UsersWatch =
+  UsersWatch'
     { _uwPayload :: !WatchRequest
     , _uwUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersWatch' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ usersWatch
     :: WatchRequest -- ^ 'uwPayload'
     -> UsersWatch
 usersWatch pUwPayload_ =
-    UsersWatch'
-    { _uwPayload = pUwPayload_
-    , _uwUserId = "me"
-    }
+  UsersWatch' {_uwPayload = pUwPayload_, _uwUserId = "me"}
 
 -- | Multipart request metadata.
 uwPayload :: Lens' UsersWatch WatchRequest

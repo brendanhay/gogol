@@ -65,14 +65,16 @@ type ResourcesListResource =
 -- | Lists all resources in a given deployment.
 --
 -- /See:/ 'resourcesList' smart constructor.
-data ResourcesList = ResourcesList'
+data ResourcesList =
+  ResourcesList'
     { _rlOrderBy    :: !(Maybe Text)
     , _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlPageToken  :: !(Maybe Text)
     , _rlMaxResults :: !(Textual Word32)
     , _rlDeployment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesList' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ resourcesList
     -> Text -- ^ 'rlDeployment'
     -> ResourcesList
 resourcesList pRlProject_ pRlDeployment_ =
-    ResourcesList'
+  ResourcesList'
     { _rlOrderBy = Nothing
     , _rlProject = pRlProject_
     , _rlFilter = Nothing

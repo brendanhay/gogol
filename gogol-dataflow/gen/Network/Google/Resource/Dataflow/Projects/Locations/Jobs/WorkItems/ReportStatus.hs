@@ -71,7 +71,8 @@ type ProjectsLocationsJobsWorkItemsReportStatusResource
 -- | Reports the status of dataflow WorkItems leased by a worker.
 --
 -- /See:/ 'projectsLocationsJobsWorkItemsReportStatus' smart constructor.
-data ProjectsLocationsJobsWorkItemsReportStatus = ProjectsLocationsJobsWorkItemsReportStatus'
+data ProjectsLocationsJobsWorkItemsReportStatus =
+  ProjectsLocationsJobsWorkItemsReportStatus'
     { _pljwirsXgafv          :: !(Maybe Xgafv)
     , _pljwirsJobId          :: !Text
     , _pljwirsUploadProtocol :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsLocationsJobsWorkItemsReportStatus = ProjectsLocationsJobsWorkItems
     , _pljwirsPayload        :: !ReportWorkItemStatusRequest
     , _pljwirsProjectId      :: !Text
     , _pljwirsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsWorkItemsReportStatus' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ projectsLocationsJobsWorkItemsReportStatus
     -> Text -- ^ 'pljwirsProjectId'
     -> ProjectsLocationsJobsWorkItemsReportStatus
 projectsLocationsJobsWorkItemsReportStatus pPljwirsJobId_ pPljwirsLocation_ pPljwirsPayload_ pPljwirsProjectId_ =
-    ProjectsLocationsJobsWorkItemsReportStatus'
+  ProjectsLocationsJobsWorkItemsReportStatus'
     { _pljwirsXgafv = Nothing
     , _pljwirsJobId = pPljwirsJobId_
     , _pljwirsUploadProtocol = Nothing
@@ -176,7 +178,8 @@ pljwirsCallback
       (\ s a -> s{_pljwirsCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsJobsWorkItemsReportStatus where
+           ProjectsLocationsJobsWorkItemsReportStatus
+         where
         type Rs ProjectsLocationsJobsWorkItemsReportStatus =
              ReportWorkItemStatusResponse
         type Scopes

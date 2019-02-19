@@ -72,12 +72,14 @@ type RegionInstanceGroupManagersInsertResource =
 -- managed instance group can contain up to 2000 instances.
 --
 -- /See:/ 'regionInstanceGroupManagersInsert' smart constructor.
-data RegionInstanceGroupManagersInsert = RegionInstanceGroupManagersInsert'
+data RegionInstanceGroupManagersInsert =
+  RegionInstanceGroupManagersInsert'
     { _rigmiRequestId :: !(Maybe Text)
     , _rigmiProject   :: !Text
     , _rigmiPayload   :: !InstanceGroupManager
     , _rigmiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersInsert' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ regionInstanceGroupManagersInsert
     -> Text -- ^ 'rigmiRegion'
     -> RegionInstanceGroupManagersInsert
 regionInstanceGroupManagersInsert pRigmiProject_ pRigmiPayload_ pRigmiRegion_ =
-    RegionInstanceGroupManagersInsert'
+  RegionInstanceGroupManagersInsert'
     { _rigmiRequestId = Nothing
     , _rigmiProject = pRigmiProject_
     , _rigmiPayload = pRigmiPayload_
@@ -134,7 +136,8 @@ rigmiRegion
   = lens _rigmiRegion (\ s a -> s{_rigmiRegion = a})
 
 instance GoogleRequest
-         RegionInstanceGroupManagersInsert where
+           RegionInstanceGroupManagersInsert
+         where
         type Rs RegionInstanceGroupManagersInsert = Operation
         type Scopes RegionInstanceGroupManagersInsert =
              '["https://www.googleapis.com/auth/cloud-platform",

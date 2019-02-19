@@ -63,10 +63,12 @@ type ReportsGetFileResource =
 -- | Downloads a report file encoded in UTF-8.
 --
 -- /See:/ 'reportsGetFile' smart constructor.
-data ReportsGetFile = ReportsGetFile'
+data ReportsGetFile =
+  ReportsGetFile'
     { _rgfReportId       :: !Text
     , _rgfReportFragment :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsGetFile' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ reportsGetFile
     -> Int32 -- ^ 'rgfReportFragment'
     -> ReportsGetFile
 reportsGetFile pRgfReportId_ pRgfReportFragment_ =
-    ReportsGetFile'
+  ReportsGetFile'
     { _rgfReportId = pRgfReportId_
     , _rgfReportFragment = _Coerce # pRgfReportFragment_
     }

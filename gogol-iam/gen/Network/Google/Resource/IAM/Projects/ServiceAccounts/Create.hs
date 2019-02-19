@@ -63,7 +63,8 @@ type ProjectsServiceAccountsCreateResource =
 -- | Creates a ServiceAccount and returns it.
 --
 -- /See:/ 'projectsServiceAccountsCreate' smart constructor.
-data ProjectsServiceAccountsCreate = ProjectsServiceAccountsCreate'
+data ProjectsServiceAccountsCreate =
+  ProjectsServiceAccountsCreate'
     { _psacXgafv          :: !(Maybe Xgafv)
     , _psacUploadProtocol :: !(Maybe Text)
     , _psacAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsServiceAccountsCreate = ProjectsServiceAccountsCreate'
     , _psacPayload        :: !CreateServiceAccountRequest
     , _psacName           :: !Text
     , _psacCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsServiceAccountsCreate
     -> Text -- ^ 'psacName'
     -> ProjectsServiceAccountsCreate
 projectsServiceAccountsCreate pPsacPayload_ pPsacName_ =
-    ProjectsServiceAccountsCreate'
+  ProjectsServiceAccountsCreate'
     { _psacXgafv = Nothing
     , _psacUploadProtocol = Nothing
     , _psacAccessToken = Nothing

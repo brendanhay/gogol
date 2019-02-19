@@ -62,12 +62,14 @@ type BackendBucketsUpdateResource =
 -- the request.
 --
 -- /See:/ 'backendBucketsUpdate' smart constructor.
-data BackendBucketsUpdate = BackendBucketsUpdate'
+data BackendBucketsUpdate =
+  BackendBucketsUpdate'
     { _bbuRequestId     :: !(Maybe Text)
     , _bbuBackendBucket :: !Text
     , _bbuProject       :: !Text
     , _bbuPayload       :: !BackendBucket
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendBucketsUpdate' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ backendBucketsUpdate
     -> BackendBucket -- ^ 'bbuPayload'
     -> BackendBucketsUpdate
 backendBucketsUpdate pBbuBackendBucket_ pBbuProject_ pBbuPayload_ =
-    BackendBucketsUpdate'
+  BackendBucketsUpdate'
     { _bbuRequestId = Nothing
     , _bbuBackendBucket = pBbuBackendBucket_
     , _bbuProject = pBbuProject_

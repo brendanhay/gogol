@@ -68,7 +68,8 @@ type SpreadsheetsSheetsCopyToResource =
 -- the properties of the newly created sheet.
 --
 -- /See:/ 'spreadsheetsSheetsCopyTo' smart constructor.
-data SpreadsheetsSheetsCopyTo = SpreadsheetsSheetsCopyTo'
+data SpreadsheetsSheetsCopyTo =
+  SpreadsheetsSheetsCopyTo'
     { _ssctXgafv          :: !(Maybe Xgafv)
     , _ssctUploadProtocol :: !(Maybe Text)
     , _ssctAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data SpreadsheetsSheetsCopyTo = SpreadsheetsSheetsCopyTo'
     , _ssctPayload        :: !CopySheetToAnotherSpreadsheetRequest
     , _ssctSheetId        :: !(Textual Int32)
     , _ssctCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsSheetsCopyTo' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ spreadsheetsSheetsCopyTo
     -> Int32 -- ^ 'ssctSheetId'
     -> SpreadsheetsSheetsCopyTo
 spreadsheetsSheetsCopyTo pSsctSpreadsheetId_ pSsctPayload_ pSsctSheetId_ =
-    SpreadsheetsSheetsCopyTo'
+  SpreadsheetsSheetsCopyTo'
     { _ssctXgafv = Nothing
     , _ssctUploadProtocol = Nothing
     , _ssctAccessToken = Nothing

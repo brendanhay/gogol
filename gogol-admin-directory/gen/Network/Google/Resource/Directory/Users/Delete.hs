@@ -52,9 +52,11 @@ type UsersDeleteResource =
 -- | Delete user
 --
 -- /See:/ 'usersDelete' smart constructor.
-newtype UsersDelete = UsersDelete'
+newtype UsersDelete =
+  UsersDelete'
     { _udUserKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDelete' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype UsersDelete = UsersDelete'
 usersDelete
     :: Text -- ^ 'udUserKey'
     -> UsersDelete
-usersDelete pUdUserKey_ =
-    UsersDelete'
-    { _udUserKey = pUdUserKey_
-    }
+usersDelete pUdUserKey_ = UsersDelete' {_udUserKey = pUdUserKey_}
 
 -- | Email or immutable ID of the user
 udUserKey :: Lens' UsersDelete Text

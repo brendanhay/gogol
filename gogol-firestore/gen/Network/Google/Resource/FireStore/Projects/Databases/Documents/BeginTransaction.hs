@@ -64,7 +64,8 @@ type ProjectsDatabasesDocumentsBeginTransactionResource
 -- | Starts a new transaction.
 --
 -- /See:/ 'projectsDatabasesDocumentsBeginTransaction' smart constructor.
-data ProjectsDatabasesDocumentsBeginTransaction = ProjectsDatabasesDocumentsBeginTransaction'
+data ProjectsDatabasesDocumentsBeginTransaction =
+  ProjectsDatabasesDocumentsBeginTransaction'
     { _pddbtXgafv          :: !(Maybe Xgafv)
     , _pddbtUploadProtocol :: !(Maybe Text)
     , _pddbtDatabase       :: !Text
@@ -72,7 +73,8 @@ data ProjectsDatabasesDocumentsBeginTransaction = ProjectsDatabasesDocumentsBegi
     , _pddbtUploadType     :: !(Maybe Text)
     , _pddbtPayload        :: !BeginTransactionRequest
     , _pddbtCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsBeginTransaction' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsDatabasesDocumentsBeginTransaction
     -> BeginTransactionRequest -- ^ 'pddbtPayload'
     -> ProjectsDatabasesDocumentsBeginTransaction
 projectsDatabasesDocumentsBeginTransaction pPddbtDatabase_ pPddbtPayload_ =
-    ProjectsDatabasesDocumentsBeginTransaction'
+  ProjectsDatabasesDocumentsBeginTransaction'
     { _pddbtXgafv = Nothing
     , _pddbtUploadProtocol = Nothing
     , _pddbtDatabase = pPddbtDatabase_
@@ -148,7 +150,8 @@ pddbtCallback
       (\ s a -> s{_pddbtCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsBeginTransaction where
+           ProjectsDatabasesDocumentsBeginTransaction
+         where
         type Rs ProjectsDatabasesDocumentsBeginTransaction =
              BeginTransactionResponse
         type Scopes

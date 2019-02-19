@@ -65,14 +65,16 @@ type ManifestsListResource =
 -- | Lists all manifests for a given deployment.
 --
 -- /See:/ 'manifestsList' smart constructor.
-data ManifestsList = ManifestsList'
+data ManifestsList =
+  ManifestsList'
     { _mlOrderBy    :: !(Maybe Text)
     , _mlProject    :: !Text
     , _mlFilter     :: !(Maybe Text)
     , _mlPageToken  :: !(Maybe Text)
     , _mlMaxResults :: !(Textual Word32)
     , _mlDeployment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManifestsList' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ manifestsList
     -> Text -- ^ 'mlDeployment'
     -> ManifestsList
 manifestsList pMlProject_ pMlDeployment_ =
-    ManifestsList'
+  ManifestsList'
     { _mlOrderBy = Nothing
     , _mlProject = pMlProject_
     , _mlFilter = Nothing

@@ -60,12 +60,14 @@ type PlayersListResource =
 -- | Get the collection of players for the currently authenticated user.
 --
 -- /See:/ 'playersList' smart constructor.
-data PlayersList = PlayersList'
+data PlayersList =
+  PlayersList'
     { _plCollection :: !PlayersListCollection
     , _plLanguage   :: !(Maybe Text)
     , _plPageToken  :: !(Maybe Text)
     , _plMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayersList' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ playersList
     :: PlayersListCollection -- ^ 'plCollection'
     -> PlayersList
 playersList pPlCollection_ =
-    PlayersList'
+  PlayersList'
     { _plCollection = pPlCollection_
     , _plLanguage = Nothing
     , _plPageToken = Nothing

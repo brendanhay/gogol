@@ -59,14 +59,16 @@ type ProjectsRolesGetResource =
 -- | Gets a Role definition.
 --
 -- /See:/ 'projectsRolesGet' smart constructor.
-data ProjectsRolesGet = ProjectsRolesGet'
+data ProjectsRolesGet =
+  ProjectsRolesGet'
     { _prgXgafv          :: !(Maybe Xgafv)
     , _prgUploadProtocol :: !(Maybe Text)
     , _prgAccessToken    :: !(Maybe Text)
     , _prgUploadType     :: !(Maybe Text)
     , _prgName           :: !Text
     , _prgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRolesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsRolesGet
     :: Text -- ^ 'prgName'
     -> ProjectsRolesGet
 projectsRolesGet pPrgName_ =
-    ProjectsRolesGet'
+  ProjectsRolesGet'
     { _prgXgafv = Nothing
     , _prgUploadProtocol = Nothing
     , _prgAccessToken = Nothing

@@ -67,12 +67,14 @@ type TargetHTTPSProxiesSetSSLPolicyResource =
 -- connection between the load balancer and the backends.
 --
 -- /See:/ 'targetHTTPSProxiesSetSSLPolicy' smart constructor.
-data TargetHTTPSProxiesSetSSLPolicy = TargetHTTPSProxiesSetSSLPolicy'
+data TargetHTTPSProxiesSetSSLPolicy =
+  TargetHTTPSProxiesSetSSLPolicy'
     { _thpsspRequestId        :: !(Maybe Text)
     , _thpsspProject          :: !Text
     , _thpsspPayload          :: !SSLPolicyReference
     , _thpsspTargetHTTPSProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxiesSetSSLPolicy' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ targetHTTPSProxiesSetSSLPolicy
     -> Text -- ^ 'thpsspTargetHTTPSProxy'
     -> TargetHTTPSProxiesSetSSLPolicy
 targetHTTPSProxiesSetSSLPolicy pThpsspProject_ pThpsspPayload_ pThpsspTargetHTTPSProxy_ =
-    TargetHTTPSProxiesSetSSLPolicy'
+  TargetHTTPSProxiesSetSSLPolicy'
     { _thpsspRequestId = Nothing
     , _thpsspProject = pThpsspProject_
     , _thpsspPayload = pThpsspPayload_

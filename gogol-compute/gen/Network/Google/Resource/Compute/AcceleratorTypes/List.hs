@@ -66,14 +66,16 @@ type AcceleratorTypesListResource =
 -- project.
 --
 -- /See:/ 'acceleratorTypesList' smart constructor.
-data AcceleratorTypesList = AcceleratorTypesList'
+data AcceleratorTypesList =
+  AcceleratorTypesList'
     { _atlOrderBy    :: !(Maybe Text)
     , _atlProject    :: !Text
     , _atlZone       :: !Text
     , _atlFilter     :: !(Maybe Text)
     , _atlPageToken  :: !(Maybe Text)
     , _atlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypesList' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ acceleratorTypesList
     -> Text -- ^ 'atlZone'
     -> AcceleratorTypesList
 acceleratorTypesList pAtlProject_ pAtlZone_ =
-    AcceleratorTypesList'
+  AcceleratorTypesList'
     { _atlOrderBy = Nothing
     , _atlProject = pAtlProject_
     , _atlZone = pAtlZone_

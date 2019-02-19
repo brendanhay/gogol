@@ -57,11 +57,13 @@ type RolesUpdateResource =
 -- | Updates a role.
 --
 -- /See:/ 'rolesUpdate' smart constructor.
-data RolesUpdate = RolesUpdate'
+data RolesUpdate =
+  RolesUpdate'
     { _ruPayload  :: !Role
     , _ruRoleId   :: !Text
     , _ruCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RolesUpdate' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ rolesUpdate
     -> Text -- ^ 'ruCustomer'
     -> RolesUpdate
 rolesUpdate pRuPayload_ pRuRoleId_ pRuCustomer_ =
-    RolesUpdate'
+  RolesUpdate'
     { _ruPayload = pRuPayload_
     , _ruRoleId = pRuRoleId_
     , _ruCustomer = pRuCustomer_

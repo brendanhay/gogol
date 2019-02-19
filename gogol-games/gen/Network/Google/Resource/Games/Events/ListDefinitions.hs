@@ -56,11 +56,13 @@ type EventsListDefinitionsResource =
 -- | Returns a list of the event definitions in this application.
 --
 -- /See:/ 'eventsListDefinitions' smart constructor.
-data EventsListDefinitions = EventsListDefinitions'
+data EventsListDefinitions =
+  EventsListDefinitions'
     { _eldLanguage   :: !(Maybe Text)
     , _eldPageToken  :: !(Maybe Text)
     , _eldMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventsListDefinitions' with the minimum fields required to make a request.
 --
@@ -74,11 +76,8 @@ data EventsListDefinitions = EventsListDefinitions'
 eventsListDefinitions
     :: EventsListDefinitions
 eventsListDefinitions =
-    EventsListDefinitions'
-    { _eldLanguage = Nothing
-    , _eldPageToken = Nothing
-    , _eldMaxResults = Nothing
-    }
+  EventsListDefinitions'
+    {_eldLanguage = Nothing, _eldPageToken = Nothing, _eldMaxResults = Nothing}
 
 -- | The preferred language to use for strings returned by this method.
 eldLanguage :: Lens' EventsListDefinitions (Maybe Text)

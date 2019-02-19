@@ -57,11 +57,13 @@ type OrdersCancellineitemResource =
 -- | Cancels a line item, making a full refund.
 --
 -- /See:/ 'ordersCancellineitem' smart constructor.
-data OrdersCancellineitem = OrdersCancellineitem'
+data OrdersCancellineitem =
+  OrdersCancellineitem'
     { _oc1MerchantId :: !(Textual Word64)
     , _oc1Payload    :: !OrdersCancelLineItemRequest
     , _oc1OrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersCancellineitem' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ ordersCancellineitem
     -> Text -- ^ 'oc1OrderId'
     -> OrdersCancellineitem
 ordersCancellineitem pOc1MerchantId_ pOc1Payload_ pOc1OrderId_ =
-    OrdersCancellineitem'
+  OrdersCancellineitem'
     { _oc1MerchantId = _Coerce # pOc1MerchantId_
     , _oc1Payload = pOc1Payload_
     , _oc1OrderId = pOc1OrderId_

@@ -58,11 +58,13 @@ type RoomsLeaveResource =
 -- method directly is unsupported.
 --
 -- /See:/ 'roomsLeave' smart constructor.
-data RoomsLeave = RoomsLeave'
+data RoomsLeave =
+  RoomsLeave'
     { _rlPayload  :: !RoomLeaveRequest
     , _rlRoomId   :: !Text
     , _rlLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoomsLeave' with the minimum fields required to make a request.
 --
@@ -78,11 +80,8 @@ roomsLeave
     -> Text -- ^ 'rlRoomId'
     -> RoomsLeave
 roomsLeave pRlPayload_ pRlRoomId_ =
-    RoomsLeave'
-    { _rlPayload = pRlPayload_
-    , _rlRoomId = pRlRoomId_
-    , _rlLanguage = Nothing
-    }
+  RoomsLeave'
+    {_rlPayload = pRlPayload_, _rlRoomId = pRlRoomId_, _rlLanguage = Nothing}
 
 -- | Multipart request metadata.
 rlPayload :: Lens' RoomsLeave RoomLeaveRequest

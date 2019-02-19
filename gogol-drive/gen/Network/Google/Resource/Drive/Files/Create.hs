@@ -74,14 +74,16 @@ type FilesCreateResource =
 -- | Creates a new file.
 --
 -- /See:/ 'filesCreate' smart constructor.
-data FilesCreate = FilesCreate'
+data FilesCreate =
+  FilesCreate'
     { _fcPayload                   :: !File
     , _fcUseContentAsIndexableText :: !Bool
     , _fcOCRLanguage               :: !(Maybe Text)
     , _fcKeepRevisionForever       :: !Bool
     , _fcIgnoreDefaultVisibility   :: !Bool
     , _fcSupportsTeamDrives        :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilesCreate' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ filesCreate
     :: File -- ^ 'fcPayload'
     -> FilesCreate
 filesCreate pFcPayload_ =
-    FilesCreate'
+  FilesCreate'
     { _fcPayload = pFcPayload_
     , _fcUseContentAsIndexableText = False
     , _fcOCRLanguage = Nothing

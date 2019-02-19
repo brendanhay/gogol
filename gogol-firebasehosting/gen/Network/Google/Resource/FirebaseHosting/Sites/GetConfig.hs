@@ -59,14 +59,16 @@ type SitesGetConfigResource =
 -- | Gets the Hosting metadata for a specific site.
 --
 -- /See:/ 'sitesGetConfig' smart constructor.
-data SitesGetConfig = SitesGetConfig'
+data SitesGetConfig =
+  SitesGetConfig'
     { _sgcXgafv          :: !(Maybe Xgafv)
     , _sgcUploadProtocol :: !(Maybe Text)
     , _sgcAccessToken    :: !(Maybe Text)
     , _sgcUploadType     :: !(Maybe Text)
     , _sgcName           :: !Text
     , _sgcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesGetConfig' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ sitesGetConfig
     :: Text -- ^ 'sgcName'
     -> SitesGetConfig
 sitesGetConfig pSgcName_ =
-    SitesGetConfig'
+  SitesGetConfig'
     { _sgcXgafv = Nothing
     , _sgcUploadProtocol = Nothing
     , _sgcAccessToken = Nothing

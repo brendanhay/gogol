@@ -55,10 +55,12 @@ type MyLibraryBookshelvesClearVolumesResource =
 -- | Clears all volumes from a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesClearVolumes' smart constructor.
-data MyLibraryBookshelvesClearVolumes = MyLibraryBookshelvesClearVolumes'
+data MyLibraryBookshelvesClearVolumes =
+  MyLibraryBookshelvesClearVolumes'
     { _mlbcvShelf  :: !Text
     , _mlbcvSource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyLibraryBookshelvesClearVolumes' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ myLibraryBookshelvesClearVolumes
     :: Text -- ^ 'mlbcvShelf'
     -> MyLibraryBookshelvesClearVolumes
 myLibraryBookshelvesClearVolumes pMlbcvShelf_ =
-    MyLibraryBookshelvesClearVolumes'
-    { _mlbcvShelf = pMlbcvShelf_
-    , _mlbcvSource = Nothing
-    }
+  MyLibraryBookshelvesClearVolumes'
+    {_mlbcvShelf = pMlbcvShelf_, _mlbcvSource = Nothing}
 
 -- | ID of bookshelf from which to remove a volume.
 mlbcvShelf :: Lens' MyLibraryBookshelvesClearVolumes Text
@@ -87,7 +87,8 @@ mlbcvSource
   = lens _mlbcvSource (\ s a -> s{_mlbcvSource = a})
 
 instance GoogleRequest
-         MyLibraryBookshelvesClearVolumes where
+           MyLibraryBookshelvesClearVolumes
+         where
         type Rs MyLibraryBookshelvesClearVolumes = ()
         type Scopes MyLibraryBookshelvesClearVolumes =
              '["https://www.googleapis.com/auth/books"]

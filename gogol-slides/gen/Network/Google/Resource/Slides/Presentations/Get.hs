@@ -60,14 +60,16 @@ type PresentationsGetResource =
 -- | Gets the latest version of the specified presentation.
 --
 -- /See:/ 'presentationsGet' smart constructor.
-data PresentationsGet = PresentationsGet'
+data PresentationsGet =
+  PresentationsGet'
     { _pgXgafv          :: !(Maybe Xgafv)
     , _pgUploadProtocol :: !(Maybe Text)
     , _pgAccessToken    :: !(Maybe Text)
     , _pgUploadType     :: !(Maybe Text)
     , _pgPresentationId :: !Text
     , _pgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PresentationsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ presentationsGet
     :: Text -- ^ 'pgPresentationId'
     -> PresentationsGet
 presentationsGet pPgPresentationId_ =
-    PresentationsGet'
+  PresentationsGet'
     { _pgXgafv = Nothing
     , _pgUploadProtocol = Nothing
     , _pgAccessToken = Nothing

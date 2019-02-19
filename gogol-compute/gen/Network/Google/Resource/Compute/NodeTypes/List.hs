@@ -63,14 +63,16 @@ type NodeTypesListResource =
 -- | Retrieves a list of node types available to the specified project.
 --
 -- /See:/ 'nodeTypesList' smart constructor.
-data NodeTypesList = NodeTypesList'
+data NodeTypesList =
+  NodeTypesList'
     { _ntltOrderBy    :: !(Maybe Text)
     , _ntltProject    :: !Text
     , _ntltZone       :: !Text
     , _ntltFilter     :: !(Maybe Text)
     , _ntltPageToken  :: !(Maybe Text)
     , _ntltMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypesList' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ nodeTypesList
     -> Text -- ^ 'ntltZone'
     -> NodeTypesList
 nodeTypesList pNtltProject_ pNtltZone_ =
-    NodeTypesList'
+  NodeTypesList'
     { _ntltOrderBy = Nothing
     , _ntltProject = pNtltProject_
     , _ntltZone = pNtltZone_

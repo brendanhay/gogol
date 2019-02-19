@@ -71,7 +71,8 @@ type InstancesListReferrersResource =
 -- Instances.
 --
 -- /See:/ 'instancesListReferrers' smart constructor.
-data InstancesListReferrers = InstancesListReferrers'
+data InstancesListReferrers =
+  InstancesListReferrers'
     { _ilrOrderBy    :: !(Maybe Text)
     , _ilrProject    :: !Text
     , _ilrZone       :: !Text
@@ -79,7 +80,8 @@ data InstancesListReferrers = InstancesListReferrers'
     , _ilrPageToken  :: !(Maybe Text)
     , _ilrMaxResults :: !(Textual Word32)
     , _ilrInstance   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesListReferrers' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ instancesListReferrers
     -> Text -- ^ 'ilrInstance'
     -> InstancesListReferrers
 instancesListReferrers pIlrProject_ pIlrZone_ pIlrInstance_ =
-    InstancesListReferrers'
+  InstancesListReferrers'
     { _ilrOrderBy = Nothing
     , _ilrProject = pIlrProject_
     , _ilrZone = pIlrZone_

@@ -50,8 +50,8 @@ type MyConfigGetUserSettingsResource =
 --
 -- /See:/ 'myConfigGetUserSettings' smart constructor.
 data MyConfigGetUserSettings =
-    MyConfigGetUserSettings'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  MyConfigGetUserSettings'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyConfigGetUserSettings' with the minimum fields required to make a request.
 --

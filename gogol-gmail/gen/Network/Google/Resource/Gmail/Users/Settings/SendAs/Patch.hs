@@ -65,11 +65,13 @@ type UsersSettingsSendAsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'usersSettingsSendAsPatch' smart constructor.
-data UsersSettingsSendAsPatch = UsersSettingsSendAsPatch'
+data UsersSettingsSendAsPatch =
+  UsersSettingsSendAsPatch'
     { _ussapPayload     :: !SendAs
     , _ussapUserId      :: !Text
     , _ussapSendAsEmail :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsSendAsPatch' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ usersSettingsSendAsPatch
     -> Text -- ^ 'ussapSendAsEmail'
     -> UsersSettingsSendAsPatch
 usersSettingsSendAsPatch pUssapPayload_ pUssapSendAsEmail_ =
-    UsersSettingsSendAsPatch'
+  UsersSettingsSendAsPatch'
     { _ussapPayload = pUssapPayload_
     , _ussapUserId = "me"
     , _ussapSendAsEmail = pUssapSendAsEmail_

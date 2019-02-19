@@ -71,7 +71,8 @@ type SinksUpdateResource =
 -- unique_writer_identity field.
 --
 -- /See:/ 'sinksUpdate' smart constructor.
-data SinksUpdate = SinksUpdate'
+data SinksUpdate =
+  SinksUpdate'
     { _suXgafv                :: !(Maybe Xgafv)
     , _suUniqueWriterIdentity :: !(Maybe Bool)
     , _suUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,8 @@ data SinksUpdate = SinksUpdate'
     , _suPayload              :: !LogSink
     , _suSinkName             :: !Text
     , _suCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SinksUpdate' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ sinksUpdate
     -> Text -- ^ 'suSinkName'
     -> SinksUpdate
 sinksUpdate pSuPayload_ pSuSinkName_ =
-    SinksUpdate'
+  SinksUpdate'
     { _suXgafv = Nothing
     , _suUniqueWriterIdentity = Nothing
     , _suUploadProtocol = Nothing

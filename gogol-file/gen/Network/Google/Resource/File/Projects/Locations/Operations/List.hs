@@ -59,7 +59,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @file.projects.locations.operations.list@ method which the
 -- 'ProjectsLocationsOperationsList' request conforms to.
 type ProjectsLocationsOperationsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          "operations" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -85,7 +85,8 @@ type ProjectsLocationsOperationsListResource =
 -- id.
 --
 -- /See:/ 'projectsLocationsOperationsList' smart constructor.
-data ProjectsLocationsOperationsList = ProjectsLocationsOperationsList'
+data ProjectsLocationsOperationsList =
+  ProjectsLocationsOperationsList'
     { _plolXgafv          :: !(Maybe Xgafv)
     , _plolUploadProtocol :: !(Maybe Text)
     , _plolAccessToken    :: !(Maybe Text)
@@ -95,7 +96,8 @@ data ProjectsLocationsOperationsList = ProjectsLocationsOperationsList'
     , _plolPageToken      :: !(Maybe Text)
     , _plolPageSize       :: !(Maybe (Textual Int32))
     , _plolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsOperationsList' with the minimum fields required to make a request.
 --
@@ -122,7 +124,7 @@ projectsLocationsOperationsList
     :: Text -- ^ 'plolName'
     -> ProjectsLocationsOperationsList
 projectsLocationsOperationsList pPlolName_ =
-    ProjectsLocationsOperationsList'
+  ProjectsLocationsOperationsList'
     { _plolXgafv = Nothing
     , _plolUploadProtocol = Nothing
     , _plolAccessToken = Nothing
@@ -184,7 +186,8 @@ plolCallback
   = lens _plolCallback (\ s a -> s{_plolCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsOperationsList where
+           ProjectsLocationsOperationsList
+         where
         type Rs ProjectsLocationsOperationsList =
              ListOperationsResponse
         type Scopes ProjectsLocationsOperationsList =

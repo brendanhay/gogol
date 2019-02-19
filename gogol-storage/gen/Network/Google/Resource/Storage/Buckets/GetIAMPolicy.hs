@@ -54,10 +54,12 @@ type BucketsGetIAMPolicyResource =
 -- | Returns an IAM policy for the specified bucket.
 --
 -- /See:/ 'bucketsGetIAMPolicy' smart constructor.
-data BucketsGetIAMPolicy = BucketsGetIAMPolicy'
+data BucketsGetIAMPolicy =
+  BucketsGetIAMPolicy'
     { _bgipBucket      :: !Text
     , _bgipUserProject :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ bucketsGetIAMPolicy
     :: Text -- ^ 'bgipBucket'
     -> BucketsGetIAMPolicy
 bucketsGetIAMPolicy pBgipBucket_ =
-    BucketsGetIAMPolicy'
-    { _bgipBucket = pBgipBucket_
-    , _bgipUserProject = Nothing
-    }
+  BucketsGetIAMPolicy' {_bgipBucket = pBgipBucket_, _bgipUserProject = Nothing}
 
 -- | Name of a bucket.
 bgipBucket :: Lens' BucketsGetIAMPolicy Text

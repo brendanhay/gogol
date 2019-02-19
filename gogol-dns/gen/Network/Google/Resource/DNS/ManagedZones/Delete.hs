@@ -56,11 +56,13 @@ type ManagedZonesDeleteResource =
 -- | Delete a previously created ManagedZone.
 --
 -- /See:/ 'managedZonesDelete' smart constructor.
-data ManagedZonesDelete = ManagedZonesDelete'
+data ManagedZonesDelete =
+  ManagedZonesDelete'
     { _mzdProject           :: !Text
     , _mzdManagedZone       :: !Text
     , _mzdClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedZonesDelete' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ managedZonesDelete
     -> Text -- ^ 'mzdManagedZone'
     -> ManagedZonesDelete
 managedZonesDelete pMzdProject_ pMzdManagedZone_ =
-    ManagedZonesDelete'
+  ManagedZonesDelete'
     { _mzdProject = pMzdProject_
     , _mzdManagedZone = pMzdManagedZone_
     , _mzdClientOperationId = Nothing

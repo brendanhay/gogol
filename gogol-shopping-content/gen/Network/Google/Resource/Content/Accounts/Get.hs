@@ -53,10 +53,12 @@ type AccountsGetResource =
 -- | Retrieves a Merchant Center account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet'
+data AccountsGet =
+  AccountsGet'
     { _agMerchantId :: !(Textual Word64)
     , _agAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
@@ -70,7 +72,7 @@ accountsGet
     -> Word64 -- ^ 'agAccountId'
     -> AccountsGet
 accountsGet pAgMerchantId_ pAgAccountId_ =
-    AccountsGet'
+  AccountsGet'
     { _agMerchantId = _Coerce # pAgMerchantId_
     , _agAccountId = _Coerce # pAgAccountId_
     }

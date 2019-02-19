@@ -56,11 +56,13 @@ type ColumnListResource =
 -- | Retrieves a list of columns.
 --
 -- /See:/ 'columnList'' smart constructor.
-data ColumnList' = ColumnList''
+data ColumnList' =
+  ColumnList''
     { _clPageToken  :: !(Maybe Text)
     , _clTableId    :: !Text
     , _clMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ColumnList'' with the minimum fields required to make a request.
 --
@@ -75,11 +77,8 @@ columnList'
     :: Text -- ^ 'clTableId'
     -> ColumnList'
 columnList' pClTableId_ =
-    ColumnList''
-    { _clPageToken = Nothing
-    , _clTableId = pClTableId_
-    , _clMaxResults = Nothing
-    }
+  ColumnList''
+    {_clPageToken = Nothing, _clTableId = pClTableId_, _clMaxResults = Nothing}
 
 -- | Continuation token specifying which result page to return.
 clPageToken :: Lens' ColumnList' (Maybe Text)

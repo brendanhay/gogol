@@ -46,8 +46,8 @@ type UserInfoGetResource =
 --
 -- /See:/ 'userInfoGet' smart constructor.
 data UserInfoGet =
-    UserInfoGet'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  UserInfoGet'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserInfoGet' with the minimum fields required to make a request.
 --

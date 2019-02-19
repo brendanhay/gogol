@@ -69,7 +69,8 @@ type ProjectsStoredInfoTypesPatchResource =
 -- learn more.
 --
 -- /See:/ 'projectsStoredInfoTypesPatch' smart constructor.
-data ProjectsStoredInfoTypesPatch = ProjectsStoredInfoTypesPatch'
+data ProjectsStoredInfoTypesPatch =
+  ProjectsStoredInfoTypesPatch'
     { _psitpXgafv          :: !(Maybe Xgafv)
     , _psitpUploadProtocol :: !(Maybe Text)
     , _psitpAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsStoredInfoTypesPatch = ProjectsStoredInfoTypesPatch'
     , _psitpPayload        :: !GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
     , _psitpName           :: !Text
     , _psitpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsStoredInfoTypesPatch' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsStoredInfoTypesPatch
     -> Text -- ^ 'psitpName'
     -> ProjectsStoredInfoTypesPatch
 projectsStoredInfoTypesPatch pPsitpPayload_ pPsitpName_ =
-    ProjectsStoredInfoTypesPatch'
+  ProjectsStoredInfoTypesPatch'
     { _psitpXgafv = Nothing
     , _psitpUploadProtocol = Nothing
     , _psitpAccessToken = Nothing

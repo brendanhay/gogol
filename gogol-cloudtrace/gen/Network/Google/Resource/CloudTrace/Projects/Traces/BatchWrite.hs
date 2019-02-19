@@ -65,7 +65,8 @@ type ProjectsTracesBatchWriteResource =
 -- spans.
 --
 -- /See:/ 'projectsTracesBatchWrite' smart constructor.
-data ProjectsTracesBatchWrite = ProjectsTracesBatchWrite'
+data ProjectsTracesBatchWrite =
+  ProjectsTracesBatchWrite'
     { _ptbwXgafv          :: !(Maybe Xgafv)
     , _ptbwUploadProtocol :: !(Maybe Text)
     , _ptbwAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsTracesBatchWrite = ProjectsTracesBatchWrite'
     , _ptbwPayload        :: !BatchWriteSpansRequest
     , _ptbwName           :: !Text
     , _ptbwCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTracesBatchWrite' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsTracesBatchWrite
     -> Text -- ^ 'ptbwName'
     -> ProjectsTracesBatchWrite
 projectsTracesBatchWrite pPtbwPayload_ pPtbwName_ =
-    ProjectsTracesBatchWrite'
+  ProjectsTracesBatchWrite'
     { _ptbwXgafv = Nothing
     , _ptbwUploadProtocol = Nothing
     , _ptbwAccessToken = Nothing

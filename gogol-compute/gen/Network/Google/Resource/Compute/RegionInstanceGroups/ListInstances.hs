@@ -78,7 +78,8 @@ type RegionInstanceGroupsListInstancesResource =
 -- running.
 --
 -- /See:/ 'regionInstanceGroupsListInstances'' smart constructor.
-data RegionInstanceGroupsListInstances' = RegionInstanceGroupsListInstances''
+data RegionInstanceGroupsListInstances' =
+  RegionInstanceGroupsListInstances''
     { _rigliOrderBy       :: !(Maybe Text)
     , _rigliProject       :: !Text
     , _rigliPayload       :: !RegionInstanceGroupsListInstancesRequest
@@ -87,7 +88,8 @@ data RegionInstanceGroupsListInstances' = RegionInstanceGroupsListInstances''
     , _rigliPageToken     :: !(Maybe Text)
     , _rigliInstanceGroup :: !Text
     , _rigliMaxResults    :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupsListInstances'' with the minimum fields required to make a request.
 --
@@ -115,7 +117,7 @@ regionInstanceGroupsListInstances'
     -> Text -- ^ 'rigliInstanceGroup'
     -> RegionInstanceGroupsListInstances'
 regionInstanceGroupsListInstances' pRigliProject_ pRigliPayload_ pRigliRegion_ pRigliInstanceGroup_ =
-    RegionInstanceGroupsListInstances''
+  RegionInstanceGroupsListInstances''
     { _rigliOrderBy = Nothing
     , _rigliProject = pRigliProject_
     , _rigliPayload = pRigliPayload_
@@ -199,7 +201,8 @@ rigliMaxResults
       . _Coerce
 
 instance GoogleRequest
-         RegionInstanceGroupsListInstances' where
+           RegionInstanceGroupsListInstances'
+         where
         type Rs RegionInstanceGroupsListInstances' =
              RegionInstanceGroupsListInstances
         type Scopes RegionInstanceGroupsListInstances' =

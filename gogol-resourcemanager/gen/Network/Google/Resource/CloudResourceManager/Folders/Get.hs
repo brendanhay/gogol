@@ -65,14 +65,16 @@ type FoldersGetResource =
 -- \`resourcemanager.folders.get\` permission on the identified folder.
 --
 -- /See:/ 'foldersGet' smart constructor.
-data FoldersGet = FoldersGet'
+data FoldersGet =
+  FoldersGet'
     { _fgXgafv          :: !(Maybe Xgafv)
     , _fgUploadProtocol :: !(Maybe Text)
     , _fgAccessToken    :: !(Maybe Text)
     , _fgUploadType     :: !(Maybe Text)
     , _fgName           :: !Text
     , _fgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersGet' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ foldersGet
     :: Text -- ^ 'fgName'
     -> FoldersGet
 foldersGet pFgName_ =
-    FoldersGet'
+  FoldersGet'
     { _fgXgafv = Nothing
     , _fgUploadProtocol = Nothing
     , _fgAccessToken = Nothing

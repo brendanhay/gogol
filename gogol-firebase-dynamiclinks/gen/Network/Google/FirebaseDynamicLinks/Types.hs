@@ -264,4 +264,4 @@ firebaseDynamicLinksService
 
 -- | View and administer all your Firebase data and settings
 firebaseScope :: Proxy '["https://www.googleapis.com/auth/firebase"]
-firebaseScope = Proxy;
+firebaseScope = Proxy

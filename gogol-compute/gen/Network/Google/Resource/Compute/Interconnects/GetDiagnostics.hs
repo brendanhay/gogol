@@ -57,10 +57,12 @@ type InterconnectsGetDiagnosticsResource =
 -- | Returns the interconnectDiagnostics for the specified interconnect.
 --
 -- /See:/ 'interconnectsGetDiagnostics' smart constructor.
-data InterconnectsGetDiagnostics = InterconnectsGetDiagnostics'
+data InterconnectsGetDiagnostics =
+  InterconnectsGetDiagnostics'
     { _igdsProject      :: !Text
     , _igdsInterconnect :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectsGetDiagnostics' with the minimum fields required to make a request.
 --
@@ -74,10 +76,8 @@ interconnectsGetDiagnostics
     -> Text -- ^ 'igdsInterconnect'
     -> InterconnectsGetDiagnostics
 interconnectsGetDiagnostics pIgdsProject_ pIgdsInterconnect_ =
-    InterconnectsGetDiagnostics'
-    { _igdsProject = pIgdsProject_
-    , _igdsInterconnect = pIgdsInterconnect_
-    }
+  InterconnectsGetDiagnostics'
+    {_igdsProject = pIgdsProject_, _igdsInterconnect = pIgdsInterconnect_}
 
 -- | Project ID for this request.
 igdsProject :: Lens' InterconnectsGetDiagnostics Text

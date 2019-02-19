@@ -54,10 +54,12 @@ type WebResourceInsertResource =
 -- | Attempt verification of a website or domain.
 --
 -- /See:/ 'webResourceInsert' smart constructor.
-data WebResourceInsert = WebResourceInsert'
+data WebResourceInsert =
+  WebResourceInsert'
     { _wriPayload            :: !SiteVerificationWebResourceResource
     , _wriVerificationMethod :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebResourceInsert' with the minimum fields required to make a request.
 --
@@ -71,7 +73,7 @@ webResourceInsert
     -> Text -- ^ 'wriVerificationMethod'
     -> WebResourceInsert
 webResourceInsert pWriPayload_ pWriVerificationMethod_ =
-    WebResourceInsert'
+  WebResourceInsert'
     { _wriPayload = pWriPayload_
     , _wriVerificationMethod = pWriVerificationMethod_
     }

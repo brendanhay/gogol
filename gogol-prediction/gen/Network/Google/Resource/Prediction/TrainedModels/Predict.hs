@@ -57,11 +57,13 @@ type TrainedModelsPredictResource =
 -- | Submit model id and request a prediction.
 --
 -- /See:/ 'trainedModelsPredict' smart constructor.
-data TrainedModelsPredict = TrainedModelsPredict'
+data TrainedModelsPredict =
+  TrainedModelsPredict'
     { _tmpProject :: !Text
     , _tmpPayload :: !Input
     , _tmpId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrainedModelsPredict' with the minimum fields required to make a request.
 --
@@ -78,11 +80,8 @@ trainedModelsPredict
     -> Text -- ^ 'tmpId'
     -> TrainedModelsPredict
 trainedModelsPredict pTmpProject_ pTmpPayload_ pTmpId_ =
-    TrainedModelsPredict'
-    { _tmpProject = pTmpProject_
-    , _tmpPayload = pTmpPayload_
-    , _tmpId = pTmpId_
-    }
+  TrainedModelsPredict'
+    {_tmpProject = pTmpProject_, _tmpPayload = pTmpPayload_, _tmpId = pTmpId_}
 
 -- | The project associated with the model.
 tmpProject :: Lens' TrainedModelsPredict Text

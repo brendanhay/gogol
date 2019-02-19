@@ -63,7 +63,8 @@ type EnterprisesEnrollmentTokensCreateResource =
 -- | Creates an enrollment token for a given enterprise.
 --
 -- /See:/ 'enterprisesEnrollmentTokensCreate' smart constructor.
-data EnterprisesEnrollmentTokensCreate = EnterprisesEnrollmentTokensCreate'
+data EnterprisesEnrollmentTokensCreate =
+  EnterprisesEnrollmentTokensCreate'
     { _eetcParent         :: !Text
     , _eetcXgafv          :: !(Maybe Xgafv)
     , _eetcUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data EnterprisesEnrollmentTokensCreate = EnterprisesEnrollmentTokensCreate'
     , _eetcUploadType     :: !(Maybe Text)
     , _eetcPayload        :: !EnrollmentToken
     , _eetcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesEnrollmentTokensCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ enterprisesEnrollmentTokensCreate
     -> EnrollmentToken -- ^ 'eetcPayload'
     -> EnterprisesEnrollmentTokensCreate
 enterprisesEnrollmentTokensCreate pEetcParent_ pEetcPayload_ =
-    EnterprisesEnrollmentTokensCreate'
+  EnterprisesEnrollmentTokensCreate'
     { _eetcParent = pEetcParent_
     , _eetcXgafv = Nothing
     , _eetcUploadProtocol = Nothing
@@ -144,7 +146,8 @@ eetcCallback
   = lens _eetcCallback (\ s a -> s{_eetcCallback = a})
 
 instance GoogleRequest
-         EnterprisesEnrollmentTokensCreate where
+           EnterprisesEnrollmentTokensCreate
+         where
         type Rs EnterprisesEnrollmentTokensCreate =
              EnrollmentToken
         type Scopes EnterprisesEnrollmentTokensCreate =

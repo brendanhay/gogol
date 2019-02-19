@@ -59,14 +59,16 @@ type ProjectsServiceAccountsKeysDeleteResource =
 -- | Deletes a ServiceAccountKey.
 --
 -- /See:/ 'projectsServiceAccountsKeysDelete' smart constructor.
-data ProjectsServiceAccountsKeysDelete = ProjectsServiceAccountsKeysDelete'
+data ProjectsServiceAccountsKeysDelete =
+  ProjectsServiceAccountsKeysDelete'
     { _psakdXgafv          :: !(Maybe Xgafv)
     , _psakdUploadProtocol :: !(Maybe Text)
     , _psakdAccessToken    :: !(Maybe Text)
     , _psakdUploadType     :: !(Maybe Text)
     , _psakdName           :: !Text
     , _psakdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsKeysDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsServiceAccountsKeysDelete
     :: Text -- ^ 'psakdName'
     -> ProjectsServiceAccountsKeysDelete
 projectsServiceAccountsKeysDelete pPsakdName_ =
-    ProjectsServiceAccountsKeysDelete'
+  ProjectsServiceAccountsKeysDelete'
     { _psakdXgafv = Nothing
     , _psakdUploadProtocol = Nothing
     , _psakdAccessToken = Nothing
@@ -135,7 +137,8 @@ psakdCallback
       (\ s a -> s{_psakdCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsKeysDelete where
+           ProjectsServiceAccountsKeysDelete
+         where
         type Rs ProjectsServiceAccountsKeysDelete = Empty
         type Scopes ProjectsServiceAccountsKeysDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]

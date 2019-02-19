@@ -63,14 +63,16 @@ type AssetsGetResource =
 -- token) is the author of the asset.
 --
 -- /See:/ 'assetsGet' smart constructor.
-data AssetsGet = AssetsGet'
+data AssetsGet =
+  AssetsGet'
     { _agXgafv          :: !(Maybe Xgafv)
     , _agUploadProtocol :: !(Maybe Text)
     , _agAccessToken    :: !(Maybe Text)
     , _agUploadType     :: !(Maybe Text)
     , _agName           :: !Text
     , _agCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssetsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ assetsGet
     :: Text -- ^ 'agName'
     -> AssetsGet
 assetsGet pAgName_ =
-    AssetsGet'
+  AssetsGet'
     { _agXgafv = Nothing
     , _agUploadProtocol = Nothing
     , _agAccessToken = Nothing

@@ -55,10 +55,12 @@ type ScoresSubmitMultipleResource =
 -- | Submits multiple scores to leaderboards.
 --
 -- /See:/ 'scoresSubmitMultiple' smart constructor.
-data ScoresSubmitMultiple = ScoresSubmitMultiple'
+data ScoresSubmitMultiple =
+  ScoresSubmitMultiple'
     { _ssmPayload  :: !PlayerScoreSubmissionList
     , _ssmLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ScoresSubmitMultiple' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ scoresSubmitMultiple
     :: PlayerScoreSubmissionList -- ^ 'ssmPayload'
     -> ScoresSubmitMultiple
 scoresSubmitMultiple pSsmPayload_ =
-    ScoresSubmitMultiple'
-    { _ssmPayload = pSsmPayload_
-    , _ssmLanguage = Nothing
-    }
+  ScoresSubmitMultiple' {_ssmPayload = pSsmPayload_, _ssmLanguage = Nothing}
 
 -- | Multipart request metadata.
 ssmPayload :: Lens' ScoresSubmitMultiple PlayerScoreSubmissionList

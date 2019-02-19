@@ -55,10 +55,12 @@ type InstancesInsertResource =
 -- | Creates a new Cloud SQL instance.
 --
 -- /See:/ 'instancesInsert' smart constructor.
-data InstancesInsert = InstancesInsert'
+data InstancesInsert =
+  InstancesInsert'
     { _iiiProject :: !Text
     , _iiiPayload :: !DatabaseInstance
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ instancesInsert
     -> DatabaseInstance -- ^ 'iiiPayload'
     -> InstancesInsert
 instancesInsert pIiiProject_ pIiiPayload_ =
-    InstancesInsert'
-    { _iiiProject = pIiiProject_
-    , _iiiPayload = pIiiPayload_
-    }
+  InstancesInsert' {_iiiProject = pIiiProject_, _iiiPayload = pIiiPayload_}
 
 -- | Project ID of the project to which the newly created Cloud SQL instances
 -- should belong.

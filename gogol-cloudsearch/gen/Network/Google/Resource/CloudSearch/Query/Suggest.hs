@@ -62,14 +62,16 @@ type QuerySuggestResource =
 -- | Provides suggestions for autocompleting the query.
 --
 -- /See:/ 'querySuggest' smart constructor.
-data QuerySuggest = QuerySuggest'
+data QuerySuggest =
+  QuerySuggest'
     { _qsXgafv          :: !(Maybe Xgafv)
     , _qsUploadProtocol :: !(Maybe Text)
     , _qsAccessToken    :: !(Maybe Text)
     , _qsUploadType     :: !(Maybe Text)
     , _qsPayload        :: !SuggestRequest
     , _qsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuerySuggest' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ querySuggest
     :: SuggestRequest -- ^ 'qsPayload'
     -> QuerySuggest
 querySuggest pQsPayload_ =
-    QuerySuggest'
+  QuerySuggest'
     { _qsXgafv = Nothing
     , _qsUploadProtocol = Nothing
     , _qsAccessToken = Nothing

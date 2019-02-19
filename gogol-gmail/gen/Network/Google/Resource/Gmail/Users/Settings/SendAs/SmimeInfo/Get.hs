@@ -58,11 +58,13 @@ type UsersSettingsSendAsSmimeInfoGetResource =
 -- | Gets the specified S\/MIME config for the specified send-as alias.
 --
 -- /See:/ 'usersSettingsSendAsSmimeInfoGet' smart constructor.
-data UsersSettingsSendAsSmimeInfoGet = UsersSettingsSendAsSmimeInfoGet'
+data UsersSettingsSendAsSmimeInfoGet =
+  UsersSettingsSendAsSmimeInfoGet'
     { _ussasigUserId      :: !Text
     , _ussasigSendAsEmail :: !Text
     , _ussasigId          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsSendAsSmimeInfoGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ usersSettingsSendAsSmimeInfoGet
     -> Text -- ^ 'ussasigId'
     -> UsersSettingsSendAsSmimeInfoGet
 usersSettingsSendAsSmimeInfoGet pUssasigSendAsEmail_ pUssasigId_ =
-    UsersSettingsSendAsSmimeInfoGet'
+  UsersSettingsSendAsSmimeInfoGet'
     { _ussasigUserId = "me"
     , _ussasigSendAsEmail = pUssasigSendAsEmail_
     , _ussasigId = pUssasigId_
@@ -104,7 +106,8 @@ ussasigId
   = lens _ussasigId (\ s a -> s{_ussasigId = a})
 
 instance GoogleRequest
-         UsersSettingsSendAsSmimeInfoGet where
+           UsersSettingsSendAsSmimeInfoGet
+         where
         type Rs UsersSettingsSendAsSmimeInfoGet = SmimeInfo
         type Scopes UsersSettingsSendAsSmimeInfoGet =
              '["https://mail.google.com/",

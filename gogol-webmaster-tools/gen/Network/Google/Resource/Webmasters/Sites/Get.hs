@@ -51,9 +51,11 @@ type SitesGetResource =
 -- | Retrieves information about specific site.
 --
 -- /See:/ 'sitesGet' smart constructor.
-newtype SitesGet = SitesGet'
+newtype SitesGet =
+  SitesGet'
     { _sitSiteURL :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesGet' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype SitesGet = SitesGet'
 sitesGet
     :: Text -- ^ 'sitSiteURL'
     -> SitesGet
-sitesGet pSitSiteURL_ =
-    SitesGet'
-    { _sitSiteURL = pSitSiteURL_
-    }
+sitesGet pSitSiteURL_ = SitesGet' {_sitSiteURL = pSitSiteURL_}
 
 -- | The URI of the property as defined in Search Console. Examples:
 -- http:\/\/www.example.com\/ or android-app:\/\/com.example\/ Note: for

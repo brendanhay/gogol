@@ -55,10 +55,12 @@ type AccountsContainersWorkspacesFoldersListResource
 -- | Lists all GTM Folders of a Container.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersList' smart constructor.
-data AccountsContainersWorkspacesFoldersList = AccountsContainersWorkspacesFoldersList'
+data AccountsContainersWorkspacesFoldersList =
+  AccountsContainersWorkspacesFoldersList'
     { _acwflParent    :: !Text
     , _acwflPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersList' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsContainersWorkspacesFoldersList
     :: Text -- ^ 'acwflParent'
     -> AccountsContainersWorkspacesFoldersList
 accountsContainersWorkspacesFoldersList pAcwflParent_ =
-    AccountsContainersWorkspacesFoldersList'
-    { _acwflParent = pAcwflParent_
-    , _acwflPageToken = Nothing
-    }
+  AccountsContainersWorkspacesFoldersList'
+    {_acwflParent = pAcwflParent_, _acwflPageToken = Nothing}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -89,7 +89,8 @@ acwflPageToken
       (\ s a -> s{_acwflPageToken = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesFoldersList where
+           AccountsContainersWorkspacesFoldersList
+         where
         type Rs AccountsContainersWorkspacesFoldersList =
              ListFoldersResponse
         type Scopes AccountsContainersWorkspacesFoldersList =

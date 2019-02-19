@@ -23,11 +23,13 @@ import           Network.Google.Prelude
 -- | Identifies metdata updates to one device.
 --
 -- /See:/ 'updateMetadataArguments' smart constructor.
-data UpdateMetadataArguments = UpdateMetadataArguments'
+data UpdateMetadataArguments =
+  UpdateMetadataArguments'
     { _umaDeviceIdentifier :: !(Maybe DeviceIdentifier)
     , _umaDeviceId         :: !(Maybe (Textual Int64))
     , _umaDeviceMetadata   :: !(Maybe DeviceMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateMetadataArguments' with the minimum fields required to make a request.
 --
@@ -41,7 +43,7 @@ data UpdateMetadataArguments = UpdateMetadataArguments'
 updateMetadataArguments
     :: UpdateMetadataArguments
 updateMetadataArguments =
-    UpdateMetadataArguments'
+  UpdateMetadataArguments'
     { _umaDeviceIdentifier = Nothing
     , _umaDeviceId = Nothing
     , _umaDeviceMetadata = Nothing
@@ -118,11 +120,13 @@ instance ToJSON UpdateMetadataArguments where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -135,12 +139,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -181,12 +180,14 @@ instance ToJSON Status where
 -- | Identifies one claim request.
 --
 -- /See:/ 'partnerClaim' smart constructor.
-data PartnerClaim = PartnerClaim'
+data PartnerClaim =
+  PartnerClaim'
     { _pcDeviceIdentifier :: !(Maybe DeviceIdentifier)
     , _pcSectionType      :: !(Maybe PartnerClaimSectionType)
     , _pcCustomerId       :: !(Maybe (Textual Int64))
     , _pcDeviceMetadata   :: !(Maybe DeviceMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartnerClaim' with the minimum fields required to make a request.
 --
@@ -202,7 +203,7 @@ data PartnerClaim = PartnerClaim'
 partnerClaim
     :: PartnerClaim
 partnerClaim =
-    PartnerClaim'
+  PartnerClaim'
     { _pcDeviceIdentifier = Nothing
     , _pcSectionType = Nothing
     , _pcCustomerId = Nothing
@@ -254,9 +255,11 @@ instance ToJSON PartnerClaim where
 -- | Request message for customer to unclaim a device.
 --
 -- /See:/ 'customerUnclaimDeviceRequest' smart constructor.
-newtype CustomerUnclaimDeviceRequest = CustomerUnclaimDeviceRequest'
+newtype CustomerUnclaimDeviceRequest =
+  CustomerUnclaimDeviceRequest'
     { _cudrDevice :: Maybe DeviceReference
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomerUnclaimDeviceRequest' with the minimum fields required to make a request.
 --
@@ -266,9 +269,7 @@ newtype CustomerUnclaimDeviceRequest = CustomerUnclaimDeviceRequest'
 customerUnclaimDeviceRequest
     :: CustomerUnclaimDeviceRequest
 customerUnclaimDeviceRequest =
-    CustomerUnclaimDeviceRequest'
-    { _cudrDevice = Nothing
-    }
+  CustomerUnclaimDeviceRequest' {_cudrDevice = Nothing}
 
 -- | Required. The device to unclaim.
 cudrDevice :: Lens' CustomerUnclaimDeviceRequest (Maybe DeviceReference)
@@ -288,11 +289,13 @@ instance ToJSON CustomerUnclaimDeviceRequest where
 -- | Request to find devices.
 --
 -- /See:/ 'findDevicesByDeviceIdentifierRequest' smart constructor.
-data FindDevicesByDeviceIdentifierRequest = FindDevicesByDeviceIdentifierRequest'
+data FindDevicesByDeviceIdentifierRequest =
+  FindDevicesByDeviceIdentifierRequest'
     { _fdbdirDeviceIdentifier :: !(Maybe DeviceIdentifier)
     , _fdbdirLimit            :: !(Maybe (Textual Int64))
     , _fdbdirPageToken        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FindDevicesByDeviceIdentifierRequest' with the minimum fields required to make a request.
 --
@@ -306,7 +309,7 @@ data FindDevicesByDeviceIdentifierRequest = FindDevicesByDeviceIdentifierRequest
 findDevicesByDeviceIdentifierRequest
     :: FindDevicesByDeviceIdentifierRequest
 findDevicesByDeviceIdentifierRequest =
-    FindDevicesByDeviceIdentifierRequest'
+  FindDevicesByDeviceIdentifierRequest'
     { _fdbdirDeviceIdentifier = Nothing
     , _fdbdirLimit = Nothing
     , _fdbdirPageToken = Nothing
@@ -332,7 +335,8 @@ fdbdirPageToken
       (\ s a -> s{_fdbdirPageToken = a})
 
 instance FromJSON
-         FindDevicesByDeviceIdentifierRequest where
+           FindDevicesByDeviceIdentifierRequest
+         where
         parseJSON
           = withObject "FindDevicesByDeviceIdentifierRequest"
               (\ o ->
@@ -352,11 +356,13 @@ instance ToJSON FindDevicesByDeviceIdentifierRequest
 -- | Response containing found devices.
 --
 -- /See:/ 'findDevicesByOwnerResponse' smart constructor.
-data FindDevicesByOwnerResponse = FindDevicesByOwnerResponse'
+data FindDevicesByOwnerResponse =
+  FindDevicesByOwnerResponse'
     { _fdborNextPageToken :: !(Maybe Text)
     , _fdborTotalSize     :: !(Maybe (Textual Int32))
     , _fdborDevices       :: !(Maybe [Device])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FindDevicesByOwnerResponse' with the minimum fields required to make a request.
 --
@@ -370,7 +376,7 @@ data FindDevicesByOwnerResponse = FindDevicesByOwnerResponse'
 findDevicesByOwnerResponse
     :: FindDevicesByOwnerResponse
 findDevicesByOwnerResponse =
-    FindDevicesByOwnerResponse'
+  FindDevicesByOwnerResponse'
     { _fdborNextPageToken = Nothing
     , _fdborTotalSize = Nothing
     , _fdborDevices = Nothing
@@ -416,9 +422,11 @@ instance ToJSON FindDevicesByOwnerResponse where
 -- | Metadata entries recorded as key-value pairs.
 --
 -- /See:/ 'deviceMetadataEntries' smart constructor.
-newtype DeviceMetadataEntries = DeviceMetadataEntries'
+newtype DeviceMetadataEntries =
+  DeviceMetadataEntries'
     { _dmeAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceMetadataEntries' with the minimum fields required to make a request.
 --
@@ -429,9 +437,7 @@ deviceMetadataEntries
     :: HashMap Text Text -- ^ 'dmeAddtional'
     -> DeviceMetadataEntries
 deviceMetadataEntries pDmeAddtional_ =
-    DeviceMetadataEntries'
-    { _dmeAddtional = _Coerce # pDmeAddtional_
-    }
+  DeviceMetadataEntries' {_dmeAddtional = _Coerce # pDmeAddtional_}
 
 dmeAddtional :: Lens' DeviceMetadataEntries (HashMap Text Text)
 dmeAddtional
@@ -450,11 +456,13 @@ instance ToJSON DeviceMetadataEntries where
 -- | Identifies one unclaim request.
 --
 -- /See:/ 'partnerUnclaim' smart constructor.
-data PartnerUnclaim = PartnerUnclaim'
+data PartnerUnclaim =
+  PartnerUnclaim'
     { _puDeviceIdentifier :: !(Maybe DeviceIdentifier)
     , _puSectionType      :: !(Maybe PartnerUnclaimSectionType)
     , _puDeviceId         :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartnerUnclaim' with the minimum fields required to make a request.
 --
@@ -468,7 +476,7 @@ data PartnerUnclaim = PartnerUnclaim'
 partnerUnclaim
     :: PartnerUnclaim
 partnerUnclaim =
-    PartnerUnclaim'
+  PartnerUnclaim'
     { _puDeviceIdentifier = Nothing
     , _puSectionType = Nothing
     , _puDeviceId = Nothing
@@ -516,11 +524,13 @@ instance ToJSON PartnerUnclaim where
 -- Google Play.
 --
 -- /See:/ 'dpc' smart constructor.
-data Dpc = Dpc'
+data Dpc =
+  Dpc'
     { _dPackageName :: !(Maybe Text)
     , _dName        :: !(Maybe Text)
     , _dDpcName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Dpc' with the minimum fields required to make a request.
 --
@@ -533,12 +543,7 @@ data Dpc = Dpc'
 -- * 'dDpcName'
 dpc
     :: Dpc
-dpc =
-    Dpc'
-    { _dPackageName = Nothing
-    , _dName = Nothing
-    , _dDpcName = Nothing
-    }
+dpc = Dpc' {_dPackageName = Nothing, _dName = Nothing, _dDpcName = Nothing}
 
 -- | Output only. The DPC\'s Android application ID that looks like a Java
 -- package name. Zero-touch enrollment installs the DPC app onto a device
@@ -578,11 +583,13 @@ instance ToJSON Dpc where
 -- | Response message to list customers of the vendor.
 --
 -- /See:/ 'listVendorCustomersResponse' smart constructor.
-data ListVendorCustomersResponse = ListVendorCustomersResponse'
+data ListVendorCustomersResponse =
+  ListVendorCustomersResponse'
     { _lvcrCustomers     :: !(Maybe [Company])
     , _lvcrNextPageToken :: !(Maybe Text)
     , _lvcrTotalSize     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListVendorCustomersResponse' with the minimum fields required to make a request.
 --
@@ -596,7 +603,7 @@ data ListVendorCustomersResponse = ListVendorCustomersResponse'
 listVendorCustomersResponse
     :: ListVendorCustomersResponse
 listVendorCustomersResponse =
-    ListVendorCustomersResponse'
+  ListVendorCustomersResponse'
     { _lvcrCustomers = Nothing
     , _lvcrNextPageToken = Nothing
     , _lvcrTotalSize = Nothing
@@ -645,12 +652,14 @@ instance ToJSON ListVendorCustomersResponse where
 -- change in the request.
 --
 -- /See:/ 'operationPerDevice' smart constructor.
-data OperationPerDevice = OperationPerDevice'
+data OperationPerDevice =
+  OperationPerDevice'
     { _opdUpdateMetadata :: !(Maybe UpdateMetadataArguments)
     , _opdResult         :: !(Maybe PerDeviceStatusInBatch)
     , _opdClaim          :: !(Maybe PartnerClaim)
     , _opdUnclaim        :: !(Maybe PartnerUnclaim)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationPerDevice' with the minimum fields required to make a request.
 --
@@ -666,7 +675,7 @@ data OperationPerDevice = OperationPerDevice'
 operationPerDevice
     :: OperationPerDevice
 operationPerDevice =
-    OperationPerDevice'
+  OperationPerDevice'
     { _opdUpdateMetadata = Nothing
     , _opdResult = Nothing
     , _opdClaim = Nothing
@@ -715,13 +724,15 @@ instance ToJSON OperationPerDevice where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -739,7 +750,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -807,8 +818,8 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -825,12 +836,14 @@ instance ToJSON Empty where
 -- | Captures the processing status for each device in the operation.
 --
 -- /See:/ 'perDeviceStatusInBatch' smart constructor.
-data PerDeviceStatusInBatch = PerDeviceStatusInBatch'
+data PerDeviceStatusInBatch =
+  PerDeviceStatusInBatch'
     { _pdsibStatus          :: !(Maybe PerDeviceStatusInBatchStatus)
     , _pdsibErrorIdentifier :: !(Maybe Text)
     , _pdsibDeviceId        :: !(Maybe (Textual Int64))
     , _pdsibErrorMessage    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PerDeviceStatusInBatch' with the minimum fields required to make a request.
 --
@@ -846,7 +859,7 @@ data PerDeviceStatusInBatch = PerDeviceStatusInBatch'
 perDeviceStatusInBatch
     :: PerDeviceStatusInBatch
 perDeviceStatusInBatch =
-    PerDeviceStatusInBatch'
+  PerDeviceStatusInBatch'
     { _pdsibStatus = Nothing
     , _pdsibErrorIdentifier = Nothing
     , _pdsibDeviceId = Nothing
@@ -900,9 +913,11 @@ instance ToJSON PerDeviceStatusInBatch where
 -- customer\'s view of the portal.
 --
 -- /See:/ 'claimDevicesRequest' smart constructor.
-newtype ClaimDevicesRequest = ClaimDevicesRequest'
+newtype ClaimDevicesRequest =
+  ClaimDevicesRequest'
     { _cdrClaims :: Maybe [PartnerClaim]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClaimDevicesRequest' with the minimum fields required to make a request.
 --
@@ -911,10 +926,7 @@ newtype ClaimDevicesRequest = ClaimDevicesRequest'
 -- * 'cdrClaims'
 claimDevicesRequest
     :: ClaimDevicesRequest
-claimDevicesRequest =
-    ClaimDevicesRequest'
-    { _cdrClaims = Nothing
-    }
+claimDevicesRequest = ClaimDevicesRequest' {_cdrClaims = Nothing}
 
 -- | Required. A list of device claims.
 cdrClaims :: Lens' ClaimDevicesRequest [PartnerClaim]
@@ -936,14 +948,16 @@ instance ToJSON ClaimDevicesRequest where
 -- | An Android device registered for zero-touch enrollment.
 --
 -- /See:/ 'device' smart constructor.
-data Device = Device'
+data Device =
+  Device'
     { _devDeviceIdentifier :: !(Maybe DeviceIdentifier)
     , _devClaims           :: !(Maybe [DeviceClaim])
     , _devName             :: !(Maybe Text)
     , _devDeviceId         :: !(Maybe (Textual Int64))
     , _devDeviceMetadata   :: !(Maybe DeviceMetadata)
     , _devConfiguration    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
@@ -963,7 +977,7 @@ data Device = Device'
 device
     :: Device
 device =
-    Device'
+  Device'
     { _devDeviceIdentifier = Nothing
     , _devClaims = Nothing
     , _devName = Nothing
@@ -1041,12 +1055,14 @@ instance ToJSON Device where
 -- | Request message to claim a device on behalf of a customer.
 --
 -- /See:/ 'claimDeviceRequest' smart constructor.
-data ClaimDeviceRequest = ClaimDeviceRequest'
+data ClaimDeviceRequest =
+  ClaimDeviceRequest'
     { _cdrDeviceIdentifier :: !(Maybe DeviceIdentifier)
     , _cdrSectionType      :: !(Maybe ClaimDeviceRequestSectionType)
     , _cdrCustomerId       :: !(Maybe (Textual Int64))
     , _cdrDeviceMetadata   :: !(Maybe DeviceMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClaimDeviceRequest' with the minimum fields required to make a request.
 --
@@ -1062,7 +1078,7 @@ data ClaimDeviceRequest = ClaimDeviceRequest'
 claimDeviceRequest
     :: ClaimDeviceRequest
 claimDeviceRequest =
-    ClaimDeviceRequest'
+  ClaimDeviceRequest'
     { _cdrDeviceIdentifier = Nothing
     , _cdrSectionType = Nothing
     , _cdrCustomerId = Nothing
@@ -1121,10 +1137,12 @@ instance ToJSON ClaimDeviceRequest where
 -- read [Identifiers](\/zero-touch\/guides\/identifiers).
 --
 -- /See:/ 'deviceReference' smart constructor.
-data DeviceReference = DeviceReference'
+data DeviceReference =
+  DeviceReference'
     { _drDeviceIdentifier :: !(Maybe DeviceIdentifier)
     , _drDeviceId         :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceReference' with the minimum fields required to make a request.
 --
@@ -1136,10 +1154,7 @@ data DeviceReference = DeviceReference'
 deviceReference
     :: DeviceReference
 deviceReference =
-    DeviceReference'
-    { _drDeviceIdentifier = Nothing
-    , _drDeviceId = Nothing
-    }
+  DeviceReference' {_drDeviceIdentifier = Nothing, _drDeviceId = Nothing}
 
 -- | The hardware IDs of the device.
 drDeviceIdentifier :: Lens' DeviceReference (Maybe DeviceIdentifier)
@@ -1170,9 +1185,11 @@ instance ToJSON DeviceReference where
 -- | Request message for customer to remove the configuration from device.
 --
 -- /See:/ 'customerRemoveConfigurationRequest' smart constructor.
-newtype CustomerRemoveConfigurationRequest = CustomerRemoveConfigurationRequest'
+newtype CustomerRemoveConfigurationRequest =
+  CustomerRemoveConfigurationRequest'
     { _crcrDevice :: Maybe DeviceReference
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomerRemoveConfigurationRequest' with the minimum fields required to make a request.
 --
@@ -1182,9 +1199,7 @@ newtype CustomerRemoveConfigurationRequest = CustomerRemoveConfigurationRequest'
 customerRemoveConfigurationRequest
     :: CustomerRemoveConfigurationRequest
 customerRemoveConfigurationRequest =
-    CustomerRemoveConfigurationRequest'
-    { _crcrDevice = Nothing
-    }
+  CustomerRemoveConfigurationRequest' {_crcrDevice = Nothing}
 
 -- | Required. The device to remove the configuration from.
 crcrDevice :: Lens' CustomerRemoveConfigurationRequest (Maybe DeviceReference)
@@ -1209,13 +1224,15 @@ instance ToJSON CustomerRemoveConfigurationRequest
 -- [Identifiers](\/zero-touch\/guides\/identifiers).
 --
 -- /See:/ 'deviceIdentifier' smart constructor.
-data DeviceIdentifier = DeviceIdentifier'
+data DeviceIdentifier =
+  DeviceIdentifier'
     { _diManufacturer :: !(Maybe Text)
     , _diModel        :: !(Maybe Text)
     , _diMeid         :: !(Maybe Text)
     , _diImei         :: !(Maybe Text)
     , _diSerialNumber :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceIdentifier' with the minimum fields required to make a request.
 --
@@ -1233,7 +1250,7 @@ data DeviceIdentifier = DeviceIdentifier'
 deviceIdentifier
     :: DeviceIdentifier
 deviceIdentifier =
-    DeviceIdentifier'
+  DeviceIdentifier'
     { _diManufacturer = Nothing
     , _diModel = Nothing
     , _diMeid = Nothing
@@ -1293,9 +1310,11 @@ instance ToJSON DeviceIdentifier where
 -- | Request to unclaim devices asynchronously in batch.
 --
 -- /See:/ 'unclaimDevicesRequest' smart constructor.
-newtype UnclaimDevicesRequest = UnclaimDevicesRequest'
+newtype UnclaimDevicesRequest =
+  UnclaimDevicesRequest'
     { _udrUnclaims :: Maybe [PartnerUnclaim]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnclaimDevicesRequest' with the minimum fields required to make a request.
 --
@@ -1304,10 +1323,7 @@ newtype UnclaimDevicesRequest = UnclaimDevicesRequest'
 -- * 'udrUnclaims'
 unclaimDevicesRequest
     :: UnclaimDevicesRequest
-unclaimDevicesRequest =
-    UnclaimDevicesRequest'
-    { _udrUnclaims = Nothing
-    }
+unclaimDevicesRequest = UnclaimDevicesRequest' {_udrUnclaims = Nothing}
 
 -- | Required. The list of devices to unclaim.
 udrUnclaims :: Lens' UnclaimDevicesRequest [PartnerUnclaim]
@@ -1330,9 +1346,11 @@ instance ToJSON UnclaimDevicesRequest where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1343,9 +1361,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1364,11 +1380,13 @@ instance ToJSON StatusDetailsItem where
 -- | Response message to list vendors of the partner.
 --
 -- /See:/ 'listVendorsResponse' smart constructor.
-data ListVendorsResponse = ListVendorsResponse'
+data ListVendorsResponse =
+  ListVendorsResponse'
     { _lvrNextPageToken :: !(Maybe Text)
     , _lvrTotalSize     :: !(Maybe (Textual Int32))
     , _lvrVendors       :: !(Maybe [Company])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListVendorsResponse' with the minimum fields required to make a request.
 --
@@ -1382,7 +1400,7 @@ data ListVendorsResponse = ListVendorsResponse'
 listVendorsResponse
     :: ListVendorsResponse
 listVendorsResponse =
-    ListVendorsResponse'
+  ListVendorsResponse'
     { _lvrNextPageToken = Nothing
     , _lvrTotalSize = Nothing
     , _lvrVendors = Nothing
@@ -1428,9 +1446,11 @@ instance ToJSON ListVendorsResponse where
 -- | Response message of customer\'s listing configuration.
 --
 -- /See:/ 'customerListConfigurationsResponse' smart constructor.
-newtype CustomerListConfigurationsResponse = CustomerListConfigurationsResponse'
+newtype CustomerListConfigurationsResponse =
+  CustomerListConfigurationsResponse'
     { _clcrConfigurations :: Maybe [Configuration]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomerListConfigurationsResponse' with the minimum fields required to make a request.
 --
@@ -1440,9 +1460,7 @@ newtype CustomerListConfigurationsResponse = CustomerListConfigurationsResponse'
 customerListConfigurationsResponse
     :: CustomerListConfigurationsResponse
 customerListConfigurationsResponse =
-    CustomerListConfigurationsResponse'
-    { _clcrConfigurations = Nothing
-    }
+  CustomerListConfigurationsResponse' {_clcrConfigurations = Nothing}
 
 -- | The configurations.
 clcrConfigurations :: Lens' CustomerListConfigurationsResponse [Configuration]
@@ -1470,10 +1488,12 @@ instance ToJSON CustomerListConfigurationsResponse
 -- | Request message for customer to assign a configuration to device.
 --
 -- /See:/ 'customerApplyConfigurationRequest' smart constructor.
-data CustomerApplyConfigurationRequest = CustomerApplyConfigurationRequest'
+data CustomerApplyConfigurationRequest =
+  CustomerApplyConfigurationRequest'
     { _cacrDevice        :: !(Maybe DeviceReference)
     , _cacrConfiguration :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomerApplyConfigurationRequest' with the minimum fields required to make a request.
 --
@@ -1485,10 +1505,8 @@ data CustomerApplyConfigurationRequest = CustomerApplyConfigurationRequest'
 customerApplyConfigurationRequest
     :: CustomerApplyConfigurationRequest
 customerApplyConfigurationRequest =
-    CustomerApplyConfigurationRequest'
-    { _cacrDevice = Nothing
-    , _cacrConfiguration = Nothing
-    }
+  CustomerApplyConfigurationRequest'
+    {_cacrDevice = Nothing, _cacrConfiguration = Nothing}
 
 -- | Required. The device the configuration is applied to.
 cacrDevice :: Lens' CustomerApplyConfigurationRequest (Maybe DeviceReference)
@@ -1522,14 +1540,16 @@ instance ToJSON CustomerApplyConfigurationRequest
 -- APIs.
 --
 -- /See:/ 'company' smart constructor.
-data Company = Company'
+data Company =
+  Company'
     { _cCompanyId   :: !(Maybe (Textual Int64))
     , _cCompanyName :: !(Maybe Text)
     , _cOwnerEmails :: !(Maybe [Text])
     , _cTermsStatus :: !(Maybe CompanyTermsStatus)
     , _cName        :: !(Maybe Text)
     , _cAdminEmails :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Company' with the minimum fields required to make a request.
 --
@@ -1549,7 +1569,7 @@ data Company = Company'
 company
     :: Company
 company =
-    Company'
+  Company'
     { _cCompanyId = Nothing
     , _cCompanyName = Nothing
     , _cOwnerEmails = Nothing
@@ -1628,10 +1648,12 @@ instance ToJSON Company where
 -- | Response message for listing my customers.
 --
 -- /See:/ 'customerListCustomersResponse' smart constructor.
-data CustomerListCustomersResponse = CustomerListCustomersResponse'
+data CustomerListCustomersResponse =
+  CustomerListCustomersResponse'
     { _clcrCustomers     :: !(Maybe [Company])
     , _clcrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomerListCustomersResponse' with the minimum fields required to make a request.
 --
@@ -1643,10 +1665,8 @@ data CustomerListCustomersResponse = CustomerListCustomersResponse'
 customerListCustomersResponse
     :: CustomerListCustomersResponse
 customerListCustomersResponse =
-    CustomerListCustomersResponse'
-    { _clcrCustomers = Nothing
-    , _clcrNextPageToken = Nothing
-    }
+  CustomerListCustomersResponse'
+    {_clcrCustomers = Nothing, _clcrNextPageToken = Nothing}
 
 -- | The customer accounts the calling user is a member of.
 clcrCustomers :: Lens' CustomerListCustomersResponse [Company]
@@ -1684,11 +1704,13 @@ instance ToJSON CustomerListCustomersResponse where
 -- customers](\/zero-touch\/guides\/how-it-works#claim).
 --
 -- /See:/ 'deviceClaim' smart constructor.
-data DeviceClaim = DeviceClaim'
+data DeviceClaim =
+  DeviceClaim'
     { _dcSectionType    :: !(Maybe DeviceClaimSectionType)
     , _dcOwnerCompanyId :: !(Maybe (Textual Int64))
     , _dcResellerId     :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceClaim' with the minimum fields required to make a request.
 --
@@ -1702,7 +1724,7 @@ data DeviceClaim = DeviceClaim'
 deviceClaim
     :: DeviceClaim
 deviceClaim =
-    DeviceClaim'
+  DeviceClaim'
     { _dcSectionType = Nothing
     , _dcOwnerCompanyId = Nothing
     , _dcResellerId = Nothing
@@ -1746,9 +1768,11 @@ instance ToJSON DeviceClaim where
 -- | Request to set metadata for a device.
 --
 -- /See:/ 'updateDeviceMetadataRequest' smart constructor.
-newtype UpdateDeviceMetadataRequest = UpdateDeviceMetadataRequest'
+newtype UpdateDeviceMetadataRequest =
+  UpdateDeviceMetadataRequest'
     { _udmrDeviceMetadata :: Maybe DeviceMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDeviceMetadataRequest' with the minimum fields required to make a request.
 --
@@ -1758,9 +1782,7 @@ newtype UpdateDeviceMetadataRequest = UpdateDeviceMetadataRequest'
 updateDeviceMetadataRequest
     :: UpdateDeviceMetadataRequest
 updateDeviceMetadataRequest =
-    UpdateDeviceMetadataRequest'
-    { _udmrDeviceMetadata = Nothing
-    }
+  UpdateDeviceMetadataRequest' {_udmrDeviceMetadata = Nothing}
 
 -- | Required. The metdata to attach to the device.
 udmrDeviceMetadata :: Lens' UpdateDeviceMetadataRequest (Maybe DeviceMetadata)
@@ -1785,9 +1807,11 @@ instance ToJSON UpdateDeviceMetadataRequest where
 -- read [Device metadata](\/zero-touch\/guides\/metadata).
 --
 -- /See:/ 'deviceMetadata' smart constructor.
-newtype DeviceMetadata = DeviceMetadata'
+newtype DeviceMetadata =
+  DeviceMetadata'
     { _dmEntries :: Maybe DeviceMetadataEntries
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceMetadata' with the minimum fields required to make a request.
 --
@@ -1796,10 +1820,7 @@ newtype DeviceMetadata = DeviceMetadata'
 -- * 'dmEntries'
 deviceMetadata
     :: DeviceMetadata
-deviceMetadata =
-    DeviceMetadata'
-    { _dmEntries = Nothing
-    }
+deviceMetadata = DeviceMetadata' {_dmEntries = Nothing}
 
 -- | Metadata entries recorded as key-value pairs.
 dmEntries :: Lens' DeviceMetadata (Maybe DeviceMetadataEntries)
@@ -1818,12 +1839,14 @@ instance ToJSON DeviceMetadata where
 -- | Request to find devices by customers.
 --
 -- /See:/ 'findDevicesByOwnerRequest' smart constructor.
-data FindDevicesByOwnerRequest = FindDevicesByOwnerRequest'
+data FindDevicesByOwnerRequest =
+  FindDevicesByOwnerRequest'
     { _fdborSectionType :: !(Maybe FindDevicesByOwnerRequestSectionType)
     , _fdborCustomerId  :: !(Maybe [Textual Int64])
     , _fdborLimit       :: !(Maybe (Textual Int64))
     , _fdborPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FindDevicesByOwnerRequest' with the minimum fields required to make a request.
 --
@@ -1839,7 +1862,7 @@ data FindDevicesByOwnerRequest = FindDevicesByOwnerRequest'
 findDevicesByOwnerRequest
     :: FindDevicesByOwnerRequest
 findDevicesByOwnerRequest =
-    FindDevicesByOwnerRequest'
+  FindDevicesByOwnerRequest'
     { _fdborSectionType = Nothing
     , _fdborCustomerId = Nothing
     , _fdborLimit = Nothing
@@ -1895,11 +1918,13 @@ instance ToJSON FindDevicesByOwnerRequest where
 -- | Response containing found devices.
 --
 -- /See:/ 'findDevicesByDeviceIdentifierResponse' smart constructor.
-data FindDevicesByDeviceIdentifierResponse = FindDevicesByDeviceIdentifierResponse'
+data FindDevicesByDeviceIdentifierResponse =
+  FindDevicesByDeviceIdentifierResponse'
     { _fdbdirNextPageToken :: !(Maybe Text)
     , _fdbdirTotalSize     :: !(Maybe (Textual Int32))
     , _fdbdirDevices       :: !(Maybe [Device])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FindDevicesByDeviceIdentifierResponse' with the minimum fields required to make a request.
 --
@@ -1913,7 +1938,7 @@ data FindDevicesByDeviceIdentifierResponse = FindDevicesByDeviceIdentifierRespon
 findDevicesByDeviceIdentifierResponse
     :: FindDevicesByDeviceIdentifierResponse
 findDevicesByDeviceIdentifierResponse =
-    FindDevicesByDeviceIdentifierResponse'
+  FindDevicesByDeviceIdentifierResponse'
     { _fdbdirNextPageToken = Nothing
     , _fdbdirTotalSize = Nothing
     , _fdbdirDevices = Nothing
@@ -1942,7 +1967,8 @@ fdbdirDevices
       . _Coerce
 
 instance FromJSON
-         FindDevicesByDeviceIdentifierResponse where
+           FindDevicesByDeviceIdentifierResponse
+         where
         parseJSON
           = withObject "FindDevicesByDeviceIdentifierResponse"
               (\ o ->
@@ -1962,11 +1988,13 @@ instance ToJSON FindDevicesByDeviceIdentifierResponse
 -- | Request message to unclaim a device.
 --
 -- /See:/ 'unclaimDeviceRequest' smart constructor.
-data UnclaimDeviceRequest = UnclaimDeviceRequest'
+data UnclaimDeviceRequest =
+  UnclaimDeviceRequest'
     { _udrDeviceIdentifier :: !(Maybe DeviceIdentifier)
     , _udrSectionType      :: !(Maybe UnclaimDeviceRequestSectionType)
     , _udrDeviceId         :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnclaimDeviceRequest' with the minimum fields required to make a request.
 --
@@ -1980,7 +2008,7 @@ data UnclaimDeviceRequest = UnclaimDeviceRequest'
 unclaimDeviceRequest
     :: UnclaimDeviceRequest
 unclaimDeviceRequest =
-    UnclaimDeviceRequest'
+  UnclaimDeviceRequest'
     { _udrDeviceIdentifier = Nothing
     , _udrSectionType = Nothing
     , _udrDeviceId = Nothing
@@ -2025,10 +2053,12 @@ instance ToJSON UnclaimDeviceRequest where
 -- operations](\/zero-touch\/guides\/how-it-works#operations).
 --
 -- /See:/ 'devicesLongRunningOperationResponse' smart constructor.
-data DevicesLongRunningOperationResponse = DevicesLongRunningOperationResponse'
+data DevicesLongRunningOperationResponse =
+  DevicesLongRunningOperationResponse'
     { _dlrorSuccessCount    :: !(Maybe (Textual Int32))
     , _dlrorPerDeviceStatus :: !(Maybe [OperationPerDevice])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DevicesLongRunningOperationResponse' with the minimum fields required to make a request.
 --
@@ -2040,10 +2070,8 @@ data DevicesLongRunningOperationResponse = DevicesLongRunningOperationResponse'
 devicesLongRunningOperationResponse
     :: DevicesLongRunningOperationResponse
 devicesLongRunningOperationResponse =
-    DevicesLongRunningOperationResponse'
-    { _dlrorSuccessCount = Nothing
-    , _dlrorPerDeviceStatus = Nothing
-    }
+  DevicesLongRunningOperationResponse'
+    {_dlrorSuccessCount = Nothing, _dlrorPerDeviceStatus = Nothing}
 
 -- | A summary of how many items in the operation the server processed
 -- successfully. Updated as the operation progresses.
@@ -2090,7 +2118,8 @@ instance ToJSON DevicesLongRunningOperationResponse
 -- purchases.
 --
 -- /See:/ 'configuration' smart constructor.
-data Configuration = Configuration'
+data Configuration =
+  Configuration'
     { _conContactPhone      :: !(Maybe Text)
     , _conContactEmail      :: !(Maybe Text)
     , _conConfigurationName :: !(Maybe Text)
@@ -2101,7 +2130,8 @@ data Configuration = Configuration'
     , _conName              :: !(Maybe Text)
     , _conDpcResourcePath   :: !(Maybe Text)
     , _conIsDefault         :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Configuration' with the minimum fields required to make a request.
 --
@@ -2129,7 +2159,7 @@ data Configuration = Configuration'
 configuration
     :: Configuration
 configuration =
-    Configuration'
+  Configuration'
     { _conContactPhone = Nothing
     , _conContactEmail = Nothing
     , _conConfigurationName = Nothing
@@ -2253,9 +2283,11 @@ instance ToJSON Configuration where
 -- \`updateMetadataAsync\`.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -2266,9 +2298,7 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -2287,11 +2317,13 @@ instance ToJSON OperationMetadata where
 -- | Response message of all customers related to this partner.
 --
 -- /See:/ 'listCustomersResponse' smart constructor.
-data ListCustomersResponse = ListCustomersResponse'
+data ListCustomersResponse =
+  ListCustomersResponse'
     { _lcrCustomers     :: !(Maybe [Company])
     , _lcrNextPageToken :: !(Maybe Text)
     , _lcrTotalSize     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCustomersResponse' with the minimum fields required to make a request.
 --
@@ -2305,7 +2337,7 @@ data ListCustomersResponse = ListCustomersResponse'
 listCustomersResponse
     :: ListCustomersResponse
 listCustomersResponse =
-    ListCustomersResponse'
+  ListCustomersResponse'
     { _lcrCustomers = Nothing
     , _lcrNextPageToken = Nothing
     , _lcrTotalSize = Nothing
@@ -2354,11 +2386,13 @@ instance ToJSON ListCustomersResponse where
 -- operations](\/zero-touch\/guides\/how-it-works#operations).
 --
 -- /See:/ 'devicesLongRunningOperationMetadata' smart constructor.
-data DevicesLongRunningOperationMetadata = DevicesLongRunningOperationMetadata'
+data DevicesLongRunningOperationMetadata =
+  DevicesLongRunningOperationMetadata'
     { _dlromProgress         :: !(Maybe (Textual Int32))
     , _dlromDevicesCount     :: !(Maybe (Textual Int32))
     , _dlromProcessingStatus :: !(Maybe DevicesLongRunningOperationMetadataProcessingStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DevicesLongRunningOperationMetadata' with the minimum fields required to make a request.
 --
@@ -2372,7 +2406,7 @@ data DevicesLongRunningOperationMetadata = DevicesLongRunningOperationMetadata'
 devicesLongRunningOperationMetadata
     :: DevicesLongRunningOperationMetadata
 devicesLongRunningOperationMetadata =
-    DevicesLongRunningOperationMetadata'
+  DevicesLongRunningOperationMetadata'
     { _dlromProgress = Nothing
     , _dlromDevicesCount = Nothing
     , _dlromProcessingStatus = Nothing
@@ -2425,9 +2459,11 @@ instance ToJSON DevicesLongRunningOperationMetadata
 -- \`updateMetadataAsync\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -2438,9 +2474,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -2459,10 +2493,12 @@ instance ToJSON OperationResponse where
 -- | Response message of customer\'s liting devices.
 --
 -- /See:/ 'customerListDevicesResponse' smart constructor.
-data CustomerListDevicesResponse = CustomerListDevicesResponse'
+data CustomerListDevicesResponse =
+  CustomerListDevicesResponse'
     { _cldrNextPageToken :: !(Maybe Text)
     , _cldrDevices       :: !(Maybe [Device])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomerListDevicesResponse' with the minimum fields required to make a request.
 --
@@ -2474,10 +2510,8 @@ data CustomerListDevicesResponse = CustomerListDevicesResponse'
 customerListDevicesResponse
     :: CustomerListDevicesResponse
 customerListDevicesResponse =
-    CustomerListDevicesResponse'
-    { _cldrNextPageToken = Nothing
-    , _cldrDevices = Nothing
-    }
+  CustomerListDevicesResponse'
+    {_cldrNextPageToken = Nothing, _cldrDevices = Nothing}
 
 -- | A token used to access the next page of results. Omitted if no further
 -- results are available.
@@ -2511,9 +2545,11 @@ instance ToJSON CustomerListDevicesResponse where
 -- | Request to update device metadata in batch.
 --
 -- /See:/ 'updateDeviceMetadataInBatchRequest' smart constructor.
-newtype UpdateDeviceMetadataInBatchRequest = UpdateDeviceMetadataInBatchRequest'
+newtype UpdateDeviceMetadataInBatchRequest =
+  UpdateDeviceMetadataInBatchRequest'
     { _udmibrUpdates :: Maybe [UpdateMetadataArguments]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDeviceMetadataInBatchRequest' with the minimum fields required to make a request.
 --
@@ -2523,9 +2559,7 @@ newtype UpdateDeviceMetadataInBatchRequest = UpdateDeviceMetadataInBatchRequest'
 updateDeviceMetadataInBatchRequest
     :: UpdateDeviceMetadataInBatchRequest
 updateDeviceMetadataInBatchRequest =
-    UpdateDeviceMetadataInBatchRequest'
-    { _udmibrUpdates = Nothing
-    }
+  UpdateDeviceMetadataInBatchRequest' {_udmibrUpdates = Nothing}
 
 -- | Required. The list of metadata updates.
 udmibrUpdates :: Lens' UpdateDeviceMetadataInBatchRequest [UpdateMetadataArguments]
@@ -2552,9 +2586,11 @@ instance ToJSON UpdateDeviceMetadataInBatchRequest
 -- | Response message of customer\'s listing DPCs.
 --
 -- /See:/ 'customerListDpcsResponse' smart constructor.
-newtype CustomerListDpcsResponse = CustomerListDpcsResponse'
+newtype CustomerListDpcsResponse =
+  CustomerListDpcsResponse'
     { _cldrDpcs :: Maybe [Dpc]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomerListDpcsResponse' with the minimum fields required to make a request.
 --
@@ -2563,10 +2599,7 @@ newtype CustomerListDpcsResponse = CustomerListDpcsResponse'
 -- * 'cldrDpcs'
 customerListDpcsResponse
     :: CustomerListDpcsResponse
-customerListDpcsResponse =
-    CustomerListDpcsResponse'
-    { _cldrDpcs = Nothing
-    }
+customerListDpcsResponse = CustomerListDpcsResponse' {_cldrDpcs = Nothing}
 
 -- | The list of DPCs available to the customer that support zero-touch
 -- enrollment.
@@ -2590,10 +2623,12 @@ instance ToJSON CustomerListDpcsResponse where
 -- | Response message containing device id of the claim.
 --
 -- /See:/ 'claimDeviceResponse' smart constructor.
-data ClaimDeviceResponse = ClaimDeviceResponse'
+data ClaimDeviceResponse =
+  ClaimDeviceResponse'
     { _cdrDeviceName :: !(Maybe Text)
     , _cdrDeviceId   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClaimDeviceResponse' with the minimum fields required to make a request.
 --
@@ -2605,10 +2640,7 @@ data ClaimDeviceResponse = ClaimDeviceResponse'
 claimDeviceResponse
     :: ClaimDeviceResponse
 claimDeviceResponse =
-    ClaimDeviceResponse'
-    { _cdrDeviceName = Nothing
-    , _cdrDeviceId = Nothing
-    }
+  ClaimDeviceResponse' {_cdrDeviceName = Nothing, _cdrDeviceId = Nothing}
 
 -- | The resource name of the device in the format
 -- \`partners\/[PARTNER_ID]\/devices\/[DEVICE_ID]\`.
@@ -2640,9 +2672,11 @@ instance ToJSON ClaimDeviceResponse where
 -- | Request message to create a customer.
 --
 -- /See:/ 'createCustomerRequest' smart constructor.
-newtype CreateCustomerRequest = CreateCustomerRequest'
+newtype CreateCustomerRequest =
+  CreateCustomerRequest'
     { _ccrCustomer :: Maybe Company
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCustomerRequest' with the minimum fields required to make a request.
 --
@@ -2651,10 +2685,7 @@ newtype CreateCustomerRequest = CreateCustomerRequest'
 -- * 'ccrCustomer'
 createCustomerRequest
     :: CreateCustomerRequest
-createCustomerRequest =
-    CreateCustomerRequest'
-    { _ccrCustomer = Nothing
-    }
+createCustomerRequest = CreateCustomerRequest' {_ccrCustomer = Nothing}
 
 -- | Required. The company data to populate the new customer. Must contain a
 -- value for \`companyName\` and at least one \`owner_email\` that\'s

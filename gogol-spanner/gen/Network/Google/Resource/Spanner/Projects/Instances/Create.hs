@@ -97,7 +97,8 @@ type ProjectsInstancesCreateResource =
 -- response field type is Instance, if successful.
 --
 -- /See:/ 'projectsInstancesCreate' smart constructor.
-data ProjectsInstancesCreate = ProjectsInstancesCreate'
+data ProjectsInstancesCreate =
+  ProjectsInstancesCreate'
     { _picParent         :: !Text
     , _picXgafv          :: !(Maybe Xgafv)
     , _picUploadProtocol :: !(Maybe Text)
@@ -105,7 +106,8 @@ data ProjectsInstancesCreate = ProjectsInstancesCreate'
     , _picUploadType     :: !(Maybe Text)
     , _picPayload        :: !CreateInstanceRequest
     , _picCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesCreate' with the minimum fields required to make a request.
 --
@@ -129,7 +131,7 @@ projectsInstancesCreate
     -> CreateInstanceRequest -- ^ 'picPayload'
     -> ProjectsInstancesCreate
 projectsInstancesCreate pPicParent_ pPicPayload_ =
-    ProjectsInstancesCreate'
+  ProjectsInstancesCreate'
     { _picParent = pPicParent_
     , _picXgafv = Nothing
     , _picUploadProtocol = Nothing

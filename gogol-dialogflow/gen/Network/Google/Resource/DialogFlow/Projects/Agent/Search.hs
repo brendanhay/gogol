@@ -74,7 +74,8 @@ type ProjectsAgentSearchResource =
 -- Sub-Collections](https:\/\/cloud.google.com\/apis\/design\/design_patterns#list_sub-collections).
 --
 -- /See:/ 'projectsAgentSearch' smart constructor.
-data ProjectsAgentSearch = ProjectsAgentSearch'
+data ProjectsAgentSearch =
+  ProjectsAgentSearch'
     { _pasParent         :: !Text
     , _pasXgafv          :: !(Maybe Xgafv)
     , _pasUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,8 @@ data ProjectsAgentSearch = ProjectsAgentSearch'
     , _pasPageToken      :: !(Maybe Text)
     , _pasPageSize       :: !(Maybe (Textual Int32))
     , _pasCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentSearch' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ projectsAgentSearch
     :: Text -- ^ 'pasParent'
     -> ProjectsAgentSearch
 projectsAgentSearch pPasParent_ =
-    ProjectsAgentSearch'
+  ProjectsAgentSearch'
     { _pasParent = pPasParent_
     , _pasXgafv = Nothing
     , _pasUploadProtocol = Nothing

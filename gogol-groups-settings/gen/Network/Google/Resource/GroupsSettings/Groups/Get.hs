@@ -51,9 +51,11 @@ type GroupsGetResource =
 -- | Gets one resource by id.
 --
 -- /See:/ 'groupsGet' smart constructor.
-newtype GroupsGet = GroupsGet'
+newtype GroupsGet =
+  GroupsGet'
     { _ggGroupUniqueId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype GroupsGet = GroupsGet'
 groupsGet
     :: Text -- ^ 'ggGroupUniqueId'
     -> GroupsGet
-groupsGet pGgGroupUniqueId_ =
-    GroupsGet'
-    { _ggGroupUniqueId = pGgGroupUniqueId_
-    }
+groupsGet pGgGroupUniqueId_ = GroupsGet' {_ggGroupUniqueId = pGgGroupUniqueId_}
 
 -- | The resource ID
 ggGroupUniqueId :: Lens' GroupsGet Text

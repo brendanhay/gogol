@@ -57,11 +57,13 @@ type BackendServicesDeleteResource =
 -- | Deletes the specified BackendService resource.
 --
 -- /See:/ 'backendServicesDelete' smart constructor.
-data BackendServicesDelete = BackendServicesDelete'
+data BackendServicesDelete =
+  BackendServicesDelete'
     { _bsdRequestId      :: !(Maybe Text)
     , _bsdProject        :: !Text
     , _bsdBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServicesDelete' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ backendServicesDelete
     -> Text -- ^ 'bsdBackendService'
     -> BackendServicesDelete
 backendServicesDelete pBsdProject_ pBsdBackendService_ =
-    BackendServicesDelete'
+  BackendServicesDelete'
     { _bsdRequestId = Nothing
     , _bsdProject = pBsdProject_
     , _bsdBackendService = pBsdBackendService_

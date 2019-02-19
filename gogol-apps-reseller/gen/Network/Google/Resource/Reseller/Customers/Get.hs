@@ -52,9 +52,11 @@ type CustomersGetResource =
 -- | Get a customer account.
 --
 -- /See:/ 'customersGet' smart constructor.
-newtype CustomersGet = CustomersGet'
+newtype CustomersGet =
+  CustomersGet'
     { _cgCustomerId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersGet' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype CustomersGet = CustomersGet'
 customersGet
     :: Text -- ^ 'cgCustomerId'
     -> CustomersGet
-customersGet pCgCustomerId_ =
-    CustomersGet'
-    { _cgCustomerId = pCgCustomerId_
-    }
+customersGet pCgCustomerId_ = CustomersGet' {_cgCustomerId = pCgCustomerId_}
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a

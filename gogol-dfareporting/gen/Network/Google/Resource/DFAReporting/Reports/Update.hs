@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsUpdate' request conforms to.
 type ReportsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -56,11 +56,13 @@ type ReportsUpdateResource =
 -- | Updates a report.
 --
 -- /See:/ 'reportsUpdate' smart constructor.
-data ReportsUpdate = ReportsUpdate'
+data ReportsUpdate =
+  ReportsUpdate'
     { _ruReportId  :: !(Textual Int64)
     , _ruProFileId :: !(Textual Int64)
     , _ruPayload   :: !Report
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsUpdate' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ reportsUpdate
     -> Report -- ^ 'ruPayload'
     -> ReportsUpdate
 reportsUpdate pRuReportId_ pRuProFileId_ pRuPayload_ =
-    ReportsUpdate'
+  ReportsUpdate'
     { _ruReportId = _Coerce # pRuReportId_
     , _ruProFileId = _Coerce # pRuProFileId_
     , _ruPayload = pRuPayload_

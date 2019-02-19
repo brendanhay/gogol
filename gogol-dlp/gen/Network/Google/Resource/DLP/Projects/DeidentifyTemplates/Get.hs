@@ -64,14 +64,16 @@ type ProjectsDeidentifyTemplatesGetResource =
 -- more.
 --
 -- /See:/ 'projectsDeidentifyTemplatesGet' smart constructor.
-data ProjectsDeidentifyTemplatesGet = ProjectsDeidentifyTemplatesGet'
+data ProjectsDeidentifyTemplatesGet =
+  ProjectsDeidentifyTemplatesGet'
     { _pdtgXgafv          :: !(Maybe Xgafv)
     , _pdtgUploadProtocol :: !(Maybe Text)
     , _pdtgAccessToken    :: !(Maybe Text)
     , _pdtgUploadType     :: !(Maybe Text)
     , _pdtgName           :: !Text
     , _pdtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDeidentifyTemplatesGet' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ projectsDeidentifyTemplatesGet
     :: Text -- ^ 'pdtgName'
     -> ProjectsDeidentifyTemplatesGet
 projectsDeidentifyTemplatesGet pPdtgName_ =
-    ProjectsDeidentifyTemplatesGet'
+  ProjectsDeidentifyTemplatesGet'
     { _pdtgXgafv = Nothing
     , _pdtgUploadProtocol = Nothing
     , _pdtgAccessToken = Nothing

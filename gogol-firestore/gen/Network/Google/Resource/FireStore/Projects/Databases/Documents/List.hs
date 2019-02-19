@@ -76,7 +76,8 @@ type ProjectsDatabasesDocumentsListResource =
 -- | Lists documents.
 --
 -- /See:/ 'projectsDatabasesDocumentsList' smart constructor.
-data ProjectsDatabasesDocumentsList = ProjectsDatabasesDocumentsList'
+data ProjectsDatabasesDocumentsList =
+  ProjectsDatabasesDocumentsList'
     { _pParent         :: !Text
     , _pXgafv          :: !(Maybe Xgafv)
     , _pReadTime       :: !(Maybe DateTime')
@@ -91,7 +92,8 @@ data ProjectsDatabasesDocumentsList = ProjectsDatabasesDocumentsList'
     , _pPageSize       :: !(Maybe (Textual Int32))
     , _pMaskFieldPaths :: !(Maybe [Text])
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsList' with the minimum fields required to make a request.
 --
@@ -129,7 +131,7 @@ projectsDatabasesDocumentsList
     -> Text -- ^ 'pCollectionId'
     -> ProjectsDatabasesDocumentsList
 projectsDatabasesDocumentsList pPParent_ pPCollectionId_ =
-    ProjectsDatabasesDocumentsList'
+  ProjectsDatabasesDocumentsList'
     { _pParent = pPParent_
     , _pXgafv = Nothing
     , _pReadTime = Nothing

@@ -53,10 +53,12 @@ type CommentsUpdateResource =
 -- | Modifies a comment.
 --
 -- /See:/ 'commentsUpdate' smart constructor.
-data CommentsUpdate = CommentsUpdate'
+data CommentsUpdate =
+  CommentsUpdate'
     { _cuPart    :: !Text
     , _cuPayload :: !Comment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentsUpdate' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ commentsUpdate
     -> Comment -- ^ 'cuPayload'
     -> CommentsUpdate
 commentsUpdate pCuPart_ pCuPayload_ =
-    CommentsUpdate'
-    { _cuPart = pCuPart_
-    , _cuPayload = pCuPayload_
-    }
+  CommentsUpdate' {_cuPart = pCuPart_, _cuPayload = pCuPayload_}
 
 -- | The part parameter identifies the properties that the API response will
 -- include. You must at least include the snippet part in the parameter

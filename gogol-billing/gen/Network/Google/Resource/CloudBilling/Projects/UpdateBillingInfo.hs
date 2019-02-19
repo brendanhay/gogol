@@ -113,7 +113,8 @@ type ProjectsUpdateBillingInfoResource =
 -- with the name of an *open* billing account.
 --
 -- /See:/ 'projectsUpdateBillingInfo' smart constructor.
-data ProjectsUpdateBillingInfo = ProjectsUpdateBillingInfo'
+data ProjectsUpdateBillingInfo =
+  ProjectsUpdateBillingInfo'
     { _pubiXgafv          :: !(Maybe Xgafv)
     , _pubiUploadProtocol :: !(Maybe Text)
     , _pubiAccessToken    :: !(Maybe Text)
@@ -121,7 +122,8 @@ data ProjectsUpdateBillingInfo = ProjectsUpdateBillingInfo'
     , _pubiPayload        :: !ProjectBillingInfo
     , _pubiName           :: !Text
     , _pubiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsUpdateBillingInfo' with the minimum fields required to make a request.
 --
@@ -145,7 +147,7 @@ projectsUpdateBillingInfo
     -> Text -- ^ 'pubiName'
     -> ProjectsUpdateBillingInfo
 projectsUpdateBillingInfo pPubiPayload_ pPubiName_ =
-    ProjectsUpdateBillingInfo'
+  ProjectsUpdateBillingInfo'
     { _pubiXgafv = Nothing
     , _pubiUploadProtocol = Nothing
     , _pubiAccessToken = Nothing

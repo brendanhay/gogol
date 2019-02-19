@@ -52,9 +52,11 @@ type GroupsInsertResource =
 -- | Create Group
 --
 -- /See:/ 'groupsInsert' smart constructor.
-newtype GroupsInsert = GroupsInsert'
+newtype GroupsInsert =
+  GroupsInsert'
     { _giPayload :: Group
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsInsert' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype GroupsInsert = GroupsInsert'
 groupsInsert
     :: Group -- ^ 'giPayload'
     -> GroupsInsert
-groupsInsert pGiPayload_ =
-    GroupsInsert'
-    { _giPayload = pGiPayload_
-    }
+groupsInsert pGiPayload_ = GroupsInsert' {_giPayload = pGiPayload_}
 
 -- | Multipart request metadata.
 giPayload :: Lens' GroupsInsert Group

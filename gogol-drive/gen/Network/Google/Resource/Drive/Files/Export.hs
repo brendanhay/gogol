@@ -65,10 +65,12 @@ type FilesExportResource =
 -- content. Please note that the exported content is limited to 10MB.
 --
 -- /See:/ 'filesExport' smart constructor.
-data FilesExport = FilesExport'
+data FilesExport =
+  FilesExport'
     { _feMimeType :: !Text
     , _feFileId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilesExport' with the minimum fields required to make a request.
 --
@@ -82,10 +84,7 @@ filesExport
     -> Text -- ^ 'feFileId'
     -> FilesExport
 filesExport pFeMimeType_ pFeFileId_ =
-    FilesExport'
-    { _feMimeType = pFeMimeType_
-    , _feFileId = pFeFileId_
-    }
+  FilesExport' {_feMimeType = pFeMimeType_, _feFileId = pFeFileId_}
 
 -- | The MIME type of the format requested for this export.
 feMimeType :: Lens' FilesExport Text

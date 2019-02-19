@@ -55,10 +55,12 @@ type UsersRevokeTokenResource =
 -- | Revokes a previously generated token (activation code) for the user.
 --
 -- /See:/ 'usersRevokeToken' smart constructor.
-data UsersRevokeToken = UsersRevokeToken'
+data UsersRevokeToken =
+  UsersRevokeToken'
     { _urtEnterpriseId :: !Text
     , _urtUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersRevokeToken' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ usersRevokeToken
     -> Text -- ^ 'urtUserId'
     -> UsersRevokeToken
 usersRevokeToken pUrtEnterpriseId_ pUrtUserId_ =
-    UsersRevokeToken'
-    { _urtEnterpriseId = pUrtEnterpriseId_
-    , _urtUserId = pUrtUserId_
-    }
+  UsersRevokeToken'
+    {_urtEnterpriseId = pUrtEnterpriseId_, _urtUserId = pUrtUserId_}
 
 -- | The ID of the enterprise.
 urtEnterpriseId :: Lens' UsersRevokeToken Text

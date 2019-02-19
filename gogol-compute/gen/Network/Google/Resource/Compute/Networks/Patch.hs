@@ -61,12 +61,14 @@ type NetworksPatchResource =
 -- Only the following fields can be modified: routingConfig.routingMode.
 --
 -- /See:/ 'networksPatch' smart constructor.
-data NetworksPatch = NetworksPatch'
+data NetworksPatch =
+  NetworksPatch'
     { _npRequestId :: !(Maybe Text)
     , _npProject   :: !Text
     , _npNetwork   :: !Text
     , _npPayload   :: !Network
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworksPatch' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ networksPatch
     -> Network -- ^ 'npPayload'
     -> NetworksPatch
 networksPatch pNpProject_ pNpNetwork_ pNpPayload_ =
-    NetworksPatch'
+  NetworksPatch'
     { _npRequestId = Nothing
     , _npProject = pNpProject_
     , _npNetwork = pNpNetwork_

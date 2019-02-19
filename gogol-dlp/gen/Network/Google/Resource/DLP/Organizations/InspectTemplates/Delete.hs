@@ -62,14 +62,16 @@ type OrganizationsInspectTemplatesDeleteResource =
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'organizationsInspectTemplatesDelete' smart constructor.
-data OrganizationsInspectTemplatesDelete = OrganizationsInspectTemplatesDelete'
+data OrganizationsInspectTemplatesDelete =
+  OrganizationsInspectTemplatesDelete'
     { _oitdXgafv          :: !(Maybe Xgafv)
     , _oitdUploadProtocol :: !(Maybe Text)
     , _oitdAccessToken    :: !(Maybe Text)
     , _oitdUploadType     :: !(Maybe Text)
     , _oitdName           :: !Text
     , _oitdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsInspectTemplatesDelete' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ organizationsInspectTemplatesDelete
     :: Text -- ^ 'oitdName'
     -> OrganizationsInspectTemplatesDelete
 organizationsInspectTemplatesDelete pOitdName_ =
-    OrganizationsInspectTemplatesDelete'
+  OrganizationsInspectTemplatesDelete'
     { _oitdXgafv = Nothing
     , _oitdUploadProtocol = Nothing
     , _oitdAccessToken = Nothing
@@ -134,7 +136,8 @@ oitdCallback
   = lens _oitdCallback (\ s a -> s{_oitdCallback = a})
 
 instance GoogleRequest
-         OrganizationsInspectTemplatesDelete where
+           OrganizationsInspectTemplatesDelete
+         where
         type Rs OrganizationsInspectTemplatesDelete =
              GoogleProtobufEmpty
         type Scopes OrganizationsInspectTemplatesDelete =

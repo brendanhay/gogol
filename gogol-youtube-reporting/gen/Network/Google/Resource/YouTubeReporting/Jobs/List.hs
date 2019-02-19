@@ -67,7 +67,8 @@ type JobsListResource =
 -- | Lists jobs.
 --
 -- /See:/ 'jobsList' smart constructor.
-data JobsList = JobsList'
+data JobsList =
+  JobsList'
     { _jlXgafv                  :: !(Maybe Xgafv)
     , _jlUploadProtocol         :: !(Maybe Text)
     , _jlAccessToken            :: !(Maybe Text)
@@ -77,7 +78,8 @@ data JobsList = JobsList'
     , _jlPageToken              :: !(Maybe Text)
     , _jlPageSize               :: !(Maybe (Textual Int32))
     , _jlCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobsList' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ data JobsList = JobsList'
 jobsList
     :: JobsList
 jobsList =
-    JobsList'
+  JobsList'
     { _jlXgafv = Nothing
     , _jlUploadProtocol = Nothing
     , _jlAccessToken = Nothing

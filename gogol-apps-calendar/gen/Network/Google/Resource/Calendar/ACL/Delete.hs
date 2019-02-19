@@ -54,10 +54,12 @@ type ACLDeleteResource =
 -- | Deletes an access control rule.
 --
 -- /See:/ 'aclDelete' smart constructor.
-data ACLDelete = ACLDelete'
+data ACLDelete =
+  ACLDelete'
     { _adCalendarId :: !Text
     , _adRuleId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ACLDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ aclDelete
     -> Text -- ^ 'adRuleId'
     -> ACLDelete
 aclDelete pAdCalendarId_ pAdRuleId_ =
-    ACLDelete'
-    { _adCalendarId = pAdCalendarId_
-    , _adRuleId = pAdRuleId_
-    }
+  ACLDelete' {_adCalendarId = pAdCalendarId_, _adRuleId = pAdRuleId_}
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

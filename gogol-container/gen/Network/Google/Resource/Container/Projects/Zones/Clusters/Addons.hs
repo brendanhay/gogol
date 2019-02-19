@@ -70,7 +70,8 @@ type ProjectsZonesClustersAddonsResource =
 -- | Sets the addons for a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersAddons' smart constructor.
-data ProjectsZonesClustersAddons = ProjectsZonesClustersAddons'
+data ProjectsZonesClustersAddons =
+  ProjectsZonesClustersAddons'
     { _pzcaXgafv          :: !(Maybe Xgafv)
     , _pzcaUploadProtocol :: !(Maybe Text)
     , _pzcaAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsZonesClustersAddons = ProjectsZonesClustersAddons'
     , _pzcaClusterId      :: !Text
     , _pzcaProjectId      :: !Text
     , _pzcaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersAddons' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ projectsZonesClustersAddons
     -> Text -- ^ 'pzcaProjectId'
     -> ProjectsZonesClustersAddons
 projectsZonesClustersAddons pPzcaZone_ pPzcaPayload_ pPzcaClusterId_ pPzcaProjectId_ =
-    ProjectsZonesClustersAddons'
+  ProjectsZonesClustersAddons'
     { _pzcaXgafv = Nothing
     , _pzcaUploadProtocol = Nothing
     , _pzcaAccessToken = Nothing

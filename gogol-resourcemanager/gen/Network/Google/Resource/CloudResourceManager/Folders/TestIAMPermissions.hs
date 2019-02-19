@@ -68,7 +68,8 @@ type FoldersTestIAMPermissionsResource =
 -- call.
 --
 -- /See:/ 'foldersTestIAMPermissions' smart constructor.
-data FoldersTestIAMPermissions = FoldersTestIAMPermissions'
+data FoldersTestIAMPermissions =
+  FoldersTestIAMPermissions'
     { _ftipXgafv          :: !(Maybe Xgafv)
     , _ftipUploadProtocol :: !(Maybe Text)
     , _ftipAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data FoldersTestIAMPermissions = FoldersTestIAMPermissions'
     , _ftipPayload        :: !TestIAMPermissionsRequest
     , _ftipResource       :: !Text
     , _ftipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ foldersTestIAMPermissions
     -> Text -- ^ 'ftipResource'
     -> FoldersTestIAMPermissions
 foldersTestIAMPermissions pFtipPayload_ pFtipResource_ =
-    FoldersTestIAMPermissions'
+  FoldersTestIAMPermissions'
     { _ftipXgafv = Nothing
     , _ftipUploadProtocol = Nothing
     , _ftipAccessToken = Nothing

@@ -73,7 +73,8 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
 -- warning.
 --
 -- /See:/ 'projectsSubscriptionsTestIAMPermissions' smart constructor.
-data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermissions'
+data ProjectsSubscriptionsTestIAMPermissions =
+  ProjectsSubscriptionsTestIAMPermissions'
     { _pstiampXgafv          :: !(Maybe Xgafv)
     , _pstiampUploadProtocol :: !(Maybe Text)
     , _pstiampAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermi
     , _pstiampPayload        :: !TestIAMPermissionsRequest
     , _pstiampResource       :: !Text
     , _pstiampCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsSubscriptionsTestIAMPermissions
     -> Text -- ^ 'pstiampResource'
     -> ProjectsSubscriptionsTestIAMPermissions
 projectsSubscriptionsTestIAMPermissions pPstiampPayload_ pPstiampResource_ =
-    ProjectsSubscriptionsTestIAMPermissions'
+  ProjectsSubscriptionsTestIAMPermissions'
     { _pstiampXgafv = Nothing
     , _pstiampUploadProtocol = Nothing
     , _pstiampAccessToken = Nothing
@@ -159,7 +161,8 @@ pstiampCallback
       (\ s a -> s{_pstiampCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsTestIAMPermissions where
+           ProjectsSubscriptionsTestIAMPermissions
+         where
         type Rs ProjectsSubscriptionsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsSubscriptionsTestIAMPermissions =

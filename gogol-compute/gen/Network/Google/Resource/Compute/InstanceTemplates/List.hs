@@ -64,13 +64,15 @@ type InstanceTemplatesListResource =
 -- specified project and zone.
 --
 -- /See:/ 'instanceTemplatesList' smart constructor.
-data InstanceTemplatesList = InstanceTemplatesList'
+data InstanceTemplatesList =
+  InstanceTemplatesList'
     { _itlOrderBy    :: !(Maybe Text)
     , _itlProject    :: !Text
     , _itlFilter     :: !(Maybe Text)
     , _itlPageToken  :: !(Maybe Text)
     , _itlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceTemplatesList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ instanceTemplatesList
     :: Text -- ^ 'itlProject'
     -> InstanceTemplatesList
 instanceTemplatesList pItlProject_ =
-    InstanceTemplatesList'
+  InstanceTemplatesList'
     { _itlOrderBy = Nothing
     , _itlProject = pItlProject_
     , _itlFilter = Nothing

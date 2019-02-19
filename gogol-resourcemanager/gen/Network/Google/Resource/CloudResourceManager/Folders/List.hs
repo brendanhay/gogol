@@ -77,7 +77,8 @@ type FoldersListResource =
 -- identified parent.
 --
 -- /See:/ 'foldersList' smart constructor.
-data FoldersList = FoldersList'
+data FoldersList =
+  FoldersList'
     { _flParent         :: !(Maybe Text)
     , _flXgafv          :: !(Maybe Xgafv)
     , _flUploadProtocol :: !(Maybe Text)
@@ -87,7 +88,8 @@ data FoldersList = FoldersList'
     , _flPageToken      :: !(Maybe Text)
     , _flPageSize       :: !(Maybe (Textual Int32))
     , _flCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersList' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ data FoldersList = FoldersList'
 foldersList
     :: FoldersList
 foldersList =
-    FoldersList'
+  FoldersList'
     { _flParent = Nothing
     , _flXgafv = Nothing
     , _flUploadProtocol = Nothing

@@ -67,7 +67,8 @@ type PartnersDevicesMetadataResource =
 -- | Updates reseller metadata associated with the device.
 --
 -- /See:/ 'partnersDevicesMetadata' smart constructor.
-data PartnersDevicesMetadata = PartnersDevicesMetadata'
+data PartnersDevicesMetadata =
+  PartnersDevicesMetadata'
     { _pdmXgafv           :: !(Maybe Xgafv)
     , _pdmUploadProtocol  :: !(Maybe Text)
     , _pdmAccessToken     :: !(Maybe Text)
@@ -76,7 +77,8 @@ data PartnersDevicesMetadata = PartnersDevicesMetadata'
     , _pdmDeviceId        :: !(Textual Int64)
     , _pdmCallback        :: !(Maybe Text)
     , _pdmMetadataOwnerId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartnersDevicesMetadata' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ partnersDevicesMetadata
     -> Int64 -- ^ 'pdmMetadataOwnerId'
     -> PartnersDevicesMetadata
 partnersDevicesMetadata pPdmPayload_ pPdmDeviceId_ pPdmMetadataOwnerId_ =
-    PartnersDevicesMetadata'
+  PartnersDevicesMetadata'
     { _pdmXgafv = Nothing
     , _pdmUploadProtocol = Nothing
     , _pdmAccessToken = Nothing

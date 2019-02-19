@@ -69,7 +69,8 @@ type ProjectsZonesClustersSetNetworkPolicyResource =
 -- | Enables\/Disables Network Policy for a cluster.
 --
 -- /See:/ 'projectsZonesClustersSetNetworkPolicy' smart constructor.
-data ProjectsZonesClustersSetNetworkPolicy = ProjectsZonesClustersSetNetworkPolicy'
+data ProjectsZonesClustersSetNetworkPolicy =
+  ProjectsZonesClustersSetNetworkPolicy'
     { _pzcsnpXgafv          :: !(Maybe Xgafv)
     , _pzcsnpUploadProtocol :: !(Maybe Text)
     , _pzcsnpAccessToken    :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsZonesClustersSetNetworkPolicy = ProjectsZonesClustersSetNetworkPoli
     , _pzcsnpClusterId      :: !Text
     , _pzcsnpProjectId      :: !Text
     , _pzcsnpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersSetNetworkPolicy' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsZonesClustersSetNetworkPolicy
     -> Text -- ^ 'pzcsnpProjectId'
     -> ProjectsZonesClustersSetNetworkPolicy
 projectsZonesClustersSetNetworkPolicy pPzcsnpZone_ pPzcsnpPayload_ pPzcsnpClusterId_ pPzcsnpProjectId_ =
-    ProjectsZonesClustersSetNetworkPolicy'
+  ProjectsZonesClustersSetNetworkPolicy'
     { _pzcsnpXgafv = Nothing
     , _pzcsnpUploadProtocol = Nothing
     , _pzcsnpAccessToken = Nothing
@@ -179,7 +181,8 @@ pzcsnpCallback
       (\ s a -> s{_pzcsnpCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersSetNetworkPolicy where
+           ProjectsZonesClustersSetNetworkPolicy
+         where
         type Rs ProjectsZonesClustersSetNetworkPolicy =
              Operation
         type Scopes ProjectsZonesClustersSetNetworkPolicy =

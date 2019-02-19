@@ -60,11 +60,13 @@ type PurchasesSubscriptionsCancelResource =
 -- until its expiration time.
 --
 -- /See:/ 'purchasesSubscriptionsCancel' smart constructor.
-data PurchasesSubscriptionsCancel = PurchasesSubscriptionsCancel'
+data PurchasesSubscriptionsCancel =
+  PurchasesSubscriptionsCancel'
     { _pscPackageName    :: !Text
     , _pscToken          :: !Text
     , _pscSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsCancel' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ purchasesSubscriptionsCancel
     -> Text -- ^ 'pscSubscriptionId'
     -> PurchasesSubscriptionsCancel
 purchasesSubscriptionsCancel pPscPackageName_ pPscToken_ pPscSubscriptionId_ =
-    PurchasesSubscriptionsCancel'
+  PurchasesSubscriptionsCancel'
     { _pscPackageName = pPscPackageName_
     , _pscToken = pPscToken_
     , _pscSubscriptionId = pPscSubscriptionId_

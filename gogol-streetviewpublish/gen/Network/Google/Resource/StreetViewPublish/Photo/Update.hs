@@ -86,7 +86,8 @@ type PhotoUpdateResource =
 -- being indexed.
 --
 -- /See:/ 'photoUpdate' smart constructor.
-data PhotoUpdate = PhotoUpdate'
+data PhotoUpdate =
+  PhotoUpdate'
     { _puXgafv          :: !(Maybe Xgafv)
     , _puUploadProtocol :: !(Maybe Text)
     , _puUpdateMask     :: !(Maybe GFieldMask)
@@ -95,7 +96,8 @@ data PhotoUpdate = PhotoUpdate'
     , _puPayload        :: !Photo
     , _puId             :: !Text
     , _puCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PhotoUpdate' with the minimum fields required to make a request.
 --
@@ -121,7 +123,7 @@ photoUpdate
     -> Text -- ^ 'puId'
     -> PhotoUpdate
 photoUpdate pPuPayload_ pPuId_ =
-    PhotoUpdate'
+  PhotoUpdate'
     { _puXgafv = Nothing
     , _puUploadProtocol = Nothing
     , _puUpdateMask = Nothing

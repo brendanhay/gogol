@@ -58,11 +58,13 @@ type ForwardingRulesGetResource =
 -- | Returns the specified ForwardingRule resource.
 --
 -- /See:/ 'forwardingRulesGet' smart constructor.
-data ForwardingRulesGet = ForwardingRulesGet'
+data ForwardingRulesGet =
+  ForwardingRulesGet'
     { _frgProject        :: !Text
     , _frgForwardingRule :: !Text
     , _frgRegion         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRulesGet' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ forwardingRulesGet
     -> Text -- ^ 'frgRegion'
     -> ForwardingRulesGet
 forwardingRulesGet pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
-    ForwardingRulesGet'
+  ForwardingRulesGet'
     { _frgProject = pFrgProject_
     , _frgForwardingRule = pFrgForwardingRule_
     , _frgRegion = pFrgRegion_

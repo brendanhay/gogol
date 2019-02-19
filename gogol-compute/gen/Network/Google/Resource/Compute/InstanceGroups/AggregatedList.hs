@@ -62,13 +62,15 @@ type InstanceGroupsAggregatedListResource =
 -- | Retrieves the list of instance groups and sorts them by zone.
 --
 -- /See:/ 'instanceGroupsAggregatedList' smart constructor.
-data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList'
+data InstanceGroupsAggregatedList =
+  InstanceGroupsAggregatedList'
     { _igalOrderBy    :: !(Maybe Text)
     , _igalProject    :: !Text
     , _igalFilter     :: !(Maybe Text)
     , _igalPageToken  :: !(Maybe Text)
     , _igalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ instanceGroupsAggregatedList
     :: Text -- ^ 'igalProject'
     -> InstanceGroupsAggregatedList
 instanceGroupsAggregatedList pIgalProject_ =
-    InstanceGroupsAggregatedList'
+  InstanceGroupsAggregatedList'
     { _igalOrderBy = Nothing
     , _igalProject = pIgalProject_
     , _igalFilter = Nothing

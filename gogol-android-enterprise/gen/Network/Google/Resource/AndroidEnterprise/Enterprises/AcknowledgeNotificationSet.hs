@@ -56,9 +56,11 @@ type EnterprisesAcknowledgeNotificationSetResource =
 -- returning the same notifications.
 --
 -- /See:/ 'enterprisesAcknowledgeNotificationSet' smart constructor.
-newtype EnterprisesAcknowledgeNotificationSet = EnterprisesAcknowledgeNotificationSet'
+newtype EnterprisesAcknowledgeNotificationSet =
+  EnterprisesAcknowledgeNotificationSet'
     { _eansNotificationSetId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesAcknowledgeNotificationSet' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ newtype EnterprisesAcknowledgeNotificationSet = EnterprisesAcknowledgeNotificati
 enterprisesAcknowledgeNotificationSet
     :: EnterprisesAcknowledgeNotificationSet
 enterprisesAcknowledgeNotificationSet =
-    EnterprisesAcknowledgeNotificationSet'
-    { _eansNotificationSetId = Nothing
-    }
+  EnterprisesAcknowledgeNotificationSet' {_eansNotificationSetId = Nothing}
 
 -- | The notification set ID as returned by Enterprises.PullNotificationSet.
 -- This must be provided.
@@ -80,7 +80,8 @@ eansNotificationSetId
       (\ s a -> s{_eansNotificationSetId = a})
 
 instance GoogleRequest
-         EnterprisesAcknowledgeNotificationSet where
+           EnterprisesAcknowledgeNotificationSet
+         where
         type Rs EnterprisesAcknowledgeNotificationSet = ()
         type Scopes EnterprisesAcknowledgeNotificationSet =
              '["https://www.googleapis.com/auth/androidenterprise"]

@@ -67,7 +67,8 @@ type ProjectsZonesOperationsListResource =
 -- | Lists all operations in a project in a specific zone or all zones.
 --
 -- /See:/ 'projectsZonesOperationsList' smart constructor.
-data ProjectsZonesOperationsList = ProjectsZonesOperationsList'
+data ProjectsZonesOperationsList =
+  ProjectsZonesOperationsList'
     { _pzolParent         :: !(Maybe Text)
     , _pzolXgafv          :: !(Maybe Xgafv)
     , _pzolUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsZonesOperationsList = ProjectsZonesOperationsList'
     , _pzolZone           :: !Text
     , _pzolProjectId      :: !Text
     , _pzolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesOperationsList' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsZonesOperationsList
     -> Text -- ^ 'pzolProjectId'
     -> ProjectsZonesOperationsList
 projectsZonesOperationsList pPzolZone_ pPzolProjectId_ =
-    ProjectsZonesOperationsList'
+  ProjectsZonesOperationsList'
     { _pzolParent = Nothing
     , _pzolXgafv = Nothing
     , _pzolUploadProtocol = Nothing

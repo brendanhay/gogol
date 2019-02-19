@@ -61,14 +61,16 @@ type CustomersConfigurationsDeleteResource =
 -- devices with the configuration applied.
 --
 -- /See:/ 'customersConfigurationsDelete' smart constructor.
-data CustomersConfigurationsDelete = CustomersConfigurationsDelete'
+data CustomersConfigurationsDelete =
+  CustomersConfigurationsDelete'
     { _ccdXgafv          :: !(Maybe Xgafv)
     , _ccdUploadProtocol :: !(Maybe Text)
     , _ccdAccessToken    :: !(Maybe Text)
     , _ccdUploadType     :: !(Maybe Text)
     , _ccdName           :: !Text
     , _ccdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersConfigurationsDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ customersConfigurationsDelete
     :: Text -- ^ 'ccdName'
     -> CustomersConfigurationsDelete
 customersConfigurationsDelete pCcdName_ =
-    CustomersConfigurationsDelete'
+  CustomersConfigurationsDelete'
     { _ccdXgafv = Nothing
     , _ccdUploadProtocol = Nothing
     , _ccdAccessToken = Nothing

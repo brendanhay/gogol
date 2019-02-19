@@ -65,14 +65,16 @@ type CalendarListListResource =
 -- | Returns the calendars on the user\'s calendar list.
 --
 -- /See:/ 'calendarListList' smart constructor.
-data CalendarListList = CalendarListList'
+data CalendarListList =
+  CalendarListList'
     { _cllSyncToken     :: !(Maybe Text)
     , _cllMinAccessRole :: !(Maybe CalendarListListMinAccessRole)
     , _cllShowDeleted   :: !(Maybe Bool)
     , _cllShowHidden    :: !(Maybe Bool)
     , _cllPageToken     :: !(Maybe Text)
     , _cllMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CalendarListList' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ data CalendarListList = CalendarListList'
 calendarListList
     :: CalendarListList
 calendarListList =
-    CalendarListList'
+  CalendarListList'
     { _cllSyncToken = Nothing
     , _cllMinAccessRole = Nothing
     , _cllShowDeleted = Nothing

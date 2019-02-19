@@ -68,7 +68,8 @@ type DebuggerDebuggeesBreakpointsSetResource =
 -- | Sets the breakpoint to the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsSet' smart constructor.
-data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet'
+data DebuggerDebuggeesBreakpointsSet =
+  DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv          :: !(Maybe Xgafv)
     , _ddbsUploadProtocol :: !(Maybe Text)
     , _ddbsAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet'
     , _ddbsDebuggeeId     :: !Text
     , _ddbsClientVersion  :: !(Maybe Text)
     , _ddbsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DebuggerDebuggeesBreakpointsSet' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ debuggerDebuggeesBreakpointsSet
     -> Text -- ^ 'ddbsDebuggeeId'
     -> DebuggerDebuggeesBreakpointsSet
 debuggerDebuggeesBreakpointsSet pDdbsPayload_ pDdbsDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsSet'
+  DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv = Nothing
     , _ddbsUploadProtocol = Nothing
     , _ddbsAccessToken = Nothing
@@ -161,7 +163,8 @@ ddbsCallback
   = lens _ddbsCallback (\ s a -> s{_ddbsCallback = a})
 
 instance GoogleRequest
-         DebuggerDebuggeesBreakpointsSet where
+           DebuggerDebuggeesBreakpointsSet
+         where
         type Rs DebuggerDebuggeesBreakpointsSet =
              SetBreakpointResponse
         type Scopes DebuggerDebuggeesBreakpointsSet =

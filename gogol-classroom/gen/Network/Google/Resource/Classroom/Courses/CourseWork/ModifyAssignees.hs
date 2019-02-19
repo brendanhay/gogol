@@ -78,7 +78,8 @@ type CoursesCourseWorkModifyAssigneesResource =
 -- does not exist.
 --
 -- /See:/ 'coursesCourseWorkModifyAssignees' smart constructor.
-data CoursesCourseWorkModifyAssignees = CoursesCourseWorkModifyAssignees'
+data CoursesCourseWorkModifyAssignees =
+  CoursesCourseWorkModifyAssignees'
     { _ccwmaXgafv          :: !(Maybe Xgafv)
     , _ccwmaUploadProtocol :: !(Maybe Text)
     , _ccwmaCourseId       :: !Text
@@ -87,7 +88,8 @@ data CoursesCourseWorkModifyAssignees = CoursesCourseWorkModifyAssignees'
     , _ccwmaPayload        :: !ModifyCourseWorkAssigneesRequest
     , _ccwmaId             :: !Text
     , _ccwmaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesCourseWorkModifyAssignees' with the minimum fields required to make a request.
 --
@@ -114,7 +116,7 @@ coursesCourseWorkModifyAssignees
     -> Text -- ^ 'ccwmaId'
     -> CoursesCourseWorkModifyAssignees
 coursesCourseWorkModifyAssignees pCcwmaCourseId_ pCcwmaPayload_ pCcwmaId_ =
-    CoursesCourseWorkModifyAssignees'
+  CoursesCourseWorkModifyAssignees'
     { _ccwmaXgafv = Nothing
     , _ccwmaUploadProtocol = Nothing
     , _ccwmaCourseId = pCcwmaCourseId_
@@ -171,7 +173,8 @@ ccwmaCallback
       (\ s a -> s{_ccwmaCallback = a})
 
 instance GoogleRequest
-         CoursesCourseWorkModifyAssignees where
+           CoursesCourseWorkModifyAssignees
+         where
         type Rs CoursesCourseWorkModifyAssignees = CourseWork
         type Scopes CoursesCourseWorkModifyAssignees =
              '["https://www.googleapis.com/auth/classroom.coursework.students"]

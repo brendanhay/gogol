@@ -67,7 +67,8 @@ type MattersListResource =
 -- | Lists matters the user has access to.
 --
 -- /See:/ 'mattersList' smart constructor.
-data MattersList = MattersList'
+data MattersList =
+  MattersList'
     { _mlXgafv          :: !(Maybe Xgafv)
     , _mlState          :: !(Maybe Text)
     , _mlUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data MattersList = MattersList'
     , _mlPageToken      :: !(Maybe Text)
     , _mlPageSize       :: !(Maybe (Textual Int32))
     , _mlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersList' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ data MattersList = MattersList'
 mattersList
     :: MattersList
 mattersList =
-    MattersList'
+  MattersList'
     { _mlXgafv = Nothing
     , _mlState = Nothing
     , _mlUploadProtocol = Nothing

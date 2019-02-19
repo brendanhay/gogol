@@ -60,14 +60,16 @@ type ProjectsLocationsTransferConfigsGetResource =
 -- | Returns information about a data transfer config.
 --
 -- /See:/ 'projectsLocationsTransferConfigsGet' smart constructor.
-data ProjectsLocationsTransferConfigsGet = ProjectsLocationsTransferConfigsGet'
+data ProjectsLocationsTransferConfigsGet =
+  ProjectsLocationsTransferConfigsGet'
     { _pltcgXgafv          :: !(Maybe Xgafv)
     , _pltcgUploadProtocol :: !(Maybe Text)
     , _pltcgAccessToken    :: !(Maybe Text)
     , _pltcgUploadType     :: !(Maybe Text)
     , _pltcgName           :: !Text
     , _pltcgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsTransferConfigsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsLocationsTransferConfigsGet
     :: Text -- ^ 'pltcgName'
     -> ProjectsLocationsTransferConfigsGet
 projectsLocationsTransferConfigsGet pPltcgName_ =
-    ProjectsLocationsTransferConfigsGet'
+  ProjectsLocationsTransferConfigsGet'
     { _pltcgXgafv = Nothing
     , _pltcgUploadProtocol = Nothing
     , _pltcgAccessToken = Nothing
@@ -133,7 +135,8 @@ pltcgCallback
       (\ s a -> s{_pltcgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTransferConfigsGet where
+           ProjectsLocationsTransferConfigsGet
+         where
         type Rs ProjectsLocationsTransferConfigsGet =
              TransferConfig
         type Scopes ProjectsLocationsTransferConfigsGet =

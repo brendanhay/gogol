@@ -59,14 +59,16 @@ type EnterprisesPoliciesGetResource =
 -- | Gets a policy.
 --
 -- /See:/ 'enterprisesPoliciesGet' smart constructor.
-data EnterprisesPoliciesGet = EnterprisesPoliciesGet'
+data EnterprisesPoliciesGet =
+  EnterprisesPoliciesGet'
     { _epgXgafv          :: !(Maybe Xgafv)
     , _epgUploadProtocol :: !(Maybe Text)
     , _epgAccessToken    :: !(Maybe Text)
     , _epgUploadType     :: !(Maybe Text)
     , _epgName           :: !Text
     , _epgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesPoliciesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ enterprisesPoliciesGet
     :: Text -- ^ 'epgName'
     -> EnterprisesPoliciesGet
 enterprisesPoliciesGet pEpgName_ =
-    EnterprisesPoliciesGet'
+  EnterprisesPoliciesGet'
     { _epgXgafv = Nothing
     , _epgUploadProtocol = Nothing
     , _epgAccessToken = Nothing

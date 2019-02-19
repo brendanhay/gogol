@@ -55,10 +55,12 @@ type TokensGetResource =
 -- | Get information about an access token issued by a user.
 --
 -- /See:/ 'tokensGet' smart constructor.
-data TokensGet = TokensGet'
+data TokensGet =
+  TokensGet'
     { _tgClientId :: !Text
     , _tgUserKey  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TokensGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ tokensGet
     -> Text -- ^ 'tgUserKey'
     -> TokensGet
 tokensGet pTgClientId_ pTgUserKey_ =
-    TokensGet'
-    { _tgClientId = pTgClientId_
-    , _tgUserKey = pTgUserKey_
-    }
+  TokensGet' {_tgClientId = pTgClientId_, _tgUserKey = pTgUserKey_}
 
 -- | The Client ID of the application the token is issued to.
 tgClientId :: Lens' TokensGet Text

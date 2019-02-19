@@ -61,11 +61,13 @@ type SnapshotsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'snapshotsSetIAMPolicy' smart constructor.
-data SnapshotsSetIAMPolicy = SnapshotsSetIAMPolicy'
+data SnapshotsSetIAMPolicy =
+  SnapshotsSetIAMPolicy'
     { _ssipProject  :: !Text
     , _ssipPayload  :: !GlobalSetPolicyRequest
     , _ssipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SnapshotsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ snapshotsSetIAMPolicy
     -> Text -- ^ 'ssipResource'
     -> SnapshotsSetIAMPolicy
 snapshotsSetIAMPolicy pSsipProject_ pSsipPayload_ pSsipResource_ =
-    SnapshotsSetIAMPolicy'
+  SnapshotsSetIAMPolicy'
     { _ssipProject = pSsipProject_
     , _ssipPayload = pSsipPayload_
     , _ssipResource = pSsipResource_

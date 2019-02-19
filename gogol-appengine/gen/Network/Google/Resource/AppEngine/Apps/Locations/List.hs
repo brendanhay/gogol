@@ -68,7 +68,8 @@ type AppsLocationsListResource =
 -- | Lists information about the supported locations for this service.
 --
 -- /See:/ 'appsLocationsList' smart constructor.
-data AppsLocationsList = AppsLocationsList'
+data AppsLocationsList =
+  AppsLocationsList'
     { _allXgafv          :: !(Maybe Xgafv)
     , _allUploadProtocol :: !(Maybe Text)
     , _allAccessToken    :: !(Maybe Text)
@@ -78,7 +79,8 @@ data AppsLocationsList = AppsLocationsList'
     , _allPageToken      :: !(Maybe Text)
     , _allPageSize       :: !(Maybe (Textual Int32))
     , _allCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsLocationsList' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ appsLocationsList
     :: Text -- ^ 'allAppsId'
     -> AppsLocationsList
 appsLocationsList pAllAppsId_ =
-    AppsLocationsList'
+  AppsLocationsList'
     { _allXgafv = Nothing
     , _allUploadProtocol = Nothing
     , _allAccessToken = Nothing

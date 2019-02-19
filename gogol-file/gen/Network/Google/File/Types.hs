@@ -157,12 +157,12 @@ import           Network.Google.File.Types.Product
 import           Network.Google.File.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Cloud Filestore API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Filestore API. This contains the host and root path used as a starting point for constructing service requests.
 fileService :: ServiceConfig
 fileService
-  = defaultService (ServiceId "file:v1beta1")
+  = defaultService (ServiceId "file:v1")
       "file.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

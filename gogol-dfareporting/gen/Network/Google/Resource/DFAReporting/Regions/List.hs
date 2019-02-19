@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'RegionsList' request conforms to.
 type RegionsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "regions" :>
@@ -53,9 +53,11 @@ type RegionsListResource =
 -- | Retrieves a list of regions.
 --
 -- /See:/ 'regionsList' smart constructor.
-newtype RegionsList = RegionsList'
+newtype RegionsList =
+  RegionsList'
     { _rProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionsList' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype RegionsList = RegionsList'
 regionsList
     :: Int64 -- ^ 'rProFileId'
     -> RegionsList
-regionsList pRProFileId_ =
-    RegionsList'
-    { _rProFileId = _Coerce # pRProFileId_
-    }
+regionsList pRProFileId_ = RegionsList' {_rProFileId = _Coerce # pRProFileId_}
 
 -- | User profile ID associated with this request.
 rProFileId :: Lens' RegionsList Int64

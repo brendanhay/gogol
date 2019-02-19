@@ -23,10 +23,12 @@ import           Network.Google.Prelude
 -- | Response when listing course aliases.
 --
 -- /See:/ 'listCourseAliasesResponse' smart constructor.
-data ListCourseAliasesResponse = ListCourseAliasesResponse'
+data ListCourseAliasesResponse =
+  ListCourseAliasesResponse'
     { _lcarNextPageToken :: !(Maybe Text)
     , _lcarAliases       :: !(Maybe [CourseAlias])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCourseAliasesResponse' with the minimum fields required to make a request.
 --
@@ -38,10 +40,8 @@ data ListCourseAliasesResponse = ListCourseAliasesResponse'
 listCourseAliasesResponse
     :: ListCourseAliasesResponse
 listCourseAliasesResponse =
-    ListCourseAliasesResponse'
-    { _lcarNextPageToken = Nothing
-    , _lcarAliases = Nothing
-    }
+  ListCourseAliasesResponse'
+    {_lcarNextPageToken = Nothing, _lcarAliases = Nothing}
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -75,7 +75,8 @@ instance ToJSON ListCourseAliasesResponse where
 -- | Course work created by a teacher for students of the course.
 --
 -- /See:/ 'courseWork' smart constructor.
-data CourseWork = CourseWork'
+data CourseWork =
+  CourseWork'
     { _cwCreationTime               :: !(Maybe DateTime')
     , _cwScheduledTime              :: !(Maybe DateTime')
     , _cwState                      :: !(Maybe CourseWorkState)
@@ -97,7 +98,8 @@ data CourseWork = CourseWork'
     , _cwAlternateLink              :: !(Maybe Text)
     , _cwAssignment                 :: !(Maybe Assignment)
     , _cwDescription                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CourseWork' with the minimum fields required to make a request.
 --
@@ -147,7 +149,7 @@ data CourseWork = CourseWork'
 courseWork
     :: CourseWork
 courseWork =
-    CourseWork'
+  CourseWork'
     { _cwCreationTime = Nothing
     , _cwScheduledTime = Nothing
     , _cwState = Nothing
@@ -371,13 +373,15 @@ instance ToJSON CourseWork where
 -- | The history of each grade on this submission.
 --
 -- /See:/ 'gradeHistory' smart constructor.
-data GradeHistory = GradeHistory'
+data GradeHistory =
+  GradeHistory'
     { _ghGradeTimestamp  :: !(Maybe DateTime')
     , _ghMaxPoints       :: !(Maybe (Textual Double))
     , _ghPointsEarned    :: !(Maybe (Textual Double))
     , _ghActorUserId     :: !(Maybe Text)
     , _ghGradeChangeType :: !(Maybe GradeHistoryGradeChangeType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GradeHistory' with the minimum fields required to make a request.
 --
@@ -395,7 +399,7 @@ data GradeHistory = GradeHistory'
 gradeHistory
     :: GradeHistory
 gradeHistory =
-    GradeHistory'
+  GradeHistory'
     { _ghGradeTimestamp = Nothing
     , _ghMaxPoints = Nothing
     , _ghPointsEarned = Nothing
@@ -460,9 +464,11 @@ instance ToJSON GradeHistory where
 -- \`COURSE_WORK_CHANGES\`.
 --
 -- /See:/ 'courseWorkChangesInfo' smart constructor.
-newtype CourseWorkChangesInfo = CourseWorkChangesInfo'
+newtype CourseWorkChangesInfo =
+  CourseWorkChangesInfo'
     { _cwciCourseId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CourseWorkChangesInfo' with the minimum fields required to make a request.
 --
@@ -471,10 +477,7 @@ newtype CourseWorkChangesInfo = CourseWorkChangesInfo'
 -- * 'cwciCourseId'
 courseWorkChangesInfo
     :: CourseWorkChangesInfo
-courseWorkChangesInfo =
-    CourseWorkChangesInfo'
-    { _cwciCourseId = Nothing
-    }
+courseWorkChangesInfo = CourseWorkChangesInfo' {_cwciCourseId = Nothing}
 
 -- | The \`course_id\` of the course to subscribe to work changes for.
 cwciCourseId :: Lens' CourseWorkChangesInfo (Maybe Text)
@@ -495,10 +498,12 @@ instance ToJSON CourseWorkChangesInfo where
 -- | Request to modify assignee mode and options of a coursework.
 --
 -- /See:/ 'modifyCourseWorkAssigneesRequest' smart constructor.
-data ModifyCourseWorkAssigneesRequest = ModifyCourseWorkAssigneesRequest'
+data ModifyCourseWorkAssigneesRequest =
+  ModifyCourseWorkAssigneesRequest'
     { _mcwarAssigneeMode                    :: !(Maybe ModifyCourseWorkAssigneesRequestAssigneeMode)
     , _mcwarModifyIndividualStudentsOptions :: !(Maybe ModifyIndividualStudentsOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyCourseWorkAssigneesRequest' with the minimum fields required to make a request.
 --
@@ -510,7 +515,7 @@ data ModifyCourseWorkAssigneesRequest = ModifyCourseWorkAssigneesRequest'
 modifyCourseWorkAssigneesRequest
     :: ModifyCourseWorkAssigneesRequest
 modifyCourseWorkAssigneesRequest =
-    ModifyCourseWorkAssigneesRequest'
+  ModifyCourseWorkAssigneesRequest'
     { _mcwarAssigneeMode = Nothing
     , _mcwarModifyIndividualStudentsOptions = Nothing
     }
@@ -551,12 +556,14 @@ instance ToJSON ModifyCourseWorkAssigneesRequest
 -- | Representation of a Google Drive file.
 --
 -- /See:/ 'driveFile' smart constructor.
-data DriveFile = DriveFile'
+data DriveFile =
+  DriveFile'
     { _dfThumbnailURL  :: !(Maybe Text)
     , _dfId            :: !(Maybe Text)
     , _dfTitle         :: !(Maybe Text)
     , _dfAlternateLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DriveFile' with the minimum fields required to make a request.
 --
@@ -572,7 +579,7 @@ data DriveFile = DriveFile'
 driveFile
     :: DriveFile
 driveFile =
-    DriveFile'
+  DriveFile'
     { _dfThumbnailURL = Nothing
     , _dfId = Nothing
     , _dfTitle = Nothing
@@ -620,13 +627,15 @@ instance ToJSON DriveFile where
 -- specified email address.
 --
 -- /See:/ 'guardianInvitation' smart constructor.
-data GuardianInvitation = GuardianInvitation'
+data GuardianInvitation =
+  GuardianInvitation'
     { _giCreationTime        :: !(Maybe DateTime')
     , _giStudentId           :: !(Maybe Text)
     , _giState               :: !(Maybe GuardianInvitationState)
     , _giInvitationId        :: !(Maybe Text)
     , _giInvitedEmailAddress :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GuardianInvitation' with the minimum fields required to make a request.
 --
@@ -644,7 +653,7 @@ data GuardianInvitation = GuardianInvitation'
 guardianInvitation
     :: GuardianInvitation
 guardianInvitation =
-    GuardianInvitation'
+  GuardianInvitation'
     { _giCreationTime = Nothing
     , _giStudentId = Nothing
     , _giState = Nothing
@@ -706,11 +715,13 @@ instance ToJSON GuardianInvitation where
 -- For example: \"all roster changes for a domain\".
 --
 -- /See:/ 'feed' smart constructor.
-data Feed = Feed'
+data Feed =
+  Feed'
     { _fCourseWorkChangesInfo   :: !(Maybe CourseWorkChangesInfo)
     , _fFeedType                :: !(Maybe FeedFeedType)
     , _fCourseRosterChangesInfo :: !(Maybe CourseRosterChangesInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Feed' with the minimum fields required to make a request.
 --
@@ -724,7 +735,7 @@ data Feed = Feed'
 feed
     :: Feed
 feed =
-    Feed'
+  Feed'
     { _fCourseWorkChangesInfo = Nothing
     , _fFeedType = Nothing
     , _fCourseRosterChangesInfo = Nothing
@@ -773,10 +784,12 @@ instance ToJSON Feed where
 -- | Request to modify assignee mode and options of an announcement.
 --
 -- /See:/ 'modifyAnnouncementAssigneesRequest' smart constructor.
-data ModifyAnnouncementAssigneesRequest = ModifyAnnouncementAssigneesRequest'
+data ModifyAnnouncementAssigneesRequest =
+  ModifyAnnouncementAssigneesRequest'
     { _maarAssigneeMode                    :: !(Maybe ModifyAnnouncementAssigneesRequestAssigneeMode)
     , _maarModifyIndividualStudentsOptions :: !(Maybe ModifyIndividualStudentsOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyAnnouncementAssigneesRequest' with the minimum fields required to make a request.
 --
@@ -788,7 +801,7 @@ data ModifyAnnouncementAssigneesRequest = ModifyAnnouncementAssigneesRequest'
 modifyAnnouncementAssigneesRequest
     :: ModifyAnnouncementAssigneesRequest
 modifyAnnouncementAssigneesRequest =
-    ModifyAnnouncementAssigneesRequest'
+  ModifyAnnouncementAssigneesRequest'
     { _maarAssigneeMode = Nothing
     , _maarModifyIndividualStudentsOptions = Nothing
     }
@@ -830,8 +843,8 @@ instance ToJSON ModifyAnnouncementAssigneesRequest
 --
 -- /See:/ 'returnStudentSubmissionRequest' smart constructor.
 data ReturnStudentSubmissionRequest =
-    ReturnStudentSubmissionRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ReturnStudentSubmissionRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReturnStudentSubmissionRequest' with the minimum fields required to make a request.
 --
@@ -852,8 +865,8 @@ instance ToJSON ReturnStudentSubmissionRequest where
 --
 -- /See:/ 'reclaimStudentSubmissionRequest' smart constructor.
 data ReclaimStudentSubmissionRequest =
-    ReclaimStudentSubmissionRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ReclaimStudentSubmissionRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReclaimStudentSubmissionRequest' with the minimum fields required to make a request.
 --
@@ -873,10 +886,12 @@ instance ToJSON ReclaimStudentSubmissionRequest where
 -- | Response when listing course work.
 --
 -- /See:/ 'listCourseWorkResponse' smart constructor.
-data ListCourseWorkResponse = ListCourseWorkResponse'
+data ListCourseWorkResponse =
+  ListCourseWorkResponse'
     { _lcwrCourseWork    :: !(Maybe [CourseWork])
     , _lcwrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCourseWorkResponse' with the minimum fields required to make a request.
 --
@@ -888,10 +903,8 @@ data ListCourseWorkResponse = ListCourseWorkResponse'
 listCourseWorkResponse
     :: ListCourseWorkResponse
 listCourseWorkResponse =
-    ListCourseWorkResponse'
-    { _lcwrCourseWork = Nothing
-    , _lcwrNextPageToken = Nothing
-    }
+  ListCourseWorkResponse'
+    {_lcwrCourseWork = Nothing, _lcwrNextPageToken = Nothing}
 
 -- | Course work items that match the request.
 lcwrCourseWork :: Lens' ListCourseWorkResponse [CourseWork]
@@ -931,8 +944,8 @@ instance ToJSON ListCourseWorkResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -949,9 +962,11 @@ instance ToJSON Empty where
 -- | Global user permission description.
 --
 -- /See:/ 'globalPermission' smart constructor.
-newtype GlobalPermission = GlobalPermission'
+newtype GlobalPermission =
+  GlobalPermission'
     { _gpPermission :: Maybe GlobalPermissionPermission
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GlobalPermission' with the minimum fields required to make a request.
 --
@@ -960,10 +975,7 @@ newtype GlobalPermission = GlobalPermission'
 -- * 'gpPermission'
 globalPermission
     :: GlobalPermission
-globalPermission =
-    GlobalPermission'
-    { _gpPermission = Nothing
-    }
+globalPermission = GlobalPermission' {_gpPermission = Nothing}
 
 -- | Permission value.
 gpPermission :: Lens' GlobalPermission (Maybe GlobalPermissionPermission)
@@ -983,11 +995,13 @@ instance ToJSON GlobalPermission where
 -- | URL item.
 --
 -- /See:/ 'link' smart constructor.
-data Link = Link'
+data Link =
+  Link'
     { _lThumbnailURL :: !(Maybe Text)
     , _lURL          :: !(Maybe Text)
     , _lTitle        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Link' with the minimum fields required to make a request.
 --
@@ -1000,12 +1014,7 @@ data Link = Link'
 -- * 'lTitle'
 link
     :: Link
-link =
-    Link'
-    { _lThumbnailURL = Nothing
-    , _lURL = Nothing
-    , _lTitle = Nothing
-    }
+link = Link' {_lThumbnailURL = Nothing, _lURL = Nothing, _lTitle = Nothing}
 
 -- | URL of a thumbnail image of the target URL. Read-only.
 lThumbnailURL :: Lens' Link (Maybe Text)
@@ -1041,9 +1050,11 @@ instance ToJSON Link where
 -- and only if \`assigneeMode\` is \`INDIVIDUAL_STUDENTS\`.
 --
 -- /See:/ 'individualStudentsOptions' smart constructor.
-newtype IndividualStudentsOptions = IndividualStudentsOptions'
+newtype IndividualStudentsOptions =
+  IndividualStudentsOptions'
     { _isoStudentIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IndividualStudentsOptions' with the minimum fields required to make a request.
 --
@@ -1053,9 +1064,7 @@ newtype IndividualStudentsOptions = IndividualStudentsOptions'
 individualStudentsOptions
     :: IndividualStudentsOptions
 individualStudentsOptions =
-    IndividualStudentsOptions'
-    { _isoStudentIds = Nothing
-    }
+  IndividualStudentsOptions' {_isoStudentIds = Nothing}
 
 -- | Identifiers for the students that have access to the
 -- coursework\/announcement.
@@ -1081,9 +1090,11 @@ instance ToJSON IndividualStudentsOptions where
 -- | Student work for an assignment.
 --
 -- /See:/ 'assignmentSubmission' smart constructor.
-newtype AssignmentSubmission = AssignmentSubmission'
+newtype AssignmentSubmission =
+  AssignmentSubmission'
     { _asAttachments :: Maybe [Attachment]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssignmentSubmission' with the minimum fields required to make a request.
 --
@@ -1092,10 +1103,7 @@ newtype AssignmentSubmission = AssignmentSubmission'
 -- * 'asAttachments'
 assignmentSubmission
     :: AssignmentSubmission
-assignmentSubmission =
-    AssignmentSubmission'
-    { _asAttachments = Nothing
-    }
+assignmentSubmission = AssignmentSubmission' {_asAttachments = Nothing}
 
 -- | Attachments added by the student. Drive files that correspond to
 -- materials with a share mode of STUDENT_COPY may not exist yet if the
@@ -1125,9 +1133,11 @@ instance ToJSON AssignmentSubmission where
 -- | Request to modify the attachments of a student submission.
 --
 -- /See:/ 'modifyAttachmentsRequest' smart constructor.
-newtype ModifyAttachmentsRequest = ModifyAttachmentsRequest'
+newtype ModifyAttachmentsRequest =
+  ModifyAttachmentsRequest'
     { _marAddAttachments :: Maybe [Attachment]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyAttachmentsRequest' with the minimum fields required to make a request.
 --
@@ -1137,9 +1147,7 @@ newtype ModifyAttachmentsRequest = ModifyAttachmentsRequest'
 modifyAttachmentsRequest
     :: ModifyAttachmentsRequest
 modifyAttachmentsRequest =
-    ModifyAttachmentsRequest'
-    { _marAddAttachments = Nothing
-    }
+  ModifyAttachmentsRequest' {_marAddAttachments = Nothing}
 
 -- | Attachments to add. A student submission may not have more than 20
 -- attachments. Form attachments are not supported.
@@ -1166,10 +1174,12 @@ instance ToJSON ModifyAttachmentsRequest where
 -- | Response when listing course work.
 --
 -- /See:/ 'listAnnouncementsResponse' smart constructor.
-data ListAnnouncementsResponse = ListAnnouncementsResponse'
+data ListAnnouncementsResponse =
+  ListAnnouncementsResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larAnnouncements :: !(Maybe [Announcement])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAnnouncementsResponse' with the minimum fields required to make a request.
 --
@@ -1181,10 +1191,8 @@ data ListAnnouncementsResponse = ListAnnouncementsResponse'
 listAnnouncementsResponse
     :: ListAnnouncementsResponse
 listAnnouncementsResponse =
-    ListAnnouncementsResponse'
-    { _larNextPageToken = Nothing
-    , _larAnnouncements = Nothing
-    }
+  ListAnnouncementsResponse'
+    {_larNextPageToken = Nothing, _larAnnouncements = Nothing}
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -1219,10 +1227,12 @@ instance ToJSON ListAnnouncementsResponse where
 -- | Response when listing student submissions.
 --
 -- /See:/ 'listStudentSubmissionsResponse' smart constructor.
-data ListStudentSubmissionsResponse = ListStudentSubmissionsResponse'
+data ListStudentSubmissionsResponse =
+  ListStudentSubmissionsResponse'
     { _lssrNextPageToken      :: !(Maybe Text)
     , _lssrStudentSubmissions :: !(Maybe [StudentSubmission])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStudentSubmissionsResponse' with the minimum fields required to make a request.
 --
@@ -1234,10 +1244,8 @@ data ListStudentSubmissionsResponse = ListStudentSubmissionsResponse'
 listStudentSubmissionsResponse
     :: ListStudentSubmissionsResponse
 listStudentSubmissionsResponse =
-    ListStudentSubmissionsResponse'
-    { _lssrNextPageToken = Nothing
-    , _lssrStudentSubmissions = Nothing
-    }
+  ListStudentSubmissionsResponse'
+    {_lssrNextPageToken = Nothing, _lssrStudentSubmissions = Nothing}
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -1275,12 +1283,14 @@ instance ToJSON ListStudentSubmissionsResponse where
 -- \`form\` field is not supported.
 --
 -- /See:/ 'material' smart constructor.
-data Material = Material'
+data Material =
+  Material'
     { _mDriveFile    :: !(Maybe SharedDriveFile)
     , _mLink         :: !(Maybe Link)
     , _mYouTubeVideo :: !(Maybe YouTubeVideo)
     , _mForm         :: !(Maybe Form)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Material' with the minimum fields required to make a request.
 --
@@ -1296,7 +1306,7 @@ data Material = Material'
 material
     :: Material
 material =
-    Material'
+  Material'
     { _mDriveFile = Nothing
     , _mLink = Nothing
     , _mYouTubeVideo = Nothing
@@ -1344,9 +1354,11 @@ instance ToJSON Material where
 -- | Student work for a multiple-choice question.
 --
 -- /See:/ 'multipleChoiceSubmission' smart constructor.
-newtype MultipleChoiceSubmission = MultipleChoiceSubmission'
+newtype MultipleChoiceSubmission =
+  MultipleChoiceSubmission'
     { _mcsAnswer :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MultipleChoiceSubmission' with the minimum fields required to make a request.
 --
@@ -1355,10 +1367,7 @@ newtype MultipleChoiceSubmission = MultipleChoiceSubmission'
 -- * 'mcsAnswer'
 multipleChoiceSubmission
     :: MultipleChoiceSubmission
-multipleChoiceSubmission =
-    MultipleChoiceSubmission'
-    { _mcsAnswer = Nothing
-    }
+multipleChoiceSubmission = MultipleChoiceSubmission' {_mcsAnswer = Nothing}
 
 -- | Student\'s select choice.
 mcsAnswer :: Lens' MultipleChoiceSubmission (Maybe Text)
@@ -1378,10 +1387,12 @@ instance ToJSON MultipleChoiceSubmission where
 -- | Response when listing invitations.
 --
 -- /See:/ 'listInvitationsResponse' smart constructor.
-data ListInvitationsResponse = ListInvitationsResponse'
+data ListInvitationsResponse =
+  ListInvitationsResponse'
     { _lirNextPageToken :: !(Maybe Text)
     , _lirInvitations   :: !(Maybe [Invitation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListInvitationsResponse' with the minimum fields required to make a request.
 --
@@ -1393,10 +1404,8 @@ data ListInvitationsResponse = ListInvitationsResponse'
 listInvitationsResponse
     :: ListInvitationsResponse
 listInvitationsResponse =
-    ListInvitationsResponse'
-    { _lirNextPageToken = Nothing
-    , _lirInvitations = Nothing
-    }
+  ListInvitationsResponse'
+    {_lirNextPageToken = Nothing, _lirInvitations = Nothing}
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -1432,12 +1441,14 @@ instance ToJSON ListInvitationsResponse where
 -- guardian may receive information about the student\'s course work.
 --
 -- /See:/ 'guardian' smart constructor.
-data Guardian = Guardian'
+data Guardian =
+  Guardian'
     { _gStudentId           :: !(Maybe Text)
     , _gGuardianId          :: !(Maybe Text)
     , _gInvitedEmailAddress :: !(Maybe Text)
     , _gGuardianProFile     :: !(Maybe UserProFile)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Guardian' with the minimum fields required to make a request.
 --
@@ -1453,7 +1464,7 @@ data Guardian = Guardian'
 guardian
     :: Guardian
 guardian =
-    Guardian'
+  Guardian'
     { _gStudentId = Nothing
     , _gGuardianId = Nothing
     , _gInvitedEmailAddress = Nothing
@@ -1504,12 +1515,14 @@ instance ToJSON Guardian where
 -- | A material attached to a course as part of a material set.
 --
 -- /See:/ 'courseMaterial' smart constructor.
-data CourseMaterial = CourseMaterial'
+data CourseMaterial =
+  CourseMaterial'
     { _cmDriveFile    :: !(Maybe DriveFile)
     , _cmLink         :: !(Maybe Link)
     , _cmYouTubeVideo :: !(Maybe YouTubeVideo)
     , _cmForm         :: !(Maybe Form)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CourseMaterial' with the minimum fields required to make a request.
 --
@@ -1525,7 +1538,7 @@ data CourseMaterial = CourseMaterial'
 courseMaterial
     :: CourseMaterial
 courseMaterial =
-    CourseMaterial'
+  CourseMaterial'
     { _cmDriveFile = Nothing
     , _cmLink = Nothing
     , _cmYouTubeVideo = Nothing
@@ -1572,9 +1585,11 @@ instance ToJSON CourseMaterial where
 -- | Student work for a short answer question.
 --
 -- /See:/ 'shortAnswerSubmission' smart constructor.
-newtype ShortAnswerSubmission = ShortAnswerSubmission'
+newtype ShortAnswerSubmission =
+  ShortAnswerSubmission'
     { _sasAnswer :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShortAnswerSubmission' with the minimum fields required to make a request.
 --
@@ -1583,10 +1598,7 @@ newtype ShortAnswerSubmission = ShortAnswerSubmission'
 -- * 'sasAnswer'
 shortAnswerSubmission
     :: ShortAnswerSubmission
-shortAnswerSubmission =
-    ShortAnswerSubmission'
-    { _sasAnswer = Nothing
-    }
+shortAnswerSubmission = ShortAnswerSubmission' {_sasAnswer = Nothing}
 
 -- | Student response to a short-answer question.
 sasAnswer :: Lens' ShortAnswerSubmission (Maybe Text)
@@ -1605,12 +1617,14 @@ instance ToJSON ShortAnswerSubmission where
 -- | An invitation to join a course.
 --
 -- /See:/ 'invitation' smart constructor.
-data Invitation = Invitation'
+data Invitation =
+  Invitation'
     { _iCourseId :: !(Maybe Text)
     , _iUserId   :: !(Maybe Text)
     , _iRole     :: !(Maybe InvitationRole)
     , _iId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Invitation' with the minimum fields required to make a request.
 --
@@ -1626,12 +1640,8 @@ data Invitation = Invitation'
 invitation
     :: Invitation
 invitation =
-    Invitation'
-    { _iCourseId = Nothing
-    , _iUserId = Nothing
-    , _iRole = Nothing
-    , _iId = Nothing
-    }
+  Invitation'
+    {_iCourseId = Nothing, _iUserId = Nothing, _iRole = Nothing, _iId = Nothing}
 
 -- | Identifier of the course to invite the user to.
 iCourseId :: Lens' Invitation (Maybe Text)
@@ -1675,12 +1685,14 @@ instance ToJSON Invitation where
 -- setting the \`form\` field is not supported.
 --
 -- /See:/ 'attachment' smart constructor.
-data Attachment = Attachment'
+data Attachment =
+  Attachment'
     { _aDriveFile    :: !(Maybe DriveFile)
     , _aLink         :: !(Maybe Link)
     , _aYouTubeVideo :: !(Maybe YouTubeVideo)
     , _aForm         :: !(Maybe Form)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Attachment' with the minimum fields required to make a request.
 --
@@ -1696,7 +1708,7 @@ data Attachment = Attachment'
 attachment
     :: Attachment
 attachment =
-    Attachment'
+  Attachment'
     { _aDriveFile = Nothing
     , _aLink = Nothing
     , _aYouTubeVideo = Nothing
@@ -1743,7 +1755,8 @@ instance ToJSON Attachment where
 -- | Announcement created by a teacher for students of the course
 --
 -- /See:/ 'announcement' smart constructor.
-data Announcement = Announcement'
+data Announcement =
+  Announcement'
     { _aCreationTime              :: !(Maybe DateTime')
     , _aScheduledTime             :: !(Maybe DateTime')
     , _aState                     :: !(Maybe AnnouncementState)
@@ -1756,7 +1769,8 @@ data Announcement = Announcement'
     , _aId                        :: !(Maybe Text)
     , _aCreatorUserId             :: !(Maybe Text)
     , _aAlternateLink             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Announcement' with the minimum fields required to make a request.
 --
@@ -1788,7 +1802,7 @@ data Announcement = Announcement'
 announcement
     :: Announcement
 announcement =
-    Announcement'
+  Announcement'
     { _aCreationTime = Nothing
     , _aScheduledTime = Nothing
     , _aState = Nothing
@@ -1921,7 +1935,8 @@ instance ToJSON Announcement where
 -- creation time or update time.
 --
 -- /See:/ 'studentSubmission' smart constructor.
-data StudentSubmission = StudentSubmission'
+data StudentSubmission =
+  StudentSubmission'
     { _ssCreationTime             :: !(Maybe DateTime')
     , _ssLate                     :: !(Maybe Bool)
     , _ssState                    :: !(Maybe StudentSubmissionState)
@@ -1939,7 +1954,8 @@ data StudentSubmission = StudentSubmission'
     , _ssDraftGrade               :: !(Maybe (Textual Double))
     , _ssAlternateLink            :: !(Maybe Text)
     , _ssCourseWorkId             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StudentSubmission' with the minimum fields required to make a request.
 --
@@ -1981,7 +1997,7 @@ data StudentSubmission = StudentSubmission'
 studentSubmission
     :: StudentSubmission
 studentSubmission =
-    StudentSubmission'
+  StudentSubmission'
     { _ssCreationTime = Nothing
     , _ssLate = Nothing
     , _ssState = Nothing
@@ -2161,10 +2177,12 @@ instance ToJSON StudentSubmission where
 -- | Response when listing guardians.
 --
 -- /See:/ 'listGuardiansResponse' smart constructor.
-data ListGuardiansResponse = ListGuardiansResponse'
+data ListGuardiansResponse =
+  ListGuardiansResponse'
     { _lgrNextPageToken :: !(Maybe Text)
     , _lgrGuardians     :: !(Maybe [Guardian])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGuardiansResponse' with the minimum fields required to make a request.
 --
@@ -2176,10 +2194,7 @@ data ListGuardiansResponse = ListGuardiansResponse'
 listGuardiansResponse
     :: ListGuardiansResponse
 listGuardiansResponse =
-    ListGuardiansResponse'
-    { _lgrNextPageToken = Nothing
-    , _lgrGuardians = Nothing
-    }
+  ListGuardiansResponse' {_lgrNextPageToken = Nothing, _lgrGuardians = Nothing}
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -2221,11 +2236,13 @@ instance ToJSON ListGuardiansResponse where
 -- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date'
+data Date =
+  Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -2238,12 +2255,7 @@ data Date = Date'
 -- * 'dMonth'
 date
     :: Date
-date =
-    Date'
-    { _dDay = Nothing
-    , _dYear = Nothing
-    , _dMonth = Nothing
-    }
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -2284,12 +2296,14 @@ instance ToJSON Date where
 -- | YouTube video item.
 --
 -- /See:/ 'youTubeVideo' smart constructor.
-data YouTubeVideo = YouTubeVideo'
+data YouTubeVideo =
+  YouTubeVideo'
     { _ytvThumbnailURL  :: !(Maybe Text)
     , _ytvId            :: !(Maybe Text)
     , _ytvTitle         :: !(Maybe Text)
     , _ytvAlternateLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'YouTubeVideo' with the minimum fields required to make a request.
 --
@@ -2305,7 +2319,7 @@ data YouTubeVideo = YouTubeVideo'
 youTubeVideo
     :: YouTubeVideo
 youTubeVideo =
-    YouTubeVideo'
+  YouTubeVideo'
     { _ytvThumbnailURL = Nothing
     , _ytvId = Nothing
     , _ytvTitle = Nothing
@@ -2352,11 +2366,13 @@ instance ToJSON YouTubeVideo where
 -- | Teacher of a course.
 --
 -- /See:/ 'teacher' smart constructor.
-data Teacher = Teacher'
+data Teacher =
+  Teacher'
     { _tCourseId :: !(Maybe Text)
     , _tProFile  :: !(Maybe UserProFile)
     , _tUserId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Teacher' with the minimum fields required to make a request.
 --
@@ -2370,11 +2386,7 @@ data Teacher = Teacher'
 teacher
     :: Teacher
 teacher =
-    Teacher'
-    { _tCourseId = Nothing
-    , _tProFile = Nothing
-    , _tUserId = Nothing
-    }
+  Teacher' {_tCourseId = Nothing, _tProFile = Nothing, _tUserId = Nothing}
 
 -- | Identifier of the course. Read-only.
 tCourseId :: Lens' Teacher (Maybe Text)
@@ -2413,10 +2425,12 @@ instance ToJSON Teacher where
 -- information relating to the course as a whole.
 --
 -- /See:/ 'courseMaterialSet' smart constructor.
-data CourseMaterialSet = CourseMaterialSet'
+data CourseMaterialSet =
+  CourseMaterialSet'
     { _cmsMaterials :: !(Maybe [CourseMaterial])
     , _cmsTitle     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CourseMaterialSet' with the minimum fields required to make a request.
 --
@@ -2428,10 +2442,7 @@ data CourseMaterialSet = CourseMaterialSet'
 courseMaterialSet
     :: CourseMaterialSet
 courseMaterialSet =
-    CourseMaterialSet'
-    { _cmsMaterials = Nothing
-    , _cmsTitle = Nothing
-    }
+  CourseMaterialSet' {_cmsMaterials = Nothing, _cmsTitle = Nothing}
 
 -- | Materials attached to this set.
 cmsMaterials :: Lens' CourseMaterialSet [CourseMaterial]
@@ -2461,11 +2472,13 @@ instance ToJSON CourseMaterialSet where
 -- | Details of the user\'s name.
 --
 -- /See:/ 'name' smart constructor.
-data Name = Name'
+data Name =
+  Name'
     { _nGivenName  :: !(Maybe Text)
     , _nFullName   :: !(Maybe Text)
     , _nFamilyName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Name' with the minimum fields required to make a request.
 --
@@ -2479,11 +2492,7 @@ data Name = Name'
 name
     :: Name
 name =
-    Name'
-    { _nGivenName = Nothing
-    , _nFullName = Nothing
-    , _nFamilyName = Nothing
-    }
+  Name' {_nGivenName = Nothing, _nFullName = Nothing, _nFamilyName = Nothing}
 
 -- | The user\'s first name. Read-only.
 nGivenName :: Lens' Name (Maybe Text)
@@ -2520,10 +2529,12 @@ instance ToJSON Name where
 -- | Response when listing courses.
 --
 -- /See:/ 'listCoursesResponse' smart constructor.
-data ListCoursesResponse = ListCoursesResponse'
+data ListCoursesResponse =
+  ListCoursesResponse'
     { _lcrNextPageToken :: !(Maybe Text)
     , _lcrCourses       :: !(Maybe [Course])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCoursesResponse' with the minimum fields required to make a request.
 --
@@ -2535,10 +2546,7 @@ data ListCoursesResponse = ListCoursesResponse'
 listCoursesResponse
     :: ListCoursesResponse
 listCoursesResponse =
-    ListCoursesResponse'
-    { _lcrNextPageToken = Nothing
-    , _lcrCourses = Nothing
-    }
+  ListCoursesResponse' {_lcrNextPageToken = Nothing, _lcrCourses = Nothing}
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -2573,8 +2581,8 @@ instance ToJSON ListCoursesResponse where
 --
 -- /See:/ 'turnInStudentSubmissionRequest' smart constructor.
 data TurnInStudentSubmissionRequest =
-    TurnInStudentSubmissionRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  TurnInStudentSubmissionRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnInStudentSubmissionRequest' with the minimum fields required to make a request.
 --
@@ -2594,14 +2602,16 @@ instance ToJSON TurnInStudentSubmissionRequest where
 -- | Global information for a user.
 --
 -- /See:/ 'userProFile' smart constructor.
-data UserProFile = UserProFile'
+data UserProFile =
+  UserProFile'
     { _upfPhotoURL        :: !(Maybe Text)
     , _upfVerifiedTeacher :: !(Maybe Bool)
     , _upfName            :: !(Maybe Name)
     , _upfEmailAddress    :: !(Maybe Text)
     , _upfId              :: !(Maybe Text)
     , _upfPermissions     :: !(Maybe [GlobalPermission])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserProFile' with the minimum fields required to make a request.
 --
@@ -2621,7 +2631,7 @@ data UserProFile = UserProFile'
 userProFile
     :: UserProFile
 userProFile =
-    UserProFile'
+  UserProFile'
     { _upfPhotoURL = Nothing
     , _upfVerifiedTeacher = Nothing
     , _upfName = Nothing
@@ -2691,11 +2701,13 @@ instance ToJSON UserProFile where
 -- | Representation of a Google Drive folder.
 --
 -- /See:/ 'driveFolder' smart constructor.
-data DriveFolder = DriveFolder'
+data DriveFolder =
+  DriveFolder'
     { _dId            :: !(Maybe Text)
     , _dTitle         :: !(Maybe Text)
     , _dAlternateLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DriveFolder' with the minimum fields required to make a request.
 --
@@ -2709,11 +2721,7 @@ data DriveFolder = DriveFolder'
 driveFolder
     :: DriveFolder
 driveFolder =
-    DriveFolder'
-    { _dId = Nothing
-    , _dTitle = Nothing
-    , _dAlternateLink = Nothing
-    }
+  DriveFolder' {_dId = Nothing, _dTitle = Nothing, _dAlternateLink = Nothing}
 
 -- | Drive API resource ID.
 dId :: Lens' DriveFolder (Maybe Text)
@@ -2748,10 +2756,12 @@ instance ToJSON DriveFolder where
 -- histories.
 --
 -- /See:/ 'submissionHistory' smart constructor.
-data SubmissionHistory = SubmissionHistory'
+data SubmissionHistory =
+  SubmissionHistory'
     { _shGradeHistory :: !(Maybe GradeHistory)
     , _shStateHistory :: !(Maybe StateHistory)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubmissionHistory' with the minimum fields required to make a request.
 --
@@ -2763,10 +2773,7 @@ data SubmissionHistory = SubmissionHistory'
 submissionHistory
     :: SubmissionHistory
 submissionHistory =
-    SubmissionHistory'
-    { _shGradeHistory = Nothing
-    , _shStateHistory = Nothing
-    }
+  SubmissionHistory' {_shGradeHistory = Nothing, _shStateHistory = Nothing}
 
 -- | The grade history information of the submission, if present.
 shGradeHistory :: Lens' SubmissionHistory (Maybe GradeHistory)
@@ -2797,11 +2804,13 @@ instance ToJSON SubmissionHistory where
 -- | The history of each state this submission has been in.
 --
 -- /See:/ 'stateHistory' smart constructor.
-data StateHistory = StateHistory'
+data StateHistory =
+  StateHistory'
     { _shState          :: !(Maybe StateHistoryState)
     , _shActorUserId    :: !(Maybe Text)
     , _shStateTimestamp :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StateHistory' with the minimum fields required to make a request.
 --
@@ -2815,11 +2824,8 @@ data StateHistory = StateHistory'
 stateHistory
     :: StateHistory
 stateHistory =
-    StateHistory'
-    { _shState = Nothing
-    , _shActorUserId = Nothing
-    , _shStateTimestamp = Nothing
-    }
+  StateHistory'
+    {_shState = Nothing, _shActorUserId = Nothing, _shStateTimestamp = Nothing}
 
 -- | The workflow pipeline stage.
 shState :: Lens' StateHistory (Maybe StateHistoryState)
@@ -2857,9 +2863,11 @@ instance ToJSON StateHistory where
 -- | Additional details for multiple-choice questions.
 --
 -- /See:/ 'multipleChoiceQuestion' smart constructor.
-newtype MultipleChoiceQuestion = MultipleChoiceQuestion'
+newtype MultipleChoiceQuestion =
+  MultipleChoiceQuestion'
     { _mcqChoices :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MultipleChoiceQuestion' with the minimum fields required to make a request.
 --
@@ -2868,10 +2876,7 @@ newtype MultipleChoiceQuestion = MultipleChoiceQuestion'
 -- * 'mcqChoices'
 multipleChoiceQuestion
     :: MultipleChoiceQuestion
-multipleChoiceQuestion =
-    MultipleChoiceQuestion'
-    { _mcqChoices = Nothing
-    }
+multipleChoiceQuestion = MultipleChoiceQuestion' {_mcqChoices = Nothing}
 
 -- | Possible choices.
 mcqChoices :: Lens' MultipleChoiceQuestion [Text]
@@ -2894,7 +2899,8 @@ instance ToJSON MultipleChoiceQuestion where
 -- | A Course in Classroom.
 --
 -- /See:/ 'course' smart constructor.
-data Course = Course'
+data Course =
+  Course'
     { _couCreationTime       :: !(Maybe DateTime')
     , _couRoom               :: !(Maybe Text)
     , _couCourseMaterialSets :: !(Maybe [CourseMaterialSet])
@@ -2913,7 +2919,8 @@ data Course = Course'
     , _couDescription        :: !(Maybe Text)
     , _couDescriptionHeading :: !(Maybe Text)
     , _couSection            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Course' with the minimum fields required to make a request.
 --
@@ -2957,7 +2964,7 @@ data Course = Course'
 course
     :: Course
 course =
-    Course'
+  Course'
     { _couCreationTime = Nothing
     , _couRoom = Nothing
     , _couCourseMaterialSets = Nothing
@@ -3166,12 +3173,14 @@ instance ToJSON Course where
 -- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'timeOfDay' smart constructor.
-data TimeOfDay' = TimeOfDay''
+data TimeOfDay' =
+  TimeOfDay''
     { _todNanos   :: !(Maybe (Textual Int32))
     , _todHours   :: !(Maybe (Textual Int32))
     , _todMinutes :: !(Maybe (Textual Int32))
     , _todSeconds :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
 --
@@ -3187,7 +3196,7 @@ data TimeOfDay' = TimeOfDay''
 timeOfDay
     :: TimeOfDay'
 timeOfDay =
-    TimeOfDay''
+  TimeOfDay''
     { _todNanos = Nothing
     , _todHours = Nothing
     , _todMinutes = Nothing
@@ -3242,10 +3251,12 @@ instance ToJSON TimeOfDay' where
 -- | Response when listing guardian invitations.
 --
 -- /See:/ 'listGuardianInvitationsResponse' smart constructor.
-data ListGuardianInvitationsResponse = ListGuardianInvitationsResponse'
+data ListGuardianInvitationsResponse =
+  ListGuardianInvitationsResponse'
     { _lgirNextPageToken       :: !(Maybe Text)
     , _lgirGuardianInvitations :: !(Maybe [GuardianInvitation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGuardianInvitationsResponse' with the minimum fields required to make a request.
 --
@@ -3257,10 +3268,8 @@ data ListGuardianInvitationsResponse = ListGuardianInvitationsResponse'
 listGuardianInvitationsResponse
     :: ListGuardianInvitationsResponse
 listGuardianInvitationsResponse =
-    ListGuardianInvitationsResponse'
-    { _lgirNextPageToken = Nothing
-    , _lgirGuardianInvitations = Nothing
-    }
+  ListGuardianInvitationsResponse'
+    {_lgirNextPageToken = Nothing, _lgirGuardianInvitations = Nothing}
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -3297,9 +3306,11 @@ instance ToJSON ListGuardianInvitationsResponse where
 -- | Additional details for assignments.
 --
 -- /See:/ 'assignment' smart constructor.
-newtype Assignment = Assignment'
+newtype Assignment =
+  Assignment'
     { _aStudentWorkFolder :: Maybe DriveFolder
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Assignment' with the minimum fields required to make a request.
 --
@@ -3308,10 +3319,7 @@ newtype Assignment = Assignment'
 -- * 'aStudentWorkFolder'
 assignment
     :: Assignment
-assignment =
-    Assignment'
-    { _aStudentWorkFolder = Nothing
-    }
+assignment = Assignment' {_aStudentWorkFolder = Nothing}
 
 -- | Drive folder where attachments from student submissions are placed. This
 -- is only populated for course teachers and administrators.
@@ -3334,10 +3342,12 @@ instance ToJSON Assignment where
 -- | Response when listing students.
 --
 -- /See:/ 'listStudentsResponse' smart constructor.
-data ListStudentsResponse = ListStudentsResponse'
+data ListStudentsResponse =
+  ListStudentsResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrStudents      :: !(Maybe [Student])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStudentsResponse' with the minimum fields required to make a request.
 --
@@ -3349,10 +3359,7 @@ data ListStudentsResponse = ListStudentsResponse'
 listStudentsResponse
     :: ListStudentsResponse
 listStudentsResponse =
-    ListStudentsResponse'
-    { _lsrNextPageToken = Nothing
-    , _lsrStudents = Nothing
-    }
+  ListStudentsResponse' {_lsrNextPageToken = Nothing, _lsrStudents = Nothing}
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -3386,10 +3393,12 @@ instance ToJSON ListStudentsResponse where
 -- | Drive file that is used as material for course work.
 --
 -- /See:/ 'sharedDriveFile' smart constructor.
-data SharedDriveFile = SharedDriveFile'
+data SharedDriveFile =
+  SharedDriveFile'
     { _sdfDriveFile :: !(Maybe DriveFile)
     , _sdfShareMode :: !(Maybe SharedDriveFileShareMode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SharedDriveFile' with the minimum fields required to make a request.
 --
@@ -3401,10 +3410,7 @@ data SharedDriveFile = SharedDriveFile'
 sharedDriveFile
     :: SharedDriveFile
 sharedDriveFile =
-    SharedDriveFile'
-    { _sdfDriveFile = Nothing
-    , _sdfShareMode = Nothing
-    }
+  SharedDriveFile' {_sdfDriveFile = Nothing, _sdfShareMode = Nothing}
 
 -- | Drive file details.
 sdfDriveFile :: Lens' SharedDriveFile (Maybe DriveFile)
@@ -3444,9 +3450,11 @@ instance ToJSON SharedDriveFile where
 -- \`ALREADY_EXISTS\` if a previous one has succeeded.
 --
 -- /See:/ 'courseAlias' smart constructor.
-newtype CourseAlias = CourseAlias'
+newtype CourseAlias =
+  CourseAlias'
     { _caAlias :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CourseAlias' with the minimum fields required to make a request.
 --
@@ -3455,10 +3463,7 @@ newtype CourseAlias = CourseAlias'
 -- * 'caAlias'
 courseAlias
     :: CourseAlias
-courseAlias =
-    CourseAlias'
-    { _caAlias = Nothing
-    }
+courseAlias = CourseAlias' {_caAlias = Nothing}
 
 -- | Alias string. The format of the string indicates the desired alias
 -- scoping. * \`d:\` indicates a domain-scoped alias. Example:
@@ -3480,9 +3485,11 @@ instance ToJSON CourseAlias where
 -- \`COURSE_ROSTER_CHANGES\`.
 --
 -- /See:/ 'courseRosterChangesInfo' smart constructor.
-newtype CourseRosterChangesInfo = CourseRosterChangesInfo'
+newtype CourseRosterChangesInfo =
+  CourseRosterChangesInfo'
     { _crciCourseId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CourseRosterChangesInfo' with the minimum fields required to make a request.
 --
@@ -3491,10 +3498,7 @@ newtype CourseRosterChangesInfo = CourseRosterChangesInfo'
 -- * 'crciCourseId'
 courseRosterChangesInfo
     :: CourseRosterChangesInfo
-courseRosterChangesInfo =
-    CourseRosterChangesInfo'
-    { _crciCourseId = Nothing
-    }
+courseRosterChangesInfo = CourseRosterChangesInfo' {_crciCourseId = Nothing}
 
 -- | The \`course_id\` of the course to subscribe to roster changes for.
 crciCourseId :: Lens' CourseRosterChangesInfo (Maybe Text)
@@ -3517,10 +3521,12 @@ instance ToJSON CourseRosterChangesInfo where
 -- \`INDIVIDUAL_STUDENTS\`.
 --
 -- /See:/ 'modifyIndividualStudentsOptions' smart constructor.
-data ModifyIndividualStudentsOptions = ModifyIndividualStudentsOptions'
+data ModifyIndividualStudentsOptions =
+  ModifyIndividualStudentsOptions'
     { _misoAddStudentIds    :: !(Maybe [Text])
     , _misoRemoveStudentIds :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyIndividualStudentsOptions' with the minimum fields required to make a request.
 --
@@ -3532,10 +3538,8 @@ data ModifyIndividualStudentsOptions = ModifyIndividualStudentsOptions'
 modifyIndividualStudentsOptions
     :: ModifyIndividualStudentsOptions
 modifyIndividualStudentsOptions =
-    ModifyIndividualStudentsOptions'
-    { _misoAddStudentIds = Nothing
-    , _misoRemoveStudentIds = Nothing
-    }
+  ModifyIndividualStudentsOptions'
+    {_misoAddStudentIds = Nothing, _misoRemoveStudentIds = Nothing}
 
 -- | Ids of students to be added as having access to this
 -- coursework\/announcement.
@@ -3577,9 +3581,11 @@ instance ToJSON ModifyIndividualStudentsOptions where
 -- \`projects.topics.publish\` permission.
 --
 -- /See:/ 'cloudPubsubTopic' smart constructor.
-newtype CloudPubsubTopic = CloudPubsubTopic'
+newtype CloudPubsubTopic =
+  CloudPubsubTopic'
     { _cptTopicName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CloudPubsubTopic' with the minimum fields required to make a request.
 --
@@ -3588,10 +3594,7 @@ newtype CloudPubsubTopic = CloudPubsubTopic'
 -- * 'cptTopicName'
 cloudPubsubTopic
     :: CloudPubsubTopic
-cloudPubsubTopic =
-    CloudPubsubTopic'
-    { _cptTopicName = Nothing
-    }
+cloudPubsubTopic = CloudPubsubTopic' {_cptTopicName = Nothing}
 
 -- | The \`name\` field of a Cloud Pub\/Sub
 -- [Topic](https:\/\/cloud.google.com\/pubsub\/docs\/reference\/rest\/v1\/projects.topics#Topic).
@@ -3612,12 +3615,14 @@ instance ToJSON CloudPubsubTopic where
 -- | Google Forms item.
 --
 -- /See:/ 'form' smart constructor.
-data Form = Form'
+data Form =
+  Form'
     { _fThumbnailURL :: !(Maybe Text)
     , _fFormURL      :: !(Maybe Text)
     , _fTitle        :: !(Maybe Text)
     , _fResponseURL  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Form' with the minimum fields required to make a request.
 --
@@ -3633,7 +3638,7 @@ data Form = Form'
 form
     :: Form
 form =
-    Form'
+  Form'
     { _fThumbnailURL = Nothing
     , _fFormURL = Nothing
     , _fTitle = Nothing
@@ -3682,10 +3687,12 @@ instance ToJSON Form where
 -- | Response when listing teachers.
 --
 -- /See:/ 'listTeachersResponse' smart constructor.
-data ListTeachersResponse = ListTeachersResponse'
+data ListTeachersResponse =
+  ListTeachersResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTeachers      :: !(Maybe [Teacher])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTeachersResponse' with the minimum fields required to make a request.
 --
@@ -3697,10 +3704,7 @@ data ListTeachersResponse = ListTeachersResponse'
 listTeachersResponse
     :: ListTeachersResponse
 listTeachersResponse =
-    ListTeachersResponse'
-    { _ltrNextPageToken = Nothing
-    , _ltrTeachers = Nothing
-    }
+  ListTeachersResponse' {_ltrNextPageToken = Nothing, _ltrTeachers = Nothing}
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -3734,12 +3738,14 @@ instance ToJSON ListTeachersResponse where
 -- | Student in a course.
 --
 -- /See:/ 'student' smart constructor.
-data Student = Student'
+data Student =
+  Student'
     { _sCourseId          :: !(Maybe Text)
     , _sProFile           :: !(Maybe UserProFile)
     , _sStudentWorkFolder :: !(Maybe DriveFolder)
     , _sUserId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Student' with the minimum fields required to make a request.
 --
@@ -3755,7 +3761,7 @@ data Student = Student'
 student
     :: Student
 student =
-    Student'
+  Student'
     { _sCourseId = Nothing
     , _sProFile = Nothing
     , _sStudentWorkFolder = Nothing
@@ -3808,12 +3814,14 @@ instance ToJSON Student where
 -- the provided destination.
 --
 -- /See:/ 'registration' smart constructor.
-data Registration = Registration'
+data Registration =
+  Registration'
     { _rRegistrationId   :: !(Maybe Text)
     , _rExpiryTime       :: !(Maybe DateTime')
     , _rFeed             :: !(Maybe Feed)
     , _rCloudPubsubTopic :: !(Maybe CloudPubsubTopic)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Registration' with the minimum fields required to make a request.
 --
@@ -3829,7 +3837,7 @@ data Registration = Registration'
 registration
     :: Registration
 registration =
-    Registration'
+  Registration'
     { _rRegistrationId = Nothing
     , _rExpiryTime = Nothing
     , _rFeed = Nothing

@@ -239,12 +239,12 @@ bigQueryDataTransferService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View and manage your data in Google BigQuery
 bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
-bigQueryScope = Proxy;
+bigQueryScope = Proxy

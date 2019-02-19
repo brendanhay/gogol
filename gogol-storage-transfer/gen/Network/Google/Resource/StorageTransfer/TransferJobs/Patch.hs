@@ -66,7 +66,8 @@ type TransferJobsPatchResource =
 -- a job is not allowed.
 --
 -- /See:/ 'transferJobsPatch' smart constructor.
-data TransferJobsPatch = TransferJobsPatch'
+data TransferJobsPatch =
+  TransferJobsPatch'
     { _tjpXgafv          :: !(Maybe Xgafv)
     , _tjpUploadProtocol :: !(Maybe Text)
     , _tjpAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data TransferJobsPatch = TransferJobsPatch'
     , _tjpUploadType     :: !(Maybe Text)
     , _tjpPayload        :: !UpdateTransferJobRequest
     , _tjpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferJobsPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ transferJobsPatch
     -> UpdateTransferJobRequest -- ^ 'tjpPayload'
     -> TransferJobsPatch
 transferJobsPatch pTjpJobName_ pTjpPayload_ =
-    TransferJobsPatch'
+  TransferJobsPatch'
     { _tjpXgafv = Nothing
     , _tjpUploadProtocol = Nothing
     , _tjpAccessToken = Nothing

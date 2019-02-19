@@ -66,7 +66,8 @@ type AlertsFeedbackCreateResource =
 -- | Creates new feedback for an alert.
 --
 -- /See:/ 'alertsFeedbackCreate' smart constructor.
-data AlertsFeedbackCreate = AlertsFeedbackCreate'
+data AlertsFeedbackCreate =
+  AlertsFeedbackCreate'
     { _afcXgafv          :: !(Maybe Xgafv)
     , _afcUploadProtocol :: !(Maybe Text)
     , _afcAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data AlertsFeedbackCreate = AlertsFeedbackCreate'
     , _afcPayload        :: !AlertFeedback
     , _afcCustomerId     :: !(Maybe Text)
     , _afcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlertsFeedbackCreate' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ alertsFeedbackCreate
     -> AlertFeedback -- ^ 'afcPayload'
     -> AlertsFeedbackCreate
 alertsFeedbackCreate pAfcAlertId_ pAfcPayload_ =
-    AlertsFeedbackCreate'
+  AlertsFeedbackCreate'
     { _afcXgafv = Nothing
     , _afcUploadProtocol = Nothing
     , _afcAccessToken = Nothing

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesGet' request conforms to.
 type DirectorySitesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>
@@ -54,10 +54,12 @@ type DirectorySitesGetResource =
 -- | Gets one directory site by ID.
 --
 -- /See:/ 'directorySitesGet' smart constructor.
-data DirectorySitesGet = DirectorySitesGet'
+data DirectorySitesGet =
+  DirectorySitesGet'
     { _dsgProFileId :: !(Textual Int64)
     , _dsgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DirectorySitesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ directorySitesGet
     -> Int64 -- ^ 'dsgId'
     -> DirectorySitesGet
 directorySitesGet pDsgProFileId_ pDsgId_ =
-    DirectorySitesGet'
-    { _dsgProFileId = _Coerce # pDsgProFileId_
-    , _dsgId = _Coerce # pDsgId_
-    }
+  DirectorySitesGet'
+    {_dsgProFileId = _Coerce # pDsgProFileId_, _dsgId = _Coerce # pDsgId_}
 
 -- | User profile ID associated with this request.
 dsgProFileId :: Lens' DirectorySitesGet Int64

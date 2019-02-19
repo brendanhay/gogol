@@ -56,9 +56,11 @@ type EventsResetForAllPlayersResource =
 -- can be reset. All quests that use the event will also be reset.
 --
 -- /See:/ 'eventsResetForAllPlayers' smart constructor.
-newtype EventsResetForAllPlayers = EventsResetForAllPlayers'
+newtype EventsResetForAllPlayers =
+  EventsResetForAllPlayers'
     { _erfapEventId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventsResetForAllPlayers' with the minimum fields required to make a request.
 --
@@ -69,9 +71,7 @@ eventsResetForAllPlayers
     :: Text -- ^ 'erfapEventId'
     -> EventsResetForAllPlayers
 eventsResetForAllPlayers pErfapEventId_ =
-    EventsResetForAllPlayers'
-    { _erfapEventId = pErfapEventId_
-    }
+  EventsResetForAllPlayers' {_erfapEventId = pErfapEventId_}
 
 -- | The ID of the event.
 erfapEventId :: Lens' EventsResetForAllPlayers Text

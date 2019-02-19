@@ -67,7 +67,8 @@ type ProjectsLocationsDataSourcesListResource =
 -- used for UI rendering.
 --
 -- /See:/ 'projectsLocationsDataSourcesList' smart constructor.
-data ProjectsLocationsDataSourcesList = ProjectsLocationsDataSourcesList'
+data ProjectsLocationsDataSourcesList =
+  ProjectsLocationsDataSourcesList'
     { _pldslParent         :: !Text
     , _pldslXgafv          :: !(Maybe Xgafv)
     , _pldslUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsLocationsDataSourcesList = ProjectsLocationsDataSourcesList'
     , _pldslPageToken      :: !(Maybe Text)
     , _pldslPageSize       :: !(Maybe (Textual Int32))
     , _pldslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsDataSourcesList' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsLocationsDataSourcesList
     :: Text -- ^ 'pldslParent'
     -> ProjectsLocationsDataSourcesList
 projectsLocationsDataSourcesList pPldslParent_ =
-    ProjectsLocationsDataSourcesList'
+  ProjectsLocationsDataSourcesList'
     { _pldslParent = pPldslParent_
     , _pldslXgafv = Nothing
     , _pldslUploadProtocol = Nothing
@@ -165,7 +167,8 @@ pldslCallback
       (\ s a -> s{_pldslCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsDataSourcesList where
+           ProjectsLocationsDataSourcesList
+         where
         type Rs ProjectsLocationsDataSourcesList =
              ListDataSourcesResponse
         type Scopes ProjectsLocationsDataSourcesList =

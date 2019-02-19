@@ -62,12 +62,14 @@ type InstancesResetResource =
 -- instance.
 --
 -- /See:/ 'instancesReset' smart constructor.
-data InstancesReset = InstancesReset'
+data InstancesReset =
+  InstancesReset'
     { _irRequestId :: !(Maybe Text)
     , _irProject   :: !Text
     , _irZone      :: !Text
     , _irInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesReset' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ instancesReset
     -> Text -- ^ 'irInstance'
     -> InstancesReset
 instancesReset pIrProject_ pIrZone_ pIrInstance_ =
-    InstancesReset'
+  InstancesReset'
     { _irRequestId = Nothing
     , _irProject = pIrProject_
     , _irZone = pIrZone_

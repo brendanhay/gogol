@@ -67,7 +67,8 @@ type ProjectsUptimeCheckConfigsListResource =
 -- leaving out any invalid configurations.
 --
 -- /See:/ 'projectsUptimeCheckConfigsList' smart constructor.
-data ProjectsUptimeCheckConfigsList = ProjectsUptimeCheckConfigsList'
+data ProjectsUptimeCheckConfigsList =
+  ProjectsUptimeCheckConfigsList'
     { _pucclParent         :: !Text
     , _pucclXgafv          :: !(Maybe Xgafv)
     , _pucclUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsUptimeCheckConfigsList = ProjectsUptimeCheckConfigsList'
     , _pucclPageToken      :: !(Maybe Text)
     , _pucclPageSize       :: !(Maybe (Textual Int32))
     , _pucclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsUptimeCheckConfigsList' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsUptimeCheckConfigsList
     :: Text -- ^ 'pucclParent'
     -> ProjectsUptimeCheckConfigsList
 projectsUptimeCheckConfigsList pPucclParent_ =
-    ProjectsUptimeCheckConfigsList'
+  ProjectsUptimeCheckConfigsList'
     { _pucclParent = pPucclParent_
     , _pucclXgafv = Nothing
     , _pucclUploadProtocol = Nothing

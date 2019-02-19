@@ -23,9 +23,11 @@ import           Network.Google.Prelude
 -- | A row in a DoubleClick Search report.
 --
 -- /See:/ 'reportRow' smart constructor.
-newtype ReportRow = ReportRow'
+newtype ReportRow =
+  ReportRow'
     { _rrAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportRow' with the minimum fields required to make a request.
 --
@@ -35,10 +37,7 @@ newtype ReportRow = ReportRow'
 reportRow
     :: HashMap Text JSONValue -- ^ 'rrAddtional'
     -> ReportRow
-reportRow pRrAddtional_ =
-    ReportRow'
-    { _rrAddtional = _Coerce # pRrAddtional_
-    }
+reportRow pRrAddtional_ = ReportRow' {_rrAddtional = _Coerce # pRrAddtional_}
 
 -- | Indicates the columns that are represented in this row. That is, each
 -- key corresponds to a column with a non-empty cell in this row.
@@ -58,7 +57,8 @@ instance ToJSON ReportRow where
 -- | A request object used to create a DoubleClick Search report.
 --
 -- /See:/ 'reportRequest' smart constructor.
-data ReportRequest = ReportRequest'
+data ReportRequest =
+  ReportRequest'
     { _rrMaxRowsPerFile         :: !(Maybe (Textual Int32))
     , _rrReportScope            :: !(Maybe ReportRequestReportScope)
     , _rrStatisticsCurrency     :: !(Maybe Text)
@@ -73,7 +73,8 @@ data ReportRequest = ReportRequest'
     , _rrReportType             :: !(Maybe Text)
     , _rrVerifySingleTimeZone   :: !Bool
     , _rrRowCount               :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
 --
@@ -109,7 +110,7 @@ data ReportRequest = ReportRequest'
 reportRequest
     :: ReportRequest
 reportRequest =
-    ReportRequest'
+  ReportRequest'
     { _rrMaxRowsPerFile = Nothing
     , _rrReportScope = Nothing
     , _rrStatisticsCurrency = Nothing
@@ -285,10 +286,12 @@ instance ToJSON ReportRequest where
 
 --
 -- /See:/ 'reportRequestOrderByItem' smart constructor.
-data ReportRequestOrderByItem = ReportRequestOrderByItem'
+data ReportRequestOrderByItem =
+  ReportRequestOrderByItem'
     { _rrobiSortOrder :: !(Maybe Text)
     , _rrobiColumn    :: !(Maybe ReportAPIColumnSpec)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportRequestOrderByItem' with the minimum fields required to make a request.
 --
@@ -300,10 +303,7 @@ data ReportRequestOrderByItem = ReportRequestOrderByItem'
 reportRequestOrderByItem
     :: ReportRequestOrderByItem
 reportRequestOrderByItem =
-    ReportRequestOrderByItem'
-    { _rrobiSortOrder = Nothing
-    , _rrobiColumn = Nothing
-    }
+  ReportRequestOrderByItem' {_rrobiSortOrder = Nothing, _rrobiColumn = Nothing}
 
 -- | The sort direction, which is either ascending or descending.
 rrobiSortOrder :: Lens' ReportRequestOrderByItem (Maybe Text)
@@ -336,7 +336,8 @@ instance ToJSON ReportRequestOrderByItem where
 -- rows or report files.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report'
+data Report =
+  Report'
     { _rKind                   :: !Text
     , _rRows                   :: !(Maybe [ReportRow])
     , _rStatisticsCurrencyCode :: !(Maybe Text)
@@ -346,7 +347,8 @@ data Report = Report'
     , _rStatisticsTimeZone     :: !(Maybe Text)
     , _rRowCount               :: !(Maybe (Textual Int32))
     , _rRequest                :: !(Maybe ReportRequest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
@@ -372,7 +374,7 @@ data Report = Report'
 report
     :: Report
 report =
-    Report'
+  Report'
     { _rKind = "doubleclicksearch#report"
     , _rRows = Nothing
     , _rStatisticsCurrencyCode = Nothing
@@ -471,10 +473,12 @@ instance ToJSON Report where
 
 --
 -- /See:/ 'reportFilesItem' smart constructor.
-data ReportFilesItem = ReportFilesItem'
+data ReportFilesItem =
+  ReportFilesItem'
     { _rfiURL       :: !(Maybe Text)
     , _rfiByteCount :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportFilesItem' with the minimum fields required to make a request.
 --
@@ -485,11 +489,7 @@ data ReportFilesItem = ReportFilesItem'
 -- * 'rfiByteCount'
 reportFilesItem
     :: ReportFilesItem
-reportFilesItem =
-    ReportFilesItem'
-    { _rfiURL = Nothing
-    , _rfiByteCount = Nothing
-    }
+reportFilesItem = ReportFilesItem' {_rfiURL = Nothing, _rfiByteCount = Nothing}
 
 -- | Use this url to download the report file.
 rfiURL :: Lens' ReportFilesItem (Maybe Text)
@@ -517,11 +517,13 @@ instance ToJSON ReportFilesItem where
 
 --
 -- /See:/ 'reportRequestFiltersItem' smart constructor.
-data ReportRequestFiltersItem = ReportRequestFiltersItem'
+data ReportRequestFiltersItem =
+  ReportRequestFiltersItem'
     { _rrfiOperator :: !(Maybe Text)
     , _rrfiValues   :: !(Maybe [JSONValue])
     , _rrfiColumn   :: !(Maybe ReportAPIColumnSpec)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportRequestFiltersItem' with the minimum fields required to make a request.
 --
@@ -535,11 +537,8 @@ data ReportRequestFiltersItem = ReportRequestFiltersItem'
 reportRequestFiltersItem
     :: ReportRequestFiltersItem
 reportRequestFiltersItem =
-    ReportRequestFiltersItem'
-    { _rrfiOperator = Nothing
-    , _rrfiValues = Nothing
-    , _rrfiColumn = Nothing
-    }
+  ReportRequestFiltersItem'
+    {_rrfiOperator = Nothing, _rrfiValues = Nothing, _rrfiColumn = Nothing}
 
 -- | Operator to use in the filter. See the filter reference for a list of
 -- available operators.
@@ -580,14 +579,16 @@ instance ToJSON ReportRequestFiltersItem where
 -- | A message containing availability data relevant to DoubleClick Search.
 --
 -- /See:/ 'availability' smart constructor.
-data Availability = Availability'
+data Availability =
+  Availability'
     { _aAgencyId              :: !(Maybe (Textual Int64))
     , _aAdvertiserId          :: !(Maybe (Textual Int64))
     , _aSegmentationId        :: !(Maybe (Textual Int64))
     , _aSegmentationName      :: !(Maybe Text)
     , _aAvailabilityTimestamp :: !(Maybe (Textual Word64))
     , _aSegmentationType      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Availability' with the minimum fields required to make a request.
 --
@@ -607,7 +608,7 @@ data Availability = Availability'
 availability
     :: Availability
 availability =
-    Availability'
+  Availability'
     { _aAgencyId = Nothing
     , _aAdvertiserId = Nothing
     , _aSegmentationId = Nothing
@@ -685,9 +686,11 @@ instance ToJSON Availability where
 -- | The request to update availability.
 --
 -- /See:/ 'updateAvailabilityRequest' smart constructor.
-newtype UpdateAvailabilityRequest = UpdateAvailabilityRequest'
+newtype UpdateAvailabilityRequest =
+  UpdateAvailabilityRequest'
     { _uarAvailabilities :: Maybe [Availability]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateAvailabilityRequest' with the minimum fields required to make a request.
 --
@@ -697,9 +700,7 @@ newtype UpdateAvailabilityRequest = UpdateAvailabilityRequest'
 updateAvailabilityRequest
     :: UpdateAvailabilityRequest
 updateAvailabilityRequest =
-    UpdateAvailabilityRequest'
-    { _uarAvailabilities = Nothing
-    }
+  UpdateAvailabilityRequest' {_uarAvailabilities = Nothing}
 
 -- | The availabilities being requested.
 uarAvailabilities :: Lens' UpdateAvailabilityRequest [Availability]
@@ -725,10 +726,12 @@ instance ToJSON UpdateAvailabilityRequest where
 -- | A message containing the custome metric.
 --
 -- /See:/ 'customMetric' smart constructor.
-data CustomMetric = CustomMetric'
+data CustomMetric =
+  CustomMetric'
     { _cmValue :: !(Maybe (Textual Double))
     , _cmName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomMetric' with the minimum fields required to make a request.
 --
@@ -739,11 +742,7 @@ data CustomMetric = CustomMetric'
 -- * 'cmName'
 customMetric
     :: CustomMetric
-customMetric =
-    CustomMetric'
-    { _cmValue = Nothing
-    , _cmName = Nothing
-    }
+customMetric = CustomMetric' {_cmValue = Nothing, _cmName = Nothing}
 
 -- | Custom metric numeric value.
 cmValue :: Lens' CustomMetric (Maybe Double)
@@ -770,10 +769,12 @@ instance ToJSON CustomMetric where
 -- | A list of conversions.
 --
 -- /See:/ 'conversionList' smart constructor.
-data ConversionList = ConversionList'
+data ConversionList =
+  ConversionList'
     { _clKind       :: !Text
     , _clConversion :: !(Maybe [Conversion])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConversionList' with the minimum fields required to make a request.
 --
@@ -785,10 +786,8 @@ data ConversionList = ConversionList'
 conversionList
     :: ConversionList
 conversionList =
-    ConversionList'
-    { _clKind = "doubleclicksearch#conversionList"
-    , _clConversion = Nothing
-    }
+  ConversionList'
+    {_clKind = "doubleclicksearch#conversionList", _clConversion = Nothing}
 
 -- | Identifies this as a ConversionList resource. Value: the fixed string
 -- doubleclicksearch#conversionList.
@@ -820,7 +819,8 @@ instance ToJSON ConversionList where
 -- | A request object used to create a DoubleClick Search report.
 --
 -- /See:/ 'reportAPIColumnSpec' smart constructor.
-data ReportAPIColumnSpec = ReportAPIColumnSpec'
+data ReportAPIColumnSpec =
+  ReportAPIColumnSpec'
     { _racsCustomDimensionName      :: !(Maybe Text)
     , _racsSavedColumnName          :: !(Maybe Text)
     , _racsGroupByColumn            :: !Bool
@@ -831,7 +831,8 @@ data ReportAPIColumnSpec = ReportAPIColumnSpec'
     , _racsHeaderText               :: !(Maybe Text)
     , _racsPlatformSource           :: !(Maybe Text)
     , _racsColumnName               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportAPIColumnSpec' with the minimum fields required to make a request.
 --
@@ -859,7 +860,7 @@ data ReportAPIColumnSpec = ReportAPIColumnSpec'
 reportAPIColumnSpec
     :: ReportAPIColumnSpec
 reportAPIColumnSpec =
-    ReportAPIColumnSpec'
+  ReportAPIColumnSpec'
     { _racsCustomDimensionName = Nothing
     , _racsSavedColumnName = Nothing
     , _racsGroupByColumn = False
@@ -990,12 +991,14 @@ instance ToJSON ReportAPIColumnSpec where
 -- restrict the metrics to a specific time range.
 --
 -- /See:/ 'reportRequestTimeRange' smart constructor.
-data ReportRequestTimeRange = ReportRequestTimeRange'
+data ReportRequestTimeRange =
+  ReportRequestTimeRange'
     { _rrtrEndDate                         :: !(Maybe Text)
     , _rrtrChangedAttributesSinceTimestamp :: !(Maybe DateTime')
     , _rrtrStartDate                       :: !(Maybe Text)
     , _rrtrChangedMetricsSinceTimestamp    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportRequestTimeRange' with the minimum fields required to make a request.
 --
@@ -1011,7 +1014,7 @@ data ReportRequestTimeRange = ReportRequestTimeRange'
 reportRequestTimeRange
     :: ReportRequestTimeRange
 reportRequestTimeRange =
-    ReportRequestTimeRange'
+  ReportRequestTimeRange'
     { _rrtrEndDate = Nothing
     , _rrtrChangedAttributesSinceTimestamp = Nothing
     , _rrtrStartDate = Nothing
@@ -1070,7 +1073,8 @@ instance ToJSON ReportRequestTimeRange where
 -- | A conversion containing data relevant to DoubleClick Search.
 --
 -- /See:/ 'conversion' smart constructor.
-data Conversion = Conversion'
+data Conversion =
+  Conversion'
     { _cAdGroupId                   :: !(Maybe (Textual Int64))
     , _cConversionModifiedTimestamp :: !(Maybe (Textual Word64))
     , _cState                       :: !(Maybe Text)
@@ -1104,7 +1108,8 @@ data Conversion = Conversion'
     , _cSegmentationType            :: !(Maybe Text)
     , _cProductId                   :: !(Maybe Text)
     , _cProductGroupId              :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Conversion' with the minimum fields required to make a request.
 --
@@ -1178,7 +1183,7 @@ data Conversion = Conversion'
 conversion
     :: Conversion
 conversion =
-    Conversion'
+  Conversion'
     { _cAdGroupId = Nothing
     , _cConversionModifiedTimestamp = Nothing
     , _cState = Nothing
@@ -1518,11 +1523,13 @@ instance ToJSON Conversion where
 -- | A saved column
 --
 -- /See:/ 'savedColumn' smart constructor.
-data SavedColumn = SavedColumn'
+data SavedColumn =
+  SavedColumn'
     { _scSavedColumnName :: !(Maybe Text)
     , _scKind            :: !Text
     , _scType            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SavedColumn' with the minimum fields required to make a request.
 --
@@ -1536,7 +1543,7 @@ data SavedColumn = SavedColumn'
 savedColumn
     :: SavedColumn
 savedColumn =
-    SavedColumn'
+  SavedColumn'
     { _scSavedColumnName = Nothing
     , _scKind = "doubleclicksearch#savedColumn"
     , _scType = Nothing
@@ -1576,10 +1583,12 @@ instance ToJSON SavedColumn where
 -- | A message containing the custome dimension.
 --
 -- /See:/ 'customDimension' smart constructor.
-data CustomDimension = CustomDimension'
+data CustomDimension =
+  CustomDimension'
     { _cdValue :: !(Maybe Text)
     , _cdName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomDimension' with the minimum fields required to make a request.
 --
@@ -1590,11 +1599,7 @@ data CustomDimension = CustomDimension'
 -- * 'cdName'
 customDimension
     :: CustomDimension
-customDimension =
-    CustomDimension'
-    { _cdValue = Nothing
-    , _cdName = Nothing
-    }
+customDimension = CustomDimension' {_cdValue = Nothing, _cdName = Nothing}
 
 -- | Custom dimension value.
 cdValue :: Lens' CustomDimension (Maybe Text)
@@ -1620,9 +1625,11 @@ instance ToJSON CustomDimension where
 -- | The response to a update availability request.
 --
 -- /See:/ 'updateAvailabilityResponse' smart constructor.
-newtype UpdateAvailabilityResponse = UpdateAvailabilityResponse'
+newtype UpdateAvailabilityResponse =
+  UpdateAvailabilityResponse'
     { _uAvailabilities :: Maybe [Availability]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateAvailabilityResponse' with the minimum fields required to make a request.
 --
@@ -1632,9 +1639,7 @@ newtype UpdateAvailabilityResponse = UpdateAvailabilityResponse'
 updateAvailabilityResponse
     :: UpdateAvailabilityResponse
 updateAvailabilityResponse =
-    UpdateAvailabilityResponse'
-    { _uAvailabilities = Nothing
-    }
+  UpdateAvailabilityResponse' {_uAvailabilities = Nothing}
 
 -- | The availabilities being returned.
 uAvailabilities :: Lens' UpdateAvailabilityResponse [Availability]
@@ -1662,7 +1667,8 @@ instance ToJSON UpdateAvailabilityResponse where
 -- the lowest scoped level desired up through agency is required.
 --
 -- /See:/ 'reportRequestReportScope' smart constructor.
-data ReportRequestReportScope = ReportRequestReportScope'
+data ReportRequestReportScope =
+  ReportRequestReportScope'
     { _rrrsKeywordId       :: !(Maybe (Textual Int64))
     , _rrrsAdGroupId       :: !(Maybe (Textual Int64))
     , _rrrsEngineAccountId :: !(Maybe (Textual Int64))
@@ -1670,7 +1676,8 @@ data ReportRequestReportScope = ReportRequestReportScope'
     , _rrrsAdvertiserId    :: !(Maybe (Textual Int64))
     , _rrrsCampaignId      :: !(Maybe (Textual Int64))
     , _rrrsAdId            :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportRequestReportScope' with the minimum fields required to make a request.
 --
@@ -1692,7 +1699,7 @@ data ReportRequestReportScope = ReportRequestReportScope'
 reportRequestReportScope
     :: ReportRequestReportScope
 reportRequestReportScope =
-    ReportRequestReportScope'
+  ReportRequestReportScope'
     { _rrrsKeywordId = Nothing
     , _rrrsAdGroupId = Nothing
     , _rrrsEngineAccountId = Nothing
@@ -1779,10 +1786,12 @@ instance ToJSON ReportRequestReportScope where
 -- that are available from this list.
 --
 -- /See:/ 'savedColumnList' smart constructor.
-data SavedColumnList = SavedColumnList'
+data SavedColumnList =
+  SavedColumnList'
     { _sclKind  :: !Text
     , _sclItems :: !(Maybe [SavedColumn])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SavedColumnList' with the minimum fields required to make a request.
 --
@@ -1794,10 +1803,8 @@ data SavedColumnList = SavedColumnList'
 savedColumnList
     :: SavedColumnList
 savedColumnList =
-    SavedColumnList'
-    { _sclKind = "doubleclicksearch#savedColumnList"
-    , _sclItems = Nothing
-    }
+  SavedColumnList'
+    {_sclKind = "doubleclicksearch#savedColumnList", _sclItems = Nothing}
 
 -- | Identifies this as a SavedColumnList resource. Value: the fixed string
 -- doubleclicksearch#savedColumnList.

@@ -55,10 +55,12 @@ type AccountsContainersWorkspacesBuiltInVariablesListResource
 -- | Lists all the enabled Built-In Variables of a GTM Container.
 --
 -- /See:/ 'accountsContainersWorkspacesBuiltInVariablesList' smart constructor.
-data AccountsContainersWorkspacesBuiltInVariablesList = AccountsContainersWorkspacesBuiltInVariablesList'
+data AccountsContainersWorkspacesBuiltInVariablesList =
+  AccountsContainersWorkspacesBuiltInVariablesList'
     { _acwbivlParent    :: !Text
     , _acwbivlPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesBuiltInVariablesList' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsContainersWorkspacesBuiltInVariablesList
     :: Text -- ^ 'acwbivlParent'
     -> AccountsContainersWorkspacesBuiltInVariablesList
 accountsContainersWorkspacesBuiltInVariablesList pAcwbivlParent_ =
-    AccountsContainersWorkspacesBuiltInVariablesList'
-    { _acwbivlParent = pAcwbivlParent_
-    , _acwbivlPageToken = Nothing
-    }
+  AccountsContainersWorkspacesBuiltInVariablesList'
+    {_acwbivlParent = pAcwbivlParent_, _acwbivlPageToken = Nothing}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -90,7 +90,7 @@ acwbivlPageToken
       (\ s a -> s{_acwbivlPageToken = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesBuiltInVariablesList
+           AccountsContainersWorkspacesBuiltInVariablesList
          where
         type Rs
                AccountsContainersWorkspacesBuiltInVariablesList

@@ -59,11 +59,13 @@ type ManagementWebPropertyAdWordsLinksGetResource =
 -- | Returns a web property-AdWords link to which the user has access.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksGet' smart constructor.
-data ManagementWebPropertyAdWordsLinksGet = ManagementWebPropertyAdWordsLinksGet'
+data ManagementWebPropertyAdWordsLinksGet =
+  ManagementWebPropertyAdWordsLinksGet'
     { _mwpawlgWebPropertyId            :: !Text
     , _mwpawlgAccountId                :: !Text
     , _mwpawlgWebPropertyAdWordsLinkId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ managementWebPropertyAdWordsLinksGet
     -> Text -- ^ 'mwpawlgWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksGet
 managementWebPropertyAdWordsLinksGet pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksGet'
+  ManagementWebPropertyAdWordsLinksGet'
     { _mwpawlgWebPropertyId = pMwpawlgWebPropertyId_
     , _mwpawlgAccountId = pMwpawlgAccountId_
     , _mwpawlgWebPropertyAdWordsLinkId = pMwpawlgWebPropertyAdWordsLinkId_
@@ -105,7 +107,8 @@ mwpawlgWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawlgWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksGet where
+           ManagementWebPropertyAdWordsLinksGet
+         where
         type Rs ManagementWebPropertyAdWordsLinksGet =
              EntityAdWordsLink
         type Scopes ManagementWebPropertyAdWordsLinksGet =

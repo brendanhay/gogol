@@ -58,11 +58,13 @@ type ManagementCustomMetricsGetResource =
 -- | Get a custom metric to which the user has access.
 --
 -- /See:/ 'managementCustomMetricsGet' smart constructor.
-data ManagementCustomMetricsGet = ManagementCustomMetricsGet'
+data ManagementCustomMetricsGet =
+  ManagementCustomMetricsGet'
     { _mcmgCustomMetricId :: !Text
     , _mcmgWebPropertyId  :: !Text
     , _mcmgAccountId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsGet' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ managementCustomMetricsGet
     -> Text -- ^ 'mcmgAccountId'
     -> ManagementCustomMetricsGet
 managementCustomMetricsGet pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccountId_ =
-    ManagementCustomMetricsGet'
+  ManagementCustomMetricsGet'
     { _mcmgCustomMetricId = pMcmgCustomMetricId_
     , _mcmgWebPropertyId = pMcmgWebPropertyId_
     , _mcmgAccountId = pMcmgAccountId_

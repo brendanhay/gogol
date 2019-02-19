@@ -54,10 +54,12 @@ type TrainedModelsInsertResource =
 -- | Train a Prediction API model.
 --
 -- /See:/ 'trainedModelsInsert' smart constructor.
-data TrainedModelsInsert = TrainedModelsInsert'
+data TrainedModelsInsert =
+  TrainedModelsInsert'
     { _tmiProject :: !Text
     , _tmiPayload :: !Insert
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrainedModelsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ trainedModelsInsert
     -> Insert -- ^ 'tmiPayload'
     -> TrainedModelsInsert
 trainedModelsInsert pTmiProject_ pTmiPayload_ =
-    TrainedModelsInsert'
-    { _tmiProject = pTmiProject_
-    , _tmiPayload = pTmiPayload_
-    }
+  TrainedModelsInsert' {_tmiProject = pTmiProject_, _tmiPayload = pTmiPayload_}
 
 -- | The project associated with the model.
 tmiProject :: Lens' TrainedModelsInsert Text

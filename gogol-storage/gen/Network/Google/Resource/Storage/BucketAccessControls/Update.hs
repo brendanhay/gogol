@@ -59,12 +59,14 @@ type BucketAccessControlsUpdateResource =
 -- | Updates an ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsUpdate' smart constructor.
-data BucketAccessControlsUpdate = BucketAccessControlsUpdate'
+data BucketAccessControlsUpdate =
+  BucketAccessControlsUpdate'
     { _bacuBucket      :: !Text
     , _bacuPayload     :: !BucketAccessControl
     , _bacuUserProject :: !(Maybe Text)
     , _bacuEntity      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketAccessControlsUpdate' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ bucketAccessControlsUpdate
     -> Text -- ^ 'bacuEntity'
     -> BucketAccessControlsUpdate
 bucketAccessControlsUpdate pBacuBucket_ pBacuPayload_ pBacuEntity_ =
-    BucketAccessControlsUpdate'
+  BucketAccessControlsUpdate'
     { _bacuBucket = pBacuBucket_
     , _bacuPayload = pBacuPayload_
     , _bacuUserProject = Nothing

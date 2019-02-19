@@ -54,10 +54,12 @@ type TemplateDeleteResource =
 -- | Deletes a template
 --
 -- /See:/ 'templateDelete' smart constructor.
-data TemplateDelete = TemplateDelete'
+data TemplateDelete =
+  TemplateDelete'
     { _tTemplateId :: !(Textual Int32)
     , _tTableId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TemplateDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ templateDelete
     -> Text -- ^ 'tTableId'
     -> TemplateDelete
 templateDelete pTTemplateId_ pTTableId_ =
-    TemplateDelete'
-    { _tTemplateId = _Coerce # pTTemplateId_
-    , _tTableId = pTTableId_
-    }
+  TemplateDelete'
+    {_tTemplateId = _Coerce # pTTemplateId_, _tTableId = pTTableId_}
 
 -- | Identifier for the template which is being deleted
 tTemplateId :: Lens' TemplateDelete Int32

@@ -54,10 +54,12 @@ type MyLibraryAnnotationsDeleteResource =
 -- | Deletes an annotation.
 --
 -- /See:/ 'myLibraryAnnotationsDelete' smart constructor.
-data MyLibraryAnnotationsDelete = MyLibraryAnnotationsDelete'
+data MyLibraryAnnotationsDelete =
+  MyLibraryAnnotationsDelete'
     { _mladAnnotationId :: !Text
     , _mladSource       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsDelete' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ myLibraryAnnotationsDelete
     :: Text -- ^ 'mladAnnotationId'
     -> MyLibraryAnnotationsDelete
 myLibraryAnnotationsDelete pMladAnnotationId_ =
-    MyLibraryAnnotationsDelete'
-    { _mladAnnotationId = pMladAnnotationId_
-    , _mladSource = Nothing
-    }
+  MyLibraryAnnotationsDelete'
+    {_mladAnnotationId = pMladAnnotationId_, _mladSource = Nothing}
 
 -- | The ID for the annotation to delete.
 mladAnnotationId :: Lens' MyLibraryAnnotationsDelete Text

@@ -60,13 +60,15 @@ type TurnBasedMatchesListResource =
 -- | Returns turn-based matches the player is or was involved in.
 --
 -- /See:/ 'turnBasedMatchesList' smart constructor.
-data TurnBasedMatchesList = TurnBasedMatchesList'
+data TurnBasedMatchesList =
+  TurnBasedMatchesList'
     { _tMaxCompletedMatches :: !(Maybe (Textual Int32))
     , _tIncludeMatchData    :: !(Maybe Bool)
     , _tLanguage            :: !(Maybe Text)
     , _tPageToken           :: !(Maybe Text)
     , _tMaxResults          :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesList' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ data TurnBasedMatchesList = TurnBasedMatchesList'
 turnBasedMatchesList
     :: TurnBasedMatchesList
 turnBasedMatchesList =
-    TurnBasedMatchesList'
+  TurnBasedMatchesList'
     { _tMaxCompletedMatches = Nothing
     , _tIncludeMatchData = Nothing
     , _tLanguage = Nothing

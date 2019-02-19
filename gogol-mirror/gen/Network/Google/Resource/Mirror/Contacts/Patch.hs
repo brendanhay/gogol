@@ -53,10 +53,12 @@ type ContactsPatchResource =
 -- | Updates a contact in place. This method supports patch semantics.
 --
 -- /See:/ 'contactsPatch' smart constructor.
-data ContactsPatch = ContactsPatch'
+data ContactsPatch =
+  ContactsPatch'
     { _cpPayload :: !Contact
     , _cpId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContactsPatch' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ contactsPatch
     -> Text -- ^ 'cpId'
     -> ContactsPatch
 contactsPatch pCpPayload_ pCpId_ =
-    ContactsPatch'
-    { _cpPayload = pCpPayload_
-    , _cpId = pCpId_
-    }
+  ContactsPatch' {_cpPayload = pCpPayload_, _cpId = pCpId_}
 
 -- | Multipart request metadata.
 cpPayload :: Lens' ContactsPatch Contact

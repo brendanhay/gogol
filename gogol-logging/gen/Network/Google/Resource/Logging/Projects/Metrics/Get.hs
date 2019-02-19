@@ -59,14 +59,16 @@ type ProjectsMetricsGetResource =
 -- | Gets a logs-based metric.
 --
 -- /See:/ 'projectsMetricsGet' smart constructor.
-data ProjectsMetricsGet = ProjectsMetricsGet'
+data ProjectsMetricsGet =
+  ProjectsMetricsGet'
     { _pmgXgafv          :: !(Maybe Xgafv)
     , _pmgUploadProtocol :: !(Maybe Text)
     , _pmgAccessToken    :: !(Maybe Text)
     , _pmgMetricName     :: !Text
     , _pmgUploadType     :: !(Maybe Text)
     , _pmgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsMetricsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsMetricsGet
     :: Text -- ^ 'pmgMetricName'
     -> ProjectsMetricsGet
 projectsMetricsGet pPmgMetricName_ =
-    ProjectsMetricsGet'
+  ProjectsMetricsGet'
     { _pmgXgafv = Nothing
     , _pmgUploadProtocol = Nothing
     , _pmgAccessToken = Nothing

@@ -59,11 +59,13 @@ type RoutersGetRouterStatusResource =
 -- | Retrieves runtime information of the specified router.
 --
 -- /See:/ 'routersGetRouterStatus' smart constructor.
-data RoutersGetRouterStatus = RoutersGetRouterStatus'
+data RoutersGetRouterStatus =
+  RoutersGetRouterStatus'
     { _rgrsProject :: !Text
     , _rgrsRouter  :: !Text
     , _rgrsRegion  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutersGetRouterStatus' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ routersGetRouterStatus
     -> Text -- ^ 'rgrsRegion'
     -> RoutersGetRouterStatus
 routersGetRouterStatus pRgrsProject_ pRgrsRouter_ pRgrsRegion_ =
-    RoutersGetRouterStatus'
+  RoutersGetRouterStatus'
     { _rgrsProject = pRgrsProject_
     , _rgrsRouter = pRgrsRouter_
     , _rgrsRegion = pRgrsRegion_

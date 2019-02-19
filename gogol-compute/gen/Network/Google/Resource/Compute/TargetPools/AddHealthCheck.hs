@@ -63,13 +63,15 @@ type TargetPoolsAddHealthCheckResource =
 -- | Adds health check URLs to a target pool.
 --
 -- /See:/ 'targetPoolsAddHealthCheck' smart constructor.
-data TargetPoolsAddHealthCheck = TargetPoolsAddHealthCheck'
+data TargetPoolsAddHealthCheck =
+  TargetPoolsAddHealthCheck'
     { _tpahcRequestId  :: !(Maybe Text)
     , _tpahcProject    :: !Text
     , _tpahcTargetPool :: !Text
     , _tpahcPayload    :: !TargetPoolsAddHealthCheckRequest
     , _tpahcRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsAddHealthCheck' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ targetPoolsAddHealthCheck
     -> Text -- ^ 'tpahcRegion'
     -> TargetPoolsAddHealthCheck
 targetPoolsAddHealthCheck pTpahcProject_ pTpahcTargetPool_ pTpahcPayload_ pTpahcRegion_ =
-    TargetPoolsAddHealthCheck'
+  TargetPoolsAddHealthCheck'
     { _tpahcRequestId = Nothing
     , _tpahcProject = pTpahcProject_
     , _tpahcTargetPool = pTpahcTargetPool_

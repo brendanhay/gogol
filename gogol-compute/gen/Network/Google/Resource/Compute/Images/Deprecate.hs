@@ -63,12 +63,14 @@ type ImagesDeprecateResource =
 -- given, clears the deprecation status instead.
 --
 -- /See:/ 'imagesDeprecate' smart constructor.
-data ImagesDeprecate = ImagesDeprecate'
+data ImagesDeprecate =
+  ImagesDeprecate'
     { _id1RequestId :: !(Maybe Text)
     , _id1Image     :: !Text
     , _id1Project   :: !Text
     , _id1Payload   :: !DeprecationStatus
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImagesDeprecate' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ imagesDeprecate
     -> DeprecationStatus -- ^ 'id1Payload'
     -> ImagesDeprecate
 imagesDeprecate pId1Image_ pId1Project_ pId1Payload_ =
-    ImagesDeprecate'
+  ImagesDeprecate'
     { _id1RequestId = Nothing
     , _id1Image = pId1Image_
     , _id1Project = pId1Project_

@@ -68,7 +68,8 @@ type ProjectsAgentRestoreResource =
 -- version are deleted. Operation
 --
 -- /See:/ 'projectsAgentRestore' smart constructor.
-data ProjectsAgentRestore = ProjectsAgentRestore'
+data ProjectsAgentRestore =
+  ProjectsAgentRestore'
     { _parParent         :: !Text
     , _parXgafv          :: !(Maybe Xgafv)
     , _parUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsAgentRestore = ProjectsAgentRestore'
     , _parUploadType     :: !(Maybe Text)
     , _parPayload        :: !GoogleCloudDialogflowV2RestoreAgentRequest
     , _parCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentRestore' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsAgentRestore
     -> GoogleCloudDialogflowV2RestoreAgentRequest -- ^ 'parPayload'
     -> ProjectsAgentRestore
 projectsAgentRestore pParParent_ pParPayload_ =
-    ProjectsAgentRestore'
+  ProjectsAgentRestore'
     { _parParent = pParParent_
     , _parXgafv = Nothing
     , _parUploadProtocol = Nothing

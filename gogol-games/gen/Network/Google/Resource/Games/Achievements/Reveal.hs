@@ -55,9 +55,11 @@ type AchievementsRevealResource =
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsReveal' smart constructor.
-newtype AchievementsReveal = AchievementsReveal'
+newtype AchievementsReveal =
+  AchievementsReveal'
     { _arAchievementId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AchievementsReveal' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ achievementsReveal
     :: Text -- ^ 'arAchievementId'
     -> AchievementsReveal
 achievementsReveal pArAchievementId_ =
-    AchievementsReveal'
-    { _arAchievementId = pArAchievementId_
-    }
+  AchievementsReveal' {_arAchievementId = pArAchievementId_}
 
 -- | The ID of the achievement used by this method.
 arAchievementId :: Lens' AchievementsReveal Text

@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'FilesGet' request conforms to.
 type FilesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "reports" :>
            Capture "reportId" (Textual Int64) :>
              "files" :>
@@ -53,7 +53,7 @@ type FilesGetResource =
                  QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
-         "v3.2" :>
+         "v3.3" :>
            "reports" :>
              Capture "reportId" (Textual Int64) :>
                "files" :>
@@ -65,10 +65,12 @@ type FilesGetResource =
 -- supports media download.
 --
 -- /See:/ 'filesGet' smart constructor.
-data FilesGet = FilesGet'
+data FilesGet =
+  FilesGet'
     { _fgReportId :: !(Textual Int64)
     , _fgFileId   :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilesGet' with the minimum fields required to make a request.
 --
@@ -82,10 +84,8 @@ filesGet
     -> Int64 -- ^ 'fgFileId'
     -> FilesGet
 filesGet pFgReportId_ pFgFileId_ =
-    FilesGet'
-    { _fgReportId = _Coerce # pFgReportId_
-    , _fgFileId = _Coerce # pFgFileId_
-    }
+  FilesGet'
+    {_fgReportId = _Coerce # pFgReportId_, _fgFileId = _Coerce # pFgFileId_}
 
 -- | The ID of the report.
 fgReportId :: Lens' FilesGet Int64

@@ -64,7 +64,8 @@ type IndexingDatasourcesItemsGetResource =
 -- | Gets Item resource by item name.
 --
 -- /See:/ 'indexingDatasourcesItemsGet' smart constructor.
-data IndexingDatasourcesItemsGet = IndexingDatasourcesItemsGet'
+data IndexingDatasourcesItemsGet =
+  IndexingDatasourcesItemsGet'
     { _idigXgafv                       :: !(Maybe Xgafv)
     , _idigUploadProtocol              :: !(Maybe Text)
     , _idigAccessToken                 :: !(Maybe Text)
@@ -73,7 +74,8 @@ data IndexingDatasourcesItemsGet = IndexingDatasourcesItemsGet'
     , _idigName                        :: !Text
     , _idigDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _idigCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IndexingDatasourcesItemsGet' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ indexingDatasourcesItemsGet
     :: Text -- ^ 'idigName'
     -> IndexingDatasourcesItemsGet
 indexingDatasourcesItemsGet pIdigName_ =
-    IndexingDatasourcesItemsGet'
+  IndexingDatasourcesItemsGet'
     { _idigXgafv = Nothing
     , _idigUploadProtocol = Nothing
     , _idigAccessToken = Nothing

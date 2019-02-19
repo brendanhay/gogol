@@ -64,13 +64,15 @@ type BackendServicesListResource =
 -- specified project.
 --
 -- /See:/ 'backendServicesList' smart constructor.
-data BackendServicesList = BackendServicesList'
+data BackendServicesList =
+  BackendServicesList'
     { _bslOrderBy    :: !(Maybe Text)
     , _bslProject    :: !Text
     , _bslFilter     :: !(Maybe Text)
     , _bslPageToken  :: !(Maybe Text)
     , _bslMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServicesList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ backendServicesList
     :: Text -- ^ 'bslProject'
     -> BackendServicesList
 backendServicesList pBslProject_ =
-    BackendServicesList'
+  BackendServicesList'
     { _bslOrderBy = Nothing
     , _bslProject = pBslProject_
     , _bslFilter = Nothing

@@ -56,11 +56,13 @@ type TasksUpdateResource =
 -- | Updates the specified task.
 --
 -- /See:/ 'tasksUpdate' smart constructor.
-data TasksUpdate = TasksUpdate'
+data TasksUpdate =
+  TasksUpdate'
     { _tuPayload  :: !Task
     , _tuTaskList :: !Text
     , _tuTask     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TasksUpdate' with the minimum fields required to make a request.
 --
@@ -77,11 +79,8 @@ tasksUpdate
     -> Text -- ^ 'tuTask'
     -> TasksUpdate
 tasksUpdate pTuPayload_ pTuTaskList_ pTuTask_ =
-    TasksUpdate'
-    { _tuPayload = pTuPayload_
-    , _tuTaskList = pTuTaskList_
-    , _tuTask = pTuTask_
-    }
+  TasksUpdate'
+    {_tuPayload = pTuPayload_, _tuTaskList = pTuTaskList_, _tuTask = pTuTask_}
 
 -- | Multipart request metadata.
 tuPayload :: Lens' TasksUpdate Task

@@ -58,11 +58,13 @@ type FamilysharingShareResource =
 -- indicates success.
 --
 -- /See:/ 'familysharingShare' smart constructor.
-data FamilysharingShare = FamilysharingShare'
+data FamilysharingShare =
+  FamilysharingShare'
     { _fsVolumeId :: !(Maybe Text)
     , _fsSource   :: !(Maybe Text)
     , _fsDocId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FamilysharingShare' with the minimum fields required to make a request.
 --
@@ -76,11 +78,8 @@ data FamilysharingShare = FamilysharingShare'
 familysharingShare
     :: FamilysharingShare
 familysharingShare =
-    FamilysharingShare'
-    { _fsVolumeId = Nothing
-    , _fsSource = Nothing
-    , _fsDocId = Nothing
-    }
+  FamilysharingShare'
+    {_fsVolumeId = Nothing, _fsSource = Nothing, _fsDocId = Nothing}
 
 -- | The volume to share.
 fsVolumeId :: Lens' FamilysharingShare (Maybe Text)

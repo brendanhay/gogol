@@ -54,9 +54,11 @@ type VerificationCodesGenerateResource =
 -- | Generate new backup verification codes for the user.
 --
 -- /See:/ 'verificationCodesGenerate' smart constructor.
-newtype VerificationCodesGenerate = VerificationCodesGenerate'
+newtype VerificationCodesGenerate =
+  VerificationCodesGenerate'
     { _vcgUserKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VerificationCodesGenerate' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ verificationCodesGenerate
     :: Text -- ^ 'vcgUserKey'
     -> VerificationCodesGenerate
 verificationCodesGenerate pVcgUserKey_ =
-    VerificationCodesGenerate'
-    { _vcgUserKey = pVcgUserKey_
-    }
+  VerificationCodesGenerate' {_vcgUserKey = pVcgUserKey_}
 
 -- | Email or immutable ID of the user
 vcgUserKey :: Lens' VerificationCodesGenerate Text

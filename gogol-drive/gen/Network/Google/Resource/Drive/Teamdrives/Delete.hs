@@ -53,9 +53,11 @@ type TeamdrivesDeleteResource =
 -- Team Drive cannot contain any untrashed items.
 --
 -- /See:/ 'teamdrivesDelete' smart constructor.
-newtype TeamdrivesDelete = TeamdrivesDelete'
+newtype TeamdrivesDelete =
+  TeamdrivesDelete'
     { _tdTeamDriveId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TeamdrivesDelete' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ teamdrivesDelete
     :: Text -- ^ 'tdTeamDriveId'
     -> TeamdrivesDelete
 teamdrivesDelete pTdTeamDriveId_ =
-    TeamdrivesDelete'
-    { _tdTeamDriveId = pTdTeamDriveId_
-    }
+  TeamdrivesDelete' {_tdTeamDriveId = pTdTeamDriveId_}
 
 -- | The ID of the Team Drive
 tdTeamDriveId :: Lens' TeamdrivesDelete Text

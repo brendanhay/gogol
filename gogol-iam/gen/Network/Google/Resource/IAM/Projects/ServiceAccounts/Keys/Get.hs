@@ -62,7 +62,8 @@ type ProjectsServiceAccountsKeysGetResource =
 -- | Gets the ServiceAccountKey by key id.
 --
 -- /See:/ 'projectsServiceAccountsKeysGet' smart constructor.
-data ProjectsServiceAccountsKeysGet = ProjectsServiceAccountsKeysGet'
+data ProjectsServiceAccountsKeysGet =
+  ProjectsServiceAccountsKeysGet'
     { _psakgXgafv          :: !(Maybe Xgafv)
     , _psakgUploadProtocol :: !(Maybe Text)
     , _psakgAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsServiceAccountsKeysGet = ProjectsServiceAccountsKeysGet'
     , _psakgName           :: !Text
     , _psakgPublicKeyType  :: !(Maybe Text)
     , _psakgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsKeysGet' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ projectsServiceAccountsKeysGet
     :: Text -- ^ 'psakgName'
     -> ProjectsServiceAccountsKeysGet
 projectsServiceAccountsKeysGet pPsakgName_ =
-    ProjectsServiceAccountsKeysGet'
+  ProjectsServiceAccountsKeysGet'
     { _psakgXgafv = Nothing
     , _psakgUploadProtocol = Nothing
     , _psakgAccessToken = Nothing

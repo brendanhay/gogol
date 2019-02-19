@@ -69,7 +69,8 @@ type TestEnvironmentCatalogGetResource =
 -- INTERNAL - if an internal error occurred
 --
 -- /See:/ 'testEnvironmentCatalogGet' smart constructor.
-data TestEnvironmentCatalogGet = TestEnvironmentCatalogGet'
+data TestEnvironmentCatalogGet =
+  TestEnvironmentCatalogGet'
     { _tecgXgafv           :: !(Maybe Xgafv)
     , _tecgUploadProtocol  :: !(Maybe Text)
     , _tecgAccessToken     :: !(Maybe Text)
@@ -77,7 +78,8 @@ data TestEnvironmentCatalogGet = TestEnvironmentCatalogGet'
     , _tecgEnvironmentType :: !Text
     , _tecgProjectId       :: !(Maybe Text)
     , _tecgCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestEnvironmentCatalogGet' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ testEnvironmentCatalogGet
     :: Text -- ^ 'tecgEnvironmentType'
     -> TestEnvironmentCatalogGet
 testEnvironmentCatalogGet pTecgEnvironmentType_ =
-    TestEnvironmentCatalogGet'
+  TestEnvironmentCatalogGet'
     { _tecgXgafv = Nothing
     , _tecgUploadProtocol = Nothing
     , _tecgAccessToken = Nothing

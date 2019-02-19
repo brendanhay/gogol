@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 -- 'OrderDocumentsList' request conforms to.
 type OrderDocumentsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -76,7 +76,8 @@ type OrderDocumentsListResource =
 -- supports paging.
 --
 -- /See:/ 'orderDocumentsList' smart constructor.
-data OrderDocumentsList = OrderDocumentsList'
+data OrderDocumentsList =
+  OrderDocumentsList'
     { _odlSearchString :: !(Maybe Text)
     , _odlIds          :: !(Maybe [Textual Int64])
     , _odlProFileId    :: !(Textual Int64)
@@ -88,7 +89,8 @@ data OrderDocumentsList = OrderDocumentsList'
     , _odlApproved     :: !(Maybe Bool)
     , _odlSiteId       :: !(Maybe [Textual Int64])
     , _odlMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrderDocumentsList' with the minimum fields required to make a request.
 --
@@ -120,7 +122,7 @@ orderDocumentsList
     -> Int64 -- ^ 'odlProjectId'
     -> OrderDocumentsList
 orderDocumentsList pOdlProFileId_ pOdlProjectId_ =
-    OrderDocumentsList'
+  OrderDocumentsList'
     { _odlSearchString = Nothing
     , _odlIds = Nothing
     , _odlProFileId = _Coerce # pOdlProFileId_

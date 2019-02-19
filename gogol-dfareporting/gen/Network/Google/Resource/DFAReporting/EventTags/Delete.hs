@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsDelete' request conforms to.
 type EventTagsDeleteResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -54,10 +54,12 @@ type EventTagsDeleteResource =
 -- | Deletes an existing event tag.
 --
 -- /See:/ 'eventTagsDelete' smart constructor.
-data EventTagsDelete = EventTagsDelete'
+data EventTagsDelete =
+  EventTagsDelete'
     { _etdProFileId :: !(Textual Int64)
     , _etdId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventTagsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ eventTagsDelete
     -> Int64 -- ^ 'etdId'
     -> EventTagsDelete
 eventTagsDelete pEtdProFileId_ pEtdId_ =
-    EventTagsDelete'
-    { _etdProFileId = _Coerce # pEtdProFileId_
-    , _etdId = _Coerce # pEtdId_
-    }
+  EventTagsDelete'
+    {_etdProFileId = _Coerce # pEtdProFileId_, _etdId = _Coerce # pEtdId_}
 
 -- | User profile ID associated with this request.
 etdProFileId :: Lens' EventTagsDelete Int64

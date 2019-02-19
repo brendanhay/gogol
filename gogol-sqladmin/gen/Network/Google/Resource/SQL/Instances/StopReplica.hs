@@ -55,10 +55,12 @@ type InstancesStopReplicaResource =
 -- | Stops the replication in the read replica instance.
 --
 -- /See:/ 'instancesStopReplica' smart constructor.
-data InstancesStopReplica = InstancesStopReplica'
+data InstancesStopReplica =
+  InstancesStopReplica'
     { _isrProject  :: !Text
     , _isrInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesStopReplica' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ instancesStopReplica
     -> Text -- ^ 'isrInstance'
     -> InstancesStopReplica
 instancesStopReplica pIsrProject_ pIsrInstance_ =
-    InstancesStopReplica'
-    { _isrProject = pIsrProject_
-    , _isrInstance = pIsrInstance_
-    }
+  InstancesStopReplica'
+    {_isrProject = pIsrProject_, _isrInstance = pIsrInstance_}
 
 -- | ID of the project that contains the read replica.
 isrProject :: Lens' InstancesStopReplica Text

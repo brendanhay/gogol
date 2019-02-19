@@ -78,7 +78,8 @@ type UsersWatchResource =
 -- | Watch for changes in users list
 --
 -- /See:/ 'usersWatch' smart constructor.
-data UsersWatch = UsersWatch'
+data UsersWatch =
+  UsersWatch'
     { _uwEvent           :: !(Maybe UsersWatchEvent)
     , _uwOrderBy         :: !(Maybe UsersWatchOrderBy)
     , _uwViewType        :: !UsersWatchViewType
@@ -92,7 +93,8 @@ data UsersWatch = UsersWatch'
     , _uwProjection      :: !UsersWatchProjection
     , _uwPageToken       :: !(Maybe Text)
     , _uwMaxResults      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersWatch' with the minimum fields required to make a request.
 --
@@ -127,7 +129,7 @@ usersWatch
     :: Channel -- ^ 'uwPayload'
     -> UsersWatch
 usersWatch pUwPayload_ =
-    UsersWatch'
+  UsersWatch'
     { _uwEvent = Nothing
     , _uwOrderBy = Nothing
     , _uwViewType = UWVTAdminView

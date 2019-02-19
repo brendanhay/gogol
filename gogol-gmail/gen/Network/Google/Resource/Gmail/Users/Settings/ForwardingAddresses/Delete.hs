@@ -59,10 +59,12 @@ type UsersSettingsForwardingAddressesDeleteResource =
 -- account clients that have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsForwardingAddressesDelete' smart constructor.
-data UsersSettingsForwardingAddressesDelete = UsersSettingsForwardingAddressesDelete'
+data UsersSettingsForwardingAddressesDelete =
+  UsersSettingsForwardingAddressesDelete'
     { _usfadForwardingEmail :: !Text
     , _usfadUserId          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsForwardingAddressesDelete' with the minimum fields required to make a request.
 --
@@ -75,10 +77,8 @@ usersSettingsForwardingAddressesDelete
     :: Text -- ^ 'usfadForwardingEmail'
     -> UsersSettingsForwardingAddressesDelete
 usersSettingsForwardingAddressesDelete pUsfadForwardingEmail_ =
-    UsersSettingsForwardingAddressesDelete'
-    { _usfadForwardingEmail = pUsfadForwardingEmail_
-    , _usfadUserId = "me"
-    }
+  UsersSettingsForwardingAddressesDelete'
+    {_usfadForwardingEmail = pUsfadForwardingEmail_, _usfadUserId = "me"}
 
 -- | The forwarding address to be deleted.
 usfadForwardingEmail :: Lens' UsersSettingsForwardingAddressesDelete Text
@@ -93,7 +93,8 @@ usfadUserId
   = lens _usfadUserId (\ s a -> s{_usfadUserId = a})
 
 instance GoogleRequest
-         UsersSettingsForwardingAddressesDelete where
+           UsersSettingsForwardingAddressesDelete
+         where
         type Rs UsersSettingsForwardingAddressesDelete = ()
         type Scopes UsersSettingsForwardingAddressesDelete =
              '["https://www.googleapis.com/auth/gmail.settings.sharing"]

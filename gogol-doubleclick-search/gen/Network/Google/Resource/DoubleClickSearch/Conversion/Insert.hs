@@ -52,9 +52,11 @@ type ConversionInsertResource =
 -- | Inserts a batch of new conversions into DoubleClick Search.
 --
 -- /See:/ 'conversionInsert' smart constructor.
-newtype ConversionInsert = ConversionInsert'
+newtype ConversionInsert =
+  ConversionInsert'
     { _ciPayload :: ConversionList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConversionInsert' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype ConversionInsert = ConversionInsert'
 conversionInsert
     :: ConversionList -- ^ 'ciPayload'
     -> ConversionInsert
-conversionInsert pCiPayload_ =
-    ConversionInsert'
-    { _ciPayload = pCiPayload_
-    }
+conversionInsert pCiPayload_ = ConversionInsert' {_ciPayload = pCiPayload_}
 
 -- | Multipart request metadata.
 ciPayload :: Lens' ConversionInsert ConversionList

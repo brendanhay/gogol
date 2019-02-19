@@ -61,14 +61,16 @@ type TransferJobsCreateResource =
 -- | Creates a transfer job that runs periodically.
 --
 -- /See:/ 'transferJobsCreate' smart constructor.
-data TransferJobsCreate = TransferJobsCreate'
+data TransferJobsCreate =
+  TransferJobsCreate'
     { _tjcXgafv          :: !(Maybe Xgafv)
     , _tjcUploadProtocol :: !(Maybe Text)
     , _tjcAccessToken    :: !(Maybe Text)
     , _tjcUploadType     :: !(Maybe Text)
     , _tjcPayload        :: !TransferJob
     , _tjcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferJobsCreate' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ transferJobsCreate
     :: TransferJob -- ^ 'tjcPayload'
     -> TransferJobsCreate
 transferJobsCreate pTjcPayload_ =
-    TransferJobsCreate'
+  TransferJobsCreate'
     { _tjcXgafv = Nothing
     , _tjcUploadProtocol = Nothing
     , _tjcAccessToken = Nothing

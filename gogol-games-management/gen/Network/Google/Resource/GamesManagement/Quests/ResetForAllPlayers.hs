@@ -56,9 +56,11 @@ type QuestsResetForAllPlayersResource =
 -- developer console. Only draft quests can be reset.
 --
 -- /See:/ 'questsResetForAllPlayers' smart constructor.
-newtype QuestsResetForAllPlayers = QuestsResetForAllPlayers'
+newtype QuestsResetForAllPlayers =
+  QuestsResetForAllPlayers'
     { _qrfapQuestId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuestsResetForAllPlayers' with the minimum fields required to make a request.
 --
@@ -69,9 +71,7 @@ questsResetForAllPlayers
     :: Text -- ^ 'qrfapQuestId'
     -> QuestsResetForAllPlayers
 questsResetForAllPlayers pQrfapQuestId_ =
-    QuestsResetForAllPlayers'
-    { _qrfapQuestId = pQrfapQuestId_
-    }
+  QuestsResetForAllPlayers' {_qrfapQuestId = pQrfapQuestId_}
 
 -- | The ID of the quest.
 qrfapQuestId :: Lens' QuestsResetForAllPlayers Text

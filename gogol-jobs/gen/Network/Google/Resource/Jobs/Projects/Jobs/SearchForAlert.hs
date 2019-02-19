@@ -75,7 +75,8 @@ type ProjectsJobsSearchForAlertResource =
 -- permission to search against.
 --
 -- /See:/ 'projectsJobsSearchForAlert' smart constructor.
-data ProjectsJobsSearchForAlert = ProjectsJobsSearchForAlert'
+data ProjectsJobsSearchForAlert =
+  ProjectsJobsSearchForAlert'
     { _pjsfaParent         :: !Text
     , _pjsfaXgafv          :: !(Maybe Xgafv)
     , _pjsfaUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,8 @@ data ProjectsJobsSearchForAlert = ProjectsJobsSearchForAlert'
     , _pjsfaUploadType     :: !(Maybe Text)
     , _pjsfaPayload        :: !SearchJobsRequest
     , _pjsfaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsSearchForAlert' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ projectsJobsSearchForAlert
     -> SearchJobsRequest -- ^ 'pjsfaPayload'
     -> ProjectsJobsSearchForAlert
 projectsJobsSearchForAlert pPjsfaParent_ pPjsfaPayload_ =
-    ProjectsJobsSearchForAlert'
+  ProjectsJobsSearchForAlert'
     { _pjsfaParent = pPjsfaParent_
     , _pjsfaXgafv = Nothing
     , _pjsfaUploadProtocol = Nothing

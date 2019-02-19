@@ -59,12 +59,14 @@ type NotificationsListResource =
 -- | Retrieves a list of notifications.
 --
 -- /See:/ 'notificationsList' smart constructor.
-data NotificationsList = NotificationsList'
+data NotificationsList =
+  NotificationsList'
     { _nlCustomer   :: !Text
     , _nlLanguage   :: !(Maybe Text)
     , _nlPageToken  :: !(Maybe Text)
     , _nlMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationsList' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ notificationsList
     :: Text -- ^ 'nlCustomer'
     -> NotificationsList
 notificationsList pNlCustomer_ =
-    NotificationsList'
+  NotificationsList'
     { _nlCustomer = pNlCustomer_
     , _nlLanguage = Nothing
     , _nlPageToken = Nothing

@@ -73,7 +73,8 @@ type RegionInstanceGroupManagersListManagedInstancesResource
 -- group has scheduled for its instances.
 --
 -- /See:/ 'regionInstanceGroupManagersListManagedInstances' smart constructor.
-data RegionInstanceGroupManagersListManagedInstances = RegionInstanceGroupManagersListManagedInstances'
+data RegionInstanceGroupManagersListManagedInstances =
+  RegionInstanceGroupManagersListManagedInstances'
     { _rigmlmiProject              :: !Text
     , _rigmlmiInstanceGroupManager :: !Text
     , _rigmlmiOrderBy              :: !(Maybe Text)
@@ -81,7 +82,8 @@ data RegionInstanceGroupManagersListManagedInstances = RegionInstanceGroupManage
     , _rigmlmiRegion               :: !Text
     , _rigmlmiPageToken            :: !(Maybe Text)
     , _rigmlmiMaxResults           :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersListManagedInstances' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ regionInstanceGroupManagersListManagedInstances
     -> Text -- ^ 'rigmlmiRegion'
     -> RegionInstanceGroupManagersListManagedInstances
 regionInstanceGroupManagersListManagedInstances pRigmlmiProject_ pRigmlmiInstanceGroupManager_ pRigmlmiRegion_ =
-    RegionInstanceGroupManagersListManagedInstances'
+  RegionInstanceGroupManagersListManagedInstances'
     { _rigmlmiProject = pRigmlmiProject_
     , _rigmlmiInstanceGroupManager = pRigmlmiInstanceGroupManager_
     , _rigmlmiOrderBy = Nothing
@@ -187,7 +189,8 @@ rigmlmiMaxResults
       . _Coerce
 
 instance GoogleRequest
-         RegionInstanceGroupManagersListManagedInstances where
+           RegionInstanceGroupManagersListManagedInstances
+         where
         type Rs
                RegionInstanceGroupManagersListManagedInstances
              = RegionInstanceGroupManagersListInstancesResponse

@@ -59,14 +59,16 @@ type ProjectsLocationsKeyRingsGetResource =
 -- | Returns metadata for a given KeyRing.
 --
 -- /See:/ 'projectsLocationsKeyRingsGet' smart constructor.
-data ProjectsLocationsKeyRingsGet = ProjectsLocationsKeyRingsGet'
+data ProjectsLocationsKeyRingsGet =
+  ProjectsLocationsKeyRingsGet'
     { _plkrgXgafv          :: !(Maybe Xgafv)
     , _plkrgUploadProtocol :: !(Maybe Text)
     , _plkrgAccessToken    :: !(Maybe Text)
     , _plkrgUploadType     :: !(Maybe Text)
     , _plkrgName           :: !Text
     , _plkrgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsLocationsKeyRingsGet
     :: Text -- ^ 'plkrgName'
     -> ProjectsLocationsKeyRingsGet
 projectsLocationsKeyRingsGet pPlkrgName_ =
-    ProjectsLocationsKeyRingsGet'
+  ProjectsLocationsKeyRingsGet'
     { _plkrgXgafv = Nothing
     , _plkrgUploadProtocol = Nothing
     , _plkrgAccessToken = Nothing

@@ -64,7 +64,8 @@ type ProjectsLocationsGetServerConfigResource =
 -- | Returns configuration info about the Kubernetes Engine service.
 --
 -- /See:/ 'projectsLocationsGetServerConfig' smart constructor.
-data ProjectsLocationsGetServerConfig = ProjectsLocationsGetServerConfig'
+data ProjectsLocationsGetServerConfig =
+  ProjectsLocationsGetServerConfig'
     { _plgscXgafv          :: !(Maybe Xgafv)
     , _plgscUploadProtocol :: !(Maybe Text)
     , _plgscAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsLocationsGetServerConfig = ProjectsLocationsGetServerConfig'
     , _plgscName           :: !Text
     , _plgscProjectId      :: !(Maybe Text)
     , _plgscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsGetServerConfig' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsLocationsGetServerConfig
     :: Text -- ^ 'plgscName'
     -> ProjectsLocationsGetServerConfig
 projectsLocationsGetServerConfig pPlgscName_ =
-    ProjectsLocationsGetServerConfig'
+  ProjectsLocationsGetServerConfig'
     { _plgscXgafv = Nothing
     , _plgscUploadProtocol = Nothing
     , _plgscAccessToken = Nothing
@@ -160,7 +162,8 @@ plgscCallback
       (\ s a -> s{_plgscCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsGetServerConfig where
+           ProjectsLocationsGetServerConfig
+         where
         type Rs ProjectsLocationsGetServerConfig =
              ServerConfig
         type Scopes ProjectsLocationsGetServerConfig =

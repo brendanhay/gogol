@@ -65,7 +65,8 @@ type OrganizationsSinksListResource =
 -- | Lists sinks.
 --
 -- /See:/ 'organizationsSinksList' smart constructor.
-data OrganizationsSinksList = OrganizationsSinksList'
+data OrganizationsSinksList =
+  OrganizationsSinksList'
     { _oslParent         :: !Text
     , _oslXgafv          :: !(Maybe Xgafv)
     , _oslUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data OrganizationsSinksList = OrganizationsSinksList'
     , _oslPageToken      :: !(Maybe Text)
     , _oslPageSize       :: !(Maybe (Textual Int32))
     , _oslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsSinksList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ organizationsSinksList
     :: Text -- ^ 'oslParent'
     -> OrganizationsSinksList
 organizationsSinksList pOslParent_ =
-    OrganizationsSinksList'
+  OrganizationsSinksList'
     { _oslParent = pOslParent_
     , _oslXgafv = Nothing
     , _oslUploadProtocol = Nothing

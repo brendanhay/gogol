@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesPatch' request conforms to.
 type CreativeFieldValuesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -62,12 +62,14 @@ type CreativeFieldValuesPatchResource =
 -- semantics.
 --
 -- /See:/ 'creativeFieldValuesPatch' smart constructor.
-data CreativeFieldValuesPatch = CreativeFieldValuesPatch'
+data CreativeFieldValuesPatch =
+  CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId :: !(Textual Int64)
     , _cfvpProFileId       :: !(Textual Int64)
     , _cfvpPayload         :: !CreativeFieldValue
     , _cfvpId              :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeFieldValuesPatch' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ creativeFieldValuesPatch
     -> Int64 -- ^ 'cfvpId'
     -> CreativeFieldValuesPatch
 creativeFieldValuesPatch pCfvpCreativeFieldId_ pCfvpProFileId_ pCfvpPayload_ pCfvpId_ =
-    CreativeFieldValuesPatch'
+  CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId = _Coerce # pCfvpCreativeFieldId_
     , _cfvpProFileId = _Coerce # pCfvpProFileId_
     , _cfvpPayload = pCfvpPayload_

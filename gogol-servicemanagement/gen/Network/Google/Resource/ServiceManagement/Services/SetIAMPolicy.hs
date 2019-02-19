@@ -64,7 +64,8 @@ type ServicesSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'servicesSetIAMPolicy' smart constructor.
-data ServicesSetIAMPolicy = ServicesSetIAMPolicy'
+data ServicesSetIAMPolicy =
+  ServicesSetIAMPolicy'
     { _ssipXgafv          :: !(Maybe Xgafv)
     , _ssipUploadProtocol :: !(Maybe Text)
     , _ssipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ServicesSetIAMPolicy = ServicesSetIAMPolicy'
     , _ssipPayload        :: !SetIAMPolicyRequest
     , _ssipResource       :: !Text
     , _ssipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ servicesSetIAMPolicy
     -> Text -- ^ 'ssipResource'
     -> ServicesSetIAMPolicy
 servicesSetIAMPolicy pSsipPayload_ pSsipResource_ =
-    ServicesSetIAMPolicy'
+  ServicesSetIAMPolicy'
     { _ssipXgafv = Nothing
     , _ssipUploadProtocol = Nothing
     , _ssipAccessToken = Nothing

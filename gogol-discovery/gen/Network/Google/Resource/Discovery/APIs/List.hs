@@ -53,10 +53,12 @@ type APIsListResource =
 -- | Retrieve the list of APIs supported at this endpoint.
 --
 -- /See:/ 'apisList' smart constructor.
-data APIsList = APIsList'
+data APIsList =
+  APIsList'
     { _alPreferred :: !Bool
     , _alName      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'APIsList' with the minimum fields required to make a request.
 --
@@ -67,11 +69,7 @@ data APIsList = APIsList'
 -- * 'alName'
 apisList
     :: APIsList
-apisList =
-    APIsList'
-    { _alPreferred = False
-    , _alName = Nothing
-    }
+apisList = APIsList' {_alPreferred = False, _alName = Nothing}
 
 -- | Return only the preferred version of an API.
 alPreferred :: Lens' APIsList Bool

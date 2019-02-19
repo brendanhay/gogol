@@ -57,11 +57,13 @@ type ManagementWebPropertiesListResource =
 -- | Lists web properties to which the user has access.
 --
 -- /See:/ 'managementWebPropertiesList' smart constructor.
-data ManagementWebPropertiesList = ManagementWebPropertiesList'
+data ManagementWebPropertiesList =
+  ManagementWebPropertiesList'
     { _mwplAccountId  :: !Text
     , _mwplStartIndex :: !(Maybe (Textual Int32))
     , _mwplMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesList' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ managementWebPropertiesList
     :: Text -- ^ 'mwplAccountId'
     -> ManagementWebPropertiesList
 managementWebPropertiesList pMwplAccountId_ =
-    ManagementWebPropertiesList'
+  ManagementWebPropertiesList'
     { _mwplAccountId = pMwplAccountId_
     , _mwplStartIndex = Nothing
     , _mwplMaxResults = Nothing

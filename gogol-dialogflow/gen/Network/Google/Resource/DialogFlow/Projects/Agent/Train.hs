@@ -64,7 +64,8 @@ type ProjectsAgentTrainResource =
 -- | Trains the specified agent. Operation
 --
 -- /See:/ 'projectsAgentTrain' smart constructor.
-data ProjectsAgentTrain = ProjectsAgentTrain'
+data ProjectsAgentTrain =
+  ProjectsAgentTrain'
     { _patParent         :: !Text
     , _patXgafv          :: !(Maybe Xgafv)
     , _patUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsAgentTrain = ProjectsAgentTrain'
     , _patUploadType     :: !(Maybe Text)
     , _patPayload        :: !GoogleCloudDialogflowV2TrainAgentRequest
     , _patCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentTrain' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsAgentTrain
     -> GoogleCloudDialogflowV2TrainAgentRequest -- ^ 'patPayload'
     -> ProjectsAgentTrain
 projectsAgentTrain pPatParent_ pPatPayload_ =
-    ProjectsAgentTrain'
+  ProjectsAgentTrain'
     { _patParent = pPatParent_
     , _patXgafv = Nothing
     , _patUploadProtocol = Nothing

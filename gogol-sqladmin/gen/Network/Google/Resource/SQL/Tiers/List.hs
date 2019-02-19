@@ -55,9 +55,11 @@ type TiersListResource =
 -- db-n1-standard-1. For related information, see Pricing.
 --
 -- /See:/ 'tiersList' smart constructor.
-newtype TiersList = TiersList'
+newtype TiersList =
+  TiersList'
     { _tlProject :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TiersList' with the minimum fields required to make a request.
 --
@@ -67,10 +69,7 @@ newtype TiersList = TiersList'
 tiersList
     :: Text -- ^ 'tlProject'
     -> TiersList
-tiersList pTlProject_ =
-    TiersList'
-    { _tlProject = pTlProject_
-    }
+tiersList pTlProject_ = TiersList' {_tlProject = pTlProject_}
 
 -- | Project ID of the project for which to list tiers.
 tlProject :: Lens' TiersList Text

@@ -65,7 +65,8 @@ type ProjectsLocationsWorkflowTemplatesUpdateResource
 -- version that matches the current server version.
 --
 -- /See:/ 'projectsLocationsWorkflowTemplatesUpdate' smart constructor.
-data ProjectsLocationsWorkflowTemplatesUpdate = ProjectsLocationsWorkflowTemplatesUpdate'
+data ProjectsLocationsWorkflowTemplatesUpdate =
+  ProjectsLocationsWorkflowTemplatesUpdate'
     { _plwtuXgafv          :: !(Maybe Xgafv)
     , _plwtuUploadProtocol :: !(Maybe Text)
     , _plwtuAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsLocationsWorkflowTemplatesUpdate = ProjectsLocationsWorkflowTemplat
     , _plwtuPayload        :: !WorkflowTemplate
     , _plwtuName           :: !Text
     , _plwtuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesUpdate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsLocationsWorkflowTemplatesUpdate
     -> Text -- ^ 'plwtuName'
     -> ProjectsLocationsWorkflowTemplatesUpdate
 projectsLocationsWorkflowTemplatesUpdate pPlwtuPayload_ pPlwtuName_ =
-    ProjectsLocationsWorkflowTemplatesUpdate'
+  ProjectsLocationsWorkflowTemplatesUpdate'
     { _plwtuXgafv = Nothing
     , _plwtuUploadProtocol = Nothing
     , _plwtuAccessToken = Nothing
@@ -149,7 +151,8 @@ plwtuCallback
       (\ s a -> s{_plwtuCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkflowTemplatesUpdate where
+           ProjectsLocationsWorkflowTemplatesUpdate
+         where
         type Rs ProjectsLocationsWorkflowTemplatesUpdate =
              WorkflowTemplate
         type Scopes ProjectsLocationsWorkflowTemplatesUpdate

@@ -71,7 +71,8 @@ type MyLibraryAnnotationsListResource =
 -- | Retrieves a list of annotations, possibly filtered.
 --
 -- /See:/ 'myLibraryAnnotationsList' smart constructor.
-data MyLibraryAnnotationsList = MyLibraryAnnotationsList'
+data MyLibraryAnnotationsList =
+  MyLibraryAnnotationsList'
     { _mlalContentVersion :: !(Maybe Text)
     , _mlalShowDeleted    :: !(Maybe Bool)
     , _mlalUpdatedMax     :: !(Maybe Text)
@@ -82,7 +83,8 @@ data MyLibraryAnnotationsList = MyLibraryAnnotationsList'
     , _mlalPageToken      :: !(Maybe Text)
     , _mlalLayerId        :: !(Maybe Text)
     , _mlalMaxResults     :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsList' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ data MyLibraryAnnotationsList = MyLibraryAnnotationsList'
 myLibraryAnnotationsList
     :: MyLibraryAnnotationsList
 myLibraryAnnotationsList =
-    MyLibraryAnnotationsList'
+  MyLibraryAnnotationsList'
     { _mlalContentVersion = Nothing
     , _mlalShowDeleted = Nothing
     , _mlalUpdatedMax = Nothing

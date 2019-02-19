@@ -64,13 +64,15 @@ type TargetHTTPSProxiesListResource =
 -- specified project.
 --
 -- /See:/ 'targetHTTPSProxiesList' smart constructor.
-data TargetHTTPSProxiesList = TargetHTTPSProxiesList'
+data TargetHTTPSProxiesList =
+  TargetHTTPSProxiesList'
     { _thplOrderBy    :: !(Maybe Text)
     , _thplProject    :: !Text
     , _thplFilter     :: !(Maybe Text)
     , _thplPageToken  :: !(Maybe Text)
     , _thplMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxiesList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ targetHTTPSProxiesList
     :: Text -- ^ 'thplProject'
     -> TargetHTTPSProxiesList
 targetHTTPSProxiesList pThplProject_ =
-    TargetHTTPSProxiesList'
+  TargetHTTPSProxiesList'
     { _thplOrderBy = Nothing
     , _thplProject = pThplProject_
     , _thplFilter = Nothing

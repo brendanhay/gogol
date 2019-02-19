@@ -65,14 +65,16 @@ type MyConfigRequestAccessResource =
 -- | Request concurrent and download access restrictions.
 --
 -- /See:/ 'myConfigRequestAccess' smart constructor.
-data MyConfigRequestAccess = MyConfigRequestAccess'
+data MyConfigRequestAccess =
+  MyConfigRequestAccess'
     { _mcraCpksver      :: !Text
     , _mcraLocale       :: !(Maybe Text)
     , _mcraLicenseTypes :: !(Maybe MyConfigRequestAccessLicenseTypes)
     , _mcraVolumeId     :: !Text
     , _mcraSource       :: !Text
     , _mcraNonce        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyConfigRequestAccess' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ myConfigRequestAccess
     -> Text -- ^ 'mcraNonce'
     -> MyConfigRequestAccess
 myConfigRequestAccess pMcraCpksver_ pMcraVolumeId_ pMcraSource_ pMcraNonce_ =
-    MyConfigRequestAccess'
+  MyConfigRequestAccess'
     { _mcraCpksver = pMcraCpksver_
     , _mcraLocale = Nothing
     , _mcraLicenseTypes = Nothing

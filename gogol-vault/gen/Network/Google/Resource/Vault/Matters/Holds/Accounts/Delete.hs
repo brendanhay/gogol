@@ -68,7 +68,8 @@ type MattersHoldsAccountsDeleteResource =
 -- no held accounts, the hold will not apply to any accounts.
 --
 -- /See:/ 'mattersHoldsAccountsDelete' smart constructor.
-data MattersHoldsAccountsDelete = MattersHoldsAccountsDelete'
+data MattersHoldsAccountsDelete =
+  MattersHoldsAccountsDelete'
     { _mhadXgafv          :: !(Maybe Xgafv)
     , _mhadUploadProtocol :: !(Maybe Text)
     , _mhadHoldId         :: !Text
@@ -77,7 +78,8 @@ data MattersHoldsAccountsDelete = MattersHoldsAccountsDelete'
     , _mhadMatterId       :: !Text
     , _mhadAccountId      :: !Text
     , _mhadCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersHoldsAccountsDelete' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ mattersHoldsAccountsDelete
     -> Text -- ^ 'mhadAccountId'
     -> MattersHoldsAccountsDelete
 mattersHoldsAccountsDelete pMhadHoldId_ pMhadMatterId_ pMhadAccountId_ =
-    MattersHoldsAccountsDelete'
+  MattersHoldsAccountsDelete'
     { _mhadXgafv = Nothing
     , _mhadUploadProtocol = Nothing
     , _mhadHoldId = pMhadHoldId_

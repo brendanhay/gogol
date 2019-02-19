@@ -67,7 +67,8 @@ type ProjectsAgentIntentsCreateResource =
 -- | Creates an intent in the specified agent.
 --
 -- /See:/ 'projectsAgentIntentsCreate' smart constructor.
-data ProjectsAgentIntentsCreate = ProjectsAgentIntentsCreate'
+data ProjectsAgentIntentsCreate =
+  ProjectsAgentIntentsCreate'
     { _paicParent         :: !Text
     , _paicXgafv          :: !(Maybe Xgafv)
     , _paicLanguageCode   :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsAgentIntentsCreate = ProjectsAgentIntentsCreate'
     , _paicPayload        :: !GoogleCloudDialogflowV2Intent
     , _paicIntentView     :: !(Maybe Text)
     , _paicCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentIntentsCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsAgentIntentsCreate
     -> GoogleCloudDialogflowV2Intent -- ^ 'paicPayload'
     -> ProjectsAgentIntentsCreate
 projectsAgentIntentsCreate pPaicParent_ pPaicPayload_ =
-    ProjectsAgentIntentsCreate'
+  ProjectsAgentIntentsCreate'
     { _paicParent = pPaicParent_
     , _paicXgafv = Nothing
     , _paicLanguageCode = Nothing

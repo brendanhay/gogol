@@ -82,13 +82,15 @@ type InstanceGroupManagersRecreateInstancesResource =
 -- of 1000 instances with this method per request.
 --
 -- /See:/ 'instanceGroupManagersRecreateInstances' smart constructor.
-data InstanceGroupManagersRecreateInstances = InstanceGroupManagersRecreateInstances'
+data InstanceGroupManagersRecreateInstances =
+  InstanceGroupManagersRecreateInstances'
     { _igmriRequestId            :: !(Maybe Text)
     , _igmriProject              :: !Text
     , _igmriInstanceGroupManager :: !Text
     , _igmriZone                 :: !Text
     , _igmriPayload              :: !InstanceGroupManagersRecreateInstancesRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersRecreateInstances' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ instanceGroupManagersRecreateInstances
     -> InstanceGroupManagersRecreateInstancesRequest -- ^ 'igmriPayload'
     -> InstanceGroupManagersRecreateInstances
 instanceGroupManagersRecreateInstances pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ pIgmriPayload_ =
-    InstanceGroupManagersRecreateInstances'
+  InstanceGroupManagersRecreateInstances'
     { _igmriRequestId = Nothing
     , _igmriProject = pIgmriProject_
     , _igmriInstanceGroupManager = pIgmriInstanceGroupManager_
@@ -155,7 +157,8 @@ igmriPayload
   = lens _igmriPayload (\ s a -> s{_igmriPayload = a})
 
 instance GoogleRequest
-         InstanceGroupManagersRecreateInstances where
+           InstanceGroupManagersRecreateInstances
+         where
         type Rs InstanceGroupManagersRecreateInstances =
              Operation
         type Scopes InstanceGroupManagersRecreateInstances =

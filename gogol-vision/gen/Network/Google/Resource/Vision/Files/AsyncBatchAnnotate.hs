@@ -72,14 +72,16 @@ type FilesAsyncBatchAnnotateResource =
 -- contains \`AsyncBatchAnnotateFilesResponse\` (results).
 --
 -- /See:/ 'filesAsyncBatchAnnotate' smart constructor.
-data FilesAsyncBatchAnnotate = FilesAsyncBatchAnnotate'
+data FilesAsyncBatchAnnotate =
+  FilesAsyncBatchAnnotate'
     { _fabaXgafv          :: !(Maybe Xgafv)
     , _fabaUploadProtocol :: !(Maybe Text)
     , _fabaAccessToken    :: !(Maybe Text)
     , _fabaUploadType     :: !(Maybe Text)
     , _fabaPayload        :: !GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
     , _fabaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilesAsyncBatchAnnotate' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ filesAsyncBatchAnnotate
     :: GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest -- ^ 'fabaPayload'
     -> FilesAsyncBatchAnnotate
 filesAsyncBatchAnnotate pFabaPayload_ =
-    FilesAsyncBatchAnnotate'
+  FilesAsyncBatchAnnotate'
     { _fabaXgafv = Nothing
     , _fabaUploadProtocol = Nothing
     , _fabaAccessToken = Nothing

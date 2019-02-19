@@ -73,7 +73,8 @@ type ProjectsLocationsFunctionsTestIAMPermissionsResource
 -- warning.
 --
 -- /See:/ 'projectsLocationsFunctionsTestIAMPermissions' smart constructor.
-data ProjectsLocationsFunctionsTestIAMPermissions = ProjectsLocationsFunctionsTestIAMPermissions'
+data ProjectsLocationsFunctionsTestIAMPermissions =
+  ProjectsLocationsFunctionsTestIAMPermissions'
     { _plftipXgafv          :: !(Maybe Xgafv)
     , _plftipUploadProtocol :: !(Maybe Text)
     , _plftipAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsLocationsFunctionsTestIAMPermissions = ProjectsLocationsFunctionsTe
     , _plftipPayload        :: !TestIAMPermissionsRequest
     , _plftipResource       :: !Text
     , _plftipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsFunctionsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsLocationsFunctionsTestIAMPermissions
     -> Text -- ^ 'plftipResource'
     -> ProjectsLocationsFunctionsTestIAMPermissions
 projectsLocationsFunctionsTestIAMPermissions pPlftipPayload_ pPlftipResource_ =
-    ProjectsLocationsFunctionsTestIAMPermissions'
+  ProjectsLocationsFunctionsTestIAMPermissions'
     { _plftipXgafv = Nothing
     , _plftipUploadProtocol = Nothing
     , _plftipAccessToken = Nothing
@@ -159,7 +161,8 @@ plftipCallback
       (\ s a -> s{_plftipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsFunctionsTestIAMPermissions where
+           ProjectsLocationsFunctionsTestIAMPermissions
+         where
         type Rs ProjectsLocationsFunctionsTestIAMPermissions
              = TestIAMPermissionsResponse
         type Scopes

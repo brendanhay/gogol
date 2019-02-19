@@ -72,7 +72,8 @@ type ServicesTenancyUnitsRemoveProjectResource =
 -- the tenancy unit. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsRemoveProject' smart constructor.
-data ServicesTenancyUnitsRemoveProject = ServicesTenancyUnitsRemoveProject'
+data ServicesTenancyUnitsRemoveProject =
+  ServicesTenancyUnitsRemoveProject'
     { _sturpXgafv          :: !(Maybe Xgafv)
     , _sturpUploadProtocol :: !(Maybe Text)
     , _sturpAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ServicesTenancyUnitsRemoveProject = ServicesTenancyUnitsRemoveProject'
     , _sturpPayload        :: !RemoveTenantProjectRequest
     , _sturpName           :: !Text
     , _sturpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesTenancyUnitsRemoveProject' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ servicesTenancyUnitsRemoveProject
     -> Text -- ^ 'sturpName'
     -> ServicesTenancyUnitsRemoveProject
 servicesTenancyUnitsRemoveProject pSturpPayload_ pSturpName_ =
-    ServicesTenancyUnitsRemoveProject'
+  ServicesTenancyUnitsRemoveProject'
     { _sturpXgafv = Nothing
     , _sturpUploadProtocol = Nothing
     , _sturpAccessToken = Nothing
@@ -155,7 +157,8 @@ sturpCallback
       (\ s a -> s{_sturpCallback = a})
 
 instance GoogleRequest
-         ServicesTenancyUnitsRemoveProject where
+           ServicesTenancyUnitsRemoveProject
+         where
         type Rs ServicesTenancyUnitsRemoveProject = Operation
         type Scopes ServicesTenancyUnitsRemoveProject =
              '["https://www.googleapis.com/auth/cloud-platform"]

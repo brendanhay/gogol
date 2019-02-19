@@ -54,10 +54,12 @@ type ReportsSavedListResource =
 -- | List all saved reports in this AdSense account.
 --
 -- /See:/ 'reportsSavedList' smart constructor.
-data ReportsSavedList = ReportsSavedList'
+data ReportsSavedList =
+  ReportsSavedList'
     { _rslPageToken  :: !(Maybe Text)
     , _rslMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsSavedList' with the minimum fields required to make a request.
 --
@@ -69,10 +71,7 @@ data ReportsSavedList = ReportsSavedList'
 reportsSavedList
     :: ReportsSavedList
 reportsSavedList =
-    ReportsSavedList'
-    { _rslPageToken = Nothing
-    , _rslMaxResults = Nothing
-    }
+  ReportsSavedList' {_rslPageToken = Nothing, _rslMaxResults = Nothing}
 
 -- | A continuation token, used to page through saved reports. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from

@@ -54,10 +54,12 @@ type ManagementAccountsListResource =
 -- | Lists all accounts to which the user has access.
 --
 -- /See:/ 'managementAccountsList' smart constructor.
-data ManagementAccountsList = ManagementAccountsList'
+data ManagementAccountsList =
+  ManagementAccountsList'
     { _malStartIndex :: !(Maybe (Textual Int32))
     , _malMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementAccountsList' with the minimum fields required to make a request.
 --
@@ -69,10 +71,7 @@ data ManagementAccountsList = ManagementAccountsList'
 managementAccountsList
     :: ManagementAccountsList
 managementAccountsList =
-    ManagementAccountsList'
-    { _malStartIndex = Nothing
-    , _malMaxResults = Nothing
-    }
+  ManagementAccountsList' {_malStartIndex = Nothing, _malMaxResults = Nothing}
 
 -- | An index of the first account to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.

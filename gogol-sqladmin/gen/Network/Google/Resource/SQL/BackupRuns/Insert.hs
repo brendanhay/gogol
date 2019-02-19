@@ -59,11 +59,13 @@ type BackupRunsInsertResource =
 -- Second Generation instances.
 --
 -- /See:/ 'backupRunsInsert' smart constructor.
-data BackupRunsInsert = BackupRunsInsert'
+data BackupRunsInsert =
+  BackupRunsInsert'
     { _briProject  :: !Text
     , _briPayload  :: !BackupRun
     , _briInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackupRunsInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ backupRunsInsert
     -> Text -- ^ 'briInstance'
     -> BackupRunsInsert
 backupRunsInsert pBriProject_ pBriPayload_ pBriInstance_ =
-    BackupRunsInsert'
+  BackupRunsInsert'
     { _briProject = pBriProject_
     , _briPayload = pBriPayload_
     , _briInstance = pBriInstance_

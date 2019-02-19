@@ -55,10 +55,12 @@ type PosListResource =
 -- | Lists the stores of the target merchant.
 --
 -- /See:/ 'posList' smart constructor.
-data PosList = PosList'
+data PosList =
+  PosList'
     { _posMerchantId       :: !(Textual Word64)
     , _posTargetMerchantId :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PosList' with the minimum fields required to make a request.
 --
@@ -72,7 +74,7 @@ posList
     -> Word64 -- ^ 'posTargetMerchantId'
     -> PosList
 posList pPosMerchantId_ pPosTargetMerchantId_ =
-    PosList'
+  PosList'
     { _posMerchantId = _Coerce # pPosMerchantId_
     , _posTargetMerchantId = _Coerce # pPosTargetMerchantId_
     }

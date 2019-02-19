@@ -68,11 +68,13 @@ type ProductsGetAppRestrictionsSchemaResource =
 -- Managed Configurations through Play.
 --
 -- /See:/ 'productsGetAppRestrictionsSchema' smart constructor.
-data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema'
+data ProductsGetAppRestrictionsSchema =
+  ProductsGetAppRestrictionsSchema'
     { _pgarsEnterpriseId :: !Text
     , _pgarsLanguage     :: !(Maybe Text)
     , _pgarsProductId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsGetAppRestrictionsSchema' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ productsGetAppRestrictionsSchema
     -> Text -- ^ 'pgarsProductId'
     -> ProductsGetAppRestrictionsSchema
 productsGetAppRestrictionsSchema pPgarsEnterpriseId_ pPgarsProductId_ =
-    ProductsGetAppRestrictionsSchema'
+  ProductsGetAppRestrictionsSchema'
     { _pgarsEnterpriseId = pPgarsEnterpriseId_
     , _pgarsLanguage = Nothing
     , _pgarsProductId = pPgarsProductId_
@@ -114,7 +116,8 @@ pgarsProductId
       (\ s a -> s{_pgarsProductId = a})
 
 instance GoogleRequest
-         ProductsGetAppRestrictionsSchema where
+           ProductsGetAppRestrictionsSchema
+         where
         type Rs ProductsGetAppRestrictionsSchema =
              AppRestrictionsSchema
         type Scopes ProductsGetAppRestrictionsSchema =

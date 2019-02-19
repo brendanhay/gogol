@@ -54,10 +54,12 @@ type UsersDataSourcesGetResource =
 -- | Returns the specified data source.
 --
 -- /See:/ 'usersDataSourcesGet' smart constructor.
-data UsersDataSourcesGet = UsersDataSourcesGet'
+data UsersDataSourcesGet =
+  UsersDataSourcesGet'
     { _udsgDataSourceId :: !Text
     , _udsgUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDataSourcesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ usersDataSourcesGet
     -> Text -- ^ 'udsgUserId'
     -> UsersDataSourcesGet
 usersDataSourcesGet pUdsgDataSourceId_ pUdsgUserId_ =
-    UsersDataSourcesGet'
-    { _udsgDataSourceId = pUdsgDataSourceId_
-    , _udsgUserId = pUdsgUserId_
-    }
+  UsersDataSourcesGet'
+    {_udsgDataSourceId = pUdsgDataSourceId_, _udsgUserId = pUdsgUserId_}
 
 -- | The data stream ID of the data source to retrieve.
 udsgDataSourceId :: Lens' UsersDataSourcesGet Text

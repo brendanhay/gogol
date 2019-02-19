@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementGroupsInsert' request conforms to.
 type PlacementGroupsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
@@ -55,10 +55,12 @@ type PlacementGroupsInsertResource =
 -- | Inserts a new placement group.
 --
 -- /See:/ 'placementGroupsInsert' smart constructor.
-data PlacementGroupsInsert = PlacementGroupsInsert'
+data PlacementGroupsInsert =
+  PlacementGroupsInsert'
     { _pgiProFileId :: !(Textual Int64)
     , _pgiPayload   :: !PlacementGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlacementGroupsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ placementGroupsInsert
     -> PlacementGroup -- ^ 'pgiPayload'
     -> PlacementGroupsInsert
 placementGroupsInsert pPgiProFileId_ pPgiPayload_ =
-    PlacementGroupsInsert'
-    { _pgiProFileId = _Coerce # pPgiProFileId_
-    , _pgiPayload = pPgiPayload_
-    }
+  PlacementGroupsInsert'
+    {_pgiProFileId = _Coerce # pPgiProFileId_, _pgiPayload = pPgiPayload_}
 
 -- | User profile ID associated with this request.
 pgiProFileId :: Lens' PlacementGroupsInsert Int64

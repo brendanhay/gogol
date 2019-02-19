@@ -23,10 +23,12 @@ import           Network.Google.ToolResults.Types.Sum
 -- | A response containing the thumbnails in a step.
 --
 -- /See:/ 'listStepThumbnailsResponse' smart constructor.
-data ListStepThumbnailsResponse = ListStepThumbnailsResponse'
+data ListStepThumbnailsResponse =
+  ListStepThumbnailsResponse'
     { _lstrNextPageToken :: !(Maybe Text)
     , _lstrThumbnails    :: !(Maybe [Image])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStepThumbnailsResponse' with the minimum fields required to make a request.
 --
@@ -38,10 +40,8 @@ data ListStepThumbnailsResponse = ListStepThumbnailsResponse'
 listStepThumbnailsResponse
     :: ListStepThumbnailsResponse
 listStepThumbnailsResponse =
-    ListStepThumbnailsResponse'
-    { _lstrNextPageToken = Nothing
-    , _lstrThumbnails = Nothing
-    }
+  ListStepThumbnailsResponse'
+    {_lstrNextPageToken = Nothing, _lstrThumbnails = Nothing}
 
 -- | A continuation token to resume the query at the next item. If set,
 -- indicates that there are more thumbnails to read, by calling list again
@@ -82,12 +82,14 @@ instance ToJSON ListStepThumbnailsResponse where
 
 --
 -- /See:/ 'screen' smart constructor.
-data Screen = Screen'
+data Screen =
+  Screen'
     { _sFileReference :: !(Maybe Text)
     , _sLocale        :: !(Maybe Text)
     , _sModel         :: !(Maybe Text)
     , _sVersion       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Screen' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ data Screen = Screen'
 screen
     :: Screen
 screen =
-    Screen'
+  Screen'
     { _sFileReference = Nothing
     , _sLocale = Nothing
     , _sModel = Nothing
@@ -148,12 +150,14 @@ instance ToJSON Screen where
 -- | A single thumbnail, with its size and format.
 --
 -- /See:/ 'thumbnail' smart constructor.
-data Thumbnail = Thumbnail'
+data Thumbnail =
+  Thumbnail'
     { _tData        :: !(Maybe Bytes)
     , _tHeightPx    :: !(Maybe (Textual Int32))
     , _tWidthPx     :: !(Maybe (Textual Int32))
     , _tContentType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
 --
@@ -169,7 +173,7 @@ data Thumbnail = Thumbnail'
 thumbnail
     :: Thumbnail
 thumbnail =
-    Thumbnail'
+  Thumbnail'
     { _tData = Nothing
     , _tHeightPx = Nothing
     , _tWidthPx = Nothing
@@ -256,11 +260,13 @@ instance ToJSON Thumbnail where
 -- directly after any stripping needed for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [Any])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -273,12 +279,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -319,11 +320,13 @@ instance ToJSON Status where
 -- | A reference to a ToolExecution output file.
 --
 -- /See:/ 'toolOutputReference' smart constructor.
-data ToolOutputReference = ToolOutputReference'
+data ToolOutputReference =
+  ToolOutputReference'
     { _torCreationTime :: !(Maybe Timestamp)
     , _torTestCase     :: !(Maybe TestCaseReference)
     , _torOutput       :: !(Maybe FileReference)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ToolOutputReference' with the minimum fields required to make a request.
 --
@@ -337,11 +340,8 @@ data ToolOutputReference = ToolOutputReference'
 toolOutputReference
     :: ToolOutputReference
 toolOutputReference =
-    ToolOutputReference'
-    { _torCreationTime = Nothing
-    , _torTestCase = Nothing
-    , _torOutput = Nothing
-    }
+  ToolOutputReference'
+    {_torCreationTime = Nothing, _torTestCase = Nothing, _torOutput = Nothing}
 
 -- | The creation time of the file. - In response: present if set by
 -- create\/update request - In create\/update request: optional
@@ -382,14 +382,16 @@ instance ToJSON ToolOutputReference where
 -- points)
 --
 -- /See:/ 'perfSampleSeries' smart constructor.
-data PerfSampleSeries = PerfSampleSeries'
+data PerfSampleSeries =
+  PerfSampleSeries'
     { _pssExecutionId           :: !(Maybe Text)
     , _pssStepId                :: !(Maybe Text)
     , _pssHistoryId             :: !(Maybe Text)
     , _pssProjectId             :: !(Maybe Text)
     , _pssSampleSeriesId        :: !(Maybe Text)
     , _pssBasicPerfSampleSeries :: !(Maybe BasicPerfSampleSeries)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PerfSampleSeries' with the minimum fields required to make a request.
 --
@@ -409,7 +411,7 @@ data PerfSampleSeries = PerfSampleSeries'
 perfSampleSeries
     :: PerfSampleSeries
 perfSampleSeries =
-    PerfSampleSeries'
+  PerfSampleSeries'
     { _pssExecutionId = Nothing
     , _pssStepId = Nothing
     , _pssHistoryId = Nothing
@@ -477,12 +479,14 @@ instance ToJSON PerfSampleSeries where
 -- | Android app information.
 --
 -- /See:/ 'androidAppInfo' smart constructor.
-data AndroidAppInfo = AndroidAppInfo'
+data AndroidAppInfo =
+  AndroidAppInfo'
     { _aaiVersionCode :: !(Maybe Text)
     , _aaiVersionName :: !(Maybe Text)
     , _aaiPackageName :: !(Maybe Text)
     , _aaiName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AndroidAppInfo' with the minimum fields required to make a request.
 --
@@ -498,7 +502,7 @@ data AndroidAppInfo = AndroidAppInfo'
 androidAppInfo
     :: AndroidAppInfo
 androidAppInfo =
-    AndroidAppInfo'
+  AndroidAppInfo'
     { _aaiVersionCode = Nothing
     , _aaiVersionName = Nothing
     , _aaiPackageName = Nothing
@@ -548,10 +552,12 @@ instance ToJSON AndroidAppInfo where
 -- | Resource representing a single performance measure or data point
 --
 -- /See:/ 'perfSample' smart constructor.
-data PerfSample = PerfSample'
+data PerfSample =
+  PerfSample'
     { _psValue      :: !(Maybe (Textual Double))
     , _psSampleTime :: !(Maybe Timestamp)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PerfSample' with the minimum fields required to make a request.
 --
@@ -562,11 +568,7 @@ data PerfSample = PerfSample'
 -- * 'psSampleTime'
 perfSample
     :: PerfSample
-perfSample =
-    PerfSample'
-    { _psValue = Nothing
-    , _psSampleTime = Nothing
-    }
+perfSample = PerfSample' {_psValue = Nothing, _psSampleTime = Nothing}
 
 -- | Value observed
 psValue :: Lens' PerfSample (Maybe Double)
@@ -596,14 +598,16 @@ instance ToJSON PerfSample where
 -- | An issue detected occurring during a test execution.
 --
 -- /See:/ 'testIssue' smart constructor.
-data TestIssue = TestIssue'
+data TestIssue =
+  TestIssue'
     { _tiCategory     :: !(Maybe TestIssueCategory)
     , _tiSeverity     :: !(Maybe TestIssueSeverity)
     , _tiStackTrace   :: !(Maybe StackTrace)
     , _tiWarning      :: !(Maybe Any)
     , _tiType         :: !(Maybe TestIssueType)
     , _tiErrorMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestIssue' with the minimum fields required to make a request.
 --
@@ -623,7 +627,7 @@ data TestIssue = TestIssue'
 testIssue
     :: TestIssue
 testIssue =
-    TestIssue'
+  TestIssue'
     { _tiCategory = Nothing
     , _tiSeverity = Nothing
     , _tiStackTrace = Nothing
@@ -687,10 +691,12 @@ instance ToJSON TestIssue where
 
 --
 -- /See:/ 'memoryInfo' smart constructor.
-data MemoryInfo = MemoryInfo'
+data MemoryInfo =
+  MemoryInfo'
     { _miMemoryCapInKibibyte   :: !(Maybe (Textual Int64))
     , _miMemoryTotalInKibibyte :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MemoryInfo' with the minimum fields required to make a request.
 --
@@ -702,10 +708,8 @@ data MemoryInfo = MemoryInfo'
 memoryInfo
     :: MemoryInfo
 memoryInfo =
-    MemoryInfo'
-    { _miMemoryCapInKibibyte = Nothing
-    , _miMemoryTotalInKibibyte = Nothing
-    }
+  MemoryInfo'
+    {_miMemoryCapInKibibyte = Nothing, _miMemoryTotalInKibibyte = Nothing}
 
 -- | Maximum memory that can be allocated to the process in KiB
 miMemoryCapInKibibyte :: Lens' MemoryInfo (Maybe Int64)
@@ -741,12 +745,14 @@ instance ToJSON MemoryInfo where
 -- | An image, with a link to the main image and a thumbnail.
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image'
+data Image =
+  Image'
     { _iThumbnail   :: !(Maybe Thumbnail)
     , _iStepId      :: !(Maybe Text)
     , _iSourceImage :: !(Maybe ToolOutputReference)
     , _iError       :: !(Maybe Status)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -762,7 +768,7 @@ data Image = Image'
 image
     :: Image
 image =
-    Image'
+  Image'
     { _iThumbnail = Nothing
     , _iStepId = Nothing
     , _iSourceImage = Nothing
@@ -808,10 +814,12 @@ instance ToJSON Image where
 
 --
 -- /See:/ 'inconclusiveDetail' smart constructor.
-data InconclusiveDetail = InconclusiveDetail'
+data InconclusiveDetail =
+  InconclusiveDetail'
     { _idInfrastructureFailure :: !(Maybe Bool)
     , _idAbortedByUser         :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InconclusiveDetail' with the minimum fields required to make a request.
 --
@@ -823,10 +831,8 @@ data InconclusiveDetail = InconclusiveDetail'
 inconclusiveDetail
     :: InconclusiveDetail
 inconclusiveDetail =
-    InconclusiveDetail'
-    { _idInfrastructureFailure = Nothing
-    , _idAbortedByUser = Nothing
-    }
+  InconclusiveDetail'
+    {_idInfrastructureFailure = Nothing, _idAbortedByUser = Nothing}
 
 -- | If the test runner could not determine success or failure because the
 -- test depends on a component other than the system under test which
@@ -863,10 +869,12 @@ instance ToJSON InconclusiveDetail where
 
 --
 -- /See:/ 'graphicsStatsBucket' smart constructor.
-data GraphicsStatsBucket = GraphicsStatsBucket'
+data GraphicsStatsBucket =
+  GraphicsStatsBucket'
     { _gsbRenderMillis :: !(Maybe (Textual Int64))
     , _gsbFrameCount   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GraphicsStatsBucket' with the minimum fields required to make a request.
 --
@@ -878,10 +886,7 @@ data GraphicsStatsBucket = GraphicsStatsBucket'
 graphicsStatsBucket
     :: GraphicsStatsBucket
 graphicsStatsBucket =
-    GraphicsStatsBucket'
-    { _gsbRenderMillis = Nothing
-    , _gsbFrameCount = Nothing
-    }
+  GraphicsStatsBucket' {_gsbRenderMillis = Nothing, _gsbFrameCount = Nothing}
 
 -- | Lower bound of render time in milliseconds.
 gsbRenderMillis :: Lens' GraphicsStatsBucket (Maybe Int64)
@@ -919,11 +924,13 @@ instance ToJSON GraphicsStatsBucket where
 -- Executions per branch.
 --
 -- /See:/ 'history' smart constructor.
-data History = History'
+data History =
+  History'
     { _hName        :: !(Maybe Text)
     , _hHistoryId   :: !(Maybe Text)
     , _hDisplayName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'History' with the minimum fields required to make a request.
 --
@@ -937,11 +944,7 @@ data History = History'
 history
     :: History
 history =
-    History'
-    { _hName = Nothing
-    , _hHistoryId = Nothing
-    , _hDisplayName = Nothing
-    }
+  History' {_hName = Nothing, _hHistoryId = Nothing, _hDisplayName = Nothing}
 
 -- | A name to uniquely identify a history within a project. Maximum of 200
 -- characters. - In response always set - In create request: always set
@@ -982,9 +985,11 @@ instance ToJSON History where
 -- a larger sample size will cause an INVALID_ARGUMENT error
 --
 -- /See:/ 'batchCreatePerfSamplesRequest' smart constructor.
-newtype BatchCreatePerfSamplesRequest = BatchCreatePerfSamplesRequest'
+newtype BatchCreatePerfSamplesRequest =
+  BatchCreatePerfSamplesRequest'
     { _bcpsrPerfSamples :: Maybe [PerfSample]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchCreatePerfSamplesRequest' with the minimum fields required to make a request.
 --
@@ -994,9 +999,7 @@ newtype BatchCreatePerfSamplesRequest = BatchCreatePerfSamplesRequest'
 batchCreatePerfSamplesRequest
     :: BatchCreatePerfSamplesRequest
 batchCreatePerfSamplesRequest =
-    BatchCreatePerfSamplesRequest'
-    { _bcpsrPerfSamples = Nothing
-    }
+  BatchCreatePerfSamplesRequest' {_bcpsrPerfSamples = Nothing}
 
 -- | The set of PerfSamples to create should not include existing timestamps
 bcpsrPerfSamples :: Lens' BatchCreatePerfSamplesRequest [PerfSample]
@@ -1021,9 +1024,11 @@ instance ToJSON BatchCreatePerfSamplesRequest where
 
 --
 -- /See:/ 'listPerfSampleSeriesResponse' smart constructor.
-newtype ListPerfSampleSeriesResponse = ListPerfSampleSeriesResponse'
+newtype ListPerfSampleSeriesResponse =
+  ListPerfSampleSeriesResponse'
     { _lpssrPerfSampleSeries :: Maybe [PerfSampleSeries]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPerfSampleSeriesResponse' with the minimum fields required to make a request.
 --
@@ -1033,9 +1038,7 @@ newtype ListPerfSampleSeriesResponse = ListPerfSampleSeriesResponse'
 listPerfSampleSeriesResponse
     :: ListPerfSampleSeriesResponse
 listPerfSampleSeriesResponse =
-    ListPerfSampleSeriesResponse'
-    { _lpssrPerfSampleSeries = Nothing
-    }
+  ListPerfSampleSeriesResponse' {_lpssrPerfSampleSeries = Nothing}
 
 -- | The resulting PerfSampleSeries sorted by id
 lpssrPerfSampleSeries :: Lens' ListPerfSampleSeriesResponse [PerfSampleSeries]
@@ -1060,10 +1063,12 @@ instance ToJSON ListPerfSampleSeriesResponse where
 
 --
 -- /See:/ 'listPerfSamplesResponse' smart constructor.
-data ListPerfSamplesResponse = ListPerfSamplesResponse'
+data ListPerfSamplesResponse =
+  ListPerfSamplesResponse'
     { _lpsrPerfSamples   :: !(Maybe [PerfSample])
     , _lpsrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPerfSamplesResponse' with the minimum fields required to make a request.
 --
@@ -1075,10 +1080,8 @@ data ListPerfSamplesResponse = ListPerfSamplesResponse'
 listPerfSamplesResponse
     :: ListPerfSamplesResponse
 listPerfSamplesResponse =
-    ListPerfSamplesResponse'
-    { _lpsrPerfSamples = Nothing
-    , _lpsrNextPageToken = Nothing
-    }
+  ListPerfSamplesResponse'
+    {_lpsrPerfSamples = Nothing, _lpsrNextPageToken = Nothing}
 
 lpsrPerfSamples :: Lens' ListPerfSamplesResponse [PerfSample]
 lpsrPerfSamples
@@ -1113,12 +1116,14 @@ instance ToJSON ListPerfSamplesResponse where
 -- | An Android mobile test specification.
 --
 -- /See:/ 'androidTest' smart constructor.
-data AndroidTest = AndroidTest'
+data AndroidTest =
+  AndroidTest'
     { _atAndroidAppInfo             :: !(Maybe AndroidAppInfo)
     , _atTestTimeout                :: !(Maybe Duration)
     , _atAndroidRoboTest            :: !(Maybe AndroidRoboTest)
     , _atAndroidInstrumentationTest :: !(Maybe AndroidInstrumentationTest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AndroidTest' with the minimum fields required to make a request.
 --
@@ -1134,7 +1139,7 @@ data AndroidTest = AndroidTest'
 androidTest
     :: AndroidTest
 androidTest =
-    AndroidTest'
+  AndroidTest'
     { _atAndroidAppInfo = Nothing
     , _atTestTimeout = Nothing
     , _atAndroidRoboTest = Nothing
@@ -1189,13 +1194,15 @@ instance ToJSON AndroidTest where
 -- goes.
 --
 -- /See:/ 'androidRoboTest' smart constructor.
-data AndroidRoboTest = AndroidRoboTest'
+data AndroidRoboTest =
+  AndroidRoboTest'
     { _artBootstrapRunnerClass :: !(Maybe Text)
     , _artAppInitialActivity   :: !(Maybe Text)
     , _artMaxSteps             :: !(Maybe (Textual Int32))
     , _artBootstrapPackageId   :: !(Maybe Text)
     , _artMaxDepth             :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AndroidRoboTest' with the minimum fields required to make a request.
 --
@@ -1213,7 +1220,7 @@ data AndroidRoboTest = AndroidRoboTest'
 androidRoboTest
     :: AndroidRoboTest
 androidRoboTest =
-    AndroidRoboTest'
+  AndroidRoboTest'
     { _artBootstrapRunnerClass = Nothing
     , _artAppInitialActivity = Nothing
     , _artMaxSteps = Nothing
@@ -1277,9 +1284,11 @@ instance ToJSON AndroidRoboTest where
 -- | A reference to a file.
 --
 -- /See:/ 'fileReference' smart constructor.
-newtype FileReference = FileReference'
+newtype FileReference =
+  FileReference'
     { _frFileURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileReference' with the minimum fields required to make a request.
 --
@@ -1288,10 +1297,7 @@ newtype FileReference = FileReference'
 -- * 'frFileURI'
 fileReference
     :: FileReference
-fileReference =
-    FileReference'
-    { _frFileURI = Nothing
-    }
+fileReference = FileReference' {_frFileURI = Nothing}
 
 -- | The URI of a file stored in Google Cloud Storage. For example:
 -- http:\/\/storage.googleapis.com\/mybucket\/path\/to\/test.xml or in
@@ -1315,11 +1321,13 @@ instance ToJSON FileReference where
 
 --
 -- /See:/ 'cpuInfo' smart constructor.
-data CPUInfo = CPUInfo'
+data CPUInfo =
+  CPUInfo'
     { _ciNumberOfCores :: !(Maybe (Textual Int32))
     , _ciCPUProcessor  :: !(Maybe Text)
     , _ciCPUSpeedInGhz :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CPUInfo' with the minimum fields required to make a request.
 --
@@ -1333,7 +1341,7 @@ data CPUInfo = CPUInfo'
 cpuInfo
     :: CPUInfo
 cpuInfo =
-    CPUInfo'
+  CPUInfo'
     { _ciNumberOfCores = Nothing
     , _ciCPUProcessor = Nothing
     , _ciCPUSpeedInGhz = Nothing
@@ -1378,10 +1386,12 @@ instance ToJSON CPUInfo where
 
 --
 -- /See:/ 'listExecutionsResponse' smart constructor.
-data ListExecutionsResponse = ListExecutionsResponse'
+data ListExecutionsResponse =
+  ListExecutionsResponse'
     { _lerNextPageToken :: !(Maybe Text)
     , _lerExecutions    :: !(Maybe [Execution])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListExecutionsResponse' with the minimum fields required to make a request.
 --
@@ -1393,10 +1403,8 @@ data ListExecutionsResponse = ListExecutionsResponse'
 listExecutionsResponse
     :: ListExecutionsResponse
 listExecutionsResponse =
-    ListExecutionsResponse'
-    { _lerNextPageToken = Nothing
-    , _lerExecutions = Nothing
-    }
+  ListExecutionsResponse'
+    {_lerNextPageToken = Nothing, _lerExecutions = Nothing}
 
 -- | A continuation token to resume the query at the next item. Will only be
 -- set if there are more Executions to fetch.
@@ -1431,10 +1439,12 @@ instance ToJSON ListExecutionsResponse where
 -- | Response message for StepService.List.
 --
 -- /See:/ 'listStepsResponse' smart constructor.
-data ListStepsResponse = ListStepsResponse'
+data ListStepsResponse =
+  ListStepsResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrSteps         :: !(Maybe [Step])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStepsResponse' with the minimum fields required to make a request.
 --
@@ -1446,10 +1456,7 @@ data ListStepsResponse = ListStepsResponse'
 listStepsResponse
     :: ListStepsResponse
 listStepsResponse =
-    ListStepsResponse'
-    { _lsrNextPageToken = Nothing
-    , _lsrSteps = Nothing
-    }
+  ListStepsResponse' {_lsrNextPageToken = Nothing, _lsrSteps = Nothing}
 
 -- | A continuation token to resume the query at the next item. If set,
 -- indicates that there are more steps to read, by calling list again with
@@ -1484,10 +1491,12 @@ instance ToJSON ListStepsResponse where
 -- | Per-project settings for the Tool Results service.
 --
 -- /See:/ 'projectSettings' smart constructor.
-data ProjectSettings = ProjectSettings'
+data ProjectSettings =
+  ProjectSettings'
     { _psName          :: !(Maybe Text)
     , _psDefaultBucket :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectSettings' with the minimum fields required to make a request.
 --
@@ -1499,10 +1508,7 @@ data ProjectSettings = ProjectSettings'
 projectSettings
     :: ProjectSettings
 projectSettings =
-    ProjectSettings'
-    { _psName = Nothing
-    , _psDefaultBucket = Nothing
-    }
+  ProjectSettings' {_psName = Nothing, _psDefaultBucket = Nothing}
 
 -- | The name of the project\'s settings. Always of the form:
 -- projects\/{project-id}\/settings In update request: never set In
@@ -1536,9 +1542,11 @@ instance ToJSON ProjectSettings where
 -- For example: running cp to copy artifacts from one location to another.
 --
 -- /See:/ 'toolExecutionStep' smart constructor.
-newtype ToolExecutionStep = ToolExecutionStep'
+newtype ToolExecutionStep =
+  ToolExecutionStep'
     { _tesToolExecution :: Maybe ToolExecution
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ToolExecutionStep' with the minimum fields required to make a request.
 --
@@ -1547,10 +1555,7 @@ newtype ToolExecutionStep = ToolExecutionStep'
 -- * 'tesToolExecution'
 toolExecutionStep
     :: ToolExecutionStep
-toolExecutionStep =
-    ToolExecutionStep'
-    { _tesToolExecution = Nothing
-    }
+toolExecutionStep = ToolExecutionStep' {_tesToolExecution = Nothing}
 
 -- | A Tool execution. - In response: present if set by create\/update
 -- request - In create\/update request: optional
@@ -1573,10 +1578,12 @@ instance ToJSON ToolExecutionStep where
 
 --
 -- /See:/ 'stepLabelsEntry' smart constructor.
-data StepLabelsEntry = StepLabelsEntry'
+data StepLabelsEntry =
+  StepLabelsEntry'
     { _sleValue :: !(Maybe Text)
     , _sleKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StepLabelsEntry' with the minimum fields required to make a request.
 --
@@ -1587,11 +1594,7 @@ data StepLabelsEntry = StepLabelsEntry'
 -- * 'sleKey'
 stepLabelsEntry
     :: StepLabelsEntry
-stepLabelsEntry =
-    StepLabelsEntry'
-    { _sleValue = Nothing
-    , _sleKey = Nothing
-    }
+stepLabelsEntry = StepLabelsEntry' {_sleValue = Nothing, _sleKey = Nothing}
 
 sleValue :: Lens' StepLabelsEntry (Maybe Text)
 sleValue = lens _sleValue (\ s a -> s{_sleValue = a})
@@ -1619,12 +1622,14 @@ instance ToJSON StepLabelsEntry where
 -- test_result field.
 --
 -- /See:/ 'testExecutionStep' smart constructor.
-data TestExecutionStep = TestExecutionStep'
+data TestExecutionStep =
+  TestExecutionStep'
     { _tTestIssues         :: !(Maybe [TestIssue])
     , _tToolExecution      :: !(Maybe ToolExecution)
     , _tTestSuiteOverviews :: !(Maybe [TestSuiteOverview])
     , _tTestTiming         :: !(Maybe TestTiming)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestExecutionStep' with the minimum fields required to make a request.
 --
@@ -1640,7 +1645,7 @@ data TestExecutionStep = TestExecutionStep'
 testExecutionStep
     :: TestExecutionStep
 testExecutionStep =
-    TestExecutionStep'
+  TestExecutionStep'
     { _tTestIssues = Nothing
     , _tToolExecution = Nothing
     , _tTestSuiteOverviews = Nothing
@@ -1708,11 +1713,13 @@ instance ToJSON TestExecutionStep where
 -- Second, by class_name. * Third, by name.
 --
 -- /See:/ 'testCaseReference' smart constructor.
-data TestCaseReference = TestCaseReference'
+data TestCaseReference =
+  TestCaseReference'
     { _tcrTestSuiteName :: !(Maybe Text)
     , _tcrName          :: !(Maybe Text)
     , _tcrClassName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestCaseReference' with the minimum fields required to make a request.
 --
@@ -1726,11 +1733,8 @@ data TestCaseReference = TestCaseReference'
 testCaseReference
     :: TestCaseReference
 testCaseReference =
-    TestCaseReference'
-    { _tcrTestSuiteName = Nothing
-    , _tcrName = Nothing
-    , _tcrClassName = Nothing
-    }
+  TestCaseReference'
+    {_tcrTestSuiteName = Nothing, _tcrName = Nothing, _tcrClassName = Nothing}
 
 -- | The name of the test suite to which this test case belongs.
 tcrTestSuiteName :: Lens' TestCaseReference (Maybe Text)
@@ -1765,13 +1769,15 @@ instance ToJSON TestCaseReference where
 
 --
 -- /See:/ 'failureDetail' smart constructor.
-data FailureDetail = FailureDetail'
+data FailureDetail =
+  FailureDetail'
     { _fdCrashed          :: !(Maybe Bool)
     , _fdNotInstalled     :: !(Maybe Bool)
     , _fdTimedOut         :: !(Maybe Bool)
     , _fdOtherNATiveCrash :: !(Maybe Bool)
     , _fdUnableToCrawl    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FailureDetail' with the minimum fields required to make a request.
 --
@@ -1789,7 +1795,7 @@ data FailureDetail = FailureDetail'
 failureDetail
     :: FailureDetail
 failureDetail =
-    FailureDetail'
+  FailureDetail'
     { _fdCrashed = Nothing
     , _fdNotInstalled = Nothing
     , _fdTimedOut = Nothing
@@ -1850,10 +1856,12 @@ instance ToJSON FailureDetail where
 -- | Encapsulates performance environment info
 --
 -- /See:/ 'perfEnvironment' smart constructor.
-data PerfEnvironment = PerfEnvironment'
+data PerfEnvironment =
+  PerfEnvironment'
     { _peMemoryInfo :: !(Maybe MemoryInfo)
     , _peCPUInfo    :: !(Maybe CPUInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PerfEnvironment' with the minimum fields required to make a request.
 --
@@ -1865,10 +1873,7 @@ data PerfEnvironment = PerfEnvironment'
 perfEnvironment
     :: PerfEnvironment
 perfEnvironment =
-    PerfEnvironment'
-    { _peMemoryInfo = Nothing
-    , _peCPUInfo = Nothing
-    }
+  PerfEnvironment' {_peMemoryInfo = Nothing, _peCPUInfo = Nothing}
 
 -- | Memory related environment info
 peMemoryInfo :: Lens' PerfEnvironment (Maybe MemoryInfo)
@@ -1896,9 +1901,11 @@ instance ToJSON PerfEnvironment where
 
 --
 -- /See:/ 'listScreenshotClustersResponse' smart constructor.
-newtype ListScreenshotClustersResponse = ListScreenshotClustersResponse'
+newtype ListScreenshotClustersResponse =
+  ListScreenshotClustersResponse'
     { _lscrClusters :: Maybe [ScreenshotCluster]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListScreenshotClustersResponse' with the minimum fields required to make a request.
 --
@@ -1908,9 +1915,7 @@ newtype ListScreenshotClustersResponse = ListScreenshotClustersResponse'
 listScreenshotClustersResponse
     :: ListScreenshotClustersResponse
 listScreenshotClustersResponse =
-    ListScreenshotClustersResponse'
-    { _lscrClusters = Nothing
-    }
+  ListScreenshotClustersResponse' {_lscrClusters = Nothing}
 
 -- | The set of clusters associated with an execution Always set
 lscrClusters :: Lens' ListScreenshotClustersResponse [ScreenshotCluster]
@@ -1934,10 +1939,12 @@ instance ToJSON ListScreenshotClustersResponse where
 
 --
 -- /See:/ 'appStartTime' smart constructor.
-data AppStartTime = AppStartTime'
+data AppStartTime =
+  AppStartTime'
     { _astInitialDisplayTime :: !(Maybe Duration)
     , _astFullyDrawnTime     :: !(Maybe Duration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppStartTime' with the minimum fields required to make a request.
 --
@@ -1949,10 +1956,7 @@ data AppStartTime = AppStartTime'
 appStartTime
     :: AppStartTime
 appStartTime =
-    AppStartTime'
-    { _astInitialDisplayTime = Nothing
-    , _astFullyDrawnTime = Nothing
-    }
+  AppStartTime' {_astInitialDisplayTime = Nothing, _astFullyDrawnTime = Nothing}
 
 -- | The time from app start to the first displayed activity being drawn, as
 -- reported in Logcat. See
@@ -1993,7 +1997,8 @@ instance ToJSON AppStartTime where
 -- Statistics will only be present for API 23+.
 --
 -- /See:/ 'graphicsStats' smart constructor.
-data GraphicsStats = GraphicsStats'
+data GraphicsStats =
+  GraphicsStats'
     { _gsSlowDrawCount         :: !(Maybe (Textual Int64))
     , _gsTotalFrames           :: !(Maybe (Textual Int64))
     , _gsSlowBitmapUploadCount :: !(Maybe (Textual Int64))
@@ -2006,7 +2011,8 @@ data GraphicsStats = GraphicsStats'
     , _gsP99Millis             :: !(Maybe (Textual Int64))
     , _gsSlowUiThreadCount     :: !(Maybe (Textual Int64))
     , _gsJankyFrames           :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GraphicsStats' with the minimum fields required to make a request.
 --
@@ -2038,7 +2044,7 @@ data GraphicsStats = GraphicsStats'
 graphicsStats
     :: GraphicsStats
 graphicsStats =
-    GraphicsStats'
+  GraphicsStats'
     { _gsSlowDrawCount = Nothing
     , _gsTotalFrames = Nothing
     , _gsSlowBitmapUploadCount = Nothing
@@ -2173,9 +2179,11 @@ instance ToJSON GraphicsStats where
 -- | A stacktrace.
 --
 -- /See:/ 'stackTrace' smart constructor.
-newtype StackTrace = StackTrace'
+newtype StackTrace =
+  StackTrace'
     { _stException :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StackTrace' with the minimum fields required to make a request.
 --
@@ -2184,10 +2192,7 @@ newtype StackTrace = StackTrace'
 -- * 'stException'
 stackTrace
     :: StackTrace
-stackTrace =
-    StackTrace'
-    { _stException = Nothing
-    }
+stackTrace = StackTrace' {_stException = Nothing}
 
 -- | The stack trace message. Required
 stException :: Lens' StackTrace (Maybe Text)
@@ -2206,9 +2211,11 @@ instance ToJSON StackTrace where
 
 --
 -- /See:/ 'batchCreatePerfSamplesResponse' smart constructor.
-newtype BatchCreatePerfSamplesResponse = BatchCreatePerfSamplesResponse'
+newtype BatchCreatePerfSamplesResponse =
+  BatchCreatePerfSamplesResponse'
     { _bPerfSamples :: Maybe [PerfSample]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchCreatePerfSamplesResponse' with the minimum fields required to make a request.
 --
@@ -2218,9 +2225,7 @@ newtype BatchCreatePerfSamplesResponse = BatchCreatePerfSamplesResponse'
 batchCreatePerfSamplesResponse
     :: BatchCreatePerfSamplesResponse
 batchCreatePerfSamplesResponse =
-    BatchCreatePerfSamplesResponse'
-    { _bPerfSamples = Nothing
-    }
+  BatchCreatePerfSamplesResponse' {_bPerfSamples = Nothing}
 
 bPerfSamples :: Lens' BatchCreatePerfSamplesResponse [PerfSample]
 bPerfSamples
@@ -2249,7 +2254,8 @@ instance ToJSON BatchCreatePerfSamplesResponse where
 -- immutable.
 --
 -- /See:/ 'execution' smart constructor.
-data Execution = Execution'
+data Execution =
+  Execution'
     { _eCreationTime          :: !(Maybe Timestamp)
     , _eExecutionId           :: !(Maybe Text)
     , _eState                 :: !(Maybe ExecutionState)
@@ -2257,7 +2263,8 @@ data Execution = Execution'
     , _eTestExecutionMatrixId :: !(Maybe Text)
     , _eOutcome               :: !(Maybe Outcome)
     , _eSpecification         :: !(Maybe Specification)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Execution' with the minimum fields required to make a request.
 --
@@ -2279,7 +2286,7 @@ data Execution = Execution'
 execution
     :: Execution
 execution =
-    Execution'
+  Execution'
     { _eCreationTime = Nothing
     , _eExecutionId = Nothing
     , _eState = Nothing
@@ -2373,13 +2380,15 @@ instance ToJSON Execution where
 -- | Interprets a result so that humans and machines can act on it.
 --
 -- /See:/ 'outcome' smart constructor.
-data Outcome = Outcome'
+data Outcome =
+  Outcome'
     { _oSummary            :: !(Maybe OutcomeSummary)
     , _oInconclusiveDetail :: !(Maybe InconclusiveDetail)
     , _oFailureDetail      :: !(Maybe FailureDetail)
     , _oSuccessDetail      :: !(Maybe SuccessDetail)
     , _oSkippedDetail      :: !(Maybe SkippedDetail)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Outcome' with the minimum fields required to make a request.
 --
@@ -2397,7 +2406,7 @@ data Outcome = Outcome'
 outcome
     :: Outcome
 outcome =
-    Outcome'
+  Outcome'
     { _oSummary = Nothing
     , _oInconclusiveDetail = Nothing
     , _oFailureDetail = Nothing
@@ -2472,7 +2481,8 @@ instance ToJSON Outcome where
 -- which points it becomes immutable.
 --
 -- /See:/ 'step' smart constructor.
-data Step = Step'
+data Step =
+  Step'
     { _sCreationTime        :: !(Maybe Timestamp)
     , _sRunDuration         :: !(Maybe Duration)
     , _sState               :: !(Maybe StepState)
@@ -2487,7 +2497,8 @@ data Step = Step'
     , _sLabels              :: !(Maybe [StepLabelsEntry])
     , _sDeviceUsageDuration :: !(Maybe Duration)
     , _sDescription         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Step' with the minimum fields required to make a request.
 --
@@ -2523,7 +2534,7 @@ data Step = Step'
 step
     :: Step
 step =
-    Step'
+  Step'
     { _sCreationTime = Nothing
     , _sRunDuration = Nothing
     , _sState = Nothing
@@ -2721,9 +2732,11 @@ instance ToJSON Step where
 
 --
 -- /See:/ 'successDetail' smart constructor.
-newtype SuccessDetail = SuccessDetail'
+newtype SuccessDetail =
+  SuccessDetail'
     { _sdOtherNATiveCrash :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SuccessDetail' with the minimum fields required to make a request.
 --
@@ -2732,10 +2745,7 @@ newtype SuccessDetail = SuccessDetail'
 -- * 'sdOtherNATiveCrash'
 successDetail
     :: SuccessDetail
-successDetail =
-    SuccessDetail'
-    { _sdOtherNATiveCrash = Nothing
-    }
+successDetail = SuccessDetail' {_sdOtherNATiveCrash = Nothing}
 
 -- | If a native process other than the app crashed.
 sdOtherNATiveCrash :: Lens' SuccessDetail (Maybe Bool)
@@ -2759,12 +2769,14 @@ instance ToJSON SuccessDetail where
 -- copying artifacts or deploying code.
 --
 -- /See:/ 'toolExecution' smart constructor.
-data ToolExecution = ToolExecution'
+data ToolExecution =
+  ToolExecution'
     { _teCommandLineArguments :: !(Maybe [Text])
     , _teToolOutputs          :: !(Maybe [ToolOutputReference])
     , _teToolLogs             :: !(Maybe [FileReference])
     , _teExitCode             :: !(Maybe ToolExitCode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ToolExecution' with the minimum fields required to make a request.
 --
@@ -2780,7 +2792,7 @@ data ToolExecution = ToolExecution'
 toolExecution
     :: ToolExecution
 toolExecution =
-    ToolExecution'
+  ToolExecution'
     { _teCommandLineArguments = Nothing
     , _teToolOutputs = Nothing
     , _teToolLogs = Nothing
@@ -2854,9 +2866,11 @@ instance ToJSON ToolExecution where
 -- | Request message for StepService.PublishXunitXmlFiles.
 --
 -- /See:/ 'publishXUnitXMLFilesRequest' smart constructor.
-newtype PublishXUnitXMLFilesRequest = PublishXUnitXMLFilesRequest'
+newtype PublishXUnitXMLFilesRequest =
+  PublishXUnitXMLFilesRequest'
     { _pxuxfrXUnitXMLFiles :: Maybe [FileReference]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PublishXUnitXMLFilesRequest' with the minimum fields required to make a request.
 --
@@ -2866,9 +2880,7 @@ newtype PublishXUnitXMLFilesRequest = PublishXUnitXMLFilesRequest'
 publishXUnitXMLFilesRequest
     :: PublishXUnitXMLFilesRequest
 publishXUnitXMLFilesRequest =
-    PublishXUnitXMLFilesRequest'
-    { _pxuxfrXUnitXMLFiles = Nothing
-    }
+  PublishXUnitXMLFilesRequest' {_pxuxfrXUnitXMLFiles = Nothing}
 
 -- | URI of the Xunit XML files to publish. The maximum size of the file this
 -- reference is pointing to is 50MB. Required.
@@ -2895,7 +2907,8 @@ instance ToJSON PublishXUnitXMLFilesRequest where
 -- | A summary of perf metrics collected and performance environment info
 --
 -- /See:/ 'perfMetricsSummary' smart constructor.
-data PerfMetricsSummary = PerfMetricsSummary'
+data PerfMetricsSummary =
+  PerfMetricsSummary'
     { _pmsExecutionId     :: !(Maybe Text)
     , _pmsStepId          :: !(Maybe Text)
     , _pmsPerfMetrics     :: !(Maybe [PerfMetricsSummaryPerfMetricsItem])
@@ -2904,7 +2917,8 @@ data PerfMetricsSummary = PerfMetricsSummary'
     , _pmsAppStartTime    :: !(Maybe AppStartTime)
     , _pmsHistoryId       :: !(Maybe Text)
     , _pmsProjectId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PerfMetricsSummary' with the minimum fields required to make a request.
 --
@@ -2928,7 +2942,7 @@ data PerfMetricsSummary = PerfMetricsSummary'
 perfMetricsSummary
     :: PerfMetricsSummary
 perfMetricsSummary =
-    PerfMetricsSummary'
+  PerfMetricsSummary'
     { _pmsExecutionId = Nothing
     , _pmsStepId = Nothing
     , _pmsPerfMetrics = Nothing
@@ -3016,10 +3030,12 @@ instance ToJSON PerfMetricsSummary where
 -- | Response message for HistoryService.List
 --
 -- /See:/ 'listHistoriesResponse' smart constructor.
-data ListHistoriesResponse = ListHistoriesResponse'
+data ListHistoriesResponse =
+  ListHistoriesResponse'
     { _lhrNextPageToken :: !(Maybe Text)
     , _lhrHistories     :: !(Maybe [History])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListHistoriesResponse' with the minimum fields required to make a request.
 --
@@ -3031,10 +3047,7 @@ data ListHistoriesResponse = ListHistoriesResponse'
 listHistoriesResponse
     :: ListHistoriesResponse
 listHistoriesResponse =
-    ListHistoriesResponse'
-    { _lhrNextPageToken = Nothing
-    , _lhrHistories = Nothing
-    }
+  ListHistoriesResponse' {_lhrNextPageToken = Nothing, _lhrHistories = Nothing}
 
 -- | A continuation token to resume the query at the next item. Will only be
 -- set if there are more histories to fetch. Tokens are valid for up to one
@@ -3072,9 +3085,11 @@ instance ToJSON ListHistoriesResponse where
 -- | Exit code from a tool execution.
 --
 -- /See:/ 'toolExitCode' smart constructor.
-newtype ToolExitCode = ToolExitCode'
+newtype ToolExitCode =
+  ToolExitCode'
     { _tecNumber :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ToolExitCode' with the minimum fields required to make a request.
 --
@@ -3083,10 +3098,7 @@ newtype ToolExitCode = ToolExitCode'
 -- * 'tecNumber'
 toolExitCode
     :: ToolExitCode
-toolExitCode =
-    ToolExitCode'
-    { _tecNumber = Nothing
-    }
+toolExitCode = ToolExitCode' {_tecNumber = Nothing}
 
 -- | Tool execution exit code. A value of 0 means that the execution was
 -- successful. - In response: always set - In create\/update request:
@@ -3110,12 +3122,14 @@ instance ToJSON ToolExitCode where
 -- of Android tests.
 --
 -- /See:/ 'androidInstrumentationTest' smart constructor.
-data AndroidInstrumentationTest = AndroidInstrumentationTest'
+data AndroidInstrumentationTest =
+  AndroidInstrumentationTest'
     { _aitTestTargets     :: !(Maybe [Text])
     , _aitUseOrchestrator :: !(Maybe Bool)
     , _aitTestRunnerClass :: !(Maybe Text)
     , _aitTestPackageId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AndroidInstrumentationTest' with the minimum fields required to make a request.
 --
@@ -3131,7 +3145,7 @@ data AndroidInstrumentationTest = AndroidInstrumentationTest'
 androidInstrumentationTest
     :: AndroidInstrumentationTest
 androidInstrumentationTest =
-    AndroidInstrumentationTest'
+  AndroidInstrumentationTest'
     { _aitTestTargets = Nothing
     , _aitUseOrchestrator = Nothing
     , _aitTestRunnerClass = Nothing
@@ -3190,10 +3204,12 @@ instance ToJSON AndroidInstrumentationTest where
 
 --
 -- /See:/ 'stepDimensionValueEntry' smart constructor.
-data StepDimensionValueEntry = StepDimensionValueEntry'
+data StepDimensionValueEntry =
+  StepDimensionValueEntry'
     { _sdveValue :: !(Maybe Text)
     , _sdveKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StepDimensionValueEntry' with the minimum fields required to make a request.
 --
@@ -3205,10 +3221,7 @@ data StepDimensionValueEntry = StepDimensionValueEntry'
 stepDimensionValueEntry
     :: StepDimensionValueEntry
 stepDimensionValueEntry =
-    StepDimensionValueEntry'
-    { _sdveValue = Nothing
-    , _sdveKey = Nothing
-    }
+  StepDimensionValueEntry' {_sdveValue = Nothing, _sdveKey = Nothing}
 
 sdveValue :: Lens' StepDimensionValueEntry (Maybe Text)
 sdveValue
@@ -3234,9 +3247,11 @@ instance ToJSON StepDimensionValueEntry where
 -- | The details about how to run the execution.
 --
 -- /See:/ 'specification' smart constructor.
-newtype Specification = Specification'
+newtype Specification =
+  Specification'
     { _sAndroidTest :: Maybe AndroidTest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Specification' with the minimum fields required to make a request.
 --
@@ -3245,10 +3260,7 @@ newtype Specification = Specification'
 -- * 'sAndroidTest'
 specification
     :: Specification
-specification =
-    Specification'
-    { _sAndroidTest = Nothing
-    }
+specification = Specification' {_sAndroidTest = Nothing}
 
 -- | An Android mobile test execution specification.
 sAndroidTest :: Lens' Specification (Maybe AndroidTest)
@@ -3271,14 +3283,16 @@ instance ToJSON Specification where
 -- mode for the corresponding step.
 --
 -- /See:/ 'testSuiteOverview' smart constructor.
-data TestSuiteOverview = TestSuiteOverview'
+data TestSuiteOverview =
+  TestSuiteOverview'
     { _tsoSkippedCount :: !(Maybe (Textual Int32))
     , _tsoErrorCount   :: !(Maybe (Textual Int32))
     , _tsoXMLSource    :: !(Maybe FileReference)
     , _tsoName         :: !(Maybe Text)
     , _tsoFailureCount :: !(Maybe (Textual Int32))
     , _tsoTotalCount   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestSuiteOverview' with the minimum fields required to make a request.
 --
@@ -3298,7 +3312,7 @@ data TestSuiteOverview = TestSuiteOverview'
 testSuiteOverview
     :: TestSuiteOverview
 testSuiteOverview =
-    TestSuiteOverview'
+  TestSuiteOverview'
     { _tsoSkippedCount = Nothing
     , _tsoErrorCount = Nothing
     , _tsoXMLSource = Nothing
@@ -3406,10 +3420,12 @@ instance ToJSON TestSuiteOverview where
 -- \"3.000001s\".
 --
 -- /See:/ 'duration' smart constructor.
-data Duration = Duration'
+data Duration =
+  Duration'
     { _dNanos   :: !(Maybe (Textual Int32))
     , _dSeconds :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Duration' with the minimum fields required to make a request.
 --
@@ -3420,11 +3436,7 @@ data Duration = Duration'
 -- * 'dSeconds'
 duration
     :: Duration
-duration =
-    Duration'
-    { _dNanos = Nothing
-    , _dSeconds = Nothing
-    }
+duration = Duration' {_dNanos = Nothing, _dSeconds = Nothing}
 
 -- | Signed fractions of a second at nanosecond resolution of the span of
 -- time. Durations less than one second are represented with a 0
@@ -3513,10 +3525,12 @@ instance ToJSON Duration where
 -- ) to obtain a formatter capable of generating timestamps in this format.
 --
 -- /See:/ 'timestamp' smart constructor.
-data Timestamp = Timestamp'
+data Timestamp =
+  Timestamp'
     { _tNanos   :: !(Maybe (Textual Int32))
     , _tSeconds :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Timestamp' with the minimum fields required to make a request.
 --
@@ -3527,11 +3541,7 @@ data Timestamp = Timestamp'
 -- * 'tSeconds'
 timestamp
     :: Timestamp
-timestamp =
-    Timestamp'
-    { _tNanos = Nothing
-    , _tSeconds = Nothing
-    }
+timestamp = Timestamp' {_tNanos = Nothing, _tSeconds = Nothing}
 
 -- | Non-negative fractions of a second at nanosecond resolution. Negative
 -- second values with fractions must still have non-negative nanos values
@@ -3592,10 +3602,12 @@ instance ToJSON Timestamp where
 -- \"value\": \"1.212s\" }
 --
 -- /See:/ 'any' smart constructor.
-data Any = Any'
+data Any =
+  Any'
     { _aValue   :: !(Maybe Bytes)
     , _aTypeURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Any' with the minimum fields required to make a request.
 --
@@ -3606,11 +3618,7 @@ data Any = Any'
 -- * 'aTypeURL'
 any
     :: Any
-any =
-    Any'
-    { _aValue = Nothing
-    , _aTypeURL = Nothing
-    }
+any = Any' {_aValue = Nothing, _aTypeURL = Nothing}
 
 -- | Must be a valid serialized protocol buffer of the above specified type.
 aValue :: Lens' Any (Maybe ByteString)
@@ -3657,9 +3665,11 @@ instance ToJSON Any where
 -- | Testing timing break down to know phases.
 --
 -- /See:/ 'testTiming' smart constructor.
-newtype TestTiming = TestTiming'
+newtype TestTiming =
+  TestTiming'
     { _ttTestProcessDuration :: Maybe Duration
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestTiming' with the minimum fields required to make a request.
 --
@@ -3668,10 +3678,7 @@ newtype TestTiming = TestTiming'
 -- * 'ttTestProcessDuration'
 testTiming
     :: TestTiming
-testTiming =
-    TestTiming'
-    { _ttTestProcessDuration = Nothing
-    }
+testTiming = TestTiming' {_ttTestProcessDuration = Nothing}
 
 -- | How long it took to run the test process. - In response: present if
 -- previously set. - In create\/update request: optional
@@ -3695,12 +3702,14 @@ instance ToJSON TestTiming where
 
 --
 -- /See:/ 'screenshotCluster' smart constructor.
-data ScreenshotCluster = ScreenshotCluster'
+data ScreenshotCluster =
+  ScreenshotCluster'
     { _scClusterId :: !(Maybe Text)
     , _scScreens   :: !(Maybe [Screen])
     , _scActivity  :: !(Maybe Text)
     , _scKeyScreen :: !(Maybe Screen)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ScreenshotCluster' with the minimum fields required to make a request.
 --
@@ -3716,7 +3725,7 @@ data ScreenshotCluster = ScreenshotCluster'
 screenshotCluster
     :: ScreenshotCluster
 screenshotCluster =
-    ScreenshotCluster'
+  ScreenshotCluster'
     { _scClusterId = Nothing
     , _scScreens = Nothing
     , _scActivity = Nothing
@@ -3770,11 +3779,13 @@ instance ToJSON ScreenshotCluster where
 -- chart
 --
 -- /See:/ 'basicPerfSampleSeries' smart constructor.
-data BasicPerfSampleSeries = BasicPerfSampleSeries'
+data BasicPerfSampleSeries =
+  BasicPerfSampleSeries'
     { _bpssPerfUnit          :: !(Maybe BasicPerfSampleSeriesPerfUnit)
     , _bpssPerfMetricType    :: !(Maybe BasicPerfSampleSeriesPerfMetricType)
     , _bpssSampleSeriesLabel :: !(Maybe BasicPerfSampleSeriesSampleSeriesLabel)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicPerfSampleSeries' with the minimum fields required to make a request.
 --
@@ -3788,7 +3799,7 @@ data BasicPerfSampleSeries = BasicPerfSampleSeries'
 basicPerfSampleSeries
     :: BasicPerfSampleSeries
 basicPerfSampleSeries =
-    BasicPerfSampleSeries'
+  BasicPerfSampleSeries'
     { _bpssPerfUnit = Nothing
     , _bpssPerfMetricType = Nothing
     , _bpssSampleSeriesLabel = Nothing
@@ -3826,11 +3837,13 @@ instance ToJSON BasicPerfSampleSeries where
 
 --
 -- /See:/ 'skippedDetail' smart constructor.
-data SkippedDetail = SkippedDetail'
+data SkippedDetail =
+  SkippedDetail'
     { _sdIncompatibleArchitecture :: !(Maybe Bool)
     , _sdIncompatibleAppVersion   :: !(Maybe Bool)
     , _sdIncompatibleDevice       :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SkippedDetail' with the minimum fields required to make a request.
 --
@@ -3844,7 +3857,7 @@ data SkippedDetail = SkippedDetail'
 skippedDetail
     :: SkippedDetail
 skippedDetail =
-    SkippedDetail'
+  SkippedDetail'
     { _sdIncompatibleArchitecture = Nothing
     , _sdIncompatibleAppVersion = Nothing
     , _sdIncompatibleDevice = Nothing

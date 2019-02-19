@@ -55,10 +55,12 @@ type AccountsContainersWorkspacesProposalCreateResource
 -- | Creates a GTM Workspace Proposal.
 --
 -- /See:/ 'accountsContainersWorkspacesProposalCreate' smart constructor.
-data AccountsContainersWorkspacesProposalCreate = AccountsContainersWorkspacesProposalCreate'
+data AccountsContainersWorkspacesProposalCreate =
+  AccountsContainersWorkspacesProposalCreate'
     { _acwpcParent  :: !Text
     , _acwpcPayload :: !CreateWorkspaceProposalRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesProposalCreate' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ accountsContainersWorkspacesProposalCreate
     -> CreateWorkspaceProposalRequest -- ^ 'acwpcPayload'
     -> AccountsContainersWorkspacesProposalCreate
 accountsContainersWorkspacesProposalCreate pAcwpcParent_ pAcwpcPayload_ =
-    AccountsContainersWorkspacesProposalCreate'
-    { _acwpcParent = pAcwpcParent_
-    , _acwpcPayload = pAcwpcPayload_
-    }
+  AccountsContainersWorkspacesProposalCreate'
+    {_acwpcParent = pAcwpcParent_, _acwpcPayload = pAcwpcPayload_}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{aid}\/containers\/{cid}\/workspace\/{wid}
@@ -89,7 +89,8 @@ acwpcPayload
   = lens _acwpcPayload (\ s a -> s{_acwpcPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesProposalCreate where
+           AccountsContainersWorkspacesProposalCreate
+         where
         type Rs AccountsContainersWorkspacesProposalCreate =
              WorkspaceProposal
         type Scopes

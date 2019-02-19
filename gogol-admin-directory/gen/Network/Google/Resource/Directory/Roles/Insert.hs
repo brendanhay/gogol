@@ -55,10 +55,12 @@ type RolesInsertResource =
 -- | Creates a role.
 --
 -- /See:/ 'rolesInsert' smart constructor.
-data RolesInsert = RolesInsert'
+data RolesInsert =
+  RolesInsert'
     { _riPayload  :: !Role
     , _riCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RolesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ rolesInsert
     -> Text -- ^ 'riCustomer'
     -> RolesInsert
 rolesInsert pRiPayload_ pRiCustomer_ =
-    RolesInsert'
-    { _riPayload = pRiPayload_
-    , _riCustomer = pRiCustomer_
-    }
+  RolesInsert' {_riPayload = pRiPayload_, _riCustomer = pRiCustomer_}
 
 -- | Multipart request metadata.
 riPayload :: Lens' RolesInsert Role

@@ -69,7 +69,8 @@ type ProjectsModelsCreateResource =
 -- [projects.models.versions.create](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/create).
 --
 -- /See:/ 'projectsModelsCreate' smart constructor.
-data ProjectsModelsCreate = ProjectsModelsCreate'
+data ProjectsModelsCreate =
+  ProjectsModelsCreate'
     { _pmcParent         :: !Text
     , _pmcXgafv          :: !(Maybe Xgafv)
     , _pmcUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsModelsCreate = ProjectsModelsCreate'
     , _pmcUploadType     :: !(Maybe Text)
     , _pmcPayload        :: !GoogleCloudMlV1__Model
     , _pmcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsModelsCreate' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsModelsCreate
     -> GoogleCloudMlV1__Model -- ^ 'pmcPayload'
     -> ProjectsModelsCreate
 projectsModelsCreate pPmcParent_ pPmcPayload_ =
-    ProjectsModelsCreate'
+  ProjectsModelsCreate'
     { _pmcParent = pPmcParent_
     , _pmcXgafv = Nothing
     , _pmcUploadProtocol = Nothing

@@ -94,7 +94,8 @@ type UserProFilesGuardianInvitationsListResource =
 -- recognized, but Classroom has no record of that student.
 --
 -- /See:/ 'userProFilesGuardianInvitationsList' smart constructor.
-data UserProFilesGuardianInvitationsList = UserProFilesGuardianInvitationsList'
+data UserProFilesGuardianInvitationsList =
+  UserProFilesGuardianInvitationsList'
     { _upfgilStudentId           :: !Text
     , _upfgilStates              :: !(Maybe [Text])
     , _upfgilXgafv               :: !(Maybe Xgafv)
@@ -105,7 +106,8 @@ data UserProFilesGuardianInvitationsList = UserProFilesGuardianInvitationsList'
     , _upfgilPageToken           :: !(Maybe Text)
     , _upfgilPageSize            :: !(Maybe (Textual Int32))
     , _upfgilCallback            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserProFilesGuardianInvitationsList' with the minimum fields required to make a request.
 --
@@ -134,7 +136,7 @@ userProFilesGuardianInvitationsList
     :: Text -- ^ 'upfgilStudentId'
     -> UserProFilesGuardianInvitationsList
 userProFilesGuardianInvitationsList pUpfgilStudentId_ =
-    UserProFilesGuardianInvitationsList'
+  UserProFilesGuardianInvitationsList'
     { _upfgilStudentId = pUpfgilStudentId_
     , _upfgilStates = Nothing
     , _upfgilXgafv = Nothing
@@ -221,7 +223,8 @@ upfgilCallback
       (\ s a -> s{_upfgilCallback = a})
 
 instance GoogleRequest
-         UserProFilesGuardianInvitationsList where
+           UserProFilesGuardianInvitationsList
+         where
         type Rs UserProFilesGuardianInvitationsList =
              ListGuardianInvitationsResponse
         type Scopes UserProFilesGuardianInvitationsList =

@@ -63,7 +63,8 @@ type CustomersDevicesRemoveConfigurationResource =
 -- | Removes a configuration from device.
 --
 -- /See:/ 'customersDevicesRemoveConfiguration' smart constructor.
-data CustomersDevicesRemoveConfiguration = CustomersDevicesRemoveConfiguration'
+data CustomersDevicesRemoveConfiguration =
+  CustomersDevicesRemoveConfiguration'
     { _cdrcParent         :: !Text
     , _cdrcXgafv          :: !(Maybe Xgafv)
     , _cdrcUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data CustomersDevicesRemoveConfiguration = CustomersDevicesRemoveConfiguration'
     , _cdrcUploadType     :: !(Maybe Text)
     , _cdrcPayload        :: !CustomerRemoveConfigurationRequest
     , _cdrcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersDevicesRemoveConfiguration' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ customersDevicesRemoveConfiguration
     -> CustomerRemoveConfigurationRequest -- ^ 'cdrcPayload'
     -> CustomersDevicesRemoveConfiguration
 customersDevicesRemoveConfiguration pCdrcParent_ pCdrcPayload_ =
-    CustomersDevicesRemoveConfiguration'
+  CustomersDevicesRemoveConfiguration'
     { _cdrcParent = pCdrcParent_
     , _cdrcXgafv = Nothing
     , _cdrcUploadProtocol = Nothing
@@ -145,7 +147,8 @@ cdrcCallback
   = lens _cdrcCallback (\ s a -> s{_cdrcCallback = a})
 
 instance GoogleRequest
-         CustomersDevicesRemoveConfiguration where
+           CustomersDevicesRemoveConfiguration
+         where
         type Rs CustomersDevicesRemoveConfiguration = Empty
         type Scopes CustomersDevicesRemoveConfiguration = '[]
         requestClient

@@ -61,14 +61,16 @@ type ThreatMatchesFindResource =
 -- | Finds the threat entries that match the Safe Browsing lists.
 --
 -- /See:/ 'threatMatchesFind' smart constructor.
-data ThreatMatchesFind = ThreatMatchesFind'
+data ThreatMatchesFind =
+  ThreatMatchesFind'
     { _tmfXgafv          :: !(Maybe Xgafv)
     , _tmfUploadProtocol :: !(Maybe Text)
     , _tmfAccessToken    :: !(Maybe Text)
     , _tmfUploadType     :: !(Maybe Text)
     , _tmfPayload        :: !FindThreatMatchesRequest
     , _tmfCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ThreatMatchesFind' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ threatMatchesFind
     :: FindThreatMatchesRequest -- ^ 'tmfPayload'
     -> ThreatMatchesFind
 threatMatchesFind pTmfPayload_ =
-    ThreatMatchesFind'
+  ThreatMatchesFind'
     { _tmfXgafv = Nothing
     , _tmfUploadProtocol = Nothing
     , _tmfAccessToken = Nothing

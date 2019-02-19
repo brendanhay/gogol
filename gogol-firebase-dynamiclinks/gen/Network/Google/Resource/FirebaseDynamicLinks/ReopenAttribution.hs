@@ -61,14 +61,16 @@ type ReopenAttributionResource =
 -- | Get iOS reopen attribution for app universal link open deeplinking.
 --
 -- /See:/ 'reopenAttribution' smart constructor.
-data ReopenAttribution = ReopenAttribution'
+data ReopenAttribution =
+  ReopenAttribution'
     { _raXgafv          :: !(Maybe Xgafv)
     , _raUploadProtocol :: !(Maybe Text)
     , _raAccessToken    :: !(Maybe Text)
     , _raUploadType     :: !(Maybe Text)
     , _raPayload        :: !GetIosReopenAttributionRequest
     , _raCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReopenAttribution' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ reopenAttribution
     :: GetIosReopenAttributionRequest -- ^ 'raPayload'
     -> ReopenAttribution
 reopenAttribution pRaPayload_ =
-    ReopenAttribution'
+  ReopenAttribution'
     { _raXgafv = Nothing
     , _raUploadProtocol = Nothing
     , _raAccessToken = Nothing

@@ -52,8 +52,8 @@ type RelyingPartyGetPublicKeysResource =
 --
 -- /See:/ 'relyingPartyGetPublicKeys' smart constructor.
 data RelyingPartyGetPublicKeys =
-    RelyingPartyGetPublicKeys'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  RelyingPartyGetPublicKeys'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyGetPublicKeys' with the minimum fields required to make a request.
 --

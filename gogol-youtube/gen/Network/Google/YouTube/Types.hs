@@ -2145,26 +2145,26 @@ youTubeService
 
 -- | Manage your YouTube videos
 youTubeUploadScope :: Proxy '["https://www.googleapis.com/auth/youtube.upload"]
-youTubeUploadScope = Proxy;
+youTubeUploadScope = Proxy
 
 -- | Manage your YouTube account
 youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
-youTubeScope = Proxy;
+youTubeScope = Proxy
 
 -- | View and manage your assets and associated content on YouTube
 youTubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
-youTubePartnerScope = Proxy;
+youTubePartnerScope = Proxy
 
 -- | See, edit, and permanently delete your YouTube videos, ratings, comments
 -- and captions
 youTubeForceSslScope :: Proxy '["https://www.googleapis.com/auth/youtube.force-ssl"]
-youTubeForceSslScope = Proxy;
+youTubeForceSslScope = Proxy
 
 -- | View your YouTube account
 youTubeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
-youTubeReadOnlyScope = Proxy;
+youTubeReadOnlyScope = Proxy
 
 -- | View private information of your YouTube channel relevant during the
 -- audit process with a YouTube partner
 youTubePartnerChannelAuditScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner-channel-audit"]
-youTubePartnerChannelAuditScope = Proxy;
+youTubePartnerChannelAuditScope = Proxy

@@ -63,7 +63,8 @@ type ProjectsLocationsClustersSetMaintenancePolicyResource
 -- | Sets the maintenance policy for a cluster.
 --
 -- /See:/ 'projectsLocationsClustersSetMaintenancePolicy' smart constructor.
-data ProjectsLocationsClustersSetMaintenancePolicy = ProjectsLocationsClustersSetMaintenancePolicy'
+data ProjectsLocationsClustersSetMaintenancePolicy =
+  ProjectsLocationsClustersSetMaintenancePolicy'
     { _plcsmpXgafv          :: !(Maybe Xgafv)
     , _plcsmpUploadProtocol :: !(Maybe Text)
     , _plcsmpAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsLocationsClustersSetMaintenancePolicy = ProjectsLocationsClustersSe
     , _plcsmpPayload        :: !SetMaintenancePolicyRequest
     , _plcsmpName           :: !Text
     , _plcsmpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersSetMaintenancePolicy' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsLocationsClustersSetMaintenancePolicy
     -> Text -- ^ 'plcsmpName'
     -> ProjectsLocationsClustersSetMaintenancePolicy
 projectsLocationsClustersSetMaintenancePolicy pPlcsmpPayload_ pPlcsmpName_ =
-    ProjectsLocationsClustersSetMaintenancePolicy'
+  ProjectsLocationsClustersSetMaintenancePolicy'
     { _plcsmpXgafv = Nothing
     , _plcsmpUploadProtocol = Nothing
     , _plcsmpAccessToken = Nothing
@@ -148,7 +150,8 @@ plcsmpCallback
       (\ s a -> s{_plcsmpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersSetMaintenancePolicy where
+           ProjectsLocationsClustersSetMaintenancePolicy
+         where
         type Rs ProjectsLocationsClustersSetMaintenancePolicy
              = Operation
         type Scopes

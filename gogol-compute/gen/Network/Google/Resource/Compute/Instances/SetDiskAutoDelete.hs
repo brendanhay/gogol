@@ -64,14 +64,16 @@ type InstancesSetDiskAutoDeleteResource =
 -- | Sets the auto-delete flag for a disk attached to an instance.
 --
 -- /See:/ 'instancesSetDiskAutoDelete' smart constructor.
-data InstancesSetDiskAutoDelete = InstancesSetDiskAutoDelete'
+data InstancesSetDiskAutoDelete =
+  InstancesSetDiskAutoDelete'
     { _isdadRequestId  :: !(Maybe Text)
     , _isdadProject    :: !Text
     , _isdadAutoDelete :: !Bool
     , _isdadZone       :: !Text
     , _isdadDeviceName :: !Text
     , _isdadInstance   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetDiskAutoDelete' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ instancesSetDiskAutoDelete
     -> Text -- ^ 'isdadInstance'
     -> InstancesSetDiskAutoDelete
 instancesSetDiskAutoDelete pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadDeviceName_ pIsdadInstance_ =
-    InstancesSetDiskAutoDelete'
+  InstancesSetDiskAutoDelete'
     { _isdadRequestId = Nothing
     , _isdadProject = pIsdadProject_
     , _isdadAutoDelete = pIsdadAutoDelete_

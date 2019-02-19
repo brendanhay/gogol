@@ -63,7 +63,8 @@ type ProjectsRolesPatchResource =
 -- | Updates a Role definition.
 --
 -- /See:/ 'projectsRolesPatch' smart constructor.
-data ProjectsRolesPatch = ProjectsRolesPatch'
+data ProjectsRolesPatch =
+  ProjectsRolesPatch'
     { _prpXgafv          :: !(Maybe Xgafv)
     , _prpUploadProtocol :: !(Maybe Text)
     , _prpUpdateMask     :: !(Maybe GFieldMask)
@@ -72,7 +73,8 @@ data ProjectsRolesPatch = ProjectsRolesPatch'
     , _prpPayload        :: !Role
     , _prpName           :: !Text
     , _prpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRolesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsRolesPatch
     -> Text -- ^ 'prpName'
     -> ProjectsRolesPatch
 projectsRolesPatch pPrpPayload_ pPrpName_ =
-    ProjectsRolesPatch'
+  ProjectsRolesPatch'
     { _prpXgafv = Nothing
     , _prpUploadProtocol = Nothing
     , _prpUpdateMask = Nothing

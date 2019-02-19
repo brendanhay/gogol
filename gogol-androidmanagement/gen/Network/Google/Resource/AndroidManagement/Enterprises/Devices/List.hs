@@ -65,7 +65,8 @@ type EnterprisesDevicesListResource =
 -- | Lists devices for a given enterprise.
 --
 -- /See:/ 'enterprisesDevicesList' smart constructor.
-data EnterprisesDevicesList = EnterprisesDevicesList'
+data EnterprisesDevicesList =
+  EnterprisesDevicesList'
     { _edlParent         :: !Text
     , _edlXgafv          :: !(Maybe Xgafv)
     , _edlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data EnterprisesDevicesList = EnterprisesDevicesList'
     , _edlPageToken      :: !(Maybe Text)
     , _edlPageSize       :: !(Maybe (Textual Int32))
     , _edlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesDevicesList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ enterprisesDevicesList
     :: Text -- ^ 'edlParent'
     -> EnterprisesDevicesList
 enterprisesDevicesList pEdlParent_ =
-    EnterprisesDevicesList'
+  EnterprisesDevicesList'
     { _edlParent = pEdlParent_
     , _edlXgafv = Nothing
     , _edlUploadProtocol = Nothing

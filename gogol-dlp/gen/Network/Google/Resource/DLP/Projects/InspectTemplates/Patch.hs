@@ -65,7 +65,8 @@ type ProjectsInspectTemplatesPatchResource =
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'projectsInspectTemplatesPatch' smart constructor.
-data ProjectsInspectTemplatesPatch = ProjectsInspectTemplatesPatch'
+data ProjectsInspectTemplatesPatch =
+  ProjectsInspectTemplatesPatch'
     { _pitpXgafv          :: !(Maybe Xgafv)
     , _pitpUploadProtocol :: !(Maybe Text)
     , _pitpAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsInspectTemplatesPatch = ProjectsInspectTemplatesPatch'
     , _pitpPayload        :: !GooglePrivacyDlpV2UpdateInspectTemplateRequest
     , _pitpName           :: !Text
     , _pitpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInspectTemplatesPatch' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsInspectTemplatesPatch
     -> Text -- ^ 'pitpName'
     -> ProjectsInspectTemplatesPatch
 projectsInspectTemplatesPatch pPitpPayload_ pPitpName_ =
-    ProjectsInspectTemplatesPatch'
+  ProjectsInspectTemplatesPatch'
     { _pitpXgafv = Nothing
     , _pitpUploadProtocol = Nothing
     , _pitpAccessToken = Nothing

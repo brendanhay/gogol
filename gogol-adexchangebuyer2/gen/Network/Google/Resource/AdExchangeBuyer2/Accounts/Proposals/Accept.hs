@@ -74,7 +74,8 @@ type AccountsProposalsAcceptResource =
 -- \`FINALIZED\`.
 --
 -- /See:/ 'accountsProposalsAccept' smart constructor.
-data AccountsProposalsAccept = AccountsProposalsAccept'
+data AccountsProposalsAccept =
+  AccountsProposalsAccept'
     { _apaXgafv          :: !(Maybe Xgafv)
     , _apaUploadProtocol :: !(Maybe Text)
     , _apaAccessToken    :: !(Maybe Text)
@@ -83,7 +84,8 @@ data AccountsProposalsAccept = AccountsProposalsAccept'
     , _apaProposalId     :: !Text
     , _apaAccountId      :: !Text
     , _apaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsProposalsAccept' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ accountsProposalsAccept
     -> Text -- ^ 'apaAccountId'
     -> AccountsProposalsAccept
 accountsProposalsAccept pApaPayload_ pApaProposalId_ pApaAccountId_ =
-    AccountsProposalsAccept'
+  AccountsProposalsAccept'
     { _apaXgafv = Nothing
     , _apaUploadProtocol = Nothing
     , _apaAccessToken = Nothing

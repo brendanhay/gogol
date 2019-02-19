@@ -60,11 +60,13 @@ type RollingUpdatesRollbackResource =
 -- effect if invoked when the state of the update is ROLLED_BACK.
 --
 -- /See:/ 'rollingUpdatesRollback' smart constructor.
-data RollingUpdatesRollback = RollingUpdatesRollback'
+data RollingUpdatesRollback =
+  RollingUpdatesRollback'
     { _rurRollingUpdate :: !Text
     , _rurProject       :: !Text
     , _rurZone          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdatesRollback' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ rollingUpdatesRollback
     -> Text -- ^ 'rurZone'
     -> RollingUpdatesRollback
 rollingUpdatesRollback pRurRollingUpdate_ pRurProject_ pRurZone_ =
-    RollingUpdatesRollback'
+  RollingUpdatesRollback'
     { _rurRollingUpdate = pRurRollingUpdate_
     , _rurProject = pRurProject_
     , _rurZone = pRurZone_

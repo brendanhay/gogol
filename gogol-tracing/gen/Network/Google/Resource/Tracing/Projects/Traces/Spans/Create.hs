@@ -65,7 +65,8 @@ type ProjectsTracesSpansCreateResource =
 -- | Creates a new Span.
 --
 -- /See:/ 'projectsTracesSpansCreate' smart constructor.
-data ProjectsTracesSpansCreate = ProjectsTracesSpansCreate'
+data ProjectsTracesSpansCreate =
+  ProjectsTracesSpansCreate'
     { _ptscXgafv          :: !(Maybe Xgafv)
     , _ptscUploadProtocol :: !(Maybe Text)
     , _ptscPp             :: !Bool
@@ -75,7 +76,8 @@ data ProjectsTracesSpansCreate = ProjectsTracesSpansCreate'
     , _ptscBearerToken    :: !(Maybe Text)
     , _ptscName           :: !Text
     , _ptscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTracesSpansCreate' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsTracesSpansCreate
     -> Text -- ^ 'ptscName'
     -> ProjectsTracesSpansCreate
 projectsTracesSpansCreate pPtscPayload_ pPtscName_ =
-    ProjectsTracesSpansCreate'
+  ProjectsTracesSpansCreate'
     { _ptscXgafv = Nothing
     , _ptscUploadProtocol = Nothing
     , _ptscPp = True

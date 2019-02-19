@@ -84,7 +84,8 @@ type TransferOperationsListResource =
 -- id.
 --
 -- /See:/ 'transferOperationsList' smart constructor.
-data TransferOperationsList = TransferOperationsList'
+data TransferOperationsList =
+  TransferOperationsList'
     { _tolXgafv          :: !(Maybe Xgafv)
     , _tolUploadProtocol :: !(Maybe Text)
     , _tolAccessToken    :: !(Maybe Text)
@@ -94,7 +95,8 @@ data TransferOperationsList = TransferOperationsList'
     , _tolPageToken      :: !(Maybe Text)
     , _tolPageSize       :: !(Maybe (Textual Int32))
     , _tolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferOperationsList' with the minimum fields required to make a request.
 --
@@ -121,7 +123,7 @@ transferOperationsList
     :: Text -- ^ 'tolName'
     -> TransferOperationsList
 transferOperationsList pTolName_ =
-    TransferOperationsList'
+  TransferOperationsList'
     { _tolXgafv = Nothing
     , _tolUploadProtocol = Nothing
     , _tolAccessToken = Nothing

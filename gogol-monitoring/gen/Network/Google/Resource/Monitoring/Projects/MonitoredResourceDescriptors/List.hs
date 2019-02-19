@@ -71,7 +71,8 @@ type ProjectsMonitoredResourceDescriptorsListResource
 -- does not require a Stackdriver account.
 --
 -- /See:/ 'projectsMonitoredResourceDescriptorsList' smart constructor.
-data ProjectsMonitoredResourceDescriptorsList = ProjectsMonitoredResourceDescriptorsList'
+data ProjectsMonitoredResourceDescriptorsList =
+  ProjectsMonitoredResourceDescriptorsList'
     { _pmrdlXgafv          :: !(Maybe Xgafv)
     , _pmrdlUploadProtocol :: !(Maybe Text)
     , _pmrdlAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsMonitoredResourceDescriptorsList = ProjectsMonitoredResourceDescrip
     , _pmrdlPageToken      :: !(Maybe Text)
     , _pmrdlPageSize       :: !(Maybe (Textual Int32))
     , _pmrdlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsMonitoredResourceDescriptorsList' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ projectsMonitoredResourceDescriptorsList
     :: Text -- ^ 'pmrdlName'
     -> ProjectsMonitoredResourceDescriptorsList
 projectsMonitoredResourceDescriptorsList pPmrdlName_ =
-    ProjectsMonitoredResourceDescriptorsList'
+  ProjectsMonitoredResourceDescriptorsList'
     { _pmrdlXgafv = Nothing
     , _pmrdlUploadProtocol = Nothing
     , _pmrdlAccessToken = Nothing
@@ -180,7 +182,8 @@ pmrdlCallback
       (\ s a -> s{_pmrdlCallback = a})
 
 instance GoogleRequest
-         ProjectsMonitoredResourceDescriptorsList where
+           ProjectsMonitoredResourceDescriptorsList
+         where
         type Rs ProjectsMonitoredResourceDescriptorsList =
              ListMonitoredResourceDescriptorsResponse
         type Scopes ProjectsMonitoredResourceDescriptorsList

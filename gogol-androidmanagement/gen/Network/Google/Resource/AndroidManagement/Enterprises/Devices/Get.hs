@@ -59,14 +59,16 @@ type EnterprisesDevicesGetResource =
 -- | Gets a device.
 --
 -- /See:/ 'enterprisesDevicesGet' smart constructor.
-data EnterprisesDevicesGet = EnterprisesDevicesGet'
+data EnterprisesDevicesGet =
+  EnterprisesDevicesGet'
     { _edgXgafv          :: !(Maybe Xgafv)
     , _edgUploadProtocol :: !(Maybe Text)
     , _edgAccessToken    :: !(Maybe Text)
     , _edgUploadType     :: !(Maybe Text)
     , _edgName           :: !Text
     , _edgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesDevicesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ enterprisesDevicesGet
     :: Text -- ^ 'edgName'
     -> EnterprisesDevicesGet
 enterprisesDevicesGet pEdgName_ =
-    EnterprisesDevicesGet'
+  EnterprisesDevicesGet'
     { _edgXgafv = Nothing
     , _edgUploadProtocol = Nothing
     , _edgAccessToken = Nothing

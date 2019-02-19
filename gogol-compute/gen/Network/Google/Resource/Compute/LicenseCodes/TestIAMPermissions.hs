@@ -59,11 +59,13 @@ type LicenseCodesTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'licenseCodesTestIAMPermissions' smart constructor.
-data LicenseCodesTestIAMPermissions = LicenseCodesTestIAMPermissions'
+data LicenseCodesTestIAMPermissions =
+  LicenseCodesTestIAMPermissions'
     { _lctipProject  :: !Text
     , _lctipPayload  :: !TestPermissionsRequest
     , _lctipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseCodesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ licenseCodesTestIAMPermissions
     -> Text -- ^ 'lctipResource'
     -> LicenseCodesTestIAMPermissions
 licenseCodesTestIAMPermissions pLctipProject_ pLctipPayload_ pLctipResource_ =
-    LicenseCodesTestIAMPermissions'
+  LicenseCodesTestIAMPermissions'
     { _lctipProject = pLctipProject_
     , _lctipPayload = pLctipPayload_
     , _lctipResource = pLctipResource_

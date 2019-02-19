@@ -52,9 +52,11 @@ type GroupsGetResource =
 -- | Retrieve Group
 --
 -- /See:/ 'groupsGet' smart constructor.
-newtype GroupsGet = GroupsGet'
+newtype GroupsGet =
+  GroupsGet'
     { _ggGroupKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsGet' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype GroupsGet = GroupsGet'
 groupsGet
     :: Text -- ^ 'ggGroupKey'
     -> GroupsGet
-groupsGet pGgGroupKey_ =
-    GroupsGet'
-    { _ggGroupKey = pGgGroupKey_
-    }
+groupsGet pGgGroupKey_ = GroupsGet' {_ggGroupKey = pGgGroupKey_}
 
 -- | Email or immutable ID of the group
 ggGroupKey :: Lens' GroupsGet Text

@@ -66,7 +66,8 @@ type ProjectsLocationsClustersSetMasterAuthResource =
 -- generation or explicitly set the password.
 --
 -- /See:/ 'projectsLocationsClustersSetMasterAuth' smart constructor.
-data ProjectsLocationsClustersSetMasterAuth = ProjectsLocationsClustersSetMasterAuth'
+data ProjectsLocationsClustersSetMasterAuth =
+  ProjectsLocationsClustersSetMasterAuth'
     { _plcsmaXgafv          :: !(Maybe Xgafv)
     , _plcsmaUploadProtocol :: !(Maybe Text)
     , _plcsmaAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsClustersSetMasterAuth = ProjectsLocationsClustersSetMaster
     , _plcsmaPayload        :: !SetMasterAuthRequest
     , _plcsmaName           :: !Text
     , _plcsmaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersSetMasterAuth' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsLocationsClustersSetMasterAuth
     -> Text -- ^ 'plcsmaName'
     -> ProjectsLocationsClustersSetMasterAuth
 projectsLocationsClustersSetMasterAuth pPlcsmaPayload_ pPlcsmaName_ =
-    ProjectsLocationsClustersSetMasterAuth'
+  ProjectsLocationsClustersSetMasterAuth'
     { _plcsmaXgafv = Nothing
     , _plcsmaUploadProtocol = Nothing
     , _plcsmaAccessToken = Nothing
@@ -150,7 +152,8 @@ plcsmaCallback
       (\ s a -> s{_plcsmaCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersSetMasterAuth where
+           ProjectsLocationsClustersSetMasterAuth
+         where
         type Rs ProjectsLocationsClustersSetMasterAuth =
              Operation
         type Scopes ProjectsLocationsClustersSetMasterAuth =

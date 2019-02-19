@@ -58,11 +58,13 @@ type EventsListByPlayerResource =
 -- application for the currently authenticated user.
 --
 -- /See:/ 'eventsListByPlayer' smart constructor.
-data EventsListByPlayer = EventsListByPlayer'
+data EventsListByPlayer =
+  EventsListByPlayer'
     { _elbpLanguage   :: !(Maybe Text)
     , _elbpPageToken  :: !(Maybe Text)
     , _elbpMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventsListByPlayer' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ data EventsListByPlayer = EventsListByPlayer'
 eventsListByPlayer
     :: EventsListByPlayer
 eventsListByPlayer =
-    EventsListByPlayer'
+  EventsListByPlayer'
     { _elbpLanguage = Nothing
     , _elbpPageToken = Nothing
     , _elbpMaxResults = Nothing

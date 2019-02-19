@@ -63,7 +63,8 @@ type EnterprisesPoliciesPatchResource =
 -- | Updates or creates a policy.
 --
 -- /See:/ 'enterprisesPoliciesPatch' smart constructor.
-data EnterprisesPoliciesPatch = EnterprisesPoliciesPatch'
+data EnterprisesPoliciesPatch =
+  EnterprisesPoliciesPatch'
     { _eppXgafv          :: !(Maybe Xgafv)
     , _eppUploadProtocol :: !(Maybe Text)
     , _eppUpdateMask     :: !(Maybe GFieldMask)
@@ -72,7 +73,8 @@ data EnterprisesPoliciesPatch = EnterprisesPoliciesPatch'
     , _eppPayload        :: !Policy
     , _eppName           :: !Text
     , _eppCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesPoliciesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ enterprisesPoliciesPatch
     -> Text -- ^ 'eppName'
     -> EnterprisesPoliciesPatch
 enterprisesPoliciesPatch pEppPayload_ pEppName_ =
-    EnterprisesPoliciesPatch'
+  EnterprisesPoliciesPatch'
     { _eppXgafv = Nothing
     , _eppUploadProtocol = Nothing
     , _eppUpdateMask = Nothing

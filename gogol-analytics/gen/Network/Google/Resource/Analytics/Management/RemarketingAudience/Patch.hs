@@ -63,12 +63,14 @@ type ManagementRemarketingAudiencePatchResource =
 -- semantics.
 --
 -- /See:/ 'managementRemarketingAudiencePatch' smart constructor.
-data ManagementRemarketingAudiencePatch = ManagementRemarketingAudiencePatch'
+data ManagementRemarketingAudiencePatch =
+  ManagementRemarketingAudiencePatch'
     { _mrapWebPropertyId         :: !Text
     , _mrapPayload               :: !RemarketingAudience
     , _mrapAccountId             :: !Text
     , _mrapRemarketingAudienceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementRemarketingAudiencePatch' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ managementRemarketingAudiencePatch
     -> Text -- ^ 'mrapRemarketingAudienceId'
     -> ManagementRemarketingAudiencePatch
 managementRemarketingAudiencePatch pMrapWebPropertyId_ pMrapPayload_ pMrapAccountId_ pMrapRemarketingAudienceId_ =
-    ManagementRemarketingAudiencePatch'
+  ManagementRemarketingAudiencePatch'
     { _mrapWebPropertyId = pMrapWebPropertyId_
     , _mrapPayload = pMrapPayload_
     , _mrapAccountId = pMrapAccountId_
@@ -119,7 +121,8 @@ mrapRemarketingAudienceId
       (\ s a -> s{_mrapRemarketingAudienceId = a})
 
 instance GoogleRequest
-         ManagementRemarketingAudiencePatch where
+           ManagementRemarketingAudiencePatch
+         where
         type Rs ManagementRemarketingAudiencePatch =
              RemarketingAudience
         type Scopes ManagementRemarketingAudiencePatch =

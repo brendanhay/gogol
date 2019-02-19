@@ -53,8 +53,8 @@ type LiaSettingsListposDataprovidersResource =
 --
 -- /See:/ 'liaSettingsListposDataproviders' smart constructor.
 data LiaSettingsListposDataproviders =
-    LiaSettingsListposDataproviders'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  LiaSettingsListposDataproviders'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiaSettingsListposDataproviders' with the minimum fields required to make a request.
 --
@@ -63,7 +63,8 @@ liaSettingsListposDataproviders
 liaSettingsListposDataproviders = LiaSettingsListposDataproviders'
 
 instance GoogleRequest
-         LiaSettingsListposDataproviders where
+           LiaSettingsListposDataproviders
+         where
         type Rs LiaSettingsListposDataproviders =
              LiaSettingsListPosDataProvidersResponse
         type Scopes LiaSettingsListposDataproviders =

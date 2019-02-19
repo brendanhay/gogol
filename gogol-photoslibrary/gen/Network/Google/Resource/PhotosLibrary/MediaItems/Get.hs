@@ -64,7 +64,8 @@ type MediaItemsGetResource =
 -- | Returns the media item specified based on a given media item id.
 --
 -- /See:/ 'mediaItemsGet' smart constructor.
-data MediaItemsGet = MediaItemsGet'
+data MediaItemsGet =
+  MediaItemsGet'
     { _migXgafv          :: !(Maybe Xgafv)
     , _migUploadProtocol :: !(Maybe Text)
     , _migPp             :: !Bool
@@ -73,7 +74,8 @@ data MediaItemsGet = MediaItemsGet'
     , _migMediaItemId    :: !Text
     , _migBearerToken    :: !(Maybe Text)
     , _migCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MediaItemsGet' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ mediaItemsGet
     :: Text -- ^ 'migMediaItemId'
     -> MediaItemsGet
 mediaItemsGet pMigMediaItemId_ =
-    MediaItemsGet'
+  MediaItemsGet'
     { _migXgafv = Nothing
     , _migUploadProtocol = Nothing
     , _migPp = True

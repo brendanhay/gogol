@@ -61,7 +61,8 @@ type ProjectsScanConfigsUpdateResource =
 -- | Updates the specified scan configuration.
 --
 -- /See:/ 'projectsScanConfigsUpdate' smart constructor.
-data ProjectsScanConfigsUpdate = ProjectsScanConfigsUpdate'
+data ProjectsScanConfigsUpdate =
+  ProjectsScanConfigsUpdate'
     { _pscuXgafv          :: !(Maybe Xgafv)
     , _pscuUploadProtocol :: !(Maybe Text)
     , _pscuAccessToken    :: !(Maybe Text)
@@ -69,7 +70,8 @@ data ProjectsScanConfigsUpdate = ProjectsScanConfigsUpdate'
     , _pscuPayload        :: !ScanConfig
     , _pscuName           :: !Text
     , _pscuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsScanConfigsUpdate' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ projectsScanConfigsUpdate
     -> Text -- ^ 'pscuName'
     -> ProjectsScanConfigsUpdate
 projectsScanConfigsUpdate pPscuPayload_ pPscuName_ =
-    ProjectsScanConfigsUpdate'
+  ProjectsScanConfigsUpdate'
     { _pscuXgafv = Nothing
     , _pscuUploadProtocol = Nothing
     , _pscuAccessToken = Nothing

@@ -84,7 +84,8 @@ type AppsOperationsListResource =
 -- the parent resource, without the operations collection id.
 --
 -- /See:/ 'appsOperationsList' smart constructor.
-data AppsOperationsList = AppsOperationsList'
+data AppsOperationsList =
+  AppsOperationsList'
     { _aolXgafv          :: !(Maybe Xgafv)
     , _aolUploadProtocol :: !(Maybe Text)
     , _aolAccessToken    :: !(Maybe Text)
@@ -94,7 +95,8 @@ data AppsOperationsList = AppsOperationsList'
     , _aolPageToken      :: !(Maybe Text)
     , _aolPageSize       :: !(Maybe (Textual Int32))
     , _aolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsOperationsList' with the minimum fields required to make a request.
 --
@@ -121,7 +123,7 @@ appsOperationsList
     :: Text -- ^ 'aolAppsId'
     -> AppsOperationsList
 appsOperationsList pAolAppsId_ =
-    AppsOperationsList'
+  AppsOperationsList'
     { _aolXgafv = Nothing
     , _aolUploadProtocol = Nothing
     , _aolAccessToken = Nothing

@@ -64,7 +64,8 @@ type LiveStreamsListResource =
 -- | Returns a list of video streams that match the API request parameters.
 --
 -- /See:/ 'liveStreamsList' smart constructor.
-data LiveStreamsList = LiveStreamsList'
+data LiveStreamsList =
+  LiveStreamsList'
     { _lslPart                          :: !Text
     , _lslMine                          :: !(Maybe Bool)
     , _lslOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -72,7 +73,8 @@ data LiveStreamsList = LiveStreamsList'
     , _lslId                            :: !(Maybe Text)
     , _lslPageToken                     :: !(Maybe Text)
     , _lslMaxResults                    :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStreamsList' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ liveStreamsList
     :: Text -- ^ 'lslPart'
     -> LiveStreamsList
 liveStreamsList pLslPart_ =
-    LiveStreamsList'
+  LiveStreamsList'
     { _lslPart = pLslPart_
     , _lslMine = Nothing
     , _lslOnBehalfOfContentOwner = Nothing

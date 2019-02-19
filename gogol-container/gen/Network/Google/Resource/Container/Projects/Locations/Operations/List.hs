@@ -65,7 +65,8 @@ type ProjectsLocationsOperationsListResource =
 -- | Lists all operations in a project in a specific zone or all zones.
 --
 -- /See:/ 'projectsLocationsOperationsList' smart constructor.
-data ProjectsLocationsOperationsList = ProjectsLocationsOperationsList'
+data ProjectsLocationsOperationsList =
+  ProjectsLocationsOperationsList'
     { _plolParent         :: !Text
     , _plolXgafv          :: !(Maybe Xgafv)
     , _plolUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsOperationsList = ProjectsLocationsOperationsList'
     , _plolZone           :: !(Maybe Text)
     , _plolProjectId      :: !(Maybe Text)
     , _plolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsOperationsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsOperationsList
     :: Text -- ^ 'plolParent'
     -> ProjectsLocationsOperationsList
 projectsLocationsOperationsList pPlolParent_ =
-    ProjectsLocationsOperationsList'
+  ProjectsLocationsOperationsList'
     { _plolParent = pPlolParent_
     , _plolXgafv = Nothing
     , _plolUploadProtocol = Nothing
@@ -161,7 +163,8 @@ plolCallback
   = lens _plolCallback (\ s a -> s{_plolCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsOperationsList where
+           ProjectsLocationsOperationsList
+         where
         type Rs ProjectsLocationsOperationsList =
              ListOperationsResponse
         type Scopes ProjectsLocationsOperationsList =

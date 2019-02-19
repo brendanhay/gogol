@@ -56,11 +56,13 @@ type ProductsGetResource =
 -- | Retrieves details of a product for display to an enterprise admin.
 --
 -- /See:/ 'productsGet' smart constructor.
-data ProductsGet = ProductsGet'
+data ProductsGet =
+  ProductsGet'
     { _proEnterpriseId :: !Text
     , _proLanguage     :: !(Maybe Text)
     , _proProductId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsGet' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ productsGet
     -> Text -- ^ 'proProductId'
     -> ProductsGet
 productsGet pProEnterpriseId_ pProProductId_ =
-    ProductsGet'
+  ProductsGet'
     { _proEnterpriseId = pProEnterpriseId_
     , _proLanguage = Nothing
     , _proProductId = pProProductId_

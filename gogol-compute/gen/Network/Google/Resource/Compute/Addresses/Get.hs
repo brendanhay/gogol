@@ -57,11 +57,13 @@ type AddressesGetResource =
 -- | Returns the specified address resource.
 --
 -- /See:/ 'addressesGet' smart constructor.
-data AddressesGet = AddressesGet'
+data AddressesGet =
+  AddressesGet'
     { _addProject :: !Text
     , _addAddress :: !Text
     , _addRegion  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressesGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ addressesGet
     -> Text -- ^ 'addRegion'
     -> AddressesGet
 addressesGet pAddProject_ pAddAddress_ pAddRegion_ =
-    AddressesGet'
+  AddressesGet'
     { _addProject = pAddProject_
     , _addAddress = pAddAddress_
     , _addRegion = pAddRegion_

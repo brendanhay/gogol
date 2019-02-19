@@ -56,11 +56,13 @@ type WebAppsUpdateResource =
 -- | Updates an existing web app.
 --
 -- /See:/ 'webAppsUpdate' smart constructor.
-data WebAppsUpdate = WebAppsUpdate'
+data WebAppsUpdate =
+  WebAppsUpdate'
     { _wauWebAppId     :: !Text
     , _wauEnterpriseId :: !Text
     , _wauPayload      :: !WebApp
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebAppsUpdate' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ webAppsUpdate
     -> WebApp -- ^ 'wauPayload'
     -> WebAppsUpdate
 webAppsUpdate pWauWebAppId_ pWauEnterpriseId_ pWauPayload_ =
-    WebAppsUpdate'
+  WebAppsUpdate'
     { _wauWebAppId = pWauWebAppId_
     , _wauEnterpriseId = pWauEnterpriseId_
     , _wauPayload = pWauPayload_

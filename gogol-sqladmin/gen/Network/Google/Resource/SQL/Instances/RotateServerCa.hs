@@ -60,11 +60,13 @@ type InstancesRotateServerCaResource =
 -- Authority (CA) version previously added with the addServerCA method.
 --
 -- /See:/ 'instancesRotateServerCa' smart constructor.
-data InstancesRotateServerCa = InstancesRotateServerCa'
+data InstancesRotateServerCa =
+  InstancesRotateServerCa'
     { _iProject  :: !Text
     , _iPayload  :: !InstancesRotateServerCaRequest
     , _iInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesRotateServerCa' with the minimum fields required to make a request.
 --
@@ -81,11 +83,8 @@ instancesRotateServerCa
     -> Text -- ^ 'iInstance'
     -> InstancesRotateServerCa
 instancesRotateServerCa pIProject_ pIPayload_ pIInstance_ =
-    InstancesRotateServerCa'
-    { _iProject = pIProject_
-    , _iPayload = pIPayload_
-    , _iInstance = pIInstance_
-    }
+  InstancesRotateServerCa'
+    {_iProject = pIProject_, _iPayload = pIPayload_, _iInstance = pIInstance_}
 
 -- | Project ID of the project that contains the instance.
 iProject :: Lens' InstancesRotateServerCa Text

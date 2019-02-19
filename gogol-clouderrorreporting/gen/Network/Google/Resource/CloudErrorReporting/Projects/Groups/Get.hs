@@ -59,14 +59,16 @@ type ProjectsGroupsGetResource =
 -- | Get the specified group.
 --
 -- /See:/ 'projectsGroupsGet' smart constructor.
-data ProjectsGroupsGet = ProjectsGroupsGet'
+data ProjectsGroupsGet =
+  ProjectsGroupsGet'
     { _pggXgafv          :: !(Maybe Xgafv)
     , _pggUploadProtocol :: !(Maybe Text)
     , _pggAccessToken    :: !(Maybe Text)
     , _pggUploadType     :: !(Maybe Text)
     , _pggGroupName      :: !Text
     , _pggCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGroupsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsGroupsGet
     :: Text -- ^ 'pggGroupName'
     -> ProjectsGroupsGet
 projectsGroupsGet pPggGroupName_ =
-    ProjectsGroupsGet'
+  ProjectsGroupsGet'
     { _pggXgafv = Nothing
     , _pggUploadProtocol = Nothing
     , _pggAccessToken = Nothing

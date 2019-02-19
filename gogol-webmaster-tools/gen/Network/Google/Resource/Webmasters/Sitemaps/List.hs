@@ -57,10 +57,12 @@ type SitemapsListResource =
 -- sitemap index file (if sitemapIndex is specified in the request).
 --
 -- /See:/ 'sitemapsList' smart constructor.
-data SitemapsList = SitemapsList'
+data SitemapsList =
+  SitemapsList'
     { _slSiteURL      :: !Text
     , _slSitemapIndex :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitemapsList' with the minimum fields required to make a request.
 --
@@ -73,10 +75,7 @@ sitemapsList
     :: Text -- ^ 'slSiteURL'
     -> SitemapsList
 sitemapsList pSlSiteURL_ =
-    SitemapsList'
-    { _slSiteURL = pSlSiteURL_
-    , _slSitemapIndex = Nothing
-    }
+  SitemapsList' {_slSiteURL = pSlSiteURL_, _slSitemapIndex = Nothing}
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/

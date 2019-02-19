@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativesUpdate' request conforms to.
 type CreativesUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
@@ -54,10 +54,12 @@ type CreativesUpdateResource =
 -- | Updates an existing creative.
 --
 -- /See:/ 'creativesUpdate' smart constructor.
-data CreativesUpdate = CreativesUpdate'
+data CreativesUpdate =
+  CreativesUpdate'
     { _creProFileId :: !(Textual Int64)
     , _crePayload   :: !Creative
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativesUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ creativesUpdate
     -> Creative -- ^ 'crePayload'
     -> CreativesUpdate
 creativesUpdate pCreProFileId_ pCrePayload_ =
-    CreativesUpdate'
-    { _creProFileId = _Coerce # pCreProFileId_
-    , _crePayload = pCrePayload_
-    }
+  CreativesUpdate'
+    {_creProFileId = _Coerce # pCreProFileId_, _crePayload = pCrePayload_}
 
 -- | User profile ID associated with this request.
 creProFileId :: Lens' CreativesUpdate Int64

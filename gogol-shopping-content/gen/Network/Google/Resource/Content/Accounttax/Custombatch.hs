@@ -55,9 +55,11 @@ type AccounttaxCustombatchResource =
 -- request.
 --
 -- /See:/ 'accounttaxCustombatch' smart constructor.
-newtype AccounttaxCustombatch = AccounttaxCustombatch'
+newtype AccounttaxCustombatch =
+  AccounttaxCustombatch'
     { _aaPayload :: AccounttaxCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccounttaxCustombatch' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ accounttaxCustombatch
     :: AccounttaxCustomBatchRequest -- ^ 'aaPayload'
     -> AccounttaxCustombatch
 accounttaxCustombatch pAaPayload_ =
-    AccounttaxCustombatch'
-    { _aaPayload = pAaPayload_
-    }
+  AccounttaxCustombatch' {_aaPayload = pAaPayload_}
 
 -- | Multipart request metadata.
 aaPayload :: Lens' AccounttaxCustombatch AccounttaxCustomBatchRequest

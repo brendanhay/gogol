@@ -64,13 +64,15 @@ type GlobalForwardingRulesListResource =
 -- specified project.
 --
 -- /See:/ 'globalForwardingRulesList' smart constructor.
-data GlobalForwardingRulesList = GlobalForwardingRulesList'
+data GlobalForwardingRulesList =
+  GlobalForwardingRulesList'
     { _gfrlOrderBy    :: !(Maybe Text)
     , _gfrlProject    :: !Text
     , _gfrlFilter     :: !(Maybe Text)
     , _gfrlPageToken  :: !(Maybe Text)
     , _gfrlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ globalForwardingRulesList
     :: Text -- ^ 'gfrlProject'
     -> GlobalForwardingRulesList
 globalForwardingRulesList pGfrlProject_ =
-    GlobalForwardingRulesList'
+  GlobalForwardingRulesList'
     { _gfrlOrderBy = Nothing
     , _gfrlProject = pGfrlProject_
     , _gfrlFilter = Nothing

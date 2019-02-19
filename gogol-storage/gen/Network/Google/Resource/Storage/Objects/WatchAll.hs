@@ -72,7 +72,8 @@ type ObjectsWatchAllResource =
 -- | Watch for changes on all objects in a bucket.
 --
 -- /See:/ 'objectsWatchAll' smart constructor.
-data ObjectsWatchAll = ObjectsWatchAll'
+data ObjectsWatchAll =
+  ObjectsWatchAll'
     { _owaPrefix                   :: !(Maybe Text)
     , _owaBucket                   :: !Text
     , _owaPayload                  :: !Channel
@@ -83,7 +84,8 @@ data ObjectsWatchAll = ObjectsWatchAll'
     , _owaPageToken                :: !(Maybe Text)
     , _owaDelimiter                :: !(Maybe Text)
     , _owaMaxResults               :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ObjectsWatchAll' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ objectsWatchAll
     -> Channel -- ^ 'owaPayload'
     -> ObjectsWatchAll
 objectsWatchAll pOwaBucket_ pOwaPayload_ =
-    ObjectsWatchAll'
+  ObjectsWatchAll'
     { _owaPrefix = Nothing
     , _owaBucket = pOwaBucket_
     , _owaPayload = pOwaPayload_

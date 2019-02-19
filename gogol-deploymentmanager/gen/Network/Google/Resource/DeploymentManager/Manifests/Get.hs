@@ -58,11 +58,13 @@ type ManifestsGetResource =
 -- | Gets information about a specific manifest.
 --
 -- /See:/ 'manifestsGet' smart constructor.
-data ManifestsGet = ManifestsGet'
+data ManifestsGet =
+  ManifestsGet'
     { _mgProject    :: !Text
     , _mgManifest   :: !Text
     , _mgDeployment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManifestsGet' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ manifestsGet
     -> Text -- ^ 'mgDeployment'
     -> ManifestsGet
 manifestsGet pMgProject_ pMgManifest_ pMgDeployment_ =
-    ManifestsGet'
+  ManifestsGet'
     { _mgProject = pMgProject_
     , _mgManifest = pMgManifest_
     , _mgDeployment = pMgDeployment_

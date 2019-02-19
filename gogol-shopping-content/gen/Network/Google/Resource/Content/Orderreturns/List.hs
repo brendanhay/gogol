@@ -62,14 +62,16 @@ type OrderreturnsListResource =
 -- | Lists order returns in your Merchant Center account.
 --
 -- /See:/ 'orderreturnsList' smart constructor.
-data OrderreturnsList = OrderreturnsList'
+data OrderreturnsList =
+  OrderreturnsList'
     { _ordrMerchantId       :: !(Textual Word64)
     , _ordrOrderBy          :: !(Maybe OrderreturnsListOrderBy)
     , _ordrCreatedEndDate   :: !(Maybe Text)
     , _ordrCreatedStartDate :: !(Maybe Text)
     , _ordrPageToken        :: !(Maybe Text)
     , _ordrMaxResults       :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrderreturnsList' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ orderreturnsList
     :: Word64 -- ^ 'ordrMerchantId'
     -> OrderreturnsList
 orderreturnsList pOrdrMerchantId_ =
-    OrderreturnsList'
+  OrderreturnsList'
     { _ordrMerchantId = _Coerce # pOrdrMerchantId_
     , _ordrOrderBy = Nothing
     , _ordrCreatedEndDate = Nothing

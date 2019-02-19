@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'CountriesList' request conforms to.
 type CountriesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "countries" :>
@@ -53,9 +53,11 @@ type CountriesListResource =
 -- | Retrieves a list of countries.
 --
 -- /See:/ 'countriesList' smart constructor.
-newtype CountriesList = CountriesList'
+newtype CountriesList =
+  CountriesList'
     { _couProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CountriesList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ countriesList
     :: Int64 -- ^ 'couProFileId'
     -> CountriesList
 countriesList pCouProFileId_ =
-    CountriesList'
-    { _couProFileId = _Coerce # pCouProFileId_
-    }
+  CountriesList' {_couProFileId = _Coerce # pCouProFileId_}
 
 -- | User profile ID associated with this request.
 couProFileId :: Lens' CountriesList Int64

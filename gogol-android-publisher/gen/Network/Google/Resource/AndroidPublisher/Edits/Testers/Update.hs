@@ -56,12 +56,14 @@ type EditsTestersUpdateResource =
 
 --
 -- /See:/ 'editsTestersUpdate' smart constructor.
-data EditsTestersUpdate = EditsTestersUpdate'
+data EditsTestersUpdate =
+  EditsTestersUpdate'
     { _etutTrack       :: !Text
     , _etutPackageName :: !Text
     , _etutPayload     :: !Testers
     , _etutEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsTestersUpdate' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ editsTestersUpdate
     -> Text -- ^ 'etutEditId'
     -> EditsTestersUpdate
 editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
-    EditsTestersUpdate'
+  EditsTestersUpdate'
     { _etutTrack = pEtutTrack_
     , _etutPackageName = pEtutPackageName_
     , _etutPayload = pEtutPayload_

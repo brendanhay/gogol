@@ -60,14 +60,16 @@ type ProjectsDatabasesCollectionGroupsIndexesDeleteResource
 -- | Deletes a composite index.
 --
 -- /See:/ 'projectsDatabasesCollectionGroupsIndexesDelete' smart constructor.
-data ProjectsDatabasesCollectionGroupsIndexesDelete = ProjectsDatabasesCollectionGroupsIndexesDelete'
+data ProjectsDatabasesCollectionGroupsIndexesDelete =
+  ProjectsDatabasesCollectionGroupsIndexesDelete'
     { _pdcgidXgafv          :: !(Maybe Xgafv)
     , _pdcgidUploadProtocol :: !(Maybe Text)
     , _pdcgidAccessToken    :: !(Maybe Text)
     , _pdcgidUploadType     :: !(Maybe Text)
     , _pdcgidName           :: !Text
     , _pdcgidCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsIndexesDelete' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsDatabasesCollectionGroupsIndexesDelete
     :: Text -- ^ 'pdcgidName'
     -> ProjectsDatabasesCollectionGroupsIndexesDelete
 projectsDatabasesCollectionGroupsIndexesDelete pPdcgidName_ =
-    ProjectsDatabasesCollectionGroupsIndexesDelete'
+  ProjectsDatabasesCollectionGroupsIndexesDelete'
     { _pdcgidXgafv = Nothing
     , _pdcgidUploadProtocol = Nothing
     , _pdcgidAccessToken = Nothing
@@ -133,7 +135,8 @@ pdcgidCallback
       (\ s a -> s{_pdcgidCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesCollectionGroupsIndexesDelete where
+           ProjectsDatabasesCollectionGroupsIndexesDelete
+         where
         type Rs
                ProjectsDatabasesCollectionGroupsIndexesDelete
              = Empty

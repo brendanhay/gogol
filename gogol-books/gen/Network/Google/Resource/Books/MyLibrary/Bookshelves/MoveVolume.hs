@@ -59,12 +59,14 @@ type MyLibraryBookshelvesMoveVolumeResource =
 -- | Moves a volume within a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesMoveVolume' smart constructor.
-data MyLibraryBookshelvesMoveVolume = MyLibraryBookshelvesMoveVolume'
+data MyLibraryBookshelvesMoveVolume =
+  MyLibraryBookshelvesMoveVolume'
     { _mlbmvShelf          :: !Text
     , _mlbmvVolumeId       :: !Text
     , _mlbmvSource         :: !(Maybe Text)
     , _mlbmvVolumePosition :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyLibraryBookshelvesMoveVolume' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ myLibraryBookshelvesMoveVolume
     -> Int32 -- ^ 'mlbmvVolumePosition'
     -> MyLibraryBookshelvesMoveVolume
 myLibraryBookshelvesMoveVolume pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePosition_ =
-    MyLibraryBookshelvesMoveVolume'
+  MyLibraryBookshelvesMoveVolume'
     { _mlbmvShelf = pMlbmvShelf_
     , _mlbmvVolumeId = pMlbmvVolumeId_
     , _mlbmvSource = Nothing

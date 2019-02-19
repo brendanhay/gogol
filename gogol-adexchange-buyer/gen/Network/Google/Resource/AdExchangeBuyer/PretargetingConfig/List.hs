@@ -54,9 +54,11 @@ type PretargetingConfigListResource =
 -- configurations.
 --
 -- /See:/ 'pretargetingConfigList'' smart constructor.
-newtype PretargetingConfigList' = PretargetingConfigList''
+newtype PretargetingConfigList' =
+  PretargetingConfigList''
     { _pclAccountId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PretargetingConfigList'' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ pretargetingConfigList'
     :: Int64 -- ^ 'pclAccountId'
     -> PretargetingConfigList'
 pretargetingConfigList' pPclAccountId_ =
-    PretargetingConfigList''
-    { _pclAccountId = _Coerce # pPclAccountId_
-    }
+  PretargetingConfigList'' {_pclAccountId = _Coerce # pPclAccountId_}
 
 -- | The account id to get the pretargeting configs for.
 pclAccountId :: Lens' PretargetingConfigList' Int64

@@ -67,7 +67,8 @@ type ProjectsLocationsTransferConfigsListResource =
 -- | Returns information about all data transfers in the project.
 --
 -- /See:/ 'projectsLocationsTransferConfigsList' smart constructor.
-data ProjectsLocationsTransferConfigsList = ProjectsLocationsTransferConfigsList'
+data ProjectsLocationsTransferConfigsList =
+  ProjectsLocationsTransferConfigsList'
     { _pltclParent         :: !Text
     , _pltclXgafv          :: !(Maybe Xgafv)
     , _pltclUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsLocationsTransferConfigsList = ProjectsLocationsTransferConfigsList
     , _pltclDataSourceIds  :: !(Maybe [Text])
     , _pltclPageSize       :: !(Maybe (Textual Int32))
     , _pltclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsTransferConfigsList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsLocationsTransferConfigsList
     :: Text -- ^ 'pltclParent'
     -> ProjectsLocationsTransferConfigsList
 projectsLocationsTransferConfigsList pPltclParent_ =
-    ProjectsLocationsTransferConfigsList'
+  ProjectsLocationsTransferConfigsList'
     { _pltclParent = pPltclParent_
     , _pltclXgafv = Nothing
     , _pltclUploadProtocol = Nothing
@@ -178,7 +180,8 @@ pltclCallback
       (\ s a -> s{_pltclCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTransferConfigsList where
+           ProjectsLocationsTransferConfigsList
+         where
         type Rs ProjectsLocationsTransferConfigsList =
              ListTransferConfigsResponse
         type Scopes ProjectsLocationsTransferConfigsList =

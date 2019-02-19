@@ -62,13 +62,15 @@ type OperationsListResource =
 -- | Lists all operations for a project.
 --
 -- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList'
+data OperationsList =
+  OperationsList'
     { _olOrderBy    :: !(Maybe Text)
     , _olProject    :: !Text
     , _olFilter     :: !(Maybe Text)
     , _olPageToken  :: !(Maybe Text)
     , _olMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ operationsList
     :: Text -- ^ 'olProject'
     -> OperationsList
 operationsList pOlProject_ =
-    OperationsList'
+  OperationsList'
     { _olOrderBy = Nothing
     , _olProject = pOlProject_
     , _olFilter = Nothing

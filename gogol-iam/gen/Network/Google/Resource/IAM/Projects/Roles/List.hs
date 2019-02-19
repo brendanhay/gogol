@@ -69,7 +69,8 @@ type ProjectsRolesListResource =
 -- | Lists the Roles defined on a resource.
 --
 -- /See:/ 'projectsRolesList' smart constructor.
-data ProjectsRolesList = ProjectsRolesList'
+data ProjectsRolesList =
+  ProjectsRolesList'
     { _prlParent         :: !Text
     , _prlXgafv          :: !(Maybe Xgafv)
     , _prlUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsRolesList = ProjectsRolesList'
     , _prlPageToken      :: !(Maybe Text)
     , _prlPageSize       :: !(Maybe (Textual Int32))
     , _prlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRolesList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsRolesList
     :: Text -- ^ 'prlParent'
     -> ProjectsRolesList
 projectsRolesList pPrlParent_ =
-    ProjectsRolesList'
+  ProjectsRolesList'
     { _prlParent = pPrlParent_
     , _prlXgafv = Nothing
     , _prlUploadProtocol = Nothing

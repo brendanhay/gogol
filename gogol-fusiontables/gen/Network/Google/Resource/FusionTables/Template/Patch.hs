@@ -56,11 +56,13 @@ type TemplatePatchResource =
 -- | Updates an existing template. This method supports patch semantics.
 --
 -- /See:/ 'templatePatch' smart constructor.
-data TemplatePatch = TemplatePatch'
+data TemplatePatch =
+  TemplatePatch'
     { _tppTemplateId :: !(Textual Int32)
     , _tppPayload    :: !Template
     , _tppTableId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TemplatePatch' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ templatePatch
     -> Text -- ^ 'tppTableId'
     -> TemplatePatch
 templatePatch pTppTemplateId_ pTppPayload_ pTppTableId_ =
-    TemplatePatch'
+  TemplatePatch'
     { _tppTemplateId = _Coerce # pTppTemplateId_
     , _tppPayload = pTppPayload_
     , _tppTableId = pTppTableId_

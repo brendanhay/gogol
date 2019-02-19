@@ -62,12 +62,14 @@ type TargetTCPProxiesSetBackendServiceResource =
 -- | Changes the BackendService for TargetTcpProxy.
 --
 -- /See:/ 'targetTCPProxiesSetBackendService' smart constructor.
-data TargetTCPProxiesSetBackendService = TargetTCPProxiesSetBackendService'
+data TargetTCPProxiesSetBackendService =
+  TargetTCPProxiesSetBackendService'
     { _ttpsbsRequestId      :: !(Maybe Text)
     , _ttpsbsProject        :: !Text
     , _ttpsbsPayload        :: !TargetTCPProxiesSetBackendServiceRequest
     , _ttpsbsTargetTCPProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxiesSetBackendService' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ targetTCPProxiesSetBackendService
     -> Text -- ^ 'ttpsbsTargetTCPProxy'
     -> TargetTCPProxiesSetBackendService
 targetTCPProxiesSetBackendService pTtpsbsProject_ pTtpsbsPayload_ pTtpsbsTargetTCPProxy_ =
-    TargetTCPProxiesSetBackendService'
+  TargetTCPProxiesSetBackendService'
     { _ttpsbsRequestId = Nothing
     , _ttpsbsProject = pTtpsbsProject_
     , _ttpsbsPayload = pTtpsbsPayload_
@@ -128,7 +130,8 @@ ttpsbsTargetTCPProxy
       (\ s a -> s{_ttpsbsTargetTCPProxy = a})
 
 instance GoogleRequest
-         TargetTCPProxiesSetBackendService where
+           TargetTCPProxiesSetBackendService
+         where
         type Rs TargetTCPProxiesSetBackendService = Operation
         type Scopes TargetTCPProxiesSetBackendService =
              '["https://www.googleapis.com/auth/cloud-platform",

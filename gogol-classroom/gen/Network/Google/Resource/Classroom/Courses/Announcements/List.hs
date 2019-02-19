@@ -82,7 +82,8 @@ type CoursesAnnouncementsListResource =
 -- \`NOT_FOUND\` if the requested course does not exist.
 --
 -- /See:/ 'coursesAnnouncementsList' smart constructor.
-data CoursesAnnouncementsList = CoursesAnnouncementsList'
+data CoursesAnnouncementsList =
+  CoursesAnnouncementsList'
     { _calXgafv              :: !(Maybe Xgafv)
     , _calUploadProtocol     :: !(Maybe Text)
     , _calOrderBy            :: !(Maybe Text)
@@ -93,7 +94,8 @@ data CoursesAnnouncementsList = CoursesAnnouncementsList'
     , _calPageToken          :: !(Maybe Text)
     , _calPageSize           :: !(Maybe (Textual Int32))
     , _calCallback           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesAnnouncementsList' with the minimum fields required to make a request.
 --
@@ -122,7 +124,7 @@ coursesAnnouncementsList
     :: Text -- ^ 'calCourseId'
     -> CoursesAnnouncementsList
 coursesAnnouncementsList pCalCourseId_ =
-    CoursesAnnouncementsList'
+  CoursesAnnouncementsList'
     { _calXgafv = Nothing
     , _calUploadProtocol = Nothing
     , _calOrderBy = Nothing

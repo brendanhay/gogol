@@ -71,7 +71,8 @@ type ProjectsUpdateContentResource =
 -- files in the project.
 --
 -- /See:/ 'projectsUpdateContent' smart constructor.
-data ProjectsUpdateContent = ProjectsUpdateContent'
+data ProjectsUpdateContent =
+  ProjectsUpdateContent'
     { _pucXgafv          :: !(Maybe Xgafv)
     , _pucUploadProtocol :: !(Maybe Text)
     , _pucAccessToken    :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsUpdateContent = ProjectsUpdateContent'
     , _pucPayload        :: !Content
     , _pucScriptId       :: !Text
     , _pucCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsUpdateContent' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsUpdateContent
     -> Text -- ^ 'pucScriptId'
     -> ProjectsUpdateContent
 projectsUpdateContent pPucPayload_ pPucScriptId_ =
-    ProjectsUpdateContent'
+  ProjectsUpdateContent'
     { _pucXgafv = Nothing
     , _pucUploadProtocol = Nothing
     , _pucAccessToken = Nothing

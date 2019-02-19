@@ -65,7 +65,8 @@ type ProjectsLocationsNodesListResource =
 -- | Lists nodes.
 --
 -- /See:/ 'projectsLocationsNodesList' smart constructor.
-data ProjectsLocationsNodesList = ProjectsLocationsNodesList'
+data ProjectsLocationsNodesList =
+  ProjectsLocationsNodesList'
     { _plnlParent         :: !Text
     , _plnlXgafv          :: !(Maybe Xgafv)
     , _plnlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsNodesList = ProjectsLocationsNodesList'
     , _plnlPageToken      :: !(Maybe Text)
     , _plnlPageSize       :: !(Maybe (Textual Int32))
     , _plnlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsNodesList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsNodesList
     :: Text -- ^ 'plnlParent'
     -> ProjectsLocationsNodesList
 projectsLocationsNodesList pPlnlParent_ =
-    ProjectsLocationsNodesList'
+  ProjectsLocationsNodesList'
     { _plnlParent = pPlnlParent_
     , _plnlXgafv = Nothing
     , _plnlUploadProtocol = Nothing

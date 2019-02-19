@@ -70,13 +70,15 @@ type RegionBackendServicesPatchResource =
 -- and uses the JSON merge patch format and processing rules.
 --
 -- /See:/ 'regionBackendServicesPatch' smart constructor.
-data RegionBackendServicesPatch = RegionBackendServicesPatch'
+data RegionBackendServicesPatch =
+  RegionBackendServicesPatch'
     { _rbspRequestId      :: !(Maybe Text)
     , _rbspProject        :: !Text
     , _rbspPayload        :: !BackendService
     , _rbspRegion         :: !Text
     , _rbspBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionBackendServicesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ regionBackendServicesPatch
     -> Text -- ^ 'rbspBackendService'
     -> RegionBackendServicesPatch
 regionBackendServicesPatch pRbspProject_ pRbspPayload_ pRbspRegion_ pRbspBackendService_ =
-    RegionBackendServicesPatch'
+  RegionBackendServicesPatch'
     { _rbspRequestId = Nothing
     , _rbspProject = pRbspProject_
     , _rbspPayload = pRbspPayload_

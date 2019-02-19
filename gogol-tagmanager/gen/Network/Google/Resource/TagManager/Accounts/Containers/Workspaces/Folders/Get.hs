@@ -50,9 +50,11 @@ type AccountsContainersWorkspacesFoldersGetResource =
 -- | Gets a GTM Folder.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersGet' smart constructor.
-newtype AccountsContainersWorkspacesFoldersGet = AccountsContainersWorkspacesFoldersGet'
+newtype AccountsContainersWorkspacesFoldersGet =
+  AccountsContainersWorkspacesFoldersGet'
     { _acwfgPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersGet' with the minimum fields required to make a request.
 --
@@ -63,9 +65,7 @@ accountsContainersWorkspacesFoldersGet
     :: Text -- ^ 'acwfgPath'
     -> AccountsContainersWorkspacesFoldersGet
 accountsContainersWorkspacesFoldersGet pAcwfgPath_ =
-    AccountsContainersWorkspacesFoldersGet'
-    { _acwfgPath = pAcwfgPath_
-    }
+  AccountsContainersWorkspacesFoldersGet' {_acwfgPath = pAcwfgPath_}
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}
@@ -74,7 +74,8 @@ acwfgPath
   = lens _acwfgPath (\ s a -> s{_acwfgPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesFoldersGet where
+           AccountsContainersWorkspacesFoldersGet
+         where
         type Rs AccountsContainersWorkspacesFoldersGet =
              Folder
         type Scopes AccountsContainersWorkspacesFoldersGet =

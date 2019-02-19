@@ -71,7 +71,8 @@ type ProjectsModelsVersionsSetDefaultResource =
 -- to the default version setting manually using this method.
 --
 -- /See:/ 'projectsModelsVersionsSetDefault' smart constructor.
-data ProjectsModelsVersionsSetDefault = ProjectsModelsVersionsSetDefault'
+data ProjectsModelsVersionsSetDefault =
+  ProjectsModelsVersionsSetDefault'
     { _pmvsdXgafv          :: !(Maybe Xgafv)
     , _pmvsdUploadProtocol :: !(Maybe Text)
     , _pmvsdAccessToken    :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsModelsVersionsSetDefault = ProjectsModelsVersionsSetDefault'
     , _pmvsdPayload        :: !GoogleCloudMlV1__SetDefaultVersionRequest
     , _pmvsdName           :: !Text
     , _pmvsdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsModelsVersionsSetDefault' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsModelsVersionsSetDefault
     -> Text -- ^ 'pmvsdName'
     -> ProjectsModelsVersionsSetDefault
 projectsModelsVersionsSetDefault pPmvsdPayload_ pPmvsdName_ =
-    ProjectsModelsVersionsSetDefault'
+  ProjectsModelsVersionsSetDefault'
     { _pmvsdXgafv = Nothing
     , _pmvsdUploadProtocol = Nothing
     , _pmvsdAccessToken = Nothing
@@ -155,7 +157,8 @@ pmvsdCallback
       (\ s a -> s{_pmvsdCallback = a})
 
 instance GoogleRequest
-         ProjectsModelsVersionsSetDefault where
+           ProjectsModelsVersionsSetDefault
+         where
         type Rs ProjectsModelsVersionsSetDefault =
              GoogleCloudMlV1__Version
         type Scopes ProjectsModelsVersionsSetDefault =

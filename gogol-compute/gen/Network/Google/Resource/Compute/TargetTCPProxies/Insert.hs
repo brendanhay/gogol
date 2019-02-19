@@ -60,11 +60,13 @@ type TargetTCPProxiesInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'targetTCPProxiesInsert' smart constructor.
-data TargetTCPProxiesInsert = TargetTCPProxiesInsert'
+data TargetTCPProxiesInsert =
+  TargetTCPProxiesInsert'
     { _ttpiRequestId :: !(Maybe Text)
     , _ttpiProject   :: !Text
     , _ttpiPayload   :: !TargetTCPProxy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxiesInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ targetTCPProxiesInsert
     -> TargetTCPProxy -- ^ 'ttpiPayload'
     -> TargetTCPProxiesInsert
 targetTCPProxiesInsert pTtpiProject_ pTtpiPayload_ =
-    TargetTCPProxiesInsert'
+  TargetTCPProxiesInsert'
     { _ttpiRequestId = Nothing
     , _ttpiProject = pTtpiProject_
     , _ttpiPayload = pTtpiPayload_

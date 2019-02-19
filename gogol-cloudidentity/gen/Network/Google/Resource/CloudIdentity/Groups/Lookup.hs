@@ -67,7 +67,8 @@ type GroupsLookupResource =
 -- Group by its EntityKey.
 --
 -- /See:/ 'groupsLookup' smart constructor.
-data GroupsLookup = GroupsLookup'
+data GroupsLookup =
+  GroupsLookup'
     { _glXgafv             :: !(Maybe Xgafv)
     , _glUploadProtocol    :: !(Maybe Text)
     , _glAccessToken       :: !(Maybe Text)
@@ -75,7 +76,8 @@ data GroupsLookup = GroupsLookup'
     , _glUploadType        :: !(Maybe Text)
     , _glGroupKeyNamespace :: !(Maybe Text)
     , _glCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsLookup' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ data GroupsLookup = GroupsLookup'
 groupsLookup
     :: GroupsLookup
 groupsLookup =
-    GroupsLookup'
+  GroupsLookup'
     { _glXgafv = Nothing
     , _glUploadProtocol = Nothing
     , _glAccessToken = Nothing

@@ -56,10 +56,12 @@ type RoleAssignmentsGetResource =
 -- | Retrieve a role assignment.
 --
 -- /See:/ 'roleAssignmentsGet' smart constructor.
-data RoleAssignmentsGet = RoleAssignmentsGet'
+data RoleAssignmentsGet =
+  RoleAssignmentsGet'
     { _ragCustomer         :: !Text
     , _ragRoleAssignmentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoleAssignmentsGet' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ roleAssignmentsGet
     -> Text -- ^ 'ragRoleAssignmentId'
     -> RoleAssignmentsGet
 roleAssignmentsGet pRagCustomer_ pRagRoleAssignmentId_ =
-    RoleAssignmentsGet'
-    { _ragCustomer = pRagCustomer_
-    , _ragRoleAssignmentId = pRagRoleAssignmentId_
-    }
+  RoleAssignmentsGet'
+    {_ragCustomer = pRagCustomer_, _ragRoleAssignmentId = pRagRoleAssignmentId_}
 
 -- | Immutable ID of the G Suite account.
 ragCustomer :: Lens' RoleAssignmentsGet Text

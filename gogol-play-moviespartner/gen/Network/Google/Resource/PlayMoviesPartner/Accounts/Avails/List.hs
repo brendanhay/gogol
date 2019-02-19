@@ -89,7 +89,8 @@ type AccountsAvailsListResource =
 -- this method.
 --
 -- /See:/ 'accountsAvailsList' smart constructor.
-data AccountsAvailsList = AccountsAvailsList'
+data AccountsAvailsList =
+  AccountsAvailsList'
     { _aalAltId          :: !(Maybe Text)
     , _aalPphNames       :: !(Maybe [Text])
     , _aalXgafv          :: !(Maybe Xgafv)
@@ -107,7 +108,8 @@ data AccountsAvailsList = AccountsAvailsList'
     , _aalTitle          :: !(Maybe Text)
     , _aalPageSize       :: !(Maybe (Textual Int32))
     , _aalCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsAvailsList' with the minimum fields required to make a request.
 --
@@ -150,7 +152,7 @@ accountsAvailsList
     :: Text -- ^ 'aalAccountId'
     -> AccountsAvailsList
 accountsAvailsList pAalAccountId_ =
-    AccountsAvailsList'
+  AccountsAvailsList'
     { _aalAltId = Nothing
     , _aalPphNames = Nothing
     , _aalXgafv = Nothing

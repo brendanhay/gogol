@@ -65,7 +65,8 @@ type EnterprisesDevicesIssueCommandResource =
 -- status of the command.
 --
 -- /See:/ 'enterprisesDevicesIssueCommand' smart constructor.
-data EnterprisesDevicesIssueCommand = EnterprisesDevicesIssueCommand'
+data EnterprisesDevicesIssueCommand =
+  EnterprisesDevicesIssueCommand'
     { _edicXgafv          :: !(Maybe Xgafv)
     , _edicUploadProtocol :: !(Maybe Text)
     , _edicAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data EnterprisesDevicesIssueCommand = EnterprisesDevicesIssueCommand'
     , _edicPayload        :: !Command
     , _edicName           :: !Text
     , _edicCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesDevicesIssueCommand' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ enterprisesDevicesIssueCommand
     -> Text -- ^ 'edicName'
     -> EnterprisesDevicesIssueCommand
 enterprisesDevicesIssueCommand pEdicPayload_ pEdicName_ =
-    EnterprisesDevicesIssueCommand'
+  EnterprisesDevicesIssueCommand'
     { _edicXgafv = Nothing
     , _edicUploadProtocol = Nothing
     , _edicAccessToken = Nothing

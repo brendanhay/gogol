@@ -83,7 +83,8 @@ type VolumesListResource =
 -- | Performs a book search.
 --
 -- /See:/ 'volumesList' smart constructor.
-data VolumesList = VolumesList'
+data VolumesList =
+  VolumesList'
     { _vlOrderBy                  :: !(Maybe VolumesListOrderBy)
     , _vlMaxAllowedMaturityRating :: !(Maybe VolumesListMaxAllowedMaturityRating)
     , _vlLibraryRestrict          :: !(Maybe VolumesListLibraryRestrict)
@@ -98,7 +99,8 @@ data VolumesList = VolumesList'
     , _vlMaxResults               :: !(Maybe (Textual Word32))
     , _vlShowPreOrders            :: !(Maybe Bool)
     , _vlPrintType                :: !(Maybe VolumesListPrintType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VolumesList' with the minimum fields required to make a request.
 --
@@ -135,7 +137,7 @@ volumesList
     :: Text -- ^ 'vlQ'
     -> VolumesList
 volumesList pVlQ_ =
-    VolumesList'
+  VolumesList'
     { _vlOrderBy = Nothing
     , _vlMaxAllowedMaturityRating = Nothing
     , _vlLibraryRestrict = Nothing

@@ -55,10 +55,12 @@ type UsersAliasesDeleteResource =
 -- | Remove a alias for the user
 --
 -- /See:/ 'usersAliasesDelete' smart constructor.
-data UsersAliasesDelete = UsersAliasesDelete'
+data UsersAliasesDelete =
+  UsersAliasesDelete'
     { _uadAlias   :: !Text
     , _uadUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersAliasesDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ usersAliasesDelete
     -> Text -- ^ 'uadUserKey'
     -> UsersAliasesDelete
 usersAliasesDelete pUadAlias_ pUadUserKey_ =
-    UsersAliasesDelete'
-    { _uadAlias = pUadAlias_
-    , _uadUserKey = pUadUserKey_
-    }
+  UsersAliasesDelete' {_uadAlias = pUadAlias_, _uadUserKey = pUadUserKey_}
 
 -- | The alias to be removed
 uadAlias :: Lens' UsersAliasesDelete Text

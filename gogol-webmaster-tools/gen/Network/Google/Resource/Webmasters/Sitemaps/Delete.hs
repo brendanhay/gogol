@@ -54,10 +54,12 @@ type SitemapsDeleteResource =
 -- | Deletes a sitemap from this site.
 --
 -- /See:/ 'sitemapsDelete' smart constructor.
-data SitemapsDelete = SitemapsDelete'
+data SitemapsDelete =
+  SitemapsDelete'
     { _sdFeedpath :: !Text
     , _sdSiteURL  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitemapsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ sitemapsDelete
     -> Text -- ^ 'sdSiteURL'
     -> SitemapsDelete
 sitemapsDelete pSdFeedpath_ pSdSiteURL_ =
-    SitemapsDelete'
-    { _sdFeedpath = pSdFeedpath_
-    , _sdSiteURL = pSdSiteURL_
-    }
+  SitemapsDelete' {_sdFeedpath = pSdFeedpath_, _sdSiteURL = pSdSiteURL_}
 
 -- | The URL of the actual sitemap. For example:
 -- http:\/\/www.example.com\/sitemap.xml

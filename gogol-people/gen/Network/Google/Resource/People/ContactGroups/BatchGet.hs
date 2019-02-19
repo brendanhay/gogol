@@ -65,7 +65,8 @@ type ContactGroupsBatchGetResource =
 -- specifying a list of contact group resource names.
 --
 -- /See:/ 'contactGroupsBatchGet' smart constructor.
-data ContactGroupsBatchGet = ContactGroupsBatchGet'
+data ContactGroupsBatchGet =
+  ContactGroupsBatchGet'
     { _cgbgXgafv          :: !(Maybe Xgafv)
     , _cgbgMaxMembers     :: !(Maybe (Textual Int32))
     , _cgbgUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ContactGroupsBatchGet = ContactGroupsBatchGet'
     , _cgbgUploadType     :: !(Maybe Text)
     , _cgbgResourceNames  :: !(Maybe [Text])
     , _cgbgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContactGroupsBatchGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ data ContactGroupsBatchGet = ContactGroupsBatchGet'
 contactGroupsBatchGet
     :: ContactGroupsBatchGet
 contactGroupsBatchGet =
-    ContactGroupsBatchGet'
+  ContactGroupsBatchGet'
     { _cgbgXgafv = Nothing
     , _cgbgMaxMembers = Nothing
     , _cgbgUploadProtocol = Nothing

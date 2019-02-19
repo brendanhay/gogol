@@ -67,7 +67,8 @@ type ProjectsScanConfigsScanRunsListResource =
 -- stop time.
 --
 -- /See:/ 'projectsScanConfigsScanRunsList' smart constructor.
-data ProjectsScanConfigsScanRunsList = ProjectsScanConfigsScanRunsList'
+data ProjectsScanConfigsScanRunsList =
+  ProjectsScanConfigsScanRunsList'
     { _pscsrlParent         :: !Text
     , _pscsrlXgafv          :: !(Maybe Xgafv)
     , _pscsrlUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsScanConfigsScanRunsList = ProjectsScanConfigsScanRunsList'
     , _pscsrlPageToken      :: !(Maybe Text)
     , _pscsrlPageSize       :: !(Maybe (Textual Int32))
     , _pscsrlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsScanConfigsScanRunsList' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsScanConfigsScanRunsList
     :: Text -- ^ 'pscsrlParent'
     -> ProjectsScanConfigsScanRunsList
 projectsScanConfigsScanRunsList pPscsrlParent_ =
-    ProjectsScanConfigsScanRunsList'
+  ProjectsScanConfigsScanRunsList'
     { _pscsrlParent = pPscsrlParent_
     , _pscsrlXgafv = Nothing
     , _pscsrlUploadProtocol = Nothing
@@ -165,7 +167,8 @@ pscsrlCallback
       (\ s a -> s{_pscsrlCallback = a})
 
 instance GoogleRequest
-         ProjectsScanConfigsScanRunsList where
+           ProjectsScanConfigsScanRunsList
+         where
         type Rs ProjectsScanConfigsScanRunsList =
              ListScanRunsResponse
         type Scopes ProjectsScanConfigsScanRunsList =

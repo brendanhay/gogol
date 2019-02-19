@@ -53,9 +53,11 @@ type UsersSettingsGetImapResource =
 -- | Gets IMAP settings.
 --
 -- /See:/ 'usersSettingsGetImap' smart constructor.
-newtype UsersSettingsGetImap = UsersSettingsGetImap'
+newtype UsersSettingsGetImap =
+  UsersSettingsGetImap'
     { _usgiUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsGetImap' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype UsersSettingsGetImap = UsersSettingsGetImap'
 -- * 'usgiUserId'
 usersSettingsGetImap
     :: UsersSettingsGetImap
-usersSettingsGetImap =
-    UsersSettingsGetImap'
-    { _usgiUserId = "me"
-    }
+usersSettingsGetImap = UsersSettingsGetImap' {_usgiUserId = "me"}
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

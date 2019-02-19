@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesInsert' request conforms to.
 type AccountUserProFilesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
@@ -55,10 +55,12 @@ type AccountUserProFilesInsertResource =
 -- | Inserts a new account user profile.
 --
 -- /See:/ 'accountUserProFilesInsert' smart constructor.
-data AccountUserProFilesInsert = AccountUserProFilesInsert'
+data AccountUserProFilesInsert =
+  AccountUserProFilesInsert'
     { _aupfiProFileId :: !(Textual Int64)
     , _aupfiPayload   :: !AccountUserProFile
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountUserProFilesInsert' with the minimum fields required to make a request.
 --
@@ -72,7 +74,7 @@ accountUserProFilesInsert
     -> AccountUserProFile -- ^ 'aupfiPayload'
     -> AccountUserProFilesInsert
 accountUserProFilesInsert pAupfiProFileId_ pAupfiPayload_ =
-    AccountUserProFilesInsert'
+  AccountUserProFilesInsert'
     { _aupfiProFileId = _Coerce # pAupfiProFileId_
     , _aupfiPayload = pAupfiPayload_
     }

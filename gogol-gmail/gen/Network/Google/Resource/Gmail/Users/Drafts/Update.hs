@@ -67,11 +67,13 @@ type UsersDraftsUpdateResource =
 -- | Replaces a draft\'s content.
 --
 -- /See:/ 'usersDraftsUpdate' smart constructor.
-data UsersDraftsUpdate = UsersDraftsUpdate'
+data UsersDraftsUpdate =
+  UsersDraftsUpdate'
     { _uduPayload :: !Draft
     , _uduUserId  :: !Text
     , _uduId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDraftsUpdate' with the minimum fields required to make a request.
 --
@@ -87,11 +89,8 @@ usersDraftsUpdate
     -> Text -- ^ 'uduId'
     -> UsersDraftsUpdate
 usersDraftsUpdate pUduPayload_ pUduId_ =
-    UsersDraftsUpdate'
-    { _uduPayload = pUduPayload_
-    , _uduUserId = "me"
-    , _uduId = pUduId_
-    }
+  UsersDraftsUpdate'
+    {_uduPayload = pUduPayload_, _uduUserId = "me", _uduId = pUduId_}
 
 -- | Multipart request metadata.
 uduPayload :: Lens' UsersDraftsUpdate Draft
@@ -123,7 +122,8 @@ instance GoogleRequest UsersDraftsUpdate where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload UsersDraftsUpdate) where
+           (MediaUpload UsersDraftsUpdate)
+         where
         type Rs (MediaUpload UsersDraftsUpdate) = Draft
         type Scopes (MediaUpload UsersDraftsUpdate) =
              Scopes UsersDraftsUpdate

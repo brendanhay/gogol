@@ -65,7 +65,8 @@ type AccountsCreativesUpdateResource =
 -- | Updates a creative.
 --
 -- /See:/ 'accountsCreativesUpdate' smart constructor.
-data AccountsCreativesUpdate = AccountsCreativesUpdate'
+data AccountsCreativesUpdate =
+  AccountsCreativesUpdate'
     { _acucXgafv          :: !(Maybe Xgafv)
     , _acucUploadProtocol :: !(Maybe Text)
     , _acucAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data AccountsCreativesUpdate = AccountsCreativesUpdate'
     , _acucPayload        :: !Creative
     , _acucAccountId      :: !Text
     , _acucCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsCreativesUpdate' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ accountsCreativesUpdate
     -> Text -- ^ 'acucAccountId'
     -> AccountsCreativesUpdate
 accountsCreativesUpdate pAcucCreativeId_ pAcucPayload_ pAcucAccountId_ =
-    AccountsCreativesUpdate'
+  AccountsCreativesUpdate'
     { _acucXgafv = Nothing
     , _acucUploadProtocol = Nothing
     , _acucAccessToken = Nothing

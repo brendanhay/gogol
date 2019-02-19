@@ -71,7 +71,8 @@ type UserUsageReportGetResource =
 -- a set of users.
 --
 -- /See:/ 'userUsageReportGet' smart constructor.
-data UserUsageReportGet = UserUsageReportGet'
+data UserUsageReportGet =
+  UserUsageReportGet'
     { _uurgFilters    :: !(Maybe Text)
     , _uurgCustomerId :: !(Maybe Text)
     , _uurgDate       :: !Text
@@ -80,7 +81,8 @@ data UserUsageReportGet = UserUsageReportGet'
     , _uurgUserKey    :: !Text
     , _uurgMaxResults :: !(Maybe (Textual Word32))
     , _uurgOrgUnitId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserUsageReportGet' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ userUsageReportGet
     -> Text -- ^ 'uurgUserKey'
     -> UserUsageReportGet
 userUsageReportGet pUurgDate_ pUurgUserKey_ =
-    UserUsageReportGet'
+  UserUsageReportGet'
     { _uurgFilters = Nothing
     , _uurgCustomerId = Nothing
     , _uurgDate = pUurgDate_

@@ -65,13 +65,15 @@ type RepresentativesRepresentativeInfoByDivisionResource
 -- | Looks up representative information for a single geographic division.
 --
 -- /See:/ 'representativesRepresentativeInfoByDivision' smart constructor.
-data RepresentativesRepresentativeInfoByDivision = RepresentativesRepresentativeInfoByDivision'
+data RepresentativesRepresentativeInfoByDivision =
+  RepresentativesRepresentativeInfoByDivision'
     { _rribdRoles     :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
     , _rribdPayload   :: !DivisionRepresentativeInfoRequest
     , _rribdRecursive :: !(Maybe Bool)
     , _rribdOcdId     :: !Text
     , _rribdLevels    :: !(Maybe [RepresentativesRepresentativeInfoByDivisionLevels])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RepresentativesRepresentativeInfoByDivision' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ representativesRepresentativeInfoByDivision
     -> Text -- ^ 'rribdOcdId'
     -> RepresentativesRepresentativeInfoByDivision
 representativesRepresentativeInfoByDivision pRribdPayload_ pRribdOcdId_ =
-    RepresentativesRepresentativeInfoByDivision'
+  RepresentativesRepresentativeInfoByDivision'
     { _rribdRoles = Nothing
     , _rribdPayload = pRribdPayload_
     , _rribdRecursive = Nothing
@@ -137,7 +139,8 @@ rribdLevels
       . _Coerce
 
 instance GoogleRequest
-         RepresentativesRepresentativeInfoByDivision where
+           RepresentativesRepresentativeInfoByDivision
+         where
         type Rs RepresentativesRepresentativeInfoByDivision =
              RepresentativeInfoData
         type Scopes

@@ -53,9 +53,11 @@ type AlertsDeleteResource =
 -- account.
 --
 -- /See:/ 'alertsDelete' smart constructor.
-newtype AlertsDelete = AlertsDelete'
+newtype AlertsDelete =
+  AlertsDelete'
     { _adAlertId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlertsDelete' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype AlertsDelete = AlertsDelete'
 alertsDelete
     :: Text -- ^ 'adAlertId'
     -> AlertsDelete
-alertsDelete pAdAlertId_ =
-    AlertsDelete'
-    { _adAlertId = pAdAlertId_
-    }
+alertsDelete pAdAlertId_ = AlertsDelete' {_adAlertId = pAdAlertId_}
 
 -- | Alert to delete.
 adAlertId :: Lens' AlertsDelete Text

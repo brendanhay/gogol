@@ -57,11 +57,13 @@ type FirewallsDeleteResource =
 -- | Deletes the specified firewall.
 --
 -- /See:/ 'firewallsDelete' smart constructor.
-data FirewallsDelete = FirewallsDelete'
+data FirewallsDelete =
+  FirewallsDelete'
     { _fdRequestId :: !(Maybe Text)
     , _fdProject   :: !Text
     , _fdFirewall  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FirewallsDelete' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ firewallsDelete
     -> Text -- ^ 'fdFirewall'
     -> FirewallsDelete
 firewallsDelete pFdProject_ pFdFirewall_ =
-    FirewallsDelete'
+  FirewallsDelete'
     { _fdRequestId = Nothing
     , _fdProject = pFdProject_
     , _fdFirewall = pFdFirewall_

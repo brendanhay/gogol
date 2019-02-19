@@ -57,11 +57,13 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -74,12 +76,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -121,10 +118,12 @@ instance ToJSON Status where
 -- features.
 --
 -- /See:/ 'basicLevel' smart constructor.
-data BasicLevel = BasicLevel'
+data BasicLevel =
+  BasicLevel'
     { _blConditions        :: !(Maybe [Condition])
     , _blCombiningFunction :: !(Maybe BasicLevelCombiningFunction)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicLevel' with the minimum fields required to make a request.
 --
@@ -136,10 +135,7 @@ data BasicLevel = BasicLevel'
 basicLevel
     :: BasicLevel
 basicLevel =
-    BasicLevel'
-    { _blConditions = Nothing
-    , _blCombiningFunction = Nothing
-    }
+  BasicLevel' {_blConditions = Nothing, _blCombiningFunction = Nothing}
 
 -- | Required. A list of requirements for the \`AccessLevel\` to be granted.
 blConditions :: Lens' BasicLevel [Condition]
@@ -179,14 +175,16 @@ instance ToJSON BasicLevel where
 -- be applied.
 --
 -- /See:/ 'accessLevel' smart constructor.
-data AccessLevel = AccessLevel'
+data AccessLevel =
+  AccessLevel'
     { _alBasic       :: !(Maybe BasicLevel)
     , _alUpdateTime  :: !(Maybe DateTime')
     , _alName        :: !(Maybe Text)
     , _alTitle       :: !(Maybe Text)
     , _alDescription :: !(Maybe Text)
     , _alCreateTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessLevel' with the minimum fields required to make a request.
 --
@@ -206,7 +204,7 @@ data AccessLevel = AccessLevel'
 accessLevel
     :: AccessLevel
 accessLevel =
-    AccessLevel'
+  AccessLevel'
     { _alBasic = Nothing
     , _alUpdateTime = Nothing
     , _alName = Nothing
@@ -274,12 +272,14 @@ instance ToJSON AccessLevel where
 -- describe specific Service Perimeter configuration.
 --
 -- /See:/ 'servicePerimeterConfig' smart constructor.
-data ServicePerimeterConfig = ServicePerimeterConfig'
+data ServicePerimeterConfig =
+  ServicePerimeterConfig'
     { _spcUnrestrictedServices :: !(Maybe [Text])
     , _spcResources            :: !(Maybe [Text])
     , _spcRestrictedServices   :: !(Maybe [Text])
     , _spcAccessLevels         :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicePerimeterConfig' with the minimum fields required to make a request.
 --
@@ -295,7 +295,7 @@ data ServicePerimeterConfig = ServicePerimeterConfig'
 servicePerimeterConfig
     :: ServicePerimeterConfig
 servicePerimeterConfig =
-    ServicePerimeterConfig'
+  ServicePerimeterConfig'
     { _spcUnrestrictedServices = Nothing
     , _spcResources = Nothing
     , _spcRestrictedServices = Nothing
@@ -388,13 +388,15 @@ instance ToJSON ServicePerimeterConfig where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -412,7 +414,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -487,7 +489,8 @@ instance ToJSON Operation where
 -- multiple Service Perimeter Bridges.
 --
 -- /See:/ 'servicePerimeter' smart constructor.
-data ServicePerimeter = ServicePerimeter'
+data ServicePerimeter =
+  ServicePerimeter'
     { _spStatus        :: !(Maybe ServicePerimeterConfig)
     , _spPerimeterType :: !(Maybe ServicePerimeterPerimeterType)
     , _spUpdateTime    :: !(Maybe DateTime')
@@ -495,7 +498,8 @@ data ServicePerimeter = ServicePerimeter'
     , _spTitle         :: !(Maybe Text)
     , _spDescription   :: !(Maybe Text)
     , _spCreateTime    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicePerimeter' with the minimum fields required to make a request.
 --
@@ -517,7 +521,7 @@ data ServicePerimeter = ServicePerimeter'
 servicePerimeter
     :: ServicePerimeter
 servicePerimeter =
-    ServicePerimeter'
+  ServicePerimeter'
     { _spStatus = Nothing
     , _spPerimeterType = Nothing
     , _spUpdateTime = Nothing
@@ -600,10 +604,12 @@ instance ToJSON ServicePerimeter where
 -- | A response to \`ListAccessPoliciesRequest\`.
 --
 -- /See:/ 'listAccessPoliciesResponse' smart constructor.
-data ListAccessPoliciesResponse = ListAccessPoliciesResponse'
+data ListAccessPoliciesResponse =
+  ListAccessPoliciesResponse'
     { _laprNextPageToken  :: !(Maybe Text)
     , _laprAccessPolicies :: !(Maybe [AccessPolicy])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAccessPoliciesResponse' with the minimum fields required to make a request.
 --
@@ -615,10 +621,8 @@ data ListAccessPoliciesResponse = ListAccessPoliciesResponse'
 listAccessPoliciesResponse
     :: ListAccessPoliciesResponse
 listAccessPoliciesResponse =
-    ListAccessPoliciesResponse'
-    { _laprNextPageToken = Nothing
-    , _laprAccessPolicies = Nothing
-    }
+  ListAccessPoliciesResponse'
+    {_laprNextPageToken = Nothing, _laprAccessPolicies = Nothing}
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -652,9 +656,11 @@ instance ToJSON ListAccessPoliciesResponse where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -665,9 +671,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -686,10 +690,12 @@ instance ToJSON StatusDetailsItem where
 -- | A restriction on the OS type and version of devices making requests.
 --
 -- /See:/ 'osConstraint' smart constructor.
-data OSConstraint = OSConstraint'
+data OSConstraint =
+  OSConstraint'
     { _ocOSType         :: !(Maybe OSConstraintOSType)
     , _ocMinimumVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OSConstraint' with the minimum fields required to make a request.
 --
@@ -700,11 +706,7 @@ data OSConstraint = OSConstraint'
 -- * 'ocMinimumVersion'
 osConstraint
     :: OSConstraint
-osConstraint =
-    OSConstraint'
-    { _ocOSType = Nothing
-    , _ocMinimumVersion = Nothing
-    }
+osConstraint = OSConstraint' {_ocOSType = Nothing, _ocMinimumVersion = Nothing}
 
 -- | Required. The allowed OS type.
 ocOSType :: Lens' OSConstraint (Maybe OSConstraintOSType)
@@ -740,13 +742,15 @@ instance ToJSON OSConstraint where
 -- organization.
 --
 -- /See:/ 'accessPolicy' smart constructor.
-data AccessPolicy = AccessPolicy'
+data AccessPolicy =
+  AccessPolicy'
     { _apParent     :: !(Maybe Text)
     , _apUpdateTime :: !(Maybe DateTime')
     , _apName       :: !(Maybe Text)
     , _apTitle      :: !(Maybe Text)
     , _apCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPolicy' with the minimum fields required to make a request.
 --
@@ -764,7 +768,7 @@ data AccessPolicy = AccessPolicy'
 accessPolicy
     :: AccessPolicy
 accessPolicy =
-    AccessPolicy'
+  AccessPolicy'
     { _apParent = Nothing
     , _apUpdateTime = Nothing
     , _apName = Nothing
@@ -821,10 +825,12 @@ instance ToJSON AccessPolicy where
 -- | A response to \`ListServicePerimetersRequest\`.
 --
 -- /See:/ 'listServicePerimetersResponse' smart constructor.
-data ListServicePerimetersResponse = ListServicePerimetersResponse'
+data ListServicePerimetersResponse =
+  ListServicePerimetersResponse'
     { _lsprNextPageToken     :: !(Maybe Text)
     , _lsprServicePerimeters :: !(Maybe [ServicePerimeter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListServicePerimetersResponse' with the minimum fields required to make a request.
 --
@@ -836,10 +842,8 @@ data ListServicePerimetersResponse = ListServicePerimetersResponse'
 listServicePerimetersResponse
     :: ListServicePerimetersResponse
 listServicePerimetersResponse =
-    ListServicePerimetersResponse'
-    { _lsprNextPageToken = Nothing
-    , _lsprServicePerimeters = Nothing
-    }
+  ListServicePerimetersResponse'
+    {_lsprNextPageToken = Nothing, _lsprServicePerimeters = Nothing}
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -874,10 +878,12 @@ instance ToJSON ListServicePerimetersResponse where
 -- | A response to \`ListAccessLevelsRequest\`.
 --
 -- /See:/ 'listAccessLevelsResponse' smart constructor.
-data ListAccessLevelsResponse = ListAccessLevelsResponse'
+data ListAccessLevelsResponse =
+  ListAccessLevelsResponse'
     { _lalrNextPageToken :: !(Maybe Text)
     , _lalrAccessLevels  :: !(Maybe [AccessLevel])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAccessLevelsResponse' with the minimum fields required to make a request.
 --
@@ -889,10 +895,8 @@ data ListAccessLevelsResponse = ListAccessLevelsResponse'
 listAccessLevelsResponse
     :: ListAccessLevelsResponse
 listAccessLevelsResponse =
-    ListAccessLevelsResponse'
-    { _lalrNextPageToken = Nothing
-    , _lalrAccessLevels = Nothing
-    }
+  ListAccessLevelsResponse'
+    {_lalrNextPageToken = Nothing, _lalrAccessLevels = Nothing}
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -930,9 +934,11 @@ instance ToJSON ListAccessLevelsResponse where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -943,9 +949,7 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -972,12 +976,14 @@ instance ToJSON OperationMetadata where
 -- encrypted Linux desktops and encrypted Windows desktops.
 --
 -- /See:/ 'devicePolicy' smart constructor.
-data DevicePolicy = DevicePolicy'
+data DevicePolicy =
+  DevicePolicy'
     { _dpOSConstraints                 :: !(Maybe [OSConstraint])
     , _dpRequireScreenlock             :: !(Maybe Bool)
     , _dpAllowedEncryptionStatuses     :: !(Maybe [Text])
     , _dpAllowedDeviceManagementLevels :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DevicePolicy' with the minimum fields required to make a request.
 --
@@ -993,7 +999,7 @@ data DevicePolicy = DevicePolicy'
 devicePolicy
     :: DevicePolicy
 devicePolicy =
-    DevicePolicy'
+  DevicePolicy'
     { _dpOSConstraints = Nothing
     , _dpRequireScreenlock = Nothing
     , _dpAllowedEncryptionStatuses = Nothing
@@ -1062,13 +1068,15 @@ instance ToJSON DevicePolicy where
 -- DateTimeRestriction.
 --
 -- /See:/ 'condition' smart constructor.
-data Condition = Condition'
+data Condition =
+  Condition'
     { _cMembers              :: !(Maybe [Text])
     , _cNegate               :: !(Maybe Bool)
     , _cIPSubnetworks        :: !(Maybe [Text])
     , _cDevicePolicy         :: !(Maybe DevicePolicy)
     , _cRequiredAccessLevels :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
@@ -1086,7 +1094,7 @@ data Condition = Condition'
 condition
     :: Condition
 condition =
-    Condition'
+  Condition'
     { _cMembers = Nothing
     , _cNegate = Nothing
     , _cIPSubnetworks = Nothing
@@ -1175,9 +1183,11 @@ instance ToJSON Condition where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -1188,9 +1198,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)

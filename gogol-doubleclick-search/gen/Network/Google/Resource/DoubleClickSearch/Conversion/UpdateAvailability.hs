@@ -55,9 +55,11 @@ type ConversionUpdateAvailabilityResource =
 -- DoubleClick Search.
 --
 -- /See:/ 'conversionUpdateAvailability' smart constructor.
-newtype ConversionUpdateAvailability = ConversionUpdateAvailability'
+newtype ConversionUpdateAvailability =
+  ConversionUpdateAvailability'
     { _cuaPayload :: UpdateAvailabilityRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConversionUpdateAvailability' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ conversionUpdateAvailability
     :: UpdateAvailabilityRequest -- ^ 'cuaPayload'
     -> ConversionUpdateAvailability
 conversionUpdateAvailability pCuaPayload_ =
-    ConversionUpdateAvailability'
-    { _cuaPayload = pCuaPayload_
-    }
+  ConversionUpdateAvailability' {_cuaPayload = pCuaPayload_}
 
 -- | Multipart request metadata.
 cuaPayload :: Lens' ConversionUpdateAvailability UpdateAvailabilityRequest

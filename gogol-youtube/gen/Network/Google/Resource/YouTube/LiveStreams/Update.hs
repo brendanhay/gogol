@@ -61,12 +61,14 @@ type LiveStreamsUpdateResource =
 -- settings.
 --
 -- /See:/ 'liveStreamsUpdate' smart constructor.
-data LiveStreamsUpdate = LiveStreamsUpdate'
+data LiveStreamsUpdate =
+  LiveStreamsUpdate'
     { _lsuPart                          :: !Text
     , _lsuPayload                       :: !LiveStream
     , _lsuOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStreamsUpdate' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ liveStreamsUpdate
     -> LiveStream -- ^ 'lsuPayload'
     -> LiveStreamsUpdate
 liveStreamsUpdate pLsuPart_ pLsuPayload_ =
-    LiveStreamsUpdate'
+  LiveStreamsUpdate'
     { _lsuPart = pLsuPart_
     , _lsuPayload = pLsuPayload_
     , _lsuOnBehalfOfContentOwner = Nothing

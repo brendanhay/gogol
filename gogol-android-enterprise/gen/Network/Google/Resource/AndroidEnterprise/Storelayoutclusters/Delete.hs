@@ -58,11 +58,13 @@ type StorelayoutclustersDeleteResource =
 -- | Deletes a cluster.
 --
 -- /See:/ 'storelayoutclustersDelete' smart constructor.
-data StorelayoutclustersDelete = StorelayoutclustersDelete'
+data StorelayoutclustersDelete =
+  StorelayoutclustersDelete'
     { _sddEnterpriseId :: !Text
     , _sddPageId       :: !Text
     , _sddClusterId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StorelayoutclustersDelete' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ storelayoutclustersDelete
     -> Text -- ^ 'sddClusterId'
     -> StorelayoutclustersDelete
 storelayoutclustersDelete pSddEnterpriseId_ pSddPageId_ pSddClusterId_ =
-    StorelayoutclustersDelete'
+  StorelayoutclustersDelete'
     { _sddEnterpriseId = pSddEnterpriseId_
     , _sddPageId = pSddPageId_
     , _sddClusterId = pSddClusterId_

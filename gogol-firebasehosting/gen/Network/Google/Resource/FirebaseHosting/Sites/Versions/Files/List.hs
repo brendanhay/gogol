@@ -67,7 +67,8 @@ type SitesVersionsFilesListResource =
 -- | Lists the remaining files to be uploaded for the specified version.
 --
 -- /See:/ 'sitesVersionsFilesList' smart constructor.
-data SitesVersionsFilesList = SitesVersionsFilesList'
+data SitesVersionsFilesList =
+  SitesVersionsFilesList'
     { _svflParent         :: !Text
     , _svflStatus         :: !(Maybe Text)
     , _svflXgafv          :: !(Maybe Xgafv)
@@ -77,7 +78,8 @@ data SitesVersionsFilesList = SitesVersionsFilesList'
     , _svflPageToken      :: !(Maybe Text)
     , _svflPageSize       :: !(Maybe (Textual Int32))
     , _svflCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesVersionsFilesList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ sitesVersionsFilesList
     :: Text -- ^ 'svflParent'
     -> SitesVersionsFilesList
 sitesVersionsFilesList pSvflParent_ =
-    SitesVersionsFilesList'
+  SitesVersionsFilesList'
     { _svflParent = pSvflParent_
     , _svflStatus = Nothing
     , _svflXgafv = Nothing

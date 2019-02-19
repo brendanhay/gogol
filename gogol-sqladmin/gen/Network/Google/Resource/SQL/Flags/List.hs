@@ -52,9 +52,11 @@ type FlagsListResource =
 -- | List all available database flags for Cloud SQL instances.
 --
 -- /See:/ 'flagsList' smart constructor.
-newtype FlagsList = FlagsList'
+newtype FlagsList =
+  FlagsList'
     { _flDatabaseVersion :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FlagsList' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype FlagsList = FlagsList'
 -- * 'flDatabaseVersion'
 flagsList
     :: FlagsList
-flagsList =
-    FlagsList'
-    { _flDatabaseVersion = Nothing
-    }
+flagsList = FlagsList' {_flDatabaseVersion = Nothing}
 
 -- | Database type and version you want to retrieve flags for. By default,
 -- this method returns flags for all database types and versions.

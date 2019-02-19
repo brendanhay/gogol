@@ -63,14 +63,16 @@ type UsersThreadsListResource =
 -- | Lists the threads in the user\'s mailbox.
 --
 -- /See:/ 'usersThreadsList' smart constructor.
-data UsersThreadsList = UsersThreadsList'
+data UsersThreadsList =
+  UsersThreadsList'
     { _utlQ                :: !(Maybe Text)
     , _utlUserId           :: !Text
     , _utlIncludeSpamTrash :: !Bool
     , _utlLabelIds         :: !(Maybe [Text])
     , _utlPageToken        :: !(Maybe Text)
     , _utlMaxResults       :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersThreadsList' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ data UsersThreadsList = UsersThreadsList'
 usersThreadsList
     :: UsersThreadsList
 usersThreadsList =
-    UsersThreadsList'
+  UsersThreadsList'
     { _utlQ = Nothing
     , _utlUserId = "me"
     , _utlIncludeSpamTrash = False

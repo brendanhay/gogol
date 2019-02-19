@@ -64,7 +64,8 @@ type ProjectsAgentSessionsContextsPatchResource =
 -- | Updates the specified context.
 --
 -- /See:/ 'projectsAgentSessionsContextsPatch' smart constructor.
-data ProjectsAgentSessionsContextsPatch = ProjectsAgentSessionsContextsPatch'
+data ProjectsAgentSessionsContextsPatch =
+  ProjectsAgentSessionsContextsPatch'
     { _pascpXgafv          :: !(Maybe Xgafv)
     , _pascpUploadProtocol :: !(Maybe Text)
     , _pascpUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,8 @@ data ProjectsAgentSessionsContextsPatch = ProjectsAgentSessionsContextsPatch'
     , _pascpPayload        :: !GoogleCloudDialogflowV2Context
     , _pascpName           :: !Text
     , _pascpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentSessionsContextsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsAgentSessionsContextsPatch
     -> Text -- ^ 'pascpName'
     -> ProjectsAgentSessionsContextsPatch
 projectsAgentSessionsContextsPatch pPascpPayload_ pPascpName_ =
-    ProjectsAgentSessionsContextsPatch'
+  ProjectsAgentSessionsContextsPatch'
     { _pascpXgafv = Nothing
     , _pascpUploadProtocol = Nothing
     , _pascpUpdateMask = Nothing
@@ -159,7 +161,8 @@ pascpCallback
       (\ s a -> s{_pascpCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsContextsPatch where
+           ProjectsAgentSessionsContextsPatch
+         where
         type Rs ProjectsAgentSessionsContextsPatch =
              GoogleCloudDialogflowV2Context
         type Scopes ProjectsAgentSessionsContextsPatch =

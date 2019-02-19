@@ -76,7 +76,8 @@ type CoursesPatchResource =
 -- following request errors: * CourseNotModifiable
 --
 -- /See:/ 'coursesPatch' smart constructor.
-data CoursesPatch = CoursesPatch'
+data CoursesPatch =
+  CoursesPatch'
     { _cpXgafv          :: !(Maybe Xgafv)
     , _cpUploadProtocol :: !(Maybe Text)
     , _cpUpdateMask     :: !(Maybe GFieldMask)
@@ -85,7 +86,8 @@ data CoursesPatch = CoursesPatch'
     , _cpPayload        :: !Course
     , _cpId             :: !Text
     , _cpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesPatch' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ coursesPatch
     -> Text -- ^ 'cpId'
     -> CoursesPatch
 coursesPatch pCpPayload_ pCpId_ =
-    CoursesPatch'
+  CoursesPatch'
     { _cpXgafv = Nothing
     , _cpUploadProtocol = Nothing
     , _cpUpdateMask = Nothing

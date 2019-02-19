@@ -62,12 +62,14 @@ type InterconnectAttachmentsInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'interconnectAttachmentsInsert' smart constructor.
-data InterconnectAttachmentsInsert = InterconnectAttachmentsInsert'
+data InterconnectAttachmentsInsert =
+  InterconnectAttachmentsInsert'
     { _iaiRequestId :: !(Maybe Text)
     , _iaiProject   :: !Text
     , _iaiPayload   :: !InterconnectAttachment
     , _iaiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentsInsert' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ interconnectAttachmentsInsert
     -> Text -- ^ 'iaiRegion'
     -> InterconnectAttachmentsInsert
 interconnectAttachmentsInsert pIaiProject_ pIaiPayload_ pIaiRegion_ =
-    InterconnectAttachmentsInsert'
+  InterconnectAttachmentsInsert'
     { _iaiRequestId = Nothing
     , _iaiProject = pIaiProject_
     , _iaiPayload = pIaiPayload_

@@ -87,7 +87,8 @@ type ProjectsTimeSeriesListResource =
 -- Stackdriver account.
 --
 -- /See:/ 'projectsTimeSeriesList' smart constructor.
-data ProjectsTimeSeriesList = ProjectsTimeSeriesList'
+data ProjectsTimeSeriesList =
+  ProjectsTimeSeriesList'
     { _ptslIntervalStartTime             :: !(Maybe DateTime')
     , _ptslXgafv                         :: !(Maybe Xgafv)
     , _ptslUploadProtocol                :: !(Maybe Text)
@@ -105,7 +106,8 @@ data ProjectsTimeSeriesList = ProjectsTimeSeriesList'
     , _ptslIntervalEndTime               :: !(Maybe DateTime')
     , _ptslPageSize                      :: !(Maybe (Textual Int32))
     , _ptslCallback                      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTimeSeriesList' with the minimum fields required to make a request.
 --
@@ -148,7 +150,7 @@ projectsTimeSeriesList
     :: Text -- ^ 'ptslName'
     -> ProjectsTimeSeriesList
 projectsTimeSeriesList pPtslName_ =
-    ProjectsTimeSeriesList'
+  ProjectsTimeSeriesList'
     { _ptslIntervalStartTime = Nothing
     , _ptslXgafv = Nothing
     , _ptslUploadProtocol = Nothing

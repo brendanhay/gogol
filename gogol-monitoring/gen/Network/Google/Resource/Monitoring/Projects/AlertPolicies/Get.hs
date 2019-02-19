@@ -59,14 +59,16 @@ type ProjectsAlertPoliciesGetResource =
 -- | Gets a single alerting policy.
 --
 -- /See:/ 'projectsAlertPoliciesGet' smart constructor.
-data ProjectsAlertPoliciesGet = ProjectsAlertPoliciesGet'
+data ProjectsAlertPoliciesGet =
+  ProjectsAlertPoliciesGet'
     { _papgXgafv          :: !(Maybe Xgafv)
     , _papgUploadProtocol :: !(Maybe Text)
     , _papgAccessToken    :: !(Maybe Text)
     , _papgUploadType     :: !(Maybe Text)
     , _papgName           :: !Text
     , _papgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAlertPoliciesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsAlertPoliciesGet
     :: Text -- ^ 'papgName'
     -> ProjectsAlertPoliciesGet
 projectsAlertPoliciesGet pPapgName_ =
-    ProjectsAlertPoliciesGet'
+  ProjectsAlertPoliciesGet'
     { _papgXgafv = Nothing
     , _papgUploadProtocol = Nothing
     , _papgAccessToken = Nothing

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SizesInsert' request conforms to.
 type SizesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>
@@ -54,10 +54,12 @@ type SizesInsertResource =
 -- | Inserts a new size.
 --
 -- /See:/ 'sizesInsert' smart constructor.
-data SizesInsert = SizesInsert'
+data SizesInsert =
+  SizesInsert'
     { _siProFileId :: !(Textual Int64)
     , _siPayload   :: !Size
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SizesInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ sizesInsert
     -> Size -- ^ 'siPayload'
     -> SizesInsert
 sizesInsert pSiProFileId_ pSiPayload_ =
-    SizesInsert'
-    { _siProFileId = _Coerce # pSiProFileId_
-    , _siPayload = pSiPayload_
-    }
+  SizesInsert'
+    {_siProFileId = _Coerce # pSiProFileId_, _siPayload = pSiPayload_}
 
 -- | User profile ID associated with this request.
 siProFileId :: Lens' SizesInsert Int64

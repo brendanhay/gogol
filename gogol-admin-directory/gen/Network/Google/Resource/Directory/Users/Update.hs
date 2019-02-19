@@ -54,10 +54,12 @@ type UsersUpdateResource =
 -- | update user
 --
 -- /See:/ 'usersUpdate' smart constructor.
-data UsersUpdate = UsersUpdate'
+data UsersUpdate =
+  UsersUpdate'
     { _uPayload :: !User
     , _uUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ usersUpdate
     -> Text -- ^ 'uUserKey'
     -> UsersUpdate
 usersUpdate pUPayload_ pUUserKey_ =
-    UsersUpdate'
-    { _uPayload = pUPayload_
-    , _uUserKey = pUUserKey_
-    }
+  UsersUpdate' {_uPayload = pUPayload_, _uUserKey = pUUserKey_}
 
 -- | Multipart request metadata.
 uPayload :: Lens' UsersUpdate User

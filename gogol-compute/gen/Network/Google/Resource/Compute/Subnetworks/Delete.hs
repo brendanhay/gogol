@@ -59,12 +59,14 @@ type SubnetworksDeleteResource =
 -- | Deletes the specified subnetwork.
 --
 -- /See:/ 'subnetworksDelete' smart constructor.
-data SubnetworksDelete = SubnetworksDelete'
+data SubnetworksDelete =
+  SubnetworksDelete'
     { _sdRequestId  :: !(Maybe Text)
     , _sdProject    :: !Text
     , _sdSubnetwork :: !Text
     , _sdRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksDelete' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ subnetworksDelete
     -> Text -- ^ 'sdRegion'
     -> SubnetworksDelete
 subnetworksDelete pSdProject_ pSdSubnetwork_ pSdRegion_ =
-    SubnetworksDelete'
+  SubnetworksDelete'
     { _sdRequestId = Nothing
     , _sdProject = pSdProject_
     , _sdSubnetwork = pSdSubnetwork_

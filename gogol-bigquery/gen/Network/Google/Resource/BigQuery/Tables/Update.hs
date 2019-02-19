@@ -63,12 +63,14 @@ type TablesUpdateResource =
 -- that are provided in the submitted table resource.
 --
 -- /See:/ 'tablesUpdate' smart constructor.
-data TablesUpdate = TablesUpdate'
+data TablesUpdate =
+  TablesUpdate'
     { _tuPayload   :: !Table
     , _tuDataSetId :: !Text
     , _tuProjectId :: !Text
     , _tuTableId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TablesUpdate' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ tablesUpdate
     -> Text -- ^ 'tuTableId'
     -> TablesUpdate
 tablesUpdate pTuPayload_ pTuDataSetId_ pTuProjectId_ pTuTableId_ =
-    TablesUpdate'
+  TablesUpdate'
     { _tuPayload = pTuPayload_
     , _tuDataSetId = pTuDataSetId_
     , _tuProjectId = pTuProjectId_

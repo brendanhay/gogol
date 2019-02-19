@@ -61,14 +61,16 @@ type TransferOperationsCancelResource =
 -- succeeded or whether the operation completed despite cancellation.
 --
 -- /See:/ 'transferOperationsCancel' smart constructor.
-data TransferOperationsCancel = TransferOperationsCancel'
+data TransferOperationsCancel =
+  TransferOperationsCancel'
     { _tocXgafv          :: !(Maybe Xgafv)
     , _tocUploadProtocol :: !(Maybe Text)
     , _tocAccessToken    :: !(Maybe Text)
     , _tocUploadType     :: !(Maybe Text)
     , _tocName           :: !Text
     , _tocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferOperationsCancel' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ transferOperationsCancel
     :: Text -- ^ 'tocName'
     -> TransferOperationsCancel
 transferOperationsCancel pTocName_ =
-    TransferOperationsCancel'
+  TransferOperationsCancel'
     { _tocXgafv = Nothing
     , _tocUploadProtocol = Nothing
     , _tocAccessToken = Nothing

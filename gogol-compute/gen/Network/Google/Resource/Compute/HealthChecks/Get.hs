@@ -57,10 +57,12 @@ type HealthChecksGetResource =
 -- health checks by making a list() request.
 --
 -- /See:/ 'healthChecksGet' smart constructor.
-data HealthChecksGet = HealthChecksGet'
+data HealthChecksGet =
+  HealthChecksGet'
     { _hcgHealthCheck :: !Text
     , _hcgProject     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthChecksGet' with the minimum fields required to make a request.
 --
@@ -74,10 +76,8 @@ healthChecksGet
     -> Text -- ^ 'hcgProject'
     -> HealthChecksGet
 healthChecksGet pHcgHealthCheck_ pHcgProject_ =
-    HealthChecksGet'
-    { _hcgHealthCheck = pHcgHealthCheck_
-    , _hcgProject = pHcgProject_
-    }
+  HealthChecksGet'
+    {_hcgHealthCheck = pHcgHealthCheck_, _hcgProject = pHcgProject_}
 
 -- | Name of the HealthCheck resource to return.
 hcgHealthCheck :: Lens' HealthChecksGet Text

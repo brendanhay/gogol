@@ -67,7 +67,8 @@ type InfoTypesListResource =
 -- to learn more.
 --
 -- /See:/ 'infoTypesList' smart constructor.
-data InfoTypesList = InfoTypesList'
+data InfoTypesList =
+  InfoTypesList'
     { _itlXgafv          :: !(Maybe Xgafv)
     , _itlLanguageCode   :: !(Maybe Text)
     , _itlUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,8 @@ data InfoTypesList = InfoTypesList'
     , _itlUploadType     :: !(Maybe Text)
     , _itlFilter         :: !(Maybe Text)
     , _itlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InfoTypesList' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ data InfoTypesList = InfoTypesList'
 infoTypesList
     :: InfoTypesList
 infoTypesList =
-    InfoTypesList'
+  InfoTypesList'
     { _itlXgafv = Nothing
     , _itlLanguageCode = Nothing
     , _itlUploadProtocol = Nothing

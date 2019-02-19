@@ -56,10 +56,12 @@ type ManagementAccountUserLinksInsertResource =
 -- | Adds a new user to the given account.
 --
 -- /See:/ 'managementAccountUserLinksInsert' smart constructor.
-data ManagementAccountUserLinksInsert = ManagementAccountUserLinksInsert'
+data ManagementAccountUserLinksInsert =
+  ManagementAccountUserLinksInsert'
     { _mauliPayload   :: !EntityUserLink
     , _mauliAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksInsert' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ managementAccountUserLinksInsert
     -> Text -- ^ 'mauliAccountId'
     -> ManagementAccountUserLinksInsert
 managementAccountUserLinksInsert pMauliPayload_ pMauliAccountId_ =
-    ManagementAccountUserLinksInsert'
-    { _mauliPayload = pMauliPayload_
-    , _mauliAccountId = pMauliAccountId_
-    }
+  ManagementAccountUserLinksInsert'
+    {_mauliPayload = pMauliPayload_, _mauliAccountId = pMauliAccountId_}
 
 -- | Multipart request metadata.
 mauliPayload :: Lens' ManagementAccountUserLinksInsert EntityUserLink
@@ -90,7 +90,8 @@ mauliAccountId
       (\ s a -> s{_mauliAccountId = a})
 
 instance GoogleRequest
-         ManagementAccountUserLinksInsert where
+           ManagementAccountUserLinksInsert
+         where
         type Rs ManagementAccountUserLinksInsert =
              EntityUserLink
         type Scopes ManagementAccountUserLinksInsert =

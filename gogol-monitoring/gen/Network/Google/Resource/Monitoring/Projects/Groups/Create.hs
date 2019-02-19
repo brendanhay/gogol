@@ -64,7 +64,8 @@ type ProjectsGroupsCreateResource =
 -- | Creates a new group.
 --
 -- /See:/ 'projectsGroupsCreate' smart constructor.
-data ProjectsGroupsCreate = ProjectsGroupsCreate'
+data ProjectsGroupsCreate =
+  ProjectsGroupsCreate'
     { _pgcXgafv          :: !(Maybe Xgafv)
     , _pgcValidateOnly   :: !(Maybe Bool)
     , _pgcUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsGroupsCreate = ProjectsGroupsCreate'
     , _pgcPayload        :: !Group
     , _pgcName           :: !Text
     , _pgcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGroupsCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsGroupsCreate
     -> Text -- ^ 'pgcName'
     -> ProjectsGroupsCreate
 projectsGroupsCreate pPgcPayload_ pPgcName_ =
-    ProjectsGroupsCreate'
+  ProjectsGroupsCreate'
     { _pgcXgafv = Nothing
     , _pgcValidateOnly = Nothing
     , _pgcUploadProtocol = Nothing

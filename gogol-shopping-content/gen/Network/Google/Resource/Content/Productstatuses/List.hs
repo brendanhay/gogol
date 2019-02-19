@@ -58,12 +58,14 @@ type ProductstatusesListResource =
 -- | Lists the statuses of the products in your Merchant Center account.
 --
 -- /See:/ 'productstatusesList' smart constructor.
-data ProductstatusesList = ProductstatusesList'
+data ProductstatusesList =
+  ProductstatusesList'
     { _plMerchantId   :: !(Textual Word64)
     , _plDestinations :: !(Maybe [Text])
     , _plPageToken    :: !(Maybe Text)
     , _plMaxResults   :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductstatusesList' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ productstatusesList
     :: Word64 -- ^ 'plMerchantId'
     -> ProductstatusesList
 productstatusesList pPlMerchantId_ =
-    ProductstatusesList'
+  ProductstatusesList'
     { _plMerchantId = _Coerce # pPlMerchantId_
     , _plDestinations = Nothing
     , _plPageToken = Nothing

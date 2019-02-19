@@ -59,12 +59,14 @@ type ForwardingRulesDeleteResource =
 -- | Deletes the specified ForwardingRule resource.
 --
 -- /See:/ 'forwardingRulesDelete' smart constructor.
-data ForwardingRulesDelete = ForwardingRulesDelete'
+data ForwardingRulesDelete =
+  ForwardingRulesDelete'
     { _frdRequestId      :: !(Maybe Text)
     , _frdProject        :: !Text
     , _frdForwardingRule :: !Text
     , _frdRegion         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRulesDelete' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ forwardingRulesDelete
     -> Text -- ^ 'frdRegion'
     -> ForwardingRulesDelete
 forwardingRulesDelete pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
-    ForwardingRulesDelete'
+  ForwardingRulesDelete'
     { _frdRequestId = Nothing
     , _frdProject = pFrdProject_
     , _frdForwardingRule = pFrdForwardingRule_

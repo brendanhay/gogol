@@ -23,9 +23,11 @@ import           Network.Google.Prelude
 -- | Template for LicenseAssignment Insert request
 --
 -- /See:/ 'licenseAssignmentInsert' smart constructor.
-newtype LicenseAssignmentInsert = LicenseAssignmentInsert'
+newtype LicenseAssignmentInsert =
+  LicenseAssignmentInsert'
     { _laiUserId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseAssignmentInsert' with the minimum fields required to make a request.
 --
@@ -34,10 +36,7 @@ newtype LicenseAssignmentInsert = LicenseAssignmentInsert'
 -- * 'laiUserId'
 licenseAssignmentInsert
     :: LicenseAssignmentInsert
-licenseAssignmentInsert =
-    LicenseAssignmentInsert'
-    { _laiUserId = Nothing
-    }
+licenseAssignmentInsert = LicenseAssignmentInsert' {_laiUserId = Nothing}
 
 -- | Email id of the user
 laiUserId :: Lens' LicenseAssignmentInsert (Maybe Text)
@@ -57,12 +56,14 @@ instance ToJSON LicenseAssignmentInsert where
 -- | LicesnseAssignment List for a given product\/sku for a customer.
 --
 -- /See:/ 'licenseAssignmentList' smart constructor.
-data LicenseAssignmentList = LicenseAssignmentList'
+data LicenseAssignmentList =
+  LicenseAssignmentList'
     { _lalEtag          :: !(Maybe Text)
     , _lalNextPageToken :: !(Maybe Text)
     , _lalKind          :: !Text
     , _lalItems         :: !(Maybe [LicenseAssignment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseAssignmentList' with the minimum fields required to make a request.
 --
@@ -78,7 +79,7 @@ data LicenseAssignmentList = LicenseAssignmentList'
 licenseAssignmentList
     :: LicenseAssignmentList
 licenseAssignmentList =
-    LicenseAssignmentList'
+  LicenseAssignmentList'
     { _lalEtag = Nothing
     , _lalNextPageToken = Nothing
     , _lalKind = "licensing#licenseAssignmentList"
@@ -128,7 +129,8 @@ instance ToJSON LicenseAssignmentList where
 -- | Template for LiscenseAssignment Resource
 --
 -- /See:/ 'licenseAssignment' smart constructor.
-data LicenseAssignment = LicenseAssignment'
+data LicenseAssignment =
+  LicenseAssignment'
     { _laProductName :: !(Maybe Text)
     , _laEtags       :: !(Maybe Text)
     , _laSKUName     :: !(Maybe Text)
@@ -137,7 +139,8 @@ data LicenseAssignment = LicenseAssignment'
     , _laUserId      :: !(Maybe Text)
     , _laSelfLink    :: !(Maybe Text)
     , _laProductId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseAssignment' with the minimum fields required to make a request.
 --
@@ -161,7 +164,7 @@ data LicenseAssignment = LicenseAssignment'
 licenseAssignment
     :: LicenseAssignment
 licenseAssignment =
-    LicenseAssignment'
+  LicenseAssignment'
     { _laProductName = Nothing
     , _laEtags = Nothing
     , _laSKUName = Nothing

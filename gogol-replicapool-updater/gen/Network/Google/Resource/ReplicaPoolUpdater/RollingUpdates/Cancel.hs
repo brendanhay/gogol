@@ -60,11 +60,13 @@ type RollingUpdatesCancelResource =
 -- This has no effect if the update is already CANCELLED.
 --
 -- /See:/ 'rollingUpdatesCancel' smart constructor.
-data RollingUpdatesCancel = RollingUpdatesCancel'
+data RollingUpdatesCancel =
+  RollingUpdatesCancel'
     { _rucRollingUpdate :: !Text
     , _rucProject       :: !Text
     , _rucZone          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdatesCancel' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ rollingUpdatesCancel
     -> Text -- ^ 'rucZone'
     -> RollingUpdatesCancel
 rollingUpdatesCancel pRucRollingUpdate_ pRucProject_ pRucZone_ =
-    RollingUpdatesCancel'
+  RollingUpdatesCancel'
     { _rucRollingUpdate = pRucRollingUpdate_
     , _rucProject = pRucProject_
     , _rucZone = pRucZone_

@@ -61,14 +61,16 @@ type ProjectsLocationsKeyRingsCryptoKeysGetResource =
 -- CryptoKeyVersion.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysGet' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysGet = ProjectsLocationsKeyRingsCryptoKeysGet'
+data ProjectsLocationsKeyRingsCryptoKeysGet =
+  ProjectsLocationsKeyRingsCryptoKeysGet'
     { _plkrckgXgafv          :: !(Maybe Xgafv)
     , _plkrckgUploadProtocol :: !(Maybe Text)
     , _plkrckgAccessToken    :: !(Maybe Text)
     , _plkrckgUploadType     :: !(Maybe Text)
     , _plkrckgName           :: !Text
     , _plkrckgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysGet' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsLocationsKeyRingsCryptoKeysGet
     :: Text -- ^ 'plkrckgName'
     -> ProjectsLocationsKeyRingsCryptoKeysGet
 projectsLocationsKeyRingsCryptoKeysGet pPlkrckgName_ =
-    ProjectsLocationsKeyRingsCryptoKeysGet'
+  ProjectsLocationsKeyRingsCryptoKeysGet'
     { _plkrckgXgafv = Nothing
     , _plkrckgUploadProtocol = Nothing
     , _plkrckgAccessToken = Nothing
@@ -133,7 +135,8 @@ plkrckgCallback
       (\ s a -> s{_plkrckgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysGet where
+           ProjectsLocationsKeyRingsCryptoKeysGet
+         where
         type Rs ProjectsLocationsKeyRingsCryptoKeysGet =
              CryptoKey
         type Scopes ProjectsLocationsKeyRingsCryptoKeysGet =

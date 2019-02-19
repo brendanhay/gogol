@@ -55,10 +55,12 @@ type MembersInsertResource =
 -- | Add user to the specified group.
 --
 -- /See:/ 'membersInsert' smart constructor.
-data MembersInsert = MembersInsert'
+data MembersInsert =
+  MembersInsert'
     { _miGroupKey :: !Text
     , _miPayload  :: !Member
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MembersInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ membersInsert
     -> Member -- ^ 'miPayload'
     -> MembersInsert
 membersInsert pMiGroupKey_ pMiPayload_ =
-    MembersInsert'
-    { _miGroupKey = pMiGroupKey_
-    , _miPayload = pMiPayload_
-    }
+  MembersInsert' {_miGroupKey = pMiGroupKey_, _miPayload = pMiPayload_}
 
 -- | Email or immutable ID of the group
 miGroupKey :: Lens' MembersInsert Text

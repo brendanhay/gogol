@@ -1639,21 +1639,21 @@ sheetsService
 
 -- | View your Google Spreadsheets
 spreadsheetsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets.readonly"]
-spreadsheetsReadOnlyScope = Proxy;
+spreadsheetsReadOnlyScope = Proxy
 
 -- | See and download all your Google Drive files
 driveReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-driveReadOnlyScope = Proxy;
+driveReadOnlyScope = Proxy
 
 -- | See, edit, create, and delete all of your Google Drive files
 driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Proxy;
+driveScope = Proxy
 
 -- | View and manage Google Drive files and folders that you have opened or
 -- created with this app
 driveFileScope :: Proxy '["https://www.googleapis.com/auth/drive.file"]
-driveFileScope = Proxy;
+driveFileScope = Proxy
 
 -- | See, edit, create, and delete your spreadsheets in Google Drive
 spreadsheetsScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets"]
-spreadsheetsScope = Proxy;
+spreadsheetsScope = Proxy

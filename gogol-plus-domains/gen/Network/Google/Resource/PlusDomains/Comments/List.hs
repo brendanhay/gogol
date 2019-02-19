@@ -58,12 +58,14 @@ type CommentsListResource =
 -- | List all of the comments for an activity.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList'
+data CommentsList =
+  CommentsList'
     { _clActivityId :: !Text
     , _clSortOrder  :: !CommentsListSortOrder
     , _clPageToken  :: !(Maybe Text)
     , _clMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ commentsList
     :: Text -- ^ 'clActivityId'
     -> CommentsList
 commentsList pClActivityId_ =
-    CommentsList'
+  CommentsList'
     { _clActivityId = pClActivityId_
     , _clSortOrder = Ascending
     , _clPageToken = Nothing

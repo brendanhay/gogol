@@ -70,7 +70,8 @@ type ProjectsSinksCreateResource =
 -- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ 'projectsSinksCreate' smart constructor.
-data ProjectsSinksCreate = ProjectsSinksCreate'
+data ProjectsSinksCreate =
+  ProjectsSinksCreate'
     { _pscParent               :: !Text
     , _pscXgafv                :: !(Maybe Xgafv)
     , _pscUniqueWriterIdentity :: !(Maybe Bool)
@@ -79,7 +80,8 @@ data ProjectsSinksCreate = ProjectsSinksCreate'
     , _pscUploadType           :: !(Maybe Text)
     , _pscPayload              :: !LogSink
     , _pscCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSinksCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsSinksCreate
     -> LogSink -- ^ 'pscPayload'
     -> ProjectsSinksCreate
 projectsSinksCreate pPscParent_ pPscPayload_ =
-    ProjectsSinksCreate'
+  ProjectsSinksCreate'
     { _pscParent = pPscParent_
     , _pscXgafv = Nothing
     , _pscUniqueWriterIdentity = Nothing

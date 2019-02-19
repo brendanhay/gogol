@@ -68,7 +68,8 @@ type PartnersDevicesClaimAsyncResource =
 -- batch operations](\/zero-touch\/guides\/how-it-works#operations).
 --
 -- /See:/ 'partnersDevicesClaimAsync' smart constructor.
-data PartnersDevicesClaimAsync = PartnersDevicesClaimAsync'
+data PartnersDevicesClaimAsync =
+  PartnersDevicesClaimAsync'
     { _pdcaXgafv          :: !(Maybe Xgafv)
     , _pdcaUploadProtocol :: !(Maybe Text)
     , _pdcaAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data PartnersDevicesClaimAsync = PartnersDevicesClaimAsync'
     , _pdcaUploadType     :: !(Maybe Text)
     , _pdcaPayload        :: !ClaimDevicesRequest
     , _pdcaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartnersDevicesClaimAsync' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ partnersDevicesClaimAsync
     -> ClaimDevicesRequest -- ^ 'pdcaPayload'
     -> PartnersDevicesClaimAsync
 partnersDevicesClaimAsync pPdcaPartnerId_ pPdcaPayload_ =
-    PartnersDevicesClaimAsync'
+  PartnersDevicesClaimAsync'
     { _pdcaXgafv = Nothing
     , _pdcaUploadProtocol = Nothing
     , _pdcaAccessToken = Nothing

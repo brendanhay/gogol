@@ -70,7 +70,8 @@ type ProjectsZonesClustersMasterResource =
 -- | Updates the master for a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersMaster' smart constructor.
-data ProjectsZonesClustersMaster = ProjectsZonesClustersMaster'
+data ProjectsZonesClustersMaster =
+  ProjectsZonesClustersMaster'
     { _pzcmXgafv          :: !(Maybe Xgafv)
     , _pzcmUploadProtocol :: !(Maybe Text)
     , _pzcmAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsZonesClustersMaster = ProjectsZonesClustersMaster'
     , _pzcmClusterId      :: !Text
     , _pzcmProjectId      :: !Text
     , _pzcmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersMaster' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ projectsZonesClustersMaster
     -> Text -- ^ 'pzcmProjectId'
     -> ProjectsZonesClustersMaster
 projectsZonesClustersMaster pPzcmZone_ pPzcmPayload_ pPzcmClusterId_ pPzcmProjectId_ =
-    ProjectsZonesClustersMaster'
+  ProjectsZonesClustersMaster'
     { _pzcmXgafv = Nothing
     , _pzcmUploadProtocol = Nothing
     , _pzcmAccessToken = Nothing

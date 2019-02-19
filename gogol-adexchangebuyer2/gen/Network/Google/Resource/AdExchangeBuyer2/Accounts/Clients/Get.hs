@@ -63,7 +63,8 @@ type AccountsClientsGetResource =
 -- | Gets a client buyer with a given client account ID.
 --
 -- /See:/ 'accountsClientsGet' smart constructor.
-data AccountsClientsGet = AccountsClientsGet'
+data AccountsClientsGet =
+  AccountsClientsGet'
     { _acgcXgafv           :: !(Maybe Xgafv)
     , _acgcUploadProtocol  :: !(Maybe Text)
     , _acgcAccessToken     :: !(Maybe Text)
@@ -71,7 +72,8 @@ data AccountsClientsGet = AccountsClientsGet'
     , _acgcAccountId       :: !(Textual Int64)
     , _acgcClientAccountId :: !(Textual Int64)
     , _acgcCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsClientsGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ accountsClientsGet
     -> Int64 -- ^ 'acgcClientAccountId'
     -> AccountsClientsGet
 accountsClientsGet pAcgcAccountId_ pAcgcClientAccountId_ =
-    AccountsClientsGet'
+  AccountsClientsGet'
     { _acgcXgafv = Nothing
     , _acgcUploadProtocol = Nothing
     , _acgcAccessToken = Nothing

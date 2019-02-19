@@ -62,9 +62,11 @@ type ArchiveInsertResource =
 -- | Inserts a new mail into the archive of the Google group.
 --
 -- /See:/ 'archiveInsert' smart constructor.
-newtype ArchiveInsert = ArchiveInsert'
+newtype ArchiveInsert =
+  ArchiveInsert'
     { _aiGroupId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ArchiveInsert' with the minimum fields required to make a request.
 --
@@ -74,10 +76,7 @@ newtype ArchiveInsert = ArchiveInsert'
 archiveInsert
     :: Text -- ^ 'aiGroupId'
     -> ArchiveInsert
-archiveInsert pAiGroupId_ =
-    ArchiveInsert'
-    { _aiGroupId = pAiGroupId_
-    }
+archiveInsert pAiGroupId_ = ArchiveInsert' {_aiGroupId = pAiGroupId_}
 
 -- | The group ID
 aiGroupId :: Lens' ArchiveInsert Text

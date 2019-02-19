@@ -71,7 +71,8 @@ type ProjectsRegionsClustersListResource =
 -- | Lists all regions\/{region}\/clusters in a project.
 --
 -- /See:/ 'projectsRegionsClustersList' smart constructor.
-data ProjectsRegionsClustersList = ProjectsRegionsClustersList'
+data ProjectsRegionsClustersList =
+  ProjectsRegionsClustersList'
     { _prclXgafv          :: !(Maybe Xgafv)
     , _prclUploadProtocol :: !(Maybe Text)
     , _prclAccessToken    :: !(Maybe Text)
@@ -82,7 +83,8 @@ data ProjectsRegionsClustersList = ProjectsRegionsClustersList'
     , _prclProjectId      :: !Text
     , _prclPageSize       :: !(Maybe (Textual Int32))
     , _prclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsClustersList' with the minimum fields required to make a request.
 --
@@ -112,7 +114,7 @@ projectsRegionsClustersList
     -> Text -- ^ 'prclProjectId'
     -> ProjectsRegionsClustersList
 projectsRegionsClustersList pPrclRegion_ pPrclProjectId_ =
-    ProjectsRegionsClustersList'
+  ProjectsRegionsClustersList'
     { _prclXgafv = Nothing
     , _prclUploadProtocol = Nothing
     , _prclAccessToken = Nothing

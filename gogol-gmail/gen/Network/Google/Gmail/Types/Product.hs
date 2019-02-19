@@ -22,9 +22,11 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'batchDeleteMessagesRequest' smart constructor.
-newtype BatchDeleteMessagesRequest = BatchDeleteMessagesRequest'
+newtype BatchDeleteMessagesRequest =
+  BatchDeleteMessagesRequest'
     { _bdmrIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchDeleteMessagesRequest' with the minimum fields required to make a request.
 --
@@ -33,10 +35,7 @@ newtype BatchDeleteMessagesRequest = BatchDeleteMessagesRequest'
 -- * 'bdmrIds'
 batchDeleteMessagesRequest
     :: BatchDeleteMessagesRequest
-batchDeleteMessagesRequest =
-    BatchDeleteMessagesRequest'
-    { _bdmrIds = Nothing
-    }
+batchDeleteMessagesRequest = BatchDeleteMessagesRequest' {_bdmrIds = Nothing}
 
 -- | The IDs of the messages to delete.
 bdmrIds :: Lens' BatchDeleteMessagesRequest [Text]
@@ -60,10 +59,12 @@ instance ToJSON BatchDeleteMessagesRequest where
 -- \"Set up mail delegation\" for more information about delegates.
 --
 -- /See:/ 'delegate' smart constructor.
-data Delegate = Delegate'
+data Delegate =
+  Delegate'
     { _dVerificationStatus :: !(Maybe DelegateVerificationStatus)
     , _dDelegateEmail      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Delegate' with the minimum fields required to make a request.
 --
@@ -74,11 +75,7 @@ data Delegate = Delegate'
 -- * 'dDelegateEmail'
 delegate
     :: Delegate
-delegate =
-    Delegate'
-    { _dVerificationStatus = Nothing
-    , _dDelegateEmail = Nothing
-    }
+delegate = Delegate' {_dVerificationStatus = Nothing, _dDelegateEmail = Nothing}
 
 -- | Indicates whether this address has been verified and can act as a
 -- delegate for the account. Read-only.
@@ -110,10 +107,12 @@ instance ToJSON Delegate where
 
 --
 -- /See:/ 'modifyThreadRequest' smart constructor.
-data ModifyThreadRequest = ModifyThreadRequest'
+data ModifyThreadRequest =
+  ModifyThreadRequest'
     { _mtrRemoveLabelIds :: !(Maybe [Text])
     , _mtrAddLabelIds    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyThreadRequest' with the minimum fields required to make a request.
 --
@@ -125,10 +124,7 @@ data ModifyThreadRequest = ModifyThreadRequest'
 modifyThreadRequest
     :: ModifyThreadRequest
 modifyThreadRequest =
-    ModifyThreadRequest'
-    { _mtrRemoveLabelIds = Nothing
-    , _mtrAddLabelIds = Nothing
-    }
+  ModifyThreadRequest' {_mtrRemoveLabelIds = Nothing, _mtrAddLabelIds = Nothing}
 
 -- | A list of IDs of labels to remove from this thread.
 mtrRemoveLabelIds :: Lens' ModifyThreadRequest [Text]
@@ -164,9 +160,11 @@ instance ToJSON ModifyThreadRequest where
 -- | Response for the ListFilters method.
 --
 -- /See:/ 'listFiltersResponse' smart constructor.
-newtype ListFiltersResponse = ListFiltersResponse'
+newtype ListFiltersResponse =
+  ListFiltersResponse'
     { _lfrFilter :: Maybe [Filter]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListFiltersResponse' with the minimum fields required to make a request.
 --
@@ -175,10 +173,7 @@ newtype ListFiltersResponse = ListFiltersResponse'
 -- * 'lfrFilter'
 listFiltersResponse
     :: ListFiltersResponse
-listFiltersResponse =
-    ListFiltersResponse'
-    { _lfrFilter = Nothing
-    }
+listFiltersResponse = ListFiltersResponse' {_lfrFilter = Nothing}
 
 -- | List of a user\'s filters.
 lfrFilter :: Lens' ListFiltersResponse [Filter]
@@ -199,10 +194,12 @@ instance ToJSON ListFiltersResponse where
 
 --
 -- /See:/ 'modifyMessageRequest' smart constructor.
-data ModifyMessageRequest = ModifyMessageRequest'
+data ModifyMessageRequest =
+  ModifyMessageRequest'
     { _mmrRemoveLabelIds :: !(Maybe [Text])
     , _mmrAddLabelIds    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyMessageRequest' with the minimum fields required to make a request.
 --
@@ -214,10 +211,8 @@ data ModifyMessageRequest = ModifyMessageRequest'
 modifyMessageRequest
     :: ModifyMessageRequest
 modifyMessageRequest =
-    ModifyMessageRequest'
-    { _mmrRemoveLabelIds = Nothing
-    , _mmrAddLabelIds = Nothing
-    }
+  ModifyMessageRequest'
+    {_mmrRemoveLabelIds = Nothing, _mmrAddLabelIds = Nothing}
 
 -- | A list IDs of labels to remove from this message.
 mmrRemoveLabelIds :: Lens' ModifyMessageRequest [Text]
@@ -253,9 +248,11 @@ instance ToJSON ModifyMessageRequest where
 -- | Response for the ListForwardingAddresses method.
 --
 -- /See:/ 'listForwardingAddressesResponse' smart constructor.
-newtype ListForwardingAddressesResponse = ListForwardingAddressesResponse'
+newtype ListForwardingAddressesResponse =
+  ListForwardingAddressesResponse'
     { _lfarForwardingAddresses :: Maybe [ForwardingAddress]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListForwardingAddressesResponse' with the minimum fields required to make a request.
 --
@@ -265,9 +262,7 @@ newtype ListForwardingAddressesResponse = ListForwardingAddressesResponse'
 listForwardingAddressesResponse
     :: ListForwardingAddressesResponse
 listForwardingAddressesResponse =
-    ListForwardingAddressesResponse'
-    { _lfarForwardingAddresses = Nothing
-    }
+  ListForwardingAddressesResponse' {_lfarForwardingAddresses = Nothing}
 
 -- | List of addresses that may be used for forwarding.
 lfarForwardingAddresses :: Lens' ListForwardingAddressesResponse [ForwardingAddress]
@@ -295,10 +290,12 @@ instance ToJSON ListForwardingAddressesResponse where
 -- | POP settings for an account.
 --
 -- /See:/ 'popSettings' smart constructor.
-data PopSettings = PopSettings'
+data PopSettings =
+  PopSettings'
     { _psAccessWindow :: !(Maybe PopSettingsAccessWindow)
     , _psDisPosition  :: !(Maybe PopSettingsDisPosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PopSettings' with the minimum fields required to make a request.
 --
@@ -309,11 +306,7 @@ data PopSettings = PopSettings'
 -- * 'psDisPosition'
 popSettings
     :: PopSettings
-popSettings =
-    PopSettings'
-    { _psAccessWindow = Nothing
-    , _psDisPosition = Nothing
-    }
+popSettings = PopSettings' {_psAccessWindow = Nothing, _psDisPosition = Nothing}
 
 -- | The range of messages which are accessible via POP.
 psAccessWindow :: Lens' PopSettings (Maybe PopSettingsAccessWindow)
@@ -346,14 +339,16 @@ instance ToJSON PopSettings where
 -- affect multiple messages in multiple ways.
 --
 -- /See:/ 'history' smart constructor.
-data History = History'
+data History =
+  History'
     { _hLabelsRemoved   :: !(Maybe [HistoryLabelRemoved])
     , _hMessagesDeleted :: !(Maybe [HistoryMessageDeleted])
     , _hMessagesAdded   :: !(Maybe [HistoryMessageAdded])
     , _hLabelsAdded     :: !(Maybe [HistoryLabelAdded])
     , _hId              :: !(Maybe (Textual Word64))
     , _hMessages        :: !(Maybe [Message])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'History' with the minimum fields required to make a request.
 --
@@ -373,7 +368,7 @@ data History = History'
 history
     :: History
 history =
-    History'
+  History'
     { _hLabelsRemoved = Nothing
     , _hMessagesDeleted = Nothing
     , _hMessagesAdded = Nothing
@@ -453,9 +448,11 @@ instance ToJSON History where
 -- | Response for the ListDelegates method.
 --
 -- /See:/ 'listDelegatesResponse' smart constructor.
-newtype ListDelegatesResponse = ListDelegatesResponse'
+newtype ListDelegatesResponse =
+  ListDelegatesResponse'
     { _ldrDelegates :: Maybe [Delegate]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDelegatesResponse' with the minimum fields required to make a request.
 --
@@ -464,10 +461,7 @@ newtype ListDelegatesResponse = ListDelegatesResponse'
 -- * 'ldrDelegates'
 listDelegatesResponse
     :: ListDelegatesResponse
-listDelegatesResponse =
-    ListDelegatesResponse'
-    { _ldrDelegates = Nothing
-    }
+listDelegatesResponse = ListDelegatesResponse' {_ldrDelegates = Nothing}
 
 -- | List of the user\'s delegates (with any verification status).
 ldrDelegates :: Lens' ListDelegatesResponse [Delegate]
@@ -490,10 +484,12 @@ instance ToJSON ListDelegatesResponse where
 
 --
 -- /See:/ 'labelColor' smart constructor.
-data LabelColor = LabelColor'
+data LabelColor =
+  LabelColor'
     { _lcBackgRoundColor :: !(Maybe Text)
     , _lcTextColor       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LabelColor' with the minimum fields required to make a request.
 --
@@ -504,11 +500,7 @@ data LabelColor = LabelColor'
 -- * 'lcTextColor'
 labelColor
     :: LabelColor
-labelColor =
-    LabelColor'
-    { _lcBackgRoundColor = Nothing
-    , _lcTextColor = Nothing
-    }
+labelColor = LabelColor' {_lcBackgRoundColor = Nothing, _lcTextColor = Nothing}
 
 -- | The background color represented as hex string #RRGGBB (ex #000000).
 -- This field is required in order to set the color of a label. Only the
@@ -558,7 +550,8 @@ instance ToJSON LabelColor where
 -- | Message matching criteria.
 --
 -- /See:/ 'filterCriteria' smart constructor.
-data FilterCriteria = FilterCriteria'
+data FilterCriteria =
+  FilterCriteria'
     { _fcSizeComparison :: !(Maybe FilterCriteriaSizeComparison)
     , _fcSubject        :: !(Maybe Text)
     , _fcSize           :: !(Maybe (Textual Int32))
@@ -568,7 +561,8 @@ data FilterCriteria = FilterCriteria'
     , _fcQuery          :: !(Maybe Text)
     , _fcNegatedQuery   :: !(Maybe Text)
     , _fcHasAttachment  :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilterCriteria' with the minimum fields required to make a request.
 --
@@ -594,7 +588,7 @@ data FilterCriteria = FilterCriteria'
 filterCriteria
     :: FilterCriteria
 filterCriteria =
-    FilterCriteria'
+  FilterCriteria'
     { _fcSizeComparison = Nothing
     , _fcSubject = Nothing
     , _fcSize = Nothing
@@ -693,12 +687,14 @@ instance ToJSON FilterCriteria where
 -- | Profile for a Gmail user.
 --
 -- /See:/ 'proFile' smart constructor.
-data ProFile = ProFile'
+data ProFile =
+  ProFile'
     { _pfMessagesTotal :: !(Maybe (Textual Int32))
     , _pfThreadsTotal  :: !(Maybe (Textual Int32))
     , _pfHistoryId     :: !(Maybe (Textual Word64))
     , _pfEmailAddress  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProFile' with the minimum fields required to make a request.
 --
@@ -714,7 +710,7 @@ data ProFile = ProFile'
 proFile
     :: ProFile
 proFile =
-    ProFile'
+  ProFile'
     { _pfMessagesTotal = Nothing
     , _pfThreadsTotal = Nothing
     , _pfHistoryId = Nothing
@@ -767,10 +763,12 @@ instance ToJSON ProFile where
 
 --
 -- /See:/ 'messagePartHeader' smart constructor.
-data MessagePartHeader = MessagePartHeader'
+data MessagePartHeader =
+  MessagePartHeader'
     { _mphValue :: !(Maybe Text)
     , _mphName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MessagePartHeader' with the minimum fields required to make a request.
 --
@@ -781,11 +779,7 @@ data MessagePartHeader = MessagePartHeader'
 -- * 'mphName'
 messagePartHeader
     :: MessagePartHeader
-messagePartHeader =
-    MessagePartHeader'
-    { _mphValue = Nothing
-    , _mphName = Nothing
-    }
+messagePartHeader = MessagePartHeader' {_mphValue = Nothing, _mphName = Nothing}
 
 -- | The value of the header after the : separator. For example,
 -- someuser\'example.com.
@@ -812,11 +806,13 @@ instance ToJSON MessagePartHeader where
 
 --
 -- /See:/ 'listHistoryResponse' smart constructor.
-data ListHistoryResponse = ListHistoryResponse'
+data ListHistoryResponse =
+  ListHistoryResponse'
     { _lhrNextPageToken :: !(Maybe Text)
     , _lhrHistory       :: !(Maybe [History])
     , _lhrHistoryId     :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListHistoryResponse' with the minimum fields required to make a request.
 --
@@ -830,7 +826,7 @@ data ListHistoryResponse = ListHistoryResponse'
 listHistoryResponse
     :: ListHistoryResponse
 listHistoryResponse =
-    ListHistoryResponse'
+  ListHistoryResponse'
     { _lhrNextPageToken = Nothing
     , _lhrHistory = Nothing
     , _lhrHistoryId = Nothing
@@ -879,7 +875,8 @@ instance ToJSON ListHistoryResponse where
 -- the web interface.
 --
 -- /See:/ 'sendAs' smart constructor.
-data SendAs = SendAs'
+data SendAs =
+  SendAs'
     { _saSignature          :: !(Maybe Text)
     , _saReplyToAddress     :: !(Maybe Text)
     , _saTreatAsAlias       :: !(Maybe Bool)
@@ -889,7 +886,8 @@ data SendAs = SendAs'
     , _saSmtpMsa            :: !(Maybe SmtpMsa)
     , _saIsPrimary          :: !(Maybe Bool)
     , _saIsDefault          :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SendAs' with the minimum fields required to make a request.
 --
@@ -915,7 +913,7 @@ data SendAs = SendAs'
 sendAs
     :: SendAs
 sendAs =
-    SendAs'
+  SendAs'
     { _saSignature = Nothing
     , _saReplyToAddress = Nothing
     , _saTreatAsAlias = Nothing
@@ -1030,11 +1028,13 @@ instance ToJSON SendAs where
 
 --
 -- /See:/ 'listThreadsResponse' smart constructor.
-data ListThreadsResponse = ListThreadsResponse'
+data ListThreadsResponse =
+  ListThreadsResponse'
     { _ltrNextPageToken      :: !(Maybe Text)
     , _ltrResultSizeEstimate :: !(Maybe (Textual Word32))
     , _ltrThreads            :: !(Maybe [Thread])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListThreadsResponse' with the minimum fields required to make a request.
 --
@@ -1048,7 +1048,7 @@ data ListThreadsResponse = ListThreadsResponse'
 listThreadsResponse
     :: ListThreadsResponse
 listThreadsResponse =
-    ListThreadsResponse'
+  ListThreadsResponse'
     { _ltrNextPageToken = Nothing
     , _ltrResultSizeEstimate = Nothing
     , _ltrThreads = Nothing
@@ -1094,14 +1094,16 @@ instance ToJSON ListThreadsResponse where
 -- | A single MIME message part.
 --
 -- /See:/ 'messagePart' smart constructor.
-data MessagePart = MessagePart'
+data MessagePart =
+  MessagePart'
     { _mpParts    :: !(Maybe [MessagePart])
     , _mpBody     :: !(Maybe MessagePartBody)
     , _mpMimeType :: !(Maybe Text)
     , _mpHeaders  :: !(Maybe [MessagePartHeader])
     , _mpPartId   :: !(Maybe Text)
     , _mpFilename :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MessagePart' with the minimum fields required to make a request.
 --
@@ -1121,7 +1123,7 @@ data MessagePart = MessagePart'
 messagePart
     :: MessagePart
 messagePart =
-    MessagePart'
+  MessagePart'
     { _mpParts = Nothing
     , _mpBody = Nothing
     , _mpMimeType = Nothing
@@ -1191,10 +1193,12 @@ instance ToJSON MessagePart where
 
 --
 -- /See:/ 'historyLabelAdded' smart constructor.
-data HistoryLabelAdded = HistoryLabelAdded'
+data HistoryLabelAdded =
+  HistoryLabelAdded'
     { _hlaLabelIds :: !(Maybe [Text])
     , _hlaMessage  :: !(Maybe Message)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistoryLabelAdded' with the minimum fields required to make a request.
 --
@@ -1206,10 +1210,7 @@ data HistoryLabelAdded = HistoryLabelAdded'
 historyLabelAdded
     :: HistoryLabelAdded
 historyLabelAdded =
-    HistoryLabelAdded'
-    { _hlaLabelIds = Nothing
-    , _hlaMessage = Nothing
-    }
+  HistoryLabelAdded' {_hlaLabelIds = Nothing, _hlaMessage = Nothing}
 
 -- | Label IDs added to the message.
 hlaLabelIds :: Lens' HistoryLabelAdded [Text]
@@ -1238,9 +1239,11 @@ instance ToJSON HistoryLabelAdded where
 
 --
 -- /See:/ 'listLabelsResponse' smart constructor.
-newtype ListLabelsResponse = ListLabelsResponse'
+newtype ListLabelsResponse =
+  ListLabelsResponse'
     { _llrLabels :: Maybe [Label]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListLabelsResponse' with the minimum fields required to make a request.
 --
@@ -1249,10 +1252,7 @@ newtype ListLabelsResponse = ListLabelsResponse'
 -- * 'llrLabels'
 listLabelsResponse
     :: ListLabelsResponse
-listLabelsResponse =
-    ListLabelsResponse'
-    { _llrLabels = Nothing
-    }
+listLabelsResponse = ListLabelsResponse' {_llrLabels = Nothing}
 
 -- | List of labels.
 llrLabels :: Lens' ListLabelsResponse [Label]
@@ -1275,7 +1275,8 @@ instance ToJSON ListLabelsResponse where
 -- to the \"Vacation responder\" feature in the web interface.
 --
 -- /See:/ 'vacationSettings' smart constructor.
-data VacationSettings = VacationSettings'
+data VacationSettings =
+  VacationSettings'
     { _vsEnableAutoReply       :: !(Maybe Bool)
     , _vsResponseBodyPlainText :: !(Maybe Text)
     , _vsRestrictToDomain      :: !(Maybe Bool)
@@ -1284,7 +1285,8 @@ data VacationSettings = VacationSettings'
     , _vsRestrictToContacts    :: !(Maybe Bool)
     , _vsResponseSubject       :: !(Maybe Text)
     , _vsEndTime               :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VacationSettings' with the minimum fields required to make a request.
 --
@@ -1308,7 +1310,7 @@ data VacationSettings = VacationSettings'
 vacationSettings
     :: VacationSettings
 vacationSettings =
-    VacationSettings'
+  VacationSettings'
     { _vsEnableAutoReply = Nothing
     , _vsResponseBodyPlainText = Nothing
     , _vsRestrictToDomain = Nothing
@@ -1409,9 +1411,11 @@ instance ToJSON VacationSettings where
 
 --
 -- /See:/ 'historyMessageDeleted' smart constructor.
-newtype HistoryMessageDeleted = HistoryMessageDeleted'
+newtype HistoryMessageDeleted =
+  HistoryMessageDeleted'
     { _hmdMessage :: Maybe Message
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistoryMessageDeleted' with the minimum fields required to make a request.
 --
@@ -1420,10 +1424,7 @@ newtype HistoryMessageDeleted = HistoryMessageDeleted'
 -- * 'hmdMessage'
 historyMessageDeleted
     :: HistoryMessageDeleted
-historyMessageDeleted =
-    HistoryMessageDeleted'
-    { _hmdMessage = Nothing
-    }
+historyMessageDeleted = HistoryMessageDeleted' {_hmdMessage = Nothing}
 
 hmdMessage :: Lens' HistoryMessageDeleted (Maybe Message)
 hmdMessage
@@ -1441,11 +1442,13 @@ instance ToJSON HistoryMessageDeleted where
 -- | The body of a single MIME message part.
 --
 -- /See:/ 'messagePartBody' smart constructor.
-data MessagePartBody = MessagePartBody'
+data MessagePartBody =
+  MessagePartBody'
     { _mpbSize         :: !(Maybe (Textual Int32))
     , _mpbData         :: !(Maybe Bytes)
     , _mpbAttachmentId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MessagePartBody' with the minimum fields required to make a request.
 --
@@ -1459,11 +1462,8 @@ data MessagePartBody = MessagePartBody'
 messagePartBody
     :: MessagePartBody
 messagePartBody =
-    MessagePartBody'
-    { _mpbSize = Nothing
-    , _mpbData = Nothing
-    , _mpbAttachmentId = Nothing
-    }
+  MessagePartBody'
+    {_mpbSize = Nothing, _mpbData = Nothing, _mpbAttachmentId = Nothing}
 
 -- | Number of bytes for the message part data (encoding notwithstanding).
 mpbSize :: Lens' MessagePartBody (Maybe Int32)
@@ -1507,11 +1507,13 @@ instance ToJSON MessagePartBody where
 -- | Auto-forwarding settings for an account.
 --
 -- /See:/ 'autoForwarding' smart constructor.
-data AutoForwarding = AutoForwarding'
+data AutoForwarding =
+  AutoForwarding'
     { _afEnabled      :: !(Maybe Bool)
     , _afDisPosition  :: !(Maybe AutoForwardingDisPosition)
     , _afEmailAddress :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoForwarding' with the minimum fields required to make a request.
 --
@@ -1525,11 +1527,8 @@ data AutoForwarding = AutoForwarding'
 autoForwarding
     :: AutoForwarding
 autoForwarding =
-    AutoForwarding'
-    { _afEnabled = Nothing
-    , _afDisPosition = Nothing
-    , _afEmailAddress = Nothing
-    }
+  AutoForwarding'
+    {_afEnabled = Nothing, _afDisPosition = Nothing, _afEmailAddress = Nothing}
 
 -- | Whether all incoming mail is automatically forwarded to another address.
 afEnabled :: Lens' AutoForwarding (Maybe Bool)
@@ -1567,11 +1566,13 @@ instance ToJSON AutoForwarding where
 
 --
 -- /See:/ 'listDraftsResponse' smart constructor.
-data ListDraftsResponse = ListDraftsResponse'
+data ListDraftsResponse =
+  ListDraftsResponse'
     { _ldrNextPageToken      :: !(Maybe Text)
     , _ldrResultSizeEstimate :: !(Maybe (Textual Word32))
     , _ldrDrafts             :: !(Maybe [Draft])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDraftsResponse' with the minimum fields required to make a request.
 --
@@ -1585,7 +1586,7 @@ data ListDraftsResponse = ListDraftsResponse'
 listDraftsResponse
     :: ListDraftsResponse
 listDraftsResponse =
-    ListDraftsResponse'
+  ListDraftsResponse'
     { _ldrNextPageToken = Nothing
     , _ldrResultSizeEstimate = Nothing
     , _ldrDrafts = Nothing
@@ -1631,9 +1632,11 @@ instance ToJSON ListDraftsResponse where
 -- | Response for the ListSendAs method.
 --
 -- /See:/ 'listSendAsResponse' smart constructor.
-newtype ListSendAsResponse = ListSendAsResponse'
+newtype ListSendAsResponse =
+  ListSendAsResponse'
     { _lsarSendAs :: Maybe [SendAs]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSendAsResponse' with the minimum fields required to make a request.
 --
@@ -1642,10 +1645,7 @@ newtype ListSendAsResponse = ListSendAsResponse'
 -- * 'lsarSendAs'
 listSendAsResponse
     :: ListSendAsResponse
-listSendAsResponse =
-    ListSendAsResponse'
-    { _lsarSendAs = Nothing
-    }
+listSendAsResponse = ListSendAsResponse' {_lsarSendAs = Nothing}
 
 -- | List of send-as aliases.
 lsarSendAs :: Lens' ListSendAsResponse [SendAs]
@@ -1667,10 +1667,12 @@ instance ToJSON ListSendAsResponse where
 -- | Push notification watch response.
 --
 -- /See:/ 'watchResponse' smart constructor.
-data WatchResponse = WatchResponse'
+data WatchResponse =
+  WatchResponse'
     { _wrExpiration :: !(Maybe (Textual Int64))
     , _wrHistoryId  :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WatchResponse' with the minimum fields required to make a request.
 --
@@ -1681,11 +1683,7 @@ data WatchResponse = WatchResponse'
 -- * 'wrHistoryId'
 watchResponse
     :: WatchResponse
-watchResponse =
-    WatchResponse'
-    { _wrExpiration = Nothing
-    , _wrHistoryId = Nothing
-    }
+watchResponse = WatchResponse' {_wrExpiration = Nothing, _wrHistoryId = Nothing}
 
 -- | When Gmail will stop sending notifications for mailbox updates (epoch
 -- millis). Call watch again before this time to renew the watch.
@@ -1716,11 +1714,13 @@ instance ToJSON WatchResponse where
 
 --
 -- /See:/ 'batchModifyMessagesRequest' smart constructor.
-data BatchModifyMessagesRequest = BatchModifyMessagesRequest'
+data BatchModifyMessagesRequest =
+  BatchModifyMessagesRequest'
     { _bmmrIds            :: !(Maybe [Text])
     , _bmmrRemoveLabelIds :: !(Maybe [Text])
     , _bmmrAddLabelIds    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchModifyMessagesRequest' with the minimum fields required to make a request.
 --
@@ -1734,7 +1734,7 @@ data BatchModifyMessagesRequest = BatchModifyMessagesRequest'
 batchModifyMessagesRequest
     :: BatchModifyMessagesRequest
 batchModifyMessagesRequest =
-    BatchModifyMessagesRequest'
+  BatchModifyMessagesRequest'
     { _bmmrIds = Nothing
     , _bmmrRemoveLabelIds = Nothing
     , _bmmrAddLabelIds = Nothing
@@ -1783,10 +1783,12 @@ instance ToJSON BatchModifyMessagesRequest where
 -- | A draft email in the user\'s mailbox.
 --
 -- /See:/ 'draft' smart constructor.
-data Draft = Draft'
+data Draft =
+  Draft'
     { _dId      :: !(Maybe Text)
     , _dMessage :: !(Maybe Message)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Draft' with the minimum fields required to make a request.
 --
@@ -1797,11 +1799,7 @@ data Draft = Draft'
 -- * 'dMessage'
 draft
     :: Draft
-draft =
-    Draft'
-    { _dId = Nothing
-    , _dMessage = Nothing
-    }
+draft = Draft' {_dId = Nothing, _dMessage = Nothing}
 
 -- | The immutable ID of the draft.
 dId :: Lens' Draft (Maybe Text)
@@ -1826,13 +1824,15 @@ instance ToJSON Draft where
 -- | Configuration for communication with an SMTP service.
 --
 -- /See:/ 'smtpMsa' smart constructor.
-data SmtpMsa = SmtpMsa'
+data SmtpMsa =
+  SmtpMsa'
     { _smSecurityMode :: !(Maybe SmtpMsaSecurityMode)
     , _smUsername     :: !(Maybe Text)
     , _smPassword     :: !(Maybe Text)
     , _smHost         :: !(Maybe Text)
     , _smPort         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SmtpMsa' with the minimum fields required to make a request.
 --
@@ -1850,7 +1850,7 @@ data SmtpMsa = SmtpMsa'
 smtpMsa
     :: SmtpMsa
 smtpMsa =
-    SmtpMsa'
+  SmtpMsa'
     { _smSecurityMode = Nothing
     , _smUsername = Nothing
     , _smPassword = Nothing
@@ -1911,10 +1911,12 @@ instance ToJSON SmtpMsa where
 -- | Settings for a forwarding address.
 --
 -- /See:/ 'forwardingAddress' smart constructor.
-data ForwardingAddress = ForwardingAddress'
+data ForwardingAddress =
+  ForwardingAddress'
     { _faForwardingEmail    :: !(Maybe Text)
     , _faVerificationStatus :: !(Maybe ForwardingAddressVerificationStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingAddress' with the minimum fields required to make a request.
 --
@@ -1926,10 +1928,8 @@ data ForwardingAddress = ForwardingAddress'
 forwardingAddress
     :: ForwardingAddress
 forwardingAddress =
-    ForwardingAddress'
-    { _faForwardingEmail = Nothing
-    , _faVerificationStatus = Nothing
-    }
+  ForwardingAddress'
+    {_faForwardingEmail = Nothing, _faVerificationStatus = Nothing}
 
 -- | An email address to which messages can be forwarded.
 faForwardingEmail :: Lens' ForwardingAddress (Maybe Text)
@@ -1963,11 +1963,13 @@ instance ToJSON ForwardingAddress where
 -- messages instead of an entire email thread.
 --
 -- /See:/ 'filter'' smart constructor.
-data Filter = Filter'
+data Filter =
+  Filter'
     { _fAction   :: !(Maybe FilterAction)
     , _fId       :: !(Maybe Text)
     , _fCriteria :: !(Maybe FilterCriteria)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
@@ -1980,12 +1982,7 @@ data Filter = Filter'
 -- * 'fCriteria'
 filter'
     :: Filter
-filter' =
-    Filter'
-    { _fAction = Nothing
-    , _fId = Nothing
-    , _fCriteria = Nothing
-    }
+filter' = Filter' {_fAction = Nothing, _fId = Nothing, _fCriteria = Nothing}
 
 -- | Action that the filter performs.
 fAction :: Lens' Filter (Maybe FilterAction)
@@ -2018,11 +2015,13 @@ instance ToJSON Filter where
 -- | Set up or update a new push notification watch on this user\'s mailbox.
 --
 -- /See:/ 'watchRequest' smart constructor.
-data WatchRequest = WatchRequest'
+data WatchRequest =
+  WatchRequest'
     { _wrLabelFilterAction :: !(Maybe WatchRequestLabelFilterAction)
     , _wrTopicName         :: !(Maybe Text)
     , _wrLabelIds          :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WatchRequest' with the minimum fields required to make a request.
 --
@@ -2036,7 +2035,7 @@ data WatchRequest = WatchRequest'
 watchRequest
     :: WatchRequest
 watchRequest =
-    WatchRequest'
+  WatchRequest'
     { _wrLabelFilterAction = Nothing
     , _wrTopicName = Nothing
     , _wrLabelIds = Nothing
@@ -2087,12 +2086,14 @@ instance ToJSON WatchRequest where
 -- | IMAP settings for an account.
 --
 -- /See:/ 'imapSettings' smart constructor.
-data ImapSettings = ImapSettings'
+data ImapSettings =
+  ImapSettings'
     { _isEnabled         :: !(Maybe Bool)
     , _isExpungeBehavior :: !(Maybe ImapSettingsExpungeBehavior)
     , _isAutoExpunge     :: !(Maybe Bool)
     , _isMaxFolderSize   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImapSettings' with the minimum fields required to make a request.
 --
@@ -2108,7 +2109,7 @@ data ImapSettings = ImapSettings'
 imapSettings
     :: ImapSettings
 imapSettings =
-    ImapSettings'
+  ImapSettings'
     { _isEnabled = Nothing
     , _isExpungeBehavior = Nothing
     , _isAutoExpunge = Nothing
@@ -2164,9 +2165,11 @@ instance ToJSON ImapSettings where
 
 --
 -- /See:/ 'listSmimeInfoResponse' smart constructor.
-newtype ListSmimeInfoResponse = ListSmimeInfoResponse'
+newtype ListSmimeInfoResponse =
+  ListSmimeInfoResponse'
     { _lsirSmimeInfo :: Maybe [SmimeInfo]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSmimeInfoResponse' with the minimum fields required to make a request.
 --
@@ -2175,10 +2178,7 @@ newtype ListSmimeInfoResponse = ListSmimeInfoResponse'
 -- * 'lsirSmimeInfo'
 listSmimeInfoResponse
     :: ListSmimeInfoResponse
-listSmimeInfoResponse =
-    ListSmimeInfoResponse'
-    { _lsirSmimeInfo = Nothing
-    }
+listSmimeInfoResponse = ListSmimeInfoResponse' {_lsirSmimeInfo = Nothing}
 
 -- | List of SmimeInfo.
 lsirSmimeInfo :: Lens' ListSmimeInfoResponse [SmimeInfo]
@@ -2203,7 +2203,8 @@ instance ToJSON ListSmimeInfoResponse where
 -- | An email message.
 --
 -- /See:/ 'message' smart constructor.
-data Message = Message'
+data Message =
+  Message'
     { _mRaw          :: !(Maybe Bytes)
     , _mSnippet      :: !(Maybe Text)
     , _mSizeEstimate :: !(Maybe (Textual Int32))
@@ -2213,7 +2214,8 @@ data Message = Message'
     , _mLabelIds     :: !(Maybe [Text])
     , _mThreadId     :: !(Maybe Text)
     , _mInternalDate :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Message' with the minimum fields required to make a request.
 --
@@ -2239,7 +2241,7 @@ data Message = Message'
 message
     :: Message
 message =
-    Message'
+  Message'
     { _mRaw = Nothing
     , _mSnippet = Nothing
     , _mSizeEstimate = Nothing
@@ -2339,10 +2341,12 @@ instance ToJSON Message where
 
 --
 -- /See:/ 'historyLabelRemoved' smart constructor.
-data HistoryLabelRemoved = HistoryLabelRemoved'
+data HistoryLabelRemoved =
+  HistoryLabelRemoved'
     { _hlrLabelIds :: !(Maybe [Text])
     , _hlrMessage  :: !(Maybe Message)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistoryLabelRemoved' with the minimum fields required to make a request.
 --
@@ -2354,10 +2358,7 @@ data HistoryLabelRemoved = HistoryLabelRemoved'
 historyLabelRemoved
     :: HistoryLabelRemoved
 historyLabelRemoved =
-    HistoryLabelRemoved'
-    { _hlrLabelIds = Nothing
-    , _hlrMessage = Nothing
-    }
+  HistoryLabelRemoved' {_hlrLabelIds = Nothing, _hlrMessage = Nothing}
 
 -- | Label IDs removed from the message.
 hlrLabelIds :: Lens' HistoryLabelRemoved [Text]
@@ -2387,12 +2388,14 @@ instance ToJSON HistoryLabelRemoved where
 -- | A collection of messages representing a conversation.
 --
 -- /See:/ 'thread' smart constructor.
-data Thread = Thread'
+data Thread =
+  Thread'
     { _tSnippet   :: !(Maybe Text)
     , _tHistoryId :: !(Maybe (Textual Word64))
     , _tId        :: !(Maybe Text)
     , _tMessages  :: !(Maybe [Message])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Thread' with the minimum fields required to make a request.
 --
@@ -2408,7 +2411,7 @@ data Thread = Thread'
 thread
     :: Thread
 thread =
-    Thread'
+  Thread'
     { _tSnippet = Nothing
     , _tHistoryId = Nothing
     , _tId = Nothing
@@ -2456,11 +2459,13 @@ instance ToJSON Thread where
 -- | A set of actions to perform on a message.
 --
 -- /See:/ 'filterAction' smart constructor.
-data FilterAction = FilterAction'
+data FilterAction =
+  FilterAction'
     { _faForward        :: !(Maybe Text)
     , _faRemoveLabelIds :: !(Maybe [Text])
     , _faAddLabelIds    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilterAction' with the minimum fields required to make a request.
 --
@@ -2474,7 +2479,7 @@ data FilterAction = FilterAction'
 filterAction
     :: FilterAction
 filterAction =
-    FilterAction'
+  FilterAction'
     { _faForward = Nothing
     , _faRemoveLabelIds = Nothing
     , _faAddLabelIds = Nothing
@@ -2522,7 +2527,8 @@ instance ToJSON FilterAction where
 -- mailbox.
 --
 -- /See:/ 'label' smart constructor.
-data Label = Label'
+data Label =
+  Label'
     { _lThreadsUnread         :: !(Maybe (Textual Int32))
     , _lMessageListVisibility :: !(Maybe LabelMessageListVisibility)
     , _lMessagesTotal         :: !(Maybe (Textual Int32))
@@ -2533,7 +2539,8 @@ data Label = Label'
     , _lLabelListVisibility   :: !(Maybe LabelLabelListVisibility)
     , _lId                    :: !(Maybe Text)
     , _lType                  :: !(Maybe LabelType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Label' with the minimum fields required to make a request.
 --
@@ -2561,7 +2568,7 @@ data Label = Label'
 label
     :: Label
 label =
-    Label'
+  Label'
     { _lThreadsUnread = Nothing
     , _lMessageListVisibility = Nothing
     , _lMessagesTotal = Nothing
@@ -2674,7 +2681,8 @@ instance ToJSON Label where
 -- | An S\/MIME email config.
 --
 -- /See:/ 'smimeInfo' smart constructor.
-data SmimeInfo = SmimeInfo'
+data SmimeInfo =
+  SmimeInfo'
     { _siPem                  :: !(Maybe Text)
     , _siExpiration           :: !(Maybe (Textual Int64))
     , _siEncryptedKeyPassword :: !(Maybe Text)
@@ -2682,7 +2690,8 @@ data SmimeInfo = SmimeInfo'
     , _siPkcs12               :: !(Maybe Bytes)
     , _siIssuerCn             :: !(Maybe Text)
     , _siIsDefault            :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SmimeInfo' with the minimum fields required to make a request.
 --
@@ -2704,7 +2713,7 @@ data SmimeInfo = SmimeInfo'
 smimeInfo
     :: SmimeInfo
 smimeInfo =
-    SmimeInfo'
+  SmimeInfo'
     { _siPem = Nothing
     , _siExpiration = Nothing
     , _siEncryptedKeyPassword = Nothing
@@ -2783,11 +2792,13 @@ instance ToJSON SmimeInfo where
 
 --
 -- /See:/ 'listMessagesResponse' smart constructor.
-data ListMessagesResponse = ListMessagesResponse'
+data ListMessagesResponse =
+  ListMessagesResponse'
     { _lmrNextPageToken      :: !(Maybe Text)
     , _lmrResultSizeEstimate :: !(Maybe (Textual Word32))
     , _lmrMessages           :: !(Maybe [Message])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMessagesResponse' with the minimum fields required to make a request.
 --
@@ -2801,7 +2812,7 @@ data ListMessagesResponse = ListMessagesResponse'
 listMessagesResponse
     :: ListMessagesResponse
 listMessagesResponse =
-    ListMessagesResponse'
+  ListMessagesResponse'
     { _lmrNextPageToken = Nothing
     , _lmrResultSizeEstimate = Nothing
     , _lmrMessages = Nothing
@@ -2846,9 +2857,11 @@ instance ToJSON ListMessagesResponse where
 
 --
 -- /See:/ 'historyMessageAdded' smart constructor.
-newtype HistoryMessageAdded = HistoryMessageAdded'
+newtype HistoryMessageAdded =
+  HistoryMessageAdded'
     { _hmaMessage :: Maybe Message
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HistoryMessageAdded' with the minimum fields required to make a request.
 --
@@ -2857,10 +2870,7 @@ newtype HistoryMessageAdded = HistoryMessageAdded'
 -- * 'hmaMessage'
 historyMessageAdded
     :: HistoryMessageAdded
-historyMessageAdded =
-    HistoryMessageAdded'
-    { _hmaMessage = Nothing
-    }
+historyMessageAdded = HistoryMessageAdded' {_hmaMessage = Nothing}
 
 hmaMessage :: Lens' HistoryMessageAdded (Maybe Message)
 hmaMessage

@@ -59,14 +59,16 @@ type SitesDomainsDeleteResource =
 -- | Deletes the existing domain mapping on the specified site.
 --
 -- /See:/ 'sitesDomainsDelete' smart constructor.
-data SitesDomainsDelete = SitesDomainsDelete'
+data SitesDomainsDelete =
+  SitesDomainsDelete'
     { _sddXgafv          :: !(Maybe Xgafv)
     , _sddUploadProtocol :: !(Maybe Text)
     , _sddAccessToken    :: !(Maybe Text)
     , _sddUploadType     :: !(Maybe Text)
     , _sddName           :: !Text
     , _sddCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesDomainsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ sitesDomainsDelete
     :: Text -- ^ 'sddName'
     -> SitesDomainsDelete
 sitesDomainsDelete pSddName_ =
-    SitesDomainsDelete'
+  SitesDomainsDelete'
     { _sddXgafv = Nothing
     , _sddUploadProtocol = Nothing
     , _sddAccessToken = Nothing

@@ -104,7 +104,8 @@ type ProjectsNotificationChannelsGetVerificationCodeResource
 -- 64 encoded string that has a longer expiration time.
 --
 -- /See:/ 'projectsNotificationChannelsGetVerificationCode' smart constructor.
-data ProjectsNotificationChannelsGetVerificationCode = ProjectsNotificationChannelsGetVerificationCode'
+data ProjectsNotificationChannelsGetVerificationCode =
+  ProjectsNotificationChannelsGetVerificationCode'
     { _pncgvcXgafv          :: !(Maybe Xgafv)
     , _pncgvcUploadProtocol :: !(Maybe Text)
     , _pncgvcAccessToken    :: !(Maybe Text)
@@ -112,7 +113,8 @@ data ProjectsNotificationChannelsGetVerificationCode = ProjectsNotificationChann
     , _pncgvcPayload        :: !GetNotificationChannelVerificationCodeRequest
     , _pncgvcName           :: !Text
     , _pncgvcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsNotificationChannelsGetVerificationCode' with the minimum fields required to make a request.
 --
@@ -136,7 +138,7 @@ projectsNotificationChannelsGetVerificationCode
     -> Text -- ^ 'pncgvcName'
     -> ProjectsNotificationChannelsGetVerificationCode
 projectsNotificationChannelsGetVerificationCode pPncgvcPayload_ pPncgvcName_ =
-    ProjectsNotificationChannelsGetVerificationCode'
+  ProjectsNotificationChannelsGetVerificationCode'
     { _pncgvcXgafv = Nothing
     , _pncgvcUploadProtocol = Nothing
     , _pncgvcAccessToken = Nothing
@@ -190,7 +192,8 @@ pncgvcCallback
       (\ s a -> s{_pncgvcCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelsGetVerificationCode where
+           ProjectsNotificationChannelsGetVerificationCode
+         where
         type Rs
                ProjectsNotificationChannelsGetVerificationCode
              = GetNotificationChannelVerificationCodeResponse

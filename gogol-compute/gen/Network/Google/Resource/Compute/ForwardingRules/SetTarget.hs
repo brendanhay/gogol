@@ -65,13 +65,15 @@ type ForwardingRulesSetTargetResource =
 -- same type as the old target.
 --
 -- /See:/ 'forwardingRulesSetTarget' smart constructor.
-data ForwardingRulesSetTarget = ForwardingRulesSetTarget'
+data ForwardingRulesSetTarget =
+  ForwardingRulesSetTarget'
     { _frstRequestId      :: !(Maybe Text)
     , _frstProject        :: !Text
     , _frstForwardingRule :: !Text
     , _frstPayload        :: !TargetReference
     , _frstRegion         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRulesSetTarget' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ forwardingRulesSetTarget
     -> Text -- ^ 'frstRegion'
     -> ForwardingRulesSetTarget
 forwardingRulesSetTarget pFrstProject_ pFrstForwardingRule_ pFrstPayload_ pFrstRegion_ =
-    ForwardingRulesSetTarget'
+  ForwardingRulesSetTarget'
     { _frstRequestId = Nothing
     , _frstProject = pFrstProject_
     , _frstForwardingRule = pFrstForwardingRule_

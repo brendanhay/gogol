@@ -61,14 +61,16 @@ type CustomersConfigurationsListResource =
 -- | Lists a customer\'s configurations.
 --
 -- /See:/ 'customersConfigurationsList' smart constructor.
-data CustomersConfigurationsList = CustomersConfigurationsList'
+data CustomersConfigurationsList =
+  CustomersConfigurationsList'
     { _cclParent         :: !Text
     , _cclXgafv          :: !(Maybe Xgafv)
     , _cclUploadProtocol :: !(Maybe Text)
     , _cclAccessToken    :: !(Maybe Text)
     , _cclUploadType     :: !(Maybe Text)
     , _cclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersConfigurationsList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ customersConfigurationsList
     :: Text -- ^ 'cclParent'
     -> CustomersConfigurationsList
 customersConfigurationsList pCclParent_ =
-    CustomersConfigurationsList'
+  CustomersConfigurationsList'
     { _cclParent = pCclParent_
     , _cclXgafv = Nothing
     , _cclUploadProtocol = Nothing

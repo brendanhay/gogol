@@ -51,9 +51,11 @@ type AccountsContainersVersionsUndeleteResource =
 -- | Undeletes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsUndelete' smart constructor.
-newtype AccountsContainersVersionsUndelete = AccountsContainersVersionsUndelete'
+newtype AccountsContainersVersionsUndelete =
+  AccountsContainersVersionsUndelete'
     { _acvuPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsUndelete' with the minimum fields required to make a request.
 --
@@ -64,9 +66,7 @@ accountsContainersVersionsUndelete
     :: Text -- ^ 'acvuPath'
     -> AccountsContainersVersionsUndelete
 accountsContainersVersionsUndelete pAcvuPath_ =
-    AccountsContainersVersionsUndelete'
-    { _acvuPath = pAcvuPath_
-    }
+  AccountsContainersVersionsUndelete' {_acvuPath = pAcvuPath_}
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}
@@ -74,7 +74,8 @@ acvuPath :: Lens' AccountsContainersVersionsUndelete Text
 acvuPath = lens _acvuPath (\ s a -> s{_acvuPath = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsUndelete where
+           AccountsContainersVersionsUndelete
+         where
         type Rs AccountsContainersVersionsUndelete =
              ContainerVersion
         type Scopes AccountsContainersVersionsUndelete =

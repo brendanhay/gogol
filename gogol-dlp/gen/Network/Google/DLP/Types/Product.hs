@@ -23,10 +23,12 @@ import           Network.Google.Prelude
 -- | Statistics regarding a specific InfoType.
 --
 -- /See:/ 'googlePrivacyDlpV2InfoTypeStats' smart constructor.
-data GooglePrivacyDlpV2InfoTypeStats = GooglePrivacyDlpV2InfoTypeStats'
+data GooglePrivacyDlpV2InfoTypeStats =
+  GooglePrivacyDlpV2InfoTypeStats'
     { _gpdvitsCount    :: !(Maybe (Textual Int64))
     , _gpdvitsInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeStats' with the minimum fields required to make a request.
 --
@@ -38,10 +40,8 @@ data GooglePrivacyDlpV2InfoTypeStats = GooglePrivacyDlpV2InfoTypeStats'
 googlePrivacyDlpV2InfoTypeStats
     :: GooglePrivacyDlpV2InfoTypeStats
 googlePrivacyDlpV2InfoTypeStats =
-    GooglePrivacyDlpV2InfoTypeStats'
-    { _gpdvitsCount = Nothing
-    , _gpdvitsInfoType = Nothing
-    }
+  GooglePrivacyDlpV2InfoTypeStats'
+    {_gpdvitsCount = Nothing, _gpdvitsInfoType = Nothing}
 
 -- | Number of findings for this infoType.
 gpdvitsCount :: Lens' GooglePrivacyDlpV2InfoTypeStats (Maybe Int64)
@@ -77,8 +77,8 @@ instance ToJSON GooglePrivacyDlpV2InfoTypeStats where
 --
 -- /See:/ 'googlePrivacyDlpV2RedactConfig' smart constructor.
 data GooglePrivacyDlpV2RedactConfig =
-    GooglePrivacyDlpV2RedactConfig'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GooglePrivacyDlpV2RedactConfig'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RedactConfig' with the minimum fields required to make a request.
 --
@@ -98,10 +98,12 @@ instance ToJSON GooglePrivacyDlpV2RedactConfig where
 -- | Request message for UpdateJobTrigger.
 --
 -- /See:/ 'googlePrivacyDlpV2UpdateJobTriggerRequest' smart constructor.
-data GooglePrivacyDlpV2UpdateJobTriggerRequest = GooglePrivacyDlpV2UpdateJobTriggerRequest'
+data GooglePrivacyDlpV2UpdateJobTriggerRequest =
+  GooglePrivacyDlpV2UpdateJobTriggerRequest'
     { _gpdvujtrUpdateMask :: !(Maybe GFieldMask)
     , _gpdvujtrJobTrigger :: !(Maybe GooglePrivacyDlpV2JobTrigger)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2UpdateJobTriggerRequest' with the minimum fields required to make a request.
 --
@@ -113,10 +115,8 @@ data GooglePrivacyDlpV2UpdateJobTriggerRequest = GooglePrivacyDlpV2UpdateJobTrig
 googlePrivacyDlpV2UpdateJobTriggerRequest
     :: GooglePrivacyDlpV2UpdateJobTriggerRequest
 googlePrivacyDlpV2UpdateJobTriggerRequest =
-    GooglePrivacyDlpV2UpdateJobTriggerRequest'
-    { _gpdvujtrUpdateMask = Nothing
-    , _gpdvujtrJobTrigger = Nothing
-    }
+  GooglePrivacyDlpV2UpdateJobTriggerRequest'
+    {_gpdvujtrUpdateMask = Nothing, _gpdvujtrJobTrigger = Nothing}
 
 -- | Mask to control which fields get updated.
 gpdvujtrUpdateMask :: Lens' GooglePrivacyDlpV2UpdateJobTriggerRequest (Maybe GFieldMask)
@@ -131,7 +131,8 @@ gpdvujtrJobTrigger
       (\ s a -> s{_gpdvujtrJobTrigger = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2UpdateJobTriggerRequest where
+           GooglePrivacyDlpV2UpdateJobTriggerRequest
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2UpdateJobTriggerRequest"
@@ -140,7 +141,8 @@ instance FromJSON
                    (o .:? "updateMask") <*> (o .:? "jobTrigger"))
 
 instance ToJSON
-         GooglePrivacyDlpV2UpdateJobTriggerRequest where
+           GooglePrivacyDlpV2UpdateJobTriggerRequest
+         where
         toJSON GooglePrivacyDlpV2UpdateJobTriggerRequest'{..}
           = object
               (catMaybes
@@ -150,10 +152,12 @@ instance ToJSON
 -- | Generic half-open interval [start, end)
 --
 -- /See:/ 'googlePrivacyDlpV2Range' smart constructor.
-data GooglePrivacyDlpV2Range = GooglePrivacyDlpV2Range'
+data GooglePrivacyDlpV2Range =
+  GooglePrivacyDlpV2Range'
     { _gpdvrStart :: !(Maybe (Textual Int64))
     , _gpdvrEnd   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Range' with the minimum fields required to make a request.
 --
@@ -165,10 +169,7 @@ data GooglePrivacyDlpV2Range = GooglePrivacyDlpV2Range'
 googlePrivacyDlpV2Range
     :: GooglePrivacyDlpV2Range
 googlePrivacyDlpV2Range =
-    GooglePrivacyDlpV2Range'
-    { _gpdvrStart = Nothing
-    , _gpdvrEnd = Nothing
-    }
+  GooglePrivacyDlpV2Range' {_gpdvrStart = Nothing, _gpdvrEnd = Nothing}
 
 -- | Index of the first character of the range (inclusive).
 gpdvrStart :: Lens' GooglePrivacyDlpV2Range (Maybe Int64)
@@ -233,11 +234,13 @@ instance ToJSON GooglePrivacyDlpV2Range where
 -- security\/privacy reasons.
 --
 -- /See:/ 'googleRpcStatus' smart constructor.
-data GoogleRpcStatus = GoogleRpcStatus'
+data GoogleRpcStatus =
+  GoogleRpcStatus'
     { _grsDetails :: !(Maybe [GoogleRpcStatusDetailsItem])
     , _grsCode    :: !(Maybe (Textual Int32))
     , _grsMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleRpcStatus' with the minimum fields required to make a request.
 --
@@ -251,11 +254,8 @@ data GoogleRpcStatus = GoogleRpcStatus'
 googleRpcStatus
     :: GoogleRpcStatus
 googleRpcStatus =
-    GoogleRpcStatus'
-    { _grsDetails = Nothing
-    , _grsCode = Nothing
-    , _grsMessage = Nothing
-    }
+  GoogleRpcStatus'
+    {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -307,11 +307,13 @@ instance ToJSON GoogleRpcStatus where
 -- to learn more.
 --
 -- /See:/ 'googlePrivacyDlpV2FixedSizeBucketingConfig' smart constructor.
-data GooglePrivacyDlpV2FixedSizeBucketingConfig = GooglePrivacyDlpV2FixedSizeBucketingConfig'
+data GooglePrivacyDlpV2FixedSizeBucketingConfig =
+  GooglePrivacyDlpV2FixedSizeBucketingConfig'
     { _gpdvfsbcUpperBound :: !(Maybe GooglePrivacyDlpV2Value)
     , _gpdvfsbcLowerBound :: !(Maybe GooglePrivacyDlpV2Value)
     , _gpdvfsbcBucketSize :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2FixedSizeBucketingConfig' with the minimum fields required to make a request.
 --
@@ -325,7 +327,7 @@ data GooglePrivacyDlpV2FixedSizeBucketingConfig = GooglePrivacyDlpV2FixedSizeBuc
 googlePrivacyDlpV2FixedSizeBucketingConfig
     :: GooglePrivacyDlpV2FixedSizeBucketingConfig
 googlePrivacyDlpV2FixedSizeBucketingConfig =
-    GooglePrivacyDlpV2FixedSizeBucketingConfig'
+  GooglePrivacyDlpV2FixedSizeBucketingConfig'
     { _gpdvfsbcUpperBound = Nothing
     , _gpdvfsbcLowerBound = Nothing
     , _gpdvfsbcBucketSize = Nothing
@@ -361,7 +363,8 @@ gpdvfsbcBucketSize
       . mapping _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2FixedSizeBucketingConfig where
+           GooglePrivacyDlpV2FixedSizeBucketingConfig
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2FixedSizeBucketingConfig"
@@ -371,7 +374,8 @@ instance FromJSON
                      (o .:? "bucketSize"))
 
 instance ToJSON
-         GooglePrivacyDlpV2FixedSizeBucketingConfig where
+           GooglePrivacyDlpV2FixedSizeBucketingConfig
+         where
         toJSON
           GooglePrivacyDlpV2FixedSizeBucketingConfig'{..}
           = object
@@ -383,10 +387,12 @@ instance ToJSON
 -- | All the findings for a single scanned item.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectResult' smart constructor.
-data GooglePrivacyDlpV2InspectResult = GooglePrivacyDlpV2InspectResult'
+data GooglePrivacyDlpV2InspectResult =
+  GooglePrivacyDlpV2InspectResult'
     { _gpdvirFindingsTruncated :: !(Maybe Bool)
     , _gpdvirFindings          :: !(Maybe [GooglePrivacyDlpV2Finding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InspectResult' with the minimum fields required to make a request.
 --
@@ -398,10 +404,8 @@ data GooglePrivacyDlpV2InspectResult = GooglePrivacyDlpV2InspectResult'
 googlePrivacyDlpV2InspectResult
     :: GooglePrivacyDlpV2InspectResult
 googlePrivacyDlpV2InspectResult =
-    GooglePrivacyDlpV2InspectResult'
-    { _gpdvirFindingsTruncated = Nothing
-    , _gpdvirFindings = Nothing
-    }
+  GooglePrivacyDlpV2InspectResult'
+    {_gpdvirFindingsTruncated = Nothing, _gpdvirFindings = Nothing}
 
 -- | If true, then this item might have more findings than were returned, and
 -- the findings returned are an arbitrary subset of all findings. The
@@ -442,11 +446,13 @@ instance ToJSON GooglePrivacyDlpV2InspectResult where
 -- | Configuration for a StoredInfoType.
 --
 -- /See:/ 'googlePrivacyDlpV2StoredInfoTypeConfig' smart constructor.
-data GooglePrivacyDlpV2StoredInfoTypeConfig = GooglePrivacyDlpV2StoredInfoTypeConfig'
+data GooglePrivacyDlpV2StoredInfoTypeConfig =
+  GooglePrivacyDlpV2StoredInfoTypeConfig'
     { _gpdvsitcLargeCustomDictionary :: !(Maybe GooglePrivacyDlpV2LargeCustomDictionaryConfig)
     , _gpdvsitcDisplayName           :: !(Maybe Text)
     , _gpdvsitcDescription           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2StoredInfoTypeConfig' with the minimum fields required to make a request.
 --
@@ -460,7 +466,7 @@ data GooglePrivacyDlpV2StoredInfoTypeConfig = GooglePrivacyDlpV2StoredInfoTypeCo
 googlePrivacyDlpV2StoredInfoTypeConfig
     :: GooglePrivacyDlpV2StoredInfoTypeConfig
 googlePrivacyDlpV2StoredInfoTypeConfig =
-    GooglePrivacyDlpV2StoredInfoTypeConfig'
+  GooglePrivacyDlpV2StoredInfoTypeConfig'
     { _gpdvsitcLargeCustomDictionary = Nothing
     , _gpdvsitcDisplayName = Nothing
     , _gpdvsitcDescription = Nothing
@@ -485,7 +491,8 @@ gpdvsitcDescription
       (\ s a -> s{_gpdvsitcDescription = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2StoredInfoTypeConfig where
+           GooglePrivacyDlpV2StoredInfoTypeConfig
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2StoredInfoTypeConfig"
               (\ o ->
@@ -495,7 +502,8 @@ instance FromJSON
                      <*> (o .:? "description"))
 
 instance ToJSON
-         GooglePrivacyDlpV2StoredInfoTypeConfig where
+           GooglePrivacyDlpV2StoredInfoTypeConfig
+         where
         toJSON GooglePrivacyDlpV2StoredInfoTypeConfig'{..}
           = object
               (catMaybes
@@ -508,10 +516,12 @@ instance ToJSON
 -- info_type.
 --
 -- /See:/ 'googlePrivacyDlpV2InfoTypeTransformation' smart constructor.
-data GooglePrivacyDlpV2InfoTypeTransformation = GooglePrivacyDlpV2InfoTypeTransformation'
+data GooglePrivacyDlpV2InfoTypeTransformation =
+  GooglePrivacyDlpV2InfoTypeTransformation'
     { _gpdvittInfoTypes               :: !(Maybe [GooglePrivacyDlpV2InfoType])
     , _gpdvittPrimitiveTransformation :: !(Maybe GooglePrivacyDlpV2PrimitiveTransformation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeTransformation' with the minimum fields required to make a request.
 --
@@ -523,10 +533,8 @@ data GooglePrivacyDlpV2InfoTypeTransformation = GooglePrivacyDlpV2InfoTypeTransf
 googlePrivacyDlpV2InfoTypeTransformation
     :: GooglePrivacyDlpV2InfoTypeTransformation
 googlePrivacyDlpV2InfoTypeTransformation =
-    GooglePrivacyDlpV2InfoTypeTransformation'
-    { _gpdvittInfoTypes = Nothing
-    , _gpdvittPrimitiveTransformation = Nothing
-    }
+  GooglePrivacyDlpV2InfoTypeTransformation'
+    {_gpdvittInfoTypes = Nothing, _gpdvittPrimitiveTransformation = Nothing}
 
 -- | InfoTypes to apply the transformation to. An empty list will cause this
 -- transformation to apply to all findings that correspond to infoTypes
@@ -545,7 +553,8 @@ gpdvittPrimitiveTransformation
       (\ s a -> s{_gpdvittPrimitiveTransformation = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2InfoTypeTransformation where
+           GooglePrivacyDlpV2InfoTypeTransformation
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2InfoTypeTransformation"
@@ -555,7 +564,8 @@ instance FromJSON
                      (o .:? "primitiveTransformation"))
 
 instance ToJSON
-         GooglePrivacyDlpV2InfoTypeTransformation where
+           GooglePrivacyDlpV2InfoTypeTransformation
+         where
         toJSON GooglePrivacyDlpV2InfoTypeTransformation'{..}
           = object
               (catMaybes
@@ -566,9 +576,11 @@ instance ToJSON
 -- | General identifier of a data field in a storage service.
 --
 -- /See:/ 'googlePrivacyDlpV2FieldId' smart constructor.
-newtype GooglePrivacyDlpV2FieldId = GooglePrivacyDlpV2FieldId'
+newtype GooglePrivacyDlpV2FieldId =
+  GooglePrivacyDlpV2FieldId'
     { _gpdvfiName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2FieldId' with the minimum fields required to make a request.
 --
@@ -577,10 +589,7 @@ newtype GooglePrivacyDlpV2FieldId = GooglePrivacyDlpV2FieldId'
 -- * 'gpdvfiName'
 googlePrivacyDlpV2FieldId
     :: GooglePrivacyDlpV2FieldId
-googlePrivacyDlpV2FieldId =
-    GooglePrivacyDlpV2FieldId'
-    { _gpdvfiName = Nothing
-    }
+googlePrivacyDlpV2FieldId = GooglePrivacyDlpV2FieldId' {_gpdvfiName = Nothing}
 
 -- | Name describing the field.
 gpdvfiName :: Lens' GooglePrivacyDlpV2FieldId (Maybe Text)
@@ -600,7 +609,8 @@ instance ToJSON GooglePrivacyDlpV2FieldId where
 -- | Combines all of the information about a DLP job.
 --
 -- /See:/ 'googlePrivacyDlpV2DlpJob' smart constructor.
-data GooglePrivacyDlpV2DlpJob = GooglePrivacyDlpV2DlpJob'
+data GooglePrivacyDlpV2DlpJob =
+  GooglePrivacyDlpV2DlpJob'
     { _gpdvdjInspectDetails :: !(Maybe GooglePrivacyDlpV2InspectDataSourceDetails)
     , _gpdvdjState          :: !(Maybe GooglePrivacyDlpV2DlpJobState)
     , _gpdvdjStartTime      :: !(Maybe DateTime')
@@ -611,7 +621,8 @@ data GooglePrivacyDlpV2DlpJob = GooglePrivacyDlpV2DlpJob'
     , _gpdvdjType           :: !(Maybe GooglePrivacyDlpV2DlpJobType)
     , _gpdvdjErrors         :: !(Maybe [GooglePrivacyDlpV2Error])
     , _gpdvdjCreateTime     :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DlpJob' with the minimum fields required to make a request.
 --
@@ -639,7 +650,7 @@ data GooglePrivacyDlpV2DlpJob = GooglePrivacyDlpV2DlpJob'
 googlePrivacyDlpV2DlpJob
     :: GooglePrivacyDlpV2DlpJob
 googlePrivacyDlpV2DlpJob =
-    GooglePrivacyDlpV2DlpJob'
+  GooglePrivacyDlpV2DlpJob'
     { _gpdvdjInspectDetails = Nothing
     , _gpdvdjState = Nothing
     , _gpdvdjStartTime = Nothing
@@ -748,10 +759,12 @@ instance ToJSON GooglePrivacyDlpV2DlpJob where
 -- table.
 --
 -- /See:/ 'googlePrivacyDlpV2RecordTransformations' smart constructor.
-data GooglePrivacyDlpV2RecordTransformations = GooglePrivacyDlpV2RecordTransformations'
+data GooglePrivacyDlpV2RecordTransformations =
+  GooglePrivacyDlpV2RecordTransformations'
     { _gpdvrtRecordSuppressions   :: !(Maybe [GooglePrivacyDlpV2RecordSuppression])
     , _gpdvrtFieldTransformations :: !(Maybe [GooglePrivacyDlpV2FieldTransformation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RecordTransformations' with the minimum fields required to make a request.
 --
@@ -763,10 +776,8 @@ data GooglePrivacyDlpV2RecordTransformations = GooglePrivacyDlpV2RecordTransform
 googlePrivacyDlpV2RecordTransformations
     :: GooglePrivacyDlpV2RecordTransformations
 googlePrivacyDlpV2RecordTransformations =
-    GooglePrivacyDlpV2RecordTransformations'
-    { _gpdvrtRecordSuppressions = Nothing
-    , _gpdvrtFieldTransformations = Nothing
-    }
+  GooglePrivacyDlpV2RecordTransformations'
+    {_gpdvrtRecordSuppressions = Nothing, _gpdvrtFieldTransformations = Nothing}
 
 -- | Configuration defining which records get suppressed entirely. Records
 -- that match any suppression rule are omitted from the output [optional].
@@ -786,7 +797,8 @@ gpdvrtFieldTransformations
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2RecordTransformations where
+           GooglePrivacyDlpV2RecordTransformations
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2RecordTransformations"
@@ -796,7 +808,8 @@ instance FromJSON
                      (o .:? "fieldTransformations" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2RecordTransformations where
+           GooglePrivacyDlpV2RecordTransformations
+         where
         toJSON GooglePrivacyDlpV2RecordTransformations'{..}
           = object
               (catMaybes
@@ -811,10 +824,12 @@ instance ToJSON
 -- documented contexts.
 --
 -- /See:/ 'googlePrivacyDlpV2Key' smart constructor.
-data GooglePrivacyDlpV2Key = GooglePrivacyDlpV2Key'
+data GooglePrivacyDlpV2Key =
+  GooglePrivacyDlpV2Key'
     { _gpdvkPartitionId :: !(Maybe GooglePrivacyDlpV2PartitionId)
     , _gpdvkPath        :: !(Maybe [GooglePrivacyDlpV2PathElement])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Key' with the minimum fields required to make a request.
 --
@@ -826,10 +841,7 @@ data GooglePrivacyDlpV2Key = GooglePrivacyDlpV2Key'
 googlePrivacyDlpV2Key
     :: GooglePrivacyDlpV2Key
 googlePrivacyDlpV2Key =
-    GooglePrivacyDlpV2Key'
-    { _gpdvkPartitionId = Nothing
-    , _gpdvkPath = Nothing
-    }
+  GooglePrivacyDlpV2Key' {_gpdvkPartitionId = Nothing, _gpdvkPath = Nothing}
 
 -- | Entities are partitioned into subsets, currently identified by a project
 -- ID and namespace ID. Queries are scoped to a single partition.
@@ -876,9 +888,11 @@ instance ToJSON GooglePrivacyDlpV2Key where
 -- https:\/\/cloud.google.com\/dlp\/docs\/concepts-bucketing to learn more.
 --
 -- /See:/ 'googlePrivacyDlpV2BucketingConfig' smart constructor.
-newtype GooglePrivacyDlpV2BucketingConfig = GooglePrivacyDlpV2BucketingConfig'
+newtype GooglePrivacyDlpV2BucketingConfig =
+  GooglePrivacyDlpV2BucketingConfig'
     { _gpdvbcBuckets :: Maybe [GooglePrivacyDlpV2Bucket]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2BucketingConfig' with the minimum fields required to make a request.
 --
@@ -888,9 +902,7 @@ newtype GooglePrivacyDlpV2BucketingConfig = GooglePrivacyDlpV2BucketingConfig'
 googlePrivacyDlpV2BucketingConfig
     :: GooglePrivacyDlpV2BucketingConfig
 googlePrivacyDlpV2BucketingConfig =
-    GooglePrivacyDlpV2BucketingConfig'
-    { _gpdvbcBuckets = Nothing
-    }
+  GooglePrivacyDlpV2BucketingConfig' {_gpdvbcBuckets = Nothing}
 
 -- | Set of buckets. Ranges must be non-overlapping.
 gpdvbcBuckets :: Lens' GooglePrivacyDlpV2BucketingConfig [GooglePrivacyDlpV2Bucket]
@@ -918,7 +930,8 @@ instance ToJSON GooglePrivacyDlpV2BucketingConfig
 -- redactContent only info_types and min_likelihood are currently used.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectConfig' smart constructor.
-data GooglePrivacyDlpV2InspectConfig = GooglePrivacyDlpV2InspectConfig'
+data GooglePrivacyDlpV2InspectConfig =
+  GooglePrivacyDlpV2InspectConfig'
     { _gpdvicInfoTypes        :: !(Maybe [GooglePrivacyDlpV2InfoType])
     , _gpdvicMinLikelihood    :: !(Maybe GooglePrivacyDlpV2InspectConfigMinLikelihood)
     , _gpdvicExcludeInfoTypes :: !(Maybe Bool)
@@ -927,7 +940,8 @@ data GooglePrivacyDlpV2InspectConfig = GooglePrivacyDlpV2InspectConfig'
     , _gpdvicLimits           :: !(Maybe GooglePrivacyDlpV2FindingLimits)
     , _gpdvicContentOptions   :: !(Maybe [Text])
     , _gpdvicRuleSet          :: !(Maybe [GooglePrivacyDlpV2InspectionRuleSet])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InspectConfig' with the minimum fields required to make a request.
 --
@@ -951,7 +965,7 @@ data GooglePrivacyDlpV2InspectConfig = GooglePrivacyDlpV2InspectConfig'
 googlePrivacyDlpV2InspectConfig
     :: GooglePrivacyDlpV2InspectConfig
 googlePrivacyDlpV2InspectConfig =
-    GooglePrivacyDlpV2InspectConfig'
+  GooglePrivacyDlpV2InspectConfig'
     { _gpdvicInfoTypes = Nothing
     , _gpdvicMinLikelihood = Nothing
     , _gpdvicExcludeInfoTypes = Nothing
@@ -1066,11 +1080,13 @@ instance ToJSON GooglePrivacyDlpV2InspectConfig where
 -- more.
 --
 -- /See:/ 'googlePrivacyDlpV2RiskAnalysisJobConfig' smart constructor.
-data GooglePrivacyDlpV2RiskAnalysisJobConfig = GooglePrivacyDlpV2RiskAnalysisJobConfig'
+data GooglePrivacyDlpV2RiskAnalysisJobConfig =
+  GooglePrivacyDlpV2RiskAnalysisJobConfig'
     { _gpdvrajcPrivacyMetric :: !(Maybe GooglePrivacyDlpV2PrivacyMetric)
     , _gpdvrajcActions       :: !(Maybe [GooglePrivacyDlpV2Action])
     , _gpdvrajcSourceTable   :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RiskAnalysisJobConfig' with the minimum fields required to make a request.
 --
@@ -1084,7 +1100,7 @@ data GooglePrivacyDlpV2RiskAnalysisJobConfig = GooglePrivacyDlpV2RiskAnalysisJob
 googlePrivacyDlpV2RiskAnalysisJobConfig
     :: GooglePrivacyDlpV2RiskAnalysisJobConfig
 googlePrivacyDlpV2RiskAnalysisJobConfig =
-    GooglePrivacyDlpV2RiskAnalysisJobConfig'
+  GooglePrivacyDlpV2RiskAnalysisJobConfig'
     { _gpdvrajcPrivacyMetric = Nothing
     , _gpdvrajcActions = Nothing
     , _gpdvrajcSourceTable = Nothing
@@ -1112,7 +1128,8 @@ gpdvrajcSourceTable
       (\ s a -> s{_gpdvrajcSourceTable = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2RiskAnalysisJobConfig where
+           GooglePrivacyDlpV2RiskAnalysisJobConfig
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2RiskAnalysisJobConfig"
@@ -1123,7 +1140,8 @@ instance FromJSON
                      <*> (o .:? "sourceTable"))
 
 instance ToJSON
-         GooglePrivacyDlpV2RiskAnalysisJobConfig where
+           GooglePrivacyDlpV2RiskAnalysisJobConfig
+         where
         toJSON GooglePrivacyDlpV2RiskAnalysisJobConfig'{..}
           = object
               (catMaybes
@@ -1134,9 +1152,11 @@ instance ToJSON
 -- | Message for infoType-dependent details parsed from quote.
 --
 -- /See:/ 'googlePrivacyDlpV2QuoteInfo' smart constructor.
-newtype GooglePrivacyDlpV2QuoteInfo = GooglePrivacyDlpV2QuoteInfo'
+newtype GooglePrivacyDlpV2QuoteInfo =
+  GooglePrivacyDlpV2QuoteInfo'
     { _gpdvqiDateTime :: Maybe GooglePrivacyDlpV2DateTime
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2QuoteInfo' with the minimum fields required to make a request.
 --
@@ -1146,9 +1166,7 @@ newtype GooglePrivacyDlpV2QuoteInfo = GooglePrivacyDlpV2QuoteInfo'
 googlePrivacyDlpV2QuoteInfo
     :: GooglePrivacyDlpV2QuoteInfo
 googlePrivacyDlpV2QuoteInfo =
-    GooglePrivacyDlpV2QuoteInfo'
-    { _gpdvqiDateTime = Nothing
-    }
+  GooglePrivacyDlpV2QuoteInfo' {_gpdvqiDateTime = Nothing}
 
 -- | The date time indicated by the quote.
 gpdvqiDateTime :: Lens' GooglePrivacyDlpV2QuoteInfo (Maybe GooglePrivacyDlpV2DateTime)
@@ -1171,9 +1189,11 @@ instance ToJSON GooglePrivacyDlpV2QuoteInfo where
 -- to true.
 --
 -- /See:/ 'googlePrivacyDlpV2RecordSuppression' smart constructor.
-newtype GooglePrivacyDlpV2RecordSuppression = GooglePrivacyDlpV2RecordSuppression'
+newtype GooglePrivacyDlpV2RecordSuppression =
+  GooglePrivacyDlpV2RecordSuppression'
     { _gpdvrsCondition :: Maybe GooglePrivacyDlpV2RecordCondition
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RecordSuppression' with the minimum fields required to make a request.
 --
@@ -1183,9 +1203,7 @@ newtype GooglePrivacyDlpV2RecordSuppression = GooglePrivacyDlpV2RecordSuppressio
 googlePrivacyDlpV2RecordSuppression
     :: GooglePrivacyDlpV2RecordSuppression
 googlePrivacyDlpV2RecordSuppression =
-    GooglePrivacyDlpV2RecordSuppression'
-    { _gpdvrsCondition = Nothing
-    }
+  GooglePrivacyDlpV2RecordSuppression' {_gpdvrsCondition = Nothing}
 
 -- | A condition that when it evaluates to true will result in the record
 -- being evaluated to be suppressed from the transformed content.
@@ -1214,11 +1232,13 @@ instance ToJSON GooglePrivacyDlpV2RecordSuppression
 -- attacker cannot unwrap the data crypto key.
 --
 -- /See:/ 'googlePrivacyDlpV2CryptoKey' smart constructor.
-data GooglePrivacyDlpV2CryptoKey = GooglePrivacyDlpV2CryptoKey'
+data GooglePrivacyDlpV2CryptoKey =
+  GooglePrivacyDlpV2CryptoKey'
     { _gpdvckTransient  :: !(Maybe GooglePrivacyDlpV2TransientCryptoKey)
     , _gpdvckKmsWrApped :: !(Maybe GooglePrivacyDlpV2KmsWrAppedCryptoKey)
     , _gpdvckUnwrApped  :: !(Maybe GooglePrivacyDlpV2UnwrAppedCryptoKey)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CryptoKey' with the minimum fields required to make a request.
 --
@@ -1232,7 +1252,7 @@ data GooglePrivacyDlpV2CryptoKey = GooglePrivacyDlpV2CryptoKey'
 googlePrivacyDlpV2CryptoKey
     :: GooglePrivacyDlpV2CryptoKey
 googlePrivacyDlpV2CryptoKey =
-    GooglePrivacyDlpV2CryptoKey'
+  GooglePrivacyDlpV2CryptoKey'
     { _gpdvckTransient = Nothing
     , _gpdvckKmsWrApped = Nothing
     , _gpdvckUnwrApped = Nothing
@@ -1277,11 +1297,13 @@ instance ToJSON GooglePrivacyDlpV2CryptoKey where
 -- dictionaries that satisfy the size requirements.
 --
 -- /See:/ 'googlePrivacyDlpV2LargeCustomDictionaryConfig' smart constructor.
-data GooglePrivacyDlpV2LargeCustomDictionaryConfig = GooglePrivacyDlpV2LargeCustomDictionaryConfig'
+data GooglePrivacyDlpV2LargeCustomDictionaryConfig =
+  GooglePrivacyDlpV2LargeCustomDictionaryConfig'
     { _gpdvlcdcBigQueryField       :: !(Maybe GooglePrivacyDlpV2BigQueryField)
     , _gpdvlcdcCloudStorageFileSet :: !(Maybe GooglePrivacyDlpV2CloudStorageFileSet)
     , _gpdvlcdcOutputPath          :: !(Maybe GooglePrivacyDlpV2CloudStoragePath)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2LargeCustomDictionaryConfig' with the minimum fields required to make a request.
 --
@@ -1295,7 +1317,7 @@ data GooglePrivacyDlpV2LargeCustomDictionaryConfig = GooglePrivacyDlpV2LargeCust
 googlePrivacyDlpV2LargeCustomDictionaryConfig
     :: GooglePrivacyDlpV2LargeCustomDictionaryConfig
 googlePrivacyDlpV2LargeCustomDictionaryConfig =
-    GooglePrivacyDlpV2LargeCustomDictionaryConfig'
+  GooglePrivacyDlpV2LargeCustomDictionaryConfig'
     { _gpdvlcdcBigQueryField = Nothing
     , _gpdvlcdcCloudStorageFileSet = Nothing
     , _gpdvlcdcOutputPath = Nothing
@@ -1324,7 +1346,8 @@ gpdvlcdcOutputPath
       (\ s a -> s{_gpdvlcdcOutputPath = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2LargeCustomDictionaryConfig where
+           GooglePrivacyDlpV2LargeCustomDictionaryConfig
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2LargeCustomDictionaryConfig"
@@ -1335,7 +1358,8 @@ instance FromJSON
                      <*> (o .:? "outputPath"))
 
 instance ToJSON
-         GooglePrivacyDlpV2LargeCustomDictionaryConfig where
+           GooglePrivacyDlpV2LargeCustomDictionaryConfig
+         where
         toJSON
           GooglePrivacyDlpV2LargeCustomDictionaryConfig'{..}
           = object
@@ -1348,9 +1372,11 @@ instance ToJSON
 -- | Message defining a list of words or phrases to search for in the data.
 --
 -- /See:/ 'googlePrivacyDlpV2WordList' smart constructor.
-newtype GooglePrivacyDlpV2WordList = GooglePrivacyDlpV2WordList'
+newtype GooglePrivacyDlpV2WordList =
+  GooglePrivacyDlpV2WordList'
     { _gpdvwlWords :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2WordList' with the minimum fields required to make a request.
 --
@@ -1360,9 +1386,7 @@ newtype GooglePrivacyDlpV2WordList = GooglePrivacyDlpV2WordList'
 googlePrivacyDlpV2WordList
     :: GooglePrivacyDlpV2WordList
 googlePrivacyDlpV2WordList =
-    GooglePrivacyDlpV2WordList'
-    { _gpdvwlWords = Nothing
-    }
+  GooglePrivacyDlpV2WordList' {_gpdvwlWords = Nothing}
 
 -- | Words or phrases defining the dictionary. The dictionary must contain at
 -- least one phrase and every phrase must contain at least 2 characters
@@ -1387,11 +1411,13 @@ instance ToJSON GooglePrivacyDlpV2WordList where
 -- | Container structure for the content to inspect.
 --
 -- /See:/ 'googlePrivacyDlpV2ContentItem' smart constructor.
-data GooglePrivacyDlpV2ContentItem = GooglePrivacyDlpV2ContentItem'
+data GooglePrivacyDlpV2ContentItem =
+  GooglePrivacyDlpV2ContentItem'
     { _gpdvciValue    :: !(Maybe Text)
     , _gpdvciByteItem :: !(Maybe GooglePrivacyDlpV2ByteContentItem)
     , _gpdvciTable    :: !(Maybe GooglePrivacyDlpV2Table)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ContentItem' with the minimum fields required to make a request.
 --
@@ -1405,11 +1431,8 @@ data GooglePrivacyDlpV2ContentItem = GooglePrivacyDlpV2ContentItem'
 googlePrivacyDlpV2ContentItem
     :: GooglePrivacyDlpV2ContentItem
 googlePrivacyDlpV2ContentItem =
-    GooglePrivacyDlpV2ContentItem'
-    { _gpdvciValue = Nothing
-    , _gpdvciByteItem = Nothing
-    , _gpdvciTable = Nothing
-    }
+  GooglePrivacyDlpV2ContentItem'
+    {_gpdvciValue = Nothing, _gpdvciByteItem = Nothing, _gpdvciTable = Nothing}
 
 -- | String data to inspect or redact.
 gpdvciValue :: Lens' GooglePrivacyDlpV2ContentItem (Maybe Text)
@@ -1447,13 +1470,15 @@ instance ToJSON GooglePrivacyDlpV2ContentItem where
 
 --
 -- /See:/ 'googlePrivacyDlpV2CategoricalStatsHistogramBucket' smart constructor.
-data GooglePrivacyDlpV2CategoricalStatsHistogramBucket = GooglePrivacyDlpV2CategoricalStatsHistogramBucket'
+data GooglePrivacyDlpV2CategoricalStatsHistogramBucket =
+  GooglePrivacyDlpV2CategoricalStatsHistogramBucket'
     { _gpdvcshbValueFrequencyLowerBound :: !(Maybe (Textual Int64))
     , _gpdvcshbBucketValues             :: !(Maybe [GooglePrivacyDlpV2ValueFrequency])
     , _gpdvcshbValueFrequencyUpperBound :: !(Maybe (Textual Int64))
     , _gpdvcshbBucketSize               :: !(Maybe (Textual Int64))
     , _gpdvcshbBucketValueCount         :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CategoricalStatsHistogramBucket' with the minimum fields required to make a request.
 --
@@ -1471,7 +1496,7 @@ data GooglePrivacyDlpV2CategoricalStatsHistogramBucket = GooglePrivacyDlpV2Categ
 googlePrivacyDlpV2CategoricalStatsHistogramBucket
     :: GooglePrivacyDlpV2CategoricalStatsHistogramBucket
 googlePrivacyDlpV2CategoricalStatsHistogramBucket =
-    GooglePrivacyDlpV2CategoricalStatsHistogramBucket'
+  GooglePrivacyDlpV2CategoricalStatsHistogramBucket'
     { _gpdvcshbValueFrequencyLowerBound = Nothing
     , _gpdvcshbBucketValues = Nothing
     , _gpdvcshbValueFrequencyUpperBound = Nothing
@@ -1517,7 +1542,7 @@ gpdvcshbBucketValueCount
       . mapping _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2CategoricalStatsHistogramBucket
+           GooglePrivacyDlpV2CategoricalStatsHistogramBucket
          where
         parseJSON
           = withObject
@@ -1532,7 +1557,7 @@ instance FromJSON
                      <*> (o .:? "bucketValueCount"))
 
 instance ToJSON
-         GooglePrivacyDlpV2CategoricalStatsHistogramBucket
+           GooglePrivacyDlpV2CategoricalStatsHistogramBucket
          where
         toJSON
           GooglePrivacyDlpV2CategoricalStatsHistogramBucket'{..}
@@ -1549,11 +1574,13 @@ instance ToJSON
 
 --
 -- /See:/ 'googlePrivacyDlpV2Result' smart constructor.
-data GooglePrivacyDlpV2Result = GooglePrivacyDlpV2Result'
+data GooglePrivacyDlpV2Result =
+  GooglePrivacyDlpV2Result'
     { _gpdvrProcessedBytes      :: !(Maybe (Textual Int64))
     , _gpdvrInfoTypeStats       :: !(Maybe [GooglePrivacyDlpV2InfoTypeStats])
     , _gpdvrTotalEstimatedBytes :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Result' with the minimum fields required to make a request.
 --
@@ -1567,7 +1594,7 @@ data GooglePrivacyDlpV2Result = GooglePrivacyDlpV2Result'
 googlePrivacyDlpV2Result
     :: GooglePrivacyDlpV2Result
 googlePrivacyDlpV2Result =
-    GooglePrivacyDlpV2Result'
+  GooglePrivacyDlpV2Result'
     { _gpdvrProcessedBytes = Nothing
     , _gpdvrInfoTypeStats = Nothing
     , _gpdvrTotalEstimatedBytes = Nothing
@@ -1617,10 +1644,12 @@ instance ToJSON GooglePrivacyDlpV2Result where
 -- | The results of an inspect DataSource job.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectDataSourceDetails' smart constructor.
-data GooglePrivacyDlpV2InspectDataSourceDetails = GooglePrivacyDlpV2InspectDataSourceDetails'
+data GooglePrivacyDlpV2InspectDataSourceDetails =
+  GooglePrivacyDlpV2InspectDataSourceDetails'
     { _gpdvidsdResult           :: !(Maybe GooglePrivacyDlpV2Result)
     , _gpdvidsdRequestedOptions :: !(Maybe GooglePrivacyDlpV2RequestedOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InspectDataSourceDetails' with the minimum fields required to make a request.
 --
@@ -1632,10 +1661,8 @@ data GooglePrivacyDlpV2InspectDataSourceDetails = GooglePrivacyDlpV2InspectDataS
 googlePrivacyDlpV2InspectDataSourceDetails
     :: GooglePrivacyDlpV2InspectDataSourceDetails
 googlePrivacyDlpV2InspectDataSourceDetails =
-    GooglePrivacyDlpV2InspectDataSourceDetails'
-    { _gpdvidsdResult = Nothing
-    , _gpdvidsdRequestedOptions = Nothing
-    }
+  GooglePrivacyDlpV2InspectDataSourceDetails'
+    {_gpdvidsdResult = Nothing, _gpdvidsdRequestedOptions = Nothing}
 
 -- | A summary of the outcome of this inspect job.
 gpdvidsdResult :: Lens' GooglePrivacyDlpV2InspectDataSourceDetails (Maybe GooglePrivacyDlpV2Result)
@@ -1650,7 +1677,8 @@ gpdvidsdRequestedOptions
       (\ s a -> s{_gpdvidsdRequestedOptions = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2InspectDataSourceDetails where
+           GooglePrivacyDlpV2InspectDataSourceDetails
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2InspectDataSourceDetails"
@@ -1659,7 +1687,8 @@ instance FromJSON
                    (o .:? "result") <*> (o .:? "requestedOptions"))
 
 instance ToJSON
-         GooglePrivacyDlpV2InspectDataSourceDetails where
+           GooglePrivacyDlpV2InspectDataSourceDetails
+         where
         toJSON
           GooglePrivacyDlpV2InspectDataSourceDetails'{..}
           = object
@@ -1671,11 +1700,13 @@ instance ToJSON
 -- | Results of redacting an image.
 --
 -- /See:/ 'googlePrivacyDlpV2RedactImageResponse' smart constructor.
-data GooglePrivacyDlpV2RedactImageResponse = GooglePrivacyDlpV2RedactImageResponse'
+data GooglePrivacyDlpV2RedactImageResponse =
+  GooglePrivacyDlpV2RedactImageResponse'
     { _gpdvrirExtractedText :: !(Maybe Text)
     , _gpdvrirInspectResult :: !(Maybe GooglePrivacyDlpV2InspectResult)
     , _gpdvrirRedactedImage :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RedactImageResponse' with the minimum fields required to make a request.
 --
@@ -1689,7 +1720,7 @@ data GooglePrivacyDlpV2RedactImageResponse = GooglePrivacyDlpV2RedactImageRespon
 googlePrivacyDlpV2RedactImageResponse
     :: GooglePrivacyDlpV2RedactImageResponse
 googlePrivacyDlpV2RedactImageResponse =
-    GooglePrivacyDlpV2RedactImageResponse'
+  GooglePrivacyDlpV2RedactImageResponse'
     { _gpdvrirExtractedText = Nothing
     , _gpdvrirInspectResult = Nothing
     , _gpdvrirRedactedImage = Nothing
@@ -1717,7 +1748,8 @@ gpdvrirRedactedImage
       . mapping _Bytes
 
 instance FromJSON
-         GooglePrivacyDlpV2RedactImageResponse where
+           GooglePrivacyDlpV2RedactImageResponse
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2RedactImageResponse"
               (\ o ->
@@ -1738,9 +1770,11 @@ instance ToJSON GooglePrivacyDlpV2RedactImageResponse
 -- Inspect, Risk
 --
 -- /See:/ 'googlePrivacyDlpV2PublishToPubSub' smart constructor.
-newtype GooglePrivacyDlpV2PublishToPubSub = GooglePrivacyDlpV2PublishToPubSub'
+newtype GooglePrivacyDlpV2PublishToPubSub =
+  GooglePrivacyDlpV2PublishToPubSub'
     { _gpdvptpsTopic :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2PublishToPubSub' with the minimum fields required to make a request.
 --
@@ -1750,9 +1784,7 @@ newtype GooglePrivacyDlpV2PublishToPubSub = GooglePrivacyDlpV2PublishToPubSub'
 googlePrivacyDlpV2PublishToPubSub
     :: GooglePrivacyDlpV2PublishToPubSub
 googlePrivacyDlpV2PublishToPubSub =
-    GooglePrivacyDlpV2PublishToPubSub'
-    { _gpdvptpsTopic = Nothing
-    }
+  GooglePrivacyDlpV2PublishToPubSub' {_gpdvptpsTopic = Nothing}
 
 -- | Cloud Pub\/Sub topic to send notifications to. The topic must have given
 -- publishing access rights to the DLP API service account executing the
@@ -1780,10 +1812,12 @@ instance ToJSON GooglePrivacyDlpV2PublishToPubSub
 -- | Row key for identifying a record in BigQuery table.
 --
 -- /See:/ 'googlePrivacyDlpV2BigQueryKey' smart constructor.
-data GooglePrivacyDlpV2BigQueryKey = GooglePrivacyDlpV2BigQueryKey'
+data GooglePrivacyDlpV2BigQueryKey =
+  GooglePrivacyDlpV2BigQueryKey'
     { _gpdvbqkTableReference :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
     , _gpdvbqkRowNumber      :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2BigQueryKey' with the minimum fields required to make a request.
 --
@@ -1795,10 +1829,8 @@ data GooglePrivacyDlpV2BigQueryKey = GooglePrivacyDlpV2BigQueryKey'
 googlePrivacyDlpV2BigQueryKey
     :: GooglePrivacyDlpV2BigQueryKey
 googlePrivacyDlpV2BigQueryKey =
-    GooglePrivacyDlpV2BigQueryKey'
-    { _gpdvbqkTableReference = Nothing
-    , _gpdvbqkRowNumber = Nothing
-    }
+  GooglePrivacyDlpV2BigQueryKey'
+    {_gpdvbqkTableReference = Nothing, _gpdvbqkRowNumber = Nothing}
 
 -- | Complete BigQuery table reference.
 gpdvbqkTableReference :: Lens' GooglePrivacyDlpV2BigQueryKey (Maybe GooglePrivacyDlpV2BigQueryTable)
@@ -1833,9 +1865,11 @@ instance ToJSON GooglePrivacyDlpV2BigQueryKey where
 -- supported for the \`surrogate_type\` custom info type.
 --
 -- /See:/ 'googlePrivacyDlpV2DetectionRule' smart constructor.
-newtype GooglePrivacyDlpV2DetectionRule = GooglePrivacyDlpV2DetectionRule'
+newtype GooglePrivacyDlpV2DetectionRule =
+  GooglePrivacyDlpV2DetectionRule'
     { _gpdvdrHotwordRule :: Maybe GooglePrivacyDlpV2HotwordRule
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DetectionRule' with the minimum fields required to make a request.
 --
@@ -1845,9 +1879,7 @@ newtype GooglePrivacyDlpV2DetectionRule = GooglePrivacyDlpV2DetectionRule'
 googlePrivacyDlpV2DetectionRule
     :: GooglePrivacyDlpV2DetectionRule
 googlePrivacyDlpV2DetectionRule =
-    GooglePrivacyDlpV2DetectionRule'
-    { _gpdvdrHotwordRule = Nothing
-    }
+  GooglePrivacyDlpV2DetectionRule' {_gpdvdrHotwordRule = Nothing}
 
 -- | Hotword-based detection rule.
 gpdvdrHotwordRule :: Lens' GooglePrivacyDlpV2DetectionRule (Maybe GooglePrivacyDlpV2HotwordRule)
@@ -1873,9 +1905,11 @@ instance ToJSON GooglePrivacyDlpV2DetectionRule where
 -- to a field.
 --
 -- /See:/ 'googlePrivacyDlpV2RecordCondition' smart constructor.
-newtype GooglePrivacyDlpV2RecordCondition = GooglePrivacyDlpV2RecordCondition'
+newtype GooglePrivacyDlpV2RecordCondition =
+  GooglePrivacyDlpV2RecordCondition'
     { _gpdvrcExpressions :: Maybe GooglePrivacyDlpV2Expressions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RecordCondition' with the minimum fields required to make a request.
 --
@@ -1885,9 +1919,7 @@ newtype GooglePrivacyDlpV2RecordCondition = GooglePrivacyDlpV2RecordCondition'
 googlePrivacyDlpV2RecordCondition
     :: GooglePrivacyDlpV2RecordCondition
 googlePrivacyDlpV2RecordCondition =
-    GooglePrivacyDlpV2RecordCondition'
-    { _gpdvrcExpressions = Nothing
-    }
+  GooglePrivacyDlpV2RecordCondition' {_gpdvrcExpressions = Nothing}
 
 -- | An expression.
 gpdvrcExpressions :: Lens' GooglePrivacyDlpV2RecordCondition (Maybe GooglePrivacyDlpV2Expressions)
@@ -1916,12 +1948,14 @@ instance ToJSON GooglePrivacyDlpV2RecordCondition
 -- more.
 --
 -- /See:/ 'googlePrivacyDlpV2DateShiftConfig' smart constructor.
-data GooglePrivacyDlpV2DateShiftConfig = GooglePrivacyDlpV2DateShiftConfig'
+data GooglePrivacyDlpV2DateShiftConfig =
+  GooglePrivacyDlpV2DateShiftConfig'
     { _gpdvdscContext        :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvdscUpperBoundDays :: !(Maybe (Textual Int32))
     , _gpdvdscCryptoKey      :: !(Maybe GooglePrivacyDlpV2CryptoKey)
     , _gpdvdscLowerBoundDays :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DateShiftConfig' with the minimum fields required to make a request.
 --
@@ -1937,7 +1971,7 @@ data GooglePrivacyDlpV2DateShiftConfig = GooglePrivacyDlpV2DateShiftConfig'
 googlePrivacyDlpV2DateShiftConfig
     :: GooglePrivacyDlpV2DateShiftConfig
 googlePrivacyDlpV2DateShiftConfig =
-    GooglePrivacyDlpV2DateShiftConfig'
+  GooglePrivacyDlpV2DateShiftConfig'
     { _gpdvdscContext = Nothing
     , _gpdvdscUpperBoundDays = Nothing
     , _gpdvdscCryptoKey = Nothing
@@ -2001,11 +2035,13 @@ instance ToJSON GooglePrivacyDlpV2DateShiftConfig
 -- | Request to search for potentially sensitive info in a ContentItem.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectContentRequest' smart constructor.
-data GooglePrivacyDlpV2InspectContentRequest = GooglePrivacyDlpV2InspectContentRequest'
+data GooglePrivacyDlpV2InspectContentRequest =
+  GooglePrivacyDlpV2InspectContentRequest'
     { _gpdvicrInspectConfig       :: !(Maybe GooglePrivacyDlpV2InspectConfig)
     , _gpdvicrItem                :: !(Maybe GooglePrivacyDlpV2ContentItem)
     , _gpdvicrInspectTemplateName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InspectContentRequest' with the minimum fields required to make a request.
 --
@@ -2019,7 +2055,7 @@ data GooglePrivacyDlpV2InspectContentRequest = GooglePrivacyDlpV2InspectContentR
 googlePrivacyDlpV2InspectContentRequest
     :: GooglePrivacyDlpV2InspectContentRequest
 googlePrivacyDlpV2InspectContentRequest =
-    GooglePrivacyDlpV2InspectContentRequest'
+  GooglePrivacyDlpV2InspectContentRequest'
     { _gpdvicrInspectConfig = Nothing
     , _gpdvicrItem = Nothing
     , _gpdvicrInspectTemplateName = Nothing
@@ -2048,7 +2084,8 @@ gpdvicrInspectTemplateName
       (\ s a -> s{_gpdvicrInspectTemplateName = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2InspectContentRequest where
+           GooglePrivacyDlpV2InspectContentRequest
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2InspectContentRequest"
@@ -2058,7 +2095,8 @@ instance FromJSON
                      (o .:? "inspectTemplateName"))
 
 instance ToJSON
-         GooglePrivacyDlpV2InspectContentRequest where
+           GooglePrivacyDlpV2InspectContentRequest
+         where
         toJSON GooglePrivacyDlpV2InspectContentRequest'{..}
           = object
               (catMaybes
@@ -2070,9 +2108,11 @@ instance ToJSON
 -- | Result of the categorical stats computation.
 --
 -- /See:/ 'googlePrivacyDlpV2CategoricalStatsResult' smart constructor.
-newtype GooglePrivacyDlpV2CategoricalStatsResult = GooglePrivacyDlpV2CategoricalStatsResult'
+newtype GooglePrivacyDlpV2CategoricalStatsResult =
+  GooglePrivacyDlpV2CategoricalStatsResult'
     { _gpdvcsrValueFrequencyHistogramBuckets :: Maybe [GooglePrivacyDlpV2CategoricalStatsHistogramBucket]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CategoricalStatsResult' with the minimum fields required to make a request.
 --
@@ -2082,9 +2122,8 @@ newtype GooglePrivacyDlpV2CategoricalStatsResult = GooglePrivacyDlpV2Categorical
 googlePrivacyDlpV2CategoricalStatsResult
     :: GooglePrivacyDlpV2CategoricalStatsResult
 googlePrivacyDlpV2CategoricalStatsResult =
-    GooglePrivacyDlpV2CategoricalStatsResult'
-    { _gpdvcsrValueFrequencyHistogramBuckets = Nothing
-    }
+  GooglePrivacyDlpV2CategoricalStatsResult'
+    {_gpdvcsrValueFrequencyHistogramBuckets = Nothing}
 
 -- | Histogram of value frequencies in the column.
 gpdvcsrValueFrequencyHistogramBuckets :: Lens' GooglePrivacyDlpV2CategoricalStatsResult [GooglePrivacyDlpV2CategoricalStatsHistogramBucket]
@@ -2096,7 +2135,8 @@ gpdvcsrValueFrequencyHistogramBuckets
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2CategoricalStatsResult where
+           GooglePrivacyDlpV2CategoricalStatsResult
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2CategoricalStatsResult"
@@ -2105,7 +2145,8 @@ instance FromJSON
                    (o .:? "valueFrequencyHistogramBuckets" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2CategoricalStatsResult where
+           GooglePrivacyDlpV2CategoricalStatsResult
+         where
         toJSON GooglePrivacyDlpV2CategoricalStatsResult'{..}
           = object
               (catMaybes
@@ -2115,11 +2156,13 @@ instance ToJSON
 -- | Result of the numerical stats computation.
 --
 -- /See:/ 'googlePrivacyDlpV2NumericalStatsResult' smart constructor.
-data GooglePrivacyDlpV2NumericalStatsResult = GooglePrivacyDlpV2NumericalStatsResult'
+data GooglePrivacyDlpV2NumericalStatsResult =
+  GooglePrivacyDlpV2NumericalStatsResult'
     { _gpdvnsrMaxValue       :: !(Maybe GooglePrivacyDlpV2Value)
     , _gpdvnsrQuantileValues :: !(Maybe [GooglePrivacyDlpV2Value])
     , _gpdvnsrMinValue       :: !(Maybe GooglePrivacyDlpV2Value)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2NumericalStatsResult' with the minimum fields required to make a request.
 --
@@ -2133,7 +2176,7 @@ data GooglePrivacyDlpV2NumericalStatsResult = GooglePrivacyDlpV2NumericalStatsRe
 googlePrivacyDlpV2NumericalStatsResult
     :: GooglePrivacyDlpV2NumericalStatsResult
 googlePrivacyDlpV2NumericalStatsResult =
-    GooglePrivacyDlpV2NumericalStatsResult'
+  GooglePrivacyDlpV2NumericalStatsResult'
     { _gpdvnsrMaxValue = Nothing
     , _gpdvnsrQuantileValues = Nothing
     , _gpdvnsrMinValue = Nothing
@@ -2161,7 +2204,8 @@ gpdvnsrMinValue
       (\ s a -> s{_gpdvnsrMinValue = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2NumericalStatsResult where
+           GooglePrivacyDlpV2NumericalStatsResult
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2NumericalStatsResult"
               (\ o ->
@@ -2171,7 +2215,8 @@ instance FromJSON
                      <*> (o .:? "minValue"))
 
 instance ToJSON
-         GooglePrivacyDlpV2NumericalStatsResult where
+           GooglePrivacyDlpV2NumericalStatsResult
+         where
         toJSON GooglePrivacyDlpV2NumericalStatsResult'{..}
           = object
               (catMaybes
@@ -2190,33 +2235,36 @@ instance ToJSON
 --
 -- /See:/ 'googlePrivacyDlpV2PublishSummaryToCscc' smart constructor.
 data GooglePrivacyDlpV2PublishSummaryToCscc =
-    GooglePrivacyDlpV2PublishSummaryToCscc'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GooglePrivacyDlpV2PublishSummaryToCscc'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2PublishSummaryToCscc' with the minimum fields required to make a request.
 --
 googlePrivacyDlpV2PublishSummaryToCscc
     :: GooglePrivacyDlpV2PublishSummaryToCscc
-googlePrivacyDlpV2PublishSummaryToCscc =
-    GooglePrivacyDlpV2PublishSummaryToCscc'
+googlePrivacyDlpV2PublishSummaryToCscc = GooglePrivacyDlpV2PublishSummaryToCscc'
 
 instance FromJSON
-         GooglePrivacyDlpV2PublishSummaryToCscc where
+           GooglePrivacyDlpV2PublishSummaryToCscc
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2PublishSummaryToCscc"
               (\ o -> pure GooglePrivacyDlpV2PublishSummaryToCscc')
 
 instance ToJSON
-         GooglePrivacyDlpV2PublishSummaryToCscc where
+           GooglePrivacyDlpV2PublishSummaryToCscc
+         where
         toJSON = const emptyObject
 
 -- | Request message for UpdateInspectTemplate.
 --
 -- /See:/ 'googlePrivacyDlpV2UpdateInspectTemplateRequest' smart constructor.
-data GooglePrivacyDlpV2UpdateInspectTemplateRequest = GooglePrivacyDlpV2UpdateInspectTemplateRequest'
+data GooglePrivacyDlpV2UpdateInspectTemplateRequest =
+  GooglePrivacyDlpV2UpdateInspectTemplateRequest'
     { _gpdvuitrUpdateMask      :: !(Maybe GFieldMask)
     , _gpdvuitrInspectTemplate :: !(Maybe GooglePrivacyDlpV2InspectTemplate)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2UpdateInspectTemplateRequest' with the minimum fields required to make a request.
 --
@@ -2228,10 +2276,8 @@ data GooglePrivacyDlpV2UpdateInspectTemplateRequest = GooglePrivacyDlpV2UpdateIn
 googlePrivacyDlpV2UpdateInspectTemplateRequest
     :: GooglePrivacyDlpV2UpdateInspectTemplateRequest
 googlePrivacyDlpV2UpdateInspectTemplateRequest =
-    GooglePrivacyDlpV2UpdateInspectTemplateRequest'
-    { _gpdvuitrUpdateMask = Nothing
-    , _gpdvuitrInspectTemplate = Nothing
-    }
+  GooglePrivacyDlpV2UpdateInspectTemplateRequest'
+    {_gpdvuitrUpdateMask = Nothing, _gpdvuitrInspectTemplate = Nothing}
 
 -- | Mask to control which fields get updated.
 gpdvuitrUpdateMask :: Lens' GooglePrivacyDlpV2UpdateInspectTemplateRequest (Maybe GFieldMask)
@@ -2246,7 +2292,8 @@ gpdvuitrInspectTemplate
       (\ s a -> s{_gpdvuitrInspectTemplate = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2UpdateInspectTemplateRequest where
+           GooglePrivacyDlpV2UpdateInspectTemplateRequest
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2UpdateInspectTemplateRequest"
@@ -2255,7 +2302,8 @@ instance FromJSON
                    (o .:? "updateMask") <*> (o .:? "inspectTemplate"))
 
 instance ToJSON
-         GooglePrivacyDlpV2UpdateInspectTemplateRequest where
+           GooglePrivacyDlpV2UpdateInspectTemplateRequest
+         where
         toJSON
           GooglePrivacyDlpV2UpdateInspectTemplateRequest'{..}
           = object
@@ -2270,9 +2318,11 @@ instance ToJSON
 -- take into account that multiple rows correspond to the same entity.
 --
 -- /See:/ 'googlePrivacyDlpV2EntityId' smart constructor.
-newtype GooglePrivacyDlpV2EntityId = GooglePrivacyDlpV2EntityId'
+newtype GooglePrivacyDlpV2EntityId =
+  GooglePrivacyDlpV2EntityId'
     { _gpdveiField :: Maybe GooglePrivacyDlpV2FieldId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2EntityId' with the minimum fields required to make a request.
 --
@@ -2282,9 +2332,7 @@ newtype GooglePrivacyDlpV2EntityId = GooglePrivacyDlpV2EntityId'
 googlePrivacyDlpV2EntityId
     :: GooglePrivacyDlpV2EntityId
 googlePrivacyDlpV2EntityId =
-    GooglePrivacyDlpV2EntityId'
-    { _gpdveiField = Nothing
-    }
+  GooglePrivacyDlpV2EntityId' {_gpdveiField = Nothing}
 
 -- | Composite key indicating which field contains the entity identifier.
 gpdveiField :: Lens' GooglePrivacyDlpV2EntityId (Maybe GooglePrivacyDlpV2FieldId)
@@ -2304,10 +2352,12 @@ instance ToJSON GooglePrivacyDlpV2EntityId where
 -- | Container for bytes to inspect or redact.
 --
 -- /See:/ 'googlePrivacyDlpV2ByteContentItem' smart constructor.
-data GooglePrivacyDlpV2ByteContentItem = GooglePrivacyDlpV2ByteContentItem'
+data GooglePrivacyDlpV2ByteContentItem =
+  GooglePrivacyDlpV2ByteContentItem'
     { _gpdvbciData :: !(Maybe Bytes)
     , _gpdvbciType :: !(Maybe GooglePrivacyDlpV2ByteContentItemType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ByteContentItem' with the minimum fields required to make a request.
 --
@@ -2319,10 +2369,8 @@ data GooglePrivacyDlpV2ByteContentItem = GooglePrivacyDlpV2ByteContentItem'
 googlePrivacyDlpV2ByteContentItem
     :: GooglePrivacyDlpV2ByteContentItem
 googlePrivacyDlpV2ByteContentItem =
-    GooglePrivacyDlpV2ByteContentItem'
-    { _gpdvbciData = Nothing
-    , _gpdvbciType = Nothing
-    }
+  GooglePrivacyDlpV2ByteContentItem'
+    {_gpdvbciData = Nothing, _gpdvbciType = Nothing}
 
 -- | Content data to inspect or redact.
 gpdvbciData :: Lens' GooglePrivacyDlpV2ByteContentItem (Maybe ByteString)
@@ -2353,12 +2401,14 @@ instance ToJSON GooglePrivacyDlpV2ByteContentItem
 
 --
 -- /See:/ 'googlePrivacyDlpV2TaggedField' smart constructor.
-data GooglePrivacyDlpV2TaggedField = GooglePrivacyDlpV2TaggedField'
+data GooglePrivacyDlpV2TaggedField =
+  GooglePrivacyDlpV2TaggedField'
     { _gpdvtfField     :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvtfInfoType  :: !(Maybe GooglePrivacyDlpV2InfoType)
     , _gpdvtfInferred  :: !(Maybe GoogleProtobufEmpty)
     , _gpdvtfCustomTag :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2TaggedField' with the minimum fields required to make a request.
 --
@@ -2374,7 +2424,7 @@ data GooglePrivacyDlpV2TaggedField = GooglePrivacyDlpV2TaggedField'
 googlePrivacyDlpV2TaggedField
     :: GooglePrivacyDlpV2TaggedField
 googlePrivacyDlpV2TaggedField =
-    GooglePrivacyDlpV2TaggedField'
+  GooglePrivacyDlpV2TaggedField'
     { _gpdvtfField = Nothing
     , _gpdvtfInfoType = Nothing
     , _gpdvtfInferred = Nothing
@@ -2432,14 +2482,16 @@ instance ToJSON GooglePrivacyDlpV2TaggedField where
 -- | Options defining BigQuery table and row identifiers.
 --
 -- /See:/ 'googlePrivacyDlpV2BigQueryOptions' smart constructor.
-data GooglePrivacyDlpV2BigQueryOptions = GooglePrivacyDlpV2BigQueryOptions'
+data GooglePrivacyDlpV2BigQueryOptions =
+  GooglePrivacyDlpV2BigQueryOptions'
     { _gpdvbqoRowsLimit         :: !(Maybe (Textual Int64))
     , _gpdvbqoRowsLimitPercent  :: !(Maybe (Textual Int32))
     , _gpdvbqoTableReference    :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
     , _gpdvbqoIdentifyingFields :: !(Maybe [GooglePrivacyDlpV2FieldId])
     , _gpdvbqoExcludedFields    :: !(Maybe [GooglePrivacyDlpV2FieldId])
     , _gpdvbqoSampleMethod      :: !(Maybe GooglePrivacyDlpV2BigQueryOptionsSampleMethod)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2BigQueryOptions' with the minimum fields required to make a request.
 --
@@ -2459,7 +2511,7 @@ data GooglePrivacyDlpV2BigQueryOptions = GooglePrivacyDlpV2BigQueryOptions'
 googlePrivacyDlpV2BigQueryOptions
     :: GooglePrivacyDlpV2BigQueryOptions
 googlePrivacyDlpV2BigQueryOptions =
-    GooglePrivacyDlpV2BigQueryOptions'
+  GooglePrivacyDlpV2BigQueryOptions'
     { _gpdvbqoRowsLimit = Nothing
     , _gpdvbqoRowsLimitPercent = Nothing
     , _gpdvbqoTableReference = Nothing
@@ -2546,10 +2598,12 @@ instance ToJSON GooglePrivacyDlpV2BigQueryOptions
 -- | A tuple of values for the quasi-identifier columns.
 --
 -- /See:/ 'googlePrivacyDlpV2KMapEstimationQuasiIdValues' smart constructor.
-data GooglePrivacyDlpV2KMapEstimationQuasiIdValues = GooglePrivacyDlpV2KMapEstimationQuasiIdValues'
+data GooglePrivacyDlpV2KMapEstimationQuasiIdValues =
+  GooglePrivacyDlpV2KMapEstimationQuasiIdValues'
     { _gpdvkmeqivEstimatedAnonymity :: !(Maybe (Textual Int64))
     , _gpdvkmeqivQuasiIdsValues     :: !(Maybe [GooglePrivacyDlpV2Value])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KMapEstimationQuasiIdValues' with the minimum fields required to make a request.
 --
@@ -2561,7 +2615,7 @@ data GooglePrivacyDlpV2KMapEstimationQuasiIdValues = GooglePrivacyDlpV2KMapEstim
 googlePrivacyDlpV2KMapEstimationQuasiIdValues
     :: GooglePrivacyDlpV2KMapEstimationQuasiIdValues
 googlePrivacyDlpV2KMapEstimationQuasiIdValues =
-    GooglePrivacyDlpV2KMapEstimationQuasiIdValues'
+  GooglePrivacyDlpV2KMapEstimationQuasiIdValues'
     { _gpdvkmeqivEstimatedAnonymity = Nothing
     , _gpdvkmeqivQuasiIdsValues = Nothing
     }
@@ -2582,7 +2636,8 @@ gpdvkmeqivQuasiIdsValues
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2KMapEstimationQuasiIdValues where
+           GooglePrivacyDlpV2KMapEstimationQuasiIdValues
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2KMapEstimationQuasiIdValues"
@@ -2592,7 +2647,8 @@ instance FromJSON
                      (o .:? "quasiIdsValues" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2KMapEstimationQuasiIdValues where
+           GooglePrivacyDlpV2KMapEstimationQuasiIdValues
+         where
         toJSON
           GooglePrivacyDlpV2KMapEstimationQuasiIdValues'{..}
           = object
@@ -2604,9 +2660,11 @@ instance ToJSON
 -- | List of exclude infoTypes.
 --
 -- /See:/ 'googlePrivacyDlpV2ExcludeInfoTypes' smart constructor.
-newtype GooglePrivacyDlpV2ExcludeInfoTypes = GooglePrivacyDlpV2ExcludeInfoTypes'
+newtype GooglePrivacyDlpV2ExcludeInfoTypes =
+  GooglePrivacyDlpV2ExcludeInfoTypes'
     { _gpdveitInfoTypes :: Maybe [GooglePrivacyDlpV2InfoType]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ExcludeInfoTypes' with the minimum fields required to make a request.
 --
@@ -2616,9 +2674,7 @@ newtype GooglePrivacyDlpV2ExcludeInfoTypes = GooglePrivacyDlpV2ExcludeInfoTypes'
 googlePrivacyDlpV2ExcludeInfoTypes
     :: GooglePrivacyDlpV2ExcludeInfoTypes
 googlePrivacyDlpV2ExcludeInfoTypes =
-    GooglePrivacyDlpV2ExcludeInfoTypes'
-    { _gpdveitInfoTypes = Nothing
-    }
+  GooglePrivacyDlpV2ExcludeInfoTypes' {_gpdveitInfoTypes = Nothing}
 
 -- | InfoType list in ExclusionRule rule drops a finding when it overlaps or
 -- contained within with a finding of an infoType from this list. For
@@ -2652,10 +2708,12 @@ instance ToJSON GooglePrivacyDlpV2ExcludeInfoTypes
 -- | Request message for CreateInspectTemplate.
 --
 -- /See:/ 'googlePrivacyDlpV2CreateInspectTemplateRequest' smart constructor.
-data GooglePrivacyDlpV2CreateInspectTemplateRequest = GooglePrivacyDlpV2CreateInspectTemplateRequest'
+data GooglePrivacyDlpV2CreateInspectTemplateRequest =
+  GooglePrivacyDlpV2CreateInspectTemplateRequest'
     { _gpdvcitrTemplateId      :: !(Maybe Text)
     , _gpdvcitrInspectTemplate :: !(Maybe GooglePrivacyDlpV2InspectTemplate)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CreateInspectTemplateRequest' with the minimum fields required to make a request.
 --
@@ -2667,10 +2725,8 @@ data GooglePrivacyDlpV2CreateInspectTemplateRequest = GooglePrivacyDlpV2CreateIn
 googlePrivacyDlpV2CreateInspectTemplateRequest
     :: GooglePrivacyDlpV2CreateInspectTemplateRequest
 googlePrivacyDlpV2CreateInspectTemplateRequest =
-    GooglePrivacyDlpV2CreateInspectTemplateRequest'
-    { _gpdvcitrTemplateId = Nothing
-    , _gpdvcitrInspectTemplate = Nothing
-    }
+  GooglePrivacyDlpV2CreateInspectTemplateRequest'
+    {_gpdvcitrTemplateId = Nothing, _gpdvcitrInspectTemplate = Nothing}
 
 -- | The template id can contain uppercase and lowercase letters, numbers,
 -- and hyphens; that is, it must match the regular expression:
@@ -2688,7 +2744,8 @@ gpdvcitrInspectTemplate
       (\ s a -> s{_gpdvcitrInspectTemplate = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2CreateInspectTemplateRequest where
+           GooglePrivacyDlpV2CreateInspectTemplateRequest
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2CreateInspectTemplateRequest"
@@ -2697,7 +2754,8 @@ instance FromJSON
                    (o .:? "templateId") <*> (o .:? "inspectTemplate"))
 
 instance ToJSON
-         GooglePrivacyDlpV2CreateInspectTemplateRequest where
+           GooglePrivacyDlpV2CreateInspectTemplateRequest
+         where
         toJSON
           GooglePrivacyDlpV2CreateInspectTemplateRequest'{..}
           = object
@@ -2710,11 +2768,13 @@ instance ToJSON
 -- incomplete.
 --
 -- /See:/ 'googlePrivacyDlpV2PathElement' smart constructor.
-data GooglePrivacyDlpV2PathElement = GooglePrivacyDlpV2PathElement'
+data GooglePrivacyDlpV2PathElement =
+  GooglePrivacyDlpV2PathElement'
     { _gpdvpeKind :: !(Maybe Text)
     , _gpdvpeName :: !(Maybe Text)
     , _gpdvpeId   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2PathElement' with the minimum fields required to make a request.
 --
@@ -2728,11 +2788,8 @@ data GooglePrivacyDlpV2PathElement = GooglePrivacyDlpV2PathElement'
 googlePrivacyDlpV2PathElement
     :: GooglePrivacyDlpV2PathElement
 googlePrivacyDlpV2PathElement =
-    GooglePrivacyDlpV2PathElement'
-    { _gpdvpeKind = Nothing
-    , _gpdvpeName = Nothing
-    , _gpdvpeId = Nothing
-    }
+  GooglePrivacyDlpV2PathElement'
+    {_gpdvpeKind = Nothing, _gpdvpeName = Nothing, _gpdvpeId = Nothing}
 
 -- | The kind of the entity. A kind matching regex \`__.*__\` is
 -- reserved\/read-only. A kind must not contain more than 1500 bytes when
@@ -2774,9 +2831,11 @@ instance ToJSON GooglePrivacyDlpV2PathElement where
 -- estimation, not exact values.
 --
 -- /See:/ 'googlePrivacyDlpV2DeltaPresenceEstimationResult' smart constructor.
-newtype GooglePrivacyDlpV2DeltaPresenceEstimationResult = GooglePrivacyDlpV2DeltaPresenceEstimationResult'
+newtype GooglePrivacyDlpV2DeltaPresenceEstimationResult =
+  GooglePrivacyDlpV2DeltaPresenceEstimationResult'
     { _gpdvdperDeltaPresenceEstimationHistogram :: Maybe [GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DeltaPresenceEstimationResult' with the minimum fields required to make a request.
 --
@@ -2786,9 +2845,8 @@ newtype GooglePrivacyDlpV2DeltaPresenceEstimationResult = GooglePrivacyDlpV2Delt
 googlePrivacyDlpV2DeltaPresenceEstimationResult
     :: GooglePrivacyDlpV2DeltaPresenceEstimationResult
 googlePrivacyDlpV2DeltaPresenceEstimationResult =
-    GooglePrivacyDlpV2DeltaPresenceEstimationResult'
-    { _gpdvdperDeltaPresenceEstimationHistogram = Nothing
-    }
+  GooglePrivacyDlpV2DeltaPresenceEstimationResult'
+    {_gpdvdperDeltaPresenceEstimationHistogram = Nothing}
 
 -- | The intervals [min_probability, max_probability) do not overlap. If a
 -- value doesn\'t correspond to any such interval, the associated frequency
@@ -2806,7 +2864,8 @@ gpdvdperDeltaPresenceEstimationHistogram
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2DeltaPresenceEstimationResult where
+           GooglePrivacyDlpV2DeltaPresenceEstimationResult
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2DeltaPresenceEstimationResult"
@@ -2816,7 +2875,8 @@ instance FromJSON
                       mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2DeltaPresenceEstimationResult where
+           GooglePrivacyDlpV2DeltaPresenceEstimationResult
+         where
         toJSON
           GooglePrivacyDlpV2DeltaPresenceEstimationResult'{..}
           = object
@@ -2826,12 +2886,14 @@ instance ToJSON
 
 --
 -- /See:/ 'googlePrivacyDlpV2InspectJobConfig' smart constructor.
-data GooglePrivacyDlpV2InspectJobConfig = GooglePrivacyDlpV2InspectJobConfig'
+data GooglePrivacyDlpV2InspectJobConfig =
+  GooglePrivacyDlpV2InspectJobConfig'
     { _gpdvijcActions             :: !(Maybe [GooglePrivacyDlpV2Action])
     , _gpdvijcStorageConfig       :: !(Maybe GooglePrivacyDlpV2StorageConfig)
     , _gpdvijcInspectConfig       :: !(Maybe GooglePrivacyDlpV2InspectConfig)
     , _gpdvijcInspectTemplateName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InspectJobConfig' with the minimum fields required to make a request.
 --
@@ -2847,7 +2909,7 @@ data GooglePrivacyDlpV2InspectJobConfig = GooglePrivacyDlpV2InspectJobConfig'
 googlePrivacyDlpV2InspectJobConfig
     :: GooglePrivacyDlpV2InspectJobConfig
 googlePrivacyDlpV2InspectJobConfig =
-    GooglePrivacyDlpV2InspectJobConfig'
+  GooglePrivacyDlpV2InspectJobConfig'
     { _gpdvijcActions = Nothing
     , _gpdvijcStorageConfig = Nothing
     , _gpdvijcInspectConfig = Nothing
@@ -2908,10 +2970,12 @@ instance ToJSON GooglePrivacyDlpV2InspectJobConfig
 -- | A reference to a StoredInfoType to use with scanning.
 --
 -- /See:/ 'googlePrivacyDlpV2StoredType' smart constructor.
-data GooglePrivacyDlpV2StoredType = GooglePrivacyDlpV2StoredType'
+data GooglePrivacyDlpV2StoredType =
+  GooglePrivacyDlpV2StoredType'
     { _gpdvstName       :: !(Maybe Text)
     , _gpdvstCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2StoredType' with the minimum fields required to make a request.
 --
@@ -2923,10 +2987,8 @@ data GooglePrivacyDlpV2StoredType = GooglePrivacyDlpV2StoredType'
 googlePrivacyDlpV2StoredType
     :: GooglePrivacyDlpV2StoredType
 googlePrivacyDlpV2StoredType =
-    GooglePrivacyDlpV2StoredType'
-    { _gpdvstName = Nothing
-    , _gpdvstCreateTime = Nothing
-    }
+  GooglePrivacyDlpV2StoredType'
+    {_gpdvstName = Nothing, _gpdvstCreateTime = Nothing}
 
 -- | Resource name of the requested \`StoredInfoType\`, for example
 -- \`organizations\/433245324\/storedInfoTypes\/432452342\` or
@@ -2960,12 +3022,14 @@ instance ToJSON GooglePrivacyDlpV2StoredType where
 -- | The transformation to apply to the field.
 --
 -- /See:/ 'googlePrivacyDlpV2FieldTransformation' smart constructor.
-data GooglePrivacyDlpV2FieldTransformation = GooglePrivacyDlpV2FieldTransformation'
+data GooglePrivacyDlpV2FieldTransformation =
+  GooglePrivacyDlpV2FieldTransformation'
     { _gpdvftInfoTypeTransformations :: !(Maybe GooglePrivacyDlpV2InfoTypeTransformations)
     , _gpdvftPrimitiveTransformation :: !(Maybe GooglePrivacyDlpV2PrimitiveTransformation)
     , _gpdvftCondition               :: !(Maybe GooglePrivacyDlpV2RecordCondition)
     , _gpdvftFields                  :: !(Maybe [GooglePrivacyDlpV2FieldId])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2FieldTransformation' with the minimum fields required to make a request.
 --
@@ -2981,7 +3045,7 @@ data GooglePrivacyDlpV2FieldTransformation = GooglePrivacyDlpV2FieldTransformati
 googlePrivacyDlpV2FieldTransformation
     :: GooglePrivacyDlpV2FieldTransformation
 googlePrivacyDlpV2FieldTransformation =
-    GooglePrivacyDlpV2FieldTransformation'
+  GooglePrivacyDlpV2FieldTransformation'
     { _gpdvftInfoTypeTransformations = Nothing
     , _gpdvftPrimitiveTransformation = Nothing
     , _gpdvftCondition = Nothing
@@ -3020,7 +3084,8 @@ gpdvftFields
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2FieldTransformation where
+           GooglePrivacyDlpV2FieldTransformation
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2FieldTransformation"
               (\ o ->
@@ -3046,11 +3111,13 @@ instance ToJSON GooglePrivacyDlpV2FieldTransformation
 -- proximity of hotwords.
 --
 -- /See:/ 'googlePrivacyDlpV2HotwordRule' smart constructor.
-data GooglePrivacyDlpV2HotwordRule = GooglePrivacyDlpV2HotwordRule'
+data GooglePrivacyDlpV2HotwordRule =
+  GooglePrivacyDlpV2HotwordRule'
     { _gpdvhrProximity            :: !(Maybe GooglePrivacyDlpV2Proximity)
     , _gpdvhrLikelihoodAdjustment :: !(Maybe GooglePrivacyDlpV2LikelihoodAdjustment)
     , _gpdvhrHotwordRegex         :: !(Maybe GooglePrivacyDlpV2Regex)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2HotwordRule' with the minimum fields required to make a request.
 --
@@ -3064,7 +3131,7 @@ data GooglePrivacyDlpV2HotwordRule = GooglePrivacyDlpV2HotwordRule'
 googlePrivacyDlpV2HotwordRule
     :: GooglePrivacyDlpV2HotwordRule
 googlePrivacyDlpV2HotwordRule =
-    GooglePrivacyDlpV2HotwordRule'
+  GooglePrivacyDlpV2HotwordRule'
     { _gpdvhrProximity = Nothing
     , _gpdvhrLikelihoodAdjustment = Nothing
     , _gpdvhrHotwordRegex = Nothing
@@ -3117,12 +3184,14 @@ instance ToJSON GooglePrivacyDlpV2HotwordRule where
 -- it by covering it with a colored rectangle.
 --
 -- /See:/ 'googlePrivacyDlpV2RedactImageRequest' smart constructor.
-data GooglePrivacyDlpV2RedactImageRequest = GooglePrivacyDlpV2RedactImageRequest'
+data GooglePrivacyDlpV2RedactImageRequest =
+  GooglePrivacyDlpV2RedactImageRequest'
     { _gpdvrirIncludeFindings       :: !(Maybe Bool)
     , _gpdvrirInspectConfig         :: !(Maybe GooglePrivacyDlpV2InspectConfig)
     , _gpdvrirByteItem              :: !(Maybe GooglePrivacyDlpV2ByteContentItem)
     , _gpdvrirImageRedactionConfigs :: !(Maybe [GooglePrivacyDlpV2ImageRedactionConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RedactImageRequest' with the minimum fields required to make a request.
 --
@@ -3138,7 +3207,7 @@ data GooglePrivacyDlpV2RedactImageRequest = GooglePrivacyDlpV2RedactImageRequest
 googlePrivacyDlpV2RedactImageRequest
     :: GooglePrivacyDlpV2RedactImageRequest
 googlePrivacyDlpV2RedactImageRequest =
-    GooglePrivacyDlpV2RedactImageRequest'
+  GooglePrivacyDlpV2RedactImageRequest'
     { _gpdvrirIncludeFindings = Nothing
     , _gpdvrirInspectConfig = Nothing
     , _gpdvrirByteItem = Nothing
@@ -3173,7 +3242,8 @@ gpdvrirImageRedactionConfigs
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2RedactImageRequest where
+           GooglePrivacyDlpV2RedactImageRequest
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2RedactImageRequest"
               (\ o ->
@@ -3195,11 +3265,13 @@ instance ToJSON GooglePrivacyDlpV2RedactImageRequest
 
 --
 -- /See:/ 'googlePrivacyDlpV2FindingLimits' smart constructor.
-data GooglePrivacyDlpV2FindingLimits = GooglePrivacyDlpV2FindingLimits'
+data GooglePrivacyDlpV2FindingLimits =
+  GooglePrivacyDlpV2FindingLimits'
     { _gpdvflMaxFindingsPerItem     :: !(Maybe (Textual Int32))
     , _gpdvflMaxFindingsPerInfoType :: !(Maybe [GooglePrivacyDlpV2InfoTypeLimit])
     , _gpdvflMaxFindingsPerRequest  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2FindingLimits' with the minimum fields required to make a request.
 --
@@ -3213,7 +3285,7 @@ data GooglePrivacyDlpV2FindingLimits = GooglePrivacyDlpV2FindingLimits'
 googlePrivacyDlpV2FindingLimits
     :: GooglePrivacyDlpV2FindingLimits
 googlePrivacyDlpV2FindingLimits =
-    GooglePrivacyDlpV2FindingLimits'
+  GooglePrivacyDlpV2FindingLimits'
     { _gpdvflMaxFindingsPerItem = Nothing
     , _gpdvflMaxFindingsPerInfoType = Nothing
     , _gpdvflMaxFindingsPerRequest = Nothing
@@ -3280,11 +3352,13 @@ instance ToJSON GooglePrivacyDlpV2FindingLimits where
 -- the condition will evaluate to false.
 --
 -- /See:/ 'googlePrivacyDlpV2Condition' smart constructor.
-data GooglePrivacyDlpV2Condition = GooglePrivacyDlpV2Condition'
+data GooglePrivacyDlpV2Condition =
+  GooglePrivacyDlpV2Condition'
     { _gpdvcField    :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvcOperator :: !(Maybe GooglePrivacyDlpV2ConditionOperator)
     , _gpdvcValue    :: !(Maybe GooglePrivacyDlpV2Value)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Condition' with the minimum fields required to make a request.
 --
@@ -3298,11 +3372,8 @@ data GooglePrivacyDlpV2Condition = GooglePrivacyDlpV2Condition'
 googlePrivacyDlpV2Condition
     :: GooglePrivacyDlpV2Condition
 googlePrivacyDlpV2Condition =
-    GooglePrivacyDlpV2Condition'
-    { _gpdvcField = Nothing
-    , _gpdvcOperator = Nothing
-    , _gpdvcValue = Nothing
-    }
+  GooglePrivacyDlpV2Condition'
+    {_gpdvcField = Nothing, _gpdvcOperator = Nothing, _gpdvcValue = Nothing}
 
 -- | Field within the record this condition is evaluated against. [required]
 gpdvcField :: Lens' GooglePrivacyDlpV2Condition (Maybe GooglePrivacyDlpV2FieldId)
@@ -3341,12 +3412,14 @@ instance ToJSON GooglePrivacyDlpV2Condition where
 -- BigQuery.
 --
 -- /See:/ 'googlePrivacyDlpV2TimespanConfig' smart constructor.
-data GooglePrivacyDlpV2TimespanConfig = GooglePrivacyDlpV2TimespanConfig'
+data GooglePrivacyDlpV2TimespanConfig =
+  GooglePrivacyDlpV2TimespanConfig'
     { _gpdvtcTimestampField                       :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvtcStartTime                            :: !(Maybe DateTime')
     , _gpdvtcEnableAutoPopulationOfTimespanConfig :: !(Maybe Bool)
     , _gpdvtcEndTime                              :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2TimespanConfig' with the minimum fields required to make a request.
 --
@@ -3362,7 +3435,7 @@ data GooglePrivacyDlpV2TimespanConfig = GooglePrivacyDlpV2TimespanConfig'
 googlePrivacyDlpV2TimespanConfig
     :: GooglePrivacyDlpV2TimespanConfig
 googlePrivacyDlpV2TimespanConfig =
-    GooglePrivacyDlpV2TimespanConfig'
+  GooglePrivacyDlpV2TimespanConfig'
     { _gpdvtcTimestampField = Nothing
     , _gpdvtcStartTime = Nothing
     , _gpdvtcEnableAutoPopulationOfTimespanConfig = Nothing
@@ -3430,10 +3503,12 @@ instance ToJSON GooglePrivacyDlpV2TimespanConfig
 -- | Request message for CreateDeidentifyTemplate.
 --
 -- /See:/ 'googlePrivacyDlpV2CreateDeidentifyTemplateRequest' smart constructor.
-data GooglePrivacyDlpV2CreateDeidentifyTemplateRequest = GooglePrivacyDlpV2CreateDeidentifyTemplateRequest'
+data GooglePrivacyDlpV2CreateDeidentifyTemplateRequest =
+  GooglePrivacyDlpV2CreateDeidentifyTemplateRequest'
     { _gpdvcdtrTemplateId         :: !(Maybe Text)
     , _gpdvcdtrDeidentifyTemplate :: !(Maybe GooglePrivacyDlpV2DeidentifyTemplate)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CreateDeidentifyTemplateRequest' with the minimum fields required to make a request.
 --
@@ -3445,10 +3520,8 @@ data GooglePrivacyDlpV2CreateDeidentifyTemplateRequest = GooglePrivacyDlpV2Creat
 googlePrivacyDlpV2CreateDeidentifyTemplateRequest
     :: GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
 googlePrivacyDlpV2CreateDeidentifyTemplateRequest =
-    GooglePrivacyDlpV2CreateDeidentifyTemplateRequest'
-    { _gpdvcdtrTemplateId = Nothing
-    , _gpdvcdtrDeidentifyTemplate = Nothing
-    }
+  GooglePrivacyDlpV2CreateDeidentifyTemplateRequest'
+    {_gpdvcdtrTemplateId = Nothing, _gpdvcdtrDeidentifyTemplate = Nothing}
 
 -- | The template id can contain uppercase and lowercase letters, numbers,
 -- and hyphens; that is, it must match the regular expression:
@@ -3466,7 +3539,7 @@ gpdvcdtrDeidentifyTemplate
       (\ s a -> s{_gpdvcdtrDeidentifyTemplate = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
+           GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
          where
         parseJSON
           = withObject
@@ -3478,7 +3551,7 @@ instance FromJSON
                      (o .:? "deidentifyTemplate"))
 
 instance ToJSON
-         GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
+           GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
          where
         toJSON
           GooglePrivacyDlpV2CreateDeidentifyTemplateRequest'{..}
@@ -3492,9 +3565,11 @@ instance ToJSON
 -- discarded after the request finishes.
 --
 -- /See:/ 'googlePrivacyDlpV2TransientCryptoKey' smart constructor.
-newtype GooglePrivacyDlpV2TransientCryptoKey = GooglePrivacyDlpV2TransientCryptoKey'
+newtype GooglePrivacyDlpV2TransientCryptoKey =
+  GooglePrivacyDlpV2TransientCryptoKey'
     { _gpdvtckName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2TransientCryptoKey' with the minimum fields required to make a request.
 --
@@ -3504,9 +3579,7 @@ newtype GooglePrivacyDlpV2TransientCryptoKey = GooglePrivacyDlpV2TransientCrypto
 googlePrivacyDlpV2TransientCryptoKey
     :: GooglePrivacyDlpV2TransientCryptoKey
 googlePrivacyDlpV2TransientCryptoKey =
-    GooglePrivacyDlpV2TransientCryptoKey'
-    { _gpdvtckName = Nothing
-    }
+  GooglePrivacyDlpV2TransientCryptoKey' {_gpdvtckName = Nothing}
 
 -- | Name of the key. [required] This is an arbitrary string used to
 -- differentiate different keys. A unique key is generated per name: two
@@ -3519,7 +3592,8 @@ gpdvtckName
   = lens _gpdvtckName (\ s a -> s{_gpdvtckName = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2TransientCryptoKey where
+           GooglePrivacyDlpV2TransientCryptoKey
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2TransientCryptoKey"
               (\ o ->
@@ -3534,11 +3608,13 @@ instance ToJSON GooglePrivacyDlpV2TransientCryptoKey
 -- | InfoType description.
 --
 -- /See:/ 'googlePrivacyDlpV2InfoTypeDescription' smart constructor.
-data GooglePrivacyDlpV2InfoTypeDescription = GooglePrivacyDlpV2InfoTypeDescription'
+data GooglePrivacyDlpV2InfoTypeDescription =
+  GooglePrivacyDlpV2InfoTypeDescription'
     { _gpdvitdName        :: !(Maybe Text)
     , _gpdvitdDisplayName :: !(Maybe Text)
     , _gpdvitdSupportedBy :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeDescription' with the minimum fields required to make a request.
 --
@@ -3552,7 +3628,7 @@ data GooglePrivacyDlpV2InfoTypeDescription = GooglePrivacyDlpV2InfoTypeDescripti
 googlePrivacyDlpV2InfoTypeDescription
     :: GooglePrivacyDlpV2InfoTypeDescription
 googlePrivacyDlpV2InfoTypeDescription =
-    GooglePrivacyDlpV2InfoTypeDescription'
+  GooglePrivacyDlpV2InfoTypeDescription'
     { _gpdvitdName = Nothing
     , _gpdvitdDisplayName = Nothing
     , _gpdvitdSupportedBy = Nothing
@@ -3578,7 +3654,8 @@ gpdvitdSupportedBy
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2InfoTypeDescription where
+           GooglePrivacyDlpV2InfoTypeDescription
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2InfoTypeDescription"
               (\ o ->
@@ -3603,8 +3680,8 @@ instance ToJSON GooglePrivacyDlpV2InfoTypeDescription
 --
 -- /See:/ 'googleProtobufEmpty' smart constructor.
 data GoogleProtobufEmpty =
-    GoogleProtobufEmpty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleProtobufEmpty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleProtobufEmpty' with the minimum fields required to make a request.
 --
@@ -3622,9 +3699,11 @@ instance ToJSON GoogleProtobufEmpty where
 
 --
 -- /See:/ 'googleRpcStatusDetailsItem' smart constructor.
-newtype GoogleRpcStatusDetailsItem = GoogleRpcStatusDetailsItem'
+newtype GoogleRpcStatusDetailsItem =
+  GoogleRpcStatusDetailsItem'
     { _grsdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleRpcStatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -3635,9 +3714,7 @@ googleRpcStatusDetailsItem
     :: HashMap Text JSONValue -- ^ 'grsdiAddtional'
     -> GoogleRpcStatusDetailsItem
 googleRpcStatusDetailsItem pGrsdiAddtional_ =
-    GoogleRpcStatusDetailsItem'
-    { _grsdiAddtional = _Coerce # pGrsdiAddtional_
-    }
+  GoogleRpcStatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpcStatusDetailsItem (HashMap Text JSONValue)
@@ -3658,11 +3735,13 @@ instance ToJSON GoogleRpcStatusDetailsItem where
 -- | Configuration for determining how redaction of images should occur.
 --
 -- /See:/ 'googlePrivacyDlpV2ImageRedactionConfig' smart constructor.
-data GooglePrivacyDlpV2ImageRedactionConfig = GooglePrivacyDlpV2ImageRedactionConfig'
+data GooglePrivacyDlpV2ImageRedactionConfig =
+  GooglePrivacyDlpV2ImageRedactionConfig'
     { _gpdvircRedactionColor :: !(Maybe GooglePrivacyDlpV2Color)
     , _gpdvircInfoType       :: !(Maybe GooglePrivacyDlpV2InfoType)
     , _gpdvircRedactAllText  :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ImageRedactionConfig' with the minimum fields required to make a request.
 --
@@ -3676,7 +3755,7 @@ data GooglePrivacyDlpV2ImageRedactionConfig = GooglePrivacyDlpV2ImageRedactionCo
 googlePrivacyDlpV2ImageRedactionConfig
     :: GooglePrivacyDlpV2ImageRedactionConfig
 googlePrivacyDlpV2ImageRedactionConfig =
-    GooglePrivacyDlpV2ImageRedactionConfig'
+  GooglePrivacyDlpV2ImageRedactionConfig'
     { _gpdvircRedactionColor = Nothing
     , _gpdvircInfoType = Nothing
     , _gpdvircRedactAllText = Nothing
@@ -3706,7 +3785,8 @@ gpdvircRedactAllText
       (\ s a -> s{_gpdvircRedactAllText = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2ImageRedactionConfig where
+           GooglePrivacyDlpV2ImageRedactionConfig
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2ImageRedactionConfig"
               (\ o ->
@@ -3715,7 +3795,8 @@ instance FromJSON
                      (o .:? "redactAllText"))
 
 instance ToJSON
-         GooglePrivacyDlpV2ImageRedactionConfig where
+           GooglePrivacyDlpV2ImageRedactionConfig
+         where
         toJSON GooglePrivacyDlpV2ImageRedactionConfig'{..}
           = object
               (catMaybes
@@ -3726,9 +3807,11 @@ instance ToJSON
 -- | What event needs to occur for a new job to be started.
 --
 -- /See:/ 'googlePrivacyDlpV2Trigger' smart constructor.
-newtype GooglePrivacyDlpV2Trigger = GooglePrivacyDlpV2Trigger'
+newtype GooglePrivacyDlpV2Trigger =
+  GooglePrivacyDlpV2Trigger'
     { _gpdvtSchedule :: Maybe GooglePrivacyDlpV2Schedule
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Trigger' with the minimum fields required to make a request.
 --
@@ -3738,9 +3821,7 @@ newtype GooglePrivacyDlpV2Trigger = GooglePrivacyDlpV2Trigger'
 googlePrivacyDlpV2Trigger
     :: GooglePrivacyDlpV2Trigger
 googlePrivacyDlpV2Trigger =
-    GooglePrivacyDlpV2Trigger'
-    { _gpdvtSchedule = Nothing
-    }
+  GooglePrivacyDlpV2Trigger' {_gpdvtSchedule = Nothing}
 
 -- | Create a job on a repeating basis based on the elapse of time.
 gpdvtSchedule :: Lens' GooglePrivacyDlpV2Trigger (Maybe GooglePrivacyDlpV2Schedule)
@@ -3763,14 +3844,16 @@ instance ToJSON GooglePrivacyDlpV2Trigger where
 -- bucket.
 --
 -- /See:/ 'googlePrivacyDlpV2CloudStorageOptions' smart constructor.
-data GooglePrivacyDlpV2CloudStorageOptions = GooglePrivacyDlpV2CloudStorageOptions'
+data GooglePrivacyDlpV2CloudStorageOptions =
+  GooglePrivacyDlpV2CloudStorageOptions'
     { _gpdvcsoFileSet                  :: !(Maybe GooglePrivacyDlpV2FileSet)
     , _gpdvcsoBytesLimitPerFile        :: !(Maybe (Textual Int64))
     , _gpdvcsoFileTypes                :: !(Maybe [Text])
     , _gpdvcsoBytesLimitPerFilePercent :: !(Maybe (Textual Int32))
     , _gpdvcsoFilesLimitPercent        :: !(Maybe (Textual Int32))
     , _gpdvcsoSampleMethod             :: !(Maybe GooglePrivacyDlpV2CloudStorageOptionsSampleMethod)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CloudStorageOptions' with the minimum fields required to make a request.
 --
@@ -3790,7 +3873,7 @@ data GooglePrivacyDlpV2CloudStorageOptions = GooglePrivacyDlpV2CloudStorageOptio
 googlePrivacyDlpV2CloudStorageOptions
     :: GooglePrivacyDlpV2CloudStorageOptions
 googlePrivacyDlpV2CloudStorageOptions =
-    GooglePrivacyDlpV2CloudStorageOptions'
+  GooglePrivacyDlpV2CloudStorageOptions'
     { _gpdvcsoFileSet = Nothing
     , _gpdvcsoBytesLimitPerFile = Nothing
     , _gpdvcsoFileTypes = Nothing
@@ -3850,7 +3933,8 @@ gpdvcsoSampleMethod
       (\ s a -> s{_gpdvcsoSampleMethod = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2CloudStorageOptions where
+           GooglePrivacyDlpV2CloudStorageOptions
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2CloudStorageOptions"
               (\ o ->
@@ -3883,11 +3967,13 @@ instance ToJSON GooglePrivacyDlpV2CloudStorageOptions
 -- instead.
 --
 -- /See:/ 'googlePrivacyDlpV2DeltaPresenceEstimationConfig' smart constructor.
-data GooglePrivacyDlpV2DeltaPresenceEstimationConfig = GooglePrivacyDlpV2DeltaPresenceEstimationConfig'
+data GooglePrivacyDlpV2DeltaPresenceEstimationConfig =
+  GooglePrivacyDlpV2DeltaPresenceEstimationConfig'
     { _gpdvdpecAuxiliaryTables :: !(Maybe [GooglePrivacyDlpV2StatisticalTable])
     , _gpdvdpecRegionCode      :: !(Maybe Text)
     , _gpdvdpecQuasiIds        :: !(Maybe [GooglePrivacyDlpV2QuasiId])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DeltaPresenceEstimationConfig' with the minimum fields required to make a request.
 --
@@ -3901,7 +3987,7 @@ data GooglePrivacyDlpV2DeltaPresenceEstimationConfig = GooglePrivacyDlpV2DeltaPr
 googlePrivacyDlpV2DeltaPresenceEstimationConfig
     :: GooglePrivacyDlpV2DeltaPresenceEstimationConfig
 googlePrivacyDlpV2DeltaPresenceEstimationConfig =
-    GooglePrivacyDlpV2DeltaPresenceEstimationConfig'
+  GooglePrivacyDlpV2DeltaPresenceEstimationConfig'
     { _gpdvdpecAuxiliaryTables = Nothing
     , _gpdvdpecRegionCode = Nothing
     , _gpdvdpecQuasiIds = Nothing
@@ -3935,7 +4021,8 @@ gpdvdpecQuasiIds
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2DeltaPresenceEstimationConfig where
+           GooglePrivacyDlpV2DeltaPresenceEstimationConfig
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2DeltaPresenceEstimationConfig"
@@ -3946,7 +4033,8 @@ instance FromJSON
                      <*> (o .:? "quasiIds" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2DeltaPresenceEstimationConfig where
+           GooglePrivacyDlpV2DeltaPresenceEstimationConfig
+         where
         toJSON
           GooglePrivacyDlpV2DeltaPresenceEstimationConfig'{..}
           = object
@@ -3958,10 +4046,12 @@ instance ToJSON
 -- | Request message for CreateStoredInfoType.
 --
 -- /See:/ 'googlePrivacyDlpV2CreateStoredInfoTypeRequest' smart constructor.
-data GooglePrivacyDlpV2CreateStoredInfoTypeRequest = GooglePrivacyDlpV2CreateStoredInfoTypeRequest'
+data GooglePrivacyDlpV2CreateStoredInfoTypeRequest =
+  GooglePrivacyDlpV2CreateStoredInfoTypeRequest'
     { _gpdvcsitrConfig           :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
     , _gpdvcsitrStoredInfoTypeId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CreateStoredInfoTypeRequest' with the minimum fields required to make a request.
 --
@@ -3973,10 +4063,8 @@ data GooglePrivacyDlpV2CreateStoredInfoTypeRequest = GooglePrivacyDlpV2CreateSto
 googlePrivacyDlpV2CreateStoredInfoTypeRequest
     :: GooglePrivacyDlpV2CreateStoredInfoTypeRequest
 googlePrivacyDlpV2CreateStoredInfoTypeRequest =
-    GooglePrivacyDlpV2CreateStoredInfoTypeRequest'
-    { _gpdvcsitrConfig = Nothing
-    , _gpdvcsitrStoredInfoTypeId = Nothing
-    }
+  GooglePrivacyDlpV2CreateStoredInfoTypeRequest'
+    {_gpdvcsitrConfig = Nothing, _gpdvcsitrStoredInfoTypeId = Nothing}
 
 -- | Configuration of the storedInfoType to create.
 gpdvcsitrConfig :: Lens' GooglePrivacyDlpV2CreateStoredInfoTypeRequest (Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
@@ -3994,7 +4082,8 @@ gpdvcsitrStoredInfoTypeId
       (\ s a -> s{_gpdvcsitrStoredInfoTypeId = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2CreateStoredInfoTypeRequest where
+           GooglePrivacyDlpV2CreateStoredInfoTypeRequest
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2CreateStoredInfoTypeRequest"
@@ -4003,7 +4092,8 @@ instance FromJSON
                    (o .:? "config") <*> (o .:? "storedInfoTypeId"))
 
 instance ToJSON
-         GooglePrivacyDlpV2CreateStoredInfoTypeRequest where
+           GooglePrivacyDlpV2CreateStoredInfoTypeRequest
+         where
         toJSON
           GooglePrivacyDlpV2CreateStoredInfoTypeRequest'{..}
           = object
@@ -4016,10 +4106,12 @@ instance ToJSON
 -- the data corresponds to which column in the statistical model.
 --
 -- /See:/ 'googlePrivacyDlpV2QuasiIdField' smart constructor.
-data GooglePrivacyDlpV2QuasiIdField = GooglePrivacyDlpV2QuasiIdField'
+data GooglePrivacyDlpV2QuasiIdField =
+  GooglePrivacyDlpV2QuasiIdField'
     { _gpdvqifField     :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvqifCustomTag :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2QuasiIdField' with the minimum fields required to make a request.
 --
@@ -4031,10 +4123,8 @@ data GooglePrivacyDlpV2QuasiIdField = GooglePrivacyDlpV2QuasiIdField'
 googlePrivacyDlpV2QuasiIdField
     :: GooglePrivacyDlpV2QuasiIdField
 googlePrivacyDlpV2QuasiIdField =
-    GooglePrivacyDlpV2QuasiIdField'
-    { _gpdvqifField = Nothing
-    , _gpdvqifCustomTag = Nothing
-    }
+  GooglePrivacyDlpV2QuasiIdField'
+    {_gpdvqifField = Nothing, _gpdvqifCustomTag = Nothing}
 
 gpdvqifField :: Lens' GooglePrivacyDlpV2QuasiIdField (Maybe GooglePrivacyDlpV2FieldId)
 gpdvqifField
@@ -4064,9 +4154,11 @@ instance ToJSON GooglePrivacyDlpV2QuasiIdField where
 -- preserve a portion of the value.
 --
 -- /See:/ 'googlePrivacyDlpV2TimePartConfig' smart constructor.
-newtype GooglePrivacyDlpV2TimePartConfig = GooglePrivacyDlpV2TimePartConfig'
+newtype GooglePrivacyDlpV2TimePartConfig =
+  GooglePrivacyDlpV2TimePartConfig'
     { _gpdvtpcPartToExtract :: Maybe GooglePrivacyDlpV2TimePartConfigPartToExtract
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2TimePartConfig' with the minimum fields required to make a request.
 --
@@ -4076,9 +4168,7 @@ newtype GooglePrivacyDlpV2TimePartConfig = GooglePrivacyDlpV2TimePartConfig'
 googlePrivacyDlpV2TimePartConfig
     :: GooglePrivacyDlpV2TimePartConfig
 googlePrivacyDlpV2TimePartConfig =
-    GooglePrivacyDlpV2TimePartConfig'
-    { _gpdvtpcPartToExtract = Nothing
-    }
+  GooglePrivacyDlpV2TimePartConfig' {_gpdvtpcPartToExtract = Nothing}
 
 gpdvtpcPartToExtract :: Lens' GooglePrivacyDlpV2TimePartConfig (Maybe GooglePrivacyDlpV2TimePartConfigPartToExtract)
 gpdvtpcPartToExtract
@@ -4104,10 +4194,12 @@ instance ToJSON GooglePrivacyDlpV2TimePartConfig
 -- \`InspectionRuleSet\`.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectionRule' smart constructor.
-data GooglePrivacyDlpV2InspectionRule = GooglePrivacyDlpV2InspectionRule'
+data GooglePrivacyDlpV2InspectionRule =
+  GooglePrivacyDlpV2InspectionRule'
     { _gpdvirExclusionRule :: !(Maybe GooglePrivacyDlpV2ExclusionRule)
     , _gpdvirHotwordRule   :: !(Maybe GooglePrivacyDlpV2HotwordRule)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InspectionRule' with the minimum fields required to make a request.
 --
@@ -4119,10 +4211,8 @@ data GooglePrivacyDlpV2InspectionRule = GooglePrivacyDlpV2InspectionRule'
 googlePrivacyDlpV2InspectionRule
     :: GooglePrivacyDlpV2InspectionRule
 googlePrivacyDlpV2InspectionRule =
-    GooglePrivacyDlpV2InspectionRule'
-    { _gpdvirExclusionRule = Nothing
-    , _gpdvirHotwordRule = Nothing
-    }
+  GooglePrivacyDlpV2InspectionRule'
+    {_gpdvirExclusionRule = Nothing, _gpdvirHotwordRule = Nothing}
 
 -- | Exclusion rule.
 gpdvirExclusionRule :: Lens' GooglePrivacyDlpV2InspectionRule (Maybe GooglePrivacyDlpV2ExclusionRule)
@@ -4157,7 +4247,8 @@ instance ToJSON GooglePrivacyDlpV2InspectionRule
 -- question.
 --
 -- /See:/ 'googlePrivacyDlpV2CustomInfoType' smart constructor.
-data GooglePrivacyDlpV2CustomInfoType = GooglePrivacyDlpV2CustomInfoType'
+data GooglePrivacyDlpV2CustomInfoType =
+  GooglePrivacyDlpV2CustomInfoType'
     { _gpdvcitRegex          :: !(Maybe GooglePrivacyDlpV2Regex)
     , _gpdvcitStoredType     :: !(Maybe GooglePrivacyDlpV2StoredType)
     , _gpdvcitInfoType       :: !(Maybe GooglePrivacyDlpV2InfoType)
@@ -4166,7 +4257,8 @@ data GooglePrivacyDlpV2CustomInfoType = GooglePrivacyDlpV2CustomInfoType'
     , _gpdvcitDetectionRules :: !(Maybe [GooglePrivacyDlpV2DetectionRule])
     , _gpdvcitDictionary     :: !(Maybe GooglePrivacyDlpV2Dictionary)
     , _gpdvcitSurrogateType  :: !(Maybe GooglePrivacyDlpV2SurrogateType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CustomInfoType' with the minimum fields required to make a request.
 --
@@ -4190,7 +4282,7 @@ data GooglePrivacyDlpV2CustomInfoType = GooglePrivacyDlpV2CustomInfoType'
 googlePrivacyDlpV2CustomInfoType
     :: GooglePrivacyDlpV2CustomInfoType
 googlePrivacyDlpV2CustomInfoType =
-    GooglePrivacyDlpV2CustomInfoType'
+  GooglePrivacyDlpV2CustomInfoType'
     { _gpdvcitRegex = Nothing
     , _gpdvcitStoredType = Nothing
     , _gpdvcitInfoType = Nothing
@@ -4294,9 +4386,11 @@ instance ToJSON GooglePrivacyDlpV2CustomInfoType
 -- estimation, not exact values.
 --
 -- /See:/ 'googlePrivacyDlpV2KMapEstimationResult' smart constructor.
-newtype GooglePrivacyDlpV2KMapEstimationResult = GooglePrivacyDlpV2KMapEstimationResult'
+newtype GooglePrivacyDlpV2KMapEstimationResult =
+  GooglePrivacyDlpV2KMapEstimationResult'
     { _gpdvkmerKMapEstimationHistogram :: Maybe [GooglePrivacyDlpV2KMapEstimationHistogramBucket]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KMapEstimationResult' with the minimum fields required to make a request.
 --
@@ -4306,9 +4400,8 @@ newtype GooglePrivacyDlpV2KMapEstimationResult = GooglePrivacyDlpV2KMapEstimatio
 googlePrivacyDlpV2KMapEstimationResult
     :: GooglePrivacyDlpV2KMapEstimationResult
 googlePrivacyDlpV2KMapEstimationResult =
-    GooglePrivacyDlpV2KMapEstimationResult'
-    { _gpdvkmerKMapEstimationHistogram = Nothing
-    }
+  GooglePrivacyDlpV2KMapEstimationResult'
+    {_gpdvkmerKMapEstimationHistogram = Nothing}
 
 -- | The intervals [min_anonymity, max_anonymity] do not overlap. If a value
 -- doesn\'t correspond to any such interval, the associated frequency is
@@ -4325,7 +4418,8 @@ gpdvkmerKMapEstimationHistogram
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2KMapEstimationResult where
+           GooglePrivacyDlpV2KMapEstimationResult
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2KMapEstimationResult"
               (\ o ->
@@ -4333,7 +4427,8 @@ instance FromJSON
                    (o .:? "kMapEstimationHistogram" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2KMapEstimationResult where
+           GooglePrivacyDlpV2KMapEstimationResult
+         where
         toJSON GooglePrivacyDlpV2KMapEstimationResult'{..}
           = object
               (catMaybes
@@ -4344,7 +4439,8 @@ instance ToJSON
 -- \'field_transformation\', or \'record_suppress\' will be set.
 --
 -- /See:/ 'googlePrivacyDlpV2TransformationSummary' smart constructor.
-data GooglePrivacyDlpV2TransformationSummary = GooglePrivacyDlpV2TransformationSummary'
+data GooglePrivacyDlpV2TransformationSummary =
+  GooglePrivacyDlpV2TransformationSummary'
     { _gpdvtsResults              :: !(Maybe [GooglePrivacyDlpV2SummaryResult])
     , _gpdvtsField                :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvtsInfoType             :: !(Maybe GooglePrivacyDlpV2InfoType)
@@ -4352,7 +4448,8 @@ data GooglePrivacyDlpV2TransformationSummary = GooglePrivacyDlpV2TransformationS
     , _gpdvtsTransformedBytes     :: !(Maybe (Textual Int64))
     , _gpdvtsFieldTransformations :: !(Maybe [GooglePrivacyDlpV2FieldTransformation])
     , _gpdvtsTransformation       :: !(Maybe GooglePrivacyDlpV2PrimitiveTransformation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2TransformationSummary' with the minimum fields required to make a request.
 --
@@ -4374,7 +4471,7 @@ data GooglePrivacyDlpV2TransformationSummary = GooglePrivacyDlpV2TransformationS
 googlePrivacyDlpV2TransformationSummary
     :: GooglePrivacyDlpV2TransformationSummary
 googlePrivacyDlpV2TransformationSummary =
-    GooglePrivacyDlpV2TransformationSummary'
+  GooglePrivacyDlpV2TransformationSummary'
     { _gpdvtsResults = Nothing
     , _gpdvtsField = Nothing
     , _gpdvtsInfoType = Nothing
@@ -4432,7 +4529,8 @@ gpdvtsTransformation
       (\ s a -> s{_gpdvtsTransformation = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2TransformationSummary where
+           GooglePrivacyDlpV2TransformationSummary
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2TransformationSummary"
@@ -4446,7 +4544,8 @@ instance FromJSON
                      <*> (o .:? "transformation"))
 
 instance ToJSON
-         GooglePrivacyDlpV2TransformationSummary where
+           GooglePrivacyDlpV2TransformationSummary
+         where
         toJSON GooglePrivacyDlpV2TransformationSummary'{..}
           = object
               (catMaybes
@@ -4463,10 +4562,12 @@ instance ToJSON
 -- part of a detection rule.
 --
 -- /See:/ 'googlePrivacyDlpV2LikelihoodAdjustment' smart constructor.
-data GooglePrivacyDlpV2LikelihoodAdjustment = GooglePrivacyDlpV2LikelihoodAdjustment'
+data GooglePrivacyDlpV2LikelihoodAdjustment =
+  GooglePrivacyDlpV2LikelihoodAdjustment'
     { _gpdvlaFixedLikelihood    :: !(Maybe GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihood)
     , _gpdvlaRelativeLikelihood :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2LikelihoodAdjustment' with the minimum fields required to make a request.
 --
@@ -4478,10 +4579,8 @@ data GooglePrivacyDlpV2LikelihoodAdjustment = GooglePrivacyDlpV2LikelihoodAdjust
 googlePrivacyDlpV2LikelihoodAdjustment
     :: GooglePrivacyDlpV2LikelihoodAdjustment
 googlePrivacyDlpV2LikelihoodAdjustment =
-    GooglePrivacyDlpV2LikelihoodAdjustment'
-    { _gpdvlaFixedLikelihood = Nothing
-    , _gpdvlaRelativeLikelihood = Nothing
-    }
+  GooglePrivacyDlpV2LikelihoodAdjustment'
+    {_gpdvlaFixedLikelihood = Nothing, _gpdvlaRelativeLikelihood = Nothing}
 
 -- | Set the likelihood of a finding to a fixed value.
 gpdvlaFixedLikelihood :: Lens' GooglePrivacyDlpV2LikelihoodAdjustment (Maybe GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihood)
@@ -4504,7 +4603,8 @@ gpdvlaRelativeLikelihood
       . mapping _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2LikelihoodAdjustment where
+           GooglePrivacyDlpV2LikelihoodAdjustment
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2LikelihoodAdjustment"
               (\ o ->
@@ -4513,7 +4613,8 @@ instance FromJSON
                      (o .:? "relativeLikelihood"))
 
 instance ToJSON
-         GooglePrivacyDlpV2LikelihoodAdjustment where
+           GooglePrivacyDlpV2LikelihoodAdjustment
+         where
         toJSON GooglePrivacyDlpV2LikelihoodAdjustment'{..}
           = object
               (catMaybes
@@ -4524,9 +4625,11 @@ instance ToJSON
 -- | Message defining a custom regular expression.
 --
 -- /See:/ 'googlePrivacyDlpV2Regex' smart constructor.
-newtype GooglePrivacyDlpV2Regex = GooglePrivacyDlpV2Regex'
+newtype GooglePrivacyDlpV2Regex =
+  GooglePrivacyDlpV2Regex'
     { _gpdvrPattern :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Regex' with the minimum fields required to make a request.
 --
@@ -4535,10 +4638,7 @@ newtype GooglePrivacyDlpV2Regex = GooglePrivacyDlpV2Regex'
 -- * 'gpdvrPattern'
 googlePrivacyDlpV2Regex
     :: GooglePrivacyDlpV2Regex
-googlePrivacyDlpV2Regex =
-    GooglePrivacyDlpV2Regex'
-    { _gpdvrPattern = Nothing
-    }
+googlePrivacyDlpV2Regex = GooglePrivacyDlpV2Regex' {_gpdvrPattern = Nothing}
 
 -- | Pattern defining the regular expression. Its syntax
 -- (https:\/\/github.com\/google\/re2\/wiki\/Syntax) can be found under the
@@ -4561,10 +4661,12 @@ instance ToJSON GooglePrivacyDlpV2Regex where
 -- | Request message for UpdateStoredInfoType.
 --
 -- /See:/ 'googlePrivacyDlpV2UpdateStoredInfoTypeRequest' smart constructor.
-data GooglePrivacyDlpV2UpdateStoredInfoTypeRequest = GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
+data GooglePrivacyDlpV2UpdateStoredInfoTypeRequest =
+  GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
     { _gpdvusitrConfig     :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
     , _gpdvusitrUpdateMask :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2UpdateStoredInfoTypeRequest' with the minimum fields required to make a request.
 --
@@ -4576,10 +4678,8 @@ data GooglePrivacyDlpV2UpdateStoredInfoTypeRequest = GooglePrivacyDlpV2UpdateSto
 googlePrivacyDlpV2UpdateStoredInfoTypeRequest
     :: GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
 googlePrivacyDlpV2UpdateStoredInfoTypeRequest =
-    GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
-    { _gpdvusitrConfig = Nothing
-    , _gpdvusitrUpdateMask = Nothing
-    }
+  GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
+    {_gpdvusitrConfig = Nothing, _gpdvusitrUpdateMask = Nothing}
 
 -- | Updated configuration for the storedInfoType. If not provided, a new
 -- version of the storedInfoType will be created with the existing
@@ -4596,7 +4696,8 @@ gpdvusitrUpdateMask
       (\ s a -> s{_gpdvusitrUpdateMask = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2UpdateStoredInfoTypeRequest where
+           GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2UpdateStoredInfoTypeRequest"
@@ -4605,7 +4706,8 @@ instance FromJSON
                    (o .:? "config") <*> (o .:? "updateMask"))
 
 instance ToJSON
-         GooglePrivacyDlpV2UpdateStoredInfoTypeRequest where
+           GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
+         where
         toJSON
           GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'{..}
           = object
@@ -4616,10 +4718,12 @@ instance ToJSON
 -- | The set of columns\' values that share the same ldiversity value
 --
 -- /See:/ 'googlePrivacyDlpV2KAnonymityEquivalenceClass' smart constructor.
-data GooglePrivacyDlpV2KAnonymityEquivalenceClass = GooglePrivacyDlpV2KAnonymityEquivalenceClass'
+data GooglePrivacyDlpV2KAnonymityEquivalenceClass =
+  GooglePrivacyDlpV2KAnonymityEquivalenceClass'
     { _gpdvkaecEquivalenceClassSize :: !(Maybe (Textual Int64))
     , _gpdvkaecQuasiIdsValues       :: !(Maybe [GooglePrivacyDlpV2Value])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KAnonymityEquivalenceClass' with the minimum fields required to make a request.
 --
@@ -4631,10 +4735,8 @@ data GooglePrivacyDlpV2KAnonymityEquivalenceClass = GooglePrivacyDlpV2KAnonymity
 googlePrivacyDlpV2KAnonymityEquivalenceClass
     :: GooglePrivacyDlpV2KAnonymityEquivalenceClass
 googlePrivacyDlpV2KAnonymityEquivalenceClass =
-    GooglePrivacyDlpV2KAnonymityEquivalenceClass'
-    { _gpdvkaecEquivalenceClassSize = Nothing
-    , _gpdvkaecQuasiIdsValues = Nothing
-    }
+  GooglePrivacyDlpV2KAnonymityEquivalenceClass'
+    {_gpdvkaecEquivalenceClassSize = Nothing, _gpdvkaecQuasiIdsValues = Nothing}
 
 -- | Size of the equivalence class, for example number of rows with the above
 -- set of values.
@@ -4655,7 +4757,8 @@ gpdvkaecQuasiIdsValues
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2KAnonymityEquivalenceClass where
+           GooglePrivacyDlpV2KAnonymityEquivalenceClass
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2KAnonymityEquivalenceClass"
@@ -4665,7 +4768,8 @@ instance FromJSON
                      (o .:? "quasiIdsValues" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2KAnonymityEquivalenceClass where
+           GooglePrivacyDlpV2KAnonymityEquivalenceClass
+         where
         toJSON
           GooglePrivacyDlpV2KAnonymityEquivalenceClass'{..}
           = object
@@ -4677,10 +4781,12 @@ instance ToJSON
 -- | Request message for UpdateDeidentifyTemplate.
 --
 -- /See:/ 'googlePrivacyDlpV2UpdateDeidentifyTemplateRequest' smart constructor.
-data GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest = GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
+data GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest =
+  GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
     { _gpdvudtrUpdateMask         :: !(Maybe GFieldMask)
     , _gpdvudtrDeidentifyTemplate :: !(Maybe GooglePrivacyDlpV2DeidentifyTemplate)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest' with the minimum fields required to make a request.
 --
@@ -4692,10 +4798,8 @@ data GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest = GooglePrivacyDlpV2Updat
 googlePrivacyDlpV2UpdateDeidentifyTemplateRequest
     :: GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
 googlePrivacyDlpV2UpdateDeidentifyTemplateRequest =
-    GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
-    { _gpdvudtrUpdateMask = Nothing
-    , _gpdvudtrDeidentifyTemplate = Nothing
-    }
+  GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
+    {_gpdvudtrUpdateMask = Nothing, _gpdvudtrDeidentifyTemplate = Nothing}
 
 -- | Mask to control which fields get updated.
 gpdvudtrUpdateMask :: Lens' GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest (Maybe GFieldMask)
@@ -4710,7 +4814,7 @@ gpdvudtrDeidentifyTemplate
       (\ s a -> s{_gpdvudtrDeidentifyTemplate = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
+           GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
          where
         parseJSON
           = withObject
@@ -4722,7 +4826,7 @@ instance FromJSON
                      (o .:? "deidentifyTemplate"))
 
 instance ToJSON
-         GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
+           GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
          where
         toJSON
           GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'{..}
@@ -4735,10 +4839,12 @@ instance ToJSON
 -- | l-diversity metric, used for analysis of reidentification risk.
 --
 -- /See:/ 'googlePrivacyDlpV2LDiversityConfig' smart constructor.
-data GooglePrivacyDlpV2LDiversityConfig = GooglePrivacyDlpV2LDiversityConfig'
+data GooglePrivacyDlpV2LDiversityConfig =
+  GooglePrivacyDlpV2LDiversityConfig'
     { _gpdvldcSensitiveAttribute :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvldcQuasiIds           :: !(Maybe [GooglePrivacyDlpV2FieldId])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2LDiversityConfig' with the minimum fields required to make a request.
 --
@@ -4750,10 +4856,8 @@ data GooglePrivacyDlpV2LDiversityConfig = GooglePrivacyDlpV2LDiversityConfig'
 googlePrivacyDlpV2LDiversityConfig
     :: GooglePrivacyDlpV2LDiversityConfig
 googlePrivacyDlpV2LDiversityConfig =
-    GooglePrivacyDlpV2LDiversityConfig'
-    { _gpdvldcSensitiveAttribute = Nothing
-    , _gpdvldcQuasiIds = Nothing
-    }
+  GooglePrivacyDlpV2LDiversityConfig'
+    {_gpdvldcSensitiveAttribute = Nothing, _gpdvldcQuasiIds = Nothing}
 
 -- | Sensitive field for computing the l-value.
 gpdvldcSensitiveAttribute :: Lens' GooglePrivacyDlpV2LDiversityConfig (Maybe GooglePrivacyDlpV2FieldId)
@@ -4792,13 +4896,15 @@ instance ToJSON GooglePrivacyDlpV2LDiversityConfig
 -- | Request to de-identify a list of items.
 --
 -- /See:/ 'googlePrivacyDlpV2DeidentifyContentRequest' smart constructor.
-data GooglePrivacyDlpV2DeidentifyContentRequest = GooglePrivacyDlpV2DeidentifyContentRequest'
+data GooglePrivacyDlpV2DeidentifyContentRequest =
+  GooglePrivacyDlpV2DeidentifyContentRequest'
     { _gpdvdcrInspectConfig          :: !(Maybe GooglePrivacyDlpV2InspectConfig)
     , _gpdvdcrDeidentifyConfig       :: !(Maybe GooglePrivacyDlpV2DeidentifyConfig)
     , _gpdvdcrDeidentifyTemplateName :: !(Maybe Text)
     , _gpdvdcrItem                   :: !(Maybe GooglePrivacyDlpV2ContentItem)
     , _gpdvdcrInspectTemplateName    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DeidentifyContentRequest' with the minimum fields required to make a request.
 --
@@ -4816,7 +4922,7 @@ data GooglePrivacyDlpV2DeidentifyContentRequest = GooglePrivacyDlpV2DeidentifyCo
 googlePrivacyDlpV2DeidentifyContentRequest
     :: GooglePrivacyDlpV2DeidentifyContentRequest
 googlePrivacyDlpV2DeidentifyContentRequest =
-    GooglePrivacyDlpV2DeidentifyContentRequest'
+  GooglePrivacyDlpV2DeidentifyContentRequest'
     { _gpdvdcrInspectConfig = Nothing
     , _gpdvdcrDeidentifyConfig = Nothing
     , _gpdvdcrDeidentifyTemplateName = Nothing
@@ -4865,7 +4971,8 @@ gpdvdcrInspectTemplateName
       (\ s a -> s{_gpdvdcrInspectTemplateName = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2DeidentifyContentRequest where
+           GooglePrivacyDlpV2DeidentifyContentRequest
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2DeidentifyContentRequest"
@@ -4878,7 +4985,8 @@ instance FromJSON
                      <*> (o .:? "inspectTemplateName"))
 
 instance ToJSON
-         GooglePrivacyDlpV2DeidentifyContentRequest where
+           GooglePrivacyDlpV2DeidentifyContentRequest
+         where
         toJSON
           GooglePrivacyDlpV2DeidentifyContentRequest'{..}
           = object
@@ -4894,11 +5002,13 @@ instance ToJSON
 -- | Represents a color in the RGB color space.
 --
 -- /See:/ 'googlePrivacyDlpV2Color' smart constructor.
-data GooglePrivacyDlpV2Color = GooglePrivacyDlpV2Color'
+data GooglePrivacyDlpV2Color =
+  GooglePrivacyDlpV2Color'
     { _gpdvcRed   :: !(Maybe (Textual Double))
     , _gpdvcGreen :: !(Maybe (Textual Double))
     , _gpdvcBlue  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Color' with the minimum fields required to make a request.
 --
@@ -4912,11 +5022,8 @@ data GooglePrivacyDlpV2Color = GooglePrivacyDlpV2Color'
 googlePrivacyDlpV2Color
     :: GooglePrivacyDlpV2Color
 googlePrivacyDlpV2Color =
-    GooglePrivacyDlpV2Color'
-    { _gpdvcRed = Nothing
-    , _gpdvcGreen = Nothing
-    , _gpdvcBlue = Nothing
-    }
+  GooglePrivacyDlpV2Color'
+    {_gpdvcRed = Nothing, _gpdvcGreen = Nothing, _gpdvcBlue = Nothing}
 
 -- | The amount of red in the color as a value in the interval [0, 1].
 gpdvcRed :: Lens' GooglePrivacyDlpV2Color (Maybe Double)
@@ -4954,10 +5061,12 @@ instance ToJSON GooglePrivacyDlpV2Color where
 -- | The response message for listing DLP jobs.
 --
 -- /See:/ 'googlePrivacyDlpV2ListDlpJobsResponse' smart constructor.
-data GooglePrivacyDlpV2ListDlpJobsResponse = GooglePrivacyDlpV2ListDlpJobsResponse'
+data GooglePrivacyDlpV2ListDlpJobsResponse =
+  GooglePrivacyDlpV2ListDlpJobsResponse'
     { _gpdvldjrNextPageToken :: !(Maybe Text)
     , _gpdvldjrJobs          :: !(Maybe [GooglePrivacyDlpV2DlpJob])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ListDlpJobsResponse' with the minimum fields required to make a request.
 --
@@ -4969,10 +5078,8 @@ data GooglePrivacyDlpV2ListDlpJobsResponse = GooglePrivacyDlpV2ListDlpJobsRespon
 googlePrivacyDlpV2ListDlpJobsResponse
     :: GooglePrivacyDlpV2ListDlpJobsResponse
 googlePrivacyDlpV2ListDlpJobsResponse =
-    GooglePrivacyDlpV2ListDlpJobsResponse'
-    { _gpdvldjrNextPageToken = Nothing
-    , _gpdvldjrJobs = Nothing
-    }
+  GooglePrivacyDlpV2ListDlpJobsResponse'
+    {_gpdvldjrNextPageToken = Nothing, _gpdvldjrJobs = Nothing}
 
 -- | The standard List next-page token.
 gpdvldjrNextPageToken :: Lens' GooglePrivacyDlpV2ListDlpJobsResponse (Maybe Text)
@@ -4988,7 +5095,8 @@ gpdvldjrJobs
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2ListDlpJobsResponse where
+           GooglePrivacyDlpV2ListDlpJobsResponse
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2ListDlpJobsResponse"
               (\ o ->
@@ -5008,10 +5116,12 @@ instance ToJSON GooglePrivacyDlpV2ListDlpJobsResponse
 -- rule.
 --
 -- /See:/ 'googlePrivacyDlpV2Proximity' smart constructor.
-data GooglePrivacyDlpV2Proximity = GooglePrivacyDlpV2Proximity'
+data GooglePrivacyDlpV2Proximity =
+  GooglePrivacyDlpV2Proximity'
     { _gpdvpWindowAfter  :: !(Maybe (Textual Int32))
     , _gpdvpWindowBefore :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Proximity' with the minimum fields required to make a request.
 --
@@ -5023,10 +5133,8 @@ data GooglePrivacyDlpV2Proximity = GooglePrivacyDlpV2Proximity'
 googlePrivacyDlpV2Proximity
     :: GooglePrivacyDlpV2Proximity
 googlePrivacyDlpV2Proximity =
-    GooglePrivacyDlpV2Proximity'
-    { _gpdvpWindowAfter = Nothing
-    , _gpdvpWindowBefore = Nothing
-    }
+  GooglePrivacyDlpV2Proximity'
+    {_gpdvpWindowAfter = Nothing, _gpdvpWindowBefore = Nothing}
 
 -- | Number of characters after the finding to consider.
 gpdvpWindowAfter :: Lens' GooglePrivacyDlpV2Proximity (Maybe Int32)
@@ -5059,14 +5167,16 @@ instance ToJSON GooglePrivacyDlpV2Proximity where
 -- | Represents a piece of potentially sensitive content.
 --
 -- /See:/ 'googlePrivacyDlpV2Finding' smart constructor.
-data GooglePrivacyDlpV2Finding = GooglePrivacyDlpV2Finding'
+data GooglePrivacyDlpV2Finding =
+  GooglePrivacyDlpV2Finding'
     { _gpdvfLocation   :: !(Maybe GooglePrivacyDlpV2Location)
     , _gpdvfInfoType   :: !(Maybe GooglePrivacyDlpV2InfoType)
     , _gpdvfQuoteInfo  :: !(Maybe GooglePrivacyDlpV2QuoteInfo)
     , _gpdvfLikelihood :: !(Maybe GooglePrivacyDlpV2FindingLikelihood)
     , _gpdvfQuote      :: !(Maybe Text)
     , _gpdvfCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Finding' with the minimum fields required to make a request.
 --
@@ -5086,7 +5196,7 @@ data GooglePrivacyDlpV2Finding = GooglePrivacyDlpV2Finding'
 googlePrivacyDlpV2Finding
     :: GooglePrivacyDlpV2Finding
 googlePrivacyDlpV2Finding =
-    GooglePrivacyDlpV2Finding'
+  GooglePrivacyDlpV2Finding'
     { _gpdvfLocation = Nothing
     , _gpdvfInfoType = Nothing
     , _gpdvfQuoteInfo = Nothing
@@ -5164,11 +5274,13 @@ instance ToJSON GooglePrivacyDlpV2Finding where
 -- \`TransformationResultCode\` and error details occurred.
 --
 -- /See:/ 'googlePrivacyDlpV2SummaryResult' smart constructor.
-data GooglePrivacyDlpV2SummaryResult = GooglePrivacyDlpV2SummaryResult'
+data GooglePrivacyDlpV2SummaryResult =
+  GooglePrivacyDlpV2SummaryResult'
     { _gpdvsrCount   :: !(Maybe (Textual Int64))
     , _gpdvsrDetails :: !(Maybe Text)
     , _gpdvsrCode    :: !(Maybe GooglePrivacyDlpV2SummaryResultCode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2SummaryResult' with the minimum fields required to make a request.
 --
@@ -5182,11 +5294,8 @@ data GooglePrivacyDlpV2SummaryResult = GooglePrivacyDlpV2SummaryResult'
 googlePrivacyDlpV2SummaryResult
     :: GooglePrivacyDlpV2SummaryResult
 googlePrivacyDlpV2SummaryResult =
-    GooglePrivacyDlpV2SummaryResult'
-    { _gpdvsrCount = Nothing
-    , _gpdvsrDetails = Nothing
-    , _gpdvsrCode = Nothing
-    }
+  GooglePrivacyDlpV2SummaryResult'
+    {_gpdvsrCount = Nothing, _gpdvsrDetails = Nothing, _gpdvsrCode = Nothing}
 
 gpdvsrCount :: Lens' GooglePrivacyDlpV2SummaryResult (Maybe Int64)
 gpdvsrCount
@@ -5223,9 +5332,11 @@ instance ToJSON GooglePrivacyDlpV2SummaryResult where
 
 --
 -- /See:/ 'googlePrivacyDlpV2Row' smart constructor.
-newtype GooglePrivacyDlpV2Row = GooglePrivacyDlpV2Row'
+newtype GooglePrivacyDlpV2Row =
+  GooglePrivacyDlpV2Row'
     { _gpdvrValues :: Maybe [GooglePrivacyDlpV2Value]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Row' with the minimum fields required to make a request.
 --
@@ -5234,10 +5345,7 @@ newtype GooglePrivacyDlpV2Row = GooglePrivacyDlpV2Row'
 -- * 'gpdvrValues'
 googlePrivacyDlpV2Row
     :: GooglePrivacyDlpV2Row
-googlePrivacyDlpV2Row =
-    GooglePrivacyDlpV2Row'
-    { _gpdvrValues = Nothing
-    }
+googlePrivacyDlpV2Row = GooglePrivacyDlpV2Row' {_gpdvrValues = Nothing}
 
 gpdvrValues :: Lens' GooglePrivacyDlpV2Row [GooglePrivacyDlpV2Value]
 gpdvrValues
@@ -5260,18 +5368,19 @@ instance ToJSON GooglePrivacyDlpV2Row where
 --
 -- /See:/ 'googlePrivacyDlpV2ReplaceWithInfoTypeConfig' smart constructor.
 data GooglePrivacyDlpV2ReplaceWithInfoTypeConfig =
-    GooglePrivacyDlpV2ReplaceWithInfoTypeConfig'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GooglePrivacyDlpV2ReplaceWithInfoTypeConfig'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ReplaceWithInfoTypeConfig' with the minimum fields required to make a request.
 --
 googlePrivacyDlpV2ReplaceWithInfoTypeConfig
     :: GooglePrivacyDlpV2ReplaceWithInfoTypeConfig
 googlePrivacyDlpV2ReplaceWithInfoTypeConfig =
-    GooglePrivacyDlpV2ReplaceWithInfoTypeConfig'
+  GooglePrivacyDlpV2ReplaceWithInfoTypeConfig'
 
 instance FromJSON
-         GooglePrivacyDlpV2ReplaceWithInfoTypeConfig where
+           GooglePrivacyDlpV2ReplaceWithInfoTypeConfig
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2ReplaceWithInfoTypeConfig"
@@ -5279,7 +5388,8 @@ instance FromJSON
                  pure GooglePrivacyDlpV2ReplaceWithInfoTypeConfig')
 
 instance ToJSON
-         GooglePrivacyDlpV2ReplaceWithInfoTypeConfig where
+           GooglePrivacyDlpV2ReplaceWithInfoTypeConfig
+         where
         toJSON = const emptyObject
 
 -- | Represents a time of day. The date and time zone are either not
@@ -5288,12 +5398,14 @@ instance ToJSON
 -- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'googleTypeTimeOfDay' smart constructor.
-data GoogleTypeTimeOfDay = GoogleTypeTimeOfDay'
+data GoogleTypeTimeOfDay =
+  GoogleTypeTimeOfDay'
     { _gttodNanos   :: !(Maybe (Textual Int32))
     , _gttodHours   :: !(Maybe (Textual Int32))
     , _gttodMinutes :: !(Maybe (Textual Int32))
     , _gttodSeconds :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleTypeTimeOfDay' with the minimum fields required to make a request.
 --
@@ -5309,7 +5421,7 @@ data GoogleTypeTimeOfDay = GoogleTypeTimeOfDay'
 googleTypeTimeOfDay
     :: GoogleTypeTimeOfDay
 googleTypeTimeOfDay =
-    GoogleTypeTimeOfDay'
+  GoogleTypeTimeOfDay'
     { _gttodNanos = Nothing
     , _gttodHours = Nothing
     , _gttodMinutes = Nothing
@@ -5365,12 +5477,14 @@ instance ToJSON GoogleTypeTimeOfDay where
 -- in \`InspectionRuleSet\` are removed from results.
 --
 -- /See:/ 'googlePrivacyDlpV2ExclusionRule' smart constructor.
-data GooglePrivacyDlpV2ExclusionRule = GooglePrivacyDlpV2ExclusionRule'
+data GooglePrivacyDlpV2ExclusionRule =
+  GooglePrivacyDlpV2ExclusionRule'
     { _gpdverRegex            :: !(Maybe GooglePrivacyDlpV2Regex)
     , _gpdverExcludeInfoTypes :: !(Maybe GooglePrivacyDlpV2ExcludeInfoTypes)
     , _gpdverDictionary       :: !(Maybe GooglePrivacyDlpV2Dictionary)
     , _gpdverMatchingType     :: !(Maybe GooglePrivacyDlpV2ExclusionRuleMatchingType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ExclusionRule' with the minimum fields required to make a request.
 --
@@ -5386,7 +5500,7 @@ data GooglePrivacyDlpV2ExclusionRule = GooglePrivacyDlpV2ExclusionRule'
 googlePrivacyDlpV2ExclusionRule
     :: GooglePrivacyDlpV2ExclusionRule
 googlePrivacyDlpV2ExclusionRule =
-    GooglePrivacyDlpV2ExclusionRule'
+  GooglePrivacyDlpV2ExclusionRule'
     { _gpdverRegex = Nothing
     , _gpdverExcludeInfoTypes = Nothing
     , _gpdverDictionary = Nothing
@@ -5440,11 +5554,13 @@ instance ToJSON GooglePrivacyDlpV2ExclusionRule where
 -- Storage.
 --
 -- /See:/ 'googlePrivacyDlpV2CreateDlpJobRequest' smart constructor.
-data GooglePrivacyDlpV2CreateDlpJobRequest = GooglePrivacyDlpV2CreateDlpJobRequest'
+data GooglePrivacyDlpV2CreateDlpJobRequest =
+  GooglePrivacyDlpV2CreateDlpJobRequest'
     { _gpdvcdjrRiskJob    :: !(Maybe GooglePrivacyDlpV2RiskAnalysisJobConfig)
     , _gpdvcdjrJobId      :: !(Maybe Text)
     , _gpdvcdjrInspectJob :: !(Maybe GooglePrivacyDlpV2InspectJobConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CreateDlpJobRequest' with the minimum fields required to make a request.
 --
@@ -5458,7 +5574,7 @@ data GooglePrivacyDlpV2CreateDlpJobRequest = GooglePrivacyDlpV2CreateDlpJobReque
 googlePrivacyDlpV2CreateDlpJobRequest
     :: GooglePrivacyDlpV2CreateDlpJobRequest
 googlePrivacyDlpV2CreateDlpJobRequest =
-    GooglePrivacyDlpV2CreateDlpJobRequest'
+  GooglePrivacyDlpV2CreateDlpJobRequest'
     { _gpdvcdjrRiskJob = Nothing
     , _gpdvcdjrJobId = Nothing
     , _gpdvcdjrInspectJob = Nothing
@@ -5484,7 +5600,8 @@ gpdvcdjrInspectJob
       (\ s a -> s{_gpdvcdjrInspectJob = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2CreateDlpJobRequest where
+           GooglePrivacyDlpV2CreateDlpJobRequest
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2CreateDlpJobRequest"
               (\ o ->
@@ -5504,11 +5621,13 @@ instance ToJSON GooglePrivacyDlpV2CreateDlpJobRequest
 -- | Message for a unique key indicating a record that contains a finding.
 --
 -- /See:/ 'googlePrivacyDlpV2RecordKey' smart constructor.
-data GooglePrivacyDlpV2RecordKey = GooglePrivacyDlpV2RecordKey'
+data GooglePrivacyDlpV2RecordKey =
+  GooglePrivacyDlpV2RecordKey'
     { _gpdvrkIdValues     :: !(Maybe [Text])
     , _gpdvrkDatastoreKey :: !(Maybe GooglePrivacyDlpV2DatastoreKey)
     , _gpdvrkBigQueryKey  :: !(Maybe GooglePrivacyDlpV2BigQueryKey)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RecordKey' with the minimum fields required to make a request.
 --
@@ -5522,7 +5641,7 @@ data GooglePrivacyDlpV2RecordKey = GooglePrivacyDlpV2RecordKey'
 googlePrivacyDlpV2RecordKey
     :: GooglePrivacyDlpV2RecordKey
 googlePrivacyDlpV2RecordKey =
-    GooglePrivacyDlpV2RecordKey'
+  GooglePrivacyDlpV2RecordKey'
     { _gpdvrkIdValues = Nothing
     , _gpdvrkDatastoreKey = Nothing
     , _gpdvrkBigQueryKey = Nothing
@@ -5572,13 +5691,15 @@ instance ToJSON GooglePrivacyDlpV2RecordKey where
 -- to the number of uniquely identifiable records.
 --
 -- /See:/ 'googlePrivacyDlpV2KMapEstimationHistogramBucket' smart constructor.
-data GooglePrivacyDlpV2KMapEstimationHistogramBucket = GooglePrivacyDlpV2KMapEstimationHistogramBucket'
+data GooglePrivacyDlpV2KMapEstimationHistogramBucket =
+  GooglePrivacyDlpV2KMapEstimationHistogramBucket'
     { _gpdvkmehbMaxAnonymity     :: !(Maybe (Textual Int64))
     , _gpdvkmehbBucketValues     :: !(Maybe [GooglePrivacyDlpV2KMapEstimationQuasiIdValues])
     , _gpdvkmehbMinAnonymity     :: !(Maybe (Textual Int64))
     , _gpdvkmehbBucketSize       :: !(Maybe (Textual Int64))
     , _gpdvkmehbBucketValueCount :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KMapEstimationHistogramBucket' with the minimum fields required to make a request.
 --
@@ -5596,7 +5717,7 @@ data GooglePrivacyDlpV2KMapEstimationHistogramBucket = GooglePrivacyDlpV2KMapEst
 googlePrivacyDlpV2KMapEstimationHistogramBucket
     :: GooglePrivacyDlpV2KMapEstimationHistogramBucket
 googlePrivacyDlpV2KMapEstimationHistogramBucket =
-    GooglePrivacyDlpV2KMapEstimationHistogramBucket'
+  GooglePrivacyDlpV2KMapEstimationHistogramBucket'
     { _gpdvkmehbMaxAnonymity = Nothing
     , _gpdvkmehbBucketValues = Nothing
     , _gpdvkmehbMinAnonymity = Nothing
@@ -5642,7 +5763,8 @@ gpdvkmehbBucketValueCount
       . mapping _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2KMapEstimationHistogramBucket where
+           GooglePrivacyDlpV2KMapEstimationHistogramBucket
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2KMapEstimationHistogramBucket"
@@ -5655,7 +5777,8 @@ instance FromJSON
                      <*> (o .:? "bucketValueCount"))
 
 instance ToJSON
-         GooglePrivacyDlpV2KMapEstimationHistogramBucket where
+           GooglePrivacyDlpV2KMapEstimationHistogramBucket
+         where
         toJSON
           GooglePrivacyDlpV2KMapEstimationHistogramBucket'{..}
           = object
@@ -5670,10 +5793,12 @@ instance ToJSON
 -- | Response message for ListDeidentifyTemplates.
 --
 -- /See:/ 'googlePrivacyDlpV2ListDeidentifyTemplatesResponse' smart constructor.
-data GooglePrivacyDlpV2ListDeidentifyTemplatesResponse = GooglePrivacyDlpV2ListDeidentifyTemplatesResponse'
+data GooglePrivacyDlpV2ListDeidentifyTemplatesResponse =
+  GooglePrivacyDlpV2ListDeidentifyTemplatesResponse'
     { _gpdvldtrNextPageToken       :: !(Maybe Text)
     , _gpdvldtrDeidentifyTemplates :: !(Maybe [GooglePrivacyDlpV2DeidentifyTemplate])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ListDeidentifyTemplatesResponse' with the minimum fields required to make a request.
 --
@@ -5685,10 +5810,8 @@ data GooglePrivacyDlpV2ListDeidentifyTemplatesResponse = GooglePrivacyDlpV2ListD
 googlePrivacyDlpV2ListDeidentifyTemplatesResponse
     :: GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
 googlePrivacyDlpV2ListDeidentifyTemplatesResponse =
-    GooglePrivacyDlpV2ListDeidentifyTemplatesResponse'
-    { _gpdvldtrNextPageToken = Nothing
-    , _gpdvldtrDeidentifyTemplates = Nothing
-    }
+  GooglePrivacyDlpV2ListDeidentifyTemplatesResponse'
+    {_gpdvldtrNextPageToken = Nothing, _gpdvldtrDeidentifyTemplates = Nothing}
 
 -- | If the next page is available then the next page token to be used in
 -- following ListDeidentifyTemplates request.
@@ -5707,7 +5830,7 @@ gpdvldtrDeidentifyTemplates
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
+           GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
          where
         parseJSON
           = withObject
@@ -5719,7 +5842,7 @@ instance FromJSON
                      (o .:? "deidentifyTemplates" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
+           GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
          where
         toJSON
           GooglePrivacyDlpV2ListDeidentifyTemplatesResponse'{..}
@@ -5732,10 +5855,12 @@ instance ToJSON
 -- | k-anonymity metric, used for analysis of reidentification risk.
 --
 -- /See:/ 'googlePrivacyDlpV2KAnonymityConfig' smart constructor.
-data GooglePrivacyDlpV2KAnonymityConfig = GooglePrivacyDlpV2KAnonymityConfig'
+data GooglePrivacyDlpV2KAnonymityConfig =
+  GooglePrivacyDlpV2KAnonymityConfig'
     { _gpdvkacEntityId :: !(Maybe GooglePrivacyDlpV2EntityId)
     , _gpdvkacQuasiIds :: !(Maybe [GooglePrivacyDlpV2FieldId])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KAnonymityConfig' with the minimum fields required to make a request.
 --
@@ -5747,10 +5872,8 @@ data GooglePrivacyDlpV2KAnonymityConfig = GooglePrivacyDlpV2KAnonymityConfig'
 googlePrivacyDlpV2KAnonymityConfig
     :: GooglePrivacyDlpV2KAnonymityConfig
 googlePrivacyDlpV2KAnonymityConfig =
-    GooglePrivacyDlpV2KAnonymityConfig'
-    { _gpdvkacEntityId = Nothing
-    , _gpdvkacQuasiIds = Nothing
-    }
+  GooglePrivacyDlpV2KAnonymityConfig'
+    {_gpdvkacEntityId = Nothing, _gpdvkacQuasiIds = Nothing}
 
 -- | Optional message indicating that multiple rows might be associated to a
 -- single individual. If the same entity_id is associated to multiple
@@ -5796,10 +5919,12 @@ instance ToJSON GooglePrivacyDlpV2KAnonymityConfig
 -- | Results of de-identifying a ContentItem.
 --
 -- /See:/ 'googlePrivacyDlpV2DeidentifyContentResponse' smart constructor.
-data GooglePrivacyDlpV2DeidentifyContentResponse = GooglePrivacyDlpV2DeidentifyContentResponse'
+data GooglePrivacyDlpV2DeidentifyContentResponse =
+  GooglePrivacyDlpV2DeidentifyContentResponse'
     { _gOverview :: !(Maybe GooglePrivacyDlpV2TransformationOverview)
     , _gItem     :: !(Maybe GooglePrivacyDlpV2ContentItem)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DeidentifyContentResponse' with the minimum fields required to make a request.
 --
@@ -5811,10 +5936,8 @@ data GooglePrivacyDlpV2DeidentifyContentResponse = GooglePrivacyDlpV2DeidentifyC
 googlePrivacyDlpV2DeidentifyContentResponse
     :: GooglePrivacyDlpV2DeidentifyContentResponse
 googlePrivacyDlpV2DeidentifyContentResponse =
-    GooglePrivacyDlpV2DeidentifyContentResponse'
-    { _gOverview = Nothing
-    , _gItem = Nothing
-    }
+  GooglePrivacyDlpV2DeidentifyContentResponse'
+    {_gOverview = Nothing, _gItem = Nothing}
 
 -- | An overview of the changes that were made on the \`item\`.
 gOverview :: Lens' GooglePrivacyDlpV2DeidentifyContentResponse (Maybe GooglePrivacyDlpV2TransformationOverview)
@@ -5826,7 +5949,8 @@ gItem :: Lens' GooglePrivacyDlpV2DeidentifyContentResponse (Maybe GooglePrivacyD
 gItem = lens _gItem (\ s a -> s{_gItem = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2DeidentifyContentResponse where
+           GooglePrivacyDlpV2DeidentifyContentResponse
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2DeidentifyContentResponse"
@@ -5835,7 +5959,8 @@ instance FromJSON
                    (o .:? "overview") <*> (o .:? "item"))
 
 instance ToJSON
-         GooglePrivacyDlpV2DeidentifyContentResponse where
+           GooglePrivacyDlpV2DeidentifyContentResponse
+         where
         toJSON
           GooglePrivacyDlpV2DeidentifyContentResponse'{..}
           = object
@@ -5848,7 +5973,8 @@ instance ToJSON
 -- more.
 --
 -- /See:/ 'googlePrivacyDlpV2JobTrigger' smart constructor.
-data GooglePrivacyDlpV2JobTrigger = GooglePrivacyDlpV2JobTrigger'
+data GooglePrivacyDlpV2JobTrigger =
+  GooglePrivacyDlpV2JobTrigger'
     { _gpdvjtStatus      :: !(Maybe GooglePrivacyDlpV2JobTriggerStatus)
     , _gpdvjtTriggers    :: !(Maybe [GooglePrivacyDlpV2Trigger])
     , _gpdvjtLastRunTime :: !(Maybe DateTime')
@@ -5859,7 +5985,8 @@ data GooglePrivacyDlpV2JobTrigger = GooglePrivacyDlpV2JobTrigger'
     , _gpdvjtErrors      :: !(Maybe [GooglePrivacyDlpV2Error])
     , _gpdvjtDescription :: !(Maybe Text)
     , _gpdvjtCreateTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2JobTrigger' with the minimum fields required to make a request.
 --
@@ -5887,7 +6014,7 @@ data GooglePrivacyDlpV2JobTrigger = GooglePrivacyDlpV2JobTrigger'
 googlePrivacyDlpV2JobTrigger
     :: GooglePrivacyDlpV2JobTrigger
 googlePrivacyDlpV2JobTrigger =
-    GooglePrivacyDlpV2JobTrigger'
+  GooglePrivacyDlpV2JobTrigger'
     { _gpdvjtStatus = Nothing
     , _gpdvjtTriggers = Nothing
     , _gpdvjtLastRunTime = Nothing
@@ -6003,10 +6130,12 @@ instance ToJSON GooglePrivacyDlpV2JobTrigger where
 -- | Response message for ListStoredInfoTypes.
 --
 -- /See:/ 'googlePrivacyDlpV2ListStoredInfoTypesResponse' smart constructor.
-data GooglePrivacyDlpV2ListStoredInfoTypesResponse = GooglePrivacyDlpV2ListStoredInfoTypesResponse'
+data GooglePrivacyDlpV2ListStoredInfoTypesResponse =
+  GooglePrivacyDlpV2ListStoredInfoTypesResponse'
     { _gpdvlsitrNextPageToken   :: !(Maybe Text)
     , _gpdvlsitrStoredInfoTypes :: !(Maybe [GooglePrivacyDlpV2StoredInfoType])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ListStoredInfoTypesResponse' with the minimum fields required to make a request.
 --
@@ -6018,10 +6147,8 @@ data GooglePrivacyDlpV2ListStoredInfoTypesResponse = GooglePrivacyDlpV2ListStore
 googlePrivacyDlpV2ListStoredInfoTypesResponse
     :: GooglePrivacyDlpV2ListStoredInfoTypesResponse
 googlePrivacyDlpV2ListStoredInfoTypesResponse =
-    GooglePrivacyDlpV2ListStoredInfoTypesResponse'
-    { _gpdvlsitrNextPageToken = Nothing
-    , _gpdvlsitrStoredInfoTypes = Nothing
-    }
+  GooglePrivacyDlpV2ListStoredInfoTypesResponse'
+    {_gpdvlsitrNextPageToken = Nothing, _gpdvlsitrStoredInfoTypes = Nothing}
 
 -- | If the next page is available then the next page token to be used in
 -- following ListStoredInfoTypes request.
@@ -6039,7 +6166,8 @@ gpdvlsitrStoredInfoTypes
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2ListStoredInfoTypesResponse where
+           GooglePrivacyDlpV2ListStoredInfoTypesResponse
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2ListStoredInfoTypesResponse"
@@ -6049,7 +6177,8 @@ instance FromJSON
                      (o .:? "storedInfoTypes" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2ListStoredInfoTypesResponse where
+           GooglePrivacyDlpV2ListStoredInfoTypesResponse
+         where
         toJSON
           GooglePrivacyDlpV2ListStoredInfoTypesResponse'{..}
           = object
@@ -6061,12 +6190,14 @@ instance ToJSON
 -- | The set of columns\' values that share the same ldiversity value.
 --
 -- /See:/ 'googlePrivacyDlpV2LDiversityEquivalenceClass' smart constructor.
-data GooglePrivacyDlpV2LDiversityEquivalenceClass = GooglePrivacyDlpV2LDiversityEquivalenceClass'
+data GooglePrivacyDlpV2LDiversityEquivalenceClass =
+  GooglePrivacyDlpV2LDiversityEquivalenceClass'
     { _gpdvldecTopSensitiveValues         :: !(Maybe [GooglePrivacyDlpV2ValueFrequency])
     , _gpdvldecEquivalenceClassSize       :: !(Maybe (Textual Int64))
     , _gpdvldecNumDistinctSensitiveValues :: !(Maybe (Textual Int64))
     , _gpdvldecQuasiIdsValues             :: !(Maybe [GooglePrivacyDlpV2Value])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2LDiversityEquivalenceClass' with the minimum fields required to make a request.
 --
@@ -6082,7 +6213,7 @@ data GooglePrivacyDlpV2LDiversityEquivalenceClass = GooglePrivacyDlpV2LDiversity
 googlePrivacyDlpV2LDiversityEquivalenceClass
     :: GooglePrivacyDlpV2LDiversityEquivalenceClass
 googlePrivacyDlpV2LDiversityEquivalenceClass =
-    GooglePrivacyDlpV2LDiversityEquivalenceClass'
+  GooglePrivacyDlpV2LDiversityEquivalenceClass'
     { _gpdvldecTopSensitiveValues = Nothing
     , _gpdvldecEquivalenceClassSize = Nothing
     , _gpdvldecNumDistinctSensitiveValues = Nothing
@@ -6121,7 +6252,8 @@ gpdvldecQuasiIdsValues
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2LDiversityEquivalenceClass where
+           GooglePrivacyDlpV2LDiversityEquivalenceClass
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2LDiversityEquivalenceClass"
@@ -6133,7 +6265,8 @@ instance FromJSON
                      <*> (o .:? "quasiIdsValues" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2LDiversityEquivalenceClass where
+           GooglePrivacyDlpV2LDiversityEquivalenceClass
+         where
         toJSON
           GooglePrivacyDlpV2LDiversityEquivalenceClass'{..}
           = object
@@ -6149,10 +6282,12 @@ instance ToJSON
 -- | The configuration that controls how the data will change.
 --
 -- /See:/ 'googlePrivacyDlpV2DeidentifyConfig' smart constructor.
-data GooglePrivacyDlpV2DeidentifyConfig = GooglePrivacyDlpV2DeidentifyConfig'
+data GooglePrivacyDlpV2DeidentifyConfig =
+  GooglePrivacyDlpV2DeidentifyConfig'
     { _gpdvdcInfoTypeTransformations :: !(Maybe GooglePrivacyDlpV2InfoTypeTransformations)
     , _gpdvdcRecordTransformations   :: !(Maybe GooglePrivacyDlpV2RecordTransformations)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DeidentifyConfig' with the minimum fields required to make a request.
 --
@@ -6164,7 +6299,7 @@ data GooglePrivacyDlpV2DeidentifyConfig = GooglePrivacyDlpV2DeidentifyConfig'
 googlePrivacyDlpV2DeidentifyConfig
     :: GooglePrivacyDlpV2DeidentifyConfig
 googlePrivacyDlpV2DeidentifyConfig =
-    GooglePrivacyDlpV2DeidentifyConfig'
+  GooglePrivacyDlpV2DeidentifyConfig'
     { _gpdvdcInfoTypeTransformations = Nothing
     , _gpdvdcRecordTransformations = Nothing
     }
@@ -6211,12 +6346,14 @@ instance ToJSON GooglePrivacyDlpV2DeidentifyConfig
 -- modify it to a string like **3.
 --
 -- /See:/ 'googlePrivacyDlpV2CharacterMaskConfig' smart constructor.
-data GooglePrivacyDlpV2CharacterMaskConfig = GooglePrivacyDlpV2CharacterMaskConfig'
+data GooglePrivacyDlpV2CharacterMaskConfig =
+  GooglePrivacyDlpV2CharacterMaskConfig'
     { _gpdvcmcNumberToMask       :: !(Maybe (Textual Int32))
     , _gpdvcmcMaskingCharacter   :: !(Maybe Text)
     , _gpdvcmcReverseOrder       :: !(Maybe Bool)
     , _gpdvcmcCharactersToIgnore :: !(Maybe [GooglePrivacyDlpV2CharsToIgnore])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CharacterMaskConfig' with the minimum fields required to make a request.
 --
@@ -6232,7 +6369,7 @@ data GooglePrivacyDlpV2CharacterMaskConfig = GooglePrivacyDlpV2CharacterMaskConf
 googlePrivacyDlpV2CharacterMaskConfig
     :: GooglePrivacyDlpV2CharacterMaskConfig
 googlePrivacyDlpV2CharacterMaskConfig =
-    GooglePrivacyDlpV2CharacterMaskConfig'
+  GooglePrivacyDlpV2CharacterMaskConfig'
     { _gpdvcmcNumberToMask = Nothing
     , _gpdvcmcMaskingCharacter = Nothing
     , _gpdvcmcReverseOrder = Nothing
@@ -6277,7 +6414,8 @@ gpdvcmcCharactersToIgnore
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2CharacterMaskConfig where
+           GooglePrivacyDlpV2CharacterMaskConfig
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2CharacterMaskConfig"
               (\ o ->
@@ -6300,10 +6438,12 @@ instance ToJSON GooglePrivacyDlpV2CharacterMaskConfig
 -- | Options defining a data set within Google Cloud Datastore.
 --
 -- /See:/ 'googlePrivacyDlpV2DatastoreOptions' smart constructor.
-data GooglePrivacyDlpV2DatastoreOptions = GooglePrivacyDlpV2DatastoreOptions'
+data GooglePrivacyDlpV2DatastoreOptions =
+  GooglePrivacyDlpV2DatastoreOptions'
     { _gpdvdoPartitionId :: !(Maybe GooglePrivacyDlpV2PartitionId)
     , _gpdvdoKind        :: !(Maybe GooglePrivacyDlpV2KindExpression)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DatastoreOptions' with the minimum fields required to make a request.
 --
@@ -6315,10 +6455,8 @@ data GooglePrivacyDlpV2DatastoreOptions = GooglePrivacyDlpV2DatastoreOptions'
 googlePrivacyDlpV2DatastoreOptions
     :: GooglePrivacyDlpV2DatastoreOptions
 googlePrivacyDlpV2DatastoreOptions =
-    GooglePrivacyDlpV2DatastoreOptions'
-    { _gpdvdoPartitionId = Nothing
-    , _gpdvdoKind = Nothing
-    }
+  GooglePrivacyDlpV2DatastoreOptions'
+    {_gpdvdoPartitionId = Nothing, _gpdvdoKind = Nothing}
 
 -- | A partition ID identifies a grouping of entities. The grouping is always
 -- by project and namespace, however the namespace ID may be empty.
@@ -6351,10 +6489,12 @@ instance ToJSON GooglePrivacyDlpV2DatastoreOptions
 -- | A value of a field, including its frequency.
 --
 -- /See:/ 'googlePrivacyDlpV2ValueFrequency' smart constructor.
-data GooglePrivacyDlpV2ValueFrequency = GooglePrivacyDlpV2ValueFrequency'
+data GooglePrivacyDlpV2ValueFrequency =
+  GooglePrivacyDlpV2ValueFrequency'
     { _gpdvvfValue :: !(Maybe GooglePrivacyDlpV2Value)
     , _gpdvvfCount :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ValueFrequency' with the minimum fields required to make a request.
 --
@@ -6366,10 +6506,8 @@ data GooglePrivacyDlpV2ValueFrequency = GooglePrivacyDlpV2ValueFrequency'
 googlePrivacyDlpV2ValueFrequency
     :: GooglePrivacyDlpV2ValueFrequency
 googlePrivacyDlpV2ValueFrequency =
-    GooglePrivacyDlpV2ValueFrequency'
-    { _gpdvvfValue = Nothing
-    , _gpdvvfCount = Nothing
-    }
+  GooglePrivacyDlpV2ValueFrequency'
+    {_gpdvvfValue = Nothing, _gpdvvfCount = Nothing}
 
 -- | A value contained in the field in question.
 gpdvvfValue :: Lens' GooglePrivacyDlpV2ValueFrequency (Maybe GooglePrivacyDlpV2Value)
@@ -6401,12 +6539,14 @@ instance ToJSON GooglePrivacyDlpV2ValueFrequency
 -- | Bounding box encompassing detected text within an image.
 --
 -- /See:/ 'googlePrivacyDlpV2BoundingBox' smart constructor.
-data GooglePrivacyDlpV2BoundingBox = GooglePrivacyDlpV2BoundingBox'
+data GooglePrivacyDlpV2BoundingBox =
+  GooglePrivacyDlpV2BoundingBox'
     { _gpdvbbHeight :: !(Maybe (Textual Int32))
     , _gpdvbbLeft   :: !(Maybe (Textual Int32))
     , _gpdvbbWidth  :: !(Maybe (Textual Int32))
     , _gpdvbbTop    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2BoundingBox' with the minimum fields required to make a request.
 --
@@ -6422,7 +6562,7 @@ data GooglePrivacyDlpV2BoundingBox = GooglePrivacyDlpV2BoundingBox'
 googlePrivacyDlpV2BoundingBox
     :: GooglePrivacyDlpV2BoundingBox
 googlePrivacyDlpV2BoundingBox =
-    GooglePrivacyDlpV2BoundingBox'
+  GooglePrivacyDlpV2BoundingBox'
     { _gpdvbbHeight = Nothing
     , _gpdvbbLeft = Nothing
     , _gpdvbbWidth = Nothing
@@ -6477,10 +6617,12 @@ instance ToJSON GooglePrivacyDlpV2BoundingBox where
 -- project ID and namespace ID.
 --
 -- /See:/ 'googlePrivacyDlpV2PartitionId' smart constructor.
-data GooglePrivacyDlpV2PartitionId = GooglePrivacyDlpV2PartitionId'
+data GooglePrivacyDlpV2PartitionId =
+  GooglePrivacyDlpV2PartitionId'
     { _gpdvpiNamespaceId :: !(Maybe Text)
     , _gpdvpiProjectId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2PartitionId' with the minimum fields required to make a request.
 --
@@ -6492,10 +6634,8 @@ data GooglePrivacyDlpV2PartitionId = GooglePrivacyDlpV2PartitionId'
 googlePrivacyDlpV2PartitionId
     :: GooglePrivacyDlpV2PartitionId
 googlePrivacyDlpV2PartitionId =
-    GooglePrivacyDlpV2PartitionId'
-    { _gpdvpiNamespaceId = Nothing
-    , _gpdvpiProjectId = Nothing
-    }
+  GooglePrivacyDlpV2PartitionId'
+    {_gpdvpiNamespaceId = Nothing, _gpdvpiProjectId = Nothing}
 
 -- | If not empty, the ID of the namespace to which the entities belong.
 gpdvpiNamespaceId :: Lens' GooglePrivacyDlpV2PartitionId (Maybe Text)
@@ -6528,9 +6668,11 @@ instance ToJSON GooglePrivacyDlpV2PartitionId where
 -- specified. Compatible with: Inspect, Risk
 --
 -- /See:/ 'googlePrivacyDlpV2SaveFindings' smart constructor.
-newtype GooglePrivacyDlpV2SaveFindings = GooglePrivacyDlpV2SaveFindings'
+newtype GooglePrivacyDlpV2SaveFindings =
+  GooglePrivacyDlpV2SaveFindings'
     { _gpdvsfOutputConfig :: Maybe GooglePrivacyDlpV2OutputStorageConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2SaveFindings' with the minimum fields required to make a request.
 --
@@ -6540,9 +6682,7 @@ newtype GooglePrivacyDlpV2SaveFindings = GooglePrivacyDlpV2SaveFindings'
 googlePrivacyDlpV2SaveFindings
     :: GooglePrivacyDlpV2SaveFindings
 googlePrivacyDlpV2SaveFindings =
-    GooglePrivacyDlpV2SaveFindings'
-    { _gpdvsfOutputConfig = Nothing
-    }
+  GooglePrivacyDlpV2SaveFindings' {_gpdvsfOutputConfig = Nothing}
 
 gpdvsfOutputConfig :: Lens' GooglePrivacyDlpV2SaveFindings (Maybe GooglePrivacyDlpV2OutputStorageConfig)
 gpdvsfOutputConfig
@@ -6567,12 +6707,14 @@ instance ToJSON GooglePrivacyDlpV2SaveFindings where
 -- it, create timestamp, and current state.
 --
 -- /See:/ 'googlePrivacyDlpV2StoredInfoTypeVersion' smart constructor.
-data GooglePrivacyDlpV2StoredInfoTypeVersion = GooglePrivacyDlpV2StoredInfoTypeVersion'
+data GooglePrivacyDlpV2StoredInfoTypeVersion =
+  GooglePrivacyDlpV2StoredInfoTypeVersion'
     { _gpdvsitvState      :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeVersionState)
     , _gpdvsitvConfig     :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
     , _gpdvsitvErrors     :: !(Maybe [GooglePrivacyDlpV2Error])
     , _gpdvsitvCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2StoredInfoTypeVersion' with the minimum fields required to make a request.
 --
@@ -6588,7 +6730,7 @@ data GooglePrivacyDlpV2StoredInfoTypeVersion = GooglePrivacyDlpV2StoredInfoTypeV
 googlePrivacyDlpV2StoredInfoTypeVersion
     :: GooglePrivacyDlpV2StoredInfoTypeVersion
 googlePrivacyDlpV2StoredInfoTypeVersion =
-    GooglePrivacyDlpV2StoredInfoTypeVersion'
+  GooglePrivacyDlpV2StoredInfoTypeVersion'
     { _gpdvsitvState = Nothing
     , _gpdvsitvConfig = Nothing
     , _gpdvsitvErrors = Nothing
@@ -6637,7 +6779,8 @@ gpdvsitvCreateTime
       . mapping _DateTime
 
 instance FromJSON
-         GooglePrivacyDlpV2StoredInfoTypeVersion where
+           GooglePrivacyDlpV2StoredInfoTypeVersion
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2StoredInfoTypeVersion"
@@ -6648,7 +6791,8 @@ instance FromJSON
                      <*> (o .:? "createTime"))
 
 instance ToJSON
-         GooglePrivacyDlpV2StoredInfoTypeVersion where
+           GooglePrivacyDlpV2StoredInfoTypeVersion
+         where
         toJSON GooglePrivacyDlpV2StoredInfoTypeVersion'{..}
           = object
               (catMaybes
@@ -6660,9 +6804,11 @@ instance ToJSON
 -- | Response to the ListInfoTypes request.
 --
 -- /See:/ 'googlePrivacyDlpV2ListInfoTypesResponse' smart constructor.
-newtype GooglePrivacyDlpV2ListInfoTypesResponse = GooglePrivacyDlpV2ListInfoTypesResponse'
+newtype GooglePrivacyDlpV2ListInfoTypesResponse =
+  GooglePrivacyDlpV2ListInfoTypesResponse'
     { _gpdvlitrInfoTypes :: Maybe [GooglePrivacyDlpV2InfoTypeDescription]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ListInfoTypesResponse' with the minimum fields required to make a request.
 --
@@ -6672,9 +6818,7 @@ newtype GooglePrivacyDlpV2ListInfoTypesResponse = GooglePrivacyDlpV2ListInfoType
 googlePrivacyDlpV2ListInfoTypesResponse
     :: GooglePrivacyDlpV2ListInfoTypesResponse
 googlePrivacyDlpV2ListInfoTypesResponse =
-    GooglePrivacyDlpV2ListInfoTypesResponse'
-    { _gpdvlitrInfoTypes = Nothing
-    }
+  GooglePrivacyDlpV2ListInfoTypesResponse' {_gpdvlitrInfoTypes = Nothing}
 
 -- | Set of sensitive infoTypes.
 gpdvlitrInfoTypes :: Lens' GooglePrivacyDlpV2ListInfoTypesResponse [GooglePrivacyDlpV2InfoTypeDescription]
@@ -6685,7 +6829,8 @@ gpdvlitrInfoTypes
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2ListInfoTypesResponse where
+           GooglePrivacyDlpV2ListInfoTypesResponse
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2ListInfoTypesResponse"
@@ -6694,7 +6839,8 @@ instance FromJSON
                    (o .:? "infoTypes" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2ListInfoTypesResponse where
+           GooglePrivacyDlpV2ListInfoTypesResponse
+         where
         toJSON GooglePrivacyDlpV2ListInfoTypesResponse'{..}
           = object
               (catMaybes [("infoTypes" .=) <$> _gpdvlitrInfoTypes])
@@ -6702,14 +6848,16 @@ instance ToJSON
 -- | Findings container location data.
 --
 -- /See:/ 'googlePrivacyDlpV2ContentLocation' smart constructor.
-data GooglePrivacyDlpV2ContentLocation = GooglePrivacyDlpV2ContentLocation'
+data GooglePrivacyDlpV2ContentLocation =
+  GooglePrivacyDlpV2ContentLocation'
     { _gpdvclImageLocation      :: !(Maybe GooglePrivacyDlpV2ImageLocation)
     , _gpdvclContainerName      :: !(Maybe Text)
     , _gpdvclContainerTimestamp :: !(Maybe DateTime')
     , _gpdvclDocumentLocation   :: !(Maybe GooglePrivacyDlpV2DocumentLocation)
     , _gpdvclContainerVersion   :: !(Maybe Text)
     , _gpdvclRecordLocation     :: !(Maybe GooglePrivacyDlpV2RecordLocation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ContentLocation' with the minimum fields required to make a request.
 --
@@ -6729,7 +6877,7 @@ data GooglePrivacyDlpV2ContentLocation = GooglePrivacyDlpV2ContentLocation'
 googlePrivacyDlpV2ContentLocation
     :: GooglePrivacyDlpV2ContentLocation
 googlePrivacyDlpV2ContentLocation =
-    GooglePrivacyDlpV2ContentLocation'
+  GooglePrivacyDlpV2ContentLocation'
     { _gpdvclImageLocation = Nothing
     , _gpdvclContainerName = Nothing
     , _gpdvclContainerTimestamp = Nothing
@@ -6818,11 +6966,13 @@ instance ToJSON GooglePrivacyDlpV2ContentLocation
 -- reidentifiable).
 --
 -- /See:/ 'googlePrivacyDlpV2AuxiliaryTable' smart constructor.
-data GooglePrivacyDlpV2AuxiliaryTable = GooglePrivacyDlpV2AuxiliaryTable'
+data GooglePrivacyDlpV2AuxiliaryTable =
+  GooglePrivacyDlpV2AuxiliaryTable'
     { _gpdvatRelativeFrequency :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvatTable             :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
     , _gpdvatQuasiIds          :: !(Maybe [GooglePrivacyDlpV2QuasiIdField])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2AuxiliaryTable' with the minimum fields required to make a request.
 --
@@ -6836,7 +6986,7 @@ data GooglePrivacyDlpV2AuxiliaryTable = GooglePrivacyDlpV2AuxiliaryTable'
 googlePrivacyDlpV2AuxiliaryTable
     :: GooglePrivacyDlpV2AuxiliaryTable
 googlePrivacyDlpV2AuxiliaryTable =
-    GooglePrivacyDlpV2AuxiliaryTable'
+  GooglePrivacyDlpV2AuxiliaryTable'
     { _gpdvatRelativeFrequency = Nothing
     , _gpdvatTable = Nothing
     , _gpdvatQuasiIds = Nothing
@@ -6890,13 +7040,15 @@ instance ToJSON GooglePrivacyDlpV2AuxiliaryTable
 -- dataset.
 --
 -- /See:/ 'googlePrivacyDlpV2DeltaPresenceEstimationHistogramBucket' smart constructor.
-data GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket = GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket'
+data GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket =
+  GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket'
     { _gpdvdpehbBucketValues     :: !(Maybe [GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues])
     , _gpdvdpehbMaxProbability   :: !(Maybe (Textual Double))
     , _gpdvdpehbMinProbability   :: !(Maybe (Textual Double))
     , _gpdvdpehbBucketSize       :: !(Maybe (Textual Int64))
     , _gpdvdpehbBucketValueCount :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket' with the minimum fields required to make a request.
 --
@@ -6914,7 +7066,7 @@ data GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket = GooglePrivacyDlp
 googlePrivacyDlpV2DeltaPresenceEstimationHistogramBucket
     :: GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket
 googlePrivacyDlpV2DeltaPresenceEstimationHistogramBucket =
-    GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket'
+  GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket'
     { _gpdvdpehbBucketValues = Nothing
     , _gpdvdpehbMaxProbability = Nothing
     , _gpdvdpehbMinProbability = Nothing
@@ -6960,7 +7112,7 @@ gpdvdpehbBucketValueCount
       . mapping _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket
+           GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket
          where
         parseJSON
           = withObject
@@ -6975,7 +7127,7 @@ instance FromJSON
                      <*> (o .:? "bucketValueCount"))
 
 instance ToJSON
-         GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket
+           GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket
          where
         toJSON
           GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket'{..}
@@ -6991,10 +7143,12 @@ instance ToJSON
 -- | Set of files to scan.
 --
 -- /See:/ 'googlePrivacyDlpV2FileSet' smart constructor.
-data GooglePrivacyDlpV2FileSet = GooglePrivacyDlpV2FileSet'
+data GooglePrivacyDlpV2FileSet =
+  GooglePrivacyDlpV2FileSet'
     { _gpdvfsURL          :: !(Maybe Text)
     , _gpdvfsRegexFileSet :: !(Maybe GooglePrivacyDlpV2CloudStorageRegexFileSet)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2FileSet' with the minimum fields required to make a request.
 --
@@ -7006,10 +7160,8 @@ data GooglePrivacyDlpV2FileSet = GooglePrivacyDlpV2FileSet'
 googlePrivacyDlpV2FileSet
     :: GooglePrivacyDlpV2FileSet
 googlePrivacyDlpV2FileSet =
-    GooglePrivacyDlpV2FileSet'
-    { _gpdvfsURL = Nothing
-    , _gpdvfsRegexFileSet = Nothing
-    }
+  GooglePrivacyDlpV2FileSet'
+    {_gpdvfsURL = Nothing, _gpdvfsRegexFileSet = Nothing}
 
 -- | The Cloud Storage url of the file(s) to scan, in the format
 -- \`gs:\/\/\/\`. Trailing wildcard in the path is allowed. If the url ends
@@ -7047,10 +7199,12 @@ instance ToJSON GooglePrivacyDlpV2FileSet where
 -- | Response message for ListInspectTemplates.
 --
 -- /See:/ 'googlePrivacyDlpV2ListInspectTemplatesResponse' smart constructor.
-data GooglePrivacyDlpV2ListInspectTemplatesResponse = GooglePrivacyDlpV2ListInspectTemplatesResponse'
+data GooglePrivacyDlpV2ListInspectTemplatesResponse =
+  GooglePrivacyDlpV2ListInspectTemplatesResponse'
     { _gpdvlitrNextPageToken    :: !(Maybe Text)
     , _gpdvlitrInspectTemplates :: !(Maybe [GooglePrivacyDlpV2InspectTemplate])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ListInspectTemplatesResponse' with the minimum fields required to make a request.
 --
@@ -7062,10 +7216,8 @@ data GooglePrivacyDlpV2ListInspectTemplatesResponse = GooglePrivacyDlpV2ListInsp
 googlePrivacyDlpV2ListInspectTemplatesResponse
     :: GooglePrivacyDlpV2ListInspectTemplatesResponse
 googlePrivacyDlpV2ListInspectTemplatesResponse =
-    GooglePrivacyDlpV2ListInspectTemplatesResponse'
-    { _gpdvlitrNextPageToken = Nothing
-    , _gpdvlitrInspectTemplates = Nothing
-    }
+  GooglePrivacyDlpV2ListInspectTemplatesResponse'
+    {_gpdvlitrNextPageToken = Nothing, _gpdvlitrInspectTemplates = Nothing}
 
 -- | If the next page is available then the next page token to be used in
 -- following ListInspectTemplates request.
@@ -7084,7 +7236,8 @@ gpdvlitrInspectTemplates
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2ListInspectTemplatesResponse where
+           GooglePrivacyDlpV2ListInspectTemplatesResponse
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2ListInspectTemplatesResponse"
@@ -7094,7 +7247,8 @@ instance FromJSON
                      (o .:? "inspectTemplates" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2ListInspectTemplatesResponse where
+           GooglePrivacyDlpV2ListInspectTemplatesResponse
+         where
         toJSON
           GooglePrivacyDlpV2ListInspectTemplatesResponse'{..}
           = object
@@ -7106,9 +7260,11 @@ instance ToJSON
 -- | Result of the k-anonymity computation.
 --
 -- /See:/ 'googlePrivacyDlpV2KAnonymityResult' smart constructor.
-newtype GooglePrivacyDlpV2KAnonymityResult = GooglePrivacyDlpV2KAnonymityResult'
+newtype GooglePrivacyDlpV2KAnonymityResult =
+  GooglePrivacyDlpV2KAnonymityResult'
     { _gpdvkarEquivalenceClassHistogramBuckets :: Maybe [GooglePrivacyDlpV2KAnonymityHistogramBucket]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KAnonymityResult' with the minimum fields required to make a request.
 --
@@ -7118,9 +7274,8 @@ newtype GooglePrivacyDlpV2KAnonymityResult = GooglePrivacyDlpV2KAnonymityResult'
 googlePrivacyDlpV2KAnonymityResult
     :: GooglePrivacyDlpV2KAnonymityResult
 googlePrivacyDlpV2KAnonymityResult =
-    GooglePrivacyDlpV2KAnonymityResult'
-    { _gpdvkarEquivalenceClassHistogramBuckets = Nothing
-    }
+  GooglePrivacyDlpV2KAnonymityResult'
+    {_gpdvkarEquivalenceClassHistogramBuckets = Nothing}
 
 -- | Histogram of k-anonymity equivalence classes.
 gpdvkarEquivalenceClassHistogramBuckets :: Lens' GooglePrivacyDlpV2KAnonymityResult [GooglePrivacyDlpV2KAnonymityHistogramBucket]
@@ -7151,10 +7306,12 @@ instance ToJSON GooglePrivacyDlpV2KAnonymityResult
 -- | Message defining a field of a BigQuery table.
 --
 -- /See:/ 'googlePrivacyDlpV2BigQueryField' smart constructor.
-data GooglePrivacyDlpV2BigQueryField = GooglePrivacyDlpV2BigQueryField'
+data GooglePrivacyDlpV2BigQueryField =
+  GooglePrivacyDlpV2BigQueryField'
     { _gpdvbqfField :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvbqfTable :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2BigQueryField' with the minimum fields required to make a request.
 --
@@ -7166,10 +7323,8 @@ data GooglePrivacyDlpV2BigQueryField = GooglePrivacyDlpV2BigQueryField'
 googlePrivacyDlpV2BigQueryField
     :: GooglePrivacyDlpV2BigQueryField
 googlePrivacyDlpV2BigQueryField =
-    GooglePrivacyDlpV2BigQueryField'
-    { _gpdvbqfField = Nothing
-    , _gpdvbqfTable = Nothing
-    }
+  GooglePrivacyDlpV2BigQueryField'
+    {_gpdvbqfField = Nothing, _gpdvbqfTable = Nothing}
 
 -- | Designated field in the BigQuery table.
 gpdvbqfField :: Lens' GooglePrivacyDlpV2BigQueryField (Maybe GooglePrivacyDlpV2FieldId)
@@ -7199,10 +7354,12 @@ instance ToJSON GooglePrivacyDlpV2BigQueryField where
 -- | Cloud repository for storing output.
 --
 -- /See:/ 'googlePrivacyDlpV2OutputStorageConfig' smart constructor.
-data GooglePrivacyDlpV2OutputStorageConfig = GooglePrivacyDlpV2OutputStorageConfig'
+data GooglePrivacyDlpV2OutputStorageConfig =
+  GooglePrivacyDlpV2OutputStorageConfig'
     { _gpdvoscOutputSchema :: !(Maybe GooglePrivacyDlpV2OutputStorageConfigOutputSchema)
     , _gpdvoscTable        :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2OutputStorageConfig' with the minimum fields required to make a request.
 --
@@ -7214,10 +7371,8 @@ data GooglePrivacyDlpV2OutputStorageConfig = GooglePrivacyDlpV2OutputStorageConf
 googlePrivacyDlpV2OutputStorageConfig
     :: GooglePrivacyDlpV2OutputStorageConfig
 googlePrivacyDlpV2OutputStorageConfig =
-    GooglePrivacyDlpV2OutputStorageConfig'
-    { _gpdvoscOutputSchema = Nothing
-    , _gpdvoscTable = Nothing
-    }
+  GooglePrivacyDlpV2OutputStorageConfig'
+    {_gpdvoscOutputSchema = Nothing, _gpdvoscTable = Nothing}
 
 -- | Schema used for writing the findings for Inspect jobs. This field is
 -- only used for Inspect and must be unspecified for Risk jobs. Columns are
@@ -7248,7 +7403,8 @@ gpdvoscTable
   = lens _gpdvoscTable (\ s a -> s{_gpdvoscTable = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2OutputStorageConfig where
+           GooglePrivacyDlpV2OutputStorageConfig
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2OutputStorageConfig"
               (\ o ->
@@ -7266,9 +7422,11 @@ instance ToJSON GooglePrivacyDlpV2OutputStorageConfig
 -- | Message representing a set of files in Cloud Storage.
 --
 -- /See:/ 'googlePrivacyDlpV2CloudStorageFileSet' smart constructor.
-newtype GooglePrivacyDlpV2CloudStorageFileSet = GooglePrivacyDlpV2CloudStorageFileSet'
+newtype GooglePrivacyDlpV2CloudStorageFileSet =
+  GooglePrivacyDlpV2CloudStorageFileSet'
     { _gpdvcsfsURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CloudStorageFileSet' with the minimum fields required to make a request.
 --
@@ -7278,9 +7436,7 @@ newtype GooglePrivacyDlpV2CloudStorageFileSet = GooglePrivacyDlpV2CloudStorageFi
 googlePrivacyDlpV2CloudStorageFileSet
     :: GooglePrivacyDlpV2CloudStorageFileSet
 googlePrivacyDlpV2CloudStorageFileSet =
-    GooglePrivacyDlpV2CloudStorageFileSet'
-    { _gpdvcsfsURL = Nothing
-    }
+  GooglePrivacyDlpV2CloudStorageFileSet' {_gpdvcsfsURL = Nothing}
 
 -- | The url, in the format \`gs:\/\/\/\`. Trailing wildcard in the path is
 -- allowed.
@@ -7289,7 +7445,8 @@ gpdvcsfsURL
   = lens _gpdvcsfsURL (\ s a -> s{_gpdvcsfsURL = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2CloudStorageFileSet where
+           GooglePrivacyDlpV2CloudStorageFileSet
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2CloudStorageFileSet"
               (\ o ->
@@ -7307,9 +7464,11 @@ instance ToJSON GooglePrivacyDlpV2CloudStorageFileSet
 -- specific info_type.
 --
 -- /See:/ 'googlePrivacyDlpV2InfoTypeTransformations' smart constructor.
-newtype GooglePrivacyDlpV2InfoTypeTransformations = GooglePrivacyDlpV2InfoTypeTransformations'
+newtype GooglePrivacyDlpV2InfoTypeTransformations =
+  GooglePrivacyDlpV2InfoTypeTransformations'
     { _gpdvittTransformations :: Maybe [GooglePrivacyDlpV2InfoTypeTransformation]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeTransformations' with the minimum fields required to make a request.
 --
@@ -7319,9 +7478,7 @@ newtype GooglePrivacyDlpV2InfoTypeTransformations = GooglePrivacyDlpV2InfoTypeTr
 googlePrivacyDlpV2InfoTypeTransformations
     :: GooglePrivacyDlpV2InfoTypeTransformations
 googlePrivacyDlpV2InfoTypeTransformations =
-    GooglePrivacyDlpV2InfoTypeTransformations'
-    { _gpdvittTransformations = Nothing
-    }
+  GooglePrivacyDlpV2InfoTypeTransformations' {_gpdvittTransformations = Nothing}
 
 -- | Transformation for each infoType. Cannot specify more than one for a
 -- given infoType. [required]
@@ -7333,7 +7490,8 @@ gpdvittTransformations
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2InfoTypeTransformations where
+           GooglePrivacyDlpV2InfoTypeTransformations
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2InfoTypeTransformations"
@@ -7342,7 +7500,8 @@ instance FromJSON
                    (o .:? "transformations" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2InfoTypeTransformations where
+           GooglePrivacyDlpV2InfoTypeTransformations
+         where
         toJSON GooglePrivacyDlpV2InfoTypeTransformations'{..}
           = object
               (catMaybes
@@ -7353,10 +7512,12 @@ instance ToJSON
 -- a crypto transformation using a kms-wrapped crypto key: dlp.kms.encrypt
 --
 -- /See:/ 'googlePrivacyDlpV2KmsWrAppedCryptoKey' smart constructor.
-data GooglePrivacyDlpV2KmsWrAppedCryptoKey = GooglePrivacyDlpV2KmsWrAppedCryptoKey'
+data GooglePrivacyDlpV2KmsWrAppedCryptoKey =
+  GooglePrivacyDlpV2KmsWrAppedCryptoKey'
     { _gpdvkwackWrAppedKey    :: !(Maybe Bytes)
     , _gpdvkwackCryptoKeyName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KmsWrAppedCryptoKey' with the minimum fields required to make a request.
 --
@@ -7368,10 +7529,8 @@ data GooglePrivacyDlpV2KmsWrAppedCryptoKey = GooglePrivacyDlpV2KmsWrAppedCryptoK
 googlePrivacyDlpV2KmsWrAppedCryptoKey
     :: GooglePrivacyDlpV2KmsWrAppedCryptoKey
 googlePrivacyDlpV2KmsWrAppedCryptoKey =
-    GooglePrivacyDlpV2KmsWrAppedCryptoKey'
-    { _gpdvkwackWrAppedKey = Nothing
-    , _gpdvkwackCryptoKeyName = Nothing
-    }
+  GooglePrivacyDlpV2KmsWrAppedCryptoKey'
+    {_gpdvkwackWrAppedKey = Nothing, _gpdvkwackCryptoKeyName = Nothing}
 
 -- | The wrapped data crypto key. [required]
 gpdvkwackWrAppedKey :: Lens' GooglePrivacyDlpV2KmsWrAppedCryptoKey (Maybe ByteString)
@@ -7387,7 +7546,8 @@ gpdvkwackCryptoKeyName
       (\ s a -> s{_gpdvkwackCryptoKeyName = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2KmsWrAppedCryptoKey where
+           GooglePrivacyDlpV2KmsWrAppedCryptoKey
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2KmsWrAppedCryptoKey"
               (\ o ->
@@ -7405,9 +7565,11 @@ instance ToJSON GooglePrivacyDlpV2KmsWrAppedCryptoKey
 -- | Results of inspecting an item.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectContentResponse' smart constructor.
-newtype GooglePrivacyDlpV2InspectContentResponse = GooglePrivacyDlpV2InspectContentResponse'
+newtype GooglePrivacyDlpV2InspectContentResponse =
+  GooglePrivacyDlpV2InspectContentResponse'
     { _gpdvicrResult :: Maybe GooglePrivacyDlpV2InspectResult
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InspectContentResponse' with the minimum fields required to make a request.
 --
@@ -7417,9 +7579,7 @@ newtype GooglePrivacyDlpV2InspectContentResponse = GooglePrivacyDlpV2InspectCont
 googlePrivacyDlpV2InspectContentResponse
     :: GooglePrivacyDlpV2InspectContentResponse
 googlePrivacyDlpV2InspectContentResponse =
-    GooglePrivacyDlpV2InspectContentResponse'
-    { _gpdvicrResult = Nothing
-    }
+  GooglePrivacyDlpV2InspectContentResponse' {_gpdvicrResult = Nothing}
 
 -- | The findings.
 gpdvicrResult :: Lens' GooglePrivacyDlpV2InspectContentResponse (Maybe GooglePrivacyDlpV2InspectResult)
@@ -7428,7 +7588,8 @@ gpdvicrResult
       (\ s a -> s{_gpdvicrResult = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2InspectContentResponse where
+           GooglePrivacyDlpV2InspectContentResponse
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2InspectContentResponse"
@@ -7437,20 +7598,23 @@ instance FromJSON
                    (o .:? "result"))
 
 instance ToJSON
-         GooglePrivacyDlpV2InspectContentResponse where
+           GooglePrivacyDlpV2InspectContentResponse
+         where
         toJSON GooglePrivacyDlpV2InspectContentResponse'{..}
           = object
               (catMaybes [("result" .=) <$> _gpdvicrResult])
 
 --
 -- /See:/ 'googlePrivacyDlpV2LDiversityHistogramBucket' smart constructor.
-data GooglePrivacyDlpV2LDiversityHistogramBucket = GooglePrivacyDlpV2LDiversityHistogramBucket'
+data GooglePrivacyDlpV2LDiversityHistogramBucket =
+  GooglePrivacyDlpV2LDiversityHistogramBucket'
     { _gpdvldhbBucketValues                      :: !(Maybe [GooglePrivacyDlpV2LDiversityEquivalenceClass])
     , _gpdvldhbSensitiveValueFrequencyLowerBound :: !(Maybe (Textual Int64))
     , _gpdvldhbSensitiveValueFrequencyUpperBound :: !(Maybe (Textual Int64))
     , _gpdvldhbBucketSize                        :: !(Maybe (Textual Int64))
     , _gpdvldhbBucketValueCount                  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2LDiversityHistogramBucket' with the minimum fields required to make a request.
 --
@@ -7468,7 +7632,7 @@ data GooglePrivacyDlpV2LDiversityHistogramBucket = GooglePrivacyDlpV2LDiversityH
 googlePrivacyDlpV2LDiversityHistogramBucket
     :: GooglePrivacyDlpV2LDiversityHistogramBucket
 googlePrivacyDlpV2LDiversityHistogramBucket =
-    GooglePrivacyDlpV2LDiversityHistogramBucket'
+  GooglePrivacyDlpV2LDiversityHistogramBucket'
     { _gpdvldhbBucketValues = Nothing
     , _gpdvldhbSensitiveValueFrequencyLowerBound = Nothing
     , _gpdvldhbSensitiveValueFrequencyUpperBound = Nothing
@@ -7518,7 +7682,8 @@ gpdvldhbBucketValueCount
       . mapping _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2LDiversityHistogramBucket where
+           GooglePrivacyDlpV2LDiversityHistogramBucket
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2LDiversityHistogramBucket"
@@ -7531,7 +7696,8 @@ instance FromJSON
                      <*> (o .:? "bucketValueCount"))
 
 instance ToJSON
-         GooglePrivacyDlpV2LDiversityHistogramBucket where
+           GooglePrivacyDlpV2LDiversityHistogramBucket
+         where
         toJSON
           GooglePrivacyDlpV2LDiversityHistogramBucket'{..}
           = object
@@ -7548,10 +7714,12 @@ instance ToJSON
 -- | Results of re-identifying a item.
 --
 -- /See:/ 'googlePrivacyDlpV2ReidentifyContentResponse' smart constructor.
-data GooglePrivacyDlpV2ReidentifyContentResponse = GooglePrivacyDlpV2ReidentifyContentResponse'
+data GooglePrivacyDlpV2ReidentifyContentResponse =
+  GooglePrivacyDlpV2ReidentifyContentResponse'
     { _gpdvrcrOverview :: !(Maybe GooglePrivacyDlpV2TransformationOverview)
     , _gpdvrcrItem     :: !(Maybe GooglePrivacyDlpV2ContentItem)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ReidentifyContentResponse' with the minimum fields required to make a request.
 --
@@ -7563,10 +7731,8 @@ data GooglePrivacyDlpV2ReidentifyContentResponse = GooglePrivacyDlpV2ReidentifyC
 googlePrivacyDlpV2ReidentifyContentResponse
     :: GooglePrivacyDlpV2ReidentifyContentResponse
 googlePrivacyDlpV2ReidentifyContentResponse =
-    GooglePrivacyDlpV2ReidentifyContentResponse'
-    { _gpdvrcrOverview = Nothing
-    , _gpdvrcrItem = Nothing
-    }
+  GooglePrivacyDlpV2ReidentifyContentResponse'
+    {_gpdvrcrOverview = Nothing, _gpdvrcrItem = Nothing}
 
 -- | An overview of the changes that were made to the \`item\`.
 gpdvrcrOverview :: Lens' GooglePrivacyDlpV2ReidentifyContentResponse (Maybe GooglePrivacyDlpV2TransformationOverview)
@@ -7580,7 +7746,8 @@ gpdvrcrItem
   = lens _gpdvrcrItem (\ s a -> s{_gpdvrcrItem = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2ReidentifyContentResponse where
+           GooglePrivacyDlpV2ReidentifyContentResponse
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2ReidentifyContentResponse"
@@ -7589,7 +7756,8 @@ instance FromJSON
                    (o .:? "overview") <*> (o .:? "item"))
 
 instance ToJSON
-         GooglePrivacyDlpV2ReidentifyContentResponse where
+           GooglePrivacyDlpV2ReidentifyContentResponse
+         where
         toJSON
           GooglePrivacyDlpV2ReidentifyContentResponse'{..}
           = object
@@ -7600,10 +7768,12 @@ instance ToJSON
 -- | An expression, consisting or an operator and conditions.
 --
 -- /See:/ 'googlePrivacyDlpV2Expressions' smart constructor.
-data GooglePrivacyDlpV2Expressions = GooglePrivacyDlpV2Expressions'
+data GooglePrivacyDlpV2Expressions =
+  GooglePrivacyDlpV2Expressions'
     { _gpdveLogicalOperator :: !(Maybe GooglePrivacyDlpV2ExpressionsLogicalOperator)
     , _gpdveConditions      :: !(Maybe GooglePrivacyDlpV2Conditions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Expressions' with the minimum fields required to make a request.
 --
@@ -7615,10 +7785,8 @@ data GooglePrivacyDlpV2Expressions = GooglePrivacyDlpV2Expressions'
 googlePrivacyDlpV2Expressions
     :: GooglePrivacyDlpV2Expressions
 googlePrivacyDlpV2Expressions =
-    GooglePrivacyDlpV2Expressions'
-    { _gpdveLogicalOperator = Nothing
-    , _gpdveConditions = Nothing
-    }
+  GooglePrivacyDlpV2Expressions'
+    {_gpdveLogicalOperator = Nothing, _gpdveConditions = Nothing}
 
 -- | The operator to apply to the result of conditions. Default and currently
 -- only supported value is \`AND\`.
@@ -7649,12 +7817,14 @@ instance ToJSON GooglePrivacyDlpV2Expressions where
 -- | Message for a date time object. e.g. 2018-01-01, 5th August.
 --
 -- /See:/ 'googlePrivacyDlpV2DateTime' smart constructor.
-data GooglePrivacyDlpV2DateTime = GooglePrivacyDlpV2DateTime'
+data GooglePrivacyDlpV2DateTime =
+  GooglePrivacyDlpV2DateTime'
     { _gpdvdtTime      :: !(Maybe GoogleTypeTimeOfDay)
     , _gpdvdtDate      :: !(Maybe GoogleTypeDate)
     , _gpdvdtTimeZone  :: !(Maybe GooglePrivacyDlpV2TimeZone)
     , _gpdvdtDayOfWeek :: !(Maybe GooglePrivacyDlpV2DateTimeDayOfWeek)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DateTime' with the minimum fields required to make a request.
 --
@@ -7670,7 +7840,7 @@ data GooglePrivacyDlpV2DateTime = GooglePrivacyDlpV2DateTime'
 googlePrivacyDlpV2DateTime
     :: GooglePrivacyDlpV2DateTime
 googlePrivacyDlpV2DateTime =
-    GooglePrivacyDlpV2DateTime'
+  GooglePrivacyDlpV2DateTime'
     { _gpdvdtTime = Nothing
     , _gpdvdtDate = Nothing
     , _gpdvdtTimeZone = Nothing
@@ -7741,11 +7911,13 @@ instance ToJSON GooglePrivacyDlpV2DateTime where
 -- without matching across \`\/\`
 --
 -- /See:/ 'googlePrivacyDlpV2CloudStorageRegexFileSet' smart constructor.
-data GooglePrivacyDlpV2CloudStorageRegexFileSet = GooglePrivacyDlpV2CloudStorageRegexFileSet'
+data GooglePrivacyDlpV2CloudStorageRegexFileSet =
+  GooglePrivacyDlpV2CloudStorageRegexFileSet'
     { _gpdvcsrfsExcludeRegex :: !(Maybe [Text])
     , _gpdvcsrfsBucketName   :: !(Maybe Text)
     , _gpdvcsrfsIncludeRegex :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CloudStorageRegexFileSet' with the minimum fields required to make a request.
 --
@@ -7759,7 +7931,7 @@ data GooglePrivacyDlpV2CloudStorageRegexFileSet = GooglePrivacyDlpV2CloudStorage
 googlePrivacyDlpV2CloudStorageRegexFileSet
     :: GooglePrivacyDlpV2CloudStorageRegexFileSet
 googlePrivacyDlpV2CloudStorageRegexFileSet =
-    GooglePrivacyDlpV2CloudStorageRegexFileSet'
+  GooglePrivacyDlpV2CloudStorageRegexFileSet'
     { _gpdvcsrfsExcludeRegex = Nothing
     , _gpdvcsrfsBucketName = Nothing
     , _gpdvcsrfsIncludeRegex = Nothing
@@ -7799,7 +7971,8 @@ gpdvcsrfsIncludeRegex
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2CloudStorageRegexFileSet where
+           GooglePrivacyDlpV2CloudStorageRegexFileSet
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2CloudStorageRegexFileSet"
@@ -7810,7 +7983,8 @@ instance FromJSON
                      <*> (o .:? "includeRegex" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2CloudStorageRegexFileSet where
+           GooglePrivacyDlpV2CloudStorageRegexFileSet
+         where
         toJSON
           GooglePrivacyDlpV2CloudStorageRegexFileSet'{..}
           = object
@@ -7822,11 +7996,13 @@ instance ToJSON
 -- | Bucket is represented as a range, along with replacement values.
 --
 -- /See:/ 'googlePrivacyDlpV2Bucket' smart constructor.
-data GooglePrivacyDlpV2Bucket = GooglePrivacyDlpV2Bucket'
+data GooglePrivacyDlpV2Bucket =
+  GooglePrivacyDlpV2Bucket'
     { _gpdvbMax              :: !(Maybe GooglePrivacyDlpV2Value)
     , _gpdvbReplacementValue :: !(Maybe GooglePrivacyDlpV2Value)
     , _gpdvbMin              :: !(Maybe GooglePrivacyDlpV2Value)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Bucket' with the minimum fields required to make a request.
 --
@@ -7840,11 +8016,8 @@ data GooglePrivacyDlpV2Bucket = GooglePrivacyDlpV2Bucket'
 googlePrivacyDlpV2Bucket
     :: GooglePrivacyDlpV2Bucket
 googlePrivacyDlpV2Bucket =
-    GooglePrivacyDlpV2Bucket'
-    { _gpdvbMax = Nothing
-    , _gpdvbReplacementValue = Nothing
-    , _gpdvbMin = Nothing
-    }
+  GooglePrivacyDlpV2Bucket'
+    {_gpdvbMax = Nothing, _gpdvbReplacementValue = Nothing, _gpdvbMin = Nothing}
 
 -- | Upper bound of the range, exclusive; type must match min.
 gpdvbMax :: Lens' GooglePrivacyDlpV2Bucket (Maybe GooglePrivacyDlpV2Value)
@@ -7882,11 +8055,13 @@ instance ToJSON GooglePrivacyDlpV2Bucket where
 -- https:\/\/cloud.google.com\/dlp\/docs\/concepts-actions to learn more.
 --
 -- /See:/ 'googlePrivacyDlpV2Action' smart constructor.
-data GooglePrivacyDlpV2Action = GooglePrivacyDlpV2Action'
+data GooglePrivacyDlpV2Action =
+  GooglePrivacyDlpV2Action'
     { _gpdvaPubSub               :: !(Maybe GooglePrivacyDlpV2PublishToPubSub)
     , _gpdvaSaveFindings         :: !(Maybe GooglePrivacyDlpV2SaveFindings)
     , _gpdvaPublishSummaryToCscc :: !(Maybe GooglePrivacyDlpV2PublishSummaryToCscc)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Action' with the minimum fields required to make a request.
 --
@@ -7900,7 +8075,7 @@ data GooglePrivacyDlpV2Action = GooglePrivacyDlpV2Action'
 googlePrivacyDlpV2Action
     :: GooglePrivacyDlpV2Action
 googlePrivacyDlpV2Action =
-    GooglePrivacyDlpV2Action'
+  GooglePrivacyDlpV2Action'
     { _gpdvaPubSub = Nothing
     , _gpdvaSaveFindings = Nothing
     , _gpdvaPublishSummaryToCscc = Nothing
@@ -7950,11 +8125,13 @@ instance ToJSON GooglePrivacyDlpV2Action where
 -- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'googleTypeDate' smart constructor.
-data GoogleTypeDate = GoogleTypeDate'
+data GoogleTypeDate =
+  GoogleTypeDate'
     { _gtdDay   :: !(Maybe (Textual Int32))
     , _gtdYear  :: !(Maybe (Textual Int32))
     , _gtdMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleTypeDate' with the minimum fields required to make a request.
 --
@@ -7968,11 +8145,7 @@ data GoogleTypeDate = GoogleTypeDate'
 googleTypeDate
     :: GoogleTypeDate
 googleTypeDate =
-    GoogleTypeDate'
-    { _gtdDay = Nothing
-    , _gtdYear = Nothing
-    , _gtdMonth = Nothing
-    }
+  GoogleTypeDate' {_gtdDay = Nothing, _gtdYear = Nothing, _gtdMonth = Nothing}
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -8021,8 +8194,8 @@ instance ToJSON GoogleTypeDate where
 --
 -- /See:/ 'googlePrivacyDlpV2SurrogateType' smart constructor.
 data GooglePrivacyDlpV2SurrogateType =
-    GooglePrivacyDlpV2SurrogateType'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GooglePrivacyDlpV2SurrogateType'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2SurrogateType' with the minimum fields required to make a request.
 --
@@ -8045,10 +8218,12 @@ instance ToJSON GooglePrivacyDlpV2SurrogateType where
 -- to learn more.
 --
 -- /See:/ 'googlePrivacyDlpV2Table' smart constructor.
-data GooglePrivacyDlpV2Table = GooglePrivacyDlpV2Table'
+data GooglePrivacyDlpV2Table =
+  GooglePrivacyDlpV2Table'
     { _gpdvtRows    :: !(Maybe [GooglePrivacyDlpV2Row])
     , _gpdvtHeaders :: !(Maybe [GooglePrivacyDlpV2FieldId])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Table' with the minimum fields required to make a request.
 --
@@ -8060,10 +8235,7 @@ data GooglePrivacyDlpV2Table = GooglePrivacyDlpV2Table'
 googlePrivacyDlpV2Table
     :: GooglePrivacyDlpV2Table
 googlePrivacyDlpV2Table =
-    GooglePrivacyDlpV2Table'
-    { _gpdvtRows = Nothing
-    , _gpdvtHeaders = Nothing
-    }
+  GooglePrivacyDlpV2Table' {_gpdvtRows = Nothing, _gpdvtHeaders = Nothing}
 
 gpdvtRows :: Lens' GooglePrivacyDlpV2Table [GooglePrivacyDlpV2Row]
 gpdvtRows
@@ -8095,9 +8267,11 @@ instance ToJSON GooglePrivacyDlpV2Table where
 -- | Result of the l-diversity computation.
 --
 -- /See:/ 'googlePrivacyDlpV2LDiversityResult' smart constructor.
-newtype GooglePrivacyDlpV2LDiversityResult = GooglePrivacyDlpV2LDiversityResult'
+newtype GooglePrivacyDlpV2LDiversityResult =
+  GooglePrivacyDlpV2LDiversityResult'
     { _gpdvldrSensitiveValueFrequencyHistogramBuckets :: Maybe [GooglePrivacyDlpV2LDiversityHistogramBucket]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2LDiversityResult' with the minimum fields required to make a request.
 --
@@ -8107,9 +8281,8 @@ newtype GooglePrivacyDlpV2LDiversityResult = GooglePrivacyDlpV2LDiversityResult'
 googlePrivacyDlpV2LDiversityResult
     :: GooglePrivacyDlpV2LDiversityResult
 googlePrivacyDlpV2LDiversityResult =
-    GooglePrivacyDlpV2LDiversityResult'
-    { _gpdvldrSensitiveValueFrequencyHistogramBuckets = Nothing
-    }
+  GooglePrivacyDlpV2LDiversityResult'
+    {_gpdvldrSensitiveValueFrequencyHistogramBuckets = Nothing}
 
 -- | Histogram of l-diversity equivalence class sensitive value frequencies.
 gpdvldrSensitiveValueFrequencyHistogramBuckets :: Lens' GooglePrivacyDlpV2LDiversityResult [GooglePrivacyDlpV2LDiversityHistogramBucket]
@@ -8148,11 +8321,13 @@ instance ToJSON GooglePrivacyDlpV2LDiversityResult
 -- input dataset. A column with a semantic tag attached.
 --
 -- /See:/ 'googlePrivacyDlpV2KMapEstimationConfig' smart constructor.
-data GooglePrivacyDlpV2KMapEstimationConfig = GooglePrivacyDlpV2KMapEstimationConfig'
+data GooglePrivacyDlpV2KMapEstimationConfig =
+  GooglePrivacyDlpV2KMapEstimationConfig'
     { _gpdvkmecAuxiliaryTables :: !(Maybe [GooglePrivacyDlpV2AuxiliaryTable])
     , _gpdvkmecRegionCode      :: !(Maybe Text)
     , _gpdvkmecQuasiIds        :: !(Maybe [GooglePrivacyDlpV2TaggedField])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KMapEstimationConfig' with the minimum fields required to make a request.
 --
@@ -8166,7 +8341,7 @@ data GooglePrivacyDlpV2KMapEstimationConfig = GooglePrivacyDlpV2KMapEstimationCo
 googlePrivacyDlpV2KMapEstimationConfig
     :: GooglePrivacyDlpV2KMapEstimationConfig
 googlePrivacyDlpV2KMapEstimationConfig =
-    GooglePrivacyDlpV2KMapEstimationConfig'
+  GooglePrivacyDlpV2KMapEstimationConfig'
     { _gpdvkmecAuxiliaryTables = Nothing
     , _gpdvkmecRegionCode = Nothing
     , _gpdvkmecQuasiIds = Nothing
@@ -8200,7 +8375,8 @@ gpdvkmecQuasiIds
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2KMapEstimationConfig where
+           GooglePrivacyDlpV2KMapEstimationConfig
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2KMapEstimationConfig"
               (\ o ->
@@ -8210,7 +8386,8 @@ instance FromJSON
                      <*> (o .:? "quasiIds" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2KMapEstimationConfig where
+           GooglePrivacyDlpV2KMapEstimationConfig
+         where
         toJSON GooglePrivacyDlpV2KMapEstimationConfig'{..}
           = object
               (catMaybes
@@ -8229,14 +8406,16 @@ instance ToJSON
 -- more.
 --
 -- /See:/ 'googlePrivacyDlpV2CryptoReplaceFfxFpeConfig' smart constructor.
-data GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig = GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig'
+data GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig =
+  GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig'
     { _gpdvcrffcContext           :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvcrffcCommonAlphabet    :: !(Maybe GooglePrivacyDlpV2CryptoReplaceFfxFpeConfigCommonAlphabet)
     , _gpdvcrffcSurrogateInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
     , _gpdvcrffcCustomAlphabet    :: !(Maybe Text)
     , _gpdvcrffcCryptoKey         :: !(Maybe GooglePrivacyDlpV2CryptoKey)
     , _gpdvcrffcRadix             :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig' with the minimum fields required to make a request.
 --
@@ -8256,7 +8435,7 @@ data GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig = GooglePrivacyDlpV2CryptoRepla
 googlePrivacyDlpV2CryptoReplaceFfxFpeConfig
     :: GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig
 googlePrivacyDlpV2CryptoReplaceFfxFpeConfig =
-    GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig'
+  GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig'
     { _gpdvcrffcContext = Nothing
     , _gpdvcrffcCommonAlphabet = Nothing
     , _gpdvcrffcSurrogateInfoType = Nothing
@@ -8337,7 +8516,8 @@ gpdvcrffcRadix
       . mapping _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig where
+           GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig"
@@ -8350,7 +8530,8 @@ instance FromJSON
                      <*> (o .:? "radix"))
 
 instance ToJSON
-         GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig where
+           GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig
+         where
         toJSON
           GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig'{..}
           = object
@@ -8367,10 +8548,12 @@ instance ToJSON
 -- the data corresponds to which column in the statistical model.
 --
 -- /See:/ 'googlePrivacyDlpV2QuasiIdentifierField' smart constructor.
-data GooglePrivacyDlpV2QuasiIdentifierField = GooglePrivacyDlpV2QuasiIdentifierField'
+data GooglePrivacyDlpV2QuasiIdentifierField =
+  GooglePrivacyDlpV2QuasiIdentifierField'
     { _gField     :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gCustomTag :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2QuasiIdentifierField' with the minimum fields required to make a request.
 --
@@ -8382,10 +8565,8 @@ data GooglePrivacyDlpV2QuasiIdentifierField = GooglePrivacyDlpV2QuasiIdentifierF
 googlePrivacyDlpV2QuasiIdentifierField
     :: GooglePrivacyDlpV2QuasiIdentifierField
 googlePrivacyDlpV2QuasiIdentifierField =
-    GooglePrivacyDlpV2QuasiIdentifierField'
-    { _gField = Nothing
-    , _gCustomTag = Nothing
-    }
+  GooglePrivacyDlpV2QuasiIdentifierField'
+    {_gField = Nothing, _gCustomTag = Nothing}
 
 gField :: Lens' GooglePrivacyDlpV2QuasiIdentifierField (Maybe GooglePrivacyDlpV2FieldId)
 gField = lens _gField (\ s a -> s{_gField = a})
@@ -8395,7 +8576,8 @@ gCustomTag
   = lens _gCustomTag (\ s a -> s{_gCustomTag = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2QuasiIdentifierField where
+           GooglePrivacyDlpV2QuasiIdentifierField
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2QuasiIdentifierField"
               (\ o ->
@@ -8403,7 +8585,8 @@ instance FromJSON
                    (o .:? "field") <*> (o .:? "customTag"))
 
 instance ToJSON
-         GooglePrivacyDlpV2QuasiIdentifierField where
+           GooglePrivacyDlpV2QuasiIdentifierField
+         where
         toJSON GooglePrivacyDlpV2QuasiIdentifierField'{..}
           = object
               (catMaybes
@@ -8413,9 +8596,11 @@ instance ToJSON
 -- | Type of information detected by the API.
 --
 -- /See:/ 'googlePrivacyDlpV2InfoType' smart constructor.
-newtype GooglePrivacyDlpV2InfoType = GooglePrivacyDlpV2InfoType'
+newtype GooglePrivacyDlpV2InfoType =
+  GooglePrivacyDlpV2InfoType'
     { _gpdvitName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InfoType' with the minimum fields required to make a request.
 --
@@ -8424,10 +8609,7 @@ newtype GooglePrivacyDlpV2InfoType = GooglePrivacyDlpV2InfoType'
 -- * 'gpdvitName'
 googlePrivacyDlpV2InfoType
     :: GooglePrivacyDlpV2InfoType
-googlePrivacyDlpV2InfoType =
-    GooglePrivacyDlpV2InfoType'
-    { _gpdvitName = Nothing
-    }
+googlePrivacyDlpV2InfoType = GooglePrivacyDlpV2InfoType' {_gpdvitName = Nothing}
 
 -- | Name of the information type. Either a name of your choosing when
 -- creating a CustomInfoType, or one of the names listed at
@@ -8454,14 +8636,16 @@ instance ToJSON GooglePrivacyDlpV2InfoType where
 -- https:\/\/cloud.google.com\/dlp\/docs\/concepts-templates to learn more.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectTemplate' smart constructor.
-data GooglePrivacyDlpV2InspectTemplate = GooglePrivacyDlpV2InspectTemplate'
+data GooglePrivacyDlpV2InspectTemplate =
+  GooglePrivacyDlpV2InspectTemplate'
     { _gInspectConfig :: !(Maybe GooglePrivacyDlpV2InspectConfig)
     , _gUpdateTime    :: !(Maybe DateTime')
     , _gName          :: !(Maybe Text)
     , _gDisplayName   :: !(Maybe Text)
     , _gDescription   :: !(Maybe Text)
     , _gCreateTime    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InspectTemplate' with the minimum fields required to make a request.
 --
@@ -8481,7 +8665,7 @@ data GooglePrivacyDlpV2InspectTemplate = GooglePrivacyDlpV2InspectTemplate'
 googlePrivacyDlpV2InspectTemplate
     :: GooglePrivacyDlpV2InspectTemplate
 googlePrivacyDlpV2InspectTemplate =
-    GooglePrivacyDlpV2InspectTemplate'
+  GooglePrivacyDlpV2InspectTemplate'
     { _gInspectConfig = Nothing
     , _gUpdateTime = Nothing
     , _gName = Nothing
@@ -8551,13 +8735,15 @@ instance ToJSON GooglePrivacyDlpV2InspectTemplate
 
 --
 -- /See:/ 'googlePrivacyDlpV2KAnonymityHistogramBucket' smart constructor.
-data GooglePrivacyDlpV2KAnonymityHistogramBucket = GooglePrivacyDlpV2KAnonymityHistogramBucket'
+data GooglePrivacyDlpV2KAnonymityHistogramBucket =
+  GooglePrivacyDlpV2KAnonymityHistogramBucket'
     { _gpdvkahbEquivalenceClassSizeLowerBound :: !(Maybe (Textual Int64))
     , _gpdvkahbEquivalenceClassSizeUpperBound :: !(Maybe (Textual Int64))
     , _gpdvkahbBucketValues                   :: !(Maybe [GooglePrivacyDlpV2KAnonymityEquivalenceClass])
     , _gpdvkahbBucketSize                     :: !(Maybe (Textual Int64))
     , _gpdvkahbBucketValueCount               :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KAnonymityHistogramBucket' with the minimum fields required to make a request.
 --
@@ -8575,7 +8761,7 @@ data GooglePrivacyDlpV2KAnonymityHistogramBucket = GooglePrivacyDlpV2KAnonymityH
 googlePrivacyDlpV2KAnonymityHistogramBucket
     :: GooglePrivacyDlpV2KAnonymityHistogramBucket
 googlePrivacyDlpV2KAnonymityHistogramBucket =
-    GooglePrivacyDlpV2KAnonymityHistogramBucket'
+  GooglePrivacyDlpV2KAnonymityHistogramBucket'
     { _gpdvkahbEquivalenceClassSizeLowerBound = Nothing
     , _gpdvkahbEquivalenceClassSizeUpperBound = Nothing
     , _gpdvkahbBucketValues = Nothing
@@ -8623,7 +8809,8 @@ gpdvkahbBucketValueCount
       . mapping _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2KAnonymityHistogramBucket where
+           GooglePrivacyDlpV2KAnonymityHistogramBucket
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2KAnonymityHistogramBucket"
@@ -8636,7 +8823,8 @@ instance FromJSON
                      <*> (o .:? "bucketValueCount"))
 
 instance ToJSON
-         GooglePrivacyDlpV2KAnonymityHistogramBucket where
+           GooglePrivacyDlpV2KAnonymityHistogramBucket
+         where
         toJSON
           GooglePrivacyDlpV2KAnonymityHistogramBucket'{..}
           = object
@@ -8653,13 +8841,15 @@ instance ToJSON
 -- | Request to re-identify an item.
 --
 -- /See:/ 'googlePrivacyDlpV2ReidentifyContentRequest' smart constructor.
-data GooglePrivacyDlpV2ReidentifyContentRequest = GooglePrivacyDlpV2ReidentifyContentRequest'
+data GooglePrivacyDlpV2ReidentifyContentRequest =
+  GooglePrivacyDlpV2ReidentifyContentRequest'
     { _gooInspectConfig          :: !(Maybe GooglePrivacyDlpV2InspectConfig)
     , _gooReidentifyTemplateName :: !(Maybe Text)
     , _gooItem                   :: !(Maybe GooglePrivacyDlpV2ContentItem)
     , _gooInspectTemplateName    :: !(Maybe Text)
     , _gooReidentifyConfig       :: !(Maybe GooglePrivacyDlpV2DeidentifyConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ReidentifyContentRequest' with the minimum fields required to make a request.
 --
@@ -8677,7 +8867,7 @@ data GooglePrivacyDlpV2ReidentifyContentRequest = GooglePrivacyDlpV2ReidentifyCo
 googlePrivacyDlpV2ReidentifyContentRequest
     :: GooglePrivacyDlpV2ReidentifyContentRequest
 googlePrivacyDlpV2ReidentifyContentRequest =
-    GooglePrivacyDlpV2ReidentifyContentRequest'
+  GooglePrivacyDlpV2ReidentifyContentRequest'
     { _gooInspectConfig = Nothing
     , _gooReidentifyTemplateName = Nothing
     , _gooItem = Nothing
@@ -8729,7 +8919,8 @@ gooReidentifyConfig
       (\ s a -> s{_gooReidentifyConfig = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2ReidentifyContentRequest where
+           GooglePrivacyDlpV2ReidentifyContentRequest
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2ReidentifyContentRequest"
@@ -8742,7 +8933,8 @@ instance FromJSON
                      <*> (o .:? "reidentifyConfig"))
 
 instance ToJSON
-         GooglePrivacyDlpV2ReidentifyContentRequest where
+           GooglePrivacyDlpV2ReidentifyContentRequest
+         where
         toJSON
           GooglePrivacyDlpV2ReidentifyContentRequest'{..}
           = object
@@ -8763,9 +8955,11 @@ instance ToJSON
 -- https:\/\/cloud.google.com\/dlp\/docs\/pseudonymization to learn more.
 --
 -- /See:/ 'googlePrivacyDlpV2CryptoHashConfig' smart constructor.
-newtype GooglePrivacyDlpV2CryptoHashConfig = GooglePrivacyDlpV2CryptoHashConfig'
+newtype GooglePrivacyDlpV2CryptoHashConfig =
+  GooglePrivacyDlpV2CryptoHashConfig'
     { _gpdvchcCryptoKey :: Maybe GooglePrivacyDlpV2CryptoKey
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CryptoHashConfig' with the minimum fields required to make a request.
 --
@@ -8775,9 +8969,7 @@ newtype GooglePrivacyDlpV2CryptoHashConfig = GooglePrivacyDlpV2CryptoHashConfig'
 googlePrivacyDlpV2CryptoHashConfig
     :: GooglePrivacyDlpV2CryptoHashConfig
 googlePrivacyDlpV2CryptoHashConfig =
-    GooglePrivacyDlpV2CryptoHashConfig'
-    { _gpdvchcCryptoKey = Nothing
-    }
+  GooglePrivacyDlpV2CryptoHashConfig' {_gpdvchcCryptoKey = Nothing}
 
 -- | The key used by the hash function.
 gpdvchcCryptoKey :: Lens' GooglePrivacyDlpV2CryptoHashConfig (Maybe GooglePrivacyDlpV2CryptoKey)
@@ -8803,10 +8995,12 @@ instance ToJSON GooglePrivacyDlpV2CryptoHashConfig
 -- running DlpJob.
 --
 -- /See:/ 'googlePrivacyDlpV2InfoTypeLimit' smart constructor.
-data GooglePrivacyDlpV2InfoTypeLimit = GooglePrivacyDlpV2InfoTypeLimit'
+data GooglePrivacyDlpV2InfoTypeLimit =
+  GooglePrivacyDlpV2InfoTypeLimit'
     { _gpdvitlMaxFindings :: !(Maybe (Textual Int32))
     , _gpdvitlInfoType    :: !(Maybe GooglePrivacyDlpV2InfoType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeLimit' with the minimum fields required to make a request.
 --
@@ -8818,10 +9012,8 @@ data GooglePrivacyDlpV2InfoTypeLimit = GooglePrivacyDlpV2InfoTypeLimit'
 googlePrivacyDlpV2InfoTypeLimit
     :: GooglePrivacyDlpV2InfoTypeLimit
 googlePrivacyDlpV2InfoTypeLimit =
-    GooglePrivacyDlpV2InfoTypeLimit'
-    { _gpdvitlMaxFindings = Nothing
-    , _gpdvitlInfoType = Nothing
-    }
+  GooglePrivacyDlpV2InfoTypeLimit'
+    {_gpdvitlMaxFindings = Nothing, _gpdvitlInfoType = Nothing}
 
 -- | Max findings limit for the given infoType.
 gpdvitlMaxFindings :: Lens' GooglePrivacyDlpV2InfoTypeLimit (Maybe Int32)
@@ -8857,9 +9049,11 @@ instance ToJSON GooglePrivacyDlpV2InfoTypeLimit where
 -- | Location of a finding within a table.
 --
 -- /See:/ 'googlePrivacyDlpV2TableLocation' smart constructor.
-newtype GooglePrivacyDlpV2TableLocation = GooglePrivacyDlpV2TableLocation'
+newtype GooglePrivacyDlpV2TableLocation =
+  GooglePrivacyDlpV2TableLocation'
     { _gpdvtlRowIndex :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2TableLocation' with the minimum fields required to make a request.
 --
@@ -8869,9 +9063,7 @@ newtype GooglePrivacyDlpV2TableLocation = GooglePrivacyDlpV2TableLocation'
 googlePrivacyDlpV2TableLocation
     :: GooglePrivacyDlpV2TableLocation
 googlePrivacyDlpV2TableLocation =
-    GooglePrivacyDlpV2TableLocation'
-    { _gpdvtlRowIndex = Nothing
-    }
+  GooglePrivacyDlpV2TableLocation' {_gpdvtlRowIndex = Nothing}
 
 -- | The zero-based index of the row where the finding is located.
 gpdvtlRowIndex :: Lens' GooglePrivacyDlpV2TableLocation (Maybe Int64)
@@ -8895,9 +9087,11 @@ instance ToJSON GooglePrivacyDlpV2TableLocation where
 
 --
 -- /See:/ 'googlePrivacyDlpV2TimeZone' smart constructor.
-newtype GooglePrivacyDlpV2TimeZone = GooglePrivacyDlpV2TimeZone'
+newtype GooglePrivacyDlpV2TimeZone =
+  GooglePrivacyDlpV2TimeZone'
     { _gpdvtzOffSetMinutes :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2TimeZone' with the minimum fields required to make a request.
 --
@@ -8907,9 +9101,7 @@ newtype GooglePrivacyDlpV2TimeZone = GooglePrivacyDlpV2TimeZone'
 googlePrivacyDlpV2TimeZone
     :: GooglePrivacyDlpV2TimeZone
 googlePrivacyDlpV2TimeZone =
-    GooglePrivacyDlpV2TimeZone'
-    { _gpdvtzOffSetMinutes = Nothing
-    }
+  GooglePrivacyDlpV2TimeZone' {_gpdvtzOffSetMinutes = Nothing}
 
 -- | Set only if the offset can be determined. Positive for time ahead of
 -- UTC. E.g. For \"UTC-9\", this value is -540.
@@ -8935,12 +9127,14 @@ instance ToJSON GooglePrivacyDlpV2TimeZone where
 -- | Shared message indicating Cloud storage type.
 --
 -- /See:/ 'googlePrivacyDlpV2StorageConfig' smart constructor.
-data GooglePrivacyDlpV2StorageConfig = GooglePrivacyDlpV2StorageConfig'
+data GooglePrivacyDlpV2StorageConfig =
+  GooglePrivacyDlpV2StorageConfig'
     { _gpdvscTimespanConfig      :: !(Maybe GooglePrivacyDlpV2TimespanConfig)
     , _gpdvscBigQueryOptions     :: !(Maybe GooglePrivacyDlpV2BigQueryOptions)
     , _gpdvscDatastoreOptions    :: !(Maybe GooglePrivacyDlpV2DatastoreOptions)
     , _gpdvscCloudStorageOptions :: !(Maybe GooglePrivacyDlpV2CloudStorageOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2StorageConfig' with the minimum fields required to make a request.
 --
@@ -8956,7 +9150,7 @@ data GooglePrivacyDlpV2StorageConfig = GooglePrivacyDlpV2StorageConfig'
 googlePrivacyDlpV2StorageConfig
     :: GooglePrivacyDlpV2StorageConfig
 googlePrivacyDlpV2StorageConfig =
-    GooglePrivacyDlpV2StorageConfig'
+  GooglePrivacyDlpV2StorageConfig'
     { _gpdvscTimespanConfig = Nothing
     , _gpdvscBigQueryOptions = Nothing
     , _gpdvscDatastoreOptions = Nothing
@@ -9015,7 +9209,8 @@ instance ToJSON GooglePrivacyDlpV2StorageConfig where
 -- holds up to 8 bytes of data.
 --
 -- /See:/ 'googlePrivacyDlpV2Value' smart constructor.
-data GooglePrivacyDlpV2Value = GooglePrivacyDlpV2Value'
+data GooglePrivacyDlpV2Value =
+  GooglePrivacyDlpV2Value'
     { _gpdvvDayOfWeekValue :: !(Maybe GooglePrivacyDlpV2ValueDayOfWeekValue)
     , _gpdvvIntegerValue   :: !(Maybe (Textual Int64))
     , _gpdvvTimestampValue :: !(Maybe DateTime')
@@ -9024,7 +9219,8 @@ data GooglePrivacyDlpV2Value = GooglePrivacyDlpV2Value'
     , _gpdvvDateValue      :: !(Maybe GoogleTypeDate)
     , _gpdvvBooleanValue   :: !(Maybe Bool)
     , _gpdvvFloatValue     :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Value' with the minimum fields required to make a request.
 --
@@ -9048,7 +9244,7 @@ data GooglePrivacyDlpV2Value = GooglePrivacyDlpV2Value'
 googlePrivacyDlpV2Value
     :: GooglePrivacyDlpV2Value
 googlePrivacyDlpV2Value =
-    GooglePrivacyDlpV2Value'
+  GooglePrivacyDlpV2Value'
     { _gpdvvDayOfWeekValue = Nothing
     , _gpdvvIntegerValue = Nothing
     , _gpdvvTimestampValue = Nothing
@@ -9150,10 +9346,12 @@ instance ToJSON GooglePrivacyDlpV2Value where
 -- \`LargeCustomDictionaryConfig\` in the \`StoredInfoType\` API.
 --
 -- /See:/ 'googlePrivacyDlpV2Dictionary' smart constructor.
-data GooglePrivacyDlpV2Dictionary = GooglePrivacyDlpV2Dictionary'
+data GooglePrivacyDlpV2Dictionary =
+  GooglePrivacyDlpV2Dictionary'
     { _gpdvdWordList         :: !(Maybe GooglePrivacyDlpV2WordList)
     , _gpdvdCloudStoragePath :: !(Maybe GooglePrivacyDlpV2CloudStoragePath)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Dictionary' with the minimum fields required to make a request.
 --
@@ -9165,10 +9363,8 @@ data GooglePrivacyDlpV2Dictionary = GooglePrivacyDlpV2Dictionary'
 googlePrivacyDlpV2Dictionary
     :: GooglePrivacyDlpV2Dictionary
 googlePrivacyDlpV2Dictionary =
-    GooglePrivacyDlpV2Dictionary'
-    { _gpdvdWordList = Nothing
-    , _gpdvdCloudStoragePath = Nothing
-    }
+  GooglePrivacyDlpV2Dictionary'
+    {_gpdvdWordList = Nothing, _gpdvdCloudStoragePath = Nothing}
 
 -- | List of words or phrases to search for.
 gpdvdWordList :: Lens' GooglePrivacyDlpV2Dictionary (Maybe GooglePrivacyDlpV2WordList)
@@ -9200,7 +9396,8 @@ instance ToJSON GooglePrivacyDlpV2Dictionary where
 -- | Result of a risk analysis operation request.
 --
 -- /See:/ 'googlePrivacyDlpV2AnalyzeDataSourceRiskDetails' smart constructor.
-data GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails = GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails'
+data GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails =
+  GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails'
     { _gpdvadsrdRequestedPrivacyMetric        :: !(Maybe GooglePrivacyDlpV2PrivacyMetric)
     , _gpdvadsrdRequestedSourceTable          :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
     , _gpdvadsrdLDiversityResult              :: !(Maybe GooglePrivacyDlpV2LDiversityResult)
@@ -9209,7 +9406,8 @@ data GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails = GooglePrivacyDlpV2AnalyzeD
     , _gpdvadsrdDeltaPresenceEstimationResult :: !(Maybe GooglePrivacyDlpV2DeltaPresenceEstimationResult)
     , _gpdvadsrdNumericalStatsResult          :: !(Maybe GooglePrivacyDlpV2NumericalStatsResult)
     , _gpdvadsrdCategoricalStatsResult        :: !(Maybe GooglePrivacyDlpV2CategoricalStatsResult)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails' with the minimum fields required to make a request.
 --
@@ -9233,7 +9431,7 @@ data GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails = GooglePrivacyDlpV2AnalyzeD
 googlePrivacyDlpV2AnalyzeDataSourceRiskDetails
     :: GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
 googlePrivacyDlpV2AnalyzeDataSourceRiskDetails =
-    GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails'
+  GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails'
     { _gpdvadsrdRequestedPrivacyMetric = Nothing
     , _gpdvadsrdRequestedSourceTable = Nothing
     , _gpdvadsrdLDiversityResult = Nothing
@@ -9288,7 +9486,8 @@ gpdvadsrdCategoricalStatsResult
       (\ s a -> s{_gpdvadsrdCategoricalStatsResult = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails where
+           GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails"
@@ -9304,7 +9503,8 @@ instance FromJSON
                      <*> (o .:? "categoricalStatsResult"))
 
 instance ToJSON
-         GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails where
+           GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
+         where
         toJSON
           GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails'{..}
           = object
@@ -9329,9 +9529,11 @@ instance ToJSON
 -- | A collection of conditions.
 --
 -- /See:/ 'googlePrivacyDlpV2Conditions' smart constructor.
-newtype GooglePrivacyDlpV2Conditions = GooglePrivacyDlpV2Conditions'
+newtype GooglePrivacyDlpV2Conditions =
+  GooglePrivacyDlpV2Conditions'
     { _gpdvcConditions :: Maybe [GooglePrivacyDlpV2Condition]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Conditions' with the minimum fields required to make a request.
 --
@@ -9341,9 +9543,7 @@ newtype GooglePrivacyDlpV2Conditions = GooglePrivacyDlpV2Conditions'
 googlePrivacyDlpV2Conditions
     :: GooglePrivacyDlpV2Conditions
 googlePrivacyDlpV2Conditions =
-    GooglePrivacyDlpV2Conditions'
-    { _gpdvcConditions = Nothing
-    }
+  GooglePrivacyDlpV2Conditions' {_gpdvcConditions = Nothing}
 
 gpdvcConditions :: Lens' GooglePrivacyDlpV2Conditions [GooglePrivacyDlpV2Condition]
 gpdvcConditions
@@ -9367,9 +9567,11 @@ instance ToJSON GooglePrivacyDlpV2Conditions where
 -- | Record key for a finding in Cloud Datastore.
 --
 -- /See:/ 'googlePrivacyDlpV2DatastoreKey' smart constructor.
-newtype GooglePrivacyDlpV2DatastoreKey = GooglePrivacyDlpV2DatastoreKey'
+newtype GooglePrivacyDlpV2DatastoreKey =
+  GooglePrivacyDlpV2DatastoreKey'
     { _gpdvdkEntityKey :: Maybe GooglePrivacyDlpV2Key
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DatastoreKey' with the minimum fields required to make a request.
 --
@@ -9379,9 +9581,7 @@ newtype GooglePrivacyDlpV2DatastoreKey = GooglePrivacyDlpV2DatastoreKey'
 googlePrivacyDlpV2DatastoreKey
     :: GooglePrivacyDlpV2DatastoreKey
 googlePrivacyDlpV2DatastoreKey =
-    GooglePrivacyDlpV2DatastoreKey'
-    { _gpdvdkEntityKey = Nothing
-    }
+  GooglePrivacyDlpV2DatastoreKey' {_gpdvdkEntityKey = Nothing}
 
 -- | Datastore entity key.
 gpdvdkEntityKey :: Lens' GooglePrivacyDlpV2DatastoreKey (Maybe GooglePrivacyDlpV2Key)
@@ -9405,10 +9605,12 @@ instance ToJSON GooglePrivacyDlpV2DatastoreKey where
 -- | A tuple of values for the quasi-identifier columns.
 --
 -- /See:/ 'googlePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues' smart constructor.
-data GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues = GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues'
+data GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues =
+  GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues'
     { _gpdvdpeqivEstimatedProbability :: !(Maybe (Textual Double))
     , _gpdvdpeqivQuasiIdsValues       :: !(Maybe [GooglePrivacyDlpV2Value])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues' with the minimum fields required to make a request.
 --
@@ -9420,7 +9622,7 @@ data GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues = GooglePrivacyDlpV2
 googlePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues
     :: GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues
 googlePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues =
-    GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues'
+  GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues'
     { _gpdvdpeqivEstimatedProbability = Nothing
     , _gpdvdpeqivQuasiIdsValues = Nothing
     }
@@ -9448,7 +9650,7 @@ gpdvdpeqivQuasiIdsValues
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues
+           GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues
          where
         parseJSON
           = withObject
@@ -9460,7 +9662,7 @@ instance FromJSON
                      (o .:? "quasiIdsValues" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues
+           GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues
          where
         toJSON
           GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues'{..}
@@ -9474,10 +9676,12 @@ instance ToJSON
 -- left alone and skipped.
 --
 -- /See:/ 'googlePrivacyDlpV2CharsToIgnore' smart constructor.
-data GooglePrivacyDlpV2CharsToIgnore = GooglePrivacyDlpV2CharsToIgnore'
+data GooglePrivacyDlpV2CharsToIgnore =
+  GooglePrivacyDlpV2CharsToIgnore'
     { _gpdvctiCommonCharactersToIgnore :: !(Maybe GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore)
     , _gpdvctiCharactersToSkip         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CharsToIgnore' with the minimum fields required to make a request.
 --
@@ -9489,7 +9693,7 @@ data GooglePrivacyDlpV2CharsToIgnore = GooglePrivacyDlpV2CharsToIgnore'
 googlePrivacyDlpV2CharsToIgnore
     :: GooglePrivacyDlpV2CharsToIgnore
 googlePrivacyDlpV2CharsToIgnore =
-    GooglePrivacyDlpV2CharsToIgnore'
+  GooglePrivacyDlpV2CharsToIgnore'
     { _gpdvctiCommonCharactersToIgnore = Nothing
     , _gpdvctiCharactersToSkip = Nothing
     }
@@ -9528,11 +9732,13 @@ instance ToJSON GooglePrivacyDlpV2CharsToIgnore where
 -- \`..\`.
 --
 -- /See:/ 'googlePrivacyDlpV2BigQueryTable' smart constructor.
-data GooglePrivacyDlpV2BigQueryTable = GooglePrivacyDlpV2BigQueryTable'
+data GooglePrivacyDlpV2BigQueryTable =
+  GooglePrivacyDlpV2BigQueryTable'
     { _gpdvbqtDataSetId :: !(Maybe Text)
     , _gpdvbqtProjectId :: !(Maybe Text)
     , _gpdvbqtTableId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2BigQueryTable' with the minimum fields required to make a request.
 --
@@ -9546,7 +9752,7 @@ data GooglePrivacyDlpV2BigQueryTable = GooglePrivacyDlpV2BigQueryTable'
 googlePrivacyDlpV2BigQueryTable
     :: GooglePrivacyDlpV2BigQueryTable
 googlePrivacyDlpV2BigQueryTable =
-    GooglePrivacyDlpV2BigQueryTable'
+  GooglePrivacyDlpV2BigQueryTable'
     { _gpdvbqtDataSetId = Nothing
     , _gpdvbqtProjectId = Nothing
     , _gpdvbqtTableId = Nothing
@@ -9590,10 +9796,12 @@ instance ToJSON GooglePrivacyDlpV2BigQueryTable where
 
 --
 -- /See:/ 'googlePrivacyDlpV2RequestedOptions' smart constructor.
-data GooglePrivacyDlpV2RequestedOptions = GooglePrivacyDlpV2RequestedOptions'
+data GooglePrivacyDlpV2RequestedOptions =
+  GooglePrivacyDlpV2RequestedOptions'
     { _gpdvroSnapshotInspectTemplate :: !(Maybe GooglePrivacyDlpV2InspectTemplate)
     , _gpdvroJobConfig               :: !(Maybe GooglePrivacyDlpV2InspectJobConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RequestedOptions' with the minimum fields required to make a request.
 --
@@ -9605,10 +9813,8 @@ data GooglePrivacyDlpV2RequestedOptions = GooglePrivacyDlpV2RequestedOptions'
 googlePrivacyDlpV2RequestedOptions
     :: GooglePrivacyDlpV2RequestedOptions
 googlePrivacyDlpV2RequestedOptions =
-    GooglePrivacyDlpV2RequestedOptions'
-    { _gpdvroSnapshotInspectTemplate = Nothing
-    , _gpdvroJobConfig = Nothing
-    }
+  GooglePrivacyDlpV2RequestedOptions'
+    {_gpdvroSnapshotInspectTemplate = Nothing, _gpdvroJobConfig = Nothing}
 
 -- | If run with an InspectTemplate, a snapshot of its state at the time of
 -- this run.
@@ -9643,7 +9849,8 @@ instance ToJSON GooglePrivacyDlpV2RequestedOptions
 -- | A rule for transforming a value.
 --
 -- /See:/ 'googlePrivacyDlpV2PrimitiveTransformation' smart constructor.
-data GooglePrivacyDlpV2PrimitiveTransformation = GooglePrivacyDlpV2PrimitiveTransformation'
+data GooglePrivacyDlpV2PrimitiveTransformation =
+  GooglePrivacyDlpV2PrimitiveTransformation'
     { _gpdvptFixedSizeBucketingConfig  :: !(Maybe GooglePrivacyDlpV2FixedSizeBucketingConfig)
     , _gpdvptRedactConfig              :: !(Maybe GooglePrivacyDlpV2RedactConfig)
     , _gpdvptCharacterMaskConfig       :: !(Maybe GooglePrivacyDlpV2CharacterMaskConfig)
@@ -9654,7 +9861,8 @@ data GooglePrivacyDlpV2PrimitiveTransformation = GooglePrivacyDlpV2PrimitiveTran
     , _gpdvptCryptoHashConfig          :: !(Maybe GooglePrivacyDlpV2CryptoHashConfig)
     , _gpdvptReplaceConfig             :: !(Maybe GooglePrivacyDlpV2ReplaceValueConfig)
     , _gpdvptCryptoReplaceFfxFpeConfig :: !(Maybe GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2PrimitiveTransformation' with the minimum fields required to make a request.
 --
@@ -9682,7 +9890,7 @@ data GooglePrivacyDlpV2PrimitiveTransformation = GooglePrivacyDlpV2PrimitiveTran
 googlePrivacyDlpV2PrimitiveTransformation
     :: GooglePrivacyDlpV2PrimitiveTransformation
 googlePrivacyDlpV2PrimitiveTransformation =
-    GooglePrivacyDlpV2PrimitiveTransformation'
+  GooglePrivacyDlpV2PrimitiveTransformation'
     { _gpdvptFixedSizeBucketingConfig = Nothing
     , _gpdvptRedactConfig = Nothing
     , _gpdvptCharacterMaskConfig = Nothing
@@ -9746,7 +9954,8 @@ gpdvptCryptoReplaceFfxFpeConfig
       (\ s a -> s{_gpdvptCryptoReplaceFfxFpeConfig = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2PrimitiveTransformation where
+           GooglePrivacyDlpV2PrimitiveTransformation
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2PrimitiveTransformation"
@@ -9764,7 +9973,8 @@ instance FromJSON
                      <*> (o .:? "cryptoReplaceFfxFpeConfig"))
 
 instance ToJSON
-         GooglePrivacyDlpV2PrimitiveTransformation where
+           GooglePrivacyDlpV2PrimitiveTransformation
+         where
         toJSON GooglePrivacyDlpV2PrimitiveTransformation'{..}
           = object
               (catMaybes
@@ -9787,8 +9997,8 @@ instance ToJSON
 --
 -- /See:/ 'googlePrivacyDlpV2CancelDlpJobRequest' smart constructor.
 data GooglePrivacyDlpV2CancelDlpJobRequest =
-    GooglePrivacyDlpV2CancelDlpJobRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GooglePrivacyDlpV2CancelDlpJobRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CancelDlpJobRequest' with the minimum fields required to make a request.
 --
@@ -9797,7 +10007,8 @@ googlePrivacyDlpV2CancelDlpJobRequest
 googlePrivacyDlpV2CancelDlpJobRequest = GooglePrivacyDlpV2CancelDlpJobRequest'
 
 instance FromJSON
-         GooglePrivacyDlpV2CancelDlpJobRequest where
+           GooglePrivacyDlpV2CancelDlpJobRequest
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2CancelDlpJobRequest"
               (\ o -> pure GooglePrivacyDlpV2CancelDlpJobRequest')
@@ -9809,11 +10020,13 @@ instance ToJSON GooglePrivacyDlpV2CancelDlpJobRequest
 -- | Location of a finding within a row or record.
 --
 -- /See:/ 'googlePrivacyDlpV2RecordLocation' smart constructor.
-data GooglePrivacyDlpV2RecordLocation = GooglePrivacyDlpV2RecordLocation'
+data GooglePrivacyDlpV2RecordLocation =
+  GooglePrivacyDlpV2RecordLocation'
     { _gpdvrlTableLocation :: !(Maybe GooglePrivacyDlpV2TableLocation)
     , _gpdvrlFieldId       :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvrlRecordKey     :: !(Maybe GooglePrivacyDlpV2RecordKey)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2RecordLocation' with the minimum fields required to make a request.
 --
@@ -9827,7 +10040,7 @@ data GooglePrivacyDlpV2RecordLocation = GooglePrivacyDlpV2RecordLocation'
 googlePrivacyDlpV2RecordLocation
     :: GooglePrivacyDlpV2RecordLocation
 googlePrivacyDlpV2RecordLocation =
-    GooglePrivacyDlpV2RecordLocation'
+  GooglePrivacyDlpV2RecordLocation'
     { _gpdvrlTableLocation = Nothing
     , _gpdvrlFieldId = Nothing
     , _gpdvrlRecordKey = Nothing
@@ -9874,10 +10087,12 @@ instance ToJSON GooglePrivacyDlpV2RecordLocation
 -- field.
 --
 -- /See:/ 'googlePrivacyDlpV2Error' smart constructor.
-data GooglePrivacyDlpV2Error = GooglePrivacyDlpV2Error'
+data GooglePrivacyDlpV2Error =
+  GooglePrivacyDlpV2Error'
     { _gpdveDetails    :: !(Maybe GoogleRpcStatus)
     , _gpdveTimestamps :: !(Maybe [DateTime'])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Error' with the minimum fields required to make a request.
 --
@@ -9889,10 +10104,7 @@ data GooglePrivacyDlpV2Error = GooglePrivacyDlpV2Error'
 googlePrivacyDlpV2Error
     :: GooglePrivacyDlpV2Error
 googlePrivacyDlpV2Error =
-    GooglePrivacyDlpV2Error'
-    { _gpdveDetails = Nothing
-    , _gpdveTimestamps = Nothing
-    }
+  GooglePrivacyDlpV2Error' {_gpdveDetails = Nothing, _gpdveTimestamps = Nothing}
 
 gpdveDetails :: Lens' GooglePrivacyDlpV2Error (Maybe GoogleRpcStatus)
 gpdveDetails
@@ -9925,11 +10137,13 @@ instance ToJSON GooglePrivacyDlpV2Error where
 -- current version and any pending updates.
 --
 -- /See:/ 'googlePrivacyDlpV2StoredInfoType' smart constructor.
-data GooglePrivacyDlpV2StoredInfoType = GooglePrivacyDlpV2StoredInfoType'
+data GooglePrivacyDlpV2StoredInfoType =
+  GooglePrivacyDlpV2StoredInfoType'
     { _gpdvsitCurrentVersion  :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeVersion)
     , _gpdvsitName            :: !(Maybe Text)
     , _gpdvsitPendingVersions :: !(Maybe [GooglePrivacyDlpV2StoredInfoTypeVersion])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2StoredInfoType' with the minimum fields required to make a request.
 --
@@ -9943,7 +10157,7 @@ data GooglePrivacyDlpV2StoredInfoType = GooglePrivacyDlpV2StoredInfoType'
 googlePrivacyDlpV2StoredInfoType
     :: GooglePrivacyDlpV2StoredInfoType
 googlePrivacyDlpV2StoredInfoType =
-    GooglePrivacyDlpV2StoredInfoType'
+  GooglePrivacyDlpV2StoredInfoType'
     { _gpdvsitCurrentVersion = Nothing
     , _gpdvsitName = Nothing
     , _gpdvsitPendingVersions = Nothing
@@ -9996,11 +10210,13 @@ instance ToJSON GooglePrivacyDlpV2StoredInfoType
 -- reidentifiable).
 --
 -- /See:/ 'googlePrivacyDlpV2StatisticalTable' smart constructor.
-data GooglePrivacyDlpV2StatisticalTable = GooglePrivacyDlpV2StatisticalTable'
+data GooglePrivacyDlpV2StatisticalTable =
+  GooglePrivacyDlpV2StatisticalTable'
     { _gpdvstRelativeFrequency :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvstTable             :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
     , _gpdvstQuasiIds          :: !(Maybe [GooglePrivacyDlpV2QuasiIdentifierField])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2StatisticalTable' with the minimum fields required to make a request.
 --
@@ -10014,7 +10230,7 @@ data GooglePrivacyDlpV2StatisticalTable = GooglePrivacyDlpV2StatisticalTable'
 googlePrivacyDlpV2StatisticalTable
     :: GooglePrivacyDlpV2StatisticalTable
 googlePrivacyDlpV2StatisticalTable =
-    GooglePrivacyDlpV2StatisticalTable'
+  GooglePrivacyDlpV2StatisticalTable'
     { _gpdvstRelativeFrequency = Nothing
     , _gpdvstTable = Nothing
     , _gpdvstQuasiIds = Nothing
@@ -10065,14 +10281,16 @@ instance ToJSON GooglePrivacyDlpV2StatisticalTable
 -- to learn more.
 --
 -- /See:/ 'googlePrivacyDlpV2DeidentifyTemplate' smart constructor.
-data GooglePrivacyDlpV2DeidentifyTemplate = GooglePrivacyDlpV2DeidentifyTemplate'
+data GooglePrivacyDlpV2DeidentifyTemplate =
+  GooglePrivacyDlpV2DeidentifyTemplate'
     { _gpdvdtUpdateTime       :: !(Maybe DateTime')
     , _gpdvdtName             :: !(Maybe Text)
     , _gpdvdtDeidentifyConfig :: !(Maybe GooglePrivacyDlpV2DeidentifyConfig)
     , _gpdvdtDisplayName      :: !(Maybe Text)
     , _gpdvdtDescription      :: !(Maybe Text)
     , _gpdvdtCreateTime       :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DeidentifyTemplate' with the minimum fields required to make a request.
 --
@@ -10092,7 +10310,7 @@ data GooglePrivacyDlpV2DeidentifyTemplate = GooglePrivacyDlpV2DeidentifyTemplate
 googlePrivacyDlpV2DeidentifyTemplate
     :: GooglePrivacyDlpV2DeidentifyTemplate
 googlePrivacyDlpV2DeidentifyTemplate =
-    GooglePrivacyDlpV2DeidentifyTemplate'
+  GooglePrivacyDlpV2DeidentifyTemplate'
     { _gpdvdtUpdateTime = Nothing
     , _gpdvdtName = Nothing
     , _gpdvdtDeidentifyConfig = Nothing
@@ -10143,7 +10361,8 @@ gpdvdtCreateTime
       . mapping _DateTime
 
 instance FromJSON
-         GooglePrivacyDlpV2DeidentifyTemplate where
+           GooglePrivacyDlpV2DeidentifyTemplate
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2DeidentifyTemplate"
               (\ o ->
@@ -10169,9 +10388,11 @@ instance ToJSON GooglePrivacyDlpV2DeidentifyTemplate
 -- | Replace each input value with a given \`Value\`.
 --
 -- /See:/ 'googlePrivacyDlpV2ReplaceValueConfig' smart constructor.
-newtype GooglePrivacyDlpV2ReplaceValueConfig = GooglePrivacyDlpV2ReplaceValueConfig'
+newtype GooglePrivacyDlpV2ReplaceValueConfig =
+  GooglePrivacyDlpV2ReplaceValueConfig'
     { _gpdvrvcNewValue :: Maybe GooglePrivacyDlpV2Value
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ReplaceValueConfig' with the minimum fields required to make a request.
 --
@@ -10181,9 +10402,7 @@ newtype GooglePrivacyDlpV2ReplaceValueConfig = GooglePrivacyDlpV2ReplaceValueCon
 googlePrivacyDlpV2ReplaceValueConfig
     :: GooglePrivacyDlpV2ReplaceValueConfig
 googlePrivacyDlpV2ReplaceValueConfig =
-    GooglePrivacyDlpV2ReplaceValueConfig'
-    { _gpdvrvcNewValue = Nothing
-    }
+  GooglePrivacyDlpV2ReplaceValueConfig' {_gpdvrvcNewValue = Nothing}
 
 -- | Value to replace it with.
 gpdvrvcNewValue :: Lens' GooglePrivacyDlpV2ReplaceValueConfig (Maybe GooglePrivacyDlpV2Value)
@@ -10192,7 +10411,8 @@ gpdvrvcNewValue
       (\ s a -> s{_gpdvrvcNewValue = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2ReplaceValueConfig where
+           GooglePrivacyDlpV2ReplaceValueConfig
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2ReplaceValueConfig"
               (\ o ->
@@ -10209,9 +10429,11 @@ instance ToJSON GooglePrivacyDlpV2ReplaceValueConfig
 -- distinct values and value count distribution.
 --
 -- /See:/ 'googlePrivacyDlpV2CategoricalStatsConfig' smart constructor.
-newtype GooglePrivacyDlpV2CategoricalStatsConfig = GooglePrivacyDlpV2CategoricalStatsConfig'
+newtype GooglePrivacyDlpV2CategoricalStatsConfig =
+  GooglePrivacyDlpV2CategoricalStatsConfig'
     { _gpdvcscField :: Maybe GooglePrivacyDlpV2FieldId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CategoricalStatsConfig' with the minimum fields required to make a request.
 --
@@ -10221,9 +10443,7 @@ newtype GooglePrivacyDlpV2CategoricalStatsConfig = GooglePrivacyDlpV2Categorical
 googlePrivacyDlpV2CategoricalStatsConfig
     :: GooglePrivacyDlpV2CategoricalStatsConfig
 googlePrivacyDlpV2CategoricalStatsConfig =
-    GooglePrivacyDlpV2CategoricalStatsConfig'
-    { _gpdvcscField = Nothing
-    }
+  GooglePrivacyDlpV2CategoricalStatsConfig' {_gpdvcscField = Nothing}
 
 -- | Field to compute categorical stats on. All column types are supported
 -- except for arrays and structs. However, it may be more informative to
@@ -10234,7 +10454,8 @@ gpdvcscField
   = lens _gpdvcscField (\ s a -> s{_gpdvcscField = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2CategoricalStatsConfig where
+           GooglePrivacyDlpV2CategoricalStatsConfig
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2CategoricalStatsConfig"
@@ -10243,7 +10464,8 @@ instance FromJSON
                    (o .:? "field"))
 
 instance ToJSON
-         GooglePrivacyDlpV2CategoricalStatsConfig where
+           GooglePrivacyDlpV2CategoricalStatsConfig
+         where
         toJSON GooglePrivacyDlpV2CategoricalStatsConfig'{..}
           = object (catMaybes [("field" .=) <$> _gpdvcscField])
 
@@ -10251,9 +10473,11 @@ instance ToJSON
 -- and quantiles.
 --
 -- /See:/ 'googlePrivacyDlpV2NumericalStatsConfig' smart constructor.
-newtype GooglePrivacyDlpV2NumericalStatsConfig = GooglePrivacyDlpV2NumericalStatsConfig'
+newtype GooglePrivacyDlpV2NumericalStatsConfig =
+  GooglePrivacyDlpV2NumericalStatsConfig'
     { _gpdvnscField :: Maybe GooglePrivacyDlpV2FieldId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2NumericalStatsConfig' with the minimum fields required to make a request.
 --
@@ -10263,9 +10487,7 @@ newtype GooglePrivacyDlpV2NumericalStatsConfig = GooglePrivacyDlpV2NumericalStat
 googlePrivacyDlpV2NumericalStatsConfig
     :: GooglePrivacyDlpV2NumericalStatsConfig
 googlePrivacyDlpV2NumericalStatsConfig =
-    GooglePrivacyDlpV2NumericalStatsConfig'
-    { _gpdvnscField = Nothing
-    }
+  GooglePrivacyDlpV2NumericalStatsConfig' {_gpdvnscField = Nothing}
 
 -- | Field to compute numerical stats on. Supported types are integer, float,
 -- date, datetime, timestamp, time.
@@ -10274,7 +10496,8 @@ gpdvnscField
   = lens _gpdvnscField (\ s a -> s{_gpdvnscField = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2NumericalStatsConfig where
+           GooglePrivacyDlpV2NumericalStatsConfig
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2NumericalStatsConfig"
               (\ o ->
@@ -10282,17 +10505,20 @@ instance FromJSON
                    (o .:? "field"))
 
 instance ToJSON
-         GooglePrivacyDlpV2NumericalStatsConfig where
+           GooglePrivacyDlpV2NumericalStatsConfig
+         where
         toJSON GooglePrivacyDlpV2NumericalStatsConfig'{..}
           = object (catMaybes [("field" .=) <$> _gpdvnscField])
 
 -- | Response message for ListJobTriggers.
 --
 -- /See:/ 'googlePrivacyDlpV2ListJobTriggersResponse' smart constructor.
-data GooglePrivacyDlpV2ListJobTriggersResponse = GooglePrivacyDlpV2ListJobTriggersResponse'
+data GooglePrivacyDlpV2ListJobTriggersResponse =
+  GooglePrivacyDlpV2ListJobTriggersResponse'
     { _gpdvljtrNextPageToken :: !(Maybe Text)
     , _gpdvljtrJobTriggers   :: !(Maybe [GooglePrivacyDlpV2JobTrigger])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ListJobTriggersResponse' with the minimum fields required to make a request.
 --
@@ -10304,10 +10530,8 @@ data GooglePrivacyDlpV2ListJobTriggersResponse = GooglePrivacyDlpV2ListJobTrigge
 googlePrivacyDlpV2ListJobTriggersResponse
     :: GooglePrivacyDlpV2ListJobTriggersResponse
 googlePrivacyDlpV2ListJobTriggersResponse =
-    GooglePrivacyDlpV2ListJobTriggersResponse'
-    { _gpdvljtrNextPageToken = Nothing
-    , _gpdvljtrJobTriggers = Nothing
-    }
+  GooglePrivacyDlpV2ListJobTriggersResponse'
+    {_gpdvljtrNextPageToken = Nothing, _gpdvljtrJobTriggers = Nothing}
 
 -- | If the next page is available then the next page token to be used in
 -- following ListJobTriggers request.
@@ -10325,7 +10549,8 @@ gpdvljtrJobTriggers
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2ListJobTriggersResponse where
+           GooglePrivacyDlpV2ListJobTriggersResponse
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2ListJobTriggersResponse"
@@ -10335,7 +10560,8 @@ instance FromJSON
                      (o .:? "jobTriggers" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2ListJobTriggersResponse where
+           GooglePrivacyDlpV2ListJobTriggersResponse
+         where
         toJSON GooglePrivacyDlpV2ListJobTriggersResponse'{..}
           = object
               (catMaybes
@@ -10345,9 +10571,11 @@ instance ToJSON
 -- | Message representing a single file or path in Cloud Storage.
 --
 -- /See:/ 'googlePrivacyDlpV2CloudStoragePath' smart constructor.
-newtype GooglePrivacyDlpV2CloudStoragePath = GooglePrivacyDlpV2CloudStoragePath'
+newtype GooglePrivacyDlpV2CloudStoragePath =
+  GooglePrivacyDlpV2CloudStoragePath'
     { _gpdvcspPath :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CloudStoragePath' with the minimum fields required to make a request.
 --
@@ -10357,9 +10585,7 @@ newtype GooglePrivacyDlpV2CloudStoragePath = GooglePrivacyDlpV2CloudStoragePath'
 googlePrivacyDlpV2CloudStoragePath
     :: GooglePrivacyDlpV2CloudStoragePath
 googlePrivacyDlpV2CloudStoragePath =
-    GooglePrivacyDlpV2CloudStoragePath'
-    { _gpdvcspPath = Nothing
-    }
+  GooglePrivacyDlpV2CloudStoragePath' {_gpdvcspPath = Nothing}
 
 -- | A url representing a file or path (no wildcards) in Cloud Storage.
 -- Example: gs:\/\/[BUCKET_NAME]\/dictionary.txt
@@ -10383,11 +10609,13 @@ instance ToJSON GooglePrivacyDlpV2CloudStoragePath
 -- | Specifies the location of the finding.
 --
 -- /See:/ 'googlePrivacyDlpV2Location' smart constructor.
-data GooglePrivacyDlpV2Location = GooglePrivacyDlpV2Location'
+data GooglePrivacyDlpV2Location =
+  GooglePrivacyDlpV2Location'
     { _gpdvlCodepointRange   :: !(Maybe GooglePrivacyDlpV2Range)
     , _gpdvlContentLocations :: !(Maybe [GooglePrivacyDlpV2ContentLocation])
     , _gpdvlByteRange        :: !(Maybe GooglePrivacyDlpV2Range)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Location' with the minimum fields required to make a request.
 --
@@ -10401,7 +10629,7 @@ data GooglePrivacyDlpV2Location = GooglePrivacyDlpV2Location'
 googlePrivacyDlpV2Location
     :: GooglePrivacyDlpV2Location
 googlePrivacyDlpV2Location =
-    GooglePrivacyDlpV2Location'
+  GooglePrivacyDlpV2Location'
     { _gpdvlCodepointRange = Nothing
     , _gpdvlContentLocations = Nothing
     , _gpdvlByteRange = Nothing
@@ -10452,9 +10680,11 @@ instance ToJSON GooglePrivacyDlpV2Location where
 -- | Schedule for triggeredJobs.
 --
 -- /See:/ 'googlePrivacyDlpV2Schedule' smart constructor.
-newtype GooglePrivacyDlpV2Schedule = GooglePrivacyDlpV2Schedule'
+newtype GooglePrivacyDlpV2Schedule =
+  GooglePrivacyDlpV2Schedule'
     { _gpdvsRecurrencePeriodDuration :: Maybe GDuration
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Schedule' with the minimum fields required to make a request.
 --
@@ -10464,9 +10694,7 @@ newtype GooglePrivacyDlpV2Schedule = GooglePrivacyDlpV2Schedule'
 googlePrivacyDlpV2Schedule
     :: GooglePrivacyDlpV2Schedule
 googlePrivacyDlpV2Schedule =
-    GooglePrivacyDlpV2Schedule'
-    { _gpdvsRecurrencePeriodDuration = Nothing
-    }
+  GooglePrivacyDlpV2Schedule' {_gpdvsRecurrencePeriodDuration = Nothing}
 
 -- | With this option a job is started a regular periodic basis. For example:
 -- every day (86400 seconds). A scheduled start time will be skipped if the
@@ -10496,10 +10724,12 @@ instance ToJSON GooglePrivacyDlpV2Schedule where
 -- | Request message for CreateJobTrigger.
 --
 -- /See:/ 'googlePrivacyDlpV2CreateJobTriggerRequest' smart constructor.
-data GooglePrivacyDlpV2CreateJobTriggerRequest = GooglePrivacyDlpV2CreateJobTriggerRequest'
+data GooglePrivacyDlpV2CreateJobTriggerRequest =
+  GooglePrivacyDlpV2CreateJobTriggerRequest'
     { _gpdvcjtrTriggerId  :: !(Maybe Text)
     , _gpdvcjtrJobTrigger :: !(Maybe GooglePrivacyDlpV2JobTrigger)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2CreateJobTriggerRequest' with the minimum fields required to make a request.
 --
@@ -10511,10 +10741,8 @@ data GooglePrivacyDlpV2CreateJobTriggerRequest = GooglePrivacyDlpV2CreateJobTrig
 googlePrivacyDlpV2CreateJobTriggerRequest
     :: GooglePrivacyDlpV2CreateJobTriggerRequest
 googlePrivacyDlpV2CreateJobTriggerRequest =
-    GooglePrivacyDlpV2CreateJobTriggerRequest'
-    { _gpdvcjtrTriggerId = Nothing
-    , _gpdvcjtrJobTrigger = Nothing
-    }
+  GooglePrivacyDlpV2CreateJobTriggerRequest'
+    {_gpdvcjtrTriggerId = Nothing, _gpdvcjtrJobTrigger = Nothing}
 
 -- | The trigger id can contain uppercase and lowercase letters, numbers, and
 -- hyphens; that is, it must match the regular expression:
@@ -10532,7 +10760,8 @@ gpdvcjtrJobTrigger
       (\ s a -> s{_gpdvcjtrJobTrigger = a})
 
 instance FromJSON
-         GooglePrivacyDlpV2CreateJobTriggerRequest where
+           GooglePrivacyDlpV2CreateJobTriggerRequest
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2CreateJobTriggerRequest"
@@ -10541,7 +10770,8 @@ instance FromJSON
                    (o .:? "triggerId") <*> (o .:? "jobTrigger"))
 
 instance ToJSON
-         GooglePrivacyDlpV2CreateJobTriggerRequest where
+           GooglePrivacyDlpV2CreateJobTriggerRequest
+         where
         toJSON GooglePrivacyDlpV2CreateJobTriggerRequest'{..}
           = object
               (catMaybes
@@ -10551,10 +10781,12 @@ instance ToJSON
 -- | Overview of the modifications that occurred.
 --
 -- /See:/ 'googlePrivacyDlpV2TransformationOverview' smart constructor.
-data GooglePrivacyDlpV2TransformationOverview = GooglePrivacyDlpV2TransformationOverview'
+data GooglePrivacyDlpV2TransformationOverview =
+  GooglePrivacyDlpV2TransformationOverview'
     { _gpdvtoTransformedBytes        :: !(Maybe (Textual Int64))
     , _gpdvtoTransformationSummaries :: !(Maybe [GooglePrivacyDlpV2TransformationSummary])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2TransformationOverview' with the minimum fields required to make a request.
 --
@@ -10566,7 +10798,7 @@ data GooglePrivacyDlpV2TransformationOverview = GooglePrivacyDlpV2Transformation
 googlePrivacyDlpV2TransformationOverview
     :: GooglePrivacyDlpV2TransformationOverview
 googlePrivacyDlpV2TransformationOverview =
-    GooglePrivacyDlpV2TransformationOverview'
+  GooglePrivacyDlpV2TransformationOverview'
     { _gpdvtoTransformedBytes = Nothing
     , _gpdvtoTransformationSummaries = Nothing
     }
@@ -10587,7 +10819,8 @@ gpdvtoTransformationSummaries
       . _Coerce
 
 instance FromJSON
-         GooglePrivacyDlpV2TransformationOverview where
+           GooglePrivacyDlpV2TransformationOverview
+         where
         parseJSON
           = withObject
               "GooglePrivacyDlpV2TransformationOverview"
@@ -10597,7 +10830,8 @@ instance FromJSON
                      (o .:? "transformationSummaries" .!= mempty))
 
 instance ToJSON
-         GooglePrivacyDlpV2TransformationOverview where
+           GooglePrivacyDlpV2TransformationOverview
+         where
         toJSON GooglePrivacyDlpV2TransformationOverview'{..}
           = object
               (catMaybes
@@ -10608,9 +10842,11 @@ instance ToJSON
 -- | Location of the finding within an image.
 --
 -- /See:/ 'googlePrivacyDlpV2ImageLocation' smart constructor.
-newtype GooglePrivacyDlpV2ImageLocation = GooglePrivacyDlpV2ImageLocation'
+newtype GooglePrivacyDlpV2ImageLocation =
+  GooglePrivacyDlpV2ImageLocation'
     { _gpdvilBoundingBoxes :: Maybe [GooglePrivacyDlpV2BoundingBox]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2ImageLocation' with the minimum fields required to make a request.
 --
@@ -10620,9 +10856,7 @@ newtype GooglePrivacyDlpV2ImageLocation = GooglePrivacyDlpV2ImageLocation'
 googlePrivacyDlpV2ImageLocation
     :: GooglePrivacyDlpV2ImageLocation
 googlePrivacyDlpV2ImageLocation =
-    GooglePrivacyDlpV2ImageLocation'
-    { _gpdvilBoundingBoxes = Nothing
-    }
+  GooglePrivacyDlpV2ImageLocation' {_gpdvilBoundingBoxes = Nothing}
 
 -- | Bounding boxes locating the pixels within the image containing the
 -- finding.
@@ -10650,9 +10884,11 @@ instance ToJSON GooglePrivacyDlpV2ImageLocation where
 -- | A representation of a Datastore kind.
 --
 -- /See:/ 'googlePrivacyDlpV2KindExpression' smart constructor.
-newtype GooglePrivacyDlpV2KindExpression = GooglePrivacyDlpV2KindExpression'
+newtype GooglePrivacyDlpV2KindExpression =
+  GooglePrivacyDlpV2KindExpression'
     { _gpdvkeName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2KindExpression' with the minimum fields required to make a request.
 --
@@ -10662,9 +10898,7 @@ newtype GooglePrivacyDlpV2KindExpression = GooglePrivacyDlpV2KindExpression'
 googlePrivacyDlpV2KindExpression
     :: GooglePrivacyDlpV2KindExpression
 googlePrivacyDlpV2KindExpression =
-    GooglePrivacyDlpV2KindExpression'
-    { _gpdvkeName = Nothing
-    }
+  GooglePrivacyDlpV2KindExpression' {_gpdvkeName = Nothing}
 
 -- | The name of the kind.
 gpdvkeName :: Lens' GooglePrivacyDlpV2KindExpression (Maybe Text)
@@ -10686,14 +10920,16 @@ instance ToJSON GooglePrivacyDlpV2KindExpression
 -- | Privacy metric to compute for reidentification risk analysis.
 --
 -- /See:/ 'googlePrivacyDlpV2PrivacyMetric' smart constructor.
-data GooglePrivacyDlpV2PrivacyMetric = GooglePrivacyDlpV2PrivacyMetric'
+data GooglePrivacyDlpV2PrivacyMetric =
+  GooglePrivacyDlpV2PrivacyMetric'
     { _gpdvpmNumericalStatsConfig          :: !(Maybe GooglePrivacyDlpV2NumericalStatsConfig)
     , _gpdvpmCategoricalStatsConfig        :: !(Maybe GooglePrivacyDlpV2CategoricalStatsConfig)
     , _gpdvpmKMapEstimationConfig          :: !(Maybe GooglePrivacyDlpV2KMapEstimationConfig)
     , _gpdvpmKAnonymityConfig              :: !(Maybe GooglePrivacyDlpV2KAnonymityConfig)
     , _gpdvpmLDiversityConfig              :: !(Maybe GooglePrivacyDlpV2LDiversityConfig)
     , _gpdvpmDeltaPresenceEstimationConfig :: !(Maybe GooglePrivacyDlpV2DeltaPresenceEstimationConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2PrivacyMetric' with the minimum fields required to make a request.
 --
@@ -10713,7 +10949,7 @@ data GooglePrivacyDlpV2PrivacyMetric = GooglePrivacyDlpV2PrivacyMetric'
 googlePrivacyDlpV2PrivacyMetric
     :: GooglePrivacyDlpV2PrivacyMetric
 googlePrivacyDlpV2PrivacyMetric =
-    GooglePrivacyDlpV2PrivacyMetric'
+  GooglePrivacyDlpV2PrivacyMetric'
     { _gpdvpmNumericalStatsConfig = Nothing
     , _gpdvpmCategoricalStatsConfig = Nothing
     , _gpdvpmKMapEstimationConfig = Nothing
@@ -10785,9 +11021,11 @@ instance ToJSON GooglePrivacyDlpV2PrivacyMetric where
 -- the key. Choose another type of key if possible.
 --
 -- /See:/ 'googlePrivacyDlpV2UnwrAppedCryptoKey' smart constructor.
-newtype GooglePrivacyDlpV2UnwrAppedCryptoKey = GooglePrivacyDlpV2UnwrAppedCryptoKey'
+newtype GooglePrivacyDlpV2UnwrAppedCryptoKey =
+  GooglePrivacyDlpV2UnwrAppedCryptoKey'
     { _gpdvuackKey :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2UnwrAppedCryptoKey' with the minimum fields required to make a request.
 --
@@ -10797,9 +11035,7 @@ newtype GooglePrivacyDlpV2UnwrAppedCryptoKey = GooglePrivacyDlpV2UnwrAppedCrypto
 googlePrivacyDlpV2UnwrAppedCryptoKey
     :: GooglePrivacyDlpV2UnwrAppedCryptoKey
 googlePrivacyDlpV2UnwrAppedCryptoKey =
-    GooglePrivacyDlpV2UnwrAppedCryptoKey'
-    { _gpdvuackKey = Nothing
-    }
+  GooglePrivacyDlpV2UnwrAppedCryptoKey' {_gpdvuackKey = Nothing}
 
 -- | The AES 128\/192\/256 bit key. [required]
 gpdvuackKey :: Lens' GooglePrivacyDlpV2UnwrAppedCryptoKey (Maybe ByteString)
@@ -10808,7 +11044,8 @@ gpdvuackKey
       mapping _Bytes
 
 instance FromJSON
-         GooglePrivacyDlpV2UnwrAppedCryptoKey where
+           GooglePrivacyDlpV2UnwrAppedCryptoKey
+         where
         parseJSON
           = withObject "GooglePrivacyDlpV2UnwrAppedCryptoKey"
               (\ o ->
@@ -10825,10 +11062,12 @@ instance ToJSON GooglePrivacyDlpV2UnwrAppedCryptoKey
 -- within the set.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectionRuleSet' smart constructor.
-data GooglePrivacyDlpV2InspectionRuleSet = GooglePrivacyDlpV2InspectionRuleSet'
+data GooglePrivacyDlpV2InspectionRuleSet =
+  GooglePrivacyDlpV2InspectionRuleSet'
     { _gpdvirsRules     :: !(Maybe [GooglePrivacyDlpV2InspectionRule])
     , _gpdvirsInfoTypes :: !(Maybe [GooglePrivacyDlpV2InfoType])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2InspectionRuleSet' with the minimum fields required to make a request.
 --
@@ -10840,10 +11079,8 @@ data GooglePrivacyDlpV2InspectionRuleSet = GooglePrivacyDlpV2InspectionRuleSet'
 googlePrivacyDlpV2InspectionRuleSet
     :: GooglePrivacyDlpV2InspectionRuleSet
 googlePrivacyDlpV2InspectionRuleSet =
-    GooglePrivacyDlpV2InspectionRuleSet'
-    { _gpdvirsRules = Nothing
-    , _gpdvirsInfoTypes = Nothing
-    }
+  GooglePrivacyDlpV2InspectionRuleSet'
+    {_gpdvirsRules = Nothing, _gpdvirsInfoTypes = Nothing}
 
 -- | Set of rules to be applied to infoTypes. The rules are applied in order.
 gpdvirsRules :: Lens' GooglePrivacyDlpV2InspectionRuleSet [GooglePrivacyDlpV2InspectionRule]
@@ -10880,12 +11117,14 @@ instance ToJSON GooglePrivacyDlpV2InspectionRuleSet
 -- | A column with a semantic tag attached.
 --
 -- /See:/ 'googlePrivacyDlpV2QuasiId' smart constructor.
-data GooglePrivacyDlpV2QuasiId = GooglePrivacyDlpV2QuasiId'
+data GooglePrivacyDlpV2QuasiId =
+  GooglePrivacyDlpV2QuasiId'
     { _gpdvqiField     :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvqiInfoType  :: !(Maybe GooglePrivacyDlpV2InfoType)
     , _gpdvqiInferred  :: !(Maybe GoogleProtobufEmpty)
     , _gpdvqiCustomTag :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2QuasiId' with the minimum fields required to make a request.
 --
@@ -10901,7 +11140,7 @@ data GooglePrivacyDlpV2QuasiId = GooglePrivacyDlpV2QuasiId'
 googlePrivacyDlpV2QuasiId
     :: GooglePrivacyDlpV2QuasiId
 googlePrivacyDlpV2QuasiId =
-    GooglePrivacyDlpV2QuasiId'
+  GooglePrivacyDlpV2QuasiId'
     { _gpdvqiField = Nothing
     , _gpdvqiInfoType = Nothing
     , _gpdvqiInferred = Nothing
@@ -10959,9 +11198,11 @@ instance ToJSON GooglePrivacyDlpV2QuasiId where
 -- | Location of a finding within a document.
 --
 -- /See:/ 'googlePrivacyDlpV2DocumentLocation' smart constructor.
-newtype GooglePrivacyDlpV2DocumentLocation = GooglePrivacyDlpV2DocumentLocation'
+newtype GooglePrivacyDlpV2DocumentLocation =
+  GooglePrivacyDlpV2DocumentLocation'
     { _gpdvdlFileOffSet :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2DocumentLocation' with the minimum fields required to make a request.
 --
@@ -10971,9 +11212,7 @@ newtype GooglePrivacyDlpV2DocumentLocation = GooglePrivacyDlpV2DocumentLocation'
 googlePrivacyDlpV2DocumentLocation
     :: GooglePrivacyDlpV2DocumentLocation
 googlePrivacyDlpV2DocumentLocation =
-    GooglePrivacyDlpV2DocumentLocation'
-    { _gpdvdlFileOffSet = Nothing
-    }
+  GooglePrivacyDlpV2DocumentLocation' {_gpdvdlFileOffSet = Nothing}
 
 -- | Offset of the line, from the beginning of the file, where the finding is
 -- located.

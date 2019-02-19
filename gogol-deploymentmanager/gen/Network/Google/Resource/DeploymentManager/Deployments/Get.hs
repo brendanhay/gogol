@@ -55,10 +55,12 @@ type DeploymentsGetResource =
 -- | Gets information about a specific deployment.
 --
 -- /See:/ 'deploymentsGet' smart constructor.
-data DeploymentsGet = DeploymentsGet'
+data DeploymentsGet =
+  DeploymentsGet'
     { _dgProject    :: !Text
     , _dgDeployment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeploymentsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ deploymentsGet
     -> Text -- ^ 'dgDeployment'
     -> DeploymentsGet
 deploymentsGet pDgProject_ pDgDeployment_ =
-    DeploymentsGet'
-    { _dgProject = pDgProject_
-    , _dgDeployment = pDgDeployment_
-    }
+  DeploymentsGet' {_dgProject = pDgProject_, _dgDeployment = pDgDeployment_}
 
 -- | The project ID for this request.
 dgProject :: Lens' DeploymentsGet Text

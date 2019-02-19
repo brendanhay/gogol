@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativesPatch' request conforms to.
 type CreativesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
@@ -56,11 +56,13 @@ type CreativesPatchResource =
 -- | Updates an existing creative. This method supports patch semantics.
 --
 -- /See:/ 'creativesPatch' smart constructor.
-data CreativesPatch = CreativesPatch'
+data CreativesPatch =
+  CreativesPatch'
     { _cppProFileId :: !(Textual Int64)
     , _cppPayload   :: !Creative
     , _cppId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativesPatch' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ creativesPatch
     -> Int64 -- ^ 'cppId'
     -> CreativesPatch
 creativesPatch pCppProFileId_ pCppPayload_ pCppId_ =
-    CreativesPatch'
+  CreativesPatch'
     { _cppProFileId = _Coerce # pCppProFileId_
     , _cppPayload = pCppPayload_
     , _cppId = _Coerce # pCppId_

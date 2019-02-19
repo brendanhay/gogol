@@ -61,12 +61,14 @@ type InstancesDeleteResource =
 -- Stopping or Deleting an Instance.
 --
 -- /See:/ 'instancesDelete' smart constructor.
-data InstancesDelete = InstancesDelete'
+data InstancesDelete =
+  InstancesDelete'
     { _idRequestId :: !(Maybe Text)
     , _idProject   :: !Text
     , _idZone      :: !Text
     , _idInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesDelete' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ instancesDelete
     -> Text -- ^ 'idInstance'
     -> InstancesDelete
 instancesDelete pIdProject_ pIdZone_ pIdInstance_ =
-    InstancesDelete'
+  InstancesDelete'
     { _idRequestId = Nothing
     , _idProject = pIdProject_
     , _idZone = pIdZone_

@@ -68,7 +68,8 @@ type ProjectsLocationsKeyRingsCryptoKeysListResource
 -- | Lists CryptoKeys.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysList' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysList = ProjectsLocationsKeyRingsCryptoKeysList'
+data ProjectsLocationsKeyRingsCryptoKeysList =
+  ProjectsLocationsKeyRingsCryptoKeysList'
     { _plkrcklParent         :: !Text
     , _plkrcklXgafv          :: !(Maybe Xgafv)
     , _plkrcklVersionView    :: !(Maybe Text)
@@ -78,7 +79,8 @@ data ProjectsLocationsKeyRingsCryptoKeysList = ProjectsLocationsKeyRingsCryptoKe
     , _plkrcklPageToken      :: !(Maybe Text)
     , _plkrcklPageSize       :: !(Maybe (Textual Int32))
     , _plkrcklCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysList' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsLocationsKeyRingsCryptoKeysList
     :: Text -- ^ 'plkrcklParent'
     -> ProjectsLocationsKeyRingsCryptoKeysList
 projectsLocationsKeyRingsCryptoKeysList pPlkrcklParent_ =
-    ProjectsLocationsKeyRingsCryptoKeysList'
+  ProjectsLocationsKeyRingsCryptoKeysList'
     { _plkrcklParent = pPlkrcklParent_
     , _plkrcklXgafv = Nothing
     , _plkrcklVersionView = Nothing
@@ -177,7 +179,8 @@ plkrcklCallback
       (\ s a -> s{_plkrcklCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysList where
+           ProjectsLocationsKeyRingsCryptoKeysList
+         where
         type Rs ProjectsLocationsKeyRingsCryptoKeysList =
              ListCryptoKeysResponse
         type Scopes ProjectsLocationsKeyRingsCryptoKeysList =

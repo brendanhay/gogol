@@ -51,9 +51,11 @@ type CirclesGetResource =
 -- | Get a circle.
 --
 -- /See:/ 'circlesGet' smart constructor.
-newtype CirclesGet = CirclesGet'
+newtype CirclesGet =
+  CirclesGet'
     { _cgCircleId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CirclesGet' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype CirclesGet = CirclesGet'
 circlesGet
     :: Text -- ^ 'cgCircleId'
     -> CirclesGet
-circlesGet pCgCircleId_ =
-    CirclesGet'
-    { _cgCircleId = pCgCircleId_
-    }
+circlesGet pCgCircleId_ = CirclesGet' {_cgCircleId = pCgCircleId_}
 
 -- | The ID of the circle to get.
 cgCircleId :: Lens' CirclesGet Text

@@ -59,11 +59,13 @@ type MachineTypesGetResource =
 -- types by making a list() request.
 --
 -- /See:/ 'machineTypesGet' smart constructor.
-data MachineTypesGet = MachineTypesGet'
+data MachineTypesGet =
+  MachineTypesGet'
     { _mtgProject     :: !Text
     , _mtgZone        :: !Text
     , _mtgMachineType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypesGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ machineTypesGet
     -> Text -- ^ 'mtgMachineType'
     -> MachineTypesGet
 machineTypesGet pMtgProject_ pMtgZone_ pMtgMachineType_ =
-    MachineTypesGet'
+  MachineTypesGet'
     { _mtgProject = pMtgProject_
     , _mtgZone = pMtgZone_
     , _mtgMachineType = pMtgMachineType_

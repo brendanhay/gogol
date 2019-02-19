@@ -69,7 +69,8 @@ type ProjectsLocationsFunctionsGenerateDownloadURLResource
 -- https:\/\/cloud.google.com\/storage\/docs\/access-control\/signed-urls
 --
 -- /See:/ 'projectsLocationsFunctionsGenerateDownloadURL' smart constructor.
-data ProjectsLocationsFunctionsGenerateDownloadURL = ProjectsLocationsFunctionsGenerateDownloadURL'
+data ProjectsLocationsFunctionsGenerateDownloadURL =
+  ProjectsLocationsFunctionsGenerateDownloadURL'
     { _plfgduXgafv          :: !(Maybe Xgafv)
     , _plfgduUploadProtocol :: !(Maybe Text)
     , _plfgduAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsLocationsFunctionsGenerateDownloadURL = ProjectsLocationsFunctionsG
     , _plfgduPayload        :: !GenerateDownloadURLRequest
     , _plfgduName           :: !Text
     , _plfgduCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsFunctionsGenerateDownloadURL' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsLocationsFunctionsGenerateDownloadURL
     -> Text -- ^ 'plfgduName'
     -> ProjectsLocationsFunctionsGenerateDownloadURL
 projectsLocationsFunctionsGenerateDownloadURL pPlfgduPayload_ pPlfgduName_ =
-    ProjectsLocationsFunctionsGenerateDownloadURL'
+  ProjectsLocationsFunctionsGenerateDownloadURL'
     { _plfgduXgafv = Nothing
     , _plfgduUploadProtocol = Nothing
     , _plfgduAccessToken = Nothing
@@ -153,7 +155,8 @@ plfgduCallback
       (\ s a -> s{_plfgduCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsFunctionsGenerateDownloadURL where
+           ProjectsLocationsFunctionsGenerateDownloadURL
+         where
         type Rs ProjectsLocationsFunctionsGenerateDownloadURL
              = GenerateDownloadURLResponse
         type Scopes

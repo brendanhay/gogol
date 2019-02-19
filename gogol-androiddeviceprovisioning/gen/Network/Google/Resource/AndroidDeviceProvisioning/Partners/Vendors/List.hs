@@ -65,7 +65,8 @@ type PartnersVendorsListResource =
 -- | Lists the vendors of the partner.
 --
 -- /See:/ 'partnersVendorsList' smart constructor.
-data PartnersVendorsList = PartnersVendorsList'
+data PartnersVendorsList =
+  PartnersVendorsList'
     { _pvlParent         :: !Text
     , _pvlXgafv          :: !(Maybe Xgafv)
     , _pvlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data PartnersVendorsList = PartnersVendorsList'
     , _pvlPageToken      :: !(Maybe Text)
     , _pvlPageSize       :: !(Maybe (Textual Int32))
     , _pvlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartnersVendorsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ partnersVendorsList
     :: Text -- ^ 'pvlParent'
     -> PartnersVendorsList
 partnersVendorsList pPvlParent_ =
-    PartnersVendorsList'
+  PartnersVendorsList'
     { _pvlParent = pPvlParent_
     , _pvlXgafv = Nothing
     , _pvlUploadProtocol = Nothing

@@ -51,9 +51,11 @@ type AccountsContainersWorkspacesTriggersGetResource
 -- | Gets a GTM Trigger.
 --
 -- /See:/ 'accountsContainersWorkspacesTriggersGet' smart constructor.
-newtype AccountsContainersWorkspacesTriggersGet = AccountsContainersWorkspacesTriggersGet'
+newtype AccountsContainersWorkspacesTriggersGet =
+  AccountsContainersWorkspacesTriggersGet'
     { _accPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersGet' with the minimum fields required to make a request.
 --
@@ -64,9 +66,7 @@ accountsContainersWorkspacesTriggersGet
     :: Text -- ^ 'accPath'
     -> AccountsContainersWorkspacesTriggersGet
 accountsContainersWorkspacesTriggersGet pAccPath_ =
-    AccountsContainersWorkspacesTriggersGet'
-    { _accPath = pAccPath_
-    }
+  AccountsContainersWorkspacesTriggersGet' {_accPath = pAccPath_}
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}
@@ -74,7 +74,8 @@ accPath :: Lens' AccountsContainersWorkspacesTriggersGet Text
 accPath = lens _accPath (\ s a -> s{_accPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTriggersGet where
+           AccountsContainersWorkspacesTriggersGet
+         where
         type Rs AccountsContainersWorkspacesTriggersGet =
              Trigger
         type Scopes AccountsContainersWorkspacesTriggersGet =

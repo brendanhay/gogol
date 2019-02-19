@@ -84,7 +84,8 @@ type OffersListResource =
 -- | Lists the Offers available for the current user
 --
 -- /See:/ 'offersList' smart constructor.
-data OffersList = OffersList'
+data OffersList =
+  OffersList'
     { _olXgafv                                       :: !(Maybe Xgafv)
     , _olUploadProtocol                              :: !(Maybe Text)
     , _olAccessToken                                 :: !(Maybe Text)
@@ -97,7 +98,8 @@ data OffersList = OffersList'
     , _olRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _olRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _olCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OffersList' with the minimum fields required to make a request.
 --
@@ -129,7 +131,7 @@ data OffersList = OffersList'
 offersList
     :: OffersList
 offersList =
-    OffersList'
+  OffersList'
     { _olXgafv = Nothing
     , _olUploadProtocol = Nothing
     , _olAccessToken = Nothing

@@ -59,11 +59,13 @@ type RegionDiskTypesGetResource =
 -- types by making a list() request.
 --
 -- /See:/ 'regionDiskTypesGet' smart constructor.
-data RegionDiskTypesGet = RegionDiskTypesGet'
+data RegionDiskTypesGet =
+  RegionDiskTypesGet'
     { _rdtgProject  :: !Text
     , _rdtgDiskType :: !Text
     , _rdtgRegion   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionDiskTypesGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ regionDiskTypesGet
     -> Text -- ^ 'rdtgRegion'
     -> RegionDiskTypesGet
 regionDiskTypesGet pRdtgProject_ pRdtgDiskType_ pRdtgRegion_ =
-    RegionDiskTypesGet'
+  RegionDiskTypesGet'
     { _rdtgProject = pRdtgProject_
     , _rdtgDiskType = pRdtgDiskType_
     , _rdtgRegion = pRdtgRegion_

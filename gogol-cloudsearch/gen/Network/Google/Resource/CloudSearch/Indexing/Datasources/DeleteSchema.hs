@@ -63,7 +63,8 @@ type IndexingDatasourcesDeleteSchemaResource =
 -- | Deletes the schema of a data source.
 --
 -- /See:/ 'indexingDatasourcesDeleteSchema' smart constructor.
-data IndexingDatasourcesDeleteSchema = IndexingDatasourcesDeleteSchema'
+data IndexingDatasourcesDeleteSchema =
+  IndexingDatasourcesDeleteSchema'
     { _iddsXgafv                       :: !(Maybe Xgafv)
     , _iddsUploadProtocol              :: !(Maybe Text)
     , _iddsAccessToken                 :: !(Maybe Text)
@@ -71,7 +72,8 @@ data IndexingDatasourcesDeleteSchema = IndexingDatasourcesDeleteSchema'
     , _iddsName                        :: !Text
     , _iddsDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _iddsCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IndexingDatasourcesDeleteSchema' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ indexingDatasourcesDeleteSchema
     :: Text -- ^ 'iddsName'
     -> IndexingDatasourcesDeleteSchema
 indexingDatasourcesDeleteSchema pIddsName_ =
-    IndexingDatasourcesDeleteSchema'
+  IndexingDatasourcesDeleteSchema'
     { _iddsXgafv = Nothing
     , _iddsUploadProtocol = Nothing
     , _iddsAccessToken = Nothing
@@ -145,7 +147,8 @@ iddsCallback
   = lens _iddsCallback (\ s a -> s{_iddsCallback = a})
 
 instance GoogleRequest
-         IndexingDatasourcesDeleteSchema where
+           IndexingDatasourcesDeleteSchema
+         where
         type Rs IndexingDatasourcesDeleteSchema = Operation
         type Scopes IndexingDatasourcesDeleteSchema =
              '["https://www.googleapis.com/auth/cloud_search",

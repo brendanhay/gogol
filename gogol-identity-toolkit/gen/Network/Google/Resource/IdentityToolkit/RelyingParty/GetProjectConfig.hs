@@ -56,10 +56,12 @@ type RelyingPartyGetProjectConfigResource =
 -- | Get project configuration.
 --
 -- /See:/ 'relyingPartyGetProjectConfig' smart constructor.
-data RelyingPartyGetProjectConfig = RelyingPartyGetProjectConfig'
+data RelyingPartyGetProjectConfig =
+  RelyingPartyGetProjectConfig'
     { _rpgpcDelegatedProjectNumber :: !(Maybe Text)
     , _rpgpcProjectNumber          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyGetProjectConfig' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ data RelyingPartyGetProjectConfig = RelyingPartyGetProjectConfig'
 relyingPartyGetProjectConfig
     :: RelyingPartyGetProjectConfig
 relyingPartyGetProjectConfig =
-    RelyingPartyGetProjectConfig'
-    { _rpgpcDelegatedProjectNumber = Nothing
-    , _rpgpcProjectNumber = Nothing
-    }
+  RelyingPartyGetProjectConfig'
+    {_rpgpcDelegatedProjectNumber = Nothing, _rpgpcProjectNumber = Nothing}
 
 -- | Delegated GCP project number of the request.
 rpgpcDelegatedProjectNumber :: Lens' RelyingPartyGetProjectConfig (Maybe Text)

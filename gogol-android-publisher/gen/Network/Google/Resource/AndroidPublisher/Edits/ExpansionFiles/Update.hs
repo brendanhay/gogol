@@ -69,13 +69,15 @@ type EditsExpansionFilesUpdateResource =
 -- method.
 --
 -- /See:/ 'editsExpansionFilesUpdate' smart constructor.
-data EditsExpansionFilesUpdate = EditsExpansionFilesUpdate'
+data EditsExpansionFilesUpdate =
+  EditsExpansionFilesUpdate'
     { _eefuPackageName       :: !Text
     , _eefuAPKVersionCode    :: !(Textual Int32)
     , _eefuPayload           :: !ExpansionFile
     , _eefuExpansionFileType :: !EditsExpansionFilesUpdateExpansionFileType
     , _eefuEditId            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsExpansionFilesUpdate' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ editsExpansionFilesUpdate
     -> Text -- ^ 'eefuEditId'
     -> EditsExpansionFilesUpdate
 editsExpansionFilesUpdate pEefuPackageName_ pEefuAPKVersionCode_ pEefuPayload_ pEefuExpansionFileType_ pEefuEditId_ =
-    EditsExpansionFilesUpdate'
+  EditsExpansionFilesUpdate'
     { _eefuPackageName = pEefuPackageName_
     , _eefuAPKVersionCode = _Coerce # pEefuAPKVersionCode_
     , _eefuPayload = pEefuPayload_

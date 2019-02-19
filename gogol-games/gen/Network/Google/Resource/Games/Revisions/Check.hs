@@ -53,9 +53,11 @@ type RevisionsCheckResource =
 -- | Checks whether the games client is out of date.
 --
 -- /See:/ 'revisionsCheck' smart constructor.
-newtype RevisionsCheck = RevisionsCheck'
+newtype RevisionsCheck =
+  RevisionsCheck'
     { _rcClientRevision :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RevisionsCheck' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ revisionsCheck
     :: Text -- ^ 'rcClientRevision'
     -> RevisionsCheck
 revisionsCheck pRcClientRevision_ =
-    RevisionsCheck'
-    { _rcClientRevision = pRcClientRevision_
-    }
+  RevisionsCheck' {_rcClientRevision = pRcClientRevision_}
 
 -- | The revision of the client SDK used by your application. Format:
 -- [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:

@@ -59,11 +59,13 @@ type AccountsAdUnitsDeleteResource =
 -- account.
 --
 -- /See:/ 'accountsAdUnitsDelete' smart constructor.
-data AccountsAdUnitsDelete = AccountsAdUnitsDelete'
+data AccountsAdUnitsDelete =
+  AccountsAdUnitsDelete'
     { _aaudAdUnitId   :: !Text
     , _aaudAdClientId :: !Text
     , _aaudAccountId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsAdUnitsDelete' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ accountsAdUnitsDelete
     -> Text -- ^ 'aaudAccountId'
     -> AccountsAdUnitsDelete
 accountsAdUnitsDelete pAaudAdUnitId_ pAaudAdClientId_ pAaudAccountId_ =
-    AccountsAdUnitsDelete'
+  AccountsAdUnitsDelete'
     { _aaudAdUnitId = pAaudAdUnitId_
     , _aaudAdClientId = pAaudAdClientId_
     , _aaudAccountId = pAaudAccountId_

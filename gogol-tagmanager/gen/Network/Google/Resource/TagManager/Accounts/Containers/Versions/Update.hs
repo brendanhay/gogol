@@ -55,11 +55,13 @@ type AccountsContainersVersionsUpdateResource =
 -- | Updates a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsUpdate' smart constructor.
-data AccountsContainersVersionsUpdate = AccountsContainersVersionsUpdate'
+data AccountsContainersVersionsUpdate =
+  AccountsContainersVersionsUpdate'
     { _acvucPath        :: !Text
     , _acvucFingerprint :: !(Maybe Text)
     , _acvucPayload     :: !ContainerVersion
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsUpdate' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ accountsContainersVersionsUpdate
     -> ContainerVersion -- ^ 'acvucPayload'
     -> AccountsContainersVersionsUpdate
 accountsContainersVersionsUpdate pAcvucPath_ pAcvucPayload_ =
-    AccountsContainersVersionsUpdate'
+  AccountsContainersVersionsUpdate'
     { _acvucPath = pAcvucPath_
     , _acvucFingerprint = Nothing
     , _acvucPayload = pAcvucPayload_
@@ -100,7 +102,8 @@ acvucPayload
   = lens _acvucPayload (\ s a -> s{_acvucPayload = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsUpdate where
+           AccountsContainersVersionsUpdate
+         where
         type Rs AccountsContainersVersionsUpdate =
              ContainerVersion
         type Scopes AccountsContainersVersionsUpdate =

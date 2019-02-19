@@ -75,7 +75,8 @@ type BeaconsDeactivateResource =
 -- the Google Developers Console project.
 --
 -- /See:/ 'beaconsDeactivate' smart constructor.
-data BeaconsDeactivate = BeaconsDeactivate'
+data BeaconsDeactivate =
+  BeaconsDeactivate'
     { _bdXgafv          :: !(Maybe Xgafv)
     , _bdUploadProtocol :: !(Maybe Text)
     , _bdAccessToken    :: !(Maybe Text)
@@ -83,7 +84,8 @@ data BeaconsDeactivate = BeaconsDeactivate'
     , _bdUploadType     :: !(Maybe Text)
     , _bdProjectId      :: !(Maybe Text)
     , _bdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeaconsDeactivate' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ beaconsDeactivate
     :: Text -- ^ 'bdBeaconName'
     -> BeaconsDeactivate
 beaconsDeactivate pBdBeaconName_ =
-    BeaconsDeactivate'
+  BeaconsDeactivate'
     { _bdXgafv = Nothing
     , _bdUploadProtocol = Nothing
     , _bdAccessToken = Nothing

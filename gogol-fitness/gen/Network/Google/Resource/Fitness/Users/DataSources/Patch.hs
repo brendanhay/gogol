@@ -63,11 +63,13 @@ type UsersDataSourcesPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'usersDataSourcesPatch' smart constructor.
-data UsersDataSourcesPatch = UsersDataSourcesPatch'
+data UsersDataSourcesPatch =
+  UsersDataSourcesPatch'
     { _udspDataSourceId :: !Text
     , _udspPayload      :: !DataSource
     , _udspUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDataSourcesPatch' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ usersDataSourcesPatch
     -> Text -- ^ 'udspUserId'
     -> UsersDataSourcesPatch
 usersDataSourcesPatch pUdspDataSourceId_ pUdspPayload_ pUdspUserId_ =
-    UsersDataSourcesPatch'
+  UsersDataSourcesPatch'
     { _udspDataSourceId = pUdspDataSourceId_
     , _udspPayload = pUdspPayload_
     , _udspUserId = pUdspUserId_

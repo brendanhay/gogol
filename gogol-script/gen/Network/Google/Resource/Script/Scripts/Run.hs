@@ -85,7 +85,8 @@ type ScriptsRunResource =
 -- as the one used by the script.
 --
 -- /See:/ 'scriptsRun' smart constructor.
-data ScriptsRun = ScriptsRun'
+data ScriptsRun =
+  ScriptsRun'
     { _srXgafv          :: !(Maybe Xgafv)
     , _srUploadProtocol :: !(Maybe Text)
     , _srAccessToken    :: !(Maybe Text)
@@ -93,7 +94,8 @@ data ScriptsRun = ScriptsRun'
     , _srPayload        :: !ExecutionRequest
     , _srScriptId       :: !Text
     , _srCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ScriptsRun' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ scriptsRun
     -> Text -- ^ 'srScriptId'
     -> ScriptsRun
 scriptsRun pSrPayload_ pSrScriptId_ =
-    ScriptsRun'
+  ScriptsRun'
     { _srXgafv = Nothing
     , _srUploadProtocol = Nothing
     , _srAccessToken = Nothing

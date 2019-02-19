@@ -67,7 +67,8 @@ type ReportTypesListResource =
 -- | Lists report types.
 --
 -- /See:/ 'reportTypesList' smart constructor.
-data ReportTypesList = ReportTypesList'
+data ReportTypesList =
+  ReportTypesList'
     { _rtlXgafv                  :: !(Maybe Xgafv)
     , _rtlUploadProtocol         :: !(Maybe Text)
     , _rtlAccessToken            :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ReportTypesList = ReportTypesList'
     , _rtlPageToken              :: !(Maybe Text)
     , _rtlPageSize               :: !(Maybe (Textual Int32))
     , _rtlCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportTypesList' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ data ReportTypesList = ReportTypesList'
 reportTypesList
     :: ReportTypesList
 reportTypesList =
-    ReportTypesList'
+  ReportTypesList'
     { _rtlXgafv = Nothing
     , _rtlUploadProtocol = Nothing
     , _rtlAccessToken = Nothing

@@ -69,7 +69,8 @@ type ProjectsZonesClustersUpdateResource =
 -- | Updates the settings of a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersUpdate' smart constructor.
-data ProjectsZonesClustersUpdate = ProjectsZonesClustersUpdate'
+data ProjectsZonesClustersUpdate =
+  ProjectsZonesClustersUpdate'
     { _pzcuXgafv          :: !(Maybe Xgafv)
     , _pzcuUploadProtocol :: !(Maybe Text)
     , _pzcuAccessToken    :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsZonesClustersUpdate = ProjectsZonesClustersUpdate'
     , _pzcuClusterId      :: !Text
     , _pzcuProjectId      :: !Text
     , _pzcuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersUpdate' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsZonesClustersUpdate
     -> Text -- ^ 'pzcuProjectId'
     -> ProjectsZonesClustersUpdate
 projectsZonesClustersUpdate pPzcuZone_ pPzcuPayload_ pPzcuClusterId_ pPzcuProjectId_ =
-    ProjectsZonesClustersUpdate'
+  ProjectsZonesClustersUpdate'
     { _pzcuXgafv = Nothing
     , _pzcuUploadProtocol = Nothing
     , _pzcuAccessToken = Nothing

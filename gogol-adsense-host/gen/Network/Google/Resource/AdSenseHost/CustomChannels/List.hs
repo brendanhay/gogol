@@ -57,11 +57,13 @@ type CustomChannelsListResource =
 -- | List all host custom channels in this AdSense account.
 --
 -- /See:/ 'customChannelsList' smart constructor.
-data CustomChannelsList = CustomChannelsList'
+data CustomChannelsList =
+  CustomChannelsList'
     { _cclAdClientId :: !Text
     , _cclPageToken  :: !(Maybe Text)
     , _cclMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomChannelsList' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ customChannelsList
     :: Text -- ^ 'cclAdClientId'
     -> CustomChannelsList
 customChannelsList pCclAdClientId_ =
-    CustomChannelsList'
+  CustomChannelsList'
     { _cclAdClientId = pCclAdClientId_
     , _cclPageToken = Nothing
     , _cclMaxResults = Nothing

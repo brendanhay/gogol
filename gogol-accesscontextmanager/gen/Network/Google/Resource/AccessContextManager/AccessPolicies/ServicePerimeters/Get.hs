@@ -60,14 +60,16 @@ type AccessPoliciesServicePerimetersGetResource =
 -- | Get an Service Perimeter by resource name.
 --
 -- /See:/ 'accessPoliciesServicePerimetersGet' smart constructor.
-data AccessPoliciesServicePerimetersGet = AccessPoliciesServicePerimetersGet'
+data AccessPoliciesServicePerimetersGet =
+  AccessPoliciesServicePerimetersGet'
     { _apspgXgafv          :: !(Maybe Xgafv)
     , _apspgUploadProtocol :: !(Maybe Text)
     , _apspgAccessToken    :: !(Maybe Text)
     , _apspgUploadType     :: !(Maybe Text)
     , _apspgName           :: !Text
     , _apspgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesServicePerimetersGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ accessPoliciesServicePerimetersGet
     :: Text -- ^ 'apspgName'
     -> AccessPoliciesServicePerimetersGet
 accessPoliciesServicePerimetersGet pApspgName_ =
-    AccessPoliciesServicePerimetersGet'
+  AccessPoliciesServicePerimetersGet'
     { _apspgXgafv = Nothing
     , _apspgUploadProtocol = Nothing
     , _apspgAccessToken = Nothing
@@ -133,7 +135,8 @@ apspgCallback
       (\ s a -> s{_apspgCallback = a})
 
 instance GoogleRequest
-         AccessPoliciesServicePerimetersGet where
+           AccessPoliciesServicePerimetersGet
+         where
         type Rs AccessPoliciesServicePerimetersGet =
              ServicePerimeter
         type Scopes AccessPoliciesServicePerimetersGet =

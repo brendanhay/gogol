@@ -69,7 +69,8 @@ type ProjectsLocationsTemplatesGetResource =
 -- | Get the template associated with a template.
 --
 -- /See:/ 'projectsLocationsTemplatesGet' smart constructor.
-data ProjectsLocationsTemplatesGet = ProjectsLocationsTemplatesGet'
+data ProjectsLocationsTemplatesGet =
+  ProjectsLocationsTemplatesGet'
     { _pltgXgafv          :: !(Maybe Xgafv)
     , _pltgUploadProtocol :: !(Maybe Text)
     , _pltgLocation       :: !Text
@@ -79,7 +80,8 @@ data ProjectsLocationsTemplatesGet = ProjectsLocationsTemplatesGet'
     , _pltgView           :: !(Maybe Text)
     , _pltgProjectId      :: !Text
     , _pltgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsTemplatesGet' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ projectsLocationsTemplatesGet
     -> Text -- ^ 'pltgProjectId'
     -> ProjectsLocationsTemplatesGet
 projectsLocationsTemplatesGet pPltgLocation_ pPltgProjectId_ =
-    ProjectsLocationsTemplatesGet'
+  ProjectsLocationsTemplatesGet'
     { _pltgXgafv = Nothing
     , _pltgUploadProtocol = Nothing
     , _pltgLocation = pPltgLocation_

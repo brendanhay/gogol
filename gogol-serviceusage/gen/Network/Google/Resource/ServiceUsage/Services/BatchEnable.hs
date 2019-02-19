@@ -67,7 +67,8 @@ type ServicesBatchEnableResource =
 -- changes occur. Operation
 --
 -- /See:/ 'servicesBatchEnable' smart constructor.
-data ServicesBatchEnable = ServicesBatchEnable'
+data ServicesBatchEnable =
+  ServicesBatchEnable'
     { _sbeParent         :: !Text
     , _sbeXgafv          :: !(Maybe Xgafv)
     , _sbeUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ServicesBatchEnable = ServicesBatchEnable'
     , _sbeUploadType     :: !(Maybe Text)
     , _sbePayload        :: !BatchEnableServicesRequest
     , _sbeCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesBatchEnable' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ servicesBatchEnable
     -> BatchEnableServicesRequest -- ^ 'sbePayload'
     -> ServicesBatchEnable
 servicesBatchEnable pSbeParent_ pSbePayload_ =
-    ServicesBatchEnable'
+  ServicesBatchEnable'
     { _sbeParent = pSbeParent_
     , _sbeXgafv = Nothing
     , _sbeUploadProtocol = Nothing

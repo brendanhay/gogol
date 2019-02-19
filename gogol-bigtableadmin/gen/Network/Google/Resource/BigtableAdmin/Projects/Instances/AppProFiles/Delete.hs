@@ -61,7 +61,8 @@ type ProjectsInstancesAppProFilesDeleteResource =
 -- | Deletes an app profile from an instance.
 --
 -- /See:/ 'projectsInstancesAppProFilesDelete' smart constructor.
-data ProjectsInstancesAppProFilesDelete = ProjectsInstancesAppProFilesDelete'
+data ProjectsInstancesAppProFilesDelete =
+  ProjectsInstancesAppProFilesDelete'
     { _piapfdXgafv          :: !(Maybe Xgafv)
     , _piapfdUploadProtocol :: !(Maybe Text)
     , _piapfdAccessToken    :: !(Maybe Text)
@@ -69,7 +70,8 @@ data ProjectsInstancesAppProFilesDelete = ProjectsInstancesAppProFilesDelete'
     , _piapfdIgnoreWarnings :: !(Maybe Bool)
     , _piapfdName           :: !Text
     , _piapfdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesAppProFilesDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ projectsInstancesAppProFilesDelete
     :: Text -- ^ 'piapfdName'
     -> ProjectsInstancesAppProFilesDelete
 projectsInstancesAppProFilesDelete pPiapfdName_ =
-    ProjectsInstancesAppProFilesDelete'
+  ProjectsInstancesAppProFilesDelete'
     { _piapfdXgafv = Nothing
     , _piapfdUploadProtocol = Nothing
     , _piapfdAccessToken = Nothing
@@ -144,7 +146,8 @@ piapfdCallback
       (\ s a -> s{_piapfdCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesAppProFilesDelete where
+           ProjectsInstancesAppProFilesDelete
+         where
         type Rs ProjectsInstancesAppProFilesDelete = Empty
         type Scopes ProjectsInstancesAppProFilesDelete =
              '["https://www.googleapis.com/auth/bigtable.admin",

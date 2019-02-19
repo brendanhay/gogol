@@ -57,11 +57,13 @@ type PosInventoryResource =
 -- | Submit inventory for the given merchant.
 --
 -- /See:/ 'posInventory'' smart constructor.
-data PosInventory' = PosInventory''
+data PosInventory' =
+  PosInventory''
     { _piMerchantId       :: !(Textual Word64)
     , _piTargetMerchantId :: !(Textual Word64)
     , _piPayload          :: !PosInventoryRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PosInventory'' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ posInventory'
     -> PosInventoryRequest -- ^ 'piPayload'
     -> PosInventory'
 posInventory' pPiMerchantId_ pPiTargetMerchantId_ pPiPayload_ =
-    PosInventory''
+  PosInventory''
     { _piMerchantId = _Coerce # pPiMerchantId_
     , _piTargetMerchantId = _Coerce # pPiTargetMerchantId_
     , _piPayload = pPiPayload_

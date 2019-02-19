@@ -628,4 +628,4 @@ androidEnterpriseService
 
 -- | Manage corporate Android devices
 androidEnterpriseScope :: Proxy '["https://www.googleapis.com/auth/androidenterprise"]
-androidEnterpriseScope = Proxy;
+androidEnterpriseScope = Proxy

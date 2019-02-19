@@ -50,9 +50,11 @@ type AccountsContainersVersionsDeleteResource =
 -- | Deletes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsDelete' smart constructor.
-newtype AccountsContainersVersionsDelete = AccountsContainersVersionsDelete'
+newtype AccountsContainersVersionsDelete =
+  AccountsContainersVersionsDelete'
     { _acvdPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsDelete' with the minimum fields required to make a request.
 --
@@ -63,9 +65,7 @@ accountsContainersVersionsDelete
     :: Text -- ^ 'acvdPath'
     -> AccountsContainersVersionsDelete
 accountsContainersVersionsDelete pAcvdPath_ =
-    AccountsContainersVersionsDelete'
-    { _acvdPath = pAcvdPath_
-    }
+  AccountsContainersVersionsDelete' {_acvdPath = pAcvdPath_}
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}
@@ -73,7 +73,8 @@ acvdPath :: Lens' AccountsContainersVersionsDelete Text
 acvdPath = lens _acvdPath (\ s a -> s{_acvdPath = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsDelete where
+           AccountsContainersVersionsDelete
+         where
         type Rs AccountsContainersVersionsDelete = ()
         type Scopes AccountsContainersVersionsDelete =
              '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]

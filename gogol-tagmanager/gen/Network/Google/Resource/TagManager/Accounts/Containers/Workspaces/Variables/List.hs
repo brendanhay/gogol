@@ -55,10 +55,12 @@ type AccountsContainersWorkspacesVariablesListResource
 -- | Lists all GTM Variables of a Container.
 --
 -- /See:/ 'accountsContainersWorkspacesVariablesList' smart constructor.
-data AccountsContainersWorkspacesVariablesList = AccountsContainersWorkspacesVariablesList'
+data AccountsContainersWorkspacesVariablesList =
+  AccountsContainersWorkspacesVariablesList'
     { _acwvlParent    :: !Text
     , _acwvlPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesVariablesList' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsContainersWorkspacesVariablesList
     :: Text -- ^ 'acwvlParent'
     -> AccountsContainersWorkspacesVariablesList
 accountsContainersWorkspacesVariablesList pAcwvlParent_ =
-    AccountsContainersWorkspacesVariablesList'
-    { _acwvlParent = pAcwvlParent_
-    , _acwvlPageToken = Nothing
-    }
+  AccountsContainersWorkspacesVariablesList'
+    {_acwvlParent = pAcwvlParent_, _acwvlPageToken = Nothing}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -89,7 +89,8 @@ acwvlPageToken
       (\ s a -> s{_acwvlPageToken = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesVariablesList where
+           AccountsContainersWorkspacesVariablesList
+         where
         type Rs AccountsContainersWorkspacesVariablesList =
              ListVariablesResponse
         type Scopes AccountsContainersWorkspacesVariablesList

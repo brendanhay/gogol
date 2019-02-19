@@ -52,9 +52,11 @@ type ApplicationsGetResource =
 -- | Retrieves information about an application for the given application ID.
 --
 -- /See:/ 'applicationsGet' smart constructor.
-newtype ApplicationsGet = ApplicationsGet'
+newtype ApplicationsGet =
+  ApplicationsGet'
     { _agApplicationId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApplicationsGet' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ applicationsGet
     :: Int64 -- ^ 'agApplicationId'
     -> ApplicationsGet
 applicationsGet pAgApplicationId_ =
-    ApplicationsGet'
-    { _agApplicationId = _Coerce # pAgApplicationId_
-    }
+  ApplicationsGet' {_agApplicationId = _Coerce # pAgApplicationId_}
 
 -- | ID of the application resource to be retrieved.
 agApplicationId :: Lens' ApplicationsGet Int64

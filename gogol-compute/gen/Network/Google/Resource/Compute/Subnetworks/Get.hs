@@ -59,11 +59,13 @@ type SubnetworksGetResource =
 -- list() request.
 --
 -- /See:/ 'subnetworksGet' smart constructor.
-data SubnetworksGet = SubnetworksGet'
+data SubnetworksGet =
+  SubnetworksGet'
     { _sgProject    :: !Text
     , _sgSubnetwork :: !Text
     , _sgRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ subnetworksGet
     -> Text -- ^ 'sgRegion'
     -> SubnetworksGet
 subnetworksGet pSgProject_ pSgSubnetwork_ pSgRegion_ =
-    SubnetworksGet'
+  SubnetworksGet'
     { _sgProject = pSgProject_
     , _sgSubnetwork = pSgSubnetwork_
     , _sgRegion = pSgRegion_

@@ -57,11 +57,13 @@ type BackendBucketsDeleteResource =
 -- | Deletes the specified BackendBucket resource.
 --
 -- /See:/ 'backendBucketsDelete' smart constructor.
-data BackendBucketsDelete = BackendBucketsDelete'
+data BackendBucketsDelete =
+  BackendBucketsDelete'
     { _bbdRequestId     :: !(Maybe Text)
     , _bbdBackendBucket :: !Text
     , _bbdProject       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendBucketsDelete' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ backendBucketsDelete
     -> Text -- ^ 'bbdProject'
     -> BackendBucketsDelete
 backendBucketsDelete pBbdBackendBucket_ pBbdProject_ =
-    BackendBucketsDelete'
+  BackendBucketsDelete'
     { _bbdRequestId = Nothing
     , _bbdBackendBucket = pBbdBackendBucket_
     , _bbdProject = pBbdProject_

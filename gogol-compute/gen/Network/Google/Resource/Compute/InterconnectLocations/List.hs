@@ -64,13 +64,15 @@ type InterconnectLocationsListResource =
 -- project.
 --
 -- /See:/ 'interconnectLocationsList' smart constructor.
-data InterconnectLocationsList = InterconnectLocationsList'
+data InterconnectLocationsList =
+  InterconnectLocationsList'
     { _illOrderBy    :: !(Maybe Text)
     , _illProject    :: !Text
     , _illFilter     :: !(Maybe Text)
     , _illPageToken  :: !(Maybe Text)
     , _illMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectLocationsList' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ interconnectLocationsList
     :: Text -- ^ 'illProject'
     -> InterconnectLocationsList
 interconnectLocationsList pIllProject_ =
-    InterconnectLocationsList'
+  InterconnectLocationsList'
     { _illOrderBy = Nothing
     , _illProject = pIllProject_
     , _illFilter = Nothing

@@ -29,13 +29,15 @@ import           Network.Google.Prelude
 -- that returns the monitored resource descriptors used by the API.
 --
 -- /See:/ 'monitoredResourceDescriptor' smart constructor.
-data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
+data MonitoredResourceDescriptor =
+  MonitoredResourceDescriptor'
     { _mrdName        :: !(Maybe Text)
     , _mrdDisplayName :: !(Maybe Text)
     , _mrdLabels      :: !(Maybe [LabelDescriptor])
     , _mrdType        :: !(Maybe Text)
     , _mrdDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitoredResourceDescriptor' with the minimum fields required to make a request.
 --
@@ -53,7 +55,7 @@ data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
 monitoredResourceDescriptor
     :: MonitoredResourceDescriptor
 monitoredResourceDescriptor =
-    MonitoredResourceDescriptor'
+  MonitoredResourceDescriptor'
     { _mrdName = Nothing
     , _mrdDisplayName = Nothing
     , _mrdLabels = Nothing
@@ -157,11 +159,13 @@ instance ToJSON MonitoredResourceDescriptor where
 -- needed for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -174,12 +178,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -220,10 +219,12 @@ instance ToJSON Status where
 -- | The ListNotificationChannels response.
 --
 -- /See:/ 'listNotificationChannelsResponse' smart constructor.
-data ListNotificationChannelsResponse = ListNotificationChannelsResponse'
+data ListNotificationChannelsResponse =
+  ListNotificationChannelsResponse'
     { _lncrNextPageToken        :: !(Maybe Text)
     , _lncrNotificationChannels :: !(Maybe [NotificationChannel])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListNotificationChannelsResponse' with the minimum fields required to make a request.
 --
@@ -235,10 +236,8 @@ data ListNotificationChannelsResponse = ListNotificationChannelsResponse'
 listNotificationChannelsResponse
     :: ListNotificationChannelsResponse
 listNotificationChannelsResponse =
-    ListNotificationChannelsResponse'
-    { _lncrNextPageToken = Nothing
-    , _lncrNotificationChannels = Nothing
-    }
+  ListNotificationChannelsResponse'
+    {_lncrNextPageToken = Nothing, _lncrNotificationChannels = Nothing}
 
 -- | If not empty, indicates that there may be more results that match the
 -- request. Use the value in the page_token field in a subsequent request
@@ -278,11 +277,13 @@ instance ToJSON ListNotificationChannelsResponse
 -- | The ListTimeSeries response.
 --
 -- /See:/ 'listTimeSeriesResponse' smart constructor.
-data ListTimeSeriesResponse = ListTimeSeriesResponse'
+data ListTimeSeriesResponse =
+  ListTimeSeriesResponse'
     { _ltsrNextPageToken   :: !(Maybe Text)
     , _ltsrExecutionErrors :: !(Maybe [Status])
     , _ltsrTimeSeries      :: !(Maybe [TimeSeries])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTimeSeriesResponse' with the minimum fields required to make a request.
 --
@@ -296,7 +297,7 @@ data ListTimeSeriesResponse = ListTimeSeriesResponse'
 listTimeSeriesResponse
     :: ListTimeSeriesResponse
 listTimeSeriesResponse =
-    ListTimeSeriesResponse'
+  ListTimeSeriesResponse'
     { _ltsrNextPageToken = Nothing
     , _ltsrExecutionErrors = Nothing
     , _ltsrTimeSeries = Nothing
@@ -347,10 +348,12 @@ instance ToJSON ListTimeSeriesResponse where
 -- | The GetNotificationChannelVerificationCode request.
 --
 -- /See:/ 'getNotificationChannelVerificationCodeResponse' smart constructor.
-data GetNotificationChannelVerificationCodeResponse = GetNotificationChannelVerificationCodeResponse'
+data GetNotificationChannelVerificationCodeResponse =
+  GetNotificationChannelVerificationCodeResponse'
     { _gncvcrCode       :: !(Maybe Text)
     , _gncvcrExpireTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetNotificationChannelVerificationCodeResponse' with the minimum fields required to make a request.
 --
@@ -362,10 +365,8 @@ data GetNotificationChannelVerificationCodeResponse = GetNotificationChannelVeri
 getNotificationChannelVerificationCodeResponse
     :: GetNotificationChannelVerificationCodeResponse
 getNotificationChannelVerificationCodeResponse =
-    GetNotificationChannelVerificationCodeResponse'
-    { _gncvcrCode = Nothing
-    , _gncvcrExpireTime = Nothing
-    }
+  GetNotificationChannelVerificationCodeResponse'
+    {_gncvcrCode = Nothing, _gncvcrExpireTime = Nothing}
 
 -- | The verification code, which may be used to verify other channels that
 -- have an equivalent identity (i.e. other channels of the same type with
@@ -385,7 +386,8 @@ gncvcrExpireTime
       . mapping _DateTime
 
 instance FromJSON
-         GetNotificationChannelVerificationCodeResponse where
+           GetNotificationChannelVerificationCodeResponse
+         where
         parseJSON
           = withObject
               "GetNotificationChannelVerificationCodeResponse"
@@ -394,7 +396,8 @@ instance FromJSON
                    (o .:? "code") <*> (o .:? "expireTime"))
 
 instance ToJSON
-         GetNotificationChannelVerificationCodeResponse where
+           GetNotificationChannelVerificationCodeResponse
+         where
         toJSON
           GetNotificationChannelVerificationCodeResponse'{..}
           = object
@@ -405,10 +408,12 @@ instance ToJSON
 -- | The ListNotificationChannelDescriptors response.
 --
 -- /See:/ 'listNotificationChannelDescriptorsResponse' smart constructor.
-data ListNotificationChannelDescriptorsResponse = ListNotificationChannelDescriptorsResponse'
+data ListNotificationChannelDescriptorsResponse =
+  ListNotificationChannelDescriptorsResponse'
     { _lncdrNextPageToken      :: !(Maybe Text)
     , _lncdrChannelDescriptors :: !(Maybe [NotificationChannelDescriptor])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListNotificationChannelDescriptorsResponse' with the minimum fields required to make a request.
 --
@@ -420,10 +425,8 @@ data ListNotificationChannelDescriptorsResponse = ListNotificationChannelDescrip
 listNotificationChannelDescriptorsResponse
     :: ListNotificationChannelDescriptorsResponse
 listNotificationChannelDescriptorsResponse =
-    ListNotificationChannelDescriptorsResponse'
-    { _lncdrNextPageToken = Nothing
-    , _lncdrChannelDescriptors = Nothing
-    }
+  ListNotificationChannelDescriptorsResponse'
+    {_lncdrNextPageToken = Nothing, _lncdrChannelDescriptors = Nothing}
 
 -- | If not empty, indicates that there may be more results that match the
 -- request. Use the value in the page_token field in a subsequent request
@@ -444,7 +447,8 @@ lncdrChannelDescriptors
       . _Coerce
 
 instance FromJSON
-         ListNotificationChannelDescriptorsResponse where
+           ListNotificationChannelDescriptorsResponse
+         where
         parseJSON
           = withObject
               "ListNotificationChannelDescriptorsResponse"
@@ -454,7 +458,8 @@ instance FromJSON
                      (o .:? "channelDescriptors" .!= mempty))
 
 instance ToJSON
-         ListNotificationChannelDescriptorsResponse where
+           ListNotificationChannelDescriptorsResponse
+         where
         toJSON
           ListNotificationChannelDescriptorsResponse'{..}
           = object
@@ -468,7 +473,8 @@ instance ToJSON
 -- metric type\'s existing data unusable.
 --
 -- /See:/ 'metricDescriptor' smart constructor.
-data MetricDescriptor = MetricDescriptor'
+data MetricDescriptor =
+  MetricDescriptor'
     { _mdMetricKind  :: !(Maybe MetricDescriptorMetricKind)
     , _mdName        :: !(Maybe Text)
     , _mdMetadata    :: !(Maybe MetricDescriptorMetadata)
@@ -478,7 +484,8 @@ data MetricDescriptor = MetricDescriptor'
     , _mdValueType   :: !(Maybe MetricDescriptorValueType)
     , _mdDescription :: !(Maybe Text)
     , _mdUnit        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
@@ -504,7 +511,7 @@ data MetricDescriptor = MetricDescriptor'
 metricDescriptor
     :: MetricDescriptor
 metricDescriptor =
-    MetricDescriptor'
+  MetricDescriptor'
     { _mdMetricKind = Nothing
     , _mdName = Nothing
     , _mdMetadata = Nothing
@@ -651,13 +658,15 @@ instance ToJSON MetricDescriptor where
 -- ancestors.
 --
 -- /See:/ 'group'' smart constructor.
-data Group = Group'
+data Group =
+  Group'
     { _gName        :: !(Maybe Text)
     , _gDisplayName :: !(Maybe Text)
     , _gFilter      :: !(Maybe Text)
     , _gIsCluster   :: !(Maybe Bool)
     , _gParentName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
@@ -675,7 +684,7 @@ data Group = Group'
 group'
     :: Group
 group' =
-    Group'
+  Group'
     { _gName = Nothing
     , _gDisplayName = Nothing
     , _gFilter = Nothing
@@ -737,13 +746,15 @@ instance ToJSON Group where
 -- | A single strongly-typed value.
 --
 -- /See:/ 'typedValue' smart constructor.
-data TypedValue = TypedValue'
+data TypedValue =
+  TypedValue'
     { _tvBoolValue         :: !(Maybe Bool)
     , _tvDoubleValue       :: !(Maybe (Textual Double))
     , _tvStringValue       :: !(Maybe Text)
     , _tvDistributionValue :: !(Maybe Distribution)
     , _tvInt64Value        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TypedValue' with the minimum fields required to make a request.
 --
@@ -761,7 +772,7 @@ data TypedValue = TypedValue'
 typedValue
     :: TypedValue
 typedValue =
-    TypedValue'
+  TypedValue'
     { _tvBoolValue = Nothing
     , _tvDoubleValue = Nothing
     , _tvStringValue = Nothing
@@ -825,9 +836,11 @@ instance ToJSON TypedValue where
 -- use the labels \"project_id\", \"instance_id\", and \"zone\".
 --
 -- /See:/ 'monitoredResourceLabels' smart constructor.
-newtype MonitoredResourceLabels = MonitoredResourceLabels'
+newtype MonitoredResourceLabels =
+  MonitoredResourceLabels'
     { _mrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitoredResourceLabels' with the minimum fields required to make a request.
 --
@@ -838,9 +851,7 @@ monitoredResourceLabels
     :: HashMap Text Text -- ^ 'mrlAddtional'
     -> MonitoredResourceLabels
 monitoredResourceLabels pMrlAddtional_ =
-    MonitoredResourceLabels'
-    { _mrlAddtional = _Coerce # pMrlAddtional_
-    }
+  MonitoredResourceLabels' {_mrlAddtional = _Coerce # pMrlAddtional_}
 
 mrlAddtional :: Lens' MonitoredResourceLabels (HashMap Text Text)
 mrlAddtional
@@ -864,10 +875,12 @@ instance ToJSON MonitoredResourceLabels where
 -- this message.
 --
 -- /See:/ 'monitoredResourceMetadata' smart constructor.
-data MonitoredResourceMetadata = MonitoredResourceMetadata'
+data MonitoredResourceMetadata =
+  MonitoredResourceMetadata'
     { _mrmUserLabels   :: !(Maybe MonitoredResourceMetadataUserLabels)
     , _mrmSystemLabels :: !(Maybe MonitoredResourceMetadataSystemLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitoredResourceMetadata' with the minimum fields required to make a request.
 --
@@ -879,10 +892,8 @@ data MonitoredResourceMetadata = MonitoredResourceMetadata'
 monitoredResourceMetadata
     :: MonitoredResourceMetadata
 monitoredResourceMetadata =
-    MonitoredResourceMetadata'
-    { _mrmUserLabels = Nothing
-    , _mrmSystemLabels = Nothing
-    }
+  MonitoredResourceMetadata'
+    {_mrmUserLabels = Nothing, _mrmSystemLabels = Nothing}
 
 -- | Output only. A map of user-defined metadata labels.
 mrmUserLabels :: Lens' MonitoredResourceMetadata (Maybe MonitoredResourceMetadataUserLabels)
@@ -925,9 +936,11 @@ instance ToJSON MonitoredResourceMetadata where
 -- letter.
 --
 -- /See:/ 'notificationChannelUserLabels' smart constructor.
-newtype NotificationChannelUserLabels = NotificationChannelUserLabels'
+newtype NotificationChannelUserLabels =
+  NotificationChannelUserLabels'
     { _nculAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationChannelUserLabels' with the minimum fields required to make a request.
 --
@@ -938,9 +951,7 @@ notificationChannelUserLabels
     :: HashMap Text Text -- ^ 'nculAddtional'
     -> NotificationChannelUserLabels
 notificationChannelUserLabels pNculAddtional_ =
-    NotificationChannelUserLabels'
-    { _nculAddtional = _Coerce # pNculAddtional_
-    }
+  NotificationChannelUserLabels' {_nculAddtional = _Coerce # pNculAddtional_}
 
 nculAddtional :: Lens' NotificationChannelUserLabels (HashMap Text Text)
 nculAddtional
@@ -962,9 +973,11 @@ instance ToJSON NotificationChannelUserLabels where
 -- element, like the file in which it is defined.
 --
 -- /See:/ 'sourceContext' smart constructor.
-newtype SourceContext = SourceContext'
+newtype SourceContext =
+  SourceContext'
     { _scFileName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
@@ -973,10 +986,7 @@ newtype SourceContext = SourceContext'
 -- * 'scFileName'
 sourceContext
     :: SourceContext
-sourceContext =
-    SourceContext'
-    { _scFileName = Nothing
-    }
+sourceContext = SourceContext' {_scFileName = Nothing}
 
 -- | The path-qualified name of the .proto file that contained the associated
 -- protobuf element. For example:
@@ -1000,10 +1010,12 @@ instance ToJSON SourceContext where
 -- authentication is supported in Uptime Monitoring.
 --
 -- /See:/ 'basicAuthentication' smart constructor.
-data BasicAuthentication = BasicAuthentication'
+data BasicAuthentication =
+  BasicAuthentication'
     { _baUsername :: !(Maybe Text)
     , _baPassword :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BasicAuthentication' with the minimum fields required to make a request.
 --
@@ -1015,10 +1027,7 @@ data BasicAuthentication = BasicAuthentication'
 basicAuthentication
     :: BasicAuthentication
 basicAuthentication =
-    BasicAuthentication'
-    { _baUsername = Nothing
-    , _baPassword = Nothing
-    }
+  BasicAuthentication' {_baUsername = Nothing, _baPassword = Nothing}
 
 -- | The username to authenticate.
 baUsername :: Lens' BasicAuthentication (Maybe Text)
@@ -1058,7 +1067,8 @@ instance ToJSON BasicAuthentication where
 -- meaningless.
 --
 -- /See:/ 'distribution' smart constructor.
-data Distribution = Distribution'
+data Distribution =
+  Distribution'
     { _dSumOfSquaredDeviation :: !(Maybe (Textual Double))
     , _dMean                  :: !(Maybe (Textual Double))
     , _dCount                 :: !(Maybe (Textual Int64))
@@ -1066,7 +1076,8 @@ data Distribution = Distribution'
     , _dExemplars             :: !(Maybe [Exemplar])
     , _dRange                 :: !(Maybe Range)
     , _dBucketOptions         :: !(Maybe BucketOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Distribution' with the minimum fields required to make a request.
 --
@@ -1088,7 +1099,7 @@ data Distribution = Distribution'
 distribution
     :: Distribution
 distribution =
-    Distribution'
+  Distribution'
     { _dSumOfSquaredDeviation = Nothing
     , _dMean = Nothing
     , _dCount = Nothing
@@ -1187,7 +1198,8 @@ instance ToJSON Distribution where
 -- | A single field of a message type.
 --
 -- /See:/ 'field' smart constructor.
-data Field = Field'
+data Field =
+  Field'
     { _fKind         :: !(Maybe FieldKind)
     , _fOneofIndex   :: !(Maybe (Textual Int32))
     , _fName         :: !(Maybe Text)
@@ -1198,7 +1210,8 @@ data Field = Field'
     , _fDefaultValue :: !(Maybe Text)
     , _fNumber       :: !(Maybe (Textual Int32))
     , _fTypeURL      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Field' with the minimum fields required to make a request.
 --
@@ -1226,7 +1239,7 @@ data Field = Field'
 field
     :: Field
 field =
-    Field'
+  Field'
     { _fKind = Nothing
     , _fOneofIndex = Nothing
     , _fName = Nothing
@@ -1325,9 +1338,11 @@ instance ToJSON Field where
 
 --
 -- /See:/ 'exemplarAttachmentsItem' smart constructor.
-newtype ExemplarAttachmentsItem = ExemplarAttachmentsItem'
+newtype ExemplarAttachmentsItem =
+  ExemplarAttachmentsItem'
     { _eaiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExemplarAttachmentsItem' with the minimum fields required to make a request.
 --
@@ -1338,9 +1353,7 @@ exemplarAttachmentsItem
     :: HashMap Text JSONValue -- ^ 'eaiAddtional'
     -> ExemplarAttachmentsItem
 exemplarAttachmentsItem pEaiAddtional_ =
-    ExemplarAttachmentsItem'
-    { _eaiAddtional = _Coerce # pEaiAddtional_
-    }
+  ExemplarAttachmentsItem' {_eaiAddtional = _Coerce # pEaiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 eaiAddtional :: Lens' ExemplarAttachmentsItem (HashMap Text JSONValue)
@@ -1362,14 +1375,16 @@ instance ToJSON ExemplarAttachmentsItem where
 -- specified to configure channels of a given type.
 --
 -- /See:/ 'notificationChannelDescriptor' smart constructor.
-data NotificationChannelDescriptor = NotificationChannelDescriptor'
+data NotificationChannelDescriptor =
+  NotificationChannelDescriptor'
     { _ncdName           :: !(Maybe Text)
     , _ncdSupportedTiers :: !(Maybe [Text])
     , _ncdDisplayName    :: !(Maybe Text)
     , _ncdLabels         :: !(Maybe [LabelDescriptor])
     , _ncdType           :: !(Maybe Text)
     , _ncdDescription    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationChannelDescriptor' with the minimum fields required to make a request.
 --
@@ -1389,7 +1404,7 @@ data NotificationChannelDescriptor = NotificationChannelDescriptor'
 notificationChannelDescriptor
     :: NotificationChannelDescriptor
 notificationChannelDescriptor =
-    NotificationChannelDescriptor'
+  NotificationChannelDescriptor'
     { _ncdName = Nothing
     , _ncdSupportedTiers = Nothing
     , _ncdDisplayName = Nothing
@@ -1473,8 +1488,8 @@ instance ToJSON NotificationChannelDescriptor where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -1491,10 +1506,12 @@ instance ToJSON Empty where
 -- | The ListGroups response.
 --
 -- /See:/ 'listGroupsResponse' smart constructor.
-data ListGroupsResponse = ListGroupsResponse'
+data ListGroupsResponse =
+  ListGroupsResponse'
     { _lgrNextPageToken :: !(Maybe Text)
     , _lgrGroup         :: !(Maybe [Group])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGroupsResponse' with the minimum fields required to make a request.
 --
@@ -1506,10 +1523,7 @@ data ListGroupsResponse = ListGroupsResponse'
 listGroupsResponse
     :: ListGroupsResponse
 listGroupsResponse =
-    ListGroupsResponse'
-    { _lgrNextPageToken = Nothing
-    , _lgrGroup = Nothing
-    }
+  ListGroupsResponse' {_lgrNextPageToken = Nothing, _lgrGroup = Nothing}
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
@@ -1544,10 +1558,12 @@ instance ToJSON ListGroupsResponse where
 -- | The ListMetricDescriptors response.
 --
 -- /See:/ 'listMetricDescriptorsResponse' smart constructor.
-data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse'
+data ListMetricDescriptorsResponse =
+  ListMetricDescriptorsResponse'
     { _lmdrMetricDescriptors :: !(Maybe [MetricDescriptor])
     , _lmdrNextPageToken     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMetricDescriptorsResponse' with the minimum fields required to make a request.
 --
@@ -1559,10 +1575,8 @@ data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse'
 listMetricDescriptorsResponse
     :: ListMetricDescriptorsResponse
 listMetricDescriptorsResponse =
-    ListMetricDescriptorsResponse'
-    { _lmdrMetricDescriptors = Nothing
-    , _lmdrNextPageToken = Nothing
-    }
+  ListMetricDescriptorsResponse'
+    {_lmdrMetricDescriptors = Nothing, _lmdrNextPageToken = Nothing}
 
 -- | The metric descriptors that are available to the project and that match
 -- the value of filter, if present.
@@ -1599,9 +1613,11 @@ instance ToJSON ListMetricDescriptorsResponse where
 -- | The VerifyNotificationChannel request.
 --
 -- /See:/ 'verifyNotificationChannelRequest' smart constructor.
-newtype VerifyNotificationChannelRequest = VerifyNotificationChannelRequest'
+newtype VerifyNotificationChannelRequest =
+  VerifyNotificationChannelRequest'
     { _vncrCode :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VerifyNotificationChannelRequest' with the minimum fields required to make a request.
 --
@@ -1611,9 +1627,7 @@ newtype VerifyNotificationChannelRequest = VerifyNotificationChannelRequest'
 verifyNotificationChannelRequest
     :: VerifyNotificationChannelRequest
 verifyNotificationChannelRequest =
-    VerifyNotificationChannelRequest'
-    { _vncrCode = Nothing
-    }
+  VerifyNotificationChannelRequest' {_vncrCode = Nothing}
 
 -- | The verification code that was delivered to the channel as a result of
 -- invoking the SendNotificationChannelVerificationCode API method or that
@@ -1644,9 +1658,11 @@ instance ToJSON VerifyNotificationChannelRequest
 -- google.protobuf.Int32Value type.
 --
 -- /See:/ 'optionValue' smart constructor.
-newtype OptionValue = OptionValue'
+newtype OptionValue =
+  OptionValue'
     { _ovAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OptionValue' with the minimum fields required to make a request.
 --
@@ -1657,9 +1673,7 @@ optionValue
     :: HashMap Text JSONValue -- ^ 'ovAddtional'
     -> OptionValue
 optionValue pOvAddtional_ =
-    OptionValue'
-    { _ovAddtional = _Coerce # pOvAddtional_
-    }
+  OptionValue' {_ovAddtional = _Coerce # pOvAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 ovAddtional :: Lens' OptionValue (HashMap Text JSONValue)
@@ -1681,9 +1695,11 @@ instance ToJSON OptionValue where
 -- NotificationChannelDescriptor corresponding to the type field.
 --
 -- /See:/ 'notificationChannelLabels' smart constructor.
-newtype NotificationChannelLabels = NotificationChannelLabels'
+newtype NotificationChannelLabels =
+  NotificationChannelLabels'
     { _nclAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationChannelLabels' with the minimum fields required to make a request.
 --
@@ -1694,9 +1710,7 @@ notificationChannelLabels
     :: HashMap Text Text -- ^ 'nclAddtional'
     -> NotificationChannelLabels
 notificationChannelLabels pNclAddtional_ =
-    NotificationChannelLabels'
-    { _nclAddtional = _Coerce # pNclAddtional_
-    }
+  NotificationChannelLabels' {_nclAddtional = _Coerce # pNclAddtional_}
 
 nclAddtional :: Lens' NotificationChannelLabels (HashMap Text Text)
 nclAddtional
@@ -1715,9 +1729,11 @@ instance ToJSON NotificationChannelLabels where
 -- | The CreateTimeSeries request.
 --
 -- /See:/ 'createTimeSeriesRequest' smart constructor.
-newtype CreateTimeSeriesRequest = CreateTimeSeriesRequest'
+newtype CreateTimeSeriesRequest =
+  CreateTimeSeriesRequest'
     { _ctsrTimeSeries :: Maybe [TimeSeries]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTimeSeriesRequest' with the minimum fields required to make a request.
 --
@@ -1726,10 +1742,7 @@ newtype CreateTimeSeriesRequest = CreateTimeSeriesRequest'
 -- * 'ctsrTimeSeries'
 createTimeSeriesRequest
     :: CreateTimeSeriesRequest
-createTimeSeriesRequest =
-    CreateTimeSeriesRequest'
-    { _ctsrTimeSeries = Nothing
-    }
+createTimeSeriesRequest = CreateTimeSeriesRequest' {_ctsrTimeSeries = Nothing}
 
 -- | The new data to be added to a list of time series. Adds at most one data
 -- point to each of several time series. The new data point must be more
@@ -1759,9 +1772,11 @@ instance ToJSON CreateTimeSeriesRequest where
 -- | Map from label to its value, for all labels dropped in any aggregation.
 --
 -- /See:/ 'droppedLabelsLabel' smart constructor.
-newtype DroppedLabelsLabel = DroppedLabelsLabel'
+newtype DroppedLabelsLabel =
+  DroppedLabelsLabel'
     { _dllAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DroppedLabelsLabel' with the minimum fields required to make a request.
 --
@@ -1772,9 +1787,7 @@ droppedLabelsLabel
     :: HashMap Text Text -- ^ 'dllAddtional'
     -> DroppedLabelsLabel
 droppedLabelsLabel pDllAddtional_ =
-    DroppedLabelsLabel'
-    { _dllAddtional = _Coerce # pDllAddtional_
-    }
+  DroppedLabelsLabel' {_dllAddtional = _Coerce # pDllAddtional_}
 
 dllAddtional :: Lens' DroppedLabelsLabel (HashMap Text Text)
 dllAddtional
@@ -1793,7 +1806,8 @@ instance ToJSON DroppedLabelsLabel where
 -- threshold.
 --
 -- /See:/ 'metricThreshold' smart constructor.
-data MetricThreshold = MetricThreshold'
+data MetricThreshold =
+  MetricThreshold'
     { _mtThresholdValue          :: !(Maybe (Textual Double))
     , _mtAggregations            :: !(Maybe [Aggregation])
     , _mtDenominatorAggregations :: !(Maybe [Aggregation])
@@ -1802,7 +1816,8 @@ data MetricThreshold = MetricThreshold'
     , _mtFilter                  :: !(Maybe Text)
     , _mtTrigger                 :: !(Maybe Trigger)
     , _mtDuration                :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetricThreshold' with the minimum fields required to make a request.
 --
@@ -1826,7 +1841,7 @@ data MetricThreshold = MetricThreshold'
 metricThreshold
     :: MetricThreshold
 metricThreshold =
-    MetricThreshold'
+  MetricThreshold'
     { _mtThresholdValue = Nothing
     , _mtAggregations = Nothing
     , _mtDenominatorAggregations = Nothing
@@ -1966,9 +1981,11 @@ instance ToJSON MetricThreshold where
 -- projects\/PROJECT_ID\/traces\/TRACE_ID\/spans\/SPAN_ID
 --
 -- /See:/ 'spanContext' smart constructor.
-newtype SpanContext = SpanContext'
+newtype SpanContext =
+  SpanContext'
     { _scSpanName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpanContext' with the minimum fields required to make a request.
 --
@@ -1977,10 +1994,7 @@ newtype SpanContext = SpanContext'
 -- * 'scSpanName'
 spanContext
     :: SpanContext
-spanContext =
-    SpanContext'
-    { _scSpanName = Nothing
-    }
+spanContext = SpanContext' {_scSpanName = Nothing}
 
 -- | The resource name of the span in the following format:
 -- projects\/[PROJECT_ID]\/traces\/[TRACE_ID]\/spans\/[SPAN_ID] TRACE_ID is
@@ -2004,9 +2018,11 @@ instance ToJSON SpanContext where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -2017,9 +2033,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2038,9 +2052,11 @@ instance ToJSON StatusDetailsItem where
 -- | Output only. A map of user-defined metadata labels.
 --
 -- /See:/ 'monitoredResourceMetadataUserLabels' smart constructor.
-newtype MonitoredResourceMetadataUserLabels = MonitoredResourceMetadataUserLabels'
+newtype MonitoredResourceMetadataUserLabels =
+  MonitoredResourceMetadataUserLabels'
     { _mrmulAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitoredResourceMetadataUserLabels' with the minimum fields required to make a request.
 --
@@ -2051,9 +2067,8 @@ monitoredResourceMetadataUserLabels
     :: HashMap Text Text -- ^ 'mrmulAddtional'
     -> MonitoredResourceMetadataUserLabels
 monitoredResourceMetadataUserLabels pMrmulAddtional_ =
-    MonitoredResourceMetadataUserLabels'
-    { _mrmulAddtional = _Coerce # pMrmulAddtional_
-    }
+  MonitoredResourceMetadataUserLabels'
+    {_mrmulAddtional = _Coerce # pMrmulAddtional_}
 
 mrmulAddtional :: Lens' MonitoredResourceMetadataUserLabels (HashMap Text Text)
 mrmulAddtional
@@ -2077,14 +2092,16 @@ instance ToJSON MonitoredResourceMetadataUserLabels
 -- resources.
 --
 -- /See:/ 'internalChecker' smart constructor.
-data InternalChecker = InternalChecker'
+data InternalChecker =
+  InternalChecker'
     { _icState         :: !(Maybe InternalCheckerState)
     , _icNetwork       :: !(Maybe Text)
     , _icName          :: !(Maybe Text)
     , _icPeerProjectId :: !(Maybe Text)
     , _icGcpZone       :: !(Maybe Text)
     , _icDisplayName   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InternalChecker' with the minimum fields required to make a request.
 --
@@ -2104,7 +2121,7 @@ data InternalChecker = InternalChecker'
 internalChecker
     :: InternalChecker
 internalChecker =
-    InternalChecker'
+  InternalChecker'
     { _icState = Nothing
     , _icNetwork = Nothing
     , _icName = Nothing
@@ -2180,7 +2197,8 @@ instance ToJSON InternalChecker where
 -- partially populated on retrieval.
 --
 -- /See:/ 'notificationChannel' smart constructor.
-data NotificationChannel = NotificationChannel'
+data NotificationChannel =
+  NotificationChannel'
     { _ncEnabled            :: !(Maybe Bool)
     , _ncUserLabels         :: !(Maybe NotificationChannelUserLabels)
     , _ncName               :: !(Maybe Text)
@@ -2189,7 +2207,8 @@ data NotificationChannel = NotificationChannel'
     , _ncLabels             :: !(Maybe NotificationChannelLabels)
     , _ncType               :: !(Maybe Text)
     , _ncDescription        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationChannel' with the minimum fields required to make a request.
 --
@@ -2213,7 +2232,7 @@ data NotificationChannel = NotificationChannel'
 notificationChannel
     :: NotificationChannel
 notificationChannel =
-    NotificationChannel'
+  NotificationChannel'
     { _ncEnabled = Nothing
     , _ncUserLabels = Nothing
     , _ncName = Nothing
@@ -2326,10 +2345,12 @@ instance ToJSON NotificationChannel where
 -- | The ListMonitoredResourceDescriptors response.
 --
 -- /See:/ 'listMonitoredResourceDescriptorsResponse' smart constructor.
-data ListMonitoredResourceDescriptorsResponse = ListMonitoredResourceDescriptorsResponse'
+data ListMonitoredResourceDescriptorsResponse =
+  ListMonitoredResourceDescriptorsResponse'
     { _lmrdrNextPageToken       :: !(Maybe Text)
     , _lmrdrResourceDescriptors :: !(Maybe [MonitoredResourceDescriptor])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMonitoredResourceDescriptorsResponse' with the minimum fields required to make a request.
 --
@@ -2341,10 +2362,8 @@ data ListMonitoredResourceDescriptorsResponse = ListMonitoredResourceDescriptors
 listMonitoredResourceDescriptorsResponse
     :: ListMonitoredResourceDescriptorsResponse
 listMonitoredResourceDescriptorsResponse =
-    ListMonitoredResourceDescriptorsResponse'
-    { _lmrdrNextPageToken = Nothing
-    , _lmrdrResourceDescriptors = Nothing
-    }
+  ListMonitoredResourceDescriptorsResponse'
+    {_lmrdrNextPageToken = Nothing, _lmrdrResourceDescriptors = Nothing}
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
@@ -2364,7 +2383,8 @@ lmrdrResourceDescriptors
       . _Coerce
 
 instance FromJSON
-         ListMonitoredResourceDescriptorsResponse where
+           ListMonitoredResourceDescriptorsResponse
+         where
         parseJSON
           = withObject
               "ListMonitoredResourceDescriptorsResponse"
@@ -2374,7 +2394,8 @@ instance FromJSON
                      (o .:? "resourceDescriptors" .!= mempty))
 
 instance ToJSON
-         ListMonitoredResourceDescriptorsResponse where
+           ListMonitoredResourceDescriptorsResponse
+         where
         toJSON ListMonitoredResourceDescriptorsResponse'{..}
           = object
               (catMaybes
@@ -2390,9 +2411,11 @@ instance ToJSON
 -- boundary of the overflow and underflow buckets.
 --
 -- /See:/ 'explicit' smart constructor.
-newtype Explicit = Explicit'
+newtype Explicit =
+  Explicit'
     { _eBounds :: Maybe [Textual Double]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Explicit' with the minimum fields required to make a request.
 --
@@ -2401,10 +2424,7 @@ newtype Explicit = Explicit'
 -- * 'eBounds'
 explicit
     :: Explicit
-explicit =
-    Explicit'
-    { _eBounds = Nothing
-    }
+explicit = Explicit' {_eBounds = Nothing}
 
 -- | The values must be monotonically increasing.
 eBounds :: Lens' Explicit [Double]
@@ -2425,9 +2445,11 @@ instance ToJSON Explicit where
 -- listed in the MetricDescriptor must be assigned values.
 --
 -- /See:/ 'metricLabels' smart constructor.
-newtype MetricLabels = MetricLabels'
+newtype MetricLabels =
+  MetricLabels'
     { _mlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetricLabels' with the minimum fields required to make a request.
 --
@@ -2438,9 +2460,7 @@ metricLabels
     :: HashMap Text Text -- ^ 'mlAddtional'
     -> MetricLabels
 metricLabels pMlAddtional_ =
-    MetricLabels'
-    { _mlAddtional = _Coerce # pMlAddtional_
-    }
+  MetricLabels' {_mlAddtional = _Coerce # pMlAddtional_}
 
 mlAddtional :: Lens' MetricLabels (HashMap Text Text)
 mlAddtional
@@ -2458,9 +2478,11 @@ instance ToJSON MetricLabels where
 -- | The measurement metadata. Example: \"process_id\" -> 12345
 --
 -- /See:/ 'collectdPayloadMetadata' smart constructor.
-newtype CollectdPayloadMetadata = CollectdPayloadMetadata'
+newtype CollectdPayloadMetadata =
+  CollectdPayloadMetadata'
     { _cpmAddtional :: HashMap Text TypedValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CollectdPayloadMetadata' with the minimum fields required to make a request.
 --
@@ -2471,9 +2493,7 @@ collectdPayloadMetadata
     :: HashMap Text TypedValue -- ^ 'cpmAddtional'
     -> CollectdPayloadMetadata
 collectdPayloadMetadata pCpmAddtional_ =
-    CollectdPayloadMetadata'
-    { _cpmAddtional = _Coerce # pCpmAddtional_
-    }
+  CollectdPayloadMetadata' {_cpmAddtional = _Coerce # pCpmAddtional_}
 
 cpmAddtional :: Lens' CollectdPayloadMetadata (HashMap Text TypedValue)
 cpmAddtional
@@ -2492,11 +2512,13 @@ instance ToJSON CollectdPayloadMetadata where
 -- | A single data point from a collectd-based plugin.
 --
 -- /See:/ 'collectdValue' smart constructor.
-data CollectdValue = CollectdValue'
+data CollectdValue =
+  CollectdValue'
     { _cvDataSourceName :: !(Maybe Text)
     , _cvDataSourceType :: !(Maybe CollectdValueDataSourceType)
     , _cvValue          :: !(Maybe TypedValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CollectdValue' with the minimum fields required to make a request.
 --
@@ -2510,7 +2532,7 @@ data CollectdValue = CollectdValue'
 collectdValue
     :: CollectdValue
 collectdValue =
-    CollectdValue'
+  CollectdValue'
     { _cvDataSourceName = Nothing
     , _cvDataSourceType = Nothing
     , _cvValue = Nothing
@@ -2552,11 +2574,13 @@ instance ToJSON CollectdValue where
 -- | The CreateCollectdTimeSeries request.
 --
 -- /See:/ 'createCollectdTimeSeriesRequest' smart constructor.
-data CreateCollectdTimeSeriesRequest = CreateCollectdTimeSeriesRequest'
+data CreateCollectdTimeSeriesRequest =
+  CreateCollectdTimeSeriesRequest'
     { _cctsrCollectdPayloads :: !(Maybe [CollectdPayload])
     , _cctsrResource         :: !(Maybe MonitoredResource)
     , _cctsrCollectdVersion  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCollectdTimeSeriesRequest' with the minimum fields required to make a request.
 --
@@ -2570,7 +2594,7 @@ data CreateCollectdTimeSeriesRequest = CreateCollectdTimeSeriesRequest'
 createCollectdTimeSeriesRequest
     :: CreateCollectdTimeSeriesRequest
 createCollectdTimeSeriesRequest =
-    CreateCollectdTimeSeriesRequest'
+  CreateCollectdTimeSeriesRequest'
     { _cctsrCollectdPayloads = Nothing
     , _cctsrResource = Nothing
     , _cctsrCollectdVersion = Nothing
@@ -2626,12 +2650,14 @@ instance ToJSON CreateCollectdTimeSeriesRequest where
 -- Aggregation.
 --
 -- /See:/ 'aggregation' smart constructor.
-data Aggregation = Aggregation'
+data Aggregation =
+  Aggregation'
     { _aPerSeriesAligner   :: !(Maybe AggregationPerSeriesAligner)
     , _aCrossSeriesReducer :: !(Maybe AggregationCrossSeriesReducer)
     , _aAlignmentPeriod    :: !(Maybe GDuration)
     , _aGroupByFields      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Aggregation' with the minimum fields required to make a request.
 --
@@ -2647,7 +2673,7 @@ data Aggregation = Aggregation'
 aggregation
     :: Aggregation
 aggregation =
-    Aggregation'
+  Aggregation'
     { _aPerSeriesAligner = Nothing
     , _aCrossSeriesReducer = Nothing
     , _aAlignmentPeriod = Nothing
@@ -2735,7 +2761,8 @@ instance ToJSON Aggregation where
 -- availability.
 --
 -- /See:/ 'uptimeCheckConfig' smart constructor.
-data UptimeCheckConfig = UptimeCheckConfig'
+data UptimeCheckConfig =
+  UptimeCheckConfig'
     { _uccInternalCheckers  :: !(Maybe [InternalChecker])
     , _uccPeriod            :: !(Maybe GDuration)
     , _uccContentMatchers   :: !(Maybe [ContentMatcher])
@@ -2748,7 +2775,8 @@ data UptimeCheckConfig = UptimeCheckConfig'
     , _uccTimeout           :: !(Maybe GDuration)
     , _uccHTTPCheck         :: !(Maybe HTTPCheck)
     , _uccTCPCheck          :: !(Maybe TCPCheck)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UptimeCheckConfig' with the minimum fields required to make a request.
 --
@@ -2780,7 +2808,7 @@ data UptimeCheckConfig = UptimeCheckConfig'
 uptimeCheckConfig
     :: UptimeCheckConfig
 uptimeCheckConfig =
-    UptimeCheckConfig'
+  UptimeCheckConfig'
     { _uccInternalCheckers = Nothing
     , _uccPeriod = Nothing
     , _uccContentMatchers = Nothing
@@ -2934,10 +2962,12 @@ instance ToJSON UptimeCheckConfig where
 -- | A single data point in a time series.
 --
 -- /See:/ 'point' smart constructor.
-data Point = Point'
+data Point =
+  Point'
     { _pValue    :: !(Maybe TypedValue)
     , _pInterval :: !(Maybe TimeInterval)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
 --
@@ -2948,11 +2978,7 @@ data Point = Point'
 -- * 'pInterval'
 point
     :: Point
-point =
-    Point'
-    { _pValue = Nothing
-    , _pInterval = Nothing
-    }
+point = Point' {_pValue = Nothing, _pInterval = Nothing}
 
 -- | The value of the data point.
 pValue :: Lens' Point (Maybe TypedValue)
@@ -2987,7 +3013,8 @@ instance ToJSON Point where
 -- collectd documentation for more information.
 --
 -- /See:/ 'collectdPayload' smart constructor.
-data CollectdPayload = CollectdPayload'
+data CollectdPayload =
+  CollectdPayload'
     { _cpStartTime      :: !(Maybe DateTime')
     , _cpPluginInstance :: !(Maybe Text)
     , _cpValues         :: !(Maybe [CollectdValue])
@@ -2996,7 +3023,8 @@ data CollectdPayload = CollectdPayload'
     , _cpMetadata       :: !(Maybe CollectdPayloadMetadata)
     , _cpType           :: !(Maybe Text)
     , _cpPlugin         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CollectdPayload' with the minimum fields required to make a request.
 --
@@ -3020,7 +3048,7 @@ data CollectdPayload = CollectdPayload'
 collectdPayload
     :: CollectdPayload
 collectdPayload =
-    CollectdPayload'
+  CollectdPayload'
     { _cpStartTime = Nothing
     , _cpPluginInstance = Nothing
     , _cpValues = Nothing
@@ -3105,10 +3133,12 @@ instance ToJSON CollectdPayload where
 -- | Describes a change made to a configuration.
 --
 -- /See:/ 'mutationRecord' smart constructor.
-data MutationRecord = MutationRecord'
+data MutationRecord =
+  MutationRecord'
     { _mrMutatedBy  :: !(Maybe Text)
     , _mrMutateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MutationRecord' with the minimum fields required to make a request.
 --
@@ -3120,10 +3150,7 @@ data MutationRecord = MutationRecord'
 mutationRecord
     :: MutationRecord
 mutationRecord =
-    MutationRecord'
-    { _mrMutatedBy = Nothing
-    , _mrMutateTime = Nothing
-    }
+  MutationRecord' {_mrMutatedBy = Nothing, _mrMutateTime = Nothing}
 
 -- | The email address of the user making the change.
 mrMutatedBy :: Lens' MutationRecord (Maybe Text)
@@ -3154,10 +3181,12 @@ instance ToJSON MutationRecord where
 -- of a MetricDescriptor.
 --
 -- /See:/ 'metric' smart constructor.
-data Metric = Metric'
+data Metric =
+  Metric'
     { _mLabels :: !(Maybe MetricLabels)
     , _mType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Metric' with the minimum fields required to make a request.
 --
@@ -3168,11 +3197,7 @@ data Metric = Metric'
 -- * 'mType'
 metric
     :: Metric
-metric =
-    Metric'
-    { _mLabels = Nothing
-    , _mType = Nothing
-    }
+metric = Metric' {_mLabels = Nothing, _mType = Nothing}
 
 -- | The set of label values that uniquely identify this metric. All labels
 -- listed in the MetricDescriptor must be assigned values.
@@ -3199,11 +3224,13 @@ instance ToJSON Metric where
 -- | Describes the error status for payloads that were not written.
 --
 -- /See:/ 'collectdPayloadError' smart constructor.
-data CollectdPayloadError = CollectdPayloadError'
+data CollectdPayloadError =
+  CollectdPayloadError'
     { _cpeError       :: !(Maybe Status)
     , _cpeValueErrors :: !(Maybe [CollectdValueError])
     , _cpeIndex       :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CollectdPayloadError' with the minimum fields required to make a request.
 --
@@ -3217,11 +3244,8 @@ data CollectdPayloadError = CollectdPayloadError'
 collectdPayloadError
     :: CollectdPayloadError
 collectdPayloadError =
-    CollectdPayloadError'
-    { _cpeError = Nothing
-    , _cpeValueErrors = Nothing
-    , _cpeIndex = Nothing
-    }
+  CollectdPayloadError'
+    {_cpeError = Nothing, _cpeValueErrors = Nothing, _cpeIndex = Nothing}
 
 -- | Records the error status for the payload. If this field is present, the
 -- partial errors for nested values won\'t be populated.
@@ -3265,18 +3289,19 @@ instance ToJSON CollectdPayloadError where
 --
 -- /See:/ 'sendNotificationChannelVerificationCodeRequest' smart constructor.
 data SendNotificationChannelVerificationCodeRequest =
-    SendNotificationChannelVerificationCodeRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  SendNotificationChannelVerificationCodeRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SendNotificationChannelVerificationCodeRequest' with the minimum fields required to make a request.
 --
 sendNotificationChannelVerificationCodeRequest
     :: SendNotificationChannelVerificationCodeRequest
 sendNotificationChannelVerificationCodeRequest =
-    SendNotificationChannelVerificationCodeRequest'
+  SendNotificationChannelVerificationCodeRequest'
 
 instance FromJSON
-         SendNotificationChannelVerificationCodeRequest where
+           SendNotificationChannelVerificationCodeRequest
+         where
         parseJSON
           = withObject
               "SendNotificationChannelVerificationCodeRequest"
@@ -3284,7 +3309,8 @@ instance FromJSON
                  pure SendNotificationChannelVerificationCodeRequest')
 
 instance ToJSON
-         SendNotificationChannelVerificationCodeRequest where
+           SendNotificationChannelVerificationCodeRequest
+         where
         toJSON = const emptyObject
 
 -- | Specifies an exponential sequence of buckets that have a width that is
@@ -3295,11 +3321,13 @@ instance ToJSON
 -- Lower bound (1 \<= i \< N): scale * (growth_factor ^ (i - 1)).
 --
 -- /See:/ 'exponential' smart constructor.
-data Exponential = Exponential'
+data Exponential =
+  Exponential'
     { _eGrowthFactor     :: !(Maybe (Textual Double))
     , _eScale            :: !(Maybe (Textual Double))
     , _eNumFiniteBuckets :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Exponential' with the minimum fields required to make a request.
 --
@@ -3313,11 +3341,8 @@ data Exponential = Exponential'
 exponential
     :: Exponential
 exponential =
-    Exponential'
-    { _eGrowthFactor = Nothing
-    , _eScale = Nothing
-    , _eNumFiniteBuckets = Nothing
-    }
+  Exponential'
+    {_eGrowthFactor = Nothing, _eScale = Nothing, _eNumFiniteBuckets = Nothing}
 
 -- | Must be greater than 1.
 eGrowthFactor :: Lens' Exponential (Maybe Double)
@@ -3358,10 +3383,12 @@ instance ToJSON Exponential where
 -- | The range of the population values.
 --
 -- /See:/ 'range' smart constructor.
-data Range = Range'
+data Range =
+  Range'
     { _rMax :: !(Maybe (Textual Double))
     , _rMin :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Range' with the minimum fields required to make a request.
 --
@@ -3372,11 +3399,7 @@ data Range = Range'
 -- * 'rMin'
 range
     :: Range
-range =
-    Range'
-    { _rMax = Nothing
-    , _rMin = Nothing
-    }
+range = Range' {_rMax = Nothing, _rMin = Nothing}
 
 -- | The maximum of the population values.
 rMax :: Lens' Range (Maybe Double)
@@ -3414,10 +3437,12 @@ instance ToJSON Range where
 -- \"zone\": \"us-central1-a\" }}
 --
 -- /See:/ 'monitoredResource' smart constructor.
-data MonitoredResource = MonitoredResource'
+data MonitoredResource =
+  MonitoredResource'
     { _mrLabels :: !(Maybe MonitoredResourceLabels)
     , _mrType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitoredResource' with the minimum fields required to make a request.
 --
@@ -3428,11 +3453,7 @@ data MonitoredResource = MonitoredResource'
 -- * 'mrType'
 monitoredResource
     :: MonitoredResource
-monitoredResource =
-    MonitoredResource'
-    { _mrLabels = Nothing
-    , _mrType = Nothing
-    }
+monitoredResource = MonitoredResource' {_mrLabels = Nothing, _mrType = Nothing}
 
 -- | Required. Values for all of the labels listed in the associated
 -- monitored resource descriptor. For example, Compute Engine VM instances
@@ -3465,11 +3486,13 @@ instance ToJSON MonitoredResource where
 -- in the location run from.
 --
 -- /See:/ 'uptimeCheckIP' smart constructor.
-data UptimeCheckIP = UptimeCheckIP'
+data UptimeCheckIP =
+  UptimeCheckIP'
     { _uciIPAddress :: !(Maybe Text)
     , _uciLocation  :: !(Maybe Text)
     , _uciRegion    :: !(Maybe UptimeCheckIPRegion)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UptimeCheckIP' with the minimum fields required to make a request.
 --
@@ -3483,11 +3506,8 @@ data UptimeCheckIP = UptimeCheckIP'
 uptimeCheckIP
     :: UptimeCheckIP
 uptimeCheckIP =
-    UptimeCheckIP'
-    { _uciIPAddress = Nothing
-    , _uciLocation = Nothing
-    , _uciRegion = Nothing
-    }
+  UptimeCheckIP'
+    {_uciIPAddress = Nothing, _uciLocation = Nothing, _uciRegion = Nothing}
 
 -- | The IP address from which the uptime check originates. This is a full IP
 -- address (not an IP address range). Most IP addresses, as of this
@@ -3533,9 +3553,11 @@ instance ToJSON UptimeCheckIP where
 -- underscores, and dashes. Keys must begin with a letter.
 --
 -- /See:/ 'alertPolicyUserLabels' smart constructor.
-newtype AlertPolicyUserLabels = AlertPolicyUserLabels'
+newtype AlertPolicyUserLabels =
+  AlertPolicyUserLabels'
     { _apulAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlertPolicyUserLabels' with the minimum fields required to make a request.
 --
@@ -3546,9 +3568,7 @@ alertPolicyUserLabels
     :: HashMap Text Text -- ^ 'apulAddtional'
     -> AlertPolicyUserLabels
 alertPolicyUserLabels pApulAddtional_ =
-    AlertPolicyUserLabels'
-    { _apulAddtional = _Coerce # pApulAddtional_
-    }
+  AlertPolicyUserLabels' {_apulAddtional = _Coerce # pApulAddtional_}
 
 apulAddtional :: Lens' AlertPolicyUserLabels (HashMap Text Text)
 apulAddtional
@@ -3569,10 +3589,12 @@ instance ToJSON AlertPolicyUserLabels where
 -- format.
 --
 -- /See:/ 'documentation' smart constructor.
-data Documentation = Documentation'
+data Documentation =
+  Documentation'
     { _dContent  :: !(Maybe Text)
     , _dMimeType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Documentation' with the minimum fields required to make a request.
 --
@@ -3583,11 +3605,7 @@ data Documentation = Documentation'
 -- * 'dMimeType'
 documentation
     :: Documentation
-documentation =
-    Documentation'
-    { _dContent = Nothing
-    , _dMimeType = Nothing
-    }
+documentation = Documentation' {_dContent = Nothing, _dMimeType = Nothing}
 
 -- | The text of the documentation, interpreted according to mime_type. The
 -- content may not exceed 8,192 Unicode characters and may not exceed more
@@ -3623,11 +3641,13 @@ instance ToJSON Documentation where
 -- such as a example values and timestamps, origin, etc.
 --
 -- /See:/ 'exemplar' smart constructor.
-data Exemplar = Exemplar'
+data Exemplar =
+  Exemplar'
     { _eAttachments :: !(Maybe [ExemplarAttachmentsItem])
     , _eValue       :: !(Maybe (Textual Double))
     , _eTimestamp   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Exemplar' with the minimum fields required to make a request.
 --
@@ -3641,11 +3661,7 @@ data Exemplar = Exemplar'
 exemplar
     :: Exemplar
 exemplar =
-    Exemplar'
-    { _eAttachments = Nothing
-    , _eValue = Nothing
-    , _eTimestamp = Nothing
-    }
+  Exemplar' {_eAttachments = Nothing, _eValue = Nothing, _eTimestamp = Nothing}
 
 -- | Contextual information about the example value. Examples are:Trace ID:
 -- type.googleapis.com\/google.devtools.cloudtrace.v1.TraceLiteral string:
@@ -3692,11 +3708,13 @@ instance ToJSON Exemplar where
 -- | Additional annotations that can be used to guide the usage of a metric.
 --
 -- /See:/ 'metricDescriptorMetadata' smart constructor.
-data MetricDescriptorMetadata = MetricDescriptorMetadata'
+data MetricDescriptorMetadata =
+  MetricDescriptorMetadata'
     { _mdmSamplePeriod :: !(Maybe GDuration)
     , _mdmIngestDelay  :: !(Maybe GDuration)
     , _mdmLaunchStage  :: !(Maybe MetricDescriptorMetadataLaunchStage)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetricDescriptorMetadata' with the minimum fields required to make a request.
 --
@@ -3710,7 +3728,7 @@ data MetricDescriptorMetadata = MetricDescriptorMetadata'
 metricDescriptorMetadata
     :: MetricDescriptorMetadata
 metricDescriptorMetadata =
-    MetricDescriptorMetadata'
+  MetricDescriptorMetadata'
     { _mdmSamplePeriod = Nothing
     , _mdmIngestDelay = Nothing
     , _mdmLaunchStage = Nothing
@@ -3766,10 +3784,12 @@ instance ToJSON MetricDescriptorMetadata where
 -- which cover a span of time.
 --
 -- /See:/ 'timeInterval' smart constructor.
-data TimeInterval = TimeInterval'
+data TimeInterval =
+  TimeInterval'
     { _tiStartTime :: !(Maybe DateTime')
     , _tiEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimeInterval' with the minimum fields required to make a request.
 --
@@ -3780,11 +3800,7 @@ data TimeInterval = TimeInterval'
 -- * 'tiEndTime'
 timeInterval
     :: TimeInterval
-timeInterval =
-    TimeInterval'
-    { _tiStartTime = Nothing
-    , _tiEndTime = Nothing
-    }
+timeInterval = TimeInterval' {_tiStartTime = Nothing, _tiEndTime = Nothing}
 
 -- | Optional. The beginning of the time interval. The default value for the
 -- start time is the end time. The start time must not be later than the
@@ -3824,9 +3840,11 @@ instance ToJSON TimeInterval where
 -- headers allowed is 100.
 --
 -- /See:/ 'hTTPCheckHeaders' smart constructor.
-newtype HTTPCheckHeaders = HTTPCheckHeaders'
+newtype HTTPCheckHeaders =
+  HTTPCheckHeaders'
     { _httpchAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPCheckHeaders' with the minimum fields required to make a request.
 --
@@ -3837,9 +3855,7 @@ hTTPCheckHeaders
     :: HashMap Text Text -- ^ 'httpchAddtional'
     -> HTTPCheckHeaders
 hTTPCheckHeaders pHttpchAddtional_ =
-    HTTPCheckHeaders'
-    { _httpchAddtional = _Coerce # pHttpchAddtional_
-    }
+  HTTPCheckHeaders' {_httpchAddtional = _Coerce # pHttpchAddtional_}
 
 httpchAddtional :: Lens' HTTPCheckHeaders (HashMap Text Text)
 httpchAddtional
@@ -3863,9 +3879,11 @@ instance ToJSON HTTPCheckHeaders where
 -- \"b\", \"c\"], \"spot_instance\": false }
 --
 -- /See:/ 'monitoredResourceMetadataSystemLabels' smart constructor.
-newtype MonitoredResourceMetadataSystemLabels = MonitoredResourceMetadataSystemLabels'
+newtype MonitoredResourceMetadataSystemLabels =
+  MonitoredResourceMetadataSystemLabels'
     { _mrmslAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitoredResourceMetadataSystemLabels' with the minimum fields required to make a request.
 --
@@ -3876,9 +3894,8 @@ monitoredResourceMetadataSystemLabels
     :: HashMap Text JSONValue -- ^ 'mrmslAddtional'
     -> MonitoredResourceMetadataSystemLabels
 monitoredResourceMetadataSystemLabels pMrmslAddtional_ =
-    MonitoredResourceMetadataSystemLabels'
-    { _mrmslAddtional = _Coerce # pMrmslAddtional_
-    }
+  MonitoredResourceMetadataSystemLabels'
+    {_mrmslAddtional = _Coerce # pMrmslAddtional_}
 
 -- | Properties of the object.
 mrmslAddtional :: Lens' MonitoredResourceMetadataSystemLabels (HashMap Text JSONValue)
@@ -3888,7 +3905,8 @@ mrmslAddtional
       . _Coerce
 
 instance FromJSON
-         MonitoredResourceMetadataSystemLabels where
+           MonitoredResourceMetadataSystemLabels
+         where
         parseJSON
           = withObject "MonitoredResourceMetadataSystemLabels"
               (\ o ->
@@ -3903,9 +3921,11 @@ instance ToJSON MonitoredResourceMetadataSystemLabels
 -- expressions, together with their negations.
 --
 -- /See:/ 'contentMatcher' smart constructor.
-newtype ContentMatcher = ContentMatcher'
+newtype ContentMatcher =
+  ContentMatcher'
     { _cmContent :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContentMatcher' with the minimum fields required to make a request.
 --
@@ -3914,10 +3934,7 @@ newtype ContentMatcher = ContentMatcher'
 -- * 'cmContent'
 contentMatcher
     :: ContentMatcher
-contentMatcher =
-    ContentMatcher'
-    { _cmContent = Nothing
-    }
+contentMatcher = ContentMatcher' {_cmContent = Nothing}
 
 -- | String or regex content to match (max 1024 bytes)
 cmContent :: Lens' ContentMatcher (Maybe Text)
@@ -3936,11 +3953,13 @@ instance ToJSON ContentMatcher where
 -- | The ListGroupMembers response.
 --
 -- /See:/ 'listGroupMembersResponse' smart constructor.
-data ListGroupMembersResponse = ListGroupMembersResponse'
+data ListGroupMembersResponse =
+  ListGroupMembersResponse'
     { _lgmrNextPageToken :: !(Maybe Text)
     , _lgmrMembers       :: !(Maybe [MonitoredResource])
     , _lgmrTotalSize     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGroupMembersResponse' with the minimum fields required to make a request.
 --
@@ -3954,7 +3973,7 @@ data ListGroupMembersResponse = ListGroupMembersResponse'
 listGroupMembersResponse
     :: ListGroupMembersResponse
 listGroupMembersResponse =
-    ListGroupMembersResponse'
+  ListGroupMembersResponse'
     { _lgmrNextPageToken = Nothing
     , _lgmrMembers = Nothing
     , _lgmrTotalSize = Nothing
@@ -4002,11 +4021,13 @@ instance ToJSON ListGroupMembersResponse where
 -- | A description of a label.
 --
 -- /See:/ 'labelDescriptor' smart constructor.
-data LabelDescriptor = LabelDescriptor'
+data LabelDescriptor =
+  LabelDescriptor'
     { _ldKey         :: !(Maybe Text)
     , _ldValueType   :: !(Maybe LabelDescriptorValueType)
     , _ldDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LabelDescriptor' with the minimum fields required to make a request.
 --
@@ -4020,11 +4041,8 @@ data LabelDescriptor = LabelDescriptor'
 labelDescriptor
     :: LabelDescriptor
 labelDescriptor =
-    LabelDescriptor'
-    { _ldKey = Nothing
-    , _ldValueType = Nothing
-    , _ldDescription = Nothing
-    }
+  LabelDescriptor'
+    {_ldKey = Nothing, _ldValueType = Nothing, _ldDescription = Nothing}
 
 -- | The label key.
 ldKey :: Lens' LabelDescriptor (Maybe Text)
@@ -4065,11 +4083,13 @@ instance ToJSON LabelDescriptor where
 -- bound (1 \<= i \< N): offset + (width * (i - 1)).
 --
 -- /See:/ 'linear' smart constructor.
-data Linear = Linear'
+data Linear =
+  Linear'
     { _lOffSet           :: !(Maybe (Textual Double))
     , _lWidth            :: !(Maybe (Textual Double))
     , _lNumFiniteBuckets :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Linear' with the minimum fields required to make a request.
 --
@@ -4083,11 +4103,7 @@ data Linear = Linear'
 linear
     :: Linear
 linear =
-    Linear'
-    { _lOffSet = Nothing
-    , _lWidth = Nothing
-    , _lNumFiniteBuckets = Nothing
-    }
+  Linear' {_lOffSet = Nothing, _lWidth = Nothing, _lNumFiniteBuckets = Nothing}
 
 -- | Lower bound of the first bucket.
 lOffSet :: Lens' Linear (Maybe Double)
@@ -4127,10 +4143,12 @@ instance ToJSON Linear where
 -- | The protocol for the ListUptimeCheckIps response.
 --
 -- /See:/ 'listUptimeCheckIPsResponse' smart constructor.
-data ListUptimeCheckIPsResponse = ListUptimeCheckIPsResponse'
+data ListUptimeCheckIPsResponse =
+  ListUptimeCheckIPsResponse'
     { _lucirNextPageToken  :: !(Maybe Text)
     , _lucirUptimeCheckIPs :: !(Maybe [UptimeCheckIP])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListUptimeCheckIPsResponse' with the minimum fields required to make a request.
 --
@@ -4142,10 +4160,8 @@ data ListUptimeCheckIPsResponse = ListUptimeCheckIPsResponse'
 listUptimeCheckIPsResponse
     :: ListUptimeCheckIPsResponse
 listUptimeCheckIPsResponse =
-    ListUptimeCheckIPsResponse'
-    { _lucirNextPageToken = Nothing
-    , _lucirUptimeCheckIPs = Nothing
-    }
+  ListUptimeCheckIPsResponse'
+    {_lucirNextPageToken = Nothing, _lucirUptimeCheckIPs = Nothing}
 
 -- | This field represents the pagination token to retrieve the next page of
 -- results. If the value is empty, it means no further results for the
@@ -4185,9 +4201,11 @@ instance ToJSON ListUptimeCheckIPsResponse where
 -- | The GetNotificationChannelVerificationCode request.
 --
 -- /See:/ 'getNotificationChannelVerificationCodeRequest' smart constructor.
-newtype GetNotificationChannelVerificationCodeRequest = GetNotificationChannelVerificationCodeRequest'
+newtype GetNotificationChannelVerificationCodeRequest =
+  GetNotificationChannelVerificationCodeRequest'
     { _gExpireTime :: Maybe DateTime'
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetNotificationChannelVerificationCodeRequest' with the minimum fields required to make a request.
 --
@@ -4197,9 +4215,7 @@ newtype GetNotificationChannelVerificationCodeRequest = GetNotificationChannelVe
 getNotificationChannelVerificationCodeRequest
     :: GetNotificationChannelVerificationCodeRequest
 getNotificationChannelVerificationCodeRequest =
-    GetNotificationChannelVerificationCodeRequest'
-    { _gExpireTime = Nothing
-    }
+  GetNotificationChannelVerificationCodeRequest' {_gExpireTime = Nothing}
 
 -- | The desired expiration time. If specified, the API will guarantee that
 -- the returned code will not be valid after the specified timestamp;
@@ -4216,7 +4232,8 @@ gExpireTime
       mapping _DateTime
 
 instance FromJSON
-         GetNotificationChannelVerificationCodeRequest where
+           GetNotificationChannelVerificationCodeRequest
+         where
         parseJSON
           = withObject
               "GetNotificationChannelVerificationCodeRequest"
@@ -4225,7 +4242,8 @@ instance FromJSON
                    (o .:? "expireTime"))
 
 instance ToJSON
-         GetNotificationChannelVerificationCodeRequest where
+           GetNotificationChannelVerificationCodeRequest
+         where
         toJSON
           GetNotificationChannelVerificationCodeRequest'{..}
           = object
@@ -4235,10 +4253,12 @@ instance ToJSON
 -- monitored resource, when multiple resources are being monitored.
 --
 -- /See:/ 'resourceGroup' smart constructor.
-data ResourceGroup = ResourceGroup'
+data ResourceGroup =
+  ResourceGroup'
     { _rgResourceType :: !(Maybe ResourceGroupResourceType)
     , _rgGroupId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourceGroup' with the minimum fields required to make a request.
 --
@@ -4249,11 +4269,7 @@ data ResourceGroup = ResourceGroup'
 -- * 'rgGroupId'
 resourceGroup
     :: ResourceGroup
-resourceGroup =
-    ResourceGroup'
-    { _rgResourceType = Nothing
-    , _rgGroupId = Nothing
-    }
+resourceGroup = ResourceGroup' {_rgResourceType = Nothing, _rgGroupId = Nothing}
 
 -- | The resource type of the group members.
 rgResourceType :: Lens' ResourceGroup (Maybe ResourceGroupResourceType)
@@ -4295,9 +4311,11 @@ instance ToJSON ResourceGroup where
 -- any ambiguities.
 --
 -- /See:/ 'droppedLabels' smart constructor.
-newtype DroppedLabels = DroppedLabels'
+newtype DroppedLabels =
+  DroppedLabels'
     { _dlLabel :: Maybe DroppedLabelsLabel
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DroppedLabels' with the minimum fields required to make a request.
 --
@@ -4306,10 +4324,7 @@ newtype DroppedLabels = DroppedLabels'
 -- * 'dlLabel'
 droppedLabels
     :: DroppedLabels
-droppedLabels =
-    DroppedLabels'
-    { _dlLabel = Nothing
-    }
+droppedLabels = DroppedLabels' {_dlLabel = Nothing}
 
 -- | Map from label to its value, for all labels dropped in any aggregation.
 dlLabel :: Lens' DroppedLabels (Maybe DroppedLabelsLabel)
@@ -4328,10 +4343,12 @@ instance ToJSON DroppedLabels where
 -- condition. If not specified, then a {count: 1} trigger is used.
 --
 -- /See:/ 'trigger' smart constructor.
-data Trigger = Trigger'
+data Trigger =
+  Trigger'
     { _tPercent :: !(Maybe (Textual Double))
     , _tCount   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Trigger' with the minimum fields required to make a request.
 --
@@ -4342,11 +4359,7 @@ data Trigger = Trigger'
 -- * 'tCount'
 trigger
     :: Trigger
-trigger =
-    Trigger'
-    { _tPercent = Nothing
-    , _tCount = Nothing
-    }
+trigger = Trigger' {_tPercent = Nothing, _tCount = Nothing}
 
 -- | The percentage of time series that must fail the predicate for the
 -- condition to be triggered.
@@ -4378,14 +4391,16 @@ instance ToJSON Trigger where
 -- | A protocol buffer message type.
 --
 -- /See:/ 'type'' smart constructor.
-data Type = Type'
+data Type =
+  Type'
     { _tSourceContext :: !(Maybe SourceContext)
     , _tOneofs        :: !(Maybe [Text])
     , _tName          :: !(Maybe Text)
     , _tOptions       :: !(Maybe [Option])
     , _tFields        :: !(Maybe [Field])
     , _tSyntax        :: !(Maybe TypeSyntax)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
@@ -4405,7 +4420,7 @@ data Type = Type'
 type'
     :: Type
 type' =
-    Type'
+  Type'
     { _tSourceContext = Nothing
     , _tOneofs = Nothing
     , _tName = Nothing
@@ -4472,9 +4487,11 @@ instance ToJSON Type where
 -- | The CreateCollectdTimeSeries response.
 --
 -- /See:/ 'createCollectdTimeSeriesResponse' smart constructor.
-newtype CreateCollectdTimeSeriesResponse = CreateCollectdTimeSeriesResponse'
+newtype CreateCollectdTimeSeriesResponse =
+  CreateCollectdTimeSeriesResponse'
     { _cctsrPayloadErrors :: Maybe [CollectdPayloadError]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCollectdTimeSeriesResponse' with the minimum fields required to make a request.
 --
@@ -4484,9 +4501,7 @@ newtype CreateCollectdTimeSeriesResponse = CreateCollectdTimeSeriesResponse'
 createCollectdTimeSeriesResponse
     :: CreateCollectdTimeSeriesResponse
 createCollectdTimeSeriesResponse =
-    CreateCollectdTimeSeriesResponse'
-    { _cctsrPayloadErrors = Nothing
-    }
+  CreateCollectdTimeSeriesResponse' {_cctsrPayloadErrors = Nothing}
 
 -- | Records the error status for points that were not written due to an
 -- error.Failed requests for which nothing is written will return an error
@@ -4517,10 +4532,12 @@ instance ToJSON CreateCollectdTimeSeriesResponse
 -- enumeration, etc.
 --
 -- /See:/ 'option' smart constructor.
-data Option = Option'
+data Option =
+  Option'
     { _oValue :: !(Maybe OptionValue)
     , _oName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Option' with the minimum fields required to make a request.
 --
@@ -4531,11 +4548,7 @@ data Option = Option'
 -- * 'oName'
 option
     :: Option
-option =
-    Option'
-    { _oValue = Nothing
-    , _oName = Nothing
-    }
+option = Option' {_oValue = Nothing, _oName = Nothing}
 
 -- | The option\'s value packed in an Any message. If the value is a
 -- primitive, the corresponding wrapper type defined in
@@ -4569,12 +4582,14 @@ instance ToJSON Option where
 -- signifies that something is wrong.
 --
 -- /See:/ 'condition' smart constructor.
-data Condition = Condition'
+data Condition =
+  Condition'
     { _cConditionAbsent    :: !(Maybe MetricAbsence)
     , _cConditionThreshold :: !(Maybe MetricThreshold)
     , _cName               :: !(Maybe Text)
     , _cDisplayName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
@@ -4590,7 +4605,7 @@ data Condition = Condition'
 condition
     :: Condition
 condition =
-    Condition'
+  Condition'
     { _cConditionAbsent = Nothing
     , _cConditionThreshold = Nothing
     , _cName = Nothing
@@ -4670,11 +4685,13 @@ instance ToJSON Condition where
 -- finite buckets are so-called because both bounds are finite.
 --
 -- /See:/ 'bucketOptions' smart constructor.
-data BucketOptions = BucketOptions'
+data BucketOptions =
+  BucketOptions'
     { _boExponentialBuckets :: !(Maybe Exponential)
     , _boLinearBuckets      :: !(Maybe Linear)
     , _boExplicitBuckets    :: !(Maybe Explicit)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketOptions' with the minimum fields required to make a request.
 --
@@ -4688,7 +4705,7 @@ data BucketOptions = BucketOptions'
 bucketOptions
     :: BucketOptions
 bucketOptions =
-    BucketOptions'
+  BucketOptions'
     { _boExponentialBuckets = Nothing
     , _boLinearBuckets = Nothing
     , _boExplicitBuckets = Nothing
@@ -4732,11 +4749,13 @@ instance ToJSON BucketOptions where
 -- | The protocol for the ListUptimeCheckConfigs response.
 --
 -- /See:/ 'listUptimeCheckConfigsResponse' smart constructor.
-data ListUptimeCheckConfigsResponse = ListUptimeCheckConfigsResponse'
+data ListUptimeCheckConfigsResponse =
+  ListUptimeCheckConfigsResponse'
     { _luccrUptimeCheckConfigs :: !(Maybe [UptimeCheckConfig])
     , _luccrNextPageToken      :: !(Maybe Text)
     , _luccrTotalSize          :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListUptimeCheckConfigsResponse' with the minimum fields required to make a request.
 --
@@ -4750,7 +4769,7 @@ data ListUptimeCheckConfigsResponse = ListUptimeCheckConfigsResponse'
 listUptimeCheckConfigsResponse
     :: ListUptimeCheckConfigsResponse
 listUptimeCheckConfigsResponse =
-    ListUptimeCheckConfigsResponse'
+  ListUptimeCheckConfigsResponse'
     { _luccrUptimeCheckConfigs = Nothing
     , _luccrNextPageToken = Nothing
     , _luccrTotalSize = Nothing
@@ -4804,14 +4823,16 @@ instance ToJSON ListUptimeCheckConfigsResponse where
 -- | Information involved in an HTTP\/HTTPS uptime check request.
 --
 -- /See:/ 'hTTPCheck' smart constructor.
-data HTTPCheck = HTTPCheck'
+data HTTPCheck =
+  HTTPCheck'
     { _httpcUseSSL      :: !(Maybe Bool)
     , _httpcPath        :: !(Maybe Text)
     , _httpcMaskHeaders :: !(Maybe Bool)
     , _httpcHeaders     :: !(Maybe HTTPCheckHeaders)
     , _httpcAuthInfo    :: !(Maybe BasicAuthentication)
     , _httpcPort        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPCheck' with the minimum fields required to make a request.
 --
@@ -4831,7 +4852,7 @@ data HTTPCheck = HTTPCheck'
 hTTPCheck
     :: HTTPCheck
 hTTPCheck =
-    HTTPCheck'
+  HTTPCheck'
     { _httpcUseSSL = Nothing
     , _httpcPath = Nothing
     , _httpcMaskHeaders = Nothing
@@ -4918,14 +4939,16 @@ instance ToJSON HTTPCheck where
 -- type is used for both listing and creating time series.
 --
 -- /See:/ 'timeSeries' smart constructor.
-data TimeSeries = TimeSeries'
+data TimeSeries =
+  TimeSeries'
     { _tsPoints     :: !(Maybe [Point])
     , _tsMetricKind :: !(Maybe TimeSeriesMetricKind)
     , _tsMetric     :: !(Maybe Metric)
     , _tsResource   :: !(Maybe MonitoredResource)
     , _tsMetadata   :: !(Maybe MonitoredResourceMetadata)
     , _tsValueType  :: !(Maybe TimeSeriesValueType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimeSeries' with the minimum fields required to make a request.
 --
@@ -4945,7 +4968,7 @@ data TimeSeries = TimeSeries'
 timeSeries
     :: TimeSeries
 timeSeries =
-    TimeSeries'
+  TimeSeries'
     { _tsPoints = Nothing
     , _tsMetricKind = Nothing
     , _tsMetric = Nothing
@@ -5035,7 +5058,8 @@ instance ToJSON TimeSeries where
 -- Introduction to Alerting.
 --
 -- /See:/ 'alertPolicy' smart constructor.
-data AlertPolicy = AlertPolicy'
+data AlertPolicy =
+  AlertPolicy'
     { _apEnabled              :: !(Maybe Bool)
     , _apNotificationChannels :: !(Maybe [Text])
     , _apMutationRecord       :: !(Maybe MutationRecord)
@@ -5046,7 +5070,8 @@ data AlertPolicy = AlertPolicy'
     , _apDisplayName          :: !(Maybe Text)
     , _apConditions           :: !(Maybe [Condition])
     , _apCombiner             :: !(Maybe AlertPolicyCombiner)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlertPolicy' with the minimum fields required to make a request.
 --
@@ -5074,7 +5099,7 @@ data AlertPolicy = AlertPolicy'
 alertPolicy
     :: AlertPolicy
 alertPolicy =
-    AlertPolicy'
+  AlertPolicy'
     { _apEnabled = Nothing
     , _apNotificationChannels = Nothing
     , _apMutationRecord = Nothing
@@ -5213,10 +5238,12 @@ instance ToJSON AlertPolicy where
 -- | The protocol for the ListAlertPolicies response.
 --
 -- /See:/ 'listAlertPoliciesResponse' smart constructor.
-data ListAlertPoliciesResponse = ListAlertPoliciesResponse'
+data ListAlertPoliciesResponse =
+  ListAlertPoliciesResponse'
     { _laprNextPageToken :: !(Maybe Text)
     , _laprAlertPolicies :: !(Maybe [AlertPolicy])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAlertPoliciesResponse' with the minimum fields required to make a request.
 --
@@ -5228,10 +5255,8 @@ data ListAlertPoliciesResponse = ListAlertPoliciesResponse'
 listAlertPoliciesResponse
     :: ListAlertPoliciesResponse
 listAlertPoliciesResponse =
-    ListAlertPoliciesResponse'
-    { _laprNextPageToken = Nothing
-    , _laprAlertPolicies = Nothing
-    }
+  ListAlertPoliciesResponse'
+    {_laprNextPageToken = Nothing, _laprAlertPolicies = Nothing}
 
 -- | If there might be more results than were returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
@@ -5267,9 +5292,11 @@ instance ToJSON ListAlertPoliciesResponse where
 -- | Information required for a TCP uptime check request.
 --
 -- /See:/ 'tcpCheck' smart constructor.
-newtype TCPCheck = TCPCheck'
+newtype TCPCheck =
+  TCPCheck'
     { _tcPort :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TCPCheck' with the minimum fields required to make a request.
 --
@@ -5278,10 +5305,7 @@ newtype TCPCheck = TCPCheck'
 -- * 'tcPort'
 tcpCheck
     :: TCPCheck
-tcpCheck =
-    TCPCheck'
-    { _tcPort = Nothing
-    }
+tcpCheck = TCPCheck' {_tcPort = Nothing}
 
 -- | The port to the page to run the check against. Will be combined with
 -- host (specified within the MonitoredResource) to construct the full URL.
@@ -5307,12 +5331,14 @@ instance ToJSON TCPCheck where
 -- data in the specified duration.
 --
 -- /See:/ 'metricAbsence' smart constructor.
-data MetricAbsence = MetricAbsence'
+data MetricAbsence =
+  MetricAbsence'
     { _maAggregations :: !(Maybe [Aggregation])
     , _maFilter       :: !(Maybe Text)
     , _maTrigger      :: !(Maybe Trigger)
     , _maDuration     :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetricAbsence' with the minimum fields required to make a request.
 --
@@ -5328,7 +5354,7 @@ data MetricAbsence = MetricAbsence'
 metricAbsence
     :: MetricAbsence
 metricAbsence =
-    MetricAbsence'
+  MetricAbsence'
     { _maAggregations = Nothing
     , _maFilter = Nothing
     , _maTrigger = Nothing
@@ -5400,10 +5426,12 @@ instance ToJSON MetricAbsence where
 -- | Describes the error status for values that were not written.
 --
 -- /See:/ 'collectdValueError' smart constructor.
-data CollectdValueError = CollectdValueError'
+data CollectdValueError =
+  CollectdValueError'
     { _cveError :: !(Maybe Status)
     , _cveIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CollectdValueError' with the minimum fields required to make a request.
 --
@@ -5415,10 +5443,7 @@ data CollectdValueError = CollectdValueError'
 collectdValueError
     :: CollectdValueError
 collectdValueError =
-    CollectdValueError'
-    { _cveError = Nothing
-    , _cveIndex = Nothing
-    }
+  CollectdValueError' {_cveError = Nothing, _cveIndex = Nothing}
 
 -- | Records the error status for the value.
 cveError :: Lens' CollectdValueError (Maybe Status)

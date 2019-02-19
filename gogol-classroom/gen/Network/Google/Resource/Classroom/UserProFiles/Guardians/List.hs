@@ -98,7 +98,8 @@ type UserProFilesGuardiansListResource =
 -- format can be recognized, but Classroom has no record of that student.
 --
 -- /See:/ 'userProFilesGuardiansList' smart constructor.
-data UserProFilesGuardiansList = UserProFilesGuardiansList'
+data UserProFilesGuardiansList =
+  UserProFilesGuardiansList'
     { _upfglStudentId           :: !Text
     , _upfglXgafv               :: !(Maybe Xgafv)
     , _upfglUploadProtocol      :: !(Maybe Text)
@@ -108,7 +109,8 @@ data UserProFilesGuardiansList = UserProFilesGuardiansList'
     , _upfglPageToken           :: !(Maybe Text)
     , _upfglPageSize            :: !(Maybe (Textual Int32))
     , _upfglCallback            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserProFilesGuardiansList' with the minimum fields required to make a request.
 --
@@ -135,7 +137,7 @@ userProFilesGuardiansList
     :: Text -- ^ 'upfglStudentId'
     -> UserProFilesGuardiansList
 userProFilesGuardiansList pUpfglStudentId_ =
-    UserProFilesGuardiansList'
+  UserProFilesGuardiansList'
     { _upfglStudentId = pUpfglStudentId_
     , _upfglXgafv = Nothing
     , _upfglUploadProtocol = Nothing

@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesList' request conforms to.
 type PlacementStrategiesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -71,7 +71,8 @@ type PlacementStrategiesListResource =
 -- supports paging.
 --
 -- /See:/ 'placementStrategiesList' smart constructor.
-data PlacementStrategiesList = PlacementStrategiesList'
+data PlacementStrategiesList =
+  PlacementStrategiesList'
     { _pslSearchString :: !(Maybe Text)
     , _pslIds          :: !(Maybe [Textual Int64])
     , _pslProFileId    :: !(Textual Int64)
@@ -79,7 +80,8 @@ data PlacementStrategiesList = PlacementStrategiesList'
     , _pslPageToken    :: !(Maybe Text)
     , _pslSortField    :: !PlacementStrategiesListSortField
     , _pslMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlacementStrategiesList' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ placementStrategiesList
     :: Int64 -- ^ 'pslProFileId'
     -> PlacementStrategiesList
 placementStrategiesList pPslProFileId_ =
-    PlacementStrategiesList'
+  PlacementStrategiesList'
     { _pslSearchString = Nothing
     , _pslIds = Nothing
     , _pslProFileId = _Coerce # pPslProFileId_

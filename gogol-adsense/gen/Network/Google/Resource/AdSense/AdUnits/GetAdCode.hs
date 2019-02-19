@@ -55,10 +55,12 @@ type AdUnitsGetAdCodeResource =
 -- | Get ad code for the specified ad unit.
 --
 -- /See:/ 'adUnitsGetAdCode' smart constructor.
-data AdUnitsGetAdCode = AdUnitsGetAdCode'
+data AdUnitsGetAdCode =
+  AdUnitsGetAdCode'
     { _augacAdUnitId   :: !Text
     , _augacAdClientId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdUnitsGetAdCode' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ adUnitsGetAdCode
     -> Text -- ^ 'augacAdClientId'
     -> AdUnitsGetAdCode
 adUnitsGetAdCode pAugacAdUnitId_ pAugacAdClientId_ =
-    AdUnitsGetAdCode'
-    { _augacAdUnitId = pAugacAdUnitId_
-    , _augacAdClientId = pAugacAdClientId_
-    }
+  AdUnitsGetAdCode'
+    {_augacAdUnitId = pAugacAdUnitId_, _augacAdClientId = pAugacAdClientId_}
 
 -- | Ad unit to get the code for.
 augacAdUnitId :: Lens' AdUnitsGetAdCode Text

@@ -66,7 +66,8 @@ type AppsAuthorizedDomainsListResource =
 -- | Lists all domains the user is authorized to administer.
 --
 -- /See:/ 'appsAuthorizedDomainsList' smart constructor.
-data AppsAuthorizedDomainsList = AppsAuthorizedDomainsList'
+data AppsAuthorizedDomainsList =
+  AppsAuthorizedDomainsList'
     { _aadlXgafv          :: !(Maybe Xgafv)
     , _aadlUploadProtocol :: !(Maybe Text)
     , _aadlAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data AppsAuthorizedDomainsList = AppsAuthorizedDomainsList'
     , _aadlPageToken      :: !(Maybe Text)
     , _aadlPageSize       :: !(Maybe (Textual Int32))
     , _aadlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsAuthorizedDomainsList' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ appsAuthorizedDomainsList
     :: Text -- ^ 'aadlAppsId'
     -> AppsAuthorizedDomainsList
 appsAuthorizedDomainsList pAadlAppsId_ =
-    AppsAuthorizedDomainsList'
+  AppsAuthorizedDomainsList'
     { _aadlXgafv = Nothing
     , _aadlUploadProtocol = Nothing
     , _aadlAccessToken = Nothing

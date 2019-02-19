@@ -65,7 +65,8 @@ type ProjectsServiceAccountsTestIAMPermissionsResource
 -- for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsTestIAMPermissions' smart constructor.
-data ProjectsServiceAccountsTestIAMPermissions = ProjectsServiceAccountsTestIAMPermissions'
+data ProjectsServiceAccountsTestIAMPermissions =
+  ProjectsServiceAccountsTestIAMPermissions'
     { _psatipXgafv          :: !(Maybe Xgafv)
     , _psatipUploadProtocol :: !(Maybe Text)
     , _psatipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsServiceAccountsTestIAMPermissions = ProjectsServiceAccountsTestIAMP
     , _psatipPayload        :: !TestIAMPermissionsRequest
     , _psatipResource       :: !Text
     , _psatipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsServiceAccountsTestIAMPermissions
     -> Text -- ^ 'psatipResource'
     -> ProjectsServiceAccountsTestIAMPermissions
 projectsServiceAccountsTestIAMPermissions pPsatipPayload_ pPsatipResource_ =
-    ProjectsServiceAccountsTestIAMPermissions'
+  ProjectsServiceAccountsTestIAMPermissions'
     { _psatipXgafv = Nothing
     , _psatipUploadProtocol = Nothing
     , _psatipAccessToken = Nothing
@@ -151,7 +153,8 @@ psatipCallback
       (\ s a -> s{_psatipCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsTestIAMPermissions where
+           ProjectsServiceAccountsTestIAMPermissions
+         where
         type Rs ProjectsServiceAccountsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsServiceAccountsTestIAMPermissions

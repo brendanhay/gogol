@@ -80,11 +80,13 @@ type EditsBundlesUploadResource =
 -- for an example in java.
 --
 -- /See:/ 'editsBundlesUpload' smart constructor.
-data EditsBundlesUpload = EditsBundlesUpload'
+data EditsBundlesUpload =
+  EditsBundlesUpload'
     { _ebuPackageName                  :: !Text
     , _ebuAckBundleInstallationWarning :: !(Maybe Bool)
     , _ebuEditId                       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsBundlesUpload' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ editsBundlesUpload
     -> Text -- ^ 'ebuEditId'
     -> EditsBundlesUpload
 editsBundlesUpload pEbuPackageName_ pEbuEditId_ =
-    EditsBundlesUpload'
+  EditsBundlesUpload'
     { _ebuPackageName = pEbuPackageName_
     , _ebuAckBundleInstallationWarning = Nothing
     , _ebuEditId = pEbuEditId_
@@ -141,7 +143,8 @@ instance GoogleRequest EditsBundlesUpload where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload EditsBundlesUpload) where
+           (MediaUpload EditsBundlesUpload)
+         where
         type Rs (MediaUpload EditsBundlesUpload) = Bundle
         type Scopes (MediaUpload EditsBundlesUpload) =
              Scopes EditsBundlesUpload

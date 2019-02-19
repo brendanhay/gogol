@@ -60,12 +60,14 @@ type ReplicasGetResource =
 -- | Gets information about a specific replica.
 --
 -- /See:/ 'replicasGet' smart constructor.
-data ReplicasGet = ReplicasGet'
+data ReplicasGet =
+  ReplicasGet'
     { _rgPoolName    :: !Text
     , _rgZone        :: !Text
     , _rgReplicaName :: !Text
     , _rgProjectName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplicasGet' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ replicasGet
     -> Text -- ^ 'rgProjectName'
     -> ReplicasGet
 replicasGet pRgPoolName_ pRgZone_ pRgReplicaName_ pRgProjectName_ =
-    ReplicasGet'
+  ReplicasGet'
     { _rgPoolName = pRgPoolName_
     , _rgZone = pRgZone_
     , _rgReplicaName = pRgReplicaName_

@@ -60,14 +60,16 @@ type ProjectsAgentSessionsContextsDeleteResource =
 -- | Deletes the specified context.
 --
 -- /See:/ 'projectsAgentSessionsContextsDelete' smart constructor.
-data ProjectsAgentSessionsContextsDelete = ProjectsAgentSessionsContextsDelete'
+data ProjectsAgentSessionsContextsDelete =
+  ProjectsAgentSessionsContextsDelete'
     { _pascdXgafv          :: !(Maybe Xgafv)
     , _pascdUploadProtocol :: !(Maybe Text)
     , _pascdAccessToken    :: !(Maybe Text)
     , _pascdUploadType     :: !(Maybe Text)
     , _pascdName           :: !Text
     , _pascdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentSessionsContextsDelete' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsAgentSessionsContextsDelete
     :: Text -- ^ 'pascdName'
     -> ProjectsAgentSessionsContextsDelete
 projectsAgentSessionsContextsDelete pPascdName_ =
-    ProjectsAgentSessionsContextsDelete'
+  ProjectsAgentSessionsContextsDelete'
     { _pascdXgafv = Nothing
     , _pascdUploadProtocol = Nothing
     , _pascdAccessToken = Nothing
@@ -133,7 +135,8 @@ pascdCallback
       (\ s a -> s{_pascdCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsContextsDelete where
+           ProjectsAgentSessionsContextsDelete
+         where
         type Rs ProjectsAgentSessionsContextsDelete =
              GoogleProtobufEmpty
         type Scopes ProjectsAgentSessionsContextsDelete =

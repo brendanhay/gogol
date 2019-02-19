@@ -58,11 +58,13 @@ type ResourcesFeaturesListResource =
 -- | Retrieves a list of features for an account.
 --
 -- /See:/ 'resourcesFeaturesList' smart constructor.
-data ResourcesFeaturesList = ResourcesFeaturesList'
+data ResourcesFeaturesList =
+  ResourcesFeaturesList'
     { _rflCustomer   :: !Text
     , _rflPageToken  :: !(Maybe Text)
     , _rflMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesFeaturesList' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ resourcesFeaturesList
     :: Text -- ^ 'rflCustomer'
     -> ResourcesFeaturesList
 resourcesFeaturesList pRflCustomer_ =
-    ResourcesFeaturesList'
+  ResourcesFeaturesList'
     { _rflCustomer = pRflCustomer_
     , _rflPageToken = Nothing
     , _rflMaxResults = Nothing

@@ -73,14 +73,16 @@ type NamespacesListResource =
 -- permissions in the Google Developers Console project.
 --
 -- /See:/ 'namespacesList' smart constructor.
-data NamespacesList = NamespacesList'
+data NamespacesList =
+  NamespacesList'
     { _nlXgafv          :: !(Maybe Xgafv)
     , _nlUploadProtocol :: !(Maybe Text)
     , _nlAccessToken    :: !(Maybe Text)
     , _nlUploadType     :: !(Maybe Text)
     , _nlProjectId      :: !(Maybe Text)
     , _nlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NamespacesList' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ data NamespacesList = NamespacesList'
 namespacesList
     :: NamespacesList
 namespacesList =
-    NamespacesList'
+  NamespacesList'
     { _nlXgafv = Nothing
     , _nlUploadProtocol = Nothing
     , _nlAccessToken = Nothing

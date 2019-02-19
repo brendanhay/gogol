@@ -64,7 +64,8 @@ type ProjectsLocationsKeyRingsCryptoKeysPatchResource
 -- | Update a CryptoKey.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysPatch' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysPatch = ProjectsLocationsKeyRingsCryptoKeysPatch'
+data ProjectsLocationsKeyRingsCryptoKeysPatch =
+  ProjectsLocationsKeyRingsCryptoKeysPatch'
     { _plkrckpXgafv          :: !(Maybe Xgafv)
     , _plkrckpUploadProtocol :: !(Maybe Text)
     , _plkrckpUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,8 @@ data ProjectsLocationsKeyRingsCryptoKeysPatch = ProjectsLocationsKeyRingsCryptoK
     , _plkrckpPayload        :: !CryptoKey
     , _plkrckpName           :: !Text
     , _plkrckpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsKeyRingsCryptoKeysPatch
     -> Text -- ^ 'plkrckpName'
     -> ProjectsLocationsKeyRingsCryptoKeysPatch
 projectsLocationsKeyRingsCryptoKeysPatch pPlkrckpPayload_ pPlkrckpName_ =
-    ProjectsLocationsKeyRingsCryptoKeysPatch'
+  ProjectsLocationsKeyRingsCryptoKeysPatch'
     { _plkrckpXgafv = Nothing
     , _plkrckpUploadProtocol = Nothing
     , _plkrckpUpdateMask = Nothing
@@ -158,7 +160,8 @@ plkrckpCallback
       (\ s a -> s{_plkrckpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysPatch where
+           ProjectsLocationsKeyRingsCryptoKeysPatch
+         where
         type Rs ProjectsLocationsKeyRingsCryptoKeysPatch =
              CryptoKey
         type Scopes ProjectsLocationsKeyRingsCryptoKeysPatch

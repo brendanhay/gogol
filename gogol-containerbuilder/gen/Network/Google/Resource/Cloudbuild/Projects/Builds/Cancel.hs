@@ -66,7 +66,8 @@ type ProjectsBuildsCancelResource =
 -- | Cancels a build in progress.
 --
 -- /See:/ 'projectsBuildsCancel' smart constructor.
-data ProjectsBuildsCancel = ProjectsBuildsCancel'
+data ProjectsBuildsCancel =
+  ProjectsBuildsCancel'
     { _pbcXgafv          :: !(Maybe Xgafv)
     , _pbcUploadProtocol :: !(Maybe Text)
     , _pbcAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsBuildsCancel = ProjectsBuildsCancel'
     , _pbcId             :: !Text
     , _pbcProjectId      :: !Text
     , _pbcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsBuildsCancel' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsBuildsCancel
     -> Text -- ^ 'pbcProjectId'
     -> ProjectsBuildsCancel
 projectsBuildsCancel pPbcPayload_ pPbcId_ pPbcProjectId_ =
-    ProjectsBuildsCancel'
+  ProjectsBuildsCancel'
     { _pbcXgafv = Nothing
     , _pbcUploadProtocol = Nothing
     , _pbcAccessToken = Nothing

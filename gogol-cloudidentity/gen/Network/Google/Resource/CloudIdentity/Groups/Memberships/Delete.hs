@@ -59,14 +59,16 @@ type GroupsMembershipsDeleteResource =
 -- | Deletes a Membership.
 --
 -- /See:/ 'groupsMembershipsDelete' smart constructor.
-data GroupsMembershipsDelete = GroupsMembershipsDelete'
+data GroupsMembershipsDelete =
+  GroupsMembershipsDelete'
     { _gmdXgafv          :: !(Maybe Xgafv)
     , _gmdUploadProtocol :: !(Maybe Text)
     , _gmdAccessToken    :: !(Maybe Text)
     , _gmdUploadType     :: !(Maybe Text)
     , _gmdName           :: !Text
     , _gmdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsMembershipsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ groupsMembershipsDelete
     :: Text -- ^ 'gmdName'
     -> GroupsMembershipsDelete
 groupsMembershipsDelete pGmdName_ =
-    GroupsMembershipsDelete'
+  GroupsMembershipsDelete'
     { _gmdXgafv = Nothing
     , _gmdUploadProtocol = Nothing
     , _gmdAccessToken = Nothing

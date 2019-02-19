@@ -57,11 +57,13 @@ type OrdersCancelResource =
 -- | Cancels all line items in an order, making a full refund.
 --
 -- /See:/ 'ordersCancel' smart constructor.
-data OrdersCancel = OrdersCancel'
+data OrdersCancel =
+  OrdersCancel'
     { _o2MerchantId :: !(Textual Word64)
     , _o2Payload    :: !OrdersCancelRequest
     , _o2OrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersCancel' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ ordersCancel
     -> Text -- ^ 'o2OrderId'
     -> OrdersCancel
 ordersCancel pO2MerchantId_ pO2Payload_ pO2OrderId_ =
-    OrdersCancel'
+  OrdersCancel'
     { _o2MerchantId = _Coerce # pO2MerchantId_
     , _o2Payload = pO2Payload_
     , _o2OrderId = pO2OrderId_

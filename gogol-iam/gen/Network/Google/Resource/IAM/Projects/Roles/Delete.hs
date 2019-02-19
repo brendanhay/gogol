@@ -73,7 +73,8 @@ type ProjectsRolesDeleteResource =
 -- associated with the role are removed.
 --
 -- /See:/ 'projectsRolesDelete' smart constructor.
-data ProjectsRolesDelete = ProjectsRolesDelete'
+data ProjectsRolesDelete =
+  ProjectsRolesDelete'
     { _prdXgafv          :: !(Maybe Xgafv)
     , _prdEtag           :: !(Maybe Bytes)
     , _prdUploadProtocol :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsRolesDelete = ProjectsRolesDelete'
     , _prdUploadType     :: !(Maybe Text)
     , _prdName           :: !Text
     , _prdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRolesDelete' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsRolesDelete
     :: Text -- ^ 'prdName'
     -> ProjectsRolesDelete
 projectsRolesDelete pPrdName_ =
-    ProjectsRolesDelete'
+  ProjectsRolesDelete'
     { _prdXgafv = Nothing
     , _prdEtag = Nothing
     , _prdUploadProtocol = Nothing

@@ -57,10 +57,12 @@ type ProductsInsertResource =
 -- exists, this method updates that entry.
 --
 -- /See:/ 'productsInsert' smart constructor.
-data ProductsInsert = ProductsInsert'
+data ProductsInsert =
+  ProductsInsert'
     { _piiMerchantId :: !(Textual Word64)
     , _piiPayload    :: !Product
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsInsert' with the minimum fields required to make a request.
 --
@@ -74,10 +76,8 @@ productsInsert
     -> Product -- ^ 'piiPayload'
     -> ProductsInsert
 productsInsert pPiiMerchantId_ pPiiPayload_ =
-    ProductsInsert'
-    { _piiMerchantId = _Coerce # pPiiMerchantId_
-    , _piiPayload = pPiiPayload_
-    }
+  ProductsInsert'
+    {_piiMerchantId = _Coerce # pPiiMerchantId_, _piiPayload = pPiiPayload_}
 
 -- | The ID of the account that contains the product. This account cannot be
 -- a multi-client account.

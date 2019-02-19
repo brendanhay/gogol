@@ -67,7 +67,8 @@ type IndexingDatasourcesItemsDeleteQueueItemsResource
 -- items.
 --
 -- /See:/ 'indexingDatasourcesItemsDeleteQueueItems' smart constructor.
-data IndexingDatasourcesItemsDeleteQueueItems = IndexingDatasourcesItemsDeleteQueueItems'
+data IndexingDatasourcesItemsDeleteQueueItems =
+  IndexingDatasourcesItemsDeleteQueueItems'
     { _ididqiXgafv          :: !(Maybe Xgafv)
     , _ididqiUploadProtocol :: !(Maybe Text)
     , _ididqiAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data IndexingDatasourcesItemsDeleteQueueItems = IndexingDatasourcesItemsDeleteQu
     , _ididqiPayload        :: !DeleteQueueItemsRequest
     , _ididqiName           :: !Text
     , _ididqiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IndexingDatasourcesItemsDeleteQueueItems' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ indexingDatasourcesItemsDeleteQueueItems
     -> Text -- ^ 'ididqiName'
     -> IndexingDatasourcesItemsDeleteQueueItems
 indexingDatasourcesItemsDeleteQueueItems pIdidqiPayload_ pIdidqiName_ =
-    IndexingDatasourcesItemsDeleteQueueItems'
+  IndexingDatasourcesItemsDeleteQueueItems'
     { _ididqiXgafv = Nothing
     , _ididqiUploadProtocol = Nothing
     , _ididqiAccessToken = Nothing
@@ -151,7 +153,8 @@ ididqiCallback
       (\ s a -> s{_ididqiCallback = a})
 
 instance GoogleRequest
-         IndexingDatasourcesItemsDeleteQueueItems where
+           IndexingDatasourcesItemsDeleteQueueItems
+         where
         type Rs IndexingDatasourcesItemsDeleteQueueItems =
              Operation
         type Scopes IndexingDatasourcesItemsDeleteQueueItems

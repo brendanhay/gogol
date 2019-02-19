@@ -66,7 +66,8 @@ type ProjectsInstancesSetIAMPolicyResource =
 -- \`spanner.instances.setIamPolicy\` on resource.
 --
 -- /See:/ 'projectsInstancesSetIAMPolicy' smart constructor.
-data ProjectsInstancesSetIAMPolicy = ProjectsInstancesSetIAMPolicy'
+data ProjectsInstancesSetIAMPolicy =
+  ProjectsInstancesSetIAMPolicy'
     { _pisipXgafv          :: !(Maybe Xgafv)
     , _pisipUploadProtocol :: !(Maybe Text)
     , _pisipAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsInstancesSetIAMPolicy = ProjectsInstancesSetIAMPolicy'
     , _pisipPayload        :: !SetIAMPolicyRequest
     , _pisipResource       :: !Text
     , _pisipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsInstancesSetIAMPolicy
     -> Text -- ^ 'pisipResource'
     -> ProjectsInstancesSetIAMPolicy
 projectsInstancesSetIAMPolicy pPisipPayload_ pPisipResource_ =
-    ProjectsInstancesSetIAMPolicy'
+  ProjectsInstancesSetIAMPolicy'
     { _pisipXgafv = Nothing
     , _pisipUploadProtocol = Nothing
     , _pisipAccessToken = Nothing

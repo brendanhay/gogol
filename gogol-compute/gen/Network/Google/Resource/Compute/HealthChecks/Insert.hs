@@ -59,11 +59,13 @@ type HealthChecksInsertResource =
 -- included in the request.
 --
 -- /See:/ 'healthChecksInsert' smart constructor.
-data HealthChecksInsert = HealthChecksInsert'
+data HealthChecksInsert =
+  HealthChecksInsert'
     { _hciRequestId :: !(Maybe Text)
     , _hciProject   :: !Text
     , _hciPayload   :: !HealthCheck
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthChecksInsert' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ healthChecksInsert
     -> HealthCheck -- ^ 'hciPayload'
     -> HealthChecksInsert
 healthChecksInsert pHciProject_ pHciPayload_ =
-    HealthChecksInsert'
+  HealthChecksInsert'
     { _hciRequestId = Nothing
     , _hciProject = pHciProject_
     , _hciPayload = pHciPayload_

@@ -54,9 +54,11 @@ type PushtokensRemoveResource =
 -- non-existent push token will report success.
 --
 -- /See:/ 'pushtokensRemove' smart constructor.
-newtype PushtokensRemove = PushtokensRemove'
+newtype PushtokensRemove =
+  PushtokensRemove'
     { _prPayload :: PushTokenId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PushtokensRemove' with the minimum fields required to make a request.
 --
@@ -66,10 +68,7 @@ newtype PushtokensRemove = PushtokensRemove'
 pushtokensRemove
     :: PushTokenId -- ^ 'prPayload'
     -> PushtokensRemove
-pushtokensRemove pPrPayload_ =
-    PushtokensRemove'
-    { _prPayload = pPrPayload_
-    }
+pushtokensRemove pPrPayload_ = PushtokensRemove' {_prPayload = pPrPayload_}
 
 -- | Multipart request metadata.
 prPayload :: Lens' PushtokensRemove PushTokenId

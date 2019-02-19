@@ -61,7 +61,8 @@ type ProjectsAttestorsUpdateResource =
 -- | Updates an attestor. Returns NOT_FOUND if the attestor does not exist.
 --
 -- /See:/ 'projectsAttestorsUpdate' smart constructor.
-data ProjectsAttestorsUpdate = ProjectsAttestorsUpdate'
+data ProjectsAttestorsUpdate =
+  ProjectsAttestorsUpdate'
     { _pauXgafv          :: !(Maybe Xgafv)
     , _pauUploadProtocol :: !(Maybe Text)
     , _pauAccessToken    :: !(Maybe Text)
@@ -69,7 +70,8 @@ data ProjectsAttestorsUpdate = ProjectsAttestorsUpdate'
     , _pauPayload        :: !Attestor
     , _pauName           :: !Text
     , _pauCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAttestorsUpdate' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ projectsAttestorsUpdate
     -> Text -- ^ 'pauName'
     -> ProjectsAttestorsUpdate
 projectsAttestorsUpdate pPauPayload_ pPauName_ =
-    ProjectsAttestorsUpdate'
+  ProjectsAttestorsUpdate'
     { _pauXgafv = Nothing
     , _pauUploadProtocol = Nothing
     , _pauAccessToken = Nothing

@@ -62,11 +62,13 @@ type PurchasesSubscriptionsRevokeResource =
 -- recurring.
 --
 -- /See:/ 'purchasesSubscriptionsRevoke' smart constructor.
-data PurchasesSubscriptionsRevoke = PurchasesSubscriptionsRevoke'
+data PurchasesSubscriptionsRevoke =
+  PurchasesSubscriptionsRevoke'
     { _pPackageName    :: !Text
     , _pToken          :: !Text
     , _pSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsRevoke' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ purchasesSubscriptionsRevoke
     -> Text -- ^ 'pSubscriptionId'
     -> PurchasesSubscriptionsRevoke
 purchasesSubscriptionsRevoke pPPackageName_ pPToken_ pPSubscriptionId_ =
-    PurchasesSubscriptionsRevoke'
+  PurchasesSubscriptionsRevoke'
     { _pPackageName = pPPackageName_
     , _pToken = pPToken_
     , _pSubscriptionId = pPSubscriptionId_

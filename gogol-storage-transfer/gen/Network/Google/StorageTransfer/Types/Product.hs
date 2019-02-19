@@ -24,11 +24,13 @@ import           Network.Google.StorageTransfer.Types.Sum
 -- entries.
 --
 -- /See:/ 'errorSummary' smart constructor.
-data ErrorSummary = ErrorSummary'
+data ErrorSummary =
+  ErrorSummary'
     { _esErrorCount      :: !(Maybe (Textual Int64))
     , _esErrorCode       :: !(Maybe ErrorSummaryErrorCode)
     , _esErrorLogEntries :: !(Maybe [ErrorLogEntry])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ErrorSummary' with the minimum fields required to make a request.
 --
@@ -42,7 +44,7 @@ data ErrorSummary = ErrorSummary'
 errorSummary
     :: ErrorSummary
 errorSummary =
-    ErrorSummary'
+  ErrorSummary'
     { _esErrorCount = Nothing
     , _esErrorCode = Nothing
     , _esErrorLogEntries = Nothing
@@ -120,11 +122,13 @@ instance ToJSON ErrorSummary where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -137,12 +141,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -183,10 +182,12 @@ instance ToJSON Status where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -198,10 +199,8 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -235,11 +234,13 @@ instance ToJSON ListOperationsResponse where
 -- | Transfers can be scheduled to recur or to run just once.
 --
 -- /See:/ 'schedule' smart constructor.
-data Schedule = Schedule'
+data Schedule =
+  Schedule'
     { _sScheduleEndDate   :: !(Maybe Date)
     , _sScheduleStartDate :: !(Maybe Date)
     , _sStartTimeOfDay    :: !(Maybe TimeOfDay')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Schedule' with the minimum fields required to make a request.
 --
@@ -253,7 +254,7 @@ data Schedule = Schedule'
 schedule
     :: Schedule
 schedule =
-    Schedule'
+  Schedule'
     { _sScheduleEndDate = Nothing
     , _sScheduleStartDate = Nothing
     , _sStartTimeOfDay = Nothing
@@ -307,12 +308,14 @@ instance ToJSON Schedule where
 -- | Conditions that determine which objects will be transferred.
 --
 -- /See:/ 'objectConditions' smart constructor.
-data ObjectConditions = ObjectConditions'
+data ObjectConditions =
+  ObjectConditions'
     { _ocMinTimeElapsedSinceLastModification :: !(Maybe GDuration)
     , _ocIncludePrefixes                     :: !(Maybe [Text])
     , _ocMaxTimeElapsedSinceLastModification :: !(Maybe GDuration)
     , _ocExcludePrefixes                     :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ObjectConditions' with the minimum fields required to make a request.
 --
@@ -328,7 +331,7 @@ data ObjectConditions = ObjectConditions'
 objectConditions
     :: ObjectConditions
 objectConditions =
-    ObjectConditions'
+  ObjectConditions'
     { _ocMinTimeElapsedSinceLastModification = Nothing
     , _ocIncludePrefixes = Nothing
     , _ocMaxTimeElapsedSinceLastModification = Nothing
@@ -421,13 +424,15 @@ instance ToJSON ObjectConditions where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -445,7 +450,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -514,8 +519,8 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -533,8 +538,8 @@ instance ToJSON Empty where
 --
 -- /See:/ 'pauseTransferOperationRequest' smart constructor.
 data PauseTransferOperationRequest =
-    PauseTransferOperationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  PauseTransferOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PauseTransferOperationRequest' with the minimum fields required to make a request.
 --
@@ -553,9 +558,11 @@ instance ToJSON PauseTransferOperationRequest where
 -- | Google service account
 --
 -- /See:/ 'googleServiceAccount' smart constructor.
-newtype GoogleServiceAccount = GoogleServiceAccount'
+newtype GoogleServiceAccount =
+  GoogleServiceAccount'
     { _gsaAccountEmail :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleServiceAccount' with the minimum fields required to make a request.
 --
@@ -564,10 +571,7 @@ newtype GoogleServiceAccount = GoogleServiceAccount'
 -- * 'gsaAccountEmail'
 googleServiceAccount
     :: GoogleServiceAccount
-googleServiceAccount =
-    GoogleServiceAccount'
-    { _gsaAccountEmail = Nothing
-    }
+googleServiceAccount = GoogleServiceAccount' {_gsaAccountEmail = Nothing}
 
 -- | Required.
 gsaAccountEmail :: Lens' GoogleServiceAccount (Maybe Text)
@@ -589,9 +593,11 @@ instance ToJSON GoogleServiceAccount where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -602,9 +608,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -630,11 +634,13 @@ instance ToJSON StatusDetailsItem where
 -- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date'
+data Date =
+  Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -647,12 +653,7 @@ data Date = Date'
 -- * 'dMonth'
 date
     :: Date
-date =
-    Date'
-    { _dDay = Nothing
-    , _dYear = Nothing
-    , _dMonth = Nothing
-    }
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -693,11 +694,13 @@ instance ToJSON Date where
 -- | Request passed to UpdateTransferJob.
 --
 -- /See:/ 'updateTransferJobRequest' smart constructor.
-data UpdateTransferJobRequest = UpdateTransferJobRequest'
+data UpdateTransferJobRequest =
+  UpdateTransferJobRequest'
     { _utjrTransferJob                :: !(Maybe TransferJob)
     , _utjrProjectId                  :: !(Maybe Text)
     , _utjrUpdateTransferJobFieldMask :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTransferJobRequest' with the minimum fields required to make a request.
 --
@@ -711,7 +714,7 @@ data UpdateTransferJobRequest = UpdateTransferJobRequest'
 updateTransferJobRequest
     :: UpdateTransferJobRequest
 updateTransferJobRequest =
-    UpdateTransferJobRequest'
+  UpdateTransferJobRequest'
     { _utjrTransferJob = Nothing
     , _utjrProjectId = Nothing
     , _utjrUpdateTransferJobFieldMask = Nothing
@@ -765,7 +768,8 @@ instance ToJSON UpdateTransferJobRequest where
 -- operation.
 --
 -- /See:/ 'transferCounters' smart constructor.
-data TransferCounters = TransferCounters'
+data TransferCounters =
+  TransferCounters'
     { _tcBytesFoundOnlyFromSink         :: !(Maybe (Textual Int64))
     , _tcBytesDeletedFromSink           :: !(Maybe (Textual Int64))
     , _tcObjectsDeletedFromSource       :: !(Maybe (Textual Int64))
@@ -782,7 +786,8 @@ data TransferCounters = TransferCounters'
     , _tcObjectsFromSourceFailed        :: !(Maybe (Textual Int64))
     , _tcObjectsFailedToDeleteFromSink  :: !(Maybe (Textual Int64))
     , _tcObjectsFromSourceSkippedBySync :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferCounters' with the minimum fields required to make a request.
 --
@@ -822,7 +827,7 @@ data TransferCounters = TransferCounters'
 transferCounters
     :: TransferCounters
 transferCounters =
-    TransferCounters'
+  TransferCounters'
     { _tcBytesFoundOnlyFromSink = Nothing
     , _tcBytesDeletedFromSink = Nothing
     , _tcObjectsDeletedFromSource = Nothing
@@ -1023,7 +1028,8 @@ instance ToJSON TransferCounters where
 -- periodically.
 --
 -- /See:/ 'transferJob' smart constructor.
-data TransferJob = TransferJob'
+data TransferJob =
+  TransferJob'
     { _tjCreationTime         :: !(Maybe DateTime')
     , _tjStatus               :: !(Maybe TransferJobStatus)
     , _tjSchedule             :: !(Maybe Schedule)
@@ -1033,7 +1039,8 @@ data TransferJob = TransferJob'
     , _tjTransferSpec         :: !(Maybe TransferSpec)
     , _tjDescription          :: !(Maybe Text)
     , _tjLastModificationTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferJob' with the minimum fields required to make a request.
 --
@@ -1059,7 +1066,7 @@ data TransferJob = TransferJob'
 transferJob
     :: TransferJob
 transferJob =
-    TransferJob'
+  TransferJob'
     { _tjCreationTime = Nothing
     , _tjStatus = Nothing
     , _tjSchedule = Nothing
@@ -1166,9 +1173,11 @@ instance ToJSON TransferJob where
 -- object is updated.
 --
 -- /See:/ 'gcsData' smart constructor.
-newtype GcsData = GcsData'
+newtype GcsData =
+  GcsData'
     { _gdBucketName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GcsData' with the minimum fields required to make a request.
 --
@@ -1177,10 +1186,7 @@ newtype GcsData = GcsData'
 -- * 'gdBucketName'
 gcsData
     :: GcsData
-gcsData =
-    GcsData'
-    { _gdBucketName = Nothing
-    }
+gcsData = GcsData' {_gdBucketName = Nothing}
 
 -- | Google Cloud Storage bucket name (see [Bucket Name
 -- Requirements](https:\/\/cloud.google.com\/storage\/docs\/naming#requirements)).
@@ -1203,10 +1209,12 @@ instance ToJSON GcsData where
 -- AwsS3Data resource, an object\'s name is the S3 object\'s key name.
 --
 -- /See:/ 'awsS3Data' smart constructor.
-data AwsS3Data = AwsS3Data'
+data AwsS3Data =
+  AwsS3Data'
     { _asdBucketName   :: !(Maybe Text)
     , _asdAwsAccessKey :: !(Maybe AwsAccessKey)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AwsS3Data' with the minimum fields required to make a request.
 --
@@ -1217,11 +1225,7 @@ data AwsS3Data = AwsS3Data'
 -- * 'asdAwsAccessKey'
 awsS3Data
     :: AwsS3Data
-awsS3Data =
-    AwsS3Data'
-    { _asdBucketName = Nothing
-    , _asdAwsAccessKey = Nothing
-    }
+awsS3Data = AwsS3Data' {_asdBucketName = Nothing, _asdAwsAccessKey = Nothing}
 
 -- | S3 Bucket name (see [Creating a
 -- bucket](http:\/\/docs.aws.amazon.com\/AmazonS3\/latest\/dev\/create-bucket-get-location-example.html)).
@@ -1282,9 +1286,11 @@ instance ToJSON AwsS3Data where
 -- objects to transfer.
 --
 -- /See:/ 'hTTPData' smart constructor.
-newtype HTTPData = HTTPData'
+newtype HTTPData =
+  HTTPData'
     { _httpdListURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPData' with the minimum fields required to make a request.
 --
@@ -1293,10 +1299,7 @@ newtype HTTPData = HTTPData'
 -- * 'httpdListURL'
 hTTPData
     :: HTTPData
-hTTPData =
-    HTTPData'
-    { _httpdListURL = Nothing
-    }
+hTTPData = HTTPData' {_httpdListURL = Nothing}
 
 -- | The URL that points to the file that stores the object list entries.
 -- This file must allow public access. Currently, only URLs with HTTP and
@@ -1321,12 +1324,14 @@ instance ToJSON HTTPData where
 -- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'timeOfDay' smart constructor.
-data TimeOfDay' = TimeOfDay''
+data TimeOfDay' =
+  TimeOfDay''
     { _todNanos   :: !(Maybe (Textual Int32))
     , _todHours   :: !(Maybe (Textual Int32))
     , _todMinutes :: !(Maybe (Textual Int32))
     , _todSeconds :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
 --
@@ -1342,7 +1347,7 @@ data TimeOfDay' = TimeOfDay''
 timeOfDay
     :: TimeOfDay'
 timeOfDay =
-    TimeOfDay''
+  TimeOfDay''
     { _todNanos = Nothing
     , _todHours = Nothing
     , _todMinutes = Nothing
@@ -1397,10 +1402,12 @@ instance ToJSON TimeOfDay' where
 -- | An entry describing an error that has occurred.
 --
 -- /See:/ 'errorLogEntry' smart constructor.
-data ErrorLogEntry = ErrorLogEntry'
+data ErrorLogEntry =
+  ErrorLogEntry'
     { _eleURL          :: !(Maybe Text)
     , _eleErrorDetails :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ErrorLogEntry' with the minimum fields required to make a request.
 --
@@ -1411,11 +1418,7 @@ data ErrorLogEntry = ErrorLogEntry'
 -- * 'eleErrorDetails'
 errorLogEntry
     :: ErrorLogEntry
-errorLogEntry =
-    ErrorLogEntry'
-    { _eleURL = Nothing
-    , _eleErrorDetails = Nothing
-    }
+errorLogEntry = ErrorLogEntry' {_eleURL = Nothing, _eleErrorDetails = Nothing}
 
 -- | A URL that refers to the target (a data source, a data sink, or an
 -- object) with which the error is associated. Required.
@@ -1447,9 +1450,11 @@ instance ToJSON ErrorLogEntry where
 -- | Represents the transfer operation object.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -1460,9 +1465,7 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1482,11 +1485,13 @@ instance ToJSON OperationMetadata where
 -- be performed on objects in a transfer.
 --
 -- /See:/ 'transferOptions' smart constructor.
-data TransferOptions = TransferOptions'
+data TransferOptions =
+  TransferOptions'
     { _toDeleteObjectsUniqueInSink             :: !(Maybe Bool)
     , _toDeleteObjectsFromSourceAfterTransfer  :: !(Maybe Bool)
     , _toOverwriteObjectsAlreadyExistingInSink :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferOptions' with the minimum fields required to make a request.
 --
@@ -1500,7 +1505,7 @@ data TransferOptions = TransferOptions'
 transferOptions
     :: TransferOptions
 transferOptions =
-    TransferOptions'
+  TransferOptions'
     { _toDeleteObjectsUniqueInSink = Nothing
     , _toDeleteObjectsFromSourceAfterTransfer = Nothing
     , _toOverwriteObjectsAlreadyExistingInSink = Nothing
@@ -1553,7 +1558,8 @@ instance ToJSON TransferOptions where
 -- | A description of the execution of a transfer.
 --
 -- /See:/ 'transferOperation' smart constructor.
-data TransferOperation = TransferOperation'
+data TransferOperation =
+  TransferOperation'
     { _toStatus          :: !(Maybe TransferOperationStatus)
     , _toCounters        :: !(Maybe TransferCounters)
     , _toStartTime       :: !(Maybe DateTime')
@@ -1563,7 +1569,8 @@ data TransferOperation = TransferOperation'
     , _toProjectId       :: !(Maybe Text)
     , _toTransferSpec    :: !(Maybe TransferSpec)
     , _toErrorBreakdowns :: !(Maybe [ErrorSummary])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferOperation' with the minimum fields required to make a request.
 --
@@ -1589,7 +1596,7 @@ data TransferOperation = TransferOperation'
 transferOperation
     :: TransferOperation
 transferOperation =
-    TransferOperation'
+  TransferOperation'
     { _toStatus = Nothing
     , _toCounters = Nothing
     , _toStartTime = Nothing
@@ -1683,14 +1690,16 @@ instance ToJSON TransferOperation where
 -- | Configuration for running a transfer.
 --
 -- /See:/ 'transferSpec' smart constructor.
-data TransferSpec = TransferSpec'
+data TransferSpec =
+  TransferSpec'
     { _tsGcsDataSource    :: !(Maybe GcsData)
     , _tsObjectConditions :: !(Maybe ObjectConditions)
     , _tsHTTPDataSource   :: !(Maybe HTTPData)
     , _tsAwsS3DataSource  :: !(Maybe AwsS3Data)
     , _tsGcsDataSink      :: !(Maybe GcsData)
     , _tsTransferOptions  :: !(Maybe TransferOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferSpec' with the minimum fields required to make a request.
 --
@@ -1710,7 +1719,7 @@ data TransferSpec = TransferSpec'
 transferSpec
     :: TransferSpec
 transferSpec =
-    TransferSpec'
+  TransferSpec'
     { _tsGcsDataSource = Nothing
     , _tsObjectConditions = Nothing
     , _tsHTTPDataSource = Nothing
@@ -1786,10 +1795,12 @@ instance ToJSON TransferSpec where
 -- | Response from ListTransferJobs.
 --
 -- /See:/ 'listTransferJobsResponse' smart constructor.
-data ListTransferJobsResponse = ListTransferJobsResponse'
+data ListTransferJobsResponse =
+  ListTransferJobsResponse'
     { _ltjrNextPageToken :: !(Maybe Text)
     , _ltjrTransferJobs  :: !(Maybe [TransferJob])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTransferJobsResponse' with the minimum fields required to make a request.
 --
@@ -1801,10 +1812,8 @@ data ListTransferJobsResponse = ListTransferJobsResponse'
 listTransferJobsResponse
     :: ListTransferJobsResponse
 listTransferJobsResponse =
-    ListTransferJobsResponse'
-    { _ltjrNextPageToken = Nothing
-    , _ltjrTransferJobs = Nothing
-    }
+  ListTransferJobsResponse'
+    {_ltjrNextPageToken = Nothing, _ltjrTransferJobs = Nothing}
 
 -- | The list next page token.
 ltjrNextPageToken :: Lens' ListTransferJobsResponse (Maybe Text)
@@ -1845,9 +1854,11 @@ instance ToJSON ListTransferJobsResponse where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -1858,9 +1869,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1880,8 +1889,8 @@ instance ToJSON OperationResponse where
 --
 -- /See:/ 'resumeTransferOperationRequest' smart constructor.
 data ResumeTransferOperationRequest =
-    ResumeTransferOperationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ResumeTransferOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResumeTransferOperationRequest' with the minimum fields required to make a request.
 --
@@ -1902,10 +1911,12 @@ instance ToJSON ResumeTransferOperationRequest where
 -- Credentials](http:\/\/docs.aws.amazon.com\/general\/latest\/gr\/aws-security-credentials.html)).
 --
 -- /See:/ 'awsAccessKey' smart constructor.
-data AwsAccessKey = AwsAccessKey'
+data AwsAccessKey =
+  AwsAccessKey'
     { _aakSecretAccessKey :: !(Maybe Text)
     , _aakAccessKeyId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AwsAccessKey' with the minimum fields required to make a request.
 --
@@ -1917,10 +1928,7 @@ data AwsAccessKey = AwsAccessKey'
 awsAccessKey
     :: AwsAccessKey
 awsAccessKey =
-    AwsAccessKey'
-    { _aakSecretAccessKey = Nothing
-    , _aakAccessKeyId = Nothing
-    }
+  AwsAccessKey' {_aakSecretAccessKey = Nothing, _aakAccessKeyId = Nothing}
 
 -- | AWS secret access key. This field is not returned in RPC responses.
 -- Required.

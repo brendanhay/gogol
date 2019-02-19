@@ -65,7 +65,8 @@ type ProjectsMetricsListResource =
 -- | Lists logs-based metrics.
 --
 -- /See:/ 'projectsMetricsList' smart constructor.
-data ProjectsMetricsList = ProjectsMetricsList'
+data ProjectsMetricsList =
+  ProjectsMetricsList'
     { _pmlParent         :: !Text
     , _pmlXgafv          :: !(Maybe Xgafv)
     , _pmlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsMetricsList = ProjectsMetricsList'
     , _pmlPageToken      :: !(Maybe Text)
     , _pmlPageSize       :: !(Maybe (Textual Int32))
     , _pmlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsMetricsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsMetricsList
     :: Text -- ^ 'pmlParent'
     -> ProjectsMetricsList
 projectsMetricsList pPmlParent_ =
-    ProjectsMetricsList'
+  ProjectsMetricsList'
     { _pmlParent = pPmlParent_
     , _pmlXgafv = Nothing
     , _pmlUploadProtocol = Nothing

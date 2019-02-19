@@ -60,14 +60,16 @@ type ProjectsInstanceConfigsGetResource =
 -- | Gets information about a particular instance configuration.
 --
 -- /See:/ 'projectsInstanceConfigsGet' smart constructor.
-data ProjectsInstanceConfigsGet = ProjectsInstanceConfigsGet'
+data ProjectsInstanceConfigsGet =
+  ProjectsInstanceConfigsGet'
     { _picgXgafv          :: !(Maybe Xgafv)
     , _picgUploadProtocol :: !(Maybe Text)
     , _picgAccessToken    :: !(Maybe Text)
     , _picgUploadType     :: !(Maybe Text)
     , _picgName           :: !Text
     , _picgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstanceConfigsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsInstanceConfigsGet
     :: Text -- ^ 'picgName'
     -> ProjectsInstanceConfigsGet
 projectsInstanceConfigsGet pPicgName_ =
-    ProjectsInstanceConfigsGet'
+  ProjectsInstanceConfigsGet'
     { _picgXgafv = Nothing
     , _picgUploadProtocol = Nothing
     , _picgAccessToken = Nothing

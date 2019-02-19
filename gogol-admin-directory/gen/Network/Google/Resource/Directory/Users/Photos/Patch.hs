@@ -56,10 +56,12 @@ type UsersPhotosPatchResource =
 -- | Add a photo for the user. This method supports patch semantics.
 --
 -- /See:/ 'usersPhotosPatch' smart constructor.
-data UsersPhotosPatch = UsersPhotosPatch'
+data UsersPhotosPatch =
+  UsersPhotosPatch'
     { _uppPayload :: !UserPhoto
     , _uppUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersPhotosPatch' with the minimum fields required to make a request.
 --
@@ -73,10 +75,7 @@ usersPhotosPatch
     -> Text -- ^ 'uppUserKey'
     -> UsersPhotosPatch
 usersPhotosPatch pUppPayload_ pUppUserKey_ =
-    UsersPhotosPatch'
-    { _uppPayload = pUppPayload_
-    , _uppUserKey = pUppUserKey_
-    }
+  UsersPhotosPatch' {_uppPayload = pUppPayload_, _uppUserKey = pUppUserKey_}
 
 -- | Multipart request metadata.
 uppPayload :: Lens' UsersPhotosPatch UserPhoto

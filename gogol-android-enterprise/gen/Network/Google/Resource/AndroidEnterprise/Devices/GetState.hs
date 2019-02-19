@@ -66,11 +66,13 @@ type DevicesGetStateResource =
 -- services. This is only supported for Google-managed users.
 --
 -- /See:/ 'devicesGetState' smart constructor.
-data DevicesGetState = DevicesGetState'
+data DevicesGetState =
+  DevicesGetState'
     { _dgsEnterpriseId :: !Text
     , _dgsUserId       :: !Text
     , _dgsDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DevicesGetState' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ devicesGetState
     -> Text -- ^ 'dgsDeviceId'
     -> DevicesGetState
 devicesGetState pDgsEnterpriseId_ pDgsUserId_ pDgsDeviceId_ =
-    DevicesGetState'
+  DevicesGetState'
     { _dgsEnterpriseId = pDgsEnterpriseId_
     , _dgsUserId = pDgsUserId_
     , _dgsDeviceId = pDgsDeviceId_

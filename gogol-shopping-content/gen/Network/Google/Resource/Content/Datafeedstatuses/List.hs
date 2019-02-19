@@ -56,11 +56,13 @@ type DatafeedstatusesListResource =
 -- | Lists the statuses of the datafeeds in your Merchant Center account.
 --
 -- /See:/ 'datafeedstatusesList' smart constructor.
-data DatafeedstatusesList = DatafeedstatusesList'
+data DatafeedstatusesList =
+  DatafeedstatusesList'
     { _dlMerchantId :: !(Textual Word64)
     , _dlPageToken  :: !(Maybe Text)
     , _dlMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DatafeedstatusesList' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ datafeedstatusesList
     :: Word64 -- ^ 'dlMerchantId'
     -> DatafeedstatusesList
 datafeedstatusesList pDlMerchantId_ =
-    DatafeedstatusesList'
+  DatafeedstatusesList'
     { _dlMerchantId = _Coerce # pDlMerchantId_
     , _dlPageToken = Nothing
     , _dlMaxResults = Nothing

@@ -60,10 +60,12 @@ type ProjectsHistoriesGetResource =
 -- History does not exist
 --
 -- /See:/ 'projectsHistoriesGet' smart constructor.
-data ProjectsHistoriesGet = ProjectsHistoriesGet'
+data ProjectsHistoriesGet =
+  ProjectsHistoriesGet'
     { _phgHistoryId :: !Text
     , _phgProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsHistoriesGet' with the minimum fields required to make a request.
 --
@@ -77,10 +79,8 @@ projectsHistoriesGet
     -> Text -- ^ 'phgProjectId'
     -> ProjectsHistoriesGet
 projectsHistoriesGet pPhgHistoryId_ pPhgProjectId_ =
-    ProjectsHistoriesGet'
-    { _phgHistoryId = pPhgHistoryId_
-    , _phgProjectId = pPhgProjectId_
-    }
+  ProjectsHistoriesGet'
+    {_phgHistoryId = pPhgHistoryId_, _phgProjectId = pPhgProjectId_}
 
 -- | A History id. Required.
 phgHistoryId :: Lens' ProjectsHistoriesGet Text

@@ -54,10 +54,12 @@ type PageViewsGetResource =
 -- | Retrieve pageview stats for a Blog.
 --
 -- /See:/ 'pageViewsGet' smart constructor.
-data PageViewsGet = PageViewsGet'
+data PageViewsGet =
+  PageViewsGet'
     { _pvgBlogId :: !Text
     , _pvgRange  :: !(Maybe [PageViewsGetRange])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageViewsGet' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ pageViewsGet
     :: Text -- ^ 'pvgBlogId'
     -> PageViewsGet
 pageViewsGet pPvgBlogId_ =
-    PageViewsGet'
-    { _pvgBlogId = pPvgBlogId_
-    , _pvgRange = Nothing
-    }
+  PageViewsGet' {_pvgBlogId = pPvgBlogId_, _pvgRange = Nothing}
 
 -- | The ID of the blog to get.
 pvgBlogId :: Lens' PageViewsGet Text

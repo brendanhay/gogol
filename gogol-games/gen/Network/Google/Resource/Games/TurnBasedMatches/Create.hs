@@ -55,10 +55,12 @@ type TurnBasedMatchesCreateResource =
 -- | Create a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesCreate' smart constructor.
-data TurnBasedMatchesCreate = TurnBasedMatchesCreate'
+data TurnBasedMatchesCreate =
+  TurnBasedMatchesCreate'
     { _tbmcPayload  :: !TurnBasedMatchCreateRequest
     , _tbmcLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesCreate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ turnBasedMatchesCreate
     :: TurnBasedMatchCreateRequest -- ^ 'tbmcPayload'
     -> TurnBasedMatchesCreate
 turnBasedMatchesCreate pTbmcPayload_ =
-    TurnBasedMatchesCreate'
-    { _tbmcPayload = pTbmcPayload_
-    , _tbmcLanguage = Nothing
-    }
+  TurnBasedMatchesCreate'
+    {_tbmcPayload = pTbmcPayload_, _tbmcLanguage = Nothing}
 
 -- | Multipart request metadata.
 tbmcPayload :: Lens' TurnBasedMatchesCreate TurnBasedMatchCreateRequest

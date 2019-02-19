@@ -54,9 +54,11 @@ type RoomsDismissResource =
 -- only. Calling this method directly is unsupported.
 --
 -- /See:/ 'roomsDismiss' smart constructor.
-newtype RoomsDismiss = RoomsDismiss'
+newtype RoomsDismiss =
+  RoomsDismiss'
     { _rdRoomId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoomsDismiss' with the minimum fields required to make a request.
 --
@@ -66,10 +68,7 @@ newtype RoomsDismiss = RoomsDismiss'
 roomsDismiss
     :: Text -- ^ 'rdRoomId'
     -> RoomsDismiss
-roomsDismiss pRdRoomId_ =
-    RoomsDismiss'
-    { _rdRoomId = pRdRoomId_
-    }
+roomsDismiss pRdRoomId_ = RoomsDismiss' {_rdRoomId = pRdRoomId_}
 
 -- | The ID of the room.
 rdRoomId :: Lens' RoomsDismiss Text

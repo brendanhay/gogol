@@ -24,7 +24,8 @@ import           Network.Google.Prelude
 -- associated with a deal and\/or revision number.
 --
 -- /See:/ 'marketplaceNote' smart constructor.
-data MarketplaceNote = MarketplaceNote'
+data MarketplaceNote =
+  MarketplaceNote'
     { _mnNote                   :: !(Maybe Text)
     , _mnKind                   :: !Text
     , _mnTimestampMs            :: !(Maybe (Textual Int64))
@@ -33,7 +34,8 @@ data MarketplaceNote = MarketplaceNote'
     , _mnProposalRevisionNumber :: !(Maybe (Textual Int64))
     , _mnNoteId                 :: !(Maybe Text)
     , _mnCreatorRole            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MarketplaceNote' with the minimum fields required to make a request.
 --
@@ -57,7 +59,7 @@ data MarketplaceNote = MarketplaceNote'
 marketplaceNote
     :: MarketplaceNote
 marketplaceNote =
-    MarketplaceNote'
+  MarketplaceNote'
     { _mnNote = Nothing
     , _mnKind = "adexchangebuyer#marketplaceNote"
     , _mnTimestampMs = Nothing
@@ -144,7 +146,8 @@ instance ToJSON MarketplaceNote where
 -- set.)
 --
 -- /See:/ 'creativeNATiveAd' smart constructor.
-data CreativeNATiveAd = CreativeNATiveAd'
+data CreativeNATiveAd =
+  CreativeNATiveAd'
     { _cnataImage                 :: !(Maybe CreativeNATiveAdImage)
     , _cnataAppIcon               :: !(Maybe CreativeNATiveAdAppIcon)
     , _cnataClickTrackingURL      :: !(Maybe Text)
@@ -159,7 +162,8 @@ data CreativeNATiveAd = CreativeNATiveAd'
     , _cnataAdvertiser            :: !(Maybe Text)
     , _cnataStarRating            :: !(Maybe (Textual Double))
     , _cnataLogo                  :: !(Maybe CreativeNATiveAdLogo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeNATiveAd' with the minimum fields required to make a request.
 --
@@ -195,7 +199,7 @@ data CreativeNATiveAd = CreativeNATiveAd'
 creativeNATiveAd
     :: CreativeNATiveAd
 creativeNATiveAd =
-    CreativeNATiveAd'
+  CreativeNATiveAd'
     { _cnataImage = Nothing
     , _cnataAppIcon = Nothing
     , _cnataClickTrackingURL = Nothing
@@ -334,10 +338,12 @@ instance ToJSON CreativeNATiveAd where
 
 --
 -- /See:/ 'editAllOrderDealsResponse' smart constructor.
-data EditAllOrderDealsResponse = EditAllOrderDealsResponse'
+data EditAllOrderDealsResponse =
+  EditAllOrderDealsResponse'
     { _eaodrDeals               :: !(Maybe [MarketplaceDeal])
     , _eaodrOrderRevisionNumber :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditAllOrderDealsResponse' with the minimum fields required to make a request.
 --
@@ -349,10 +355,8 @@ data EditAllOrderDealsResponse = EditAllOrderDealsResponse'
 editAllOrderDealsResponse
     :: EditAllOrderDealsResponse
 editAllOrderDealsResponse =
-    EditAllOrderDealsResponse'
-    { _eaodrDeals = Nothing
-    , _eaodrOrderRevisionNumber = Nothing
-    }
+  EditAllOrderDealsResponse'
+    {_eaodrDeals = Nothing, _eaodrOrderRevisionNumber = Nothing}
 
 -- | List of all deals in the proposal after edit.
 eaodrDeals :: Lens' EditAllOrderDealsResponse [MarketplaceDeal]
@@ -386,9 +390,11 @@ instance ToJSON EditAllOrderDealsResponse where
 
 --
 -- /See:/ 'targetingValueDemogGenderCriteria' smart constructor.
-newtype TargetingValueDemogGenderCriteria = TargetingValueDemogGenderCriteria'
+newtype TargetingValueDemogGenderCriteria =
+  TargetingValueDemogGenderCriteria'
     { _tvdgcDemogGenderCriteriaIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetingValueDemogGenderCriteria' with the minimum fields required to make a request.
 --
@@ -398,9 +404,7 @@ newtype TargetingValueDemogGenderCriteria = TargetingValueDemogGenderCriteria'
 targetingValueDemogGenderCriteria
     :: TargetingValueDemogGenderCriteria
 targetingValueDemogGenderCriteria =
-    TargetingValueDemogGenderCriteria'
-    { _tvdgcDemogGenderCriteriaIds = Nothing
-    }
+  TargetingValueDemogGenderCriteria' {_tvdgcDemogGenderCriteriaIds = Nothing}
 
 tvdgcDemogGenderCriteriaIds :: Lens' TargetingValueDemogGenderCriteria [Text]
 tvdgcDemogGenderCriteriaIds
@@ -430,11 +434,13 @@ instance ToJSON TargetingValueDemogGenderCriteria
 -- to a single creative.
 --
 -- /See:/ 'creativesList' smart constructor.
-data CreativesList = CreativesList'
+data CreativesList =
+  CreativesList'
     { _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
     , _clItems         :: !(Maybe [Creative])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativesList' with the minimum fields required to make a request.
 --
@@ -448,7 +454,7 @@ data CreativesList = CreativesList'
 creativesList
     :: CreativesList
 creativesList =
-    CreativesList'
+  CreativesList'
     { _clNextPageToken = Nothing
     , _clKind = "adexchangebuyer#creativesList"
     , _clItems = Nothing
@@ -489,11 +495,13 @@ instance ToJSON CreativesList where
 
 --
 -- /See:/ 'creativeDealIdsDealStatusesItem' smart constructor.
-data CreativeDealIdsDealStatusesItem = CreativeDealIdsDealStatusesItem'
+data CreativeDealIdsDealStatusesItem =
+  CreativeDealIdsDealStatusesItem'
     { _cdidsiArcStatus     :: !(Maybe Text)
     , _cdidsiWebPropertyId :: !(Maybe (Textual Int32))
     , _cdidsiDealId        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeDealIdsDealStatusesItem' with the minimum fields required to make a request.
 --
@@ -507,7 +515,7 @@ data CreativeDealIdsDealStatusesItem = CreativeDealIdsDealStatusesItem'
 creativeDealIdsDealStatusesItem
     :: CreativeDealIdsDealStatusesItem
 creativeDealIdsDealStatusesItem =
-    CreativeDealIdsDealStatusesItem'
+  CreativeDealIdsDealStatusesItem'
     { _cdidsiArcStatus = Nothing
     , _cdidsiWebPropertyId = Nothing
     , _cdidsiDealId = Nothing
@@ -551,12 +559,14 @@ instance ToJSON CreativeDealIdsDealStatusesItem where
 
 --
 -- /See:/ 'creativeServingRestrictionsItemContextsItem' smart constructor.
-data CreativeServingRestrictionsItemContextsItem = CreativeServingRestrictionsItemContextsItem'
+data CreativeServingRestrictionsItemContextsItem =
+  CreativeServingRestrictionsItemContextsItem'
     { _csriciPlatform      :: !(Maybe [Text])
     , _csriciContextType   :: !(Maybe Text)
     , _csriciAuctionType   :: !(Maybe [Text])
     , _csriciGeoCriteriaId :: !(Maybe [Textual Int32])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeServingRestrictionsItemContextsItem' with the minimum fields required to make a request.
 --
@@ -572,7 +582,7 @@ data CreativeServingRestrictionsItemContextsItem = CreativeServingRestrictionsIt
 creativeServingRestrictionsItemContextsItem
     :: CreativeServingRestrictionsItemContextsItem
 creativeServingRestrictionsItemContextsItem =
-    CreativeServingRestrictionsItemContextsItem'
+  CreativeServingRestrictionsItemContextsItem'
     { _csriciPlatform = Nothing
     , _csriciContextType = Nothing
     , _csriciAuctionType = Nothing
@@ -615,7 +625,8 @@ csriciGeoCriteriaId
       . _Coerce
 
 instance FromJSON
-         CreativeServingRestrictionsItemContextsItem where
+           CreativeServingRestrictionsItemContextsItem
+         where
         parseJSON
           = withObject
               "CreativeServingRestrictionsItemContextsItem"
@@ -627,7 +638,8 @@ instance FromJSON
                      <*> (o .:? "geoCriteriaId" .!= mempty))
 
 instance ToJSON
-         CreativeServingRestrictionsItemContextsItem where
+           CreativeServingRestrictionsItemContextsItem
+         where
         toJSON
           CreativeServingRestrictionsItemContextsItem'{..}
           = object
@@ -639,9 +651,11 @@ instance ToJSON
 
 --
 -- /See:/ 'createOrdersResponse' smart constructor.
-newtype CreateOrdersResponse = CreateOrdersResponse'
+newtype CreateOrdersResponse =
+  CreateOrdersResponse'
     { _corProposals :: Maybe [Proposal]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateOrdersResponse' with the minimum fields required to make a request.
 --
@@ -650,10 +664,7 @@ newtype CreateOrdersResponse = CreateOrdersResponse'
 -- * 'corProposals'
 createOrdersResponse
     :: CreateOrdersResponse
-createOrdersResponse =
-    CreateOrdersResponse'
-    { _corProposals = Nothing
-    }
+createOrdersResponse = CreateOrdersResponse' {_corProposals = Nothing}
 
 -- | The list of proposals successfully created.
 corProposals :: Lens' CreateOrdersResponse [Proposal]
@@ -676,12 +687,14 @@ instance ToJSON CreateOrdersResponse where
 
 --
 -- /See:/ 'accountBidderLocationItem' smart constructor.
-data AccountBidderLocationItem = AccountBidderLocationItem'
+data AccountBidderLocationItem =
+  AccountBidderLocationItem'
     { _abliURL         :: !(Maybe Text)
     , _abliMaximumQps  :: !(Maybe (Textual Int32))
     , _abliRegion      :: !(Maybe Text)
     , _abliBidProtocol :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountBidderLocationItem' with the minimum fields required to make a request.
 --
@@ -697,7 +710,7 @@ data AccountBidderLocationItem = AccountBidderLocationItem'
 accountBidderLocationItem
     :: AccountBidderLocationItem
 accountBidderLocationItem =
-    AccountBidderLocationItem'
+  AccountBidderLocationItem'
     { _abliURL = Nothing
     , _abliMaximumQps = Nothing
     , _abliRegion = Nothing
@@ -753,10 +766,12 @@ instance ToJSON AccountBidderLocationItem where
 
 --
 -- /See:/ 'privateData' smart constructor.
-data PrivateData = PrivateData'
+data PrivateData =
+  PrivateData'
     { _pdReferencePayload :: !(Maybe Bytes)
     , _pdReferenceId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PrivateData' with the minimum fields required to make a request.
 --
@@ -768,10 +783,7 @@ data PrivateData = PrivateData'
 privateData
     :: PrivateData
 privateData =
-    PrivateData'
-    { _pdReferencePayload = Nothing
-    , _pdReferenceId = Nothing
-    }
+  PrivateData' {_pdReferencePayload = Nothing, _pdReferenceId = Nothing}
 
 pdReferencePayload :: Lens' PrivateData (Maybe ByteString)
 pdReferencePayload
@@ -801,14 +813,16 @@ instance ToJSON PrivateData where
 -- | The configuration data for Ad Exchange RTB - Budget API.
 --
 -- /See:/ 'budget' smart constructor.
-data Budget = Budget'
+data Budget =
+  Budget'
     { _bCurrencyCode :: !(Maybe Text)
     , _bKind         :: !Text
     , _bBudgetAmount :: !(Maybe (Textual Int64))
     , _bAccountId    :: !(Maybe (Textual Int64))
     , _bId           :: !(Maybe Text)
     , _bBillingId    :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Budget' with the minimum fields required to make a request.
 --
@@ -828,7 +842,7 @@ data Budget = Budget'
 budget
     :: Budget
 budget =
-    Budget'
+  Budget'
     { _bCurrencyCode = Nothing
     , _bKind = "adexchangebuyer#budget"
     , _bBudgetAmount = Nothing
@@ -896,9 +910,11 @@ instance ToJSON Budget where
 
 --
 -- /See:/ 'addOrderNotesRequest' smart constructor.
-newtype AddOrderNotesRequest = AddOrderNotesRequest'
+newtype AddOrderNotesRequest =
+  AddOrderNotesRequest'
     { _aonrNotes :: Maybe [MarketplaceNote]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddOrderNotesRequest' with the minimum fields required to make a request.
 --
@@ -907,10 +923,7 @@ newtype AddOrderNotesRequest = AddOrderNotesRequest'
 -- * 'aonrNotes'
 addOrderNotesRequest
     :: AddOrderNotesRequest
-addOrderNotesRequest =
-    AddOrderNotesRequest'
-    { _aonrNotes = Nothing
-    }
+addOrderNotesRequest = AddOrderNotesRequest' {_aonrNotes = Nothing}
 
 -- | The list of notes to add.
 aonrNotes :: Lens' AddOrderNotesRequest [MarketplaceNote]
@@ -931,11 +944,13 @@ instance ToJSON AddOrderNotesRequest where
 
 --
 -- /See:/ 'deliveryControlFrequencyCap' smart constructor.
-data DeliveryControlFrequencyCap = DeliveryControlFrequencyCap'
+data DeliveryControlFrequencyCap =
+  DeliveryControlFrequencyCap'
     { _dcfcMaxImpressions :: !(Maybe (Textual Int32))
     , _dcfcNumTimeUnits   :: !(Maybe (Textual Int32))
     , _dcfcTimeUnitType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeliveryControlFrequencyCap' with the minimum fields required to make a request.
 --
@@ -949,7 +964,7 @@ data DeliveryControlFrequencyCap = DeliveryControlFrequencyCap'
 deliveryControlFrequencyCap
     :: DeliveryControlFrequencyCap
 deliveryControlFrequencyCap =
-    DeliveryControlFrequencyCap'
+  DeliveryControlFrequencyCap'
     { _dcfcMaxImpressions = Nothing
     , _dcfcNumTimeUnits = Nothing
     , _dcfcTimeUnitType = Nothing
@@ -990,10 +1005,12 @@ instance ToJSON DeliveryControlFrequencyCap where
 
 --
 -- /See:/ 'marketplaceDealParty' smart constructor.
-data MarketplaceDealParty = MarketplaceDealParty'
+data MarketplaceDealParty =
+  MarketplaceDealParty'
     { _mdpSeller :: !(Maybe Seller)
     , _mdpBuyer  :: !(Maybe Buyer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MarketplaceDealParty' with the minimum fields required to make a request.
 --
@@ -1005,10 +1022,7 @@ data MarketplaceDealParty = MarketplaceDealParty'
 marketplaceDealParty
     :: MarketplaceDealParty
 marketplaceDealParty =
-    MarketplaceDealParty'
-    { _mdpSeller = Nothing
-    , _mdpBuyer = Nothing
-    }
+  MarketplaceDealParty' {_mdpSeller = Nothing, _mdpBuyer = Nothing}
 
 -- | The buyer\/seller associated with the deal. One of buyer\/seller is
 -- specified for a deal party.
@@ -1037,9 +1051,11 @@ instance ToJSON MarketplaceDealParty where
 
 --
 -- /See:/ 'getOrderNotesResponse' smart constructor.
-newtype GetOrderNotesResponse = GetOrderNotesResponse'
+newtype GetOrderNotesResponse =
+  GetOrderNotesResponse'
     { _gonrNotes :: Maybe [MarketplaceNote]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOrderNotesResponse' with the minimum fields required to make a request.
 --
@@ -1048,10 +1064,7 @@ newtype GetOrderNotesResponse = GetOrderNotesResponse'
 -- * 'gonrNotes'
 getOrderNotesResponse
     :: GetOrderNotesResponse
-getOrderNotesResponse =
-    GetOrderNotesResponse'
-    { _gonrNotes = Nothing
-    }
+getOrderNotesResponse = GetOrderNotesResponse' {_gonrNotes = Nothing}
 
 -- | The list of matching notes. The notes for a proposal are ordered from
 -- oldest to newest. If the notes span multiple proposals, they will be
@@ -1076,9 +1089,11 @@ instance ToJSON GetOrderNotesResponse where
 
 --
 -- /See:/ 'getOrdersResponse' smart constructor.
-newtype GetOrdersResponse = GetOrdersResponse'
+newtype GetOrdersResponse =
+  GetOrdersResponse'
     { _gorProposals :: Maybe [Proposal]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOrdersResponse' with the minimum fields required to make a request.
 --
@@ -1087,10 +1102,7 @@ newtype GetOrdersResponse = GetOrdersResponse'
 -- * 'gorProposals'
 getOrdersResponse
     :: GetOrdersResponse
-getOrdersResponse =
-    GetOrdersResponse'
-    { _gorProposals = Nothing
-    }
+getOrdersResponse = GetOrdersResponse' {_gorProposals = Nothing}
 
 -- | The list of matching proposals.
 gorProposals :: Lens' GetOrdersResponse [Proposal]
@@ -1113,10 +1125,12 @@ instance ToJSON GetOrdersResponse where
 
 --
 -- /See:/ 'creativeServingRestrictionsItemDisApprovalReasonsItem' smart constructor.
-data CreativeServingRestrictionsItemDisApprovalReasonsItem = CreativeServingRestrictionsItemDisApprovalReasonsItem'
+data CreativeServingRestrictionsItemDisApprovalReasonsItem =
+  CreativeServingRestrictionsItemDisApprovalReasonsItem'
     { _csridariReason  :: !(Maybe Text)
     , _csridariDetails :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeServingRestrictionsItemDisApprovalReasonsItem' with the minimum fields required to make a request.
 --
@@ -1128,10 +1142,8 @@ data CreativeServingRestrictionsItemDisApprovalReasonsItem = CreativeServingRest
 creativeServingRestrictionsItemDisApprovalReasonsItem
     :: CreativeServingRestrictionsItemDisApprovalReasonsItem
 creativeServingRestrictionsItemDisApprovalReasonsItem =
-    CreativeServingRestrictionsItemDisApprovalReasonsItem'
-    { _csridariReason = Nothing
-    , _csridariDetails = Nothing
-    }
+  CreativeServingRestrictionsItemDisApprovalReasonsItem'
+    {_csridariReason = Nothing, _csridariDetails = Nothing}
 
 -- | The categorized reason for disapproval.
 csridariReason :: Lens' CreativeServingRestrictionsItemDisApprovalReasonsItem (Maybe Text)
@@ -1148,7 +1160,7 @@ csridariDetails
       . _Coerce
 
 instance FromJSON
-         CreativeServingRestrictionsItemDisApprovalReasonsItem
+           CreativeServingRestrictionsItemDisApprovalReasonsItem
          where
         parseJSON
           = withObject
@@ -1159,7 +1171,7 @@ instance FromJSON
                    (o .:? "reason") <*> (o .:? "details" .!= mempty))
 
 instance ToJSON
-         CreativeServingRestrictionsItemDisApprovalReasonsItem
+           CreativeServingRestrictionsItemDisApprovalReasonsItem
          where
         toJSON
           CreativeServingRestrictionsItemDisApprovalReasonsItem'{..}
@@ -1172,10 +1184,12 @@ instance ToJSON
 -- access to. Each entry in the feed corresponds to a single buyer account.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList'
+data AccountsList =
+  AccountsList'
     { _alKind  :: !Text
     , _alItems :: !(Maybe [Account])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
@@ -1187,10 +1201,7 @@ data AccountsList = AccountsList'
 accountsList
     :: AccountsList
 accountsList =
-    AccountsList'
-    { _alKind = "adexchangebuyer#accountsList"
-    , _alItems = Nothing
-    }
+  AccountsList' {_alKind = "adexchangebuyer#accountsList", _alItems = Nothing}
 
 -- | Resource type.
 alKind :: Lens' AccountsList Text
@@ -1222,10 +1233,12 @@ instance ToJSON AccountsList where
 -- {dimension_value: {id: 2, name: \'UK\'}}]}
 --
 -- /See:/ 'dimension' smart constructor.
-data Dimension = Dimension'
+data Dimension =
+  Dimension'
     { _dDimensionValues :: !(Maybe [DimensionDimensionValue])
     , _dDimensionType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 --
@@ -1236,11 +1249,7 @@ data Dimension = Dimension'
 -- * 'dDimensionType'
 dimension
     :: Dimension
-dimension =
-    Dimension'
-    { _dDimensionValues = Nothing
-    , _dDimensionType = Nothing
-    }
+dimension = Dimension' {_dDimensionValues = Nothing, _dDimensionType = Nothing}
 
 dDimensionValues :: Lens' Dimension [DimensionDimensionValue]
 dDimensionValues
@@ -1271,10 +1280,12 @@ instance ToJSON Dimension where
 
 --
 -- /See:/ 'createOrdersRequest' smart constructor.
-data CreateOrdersRequest = CreateOrdersRequest'
+data CreateOrdersRequest =
+  CreateOrdersRequest'
     { _cProposals       :: !(Maybe [Proposal])
     , _cWebPropertyCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateOrdersRequest' with the minimum fields required to make a request.
 --
@@ -1286,10 +1297,7 @@ data CreateOrdersRequest = CreateOrdersRequest'
 createOrdersRequest
     :: CreateOrdersRequest
 createOrdersRequest =
-    CreateOrdersRequest'
-    { _cProposals = Nothing
-    , _cWebPropertyCode = Nothing
-    }
+  CreateOrdersRequest' {_cProposals = Nothing, _cWebPropertyCode = Nothing}
 
 -- | The list of proposals to create.
 cProposals :: Lens' CreateOrdersRequest [Proposal]
@@ -1321,11 +1329,13 @@ instance ToJSON CreateOrdersRequest where
 
 --
 -- /See:/ 'creativeCorrectionsItem' smart constructor.
-data CreativeCorrectionsItem = CreativeCorrectionsItem'
+data CreativeCorrectionsItem =
+  CreativeCorrectionsItem'
     { _cciContexts :: !(Maybe [CreativeCorrectionsItemContextsItem])
     , _cciReason   :: !(Maybe Text)
     , _cciDetails  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeCorrectionsItem' with the minimum fields required to make a request.
 --
@@ -1339,11 +1349,8 @@ data CreativeCorrectionsItem = CreativeCorrectionsItem'
 creativeCorrectionsItem
     :: CreativeCorrectionsItem
 creativeCorrectionsItem =
-    CreativeCorrectionsItem'
-    { _cciContexts = Nothing
-    , _cciReason = Nothing
-    , _cciDetails = Nothing
-    }
+  CreativeCorrectionsItem'
+    {_cciContexts = Nothing, _cciReason = Nothing, _cciDetails = Nothing}
 
 -- | All known serving contexts containing serving status information.
 cciContexts :: Lens' CreativeCorrectionsItem [CreativeCorrectionsItemContextsItem]
@@ -1382,10 +1389,12 @@ instance ToJSON CreativeCorrectionsItem where
 
 --
 -- /See:/ 'dealTermsRubiconNonGuaranteedTerms' smart constructor.
-data DealTermsRubiconNonGuaranteedTerms = DealTermsRubiconNonGuaranteedTerms'
+data DealTermsRubiconNonGuaranteedTerms =
+  DealTermsRubiconNonGuaranteedTerms'
     { _dtrngtPriorityPrice :: !(Maybe Price)
     , _dtrngtStandardPrice :: !(Maybe Price)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DealTermsRubiconNonGuaranteedTerms' with the minimum fields required to make a request.
 --
@@ -1397,10 +1406,8 @@ data DealTermsRubiconNonGuaranteedTerms = DealTermsRubiconNonGuaranteedTerms'
 dealTermsRubiconNonGuaranteedTerms
     :: DealTermsRubiconNonGuaranteedTerms
 dealTermsRubiconNonGuaranteedTerms =
-    DealTermsRubiconNonGuaranteedTerms'
-    { _dtrngtPriorityPrice = Nothing
-    , _dtrngtStandardPrice = Nothing
-    }
+  DealTermsRubiconNonGuaranteedTerms'
+    {_dtrngtPriorityPrice = Nothing, _dtrngtStandardPrice = Nothing}
 
 -- | Optional price for Rubicon priority access in the auction.
 dtrngtPriorityPrice :: Lens' DealTermsRubiconNonGuaranteedTerms (Maybe Price)
@@ -1432,10 +1439,12 @@ instance ToJSON DealTermsRubiconNonGuaranteedTerms
 
 --
 -- /See:/ 'dealServingMetadata' smart constructor.
-data DealServingMetadata = DealServingMetadata'
+data DealServingMetadata =
+  DealServingMetadata'
     { _dsmDealPauseStatus   :: !(Maybe DealServingMetadataDealPauseStatus)
     , _dsmAlcoholAdsAllowed :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DealServingMetadata' with the minimum fields required to make a request.
 --
@@ -1447,10 +1456,8 @@ data DealServingMetadata = DealServingMetadata'
 dealServingMetadata
     :: DealServingMetadata
 dealServingMetadata =
-    DealServingMetadata'
-    { _dsmDealPauseStatus = Nothing
-    , _dsmAlcoholAdsAllowed = Nothing
-    }
+  DealServingMetadata'
+    {_dsmDealPauseStatus = Nothing, _dsmAlcoholAdsAllowed = Nothing}
 
 -- | Tracks which parties (if any) have paused a deal. (readonly, except via
 -- PauseResumeOrderDeals action)
@@ -1484,10 +1491,12 @@ instance ToJSON DealServingMetadata where
 
 --
 -- /See:/ 'addOrderDealsResponse' smart constructor.
-data AddOrderDealsResponse = AddOrderDealsResponse'
+data AddOrderDealsResponse =
+  AddOrderDealsResponse'
     { _aodrDeals                  :: !(Maybe [MarketplaceDeal])
     , _aodrProposalRevisionNumber :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddOrderDealsResponse' with the minimum fields required to make a request.
 --
@@ -1499,10 +1508,8 @@ data AddOrderDealsResponse = AddOrderDealsResponse'
 addOrderDealsResponse
     :: AddOrderDealsResponse
 addOrderDealsResponse =
-    AddOrderDealsResponse'
-    { _aodrDeals = Nothing
-    , _aodrProposalRevisionNumber = Nothing
-    }
+  AddOrderDealsResponse'
+    {_aodrDeals = Nothing, _aodrProposalRevisionNumber = Nothing}
 
 -- | List of deals added (in the same proposal as passed in the request)
 aodrDeals :: Lens' AddOrderDealsResponse [MarketplaceDeal]
@@ -1536,11 +1543,13 @@ instance ToJSON AddOrderDealsResponse where
 
 --
 -- /See:/ 'deliveryControl' smart constructor.
-data DeliveryControl = DeliveryControl'
+data DeliveryControl =
+  DeliveryControl'
     { _dcCreativeBlockingLevel :: !(Maybe Text)
     , _dcFrequencyCaps         :: !(Maybe [DeliveryControlFrequencyCap])
     , _dcDeliveryRateType      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeliveryControl' with the minimum fields required to make a request.
 --
@@ -1554,7 +1563,7 @@ data DeliveryControl = DeliveryControl'
 deliveryControl
     :: DeliveryControl
 deliveryControl =
-    DeliveryControl'
+  DeliveryControl'
     { _dcCreativeBlockingLevel = Nothing
     , _dcFrequencyCaps = Nothing
     , _dcDeliveryRateType = Nothing
@@ -1602,12 +1611,14 @@ instance ToJSON DeliveryControl where
 -- matching rule where no buyer is set.
 --
 -- /See:/ 'pricePerBuyer' smart constructor.
-data PricePerBuyer = PricePerBuyer'
+data PricePerBuyer =
+  PricePerBuyer'
     { _ppbBilledBuyer :: !(Maybe Buyer)
     , _ppbPrice       :: !(Maybe Price)
     , _ppbAuctionTier :: !(Maybe Text)
     , _ppbBuyer       :: !(Maybe Buyer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PricePerBuyer' with the minimum fields required to make a request.
 --
@@ -1623,7 +1634,7 @@ data PricePerBuyer = PricePerBuyer'
 pricePerBuyer
     :: PricePerBuyer
 pricePerBuyer =
-    PricePerBuyer'
+  PricePerBuyer'
     { _ppbBilledBuyer = Nothing
     , _ppbPrice = Nothing
     , _ppbAuctionTier = Nothing
@@ -1673,7 +1684,8 @@ instance ToJSON PricePerBuyer where
 -- | A creative and its classification data.
 --
 -- /See:/ 'creative' smart constructor.
-data Creative = Creative'
+data Creative =
+  Creative'
     { _cAttribute                  :: !(Maybe [Textual Int32])
     , _cNATiveAd                   :: !(Maybe CreativeNATiveAd)
     , _cHeight                     :: !(Maybe (Textual Int32))
@@ -1704,7 +1716,8 @@ data Creative = Creative'
     , _cDetectedDomains            :: !(Maybe [Text])
     , _cOpenAuctionStatus          :: !(Maybe Text)
     , _cCreativeStatusIdentityType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Creative' with the minimum fields required to make a request.
 --
@@ -1772,7 +1785,7 @@ data Creative = Creative'
 creative
     :: Creative
 creative =
-    Creative'
+  Creative'
     { _cAttribute = Nothing
     , _cNATiveAd = Nothing
     , _cHeight = Nothing
@@ -2122,13 +2135,15 @@ instance ToJSON Creative where
 
 --
 -- /See:/ 'targetingValueDayPartTargetingDayPart' smart constructor.
-data TargetingValueDayPartTargetingDayPart = TargetingValueDayPartTargetingDayPart'
+data TargetingValueDayPartTargetingDayPart =
+  TargetingValueDayPartTargetingDayPart'
     { _tvdptdpEndHour     :: !(Maybe (Textual Int32))
     , _tvdptdpStartHour   :: !(Maybe (Textual Int32))
     , _tvdptdpStartMinute :: !(Maybe (Textual Int32))
     , _tvdptdpDayOfWeek   :: !(Maybe Text)
     , _tvdptdpEndMinute   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetingValueDayPartTargetingDayPart' with the minimum fields required to make a request.
 --
@@ -2146,7 +2161,7 @@ data TargetingValueDayPartTargetingDayPart = TargetingValueDayPartTargetingDayPa
 targetingValueDayPartTargetingDayPart
     :: TargetingValueDayPartTargetingDayPart
 targetingValueDayPartTargetingDayPart =
-    TargetingValueDayPartTargetingDayPart'
+  TargetingValueDayPartTargetingDayPart'
     { _tvdptdpEndHour = Nothing
     , _tvdptdpStartHour = Nothing
     , _tvdptdpStartMinute = Nothing
@@ -2184,7 +2199,8 @@ tvdptdpEndMinute
       . mapping _Coerce
 
 instance FromJSON
-         TargetingValueDayPartTargetingDayPart where
+           TargetingValueDayPartTargetingDayPart
+         where
         parseJSON
           = withObject "TargetingValueDayPartTargetingDayPart"
               (\ o ->
@@ -2208,11 +2224,13 @@ instance ToJSON TargetingValueDayPartTargetingDayPart
 -- | Value of the dimension.
 --
 -- /See:/ 'dimensionDimensionValue' smart constructor.
-data DimensionDimensionValue = DimensionDimensionValue'
+data DimensionDimensionValue =
+  DimensionDimensionValue'
     { _ddvName       :: !(Maybe Text)
     , _ddvId         :: !(Maybe (Textual Int32))
     , _ddvPercentage :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DimensionDimensionValue' with the minimum fields required to make a request.
 --
@@ -2226,11 +2244,8 @@ data DimensionDimensionValue = DimensionDimensionValue'
 dimensionDimensionValue
     :: DimensionDimensionValue
 dimensionDimensionValue =
-    DimensionDimensionValue'
-    { _ddvName = Nothing
-    , _ddvId = Nothing
-    , _ddvPercentage = Nothing
-    }
+  DimensionDimensionValue'
+    {_ddvName = Nothing, _ddvId = Nothing, _ddvPercentage = Nothing}
 
 -- | Name of the dimension mainly for debugging purposes, except for the case
 -- of CREATIVE_SIZE. For CREATIVE_SIZE, strings are used instead of ids.
@@ -2269,10 +2284,12 @@ instance ToJSON DimensionDimensionValue where
 
 --
 -- /See:/ 'pretargetingConfigList' smart constructor.
-data PretargetingConfigList = PretargetingConfigList'
+data PretargetingConfigList =
+  PretargetingConfigList'
     { _pclKind  :: !Text
     , _pclItems :: !(Maybe [PretargetingConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PretargetingConfigList' with the minimum fields required to make a request.
 --
@@ -2284,10 +2301,8 @@ data PretargetingConfigList = PretargetingConfigList'
 pretargetingConfigList
     :: PretargetingConfigList
 pretargetingConfigList =
-    PretargetingConfigList'
-    { _pclKind = "adexchangebuyer#pretargetingConfigList"
-    , _pclItems = Nothing
-    }
+  PretargetingConfigList'
+    {_pclKind = "adexchangebuyer#pretargetingConfigList", _pclItems = Nothing}
 
 -- | Resource type.
 pclKind :: Lens' PretargetingConfigList Text
@@ -2318,9 +2333,11 @@ instance ToJSON PretargetingConfigList where
 
 --
 -- /See:/ 'targetingValueDemogAgeCriteria' smart constructor.
-newtype TargetingValueDemogAgeCriteria = TargetingValueDemogAgeCriteria'
+newtype TargetingValueDemogAgeCriteria =
+  TargetingValueDemogAgeCriteria'
     { _tvdacDemogAgeCriteriaIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetingValueDemogAgeCriteria' with the minimum fields required to make a request.
 --
@@ -2330,9 +2347,7 @@ newtype TargetingValueDemogAgeCriteria = TargetingValueDemogAgeCriteria'
 targetingValueDemogAgeCriteria
     :: TargetingValueDemogAgeCriteria
 targetingValueDemogAgeCriteria =
-    TargetingValueDemogAgeCriteria'
-    { _tvdacDemogAgeCriteriaIds = Nothing
-    }
+  TargetingValueDemogAgeCriteria' {_tvdacDemogAgeCriteriaIds = Nothing}
 
 tvdacDemogAgeCriteriaIds :: Lens' TargetingValueDemogAgeCriteria [Text]
 tvdacDemogAgeCriteriaIds
@@ -2358,9 +2373,11 @@ instance ToJSON TargetingValueDemogAgeCriteria where
 
 --
 -- /See:/ 'dealTermsNonGuaranteedFixedPriceTerms' smart constructor.
-newtype DealTermsNonGuaranteedFixedPriceTerms = DealTermsNonGuaranteedFixedPriceTerms'
+newtype DealTermsNonGuaranteedFixedPriceTerms =
+  DealTermsNonGuaranteedFixedPriceTerms'
     { _dtngfptFixedPrices :: Maybe [PricePerBuyer]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DealTermsNonGuaranteedFixedPriceTerms' with the minimum fields required to make a request.
 --
@@ -2370,9 +2387,7 @@ newtype DealTermsNonGuaranteedFixedPriceTerms = DealTermsNonGuaranteedFixedPrice
 dealTermsNonGuaranteedFixedPriceTerms
     :: DealTermsNonGuaranteedFixedPriceTerms
 dealTermsNonGuaranteedFixedPriceTerms =
-    DealTermsNonGuaranteedFixedPriceTerms'
-    { _dtngfptFixedPrices = Nothing
-    }
+  DealTermsNonGuaranteedFixedPriceTerms' {_dtngfptFixedPrices = Nothing}
 
 -- | Fixed price for the specified buyer.
 dtngfptFixedPrices :: Lens' DealTermsNonGuaranteedFixedPriceTerms [PricePerBuyer]
@@ -2383,7 +2398,8 @@ dtngfptFixedPrices
       . _Coerce
 
 instance FromJSON
-         DealTermsNonGuaranteedFixedPriceTerms where
+           DealTermsNonGuaranteedFixedPriceTerms
+         where
         parseJSON
           = withObject "DealTermsNonGuaranteedFixedPriceTerms"
               (\ o ->
@@ -2400,7 +2416,8 @@ instance ToJSON DealTermsNonGuaranteedFixedPriceTerms
 -- | The configuration data for an Ad Exchange performance report list.
 --
 -- /See:/ 'performanceReport' smart constructor.
-data PerformanceReport = PerformanceReport'
+data PerformanceReport =
+  PerformanceReport'
     { _prFilteredBidRate         :: !(Maybe (Textual Double))
     , _prKind                    :: !Text
     , _prLatency95thPercentile   :: !(Maybe (Textual Double))
@@ -2423,7 +2440,8 @@ data PerformanceReport = PerformanceReport'
     , _prTimestamp               :: !(Maybe (Textual Int64))
     , _prPixelMatchRequests      :: !(Maybe (Textual Double))
     , _prOutOfQuota              :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PerformanceReport' with the minimum fields required to make a request.
 --
@@ -2475,7 +2493,7 @@ data PerformanceReport = PerformanceReport'
 performanceReport
     :: PerformanceReport
 performanceReport =
-    PerformanceReport'
+  PerformanceReport'
     { _prFilteredBidRate = Nothing
     , _prKind = "adexchangebuyer#performanceReport"
     , _prLatency95thPercentile = Nothing
@@ -2725,10 +2743,12 @@ instance ToJSON PerformanceReport where
 
 --
 -- /See:/ 'pretargetingConfigExcludedPlacementsItem' smart constructor.
-data PretargetingConfigExcludedPlacementsItem = PretargetingConfigExcludedPlacementsItem'
+data PretargetingConfigExcludedPlacementsItem =
+  PretargetingConfigExcludedPlacementsItem'
     { _pcepiToken :: !(Maybe Text)
     , _pcepiType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PretargetingConfigExcludedPlacementsItem' with the minimum fields required to make a request.
 --
@@ -2740,10 +2760,8 @@ data PretargetingConfigExcludedPlacementsItem = PretargetingConfigExcludedPlacem
 pretargetingConfigExcludedPlacementsItem
     :: PretargetingConfigExcludedPlacementsItem
 pretargetingConfigExcludedPlacementsItem =
-    PretargetingConfigExcludedPlacementsItem'
-    { _pcepiToken = Nothing
-    , _pcepiType = Nothing
-    }
+  PretargetingConfigExcludedPlacementsItem'
+    {_pcepiToken = Nothing, _pcepiType = Nothing}
 
 -- | The value of the placement. Interpretation depends on the placement
 -- type, e.g. URL for a site placement, channel name for a channel
@@ -2758,7 +2776,8 @@ pcepiType
   = lens _pcepiType (\ s a -> s{_pcepiType = a})
 
 instance FromJSON
-         PretargetingConfigExcludedPlacementsItem where
+           PretargetingConfigExcludedPlacementsItem
+         where
         parseJSON
           = withObject
               "PretargetingConfigExcludedPlacementsItem"
@@ -2767,7 +2786,8 @@ instance FromJSON
                    (o .:? "token") <*> (o .:? "type"))
 
 instance ToJSON
-         PretargetingConfigExcludedPlacementsItem where
+           PretargetingConfigExcludedPlacementsItem
+         where
         toJSON PretargetingConfigExcludedPlacementsItem'{..}
           = object
               (catMaybes
@@ -2776,10 +2796,12 @@ instance ToJSON
 
 --
 -- /See:/ 'seller' smart constructor.
-data Seller = Seller'
+data Seller =
+  Seller'
     { _sAccountId    :: !(Maybe Text)
     , _sSubAccountId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Seller' with the minimum fields required to make a request.
 --
@@ -2790,11 +2812,7 @@ data Seller = Seller'
 -- * 'sSubAccountId'
 seller
     :: Seller
-seller =
-    Seller'
-    { _sAccountId = Nothing
-    , _sSubAccountId = Nothing
-    }
+seller = Seller' {_sAccountId = Nothing, _sSubAccountId = Nothing}
 
 -- | The unique id for the seller. The seller fills in this field. The seller
 -- account id is then available to buyer in the product.
@@ -2825,7 +2843,8 @@ instance ToJSON Seller where
 -- | Configuration data for an Ad Exchange buyer account.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account'
+data Account =
+  Account'
     { _aApplyPretargetingToNonGuaranteedDeals :: !(Maybe Bool)
     , _aMaximumTotalQps                       :: !(Maybe (Textual Int32))
     , _aKind                                  :: !Text
@@ -2835,7 +2854,8 @@ data Account = Account'
     , _aNumberActiveCreatives                 :: !(Maybe (Textual Int32))
     , _aId                                    :: !(Maybe (Textual Int32))
     , _aBidderLocation                        :: !(Maybe [AccountBidderLocationItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -2861,7 +2881,7 @@ data Account = Account'
 account
     :: Account
 account =
-    Account'
+  Account'
     { _aApplyPretargetingToNonGuaranteedDeals = Nothing
     , _aMaximumTotalQps = Nothing
     , _aKind = "adexchangebuyer#account"
@@ -2975,11 +2995,13 @@ instance ToJSON Account where
 
 --
 -- /See:/ 'deleteOrderDealsRequest' smart constructor.
-data DeleteOrderDealsRequest = DeleteOrderDealsRequest'
+data DeleteOrderDealsRequest =
+  DeleteOrderDealsRequest'
     { _dodrUpdateAction           :: !(Maybe Text)
     , _dodrDealIds                :: !(Maybe [Text])
     , _dodrProposalRevisionNumber :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteOrderDealsRequest' with the minimum fields required to make a request.
 --
@@ -2993,7 +3015,7 @@ data DeleteOrderDealsRequest = DeleteOrderDealsRequest'
 deleteOrderDealsRequest
     :: DeleteOrderDealsRequest
 deleteOrderDealsRequest =
-    DeleteOrderDealsRequest'
+  DeleteOrderDealsRequest'
     { _dodrUpdateAction = Nothing
     , _dodrDealIds = Nothing
     , _dodrProposalRevisionNumber = Nothing
@@ -3039,10 +3061,12 @@ instance ToJSON DeleteOrderDealsRequest where
 
 --
 -- /See:/ 'contactInformation' smart constructor.
-data ContactInformation = ContactInformation'
+data ContactInformation =
+  ContactInformation'
     { _ciEmail :: !(Maybe Text)
     , _ciName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContactInformation' with the minimum fields required to make a request.
 --
@@ -3053,11 +3077,7 @@ data ContactInformation = ContactInformation'
 -- * 'ciName'
 contactInformation
     :: ContactInformation
-contactInformation =
-    ContactInformation'
-    { _ciEmail = Nothing
-    , _ciName = Nothing
-    }
+contactInformation = ContactInformation' {_ciEmail = Nothing, _ciName = Nothing}
 
 -- | Email address of the contact.
 ciEmail :: Lens' ContactInformation (Maybe Text)
@@ -3083,11 +3103,13 @@ instance ToJSON ContactInformation where
 -- | A smaller image, for the advertiser logo.
 --
 -- /See:/ 'creativeNATiveAdLogo' smart constructor.
-data CreativeNATiveAdLogo = CreativeNATiveAdLogo'
+data CreativeNATiveAdLogo =
+  CreativeNATiveAdLogo'
     { _cnatalHeight :: !(Maybe (Textual Int32))
     , _cnatalURL    :: !(Maybe Text)
     , _cnatalWidth  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeNATiveAdLogo' with the minimum fields required to make a request.
 --
@@ -3101,11 +3123,8 @@ data CreativeNATiveAdLogo = CreativeNATiveAdLogo'
 creativeNATiveAdLogo
     :: CreativeNATiveAdLogo
 creativeNATiveAdLogo =
-    CreativeNATiveAdLogo'
-    { _cnatalHeight = Nothing
-    , _cnatalURL = Nothing
-    , _cnatalWidth = Nothing
-    }
+  CreativeNATiveAdLogo'
+    {_cnatalHeight = Nothing, _cnatalURL = Nothing, _cnatalWidth = Nothing}
 
 cnatalHeight :: Lens' CreativeNATiveAdLogo (Maybe Int32)
 cnatalHeight
@@ -3139,9 +3158,11 @@ instance ToJSON CreativeNATiveAdLogo where
 
 --
 -- /See:/ 'getOrderDealsResponse' smart constructor.
-newtype GetOrderDealsResponse = GetOrderDealsResponse'
+newtype GetOrderDealsResponse =
+  GetOrderDealsResponse'
     { _godrDeals :: Maybe [MarketplaceDeal]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOrderDealsResponse' with the minimum fields required to make a request.
 --
@@ -3150,10 +3171,7 @@ newtype GetOrderDealsResponse = GetOrderDealsResponse'
 -- * 'godrDeals'
 getOrderDealsResponse
     :: GetOrderDealsResponse
-getOrderDealsResponse =
-    GetOrderDealsResponse'
-    { _godrDeals = Nothing
-    }
+getOrderDealsResponse = GetOrderDealsResponse' {_godrDeals = Nothing}
 
 -- | List of deals for the proposal
 godrDeals :: Lens' GetOrderDealsResponse [MarketplaceDeal]
@@ -3176,10 +3194,12 @@ instance ToJSON GetOrderDealsResponse where
 -- | The configuration data for an Ad Exchange performance report list.
 --
 -- /See:/ 'performanceReportList' smart constructor.
-data PerformanceReportList = PerformanceReportList'
+data PerformanceReportList =
+  PerformanceReportList'
     { _prlKind              :: !Text
     , _prlPerformanceReport :: !(Maybe [PerformanceReport])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PerformanceReportList' with the minimum fields required to make a request.
 --
@@ -3191,7 +3211,7 @@ data PerformanceReportList = PerformanceReportList'
 performanceReportList
     :: PerformanceReportList
 performanceReportList =
-    PerformanceReportList'
+  PerformanceReportList'
     { _prlKind = "adexchangebuyer#performanceReportList"
     , _prlPerformanceReport = Nothing
     }
@@ -3226,7 +3246,8 @@ instance ToJSON PerformanceReportList where
 
 --
 -- /See:/ 'pretargetingConfig' smart constructor.
-data PretargetingConfig = PretargetingConfig'
+data PretargetingConfig =
+  PretargetingConfig'
     { _pcPlatforms                     :: !(Maybe [Text])
     , _pcMobileCarriers                :: !(Maybe [Textual Int64])
     , _pcVendorTypes                   :: !(Maybe [Textual Int64])
@@ -3253,7 +3274,8 @@ data PretargetingConfig = PretargetingConfig'
     , _pcExcludedContentLabels         :: !(Maybe [Textual Int64])
     , _pcBillingId                     :: !(Maybe (Textual Int64))
     , _pcMobileOperatingSystemVersions :: !(Maybe [Textual Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PretargetingConfig' with the minimum fields required to make a request.
 --
@@ -3313,7 +3335,7 @@ data PretargetingConfig = PretargetingConfig'
 pretargetingConfig
     :: PretargetingConfig
 pretargetingConfig =
-    PretargetingConfig'
+  PretargetingConfig'
     { _pcPlatforms = Nothing
     , _pcMobileCarriers = Nothing
     , _pcVendorTypes = Nothing
@@ -3629,10 +3651,12 @@ instance ToJSON PretargetingConfig where
 -- be set in requests.
 --
 -- /See:/ 'creativeFilteringReasons' smart constructor.
-data CreativeFilteringReasons = CreativeFilteringReasons'
+data CreativeFilteringReasons =
+  CreativeFilteringReasons'
     { _cfrReasons :: !(Maybe [CreativeFilteringReasonsReasonsItem])
     , _cfrDate    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeFilteringReasons' with the minimum fields required to make a request.
 --
@@ -3644,10 +3668,7 @@ data CreativeFilteringReasons = CreativeFilteringReasons'
 creativeFilteringReasons
     :: CreativeFilteringReasons
 creativeFilteringReasons =
-    CreativeFilteringReasons'
-    { _cfrReasons = Nothing
-    , _cfrDate = Nothing
-    }
+  CreativeFilteringReasons' {_cfrReasons = Nothing, _cfrDate = Nothing}
 
 -- | The filtering reasons.
 cfrReasons :: Lens' CreativeFilteringReasons [CreativeFilteringReasonsReasonsItem]
@@ -3678,14 +3699,16 @@ instance ToJSON CreativeFilteringReasons where
 -- | Next Id: 7
 --
 -- /See:/ 'targetingValueCreativeSize' smart constructor.
-data TargetingValueCreativeSize = TargetingValueCreativeSize'
+data TargetingValueCreativeSize =
+  TargetingValueCreativeSize'
     { _tvcsSize             :: !(Maybe TargetingValueSize)
     , _tvcsCompanionSizes   :: !(Maybe [TargetingValueSize])
     , _tvcsSkippableAdType  :: !(Maybe Text)
     , _tvcsCreativeSizeType :: !(Maybe Text)
     , _tvcsAllowedFormats   :: !(Maybe [Text])
     , _tvcsNATiveTemplate   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetingValueCreativeSize' with the minimum fields required to make a request.
 --
@@ -3705,7 +3728,7 @@ data TargetingValueCreativeSize = TargetingValueCreativeSize'
 targetingValueCreativeSize
     :: TargetingValueCreativeSize
 targetingValueCreativeSize =
-    TargetingValueCreativeSize'
+  TargetingValueCreativeSize'
     { _tvcsSize = Nothing
     , _tvcsCompanionSizes = Nothing
     , _tvcsSkippableAdType = Nothing
@@ -3778,12 +3801,14 @@ instance ToJSON TargetingValueCreativeSize where
 
 --
 -- /See:/ 'dealTermsGuaranteedFixedPriceTermsBillingInfo' smart constructor.
-data DealTermsGuaranteedFixedPriceTermsBillingInfo = DealTermsGuaranteedFixedPriceTermsBillingInfo'
+data DealTermsGuaranteedFixedPriceTermsBillingInfo =
+  DealTermsGuaranteedFixedPriceTermsBillingInfo'
     { _dtgfptbiCurrencyConversionTimeMs   :: !(Maybe (Textual Int64))
     , _dtgfptbiDfpLineItemId              :: !(Maybe (Textual Int64))
     , _dtgfptbiPrice                      :: !(Maybe Price)
     , _dtgfptbiOriginalContractedQuantity :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DealTermsGuaranteedFixedPriceTermsBillingInfo' with the minimum fields required to make a request.
 --
@@ -3799,7 +3824,7 @@ data DealTermsGuaranteedFixedPriceTermsBillingInfo = DealTermsGuaranteedFixedPri
 dealTermsGuaranteedFixedPriceTermsBillingInfo
     :: DealTermsGuaranteedFixedPriceTermsBillingInfo
 dealTermsGuaranteedFixedPriceTermsBillingInfo =
-    DealTermsGuaranteedFixedPriceTermsBillingInfo'
+  DealTermsGuaranteedFixedPriceTermsBillingInfo'
     { _dtgfptbiCurrencyConversionTimeMs = Nothing
     , _dtgfptbiDfpLineItemId = Nothing
     , _dtgfptbiPrice = Nothing
@@ -3842,7 +3867,8 @@ dtgfptbiOriginalContractedQuantity
       . mapping _Coerce
 
 instance FromJSON
-         DealTermsGuaranteedFixedPriceTermsBillingInfo where
+           DealTermsGuaranteedFixedPriceTermsBillingInfo
+         where
         parseJSON
           = withObject
               "DealTermsGuaranteedFixedPriceTermsBillingInfo"
@@ -3854,7 +3880,8 @@ instance FromJSON
                      <*> (o .:? "originalContractedQuantity"))
 
 instance ToJSON
-         DealTermsGuaranteedFixedPriceTermsBillingInfo where
+           DealTermsGuaranteedFixedPriceTermsBillingInfo
+         where
         toJSON
           DealTermsGuaranteedFixedPriceTermsBillingInfo'{..}
           = object
@@ -3868,9 +3895,11 @@ instance ToJSON
 
 --
 -- /See:/ 'getPublisherProFilesByAccountIdResponse' smart constructor.
-newtype GetPublisherProFilesByAccountIdResponse = GetPublisherProFilesByAccountIdResponse'
+newtype GetPublisherProFilesByAccountIdResponse =
+  GetPublisherProFilesByAccountIdResponse'
     { _gppfbairProFiles :: Maybe [PublisherProFileAPIProto]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPublisherProFilesByAccountIdResponse' with the minimum fields required to make a request.
 --
@@ -3880,9 +3909,7 @@ newtype GetPublisherProFilesByAccountIdResponse = GetPublisherProFilesByAccountI
 getPublisherProFilesByAccountIdResponse
     :: GetPublisherProFilesByAccountIdResponse
 getPublisherProFilesByAccountIdResponse =
-    GetPublisherProFilesByAccountIdResponse'
-    { _gppfbairProFiles = Nothing
-    }
+  GetPublisherProFilesByAccountIdResponse' {_gppfbairProFiles = Nothing}
 
 -- | Profiles for the requested publisher
 gppfbairProFiles :: Lens' GetPublisherProFilesByAccountIdResponse [PublisherProFileAPIProto]
@@ -3893,7 +3920,8 @@ gppfbairProFiles
       . _Coerce
 
 instance FromJSON
-         GetPublisherProFilesByAccountIdResponse where
+           GetPublisherProFilesByAccountIdResponse
+         where
         parseJSON
           = withObject
               "GetPublisherProFilesByAccountIdResponse"
@@ -3902,7 +3930,8 @@ instance FromJSON
                    (o .:? "profiles" .!= mempty))
 
 instance ToJSON
-         GetPublisherProFilesByAccountIdResponse where
+           GetPublisherProFilesByAccountIdResponse
+         where
         toJSON GetPublisherProFilesByAccountIdResponse'{..}
           = object
               (catMaybes [("profiles" .=) <$> _gppfbairProFiles])
@@ -3916,7 +3945,8 @@ instance ToJSON
 -- either buyer or the seller.
 --
 -- /See:/ 'proposal' smart constructor.
-data Proposal = Proposal'
+data Proposal =
+  Proposal'
     { _pBuyerPrivateData           :: !(Maybe PrivateData)
     , _pIsSetupComplete            :: !(Maybe Bool)
     , _pInventorySource            :: !(Maybe Text)
@@ -3940,7 +3970,8 @@ data Proposal = Proposal'
     , _pNegotiationId              :: !(Maybe Text)
     , _pHasBuyerSignedOff          :: !(Maybe Bool)
     , _pBuyer                      :: !(Maybe Buyer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Proposal' with the minimum fields required to make a request.
 --
@@ -3994,7 +4025,7 @@ data Proposal = Proposal'
 proposal
     :: Proposal
 proposal =
-    Proposal'
+  Proposal'
     { _pBuyerPrivateData = Nothing
     , _pIsSetupComplete = Nothing
     , _pInventorySource = Nothing
@@ -4228,10 +4259,12 @@ instance ToJSON Proposal where
 -- access to. Each entry in the feed corresponds to a single billing info.
 --
 -- /See:/ 'billingInfoList' smart constructor.
-data BillingInfoList = BillingInfoList'
+data BillingInfoList =
+  BillingInfoList'
     { _bilKind  :: !Text
     , _bilItems :: !(Maybe [BillingInfo])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingInfoList' with the minimum fields required to make a request.
 --
@@ -4243,10 +4276,8 @@ data BillingInfoList = BillingInfoList'
 billingInfoList
     :: BillingInfoList
 billingInfoList =
-    BillingInfoList'
-    { _bilKind = "adexchangebuyer#billingInfoList"
-    , _bilItems = Nothing
-    }
+  BillingInfoList'
+    {_bilKind = "adexchangebuyer#billingInfoList", _bilItems = Nothing}
 
 -- | Resource type.
 bilKind :: Lens' BillingInfoList Text
@@ -4276,9 +4307,11 @@ instance ToJSON BillingInfoList where
 
 --
 -- /See:/ 'addOrderNotesResponse' smart constructor.
-newtype AddOrderNotesResponse = AddOrderNotesResponse'
+newtype AddOrderNotesResponse =
+  AddOrderNotesResponse'
     { _aNotes :: Maybe [MarketplaceNote]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddOrderNotesResponse' with the minimum fields required to make a request.
 --
@@ -4287,10 +4320,7 @@ newtype AddOrderNotesResponse = AddOrderNotesResponse'
 -- * 'aNotes'
 addOrderNotesResponse
     :: AddOrderNotesResponse
-addOrderNotesResponse =
-    AddOrderNotesResponse'
-    { _aNotes = Nothing
-    }
+addOrderNotesResponse = AddOrderNotesResponse' {_aNotes = Nothing}
 
 aNotes :: Lens' AddOrderNotesResponse [MarketplaceNote]
 aNotes
@@ -4310,10 +4340,12 @@ instance ToJSON AddOrderNotesResponse where
 
 --
 -- /See:/ 'targetingValueSize' smart constructor.
-data TargetingValueSize = TargetingValueSize'
+data TargetingValueSize =
+  TargetingValueSize'
     { _tvsHeight :: !(Maybe (Textual Int32))
     , _tvsWidth  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetingValueSize' with the minimum fields required to make a request.
 --
@@ -4325,10 +4357,7 @@ data TargetingValueSize = TargetingValueSize'
 targetingValueSize
     :: TargetingValueSize
 targetingValueSize =
-    TargetingValueSize'
-    { _tvsHeight = Nothing
-    , _tvsWidth = Nothing
-    }
+  TargetingValueSize' {_tvsHeight = Nothing, _tvsWidth = Nothing}
 
 -- | The height of the creative.
 tvsHeight :: Lens' TargetingValueSize (Maybe Int32)
@@ -4358,12 +4387,14 @@ instance ToJSON TargetingValueSize where
 
 --
 -- /See:/ 'updatePrivateAuctionProposalRequest' smart constructor.
-data UpdatePrivateAuctionProposalRequest = UpdatePrivateAuctionProposalRequest'
+data UpdatePrivateAuctionProposalRequest =
+  UpdatePrivateAuctionProposalRequest'
     { _upaprExternalDealId         :: !(Maybe Text)
     , _upaprUpdateAction           :: !(Maybe Text)
     , _upaprNote                   :: !(Maybe MarketplaceNote)
     , _upaprProposalRevisionNumber :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdatePrivateAuctionProposalRequest' with the minimum fields required to make a request.
 --
@@ -4379,7 +4410,7 @@ data UpdatePrivateAuctionProposalRequest = UpdatePrivateAuctionProposalRequest'
 updatePrivateAuctionProposalRequest
     :: UpdatePrivateAuctionProposalRequest
 updatePrivateAuctionProposalRequest =
-    UpdatePrivateAuctionProposalRequest'
+  UpdatePrivateAuctionProposalRequest'
     { _upaprExternalDealId = Nothing
     , _upaprUpdateAction = Nothing
     , _upaprNote = Nothing
@@ -4433,10 +4464,12 @@ instance ToJSON UpdatePrivateAuctionProposalRequest
 
 --
 -- /See:/ 'pretargetingConfigDimensionsItem' smart constructor.
-data PretargetingConfigDimensionsItem = PretargetingConfigDimensionsItem'
+data PretargetingConfigDimensionsItem =
+  PretargetingConfigDimensionsItem'
     { _pcdiHeight :: !(Maybe (Textual Int64))
     , _pcdiWidth  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PretargetingConfigDimensionsItem' with the minimum fields required to make a request.
 --
@@ -4448,10 +4481,8 @@ data PretargetingConfigDimensionsItem = PretargetingConfigDimensionsItem'
 pretargetingConfigDimensionsItem
     :: PretargetingConfigDimensionsItem
 pretargetingConfigDimensionsItem =
-    PretargetingConfigDimensionsItem'
-    { _pcdiHeight = Nothing
-    , _pcdiWidth = Nothing
-    }
+  PretargetingConfigDimensionsItem'
+    {_pcdiHeight = Nothing, _pcdiWidth = Nothing}
 
 -- | Height in pixels.
 pcdiHeight :: Lens' PretargetingConfigDimensionsItem (Maybe Int64)
@@ -4483,12 +4514,14 @@ instance ToJSON PretargetingConfigDimensionsItem
 
 --
 -- /See:/ 'creativeCorrectionsItemContextsItem' smart constructor.
-data CreativeCorrectionsItemContextsItem = CreativeCorrectionsItemContextsItem'
+data CreativeCorrectionsItemContextsItem =
+  CreativeCorrectionsItemContextsItem'
     { _cciciPlatform      :: !(Maybe [Text])
     , _cciciContextType   :: !(Maybe Text)
     , _cciciAuctionType   :: !(Maybe [Text])
     , _cciciGeoCriteriaId :: !(Maybe [Textual Int32])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeCorrectionsItemContextsItem' with the minimum fields required to make a request.
 --
@@ -4504,7 +4537,7 @@ data CreativeCorrectionsItemContextsItem = CreativeCorrectionsItemContextsItem'
 creativeCorrectionsItemContextsItem
     :: CreativeCorrectionsItemContextsItem
 creativeCorrectionsItemContextsItem =
-    CreativeCorrectionsItemContextsItem'
+  CreativeCorrectionsItemContextsItem'
     { _cciciPlatform = Nothing
     , _cciciContextType = Nothing
     , _cciciAuctionType = Nothing
@@ -4568,11 +4601,13 @@ instance ToJSON CreativeCorrectionsItemContextsItem
 -- | This message carries publisher provided forecasting information.
 --
 -- /See:/ 'publisherProvidedForecast' smart constructor.
-data PublisherProvidedForecast = PublisherProvidedForecast'
+data PublisherProvidedForecast =
+  PublisherProvidedForecast'
     { _ppfWeeklyImpressions :: !(Maybe (Textual Int64))
     , _ppfWeeklyUniques     :: !(Maybe (Textual Int64))
     , _ppfDimensions        :: !(Maybe [Dimension])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PublisherProvidedForecast' with the minimum fields required to make a request.
 --
@@ -4586,7 +4621,7 @@ data PublisherProvidedForecast = PublisherProvidedForecast'
 publisherProvidedForecast
     :: PublisherProvidedForecast
 publisherProvidedForecast =
-    PublisherProvidedForecast'
+  PublisherProvidedForecast'
     { _ppfWeeklyImpressions = Nothing
     , _ppfWeeklyUniques = Nothing
     , _ppfDimensions = Nothing
@@ -4633,14 +4668,16 @@ instance ToJSON PublisherProvidedForecast where
 
 --
 -- /See:/ 'targetingValue' smart constructor.
-data TargetingValue = TargetingValue'
+data TargetingValue =
+  TargetingValue'
     { _tvDemogAgeCriteriaValue    :: !(Maybe TargetingValueDemogAgeCriteria)
     , _tvCreativeSizeValue        :: !(Maybe TargetingValueCreativeSize)
     , _tvStringValue              :: !(Maybe Text)
     , _tvLongValue                :: !(Maybe (Textual Int64))
     , _tvDayPartTargetingValue    :: !(Maybe TargetingValueDayPartTargeting)
     , _tvDemogGenderCriteriaValue :: !(Maybe TargetingValueDemogGenderCriteria)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetingValue' with the minimum fields required to make a request.
 --
@@ -4660,7 +4697,7 @@ data TargetingValue = TargetingValue'
 targetingValue
     :: TargetingValue
 targetingValue =
-    TargetingValue'
+  TargetingValue'
     { _tvDemogAgeCriteriaValue = Nothing
     , _tvCreativeSizeValue = Nothing
     , _tvStringValue = Nothing
@@ -4733,11 +4770,13 @@ instance ToJSON TargetingValue where
 -- | The app icon, for app download ads.
 --
 -- /See:/ 'creativeNATiveAdAppIcon' smart constructor.
-data CreativeNATiveAdAppIcon = CreativeNATiveAdAppIcon'
+data CreativeNATiveAdAppIcon =
+  CreativeNATiveAdAppIcon'
     { _cnataaiHeight :: !(Maybe (Textual Int32))
     , _cnataaiURL    :: !(Maybe Text)
     , _cnataaiWidth  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeNATiveAdAppIcon' with the minimum fields required to make a request.
 --
@@ -4751,11 +4790,8 @@ data CreativeNATiveAdAppIcon = CreativeNATiveAdAppIcon'
 creativeNATiveAdAppIcon
     :: CreativeNATiveAdAppIcon
 creativeNATiveAdAppIcon =
-    CreativeNATiveAdAppIcon'
-    { _cnataaiHeight = Nothing
-    , _cnataaiURL = Nothing
-    , _cnataaiWidth = Nothing
-    }
+  CreativeNATiveAdAppIcon'
+    {_cnataaiHeight = Nothing, _cnataaiURL = Nothing, _cnataaiWidth = Nothing}
 
 cnataaiHeight :: Lens' CreativeNATiveAdAppIcon (Maybe Int32)
 cnataaiHeight
@@ -4790,12 +4826,14 @@ instance ToJSON CreativeNATiveAdAppIcon where
 
 --
 -- /See:/ 'price' smart constructor.
-data Price = Price'
+data Price =
+  Price'
     { _pCurrencyCode      :: !(Maybe Text)
     , _pAmountMicros      :: !(Maybe (Textual Double))
     , _pPricingType       :: !(Maybe Text)
     , _pExpectedCpmMicros :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
@@ -4811,7 +4849,7 @@ data Price = Price'
 price
     :: Price
 price =
-    Price'
+  Price'
     { _pCurrencyCode = Nothing
     , _pAmountMicros = Nothing
     , _pPricingType = Nothing
@@ -4863,11 +4901,13 @@ instance ToJSON Price where
 
 --
 -- /See:/ 'pretargetingConfigVideoPlayerSizesItem' smart constructor.
-data PretargetingConfigVideoPlayerSizesItem = PretargetingConfigVideoPlayerSizesItem'
+data PretargetingConfigVideoPlayerSizesItem =
+  PretargetingConfigVideoPlayerSizesItem'
     { _pcvpsiMinWidth    :: !(Maybe (Textual Int64))
     , _pcvpsiAspectRatio :: !(Maybe Text)
     , _pcvpsiMinHeight   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PretargetingConfigVideoPlayerSizesItem' with the minimum fields required to make a request.
 --
@@ -4881,7 +4921,7 @@ data PretargetingConfigVideoPlayerSizesItem = PretargetingConfigVideoPlayerSizes
 pretargetingConfigVideoPlayerSizesItem
     :: PretargetingConfigVideoPlayerSizesItem
 pretargetingConfigVideoPlayerSizesItem =
-    PretargetingConfigVideoPlayerSizesItem'
+  PretargetingConfigVideoPlayerSizesItem'
     { _pcvpsiMinWidth = Nothing
     , _pcvpsiAspectRatio = Nothing
     , _pcvpsiMinHeight = Nothing
@@ -4911,7 +4951,8 @@ pcvpsiMinHeight
       . mapping _Coerce
 
 instance FromJSON
-         PretargetingConfigVideoPlayerSizesItem where
+           PretargetingConfigVideoPlayerSizesItem
+         where
         parseJSON
           = withObject "PretargetingConfigVideoPlayerSizesItem"
               (\ o ->
@@ -4920,7 +4961,8 @@ instance FromJSON
                      (o .:? "minHeight"))
 
 instance ToJSON
-         PretargetingConfigVideoPlayerSizesItem where
+           PretargetingConfigVideoPlayerSizesItem
+         where
         toJSON PretargetingConfigVideoPlayerSizesItem'{..}
           = object
               (catMaybes
@@ -4930,12 +4972,14 @@ instance ToJSON
 
 --
 -- /See:/ 'editAllOrderDealsRequest' smart constructor.
-data EditAllOrderDealsRequest = EditAllOrderDealsRequest'
+data EditAllOrderDealsRequest =
+  EditAllOrderDealsRequest'
     { _eUpdateAction           :: !(Maybe Text)
     , _eDeals                  :: !(Maybe [MarketplaceDeal])
     , _eProposalRevisionNumber :: !(Maybe (Textual Int64))
     , _eProposal               :: !(Maybe Proposal)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditAllOrderDealsRequest' with the minimum fields required to make a request.
 --
@@ -4951,7 +4995,7 @@ data EditAllOrderDealsRequest = EditAllOrderDealsRequest'
 editAllOrderDealsRequest
     :: EditAllOrderDealsRequest
 editAllOrderDealsRequest =
-    EditAllOrderDealsRequest'
+  EditAllOrderDealsRequest'
     { _eUpdateAction = Nothing
     , _eDeals = Nothing
     , _eProposalRevisionNumber = Nothing
@@ -5016,12 +5060,14 @@ instance ToJSON EditAllOrderDealsRequest where
 -- | The configuration data for an Ad Exchange billing info.
 --
 -- /See:/ 'billingInfo' smart constructor.
-data BillingInfo = BillingInfo'
+data BillingInfo =
+  BillingInfo'
     { _biKind        :: !Text
     , _biAccountName :: !(Maybe Text)
     , _biAccountId   :: !(Maybe (Textual Int32))
     , _biBillingId   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingInfo' with the minimum fields required to make a request.
 --
@@ -5037,7 +5083,7 @@ data BillingInfo = BillingInfo'
 billingInfo
     :: BillingInfo
 billingInfo =
-    BillingInfo'
+  BillingInfo'
     { _biKind = "adexchangebuyer#billingInfo"
     , _biAccountName = Nothing
     , _biAccountId = Nothing
@@ -5090,10 +5136,12 @@ instance ToJSON BillingInfo where
 
 --
 -- /See:/ 'targetingValueDayPartTargeting' smart constructor.
-data TargetingValueDayPartTargeting = TargetingValueDayPartTargeting'
+data TargetingValueDayPartTargeting =
+  TargetingValueDayPartTargeting'
     { _tvdptTimeZoneType :: !(Maybe Text)
     , _tvdptDayParts     :: !(Maybe [TargetingValueDayPartTargetingDayPart])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetingValueDayPartTargeting' with the minimum fields required to make a request.
 --
@@ -5105,10 +5153,8 @@ data TargetingValueDayPartTargeting = TargetingValueDayPartTargeting'
 targetingValueDayPartTargeting
     :: TargetingValueDayPartTargeting
 targetingValueDayPartTargeting =
-    TargetingValueDayPartTargeting'
-    { _tvdptTimeZoneType = Nothing
-    , _tvdptDayParts = Nothing
-    }
+  TargetingValueDayPartTargeting'
+    {_tvdptTimeZoneType = Nothing, _tvdptDayParts = Nothing}
 
 tvdptTimeZoneType :: Lens' TargetingValueDayPartTargeting (Maybe Text)
 tvdptTimeZoneType
@@ -5140,11 +5186,13 @@ instance ToJSON TargetingValueDayPartTargeting where
 
 --
 -- /See:/ 'sharedTargeting' smart constructor.
-data SharedTargeting = SharedTargeting'
+data SharedTargeting =
+  SharedTargeting'
     { _stKey        :: !(Maybe Text)
     , _stExclusions :: !(Maybe [TargetingValue])
     , _stInclusions :: !(Maybe [TargetingValue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SharedTargeting' with the minimum fields required to make a request.
 --
@@ -5158,11 +5206,8 @@ data SharedTargeting = SharedTargeting'
 sharedTargeting
     :: SharedTargeting
 sharedTargeting =
-    SharedTargeting'
-    { _stKey = Nothing
-    , _stExclusions = Nothing
-    , _stInclusions = Nothing
-    }
+  SharedTargeting'
+    {_stKey = Nothing, _stExclusions = Nothing, _stInclusions = Nothing}
 
 -- | The key representing the shared targeting criterion.
 stKey :: Lens' SharedTargeting (Maybe Text)
@@ -5203,11 +5248,13 @@ instance ToJSON SharedTargeting where
 -- | A large image.
 --
 -- /See:/ 'creativeNATiveAdImage' smart constructor.
-data CreativeNATiveAdImage = CreativeNATiveAdImage'
+data CreativeNATiveAdImage =
+  CreativeNATiveAdImage'
     { _cnataiHeight :: !(Maybe (Textual Int32))
     , _cnataiURL    :: !(Maybe Text)
     , _cnataiWidth  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeNATiveAdImage' with the minimum fields required to make a request.
 --
@@ -5221,11 +5268,8 @@ data CreativeNATiveAdImage = CreativeNATiveAdImage'
 creativeNATiveAdImage
     :: CreativeNATiveAdImage
 creativeNATiveAdImage =
-    CreativeNATiveAdImage'
-    { _cnataiHeight = Nothing
-    , _cnataiURL = Nothing
-    , _cnataiWidth = Nothing
-    }
+  CreativeNATiveAdImage'
+    {_cnataiHeight = Nothing, _cnataiURL = Nothing, _cnataiWidth = Nothing}
 
 cnataiHeight :: Lens' CreativeNATiveAdImage (Maybe Int32)
 cnataiHeight
@@ -5266,7 +5310,8 @@ instance ToJSON CreativeNATiveAdImage where
 -- field is updatable at all times by either buyer or the seller.
 --
 -- /See:/ 'product' smart constructor.
-data Product = Product'
+data Product =
+  Product'
     { _proState                         :: !(Maybe Text)
     , _proInventorySource               :: !(Maybe Text)
     , _proWebPropertyCode               :: !(Maybe Text)
@@ -5294,7 +5339,8 @@ data Product = Product'
     , _proLegacyOfferId                 :: !(Maybe Text)
     , _proProductId                     :: !(Maybe Text)
     , _proBuyer                         :: !(Maybe Buyer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
@@ -5356,7 +5402,7 @@ data Product = Product'
 product
     :: Product
 product =
-    Product'
+  Product'
     { _proState = Nothing
     , _proInventorySource = Nothing
     , _proWebPropertyCode = Nothing
@@ -5638,11 +5684,13 @@ instance ToJSON Product where
 
 --
 -- /See:/ 'creativeServingRestrictionsItem' smart constructor.
-data CreativeServingRestrictionsItem = CreativeServingRestrictionsItem'
+data CreativeServingRestrictionsItem =
+  CreativeServingRestrictionsItem'
     { _csriContexts           :: !(Maybe [CreativeServingRestrictionsItemContextsItem])
     , _csriReason             :: !(Maybe Text)
     , _csriDisApprovalReasons :: !(Maybe [CreativeServingRestrictionsItemDisApprovalReasonsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeServingRestrictionsItem' with the minimum fields required to make a request.
 --
@@ -5656,7 +5704,7 @@ data CreativeServingRestrictionsItem = CreativeServingRestrictionsItem'
 creativeServingRestrictionsItem
     :: CreativeServingRestrictionsItem
 creativeServingRestrictionsItem =
-    CreativeServingRestrictionsItem'
+  CreativeServingRestrictionsItem'
     { _csriContexts = Nothing
     , _csriReason = Nothing
     , _csriDisApprovalReasons = Nothing
@@ -5707,10 +5755,12 @@ instance ToJSON CreativeServingRestrictionsItem where
 
 --
 -- /See:/ 'deleteOrderDealsResponse' smart constructor.
-data DeleteOrderDealsResponse = DeleteOrderDealsResponse'
+data DeleteOrderDealsResponse =
+  DeleteOrderDealsResponse'
     { _dDeals                  :: !(Maybe [MarketplaceDeal])
     , _dProposalRevisionNumber :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteOrderDealsResponse' with the minimum fields required to make a request.
 --
@@ -5722,10 +5772,8 @@ data DeleteOrderDealsResponse = DeleteOrderDealsResponse'
 deleteOrderDealsResponse
     :: DeleteOrderDealsResponse
 deleteOrderDealsResponse =
-    DeleteOrderDealsResponse'
-    { _dDeals = Nothing
-    , _dProposalRevisionNumber = Nothing
-    }
+  DeleteOrderDealsResponse'
+    {_dDeals = Nothing, _dProposalRevisionNumber = Nothing}
 
 -- | List of deals deleted (in the same proposal as passed in the request)
 dDeals :: Lens' DeleteOrderDealsResponse [MarketplaceDeal]
@@ -5758,10 +5806,12 @@ instance ToJSON DeleteOrderDealsResponse where
 
 --
 -- /See:/ 'pretargetingConfigPlacementsItem' smart constructor.
-data PretargetingConfigPlacementsItem = PretargetingConfigPlacementsItem'
+data PretargetingConfigPlacementsItem =
+  PretargetingConfigPlacementsItem'
     { _pcpiToken :: !(Maybe Text)
     , _pcpiType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PretargetingConfigPlacementsItem' with the minimum fields required to make a request.
 --
@@ -5773,10 +5823,7 @@ data PretargetingConfigPlacementsItem = PretargetingConfigPlacementsItem'
 pretargetingConfigPlacementsItem
     :: PretargetingConfigPlacementsItem
 pretargetingConfigPlacementsItem =
-    PretargetingConfigPlacementsItem'
-    { _pcpiToken = Nothing
-    , _pcpiType = Nothing
-    }
+  PretargetingConfigPlacementsItem' {_pcpiToken = Nothing, _pcpiType = Nothing}
 
 -- | The value of the placement. Interpretation depends on the placement
 -- type, e.g. URL for a site placement, channel name for a channel
@@ -5807,7 +5854,8 @@ instance ToJSON PretargetingConfigPlacementsItem
 
 --
 -- /See:/ 'publisherProFileAPIProto' smart constructor.
-data PublisherProFileAPIProto = PublisherProFileAPIProto'
+data PublisherProFileAPIProto =
+  PublisherProFileAPIProto'
     { _ppfapAudience                  :: !(Maybe Text)
     , _ppfapState                     :: !(Maybe Text)
     , _ppfapMediaKitLink              :: !(Maybe Text)
@@ -5830,7 +5878,8 @@ data PublisherProFileAPIProto = PublisherProFileAPIProto'
     , _ppfapRateCardInfoLink          :: !(Maybe Text)
     , _ppfapTopHeadlines              :: !(Maybe [Text])
     , _ppfapProgrammaticContact       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PublisherProFileAPIProto' with the minimum fields required to make a request.
 --
@@ -5882,7 +5931,7 @@ data PublisherProFileAPIProto = PublisherProFileAPIProto'
 publisherProFileAPIProto
     :: PublisherProFileAPIProto
 publisherProFileAPIProto =
-    PublisherProFileAPIProto'
+  PublisherProFileAPIProto'
     { _ppfapAudience = Nothing
     , _ppfapState = Nothing
     , _ppfapMediaKitLink = Nothing
@@ -6106,7 +6155,8 @@ instance ToJSON PublisherProFileAPIProto where
 -- targeting information that is used for serving.
 --
 -- /See:/ 'marketplaceDeal' smart constructor.
-data MarketplaceDeal = MarketplaceDeal'
+data MarketplaceDeal =
+  MarketplaceDeal'
     { _mdExternalDealId                 :: !(Maybe Text)
     , _mdBuyerPrivateData               :: !(Maybe PrivateData)
     , _mdIsSetupComplete                :: !(Maybe Bool)
@@ -6132,7 +6182,8 @@ data MarketplaceDeal = MarketplaceDeal'
     , _mdProductRevisionNumber          :: !(Maybe (Textual Int64))
     , _mdProductId                      :: !(Maybe Text)
     , _mdCreativeSafeFrameCompatibility :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MarketplaceDeal' with the minimum fields required to make a request.
 --
@@ -6190,7 +6241,7 @@ data MarketplaceDeal = MarketplaceDeal'
 marketplaceDeal
     :: MarketplaceDeal
 marketplaceDeal =
-    MarketplaceDeal'
+  MarketplaceDeal'
     { _mdExternalDealId = Nothing
     , _mdBuyerPrivateData = Nothing
     , _mdIsSetupComplete = Nothing
@@ -6451,9 +6502,11 @@ instance ToJSON MarketplaceDeal where
 
 --
 -- /See:/ 'getOffersResponse' smart constructor.
-newtype GetOffersResponse = GetOffersResponse'
+newtype GetOffersResponse =
+  GetOffersResponse'
     { _gorProducts :: Maybe [Product]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOffersResponse' with the minimum fields required to make a request.
 --
@@ -6462,10 +6515,7 @@ newtype GetOffersResponse = GetOffersResponse'
 -- * 'gorProducts'
 getOffersResponse
     :: GetOffersResponse
-getOffersResponse =
-    GetOffersResponse'
-    { _gorProducts = Nothing
-    }
+getOffersResponse = GetOffersResponse' {_gorProducts = Nothing}
 
 -- | The returned list of products.
 gorProducts :: Lens' GetOffersResponse [Product]
@@ -6487,10 +6537,12 @@ instance ToJSON GetOffersResponse where
 
 --
 -- /See:/ 'dealTermsNonGuaranteedAuctionTerms' smart constructor.
-data DealTermsNonGuaranteedAuctionTerms = DealTermsNonGuaranteedAuctionTerms'
+data DealTermsNonGuaranteedAuctionTerms =
+  DealTermsNonGuaranteedAuctionTerms'
     { _dtngatReservePricePerBuyers      :: !(Maybe [PricePerBuyer])
     , _dtngatAutoOptimizePrivateAuction :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DealTermsNonGuaranteedAuctionTerms' with the minimum fields required to make a request.
 --
@@ -6502,7 +6554,7 @@ data DealTermsNonGuaranteedAuctionTerms = DealTermsNonGuaranteedAuctionTerms'
 dealTermsNonGuaranteedAuctionTerms
     :: DealTermsNonGuaranteedAuctionTerms
 dealTermsNonGuaranteedAuctionTerms =
-    DealTermsNonGuaranteedAuctionTerms'
+  DealTermsNonGuaranteedAuctionTerms'
     { _dtngatReservePricePerBuyers = Nothing
     , _dtngatAutoOptimizePrivateAuction = Nothing
     }
@@ -6543,10 +6595,12 @@ instance ToJSON DealTermsNonGuaranteedAuctionTerms
 
 --
 -- /See:/ 'creativeFilteringReasonsReasonsItem' smart constructor.
-data CreativeFilteringReasonsReasonsItem = CreativeFilteringReasonsReasonsItem'
+data CreativeFilteringReasonsReasonsItem =
+  CreativeFilteringReasonsReasonsItem'
     { _cfrriFilteringStatus :: !(Maybe (Textual Int32))
     , _cfrriFilteringCount  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeFilteringReasonsReasonsItem' with the minimum fields required to make a request.
 --
@@ -6558,10 +6612,8 @@ data CreativeFilteringReasonsReasonsItem = CreativeFilteringReasonsReasonsItem'
 creativeFilteringReasonsReasonsItem
     :: CreativeFilteringReasonsReasonsItem
 creativeFilteringReasonsReasonsItem =
-    CreativeFilteringReasonsReasonsItem'
-    { _cfrriFilteringStatus = Nothing
-    , _cfrriFilteringCount = Nothing
-    }
+  CreativeFilteringReasonsReasonsItem'
+    {_cfrriFilteringStatus = Nothing, _cfrriFilteringCount = Nothing}
 
 -- | The filtering status code as defined in creative-status-codes.txt.
 cfrriFilteringStatus :: Lens' CreativeFilteringReasonsReasonsItem (Maybe Int32)
@@ -6597,7 +6649,8 @@ instance ToJSON CreativeFilteringReasonsReasonsItem
 
 --
 -- /See:/ 'dealTerms' smart constructor.
-data DealTerms = DealTerms'
+data DealTerms =
+  DealTerms'
     { _dtEstimatedGrossSpend           :: !(Maybe Price)
     , _dtNonGuaranteedFixedPriceTerms  :: !(Maybe DealTermsNonGuaranteedFixedPriceTerms)
     , _dtNonGuaranteedAuctionTerms     :: !(Maybe DealTermsNonGuaranteedAuctionTerms)
@@ -6608,7 +6661,8 @@ data DealTerms = DealTerms'
     , _dtSellerTimeZone                :: !(Maybe Text)
     , _dtGuaranteedFixedPriceTerms     :: !(Maybe DealTermsGuaranteedFixedPriceTerms)
     , _dtDescription                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DealTerms' with the minimum fields required to make a request.
 --
@@ -6636,7 +6690,7 @@ data DealTerms = DealTerms'
 dealTerms
     :: DealTerms
 dealTerms =
-    DealTerms'
+  DealTerms'
     { _dtEstimatedGrossSpend = Nothing
     , _dtNonGuaranteedFixedPriceTerms = Nothing
     , _dtNonGuaranteedAuctionTerms = Nothing
@@ -6756,10 +6810,12 @@ instance ToJSON DealTerms where
 -- | The external deal ids associated with a creative.
 --
 -- /See:/ 'creativeDealIds' smart constructor.
-data CreativeDealIds = CreativeDealIds'
+data CreativeDealIds =
+  CreativeDealIds'
     { _cdiKind         :: !Text
     , _cdiDealStatuses :: !(Maybe [CreativeDealIdsDealStatusesItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeDealIds' with the minimum fields required to make a request.
 --
@@ -6771,10 +6827,8 @@ data CreativeDealIds = CreativeDealIds'
 creativeDealIds
     :: CreativeDealIds
 creativeDealIds =
-    CreativeDealIds'
-    { _cdiKind = "adexchangebuyer#creativeDealIds"
-    , _cdiDealStatuses = Nothing
-    }
+  CreativeDealIds'
+    {_cdiKind = "adexchangebuyer#creativeDealIds", _cdiDealStatuses = Nothing}
 
 -- | Resource type.
 cdiKind :: Lens' CreativeDealIds Text
@@ -6805,12 +6859,14 @@ instance ToJSON CreativeDealIds where
 
 --
 -- /See:/ 'marketplaceLabel' smart constructor.
-data MarketplaceLabel = MarketplaceLabel'
+data MarketplaceLabel =
+  MarketplaceLabel'
     { _mlDeprecatedMarketplaceDealParty :: !(Maybe MarketplaceDealParty)
     , _mlAccountId                      :: !(Maybe Text)
     , _mlCreateTimeMs                   :: !(Maybe (Textual Int64))
     , _mlLabel                          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MarketplaceLabel' with the minimum fields required to make a request.
 --
@@ -6826,7 +6882,7 @@ data MarketplaceLabel = MarketplaceLabel'
 marketplaceLabel
     :: MarketplaceLabel
 marketplaceLabel =
-    MarketplaceLabel'
+  MarketplaceLabel'
     { _mlDeprecatedMarketplaceDealParty = Nothing
     , _mlAccountId = Nothing
     , _mlCreateTimeMs = Nothing
@@ -6877,9 +6933,11 @@ instance ToJSON MarketplaceLabel where
 
 --
 -- /See:/ 'buyer' smart constructor.
-newtype Buyer = Buyer'
+newtype Buyer =
+  Buyer'
     { _buyAccountId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Buyer' with the minimum fields required to make a request.
 --
@@ -6888,10 +6946,7 @@ newtype Buyer = Buyer'
 -- * 'buyAccountId'
 buyer
     :: Buyer
-buyer =
-    Buyer'
-    { _buyAccountId = Nothing
-    }
+buyer = Buyer' {_buyAccountId = Nothing}
 
 -- | Adx account id of the buyer.
 buyAccountId :: Lens' Buyer (Maybe Text)
@@ -6910,11 +6965,13 @@ instance ToJSON Buyer where
 
 --
 -- /See:/ 'addOrderDealsRequest' smart constructor.
-data AddOrderDealsRequest = AddOrderDealsRequest'
+data AddOrderDealsRequest =
+  AddOrderDealsRequest'
     { _aUpdateAction           :: !(Maybe Text)
     , _aDeals                  :: !(Maybe [MarketplaceDeal])
     , _aProposalRevisionNumber :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddOrderDealsRequest' with the minimum fields required to make a request.
 --
@@ -6928,7 +6985,7 @@ data AddOrderDealsRequest = AddOrderDealsRequest'
 addOrderDealsRequest
     :: AddOrderDealsRequest
 addOrderDealsRequest =
-    AddOrderDealsRequest'
+  AddOrderDealsRequest'
     { _aUpdateAction = Nothing
     , _aDeals = Nothing
     , _aProposalRevisionNumber = Nothing
@@ -6975,13 +7032,15 @@ instance ToJSON AddOrderDealsRequest where
 -- has_buyer_paused or the has_seller_paused bits can be set independently.
 --
 -- /See:/ 'dealServingMetadataDealPauseStatus' smart constructor.
-data DealServingMetadataDealPauseStatus = DealServingMetadataDealPauseStatus'
+data DealServingMetadataDealPauseStatus =
+  DealServingMetadataDealPauseStatus'
     { _dsmdpsFirstPausedBy     :: !(Maybe Text)
     , _dsmdpsBuyerPauseReason  :: !(Maybe Text)
     , _dsmdpsHasBuyerPaused    :: !(Maybe Bool)
     , _dsmdpsSellerPauseReason :: !(Maybe Text)
     , _dsmdpsHasSellerPaused   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DealServingMetadataDealPauseStatus' with the minimum fields required to make a request.
 --
@@ -6999,7 +7058,7 @@ data DealServingMetadataDealPauseStatus = DealServingMetadataDealPauseStatus'
 dealServingMetadataDealPauseStatus
     :: DealServingMetadataDealPauseStatus
 dealServingMetadataDealPauseStatus =
-    DealServingMetadataDealPauseStatus'
+  DealServingMetadataDealPauseStatus'
     { _dsmdpsFirstPausedBy = Nothing
     , _dsmdpsBuyerPauseReason = Nothing
     , _dsmdpsHasBuyerPaused = Nothing
@@ -7059,13 +7118,15 @@ instance ToJSON DealServingMetadataDealPauseStatus
 
 --
 -- /See:/ 'dealTermsGuaranteedFixedPriceTerms' smart constructor.
-data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms'
+data DealTermsGuaranteedFixedPriceTerms =
+  DealTermsGuaranteedFixedPriceTerms'
     { _dtgfptGuaranteedLooks       :: !(Maybe (Textual Int64))
     , _dtgfptGuaranteedImpressions :: !(Maybe (Textual Int64))
     , _dtgfptBillingInfo           :: !(Maybe DealTermsGuaranteedFixedPriceTermsBillingInfo)
     , _dtgfptFixedPrices           :: !(Maybe [PricePerBuyer])
     , _dtgfptMinimumDailyLooks     :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DealTermsGuaranteedFixedPriceTerms' with the minimum fields required to make a request.
 --
@@ -7083,7 +7144,7 @@ data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms'
 dealTermsGuaranteedFixedPriceTerms
     :: DealTermsGuaranteedFixedPriceTerms
 dealTermsGuaranteedFixedPriceTerms =
-    DealTermsGuaranteedFixedPriceTerms'
+  DealTermsGuaranteedFixedPriceTerms'
     { _dtgfptGuaranteedLooks = Nothing
     , _dtgfptGuaranteedImpressions = Nothing
     , _dtgfptBillingInfo = Nothing

@@ -58,10 +58,12 @@ type SubscriptionsStartPaidServiceResource =
 -- subscription.
 --
 -- /See:/ 'subscriptionsStartPaidService' smart constructor.
-data SubscriptionsStartPaidService = SubscriptionsStartPaidService'
+data SubscriptionsStartPaidService =
+  SubscriptionsStartPaidService'
     { _sspsCustomerId     :: !Text
     , _sspsSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionsStartPaidService' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ subscriptionsStartPaidService
     -> Text -- ^ 'sspsSubscriptionId'
     -> SubscriptionsStartPaidService
 subscriptionsStartPaidService pSspsCustomerId_ pSspsSubscriptionId_ =
-    SubscriptionsStartPaidService'
+  SubscriptionsStartPaidService'
     { _sspsCustomerId = pSspsCustomerId_
     , _sspsSubscriptionId = pSspsSubscriptionId_
     }

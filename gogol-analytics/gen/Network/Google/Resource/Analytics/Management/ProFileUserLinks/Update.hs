@@ -64,13 +64,15 @@ type ManagementProFileUserLinksUpdateResource =
 -- | Updates permissions for an existing user on the given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksUpdate' smart constructor.
-data ManagementProFileUserLinksUpdate = ManagementProFileUserLinksUpdate'
+data ManagementProFileUserLinksUpdate =
+  ManagementProFileUserLinksUpdate'
     { _mpfuluWebPropertyId :: !Text
     , _mpfuluProFileId     :: !Text
     , _mpfuluPayload       :: !EntityUserLink
     , _mpfuluAccountId     :: !Text
     , _mpfuluLinkId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementProFileUserLinksUpdate' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ managementProFileUserLinksUpdate
     -> Text -- ^ 'mpfuluLinkId'
     -> ManagementProFileUserLinksUpdate
 managementProFileUserLinksUpdate pMpfuluWebPropertyId_ pMpfuluProFileId_ pMpfuluPayload_ pMpfuluAccountId_ pMpfuluLinkId_ =
-    ManagementProFileUserLinksUpdate'
+  ManagementProFileUserLinksUpdate'
     { _mpfuluWebPropertyId = pMpfuluWebPropertyId_
     , _mpfuluProFileId = pMpfuluProFileId_
     , _mpfuluPayload = pMpfuluPayload_
@@ -131,7 +133,8 @@ mpfuluLinkId
   = lens _mpfuluLinkId (\ s a -> s{_mpfuluLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileUserLinksUpdate where
+           ManagementProFileUserLinksUpdate
+         where
         type Rs ManagementProFileUserLinksUpdate =
              EntityUserLink
         type Scopes ManagementProFileUserLinksUpdate =

@@ -52,9 +52,11 @@ type TurnBasedMatchesCancelResource =
 -- | Cancel a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesCancel' smart constructor.
-newtype TurnBasedMatchesCancel = TurnBasedMatchesCancel'
+newtype TurnBasedMatchesCancel =
+  TurnBasedMatchesCancel'
     { _tbmcMatchId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesCancel' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ turnBasedMatchesCancel
     :: Text -- ^ 'tbmcMatchId'
     -> TurnBasedMatchesCancel
 turnBasedMatchesCancel pTbmcMatchId_ =
-    TurnBasedMatchesCancel'
-    { _tbmcMatchId = pTbmcMatchId_
-    }
+  TurnBasedMatchesCancel' {_tbmcMatchId = pTbmcMatchId_}
 
 -- | The ID of the match.
 tbmcMatchId :: Lens' TurnBasedMatchesCancel Text

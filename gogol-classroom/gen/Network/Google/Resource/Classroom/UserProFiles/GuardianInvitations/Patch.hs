@@ -94,7 +94,8 @@ type UserProFilesGuardianInvitationsPatchResource =
 -- refer to a guardian invitation known to Classroom.
 --
 -- /See:/ 'userProFilesGuardianInvitationsPatch' smart constructor.
-data UserProFilesGuardianInvitationsPatch = UserProFilesGuardianInvitationsPatch'
+data UserProFilesGuardianInvitationsPatch =
+  UserProFilesGuardianInvitationsPatch'
     { _upfgipStudentId      :: !Text
     , _upfgipXgafv          :: !(Maybe Xgafv)
     , _upfgipUploadProtocol :: !(Maybe Text)
@@ -104,7 +105,8 @@ data UserProFilesGuardianInvitationsPatch = UserProFilesGuardianInvitationsPatch
     , _upfgipPayload        :: !GuardianInvitation
     , _upfgipInvitationId   :: !Text
     , _upfgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserProFilesGuardianInvitationsPatch' with the minimum fields required to make a request.
 --
@@ -133,7 +135,7 @@ userProFilesGuardianInvitationsPatch
     -> Text -- ^ 'upfgipInvitationId'
     -> UserProFilesGuardianInvitationsPatch
 userProFilesGuardianInvitationsPatch pUpfgipStudentId_ pUpfgipPayload_ pUpfgipInvitationId_ =
-    UserProFilesGuardianInvitationsPatch'
+  UserProFilesGuardianInvitationsPatch'
     { _upfgipStudentId = pUpfgipStudentId_
     , _upfgipXgafv = Nothing
     , _upfgipUploadProtocol = Nothing
@@ -202,7 +204,8 @@ upfgipCallback
       (\ s a -> s{_upfgipCallback = a})
 
 instance GoogleRequest
-         UserProFilesGuardianInvitationsPatch where
+           UserProFilesGuardianInvitationsPatch
+         where
         type Rs UserProFilesGuardianInvitationsPatch =
              GuardianInvitation
         type Scopes UserProFilesGuardianInvitationsPatch =

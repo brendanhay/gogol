@@ -62,7 +62,8 @@ type ProjectsLocationsNodesStartResource =
 -- | Starts a node.
 --
 -- /See:/ 'projectsLocationsNodesStart' smart constructor.
-data ProjectsLocationsNodesStart = ProjectsLocationsNodesStart'
+data ProjectsLocationsNodesStart =
+  ProjectsLocationsNodesStart'
     { _plnsXgafv          :: !(Maybe Xgafv)
     , _plnsUploadProtocol :: !(Maybe Text)
     , _plnsAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsLocationsNodesStart = ProjectsLocationsNodesStart'
     , _plnsPayload        :: !StartNodeRequest
     , _plnsName           :: !Text
     , _plnsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsNodesStart' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsLocationsNodesStart
     -> Text -- ^ 'plnsName'
     -> ProjectsLocationsNodesStart
 projectsLocationsNodesStart pPlnsPayload_ pPlnsName_ =
-    ProjectsLocationsNodesStart'
+  ProjectsLocationsNodesStart'
     { _plnsXgafv = Nothing
     , _plnsUploadProtocol = Nothing
     , _plnsAccessToken = Nothing

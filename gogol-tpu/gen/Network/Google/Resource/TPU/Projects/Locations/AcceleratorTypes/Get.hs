@@ -60,14 +60,16 @@ type ProjectsLocationsAcceleratorTypesGetResource =
 -- | Gets AcceleratorType.
 --
 -- /See:/ 'projectsLocationsAcceleratorTypesGet' smart constructor.
-data ProjectsLocationsAcceleratorTypesGet = ProjectsLocationsAcceleratorTypesGet'
+data ProjectsLocationsAcceleratorTypesGet =
+  ProjectsLocationsAcceleratorTypesGet'
     { _platgXgafv          :: !(Maybe Xgafv)
     , _platgUploadProtocol :: !(Maybe Text)
     , _platgAccessToken    :: !(Maybe Text)
     , _platgUploadType     :: !(Maybe Text)
     , _platgName           :: !Text
     , _platgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsAcceleratorTypesGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsLocationsAcceleratorTypesGet
     :: Text -- ^ 'platgName'
     -> ProjectsLocationsAcceleratorTypesGet
 projectsLocationsAcceleratorTypesGet pPlatgName_ =
-    ProjectsLocationsAcceleratorTypesGet'
+  ProjectsLocationsAcceleratorTypesGet'
     { _platgXgafv = Nothing
     , _platgUploadProtocol = Nothing
     , _platgAccessToken = Nothing
@@ -132,7 +134,8 @@ platgCallback
       (\ s a -> s{_platgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsAcceleratorTypesGet where
+           ProjectsLocationsAcceleratorTypesGet
+         where
         type Rs ProjectsLocationsAcceleratorTypesGet =
              AcceleratorType
         type Scopes ProjectsLocationsAcceleratorTypesGet =

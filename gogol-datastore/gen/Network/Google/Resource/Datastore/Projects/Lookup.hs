@@ -63,7 +63,8 @@ type ProjectsLookupResource =
 -- | Looks up entities by key.
 --
 -- /See:/ 'projectsLookup' smart constructor.
-data ProjectsLookup = ProjectsLookup'
+data ProjectsLookup =
+  ProjectsLookup'
     { _plXgafv          :: !(Maybe Xgafv)
     , _plUploadProtocol :: !(Maybe Text)
     , _plAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsLookup = ProjectsLookup'
     , _plPayload        :: !LookupRequest
     , _plProjectId      :: !Text
     , _plCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLookup' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsLookup
     -> Text -- ^ 'plProjectId'
     -> ProjectsLookup
 projectsLookup pPlPayload_ pPlProjectId_ =
-    ProjectsLookup'
+  ProjectsLookup'
     { _plXgafv = Nothing
     , _plUploadProtocol = Nothing
     , _plAccessToken = Nothing

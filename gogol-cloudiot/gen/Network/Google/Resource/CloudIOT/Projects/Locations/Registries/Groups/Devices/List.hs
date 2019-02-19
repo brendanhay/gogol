@@ -82,7 +82,8 @@ type ProjectsLocationsRegistriesGroupsDevicesListResource
 -- | List devices in a device registry.
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsDevicesList' smart constructor.
-data ProjectsLocationsRegistriesGroupsDevicesList = ProjectsLocationsRegistriesGroupsDevicesList'
+data ProjectsLocationsRegistriesGroupsDevicesList =
+  ProjectsLocationsRegistriesGroupsDevicesList'
     { _plrgdlParent                                  :: !Text
     , _plrgdlXgafv                                   :: !(Maybe Xgafv)
     , _plrgdlUploadProtocol                          :: !(Maybe Text)
@@ -97,7 +98,8 @@ data ProjectsLocationsRegistriesGroupsDevicesList = ProjectsLocationsRegistriesG
     , _plrgdlPageToken                               :: !(Maybe Text)
     , _plrgdlPageSize                                :: !(Maybe (Textual Int32))
     , _plrgdlCallback                                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsDevicesList' with the minimum fields required to make a request.
 --
@@ -134,7 +136,7 @@ projectsLocationsRegistriesGroupsDevicesList
     :: Text -- ^ 'plrgdlParent'
     -> ProjectsLocationsRegistriesGroupsDevicesList
 projectsLocationsRegistriesGroupsDevicesList pPlrgdlParent_ =
-    ProjectsLocationsRegistriesGroupsDevicesList'
+  ProjectsLocationsRegistriesGroupsDevicesList'
     { _plrgdlParent = pPlrgdlParent_
     , _plrgdlXgafv = Nothing
     , _plrgdlUploadProtocol = Nothing
@@ -262,7 +264,8 @@ plrgdlCallback
       (\ s a -> s{_plrgdlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsDevicesList where
+           ProjectsLocationsRegistriesGroupsDevicesList
+         where
         type Rs ProjectsLocationsRegistriesGroupsDevicesList
              = ListDevicesResponse
         type Scopes

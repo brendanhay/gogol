@@ -55,10 +55,12 @@ type SurveysStartResource =
 -- | Begins running a survey.
 --
 -- /See:/ 'surveysStart' smart constructor.
-data SurveysStart = SurveysStart'
+data SurveysStart =
+  SurveysStart'
     { _ssResourceId :: !Text
     , _ssPayload    :: !SurveysStartRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveysStart' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ surveysStart
     -> SurveysStartRequest -- ^ 'ssPayload'
     -> SurveysStart
 surveysStart pSsResourceId_ pSsPayload_ =
-    SurveysStart'
-    { _ssResourceId = pSsResourceId_
-    , _ssPayload = pSsPayload_
-    }
+  SurveysStart' {_ssResourceId = pSsResourceId_, _ssPayload = pSsPayload_}
 
 ssResourceId :: Lens' SurveysStart Text
 ssResourceId

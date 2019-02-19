@@ -61,10 +61,12 @@ type EnterprisesCreateWebTokenResource =
 -- API documentation for further information.
 --
 -- /See:/ 'enterprisesCreateWebToken' smart constructor.
-data EnterprisesCreateWebToken = EnterprisesCreateWebToken'
+data EnterprisesCreateWebToken =
+  EnterprisesCreateWebToken'
     { _ecwtEnterpriseId :: !Text
     , _ecwtPayload      :: !AdministratorWebTokenSpec
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesCreateWebToken' with the minimum fields required to make a request.
 --
@@ -78,10 +80,8 @@ enterprisesCreateWebToken
     -> AdministratorWebTokenSpec -- ^ 'ecwtPayload'
     -> EnterprisesCreateWebToken
 enterprisesCreateWebToken pEcwtEnterpriseId_ pEcwtPayload_ =
-    EnterprisesCreateWebToken'
-    { _ecwtEnterpriseId = pEcwtEnterpriseId_
-    , _ecwtPayload = pEcwtPayload_
-    }
+  EnterprisesCreateWebToken'
+    {_ecwtEnterpriseId = pEcwtEnterpriseId_, _ecwtPayload = pEcwtPayload_}
 
 -- | The ID of the enterprise.
 ecwtEnterpriseId :: Lens' EnterprisesCreateWebToken Text

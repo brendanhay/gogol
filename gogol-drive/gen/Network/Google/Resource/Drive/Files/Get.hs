@@ -64,11 +64,13 @@ type FilesGetResource =
 -- | Gets a file\'s metadata or content by ID.
 --
 -- /See:/ 'filesGet' smart constructor.
-data FilesGet = FilesGet'
+data FilesGet =
+  FilesGet'
     { _fgAcknowledgeAbuse   :: !Bool
     , _fgFileId             :: !Text
     , _fgSupportsTeamDrives :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilesGet' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ filesGet
     :: Text -- ^ 'fgFileId'
     -> FilesGet
 filesGet pFgFileId_ =
-    FilesGet'
+  FilesGet'
     { _fgAcknowledgeAbuse = False
     , _fgFileId = pFgFileId_
     , _fgSupportsTeamDrives = False

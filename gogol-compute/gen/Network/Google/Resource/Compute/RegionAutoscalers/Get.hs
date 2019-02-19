@@ -57,11 +57,13 @@ type RegionAutoscalersGetResource =
 -- | Returns the specified autoscaler.
 --
 -- /See:/ 'regionAutoscalersGet' smart constructor.
-data RegionAutoscalersGet = RegionAutoscalersGet'
+data RegionAutoscalersGet =
+  RegionAutoscalersGet'
     { _ragProject    :: !Text
     , _ragAutoscaler :: !Text
     , _ragRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionAutoscalersGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ regionAutoscalersGet
     -> Text -- ^ 'ragRegion'
     -> RegionAutoscalersGet
 regionAutoscalersGet pRagProject_ pRagAutoscaler_ pRagRegion_ =
-    RegionAutoscalersGet'
+  RegionAutoscalersGet'
     { _ragProject = pRagProject_
     , _ragAutoscaler = pRagAutoscaler_
     , _ragRegion = pRagRegion_

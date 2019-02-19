@@ -61,12 +61,14 @@ type HealthChecksUpdateResource =
 -- included in the request.
 --
 -- /See:/ 'healthChecksUpdate' smart constructor.
-data HealthChecksUpdate = HealthChecksUpdate'
+data HealthChecksUpdate =
+  HealthChecksUpdate'
     { _hcuRequestId   :: !(Maybe Text)
     , _hcuHealthCheck :: !Text
     , _hcuProject     :: !Text
     , _hcuPayload     :: !HealthCheck
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthChecksUpdate' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ healthChecksUpdate
     -> HealthCheck -- ^ 'hcuPayload'
     -> HealthChecksUpdate
 healthChecksUpdate pHcuHealthCheck_ pHcuProject_ pHcuPayload_ =
-    HealthChecksUpdate'
+  HealthChecksUpdate'
     { _hcuRequestId = Nothing
     , _hcuHealthCheck = pHcuHealthCheck_
     , _hcuProject = pHcuProject_

@@ -58,12 +58,14 @@ type TaskListResource =
 -- | Retrieves a list of tasks.
 --
 -- /See:/ 'taskList'' smart constructor.
-data TaskList' = TaskList''
+data TaskList' =
+  TaskList''
     { _tlPageToken  :: !(Maybe Text)
     , _tlTableId    :: !Text
     , _tlStartIndex :: !(Maybe (Textual Word32))
     , _tlMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TaskList'' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ taskList'
     :: Text -- ^ 'tlTableId'
     -> TaskList'
 taskList' pTlTableId_ =
-    TaskList''
+  TaskList''
     { _tlPageToken = Nothing
     , _tlTableId = pTlTableId_
     , _tlStartIndex = Nothing

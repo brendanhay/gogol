@@ -67,7 +67,8 @@ type ProjectsOccurrencesListResource =
 -- | Lists occurrences for the specified project.
 --
 -- /See:/ 'projectsOccurrencesList' smart constructor.
-data ProjectsOccurrencesList = ProjectsOccurrencesList'
+data ProjectsOccurrencesList =
+  ProjectsOccurrencesList'
     { _polParent         :: !Text
     , _polXgafv          :: !(Maybe Xgafv)
     , _polUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsOccurrencesList = ProjectsOccurrencesList'
     , _polPageToken      :: !(Maybe Text)
     , _polPageSize       :: !(Maybe (Textual Int32))
     , _polCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsOccurrencesList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsOccurrencesList
     :: Text -- ^ 'polParent'
     -> ProjectsOccurrencesList
 projectsOccurrencesList pPolParent_ =
-    ProjectsOccurrencesList'
+  ProjectsOccurrencesList'
     { _polParent = pPolParent_
     , _polXgafv = Nothing
     , _polUploadProtocol = Nothing

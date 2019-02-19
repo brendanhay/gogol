@@ -70,7 +70,8 @@ type CommentsListResource =
 -- | Retrieves the comments for a post, possibly filtered.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList'
+data CommentsList =
+  CommentsList'
     { _clStatus      :: !(Maybe [CommentsListStatus])
     , _clEndDate     :: !(Maybe DateTime')
     , _clBlogId      :: !Text
@@ -80,7 +81,8 @@ data CommentsList = CommentsList'
     , _clPostId      :: !Text
     , _clPageToken   :: !(Maybe Text)
     , _clMaxResults  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ commentsList
     -> Text -- ^ 'clPostId'
     -> CommentsList
 commentsList pClBlogId_ pClPostId_ =
-    CommentsList'
+  CommentsList'
     { _clStatus = Nothing
     , _clEndDate = Nothing
     , _clBlogId = pClBlogId_

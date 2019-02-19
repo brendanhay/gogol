@@ -54,10 +54,12 @@ type DataSetsInsertResource =
 -- | Creates a new empty dataset.
 --
 -- /See:/ 'dataSetsInsert' smart constructor.
-data DataSetsInsert = DataSetsInsert'
+data DataSetsInsert =
+  DataSetsInsert'
     { _dsiPayload   :: !DataSet
     , _dsiProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ dataSetsInsert
     -> Text -- ^ 'dsiProjectId'
     -> DataSetsInsert
 dataSetsInsert pDsiPayload_ pDsiProjectId_ =
-    DataSetsInsert'
-    { _dsiPayload = pDsiPayload_
-    , _dsiProjectId = pDsiProjectId_
-    }
+  DataSetsInsert' {_dsiPayload = pDsiPayload_, _dsiProjectId = pDsiProjectId_}
 
 -- | Multipart request metadata.
 dsiPayload :: Lens' DataSetsInsert DataSet

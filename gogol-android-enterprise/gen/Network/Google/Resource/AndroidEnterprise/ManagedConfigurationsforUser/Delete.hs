@@ -59,11 +59,13 @@ type ManagedConfigurationsforUserDeleteResource =
 -- user.
 --
 -- /See:/ 'managedConfigurationsforUserDelete' smart constructor.
-data ManagedConfigurationsforUserDelete = ManagedConfigurationsforUserDelete'
+data ManagedConfigurationsforUserDelete =
+  ManagedConfigurationsforUserDelete'
     { _mcudEnterpriseId                  :: !Text
     , _mcudUserId                        :: !Text
     , _mcudManagedConfigurationForUserId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsforUserDelete' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ managedConfigurationsforUserDelete
     -> Text -- ^ 'mcudManagedConfigurationForUserId'
     -> ManagedConfigurationsforUserDelete
 managedConfigurationsforUserDelete pMcudEnterpriseId_ pMcudUserId_ pMcudManagedConfigurationForUserId_ =
-    ManagedConfigurationsforUserDelete'
+  ManagedConfigurationsforUserDelete'
     { _mcudEnterpriseId = pMcudEnterpriseId_
     , _mcudUserId = pMcudUserId_
     , _mcudManagedConfigurationForUserId = pMcudManagedConfigurationForUserId_
@@ -105,7 +107,8 @@ mcudManagedConfigurationForUserId
       (\ s a -> s{_mcudManagedConfigurationForUserId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforUserDelete where
+           ManagedConfigurationsforUserDelete
+         where
         type Rs ManagedConfigurationsforUserDelete = ()
         type Scopes ManagedConfigurationsforUserDelete =
              '["https://www.googleapis.com/auth/androidenterprise"]

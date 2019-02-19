@@ -22,11 +22,13 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'taskLinksItem' smart constructor.
-data TaskLinksItem = TaskLinksItem'
+data TaskLinksItem =
+  TaskLinksItem'
     { _tliLink        :: !(Maybe Text)
     , _tliType        :: !(Maybe Text)
     , _tliDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TaskLinksItem' with the minimum fields required to make a request.
 --
@@ -40,11 +42,8 @@ data TaskLinksItem = TaskLinksItem'
 taskLinksItem
     :: TaskLinksItem
 taskLinksItem =
-    TaskLinksItem'
-    { _tliLink = Nothing
-    , _tliType = Nothing
-    , _tliDescription = Nothing
-    }
+  TaskLinksItem'
+    {_tliLink = Nothing, _tliType = Nothing, _tliDescription = Nothing}
 
 -- | The URL.
 tliLink :: Lens' TaskLinksItem (Maybe Text)
@@ -54,7 +53,7 @@ tliLink = lens _tliLink (\ s a -> s{_tliLink = a})
 tliType :: Lens' TaskLinksItem (Maybe Text)
 tliType = lens _tliType (\ s a -> s{_tliType = a})
 
--- | The description. In HTML speak: Everything between and.
+-- | The description. In HTML speak: Everything between and .
 tliDescription :: Lens' TaskLinksItem (Maybe Text)
 tliDescription
   = lens _tliDescription
@@ -77,12 +76,14 @@ instance ToJSON TaskLinksItem where
 
 --
 -- /See:/ 'tasks' smart constructor.
-data Tasks = Tasks'
+data Tasks =
+  Tasks'
     { _tEtag          :: !(Maybe Text)
     , _tNextPageToken :: !(Maybe Text)
     , _tKind          :: !Text
     , _tItems         :: !(Maybe [Task])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Tasks' with the minimum fields required to make a request.
 --
@@ -98,7 +99,7 @@ data Tasks = Tasks'
 tasks
     :: Tasks
 tasks =
-    Tasks'
+  Tasks'
     { _tEtag = Nothing
     , _tNextPageToken = Nothing
     , _tKind = "tasks#tasks"
@@ -144,12 +145,14 @@ instance ToJSON Tasks where
 
 --
 -- /See:/ 'taskLists' smart constructor.
-data TaskLists = TaskLists'
+data TaskLists =
+  TaskLists'
     { _tlEtag          :: !(Maybe Text)
     , _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
     , _tlItems         :: !(Maybe [TaskList])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TaskLists' with the minimum fields required to make a request.
 --
@@ -165,7 +168,7 @@ data TaskLists = TaskLists'
 taskLists
     :: TaskLists
 taskLists =
-    TaskLists'
+  TaskLists'
     { _tlEtag = Nothing
     , _tlNextPageToken = Nothing
     , _tlKind = "tasks#taskLists"
@@ -211,14 +214,16 @@ instance ToJSON TaskLists where
 
 --
 -- /See:/ 'taskList' smart constructor.
-data TaskList = TaskList'
+data TaskList =
+  TaskList'
     { _tasEtag     :: !(Maybe Text)
     , _tasKind     :: !Text
     , _tasSelfLink :: !(Maybe Text)
     , _tasId       :: !(Maybe Text)
     , _tasUpdated  :: !(Maybe DateTime')
     , _tasTitle    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TaskList' with the minimum fields required to make a request.
 --
@@ -238,7 +243,7 @@ data TaskList = TaskList'
 taskList
     :: TaskList
 taskList =
-    TaskList'
+  TaskList'
     { _tasEtag = Nothing
     , _tasKind = "tasks#taskList"
     , _tasSelfLink = Nothing
@@ -298,7 +303,8 @@ instance ToJSON TaskList where
 
 --
 -- /See:/ 'task' smart constructor.
-data Task = Task'
+data Task =
+  Task'
     { _ttParent    :: !(Maybe Text)
     , _ttStatus    :: !(Maybe Text)
     , _ttDue       :: !(Maybe DateTime')
@@ -314,7 +320,8 @@ data Task = Task'
     , _ttLinks     :: !(Maybe [TaskLinksItem])
     , _ttNotes     :: !(Maybe Text)
     , _ttPosition  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Task' with the minimum fields required to make a request.
 --
@@ -352,7 +359,7 @@ data Task = Task'
 task
     :: Task
 task =
-    Task'
+  Task'
     { _ttParent = Nothing
     , _ttStatus = Nothing
     , _ttDue = Nothing

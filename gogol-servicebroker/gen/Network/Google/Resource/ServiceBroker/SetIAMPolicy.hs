@@ -64,7 +64,8 @@ type SetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'setIAMPolicy' smart constructor.
-data SetIAMPolicy = SetIAMPolicy'
+data SetIAMPolicy =
+  SetIAMPolicy'
     { _sipXgafv          :: !(Maybe Xgafv)
     , _sipUploadProtocol :: !(Maybe Text)
     , _sipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data SetIAMPolicy = SetIAMPolicy'
     , _sipPayload        :: !GoogleIAMV1__SetIAMPolicyRequest
     , _sipResource       :: !Text
     , _sipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ setIAMPolicy
     -> Text -- ^ 'sipResource'
     -> SetIAMPolicy
 setIAMPolicy pSipPayload_ pSipResource_ =
-    SetIAMPolicy'
+  SetIAMPolicy'
     { _sipXgafv = Nothing
     , _sipUploadProtocol = Nothing
     , _sipAccessToken = Nothing

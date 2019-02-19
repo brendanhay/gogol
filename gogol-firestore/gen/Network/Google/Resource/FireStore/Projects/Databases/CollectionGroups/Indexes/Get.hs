@@ -61,14 +61,16 @@ type ProjectsDatabasesCollectionGroupsIndexesGetResource
 -- | Gets a composite index.
 --
 -- /See:/ 'projectsDatabasesCollectionGroupsIndexesGet' smart constructor.
-data ProjectsDatabasesCollectionGroupsIndexesGet = ProjectsDatabasesCollectionGroupsIndexesGet'
+data ProjectsDatabasesCollectionGroupsIndexesGet =
+  ProjectsDatabasesCollectionGroupsIndexesGet'
     { _pdcgigXgafv          :: !(Maybe Xgafv)
     , _pdcgigUploadProtocol :: !(Maybe Text)
     , _pdcgigAccessToken    :: !(Maybe Text)
     , _pdcgigUploadType     :: !(Maybe Text)
     , _pdcgigName           :: !Text
     , _pdcgigCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsIndexesGet' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsDatabasesCollectionGroupsIndexesGet
     :: Text -- ^ 'pdcgigName'
     -> ProjectsDatabasesCollectionGroupsIndexesGet
 projectsDatabasesCollectionGroupsIndexesGet pPdcgigName_ =
-    ProjectsDatabasesCollectionGroupsIndexesGet'
+  ProjectsDatabasesCollectionGroupsIndexesGet'
     { _pdcgigXgafv = Nothing
     , _pdcgigUploadProtocol = Nothing
     , _pdcgigAccessToken = Nothing
@@ -134,7 +136,8 @@ pdcgigCallback
       (\ s a -> s{_pdcgigCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesCollectionGroupsIndexesGet where
+           ProjectsDatabasesCollectionGroupsIndexesGet
+         where
         type Rs ProjectsDatabasesCollectionGroupsIndexesGet =
              GoogleFirestoreAdminV1Index
         type Scopes

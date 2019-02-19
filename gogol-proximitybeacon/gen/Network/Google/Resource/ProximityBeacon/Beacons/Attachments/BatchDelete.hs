@@ -81,7 +81,8 @@ type BeaconsAttachmentsBatchDeleteResource =
 -- the Google Developers Console project.
 --
 -- /See:/ 'beaconsAttachmentsBatchDelete' smart constructor.
-data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete'
+data BeaconsAttachmentsBatchDelete =
+  BeaconsAttachmentsBatchDelete'
     { _babdXgafv          :: !(Maybe Xgafv)
     , _babdUploadProtocol :: !(Maybe Text)
     , _babdAccessToken    :: !(Maybe Text)
@@ -90,7 +91,8 @@ data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete'
     , _babdNamespacedType :: !(Maybe Text)
     , _babdProjectId      :: !(Maybe Text)
     , _babdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsBatchDelete' with the minimum fields required to make a request.
 --
@@ -115,7 +117,7 @@ beaconsAttachmentsBatchDelete
     :: Text -- ^ 'babdBeaconName'
     -> BeaconsAttachmentsBatchDelete
 beaconsAttachmentsBatchDelete pBabdBeaconName_ =
-    BeaconsAttachmentsBatchDelete'
+  BeaconsAttachmentsBatchDelete'
     { _babdXgafv = Nothing
     , _babdUploadProtocol = Nothing
     , _babdAccessToken = Nothing

@@ -53,10 +53,12 @@ type AccountsContainersVersionsGetResource =
 -- | Gets a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsGet' smart constructor.
-data AccountsContainersVersionsGet = AccountsContainersVersionsGet'
+data AccountsContainersVersionsGet =
+  AccountsContainersVersionsGet'
     { _acvgPath               :: !Text
     , _acvgContainerVersionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsGet' with the minimum fields required to make a request.
 --
@@ -69,10 +71,8 @@ accountsContainersVersionsGet
     :: Text -- ^ 'acvgPath'
     -> AccountsContainersVersionsGet
 accountsContainersVersionsGet pAcvgPath_ =
-    AccountsContainersVersionsGet'
-    { _acvgPath = pAcvgPath_
-    , _acvgContainerVersionId = Nothing
-    }
+  AccountsContainersVersionsGet'
+    {_acvgPath = pAcvgPath_, _acvgContainerVersionId = Nothing}
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}

@@ -55,11 +55,13 @@ type AccountsContainersWorkspacesVariablesUpdateResource
 -- | Updates a GTM Variable.
 --
 -- /See:/ 'accountsContainersWorkspacesVariablesUpdate' smart constructor.
-data AccountsContainersWorkspacesVariablesUpdate = AccountsContainersWorkspacesVariablesUpdate'
+data AccountsContainersWorkspacesVariablesUpdate =
+  AccountsContainersWorkspacesVariablesUpdate'
     { _acwvuPath        :: !Text
     , _acwvuFingerprint :: !(Maybe Text)
     , _acwvuPayload     :: !Variable
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesVariablesUpdate' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ accountsContainersWorkspacesVariablesUpdate
     -> Variable -- ^ 'acwvuPayload'
     -> AccountsContainersWorkspacesVariablesUpdate
 accountsContainersWorkspacesVariablesUpdate pAcwvuPath_ pAcwvuPayload_ =
-    AccountsContainersWorkspacesVariablesUpdate'
+  AccountsContainersWorkspacesVariablesUpdate'
     { _acwvuPath = pAcwvuPath_
     , _acwvuFingerprint = Nothing
     , _acwvuPayload = pAcwvuPayload_
@@ -100,7 +102,8 @@ acwvuPayload
   = lens _acwvuPayload (\ s a -> s{_acwvuPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesVariablesUpdate where
+           AccountsContainersWorkspacesVariablesUpdate
+         where
         type Rs AccountsContainersWorkspacesVariablesUpdate =
              Variable
         type Scopes

@@ -65,7 +65,8 @@ type ProjectsTriggersDeleteResource =
 -- experimental.
 --
 -- /See:/ 'projectsTriggersDelete' smart constructor.
-data ProjectsTriggersDelete = ProjectsTriggersDelete'
+data ProjectsTriggersDelete =
+  ProjectsTriggersDelete'
     { _ptdXgafv          :: !(Maybe Xgafv)
     , _ptdUploadProtocol :: !(Maybe Text)
     , _ptdTriggerId      :: !Text
@@ -73,7 +74,8 @@ data ProjectsTriggersDelete = ProjectsTriggersDelete'
     , _ptdUploadType     :: !(Maybe Text)
     , _ptdProjectId      :: !Text
     , _ptdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTriggersDelete' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsTriggersDelete
     -> Text -- ^ 'ptdProjectId'
     -> ProjectsTriggersDelete
 projectsTriggersDelete pPtdTriggerId_ pPtdProjectId_ =
-    ProjectsTriggersDelete'
+  ProjectsTriggersDelete'
     { _ptdXgafv = Nothing
     , _ptdUploadProtocol = Nothing
     , _ptdTriggerId = pPtdTriggerId_

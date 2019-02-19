@@ -62,10 +62,12 @@ type ServiceAccountkeysDeleteResource =
 -- Enterprises.SetAccount.
 --
 -- /See:/ 'serviceAccountkeysDelete' smart constructor.
-data ServiceAccountkeysDelete = ServiceAccountkeysDelete'
+data ServiceAccountkeysDelete =
+  ServiceAccountkeysDelete'
     { _sadKeyId        :: !Text
     , _sadEnterpriseId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServiceAccountkeysDelete' with the minimum fields required to make a request.
 --
@@ -79,10 +81,8 @@ serviceAccountkeysDelete
     -> Text -- ^ 'sadEnterpriseId'
     -> ServiceAccountkeysDelete
 serviceAccountkeysDelete pSadKeyId_ pSadEnterpriseId_ =
-    ServiceAccountkeysDelete'
-    { _sadKeyId = pSadKeyId_
-    , _sadEnterpriseId = pSadEnterpriseId_
-    }
+  ServiceAccountkeysDelete'
+    {_sadKeyId = pSadKeyId_, _sadEnterpriseId = pSadEnterpriseId_}
 
 -- | The ID of the key.
 sadKeyId :: Lens' ServiceAccountkeysDelete Text

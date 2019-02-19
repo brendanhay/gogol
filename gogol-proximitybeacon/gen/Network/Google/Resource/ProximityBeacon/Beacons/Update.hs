@@ -81,7 +81,8 @@ type BeaconsUpdateResource =
 -- the Google Developers Console project.
 --
 -- /See:/ 'beaconsUpdate' smart constructor.
-data BeaconsUpdate = BeaconsUpdate'
+data BeaconsUpdate =
+  BeaconsUpdate'
     { _buXgafv          :: !(Maybe Xgafv)
     , _buUploadProtocol :: !(Maybe Text)
     , _buAccessToken    :: !(Maybe Text)
@@ -90,7 +91,8 @@ data BeaconsUpdate = BeaconsUpdate'
     , _buPayload        :: !Beacon
     , _buProjectId      :: !(Maybe Text)
     , _buCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeaconsUpdate' with the minimum fields required to make a request.
 --
@@ -116,7 +118,7 @@ beaconsUpdate
     -> Beacon -- ^ 'buPayload'
     -> BeaconsUpdate
 beaconsUpdate pBuBeaconName_ pBuPayload_ =
-    BeaconsUpdate'
+  BeaconsUpdate'
     { _buXgafv = Nothing
     , _buUploadProtocol = Nothing
     , _buAccessToken = Nothing

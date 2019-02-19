@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesDelete' request conforms to.
 type PlacementStrategiesDeleteResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -54,10 +54,12 @@ type PlacementStrategiesDeleteResource =
 -- | Deletes an existing placement strategy.
 --
 -- /See:/ 'placementStrategiesDelete' smart constructor.
-data PlacementStrategiesDelete = PlacementStrategiesDelete'
+data PlacementStrategiesDelete =
+  PlacementStrategiesDelete'
     { _psdProFileId :: !(Textual Int64)
     , _psdId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlacementStrategiesDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ placementStrategiesDelete
     -> Int64 -- ^ 'psdId'
     -> PlacementStrategiesDelete
 placementStrategiesDelete pPsdProFileId_ pPsdId_ =
-    PlacementStrategiesDelete'
-    { _psdProFileId = _Coerce # pPsdProFileId_
-    , _psdId = _Coerce # pPsdId_
-    }
+  PlacementStrategiesDelete'
+    {_psdProFileId = _Coerce # pPsdProFileId_, _psdId = _Coerce # pPsdId_}
 
 -- | User profile ID associated with this request.
 psdProFileId :: Lens' PlacementStrategiesDelete Int64

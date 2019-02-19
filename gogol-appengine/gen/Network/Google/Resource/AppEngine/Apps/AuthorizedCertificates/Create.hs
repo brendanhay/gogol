@@ -64,7 +64,8 @@ type AppsAuthorizedCertificatesCreateResource =
 -- | Uploads the specified SSL certificate.
 --
 -- /See:/ 'appsAuthorizedCertificatesCreate' smart constructor.
-data AppsAuthorizedCertificatesCreate = AppsAuthorizedCertificatesCreate'
+data AppsAuthorizedCertificatesCreate =
+  AppsAuthorizedCertificatesCreate'
     { _aaccXgafv          :: !(Maybe Xgafv)
     , _aaccUploadProtocol :: !(Maybe Text)
     , _aaccAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data AppsAuthorizedCertificatesCreate = AppsAuthorizedCertificatesCreate'
     , _aaccPayload        :: !AuthorizedCertificate
     , _aaccAppsId         :: !Text
     , _aaccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsAuthorizedCertificatesCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ appsAuthorizedCertificatesCreate
     -> Text -- ^ 'aaccAppsId'
     -> AppsAuthorizedCertificatesCreate
 appsAuthorizedCertificatesCreate pAaccPayload_ pAaccAppsId_ =
-    AppsAuthorizedCertificatesCreate'
+  AppsAuthorizedCertificatesCreate'
     { _aaccXgafv = Nothing
     , _aaccUploadProtocol = Nothing
     , _aaccAccessToken = Nothing
@@ -146,7 +148,8 @@ aaccCallback
   = lens _aaccCallback (\ s a -> s{_aaccCallback = a})
 
 instance GoogleRequest
-         AppsAuthorizedCertificatesCreate where
+           AppsAuthorizedCertificatesCreate
+         where
         type Rs AppsAuthorizedCertificatesCreate =
              AuthorizedCertificate
         type Scopes AppsAuthorizedCertificatesCreate =

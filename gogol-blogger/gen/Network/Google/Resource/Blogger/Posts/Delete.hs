@@ -54,10 +54,12 @@ type PostsDeleteResource =
 -- | Delete a post by ID.
 --
 -- /See:/ 'postsDelete' smart constructor.
-data PostsDelete = PostsDelete'
+data PostsDelete =
+  PostsDelete'
     { _pdBlogId :: !Text
     , _pdPostId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ postsDelete
     -> Text -- ^ 'pdPostId'
     -> PostsDelete
 postsDelete pPdBlogId_ pPdPostId_ =
-    PostsDelete'
-    { _pdBlogId = pPdBlogId_
-    , _pdPostId = pPdPostId_
-    }
+  PostsDelete' {_pdBlogId = pPdBlogId_, _pdPostId = pPdPostId_}
 
 -- | The ID of the Blog.
 pdBlogId :: Lens' PostsDelete Text

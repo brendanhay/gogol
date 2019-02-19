@@ -54,10 +54,12 @@ type AccountsContainersWorkspacesListResource =
 -- | Lists all Workspaces that belong to a GTM Container.
 --
 -- /See:/ 'accountsContainersWorkspacesList' smart constructor.
-data AccountsContainersWorkspacesList = AccountsContainersWorkspacesList'
+data AccountsContainersWorkspacesList =
+  AccountsContainersWorkspacesList'
     { _acwlParent    :: !Text
     , _acwlPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesList' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ accountsContainersWorkspacesList
     :: Text -- ^ 'acwlParent'
     -> AccountsContainersWorkspacesList
 accountsContainersWorkspacesList pAcwlParent_ =
-    AccountsContainersWorkspacesList'
-    { _acwlParent = pAcwlParent_
-    , _acwlPageToken = Nothing
-    }
+  AccountsContainersWorkspacesList'
+    {_acwlParent = pAcwlParent_, _acwlPageToken = Nothing}
 
 -- | GTM parent Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}
@@ -88,7 +88,8 @@ acwlPageToken
       (\ s a -> s{_acwlPageToken = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesList where
+           AccountsContainersWorkspacesList
+         where
         type Rs AccountsContainersWorkspacesList =
              ListWorkspacesResponse
         type Scopes AccountsContainersWorkspacesList =

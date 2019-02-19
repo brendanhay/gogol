@@ -61,13 +61,15 @@ type UsersDraftsListResource =
 -- | Lists the drafts in the user\'s mailbox.
 --
 -- /See:/ 'usersDraftsList' smart constructor.
-data UsersDraftsList = UsersDraftsList'
+data UsersDraftsList =
+  UsersDraftsList'
     { _udlQ                :: !(Maybe Text)
     , _udlUserId           :: !Text
     , _udlIncludeSpamTrash :: !Bool
     , _udlPageToken        :: !(Maybe Text)
     , _udlMaxResults       :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDraftsList' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ data UsersDraftsList = UsersDraftsList'
 usersDraftsList
     :: UsersDraftsList
 usersDraftsList =
-    UsersDraftsList'
+  UsersDraftsList'
     { _udlQ = Nothing
     , _udlUserId = "me"
     , _udlIncludeSpamTrash = False

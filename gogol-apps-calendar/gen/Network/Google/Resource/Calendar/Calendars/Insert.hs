@@ -51,9 +51,11 @@ type CalendarsInsertResource =
 -- | Creates a secondary calendar.
 --
 -- /See:/ 'calendarsInsert' smart constructor.
-newtype CalendarsInsert = CalendarsInsert'
+newtype CalendarsInsert =
+  CalendarsInsert'
     { _ciPayload :: Calendar
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CalendarsInsert' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype CalendarsInsert = CalendarsInsert'
 calendarsInsert
     :: Calendar -- ^ 'ciPayload'
     -> CalendarsInsert
-calendarsInsert pCiPayload_ =
-    CalendarsInsert'
-    { _ciPayload = pCiPayload_
-    }
+calendarsInsert pCiPayload_ = CalendarsInsert' {_ciPayload = pCiPayload_}
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CalendarsInsert Calendar

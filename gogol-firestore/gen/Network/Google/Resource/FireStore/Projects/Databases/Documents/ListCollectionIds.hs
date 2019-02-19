@@ -63,7 +63,8 @@ type ProjectsDatabasesDocumentsListCollectionIdsResource
 -- | Lists all the collection IDs underneath a document.
 --
 -- /See:/ 'projectsDatabasesDocumentsListCollectionIds' smart constructor.
-data ProjectsDatabasesDocumentsListCollectionIds = ProjectsDatabasesDocumentsListCollectionIds'
+data ProjectsDatabasesDocumentsListCollectionIds =
+  ProjectsDatabasesDocumentsListCollectionIds'
     { _pddlciParent         :: !Text
     , _pddlciXgafv          :: !(Maybe Xgafv)
     , _pddlciUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsDatabasesDocumentsListCollectionIds = ProjectsDatabasesDocumentsLis
     , _pddlciUploadType     :: !(Maybe Text)
     , _pddlciPayload        :: !ListCollectionIdsRequest
     , _pddlciCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsListCollectionIds' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsDatabasesDocumentsListCollectionIds
     -> ListCollectionIdsRequest -- ^ 'pddlciPayload'
     -> ProjectsDatabasesDocumentsListCollectionIds
 projectsDatabasesDocumentsListCollectionIds pPddlciParent_ pPddlciPayload_ =
-    ProjectsDatabasesDocumentsListCollectionIds'
+  ProjectsDatabasesDocumentsListCollectionIds'
     { _pddlciParent = pPddlciParent_
     , _pddlciXgafv = Nothing
     , _pddlciUploadProtocol = Nothing
@@ -149,7 +151,8 @@ pddlciCallback
       (\ s a -> s{_pddlciCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsListCollectionIds where
+           ProjectsDatabasesDocumentsListCollectionIds
+         where
         type Rs ProjectsDatabasesDocumentsListCollectionIds =
              ListCollectionIdsResponse
         type Scopes

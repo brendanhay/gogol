@@ -62,14 +62,16 @@ type SettingsSearchApplicationsCreateResource =
 -- | Creates a search application.
 --
 -- /See:/ 'settingsSearchApplicationsCreate' smart constructor.
-data SettingsSearchApplicationsCreate = SettingsSearchApplicationsCreate'
+data SettingsSearchApplicationsCreate =
+  SettingsSearchApplicationsCreate'
     { _ssacXgafv          :: !(Maybe Xgafv)
     , _ssacUploadProtocol :: !(Maybe Text)
     , _ssacAccessToken    :: !(Maybe Text)
     , _ssacUploadType     :: !(Maybe Text)
     , _ssacPayload        :: !SearchApplication
     , _ssacCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SettingsSearchApplicationsCreate' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ settingsSearchApplicationsCreate
     :: SearchApplication -- ^ 'ssacPayload'
     -> SettingsSearchApplicationsCreate
 settingsSearchApplicationsCreate pSsacPayload_ =
-    SettingsSearchApplicationsCreate'
+  SettingsSearchApplicationsCreate'
     { _ssacXgafv = Nothing
     , _ssacUploadProtocol = Nothing
     , _ssacAccessToken = Nothing
@@ -133,7 +135,8 @@ ssacCallback
   = lens _ssacCallback (\ s a -> s{_ssacCallback = a})
 
 instance GoogleRequest
-         SettingsSearchApplicationsCreate where
+           SettingsSearchApplicationsCreate
+         where
         type Rs SettingsSearchApplicationsCreate = Operation
         type Scopes SettingsSearchApplicationsCreate =
              '["https://www.googleapis.com/auth/cloud_search",

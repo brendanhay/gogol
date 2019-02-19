@@ -60,11 +60,13 @@ type DataSetsUpdateResource =
 -- fields that are provided in the submitted dataset resource.
 --
 -- /See:/ 'dataSetsUpdate' smart constructor.
-data DataSetsUpdate = DataSetsUpdate'
+data DataSetsUpdate =
+  DataSetsUpdate'
     { _dsuPayload   :: !DataSet
     , _dsuDataSetId :: !Text
     , _dsuProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetsUpdate' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ dataSetsUpdate
     -> Text -- ^ 'dsuProjectId'
     -> DataSetsUpdate
 dataSetsUpdate pDsuPayload_ pDsuDataSetId_ pDsuProjectId_ =
-    DataSetsUpdate'
+  DataSetsUpdate'
     { _dsuPayload = pDsuPayload_
     , _dsuDataSetId = pDsuDataSetId_
     , _dsuProjectId = pDsuProjectId_

@@ -55,10 +55,12 @@ type UsersGetAvailableProductSetResource =
 -- | Retrieves the set of products a user is entitled to access.
 --
 -- /See:/ 'usersGetAvailableProductSet' smart constructor.
-data UsersGetAvailableProductSet = UsersGetAvailableProductSet'
+data UsersGetAvailableProductSet =
+  UsersGetAvailableProductSet'
     { _ugapsEnterpriseId :: !Text
     , _ugapsUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersGetAvailableProductSet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ usersGetAvailableProductSet
     -> Text -- ^ 'ugapsUserId'
     -> UsersGetAvailableProductSet
 usersGetAvailableProductSet pUgapsEnterpriseId_ pUgapsUserId_ =
-    UsersGetAvailableProductSet'
-    { _ugapsEnterpriseId = pUgapsEnterpriseId_
-    , _ugapsUserId = pUgapsUserId_
-    }
+  UsersGetAvailableProductSet'
+    {_ugapsEnterpriseId = pUgapsEnterpriseId_, _ugapsUserId = pUgapsUserId_}
 
 -- | The ID of the enterprise.
 ugapsEnterpriseId :: Lens' UsersGetAvailableProductSet Text

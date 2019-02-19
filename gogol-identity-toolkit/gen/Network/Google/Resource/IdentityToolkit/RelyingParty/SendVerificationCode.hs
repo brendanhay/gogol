@@ -56,9 +56,11 @@ type RelyingPartySendVerificationCodeResource =
 -- | Send SMS verification code.
 --
 -- /See:/ 'relyingPartySendVerificationCode' smart constructor.
-newtype RelyingPartySendVerificationCode = RelyingPartySendVerificationCode'
+newtype RelyingPartySendVerificationCode =
+  RelyingPartySendVerificationCode'
     { _rpsvcPayload :: IdentitytoolkitRelyingPartySendVerificationCodeRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartySendVerificationCode' with the minimum fields required to make a request.
 --
@@ -69,9 +71,7 @@ relyingPartySendVerificationCode
     :: IdentitytoolkitRelyingPartySendVerificationCodeRequest -- ^ 'rpsvcPayload'
     -> RelyingPartySendVerificationCode
 relyingPartySendVerificationCode pRpsvcPayload_ =
-    RelyingPartySendVerificationCode'
-    { _rpsvcPayload = pRpsvcPayload_
-    }
+  RelyingPartySendVerificationCode' {_rpsvcPayload = pRpsvcPayload_}
 
 -- | Multipart request metadata.
 rpsvcPayload :: Lens' RelyingPartySendVerificationCode IdentitytoolkitRelyingPartySendVerificationCodeRequest
@@ -79,7 +79,8 @@ rpsvcPayload
   = lens _rpsvcPayload (\ s a -> s{_rpsvcPayload = a})
 
 instance GoogleRequest
-         RelyingPartySendVerificationCode where
+           RelyingPartySendVerificationCode
+         where
         type Rs RelyingPartySendVerificationCode =
              IdentitytoolkitRelyingPartySendVerificationCodeResponse
         type Scopes RelyingPartySendVerificationCode =

@@ -66,7 +66,8 @@ type ProjectsLocationsRegistriesDevicesStatesListResource
 -- (i.e.: newest first).
 --
 -- /See:/ 'projectsLocationsRegistriesDevicesStatesList' smart constructor.
-data ProjectsLocationsRegistriesDevicesStatesList = ProjectsLocationsRegistriesDevicesStatesList'
+data ProjectsLocationsRegistriesDevicesStatesList =
+  ProjectsLocationsRegistriesDevicesStatesList'
     { _plrdslXgafv          :: !(Maybe Xgafv)
     , _plrdslUploadProtocol :: !(Maybe Text)
     , _plrdslAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsRegistriesDevicesStatesList = ProjectsLocationsRegistriesD
     , _plrdslName           :: !Text
     , _plrdslNumStates      :: !(Maybe (Textual Int32))
     , _plrdslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesStatesList' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsLocationsRegistriesDevicesStatesList
     :: Text -- ^ 'plrdslName'
     -> ProjectsLocationsRegistriesDevicesStatesList
 projectsLocationsRegistriesDevicesStatesList pPlrdslName_ =
-    ProjectsLocationsRegistriesDevicesStatesList'
+  ProjectsLocationsRegistriesDevicesStatesList'
     { _plrdslXgafv = Nothing
     , _plrdslUploadProtocol = Nothing
     , _plrdslAccessToken = Nothing
@@ -154,7 +156,8 @@ plrdslCallback
       (\ s a -> s{_plrdslCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesDevicesStatesList where
+           ProjectsLocationsRegistriesDevicesStatesList
+         where
         type Rs ProjectsLocationsRegistriesDevicesStatesList
              = ListDeviceStatesResponse
         type Scopes

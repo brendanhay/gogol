@@ -64,7 +64,8 @@ type ProjectsRegionsClustersSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsRegionsClustersSetIAMPolicy' smart constructor.
-data ProjectsRegionsClustersSetIAMPolicy = ProjectsRegionsClustersSetIAMPolicy'
+data ProjectsRegionsClustersSetIAMPolicy =
+  ProjectsRegionsClustersSetIAMPolicy'
     { _prcsipXgafv          :: !(Maybe Xgafv)
     , _prcsipUploadProtocol :: !(Maybe Text)
     , _prcsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsRegionsClustersSetIAMPolicy = ProjectsRegionsClustersSetIAMPolicy'
     , _prcsipPayload        :: !SetIAMPolicyRequest
     , _prcsipResource       :: !Text
     , _prcsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsClustersSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsRegionsClustersSetIAMPolicy
     -> Text -- ^ 'prcsipResource'
     -> ProjectsRegionsClustersSetIAMPolicy
 projectsRegionsClustersSetIAMPolicy pPrcsipPayload_ pPrcsipResource_ =
-    ProjectsRegionsClustersSetIAMPolicy'
+  ProjectsRegionsClustersSetIAMPolicy'
     { _prcsipXgafv = Nothing
     , _prcsipUploadProtocol = Nothing
     , _prcsipAccessToken = Nothing
@@ -149,7 +151,8 @@ prcsipCallback
       (\ s a -> s{_prcsipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsClustersSetIAMPolicy where
+           ProjectsRegionsClustersSetIAMPolicy
+         where
         type Rs ProjectsRegionsClustersSetIAMPolicy = Policy
         type Scopes ProjectsRegionsClustersSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

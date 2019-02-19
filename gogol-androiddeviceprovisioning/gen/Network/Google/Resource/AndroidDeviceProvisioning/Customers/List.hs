@@ -63,7 +63,8 @@ type CustomersListResource =
 -- | Lists the user\'s customer accounts.
 --
 -- /See:/ 'customersList' smart constructor.
-data CustomersList = CustomersList'
+data CustomersList =
+  CustomersList'
     { _clXgafv          :: !(Maybe Xgafv)
     , _clUploadProtocol :: !(Maybe Text)
     , _clAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data CustomersList = CustomersList'
     , _clPageToken      :: !(Maybe Text)
     , _clPageSize       :: !(Maybe (Textual Int32))
     , _clCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersList' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ data CustomersList = CustomersList'
 customersList
     :: CustomersList
 customersList =
-    CustomersList'
+  CustomersList'
     { _clXgafv = Nothing
     , _clUploadProtocol = Nothing
     , _clAccessToken = Nothing

@@ -23,9 +23,11 @@ import           Network.Google.Redis.Types.Sum
 -- | Resource labels to represent user provided metadata
 --
 -- /See:/ 'instanceLabels' smart constructor.
-newtype InstanceLabels = InstanceLabels'
+newtype InstanceLabels =
+  InstanceLabels'
     { _ilAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceLabels' with the minimum fields required to make a request.
 --
@@ -36,9 +38,7 @@ instanceLabels
     :: HashMap Text Text -- ^ 'ilAddtional'
     -> InstanceLabels
 instanceLabels pIlAddtional_ =
-    InstanceLabels'
-    { _ilAddtional = _Coerce # pIlAddtional_
-    }
+  InstanceLabels' {_ilAddtional = _Coerce # pIlAddtional_}
 
 ilAddtional :: Lens' InstanceLabels (HashMap Text Text)
 ilAddtional
@@ -90,11 +90,13 @@ instance ToJSON InstanceLabels where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -107,12 +109,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -153,10 +150,12 @@ instance ToJSON Status where
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
-data ListLocationsResponse = ListLocationsResponse'
+data ListLocationsResponse =
+  ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -168,10 +167,7 @@ data ListLocationsResponse = ListLocationsResponse'
 listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
-    ListLocationsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLocations = Nothing
-    }
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -204,10 +200,12 @@ instance ToJSON ListLocationsResponse where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -219,10 +217,8 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -256,13 +252,15 @@ instance ToJSON ListOperationsResponse where
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lName        :: !(Maybe Text)
     , _lMetadata    :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
     , _lLabels      :: !(Maybe LocationLabels)
     , _lLocationId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -280,7 +278,7 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lName = Nothing
     , _lMetadata = Nothing
     , _lDisplayName = Nothing
@@ -342,8 +340,8 @@ instance ToJSON Location where
 --
 -- /See:/ 'googleCloudRedisV1ZoneMetadata' smart constructor.
 data GoogleCloudRedisV1ZoneMetadata =
-    GoogleCloudRedisV1ZoneMetadata'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleCloudRedisV1ZoneMetadata'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleCloudRedisV1ZoneMetadata' with the minimum fields required to make a request.
 --
@@ -364,13 +362,15 @@ instance ToJSON GoogleCloudRedisV1ZoneMetadata where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -388,7 +388,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -464,8 +464,8 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -481,9 +481,11 @@ instance ToJSON Empty where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -494,9 +496,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -518,9 +518,11 @@ instance ToJSON StatusDetailsItem where
 -- \`google.cloud.location.Location.metadata\` field.
 --
 -- /See:/ 'googleCloudRedisV1LocationMetadata' smart constructor.
-newtype GoogleCloudRedisV1LocationMetadata = GoogleCloudRedisV1LocationMetadata'
+newtype GoogleCloudRedisV1LocationMetadata =
+  GoogleCloudRedisV1LocationMetadata'
     { _gcrvlmAvailableZones :: Maybe GoogleCloudRedisV1LocationMetadataAvailableZones
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleCloudRedisV1LocationMetadata' with the minimum fields required to make a request.
 --
@@ -530,9 +532,7 @@ newtype GoogleCloudRedisV1LocationMetadata = GoogleCloudRedisV1LocationMetadata'
 googleCloudRedisV1LocationMetadata
     :: GoogleCloudRedisV1LocationMetadata
 googleCloudRedisV1LocationMetadata =
-    GoogleCloudRedisV1LocationMetadata'
-    { _gcrvlmAvailableZones = Nothing
-    }
+  GoogleCloudRedisV1LocationMetadata' {_gcrvlmAvailableZones = Nothing}
 
 -- | Output only. The set of available zones in the location. The map is
 -- keyed by the lowercase ID of each zone, as defined by GCE. These keys
@@ -561,7 +561,8 @@ instance ToJSON GoogleCloudRedisV1LocationMetadata
 -- | Represents the v1 metadata of the long-running operation.
 --
 -- /See:/ 'googleCloudRedisV1OperationMetadata' smart constructor.
-data GoogleCloudRedisV1OperationMetadata = GoogleCloudRedisV1OperationMetadata'
+data GoogleCloudRedisV1OperationMetadata =
+  GoogleCloudRedisV1OperationMetadata'
     { _gcrvomAPIVersion      :: !(Maybe Text)
     , _gcrvomEndTime         :: !(Maybe DateTime')
     , _gcrvomStatusDetail    :: !(Maybe Text)
@@ -569,7 +570,8 @@ data GoogleCloudRedisV1OperationMetadata = GoogleCloudRedisV1OperationMetadata'
     , _gcrvomCancelRequested :: !(Maybe Bool)
     , _gcrvomTarget          :: !(Maybe Text)
     , _gcrvomCreateTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleCloudRedisV1OperationMetadata' with the minimum fields required to make a request.
 --
@@ -591,7 +593,7 @@ data GoogleCloudRedisV1OperationMetadata = GoogleCloudRedisV1OperationMetadata'
 googleCloudRedisV1OperationMetadata
     :: GoogleCloudRedisV1OperationMetadata
 googleCloudRedisV1OperationMetadata =
-    GoogleCloudRedisV1OperationMetadata'
+  GoogleCloudRedisV1OperationMetadata'
     { _gcrvomAPIVersion = Nothing
     , _gcrvomEndTime = Nothing
     , _gcrvomStatusDetail = Nothing
@@ -674,9 +676,11 @@ instance ToJSON GoogleCloudRedisV1OperationMetadata
 -- parameters are: * maxmemory-policy * notify-keyspace-events
 --
 -- /See:/ 'instanceRedisConfigs' smart constructor.
-newtype InstanceRedisConfigs = InstanceRedisConfigs'
+newtype InstanceRedisConfigs =
+  InstanceRedisConfigs'
     { _ircAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceRedisConfigs' with the minimum fields required to make a request.
 --
@@ -687,9 +691,7 @@ instanceRedisConfigs
     :: HashMap Text Text -- ^ 'ircAddtional'
     -> InstanceRedisConfigs
 instanceRedisConfigs pIrcAddtional_ =
-    InstanceRedisConfigs'
-    { _ircAddtional = _Coerce # pIrcAddtional_
-    }
+  InstanceRedisConfigs' {_ircAddtional = _Coerce # pIrcAddtional_}
 
 ircAddtional :: Lens' InstanceRedisConfigs (HashMap Text Text)
 ircAddtional
@@ -711,9 +713,11 @@ instance ToJSON InstanceRedisConfigs where
 -- fields when creating a Redis instance.
 --
 -- /See:/ 'googleCloudRedisV1LocationMetadataAvailableZones' smart constructor.
-newtype GoogleCloudRedisV1LocationMetadataAvailableZones = GoogleCloudRedisV1LocationMetadataAvailableZones'
+newtype GoogleCloudRedisV1LocationMetadataAvailableZones =
+  GoogleCloudRedisV1LocationMetadataAvailableZones'
     { _gcrvlmazAddtional :: HashMap Text GoogleCloudRedisV1ZoneMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleCloudRedisV1LocationMetadataAvailableZones' with the minimum fields required to make a request.
 --
@@ -724,9 +728,8 @@ googleCloudRedisV1LocationMetadataAvailableZones
     :: HashMap Text GoogleCloudRedisV1ZoneMetadata -- ^ 'gcrvlmazAddtional'
     -> GoogleCloudRedisV1LocationMetadataAvailableZones
 googleCloudRedisV1LocationMetadataAvailableZones pGcrvlmazAddtional_ =
-    GoogleCloudRedisV1LocationMetadataAvailableZones'
-    { _gcrvlmazAddtional = _Coerce # pGcrvlmazAddtional_
-    }
+  GoogleCloudRedisV1LocationMetadataAvailableZones'
+    {_gcrvlmazAddtional = _Coerce # pGcrvlmazAddtional_}
 
 gcrvlmazAddtional :: Lens' GoogleCloudRedisV1LocationMetadataAvailableZones (HashMap Text GoogleCloudRedisV1ZoneMetadata)
 gcrvlmazAddtional
@@ -735,7 +738,7 @@ gcrvlmazAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudRedisV1LocationMetadataAvailableZones
+           GoogleCloudRedisV1LocationMetadataAvailableZones
          where
         parseJSON
           = withObject
@@ -745,7 +748,7 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudRedisV1LocationMetadataAvailableZones
+           GoogleCloudRedisV1LocationMetadataAvailableZones
          where
         toJSON = toJSON . _gcrvlmazAddtional
 
@@ -753,9 +756,11 @@ instance ToJSON
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
 -- /See:/ 'locationLabels' smart constructor.
-newtype LocationLabels = LocationLabels'
+newtype LocationLabels =
+  LocationLabels'
     { _llAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
@@ -766,9 +771,7 @@ locationLabels
     :: HashMap Text Text -- ^ 'llAddtional'
     -> LocationLabels
 locationLabels pLlAddtional_ =
-    LocationLabels'
-    { _llAddtional = _Coerce # pLlAddtional_
-    }
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -789,9 +792,11 @@ instance ToJSON LocationLabels where
 -- \`alternative_location_id\` fields when creating a Redis instance.
 --
 -- /See:/ 'locationMetadata' smart constructor.
-newtype LocationMetadata = LocationMetadata'
+newtype LocationMetadata =
+  LocationMetadata'
     { _lmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
@@ -802,9 +807,7 @@ locationMetadata
     :: HashMap Text JSONValue -- ^ 'lmAddtional'
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
-    LocationMetadata'
-    { _lmAddtional = _Coerce # pLmAddtional_
-    }
+  LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -831,9 +834,11 @@ instance ToJSON LocationMetadata where
 -- \`apiVersion\`: API version used to start the operation. }
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -844,9 +849,7 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -865,11 +868,13 @@ instance ToJSON OperationMetadata where
 -- | Response for ListInstances.
 --
 -- /See:/ 'listInstancesResponse' smart constructor.
-data ListInstancesResponse = ListInstancesResponse'
+data ListInstancesResponse =
+  ListInstancesResponse'
     { _lirNextPageToken :: !(Maybe Text)
     , _lirUnreachable   :: !(Maybe [Text])
     , _lirInstances     :: !(Maybe [Instance])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
@@ -883,7 +888,7 @@ data ListInstancesResponse = ListInstancesResponse'
 listInstancesResponse
     :: ListInstancesResponse
 listInstancesResponse =
-    ListInstancesResponse'
+  ListInstancesResponse'
     { _lirNextPageToken = Nothing
     , _lirUnreachable = Nothing
     , _lirInstances = Nothing
@@ -946,9 +951,11 @@ instance ToJSON ListInstancesResponse where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -959,9 +966,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -980,7 +985,8 @@ instance ToJSON OperationResponse where
 -- | A Google Cloud Redis instance.
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance'
+data Instance =
+  Instance'
     { _iState                 :: !(Maybe InstanceState)
     , _iAuthorizedNetwork     :: !(Maybe Text)
     , _iMemorySizeGb          :: !(Maybe (Textual Int32))
@@ -998,7 +1004,8 @@ data Instance = Instance'
     , _iCreateTime            :: !(Maybe DateTime')
     , _iPort                  :: !(Maybe (Textual Int32))
     , _iCurrentLocationId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -1040,7 +1047,7 @@ data Instance = Instance'
 instance'
     :: Instance
 instance' =
-    Instance'
+  Instance'
     { _iState = Nothing
     , _iAuthorizedNetwork = Nothing
     , _iMemorySizeGb = Nothing

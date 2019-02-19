@@ -73,7 +73,8 @@ type SpreadsheetsValuesBatchClearByDataFilterResource
 -- validation, etc..) are kept.
 --
 -- /See:/ 'spreadsheetsValuesBatchClearByDataFilter' smart constructor.
-data SpreadsheetsValuesBatchClearByDataFilter = SpreadsheetsValuesBatchClearByDataFilter'
+data SpreadsheetsValuesBatchClearByDataFilter =
+  SpreadsheetsValuesBatchClearByDataFilter'
     { _svbcbdfXgafv          :: !(Maybe Xgafv)
     , _svbcbdfUploadProtocol :: !(Maybe Text)
     , _svbcbdfAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data SpreadsheetsValuesBatchClearByDataFilter = SpreadsheetsValuesBatchClearByDa
     , _svbcbdfUploadType     :: !(Maybe Text)
     , _svbcbdfPayload        :: !BatchClearValuesByDataFilterRequest
     , _svbcbdfCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsValuesBatchClearByDataFilter' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ spreadsheetsValuesBatchClearByDataFilter
     -> BatchClearValuesByDataFilterRequest -- ^ 'svbcbdfPayload'
     -> SpreadsheetsValuesBatchClearByDataFilter
 spreadsheetsValuesBatchClearByDataFilter pSvbcbdfSpreadsheetId_ pSvbcbdfPayload_ =
-    SpreadsheetsValuesBatchClearByDataFilter'
+  SpreadsheetsValuesBatchClearByDataFilter'
     { _svbcbdfXgafv = Nothing
     , _svbcbdfUploadProtocol = Nothing
     , _svbcbdfAccessToken = Nothing
@@ -157,7 +159,8 @@ svbcbdfCallback
       (\ s a -> s{_svbcbdfCallback = a})
 
 instance GoogleRequest
-         SpreadsheetsValuesBatchClearByDataFilter where
+           SpreadsheetsValuesBatchClearByDataFilter
+         where
         type Rs SpreadsheetsValuesBatchClearByDataFilter =
              BatchClearValuesByDataFilterResponse
         type Scopes SpreadsheetsValuesBatchClearByDataFilter

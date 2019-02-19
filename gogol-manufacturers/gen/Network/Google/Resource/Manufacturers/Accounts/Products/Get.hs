@@ -72,7 +72,8 @@ type AccountsProductsGetResource =
 -- take days to appear.
 --
 -- /See:/ 'accountsProductsGet' smart constructor.
-data AccountsProductsGet = AccountsProductsGet'
+data AccountsProductsGet =
+  AccountsProductsGet'
     { _apgParent         :: !Text
     , _apgInclude        :: !(Maybe [Text])
     , _apgXgafv          :: !(Maybe Xgafv)
@@ -81,7 +82,8 @@ data AccountsProductsGet = AccountsProductsGet'
     , _apgUploadType     :: !(Maybe Text)
     , _apgName           :: !Text
     , _apgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsProductsGet' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ accountsProductsGet
     -> Text -- ^ 'apgName'
     -> AccountsProductsGet
 accountsProductsGet pApgParent_ pApgName_ =
-    AccountsProductsGet'
+  AccountsProductsGet'
     { _apgParent = pApgParent_
     , _apgInclude = Nothing
     , _apgXgafv = Nothing

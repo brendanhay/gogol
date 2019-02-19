@@ -73,7 +73,8 @@ type ProjectsRegionsJobsCancelResource =
 -- regions\/{region}\/jobs.get.
 --
 -- /See:/ 'projectsRegionsJobsCancel' smart constructor.
-data ProjectsRegionsJobsCancel = ProjectsRegionsJobsCancel'
+data ProjectsRegionsJobsCancel =
+  ProjectsRegionsJobsCancel'
     { _prjcXgafv          :: !(Maybe Xgafv)
     , _prjcJobId          :: !Text
     , _prjcUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,8 @@ data ProjectsRegionsJobsCancel = ProjectsRegionsJobsCancel'
     , _prjcRegion         :: !Text
     , _prjcProjectId      :: !Text
     , _prjcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsJobsCancel' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ projectsRegionsJobsCancel
     -> Text -- ^ 'prjcProjectId'
     -> ProjectsRegionsJobsCancel
 projectsRegionsJobsCancel pPrjcJobId_ pPrjcPayload_ pPrjcRegion_ pPrjcProjectId_ =
-    ProjectsRegionsJobsCancel'
+  ProjectsRegionsJobsCancel'
     { _prjcXgafv = Nothing
     , _prjcJobId = pPrjcJobId_
     , _prjcUploadProtocol = Nothing

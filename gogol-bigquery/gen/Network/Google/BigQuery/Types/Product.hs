@@ -22,11 +22,13 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'jobReference' smart constructor.
-data JobReference = JobReference'
+data JobReference =
+  JobReference'
     { _jrJobId     :: !(Maybe Text)
     , _jrLocation  :: !(Maybe Text)
     , _jrProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobReference' with the minimum fields required to make a request.
 --
@@ -40,11 +42,8 @@ data JobReference = JobReference'
 jobReference
     :: JobReference
 jobReference =
-    JobReference'
-    { _jrJobId = Nothing
-    , _jrLocation = Nothing
-    , _jrProjectId = Nothing
-    }
+  JobReference'
+    {_jrJobId = Nothing, _jrLocation = Nothing, _jrProjectId = Nothing}
 
 -- | [Required] The ID of the job. The ID must contain only letters (a-z,
 -- A-Z), numbers (0-9), underscores (_), or dashes (-). The maximum length
@@ -81,13 +80,15 @@ instance ToJSON JobReference where
 
 --
 -- /See:/ 'tableList' smart constructor.
-data TableList = TableList'
+data TableList =
+  TableList'
     { _tlTotalItems    :: !(Maybe (Textual Int32))
     , _tlEtag          :: !(Maybe Text)
     , _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
     , _tlTables        :: !(Maybe [TableListTablesItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableList' with the minimum fields required to make a request.
 --
@@ -105,7 +106,7 @@ data TableList = TableList'
 tableList
     :: TableList
 tableList =
-    TableList'
+  TableList'
     { _tlTotalItems = Nothing
     , _tlEtag = Nothing
     , _tlNextPageToken = Nothing
@@ -162,14 +163,16 @@ instance ToJSON TableList where
 
 --
 -- /See:/ 'dataSetListDataSetsItem' smart constructor.
-data DataSetListDataSetsItem = DataSetListDataSetsItem'
+data DataSetListDataSetsItem =
+  DataSetListDataSetsItem'
     { _dsldsiLocation         :: !(Maybe Text)
     , _dsldsiFriendlyName     :: !(Maybe Text)
     , _dsldsiKind             :: !Text
     , _dsldsiDataSetReference :: !(Maybe DataSetReference)
     , _dsldsiId               :: !(Maybe Text)
     , _dsldsiLabels           :: !(Maybe DataSetListDataSetsItemLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetListDataSetsItem' with the minimum fields required to make a request.
 --
@@ -189,7 +192,7 @@ data DataSetListDataSetsItem = DataSetListDataSetsItem'
 dataSetListDataSetsItem
     :: DataSetListDataSetsItem
 dataSetListDataSetsItem =
-    DataSetListDataSetsItem'
+  DataSetListDataSetsItem'
     { _dsldsiLocation = Nothing
     , _dsldsiFriendlyName = Nothing
     , _dsldsiKind = "bigquery#dataset"
@@ -257,13 +260,15 @@ instance ToJSON DataSetListDataSetsItem where
 
 --
 -- /See:/ 'tableDataList' smart constructor.
-data TableDataList = TableDataList'
+data TableDataList =
+  TableDataList'
     { _tdlEtag      :: !(Maybe Text)
     , _tdlKind      :: !Text
     , _tdlRows      :: !(Maybe [TableRow])
     , _tdlPageToken :: !(Maybe Text)
     , _tdlTotalRows :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableDataList' with the minimum fields required to make a request.
 --
@@ -281,7 +286,7 @@ data TableDataList = TableDataList'
 tableDataList
     :: TableDataList
 tableDataList =
-    TableDataList'
+  TableDataList'
     { _tdlEtag = Nothing
     , _tdlKind = "bigquery#tableDataList"
     , _tdlRows = Nothing
@@ -338,14 +343,16 @@ instance ToJSON TableDataList where
 
 --
 -- /See:/ 'jobConfigurationTableCopy' smart constructor.
-data JobConfigurationTableCopy = JobConfigurationTableCopy'
+data JobConfigurationTableCopy =
+  JobConfigurationTableCopy'
     { _jctcDestinationTable                   :: !(Maybe TableReference)
     , _jctcWriteDisPosition                   :: !(Maybe Text)
     , _jctcSourceTables                       :: !(Maybe [TableReference])
     , _jctcCreateDisPosition                  :: !(Maybe Text)
     , _jctcSourceTable                        :: !(Maybe TableReference)
     , _jctcDestinationEncryptionConfiguration :: !(Maybe EncryptionConfiguration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobConfigurationTableCopy' with the minimum fields required to make a request.
 --
@@ -365,7 +372,7 @@ data JobConfigurationTableCopy = JobConfigurationTableCopy'
 jobConfigurationTableCopy
     :: JobConfigurationTableCopy
 jobConfigurationTableCopy =
-    JobConfigurationTableCopy'
+  JobConfigurationTableCopy'
     { _jctcDestinationTable = Nothing
     , _jctcWriteDisPosition = Nothing
     , _jctcSourceTables = Nothing
@@ -452,7 +459,8 @@ instance ToJSON JobConfigurationTableCopy where
 
 --
 -- /See:/ 'tableListTablesItem' smart constructor.
-data TableListTablesItem = TableListTablesItem'
+data TableListTablesItem =
+  TableListTablesItem'
     { _tltiCreationTime     :: !(Maybe (Textual Int64))
     , _tltiClustering       :: !(Maybe Clustering)
     , _tltiTableReference   :: !(Maybe TableReference)
@@ -464,7 +472,8 @@ data TableListTablesItem = TableListTablesItem'
     , _tltiLabels           :: !(Maybe TableListTablesItemLabels)
     , _tltiType             :: !(Maybe Text)
     , _tltiExpirationTime   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableListTablesItem' with the minimum fields required to make a request.
 --
@@ -494,7 +503,7 @@ data TableListTablesItem = TableListTablesItem'
 tableListTablesItem
     :: TableListTablesItem
 tableListTablesItem =
-    TableListTablesItem'
+  TableListTablesItem'
     { _tltiCreationTime = Nothing
     , _tltiClustering = Nothing
     , _tltiTableReference = Nothing
@@ -603,9 +612,11 @@ instance ToJSON TableListTablesItem where
 
 --
 -- /See:/ 'tableSchema' smart constructor.
-newtype TableSchema = TableSchema'
+newtype TableSchema =
+  TableSchema'
     { _tsFields :: Maybe [TableFieldSchema]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableSchema' with the minimum fields required to make a request.
 --
@@ -614,10 +625,7 @@ newtype TableSchema = TableSchema'
 -- * 'tsFields'
 tableSchema
     :: TableSchema
-tableSchema =
-    TableSchema'
-    { _tsFields = Nothing
-    }
+tableSchema = TableSchema' {_tsFields = Nothing}
 
 -- | Describes the fields in a table.
 tsFields :: Lens' TableSchema [TableFieldSchema]
@@ -637,13 +645,15 @@ instance ToJSON TableSchema where
 
 --
 -- /See:/ 'projectList' smart constructor.
-data ProjectList = ProjectList'
+data ProjectList =
+  ProjectList'
     { _plTotalItems    :: !(Maybe (Textual Int32))
     , _plEtag          :: !(Maybe Text)
     , _plNextPageToken :: !(Maybe Text)
     , _plKind          :: !Text
     , _plProjects      :: !(Maybe [ProjectListProjectsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectList' with the minimum fields required to make a request.
 --
@@ -661,7 +671,7 @@ data ProjectList = ProjectList'
 projectList
     :: ProjectList
 projectList =
-    ProjectList'
+  ProjectList'
     { _plTotalItems = Nothing
     , _plEtag = Nothing
     , _plNextPageToken = Nothing
@@ -718,10 +728,12 @@ instance ToJSON ProjectList where
 
 --
 -- /See:/ 'explainQueryStep' smart constructor.
-data ExplainQueryStep = ExplainQueryStep'
+data ExplainQueryStep =
+  ExplainQueryStep'
     { _eqsSubsteps :: !(Maybe [Text])
     , _eqsKind     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExplainQueryStep' with the minimum fields required to make a request.
 --
@@ -733,10 +745,7 @@ data ExplainQueryStep = ExplainQueryStep'
 explainQueryStep
     :: ExplainQueryStep
 explainQueryStep =
-    ExplainQueryStep'
-    { _eqsSubsteps = Nothing
-    , _eqsKind = Nothing
-    }
+  ExplainQueryStep' {_eqsSubsteps = Nothing, _eqsKind = Nothing}
 
 -- | Human-readable stage descriptions.
 eqsSubsteps :: Lens' ExplainQueryStep [Text]
@@ -765,13 +774,15 @@ instance ToJSON ExplainQueryStep where
 
 --
 -- /See:/ 'queryTimelineSample' smart constructor.
-data QueryTimelineSample = QueryTimelineSample'
+data QueryTimelineSample =
+  QueryTimelineSample'
     { _qtsPendingUnits   :: !(Maybe (Textual Int64))
     , _qtsTotalSlotMs    :: !(Maybe (Textual Int64))
     , _qtsActiveUnits    :: !(Maybe (Textual Int64))
     , _qtsElapsedMs      :: !(Maybe (Textual Int64))
     , _qtsCompletedUnits :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryTimelineSample' with the minimum fields required to make a request.
 --
@@ -789,7 +800,7 @@ data QueryTimelineSample = QueryTimelineSample'
 queryTimelineSample
     :: QueryTimelineSample
 queryTimelineSample =
-    QueryTimelineSample'
+  QueryTimelineSample'
     { _qtsPendingUnits = Nothing
     , _qtsTotalSlotMs = Nothing
     , _qtsActiveUnits = Nothing
@@ -855,11 +866,13 @@ instance ToJSON QueryTimelineSample where
 
 --
 -- /See:/ 'queryParameterTypeStructTypesItem' smart constructor.
-data QueryParameterTypeStructTypesItem = QueryParameterTypeStructTypesItem'
+data QueryParameterTypeStructTypesItem =
+  QueryParameterTypeStructTypesItem'
     { _qptstiName        :: !(Maybe Text)
     , _qptstiType        :: !(Maybe QueryParameterType)
     , _qptstiDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryParameterTypeStructTypesItem' with the minimum fields required to make a request.
 --
@@ -873,11 +886,8 @@ data QueryParameterTypeStructTypesItem = QueryParameterTypeStructTypesItem'
 queryParameterTypeStructTypesItem
     :: QueryParameterTypeStructTypesItem
 queryParameterTypeStructTypesItem =
-    QueryParameterTypeStructTypesItem'
-    { _qptstiName = Nothing
-    , _qptstiType = Nothing
-    , _qptstiDescription = Nothing
-    }
+  QueryParameterTypeStructTypesItem'
+    {_qptstiName = Nothing, _qptstiType = Nothing, _qptstiDescription = Nothing}
 
 -- | [Optional] The name of this field.
 qptstiName :: Lens' QueryParameterTypeStructTypesItem (Maybe Text)
@@ -915,13 +925,15 @@ instance ToJSON QueryParameterTypeStructTypesItem
 
 --
 -- /See:/ 'bigtableColumnFamily' smart constructor.
-data BigtableColumnFamily = BigtableColumnFamily'
+data BigtableColumnFamily =
+  BigtableColumnFamily'
     { _bcfFamilyId       :: !(Maybe Text)
     , _bcfColumns        :: !(Maybe [BigtableColumn])
     , _bcfOnlyReadLatest :: !(Maybe Bool)
     , _bcfType           :: !(Maybe Text)
     , _bcfEncoding       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BigtableColumnFamily' with the minimum fields required to make a request.
 --
@@ -939,7 +951,7 @@ data BigtableColumnFamily = BigtableColumnFamily'
 bigtableColumnFamily
     :: BigtableColumnFamily
 bigtableColumnFamily =
-    BigtableColumnFamily'
+  BigtableColumnFamily'
     { _bcfFamilyId = Nothing
     , _bcfColumns = Nothing
     , _bcfOnlyReadLatest = Nothing
@@ -1012,7 +1024,8 @@ instance ToJSON BigtableColumnFamily where
 
 --
 -- /See:/ 'jobStatistics' smart constructor.
-data JobStatistics = JobStatistics'
+data JobStatistics =
+  JobStatistics'
     { _jsCreationTime        :: !(Maybe (Textual Int64))
     , _jsStartTime           :: !(Maybe (Textual Int64))
     , _jsCompletionRatio     :: !(Maybe (Textual Double))
@@ -1024,7 +1037,8 @@ data JobStatistics = JobStatistics'
     , _jsQuery               :: !(Maybe JobStatistics2)
     , _jsExtract             :: !(Maybe JobStatistics4)
     , _jsReservationUsage    :: !(Maybe [JobStatisticsReservationUsageItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobStatistics' with the minimum fields required to make a request.
 --
@@ -1054,7 +1068,7 @@ data JobStatistics = JobStatistics'
 jobStatistics
     :: JobStatistics
 jobStatistics =
-    JobStatistics'
+  JobStatistics'
     { _jsCreationTime = Nothing
     , _jsStartTime = Nothing
     , _jsCompletionRatio = Nothing
@@ -1184,9 +1198,11 @@ instance ToJSON JobStatistics where
 -- in the list must have a different key.
 --
 -- /See:/ 'jobConfigurationLabels' smart constructor.
-newtype JobConfigurationLabels = JobConfigurationLabels'
+newtype JobConfigurationLabels =
+  JobConfigurationLabels'
     { _jclAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobConfigurationLabels' with the minimum fields required to make a request.
 --
@@ -1197,9 +1213,7 @@ jobConfigurationLabels
     :: HashMap Text Text -- ^ 'jclAddtional'
     -> JobConfigurationLabels
 jobConfigurationLabels pJclAddtional_ =
-    JobConfigurationLabels'
-    { _jclAddtional = _Coerce # pJclAddtional_
-    }
+  JobConfigurationLabels' {_jclAddtional = _Coerce # pJclAddtional_}
 
 jclAddtional :: Lens' JobConfigurationLabels (HashMap Text Text)
 jclAddtional
@@ -1217,7 +1231,8 @@ instance ToJSON JobConfigurationLabels where
 
 --
 -- /See:/ 'dataSet' smart constructor.
-data DataSet = DataSet'
+data DataSet =
+  DataSet'
     { _dsCreationTime                 :: !(Maybe (Textual Int64))
     , _dsDefaultPartitionExpirationMs :: !(Maybe (Textual Int64))
     , _dsAccess                       :: !(Maybe [DataSetAccessItem])
@@ -1232,7 +1247,8 @@ data DataSet = DataSet'
     , _dsLabels                       :: !(Maybe DataSetLabels)
     , _dsDefaultTableExpirationMs     :: !(Maybe (Textual Int64))
     , _dsDescription                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSet' with the minimum fields required to make a request.
 --
@@ -1268,7 +1284,7 @@ data DataSet = DataSet'
 dataSet
     :: DataSet
 dataSet =
-    DataSet'
+  DataSet'
     { _dsCreationTime = Nothing
     , _dsDefaultPartitionExpirationMs = Nothing
     , _dsAccess = Nothing
@@ -1445,11 +1461,13 @@ instance ToJSON DataSet where
 -- | [TrustedTester] [Required] Defines the ranges for range partitioning.
 --
 -- /See:/ 'rangePartitioningRange' smart constructor.
-data RangePartitioningRange = RangePartitioningRange'
+data RangePartitioningRange =
+  RangePartitioningRange'
     { _rprStart    :: !(Maybe (Textual Int64))
     , _rprInterval :: !(Maybe (Textual Int64))
     , _rprEnd      :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RangePartitioningRange' with the minimum fields required to make a request.
 --
@@ -1463,11 +1481,8 @@ data RangePartitioningRange = RangePartitioningRange'
 rangePartitioningRange
     :: RangePartitioningRange
 rangePartitioningRange =
-    RangePartitioningRange'
-    { _rprStart = Nothing
-    , _rprInterval = Nothing
-    , _rprEnd = Nothing
-    }
+  RangePartitioningRange'
+    {_rprStart = Nothing, _rprInterval = Nothing, _rprEnd = Nothing}
 
 -- | [TrustedTester] [Required] The start of range partitioning, inclusive.
 rprStart :: Lens' RangePartitioningRange (Maybe Int64)
@@ -1505,10 +1520,12 @@ instance ToJSON RangePartitioningRange where
 
 --
 -- /See:/ 'jobStatisticsReservationUsageItem' smart constructor.
-data JobStatisticsReservationUsageItem = JobStatisticsReservationUsageItem'
+data JobStatisticsReservationUsageItem =
+  JobStatisticsReservationUsageItem'
     { _jsruiName   :: !(Maybe Text)
     , _jsruiSlotMs :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobStatisticsReservationUsageItem' with the minimum fields required to make a request.
 --
@@ -1520,10 +1537,8 @@ data JobStatisticsReservationUsageItem = JobStatisticsReservationUsageItem'
 jobStatisticsReservationUsageItem
     :: JobStatisticsReservationUsageItem
 jobStatisticsReservationUsageItem =
-    JobStatisticsReservationUsageItem'
-    { _jsruiName = Nothing
-    , _jsruiSlotMs = Nothing
-    }
+  JobStatisticsReservationUsageItem'
+    {_jsruiName = Nothing, _jsruiSlotMs = Nothing}
 
 -- | [Output-only] Reservation name or \"unreserved\" for on-demand resources
 -- usage.
@@ -1555,11 +1570,13 @@ instance ToJSON JobStatisticsReservationUsageItem
 
 --
 -- /See:/ 'bigtableOptions' smart constructor.
-data BigtableOptions = BigtableOptions'
+data BigtableOptions =
+  BigtableOptions'
     { _boReadRowkeyAsString              :: !(Maybe Bool)
     , _boIgnoreUnspecifiedColumnFamilies :: !(Maybe Bool)
     , _boColumnFamilies                  :: !(Maybe [BigtableColumnFamily])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BigtableOptions' with the minimum fields required to make a request.
 --
@@ -1573,7 +1590,7 @@ data BigtableOptions = BigtableOptions'
 bigtableOptions
     :: BigtableOptions
 bigtableOptions =
-    BigtableOptions'
+  BigtableOptions'
     { _boReadRowkeyAsString = Nothing
     , _boIgnoreUnspecifiedColumnFamilies = Nothing
     , _boColumnFamilies = Nothing
@@ -1631,9 +1648,11 @@ instance ToJSON BigtableOptions where
 
 --
 -- /See:/ 'clustering' smart constructor.
-newtype Clustering = Clustering'
+newtype Clustering =
+  Clustering'
     { _cFields :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Clustering' with the minimum fields required to make a request.
 --
@@ -1642,10 +1661,7 @@ newtype Clustering = Clustering'
 -- * 'cFields'
 clustering
     :: Clustering
-clustering =
-    Clustering'
-    { _cFields = Nothing
-    }
+clustering = Clustering' {_cFields = Nothing}
 
 -- | [Repeated] One or more fields on which data should be clustered. Only
 -- top-level, non-repeated, simple-type fields are supported. When you
@@ -1668,7 +1684,8 @@ instance ToJSON Clustering where
 
 --
 -- /See:/ 'externalDataConfiguration' smart constructor.
-data ExternalDataConfiguration = ExternalDataConfiguration'
+data ExternalDataConfiguration =
+  ExternalDataConfiguration'
     { _edcBigtableOptions     :: !(Maybe BigtableOptions)
     , _edcIgnoreUnknownValues :: !(Maybe Bool)
     , _edcCompression         :: !(Maybe Text)
@@ -1679,7 +1696,8 @@ data ExternalDataConfiguration = ExternalDataConfiguration'
     , _edcAutodetect          :: !(Maybe Bool)
     , _edcSourceURIs          :: !(Maybe [Text])
     , _edcCSVOptions          :: !(Maybe CSVOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExternalDataConfiguration' with the minimum fields required to make a request.
 --
@@ -1707,7 +1725,7 @@ data ExternalDataConfiguration = ExternalDataConfiguration'
 externalDataConfiguration
     :: ExternalDataConfiguration
 externalDataConfiguration =
-    ExternalDataConfiguration'
+  ExternalDataConfiguration'
     { _edcBigtableOptions = Nothing
     , _edcIgnoreUnknownValues = Nothing
     , _edcCompression = Nothing
@@ -1847,11 +1865,13 @@ instance ToJSON ExternalDataConfiguration where
 
 --
 -- /See:/ 'tableReference' smart constructor.
-data TableReference = TableReference'
+data TableReference =
+  TableReference'
     { _trDataSetId :: !(Maybe Text)
     , _trProjectId :: !(Maybe Text)
     , _trTableId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableReference' with the minimum fields required to make a request.
 --
@@ -1865,11 +1885,8 @@ data TableReference = TableReference'
 tableReference
     :: TableReference
 tableReference =
-    TableReference'
-    { _trDataSetId = Nothing
-    , _trProjectId = Nothing
-    , _trTableId = Nothing
-    }
+  TableReference'
+    {_trDataSetId = Nothing, _trProjectId = Nothing, _trTableId = Nothing}
 
 -- | [Required] The ID of the dataset containing this table.
 trDataSetId :: Lens' TableReference (Maybe Text)
@@ -1909,11 +1926,13 @@ instance ToJSON TableReference where
 -- used for any options not specified in the input query.
 --
 -- /See:/ 'modelDefinitionModelOptions' smart constructor.
-data ModelDefinitionModelOptions = ModelDefinitionModelOptions'
+data ModelDefinitionModelOptions =
+  ModelDefinitionModelOptions'
     { _mdmoModelType :: !(Maybe Text)
     , _mdmoLabels    :: !(Maybe [Text])
     , _mdmoLossType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModelDefinitionModelOptions' with the minimum fields required to make a request.
 --
@@ -1927,11 +1946,8 @@ data ModelDefinitionModelOptions = ModelDefinitionModelOptions'
 modelDefinitionModelOptions
     :: ModelDefinitionModelOptions
 modelDefinitionModelOptions =
-    ModelDefinitionModelOptions'
-    { _mdmoModelType = Nothing
-    , _mdmoLabels = Nothing
-    , _mdmoLossType = Nothing
-    }
+  ModelDefinitionModelOptions'
+    {_mdmoModelType = Nothing, _mdmoLabels = Nothing, _mdmoLossType = Nothing}
 
 mdmoModelType :: Lens' ModelDefinitionModelOptions (Maybe Text)
 mdmoModelType
@@ -1966,10 +1982,12 @@ instance ToJSON ModelDefinitionModelOptions where
 
 --
 -- /See:/ 'rangePartitioning' smart constructor.
-data RangePartitioning = RangePartitioning'
+data RangePartitioning =
+  RangePartitioning'
     { _rpField :: !(Maybe Text)
     , _rpRange :: !(Maybe RangePartitioningRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RangePartitioning' with the minimum fields required to make a request.
 --
@@ -1980,11 +1998,7 @@ data RangePartitioning = RangePartitioning'
 -- * 'rpRange'
 rangePartitioning
     :: RangePartitioning
-rangePartitioning =
-    RangePartitioning'
-    { _rpField = Nothing
-    , _rpRange = Nothing
-    }
+rangePartitioning = RangePartitioning' {_rpField = Nothing, _rpRange = Nothing}
 
 -- | [TrustedTester] [Required] The table is partitioned by this field. The
 -- field must be a top-level NULLABLE\/REQUIRED field. The only supported
@@ -2012,13 +2026,15 @@ instance ToJSON RangePartitioning where
 
 --
 -- /See:/ 'tableFieldSchema' smart constructor.
-data TableFieldSchema = TableFieldSchema'
+data TableFieldSchema =
+  TableFieldSchema'
     { _tfsMode        :: !(Maybe Text)
     , _tfsName        :: !(Maybe Text)
     , _tfsType        :: !(Maybe Text)
     , _tfsDescription :: !(Maybe Text)
     , _tfsFields      :: !(Maybe [TableFieldSchema])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableFieldSchema' with the minimum fields required to make a request.
 --
@@ -2036,7 +2052,7 @@ data TableFieldSchema = TableFieldSchema'
 tableFieldSchema
     :: TableFieldSchema
 tableFieldSchema =
-    TableFieldSchema'
+  TableFieldSchema'
     { _tfsMode = Nothing
     , _tfsName = Nothing
     , _tfsType = Nothing
@@ -2098,7 +2114,8 @@ instance ToJSON TableFieldSchema where
 
 --
 -- /See:/ 'getQueryResultsResponse' smart constructor.
-data GetQueryResultsResponse = GetQueryResultsResponse'
+data GetQueryResultsResponse =
+  GetQueryResultsResponse'
     { _gqrrJobReference        :: !(Maybe JobReference)
     , _gqrrEtag                :: !(Maybe Text)
     , _gqrrKind                :: !Text
@@ -2111,7 +2128,8 @@ data GetQueryResultsResponse = GetQueryResultsResponse'
     , _gqrrErrors              :: !(Maybe [ErrorProto])
     , _gqrrJobComplete         :: !(Maybe Bool)
     , _gqrrCacheHit            :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetQueryResultsResponse' with the minimum fields required to make a request.
 --
@@ -2143,7 +2161,7 @@ data GetQueryResultsResponse = GetQueryResultsResponse'
 getQueryResultsResponse
     :: GetQueryResultsResponse
 getQueryResultsResponse =
-    GetQueryResultsResponse'
+  GetQueryResultsResponse'
     { _gqrrJobReference = Nothing
     , _gqrrEtag = Nothing
     , _gqrrKind = "bigquery#getQueryResultsResponse"
@@ -2284,12 +2302,14 @@ instance ToJSON GetQueryResultsResponse where
 
 --
 -- /See:/ 'dataSetList' smart constructor.
-data DataSetList = DataSetList'
+data DataSetList =
+  DataSetList'
     { _dslEtag          :: !(Maybe Text)
     , _dslNextPageToken :: !(Maybe Text)
     , _dslKind          :: !Text
     , _dslDataSets      :: !(Maybe [DataSetListDataSetsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetList' with the minimum fields required to make a request.
 --
@@ -2305,7 +2325,7 @@ data DataSetList = DataSetList'
 dataSetList
     :: DataSetList
 dataSetList =
-    DataSetList'
+  DataSetList'
     { _dslEtag = Nothing
     , _dslNextPageToken = Nothing
     , _dslKind = "bigquery#datasetList"
@@ -2359,7 +2379,8 @@ instance ToJSON DataSetList where
 
 --
 -- /See:/ 'queryRequest' smart constructor.
-data QueryRequest = QueryRequest'
+data QueryRequest =
+  QueryRequest'
     { _qrLocation        :: !(Maybe Text)
     , _qrUseQueryCache   :: !Bool
     , _qrPreserveNulls   :: !(Maybe Bool)
@@ -2372,7 +2393,8 @@ data QueryRequest = QueryRequest'
     , _qrDryRun          :: !(Maybe Bool)
     , _qrMaxResults      :: !(Maybe (Textual Word32))
     , _qrDefaultDataSet  :: !(Maybe DataSetReference)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryRequest' with the minimum fields required to make a request.
 --
@@ -2404,7 +2426,7 @@ data QueryRequest = QueryRequest'
 queryRequest
     :: QueryRequest
 queryRequest =
-    QueryRequest'
+  QueryRequest'
     { _qrLocation = Nothing
     , _qrUseQueryCache = True
     , _qrPreserveNulls = Nothing
@@ -2551,11 +2573,13 @@ instance ToJSON QueryRequest where
 
 --
 -- /See:/ 'queryParameter' smart constructor.
-data QueryParameter = QueryParameter'
+data QueryParameter =
+  QueryParameter'
     { _qpParameterValue :: !(Maybe QueryParameterValue)
     , _qpParameterType  :: !(Maybe QueryParameterType)
     , _qpName           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryParameter' with the minimum fields required to make a request.
 --
@@ -2569,11 +2593,8 @@ data QueryParameter = QueryParameter'
 queryParameter
     :: QueryParameter
 queryParameter =
-    QueryParameter'
-    { _qpParameterValue = Nothing
-    , _qpParameterType = Nothing
-    , _qpName = Nothing
-    }
+  QueryParameter'
+    {_qpParameterValue = Nothing, _qpParameterType = Nothing, _qpName = Nothing}
 
 -- | [Required] The value of this parameter.
 qpParameterValue :: Lens' QueryParameter (Maybe QueryParameterValue)
@@ -2610,13 +2631,15 @@ instance ToJSON QueryParameter where
 
 --
 -- /See:/ 'iterationResult' smart constructor.
-data IterationResult = IterationResult'
+data IterationResult =
+  IterationResult'
     { _irDurationMs   :: !(Maybe (Textual Int64))
     , _irLearnRate    :: !(Maybe (Textual Double))
     , _irEvalLoss     :: !(Maybe (Textual Double))
     , _irTrainingLoss :: !(Maybe (Textual Double))
     , _irIndex        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IterationResult' with the minimum fields required to make a request.
 --
@@ -2634,7 +2657,7 @@ data IterationResult = IterationResult'
 iterationResult
     :: IterationResult
 iterationResult =
-    IterationResult'
+  IterationResult'
     { _irDurationMs = Nothing
     , _irLearnRate = Nothing
     , _irEvalLoss = Nothing
@@ -2704,9 +2727,11 @@ instance ToJSON IterationResult where
 
 --
 -- /See:/ 'jobStatistics4' smart constructor.
-newtype JobStatistics4 = JobStatistics4'
+newtype JobStatistics4 =
+  JobStatistics4'
     { _jsDestinationURIFileCounts :: Maybe [Textual Int64]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobStatistics4' with the minimum fields required to make a request.
 --
@@ -2715,10 +2740,7 @@ newtype JobStatistics4 = JobStatistics4'
 -- * 'jsDestinationURIFileCounts'
 jobStatistics4
     :: JobStatistics4
-jobStatistics4 =
-    JobStatistics4'
-    { _jsDestinationURIFileCounts = Nothing
-    }
+jobStatistics4 = JobStatistics4' {_jsDestinationURIFileCounts = Nothing}
 
 -- | [Output-only] Number of files per destination URI or URI pattern
 -- specified in the extract configuration. These values will be in the same
@@ -2746,9 +2768,11 @@ instance ToJSON JobStatistics4 where
 
 --
 -- /See:/ 'projectReference' smart constructor.
-newtype ProjectReference = ProjectReference'
+newtype ProjectReference =
+  ProjectReference'
     { _prProjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectReference' with the minimum fields required to make a request.
 --
@@ -2757,10 +2781,7 @@ newtype ProjectReference = ProjectReference'
 -- * 'prProjectId'
 projectReference
     :: ProjectReference
-projectReference =
-    ProjectReference'
-    { _prProjectId = Nothing
-    }
+projectReference = ProjectReference' {_prProjectId = Nothing}
 
 -- | [Required] ID of the project. Can be either the numeric ID or the
 -- assigned ID of the project.
@@ -2780,7 +2801,8 @@ instance ToJSON ProjectReference where
 
 --
 -- /See:/ 'explainQueryStage' smart constructor.
-data ExplainQueryStage = ExplainQueryStage'
+data ExplainQueryStage =
+  ExplainQueryStage'
     { _eqsReadMsAvg                 :: !(Maybe (Textual Int64))
     , _eqsStatus                    :: !(Maybe Text)
     , _eqsShuffleOutputBytesSpilled :: !(Maybe (Textual Int64))
@@ -2810,7 +2832,8 @@ data ExplainQueryStage = ExplainQueryStage'
     , _eqsStartMs                   :: !(Maybe (Textual Int64))
     , _eqsEndMs                     :: !(Maybe (Textual Int64))
     , _eqsWaitMsMax                 :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExplainQueryStage' with the minimum fields required to make a request.
 --
@@ -2876,7 +2899,7 @@ data ExplainQueryStage = ExplainQueryStage'
 explainQueryStage
     :: ExplainQueryStage
 explainQueryStage =
-    ExplainQueryStage'
+  ExplainQueryStage'
     { _eqsReadMsAvg = Nothing
     , _eqsStatus = Nothing
     , _eqsShuffleOutputBytesSpilled = Nothing
@@ -3179,7 +3202,8 @@ instance ToJSON ExplainQueryStage where
 -- training run.
 --
 -- /See:/ 'trainingRunTrainingOptions' smart constructor.
-data TrainingRunTrainingOptions = TrainingRunTrainingOptions'
+data TrainingRunTrainingOptions =
+  TrainingRunTrainingOptions'
     { _trtoLineSearchInitLearnRate :: !(Maybe (Textual Double))
     , _trtoMinRelProgress          :: !(Maybe (Textual Double))
     , _trtoL1Reg                   :: !(Maybe (Textual Double))
@@ -3189,7 +3213,8 @@ data TrainingRunTrainingOptions = TrainingRunTrainingOptions'
     , _trtoEarlyStop               :: !(Maybe Bool)
     , _trtoL2Reg                   :: !(Maybe (Textual Double))
     , _trtoWarmStart               :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrainingRunTrainingOptions' with the minimum fields required to make a request.
 --
@@ -3215,7 +3240,7 @@ data TrainingRunTrainingOptions = TrainingRunTrainingOptions'
 trainingRunTrainingOptions
     :: TrainingRunTrainingOptions
 trainingRunTrainingOptions =
-    TrainingRunTrainingOptions'
+  TrainingRunTrainingOptions'
     { _trtoLineSearchInitLearnRate = Nothing
     , _trtoMinRelProgress = Nothing
     , _trtoL1Reg = Nothing
@@ -3308,10 +3333,12 @@ instance ToJSON TrainingRunTrainingOptions where
 
 --
 -- /See:/ 'bigQueryModelTraining' smart constructor.
-data BigQueryModelTraining = BigQueryModelTraining'
+data BigQueryModelTraining =
+  BigQueryModelTraining'
     { _bqmtExpectedTotalIterations :: !(Maybe (Textual Int64))
     , _bqmtCurrentIteration        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BigQueryModelTraining' with the minimum fields required to make a request.
 --
@@ -3323,10 +3350,8 @@ data BigQueryModelTraining = BigQueryModelTraining'
 bigQueryModelTraining
     :: BigQueryModelTraining
 bigQueryModelTraining =
-    BigQueryModelTraining'
-    { _bqmtExpectedTotalIterations = Nothing
-    , _bqmtCurrentIteration = Nothing
-    }
+  BigQueryModelTraining'
+    {_bqmtExpectedTotalIterations = Nothing, _bqmtCurrentIteration = Nothing}
 
 -- | [Output-only, Beta] Expected number of iterations for the create model
 -- query job specified as num_iterations in the input query. The actual
@@ -3364,7 +3389,8 @@ instance ToJSON BigQueryModelTraining where
 
 --
 -- /See:/ 'jobConfigurationLoad' smart constructor.
-data JobConfigurationLoad = JobConfigurationLoad'
+data JobConfigurationLoad =
+  JobConfigurationLoad'
     { _jclSkipLeadingRows                    :: !(Maybe (Textual Int32))
     , _jclProjectionFields                   :: !(Maybe [Text])
     , _jclDestinationTable                   :: !(Maybe TableReference)
@@ -3391,7 +3417,8 @@ data JobConfigurationLoad = JobConfigurationLoad'
     , _jclDestinationEncryptionConfiguration :: !(Maybe EncryptionConfiguration)
     , _jclFieldDelimiter                     :: !(Maybe Text)
     , _jclNullMarker                         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobConfigurationLoad' with the minimum fields required to make a request.
 --
@@ -3451,7 +3478,7 @@ data JobConfigurationLoad = JobConfigurationLoad'
 jobConfigurationLoad
     :: JobConfigurationLoad
 jobConfigurationLoad =
-    JobConfigurationLoad'
+  JobConfigurationLoad'
     { _jclSkipLeadingRows = Nothing
     , _jclProjectionFields = Nothing
     , _jclDestinationTable = Nothing
@@ -3800,10 +3827,12 @@ instance ToJSON JobConfigurationLoad where
 
 --
 -- /See:/ 'dataSetReference' smart constructor.
-data DataSetReference = DataSetReference'
+data DataSetReference =
+  DataSetReference'
     { _dsrDataSetId :: !(Maybe Text)
     , _dsrProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetReference' with the minimum fields required to make a request.
 --
@@ -3815,10 +3844,7 @@ data DataSetReference = DataSetReference'
 dataSetReference
     :: DataSetReference
 dataSetReference =
-    DataSetReference'
-    { _dsrDataSetId = Nothing
-    , _dsrProjectId = Nothing
-    }
+  DataSetReference' {_dsrDataSetId = Nothing, _dsrProjectId = Nothing}
 
 -- | [Required] A unique ID for this dataset, without the project name. The
 -- ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores
@@ -3848,10 +3874,12 @@ instance ToJSON DataSetReference where
 
 --
 -- /See:/ 'materializedViewDefinition' smart constructor.
-data MaterializedViewDefinition = MaterializedViewDefinition'
+data MaterializedViewDefinition =
+  MaterializedViewDefinition'
     { _mvdQuery           :: !(Maybe Text)
     , _mvdLastRefreshTime :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MaterializedViewDefinition' with the minimum fields required to make a request.
 --
@@ -3863,10 +3891,8 @@ data MaterializedViewDefinition = MaterializedViewDefinition'
 materializedViewDefinition
     :: MaterializedViewDefinition
 materializedViewDefinition =
-    MaterializedViewDefinition'
-    { _mvdQuery = Nothing
-    , _mvdLastRefreshTime = Nothing
-    }
+  MaterializedViewDefinition'
+    {_mvdQuery = Nothing, _mvdLastRefreshTime = Nothing}
 
 -- | [Required] A query whose result is persisted.
 mvdQuery :: Lens' MaterializedViewDefinition (Maybe Text)
@@ -3896,13 +3922,15 @@ instance ToJSON MaterializedViewDefinition where
 
 --
 -- /See:/ 'tableDataInsertAllRequest' smart constructor.
-data TableDataInsertAllRequest = TableDataInsertAllRequest'
+data TableDataInsertAllRequest =
+  TableDataInsertAllRequest'
     { _tdiarKind                :: !Text
     , _tdiarIgnoreUnknownValues :: !(Maybe Bool)
     , _tdiarRows                :: !(Maybe [TableDataInsertAllRequestRowsItem])
     , _tdiarTemplateSuffix      :: !(Maybe Text)
     , _tdiarSkipInvalidRows     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableDataInsertAllRequest' with the minimum fields required to make a request.
 --
@@ -3920,7 +3948,7 @@ data TableDataInsertAllRequest = TableDataInsertAllRequest'
 tableDataInsertAllRequest
     :: TableDataInsertAllRequest
 tableDataInsertAllRequest =
-    TableDataInsertAllRequest'
+  TableDataInsertAllRequest'
     { _tdiarKind = "bigquery#tableDataInsertAllRequest"
     , _tdiarIgnoreUnknownValues = Nothing
     , _tdiarRows = Nothing
@@ -3992,10 +4020,12 @@ instance ToJSON TableDataInsertAllRequest where
 
 --
 -- /See:/ 'getServiceAccountResponse' smart constructor.
-data GetServiceAccountResponse = GetServiceAccountResponse'
+data GetServiceAccountResponse =
+  GetServiceAccountResponse'
     { _gsarEmail :: !(Maybe Text)
     , _gsarKind  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetServiceAccountResponse' with the minimum fields required to make a request.
 --
@@ -4007,10 +4037,8 @@ data GetServiceAccountResponse = GetServiceAccountResponse'
 getServiceAccountResponse
     :: GetServiceAccountResponse
 getServiceAccountResponse =
-    GetServiceAccountResponse'
-    { _gsarEmail = Nothing
-    , _gsarKind = "bigquery#getServiceAccountResponse"
-    }
+  GetServiceAccountResponse'
+    {_gsarEmail = Nothing, _gsarKind = "bigquery#getServiceAccountResponse"}
 
 -- | The service account email address.
 gsarEmail :: Lens' GetServiceAccountResponse (Maybe Text)
@@ -4039,13 +4067,15 @@ instance ToJSON GetServiceAccountResponse where
 
 --
 -- /See:/ 'projectListProjectsItem' smart constructor.
-data ProjectListProjectsItem = ProjectListProjectsItem'
+data ProjectListProjectsItem =
+  ProjectListProjectsItem'
     { _plpiFriendlyName     :: !(Maybe Text)
     , _plpiKind             :: !Text
     , _plpiProjectReference :: !(Maybe ProjectReference)
     , _plpiId               :: !(Maybe Text)
     , _plpiNumericId        :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectListProjectsItem' with the minimum fields required to make a request.
 --
@@ -4063,7 +4093,7 @@ data ProjectListProjectsItem = ProjectListProjectsItem'
 projectListProjectsItem
     :: ProjectListProjectsItem
 projectListProjectsItem =
-    ProjectListProjectsItem'
+  ProjectListProjectsItem'
     { _plpiFriendlyName = Nothing
     , _plpiKind = "bigquery#project"
     , _plpiProjectReference = Nothing
@@ -4121,14 +4151,16 @@ instance ToJSON ProjectListProjectsItem where
 
 --
 -- /See:/ 'bigtableColumn' smart constructor.
-data BigtableColumn = BigtableColumn'
+data BigtableColumn =
+  BigtableColumn'
     { _bcQualifierEncoded :: !(Maybe Bytes)
     , _bcFieldName        :: !(Maybe Text)
     , _bcQualifierString  :: !(Maybe Text)
     , _bcOnlyReadLatest   :: !(Maybe Bool)
     , _bcType             :: !(Maybe Text)
     , _bcEncoding         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BigtableColumn' with the minimum fields required to make a request.
 --
@@ -4148,7 +4180,7 @@ data BigtableColumn = BigtableColumn'
 bigtableColumn
     :: BigtableColumn
 bigtableColumn =
-    BigtableColumn'
+  BigtableColumn'
     { _bcQualifierEncoded = Nothing
     , _bcFieldName = Nothing
     , _bcQualifierString = Nothing
@@ -4236,11 +4268,13 @@ instance ToJSON BigtableColumn where
 
 --
 -- /See:/ 'streamingbuffer' smart constructor.
-data Streamingbuffer = Streamingbuffer'
+data Streamingbuffer =
+  Streamingbuffer'
     { _sEstimatedBytes  :: !(Maybe (Textual Word64))
     , _sOldestEntryTime :: !(Maybe (Textual Word64))
     , _sEstimatedRows   :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Streamingbuffer' with the minimum fields required to make a request.
 --
@@ -4254,7 +4288,7 @@ data Streamingbuffer = Streamingbuffer'
 streamingbuffer
     :: Streamingbuffer
 streamingbuffer =
-    Streamingbuffer'
+  Streamingbuffer'
     { _sEstimatedBytes = Nothing
     , _sOldestEntryTime = Nothing
     , _sEstimatedRows = Nothing
@@ -4304,9 +4338,11 @@ instance ToJSON Streamingbuffer where
 
 --
 -- /See:/ 'tableRow' smart constructor.
-newtype TableRow = TableRow'
+newtype TableRow =
+  TableRow'
     { _trF :: Maybe [TableCell]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableRow' with the minimum fields required to make a request.
 --
@@ -4315,10 +4351,7 @@ newtype TableRow = TableRow'
 -- * 'trF'
 tableRow
     :: TableRow
-tableRow =
-    TableRow'
-    { _trF = Nothing
-    }
+tableRow = TableRow' {_trF = Nothing}
 
 -- | Represents a single row in the result set, consisting of one or more
 -- fields.
@@ -4338,7 +4371,8 @@ instance ToJSON TableRow where
 
 --
 -- /See:/ 'jobListJobsItem' smart constructor.
-data JobListJobsItem = JobListJobsItem'
+data JobListJobsItem =
+  JobListJobsItem'
     { _jljiJobReference  :: !(Maybe JobReference)
     , _jljiStatus        :: !(Maybe JobStatus)
     , _jljiState         :: !(Maybe Text)
@@ -4348,7 +4382,8 @@ data JobListJobsItem = JobListJobsItem'
     , _jljiId            :: !(Maybe Text)
     , _jljiStatistics    :: !(Maybe JobStatistics)
     , _jljiConfiguration :: !(Maybe JobConfiguration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobListJobsItem' with the minimum fields required to make a request.
 --
@@ -4374,7 +4409,7 @@ data JobListJobsItem = JobListJobsItem'
 jobListJobsItem
     :: JobListJobsItem
 jobListJobsItem =
-    JobListJobsItem'
+  JobListJobsItem'
     { _jljiJobReference = Nothing
     , _jljiStatus = Nothing
     , _jljiState = Nothing
@@ -4466,12 +4501,14 @@ instance ToJSON JobListJobsItem where
 
 --
 -- /See:/ 'timePartitioning' smart constructor.
-data TimePartitioning = TimePartitioning'
+data TimePartitioning =
+  TimePartitioning'
     { _tpField                  :: !(Maybe Text)
     , _tpExpirationMs           :: !(Maybe (Textual Int64))
     , _tpRequirePartitionFilter :: !(Maybe Bool)
     , _tpType                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimePartitioning' with the minimum fields required to make a request.
 --
@@ -4487,7 +4524,7 @@ data TimePartitioning = TimePartitioning'
 timePartitioning
     :: TimePartitioning
 timePartitioning =
-    TimePartitioning'
+  TimePartitioning'
     { _tpField = Nothing
     , _tpExpirationMs = Nothing
     , _tpRequirePartitionFilter = Nothing
@@ -4544,9 +4581,11 @@ instance ToJSON TimePartitioning where
 -- declaration.
 --
 -- /See:/ 'queryParameterValueStructValues' smart constructor.
-newtype QueryParameterValueStructValues = QueryParameterValueStructValues'
+newtype QueryParameterValueStructValues =
+  QueryParameterValueStructValues'
     { _qpvsvAddtional :: HashMap Text QueryParameterValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryParameterValueStructValues' with the minimum fields required to make a request.
 --
@@ -4557,9 +4596,8 @@ queryParameterValueStructValues
     :: HashMap Text QueryParameterValue -- ^ 'qpvsvAddtional'
     -> QueryParameterValueStructValues
 queryParameterValueStructValues pQpvsvAddtional_ =
-    QueryParameterValueStructValues'
-    { _qpvsvAddtional = _Coerce # pQpvsvAddtional_
-    }
+  QueryParameterValueStructValues'
+    {_qpvsvAddtional = _Coerce # pQpvsvAddtional_}
 
 qpvsvAddtional :: Lens' QueryParameterValueStructValues (HashMap Text QueryParameterValue)
 qpvsvAddtional
@@ -4584,9 +4622,11 @@ instance ToJSON QueryParameterValueStructValues where
 -- information.
 --
 -- /See:/ 'dataSetLabels' smart constructor.
-newtype DataSetLabels = DataSetLabels'
+newtype DataSetLabels =
+  DataSetLabels'
     { _dslAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetLabels' with the minimum fields required to make a request.
 --
@@ -4597,9 +4637,7 @@ dataSetLabels
     :: HashMap Text Text -- ^ 'dslAddtional'
     -> DataSetLabels
 dataSetLabels pDslAddtional_ =
-    DataSetLabels'
-    { _dslAddtional = _Coerce # pDslAddtional_
-    }
+  DataSetLabels' {_dslAddtional = _Coerce # pDslAddtional_}
 
 dslAddtional :: Lens' DataSetLabels (HashMap Text Text)
 dslAddtional
@@ -4616,7 +4654,8 @@ instance ToJSON DataSetLabels where
 
 --
 -- /See:/ 'jobConfiguration' smart constructor.
-data JobConfiguration = JobConfiguration'
+data JobConfiguration =
+  JobConfiguration'
     { _jcJobType      :: !(Maybe Text)
     , _jcCopy         :: !(Maybe JobConfigurationTableCopy)
     , _jcLoad         :: !(Maybe JobConfigurationLoad)
@@ -4625,7 +4664,8 @@ data JobConfiguration = JobConfiguration'
     , _jcExtract      :: !(Maybe JobConfigurationExtract)
     , _jcLabels       :: !(Maybe JobConfigurationLabels)
     , _jcDryRun       :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobConfiguration' with the minimum fields required to make a request.
 --
@@ -4649,7 +4689,7 @@ data JobConfiguration = JobConfiguration'
 jobConfiguration
     :: JobConfiguration
 jobConfiguration =
-    JobConfiguration'
+  JobConfiguration'
     { _jcJobType = Nothing
     , _jcCopy = Nothing
     , _jcLoad = Nothing
@@ -4734,7 +4774,8 @@ instance ToJSON JobConfiguration where
 
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job'
+data Job =
+  Job'
     { _jJobReference  :: !(Maybe JobReference)
     , _jStatus        :: !(Maybe JobStatus)
     , _jEtag          :: !(Maybe Text)
@@ -4744,7 +4785,8 @@ data Job = Job'
     , _jId            :: !(Maybe Text)
     , _jStatistics    :: !(Maybe JobStatistics)
     , _jConfiguration :: !(Maybe JobConfiguration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -4770,7 +4812,7 @@ data Job = Job'
 job
     :: Job
 job =
-    Job'
+  Job'
     { _jJobReference = Nothing
     , _jStatus = Nothing
     , _jEtag = Nothing
@@ -4855,9 +4897,11 @@ instance ToJSON Job where
 
 --
 -- /See:/ 'encryptionConfiguration' smart constructor.
-newtype EncryptionConfiguration = EncryptionConfiguration'
+newtype EncryptionConfiguration =
+  EncryptionConfiguration'
     { _ecKmsKeyName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EncryptionConfiguration' with the minimum fields required to make a request.
 --
@@ -4866,10 +4910,7 @@ newtype EncryptionConfiguration = EncryptionConfiguration'
 -- * 'ecKmsKeyName'
 encryptionConfiguration
     :: EncryptionConfiguration
-encryptionConfiguration =
-    EncryptionConfiguration'
-    { _ecKmsKeyName = Nothing
-    }
+encryptionConfiguration = EncryptionConfiguration' {_ecKmsKeyName = Nothing}
 
 -- | [Optional] Describes the Cloud KMS encryption key that will be used to
 -- protect destination BigQuery table. The BigQuery Service Account
@@ -4891,10 +4932,12 @@ instance ToJSON EncryptionConfiguration where
 
 --
 -- /See:/ 'tableDataInsertAllResponseInsertErrorsItem' smart constructor.
-data TableDataInsertAllResponseInsertErrorsItem = TableDataInsertAllResponseInsertErrorsItem'
+data TableDataInsertAllResponseInsertErrorsItem =
+  TableDataInsertAllResponseInsertErrorsItem'
     { _tdiarieiErrors :: !(Maybe [ErrorProto])
     , _tdiarieiIndex  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableDataInsertAllResponseInsertErrorsItem' with the minimum fields required to make a request.
 --
@@ -4906,10 +4949,8 @@ data TableDataInsertAllResponseInsertErrorsItem = TableDataInsertAllResponseInse
 tableDataInsertAllResponseInsertErrorsItem
     :: TableDataInsertAllResponseInsertErrorsItem
 tableDataInsertAllResponseInsertErrorsItem =
-    TableDataInsertAllResponseInsertErrorsItem'
-    { _tdiarieiErrors = Nothing
-    , _tdiarieiIndex = Nothing
-    }
+  TableDataInsertAllResponseInsertErrorsItem'
+    {_tdiarieiErrors = Nothing, _tdiarieiIndex = Nothing}
 
 -- | Error information for the row indicated by the index property.
 tdiarieiErrors :: Lens' TableDataInsertAllResponseInsertErrorsItem [ErrorProto]
@@ -4927,7 +4968,8 @@ tdiarieiIndex
       . mapping _Coerce
 
 instance FromJSON
-         TableDataInsertAllResponseInsertErrorsItem where
+           TableDataInsertAllResponseInsertErrorsItem
+         where
         parseJSON
           = withObject
               "TableDataInsertAllResponseInsertErrorsItem"
@@ -4936,7 +4978,8 @@ instance FromJSON
                    (o .:? "errors" .!= mempty) <*> (o .:? "index"))
 
 instance ToJSON
-         TableDataInsertAllResponseInsertErrorsItem where
+           TableDataInsertAllResponseInsertErrorsItem
+         where
         toJSON
           TableDataInsertAllResponseInsertErrorsItem'{..}
           = object
@@ -4946,7 +4989,8 @@ instance ToJSON
 
 --
 -- /See:/ 'jobConfigurationExtract' smart constructor.
-data JobConfigurationExtract = JobConfigurationExtract'
+data JobConfigurationExtract =
+  JobConfigurationExtract'
     { _jceDestinationFormat :: !(Maybe Text)
     , _jceSourceTable       :: !(Maybe TableReference)
     , _jcePrintHeader       :: !Bool
@@ -4954,7 +4998,8 @@ data JobConfigurationExtract = JobConfigurationExtract'
     , _jceDestinationURIs   :: !(Maybe [Text])
     , _jceDestinationURI    :: !(Maybe Text)
     , _jceFieldDelimiter    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobConfigurationExtract' with the minimum fields required to make a request.
 --
@@ -4976,7 +5021,7 @@ data JobConfigurationExtract = JobConfigurationExtract'
 jobConfigurationExtract
     :: JobConfigurationExtract
 jobConfigurationExtract =
-    JobConfigurationExtract'
+  JobConfigurationExtract'
     { _jceDestinationFormat = Nothing
     , _jceSourceTable = Nothing
     , _jcePrintHeader = True
@@ -5065,10 +5110,12 @@ instance ToJSON JobConfigurationExtract where
 
 --
 -- /See:/ 'modelDefinition' smart constructor.
-data ModelDefinition = ModelDefinition'
+data ModelDefinition =
+  ModelDefinition'
     { _mdModelOptions :: !(Maybe ModelDefinitionModelOptions)
     , _mdTrainingRuns :: !(Maybe [TrainingRun])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModelDefinition' with the minimum fields required to make a request.
 --
@@ -5080,10 +5127,7 @@ data ModelDefinition = ModelDefinition'
 modelDefinition
     :: ModelDefinition
 modelDefinition =
-    ModelDefinition'
-    { _mdModelOptions = Nothing
-    , _mdTrainingRuns = Nothing
-    }
+  ModelDefinition' {_mdModelOptions = Nothing, _mdTrainingRuns = Nothing}
 
 -- | [Output-only, Beta] Model options used for the first training run. These
 -- options are immutable for subsequent training runs. Default values are
@@ -5121,10 +5165,12 @@ instance ToJSON ModelDefinition where
 
 --
 -- /See:/ 'jobCancelResponse' smart constructor.
-data JobCancelResponse = JobCancelResponse'
+data JobCancelResponse =
+  JobCancelResponse'
     { _jcrKind :: !Text
     , _jcrJob  :: !(Maybe Job)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobCancelResponse' with the minimum fields required to make a request.
 --
@@ -5136,10 +5182,8 @@ data JobCancelResponse = JobCancelResponse'
 jobCancelResponse
     :: JobCancelResponse
 jobCancelResponse =
-    JobCancelResponse'
-    { _jcrKind = "bigquery#jobCancelResponse"
-    , _jcrJob = Nothing
-    }
+  JobCancelResponse'
+    {_jcrKind = "bigquery#jobCancelResponse", _jcrJob = Nothing}
 
 -- | The resource type of the response.
 jcrKind :: Lens' JobCancelResponse Text
@@ -5166,9 +5210,11 @@ instance ToJSON JobCancelResponse where
 -- | Represents a single JSON object.
 --
 -- /See:/ 'jsonObject' smart constructor.
-newtype JSONObject = JSONObject'
+newtype JSONObject =
+  JSONObject'
     { _joAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JSONObject' with the minimum fields required to make a request.
 --
@@ -5178,10 +5224,7 @@ newtype JSONObject = JSONObject'
 jsonObject
     :: HashMap Text JSONValue -- ^ 'joAddtional'
     -> JSONObject
-jsonObject pJoAddtional_ =
-    JSONObject'
-    { _joAddtional = _Coerce # pJoAddtional_
-    }
+jsonObject pJoAddtional_ = JSONObject' {_joAddtional = _Coerce # pJoAddtional_}
 
 joAddtional :: Lens' JSONObject (HashMap Text JSONValue)
 joAddtional
@@ -5198,7 +5241,8 @@ instance ToJSON JSONObject where
 
 --
 -- /See:/ 'jobConfigurationQuery' smart constructor.
-data JobConfigurationQuery = JobConfigurationQuery'
+data JobConfigurationQuery =
+  JobConfigurationQuery'
     { _jcqDestinationTable                   :: !(Maybe TableReference)
     , _jcqWriteDisPosition                   :: !(Maybe Text)
     , _jcqPriority                           :: !(Maybe Text)
@@ -5221,7 +5265,8 @@ data JobConfigurationQuery = JobConfigurationQuery'
     , _jcqUseLegacySQL                       :: !Bool
     , _jcqDestinationEncryptionConfiguration :: !(Maybe EncryptionConfiguration)
     , _jcqDefaultDataSet                     :: !(Maybe DataSetReference)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobConfigurationQuery' with the minimum fields required to make a request.
 --
@@ -5273,7 +5318,7 @@ data JobConfigurationQuery = JobConfigurationQuery'
 jobConfigurationQuery
     :: JobConfigurationQuery
 jobConfigurationQuery =
-    JobConfigurationQuery'
+  JobConfigurationQuery'
     { _jcqDestinationTable = Nothing
     , _jcqWriteDisPosition = Nothing
     , _jcqPriority = Nothing
@@ -5556,10 +5601,12 @@ instance ToJSON JobConfigurationQuery where
 
 --
 -- /See:/ 'googleSheetsOptions' smart constructor.
-data GoogleSheetsOptions = GoogleSheetsOptions'
+data GoogleSheetsOptions =
+  GoogleSheetsOptions'
     { _gsoSkipLeadingRows :: !(Maybe (Textual Int64))
     , _gsoRange           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleSheetsOptions' with the minimum fields required to make a request.
 --
@@ -5571,10 +5618,7 @@ data GoogleSheetsOptions = GoogleSheetsOptions'
 googleSheetsOptions
     :: GoogleSheetsOptions
 googleSheetsOptions =
-    GoogleSheetsOptions'
-    { _gsoSkipLeadingRows = Nothing
-    , _gsoRange = Nothing
-    }
+  GoogleSheetsOptions' {_gsoSkipLeadingRows = Nothing, _gsoRange = Nothing}
 
 -- | [Optional] The number of rows at the top of a sheet that BigQuery will
 -- skip when reading the data. The default value is 0. This property is
@@ -5616,10 +5660,12 @@ instance ToJSON GoogleSheetsOptions where
 
 --
 -- /See:/ 'tableDataInsertAllRequestRowsItem' smart constructor.
-data TableDataInsertAllRequestRowsItem = TableDataInsertAllRequestRowsItem'
+data TableDataInsertAllRequestRowsItem =
+  TableDataInsertAllRequestRowsItem'
     { _tdiarriJSON     :: !(Maybe JSONObject)
     , _tdiarriInsertId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableDataInsertAllRequestRowsItem' with the minimum fields required to make a request.
 --
@@ -5631,10 +5677,8 @@ data TableDataInsertAllRequestRowsItem = TableDataInsertAllRequestRowsItem'
 tableDataInsertAllRequestRowsItem
     :: TableDataInsertAllRequestRowsItem
 tableDataInsertAllRequestRowsItem =
-    TableDataInsertAllRequestRowsItem'
-    { _tdiarriJSON = Nothing
-    , _tdiarriInsertId = Nothing
-    }
+  TableDataInsertAllRequestRowsItem'
+    {_tdiarriJSON = Nothing, _tdiarriInsertId = Nothing}
 
 -- | [Required] A JSON object that contains a row of data. The object\'s
 -- properties and values must match the destination table\'s schema.
@@ -5667,12 +5711,14 @@ instance ToJSON TableDataInsertAllRequestRowsItem
 
 --
 -- /See:/ 'jobList' smart constructor.
-data JobList = JobList'
+data JobList =
+  JobList'
     { _jlEtag          :: !(Maybe Text)
     , _jlNextPageToken :: !(Maybe Text)
     , _jlKind          :: !Text
     , _jlJobs          :: !(Maybe [JobListJobsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobList' with the minimum fields required to make a request.
 --
@@ -5688,7 +5734,7 @@ data JobList = JobList'
 jobList
     :: JobList
 jobList =
-    JobList'
+  JobList'
     { _jlEtag = Nothing
     , _jlNextPageToken = Nothing
     , _jlKind = "bigquery#jobList"
@@ -5738,9 +5784,11 @@ instance ToJSON JobList where
 -- queried as if it were a standard BigQuery table.
 --
 -- /See:/ 'jobConfigurationQueryTableDefinitions' smart constructor.
-newtype JobConfigurationQueryTableDefinitions = JobConfigurationQueryTableDefinitions'
+newtype JobConfigurationQueryTableDefinitions =
+  JobConfigurationQueryTableDefinitions'
     { _jcqtdAddtional :: HashMap Text ExternalDataConfiguration
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobConfigurationQueryTableDefinitions' with the minimum fields required to make a request.
 --
@@ -5751,9 +5799,8 @@ jobConfigurationQueryTableDefinitions
     :: HashMap Text ExternalDataConfiguration -- ^ 'jcqtdAddtional'
     -> JobConfigurationQueryTableDefinitions
 jobConfigurationQueryTableDefinitions pJcqtdAddtional_ =
-    JobConfigurationQueryTableDefinitions'
-    { _jcqtdAddtional = _Coerce # pJcqtdAddtional_
-    }
+  JobConfigurationQueryTableDefinitions'
+    {_jcqtdAddtional = _Coerce # pJcqtdAddtional_}
 
 jcqtdAddtional :: Lens' JobConfigurationQueryTableDefinitions (HashMap Text ExternalDataConfiguration)
 jcqtdAddtional
@@ -5762,7 +5809,8 @@ jcqtdAddtional
       . _Coerce
 
 instance FromJSON
-         JobConfigurationQueryTableDefinitions where
+           JobConfigurationQueryTableDefinitions
+         where
         parseJSON
           = withObject "JobConfigurationQueryTableDefinitions"
               (\ o ->
@@ -5775,9 +5823,11 @@ instance ToJSON JobConfigurationQueryTableDefinitions
 
 --
 -- /See:/ 'tableCell' smart constructor.
-newtype TableCell = TableCell'
+newtype TableCell =
+  TableCell'
     { _tcV :: Maybe JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableCell' with the minimum fields required to make a request.
 --
@@ -5786,10 +5836,7 @@ newtype TableCell = TableCell'
 -- * 'tcV'
 tableCell
     :: TableCell
-tableCell =
-    TableCell'
-    { _tcV = Nothing
-    }
+tableCell = TableCell' {_tcV = Nothing}
 
 tcV :: Lens' TableCell (Maybe JSONValue)
 tcV = lens _tcV (\ s a -> s{_tcV = a})
@@ -5805,10 +5852,12 @@ instance ToJSON TableCell where
 
 --
 -- /See:/ 'jobStatistics2ReservationUsageItem' smart constructor.
-data JobStatistics2ReservationUsageItem = JobStatistics2ReservationUsageItem'
+data JobStatistics2ReservationUsageItem =
+  JobStatistics2ReservationUsageItem'
     { _jName   :: !(Maybe Text)
     , _jSlotMs :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobStatistics2ReservationUsageItem' with the minimum fields required to make a request.
 --
@@ -5820,10 +5869,7 @@ data JobStatistics2ReservationUsageItem = JobStatistics2ReservationUsageItem'
 jobStatistics2ReservationUsageItem
     :: JobStatistics2ReservationUsageItem
 jobStatistics2ReservationUsageItem =
-    JobStatistics2ReservationUsageItem'
-    { _jName = Nothing
-    , _jSlotMs = Nothing
-    }
+  JobStatistics2ReservationUsageItem' {_jName = Nothing, _jSlotMs = Nothing}
 
 -- | [Output-only] Reservation name or \"unreserved\" for on-demand resources
 -- usage.
@@ -5853,11 +5899,13 @@ instance ToJSON JobStatistics2ReservationUsageItem
 
 --
 -- /See:/ 'queryParameterValue' smart constructor.
-data QueryParameterValue = QueryParameterValue'
+data QueryParameterValue =
+  QueryParameterValue'
     { _qpvStructValues :: !(Maybe QueryParameterValueStructValues)
     , _qpvValue        :: !(Maybe Text)
     , _qpvArrayValues  :: !(Maybe [QueryParameterValue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryParameterValue' with the minimum fields required to make a request.
 --
@@ -5871,11 +5919,8 @@ data QueryParameterValue = QueryParameterValue'
 queryParameterValue
     :: QueryParameterValue
 queryParameterValue =
-    QueryParameterValue'
-    { _qpvStructValues = Nothing
-    , _qpvValue = Nothing
-    , _qpvArrayValues = Nothing
-    }
+  QueryParameterValue'
+    {_qpvStructValues = Nothing, _qpvValue = Nothing, _qpvArrayValues = Nothing}
 
 -- | [Optional] The struct field values, in order of the struct type\'s
 -- declaration.
@@ -5914,11 +5959,13 @@ instance ToJSON QueryParameterValue where
 
 --
 -- /See:/ 'viewDefinition' smart constructor.
-data ViewDefinition = ViewDefinition'
+data ViewDefinition =
+  ViewDefinition'
     { _vdUserDefinedFunctionResources :: !(Maybe [UserDefinedFunctionResource])
     , _vdQuery                        :: !(Maybe Text)
     , _vdUseLegacySQL                 :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ViewDefinition' with the minimum fields required to make a request.
 --
@@ -5932,7 +5979,7 @@ data ViewDefinition = ViewDefinition'
 viewDefinition
     :: ViewDefinition
 viewDefinition =
-    ViewDefinition'
+  ViewDefinition'
     { _vdUserDefinedFunctionResources = Nothing
     , _vdQuery = Nothing
     , _vdUseLegacySQL = Nothing
@@ -5979,10 +6026,12 @@ instance ToJSON ViewDefinition where
 
 --
 -- /See:/ 'userDefinedFunctionResource' smart constructor.
-data UserDefinedFunctionResource = UserDefinedFunctionResource'
+data UserDefinedFunctionResource =
+  UserDefinedFunctionResource'
     { _udfrResourceURI :: !(Maybe Text)
     , _udfrInlineCode  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserDefinedFunctionResource' with the minimum fields required to make a request.
 --
@@ -5994,10 +6043,8 @@ data UserDefinedFunctionResource = UserDefinedFunctionResource'
 userDefinedFunctionResource
     :: UserDefinedFunctionResource
 userDefinedFunctionResource =
-    UserDefinedFunctionResource'
-    { _udfrResourceURI = Nothing
-    , _udfrInlineCode = Nothing
-    }
+  UserDefinedFunctionResource'
+    {_udfrResourceURI = Nothing, _udfrInlineCode = Nothing}
 
 -- | [Pick one] A code resource to load from a Google Cloud Storage URI
 -- (gs:\/\/bucket\/path).
@@ -6030,7 +6077,8 @@ instance ToJSON UserDefinedFunctionResource where
 
 --
 -- /See:/ 'jobStatistics2' smart constructor.
-data JobStatistics2 = JobStatistics2'
+data JobStatistics2 =
+  JobStatistics2'
     { _jModelTrainingExpectedTotalIteration :: !(Maybe (Textual Int64))
     , _jModelTraining                       :: !(Maybe BigQueryModelTraining)
     , _jTotalSlotMs                         :: !(Maybe (Textual Int64))
@@ -6052,7 +6100,8 @@ data JobStatistics2 = JobStatistics2'
     , _jTotalBytesBilled                    :: !(Maybe (Textual Int64))
     , _jDdlOperationPerformed               :: !(Maybe Text)
     , _jTotalPartitionsProcessed            :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobStatistics2' with the minimum fields required to make a request.
 --
@@ -6102,7 +6151,7 @@ data JobStatistics2 = JobStatistics2'
 jobStatistics2
     :: JobStatistics2
 jobStatistics2 =
-    JobStatistics2'
+  JobStatistics2'
     { _jModelTrainingExpectedTotalIteration = Nothing
     , _jModelTraining = Nothing
     , _jTotalSlotMs = Nothing
@@ -6357,11 +6406,13 @@ instance ToJSON JobStatistics2 where
 
 --
 -- /See:/ 'jobStatus' smart constructor.
-data JobStatus = JobStatus'
+data JobStatus =
+  JobStatus'
     { _jsState       :: !(Maybe Text)
     , _jsErrorResult :: !(Maybe ErrorProto)
     , _jsErrors      :: !(Maybe [ErrorProto])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobStatus' with the minimum fields required to make a request.
 --
@@ -6375,11 +6426,7 @@ data JobStatus = JobStatus'
 jobStatus
     :: JobStatus
 jobStatus =
-    JobStatus'
-    { _jsState = Nothing
-    , _jsErrorResult = Nothing
-    , _jsErrors = Nothing
-    }
+  JobStatus' {_jsState = Nothing, _jsErrorResult = Nothing, _jsErrors = Nothing}
 
 -- | [Output-only] Running state of the job.
 jsState :: Lens' JobStatus (Maybe Text)
@@ -6426,9 +6473,11 @@ instance ToJSON JobStatus where
 -- in the list must have a different key.
 --
 -- /See:/ 'tableLabels' smart constructor.
-newtype TableLabels = TableLabels'
+newtype TableLabels =
+  TableLabels'
     { _tlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableLabels' with the minimum fields required to make a request.
 --
@@ -6439,9 +6488,7 @@ tableLabels
     :: HashMap Text Text -- ^ 'tlAddtional'
     -> TableLabels
 tableLabels pTlAddtional_ =
-    TableLabels'
-    { _tlAddtional = _Coerce # pTlAddtional_
-    }
+  TableLabels' {_tlAddtional = _Coerce # pTlAddtional_}
 
 tlAddtional :: Lens' TableLabels (HashMap Text Text)
 tlAddtional
@@ -6458,10 +6505,12 @@ instance ToJSON TableLabels where
 
 --
 -- /See:/ 'destinationTableProperties' smart constructor.
-data DestinationTableProperties = DestinationTableProperties'
+data DestinationTableProperties =
+  DestinationTableProperties'
     { _dtpFriendlyName :: !(Maybe Text)
     , _dtpDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DestinationTableProperties' with the minimum fields required to make a request.
 --
@@ -6473,10 +6522,8 @@ data DestinationTableProperties = DestinationTableProperties'
 destinationTableProperties
     :: DestinationTableProperties
 destinationTableProperties =
-    DestinationTableProperties'
-    { _dtpFriendlyName = Nothing
-    , _dtpDescription = Nothing
-    }
+  DestinationTableProperties'
+    {_dtpFriendlyName = Nothing, _dtpDescription = Nothing}
 
 -- | [Optional] The friendly name for the destination table. This will only
 -- be used if the destination table is newly created. If the table already
@@ -6512,7 +6559,8 @@ instance ToJSON DestinationTableProperties where
 
 --
 -- /See:/ 'dataSetAccessItem' smart constructor.
-data DataSetAccessItem = DataSetAccessItem'
+data DataSetAccessItem =
+  DataSetAccessItem'
     { _dsaiGroupByEmail :: !(Maybe Text)
     , _dsaiDomain       :: !(Maybe Text)
     , _dsaiSpecialGroup :: !(Maybe Text)
@@ -6520,7 +6568,8 @@ data DataSetAccessItem = DataSetAccessItem'
     , _dsaiIAMMember    :: !(Maybe Text)
     , _dsaiView         :: !(Maybe TableReference)
     , _dsaiUserByEmail  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetAccessItem' with the minimum fields required to make a request.
 --
@@ -6542,7 +6591,7 @@ data DataSetAccessItem = DataSetAccessItem'
 dataSetAccessItem
     :: DataSetAccessItem
 dataSetAccessItem =
-    DataSetAccessItem'
+  DataSetAccessItem'
     { _dsaiGroupByEmail = Nothing
     , _dsaiDomain = Nothing
     , _dsaiSpecialGroup = Nothing
@@ -6631,10 +6680,12 @@ instance ToJSON DataSetAccessItem where
 
 --
 -- /See:/ 'tableDataInsertAllResponse' smart constructor.
-data TableDataInsertAllResponse = TableDataInsertAllResponse'
+data TableDataInsertAllResponse =
+  TableDataInsertAllResponse'
     { _tKind         :: !Text
     , _tInsertErrors :: !(Maybe [TableDataInsertAllResponseInsertErrorsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableDataInsertAllResponse' with the minimum fields required to make a request.
 --
@@ -6646,10 +6697,8 @@ data TableDataInsertAllResponse = TableDataInsertAllResponse'
 tableDataInsertAllResponse
     :: TableDataInsertAllResponse
 tableDataInsertAllResponse =
-    TableDataInsertAllResponse'
-    { _tKind = "bigquery#tableDataInsertAllResponse"
-    , _tInsertErrors = Nothing
-    }
+  TableDataInsertAllResponse'
+    {_tKind = "bigquery#tableDataInsertAllResponse", _tInsertErrors = Nothing}
 
 -- | The resource type of the response.
 tKind :: Lens' TableDataInsertAllResponse Text
@@ -6681,11 +6730,13 @@ instance ToJSON TableDataInsertAllResponse where
 
 --
 -- /See:/ 'queryParameterType' smart constructor.
-data QueryParameterType = QueryParameterType'
+data QueryParameterType =
+  QueryParameterType'
     { _qptStructTypes :: !(Maybe [QueryParameterTypeStructTypesItem])
     , _qptType        :: !(Maybe Text)
     , _qptArrayType   :: !(Maybe QueryParameterType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryParameterType' with the minimum fields required to make a request.
 --
@@ -6699,11 +6750,8 @@ data QueryParameterType = QueryParameterType'
 queryParameterType
     :: QueryParameterType
 queryParameterType =
-    QueryParameterType'
-    { _qptStructTypes = Nothing
-    , _qptType = Nothing
-    , _qptArrayType = Nothing
-    }
+  QueryParameterType'
+    {_qptStructTypes = Nothing, _qptType = Nothing, _qptArrayType = Nothing}
 
 -- | [Optional] The types of the fields of this struct, in order, if this is
 -- a struct.
@@ -6741,7 +6789,8 @@ instance ToJSON QueryParameterType where
 
 --
 -- /See:/ 'table' smart constructor.
-data Table = Table'
+data Table =
+  Table'
     { _tabMaterializedView          :: !(Maybe MaterializedViewDefinition)
     , _tabCreationTime              :: !(Maybe (Textual Int64))
     , _tabEtag                      :: !(Maybe Text)
@@ -6770,7 +6819,8 @@ data Table = Table'
     , _tabNumLongTermBytes          :: !(Maybe (Textual Int64))
     , _tabExpirationTime            :: !(Maybe (Textual Int64))
     , _tabDescription               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
@@ -6834,7 +6884,7 @@ data Table = Table'
 table
     :: Table
 table =
-    Table'
+  Table'
     { _tabMaterializedView = Nothing
     , _tabCreationTime = Nothing
     , _tabEtag = Nothing
@@ -7129,12 +7179,14 @@ instance ToJSON Table where
 
 --
 -- /See:/ 'errorProto' smart constructor.
-data ErrorProto = ErrorProto'
+data ErrorProto =
+  ErrorProto'
     { _epDebugInfo :: !(Maybe Text)
     , _epLocation  :: !(Maybe Text)
     , _epReason    :: !(Maybe Text)
     , _epMessage   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ErrorProto' with the minimum fields required to make a request.
 --
@@ -7150,7 +7202,7 @@ data ErrorProto = ErrorProto'
 errorProto
     :: ErrorProto
 errorProto =
-    ErrorProto'
+  ErrorProto'
     { _epDebugInfo = Nothing
     , _epLocation = Nothing
     , _epReason = Nothing
@@ -7197,14 +7249,16 @@ instance ToJSON ErrorProto where
 
 --
 -- /See:/ 'csvOptions' smart constructor.
-data CSVOptions = CSVOptions'
+data CSVOptions =
+  CSVOptions'
     { _coSkipLeadingRows     :: !(Maybe (Textual Int64))
     , _coAllowJaggedRows     :: !(Maybe Bool)
     , _coAllowQuotedNewlines :: !(Maybe Bool)
     , _coQuote               :: !Text
     , _coEncoding            :: !(Maybe Text)
     , _coFieldDelimiter      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CSVOptions' with the minimum fields required to make a request.
 --
@@ -7224,7 +7278,7 @@ data CSVOptions = CSVOptions'
 csvOptions
     :: CSVOptions
 csvOptions =
-    CSVOptions'
+  CSVOptions'
     { _coSkipLeadingRows = Nothing
     , _coAllowJaggedRows = Nothing
     , _coAllowQuotedNewlines = Nothing
@@ -7313,13 +7367,15 @@ instance ToJSON CSVOptions where
 
 --
 -- /See:/ 'jobStatistics3' smart constructor.
-data JobStatistics3 = JobStatistics3'
+data JobStatistics3 =
+  JobStatistics3'
     { _jsInputFiles     :: !(Maybe (Textual Int64))
     , _jsOutputRows     :: !(Maybe (Textual Int64))
     , _jsOutputBytes    :: !(Maybe (Textual Int64))
     , _jsInputFileBytes :: !(Maybe (Textual Int64))
     , _jsBadRecords     :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobStatistics3' with the minimum fields required to make a request.
 --
@@ -7337,7 +7393,7 @@ data JobStatistics3 = JobStatistics3'
 jobStatistics3
     :: JobStatistics3
 jobStatistics3 =
-    JobStatistics3'
+  JobStatistics3'
     { _jsInputFiles = Nothing
     , _jsOutputRows = Nothing
     , _jsOutputBytes = Nothing
@@ -7404,7 +7460,8 @@ instance ToJSON JobStatistics3 where
 
 --
 -- /See:/ 'queryResponse' smart constructor.
-data QueryResponse = QueryResponse'
+data QueryResponse =
+  QueryResponse'
     { _qJobReference        :: !(Maybe JobReference)
     , _qKind                :: !Text
     , _qSchema              :: !(Maybe TableSchema)
@@ -7416,7 +7473,8 @@ data QueryResponse = QueryResponse'
     , _qErrors              :: !(Maybe [ErrorProto])
     , _qJobComplete         :: !(Maybe Bool)
     , _qCacheHit            :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryResponse' with the minimum fields required to make a request.
 --
@@ -7446,7 +7504,7 @@ data QueryResponse = QueryResponse'
 queryResponse
     :: QueryResponse
 queryResponse =
-    QueryResponse'
+  QueryResponse'
     { _qJobReference = Nothing
     , _qKind = "bigquery#queryResponse"
     , _qSchema = Nothing
@@ -7574,9 +7632,11 @@ instance ToJSON QueryResponse where
 -- and group your datasets.
 --
 -- /See:/ 'dataSetListDataSetsItemLabels' smart constructor.
-newtype DataSetListDataSetsItemLabels = DataSetListDataSetsItemLabels'
+newtype DataSetListDataSetsItemLabels =
+  DataSetListDataSetsItemLabels'
     { _dsldsilAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DataSetListDataSetsItemLabels' with the minimum fields required to make a request.
 --
@@ -7587,9 +7647,8 @@ dataSetListDataSetsItemLabels
     :: HashMap Text Text -- ^ 'dsldsilAddtional'
     -> DataSetListDataSetsItemLabels
 dataSetListDataSetsItemLabels pDsldsilAddtional_ =
-    DataSetListDataSetsItemLabels'
-    { _dsldsilAddtional = _Coerce # pDsldsilAddtional_
-    }
+  DataSetListDataSetsItemLabels'
+    {_dsldsilAddtional = _Coerce # pDsldsilAddtional_}
 
 dsldsilAddtional :: Lens' DataSetListDataSetsItemLabels (HashMap Text Text)
 dsldsilAddtional
@@ -7609,12 +7668,14 @@ instance ToJSON DataSetListDataSetsItemLabels where
 
 --
 -- /See:/ 'trainingRun' smart constructor.
-data TrainingRun = TrainingRun'
+data TrainingRun =
+  TrainingRun'
     { _trState            :: !(Maybe Text)
     , _trStartTime        :: !(Maybe DateTime')
     , _trIterationResults :: !(Maybe [IterationResult])
     , _trTrainingOptions  :: !(Maybe TrainingRunTrainingOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrainingRun' with the minimum fields required to make a request.
 --
@@ -7630,7 +7691,7 @@ data TrainingRun = TrainingRun'
 trainingRun
     :: TrainingRun
 trainingRun =
-    TrainingRun'
+  TrainingRun'
     { _trState = Nothing
     , _trStartTime = Nothing
     , _trIterationResults = Nothing
@@ -7691,9 +7752,11 @@ instance ToJSON TrainingRun where
 -- | Additional details for a view.
 --
 -- /See:/ 'tableListTablesItemView' smart constructor.
-newtype TableListTablesItemView = TableListTablesItemView'
+newtype TableListTablesItemView =
+  TableListTablesItemView'
     { _tltivUseLegacySQL :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableListTablesItemView' with the minimum fields required to make a request.
 --
@@ -7703,9 +7766,7 @@ newtype TableListTablesItemView = TableListTablesItemView'
 tableListTablesItemView
     :: TableListTablesItemView
 tableListTablesItemView =
-    TableListTablesItemView'
-    { _tltivUseLegacySQL = Nothing
-    }
+  TableListTablesItemView' {_tltivUseLegacySQL = Nothing}
 
 -- | True if view is defined in legacy SQL dialect, false if in standard SQL.
 tltivUseLegacySQL :: Lens' TableListTablesItemView (Maybe Bool)
@@ -7729,9 +7790,11 @@ instance ToJSON TableListTablesItemView where
 -- group your tables.
 --
 -- /See:/ 'tableListTablesItemLabels' smart constructor.
-newtype TableListTablesItemLabels = TableListTablesItemLabels'
+newtype TableListTablesItemLabels =
+  TableListTablesItemLabels'
     { _tltilAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableListTablesItemLabels' with the minimum fields required to make a request.
 --
@@ -7742,9 +7805,7 @@ tableListTablesItemLabels
     :: HashMap Text Text -- ^ 'tltilAddtional'
     -> TableListTablesItemLabels
 tableListTablesItemLabels pTltilAddtional_ =
-    TableListTablesItemLabels'
-    { _tltilAddtional = _Coerce # pTltilAddtional_
-    }
+  TableListTablesItemLabels' {_tltilAddtional = _Coerce # pTltilAddtional_}
 
 tltilAddtional :: Lens' TableListTablesItemLabels (HashMap Text Text)
 tltilAddtional

@@ -62,13 +62,15 @@ type ForwardingRulesAggregatedListResource =
 -- | Retrieves an aggregated list of forwarding rules.
 --
 -- /See:/ 'forwardingRulesAggregatedList' smart constructor.
-data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList'
+data ForwardingRulesAggregatedList =
+  ForwardingRulesAggregatedList'
     { _fralOrderBy    :: !(Maybe Text)
     , _fralProject    :: !Text
     , _fralFilter     :: !(Maybe Text)
     , _fralPageToken  :: !(Maybe Text)
     , _fralMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRulesAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ forwardingRulesAggregatedList
     :: Text -- ^ 'fralProject'
     -> ForwardingRulesAggregatedList
 forwardingRulesAggregatedList pFralProject_ =
-    ForwardingRulesAggregatedList'
+  ForwardingRulesAggregatedList'
     { _fralOrderBy = Nothing
     , _fralProject = pFralProject_
     , _fralFilter = Nothing

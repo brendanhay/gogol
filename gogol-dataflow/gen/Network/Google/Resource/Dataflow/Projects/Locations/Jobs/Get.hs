@@ -68,7 +68,8 @@ type ProjectsLocationsJobsGetResource =
 -- | Gets the state of the specified Cloud Dataflow job.
 --
 -- /See:/ 'projectsLocationsJobsGet' smart constructor.
-data ProjectsLocationsJobsGet = ProjectsLocationsJobsGet'
+data ProjectsLocationsJobsGet =
+  ProjectsLocationsJobsGet'
     { _pljgXgafv          :: !(Maybe Xgafv)
     , _pljgJobId          :: !Text
     , _pljgUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,8 @@ data ProjectsLocationsJobsGet = ProjectsLocationsJobsGet'
     , _pljgView           :: !(Maybe Text)
     , _pljgProjectId      :: !Text
     , _pljgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsGet' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ projectsLocationsJobsGet
     -> Text -- ^ 'pljgProjectId'
     -> ProjectsLocationsJobsGet
 projectsLocationsJobsGet pPljgJobId_ pPljgLocation_ pPljgProjectId_ =
-    ProjectsLocationsJobsGet'
+  ProjectsLocationsJobsGet'
     { _pljgXgafv = Nothing
     , _pljgJobId = pPljgJobId_
     , _pljgUploadProtocol = Nothing

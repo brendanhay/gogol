@@ -59,11 +59,13 @@ type AchievementsIncrementResource =
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsIncrement' smart constructor.
-data AchievementsIncrement = AchievementsIncrement'
+data AchievementsIncrement =
+  AchievementsIncrement'
     { _aiRequestId        :: !(Maybe (Textual Int64))
     , _aiAchievementId    :: !Text
     , _aiStepsToIncrement :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AchievementsIncrement' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ achievementsIncrement
     -> Int32 -- ^ 'aiStepsToIncrement'
     -> AchievementsIncrement
 achievementsIncrement pAiAchievementId_ pAiStepsToIncrement_ =
-    AchievementsIncrement'
+  AchievementsIncrement'
     { _aiRequestId = Nothing
     , _aiAchievementId = pAiAchievementId_
     , _aiStepsToIncrement = _Coerce # pAiStepsToIncrement_

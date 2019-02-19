@@ -53,10 +53,12 @@ type AccountsContainersWorkspacesTagsCreateResource =
 -- | Creates a GTM Tag.
 --
 -- /See:/ 'accountsContainersWorkspacesTagsCreate' smart constructor.
-data AccountsContainersWorkspacesTagsCreate = AccountsContainersWorkspacesTagsCreate'
+data AccountsContainersWorkspacesTagsCreate =
+  AccountsContainersWorkspacesTagsCreate'
     { _acwtccParent  :: !Text
     , _acwtccPayload :: !Tag
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesTagsCreate' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ accountsContainersWorkspacesTagsCreate
     -> Tag -- ^ 'acwtccPayload'
     -> AccountsContainersWorkspacesTagsCreate
 accountsContainersWorkspacesTagsCreate pAcwtccParent_ pAcwtccPayload_ =
-    AccountsContainersWorkspacesTagsCreate'
-    { _acwtccParent = pAcwtccParent_
-    , _acwtccPayload = pAcwtccPayload_
-    }
+  AccountsContainersWorkspacesTagsCreate'
+    {_acwtccParent = pAcwtccParent_, _acwtccPayload = pAcwtccPayload_}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -88,7 +88,8 @@ acwtccPayload
       (\ s a -> s{_acwtccPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTagsCreate where
+           AccountsContainersWorkspacesTagsCreate
+         where
         type Rs AccountsContainersWorkspacesTagsCreate = Tag
         type Scopes AccountsContainersWorkspacesTagsCreate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]

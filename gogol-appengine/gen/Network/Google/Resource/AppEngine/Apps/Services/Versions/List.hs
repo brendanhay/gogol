@@ -71,7 +71,8 @@ type AppsServicesVersionsListResource =
 -- | Lists the versions of a service.
 --
 -- /See:/ 'appsServicesVersionsList' smart constructor.
-data AppsServicesVersionsList = AppsServicesVersionsList'
+data AppsServicesVersionsList =
+  AppsServicesVersionsList'
     { _asvlXgafv          :: !(Maybe Xgafv)
     , _asvlUploadProtocol :: !(Maybe Text)
     , _asvlAccessToken    :: !(Maybe Text)
@@ -82,7 +83,8 @@ data AppsServicesVersionsList = AppsServicesVersionsList'
     , _asvlServicesId     :: !Text
     , _asvlPageSize       :: !(Maybe (Textual Int32))
     , _asvlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsServicesVersionsList' with the minimum fields required to make a request.
 --
@@ -112,7 +114,7 @@ appsServicesVersionsList
     -> Text -- ^ 'asvlServicesId'
     -> AppsServicesVersionsList
 appsServicesVersionsList pAsvlAppsId_ pAsvlServicesId_ =
-    AppsServicesVersionsList'
+  AppsServicesVersionsList'
     { _asvlXgafv = Nothing
     , _asvlUploadProtocol = Nothing
     , _asvlAccessToken = Nothing

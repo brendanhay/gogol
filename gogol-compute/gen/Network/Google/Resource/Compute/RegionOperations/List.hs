@@ -65,14 +65,16 @@ type RegionOperationsListResource =
 -- region.
 --
 -- /See:/ 'regionOperationsList' smart constructor.
-data RegionOperationsList = RegionOperationsList'
+data RegionOperationsList =
+  RegionOperationsList'
     { _rolOrderBy    :: !(Maybe Text)
     , _rolProject    :: !Text
     , _rolFilter     :: !(Maybe Text)
     , _rolRegion     :: !Text
     , _rolPageToken  :: !(Maybe Text)
     , _rolMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionOperationsList' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ regionOperationsList
     -> Text -- ^ 'rolRegion'
     -> RegionOperationsList
 regionOperationsList pRolProject_ pRolRegion_ =
-    RegionOperationsList'
+  RegionOperationsList'
     { _rolOrderBy = Nothing
     , _rolProject = pRolProject_
     , _rolFilter = Nothing

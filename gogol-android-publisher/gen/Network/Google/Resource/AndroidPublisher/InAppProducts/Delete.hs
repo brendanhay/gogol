@@ -54,10 +54,12 @@ type InAppProductsDeleteResource =
 -- | Delete an in-app product for an app.
 --
 -- /See:/ 'inAppProductsDelete' smart constructor.
-data InAppProductsDelete = InAppProductsDelete'
+data InAppProductsDelete =
+  InAppProductsDelete'
     { _iapdPackageName :: !Text
     , _iapdSKU         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InAppProductsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ inAppProductsDelete
     -> Text -- ^ 'iapdSKU'
     -> InAppProductsDelete
 inAppProductsDelete pIapdPackageName_ pIapdSKU_ =
-    InAppProductsDelete'
-    { _iapdPackageName = pIapdPackageName_
-    , _iapdSKU = pIapdSKU_
-    }
+  InAppProductsDelete'
+    {_iapdPackageName = pIapdPackageName_, _iapdSKU = pIapdSKU_}
 
 -- | Unique identifier for the Android app with the in-app product; for
 -- example, \"com.spiffygame\".

@@ -57,11 +57,13 @@ type ManagedZonesCreateResource =
 -- | Create a new ManagedZone.
 --
 -- /See:/ 'managedZonesCreate' smart constructor.
-data ManagedZonesCreate = ManagedZonesCreate'
+data ManagedZonesCreate =
+  ManagedZonesCreate'
     { _mzcProject           :: !Text
     , _mzcPayload           :: !ManagedZone
     , _mzcClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedZonesCreate' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ managedZonesCreate
     -> ManagedZone -- ^ 'mzcPayload'
     -> ManagedZonesCreate
 managedZonesCreate pMzcProject_ pMzcPayload_ =
-    ManagedZonesCreate'
+  ManagedZonesCreate'
     { _mzcProject = pMzcProject_
     , _mzcPayload = pMzcPayload_
     , _mzcClientOperationId = Nothing

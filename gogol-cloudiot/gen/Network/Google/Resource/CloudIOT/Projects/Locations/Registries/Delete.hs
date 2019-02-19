@@ -59,14 +59,16 @@ type ProjectsLocationsRegistriesDeleteResource =
 -- | Deletes a device registry configuration.
 --
 -- /See:/ 'projectsLocationsRegistriesDelete' smart constructor.
-data ProjectsLocationsRegistriesDelete = ProjectsLocationsRegistriesDelete'
+data ProjectsLocationsRegistriesDelete =
+  ProjectsLocationsRegistriesDelete'
     { _plrdXgafv          :: !(Maybe Xgafv)
     , _plrdUploadProtocol :: !(Maybe Text)
     , _plrdAccessToken    :: !(Maybe Text)
     , _plrdUploadType     :: !(Maybe Text)
     , _plrdName           :: !Text
     , _plrdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsLocationsRegistriesDelete
     :: Text -- ^ 'plrdName'
     -> ProjectsLocationsRegistriesDelete
 projectsLocationsRegistriesDelete pPlrdName_ =
-    ProjectsLocationsRegistriesDelete'
+  ProjectsLocationsRegistriesDelete'
     { _plrdXgafv = Nothing
     , _plrdUploadProtocol = Nothing
     , _plrdAccessToken = Nothing
@@ -130,7 +132,8 @@ plrdCallback
   = lens _plrdCallback (\ s a -> s{_plrdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesDelete where
+           ProjectsLocationsRegistriesDelete
+         where
         type Rs ProjectsLocationsRegistriesDelete = Empty
         type Scopes ProjectsLocationsRegistriesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

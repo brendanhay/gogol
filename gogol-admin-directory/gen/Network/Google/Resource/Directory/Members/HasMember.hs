@@ -58,10 +58,12 @@ type MembersHasMemberResource =
 -- be direct or nested.
 --
 -- /See:/ 'membersHasMember'' smart constructor.
-data MembersHasMember' = MembersHasMember''
+data MembersHasMember' =
+  MembersHasMember''
     { _mhmMemberKey :: !Text
     , _mhmGroupKey  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MembersHasMember'' with the minimum fields required to make a request.
 --
@@ -75,10 +77,8 @@ membersHasMember'
     -> Text -- ^ 'mhmGroupKey'
     -> MembersHasMember'
 membersHasMember' pMhmMemberKey_ pMhmGroupKey_ =
-    MembersHasMember''
-    { _mhmMemberKey = pMhmMemberKey_
-    , _mhmGroupKey = pMhmGroupKey_
-    }
+  MembersHasMember''
+    {_mhmMemberKey = pMhmMemberKey_, _mhmGroupKey = pMhmGroupKey_}
 
 -- | Identifies the user member in the API request. The value can be the
 -- user\'s primary email address, alias, or unique ID.

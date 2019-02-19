@@ -67,14 +67,16 @@ type FoldersSearchResource =
 -- which the caller has the permission \`resourcemanager.folders.get\`.
 --
 -- /See:/ 'foldersSearch' smart constructor.
-data FoldersSearch = FoldersSearch'
+data FoldersSearch =
+  FoldersSearch'
     { _fsXgafv          :: !(Maybe Xgafv)
     , _fsUploadProtocol :: !(Maybe Text)
     , _fsAccessToken    :: !(Maybe Text)
     , _fsUploadType     :: !(Maybe Text)
     , _fsPayload        :: !SearchFoldersRequest
     , _fsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersSearch' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ foldersSearch
     :: SearchFoldersRequest -- ^ 'fsPayload'
     -> FoldersSearch
 foldersSearch pFsPayload_ =
-    FoldersSearch'
+  FoldersSearch'
     { _fsXgafv = Nothing
     , _fsUploadProtocol = Nothing
     , _fsAccessToken = Nothing

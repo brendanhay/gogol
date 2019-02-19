@@ -52,9 +52,11 @@ type ProposalsSetupcompleteResource =
 -- | Update the given proposal to indicate that setup has been completed.
 --
 -- /See:/ 'proposalsSetupcomplete' smart constructor.
-newtype ProposalsSetupcomplete = ProposalsSetupcomplete'
+newtype ProposalsSetupcomplete =
+  ProposalsSetupcomplete'
     { _psProposalId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProposalsSetupcomplete' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ proposalsSetupcomplete
     :: Text -- ^ 'psProposalId'
     -> ProposalsSetupcomplete
 proposalsSetupcomplete pPsProposalId_ =
-    ProposalsSetupcomplete'
-    { _psProposalId = pPsProposalId_
-    }
+  ProposalsSetupcomplete' {_psProposalId = pPsProposalId_}
 
 -- | The proposal id for which the setup is complete
 psProposalId :: Lens' ProposalsSetupcomplete Text

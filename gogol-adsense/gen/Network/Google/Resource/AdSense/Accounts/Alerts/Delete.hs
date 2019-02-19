@@ -56,10 +56,12 @@ type AccountsAlertsDeleteResource =
 -- AdSense account.
 --
 -- /See:/ 'accountsAlertsDelete' smart constructor.
-data AccountsAlertsDelete = AccountsAlertsDelete'
+data AccountsAlertsDelete =
+  AccountsAlertsDelete'
     { _aadAlertId   :: !Text
     , _aadAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsAlertsDelete' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ accountsAlertsDelete
     -> Text -- ^ 'aadAccountId'
     -> AccountsAlertsDelete
 accountsAlertsDelete pAadAlertId_ pAadAccountId_ =
-    AccountsAlertsDelete'
-    { _aadAlertId = pAadAlertId_
-    , _aadAccountId = pAadAccountId_
-    }
+  AccountsAlertsDelete'
+    {_aadAlertId = pAadAlertId_, _aadAccountId = pAadAccountId_}
 
 -- | Alert to delete.
 aadAlertId :: Lens' AccountsAlertsDelete Text

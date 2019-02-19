@@ -74,7 +74,8 @@ type QuerySourcesListResource =
 -- | Returns list of sources that user can use for Search and Suggest APIs.
 --
 -- /See:/ 'querySourcesList' smart constructor.
-data QuerySourcesList = QuerySourcesList'
+data QuerySourcesList =
+  QuerySourcesList'
     { _qslXgafv                                     :: !(Maybe Xgafv)
     , _qslRequestOptionsTimeZone                    :: !(Maybe Text)
     , _qslRequestOptionsDebugOptionsEnableDebugging :: !(Maybe Bool)
@@ -85,7 +86,8 @@ data QuerySourcesList = QuerySourcesList'
     , _qslRequestOptionsLanguageCode                :: !(Maybe Text)
     , _qslPageToken                                 :: !(Maybe Text)
     , _qslCallback                                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuerySourcesList' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ data QuerySourcesList = QuerySourcesList'
 querySourcesList
     :: QuerySourcesList
 querySourcesList =
-    QuerySourcesList'
+  QuerySourcesList'
     { _qslXgafv = Nothing
     , _qslRequestOptionsTimeZone = Nothing
     , _qslRequestOptionsDebugOptionsEnableDebugging = Nothing

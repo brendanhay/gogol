@@ -66,14 +66,16 @@ type InvitationsDeleteResource =
 -- invitation exists with the requested ID.
 --
 -- /See:/ 'invitationsDelete' smart constructor.
-data InvitationsDelete = InvitationsDelete'
+data InvitationsDelete =
+  InvitationsDelete'
     { _idXgafv          :: !(Maybe Xgafv)
     , _idUploadProtocol :: !(Maybe Text)
     , _idAccessToken    :: !(Maybe Text)
     , _idUploadType     :: !(Maybe Text)
     , _idId             :: !Text
     , _idCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InvitationsDelete' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ invitationsDelete
     :: Text -- ^ 'idId'
     -> InvitationsDelete
 invitationsDelete pIdId_ =
-    InvitationsDelete'
+  InvitationsDelete'
     { _idXgafv = Nothing
     , _idUploadProtocol = Nothing
     , _idAccessToken = Nothing

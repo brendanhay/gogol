@@ -62,14 +62,16 @@ type CommentsListResource =
 -- | Returns a list of comments that match the API request parameters.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList'
+data CommentsList =
+  CommentsList'
     { _cllPart       :: !Text
     , _cllId         :: !(Maybe Text)
     , _cllPageToken  :: !(Maybe Text)
     , _cllTextFormat :: !CommentsListTextFormat
     , _cllMaxResults :: !(Textual Word32)
     , _cllParentId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ commentsList
     :: Text -- ^ 'cllPart'
     -> CommentsList
 commentsList pCllPart_ =
-    CommentsList'
+  CommentsList'
     { _cllPart = pCllPart_
     , _cllId = Nothing
     , _cllPageToken = Nothing

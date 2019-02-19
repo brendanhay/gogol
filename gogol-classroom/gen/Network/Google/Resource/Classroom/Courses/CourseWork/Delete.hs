@@ -79,7 +79,8 @@ type CoursesCourseWorkDeleteResource =
 -- deleted. * \`NOT_FOUND\` if no course exists with the requested ID.
 --
 -- /See:/ 'coursesCourseWorkDelete' smart constructor.
-data CoursesCourseWorkDelete = CoursesCourseWorkDelete'
+data CoursesCourseWorkDelete =
+  CoursesCourseWorkDelete'
     { _ccwdXgafv          :: !(Maybe Xgafv)
     , _ccwdUploadProtocol :: !(Maybe Text)
     , _ccwdCourseId       :: !Text
@@ -87,7 +88,8 @@ data CoursesCourseWorkDelete = CoursesCourseWorkDelete'
     , _ccwdUploadType     :: !(Maybe Text)
     , _ccwdId             :: !Text
     , _ccwdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesCourseWorkDelete' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ coursesCourseWorkDelete
     -> Text -- ^ 'ccwdId'
     -> CoursesCourseWorkDelete
 coursesCourseWorkDelete pCcwdCourseId_ pCcwdId_ =
-    CoursesCourseWorkDelete'
+  CoursesCourseWorkDelete'
     { _ccwdXgafv = Nothing
     , _ccwdUploadProtocol = Nothing
     , _ccwdCourseId = pCcwdCourseId_

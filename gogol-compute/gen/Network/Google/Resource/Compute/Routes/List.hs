@@ -63,13 +63,15 @@ type RoutesListResource =
 -- project.
 --
 -- /See:/ 'routesList' smart constructor.
-data RoutesList = RoutesList'
+data RoutesList =
+  RoutesList'
     { _rllOrderBy    :: !(Maybe Text)
     , _rllProject    :: !Text
     , _rllFilter     :: !(Maybe Text)
     , _rllPageToken  :: !(Maybe Text)
     , _rllMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutesList' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ routesList
     :: Text -- ^ 'rllProject'
     -> RoutesList
 routesList pRllProject_ =
-    RoutesList'
+  RoutesList'
     { _rllOrderBy = Nothing
     , _rllProject = pRllProject_
     , _rllFilter = Nothing

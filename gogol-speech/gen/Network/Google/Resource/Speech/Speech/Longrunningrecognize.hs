@@ -67,14 +67,16 @@ type SpeechLongrunningrecognizeResource =
 -- \`LongRunningRecognizeResponse\` message.
 --
 -- /See:/ 'speechLongrunningrecognize' smart constructor.
-data SpeechLongrunningrecognize = SpeechLongrunningrecognize'
+data SpeechLongrunningrecognize =
+  SpeechLongrunningrecognize'
     { _slXgafv          :: !(Maybe Xgafv)
     , _slUploadProtocol :: !(Maybe Text)
     , _slAccessToken    :: !(Maybe Text)
     , _slUploadType     :: !(Maybe Text)
     , _slPayload        :: !LongRunningRecognizeRequest
     , _slCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpeechLongrunningrecognize' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ speechLongrunningrecognize
     :: LongRunningRecognizeRequest -- ^ 'slPayload'
     -> SpeechLongrunningrecognize
 speechLongrunningrecognize pSlPayload_ =
-    SpeechLongrunningrecognize'
+  SpeechLongrunningrecognize'
     { _slXgafv = Nothing
     , _slUploadProtocol = Nothing
     , _slAccessToken = Nothing

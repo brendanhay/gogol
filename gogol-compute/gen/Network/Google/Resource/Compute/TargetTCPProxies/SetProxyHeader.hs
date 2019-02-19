@@ -61,12 +61,14 @@ type TargetTCPProxiesSetProxyHeaderResource =
 -- | Changes the ProxyHeaderType for TargetTcpProxy.
 --
 -- /See:/ 'targetTCPProxiesSetProxyHeader' smart constructor.
-data TargetTCPProxiesSetProxyHeader = TargetTCPProxiesSetProxyHeader'
+data TargetTCPProxiesSetProxyHeader =
+  TargetTCPProxiesSetProxyHeader'
     { _ttpsphRequestId      :: !(Maybe Text)
     , _ttpsphProject        :: !Text
     , _ttpsphPayload        :: !TargetTCPProxiesSetProxyHeaderRequest
     , _ttpsphTargetTCPProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxiesSetProxyHeader' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ targetTCPProxiesSetProxyHeader
     -> Text -- ^ 'ttpsphTargetTCPProxy'
     -> TargetTCPProxiesSetProxyHeader
 targetTCPProxiesSetProxyHeader pTtpsphProject_ pTtpsphPayload_ pTtpsphTargetTCPProxy_ =
-    TargetTCPProxiesSetProxyHeader'
+  TargetTCPProxiesSetProxyHeader'
     { _ttpsphRequestId = Nothing
     , _ttpsphProject = pTtpsphProject_
     , _ttpsphPayload = pTtpsphPayload_

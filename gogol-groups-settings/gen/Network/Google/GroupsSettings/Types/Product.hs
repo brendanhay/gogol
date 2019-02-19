@@ -23,7 +23,8 @@ import           Network.Google.Prelude
 -- | JSON template for Group resource
 --
 -- /See:/ 'groups' smart constructor.
-data Groups = Groups'
+data Groups =
+  Groups'
     { _gEmail                               :: !(Maybe Text)
     , _gSendMessageDenyNotification         :: !(Maybe Text)
     , _gWhoCanEnterFreeFormTags             :: !(Maybe Text)
@@ -67,7 +68,8 @@ data Groups = Groups'
     , _gDefaultMessageDenyNotificationText  :: !(Maybe Text)
     , _gWhoCanMarkFavoriteReplyOnOwnTopic   :: !(Maybe Text)
     , _gAllowWebPosting                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Groups' with the minimum fields required to make a request.
 --
@@ -161,7 +163,7 @@ data Groups = Groups'
 groups
     :: Groups
 groups =
-    Groups'
+  Groups'
     { _gEmail = Nothing
     , _gSendMessageDenyNotification = Nothing
     , _gWhoCanEnterFreeFormTags = Nothing

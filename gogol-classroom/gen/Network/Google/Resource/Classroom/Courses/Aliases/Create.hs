@@ -76,7 +76,8 @@ type CoursesAliasesCreateResource =
 -- attempts to access a domain-scoped alias).
 --
 -- /See:/ 'coursesAliasesCreate' smart constructor.
-data CoursesAliasesCreate = CoursesAliasesCreate'
+data CoursesAliasesCreate =
+  CoursesAliasesCreate'
     { _cacXgafv          :: !(Maybe Xgafv)
     , _cacUploadProtocol :: !(Maybe Text)
     , _cacCourseId       :: !Text
@@ -84,7 +85,8 @@ data CoursesAliasesCreate = CoursesAliasesCreate'
     , _cacUploadType     :: !(Maybe Text)
     , _cacPayload        :: !CourseAlias
     , _cacCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesAliasesCreate' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ coursesAliasesCreate
     -> CourseAlias -- ^ 'cacPayload'
     -> CoursesAliasesCreate
 coursesAliasesCreate pCacCourseId_ pCacPayload_ =
-    CoursesAliasesCreate'
+  CoursesAliasesCreate'
     { _cacXgafv = Nothing
     , _cacUploadProtocol = Nothing
     , _cacCourseId = pCacCourseId_

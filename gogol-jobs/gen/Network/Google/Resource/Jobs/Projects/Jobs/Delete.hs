@@ -61,14 +61,16 @@ type ProjectsJobsDeleteResource =
 -- within 10 seconds, but it may take up to 5 minutes.
 --
 -- /See:/ 'projectsJobsDelete' smart constructor.
-data ProjectsJobsDelete = ProjectsJobsDelete'
+data ProjectsJobsDelete =
+  ProjectsJobsDelete'
     { _pjdXgafv          :: !(Maybe Xgafv)
     , _pjdUploadProtocol :: !(Maybe Text)
     , _pjdAccessToken    :: !(Maybe Text)
     , _pjdUploadType     :: !(Maybe Text)
     , _pjdName           :: !Text
     , _pjdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsJobsDelete
     :: Text -- ^ 'pjdName'
     -> ProjectsJobsDelete
 projectsJobsDelete pPjdName_ =
-    ProjectsJobsDelete'
+  ProjectsJobsDelete'
     { _pjdXgafv = Nothing
     , _pjdUploadProtocol = Nothing
     , _pjdAccessToken = Nothing

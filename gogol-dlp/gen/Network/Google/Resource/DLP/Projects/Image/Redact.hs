@@ -75,7 +75,8 @@ type ProjectsImageRedactResource =
 -- detectors are updated.
 --
 -- /See:/ 'projectsImageRedact' smart constructor.
-data ProjectsImageRedact = ProjectsImageRedact'
+data ProjectsImageRedact =
+  ProjectsImageRedact'
     { _pirParent         :: !Text
     , _pirXgafv          :: !(Maybe Xgafv)
     , _pirUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,8 @@ data ProjectsImageRedact = ProjectsImageRedact'
     , _pirUploadType     :: !(Maybe Text)
     , _pirPayload        :: !GooglePrivacyDlpV2RedactImageRequest
     , _pirCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsImageRedact' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ projectsImageRedact
     -> GooglePrivacyDlpV2RedactImageRequest -- ^ 'pirPayload'
     -> ProjectsImageRedact
 projectsImageRedact pPirParent_ pPirPayload_ =
-    ProjectsImageRedact'
+  ProjectsImageRedact'
     { _pirParent = pPirParent_
     , _pirXgafv = Nothing
     , _pirUploadProtocol = Nothing

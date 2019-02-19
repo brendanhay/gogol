@@ -64,7 +64,8 @@ type SitesUpdateConfigResource =
 -- | Sets the Hosting metadata for a specific site.
 --
 -- /See:/ 'sitesUpdateConfig' smart constructor.
-data SitesUpdateConfig = SitesUpdateConfig'
+data SitesUpdateConfig =
+  SitesUpdateConfig'
     { _sucXgafv          :: !(Maybe Xgafv)
     , _sucUploadProtocol :: !(Maybe Text)
     , _sucUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,8 @@ data SitesUpdateConfig = SitesUpdateConfig'
     , _sucPayload        :: !SiteConfig
     , _sucName           :: !Text
     , _sucCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesUpdateConfig' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ sitesUpdateConfig
     -> Text -- ^ 'sucName'
     -> SitesUpdateConfig
 sitesUpdateConfig pSucPayload_ pSucName_ =
-    SitesUpdateConfig'
+  SitesUpdateConfig'
     { _sucXgafv = Nothing
     , _sucUploadProtocol = Nothing
     , _sucUpdateMask = Nothing

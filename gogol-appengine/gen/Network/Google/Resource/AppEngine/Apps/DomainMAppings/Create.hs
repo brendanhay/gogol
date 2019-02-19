@@ -70,7 +70,8 @@ type AppsDomainMAppingsCreateResource =
 -- authorized domains, see AuthorizedDomains.ListAuthorizedDomains.
 --
 -- /See:/ 'appsDomainMAppingsCreate' smart constructor.
-data AppsDomainMAppingsCreate = AppsDomainMAppingsCreate'
+data AppsDomainMAppingsCreate =
+  AppsDomainMAppingsCreate'
     { _admacXgafv            :: !(Maybe Xgafv)
     , _admacUploadProtocol   :: !(Maybe Text)
     , _admacAccessToken      :: !(Maybe Text)
@@ -79,7 +80,8 @@ data AppsDomainMAppingsCreate = AppsDomainMAppingsCreate'
     , _admacOverrideStrategy :: !(Maybe Text)
     , _admacAppsId           :: !Text
     , _admacCallback         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsDomainMAppingsCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ appsDomainMAppingsCreate
     -> Text -- ^ 'admacAppsId'
     -> AppsDomainMAppingsCreate
 appsDomainMAppingsCreate pAdmacPayload_ pAdmacAppsId_ =
-    AppsDomainMAppingsCreate'
+  AppsDomainMAppingsCreate'
     { _admacXgafv = Nothing
     , _admacUploadProtocol = Nothing
     , _admacAccessToken = Nothing

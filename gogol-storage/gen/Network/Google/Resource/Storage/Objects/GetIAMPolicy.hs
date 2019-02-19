@@ -59,12 +59,14 @@ type ObjectsGetIAMPolicyResource =
 -- | Returns an IAM policy for the specified object.
 --
 -- /See:/ 'objectsGetIAMPolicy' smart constructor.
-data ObjectsGetIAMPolicy = ObjectsGetIAMPolicy'
+data ObjectsGetIAMPolicy =
+  ObjectsGetIAMPolicy'
     { _ogipBucket      :: !Text
     , _ogipUserProject :: !(Maybe Text)
     , _ogipObject      :: !Text
     , _ogipGeneration  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ObjectsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ objectsGetIAMPolicy
     -> Text -- ^ 'ogipObject'
     -> ObjectsGetIAMPolicy
 objectsGetIAMPolicy pOgipBucket_ pOgipObject_ =
-    ObjectsGetIAMPolicy'
+  ObjectsGetIAMPolicy'
     { _ogipBucket = pOgipBucket_
     , _ogipUserProject = Nothing
     , _ogipObject = pOgipObject_

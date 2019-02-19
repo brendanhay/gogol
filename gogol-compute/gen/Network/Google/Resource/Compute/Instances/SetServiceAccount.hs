@@ -65,13 +65,15 @@ type InstancesSetServiceAccountResource =
 -- Changing the service account and access scopes for an instance.
 --
 -- /See:/ 'instancesSetServiceAccount' smart constructor.
-data InstancesSetServiceAccount = InstancesSetServiceAccount'
+data InstancesSetServiceAccount =
+  InstancesSetServiceAccount'
     { _issaRequestId :: !(Maybe Text)
     , _issaProject   :: !Text
     , _issaZone      :: !Text
     , _issaPayload   :: !InstancesSetServiceAccountRequest
     , _issaInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetServiceAccount' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ instancesSetServiceAccount
     -> Text -- ^ 'issaInstance'
     -> InstancesSetServiceAccount
 instancesSetServiceAccount pIssaProject_ pIssaZone_ pIssaPayload_ pIssaInstance_ =
-    InstancesSetServiceAccount'
+  InstancesSetServiceAccount'
     { _issaRequestId = Nothing
     , _issaProject = pIssaProject_
     , _issaZone = pIssaZone_

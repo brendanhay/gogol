@@ -55,10 +55,12 @@ type SurveysUpdateResource =
 -- owners property.
 --
 -- /See:/ 'surveysUpdate' smart constructor.
-data SurveysUpdate = SurveysUpdate'
+data SurveysUpdate =
+  SurveysUpdate'
     { _suSurveyURLId :: !Text
     , _suPayload     :: !Survey
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveysUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ surveysUpdate
     -> Survey -- ^ 'suPayload'
     -> SurveysUpdate
 surveysUpdate pSuSurveyURLId_ pSuPayload_ =
-    SurveysUpdate'
-    { _suSurveyURLId = pSuSurveyURLId_
-    , _suPayload = pSuPayload_
-    }
+  SurveysUpdate' {_suSurveyURLId = pSuSurveyURLId_, _suPayload = pSuPayload_}
 
 -- | External URL ID for the survey.
 suSurveyURLId :: Lens' SurveysUpdate Text

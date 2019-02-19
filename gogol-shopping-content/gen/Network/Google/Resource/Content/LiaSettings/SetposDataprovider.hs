@@ -61,13 +61,15 @@ type LiaSettingsSetposDataproviderResource =
 -- | Sets the POS data provider for the specified country.
 --
 -- /See:/ 'liaSettingsSetposDataprovider' smart constructor.
-data LiaSettingsSetposDataprovider = LiaSettingsSetposDataprovider'
+data LiaSettingsSetposDataprovider =
+  LiaSettingsSetposDataprovider'
     { _lssdMerchantId           :: !(Textual Word64)
     , _lssdCountry              :: !Text
     , _lssdAccountId            :: !(Textual Word64)
     , _lssdPosExternalAccountId :: !(Maybe Text)
     , _lssdPosDataProviderId    :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiaSettingsSetposDataprovider' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ liaSettingsSetposDataprovider
     -> Word64 -- ^ 'lssdAccountId'
     -> LiaSettingsSetposDataprovider
 liaSettingsSetposDataprovider pLssdMerchantId_ pLssdCountry_ pLssdAccountId_ =
-    LiaSettingsSetposDataprovider'
+  LiaSettingsSetposDataprovider'
     { _lssdMerchantId = _Coerce # pLssdMerchantId_
     , _lssdCountry = pLssdCountry_
     , _lssdAccountId = _Coerce # pLssdAccountId_

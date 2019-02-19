@@ -24,12 +24,14 @@ import           Network.Google.Prelude
 -- images.
 --
 -- /See:/ 'card' smart constructor.
-data Card = Card'
+data Card =
+  Card'
     { _cCardActions :: !(Maybe [CardAction])
     , _cName        :: !(Maybe Text)
     , _cHeader      :: !(Maybe CardHeader)
     , _cSections    :: !(Maybe [Section])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Card' with the minimum fields required to make a request.
 --
@@ -45,7 +47,7 @@ data Card = Card'
 card
     :: Card
 card =
-    Card'
+  Card'
     { _cCardActions = Nothing
     , _cName = Nothing
     , _cHeader = Nothing
@@ -94,11 +96,13 @@ instance ToJSON Card where
 -- | A room or DM in Hangouts Chat.
 --
 -- /See:/ 'space' smart constructor.
-data Space = Space'
+data Space =
+  Space'
     { _sName        :: !(Maybe Text)
     , _sDisplayName :: !(Maybe Text)
     , _sType        :: !(Maybe SpaceType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Space' with the minimum fields required to make a request.
 --
@@ -111,12 +115,7 @@ data Space = Space'
 -- * 'sType'
 space
     :: Space
-space =
-    Space'
-    { _sName = Nothing
-    , _sDisplayName = Nothing
-    , _sType = Nothing
-    }
+space = Space' {_sName = Nothing, _sDisplayName = Nothing, _sType = Nothing}
 
 -- | Resource name of the space, in the form \"spaces\/*\". Example:
 -- spaces\/AAAAMpdlehYs
@@ -152,7 +151,8 @@ instance ToJSON Space where
 -- element may also contain some actions such as onclick button.
 --
 -- /See:/ 'keyValue' smart constructor.
-data KeyValue = KeyValue'
+data KeyValue =
+  KeyValue'
     { _kvOnClick          :: !(Maybe OnClick)
     , _kvTopLabel         :: !(Maybe Text)
     , _kvIcon             :: !(Maybe KeyValueIcon)
@@ -161,7 +161,8 @@ data KeyValue = KeyValue'
     , _kvIconURL          :: !(Maybe Text)
     , _kvContentMultiline :: !(Maybe Bool)
     , _kvBottomLabel      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'KeyValue' with the minimum fields required to make a request.
 --
@@ -185,7 +186,7 @@ data KeyValue = KeyValue'
 keyValue
     :: KeyValue
 keyValue =
-    KeyValue'
+  KeyValue'
     { _kvOnClick = Nothing
     , _kvTopLabel = Nothing
     , _kvIcon = Nothing
@@ -266,12 +267,14 @@ instance ToJSON KeyValue where
 -- | A widget is a UI element that presents texts, images, etc.
 --
 -- /See:/ 'widgetMarkup' smart constructor.
-data WidgetMarkup = WidgetMarkup'
+data WidgetMarkup =
+  WidgetMarkup'
     { _wmKeyValue      :: !(Maybe KeyValue)
     , _wmImage         :: !(Maybe Image)
     , _wmButtons       :: !(Maybe [Button])
     , _wmTextParagraph :: !(Maybe TextParagraph)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WidgetMarkup' with the minimum fields required to make a request.
 --
@@ -287,7 +290,7 @@ data WidgetMarkup = WidgetMarkup'
 widgetMarkup
     :: WidgetMarkup
 widgetMarkup =
-    WidgetMarkup'
+  WidgetMarkup'
     { _wmKeyValue = Nothing
     , _wmImage = Nothing
     , _wmButtons = Nothing
@@ -338,10 +341,12 @@ instance ToJSON WidgetMarkup where
 -- | An onclick action (e.g. open a link).
 --
 -- /See:/ 'onClick' smart constructor.
-data OnClick = OnClick'
+data OnClick =
+  OnClick'
     { _ocAction   :: !(Maybe FormAction)
     , _ocOpenLink :: !(Maybe OpenLink)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OnClick' with the minimum fields required to make a request.
 --
@@ -352,11 +357,7 @@ data OnClick = OnClick'
 -- * 'ocOpenLink'
 onClick
     :: OnClick
-onClick =
-    OnClick'
-    { _ocAction = Nothing
-    , _ocOpenLink = Nothing
-    }
+onClick = OnClick' {_ocAction = Nothing, _ocOpenLink = Nothing}
 
 -- | A form action will be trigger by this onclick if specified.
 ocAction :: Lens' OnClick (Maybe FormAction)
@@ -390,12 +391,14 @@ instance ToJSON OnClick where
 -- \"type\":\"MENTION\" } }] \`\`\`
 --
 -- /See:/ 'annotation' smart constructor.
-data Annotation = Annotation'
+data Annotation =
+  Annotation'
     { _aLength      :: !(Maybe (Textual Int32))
     , _aType        :: !(Maybe AnnotationType)
     , _aUserMention :: !(Maybe UserMentionMetadata)
     , _aStartIndex  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
@@ -411,7 +414,7 @@ data Annotation = Annotation'
 annotation
     :: Annotation
 annotation =
-    Annotation'
+  Annotation'
     { _aLength = Nothing
     , _aType = Nothing
     , _aUserMention = Nothing
@@ -461,11 +464,13 @@ instance ToJSON Annotation where
 -- | An image that is specified by a URL and can have an onclick action.
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image'
+data Image =
+  Image'
     { _iOnClick     :: !(Maybe OnClick)
     , _iAspectRatio :: !(Maybe (Textual Double))
     , _iImageURL    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -479,11 +484,7 @@ data Image = Image'
 image
     :: Image
 image =
-    Image'
-    { _iOnClick = Nothing
-    , _iAspectRatio = Nothing
-    , _iImageURL = Nothing
-    }
+  Image' {_iOnClick = Nothing, _iAspectRatio = Nothing, _iImageURL = Nothing}
 
 -- | The onclick action.
 iOnClick :: Lens' Image (Maybe OnClick)
@@ -522,10 +523,12 @@ instance ToJSON Image where
 -- snooze type and snooze time in the list of string parameters.
 --
 -- /See:/ 'actionParameter' smart constructor.
-data ActionParameter = ActionParameter'
+data ActionParameter =
+  ActionParameter'
     { _apValue :: !(Maybe Text)
     , _apKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActionParameter' with the minimum fields required to make a request.
 --
@@ -536,11 +539,7 @@ data ActionParameter = ActionParameter'
 -- * 'apKey'
 actionParameter
     :: ActionParameter
-actionParameter =
-    ActionParameter'
-    { _apValue = Nothing
-    , _apKey = Nothing
-    }
+actionParameter = ActionParameter' {_apValue = Nothing, _apKey = Nothing}
 
 -- | The value of the parameter.
 apValue :: Lens' ActionParameter (Maybe Text)
@@ -566,12 +565,14 @@ instance ToJSON ActionParameter where
 -- | Represents a membership relation in Hangouts Chat.
 --
 -- /See:/ 'membership' smart constructor.
-data Membership = Membership'
+data Membership =
+  Membership'
     { _mState      :: !(Maybe MembershipState)
     , _mName       :: !(Maybe Text)
     , _mMember     :: !(Maybe User)
     , _mCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Membership' with the minimum fields required to make a request.
 --
@@ -587,7 +588,7 @@ data Membership = Membership'
 membership
     :: Membership
 membership =
-    Membership'
+  Membership'
     { _mState = Nothing
     , _mName = Nothing
     , _mMember = Nothing
@@ -639,8 +640,8 @@ instance ToJSON Membership where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -657,7 +658,8 @@ instance ToJSON Empty where
 -- | Hangouts Chat events.
 --
 -- /See:/ 'deprecatedEvent' smart constructor.
-data DeprecatedEvent = DeprecatedEvent'
+data DeprecatedEvent =
+  DeprecatedEvent'
     { _deSpace                     :: !(Maybe Space)
     , _deToken                     :: !(Maybe Text)
     , _deAction                    :: !(Maybe FormAction)
@@ -667,7 +669,8 @@ data DeprecatedEvent = DeprecatedEvent'
     , _deType                      :: !(Maybe DeprecatedEventType)
     , _deMessage                   :: !(Maybe Message)
     , _deThreadKey                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeprecatedEvent' with the minimum fields required to make a request.
 --
@@ -693,7 +696,7 @@ data DeprecatedEvent = DeprecatedEvent'
 deprecatedEvent
     :: DeprecatedEvent
 deprecatedEvent =
-    DeprecatedEvent'
+  DeprecatedEvent'
     { _deSpace = Nothing
     , _deToken = Nothing
     , _deAction = Nothing
@@ -791,9 +794,11 @@ instance ToJSON DeprecatedEvent where
 -- | A paragraph of text. Formatted text supported.
 --
 -- /See:/ 'textParagraph' smart constructor.
-newtype TextParagraph = TextParagraph'
+newtype TextParagraph =
+  TextParagraph'
     { _tpText :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextParagraph' with the minimum fields required to make a request.
 --
@@ -802,10 +807,7 @@ newtype TextParagraph = TextParagraph'
 -- * 'tpText'
 textParagraph
     :: TextParagraph
-textParagraph =
-    TextParagraph'
-    { _tpText = Nothing
-    }
+textParagraph = TextParagraph' {_tpText = Nothing}
 
 tpText :: Lens' TextParagraph (Maybe Text)
 tpText = lens _tpText (\ s a -> s{_tpText = a})
@@ -822,10 +824,12 @@ instance ToJSON TextParagraph where
 -- | A button. Can be a text button or an image button.
 --
 -- /See:/ 'button' smart constructor.
-data Button = Button'
+data Button =
+  Button'
     { _bTextButton  :: !(Maybe TextButton)
     , _bImageButton :: !(Maybe ImageButton)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Button' with the minimum fields required to make a request.
 --
@@ -836,11 +840,7 @@ data Button = Button'
 -- * 'bImageButton'
 button
     :: Button
-button =
-    Button'
-    { _bTextButton = Nothing
-    , _bImageButton = Nothing
-    }
+button = Button' {_bTextButton = Nothing, _bImageButton = Nothing}
 
 -- | A button with text and onclick action.
 bTextButton :: Lens' Button (Maybe TextButton)
@@ -868,10 +868,12 @@ instance ToJSON Button where
 
 --
 -- /See:/ 'listSpacesResponse' smart constructor.
-data ListSpacesResponse = ListSpacesResponse'
+data ListSpacesResponse =
+  ListSpacesResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrSpaces        :: !(Maybe [Space])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSpacesResponse' with the minimum fields required to make a request.
 --
@@ -883,10 +885,7 @@ data ListSpacesResponse = ListSpacesResponse'
 listSpacesResponse
     :: ListSpacesResponse
 listSpacesResponse =
-    ListSpacesResponse'
-    { _lsrNextPageToken = Nothing
-    , _lsrSpaces = Nothing
-    }
+  ListSpacesResponse' {_lsrNextPageToken = Nothing, _lsrSpaces = Nothing}
 
 -- | Continuation token to retrieve the next page of results. It will be
 -- empty for the last page of results. Tokens expire in an hour. An error
@@ -921,11 +920,13 @@ instance ToJSON ListSpacesResponse where
 -- | A user in Hangouts Chat.
 --
 -- /See:/ 'user' smart constructor.
-data User = User'
+data User =
+  User'
     { _uName        :: !(Maybe Text)
     , _uDisplayName :: !(Maybe Text)
     , _uType        :: !(Maybe UserType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -938,12 +939,7 @@ data User = User'
 -- * 'uType'
 user
     :: User
-user =
-    User'
-    { _uName = Nothing
-    , _uDisplayName = Nothing
-    , _uType = Nothing
-    }
+user = User' {_uName = Nothing, _uDisplayName = Nothing, _uType = Nothing}
 
 -- | Resource name, in the format \"users\/*\".
 uName :: Lens' User (Maybe Text)
@@ -977,9 +973,11 @@ instance ToJSON User where
 -- | A link that opens a new window.
 --
 -- /See:/ 'openLink' smart constructor.
-newtype OpenLink = OpenLink'
+newtype OpenLink =
+  OpenLink'
     { _olURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OpenLink' with the minimum fields required to make a request.
 --
@@ -988,10 +986,7 @@ newtype OpenLink = OpenLink'
 -- * 'olURL'
 openLink
     :: OpenLink
-openLink =
-    OpenLink'
-    { _olURL = Nothing
-    }
+openLink = OpenLink' {_olURL = Nothing}
 
 -- | The URL to open.
 olURL :: Lens' OpenLink (Maybe Text)
@@ -1011,10 +1006,12 @@ instance ToJSON OpenLink where
 -- the invoice in browser.
 --
 -- /See:/ 'cardAction' smart constructor.
-data CardAction = CardAction'
+data CardAction =
+  CardAction'
     { _caOnClick     :: !(Maybe OnClick)
     , _caActionLabel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CardAction' with the minimum fields required to make a request.
 --
@@ -1025,11 +1022,7 @@ data CardAction = CardAction'
 -- * 'caActionLabel'
 cardAction
     :: CardAction
-cardAction =
-    CardAction'
-    { _caOnClick = Nothing
-    , _caActionLabel = Nothing
-    }
+cardAction = CardAction' {_caOnClick = Nothing, _caActionLabel = Nothing}
 
 -- | The onclick action for this action item.
 caOnClick :: Lens' CardAction (Maybe OnClick)
@@ -1059,10 +1052,12 @@ instance ToJSON CardAction where
 -- | Parameters that a bot can use to configure how it\'s response is posted.
 --
 -- /See:/ 'actionResponse' smart constructor.
-data ActionResponse = ActionResponse'
+data ActionResponse =
+  ActionResponse'
     { _arURL  :: !(Maybe Text)
     , _arType :: !(Maybe ActionResponseType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActionResponse' with the minimum fields required to make a request.
 --
@@ -1073,11 +1068,7 @@ data ActionResponse = ActionResponse'
 -- * 'arType'
 actionResponse
     :: ActionResponse
-actionResponse =
-    ActionResponse'
-    { _arURL = Nothing
-    , _arType = Nothing
-    }
+actionResponse = ActionResponse' {_arURL = Nothing, _arType = Nothing}
 
 -- | URL for users to auth or config. (Only for REQUEST_CONFIG response
 -- types.)
@@ -1104,10 +1095,12 @@ instance ToJSON ActionResponse where
 -- example, an Apps Script can be invoked to handle the form.
 --
 -- /See:/ 'formAction' smart constructor.
-data FormAction = FormAction'
+data FormAction =
+  FormAction'
     { _faActionMethodName :: !(Maybe Text)
     , _faParameters       :: !(Maybe [ActionParameter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FormAction' with the minimum fields required to make a request.
 --
@@ -1119,10 +1112,7 @@ data FormAction = FormAction'
 formAction
     :: FormAction
 formAction =
-    FormAction'
-    { _faActionMethodName = Nothing
-    , _faParameters = Nothing
-    }
+  FormAction' {_faActionMethodName = Nothing, _faParameters = Nothing}
 
 -- | Apps Script function to invoke when the containing element is
 -- clicked\/activated.
@@ -1155,10 +1145,12 @@ instance ToJSON FormAction where
 
 --
 -- /See:/ 'listMembershipsResponse' smart constructor.
-data ListMembershipsResponse = ListMembershipsResponse'
+data ListMembershipsResponse =
+  ListMembershipsResponse'
     { _lmrNextPageToken :: !(Maybe Text)
     , _lmrMemberships   :: !(Maybe [Membership])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMembershipsResponse' with the minimum fields required to make a request.
 --
@@ -1170,10 +1162,8 @@ data ListMembershipsResponse = ListMembershipsResponse'
 listMembershipsResponse
     :: ListMembershipsResponse
 listMembershipsResponse =
-    ListMembershipsResponse'
-    { _lmrNextPageToken = Nothing
-    , _lmrMemberships = Nothing
-    }
+  ListMembershipsResponse'
+    {_lmrNextPageToken = Nothing, _lmrMemberships = Nothing}
 
 -- | Continuation token to retrieve the next page of results. It will be
 -- empty for the last page of results.
@@ -1208,7 +1198,8 @@ instance ToJSON ListMembershipsResponse where
 -- | A message in Hangouts Chat.
 --
 -- /See:/ 'message' smart constructor.
-data Message = Message'
+data Message =
+  Message'
     { _mesAnnotations    :: !(Maybe [Annotation])
     , _mesSpace          :: !(Maybe Space)
     , _mesText           :: !(Maybe Text)
@@ -1221,7 +1212,8 @@ data Message = Message'
     , _mesThread         :: !(Maybe Thread)
     , _mesFallbackText   :: !(Maybe Text)
     , _mesCreateTime     :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Message' with the minimum fields required to make a request.
 --
@@ -1253,7 +1245,7 @@ data Message = Message'
 message
     :: Message
 message =
-    Message'
+  Message'
     { _mesAnnotations = Nothing
     , _mesSpace = Nothing
     , _mesText = Nothing
@@ -1379,12 +1371,14 @@ instance ToJSON Message where
 
 --
 -- /See:/ 'cardHeader' smart constructor.
-data CardHeader = CardHeader'
+data CardHeader =
+  CardHeader'
     { _chSubtitle   :: !(Maybe Text)
     , _chImageURL   :: !(Maybe Text)
     , _chTitle      :: !(Maybe Text)
     , _chImageStyle :: !(Maybe CardHeaderImageStyle)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CardHeader' with the minimum fields required to make a request.
 --
@@ -1400,7 +1394,7 @@ data CardHeader = CardHeader'
 cardHeader
     :: CardHeader
 cardHeader =
-    CardHeader'
+  CardHeader'
     { _chSubtitle = Nothing
     , _chImageURL = Nothing
     , _chTitle = Nothing
@@ -1449,10 +1443,12 @@ instance ToJSON CardHeader where
 -- | A button with text and onclick action.
 --
 -- /See:/ 'textButton' smart constructor.
-data TextButton = TextButton'
+data TextButton =
+  TextButton'
     { _tbOnClick :: !(Maybe OnClick)
     , _tbText    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextButton' with the minimum fields required to make a request.
 --
@@ -1463,11 +1459,7 @@ data TextButton = TextButton'
 -- * 'tbText'
 textButton
     :: TextButton
-textButton =
-    TextButton'
-    { _tbOnClick = Nothing
-    , _tbText = Nothing
-    }
+textButton = TextButton' {_tbOnClick = Nothing, _tbText = Nothing}
 
 -- | The onclick action of the button.
 tbOnClick :: Lens' TextButton (Maybe OnClick)
@@ -1494,9 +1486,11 @@ instance ToJSON TextButton where
 -- | A thread in Hangouts Chat.
 --
 -- /See:/ 'thread' smart constructor.
-newtype Thread = Thread'
+newtype Thread =
+  Thread'
     { _tName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Thread' with the minimum fields required to make a request.
 --
@@ -1505,10 +1499,7 @@ newtype Thread = Thread'
 -- * 'tName'
 thread
     :: Thread
-thread =
-    Thread'
-    { _tName = Nothing
-    }
+thread = Thread' {_tName = Nothing}
 
 -- | Resource name, in the form \"spaces\/*\/threads\/*\". Example:
 -- spaces\/AAAAMpdlehY\/threads\/UMxbHmzDlr4
@@ -1527,10 +1518,12 @@ instance ToJSON Thread where
 -- | Annotation metadata for user mentions (\').
 --
 -- /See:/ 'userMentionMetadata' smart constructor.
-data UserMentionMetadata = UserMentionMetadata'
+data UserMentionMetadata =
+  UserMentionMetadata'
     { _ummUser :: !(Maybe User)
     , _ummType :: !(Maybe UserMentionMetadataType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserMentionMetadata' with the minimum fields required to make a request.
 --
@@ -1542,10 +1535,7 @@ data UserMentionMetadata = UserMentionMetadata'
 userMentionMetadata
     :: UserMentionMetadata
 userMentionMetadata =
-    UserMentionMetadata'
-    { _ummUser = Nothing
-    , _ummType = Nothing
-    }
+  UserMentionMetadata' {_ummUser = Nothing, _ummType = Nothing}
 
 -- | The user mentioned.
 ummUser :: Lens' UserMentionMetadata (Maybe User)
@@ -1571,12 +1561,14 @@ instance ToJSON UserMentionMetadata where
 -- | An image button with an onclick action.
 --
 -- /See:/ 'imageButton' smart constructor.
-data ImageButton = ImageButton'
+data ImageButton =
+  ImageButton'
     { _ibOnClick :: !(Maybe OnClick)
     , _ibIcon    :: !(Maybe ImageButtonIcon)
     , _ibName    :: !(Maybe Text)
     , _ibIconURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImageButton' with the minimum fields required to make a request.
 --
@@ -1592,7 +1584,7 @@ data ImageButton = ImageButton'
 imageButton
     :: ImageButton
 imageButton =
-    ImageButton'
+  ImageButton'
     { _ibOnClick = Nothing
     , _ibIcon = Nothing
     , _ibName = Nothing
@@ -1642,10 +1634,12 @@ instance ToJSON ImageButton where
 -- layout properties (e.g. float).
 --
 -- /See:/ 'section' smart constructor.
-data Section = Section'
+data Section =
+  Section'
     { _sWidgets :: !(Maybe [WidgetMarkup])
     , _sHeader  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Section' with the minimum fields required to make a request.
 --
@@ -1656,11 +1650,7 @@ data Section = Section'
 -- * 'sHeader'
 section
     :: Section
-section =
-    Section'
-    { _sWidgets = Nothing
-    , _sHeader = Nothing
-    }
+section = Section' {_sWidgets = Nothing, _sHeader = Nothing}
 
 -- | A section must contain at least 1 widget.
 sWidgets :: Lens' Section [WidgetMarkup]

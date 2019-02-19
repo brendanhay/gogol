@@ -76,7 +76,8 @@ type CoursesAnnouncementsCreateResource =
 -- following request error: * AttachmentNotVisible
 --
 -- /See:/ 'coursesAnnouncementsCreate' smart constructor.
-data CoursesAnnouncementsCreate = CoursesAnnouncementsCreate'
+data CoursesAnnouncementsCreate =
+  CoursesAnnouncementsCreate'
     { _couXgafv          :: !(Maybe Xgafv)
     , _couUploadProtocol :: !(Maybe Text)
     , _couCourseId       :: !Text
@@ -84,7 +85,8 @@ data CoursesAnnouncementsCreate = CoursesAnnouncementsCreate'
     , _couUploadType     :: !(Maybe Text)
     , _couPayload        :: !Announcement
     , _couCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesAnnouncementsCreate' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ coursesAnnouncementsCreate
     -> Announcement -- ^ 'couPayload'
     -> CoursesAnnouncementsCreate
 coursesAnnouncementsCreate pCouCourseId_ pCouPayload_ =
-    CoursesAnnouncementsCreate'
+  CoursesAnnouncementsCreate'
     { _couXgafv = Nothing
     , _couUploadProtocol = Nothing
     , _couCourseId = pCouCourseId_

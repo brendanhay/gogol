@@ -64,10 +64,12 @@ type UsersDraftsCreateResource =
 -- | Creates a new draft with the DRAFT label.
 --
 -- /See:/ 'usersDraftsCreate' smart constructor.
-data UsersDraftsCreate = UsersDraftsCreate'
+data UsersDraftsCreate =
+  UsersDraftsCreate'
     { _udcPayload :: !Draft
     , _udcUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDraftsCreate' with the minimum fields required to make a request.
 --
@@ -80,10 +82,7 @@ usersDraftsCreate
     :: Draft -- ^ 'udcPayload'
     -> UsersDraftsCreate
 usersDraftsCreate pUdcPayload_ =
-    UsersDraftsCreate'
-    { _udcPayload = pUdcPayload_
-    , _udcUserId = "me"
-    }
+  UsersDraftsCreate' {_udcPayload = pUdcPayload_, _udcUserId = "me"}
 
 -- | Multipart request metadata.
 udcPayload :: Lens' UsersDraftsCreate Draft
@@ -111,7 +110,8 @@ instance GoogleRequest UsersDraftsCreate where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload UsersDraftsCreate) where
+           (MediaUpload UsersDraftsCreate)
+         where
         type Rs (MediaUpload UsersDraftsCreate) = Draft
         type Scopes (MediaUpload UsersDraftsCreate) =
              Scopes UsersDraftsCreate

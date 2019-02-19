@@ -57,11 +57,13 @@ type BucketAccessControlsGetResource =
 -- | Returns the ACL entry for the specified entity on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsGet' smart constructor.
-data BucketAccessControlsGet = BucketAccessControlsGet'
+data BucketAccessControlsGet =
+  BucketAccessControlsGet'
     { _bacgBucket      :: !Text
     , _bacgUserProject :: !(Maybe Text)
     , _bacgEntity      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketAccessControlsGet' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ bucketAccessControlsGet
     -> Text -- ^ 'bacgEntity'
     -> BucketAccessControlsGet
 bucketAccessControlsGet pBacgBucket_ pBacgEntity_ =
-    BucketAccessControlsGet'
+  BucketAccessControlsGet'
     { _bacgBucket = pBacgBucket_
     , _bacgUserProject = Nothing
     , _bacgEntity = pBacgEntity_

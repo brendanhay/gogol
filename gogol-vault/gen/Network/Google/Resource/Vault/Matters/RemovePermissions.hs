@@ -63,7 +63,8 @@ type MattersRemovePermissionsResource =
 -- | Removes an account as a matter collaborator.
 --
 -- /See:/ 'mattersRemovePermissions' smart constructor.
-data MattersRemovePermissions = MattersRemovePermissions'
+data MattersRemovePermissions =
+  MattersRemovePermissions'
     { _mrpXgafv          :: !(Maybe Xgafv)
     , _mrpUploadProtocol :: !(Maybe Text)
     , _mrpAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data MattersRemovePermissions = MattersRemovePermissions'
     , _mrpPayload        :: !RemoveMatterPermissionsRequest
     , _mrpMatterId       :: !Text
     , _mrpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersRemovePermissions' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ mattersRemovePermissions
     -> Text -- ^ 'mrpMatterId'
     -> MattersRemovePermissions
 mattersRemovePermissions pMrpPayload_ pMrpMatterId_ =
-    MattersRemovePermissions'
+  MattersRemovePermissions'
     { _mrpXgafv = Nothing
     , _mrpUploadProtocol = Nothing
     , _mrpAccessToken = Nothing

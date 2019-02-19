@@ -62,13 +62,15 @@ type MachineTypesAggregatedListResource =
 -- | Retrieves an aggregated list of machine types.
 --
 -- /See:/ 'machineTypesAggregatedList' smart constructor.
-data MachineTypesAggregatedList = MachineTypesAggregatedList'
+data MachineTypesAggregatedList =
+  MachineTypesAggregatedList'
     { _mtalOrderBy    :: !(Maybe Text)
     , _mtalProject    :: !Text
     , _mtalFilter     :: !(Maybe Text)
     , _mtalPageToken  :: !(Maybe Text)
     , _mtalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypesAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ machineTypesAggregatedList
     :: Text -- ^ 'mtalProject'
     -> MachineTypesAggregatedList
 machineTypesAggregatedList pMtalProject_ =
-    MachineTypesAggregatedList'
+  MachineTypesAggregatedList'
     { _mtalOrderBy = Nothing
     , _mtalProject = pMtalProject_
     , _mtalFilter = Nothing

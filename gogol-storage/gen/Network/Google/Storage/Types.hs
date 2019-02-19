@@ -456,20 +456,20 @@ storageService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View your data in Google Cloud Storage
 storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-storageReadOnlyScope = Proxy;
+storageReadOnlyScope = Proxy
 
 -- | Manage your data in Google Cloud Storage
 storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-storageReadWriteScope = Proxy;
+storageReadWriteScope = Proxy
 
 -- | Manage your data and permissions in Google Cloud Storage
 storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-storageFullControlScope = Proxy;
+storageFullControlScope = Proxy

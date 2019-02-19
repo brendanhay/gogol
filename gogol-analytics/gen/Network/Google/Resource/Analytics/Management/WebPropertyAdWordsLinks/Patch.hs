@@ -63,12 +63,14 @@ type ManagementWebPropertyAdWordsLinksPatchResource =
 -- semantics.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksPatch' smart constructor.
-data ManagementWebPropertyAdWordsLinksPatch = ManagementWebPropertyAdWordsLinksPatch'
+data ManagementWebPropertyAdWordsLinksPatch =
+  ManagementWebPropertyAdWordsLinksPatch'
     { _mwpawlpWebPropertyId            :: !Text
     , _mwpawlpPayload                  :: !EntityAdWordsLink
     , _mwpawlpAccountId                :: !Text
     , _mwpawlpWebPropertyAdWordsLinkId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksPatch' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ managementWebPropertyAdWordsLinksPatch
     -> Text -- ^ 'mwpawlpWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksPatch
 managementWebPropertyAdWordsLinksPatch pMwpawlpWebPropertyId_ pMwpawlpPayload_ pMwpawlpAccountId_ pMwpawlpWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksPatch'
+  ManagementWebPropertyAdWordsLinksPatch'
     { _mwpawlpWebPropertyId = pMwpawlpWebPropertyId_
     , _mwpawlpPayload = pMwpawlpPayload_
     , _mwpawlpAccountId = pMwpawlpAccountId_
@@ -120,7 +122,8 @@ mwpawlpWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawlpWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksPatch where
+           ManagementWebPropertyAdWordsLinksPatch
+         where
         type Rs ManagementWebPropertyAdWordsLinksPatch =
              EntityAdWordsLink
         type Scopes ManagementWebPropertyAdWordsLinksPatch =

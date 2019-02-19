@@ -52,9 +52,11 @@ type DictionaryListOfflineMetadataResource =
 -- | Returns a list of offline dictionary metadata available
 --
 -- /See:/ 'dictionaryListOfflineMetadata' smart constructor.
-newtype DictionaryListOfflineMetadata = DictionaryListOfflineMetadata'
+newtype DictionaryListOfflineMetadata =
+  DictionaryListOfflineMetadata'
     { _dlomCpksver :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DictionaryListOfflineMetadata' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ dictionaryListOfflineMetadata
     :: Text -- ^ 'dlomCpksver'
     -> DictionaryListOfflineMetadata
 dictionaryListOfflineMetadata pDlomCpksver_ =
-    DictionaryListOfflineMetadata'
-    { _dlomCpksver = pDlomCpksver_
-    }
+  DictionaryListOfflineMetadata' {_dlomCpksver = pDlomCpksver_}
 
 -- | The device\/version ID from which to request the data.
 dlomCpksver :: Lens' DictionaryListOfflineMetadata Text

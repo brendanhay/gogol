@@ -63,11 +63,13 @@ type SubscriptionsChangePlanResource =
 -- plan with monthly or yearly payments.
 --
 -- /See:/ 'subscriptionsChangePlan' smart constructor.
-data SubscriptionsChangePlan = SubscriptionsChangePlan'
+data SubscriptionsChangePlan =
+  SubscriptionsChangePlan'
     { _scpPayload        :: !ChangePlanRequest
     , _scpCustomerId     :: !Text
     , _scpSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionsChangePlan' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ subscriptionsChangePlan
     -> Text -- ^ 'scpSubscriptionId'
     -> SubscriptionsChangePlan
 subscriptionsChangePlan pScpPayload_ pScpCustomerId_ pScpSubscriptionId_ =
-    SubscriptionsChangePlan'
+  SubscriptionsChangePlan'
     { _scpPayload = pScpPayload_
     , _scpCustomerId = pScpCustomerId_
     , _scpSubscriptionId = pScpSubscriptionId_

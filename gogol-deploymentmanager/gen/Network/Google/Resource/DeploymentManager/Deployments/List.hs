@@ -62,13 +62,15 @@ type DeploymentsListResource =
 -- | Lists all deployments for a given project.
 --
 -- /See:/ 'deploymentsList' smart constructor.
-data DeploymentsList = DeploymentsList'
+data DeploymentsList =
+  DeploymentsList'
     { _dlOrderBy    :: !(Maybe Text)
     , _dlProject    :: !Text
     , _dlFilter     :: !(Maybe Text)
     , _dlPageToken  :: !(Maybe Text)
     , _dlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeploymentsList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ deploymentsList
     :: Text -- ^ 'dlProject'
     -> DeploymentsList
 deploymentsList pDlProject_ =
-    DeploymentsList'
+  DeploymentsList'
     { _dlOrderBy = Nothing
     , _dlProject = pDlProject_
     , _dlFilter = Nothing

@@ -66,7 +66,8 @@ type ProjectsInstancesDatabasesSetIAMPolicyResource =
 -- \`spanner.databases.setIamPolicy\` permission on resource.
 --
 -- /See:/ 'projectsInstancesDatabasesSetIAMPolicy' smart constructor.
-data ProjectsInstancesDatabasesSetIAMPolicy = ProjectsInstancesDatabasesSetIAMPolicy'
+data ProjectsInstancesDatabasesSetIAMPolicy =
+  ProjectsInstancesDatabasesSetIAMPolicy'
     { _pidsipXgafv          :: !(Maybe Xgafv)
     , _pidsipUploadProtocol :: !(Maybe Text)
     , _pidsipAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsInstancesDatabasesSetIAMPolicy = ProjectsInstancesDatabasesSetIAMPo
     , _pidsipPayload        :: !SetIAMPolicyRequest
     , _pidsipResource       :: !Text
     , _pidsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsInstancesDatabasesSetIAMPolicy
     -> Text -- ^ 'pidsipResource'
     -> ProjectsInstancesDatabasesSetIAMPolicy
 projectsInstancesDatabasesSetIAMPolicy pPidsipPayload_ pPidsipResource_ =
-    ProjectsInstancesDatabasesSetIAMPolicy'
+  ProjectsInstancesDatabasesSetIAMPolicy'
     { _pidsipXgafv = Nothing
     , _pidsipUploadProtocol = Nothing
     , _pidsipAccessToken = Nothing
@@ -152,7 +154,8 @@ pidsipCallback
       (\ s a -> s{_pidsipCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSetIAMPolicy where
+           ProjectsInstancesDatabasesSetIAMPolicy
+         where
         type Rs ProjectsInstancesDatabasesSetIAMPolicy =
              Policy
         type Scopes ProjectsInstancesDatabasesSetIAMPolicy =

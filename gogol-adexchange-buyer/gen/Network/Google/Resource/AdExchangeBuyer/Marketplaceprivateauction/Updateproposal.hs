@@ -56,10 +56,12 @@ type MarketplaceprivateauctionUpdateproposalResource
 -- | Update a given private auction proposal
 --
 -- /See:/ 'marketplaceprivateauctionUpdateproposal' smart constructor.
-data MarketplaceprivateauctionUpdateproposal = MarketplaceprivateauctionUpdateproposal'
+data MarketplaceprivateauctionUpdateproposal =
+  MarketplaceprivateauctionUpdateproposal'
     { _muPrivateAuctionId :: !Text
     , _muPayload          :: !UpdatePrivateAuctionProposalRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MarketplaceprivateauctionUpdateproposal' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ marketplaceprivateauctionUpdateproposal
     -> UpdatePrivateAuctionProposalRequest -- ^ 'muPayload'
     -> MarketplaceprivateauctionUpdateproposal
 marketplaceprivateauctionUpdateproposal pMuPrivateAuctionId_ pMuPayload_ =
-    MarketplaceprivateauctionUpdateproposal'
-    { _muPrivateAuctionId = pMuPrivateAuctionId_
-    , _muPayload = pMuPayload_
-    }
+  MarketplaceprivateauctionUpdateproposal'
+    {_muPrivateAuctionId = pMuPrivateAuctionId_, _muPayload = pMuPayload_}
 
 -- | The private auction id to be updated.
 muPrivateAuctionId :: Lens' MarketplaceprivateauctionUpdateproposal Text
@@ -90,7 +90,8 @@ muPayload
   = lens _muPayload (\ s a -> s{_muPayload = a})
 
 instance GoogleRequest
-         MarketplaceprivateauctionUpdateproposal where
+           MarketplaceprivateauctionUpdateproposal
+         where
         type Rs MarketplaceprivateauctionUpdateproposal = ()
         type Scopes MarketplaceprivateauctionUpdateproposal =
              '["https://www.googleapis.com/auth/adexchange.buyer"]

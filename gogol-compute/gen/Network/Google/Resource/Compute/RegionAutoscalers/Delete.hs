@@ -59,12 +59,14 @@ type RegionAutoscalersDeleteResource =
 -- | Deletes the specified autoscaler.
 --
 -- /See:/ 'regionAutoscalersDelete' smart constructor.
-data RegionAutoscalersDelete = RegionAutoscalersDelete'
+data RegionAutoscalersDelete =
+  RegionAutoscalersDelete'
     { _radRequestId  :: !(Maybe Text)
     , _radProject    :: !Text
     , _radAutoscaler :: !Text
     , _radRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionAutoscalersDelete' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ regionAutoscalersDelete
     -> Text -- ^ 'radRegion'
     -> RegionAutoscalersDelete
 regionAutoscalersDelete pRadProject_ pRadAutoscaler_ pRadRegion_ =
-    RegionAutoscalersDelete'
+  RegionAutoscalersDelete'
     { _radRequestId = Nothing
     , _radProject = pRadProject_
     , _radAutoscaler = pRadAutoscaler_

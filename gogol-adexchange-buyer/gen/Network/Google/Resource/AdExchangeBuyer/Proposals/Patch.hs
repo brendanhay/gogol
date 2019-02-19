@@ -57,12 +57,14 @@ type ProposalsPatchResource =
 -- | Update the given proposal. This method supports patch semantics.
 --
 -- /See:/ 'proposalsPatch' smart constructor.
-data ProposalsPatch = ProposalsPatch'
+data ProposalsPatch =
+  ProposalsPatch'
     { _ppUpdateAction   :: !ProposalsPatchUpdateAction
     , _ppRevisionNumber :: !(Textual Int64)
     , _ppPayload        :: !Proposal
     , _ppProposalId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProposalsPatch' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ proposalsPatch
     -> Text -- ^ 'ppProposalId'
     -> ProposalsPatch
 proposalsPatch pPpUpdateAction_ pPpRevisionNumber_ pPpPayload_ pPpProposalId_ =
-    ProposalsPatch'
+  ProposalsPatch'
     { _ppUpdateAction = pPpUpdateAction_
     , _ppRevisionNumber = _Coerce # pPpRevisionNumber_
     , _ppPayload = pPpPayload_

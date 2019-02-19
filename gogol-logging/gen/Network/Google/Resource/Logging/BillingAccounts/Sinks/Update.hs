@@ -71,7 +71,8 @@ type BillingAccountsSinksUpdateResource =
 -- unique_writer_identity field.
 --
 -- /See:/ 'billingAccountsSinksUpdate' smart constructor.
-data BillingAccountsSinksUpdate = BillingAccountsSinksUpdate'
+data BillingAccountsSinksUpdate =
+  BillingAccountsSinksUpdate'
     { _basuXgafv                :: !(Maybe Xgafv)
     , _basuUniqueWriterIdentity :: !(Maybe Bool)
     , _basuUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,8 @@ data BillingAccountsSinksUpdate = BillingAccountsSinksUpdate'
     , _basuPayload              :: !LogSink
     , _basuSinkName             :: !Text
     , _basuCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsSinksUpdate' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ billingAccountsSinksUpdate
     -> Text -- ^ 'basuSinkName'
     -> BillingAccountsSinksUpdate
 billingAccountsSinksUpdate pBasuPayload_ pBasuSinkName_ =
-    BillingAccountsSinksUpdate'
+  BillingAccountsSinksUpdate'
     { _basuXgafv = Nothing
     , _basuUniqueWriterIdentity = Nothing
     , _basuUploadProtocol = Nothing

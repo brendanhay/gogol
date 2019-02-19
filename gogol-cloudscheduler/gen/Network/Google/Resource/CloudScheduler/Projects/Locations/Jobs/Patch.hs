@@ -73,7 +73,8 @@ type ProjectsLocationsJobsPatchResource =
 -- is received.
 --
 -- /See:/ 'projectsLocationsJobsPatch' smart constructor.
-data ProjectsLocationsJobsPatch = ProjectsLocationsJobsPatch'
+data ProjectsLocationsJobsPatch =
+  ProjectsLocationsJobsPatch'
     { _pljpXgafv          :: !(Maybe Xgafv)
     , _pljpUploadProtocol :: !(Maybe Text)
     , _pljpUpdateMask     :: !(Maybe GFieldMask)
@@ -82,7 +83,8 @@ data ProjectsLocationsJobsPatch = ProjectsLocationsJobsPatch'
     , _pljpPayload        :: !Job
     , _pljpName           :: !Text
     , _pljpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsPatch' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ projectsLocationsJobsPatch
     -> Text -- ^ 'pljpName'
     -> ProjectsLocationsJobsPatch
 projectsLocationsJobsPatch pPljpPayload_ pPljpName_ =
-    ProjectsLocationsJobsPatch'
+  ProjectsLocationsJobsPatch'
     { _pljpXgafv = Nothing
     , _pljpUploadProtocol = Nothing
     , _pljpUpdateMask = Nothing

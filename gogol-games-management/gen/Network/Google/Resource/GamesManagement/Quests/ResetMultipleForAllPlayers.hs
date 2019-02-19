@@ -57,9 +57,11 @@ type QuestsResetMultipleForAllPlayersResource =
 -- may be reset.
 --
 -- /See:/ 'questsResetMultipleForAllPlayers' smart constructor.
-newtype QuestsResetMultipleForAllPlayers = QuestsResetMultipleForAllPlayers'
+newtype QuestsResetMultipleForAllPlayers =
+  QuestsResetMultipleForAllPlayers'
     { _qrmfapPayload :: QuestsResetMultipleForAllRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuestsResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
@@ -70,9 +72,7 @@ questsResetMultipleForAllPlayers
     :: QuestsResetMultipleForAllRequest -- ^ 'qrmfapPayload'
     -> QuestsResetMultipleForAllPlayers
 questsResetMultipleForAllPlayers pQrmfapPayload_ =
-    QuestsResetMultipleForAllPlayers'
-    { _qrmfapPayload = pQrmfapPayload_
-    }
+  QuestsResetMultipleForAllPlayers' {_qrmfapPayload = pQrmfapPayload_}
 
 -- | Multipart request metadata.
 qrmfapPayload :: Lens' QuestsResetMultipleForAllPlayers QuestsResetMultipleForAllRequest
@@ -81,7 +81,8 @@ qrmfapPayload
       (\ s a -> s{_qrmfapPayload = a})
 
 instance GoogleRequest
-         QuestsResetMultipleForAllPlayers where
+           QuestsResetMultipleForAllPlayers
+         where
         type Rs QuestsResetMultipleForAllPlayers = ()
         type Scopes QuestsResetMultipleForAllPlayers =
              '["https://www.googleapis.com/auth/games"]

@@ -67,11 +67,13 @@ type OrderinvoicesCreaterefundinvoiceResource =
 -- previous invoice.
 --
 -- /See:/ 'orderinvoicesCreaterefundinvoice' smart constructor.
-data OrderinvoicesCreaterefundinvoice = OrderinvoicesCreaterefundinvoice'
+data OrderinvoicesCreaterefundinvoice =
+  OrderinvoicesCreaterefundinvoice'
     { _ocMerchantId :: !(Textual Word64)
     , _ocPayload    :: !OrderinvoicesCreateRefundInvoiceRequest
     , _ocOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrderinvoicesCreaterefundinvoice' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ orderinvoicesCreaterefundinvoice
     -> Text -- ^ 'ocOrderId'
     -> OrderinvoicesCreaterefundinvoice
 orderinvoicesCreaterefundinvoice pOcMerchantId_ pOcPayload_ pOcOrderId_ =
-    OrderinvoicesCreaterefundinvoice'
+  OrderinvoicesCreaterefundinvoice'
     { _ocMerchantId = _Coerce # pOcMerchantId_
     , _ocPayload = pOcPayload_
     , _ocOrderId = pOcOrderId_
@@ -112,7 +114,8 @@ ocOrderId
   = lens _ocOrderId (\ s a -> s{_ocOrderId = a})
 
 instance GoogleRequest
-         OrderinvoicesCreaterefundinvoice where
+           OrderinvoicesCreaterefundinvoice
+         where
         type Rs OrderinvoicesCreaterefundinvoice =
              OrderinvoicesCreateRefundInvoiceResponse
         type Scopes OrderinvoicesCreaterefundinvoice =

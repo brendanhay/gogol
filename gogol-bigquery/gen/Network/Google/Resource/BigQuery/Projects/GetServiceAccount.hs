@@ -55,9 +55,11 @@ type ProjectsGetServiceAccountResource =
 -- for interactions with Google Cloud KMS.
 --
 -- /See:/ 'projectsGetServiceAccount' smart constructor.
-newtype ProjectsGetServiceAccount = ProjectsGetServiceAccount'
+newtype ProjectsGetServiceAccount =
+  ProjectsGetServiceAccount'
     { _pgsaProjectId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGetServiceAccount' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ projectsGetServiceAccount
     :: Text -- ^ 'pgsaProjectId'
     -> ProjectsGetServiceAccount
 projectsGetServiceAccount pPgsaProjectId_ =
-    ProjectsGetServiceAccount'
-    { _pgsaProjectId = pPgsaProjectId_
-    }
+  ProjectsGetServiceAccount' {_pgsaProjectId = pPgsaProjectId_}
 
 -- | Project ID for which the service account is requested.
 pgsaProjectId :: Lens' ProjectsGetServiceAccount Text

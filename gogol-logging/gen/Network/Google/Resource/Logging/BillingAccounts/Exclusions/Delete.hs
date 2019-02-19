@@ -59,14 +59,16 @@ type BillingAccountsExclusionsDeleteResource =
 -- | Deletes an exclusion.
 --
 -- /See:/ 'billingAccountsExclusionsDelete' smart constructor.
-data BillingAccountsExclusionsDelete = BillingAccountsExclusionsDelete'
+data BillingAccountsExclusionsDelete =
+  BillingAccountsExclusionsDelete'
     { _baedXgafv          :: !(Maybe Xgafv)
     , _baedUploadProtocol :: !(Maybe Text)
     , _baedAccessToken    :: !(Maybe Text)
     , _baedUploadType     :: !(Maybe Text)
     , _baedName           :: !Text
     , _baedCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsExclusionsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ billingAccountsExclusionsDelete
     :: Text -- ^ 'baedName'
     -> BillingAccountsExclusionsDelete
 billingAccountsExclusionsDelete pBaedName_ =
-    BillingAccountsExclusionsDelete'
+  BillingAccountsExclusionsDelete'
     { _baedXgafv = Nothing
     , _baedUploadProtocol = Nothing
     , _baedAccessToken = Nothing
@@ -134,7 +136,8 @@ baedCallback
   = lens _baedCallback (\ s a -> s{_baedCallback = a})
 
 instance GoogleRequest
-         BillingAccountsExclusionsDelete where
+           BillingAccountsExclusionsDelete
+         where
         type Rs BillingAccountsExclusionsDelete = Empty
         type Scopes BillingAccountsExclusionsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

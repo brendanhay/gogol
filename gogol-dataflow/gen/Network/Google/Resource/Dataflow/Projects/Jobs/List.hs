@@ -72,7 +72,8 @@ type ProjectsJobsListResource =
 -- | List the jobs of a project in a given region.
 --
 -- /See:/ 'projectsJobsList' smart constructor.
-data ProjectsJobsList = ProjectsJobsList'
+data ProjectsJobsList =
+  ProjectsJobsList'
     { _pjlXgafv          :: !(Maybe Xgafv)
     , _pjlUploadProtocol :: !(Maybe Text)
     , _pjlLocation       :: !(Maybe Text)
@@ -84,7 +85,8 @@ data ProjectsJobsList = ProjectsJobsList'
     , _pjlProjectId      :: !Text
     , _pjlPageSize       :: !(Maybe (Textual Int32))
     , _pjlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsList' with the minimum fields required to make a request.
 --
@@ -115,7 +117,7 @@ projectsJobsList
     :: Text -- ^ 'pjlProjectId'
     -> ProjectsJobsList
 projectsJobsList pPjlProjectId_ =
-    ProjectsJobsList'
+  ProjectsJobsList'
     { _pjlXgafv = Nothing
     , _pjlUploadProtocol = Nothing
     , _pjlLocation = Nothing

@@ -63,12 +63,14 @@ type EditsTracksUpdateResource =
 -- adding new APKs will cause it to resume.
 --
 -- /See:/ 'editsTracksUpdate' smart constructor.
-data EditsTracksUpdate = EditsTracksUpdate'
+data EditsTracksUpdate =
+  EditsTracksUpdate'
     { _etuTrack       :: !Text
     , _etuPackageName :: !Text
     , _etuPayload     :: !Track
     , _etuEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsTracksUpdate' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ editsTracksUpdate
     -> Text -- ^ 'etuEditId'
     -> EditsTracksUpdate
 editsTracksUpdate pEtuTrack_ pEtuPackageName_ pEtuPayload_ pEtuEditId_ =
-    EditsTracksUpdate'
+  EditsTracksUpdate'
     { _etuTrack = pEtuTrack_
     , _etuPackageName = pEtuPackageName_
     , _etuPayload = pEtuPayload_

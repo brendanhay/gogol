@@ -81,7 +81,8 @@ type CoursesListResource =
 -- do not exist.
 --
 -- /See:/ 'coursesList' smart constructor.
-data CoursesList = CoursesList'
+data CoursesList =
+  CoursesList'
     { _clStudentId      :: !(Maybe Text)
     , _clXgafv          :: !(Maybe Xgafv)
     , _clUploadProtocol :: !(Maybe Text)
@@ -92,7 +93,8 @@ data CoursesList = CoursesList'
     , _clPageSize       :: !(Maybe (Textual Int32))
     , _clCourseStates   :: !(Maybe [Text])
     , _clCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesList' with the minimum fields required to make a request.
 --
@@ -120,7 +122,7 @@ data CoursesList = CoursesList'
 coursesList
     :: CoursesList
 coursesList =
-    CoursesList'
+  CoursesList'
     { _clStudentId = Nothing
     , _clXgafv = Nothing
     , _clUploadProtocol = Nothing

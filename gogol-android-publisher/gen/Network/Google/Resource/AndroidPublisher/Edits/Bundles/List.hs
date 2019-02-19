@@ -53,10 +53,12 @@ type EditsBundlesListResource =
 
 --
 -- /See:/ 'editsBundlesList' smart constructor.
-data EditsBundlesList = EditsBundlesList'
+data EditsBundlesList =
+  EditsBundlesList'
     { _eblPackageName :: !Text
     , _eblEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsBundlesList' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ editsBundlesList
     -> Text -- ^ 'eblEditId'
     -> EditsBundlesList
 editsBundlesList pEblPackageName_ pEblEditId_ =
-    EditsBundlesList'
-    { _eblPackageName = pEblPackageName_
-    , _eblEditId = pEblEditId_
-    }
+  EditsBundlesList'
+    {_eblPackageName = pEblPackageName_, _eblEditId = pEblEditId_}
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

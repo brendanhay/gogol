@@ -70,7 +70,8 @@ type ProjectsLocationsJobsCreateResource =
 -- | Creates a Cloud Dataflow job.
 --
 -- /See:/ 'projectsLocationsJobsCreate' smart constructor.
-data ProjectsLocationsJobsCreate = ProjectsLocationsJobsCreate'
+data ProjectsLocationsJobsCreate =
+  ProjectsLocationsJobsCreate'
     { _pljcXgafv          :: !(Maybe Xgafv)
     , _pljcUploadProtocol :: !(Maybe Text)
     , _pljcLocation       :: !Text
@@ -81,7 +82,8 @@ data ProjectsLocationsJobsCreate = ProjectsLocationsJobsCreate'
     , _pljcProjectId      :: !Text
     , _pljcReplaceJobId   :: !(Maybe Text)
     , _pljcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsCreate' with the minimum fields required to make a request.
 --
@@ -112,7 +114,7 @@ projectsLocationsJobsCreate
     -> Text -- ^ 'pljcProjectId'
     -> ProjectsLocationsJobsCreate
 projectsLocationsJobsCreate pPljcLocation_ pPljcPayload_ pPljcProjectId_ =
-    ProjectsLocationsJobsCreate'
+  ProjectsLocationsJobsCreate'
     { _pljcXgafv = Nothing
     , _pljcUploadProtocol = Nothing
     , _pljcLocation = pPljcLocation_

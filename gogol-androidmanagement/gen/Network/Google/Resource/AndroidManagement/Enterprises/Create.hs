@@ -68,7 +68,8 @@ type EnterprisesCreateResource =
 -- flow.
 --
 -- /See:/ 'enterprisesCreate' smart constructor.
-data EnterprisesCreate = EnterprisesCreate'
+data EnterprisesCreate =
+  EnterprisesCreate'
     { _ecXgafv           :: !(Maybe Xgafv)
     , _ecSignupURLName   :: !(Maybe Text)
     , _ecUploadProtocol  :: !(Maybe Text)
@@ -78,7 +79,8 @@ data EnterprisesCreate = EnterprisesCreate'
     , _ecProjectId       :: !(Maybe Text)
     , _ecEnterpriseToken :: !(Maybe Text)
     , _ecCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ enterprisesCreate
     :: Enterprise -- ^ 'ecPayload'
     -> EnterprisesCreate
 enterprisesCreate pEcPayload_ =
-    EnterprisesCreate'
+  EnterprisesCreate'
     { _ecXgafv = Nothing
     , _ecSignupURLName = Nothing
     , _ecUploadProtocol = Nothing

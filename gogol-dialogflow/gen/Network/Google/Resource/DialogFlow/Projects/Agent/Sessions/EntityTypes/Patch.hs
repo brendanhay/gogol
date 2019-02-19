@@ -67,7 +67,8 @@ type ProjectsAgentSessionsEntityTypesPatchResource =
 -- | Updates the specified session entity type.
 --
 -- /See:/ 'projectsAgentSessionsEntityTypesPatch' smart constructor.
-data ProjectsAgentSessionsEntityTypesPatch = ProjectsAgentSessionsEntityTypesPatch'
+data ProjectsAgentSessionsEntityTypesPatch =
+  ProjectsAgentSessionsEntityTypesPatch'
     { _paSetpXgafv          :: !(Maybe Xgafv)
     , _paSetpUploadProtocol :: !(Maybe Text)
     , _paSetpUpdateMask     :: !(Maybe GFieldMask)
@@ -76,7 +77,8 @@ data ProjectsAgentSessionsEntityTypesPatch = ProjectsAgentSessionsEntityTypesPat
     , _paSetpPayload        :: !GoogleCloudDialogflowV2SessionEntityType
     , _paSetpName           :: !Text
     , _paSetpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesPatch' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsAgentSessionsEntityTypesPatch
     -> Text -- ^ 'paSetpName'
     -> ProjectsAgentSessionsEntityTypesPatch
 projectsAgentSessionsEntityTypesPatch pPaSetpPayload_ pPaSetpName_ =
-    ProjectsAgentSessionsEntityTypesPatch'
+  ProjectsAgentSessionsEntityTypesPatch'
     { _paSetpXgafv = Nothing
     , _paSetpUploadProtocol = Nothing
     , _paSetpUpdateMask = Nothing
@@ -163,7 +165,8 @@ paSetpCallback
       (\ s a -> s{_paSetpCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsEntityTypesPatch where
+           ProjectsAgentSessionsEntityTypesPatch
+         where
         type Rs ProjectsAgentSessionsEntityTypesPatch =
              GoogleCloudDialogflowV2SessionEntityType
         type Scopes ProjectsAgentSessionsEntityTypesPatch =

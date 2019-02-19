@@ -55,10 +55,12 @@ type DomainAliasesDeleteResource =
 -- | Deletes a Domain Alias of the customer.
 --
 -- /See:/ 'domainAliasesDelete' smart constructor.
-data DomainAliasesDelete = DomainAliasesDelete'
+data DomainAliasesDelete =
+  DomainAliasesDelete'
     { _dadDomainAliasName :: !Text
     , _dadCustomer        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DomainAliasesDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ domainAliasesDelete
     -> Text -- ^ 'dadCustomer'
     -> DomainAliasesDelete
 domainAliasesDelete pDadDomainAliasName_ pDadCustomer_ =
-    DomainAliasesDelete'
-    { _dadDomainAliasName = pDadDomainAliasName_
-    , _dadCustomer = pDadCustomer_
-    }
+  DomainAliasesDelete'
+    {_dadDomainAliasName = pDadDomainAliasName_, _dadCustomer = pDadCustomer_}
 
 -- | Name of domain alias to be retrieved.
 dadDomainAliasName :: Lens' DomainAliasesDelete Text

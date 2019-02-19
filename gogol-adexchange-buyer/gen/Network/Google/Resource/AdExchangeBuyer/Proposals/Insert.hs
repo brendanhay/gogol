@@ -53,9 +53,11 @@ type ProposalsInsertResource =
 -- | Create the given list of proposals
 --
 -- /See:/ 'proposalsInsert' smart constructor.
-newtype ProposalsInsert = ProposalsInsert'
+newtype ProposalsInsert =
+  ProposalsInsert'
     { _piPayload :: CreateOrdersRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProposalsInsert' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype ProposalsInsert = ProposalsInsert'
 proposalsInsert
     :: CreateOrdersRequest -- ^ 'piPayload'
     -> ProposalsInsert
-proposalsInsert pPiPayload_ =
-    ProposalsInsert'
-    { _piPayload = pPiPayload_
-    }
+proposalsInsert pPiPayload_ = ProposalsInsert' {_piPayload = pPiPayload_}
 
 -- | Multipart request metadata.
 piPayload :: Lens' ProposalsInsert CreateOrdersRequest

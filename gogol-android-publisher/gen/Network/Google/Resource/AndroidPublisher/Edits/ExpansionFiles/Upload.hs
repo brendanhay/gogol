@@ -81,12 +81,14 @@ type EditsExpansionFilesUploadResource =
 -- | Uploads and attaches a new Expansion File to the APK specified.
 --
 -- /See:/ 'editsExpansionFilesUpload' smart constructor.
-data EditsExpansionFilesUpload = EditsExpansionFilesUpload'
+data EditsExpansionFilesUpload =
+  EditsExpansionFilesUpload'
     { _ePackageName       :: !Text
     , _eAPKVersionCode    :: !(Textual Int32)
     , _eExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
     , _eEditId            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsExpansionFilesUpload' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ editsExpansionFilesUpload
     -> Text -- ^ 'eEditId'
     -> EditsExpansionFilesUpload
 editsExpansionFilesUpload pEPackageName_ pEAPKVersionCode_ pEExpansionFileType_ pEEditId_ =
-    EditsExpansionFilesUpload'
+  EditsExpansionFilesUpload'
     { _ePackageName = pEPackageName_
     , _eAPKVersionCode = _Coerce # pEAPKVersionCode_
     , _eExpansionFileType = pEExpansionFileType_
@@ -153,7 +155,8 @@ instance GoogleRequest EditsExpansionFilesUpload
                       mempty
 
 instance GoogleRequest
-         (MediaUpload EditsExpansionFilesUpload) where
+           (MediaUpload EditsExpansionFilesUpload)
+         where
         type Rs (MediaUpload EditsExpansionFilesUpload) =
              ExpansionFilesUploadResponse
         type Scopes (MediaUpload EditsExpansionFilesUpload) =

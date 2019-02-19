@@ -59,14 +59,16 @@ type SpacesMessagesDeleteResource =
 -- | Deletes a message.
 --
 -- /See:/ 'spacesMessagesDelete' smart constructor.
-data SpacesMessagesDelete = SpacesMessagesDelete'
+data SpacesMessagesDelete =
+  SpacesMessagesDelete'
     { _smdXgafv          :: !(Maybe Xgafv)
     , _smdUploadProtocol :: !(Maybe Text)
     , _smdAccessToken    :: !(Maybe Text)
     , _smdUploadType     :: !(Maybe Text)
     , _smdName           :: !Text
     , _smdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpacesMessagesDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ spacesMessagesDelete
     :: Text -- ^ 'smdName'
     -> SpacesMessagesDelete
 spacesMessagesDelete pSmdName_ =
-    SpacesMessagesDelete'
+  SpacesMessagesDelete'
     { _smdXgafv = Nothing
     , _smdUploadProtocol = Nothing
     , _smdAccessToken = Nothing

@@ -70,7 +70,8 @@ type AppsServicesPatchResource =
 -- | Updates the configuration of the specified service.
 --
 -- /See:/ 'appsServicesPatch' smart constructor.
-data AppsServicesPatch = AppsServicesPatch'
+data AppsServicesPatch =
+  AppsServicesPatch'
     { _aspXgafv          :: !(Maybe Xgafv)
     , _aspUploadProtocol :: !(Maybe Text)
     , _aspUpdateMask     :: !(Maybe GFieldMask)
@@ -81,7 +82,8 @@ data AppsServicesPatch = AppsServicesPatch'
     , _aspAppsId         :: !Text
     , _aspServicesId     :: !Text
     , _aspCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsServicesPatch' with the minimum fields required to make a request.
 --
@@ -112,7 +114,7 @@ appsServicesPatch
     -> Text -- ^ 'aspServicesId'
     -> AppsServicesPatch
 appsServicesPatch pAspPayload_ pAspAppsId_ pAspServicesId_ =
-    AppsServicesPatch'
+  AppsServicesPatch'
     { _aspXgafv = Nothing
     , _aspUploadProtocol = Nothing
     , _aspUpdateMask = Nothing

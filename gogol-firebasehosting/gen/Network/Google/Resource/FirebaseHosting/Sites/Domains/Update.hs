@@ -63,7 +63,8 @@ type SitesDomainsUpdateResource =
 -- not exist.
 --
 -- /See:/ 'sitesDomainsUpdate' smart constructor.
-data SitesDomainsUpdate = SitesDomainsUpdate'
+data SitesDomainsUpdate =
+  SitesDomainsUpdate'
     { _sduXgafv          :: !(Maybe Xgafv)
     , _sduUploadProtocol :: !(Maybe Text)
     , _sduAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data SitesDomainsUpdate = SitesDomainsUpdate'
     , _sduPayload        :: !Domain
     , _sduName           :: !Text
     , _sduCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesDomainsUpdate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ sitesDomainsUpdate
     -> Text -- ^ 'sduName'
     -> SitesDomainsUpdate
 sitesDomainsUpdate pSduPayload_ pSduName_ =
-    SitesDomainsUpdate'
+  SitesDomainsUpdate'
     { _sduXgafv = Nothing
     , _sduUploadProtocol = Nothing
     , _sduAccessToken = Nothing

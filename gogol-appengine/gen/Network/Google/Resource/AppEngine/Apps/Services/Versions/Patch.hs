@@ -129,7 +129,8 @@ type AppsServicesVersionsPatchResource =
 -- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
 --
 -- /See:/ 'appsServicesVersionsPatch' smart constructor.
-data AppsServicesVersionsPatch = AppsServicesVersionsPatch'
+data AppsServicesVersionsPatch =
+  AppsServicesVersionsPatch'
     { _asvpXgafv          :: !(Maybe Xgafv)
     , _asvpUploadProtocol :: !(Maybe Text)
     , _asvpUpdateMask     :: !(Maybe GFieldMask)
@@ -140,7 +141,8 @@ data AppsServicesVersionsPatch = AppsServicesVersionsPatch'
     , _asvpAppsId         :: !Text
     , _asvpServicesId     :: !Text
     , _asvpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsServicesVersionsPatch' with the minimum fields required to make a request.
 --
@@ -172,7 +174,7 @@ appsServicesVersionsPatch
     -> Text -- ^ 'asvpServicesId'
     -> AppsServicesVersionsPatch
 appsServicesVersionsPatch pAsvpPayload_ pAsvpVersionsId_ pAsvpAppsId_ pAsvpServicesId_ =
-    AppsServicesVersionsPatch'
+  AppsServicesVersionsPatch'
     { _asvpXgafv = Nothing
     , _asvpUploadProtocol = Nothing
     , _asvpUpdateMask = Nothing

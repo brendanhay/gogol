@@ -75,14 +75,16 @@ type OperationsCancelResource =
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
 -- /See:/ 'operationsCancel' smart constructor.
-data OperationsCancel = OperationsCancel'
+data OperationsCancel =
+  OperationsCancel'
     { _ocXgafv          :: !(Maybe Xgafv)
     , _ocUploadProtocol :: !(Maybe Text)
     , _ocAccessToken    :: !(Maybe Text)
     , _ocUploadType     :: !(Maybe Text)
     , _ocName           :: !Text
     , _ocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationsCancel' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ operationsCancel
     :: Text -- ^ 'ocName'
     -> OperationsCancel
 operationsCancel pOcName_ =
-    OperationsCancel'
+  OperationsCancel'
     { _ocXgafv = Nothing
     , _ocUploadProtocol = Nothing
     , _ocAccessToken = Nothing

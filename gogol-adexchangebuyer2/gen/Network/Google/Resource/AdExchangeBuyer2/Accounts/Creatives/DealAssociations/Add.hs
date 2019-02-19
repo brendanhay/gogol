@@ -67,7 +67,8 @@ type AccountsCreativesDealAssociationsAddResource =
 -- | Associate an existing deal with a creative.
 --
 -- /See:/ 'accountsCreativesDealAssociationsAdd' smart constructor.
-data AccountsCreativesDealAssociationsAdd = AccountsCreativesDealAssociationsAdd'
+data AccountsCreativesDealAssociationsAdd =
+  AccountsCreativesDealAssociationsAdd'
     { _acdaaXgafv          :: !(Maybe Xgafv)
     , _acdaaUploadProtocol :: !(Maybe Text)
     , _acdaaAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data AccountsCreativesDealAssociationsAdd = AccountsCreativesDealAssociationsAdd
     , _acdaaPayload        :: !AddDealAssociationRequest
     , _acdaaAccountId      :: !Text
     , _acdaaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsCreativesDealAssociationsAdd' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ accountsCreativesDealAssociationsAdd
     -> Text -- ^ 'acdaaAccountId'
     -> AccountsCreativesDealAssociationsAdd
 accountsCreativesDealAssociationsAdd pAcdaaCreativeId_ pAcdaaPayload_ pAcdaaAccountId_ =
-    AccountsCreativesDealAssociationsAdd'
+  AccountsCreativesDealAssociationsAdd'
     { _acdaaXgafv = Nothing
     , _acdaaUploadProtocol = Nothing
     , _acdaaAccessToken = Nothing
@@ -161,7 +163,8 @@ acdaaCallback
       (\ s a -> s{_acdaaCallback = a})
 
 instance GoogleRequest
-         AccountsCreativesDealAssociationsAdd where
+           AccountsCreativesDealAssociationsAdd
+         where
         type Rs AccountsCreativesDealAssociationsAdd = Empty
         type Scopes AccountsCreativesDealAssociationsAdd =
              '["https://www.googleapis.com/auth/adexchange.buyer"]

@@ -85,7 +85,8 @@ type ProjectsGroupStatsListResource =
 -- | Lists the specified groups.
 --
 -- /See:/ 'projectsGroupStatsList' smart constructor.
-data ProjectsGroupStatsList = ProjectsGroupStatsList'
+data ProjectsGroupStatsList =
+  ProjectsGroupStatsList'
     { _pgslXgafv                     :: !(Maybe Xgafv)
     , _pgslUploadProtocol            :: !(Maybe Text)
     , _pgslAccessToken               :: !(Maybe Text)
@@ -103,7 +104,8 @@ data ProjectsGroupStatsList = ProjectsGroupStatsList'
     , _pgslCallback                  :: !(Maybe Text)
     , _pgslServiceFilterVersion      :: !(Maybe Text)
     , _pgslTimeRangePeriod           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGroupStatsList' with the minimum fields required to make a request.
 --
@@ -146,7 +148,7 @@ projectsGroupStatsList
     :: Text -- ^ 'pgslProjectName'
     -> ProjectsGroupStatsList
 projectsGroupStatsList pPgslProjectName_ =
-    ProjectsGroupStatsList'
+  ProjectsGroupStatsList'
     { _pgslXgafv = Nothing
     , _pgslUploadProtocol = Nothing
     , _pgslAccessToken = Nothing

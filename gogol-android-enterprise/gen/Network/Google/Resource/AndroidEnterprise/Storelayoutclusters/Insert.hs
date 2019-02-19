@@ -59,11 +59,13 @@ type StorelayoutclustersInsertResource =
 -- | Inserts a new cluster in a page.
 --
 -- /See:/ 'storelayoutclustersInsert' smart constructor.
-data StorelayoutclustersInsert = StorelayoutclustersInsert'
+data StorelayoutclustersInsert =
+  StorelayoutclustersInsert'
     { _sEnterpriseId :: !Text
     , _sPageId       :: !Text
     , _sPayload      :: !StoreCluster
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StorelayoutclustersInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ storelayoutclustersInsert
     -> StoreCluster -- ^ 'sPayload'
     -> StorelayoutclustersInsert
 storelayoutclustersInsert pSEnterpriseId_ pSPageId_ pSPayload_ =
-    StorelayoutclustersInsert'
+  StorelayoutclustersInsert'
     { _sEnterpriseId = pSEnterpriseId_
     , _sPageId = pSPageId_
     , _sPayload = pSPayload_

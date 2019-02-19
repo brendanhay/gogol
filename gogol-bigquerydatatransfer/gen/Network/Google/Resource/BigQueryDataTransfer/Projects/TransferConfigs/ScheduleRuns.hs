@@ -68,7 +68,8 @@ type ProjectsTransferConfigsScheduleRunsResource =
 -- the time range.
 --
 -- /See:/ 'projectsTransferConfigsScheduleRuns' smart constructor.
-data ProjectsTransferConfigsScheduleRuns = ProjectsTransferConfigsScheduleRuns'
+data ProjectsTransferConfigsScheduleRuns =
+  ProjectsTransferConfigsScheduleRuns'
     { _ptcsrParent         :: !Text
     , _ptcsrXgafv          :: !(Maybe Xgafv)
     , _ptcsrUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsTransferConfigsScheduleRuns = ProjectsTransferConfigsScheduleRuns'
     , _ptcsrUploadType     :: !(Maybe Text)
     , _ptcsrPayload        :: !ScheduleTransferRunsRequest
     , _ptcsrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTransferConfigsScheduleRuns' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsTransferConfigsScheduleRuns
     -> ScheduleTransferRunsRequest -- ^ 'ptcsrPayload'
     -> ProjectsTransferConfigsScheduleRuns
 projectsTransferConfigsScheduleRuns pPtcsrParent_ pPtcsrPayload_ =
-    ProjectsTransferConfigsScheduleRuns'
+  ProjectsTransferConfigsScheduleRuns'
     { _ptcsrParent = pPtcsrParent_
     , _ptcsrXgafv = Nothing
     , _ptcsrUploadProtocol = Nothing
@@ -151,7 +153,8 @@ ptcsrCallback
       (\ s a -> s{_ptcsrCallback = a})
 
 instance GoogleRequest
-         ProjectsTransferConfigsScheduleRuns where
+           ProjectsTransferConfigsScheduleRuns
+         where
         type Rs ProjectsTransferConfigsScheduleRuns =
              ScheduleTransferRunsResponse
         type Scopes ProjectsTransferConfigsScheduleRuns =

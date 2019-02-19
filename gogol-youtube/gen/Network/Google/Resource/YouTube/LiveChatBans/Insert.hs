@@ -55,10 +55,12 @@ type LiveChatBansInsertResource =
 -- | Adds a new ban to the chat.
 --
 -- /See:/ 'liveChatBansInsert' smart constructor.
-data LiveChatBansInsert = LiveChatBansInsert'
+data LiveChatBansInsert =
+  LiveChatBansInsert'
     { _lcbiPart    :: !Text
     , _lcbiPayload :: !LiveChatBan
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatBansInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ liveChatBansInsert
     -> LiveChatBan -- ^ 'lcbiPayload'
     -> LiveChatBansInsert
 liveChatBansInsert pLcbiPart_ pLcbiPayload_ =
-    LiveChatBansInsert'
-    { _lcbiPart = pLcbiPart_
-    , _lcbiPayload = pLcbiPayload_
-    }
+  LiveChatBansInsert' {_lcbiPart = pLcbiPart_, _lcbiPayload = pLcbiPayload_}
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

@@ -51,18 +51,19 @@ type ResolvedAppAccessSettingsListTrustedAppsResource
 --
 -- /See:/ 'resolvedAppAccessSettingsListTrustedApps' smart constructor.
 data ResolvedAppAccessSettingsListTrustedApps =
-    ResolvedAppAccessSettingsListTrustedApps'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ResolvedAppAccessSettingsListTrustedApps'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResolvedAppAccessSettingsListTrustedApps' with the minimum fields required to make a request.
 --
 resolvedAppAccessSettingsListTrustedApps
     :: ResolvedAppAccessSettingsListTrustedApps
 resolvedAppAccessSettingsListTrustedApps =
-    ResolvedAppAccessSettingsListTrustedApps'
+  ResolvedAppAccessSettingsListTrustedApps'
 
 instance GoogleRequest
-         ResolvedAppAccessSettingsListTrustedApps where
+           ResolvedAppAccessSettingsListTrustedApps
+         where
         type Rs ResolvedAppAccessSettingsListTrustedApps =
              TrustedApps
         type Scopes ResolvedAppAccessSettingsListTrustedApps

@@ -53,10 +53,12 @@ type OrdersGetResource =
 -- | Retrieves an order from your Merchant Center account.
 --
 -- /See:/ 'ordersGet' smart constructor.
-data OrdersGet = OrdersGet'
+data OrdersGet =
+  OrdersGet'
     { _ogMerchantId :: !(Textual Word64)
     , _ogOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersGet' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ ordersGet
     -> Text -- ^ 'ogOrderId'
     -> OrdersGet
 ordersGet pOgMerchantId_ pOgOrderId_ =
-    OrdersGet'
-    { _ogMerchantId = _Coerce # pOgMerchantId_
-    , _ogOrderId = pOgOrderId_
-    }
+  OrdersGet'
+    {_ogMerchantId = _Coerce # pOgMerchantId_, _ogOrderId = pOgOrderId_}
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

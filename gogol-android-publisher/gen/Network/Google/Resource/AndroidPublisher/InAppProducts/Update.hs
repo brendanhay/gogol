@@ -59,12 +59,14 @@ type InAppProductsUpdateResource =
 -- | Updates the details of an in-app product.
 --
 -- /See:/ 'inAppProductsUpdate' smart constructor.
-data InAppProductsUpdate = InAppProductsUpdate'
+data InAppProductsUpdate =
+  InAppProductsUpdate'
     { _iapuAutoConvertMissingPrices :: !(Maybe Bool)
     , _iapuPackageName              :: !Text
     , _iapuPayload                  :: !InAppProduct
     , _iapuSKU                      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InAppProductsUpdate' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ inAppProductsUpdate
     -> Text -- ^ 'iapuSKU'
     -> InAppProductsUpdate
 inAppProductsUpdate pIapuPackageName_ pIapuPayload_ pIapuSKU_ =
-    InAppProductsUpdate'
+  InAppProductsUpdate'
     { _iapuAutoConvertMissingPrices = Nothing
     , _iapuPackageName = pIapuPackageName_
     , _iapuPayload = pIapuPayload_

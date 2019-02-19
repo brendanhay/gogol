@@ -64,7 +64,8 @@ type ProjectsLocationsRegistriesDevicesPatchResource
 -- | Updates a device.
 --
 -- /See:/ 'projectsLocationsRegistriesDevicesPatch' smart constructor.
-data ProjectsLocationsRegistriesDevicesPatch = ProjectsLocationsRegistriesDevicesPatch'
+data ProjectsLocationsRegistriesDevicesPatch =
+  ProjectsLocationsRegistriesDevicesPatch'
     { _plrdpXgafv          :: !(Maybe Xgafv)
     , _plrdpUploadProtocol :: !(Maybe Text)
     , _plrdpUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,8 @@ data ProjectsLocationsRegistriesDevicesPatch = ProjectsLocationsRegistriesDevice
     , _plrdpPayload        :: !Device
     , _plrdpName           :: !Text
     , _plrdpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsRegistriesDevicesPatch
     -> Text -- ^ 'plrdpName'
     -> ProjectsLocationsRegistriesDevicesPatch
 projectsLocationsRegistriesDevicesPatch pPlrdpPayload_ pPlrdpName_ =
-    ProjectsLocationsRegistriesDevicesPatch'
+  ProjectsLocationsRegistriesDevicesPatch'
     { _plrdpXgafv = Nothing
     , _plrdpUploadProtocol = Nothing
     , _plrdpUpdateMask = Nothing
@@ -164,7 +166,8 @@ plrdpCallback
       (\ s a -> s{_plrdpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesDevicesPatch where
+           ProjectsLocationsRegistriesDevicesPatch
+         where
         type Rs ProjectsLocationsRegistriesDevicesPatch =
              Device
         type Scopes ProjectsLocationsRegistriesDevicesPatch =

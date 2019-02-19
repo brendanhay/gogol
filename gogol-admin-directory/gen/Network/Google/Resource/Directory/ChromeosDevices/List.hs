@@ -71,7 +71,8 @@ type ChromeosDevicesListResource =
 -- | Retrieve all Chrome OS Devices of a customer (paginated)
 --
 -- /See:/ 'chromeosDevicesList' smart constructor.
-data ChromeosDevicesList = ChromeosDevicesList'
+data ChromeosDevicesList =
+  ChromeosDevicesList'
     { _cdlOrderBy     :: !(Maybe ChromeosDevicesListOrderBy)
     , _cdlOrgUnitPath :: !(Maybe Text)
     , _cdlCustomerId  :: !Text
@@ -80,7 +81,8 @@ data ChromeosDevicesList = ChromeosDevicesList'
     , _cdlProjection  :: !(Maybe ChromeosDevicesListProjection)
     , _cdlPageToken   :: !(Maybe Text)
     , _cdlMaxResults  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChromeosDevicesList' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ chromeosDevicesList
     :: Text -- ^ 'cdlCustomerId'
     -> ChromeosDevicesList
 chromeosDevicesList pCdlCustomerId_ =
-    ChromeosDevicesList'
+  ChromeosDevicesList'
     { _cdlOrderBy = Nothing
     , _cdlOrgUnitPath = Nothing
     , _cdlCustomerId = pCdlCustomerId_

@@ -92,7 +92,8 @@ type AccountsStoreInfosListResource =
 -- this method.
 --
 -- /See:/ 'accountsStoreInfosList' smart constructor.
-data AccountsStoreInfosList = AccountsStoreInfosList'
+data AccountsStoreInfosList =
+  AccountsStoreInfosList'
     { _asilPphNames       :: !(Maybe [Text])
     , _asilXgafv          :: !(Maybe Xgafv)
     , _asilStudioNames    :: !(Maybe [Text])
@@ -111,7 +112,8 @@ data AccountsStoreInfosList = AccountsStoreInfosList'
     , _asilPageToken      :: !(Maybe Text)
     , _asilPageSize       :: !(Maybe (Textual Int32))
     , _asilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsStoreInfosList' with the minimum fields required to make a request.
 --
@@ -156,7 +158,7 @@ accountsStoreInfosList
     :: Text -- ^ 'asilAccountId'
     -> AccountsStoreInfosList
 accountsStoreInfosList pAsilAccountId_ =
-    AccountsStoreInfosList'
+  AccountsStoreInfosList'
     { _asilPphNames = Nothing
     , _asilXgafv = Nothing
     , _asilStudioNames = Nothing

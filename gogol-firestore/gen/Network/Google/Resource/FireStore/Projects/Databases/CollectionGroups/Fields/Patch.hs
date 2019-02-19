@@ -83,7 +83,8 @@ type ProjectsDatabasesCollectionGroupsFieldsPatchResource
 -- \`projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/__default__\/fields\/*\`.
 --
 -- /See:/ 'projectsDatabasesCollectionGroupsFieldsPatch' smart constructor.
-data ProjectsDatabasesCollectionGroupsFieldsPatch = ProjectsDatabasesCollectionGroupsFieldsPatch'
+data ProjectsDatabasesCollectionGroupsFieldsPatch =
+  ProjectsDatabasesCollectionGroupsFieldsPatch'
     { _pdcgfpXgafv          :: !(Maybe Xgafv)
     , _pdcgfpUploadProtocol :: !(Maybe Text)
     , _pdcgfpUpdateMask     :: !(Maybe GFieldMask)
@@ -92,7 +93,8 @@ data ProjectsDatabasesCollectionGroupsFieldsPatch = ProjectsDatabasesCollectionG
     , _pdcgfpPayload        :: !GoogleFirestoreAdminV1Field
     , _pdcgfpName           :: !Text
     , _pdcgfpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsFieldsPatch' with the minimum fields required to make a request.
 --
@@ -118,7 +120,7 @@ projectsDatabasesCollectionGroupsFieldsPatch
     -> Text -- ^ 'pdcgfpName'
     -> ProjectsDatabasesCollectionGroupsFieldsPatch
 projectsDatabasesCollectionGroupsFieldsPatch pPdcgfpPayload_ pPdcgfpName_ =
-    ProjectsDatabasesCollectionGroupsFieldsPatch'
+  ProjectsDatabasesCollectionGroupsFieldsPatch'
     { _pdcgfpXgafv = Nothing
     , _pdcgfpUploadProtocol = Nothing
     , _pdcgfpUpdateMask = Nothing
@@ -195,7 +197,8 @@ pdcgfpCallback
       (\ s a -> s{_pdcgfpCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesCollectionGroupsFieldsPatch where
+           ProjectsDatabasesCollectionGroupsFieldsPatch
+         where
         type Rs ProjectsDatabasesCollectionGroupsFieldsPatch
              = GoogleLongrunningOperation
         type Scopes

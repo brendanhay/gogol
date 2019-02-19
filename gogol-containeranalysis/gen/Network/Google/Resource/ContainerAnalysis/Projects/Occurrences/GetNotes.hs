@@ -62,14 +62,16 @@ type ProjectsOccurrencesGetNotesResource =
 -- can use this method to get a note that belongs to a provider project.
 --
 -- /See:/ 'projectsOccurrencesGetNotes' smart constructor.
-data ProjectsOccurrencesGetNotes = ProjectsOccurrencesGetNotes'
+data ProjectsOccurrencesGetNotes =
+  ProjectsOccurrencesGetNotes'
     { _pognXgafv          :: !(Maybe Xgafv)
     , _pognUploadProtocol :: !(Maybe Text)
     , _pognAccessToken    :: !(Maybe Text)
     , _pognUploadType     :: !(Maybe Text)
     , _pognName           :: !Text
     , _pognCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsOccurrencesGetNotes' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ projectsOccurrencesGetNotes
     :: Text -- ^ 'pognName'
     -> ProjectsOccurrencesGetNotes
 projectsOccurrencesGetNotes pPognName_ =
-    ProjectsOccurrencesGetNotes'
+  ProjectsOccurrencesGetNotes'
     { _pognXgafv = Nothing
     , _pognUploadProtocol = Nothing
     , _pognAccessToken = Nothing

@@ -69,12 +69,14 @@ type DevicesSetStateResource =
 -- services. This is only supported for Google-managed users.
 --
 -- /See:/ 'devicesSetState' smart constructor.
-data DevicesSetState = DevicesSetState'
+data DevicesSetState =
+  DevicesSetState'
     { _dssEnterpriseId :: !Text
     , _dssPayload      :: !DeviceState
     , _dssUserId       :: !Text
     , _dssDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DevicesSetState' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ devicesSetState
     -> Text -- ^ 'dssDeviceId'
     -> DevicesSetState
 devicesSetState pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
-    DevicesSetState'
+  DevicesSetState'
     { _dssEnterpriseId = pDssEnterpriseId_
     , _dssPayload = pDssPayload_
     , _dssUserId = pDssUserId_

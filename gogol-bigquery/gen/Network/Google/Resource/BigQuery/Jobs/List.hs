@@ -74,7 +74,8 @@ type JobsListResource =
 -- set the allUsers property.
 --
 -- /See:/ 'jobsList' smart constructor.
-data JobsList = JobsList'
+data JobsList =
+  JobsList'
     { _jlMaxCreationTime :: !(Maybe (Textual Word64))
     , _jlMinCreationTime :: !(Maybe (Textual Word64))
     , _jlStateFilter     :: !(Maybe [JobsListStateFilter])
@@ -83,7 +84,8 @@ data JobsList = JobsList'
     , _jlProjectId       :: !Text
     , _jlAllUsers        :: !(Maybe Bool)
     , _jlMaxResults      :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JobsList' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ jobsList
     :: Text -- ^ 'jlProjectId'
     -> JobsList
 jobsList pJlProjectId_ =
-    JobsList'
+  JobsList'
     { _jlMaxCreationTime = Nothing
     , _jlMinCreationTime = Nothing
     , _jlStateFilter = Nothing

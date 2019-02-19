@@ -57,11 +57,13 @@ type OrgUnitsPatchResource =
 -- | Update organizational unit. This method supports patch semantics.
 --
 -- /See:/ 'orgUnitsPatch' smart constructor.
-data OrgUnitsPatch = OrgUnitsPatch'
+data OrgUnitsPatch =
+  OrgUnitsPatch'
     { _oupPayload     :: !OrgUnit
     , _oupOrgUnitPath :: ![Text]
     , _oupCustomerId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrgUnitsPatch' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ orgUnitsPatch
     -> Text -- ^ 'oupCustomerId'
     -> OrgUnitsPatch
 orgUnitsPatch pOupPayload_ pOupOrgUnitPath_ pOupCustomerId_ =
-    OrgUnitsPatch'
+  OrgUnitsPatch'
     { _oupPayload = pOupPayload_
     , _oupOrgUnitPath = _Coerce # pOupOrgUnitPath_
     , _oupCustomerId = pOupCustomerId_

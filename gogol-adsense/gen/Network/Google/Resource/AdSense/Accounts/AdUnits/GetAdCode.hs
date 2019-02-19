@@ -58,11 +58,13 @@ type AccountsAdUnitsGetAdCodeResource =
 -- | Get ad code for the specified ad unit.
 --
 -- /See:/ 'accountsAdUnitsGetAdCode' smart constructor.
-data AccountsAdUnitsGetAdCode = AccountsAdUnitsGetAdCode'
+data AccountsAdUnitsGetAdCode =
+  AccountsAdUnitsGetAdCode'
     { _aaugacAdUnitId   :: !Text
     , _aaugacAdClientId :: !Text
     , _aaugacAccountId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsAdUnitsGetAdCode' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ accountsAdUnitsGetAdCode
     -> Text -- ^ 'aaugacAccountId'
     -> AccountsAdUnitsGetAdCode
 accountsAdUnitsGetAdCode pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
-    AccountsAdUnitsGetAdCode'
+  AccountsAdUnitsGetAdCode'
     { _aaugacAdUnitId = pAaugacAdUnitId_
     , _aaugacAdClientId = pAaugacAdClientId_
     , _aaugacAccountId = pAaugacAccountId_

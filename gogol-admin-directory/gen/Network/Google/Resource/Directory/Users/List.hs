@@ -75,7 +75,8 @@ type UsersListResource =
 -- | Retrieve either deleted users or all users in a domain (paginated)
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList'
+data UsersList =
+  UsersList'
     { _ulEvent           :: !(Maybe UsersListEvent)
     , _ulOrderBy         :: !(Maybe UsersListOrderBy)
     , _ulViewType        :: !UsersListViewType
@@ -88,7 +89,8 @@ data UsersList = UsersList'
     , _ulProjection      :: !UsersListProjection
     , _ulPageToken       :: !(Maybe Text)
     , _ulMaxResults      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
@@ -120,7 +122,7 @@ data UsersList = UsersList'
 usersList
     :: UsersList
 usersList =
-    UsersList'
+  UsersList'
     { _ulEvent = Nothing
     , _ulOrderBy = Nothing
     , _ulViewType = AdminView

@@ -60,12 +60,14 @@ type SettingsWatchResource =
 -- | Watch for changes to Settings resources.
 --
 -- /See:/ 'settingsWatch' smart constructor.
-data SettingsWatch = SettingsWatch'
+data SettingsWatch =
+  SettingsWatch'
     { _swSyncToken  :: !(Maybe Text)
     , _swPayload    :: !Channel
     , _swPageToken  :: !(Maybe Text)
     , _swMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SettingsWatch' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ settingsWatch
     :: Channel -- ^ 'swPayload'
     -> SettingsWatch
 settingsWatch pSwPayload_ =
-    SettingsWatch'
+  SettingsWatch'
     { _swSyncToken = Nothing
     , _swPayload = pSwPayload_
     , _swPageToken = Nothing

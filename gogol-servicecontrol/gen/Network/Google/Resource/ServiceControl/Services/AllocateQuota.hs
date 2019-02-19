@@ -79,7 +79,8 @@ type ServicesAllocateQuotaResource =
 -- dependency on the quota functionality.
 --
 -- /See:/ 'servicesAllocateQuota' smart constructor.
-data ServicesAllocateQuota = ServicesAllocateQuota'
+data ServicesAllocateQuota =
+  ServicesAllocateQuota'
     { _saqXgafv          :: !(Maybe Xgafv)
     , _saqUploadProtocol :: !(Maybe Text)
     , _saqAccessToken    :: !(Maybe Text)
@@ -87,7 +88,8 @@ data ServicesAllocateQuota = ServicesAllocateQuota'
     , _saqPayload        :: !AllocateQuotaRequest
     , _saqServiceName    :: !Text
     , _saqCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesAllocateQuota' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ servicesAllocateQuota
     -> Text -- ^ 'saqServiceName'
     -> ServicesAllocateQuota
 servicesAllocateQuota pSaqPayload_ pSaqServiceName_ =
-    ServicesAllocateQuota'
+  ServicesAllocateQuota'
     { _saqXgafv = Nothing
     , _saqUploadProtocol = Nothing
     , _saqAccessToken = Nothing

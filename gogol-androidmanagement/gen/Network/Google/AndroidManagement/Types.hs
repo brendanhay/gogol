@@ -654,4 +654,4 @@ androidManagementService
 
 -- | Manage Android devices and apps for your customers
 androidManagementScope :: Proxy '["https://www.googleapis.com/auth/androidmanagement"]
-androidManagementScope = Proxy;
+androidManagementScope = Proxy

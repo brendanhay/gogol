@@ -523,8 +523,8 @@ sQLAdminService
 
 -- | Manage your Google SQL Service instances
 sqlServiceAdminScope :: Proxy '["https://www.googleapis.com/auth/sqlservice.admin"]
-sqlServiceAdminScope = Proxy;
+sqlServiceAdminScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

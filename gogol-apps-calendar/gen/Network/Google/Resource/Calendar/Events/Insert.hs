@@ -64,7 +64,8 @@ type EventsInsertResource =
 -- | Creates an event.
 --
 -- /See:/ 'eventsInsert' smart constructor.
-data EventsInsert = EventsInsert'
+data EventsInsert =
+  EventsInsert'
     { _eveConferenceDataVersion :: !(Maybe (Textual Int32))
     , _eveCalendarId            :: !Text
     , _evePayload               :: !Event
@@ -72,7 +73,8 @@ data EventsInsert = EventsInsert'
     , _eveSendNotifications     :: !(Maybe Bool)
     , _eveSupportsAttachments   :: !(Maybe Bool)
     , _eveSendUpdates           :: !(Maybe EventsInsertSendUpdates)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventsInsert' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ eventsInsert
     -> Event -- ^ 'evePayload'
     -> EventsInsert
 eventsInsert pEveCalendarId_ pEvePayload_ =
-    EventsInsert'
+  EventsInsert'
     { _eveConferenceDataVersion = Nothing
     , _eveCalendarId = pEveCalendarId_
     , _evePayload = pEvePayload_

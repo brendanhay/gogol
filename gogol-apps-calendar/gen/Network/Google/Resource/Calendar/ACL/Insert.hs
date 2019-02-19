@@ -56,11 +56,13 @@ type ACLInsertResource =
 -- | Creates an access control rule.
 --
 -- /See:/ 'aclInsert' smart constructor.
-data ACLInsert = ACLInsert'
+data ACLInsert =
+  ACLInsert'
     { _aiCalendarId        :: !Text
     , _aiPayload           :: !ACLRule
     , _aiSendNotifications :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ACLInsert' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ aclInsert
     -> ACLRule -- ^ 'aiPayload'
     -> ACLInsert
 aclInsert pAiCalendarId_ pAiPayload_ =
-    ACLInsert'
+  ACLInsert'
     { _aiCalendarId = pAiCalendarId_
     , _aiPayload = pAiPayload_
     , _aiSendNotifications = Nothing

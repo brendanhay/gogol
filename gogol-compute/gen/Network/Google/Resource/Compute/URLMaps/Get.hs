@@ -57,10 +57,12 @@ type URLMapsGetResource =
 -- by making a list() request.
 --
 -- /See:/ 'urlMapsGet' smart constructor.
-data URLMapsGet = URLMapsGet'
+data URLMapsGet =
+  URLMapsGet'
     { _umgURLMap  :: !Text
     , _umgProject :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapsGet' with the minimum fields required to make a request.
 --
@@ -74,10 +76,7 @@ urlMapsGet
     -> Text -- ^ 'umgProject'
     -> URLMapsGet
 urlMapsGet pUmgURLMap_ pUmgProject_ =
-    URLMapsGet'
-    { _umgURLMap = pUmgURLMap_
-    , _umgProject = pUmgProject_
-    }
+  URLMapsGet' {_umgURLMap = pUmgURLMap_, _umgProject = pUmgProject_}
 
 -- | Name of the UrlMap resource to return.
 umgURLMap :: Lens' URLMapsGet Text

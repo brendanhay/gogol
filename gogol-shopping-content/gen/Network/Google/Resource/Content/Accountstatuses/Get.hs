@@ -57,11 +57,13 @@ type AccountstatusesGetResource =
 -- can only call this method for sub-accounts.
 --
 -- /See:/ 'accountstatusesGet' smart constructor.
-data AccountstatusesGet = AccountstatusesGet'
+data AccountstatusesGet =
+  AccountstatusesGet'
     { _aaMerchantId   :: !(Textual Word64)
     , _aaAccountId    :: !(Textual Word64)
     , _aaDestinations :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountstatusesGet' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ accountstatusesGet
     -> Word64 -- ^ 'aaAccountId'
     -> AccountstatusesGet
 accountstatusesGet pAaMerchantId_ pAaAccountId_ =
-    AccountstatusesGet'
+  AccountstatusesGet'
     { _aaMerchantId = _Coerce # pAaMerchantId_
     , _aaAccountId = _Coerce # pAaAccountId_
     , _aaDestinations = Nothing

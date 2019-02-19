@@ -53,10 +53,12 @@ type DatafeedsDeleteResource =
 -- | Deletes a datafeed configuration from your Merchant Center account.
 --
 -- /See:/ 'datafeedsDelete' smart constructor.
-data DatafeedsDelete = DatafeedsDelete'
+data DatafeedsDelete =
+  DatafeedsDelete'
     { _ddMerchantId :: !(Textual Word64)
     , _ddDatafeedId :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DatafeedsDelete' with the minimum fields required to make a request.
 --
@@ -70,7 +72,7 @@ datafeedsDelete
     -> Word64 -- ^ 'ddDatafeedId'
     -> DatafeedsDelete
 datafeedsDelete pDdMerchantId_ pDdDatafeedId_ =
-    DatafeedsDelete'
+  DatafeedsDelete'
     { _ddMerchantId = _Coerce # pDdMerchantId_
     , _ddDatafeedId = _Coerce # pDdDatafeedId_
     }

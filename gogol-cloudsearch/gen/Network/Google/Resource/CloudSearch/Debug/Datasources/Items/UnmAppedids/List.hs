@@ -68,7 +68,8 @@ type DebugDatasourcesItemsUnmAppedidsListResource =
 -- | List all unmapped identities for a specific item.
 --
 -- /See:/ 'debugDatasourcesItemsUnmAppedidsList' smart constructor.
-data DebugDatasourcesItemsUnmAppedidsList = DebugDatasourcesItemsUnmAppedidsList'
+data DebugDatasourcesItemsUnmAppedidsList =
+  DebugDatasourcesItemsUnmAppedidsList'
     { _ddiualParent                      :: !Text
     , _ddiualXgafv                       :: !(Maybe Xgafv)
     , _ddiualUploadProtocol              :: !(Maybe Text)
@@ -78,7 +79,8 @@ data DebugDatasourcesItemsUnmAppedidsList = DebugDatasourcesItemsUnmAppedidsList
     , _ddiualPageToken                   :: !(Maybe Text)
     , _ddiualPageSize                    :: !(Maybe (Textual Int32))
     , _ddiualCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DebugDatasourcesItemsUnmAppedidsList' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ debugDatasourcesItemsUnmAppedidsList
     :: Text -- ^ 'ddiualParent'
     -> DebugDatasourcesItemsUnmAppedidsList
 debugDatasourcesItemsUnmAppedidsList pDdiualParent_ =
-    DebugDatasourcesItemsUnmAppedidsList'
+  DebugDatasourcesItemsUnmAppedidsList'
     { _ddiualParent = pDdiualParent_
     , _ddiualXgafv = Nothing
     , _ddiualUploadProtocol = Nothing
@@ -173,7 +175,8 @@ ddiualCallback
       (\ s a -> s{_ddiualCallback = a})
 
 instance GoogleRequest
-         DebugDatasourcesItemsUnmAppedidsList where
+           DebugDatasourcesItemsUnmAppedidsList
+         where
         type Rs DebugDatasourcesItemsUnmAppedidsList =
              ListUnmAppedIdentitiesResponse
         type Scopes DebugDatasourcesItemsUnmAppedidsList =

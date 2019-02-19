@@ -68,7 +68,8 @@ type ProjectsAgentIntentsPatchResource =
 -- | Updates the specified intent.
 --
 -- /See:/ 'projectsAgentIntentsPatch' smart constructor.
-data ProjectsAgentIntentsPatch = ProjectsAgentIntentsPatch'
+data ProjectsAgentIntentsPatch =
+  ProjectsAgentIntentsPatch'
     { _paipXgafv          :: !(Maybe Xgafv)
     , _paipLanguageCode   :: !(Maybe Text)
     , _paipUploadProtocol :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsAgentIntentsPatch = ProjectsAgentIntentsPatch'
     , _paipIntentView     :: !(Maybe Text)
     , _paipName           :: !Text
     , _paipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentIntentsPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsAgentIntentsPatch
     -> Text -- ^ 'paipName'
     -> ProjectsAgentIntentsPatch
 projectsAgentIntentsPatch pPaipPayload_ pPaipName_ =
-    ProjectsAgentIntentsPatch'
+  ProjectsAgentIntentsPatch'
     { _paipXgafv = Nothing
     , _paipLanguageCode = Nothing
     , _paipUploadProtocol = Nothing

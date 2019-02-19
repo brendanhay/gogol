@@ -62,12 +62,14 @@ type ManagedConfigurationsforDeviceDeleteResource =
 -- device.
 --
 -- /See:/ 'managedConfigurationsforDeviceDelete' smart constructor.
-data ManagedConfigurationsforDeviceDelete = ManagedConfigurationsforDeviceDelete'
+data ManagedConfigurationsforDeviceDelete =
+  ManagedConfigurationsforDeviceDelete'
     { _mcddEnterpriseId                    :: !Text
     , _mcddUserId                          :: !Text
     , _mcddDeviceId                        :: !Text
     , _mcddManagedConfigurationForDeviceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsforDeviceDelete' with the minimum fields required to make a request.
 --
@@ -87,11 +89,12 @@ managedConfigurationsforDeviceDelete
     -> Text -- ^ 'mcddManagedConfigurationForDeviceId'
     -> ManagedConfigurationsforDeviceDelete
 managedConfigurationsforDeviceDelete pMcddEnterpriseId_ pMcddUserId_ pMcddDeviceId_ pMcddManagedConfigurationForDeviceId_ =
-    ManagedConfigurationsforDeviceDelete'
+  ManagedConfigurationsforDeviceDelete'
     { _mcddEnterpriseId = pMcddEnterpriseId_
     , _mcddUserId = pMcddUserId_
     , _mcddDeviceId = pMcddDeviceId_
-    , _mcddManagedConfigurationForDeviceId = pMcddManagedConfigurationForDeviceId_
+    , _mcddManagedConfigurationForDeviceId =
+        pMcddManagedConfigurationForDeviceId_
     }
 
 -- | The ID of the enterprise.
@@ -119,7 +122,8 @@ mcddManagedConfigurationForDeviceId
          s{_mcddManagedConfigurationForDeviceId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforDeviceDelete where
+           ManagedConfigurationsforDeviceDelete
+         where
         type Rs ManagedConfigurationsforDeviceDelete = ()
         type Scopes ManagedConfigurationsforDeviceDelete =
              '["https://www.googleapis.com/auth/androidenterprise"]

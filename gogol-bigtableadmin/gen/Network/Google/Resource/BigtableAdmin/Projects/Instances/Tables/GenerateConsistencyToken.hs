@@ -69,7 +69,8 @@ type ProjectsInstancesTablesGenerateConsistencyTokenResource
 -- available for 90 days.
 --
 -- /See:/ 'projectsInstancesTablesGenerateConsistencyToken' smart constructor.
-data ProjectsInstancesTablesGenerateConsistencyToken = ProjectsInstancesTablesGenerateConsistencyToken'
+data ProjectsInstancesTablesGenerateConsistencyToken =
+  ProjectsInstancesTablesGenerateConsistencyToken'
     { _pitgctXgafv          :: !(Maybe Xgafv)
     , _pitgctUploadProtocol :: !(Maybe Text)
     , _pitgctAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsInstancesTablesGenerateConsistencyToken = ProjectsInstancesTablesGe
     , _pitgctPayload        :: !GenerateConsistencyTokenRequest
     , _pitgctName           :: !Text
     , _pitgctCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesTablesGenerateConsistencyToken' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsInstancesTablesGenerateConsistencyToken
     -> Text -- ^ 'pitgctName'
     -> ProjectsInstancesTablesGenerateConsistencyToken
 projectsInstancesTablesGenerateConsistencyToken pPitgctPayload_ pPitgctName_ =
-    ProjectsInstancesTablesGenerateConsistencyToken'
+  ProjectsInstancesTablesGenerateConsistencyToken'
     { _pitgctXgafv = Nothing
     , _pitgctUploadProtocol = Nothing
     , _pitgctAccessToken = Nothing
@@ -154,7 +156,8 @@ pitgctCallback
       (\ s a -> s{_pitgctCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesTablesGenerateConsistencyToken where
+           ProjectsInstancesTablesGenerateConsistencyToken
+         where
         type Rs
                ProjectsInstancesTablesGenerateConsistencyToken
              = GenerateConsistencyTokenResponse

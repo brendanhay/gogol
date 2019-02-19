@@ -77,14 +77,16 @@ type BillingAccountsCreateResource =
 -- provisioned as a reseller account.
 --
 -- /See:/ 'billingAccountsCreate' smart constructor.
-data BillingAccountsCreate = BillingAccountsCreate'
+data BillingAccountsCreate =
+  BillingAccountsCreate'
     { _bacXgafv          :: !(Maybe Xgafv)
     , _bacUploadProtocol :: !(Maybe Text)
     , _bacAccessToken    :: !(Maybe Text)
     , _bacUploadType     :: !(Maybe Text)
     , _bacPayload        :: !BillingAccount
     , _bacCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ billingAccountsCreate
     :: BillingAccount -- ^ 'bacPayload'
     -> BillingAccountsCreate
 billingAccountsCreate pBacPayload_ =
-    BillingAccountsCreate'
+  BillingAccountsCreate'
     { _bacXgafv = Nothing
     , _bacUploadProtocol = Nothing
     , _bacAccessToken = Nothing

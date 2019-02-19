@@ -65,7 +65,8 @@ type ProjectsVersionsCreateResource =
 -- version number.
 --
 -- /See:/ 'projectsVersionsCreate' smart constructor.
-data ProjectsVersionsCreate = ProjectsVersionsCreate'
+data ProjectsVersionsCreate =
+  ProjectsVersionsCreate'
     { _pvcXgafv          :: !(Maybe Xgafv)
     , _pvcUploadProtocol :: !(Maybe Text)
     , _pvcAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsVersionsCreate = ProjectsVersionsCreate'
     , _pvcPayload        :: !Version
     , _pvcScriptId       :: !Text
     , _pvcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsVersionsCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsVersionsCreate
     -> Text -- ^ 'pvcScriptId'
     -> ProjectsVersionsCreate
 projectsVersionsCreate pPvcPayload_ pPvcScriptId_ =
-    ProjectsVersionsCreate'
+  ProjectsVersionsCreate'
     { _pvcXgafv = Nothing
     , _pvcUploadProtocol = Nothing
     , _pvcAccessToken = Nothing

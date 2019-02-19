@@ -65,7 +65,8 @@ type ProjectsAgentEntityTypesCreateResource =
 -- | Creates an entity type in the specified agent.
 --
 -- /See:/ 'projectsAgentEntityTypesCreate' smart constructor.
-data ProjectsAgentEntityTypesCreate = ProjectsAgentEntityTypesCreate'
+data ProjectsAgentEntityTypesCreate =
+  ProjectsAgentEntityTypesCreate'
     { _paetcParent         :: !Text
     , _paetcXgafv          :: !(Maybe Xgafv)
     , _paetcLanguageCode   :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsAgentEntityTypesCreate = ProjectsAgentEntityTypesCreate'
     , _paetcUploadType     :: !(Maybe Text)
     , _paetcPayload        :: !GoogleCloudDialogflowV2EntityType
     , _paetcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentEntityTypesCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsAgentEntityTypesCreate
     -> GoogleCloudDialogflowV2EntityType -- ^ 'paetcPayload'
     -> ProjectsAgentEntityTypesCreate
 projectsAgentEntityTypesCreate pPaetcParent_ pPaetcPayload_ =
-    ProjectsAgentEntityTypesCreate'
+  ProjectsAgentEntityTypesCreate'
     { _paetcParent = pPaetcParent_
     , _paetcXgafv = Nothing
     , _paetcLanguageCode = Nothing

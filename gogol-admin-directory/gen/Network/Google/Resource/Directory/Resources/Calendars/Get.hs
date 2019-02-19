@@ -57,10 +57,12 @@ type ResourcesCalendarsGetResource =
 -- | Retrieves a calendar resource.
 --
 -- /See:/ 'resourcesCalendarsGet' smart constructor.
-data ResourcesCalendarsGet = ResourcesCalendarsGet'
+data ResourcesCalendarsGet =
+  ResourcesCalendarsGet'
     { _rcgCustomer           :: !Text
     , _rcgCalendarResourceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesCalendarsGet' with the minimum fields required to make a request.
 --
@@ -74,7 +76,7 @@ resourcesCalendarsGet
     -> Text -- ^ 'rcgCalendarResourceId'
     -> ResourcesCalendarsGet
 resourcesCalendarsGet pRcgCustomer_ pRcgCalendarResourceId_ =
-    ResourcesCalendarsGet'
+  ResourcesCalendarsGet'
     { _rcgCustomer = pRcgCustomer_
     , _rcgCalendarResourceId = pRcgCalendarResourceId_
     }

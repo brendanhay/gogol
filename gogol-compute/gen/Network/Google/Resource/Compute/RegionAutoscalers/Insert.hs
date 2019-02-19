@@ -61,12 +61,14 @@ type RegionAutoscalersInsertResource =
 -- in the request.
 --
 -- /See:/ 'regionAutoscalersInsert' smart constructor.
-data RegionAutoscalersInsert = RegionAutoscalersInsert'
+data RegionAutoscalersInsert =
+  RegionAutoscalersInsert'
     { _raiRequestId :: !(Maybe Text)
     , _raiProject   :: !Text
     , _raiPayload   :: !Autoscaler
     , _raiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionAutoscalersInsert' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ regionAutoscalersInsert
     -> Text -- ^ 'raiRegion'
     -> RegionAutoscalersInsert
 regionAutoscalersInsert pRaiProject_ pRaiPayload_ pRaiRegion_ =
-    RegionAutoscalersInsert'
+  RegionAutoscalersInsert'
     { _raiRequestId = Nothing
     , _raiProject = pRaiProject_
     , _raiPayload = pRaiPayload_

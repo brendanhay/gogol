@@ -63,14 +63,16 @@ type FoldersLogsDeleteResource =
 -- might not be deleted.
 --
 -- /See:/ 'foldersLogsDelete' smart constructor.
-data FoldersLogsDelete = FoldersLogsDelete'
+data FoldersLogsDelete =
+  FoldersLogsDelete'
     { _fldXgafv          :: !(Maybe Xgafv)
     , _fldUploadProtocol :: !(Maybe Text)
     , _fldAccessToken    :: !(Maybe Text)
     , _fldUploadType     :: !(Maybe Text)
     , _fldLogName        :: !Text
     , _fldCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersLogsDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ foldersLogsDelete
     :: Text -- ^ 'fldLogName'
     -> FoldersLogsDelete
 foldersLogsDelete pFldLogName_ =
-    FoldersLogsDelete'
+  FoldersLogsDelete'
     { _fldXgafv = Nothing
     , _fldUploadProtocol = Nothing
     , _fldAccessToken = Nothing

@@ -61,11 +61,13 @@ type RoomsReportStatusResource =
 -- unsupported.
 --
 -- /See:/ 'roomsReportStatus' smart constructor.
-data RoomsReportStatus = RoomsReportStatus'
+data RoomsReportStatus =
+  RoomsReportStatus'
     { _rrsPayload  :: !RoomP2PStatuses
     , _rrsRoomId   :: !Text
     , _rrsLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoomsReportStatus' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ roomsReportStatus
     -> Text -- ^ 'rrsRoomId'
     -> RoomsReportStatus
 roomsReportStatus pRrsPayload_ pRrsRoomId_ =
-    RoomsReportStatus'
+  RoomsReportStatus'
     { _rrsPayload = pRrsPayload_
     , _rrsRoomId = pRrsRoomId_
     , _rrsLanguage = Nothing

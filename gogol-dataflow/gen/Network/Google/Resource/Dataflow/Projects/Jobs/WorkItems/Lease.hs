@@ -67,7 +67,8 @@ type ProjectsJobsWorkItemsLeaseResource =
 -- | Leases a dataflow WorkItem to run.
 --
 -- /See:/ 'projectsJobsWorkItemsLease' smart constructor.
-data ProjectsJobsWorkItemsLease = ProjectsJobsWorkItemsLease'
+data ProjectsJobsWorkItemsLease =
+  ProjectsJobsWorkItemsLease'
     { _pjwilXgafv          :: !(Maybe Xgafv)
     , _pjwilJobId          :: !Text
     , _pjwilUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsJobsWorkItemsLease = ProjectsJobsWorkItemsLease'
     , _pjwilPayload        :: !LeaseWorkItemRequest
     , _pjwilProjectId      :: !Text
     , _pjwilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsWorkItemsLease' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsJobsWorkItemsLease
     -> Text -- ^ 'pjwilProjectId'
     -> ProjectsJobsWorkItemsLease
 projectsJobsWorkItemsLease pPjwilJobId_ pPjwilPayload_ pPjwilProjectId_ =
-    ProjectsJobsWorkItemsLease'
+  ProjectsJobsWorkItemsLease'
     { _pjwilXgafv = Nothing
     , _pjwilJobId = pPjwilJobId_
     , _pjwilUploadProtocol = Nothing

@@ -96,7 +96,8 @@ type ReportsGenerateResource =
 -- specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ 'reportsGenerate' smart constructor.
-data ReportsGenerate = ReportsGenerate'
+data ReportsGenerate =
+  ReportsGenerate'
     { _rgDimension            :: !(Maybe [Text])
     , _rgLocale               :: !(Maybe Text)
     , _rgEndDate              :: !Text
@@ -109,7 +110,8 @@ data ReportsGenerate = ReportsGenerate'
     , _rgStartIndex           :: !(Maybe (Textual Int32))
     , _rgUseTimezoneReporting :: !(Maybe Bool)
     , _rgMaxResults           :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.
 --
@@ -143,7 +145,7 @@ reportsGenerate
     -> Text -- ^ 'rgStartDate'
     -> ReportsGenerate
 reportsGenerate pRgEndDate_ pRgStartDate_ =
-    ReportsGenerate'
+  ReportsGenerate'
     { _rgDimension = Nothing
     , _rgLocale = Nothing
     , _rgEndDate = pRgEndDate_
@@ -261,7 +263,8 @@ instance GoogleRequest ReportsGenerate where
                       mempty
 
 instance GoogleRequest
-         (MediaDownload ReportsGenerate) where
+           (MediaDownload ReportsGenerate)
+         where
         type Rs (MediaDownload ReportsGenerate) = Stream
         type Scopes (MediaDownload ReportsGenerate) =
              Scopes ReportsGenerate

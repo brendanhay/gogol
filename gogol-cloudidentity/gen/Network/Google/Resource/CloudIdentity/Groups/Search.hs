@@ -67,7 +67,8 @@ type GroupsSearchResource =
 -- | Searches for Groups.
 --
 -- /See:/ 'groupsSearch' smart constructor.
-data GroupsSearch = GroupsSearch'
+data GroupsSearch =
+  GroupsSearch'
     { _gsXgafv          :: !(Maybe Xgafv)
     , _gsUploadProtocol :: !(Maybe Text)
     , _gsAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data GroupsSearch = GroupsSearch'
     , _gsPageToken      :: !(Maybe Text)
     , _gsPageSize       :: !(Maybe (Textual Int32))
     , _gsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsSearch' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ data GroupsSearch = GroupsSearch'
 groupsSearch
     :: GroupsSearch
 groupsSearch =
-    GroupsSearch'
+  GroupsSearch'
     { _gsXgafv = Nothing
     , _gsUploadProtocol = Nothing
     , _gsAccessToken = Nothing

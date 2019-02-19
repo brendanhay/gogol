@@ -66,14 +66,16 @@ type ProjectsInstancesDatabasesOperationsDeleteResource
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
 -- /See:/ 'projectsInstancesDatabasesOperationsDelete' smart constructor.
-data ProjectsInstancesDatabasesOperationsDelete = ProjectsInstancesDatabasesOperationsDelete'
+data ProjectsInstancesDatabasesOperationsDelete =
+  ProjectsInstancesDatabasesOperationsDelete'
     { _pidodXgafv          :: !(Maybe Xgafv)
     , _pidodUploadProtocol :: !(Maybe Text)
     , _pidodAccessToken    :: !(Maybe Text)
     , _pidodUploadType     :: !(Maybe Text)
     , _pidodName           :: !Text
     , _pidodCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesOperationsDelete' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsInstancesDatabasesOperationsDelete
     :: Text -- ^ 'pidodName'
     -> ProjectsInstancesDatabasesOperationsDelete
 projectsInstancesDatabasesOperationsDelete pPidodName_ =
-    ProjectsInstancesDatabasesOperationsDelete'
+  ProjectsInstancesDatabasesOperationsDelete'
     { _pidodXgafv = Nothing
     , _pidodUploadProtocol = Nothing
     , _pidodAccessToken = Nothing
@@ -138,7 +140,8 @@ pidodCallback
       (\ s a -> s{_pidodCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesOperationsDelete where
+           ProjectsInstancesDatabasesOperationsDelete
+         where
         type Rs ProjectsInstancesDatabasesOperationsDelete =
              Empty
         type Scopes

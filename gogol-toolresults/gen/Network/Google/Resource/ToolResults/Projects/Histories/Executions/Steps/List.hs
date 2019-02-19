@@ -79,13 +79,15 @@ type ProjectsHistoriesExecutionsStepsListResource =
 -- exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsList' smart constructor.
-data ProjectsHistoriesExecutionsStepsList = ProjectsHistoriesExecutionsStepsList'
+data ProjectsHistoriesExecutionsStepsList =
+  ProjectsHistoriesExecutionsStepsList'
     { _pheslExecutionId :: !Text
     , _pheslHistoryId   :: !Text
     , _pheslPageToken   :: !(Maybe Text)
     , _pheslProjectId   :: !Text
     , _pheslPageSize    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsList' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ projectsHistoriesExecutionsStepsList
     -> Text -- ^ 'pheslProjectId'
     -> ProjectsHistoriesExecutionsStepsList
 projectsHistoriesExecutionsStepsList pPheslExecutionId_ pPheslHistoryId_ pPheslProjectId_ =
-    ProjectsHistoriesExecutionsStepsList'
+  ProjectsHistoriesExecutionsStepsList'
     { _pheslExecutionId = pPheslExecutionId_
     , _pheslHistoryId = pPheslHistoryId_
     , _pheslPageToken = Nothing
@@ -147,7 +149,8 @@ pheslPageSize
       . mapping _Coerce
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsList where
+           ProjectsHistoriesExecutionsStepsList
+         where
         type Rs ProjectsHistoriesExecutionsStepsList =
              ListStepsResponse
         type Scopes ProjectsHistoriesExecutionsStepsList =

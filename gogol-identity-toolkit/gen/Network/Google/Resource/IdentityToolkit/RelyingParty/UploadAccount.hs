@@ -54,9 +54,11 @@ type RelyingPartyUploadAccountResource =
 -- | Batch upload existing user accounts.
 --
 -- /See:/ 'relyingPartyUploadAccount' smart constructor.
-newtype RelyingPartyUploadAccount = RelyingPartyUploadAccount'
+newtype RelyingPartyUploadAccount =
+  RelyingPartyUploadAccount'
     { _rpuaPayload :: IdentitytoolkitRelyingPartyUploadAccountRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyUploadAccount' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ relyingPartyUploadAccount
     :: IdentitytoolkitRelyingPartyUploadAccountRequest -- ^ 'rpuaPayload'
     -> RelyingPartyUploadAccount
 relyingPartyUploadAccount pRpuaPayload_ =
-    RelyingPartyUploadAccount'
-    { _rpuaPayload = pRpuaPayload_
-    }
+  RelyingPartyUploadAccount' {_rpuaPayload = pRpuaPayload_}
 
 -- | Multipart request metadata.
 rpuaPayload :: Lens' RelyingPartyUploadAccount IdentitytoolkitRelyingPartyUploadAccountRequest

@@ -56,11 +56,13 @@ type MyLibraryAnnotationsUpdateResource =
 -- | Updates an existing annotation.
 --
 -- /See:/ 'myLibraryAnnotationsUpdate' smart constructor.
-data MyLibraryAnnotationsUpdate = MyLibraryAnnotationsUpdate'
+data MyLibraryAnnotationsUpdate =
+  MyLibraryAnnotationsUpdate'
     { _mlauPayload      :: !Annotation
     , _mlauAnnotationId :: !Text
     , _mlauSource       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsUpdate' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ myLibraryAnnotationsUpdate
     -> Text -- ^ 'mlauAnnotationId'
     -> MyLibraryAnnotationsUpdate
 myLibraryAnnotationsUpdate pMlauPayload_ pMlauAnnotationId_ =
-    MyLibraryAnnotationsUpdate'
+  MyLibraryAnnotationsUpdate'
     { _mlauPayload = pMlauPayload_
     , _mlauAnnotationId = pMlauAnnotationId_
     , _mlauSource = Nothing

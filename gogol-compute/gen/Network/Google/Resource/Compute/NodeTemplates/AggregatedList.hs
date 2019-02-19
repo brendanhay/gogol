@@ -62,13 +62,15 @@ type NodeTemplatesAggregatedListResource =
 -- | Retrieves an aggregated list of node templates.
 --
 -- /See:/ 'nodeTemplatesAggregatedList' smart constructor.
-data NodeTemplatesAggregatedList = NodeTemplatesAggregatedList'
+data NodeTemplatesAggregatedList =
+  NodeTemplatesAggregatedList'
     { _nOrderBy    :: !(Maybe Text)
     , _nProject    :: !Text
     , _nFilter     :: !(Maybe Text)
     , _nPageToken  :: !(Maybe Text)
     , _nMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplatesAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ nodeTemplatesAggregatedList
     :: Text -- ^ 'nProject'
     -> NodeTemplatesAggregatedList
 nodeTemplatesAggregatedList pNProject_ =
-    NodeTemplatesAggregatedList'
+  NodeTemplatesAggregatedList'
     { _nOrderBy = Nothing
     , _nProject = pNProject_
     , _nFilter = Nothing

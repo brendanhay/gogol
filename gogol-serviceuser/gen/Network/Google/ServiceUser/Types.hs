@@ -563,12 +563,12 @@ serviceUserService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | Manage your Google API service configuration
 serviceManagementScope :: Proxy '["https://www.googleapis.com/auth/service.management"]
-serviceManagementScope = Proxy;
+serviceManagementScope = Proxy

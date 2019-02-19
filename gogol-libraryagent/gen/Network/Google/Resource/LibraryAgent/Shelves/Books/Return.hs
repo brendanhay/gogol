@@ -64,14 +64,16 @@ type ShelvesBooksReturnResource =
 -- library or the users didn\'t borrow before.
 --
 -- /See:/ 'shelvesBooksReturn' smart constructor.
-data ShelvesBooksReturn = ShelvesBooksReturn'
+data ShelvesBooksReturn =
+  ShelvesBooksReturn'
     { _sbrXgafv          :: !(Maybe Xgafv)
     , _sbrUploadProtocol :: !(Maybe Text)
     , _sbrAccessToken    :: !(Maybe Text)
     , _sbrUploadType     :: !(Maybe Text)
     , _sbrName           :: !Text
     , _sbrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShelvesBooksReturn' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ shelvesBooksReturn
     :: Text -- ^ 'sbrName'
     -> ShelvesBooksReturn
 shelvesBooksReturn pSbrName_ =
-    ShelvesBooksReturn'
+  ShelvesBooksReturn'
     { _sbrXgafv = Nothing
     , _sbrUploadProtocol = Nothing
     , _sbrAccessToken = Nothing

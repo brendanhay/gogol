@@ -70,7 +70,8 @@ type AccessPoliciesServicePerimetersPatchResource =
 -- errors will result in an error response for the first error encountered.
 --
 -- /See:/ 'accessPoliciesServicePerimetersPatch' smart constructor.
-data AccessPoliciesServicePerimetersPatch = AccessPoliciesServicePerimetersPatch'
+data AccessPoliciesServicePerimetersPatch =
+  AccessPoliciesServicePerimetersPatch'
     { _apsppXgafv          :: !(Maybe Xgafv)
     , _apsppUploadProtocol :: !(Maybe Text)
     , _apsppUpdateMask     :: !(Maybe GFieldMask)
@@ -79,7 +80,8 @@ data AccessPoliciesServicePerimetersPatch = AccessPoliciesServicePerimetersPatch
     , _apsppPayload        :: !ServicePerimeter
     , _apsppName           :: !Text
     , _apsppCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesServicePerimetersPatch' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ accessPoliciesServicePerimetersPatch
     -> Text -- ^ 'apsppName'
     -> AccessPoliciesServicePerimetersPatch
 accessPoliciesServicePerimetersPatch pApsppPayload_ pApsppName_ =
-    AccessPoliciesServicePerimetersPatch'
+  AccessPoliciesServicePerimetersPatch'
     { _apsppXgafv = Nothing
     , _apsppUploadProtocol = Nothing
     , _apsppUpdateMask = Nothing
@@ -165,7 +167,8 @@ apsppCallback
       (\ s a -> s{_apsppCallback = a})
 
 instance GoogleRequest
-         AccessPoliciesServicePerimetersPatch where
+           AccessPoliciesServicePerimetersPatch
+         where
         type Rs AccessPoliciesServicePerimetersPatch =
              Operation
         type Scopes AccessPoliciesServicePerimetersPatch =

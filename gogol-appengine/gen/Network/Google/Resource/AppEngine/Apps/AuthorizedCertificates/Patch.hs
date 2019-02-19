@@ -76,7 +76,8 @@ type AppsAuthorizedCertificatesPatchResource =
 -- also be updated.
 --
 -- /See:/ 'appsAuthorizedCertificatesPatch' smart constructor.
-data AppsAuthorizedCertificatesPatch = AppsAuthorizedCertificatesPatch'
+data AppsAuthorizedCertificatesPatch =
+  AppsAuthorizedCertificatesPatch'
     { _aacpAuthorizedCertificatesId :: !Text
     , _aacpXgafv                    :: !(Maybe Xgafv)
     , _aacpUploadProtocol           :: !(Maybe Text)
@@ -86,7 +87,8 @@ data AppsAuthorizedCertificatesPatch = AppsAuthorizedCertificatesPatch'
     , _aacpPayload                  :: !AuthorizedCertificate
     , _aacpAppsId                   :: !Text
     , _aacpCallback                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsAuthorizedCertificatesPatch' with the minimum fields required to make a request.
 --
@@ -115,7 +117,7 @@ appsAuthorizedCertificatesPatch
     -> Text -- ^ 'aacpAppsId'
     -> AppsAuthorizedCertificatesPatch
 appsAuthorizedCertificatesPatch pAacpAuthorizedCertificatesId_ pAacpPayload_ pAacpAppsId_ =
-    AppsAuthorizedCertificatesPatch'
+  AppsAuthorizedCertificatesPatch'
     { _aacpAuthorizedCertificatesId = pAacpAuthorizedCertificatesId_
     , _aacpXgafv = Nothing
     , _aacpUploadProtocol = Nothing
@@ -180,7 +182,8 @@ aacpCallback
   = lens _aacpCallback (\ s a -> s{_aacpCallback = a})
 
 instance GoogleRequest
-         AppsAuthorizedCertificatesPatch where
+           AppsAuthorizedCertificatesPatch
+         where
         type Rs AppsAuthorizedCertificatesPatch =
              AuthorizedCertificate
         type Scopes AppsAuthorizedCertificatesPatch =

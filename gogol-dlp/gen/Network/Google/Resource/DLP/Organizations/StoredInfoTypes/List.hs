@@ -72,7 +72,8 @@ type OrganizationsStoredInfoTypesListResource =
 -- learn more.
 --
 -- /See:/ 'organizationsStoredInfoTypesList' smart constructor.
-data OrganizationsStoredInfoTypesList = OrganizationsStoredInfoTypesList'
+data OrganizationsStoredInfoTypesList =
+  OrganizationsStoredInfoTypesList'
     { _ositlParent         :: !Text
     , _ositlXgafv          :: !(Maybe Xgafv)
     , _ositlUploadProtocol :: !(Maybe Text)
@@ -82,7 +83,8 @@ data OrganizationsStoredInfoTypesList = OrganizationsStoredInfoTypesList'
     , _ositlPageToken      :: !(Maybe Text)
     , _ositlPageSize       :: !(Maybe (Textual Int32))
     , _ositlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsStoredInfoTypesList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ organizationsStoredInfoTypesList
     :: Text -- ^ 'ositlParent'
     -> OrganizationsStoredInfoTypesList
 organizationsStoredInfoTypesList pOsitlParent_ =
-    OrganizationsStoredInfoTypesList'
+  OrganizationsStoredInfoTypesList'
     { _ositlParent = pOsitlParent_
     , _ositlXgafv = Nothing
     , _ositlUploadProtocol = Nothing
@@ -184,7 +186,8 @@ ositlCallback
       (\ s a -> s{_ositlCallback = a})
 
 instance GoogleRequest
-         OrganizationsStoredInfoTypesList where
+           OrganizationsStoredInfoTypesList
+         where
         type Rs OrganizationsStoredInfoTypesList =
              GooglePrivacyDlpV2ListStoredInfoTypesResponse
         type Scopes OrganizationsStoredInfoTypesList =

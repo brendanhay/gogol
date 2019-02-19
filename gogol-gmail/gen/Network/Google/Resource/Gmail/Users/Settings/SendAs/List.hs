@@ -58,9 +58,11 @@ type UsersSettingsSendAsListResource =
 -- custom \"from\" aliases.
 --
 -- /See:/ 'usersSettingsSendAsList' smart constructor.
-newtype UsersSettingsSendAsList = UsersSettingsSendAsList'
+newtype UsersSettingsSendAsList =
+  UsersSettingsSendAsList'
     { _ussalUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsSendAsList' with the minimum fields required to make a request.
 --
@@ -69,10 +71,7 @@ newtype UsersSettingsSendAsList = UsersSettingsSendAsList'
 -- * 'ussalUserId'
 usersSettingsSendAsList
     :: UsersSettingsSendAsList
-usersSettingsSendAsList =
-    UsersSettingsSendAsList'
-    { _ussalUserId = "me"
-    }
+usersSettingsSendAsList = UsersSettingsSendAsList' {_ussalUserId = "me"}
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

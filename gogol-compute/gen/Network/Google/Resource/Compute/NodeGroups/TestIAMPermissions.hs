@@ -61,12 +61,14 @@ type NodeGroupsTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'nodeGroupsTestIAMPermissions' smart constructor.
-data NodeGroupsTestIAMPermissions = NodeGroupsTestIAMPermissions'
+data NodeGroupsTestIAMPermissions =
+  NodeGroupsTestIAMPermissions'
     { _ngtipProject  :: !Text
     , _ngtipZone     :: !Text
     , _ngtipPayload  :: !TestPermissionsRequest
     , _ngtipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ nodeGroupsTestIAMPermissions
     -> Text -- ^ 'ngtipResource'
     -> NodeGroupsTestIAMPermissions
 nodeGroupsTestIAMPermissions pNgtipProject_ pNgtipZone_ pNgtipPayload_ pNgtipResource_ =
-    NodeGroupsTestIAMPermissions'
+  NodeGroupsTestIAMPermissions'
     { _ngtipProject = pNgtipProject_
     , _ngtipZone = pNgtipZone_
     , _ngtipPayload = pNgtipPayload_

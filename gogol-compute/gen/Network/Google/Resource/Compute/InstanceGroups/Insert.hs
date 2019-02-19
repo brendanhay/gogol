@@ -62,12 +62,14 @@ type InstanceGroupsInsertResource =
 -- that are included in the request.
 --
 -- /See:/ 'instanceGroupsInsert' smart constructor.
-data InstanceGroupsInsert = InstanceGroupsInsert'
+data InstanceGroupsInsert =
+  InstanceGroupsInsert'
     { _igiRequestId :: !(Maybe Text)
     , _igiProject   :: !Text
     , _igiZone      :: !Text
     , _igiPayload   :: !InstanceGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsInsert' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ instanceGroupsInsert
     -> InstanceGroup -- ^ 'igiPayload'
     -> InstanceGroupsInsert
 instanceGroupsInsert pIgiProject_ pIgiZone_ pIgiPayload_ =
-    InstanceGroupsInsert'
+  InstanceGroupsInsert'
     { _igiRequestId = Nothing
     , _igiProject = pIgiProject_
     , _igiZone = pIgiZone_

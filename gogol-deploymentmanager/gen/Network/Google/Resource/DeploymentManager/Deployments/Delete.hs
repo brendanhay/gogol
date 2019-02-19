@@ -59,11 +59,13 @@ type DeploymentsDeleteResource =
 -- | Deletes a deployment and all of the resources in the deployment.
 --
 -- /See:/ 'deploymentsDelete' smart constructor.
-data DeploymentsDelete = DeploymentsDelete'
+data DeploymentsDelete =
+  DeploymentsDelete'
     { _ddProject      :: !Text
     , _ddDeletePolicy :: !DeploymentsDeleteDeletePolicy
     , _ddDeployment   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeploymentsDelete' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ deploymentsDelete
     -> Text -- ^ 'ddDeployment'
     -> DeploymentsDelete
 deploymentsDelete pDdProject_ pDdDeployment_ =
-    DeploymentsDelete'
+  DeploymentsDelete'
     { _ddProject = pDdProject_
     , _ddDeletePolicy = Delete'
     , _ddDeployment = pDdDeployment_

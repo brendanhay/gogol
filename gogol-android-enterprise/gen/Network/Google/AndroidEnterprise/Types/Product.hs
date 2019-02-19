@@ -36,7 +36,8 @@ import           Network.Google.Prelude
 -- entitlements for the product.
 --
 -- /See:/ 'groupLicense' smart constructor.
-data GroupLicense = GroupLicense'
+data GroupLicense =
+  GroupLicense'
     { _glKind            :: !Text
     , _glNumProvisioned  :: !(Maybe (Textual Int32))
     , _glNumPurchased    :: !(Maybe (Textual Int32))
@@ -44,7 +45,8 @@ data GroupLicense = GroupLicense'
     , _glPermissions     :: !(Maybe Text)
     , _glProductId       :: !(Maybe Text)
     , _glAcquisitionKind :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupLicense' with the minimum fields required to make a request.
 --
@@ -66,7 +68,7 @@ data GroupLicense = GroupLicense'
 groupLicense
     :: GroupLicense
 groupLicense =
-    GroupLicense'
+  GroupLicense'
     { _glKind = "androidenterprise#groupLicense"
     , _glNumProvisioned = Nothing
     , _glNumPurchased = Nothing
@@ -167,10 +169,12 @@ instance ToJSON GroupLicense where
 -- | The store page resources for the enterprise.
 --
 -- /See:/ 'storeLayoutPagesListResponse' smart constructor.
-data StoreLayoutPagesListResponse = StoreLayoutPagesListResponse'
+data StoreLayoutPagesListResponse =
+  StoreLayoutPagesListResponse'
     { _slplrKind :: !Text
     , _slplrPage :: !(Maybe [StorePage])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StoreLayoutPagesListResponse' with the minimum fields required to make a request.
 --
@@ -182,7 +186,7 @@ data StoreLayoutPagesListResponse = StoreLayoutPagesListResponse'
 storeLayoutPagesListResponse
     :: StoreLayoutPagesListResponse
 storeLayoutPagesListResponse =
-    StoreLayoutPagesListResponse'
+  StoreLayoutPagesListResponse'
     { _slplrKind = "androidenterprise#storeLayoutPagesListResponse"
     , _slplrPage = Nothing
     }
@@ -220,10 +224,12 @@ instance ToJSON StoreLayoutPagesListResponse where
 -- API calls that require such authentication.
 --
 -- /See:/ 'enterpriseAccount' smart constructor.
-data EnterpriseAccount = EnterpriseAccount'
+data EnterpriseAccount =
+  EnterpriseAccount'
     { _eaKind         :: !Text
     , _eaAccountEmail :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterpriseAccount' with the minimum fields required to make a request.
 --
@@ -235,10 +241,8 @@ data EnterpriseAccount = EnterpriseAccount'
 enterpriseAccount
     :: EnterpriseAccount
 enterpriseAccount =
-    EnterpriseAccount'
-    { _eaKind = "androidenterprise#enterpriseAccount"
-    , _eaAccountEmail = Nothing
-    }
+  EnterpriseAccount'
+    {_eaKind = "androidenterprise#enterpriseAccount", _eaAccountEmail = Nothing}
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#enterpriseAccount\".
@@ -270,13 +274,15 @@ instance ToJSON EnterpriseAccount where
 -- | A typed value for the restriction.
 --
 -- /See:/ 'appRestrictionsSchemaRestrictionRestrictionValue' smart constructor.
-data AppRestrictionsSchemaRestrictionRestrictionValue = AppRestrictionsSchemaRestrictionRestrictionValue'
+data AppRestrictionsSchemaRestrictionRestrictionValue =
+  AppRestrictionsSchemaRestrictionRestrictionValue'
     { _arsrrvValueMultiselect :: !(Maybe [Text])
     , _arsrrvValueBool        :: !(Maybe Bool)
     , _arsrrvValueInteger     :: !(Maybe (Textual Int32))
     , _arsrrvType             :: !(Maybe Text)
     , _arsrrvValueString      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppRestrictionsSchemaRestrictionRestrictionValue' with the minimum fields required to make a request.
 --
@@ -294,7 +300,7 @@ data AppRestrictionsSchemaRestrictionRestrictionValue = AppRestrictionsSchemaRes
 appRestrictionsSchemaRestrictionRestrictionValue
     :: AppRestrictionsSchemaRestrictionRestrictionValue
 appRestrictionsSchemaRestrictionRestrictionValue =
-    AppRestrictionsSchemaRestrictionRestrictionValue'
+  AppRestrictionsSchemaRestrictionRestrictionValue'
     { _arsrrvValueMultiselect = Nothing
     , _arsrrvValueBool = Nothing
     , _arsrrvValueInteger = Nothing
@@ -337,7 +343,7 @@ arsrrvValueString
       (\ s a -> s{_arsrrvValueString = a})
 
 instance FromJSON
-         AppRestrictionsSchemaRestrictionRestrictionValue
+           AppRestrictionsSchemaRestrictionRestrictionValue
          where
         parseJSON
           = withObject
@@ -351,7 +357,7 @@ instance FromJSON
                      <*> (o .:? "valueString"))
 
 instance ToJSON
-         AppRestrictionsSchemaRestrictionRestrictionValue
+           AppRestrictionsSchemaRestrictionRestrictionValue
          where
         toJSON
           AppRestrictionsSchemaRestrictionRestrictionValue'{..}
@@ -365,10 +371,12 @@ instance ToJSON
 
 --
 -- /See:/ 'administratorWebTokenSpecPlaySearch' smart constructor.
-data AdministratorWebTokenSpecPlaySearch = AdministratorWebTokenSpecPlaySearch'
+data AdministratorWebTokenSpecPlaySearch =
+  AdministratorWebTokenSpecPlaySearch'
     { _awtspsEnabled     :: !(Maybe Bool)
     , _awtspsApproveApps :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdministratorWebTokenSpecPlaySearch' with the minimum fields required to make a request.
 --
@@ -380,10 +388,8 @@ data AdministratorWebTokenSpecPlaySearch = AdministratorWebTokenSpecPlaySearch'
 administratorWebTokenSpecPlaySearch
     :: AdministratorWebTokenSpecPlaySearch
 administratorWebTokenSpecPlaySearch =
-    AdministratorWebTokenSpecPlaySearch'
-    { _awtspsEnabled = Nothing
-    , _awtspsApproveApps = Nothing
-    }
+  AdministratorWebTokenSpecPlaySearch'
+    {_awtspsEnabled = Nothing, _awtspsApproveApps = Nothing}
 
 -- | Whether the managed Play Search apps page is displayed. Default is true.
 awtspsEnabled :: Lens' AdministratorWebTokenSpecPlaySearch (Maybe Bool)
@@ -417,10 +423,12 @@ instance ToJSON AdministratorWebTokenSpecPlaySearch
 -- methods on device resources.
 --
 -- /See:/ 'deviceState' smart constructor.
-data DeviceState = DeviceState'
+data DeviceState =
+  DeviceState'
     { _dsKind         :: !Text
     , _dsAccountState :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeviceState' with the minimum fields required to make a request.
 --
@@ -432,10 +440,8 @@ data DeviceState = DeviceState'
 deviceState
     :: DeviceState
 deviceState =
-    DeviceState'
-    { _dsKind = "androidenterprise#deviceState"
-    , _dsAccountState = Nothing
-    }
+  DeviceState'
+    {_dsKind = "androidenterprise#deviceState", _dsAccountState = Nothing}
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#deviceState\".
@@ -469,10 +475,12 @@ instance ToJSON DeviceState where
 -- | The user resources for the group license.
 --
 -- /See:/ 'groupLicenseUsersListResponse' smart constructor.
-data GroupLicenseUsersListResponse = GroupLicenseUsersListResponse'
+data GroupLicenseUsersListResponse =
+  GroupLicenseUsersListResponse'
     { _glulrKind :: !Text
     , _glulrUser :: !(Maybe [User])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupLicenseUsersListResponse' with the minimum fields required to make a request.
 --
@@ -484,7 +492,7 @@ data GroupLicenseUsersListResponse = GroupLicenseUsersListResponse'
 groupLicenseUsersListResponse
     :: GroupLicenseUsersListResponse
 groupLicenseUsersListResponse =
-    GroupLicenseUsersListResponse'
+  GroupLicenseUsersListResponse'
     { _glulrKind = "androidenterprise#groupLicenseUsersListResponse"
     , _glulrUser = Nothing
     }
@@ -520,10 +528,12 @@ instance ToJSON GroupLicenseUsersListResponse where
 
 --
 -- /See:/ 'tokenPagination' smart constructor.
-data TokenPagination = TokenPagination'
+data TokenPagination =
+  TokenPagination'
     { _tpNextPageToken     :: !(Maybe Text)
     , _tpPreviousPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
@@ -535,10 +545,7 @@ data TokenPagination = TokenPagination'
 tokenPagination
     :: TokenPagination
 tokenPagination =
-    TokenPagination'
-    { _tpNextPageToken = Nothing
-    , _tpPreviousPageToken = Nothing
-    }
+  TokenPagination' {_tpNextPageToken = Nothing, _tpPreviousPageToken = Nothing}
 
 tpNextPageToken :: Lens' TokenPagination (Maybe Text)
 tpNextPageToken
@@ -567,9 +574,11 @@ instance ToJSON TokenPagination where
 
 --
 -- /See:/ 'administratorWebTokenSpecWebApps' smart constructor.
-newtype AdministratorWebTokenSpecWebApps = AdministratorWebTokenSpecWebApps'
+newtype AdministratorWebTokenSpecWebApps =
+  AdministratorWebTokenSpecWebApps'
     { _awtswaEnabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdministratorWebTokenSpecWebApps' with the minimum fields required to make a request.
 --
@@ -579,9 +588,7 @@ newtype AdministratorWebTokenSpecWebApps = AdministratorWebTokenSpecWebApps'
 administratorWebTokenSpecWebApps
     :: AdministratorWebTokenSpecWebApps
 administratorWebTokenSpecWebApps =
-    AdministratorWebTokenSpecWebApps'
-    { _awtswaEnabled = Nothing
-    }
+  AdministratorWebTokenSpecWebApps' {_awtswaEnabled = Nothing}
 
 -- | Whether the Web Apps page is displayed. Default is true.
 awtswaEnabled :: Lens' AdministratorWebTokenSpecWebApps (Maybe Bool)
@@ -606,10 +613,12 @@ instance ToJSON AdministratorWebTokenSpecWebApps
 -- | Information on an approval URL.
 --
 -- /See:/ 'approvalURLInfo' smart constructor.
-data ApprovalURLInfo = ApprovalURLInfo'
+data ApprovalURLInfo =
+  ApprovalURLInfo'
     { _auiApprovalURL :: !(Maybe Text)
     , _auiKind        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ApprovalURLInfo' with the minimum fields required to make a request.
 --
@@ -621,10 +630,8 @@ data ApprovalURLInfo = ApprovalURLInfo'
 approvalURLInfo
     :: ApprovalURLInfo
 approvalURLInfo =
-    ApprovalURLInfo'
-    { _auiApprovalURL = Nothing
-    , _auiKind = "androidenterprise#approvalUrlInfo"
-    }
+  ApprovalURLInfo'
+    {_auiApprovalURL = Nothing, _auiKind = "androidenterprise#approvalUrlInfo"}
 
 -- | A URL that displays a product\'s permissions and that can also be used
 -- to approve the product with the Products.approve call.
@@ -657,10 +664,12 @@ instance ToJSON ApprovalURLInfo where
 -- | The managed configurations settings for a product.
 --
 -- /See:/ 'managedConfigurationsSettingsListResponse' smart constructor.
-data ManagedConfigurationsSettingsListResponse = ManagedConfigurationsSettingsListResponse'
+data ManagedConfigurationsSettingsListResponse =
+  ManagedConfigurationsSettingsListResponse'
     { _mcslrKind                          :: !Text
     , _mcslrManagedConfigurationsSettings :: !(Maybe [ManagedConfigurationsSettings])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsSettingsListResponse' with the minimum fields required to make a request.
 --
@@ -672,7 +681,7 @@ data ManagedConfigurationsSettingsListResponse = ManagedConfigurationsSettingsLi
 managedConfigurationsSettingsListResponse
     :: ManagedConfigurationsSettingsListResponse
 managedConfigurationsSettingsListResponse =
-    ManagedConfigurationsSettingsListResponse'
+  ManagedConfigurationsSettingsListResponse'
     { _mcslrKind = "androidenterprise#managedConfigurationsSettingsListResponse"
     , _mcslrManagedConfigurationsSettings = Nothing
     }
@@ -693,7 +702,8 @@ mcslrManagedConfigurationsSettings
       . _Coerce
 
 instance FromJSON
-         ManagedConfigurationsSettingsListResponse where
+           ManagedConfigurationsSettingsListResponse
+         where
         parseJSON
           = withObject
               "ManagedConfigurationsSettingsListResponse"
@@ -705,7 +715,8 @@ instance FromJSON
                      (o .:? "managedConfigurationsSettings" .!= mempty))
 
 instance ToJSON
-         ManagedConfigurationsSettingsListResponse where
+           ManagedConfigurationsSettingsListResponse
+         where
         toJSON ManagedConfigurationsSettingsListResponse'{..}
           = object
               (catMaybes
@@ -719,7 +730,8 @@ instance ToJSON
 -- property\'s type in the app restrictions schema.
 --
 -- /See:/ 'managedProperty' smart constructor.
-data ManagedProperty = ManagedProperty'
+data ManagedProperty =
+  ManagedProperty'
     { _mpValueStringArray :: !(Maybe [Text])
     , _mpValueBool        :: !(Maybe Bool)
     , _mpKey              :: !(Maybe Text)
@@ -727,7 +739,8 @@ data ManagedProperty = ManagedProperty'
     , _mpValueInteger     :: !(Maybe (Textual Int32))
     , _mpValueBundleArray :: !(Maybe [ManagedPropertyBundle])
     , _mpValueString      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedProperty' with the minimum fields required to make a request.
 --
@@ -749,7 +762,7 @@ data ManagedProperty = ManagedProperty'
 managedProperty
     :: ManagedProperty
 managedProperty =
-    ManagedProperty'
+  ManagedProperty'
     { _mpValueStringArray = Nothing
     , _mpValueBool = Nothing
     , _mpKey = Nothing
@@ -837,10 +850,12 @@ instance ToJSON ManagedProperty where
 -- | The store page resources for the enterprise.
 --
 -- /See:/ 'storeLayoutClustersListResponse' smart constructor.
-data StoreLayoutClustersListResponse = StoreLayoutClustersListResponse'
+data StoreLayoutClustersListResponse =
+  StoreLayoutClustersListResponse'
     { _slclrCluster :: !(Maybe [StoreCluster])
     , _slclrKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StoreLayoutClustersListResponse' with the minimum fields required to make a request.
 --
@@ -852,7 +867,7 @@ data StoreLayoutClustersListResponse = StoreLayoutClustersListResponse'
 storeLayoutClustersListResponse
     :: StoreLayoutClustersListResponse
 storeLayoutClustersListResponse =
-    StoreLayoutClustersListResponse'
+  StoreLayoutClustersListResponse'
     { _slclrCluster = Nothing
     , _slclrKind = "androidenterprise#storeLayoutClustersListResponse"
     }
@@ -892,12 +907,14 @@ instance ToJSON StoreLayoutClustersListResponse where
 -- schema, as well as any configuration variables defined for the user.
 --
 -- /See:/ 'managedConfiguration' smart constructor.
-data ManagedConfiguration = ManagedConfiguration'
+data ManagedConfiguration =
+  ManagedConfiguration'
     { _mcManagedProperty        :: !(Maybe [ManagedProperty])
     , _mcKind                   :: !Text
     , _mcConfigurationVariables :: !(Maybe ConfigurationVariables)
     , _mcProductId              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfiguration' with the minimum fields required to make a request.
 --
@@ -913,7 +930,7 @@ data ManagedConfiguration = ManagedConfiguration'
 managedConfiguration
     :: ManagedConfiguration
 managedConfiguration =
-    ManagedConfiguration'
+  ManagedConfiguration'
     { _mcManagedProperty = Nothing
     , _mcKind = "androidenterprise#managedConfiguration"
     , _mcConfigurationVariables = Nothing
@@ -971,13 +988,15 @@ instance ToJSON ManagedConfiguration where
 -- displayed as part of a store page.
 --
 -- /See:/ 'storeCluster' smart constructor.
-data StoreCluster = StoreCluster'
+data StoreCluster =
+  StoreCluster'
     { _scKind        :: !Text
     , _scName        :: !(Maybe [LocalizedText])
     , _scOrderInPage :: !(Maybe Text)
     , _scId          :: !(Maybe Text)
     , _scProductId   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StoreCluster' with the minimum fields required to make a request.
 --
@@ -995,7 +1014,7 @@ data StoreCluster = StoreCluster'
 storeCluster
     :: StoreCluster
 storeCluster =
-    StoreCluster'
+  StoreCluster'
     { _scKind = "androidenterprise#storeCluster"
     , _scName = Nothing
     , _scOrderInPage = Nothing
@@ -1065,7 +1084,8 @@ instance ToJSON StoreCluster where
 -- allowed to communiate with.
 --
 -- /See:/ 'administratorWebTokenSpec' smart constructor.
-data AdministratorWebTokenSpec = AdministratorWebTokenSpec'
+data AdministratorWebTokenSpec =
+  AdministratorWebTokenSpec'
     { _awtsParent       :: !(Maybe Text)
     , _awtsPrivateApps  :: !(Maybe AdministratorWebTokenSpecPrivateApps)
     , _awtsPlaySearch   :: !(Maybe AdministratorWebTokenSpecPlaySearch)
@@ -1073,7 +1093,8 @@ data AdministratorWebTokenSpec = AdministratorWebTokenSpec'
     , _awtsWebApps      :: !(Maybe AdministratorWebTokenSpecWebApps)
     , _awtsPermission   :: !(Maybe [Text])
     , _awtsStoreBuilder :: !(Maybe AdministratorWebTokenSpecStoreBuilder)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdministratorWebTokenSpec' with the minimum fields required to make a request.
 --
@@ -1095,7 +1116,7 @@ data AdministratorWebTokenSpec = AdministratorWebTokenSpec'
 administratorWebTokenSpec
     :: AdministratorWebTokenSpec
 administratorWebTokenSpec =
-    AdministratorWebTokenSpec'
+  AdministratorWebTokenSpec'
     { _awtsParent = Nothing
     , _awtsPrivateApps = Nothing
     , _awtsPlaySearch = Nothing
@@ -1176,11 +1197,13 @@ instance ToJSON AdministratorWebTokenSpec where
 -- | A product to be made visible to a user.
 --
 -- /See:/ 'productVisibility' smart constructor.
-data ProductVisibility = ProductVisibility'
+data ProductVisibility =
+  ProductVisibility'
     { _pvTracks    :: !(Maybe [Text])
     , _pvTrackIds  :: !(Maybe [Text])
     , _pvProductId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductVisibility' with the minimum fields required to make a request.
 --
@@ -1194,11 +1217,8 @@ data ProductVisibility = ProductVisibility'
 productVisibility
     :: ProductVisibility
 productVisibility =
-    ProductVisibility'
-    { _pvTracks = Nothing
-    , _pvTrackIds = Nothing
-    , _pvProductId = Nothing
-    }
+  ProductVisibility'
+    {_pvTracks = Nothing, _pvTrackIds = Nothing, _pvProductId = Nothing}
 
 -- | Deprecated. Use trackIds instead.
 pvTracks :: Lens' ProductVisibility [Text]
@@ -1241,7 +1261,8 @@ instance ToJSON ProductVisibility where
 -- | A notification of one event relating to an enterprise.
 --
 -- /See:/ 'notification' smart constructor.
-data Notification = Notification'
+data Notification =
+  Notification'
     { _nEnterpriseId                     :: !(Maybe Text)
     , _nNewPermissionsEvent              :: !(Maybe NewPermissionsEvent)
     , _nProductApprovalEvent             :: !(Maybe ProductApprovalEvent)
@@ -1252,7 +1273,8 @@ data Notification = Notification'
     , _nAppRestrictionsSchemaChangeEvent :: !(Maybe AppRestrictionsSchemaChangeEvent)
     , _nNewDeviceEvent                   :: !(Maybe NewDeviceEvent)
     , _nTimestampMillis                  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
@@ -1280,7 +1302,7 @@ data Notification = Notification'
 notification
     :: Notification
 notification =
-    Notification'
+  Notification'
     { _nEnterpriseId = Nothing
     , _nNewPermissionsEvent = Nothing
     , _nProductApprovalEvent = Nothing
@@ -1392,11 +1414,13 @@ instance ToJSON Notification where
 
 --
 -- /See:/ 'pageInfo' smart constructor.
-data PageInfo = PageInfo'
+data PageInfo =
+  PageInfo'
     { _piResultPerPage :: !(Maybe (Textual Int32))
     , _piTotalResults  :: !(Maybe (Textual Int32))
     , _piStartIndex    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
@@ -1410,7 +1434,7 @@ data PageInfo = PageInfo'
 pageInfo
     :: PageInfo
 pageInfo =
-    PageInfo'
+  PageInfo'
     { _piResultPerPage = Nothing
     , _piTotalResults = Nothing
     , _piStartIndex = Nothing
@@ -1456,10 +1480,12 @@ instance ToJSON PageInfo where
 -- accepted.
 --
 -- /See:/ 'productPermission' smart constructor.
-data ProductPermission = ProductPermission'
+data ProductPermission =
+  ProductPermission'
     { _ppState        :: !(Maybe Text)
     , _ppPermissionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductPermission' with the minimum fields required to make a request.
 --
@@ -1471,10 +1497,7 @@ data ProductPermission = ProductPermission'
 productPermission
     :: ProductPermission
 productPermission =
-    ProductPermission'
-    { _ppState = Nothing
-    , _ppPermissionId = Nothing
-    }
+  ProductPermission' {_ppState = Nothing, _ppPermissionId = Nothing}
 
 -- | Whether the permission has been accepted or not.
 ppState :: Lens' ProductPermission (Maybe Text)
@@ -1503,11 +1526,13 @@ instance ToJSON ProductPermission where
 -- | An event generated when new permissions are added to an app.
 --
 -- /See:/ 'newPermissionsEvent' smart constructor.
-data NewPermissionsEvent = NewPermissionsEvent'
+data NewPermissionsEvent =
+  NewPermissionsEvent'
     { _npeRequestedPermissions :: !(Maybe [Text])
     , _npeApprovedPermissions  :: !(Maybe [Text])
     , _npeProductId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NewPermissionsEvent' with the minimum fields required to make a request.
 --
@@ -1521,7 +1546,7 @@ data NewPermissionsEvent = NewPermissionsEvent'
 newPermissionsEvent
     :: NewPermissionsEvent
 newPermissionsEvent =
-    NewPermissionsEvent'
+  NewPermissionsEvent'
     { _npeRequestedPermissions = Nothing
     , _npeApprovedPermissions = Nothing
     , _npeProductId = Nothing
@@ -1575,10 +1600,12 @@ instance ToJSON NewPermissionsEvent where
 -- | An event generated whenever a product\'s availability changes.
 --
 -- /See:/ 'productAvailabilityChangeEvent' smart constructor.
-data ProductAvailabilityChangeEvent = ProductAvailabilityChangeEvent'
+data ProductAvailabilityChangeEvent =
+  ProductAvailabilityChangeEvent'
     { _paceAvailabilityStatus :: !(Maybe Text)
     , _paceProductId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductAvailabilityChangeEvent' with the minimum fields required to make a request.
 --
@@ -1590,10 +1617,8 @@ data ProductAvailabilityChangeEvent = ProductAvailabilityChangeEvent'
 productAvailabilityChangeEvent
     :: ProductAvailabilityChangeEvent
 productAvailabilityChangeEvent =
-    ProductAvailabilityChangeEvent'
-    { _paceAvailabilityStatus = Nothing
-    , _paceProductId = Nothing
-    }
+  ProductAvailabilityChangeEvent'
+    {_paceAvailabilityStatus = Nothing, _paceProductId = Nothing}
 
 -- | The new state of the product. This field will always be present.
 paceAvailabilityStatus :: Lens' ProductAvailabilityChangeEvent (Maybe Text)
@@ -1627,10 +1652,12 @@ instance ToJSON ProductAvailabilityChangeEvent where
 -- | An event generated when a product\'s approval status is changed.
 --
 -- /See:/ 'productApprovalEvent' smart constructor.
-data ProductApprovalEvent = ProductApprovalEvent'
+data ProductApprovalEvent =
+  ProductApprovalEvent'
     { _paeApproved  :: !(Maybe Text)
     , _paeProductId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductApprovalEvent' with the minimum fields required to make a request.
 --
@@ -1642,10 +1669,7 @@ data ProductApprovalEvent = ProductApprovalEvent'
 productApprovalEvent
     :: ProductApprovalEvent
 productApprovalEvent =
-    ProductApprovalEvent'
-    { _paeApproved = Nothing
-    , _paeProductId = Nothing
-    }
+  ProductApprovalEvent' {_paeApproved = Nothing, _paeProductId = Nothing}
 
 -- | Whether the product was approved or unapproved. This field will always
 -- be present.
@@ -1677,12 +1701,14 @@ instance ToJSON ProductApprovalEvent where
 -- belonging to a specific enterprise user.
 --
 -- /See:/ 'device' smart constructor.
-data Device = Device'
+data Device =
+  Device'
     { _dKind           :: !Text
     , _dPolicy         :: !(Maybe Policy)
     , _dManagementType :: !(Maybe Text)
     , _dAndroidId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
@@ -1698,7 +1724,7 @@ data Device = Device'
 device
     :: Device
 device =
-    Device'
+  Device'
     { _dKind = "androidenterprise#device"
     , _dPolicy = Nothing
     , _dManagementType = Nothing
@@ -1757,11 +1783,13 @@ instance ToJSON Device where
 -- installation. At least one of the fields must be set.
 --
 -- /See:/ 'autoInstallConstraint' smart constructor.
-data AutoInstallConstraint = AutoInstallConstraint'
+data AutoInstallConstraint =
+  AutoInstallConstraint'
     { _aicChargingStateConstraint   :: !(Maybe Text)
     , _aicDeviceIdleStateConstraint :: !(Maybe Text)
     , _aicNetworkTypeConstraint     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoInstallConstraint' with the minimum fields required to make a request.
 --
@@ -1775,7 +1803,7 @@ data AutoInstallConstraint = AutoInstallConstraint'
 autoInstallConstraint
     :: AutoInstallConstraint
 autoInstallConstraint =
-    AutoInstallConstraint'
+  AutoInstallConstraint'
     { _aicChargingStateConstraint = Nothing
     , _aicDeviceIdleStateConstraint = Nothing
     , _aicNetworkTypeConstraint = Nothing
@@ -1822,13 +1850,15 @@ instance ToJSON AutoInstallConstraint where
 -- | Credentials that can be used to authenticate as a service account.
 --
 -- /See:/ 'serviceAccountKey' smart constructor.
-data ServiceAccountKey = ServiceAccountKey'
+data ServiceAccountKey =
+  ServiceAccountKey'
     { _sakKind       :: !Text
     , _sakData       :: !(Maybe Text)
     , _sakId         :: !(Maybe Text)
     , _sakType       :: !(Maybe Text)
     , _sakPublicData :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServiceAccountKey' with the minimum fields required to make a request.
 --
@@ -1846,7 +1876,7 @@ data ServiceAccountKey = ServiceAccountKey'
 serviceAccountKey
     :: ServiceAccountKey
 serviceAccountKey =
-    ServiceAccountKey'
+  ServiceAccountKey'
     { _sakKind = "androidenterprise#serviceAccountKey"
     , _sakData = Nothing
     , _sakId = Nothing
@@ -1906,10 +1936,12 @@ instance ToJSON ServiceAccountKey where
 -- | The install resources for the device.
 --
 -- /See:/ 'installsListResponse' smart constructor.
-data InstallsListResponse = InstallsListResponse'
+data InstallsListResponse =
+  InstallsListResponse'
     { _ilrKind    :: !Text
     , _ilrInstall :: !(Maybe [Install])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstallsListResponse' with the minimum fields required to make a request.
 --
@@ -1921,10 +1953,8 @@ data InstallsListResponse = InstallsListResponse'
 installsListResponse
     :: InstallsListResponse
 installsListResponse =
-    InstallsListResponse'
-    { _ilrKind = "androidenterprise#installsListResponse"
-    , _ilrInstall = Nothing
-    }
+  InstallsListResponse'
+    {_ilrKind = "androidenterprise#installsListResponse", _ilrInstall = Nothing}
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#installsListResponse\".
@@ -1959,7 +1989,8 @@ instance ToJSON InstallsListResponse where
 -- configuration that may be pre-applied.
 --
 -- /See:/ 'appRestrictionsSchemaRestriction' smart constructor.
-data AppRestrictionsSchemaRestriction = AppRestrictionsSchemaRestriction'
+data AppRestrictionsSchemaRestriction =
+  AppRestrictionsSchemaRestriction'
     { _arsrRestrictionType   :: !(Maybe Text)
     , _arsrEntry             :: !(Maybe [Text])
     , _arsrKey               :: !(Maybe Text)
@@ -1968,7 +1999,8 @@ data AppRestrictionsSchemaRestriction = AppRestrictionsSchemaRestriction'
     , _arsrTitle             :: !(Maybe Text)
     , _arsrDescription       :: !(Maybe Text)
     , _arsrNestedRestriction :: !(Maybe [AppRestrictionsSchemaRestriction])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppRestrictionsSchemaRestriction' with the minimum fields required to make a request.
 --
@@ -1992,7 +2024,7 @@ data AppRestrictionsSchemaRestriction = AppRestrictionsSchemaRestriction'
 appRestrictionsSchemaRestriction
     :: AppRestrictionsSchemaRestriction
 appRestrictionsSchemaRestriction =
-    AppRestrictionsSchemaRestriction'
+  AppRestrictionsSchemaRestriction'
     { _arsrRestrictionType = Nothing
     , _arsrEntry = Nothing
     , _arsrKey = Nothing
@@ -2093,12 +2125,14 @@ instance ToJSON AppRestrictionsSchemaRestriction
 -- | The policy for a product.
 --
 -- /See:/ 'productPolicy' smart constructor.
-data ProductPolicy = ProductPolicy'
+data ProductPolicy =
+  ProductPolicy'
     { _ppTracks            :: !(Maybe [Text])
     , _ppTrackIds          :: !(Maybe [Text])
     , _ppAutoInstallPolicy :: !(Maybe AutoInstallPolicy)
     , _ppProductId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductPolicy' with the minimum fields required to make a request.
 --
@@ -2114,7 +2148,7 @@ data ProductPolicy = ProductPolicy'
 productPolicy
     :: ProductPolicy
 productPolicy =
-    ProductPolicy'
+  ProductPolicy'
     { _ppTracks = Nothing
     , _ppTrackIds = Nothing
     , _ppAutoInstallPolicy = Nothing
@@ -2171,9 +2205,11 @@ instance ToJSON ProductPolicy where
 -- managed Google Play store.
 --
 -- /See:/ 'administrator' smart constructor.
-newtype Administrator = Administrator'
+newtype Administrator =
+  Administrator'
     { _aEmail :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Administrator' with the minimum fields required to make a request.
 --
@@ -2182,10 +2218,7 @@ newtype Administrator = Administrator'
 -- * 'aEmail'
 administrator
     :: Administrator
-administrator =
-    Administrator'
-    { _aEmail = Nothing
-    }
+administrator = Administrator' {_aEmail = Nothing}
 
 -- | The admin\'s email address.
 aEmail :: Lens' Administrator (Maybe Text)
@@ -2203,10 +2236,12 @@ instance ToJSON Administrator where
 -- | The matching user resources.
 --
 -- /See:/ 'usersListResponse' smart constructor.
-data UsersListResponse = UsersListResponse'
+data UsersListResponse =
+  UsersListResponse'
     { _ulrKind :: !Text
     , _ulrUser :: !(Maybe [User])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersListResponse' with the minimum fields required to make a request.
 --
@@ -2218,10 +2253,8 @@ data UsersListResponse = UsersListResponse'
 usersListResponse
     :: UsersListResponse
 usersListResponse =
-    UsersListResponse'
-    { _ulrKind = "androidenterprise#usersListResponse"
-    , _ulrUser = Nothing
-    }
+  UsersListResponse'
+    {_ulrKind = "androidenterprise#usersListResponse", _ulrUser = Nothing}
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#usersListResponse\".
@@ -2252,9 +2285,11 @@ instance ToJSON UsersListResponse where
 
 --
 -- /See:/ 'administratorWebTokenSpecStoreBuilder' smart constructor.
-newtype AdministratorWebTokenSpecStoreBuilder = AdministratorWebTokenSpecStoreBuilder'
+newtype AdministratorWebTokenSpecStoreBuilder =
+  AdministratorWebTokenSpecStoreBuilder'
     { _awtssbEnabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdministratorWebTokenSpecStoreBuilder' with the minimum fields required to make a request.
 --
@@ -2264,9 +2299,7 @@ newtype AdministratorWebTokenSpecStoreBuilder = AdministratorWebTokenSpecStoreBu
 administratorWebTokenSpecStoreBuilder
     :: AdministratorWebTokenSpecStoreBuilder
 administratorWebTokenSpecStoreBuilder =
-    AdministratorWebTokenSpecStoreBuilder'
-    { _awtssbEnabled = Nothing
-    }
+  AdministratorWebTokenSpecStoreBuilder' {_awtssbEnabled = Nothing}
 
 -- | Whether the Organize apps page is displayed. Default is true.
 awtssbEnabled :: Lens' AdministratorWebTokenSpecStoreBuilder (Maybe Bool)
@@ -2275,7 +2308,8 @@ awtssbEnabled
       (\ s a -> s{_awtssbEnabled = a})
 
 instance FromJSON
-         AdministratorWebTokenSpecStoreBuilder where
+           AdministratorWebTokenSpecStoreBuilder
+         where
         parseJSON
           = withObject "AdministratorWebTokenSpecStoreBuilder"
               (\ o ->
@@ -2292,10 +2326,12 @@ instance ToJSON AdministratorWebTokenSpecStoreBuilder
 -- device to provision the given EMM-managed user on that device.
 --
 -- /See:/ 'authenticationToken' smart constructor.
-data AuthenticationToken = AuthenticationToken'
+data AuthenticationToken =
+  AuthenticationToken'
     { _atKind  :: !Text
     , _atToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuthenticationToken' with the minimum fields required to make a request.
 --
@@ -2307,10 +2343,8 @@ data AuthenticationToken = AuthenticationToken'
 authenticationToken
     :: AuthenticationToken
 authenticationToken =
-    AuthenticationToken'
-    { _atKind = "androidenterprise#authenticationToken"
-    , _atToken = Nothing
-    }
+  AuthenticationToken'
+    {_atKind = "androidenterprise#authenticationToken", _atToken = Nothing}
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#authenticationToken\".
@@ -2345,13 +2379,15 @@ instance ToJSON AuthenticationToken where
 -- properties in the managed configurations schema.
 --
 -- /See:/ 'managedConfigurationsSettings' smart constructor.
-data ManagedConfigurationsSettings = ManagedConfigurationsSettings'
+data ManagedConfigurationsSettings =
+  ManagedConfigurationsSettings'
     { _mcsLastUpdatedTimestampMillis :: !(Maybe (Textual Int64))
     , _mcsManagedProperty            :: !(Maybe [ManagedProperty])
     , _mcsKind                       :: !Text
     , _mcsMcmId                      :: !(Maybe Text)
     , _mcsName                       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsSettings' with the minimum fields required to make a request.
 --
@@ -2369,7 +2405,7 @@ data ManagedConfigurationsSettings = ManagedConfigurationsSettings'
 managedConfigurationsSettings
     :: ManagedConfigurationsSettings
 managedConfigurationsSettings =
-    ManagedConfigurationsSettings'
+  ManagedConfigurationsSettings'
     { _mcsLastUpdatedTimestampMillis = Nothing
     , _mcsManagedProperty = Nothing
     , _mcsKind = "androidenterprise#managedConfigurationsSettings"
@@ -2433,13 +2469,15 @@ instance ToJSON ManagedConfigurationsSettings where
 -- | This represents a single version of the app.
 --
 -- /See:/ 'appVersion' smart constructor.
-data AppVersion = AppVersion'
+data AppVersion =
+  AppVersion'
     { _avTrack         :: !(Maybe Text)
     , _avVersionCode   :: !(Maybe (Textual Int32))
     , _avVersionString :: !(Maybe Text)
     , _avTrackId       :: !(Maybe [Text])
     , _avIsProduction  :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppVersion' with the minimum fields required to make a request.
 --
@@ -2457,7 +2495,7 @@ data AppVersion = AppVersion'
 appVersion
     :: AppVersion
 appVersion =
-    AppVersion'
+  AppVersion'
     { _avTrack = Nothing
     , _avVersionCode = Nothing
     , _avVersionString = Nothing
@@ -2522,9 +2560,11 @@ instance ToJSON AppVersion where
 -- | A bundle of managed properties.
 --
 -- /See:/ 'managedPropertyBundle' smart constructor.
-newtype ManagedPropertyBundle = ManagedPropertyBundle'
+newtype ManagedPropertyBundle =
+  ManagedPropertyBundle'
     { _mpbManagedProperty :: Maybe [ManagedProperty]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedPropertyBundle' with the minimum fields required to make a request.
 --
@@ -2533,10 +2573,7 @@ newtype ManagedPropertyBundle = ManagedPropertyBundle'
 -- * 'mpbManagedProperty'
 managedPropertyBundle
     :: ManagedPropertyBundle
-managedPropertyBundle =
-    ManagedPropertyBundle'
-    { _mpbManagedProperty = Nothing
-    }
+managedPropertyBundle = ManagedPropertyBundle' {_mpbManagedProperty = Nothing}
 
 -- | The list of managed properties.
 mpbManagedProperty :: Lens' ManagedPropertyBundle [ManagedProperty]
@@ -2562,10 +2599,12 @@ instance ToJSON ManagedPropertyBundle where
 -- | The grouplicense resources for the enterprise.
 --
 -- /See:/ 'groupLicensesListResponse' smart constructor.
-data GroupLicensesListResponse = GroupLicensesListResponse'
+data GroupLicensesListResponse =
+  GroupLicensesListResponse'
     { _gllrGroupLicense :: !(Maybe [GroupLicense])
     , _gllrKind         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupLicensesListResponse' with the minimum fields required to make a request.
 --
@@ -2577,7 +2616,7 @@ data GroupLicensesListResponse = GroupLicensesListResponse'
 groupLicensesListResponse
     :: GroupLicensesListResponse
 groupLicensesListResponse =
-    GroupLicensesListResponse'
+  GroupLicensesListResponse'
     { _gllrGroupLicense = Nothing
     , _gllrKind = "androidenterprise#groupLicensesListResponse"
     }
@@ -2614,10 +2653,12 @@ instance ToJSON GroupLicensesListResponse where
 -- | Deprecated and unused.
 --
 -- /See:/ 'androidDevicePolicyConfig' smart constructor.
-data AndroidDevicePolicyConfig = AndroidDevicePolicyConfig'
+data AndroidDevicePolicyConfig =
+  AndroidDevicePolicyConfig'
     { _adpcState :: !(Maybe Text)
     , _adpcKind  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AndroidDevicePolicyConfig' with the minimum fields required to make a request.
 --
@@ -2629,7 +2670,7 @@ data AndroidDevicePolicyConfig = AndroidDevicePolicyConfig'
 androidDevicePolicyConfig
     :: AndroidDevicePolicyConfig
 androidDevicePolicyConfig =
-    AndroidDevicePolicyConfig'
+  AndroidDevicePolicyConfig'
     { _adpcState = Nothing
     , _adpcKind = "androidenterprise#androidDevicePolicyConfig"
     }
@@ -2663,12 +2704,14 @@ instance ToJSON AndroidDevicePolicyConfig where
 -- | A set of products.
 --
 -- /See:/ 'productSet' smart constructor.
-data ProductSet = ProductSet'
+data ProductSet =
+  ProductSet'
     { _psProductVisibility  :: !(Maybe [ProductVisibility])
     , _psKind               :: !Text
     , _psProductSetBehavior :: !(Maybe Text)
     , _psProductId          :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductSet' with the minimum fields required to make a request.
 --
@@ -2684,7 +2727,7 @@ data ProductSet = ProductSet'
 productSet
     :: ProductSet
 productSet =
-    ProductSet'
+  ProductSet'
     { _psProductVisibility = Nothing
     , _psKind = "androidenterprise#productSet"
     , _psProductSetBehavior = Nothing
@@ -2773,12 +2816,14 @@ instance ToJSON ProductSet where
 -- themselves.
 --
 -- /See:/ 'install' smart constructor.
-data Install = Install'
+data Install =
+  Install'
     { _iVersionCode  :: !(Maybe (Textual Int32))
     , _iKind         :: !Text
     , _iInstallState :: !(Maybe Text)
     , _iProductId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Install' with the minimum fields required to make a request.
 --
@@ -2794,7 +2839,7 @@ data Install = Install'
 install
     :: Install
 install =
-    Install'
+  Install'
     { _iVersionCode = Nothing
     , _iKind = "androidenterprise#install"
     , _iInstallState = Nothing
@@ -2851,10 +2896,12 @@ instance ToJSON Install where
 -- store to update the apps on the foreground in the designated window.
 --
 -- /See:/ 'maintenanceWindow' smart constructor.
-data MaintenanceWindow = MaintenanceWindow'
+data MaintenanceWindow =
+  MaintenanceWindow'
     { _mwDurationMs               :: !(Maybe (Textual Int64))
     , _mwStartTimeAfterMidnightMs :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MaintenanceWindow' with the minimum fields required to make a request.
 --
@@ -2866,10 +2913,8 @@ data MaintenanceWindow = MaintenanceWindow'
 maintenanceWindow
     :: MaintenanceWindow
 maintenanceWindow =
-    MaintenanceWindow'
-    { _mwDurationMs = Nothing
-    , _mwStartTimeAfterMidnightMs = Nothing
-    }
+  MaintenanceWindow'
+    {_mwDurationMs = Nothing, _mwStartTimeAfterMidnightMs = Nothing}
 
 -- | Duration of the maintenance window, in milliseconds. The duration must
 -- be between 30 minutes and 24 hours (inclusive).
@@ -2904,9 +2949,11 @@ instance ToJSON MaintenanceWindow where
 
 --
 -- /See:/ 'serviceAccountKeysListResponse' smart constructor.
-newtype ServiceAccountKeysListResponse = ServiceAccountKeysListResponse'
+newtype ServiceAccountKeysListResponse =
+  ServiceAccountKeysListResponse'
     { _saklrServiceAccountKey :: Maybe [ServiceAccountKey]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServiceAccountKeysListResponse' with the minimum fields required to make a request.
 --
@@ -2916,9 +2963,7 @@ newtype ServiceAccountKeysListResponse = ServiceAccountKeysListResponse'
 serviceAccountKeysListResponse
     :: ServiceAccountKeysListResponse
 serviceAccountKeysListResponse =
-    ServiceAccountKeysListResponse'
-    { _saklrServiceAccountKey = Nothing
-    }
+  ServiceAccountKeysListResponse' {_saklrServiceAccountKey = Nothing}
 
 -- | The service account credentials.
 saklrServiceAccountKey :: Lens' ServiceAccountKeysListResponse [ServiceAccountKey]
@@ -2946,10 +2991,12 @@ instance ToJSON ServiceAccountKeysListResponse where
 -- | Id to name association of a track.
 --
 -- /See:/ 'trackInfo' smart constructor.
-data TrackInfo = TrackInfo'
+data TrackInfo =
+  TrackInfo'
     { _tiTrackAlias :: !(Maybe Text)
     , _tiTrackId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrackInfo' with the minimum fields required to make a request.
 --
@@ -2960,11 +3007,7 @@ data TrackInfo = TrackInfo'
 -- * 'tiTrackId'
 trackInfo
     :: TrackInfo
-trackInfo =
-    TrackInfo'
-    { _tiTrackAlias = Nothing
-    , _tiTrackId = Nothing
-    }
+trackInfo = TrackInfo' {_tiTrackAlias = Nothing, _tiTrackId = Nothing}
 
 -- | A modifiable name for a track. This is the visible name in the play
 -- developer console.
@@ -3005,7 +3048,8 @@ instance ToJSON TrackInfo where
 -- Play.
 --
 -- /See:/ 'user' smart constructor.
-data User = User'
+data User =
+  User'
     { _uAccountIdentifier :: !(Maybe Text)
     , _uKind              :: !Text
     , _uDisplayName       :: !(Maybe Text)
@@ -3013,7 +3057,8 @@ data User = User'
     , _uPrimaryEmail      :: !(Maybe Text)
     , _uManagementType    :: !(Maybe Text)
     , _uAccountType       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -3035,7 +3080,7 @@ data User = User'
 user
     :: User
 user =
-    User'
+  User'
     { _uAccountIdentifier = Nothing
     , _uKind = "androidenterprise#user"
     , _uDisplayName = Nothing
@@ -3124,10 +3169,12 @@ instance ToJSON User where
 -- | The managed configuration resources for the device.
 --
 -- /See:/ 'managedConfigurationsForDeviceListResponse' smart constructor.
-data ManagedConfigurationsForDeviceListResponse = ManagedConfigurationsForDeviceListResponse'
+data ManagedConfigurationsForDeviceListResponse =
+  ManagedConfigurationsForDeviceListResponse'
     { _mcfdlrKind                          :: !Text
     , _mcfdlrManagedConfigurationForDevice :: !(Maybe [ManagedConfiguration])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsForDeviceListResponse' with the minimum fields required to make a request.
 --
@@ -3139,8 +3186,9 @@ data ManagedConfigurationsForDeviceListResponse = ManagedConfigurationsForDevice
 managedConfigurationsForDeviceListResponse
     :: ManagedConfigurationsForDeviceListResponse
 managedConfigurationsForDeviceListResponse =
-    ManagedConfigurationsForDeviceListResponse'
-    { _mcfdlrKind = "androidenterprise#managedConfigurationsForDeviceListResponse"
+  ManagedConfigurationsForDeviceListResponse'
+    { _mcfdlrKind =
+        "androidenterprise#managedConfigurationsForDeviceListResponse"
     , _mcfdlrManagedConfigurationForDevice = Nothing
     }
 
@@ -3160,7 +3208,8 @@ mcfdlrManagedConfigurationForDevice
       . _Coerce
 
 instance FromJSON
-         ManagedConfigurationsForDeviceListResponse where
+           ManagedConfigurationsForDeviceListResponse
+         where
         parseJSON
           = withObject
               "ManagedConfigurationsForDeviceListResponse"
@@ -3172,7 +3221,8 @@ instance FromJSON
                      (o .:? "managedConfigurationForDevice" .!= mempty))
 
 instance ToJSON
-         ManagedConfigurationsForDeviceListResponse where
+           ManagedConfigurationsForDeviceListResponse
+         where
         toJSON
           ManagedConfigurationsForDeviceListResponse'{..}
           = object
@@ -3183,9 +3233,11 @@ instance ToJSON
 
 --
 -- /See:/ 'productsGenerateApprovalURLResponse' smart constructor.
-newtype ProductsGenerateApprovalURLResponse = ProductsGenerateApprovalURLResponse'
+newtype ProductsGenerateApprovalURLResponse =
+  ProductsGenerateApprovalURLResponse'
     { _pgaurURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsGenerateApprovalURLResponse' with the minimum fields required to make a request.
 --
@@ -3195,9 +3247,7 @@ newtype ProductsGenerateApprovalURLResponse = ProductsGenerateApprovalURLRespons
 productsGenerateApprovalURLResponse
     :: ProductsGenerateApprovalURLResponse
 productsGenerateApprovalURLResponse =
-    ProductsGenerateApprovalURLResponse'
-    { _pgaurURL = Nothing
-    }
+  ProductsGenerateApprovalURLResponse' {_pgaurURL = Nothing}
 
 -- | A URL that can be rendered in an iframe to display the permissions (if
 -- any) of a product. This URL can be used to approve the product only once
@@ -3228,12 +3278,14 @@ instance ToJSON ProductsGenerateApprovalURLResponse
 -- subcollection.
 --
 -- /See:/ 'storePage' smart constructor.
-data StorePage = StorePage'
+data StorePage =
+  StorePage'
     { _spKind :: !Text
     , _spLink :: !(Maybe [Text])
     , _spName :: !(Maybe [LocalizedText])
     , _spId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StorePage' with the minimum fields required to make a request.
 --
@@ -3249,7 +3301,7 @@ data StorePage = StorePage'
 storePage
     :: StorePage
 storePage =
-    StorePage'
+  StorePage'
     { _spKind = "androidenterprise#storePage"
     , _spLink = Nothing
     , _spName = Nothing
@@ -3301,10 +3353,12 @@ instance ToJSON StorePage where
 
 --
 -- /See:/ 'enterprisesSendTestPushNotificationResponse' smart constructor.
-data EnterprisesSendTestPushNotificationResponse = EnterprisesSendTestPushNotificationResponse'
+data EnterprisesSendTestPushNotificationResponse =
+  EnterprisesSendTestPushNotificationResponse'
     { _estpnrTopicName :: !(Maybe Text)
     , _estpnrMessageId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesSendTestPushNotificationResponse' with the minimum fields required to make a request.
 --
@@ -3316,10 +3370,8 @@ data EnterprisesSendTestPushNotificationResponse = EnterprisesSendTestPushNotifi
 enterprisesSendTestPushNotificationResponse
     :: EnterprisesSendTestPushNotificationResponse
 enterprisesSendTestPushNotificationResponse =
-    EnterprisesSendTestPushNotificationResponse'
-    { _estpnrTopicName = Nothing
-    , _estpnrMessageId = Nothing
-    }
+  EnterprisesSendTestPushNotificationResponse'
+    {_estpnrTopicName = Nothing, _estpnrMessageId = Nothing}
 
 -- | The name of the Cloud Pub\/Sub topic to which notifications for this
 -- enterprise\'s enrolled account will be sent.
@@ -3335,7 +3387,8 @@ estpnrMessageId
       (\ s a -> s{_estpnrMessageId = a})
 
 instance FromJSON
-         EnterprisesSendTestPushNotificationResponse where
+           EnterprisesSendTestPushNotificationResponse
+         where
         parseJSON
           = withObject
               "EnterprisesSendTestPushNotificationResponse"
@@ -3344,7 +3397,8 @@ instance FromJSON
                    (o .:? "topicName") <*> (o .:? "messageId"))
 
 instance ToJSON
-         EnterprisesSendTestPushNotificationResponse where
+           EnterprisesSendTestPushNotificationResponse
+         where
         toJSON
           EnterprisesSendTestPushNotificationResponse'{..}
           = object
@@ -3356,11 +3410,13 @@ instance ToJSON
 -- be used to authenticate as the service account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount'
+data ServiceAccount =
+  ServiceAccount'
     { _saKind :: !Text
     , _saKey  :: !(Maybe ServiceAccountKey)
     , _saName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
@@ -3374,7 +3430,7 @@ data ServiceAccount = ServiceAccount'
 serviceAccount
     :: ServiceAccount
 serviceAccount =
-    ServiceAccount'
+  ServiceAccount'
     { _saKind = "androidenterprise#serviceAccount"
     , _saKey = Nothing
     , _saName = Nothing
@@ -3412,15 +3468,18 @@ instance ToJSON ServiceAccount where
 
 -- | A variable set is a key-value pair of EMM-provided placeholders and its
 -- corresponding value, which is attributed to a user. For example,
--- /F//I//R//S//T//N//A//M//E//c//o//u//l//d//b//e//a//p//l//a//c//e//h//o//l//d//e//r/, /a//n//d//i//t//s//v//a//l//u//e//c//o//u//l//d//b//e//A//l//i//c//e/./P//l//a//c//e//h//o//l//d//e//r//s//s//h//o//u//l//d//s//t//a//r//t//w//i//t//h//a/′\'
--- sign and should be alphanumeric only.
+-- $FIRSTNAME could be a placeholder, and its value could be Alice.
+-- Placeholders should start with a \'$\' sign and should be alphanumeric
+-- only.
 --
 -- /See:/ 'variableSet' smart constructor.
-data VariableSet = VariableSet'
+data VariableSet =
+  VariableSet'
     { _vsKind        :: !Text
     , _vsUserValue   :: !(Maybe Text)
     , _vsPlaceholder :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VariableSet' with the minimum fields required to make a request.
 --
@@ -3434,7 +3493,7 @@ data VariableSet = VariableSet'
 variableSet
     :: VariableSet
 variableSet =
-    VariableSet'
+  VariableSet'
     { _vsKind = "androidenterprise#variableSet"
     , _vsUserValue = Nothing
     , _vsPlaceholder = Nothing
@@ -3479,9 +3538,11 @@ instance ToJSON VariableSet where
 -- version history for an app, use Products.Get on the EMM API.
 --
 -- /See:/ 'appUpdateEvent' smart constructor.
-newtype AppUpdateEvent = AppUpdateEvent'
+newtype AppUpdateEvent =
+  AppUpdateEvent'
     { _aueProductId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppUpdateEvent' with the minimum fields required to make a request.
 --
@@ -3490,10 +3551,7 @@ newtype AppUpdateEvent = AppUpdateEvent'
 -- * 'aueProductId'
 appUpdateEvent
     :: AppUpdateEvent
-appUpdateEvent =
-    AppUpdateEvent'
-    { _aueProductId = Nothing
-    }
+appUpdateEvent = AppUpdateEvent' {_aueProductId = Nothing}
 
 -- | The id of the product (e.g. \"app:com.google.android.gm\") that was
 -- updated. This field will always be present.
@@ -3514,10 +3572,12 @@ instance ToJSON AppUpdateEvent where
 -- | The matching enterprise resources.
 --
 -- /See:/ 'enterprisesListResponse' smart constructor.
-data EnterprisesListResponse = EnterprisesListResponse'
+data EnterprisesListResponse =
+  EnterprisesListResponse'
     { _elrKind       :: !Text
     , _elrEnterprise :: !(Maybe [Enterprise])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesListResponse' with the minimum fields required to make a request.
 --
@@ -3529,7 +3589,7 @@ data EnterprisesListResponse = EnterprisesListResponse'
 enterprisesListResponse
     :: EnterprisesListResponse
 enterprisesListResponse =
-    EnterprisesListResponse'
+  EnterprisesListResponse'
     { _elrKind = "androidenterprise#enterprisesListResponse"
     , _elrEnterprise = Nothing
     }
@@ -3568,11 +3628,13 @@ instance ToJSON EnterprisesListResponse where
 -- account authenticated for the request.
 --
 -- /See:/ 'notificationSet' smart constructor.
-data NotificationSet = NotificationSet'
+data NotificationSet =
+  NotificationSet'
     { _nsNotificationSetId :: !(Maybe Text)
     , _nsNotification      :: !(Maybe [Notification])
     , _nsKind              :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationSet' with the minimum fields required to make a request.
 --
@@ -3586,7 +3648,7 @@ data NotificationSet = NotificationSet'
 notificationSet
     :: NotificationSet
 notificationSet =
-    NotificationSet'
+  NotificationSet'
     { _nsNotificationSetId = Nothing
     , _nsNotification = Nothing
     , _nsKind = "androidenterprise#notificationSet"
@@ -3636,10 +3698,12 @@ instance ToJSON NotificationSet where
 -- for the product.
 --
 -- /See:/ 'appRestrictionsSchema' smart constructor.
-data AppRestrictionsSchema = AppRestrictionsSchema'
+data AppRestrictionsSchema =
+  AppRestrictionsSchema'
     { _arsKind         :: !Text
     , _arsRestrictions :: !(Maybe [AppRestrictionsSchemaRestriction])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppRestrictionsSchema' with the minimum fields required to make a request.
 --
@@ -3651,7 +3715,7 @@ data AppRestrictionsSchema = AppRestrictionsSchema'
 appRestrictionsSchema
     :: AppRestrictionsSchema
 appRestrictionsSchema =
-    AppRestrictionsSchema'
+  AppRestrictionsSchema'
     { _arsKind = "androidenterprise#appRestrictionsSchema"
     , _arsRestrictions = Nothing
     }
@@ -3688,9 +3752,11 @@ instance ToJSON AppRestrictionsSchema where
 -- | Icon for a web app.
 --
 -- /See:/ 'webAppIcon' smart constructor.
-newtype WebAppIcon = WebAppIcon'
+newtype WebAppIcon =
+  WebAppIcon'
     { _waiImageData :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebAppIcon' with the minimum fields required to make a request.
 --
@@ -3699,10 +3765,7 @@ newtype WebAppIcon = WebAppIcon'
 -- * 'waiImageData'
 webAppIcon
     :: WebAppIcon
-webAppIcon =
-    WebAppIcon'
-    { _waiImageData = Nothing
-    }
+webAppIcon = WebAppIcon' {_waiImageData = Nothing}
 
 -- | The actual bytes of the image in a base64url encoded string (c.f.
 -- RFC4648, section 5 \"Base 64 Encoding with URL and Filename Safe
@@ -3725,10 +3788,12 @@ instance ToJSON WebAppIcon where
 -- | A localized string with its locale.
 --
 -- /See:/ 'localizedText' smart constructor.
-data LocalizedText = LocalizedText'
+data LocalizedText =
+  LocalizedText'
     { _ltText   :: !(Maybe Text)
     , _ltLocale :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocalizedText' with the minimum fields required to make a request.
 --
@@ -3739,11 +3804,7 @@ data LocalizedText = LocalizedText'
 -- * 'ltLocale'
 localizedText
     :: LocalizedText
-localizedText =
-    LocalizedText'
-    { _ltText = Nothing
-    , _ltLocale = Nothing
-    }
+localizedText = LocalizedText' {_ltText = Nothing, _ltLocale = Nothing}
 
 -- | The text localized in the associated locale.
 ltText :: Lens' LocalizedText (Maybe Text)
@@ -3773,11 +3834,13 @@ instance ToJSON LocalizedText where
 -- appropriate EMM app can be automatically downloaded.
 --
 -- /See:/ 'userToken' smart constructor.
-data UserToken = UserToken'
+data UserToken =
+  UserToken'
     { _utKind   :: !Text
     , _utToken  :: !(Maybe Text)
     , _utUserId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserToken' with the minimum fields required to make a request.
 --
@@ -3791,7 +3854,7 @@ data UserToken = UserToken'
 userToken
     :: UserToken
 userToken =
-    UserToken'
+  UserToken'
     { _utKind = "androidenterprise#userToken"
     , _utToken = Nothing
     , _utUserId = Nothing
@@ -3829,9 +3892,11 @@ instance ToJSON UserToken where
 
 --
 -- /See:/ 'administratorWebTokenSpecPrivateApps' smart constructor.
-newtype AdministratorWebTokenSpecPrivateApps = AdministratorWebTokenSpecPrivateApps'
+newtype AdministratorWebTokenSpecPrivateApps =
+  AdministratorWebTokenSpecPrivateApps'
     { _awtspaEnabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdministratorWebTokenSpecPrivateApps' with the minimum fields required to make a request.
 --
@@ -3841,9 +3906,7 @@ newtype AdministratorWebTokenSpecPrivateApps = AdministratorWebTokenSpecPrivateA
 administratorWebTokenSpecPrivateApps
     :: AdministratorWebTokenSpecPrivateApps
 administratorWebTokenSpecPrivateApps =
-    AdministratorWebTokenSpecPrivateApps'
-    { _awtspaEnabled = Nothing
-    }
+  AdministratorWebTokenSpecPrivateApps' {_awtspaEnabled = Nothing}
 
 -- | Whether the Private Apps page is displayed. Default is true.
 awtspaEnabled :: Lens' AdministratorWebTokenSpecPrivateApps (Maybe Bool)
@@ -3852,7 +3915,8 @@ awtspaEnabled
       (\ s a -> s{_awtspaEnabled = a})
 
 instance FromJSON
-         AdministratorWebTokenSpecPrivateApps where
+           AdministratorWebTokenSpecPrivateApps
+         where
         parseJSON
           = withObject "AdministratorWebTokenSpecPrivateApps"
               (\ o ->
@@ -3868,10 +3932,12 @@ instance ToJSON AdministratorWebTokenSpecPrivateApps
 -- | The device resources for the user.
 --
 -- /See:/ 'devicesListResponse' smart constructor.
-data DevicesListResponse = DevicesListResponse'
+data DevicesListResponse =
+  DevicesListResponse'
     { _dlrKind   :: !Text
     , _dlrDevice :: !(Maybe [Device])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DevicesListResponse' with the minimum fields required to make a request.
 --
@@ -3883,10 +3949,8 @@ data DevicesListResponse = DevicesListResponse'
 devicesListResponse
     :: DevicesListResponse
 devicesListResponse =
-    DevicesListResponse'
-    { _dlrKind = "androidenterprise#devicesListResponse"
-    , _dlrDevice = Nothing
-    }
+  DevicesListResponse'
+    {_dlrKind = "androidenterprise#devicesListResponse", _dlrDevice = Nothing}
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#devicesListResponse\".
@@ -3918,10 +3982,12 @@ instance ToJSON DevicesListResponse where
 
 --
 -- /See:/ 'productSigningCertificate' smart constructor.
-data ProductSigningCertificate = ProductSigningCertificate'
+data ProductSigningCertificate =
+  ProductSigningCertificate'
     { _pscCertificateHashSha256 :: !(Maybe Text)
     , _pscCertificateHashSha1   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductSigningCertificate' with the minimum fields required to make a request.
 --
@@ -3933,10 +3999,8 @@ data ProductSigningCertificate = ProductSigningCertificate'
 productSigningCertificate
     :: ProductSigningCertificate
 productSigningCertificate =
-    ProductSigningCertificate'
-    { _pscCertificateHashSha256 = Nothing
-    , _pscCertificateHashSha1 = Nothing
-    }
+  ProductSigningCertificate'
+    {_pscCertificateHashSha256 = Nothing, _pscCertificateHashSha1 = Nothing}
 
 -- | The base64 urlsafe encoded SHA2-256 hash of the certificate.
 pscCertificateHashSha256 :: Lens' ProductSigningCertificate (Maybe Text)
@@ -3984,13 +4048,15 @@ instance ToJSON ProductSigningCertificate where
 -- Enterprise for details.
 --
 -- /See:/ 'enterprise' smart constructor.
-data Enterprise = Enterprise'
+data Enterprise =
+  Enterprise'
     { _eKind          :: !Text
     , _eAdministrator :: !(Maybe [Administrator])
     , _ePrimaryDomain :: !(Maybe Text)
     , _eName          :: !(Maybe Text)
     , _eId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Enterprise' with the minimum fields required to make a request.
 --
@@ -4008,7 +4074,7 @@ data Enterprise = Enterprise'
 enterprise
     :: Enterprise
 enterprise =
-    Enterprise'
+  Enterprise'
     { _eKind = "androidenterprise#enterprise"
     , _eAdministrator = Nothing
     , _ePrimaryDomain = Nothing
@@ -4067,13 +4133,15 @@ instance ToJSON Enterprise where
 -- | An event generated when an app installation failed on a device
 --
 -- /See:/ 'installFailureEvent' smart constructor.
-data InstallFailureEvent = InstallFailureEvent'
+data InstallFailureEvent =
+  InstallFailureEvent'
     { _ifeFailureReason  :: !(Maybe Text)
     , _ifeFailureDetails :: !(Maybe Text)
     , _ifeUserId         :: !(Maybe Text)
     , _ifeDeviceId       :: !(Maybe Text)
     , _ifeProductId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstallFailureEvent' with the minimum fields required to make a request.
 --
@@ -4091,7 +4159,7 @@ data InstallFailureEvent = InstallFailureEvent'
 installFailureEvent
     :: InstallFailureEvent
 installFailureEvent =
-    InstallFailureEvent'
+  InstallFailureEvent'
     { _ifeFailureReason = Nothing
     , _ifeFailureDetails = Nothing
     , _ifeUserId = Nothing
@@ -4151,10 +4219,12 @@ instance ToJSON InstallFailureEvent where
 -- | The managed configuration resources for the user.
 --
 -- /See:/ 'managedConfigurationsForUserListResponse' smart constructor.
-data ManagedConfigurationsForUserListResponse = ManagedConfigurationsForUserListResponse'
+data ManagedConfigurationsForUserListResponse =
+  ManagedConfigurationsForUserListResponse'
     { _mcfulrManagedConfigurationForUser :: !(Maybe [ManagedConfiguration])
     , _mcfulrKind                        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsForUserListResponse' with the minimum fields required to make a request.
 --
@@ -4166,7 +4236,7 @@ data ManagedConfigurationsForUserListResponse = ManagedConfigurationsForUserList
 managedConfigurationsForUserListResponse
     :: ManagedConfigurationsForUserListResponse
 managedConfigurationsForUserListResponse =
-    ManagedConfigurationsForUserListResponse'
+  ManagedConfigurationsForUserListResponse'
     { _mcfulrManagedConfigurationForUser = Nothing
     , _mcfulrKind = "androidenterprise#managedConfigurationsForUserListResponse"
     }
@@ -4186,7 +4256,8 @@ mcfulrKind
   = lens _mcfulrKind (\ s a -> s{_mcfulrKind = a})
 
 instance FromJSON
-         ManagedConfigurationsForUserListResponse where
+           ManagedConfigurationsForUserListResponse
+         where
         parseJSON
           = withObject
               "ManagedConfigurationsForUserListResponse"
@@ -4197,7 +4268,8 @@ instance FromJSON
                         "androidenterprise#managedConfigurationsForUserListResponse"))
 
 instance ToJSON
-         ManagedConfigurationsForUserListResponse where
+           ManagedConfigurationsForUserListResponse
+         where
         toJSON ManagedConfigurationsForUserListResponse'{..}
           = object
               (catMaybes
@@ -4211,11 +4283,13 @@ instance ToJSON
 -- placeholders in the managed configuration settings.
 --
 -- /See:/ 'configurationVariables' smart constructor.
-data ConfigurationVariables = ConfigurationVariables'
+data ConfigurationVariables =
+  ConfigurationVariables'
     { _cvKind        :: !Text
     , _cvMcmId       :: !(Maybe Text)
     , _cvVariableSet :: !(Maybe [VariableSet])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConfigurationVariables' with the minimum fields required to make a request.
 --
@@ -4229,7 +4303,7 @@ data ConfigurationVariables = ConfigurationVariables'
 configurationVariables
     :: ConfigurationVariables
 configurationVariables =
-    ConfigurationVariables'
+  ConfigurationVariables'
     { _cvKind = "androidenterprise#configurationVariables"
     , _cvMcmId = Nothing
     , _cvVariableSet = Nothing
@@ -4273,11 +4347,13 @@ instance ToJSON ConfigurationVariables where
 -- specifying the page to display the first time the store is opened.
 --
 -- /See:/ 'storeLayout' smart constructor.
-data StoreLayout = StoreLayout'
+data StoreLayout =
+  StoreLayout'
     { _slStoreLayoutType :: !(Maybe Text)
     , _slKind            :: !Text
     , _slHomepageId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StoreLayout' with the minimum fields required to make a request.
 --
@@ -4291,7 +4367,7 @@ data StoreLayout = StoreLayout'
 storeLayout
     :: StoreLayout
 storeLayout =
-    StoreLayout'
+  StoreLayout'
     { _slStoreLayoutType = Nothing
     , _slKind = "androidenterprise#storeLayout"
     , _slHomepageId = Nothing
@@ -4340,9 +4416,11 @@ instance ToJSON StoreLayout where
 -- schema for an app, use Products.getAppRestrictionsSchema on the EMM API.
 --
 -- /See:/ 'appRestrictionsSchemaChangeEvent' smart constructor.
-newtype AppRestrictionsSchemaChangeEvent = AppRestrictionsSchemaChangeEvent'
+newtype AppRestrictionsSchemaChangeEvent =
+  AppRestrictionsSchemaChangeEvent'
     { _arsceProductId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppRestrictionsSchemaChangeEvent' with the minimum fields required to make a request.
 --
@@ -4352,9 +4430,7 @@ newtype AppRestrictionsSchemaChangeEvent = AppRestrictionsSchemaChangeEvent'
 appRestrictionsSchemaChangeEvent
     :: AppRestrictionsSchemaChangeEvent
 appRestrictionsSchemaChangeEvent =
-    AppRestrictionsSchemaChangeEvent'
-    { _arsceProductId = Nothing
-    }
+  AppRestrictionsSchemaChangeEvent' {_arsceProductId = Nothing}
 
 -- | The id of the product (e.g. \"app:com.google.android.gm\") for which the
 -- app restriction schema changed. This field will always be present.
@@ -4380,12 +4456,14 @@ instance ToJSON AppRestrictionsSchemaChangeEvent
 -- | An event generated when a new device is ready to be managed.
 --
 -- /See:/ 'newDeviceEvent' smart constructor.
-data NewDeviceEvent = NewDeviceEvent'
+data NewDeviceEvent =
+  NewDeviceEvent'
     { _ndeUserId         :: !(Maybe Text)
     , _ndeDpcPackageName :: !(Maybe Text)
     , _ndeDeviceId       :: !(Maybe Text)
     , _ndeManagementType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NewDeviceEvent' with the minimum fields required to make a request.
 --
@@ -4401,7 +4479,7 @@ data NewDeviceEvent = NewDeviceEvent'
 newDeviceEvent
     :: NewDeviceEvent
 newDeviceEvent =
-    NewDeviceEvent'
+  NewDeviceEvent'
     { _ndeUserId = Nothing
     , _ndeDpcPackageName = Nothing
     , _ndeDeviceId = Nothing
@@ -4454,12 +4532,14 @@ instance ToJSON NewDeviceEvent where
 -- | The device policy for a given managed device.
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pProductAvailabilityPolicy :: !(Maybe Text)
     , _pProductPolicy             :: !(Maybe [ProductPolicy])
     , _pMaintenanceWindow         :: !(Maybe MaintenanceWindow)
     , _pAutoUpdatePolicy          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -4475,7 +4555,7 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pProductAvailabilityPolicy = Nothing
     , _pProductPolicy = Nothing
     , _pMaintenanceWindow = Nothing
@@ -4543,10 +4623,12 @@ instance ToJSON Policy where
 -- | A token authorizing an admin to access an iframe.
 --
 -- /See:/ 'administratorWebToken' smart constructor.
-data AdministratorWebToken = AdministratorWebToken'
+data AdministratorWebToken =
+  AdministratorWebToken'
     { _awtKind  :: !Text
     , _awtToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdministratorWebToken' with the minimum fields required to make a request.
 --
@@ -4558,10 +4640,8 @@ data AdministratorWebToken = AdministratorWebToken'
 administratorWebToken
     :: AdministratorWebToken
 administratorWebToken =
-    AdministratorWebToken'
-    { _awtKind = "androidenterprise#administratorWebToken"
-    , _awtToken = Nothing
-    }
+  AdministratorWebToken'
+    {_awtKind = "androidenterprise#administratorWebToken", _awtToken = Nothing}
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#administratorWebToken\".
@@ -4593,11 +4673,13 @@ instance ToJSON AdministratorWebToken where
 -- Signup URL and Completion Token.
 --
 -- /See:/ 'signupInfo' smart constructor.
-data SignupInfo = SignupInfo'
+data SignupInfo =
+  SignupInfo'
     { _siCompletionToken :: !(Maybe Text)
     , _siKind            :: !Text
     , _siURL             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SignupInfo' with the minimum fields required to make a request.
 --
@@ -4611,7 +4693,7 @@ data SignupInfo = SignupInfo'
 signupInfo
     :: SignupInfo
 signupInfo =
-    SignupInfo'
+  SignupInfo'
     { _siCompletionToken = Nothing
     , _siKind = "androidenterprise#signupInfo"
     , _siURL = Nothing
@@ -4659,7 +4741,8 @@ instance ToJSON SignupInfo where
 -- an EMM user interface.
 --
 -- /See:/ 'product' smart constructor.
-data Product = Product'
+data Product =
+  Product'
     { _pScreenshotURLs             :: !(Maybe [Text])
     , _pLastUpdatedTimestampMillis :: !(Maybe (Textual Int64))
     , _pSmallIconURL               :: !(Maybe Text)
@@ -4684,7 +4767,8 @@ data Product = Product'
     , _pRecentChanges              :: !(Maybe Text)
     , _pDescription                :: !(Maybe Text)
     , _pDetailsURL                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
@@ -4740,7 +4824,7 @@ data Product = Product'
 product
     :: Product
 product =
-    Product'
+  Product'
     { _pScreenshotURLs = Nothing
     , _pLastUpdatedTimestampMillis = Nothing
     , _pSmallIconURL = Nothing
@@ -4991,10 +5075,12 @@ instance ToJSON Product where
 -- | The entitlement resources for the user.
 --
 -- /See:/ 'entitlementsListResponse' smart constructor.
-data EntitlementsListResponse = EntitlementsListResponse'
+data EntitlementsListResponse =
+  EntitlementsListResponse'
     { _entKind        :: !Text
     , _entEntitlement :: !(Maybe [Entitlement])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntitlementsListResponse' with the minimum fields required to make a request.
 --
@@ -5006,7 +5092,7 @@ data EntitlementsListResponse = EntitlementsListResponse'
 entitlementsListResponse
     :: EntitlementsListResponse
 entitlementsListResponse =
-    EntitlementsListResponse'
+  EntitlementsListResponse'
     { _entKind = "androidenterprise#entitlementsListResponse"
     , _entEntitlement = Nothing
     }
@@ -5046,11 +5132,13 @@ instance ToJSON EntitlementsListResponse where
 -- they have been accepted by the enterprise.
 --
 -- /See:/ 'productPermissions' smart constructor.
-data ProductPermissions = ProductPermissions'
+data ProductPermissions =
+  ProductPermissions'
     { _ppsKind       :: !Text
     , _ppsPermission :: !(Maybe [ProductPermission])
     , _ppsProductId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductPermissions' with the minimum fields required to make a request.
 --
@@ -5064,7 +5152,7 @@ data ProductPermissions = ProductPermissions'
 productPermissions
     :: ProductPermissions
 productPermissions =
-    ProductPermissions'
+  ProductPermissions'
     { _ppsKind = "androidenterprise#productPermissions"
     , _ppsPermission = Nothing
     , _ppsProductId = Nothing
@@ -5116,12 +5204,14 @@ instance ToJSON ProductPermissions where
 -- obtaining consent from the enterprise.
 --
 -- /See:/ 'permission' smart constructor.
-data Permission = Permission'
+data Permission =
+  Permission'
     { _perKind         :: !Text
     , _perName         :: !(Maybe Text)
     , _perDescription  :: !(Maybe Text)
     , _perPermissionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
@@ -5137,7 +5227,7 @@ data Permission = Permission'
 permission
     :: Permission
 permission =
-    Permission'
+  Permission'
     { _perKind = "androidenterprise#permission"
     , _perName = Nothing
     , _perDescription = Nothing
@@ -5187,10 +5277,12 @@ instance ToJSON Permission where
 -- | The web app details for an enterprise.
 --
 -- /See:/ 'webAppsListResponse' smart constructor.
-data WebAppsListResponse = WebAppsListResponse'
+data WebAppsListResponse =
+  WebAppsListResponse'
     { _walrKind   :: !Text
     , _walrWebApp :: !(Maybe [WebApp])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebAppsListResponse' with the minimum fields required to make a request.
 --
@@ -5202,10 +5294,8 @@ data WebAppsListResponse = WebAppsListResponse'
 webAppsListResponse
     :: WebAppsListResponse
 webAppsListResponse =
-    WebAppsListResponse'
-    { _walrKind = "androidenterprise#webAppsListResponse"
-    , _walrWebApp = Nothing
-    }
+  WebAppsListResponse'
+    {_walrKind = "androidenterprise#webAppsListResponse", _walrWebApp = Nothing}
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#webAppsListResponse\".
@@ -5237,10 +5327,12 @@ instance ToJSON WebAppsListResponse where
 
 --
 -- /See:/ 'productsApproveRequest' smart constructor.
-data ProductsApproveRequest = ProductsApproveRequest'
+data ProductsApproveRequest =
+  ProductsApproveRequest'
     { _parApprovalURLInfo     :: !(Maybe ApprovalURLInfo)
     , _parApprovedPermissions :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsApproveRequest' with the minimum fields required to make a request.
 --
@@ -5252,10 +5344,8 @@ data ProductsApproveRequest = ProductsApproveRequest'
 productsApproveRequest
     :: ProductsApproveRequest
 productsApproveRequest =
-    ProductsApproveRequest'
-    { _parApprovalURLInfo = Nothing
-    , _parApprovedPermissions = Nothing
-    }
+  ProductsApproveRequest'
+    {_parApprovalURLInfo = Nothing, _parApprovedPermissions = Nothing}
 
 -- | The approval URL that was shown to the user. Only the permissions shown
 -- to the user with that URL will be accepted, which may not be the
@@ -5297,12 +5387,14 @@ instance ToJSON ProductsApproveRequest where
 
 --
 -- /See:/ 'autoInstallPolicy' smart constructor.
-data AutoInstallPolicy = AutoInstallPolicy'
+data AutoInstallPolicy =
+  AutoInstallPolicy'
     { _aipAutoInstallConstraint :: !(Maybe [AutoInstallConstraint])
     , _aipAutoInstallPriority   :: !(Maybe (Textual Int32))
     , _aipAutoInstallMode       :: !(Maybe Text)
     , _aipMinimumVersionCode    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoInstallPolicy' with the minimum fields required to make a request.
 --
@@ -5318,7 +5410,7 @@ data AutoInstallPolicy = AutoInstallPolicy'
 autoInstallPolicy
     :: AutoInstallPolicy
 autoInstallPolicy =
-    AutoInstallPolicy'
+  AutoInstallPolicy'
     { _aipAutoInstallConstraint = Nothing
     , _aipAutoInstallPriority = Nothing
     , _aipAutoInstallMode = Nothing
@@ -5402,11 +5494,13 @@ instance ToJSON AutoInstallPolicy where
 -- API.
 --
 -- /See:/ 'entitlement' smart constructor.
-data Entitlement = Entitlement'
+data Entitlement =
+  Entitlement'
     { _eeKind      :: !Text
     , _eeReason    :: !(Maybe Text)
     , _eeProductId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Entitlement' with the minimum fields required to make a request.
 --
@@ -5420,7 +5514,7 @@ data Entitlement = Entitlement'
 entitlement
     :: Entitlement
 entitlement =
-    Entitlement'
+  Entitlement'
     { _eeKind = "androidenterprise#entitlement"
     , _eeReason = Nothing
     , _eeProductId = Nothing
@@ -5463,12 +5557,14 @@ instance ToJSON Entitlement where
 -- | The matching products.
 --
 -- /See:/ 'productsListResponse' smart constructor.
-data ProductsListResponse = ProductsListResponse'
+data ProductsListResponse =
+  ProductsListResponse'
     { _plrTokenPagination :: !(Maybe TokenPagination)
     , _plrPageInfo        :: !(Maybe PageInfo)
     , _plrKind            :: !Text
     , _plrProduct         :: !(Maybe [Product])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsListResponse' with the minimum fields required to make a request.
 --
@@ -5484,7 +5580,7 @@ data ProductsListResponse = ProductsListResponse'
 productsListResponse
     :: ProductsListResponse
 productsListResponse =
-    ProductsListResponse'
+  ProductsListResponse'
     { _plrTokenPagination = Nothing
     , _plrPageInfo = Nothing
     , _plrKind = "androidenterprise#productsListResponse"
@@ -5537,7 +5633,8 @@ instance ToJSON ProductsListResponse where
 -- | WebApp resource info.
 --
 -- /See:/ 'webApp' smart constructor.
-data WebApp = WebApp'
+data WebApp =
+  WebApp'
     { _waWebAppId    :: !(Maybe Text)
     , _waVersionCode :: !(Maybe (Textual Int64))
     , _waIcons       :: !(Maybe [WebAppIcon])
@@ -5545,7 +5642,8 @@ data WebApp = WebApp'
     , _waDisplayMode :: !(Maybe Text)
     , _waIsPublished :: !(Maybe Bool)
     , _waTitle       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebApp' with the minimum fields required to make a request.
 --
@@ -5567,7 +5665,7 @@ data WebApp = WebApp'
 webApp
     :: WebApp
 webApp =
-    WebApp'
+  WebApp'
     { _waWebAppId = Nothing
     , _waVersionCode = Nothing
     , _waIcons = Nothing

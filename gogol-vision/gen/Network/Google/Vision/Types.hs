@@ -1727,8 +1727,8 @@ visionService
 
 -- | Apply machine learning models to understand and label images
 cloudVisionScope :: Proxy '["https://www.googleapis.com/auth/cloud-vision"]
-cloudVisionScope = Proxy;
+cloudVisionScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

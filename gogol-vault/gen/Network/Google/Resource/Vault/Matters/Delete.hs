@@ -60,14 +60,16 @@ type MattersDeleteResource =
 -- | Deletes the specified matter. Returns matter with updated state.
 --
 -- /See:/ 'mattersDelete' smart constructor.
-data MattersDelete = MattersDelete'
+data MattersDelete =
+  MattersDelete'
     { _mdXgafv          :: !(Maybe Xgafv)
     , _mdUploadProtocol :: !(Maybe Text)
     , _mdAccessToken    :: !(Maybe Text)
     , _mdUploadType     :: !(Maybe Text)
     , _mdMatterId       :: !Text
     , _mdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersDelete' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ mattersDelete
     :: Text -- ^ 'mdMatterId'
     -> MattersDelete
 mattersDelete pMdMatterId_ =
-    MattersDelete'
+  MattersDelete'
     { _mdXgafv = Nothing
     , _mdUploadProtocol = Nothing
     , _mdAccessToken = Nothing

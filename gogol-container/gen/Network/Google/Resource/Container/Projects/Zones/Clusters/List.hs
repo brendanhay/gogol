@@ -69,7 +69,8 @@ type ProjectsZonesClustersListResource =
 -- all zones.
 --
 -- /See:/ 'projectsZonesClustersList' smart constructor.
-data ProjectsZonesClustersList = ProjectsZonesClustersList'
+data ProjectsZonesClustersList =
+  ProjectsZonesClustersList'
     { _proParent         :: !(Maybe Text)
     , _proXgafv          :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,8 @@ data ProjectsZonesClustersList = ProjectsZonesClustersList'
     , _proZone           :: !Text
     , _proProjectId      :: !Text
     , _proCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsZonesClustersList
     -> Text -- ^ 'proProjectId'
     -> ProjectsZonesClustersList
 projectsZonesClustersList pProZone_ pProProjectId_ =
-    ProjectsZonesClustersList'
+  ProjectsZonesClustersList'
     { _proParent = Nothing
     , _proXgafv = Nothing
     , _proUploadProtocol = Nothing

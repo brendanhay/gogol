@@ -63,7 +63,8 @@ type AccountsClientsCreateResource =
 -- | Creates a new client buyer.
 --
 -- /See:/ 'accountsClientsCreate' smart constructor.
-data AccountsClientsCreate = AccountsClientsCreate'
+data AccountsClientsCreate =
+  AccountsClientsCreate'
     { _accXgafv          :: !(Maybe Xgafv)
     , _accUploadProtocol :: !(Maybe Text)
     , _accAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data AccountsClientsCreate = AccountsClientsCreate'
     , _accPayload        :: !Client
     , _accAccountId      :: !(Textual Int64)
     , _accCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsClientsCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ accountsClientsCreate
     -> Int64 -- ^ 'accAccountId'
     -> AccountsClientsCreate
 accountsClientsCreate pAccPayload_ pAccAccountId_ =
-    AccountsClientsCreate'
+  AccountsClientsCreate'
     { _accXgafv = Nothing
     , _accUploadProtocol = Nothing
     , _accAccessToken = Nothing

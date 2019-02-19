@@ -69,7 +69,8 @@ type ProjectsZonesClustersStartIPRotationResource =
 -- | Start master IP rotation.
 --
 -- /See:/ 'projectsZonesClustersStartIPRotation' smart constructor.
-data ProjectsZonesClustersStartIPRotation = ProjectsZonesClustersStartIPRotation'
+data ProjectsZonesClustersStartIPRotation =
+  ProjectsZonesClustersStartIPRotation'
     { _pzcsirXgafv          :: !(Maybe Xgafv)
     , _pzcsirUploadProtocol :: !(Maybe Text)
     , _pzcsirAccessToken    :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsZonesClustersStartIPRotation = ProjectsZonesClustersStartIPRotation
     , _pzcsirClusterId      :: !Text
     , _pzcsirProjectId      :: !Text
     , _pzcsirCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersStartIPRotation' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsZonesClustersStartIPRotation
     -> Text -- ^ 'pzcsirProjectId'
     -> ProjectsZonesClustersStartIPRotation
 projectsZonesClustersStartIPRotation pPzcsirZone_ pPzcsirPayload_ pPzcsirClusterId_ pPzcsirProjectId_ =
-    ProjectsZonesClustersStartIPRotation'
+  ProjectsZonesClustersStartIPRotation'
     { _pzcsirXgafv = Nothing
     , _pzcsirUploadProtocol = Nothing
     , _pzcsirAccessToken = Nothing
@@ -179,7 +181,8 @@ pzcsirCallback
       (\ s a -> s{_pzcsirCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersStartIPRotation where
+           ProjectsZonesClustersStartIPRotation
+         where
         type Rs ProjectsZonesClustersStartIPRotation =
              Operation
         type Scopes ProjectsZonesClustersStartIPRotation =

@@ -73,7 +73,8 @@ type ProjectsLocationsKeyRingsImportJobsTestIAMPermissionsResource
 -- warning.
 --
 -- /See:/ 'projectsLocationsKeyRingsImportJobsTestIAMPermissions' smart constructor.
-data ProjectsLocationsKeyRingsImportJobsTestIAMPermissions = ProjectsLocationsKeyRingsImportJobsTestIAMPermissions'
+data ProjectsLocationsKeyRingsImportJobsTestIAMPermissions =
+  ProjectsLocationsKeyRingsImportJobsTestIAMPermissions'
     { _plkrijtipXgafv          :: !(Maybe Xgafv)
     , _plkrijtipUploadProtocol :: !(Maybe Text)
     , _plkrijtipAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsLocationsKeyRingsImportJobsTestIAMPermissions = ProjectsLocationsKe
     , _plkrijtipPayload        :: !TestIAMPermissionsRequest
     , _plkrijtipResource       :: !Text
     , _plkrijtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsImportJobsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsLocationsKeyRingsImportJobsTestIAMPermissions
     -> Text -- ^ 'plkrijtipResource'
     -> ProjectsLocationsKeyRingsImportJobsTestIAMPermissions
 projectsLocationsKeyRingsImportJobsTestIAMPermissions pPlkrijtipPayload_ pPlkrijtipResource_ =
-    ProjectsLocationsKeyRingsImportJobsTestIAMPermissions'
+  ProjectsLocationsKeyRingsImportJobsTestIAMPermissions'
     { _plkrijtipXgafv = Nothing
     , _plkrijtipUploadProtocol = Nothing
     , _plkrijtipAccessToken = Nothing
@@ -160,7 +162,7 @@ plkrijtipCallback
       (\ s a -> s{_plkrijtipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsImportJobsTestIAMPermissions
+           ProjectsLocationsKeyRingsImportJobsTestIAMPermissions
          where
         type Rs
                ProjectsLocationsKeyRingsImportJobsTestIAMPermissions

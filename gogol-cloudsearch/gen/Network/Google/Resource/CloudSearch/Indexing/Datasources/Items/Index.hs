@@ -67,7 +67,8 @@ type IndexingDatasourcesItemsIndexResource =
 -- with no provided values are cleared out in the Cloud Search index.
 --
 -- /See:/ 'indexingDatasourcesItemsIndex' smart constructor.
-data IndexingDatasourcesItemsIndex = IndexingDatasourcesItemsIndex'
+data IndexingDatasourcesItemsIndex =
+  IndexingDatasourcesItemsIndex'
     { _idiiXgafv          :: !(Maybe Xgafv)
     , _idiiUploadProtocol :: !(Maybe Text)
     , _idiiAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data IndexingDatasourcesItemsIndex = IndexingDatasourcesItemsIndex'
     , _idiiPayload        :: !IndexItemRequest
     , _idiiName           :: !Text
     , _idiiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IndexingDatasourcesItemsIndex' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ indexingDatasourcesItemsIndex
     -> Text -- ^ 'idiiName'
     -> IndexingDatasourcesItemsIndex
 indexingDatasourcesItemsIndex pIdiiPayload_ pIdiiName_ =
-    IndexingDatasourcesItemsIndex'
+  IndexingDatasourcesItemsIndex'
     { _idiiXgafv = Nothing
     , _idiiUploadProtocol = Nothing
     , _idiiAccessToken = Nothing

@@ -65,7 +65,8 @@ type ProjectsCommitResource =
 -- entities.
 --
 -- /See:/ 'projectsCommit' smart constructor.
-data ProjectsCommit = ProjectsCommit'
+data ProjectsCommit =
+  ProjectsCommit'
     { _pcXgafv          :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
     , _pcAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsCommit = ProjectsCommit'
     , _pcPayload        :: !CommitRequest
     , _pcProjectId      :: !Text
     , _pcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsCommit' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsCommit
     -> Text -- ^ 'pcProjectId'
     -> ProjectsCommit
 projectsCommit pPcPayload_ pPcProjectId_ =
-    ProjectsCommit'
+  ProjectsCommit'
     { _pcXgafv = Nothing
     , _pcUploadProtocol = Nothing
     , _pcAccessToken = Nothing

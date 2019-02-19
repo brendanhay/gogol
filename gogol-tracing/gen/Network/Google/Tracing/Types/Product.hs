@@ -28,7 +28,8 @@ import           Network.Google.Tracing.Types.Sum
 -- gaps and\/or overlaps between spans in a trace.
 --
 -- /See:/ 'span' smart constructor.
-data Span = Span'
+data Span =
+  Span'
     { _sStatus       :: !(Maybe Status)
     , _sStartTime    :: !(Maybe DateTime')
     , _sName         :: !(Maybe Text)
@@ -40,7 +41,8 @@ data Span = Span'
     , _sParentSpanId :: !(Maybe Text)
     , _sLinks        :: !(Maybe Links)
     , _sSpanId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Span' with the minimum fields required to make a request.
 --
@@ -70,7 +72,7 @@ data Span = Span'
 span
     :: Span
 span =
-    Span'
+  Span'
     { _sStatus = Nothing
     , _sStartTime = Nothing
     , _sName = Nothing
@@ -195,10 +197,12 @@ instance ToJSON Span where
 -- | Represents a string value that might be truncated.
 --
 -- /See:/ 'truncatableString' smart constructor.
-data TruncatableString = TruncatableString'
+data TruncatableString =
+  TruncatableString'
     { _tsTruncatedCharacterCount :: !(Maybe (Textual Int32))
     , _tsValue                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TruncatableString' with the minimum fields required to make a request.
 --
@@ -210,10 +214,7 @@ data TruncatableString = TruncatableString'
 truncatableString
     :: TruncatableString
 truncatableString =
-    TruncatableString'
-    { _tsTruncatedCharacterCount = Nothing
-    , _tsValue = Nothing
-    }
+  TruncatableString' {_tsTruncatedCharacterCount = Nothing, _tsValue = Nothing}
 
 -- | The number of characters truncated from the original string value. If 0
 -- it means that the string value was not truncated.
@@ -281,11 +282,13 @@ instance ToJSON TruncatableString where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -298,12 +301,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
@@ -351,9 +349,11 @@ instance ToJSON Status where
 -- \"\/http\/url\": google.com\/apis \"abc.com\/myattribute\": true
 --
 -- /See:/ 'attributesAttributeMap' smart constructor.
-newtype AttributesAttributeMap = AttributesAttributeMap'
+newtype AttributesAttributeMap =
+  AttributesAttributeMap'
     { _aamAddtional :: HashMap Text AttributeValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttributesAttributeMap' with the minimum fields required to make a request.
 --
@@ -364,9 +364,7 @@ attributesAttributeMap
     :: HashMap Text AttributeValue -- ^ 'aamAddtional'
     -> AttributesAttributeMap
 attributesAttributeMap pAamAddtional_ =
-    AttributesAttributeMap'
-    { _aamAddtional = _Coerce # pAamAddtional_
-    }
+  AttributesAttributeMap' {_aamAddtional = _Coerce # pAamAddtional_}
 
 aamAddtional :: Lens' AttributesAttributeMap (HashMap Text AttributeValue)
 aamAddtional
@@ -386,10 +384,12 @@ instance ToJSON AttributesAttributeMap where
 -- are allowed per Span.
 --
 -- /See:/ 'annotation' smart constructor.
-data Annotation = Annotation'
+data Annotation =
+  Annotation'
     { _aAttributes  :: !(Maybe Attributes)
     , _aDescription :: !(Maybe TruncatableString)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
@@ -400,11 +400,7 @@ data Annotation = Annotation'
 -- * 'aDescription'
 annotation
     :: Annotation
-annotation =
-    Annotation'
-    { _aAttributes = Nothing
-    , _aDescription = Nothing
-    }
+annotation = Annotation' {_aAttributes = Nothing, _aDescription = Nothing}
 
 -- | A set of attributes on the annotation. A maximum of 4 attributes are
 -- allowed per Annotation.
@@ -435,11 +431,13 @@ instance ToJSON Annotation where
 -- | The allowed types for the value side of an attribute key:value pair.
 --
 -- /See:/ 'attributeValue' smart constructor.
-data AttributeValue = AttributeValue'
+data AttributeValue =
+  AttributeValue'
     { _avBoolValue   :: !(Maybe Bool)
     , _avIntValue    :: !(Maybe (Textual Int64))
     , _avStringValue :: !(Maybe TruncatableString)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttributeValue' with the minimum fields required to make a request.
 --
@@ -453,11 +451,8 @@ data AttributeValue = AttributeValue'
 attributeValue
     :: AttributeValue
 attributeValue =
-    AttributeValue'
-    { _avBoolValue = Nothing
-    , _avIntValue = Nothing
-    , _avStringValue = Nothing
-    }
+  AttributeValue'
+    {_avBoolValue = Nothing, _avIntValue = Nothing, _avStringValue = Nothing}
 
 -- | A boolean value.
 avBoolValue :: Lens' AttributeValue (Maybe Bool)
@@ -500,8 +495,8 @@ instance ToJSON AttributeValue where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -522,11 +517,13 @@ instance ToJSON Empty where
 -- request from a different service project.
 --
 -- /See:/ 'link' smart constructor.
-data Link = Link'
+data Link =
+  Link'
     { _lTraceId :: !(Maybe Text)
     , _lType    :: !(Maybe LinkType)
     , _lSpanId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Link' with the minimum fields required to make a request.
 --
@@ -539,12 +536,7 @@ data Link = Link'
 -- * 'lSpanId'
 link
     :: Link
-link =
-    Link'
-    { _lTraceId = Nothing
-    , _lType = Nothing
-    , _lSpanId = Nothing
-    }
+link = Link' {_lTraceId = Nothing, _lType = Nothing, _lSpanId = Nothing}
 
 -- | \`TRACE_ID\` is a unique identifier for a trace within a project. It is
 -- a base16-encoded, case-insensitive string of a 16-bytes array and is
@@ -579,9 +571,11 @@ instance ToJSON Link where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -592,9 +586,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -613,10 +605,12 @@ instance ToJSON StatusDetailsItem where
 -- | The response message for the \`ListSpans\` method.
 --
 -- /See:/ 'listSpansResponse' smart constructor.
-data ListSpansResponse = ListSpansResponse'
+data ListSpansResponse =
+  ListSpansResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrSpans         :: !(Maybe [Span])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSpansResponse' with the minimum fields required to make a request.
 --
@@ -628,10 +622,7 @@ data ListSpansResponse = ListSpansResponse'
 listSpansResponse
     :: ListSpansResponse
 listSpansResponse =
-    ListSpansResponse'
-    { _lsrNextPageToken = Nothing
-    , _lsrSpans = Nothing
-    }
+  ListSpansResponse' {_lsrNextPageToken = Nothing, _lsrSpans = Nothing}
 
 -- | If defined, indicates that there are more spans that match the request.
 -- Pass this as the value of \`pageToken\` in a subsequent request to
@@ -666,10 +657,12 @@ instance ToJSON ListSpansResponse where
 -- | StackTrace collected in a trace.
 --
 -- /See:/ 'stackTrace' smart constructor.
-data StackTrace = StackTrace'
+data StackTrace =
+  StackTrace'
     { _stStackTraceHashId :: !(Maybe (Textual Word64))
     , _stStackFrames      :: !(Maybe StackFrames)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StackTrace' with the minimum fields required to make a request.
 --
@@ -681,10 +674,7 @@ data StackTrace = StackTrace'
 stackTrace
     :: StackTrace
 stackTrace =
-    StackTrace'
-    { _stStackTraceHashId = Nothing
-    , _stStackFrames = Nothing
-    }
+  StackTrace' {_stStackTraceHashId = Nothing, _stStackFrames = Nothing}
 
 -- | The hash ID is used to conserve network bandwidth for duplicate stack
 -- traces within a single trace. Often multiple spans will have identical
@@ -721,9 +711,11 @@ instance ToJSON StackTrace where
 -- | The request message for the \`BatchWriteSpans\` method.
 --
 -- /See:/ 'batchWriteSpansRequest' smart constructor.
-newtype BatchWriteSpansRequest = BatchWriteSpansRequest'
+newtype BatchWriteSpansRequest =
+  BatchWriteSpansRequest'
     { _bwsrSpans :: Maybe [Span]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchWriteSpansRequest' with the minimum fields required to make a request.
 --
@@ -732,10 +724,7 @@ newtype BatchWriteSpansRequest = BatchWriteSpansRequest'
 -- * 'bwsrSpans'
 batchWriteSpansRequest
     :: BatchWriteSpansRequest
-batchWriteSpansRequest =
-    BatchWriteSpansRequest'
-    { _bwsrSpans = Nothing
-    }
+batchWriteSpansRequest = BatchWriteSpansRequest' {_bwsrSpans = Nothing}
 
 -- | A collection of spans.
 bwsrSpans :: Lens' BatchWriteSpansRequest [Span]
@@ -758,10 +747,12 @@ instance ToJSON BatchWriteSpansRequest where
 -- | Attributes of a span with a key:value format.
 --
 -- /See:/ 'attributes' smart constructor.
-data Attributes = Attributes'
+data Attributes =
+  Attributes'
     { _aDroppedAttributesCount :: !(Maybe (Textual Int32))
     , _aAttributeMap           :: !(Maybe AttributesAttributeMap)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Attributes' with the minimum fields required to make a request.
 --
@@ -773,10 +764,7 @@ data Attributes = Attributes'
 attributes
     :: Attributes
 attributes =
-    Attributes'
-    { _aDroppedAttributesCount = Nothing
-    , _aAttributeMap = Nothing
-    }
+  Attributes' {_aDroppedAttributesCount = Nothing, _aAttributeMap = Nothing}
 
 -- | The number of dropped attributes after the maximum size was enforced. If
 -- 0 then no attributes were dropped.
@@ -819,12 +807,14 @@ instance ToJSON Attributes where
 -- maximum of 128 network events are allowed per Span.
 --
 -- /See:/ 'networkEvent' smart constructor.
-data NetworkEvent = NetworkEvent'
+data NetworkEvent =
+  NetworkEvent'
     { _neTime        :: !(Maybe DateTime')
     , _neMessageSize :: !(Maybe (Textual Word64))
     , _neType        :: !(Maybe NetworkEventType)
     , _neMessageId   :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkEvent' with the minimum fields required to make a request.
 --
@@ -840,7 +830,7 @@ data NetworkEvent = NetworkEvent'
 networkEvent
     :: NetworkEvent
 networkEvent =
-    NetworkEvent'
+  NetworkEvent'
     { _neTime = Nothing
     , _neMessageSize = Nothing
     , _neType = Nothing
@@ -894,10 +884,12 @@ instance ToJSON NetworkEvent where
 -- | Binary module.
 --
 -- /See:/ 'module'' smart constructor.
-data Module = Module'
+data Module =
+  Module'
     { _mBuildId :: !(Maybe TruncatableString)
     , _mModule  :: !(Maybe TruncatableString)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Module' with the minimum fields required to make a request.
 --
@@ -908,11 +900,7 @@ data Module = Module'
 -- * 'mModule'
 module'
     :: Module
-module' =
-    Module'
-    { _mBuildId = Nothing
-    , _mModule = Nothing
-    }
+module' = Module' {_mBuildId = Nothing, _mModule = Nothing}
 
 -- | Build_id is a unique identifier for the module, usually a hash of its
 -- contents (up to 128 characters).
@@ -942,11 +930,13 @@ instance ToJSON Module where
 -- pairs, or details of an RPC message sent\/received on the network.
 --
 -- /See:/ 'timeEvents' smart constructor.
-data TimeEvents = TimeEvents'
+data TimeEvents =
+  TimeEvents'
     { _teDroppedAnnotationsCount   :: !(Maybe (Textual Int32))
     , _teDroppedNetworkEventsCount :: !(Maybe (Textual Int32))
     , _teTimeEvent                 :: !(Maybe [TimeEvent])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimeEvents' with the minimum fields required to make a request.
 --
@@ -960,7 +950,7 @@ data TimeEvents = TimeEvents'
 timeEvents
     :: TimeEvents
 timeEvents =
-    TimeEvents'
+  TimeEvents'
     { _teDroppedAnnotationsCount = Nothing
     , _teDroppedNetworkEventsCount = Nothing
     , _teTimeEvent = Nothing
@@ -1011,10 +1001,12 @@ instance ToJSON TimeEvents where
 -- | Represents collection of StackFrames that can be truncated.
 --
 -- /See:/ 'stackFrames' smart constructor.
-data StackFrames = StackFrames'
+data StackFrames =
+  StackFrames'
     { _sfDroppedFramesCount :: !(Maybe (Textual Int32))
     , _sfFrame              :: !(Maybe [StackFrame])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StackFrames' with the minimum fields required to make a request.
 --
@@ -1025,11 +1017,7 @@ data StackFrames = StackFrames'
 -- * 'sfFrame'
 stackFrames
     :: StackFrames
-stackFrames =
-    StackFrames'
-    { _sfDroppedFramesCount = Nothing
-    , _sfFrame = Nothing
-    }
+stackFrames = StackFrames' {_sfDroppedFramesCount = Nothing, _sfFrame = Nothing}
 
 -- | The number of dropped stack frames after the maximum size was enforced.
 -- If 0 then no frames were dropped.
@@ -1063,7 +1051,8 @@ instance ToJSON StackFrames where
 -- | Represents a single stack frame in a stack trace.
 --
 -- /See:/ 'stackFrame' smart constructor.
-data StackFrame = StackFrame'
+data StackFrame =
+  StackFrame'
     { _sfLoadModule           :: !(Maybe Module)
     , _sfOriginalFunctionName :: !(Maybe TruncatableString)
     , _sfLineNumber           :: !(Maybe (Textual Int64))
@@ -1071,7 +1060,8 @@ data StackFrame = StackFrame'
     , _sfFunctionName         :: !(Maybe TruncatableString)
     , _sfColumnNumber         :: !(Maybe (Textual Int64))
     , _sfFileName             :: !(Maybe TruncatableString)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StackFrame' with the minimum fields required to make a request.
 --
@@ -1093,7 +1083,7 @@ data StackFrame = StackFrame'
 stackFrame
     :: StackFrame
 stackFrame =
-    StackFrame'
+  StackFrame'
     { _sfLoadModule = Nothing
     , _sfOriginalFunctionName = Nothing
     , _sfLineNumber = Nothing
@@ -1178,10 +1168,12 @@ instance ToJSON StackFrame where
 -- the same or different trace.
 --
 -- /See:/ 'links' smart constructor.
-data Links = Links'
+data Links =
+  Links'
     { _lDroppedLinksCount :: !(Maybe (Textual Int32))
     , _lLink              :: !(Maybe [Link])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Links' with the minimum fields required to make a request.
 --
@@ -1192,11 +1184,7 @@ data Links = Links'
 -- * 'lLink'
 links
     :: Links
-links =
-    Links'
-    { _lDroppedLinksCount = Nothing
-    , _lLink = Nothing
-    }
+links = Links' {_lDroppedLinksCount = Nothing, _lLink = Nothing}
 
 -- | The number of dropped links after the maximum size was enforced. If 0
 -- then no links were dropped.
@@ -1230,10 +1218,12 @@ instance ToJSON Links where
 -- | The response message for the \`ListTraces\` method.
 --
 -- /See:/ 'listTracesResponse' smart constructor.
-data ListTracesResponse = ListTracesResponse'
+data ListTracesResponse =
+  ListTracesResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTraces        :: !(Maybe [Trace])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTracesResponse' with the minimum fields required to make a request.
 --
@@ -1245,10 +1235,7 @@ data ListTracesResponse = ListTracesResponse'
 listTracesResponse
     :: ListTracesResponse
 listTracesResponse =
-    ListTracesResponse'
-    { _ltrNextPageToken = Nothing
-    , _ltrTraces = Nothing
-    }
+  ListTracesResponse' {_ltrNextPageToken = Nothing, _ltrTraces = Nothing}
 
 -- | If defined, indicates that there are more traces that match the request
 -- and that this value should be passed to the next request to continue
@@ -1283,11 +1270,13 @@ instance ToJSON ListTracesResponse where
 -- | A time-stamped annotation in the Span.
 --
 -- /See:/ 'timeEvent' smart constructor.
-data TimeEvent = TimeEvent'
+data TimeEvent =
+  TimeEvent'
     { _teAnnotation   :: !(Maybe Annotation)
     , _teTime         :: !(Maybe DateTime')
     , _teNetworkEvent :: !(Maybe NetworkEvent)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimeEvent' with the minimum fields required to make a request.
 --
@@ -1301,11 +1290,8 @@ data TimeEvent = TimeEvent'
 timeEvent
     :: TimeEvent
 timeEvent =
-    TimeEvent'
-    { _teAnnotation = Nothing
-    , _teTime = Nothing
-    , _teNetworkEvent = Nothing
-    }
+  TimeEvent'
+    {_teAnnotation = Nothing, _teTime = Nothing, _teNetworkEvent = Nothing}
 
 -- | One or more key:value pairs.
 teAnnotation :: Lens' TimeEvent (Maybe Annotation)
@@ -1345,9 +1331,11 @@ instance ToJSON TimeEvent where
 -- operation and including time information and operation details.
 --
 -- /See:/ 'trace' smart constructor.
-newtype Trace = Trace'
+newtype Trace =
+  Trace'
     { _tName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Trace' with the minimum fields required to make a request.
 --
@@ -1356,10 +1344,7 @@ newtype Trace = Trace'
 -- * 'tName'
 trace
     :: Trace
-trace =
-    Trace'
-    { _tName = Nothing
-    }
+trace = Trace' {_tName = Nothing}
 
 -- | The resource name of Trace in the format
 -- \`projects\/PROJECT_ID\/traces\/TRACE_ID\`. \`TRACE_ID\` is a unique

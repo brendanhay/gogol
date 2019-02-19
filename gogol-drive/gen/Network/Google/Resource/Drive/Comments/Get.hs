@@ -56,11 +56,13 @@ type CommentsGetResource =
 -- | Gets a comment by ID.
 --
 -- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet'
+data CommentsGet =
+  CommentsGet'
     { _cgFileId         :: !Text
     , _cgCommentId      :: !Text
     , _cgIncludeDeleted :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ commentsGet
     -> Text -- ^ 'cgCommentId'
     -> CommentsGet
 commentsGet pCgFileId_ pCgCommentId_ =
-    CommentsGet'
+  CommentsGet'
     { _cgFileId = pCgFileId_
     , _cgCommentId = pCgCommentId_
     , _cgIncludeDeleted = False

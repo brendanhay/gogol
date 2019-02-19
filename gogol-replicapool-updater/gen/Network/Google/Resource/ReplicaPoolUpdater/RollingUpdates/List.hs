@@ -64,13 +64,15 @@ type RollingUpdatesListResource =
 -- chronological order and paginated format.
 --
 -- /See:/ 'rollingUpdatesList' smart constructor.
-data RollingUpdatesList = RollingUpdatesList'
+data RollingUpdatesList =
+  RollingUpdatesList'
     { _rulProject    :: !Text
     , _rulZone       :: !Text
     , _rulFilter     :: !(Maybe Text)
     , _rulPageToken  :: !(Maybe Text)
     , _rulMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdatesList' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ rollingUpdatesList
     -> Text -- ^ 'rulZone'
     -> RollingUpdatesList
 rollingUpdatesList pRulProject_ pRulZone_ =
-    RollingUpdatesList'
+  RollingUpdatesList'
     { _rulProject = pRulProject_
     , _rulZone = pRulZone_
     , _rulFilter = Nothing

@@ -56,12 +56,14 @@ type EditsTestersPatchResource =
 
 --
 -- /See:/ 'editsTestersPatch' smart constructor.
-data EditsTestersPatch = EditsTestersPatch'
+data EditsTestersPatch =
+  EditsTestersPatch'
     { _etpTrack       :: !Text
     , _etpPackageName :: !Text
     , _etpPayload     :: !Testers
     , _etpEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsTestersPatch' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ editsTestersPatch
     -> Text -- ^ 'etpEditId'
     -> EditsTestersPatch
 editsTestersPatch pEtpTrack_ pEtpPackageName_ pEtpPayload_ pEtpEditId_ =
-    EditsTestersPatch'
+  EditsTestersPatch'
     { _etpTrack = pEtpTrack_
     , _etpPackageName = pEtpPackageName_
     , _etpPayload = pEtpPayload_

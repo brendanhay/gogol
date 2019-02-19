@@ -59,11 +59,13 @@ type EditsTracksGetResource =
 -- the APK version codes that are in this track.
 --
 -- /See:/ 'editsTracksGet' smart constructor.
-data EditsTracksGet = EditsTracksGet'
+data EditsTracksGet =
+  EditsTracksGet'
     { _etgtTrack       :: !Text
     , _etgtPackageName :: !Text
     , _etgtEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsTracksGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ editsTracksGet
     -> Text -- ^ 'etgtEditId'
     -> EditsTracksGet
 editsTracksGet pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
-    EditsTracksGet'
+  EditsTracksGet'
     { _etgtTrack = pEtgtTrack_
     , _etgtPackageName = pEtgtPackageName_
     , _etgtEditId = pEtgtEditId_

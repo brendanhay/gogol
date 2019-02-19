@@ -62,7 +62,8 @@ type ProjectsScanConfigsScanRunsStopResource =
 -- | Stops a ScanRun. The stopped ScanRun is returned.
 --
 -- /See:/ 'projectsScanConfigsScanRunsStop' smart constructor.
-data ProjectsScanConfigsScanRunsStop = ProjectsScanConfigsScanRunsStop'
+data ProjectsScanConfigsScanRunsStop =
+  ProjectsScanConfigsScanRunsStop'
     { _pscsrsXgafv          :: !(Maybe Xgafv)
     , _pscsrsUploadProtocol :: !(Maybe Text)
     , _pscsrsAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsScanConfigsScanRunsStop = ProjectsScanConfigsScanRunsStop'
     , _pscsrsPayload        :: !StopScanRunRequest
     , _pscsrsName           :: !Text
     , _pscsrsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsScanConfigsScanRunsStop' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsScanConfigsScanRunsStop
     -> Text -- ^ 'pscsrsName'
     -> ProjectsScanConfigsScanRunsStop
 projectsScanConfigsScanRunsStop pPscsrsPayload_ pPscsrsName_ =
-    ProjectsScanConfigsScanRunsStop'
+  ProjectsScanConfigsScanRunsStop'
     { _pscsrsXgafv = Nothing
     , _pscsrsUploadProtocol = Nothing
     , _pscsrsAccessToken = Nothing
@@ -147,7 +149,8 @@ pscsrsCallback
       (\ s a -> s{_pscsrsCallback = a})
 
 instance GoogleRequest
-         ProjectsScanConfigsScanRunsStop where
+           ProjectsScanConfigsScanRunsStop
+         where
         type Rs ProjectsScanConfigsScanRunsStop = ScanRun
         type Scopes ProjectsScanConfigsScanRunsStop =
              '["https://www.googleapis.com/auth/cloud-platform"]

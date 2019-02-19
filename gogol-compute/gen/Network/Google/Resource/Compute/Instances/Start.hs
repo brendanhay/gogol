@@ -62,12 +62,14 @@ type InstancesStartResource =
 -- For more information, see Restart an instance.
 --
 -- /See:/ 'instancesStart' smart constructor.
-data InstancesStart = InstancesStart'
+data InstancesStart =
+  InstancesStart'
     { _insnRequestId :: !(Maybe Text)
     , _insnProject   :: !Text
     , _insnZone      :: !Text
     , _insnInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesStart' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ instancesStart
     -> Text -- ^ 'insnInstance'
     -> InstancesStart
 instancesStart pInsnProject_ pInsnZone_ pInsnInstance_ =
-    InstancesStart'
+  InstancesStart'
     { _insnRequestId = Nothing
     , _insnProject = pInsnProject_
     , _insnZone = pInsnZone_

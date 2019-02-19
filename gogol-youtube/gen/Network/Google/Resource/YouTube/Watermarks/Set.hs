@@ -68,11 +68,13 @@ type WatermarksSetResource =
 -- | Uploads a watermark image to YouTube and sets it for a channel.
 --
 -- /See:/ 'watermarksSet' smart constructor.
-data WatermarksSet = WatermarksSet'
+data WatermarksSet =
+  WatermarksSet'
     { _wsChannelId              :: !Text
     , _wsPayload                :: !InvideoBranding
     , _wsOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WatermarksSet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ watermarksSet
     -> InvideoBranding -- ^ 'wsPayload'
     -> WatermarksSet
 watermarksSet pWsChannelId_ pWsPayload_ =
-    WatermarksSet'
+  WatermarksSet'
     { _wsChannelId = pWsChannelId_
     , _wsPayload = pWsPayload_
     , _wsOnBehalfOfContentOwner = Nothing

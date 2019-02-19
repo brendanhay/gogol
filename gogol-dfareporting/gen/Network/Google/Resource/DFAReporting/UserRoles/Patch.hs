@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'UserRolesPatch' request conforms to.
 type UserRolesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -56,11 +56,13 @@ type UserRolesPatchResource =
 -- | Updates an existing user role. This method supports patch semantics.
 --
 -- /See:/ 'userRolesPatch' smart constructor.
-data UserRolesPatch = UserRolesPatch'
+data UserRolesPatch =
+  UserRolesPatch'
     { _urpProFileId :: !(Textual Int64)
     , _urpPayload   :: !UserRole
     , _urpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserRolesPatch' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ userRolesPatch
     -> Int64 -- ^ 'urpId'
     -> UserRolesPatch
 userRolesPatch pUrpProFileId_ pUrpPayload_ pUrpId_ =
-    UserRolesPatch'
+  UserRolesPatch'
     { _urpProFileId = _Coerce # pUrpProFileId_
     , _urpPayload = pUrpPayload_
     , _urpId = _Coerce # pUrpId_

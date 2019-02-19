@@ -66,7 +66,8 @@ type ProjectsAgentSessionsContextsListResource =
 -- | Returns the list of all contexts in the specified session.
 --
 -- /See:/ 'projectsAgentSessionsContextsList' smart constructor.
-data ProjectsAgentSessionsContextsList = ProjectsAgentSessionsContextsList'
+data ProjectsAgentSessionsContextsList =
+  ProjectsAgentSessionsContextsList'
     { _pasclParent         :: !Text
     , _pasclXgafv          :: !(Maybe Xgafv)
     , _pasclUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsAgentSessionsContextsList = ProjectsAgentSessionsContextsList'
     , _pasclPageToken      :: !(Maybe Text)
     , _pasclPageSize       :: !(Maybe (Textual Int32))
     , _pasclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentSessionsContextsList' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsAgentSessionsContextsList
     :: Text -- ^ 'pasclParent'
     -> ProjectsAgentSessionsContextsList
 projectsAgentSessionsContextsList pPasclParent_ =
-    ProjectsAgentSessionsContextsList'
+  ProjectsAgentSessionsContextsList'
     { _pasclParent = pPasclParent_
     , _pasclXgafv = Nothing
     , _pasclUploadProtocol = Nothing
@@ -162,7 +164,8 @@ pasclCallback
       (\ s a -> s{_pasclCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsContextsList where
+           ProjectsAgentSessionsContextsList
+         where
         type Rs ProjectsAgentSessionsContextsList =
              GoogleCloudDialogflowV2ListContextsResponse
         type Scopes ProjectsAgentSessionsContextsList =

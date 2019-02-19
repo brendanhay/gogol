@@ -62,13 +62,15 @@ type InterconnectsListResource =
 -- | Retrieves the list of interconnect available to the specified project.
 --
 -- /See:/ 'interconnectsList' smart constructor.
-data InterconnectsList = InterconnectsList'
+data InterconnectsList =
+  InterconnectsList'
     { _ilOrderBy    :: !(Maybe Text)
     , _ilProject    :: !Text
     , _ilFilter     :: !(Maybe Text)
     , _ilPageToken  :: !(Maybe Text)
     , _ilMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectsList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ interconnectsList
     :: Text -- ^ 'ilProject'
     -> InterconnectsList
 interconnectsList pIlProject_ =
-    InterconnectsList'
+  InterconnectsList'
     { _ilOrderBy = Nothing
     , _ilProject = pIlProject_
     , _ilFilter = Nothing

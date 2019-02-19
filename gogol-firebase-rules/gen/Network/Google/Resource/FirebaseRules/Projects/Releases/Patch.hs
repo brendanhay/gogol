@@ -66,7 +66,8 @@ type ProjectsReleasesPatchResource =
 -- supported. To create a \`Release\` use the CreateRelease method.
 --
 -- /See:/ 'projectsReleasesPatch' smart constructor.
-data ProjectsReleasesPatch = ProjectsReleasesPatch'
+data ProjectsReleasesPatch =
+  ProjectsReleasesPatch'
     { _prpXgafv          :: !(Maybe Xgafv)
     , _prpUploadProtocol :: !(Maybe Text)
     , _prpAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsReleasesPatch = ProjectsReleasesPatch'
     , _prpPayload        :: !UpdateReleaseRequest
     , _prpName           :: !Text
     , _prpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReleasesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ projectsReleasesPatch
     -> Text -- ^ 'prpName'
     -> ProjectsReleasesPatch
 projectsReleasesPatch pPrpPayload_ pPrpName_ =
-    ProjectsReleasesPatch'
+  ProjectsReleasesPatch'
     { _prpXgafv = Nothing
     , _prpUploadProtocol = Nothing
     , _prpAccessToken = Nothing

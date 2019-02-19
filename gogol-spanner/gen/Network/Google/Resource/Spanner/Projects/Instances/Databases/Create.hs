@@ -71,7 +71,8 @@ type ProjectsInstancesDatabasesCreateResource =
 -- response field type is Database, if successful.
 --
 -- /See:/ 'projectsInstancesDatabasesCreate' smart constructor.
-data ProjectsInstancesDatabasesCreate = ProjectsInstancesDatabasesCreate'
+data ProjectsInstancesDatabasesCreate =
+  ProjectsInstancesDatabasesCreate'
     { _pidcParent         :: !Text
     , _pidcXgafv          :: !(Maybe Xgafv)
     , _pidcUploadProtocol :: !(Maybe Text)
@@ -79,7 +80,8 @@ data ProjectsInstancesDatabasesCreate = ProjectsInstancesDatabasesCreate'
     , _pidcUploadType     :: !(Maybe Text)
     , _pidcPayload        :: !CreateDatabaseRequest
     , _pidcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesCreate' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsInstancesDatabasesCreate
     -> CreateDatabaseRequest -- ^ 'pidcPayload'
     -> ProjectsInstancesDatabasesCreate
 projectsInstancesDatabasesCreate pPidcParent_ pPidcPayload_ =
-    ProjectsInstancesDatabasesCreate'
+  ProjectsInstancesDatabasesCreate'
     { _pidcParent = pPidcParent_
     , _pidcXgafv = Nothing
     , _pidcUploadProtocol = Nothing
@@ -153,7 +155,8 @@ pidcCallback
   = lens _pidcCallback (\ s a -> s{_pidcCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesCreate where
+           ProjectsInstancesDatabasesCreate
+         where
         type Rs ProjectsInstancesDatabasesCreate = Operation
         type Scopes ProjectsInstancesDatabasesCreate =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -62,7 +62,8 @@ type SitesDomainsCreateResource =
 -- | Creates a domain mapping on the specified site.
 --
 -- /See:/ 'sitesDomainsCreate' smart constructor.
-data SitesDomainsCreate = SitesDomainsCreate'
+data SitesDomainsCreate =
+  SitesDomainsCreate'
     { _sdcParent         :: !Text
     , _sdcXgafv          :: !(Maybe Xgafv)
     , _sdcUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,8 @@ data SitesDomainsCreate = SitesDomainsCreate'
     , _sdcUploadType     :: !(Maybe Text)
     , _sdcPayload        :: !Domain
     , _sdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesDomainsCreate' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ sitesDomainsCreate
     -> Domain -- ^ 'sdcPayload'
     -> SitesDomainsCreate
 sitesDomainsCreate pSdcParent_ pSdcPayload_ =
-    SitesDomainsCreate'
+  SitesDomainsCreate'
     { _sdcParent = pSdcParent_
     , _sdcXgafv = Nothing
     , _sdcUploadProtocol = Nothing

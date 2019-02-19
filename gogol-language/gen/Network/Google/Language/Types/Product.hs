@@ -23,10 +23,12 @@ import           Network.Google.Prelude
 -- | The syntax analysis request message.
 --
 -- /See:/ 'analyzeSyntaxRequest' smart constructor.
-data AnalyzeSyntaxRequest = AnalyzeSyntaxRequest'
+data AnalyzeSyntaxRequest =
+  AnalyzeSyntaxRequest'
     { _asrEncodingType :: !(Maybe AnalyzeSyntaxRequestEncodingType)
     , _asrDocument     :: !(Maybe Document)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnalyzeSyntaxRequest' with the minimum fields required to make a request.
 --
@@ -38,10 +40,7 @@ data AnalyzeSyntaxRequest = AnalyzeSyntaxRequest'
 analyzeSyntaxRequest
     :: AnalyzeSyntaxRequest
 analyzeSyntaxRequest =
-    AnalyzeSyntaxRequest'
-    { _asrEncodingType = Nothing
-    , _asrDocument = Nothing
-    }
+  AnalyzeSyntaxRequest' {_asrEncodingType = Nothing, _asrDocument = Nothing}
 
 -- | The encoding type used by the API to calculate offsets.
 asrEncodingType :: Lens' AnalyzeSyntaxRequest (Maybe AnalyzeSyntaxRequestEncodingType)
@@ -73,10 +72,12 @@ instance ToJSON AnalyzeSyntaxRequest where
 -- http:\/\/www.aclweb.org\/anthology\/P13-2017
 --
 -- /See:/ 'dependencyEdge' smart constructor.
-data DependencyEdge = DependencyEdge'
+data DependencyEdge =
+  DependencyEdge'
     { _deHeadTokenIndex :: !(Maybe (Textual Int32))
     , _deLabel          :: !(Maybe DependencyEdgeLabel)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DependencyEdge' with the minimum fields required to make a request.
 --
@@ -88,10 +89,7 @@ data DependencyEdge = DependencyEdge'
 dependencyEdge
     :: DependencyEdge
 dependencyEdge =
-    DependencyEdge'
-    { _deHeadTokenIndex = Nothing
-    , _deLabel = Nothing
-    }
+  DependencyEdge' {_deHeadTokenIndex = Nothing, _deLabel = Nothing}
 
 -- | Represents the head of this token in the dependency tree. This is the
 -- index of the token which has an arc going to this token. The index is
@@ -125,9 +123,11 @@ instance ToJSON DependencyEdge where
 -- | The document classification request message.
 --
 -- /See:/ 'classifyTextRequest' smart constructor.
-newtype ClassifyTextRequest = ClassifyTextRequest'
+newtype ClassifyTextRequest =
+  ClassifyTextRequest'
     { _ctrDocument :: Maybe Document
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClassifyTextRequest' with the minimum fields required to make a request.
 --
@@ -136,10 +136,7 @@ newtype ClassifyTextRequest = ClassifyTextRequest'
 -- * 'ctrDocument'
 classifyTextRequest
     :: ClassifyTextRequest
-classifyTextRequest =
-    ClassifyTextRequest'
-    { _ctrDocument = Nothing
-    }
+classifyTextRequest = ClassifyTextRequest' {_ctrDocument = Nothing}
 
 -- | Input document.
 ctrDocument :: Lens' ClassifyTextRequest (Maybe Document)
@@ -193,11 +190,13 @@ instance ToJSON ClassifyTextRequest where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -210,12 +209,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -257,10 +251,12 @@ instance ToJSON Status where
 -- the text.
 --
 -- /See:/ 'sentiment' smart constructor.
-data Sentiment = Sentiment'
+data Sentiment =
+  Sentiment'
     { _sScore     :: !(Maybe (Textual Double))
     , _sMagnitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Sentiment' with the minimum fields required to make a request.
 --
@@ -271,11 +267,7 @@ data Sentiment = Sentiment'
 -- * 'sMagnitude'
 sentiment
     :: Sentiment
-sentiment =
-    Sentiment'
-    { _sScore = Nothing
-    , _sMagnitude = Nothing
-    }
+sentiment = Sentiment' {_sScore = Nothing, _sMagnitude = Nothing}
 
 -- | Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
 -- sentiment).
@@ -309,12 +301,14 @@ instance ToJSON Sentiment where
 -- | Represents the smallest syntactic building block of the text.
 --
 -- /See:/ 'token' smart constructor.
-data Token = Token'
+data Token =
+  Token'
     { _tDependencyEdge :: !(Maybe DependencyEdge)
     , _tText           :: !(Maybe TextSpan)
     , _tLemma          :: !(Maybe Text)
     , _tPartOfSpeech   :: !(Maybe PartOfSpeech)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Token' with the minimum fields required to make a request.
 --
@@ -330,7 +324,7 @@ data Token = Token'
 token
     :: Token
 token =
-    Token'
+  Token'
     { _tDependencyEdge = Nothing
     , _tText = Nothing
     , _tLemma = Nothing
@@ -377,9 +371,11 @@ instance ToJSON Token where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -390,9 +386,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -411,10 +405,12 @@ instance ToJSON StatusDetailsItem where
 -- | Represents a category returned from the text classifier.
 --
 -- /See:/ 'classificationCategory' smart constructor.
-data ClassificationCategory = ClassificationCategory'
+data ClassificationCategory =
+  ClassificationCategory'
     { _ccConfidence :: !(Maybe (Textual Double))
     , _ccName       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClassificationCategory' with the minimum fields required to make a request.
 --
@@ -426,10 +422,7 @@ data ClassificationCategory = ClassificationCategory'
 classificationCategory
     :: ClassificationCategory
 classificationCategory =
-    ClassificationCategory'
-    { _ccConfidence = Nothing
-    , _ccName = Nothing
-    }
+  ClassificationCategory' {_ccConfidence = Nothing, _ccName = Nothing}
 
 -- | The classifier\'s confidence of the category. Number represents how
 -- certain the classifier is that this category represents the given text.
@@ -461,11 +454,13 @@ instance ToJSON ClassificationCategory where
 -- multiple analysis types (sentiment, entities, and syntax) in one call.
 --
 -- /See:/ 'annotateTextRequest' smart constructor.
-data AnnotateTextRequest = AnnotateTextRequest'
+data AnnotateTextRequest =
+  AnnotateTextRequest'
     { _atrEncodingType :: !(Maybe AnnotateTextRequestEncodingType)
     , _atrFeatures     :: !(Maybe Features)
     , _atrDocument     :: !(Maybe Document)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnnotateTextRequest' with the minimum fields required to make a request.
 --
@@ -479,11 +474,8 @@ data AnnotateTextRequest = AnnotateTextRequest'
 annotateTextRequest
     :: AnnotateTextRequest
 annotateTextRequest =
-    AnnotateTextRequest'
-    { _atrEncodingType = Nothing
-    , _atrFeatures = Nothing
-    , _atrDocument = Nothing
-    }
+  AnnotateTextRequest'
+    {_atrEncodingType = Nothing, _atrFeatures = Nothing, _atrDocument = Nothing}
 
 -- | The encoding type used by the API to calculate offsets.
 atrEncodingType :: Lens' AnnotateTextRequest (Maybe AnnotateTextRequestEncodingType)
@@ -521,11 +513,13 @@ instance ToJSON AnnotateTextRequest where
 -- mentions are supported.
 --
 -- /See:/ 'entityMention' smart constructor.
-data EntityMention = EntityMention'
+data EntityMention =
+  EntityMention'
     { _emSentiment :: !(Maybe Sentiment)
     , _emText      :: !(Maybe TextSpan)
     , _emType      :: !(Maybe EntityMentionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntityMention' with the minimum fields required to make a request.
 --
@@ -539,11 +533,7 @@ data EntityMention = EntityMention'
 entityMention
     :: EntityMention
 entityMention =
-    EntityMention'
-    { _emSentiment = Nothing
-    , _emText = Nothing
-    , _emType = Nothing
-    }
+  EntityMention' {_emSentiment = Nothing, _emText = Nothing, _emType = Nothing}
 
 -- | For calls to AnalyzeEntitySentiment or if
 -- AnnotateTextRequest.Features.extract_entity_sentiment is set to true,
@@ -579,10 +569,12 @@ instance ToJSON EntityMention where
 -- | Represents an output piece of text.
 --
 -- /See:/ 'textSpan' smart constructor.
-data TextSpan = TextSpan'
+data TextSpan =
+  TextSpan'
     { _tsBeginOffSet :: !(Maybe (Textual Int32))
     , _tsContent     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextSpan' with the minimum fields required to make a request.
 --
@@ -593,11 +585,7 @@ data TextSpan = TextSpan'
 -- * 'tsContent'
 textSpan
     :: TextSpan
-textSpan =
-    TextSpan'
-    { _tsBeginOffSet = Nothing
-    , _tsContent = Nothing
-    }
+textSpan = TextSpan' {_tsBeginOffSet = Nothing, _tsContent = Nothing}
 
 -- | The API calculates the beginning offset of the content in the original
 -- document according to the EncodingType specified in the API request.
@@ -629,10 +617,12 @@ instance ToJSON TextSpan where
 -- | The entity-level sentiment analysis request message.
 --
 -- /See:/ 'analyzeEntitySentimentRequest' smart constructor.
-data AnalyzeEntitySentimentRequest = AnalyzeEntitySentimentRequest'
+data AnalyzeEntitySentimentRequest =
+  AnalyzeEntitySentimentRequest'
     { _aesrEncodingType :: !(Maybe AnalyzeEntitySentimentRequestEncodingType)
     , _aesrDocument     :: !(Maybe Document)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnalyzeEntitySentimentRequest' with the minimum fields required to make a request.
 --
@@ -644,10 +634,8 @@ data AnalyzeEntitySentimentRequest = AnalyzeEntitySentimentRequest'
 analyzeEntitySentimentRequest
     :: AnalyzeEntitySentimentRequest
 analyzeEntitySentimentRequest =
-    AnalyzeEntitySentimentRequest'
-    { _aesrEncodingType = Nothing
-    , _aesrDocument = Nothing
-    }
+  AnalyzeEntitySentimentRequest'
+    {_aesrEncodingType = Nothing, _aesrDocument = Nothing}
 
 -- | The encoding type used by the API to calculate offsets.
 aesrEncodingType :: Lens' AnalyzeEntitySentimentRequest (Maybe AnalyzeEntitySentimentRequestEncodingType)
@@ -677,14 +665,16 @@ instance ToJSON AnalyzeEntitySentimentRequest where
 -- | The text annotations response message.
 --
 -- /See:/ 'annotateTextResponse' smart constructor.
-data AnnotateTextResponse = AnnotateTextResponse'
+data AnnotateTextResponse =
+  AnnotateTextResponse'
     { _atrEntities          :: !(Maybe [Entity])
     , _atrTokens            :: !(Maybe [Token])
     , _atrDocumentSentiment :: !(Maybe Sentiment)
     , _atrCategories        :: !(Maybe [ClassificationCategory])
     , _atrSentences         :: !(Maybe [Sentence])
     , _atrLanguage          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnnotateTextResponse' with the minimum fields required to make a request.
 --
@@ -704,7 +694,7 @@ data AnnotateTextResponse = AnnotateTextResponse'
 annotateTextResponse
     :: AnnotateTextResponse
 annotateTextResponse =
-    AnnotateTextResponse'
+  AnnotateTextResponse'
     { _atrEntities = Nothing
     , _atrTokens = Nothing
     , _atrDocumentSentiment = Nothing
@@ -790,13 +780,15 @@ instance ToJSON AnnotateTextResponse where
 -- input.
 --
 -- /See:/ 'features' smart constructor.
-data Features = Features'
+data Features =
+  Features'
     { _fExtractSyntax            :: !(Maybe Bool)
     , _fExtractDocumentSentiment :: !(Maybe Bool)
     , _fClassifyText             :: !(Maybe Bool)
     , _fExtractEntitySentiment   :: !(Maybe Bool)
     , _fExtractEntities          :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Features' with the minimum fields required to make a request.
 --
@@ -814,7 +806,7 @@ data Features = Features'
 features
     :: Features
 features =
-    Features'
+  Features'
     { _fExtractSyntax = Nothing
     , _fExtractDocumentSentiment = Nothing
     , _fClassifyText = Nothing
@@ -879,12 +871,14 @@ instance ToJSON Features where
 -- Represents the input to API methods.
 --
 -- /See:/ 'document' smart constructor.
-data Document = Document'
+data Document =
+  Document'
     { _dContent       :: !(Maybe Text)
     , _dLanguage      :: !(Maybe Text)
     , _dGcsContentURI :: !(Maybe Text)
     , _dType          :: !(Maybe DocumentType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Document' with the minimum fields required to make a request.
 --
@@ -900,7 +894,7 @@ data Document = Document'
 document
     :: Document
 document =
-    Document'
+  Document'
     { _dContent = Nothing
     , _dLanguage = Nothing
     , _dGcsContentURI = Nothing
@@ -958,10 +952,12 @@ instance ToJSON Document where
 -- | The sentiment analysis request message.
 --
 -- /See:/ 'analyzeSentimentRequest' smart constructor.
-data AnalyzeSentimentRequest = AnalyzeSentimentRequest'
+data AnalyzeSentimentRequest =
+  AnalyzeSentimentRequest'
     { _aEncodingType :: !(Maybe AnalyzeSentimentRequestEncodingType)
     , _aDocument     :: !(Maybe Document)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnalyzeSentimentRequest' with the minimum fields required to make a request.
 --
@@ -973,10 +969,7 @@ data AnalyzeSentimentRequest = AnalyzeSentimentRequest'
 analyzeSentimentRequest
     :: AnalyzeSentimentRequest
 analyzeSentimentRequest =
-    AnalyzeSentimentRequest'
-    { _aEncodingType = Nothing
-    , _aDocument = Nothing
-    }
+  AnalyzeSentimentRequest' {_aEncodingType = Nothing, _aDocument = Nothing}
 
 -- | The encoding type used by the API to calculate sentence offsets.
 aEncodingType :: Lens' AnalyzeSentimentRequest (Maybe AnalyzeSentimentRequestEncodingType)
@@ -1006,10 +999,12 @@ instance ToJSON AnalyzeSentimentRequest where
 -- | The entity analysis response message.
 --
 -- /See:/ 'analyzeEntitiesResponse' smart constructor.
-data AnalyzeEntitiesResponse = AnalyzeEntitiesResponse'
+data AnalyzeEntitiesResponse =
+  AnalyzeEntitiesResponse'
     { _aerEntities :: !(Maybe [Entity])
     , _aerLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnalyzeEntitiesResponse' with the minimum fields required to make a request.
 --
@@ -1021,10 +1016,7 @@ data AnalyzeEntitiesResponse = AnalyzeEntitiesResponse'
 analyzeEntitiesResponse
     :: AnalyzeEntitiesResponse
 analyzeEntitiesResponse =
-    AnalyzeEntitiesResponse'
-    { _aerEntities = Nothing
-    , _aerLanguage = Nothing
-    }
+  AnalyzeEntitiesResponse' {_aerEntities = Nothing, _aerLanguage = Nothing}
 
 -- | The recognized entities in the input document.
 aerEntities :: Lens' AnalyzeEntitiesResponse [Entity]
@@ -1058,11 +1050,13 @@ instance ToJSON AnalyzeEntitiesResponse where
 -- | The sentiment analysis response message.
 --
 -- /See:/ 'analyzeSentimentResponse' smart constructor.
-data AnalyzeSentimentResponse = AnalyzeSentimentResponse'
+data AnalyzeSentimentResponse =
+  AnalyzeSentimentResponse'
     { _asrDocumentSentiment :: !(Maybe Sentiment)
     , _asrSentences         :: !(Maybe [Sentence])
     , _asrLanguage          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnalyzeSentimentResponse' with the minimum fields required to make a request.
 --
@@ -1076,7 +1070,7 @@ data AnalyzeSentimentResponse = AnalyzeSentimentResponse'
 analyzeSentimentResponse
     :: AnalyzeSentimentResponse
 analyzeSentimentResponse =
-    AnalyzeSentimentResponse'
+  AnalyzeSentimentResponse'
     { _asrDocumentSentiment = Nothing
     , _asrSentences = Nothing
     , _asrLanguage = Nothing
@@ -1123,10 +1117,12 @@ instance ToJSON AnalyzeSentimentResponse where
 -- | The entity analysis request message.
 --
 -- /See:/ 'analyzeEntitiesRequest' smart constructor.
-data AnalyzeEntitiesRequest = AnalyzeEntitiesRequest'
+data AnalyzeEntitiesRequest =
+  AnalyzeEntitiesRequest'
     { _aerEncodingType :: !(Maybe AnalyzeEntitiesRequestEncodingType)
     , _aerDocument     :: !(Maybe Document)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnalyzeEntitiesRequest' with the minimum fields required to make a request.
 --
@@ -1138,10 +1134,7 @@ data AnalyzeEntitiesRequest = AnalyzeEntitiesRequest'
 analyzeEntitiesRequest
     :: AnalyzeEntitiesRequest
 analyzeEntitiesRequest =
-    AnalyzeEntitiesRequest'
-    { _aerEncodingType = Nothing
-    , _aerDocument = Nothing
-    }
+  AnalyzeEntitiesRequest' {_aerEncodingType = Nothing, _aerDocument = Nothing}
 
 -- | The encoding type used by the API to calculate offsets.
 aerEncodingType :: Lens' AnalyzeEntitiesRequest (Maybe AnalyzeEntitiesRequestEncodingType)
@@ -1173,14 +1166,16 @@ instance ToJSON AnalyzeEntitiesRequest where
 -- such as salience and mentions, with entities.
 --
 -- /See:/ 'entity' smart constructor.
-data Entity = Entity'
+data Entity =
+  Entity'
     { _eSentiment :: !(Maybe Sentiment)
     , _eName      :: !(Maybe Text)
     , _eSalience  :: !(Maybe (Textual Double))
     , _eMetadata  :: !(Maybe EntityMetadata)
     , _eType      :: !(Maybe EntityType)
     , _eMentions  :: !(Maybe [EntityMention])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Entity' with the minimum fields required to make a request.
 --
@@ -1200,7 +1195,7 @@ data Entity = Entity'
 entity
     :: Entity
 entity =
-    Entity'
+  Entity'
     { _eSentiment = Nothing
     , _eName = Nothing
     , _eSalience = Nothing
@@ -1274,10 +1269,12 @@ instance ToJSON Entity where
 -- | The entity-level sentiment analysis response message.
 --
 -- /See:/ 'analyzeEntitySentimentResponse' smart constructor.
-data AnalyzeEntitySentimentResponse = AnalyzeEntitySentimentResponse'
+data AnalyzeEntitySentimentResponse =
+  AnalyzeEntitySentimentResponse'
     { _aesrEntities :: !(Maybe [Entity])
     , _aesrLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnalyzeEntitySentimentResponse' with the minimum fields required to make a request.
 --
@@ -1289,10 +1286,8 @@ data AnalyzeEntitySentimentResponse = AnalyzeEntitySentimentResponse'
 analyzeEntitySentimentResponse
     :: AnalyzeEntitySentimentResponse
 analyzeEntitySentimentResponse =
-    AnalyzeEntitySentimentResponse'
-    { _aesrEntities = Nothing
-    , _aesrLanguage = Nothing
-    }
+  AnalyzeEntitySentimentResponse'
+    {_aesrEntities = Nothing, _aesrLanguage = Nothing}
 
 -- | The recognized entities in the input document with associated
 -- sentiments.
@@ -1328,11 +1323,13 @@ instance ToJSON AnalyzeEntitySentimentResponse where
 -- | The syntax analysis response message.
 --
 -- /See:/ 'analyzeSyntaxResponse' smart constructor.
-data AnalyzeSyntaxResponse = AnalyzeSyntaxResponse'
+data AnalyzeSyntaxResponse =
+  AnalyzeSyntaxResponse'
     { _aTokens    :: !(Maybe [Token])
     , _aSentences :: !(Maybe [Sentence])
     , _aLanguage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnalyzeSyntaxResponse' with the minimum fields required to make a request.
 --
@@ -1346,11 +1343,8 @@ data AnalyzeSyntaxResponse = AnalyzeSyntaxResponse'
 analyzeSyntaxResponse
     :: AnalyzeSyntaxResponse
 analyzeSyntaxResponse =
-    AnalyzeSyntaxResponse'
-    { _aTokens = Nothing
-    , _aSentences = Nothing
-    , _aLanguage = Nothing
-    }
+  AnalyzeSyntaxResponse'
+    {_aTokens = Nothing, _aSentences = Nothing, _aLanguage = Nothing}
 
 -- | Tokens, along with their syntactic information, in the input document.
 aTokens :: Lens' AnalyzeSyntaxResponse [Token]
@@ -1395,9 +1389,11 @@ instance ToJSON AnalyzeSyntaxResponse where
 -- \"wikipedia_url\" and \"mid\", respectively.
 --
 -- /See:/ 'entityMetadata' smart constructor.
-newtype EntityMetadata = EntityMetadata'
+newtype EntityMetadata =
+  EntityMetadata'
     { _emAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntityMetadata' with the minimum fields required to make a request.
 --
@@ -1408,9 +1404,7 @@ entityMetadata
     :: HashMap Text Text -- ^ 'emAddtional'
     -> EntityMetadata
 entityMetadata pEmAddtional_ =
-    EntityMetadata'
-    { _emAddtional = _Coerce # pEmAddtional_
-    }
+  EntityMetadata' {_emAddtional = _Coerce # pEmAddtional_}
 
 emAddtional :: Lens' EntityMetadata (HashMap Text Text)
 emAddtional
@@ -1428,9 +1422,11 @@ instance ToJSON EntityMetadata where
 -- | The document classification response message.
 --
 -- /See:/ 'classifyTextResponse' smart constructor.
-newtype ClassifyTextResponse = ClassifyTextResponse'
+newtype ClassifyTextResponse =
+  ClassifyTextResponse'
     { _ctrCategories :: Maybe [ClassificationCategory]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ClassifyTextResponse' with the minimum fields required to make a request.
 --
@@ -1439,10 +1435,7 @@ newtype ClassifyTextResponse = ClassifyTextResponse'
 -- * 'ctrCategories'
 classifyTextResponse
     :: ClassifyTextResponse
-classifyTextResponse =
-    ClassifyTextResponse'
-    { _ctrCategories = Nothing
-    }
+classifyTextResponse = ClassifyTextResponse' {_ctrCategories = Nothing}
 
 -- | Categories representing the input document.
 ctrCategories :: Lens' ClassifyTextResponse [ClassificationCategory]
@@ -1469,7 +1462,8 @@ instance ToJSON ClassifyTextResponse where
 -- http:\/\/www.lrec-conf.org\/proceedings\/lrec2012\/pdf\/274_Paper.pdf
 --
 -- /See:/ 'partOfSpeech' smart constructor.
-data PartOfSpeech = PartOfSpeech'
+data PartOfSpeech =
+  PartOfSpeech'
     { _posProper      :: !(Maybe PartOfSpeechProper)
     , _posTag         :: !(Maybe PartOfSpeechTag)
     , _posPerson      :: !(Maybe PartOfSpeechPerson)
@@ -1482,7 +1476,8 @@ data PartOfSpeech = PartOfSpeech'
     , _posForm        :: !(Maybe PartOfSpeechForm)
     , _posTense       :: !(Maybe PartOfSpeechTense)
     , _posMood        :: !(Maybe PartOfSpeechMood)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartOfSpeech' with the minimum fields required to make a request.
 --
@@ -1514,7 +1509,7 @@ data PartOfSpeech = PartOfSpeech'
 partOfSpeech
     :: PartOfSpeech
 partOfSpeech =
-    PartOfSpeech'
+  PartOfSpeech'
     { _posProper = Nothing
     , _posTag = Nothing
     , _posPerson = Nothing
@@ -1619,10 +1614,12 @@ instance ToJSON PartOfSpeech where
 -- | Represents a sentence in the input document.
 --
 -- /See:/ 'sentence' smart constructor.
-data Sentence = Sentence'
+data Sentence =
+  Sentence'
     { _sSentiment :: !(Maybe Sentiment)
     , _sText      :: !(Maybe TextSpan)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Sentence' with the minimum fields required to make a request.
 --
@@ -1633,11 +1630,7 @@ data Sentence = Sentence'
 -- * 'sText'
 sentence
     :: Sentence
-sentence =
-    Sentence'
-    { _sSentiment = Nothing
-    , _sText = Nothing
-    }
+sentence = Sentence' {_sSentiment = Nothing, _sText = Nothing}
 
 -- | For calls to AnalyzeSentiment or if
 -- AnnotateTextRequest.Features.extract_document_sentiment is set to true,

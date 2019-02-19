@@ -68,7 +68,8 @@ type ProjectsIapTunnelTestIAMPermissionsResource =
 -- https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing_access_via_the_api
 --
 -- /See:/ 'projectsIapTunnelTestIAMPermissions' smart constructor.
-data ProjectsIapTunnelTestIAMPermissions = ProjectsIapTunnelTestIAMPermissions'
+data ProjectsIapTunnelTestIAMPermissions =
+  ProjectsIapTunnelTestIAMPermissions'
     { _pittipXgafv          :: !(Maybe Xgafv)
     , _pittipUploadProtocol :: !(Maybe Text)
     , _pittipAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsIapTunnelTestIAMPermissions = ProjectsIapTunnelTestIAMPermissions'
     , _pittipPayload        :: !TestIAMPermissionsRequest
     , _pittipResource       :: !Text
     , _pittipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsIapTunnelTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsIapTunnelTestIAMPermissions
     -> Text -- ^ 'pittipResource'
     -> ProjectsIapTunnelTestIAMPermissions
 projectsIapTunnelTestIAMPermissions pPittipPayload_ pPittipResource_ =
-    ProjectsIapTunnelTestIAMPermissions'
+  ProjectsIapTunnelTestIAMPermissions'
     { _pittipXgafv = Nothing
     , _pittipUploadProtocol = Nothing
     , _pittipAccessToken = Nothing
@@ -154,7 +156,8 @@ pittipCallback
       (\ s a -> s{_pittipCallback = a})
 
 instance GoogleRequest
-         ProjectsIapTunnelTestIAMPermissions where
+           ProjectsIapTunnelTestIAMPermissions
+         where
         type Rs ProjectsIapTunnelTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsIapTunnelTestIAMPermissions =

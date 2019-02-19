@@ -54,10 +54,12 @@ type GrouplicensesGetResource =
 -- | Retrieves details of an enterprise\'s group license for a product.
 --
 -- /See:/ 'grouplicensesGet' smart constructor.
-data GrouplicensesGet = GrouplicensesGet'
+data GrouplicensesGet =
+  GrouplicensesGet'
     { _ggEnterpriseId   :: !Text
     , _ggGroupLicenseId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GrouplicensesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ grouplicensesGet
     -> Text -- ^ 'ggGroupLicenseId'
     -> GrouplicensesGet
 grouplicensesGet pGgEnterpriseId_ pGgGroupLicenseId_ =
-    GrouplicensesGet'
-    { _ggEnterpriseId = pGgEnterpriseId_
-    , _ggGroupLicenseId = pGgGroupLicenseId_
-    }
+  GrouplicensesGet'
+    {_ggEnterpriseId = pGgEnterpriseId_, _ggGroupLicenseId = pGgGroupLicenseId_}
 
 -- | The ID of the enterprise.
 ggEnterpriseId :: Lens' GrouplicensesGet Text

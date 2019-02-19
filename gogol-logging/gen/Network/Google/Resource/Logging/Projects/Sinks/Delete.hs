@@ -61,14 +61,16 @@ type ProjectsSinksDeleteResource =
 -- service account is also deleted.
 --
 -- /See:/ 'projectsSinksDelete' smart constructor.
-data ProjectsSinksDelete = ProjectsSinksDelete'
+data ProjectsSinksDelete =
+  ProjectsSinksDelete'
     { _psdXgafv          :: !(Maybe Xgafv)
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdAccessToken    :: !(Maybe Text)
     , _psdUploadType     :: !(Maybe Text)
     , _psdSinkName       :: !Text
     , _psdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSinksDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsSinksDelete
     :: Text -- ^ 'psdSinkName'
     -> ProjectsSinksDelete
 projectsSinksDelete pPsdSinkName_ =
-    ProjectsSinksDelete'
+  ProjectsSinksDelete'
     { _psdXgafv = Nothing
     , _psdUploadProtocol = Nothing
     , _psdAccessToken = Nothing

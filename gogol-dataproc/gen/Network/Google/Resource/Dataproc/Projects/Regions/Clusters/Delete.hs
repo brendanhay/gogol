@@ -71,7 +71,8 @@ type ProjectsRegionsClustersDeleteResource =
 -- | Deletes a cluster in a project.
 --
 -- /See:/ 'projectsRegionsClustersDelete' smart constructor.
-data ProjectsRegionsClustersDelete = ProjectsRegionsClustersDelete'
+data ProjectsRegionsClustersDelete =
+  ProjectsRegionsClustersDelete'
     { _prcdXgafv          :: !(Maybe Xgafv)
     , _prcdRequestId      :: !(Maybe Text)
     , _prcdClusterUuid    :: !(Maybe Text)
@@ -82,7 +83,8 @@ data ProjectsRegionsClustersDelete = ProjectsRegionsClustersDelete'
     , _prcdRegion         :: !Text
     , _prcdProjectId      :: !Text
     , _prcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsClustersDelete' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ projectsRegionsClustersDelete
     -> Text -- ^ 'prcdProjectId'
     -> ProjectsRegionsClustersDelete
 projectsRegionsClustersDelete pPrcdClusterName_ pPrcdRegion_ pPrcdProjectId_ =
-    ProjectsRegionsClustersDelete'
+  ProjectsRegionsClustersDelete'
     { _prcdXgafv = Nothing
     , _prcdRequestId = Nothing
     , _prcdClusterUuid = Nothing

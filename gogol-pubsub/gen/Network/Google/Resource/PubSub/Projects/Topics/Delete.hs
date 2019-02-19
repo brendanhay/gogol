@@ -69,14 +69,16 @@ type ProjectsTopicsDeleteResource =
 -- \`_deleted-topic_\`.
 --
 -- /See:/ 'projectsTopicsDelete' smart constructor.
-data ProjectsTopicsDelete = ProjectsTopicsDelete'
+data ProjectsTopicsDelete =
+  ProjectsTopicsDelete'
     { _ptdXgafv          :: !(Maybe Xgafv)
     , _ptdUploadProtocol :: !(Maybe Text)
     , _ptdAccessToken    :: !(Maybe Text)
     , _ptdUploadType     :: !(Maybe Text)
     , _ptdTopic          :: !Text
     , _ptdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTopicsDelete' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsTopicsDelete
     :: Text -- ^ 'ptdTopic'
     -> ProjectsTopicsDelete
 projectsTopicsDelete pPtdTopic_ =
-    ProjectsTopicsDelete'
+  ProjectsTopicsDelete'
     { _ptdXgafv = Nothing
     , _ptdUploadProtocol = Nothing
     , _ptdAccessToken = Nothing

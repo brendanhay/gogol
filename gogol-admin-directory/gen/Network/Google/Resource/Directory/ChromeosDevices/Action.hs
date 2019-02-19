@@ -60,11 +60,13 @@ type ChromeosDevicesActionResource =
 -- | Take action on Chrome OS Device
 --
 -- /See:/ 'chromeosDevicesAction' smart constructor.
-data ChromeosDevicesAction = ChromeosDevicesAction'
+data ChromeosDevicesAction =
+  ChromeosDevicesAction'
     { _cdaResourceId :: !Text
     , _cdaPayload    :: !ChromeOSDeviceAction
     , _cdaCustomerId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChromeosDevicesAction' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ chromeosDevicesAction
     -> Text -- ^ 'cdaCustomerId'
     -> ChromeosDevicesAction
 chromeosDevicesAction pCdaResourceId_ pCdaPayload_ pCdaCustomerId_ =
-    ChromeosDevicesAction'
+  ChromeosDevicesAction'
     { _cdaResourceId = pCdaResourceId_
     , _cdaPayload = pCdaPayload_
     , _cdaCustomerId = pCdaCustomerId_

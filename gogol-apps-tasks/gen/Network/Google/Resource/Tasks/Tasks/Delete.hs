@@ -54,10 +54,12 @@ type TasksDeleteResource =
 -- | Deletes the specified task from the task list.
 --
 -- /See:/ 'tasksDelete' smart constructor.
-data TasksDelete = TasksDelete'
+data TasksDelete =
+  TasksDelete'
     { _tdTaskList :: !Text
     , _tdTask     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TasksDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ tasksDelete
     -> Text -- ^ 'tdTask'
     -> TasksDelete
 tasksDelete pTdTaskList_ pTdTask_ =
-    TasksDelete'
-    { _tdTaskList = pTdTaskList_
-    , _tdTask = pTdTask_
-    }
+  TasksDelete' {_tdTaskList = pTdTaskList_, _tdTask = pTdTask_}
 
 -- | Task list identifier.
 tdTaskList :: Lens' TasksDelete Text

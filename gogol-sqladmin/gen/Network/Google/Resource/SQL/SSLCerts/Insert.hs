@@ -62,11 +62,13 @@ type SSLCertsInsertResource =
 -- until the instance is restarted.
 --
 -- /See:/ 'sslCertsInsert' smart constructor.
-data SSLCertsInsert = SSLCertsInsert'
+data SSLCertsInsert =
+  SSLCertsInsert'
     { _sciProject  :: !Text
     , _sciPayload  :: !SSLCertsInsertRequest
     , _sciInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLCertsInsert' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ sslCertsInsert
     -> Text -- ^ 'sciInstance'
     -> SSLCertsInsert
 sslCertsInsert pSciProject_ pSciPayload_ pSciInstance_ =
-    SSLCertsInsert'
+  SSLCertsInsert'
     { _sciProject = pSciProject_
     , _sciPayload = pSciPayload_
     , _sciInstance = pSciInstance_

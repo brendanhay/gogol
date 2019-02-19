@@ -68,7 +68,8 @@ type ProjectsTriggersPatchResource =
 -- experimental.
 --
 -- /See:/ 'projectsTriggersPatch' smart constructor.
-data ProjectsTriggersPatch = ProjectsTriggersPatch'
+data ProjectsTriggersPatch =
+  ProjectsTriggersPatch'
     { _ptpXgafv          :: !(Maybe Xgafv)
     , _ptpUploadProtocol :: !(Maybe Text)
     , _ptpTriggerId      :: !Text
@@ -77,7 +78,8 @@ data ProjectsTriggersPatch = ProjectsTriggersPatch'
     , _ptpPayload        :: !BuildTrigger
     , _ptpProjectId      :: !Text
     , _ptpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTriggersPatch' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsTriggersPatch
     -> Text -- ^ 'ptpProjectId'
     -> ProjectsTriggersPatch
 projectsTriggersPatch pPtpTriggerId_ pPtpPayload_ pPtpProjectId_ =
-    ProjectsTriggersPatch'
+  ProjectsTriggersPatch'
     { _ptpXgafv = Nothing
     , _ptpUploadProtocol = Nothing
     , _ptpTriggerId = pPtpTriggerId_

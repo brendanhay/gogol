@@ -64,14 +64,16 @@ type ProjectsModelsGetResource =
 -- been deployed).
 --
 -- /See:/ 'projectsModelsGet' smart constructor.
-data ProjectsModelsGet = ProjectsModelsGet'
+data ProjectsModelsGet =
+  ProjectsModelsGet'
     { _pmgXgafv          :: !(Maybe Xgafv)
     , _pmgUploadProtocol :: !(Maybe Text)
     , _pmgAccessToken    :: !(Maybe Text)
     , _pmgUploadType     :: !(Maybe Text)
     , _pmgName           :: !Text
     , _pmgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsModelsGet' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ projectsModelsGet
     :: Text -- ^ 'pmgName'
     -> ProjectsModelsGet
 projectsModelsGet pPmgName_ =
-    ProjectsModelsGet'
+  ProjectsModelsGet'
     { _pmgXgafv = Nothing
     , _pmgUploadProtocol = Nothing
     , _pmgAccessToken = Nothing

@@ -57,12 +57,14 @@ type BucketsDeleteResource =
 -- | Permanently deletes an empty bucket.
 --
 -- /See:/ 'bucketsDelete' smart constructor.
-data BucketsDelete = BucketsDelete'
+data BucketsDelete =
+  BucketsDelete'
     { _bdIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _bdBucket                   :: !Text
     , _bdUserProject              :: !(Maybe Text)
     , _bdIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketsDelete' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ bucketsDelete
     :: Text -- ^ 'bdBucket'
     -> BucketsDelete
 bucketsDelete pBdBucket_ =
-    BucketsDelete'
+  BucketsDelete'
     { _bdIfMetagenerationMatch = Nothing
     , _bdBucket = pBdBucket_
     , _bdUserProject = Nothing

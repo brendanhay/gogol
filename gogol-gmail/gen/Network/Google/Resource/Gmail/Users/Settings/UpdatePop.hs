@@ -56,10 +56,12 @@ type UsersSettingsUpdatePopResource =
 -- | Updates POP settings.
 --
 -- /See:/ 'usersSettingsUpdatePop' smart constructor.
-data UsersSettingsUpdatePop = UsersSettingsUpdatePop'
+data UsersSettingsUpdatePop =
+  UsersSettingsUpdatePop'
     { _usupPayload :: !PopSettings
     , _usupUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsUpdatePop' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ usersSettingsUpdatePop
     :: PopSettings -- ^ 'usupPayload'
     -> UsersSettingsUpdatePop
 usersSettingsUpdatePop pUsupPayload_ =
-    UsersSettingsUpdatePop'
-    { _usupPayload = pUsupPayload_
-    , _usupUserId = "me"
-    }
+  UsersSettingsUpdatePop' {_usupPayload = pUsupPayload_, _usupUserId = "me"}
 
 -- | Multipart request metadata.
 usupPayload :: Lens' UsersSettingsUpdatePop PopSettings

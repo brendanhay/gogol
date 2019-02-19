@@ -63,7 +63,8 @@ type ProjectsTopicsCreateResource =
 -- <https://cloud.google.com/pubsub/docs/admin#resource_names resource name rules>.
 --
 -- /See:/ 'projectsTopicsCreate' smart constructor.
-data ProjectsTopicsCreate = ProjectsTopicsCreate'
+data ProjectsTopicsCreate =
+  ProjectsTopicsCreate'
     { _ptcXgafv          :: !(Maybe Xgafv)
     , _ptcUploadProtocol :: !(Maybe Text)
     , _ptcAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsTopicsCreate = ProjectsTopicsCreate'
     , _ptcPayload        :: !Topic
     , _ptcName           :: !Text
     , _ptcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTopicsCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsTopicsCreate
     -> Text -- ^ 'ptcName'
     -> ProjectsTopicsCreate
 projectsTopicsCreate pPtcPayload_ pPtcName_ =
-    ProjectsTopicsCreate'
+  ProjectsTopicsCreate'
     { _ptcXgafv = Nothing
     , _ptcUploadProtocol = Nothing
     , _ptcAccessToken = Nothing

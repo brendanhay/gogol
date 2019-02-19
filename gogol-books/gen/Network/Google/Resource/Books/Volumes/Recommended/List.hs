@@ -58,11 +58,13 @@ type VolumesRecommendedListResource =
 -- | Return a list of recommended books for the current user.
 --
 -- /See:/ 'volumesRecommendedList' smart constructor.
-data VolumesRecommendedList = VolumesRecommendedList'
+data VolumesRecommendedList =
+  VolumesRecommendedList'
     { _vrlLocale                   :: !(Maybe Text)
     , _vrlMaxAllowedMaturityRating :: !(Maybe VolumesRecommendedListMaxAllowedMaturityRating)
     , _vrlSource                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VolumesRecommendedList' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ data VolumesRecommendedList = VolumesRecommendedList'
 volumesRecommendedList
     :: VolumesRecommendedList
 volumesRecommendedList =
-    VolumesRecommendedList'
+  VolumesRecommendedList'
     { _vrlLocale = Nothing
     , _vrlMaxAllowedMaturityRating = Nothing
     , _vrlSource = Nothing

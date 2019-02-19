@@ -64,14 +64,16 @@ type ObjectAccessControlsUpdateResource =
 -- | Updates an ACL entry on the specified object.
 --
 -- /See:/ 'objectAccessControlsUpdate' smart constructor.
-data ObjectAccessControlsUpdate = ObjectAccessControlsUpdate'
+data ObjectAccessControlsUpdate =
+  ObjectAccessControlsUpdate'
     { _oacuBucket      :: !Text
     , _oacuPayload     :: !ObjectAccessControl
     , _oacuUserProject :: !(Maybe Text)
     , _oacuObject      :: !Text
     , _oacuEntity      :: !Text
     , _oacuGeneration  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ObjectAccessControlsUpdate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ objectAccessControlsUpdate
     -> Text -- ^ 'oacuEntity'
     -> ObjectAccessControlsUpdate
 objectAccessControlsUpdate pOacuBucket_ pOacuPayload_ pOacuObject_ pOacuEntity_ =
-    ObjectAccessControlsUpdate'
+  ObjectAccessControlsUpdate'
     { _oacuBucket = pOacuBucket_
     , _oacuPayload = pOacuPayload_
     , _oacuUserProject = Nothing

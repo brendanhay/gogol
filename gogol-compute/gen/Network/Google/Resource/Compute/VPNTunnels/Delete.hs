@@ -59,12 +59,14 @@ type VPNTunnelsDeleteResource =
 -- | Deletes the specified VpnTunnel resource.
 --
 -- /See:/ 'vpnTunnelsDelete' smart constructor.
-data VPNTunnelsDelete = VPNTunnelsDelete'
+data VPNTunnelsDelete =
+  VPNTunnelsDelete'
     { _vtdRequestId :: !(Maybe Text)
     , _vtdProject   :: !Text
     , _vtdVPNTunnel :: !Text
     , _vtdRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelsDelete' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ vpnTunnelsDelete
     -> Text -- ^ 'vtdRegion'
     -> VPNTunnelsDelete
 vpnTunnelsDelete pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
-    VPNTunnelsDelete'
+  VPNTunnelsDelete'
     { _vtdRequestId = Nothing
     , _vtdProject = pVtdProject_
     , _vtdVPNTunnel = pVtdVPNTunnel_

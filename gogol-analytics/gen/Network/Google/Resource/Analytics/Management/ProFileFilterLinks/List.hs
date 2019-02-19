@@ -64,13 +64,15 @@ type ManagementProFileFilterLinksListResource =
 -- | Lists all profile filter links for a profile.
 --
 -- /See:/ 'managementProFileFilterLinksList' smart constructor.
-data ManagementProFileFilterLinksList = ManagementProFileFilterLinksList'
+data ManagementProFileFilterLinksList =
+  ManagementProFileFilterLinksList'
     { _mpffllWebPropertyId :: !Text
     , _mpffllProFileId     :: !Text
     , _mpffllAccountId     :: !Text
     , _mpffllStartIndex    :: !(Maybe (Textual Int32))
     , _mpffllMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksList' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ managementProFileFilterLinksList
     -> Text -- ^ 'mpffllAccountId'
     -> ManagementProFileFilterLinksList
 managementProFileFilterLinksList pMpffllWebPropertyId_ pMpffllProFileId_ pMpffllAccountId_ =
-    ManagementProFileFilterLinksList'
+  ManagementProFileFilterLinksList'
     { _mpffllWebPropertyId = pMpffllWebPropertyId_
     , _mpffllProFileId = pMpffllProFileId_
     , _mpffllAccountId = pMpffllAccountId_
@@ -137,7 +139,8 @@ mpffllMaxResults
       . mapping _Coerce
 
 instance GoogleRequest
-         ManagementProFileFilterLinksList where
+           ManagementProFileFilterLinksList
+         where
         type Rs ManagementProFileFilterLinksList =
              ProFileFilterLinks
         type Scopes ManagementProFileFilterLinksList =

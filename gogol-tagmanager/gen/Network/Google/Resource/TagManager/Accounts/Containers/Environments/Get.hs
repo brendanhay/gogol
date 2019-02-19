@@ -50,9 +50,11 @@ type AccountsContainersEnvironmentsGetResource =
 -- | Gets a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsGet' smart constructor.
-newtype AccountsContainersEnvironmentsGet = AccountsContainersEnvironmentsGet'
+newtype AccountsContainersEnvironmentsGet =
+  AccountsContainersEnvironmentsGet'
     { _acegPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersEnvironmentsGet' with the minimum fields required to make a request.
 --
@@ -63,9 +65,7 @@ accountsContainersEnvironmentsGet
     :: Text -- ^ 'acegPath'
     -> AccountsContainersEnvironmentsGet
 accountsContainersEnvironmentsGet pAcegPath_ =
-    AccountsContainersEnvironmentsGet'
-    { _acegPath = pAcegPath_
-    }
+  AccountsContainersEnvironmentsGet' {_acegPath = pAcegPath_}
 
 -- | GTM Environment\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/environments\/{environment_id}
@@ -73,7 +73,8 @@ acegPath :: Lens' AccountsContainersEnvironmentsGet Text
 acegPath = lens _acegPath (\ s a -> s{_acegPath = a})
 
 instance GoogleRequest
-         AccountsContainersEnvironmentsGet where
+           AccountsContainersEnvironmentsGet
+         where
         type Rs AccountsContainersEnvironmentsGet =
              Environment
         type Scopes AccountsContainersEnvironmentsGet =

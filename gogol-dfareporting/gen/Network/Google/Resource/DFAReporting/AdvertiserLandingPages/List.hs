@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserLandingPagesList' request conforms to.
 type AdvertiserLandingPagesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserLandingPages" :>
@@ -78,7 +78,8 @@ type AdvertiserLandingPagesListResource =
 -- | Retrieves a list of landing pages.
 --
 -- /See:/ 'advertiserLandingPagesList' smart constructor.
-data AdvertiserLandingPagesList = AdvertiserLandingPagesList'
+data AdvertiserLandingPagesList =
+  AdvertiserLandingPagesList'
     { _alplCampaignIds   :: !(Maybe [Textual Int64])
     , _alplSearchString  :: !(Maybe Text)
     , _alplIds           :: !(Maybe [Textual Int64])
@@ -90,7 +91,8 @@ data AdvertiserLandingPagesList = AdvertiserLandingPagesList'
     , _alplAdvertiserIds :: !(Maybe [Textual Int64])
     , _alplArchived      :: !(Maybe Bool)
     , _alplMaxResults    :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdvertiserLandingPagesList' with the minimum fields required to make a request.
 --
@@ -121,7 +123,7 @@ advertiserLandingPagesList
     :: Int64 -- ^ 'alplProFileId'
     -> AdvertiserLandingPagesList
 advertiserLandingPagesList pAlplProFileId_ =
-    AdvertiserLandingPagesList'
+  AdvertiserLandingPagesList'
     { _alplCampaignIds = Nothing
     , _alplSearchString = Nothing
     , _alplIds = Nothing

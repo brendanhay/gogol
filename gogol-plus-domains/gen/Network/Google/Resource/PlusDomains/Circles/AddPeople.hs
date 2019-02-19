@@ -58,11 +58,13 @@ type CirclesAddPeopleResource =
 -- including the number of circle adds. Learn More.
 --
 -- /See:/ 'circlesAddPeople' smart constructor.
-data CirclesAddPeople = CirclesAddPeople'
+data CirclesAddPeople =
+  CirclesAddPeople'
     { _capEmail    :: !(Maybe [Text])
     , _capUserId   :: !(Maybe [Text])
     , _capCircleId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CirclesAddPeople' with the minimum fields required to make a request.
 --
@@ -77,11 +79,8 @@ circlesAddPeople
     :: Text -- ^ 'capCircleId'
     -> CirclesAddPeople
 circlesAddPeople pCapCircleId_ =
-    CirclesAddPeople'
-    { _capEmail = Nothing
-    , _capUserId = Nothing
-    , _capCircleId = pCapCircleId_
-    }
+  CirclesAddPeople'
+    {_capEmail = Nothing, _capUserId = Nothing, _capCircleId = pCapCircleId_}
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
 capEmail :: Lens' CirclesAddPeople [Text]

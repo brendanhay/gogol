@@ -87,7 +87,8 @@ type ProjectsLocationsRegistriesGroupsDevicesSendCommandToDeviceResource
 -- QoS 0, no acknowledgment will be expected from the device.
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsDevicesSendCommandToDevice' smart constructor.
-data ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice = ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice'
+data ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice =
+  ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice'
     { _plrgdsctdXgafv          :: !(Maybe Xgafv)
     , _plrgdsctdUploadProtocol :: !(Maybe Text)
     , _plrgdsctdAccessToken    :: !(Maybe Text)
@@ -95,7 +96,8 @@ data ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice = ProjectsLocat
     , _plrgdsctdPayload        :: !SendCommandToDeviceRequest
     , _plrgdsctdName           :: !Text
     , _plrgdsctdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice' with the minimum fields required to make a request.
 --
@@ -119,7 +121,7 @@ projectsLocationsRegistriesGroupsDevicesSendCommandToDevice
     -> Text -- ^ 'plrgdsctdName'
     -> ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice
 projectsLocationsRegistriesGroupsDevicesSendCommandToDevice pPlrgdsctdPayload_ pPlrgdsctdName_ =
-    ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice'
+  ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice'
     { _plrgdsctdXgafv = Nothing
     , _plrgdsctdUploadProtocol = Nothing
     , _plrgdsctdAccessToken = Nothing
@@ -175,7 +177,7 @@ plrgdsctdCallback
       (\ s a -> s{_plrgdsctdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice
+           ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice
          where
         type Rs
                ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice

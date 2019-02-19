@@ -76,7 +76,8 @@ type ActivitiesListResource =
 -- using the source parameter.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList'
+data ActivitiesList =
+  ActivitiesList'
     { _alDriveFileId      :: !(Maybe Text)
     , _alDriveAncestorId  :: !(Maybe Text)
     , _alGroupingStrategy :: !ActivitiesListGroupingStrategy
@@ -84,7 +85,8 @@ data ActivitiesList = ActivitiesList'
     , _alSource           :: !(Maybe Text)
     , _alPageToken        :: !(Maybe Text)
     , _alPageSize         :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ data ActivitiesList = ActivitiesList'
 activitiesList
     :: ActivitiesList
 activitiesList =
-    ActivitiesList'
+  ActivitiesList'
     { _alDriveFileId = Nothing
     , _alDriveAncestorId = Nothing
     , _alGroupingStrategy = DriveUi

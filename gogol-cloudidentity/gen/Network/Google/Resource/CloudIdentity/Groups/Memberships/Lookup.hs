@@ -69,7 +69,8 @@ type GroupsMembershipsLookupResource =
 -- Membership within a Group by member\'s EntityKey.
 --
 -- /See:/ 'groupsMembershipsLookup' smart constructor.
-data GroupsMembershipsLookup = GroupsMembershipsLookup'
+data GroupsMembershipsLookup =
+  GroupsMembershipsLookup'
     { _gmlParent             :: !Text
     , _gmlXgafv              :: !(Maybe Xgafv)
     , _gmlUploadProtocol     :: !(Maybe Text)
@@ -78,7 +79,8 @@ data GroupsMembershipsLookup = GroupsMembershipsLookup'
     , _gmlMemberKeyId        :: !(Maybe Text)
     , _gmlMemberKeyNamespace :: !(Maybe Text)
     , _gmlCallback           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsMembershipsLookup' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ groupsMembershipsLookup
     :: Text -- ^ 'gmlParent'
     -> GroupsMembershipsLookup
 groupsMembershipsLookup pGmlParent_ =
-    GroupsMembershipsLookup'
+  GroupsMembershipsLookup'
     { _gmlParent = pGmlParent_
     , _gmlXgafv = Nothing
     , _gmlUploadProtocol = Nothing

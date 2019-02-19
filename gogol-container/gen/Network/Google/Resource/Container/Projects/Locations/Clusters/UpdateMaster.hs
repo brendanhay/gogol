@@ -62,7 +62,8 @@ type ProjectsLocationsClustersUpdateMasterResource =
 -- | Updates the master for a specific cluster.
 --
 -- /See:/ 'projectsLocationsClustersUpdateMaster' smart constructor.
-data ProjectsLocationsClustersUpdateMaster = ProjectsLocationsClustersUpdateMaster'
+data ProjectsLocationsClustersUpdateMaster =
+  ProjectsLocationsClustersUpdateMaster'
     { _plcumXgafv          :: !(Maybe Xgafv)
     , _plcumUploadProtocol :: !(Maybe Text)
     , _plcumAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsLocationsClustersUpdateMaster = ProjectsLocationsClustersUpdateMast
     , _plcumPayload        :: !UpdateMasterRequest
     , _plcumName           :: !Text
     , _plcumCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersUpdateMaster' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsLocationsClustersUpdateMaster
     -> Text -- ^ 'plcumName'
     -> ProjectsLocationsClustersUpdateMaster
 projectsLocationsClustersUpdateMaster pPlcumPayload_ pPlcumName_ =
-    ProjectsLocationsClustersUpdateMaster'
+  ProjectsLocationsClustersUpdateMaster'
     { _plcumXgafv = Nothing
     , _plcumUploadProtocol = Nothing
     , _plcumAccessToken = Nothing
@@ -145,7 +147,8 @@ plcumCallback
       (\ s a -> s{_plcumCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersUpdateMaster where
+           ProjectsLocationsClustersUpdateMaster
+         where
         type Rs ProjectsLocationsClustersUpdateMaster =
              Operation
         type Scopes ProjectsLocationsClustersUpdateMaster =

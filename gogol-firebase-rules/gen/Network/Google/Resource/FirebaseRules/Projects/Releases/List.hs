@@ -71,7 +71,8 @@ type ProjectsReleasesListResource =
 -- any combination thereof.
 --
 -- /See:/ 'projectsReleasesList' smart constructor.
-data ProjectsReleasesList = ProjectsReleasesList'
+data ProjectsReleasesList =
+  ProjectsReleasesList'
     { _prlrXgafv          :: !(Maybe Xgafv)
     , _prlrUploadProtocol :: !(Maybe Text)
     , _prlrAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsReleasesList = ProjectsReleasesList'
     , _prlrPageToken      :: !(Maybe Text)
     , _prlrPageSize       :: !(Maybe (Textual Int32))
     , _prlrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReleasesList' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ projectsReleasesList
     :: Text -- ^ 'prlrName'
     -> ProjectsReleasesList
 projectsReleasesList pPrlrName_ =
-    ProjectsReleasesList'
+  ProjectsReleasesList'
     { _prlrXgafv = Nothing
     , _prlrUploadProtocol = Nothing
     , _prlrAccessToken = Nothing

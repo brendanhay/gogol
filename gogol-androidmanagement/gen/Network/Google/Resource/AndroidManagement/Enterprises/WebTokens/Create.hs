@@ -64,7 +64,8 @@ type EnterprisesWebTokensCreateResource =
 -- for a given enterprise.
 --
 -- /See:/ 'enterprisesWebTokensCreate' smart constructor.
-data EnterprisesWebTokensCreate = EnterprisesWebTokensCreate'
+data EnterprisesWebTokensCreate =
+  EnterprisesWebTokensCreate'
     { _ewtcParent         :: !Text
     , _ewtcXgafv          :: !(Maybe Xgafv)
     , _ewtcUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,8 @@ data EnterprisesWebTokensCreate = EnterprisesWebTokensCreate'
     , _ewtcUploadType     :: !(Maybe Text)
     , _ewtcPayload        :: !WebToken
     , _ewtcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesWebTokensCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ enterprisesWebTokensCreate
     -> WebToken -- ^ 'ewtcPayload'
     -> EnterprisesWebTokensCreate
 enterprisesWebTokensCreate pEwtcParent_ pEwtcPayload_ =
-    EnterprisesWebTokensCreate'
+  EnterprisesWebTokensCreate'
     { _ewtcParent = pEwtcParent_
     , _ewtcXgafv = Nothing
     , _ewtcUploadProtocol = Nothing

@@ -65,7 +65,8 @@ type CustomersConfigurationsCreateResource =
 -- configuration to devices.
 --
 -- /See:/ 'customersConfigurationsCreate' smart constructor.
-data CustomersConfigurationsCreate = CustomersConfigurationsCreate'
+data CustomersConfigurationsCreate =
+  CustomersConfigurationsCreate'
     { _cccParent         :: !Text
     , _cccXgafv          :: !(Maybe Xgafv)
     , _cccUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data CustomersConfigurationsCreate = CustomersConfigurationsCreate'
     , _cccUploadType     :: !(Maybe Text)
     , _cccPayload        :: !Configuration
     , _cccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomersConfigurationsCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ customersConfigurationsCreate
     -> Configuration -- ^ 'cccPayload'
     -> CustomersConfigurationsCreate
 customersConfigurationsCreate pCccParent_ pCccPayload_ =
-    CustomersConfigurationsCreate'
+  CustomersConfigurationsCreate'
     { _cccParent = pCccParent_
     , _cccXgafv = Nothing
     , _cccUploadProtocol = Nothing

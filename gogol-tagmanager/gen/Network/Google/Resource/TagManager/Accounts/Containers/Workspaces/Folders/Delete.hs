@@ -51,9 +51,11 @@ type AccountsContainersWorkspacesFoldersDeleteResource
 -- | Deletes a GTM Folder.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersDelete' smart constructor.
-newtype AccountsContainersWorkspacesFoldersDelete = AccountsContainersWorkspacesFoldersDelete'
+newtype AccountsContainersWorkspacesFoldersDelete =
+  AccountsContainersWorkspacesFoldersDelete'
     { _acwfdPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersDelete' with the minimum fields required to make a request.
 --
@@ -64,9 +66,7 @@ accountsContainersWorkspacesFoldersDelete
     :: Text -- ^ 'acwfdPath'
     -> AccountsContainersWorkspacesFoldersDelete
 accountsContainersWorkspacesFoldersDelete pAcwfdPath_ =
-    AccountsContainersWorkspacesFoldersDelete'
-    { _acwfdPath = pAcwfdPath_
-    }
+  AccountsContainersWorkspacesFoldersDelete' {_acwfdPath = pAcwfdPath_}
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}
@@ -75,7 +75,8 @@ acwfdPath
   = lens _acwfdPath (\ s a -> s{_acwfdPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesFoldersDelete where
+           AccountsContainersWorkspacesFoldersDelete
+         where
         type Rs AccountsContainersWorkspacesFoldersDelete =
              ()
         type Scopes AccountsContainersWorkspacesFoldersDelete

@@ -65,7 +65,8 @@ type FoldersExclusionsListResource =
 -- | Lists all the exclusions in a parent resource.
 --
 -- /See:/ 'foldersExclusionsList' smart constructor.
-data FoldersExclusionsList = FoldersExclusionsList'
+data FoldersExclusionsList =
+  FoldersExclusionsList'
     { _felParent         :: !Text
     , _felXgafv          :: !(Maybe Xgafv)
     , _felUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data FoldersExclusionsList = FoldersExclusionsList'
     , _felPageToken      :: !(Maybe Text)
     , _felPageSize       :: !(Maybe (Textual Int32))
     , _felCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersExclusionsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ foldersExclusionsList
     :: Text -- ^ 'felParent'
     -> FoldersExclusionsList
 foldersExclusionsList pFelParent_ =
-    FoldersExclusionsList'
+  FoldersExclusionsList'
     { _felParent = pFelParent_
     , _felXgafv = Nothing
     , _felUploadProtocol = Nothing

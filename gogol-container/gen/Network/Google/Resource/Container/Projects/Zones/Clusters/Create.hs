@@ -83,7 +83,8 @@ type ProjectsZonesClustersCreateResource =
 -- by the cluster.
 --
 -- /See:/ 'projectsZonesClustersCreate' smart constructor.
-data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate'
+data ProjectsZonesClustersCreate =
+  ProjectsZonesClustersCreate'
     { _pzccXgafv          :: !(Maybe Xgafv)
     , _pzccUploadProtocol :: !(Maybe Text)
     , _pzccAccessToken    :: !(Maybe Text)
@@ -92,7 +93,8 @@ data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate'
     , _pzccPayload        :: !CreateClusterRequest
     , _pzccProjectId      :: !Text
     , _pzccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersCreate' with the minimum fields required to make a request.
 --
@@ -119,7 +121,7 @@ projectsZonesClustersCreate
     -> Text -- ^ 'pzccProjectId'
     -> ProjectsZonesClustersCreate
 projectsZonesClustersCreate pPzccZone_ pPzccPayload_ pPzccProjectId_ =
-    ProjectsZonesClustersCreate'
+  ProjectsZonesClustersCreate'
     { _pzccXgafv = Nothing
     , _pzccUploadProtocol = Nothing
     , _pzccAccessToken = Nothing

@@ -62,13 +62,15 @@ type DisksAggregatedListResource =
 -- | Retrieves an aggregated list of persistent disks.
 --
 -- /See:/ 'disksAggregatedList' smart constructor.
-data DisksAggregatedList = DisksAggregatedList'
+data DisksAggregatedList =
+  DisksAggregatedList'
     { _dalOrderBy    :: !(Maybe Text)
     , _dalProject    :: !Text
     , _dalFilter     :: !(Maybe Text)
     , _dalPageToken  :: !(Maybe Text)
     , _dalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisksAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ disksAggregatedList
     :: Text -- ^ 'dalProject'
     -> DisksAggregatedList
 disksAggregatedList pDalProject_ =
-    DisksAggregatedList'
+  DisksAggregatedList'
     { _dalOrderBy = Nothing
     , _dalProject = pDalProject_
     , _dalFilter = Nothing

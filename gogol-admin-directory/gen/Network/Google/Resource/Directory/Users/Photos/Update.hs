@@ -56,10 +56,12 @@ type UsersPhotosUpdateResource =
 -- | Add a photo for the user
 --
 -- /See:/ 'usersPhotosUpdate' smart constructor.
-data UsersPhotosUpdate = UsersPhotosUpdate'
+data UsersPhotosUpdate =
+  UsersPhotosUpdate'
     { _upuPayload :: !UserPhoto
     , _upuUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersPhotosUpdate' with the minimum fields required to make a request.
 --
@@ -73,10 +75,7 @@ usersPhotosUpdate
     -> Text -- ^ 'upuUserKey'
     -> UsersPhotosUpdate
 usersPhotosUpdate pUpuPayload_ pUpuUserKey_ =
-    UsersPhotosUpdate'
-    { _upuPayload = pUpuPayload_
-    , _upuUserKey = pUpuUserKey_
-    }
+  UsersPhotosUpdate' {_upuPayload = pUpuPayload_, _upuUserKey = pUpuUserKey_}
 
 -- | Multipart request metadata.
 upuPayload :: Lens' UsersPhotosUpdate UserPhoto

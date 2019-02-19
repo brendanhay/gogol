@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemsList' request conforms to.
 type OperatingSystemsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystems" :>
@@ -53,9 +53,11 @@ type OperatingSystemsListResource =
 -- | Retrieves a list of operating systems.
 --
 -- /See:/ 'operatingSystemsList' smart constructor.
-newtype OperatingSystemsList = OperatingSystemsList'
+newtype OperatingSystemsList =
+  OperatingSystemsList'
     { _oslProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperatingSystemsList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ operatingSystemsList
     :: Int64 -- ^ 'oslProFileId'
     -> OperatingSystemsList
 operatingSystemsList pOslProFileId_ =
-    OperatingSystemsList'
-    { _oslProFileId = _Coerce # pOslProFileId_
-    }
+  OperatingSystemsList' {_oslProFileId = _Coerce # pOslProFileId_}
 
 -- | User profile ID associated with this request.
 oslProFileId :: Lens' OperatingSystemsList Int64

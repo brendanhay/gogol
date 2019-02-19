@@ -64,7 +64,8 @@ type ProjectsJobsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsJobsSetIAMPolicy' smart constructor.
-data ProjectsJobsSetIAMPolicy = ProjectsJobsSetIAMPolicy'
+data ProjectsJobsSetIAMPolicy =
+  ProjectsJobsSetIAMPolicy'
     { _pjsipXgafv          :: !(Maybe Xgafv)
     , _pjsipUploadProtocol :: !(Maybe Text)
     , _pjsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsJobsSetIAMPolicy = ProjectsJobsSetIAMPolicy'
     , _pjsipPayload        :: !GoogleIAMV1__SetIAMPolicyRequest
     , _pjsipResource       :: !Text
     , _pjsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsJobsSetIAMPolicy
     -> Text -- ^ 'pjsipResource'
     -> ProjectsJobsSetIAMPolicy
 projectsJobsSetIAMPolicy pPjsipPayload_ pPjsipResource_ =
-    ProjectsJobsSetIAMPolicy'
+  ProjectsJobsSetIAMPolicy'
     { _pjsipXgafv = Nothing
     , _pjsipUploadProtocol = Nothing
     , _pjsipAccessToken = Nothing

@@ -63,13 +63,15 @@ type ManagementExperimentsListResource =
 -- | Lists experiments to which the user has access.
 --
 -- /See:/ 'managementExperimentsList' smart constructor.
-data ManagementExperimentsList = ManagementExperimentsList'
+data ManagementExperimentsList =
+  ManagementExperimentsList'
     { _melWebPropertyId :: !Text
     , _melProFileId     :: !Text
     , _melAccountId     :: !Text
     , _melStartIndex    :: !(Maybe (Textual Int32))
     , _melMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementExperimentsList' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ managementExperimentsList
     -> Text -- ^ 'melAccountId'
     -> ManagementExperimentsList
 managementExperimentsList pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ =
-    ManagementExperimentsList'
+  ManagementExperimentsList'
     { _melWebPropertyId = pMelWebPropertyId_
     , _melProFileId = pMelProFileId_
     , _melAccountId = pMelAccountId_

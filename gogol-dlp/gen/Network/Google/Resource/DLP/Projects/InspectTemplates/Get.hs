@@ -62,14 +62,16 @@ type ProjectsInspectTemplatesGetResource =
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'projectsInspectTemplatesGet' smart constructor.
-data ProjectsInspectTemplatesGet = ProjectsInspectTemplatesGet'
+data ProjectsInspectTemplatesGet =
+  ProjectsInspectTemplatesGet'
     { _pitgXgafv          :: !(Maybe Xgafv)
     , _pitgUploadProtocol :: !(Maybe Text)
     , _pitgAccessToken    :: !(Maybe Text)
     , _pitgUploadType     :: !(Maybe Text)
     , _pitgName           :: !Text
     , _pitgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInspectTemplatesGet' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ projectsInspectTemplatesGet
     :: Text -- ^ 'pitgName'
     -> ProjectsInspectTemplatesGet
 projectsInspectTemplatesGet pPitgName_ =
-    ProjectsInspectTemplatesGet'
+  ProjectsInspectTemplatesGet'
     { _pitgXgafv = Nothing
     , _pitgUploadProtocol = Nothing
     , _pitgAccessToken = Nothing

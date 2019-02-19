@@ -62,14 +62,16 @@ type ProjectsModelsGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsModelsGetIAMPolicy' smart constructor.
-data ProjectsModelsGetIAMPolicy = ProjectsModelsGetIAMPolicy'
+data ProjectsModelsGetIAMPolicy =
+  ProjectsModelsGetIAMPolicy'
     { _pmgipXgafv          :: !(Maybe Xgafv)
     , _pmgipUploadProtocol :: !(Maybe Text)
     , _pmgipAccessToken    :: !(Maybe Text)
     , _pmgipUploadType     :: !(Maybe Text)
     , _pmgipResource       :: !Text
     , _pmgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsModelsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ projectsModelsGetIAMPolicy
     :: Text -- ^ 'pmgipResource'
     -> ProjectsModelsGetIAMPolicy
 projectsModelsGetIAMPolicy pPmgipResource_ =
-    ProjectsModelsGetIAMPolicy'
+  ProjectsModelsGetIAMPolicy'
     { _pmgipXgafv = Nothing
     , _pmgipUploadProtocol = Nothing
     , _pmgipAccessToken = Nothing

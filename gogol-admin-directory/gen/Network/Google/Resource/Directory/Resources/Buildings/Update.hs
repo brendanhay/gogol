@@ -58,11 +58,13 @@ type ResourcesBuildingsUpdateResource =
 -- | Updates a building.
 --
 -- /See:/ 'resourcesBuildingsUpdate' smart constructor.
-data ResourcesBuildingsUpdate = ResourcesBuildingsUpdate'
+data ResourcesBuildingsUpdate =
+  ResourcesBuildingsUpdate'
     { _rbuBuildingId :: !Text
     , _rbuPayload    :: !Building
     , _rbuCustomer   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesBuildingsUpdate' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ resourcesBuildingsUpdate
     -> Text -- ^ 'rbuCustomer'
     -> ResourcesBuildingsUpdate
 resourcesBuildingsUpdate pRbuBuildingId_ pRbuPayload_ pRbuCustomer_ =
-    ResourcesBuildingsUpdate'
+  ResourcesBuildingsUpdate'
     { _rbuBuildingId = pRbuBuildingId_
     , _rbuPayload = pRbuPayload_
     , _rbuCustomer = pRbuCustomer_

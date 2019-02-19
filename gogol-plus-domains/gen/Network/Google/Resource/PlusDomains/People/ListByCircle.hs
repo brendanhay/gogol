@@ -56,11 +56,13 @@ type PeopleListByCircleResource =
 -- | List all of the people who are members of a circle.
 --
 -- /See:/ 'peopleListByCircle' smart constructor.
-data PeopleListByCircle = PeopleListByCircle'
+data PeopleListByCircle =
+  PeopleListByCircle'
     { _plbcCircleId   :: !Text
     , _plbcPageToken  :: !(Maybe Text)
     , _plbcMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PeopleListByCircle' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ peopleListByCircle
     :: Text -- ^ 'plbcCircleId'
     -> PeopleListByCircle
 peopleListByCircle pPlbcCircleId_ =
-    PeopleListByCircle'
+  PeopleListByCircle'
     { _plbcCircleId = pPlbcCircleId_
     , _plbcPageToken = Nothing
     , _plbcMaxResults = 20

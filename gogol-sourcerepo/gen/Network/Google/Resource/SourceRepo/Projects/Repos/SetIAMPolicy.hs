@@ -64,7 +64,8 @@ type ProjectsReposSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsReposSetIAMPolicy' smart constructor.
-data ProjectsReposSetIAMPolicy = ProjectsReposSetIAMPolicy'
+data ProjectsReposSetIAMPolicy =
+  ProjectsReposSetIAMPolicy'
     { _prsipXgafv          :: !(Maybe Xgafv)
     , _prsipUploadProtocol :: !(Maybe Text)
     , _prsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsReposSetIAMPolicy = ProjectsReposSetIAMPolicy'
     , _prsipPayload        :: !SetIAMPolicyRequest
     , _prsipResource       :: !Text
     , _prsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReposSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsReposSetIAMPolicy
     -> Text -- ^ 'prsipResource'
     -> ProjectsReposSetIAMPolicy
 projectsReposSetIAMPolicy pPrsipPayload_ pPrsipResource_ =
-    ProjectsReposSetIAMPolicy'
+  ProjectsReposSetIAMPolicy'
     { _prsipXgafv = Nothing
     , _prsipUploadProtocol = Nothing
     , _prsipAccessToken = Nothing

@@ -63,7 +63,8 @@ type ProjectsDatabasesDocumentsCommitResource =
 -- | Commits a transaction, while optionally updating documents.
 --
 -- /See:/ 'projectsDatabasesDocumentsCommit' smart constructor.
-data ProjectsDatabasesDocumentsCommit = ProjectsDatabasesDocumentsCommit'
+data ProjectsDatabasesDocumentsCommit =
+  ProjectsDatabasesDocumentsCommit'
     { _pddcXgafv          :: !(Maybe Xgafv)
     , _pddcUploadProtocol :: !(Maybe Text)
     , _pddcDatabase       :: !Text
@@ -71,7 +72,8 @@ data ProjectsDatabasesDocumentsCommit = ProjectsDatabasesDocumentsCommit'
     , _pddcUploadType     :: !(Maybe Text)
     , _pddcPayload        :: !CommitRequest
     , _pddcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsCommit' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsDatabasesDocumentsCommit
     -> CommitRequest -- ^ 'pddcPayload'
     -> ProjectsDatabasesDocumentsCommit
 projectsDatabasesDocumentsCommit pPddcDatabase_ pPddcPayload_ =
-    ProjectsDatabasesDocumentsCommit'
+  ProjectsDatabasesDocumentsCommit'
     { _pddcXgafv = Nothing
     , _pddcUploadProtocol = Nothing
     , _pddcDatabase = pPddcDatabase_
@@ -145,7 +147,8 @@ pddcCallback
   = lens _pddcCallback (\ s a -> s{_pddcCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsCommit where
+           ProjectsDatabasesDocumentsCommit
+         where
         type Rs ProjectsDatabasesDocumentsCommit =
              CommitResponse
         type Scopes ProjectsDatabasesDocumentsCommit =

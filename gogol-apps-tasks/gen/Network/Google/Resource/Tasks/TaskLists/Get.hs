@@ -53,9 +53,11 @@ type TaskListsGetResource =
 -- | Returns the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsGet' smart constructor.
-newtype TaskListsGet = TaskListsGet'
+newtype TaskListsGet =
+  TaskListsGet'
     { _tlgTaskList :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TaskListsGet' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype TaskListsGet = TaskListsGet'
 taskListsGet
     :: Text -- ^ 'tlgTaskList'
     -> TaskListsGet
-taskListsGet pTlgTaskList_ =
-    TaskListsGet'
-    { _tlgTaskList = pTlgTaskList_
-    }
+taskListsGet pTlgTaskList_ = TaskListsGet' {_tlgTaskList = pTlgTaskList_}
 
 -- | Task list identifier.
 tlgTaskList :: Lens' TaskListsGet Text

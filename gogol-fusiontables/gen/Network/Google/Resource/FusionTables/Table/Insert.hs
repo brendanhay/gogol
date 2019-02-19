@@ -51,9 +51,11 @@ type TableInsertResource =
 -- | Creates a new table.
 --
 -- /See:/ 'tableInsert' smart constructor.
-newtype TableInsert = TableInsert'
+newtype TableInsert =
+  TableInsert'
     { _tiPayload :: Table
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableInsert' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype TableInsert = TableInsert'
 tableInsert
     :: Table -- ^ 'tiPayload'
     -> TableInsert
-tableInsert pTiPayload_ =
-    TableInsert'
-    { _tiPayload = pTiPayload_
-    }
+tableInsert pTiPayload_ = TableInsert' {_tiPayload = pTiPayload_}
 
 -- | Multipart request metadata.
 tiPayload :: Lens' TableInsert Table

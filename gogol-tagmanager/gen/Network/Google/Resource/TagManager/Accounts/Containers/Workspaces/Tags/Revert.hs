@@ -53,10 +53,12 @@ type AccountsContainersWorkspacesTagsRevertResource =
 -- | Reverts changes to a GTM Tag in a GTM Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesTagsRevert' smart constructor.
-data AccountsContainersWorkspacesTagsRevert = AccountsContainersWorkspacesTagsRevert'
+data AccountsContainersWorkspacesTagsRevert =
+  AccountsContainersWorkspacesTagsRevert'
     { _acwtrcPath        :: !Text
     , _acwtrcFingerprint :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesTagsRevert' with the minimum fields required to make a request.
 --
@@ -69,10 +71,8 @@ accountsContainersWorkspacesTagsRevert
     :: Text -- ^ 'acwtrcPath'
     -> AccountsContainersWorkspacesTagsRevert
 accountsContainersWorkspacesTagsRevert pAcwtrcPath_ =
-    AccountsContainersWorkspacesTagsRevert'
-    { _acwtrcPath = pAcwtrcPath_
-    , _acwtrcFingerprint = Nothing
-    }
+  AccountsContainersWorkspacesTagsRevert'
+    {_acwtrcPath = pAcwtrcPath_, _acwtrcFingerprint = Nothing}
 
 -- | GTM Tag\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/tags\/{tag_id}
@@ -88,7 +88,8 @@ acwtrcFingerprint
       (\ s a -> s{_acwtrcFingerprint = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTagsRevert where
+           AccountsContainersWorkspacesTagsRevert
+         where
         type Rs AccountsContainersWorkspacesTagsRevert =
              RevertTagResponse
         type Scopes AccountsContainersWorkspacesTagsRevert =

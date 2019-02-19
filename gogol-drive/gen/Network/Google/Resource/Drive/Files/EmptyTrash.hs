@@ -50,8 +50,8 @@ type FilesEmptyTrashResource =
 --
 -- /See:/ 'filesEmptyTrash' smart constructor.
 data FilesEmptyTrash =
-    FilesEmptyTrash'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  FilesEmptyTrash'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilesEmptyTrash' with the minimum fields required to make a request.
 --

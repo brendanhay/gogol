@@ -61,11 +61,13 @@ type ProjectsSetUsageExportBucketResource =
 -- method, the usage export feature will be disabled.
 --
 -- /See:/ 'projectsSetUsageExportBucket' smart constructor.
-data ProjectsSetUsageExportBucket = ProjectsSetUsageExportBucket'
+data ProjectsSetUsageExportBucket =
+  ProjectsSetUsageExportBucket'
     { _psuebRequestId :: !(Maybe Text)
     , _psuebProject   :: !Text
     , _psuebPayload   :: !UsageExportLocation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSetUsageExportBucket' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ projectsSetUsageExportBucket
     -> UsageExportLocation -- ^ 'psuebPayload'
     -> ProjectsSetUsageExportBucket
 projectsSetUsageExportBucket pPsuebProject_ pPsuebPayload_ =
-    ProjectsSetUsageExportBucket'
+  ProjectsSetUsageExportBucket'
     { _psuebRequestId = Nothing
     , _psuebProject = pPsuebProject_
     , _psuebPayload = pPsuebPayload_

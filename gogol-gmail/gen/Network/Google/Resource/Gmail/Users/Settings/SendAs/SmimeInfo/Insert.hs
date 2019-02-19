@@ -60,11 +60,13 @@ type UsersSettingsSendAsSmimeInfoInsertResource =
 -- alias. Note that pkcs12 format is required for the key.
 --
 -- /See:/ 'usersSettingsSendAsSmimeInfoInsert' smart constructor.
-data UsersSettingsSendAsSmimeInfoInsert = UsersSettingsSendAsSmimeInfoInsert'
+data UsersSettingsSendAsSmimeInfoInsert =
+  UsersSettingsSendAsSmimeInfoInsert'
     { _ussasiiPayload     :: !SmimeInfo
     , _ussasiiUserId      :: !Text
     , _ussasiiSendAsEmail :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsSendAsSmimeInfoInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ usersSettingsSendAsSmimeInfoInsert
     -> Text -- ^ 'ussasiiSendAsEmail'
     -> UsersSettingsSendAsSmimeInfoInsert
 usersSettingsSendAsSmimeInfoInsert pUssasiiPayload_ pUssasiiSendAsEmail_ =
-    UsersSettingsSendAsSmimeInfoInsert'
+  UsersSettingsSendAsSmimeInfoInsert'
     { _ussasiiPayload = pUssasiiPayload_
     , _ussasiiUserId = "me"
     , _ussasiiSendAsEmail = pUssasiiSendAsEmail_
@@ -107,7 +109,8 @@ ussasiiSendAsEmail
       (\ s a -> s{_ussasiiSendAsEmail = a})
 
 instance GoogleRequest
-         UsersSettingsSendAsSmimeInfoInsert where
+           UsersSettingsSendAsSmimeInfoInsert
+         where
         type Rs UsersSettingsSendAsSmimeInfoInsert =
              SmimeInfo
         type Scopes UsersSettingsSendAsSmimeInfoInsert =

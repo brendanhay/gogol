@@ -72,13 +72,15 @@ type LicensesListResource =
 -- debian-cloud or windows-cloud.
 --
 -- /See:/ 'licensesList' smart constructor.
-data LicensesList = LicensesList'
+data LicensesList =
+  LicensesList'
     { _llOrderBy    :: !(Maybe Text)
     , _llProject    :: !Text
     , _llFilter     :: !(Maybe Text)
     , _llPageToken  :: !(Maybe Text)
     , _llMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicensesList' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ licensesList
     :: Text -- ^ 'llProject'
     -> LicensesList
 licensesList pLlProject_ =
-    LicensesList'
+  LicensesList'
     { _llOrderBy = Nothing
     , _llProject = pLlProject_
     , _llFilter = Nothing

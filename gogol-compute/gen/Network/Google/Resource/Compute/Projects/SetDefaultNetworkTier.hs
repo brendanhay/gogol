@@ -61,11 +61,13 @@ type ProjectsSetDefaultNetworkTierResource =
 -- specifying the network tier field.
 --
 -- /See:/ 'projectsSetDefaultNetworkTier' smart constructor.
-data ProjectsSetDefaultNetworkTier = ProjectsSetDefaultNetworkTier'
+data ProjectsSetDefaultNetworkTier =
+  ProjectsSetDefaultNetworkTier'
     { _psdntRequestId :: !(Maybe Text)
     , _psdntProject   :: !Text
     , _psdntPayload   :: !ProjectsSetDefaultNetworkTierRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSetDefaultNetworkTier' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ projectsSetDefaultNetworkTier
     -> ProjectsSetDefaultNetworkTierRequest -- ^ 'psdntPayload'
     -> ProjectsSetDefaultNetworkTier
 projectsSetDefaultNetworkTier pPsdntProject_ pPsdntPayload_ =
-    ProjectsSetDefaultNetworkTier'
+  ProjectsSetDefaultNetworkTier'
     { _psdntRequestId = Nothing
     , _psdntProject = pPsdntProject_
     , _psdntPayload = pPsdntPayload_

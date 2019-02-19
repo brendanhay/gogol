@@ -80,7 +80,8 @@ type ProjectsLocationsInstancesCreateResource =
 -- need to call DeleteOperation.
 --
 -- /See:/ 'projectsLocationsInstancesCreate' smart constructor.
-data ProjectsLocationsInstancesCreate = ProjectsLocationsInstancesCreate'
+data ProjectsLocationsInstancesCreate =
+  ProjectsLocationsInstancesCreate'
     { _plicParent         :: !Text
     , _plicInstanceId     :: !(Maybe Text)
     , _plicXgafv          :: !(Maybe Xgafv)
@@ -89,7 +90,8 @@ data ProjectsLocationsInstancesCreate = ProjectsLocationsInstancesCreate'
     , _plicUploadType     :: !(Maybe Text)
     , _plicPayload        :: !Instance
     , _plicCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsInstancesCreate' with the minimum fields required to make a request.
 --
@@ -115,7 +117,7 @@ projectsLocationsInstancesCreate
     -> Instance -- ^ 'plicPayload'
     -> ProjectsLocationsInstancesCreate
 projectsLocationsInstancesCreate pPlicParent_ pPlicPayload_ =
-    ProjectsLocationsInstancesCreate'
+  ProjectsLocationsInstancesCreate'
     { _plicParent = pPlicParent_
     , _plicInstanceId = Nothing
     , _plicXgafv = Nothing
@@ -177,7 +179,8 @@ plicCallback
   = lens _plicCallback (\ s a -> s{_plicCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsInstancesCreate where
+           ProjectsLocationsInstancesCreate
+         where
         type Rs ProjectsLocationsInstancesCreate = Operation
         type Scopes ProjectsLocationsInstancesCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

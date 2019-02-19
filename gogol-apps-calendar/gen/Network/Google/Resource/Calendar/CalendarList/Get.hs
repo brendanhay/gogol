@@ -54,9 +54,11 @@ type CalendarListGetResource =
 -- | Returns a calendar from the user\'s calendar list.
 --
 -- /See:/ 'calendarListGet' smart constructor.
-newtype CalendarListGet = CalendarListGet'
+newtype CalendarListGet =
+  CalendarListGet'
     { _clgCalendarId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CalendarListGet' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ calendarListGet
     :: Text -- ^ 'clgCalendarId'
     -> CalendarListGet
 calendarListGet pClgCalendarId_ =
-    CalendarListGet'
-    { _clgCalendarId = pClgCalendarId_
-    }
+  CalendarListGet' {_clgCalendarId = pClgCalendarId_}
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

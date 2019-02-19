@@ -56,11 +56,13 @@ type ProductsListResource =
 -- | Lists the products in your Merchant Center account.
 --
 -- /See:/ 'productsList' smart constructor.
-data ProductsList = ProductsList'
+data ProductsList =
+  ProductsList'
     { _pllMerchantId :: !(Textual Word64)
     , _pllPageToken  :: !(Maybe Text)
     , _pllMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsList' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ productsList
     :: Word64 -- ^ 'pllMerchantId'
     -> ProductsList
 productsList pPllMerchantId_ =
-    ProductsList'
+  ProductsList'
     { _pllMerchantId = _Coerce # pPllMerchantId_
     , _pllPageToken = Nothing
     , _pllMaxResults = Nothing

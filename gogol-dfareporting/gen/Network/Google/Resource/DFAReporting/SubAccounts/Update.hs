@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsUpdate' request conforms to.
 type SubAccountsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -54,10 +54,12 @@ type SubAccountsUpdateResource =
 -- | Updates an existing subaccount.
 --
 -- /See:/ 'subAccountsUpdate' smart constructor.
-data SubAccountsUpdate = SubAccountsUpdate'
+data SubAccountsUpdate =
+  SubAccountsUpdate'
     { _sauProFileId :: !(Textual Int64)
     , _sauPayload   :: !SubAccount
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubAccountsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ subAccountsUpdate
     -> SubAccount -- ^ 'sauPayload'
     -> SubAccountsUpdate
 subAccountsUpdate pSauProFileId_ pSauPayload_ =
-    SubAccountsUpdate'
-    { _sauProFileId = _Coerce # pSauProFileId_
-    , _sauPayload = pSauPayload_
-    }
+  SubAccountsUpdate'
+    {_sauProFileId = _Coerce # pSauProFileId_, _sauPayload = pSauPayload_}
 
 -- | User profile ID associated with this request.
 sauProFileId :: Lens' SubAccountsUpdate Int64

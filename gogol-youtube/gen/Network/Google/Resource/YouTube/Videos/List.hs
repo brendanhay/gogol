@@ -76,7 +76,8 @@ type VideosListResource =
 -- | Returns a list of videos that match the API request parameters.
 --
 -- /See:/ 'videosList' smart constructor.
-data VideosList = VideosList'
+data VideosList =
+  VideosList'
     { _vlChart                  :: !(Maybe VideosListChart)
     , _vlPart                   :: !Text
     , _vlRegionCode             :: !(Maybe Text)
@@ -90,7 +91,8 @@ data VideosList = VideosList'
     , _vlId                     :: !(Maybe Text)
     , _vlPageToken              :: !(Maybe Text)
     , _vlMaxResults             :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideosList' with the minimum fields required to make a request.
 --
@@ -125,7 +127,7 @@ videosList
     :: Text -- ^ 'vlPart'
     -> VideosList
 videosList pVlPart_ =
-    VideosList'
+  VideosList'
     { _vlChart = Nothing
     , _vlPart = pVlPart_
     , _vlRegionCode = Nothing

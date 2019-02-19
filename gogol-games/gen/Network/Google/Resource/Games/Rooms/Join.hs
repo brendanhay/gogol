@@ -58,11 +58,13 @@ type RoomsJoinResource =
 -- directly is unsupported.
 --
 -- /See:/ 'roomsJoin' smart constructor.
-data RoomsJoin = RoomsJoin'
+data RoomsJoin =
+  RoomsJoin'
     { _rjPayload  :: !RoomJoinRequest
     , _rjRoomId   :: !Text
     , _rjLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoomsJoin' with the minimum fields required to make a request.
 --
@@ -78,11 +80,8 @@ roomsJoin
     -> Text -- ^ 'rjRoomId'
     -> RoomsJoin
 roomsJoin pRjPayload_ pRjRoomId_ =
-    RoomsJoin'
-    { _rjPayload = pRjPayload_
-    , _rjRoomId = pRjRoomId_
-    , _rjLanguage = Nothing
-    }
+  RoomsJoin'
+    {_rjPayload = pRjPayload_, _rjRoomId = pRjRoomId_, _rjLanguage = Nothing}
 
 -- | Multipart request metadata.
 rjPayload :: Lens' RoomsJoin RoomJoinRequest

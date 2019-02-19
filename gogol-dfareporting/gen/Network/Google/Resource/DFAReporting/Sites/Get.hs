@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SitesGet' request conforms to.
 type SitesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -54,10 +54,12 @@ type SitesGetResource =
 -- | Gets one site by ID.
 --
 -- /See:/ 'sitesGet' smart constructor.
-data SitesGet = SitesGet'
+data SitesGet =
+  SitesGet'
     { _sggProFileId :: !(Textual Int64)
     , _sggId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ sitesGet
     -> Int64 -- ^ 'sggId'
     -> SitesGet
 sitesGet pSggProFileId_ pSggId_ =
-    SitesGet'
-    { _sggProFileId = _Coerce # pSggProFileId_
-    , _sggId = _Coerce # pSggId_
-    }
+  SitesGet'
+    {_sggProFileId = _Coerce # pSggProFileId_, _sggId = _Coerce # pSggId_}
 
 -- | User profile ID associated with this request.
 sggProFileId :: Lens' SitesGet Int64

@@ -55,11 +55,13 @@ type AccountsContainersEnvironmentsPatchResource =
 -- | Updates a GTM Environment. This method supports patch semantics.
 --
 -- /See:/ 'accountsContainersEnvironmentsPatch' smart constructor.
-data AccountsContainersEnvironmentsPatch = AccountsContainersEnvironmentsPatch'
+data AccountsContainersEnvironmentsPatch =
+  AccountsContainersEnvironmentsPatch'
     { _acepPath        :: !Text
     , _acepFingerprint :: !(Maybe Text)
     , _acepPayload     :: !Environment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersEnvironmentsPatch' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ accountsContainersEnvironmentsPatch
     -> Environment -- ^ 'acepPayload'
     -> AccountsContainersEnvironmentsPatch
 accountsContainersEnvironmentsPatch pAcepPath_ pAcepPayload_ =
-    AccountsContainersEnvironmentsPatch'
+  AccountsContainersEnvironmentsPatch'
     { _acepPath = pAcepPath_
     , _acepFingerprint = Nothing
     , _acepPayload = pAcepPayload_
@@ -99,7 +101,8 @@ acepPayload
   = lens _acepPayload (\ s a -> s{_acepPayload = a})
 
 instance GoogleRequest
-         AccountsContainersEnvironmentsPatch where
+           AccountsContainersEnvironmentsPatch
+         where
         type Rs AccountsContainersEnvironmentsPatch =
              Environment
         type Scopes AccountsContainersEnvironmentsPatch =

@@ -58,10 +58,12 @@ type EditsDeleteResource =
 -- you want to preemptively abandon an edit.
 --
 -- /See:/ 'editsDelete' smart constructor.
-data EditsDelete = EditsDelete'
+data EditsDelete =
+  EditsDelete'
     { _edPackageName :: !Text
     , _edEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsDelete' with the minimum fields required to make a request.
 --
@@ -75,10 +77,7 @@ editsDelete
     -> Text -- ^ 'edEditId'
     -> EditsDelete
 editsDelete pEdPackageName_ pEdEditId_ =
-    EditsDelete'
-    { _edPackageName = pEdPackageName_
-    , _edEditId = pEdEditId_
-    }
+  EditsDelete' {_edPackageName = pEdPackageName_, _edEditId = pEdEditId_}
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

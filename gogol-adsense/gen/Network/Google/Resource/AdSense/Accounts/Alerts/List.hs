@@ -54,10 +54,12 @@ type AccountsAlertsListResource =
 -- | List the alerts for the specified AdSense account.
 --
 -- /See:/ 'accountsAlertsList' smart constructor.
-data AccountsAlertsList = AccountsAlertsList'
+data AccountsAlertsList =
+  AccountsAlertsList'
     { _aalLocale    :: !(Maybe Text)
     , _aalAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsAlertsList' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ accountsAlertsList
     :: Text -- ^ 'aalAccountId'
     -> AccountsAlertsList
 accountsAlertsList pAalAccountId_ =
-    AccountsAlertsList'
-    { _aalLocale = Nothing
-    , _aalAccountId = pAalAccountId_
-    }
+  AccountsAlertsList' {_aalLocale = Nothing, _aalAccountId = pAalAccountId_}
 
 -- | The locale to use for translating alert messages. The account locale
 -- will be used if this is not supplied. The AdSense default (English) will

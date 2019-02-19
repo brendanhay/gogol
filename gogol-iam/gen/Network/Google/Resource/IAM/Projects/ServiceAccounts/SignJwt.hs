@@ -68,7 +68,8 @@ type ProjectsServiceAccountsSignJwtResource =
 -- more than one hour, the request will fail.
 --
 -- /See:/ 'projectsServiceAccountsSignJwt' smart constructor.
-data ProjectsServiceAccountsSignJwt = ProjectsServiceAccountsSignJwt'
+data ProjectsServiceAccountsSignJwt =
+  ProjectsServiceAccountsSignJwt'
     { _psasjXgafv          :: !(Maybe Xgafv)
     , _psasjUploadProtocol :: !(Maybe Text)
     , _psasjAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsServiceAccountsSignJwt = ProjectsServiceAccountsSignJwt'
     , _psasjPayload        :: !SignJwtRequest
     , _psasjName           :: !Text
     , _psasjCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsSignJwt' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsServiceAccountsSignJwt
     -> Text -- ^ 'psasjName'
     -> ProjectsServiceAccountsSignJwt
 projectsServiceAccountsSignJwt pPsasjPayload_ pPsasjName_ =
-    ProjectsServiceAccountsSignJwt'
+  ProjectsServiceAccountsSignJwt'
     { _psasjXgafv = Nothing
     , _psasjUploadProtocol = Nothing
     , _psasjAccessToken = Nothing

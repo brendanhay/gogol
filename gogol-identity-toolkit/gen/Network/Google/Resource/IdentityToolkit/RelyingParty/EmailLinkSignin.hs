@@ -54,9 +54,11 @@ type RelyingPartyEmailLinkSigninResource =
 -- | Reset password for a user.
 --
 -- /See:/ 'relyingPartyEmailLinkSignin' smart constructor.
-newtype RelyingPartyEmailLinkSignin = RelyingPartyEmailLinkSignin'
+newtype RelyingPartyEmailLinkSignin =
+  RelyingPartyEmailLinkSignin'
     { _rpelsPayload :: IdentitytoolkitRelyingPartyEmailLinkSigninRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyEmailLinkSignin' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ relyingPartyEmailLinkSignin
     :: IdentitytoolkitRelyingPartyEmailLinkSigninRequest -- ^ 'rpelsPayload'
     -> RelyingPartyEmailLinkSignin
 relyingPartyEmailLinkSignin pRpelsPayload_ =
-    RelyingPartyEmailLinkSignin'
-    { _rpelsPayload = pRpelsPayload_
-    }
+  RelyingPartyEmailLinkSignin' {_rpelsPayload = pRpelsPayload_}
 
 -- | Multipart request metadata.
 rpelsPayload :: Lens' RelyingPartyEmailLinkSignin IdentitytoolkitRelyingPartyEmailLinkSigninRequest

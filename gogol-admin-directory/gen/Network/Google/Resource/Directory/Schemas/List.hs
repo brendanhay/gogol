@@ -53,9 +53,11 @@ type SchemasListResource =
 -- | Retrieve all schemas for a customer
 --
 -- /See:/ 'schemasList' smart constructor.
-newtype SchemasList = SchemasList'
+newtype SchemasList =
+  SchemasList'
     { _slCustomerId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SchemasList' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype SchemasList = SchemasList'
 schemasList
     :: Text -- ^ 'slCustomerId'
     -> SchemasList
-schemasList pSlCustomerId_ =
-    SchemasList'
-    { _slCustomerId = pSlCustomerId_
-    }
+schemasList pSlCustomerId_ = SchemasList' {_slCustomerId = pSlCustomerId_}
 
 -- | Immutable ID of the G Suite account
 slCustomerId :: Lens' SchemasList Text

@@ -70,12 +70,14 @@ type InstancesStopResource =
 -- an instance.
 --
 -- /See:/ 'instancesStop' smart constructor.
-data InstancesStop = InstancesStop'
+data InstancesStop =
+  InstancesStop'
     { _isRequestId :: !(Maybe Text)
     , _isProject   :: !Text
     , _isZone      :: !Text
     , _isInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesStop' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ instancesStop
     -> Text -- ^ 'isInstance'
     -> InstancesStop
 instancesStop pIsProject_ pIsZone_ pIsInstance_ =
-    InstancesStop'
+  InstancesStop'
     { _isRequestId = Nothing
     , _isProject = pIsProject_
     , _isZone = pIsZone_

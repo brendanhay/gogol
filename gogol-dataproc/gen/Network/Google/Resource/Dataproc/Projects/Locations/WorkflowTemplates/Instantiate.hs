@@ -75,7 +75,8 @@ type ProjectsLocationsWorkflowTemplatesInstantiateResource
 -- completion, Operation.response will be Empty.
 --
 -- /See:/ 'projectsLocationsWorkflowTemplatesInstantiate' smart constructor.
-data ProjectsLocationsWorkflowTemplatesInstantiate = ProjectsLocationsWorkflowTemplatesInstantiate'
+data ProjectsLocationsWorkflowTemplatesInstantiate =
+  ProjectsLocationsWorkflowTemplatesInstantiate'
     { _plwtiXgafv          :: !(Maybe Xgafv)
     , _plwtiUploadProtocol :: !(Maybe Text)
     , _plwtiAccessToken    :: !(Maybe Text)
@@ -83,7 +84,8 @@ data ProjectsLocationsWorkflowTemplatesInstantiate = ProjectsLocationsWorkflowTe
     , _plwtiPayload        :: !InstantiateWorkflowTemplateRequest
     , _plwtiName           :: !Text
     , _plwtiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesInstantiate' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ projectsLocationsWorkflowTemplatesInstantiate
     -> Text -- ^ 'plwtiName'
     -> ProjectsLocationsWorkflowTemplatesInstantiate
 projectsLocationsWorkflowTemplatesInstantiate pPlwtiPayload_ pPlwtiName_ =
-    ProjectsLocationsWorkflowTemplatesInstantiate'
+  ProjectsLocationsWorkflowTemplatesInstantiate'
     { _plwtiXgafv = Nothing
     , _plwtiUploadProtocol = Nothing
     , _plwtiAccessToken = Nothing
@@ -159,7 +161,8 @@ plwtiCallback
       (\ s a -> s{_plwtiCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkflowTemplatesInstantiate where
+           ProjectsLocationsWorkflowTemplatesInstantiate
+         where
         type Rs ProjectsLocationsWorkflowTemplatesInstantiate
              = Operation
         type Scopes

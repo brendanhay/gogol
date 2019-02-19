@@ -59,11 +59,13 @@ type ProjectsDisableXpnResourceResource =
 -- host project.
 --
 -- /See:/ 'projectsDisableXpnResource' smart constructor.
-data ProjectsDisableXpnResource = ProjectsDisableXpnResource'
+data ProjectsDisableXpnResource =
+  ProjectsDisableXpnResource'
     { _pdxrRequestId :: !(Maybe Text)
     , _pdxrProject   :: !Text
     , _pdxrPayload   :: !ProjectsDisableXpnResourceRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDisableXpnResource' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ projectsDisableXpnResource
     -> ProjectsDisableXpnResourceRequest -- ^ 'pdxrPayload'
     -> ProjectsDisableXpnResource
 projectsDisableXpnResource pPdxrProject_ pPdxrPayload_ =
-    ProjectsDisableXpnResource'
+  ProjectsDisableXpnResource'
     { _pdxrRequestId = Nothing
     , _pdxrProject = pPdxrProject_
     , _pdxrPayload = pPdxrPayload_

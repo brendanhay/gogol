@@ -67,14 +67,16 @@ type CreativesListResource =
 -- creative will be available 30-40 minutes after submission.
 --
 -- /See:/ 'creativesList'' smart constructor.
-data CreativesList' = CreativesList''
+data CreativesList' =
+  CreativesList''
     { _clBuyerCreativeId         :: !(Maybe [Text])
     , _clOpenAuctionStatusFilter :: !(Maybe CreativesListOpenAuctionStatusFilter)
     , _clAccountId               :: !(Maybe [Textual Int32])
     , _clPageToken               :: !(Maybe Text)
     , _clDealsStatusFilter       :: !(Maybe CreativesListDealsStatusFilter)
     , _clMaxResults              :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ data CreativesList' = CreativesList''
 creativesList'
     :: CreativesList'
 creativesList' =
-    CreativesList''
+  CreativesList''
     { _clBuyerCreativeId = Nothing
     , _clOpenAuctionStatusFilter = Nothing
     , _clAccountId = Nothing

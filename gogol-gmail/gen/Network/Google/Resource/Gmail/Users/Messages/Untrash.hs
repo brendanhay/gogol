@@ -55,10 +55,12 @@ type UsersMessagesUntrashResource =
 -- | Removes the specified message from the trash.
 --
 -- /See:/ 'usersMessagesUntrash' smart constructor.
-data UsersMessagesUntrash = UsersMessagesUntrash'
+data UsersMessagesUntrash =
+  UsersMessagesUntrash'
     { _umuUserId :: !Text
     , _umuId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersMessagesUntrash' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ usersMessagesUntrash
     :: Text -- ^ 'umuId'
     -> UsersMessagesUntrash
 usersMessagesUntrash pUmuId_ =
-    UsersMessagesUntrash'
-    { _umuUserId = "me"
-    , _umuId = pUmuId_
-    }
+  UsersMessagesUntrash' {_umuUserId = "me", _umuId = pUmuId_}
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

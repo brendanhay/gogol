@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsList' request conforms to.
 type SubAccountsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -67,7 +67,8 @@ type SubAccountsListResource =
 -- paging.
 --
 -- /See:/ 'subAccountsList' smart constructor.
-data SubAccountsList = SubAccountsList'
+data SubAccountsList =
+  SubAccountsList'
     { _salSearchString :: !(Maybe Text)
     , _salIds          :: !(Maybe [Textual Int64])
     , _salProFileId    :: !(Textual Int64)
@@ -75,7 +76,8 @@ data SubAccountsList = SubAccountsList'
     , _salPageToken    :: !(Maybe Text)
     , _salSortField    :: !SubAccountsListSortField
     , _salMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubAccountsList' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ subAccountsList
     :: Int64 -- ^ 'salProFileId'
     -> SubAccountsList
 subAccountsList pSalProFileId_ =
-    SubAccountsList'
+  SubAccountsList'
     { _salSearchString = Nothing
     , _salIds = Nothing
     , _salProFileId = _Coerce # pSalProFileId_

@@ -60,11 +60,13 @@ type InstancesExportResource =
 -- SQL dump or CSV file.
 --
 -- /See:/ 'instancesExport' smart constructor.
-data InstancesExport = InstancesExport'
+data InstancesExport =
+  InstancesExport'
     { _ieProject  :: !Text
     , _iePayload  :: !InstancesExportRequest
     , _ieInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesExport' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ instancesExport
     -> Text -- ^ 'ieInstance'
     -> InstancesExport
 instancesExport pIeProject_ pIePayload_ pIeInstance_ =
-    InstancesExport'
+  InstancesExport'
     { _ieProject = pIeProject_
     , _iePayload = pIePayload_
     , _ieInstance = pIeInstance_

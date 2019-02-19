@@ -73,13 +73,15 @@ type LiveBroadcastsTransitionResource =
 -- for the stream bound to your broadcast is active.
 --
 -- /See:/ 'liveBroadcastsTransition' smart constructor.
-data LiveBroadcastsTransition = LiveBroadcastsTransition'
+data LiveBroadcastsTransition =
+  LiveBroadcastsTransition'
     { _lbtPart                          :: !Text
     , _lbtBroadcastStatus               :: !LiveBroadcastsTransitionBroadcastStatus
     , _lbtOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbtOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbtId                            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveBroadcastsTransition' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ liveBroadcastsTransition
     -> Text -- ^ 'lbtId'
     -> LiveBroadcastsTransition
 liveBroadcastsTransition pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
-    LiveBroadcastsTransition'
+  LiveBroadcastsTransition'
     { _lbtPart = pLbtPart_
     , _lbtBroadcastStatus = pLbtBroadcastStatus_
     , _lbtOnBehalfOfContentOwner = Nothing

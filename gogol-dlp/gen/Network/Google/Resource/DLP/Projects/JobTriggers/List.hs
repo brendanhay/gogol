@@ -72,7 +72,8 @@ type ProjectsJobTriggersListResource =
 -- more.
 --
 -- /See:/ 'projectsJobTriggersList' smart constructor.
-data ProjectsJobTriggersList = ProjectsJobTriggersList'
+data ProjectsJobTriggersList =
+  ProjectsJobTriggersList'
     { _pjtlParent         :: !Text
     , _pjtlXgafv          :: !(Maybe Xgafv)
     , _pjtlUploadProtocol :: !(Maybe Text)
@@ -82,7 +83,8 @@ data ProjectsJobTriggersList = ProjectsJobTriggersList'
     , _pjtlPageToken      :: !(Maybe Text)
     , _pjtlPageSize       :: !(Maybe (Textual Int32))
     , _pjtlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobTriggersList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsJobTriggersList
     :: Text -- ^ 'pjtlParent'
     -> ProjectsJobTriggersList
 projectsJobTriggersList pPjtlParent_ =
-    ProjectsJobTriggersList'
+  ProjectsJobTriggersList'
     { _pjtlParent = pPjtlParent_
     , _pjtlXgafv = Nothing
     , _pjtlUploadProtocol = Nothing

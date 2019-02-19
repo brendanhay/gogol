@@ -55,11 +55,13 @@ type LiveStreamsDeleteResource =
 -- | Deletes a video stream.
 --
 -- /See:/ 'liveStreamsDelete' smart constructor.
-data LiveStreamsDelete = LiveStreamsDelete'
+data LiveStreamsDelete =
+  LiveStreamsDelete'
     { _lsdOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsdId                            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveStreamsDelete' with the minimum fields required to make a request.
 --
@@ -74,7 +76,7 @@ liveStreamsDelete
     :: Text -- ^ 'lsdId'
     -> LiveStreamsDelete
 liveStreamsDelete pLsdId_ =
-    LiveStreamsDelete'
+  LiveStreamsDelete'
     { _lsdOnBehalfOfContentOwner = Nothing
     , _lsdOnBehalfOfContentOwnerChannel = Nothing
     , _lsdId = pLsdId_

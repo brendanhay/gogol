@@ -63,7 +63,8 @@ type AccountsCreativesGetResource =
 -- | Gets a creative.
 --
 -- /See:/ 'accountsCreativesGet' smart constructor.
-data AccountsCreativesGet = AccountsCreativesGet'
+data AccountsCreativesGet =
+  AccountsCreativesGet'
     { _acgXgafv          :: !(Maybe Xgafv)
     , _acgUploadProtocol :: !(Maybe Text)
     , _acgAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data AccountsCreativesGet = AccountsCreativesGet'
     , _acgCreativeId     :: !Text
     , _acgAccountId      :: !Text
     , _acgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsCreativesGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ accountsCreativesGet
     -> Text -- ^ 'acgAccountId'
     -> AccountsCreativesGet
 accountsCreativesGet pAcgCreativeId_ pAcgAccountId_ =
-    AccountsCreativesGet'
+  AccountsCreativesGet'
     { _acgXgafv = Nothing
     , _acgUploadProtocol = Nothing
     , _acgAccessToken = Nothing

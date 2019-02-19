@@ -57,11 +57,13 @@ type DefaultObjectAccessControlsInsertResource =
 -- | Creates a new default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsInsert' smart constructor.
-data DefaultObjectAccessControlsInsert = DefaultObjectAccessControlsInsert'
+data DefaultObjectAccessControlsInsert =
+  DefaultObjectAccessControlsInsert'
     { _doaciBucket      :: !Text
     , _doaciPayload     :: !ObjectAccessControl
     , _doaciUserProject :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsInsert' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ defaultObjectAccessControlsInsert
     -> ObjectAccessControl -- ^ 'doaciPayload'
     -> DefaultObjectAccessControlsInsert
 defaultObjectAccessControlsInsert pDoaciBucket_ pDoaciPayload_ =
-    DefaultObjectAccessControlsInsert'
+  DefaultObjectAccessControlsInsert'
     { _doaciBucket = pDoaciBucket_
     , _doaciPayload = pDoaciPayload_
     , _doaciUserProject = Nothing
@@ -101,7 +103,8 @@ doaciUserProject
       (\ s a -> s{_doaciUserProject = a})
 
 instance GoogleRequest
-         DefaultObjectAccessControlsInsert where
+           DefaultObjectAccessControlsInsert
+         where
         type Rs DefaultObjectAccessControlsInsert =
              ObjectAccessControl
         type Scopes DefaultObjectAccessControlsInsert =

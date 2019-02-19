@@ -74,7 +74,8 @@ type AppsDomainMAppingsPatchResource =
 -- the associated domain in order to update a DomainMapping resource.
 --
 -- /See:/ 'appsDomainMAppingsPatch' smart constructor.
-data AppsDomainMAppingsPatch = AppsDomainMAppingsPatch'
+data AppsDomainMAppingsPatch =
+  AppsDomainMAppingsPatch'
     { _admapXgafv            :: !(Maybe Xgafv)
     , _admapUploadProtocol   :: !(Maybe Text)
     , _admapUpdateMask       :: !(Maybe GFieldMask)
@@ -84,7 +85,8 @@ data AppsDomainMAppingsPatch = AppsDomainMAppingsPatch'
     , _admapAppsId           :: !Text
     , _admapDomainMAppingsId :: !Text
     , _admapCallback         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsDomainMAppingsPatch' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ appsDomainMAppingsPatch
     -> Text -- ^ 'admapDomainMAppingsId'
     -> AppsDomainMAppingsPatch
 appsDomainMAppingsPatch pAdmapPayload_ pAdmapAppsId_ pAdmapDomainMAppingsId_ =
-    AppsDomainMAppingsPatch'
+  AppsDomainMAppingsPatch'
     { _admapXgafv = Nothing
     , _admapUploadProtocol = Nothing
     , _admapUpdateMask = Nothing

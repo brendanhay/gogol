@@ -54,9 +54,11 @@ type EnterprisesGetAndroidDevicePolicyConfigResource
 -- | Deprecated and unused.
 --
 -- /See:/ 'enterprisesGetAndroidDevicePolicyConfig' smart constructor.
-newtype EnterprisesGetAndroidDevicePolicyConfig = EnterprisesGetAndroidDevicePolicyConfig'
+newtype EnterprisesGetAndroidDevicePolicyConfig =
+  EnterprisesGetAndroidDevicePolicyConfig'
     { _egadpcEnterpriseId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesGetAndroidDevicePolicyConfig' with the minimum fields required to make a request.
 --
@@ -67,9 +69,8 @@ enterprisesGetAndroidDevicePolicyConfig
     :: Text -- ^ 'egadpcEnterpriseId'
     -> EnterprisesGetAndroidDevicePolicyConfig
 enterprisesGetAndroidDevicePolicyConfig pEgadpcEnterpriseId_ =
-    EnterprisesGetAndroidDevicePolicyConfig'
-    { _egadpcEnterpriseId = pEgadpcEnterpriseId_
-    }
+  EnterprisesGetAndroidDevicePolicyConfig'
+    {_egadpcEnterpriseId = pEgadpcEnterpriseId_}
 
 -- | The ID of the enterprise.
 egadpcEnterpriseId :: Lens' EnterprisesGetAndroidDevicePolicyConfig Text
@@ -78,7 +79,8 @@ egadpcEnterpriseId
       (\ s a -> s{_egadpcEnterpriseId = a})
 
 instance GoogleRequest
-         EnterprisesGetAndroidDevicePolicyConfig where
+           EnterprisesGetAndroidDevicePolicyConfig
+         where
         type Rs EnterprisesGetAndroidDevicePolicyConfig =
              AndroidDevicePolicyConfig
         type Scopes EnterprisesGetAndroidDevicePolicyConfig =

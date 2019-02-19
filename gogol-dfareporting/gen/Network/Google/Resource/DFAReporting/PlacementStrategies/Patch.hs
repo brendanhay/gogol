@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesPatch' request conforms to.
 type PlacementStrategiesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -59,11 +59,13 @@ type PlacementStrategiesPatchResource =
 -- semantics.
 --
 -- /See:/ 'placementStrategiesPatch' smart constructor.
-data PlacementStrategiesPatch = PlacementStrategiesPatch'
+data PlacementStrategiesPatch =
+  PlacementStrategiesPatch'
     { _pspProFileId :: !(Textual Int64)
     , _pspPayload   :: !PlacementStrategy
     , _pspId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlacementStrategiesPatch' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ placementStrategiesPatch
     -> Int64 -- ^ 'pspId'
     -> PlacementStrategiesPatch
 placementStrategiesPatch pPspProFileId_ pPspPayload_ pPspId_ =
-    PlacementStrategiesPatch'
+  PlacementStrategiesPatch'
     { _pspProFileId = _Coerce # pPspProFileId_
     , _pspPayload = pPspPayload_
     , _pspId = _Coerce # pPspId_

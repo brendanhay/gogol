@@ -55,10 +55,12 @@ type StorelayoutpagesGetResource =
 -- | Retrieves details of a store page.
 --
 -- /See:/ 'storelayoutpagesGet' smart constructor.
-data StorelayoutpagesGet = StorelayoutpagesGet'
+data StorelayoutpagesGet =
+  StorelayoutpagesGet'
     { _sgEnterpriseId :: !Text
     , _sgPageId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StorelayoutpagesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ storelayoutpagesGet
     -> Text -- ^ 'sgPageId'
     -> StorelayoutpagesGet
 storelayoutpagesGet pSgEnterpriseId_ pSgPageId_ =
-    StorelayoutpagesGet'
-    { _sgEnterpriseId = pSgEnterpriseId_
-    , _sgPageId = pSgPageId_
-    }
+  StorelayoutpagesGet'
+    {_sgEnterpriseId = pSgEnterpriseId_, _sgPageId = pSgPageId_}
 
 -- | The ID of the enterprise.
 sgEnterpriseId :: Lens' StorelayoutpagesGet Text

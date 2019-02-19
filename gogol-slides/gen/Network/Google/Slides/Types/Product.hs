@@ -23,10 +23,12 @@ import           Network.Google.Slides.Types.Sum
 -- | A TextElement kind that represents the beginning of a new paragraph.
 --
 -- /See:/ 'paragraphMarker' smart constructor.
-data ParagraphMarker = ParagraphMarker'
+data ParagraphMarker =
+  ParagraphMarker'
     { _pmStyle  :: !(Maybe ParagraphStyle)
     , _pmBullet :: !(Maybe Bullet)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ParagraphMarker' with the minimum fields required to make a request.
 --
@@ -37,11 +39,7 @@ data ParagraphMarker = ParagraphMarker'
 -- * 'pmBullet'
 paragraphMarker
     :: ParagraphMarker
-paragraphMarker =
-    ParagraphMarker'
-    { _pmStyle = Nothing
-    , _pmBullet = Nothing
-    }
+paragraphMarker = ParagraphMarker' {_pmStyle = Nothing, _pmBullet = Nothing}
 
 -- | The paragraph\'s style
 pmStyle :: Lens' ParagraphMarker (Maybe ParagraphStyle)
@@ -69,10 +67,12 @@ instance ToJSON ParagraphMarker where
 -- | Deletes a row from a table.
 --
 -- /See:/ 'deleteTableRowRequest' smart constructor.
-data DeleteTableRowRequest = DeleteTableRowRequest'
+data DeleteTableRowRequest =
+  DeleteTableRowRequest'
     { _dtrrCellLocation  :: !(Maybe TableCellLocation)
     , _dtrrTableObjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTableRowRequest' with the minimum fields required to make a request.
 --
@@ -84,10 +84,8 @@ data DeleteTableRowRequest = DeleteTableRowRequest'
 deleteTableRowRequest
     :: DeleteTableRowRequest
 deleteTableRowRequest =
-    DeleteTableRowRequest'
-    { _dtrrCellLocation = Nothing
-    , _dtrrTableObjectId = Nothing
-    }
+  DeleteTableRowRequest'
+    {_dtrrCellLocation = Nothing, _dtrrTableObjectId = Nothing}
 
 -- | The reference table cell location from which a row will be deleted. The
 -- row this cell spans will be deleted. If this is a merged cell, multiple
@@ -121,11 +119,13 @@ instance ToJSON DeleteTableRowRequest where
 -- | The thumbnail of a page.
 --
 -- /See:/ 'thumbnail' smart constructor.
-data Thumbnail = Thumbnail'
+data Thumbnail =
+  Thumbnail'
     { _tHeight     :: !(Maybe (Textual Int32))
     , _tWidth      :: !(Maybe (Textual Int32))
     , _tContentURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
 --
@@ -139,11 +139,7 @@ data Thumbnail = Thumbnail'
 thumbnail
     :: Thumbnail
 thumbnail =
-    Thumbnail'
-    { _tHeight = Nothing
-    , _tWidth = Nothing
-    , _tContentURL = Nothing
-    }
+  Thumbnail' {_tHeight = Nothing, _tWidth = Nothing, _tContentURL = Nothing}
 
 -- | The positive height in pixels of the thumbnail image.
 tHeight :: Lens' Thumbnail (Maybe Int32)
@@ -186,10 +182,12 @@ instance ToJSON Thumbnail where
 -- | The properties of each border cell.
 --
 -- /See:/ 'tableBOrderCell' smart constructor.
-data TableBOrderCell = TableBOrderCell'
+data TableBOrderCell =
+  TableBOrderCell'
     { _tbocLocation              :: !(Maybe TableCellLocation)
     , _tbocTableBOrderProperties :: !(Maybe TableBOrderProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableBOrderCell' with the minimum fields required to make a request.
 --
@@ -201,10 +199,8 @@ data TableBOrderCell = TableBOrderCell'
 tableBOrderCell
     :: TableBOrderCell
 tableBOrderCell =
-    TableBOrderCell'
-    { _tbocLocation = Nothing
-    , _tbocTableBOrderProperties = Nothing
-    }
+  TableBOrderCell'
+    {_tbocLocation = Nothing, _tbocTableBOrderProperties = Nothing}
 
 -- | The location of the border within the border table.
 tbocLocation :: Lens' TableBOrderCell (Maybe TableCellLocation)
@@ -238,11 +234,13 @@ instance ToJSON TableBOrderCell where
 -- \`transform\`, but the visual size will be unchanged.
 --
 -- /See:/ 'pageElementProperties' smart constructor.
-data PageElementProperties = PageElementProperties'
+data PageElementProperties =
+  PageElementProperties'
     { _pepTransform    :: !(Maybe AffineTransform)
     , _pepSize         :: !(Maybe Size)
     , _pepPageObjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageElementProperties' with the minimum fields required to make a request.
 --
@@ -256,11 +254,8 @@ data PageElementProperties = PageElementProperties'
 pageElementProperties
     :: PageElementProperties
 pageElementProperties =
-    PageElementProperties'
-    { _pepTransform = Nothing
-    , _pepSize = Nothing
-    , _pepPageObjectId = Nothing
-    }
+  PageElementProperties'
+    {_pepTransform = Nothing, _pepSize = Nothing, _pepPageObjectId = Nothing}
 
 -- | The transform for the element.
 pepTransform :: Lens' PageElementProperties (Maybe AffineTransform)
@@ -296,9 +291,11 @@ instance ToJSON PageElementProperties where
 -- | The result of replacing shapes with an image.
 --
 -- /See:/ 'replaceAllShapesWithImageResponse' smart constructor.
-newtype ReplaceAllShapesWithImageResponse = ReplaceAllShapesWithImageResponse'
+newtype ReplaceAllShapesWithImageResponse =
+  ReplaceAllShapesWithImageResponse'
     { _raswirOccurrencesChanged :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplaceAllShapesWithImageResponse' with the minimum fields required to make a request.
 --
@@ -308,9 +305,7 @@ newtype ReplaceAllShapesWithImageResponse = ReplaceAllShapesWithImageResponse'
 replaceAllShapesWithImageResponse
     :: ReplaceAllShapesWithImageResponse
 replaceAllShapesWithImageResponse =
-    ReplaceAllShapesWithImageResponse'
-    { _raswirOccurrencesChanged = Nothing
-    }
+  ReplaceAllShapesWithImageResponse' {_raswirOccurrencesChanged = Nothing}
 
 -- | The number of shapes replaced with images.
 raswirOccurrencesChanged :: Lens' ReplaceAllShapesWithImageResponse (Maybe Int32)
@@ -338,9 +333,11 @@ instance ToJSON ReplaceAllShapesWithImageResponse
 -- | The fill of the outline.
 --
 -- /See:/ 'outlineFill' smart constructor.
-newtype OutlineFill = OutlineFill'
+newtype OutlineFill =
+  OutlineFill'
     { _ofSolidFill :: Maybe SolidFill
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OutlineFill' with the minimum fields required to make a request.
 --
@@ -349,10 +346,7 @@ newtype OutlineFill = OutlineFill'
 -- * 'ofSolidFill'
 outlineFill
     :: OutlineFill
-outlineFill =
-    OutlineFill'
-    { _ofSolidFill = Nothing
-    }
+outlineFill = OutlineFill' {_ofSolidFill = Nothing}
 
 -- | Solid color fill.
 ofSolidFill :: Lens' OutlineFill (Maybe SolidFill)
@@ -372,11 +366,13 @@ instance ToJSON OutlineFill where
 -- | A PageElement kind representing an image.
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image'
+data Image =
+  Image'
     { _iImageProperties :: !(Maybe ImageProperties)
     , _iContentURL      :: !(Maybe Text)
     , _iSourceURL       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -390,11 +386,8 @@ data Image = Image'
 image
     :: Image
 image =
-    Image'
-    { _iImageProperties = Nothing
-    , _iContentURL = Nothing
-    , _iSourceURL = Nothing
-    }
+  Image'
+    {_iImageProperties = Nothing, _iContentURL = Nothing, _iSourceURL = Nothing}
 
 -- | The properties of the image.
 iImageProperties :: Lens' Image (Maybe ImageProperties)
@@ -435,11 +428,13 @@ instance ToJSON Image where
 -- | Updates the properties of a Line.
 --
 -- /See:/ 'updateLinePropertiesRequest' smart constructor.
-data UpdateLinePropertiesRequest = UpdateLinePropertiesRequest'
+data UpdateLinePropertiesRequest =
+  UpdateLinePropertiesRequest'
     { _ulprLineProperties :: !(Maybe LineProperties)
     , _ulprObjectId       :: !(Maybe Text)
     , _ulprFields         :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateLinePropertiesRequest' with the minimum fields required to make a request.
 --
@@ -453,7 +448,7 @@ data UpdateLinePropertiesRequest = UpdateLinePropertiesRequest'
 updateLinePropertiesRequest
     :: UpdateLinePropertiesRequest
 updateLinePropertiesRequest =
-    UpdateLinePropertiesRequest'
+  UpdateLinePropertiesRequest'
     { _ulprLineProperties = Nothing
     , _ulprObjectId = Nothing
     , _ulprFields = Nothing
@@ -514,13 +509,15 @@ instance ToJSON UpdateLinePropertiesRequest where
 -- content in the crop rectangle will be stretched to fit its container.
 --
 -- /See:/ 'cropProperties' smart constructor.
-data CropProperties = CropProperties'
+data CropProperties =
+  CropProperties'
     { _cpBottomOffSet :: !(Maybe (Textual Double))
     , _cpTopOffSet    :: !(Maybe (Textual Double))
     , _cpAngle        :: !(Maybe (Textual Double))
     , _cpRightOffSet  :: !(Maybe (Textual Double))
     , _cpLeftOffSet   :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CropProperties' with the minimum fields required to make a request.
 --
@@ -538,7 +535,7 @@ data CropProperties = CropProperties'
 cropProperties
     :: CropProperties
 cropProperties =
-    CropProperties'
+  CropProperties'
     { _cpBottomOffSet = Nothing
     , _cpTopOffSet = Nothing
     , _cpAngle = Nothing
@@ -611,7 +608,8 @@ instance ToJSON CropProperties where
 -- that match the appearance of new lines created in the Slides editor.
 --
 -- /See:/ 'lineProperties' smart constructor.
-data LineProperties = LineProperties'
+data LineProperties =
+  LineProperties'
     { _lpWeight          :: !(Maybe Dimension)
     , _lpLink            :: !(Maybe Link)
     , _lpStartConnection :: !(Maybe LineConnection)
@@ -620,7 +618,8 @@ data LineProperties = LineProperties'
     , _lpLineFill        :: !(Maybe LineFill)
     , _lpEndConnection   :: !(Maybe LineConnection)
     , _lpEndArrow        :: !(Maybe LinePropertiesEndArrow)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LineProperties' with the minimum fields required to make a request.
 --
@@ -644,7 +643,7 @@ data LineProperties = LineProperties'
 lineProperties
     :: LineProperties
 lineProperties =
-    LineProperties'
+  LineProperties'
     { _lpWeight = Nothing
     , _lpLink = Nothing
     , _lpStartConnection = Nothing
@@ -729,9 +728,11 @@ instance ToJSON LineProperties where
 -- | A PageElement kind representing a joined collection of PageElements.
 --
 -- /See:/ 'group'' smart constructor.
-newtype Group = Group'
+newtype Group =
+  Group'
     { _gChildren :: Maybe [PageElement]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
@@ -740,10 +741,7 @@ newtype Group = Group'
 -- * 'gChildren'
 group'
     :: Group
-group' =
-    Group'
-    { _gChildren = Nothing
-    }
+group' = Group' {_gChildren = Nothing}
 
 -- | The collection of elements in the group. The minimum size of a group is
 -- 2.
@@ -766,11 +764,13 @@ instance ToJSON Group where
 -- some image effects from the existing image.
 --
 -- /See:/ 'replaceImageRequest' smart constructor.
-data ReplaceImageRequest = ReplaceImageRequest'
+data ReplaceImageRequest =
+  ReplaceImageRequest'
     { _rirImageReplaceMethod :: !(Maybe ReplaceImageRequestImageReplaceMethod)
     , _rirImageObjectId      :: !(Maybe Text)
     , _rirURL                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplaceImageRequest' with the minimum fields required to make a request.
 --
@@ -784,7 +784,7 @@ data ReplaceImageRequest = ReplaceImageRequest'
 replaceImageRequest
     :: ReplaceImageRequest
 replaceImageRequest =
-    ReplaceImageRequest'
+  ReplaceImageRequest'
     { _rirImageReplaceMethod = Nothing
     , _rirImageObjectId = Nothing
     , _rirURL = Nothing
@@ -832,10 +832,12 @@ instance ToJSON ReplaceImageRequest where
 -- | Request message for PresentationsService.BatchUpdatePresentation.
 --
 -- /See:/ 'batchUpdatePresentationRequest' smart constructor.
-data BatchUpdatePresentationRequest = BatchUpdatePresentationRequest'
+data BatchUpdatePresentationRequest =
+  BatchUpdatePresentationRequest'
     { _buprRequests     :: !(Maybe [Request'])
     , _buprWriteControl :: !(Maybe WriteControl)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdatePresentationRequest' with the minimum fields required to make a request.
 --
@@ -847,10 +849,8 @@ data BatchUpdatePresentationRequest = BatchUpdatePresentationRequest'
 batchUpdatePresentationRequest
     :: BatchUpdatePresentationRequest
 batchUpdatePresentationRequest =
-    BatchUpdatePresentationRequest'
-    { _buprRequests = Nothing
-    , _buprWriteControl = Nothing
-    }
+  BatchUpdatePresentationRequest'
+    {_buprRequests = Nothing, _buprWriteControl = Nothing}
 
 -- | A list of updates to apply to the presentation.
 buprRequests :: Lens' BatchUpdatePresentationRequest [Request']
@@ -886,10 +886,12 @@ instance ToJSON BatchUpdatePresentationRequest where
 -- may cover the elements that are behind it.
 --
 -- /See:/ 'updatePageElementsZOrderRequest' smart constructor.
-data UpdatePageElementsZOrderRequest = UpdatePageElementsZOrderRequest'
+data UpdatePageElementsZOrderRequest =
+  UpdatePageElementsZOrderRequest'
     { _upezorOperation            :: !(Maybe UpdatePageElementsZOrderRequestOperation)
     , _upezorPageElementObjectIds :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdatePageElementsZOrderRequest' with the minimum fields required to make a request.
 --
@@ -901,10 +903,8 @@ data UpdatePageElementsZOrderRequest = UpdatePageElementsZOrderRequest'
 updatePageElementsZOrderRequest
     :: UpdatePageElementsZOrderRequest
 updatePageElementsZOrderRequest =
-    UpdatePageElementsZOrderRequest'
-    { _upezorOperation = Nothing
-    , _upezorPageElementObjectIds = Nothing
-    }
+  UpdatePageElementsZOrderRequest'
+    {_upezorOperation = Nothing, _upezorPageElementObjectIds = Nothing}
 
 -- | The Z-order operation to apply on the page elements. When applying the
 -- operation on multiple page elements, the relative Z-orders within these
@@ -943,11 +943,13 @@ instance ToJSON UpdatePageElementsZOrderRequest where
 -- | Creates a new shape.
 --
 -- /See:/ 'createShapeRequest' smart constructor.
-data CreateShapeRequest = CreateShapeRequest'
+data CreateShapeRequest =
+  CreateShapeRequest'
     { _csrShapeType         :: !(Maybe CreateShapeRequestShapeType)
     , _csrObjectId          :: !(Maybe Text)
     , _csrElementProperties :: !(Maybe PageElementProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateShapeRequest' with the minimum fields required to make a request.
 --
@@ -961,7 +963,7 @@ data CreateShapeRequest = CreateShapeRequest'
 createShapeRequest
     :: CreateShapeRequest
 createShapeRequest =
-    CreateShapeRequest'
+  CreateShapeRequest'
     { _csrShapeType = Nothing
     , _csrObjectId = Nothing
     , _csrElementProperties = Nothing
@@ -1008,11 +1010,13 @@ instance ToJSON CreateShapeRequest where
 -- | A TextElement kind that represents auto text.
 --
 -- /See:/ 'autoText' smart constructor.
-data AutoText = AutoText'
+data AutoText =
+  AutoText'
     { _atStyle   :: !(Maybe TextStyle)
     , _atContent :: !(Maybe Text)
     , _atType    :: !(Maybe AutoTextType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoText' with the minimum fields required to make a request.
 --
@@ -1026,11 +1030,7 @@ data AutoText = AutoText'
 autoText
     :: AutoText
 autoText =
-    AutoText'
-    { _atStyle = Nothing
-    , _atContent = Nothing
-    , _atType = Nothing
-    }
+  AutoText' {_atStyle = Nothing, _atContent = Nothing, _atType = Nothing}
 
 -- | The styling applied to this auto text.
 atStyle :: Lens' AutoText (Maybe TextStyle)
@@ -1068,13 +1068,15 @@ instance ToJSON AutoText where
 -- drive.readonly, or drive OAuth scopes.
 --
 -- /See:/ 'replaceAllShapesWithSheetsChartRequest' smart constructor.
-data ReplaceAllShapesWithSheetsChartRequest = ReplaceAllShapesWithSheetsChartRequest'
+data ReplaceAllShapesWithSheetsChartRequest =
+  ReplaceAllShapesWithSheetsChartRequest'
     { _raswscrPageObjectIds :: !(Maybe [Text])
     , _raswscrSpreadsheetId :: !(Maybe Text)
     , _raswscrLinkingMode   :: !(Maybe ReplaceAllShapesWithSheetsChartRequestLinkingMode)
     , _raswscrContainsText  :: !(Maybe SubstringMatchCriteria)
     , _raswscrChartId       :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplaceAllShapesWithSheetsChartRequest' with the minimum fields required to make a request.
 --
@@ -1092,7 +1094,7 @@ data ReplaceAllShapesWithSheetsChartRequest = ReplaceAllShapesWithSheetsChartReq
 replaceAllShapesWithSheetsChartRequest
     :: ReplaceAllShapesWithSheetsChartRequest
 replaceAllShapesWithSheetsChartRequest =
-    ReplaceAllShapesWithSheetsChartRequest'
+  ReplaceAllShapesWithSheetsChartRequest'
     { _raswscrPageObjectIds = Nothing
     , _raswscrSpreadsheetId = Nothing
     , _raswscrLinkingMode = Nothing
@@ -1139,7 +1141,8 @@ raswscrChartId
       . mapping _Coerce
 
 instance FromJSON
-         ReplaceAllShapesWithSheetsChartRequest where
+           ReplaceAllShapesWithSheetsChartRequest
+         where
         parseJSON
           = withObject "ReplaceAllShapesWithSheetsChartRequest"
               (\ o ->
@@ -1151,7 +1154,8 @@ instance FromJSON
                      <*> (o .:? "chartId"))
 
 instance ToJSON
-         ReplaceAllShapesWithSheetsChartRequest where
+           ReplaceAllShapesWithSheetsChartRequest
+         where
         toJSON ReplaceAllShapesWithSheetsChartRequest'{..}
           = object
               (catMaybes
@@ -1166,10 +1170,12 @@ instance ToJSON
 -- implicit reference to that list\'s ID.
 --
 -- /See:/ 'list' smart constructor.
-data List = List'
+data List =
+  List'
     { _lListId       :: !(Maybe Text)
     , _lNestingLevel :: !(Maybe ListNestingLevel)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'List' with the minimum fields required to make a request.
 --
@@ -1180,11 +1186,7 @@ data List = List'
 -- * 'lNestingLevel'
 list
     :: List
-list =
-    List'
-    { _lListId = Nothing
-    , _lNestingLevel = Nothing
-    }
+list = List' {_lListId = Nothing, _lNestingLevel = Nothing}
 
 -- | The ID of the list.
 lListId :: Lens' List (Maybe Text)
@@ -1216,9 +1218,11 @@ instance ToJSON List where
 -- NOTES.
 --
 -- /See:/ 'notesProperties' smart constructor.
-newtype NotesProperties = NotesProperties'
+newtype NotesProperties =
+  NotesProperties'
     { _npSpeakerNotesObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotesProperties' with the minimum fields required to make a request.
 --
@@ -1227,10 +1231,7 @@ newtype NotesProperties = NotesProperties'
 -- * 'npSpeakerNotesObjectId'
 notesProperties
     :: NotesProperties
-notesProperties =
-    NotesProperties'
-    { _npSpeakerNotesObjectId = Nothing
-    }
+notesProperties = NotesProperties' {_npSpeakerNotesObjectId = Nothing}
 
 -- | The object ID of the shape on this notes page that contains the speaker
 -- notes for the corresponding slide. The actual shape may not always exist
@@ -1259,9 +1260,11 @@ instance ToJSON NotesProperties where
 -- | The result of grouping objects.
 --
 -- /See:/ 'groupObjectsResponse' smart constructor.
-newtype GroupObjectsResponse = GroupObjectsResponse'
+newtype GroupObjectsResponse =
+  GroupObjectsResponse'
     { _gorObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupObjectsResponse' with the minimum fields required to make a request.
 --
@@ -1270,10 +1273,7 @@ newtype GroupObjectsResponse = GroupObjectsResponse'
 -- * 'gorObjectId'
 groupObjectsResponse
     :: GroupObjectsResponse
-groupObjectsResponse =
-    GroupObjectsResponse'
-    { _gorObjectId = Nothing
-    }
+groupObjectsResponse = GroupObjectsResponse' {_gorObjectId = Nothing}
 
 -- | The object ID of the created group.
 gorObjectId :: Lens' GroupObjectsResponse (Maybe Text)
@@ -1293,11 +1293,13 @@ instance ToJSON GroupObjectsResponse where
 -- | An RGB color.
 --
 -- /See:/ 'rgbColor' smart constructor.
-data RgbColor = RgbColor'
+data RgbColor =
+  RgbColor'
     { _rcRed   :: !(Maybe (Textual Double))
     , _rcGreen :: !(Maybe (Textual Double))
     , _rcBlue  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RgbColor' with the minimum fields required to make a request.
 --
@@ -1310,12 +1312,7 @@ data RgbColor = RgbColor'
 -- * 'rcBlue'
 rgbColor
     :: RgbColor
-rgbColor =
-    RgbColor'
-    { _rcRed = Nothing
-    , _rcGreen = Nothing
-    , _rcBlue = Nothing
-    }
+rgbColor = RgbColor' {_rcRed = Nothing, _rcGreen = Nothing, _rcBlue = Nothing}
 
 -- | The red component of the color, from 0.0 to 1.0.
 rcRed :: Lens' RgbColor (Maybe Double)
@@ -1352,11 +1349,13 @@ instance ToJSON RgbColor where
 -- | Updates the properties of a Page.
 --
 -- /See:/ 'updatePagePropertiesRequest' smart constructor.
-data UpdatePagePropertiesRequest = UpdatePagePropertiesRequest'
+data UpdatePagePropertiesRequest =
+  UpdatePagePropertiesRequest'
     { _upprObjectId       :: !(Maybe Text)
     , _upprPageProperties :: !(Maybe PageProperties)
     , _upprFields         :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdatePagePropertiesRequest' with the minimum fields required to make a request.
 --
@@ -1370,7 +1369,7 @@ data UpdatePagePropertiesRequest = UpdatePagePropertiesRequest'
 updatePagePropertiesRequest
     :: UpdatePagePropertiesRequest
 updatePagePropertiesRequest =
-    UpdatePagePropertiesRequest'
+  UpdatePagePropertiesRequest'
     { _upprObjectId = Nothing
     , _upprPageProperties = Nothing
     , _upprFields = Nothing
@@ -1419,13 +1418,15 @@ instance ToJSON UpdatePagePropertiesRequest where
 -- drive.file, or drive OAuth scopes.
 --
 -- /See:/ 'createSheetsChartRequest' smart constructor.
-data CreateSheetsChartRequest = CreateSheetsChartRequest'
+data CreateSheetsChartRequest =
+  CreateSheetsChartRequest'
     { _cscrObjectId          :: !(Maybe Text)
     , _cscrSpreadsheetId     :: !(Maybe Text)
     , _cscrLinkingMode       :: !(Maybe CreateSheetsChartRequestLinkingMode)
     , _cscrElementProperties :: !(Maybe PageElementProperties)
     , _cscrChartId           :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSheetsChartRequest' with the minimum fields required to make a request.
 --
@@ -1443,7 +1444,7 @@ data CreateSheetsChartRequest = CreateSheetsChartRequest'
 createSheetsChartRequest
     :: CreateSheetsChartRequest
 createSheetsChartRequest =
-    CreateSheetsChartRequest'
+  CreateSheetsChartRequest'
     { _cscrObjectId = Nothing
     , _cscrSpreadsheetId = Nothing
     , _cscrLinkingMode = Nothing
@@ -1512,9 +1513,11 @@ instance ToJSON CreateSheetsChartRequest where
 -- | Properties of each row in a table.
 --
 -- /See:/ 'tableRowProperties' smart constructor.
-newtype TableRowProperties = TableRowProperties'
+newtype TableRowProperties =
+  TableRowProperties'
     { _trpMinRowHeight :: Maybe Dimension
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableRowProperties' with the minimum fields required to make a request.
 --
@@ -1523,10 +1526,7 @@ newtype TableRowProperties = TableRowProperties'
 -- * 'trpMinRowHeight'
 tableRowProperties
     :: TableRowProperties
-tableRowProperties =
-    TableRowProperties'
-    { _trpMinRowHeight = Nothing
-    }
+tableRowProperties = TableRowProperties' {_trpMinRowHeight = Nothing}
 
 -- | Minimum height of the row. The row will be rendered in the Slides editor
 -- at a height equal to or greater than this value in order to show all the
@@ -1551,12 +1551,14 @@ instance ToJSON TableRowProperties where
 -- | Updates the properties of a Table row.
 --
 -- /See:/ 'updateTableRowPropertiesRequest' smart constructor.
-data UpdateTableRowPropertiesRequest = UpdateTableRowPropertiesRequest'
+data UpdateTableRowPropertiesRequest =
+  UpdateTableRowPropertiesRequest'
     { _utrprTableRowProperties :: !(Maybe TableRowProperties)
     , _utrprRowIndices         :: !(Maybe [Textual Int32])
     , _utrprObjectId           :: !(Maybe Text)
     , _utrprFields             :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTableRowPropertiesRequest' with the minimum fields required to make a request.
 --
@@ -1572,7 +1574,7 @@ data UpdateTableRowPropertiesRequest = UpdateTableRowPropertiesRequest'
 updateTableRowPropertiesRequest
     :: UpdateTableRowPropertiesRequest
 updateTableRowPropertiesRequest =
-    UpdateTableRowPropertiesRequest'
+  UpdateTableRowPropertiesRequest'
     { _utrprTableRowProperties = Nothing
     , _utrprRowIndices = Nothing
     , _utrprObjectId = Nothing
@@ -1636,9 +1638,11 @@ instance ToJSON UpdateTableRowPropertiesRequest where
 -- MASTER.
 --
 -- /See:/ 'masterProperties' smart constructor.
-newtype MasterProperties = MasterProperties'
+newtype MasterProperties =
+  MasterProperties'
     { _mpDisplayName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MasterProperties' with the minimum fields required to make a request.
 --
@@ -1647,10 +1651,7 @@ newtype MasterProperties = MasterProperties'
 -- * 'mpDisplayName'
 masterProperties
     :: MasterProperties
-masterProperties =
-    MasterProperties'
-    { _mpDisplayName = Nothing
-    }
+masterProperties = MasterProperties' {_mpDisplayName = Nothing}
 
 -- | The human-readable name of the master.
 mpDisplayName :: Lens' MasterProperties (Maybe Text)
@@ -1671,11 +1672,13 @@ instance ToJSON MasterProperties where
 -- | Deletes text from a shape or a table cell.
 --
 -- /See:/ 'deleteTextRequest' smart constructor.
-data DeleteTextRequest = DeleteTextRequest'
+data DeleteTextRequest =
+  DeleteTextRequest'
     { _dtrTextRange    :: !(Maybe Range)
     , _dtrObjectId     :: !(Maybe Text)
     , _dtrCellLocation :: !(Maybe TableCellLocation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTextRequest' with the minimum fields required to make a request.
 --
@@ -1689,7 +1692,7 @@ data DeleteTextRequest = DeleteTextRequest'
 deleteTextRequest
     :: DeleteTextRequest
 deleteTextRequest =
-    DeleteTextRequest'
+  DeleteTextRequest'
     { _dtrTextRange = Nothing
     , _dtrObjectId = Nothing
     , _dtrCellLocation = Nothing
@@ -1742,12 +1745,14 @@ instance ToJSON DeleteTextRequest where
 -- to fit the new column.
 --
 -- /See:/ 'insertTableColumnsRequest' smart constructor.
-data InsertTableColumnsRequest = InsertTableColumnsRequest'
+data InsertTableColumnsRequest =
+  InsertTableColumnsRequest'
     { _itcrInsertRight   :: !(Maybe Bool)
     , _itcrNumber        :: !(Maybe (Textual Int32))
     , _itcrCellLocation  :: !(Maybe TableCellLocation)
     , _itcrTableObjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InsertTableColumnsRequest' with the minimum fields required to make a request.
 --
@@ -1763,7 +1768,7 @@ data InsertTableColumnsRequest = InsertTableColumnsRequest'
 insertTableColumnsRequest
     :: InsertTableColumnsRequest
 insertTableColumnsRequest =
-    InsertTableColumnsRequest'
+  InsertTableColumnsRequest'
     { _itcrInsertRight = Nothing
     , _itcrNumber = Nothing
     , _itcrCellLocation = Nothing
@@ -1820,9 +1825,11 @@ instance ToJSON InsertTableColumnsRequest where
 -- | The bulleted lists contained in this text, keyed by list ID.
 --
 -- /See:/ 'textContentLists' smart constructor.
-newtype TextContentLists = TextContentLists'
+newtype TextContentLists =
+  TextContentLists'
     { _tclAddtional :: HashMap Text List
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextContentLists' with the minimum fields required to make a request.
 --
@@ -1833,9 +1840,7 @@ textContentLists
     :: HashMap Text List -- ^ 'tclAddtional'
     -> TextContentLists
 textContentLists pTclAddtional_ =
-    TextContentLists'
-    { _tclAddtional = _Coerce # pTclAddtional_
-    }
+  TextContentLists' {_tclAddtional = _Coerce # pTclAddtional_}
 
 tclAddtional :: Lens' TextContentLists (HashMap Text List)
 tclAddtional
@@ -1853,10 +1858,12 @@ instance ToJSON TextContentLists where
 -- | A width and height.
 --
 -- /See:/ 'size' smart constructor.
-data Size = Size'
+data Size =
+  Size'
     { _sHeight :: !(Maybe Dimension)
     , _sWidth  :: !(Maybe Dimension)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Size' with the minimum fields required to make a request.
 --
@@ -1867,11 +1874,7 @@ data Size = Size'
 -- * 'sWidth'
 size
     :: Size
-size =
-    Size'
-    { _sHeight = Nothing
-    , _sWidth = Nothing
-    }
+size = Size' {_sHeight = Nothing, _sWidth = Nothing}
 
 -- | The height of the object.
 sHeight :: Lens' Size (Maybe Dimension)
@@ -1899,10 +1902,12 @@ instance ToJSON Size where
 -- container.
 --
 -- /See:/ 'stretchedPictureFill' smart constructor.
-data StretchedPictureFill = StretchedPictureFill'
+data StretchedPictureFill =
+  StretchedPictureFill'
     { _spfSize       :: !(Maybe Size)
     , _spfContentURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StretchedPictureFill' with the minimum fields required to make a request.
 --
@@ -1914,10 +1919,7 @@ data StretchedPictureFill = StretchedPictureFill'
 stretchedPictureFill
     :: StretchedPictureFill
 stretchedPictureFill =
-    StretchedPictureFill'
-    { _spfSize = Nothing
-    , _spfContentURL = Nothing
-    }
+  StretchedPictureFill' {_spfSize = Nothing, _spfContentURL = Nothing}
 
 -- | The original size of the picture fill. This field is read-only.
 spfSize :: Lens' StretchedPictureFill (Maybe Size)
@@ -1954,9 +1956,11 @@ instance ToJSON StretchedPictureFill where
 -- | The fill of the border.
 --
 -- /See:/ 'tableBOrderFill' smart constructor.
-newtype TableBOrderFill = TableBOrderFill'
+newtype TableBOrderFill =
+  TableBOrderFill'
     { _tbofSolidFill :: Maybe SolidFill
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableBOrderFill' with the minimum fields required to make a request.
 --
@@ -1965,10 +1969,7 @@ newtype TableBOrderFill = TableBOrderFill'
 -- * 'tbofSolidFill'
 tableBOrderFill
     :: TableBOrderFill
-tableBOrderFill =
-    TableBOrderFill'
-    { _tbofSolidFill = Nothing
-    }
+tableBOrderFill = TableBOrderFill' {_tbofSolidFill = Nothing}
 
 -- | Solid fill.
 tbofSolidFill :: Lens' TableBOrderFill (Maybe SolidFill)
@@ -1990,12 +1991,14 @@ instance ToJSON TableBOrderFill where
 -- Sheets.
 --
 -- /See:/ 'sheetsChart' smart constructor.
-data SheetsChart = SheetsChart'
+data SheetsChart =
+  SheetsChart'
     { _scSpreadsheetId         :: !(Maybe Text)
     , _scContentURL            :: !(Maybe Text)
     , _scSheetsChartProperties :: !(Maybe SheetsChartProperties)
     , _scChartId               :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SheetsChart' with the minimum fields required to make a request.
 --
@@ -2011,7 +2014,7 @@ data SheetsChart = SheetsChart'
 sheetsChart
     :: SheetsChart
 sheetsChart =
-    SheetsChart'
+  SheetsChart'
     { _scSpreadsheetId = Nothing
     , _scContentURL = Nothing
     , _scSheetsChartProperties = Nothing
@@ -2068,9 +2071,11 @@ instance ToJSON SheetsChart where
 -- | The result of creating a shape.
 --
 -- /See:/ 'createShapeResponse' smart constructor.
-newtype CreateShapeResponse = CreateShapeResponse'
+newtype CreateShapeResponse =
+  CreateShapeResponse'
     { _cObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateShapeResponse' with the minimum fields required to make a request.
 --
@@ -2079,10 +2084,7 @@ newtype CreateShapeResponse = CreateShapeResponse'
 -- * 'cObjectId'
 createShapeResponse
     :: CreateShapeResponse
-createShapeResponse =
-    CreateShapeResponse'
-    { _cObjectId = Nothing
-    }
+createShapeResponse = CreateShapeResponse' {_cObjectId = Nothing}
 
 -- | The object ID of the created shape.
 cObjectId :: Lens' CreateShapeResponse (Maybe Text)
@@ -2101,10 +2103,12 @@ instance ToJSON CreateShapeResponse where
 -- | Deletes a column from a table.
 --
 -- /See:/ 'deleteTableColumnRequest' smart constructor.
-data DeleteTableColumnRequest = DeleteTableColumnRequest'
+data DeleteTableColumnRequest =
+  DeleteTableColumnRequest'
     { _dtcrCellLocation  :: !(Maybe TableCellLocation)
     , _dtcrTableObjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTableColumnRequest' with the minimum fields required to make a request.
 --
@@ -2116,10 +2120,8 @@ data DeleteTableColumnRequest = DeleteTableColumnRequest'
 deleteTableColumnRequest
     :: DeleteTableColumnRequest
 deleteTableColumnRequest =
-    DeleteTableColumnRequest'
-    { _dtcrCellLocation = Nothing
-    , _dtcrTableObjectId = Nothing
-    }
+  DeleteTableColumnRequest'
+    {_dtcrCellLocation = Nothing, _dtcrTableObjectId = Nothing}
 
 -- | The reference table cell location from which a column will be deleted.
 -- The column this cell spans will be deleted. If this is a merged cell,
@@ -2153,9 +2155,11 @@ instance ToJSON DeleteTableColumnRequest where
 -- | Contents of each border row in a table.
 --
 -- /See:/ 'tableBOrderRow' smart constructor.
-newtype TableBOrderRow = TableBOrderRow'
+newtype TableBOrderRow =
+  TableBOrderRow'
     { _tborTableBOrderCells :: Maybe [TableBOrderCell]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableBOrderRow' with the minimum fields required to make a request.
 --
@@ -2164,10 +2168,7 @@ newtype TableBOrderRow = TableBOrderRow'
 -- * 'tborTableBOrderCells'
 tableBOrderRow
     :: TableBOrderRow
-tableBOrderRow =
-    TableBOrderRow'
-    { _tborTableBOrderCells = Nothing
-    }
+tableBOrderRow = TableBOrderRow' {_tborTableBOrderCells = Nothing}
 
 -- | Properties of each border cell. When a border\'s adjacent table cells
 -- are merged, it is not included in the response.
@@ -2194,10 +2195,12 @@ instance ToJSON TableBOrderRow where
 -- | The properties for one end of a Line connection.
 --
 -- /See:/ 'lineConnection' smart constructor.
-data LineConnection = LineConnection'
+data LineConnection =
+  LineConnection'
     { _lcConnectedObjectId   :: !(Maybe Text)
     , _lcConnectionSiteIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LineConnection' with the minimum fields required to make a request.
 --
@@ -2209,10 +2212,8 @@ data LineConnection = LineConnection'
 lineConnection
     :: LineConnection
 lineConnection =
-    LineConnection'
-    { _lcConnectedObjectId = Nothing
-    , _lcConnectionSiteIndex = Nothing
-    }
+  LineConnection'
+    {_lcConnectedObjectId = Nothing, _lcConnectionSiteIndex = Nothing}
 
 -- | The object ID of the connected page element. Some page elements, such as
 -- groups, tables, and lines do not have connection sites and therefore
@@ -2257,12 +2258,14 @@ instance ToJSON LineConnection where
 -- | A hypertext link.
 --
 -- /See:/ 'link' smart constructor.
-data Link = Link'
+data Link =
+  Link'
     { _lURL          :: !(Maybe Text)
     , _lPageObjectId :: !(Maybe Text)
     , _lRelativeLink :: !(Maybe LinkRelativeLink)
     , _lSlideIndex   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Link' with the minimum fields required to make a request.
 --
@@ -2278,7 +2281,7 @@ data Link = Link'
 link
     :: Link
 link =
-    Link'
+  Link'
     { _lURL = Nothing
     , _lPageObjectId = Nothing
     , _lRelativeLink = Nothing
@@ -2332,10 +2335,12 @@ instance ToJSON Link where
 -- PageElements to create a Group on the same page as all the children.
 --
 -- /See:/ 'groupObjectsRequest' smart constructor.
-data GroupObjectsRequest = GroupObjectsRequest'
+data GroupObjectsRequest =
+  GroupObjectsRequest'
     { _gorGroupObjectId     :: !(Maybe Text)
     , _gorChildrenObjectIds :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupObjectsRequest' with the minimum fields required to make a request.
 --
@@ -2347,10 +2352,8 @@ data GroupObjectsRequest = GroupObjectsRequest'
 groupObjectsRequest
     :: GroupObjectsRequest
 groupObjectsRequest =
-    GroupObjectsRequest'
-    { _gorGroupObjectId = Nothing
-    , _gorChildrenObjectIds = Nothing
-    }
+  GroupObjectsRequest'
+    {_gorGroupObjectId = Nothing, _gorChildrenObjectIds = Nothing}
 
 -- | A user-supplied object ID for the group to be created. If you specify an
 -- ID, it must be unique among all pages and page elements in the
@@ -2393,10 +2396,12 @@ instance ToJSON GroupObjectsRequest where
 -- | A magnitude in a single direction in the specified units.
 --
 -- /See:/ 'dimension' smart constructor.
-data Dimension = Dimension'
+data Dimension =
+  Dimension'
     { _dMagnitude :: !(Maybe (Textual Double))
     , _dUnit      :: !(Maybe DimensionUnit)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 --
@@ -2407,11 +2412,7 @@ data Dimension = Dimension'
 -- * 'dUnit'
 dimension
     :: Dimension
-dimension =
-    Dimension'
-    { _dMagnitude = Nothing
-    , _dUnit = Nothing
-    }
+dimension = Dimension' {_dMagnitude = Nothing, _dUnit = Nothing}
 
 -- | The magnitude.
 dMagnitude :: Lens' Dimension (Maybe Double)
@@ -2440,11 +2441,13 @@ instance ToJSON Dimension where
 -- | Response message from a batch update.
 --
 -- /See:/ 'batchUpdatePresentationResponse' smart constructor.
-data BatchUpdatePresentationResponse = BatchUpdatePresentationResponse'
+data BatchUpdatePresentationResponse =
+  BatchUpdatePresentationResponse'
     { _bPresentationId :: !(Maybe Text)
     , _bReplies        :: !(Maybe [Response])
     , _bWriteControl   :: !(Maybe WriteControl)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchUpdatePresentationResponse' with the minimum fields required to make a request.
 --
@@ -2458,11 +2461,8 @@ data BatchUpdatePresentationResponse = BatchUpdatePresentationResponse'
 batchUpdatePresentationResponse
     :: BatchUpdatePresentationResponse
 batchUpdatePresentationResponse =
-    BatchUpdatePresentationResponse'
-    { _bPresentationId = Nothing
-    , _bReplies = Nothing
-    , _bWriteControl = Nothing
-    }
+  BatchUpdatePresentationResponse'
+    {_bPresentationId = Nothing, _bReplies = Nothing, _bWriteControl = Nothing}
 
 -- | The presentation the updates were applied to.
 bPresentationId :: Lens' BatchUpdatePresentationResponse (Maybe Text)
@@ -2519,9 +2519,11 @@ instance ToJSON BatchUpdatePresentationResponse where
 -- duplicate objects will receive a new random ID.
 --
 -- /See:/ 'duplicateObjectRequestObjectIds' smart constructor.
-newtype DuplicateObjectRequestObjectIds = DuplicateObjectRequestObjectIds'
+newtype DuplicateObjectRequestObjectIds =
+  DuplicateObjectRequestObjectIds'
     { _doroiAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DuplicateObjectRequestObjectIds' with the minimum fields required to make a request.
 --
@@ -2532,9 +2534,8 @@ duplicateObjectRequestObjectIds
     :: HashMap Text Text -- ^ 'doroiAddtional'
     -> DuplicateObjectRequestObjectIds
 duplicateObjectRequestObjectIds pDoroiAddtional_ =
-    DuplicateObjectRequestObjectIds'
-    { _doroiAddtional = _Coerce # pDoroiAddtional_
-    }
+  DuplicateObjectRequestObjectIds'
+    {_doroiAddtional = _Coerce # pDoroiAddtional_}
 
 doroiAddtional :: Lens' DuplicateObjectRequestObjectIds (HashMap Text Text)
 doroiAddtional
@@ -2556,9 +2557,11 @@ instance ToJSON DuplicateObjectRequestObjectIds where
 -- | The result of replacing shapes with a Google Sheets chart.
 --
 -- /See:/ 'replaceAllShapesWithSheetsChartResponse' smart constructor.
-newtype ReplaceAllShapesWithSheetsChartResponse = ReplaceAllShapesWithSheetsChartResponse'
+newtype ReplaceAllShapesWithSheetsChartResponse =
+  ReplaceAllShapesWithSheetsChartResponse'
     { _raswscrOccurrencesChanged :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplaceAllShapesWithSheetsChartResponse' with the minimum fields required to make a request.
 --
@@ -2568,9 +2571,8 @@ newtype ReplaceAllShapesWithSheetsChartResponse = ReplaceAllShapesWithSheetsChar
 replaceAllShapesWithSheetsChartResponse
     :: ReplaceAllShapesWithSheetsChartResponse
 replaceAllShapesWithSheetsChartResponse =
-    ReplaceAllShapesWithSheetsChartResponse'
-    { _raswscrOccurrencesChanged = Nothing
-    }
+  ReplaceAllShapesWithSheetsChartResponse'
+    {_raswscrOccurrencesChanged = Nothing}
 
 -- | The number of shapes replaced with charts.
 raswscrOccurrencesChanged :: Lens' ReplaceAllShapesWithSheetsChartResponse (Maybe Int32)
@@ -2580,7 +2582,8 @@ raswscrOccurrencesChanged
       . mapping _Coerce
 
 instance FromJSON
-         ReplaceAllShapesWithSheetsChartResponse where
+           ReplaceAllShapesWithSheetsChartResponse
+         where
         parseJSON
           = withObject
               "ReplaceAllShapesWithSheetsChartResponse"
@@ -2589,7 +2592,8 @@ instance FromJSON
                    (o .:? "occurrencesChanged"))
 
 instance ToJSON
-         ReplaceAllShapesWithSheetsChartResponse where
+           ReplaceAllShapesWithSheetsChartResponse
+         where
         toJSON ReplaceAllShapesWithSheetsChartResponse'{..}
           = object
               (catMaybes
@@ -2599,12 +2603,14 @@ instance ToJSON
 -- | Creates a new table.
 --
 -- /See:/ 'createTableRequest' smart constructor.
-data CreateTableRequest = CreateTableRequest'
+data CreateTableRequest =
+  CreateTableRequest'
     { _ctrObjectId          :: !(Maybe Text)
     , _ctrRows              :: !(Maybe (Textual Int32))
     , _ctrElementProperties :: !(Maybe PageElementProperties)
     , _ctrColumns           :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTableRequest' with the minimum fields required to make a request.
 --
@@ -2620,7 +2626,7 @@ data CreateTableRequest = CreateTableRequest'
 createTableRequest
     :: CreateTableRequest
 createTableRequest =
-    CreateTableRequest'
+  CreateTableRequest'
     { _ctrObjectId = Nothing
     , _ctrRows = Nothing
     , _ctrElementProperties = Nothing
@@ -2681,11 +2687,13 @@ instance ToJSON CreateTableRequest where
 -- | The border styling properties of the TableBorderCell.
 --
 -- /See:/ 'tableBOrderProperties' smart constructor.
-data TableBOrderProperties = TableBOrderProperties'
+data TableBOrderProperties =
+  TableBOrderProperties'
     { _tbopTableBOrderFill :: !(Maybe TableBOrderFill)
     , _tbopWeight          :: !(Maybe Dimension)
     , _tbopDashStyle       :: !(Maybe TableBOrderPropertiesDashStyle)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableBOrderProperties' with the minimum fields required to make a request.
 --
@@ -2699,7 +2707,7 @@ data TableBOrderProperties = TableBOrderProperties'
 tableBOrderProperties
     :: TableBOrderProperties
 tableBOrderProperties =
-    TableBOrderProperties'
+  TableBOrderProperties'
     { _tbopTableBOrderFill = Nothing
     , _tbopWeight = Nothing
     , _tbopDashStyle = Nothing
@@ -2741,7 +2749,8 @@ instance ToJSON TableBOrderProperties where
 -- | A single response from an update.
 --
 -- /See:/ 'response' smart constructor.
-data Response = Response'
+data Response =
+  Response'
     { _rReplaceAllShapesWithImage       :: !(Maybe ReplaceAllShapesWithImageResponse)
     , _rCreateLine                      :: !(Maybe CreateLineResponse)
     , _rReplaceAllText                  :: !(Maybe ReplaceAllTextResponse)
@@ -2754,7 +2763,8 @@ data Response = Response'
     , _rCreateVideo                     :: !(Maybe CreateVideoResponse)
     , _rCreateImage                     :: !(Maybe CreateImageResponse)
     , _rCreateSlide                     :: !(Maybe CreateSlideResponse)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Response' with the minimum fields required to make a request.
 --
@@ -2786,7 +2796,7 @@ data Response = Response'
 response
     :: Response
 response =
-    Response'
+  Response'
     { _rReplaceAllShapesWithImage = Nothing
     , _rCreateLine = Nothing
     , _rReplaceAllText = Nothing
@@ -2908,9 +2918,11 @@ instance ToJSON Response where
 -- | A color that can either be fully opaque or fully transparent.
 --
 -- /See:/ 'optionalColor' smart constructor.
-newtype OptionalColor = OptionalColor'
+newtype OptionalColor =
+  OptionalColor'
     { _ocOpaqueColor :: Maybe OpaqueColor
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OptionalColor' with the minimum fields required to make a request.
 --
@@ -2919,10 +2931,7 @@ newtype OptionalColor = OptionalColor'
 -- * 'ocOpaqueColor'
 optionalColor
     :: OptionalColor
-optionalColor =
-    OptionalColor'
-    { _ocOpaqueColor = Nothing
-    }
+optionalColor = OptionalColor' {_ocOpaqueColor = Nothing}
 
 -- | If set, this will be used as an opaque color. If unset, this represents
 -- a transparent color.
@@ -2947,10 +2956,12 @@ instance ToJSON OptionalColor where
 -- the same page at the same position as the original.
 --
 -- /See:/ 'duplicateObjectRequest' smart constructor.
-data DuplicateObjectRequest = DuplicateObjectRequest'
+data DuplicateObjectRequest =
+  DuplicateObjectRequest'
     { _dorObjectId  :: !(Maybe Text)
     , _dorObjectIds :: !(Maybe DuplicateObjectRequestObjectIds)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DuplicateObjectRequest' with the minimum fields required to make a request.
 --
@@ -2962,10 +2973,7 @@ data DuplicateObjectRequest = DuplicateObjectRequest'
 duplicateObjectRequest
     :: DuplicateObjectRequest
 duplicateObjectRequest =
-    DuplicateObjectRequest'
-    { _dorObjectId = Nothing
-    , _dorObjectIds = Nothing
-    }
+  DuplicateObjectRequest' {_dorObjectId = Nothing, _dorObjectIds = Nothing}
 
 -- | The ID of the object to duplicate.
 dorObjectId :: Lens' DuplicateObjectRequest (Maybe Text)
@@ -3008,9 +3016,11 @@ instance ToJSON DuplicateObjectRequest where
 -- | Ungroups objects, such as groups.
 --
 -- /See:/ 'unGroupObjectsRequest' smart constructor.
-newtype UnGroupObjectsRequest = UnGroupObjectsRequest'
+newtype UnGroupObjectsRequest =
+  UnGroupObjectsRequest'
     { _ugorObjectIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnGroupObjectsRequest' with the minimum fields required to make a request.
 --
@@ -3019,10 +3029,7 @@ newtype UnGroupObjectsRequest = UnGroupObjectsRequest'
 -- * 'ugorObjectIds'
 unGroupObjectsRequest
     :: UnGroupObjectsRequest
-unGroupObjectsRequest =
-    UnGroupObjectsRequest'
-    { _ugorObjectIds = Nothing
-    }
+unGroupObjectsRequest = UnGroupObjectsRequest' {_ugorObjectIds = Nothing}
 
 -- | The object IDs of the objects to ungroup. Only groups that are not
 -- inside other groups can be ungrouped. All the groups should be on the
@@ -3050,7 +3057,8 @@ instance ToJSON UnGroupObjectsRequest where
 -- | A page in a presentation.
 --
 -- /See:/ 'page' smart constructor.
-data Page = Page'
+data Page =
+  Page'
     { _pNotesProperties  :: !(Maybe NotesProperties)
     , _pMasterProperties :: !(Maybe MasterProperties)
     , _pObjectId         :: !(Maybe Text)
@@ -3060,7 +3068,8 @@ data Page = Page'
     , _pLayoutProperties :: !(Maybe LayoutProperties)
     , _pPageType         :: !(Maybe PagePageType)
     , _pRevisionId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
@@ -3086,7 +3095,7 @@ data Page = Page'
 page
     :: Page
 page =
-    Page'
+  Page'
     { _pNotesProperties = Nothing
     , _pMasterProperties = Nothing
     , _pObjectId = Nothing
@@ -3194,9 +3203,11 @@ instance ToJSON Page where
 -- | The result of replacing text.
 --
 -- /See:/ 'replaceAllTextResponse' smart constructor.
-newtype ReplaceAllTextResponse = ReplaceAllTextResponse'
+newtype ReplaceAllTextResponse =
+  ReplaceAllTextResponse'
     { _ratrOccurrencesChanged :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplaceAllTextResponse' with the minimum fields required to make a request.
 --
@@ -3206,9 +3217,7 @@ newtype ReplaceAllTextResponse = ReplaceAllTextResponse'
 replaceAllTextResponse
     :: ReplaceAllTextResponse
 replaceAllTextResponse =
-    ReplaceAllTextResponse'
-    { _ratrOccurrencesChanged = Nothing
-    }
+  ReplaceAllTextResponse' {_ratrOccurrencesChanged = Nothing}
 
 -- | The number of occurrences changed by replacing all text.
 ratrOccurrencesChanged :: Lens' ReplaceAllTextResponse (Maybe Int32)
@@ -3234,12 +3243,14 @@ instance ToJSON ReplaceAllTextResponse where
 -- | Describes the bullet of a paragraph.
 --
 -- /See:/ 'bullet' smart constructor.
-data Bullet = Bullet'
+data Bullet =
+  Bullet'
     { _bGlyph        :: !(Maybe Text)
     , _bListId       :: !(Maybe Text)
     , _bNestingLevel :: !(Maybe (Textual Int32))
     , _bBulletStyle  :: !(Maybe TextStyle)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Bullet' with the minimum fields required to make a request.
 --
@@ -3255,7 +3266,7 @@ data Bullet = Bullet'
 bullet
     :: Bullet
 bullet =
-    Bullet'
+  Bullet'
     { _bGlyph = Nothing
     , _bListId = Nothing
     , _bNestingLevel = Nothing
@@ -3303,11 +3314,13 @@ instance ToJSON Bullet where
 -- | Update the properties of an Image.
 --
 -- /See:/ 'updateImagePropertiesRequest' smart constructor.
-data UpdateImagePropertiesRequest = UpdateImagePropertiesRequest'
+data UpdateImagePropertiesRequest =
+  UpdateImagePropertiesRequest'
     { _uiprObjectId        :: !(Maybe Text)
     , _uiprImageProperties :: !(Maybe ImageProperties)
     , _uiprFields          :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateImagePropertiesRequest' with the minimum fields required to make a request.
 --
@@ -3321,7 +3334,7 @@ data UpdateImagePropertiesRequest = UpdateImagePropertiesRequest'
 updateImagePropertiesRequest
     :: UpdateImagePropertiesRequest
 updateImagePropertiesRequest =
-    UpdateImagePropertiesRequest'
+  UpdateImagePropertiesRequest'
     { _uiprObjectId = Nothing
     , _uiprImageProperties = Nothing
     , _uiprFields = Nothing
@@ -3369,11 +3382,13 @@ instance ToJSON UpdateImagePropertiesRequest where
 -- SLIDE.
 --
 -- /See:/ 'slideProperties' smart constructor.
-data SlideProperties = SlideProperties'
+data SlideProperties =
+  SlideProperties'
     { _spLayoutObjectId :: !(Maybe Text)
     , _spMasterObjectId :: !(Maybe Text)
     , _spNotesPage      :: !(Maybe Page)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SlideProperties' with the minimum fields required to make a request.
 --
@@ -3387,7 +3402,7 @@ data SlideProperties = SlideProperties'
 slideProperties
     :: SlideProperties
 slideProperties =
-    SlideProperties'
+  SlideProperties'
     { _spLayoutObjectId = Nothing
     , _spMasterObjectId = Nothing
     , _spNotesPage = Nothing
@@ -3438,7 +3453,8 @@ instance ToJSON SlideProperties where
 -- | A Google Slides presentation.
 --
 -- /See:/ 'presentation' smart constructor.
-data Presentation = Presentation'
+data Presentation =
+  Presentation'
     { _preSlides         :: !(Maybe [Page])
     , _preNotesMaster    :: !(Maybe Page)
     , _preMasters        :: !(Maybe [Page])
@@ -3448,7 +3464,8 @@ data Presentation = Presentation'
     , _preRevisionId     :: !(Maybe Text)
     , _prePageSize       :: !(Maybe Size)
     , _preLayouts        :: !(Maybe [Page])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Presentation' with the minimum fields required to make a request.
 --
@@ -3474,7 +3491,7 @@ data Presentation = Presentation'
 presentation
     :: Presentation
 presentation =
-    Presentation'
+  Presentation'
     { _preSlides = Nothing
     , _preNotesMaster = Nothing
     , _preMasters = Nothing
@@ -3597,10 +3614,12 @@ instance ToJSON Presentation where
 -- | A pair mapping a theme color type to the concrete color it represents.
 --
 -- /See:/ 'themeColorPair' smart constructor.
-data ThemeColorPair = ThemeColorPair'
+data ThemeColorPair =
+  ThemeColorPair'
     { _tcpColor :: !(Maybe RgbColor)
     , _tcpType  :: !(Maybe ThemeColorPairType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ThemeColorPair' with the minimum fields required to make a request.
 --
@@ -3611,11 +3630,7 @@ data ThemeColorPair = ThemeColorPair'
 -- * 'tcpType'
 themeColorPair
     :: ThemeColorPair
-themeColorPair =
-    ThemeColorPair'
-    { _tcpColor = Nothing
-    , _tcpType = Nothing
-    }
+themeColorPair = ThemeColorPair' {_tcpColor = Nothing, _tcpType = Nothing}
 
 -- | The concrete color corresponding to the theme color type above.
 tcpColor :: Lens' ThemeColorPair (Maybe RgbColor)
@@ -3645,7 +3660,8 @@ instance ToJSON ThemeColorPair where
 -- created in the Slides editor, which may depend on the page element kind.
 --
 -- /See:/ 'shadow' smart constructor.
-data Shadow = Shadow'
+data Shadow =
+  Shadow'
     { _sTransform       :: !(Maybe AffineTransform)
     , _sColor           :: !(Maybe OpaqueColor)
     , _sBlurRadius      :: !(Maybe Dimension)
@@ -3654,7 +3670,8 @@ data Shadow = Shadow'
     , _sAlignment       :: !(Maybe ShadowAlignment)
     , _sPropertyState   :: !(Maybe ShadowPropertyState)
     , _sType            :: !(Maybe ShadowType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Shadow' with the minimum fields required to make a request.
 --
@@ -3678,7 +3695,7 @@ data Shadow = Shadow'
 shadow
     :: Shadow
 shadow =
-    Shadow'
+  Shadow'
     { _sTransform = Nothing
     , _sColor = Nothing
     , _sBlurRadius = Nothing
@@ -3767,7 +3784,8 @@ instance ToJSON Shadow where
 -- | The properties of the Image.
 --
 -- /See:/ 'imageProperties' smart constructor.
-data ImageProperties = ImageProperties'
+data ImageProperties =
+  ImageProperties'
     { _ipCropProperties :: !(Maybe CropProperties)
     , _ipLink           :: !(Maybe Link)
     , _ipTransparency   :: !(Maybe (Textual Double))
@@ -3776,7 +3794,8 @@ data ImageProperties = ImageProperties'
     , _ipRecolor        :: !(Maybe Recolor)
     , _ipOutline        :: !(Maybe Outline)
     , _ipBrightness     :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImageProperties' with the minimum fields required to make a request.
 --
@@ -3800,7 +3819,7 @@ data ImageProperties = ImageProperties'
 imageProperties
     :: ImageProperties
 imageProperties =
-    ImageProperties'
+  ImageProperties'
     { _ipCropProperties = Nothing
     , _ipLink = Nothing
     , _ipTransparency = Nothing
@@ -3891,11 +3910,13 @@ instance ToJSON ImageProperties where
 -- connector, curved connector, or bent connector.
 --
 -- /See:/ 'line' smart constructor.
-data Line = Line'
+data Line =
+  Line'
     { _lLineProperties :: !(Maybe LineProperties)
     , _lLineCategory   :: !(Maybe LineLineCategory)
     , _lLineType       :: !(Maybe LineLineType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Line' with the minimum fields required to make a request.
 --
@@ -3909,11 +3930,8 @@ data Line = Line'
 line
     :: Line
 line =
-    Line'
-    { _lLineProperties = Nothing
-    , _lLineCategory = Nothing
-    , _lLineType = Nothing
-    }
+  Line'
+    {_lLineProperties = Nothing, _lLineCategory = Nothing, _lLineType = Nothing}
 
 -- | The properties of the line.
 lLineProperties :: Lens' Line (Maybe LineProperties)
@@ -3952,9 +3970,11 @@ instance ToJSON Line where
 -- | The result of creating a video.
 --
 -- /See:/ 'createVideoResponse' smart constructor.
-newtype CreateVideoResponse = CreateVideoResponse'
+newtype CreateVideoResponse =
+  CreateVideoResponse'
     { _cvrObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateVideoResponse' with the minimum fields required to make a request.
 --
@@ -3963,10 +3983,7 @@ newtype CreateVideoResponse = CreateVideoResponse'
 -- * 'cvrObjectId'
 createVideoResponse
     :: CreateVideoResponse
-createVideoResponse =
-    CreateVideoResponse'
-    { _cvrObjectId = Nothing
-    }
+createVideoResponse = CreateVideoResponse' {_cvrObjectId = Nothing}
 
 -- | The object ID of the created video.
 cvrObjectId :: Lens' CreateVideoResponse (Maybe Text)
@@ -3987,10 +4004,12 @@ instance ToJSON CreateVideoResponse where
 -- - One of the layouts in the presentation.
 --
 -- /See:/ 'layoutReference' smart constructor.
-data LayoutReference = LayoutReference'
+data LayoutReference =
+  LayoutReference'
     { _lrPredefinedLayout :: !(Maybe LayoutReferencePredefinedLayout)
     , _lrLayoutId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LayoutReference' with the minimum fields required to make a request.
 --
@@ -4002,10 +4021,7 @@ data LayoutReference = LayoutReference'
 layoutReference
     :: LayoutReference
 layoutReference =
-    LayoutReference'
-    { _lrPredefinedLayout = Nothing
-    , _lrLayoutId = Nothing
-    }
+  LayoutReference' {_lrPredefinedLayout = Nothing, _lrLayoutId = Nothing}
 
 -- | Predefined layout.
 lrPredefinedLayout :: Lens' LayoutReference (Maybe LayoutReferencePredefinedLayout)
@@ -4035,9 +4051,11 @@ instance ToJSON LayoutReference where
 -- | The fill of the line.
 --
 -- /See:/ 'lineFill' smart constructor.
-newtype LineFill = LineFill'
+newtype LineFill =
+  LineFill'
     { _lfSolidFill :: Maybe SolidFill
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LineFill' with the minimum fields required to make a request.
 --
@@ -4046,10 +4064,7 @@ newtype LineFill = LineFill'
 -- * 'lfSolidFill'
 lineFill
     :: LineFill
-lineFill =
-    LineFill'
-    { _lfSolidFill = Nothing
-    }
+lineFill = LineFill' {_lfSolidFill = Nothing}
 
 -- | Solid color fill.
 lfSolidFill :: Lens' LineFill (Maybe SolidFill)
@@ -4072,11 +4087,13 @@ instance ToJSON LineFill where
 -- for PageElement.transform for more details.
 --
 -- /See:/ 'updatePageElementTransformRequest' smart constructor.
-data UpdatePageElementTransformRequest = UpdatePageElementTransformRequest'
+data UpdatePageElementTransformRequest =
+  UpdatePageElementTransformRequest'
     { _upetrTransform :: !(Maybe AffineTransform)
     , _upetrObjectId  :: !(Maybe Text)
     , _upetrApplyMode :: !(Maybe UpdatePageElementTransformRequestApplyMode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdatePageElementTransformRequest' with the minimum fields required to make a request.
 --
@@ -4090,7 +4107,7 @@ data UpdatePageElementTransformRequest = UpdatePageElementTransformRequest'
 updatePageElementTransformRequest
     :: UpdatePageElementTransformRequest
 updatePageElementTransformRequest =
-    UpdatePageElementTransformRequest'
+  UpdatePageElementTransformRequest'
     { _upetrTransform = Nothing
     , _upetrObjectId = Nothing
     , _upetrApplyMode = Nothing
@@ -4135,12 +4152,14 @@ instance ToJSON UpdatePageElementTransformRequest
 -- | Inserts rows into a table.
 --
 -- /See:/ 'insertTableRowsRequest' smart constructor.
-data InsertTableRowsRequest = InsertTableRowsRequest'
+data InsertTableRowsRequest =
+  InsertTableRowsRequest'
     { _itrrInsertBelow   :: !(Maybe Bool)
     , _itrrNumber        :: !(Maybe (Textual Int32))
     , _itrrCellLocation  :: !(Maybe TableCellLocation)
     , _itrrTableObjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InsertTableRowsRequest' with the minimum fields required to make a request.
 --
@@ -4156,7 +4175,7 @@ data InsertTableRowsRequest = InsertTableRowsRequest'
 insertTableRowsRequest
     :: InsertTableRowsRequest
 insertTableRowsRequest =
-    InsertTableRowsRequest'
+  InsertTableRowsRequest'
     { _itrrInsertBelow = Nothing
     , _itrrNumber = Nothing
     , _itrrCellLocation = Nothing
@@ -4212,10 +4231,12 @@ instance ToJSON InsertTableRowsRequest where
 -- | Unmerges cells in a Table.
 --
 -- /See:/ 'unmergeTableCellsRequest' smart constructor.
-data UnmergeTableCellsRequest = UnmergeTableCellsRequest'
+data UnmergeTableCellsRequest =
+  UnmergeTableCellsRequest'
     { _utcrObjectId   :: !(Maybe Text)
     , _utcrTableRange :: !(Maybe TableRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnmergeTableCellsRequest' with the minimum fields required to make a request.
 --
@@ -4227,10 +4248,7 @@ data UnmergeTableCellsRequest = UnmergeTableCellsRequest'
 unmergeTableCellsRequest
     :: UnmergeTableCellsRequest
 unmergeTableCellsRequest =
-    UnmergeTableCellsRequest'
-    { _utcrObjectId = Nothing
-    , _utcrTableRange = Nothing
-    }
+  UnmergeTableCellsRequest' {_utcrObjectId = Nothing, _utcrTableRange = Nothing}
 
 -- | The object ID of the table.
 utcrObjectId :: Lens' UnmergeTableCellsRequest (Maybe Text)
@@ -4265,12 +4283,14 @@ instance ToJSON UnmergeTableCellsRequest where
 -- | A PageElement kind representing a video.
 --
 -- /See:/ 'video' smart constructor.
-data Video = Video'
+data Video =
+  Video'
     { _vURL             :: !(Maybe Text)
     , _vSource          :: !(Maybe VideoSource)
     , _vId              :: !(Maybe Text)
     , _vVideoProperties :: !(Maybe VideoProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Video' with the minimum fields required to make a request.
 --
@@ -4286,7 +4306,7 @@ data Video = Video'
 video
     :: Video
 video =
-    Video'
+  Video'
     { _vURL = Nothing
     , _vSource = Nothing
     , _vId = Nothing
@@ -4331,12 +4351,14 @@ instance ToJSON Video where
 -- | Updates the properties of a Table column.
 --
 -- /See:/ 'updateTableColumnPropertiesRequest' smart constructor.
-data UpdateTableColumnPropertiesRequest = UpdateTableColumnPropertiesRequest'
+data UpdateTableColumnPropertiesRequest =
+  UpdateTableColumnPropertiesRequest'
     { _utcprObjectId              :: !(Maybe Text)
     , _utcprTableColumnProperties :: !(Maybe TableColumnProperties)
     , _utcprFields                :: !(Maybe GFieldMask)
     , _utcprColumnIndices         :: !(Maybe [Textual Int32])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTableColumnPropertiesRequest' with the minimum fields required to make a request.
 --
@@ -4352,7 +4374,7 @@ data UpdateTableColumnPropertiesRequest = UpdateTableColumnPropertiesRequest'
 updateTableColumnPropertiesRequest
     :: UpdateTableColumnPropertiesRequest
 updateTableColumnPropertiesRequest =
-    UpdateTableColumnPropertiesRequest'
+  UpdateTableColumnPropertiesRequest'
     { _utcprObjectId = Nothing
     , _utcprTableColumnProperties = Nothing
     , _utcprFields = Nothing
@@ -4418,10 +4440,12 @@ instance ToJSON UpdateTableColumnPropertiesRequest
 -- | The properties of the TableCell.
 --
 -- /See:/ 'tableCellProperties' smart constructor.
-data TableCellProperties = TableCellProperties'
+data TableCellProperties =
+  TableCellProperties'
     { _tcpTableCellBackgRoundFill :: !(Maybe TableCellBackgRoundFill)
     , _tcpContentAlignment        :: !(Maybe TableCellPropertiesContentAlignment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableCellProperties' with the minimum fields required to make a request.
 --
@@ -4433,10 +4457,8 @@ data TableCellProperties = TableCellProperties'
 tableCellProperties
     :: TableCellProperties
 tableCellProperties =
-    TableCellProperties'
-    { _tcpTableCellBackgRoundFill = Nothing
-    , _tcpContentAlignment = Nothing
-    }
+  TableCellProperties'
+    {_tcpTableCellBackgRoundFill = Nothing, _tcpContentAlignment = Nothing}
 
 -- | The background fill of the table cell. The default fill matches the fill
 -- for newly created table cells in the Slides editor.
@@ -4472,9 +4494,11 @@ instance ToJSON TableCellProperties where
 -- | The result of creating a line.
 --
 -- /See:/ 'createLineResponse' smart constructor.
-newtype CreateLineResponse = CreateLineResponse'
+newtype CreateLineResponse =
+  CreateLineResponse'
     { _clrObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateLineResponse' with the minimum fields required to make a request.
 --
@@ -4483,10 +4507,7 @@ newtype CreateLineResponse = CreateLineResponse'
 -- * 'clrObjectId'
 createLineResponse
     :: CreateLineResponse
-createLineResponse =
-    CreateLineResponse'
-    { _clrObjectId = Nothing
-    }
+createLineResponse = CreateLineResponse' {_clrObjectId = Nothing}
 
 -- | The object ID of the created line.
 clrObjectId :: Lens' CreateLineResponse (Maybe Text)
@@ -4506,9 +4527,11 @@ instance ToJSON CreateLineResponse where
 -- | A PageElement kind representing word art.
 --
 -- /See:/ 'wordArt' smart constructor.
-newtype WordArt = WordArt'
+newtype WordArt =
+  WordArt'
     { _waRenderedText :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WordArt' with the minimum fields required to make a request.
 --
@@ -4517,10 +4540,7 @@ newtype WordArt = WordArt'
 -- * 'waRenderedText'
 wordArt
     :: WordArt
-wordArt =
-    WordArt'
-    { _waRenderedText = Nothing
-    }
+wordArt = WordArt' {_waRenderedText = Nothing}
 
 -- | The text rendered as word art.
 waRenderedText :: Lens' WordArt (Maybe Text)
@@ -4541,10 +4561,12 @@ instance ToJSON WordArt where
 -- | The table cell background fill.
 --
 -- /See:/ 'tableCellBackgRoundFill' smart constructor.
-data TableCellBackgRoundFill = TableCellBackgRoundFill'
+data TableCellBackgRoundFill =
+  TableCellBackgRoundFill'
     { _tcbrfSolidFill     :: !(Maybe SolidFill)
     , _tcbrfPropertyState :: !(Maybe TableCellBackgRoundFillPropertyState)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableCellBackgRoundFill' with the minimum fields required to make a request.
 --
@@ -4556,10 +4578,8 @@ data TableCellBackgRoundFill = TableCellBackgRoundFill'
 tableCellBackgRoundFill
     :: TableCellBackgRoundFill
 tableCellBackgRoundFill =
-    TableCellBackgRoundFill'
-    { _tcbrfSolidFill = Nothing
-    , _tcbrfPropertyState = Nothing
-    }
+  TableCellBackgRoundFill'
+    {_tcbrfSolidFill = Nothing, _tcbrfPropertyState = Nothing}
 
 -- | Solid color fill.
 tcbrfSolidFill :: Lens' TableCellBackgRoundFill (Maybe SolidFill)
@@ -4595,10 +4615,12 @@ instance ToJSON TableCellBackgRoundFill where
 -- styling.
 --
 -- /See:/ 'textRun' smart constructor.
-data TextRun = TextRun'
+data TextRun =
+  TextRun'
     { _trStyle   :: !(Maybe TextStyle)
     , _trContent :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextRun' with the minimum fields required to make a request.
 --
@@ -4609,11 +4631,7 @@ data TextRun = TextRun'
 -- * 'trContent'
 textRun
     :: TextRun
-textRun =
-    TextRun'
-    { _trStyle = Nothing
-    , _trContent = Nothing
-    }
+textRun = TextRun' {_trStyle = Nothing, _trContent = Nothing}
 
 -- | The styling applied to this run.
 trStyle :: Lens' TextRun (Maybe TextStyle)
@@ -4643,9 +4661,11 @@ instance ToJSON TextRun where
 -- drive.readonly, or drive OAuth scopes.
 --
 -- /See:/ 'refreshSheetsChartRequest' smart constructor.
-newtype RefreshSheetsChartRequest = RefreshSheetsChartRequest'
+newtype RefreshSheetsChartRequest =
+  RefreshSheetsChartRequest'
     { _rscrObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RefreshSheetsChartRequest' with the minimum fields required to make a request.
 --
@@ -4654,10 +4674,7 @@ newtype RefreshSheetsChartRequest = RefreshSheetsChartRequest'
 -- * 'rscrObjectId'
 refreshSheetsChartRequest
     :: RefreshSheetsChartRequest
-refreshSheetsChartRequest =
-    RefreshSheetsChartRequest'
-    { _rscrObjectId = Nothing
-    }
+refreshSheetsChartRequest = RefreshSheetsChartRequest' {_rscrObjectId = Nothing}
 
 -- | The object ID of the chart to refresh.
 rscrObjectId :: Lens' RefreshSheetsChartRequest (Maybe Text)
@@ -4678,11 +4695,13 @@ instance ToJSON RefreshSheetsChartRequest where
 -- | Properties and contents of each row in a table.
 --
 -- /See:/ 'tableRow' smart constructor.
-data TableRow = TableRow'
+data TableRow =
+  TableRow'
     { _trTableRowProperties :: !(Maybe TableRowProperties)
     , _trTableCells         :: !(Maybe [TableCell])
     , _trRowHeight          :: !(Maybe Dimension)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableRow' with the minimum fields required to make a request.
 --
@@ -4696,7 +4715,7 @@ data TableRow = TableRow'
 tableRow
     :: TableRow
 tableRow =
-    TableRow'
+  TableRow'
     { _trTableRowProperties = Nothing
     , _trTableCells = Nothing
     , _trRowHeight = Nothing
@@ -4743,10 +4762,12 @@ instance ToJSON TableRow where
 -- | Represents a font family and weight used to style a TextRun.
 --
 -- /See:/ 'weightedFontFamily' smart constructor.
-data WeightedFontFamily = WeightedFontFamily'
+data WeightedFontFamily =
+  WeightedFontFamily'
     { _wffFontFamily :: !(Maybe Text)
     , _wffWeight     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WeightedFontFamily' with the minimum fields required to make a request.
 --
@@ -4758,10 +4779,7 @@ data WeightedFontFamily = WeightedFontFamily'
 weightedFontFamily
     :: WeightedFontFamily
 weightedFontFamily =
-    WeightedFontFamily'
-    { _wffFontFamily = Nothing
-    , _wffWeight = Nothing
-    }
+  WeightedFontFamily' {_wffFontFamily = Nothing, _wffWeight = Nothing}
 
 -- | The font family of the text. The font family can be any font from the
 -- Font menu in Slides or from [Google Fonts]
@@ -4804,12 +4822,14 @@ instance ToJSON WeightedFontFamily where
 -- drive.file OAuth scopes.
 --
 -- /See:/ 'createVideoRequest' smart constructor.
-data CreateVideoRequest = CreateVideoRequest'
+data CreateVideoRequest =
+  CreateVideoRequest'
     { _creObjectId          :: !(Maybe Text)
     , _creElementProperties :: !(Maybe PageElementProperties)
     , _creSource            :: !(Maybe CreateVideoRequestSource)
     , _creId                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateVideoRequest' with the minimum fields required to make a request.
 --
@@ -4825,7 +4845,7 @@ data CreateVideoRequest = CreateVideoRequest'
 createVideoRequest
     :: CreateVideoRequest
 createVideoRequest =
-    CreateVideoRequest'
+  CreateVideoRequest'
     { _creObjectId = Nothing
     , _creElementProperties = Nothing
     , _creSource = Nothing
@@ -4888,10 +4908,12 @@ instance ToJSON CreateVideoRequest where
 -- (e.g. text box or rectangle) or a table cell in a page.
 --
 -- /See:/ 'textContent' smart constructor.
-data TextContent = TextContent'
+data TextContent =
+  TextContent'
     { _tcTextElements :: !(Maybe [TextElement])
     , _tcLists        :: !(Maybe TextContentLists)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextContent' with the minimum fields required to make a request.
 --
@@ -4902,11 +4924,7 @@ data TextContent = TextContent'
 -- * 'tcLists'
 textContent
     :: TextContent
-textContent =
-    TextContent'
-    { _tcTextElements = Nothing
-    , _tcLists = Nothing
-    }
+textContent = TextContent' {_tcTextElements = Nothing, _tcLists = Nothing}
 
 -- | The text contents broken down into its component parts, including
 -- styling information. This property is read-only.
@@ -4940,12 +4958,14 @@ instance ToJSON TextContent where
 -- more specific classification.
 --
 -- /See:/ 'shape' smart constructor.
-data Shape = Shape'
+data Shape =
+  Shape'
     { _sShapeType       :: !(Maybe ShapeShapeType)
     , _sText            :: !(Maybe TextContent)
     , _sPlaceholder     :: !(Maybe Placeholder)
     , _sShapeProperties :: !(Maybe ShapeProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Shape' with the minimum fields required to make a request.
 --
@@ -4961,7 +4981,7 @@ data Shape = Shape'
 shape
     :: Shape
 shape =
-    Shape'
+  Shape'
     { _sShapeType = Nothing
     , _sText = Nothing
     , _sPlaceholder = Nothing
@@ -5017,7 +5037,8 @@ instance ToJSON Shape where
 -- composed of these six matrix elements.
 --
 -- /See:/ 'affineTransform' smart constructor.
-data AffineTransform = AffineTransform'
+data AffineTransform =
+  AffineTransform'
     { _atTranslateX :: !(Maybe (Textual Double))
     , _atShearY     :: !(Maybe (Textual Double))
     , _atTranslateY :: !(Maybe (Textual Double))
@@ -5025,7 +5046,8 @@ data AffineTransform = AffineTransform'
     , _atScaleX     :: !(Maybe (Textual Double))
     , _atUnit       :: !(Maybe AffineTransformUnit)
     , _atScaleY     :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AffineTransform' with the minimum fields required to make a request.
 --
@@ -5047,7 +5069,7 @@ data AffineTransform = AffineTransform'
 affineTransform
     :: AffineTransform
 affineTransform =
-    AffineTransform'
+  AffineTransform'
     { _atTranslateX = Nothing
     , _atShearY = Nothing
     , _atTranslateY = Nothing
@@ -5123,9 +5145,11 @@ instance ToJSON AffineTransform where
 -- | The result of creating an embedded Google Sheets chart.
 --
 -- /See:/ 'createSheetsChartResponse' smart constructor.
-newtype CreateSheetsChartResponse = CreateSheetsChartResponse'
+newtype CreateSheetsChartResponse =
+  CreateSheetsChartResponse'
     { _cscrsObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSheetsChartResponse' with the minimum fields required to make a request.
 --
@@ -5135,9 +5159,7 @@ newtype CreateSheetsChartResponse = CreateSheetsChartResponse'
 createSheetsChartResponse
     :: CreateSheetsChartResponse
 createSheetsChartResponse =
-    CreateSheetsChartResponse'
-    { _cscrsObjectId = Nothing
-    }
+  CreateSheetsChartResponse' {_cscrsObjectId = Nothing}
 
 -- | The object ID of the created chart.
 cscrsObjectId :: Lens' CreateSheetsChartResponse (Maybe Text)
@@ -5160,11 +5182,13 @@ instance ToJSON CreateSheetsChartResponse where
 -- characters in text.
 --
 -- /See:/ 'range' smart constructor.
-data Range = Range'
+data Range =
+  Range'
     { _rEndIndex   :: !(Maybe (Textual Int32))
     , _rType       :: !(Maybe RangeType)
     , _rStartIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Range' with the minimum fields required to make a request.
 --
@@ -5177,12 +5201,7 @@ data Range = Range'
 -- * 'rStartIndex'
 range
     :: Range
-range =
-    Range'
-    { _rEndIndex = Nothing
-    , _rType = Nothing
-    , _rStartIndex = Nothing
-    }
+range = Range' {_rEndIndex = Nothing, _rType = Nothing, _rStartIndex = Nothing}
 
 -- | The optional zero-based index of the end of the collection. Required for
 -- \`FIXED_RANGE\` ranges.
@@ -5221,11 +5240,13 @@ instance ToJSON Range where
 -- | Creates an image.
 --
 -- /See:/ 'createImageRequest' smart constructor.
-data CreateImageRequest = CreateImageRequest'
+data CreateImageRequest =
+  CreateImageRequest'
     { _cirObjectId          :: !(Maybe Text)
     , _cirURL               :: !(Maybe Text)
     , _cirElementProperties :: !(Maybe PageElementProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateImageRequest' with the minimum fields required to make a request.
 --
@@ -5239,11 +5260,8 @@ data CreateImageRequest = CreateImageRequest'
 createImageRequest
     :: CreateImageRequest
 createImageRequest =
-    CreateImageRequest'
-    { _cirObjectId = Nothing
-    , _cirURL = Nothing
-    , _cirElementProperties = Nothing
-    }
+  CreateImageRequest'
+    {_cirObjectId = Nothing, _cirURL = Nothing, _cirElementProperties = Nothing}
 
 -- | A user-supplied object ID. If you specify an ID, it must be unique among
 -- all pages and page elements in the presentation. The ID must start with
@@ -5298,10 +5316,12 @@ instance ToJSON CreateImageRequest where
 -- | Merges cells in a Table.
 --
 -- /See:/ 'mergeTableCellsRequest' smart constructor.
-data MergeTableCellsRequest = MergeTableCellsRequest'
+data MergeTableCellsRequest =
+  MergeTableCellsRequest'
     { _mtcrObjectId   :: !(Maybe Text)
     , _mtcrTableRange :: !(Maybe TableRange)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MergeTableCellsRequest' with the minimum fields required to make a request.
 --
@@ -5313,10 +5333,7 @@ data MergeTableCellsRequest = MergeTableCellsRequest'
 mergeTableCellsRequest
     :: MergeTableCellsRequest
 mergeTableCellsRequest =
-    MergeTableCellsRequest'
-    { _mtcrObjectId = Nothing
-    , _mtcrTableRange = Nothing
-    }
+  MergeTableCellsRequest' {_mtcrObjectId = Nothing, _mtcrTableRange = Nothing}
 
 -- | The object ID of the table.
 mtcrObjectId :: Lens' MergeTableCellsRequest (Maybe Text)
@@ -5350,9 +5367,11 @@ instance ToJSON MergeTableCellsRequest where
 -- | Provides control over how write requests are executed.
 --
 -- /See:/ 'writeControl' smart constructor.
-newtype WriteControl = WriteControl'
+newtype WriteControl =
+  WriteControl'
     { _wcRequiredRevisionId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WriteControl' with the minimum fields required to make a request.
 --
@@ -5361,10 +5380,7 @@ newtype WriteControl = WriteControl'
 -- * 'wcRequiredRevisionId'
 writeControl
     :: WriteControl
-writeControl =
-    WriteControl'
-    { _wcRequiredRevisionId = Nothing
-    }
+writeControl = WriteControl' {_wcRequiredRevisionId = Nothing}
 
 -- | The revision ID of the presentation required for the write request. If
 -- specified and the \`required_revision_id\` doesn\'t exactly match the
@@ -5403,7 +5419,8 @@ instance ToJSON WriteControl where
 -- the Slides editor.
 --
 -- /See:/ 'textStyle' smart constructor.
-data TextStyle = TextStyle'
+data TextStyle =
+  TextStyle'
     { _tsFontFamily         :: !(Maybe Text)
     , _tsLink               :: !(Maybe Link)
     , _tsBackgRoundColor    :: !(Maybe OptionalColor)
@@ -5416,7 +5433,8 @@ data TextStyle = TextStyle'
     , _tsItalic             :: !(Maybe Bool)
     , _tsBold               :: !(Maybe Bool)
     , _tsStrikethrough      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextStyle' with the minimum fields required to make a request.
 --
@@ -5448,7 +5466,7 @@ data TextStyle = TextStyle'
 textStyle
     :: TextStyle
 textStyle =
-    TextStyle'
+  TextStyle'
     { _tsFontFamily = Nothing
     , _tsLink = Nothing
     , _tsBackgRoundColor = Nothing
@@ -5612,10 +5630,12 @@ instance ToJSON TextStyle where
 -- from a parent placeholder if it exists.
 --
 -- /See:/ 'solidFill' smart constructor.
-data SolidFill = SolidFill'
+data SolidFill =
+  SolidFill'
     { _sfColor :: !(Maybe OpaqueColor)
     , _sfAlpha :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SolidFill' with the minimum fields required to make a request.
 --
@@ -5626,11 +5646,7 @@ data SolidFill = SolidFill'
 -- * 'sfAlpha'
 solidFill
     :: SolidFill
-solidFill =
-    SolidFill'
-    { _sfColor = Nothing
-    , _sfAlpha = Nothing
-    }
+solidFill = SolidFill' {_sfColor = Nothing, _sfAlpha = Nothing}
 
 -- | The color value of the solid fill.
 sfColor :: Lens' SolidFill (Maybe OpaqueColor)
@@ -5662,13 +5678,15 @@ instance ToJSON SolidFill where
 -- | Update the styling of text in a Shape or Table.
 --
 -- /See:/ 'updateTextStyleRequest' smart constructor.
-data UpdateTextStyleRequest = UpdateTextStyleRequest'
+data UpdateTextStyleRequest =
+  UpdateTextStyleRequest'
     { _utsrStyle        :: !(Maybe TextStyle)
     , _utsrTextRange    :: !(Maybe Range)
     , _utsrObjectId     :: !(Maybe Text)
     , _utsrCellLocation :: !(Maybe TableCellLocation)
     , _utsrFields       :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTextStyleRequest' with the minimum fields required to make a request.
 --
@@ -5686,7 +5704,7 @@ data UpdateTextStyleRequest = UpdateTextStyleRequest'
 updateTextStyleRequest
     :: UpdateTextStyleRequest
 updateTextStyleRequest =
-    UpdateTextStyleRequest'
+  UpdateTextStyleRequest'
     { _utsrStyle = Nothing
     , _utsrTextRange = Nothing
     , _utsrObjectId = Nothing
@@ -5758,10 +5776,12 @@ instance ToJSON UpdateTextStyleRequest where
 -- | A recolor effect applied on an image.
 --
 -- /See:/ 'recolor' smart constructor.
-data Recolor = Recolor'
+data Recolor =
+  Recolor'
     { _rName         :: !(Maybe RecolorName)
     , _rRecolorStops :: !(Maybe [ColorStop])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Recolor' with the minimum fields required to make a request.
 --
@@ -5772,11 +5792,7 @@ data Recolor = Recolor'
 -- * 'rRecolorStops'
 recolor
     :: Recolor
-recolor =
-    Recolor'
-    { _rName = Nothing
-    , _rRecolorStops = Nothing
-    }
+recolor = Recolor' {_rName = Nothing, _rRecolorStops = Nothing}
 
 -- | The name of the recolor effect. The name is determined from the
 -- \`recolor_stops\` by matching the gradient against the colors in the
@@ -5814,10 +5830,12 @@ instance ToJSON Recolor where
 -- either SlideProperties or LayoutProperties.
 --
 -- /See:/ 'pageProperties' smart constructor.
-data PageProperties = PageProperties'
+data PageProperties =
+  PageProperties'
     { _ppPageBackgRoundFill :: !(Maybe PageBackgRoundFill)
     , _ppColorScheme        :: !(Maybe ColorScheme)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageProperties' with the minimum fields required to make a request.
 --
@@ -5829,10 +5847,7 @@ data PageProperties = PageProperties'
 pageProperties
     :: PageProperties
 pageProperties =
-    PageProperties'
-    { _ppPageBackgRoundFill = Nothing
-    , _ppColorScheme = Nothing
-    }
+  PageProperties' {_ppPageBackgRoundFill = Nothing, _ppColorScheme = Nothing}
 
 -- | The background fill of the page. If unset, the background fill is
 -- inherited from a parent page if it exists. If the page has no parent,
@@ -5869,11 +5884,13 @@ instance ToJSON PageProperties where
 -- | The page background fill.
 --
 -- /See:/ 'pageBackgRoundFill' smart constructor.
-data PageBackgRoundFill = PageBackgRoundFill'
+data PageBackgRoundFill =
+  PageBackgRoundFill'
     { _pbrfStretchedPictureFill :: !(Maybe StretchedPictureFill)
     , _pbrfSolidFill            :: !(Maybe SolidFill)
     , _pbrfPropertyState        :: !(Maybe PageBackgRoundFillPropertyState)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageBackgRoundFill' with the minimum fields required to make a request.
 --
@@ -5887,7 +5904,7 @@ data PageBackgRoundFill = PageBackgRoundFill'
 pageBackgRoundFill
     :: PageBackgRoundFill
 pageBackgRoundFill =
-    PageBackgRoundFill'
+  PageBackgRoundFill'
     { _pbrfStretchedPictureFill = Nothing
     , _pbrfSolidFill = Nothing
     , _pbrfPropertyState = Nothing
@@ -5937,9 +5954,11 @@ instance ToJSON PageBackgRoundFill where
 -- given level of nesting.
 --
 -- /See:/ 'nestingLevel' smart constructor.
-newtype NestingLevel = NestingLevel'
+newtype NestingLevel =
+  NestingLevel'
     { _nlBulletStyle :: Maybe TextStyle
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NestingLevel' with the minimum fields required to make a request.
 --
@@ -5948,10 +5967,7 @@ newtype NestingLevel = NestingLevel'
 -- * 'nlBulletStyle'
 nestingLevel
     :: NestingLevel
-nestingLevel =
-    NestingLevel'
-    { _nlBulletStyle = Nothing
-    }
+nestingLevel = NestingLevel' {_nlBulletStyle = Nothing}
 
 -- | The style of a bullet at this level of nesting.
 nlBulletStyle :: Lens' NestingLevel (Maybe TextStyle)
@@ -5972,10 +5988,12 @@ instance ToJSON NestingLevel where
 -- | A themeable solid color value.
 --
 -- /See:/ 'opaqueColor' smart constructor.
-data OpaqueColor = OpaqueColor'
+data OpaqueColor =
+  OpaqueColor'
     { _ocThemeColor :: !(Maybe OpaqueColorThemeColor)
     , _ocRgbColor   :: !(Maybe RgbColor)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OpaqueColor' with the minimum fields required to make a request.
 --
@@ -5986,11 +6004,7 @@ data OpaqueColor = OpaqueColor'
 -- * 'ocRgbColor'
 opaqueColor
     :: OpaqueColor
-opaqueColor =
-    OpaqueColor'
-    { _ocThemeColor = Nothing
-    , _ocRgbColor = Nothing
-    }
+opaqueColor = OpaqueColor' {_ocThemeColor = Nothing, _ocRgbColor = Nothing}
 
 -- | An opaque theme color.
 ocThemeColor :: Lens' OpaqueColor (Maybe OpaqueColorThemeColor)
@@ -6019,12 +6033,14 @@ instance ToJSON OpaqueColor where
 -- | Creates a new slide.
 --
 -- /See:/ 'createSlideRequest' smart constructor.
-data CreateSlideRequest = CreateSlideRequest'
+data CreateSlideRequest =
+  CreateSlideRequest'
     { _csrsObjectId              :: !(Maybe Text)
     , _csrsSlideLayoutReference  :: !(Maybe LayoutReference)
     , _csrsInsertionIndex        :: !(Maybe (Textual Int32))
     , _csrsPlaceholderIdMAppings :: !(Maybe [LayoutPlaceholderIdMApping])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSlideRequest' with the minimum fields required to make a request.
 --
@@ -6040,7 +6056,7 @@ data CreateSlideRequest = CreateSlideRequest'
 createSlideRequest
     :: CreateSlideRequest
 createSlideRequest =
-    CreateSlideRequest'
+  CreateSlideRequest'
     { _csrsObjectId = Nothing
     , _csrsSlideLayoutReference = Nothing
     , _csrsInsertionIndex = Nothing
@@ -6112,10 +6128,12 @@ instance ToJSON CreateSlideRequest where
 -- | A location of a single table cell within a table.
 --
 -- /See:/ 'tableCellLocation' smart constructor.
-data TableCellLocation = TableCellLocation'
+data TableCellLocation =
+  TableCellLocation'
     { _tclColumnIndex :: !(Maybe (Textual Int32))
     , _tclRowIndex    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableCellLocation' with the minimum fields required to make a request.
 --
@@ -6127,10 +6145,7 @@ data TableCellLocation = TableCellLocation'
 tableCellLocation
     :: TableCellLocation
 tableCellLocation =
-    TableCellLocation'
-    { _tclColumnIndex = Nothing
-    , _tclRowIndex = Nothing
-    }
+  TableCellLocation' {_tclColumnIndex = Nothing, _tclRowIndex = Nothing}
 
 -- | The 0-based column index.
 tclColumnIndex :: Lens' TableCellLocation (Maybe Int32)
@@ -6162,10 +6177,12 @@ instance ToJSON TableCellLocation where
 -- | Updates the position of slides in the presentation.
 --
 -- /See:/ 'updateSlidesPositionRequest' smart constructor.
-data UpdateSlidesPositionRequest = UpdateSlidesPositionRequest'
+data UpdateSlidesPositionRequest =
+  UpdateSlidesPositionRequest'
     { _usprSlideObjectIds :: !(Maybe [Text])
     , _usprInsertionIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSlidesPositionRequest' with the minimum fields required to make a request.
 --
@@ -6177,10 +6194,8 @@ data UpdateSlidesPositionRequest = UpdateSlidesPositionRequest'
 updateSlidesPositionRequest
     :: UpdateSlidesPositionRequest
 updateSlidesPositionRequest =
-    UpdateSlidesPositionRequest'
-    { _usprSlideObjectIds = Nothing
-    , _usprInsertionIndex = Nothing
-    }
+  UpdateSlidesPositionRequest'
+    {_usprSlideObjectIds = Nothing, _usprInsertionIndex = Nothing}
 
 -- | The IDs of the slides in the presentation that should be moved. The
 -- slides in this list must be in existing presentation order, without
@@ -6222,13 +6237,15 @@ instance ToJSON UpdateSlidesPositionRequest where
 -- shapes.
 --
 -- /See:/ 'replaceAllShapesWithImageRequest' smart constructor.
-data ReplaceAllShapesWithImageRequest = ReplaceAllShapesWithImageRequest'
+data ReplaceAllShapesWithImageRequest =
+  ReplaceAllShapesWithImageRequest'
     { _raswirImageReplaceMethod :: !(Maybe ReplaceAllShapesWithImageRequestImageReplaceMethod)
     , _raswirPageObjectIds      :: !(Maybe [Text])
     , _raswirContainsText       :: !(Maybe SubstringMatchCriteria)
     , _raswirImageURL           :: !(Maybe Text)
     , _raswirReplaceMethod      :: !(Maybe ReplaceAllShapesWithImageRequestReplaceMethod)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplaceAllShapesWithImageRequest' with the minimum fields required to make a request.
 --
@@ -6246,7 +6263,7 @@ data ReplaceAllShapesWithImageRequest = ReplaceAllShapesWithImageRequest'
 replaceAllShapesWithImageRequest
     :: ReplaceAllShapesWithImageRequest
 replaceAllShapesWithImageRequest =
-    ReplaceAllShapesWithImageRequest'
+  ReplaceAllShapesWithImageRequest'
     { _raswirImageReplaceMethod = Nothing
     , _raswirPageObjectIds = Nothing
     , _raswirContainsText = Nothing
@@ -6329,7 +6346,8 @@ instance ToJSON ReplaceAllShapesWithImageRequest
 -- | A visual element rendered on a page.
 --
 -- /See:/ 'pageElement' smart constructor.
-data PageElement = PageElement'
+data PageElement =
+  PageElement'
     { _peTransform    :: !(Maybe AffineTransform)
     , _peImage        :: !(Maybe Image)
     , _peSize         :: !(Maybe Size)
@@ -6343,7 +6361,8 @@ data PageElement = PageElement'
     , _peTitle        :: !(Maybe Text)
     , _peTable        :: !(Maybe Table)
     , _peDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageElement' with the minimum fields required to make a request.
 --
@@ -6377,7 +6396,7 @@ data PageElement = PageElement'
 pageElement
     :: PageElement
 pageElement =
-    PageElement'
+  PageElement'
     { _peTransform = Nothing
     , _peImage = Nothing
     , _peSize = Nothing
@@ -6502,11 +6521,13 @@ instance ToJSON PageElement where
 -- | A color and position in a gradient band.
 --
 -- /See:/ 'colorStop' smart constructor.
-data ColorStop = ColorStop'
+data ColorStop =
+  ColorStop'
     { _csColor    :: !(Maybe OpaqueColor)
     , _csAlpha    :: !(Maybe (Textual Double))
     , _csPosition :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ColorStop' with the minimum fields required to make a request.
 --
@@ -6520,11 +6541,7 @@ data ColorStop = ColorStop'
 colorStop
     :: ColorStop
 colorStop =
-    ColorStop'
-    { _csColor = Nothing
-    , _csAlpha = Nothing
-    , _csPosition = Nothing
-    }
+  ColorStop' {_csColor = Nothing, _csAlpha = Nothing, _csPosition = Nothing}
 
 -- | The color of the gradient stop.
 csColor :: Lens' ColorStop (Maybe OpaqueColor)
@@ -6563,9 +6580,11 @@ instance ToJSON ColorStop where
 -- | Deletes an object, either pages or page elements, from the presentation.
 --
 -- /See:/ 'deleteObjectRequest' smart constructor.
-newtype DeleteObjectRequest = DeleteObjectRequest'
+newtype DeleteObjectRequest =
+  DeleteObjectRequest'
     { _dObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteObjectRequest' with the minimum fields required to make a request.
 --
@@ -6574,10 +6593,7 @@ newtype DeleteObjectRequest = DeleteObjectRequest'
 -- * 'dObjectId'
 deleteObjectRequest
     :: DeleteObjectRequest
-deleteObjectRequest =
-    DeleteObjectRequest'
-    { _dObjectId = Nothing
-    }
+deleteObjectRequest = DeleteObjectRequest' {_dObjectId = Nothing}
 
 -- | The object ID of the page or page element to delete. If after a delete
 -- operation a group contains only 1 or no page elements, the group is also
@@ -6599,9 +6615,11 @@ instance ToJSON DeleteObjectRequest where
 -- | The result of creating a slide.
 --
 -- /See:/ 'createSlideResponse' smart constructor.
-newtype CreateSlideResponse = CreateSlideResponse'
+newtype CreateSlideResponse =
+  CreateSlideResponse'
     { _ccObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSlideResponse' with the minimum fields required to make a request.
 --
@@ -6610,10 +6628,7 @@ newtype CreateSlideResponse = CreateSlideResponse'
 -- * 'ccObjectId'
 createSlideResponse
     :: CreateSlideResponse
-createSlideResponse =
-    CreateSlideResponse'
-    { _ccObjectId = Nothing
-    }
+createSlideResponse = CreateSlideResponse' {_ccObjectId = Nothing}
 
 -- | The object ID of the created slide.
 ccObjectId :: Lens' CreateSlideResponse (Maybe Text)
@@ -6633,9 +6648,11 @@ instance ToJSON CreateSlideResponse where
 -- | The palette of predefined colors for a page.
 --
 -- /See:/ 'colorScheme' smart constructor.
-newtype ColorScheme = ColorScheme'
+newtype ColorScheme =
+  ColorScheme'
     { _csColors :: Maybe [ThemeColorPair]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ColorScheme' with the minimum fields required to make a request.
 --
@@ -6644,10 +6661,7 @@ newtype ColorScheme = ColorScheme'
 -- * 'csColors'
 colorScheme
     :: ColorScheme
-colorScheme =
-    ColorScheme'
-    { _csColors = Nothing
-    }
+colorScheme = ColorScheme' {_csColors = Nothing}
 
 -- | The ThemeColorType and corresponding concrete color pairs.
 csColors :: Lens' ColorScheme [ThemeColorPair]
@@ -6668,13 +6682,15 @@ instance ToJSON ColorScheme where
 -- | Properties and contents of each table cell.
 --
 -- /See:/ 'tableCell' smart constructor.
-data TableCell = TableCell'
+data TableCell =
+  TableCell'
     { _tcColumnSpan          :: !(Maybe (Textual Int32))
     , _tcLocation            :: !(Maybe TableCellLocation)
     , _tcText                :: !(Maybe TextContent)
     , _tcRowSpan             :: !(Maybe (Textual Int32))
     , _tcTableCellProperties :: !(Maybe TableCellProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableCell' with the minimum fields required to make a request.
 --
@@ -6692,7 +6708,7 @@ data TableCell = TableCell'
 tableCell
     :: TableCell
 tableCell =
-    TableCell'
+  TableCell'
     { _tcColumnSpan = Nothing
     , _tcLocation = Nothing
     , _tcText = Nothing
@@ -6753,9 +6769,11 @@ instance ToJSON TableCell where
 -- for the keys of this map are 0 through 8, inclusive.
 --
 -- /See:/ 'listNestingLevel' smart constructor.
-newtype ListNestingLevel = ListNestingLevel'
+newtype ListNestingLevel =
+  ListNestingLevel'
     { _lnlAddtional :: HashMap Text NestingLevel
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListNestingLevel' with the minimum fields required to make a request.
 --
@@ -6766,9 +6784,7 @@ listNestingLevel
     :: HashMap Text NestingLevel -- ^ 'lnlAddtional'
     -> ListNestingLevel
 listNestingLevel pLnlAddtional_ =
-    ListNestingLevel'
-    { _lnlAddtional = _Coerce # pLnlAddtional_
-    }
+  ListNestingLevel' {_lnlAddtional = _Coerce # pLnlAddtional_}
 
 lnlAddtional :: Lens' ListNestingLevel (HashMap Text NestingLevel)
 lnlAddtional
@@ -6789,12 +6805,14 @@ instance ToJSON ListNestingLevel where
 -- in the Slides editor, which may depend on the page element kind.
 --
 -- /See:/ 'outline' smart constructor.
-data Outline = Outline'
+data Outline =
+  Outline'
     { _oOutlineFill   :: !(Maybe OutlineFill)
     , _oWeight        :: !(Maybe Dimension)
     , _oDashStyle     :: !(Maybe OutlineDashStyle)
     , _oPropertyState :: !(Maybe OutlinePropertyState)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Outline' with the minimum fields required to make a request.
 --
@@ -6810,7 +6828,7 @@ data Outline = Outline'
 outline
     :: Outline
 outline =
-    Outline'
+  Outline'
     { _oOutlineFill = Nothing
     , _oWeight = Nothing
     , _oDashStyle = Nothing
@@ -6862,11 +6880,13 @@ instance ToJSON Outline where
 -- | Update the properties of a Video.
 --
 -- /See:/ 'updateVideoPropertiesRequest' smart constructor.
-data UpdateVideoPropertiesRequest = UpdateVideoPropertiesRequest'
+data UpdateVideoPropertiesRequest =
+  UpdateVideoPropertiesRequest'
     { _uvprObjectId        :: !(Maybe Text)
     , _uvprVideoProperties :: !(Maybe VideoProperties)
     , _uvprFields          :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateVideoPropertiesRequest' with the minimum fields required to make a request.
 --
@@ -6880,7 +6900,7 @@ data UpdateVideoPropertiesRequest = UpdateVideoPropertiesRequest'
 updateVideoPropertiesRequest
     :: UpdateVideoPropertiesRequest
 updateVideoPropertiesRequest =
-    UpdateVideoPropertiesRequest'
+  UpdateVideoPropertiesRequest'
     { _uvprObjectId = Nothing
     , _uvprVideoProperties = Nothing
     , _uvprFields = Nothing
@@ -6927,13 +6947,15 @@ instance ToJSON UpdateVideoPropertiesRequest where
 -- | The properties of the Video.
 --
 -- /See:/ 'videoProperties' smart constructor.
-data VideoProperties = VideoProperties'
+data VideoProperties =
+  VideoProperties'
     { _vpStart    :: !(Maybe (Textual Word32))
     , _vpAutoPlay :: !(Maybe Bool)
     , _vpMute     :: !(Maybe Bool)
     , _vpEnd      :: !(Maybe (Textual Word32))
     , _vpOutline  :: !(Maybe Outline)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideoProperties' with the minimum fields required to make a request.
 --
@@ -6951,7 +6973,7 @@ data VideoProperties = VideoProperties'
 videoProperties
     :: VideoProperties
 videoProperties =
-    VideoProperties'
+  VideoProperties'
     { _vpStart = Nothing
     , _vpAutoPlay = Nothing
     , _vpMute = Nothing
@@ -7017,11 +7039,13 @@ instance ToJSON VideoProperties where
 -- a slide from a specified layout.
 --
 -- /See:/ 'layoutPlaceholderIdMApping' smart constructor.
-data LayoutPlaceholderIdMApping = LayoutPlaceholderIdMApping'
+data LayoutPlaceholderIdMApping =
+  LayoutPlaceholderIdMApping'
     { _lpimaObjectId                  :: !(Maybe Text)
     , _lpimaLayoutPlaceholderObjectId :: !(Maybe Text)
     , _lpimaLayoutPlaceholder         :: !(Maybe Placeholder)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LayoutPlaceholderIdMApping' with the minimum fields required to make a request.
 --
@@ -7035,7 +7059,7 @@ data LayoutPlaceholderIdMApping = LayoutPlaceholderIdMApping'
 layoutPlaceholderIdMApping
     :: LayoutPlaceholderIdMApping
 layoutPlaceholderIdMApping =
-    LayoutPlaceholderIdMApping'
+  LayoutPlaceholderIdMApping'
     { _lpimaObjectId = Nothing
     , _lpimaLayoutPlaceholderObjectId = Nothing
     , _lpimaLayoutPlaceholder = Nothing
@@ -7092,9 +7116,11 @@ instance ToJSON LayoutPlaceholderIdMApping where
 -- | The result of creating an image.
 --
 -- /See:/ 'createImageResponse' smart constructor.
-newtype CreateImageResponse = CreateImageResponse'
+newtype CreateImageResponse =
+  CreateImageResponse'
     { _ciriObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateImageResponse' with the minimum fields required to make a request.
 --
@@ -7103,10 +7129,7 @@ newtype CreateImageResponse = CreateImageResponse'
 -- * 'ciriObjectId'
 createImageResponse
     :: CreateImageResponse
-createImageResponse =
-    CreateImageResponse'
-    { _ciriObjectId = Nothing
-    }
+createImageResponse = CreateImageResponse' {_ciriObjectId = Nothing}
 
 -- | The object ID of the created image.
 ciriObjectId :: Lens' CreateImageResponse (Maybe Text)
@@ -7127,13 +7150,15 @@ instance ToJSON CreateImageResponse where
 -- content of a Shape or TableCell.
 --
 -- /See:/ 'textElement' smart constructor.
-data TextElement = TextElement'
+data TextElement =
+  TextElement'
     { _teParagraphMarker :: !(Maybe ParagraphMarker)
     , _teAutoText        :: !(Maybe AutoText)
     , _teEndIndex        :: !(Maybe (Textual Int32))
     , _teTextRun         :: !(Maybe TextRun)
     , _teStartIndex      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextElement' with the minimum fields required to make a request.
 --
@@ -7151,7 +7176,7 @@ data TextElement = TextElement'
 textElement
     :: TextElement
 textElement =
-    TextElement'
+  TextElement'
     { _teParagraphMarker = Nothing
     , _teAutoText = Nothing
     , _teEndIndex = Nothing
@@ -7223,11 +7248,13 @@ instance ToJSON TextElement where
 -- preserved by adding indent to the start of the corresponding paragraph.
 --
 -- /See:/ 'deleteParagraphBulletsRequest' smart constructor.
-data DeleteParagraphBulletsRequest = DeleteParagraphBulletsRequest'
+data DeleteParagraphBulletsRequest =
+  DeleteParagraphBulletsRequest'
     { _dpbrTextRange    :: !(Maybe Range)
     , _dpbrObjectId     :: !(Maybe Text)
     , _dpbrCellLocation :: !(Maybe TableCellLocation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteParagraphBulletsRequest' with the minimum fields required to make a request.
 --
@@ -7241,7 +7268,7 @@ data DeleteParagraphBulletsRequest = DeleteParagraphBulletsRequest'
 deleteParagraphBulletsRequest
     :: DeleteParagraphBulletsRequest
 deleteParagraphBulletsRequest =
-    DeleteParagraphBulletsRequest'
+  DeleteParagraphBulletsRequest'
     { _dpbrTextRange = Nothing
     , _dpbrObjectId = Nothing
     , _dpbrCellLocation = Nothing
@@ -7285,12 +7312,14 @@ instance ToJSON DeleteParagraphBulletsRequest where
 -- | Inserts text into a shape or a table cell.
 --
 -- /See:/ 'insertTextRequest' smart constructor.
-data InsertTextRequest = InsertTextRequest'
+data InsertTextRequest =
+  InsertTextRequest'
     { _itrText           :: !(Maybe Text)
     , _itrObjectId       :: !(Maybe Text)
     , _itrInsertionIndex :: !(Maybe (Textual Int32))
     , _itrCellLocation   :: !(Maybe TableCellLocation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InsertTextRequest' with the minimum fields required to make a request.
 --
@@ -7306,7 +7335,7 @@ data InsertTextRequest = InsertTextRequest'
 insertTextRequest
     :: InsertTextRequest
 insertTextRequest =
-    InsertTextRequest'
+  InsertTextRequest'
     { _itrText = Nothing
     , _itrObjectId = Nothing
     , _itrInsertionIndex = Nothing
@@ -7370,13 +7399,15 @@ instance ToJSON InsertTextRequest where
 -- | Updates the properties of the table borders in a Table.
 --
 -- /See:/ 'updateTableBOrderPropertiesRequest' smart constructor.
-data UpdateTableBOrderPropertiesRequest = UpdateTableBOrderPropertiesRequest'
+data UpdateTableBOrderPropertiesRequest =
+  UpdateTableBOrderPropertiesRequest'
     { _utboprBOrderPosition        :: !(Maybe UpdateTableBOrderPropertiesRequestBOrderPosition)
     , _utboprObjectId              :: !(Maybe Text)
     , _utboprTableBOrderProperties :: !(Maybe TableBOrderProperties)
     , _utboprTableRange            :: !(Maybe TableRange)
     , _utboprFields                :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTableBOrderPropertiesRequest' with the minimum fields required to make a request.
 --
@@ -7394,7 +7425,7 @@ data UpdateTableBOrderPropertiesRequest = UpdateTableBOrderPropertiesRequest'
 updateTableBOrderPropertiesRequest
     :: UpdateTableBOrderPropertiesRequest
 updateTableBOrderPropertiesRequest =
-    UpdateTableBOrderPropertiesRequest'
+  UpdateTableBOrderPropertiesRequest'
     { _utboprBOrderPosition = Nothing
     , _utboprObjectId = Nothing
     , _utboprTableBOrderProperties = Nothing
@@ -7467,12 +7498,14 @@ instance ToJSON UpdateTableBOrderPropertiesRequest
 -- | Creates a line.
 --
 -- /See:/ 'createLineRequest' smart constructor.
-data CreateLineRequest = CreateLineRequest'
+data CreateLineRequest =
+  CreateLineRequest'
     { _clrlCategory          :: !(Maybe CreateLineRequestCategory)
     , _clrlObjectId          :: !(Maybe Text)
     , _clrlLineCategory      :: !(Maybe CreateLineRequestLineCategory)
     , _clrlElementProperties :: !(Maybe PageElementProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateLineRequest' with the minimum fields required to make a request.
 --
@@ -7488,7 +7521,7 @@ data CreateLineRequest = CreateLineRequest'
 createLineRequest
     :: CreateLineRequest
 createLineRequest =
-    CreateLineRequest'
+  CreateLineRequest'
     { _clrlCategory = Nothing
     , _clrlObjectId = Nothing
     , _clrlLineCategory = Nothing
@@ -7555,11 +7588,13 @@ instance ToJSON CreateLineRequest where
 -- shape.
 --
 -- /See:/ 'placeholder' smart constructor.
-data Placeholder = Placeholder'
+data Placeholder =
+  Placeholder'
     { _pParentObjectId :: !(Maybe Text)
     , _pType           :: !(Maybe PlaceholderType)
     , _pIndex          :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Placeholder' with the minimum fields required to make a request.
 --
@@ -7573,11 +7608,7 @@ data Placeholder = Placeholder'
 placeholder
     :: Placeholder
 placeholder =
-    Placeholder'
-    { _pParentObjectId = Nothing
-    , _pType = Nothing
-    , _pIndex = Nothing
-    }
+  Placeholder' {_pParentObjectId = Nothing, _pType = Nothing, _pIndex = Nothing}
 
 -- | The object ID of this shape\'s parent placeholder. If unset, the parent
 -- placeholder shape does not exist, so the shape does not inherit
@@ -7617,11 +7648,13 @@ instance ToJSON Placeholder where
 -- LAYOUT.
 --
 -- /See:/ 'layoutProperties' smart constructor.
-data LayoutProperties = LayoutProperties'
+data LayoutProperties =
+  LayoutProperties'
     { _lpMasterObjectId :: !(Maybe Text)
     , _lpName           :: !(Maybe Text)
     , _lpDisplayName    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LayoutProperties' with the minimum fields required to make a request.
 --
@@ -7635,11 +7668,8 @@ data LayoutProperties = LayoutProperties'
 layoutProperties
     :: LayoutProperties
 layoutProperties =
-    LayoutProperties'
-    { _lpMasterObjectId = Nothing
-    , _lpName = Nothing
-    , _lpDisplayName = Nothing
-    }
+  LayoutProperties'
+    {_lpMasterObjectId = Nothing, _lpName = Nothing, _lpDisplayName = Nothing}
 
 -- | The object ID of the master that this layout is based on.
 lpMasterObjectId :: Lens' LayoutProperties (Maybe Text)
@@ -7676,11 +7706,13 @@ instance ToJSON LayoutProperties where
 -- | Update the properties of a Shape.
 --
 -- /See:/ 'updateShapePropertiesRequest' smart constructor.
-data UpdateShapePropertiesRequest = UpdateShapePropertiesRequest'
+data UpdateShapePropertiesRequest =
+  UpdateShapePropertiesRequest'
     { _usprObjectId        :: !(Maybe Text)
     , _usprShapeProperties :: !(Maybe ShapeProperties)
     , _usprFields          :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateShapePropertiesRequest' with the minimum fields required to make a request.
 --
@@ -7694,7 +7726,7 @@ data UpdateShapePropertiesRequest = UpdateShapePropertiesRequest'
 updateShapePropertiesRequest
     :: UpdateShapePropertiesRequest
 updateShapePropertiesRequest =
-    UpdateShapePropertiesRequest'
+  UpdateShapePropertiesRequest'
     { _usprObjectId = Nothing
     , _usprShapeProperties = Nothing
     , _usprFields = Nothing
@@ -7741,14 +7773,16 @@ instance ToJSON UpdateShapePropertiesRequest where
 -- | A PageElement kind representing a table.
 --
 -- /See:/ 'table' smart constructor.
-data Table = Table'
+data Table =
+  Table'
     { _tTableRows            :: !(Maybe [TableRow])
     , _tVerticalBOrderRows   :: !(Maybe [TableBOrderRow])
     , _tRows                 :: !(Maybe (Textual Int32))
     , _tColumns              :: !(Maybe (Textual Int32))
     , _tHorizontalBOrderRows :: !(Maybe [TableBOrderRow])
     , _tTableColumns         :: !(Maybe [TableColumnProperties])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
@@ -7768,7 +7802,7 @@ data Table = Table'
 table
     :: Table
 table =
-    Table'
+  Table'
     { _tTableRows = Nothing
     , _tVerticalBOrderRows = Nothing
     , _tRows = Nothing
@@ -7855,10 +7889,12 @@ instance ToJSON Table where
 -- | Updates the category of a line.
 --
 -- /See:/ 'updateLineCategoryRequest' smart constructor.
-data UpdateLineCategoryRequest = UpdateLineCategoryRequest'
+data UpdateLineCategoryRequest =
+  UpdateLineCategoryRequest'
     { _ulcrObjectId     :: !(Maybe Text)
     , _ulcrLineCategory :: !(Maybe UpdateLineCategoryRequestLineCategory)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateLineCategoryRequest' with the minimum fields required to make a request.
 --
@@ -7870,10 +7906,8 @@ data UpdateLineCategoryRequest = UpdateLineCategoryRequest'
 updateLineCategoryRequest
     :: UpdateLineCategoryRequest
 updateLineCategoryRequest =
-    UpdateLineCategoryRequest'
-    { _ulcrObjectId = Nothing
-    , _ulcrLineCategory = Nothing
-    }
+  UpdateLineCategoryRequest'
+    {_ulcrObjectId = Nothing, _ulcrLineCategory = Nothing}
 
 -- | The object ID of the line the update is applied to. Only a line with a
 -- category indicating it is a \"connector\" can be updated. The line may
@@ -7911,13 +7945,15 @@ instance ToJSON UpdateLineCategoryRequest where
 -- value.
 --
 -- /See:/ 'shapeProperties' smart constructor.
-data ShapeProperties = ShapeProperties'
+data ShapeProperties =
+  ShapeProperties'
     { _spLink                :: !(Maybe Link)
     , _spShadow              :: !(Maybe Shadow)
     , _spOutline             :: !(Maybe Outline)
     , _spContentAlignment    :: !(Maybe ShapePropertiesContentAlignment)
     , _spShapeBackgRoundFill :: !(Maybe ShapeBackgRoundFill)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShapeProperties' with the minimum fields required to make a request.
 --
@@ -7935,7 +7971,7 @@ data ShapeProperties = ShapeProperties'
 shapeProperties
     :: ShapeProperties
 shapeProperties =
-    ShapeProperties'
+  ShapeProperties'
     { _spLink = Nothing
     , _spShadow = Nothing
     , _spOutline = Nothing
@@ -8005,10 +8041,12 @@ instance ToJSON ShapeProperties where
 -- | The shape background fill.
 --
 -- /See:/ 'shapeBackgRoundFill' smart constructor.
-data ShapeBackgRoundFill = ShapeBackgRoundFill'
+data ShapeBackgRoundFill =
+  ShapeBackgRoundFill'
     { _sbrfSolidFill     :: !(Maybe SolidFill)
     , _sbrfPropertyState :: !(Maybe ShapeBackgRoundFillPropertyState)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShapeBackgRoundFill' with the minimum fields required to make a request.
 --
@@ -8020,10 +8058,7 @@ data ShapeBackgRoundFill = ShapeBackgRoundFill'
 shapeBackgRoundFill
     :: ShapeBackgRoundFill
 shapeBackgRoundFill =
-    ShapeBackgRoundFill'
-    { _sbrfSolidFill = Nothing
-    , _sbrfPropertyState = Nothing
-    }
+  ShapeBackgRoundFill' {_sbrfSolidFill = Nothing, _sbrfPropertyState = Nothing}
 
 -- | Solid color fill.
 sbrfSolidFill :: Lens' ShapeBackgRoundFill (Maybe SolidFill)
@@ -8065,12 +8100,14 @@ instance ToJSON ShapeBackgRoundFill where
 -- updated are added to that preceding list.
 --
 -- /See:/ 'createParagraphBulletsRequest' smart constructor.
-data CreateParagraphBulletsRequest = CreateParagraphBulletsRequest'
+data CreateParagraphBulletsRequest =
+  CreateParagraphBulletsRequest'
     { _cpbrTextRange    :: !(Maybe Range)
     , _cpbrObjectId     :: !(Maybe Text)
     , _cpbrBulletPreset :: !(Maybe CreateParagraphBulletsRequestBulletPreset)
     , _cpbrCellLocation :: !(Maybe TableCellLocation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateParagraphBulletsRequest' with the minimum fields required to make a request.
 --
@@ -8086,7 +8123,7 @@ data CreateParagraphBulletsRequest = CreateParagraphBulletsRequest'
 createParagraphBulletsRequest
     :: CreateParagraphBulletsRequest
 createParagraphBulletsRequest =
-    CreateParagraphBulletsRequest'
+  CreateParagraphBulletsRequest'
     { _cpbrTextRange = Nothing
     , _cpbrObjectId = Nothing
     , _cpbrBulletPreset = Nothing
@@ -8141,11 +8178,13 @@ instance ToJSON CreateParagraphBulletsRequest where
 -- | Updates the alt text title and\/or description of a page element.
 --
 -- /See:/ 'updatePageElementAltTextRequest' smart constructor.
-data UpdatePageElementAltTextRequest = UpdatePageElementAltTextRequest'
+data UpdatePageElementAltTextRequest =
+  UpdatePageElementAltTextRequest'
     { _upeatrObjectId    :: !(Maybe Text)
     , _upeatrTitle       :: !(Maybe Text)
     , _upeatrDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdatePageElementAltTextRequest' with the minimum fields required to make a request.
 --
@@ -8159,7 +8198,7 @@ data UpdatePageElementAltTextRequest = UpdatePageElementAltTextRequest'
 updatePageElementAltTextRequest
     :: UpdatePageElementAltTextRequest
 updatePageElementAltTextRequest =
-    UpdatePageElementAltTextRequest'
+  UpdatePageElementAltTextRequest'
     { _upeatrObjectId = Nothing
     , _upeatrTitle = Nothing
     , _upeatrDescription = Nothing
@@ -8208,12 +8247,14 @@ instance ToJSON UpdatePageElementAltTextRequest where
 -- | Update the properties of a TableCell.
 --
 -- /See:/ 'updateTableCellPropertiesRequest' smart constructor.
-data UpdateTableCellPropertiesRequest = UpdateTableCellPropertiesRequest'
+data UpdateTableCellPropertiesRequest =
+  UpdateTableCellPropertiesRequest'
     { _uObjectId            :: !(Maybe Text)
     , _uTableCellProperties :: !(Maybe TableCellProperties)
     , _uTableRange          :: !(Maybe TableRange)
     , _uFields              :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTableCellPropertiesRequest' with the minimum fields required to make a request.
 --
@@ -8229,7 +8270,7 @@ data UpdateTableCellPropertiesRequest = UpdateTableCellPropertiesRequest'
 updateTableCellPropertiesRequest
     :: UpdateTableCellPropertiesRequest
 updateTableCellPropertiesRequest =
-    UpdateTableCellPropertiesRequest'
+  UpdateTableCellPropertiesRequest'
     { _uObjectId = Nothing
     , _uTableCellProperties = Nothing
     , _uTableRange = Nothing
@@ -8287,9 +8328,11 @@ instance ToJSON UpdateTableCellPropertiesRequest
 -- | The properties of the SheetsChart.
 --
 -- /See:/ 'sheetsChartProperties' smart constructor.
-newtype SheetsChartProperties = SheetsChartProperties'
+newtype SheetsChartProperties =
+  SheetsChartProperties'
     { _scpChartImageProperties :: Maybe ImageProperties
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SheetsChartProperties' with the minimum fields required to make a request.
 --
@@ -8299,9 +8342,7 @@ newtype SheetsChartProperties = SheetsChartProperties'
 sheetsChartProperties
     :: SheetsChartProperties
 sheetsChartProperties =
-    SheetsChartProperties'
-    { _scpChartImageProperties = Nothing
-    }
+  SheetsChartProperties' {_scpChartImageProperties = Nothing}
 
 -- | The properties of the embedded chart image.
 scpChartImageProperties :: Lens' SheetsChartProperties (Maybe ImageProperties)
@@ -8334,7 +8375,8 @@ instance ToJSON SheetsChartProperties where
 -- styles are represented as unset fields in this message.
 --
 -- /See:/ 'paragraphStyle' smart constructor.
-data ParagraphStyle = ParagraphStyle'
+data ParagraphStyle =
+  ParagraphStyle'
     { _psLineSpacing     :: !(Maybe (Textual Double))
     , _psDirection       :: !(Maybe ParagraphStyleDirection)
     , _psIndentFirstLine :: !(Maybe Dimension)
@@ -8344,7 +8386,8 @@ data ParagraphStyle = ParagraphStyle'
     , _psSpaceBelow      :: !(Maybe Dimension)
     , _psSpacingMode     :: !(Maybe ParagraphStyleSpacingMode)
     , _psSpaceAbove      :: !(Maybe Dimension)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ParagraphStyle' with the minimum fields required to make a request.
 --
@@ -8370,7 +8413,7 @@ data ParagraphStyle = ParagraphStyle'
 paragraphStyle
     :: ParagraphStyle
 paragraphStyle =
-    ParagraphStyle'
+  ParagraphStyle'
     { _psLineSpacing = Nothing
     , _psDirection = Nothing
     , _psIndentFirstLine = Nothing
@@ -8473,9 +8516,11 @@ instance ToJSON ParagraphStyle where
 -- | The result of creating a table.
 --
 -- /See:/ 'createTableResponse' smart constructor.
-newtype CreateTableResponse = CreateTableResponse'
+newtype CreateTableResponse =
+  CreateTableResponse'
     { _ctrtObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTableResponse' with the minimum fields required to make a request.
 --
@@ -8484,10 +8529,7 @@ newtype CreateTableResponse = CreateTableResponse'
 -- * 'ctrtObjectId'
 createTableResponse
     :: CreateTableResponse
-createTableResponse =
-    CreateTableResponse'
-    { _ctrtObjectId = Nothing
-    }
+createTableResponse = CreateTableResponse' {_ctrtObjectId = Nothing}
 
 -- | The object ID of the created table.
 ctrtObjectId :: Lens' CreateTableResponse (Maybe Text)
@@ -8508,9 +8550,11 @@ instance ToJSON CreateTableResponse where
 -- sites on the connected page elements.
 --
 -- /See:/ 'rerouteLineRequest' smart constructor.
-newtype RerouteLineRequest = RerouteLineRequest'
+newtype RerouteLineRequest =
+  RerouteLineRequest'
     { _rlrObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RerouteLineRequest' with the minimum fields required to make a request.
 --
@@ -8519,10 +8563,7 @@ newtype RerouteLineRequest = RerouteLineRequest'
 -- * 'rlrObjectId'
 rerouteLineRequest
     :: RerouteLineRequest
-rerouteLineRequest =
-    RerouteLineRequest'
-    { _rlrObjectId = Nothing
-    }
+rerouteLineRequest = RerouteLineRequest' {_rlrObjectId = Nothing}
 
 -- | The object ID of the line to reroute. Only a line with a category
 -- indicating it is a \"connector\" can be rerouted. The start and end
@@ -8544,9 +8585,11 @@ instance ToJSON RerouteLineRequest where
 -- | Properties of each column in a table.
 --
 -- /See:/ 'tableColumnProperties' smart constructor.
-newtype TableColumnProperties = TableColumnProperties'
+newtype TableColumnProperties =
+  TableColumnProperties'
     { _tcpColumnWidth :: Maybe Dimension
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableColumnProperties' with the minimum fields required to make a request.
 --
@@ -8555,10 +8598,7 @@ newtype TableColumnProperties = TableColumnProperties'
 -- * 'tcpColumnWidth'
 tableColumnProperties
     :: TableColumnProperties
-tableColumnProperties =
-    TableColumnProperties'
-    { _tcpColumnWidth = Nothing
-    }
+tableColumnProperties = TableColumnProperties' {_tcpColumnWidth = Nothing}
 
 -- | Width of a column.
 tcpColumnWidth :: Lens' TableColumnProperties (Maybe Dimension)
@@ -8580,9 +8620,11 @@ instance ToJSON TableColumnProperties where
 -- | The response of duplicating an object.
 --
 -- /See:/ 'duplicateObjectResponse' smart constructor.
-newtype DuplicateObjectResponse = DuplicateObjectResponse'
+newtype DuplicateObjectResponse =
+  DuplicateObjectResponse'
     { _dupObjectId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DuplicateObjectResponse' with the minimum fields required to make a request.
 --
@@ -8591,10 +8633,7 @@ newtype DuplicateObjectResponse = DuplicateObjectResponse'
 -- * 'dupObjectId'
 duplicateObjectResponse
     :: DuplicateObjectResponse
-duplicateObjectResponse =
-    DuplicateObjectResponse'
-    { _dupObjectId = Nothing
-    }
+duplicateObjectResponse = DuplicateObjectResponse' {_dupObjectId = Nothing}
 
 -- | The ID of the new duplicate object.
 dupObjectId :: Lens' DuplicateObjectResponse (Maybe Text)
@@ -8616,13 +8655,15 @@ instance ToJSON DuplicateObjectResponse where
 -- that overlap with the given text index range.
 --
 -- /See:/ 'updateParagraphStyleRequest' smart constructor.
-data UpdateParagraphStyleRequest = UpdateParagraphStyleRequest'
+data UpdateParagraphStyleRequest =
+  UpdateParagraphStyleRequest'
     { _upsrStyle        :: !(Maybe ParagraphStyle)
     , _upsrTextRange    :: !(Maybe Range)
     , _upsrObjectId     :: !(Maybe Text)
     , _upsrCellLocation :: !(Maybe TableCellLocation)
     , _upsrFields       :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateParagraphStyleRequest' with the minimum fields required to make a request.
 --
@@ -8640,7 +8681,7 @@ data UpdateParagraphStyleRequest = UpdateParagraphStyleRequest'
 updateParagraphStyleRequest
     :: UpdateParagraphStyleRequest
 updateParagraphStyleRequest =
-    UpdateParagraphStyleRequest'
+  UpdateParagraphStyleRequest'
     { _upsrStyle = Nothing
     , _upsrTextRange = Nothing
     , _upsrObjectId = Nothing
@@ -8705,11 +8746,13 @@ instance ToJSON UpdateParagraphStyleRequest where
 -- | Replaces all instances of text matching a criteria with replace text.
 --
 -- /See:/ 'replaceAllTextRequest' smart constructor.
-data ReplaceAllTextRequest = ReplaceAllTextRequest'
+data ReplaceAllTextRequest =
+  ReplaceAllTextRequest'
     { _ratrPageObjectIds :: !(Maybe [Text])
     , _ratrContainsText  :: !(Maybe SubstringMatchCriteria)
     , _ratrReplaceText   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReplaceAllTextRequest' with the minimum fields required to make a request.
 --
@@ -8723,7 +8766,7 @@ data ReplaceAllTextRequest = ReplaceAllTextRequest'
 replaceAllTextRequest
     :: ReplaceAllTextRequest
 replaceAllTextRequest =
-    ReplaceAllTextRequest'
+  ReplaceAllTextRequest'
     { _ratrPageObjectIds = Nothing
     , _ratrContainsText = Nothing
     , _ratrReplaceText = Nothing
@@ -8777,11 +8820,13 @@ instance ToJSON ReplaceAllTextRequest where
 -- and column span = 2 specifies the following cells: x x [ x ]
 --
 -- /See:/ 'tableRange' smart constructor.
-data TableRange = TableRange'
+data TableRange =
+  TableRange'
     { _trColumnSpan :: !(Maybe (Textual Int32))
     , _trLocation   :: !(Maybe TableCellLocation)
     , _trRowSpan    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableRange' with the minimum fields required to make a request.
 --
@@ -8795,11 +8840,8 @@ data TableRange = TableRange'
 tableRange
     :: TableRange
 tableRange =
-    TableRange'
-    { _trColumnSpan = Nothing
-    , _trLocation = Nothing
-    , _trRowSpan = Nothing
-    }
+  TableRange'
+    {_trColumnSpan = Nothing, _trLocation = Nothing, _trRowSpan = Nothing}
 
 -- | The column span of the table range.
 trColumnSpan :: Lens' TableRange (Maybe Int32)
@@ -8837,7 +8879,8 @@ instance ToJSON TableRange where
 -- | A single kind of update to apply to a presentation.
 --
 -- /See:/ 'request'' smart constructor.
-data Request' = Request''
+data Request' =
+  Request''
     { _reqReplaceAllShapesWithImage       :: !(Maybe ReplaceAllShapesWithImageRequest)
     , _reqDeleteObject                    :: !(Maybe DeleteObjectRequest)
     , _reqUpdateSlidesPosition            :: !(Maybe UpdateSlidesPositionRequest)
@@ -8881,7 +8924,8 @@ data Request' = Request''
     , _reqCreateSlide                     :: !(Maybe CreateSlideRequest)
     , _reqUpdateTextStyle                 :: !(Maybe UpdateTextStyleRequest)
     , _reqUpdateVideoProperties           :: !(Maybe UpdateVideoPropertiesRequest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Request' with the minimum fields required to make a request.
 --
@@ -8975,7 +9019,7 @@ data Request' = Request''
 request'
     :: Request'
 request' =
-    Request''
+  Request''
     { _reqReplaceAllShapesWithImage = Nothing
     , _reqDeleteObject = Nothing
     , _reqUpdateSlidesPosition = Nothing
@@ -9398,10 +9442,12 @@ instance ToJSON Request' where
 -- | A criteria that matches a specific string of text in a shape or table.
 --
 -- /See:/ 'substringMatchCriteria' smart constructor.
-data SubstringMatchCriteria = SubstringMatchCriteria'
+data SubstringMatchCriteria =
+  SubstringMatchCriteria'
     { _smcMatchCase :: !(Maybe Bool)
     , _smcText      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubstringMatchCriteria' with the minimum fields required to make a request.
 --
@@ -9413,10 +9459,7 @@ data SubstringMatchCriteria = SubstringMatchCriteria'
 substringMatchCriteria
     :: SubstringMatchCriteria
 substringMatchCriteria =
-    SubstringMatchCriteria'
-    { _smcMatchCase = Nothing
-    , _smcText = Nothing
-    }
+  SubstringMatchCriteria' {_smcMatchCase = Nothing, _smcText = Nothing}
 
 -- | Indicates whether the search should respect case: - \`True\`: the search
 -- is case sensitive. - \`False\`: the search is case insensitive.

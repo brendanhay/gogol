@@ -68,7 +68,8 @@ type ProjectsAgentEntityTypesListResource =
 -- | Returns the list of all entity types in the specified agent.
 --
 -- /See:/ 'projectsAgentEntityTypesList' smart constructor.
-data ProjectsAgentEntityTypesList = ProjectsAgentEntityTypesList'
+data ProjectsAgentEntityTypesList =
+  ProjectsAgentEntityTypesList'
     { _paetlParent         :: !Text
     , _paetlXgafv          :: !(Maybe Xgafv)
     , _paetlLanguageCode   :: !(Maybe Text)
@@ -78,7 +79,8 @@ data ProjectsAgentEntityTypesList = ProjectsAgentEntityTypesList'
     , _paetlPageToken      :: !(Maybe Text)
     , _paetlPageSize       :: !(Maybe (Textual Int32))
     , _paetlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentEntityTypesList' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsAgentEntityTypesList
     :: Text -- ^ 'paetlParent'
     -> ProjectsAgentEntityTypesList
 projectsAgentEntityTypesList pPaetlParent_ =
-    ProjectsAgentEntityTypesList'
+  ProjectsAgentEntityTypesList'
     { _paetlParent = pPaetlParent_
     , _paetlXgafv = Nothing
     , _paetlLanguageCode = Nothing

@@ -58,11 +58,13 @@ type RollingUpdatesInsertResource =
 -- | Inserts and starts a new update.
 --
 -- /See:/ 'rollingUpdatesInsert' smart constructor.
-data RollingUpdatesInsert = RollingUpdatesInsert'
+data RollingUpdatesInsert =
+  RollingUpdatesInsert'
     { _ruiProject :: !Text
     , _ruiZone    :: !Text
     , _ruiPayload :: !RollingUpdate
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdatesInsert' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ rollingUpdatesInsert
     -> RollingUpdate -- ^ 'ruiPayload'
     -> RollingUpdatesInsert
 rollingUpdatesInsert pRuiProject_ pRuiZone_ pRuiPayload_ =
-    RollingUpdatesInsert'
+  RollingUpdatesInsert'
     { _ruiProject = pRuiProject_
     , _ruiZone = pRuiZone_
     , _ruiPayload = pRuiPayload_

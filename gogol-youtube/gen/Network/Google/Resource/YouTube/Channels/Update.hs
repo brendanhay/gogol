@@ -59,11 +59,13 @@ type ChannelsUpdateResource =
 -- invideoPromotion objects and their child properties.
 --
 -- /See:/ 'channelsUpdate' smart constructor.
-data ChannelsUpdate = ChannelsUpdate'
+data ChannelsUpdate =
+  ChannelsUpdate'
     { _chaPart                   :: !Text
     , _chaPayload                :: !Channel
     , _chaOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelsUpdate' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ channelsUpdate
     -> Channel -- ^ 'chaPayload'
     -> ChannelsUpdate
 channelsUpdate pChaPart_ pChaPayload_ =
-    ChannelsUpdate'
+  ChannelsUpdate'
     { _chaPart = pChaPart_
     , _chaPayload = pChaPayload_
     , _chaOnBehalfOfContentOwner = Nothing

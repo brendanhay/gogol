@@ -88,13 +88,15 @@ type InstanceGroupManagersAbandonInstancesResource =
 -- per request.
 --
 -- /See:/ 'instanceGroupManagersAbandonInstances' smart constructor.
-data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstances'
+data InstanceGroupManagersAbandonInstances =
+  InstanceGroupManagersAbandonInstances'
     { _igmaiRequestId            :: !(Maybe Text)
     , _igmaiProject              :: !Text
     , _igmaiInstanceGroupManager :: !Text
     , _igmaiZone                 :: !Text
     , _igmaiPayload              :: !InstanceGroupManagersAbandonInstancesRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAbandonInstances' with the minimum fields required to make a request.
 --
@@ -116,7 +118,7 @@ instanceGroupManagersAbandonInstances
     -> InstanceGroupManagersAbandonInstancesRequest -- ^ 'igmaiPayload'
     -> InstanceGroupManagersAbandonInstances
 instanceGroupManagersAbandonInstances pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ pIgmaiPayload_ =
-    InstanceGroupManagersAbandonInstances'
+  InstanceGroupManagersAbandonInstances'
     { _igmaiRequestId = Nothing
     , _igmaiProject = pIgmaiProject_
     , _igmaiInstanceGroupManager = pIgmaiInstanceGroupManager_
@@ -161,7 +163,8 @@ igmaiPayload
   = lens _igmaiPayload (\ s a -> s{_igmaiPayload = a})
 
 instance GoogleRequest
-         InstanceGroupManagersAbandonInstances where
+           InstanceGroupManagersAbandonInstances
+         where
         type Rs InstanceGroupManagersAbandonInstances =
              Operation
         type Scopes InstanceGroupManagersAbandonInstances =

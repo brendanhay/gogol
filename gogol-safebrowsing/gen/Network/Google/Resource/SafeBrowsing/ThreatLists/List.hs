@@ -59,13 +59,15 @@ type ThreatListsListResource =
 -- | Lists the Safe Browsing threat lists available for download.
 --
 -- /See:/ 'threatListsList' smart constructor.
-data ThreatListsList = ThreatListsList'
+data ThreatListsList =
+  ThreatListsList'
     { _tllXgafv          :: !(Maybe Xgafv)
     , _tllUploadProtocol :: !(Maybe Text)
     , _tllAccessToken    :: !(Maybe Text)
     , _tllUploadType     :: !(Maybe Text)
     , _tllCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ThreatListsList' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ data ThreatListsList = ThreatListsList'
 threatListsList
     :: ThreatListsList
 threatListsList =
-    ThreatListsList'
+  ThreatListsList'
     { _tllXgafv = Nothing
     , _tllUploadProtocol = Nothing
     , _tllAccessToken = Nothing

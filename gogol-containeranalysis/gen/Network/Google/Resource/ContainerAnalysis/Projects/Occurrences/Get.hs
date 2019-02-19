@@ -59,14 +59,16 @@ type ProjectsOccurrencesGetResource =
 -- | Gets the specified occurrence.
 --
 -- /See:/ 'projectsOccurrencesGet' smart constructor.
-data ProjectsOccurrencesGet = ProjectsOccurrencesGet'
+data ProjectsOccurrencesGet =
+  ProjectsOccurrencesGet'
     { _pogXgafv          :: !(Maybe Xgafv)
     , _pogUploadProtocol :: !(Maybe Text)
     , _pogAccessToken    :: !(Maybe Text)
     , _pogUploadType     :: !(Maybe Text)
     , _pogName           :: !Text
     , _pogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsOccurrencesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsOccurrencesGet
     :: Text -- ^ 'pogName'
     -> ProjectsOccurrencesGet
 projectsOccurrencesGet pPogName_ =
-    ProjectsOccurrencesGet'
+  ProjectsOccurrencesGet'
     { _pogXgafv = Nothing
     , _pogUploadProtocol = Nothing
     , _pogAccessToken = Nothing

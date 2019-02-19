@@ -52,9 +52,11 @@ type ReportsGenerateResource =
 -- | Generates and returns a report immediately.
 --
 -- /See:/ 'reportsGenerate' smart constructor.
-newtype ReportsGenerate = ReportsGenerate'
+newtype ReportsGenerate =
+  ReportsGenerate'
     { _rgPayload :: ReportRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype ReportsGenerate = ReportsGenerate'
 reportsGenerate
     :: ReportRequest -- ^ 'rgPayload'
     -> ReportsGenerate
-reportsGenerate pRgPayload_ =
-    ReportsGenerate'
-    { _rgPayload = pRgPayload_
-    }
+reportsGenerate pRgPayload_ = ReportsGenerate' {_rgPayload = pRgPayload_}
 
 -- | Multipart request metadata.
 rgPayload :: Lens' ReportsGenerate ReportRequest

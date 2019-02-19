@@ -54,10 +54,12 @@ type SitemapsSubmitResource =
 -- | Submits a sitemap for a site.
 --
 -- /See:/ 'sitemapsSubmit' smart constructor.
-data SitemapsSubmit = SitemapsSubmit'
+data SitemapsSubmit =
+  SitemapsSubmit'
     { _ssFeedpath :: !Text
     , _ssSiteURL  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitemapsSubmit' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ sitemapsSubmit
     -> Text -- ^ 'ssSiteURL'
     -> SitemapsSubmit
 sitemapsSubmit pSsFeedpath_ pSsSiteURL_ =
-    SitemapsSubmit'
-    { _ssFeedpath = pSsFeedpath_
-    , _ssSiteURL = pSsSiteURL_
-    }
+  SitemapsSubmit' {_ssFeedpath = pSsFeedpath_, _ssSiteURL = pSsSiteURL_}
 
 -- | The URL of the sitemap to add. For example:
 -- http:\/\/www.example.com\/sitemap.xml

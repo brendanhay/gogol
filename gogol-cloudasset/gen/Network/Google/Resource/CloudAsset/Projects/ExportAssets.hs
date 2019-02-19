@@ -68,7 +68,8 @@ type ProjectsExportAssetsResource =
 -- track of the export.
 --
 -- /See:/ 'projectsExportAssets' smart constructor.
-data ProjectsExportAssets = ProjectsExportAssets'
+data ProjectsExportAssets =
+  ProjectsExportAssets'
     { _peaParent         :: !Text
     , _peaXgafv          :: !(Maybe Xgafv)
     , _peaUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsExportAssets = ProjectsExportAssets'
     , _peaUploadType     :: !(Maybe Text)
     , _peaPayload        :: !ExportAssetsRequest
     , _peaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsExportAssets' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsExportAssets
     -> ExportAssetsRequest -- ^ 'peaPayload'
     -> ProjectsExportAssets
 projectsExportAssets pPeaParent_ pPeaPayload_ =
-    ProjectsExportAssets'
+  ProjectsExportAssets'
     { _peaParent = pPeaParent_
     , _peaXgafv = Nothing
     , _peaUploadProtocol = Nothing

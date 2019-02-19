@@ -62,14 +62,16 @@ type ProjectsLocationsKeyRingsImportJobsGetIAMPolicyResource
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsLocationsKeyRingsImportJobsGetIAMPolicy' smart constructor.
-data ProjectsLocationsKeyRingsImportJobsGetIAMPolicy = ProjectsLocationsKeyRingsImportJobsGetIAMPolicy'
+data ProjectsLocationsKeyRingsImportJobsGetIAMPolicy =
+  ProjectsLocationsKeyRingsImportJobsGetIAMPolicy'
     { _plkrijgipXgafv          :: !(Maybe Xgafv)
     , _plkrijgipUploadProtocol :: !(Maybe Text)
     , _plkrijgipAccessToken    :: !(Maybe Text)
     , _plkrijgipUploadType     :: !(Maybe Text)
     , _plkrijgipResource       :: !Text
     , _plkrijgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsImportJobsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ projectsLocationsKeyRingsImportJobsGetIAMPolicy
     :: Text -- ^ 'plkrijgipResource'
     -> ProjectsLocationsKeyRingsImportJobsGetIAMPolicy
 projectsLocationsKeyRingsImportJobsGetIAMPolicy pPlkrijgipResource_ =
-    ProjectsLocationsKeyRingsImportJobsGetIAMPolicy'
+  ProjectsLocationsKeyRingsImportJobsGetIAMPolicy'
     { _plkrijgipXgafv = Nothing
     , _plkrijgipUploadProtocol = Nothing
     , _plkrijgipAccessToken = Nothing
@@ -137,7 +139,8 @@ plkrijgipCallback
       (\ s a -> s{_plkrijgipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsImportJobsGetIAMPolicy where
+           ProjectsLocationsKeyRingsImportJobsGetIAMPolicy
+         where
         type Rs
                ProjectsLocationsKeyRingsImportJobsGetIAMPolicy
              = Policy

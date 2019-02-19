@@ -52,9 +52,11 @@ type AccountsContainersVersionsLiveResource =
 -- | Gets the live (i.e. published) container version
 --
 -- /See:/ 'accountsContainersVersionsLive' smart constructor.
-newtype AccountsContainersVersionsLive = AccountsContainersVersionsLive'
+newtype AccountsContainersVersionsLive =
+  AccountsContainersVersionsLive'
     { _acvlParent :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsLive' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ accountsContainersVersionsLive
     :: Text -- ^ 'acvlParent'
     -> AccountsContainersVersionsLive
 accountsContainersVersionsLive pAcvlParent_ =
-    AccountsContainersVersionsLive'
-    { _acvlParent = pAcvlParent_
-    }
+  AccountsContainersVersionsLive' {_acvlParent = pAcvlParent_}
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}

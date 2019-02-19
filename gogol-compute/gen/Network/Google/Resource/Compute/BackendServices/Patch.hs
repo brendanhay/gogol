@@ -68,12 +68,14 @@ type BackendServicesPatchResource =
 -- JSON merge patch format and processing rules.
 --
 -- /See:/ 'backendServicesPatch' smart constructor.
-data BackendServicesPatch = BackendServicesPatch'
+data BackendServicesPatch =
+  BackendServicesPatch'
     { _bspRequestId      :: !(Maybe Text)
     , _bspProject        :: !Text
     , _bspPayload        :: !BackendService
     , _bspBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServicesPatch' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ backendServicesPatch
     -> Text -- ^ 'bspBackendService'
     -> BackendServicesPatch
 backendServicesPatch pBspProject_ pBspPayload_ pBspBackendService_ =
-    BackendServicesPatch'
+  BackendServicesPatch'
     { _bspRequestId = Nothing
     , _bspProject = pBspProject_
     , _bspPayload = pBspPayload_

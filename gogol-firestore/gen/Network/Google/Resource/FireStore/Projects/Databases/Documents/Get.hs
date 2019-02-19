@@ -65,7 +65,8 @@ type ProjectsDatabasesDocumentsGetResource =
 -- | Gets a single document.
 --
 -- /See:/ 'projectsDatabasesDocumentsGet' smart constructor.
-data ProjectsDatabasesDocumentsGet = ProjectsDatabasesDocumentsGet'
+data ProjectsDatabasesDocumentsGet =
+  ProjectsDatabasesDocumentsGet'
     { _pddgXgafv          :: !(Maybe Xgafv)
     , _pddgReadTime       :: !(Maybe DateTime')
     , _pddgUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsDatabasesDocumentsGet = ProjectsDatabasesDocumentsGet'
     , _pddgName           :: !Text
     , _pddgMaskFieldPaths :: !(Maybe [Text])
     , _pddgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsGet' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ projectsDatabasesDocumentsGet
     :: Text -- ^ 'pddgName'
     -> ProjectsDatabasesDocumentsGet
 projectsDatabasesDocumentsGet pPddgName_ =
-    ProjectsDatabasesDocumentsGet'
+  ProjectsDatabasesDocumentsGet'
     { _pddgXgafv = Nothing
     , _pddgReadTime = Nothing
     , _pddgUploadProtocol = Nothing

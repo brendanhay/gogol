@@ -57,11 +57,13 @@ type GlobalForwardingRulesDeleteResource =
 -- | Deletes the specified GlobalForwardingRule resource.
 --
 -- /See:/ 'globalForwardingRulesDelete' smart constructor.
-data GlobalForwardingRulesDelete = GlobalForwardingRulesDelete'
+data GlobalForwardingRulesDelete =
+  GlobalForwardingRulesDelete'
     { _gfrdRequestId      :: !(Maybe Text)
     , _gfrdProject        :: !Text
     , _gfrdForwardingRule :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesDelete' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ globalForwardingRulesDelete
     -> Text -- ^ 'gfrdForwardingRule'
     -> GlobalForwardingRulesDelete
 globalForwardingRulesDelete pGfrdProject_ pGfrdForwardingRule_ =
-    GlobalForwardingRulesDelete'
+  GlobalForwardingRulesDelete'
     { _gfrdRequestId = Nothing
     , _gfrdProject = pGfrdProject_
     , _gfrdForwardingRule = pGfrdForwardingRule_

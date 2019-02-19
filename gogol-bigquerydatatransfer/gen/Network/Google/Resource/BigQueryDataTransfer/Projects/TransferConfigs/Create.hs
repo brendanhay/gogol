@@ -65,7 +65,8 @@ type ProjectsTransferConfigsCreateResource =
 -- | Creates a new data transfer configuration.
 --
 -- /See:/ 'projectsTransferConfigsCreate' smart constructor.
-data ProjectsTransferConfigsCreate = ProjectsTransferConfigsCreate'
+data ProjectsTransferConfigsCreate =
+  ProjectsTransferConfigsCreate'
     { _ptccParent            :: !Text
     , _ptccXgafv             :: !(Maybe Xgafv)
     , _ptccUploadProtocol    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsTransferConfigsCreate = ProjectsTransferConfigsCreate'
     , _ptccAuthorizationCode :: !(Maybe Text)
     , _ptccPayload           :: !TransferConfig
     , _ptccCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTransferConfigsCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsTransferConfigsCreate
     -> TransferConfig -- ^ 'ptccPayload'
     -> ProjectsTransferConfigsCreate
 projectsTransferConfigsCreate pPtccParent_ pPtccPayload_ =
-    ProjectsTransferConfigsCreate'
+  ProjectsTransferConfigsCreate'
     { _ptccParent = pPtccParent_
     , _ptccXgafv = Nothing
     , _ptccUploadProtocol = Nothing

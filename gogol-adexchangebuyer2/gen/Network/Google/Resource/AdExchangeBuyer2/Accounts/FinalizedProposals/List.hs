@@ -74,7 +74,8 @@ type AccountsFinalizedProposalsListResource =
 -- the results. The notes will not be returned.
 --
 -- /See:/ 'accountsFinalizedProposalsList' smart constructor.
-data AccountsFinalizedProposalsList = AccountsFinalizedProposalsList'
+data AccountsFinalizedProposalsList =
+  AccountsFinalizedProposalsList'
     { _afplXgafv          :: !(Maybe Xgafv)
     , _afplUploadProtocol :: !(Maybe Text)
     , _afplAccessToken    :: !(Maybe Text)
@@ -85,7 +86,8 @@ data AccountsFinalizedProposalsList = AccountsFinalizedProposalsList'
     , _afplPageToken      :: !(Maybe Text)
     , _afplPageSize       :: !(Maybe (Textual Int32))
     , _afplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsFinalizedProposalsList' with the minimum fields required to make a request.
 --
@@ -114,7 +116,7 @@ accountsFinalizedProposalsList
     :: Text -- ^ 'afplAccountId'
     -> AccountsFinalizedProposalsList
 accountsFinalizedProposalsList pAfplAccountId_ =
-    AccountsFinalizedProposalsList'
+  AccountsFinalizedProposalsList'
     { _afplXgafv = Nothing
     , _afplUploadProtocol = Nothing
     , _afplAccessToken = Nothing

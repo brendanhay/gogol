@@ -22,11 +22,13 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'postUserInfo' smart constructor.
-data PostUserInfo = PostUserInfo'
+data PostUserInfo =
+  PostUserInfo'
     { _puiPostUserInfo :: !(Maybe PostPerUserInfo)
     , _puiPost         :: !(Maybe Post')
     , _puiKind         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostUserInfo' with the minimum fields required to make a request.
 --
@@ -40,7 +42,7 @@ data PostUserInfo = PostUserInfo'
 postUserInfo
     :: PostUserInfo
 postUserInfo =
-    PostUserInfo'
+  PostUserInfo'
     { _puiPostUserInfo = Nothing
     , _puiPost = Nothing
     , _puiKind = "blogger#postUserInfo"
@@ -78,9 +80,11 @@ instance ToJSON PostUserInfo where
 -- | The Post author\'s avatar.
 --
 -- /See:/ 'postAuthorImage' smart constructor.
-newtype PostAuthorImage = PostAuthorImage'
+newtype PostAuthorImage =
+  PostAuthorImage'
     { _paiURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostAuthorImage' with the minimum fields required to make a request.
 --
@@ -89,10 +93,7 @@ newtype PostAuthorImage = PostAuthorImage'
 -- * 'paiURL'
 postAuthorImage
     :: PostAuthorImage
-postAuthorImage =
-    PostAuthorImage'
-    { _paiURL = Nothing
-    }
+postAuthorImage = PostAuthorImage' {_paiURL = Nothing}
 
 -- | The Post author\'s avatar URL.
 paiURL :: Lens' PostAuthorImage (Maybe Text)
@@ -109,12 +110,14 @@ instance ToJSON PostAuthorImage where
 
 --
 -- /See:/ 'postList' smart constructor.
-data PostList = PostList'
+data PostList =
+  PostList'
     { _plEtag          :: !(Maybe Text)
     , _plNextPageToken :: !(Maybe Text)
     , _plKind          :: !Text
     , _plItems         :: !(Maybe [Post'])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostList' with the minimum fields required to make a request.
 --
@@ -130,7 +133,7 @@ data PostList = PostList'
 postList
     :: PostList
 postList =
-    PostList'
+  PostList'
     { _plEtag = Nothing
     , _plNextPageToken = Nothing
     , _plKind = "blogger#postList"
@@ -177,9 +180,11 @@ instance ToJSON PostList where
 -- | Data about the comment this is in reply to.
 --
 -- /See:/ 'commentInReplyTo' smart constructor.
-newtype CommentInReplyTo = CommentInReplyTo'
+newtype CommentInReplyTo =
+  CommentInReplyTo'
     { _cirtId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentInReplyTo' with the minimum fields required to make a request.
 --
@@ -188,10 +193,7 @@ newtype CommentInReplyTo = CommentInReplyTo'
 -- * 'cirtId'
 commentInReplyTo
     :: CommentInReplyTo
-commentInReplyTo =
-    CommentInReplyTo'
-    { _cirtId = Nothing
-    }
+commentInReplyTo = CommentInReplyTo' {_cirtId = Nothing}
 
 -- | The identified of the parent of this comment.
 cirtId :: Lens' CommentInReplyTo (Maybe Text)
@@ -209,9 +211,11 @@ instance ToJSON CommentInReplyTo where
 -- | Data about the blog containing this comment.
 --
 -- /See:/ 'commentBlog' smart constructor.
-newtype CommentBlog = CommentBlog'
+newtype CommentBlog =
+  CommentBlog'
     { _cbId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentBlog' with the minimum fields required to make a request.
 --
@@ -220,10 +224,7 @@ newtype CommentBlog = CommentBlog'
 -- * 'cbId'
 commentBlog
     :: CommentBlog
-commentBlog =
-    CommentBlog'
-    { _cbId = Nothing
-    }
+commentBlog = CommentBlog' {_cbId = Nothing}
 
 -- | The identifier of the blog containing this comment.
 cbId :: Lens' CommentBlog (Maybe Text)
@@ -240,11 +241,13 @@ instance ToJSON CommentBlog where
 
 --
 -- /See:/ 'pageviews' smart constructor.
-data Pageviews = Pageviews'
+data Pageviews =
+  Pageviews'
     { _pKind   :: !Text
     , _pCounts :: !(Maybe [PageviewsCountsItem])
     , _pBlogId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Pageviews' with the minimum fields required to make a request.
 --
@@ -258,11 +261,8 @@ data Pageviews = Pageviews'
 pageviews
     :: Pageviews
 pageviews =
-    Pageviews'
-    { _pKind = "blogger#page_views"
-    , _pCounts = Nothing
-    , _pBlogId = Nothing
-    }
+  Pageviews'
+    {_pKind = "blogger#page_views", _pCounts = Nothing, _pBlogId = Nothing}
 
 -- | The kind of this entry. Always blogger#page_views
 pKind :: Lens' Pageviews Text
@@ -297,12 +297,14 @@ instance ToJSON Pageviews where
 -- | The location for geotagged posts.
 --
 -- /See:/ 'postLocation' smart constructor.
-data PostLocation = PostLocation'
+data PostLocation =
+  PostLocation'
     { _plSpan :: !(Maybe Text)
     , _plLat  :: !(Maybe (Textual Double))
     , _plName :: !(Maybe Text)
     , _plLng  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostLocation' with the minimum fields required to make a request.
 --
@@ -318,12 +320,8 @@ data PostLocation = PostLocation'
 postLocation
     :: PostLocation
 postLocation =
-    PostLocation'
-    { _plSpan = Nothing
-    , _plLat = Nothing
-    , _plName = Nothing
-    , _plLng = Nothing
-    }
+  PostLocation'
+    {_plSpan = Nothing, _plLat = Nothing, _plName = Nothing, _plLng = Nothing}
 
 -- | Location\'s viewport span. Can be used when rendering a map preview.
 plSpan :: Lens' PostLocation (Maybe Text)
@@ -363,11 +361,13 @@ instance ToJSON PostLocation where
 -- | The container of posts in this blog.
 --
 -- /See:/ 'blogPosts' smart constructor.
-data BlogPosts = BlogPosts'
+data BlogPosts =
+  BlogPosts'
     { _bpTotalItems :: !(Maybe (Textual Int32))
     , _bpItems      :: !(Maybe [Post'])
     , _bpSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BlogPosts' with the minimum fields required to make a request.
 --
@@ -381,11 +381,8 @@ data BlogPosts = BlogPosts'
 blogPosts
     :: BlogPosts
 blogPosts =
-    BlogPosts'
-    { _bpTotalItems = Nothing
-    , _bpItems = Nothing
-    , _bpSelfLink = Nothing
-    }
+  BlogPosts'
+    {_bpTotalItems = Nothing, _bpItems = Nothing, _bpSelfLink = Nothing}
 
 -- | The count of posts in this blog.
 bpTotalItems :: Lens' BlogPosts (Maybe Int32)
@@ -422,7 +419,8 @@ instance ToJSON BlogPosts where
 
 --
 -- /See:/ 'post' smart constructor.
-data Post' = Post''
+data Post' =
+  Post''
     { _posImages         :: !(Maybe [PostImagesItem])
     , _posStatus         :: !(Maybe Text)
     , _posEtag           :: !(Maybe Text)
@@ -442,7 +440,8 @@ data Post' = Post''
     , _posUpdated        :: !(Maybe DateTime')
     , _posTitleLink      :: !(Maybe Text)
     , _posTitle          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Post' with the minimum fields required to make a request.
 --
@@ -488,7 +487,7 @@ data Post' = Post''
 post
     :: Post'
 post =
-    Post''
+  Post''
     { _posImages = Nothing
     , _posStatus = Nothing
     , _posEtag = Nothing
@@ -655,7 +654,8 @@ instance ToJSON Post' where
 
 --
 -- /See:/ 'page' smart constructor.
-data Page = Page'
+data Page =
+  Page'
     { _pagStatus    :: !(Maybe Text)
     , _pagEtag      :: !(Maybe Text)
     , _pagKind      :: !Text
@@ -668,7 +668,8 @@ data Page = Page'
     , _pagId        :: !(Maybe Text)
     , _pagUpdated   :: !(Maybe DateTime')
     , _pagTitle     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
@@ -700,7 +701,7 @@ data Page = Page'
 page
     :: Page
 page =
-    Page'
+  Page'
     { _pagStatus = Nothing
     , _pagEtag = Nothing
     , _pagKind = "blogger#page"
@@ -806,11 +807,13 @@ instance ToJSON Page where
 -- | The locale this Blog is set to.
 --
 -- /See:/ 'blogLocale' smart constructor.
-data BlogLocale = BlogLocale'
+data BlogLocale =
+  BlogLocale'
     { _blVariant  :: !(Maybe Text)
     , _blCountry  :: !(Maybe Text)
     , _blLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BlogLocale' with the minimum fields required to make a request.
 --
@@ -824,11 +827,8 @@ data BlogLocale = BlogLocale'
 blogLocale
     :: BlogLocale
 blogLocale =
-    BlogLocale'
-    { _blVariant = Nothing
-    , _blCountry = Nothing
-    , _blLanguage = Nothing
-    }
+  BlogLocale'
+    {_blVariant = Nothing, _blCountry = Nothing, _blLanguage = Nothing}
 
 -- | The language variant this blog is authored in.
 blVariant :: Lens' BlogLocale (Maybe Text)
@@ -864,12 +864,14 @@ instance ToJSON BlogLocale where
 -- | The author of this Page.
 --
 -- /See:/ 'pageAuthor' smart constructor.
-data PageAuthor = PageAuthor'
+data PageAuthor =
+  PageAuthor'
     { _paImage       :: !(Maybe PageAuthorImage)
     , _paURL         :: !(Maybe Text)
     , _paDisplayName :: !(Maybe Text)
     , _paId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageAuthor' with the minimum fields required to make a request.
 --
@@ -885,7 +887,7 @@ data PageAuthor = PageAuthor'
 pageAuthor
     :: PageAuthor
 pageAuthor =
-    PageAuthor'
+  PageAuthor'
     { _paImage = Nothing
     , _paURL = Nothing
     , _paDisplayName = Nothing
@@ -929,7 +931,8 @@ instance ToJSON PageAuthor where
 
 --
 -- /See:/ 'blog' smart constructor.
-data Blog = Blog'
+data Blog =
+  Blog'
     { _bStatus         :: !(Maybe Text)
     , _bKind           :: !Text
     , _bPages          :: !(Maybe BlogPages)
@@ -943,7 +946,8 @@ data Blog = Blog'
     , _bUpdated        :: !(Maybe DateTime')
     , _bPosts          :: !(Maybe BlogPosts)
     , _bDescription    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Blog' with the minimum fields required to make a request.
 --
@@ -977,7 +981,7 @@ data Blog = Blog'
 blog
     :: Blog
 blog =
-    Blog'
+  Blog'
     { _bStatus = Nothing
     , _bKind = "blogger#blog"
     , _bPages = Nothing
@@ -1090,10 +1094,12 @@ instance ToJSON Blog where
 -- | The container of pages in this blog.
 --
 -- /See:/ 'blogPages' smart constructor.
-data BlogPages = BlogPages'
+data BlogPages =
+  BlogPages'
     { _bpsTotalItems :: !(Maybe (Textual Int32))
     , _bpsSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BlogPages' with the minimum fields required to make a request.
 --
@@ -1104,11 +1110,7 @@ data BlogPages = BlogPages'
 -- * 'bpsSelfLink'
 blogPages
     :: BlogPages
-blogPages =
-    BlogPages'
-    { _bpsTotalItems = Nothing
-    , _bpsSelfLink = Nothing
-    }
+blogPages = BlogPages' {_bpsTotalItems = Nothing, _bpsSelfLink = Nothing}
 
 -- | The count of pages in this blog.
 bpsTotalItems :: Lens' BlogPages (Maybe Int32)
@@ -1139,9 +1141,11 @@ instance ToJSON BlogPages where
 -- | Data about the blog containing this Post.
 --
 -- /See:/ 'postBlog' smart constructor.
-newtype PostBlog = PostBlog'
+newtype PostBlog =
+  PostBlog'
     { _pbId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostBlog' with the minimum fields required to make a request.
 --
@@ -1150,10 +1154,7 @@ newtype PostBlog = PostBlog'
 -- * 'pbId'
 postBlog
     :: PostBlog
-postBlog =
-    PostBlog'
-    { _pbId = Nothing
-    }
+postBlog = PostBlog' {_pbId = Nothing}
 
 -- | The identifier of the Blog that contains this Post.
 pbId :: Lens' PostBlog (Maybe Text)
@@ -1170,12 +1171,14 @@ instance ToJSON PostBlog where
 
 --
 -- /See:/ 'pageList' smart constructor.
-data PageList = PageList'
+data PageList =
+  PageList'
     { _pllEtag          :: !(Maybe Text)
     , _pllNextPageToken :: !(Maybe Text)
     , _pllKind          :: !Text
     , _pllItems         :: !(Maybe [Page])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageList' with the minimum fields required to make a request.
 --
@@ -1191,7 +1194,7 @@ data PageList = PageList'
 pageList
     :: PageList
 pageList =
-    PageList'
+  PageList'
     { _pllEtag = Nothing
     , _pllNextPageToken = Nothing
     , _pllKind = "blogger#pageList"
@@ -1240,11 +1243,13 @@ instance ToJSON PageList where
 -- | This user\'s locale
 --
 -- /See:/ 'userLocale' smart constructor.
-data UserLocale = UserLocale'
+data UserLocale =
+  UserLocale'
     { _ulVariant  :: !(Maybe Text)
     , _ulCountry  :: !(Maybe Text)
     , _ulLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserLocale' with the minimum fields required to make a request.
 --
@@ -1258,11 +1263,8 @@ data UserLocale = UserLocale'
 userLocale
     :: UserLocale
 userLocale =
-    UserLocale'
-    { _ulVariant = Nothing
-    , _ulCountry = Nothing
-    , _ulLanguage = Nothing
-    }
+  UserLocale'
+    {_ulVariant = Nothing, _ulCountry = Nothing, _ulLanguage = Nothing}
 
 -- | The user\'s language variant setting.
 ulVariant :: Lens' UserLocale (Maybe Text)
@@ -1298,9 +1300,11 @@ instance ToJSON UserLocale where
 -- | The comment creator\'s avatar.
 --
 -- /See:/ 'commentAuthorImage' smart constructor.
-newtype CommentAuthorImage = CommentAuthorImage'
+newtype CommentAuthorImage =
+  CommentAuthorImage'
     { _caiURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentAuthorImage' with the minimum fields required to make a request.
 --
@@ -1309,10 +1313,7 @@ newtype CommentAuthorImage = CommentAuthorImage'
 -- * 'caiURL'
 commentAuthorImage
     :: CommentAuthorImage
-commentAuthorImage =
-    CommentAuthorImage'
-    { _caiURL = Nothing
-    }
+commentAuthorImage = CommentAuthorImage' {_caiURL = Nothing}
 
 -- | The comment creator\'s avatar URL.
 caiURL :: Lens' CommentAuthorImage (Maybe Text)
@@ -1329,7 +1330,8 @@ instance ToJSON CommentAuthorImage where
 
 --
 -- /See:/ 'user' smart constructor.
-data User = User'
+data User =
+  User'
     { _uBlogs       :: !(Maybe UserBlogs)
     , _uKind        :: !Text
     , _uCreated     :: !(Maybe DateTime')
@@ -1339,7 +1341,8 @@ data User = User'
     , _uAbout       :: !(Maybe Text)
     , _uDisplayName :: !(Maybe Text)
     , _uId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -1365,7 +1368,7 @@ data User = User'
 user
     :: User
 user =
-    User'
+  User'
     { _uBlogs = Nothing
     , _uKind = "blogger#user"
     , _uCreated = Nothing
@@ -1446,9 +1449,11 @@ instance ToJSON User where
 -- | The container of blogs for this user.
 --
 -- /See:/ 'userBlogs' smart constructor.
-newtype UserBlogs = UserBlogs'
+newtype UserBlogs =
+  UserBlogs'
     { _ubSelfLink :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserBlogs' with the minimum fields required to make a request.
 --
@@ -1457,10 +1462,7 @@ newtype UserBlogs = UserBlogs'
 -- * 'ubSelfLink'
 userBlogs
     :: UserBlogs
-userBlogs =
-    UserBlogs'
-    { _ubSelfLink = Nothing
-    }
+userBlogs = UserBlogs' {_ubSelfLink = Nothing}
 
 -- | The URL of the Blogs for this user.
 ubSelfLink :: Lens' UserBlogs (Maybe Text)
@@ -1480,11 +1482,13 @@ instance ToJSON UserBlogs where
 -- | The container of comments on this Post.
 --
 -- /See:/ 'postReplies' smart constructor.
-data PostReplies = PostReplies'
+data PostReplies =
+  PostReplies'
     { _prTotalItems :: !(Maybe (Textual Int64))
     , _prItems      :: !(Maybe [Comment])
     , _prSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostReplies' with the minimum fields required to make a request.
 --
@@ -1498,11 +1502,8 @@ data PostReplies = PostReplies'
 postReplies
     :: PostReplies
 postReplies =
-    PostReplies'
-    { _prTotalItems = Nothing
-    , _prItems = Nothing
-    , _prSelfLink = Nothing
-    }
+  PostReplies'
+    {_prTotalItems = Nothing, _prItems = Nothing, _prSelfLink = Nothing}
 
 -- | The count of comments on this post.
 prTotalItems :: Lens' PostReplies (Maybe Int64)
@@ -1539,11 +1540,13 @@ instance ToJSON PostReplies where
 
 --
 -- /See:/ 'blogList' smart constructor.
-data BlogList = BlogList'
+data BlogList =
+  BlogList'
     { _blKind          :: !Text
     , _blItems         :: !(Maybe [Blog])
     , _blBlogUserInfos :: !(Maybe [BlogUserInfo])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BlogList' with the minimum fields required to make a request.
 --
@@ -1557,7 +1560,7 @@ data BlogList = BlogList'
 blogList
     :: BlogList
 blogList =
-    BlogList'
+  BlogList'
     { _blKind = "blogger#blogList"
     , _blItems = Nothing
     , _blBlogUserInfos = Nothing
@@ -1600,9 +1603,11 @@ instance ToJSON BlogList where
 -- | Data about the blog containing this Page.
 --
 -- /See:/ 'pageBlog' smart constructor.
-newtype PageBlog = PageBlog'
+newtype PageBlog =
+  PageBlog'
     { _pId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageBlog' with the minimum fields required to make a request.
 --
@@ -1611,10 +1616,7 @@ newtype PageBlog = PageBlog'
 -- * 'pId'
 pageBlog
     :: PageBlog
-pageBlog =
-    PageBlog'
-    { _pId = Nothing
-    }
+pageBlog = PageBlog' {_pId = Nothing}
 
 -- | The identifier of the blog containing this page.
 pId :: Lens' PageBlog (Maybe Text)
@@ -1632,12 +1634,14 @@ instance ToJSON PageBlog where
 -- | The author of this Post.
 --
 -- /See:/ 'postAuthor' smart constructor.
-data PostAuthor = PostAuthor'
+data PostAuthor =
+  PostAuthor'
     { _paaImage       :: !(Maybe PostAuthorImage)
     , _paaURL         :: !(Maybe Text)
     , _paaDisplayName :: !(Maybe Text)
     , _paaId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostAuthor' with the minimum fields required to make a request.
 --
@@ -1653,7 +1657,7 @@ data PostAuthor = PostAuthor'
 postAuthor
     :: PostAuthor
 postAuthor =
-    PostAuthor'
+  PostAuthor'
     { _paaImage = Nothing
     , _paaURL = Nothing
     , _paaDisplayName = Nothing
@@ -1697,13 +1701,15 @@ instance ToJSON PostAuthor where
 
 --
 -- /See:/ 'postPerUserInfo' smart constructor.
-data PostPerUserInfo = PostPerUserInfo'
+data PostPerUserInfo =
+  PostPerUserInfo'
     { _ppuiKind          :: !Text
     , _ppuiBlogId        :: !(Maybe Text)
     , _ppuiUserId        :: !(Maybe Text)
     , _ppuiHasEditAccess :: !(Maybe Bool)
     , _ppuiPostId        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostPerUserInfo' with the minimum fields required to make a request.
 --
@@ -1721,7 +1727,7 @@ data PostPerUserInfo = PostPerUserInfo'
 postPerUserInfo
     :: PostPerUserInfo
 postPerUserInfo =
-    PostPerUserInfo'
+  PostPerUserInfo'
     { _ppuiKind = "blogger#postPerUserInfo"
     , _ppuiBlogId = Nothing
     , _ppuiUserId = Nothing
@@ -1777,10 +1783,12 @@ instance ToJSON PostPerUserInfo where
 
 --
 -- /See:/ 'pageviewsCountsItem' smart constructor.
-data PageviewsCountsItem = PageviewsCountsItem'
+data PageviewsCountsItem =
+  PageviewsCountsItem'
     { _pciTimeRange :: !(Maybe Text)
     , _pciCount     :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageviewsCountsItem' with the minimum fields required to make a request.
 --
@@ -1792,10 +1800,7 @@ data PageviewsCountsItem = PageviewsCountsItem'
 pageviewsCountsItem
     :: PageviewsCountsItem
 pageviewsCountsItem =
-    PageviewsCountsItem'
-    { _pciTimeRange = Nothing
-    , _pciCount = Nothing
-    }
+  PageviewsCountsItem' {_pciTimeRange = Nothing, _pciCount = Nothing}
 
 -- | Time range the given count applies to
 pciTimeRange :: Lens' PageviewsCountsItem (Maybe Text)
@@ -1824,7 +1829,8 @@ instance ToJSON PageviewsCountsItem where
 
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment'
+data Comment =
+  Comment'
     { _cStatus    :: !(Maybe Text)
     , _cPost      :: !(Maybe CommentPost)
     , _cKind      :: !Text
@@ -1836,7 +1842,8 @@ data Comment = Comment'
     , _cId        :: !(Maybe Text)
     , _cUpdated   :: !(Maybe DateTime')
     , _cInReplyTo :: !(Maybe CommentInReplyTo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
@@ -1866,7 +1873,7 @@ data Comment = Comment'
 comment
     :: Comment
 comment =
-    Comment'
+  Comment'
     { _cStatus = Nothing
     , _cPost = Nothing
     , _cKind = "blogger#comment"
@@ -1962,9 +1969,11 @@ instance ToJSON Comment where
 -- | Data about the post containing this comment.
 --
 -- /See:/ 'commentPost' smart constructor.
-newtype CommentPost = CommentPost'
+newtype CommentPost =
+  CommentPost'
     { _cpId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentPost' with the minimum fields required to make a request.
 --
@@ -1973,10 +1982,7 @@ newtype CommentPost = CommentPost'
 -- * 'cpId'
 commentPost
     :: CommentPost
-commentPost =
-    CommentPost'
-    { _cpId = Nothing
-    }
+commentPost = CommentPost' {_cpId = Nothing}
 
 -- | The identifier of the post containing this comment.
 cpId :: Lens' CommentPost (Maybe Text)
@@ -1993,14 +1999,16 @@ instance ToJSON CommentPost where
 
 --
 -- /See:/ 'blogPerUserInfo' smart constructor.
-data BlogPerUserInfo = BlogPerUserInfo'
+data BlogPerUserInfo =
+  BlogPerUserInfo'
     { _bpuiPhotosAlbumKey :: !(Maybe Text)
     , _bpuiKind           :: !Text
     , _bpuiBlogId         :: !(Maybe Text)
     , _bpuiUserId         :: !(Maybe Text)
     , _bpuiRole           :: !(Maybe Text)
     , _bpuiHasAdminAccess :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BlogPerUserInfo' with the minimum fields required to make a request.
 --
@@ -2020,7 +2028,7 @@ data BlogPerUserInfo = BlogPerUserInfo'
 blogPerUserInfo
     :: BlogPerUserInfo
 blogPerUserInfo =
-    BlogPerUserInfo'
+  BlogPerUserInfo'
     { _bpuiPhotosAlbumKey = Nothing
     , _bpuiKind = "blogger#blogPerUserInfo"
     , _bpuiBlogId = Nothing
@@ -2085,11 +2093,13 @@ instance ToJSON BlogPerUserInfo where
 
 --
 -- /See:/ 'postUserInfosList' smart constructor.
-data PostUserInfosList = PostUserInfosList'
+data PostUserInfosList =
+  PostUserInfosList'
     { _puilNextPageToken :: !(Maybe Text)
     , _puilKind          :: !Text
     , _puilItems         :: !(Maybe [PostUserInfo])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostUserInfosList' with the minimum fields required to make a request.
 --
@@ -2103,7 +2113,7 @@ data PostUserInfosList = PostUserInfosList'
 postUserInfosList
     :: PostUserInfosList
 postUserInfosList =
-    PostUserInfosList'
+  PostUserInfosList'
     { _puilNextPageToken = Nothing
     , _puilKind = "blogger#postUserInfosList"
     , _puilItems = Nothing
@@ -2146,12 +2156,14 @@ instance ToJSON PostUserInfosList where
 -- | The author of this Comment.
 --
 -- /See:/ 'commentAuthor' smart constructor.
-data CommentAuthor = CommentAuthor'
+data CommentAuthor =
+  CommentAuthor'
     { _caImage       :: !(Maybe CommentAuthorImage)
     , _caURL         :: !(Maybe Text)
     , _caDisplayName :: !(Maybe Text)
     , _caId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentAuthor' with the minimum fields required to make a request.
 --
@@ -2167,7 +2179,7 @@ data CommentAuthor = CommentAuthor'
 commentAuthor
     :: CommentAuthor
 commentAuthor =
-    CommentAuthor'
+  CommentAuthor'
     { _caImage = Nothing
     , _caURL = Nothing
     , _caDisplayName = Nothing
@@ -2211,11 +2223,13 @@ instance ToJSON CommentAuthor where
 
 --
 -- /See:/ 'blogUserInfo' smart constructor.
-data BlogUserInfo = BlogUserInfo'
+data BlogUserInfo =
+  BlogUserInfo'
     { _buiKind         :: !Text
     , _buiBlog         :: !(Maybe Blog)
     , _buiBlogUserInfo :: !(Maybe BlogPerUserInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BlogUserInfo' with the minimum fields required to make a request.
 --
@@ -2229,7 +2243,7 @@ data BlogUserInfo = BlogUserInfo'
 blogUserInfo
     :: BlogUserInfo
 blogUserInfo =
-    BlogUserInfo'
+  BlogUserInfo'
     { _buiKind = "blogger#blogUserInfo"
     , _buiBlog = Nothing
     , _buiBlogUserInfo = Nothing
@@ -2268,9 +2282,11 @@ instance ToJSON BlogUserInfo where
 -- | The page author\'s avatar.
 --
 -- /See:/ 'pageAuthorImage' smart constructor.
-newtype PageAuthorImage = PageAuthorImage'
+newtype PageAuthorImage =
+  PageAuthorImage'
     { _pURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageAuthorImage' with the minimum fields required to make a request.
 --
@@ -2279,10 +2295,7 @@ newtype PageAuthorImage = PageAuthorImage'
 -- * 'pURL'
 pageAuthorImage
     :: PageAuthorImage
-pageAuthorImage =
-    PageAuthorImage'
-    { _pURL = Nothing
-    }
+pageAuthorImage = PageAuthorImage' {_pURL = Nothing}
 
 -- | The page author\'s avatar URL.
 pURL :: Lens' PageAuthorImage (Maybe Text)
@@ -2299,13 +2312,15 @@ instance ToJSON PageAuthorImage where
 
 --
 -- /See:/ 'commentList' smart constructor.
-data CommentList = CommentList'
+data CommentList =
+  CommentList'
     { _clEtag          :: !(Maybe Text)
     , _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
     , _clItems         :: !(Maybe [Comment])
     , _clPrevPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentList' with the minimum fields required to make a request.
 --
@@ -2323,7 +2338,7 @@ data CommentList = CommentList'
 commentList
     :: CommentList
 commentList =
-    CommentList'
+  CommentList'
     { _clEtag = Nothing
     , _clNextPageToken = Nothing
     , _clKind = "blogger#commentList"
@@ -2378,9 +2393,11 @@ instance ToJSON CommentList where
 
 --
 -- /See:/ 'postImagesItem' smart constructor.
-newtype PostImagesItem = PostImagesItem'
+newtype PostImagesItem =
+  PostImagesItem'
     { _piiURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostImagesItem' with the minimum fields required to make a request.
 --
@@ -2389,10 +2406,7 @@ newtype PostImagesItem = PostImagesItem'
 -- * 'piiURL'
 postImagesItem
     :: PostImagesItem
-postImagesItem =
-    PostImagesItem'
-    { _piiURL = Nothing
-    }
+postImagesItem = PostImagesItem' {_piiURL = Nothing}
 
 piiURL :: Lens' PostImagesItem (Maybe Text)
 piiURL = lens _piiURL (\ s a -> s{_piiURL = a})

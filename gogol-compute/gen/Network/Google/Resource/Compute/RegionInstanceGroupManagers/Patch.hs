@@ -74,13 +74,15 @@ type RegionInstanceGroupManagersPatchResource =
 -- rules.
 --
 -- /See:/ 'regionInstanceGroupManagersPatch' smart constructor.
-data RegionInstanceGroupManagersPatch = RegionInstanceGroupManagersPatch'
+data RegionInstanceGroupManagersPatch =
+  RegionInstanceGroupManagersPatch'
     { _rigmpRequestId            :: !(Maybe Text)
     , _rigmpProject              :: !Text
     , _rigmpInstanceGroupManager :: !Text
     , _rigmpPayload              :: !InstanceGroupManager
     , _rigmpRegion               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersPatch' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ regionInstanceGroupManagersPatch
     -> Text -- ^ 'rigmpRegion'
     -> RegionInstanceGroupManagersPatch
 regionInstanceGroupManagersPatch pRigmpProject_ pRigmpInstanceGroupManager_ pRigmpPayload_ pRigmpRegion_ =
-    RegionInstanceGroupManagersPatch'
+  RegionInstanceGroupManagersPatch'
     { _rigmpRequestId = Nothing
     , _rigmpProject = pRigmpProject_
     , _rigmpInstanceGroupManager = pRigmpInstanceGroupManager_
@@ -147,7 +149,8 @@ rigmpRegion
   = lens _rigmpRegion (\ s a -> s{_rigmpRegion = a})
 
 instance GoogleRequest
-         RegionInstanceGroupManagersPatch where
+           RegionInstanceGroupManagersPatch
+         where
         type Rs RegionInstanceGroupManagersPatch = Operation
         type Scopes RegionInstanceGroupManagersPatch =
              '["https://www.googleapis.com/auth/cloud-platform",

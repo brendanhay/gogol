@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesGet' request conforms to.
 type PlacementStrategiesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -55,10 +55,12 @@ type PlacementStrategiesGetResource =
 -- | Gets one placement strategy by ID.
 --
 -- /See:/ 'placementStrategiesGet' smart constructor.
-data PlacementStrategiesGet = PlacementStrategiesGet'
+data PlacementStrategiesGet =
+  PlacementStrategiesGet'
     { _psgProFileId :: !(Textual Int64)
     , _psgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlacementStrategiesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ placementStrategiesGet
     -> Int64 -- ^ 'psgId'
     -> PlacementStrategiesGet
 placementStrategiesGet pPsgProFileId_ pPsgId_ =
-    PlacementStrategiesGet'
-    { _psgProFileId = _Coerce # pPsgProFileId_
-    , _psgId = _Coerce # pPsgId_
-    }
+  PlacementStrategiesGet'
+    {_psgProFileId = _Coerce # pPsgProFileId_, _psgId = _Coerce # pPsgId_}
 
 -- | User profile ID associated with this request.
 psgProFileId :: Lens' PlacementStrategiesGet Int64

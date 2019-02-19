@@ -61,14 +61,16 @@ type ProjectsGetPolicyResource =
 -- project does not have one.
 --
 -- /See:/ 'projectsGetPolicy' smart constructor.
-data ProjectsGetPolicy = ProjectsGetPolicy'
+data ProjectsGetPolicy =
+  ProjectsGetPolicy'
     { _pgpXgafv          :: !(Maybe Xgafv)
     , _pgpUploadProtocol :: !(Maybe Text)
     , _pgpAccessToken    :: !(Maybe Text)
     , _pgpUploadType     :: !(Maybe Text)
     , _pgpName           :: !Text
     , _pgpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGetPolicy' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsGetPolicy
     :: Text -- ^ 'pgpName'
     -> ProjectsGetPolicy
 projectsGetPolicy pPgpName_ =
-    ProjectsGetPolicy'
+  ProjectsGetPolicy'
     { _pgpXgafv = Nothing
     , _pgpUploadProtocol = Nothing
     , _pgpAccessToken = Nothing

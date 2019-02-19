@@ -65,7 +65,8 @@ type ProjectsLocationsTransferConfigsCreateResource =
 -- | Creates a new data transfer configuration.
 --
 -- /See:/ 'projectsLocationsTransferConfigsCreate' smart constructor.
-data ProjectsLocationsTransferConfigsCreate = ProjectsLocationsTransferConfigsCreate'
+data ProjectsLocationsTransferConfigsCreate =
+  ProjectsLocationsTransferConfigsCreate'
     { _pltccParent            :: !Text
     , _pltccXgafv             :: !(Maybe Xgafv)
     , _pltccUploadProtocol    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsTransferConfigsCreate = ProjectsLocationsTransferConfigsCr
     , _pltccAuthorizationCode :: !(Maybe Text)
     , _pltccPayload           :: !TransferConfig
     , _pltccCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsTransferConfigsCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsLocationsTransferConfigsCreate
     -> TransferConfig -- ^ 'pltccPayload'
     -> ProjectsLocationsTransferConfigsCreate
 projectsLocationsTransferConfigsCreate pPltccParent_ pPltccPayload_ =
-    ProjectsLocationsTransferConfigsCreate'
+  ProjectsLocationsTransferConfigsCreate'
     { _pltccParent = pPltccParent_
     , _pltccXgafv = Nothing
     , _pltccUploadProtocol = Nothing
@@ -174,7 +176,8 @@ pltccCallback
       (\ s a -> s{_pltccCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTransferConfigsCreate where
+           ProjectsLocationsTransferConfigsCreate
+         where
         type Rs ProjectsLocationsTransferConfigsCreate =
              TransferConfig
         type Scopes ProjectsLocationsTransferConfigsCreate =

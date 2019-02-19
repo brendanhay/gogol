@@ -23,10 +23,12 @@ import           Network.Google.Prelude
 -- | A Shelf contains a collection of books with a theme.
 --
 -- /See:/ 'googleExampleLibraryagentV1Shelf' smart constructor.
-data GoogleExampleLibraryagentV1Shelf = GoogleExampleLibraryagentV1Shelf'
+data GoogleExampleLibraryagentV1Shelf =
+  GoogleExampleLibraryagentV1Shelf'
     { _gelvsName  :: !(Maybe Text)
     , _gelvsTheme :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleExampleLibraryagentV1Shelf' with the minimum fields required to make a request.
 --
@@ -38,10 +40,8 @@ data GoogleExampleLibraryagentV1Shelf = GoogleExampleLibraryagentV1Shelf'
 googleExampleLibraryagentV1Shelf
     :: GoogleExampleLibraryagentV1Shelf
 googleExampleLibraryagentV1Shelf =
-    GoogleExampleLibraryagentV1Shelf'
-    { _gelvsName = Nothing
-    , _gelvsTheme = Nothing
-    }
+  GoogleExampleLibraryagentV1Shelf'
+    {_gelvsName = Nothing, _gelvsTheme = Nothing}
 
 -- | Output only. The resource name of the shelf. Shelf names have the form
 -- \`shelves\/{shelf_id}\`. The name is ignored when creating a shelf.
@@ -73,10 +73,12 @@ instance ToJSON GoogleExampleLibraryagentV1Shelf
 -- | Response message for LibraryAgent.ListShelves.
 --
 -- /See:/ 'googleExampleLibraryagentV1ListShelvesResponse' smart constructor.
-data GoogleExampleLibraryagentV1ListShelvesResponse = GoogleExampleLibraryagentV1ListShelvesResponse'
+data GoogleExampleLibraryagentV1ListShelvesResponse =
+  GoogleExampleLibraryagentV1ListShelvesResponse'
     { _gelvlsrNextPageToken :: !(Maybe Text)
     , _gelvlsrShelves       :: !(Maybe [GoogleExampleLibraryagentV1Shelf])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleExampleLibraryagentV1ListShelvesResponse' with the minimum fields required to make a request.
 --
@@ -88,10 +90,8 @@ data GoogleExampleLibraryagentV1ListShelvesResponse = GoogleExampleLibraryagentV
 googleExampleLibraryagentV1ListShelvesResponse
     :: GoogleExampleLibraryagentV1ListShelvesResponse
 googleExampleLibraryagentV1ListShelvesResponse =
-    GoogleExampleLibraryagentV1ListShelvesResponse'
-    { _gelvlsrNextPageToken = Nothing
-    , _gelvlsrShelves = Nothing
-    }
+  GoogleExampleLibraryagentV1ListShelvesResponse'
+    {_gelvlsrNextPageToken = Nothing, _gelvlsrShelves = Nothing}
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListShelvesRequest.page_token field in the subsequent call to
@@ -110,7 +110,8 @@ gelvlsrShelves
       . _Coerce
 
 instance FromJSON
-         GoogleExampleLibraryagentV1ListShelvesResponse where
+           GoogleExampleLibraryagentV1ListShelvesResponse
+         where
         parseJSON
           = withObject
               "GoogleExampleLibraryagentV1ListShelvesResponse"
@@ -120,7 +121,8 @@ instance FromJSON
                      (o .:? "shelves" .!= mempty))
 
 instance ToJSON
-         GoogleExampleLibraryagentV1ListShelvesResponse where
+           GoogleExampleLibraryagentV1ListShelvesResponse
+         where
         toJSON
           GoogleExampleLibraryagentV1ListShelvesResponse'{..}
           = object
@@ -131,10 +133,12 @@ instance ToJSON
 -- | Response message for LibraryAgent.ListBooks.
 --
 -- /See:/ 'googleExampleLibraryagentV1ListBooksResponse' smart constructor.
-data GoogleExampleLibraryagentV1ListBooksResponse = GoogleExampleLibraryagentV1ListBooksResponse'
+data GoogleExampleLibraryagentV1ListBooksResponse =
+  GoogleExampleLibraryagentV1ListBooksResponse'
     { _gelvlbrNextPageToken :: !(Maybe Text)
     , _gelvlbrBooks         :: !(Maybe [GoogleExampleLibraryagentV1Book])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleExampleLibraryagentV1ListBooksResponse' with the minimum fields required to make a request.
 --
@@ -146,10 +150,8 @@ data GoogleExampleLibraryagentV1ListBooksResponse = GoogleExampleLibraryagentV1L
 googleExampleLibraryagentV1ListBooksResponse
     :: GoogleExampleLibraryagentV1ListBooksResponse
 googleExampleLibraryagentV1ListBooksResponse =
-    GoogleExampleLibraryagentV1ListBooksResponse'
-    { _gelvlbrNextPageToken = Nothing
-    , _gelvlbrBooks = Nothing
-    }
+  GoogleExampleLibraryagentV1ListBooksResponse'
+    {_gelvlbrNextPageToken = Nothing, _gelvlbrBooks = Nothing}
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListBooksRequest.page_token field in the subsequent call to
@@ -167,7 +169,8 @@ gelvlbrBooks
       . _Coerce
 
 instance FromJSON
-         GoogleExampleLibraryagentV1ListBooksResponse where
+           GoogleExampleLibraryagentV1ListBooksResponse
+         where
         parseJSON
           = withObject
               "GoogleExampleLibraryagentV1ListBooksResponse"
@@ -177,7 +180,8 @@ instance FromJSON
                      (o .:? "books" .!= mempty))
 
 instance ToJSON
-         GoogleExampleLibraryagentV1ListBooksResponse where
+           GoogleExampleLibraryagentV1ListBooksResponse
+         where
         toJSON
           GoogleExampleLibraryagentV1ListBooksResponse'{..}
           = object
@@ -188,12 +192,14 @@ instance ToJSON
 -- | A single book in the library.
 --
 -- /See:/ 'googleExampleLibraryagentV1Book' smart constructor.
-data GoogleExampleLibraryagentV1Book = GoogleExampleLibraryagentV1Book'
+data GoogleExampleLibraryagentV1Book =
+  GoogleExampleLibraryagentV1Book'
     { _gelvbRead   :: !(Maybe Bool)
     , _gelvbName   :: !(Maybe Text)
     , _gelvbAuthor :: !(Maybe Text)
     , _gelvbTitle  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleExampleLibraryagentV1Book' with the minimum fields required to make a request.
 --
@@ -209,7 +215,7 @@ data GoogleExampleLibraryagentV1Book = GoogleExampleLibraryagentV1Book'
 googleExampleLibraryagentV1Book
     :: GoogleExampleLibraryagentV1Book
 googleExampleLibraryagentV1Book =
-    GoogleExampleLibraryagentV1Book'
+  GoogleExampleLibraryagentV1Book'
     { _gelvbRead = Nothing
     , _gelvbName = Nothing
     , _gelvbAuthor = Nothing

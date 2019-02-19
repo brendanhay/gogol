@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'LanguagesList' request conforms to.
 type LanguagesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "languages" :>
@@ -53,9 +53,11 @@ type LanguagesListResource =
 -- | Retrieves a list of languages.
 --
 -- /See:/ 'languagesList' smart constructor.
-newtype LanguagesList = LanguagesList'
+newtype LanguagesList =
+  LanguagesList'
     { _llProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LanguagesList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ languagesList
     :: Int64 -- ^ 'llProFileId'
     -> LanguagesList
 languagesList pLlProFileId_ =
-    LanguagesList'
-    { _llProFileId = _Coerce # pLlProFileId_
-    }
+  LanguagesList' {_llProFileId = _Coerce # pLlProFileId_}
 
 -- | User profile ID associated with this request.
 llProFileId :: Lens' LanguagesList Int64

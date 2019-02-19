@@ -70,7 +70,8 @@ type ChangesWatchResource =
 -- | Subscribes to changes for a user.
 --
 -- /See:/ 'changesWatch' smart constructor.
-data ChangesWatch = ChangesWatch'
+data ChangesWatch =
+  ChangesWatch'
     { _cwIncludeTeamDriveItems :: !Bool
     , _cwPayload               :: !Channel
     , _cwIncludeCorpusRemovals :: !Bool
@@ -81,7 +82,8 @@ data ChangesWatch = ChangesWatch'
     , _cwPageSize              :: !(Textual Int32)
     , _cwIncludeRemoved        :: !Bool
     , _cwSupportsTeamDrives    :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChangesWatch' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ changesWatch
     -> Text -- ^ 'cwPageToken'
     -> ChangesWatch
 changesWatch pCwPayload_ pCwPageToken_ =
-    ChangesWatch'
+  ChangesWatch'
     { _cwIncludeTeamDriveItems = False
     , _cwPayload = pCwPayload_
     , _cwIncludeCorpusRemovals = False

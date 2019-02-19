@@ -63,7 +63,8 @@ type OrganizationsRolesCreateResource =
 -- | Creates a new Role.
 --
 -- /See:/ 'organizationsRolesCreate' smart constructor.
-data OrganizationsRolesCreate = OrganizationsRolesCreate'
+data OrganizationsRolesCreate =
+  OrganizationsRolesCreate'
     { _orcParent         :: !Text
     , _orcXgafv          :: !(Maybe Xgafv)
     , _orcUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data OrganizationsRolesCreate = OrganizationsRolesCreate'
     , _orcUploadType     :: !(Maybe Text)
     , _orcPayload        :: !CreateRoleRequest
     , _orcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsRolesCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ organizationsRolesCreate
     -> CreateRoleRequest -- ^ 'orcPayload'
     -> OrganizationsRolesCreate
 organizationsRolesCreate pOrcParent_ pOrcPayload_ =
-    OrganizationsRolesCreate'
+  OrganizationsRolesCreate'
     { _orcParent = pOrcParent_
     , _orcXgafv = Nothing
     , _orcUploadProtocol = Nothing

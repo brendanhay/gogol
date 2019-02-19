@@ -55,10 +55,12 @@ type DomainsDeleteResource =
 -- | Deletes a domain of the customer.
 --
 -- /See:/ 'domainsDelete' smart constructor.
-data DomainsDelete = DomainsDelete'
+data DomainsDelete =
+  DomainsDelete'
     { _ddCustomer   :: !Text
     , _ddDomainName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DomainsDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ domainsDelete
     -> Text -- ^ 'ddDomainName'
     -> DomainsDelete
 domainsDelete pDdCustomer_ pDdDomainName_ =
-    DomainsDelete'
-    { _ddCustomer = pDdCustomer_
-    , _ddDomainName = pDdDomainName_
-    }
+  DomainsDelete' {_ddCustomer = pDdCustomer_, _ddDomainName = pDdDomainName_}
 
 -- | Immutable ID of the G Suite account.
 ddCustomer :: Lens' DomainsDelete Text

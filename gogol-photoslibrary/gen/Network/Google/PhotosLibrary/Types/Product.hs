@@ -27,10 +27,12 @@ import           Network.Google.Prelude
 -- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng'
+data LatLng =
+  LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -41,11 +43,7 @@ data LatLng = LatLng'
 -- * 'llLongitude'
 latLng
     :: LatLng
-latLng =
-    LatLng'
-    { _llLatitude = Nothing
-    , _llLongitude = Nothing
-    }
+latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -76,9 +74,11 @@ instance ToJSON LatLng where
 -- | An enrichment containing a single location.
 --
 -- /See:/ 'locationEnrichment' smart constructor.
-newtype LocationEnrichment = LocationEnrichment'
+newtype LocationEnrichment =
+  LocationEnrichment'
     { _leLocation :: Maybe Location
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationEnrichment' with the minimum fields required to make a request.
 --
@@ -87,10 +87,7 @@ newtype LocationEnrichment = LocationEnrichment'
 -- * 'leLocation'
 locationEnrichment
     :: LocationEnrichment
-locationEnrichment =
-    LocationEnrichment'
-    { _leLocation = Nothing
-    }
+locationEnrichment = LocationEnrichment' {_leLocation = Nothing}
 
 -- | Location for this enrichment item.
 leLocation :: Lens' LocationEnrichment (Maybe Location)
@@ -112,10 +109,12 @@ instance ToJSON LocationEnrichment where
 -- date ranges.
 --
 -- /See:/ 'dateFilter' smart constructor.
-data DateFilter = DateFilter'
+data DateFilter =
+  DateFilter'
     { _dfDates  :: !(Maybe [Date])
     , _dfRanges :: !(Maybe [DateRange])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DateFilter' with the minimum fields required to make a request.
 --
@@ -126,11 +125,7 @@ data DateFilter = DateFilter'
 -- * 'dfRanges'
 dateFilter
     :: DateFilter
-dateFilter =
-    DateFilter'
-    { _dfDates = Nothing
-    , _dfRanges = Nothing
-    }
+dateFilter = DateFilter' {_dfDates = Nothing, _dfRanges = Nothing}
 
 -- | List of dates that the media items must have been created on. There is a
 -- maximum of 5 dates that can be included per request.
@@ -166,14 +161,16 @@ instance ToJSON DateFilter where
 -- exposure time. Some of these fields may be null or not included.
 --
 -- /See:/ 'photo' smart constructor.
-data Photo = Photo'
+data Photo =
+  Photo'
     { _pFocalLength     :: !(Maybe (Textual Double))
     , _pCameraMake      :: !(Maybe Text)
     , _pExposureTime    :: !(Maybe GDuration)
     , _pCameraModel     :: !(Maybe Text)
     , _pIsoEquivalent   :: !(Maybe (Textual Int32))
     , _pApertureFNumber :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
@@ -193,7 +190,7 @@ data Photo = Photo'
 photo
     :: Photo
 photo =
-    Photo'
+  Photo'
     { _pFocalLength = Nothing
     , _pCameraMake = Nothing
     , _pExposureTime = Nothing
@@ -264,9 +261,11 @@ instance ToJSON Photo where
 -- | An enrichment containing text.
 --
 -- /See:/ 'textEnrichment' smart constructor.
-newtype TextEnrichment = TextEnrichment'
+newtype TextEnrichment =
+  TextEnrichment'
     { _teText :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TextEnrichment' with the minimum fields required to make a request.
 --
@@ -275,10 +274,7 @@ newtype TextEnrichment = TextEnrichment'
 -- * 'teText'
 textEnrichment
     :: TextEnrichment
-textEnrichment =
-    TextEnrichment'
-    { _teText = Nothing
-    }
+textEnrichment = TextEnrichment' {_teText = Nothing}
 
 -- | Text for this text enrichment item.
 teText :: Lens' TextEnrichment (Maybe Text)
@@ -330,11 +326,13 @@ instance ToJSON TextEnrichment where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -347,12 +345,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -392,9 +385,11 @@ instance ToJSON Status where
 
 --
 -- /See:/ 'addEnrichmentToAlbumResponse' smart constructor.
-newtype AddEnrichmentToAlbumResponse = AddEnrichmentToAlbumResponse'
+newtype AddEnrichmentToAlbumResponse =
+  AddEnrichmentToAlbumResponse'
     { _aetarEnrichmentItem :: Maybe EnrichmentItem
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddEnrichmentToAlbumResponse' with the minimum fields required to make a request.
 --
@@ -404,9 +399,7 @@ newtype AddEnrichmentToAlbumResponse = AddEnrichmentToAlbumResponse'
 addEnrichmentToAlbumResponse
     :: AddEnrichmentToAlbumResponse
 addEnrichmentToAlbumResponse =
-    AddEnrichmentToAlbumResponse'
-    { _aetarEnrichmentItem = Nothing
-    }
+  AddEnrichmentToAlbumResponse' {_aetarEnrichmentItem = Nothing}
 
 -- | [Output only] Enrichment which was added.
 aetarEnrichmentItem :: Lens' AddEnrichmentToAlbumResponse (Maybe EnrichmentItem)
@@ -429,10 +422,12 @@ instance ToJSON AddEnrichmentToAlbumResponse where
 
 --
 -- /See:/ 'searchMediaItemsResponse' smart constructor.
-data SearchMediaItemsResponse = SearchMediaItemsResponse'
+data SearchMediaItemsResponse =
+  SearchMediaItemsResponse'
     { _smirNextPageToken :: !(Maybe Text)
     , _smirMediaItems    :: !(Maybe [MediaItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchMediaItemsResponse' with the minimum fields required to make a request.
 --
@@ -444,10 +439,8 @@ data SearchMediaItemsResponse = SearchMediaItemsResponse'
 searchMediaItemsResponse
     :: SearchMediaItemsResponse
 searchMediaItemsResponse =
-    SearchMediaItemsResponse'
-    { _smirNextPageToken = Nothing
-    , _smirMediaItems = Nothing
-    }
+  SearchMediaItemsResponse'
+    {_smirNextPageToken = Nothing, _smirMediaItems = Nothing}
 
 -- | [Output only] Token to use to get the next set of media items. Its
 -- presence is the only reliable indicator of more media items being
@@ -484,8 +477,8 @@ instance ToJSON SearchMediaItemsResponse where
 --
 -- /See:/ 'joinSharedAlbumResponse' smart constructor.
 data JoinSharedAlbumResponse =
-    JoinSharedAlbumResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  JoinSharedAlbumResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JoinSharedAlbumResponse' with the minimum fields required to make a request.
 --
@@ -504,9 +497,11 @@ instance ToJSON JoinSharedAlbumResponse where
 -- | Request to create an album in Google Photos.
 --
 -- /See:/ 'createAlbumRequest' smart constructor.
-newtype CreateAlbumRequest = CreateAlbumRequest'
+newtype CreateAlbumRequest =
+  CreateAlbumRequest'
     { _carAlbum :: Maybe Album
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateAlbumRequest' with the minimum fields required to make a request.
 --
@@ -515,10 +510,7 @@ newtype CreateAlbumRequest = CreateAlbumRequest'
 -- * 'carAlbum'
 createAlbumRequest
     :: CreateAlbumRequest
-createAlbumRequest =
-    CreateAlbumRequest'
-    { _carAlbum = Nothing
-    }
+createAlbumRequest = CreateAlbumRequest' {_carAlbum = Nothing}
 
 -- | The album to be created.
 carAlbum :: Lens' CreateAlbumRequest (Maybe Album)
@@ -536,10 +528,12 @@ instance ToJSON CreateAlbumRequest where
 -- | Represents a physical location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lLatlng       :: !(Maybe LatLng)
     , _lLocationName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -550,11 +544,7 @@ data Location = Location'
 -- * 'lLocationName'
 location
     :: Location
-location =
-    Location'
-    { _lLatlng = Nothing
-    , _lLocationName = Nothing
-    }
+location = Location' {_lLatlng = Nothing, _lLocationName = Nothing}
 
 -- | Position of the location on the map.
 lLatlng :: Lens' Location (Maybe LatLng)
@@ -584,11 +574,13 @@ instance ToJSON Location where
 -- AddEnrichmentToAlbum call.
 --
 -- /See:/ 'newEnrichmentItem' smart constructor.
-data NewEnrichmentItem = NewEnrichmentItem'
+data NewEnrichmentItem =
+  NewEnrichmentItem'
     { _neiLocationEnrichment :: !(Maybe LocationEnrichment)
     , _neiTextEnrichment     :: !(Maybe TextEnrichment)
     , _neiMapEnrichment      :: !(Maybe MapEnrichment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NewEnrichmentItem' with the minimum fields required to make a request.
 --
@@ -602,7 +594,7 @@ data NewEnrichmentItem = NewEnrichmentItem'
 newEnrichmentItem
     :: NewEnrichmentItem
 newEnrichmentItem =
-    NewEnrichmentItem'
+  NewEnrichmentItem'
     { _neiLocationEnrichment = Nothing
     , _neiTextEnrichment = Nothing
     , _neiMapEnrichment = Nothing
@@ -649,11 +641,13 @@ instance ToJSON NewEnrichmentItem where
 -- scope.
 --
 -- /See:/ 'shareInfo' smart constructor.
-data ShareInfo = ShareInfo'
+data ShareInfo =
+  ShareInfo'
     { _siShareableURL       :: !(Maybe Text)
     , _siShareToken         :: !(Maybe Text)
     , _siSharedAlbumOptions :: !(Maybe SharedAlbumOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShareInfo' with the minimum fields required to make a request.
 --
@@ -667,7 +661,7 @@ data ShareInfo = ShareInfo'
 shareInfo
     :: ShareInfo
 shareInfo =
-    ShareInfo'
+  ShareInfo'
     { _siShareableURL = Nothing
     , _siShareToken = Nothing
     , _siSharedAlbumOptions = Nothing
@@ -715,11 +709,13 @@ instance ToJSON ShareInfo where
 -- 'albumId' is set.
 --
 -- /See:/ 'batchCreateMediaItemsRequest' smart constructor.
-data BatchCreateMediaItemsRequest = BatchCreateMediaItemsRequest'
+data BatchCreateMediaItemsRequest =
+  BatchCreateMediaItemsRequest'
     { _bcmirAlbumId       :: !(Maybe Text)
     , _bcmirNewMediaItems :: !(Maybe [NewMediaItem])
     , _bcmirAlbumPosition :: !(Maybe AlbumPosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchCreateMediaItemsRequest' with the minimum fields required to make a request.
 --
@@ -733,7 +729,7 @@ data BatchCreateMediaItemsRequest = BatchCreateMediaItemsRequest'
 batchCreateMediaItemsRequest
     :: BatchCreateMediaItemsRequest
 batchCreateMediaItemsRequest =
-    BatchCreateMediaItemsRequest'
+  BatchCreateMediaItemsRequest'
     { _bcmirAlbumId = Nothing
     , _bcmirNewMediaItems = Nothing
     , _bcmirAlbumPosition = Nothing
@@ -783,12 +779,14 @@ instance ToJSON BatchCreateMediaItemsRequest where
 -- options are specified, they are treated as AND with each other.
 --
 -- /See:/ 'filters' smart constructor.
-data Filters = Filters'
+data Filters =
+  Filters'
     { _fDateFilter           :: !(Maybe DateFilter)
     , _fIncludeArchivedMedia :: !(Maybe Bool)
     , _fMediaTypeFilter      :: !(Maybe MediaTypeFilter)
     , _fContentFilter        :: !(Maybe ContentFilter)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Filters' with the minimum fields required to make a request.
 --
@@ -804,7 +802,7 @@ data Filters = Filters'
 filters
     :: Filters
 filters =
-    Filters'
+  Filters'
     { _fDateFilter = Nothing
     , _fIncludeArchivedMedia = Nothing
     , _fMediaTypeFilter = Nothing
@@ -857,9 +855,11 @@ instance ToJSON Filters where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -870,9 +870,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -892,10 +890,12 @@ instance ToJSON StatusDetailsItem where
 -- Date definition for more).
 --
 -- /See:/ 'dateRange' smart constructor.
-data DateRange = DateRange'
+data DateRange =
+  DateRange'
     { _drEndDate   :: !(Maybe Date)
     , _drStartDate :: !(Maybe Date)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DateRange' with the minimum fields required to make a request.
 --
@@ -906,11 +906,7 @@ data DateRange = DateRange'
 -- * 'drStartDate'
 dateRange
     :: DateRange
-dateRange =
-    DateRange'
-    { _drEndDate = Nothing
-    , _drStartDate = Nothing
-    }
+dateRange = DateRange' {_drEndDate = Nothing, _drStartDate = Nothing}
 
 -- | The end date (included as part of the range) in the same format as the
 -- start date.
@@ -941,10 +937,12 @@ instance ToJSON DateRange where
 -- | Options that control the sharing of an album.
 --
 -- /See:/ 'sharedAlbumOptions' smart constructor.
-data SharedAlbumOptions = SharedAlbumOptions'
+data SharedAlbumOptions =
+  SharedAlbumOptions'
     { _saoIsCollaborative :: !(Maybe Bool)
     , _saoIsCommentable   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SharedAlbumOptions' with the minimum fields required to make a request.
 --
@@ -956,10 +954,8 @@ data SharedAlbumOptions = SharedAlbumOptions'
 sharedAlbumOptions
     :: SharedAlbumOptions
 sharedAlbumOptions =
-    SharedAlbumOptions'
-    { _saoIsCollaborative = Nothing
-    , _saoIsCommentable = Nothing
-    }
+  SharedAlbumOptions'
+    {_saoIsCollaborative = Nothing, _saoIsCommentable = Nothing}
 
 -- | True if the shared album allows collaborators (users who have joined the
 -- album) to add media items to it. Defaults to false.
@@ -994,13 +990,15 @@ instance ToJSON SharedAlbumOptions where
 -- | Metadata for a media item.
 --
 -- /See:/ 'mediaMetadata' smart constructor.
-data MediaMetadata = MediaMetadata'
+data MediaMetadata =
+  MediaMetadata'
     { _mmCreationTime :: !(Maybe DateTime')
     , _mmPhoto        :: !(Maybe Photo)
     , _mmHeight       :: !(Maybe (Textual Int64))
     , _mmWidth        :: !(Maybe (Textual Int64))
     , _mmVideo        :: !(Maybe Video)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MediaMetadata' with the minimum fields required to make a request.
 --
@@ -1018,7 +1016,7 @@ data MediaMetadata = MediaMetadata'
 mediaMetadata
     :: MediaMetadata
 mediaMetadata =
-    MediaMetadata'
+  MediaMetadata'
     { _mmCreationTime = Nothing
     , _mmPhoto = Nothing
     , _mmHeight = Nothing
@@ -1076,9 +1074,11 @@ instance ToJSON MediaMetadata where
 
 --
 -- /See:/ 'shareAlbumResponse' smart constructor.
-newtype ShareAlbumResponse = ShareAlbumResponse'
+newtype ShareAlbumResponse =
+  ShareAlbumResponse'
     { _sarShareInfo :: Maybe ShareInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShareAlbumResponse' with the minimum fields required to make a request.
 --
@@ -1087,10 +1087,7 @@ newtype ShareAlbumResponse = ShareAlbumResponse'
 -- * 'sarShareInfo'
 shareAlbumResponse
     :: ShareAlbumResponse
-shareAlbumResponse =
-    ShareAlbumResponse'
-    { _sarShareInfo = Nothing
-    }
+shareAlbumResponse = ShareAlbumResponse' {_sarShareInfo = Nothing}
 
 -- | [Output only] Information about the shared album.
 sarShareInfo :: Lens' ShareAlbumResponse (Maybe ShareInfo)
@@ -1111,12 +1108,14 @@ instance ToJSON ShareAlbumResponse where
 -- status. Some of these fields may be null or not included.
 --
 -- /See:/ 'video' smart constructor.
-data Video = Video'
+data Video =
+  Video'
     { _vStatus      :: !(Maybe VideoStatus)
     , _vCameraMake  :: !(Maybe Text)
     , _vCameraModel :: !(Maybe Text)
     , _vFps         :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Video' with the minimum fields required to make a request.
 --
@@ -1132,7 +1131,7 @@ data Video = Video'
 video
     :: Video
 video =
-    Video'
+  Video'
     { _vStatus = Nothing
     , _vCameraMake = Nothing
     , _vCameraModel = Nothing
@@ -1181,7 +1180,8 @@ instance ToJSON Video where
 -- Photos.
 --
 -- /See:/ 'mediaItem' smart constructor.
-data MediaItem = MediaItem'
+data MediaItem =
+  MediaItem'
     { _miProductURL      :: !(Maybe Text)
     , _miBaseURL         :: !(Maybe Text)
     , _miMediaMetadata   :: !(Maybe MediaMetadata)
@@ -1189,7 +1189,8 @@ data MediaItem = MediaItem'
     , _miId              :: !(Maybe Text)
     , _miContributorInfo :: !(Maybe ContributorInfo)
     , _miDescription     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MediaItem' with the minimum fields required to make a request.
 --
@@ -1211,7 +1212,7 @@ data MediaItem = MediaItem'
 mediaItem
     :: MediaItem
 mediaItem =
-    MediaItem'
+  MediaItem'
     { _miProductURL = Nothing
     , _miBaseURL = Nothing
     , _miMediaMetadata = Nothing
@@ -1295,11 +1296,13 @@ instance ToJSON MediaItem where
 -- month and day independent of year, e.g. anniversary date.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date'
+data Date =
+  Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -1312,12 +1315,7 @@ data Date = Date'
 -- * 'dMonth'
 date
     :: Date
-date =
-    Date'
-    { _dDay = Nothing
-    , _dYear = Nothing
-    , _dMonth = Nothing
-    }
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year\/month where the day is not significant.
@@ -1357,9 +1355,11 @@ instance ToJSON Date where
 -- | An enrichment item.
 --
 -- /See:/ 'enrichmentItem' smart constructor.
-newtype EnrichmentItem = EnrichmentItem'
+newtype EnrichmentItem =
+  EnrichmentItem'
     { _eiId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnrichmentItem' with the minimum fields required to make a request.
 --
@@ -1368,10 +1368,7 @@ newtype EnrichmentItem = EnrichmentItem'
 -- * 'eiId'
 enrichmentItem
     :: EnrichmentItem
-enrichmentItem =
-    EnrichmentItem'
-    { _eiId = Nothing
-    }
+enrichmentItem = EnrichmentItem' {_eiId = Nothing}
 
 -- | Identifier of the enrichment item.
 eiId :: Lens' EnrichmentItem (Maybe Text)
@@ -1388,10 +1385,12 @@ instance ToJSON EnrichmentItem where
 
 --
 -- /See:/ 'listSharedAlbumsResponse' smart constructor.
-data ListSharedAlbumsResponse = ListSharedAlbumsResponse'
+data ListSharedAlbumsResponse =
+  ListSharedAlbumsResponse'
     { _lsarNextPageToken :: !(Maybe Text)
     , _lsarSharedAlbums  :: !(Maybe [Album])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSharedAlbumsResponse' with the minimum fields required to make a request.
 --
@@ -1403,10 +1402,8 @@ data ListSharedAlbumsResponse = ListSharedAlbumsResponse'
 listSharedAlbumsResponse
     :: ListSharedAlbumsResponse
 listSharedAlbumsResponse =
-    ListSharedAlbumsResponse'
-    { _lsarNextPageToken = Nothing
-    , _lsarSharedAlbums = Nothing
-    }
+  ListSharedAlbumsResponse'
+    {_lsarNextPageToken = Nothing, _lsarSharedAlbums = Nothing}
 
 -- | [Output only] Token to use to get the next set of shared albums.
 -- Populated if there are more shared albums to retrieve for this request.
@@ -1443,9 +1440,11 @@ instance ToJSON ListSharedAlbumsResponse where
 -- with each other.
 --
 -- /See:/ 'mediaTypeFilter' smart constructor.
-newtype MediaTypeFilter = MediaTypeFilter'
+newtype MediaTypeFilter =
+  MediaTypeFilter'
     { _mtfMediaTypes :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MediaTypeFilter' with the minimum fields required to make a request.
 --
@@ -1454,10 +1453,7 @@ newtype MediaTypeFilter = MediaTypeFilter'
 -- * 'mtfMediaTypes'
 mediaTypeFilter
     :: MediaTypeFilter
-mediaTypeFilter =
-    MediaTypeFilter'
-    { _mtfMediaTypes = Nothing
-    }
+mediaTypeFilter = MediaTypeFilter' {_mtfMediaTypes = Nothing}
 
 -- | The types of media items to be included. This field should only be
 -- populated with one media type, multiple media types will result in an
@@ -1483,11 +1479,13 @@ instance ToJSON MediaTypeFilter where
 -- | Result of creating a new media item.
 --
 -- /See:/ 'newMediaItemResult' smart constructor.
-data NewMediaItemResult = NewMediaItemResult'
+data NewMediaItemResult =
+  NewMediaItemResult'
     { _nmirStatus      :: !(Maybe Status)
     , _nmirUploadToken :: !(Maybe Text)
     , _nmirMediaItem   :: !(Maybe MediaItem)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NewMediaItemResult' with the minimum fields required to make a request.
 --
@@ -1501,7 +1499,7 @@ data NewMediaItemResult = NewMediaItemResult'
 newMediaItemResult
     :: NewMediaItemResult
 newMediaItemResult =
-    NewMediaItemResult'
+  NewMediaItemResult'
     { _nmirStatus = Nothing
     , _nmirUploadToken = Nothing
     , _nmirMediaItem = Nothing
@@ -1548,7 +1546,8 @@ instance ToJSON NewMediaItemResult where
 -- been shared by the application.
 --
 -- /See:/ 'album' smart constructor.
-data Album = Album'
+data Album =
+  Album'
     { _aIsWriteable       :: !(Maybe Bool)
     , _aProductURL        :: !(Maybe Text)
     , _aShareInfo         :: !(Maybe ShareInfo)
@@ -1556,7 +1555,8 @@ data Album = Album'
     , _aId                :: !(Maybe Text)
     , _aTotalMediaItems   :: !(Maybe (Textual Int64))
     , _aTitle             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Album' with the minimum fields required to make a request.
 --
@@ -1578,7 +1578,7 @@ data Album = Album'
 album
     :: Album
 album =
-    Album'
+  Album'
     { _aIsWriteable = Nothing
     , _aProductURL = Nothing
     , _aShareInfo = Nothing
@@ -1662,9 +1662,11 @@ instance ToJSON Album where
 -- | A simple media item to be created in Google Photos via an upload token.
 --
 -- /See:/ 'simpleMediaItem' smart constructor.
-newtype SimpleMediaItem = SimpleMediaItem'
+newtype SimpleMediaItem =
+  SimpleMediaItem'
     { _smiUploadToken :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SimpleMediaItem' with the minimum fields required to make a request.
 --
@@ -1673,10 +1675,7 @@ newtype SimpleMediaItem = SimpleMediaItem'
 -- * 'smiUploadToken'
 simpleMediaItem
     :: SimpleMediaItem
-simpleMediaItem =
-    SimpleMediaItem'
-    { _smiUploadToken = Nothing
-    }
+simpleMediaItem = SimpleMediaItem' {_smiUploadToken = Nothing}
 
 -- | Token identifying the media bytes which have been uploaded to Google.
 smiUploadToken :: Lens' SimpleMediaItem (Maybe Text)
@@ -1699,10 +1698,12 @@ instance ToJSON SimpleMediaItem where
 -- shared, was created by you and you have the sharing scope.
 --
 -- /See:/ 'contributorInfo' smart constructor.
-data ContributorInfo = ContributorInfo'
+data ContributorInfo =
+  ContributorInfo'
     { _ciProFilePictureBaseURL :: !(Maybe Text)
     , _ciDisplayName           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContributorInfo' with the minimum fields required to make a request.
 --
@@ -1714,10 +1715,8 @@ data ContributorInfo = ContributorInfo'
 contributorInfo
     :: ContributorInfo
 contributorInfo =
-    ContributorInfo'
-    { _ciProFilePictureBaseURL = Nothing
-    , _ciDisplayName = Nothing
-    }
+  ContributorInfo'
+    {_ciProFilePictureBaseURL = Nothing, _ciDisplayName = Nothing}
 
 -- | URL to the profile picture of the contributor.
 ciProFilePictureBaseURL :: Lens' ContributorInfo (Maybe Text)
@@ -1749,10 +1748,12 @@ instance ToJSON ContributorInfo where
 
 --
 -- /See:/ 'listAlbumsResponse' smart constructor.
-data ListAlbumsResponse = ListAlbumsResponse'
+data ListAlbumsResponse =
+  ListAlbumsResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larAlbums        :: !(Maybe [Album])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAlbumsResponse' with the minimum fields required to make a request.
 --
@@ -1764,10 +1765,7 @@ data ListAlbumsResponse = ListAlbumsResponse'
 listAlbumsResponse
     :: ListAlbumsResponse
 listAlbumsResponse =
-    ListAlbumsResponse'
-    { _larNextPageToken = Nothing
-    , _larAlbums = Nothing
-    }
+  ListAlbumsResponse' {_larNextPageToken = Nothing, _larAlbums = Nothing}
 
 -- | [Output only] Token to use to get the next set of albums. Populated if
 -- there are more albums to retrieve for this request.
@@ -1802,10 +1800,12 @@ instance ToJSON ListAlbumsResponse where
 -- locations.
 --
 -- /See:/ 'mapEnrichment' smart constructor.
-data MapEnrichment = MapEnrichment'
+data MapEnrichment =
+  MapEnrichment'
     { _meDestination :: !(Maybe Location)
     , _meOrigin      :: !(Maybe Location)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MapEnrichment' with the minimum fields required to make a request.
 --
@@ -1816,11 +1816,7 @@ data MapEnrichment = MapEnrichment'
 -- * 'meOrigin'
 mapEnrichment
     :: MapEnrichment
-mapEnrichment =
-    MapEnrichment'
-    { _meDestination = Nothing
-    , _meOrigin = Nothing
-    }
+mapEnrichment = MapEnrichment' {_meDestination = Nothing, _meOrigin = Nothing}
 
 -- | Destination location for this enrichemt item.
 meDestination :: Lens' MapEnrichment (Maybe Location)
@@ -1856,12 +1852,14 @@ instance ToJSON MapEnrichment where
 -- request.
 --
 -- /See:/ 'searchMediaItemsRequest' smart constructor.
-data SearchMediaItemsRequest = SearchMediaItemsRequest'
+data SearchMediaItemsRequest =
+  SearchMediaItemsRequest'
     { _smirAlbumId   :: !(Maybe Text)
     , _smirFilters   :: !(Maybe Filters)
     , _smirPageToken :: !(Maybe Text)
     , _smirPageSize  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchMediaItemsRequest' with the minimum fields required to make a request.
 --
@@ -1877,7 +1875,7 @@ data SearchMediaItemsRequest = SearchMediaItemsRequest'
 searchMediaItemsRequest
     :: SearchMediaItemsRequest
 searchMediaItemsRequest =
-    SearchMediaItemsRequest'
+  SearchMediaItemsRequest'
     { _smirAlbumId = Nothing
     , _smirFilters = Nothing
     , _smirPageToken = Nothing
@@ -1934,10 +1932,12 @@ instance ToJSON SearchMediaItemsRequest where
 -- | New media item that will be created in a user\'s Google Photos account.
 --
 -- /See:/ 'newMediaItem' smart constructor.
-data NewMediaItem = NewMediaItem'
+data NewMediaItem =
+  NewMediaItem'
     { _nmiSimpleMediaItem :: !(Maybe SimpleMediaItem)
     , _nmiDescription     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NewMediaItem' with the minimum fields required to make a request.
 --
@@ -1949,10 +1949,7 @@ data NewMediaItem = NewMediaItem'
 newMediaItem
     :: NewMediaItem
 newMediaItem =
-    NewMediaItem'
-    { _nmiSimpleMediaItem = Nothing
-    , _nmiDescription = Nothing
-    }
+  NewMediaItem' {_nmiSimpleMediaItem = Nothing, _nmiDescription = Nothing}
 
 -- | A new media item that has been uploaded via the included uploadToken.
 nmiSimpleMediaItem :: Lens' NewMediaItem (Maybe SimpleMediaItem)
@@ -1985,10 +1982,12 @@ instance ToJSON NewMediaItem where
 -- | Request to add an enrichment to a specific album at a specific position.
 --
 -- /See:/ 'addEnrichmentToAlbumRequest' smart constructor.
-data AddEnrichmentToAlbumRequest = AddEnrichmentToAlbumRequest'
+data AddEnrichmentToAlbumRequest =
+  AddEnrichmentToAlbumRequest'
     { _aetarNewEnrichmentItem :: !(Maybe NewEnrichmentItem)
     , _aetarAlbumPosition     :: !(Maybe AlbumPosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddEnrichmentToAlbumRequest' with the minimum fields required to make a request.
 --
@@ -2000,10 +1999,8 @@ data AddEnrichmentToAlbumRequest = AddEnrichmentToAlbumRequest'
 addEnrichmentToAlbumRequest
     :: AddEnrichmentToAlbumRequest
 addEnrichmentToAlbumRequest =
-    AddEnrichmentToAlbumRequest'
-    { _aetarNewEnrichmentItem = Nothing
-    , _aetarAlbumPosition = Nothing
-    }
+  AddEnrichmentToAlbumRequest'
+    {_aetarNewEnrichmentItem = Nothing, _aetarAlbumPosition = Nothing}
 
 -- | The enrichment to be added.
 aetarNewEnrichmentItem :: Lens' AddEnrichmentToAlbumRequest (Maybe NewEnrichmentItem)
@@ -2038,9 +2035,11 @@ instance ToJSON AddEnrichmentToAlbumRequest where
 -- calls.
 --
 -- /See:/ 'joinSharedAlbumRequest' smart constructor.
-newtype JoinSharedAlbumRequest = JoinSharedAlbumRequest'
+newtype JoinSharedAlbumRequest =
+  JoinSharedAlbumRequest'
     { _jsarShareToken :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'JoinSharedAlbumRequest' with the minimum fields required to make a request.
 --
@@ -2049,10 +2048,7 @@ newtype JoinSharedAlbumRequest = JoinSharedAlbumRequest'
 -- * 'jsarShareToken'
 joinSharedAlbumRequest
     :: JoinSharedAlbumRequest
-joinSharedAlbumRequest =
-    JoinSharedAlbumRequest'
-    { _jsarShareToken = Nothing
-    }
+joinSharedAlbumRequest = JoinSharedAlbumRequest' {_jsarShareToken = Nothing}
 
 -- | Token indicating the shared album to join on behalf of the user.
 jsarShareToken :: Lens' JoinSharedAlbumRequest (Maybe Text)
@@ -2074,9 +2070,11 @@ instance ToJSON JoinSharedAlbumRequest where
 -- | Request to make an album shared in Google Photos.
 --
 -- /See:/ 'shareAlbumRequest' smart constructor.
-newtype ShareAlbumRequest = ShareAlbumRequest'
+newtype ShareAlbumRequest =
+  ShareAlbumRequest'
     { _sarSharedAlbumOptions :: Maybe SharedAlbumOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShareAlbumRequest' with the minimum fields required to make a request.
 --
@@ -2085,10 +2083,7 @@ newtype ShareAlbumRequest = ShareAlbumRequest'
 -- * 'sarSharedAlbumOptions'
 shareAlbumRequest
     :: ShareAlbumRequest
-shareAlbumRequest =
-    ShareAlbumRequest'
-    { _sarSharedAlbumOptions = Nothing
-    }
+shareAlbumRequest = ShareAlbumRequest' {_sarSharedAlbumOptions = Nothing}
 
 -- | Options to be set when converting the album to a shared album.
 sarSharedAlbumOptions :: Lens' ShareAlbumRequest (Maybe SharedAlbumOptions)
@@ -2112,11 +2107,13 @@ instance ToJSON ShareAlbumRequest where
 -- | Specifies a position in an album.
 --
 -- /See:/ 'albumPosition' smart constructor.
-data AlbumPosition = AlbumPosition'
+data AlbumPosition =
+  AlbumPosition'
     { _apRelativeMediaItemId      :: !(Maybe Text)
     , _apRelativeEnrichmentItemId :: !(Maybe Text)
     , _apPosition                 :: !(Maybe AlbumPositionPosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlbumPosition' with the minimum fields required to make a request.
 --
@@ -2130,7 +2127,7 @@ data AlbumPosition = AlbumPosition'
 albumPosition
     :: AlbumPosition
 albumPosition =
-    AlbumPosition'
+  AlbumPosition'
     { _apRelativeMediaItemId = Nothing
     , _apRelativeEnrichmentItemId = Nothing
     , _apPosition = Nothing
@@ -2189,10 +2186,12 @@ instance ToJSON AlbumPosition where
 -- 'excludedContentCategories'.
 --
 -- /See:/ 'contentFilter' smart constructor.
-data ContentFilter = ContentFilter'
+data ContentFilter =
+  ContentFilter'
     { _cfIncludedContentCategories :: !(Maybe [Text])
     , _cfExcludedContentCategories :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContentFilter' with the minimum fields required to make a request.
 --
@@ -2204,7 +2203,7 @@ data ContentFilter = ContentFilter'
 contentFilter
     :: ContentFilter
 contentFilter =
-    ContentFilter'
+  ContentFilter'
     { _cfIncludedContentCategories = Nothing
     , _cfExcludedContentCategories = Nothing
     }
@@ -2248,9 +2247,11 @@ instance ToJSON ContentFilter where
 
 --
 -- /See:/ 'batchCreateMediaItemsResponse' smart constructor.
-newtype BatchCreateMediaItemsResponse = BatchCreateMediaItemsResponse'
+newtype BatchCreateMediaItemsResponse =
+  BatchCreateMediaItemsResponse'
     { _bcmirNewMediaItemResults :: Maybe [NewMediaItemResult]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchCreateMediaItemsResponse' with the minimum fields required to make a request.
 --
@@ -2260,9 +2261,7 @@ newtype BatchCreateMediaItemsResponse = BatchCreateMediaItemsResponse'
 batchCreateMediaItemsResponse
     :: BatchCreateMediaItemsResponse
 batchCreateMediaItemsResponse =
-    BatchCreateMediaItemsResponse'
-    { _bcmirNewMediaItemResults = Nothing
-    }
+  BatchCreateMediaItemsResponse' {_bcmirNewMediaItemResults = Nothing}
 
 -- | [Output only] List of media items which were created.
 bcmirNewMediaItemResults :: Lens' BatchCreateMediaItemsResponse [NewMediaItemResult]

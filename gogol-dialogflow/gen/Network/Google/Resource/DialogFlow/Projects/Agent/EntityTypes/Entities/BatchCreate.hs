@@ -65,7 +65,8 @@ type ProjectsAgentEntityTypesEntitiesBatchCreateResource
 -- | Creates multiple new entities in the specified entity type. Operation
 --
 -- /See:/ 'projectsAgentEntityTypesEntitiesBatchCreate' smart constructor.
-data ProjectsAgentEntityTypesEntitiesBatchCreate = ProjectsAgentEntityTypesEntitiesBatchCreate'
+data ProjectsAgentEntityTypesEntitiesBatchCreate =
+  ProjectsAgentEntityTypesEntitiesBatchCreate'
     { _paetebcParent         :: !Text
     , _paetebcXgafv          :: !(Maybe Xgafv)
     , _paetebcUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsAgentEntityTypesEntitiesBatchCreate = ProjectsAgentEntityTypesEntit
     , _paetebcUploadType     :: !(Maybe Text)
     , _paetebcPayload        :: !GoogleCloudDialogflowV2BatchCreateEntitiesRequest
     , _paetebcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentEntityTypesEntitiesBatchCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsAgentEntityTypesEntitiesBatchCreate
     -> GoogleCloudDialogflowV2BatchCreateEntitiesRequest -- ^ 'paetebcPayload'
     -> ProjectsAgentEntityTypesEntitiesBatchCreate
 projectsAgentEntityTypesEntitiesBatchCreate pPaetebcParent_ pPaetebcPayload_ =
-    ProjectsAgentEntityTypesEntitiesBatchCreate'
+  ProjectsAgentEntityTypesEntitiesBatchCreate'
     { _paetebcParent = pPaetebcParent_
     , _paetebcXgafv = Nothing
     , _paetebcUploadProtocol = Nothing
@@ -150,7 +152,8 @@ paetebcCallback
       (\ s a -> s{_paetebcCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentEntityTypesEntitiesBatchCreate where
+           ProjectsAgentEntityTypesEntitiesBatchCreate
+         where
         type Rs ProjectsAgentEntityTypesEntitiesBatchCreate =
              GoogleLongrunningOperation
         type Scopes

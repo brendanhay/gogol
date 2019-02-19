@@ -65,14 +65,16 @@ type VPNTunnelsListResource =
 -- project and region.
 --
 -- /See:/ 'vpnTunnelsList' smart constructor.
-data VPNTunnelsList = VPNTunnelsList'
+data VPNTunnelsList =
+  VPNTunnelsList'
     { _vtlOrderBy    :: !(Maybe Text)
     , _vtlProject    :: !Text
     , _vtlFilter     :: !(Maybe Text)
     , _vtlRegion     :: !Text
     , _vtlPageToken  :: !(Maybe Text)
     , _vtlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelsList' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ vpnTunnelsList
     -> Text -- ^ 'vtlRegion'
     -> VPNTunnelsList
 vpnTunnelsList pVtlProject_ pVtlRegion_ =
-    VPNTunnelsList'
+  VPNTunnelsList'
     { _vtlOrderBy = Nothing
     , _vtlProject = pVtlProject_
     , _vtlFilter = Nothing

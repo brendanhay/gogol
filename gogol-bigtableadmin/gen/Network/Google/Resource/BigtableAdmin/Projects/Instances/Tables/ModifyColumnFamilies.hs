@@ -69,7 +69,8 @@ type ProjectsInstancesTablesModifyColumnFamiliesResource
 -- where only some modifications have taken effect.
 --
 -- /See:/ 'projectsInstancesTablesModifyColumnFamilies' smart constructor.
-data ProjectsInstancesTablesModifyColumnFamilies = ProjectsInstancesTablesModifyColumnFamilies'
+data ProjectsInstancesTablesModifyColumnFamilies =
+  ProjectsInstancesTablesModifyColumnFamilies'
     { _pitmcfXgafv          :: !(Maybe Xgafv)
     , _pitmcfUploadProtocol :: !(Maybe Text)
     , _pitmcfAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsInstancesTablesModifyColumnFamilies = ProjectsInstancesTablesModify
     , _pitmcfPayload        :: !ModifyColumnFamiliesRequest
     , _pitmcfName           :: !Text
     , _pitmcfCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesTablesModifyColumnFamilies' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsInstancesTablesModifyColumnFamilies
     -> Text -- ^ 'pitmcfName'
     -> ProjectsInstancesTablesModifyColumnFamilies
 projectsInstancesTablesModifyColumnFamilies pPitmcfPayload_ pPitmcfName_ =
-    ProjectsInstancesTablesModifyColumnFamilies'
+  ProjectsInstancesTablesModifyColumnFamilies'
     { _pitmcfXgafv = Nothing
     , _pitmcfUploadProtocol = Nothing
     , _pitmcfAccessToken = Nothing
@@ -154,7 +156,8 @@ pitmcfCallback
       (\ s a -> s{_pitmcfCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesTablesModifyColumnFamilies where
+           ProjectsInstancesTablesModifyColumnFamilies
+         where
         type Rs ProjectsInstancesTablesModifyColumnFamilies =
              Table
         type Scopes

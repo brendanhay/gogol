@@ -57,10 +57,12 @@ type EnterprisesSetAccountResource =
 -- enterprise.
 --
 -- /See:/ 'enterprisesSetAccount' smart constructor.
-data EnterprisesSetAccount = EnterprisesSetAccount'
+data EnterprisesSetAccount =
+  EnterprisesSetAccount'
     { _esaEnterpriseId :: !Text
     , _esaPayload      :: !EnterpriseAccount
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesSetAccount' with the minimum fields required to make a request.
 --
@@ -74,10 +76,8 @@ enterprisesSetAccount
     -> EnterpriseAccount -- ^ 'esaPayload'
     -> EnterprisesSetAccount
 enterprisesSetAccount pEsaEnterpriseId_ pEsaPayload_ =
-    EnterprisesSetAccount'
-    { _esaEnterpriseId = pEsaEnterpriseId_
-    , _esaPayload = pEsaPayload_
-    }
+  EnterprisesSetAccount'
+    {_esaEnterpriseId = pEsaEnterpriseId_, _esaPayload = pEsaPayload_}
 
 -- | The ID of the enterprise.
 esaEnterpriseId :: Lens' EnterprisesSetAccount Text

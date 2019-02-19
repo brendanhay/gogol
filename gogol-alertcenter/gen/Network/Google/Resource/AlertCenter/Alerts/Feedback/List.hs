@@ -66,7 +66,8 @@ type AlertsFeedbackListResource =
 -- | Lists all the feedback for an alert.
 --
 -- /See:/ 'alertsFeedbackList' smart constructor.
-data AlertsFeedbackList = AlertsFeedbackList'
+data AlertsFeedbackList =
+  AlertsFeedbackList'
     { _aflXgafv          :: !(Maybe Xgafv)
     , _aflUploadProtocol :: !(Maybe Text)
     , _aflAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data AlertsFeedbackList = AlertsFeedbackList'
     , _aflCustomerId     :: !(Maybe Text)
     , _aflFilter         :: !(Maybe Text)
     , _aflCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlertsFeedbackList' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ alertsFeedbackList
     :: Text -- ^ 'aflAlertId'
     -> AlertsFeedbackList
 alertsFeedbackList pAflAlertId_ =
-    AlertsFeedbackList'
+  AlertsFeedbackList'
     { _aflXgafv = Nothing
     , _aflUploadProtocol = Nothing
     , _aflAccessToken = Nothing

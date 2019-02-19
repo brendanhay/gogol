@@ -59,12 +59,14 @@ type UsersDeleteResource =
 -- | Deletes a user from a Cloud SQL instance.
 --
 -- /See:/ 'usersDelete' smart constructor.
-data UsersDelete = UsersDelete'
+data UsersDelete =
+  UsersDelete'
     { _udProject  :: !Text
     , _udName     :: !Text
     , _udHost     :: !Text
     , _udInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDelete' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ usersDelete
     -> Text -- ^ 'udInstance'
     -> UsersDelete
 usersDelete pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
-    UsersDelete'
+  UsersDelete'
     { _udProject = pUdProject_
     , _udName = pUdName_
     , _udHost = pUdHost_

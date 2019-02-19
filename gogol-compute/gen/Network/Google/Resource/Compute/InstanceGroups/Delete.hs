@@ -63,12 +63,14 @@ type InstanceGroupsDeleteResource =
 -- Read Deleting an instance group for more information.
 --
 -- /See:/ 'instanceGroupsDelete' smart constructor.
-data InstanceGroupsDelete = InstanceGroupsDelete'
+data InstanceGroupsDelete =
+  InstanceGroupsDelete'
     { _igdRequestId     :: !(Maybe Text)
     , _igdProject       :: !Text
     , _igdZone          :: !Text
     , _igdInstanceGroup :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ instanceGroupsDelete
     -> Text -- ^ 'igdInstanceGroup'
     -> InstanceGroupsDelete
 instanceGroupsDelete pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
-    InstanceGroupsDelete'
+  InstanceGroupsDelete'
     { _igdRequestId = Nothing
     , _igdProject = pIgdProject_
     , _igdZone = pIgdZone_

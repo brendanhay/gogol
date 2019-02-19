@@ -73,7 +73,8 @@ type SitesVersionsPatchResource =
 -- version to \`DELETED\`.
 --
 -- /See:/ 'sitesVersionsPatch' smart constructor.
-data SitesVersionsPatch = SitesVersionsPatch'
+data SitesVersionsPatch =
+  SitesVersionsPatch'
     { _svpXgafv          :: !(Maybe Xgafv)
     , _svpUploadProtocol :: !(Maybe Text)
     , _svpUpdateMask     :: !(Maybe GFieldMask)
@@ -82,7 +83,8 @@ data SitesVersionsPatch = SitesVersionsPatch'
     , _svpPayload        :: !Version
     , _svpName           :: !Text
     , _svpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesVersionsPatch' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ sitesVersionsPatch
     -> Text -- ^ 'svpName'
     -> SitesVersionsPatch
 sitesVersionsPatch pSvpPayload_ pSvpName_ =
-    SitesVersionsPatch'
+  SitesVersionsPatch'
     { _svpXgafv = Nothing
     , _svpUploadProtocol = Nothing
     , _svpUpdateMask = Nothing

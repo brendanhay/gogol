@@ -68,7 +68,8 @@ type ProjectsInstancesDatabasesGetIAMPolicyResource =
 -- resource.
 --
 -- /See:/ 'projectsInstancesDatabasesGetIAMPolicy' smart constructor.
-data ProjectsInstancesDatabasesGetIAMPolicy = ProjectsInstancesDatabasesGetIAMPolicy'
+data ProjectsInstancesDatabasesGetIAMPolicy =
+  ProjectsInstancesDatabasesGetIAMPolicy'
     { _pidgipXgafv          :: !(Maybe Xgafv)
     , _pidgipUploadProtocol :: !(Maybe Text)
     , _pidgipAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsInstancesDatabasesGetIAMPolicy = ProjectsInstancesDatabasesGetIAMPo
     , _pidgipPayload        :: !GetIAMPolicyRequest
     , _pidgipResource       :: !Text
     , _pidgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsInstancesDatabasesGetIAMPolicy
     -> Text -- ^ 'pidgipResource'
     -> ProjectsInstancesDatabasesGetIAMPolicy
 projectsInstancesDatabasesGetIAMPolicy pPidgipPayload_ pPidgipResource_ =
-    ProjectsInstancesDatabasesGetIAMPolicy'
+  ProjectsInstancesDatabasesGetIAMPolicy'
     { _pidgipXgafv = Nothing
     , _pidgipUploadProtocol = Nothing
     , _pidgipAccessToken = Nothing
@@ -155,7 +157,8 @@ pidgipCallback
       (\ s a -> s{_pidgipCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesGetIAMPolicy where
+           ProjectsInstancesDatabasesGetIAMPolicy
+         where
         type Rs ProjectsInstancesDatabasesGetIAMPolicy =
              Policy
         type Scopes ProjectsInstancesDatabasesGetIAMPolicy =

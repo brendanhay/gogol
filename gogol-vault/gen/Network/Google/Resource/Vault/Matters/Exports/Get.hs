@@ -63,7 +63,8 @@ type MattersExportsGetResource =
 -- | Gets an Export.
 --
 -- /See:/ 'mattersExportsGet' smart constructor.
-data MattersExportsGet = MattersExportsGet'
+data MattersExportsGet =
+  MattersExportsGet'
     { _megXgafv          :: !(Maybe Xgafv)
     , _megUploadProtocol :: !(Maybe Text)
     , _megAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data MattersExportsGet = MattersExportsGet'
     , _megMatterId       :: !Text
     , _megExportId       :: !Text
     , _megCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersExportsGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ mattersExportsGet
     -> Text -- ^ 'megExportId'
     -> MattersExportsGet
 mattersExportsGet pMegMatterId_ pMegExportId_ =
-    MattersExportsGet'
+  MattersExportsGet'
     { _megXgafv = Nothing
     , _megUploadProtocol = Nothing
     , _megAccessToken = Nothing

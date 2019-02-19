@@ -72,7 +72,8 @@ type BiddersAccountsFilterSetsFilteredBidsCreativesListResource
 -- filtered, with the number of bids filtered for each creative.
 --
 -- /See:/ 'biddersAccountsFilterSetsFilteredBidsCreativesList' smart constructor.
-data BiddersAccountsFilterSetsFilteredBidsCreativesList = BiddersAccountsFilterSetsFilteredBidsCreativesList'
+data BiddersAccountsFilterSetsFilteredBidsCreativesList =
+  BiddersAccountsFilterSetsFilteredBidsCreativesList'
     { _bafsfbclXgafv            :: !(Maybe Xgafv)
     , _bafsfbclUploadProtocol   :: !(Maybe Text)
     , _bafsfbclFilterSetName    :: !Text
@@ -82,7 +83,8 @@ data BiddersAccountsFilterSetsFilteredBidsCreativesList = BiddersAccountsFilterS
     , _bafsfbclPageToken        :: !(Maybe Text)
     , _bafsfbclPageSize         :: !(Maybe (Textual Int32))
     , _bafsfbclCallback         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BiddersAccountsFilterSetsFilteredBidsCreativesList' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ biddersAccountsFilterSetsFilteredBidsCreativesList
     -> Int32 -- ^ 'bafsfbclCreativeStatusId'
     -> BiddersAccountsFilterSetsFilteredBidsCreativesList
 biddersAccountsFilterSetsFilteredBidsCreativesList pBafsfbclFilterSetName_ pBafsfbclCreativeStatusId_ =
-    BiddersAccountsFilterSetsFilteredBidsCreativesList'
+  BiddersAccountsFilterSetsFilteredBidsCreativesList'
     { _bafsfbclXgafv = Nothing
     , _bafsfbclUploadProtocol = Nothing
     , _bafsfbclFilterSetName = pBafsfbclFilterSetName_
@@ -191,7 +193,7 @@ bafsfbclCallback
       (\ s a -> s{_bafsfbclCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsFilteredBidsCreativesList
+           BiddersAccountsFilterSetsFilteredBidsCreativesList
          where
         type Rs
                BiddersAccountsFilterSetsFilteredBidsCreativesList

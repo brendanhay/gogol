@@ -53,9 +53,11 @@ type AccountsMetadataMetricsListResource =
 -- | List the metadata for the metrics available to this AdExchange account.
 --
 -- /See:/ 'accountsMetadataMetricsList' smart constructor.
-newtype AccountsMetadataMetricsList = AccountsMetadataMetricsList'
+newtype AccountsMetadataMetricsList =
+  AccountsMetadataMetricsList'
     { _ammlAccountId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsMetadataMetricsList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ accountsMetadataMetricsList
     :: Text -- ^ 'ammlAccountId'
     -> AccountsMetadataMetricsList
 accountsMetadataMetricsList pAmmlAccountId_ =
-    AccountsMetadataMetricsList'
-    { _ammlAccountId = pAmmlAccountId_
-    }
+  AccountsMetadataMetricsList' {_ammlAccountId = pAmmlAccountId_}
 
 -- | Account with visibility to the metrics.
 ammlAccountId :: Lens' AccountsMetadataMetricsList Text

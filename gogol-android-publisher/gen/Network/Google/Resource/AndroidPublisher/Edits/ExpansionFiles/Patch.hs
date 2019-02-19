@@ -69,13 +69,15 @@ type EditsExpansionFilesPatchResource =
 -- method. This method supports patch semantics.
 --
 -- /See:/ 'editsExpansionFilesPatch' smart constructor.
-data EditsExpansionFilesPatch = EditsExpansionFilesPatch'
+data EditsExpansionFilesPatch =
+  EditsExpansionFilesPatch'
     { _eefpPackageName       :: !Text
     , _eefpAPKVersionCode    :: !(Textual Int32)
     , _eefpPayload           :: !ExpansionFile
     , _eefpExpansionFileType :: !EditsExpansionFilesPatchExpansionFileType
     , _eefpEditId            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsExpansionFilesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ editsExpansionFilesPatch
     -> Text -- ^ 'eefpEditId'
     -> EditsExpansionFilesPatch
 editsExpansionFilesPatch pEefpPackageName_ pEefpAPKVersionCode_ pEefpPayload_ pEefpExpansionFileType_ pEefpEditId_ =
-    EditsExpansionFilesPatch'
+  EditsExpansionFilesPatch'
     { _eefpPackageName = pEefpPackageName_
     , _eefpAPKVersionCode = _Coerce # pEefpAPKVersionCode_
     , _eefpPayload = pEefpPayload_

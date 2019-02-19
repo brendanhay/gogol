@@ -60,11 +60,13 @@ type UsersDataSourcesUpdateResource =
 -- cannot be modified. Data sources are identified by their dataStreamId.
 --
 -- /See:/ 'usersDataSourcesUpdate' smart constructor.
-data UsersDataSourcesUpdate = UsersDataSourcesUpdate'
+data UsersDataSourcesUpdate =
+  UsersDataSourcesUpdate'
     { _udsuDataSourceId :: !Text
     , _udsuPayload      :: !DataSource
     , _udsuUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDataSourcesUpdate' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ usersDataSourcesUpdate
     -> Text -- ^ 'udsuUserId'
     -> UsersDataSourcesUpdate
 usersDataSourcesUpdate pUdsuDataSourceId_ pUdsuPayload_ pUdsuUserId_ =
-    UsersDataSourcesUpdate'
+  UsersDataSourcesUpdate'
     { _udsuDataSourceId = pUdsuDataSourceId_
     , _udsuPayload = pUdsuPayload_
     , _udsuUserId = pUdsuUserId_

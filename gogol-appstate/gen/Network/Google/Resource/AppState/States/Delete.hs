@@ -59,9 +59,11 @@ type StatesDeleteResource =
 -- can result in data loss and data corruption.
 --
 -- /See:/ 'statesDelete' smart constructor.
-newtype StatesDelete = StatesDelete'
+newtype StatesDelete =
+  StatesDelete'
     { _sdStateKey :: Textual Int32
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatesDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ newtype StatesDelete = StatesDelete'
 statesDelete
     :: Int32 -- ^ 'sdStateKey'
     -> StatesDelete
-statesDelete pSdStateKey_ =
-    StatesDelete'
-    { _sdStateKey = _Coerce # pSdStateKey_
-    }
+statesDelete pSdStateKey_ = StatesDelete' {_sdStateKey = _Coerce # pSdStateKey_}
 
 -- | The key for the data to be retrieved.
 sdStateKey :: Lens' StatesDelete Int32

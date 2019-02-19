@@ -83,12 +83,14 @@ type EditsDeobfuscationFilesUploadResource =
 -- file already exists, it will be replaced.
 --
 -- /See:/ 'editsDeobfuscationFilesUpload' smart constructor.
-data EditsDeobfuscationFilesUpload = EditsDeobfuscationFilesUpload'
+data EditsDeobfuscationFilesUpload =
+  EditsDeobfuscationFilesUpload'
     { _edfuDeobfuscationFileType :: !EditsDeobfuscationFilesUploadDeobfuscationFileType
     , _edfuPackageName           :: !Text
     , _edfuAPKVersionCode        :: !(Textual Int32)
     , _edfuEditId                :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsDeobfuscationFilesUpload' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ editsDeobfuscationFilesUpload
     -> Text -- ^ 'edfuEditId'
     -> EditsDeobfuscationFilesUpload
 editsDeobfuscationFilesUpload pEdfuDeobfuscationFileType_ pEdfuPackageName_ pEdfuAPKVersionCode_ pEdfuEditId_ =
-    EditsDeobfuscationFilesUpload'
+  EditsDeobfuscationFilesUpload'
     { _edfuDeobfuscationFileType = pEdfuDeobfuscationFileType_
     , _edfuPackageName = pEdfuPackageName_
     , _edfuAPKVersionCode = _Coerce # pEdfuAPKVersionCode_
@@ -157,7 +159,8 @@ instance GoogleRequest EditsDeobfuscationFilesUpload
                       mempty
 
 instance GoogleRequest
-         (MediaUpload EditsDeobfuscationFilesUpload) where
+           (MediaUpload EditsDeobfuscationFilesUpload)
+         where
         type Rs (MediaUpload EditsDeobfuscationFilesUpload) =
              DeobfuscationFilesUploadResponse
         type Scopes

@@ -61,14 +61,16 @@ type OrganizationsSinksDeleteResource =
 -- service account is also deleted.
 --
 -- /See:/ 'organizationsSinksDelete' smart constructor.
-data OrganizationsSinksDelete = OrganizationsSinksDelete'
+data OrganizationsSinksDelete =
+  OrganizationsSinksDelete'
     { _osdXgafv          :: !(Maybe Xgafv)
     , _osdUploadProtocol :: !(Maybe Text)
     , _osdAccessToken    :: !(Maybe Text)
     , _osdUploadType     :: !(Maybe Text)
     , _osdSinkName       :: !Text
     , _osdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsSinksDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ organizationsSinksDelete
     :: Text -- ^ 'osdSinkName'
     -> OrganizationsSinksDelete
 organizationsSinksDelete pOsdSinkName_ =
-    OrganizationsSinksDelete'
+  OrganizationsSinksDelete'
     { _osdXgafv = Nothing
     , _osdUploadProtocol = Nothing
     , _osdAccessToken = Nothing

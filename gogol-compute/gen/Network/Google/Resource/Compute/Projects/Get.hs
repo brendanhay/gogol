@@ -51,9 +51,11 @@ type ProjectsGetResource =
 -- | Returns the specified Project resource.
 --
 -- /See:/ 'projectsGet' smart constructor.
-newtype ProjectsGet = ProjectsGet'
+newtype ProjectsGet =
+  ProjectsGet'
     { _pgProject :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype ProjectsGet = ProjectsGet'
 projectsGet
     :: Text -- ^ 'pgProject'
     -> ProjectsGet
-projectsGet pPgProject_ =
-    ProjectsGet'
-    { _pgProject = pPgProject_
-    }
+projectsGet pPgProject_ = ProjectsGet' {_pgProject = pPgProject_}
 
 -- | Project ID for this request.
 pgProject :: Lens' ProjectsGet Text

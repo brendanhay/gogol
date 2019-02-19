@@ -64,13 +64,15 @@ type RegionInstanceGroupsSetNamedPortsResource =
 -- | Sets the named ports for the specified regional instance group.
 --
 -- /See:/ 'regionInstanceGroupsSetNamedPorts' smart constructor.
-data RegionInstanceGroupsSetNamedPorts = RegionInstanceGroupsSetNamedPorts'
+data RegionInstanceGroupsSetNamedPorts =
+  RegionInstanceGroupsSetNamedPorts'
     { _rigsnpRequestId     :: !(Maybe Text)
     , _rigsnpProject       :: !Text
     , _rigsnpPayload       :: !RegionInstanceGroupsSetNamedPortsRequest
     , _rigsnpRegion        :: !Text
     , _rigsnpInstanceGroup :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupsSetNamedPorts' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ regionInstanceGroupsSetNamedPorts
     -> Text -- ^ 'rigsnpInstanceGroup'
     -> RegionInstanceGroupsSetNamedPorts
 regionInstanceGroupsSetNamedPorts pRigsnpProject_ pRigsnpPayload_ pRigsnpRegion_ pRigsnpInstanceGroup_ =
-    RegionInstanceGroupsSetNamedPorts'
+  RegionInstanceGroupsSetNamedPorts'
     { _rigsnpRequestId = Nothing
     , _rigsnpProject = pRigsnpProject_
     , _rigsnpPayload = pRigsnpPayload_
@@ -140,7 +142,8 @@ rigsnpInstanceGroup
       (\ s a -> s{_rigsnpInstanceGroup = a})
 
 instance GoogleRequest
-         RegionInstanceGroupsSetNamedPorts where
+           RegionInstanceGroupsSetNamedPorts
+         where
         type Rs RegionInstanceGroupsSetNamedPorts = Operation
         type Scopes RegionInstanceGroupsSetNamedPorts =
              '["https://www.googleapis.com/auth/cloud-platform",

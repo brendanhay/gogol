@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesUpdate' request conforms to.
 type AccountUserProFilesUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
@@ -55,10 +55,12 @@ type AccountUserProFilesUpdateResource =
 -- | Updates an existing account user profile.
 --
 -- /See:/ 'accountUserProFilesUpdate' smart constructor.
-data AccountUserProFilesUpdate = AccountUserProFilesUpdate'
+data AccountUserProFilesUpdate =
+  AccountUserProFilesUpdate'
     { _aupfuProFileId :: !(Textual Int64)
     , _aupfuPayload   :: !AccountUserProFile
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountUserProFilesUpdate' with the minimum fields required to make a request.
 --
@@ -72,7 +74,7 @@ accountUserProFilesUpdate
     -> AccountUserProFile -- ^ 'aupfuPayload'
     -> AccountUserProFilesUpdate
 accountUserProFilesUpdate pAupfuProFileId_ pAupfuPayload_ =
-    AccountUserProFilesUpdate'
+  AccountUserProFilesUpdate'
     { _aupfuProFileId = _Coerce # pAupfuProFileId_
     , _aupfuPayload = pAupfuPayload_
     }

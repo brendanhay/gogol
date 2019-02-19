@@ -65,7 +65,8 @@ type AlbumsCreateResource =
 -- | Creates an album in a user\'s Google Photos library.
 --
 -- /See:/ 'albumsCreate' smart constructor.
-data AlbumsCreate = AlbumsCreate'
+data AlbumsCreate =
+  AlbumsCreate'
     { _acXgafv          :: !(Maybe Xgafv)
     , _acUploadProtocol :: !(Maybe Text)
     , _acPp             :: !Bool
@@ -74,7 +75,8 @@ data AlbumsCreate = AlbumsCreate'
     , _acPayload        :: !CreateAlbumRequest
     , _acBearerToken    :: !(Maybe Text)
     , _acCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlbumsCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ albumsCreate
     :: CreateAlbumRequest -- ^ 'acPayload'
     -> AlbumsCreate
 albumsCreate pAcPayload_ =
-    AlbumsCreate'
+  AlbumsCreate'
     { _acXgafv = Nothing
     , _acUploadProtocol = Nothing
     , _acPp = True

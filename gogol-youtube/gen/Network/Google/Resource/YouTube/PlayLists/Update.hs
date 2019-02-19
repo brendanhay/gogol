@@ -57,11 +57,13 @@ type PlayListsUpdateResource =
 -- description, or privacy status.
 --
 -- /See:/ 'playListsUpdate' smart constructor.
-data PlayListsUpdate = PlayListsUpdate'
+data PlayListsUpdate =
+  PlayListsUpdate'
     { _pluPart                   :: !Text
     , _pluPayload                :: !PlayList
     , _pluOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListsUpdate' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ playListsUpdate
     -> PlayList -- ^ 'pluPayload'
     -> PlayListsUpdate
 playListsUpdate pPluPart_ pPluPayload_ =
-    PlayListsUpdate'
+  PlayListsUpdate'
     { _pluPart = pPluPart_
     , _pluPayload = pPluPayload_
     , _pluOnBehalfOfContentOwner = Nothing

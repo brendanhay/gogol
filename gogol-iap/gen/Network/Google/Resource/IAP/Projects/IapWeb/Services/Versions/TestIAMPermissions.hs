@@ -69,7 +69,8 @@ type ProjectsIapWebServicesVersionsTestIAMPermissionsResource
 -- https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing_access_via_the_api
 --
 -- /See:/ 'projectsIapWebServicesVersionsTestIAMPermissions' smart constructor.
-data ProjectsIapWebServicesVersionsTestIAMPermissions = ProjectsIapWebServicesVersionsTestIAMPermissions'
+data ProjectsIapWebServicesVersionsTestIAMPermissions =
+  ProjectsIapWebServicesVersionsTestIAMPermissions'
     { _piwsvtipXgafv          :: !(Maybe Xgafv)
     , _piwsvtipUploadProtocol :: !(Maybe Text)
     , _piwsvtipAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsIapWebServicesVersionsTestIAMPermissions = ProjectsIapWebServicesVe
     , _piwsvtipPayload        :: !TestIAMPermissionsRequest
     , _piwsvtipResource       :: !Text
     , _piwsvtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsIapWebServicesVersionsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsIapWebServicesVersionsTestIAMPermissions
     -> Text -- ^ 'piwsvtipResource'
     -> ProjectsIapWebServicesVersionsTestIAMPermissions
 projectsIapWebServicesVersionsTestIAMPermissions pPiwsvtipPayload_ pPiwsvtipResource_ =
-    ProjectsIapWebServicesVersionsTestIAMPermissions'
+  ProjectsIapWebServicesVersionsTestIAMPermissions'
     { _piwsvtipXgafv = Nothing
     , _piwsvtipUploadProtocol = Nothing
     , _piwsvtipAccessToken = Nothing
@@ -156,7 +158,7 @@ piwsvtipCallback
       (\ s a -> s{_piwsvtipCallback = a})
 
 instance GoogleRequest
-         ProjectsIapWebServicesVersionsTestIAMPermissions
+           ProjectsIapWebServicesVersionsTestIAMPermissions
          where
         type Rs
                ProjectsIapWebServicesVersionsTestIAMPermissions

@@ -64,7 +64,8 @@ type ProjectsRegionsJobsGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsRegionsJobsGetIAMPolicy' smart constructor.
-data ProjectsRegionsJobsGetIAMPolicy = ProjectsRegionsJobsGetIAMPolicy'
+data ProjectsRegionsJobsGetIAMPolicy =
+  ProjectsRegionsJobsGetIAMPolicy'
     { _prjgipXgafv          :: !(Maybe Xgafv)
     , _prjgipUploadProtocol :: !(Maybe Text)
     , _prjgipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsRegionsJobsGetIAMPolicy = ProjectsRegionsJobsGetIAMPolicy'
     , _prjgipPayload        :: !GetIAMPolicyRequest
     , _prjgipResource       :: !Text
     , _prjgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsJobsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsRegionsJobsGetIAMPolicy
     -> Text -- ^ 'prjgipResource'
     -> ProjectsRegionsJobsGetIAMPolicy
 projectsRegionsJobsGetIAMPolicy pPrjgipPayload_ pPrjgipResource_ =
-    ProjectsRegionsJobsGetIAMPolicy'
+  ProjectsRegionsJobsGetIAMPolicy'
     { _prjgipXgafv = Nothing
     , _prjgipUploadProtocol = Nothing
     , _prjgipAccessToken = Nothing
@@ -149,7 +151,8 @@ prjgipCallback
       (\ s a -> s{_prjgipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsJobsGetIAMPolicy where
+           ProjectsRegionsJobsGetIAMPolicy
+         where
         type Rs ProjectsRegionsJobsGetIAMPolicy = Policy
         type Scopes ProjectsRegionsJobsGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

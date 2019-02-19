@@ -59,14 +59,16 @@ type ProjectsNotesDeleteResource =
 -- | Deletes the specified note.
 --
 -- /See:/ 'projectsNotesDelete' smart constructor.
-data ProjectsNotesDelete = ProjectsNotesDelete'
+data ProjectsNotesDelete =
+  ProjectsNotesDelete'
     { _pndXgafv          :: !(Maybe Xgafv)
     , _pndUploadProtocol :: !(Maybe Text)
     , _pndAccessToken    :: !(Maybe Text)
     , _pndUploadType     :: !(Maybe Text)
     , _pndName           :: !Text
     , _pndCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsNotesDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsNotesDelete
     :: Text -- ^ 'pndName'
     -> ProjectsNotesDelete
 projectsNotesDelete pPndName_ =
-    ProjectsNotesDelete'
+  ProjectsNotesDelete'
     { _pndXgafv = Nothing
     , _pndUploadProtocol = Nothing
     , _pndAccessToken = Nothing

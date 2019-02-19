@@ -66,7 +66,7 @@ import           Network.Google.Prelude
 -- 'AdsList' request conforms to.
 type AdsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
@@ -124,7 +124,8 @@ type AdsListResource =
 -- | Retrieves a list of ads, possibly filtered. This method supports paging.
 --
 -- /See:/ 'adsList' smart constructor.
-data AdsList = AdsList'
+data AdsList =
+  AdsList'
     { _alRemarketingListIds                   :: !(Maybe [Textual Int64])
     , _alLandingPageIds                       :: !(Maybe [Textual Int64])
     , _alCreativeIds                          :: !(Maybe [Textual Int64])
@@ -149,7 +150,8 @@ data AdsList = AdsList'
     , _alArchived                             :: !(Maybe Bool)
     , _alMaxResults                           :: !(Textual Int32)
     , _alAudienceSegmentIds                   :: !(Maybe [Textual Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdsList' with the minimum fields required to make a request.
 --
@@ -206,7 +208,7 @@ adsList
     :: Int64 -- ^ 'alProFileId'
     -> AdsList
 adsList pAlProFileId_ =
-    AdsList'
+  AdsList'
     { _alRemarketingListIds = Nothing
     , _alLandingPageIds = Nothing
     , _alCreativeIds = Nothing

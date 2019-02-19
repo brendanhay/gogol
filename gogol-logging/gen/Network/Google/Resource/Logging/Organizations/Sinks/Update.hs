@@ -71,7 +71,8 @@ type OrganizationsSinksUpdateResource =
 -- unique_writer_identity field.
 --
 -- /See:/ 'organizationsSinksUpdate' smart constructor.
-data OrganizationsSinksUpdate = OrganizationsSinksUpdate'
+data OrganizationsSinksUpdate =
+  OrganizationsSinksUpdate'
     { _osuXgafv                :: !(Maybe Xgafv)
     , _osuUniqueWriterIdentity :: !(Maybe Bool)
     , _osuUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,8 @@ data OrganizationsSinksUpdate = OrganizationsSinksUpdate'
     , _osuPayload              :: !LogSink
     , _osuSinkName             :: !Text
     , _osuCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsSinksUpdate' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ organizationsSinksUpdate
     -> Text -- ^ 'osuSinkName'
     -> OrganizationsSinksUpdate
 organizationsSinksUpdate pOsuPayload_ pOsuSinkName_ =
-    OrganizationsSinksUpdate'
+  OrganizationsSinksUpdate'
     { _osuXgafv = Nothing
     , _osuUniqueWriterIdentity = Nothing
     , _osuUploadProtocol = Nothing

@@ -61,12 +61,14 @@ type LicenseAssignmentsUpdateResource =
 -- | Assign License.
 --
 -- /See:/ 'licenseAssignmentsUpdate' smart constructor.
-data LicenseAssignmentsUpdate = LicenseAssignmentsUpdate'
+data LicenseAssignmentsUpdate =
+  LicenseAssignmentsUpdate'
     { _lauSKUId     :: !Text
     , _lauPayload   :: !LicenseAssignment
     , _lauUserId    :: !Text
     , _lauProductId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseAssignmentsUpdate' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ licenseAssignmentsUpdate
     -> Text -- ^ 'lauProductId'
     -> LicenseAssignmentsUpdate
 licenseAssignmentsUpdate pLauSKUId_ pLauPayload_ pLauUserId_ pLauProductId_ =
-    LicenseAssignmentsUpdate'
+  LicenseAssignmentsUpdate'
     { _lauSKUId = pLauSKUId_
     , _lauPayload = pLauPayload_
     , _lauUserId = pLauUserId_

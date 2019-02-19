@@ -60,14 +60,16 @@ type ProjectsGetConfigResource =
 -- | Returns the Cloud Source Repositories configuration of the project.
 --
 -- /See:/ 'projectsGetConfig' smart constructor.
-data ProjectsGetConfig = ProjectsGetConfig'
+data ProjectsGetConfig =
+  ProjectsGetConfig'
     { _pgcXgafv          :: !(Maybe Xgafv)
     , _pgcUploadProtocol :: !(Maybe Text)
     , _pgcAccessToken    :: !(Maybe Text)
     , _pgcUploadType     :: !(Maybe Text)
     , _pgcName           :: !Text
     , _pgcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGetConfig' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsGetConfig
     :: Text -- ^ 'pgcName'
     -> ProjectsGetConfig
 projectsGetConfig pPgcName_ =
-    ProjectsGetConfig'
+  ProjectsGetConfig'
     { _pgcXgafv = Nothing
     , _pgcUploadProtocol = Nothing
     , _pgcAccessToken = Nothing

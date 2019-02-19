@@ -54,10 +54,12 @@ type NotificationsListResource =
 -- | Retrieves a list of notification subscriptions for a given bucket.
 --
 -- /See:/ 'notificationsList' smart constructor.
-data NotificationsList = NotificationsList'
+data NotificationsList =
+  NotificationsList'
     { _nlBucket      :: !Text
     , _nlUserProject :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotificationsList' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ notificationsList
     :: Text -- ^ 'nlBucket'
     -> NotificationsList
 notificationsList pNlBucket_ =
-    NotificationsList'
-    { _nlBucket = pNlBucket_
-    , _nlUserProject = Nothing
-    }
+  NotificationsList' {_nlBucket = pNlBucket_, _nlUserProject = Nothing}
 
 -- | Name of a Google Cloud Storage bucket.
 nlBucket :: Lens' NotificationsList Text

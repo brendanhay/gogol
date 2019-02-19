@@ -66,7 +66,8 @@ type UsersGetLoginProFileResource =
 -- machine on Google Compute Engine.
 --
 -- /See:/ 'usersGetLoginProFile' smart constructor.
-data UsersGetLoginProFile = UsersGetLoginProFile'
+data UsersGetLoginProFile =
+  UsersGetLoginProFile'
     { _uglpfXgafv          :: !(Maybe Xgafv)
     , _uglpfUploadProtocol :: !(Maybe Text)
     , _uglpfAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data UsersGetLoginProFile = UsersGetLoginProFile'
     , _uglpfProjectId      :: !(Maybe Text)
     , _uglpfSystemId       :: !(Maybe Text)
     , _uglpfCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersGetLoginProFile' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ usersGetLoginProFile
     :: Text -- ^ 'uglpfName'
     -> UsersGetLoginProFile
 usersGetLoginProFile pUglpfName_ =
-    UsersGetLoginProFile'
+  UsersGetLoginProFile'
     { _uglpfXgafv = Nothing
     , _uglpfUploadProtocol = Nothing
     , _uglpfAccessToken = Nothing

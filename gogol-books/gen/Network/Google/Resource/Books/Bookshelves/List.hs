@@ -54,10 +54,12 @@ type BookshelvesListResource =
 -- | Retrieves a list of public bookshelves for the specified user.
 --
 -- /See:/ 'bookshelvesList' smart constructor.
-data BookshelvesList = BookshelvesList'
+data BookshelvesList =
+  BookshelvesList'
     { _blUserId :: !Text
     , _blSource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BookshelvesList' with the minimum fields required to make a request.
 --
@@ -70,10 +72,7 @@ bookshelvesList
     :: Text -- ^ 'blUserId'
     -> BookshelvesList
 bookshelvesList pBlUserId_ =
-    BookshelvesList'
-    { _blUserId = pBlUserId_
-    , _blSource = Nothing
-    }
+  BookshelvesList' {_blUserId = pBlUserId_, _blSource = Nothing}
 
 -- | ID of user for whom to retrieve bookshelves.
 blUserId :: Lens' BookshelvesList Text

@@ -85,7 +85,8 @@ type ProjectsLocationsQueuesTasksRunResource =
 -- has already succeeded or permanently failed.
 --
 -- /See:/ 'projectsLocationsQueuesTasksRun' smart constructor.
-data ProjectsLocationsQueuesTasksRun = ProjectsLocationsQueuesTasksRun'
+data ProjectsLocationsQueuesTasksRun =
+  ProjectsLocationsQueuesTasksRun'
     { _plqtrXgafv          :: !(Maybe Xgafv)
     , _plqtrUploadProtocol :: !(Maybe Text)
     , _plqtrAccessToken    :: !(Maybe Text)
@@ -93,7 +94,8 @@ data ProjectsLocationsQueuesTasksRun = ProjectsLocationsQueuesTasksRun'
     , _plqtrPayload        :: !RunTaskRequest
     , _plqtrName           :: !Text
     , _plqtrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsQueuesTasksRun' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ projectsLocationsQueuesTasksRun
     -> Text -- ^ 'plqtrName'
     -> ProjectsLocationsQueuesTasksRun
 projectsLocationsQueuesTasksRun pPlqtrPayload_ pPlqtrName_ =
-    ProjectsLocationsQueuesTasksRun'
+  ProjectsLocationsQueuesTasksRun'
     { _plqtrXgafv = Nothing
     , _plqtrUploadProtocol = Nothing
     , _plqtrAccessToken = Nothing
@@ -168,7 +170,8 @@ plqtrCallback
       (\ s a -> s{_plqtrCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsQueuesTasksRun where
+           ProjectsLocationsQueuesTasksRun
+         where
         type Rs ProjectsLocationsQueuesTasksRun = Task
         type Scopes ProjectsLocationsQueuesTasksRun =
              '["https://www.googleapis.com/auth/cloud-platform"]

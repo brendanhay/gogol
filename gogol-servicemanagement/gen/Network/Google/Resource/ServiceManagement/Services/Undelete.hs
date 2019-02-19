@@ -66,14 +66,16 @@ type ServicesUndeleteResource =
 -- days. Operation
 --
 -- /See:/ 'servicesUndelete' smart constructor.
-data ServicesUndelete = ServicesUndelete'
+data ServicesUndelete =
+  ServicesUndelete'
     { _suXgafv          :: !(Maybe Xgafv)
     , _suUploadProtocol :: !(Maybe Text)
     , _suAccessToken    :: !(Maybe Text)
     , _suUploadType     :: !(Maybe Text)
     , _suServiceName    :: !Text
     , _suCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesUndelete' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ servicesUndelete
     :: Text -- ^ 'suServiceName'
     -> ServicesUndelete
 servicesUndelete pSuServiceName_ =
-    ServicesUndelete'
+  ServicesUndelete'
     { _suXgafv = Nothing
     , _suUploadProtocol = Nothing
     , _suAccessToken = Nothing

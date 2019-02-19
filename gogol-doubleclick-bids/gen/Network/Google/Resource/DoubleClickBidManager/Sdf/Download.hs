@@ -53,9 +53,11 @@ type SdfDownloadResource =
 -- | Retrieves entities in SDF format.
 --
 -- /See:/ 'sdfDownload' smart constructor.
-newtype SdfDownload = SdfDownload'
+newtype SdfDownload =
+  SdfDownload'
     { _sdPayload :: DownloadRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SdfDownload' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype SdfDownload = SdfDownload'
 sdfDownload
     :: DownloadRequest -- ^ 'sdPayload'
     -> SdfDownload
-sdfDownload pSdPayload_ =
-    SdfDownload'
-    { _sdPayload = pSdPayload_
-    }
+sdfDownload pSdPayload_ = SdfDownload' {_sdPayload = pSdPayload_}
 
 -- | Multipart request metadata.
 sdPayload :: Lens' SdfDownload DownloadRequest

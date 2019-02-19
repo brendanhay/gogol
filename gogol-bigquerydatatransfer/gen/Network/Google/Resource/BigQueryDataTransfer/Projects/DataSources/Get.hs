@@ -61,14 +61,16 @@ type ProjectsDataSourcesGetResource =
 -- used for UI rendering.
 --
 -- /See:/ 'projectsDataSourcesGet' smart constructor.
-data ProjectsDataSourcesGet = ProjectsDataSourcesGet'
+data ProjectsDataSourcesGet =
+  ProjectsDataSourcesGet'
     { _pdsgXgafv          :: !(Maybe Xgafv)
     , _pdsgUploadProtocol :: !(Maybe Text)
     , _pdsgAccessToken    :: !(Maybe Text)
     , _pdsgUploadType     :: !(Maybe Text)
     , _pdsgName           :: !Text
     , _pdsgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDataSourcesGet' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsDataSourcesGet
     :: Text -- ^ 'pdsgName'
     -> ProjectsDataSourcesGet
 projectsDataSourcesGet pPdsgName_ =
-    ProjectsDataSourcesGet'
+  ProjectsDataSourcesGet'
     { _pdsgXgafv = Nothing
     , _pdsgUploadProtocol = Nothing
     , _pdsgAccessToken = Nothing

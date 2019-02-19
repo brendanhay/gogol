@@ -73,7 +73,8 @@ type ProjectsEventsReportResource =
 -- https:\/\/clouderrorreporting.googleapis.com\/v1beta1\/projects\/example-project\/events:report?key=123ABC456\`
 --
 -- /See:/ 'projectsEventsReport' smart constructor.
-data ProjectsEventsReport = ProjectsEventsReport'
+data ProjectsEventsReport =
+  ProjectsEventsReport'
     { _perXgafv          :: !(Maybe Xgafv)
     , _perUploadProtocol :: !(Maybe Text)
     , _perAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsEventsReport = ProjectsEventsReport'
     , _perPayload        :: !ReportedErrorEvent
     , _perProjectName    :: !Text
     , _perCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsEventsReport' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsEventsReport
     -> Text -- ^ 'perProjectName'
     -> ProjectsEventsReport
 projectsEventsReport pPerPayload_ pPerProjectName_ =
-    ProjectsEventsReport'
+  ProjectsEventsReport'
     { _perXgafv = Nothing
     , _perUploadProtocol = Nothing
     , _perAccessToken = Nothing

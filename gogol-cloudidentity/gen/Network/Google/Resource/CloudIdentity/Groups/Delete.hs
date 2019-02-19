@@ -59,14 +59,16 @@ type GroupsDeleteResource =
 -- | Deletes a Group.
 --
 -- /See:/ 'groupsDelete' smart constructor.
-data GroupsDelete = GroupsDelete'
+data GroupsDelete =
+  GroupsDelete'
     { _gdXgafv          :: !(Maybe Xgafv)
     , _gdUploadProtocol :: !(Maybe Text)
     , _gdAccessToken    :: !(Maybe Text)
     , _gdUploadType     :: !(Maybe Text)
     , _gdName           :: !Text
     , _gdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ groupsDelete
     :: Text -- ^ 'gdName'
     -> GroupsDelete
 groupsDelete pGdName_ =
-    GroupsDelete'
+  GroupsDelete'
     { _gdXgafv = Nothing
     , _gdUploadProtocol = Nothing
     , _gdAccessToken = Nothing

@@ -72,7 +72,8 @@ type SpreadsheetsDeveloperMetadataSearchResource =
 -- developer metadata associated with locations intersecting that region.
 --
 -- /See:/ 'spreadsheetsDeveloperMetadataSearch' smart constructor.
-data SpreadsheetsDeveloperMetadataSearch = SpreadsheetsDeveloperMetadataSearch'
+data SpreadsheetsDeveloperMetadataSearch =
+  SpreadsheetsDeveloperMetadataSearch'
     { _sdmsXgafv          :: !(Maybe Xgafv)
     , _sdmsUploadProtocol :: !(Maybe Text)
     , _sdmsAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data SpreadsheetsDeveloperMetadataSearch = SpreadsheetsDeveloperMetadataSearch'
     , _sdmsUploadType     :: !(Maybe Text)
     , _sdmsPayload        :: !SearchDeveloperMetadataRequest
     , _sdmsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsDeveloperMetadataSearch' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ spreadsheetsDeveloperMetadataSearch
     -> SearchDeveloperMetadataRequest -- ^ 'sdmsPayload'
     -> SpreadsheetsDeveloperMetadataSearch
 spreadsheetsDeveloperMetadataSearch pSdmsSpreadsheetId_ pSdmsPayload_ =
-    SpreadsheetsDeveloperMetadataSearch'
+  SpreadsheetsDeveloperMetadataSearch'
     { _sdmsXgafv = Nothing
     , _sdmsUploadProtocol = Nothing
     , _sdmsAccessToken = Nothing
@@ -154,7 +156,8 @@ sdmsCallback
   = lens _sdmsCallback (\ s a -> s{_sdmsCallback = a})
 
 instance GoogleRequest
-         SpreadsheetsDeveloperMetadataSearch where
+           SpreadsheetsDeveloperMetadataSearch
+         where
         type Rs SpreadsheetsDeveloperMetadataSearch =
              SearchDeveloperMetadataResponse
         type Scopes SpreadsheetsDeveloperMetadataSearch =

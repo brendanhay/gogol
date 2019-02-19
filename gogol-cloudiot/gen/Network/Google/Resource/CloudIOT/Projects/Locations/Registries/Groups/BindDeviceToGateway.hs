@@ -63,7 +63,8 @@ type ProjectsLocationsRegistriesGroupsBindDeviceToGatewayResource
 -- | Associates the device with the gateway.
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsBindDeviceToGateway' smart constructor.
-data ProjectsLocationsRegistriesGroupsBindDeviceToGateway = ProjectsLocationsRegistriesGroupsBindDeviceToGateway'
+data ProjectsLocationsRegistriesGroupsBindDeviceToGateway =
+  ProjectsLocationsRegistriesGroupsBindDeviceToGateway'
     { _plrgbdtgParent         :: !Text
     , _plrgbdtgXgafv          :: !(Maybe Xgafv)
     , _plrgbdtgUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsLocationsRegistriesGroupsBindDeviceToGateway = ProjectsLocationsReg
     , _plrgbdtgUploadType     :: !(Maybe Text)
     , _plrgbdtgPayload        :: !BindDeviceToGatewayRequest
     , _plrgbdtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsBindDeviceToGateway' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsLocationsRegistriesGroupsBindDeviceToGateway
     -> BindDeviceToGatewayRequest -- ^ 'plrgbdtgPayload'
     -> ProjectsLocationsRegistriesGroupsBindDeviceToGateway
 projectsLocationsRegistriesGroupsBindDeviceToGateway pPlrgbdtgParent_ pPlrgbdtgPayload_ =
-    ProjectsLocationsRegistriesGroupsBindDeviceToGateway'
+  ProjectsLocationsRegistriesGroupsBindDeviceToGateway'
     { _plrgbdtgParent = pPlrgbdtgParent_
     , _plrgbdtgXgafv = Nothing
     , _plrgbdtgUploadProtocol = Nothing
@@ -149,7 +151,7 @@ plrgbdtgCallback
       (\ s a -> s{_plrgbdtgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsBindDeviceToGateway
+           ProjectsLocationsRegistriesGroupsBindDeviceToGateway
          where
         type Rs
                ProjectsLocationsRegistriesGroupsBindDeviceToGateway

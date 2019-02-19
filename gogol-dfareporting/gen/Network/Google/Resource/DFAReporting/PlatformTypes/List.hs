@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'PlatformTypesList' request conforms to.
 type PlatformTypesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "platformTypes" :>
@@ -53,9 +53,11 @@ type PlatformTypesListResource =
 -- | Retrieves a list of platform types.
 --
 -- /See:/ 'platformTypesList' smart constructor.
-newtype PlatformTypesList = PlatformTypesList'
+newtype PlatformTypesList =
+  PlatformTypesList'
     { _ptlProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlatformTypesList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ platformTypesList
     :: Int64 -- ^ 'ptlProFileId'
     -> PlatformTypesList
 platformTypesList pPtlProFileId_ =
-    PlatformTypesList'
-    { _ptlProFileId = _Coerce # pPtlProFileId_
-    }
+  PlatformTypesList' {_ptlProFileId = _Coerce # pPtlProFileId_}
 
 -- | User profile ID associated with this request.
 ptlProFileId :: Lens' PlatformTypesList Int64

@@ -57,11 +57,13 @@ type OrgUnitsListResource =
 -- | Retrieve all organizational units
 --
 -- /See:/ 'orgUnitsList' smart constructor.
-data OrgUnitsList = OrgUnitsList'
+data OrgUnitsList =
+  OrgUnitsList'
     { _oulOrgUnitPath :: !Text
     , _oulCustomerId  :: !Text
     , _oulType        :: !(Maybe OrgUnitsListType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrgUnitsList' with the minimum fields required to make a request.
 --
@@ -76,11 +78,8 @@ orgUnitsList
     :: Text -- ^ 'oulCustomerId'
     -> OrgUnitsList
 orgUnitsList pOulCustomerId_ =
-    OrgUnitsList'
-    { _oulOrgUnitPath = ""
-    , _oulCustomerId = pOulCustomerId_
-    , _oulType = Nothing
-    }
+  OrgUnitsList'
+    {_oulOrgUnitPath = "", _oulCustomerId = pOulCustomerId_, _oulType = Nothing}
 
 -- | the URL-encoded organizational unit\'s path or its ID
 oulOrgUnitPath :: Lens' OrgUnitsList Text

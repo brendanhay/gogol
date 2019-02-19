@@ -67,7 +67,8 @@ type GroupsListResource =
 -- | List groups within a customer or a domain.
 --
 -- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList'
+data GroupsList =
+  GroupsList'
     { _gllParent         :: !(Maybe Text)
     , _gllXgafv          :: !(Maybe Xgafv)
     , _gllUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data GroupsList = GroupsList'
     , _gllPageToken      :: !(Maybe Text)
     , _gllPageSize       :: !(Maybe (Textual Int32))
     , _gllCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsList' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ data GroupsList = GroupsList'
 groupsList
     :: GroupsList
 groupsList =
-    GroupsList'
+  GroupsList'
     { _gllParent = Nothing
     , _gllXgafv = Nothing
     , _gllUploadProtocol = Nothing

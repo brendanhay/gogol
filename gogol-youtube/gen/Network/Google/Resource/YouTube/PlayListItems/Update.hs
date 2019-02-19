@@ -58,11 +58,13 @@ type PlayListItemsUpdateResource =
 -- position in the playlist.
 --
 -- /See:/ 'playListItemsUpdate' smart constructor.
-data PlayListItemsUpdate = PlayListItemsUpdate'
+data PlayListItemsUpdate =
+  PlayListItemsUpdate'
     { _pliuPart                   :: !Text
     , _pliuPayload                :: !PlayListItem
     , _pliuOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayListItemsUpdate' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ playListItemsUpdate
     -> PlayListItem -- ^ 'pliuPayload'
     -> PlayListItemsUpdate
 playListItemsUpdate pPliuPart_ pPliuPayload_ =
-    PlayListItemsUpdate'
+  PlayListItemsUpdate'
     { _pliuPart = pPliuPart_
     , _pliuPayload = pPliuPayload_
     , _pliuOnBehalfOfContentOwner = Nothing

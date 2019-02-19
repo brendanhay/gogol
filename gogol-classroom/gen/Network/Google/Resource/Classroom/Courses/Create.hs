@@ -74,14 +74,16 @@ type CoursesCreateResource =
 -- specified in the \`id\` and already exists.
 --
 -- /See:/ 'coursesCreate' smart constructor.
-data CoursesCreate = CoursesCreate'
+data CoursesCreate =
+  CoursesCreate'
     { _ccXgafv          :: !(Maybe Xgafv)
     , _ccUploadProtocol :: !(Maybe Text)
     , _ccAccessToken    :: !(Maybe Text)
     , _ccUploadType     :: !(Maybe Text)
     , _ccPayload        :: !Course
     , _ccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesCreate' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ coursesCreate
     :: Course -- ^ 'ccPayload'
     -> CoursesCreate
 coursesCreate pCcPayload_ =
-    CoursesCreate'
+  CoursesCreate'
     { _ccXgafv = Nothing
     , _ccUploadProtocol = Nothing
     , _ccAccessToken = Nothing

@@ -63,7 +63,8 @@ type ProjectsJobsPatchResource =
 -- search results within 10 seconds, but it may take up to 5 minutes.
 --
 -- /See:/ 'projectsJobsPatch' smart constructor.
-data ProjectsJobsPatch = ProjectsJobsPatch'
+data ProjectsJobsPatch =
+  ProjectsJobsPatch'
     { _pjpXgafv          :: !(Maybe Xgafv)
     , _pjpUploadProtocol :: !(Maybe Text)
     , _pjpAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsJobsPatch = ProjectsJobsPatch'
     , _pjpPayload        :: !UpdateJobRequest
     , _pjpName           :: !Text
     , _pjpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsPatch' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsJobsPatch
     -> Text -- ^ 'pjpName'
     -> ProjectsJobsPatch
 projectsJobsPatch pPjpPayload_ pPjpName_ =
-    ProjectsJobsPatch'
+  ProjectsJobsPatch'
     { _pjpXgafv = Nothing
     , _pjpUploadProtocol = Nothing
     , _pjpAccessToken = Nothing

@@ -60,11 +60,13 @@ type StatesUpdateResource =
 -- face of concurrent writes. Maximum per-key size is 128KB.
 --
 -- /See:/ 'statesUpdate' smart constructor.
-data StatesUpdate = StatesUpdate'
+data StatesUpdate =
+  StatesUpdate'
     { _suCurrentStateVersion :: !(Maybe Text)
     , _suStateKey            :: !(Textual Int32)
     , _suPayload             :: !UpdateRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatesUpdate' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ statesUpdate
     -> UpdateRequest -- ^ 'suPayload'
     -> StatesUpdate
 statesUpdate pSuStateKey_ pSuPayload_ =
-    StatesUpdate'
+  StatesUpdate'
     { _suCurrentStateVersion = Nothing
     , _suStateKey = _Coerce # pSuStateKey_
     , _suPayload = pSuPayload_

@@ -53,9 +53,11 @@ type TaskListsDeleteResource =
 -- | Deletes the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsDelete' smart constructor.
-newtype TaskListsDelete = TaskListsDelete'
+newtype TaskListsDelete =
+  TaskListsDelete'
     { _tldTaskList :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TaskListsDelete' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype TaskListsDelete = TaskListsDelete'
 taskListsDelete
     :: Text -- ^ 'tldTaskList'
     -> TaskListsDelete
-taskListsDelete pTldTaskList_ =
-    TaskListsDelete'
-    { _tldTaskList = pTldTaskList_
-    }
+taskListsDelete pTldTaskList_ = TaskListsDelete' {_tldTaskList = pTldTaskList_}
 
 -- | Task list identifier.
 tldTaskList :: Lens' TaskListsDelete Text

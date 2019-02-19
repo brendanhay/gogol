@@ -70,7 +70,8 @@ type ProjectsZonesClustersResourceLabelsResource =
 -- | Sets labels on a cluster.
 --
 -- /See:/ 'projectsZonesClustersResourceLabels' smart constructor.
-data ProjectsZonesClustersResourceLabels = ProjectsZonesClustersResourceLabels'
+data ProjectsZonesClustersResourceLabels =
+  ProjectsZonesClustersResourceLabels'
     { _pzcrlXgafv          :: !(Maybe Xgafv)
     , _pzcrlUploadProtocol :: !(Maybe Text)
     , _pzcrlAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsZonesClustersResourceLabels = ProjectsZonesClustersResourceLabels'
     , _pzcrlClusterId      :: !Text
     , _pzcrlProjectId      :: !Text
     , _pzcrlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersResourceLabels' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ projectsZonesClustersResourceLabels
     -> Text -- ^ 'pzcrlProjectId'
     -> ProjectsZonesClustersResourceLabels
 projectsZonesClustersResourceLabels pPzcrlZone_ pPzcrlPayload_ pPzcrlClusterId_ pPzcrlProjectId_ =
-    ProjectsZonesClustersResourceLabels'
+  ProjectsZonesClustersResourceLabels'
     { _pzcrlXgafv = Nothing
     , _pzcrlUploadProtocol = Nothing
     , _pzcrlAccessToken = Nothing
@@ -179,7 +181,8 @@ pzcrlCallback
       (\ s a -> s{_pzcrlCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersResourceLabels where
+           ProjectsZonesClustersResourceLabels
+         where
         type Rs ProjectsZonesClustersResourceLabels =
              Operation
         type Scopes ProjectsZonesClustersResourceLabels =

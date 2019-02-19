@@ -76,7 +76,8 @@ type AccountsProposalsCompleteSetupResource =
 -- The server will advance the revision number of the most recent proposal.
 --
 -- /See:/ 'accountsProposalsCompleteSetup' smart constructor.
-data AccountsProposalsCompleteSetup = AccountsProposalsCompleteSetup'
+data AccountsProposalsCompleteSetup =
+  AccountsProposalsCompleteSetup'
     { _apcsXgafv          :: !(Maybe Xgafv)
     , _apcsUploadProtocol :: !(Maybe Text)
     , _apcsAccessToken    :: !(Maybe Text)
@@ -85,7 +86,8 @@ data AccountsProposalsCompleteSetup = AccountsProposalsCompleteSetup'
     , _apcsProposalId     :: !Text
     , _apcsAccountId      :: !Text
     , _apcsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsProposalsCompleteSetup' with the minimum fields required to make a request.
 --
@@ -112,7 +114,7 @@ accountsProposalsCompleteSetup
     -> Text -- ^ 'apcsAccountId'
     -> AccountsProposalsCompleteSetup
 accountsProposalsCompleteSetup pApcsPayload_ pApcsProposalId_ pApcsAccountId_ =
-    AccountsProposalsCompleteSetup'
+  AccountsProposalsCompleteSetup'
     { _apcsXgafv = Nothing
     , _apcsUploadProtocol = Nothing
     , _apcsAccessToken = Nothing

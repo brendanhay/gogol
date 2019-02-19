@@ -60,12 +60,14 @@ type PoolsUpdatetemplateResource =
 -- | Update the template used by the pool.
 --
 -- /See:/ 'poolsUpdatetemplate' smart constructor.
-data PoolsUpdatetemplate = PoolsUpdatetemplate'
+data PoolsUpdatetemplate =
+  PoolsUpdatetemplate'
     { _puPoolName    :: !Text
     , _puZone        :: !Text
     , _puPayload     :: !Template
     , _puProjectName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PoolsUpdatetemplate' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ poolsUpdatetemplate
     -> Text -- ^ 'puProjectName'
     -> PoolsUpdatetemplate
 poolsUpdatetemplate pPuPoolName_ pPuZone_ pPuPayload_ pPuProjectName_ =
-    PoolsUpdatetemplate'
+  PoolsUpdatetemplate'
     { _puPoolName = pPuPoolName_
     , _puZone = pPuZone_
     , _puPayload = pPuPayload_

@@ -88,8 +88,8 @@ appsTasksService
 
 -- | View your tasks
 tasksReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tasks.readonly"]
-tasksReadOnlyScope = Proxy;
+tasksReadOnlyScope = Proxy
 
 -- | Create, edit, organize, and delete all your tasks
 tasksScope :: Proxy '["https://www.googleapis.com/auth/tasks"]
-tasksScope = Proxy;
+tasksScope = Proxy

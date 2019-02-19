@@ -23,10 +23,12 @@ import           Network.Google.Prelude
 -- | List reports response.
 --
 -- /See:/ 'listReportsResponse' smart constructor.
-data ListReportsResponse = ListReportsResponse'
+data ListReportsResponse =
+  ListReportsResponse'
     { _lrrReports :: !(Maybe [Report])
     , _lrrKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListReportsResponse' with the minimum fields required to make a request.
 --
@@ -38,7 +40,7 @@ data ListReportsResponse = ListReportsResponse'
 listReportsResponse
     :: ListReportsResponse
 listReportsResponse =
-    ListReportsResponse'
+  ListReportsResponse'
     { _lrrReports = Nothing
     , _lrrKind = "doubleclickbidmanager#listReportsResponse"
     }
@@ -74,7 +76,8 @@ instance ToJSON ListReportsResponse where
 -- | Query metadata.
 --
 -- /See:/ 'queryMetadata' smart constructor.
-data QueryMetadata = QueryMetadata'
+data QueryMetadata =
+  QueryMetadata'
     { _qmGoogleCloudStoragePathForLatestReport :: !(Maybe Text)
     , _qmLocale                                :: !(Maybe Text)
     , _qmFormat                                :: !(Maybe QueryMetadataFormat)
@@ -86,7 +89,8 @@ data QueryMetadata = QueryMetadata'
     , _qmReportCount                           :: !(Maybe (Textual Int32))
     , _qmTitle                                 :: !(Maybe Text)
     , _qmSendNotification                      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryMetadata' with the minimum fields required to make a request.
 --
@@ -116,7 +120,7 @@ data QueryMetadata = QueryMetadata'
 queryMetadata
     :: QueryMetadata
 queryMetadata =
-    QueryMetadata'
+  QueryMetadata'
     { _qmGoogleCloudStoragePathForLatestReport = Nothing
     , _qmLocale = Nothing
     , _qmFormat = Nothing
@@ -239,12 +243,14 @@ instance ToJSON QueryMetadata where
 -- | Request to run a stored query to generate a report.
 --
 -- /See:/ 'runQueryRequest' smart constructor.
-data RunQueryRequest = RunQueryRequest'
+data RunQueryRequest =
+  RunQueryRequest'
     { _rqrReportDataEndTimeMs   :: !(Maybe (Textual Int64))
     , _rqrDataRange             :: !(Maybe RunQueryRequestDataRange)
     , _rqrReportDataStartTimeMs :: !(Maybe (Textual Int64))
     , _rqrTimezoneCode          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
 --
@@ -260,7 +266,7 @@ data RunQueryRequest = RunQueryRequest'
 runQueryRequest
     :: RunQueryRequest
 runQueryRequest =
-    RunQueryRequest'
+  RunQueryRequest'
     { _rqrReportDataEndTimeMs = Nothing
     , _rqrDataRange = Nothing
     , _rqrReportDataStartTimeMs = Nothing
@@ -320,10 +326,12 @@ instance ToJSON RunQueryRequest where
 -- | Filter used to match traffic data in your report.
 --
 -- /See:/ 'filterPair' smart constructor.
-data FilterPair = FilterPair'
+data FilterPair =
+  FilterPair'
     { _fpValue :: !(Maybe Text)
     , _fpType  :: !(Maybe FilterPairType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilterPair' with the minimum fields required to make a request.
 --
@@ -334,11 +342,7 @@ data FilterPair = FilterPair'
 -- * 'fpType'
 filterPair
     :: FilterPair
-filterPair =
-    FilterPair'
-    { _fpValue = Nothing
-    , _fpType = Nothing
-    }
+filterPair = FilterPair' {_fpValue = Nothing, _fpType = Nothing}
 
 -- | Filter value.
 fpValue :: Lens' FilterPair (Maybe Text)
@@ -363,11 +367,13 @@ instance ToJSON FilterPair where
 -- | Request to upload line items.
 --
 -- /See:/ 'uploadLineItemsRequest' smart constructor.
-data UploadLineItemsRequest = UploadLineItemsRequest'
+data UploadLineItemsRequest =
+  UploadLineItemsRequest'
     { _ulirLineItems :: !(Maybe Text)
     , _ulirFormat    :: !(Maybe UploadLineItemsRequestFormat)
     , _ulirDryRun    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UploadLineItemsRequest' with the minimum fields required to make a request.
 --
@@ -381,11 +387,8 @@ data UploadLineItemsRequest = UploadLineItemsRequest'
 uploadLineItemsRequest
     :: UploadLineItemsRequest
 uploadLineItemsRequest =
-    UploadLineItemsRequest'
-    { _ulirLineItems = Nothing
-    , _ulirFormat = Nothing
-    , _ulirDryRun = Nothing
-    }
+  UploadLineItemsRequest'
+    {_ulirLineItems = Nothing, _ulirFormat = Nothing, _ulirDryRun = Nothing}
 
 -- | Line items in CSV to upload. Refer to Entity Write File Format for more
 -- information on file format.
@@ -424,12 +427,14 @@ instance ToJSON UploadLineItemsRequest where
 -- | Request to fetch stored line items.
 --
 -- /See:/ 'downloadLineItemsRequest' smart constructor.
-data DownloadLineItemsRequest = DownloadLineItemsRequest'
+data DownloadLineItemsRequest =
+  DownloadLineItemsRequest'
     { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
     , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
     , _dlirFileSpec   :: !(Maybe DownloadLineItemsRequestFileSpec)
     , _dlirFilterIds  :: !(Maybe [Textual Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
 --
@@ -445,7 +450,7 @@ data DownloadLineItemsRequest = DownloadLineItemsRequest'
 downloadLineItemsRequest
     :: DownloadLineItemsRequest
 downloadLineItemsRequest =
-    DownloadLineItemsRequest'
+  DownloadLineItemsRequest'
     { _dlirFilterType = Nothing
     , _dlirFormat = Nothing
     , _dlirFileSpec = Nothing
@@ -500,12 +505,14 @@ instance ToJSON DownloadLineItemsRequest where
 -- TrueView ad groups and ads.
 --
 -- /See:/ 'downloadRequest' smart constructor.
-data DownloadRequest = DownloadRequest'
+data DownloadRequest =
+  DownloadRequest'
     { _drFileTypes  :: !(Maybe [DownloadRequestFileTypesItem])
     , _drFilterType :: !(Maybe DownloadRequestFilterType)
     , _drVersion    :: !(Maybe Text)
     , _drFilterIds  :: !(Maybe [Textual Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DownloadRequest' with the minimum fields required to make a request.
 --
@@ -521,7 +528,7 @@ data DownloadRequest = DownloadRequest'
 downloadRequest
     :: DownloadRequest
 downloadRequest =
-    DownloadRequest'
+  DownloadRequest'
     { _drFileTypes = Nothing
     , _drFilterType = Nothing
     , _drVersion = Nothing
@@ -577,10 +584,12 @@ instance ToJSON DownloadRequest where
 -- | List queries response.
 --
 -- /See:/ 'listQueriesResponse' smart constructor.
-data ListQueriesResponse = ListQueriesResponse'
+data ListQueriesResponse =
+  ListQueriesResponse'
     { _lqrQueries :: !(Maybe [Query])
     , _lqrKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListQueriesResponse' with the minimum fields required to make a request.
 --
@@ -592,7 +601,7 @@ data ListQueriesResponse = ListQueriesResponse'
 listQueriesResponse
     :: ListQueriesResponse
 listQueriesResponse =
-    ListQueriesResponse'
+  ListQueriesResponse'
     { _lqrQueries = Nothing
     , _lqrKind = "doubleclickbidmanager#listQueriesResponse"
     }
@@ -628,9 +637,11 @@ instance ToJSON ListQueriesResponse where
 -- | Upload line items response.
 --
 -- /See:/ 'uploadLineItemsResponse' smart constructor.
-newtype UploadLineItemsResponse = UploadLineItemsResponse'
+newtype UploadLineItemsResponse =
+  UploadLineItemsResponse'
     { _ulirUploadStatus :: Maybe UploadStatus
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UploadLineItemsResponse' with the minimum fields required to make a request.
 --
@@ -639,10 +650,7 @@ newtype UploadLineItemsResponse = UploadLineItemsResponse'
 -- * 'ulirUploadStatus'
 uploadLineItemsResponse
     :: UploadLineItemsResponse
-uploadLineItemsResponse =
-    UploadLineItemsResponse'
-    { _ulirUploadStatus = Nothing
-    }
+uploadLineItemsResponse = UploadLineItemsResponse' {_ulirUploadStatus = Nothing}
 
 -- | Status of upload.
 ulirUploadStatus :: Lens' UploadLineItemsResponse (Maybe UploadStatus)
@@ -665,12 +673,14 @@ instance ToJSON UploadLineItemsResponse where
 -- | Report metadata.
 --
 -- /See:/ 'reportMetadata' smart constructor.
-data ReportMetadata = ReportMetadata'
+data ReportMetadata =
+  ReportMetadata'
     { _rmStatus                 :: !(Maybe ReportStatus)
     , _rmReportDataEndTimeMs    :: !(Maybe (Textual Int64))
     , _rmGoogleCloudStoragePath :: !(Maybe Text)
     , _rmReportDataStartTimeMs  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportMetadata' with the minimum fields required to make a request.
 --
@@ -686,7 +696,7 @@ data ReportMetadata = ReportMetadata'
 reportMetadata
     :: ReportMetadata
 reportMetadata =
-    ReportMetadata'
+  ReportMetadata'
     { _rmStatus = Nothing
     , _rmReportDataEndTimeMs = Nothing
     , _rmGoogleCloudStoragePath = Nothing
@@ -742,11 +752,13 @@ instance ToJSON ReportMetadata where
 -- | Represents a report.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report'
+data Report =
+  Report'
     { _rParams   :: !(Maybe Parameters)
     , _rKey      :: !(Maybe ReportKey)
     , _rMetadata :: !(Maybe ReportMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
@@ -759,12 +771,7 @@ data Report = Report'
 -- * 'rMetadata'
 report
     :: Report
-report =
-    Report'
-    { _rParams = Nothing
-    , _rKey = Nothing
-    , _rMetadata = Nothing
-    }
+report = Report' {_rParams = Nothing, _rKey = Nothing, _rMetadata = Nothing}
 
 -- | Report parameters.
 rParams :: Lens' Report (Maybe Parameters)
@@ -797,14 +804,16 @@ instance ToJSON Report where
 -- | Represents the upload status of a row in the request.
 --
 -- /See:/ 'rowStatus' smart constructor.
-data RowStatus = RowStatus'
+data RowStatus =
+  RowStatus'
     { _rsEntityName :: !(Maybe Text)
     , _rsChanged    :: !(Maybe Bool)
     , _rsPersisted  :: !(Maybe Bool)
     , _rsRowNumber  :: !(Maybe (Textual Int32))
     , _rsErrors     :: !(Maybe [Text])
     , _rsEntityId   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RowStatus' with the minimum fields required to make a request.
 --
@@ -824,7 +833,7 @@ data RowStatus = RowStatus'
 rowStatus
     :: RowStatus
 rowStatus =
-    RowStatus'
+  RowStatus'
     { _rsEntityName = Nothing
     , _rsChanged = Nothing
     , _rsPersisted = Nothing
@@ -892,10 +901,12 @@ instance ToJSON RowStatus where
 -- | Key used to identify a report.
 --
 -- /See:/ 'reportKey' smart constructor.
-data ReportKey = ReportKey'
+data ReportKey =
+  ReportKey'
     { _rkQueryId  :: !(Maybe (Textual Int64))
     , _rkReportId :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportKey' with the minimum fields required to make a request.
 --
@@ -906,11 +917,7 @@ data ReportKey = ReportKey'
 -- * 'rkReportId'
 reportKey
     :: ReportKey
-reportKey =
-    ReportKey'
-    { _rkQueryId = Nothing
-    , _rkReportId = Nothing
-    }
+reportKey = ReportKey' {_rkQueryId = Nothing, _rkReportId = Nothing}
 
 -- | Query ID.
 rkQueryId :: Lens' ReportKey (Maybe Int64)
@@ -941,10 +948,12 @@ instance ToJSON ReportKey where
 -- | Represents the status of upload.
 --
 -- /See:/ 'uploadStatus' smart constructor.
-data UploadStatus = UploadStatus'
+data UploadStatus =
+  UploadStatus'
     { _usRowStatus :: !(Maybe [RowStatus])
     , _usErrors    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UploadStatus' with the minimum fields required to make a request.
 --
@@ -955,11 +964,7 @@ data UploadStatus = UploadStatus'
 -- * 'usErrors'
 uploadStatus
     :: UploadStatus
-uploadStatus =
-    UploadStatus'
-    { _usRowStatus = Nothing
-    , _usErrors = Nothing
-    }
+uploadStatus = UploadStatus' {_usRowStatus = Nothing, _usErrors = Nothing}
 
 -- | Per-row upload status.
 usRowStatus :: Lens' UploadStatus [RowStatus]
@@ -993,12 +998,14 @@ instance ToJSON UploadStatus where
 -- | Information on how frequently and when to run a query.
 --
 -- /See:/ 'querySchedule' smart constructor.
-data QuerySchedule = QuerySchedule'
+data QuerySchedule =
+  QuerySchedule'
     { _qsFrequency           :: !(Maybe QueryScheduleFrequency)
     , _qsEndTimeMs           :: !(Maybe (Textual Int64))
     , _qsNextRunMinuteOfDay  :: !(Maybe (Textual Int32))
     , _qsNextRunTimezoneCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuerySchedule' with the minimum fields required to make a request.
 --
@@ -1014,7 +1021,7 @@ data QuerySchedule = QuerySchedule'
 querySchedule
     :: QuerySchedule
 querySchedule =
-    QuerySchedule'
+  QuerySchedule'
     { _qsFrequency = Nothing
     , _qsEndTimeMs = Nothing
     , _qsNextRunMinuteOfDay = Nothing
@@ -1070,9 +1077,11 @@ instance ToJSON QuerySchedule where
 -- | Download line items response.
 --
 -- /See:/ 'downloadLineItemsResponse' smart constructor.
-newtype DownloadLineItemsResponse = DownloadLineItemsResponse'
+newtype DownloadLineItemsResponse =
+  DownloadLineItemsResponse'
     { _dlirLineItems :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DownloadLineItemsResponse' with the minimum fields required to make a request.
 --
@@ -1082,9 +1091,7 @@ newtype DownloadLineItemsResponse = DownloadLineItemsResponse'
 downloadLineItemsResponse
     :: DownloadLineItemsResponse
 downloadLineItemsResponse =
-    DownloadLineItemsResponse'
-    { _dlirLineItems = Nothing
-    }
+  DownloadLineItemsResponse' {_dlirLineItems = Nothing}
 
 -- | Retrieved line items in CSV format. For more information about file
 -- formats, see Entity Write File Format.
@@ -1107,13 +1114,15 @@ instance ToJSON DownloadLineItemsResponse where
 -- | Download response.
 --
 -- /See:/ 'downloadResponse' smart constructor.
-data DownloadResponse = DownloadResponse'
+data DownloadResponse =
+  DownloadResponse'
     { _drInsertionOrders :: !(Maybe Text)
     , _drCampaigns       :: !(Maybe Text)
     , _drLineItems       :: !(Maybe Text)
     , _drAdGroups        :: !(Maybe Text)
     , _drAds             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DownloadResponse' with the minimum fields required to make a request.
 --
@@ -1131,7 +1140,7 @@ data DownloadResponse = DownloadResponse'
 downloadResponse
     :: DownloadResponse
 downloadResponse =
-    DownloadResponse'
+  DownloadResponse'
     { _drInsertionOrders = Nothing
     , _drCampaigns = Nothing
     , _drLineItems = Nothing
@@ -1187,12 +1196,14 @@ instance ToJSON DownloadResponse where
 -- | Report status.
 --
 -- /See:/ 'reportStatus' smart constructor.
-data ReportStatus = ReportStatus'
+data ReportStatus =
+  ReportStatus'
     { _rsState        :: !(Maybe ReportStatusState)
     , _rsFinishTimeMs :: !(Maybe (Textual Int64))
     , _rsFormat       :: !(Maybe ReportStatusFormat)
     , _rsFailure      :: !(Maybe ReportFailure)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportStatus' with the minimum fields required to make a request.
 --
@@ -1208,7 +1219,7 @@ data ReportStatus = ReportStatus'
 reportStatus
     :: ReportStatus
 reportStatus =
-    ReportStatus'
+  ReportStatus'
     { _rsState = Nothing
     , _rsFinishTimeMs = Nothing
     , _rsFormat = Nothing
@@ -1256,7 +1267,8 @@ instance ToJSON ReportStatus where
 -- | Represents a query.
 --
 -- /See:/ 'query' smart constructor.
-data Query = Query'
+data Query =
+  Query'
     { _qQueryId               :: !(Maybe (Textual Int64))
     , _qReportDataEndTimeMs   :: !(Maybe (Textual Int64))
     , _qSchedule              :: !(Maybe QuerySchedule)
@@ -1265,7 +1277,8 @@ data Query = Query'
     , _qMetadata              :: !(Maybe QueryMetadata)
     , _qReportDataStartTimeMs :: !(Maybe (Textual Int64))
     , _qTimezoneCode          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Query' with the minimum fields required to make a request.
 --
@@ -1289,7 +1302,7 @@ data Query = Query'
 query
     :: Query
 query =
-    Query'
+  Query'
     { _qQueryId = Nothing
     , _qReportDataEndTimeMs = Nothing
     , _qSchedule = Nothing
@@ -1379,13 +1392,15 @@ instance ToJSON Query where
 -- | Parameters of a query or report.
 --
 -- /See:/ 'parameters' smart constructor.
-data Parameters = Parameters'
+data Parameters =
+  Parameters'
     { _pMetrics           :: !(Maybe [ParametersMetricsItem])
     , _pIncludeInviteData :: !(Maybe Bool)
     , _pFilters           :: !(Maybe [FilterPair])
     , _pGroupBys          :: !(Maybe [ParametersGroupBysItem])
     , _pType              :: !(Maybe ParametersType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Parameters' with the minimum fields required to make a request.
 --
@@ -1403,7 +1418,7 @@ data Parameters = Parameters'
 parameters
     :: Parameters
 parameters =
-    Parameters'
+  Parameters'
     { _pMetrics = Nothing
     , _pIncludeInviteData = Nothing
     , _pFilters = Nothing
@@ -1466,9 +1481,11 @@ instance ToJSON Parameters where
 -- | An explanation of a report failure.
 --
 -- /See:/ 'reportFailure' smart constructor.
-newtype ReportFailure = ReportFailure'
+newtype ReportFailure =
+  ReportFailure'
     { _rfErrorCode :: Maybe ReportFailureErrorCode
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportFailure' with the minimum fields required to make a request.
 --
@@ -1477,10 +1494,7 @@ newtype ReportFailure = ReportFailure'
 -- * 'rfErrorCode'
 reportFailure
     :: ReportFailure
-reportFailure =
-    ReportFailure'
-    { _rfErrorCode = Nothing
-    }
+reportFailure = ReportFailure' {_rfErrorCode = Nothing}
 
 -- | Error code that shows why the report was not created.
 rfErrorCode :: Lens' ReportFailure (Maybe ReportFailureErrorCode)

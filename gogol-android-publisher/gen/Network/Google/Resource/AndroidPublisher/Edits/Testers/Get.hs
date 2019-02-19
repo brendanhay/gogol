@@ -54,11 +54,13 @@ type EditsTestersGetResource =
 
 --
 -- /See:/ 'editsTestersGet' smart constructor.
-data EditsTestersGet = EditsTestersGet'
+data EditsTestersGet =
+  EditsTestersGet'
     { _etgTrack       :: !Text
     , _etgPackageName :: !Text
     , _etgEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsTestersGet' with the minimum fields required to make a request.
 --
@@ -75,7 +77,7 @@ editsTestersGet
     -> Text -- ^ 'etgEditId'
     -> EditsTestersGet
 editsTestersGet pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
-    EditsTestersGet'
+  EditsTestersGet'
     { _etgTrack = pEtgTrack_
     , _etgPackageName = pEtgPackageName_
     , _etgEditId = pEtgEditId_

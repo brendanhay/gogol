@@ -65,7 +65,8 @@ type AccessPoliciesServicePerimetersListResource =
 -- | List all Service Perimeters for an access policy.
 --
 -- /See:/ 'accessPoliciesServicePerimetersList' smart constructor.
-data AccessPoliciesServicePerimetersList = AccessPoliciesServicePerimetersList'
+data AccessPoliciesServicePerimetersList =
+  AccessPoliciesServicePerimetersList'
     { _apsplParent         :: !Text
     , _apsplXgafv          :: !(Maybe Xgafv)
     , _apsplUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data AccessPoliciesServicePerimetersList = AccessPoliciesServicePerimetersList'
     , _apsplPageToken      :: !(Maybe Text)
     , _apsplPageSize       :: !(Maybe (Textual Int32))
     , _apsplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesServicePerimetersList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ accessPoliciesServicePerimetersList
     :: Text -- ^ 'apsplParent'
     -> AccessPoliciesServicePerimetersList
 accessPoliciesServicePerimetersList pApsplParent_ =
-    AccessPoliciesServicePerimetersList'
+  AccessPoliciesServicePerimetersList'
     { _apsplParent = pApsplParent_
     , _apsplXgafv = Nothing
     , _apsplUploadProtocol = Nothing
@@ -160,7 +162,8 @@ apsplCallback
       (\ s a -> s{_apsplCallback = a})
 
 instance GoogleRequest
-         AccessPoliciesServicePerimetersList where
+           AccessPoliciesServicePerimetersList
+         where
         type Rs AccessPoliciesServicePerimetersList =
              ListServicePerimetersResponse
         type Scopes AccessPoliciesServicePerimetersList =

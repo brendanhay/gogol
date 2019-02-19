@@ -54,10 +54,12 @@ type AccountsContainersWorkspacesTriggersRevertResource
 -- | Reverts changes to a GTM Trigger in a GTM Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesTriggersRevert' smart constructor.
-data AccountsContainersWorkspacesTriggersRevert = AccountsContainersWorkspacesTriggersRevert'
+data AccountsContainersWorkspacesTriggersRevert =
+  AccountsContainersWorkspacesTriggersRevert'
     { _acwtrPath        :: !Text
     , _acwtrFingerprint :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersRevert' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ accountsContainersWorkspacesTriggersRevert
     :: Text -- ^ 'acwtrPath'
     -> AccountsContainersWorkspacesTriggersRevert
 accountsContainersWorkspacesTriggersRevert pAcwtrPath_ =
-    AccountsContainersWorkspacesTriggersRevert'
-    { _acwtrPath = pAcwtrPath_
-    , _acwtrFingerprint = Nothing
-    }
+  AccountsContainersWorkspacesTriggersRevert'
+    {_acwtrPath = pAcwtrPath_, _acwtrFingerprint = Nothing}
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}
@@ -89,7 +89,8 @@ acwtrFingerprint
       (\ s a -> s{_acwtrFingerprint = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTriggersRevert where
+           AccountsContainersWorkspacesTriggersRevert
+         where
         type Rs AccountsContainersWorkspacesTriggersRevert =
              RevertTriggerResponse
         type Scopes

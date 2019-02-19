@@ -51,9 +51,11 @@ type SurveysInsertResource =
 -- | Creates a survey.
 --
 -- /See:/ 'surveysInsert' smart constructor.
-newtype SurveysInsert = SurveysInsert'
+newtype SurveysInsert =
+  SurveysInsert'
     { _siPayload :: Survey
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveysInsert' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype SurveysInsert = SurveysInsert'
 surveysInsert
     :: Survey -- ^ 'siPayload'
     -> SurveysInsert
-surveysInsert pSiPayload_ =
-    SurveysInsert'
-    { _siPayload = pSiPayload_
-    }
+surveysInsert pSiPayload_ = SurveysInsert' {_siPayload = pSiPayload_}
 
 -- | Multipart request metadata.
 siPayload :: Lens' SurveysInsert Survey

@@ -54,9 +54,11 @@ type TurnBasedMatchesDismissResource =
 -- show up in the list and will not generate notifications.
 --
 -- /See:/ 'turnBasedMatchesDismiss' smart constructor.
-newtype TurnBasedMatchesDismiss = TurnBasedMatchesDismiss'
+newtype TurnBasedMatchesDismiss =
+  TurnBasedMatchesDismiss'
     { _tMatchId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesDismiss' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ turnBasedMatchesDismiss
     :: Text -- ^ 'tMatchId'
     -> TurnBasedMatchesDismiss
 turnBasedMatchesDismiss pTMatchId_ =
-    TurnBasedMatchesDismiss'
-    { _tMatchId = pTMatchId_
-    }
+  TurnBasedMatchesDismiss' {_tMatchId = pTMatchId_}
 
 -- | The ID of the match.
 tMatchId :: Lens' TurnBasedMatchesDismiss Text

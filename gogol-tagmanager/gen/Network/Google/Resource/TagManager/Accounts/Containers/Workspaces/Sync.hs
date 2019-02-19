@@ -55,9 +55,11 @@ type AccountsContainersWorkspacesSyncResource =
 -- entities.
 --
 -- /See:/ 'accountsContainersWorkspacesSync' smart constructor.
-newtype AccountsContainersWorkspacesSync = AccountsContainersWorkspacesSync'
+newtype AccountsContainersWorkspacesSync =
+  AccountsContainersWorkspacesSync'
     { _acwsPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesSync' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ accountsContainersWorkspacesSync
     :: Text -- ^ 'acwsPath'
     -> AccountsContainersWorkspacesSync
 accountsContainersWorkspacesSync pAcwsPath_ =
-    AccountsContainersWorkspacesSync'
-    { _acwsPath = pAcwsPath_
-    }
+  AccountsContainersWorkspacesSync' {_acwsPath = pAcwsPath_}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -78,7 +78,8 @@ acwsPath :: Lens' AccountsContainersWorkspacesSync Text
 acwsPath = lens _acwsPath (\ s a -> s{_acwsPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesSync where
+           AccountsContainersWorkspacesSync
+         where
         type Rs AccountsContainersWorkspacesSync =
              SyncWorkspaceResponse
         type Scopes AccountsContainersWorkspacesSync =

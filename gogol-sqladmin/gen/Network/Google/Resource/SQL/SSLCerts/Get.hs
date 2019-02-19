@@ -61,11 +61,13 @@ type SSLCertsGetResource =
 -- initial creation.
 --
 -- /See:/ 'sslCertsGet' smart constructor.
-data SSLCertsGet = SSLCertsGet'
+data SSLCertsGet =
+  SSLCertsGet'
     { _scgProject         :: !Text
     , _scgSha1Fingerprint :: !Text
     , _scgInstance        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLCertsGet' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ sslCertsGet
     -> Text -- ^ 'scgInstance'
     -> SSLCertsGet
 sslCertsGet pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
-    SSLCertsGet'
+  SSLCertsGet'
     { _scgProject = pScgProject_
     , _scgSha1Fingerprint = pScgSha1Fingerprint_
     , _scgInstance = pScgInstance_

@@ -84,7 +84,8 @@ type ServicesTenancyUnitsApplyProjectConfigResource =
 -- Operation.
 --
 -- /See:/ 'servicesTenancyUnitsApplyProjectConfig' smart constructor.
-data ServicesTenancyUnitsApplyProjectConfig = ServicesTenancyUnitsApplyProjectConfig'
+data ServicesTenancyUnitsApplyProjectConfig =
+  ServicesTenancyUnitsApplyProjectConfig'
     { _stuapcXgafv          :: !(Maybe Xgafv)
     , _stuapcUploadProtocol :: !(Maybe Text)
     , _stuapcAccessToken    :: !(Maybe Text)
@@ -92,7 +93,8 @@ data ServicesTenancyUnitsApplyProjectConfig = ServicesTenancyUnitsApplyProjectCo
     , _stuapcPayload        :: !ApplyTenantProjectConfigRequest
     , _stuapcName           :: !Text
     , _stuapcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesTenancyUnitsApplyProjectConfig' with the minimum fields required to make a request.
 --
@@ -116,7 +118,7 @@ servicesTenancyUnitsApplyProjectConfig
     -> Text -- ^ 'stuapcName'
     -> ServicesTenancyUnitsApplyProjectConfig
 servicesTenancyUnitsApplyProjectConfig pStuapcPayload_ pStuapcName_ =
-    ServicesTenancyUnitsApplyProjectConfig'
+  ServicesTenancyUnitsApplyProjectConfig'
     { _stuapcXgafv = Nothing
     , _stuapcUploadProtocol = Nothing
     , _stuapcAccessToken = Nothing
@@ -167,7 +169,8 @@ stuapcCallback
       (\ s a -> s{_stuapcCallback = a})
 
 instance GoogleRequest
-         ServicesTenancyUnitsApplyProjectConfig where
+           ServicesTenancyUnitsApplyProjectConfig
+         where
         type Rs ServicesTenancyUnitsApplyProjectConfig =
              Operation
         type Scopes ServicesTenancyUnitsApplyProjectConfig =

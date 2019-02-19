@@ -55,10 +55,12 @@ type GroupsAliasesInsertResource =
 -- | Add a alias for the group
 --
 -- /See:/ 'groupsAliasesInsert' smart constructor.
-data GroupsAliasesInsert = GroupsAliasesInsert'
+data GroupsAliasesInsert =
+  GroupsAliasesInsert'
     { _gaiGroupKey :: !Text
     , _gaiPayload  :: !Alias
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsAliasesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ groupsAliasesInsert
     -> Alias -- ^ 'gaiPayload'
     -> GroupsAliasesInsert
 groupsAliasesInsert pGaiGroupKey_ pGaiPayload_ =
-    GroupsAliasesInsert'
-    { _gaiGroupKey = pGaiGroupKey_
-    , _gaiPayload = pGaiPayload_
-    }
+  GroupsAliasesInsert'
+    {_gaiGroupKey = pGaiGroupKey_, _gaiPayload = pGaiPayload_}
 
 -- | Email or immutable ID of the group
 gaiGroupKey :: Lens' GroupsAliasesInsert Text

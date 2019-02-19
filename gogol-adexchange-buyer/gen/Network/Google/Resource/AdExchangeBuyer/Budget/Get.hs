@@ -55,10 +55,12 @@ type BudgetGetResource =
 -- accountId and billingId.
 --
 -- /See:/ 'budgetGet' smart constructor.
-data BudgetGet = BudgetGet'
+data BudgetGet =
+  BudgetGet'
     { _bgAccountId :: !(Textual Int64)
     , _bgBillingId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BudgetGet' with the minimum fields required to make a request.
 --
@@ -72,7 +74,7 @@ budgetGet
     -> Int64 -- ^ 'bgBillingId'
     -> BudgetGet
 budgetGet pBgAccountId_ pBgBillingId_ =
-    BudgetGet'
+  BudgetGet'
     { _bgAccountId = _Coerce # pBgAccountId_
     , _bgBillingId = _Coerce # pBgBillingId_
     }

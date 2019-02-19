@@ -68,7 +68,8 @@ type UsersImportSSHPublicKeyResource =
 -- of the login profile.
 --
 -- /See:/ 'usersImportSSHPublicKey' smart constructor.
-data UsersImportSSHPublicKey = UsersImportSSHPublicKey'
+data UsersImportSSHPublicKey =
+  UsersImportSSHPublicKey'
     { _uispkParent         :: !Text
     , _uispkXgafv          :: !(Maybe Xgafv)
     , _uispkUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data UsersImportSSHPublicKey = UsersImportSSHPublicKey'
     , _uispkPayload        :: !SSHPublicKey
     , _uispkProjectId      :: !(Maybe Text)
     , _uispkCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersImportSSHPublicKey' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ usersImportSSHPublicKey
     -> SSHPublicKey -- ^ 'uispkPayload'
     -> UsersImportSSHPublicKey
 usersImportSSHPublicKey pUispkParent_ pUispkPayload_ =
-    UsersImportSSHPublicKey'
+  UsersImportSSHPublicKey'
     { _uispkParent = pUispkParent_
     , _uispkXgafv = Nothing
     , _uispkUploadProtocol = Nothing

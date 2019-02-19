@@ -61,11 +61,13 @@ type DeploymentsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'deploymentsSetIAMPolicy' smart constructor.
-data DeploymentsSetIAMPolicy = DeploymentsSetIAMPolicy'
+data DeploymentsSetIAMPolicy =
+  DeploymentsSetIAMPolicy'
     { _dsipProject  :: !Text
     , _dsipPayload  :: !GlobalSetPolicyRequest
     , _dsipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeploymentsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ deploymentsSetIAMPolicy
     -> Text -- ^ 'dsipResource'
     -> DeploymentsSetIAMPolicy
 deploymentsSetIAMPolicy pDsipProject_ pDsipPayload_ pDsipResource_ =
-    DeploymentsSetIAMPolicy'
+  DeploymentsSetIAMPolicy'
     { _dsipProject = pDsipProject_
     , _dsipPayload = pDsipPayload_
     , _dsipResource = pDsipResource_

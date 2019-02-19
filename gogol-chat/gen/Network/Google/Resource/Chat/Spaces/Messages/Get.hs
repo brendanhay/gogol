@@ -59,14 +59,16 @@ type SpacesMessagesGetResource =
 -- | Returns a message.
 --
 -- /See:/ 'spacesMessagesGet' smart constructor.
-data SpacesMessagesGet = SpacesMessagesGet'
+data SpacesMessagesGet =
+  SpacesMessagesGet'
     { _smgXgafv          :: !(Maybe Xgafv)
     , _smgUploadProtocol :: !(Maybe Text)
     , _smgAccessToken    :: !(Maybe Text)
     , _smgUploadType     :: !(Maybe Text)
     , _smgName           :: !Text
     , _smgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpacesMessagesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ spacesMessagesGet
     :: Text -- ^ 'smgName'
     -> SpacesMessagesGet
 spacesMessagesGet pSmgName_ =
-    SpacesMessagesGet'
+  SpacesMessagesGet'
     { _smgXgafv = Nothing
     , _smgUploadProtocol = Nothing
     , _smgAccessToken = Nothing

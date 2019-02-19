@@ -60,11 +60,13 @@ type ChromeosDevicesGetResource =
 -- | Retrieve Chrome OS Device
 --
 -- /See:/ 'chromeosDevicesGet' smart constructor.
-data ChromeosDevicesGet = ChromeosDevicesGet'
+data ChromeosDevicesGet =
+  ChromeosDevicesGet'
     { _cdgCustomerId :: !Text
     , _cdgDeviceId   :: !Text
     , _cdgProjection :: !(Maybe ChromeosDevicesGetProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChromeosDevicesGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ chromeosDevicesGet
     -> Text -- ^ 'cdgDeviceId'
     -> ChromeosDevicesGet
 chromeosDevicesGet pCdgCustomerId_ pCdgDeviceId_ =
-    ChromeosDevicesGet'
+  ChromeosDevicesGet'
     { _cdgCustomerId = pCdgCustomerId_
     , _cdgDeviceId = pCdgDeviceId_
     , _cdgProjection = Nothing

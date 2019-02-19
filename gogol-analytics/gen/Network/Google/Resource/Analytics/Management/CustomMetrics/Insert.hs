@@ -59,11 +59,13 @@ type ManagementCustomMetricsInsertResource =
 -- | Create a new custom metric.
 --
 -- /See:/ 'managementCustomMetricsInsert' smart constructor.
-data ManagementCustomMetricsInsert = ManagementCustomMetricsInsert'
+data ManagementCustomMetricsInsert =
+  ManagementCustomMetricsInsert'
     { _mcmiWebPropertyId :: !Text
     , _mcmiPayload       :: !CustomMetric
     , _mcmiAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ managementCustomMetricsInsert
     -> Text -- ^ 'mcmiAccountId'
     -> ManagementCustomMetricsInsert
 managementCustomMetricsInsert pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ =
-    ManagementCustomMetricsInsert'
+  ManagementCustomMetricsInsert'
     { _mcmiWebPropertyId = pMcmiWebPropertyId_
     , _mcmiPayload = pMcmiPayload_
     , _mcmiAccountId = pMcmiAccountId_

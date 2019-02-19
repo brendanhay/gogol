@@ -55,11 +55,13 @@ type AccountsUpdateResource =
 -- | Updates a Merchant Center account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate'
+data AccountsUpdate =
+  AccountsUpdate'
     { _auuMerchantId :: !(Textual Word64)
     , _auuPayload    :: !Account
     , _auuAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ accountsUpdate
     -> Word64 -- ^ 'auuAccountId'
     -> AccountsUpdate
 accountsUpdate pAuuMerchantId_ pAuuPayload_ pAuuAccountId_ =
-    AccountsUpdate'
+  AccountsUpdate'
     { _auuMerchantId = _Coerce # pAuuMerchantId_
     , _auuPayload = pAuuPayload_
     , _auuAccountId = _Coerce # pAuuAccountId_

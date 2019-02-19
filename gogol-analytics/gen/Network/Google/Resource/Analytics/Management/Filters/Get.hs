@@ -55,10 +55,12 @@ type ManagementFiltersGetResource =
 -- | Returns a filters to which the user has access.
 --
 -- /See:/ 'managementFiltersGet' smart constructor.
-data ManagementFiltersGet = ManagementFiltersGet'
+data ManagementFiltersGet =
+  ManagementFiltersGet'
     { _mfgFilterId  :: !Text
     , _mfgAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementFiltersGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ managementFiltersGet
     -> Text -- ^ 'mfgAccountId'
     -> ManagementFiltersGet
 managementFiltersGet pMfgFilterId_ pMfgAccountId_ =
-    ManagementFiltersGet'
-    { _mfgFilterId = pMfgFilterId_
-    , _mfgAccountId = pMfgAccountId_
-    }
+  ManagementFiltersGet'
+    {_mfgFilterId = pMfgFilterId_, _mfgAccountId = pMfgAccountId_}
 
 -- | Filter ID to retrieve filters for.
 mfgFilterId :: Lens' ManagementFiltersGet Text

@@ -61,13 +61,15 @@ type EditsImagesDeleteResource =
 -- | Deletes the image (specified by id) from the edit.
 --
 -- /See:/ 'editsImagesDelete' smart constructor.
-data EditsImagesDelete = EditsImagesDelete'
+data EditsImagesDelete =
+  EditsImagesDelete'
     { _eidPackageName :: !Text
     , _eidImageType   :: !EditsImagesDeleteImageType
     , _eidImageId     :: !Text
     , _eidLanguage    :: !Text
     , _eidEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsImagesDelete' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ editsImagesDelete
     -> Text -- ^ 'eidEditId'
     -> EditsImagesDelete
 editsImagesDelete pEidPackageName_ pEidImageType_ pEidImageId_ pEidLanguage_ pEidEditId_ =
-    EditsImagesDelete'
+  EditsImagesDelete'
     { _eidPackageName = pEidPackageName_
     , _eidImageType = pEidImageType_
     , _eidImageId = pEidImageId_

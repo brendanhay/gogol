@@ -55,10 +55,12 @@ type AccountsContainersWorkspacesTriggersListResource
 -- | Lists all GTM Triggers of a Container.
 --
 -- /See:/ 'accountsContainersWorkspacesTriggersList' smart constructor.
-data AccountsContainersWorkspacesTriggersList = AccountsContainersWorkspacesTriggersList'
+data AccountsContainersWorkspacesTriggersList =
+  AccountsContainersWorkspacesTriggersList'
     { _acwtlcParent    :: !Text
     , _acwtlcPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersList' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsContainersWorkspacesTriggersList
     :: Text -- ^ 'acwtlcParent'
     -> AccountsContainersWorkspacesTriggersList
 accountsContainersWorkspacesTriggersList pAcwtlcParent_ =
-    AccountsContainersWorkspacesTriggersList'
-    { _acwtlcParent = pAcwtlcParent_
-    , _acwtlcPageToken = Nothing
-    }
+  AccountsContainersWorkspacesTriggersList'
+    {_acwtlcParent = pAcwtlcParent_, _acwtlcPageToken = Nothing}
 
 -- | GTM Workspaces\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -89,7 +89,8 @@ acwtlcPageToken
       (\ s a -> s{_acwtlcPageToken = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTriggersList where
+           AccountsContainersWorkspacesTriggersList
+         where
         type Rs AccountsContainersWorkspacesTriggersList =
              ListTriggersResponse
         type Scopes AccountsContainersWorkspacesTriggersList

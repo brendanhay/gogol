@@ -66,13 +66,15 @@ type ManagementProFileFilterLinksPatchResource =
 -- semantics.
 --
 -- /See:/ 'managementProFileFilterLinksPatch' smart constructor.
-data ManagementProFileFilterLinksPatch = ManagementProFileFilterLinksPatch'
+data ManagementProFileFilterLinksPatch =
+  ManagementProFileFilterLinksPatch'
     { _mpfflpWebPropertyId :: !Text
     , _mpfflpProFileId     :: !Text
     , _mpfflpPayload       :: !ProFileFilterLink
     , _mpfflpAccountId     :: !Text
     , _mpfflpLinkId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksPatch' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ managementProFileFilterLinksPatch
     -> Text -- ^ 'mpfflpLinkId'
     -> ManagementProFileFilterLinksPatch
 managementProFileFilterLinksPatch pMpfflpWebPropertyId_ pMpfflpProFileId_ pMpfflpPayload_ pMpfflpAccountId_ pMpfflpLinkId_ =
-    ManagementProFileFilterLinksPatch'
+  ManagementProFileFilterLinksPatch'
     { _mpfflpWebPropertyId = pMpfflpWebPropertyId_
     , _mpfflpProFileId = pMpfflpProFileId_
     , _mpfflpPayload = pMpfflpPayload_
@@ -133,7 +135,8 @@ mpfflpLinkId
   = lens _mpfflpLinkId (\ s a -> s{_mpfflpLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileFilterLinksPatch where
+           ManagementProFileFilterLinksPatch
+         where
         type Rs ManagementProFileFilterLinksPatch =
              ProFileFilterLink
         type Scopes ManagementProFileFilterLinksPatch =

@@ -59,12 +59,14 @@ type PostsSearchResource =
 -- | Search for a post.
 --
 -- /See:/ 'postsSearch' smart constructor.
-data PostsSearch = PostsSearch'
+data PostsSearch =
+  PostsSearch'
     { _psOrderBy     :: !PostsSearchOrderBy
     , _psBlogId      :: !Text
     , _psQ           :: !Text
     , _psFetchBodies :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostsSearch' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ postsSearch
     -> Text -- ^ 'psQ'
     -> PostsSearch
 postsSearch pPsBlogId_ pPsQ_ =
-    PostsSearch'
+  PostsSearch'
     { _psOrderBy = PSOBPublished
     , _psBlogId = pPsBlogId_
     , _psQ = pPsQ_

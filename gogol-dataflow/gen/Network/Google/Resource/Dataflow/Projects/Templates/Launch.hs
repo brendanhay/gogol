@@ -74,7 +74,8 @@ type ProjectsTemplatesLaunchResource =
 -- | Launch a template.
 --
 -- /See:/ 'projectsTemplatesLaunch' smart constructor.
-data ProjectsTemplatesLaunch = ProjectsTemplatesLaunch'
+data ProjectsTemplatesLaunch =
+  ProjectsTemplatesLaunch'
     { _ptlXgafv                          :: !(Maybe Xgafv)
     , _ptlValidateOnly                   :: !(Maybe Bool)
     , _ptlUploadProtocol                 :: !(Maybe Text)
@@ -87,7 +88,8 @@ data ProjectsTemplatesLaunch = ProjectsTemplatesLaunch'
     , _ptlProjectId                      :: !Text
     , _ptlCallback                       :: !(Maybe Text)
     , _ptlDynamicTemplateGcsPath         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTemplatesLaunch' with the minimum fields required to make a request.
 --
@@ -121,7 +123,7 @@ projectsTemplatesLaunch
     -> Text -- ^ 'ptlProjectId'
     -> ProjectsTemplatesLaunch
 projectsTemplatesLaunch pPtlPayload_ pPtlProjectId_ =
-    ProjectsTemplatesLaunch'
+  ProjectsTemplatesLaunch'
     { _ptlXgafv = Nothing
     , _ptlValidateOnly = Nothing
     , _ptlUploadProtocol = Nothing

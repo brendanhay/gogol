@@ -55,10 +55,12 @@ type MarketplaceNotesListResource =
 -- | Get all the notes associated with a proposal
 --
 -- /See:/ 'marketplaceNotesList' smart constructor.
-data MarketplaceNotesList = MarketplaceNotesList'
+data MarketplaceNotesList =
+  MarketplaceNotesList'
     { _mnlProposalId :: !Text
     , _mnlPqlQuery   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MarketplaceNotesList' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ marketplaceNotesList
     :: Text -- ^ 'mnlProposalId'
     -> MarketplaceNotesList
 marketplaceNotesList pMnlProposalId_ =
-    MarketplaceNotesList'
-    { _mnlProposalId = pMnlProposalId_
-    , _mnlPqlQuery = Nothing
-    }
+  MarketplaceNotesList'
+    {_mnlProposalId = pMnlProposalId_, _mnlPqlQuery = Nothing}
 
 -- | The proposalId to get notes for. To search across all proposals specify
 -- order_id = \'-\' as part of the URL.

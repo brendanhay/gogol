@@ -62,13 +62,15 @@ type VPNTunnelsAggregatedListResource =
 -- | Retrieves an aggregated list of VPN tunnels.
 --
 -- /See:/ 'vpnTunnelsAggregatedList' smart constructor.
-data VPNTunnelsAggregatedList = VPNTunnelsAggregatedList'
+data VPNTunnelsAggregatedList =
+  VPNTunnelsAggregatedList'
     { _vtalOrderBy    :: !(Maybe Text)
     , _vtalProject    :: !Text
     , _vtalFilter     :: !(Maybe Text)
     , _vtalPageToken  :: !(Maybe Text)
     , _vtalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelsAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ vpnTunnelsAggregatedList
     :: Text -- ^ 'vtalProject'
     -> VPNTunnelsAggregatedList
 vpnTunnelsAggregatedList pVtalProject_ =
-    VPNTunnelsAggregatedList'
+  VPNTunnelsAggregatedList'
     { _vtalOrderBy = Nothing
     , _vtalProject = pVtalProject_
     , _vtalFilter = Nothing

@@ -59,14 +59,16 @@ type ProjectsScanConfigsGetResource =
 -- | Gets the specified scan configuration.
 --
 -- /See:/ 'projectsScanConfigsGet' smart constructor.
-data ProjectsScanConfigsGet = ProjectsScanConfigsGet'
+data ProjectsScanConfigsGet =
+  ProjectsScanConfigsGet'
     { _pscgXgafv          :: !(Maybe Xgafv)
     , _pscgUploadProtocol :: !(Maybe Text)
     , _pscgAccessToken    :: !(Maybe Text)
     , _pscgUploadType     :: !(Maybe Text)
     , _pscgName           :: !Text
     , _pscgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsScanConfigsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsScanConfigsGet
     :: Text -- ^ 'pscgName'
     -> ProjectsScanConfigsGet
 projectsScanConfigsGet pPscgName_ =
-    ProjectsScanConfigsGet'
+  ProjectsScanConfigsGet'
     { _pscgXgafv = Nothing
     , _pscgUploadProtocol = Nothing
     , _pscgAccessToken = Nothing

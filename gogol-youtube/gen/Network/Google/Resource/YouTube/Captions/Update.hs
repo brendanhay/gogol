@@ -76,13 +76,15 @@ type CaptionsUpdateResource =
 -- both.
 --
 -- /See:/ 'captionsUpdate' smart constructor.
-data CaptionsUpdate = CaptionsUpdate'
+data CaptionsUpdate =
+  CaptionsUpdate'
     { _capOnBehalfOf             :: !(Maybe Text)
     , _capPart                   :: !Text
     , _capPayload                :: !Caption
     , _capOnBehalfOfContentOwner :: !(Maybe Text)
     , _capSync                   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CaptionsUpdate' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ captionsUpdate
     -> Caption -- ^ 'capPayload'
     -> CaptionsUpdate
 captionsUpdate pCapPart_ pCapPayload_ =
-    CaptionsUpdate'
+  CaptionsUpdate'
     { _capOnBehalfOf = Nothing
     , _capPart = pCapPart_
     , _capPayload = pCapPayload_

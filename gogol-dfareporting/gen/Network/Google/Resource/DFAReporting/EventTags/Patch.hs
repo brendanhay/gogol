@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'EventTagsPatch' request conforms to.
 type EventTagsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -56,11 +56,13 @@ type EventTagsPatchResource =
 -- | Updates an existing event tag. This method supports patch semantics.
 --
 -- /See:/ 'eventTagsPatch' smart constructor.
-data EventTagsPatch = EventTagsPatch'
+data EventTagsPatch =
+  EventTagsPatch'
     { _etpProFileId :: !(Textual Int64)
     , _etpPayload   :: !EventTag
     , _etpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventTagsPatch' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ eventTagsPatch
     -> Int64 -- ^ 'etpId'
     -> EventTagsPatch
 eventTagsPatch pEtpProFileId_ pEtpPayload_ pEtpId_ =
-    EventTagsPatch'
+  EventTagsPatch'
     { _etpProFileId = _Coerce # pEtpProFileId_
     , _etpPayload = pEtpPayload_
     , _etpId = _Coerce # pEtpId_

@@ -61,11 +61,13 @@ type SubscriptionsChangeRenewalSettingsResource =
 -- accounts with annual commitment plans only.
 --
 -- /See:/ 'subscriptionsChangeRenewalSettings' smart constructor.
-data SubscriptionsChangeRenewalSettings = SubscriptionsChangeRenewalSettings'
+data SubscriptionsChangeRenewalSettings =
+  SubscriptionsChangeRenewalSettings'
     { _scrsPayload        :: !RenewalSettings
     , _scrsCustomerId     :: !Text
     , _scrsSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionsChangeRenewalSettings' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ subscriptionsChangeRenewalSettings
     -> Text -- ^ 'scrsSubscriptionId'
     -> SubscriptionsChangeRenewalSettings
 subscriptionsChangeRenewalSettings pScrsPayload_ pScrsCustomerId_ pScrsSubscriptionId_ =
-    SubscriptionsChangeRenewalSettings'
+  SubscriptionsChangeRenewalSettings'
     { _scrsPayload = pScrsPayload_
     , _scrsCustomerId = pScrsCustomerId_
     , _scrsSubscriptionId = pScrsSubscriptionId_
@@ -113,7 +115,8 @@ scrsSubscriptionId
       (\ s a -> s{_scrsSubscriptionId = a})
 
 instance GoogleRequest
-         SubscriptionsChangeRenewalSettings where
+           SubscriptionsChangeRenewalSettings
+         where
         type Rs SubscriptionsChangeRenewalSettings =
              Subscription
         type Scopes SubscriptionsChangeRenewalSettings =

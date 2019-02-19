@@ -55,9 +55,11 @@ type ShippingSettingsCustombatchResource =
 -- single request.
 --
 -- /See:/ 'shippingSettingsCustombatch' smart constructor.
-newtype ShippingSettingsCustombatch = ShippingSettingsCustombatch'
+newtype ShippingSettingsCustombatch =
+  ShippingSettingsCustombatch'
     { _sscPayload :: ShippingSettingsCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShippingSettingsCustombatch' with the minimum fields required to make a request.
 --
@@ -68,9 +70,7 @@ shippingSettingsCustombatch
     :: ShippingSettingsCustomBatchRequest -- ^ 'sscPayload'
     -> ShippingSettingsCustombatch
 shippingSettingsCustombatch pSscPayload_ =
-    ShippingSettingsCustombatch'
-    { _sscPayload = pSscPayload_
-    }
+  ShippingSettingsCustombatch' {_sscPayload = pSscPayload_}
 
 -- | Multipart request metadata.
 sscPayload :: Lens' ShippingSettingsCustombatch ShippingSettingsCustomBatchRequest

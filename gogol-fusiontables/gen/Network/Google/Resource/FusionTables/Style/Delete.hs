@@ -54,10 +54,12 @@ type StyleDeleteResource =
 -- | Deletes a style.
 --
 -- /See:/ 'styleDelete' smart constructor.
-data StyleDelete = StyleDelete'
+data StyleDelete =
+  StyleDelete'
     { _sdStyleId :: !(Textual Int32)
     , _sdTableId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StyleDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ styleDelete
     -> Text -- ^ 'sdTableId'
     -> StyleDelete
 styleDelete pSdStyleId_ pSdTableId_ =
-    StyleDelete'
-    { _sdStyleId = _Coerce # pSdStyleId_
-    , _sdTableId = pSdTableId_
-    }
+  StyleDelete' {_sdStyleId = _Coerce # pSdStyleId_, _sdTableId = pSdTableId_}
 
 -- | Identifier (within a table) for the style being deleted
 sdStyleId :: Lens' StyleDelete Int32

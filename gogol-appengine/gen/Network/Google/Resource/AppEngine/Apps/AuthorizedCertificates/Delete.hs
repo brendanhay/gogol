@@ -63,7 +63,8 @@ type AppsAuthorizedCertificatesDeleteResource =
 -- | Deletes the specified SSL certificate.
 --
 -- /See:/ 'appsAuthorizedCertificatesDelete' smart constructor.
-data AppsAuthorizedCertificatesDelete = AppsAuthorizedCertificatesDelete'
+data AppsAuthorizedCertificatesDelete =
+  AppsAuthorizedCertificatesDelete'
     { _aacdAuthorizedCertificatesId :: !Text
     , _aacdXgafv                    :: !(Maybe Xgafv)
     , _aacdUploadProtocol           :: !(Maybe Text)
@@ -71,7 +72,8 @@ data AppsAuthorizedCertificatesDelete = AppsAuthorizedCertificatesDelete'
     , _aacdUploadType               :: !(Maybe Text)
     , _aacdAppsId                   :: !Text
     , _aacdCallback                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsAuthorizedCertificatesDelete' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ appsAuthorizedCertificatesDelete
     -> Text -- ^ 'aacdAppsId'
     -> AppsAuthorizedCertificatesDelete
 appsAuthorizedCertificatesDelete pAacdAuthorizedCertificatesId_ pAacdAppsId_ =
-    AppsAuthorizedCertificatesDelete'
+  AppsAuthorizedCertificatesDelete'
     { _aacdAuthorizedCertificatesId = pAacdAuthorizedCertificatesId_
     , _aacdXgafv = Nothing
     , _aacdUploadProtocol = Nothing
@@ -146,7 +148,8 @@ aacdCallback
   = lens _aacdCallback (\ s a -> s{_aacdCallback = a})
 
 instance GoogleRequest
-         AppsAuthorizedCertificatesDelete where
+           AppsAuthorizedCertificatesDelete
+         where
         type Rs AppsAuthorizedCertificatesDelete = Empty
         type Scopes AppsAuthorizedCertificatesDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]

@@ -77,7 +77,8 @@ type PhotosBatchGetResource =
 -- can occur per photo.
 --
 -- /See:/ 'photosBatchGet' smart constructor.
-data PhotosBatchGet = PhotosBatchGet'
+data PhotosBatchGet =
+  PhotosBatchGet'
     { _pbgXgafv          :: !(Maybe Xgafv)
     , _pbgLanguageCode   :: !(Maybe Text)
     , _pbgUploadProtocol :: !(Maybe Text)
@@ -86,7 +87,8 @@ data PhotosBatchGet = PhotosBatchGet'
     , _pbgPhotoIds       :: !(Maybe [Text])
     , _pbgView           :: !(Maybe Text)
     , _pbgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PhotosBatchGet' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ data PhotosBatchGet = PhotosBatchGet'
 photosBatchGet
     :: PhotosBatchGet
 photosBatchGet =
-    PhotosBatchGet'
+  PhotosBatchGet'
     { _pbgXgafv = Nothing
     , _pbgLanguageCode = Nothing
     , _pbgUploadProtocol = Nothing

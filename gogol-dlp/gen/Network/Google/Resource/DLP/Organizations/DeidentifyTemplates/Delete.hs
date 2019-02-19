@@ -64,14 +64,16 @@ type OrganizationsDeidentifyTemplatesDeleteResource =
 -- more.
 --
 -- /See:/ 'organizationsDeidentifyTemplatesDelete' smart constructor.
-data OrganizationsDeidentifyTemplatesDelete = OrganizationsDeidentifyTemplatesDelete'
+data OrganizationsDeidentifyTemplatesDelete =
+  OrganizationsDeidentifyTemplatesDelete'
     { _odtdXgafv          :: !(Maybe Xgafv)
     , _odtdUploadProtocol :: !(Maybe Text)
     , _odtdAccessToken    :: !(Maybe Text)
     , _odtdUploadType     :: !(Maybe Text)
     , _odtdName           :: !Text
     , _odtdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsDeidentifyTemplatesDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ organizationsDeidentifyTemplatesDelete
     :: Text -- ^ 'odtdName'
     -> OrganizationsDeidentifyTemplatesDelete
 organizationsDeidentifyTemplatesDelete pOdtdName_ =
-    OrganizationsDeidentifyTemplatesDelete'
+  OrganizationsDeidentifyTemplatesDelete'
     { _odtdXgafv = Nothing
     , _odtdUploadProtocol = Nothing
     , _odtdAccessToken = Nothing
@@ -136,7 +138,8 @@ odtdCallback
   = lens _odtdCallback (\ s a -> s{_odtdCallback = a})
 
 instance GoogleRequest
-         OrganizationsDeidentifyTemplatesDelete where
+           OrganizationsDeidentifyTemplatesDelete
+         where
         type Rs OrganizationsDeidentifyTemplatesDelete =
              GoogleProtobufEmpty
         type Scopes OrganizationsDeidentifyTemplatesDelete =

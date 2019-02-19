@@ -63,12 +63,14 @@ type DisksSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'disksSetIAMPolicy' smart constructor.
-data DisksSetIAMPolicy = DisksSetIAMPolicy'
+data DisksSetIAMPolicy =
+  DisksSetIAMPolicy'
     { _dsipProject  :: !Text
     , _dsipZone     :: !Text
     , _dsipPayload  :: !ZoneSetPolicyRequest
     , _dsipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisksSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ disksSetIAMPolicy
     -> Text -- ^ 'dsipResource'
     -> DisksSetIAMPolicy
 disksSetIAMPolicy pDsipProject_ pDsipZone_ pDsipPayload_ pDsipResource_ =
-    DisksSetIAMPolicy'
+  DisksSetIAMPolicy'
     { _dsipProject = pDsipProject_
     , _dsipZone = pDsipZone_
     , _dsipPayload = pDsipPayload_

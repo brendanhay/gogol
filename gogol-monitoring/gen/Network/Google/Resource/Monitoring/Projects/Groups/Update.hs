@@ -65,7 +65,8 @@ type ProjectsGroupsUpdateResource =
 -- name.
 --
 -- /See:/ 'projectsGroupsUpdate' smart constructor.
-data ProjectsGroupsUpdate = ProjectsGroupsUpdate'
+data ProjectsGroupsUpdate =
+  ProjectsGroupsUpdate'
     { _pguXgafv          :: !(Maybe Xgafv)
     , _pguValidateOnly   :: !(Maybe Bool)
     , _pguUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsGroupsUpdate = ProjectsGroupsUpdate'
     , _pguPayload        :: !Group
     , _pguName           :: !Text
     , _pguCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGroupsUpdate' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsGroupsUpdate
     -> Text -- ^ 'pguName'
     -> ProjectsGroupsUpdate
 projectsGroupsUpdate pPguPayload_ pPguName_ =
-    ProjectsGroupsUpdate'
+  ProjectsGroupsUpdate'
     { _pguXgafv = Nothing
     , _pguValidateOnly = Nothing
     , _pguUploadProtocol = Nothing

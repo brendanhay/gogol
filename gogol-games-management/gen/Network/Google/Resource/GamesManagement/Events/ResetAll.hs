@@ -54,8 +54,8 @@ type EventsResetAllResource =
 --
 -- /See:/ 'eventsResetAll' smart constructor.
 data EventsResetAll =
-    EventsResetAll'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  EventsResetAll'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventsResetAll' with the minimum fields required to make a request.
 --

@@ -61,12 +61,14 @@ type ManagementUploadsGetResource =
 -- | List uploads to which the user has access.
 --
 -- /See:/ 'managementUploadsGet' smart constructor.
-data ManagementUploadsGet = ManagementUploadsGet'
+data ManagementUploadsGet =
+  ManagementUploadsGet'
     { _mugWebPropertyId      :: !Text
     , _mugCustomDataSourceId :: !Text
     , _mugAccountId          :: !Text
     , _mugUploadId           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementUploadsGet' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ managementUploadsGet
     -> Text -- ^ 'mugUploadId'
     -> ManagementUploadsGet
 managementUploadsGet pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ =
-    ManagementUploadsGet'
+  ManagementUploadsGet'
     { _mugWebPropertyId = pMugWebPropertyId_
     , _mugCustomDataSourceId = pMugCustomDataSourceId_
     , _mugAccountId = pMugAccountId_

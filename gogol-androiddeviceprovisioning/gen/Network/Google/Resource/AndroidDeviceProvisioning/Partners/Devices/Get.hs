@@ -59,14 +59,16 @@ type PartnersDevicesGetResource =
 -- | Gets a device.
 --
 -- /See:/ 'partnersDevicesGet' smart constructor.
-data PartnersDevicesGet = PartnersDevicesGet'
+data PartnersDevicesGet =
+  PartnersDevicesGet'
     { _pdgXgafv          :: !(Maybe Xgafv)
     , _pdgUploadProtocol :: !(Maybe Text)
     , _pdgAccessToken    :: !(Maybe Text)
     , _pdgUploadType     :: !(Maybe Text)
     , _pdgName           :: !Text
     , _pdgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartnersDevicesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ partnersDevicesGet
     :: Text -- ^ 'pdgName'
     -> PartnersDevicesGet
 partnersDevicesGet pPdgName_ =
-    PartnersDevicesGet'
+  PartnersDevicesGet'
     { _pdgXgafv = Nothing
     , _pdgUploadProtocol = Nothing
     , _pdgAccessToken = Nothing

@@ -51,9 +51,11 @@ type ActivitiesGetResource =
 -- | Get an activity.
 --
 -- /See:/ 'activitiesGet' smart constructor.
-newtype ActivitiesGet = ActivitiesGet'
+newtype ActivitiesGet =
+  ActivitiesGet'
     { _agActivityId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivitiesGet' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype ActivitiesGet = ActivitiesGet'
 activitiesGet
     :: Text -- ^ 'agActivityId'
     -> ActivitiesGet
-activitiesGet pAgActivityId_ =
-    ActivitiesGet'
-    { _agActivityId = pAgActivityId_
-    }
+activitiesGet pAgActivityId_ = ActivitiesGet' {_agActivityId = pAgActivityId_}
 
 -- | The ID of the activity to get.
 agActivityId :: Lens' ActivitiesGet Text

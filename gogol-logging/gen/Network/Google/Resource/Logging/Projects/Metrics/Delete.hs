@@ -59,14 +59,16 @@ type ProjectsMetricsDeleteResource =
 -- | Deletes a logs-based metric.
 --
 -- /See:/ 'projectsMetricsDelete' smart constructor.
-data ProjectsMetricsDelete = ProjectsMetricsDelete'
+data ProjectsMetricsDelete =
+  ProjectsMetricsDelete'
     { _pmdXgafv          :: !(Maybe Xgafv)
     , _pmdUploadProtocol :: !(Maybe Text)
     , _pmdAccessToken    :: !(Maybe Text)
     , _pmdMetricName     :: !Text
     , _pmdUploadType     :: !(Maybe Text)
     , _pmdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsMetricsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsMetricsDelete
     :: Text -- ^ 'pmdMetricName'
     -> ProjectsMetricsDelete
 projectsMetricsDelete pPmdMetricName_ =
-    ProjectsMetricsDelete'
+  ProjectsMetricsDelete'
     { _pmdXgafv = Nothing
     , _pmdUploadProtocol = Nothing
     , _pmdAccessToken = Nothing

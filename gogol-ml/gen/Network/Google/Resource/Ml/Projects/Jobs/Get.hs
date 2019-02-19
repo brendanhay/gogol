@@ -60,14 +60,16 @@ type ProjectsJobsGetResource =
 -- | Describes a job.
 --
 -- /See:/ 'projectsJobsGet' smart constructor.
-data ProjectsJobsGet = ProjectsJobsGet'
+data ProjectsJobsGet =
+  ProjectsJobsGet'
     { _pjgXgafv          :: !(Maybe Xgafv)
     , _pjgUploadProtocol :: !(Maybe Text)
     , _pjgAccessToken    :: !(Maybe Text)
     , _pjgUploadType     :: !(Maybe Text)
     , _pjgName           :: !Text
     , _pjgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsJobsGet
     :: Text -- ^ 'pjgName'
     -> ProjectsJobsGet
 projectsJobsGet pPjgName_ =
-    ProjectsJobsGet'
+  ProjectsJobsGet'
     { _pjgXgafv = Nothing
     , _pjgUploadProtocol = Nothing
     , _pjgAccessToken = Nothing

@@ -64,7 +64,8 @@ type ProjectsRegionsOperationsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsRegionsOperationsSetIAMPolicy' smart constructor.
-data ProjectsRegionsOperationsSetIAMPolicy = ProjectsRegionsOperationsSetIAMPolicy'
+data ProjectsRegionsOperationsSetIAMPolicy =
+  ProjectsRegionsOperationsSetIAMPolicy'
     { _prosipXgafv          :: !(Maybe Xgafv)
     , _prosipUploadProtocol :: !(Maybe Text)
     , _prosipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsRegionsOperationsSetIAMPolicy = ProjectsRegionsOperationsSetIAMPoli
     , _prosipPayload        :: !SetIAMPolicyRequest
     , _prosipResource       :: !Text
     , _prosipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsOperationsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsRegionsOperationsSetIAMPolicy
     -> Text -- ^ 'prosipResource'
     -> ProjectsRegionsOperationsSetIAMPolicy
 projectsRegionsOperationsSetIAMPolicy pProsipPayload_ pProsipResource_ =
-    ProjectsRegionsOperationsSetIAMPolicy'
+  ProjectsRegionsOperationsSetIAMPolicy'
     { _prosipXgafv = Nothing
     , _prosipUploadProtocol = Nothing
     , _prosipAccessToken = Nothing
@@ -149,7 +151,8 @@ prosipCallback
       (\ s a -> s{_prosipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsOperationsSetIAMPolicy where
+           ProjectsRegionsOperationsSetIAMPolicy
+         where
         type Rs ProjectsRegionsOperationsSetIAMPolicy =
              Policy
         type Scopes ProjectsRegionsOperationsSetIAMPolicy =

@@ -54,10 +54,12 @@ type GroupsPatchResource =
 -- | Update Group. This method supports patch semantics.
 --
 -- /See:/ 'groupsPatch' smart constructor.
-data GroupsPatch = GroupsPatch'
+data GroupsPatch =
+  GroupsPatch'
     { _gpGroupKey :: !Text
     , _gpPayload  :: !Group
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsPatch' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ groupsPatch
     -> Group -- ^ 'gpPayload'
     -> GroupsPatch
 groupsPatch pGpGroupKey_ pGpPayload_ =
-    GroupsPatch'
-    { _gpGroupKey = pGpGroupKey_
-    , _gpPayload = pGpPayload_
-    }
+  GroupsPatch' {_gpGroupKey = pGpGroupKey_, _gpPayload = pGpPayload_}
 
 -- | Email or immutable ID of the group. If ID, it should match with id of
 -- group object

@@ -66,10 +66,12 @@ type SearchanalyticsQueryResource =
 -- grouped by date for any metric, and see which day rows are returned.
 --
 -- /See:/ 'searchanalyticsQuery' smart constructor.
-data SearchanalyticsQuery = SearchanalyticsQuery'
+data SearchanalyticsQuery =
+  SearchanalyticsQuery'
     { _sqSiteURL :: !Text
     , _sqPayload :: !SearchAnalyticsQueryRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchanalyticsQuery' with the minimum fields required to make a request.
 --
@@ -83,10 +85,7 @@ searchanalyticsQuery
     -> SearchAnalyticsQueryRequest -- ^ 'sqPayload'
     -> SearchanalyticsQuery
 searchanalyticsQuery pSqSiteURL_ pSqPayload_ =
-    SearchanalyticsQuery'
-    { _sqSiteURL = pSqSiteURL_
-    , _sqPayload = pSqPayload_
-    }
+  SearchanalyticsQuery' {_sqSiteURL = pSqSiteURL_, _sqPayload = pSqPayload_}
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/

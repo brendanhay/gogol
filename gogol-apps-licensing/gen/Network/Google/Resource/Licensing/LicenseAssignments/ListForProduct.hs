@@ -60,12 +60,14 @@ type LicenseAssignmentsListForProductResource =
 -- | List license assignments for given product of the customer.
 --
 -- /See:/ 'licenseAssignmentsListForProduct' smart constructor.
-data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct'
+data LicenseAssignmentsListForProduct =
+  LicenseAssignmentsListForProduct'
     { _lalfpCustomerId :: !Text
     , _lalfpPageToken  :: !Text
     , _lalfpProductId  :: !Text
     , _lalfpMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseAssignmentsListForProduct' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ licenseAssignmentsListForProduct
     -> Text -- ^ 'lalfpProductId'
     -> LicenseAssignmentsListForProduct
 licenseAssignmentsListForProduct pLalfpCustomerId_ pLalfpProductId_ =
-    LicenseAssignmentsListForProduct'
+  LicenseAssignmentsListForProduct'
     { _lalfpCustomerId = pLalfpCustomerId_
     , _lalfpPageToken = ""
     , _lalfpProductId = pLalfpProductId_
@@ -119,7 +121,8 @@ lalfpMaxResults
       . _Coerce
 
 instance GoogleRequest
-         LicenseAssignmentsListForProduct where
+           LicenseAssignmentsListForProduct
+         where
         type Rs LicenseAssignmentsListForProduct =
              LicenseAssignmentList
         type Scopes LicenseAssignmentsListForProduct =

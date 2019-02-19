@@ -71,7 +71,8 @@ type MattersHoldsAccountsCreateResource =
 -- hold will result in an error.
 --
 -- /See:/ 'mattersHoldsAccountsCreate' smart constructor.
-data MattersHoldsAccountsCreate = MattersHoldsAccountsCreate'
+data MattersHoldsAccountsCreate =
+  MattersHoldsAccountsCreate'
     { _mhacXgafv          :: !(Maybe Xgafv)
     , _mhacUploadProtocol :: !(Maybe Text)
     , _mhacHoldId         :: !Text
@@ -80,7 +81,8 @@ data MattersHoldsAccountsCreate = MattersHoldsAccountsCreate'
     , _mhacPayload        :: !HeldAccount
     , _mhacMatterId       :: !Text
     , _mhacCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersHoldsAccountsCreate' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ mattersHoldsAccountsCreate
     -> Text -- ^ 'mhacMatterId'
     -> MattersHoldsAccountsCreate
 mattersHoldsAccountsCreate pMhacHoldId_ pMhacPayload_ pMhacMatterId_ =
-    MattersHoldsAccountsCreate'
+  MattersHoldsAccountsCreate'
     { _mhacXgafv = Nothing
     , _mhacUploadProtocol = Nothing
     , _mhacHoldId = pMhacHoldId_

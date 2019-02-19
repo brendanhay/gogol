@@ -67,7 +67,8 @@ type ProjectsDeidentifyTemplatesPatchResource =
 -- more.
 --
 -- /See:/ 'projectsDeidentifyTemplatesPatch' smart constructor.
-data ProjectsDeidentifyTemplatesPatch = ProjectsDeidentifyTemplatesPatch'
+data ProjectsDeidentifyTemplatesPatch =
+  ProjectsDeidentifyTemplatesPatch'
     { _pdtpXgafv          :: !(Maybe Xgafv)
     , _pdtpUploadProtocol :: !(Maybe Text)
     , _pdtpAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsDeidentifyTemplatesPatch = ProjectsDeidentifyTemplatesPatch'
     , _pdtpPayload        :: !GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
     , _pdtpName           :: !Text
     , _pdtpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDeidentifyTemplatesPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsDeidentifyTemplatesPatch
     -> Text -- ^ 'pdtpName'
     -> ProjectsDeidentifyTemplatesPatch
 projectsDeidentifyTemplatesPatch pPdtpPayload_ pPdtpName_ =
-    ProjectsDeidentifyTemplatesPatch'
+  ProjectsDeidentifyTemplatesPatch'
     { _pdtpXgafv = Nothing
     , _pdtpUploadProtocol = Nothing
     , _pdtpAccessToken = Nothing
@@ -149,7 +151,8 @@ pdtpCallback
   = lens _pdtpCallback (\ s a -> s{_pdtpCallback = a})
 
 instance GoogleRequest
-         ProjectsDeidentifyTemplatesPatch where
+           ProjectsDeidentifyTemplatesPatch
+         where
         type Rs ProjectsDeidentifyTemplatesPatch =
              GooglePrivacyDlpV2DeidentifyTemplate
         type Scopes ProjectsDeidentifyTemplatesPatch =

@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'UserProFilesGet' request conforms to.
 type UserProFilesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              QueryParam "alt" AltJSON :> Get '[JSON] UserProFile
@@ -51,9 +51,11 @@ type UserProFilesGetResource =
 -- | Gets one user profile by ID.
 --
 -- /See:/ 'userProFilesGet' smart constructor.
-newtype UserProFilesGet = UserProFilesGet'
+newtype UserProFilesGet =
+  UserProFilesGet'
     { _upfgProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserProFilesGet' with the minimum fields required to make a request.
 --
@@ -64,9 +66,7 @@ userProFilesGet
     :: Int64 -- ^ 'upfgProFileId'
     -> UserProFilesGet
 userProFilesGet pUpfgProFileId_ =
-    UserProFilesGet'
-    { _upfgProFileId = _Coerce # pUpfgProFileId_
-    }
+  UserProFilesGet' {_upfgProFileId = _Coerce # pUpfgProFileId_}
 
 -- | The user profile ID.
 upfgProFileId :: Lens' UserProFilesGet Int64

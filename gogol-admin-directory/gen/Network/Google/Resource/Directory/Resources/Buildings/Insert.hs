@@ -56,10 +56,12 @@ type ResourcesBuildingsInsertResource =
 -- | Inserts a building.
 --
 -- /See:/ 'resourcesBuildingsInsert' smart constructor.
-data ResourcesBuildingsInsert = ResourcesBuildingsInsert'
+data ResourcesBuildingsInsert =
+  ResourcesBuildingsInsert'
     { _rbiPayload  :: !Building
     , _rbiCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesBuildingsInsert' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ resourcesBuildingsInsert
     -> Text -- ^ 'rbiCustomer'
     -> ResourcesBuildingsInsert
 resourcesBuildingsInsert pRbiPayload_ pRbiCustomer_ =
-    ResourcesBuildingsInsert'
-    { _rbiPayload = pRbiPayload_
-    , _rbiCustomer = pRbiCustomer_
-    }
+  ResourcesBuildingsInsert'
+    {_rbiPayload = pRbiPayload_, _rbiCustomer = pRbiCustomer_}
 
 -- | Multipart request metadata.
 rbiPayload :: Lens' ResourcesBuildingsInsert Building

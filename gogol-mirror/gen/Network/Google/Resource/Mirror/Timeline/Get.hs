@@ -51,9 +51,11 @@ type TimelineGetResource =
 -- | Gets a single timeline item by ID.
 --
 -- /See:/ 'timelineGet' smart constructor.
-newtype TimelineGet = TimelineGet'
+newtype TimelineGet =
+  TimelineGet'
     { _tgId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimelineGet' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype TimelineGet = TimelineGet'
 timelineGet
     :: Text -- ^ 'tgId'
     -> TimelineGet
-timelineGet pTgId_ =
-    TimelineGet'
-    { _tgId = pTgId_
-    }
+timelineGet pTgId_ = TimelineGet' {_tgId = pTgId_}
 
 -- | The ID of the timeline item.
 tgId :: Lens' TimelineGet Text

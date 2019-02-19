@@ -55,10 +55,12 @@ type AchievementConfigurationsInsertResource =
 -- | Insert a new achievement configuration in this application.
 --
 -- /See:/ 'achievementConfigurationsInsert' smart constructor.
-data AchievementConfigurationsInsert = AchievementConfigurationsInsert'
+data AchievementConfigurationsInsert =
+  AchievementConfigurationsInsert'
     { _aciPayload       :: !AchievementConfiguration
     , _aciApplicationId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AchievementConfigurationsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ achievementConfigurationsInsert
     -> Text -- ^ 'aciApplicationId'
     -> AchievementConfigurationsInsert
 achievementConfigurationsInsert pAciPayload_ pAciApplicationId_ =
-    AchievementConfigurationsInsert'
-    { _aciPayload = pAciPayload_
-    , _aciApplicationId = pAciApplicationId_
-    }
+  AchievementConfigurationsInsert'
+    {_aciPayload = pAciPayload_, _aciApplicationId = pAciApplicationId_}
 
 -- | Multipart request metadata.
 aciPayload :: Lens' AchievementConfigurationsInsert AchievementConfiguration
@@ -89,7 +89,8 @@ aciApplicationId
       (\ s a -> s{_aciApplicationId = a})
 
 instance GoogleRequest
-         AchievementConfigurationsInsert where
+           AchievementConfigurationsInsert
+         where
         type Rs AchievementConfigurationsInsert =
              AchievementConfiguration
         type Scopes AchievementConfigurationsInsert =

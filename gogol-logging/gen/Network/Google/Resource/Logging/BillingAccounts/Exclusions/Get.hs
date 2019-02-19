@@ -59,14 +59,16 @@ type BillingAccountsExclusionsGetResource =
 -- | Gets the description of an exclusion.
 --
 -- /See:/ 'billingAccountsExclusionsGet' smart constructor.
-data BillingAccountsExclusionsGet = BillingAccountsExclusionsGet'
+data BillingAccountsExclusionsGet =
+  BillingAccountsExclusionsGet'
     { _baegXgafv          :: !(Maybe Xgafv)
     , _baegUploadProtocol :: !(Maybe Text)
     , _baegAccessToken    :: !(Maybe Text)
     , _baegUploadType     :: !(Maybe Text)
     , _baegName           :: !Text
     , _baegCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsExclusionsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ billingAccountsExclusionsGet
     :: Text -- ^ 'baegName'
     -> BillingAccountsExclusionsGet
 billingAccountsExclusionsGet pBaegName_ =
-    BillingAccountsExclusionsGet'
+  BillingAccountsExclusionsGet'
     { _baegXgafv = Nothing
     , _baegUploadProtocol = Nothing
     , _baegAccessToken = Nothing

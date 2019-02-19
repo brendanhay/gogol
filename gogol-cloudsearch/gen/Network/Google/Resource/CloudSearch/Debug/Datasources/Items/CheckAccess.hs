@@ -65,7 +65,8 @@ type DebugDatasourcesItemsCheckAccessResource =
 -- | Checks whether an item is accessible by specified principal.
 --
 -- /See:/ 'debugDatasourcesItemsCheckAccess' smart constructor.
-data DebugDatasourcesItemsCheckAccess = DebugDatasourcesItemsCheckAccess'
+data DebugDatasourcesItemsCheckAccess =
+  DebugDatasourcesItemsCheckAccess'
     { _ddicaXgafv                       :: !(Maybe Xgafv)
     , _ddicaUploadProtocol              :: !(Maybe Text)
     , _ddicaAccessToken                 :: !(Maybe Text)
@@ -74,7 +75,8 @@ data DebugDatasourcesItemsCheckAccess = DebugDatasourcesItemsCheckAccess'
     , _ddicaName                        :: !Text
     , _ddicaDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _ddicaCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DebugDatasourcesItemsCheckAccess' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ debugDatasourcesItemsCheckAccess
     -> Text -- ^ 'ddicaName'
     -> DebugDatasourcesItemsCheckAccess
 debugDatasourcesItemsCheckAccess pDdicaPayload_ pDdicaName_ =
-    DebugDatasourcesItemsCheckAccess'
+  DebugDatasourcesItemsCheckAccess'
     { _ddicaXgafv = Nothing
     , _ddicaUploadProtocol = Nothing
     , _ddicaAccessToken = Nothing
@@ -158,7 +160,8 @@ ddicaCallback
       (\ s a -> s{_ddicaCallback = a})
 
 instance GoogleRequest
-         DebugDatasourcesItemsCheckAccess where
+           DebugDatasourcesItemsCheckAccess
+         where
         type Rs DebugDatasourcesItemsCheckAccess =
              CheckAccessResponse
         type Scopes DebugDatasourcesItemsCheckAccess =

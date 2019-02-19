@@ -55,10 +55,12 @@ type ManagementAccountUserLinksDeleteResource =
 -- | Removes a user from the given account.
 --
 -- /See:/ 'managementAccountUserLinksDelete' smart constructor.
-data ManagementAccountUserLinksDelete = ManagementAccountUserLinksDelete'
+data ManagementAccountUserLinksDelete =
+  ManagementAccountUserLinksDelete'
     { _mauldAccountId :: !Text
     , _mauldLinkId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ managementAccountUserLinksDelete
     -> Text -- ^ 'mauldLinkId'
     -> ManagementAccountUserLinksDelete
 managementAccountUserLinksDelete pMauldAccountId_ pMauldLinkId_ =
-    ManagementAccountUserLinksDelete'
-    { _mauldAccountId = pMauldAccountId_
-    , _mauldLinkId = pMauldLinkId_
-    }
+  ManagementAccountUserLinksDelete'
+    {_mauldAccountId = pMauldAccountId_, _mauldLinkId = pMauldLinkId_}
 
 -- | Account ID to delete the user link for.
 mauldAccountId :: Lens' ManagementAccountUserLinksDelete Text
@@ -89,7 +89,8 @@ mauldLinkId
   = lens _mauldLinkId (\ s a -> s{_mauldLinkId = a})
 
 instance GoogleRequest
-         ManagementAccountUserLinksDelete where
+           ManagementAccountUserLinksDelete
+         where
         type Rs ManagementAccountUserLinksDelete = ()
         type Scopes ManagementAccountUserLinksDelete =
              '["https://www.googleapis.com/auth/analytics.manage.users"]

@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'TargetableRemarketingListsList' request conforms to.
 type TargetableRemarketingListsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetableRemarketingLists" :>
@@ -74,7 +74,8 @@ type TargetableRemarketingListsListResource =
 -- This method supports paging.
 --
 -- /See:/ 'targetableRemarketingListsList' smart constructor.
-data TargetableRemarketingListsList = TargetableRemarketingListsList'
+data TargetableRemarketingListsList =
+  TargetableRemarketingListsList'
     { _trllAdvertiserId :: !(Textual Int64)
     , _trllProFileId    :: !(Textual Int64)
     , _trllSortOrder    :: !TargetableRemarketingListsListSortOrder
@@ -83,7 +84,8 @@ data TargetableRemarketingListsList = TargetableRemarketingListsList'
     , _trllPageToken    :: !(Maybe Text)
     , _trllSortField    :: !TargetableRemarketingListsListSortField
     , _trllMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ targetableRemarketingListsList
     -> Int64 -- ^ 'trllProFileId'
     -> TargetableRemarketingListsList
 targetableRemarketingListsList pTrllAdvertiserId_ pTrllProFileId_ =
-    TargetableRemarketingListsList'
+  TargetableRemarketingListsList'
     { _trllAdvertiserId = _Coerce # pTrllAdvertiserId_
     , _trllProFileId = _Coerce # pTrllProFileId_
     , _trllSortOrder = TRLLSOAscending

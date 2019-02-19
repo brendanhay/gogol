@@ -98,7 +98,8 @@ type OffersHistoryListResource =
 -- company)
 --
 -- /See:/ 'offersHistoryList' smart constructor.
-data OffersHistoryList = OffersHistoryList'
+data OffersHistoryList =
+  OffersHistoryList'
     { _ohlXgafv                                       :: !(Maybe Xgafv)
     , _ohlUploadProtocol                              :: !(Maybe Text)
     , _ohlOrderBy                                     :: !(Maybe Text)
@@ -115,7 +116,8 @@ data OffersHistoryList = OffersHistoryList'
     , _ohlRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _ohlRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _ohlCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OffersHistoryList' with the minimum fields required to make a request.
 --
@@ -155,7 +157,7 @@ data OffersHistoryList = OffersHistoryList'
 offersHistoryList
     :: OffersHistoryList
 offersHistoryList =
-    OffersHistoryList'
+  OffersHistoryList'
     { _ohlXgafv = Nothing
     , _ohlUploadProtocol = Nothing
     , _ohlOrderBy = Nothing

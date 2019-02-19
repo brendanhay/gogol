@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SizesGet' request conforms to.
 type SizesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>
@@ -54,10 +54,12 @@ type SizesGetResource =
 -- | Gets one size by ID.
 --
 -- /See:/ 'sizesGet' smart constructor.
-data SizesGet = SizesGet'
+data SizesGet =
+  SizesGet'
     { _sgProFileId :: !(Textual Int64)
     , _sgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SizesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ sizesGet
     -> Int64 -- ^ 'sgId'
     -> SizesGet
 sizesGet pSgProFileId_ pSgId_ =
-    SizesGet'
-    { _sgProFileId = _Coerce # pSgProFileId_
-    , _sgId = _Coerce # pSgId_
-    }
+  SizesGet' {_sgProFileId = _Coerce # pSgProFileId_, _sgId = _Coerce # pSgId_}
 
 -- | User profile ID associated with this request.
 sgProFileId :: Lens' SizesGet Int64

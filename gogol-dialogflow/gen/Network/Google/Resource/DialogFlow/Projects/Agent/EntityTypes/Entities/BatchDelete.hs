@@ -65,7 +65,8 @@ type ProjectsAgentEntityTypesEntitiesBatchDeleteResource
 -- | Deletes entities in the specified entity type. Operation
 --
 -- /See:/ 'projectsAgentEntityTypesEntitiesBatchDelete' smart constructor.
-data ProjectsAgentEntityTypesEntitiesBatchDelete = ProjectsAgentEntityTypesEntitiesBatchDelete'
+data ProjectsAgentEntityTypesEntitiesBatchDelete =
+  ProjectsAgentEntityTypesEntitiesBatchDelete'
     { _paetebdParent         :: !Text
     , _paetebdXgafv          :: !(Maybe Xgafv)
     , _paetebdUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsAgentEntityTypesEntitiesBatchDelete = ProjectsAgentEntityTypesEntit
     , _paetebdUploadType     :: !(Maybe Text)
     , _paetebdPayload        :: !GoogleCloudDialogflowV2BatchDeleteEntitiesRequest
     , _paetebdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentEntityTypesEntitiesBatchDelete' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsAgentEntityTypesEntitiesBatchDelete
     -> GoogleCloudDialogflowV2BatchDeleteEntitiesRequest -- ^ 'paetebdPayload'
     -> ProjectsAgentEntityTypesEntitiesBatchDelete
 projectsAgentEntityTypesEntitiesBatchDelete pPaetebdParent_ pPaetebdPayload_ =
-    ProjectsAgentEntityTypesEntitiesBatchDelete'
+  ProjectsAgentEntityTypesEntitiesBatchDelete'
     { _paetebdParent = pPaetebdParent_
     , _paetebdXgafv = Nothing
     , _paetebdUploadProtocol = Nothing
@@ -150,7 +152,8 @@ paetebdCallback
       (\ s a -> s{_paetebdCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentEntityTypesEntitiesBatchDelete where
+           ProjectsAgentEntityTypesEntitiesBatchDelete
+         where
         type Rs ProjectsAgentEntityTypesEntitiesBatchDelete =
              GoogleLongrunningOperation
         type Scopes

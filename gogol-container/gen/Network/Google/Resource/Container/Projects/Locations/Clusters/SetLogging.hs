@@ -62,7 +62,8 @@ type ProjectsLocationsClustersSetLoggingResource =
 -- | Sets the logging service for a specific cluster.
 --
 -- /See:/ 'projectsLocationsClustersSetLogging' smart constructor.
-data ProjectsLocationsClustersSetLogging = ProjectsLocationsClustersSetLogging'
+data ProjectsLocationsClustersSetLogging =
+  ProjectsLocationsClustersSetLogging'
     { _plcslXgafv          :: !(Maybe Xgafv)
     , _plcslUploadProtocol :: !(Maybe Text)
     , _plcslAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsLocationsClustersSetLogging = ProjectsLocationsClustersSetLogging'
     , _plcslPayload        :: !SetLoggingServiceRequest
     , _plcslName           :: !Text
     , _plcslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersSetLogging' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsLocationsClustersSetLogging
     -> Text -- ^ 'plcslName'
     -> ProjectsLocationsClustersSetLogging
 projectsLocationsClustersSetLogging pPlcslPayload_ pPlcslName_ =
-    ProjectsLocationsClustersSetLogging'
+  ProjectsLocationsClustersSetLogging'
     { _plcslXgafv = Nothing
     , _plcslUploadProtocol = Nothing
     , _plcslAccessToken = Nothing
@@ -145,7 +147,8 @@ plcslCallback
       (\ s a -> s{_plcslCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersSetLogging where
+           ProjectsLocationsClustersSetLogging
+         where
         type Rs ProjectsLocationsClustersSetLogging =
              Operation
         type Scopes ProjectsLocationsClustersSetLogging =

@@ -67,7 +67,8 @@ type ProjectsLocationsRegistriesTestIAMPermissionsResource
 -- not a NOT_FOUND error.
 --
 -- /See:/ 'projectsLocationsRegistriesTestIAMPermissions' smart constructor.
-data ProjectsLocationsRegistriesTestIAMPermissions = ProjectsLocationsRegistriesTestIAMPermissions'
+data ProjectsLocationsRegistriesTestIAMPermissions =
+  ProjectsLocationsRegistriesTestIAMPermissions'
     { _plrtipXgafv          :: !(Maybe Xgafv)
     , _plrtipUploadProtocol :: !(Maybe Text)
     , _plrtipAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ProjectsLocationsRegistriesTestIAMPermissions = ProjectsLocationsRegistries
     , _plrtipPayload        :: !TestIAMPermissionsRequest
     , _plrtipResource       :: !Text
     , _plrtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsRegistriesTestIAMPermissions
     -> Text -- ^ 'plrtipResource'
     -> ProjectsLocationsRegistriesTestIAMPermissions
 projectsLocationsRegistriesTestIAMPermissions pPlrtipPayload_ pPlrtipResource_ =
-    ProjectsLocationsRegistriesTestIAMPermissions'
+  ProjectsLocationsRegistriesTestIAMPermissions'
     { _plrtipXgafv = Nothing
     , _plrtipUploadProtocol = Nothing
     , _plrtipAccessToken = Nothing
@@ -153,7 +155,8 @@ plrtipCallback
       (\ s a -> s{_plrtipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesTestIAMPermissions where
+           ProjectsLocationsRegistriesTestIAMPermissions
+         where
         type Rs ProjectsLocationsRegistriesTestIAMPermissions
              = TestIAMPermissionsResponse
         type Scopes

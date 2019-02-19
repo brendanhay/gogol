@@ -63,13 +63,15 @@ type ManagementGoalsUpdateResource =
 -- | Updates an existing goal.
 --
 -- /See:/ 'managementGoalsUpdate' smart constructor.
-data ManagementGoalsUpdate = ManagementGoalsUpdate'
+data ManagementGoalsUpdate =
+  ManagementGoalsUpdate'
     { _mguWebPropertyId :: !Text
     , _mguGoalId        :: !Text
     , _mguProFileId     :: !Text
     , _mguPayload       :: !Goal
     , _mguAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementGoalsUpdate' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ managementGoalsUpdate
     -> Text -- ^ 'mguAccountId'
     -> ManagementGoalsUpdate
 managementGoalsUpdate pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload_ pMguAccountId_ =
-    ManagementGoalsUpdate'
+  ManagementGoalsUpdate'
     { _mguWebPropertyId = pMguWebPropertyId_
     , _mguGoalId = pMguGoalId_
     , _mguProFileId = pMguProFileId_

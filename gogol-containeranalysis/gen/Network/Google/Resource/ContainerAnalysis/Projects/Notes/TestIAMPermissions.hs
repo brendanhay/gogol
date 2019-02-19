@@ -72,7 +72,8 @@ type ProjectsNotesTestIAMPermissionsResource =
 -- occurrences.
 --
 -- /See:/ 'projectsNotesTestIAMPermissions' smart constructor.
-data ProjectsNotesTestIAMPermissions = ProjectsNotesTestIAMPermissions'
+data ProjectsNotesTestIAMPermissions =
+  ProjectsNotesTestIAMPermissions'
     { _pntipXgafv          :: !(Maybe Xgafv)
     , _pntipUploadProtocol :: !(Maybe Text)
     , _pntipAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsNotesTestIAMPermissions = ProjectsNotesTestIAMPermissions'
     , _pntipPayload        :: !TestIAMPermissionsRequest
     , _pntipResource       :: !Text
     , _pntipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsNotesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsNotesTestIAMPermissions
     -> Text -- ^ 'pntipResource'
     -> ProjectsNotesTestIAMPermissions
 projectsNotesTestIAMPermissions pPntipPayload_ pPntipResource_ =
-    ProjectsNotesTestIAMPermissions'
+  ProjectsNotesTestIAMPermissions'
     { _pntipXgafv = Nothing
     , _pntipUploadProtocol = Nothing
     , _pntipAccessToken = Nothing
@@ -157,7 +159,8 @@ pntipCallback
       (\ s a -> s{_pntipCallback = a})
 
 instance GoogleRequest
-         ProjectsNotesTestIAMPermissions where
+           ProjectsNotesTestIAMPermissions
+         where
         type Rs ProjectsNotesTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsNotesTestIAMPermissions =

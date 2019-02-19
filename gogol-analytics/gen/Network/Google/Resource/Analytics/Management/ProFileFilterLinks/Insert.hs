@@ -62,12 +62,14 @@ type ManagementProFileFilterLinksInsertResource =
 -- | Create a new profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksInsert' smart constructor.
-data ManagementProFileFilterLinksInsert = ManagementProFileFilterLinksInsert'
+data ManagementProFileFilterLinksInsert =
+  ManagementProFileFilterLinksInsert'
     { _mpffliWebPropertyId :: !Text
     , _mpffliProFileId     :: !Text
     , _mpffliPayload       :: !ProFileFilterLink
     , _mpffliAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksInsert' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ managementProFileFilterLinksInsert
     -> Text -- ^ 'mpffliAccountId'
     -> ManagementProFileFilterLinksInsert
 managementProFileFilterLinksInsert pMpffliWebPropertyId_ pMpffliProFileId_ pMpffliPayload_ pMpffliAccountId_ =
-    ManagementProFileFilterLinksInsert'
+  ManagementProFileFilterLinksInsert'
     { _mpffliWebPropertyId = pMpffliWebPropertyId_
     , _mpffliProFileId = pMpffliProFileId_
     , _mpffliPayload = pMpffliPayload_
@@ -119,7 +121,8 @@ mpffliAccountId
       (\ s a -> s{_mpffliAccountId = a})
 
 instance GoogleRequest
-         ManagementProFileFilterLinksInsert where
+           ManagementProFileFilterLinksInsert
+         where
         type Rs ManagementProFileFilterLinksInsert =
              ProFileFilterLink
         type Scopes ManagementProFileFilterLinksInsert =

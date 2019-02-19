@@ -63,12 +63,14 @@ type NodeTemplatesSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'nodeTemplatesSetIAMPolicy' smart constructor.
-data NodeTemplatesSetIAMPolicy = NodeTemplatesSetIAMPolicy'
+data NodeTemplatesSetIAMPolicy =
+  NodeTemplatesSetIAMPolicy'
     { _ntsipProject  :: !Text
     , _ntsipPayload  :: !RegionSetPolicyRequest
     , _ntsipResource :: !Text
     , _ntsipRegion   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplatesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ nodeTemplatesSetIAMPolicy
     -> Text -- ^ 'ntsipRegion'
     -> NodeTemplatesSetIAMPolicy
 nodeTemplatesSetIAMPolicy pNtsipProject_ pNtsipPayload_ pNtsipResource_ pNtsipRegion_ =
-    NodeTemplatesSetIAMPolicy'
+  NodeTemplatesSetIAMPolicy'
     { _ntsipProject = pNtsipProject_
     , _ntsipPayload = pNtsipPayload_
     , _ntsipResource = pNtsipResource_

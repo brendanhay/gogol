@@ -51,9 +51,11 @@ type SurveysGetResource =
 -- | Retrieves information about the specified survey.
 --
 -- /See:/ 'surveysGet' smart constructor.
-newtype SurveysGet = SurveysGet'
+newtype SurveysGet =
+  SurveysGet'
     { _sgSurveyURLId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveysGet' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype SurveysGet = SurveysGet'
 surveysGet
     :: Text -- ^ 'sgSurveyURLId'
     -> SurveysGet
-surveysGet pSgSurveyURLId_ =
-    SurveysGet'
-    { _sgSurveyURLId = pSgSurveyURLId_
-    }
+surveysGet pSgSurveyURLId_ = SurveysGet' {_sgSurveyURLId = pSgSurveyURLId_}
 
 -- | External URL ID for the survey.
 sgSurveyURLId :: Lens' SurveysGet Text

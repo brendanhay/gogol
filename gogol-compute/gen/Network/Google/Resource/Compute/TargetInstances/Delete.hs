@@ -59,12 +59,14 @@ type TargetInstancesDeleteResource =
 -- | Deletes the specified TargetInstance resource.
 --
 -- /See:/ 'targetInstancesDelete' smart constructor.
-data TargetInstancesDelete = TargetInstancesDelete'
+data TargetInstancesDelete =
+  TargetInstancesDelete'
     { _tidRequestId      :: !(Maybe Text)
     , _tidProject        :: !Text
     , _tidTargetInstance :: !Text
     , _tidZone           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstancesDelete' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ targetInstancesDelete
     -> Text -- ^ 'tidZone'
     -> TargetInstancesDelete
 targetInstancesDelete pTidProject_ pTidTargetInstance_ pTidZone_ =
-    TargetInstancesDelete'
+  TargetInstancesDelete'
     { _tidRequestId = Nothing
     , _tidProject = pTidProject_
     , _tidTargetInstance = pTidTargetInstance_

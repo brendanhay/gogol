@@ -63,7 +63,8 @@ type ContactGroupsGetResource =
 -- specifying a contact group resource name.
 --
 -- /See:/ 'contactGroupsGet' smart constructor.
-data ContactGroupsGet = ContactGroupsGet'
+data ContactGroupsGet =
+  ContactGroupsGet'
     { _cggXgafv          :: !(Maybe Xgafv)
     , _cggMaxMembers     :: !(Maybe (Textual Int32))
     , _cggUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ContactGroupsGet = ContactGroupsGet'
     , _cggAccessToken    :: !(Maybe Text)
     , _cggUploadType     :: !(Maybe Text)
     , _cggCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContactGroupsGet' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ contactGroupsGet
     :: Text -- ^ 'cggResourceName'
     -> ContactGroupsGet
 contactGroupsGet pCggResourceName_ =
-    ContactGroupsGet'
+  ContactGroupsGet'
     { _cggXgafv = Nothing
     , _cggMaxMembers = Nothing
     , _cggUploadProtocol = Nothing

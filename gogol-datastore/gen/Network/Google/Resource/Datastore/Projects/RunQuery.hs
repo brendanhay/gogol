@@ -63,7 +63,8 @@ type ProjectsRunQueryResource =
 -- | Queries for entities.
 --
 -- /See:/ 'projectsRunQuery' smart constructor.
-data ProjectsRunQuery = ProjectsRunQuery'
+data ProjectsRunQuery =
+  ProjectsRunQuery'
     { _prqXgafv          :: !(Maybe Xgafv)
     , _prqUploadProtocol :: !(Maybe Text)
     , _prqAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsRunQuery = ProjectsRunQuery'
     , _prqPayload        :: !RunQueryRequest
     , _prqProjectId      :: !Text
     , _prqCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRunQuery' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsRunQuery
     -> Text -- ^ 'prqProjectId'
     -> ProjectsRunQuery
 projectsRunQuery pPrqPayload_ pPrqProjectId_ =
-    ProjectsRunQuery'
+  ProjectsRunQuery'
     { _prqXgafv = Nothing
     , _prqUploadProtocol = Nothing
     , _prqAccessToken = Nothing

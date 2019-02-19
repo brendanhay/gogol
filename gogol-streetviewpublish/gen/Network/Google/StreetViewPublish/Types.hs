@@ -183,4 +183,4 @@ streetViewPublishService
 
 -- | Publish and manage your 360 photos on Google Street View
 streetViewPublishScope :: Proxy '["https://www.googleapis.com/auth/streetviewpublish"]
-streetViewPublishScope = Proxy;
+streetViewPublishScope = Proxy

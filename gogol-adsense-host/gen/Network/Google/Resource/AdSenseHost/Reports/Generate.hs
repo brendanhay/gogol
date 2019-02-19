@@ -71,7 +71,8 @@ type ReportsGenerateResource =
 -- specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ 'reportsGenerate' smart constructor.
-data ReportsGenerate = ReportsGenerate'
+data ReportsGenerate =
+  ReportsGenerate'
     { _rgDimension  :: !(Maybe [Text])
     , _rgLocale     :: !(Maybe Text)
     , _rgEndDate    :: !Text
@@ -81,7 +82,8 @@ data ReportsGenerate = ReportsGenerate'
     , _rgFilter     :: !(Maybe [Text])
     , _rgStartIndex :: !(Maybe (Textual Word32))
     , _rgMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ reportsGenerate
     -> Text -- ^ 'rgStartDate'
     -> ReportsGenerate
 reportsGenerate pRgEndDate_ pRgStartDate_ =
-    ReportsGenerate'
+  ReportsGenerate'
     { _rgDimension = Nothing
     , _rgLocale = Nothing
     , _rgEndDate = pRgEndDate_

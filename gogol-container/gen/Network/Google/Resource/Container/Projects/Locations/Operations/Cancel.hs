@@ -62,7 +62,8 @@ type ProjectsLocationsOperationsCancelResource =
 -- | Cancels the specified operation.
 --
 -- /See:/ 'projectsLocationsOperationsCancel' smart constructor.
-data ProjectsLocationsOperationsCancel = ProjectsLocationsOperationsCancel'
+data ProjectsLocationsOperationsCancel =
+  ProjectsLocationsOperationsCancel'
     { _plocXgafv          :: !(Maybe Xgafv)
     , _plocUploadProtocol :: !(Maybe Text)
     , _plocAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsLocationsOperationsCancel = ProjectsLocationsOperationsCancel'
     , _plocPayload        :: !CancelOperationRequest
     , _plocName           :: !Text
     , _plocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsOperationsCancel' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsLocationsOperationsCancel
     -> Text -- ^ 'plocName'
     -> ProjectsLocationsOperationsCancel
 projectsLocationsOperationsCancel pPlocPayload_ pPlocName_ =
-    ProjectsLocationsOperationsCancel'
+  ProjectsLocationsOperationsCancel'
     { _plocXgafv = Nothing
     , _plocUploadProtocol = Nothing
     , _plocAccessToken = Nothing
@@ -143,7 +145,8 @@ plocCallback
   = lens _plocCallback (\ s a -> s{_plocCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsOperationsCancel where
+           ProjectsLocationsOperationsCancel
+         where
         type Rs ProjectsLocationsOperationsCancel = Empty
         type Scopes ProjectsLocationsOperationsCancel =
              '["https://www.googleapis.com/auth/cloud-platform"]

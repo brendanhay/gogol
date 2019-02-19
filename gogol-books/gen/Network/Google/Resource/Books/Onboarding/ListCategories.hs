@@ -52,9 +52,11 @@ type OnboardingListCategoriesResource =
 -- | List categories for onboarding experience.
 --
 -- /See:/ 'onboardingListCategories' smart constructor.
-newtype OnboardingListCategories = OnboardingListCategories'
+newtype OnboardingListCategories =
+  OnboardingListCategories'
     { _olcLocale :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OnboardingListCategories' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype OnboardingListCategories = OnboardingListCategories'
 -- * 'olcLocale'
 onboardingListCategories
     :: OnboardingListCategories
-onboardingListCategories =
-    OnboardingListCategories'
-    { _olcLocale = Nothing
-    }
+onboardingListCategories = OnboardingListCategories' {_olcLocale = Nothing}
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Default is en-US if
 -- unset.

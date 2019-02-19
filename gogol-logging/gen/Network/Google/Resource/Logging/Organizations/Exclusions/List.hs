@@ -65,7 +65,8 @@ type OrganizationsExclusionsListResource =
 -- | Lists all the exclusions in a parent resource.
 --
 -- /See:/ 'organizationsExclusionsList' smart constructor.
-data OrganizationsExclusionsList = OrganizationsExclusionsList'
+data OrganizationsExclusionsList =
+  OrganizationsExclusionsList'
     { _oelParent         :: !Text
     , _oelXgafv          :: !(Maybe Xgafv)
     , _oelUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data OrganizationsExclusionsList = OrganizationsExclusionsList'
     , _oelPageToken      :: !(Maybe Text)
     , _oelPageSize       :: !(Maybe (Textual Int32))
     , _oelCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsExclusionsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ organizationsExclusionsList
     :: Text -- ^ 'oelParent'
     -> OrganizationsExclusionsList
 organizationsExclusionsList pOelParent_ =
-    OrganizationsExclusionsList'
+  OrganizationsExclusionsList'
     { _oelParent = pOelParent_
     , _oelXgafv = Nothing
     , _oelUploadProtocol = Nothing

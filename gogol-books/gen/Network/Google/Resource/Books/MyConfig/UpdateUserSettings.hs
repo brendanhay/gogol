@@ -57,9 +57,11 @@ type MyConfigUpdateUserSettingsResource =
 -- sub-objects will retain the existing value.
 --
 -- /See:/ 'myConfigUpdateUserSettings' smart constructor.
-newtype MyConfigUpdateUserSettings = MyConfigUpdateUserSettings'
+newtype MyConfigUpdateUserSettings =
+  MyConfigUpdateUserSettings'
     { _mcuusPayload :: UserSettings
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyConfigUpdateUserSettings' with the minimum fields required to make a request.
 --
@@ -70,9 +72,7 @@ myConfigUpdateUserSettings
     :: UserSettings -- ^ 'mcuusPayload'
     -> MyConfigUpdateUserSettings
 myConfigUpdateUserSettings pMcuusPayload_ =
-    MyConfigUpdateUserSettings'
-    { _mcuusPayload = pMcuusPayload_
-    }
+  MyConfigUpdateUserSettings' {_mcuusPayload = pMcuusPayload_}
 
 -- | Multipart request metadata.
 mcuusPayload :: Lens' MyConfigUpdateUserSettings UserSettings

@@ -75,7 +75,8 @@ type MediaItemsBatchCreateResource =
 -- media items are given, they will be inserted at the specified position.
 --
 -- /See:/ 'mediaItemsBatchCreate' smart constructor.
-data MediaItemsBatchCreate = MediaItemsBatchCreate'
+data MediaItemsBatchCreate =
+  MediaItemsBatchCreate'
     { _mibcXgafv          :: !(Maybe Xgafv)
     , _mibcUploadProtocol :: !(Maybe Text)
     , _mibcPp             :: !Bool
@@ -84,7 +85,8 @@ data MediaItemsBatchCreate = MediaItemsBatchCreate'
     , _mibcPayload        :: !BatchCreateMediaItemsRequest
     , _mibcBearerToken    :: !(Maybe Text)
     , _mibcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MediaItemsBatchCreate' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ mediaItemsBatchCreate
     :: BatchCreateMediaItemsRequest -- ^ 'mibcPayload'
     -> MediaItemsBatchCreate
 mediaItemsBatchCreate pMibcPayload_ =
-    MediaItemsBatchCreate'
+  MediaItemsBatchCreate'
     { _mibcXgafv = Nothing
     , _mibcUploadProtocol = Nothing
     , _mibcPp = True

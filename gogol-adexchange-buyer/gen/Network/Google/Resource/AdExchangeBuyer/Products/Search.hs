@@ -53,9 +53,11 @@ type ProductsSearchResource =
 -- | Gets the requested product.
 --
 -- /See:/ 'productsSearch' smart constructor.
-newtype ProductsSearch = ProductsSearch'
+newtype ProductsSearch =
+  ProductsSearch'
     { _psPqlQuery :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsSearch' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype ProductsSearch = ProductsSearch'
 -- * 'psPqlQuery'
 productsSearch
     :: ProductsSearch
-productsSearch =
-    ProductsSearch'
-    { _psPqlQuery = Nothing
-    }
+productsSearch = ProductsSearch' {_psPqlQuery = Nothing}
 
 -- | The pql query used to query for products.
 psPqlQuery :: Lens' ProductsSearch (Maybe Text)

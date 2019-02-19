@@ -85,7 +85,8 @@ type UserProFilesGuardiansGetResource =
 -- \`guardian_id\`.
 --
 -- /See:/ 'userProFilesGuardiansGet' smart constructor.
-data UserProFilesGuardiansGet = UserProFilesGuardiansGet'
+data UserProFilesGuardiansGet =
+  UserProFilesGuardiansGet'
     { _upfggStudentId      :: !Text
     , _upfggXgafv          :: !(Maybe Xgafv)
     , _upfggUploadProtocol :: !(Maybe Text)
@@ -93,7 +94,8 @@ data UserProFilesGuardiansGet = UserProFilesGuardiansGet'
     , _upfggUploadType     :: !(Maybe Text)
     , _upfggGuardianId     :: !Text
     , _upfggCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserProFilesGuardiansGet' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ userProFilesGuardiansGet
     -> Text -- ^ 'upfggGuardianId'
     -> UserProFilesGuardiansGet
 userProFilesGuardiansGet pUpfggStudentId_ pUpfggGuardianId_ =
-    UserProFilesGuardiansGet'
+  UserProFilesGuardiansGet'
     { _upfggStudentId = pUpfggStudentId_
     , _upfggXgafv = Nothing
     , _upfggUploadProtocol = Nothing

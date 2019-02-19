@@ -61,7 +61,8 @@ type ProjectsLocationsQueuesTasksGetResource =
 -- | Gets a task.
 --
 -- /See:/ 'projectsLocationsQueuesTasksGet' smart constructor.
-data ProjectsLocationsQueuesTasksGet = ProjectsLocationsQueuesTasksGet'
+data ProjectsLocationsQueuesTasksGet =
+  ProjectsLocationsQueuesTasksGet'
     { _plqtgXgafv          :: !(Maybe Xgafv)
     , _plqtgUploadProtocol :: !(Maybe Text)
     , _plqtgAccessToken    :: !(Maybe Text)
@@ -69,7 +70,8 @@ data ProjectsLocationsQueuesTasksGet = ProjectsLocationsQueuesTasksGet'
     , _plqtgResponseView   :: !(Maybe Text)
     , _plqtgName           :: !Text
     , _plqtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsQueuesTasksGet' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ projectsLocationsQueuesTasksGet
     :: Text -- ^ 'plqtgName'
     -> ProjectsLocationsQueuesTasksGet
 projectsLocationsQueuesTasksGet pPlqtgName_ =
-    ProjectsLocationsQueuesTasksGet'
+  ProjectsLocationsQueuesTasksGet'
     { _plqtgXgafv = Nothing
     , _plqtgUploadProtocol = Nothing
     , _plqtgAccessToken = Nothing
@@ -150,7 +152,8 @@ plqtgCallback
       (\ s a -> s{_plqtgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsQueuesTasksGet where
+           ProjectsLocationsQueuesTasksGet
+         where
         type Rs ProjectsLocationsQueuesTasksGet = Task
         type Scopes ProjectsLocationsQueuesTasksGet =
              '["https://www.googleapis.com/auth/cloud-platform"]

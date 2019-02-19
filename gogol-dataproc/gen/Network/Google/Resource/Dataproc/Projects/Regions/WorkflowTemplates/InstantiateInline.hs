@@ -82,7 +82,8 @@ type ProjectsRegionsWorkflowTemplatesInstantiateInlineResource
 -- successful completion, Operation.response will be Empty.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesInstantiateInline' smart constructor.
-data ProjectsRegionsWorkflowTemplatesInstantiateInline = ProjectsRegionsWorkflowTemplatesInstantiateInline'
+data ProjectsRegionsWorkflowTemplatesInstantiateInline =
+  ProjectsRegionsWorkflowTemplatesInstantiateInline'
     { _prwtiiParent         :: !Text
     , _prwtiiXgafv          :: !(Maybe Xgafv)
     , _prwtiiRequestId      :: !(Maybe Text)
@@ -91,7 +92,8 @@ data ProjectsRegionsWorkflowTemplatesInstantiateInline = ProjectsRegionsWorkflow
     , _prwtiiUploadType     :: !(Maybe Text)
     , _prwtiiPayload        :: !WorkflowTemplate
     , _prwtiiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesInstantiateInline' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ projectsRegionsWorkflowTemplatesInstantiateInline
     -> WorkflowTemplate -- ^ 'prwtiiPayload'
     -> ProjectsRegionsWorkflowTemplatesInstantiateInline
 projectsRegionsWorkflowTemplatesInstantiateInline pPrwtiiParent_ pPrwtiiPayload_ =
-    ProjectsRegionsWorkflowTemplatesInstantiateInline'
+  ProjectsRegionsWorkflowTemplatesInstantiateInline'
     { _prwtiiParent = pPrwtiiParent_
     , _prwtiiXgafv = Nothing
     , _prwtiiRequestId = Nothing
@@ -183,7 +185,7 @@ prwtiiCallback
       (\ s a -> s{_prwtiiCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsWorkflowTemplatesInstantiateInline
+           ProjectsRegionsWorkflowTemplatesInstantiateInline
          where
         type Rs
                ProjectsRegionsWorkflowTemplatesInstantiateInline

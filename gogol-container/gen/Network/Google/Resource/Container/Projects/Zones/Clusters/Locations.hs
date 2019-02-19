@@ -70,7 +70,8 @@ type ProjectsZonesClustersLocationsResource =
 -- | Sets the locations for a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersLocations' smart constructor.
-data ProjectsZonesClustersLocations = ProjectsZonesClustersLocations'
+data ProjectsZonesClustersLocations =
+  ProjectsZonesClustersLocations'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsZonesClustersLocations = ProjectsZonesClustersLocations'
     , _pClusterId      :: !Text
     , _pProjectId      :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersLocations' with the minimum fields required to make a request.
 --
@@ -110,7 +112,7 @@ projectsZonesClustersLocations
     -> Text -- ^ 'pProjectId'
     -> ProjectsZonesClustersLocations
 projectsZonesClustersLocations pPZone_ pPPayload_ pPClusterId_ pPProjectId_ =
-    ProjectsZonesClustersLocations'
+  ProjectsZonesClustersLocations'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing

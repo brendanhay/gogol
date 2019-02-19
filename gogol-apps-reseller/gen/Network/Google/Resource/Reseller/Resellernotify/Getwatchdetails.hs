@@ -52,8 +52,8 @@ type ResellernotifyGetwatchdetailsResource =
 --
 -- /See:/ 'resellernotifyGetwatchdetails' smart constructor.
 data ResellernotifyGetwatchdetails =
-    ResellernotifyGetwatchdetails'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ResellernotifyGetwatchdetails'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResellernotifyGetwatchdetails' with the minimum fields required to make a request.
 --

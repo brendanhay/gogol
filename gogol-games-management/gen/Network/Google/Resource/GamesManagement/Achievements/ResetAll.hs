@@ -55,8 +55,8 @@ type AchievementsResetAllResource =
 --
 -- /See:/ 'achievementsResetAll' smart constructor.
 data AchievementsResetAll =
-    AchievementsResetAll'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  AchievementsResetAll'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AchievementsResetAll' with the minimum fields required to make a request.
 --

@@ -67,7 +67,8 @@ type ProjectsInstancesDatabasesSessionsListResource =
 -- | Lists all sessions in a given database.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsList' smart constructor.
-data ProjectsInstancesDatabasesSessionsList = ProjectsInstancesDatabasesSessionsList'
+data ProjectsInstancesDatabasesSessionsList =
+  ProjectsInstancesDatabasesSessionsList'
     { _pidslXgafv          :: !(Maybe Xgafv)
     , _pidslUploadProtocol :: !(Maybe Text)
     , _pidslDatabase       :: !Text
@@ -77,7 +78,8 @@ data ProjectsInstancesDatabasesSessionsList = ProjectsInstancesDatabasesSessions
     , _pidslPageToken      :: !(Maybe Text)
     , _pidslPageSize       :: !(Maybe (Textual Int32))
     , _pidslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsInstancesDatabasesSessionsList
     :: Text -- ^ 'pidslDatabase'
     -> ProjectsInstancesDatabasesSessionsList
 projectsInstancesDatabasesSessionsList pPidslDatabase_ =
-    ProjectsInstancesDatabasesSessionsList'
+  ProjectsInstancesDatabasesSessionsList'
     { _pidslXgafv = Nothing
     , _pidslUploadProtocol = Nothing
     , _pidslDatabase = pPidslDatabase_
@@ -177,7 +179,8 @@ pidslCallback
       (\ s a -> s{_pidslCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsList where
+           ProjectsInstancesDatabasesSessionsList
+         where
         type Rs ProjectsInstancesDatabasesSessionsList =
              ListSessionsResponse
         type Scopes ProjectsInstancesDatabasesSessionsList =

@@ -56,10 +56,12 @@ type ResourcesCalendarsDeleteResource =
 -- | Deletes a calendar resource.
 --
 -- /See:/ 'resourcesCalendarsDelete' smart constructor.
-data ResourcesCalendarsDelete = ResourcesCalendarsDelete'
+data ResourcesCalendarsDelete =
+  ResourcesCalendarsDelete'
     { _rcdCustomer           :: !Text
     , _rcdCalendarResourceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesCalendarsDelete' with the minimum fields required to make a request.
 --
@@ -73,7 +75,7 @@ resourcesCalendarsDelete
     -> Text -- ^ 'rcdCalendarResourceId'
     -> ResourcesCalendarsDelete
 resourcesCalendarsDelete pRcdCustomer_ pRcdCalendarResourceId_ =
-    ResourcesCalendarsDelete'
+  ResourcesCalendarsDelete'
     { _rcdCustomer = pRcdCustomer_
     , _rcdCalendarResourceId = pRcdCalendarResourceId_
     }

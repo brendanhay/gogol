@@ -62,7 +62,8 @@ type GroupsInsertResource =
 -- | Creates a group.
 --
 -- /See:/ 'groupsInsert' smart constructor.
-data GroupsInsert = GroupsInsert'
+data GroupsInsert =
+  GroupsInsert'
     { _giXgafv                  :: !(Maybe Xgafv)
     , _giUploadProtocol         :: !(Maybe Text)
     , _giAccessToken            :: !(Maybe Text)
@@ -70,7 +71,8 @@ data GroupsInsert = GroupsInsert'
     , _giPayload                :: !Group
     , _giOnBehalfOfContentOwner :: !(Maybe Text)
     , _giCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsInsert' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ groupsInsert
     :: Group -- ^ 'giPayload'
     -> GroupsInsert
 groupsInsert pGiPayload_ =
-    GroupsInsert'
+  GroupsInsert'
     { _giXgafv = Nothing
     , _giUploadProtocol = Nothing
     , _giAccessToken = Nothing

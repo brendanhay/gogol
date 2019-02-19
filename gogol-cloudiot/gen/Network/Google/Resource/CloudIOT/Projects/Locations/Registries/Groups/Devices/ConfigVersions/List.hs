@@ -66,7 +66,8 @@ type ProjectsLocationsRegistriesGroupsDevicesConfigVersionsListResource
 -- order (i.e.: newest first).
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsDevicesConfigVersionsList' smart constructor.
-data ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList = ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList'
+data ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList =
+  ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList'
     { _plrgdcvlXgafv          :: !(Maybe Xgafv)
     , _plrgdcvlUploadProtocol :: !(Maybe Text)
     , _plrgdcvlAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList = ProjectsLocati
     , _plrgdcvlNumVersions    :: !(Maybe (Textual Int32))
     , _plrgdcvlName           :: !Text
     , _plrgdcvlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsLocationsRegistriesGroupsDevicesConfigVersionsList
     :: Text -- ^ 'plrgdcvlName'
     -> ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList
 projectsLocationsRegistriesGroupsDevicesConfigVersionsList pPlrgdcvlName_ =
-    ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList'
+  ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList'
     { _plrgdcvlXgafv = Nothing
     , _plrgdcvlUploadProtocol = Nothing
     , _plrgdcvlAccessToken = Nothing
@@ -155,7 +157,7 @@ plrgdcvlCallback
       (\ s a -> s{_plrgdcvlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList
+           ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList
          where
         type Rs
                ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList

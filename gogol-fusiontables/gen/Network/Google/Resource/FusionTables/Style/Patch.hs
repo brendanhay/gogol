@@ -57,11 +57,13 @@ type StylePatchResource =
 -- | Updates an existing style. This method supports patch semantics.
 --
 -- /See:/ 'stylePatch' smart constructor.
-data StylePatch = StylePatch'
+data StylePatch =
+  StylePatch'
     { _spPayload :: !StyleSetting
     , _spStyleId :: !(Textual Int32)
     , _spTableId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StylePatch' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ stylePatch
     -> Text -- ^ 'spTableId'
     -> StylePatch
 stylePatch pSpPayload_ pSpStyleId_ pSpTableId_ =
-    StylePatch'
+  StylePatch'
     { _spPayload = pSpPayload_
     , _spStyleId = _Coerce # pSpStyleId_
     , _spTableId = pSpTableId_

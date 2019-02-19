@@ -65,7 +65,8 @@ type ProjectsNotificationChannelsCreateResource =
 -- endpoint such as an email address, SMS number, or PagerDuty service.
 --
 -- /See:/ 'projectsNotificationChannelsCreate' smart constructor.
-data ProjectsNotificationChannelsCreate = ProjectsNotificationChannelsCreate'
+data ProjectsNotificationChannelsCreate =
+  ProjectsNotificationChannelsCreate'
     { _pnccXgafv          :: !(Maybe Xgafv)
     , _pnccUploadProtocol :: !(Maybe Text)
     , _pnccAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsNotificationChannelsCreate = ProjectsNotificationChannelsCreate'
     , _pnccPayload        :: !NotificationChannel
     , _pnccName           :: !Text
     , _pnccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsNotificationChannelsCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsNotificationChannelsCreate
     -> Text -- ^ 'pnccName'
     -> ProjectsNotificationChannelsCreate
 projectsNotificationChannelsCreate pPnccPayload_ pPnccName_ =
-    ProjectsNotificationChannelsCreate'
+  ProjectsNotificationChannelsCreate'
     { _pnccXgafv = Nothing
     , _pnccUploadProtocol = Nothing
     , _pnccAccessToken = Nothing
@@ -150,7 +152,8 @@ pnccCallback
   = lens _pnccCallback (\ s a -> s{_pnccCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelsCreate where
+           ProjectsNotificationChannelsCreate
+         where
         type Rs ProjectsNotificationChannelsCreate =
              NotificationChannel
         type Scopes ProjectsNotificationChannelsCreate =

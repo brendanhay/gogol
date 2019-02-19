@@ -83,13 +83,15 @@ type RegionInstanceGroupManagersRecreateInstancesResource
 -- of 1000 instances with this method per request.
 --
 -- /See:/ 'regionInstanceGroupManagersRecreateInstances' smart constructor.
-data RegionInstanceGroupManagersRecreateInstances = RegionInstanceGroupManagersRecreateInstances'
+data RegionInstanceGroupManagersRecreateInstances =
+  RegionInstanceGroupManagersRecreateInstances'
     { _rigmriRequestId            :: !(Maybe Text)
     , _rigmriProject              :: !Text
     , _rigmriInstanceGroupManager :: !Text
     , _rigmriPayload              :: !RegionInstanceGroupManagersRecreateRequest
     , _rigmriRegion               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersRecreateInstances' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ regionInstanceGroupManagersRecreateInstances
     -> Text -- ^ 'rigmriRegion'
     -> RegionInstanceGroupManagersRecreateInstances
 regionInstanceGroupManagersRecreateInstances pRigmriProject_ pRigmriInstanceGroupManager_ pRigmriPayload_ pRigmriRegion_ =
-    RegionInstanceGroupManagersRecreateInstances'
+  RegionInstanceGroupManagersRecreateInstances'
     { _rigmriRequestId = Nothing
     , _rigmriProject = pRigmriProject_
     , _rigmriInstanceGroupManager = pRigmriInstanceGroupManager_
@@ -158,7 +160,8 @@ rigmriRegion
   = lens _rigmriRegion (\ s a -> s{_rigmriRegion = a})
 
 instance GoogleRequest
-         RegionInstanceGroupManagersRecreateInstances where
+           RegionInstanceGroupManagersRecreateInstances
+         where
         type Rs RegionInstanceGroupManagersRecreateInstances
              = Operation
         type Scopes

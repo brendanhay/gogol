@@ -61,14 +61,16 @@ type BiddersAccountsFilterSetsDeleteResource =
 -- ID.
 --
 -- /See:/ 'biddersAccountsFilterSetsDelete' smart constructor.
-data BiddersAccountsFilterSetsDelete = BiddersAccountsFilterSetsDelete'
+data BiddersAccountsFilterSetsDelete =
+  BiddersAccountsFilterSetsDelete'
     { _bafsdXgafv          :: !(Maybe Xgafv)
     , _bafsdUploadProtocol :: !(Maybe Text)
     , _bafsdAccessToken    :: !(Maybe Text)
     , _bafsdUploadType     :: !(Maybe Text)
     , _bafsdName           :: !Text
     , _bafsdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BiddersAccountsFilterSetsDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ biddersAccountsFilterSetsDelete
     :: Text -- ^ 'bafsdName'
     -> BiddersAccountsFilterSetsDelete
 biddersAccountsFilterSetsDelete pBafsdName_ =
-    BiddersAccountsFilterSetsDelete'
+  BiddersAccountsFilterSetsDelete'
     { _bafsdXgafv = Nothing
     , _bafsdUploadProtocol = Nothing
     , _bafsdAccessToken = Nothing
@@ -138,7 +140,8 @@ bafsdCallback
       (\ s a -> s{_bafsdCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsDelete where
+           BiddersAccountsFilterSetsDelete
+         where
         type Rs BiddersAccountsFilterSetsDelete = Empty
         type Scopes BiddersAccountsFilterSetsDelete =
              '["https://www.googleapis.com/auth/adexchange.buyer"]

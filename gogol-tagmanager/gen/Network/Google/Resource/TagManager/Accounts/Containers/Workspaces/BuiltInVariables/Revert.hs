@@ -57,10 +57,12 @@ type AccountsContainersWorkspacesBuiltInVariablesRevertResource
 -- | Reverts changes to a GTM Built-In Variables in a GTM Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesBuiltInVariablesRevert' smart constructor.
-data AccountsContainersWorkspacesBuiltInVariablesRevert = AccountsContainersWorkspacesBuiltInVariablesRevert'
+data AccountsContainersWorkspacesBuiltInVariablesRevert =
+  AccountsContainersWorkspacesBuiltInVariablesRevert'
     { _acwbivrPath :: !Text
     , _acwbivrType :: !(Maybe AccountsContainersWorkspacesBuilt_in_variablesRevertType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesBuiltInVariablesRevert' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ accountsContainersWorkspacesBuiltInVariablesRevert
     :: Text -- ^ 'acwbivrPath'
     -> AccountsContainersWorkspacesBuiltInVariablesRevert
 accountsContainersWorkspacesBuiltInVariablesRevert pAcwbivrPath_ =
-    AccountsContainersWorkspacesBuiltInVariablesRevert'
-    { _acwbivrPath = pAcwbivrPath_
-    , _acwbivrType = Nothing
-    }
+  AccountsContainersWorkspacesBuiltInVariablesRevert'
+    {_acwbivrPath = pAcwbivrPath_, _acwbivrType = Nothing}
 
 -- | GTM BuiltInVariable\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/built_in_variables
@@ -90,7 +90,7 @@ acwbivrType
   = lens _acwbivrType (\ s a -> s{_acwbivrType = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesBuiltInVariablesRevert
+           AccountsContainersWorkspacesBuiltInVariablesRevert
          where
         type Rs
                AccountsContainersWorkspacesBuiltInVariablesRevert

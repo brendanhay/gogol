@@ -61,14 +61,16 @@ type DocumentsClassifyTextResource =
 -- | Classifies a document into categories.
 --
 -- /See:/ 'documentsClassifyText' smart constructor.
-data DocumentsClassifyText = DocumentsClassifyText'
+data DocumentsClassifyText =
+  DocumentsClassifyText'
     { _dctXgafv          :: !(Maybe Xgafv)
     , _dctUploadProtocol :: !(Maybe Text)
     , _dctAccessToken    :: !(Maybe Text)
     , _dctUploadType     :: !(Maybe Text)
     , _dctPayload        :: !ClassifyTextRequest
     , _dctCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentsClassifyText' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ documentsClassifyText
     :: ClassifyTextRequest -- ^ 'dctPayload'
     -> DocumentsClassifyText
 documentsClassifyText pDctPayload_ =
-    DocumentsClassifyText'
+  DocumentsClassifyText'
     { _dctXgafv = Nothing
     , _dctUploadProtocol = Nothing
     , _dctAccessToken = Nothing

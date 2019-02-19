@@ -55,10 +55,12 @@ type StorelayoutpagesInsertResource =
 -- | Inserts a new store page.
 --
 -- /See:/ 'storelayoutpagesInsert' smart constructor.
-data StorelayoutpagesInsert = StorelayoutpagesInsert'
+data StorelayoutpagesInsert =
+  StorelayoutpagesInsert'
     { _siEnterpriseId :: !Text
     , _siPayload      :: !StorePage
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StorelayoutpagesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ storelayoutpagesInsert
     -> StorePage -- ^ 'siPayload'
     -> StorelayoutpagesInsert
 storelayoutpagesInsert pSiEnterpriseId_ pSiPayload_ =
-    StorelayoutpagesInsert'
-    { _siEnterpriseId = pSiEnterpriseId_
-    , _siPayload = pSiPayload_
-    }
+  StorelayoutpagesInsert'
+    {_siEnterpriseId = pSiEnterpriseId_, _siPayload = pSiPayload_}
 
 -- | The ID of the enterprise.
 siEnterpriseId :: Lens' StorelayoutpagesInsert Text

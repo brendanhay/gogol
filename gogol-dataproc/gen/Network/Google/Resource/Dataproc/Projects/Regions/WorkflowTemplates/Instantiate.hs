@@ -75,7 +75,8 @@ type ProjectsRegionsWorkflowTemplatesInstantiateResource
 -- completion, Operation.response will be Empty.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesInstantiate' smart constructor.
-data ProjectsRegionsWorkflowTemplatesInstantiate = ProjectsRegionsWorkflowTemplatesInstantiate'
+data ProjectsRegionsWorkflowTemplatesInstantiate =
+  ProjectsRegionsWorkflowTemplatesInstantiate'
     { _prwtiXgafv          :: !(Maybe Xgafv)
     , _prwtiUploadProtocol :: !(Maybe Text)
     , _prwtiAccessToken    :: !(Maybe Text)
@@ -83,7 +84,8 @@ data ProjectsRegionsWorkflowTemplatesInstantiate = ProjectsRegionsWorkflowTempla
     , _prwtiPayload        :: !InstantiateWorkflowTemplateRequest
     , _prwtiName           :: !Text
     , _prwtiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesInstantiate' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ projectsRegionsWorkflowTemplatesInstantiate
     -> Text -- ^ 'prwtiName'
     -> ProjectsRegionsWorkflowTemplatesInstantiate
 projectsRegionsWorkflowTemplatesInstantiate pPrwtiPayload_ pPrwtiName_ =
-    ProjectsRegionsWorkflowTemplatesInstantiate'
+  ProjectsRegionsWorkflowTemplatesInstantiate'
     { _prwtiXgafv = Nothing
     , _prwtiUploadProtocol = Nothing
     , _prwtiAccessToken = Nothing
@@ -159,7 +161,8 @@ prwtiCallback
       (\ s a -> s{_prwtiCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsWorkflowTemplatesInstantiate where
+           ProjectsRegionsWorkflowTemplatesInstantiate
+         where
         type Rs ProjectsRegionsWorkflowTemplatesInstantiate =
              Operation
         type Scopes

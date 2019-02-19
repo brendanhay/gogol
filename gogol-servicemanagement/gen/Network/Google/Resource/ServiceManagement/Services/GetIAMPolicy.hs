@@ -64,7 +64,8 @@ type ServicesGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'servicesGetIAMPolicy' smart constructor.
-data ServicesGetIAMPolicy = ServicesGetIAMPolicy'
+data ServicesGetIAMPolicy =
+  ServicesGetIAMPolicy'
     { _sgipXgafv          :: !(Maybe Xgafv)
     , _sgipUploadProtocol :: !(Maybe Text)
     , _sgipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ServicesGetIAMPolicy = ServicesGetIAMPolicy'
     , _sgipPayload        :: !GetIAMPolicyRequest
     , _sgipResource       :: !Text
     , _sgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ servicesGetIAMPolicy
     -> Text -- ^ 'sgipResource'
     -> ServicesGetIAMPolicy
 servicesGetIAMPolicy pSgipPayload_ pSgipResource_ =
-    ServicesGetIAMPolicy'
+  ServicesGetIAMPolicy'
     { _sgipXgafv = Nothing
     , _sgipUploadProtocol = Nothing
     , _sgipAccessToken = Nothing

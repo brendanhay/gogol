@@ -56,10 +56,12 @@ type MobileApppanelsUpdateResource =
 -- updated is the owners property.
 --
 -- /See:/ 'mobileApppanelsUpdate' smart constructor.
-data MobileApppanelsUpdate = MobileApppanelsUpdate'
+data MobileApppanelsUpdate =
+  MobileApppanelsUpdate'
     { _mauPayload :: !MobileAppPanel
     , _mauPanelId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileApppanelsUpdate' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ mobileApppanelsUpdate
     -> Text -- ^ 'mauPanelId'
     -> MobileApppanelsUpdate
 mobileApppanelsUpdate pMauPayload_ pMauPanelId_ =
-    MobileApppanelsUpdate'
-    { _mauPayload = pMauPayload_
-    , _mauPanelId = pMauPanelId_
-    }
+  MobileApppanelsUpdate'
+    {_mauPayload = pMauPayload_, _mauPanelId = pMauPanelId_}
 
 -- | Multipart request metadata.
 mauPayload :: Lens' MobileApppanelsUpdate MobileAppPanel

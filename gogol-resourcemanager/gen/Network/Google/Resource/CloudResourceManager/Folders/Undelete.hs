@@ -74,7 +74,8 @@ type FoldersUndeleteResource =
 -- permission on the identified folder.
 --
 -- /See:/ 'foldersUndelete' smart constructor.
-data FoldersUndelete = FoldersUndelete'
+data FoldersUndelete =
+  FoldersUndelete'
     { _fuXgafv          :: !(Maybe Xgafv)
     , _fuUploadProtocol :: !(Maybe Text)
     , _fuAccessToken    :: !(Maybe Text)
@@ -82,7 +83,8 @@ data FoldersUndelete = FoldersUndelete'
     , _fuPayload        :: !UndeleteFolderRequest
     , _fuName           :: !Text
     , _fuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersUndelete' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ foldersUndelete
     -> Text -- ^ 'fuName'
     -> FoldersUndelete
 foldersUndelete pFuPayload_ pFuName_ =
-    FoldersUndelete'
+  FoldersUndelete'
     { _fuXgafv = Nothing
     , _fuUploadProtocol = Nothing
     , _fuAccessToken = Nothing

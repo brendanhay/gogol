@@ -49,8 +49,8 @@ type ColorsGetResource =
 --
 -- /See:/ 'colorsGet' smart constructor.
 data ColorsGet =
-    ColorsGet'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ColorsGet'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ColorsGet' with the minimum fields required to make a request.
 --

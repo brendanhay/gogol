@@ -53,9 +53,11 @@ type ProvisioningCreateAccountTicketResource =
 -- | Creates an account ticket.
 --
 -- /See:/ 'provisioningCreateAccountTicket' smart constructor.
-newtype ProvisioningCreateAccountTicket = ProvisioningCreateAccountTicket'
+newtype ProvisioningCreateAccountTicket =
+  ProvisioningCreateAccountTicket'
     { _pPayload :: AccountTicket
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProvisioningCreateAccountTicket' with the minimum fields required to make a request.
 --
@@ -66,16 +68,15 @@ provisioningCreateAccountTicket
     :: AccountTicket -- ^ 'pPayload'
     -> ProvisioningCreateAccountTicket
 provisioningCreateAccountTicket pPPayload_ =
-    ProvisioningCreateAccountTicket'
-    { _pPayload = pPPayload_
-    }
+  ProvisioningCreateAccountTicket' {_pPayload = pPPayload_}
 
 -- | Multipart request metadata.
 pPayload :: Lens' ProvisioningCreateAccountTicket AccountTicket
 pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
 
 instance GoogleRequest
-         ProvisioningCreateAccountTicket where
+           ProvisioningCreateAccountTicket
+         where
         type Rs ProvisioningCreateAccountTicket =
              AccountTicket
         type Scopes ProvisioningCreateAccountTicket =

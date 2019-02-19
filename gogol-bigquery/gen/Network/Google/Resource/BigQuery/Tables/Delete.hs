@@ -59,11 +59,13 @@ type TablesDeleteResource =
 -- contains data, all the data will be deleted.
 --
 -- /See:/ 'tablesDelete' smart constructor.
-data TablesDelete = TablesDelete'
+data TablesDelete =
+  TablesDelete'
     { _tdDataSetId :: !Text
     , _tdProjectId :: !Text
     , _tdTableId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TablesDelete' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ tablesDelete
     -> Text -- ^ 'tdTableId'
     -> TablesDelete
 tablesDelete pTdDataSetId_ pTdProjectId_ pTdTableId_ =
-    TablesDelete'
+  TablesDelete'
     { _tdDataSetId = pTdDataSetId_
     , _tdProjectId = pTdProjectId_
     , _tdTableId = pTdTableId_

@@ -68,7 +68,8 @@ type ProjectsLocationsQueuesPauseResource =
 -- is PAUSED.
 --
 -- /See:/ 'projectsLocationsQueuesPause' smart constructor.
-data ProjectsLocationsQueuesPause = ProjectsLocationsQueuesPause'
+data ProjectsLocationsQueuesPause =
+  ProjectsLocationsQueuesPause'
     { _proXgafv          :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
     , _proAccessToken    :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsLocationsQueuesPause = ProjectsLocationsQueuesPause'
     , _proPayload        :: !PauseQueueRequest
     , _proName           :: !Text
     , _proCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsQueuesPause' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ projectsLocationsQueuesPause
     -> Text -- ^ 'proName'
     -> ProjectsLocationsQueuesPause
 projectsLocationsQueuesPause pProPayload_ pProName_ =
-    ProjectsLocationsQueuesPause'
+  ProjectsLocationsQueuesPause'
     { _proXgafv = Nothing
     , _proUploadProtocol = Nothing
     , _proAccessToken = Nothing

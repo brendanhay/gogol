@@ -65,7 +65,8 @@ type ProjectsLocationsRegistriesGroupsSetIAMPolicyResource
 -- existing policy.
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsSetIAMPolicy' smart constructor.
-data ProjectsLocationsRegistriesGroupsSetIAMPolicy = ProjectsLocationsRegistriesGroupsSetIAMPolicy'
+data ProjectsLocationsRegistriesGroupsSetIAMPolicy =
+  ProjectsLocationsRegistriesGroupsSetIAMPolicy'
     { _plrgsipXgafv          :: !(Maybe Xgafv)
     , _plrgsipUploadProtocol :: !(Maybe Text)
     , _plrgsipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsLocationsRegistriesGroupsSetIAMPolicy = ProjectsLocationsRegistries
     , _plrgsipPayload        :: !SetIAMPolicyRequest
     , _plrgsipResource       :: !Text
     , _plrgsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsLocationsRegistriesGroupsSetIAMPolicy
     -> Text -- ^ 'plrgsipResource'
     -> ProjectsLocationsRegistriesGroupsSetIAMPolicy
 projectsLocationsRegistriesGroupsSetIAMPolicy pPlrgsipPayload_ pPlrgsipResource_ =
-    ProjectsLocationsRegistriesGroupsSetIAMPolicy'
+  ProjectsLocationsRegistriesGroupsSetIAMPolicy'
     { _plrgsipXgafv = Nothing
     , _plrgsipUploadProtocol = Nothing
     , _plrgsipAccessToken = Nothing
@@ -150,7 +152,8 @@ plrgsipCallback
       (\ s a -> s{_plrgsipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsSetIAMPolicy where
+           ProjectsLocationsRegistriesGroupsSetIAMPolicy
+         where
         type Rs ProjectsLocationsRegistriesGroupsSetIAMPolicy
              = Policy
         type Scopes

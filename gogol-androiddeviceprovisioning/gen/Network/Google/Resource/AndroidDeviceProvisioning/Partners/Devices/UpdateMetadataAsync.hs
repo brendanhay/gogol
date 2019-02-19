@@ -70,7 +70,8 @@ type PartnersDevicesUpdateMetadataAsyncResource =
 -- operations](\/zero-touch\/guides\/how-it-works#operations).
 --
 -- /See:/ 'partnersDevicesUpdateMetadataAsync' smart constructor.
-data PartnersDevicesUpdateMetadataAsync = PartnersDevicesUpdateMetadataAsync'
+data PartnersDevicesUpdateMetadataAsync =
+  PartnersDevicesUpdateMetadataAsync'
     { _pdumaXgafv          :: !(Maybe Xgafv)
     , _pdumaUploadProtocol :: !(Maybe Text)
     , _pdumaAccessToken    :: !(Maybe Text)
@@ -78,7 +79,8 @@ data PartnersDevicesUpdateMetadataAsync = PartnersDevicesUpdateMetadataAsync'
     , _pdumaUploadType     :: !(Maybe Text)
     , _pdumaPayload        :: !UpdateDeviceMetadataInBatchRequest
     , _pdumaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartnersDevicesUpdateMetadataAsync' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ partnersDevicesUpdateMetadataAsync
     -> UpdateDeviceMetadataInBatchRequest -- ^ 'pdumaPayload'
     -> PartnersDevicesUpdateMetadataAsync
 partnersDevicesUpdateMetadataAsync pPdumaPartnerId_ pPdumaPayload_ =
-    PartnersDevicesUpdateMetadataAsync'
+  PartnersDevicesUpdateMetadataAsync'
     { _pdumaXgafv = Nothing
     , _pdumaUploadProtocol = Nothing
     , _pdumaAccessToken = Nothing
@@ -154,7 +156,8 @@ pdumaCallback
       (\ s a -> s{_pdumaCallback = a})
 
 instance GoogleRequest
-         PartnersDevicesUpdateMetadataAsync where
+           PartnersDevicesUpdateMetadataAsync
+         where
         type Rs PartnersDevicesUpdateMetadataAsync =
              Operation
         type Scopes PartnersDevicesUpdateMetadataAsync = '[]

@@ -62,7 +62,8 @@ type SignupURLsCreateResource =
 -- | Creates an enterprise signup URL.
 --
 -- /See:/ 'signupURLsCreate' smart constructor.
-data SignupURLsCreate = SignupURLsCreate'
+data SignupURLsCreate =
+  SignupURLsCreate'
     { _sucXgafv          :: !(Maybe Xgafv)
     , _sucUploadProtocol :: !(Maybe Text)
     , _sucCallbackURL    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data SignupURLsCreate = SignupURLsCreate'
     , _sucUploadType     :: !(Maybe Text)
     , _sucProjectId      :: !(Maybe Text)
     , _sucCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SignupURLsCreate' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ data SignupURLsCreate = SignupURLsCreate'
 signupURLsCreate
     :: SignupURLsCreate
 signupURLsCreate =
-    SignupURLsCreate'
+  SignupURLsCreate'
     { _sucXgafv = Nothing
     , _sucUploadProtocol = Nothing
     , _sucCallbackURL = Nothing

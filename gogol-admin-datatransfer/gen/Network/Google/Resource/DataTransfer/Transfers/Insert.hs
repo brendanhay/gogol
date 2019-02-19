@@ -53,9 +53,11 @@ type TransfersInsertResource =
 -- | Inserts a data transfer request.
 --
 -- /See:/ 'transfersInsert' smart constructor.
-newtype TransfersInsert = TransfersInsert'
+newtype TransfersInsert =
+  TransfersInsert'
     { _tiPayload :: DataTransfer
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransfersInsert' with the minimum fields required to make a request.
 --
@@ -65,10 +67,7 @@ newtype TransfersInsert = TransfersInsert'
 transfersInsert
     :: DataTransfer -- ^ 'tiPayload'
     -> TransfersInsert
-transfersInsert pTiPayload_ =
-    TransfersInsert'
-    { _tiPayload = pTiPayload_
-    }
+transfersInsert pTiPayload_ = TransfersInsert' {_tiPayload = pTiPayload_}
 
 -- | Multipart request metadata.
 tiPayload :: Lens' TransfersInsert DataTransfer

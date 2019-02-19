@@ -22,11 +22,13 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'promotionImage' smart constructor.
-data PromotionImage = PromotionImage'
+data PromotionImage =
+  PromotionImage'
     { _piHeight :: !(Maybe (Textual Int32))
     , _piWidth  :: !(Maybe (Textual Int32))
     , _piSource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PromotionImage' with the minimum fields required to make a request.
 --
@@ -40,11 +42,7 @@ data PromotionImage = PromotionImage'
 promotionImage
     :: PromotionImage
 promotionImage =
-    PromotionImage'
-    { _piHeight = Nothing
-    , _piWidth = Nothing
-    , _piSource = Nothing
-    }
+  PromotionImage' {_piHeight = Nothing, _piWidth = Nothing, _piSource = Nothing}
 
 piHeight :: Lens' PromotionImage (Maybe Int32)
 piHeight
@@ -77,10 +75,12 @@ instance ToJSON PromotionImage where
 
 --
 -- /See:/ 'context' smart constructor.
-data Context = Context'
+data Context =
+  Context'
     { _cFacets :: !(Maybe [[ContextFacetsItemItem]])
     , _cTitle  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Context' with the minimum fields required to make a request.
 --
@@ -91,11 +91,7 @@ data Context = Context'
 -- * 'cTitle'
 context
     :: Context
-context =
-    Context'
-    { _cFacets = Nothing
-    , _cTitle = Nothing
-    }
+context = Context' {_cFacets = Nothing, _cTitle = Nothing}
 
 cFacets :: Lens' Context [[ContextFacetsItemItem]]
 cFacets
@@ -121,9 +117,11 @@ instance ToJSON Context where
 
 --
 -- /See:/ 'searchQueries' smart constructor.
-newtype SearchQueries = SearchQueries'
+newtype SearchQueries =
+  SearchQueries'
     { _sqAddtional :: HashMap Text [Query]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchQueries' with the minimum fields required to make a request.
 --
@@ -134,9 +132,7 @@ searchQueries
     :: HashMap Text [Query] -- ^ 'sqAddtional'
     -> SearchQueries
 searchQueries pSqAddtional_ =
-    SearchQueries'
-    { _sqAddtional = _Coerce # pSqAddtional_
-    }
+  SearchQueries' {_sqAddtional = _Coerce # pSqAddtional_}
 
 sqAddtional :: Lens' SearchQueries (HashMap Text [Query])
 sqAddtional
@@ -153,9 +149,11 @@ instance ToJSON SearchQueries where
 
 --
 -- /See:/ 'resultPagemapAdditionalItem' smart constructor.
-newtype ResultPagemapAdditionalItem = ResultPagemapAdditionalItem'
+newtype ResultPagemapAdditionalItem =
+  ResultPagemapAdditionalItem'
     { _rpaiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResultPagemapAdditionalItem' with the minimum fields required to make a request.
 --
@@ -166,9 +164,7 @@ resultPagemapAdditionalItem
     :: HashMap Text JSONValue -- ^ 'rpaiAddtional'
     -> ResultPagemapAdditionalItem
 resultPagemapAdditionalItem pRpaiAddtional_ =
-    ResultPagemapAdditionalItem'
-    { _rpaiAddtional = _Coerce # pRpaiAddtional_
-    }
+  ResultPagemapAdditionalItem' {_rpaiAddtional = _Coerce # pRpaiAddtional_}
 
 rpaiAddtional :: Lens' ResultPagemapAdditionalItem (HashMap Text JSONValue)
 rpaiAddtional
@@ -187,10 +183,12 @@ instance ToJSON ResultPagemapAdditionalItem where
 
 --
 -- /See:/ 'searchURL' smart constructor.
-data SearchURL = SearchURL'
+data SearchURL =
+  SearchURL'
     { _suType     :: !Text
     , _suTemplate :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchURL' with the minimum fields required to make a request.
 --
@@ -202,9 +200,10 @@ data SearchURL = SearchURL'
 searchURL
     :: SearchURL
 searchURL =
-    SearchURL'
+  SearchURL'
     { _suType = "application/json"
-    , _suTemplate = "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+    , _suTemplate =
+        "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
     }
 
 suType :: Lens' SearchURL Text
@@ -232,10 +231,12 @@ instance ToJSON SearchURL where
 
 --
 -- /See:/ 'searchSpelling' smart constructor.
-data SearchSpelling = SearchSpelling'
+data SearchSpelling =
+  SearchSpelling'
     { _ssCorrectedQuery     :: !(Maybe Text)
     , _ssHTMLCorrectedQuery :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchSpelling' with the minimum fields required to make a request.
 --
@@ -247,10 +248,7 @@ data SearchSpelling = SearchSpelling'
 searchSpelling
     :: SearchSpelling
 searchSpelling =
-    SearchSpelling'
-    { _ssCorrectedQuery = Nothing
-    , _ssHTMLCorrectedQuery = Nothing
-    }
+  SearchSpelling' {_ssCorrectedQuery = Nothing, _ssHTMLCorrectedQuery = Nothing}
 
 ssCorrectedQuery :: Lens' SearchSpelling (Maybe Text)
 ssCorrectedQuery
@@ -279,7 +277,8 @@ instance ToJSON SearchSpelling where
 
 --
 -- /See:/ 'resultImage' smart constructor.
-data ResultImage = ResultImage'
+data ResultImage =
+  ResultImage'
     { _riThumbnailLink   :: !(Maybe Text)
     , _riHeight          :: !(Maybe (Textual Int32))
     , _riByteSize        :: !(Maybe (Textual Int32))
@@ -287,7 +286,8 @@ data ResultImage = ResultImage'
     , _riThumbnailHeight :: !(Maybe (Textual Int32))
     , _riWidth           :: !(Maybe (Textual Int32))
     , _riThumbnailWidth  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResultImage' with the minimum fields required to make a request.
 --
@@ -309,7 +309,7 @@ data ResultImage = ResultImage'
 resultImage
     :: ResultImage
 resultImage =
-    ResultImage'
+  ResultImage'
     { _riThumbnailLink = Nothing
     , _riHeight = Nothing
     , _riByteSize = Nothing
@@ -382,9 +382,11 @@ instance ToJSON ResultImage where
 
 --
 -- /See:/ 'resultPagemap' smart constructor.
-newtype ResultPagemap = ResultPagemap'
+newtype ResultPagemap =
+  ResultPagemap'
     { _rpAddtional :: HashMap Text [ResultPagemapAdditionalItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResultPagemap' with the minimum fields required to make a request.
 --
@@ -395,9 +397,7 @@ resultPagemap
     :: HashMap Text [ResultPagemapAdditionalItem] -- ^ 'rpAddtional'
     -> ResultPagemap
 resultPagemap pRpAddtional_ =
-    ResultPagemap'
-    { _rpAddtional = _Coerce # pRpAddtional_
-    }
+  ResultPagemap' {_rpAddtional = _Coerce # pRpAddtional_}
 
 rpAddtional :: Lens' ResultPagemap (HashMap Text [ResultPagemapAdditionalItem])
 rpAddtional
@@ -414,7 +414,8 @@ instance ToJSON ResultPagemap where
 
 --
 -- /See:/ 'result' smart constructor.
-data Result = Result'
+data Result =
+  Result'
     { _rMime             :: !(Maybe Text)
     , _rImage            :: !(Maybe ResultImage)
     , _rPagemap          :: !(Maybe ResultPagemap)
@@ -430,7 +431,8 @@ data Result = Result'
     , _rHTMLTitle        :: !(Maybe Text)
     , _rLabels           :: !(Maybe [ResultLabelsItem])
     , _rTitle            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Result' with the minimum fields required to make a request.
 --
@@ -468,7 +470,7 @@ data Result = Result'
 result
     :: Result
 result =
-    Result'
+  Result'
     { _rMime = Nothing
     , _rImage = Nothing
     , _rPagemap = Nothing
@@ -581,11 +583,13 @@ instance ToJSON Result where
 
 --
 -- /See:/ 'resultLabelsItem' smart constructor.
-data ResultLabelsItem = ResultLabelsItem'
+data ResultLabelsItem =
+  ResultLabelsItem'
     { _rliName        :: !(Maybe Text)
     , _rliDisplayName :: !(Maybe Text)
     , _rliLabelWithOp :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResultLabelsItem' with the minimum fields required to make a request.
 --
@@ -599,11 +603,8 @@ data ResultLabelsItem = ResultLabelsItem'
 resultLabelsItem
     :: ResultLabelsItem
 resultLabelsItem =
-    ResultLabelsItem'
-    { _rliName = Nothing
-    , _rliDisplayName = Nothing
-    , _rliLabelWithOp = Nothing
-    }
+  ResultLabelsItem'
+    {_rliName = Nothing, _rliDisplayName = Nothing, _rliLabelWithOp = Nothing}
 
 rliName :: Lens' ResultLabelsItem (Maybe Text)
 rliName = lens _rliName (\ s a -> s{_rliName = a})
@@ -636,12 +637,14 @@ instance ToJSON ResultLabelsItem where
 
 --
 -- /See:/ 'searchSearchInformation' smart constructor.
-data SearchSearchInformation = SearchSearchInformation'
+data SearchSearchInformation =
+  SearchSearchInformation'
     { _ssiSearchTime            :: !(Maybe (Textual Double))
     , _ssiFormattedSearchTime   :: !(Maybe Text)
     , _ssiTotalResults          :: !(Maybe (Textual Int64))
     , _ssiFormattedTotalResults :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchSearchInformation' with the minimum fields required to make a request.
 --
@@ -657,7 +660,7 @@ data SearchSearchInformation = SearchSearchInformation'
 searchSearchInformation
     :: SearchSearchInformation
 searchSearchInformation =
-    SearchSearchInformation'
+  SearchSearchInformation'
     { _ssiSearchTime = Nothing
     , _ssiFormattedSearchTime = Nothing
     , _ssiTotalResults = Nothing
@@ -709,7 +712,8 @@ instance ToJSON SearchSearchInformation where
 
 --
 -- /See:/ 'query' smart constructor.
-data Query = Query'
+data Query =
+  Query'
     { _qImgDominantColor       :: !(Maybe Text)
     , _qOutputEncoding         :: !(Maybe Text)
     , _qSiteSearchFilter       :: !(Maybe Text)
@@ -746,7 +750,8 @@ data Query = Query'
     , _qSafe                   :: !(Maybe Text)
     , _qHq                     :: !(Maybe Text)
     , _qHighRange              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Query' with the minimum fields required to make a request.
 --
@@ -826,7 +831,7 @@ data Query = Query'
 query
     :: Query
 query =
-    Query'
+  Query'
     { _qImgDominantColor = Nothing
     , _qOutputEncoding = Nothing
     , _qSiteSearchFilter = Nothing
@@ -1091,12 +1096,14 @@ instance ToJSON Query where
 
 --
 -- /See:/ 'promotionBodyLinesItem' smart constructor.
-data PromotionBodyLinesItem = PromotionBodyLinesItem'
+data PromotionBodyLinesItem =
+  PromotionBodyLinesItem'
     { _pbliLink      :: !(Maybe Text)
     , _pbliURL       :: !(Maybe Text)
     , _pbliHTMLTitle :: !(Maybe Text)
     , _pbliTitle     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PromotionBodyLinesItem' with the minimum fields required to make a request.
 --
@@ -1112,7 +1119,7 @@ data PromotionBodyLinesItem = PromotionBodyLinesItem'
 promotionBodyLinesItem
     :: PromotionBodyLinesItem
 promotionBodyLinesItem =
-    PromotionBodyLinesItem'
+  PromotionBodyLinesItem'
     { _pbliLink = Nothing
     , _pbliURL = Nothing
     , _pbliHTMLTitle = Nothing
@@ -1153,14 +1160,16 @@ instance ToJSON PromotionBodyLinesItem where
 
 --
 -- /See:/ 'promotion' smart constructor.
-data Promotion = Promotion'
+data Promotion =
+  Promotion'
     { _pImage       :: !(Maybe PromotionImage)
     , _pDisplayLink :: !(Maybe Text)
     , _pBodyLines   :: !(Maybe [PromotionBodyLinesItem])
     , _pLink        :: !(Maybe Text)
     , _pHTMLTitle   :: !(Maybe Text)
     , _pTitle       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Promotion' with the minimum fields required to make a request.
 --
@@ -1180,7 +1189,7 @@ data Promotion = Promotion'
 promotion
     :: Promotion
 promotion =
-    Promotion'
+  Promotion'
     { _pImage = Nothing
     , _pDisplayLink = Nothing
     , _pBodyLines = Nothing
@@ -1236,7 +1245,8 @@ instance ToJSON Promotion where
 
 --
 -- /See:/ 'search' smart constructor.
-data Search = Search'
+data Search =
+  Search'
     { _sQueries           :: !(Maybe SearchQueries)
     , _sContext           :: !(Maybe Context)
     , _sKind              :: !Text
@@ -1245,7 +1255,8 @@ data Search = Search'
     , _sSearchInformation :: !(Maybe SearchSearchInformation)
     , _sPromotions        :: !(Maybe [Promotion])
     , _sSpelling          :: !(Maybe SearchSpelling)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Search' with the minimum fields required to make a request.
 --
@@ -1269,7 +1280,7 @@ data Search = Search'
 search
     :: Search
 search =
-    Search'
+  Search'
     { _sQueries = Nothing
     , _sContext = Nothing
     , _sKind = "customsearch#search"
@@ -1339,11 +1350,13 @@ instance ToJSON Search where
 
 --
 -- /See:/ 'contextFacetsItemItem' smart constructor.
-data ContextFacetsItemItem = ContextFacetsItemItem'
+data ContextFacetsItemItem =
+  ContextFacetsItemItem'
     { _cfiiAnchor      :: !(Maybe Text)
     , _cfiiLabelWithOp :: !(Maybe Text)
     , _cfiiLabel       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContextFacetsItemItem' with the minimum fields required to make a request.
 --
@@ -1357,11 +1370,8 @@ data ContextFacetsItemItem = ContextFacetsItemItem'
 contextFacetsItemItem
     :: ContextFacetsItemItem
 contextFacetsItemItem =
-    ContextFacetsItemItem'
-    { _cfiiAnchor = Nothing
-    , _cfiiLabelWithOp = Nothing
-    , _cfiiLabel = Nothing
-    }
+  ContextFacetsItemItem'
+    {_cfiiAnchor = Nothing, _cfiiLabelWithOp = Nothing, _cfiiLabel = Nothing}
 
 cfiiAnchor :: Lens' ContextFacetsItemItem (Maybe Text)
 cfiiAnchor

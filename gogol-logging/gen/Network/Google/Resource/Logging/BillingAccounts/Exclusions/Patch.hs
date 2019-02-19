@@ -64,7 +64,8 @@ type BillingAccountsExclusionsPatchResource =
 -- | Changes one or more properties of an existing exclusion.
 --
 -- /See:/ 'billingAccountsExclusionsPatch' smart constructor.
-data BillingAccountsExclusionsPatch = BillingAccountsExclusionsPatch'
+data BillingAccountsExclusionsPatch =
+  BillingAccountsExclusionsPatch'
     { _baepXgafv          :: !(Maybe Xgafv)
     , _baepUploadProtocol :: !(Maybe Text)
     , _baepUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,8 @@ data BillingAccountsExclusionsPatch = BillingAccountsExclusionsPatch'
     , _baepPayload        :: !LogExclusion
     , _baepName           :: !Text
     , _baepCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsExclusionsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ billingAccountsExclusionsPatch
     -> Text -- ^ 'baepName'
     -> BillingAccountsExclusionsPatch
 billingAccountsExclusionsPatch pBaepPayload_ pBaepName_ =
-    BillingAccountsExclusionsPatch'
+  BillingAccountsExclusionsPatch'
     { _baepXgafv = Nothing
     , _baepUploadProtocol = Nothing
     , _baepUpdateMask = Nothing

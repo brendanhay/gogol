@@ -66,7 +66,8 @@ type BillingAccountsTestIAMPermissionsResource =
 -- the input permissions that the caller is allowed for that resource.
 --
 -- /See:/ 'billingAccountsTestIAMPermissions' smart constructor.
-data BillingAccountsTestIAMPermissions = BillingAccountsTestIAMPermissions'
+data BillingAccountsTestIAMPermissions =
+  BillingAccountsTestIAMPermissions'
     { _batipXgafv          :: !(Maybe Xgafv)
     , _batipUploadProtocol :: !(Maybe Text)
     , _batipAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data BillingAccountsTestIAMPermissions = BillingAccountsTestIAMPermissions'
     , _batipPayload        :: !TestIAMPermissionsRequest
     , _batipResource       :: !Text
     , _batipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ billingAccountsTestIAMPermissions
     -> Text -- ^ 'batipResource'
     -> BillingAccountsTestIAMPermissions
 billingAccountsTestIAMPermissions pBatipPayload_ pBatipResource_ =
-    BillingAccountsTestIAMPermissions'
+  BillingAccountsTestIAMPermissions'
     { _batipXgafv = Nothing
     , _batipUploadProtocol = Nothing
     , _batipAccessToken = Nothing
@@ -151,7 +153,8 @@ batipCallback
       (\ s a -> s{_batipCallback = a})
 
 instance GoogleRequest
-         BillingAccountsTestIAMPermissions where
+           BillingAccountsTestIAMPermissions
+         where
         type Rs BillingAccountsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes BillingAccountsTestIAMPermissions =

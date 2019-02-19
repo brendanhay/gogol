@@ -64,14 +64,16 @@ type ProjectsJobTriggersDeleteResource =
 -- more.
 --
 -- /See:/ 'projectsJobTriggersDelete' smart constructor.
-data ProjectsJobTriggersDelete = ProjectsJobTriggersDelete'
+data ProjectsJobTriggersDelete =
+  ProjectsJobTriggersDelete'
     { _pjtdXgafv          :: !(Maybe Xgafv)
     , _pjtdUploadProtocol :: !(Maybe Text)
     , _pjtdAccessToken    :: !(Maybe Text)
     , _pjtdUploadType     :: !(Maybe Text)
     , _pjtdName           :: !Text
     , _pjtdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobTriggersDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ projectsJobTriggersDelete
     :: Text -- ^ 'pjtdName'
     -> ProjectsJobTriggersDelete
 projectsJobTriggersDelete pPjtdName_ =
-    ProjectsJobTriggersDelete'
+  ProjectsJobTriggersDelete'
     { _pjtdXgafv = Nothing
     , _pjtdUploadProtocol = Nothing
     , _pjtdAccessToken = Nothing

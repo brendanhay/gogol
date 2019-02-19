@@ -63,7 +63,8 @@ type MattersCloseResource =
 -- | Closes the specified matter. Returns matter with updated state.
 --
 -- /See:/ 'mattersClose' smart constructor.
-data MattersClose = MattersClose'
+data MattersClose =
+  MattersClose'
     { _mcXgafv          :: !(Maybe Xgafv)
     , _mcUploadProtocol :: !(Maybe Text)
     , _mcAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data MattersClose = MattersClose'
     , _mcPayload        :: !CloseMatterRequest
     , _mcMatterId       :: !Text
     , _mcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersClose' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ mattersClose
     -> Text -- ^ 'mcMatterId'
     -> MattersClose
 mattersClose pMcPayload_ pMcMatterId_ =
-    MattersClose'
+  MattersClose'
     { _mcXgafv = Nothing
     , _mcUploadProtocol = Nothing
     , _mcAccessToken = Nothing

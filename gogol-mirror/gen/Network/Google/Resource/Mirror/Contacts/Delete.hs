@@ -51,9 +51,11 @@ type ContactsDeleteResource =
 -- | Deletes a contact.
 --
 -- /See:/ 'contactsDelete' smart constructor.
-newtype ContactsDelete = ContactsDelete'
+newtype ContactsDelete =
+  ContactsDelete'
     { _cdId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContactsDelete' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype ContactsDelete = ContactsDelete'
 contactsDelete
     :: Text -- ^ 'cdId'
     -> ContactsDelete
-contactsDelete pCdId_ =
-    ContactsDelete'
-    { _cdId = pCdId_
-    }
+contactsDelete pCdId_ = ContactsDelete' {_cdId = pCdId_}
 
 -- | The ID of the contact.
 cdId :: Lens' ContactsDelete Text

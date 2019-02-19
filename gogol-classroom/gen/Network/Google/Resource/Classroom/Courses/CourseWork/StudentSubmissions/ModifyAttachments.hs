@@ -92,7 +92,8 @@ type CoursesCourseWorkStudentSubmissionsModifyAttachmentsResource
 -- student submission does not exist.
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsModifyAttachments' smart constructor.
-data CoursesCourseWorkStudentSubmissionsModifyAttachments = CoursesCourseWorkStudentSubmissionsModifyAttachments'
+data CoursesCourseWorkStudentSubmissionsModifyAttachments =
+  CoursesCourseWorkStudentSubmissionsModifyAttachments'
     { _ccwssmaXgafv          :: !(Maybe Xgafv)
     , _ccwssmaUploadProtocol :: !(Maybe Text)
     , _ccwssmaCourseId       :: !Text
@@ -102,7 +103,8 @@ data CoursesCourseWorkStudentSubmissionsModifyAttachments = CoursesCourseWorkStu
     , _ccwssmaId             :: !Text
     , _ccwssmaCallback       :: !(Maybe Text)
     , _ccwssmaCourseWorkId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsModifyAttachments' with the minimum fields required to make a request.
 --
@@ -132,7 +134,7 @@ coursesCourseWorkStudentSubmissionsModifyAttachments
     -> Text -- ^ 'ccwssmaCourseWorkId'
     -> CoursesCourseWorkStudentSubmissionsModifyAttachments
 coursesCourseWorkStudentSubmissionsModifyAttachments pCcwssmaCourseId_ pCcwssmaPayload_ pCcwssmaId_ pCcwssmaCourseWorkId_ =
-    CoursesCourseWorkStudentSubmissionsModifyAttachments'
+  CoursesCourseWorkStudentSubmissionsModifyAttachments'
     { _ccwssmaXgafv = Nothing
     , _ccwssmaUploadProtocol = Nothing
     , _ccwssmaCourseId = pCcwssmaCourseId_
@@ -198,7 +200,7 @@ ccwssmaCourseWorkId
       (\ s a -> s{_ccwssmaCourseWorkId = a})
 
 instance GoogleRequest
-         CoursesCourseWorkStudentSubmissionsModifyAttachments
+           CoursesCourseWorkStudentSubmissionsModifyAttachments
          where
         type Rs
                CoursesCourseWorkStudentSubmissionsModifyAttachments

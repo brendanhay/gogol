@@ -58,11 +58,13 @@ type BucketAccessControlsDeleteResource =
 -- specified bucket.
 --
 -- /See:/ 'bucketAccessControlsDelete' smart constructor.
-data BucketAccessControlsDelete = BucketAccessControlsDelete'
+data BucketAccessControlsDelete =
+  BucketAccessControlsDelete'
     { _bacdBucket      :: !Text
     , _bacdUserProject :: !(Maybe Text)
     , _bacdEntity      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketAccessControlsDelete' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ bucketAccessControlsDelete
     -> Text -- ^ 'bacdEntity'
     -> BucketAccessControlsDelete
 bucketAccessControlsDelete pBacdBucket_ pBacdEntity_ =
-    BucketAccessControlsDelete'
+  BucketAccessControlsDelete'
     { _bacdBucket = pBacdBucket_
     , _bacdUserProject = Nothing
     , _bacdEntity = pBacdEntity_

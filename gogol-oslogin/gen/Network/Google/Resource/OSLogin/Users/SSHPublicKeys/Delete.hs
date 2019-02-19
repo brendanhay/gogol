@@ -59,14 +59,16 @@ type UsersSSHPublicKeysDeleteResource =
 -- | Deletes an SSH public key.
 --
 -- /See:/ 'usersSSHPublicKeysDelete' smart constructor.
-data UsersSSHPublicKeysDelete = UsersSSHPublicKeysDelete'
+data UsersSSHPublicKeysDelete =
+  UsersSSHPublicKeysDelete'
     { _uspkdXgafv          :: !(Maybe Xgafv)
     , _uspkdUploadProtocol :: !(Maybe Text)
     , _uspkdAccessToken    :: !(Maybe Text)
     , _uspkdUploadType     :: !(Maybe Text)
     , _uspkdName           :: !Text
     , _uspkdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSSHPublicKeysDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ usersSSHPublicKeysDelete
     :: Text -- ^ 'uspkdName'
     -> UsersSSHPublicKeysDelete
 usersSSHPublicKeysDelete pUspkdName_ =
-    UsersSSHPublicKeysDelete'
+  UsersSSHPublicKeysDelete'
     { _uspkdXgafv = Nothing
     , _uspkdUploadProtocol = Nothing
     , _uspkdAccessToken = Nothing

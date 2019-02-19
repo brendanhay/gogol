@@ -77,10 +77,12 @@ type EnterprisesGetServiceAccountResource =
 -- the serviceAccountKeys resource.
 --
 -- /See:/ 'enterprisesGetServiceAccount' smart constructor.
-data EnterprisesGetServiceAccount = EnterprisesGetServiceAccount'
+data EnterprisesGetServiceAccount =
+  EnterprisesGetServiceAccount'
     { _egsaKeyType      :: !(Maybe EnterprisesGetServiceAccountKeyType)
     , _egsaEnterpriseId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesGetServiceAccount' with the minimum fields required to make a request.
 --
@@ -93,10 +95,8 @@ enterprisesGetServiceAccount
     :: Text -- ^ 'egsaEnterpriseId'
     -> EnterprisesGetServiceAccount
 enterprisesGetServiceAccount pEgsaEnterpriseId_ =
-    EnterprisesGetServiceAccount'
-    { _egsaKeyType = Nothing
-    , _egsaEnterpriseId = pEgsaEnterpriseId_
-    }
+  EnterprisesGetServiceAccount'
+    {_egsaKeyType = Nothing, _egsaEnterpriseId = pEgsaEnterpriseId_}
 
 -- | The type of credential to return with the service account. Required.
 egsaKeyType :: Lens' EnterprisesGetServiceAccount (Maybe EnterprisesGetServiceAccountKeyType)

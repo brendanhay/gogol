@@ -61,12 +61,14 @@ type SubnetworksInsertResource =
 -- the request.
 --
 -- /See:/ 'subnetworksInsert' smart constructor.
-data SubnetworksInsert = SubnetworksInsert'
+data SubnetworksInsert =
+  SubnetworksInsert'
     { _siRequestId :: !(Maybe Text)
     , _siProject   :: !Text
     , _siPayload   :: !Subnetwork
     , _siRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksInsert' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ subnetworksInsert
     -> Text -- ^ 'siRegion'
     -> SubnetworksInsert
 subnetworksInsert pSiProject_ pSiPayload_ pSiRegion_ =
-    SubnetworksInsert'
+  SubnetworksInsert'
     { _siRequestId = Nothing
     , _siProject = pSiProject_
     , _siPayload = pSiPayload_

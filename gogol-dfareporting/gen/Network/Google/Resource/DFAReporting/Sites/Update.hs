@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SitesUpdate' request conforms to.
 type SitesUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -54,10 +54,12 @@ type SitesUpdateResource =
 -- | Updates an existing site.
 --
 -- /See:/ 'sitesUpdate' smart constructor.
-data SitesUpdate = SitesUpdate'
+data SitesUpdate =
+  SitesUpdate'
     { _suProFileId :: !(Textual Int64)
     , _suPayload   :: !Site
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ sitesUpdate
     -> Site -- ^ 'suPayload'
     -> SitesUpdate
 sitesUpdate pSuProFileId_ pSuPayload_ =
-    SitesUpdate'
-    { _suProFileId = _Coerce # pSuProFileId_
-    , _suPayload = pSuPayload_
-    }
+  SitesUpdate'
+    {_suProFileId = _Coerce # pSuProFileId_, _suPayload = pSuPayload_}
 
 -- | User profile ID associated with this request.
 suProFileId :: Lens' SitesUpdate Int64

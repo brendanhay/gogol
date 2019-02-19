@@ -59,12 +59,14 @@ type ManagedZoneOperationsGetResource =
 -- | Fetch the representation of an existing Operation.
 --
 -- /See:/ 'managedZoneOperationsGet' smart constructor.
-data ManagedZoneOperationsGet = ManagedZoneOperationsGet'
+data ManagedZoneOperationsGet =
+  ManagedZoneOperationsGet'
     { _mzogProject           :: !Text
     , _mzogOperation         :: !Text
     , _mzogManagedZone       :: !Text
     , _mzogClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedZoneOperationsGet' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ managedZoneOperationsGet
     -> Text -- ^ 'mzogManagedZone'
     -> ManagedZoneOperationsGet
 managedZoneOperationsGet pMzogProject_ pMzogOperation_ pMzogManagedZone_ =
-    ManagedZoneOperationsGet'
+  ManagedZoneOperationsGet'
     { _mzogProject = pMzogProject_
     , _mzogOperation = pMzogOperation_
     , _mzogManagedZone = pMzogManagedZone_

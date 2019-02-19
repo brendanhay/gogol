@@ -58,11 +58,13 @@ type ResourcesBuildingsPatchResource =
 -- | Updates a building. This method supports patch semantics.
 --
 -- /See:/ 'resourcesBuildingsPatch' smart constructor.
-data ResourcesBuildingsPatch = ResourcesBuildingsPatch'
+data ResourcesBuildingsPatch =
+  ResourcesBuildingsPatch'
     { _rbpBuildingId :: !Text
     , _rbpPayload    :: !Building
     , _rbpCustomer   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesBuildingsPatch' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ resourcesBuildingsPatch
     -> Text -- ^ 'rbpCustomer'
     -> ResourcesBuildingsPatch
 resourcesBuildingsPatch pRbpBuildingId_ pRbpPayload_ pRbpCustomer_ =
-    ResourcesBuildingsPatch'
+  ResourcesBuildingsPatch'
     { _rbpBuildingId = pRbpBuildingId_
     , _rbpPayload = pRbpPayload_
     , _rbpCustomer = pRbpCustomer_

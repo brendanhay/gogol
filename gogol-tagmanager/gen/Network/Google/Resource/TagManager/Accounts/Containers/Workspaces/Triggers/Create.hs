@@ -54,10 +54,12 @@ type AccountsContainersWorkspacesTriggersCreateResource
 -- | Creates a GTM Trigger.
 --
 -- /See:/ 'accountsContainersWorkspacesTriggersCreate' smart constructor.
-data AccountsContainersWorkspacesTriggersCreate = AccountsContainersWorkspacesTriggersCreate'
+data AccountsContainersWorkspacesTriggersCreate =
+  AccountsContainersWorkspacesTriggersCreate'
     { _acwtcParent  :: !Text
     , _acwtcPayload :: !Trigger
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersCreate' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsContainersWorkspacesTriggersCreate
     -> Trigger -- ^ 'acwtcPayload'
     -> AccountsContainersWorkspacesTriggersCreate
 accountsContainersWorkspacesTriggersCreate pAcwtcParent_ pAcwtcPayload_ =
-    AccountsContainersWorkspacesTriggersCreate'
-    { _acwtcParent = pAcwtcParent_
-    , _acwtcPayload = pAcwtcPayload_
-    }
+  AccountsContainersWorkspacesTriggersCreate'
+    {_acwtcParent = pAcwtcParent_, _acwtcPayload = pAcwtcPayload_}
 
 -- | GTM Workspaces\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -88,7 +88,8 @@ acwtcPayload
   = lens _acwtcPayload (\ s a -> s{_acwtcPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTriggersCreate where
+           AccountsContainersWorkspacesTriggersCreate
+         where
         type Rs AccountsContainersWorkspacesTriggersCreate =
              Trigger
         type Scopes

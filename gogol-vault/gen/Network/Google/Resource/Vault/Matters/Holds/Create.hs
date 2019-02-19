@@ -63,7 +63,8 @@ type MattersHoldsCreateResource =
 -- | Creates a hold in the given matter.
 --
 -- /See:/ 'mattersHoldsCreate' smart constructor.
-data MattersHoldsCreate = MattersHoldsCreate'
+data MattersHoldsCreate =
+  MattersHoldsCreate'
     { _mhcXgafv          :: !(Maybe Xgafv)
     , _mhcUploadProtocol :: !(Maybe Text)
     , _mhcAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data MattersHoldsCreate = MattersHoldsCreate'
     , _mhcPayload        :: !Hold
     , _mhcMatterId       :: !Text
     , _mhcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersHoldsCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ mattersHoldsCreate
     -> Text -- ^ 'mhcMatterId'
     -> MattersHoldsCreate
 mattersHoldsCreate pMhcPayload_ pMhcMatterId_ =
-    MattersHoldsCreate'
+  MattersHoldsCreate'
     { _mhcXgafv = Nothing
     , _mhcUploadProtocol = Nothing
     , _mhcAccessToken = Nothing

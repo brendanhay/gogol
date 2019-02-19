@@ -71,7 +71,8 @@ type CoursesCourseWorkGetResource =
 -- requested course or course work does not exist.
 --
 -- /See:/ 'coursesCourseWorkGet' smart constructor.
-data CoursesCourseWorkGet = CoursesCourseWorkGet'
+data CoursesCourseWorkGet =
+  CoursesCourseWorkGet'
     { _ccwgXgafv          :: !(Maybe Xgafv)
     , _ccwgUploadProtocol :: !(Maybe Text)
     , _ccwgCourseId       :: !Text
@@ -79,7 +80,8 @@ data CoursesCourseWorkGet = CoursesCourseWorkGet'
     , _ccwgUploadType     :: !(Maybe Text)
     , _ccwgId             :: !Text
     , _ccwgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesCourseWorkGet' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ coursesCourseWorkGet
     -> Text -- ^ 'ccwgId'
     -> CoursesCourseWorkGet
 coursesCourseWorkGet pCcwgCourseId_ pCcwgId_ =
-    CoursesCourseWorkGet'
+  CoursesCourseWorkGet'
     { _ccwgXgafv = Nothing
     , _ccwgUploadProtocol = Nothing
     , _ccwgCourseId = pCcwgCourseId_

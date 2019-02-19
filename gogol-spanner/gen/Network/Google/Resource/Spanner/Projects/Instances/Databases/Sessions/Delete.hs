@@ -60,14 +60,16 @@ type ProjectsInstancesDatabasesSessionsDeleteResource
 -- | Ends a session, releasing server resources associated with it.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsDelete' smart constructor.
-data ProjectsInstancesDatabasesSessionsDelete = ProjectsInstancesDatabasesSessionsDelete'
+data ProjectsInstancesDatabasesSessionsDelete =
+  ProjectsInstancesDatabasesSessionsDelete'
     { _pidsdXgafv          :: !(Maybe Xgafv)
     , _pidsdUploadProtocol :: !(Maybe Text)
     , _pidsdAccessToken    :: !(Maybe Text)
     , _pidsdUploadType     :: !(Maybe Text)
     , _pidsdName           :: !Text
     , _pidsdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsDelete' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsInstancesDatabasesSessionsDelete
     :: Text -- ^ 'pidsdName'
     -> ProjectsInstancesDatabasesSessionsDelete
 projectsInstancesDatabasesSessionsDelete pPidsdName_ =
-    ProjectsInstancesDatabasesSessionsDelete'
+  ProjectsInstancesDatabasesSessionsDelete'
     { _pidsdXgafv = Nothing
     , _pidsdUploadProtocol = Nothing
     , _pidsdAccessToken = Nothing
@@ -132,7 +134,8 @@ pidsdCallback
       (\ s a -> s{_pidsdCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsDelete where
+           ProjectsInstancesDatabasesSessionsDelete
+         where
         type Rs ProjectsInstancesDatabasesSessionsDelete =
              Empty
         type Scopes ProjectsInstancesDatabasesSessionsDelete

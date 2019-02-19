@@ -66,14 +66,16 @@ type CoursesGetResource =
 -- exists with the requested ID.
 --
 -- /See:/ 'coursesGet' smart constructor.
-data CoursesGet = CoursesGet'
+data CoursesGet =
+  CoursesGet'
     { _cgXgafv          :: !(Maybe Xgafv)
     , _cgUploadProtocol :: !(Maybe Text)
     , _cgAccessToken    :: !(Maybe Text)
     , _cgUploadType     :: !(Maybe Text)
     , _cgId             :: !Text
     , _cgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CoursesGet' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ coursesGet
     :: Text -- ^ 'cgId'
     -> CoursesGet
 coursesGet pCgId_ =
-    CoursesGet'
+  CoursesGet'
     { _cgXgafv = Nothing
     , _cgUploadProtocol = Nothing
     , _cgAccessToken = Nothing

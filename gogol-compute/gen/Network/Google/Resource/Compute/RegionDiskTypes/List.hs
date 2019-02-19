@@ -66,14 +66,16 @@ type RegionDiskTypesListResource =
 -- project.
 --
 -- /See:/ 'regionDiskTypesList' smart constructor.
-data RegionDiskTypesList = RegionDiskTypesList'
+data RegionDiskTypesList =
+  RegionDiskTypesList'
     { _rdtlOrderBy    :: !(Maybe Text)
     , _rdtlProject    :: !Text
     , _rdtlFilter     :: !(Maybe Text)
     , _rdtlRegion     :: !Text
     , _rdtlPageToken  :: !(Maybe Text)
     , _rdtlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionDiskTypesList' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ regionDiskTypesList
     -> Text -- ^ 'rdtlRegion'
     -> RegionDiskTypesList
 regionDiskTypesList pRdtlProject_ pRdtlRegion_ =
-    RegionDiskTypesList'
+  RegionDiskTypesList'
     { _rdtlOrderBy = Nothing
     , _rdtlProject = pRdtlProject_
     , _rdtlFilter = Nothing

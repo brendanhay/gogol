@@ -61,14 +61,16 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsSubscriptionsGetIAMPolicy' smart constructor.
-data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy'
+data ProjectsSubscriptionsGetIAMPolicy =
+  ProjectsSubscriptionsGetIAMPolicy'
     { _psgiampXgafv          :: !(Maybe Xgafv)
     , _psgiampUploadProtocol :: !(Maybe Text)
     , _psgiampAccessToken    :: !(Maybe Text)
     , _psgiampUploadType     :: !(Maybe Text)
     , _psgiampResource       :: !Text
     , _psgiampCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsSubscriptionsGetIAMPolicy
     :: Text -- ^ 'psgiampResource'
     -> ProjectsSubscriptionsGetIAMPolicy
 projectsSubscriptionsGetIAMPolicy pPsgiampResource_ =
-    ProjectsSubscriptionsGetIAMPolicy'
+  ProjectsSubscriptionsGetIAMPolicy'
     { _psgiampXgafv = Nothing
     , _psgiampUploadProtocol = Nothing
     , _psgiampAccessToken = Nothing
@@ -135,7 +137,8 @@ psgiampCallback
       (\ s a -> s{_psgiampCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsGetIAMPolicy where
+           ProjectsSubscriptionsGetIAMPolicy
+         where
         type Rs ProjectsSubscriptionsGetIAMPolicy = Policy
         type Scopes ProjectsSubscriptionsGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",

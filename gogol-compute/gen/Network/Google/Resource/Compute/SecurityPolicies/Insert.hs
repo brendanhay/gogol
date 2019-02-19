@@ -60,11 +60,13 @@ type SecurityPoliciesInsertResource =
 -- the request.
 --
 -- /See:/ 'securityPoliciesInsert' smart constructor.
-data SecurityPoliciesInsert = SecurityPoliciesInsert'
+data SecurityPoliciesInsert =
+  SecurityPoliciesInsert'
     { _spiRequestId :: !(Maybe Text)
     , _spiProject   :: !Text
     , _spiPayload   :: !SecurityPolicy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPoliciesInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ securityPoliciesInsert
     -> SecurityPolicy -- ^ 'spiPayload'
     -> SecurityPoliciesInsert
 securityPoliciesInsert pSpiProject_ pSpiPayload_ =
-    SecurityPoliciesInsert'
+  SecurityPoliciesInsert'
     { _spiRequestId = Nothing
     , _spiProject = pSpiProject_
     , _spiPayload = pSpiPayload_

@@ -59,11 +59,13 @@ type ManagementWebPropertyAdWordsLinksDeleteResource
 -- | Deletes a web property-AdWords link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksDelete' smart constructor.
-data ManagementWebPropertyAdWordsLinksDelete = ManagementWebPropertyAdWordsLinksDelete'
+data ManagementWebPropertyAdWordsLinksDelete =
+  ManagementWebPropertyAdWordsLinksDelete'
     { _mwpawldWebPropertyId            :: !Text
     , _mwpawldAccountId                :: !Text
     , _mwpawldWebPropertyAdWordsLinkId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksDelete' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ managementWebPropertyAdWordsLinksDelete
     -> Text -- ^ 'mwpawldWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksDelete
 managementWebPropertyAdWordsLinksDelete pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksDelete'
+  ManagementWebPropertyAdWordsLinksDelete'
     { _mwpawldWebPropertyId = pMwpawldWebPropertyId_
     , _mwpawldAccountId = pMwpawldAccountId_
     , _mwpawldWebPropertyAdWordsLinkId = pMwpawldWebPropertyAdWordsLinkId_
@@ -105,7 +107,8 @@ mwpawldWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawldWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksDelete where
+           ManagementWebPropertyAdWordsLinksDelete
+         where
         type Rs ManagementWebPropertyAdWordsLinksDelete = ()
         type Scopes ManagementWebPropertyAdWordsLinksDelete =
              '["https://www.googleapis.com/auth/analytics.edit"]

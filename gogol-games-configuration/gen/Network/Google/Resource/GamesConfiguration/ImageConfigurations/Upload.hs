@@ -70,10 +70,12 @@ type ImageConfigurationsUploadResource =
 -- | Uploads an image for a resource with the given ID and image type.
 --
 -- /See:/ 'imageConfigurationsUpload' smart constructor.
-data ImageConfigurationsUpload = ImageConfigurationsUpload'
+data ImageConfigurationsUpload =
+  ImageConfigurationsUpload'
     { _icuResourceId :: !Text
     , _icuImageType  :: !ImageConfigurationsUploadImageType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImageConfigurationsUpload' with the minimum fields required to make a request.
 --
@@ -87,10 +89,8 @@ imageConfigurationsUpload
     -> ImageConfigurationsUploadImageType -- ^ 'icuImageType'
     -> ImageConfigurationsUpload
 imageConfigurationsUpload pIcuResourceId_ pIcuImageType_ =
-    ImageConfigurationsUpload'
-    { _icuResourceId = pIcuResourceId_
-    , _icuImageType = pIcuImageType_
-    }
+  ImageConfigurationsUpload'
+    {_icuResourceId = pIcuResourceId_, _icuImageType = pIcuImageType_}
 
 -- | The ID of the resource used by this method.
 icuResourceId :: Lens' ImageConfigurationsUpload Text
@@ -118,7 +118,8 @@ instance GoogleRequest ImageConfigurationsUpload
                       mempty
 
 instance GoogleRequest
-         (MediaUpload ImageConfigurationsUpload) where
+           (MediaUpload ImageConfigurationsUpload)
+         where
         type Rs (MediaUpload ImageConfigurationsUpload) =
              ImageConfiguration
         type Scopes (MediaUpload ImageConfigurationsUpload) =

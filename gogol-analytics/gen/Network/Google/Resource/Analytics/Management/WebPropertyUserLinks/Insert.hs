@@ -59,11 +59,13 @@ type ManagementWebPropertyUserLinksInsertResource =
 -- | Adds a new user to the given web property.
 --
 -- /See:/ 'managementWebPropertyUserLinksInsert' smart constructor.
-data ManagementWebPropertyUserLinksInsert = ManagementWebPropertyUserLinksInsert'
+data ManagementWebPropertyUserLinksInsert =
+  ManagementWebPropertyUserLinksInsert'
     { _mwpuliWebPropertyId :: !Text
     , _mwpuliPayload       :: !EntityUserLink
     , _mwpuliAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksInsert' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ managementWebPropertyUserLinksInsert
     -> Text -- ^ 'mwpuliAccountId'
     -> ManagementWebPropertyUserLinksInsert
 managementWebPropertyUserLinksInsert pMwpuliWebPropertyId_ pMwpuliPayload_ pMwpuliAccountId_ =
-    ManagementWebPropertyUserLinksInsert'
+  ManagementWebPropertyUserLinksInsert'
     { _mwpuliWebPropertyId = pMwpuliWebPropertyId_
     , _mwpuliPayload = pMwpuliPayload_
     , _mwpuliAccountId = pMwpuliAccountId_
@@ -105,7 +107,8 @@ mwpuliAccountId
       (\ s a -> s{_mwpuliAccountId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyUserLinksInsert where
+           ManagementWebPropertyUserLinksInsert
+         where
         type Rs ManagementWebPropertyUserLinksInsert =
              EntityUserLink
         type Scopes ManagementWebPropertyUserLinksInsert =

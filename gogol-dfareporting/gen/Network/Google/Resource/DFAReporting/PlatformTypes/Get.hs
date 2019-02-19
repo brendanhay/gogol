@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlatformTypesGet' request conforms to.
 type PlatformTypesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "platformTypes" :>
@@ -54,10 +54,12 @@ type PlatformTypesGetResource =
 -- | Gets one platform type by ID.
 --
 -- /See:/ 'platformTypesGet' smart constructor.
-data PlatformTypesGet = PlatformTypesGet'
+data PlatformTypesGet =
+  PlatformTypesGet'
     { _ptgProFileId :: !(Textual Int64)
     , _ptgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlatformTypesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ platformTypesGet
     -> Int64 -- ^ 'ptgId'
     -> PlatformTypesGet
 platformTypesGet pPtgProFileId_ pPtgId_ =
-    PlatformTypesGet'
-    { _ptgProFileId = _Coerce # pPtgProFileId_
-    , _ptgId = _Coerce # pPtgId_
-    }
+  PlatformTypesGet'
+    {_ptgProFileId = _Coerce # pPtgProFileId_, _ptgId = _Coerce # pPtgId_}
 
 -- | User profile ID associated with this request.
 ptgProFileId :: Lens' PlatformTypesGet Int64

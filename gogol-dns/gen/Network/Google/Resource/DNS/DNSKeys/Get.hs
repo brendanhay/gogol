@@ -61,13 +61,15 @@ type DNSKeysGetResource =
 -- | Fetch the representation of an existing DnsKey.
 --
 -- /See:/ 'dnsKeysGet' smart constructor.
-data DNSKeysGet = DNSKeysGet'
+data DNSKeysGet =
+  DNSKeysGet'
     { _dkgProject           :: !Text
     , _dkgDigestType        :: !(Maybe Text)
     , _dkgDNSKeyId          :: !Text
     , _dkgManagedZone       :: !Text
     , _dkgClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DNSKeysGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ dnsKeysGet
     -> Text -- ^ 'dkgManagedZone'
     -> DNSKeysGet
 dnsKeysGet pDkgProject_ pDkgDNSKeyId_ pDkgManagedZone_ =
-    DNSKeysGet'
+  DNSKeysGet'
     { _dkgProject = pDkgProject_
     , _dkgDigestType = Nothing
     , _dkgDNSKeyId = pDkgDNSKeyId_

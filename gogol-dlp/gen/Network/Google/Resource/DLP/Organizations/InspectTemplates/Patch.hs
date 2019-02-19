@@ -65,7 +65,8 @@ type OrganizationsInspectTemplatesPatchResource =
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'organizationsInspectTemplatesPatch' smart constructor.
-data OrganizationsInspectTemplatesPatch = OrganizationsInspectTemplatesPatch'
+data OrganizationsInspectTemplatesPatch =
+  OrganizationsInspectTemplatesPatch'
     { _oitpXgafv          :: !(Maybe Xgafv)
     , _oitpUploadProtocol :: !(Maybe Text)
     , _oitpAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data OrganizationsInspectTemplatesPatch = OrganizationsInspectTemplatesPatch'
     , _oitpPayload        :: !GooglePrivacyDlpV2UpdateInspectTemplateRequest
     , _oitpName           :: !Text
     , _oitpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsInspectTemplatesPatch' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ organizationsInspectTemplatesPatch
     -> Text -- ^ 'oitpName'
     -> OrganizationsInspectTemplatesPatch
 organizationsInspectTemplatesPatch pOitpPayload_ pOitpName_ =
-    OrganizationsInspectTemplatesPatch'
+  OrganizationsInspectTemplatesPatch'
     { _oitpXgafv = Nothing
     , _oitpUploadProtocol = Nothing
     , _oitpAccessToken = Nothing
@@ -147,7 +149,8 @@ oitpCallback
   = lens _oitpCallback (\ s a -> s{_oitpCallback = a})
 
 instance GoogleRequest
-         OrganizationsInspectTemplatesPatch where
+           OrganizationsInspectTemplatesPatch
+         where
         type Rs OrganizationsInspectTemplatesPatch =
              GooglePrivacyDlpV2InspectTemplate
         type Scopes OrganizationsInspectTemplatesPatch =

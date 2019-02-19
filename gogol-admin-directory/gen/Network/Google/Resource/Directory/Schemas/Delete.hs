@@ -55,10 +55,12 @@ type SchemasDeleteResource =
 -- | Delete schema
 --
 -- /See:/ 'schemasDelete' smart constructor.
-data SchemasDelete = SchemasDelete'
+data SchemasDelete =
+  SchemasDelete'
     { _sdCustomerId :: !Text
     , _sdSchemaKey  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SchemasDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ schemasDelete
     -> Text -- ^ 'sdSchemaKey'
     -> SchemasDelete
 schemasDelete pSdCustomerId_ pSdSchemaKey_ =
-    SchemasDelete'
-    { _sdCustomerId = pSdCustomerId_
-    , _sdSchemaKey = pSdSchemaKey_
-    }
+  SchemasDelete' {_sdCustomerId = pSdCustomerId_, _sdSchemaKey = pSdSchemaKey_}
 
 -- | Immutable ID of the G Suite account
 sdCustomerId :: Lens' SchemasDelete Text

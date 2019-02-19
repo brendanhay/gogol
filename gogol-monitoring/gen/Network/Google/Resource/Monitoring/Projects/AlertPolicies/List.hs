@@ -69,7 +69,8 @@ type ProjectsAlertPoliciesListResource =
 -- | Lists the existing alerting policies for the project.
 --
 -- /See:/ 'projectsAlertPoliciesList' smart constructor.
-data ProjectsAlertPoliciesList = ProjectsAlertPoliciesList'
+data ProjectsAlertPoliciesList =
+  ProjectsAlertPoliciesList'
     { _paplXgafv          :: !(Maybe Xgafv)
     , _paplUploadProtocol :: !(Maybe Text)
     , _paplOrderBy        :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsAlertPoliciesList = ProjectsAlertPoliciesList'
     , _paplPageToken      :: !(Maybe Text)
     , _paplPageSize       :: !(Maybe (Textual Int32))
     , _paplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAlertPoliciesList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsAlertPoliciesList
     :: Text -- ^ 'paplName'
     -> ProjectsAlertPoliciesList
 projectsAlertPoliciesList pPaplName_ =
-    ProjectsAlertPoliciesList'
+  ProjectsAlertPoliciesList'
     { _paplXgafv = Nothing
     , _paplUploadProtocol = Nothing
     , _paplOrderBy = Nothing

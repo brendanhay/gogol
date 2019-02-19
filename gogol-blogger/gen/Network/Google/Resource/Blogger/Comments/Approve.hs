@@ -58,11 +58,13 @@ type CommentsApproveResource =
 -- | Marks a comment as not spam.
 --
 -- /See:/ 'commentsApprove' smart constructor.
-data CommentsApprove = CommentsApprove'
+data CommentsApprove =
+  CommentsApprove'
     { _caBlogId    :: !Text
     , _caPostId    :: !Text
     , _caCommentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommentsApprove' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ commentsApprove
     -> Text -- ^ 'caCommentId'
     -> CommentsApprove
 commentsApprove pCaBlogId_ pCaPostId_ pCaCommentId_ =
-    CommentsApprove'
+  CommentsApprove'
     { _caBlogId = pCaBlogId_
     , _caPostId = pCaPostId_
     , _caCommentId = pCaCommentId_

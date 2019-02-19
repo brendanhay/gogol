@@ -23,9 +23,11 @@ import           Network.Google.ServiceManagement.Types.Sum
 -- | Response message for UndeleteService method.
 --
 -- /See:/ 'undeleteServiceResponse' smart constructor.
-newtype UndeleteServiceResponse = UndeleteServiceResponse'
+newtype UndeleteServiceResponse =
+  UndeleteServiceResponse'
     { _usrService :: Maybe ManagedService
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UndeleteServiceResponse' with the minimum fields required to make a request.
 --
@@ -34,10 +36,7 @@ newtype UndeleteServiceResponse = UndeleteServiceResponse'
 -- * 'usrService'
 undeleteServiceResponse
     :: UndeleteServiceResponse
-undeleteServiceResponse =
-    UndeleteServiceResponse'
-    { _usrService = Nothing
-    }
+undeleteServiceResponse = UndeleteServiceResponse' {_usrService = Nothing}
 
 -- | Revived service resource.
 usrService :: Lens' UndeleteServiceResponse (Maybe ManagedService)
@@ -59,11 +58,13 @@ instance ToJSON UndeleteServiceResponse where
 -- the behavior is implementation-dependent.
 --
 -- /See:/ 'systemParameter' smart constructor.
-data SystemParameter = SystemParameter'
+data SystemParameter =
+  SystemParameter'
     { _spHTTPHeader        :: !(Maybe Text)
     , _spURLQueryParameter :: !(Maybe Text)
     , _spName              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SystemParameter' with the minimum fields required to make a request.
 --
@@ -77,11 +78,8 @@ data SystemParameter = SystemParameter'
 systemParameter
     :: SystemParameter
 systemParameter =
-    SystemParameter'
-    { _spHTTPHeader = Nothing
-    , _spURLQueryParameter = Nothing
-    , _spName = Nothing
-    }
+  SystemParameter'
+    {_spHTTPHeader = Nothing, _spURLQueryParameter = Nothing, _spName = Nothing}
 
 -- | Define the HTTP header name to use for the parameter. It is case
 -- insensitive.
@@ -121,9 +119,11 @@ instance ToJSON SystemParameter where
 -- about how a change will affect the existing service.
 --
 -- /See:/ 'advice' smart constructor.
-newtype Advice = Advice'
+newtype Advice =
+  Advice'
     { _aDescription :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Advice' with the minimum fields required to make a request.
 --
@@ -132,10 +132,7 @@ newtype Advice = Advice'
 -- * 'aDescription'
 advice
     :: Advice
-advice =
-    Advice'
-    { _aDescription = Nothing
-    }
+advice = Advice' {_aDescription = Nothing}
 
 -- | Useful description for why this advice was applied and what actions
 -- should be taken to mitigate any implied risks.
@@ -156,11 +153,13 @@ instance ToJSON Advice where
 -- | Generic specification of a source configuration file
 --
 -- /See:/ 'configFile' smart constructor.
-data ConfigFile = ConfigFile'
+data ConfigFile =
+  ConfigFile'
     { _cfFileContents :: !(Maybe Bytes)
     , _cfFilePath     :: !(Maybe Text)
     , _cfFileType     :: !(Maybe ConfigFileFileType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConfigFile' with the minimum fields required to make a request.
 --
@@ -174,11 +173,8 @@ data ConfigFile = ConfigFile'
 configFile
     :: ConfigFile
 configFile =
-    ConfigFile'
-    { _cfFileContents = Nothing
-    , _cfFilePath = Nothing
-    , _cfFileType = Nothing
-    }
+  ConfigFile'
+    {_cfFileContents = Nothing, _cfFilePath = Nothing, _cfFileType = Nothing}
 
 -- | The bytes that constitute the file.
 cfFileContents :: Lens' ConfigFile (Maybe ByteString)
@@ -223,13 +219,15 @@ instance ToJSON ConfigFile where
 -- monitored resource descriptors used by the API.
 --
 -- /See:/ 'monitoredResourceDescriptor' smart constructor.
-data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
+data MonitoredResourceDescriptor =
+  MonitoredResourceDescriptor'
     { _mrdName        :: !(Maybe Text)
     , _mrdDisplayName :: !(Maybe Text)
     , _mrdLabels      :: !(Maybe [LabelDescriptor])
     , _mrdType        :: !(Maybe Text)
     , _mrdDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitoredResourceDescriptor' with the minimum fields required to make a request.
 --
@@ -247,7 +245,7 @@ data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
 monitoredResourceDescriptor
     :: MonitoredResourceDescriptor
 monitoredResourceDescriptor =
-    MonitoredResourceDescriptor'
+  MonitoredResourceDescriptor'
     { _mrdName = Nothing
     , _mrdDisplayName = Nothing
     , _mrdLabels = Nothing
@@ -319,11 +317,13 @@ instance ToJSON MonitoredResourceDescriptor where
 -- | A documentation rule provides information about individual API elements.
 --
 -- /See:/ 'documentationRule' smart constructor.
-data DocumentationRule = DocumentationRule'
+data DocumentationRule =
+  DocumentationRule'
     { _drSelector               :: !(Maybe Text)
     , _drDeprecationDescription :: !(Maybe Text)
     , _drDescription            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DocumentationRule' with the minimum fields required to make a request.
 --
@@ -337,7 +337,7 @@ data DocumentationRule = DocumentationRule'
 documentationRule
     :: DocumentationRule
 documentationRule =
-    DocumentationRule'
+  DocumentationRule'
     { _drSelector = Nothing
     , _drDeprecationDescription = Nothing
     , _drDescription = Nothing
@@ -421,11 +421,13 @@ instance ToJSON DocumentationRule where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -438,12 +440,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -487,9 +484,11 @@ instance ToJSON Status where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema = OperationSchema'
+newtype OperationSchema =
+  OperationSchema'
     { _osAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
@@ -500,9 +499,7 @@ operationSchema
     :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
-    OperationSchema'
-    { _osAddtional = _Coerce # pOsAddtional_
-    }
+  OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -521,12 +518,14 @@ instance ToJSON OperationSchema where
 -- | Response message for GenerateConfigReport method.
 --
 -- /See:/ 'generateConfigReportResponse' smart constructor.
-data GenerateConfigReportResponse = GenerateConfigReportResponse'
+data GenerateConfigReportResponse =
+  GenerateConfigReportResponse'
     { _gcrrDiagnostics   :: !(Maybe [Diagnostic])
     , _gcrrServiceName   :: !(Maybe Text)
     , _gcrrId            :: !(Maybe Text)
     , _gcrrChangeReports :: !(Maybe [ChangeReport])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GenerateConfigReportResponse' with the minimum fields required to make a request.
 --
@@ -542,7 +541,7 @@ data GenerateConfigReportResponse = GenerateConfigReportResponse'
 generateConfigReportResponse
     :: GenerateConfigReportResponse
 generateConfigReportResponse =
-    GenerateConfigReportResponse'
+  GenerateConfigReportResponse'
     { _gcrrDiagnostics = Nothing
     , _gcrrServiceName = Nothing
     , _gcrrId = Nothing
@@ -600,10 +599,12 @@ instance ToJSON GenerateConfigReportResponse where
 -- bill against consumer project).
 --
 -- /See:/ 'billingDestination' smart constructor.
-data BillingDestination = BillingDestination'
+data BillingDestination =
+  BillingDestination'
     { _bdMetrics           :: !(Maybe [Text])
     , _bdMonitoredResource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingDestination' with the minimum fields required to make a request.
 --
@@ -615,10 +616,7 @@ data BillingDestination = BillingDestination'
 billingDestination
     :: BillingDestination
 billingDestination =
-    BillingDestination'
-    { _bdMetrics = Nothing
-    , _bdMonitoredResource = Nothing
-    }
+  BillingDestination' {_bdMetrics = Nothing, _bdMonitoredResource = Nothing}
 
 -- | Names of the metrics to report to this billing destination. Each name
 -- must be defined in Service.metrics section.
@@ -669,10 +667,12 @@ instance ToJSON BillingDestination where
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -683,11 +683,7 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -724,9 +720,11 @@ instance ToJSON AuditConfig where
 -- monitoring, etc.
 --
 -- /See:/ 'control' smart constructor.
-newtype Control = Control'
+newtype Control =
+  Control'
     { _cEnvironment :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Control' with the minimum fields required to make a request.
 --
@@ -735,10 +733,7 @@ newtype Control = Control'
 -- * 'cEnvironment'
 control
     :: Control
-control =
-    Control'
-    { _cEnvironment = Nothing
-    }
+control = Control' {_cEnvironment = Nothing}
 
 -- | The service control environment to use. If empty, no control plane
 -- feature (like quota and billing) will be enabled.
@@ -761,8 +756,8 @@ instance ToJSON Control where
 --
 -- /See:/ 'deleteServiceStrategy' smart constructor.
 data DeleteServiceStrategy =
-    DeleteServiceStrategy'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  DeleteServiceStrategy'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteServiceStrategy' with the minimum fields required to make a request.
 --
@@ -783,10 +778,12 @@ instance ToJSON DeleteServiceStrategy where
 -- (JWT)](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32).
 --
 -- /See:/ 'authRequirement' smart constructor.
-data AuthRequirement = AuthRequirement'
+data AuthRequirement =
+  AuthRequirement'
     { _arProviderId :: !(Maybe Text)
     , _arAudiences  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuthRequirement' with the minimum fields required to make a request.
 --
@@ -798,10 +795,7 @@ data AuthRequirement = AuthRequirement'
 authRequirement
     :: AuthRequirement
 authRequirement =
-    AuthRequirement'
-    { _arProviderId = Nothing
-    , _arAudiences = Nothing
-    }
+  AuthRequirement' {_arProviderId = Nothing, _arAudiences = Nothing}
 
 -- | id from authentication provider. Example: provider_id: bookstore_auth
 arProviderId :: Lens' AuthRequirement (Maybe Text)
@@ -840,10 +834,12 @@ instance ToJSON AuthRequirement where
 -- | Response message for \`ListServices\` method.
 --
 -- /See:/ 'listServicesResponse' smart constructor.
-data ListServicesResponse = ListServicesResponse'
+data ListServicesResponse =
+  ListServicesResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrServices      :: !(Maybe [ManagedService])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListServicesResponse' with the minimum fields required to make a request.
 --
@@ -855,10 +851,7 @@ data ListServicesResponse = ListServicesResponse'
 listServicesResponse
     :: ListServicesResponse
 listServicesResponse =
-    ListServicesResponse'
-    { _lsrNextPageToken = Nothing
-    , _lsrServices = Nothing
-    }
+  ListServicesResponse' {_lsrNextPageToken = Nothing, _lsrServices = Nothing}
 
 -- | Token that can be passed to \`ListServices\` to resume a paginated
 -- query.
@@ -894,12 +887,14 @@ instance ToJSON ListServicesResponse where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -915,7 +910,7 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
@@ -981,9 +976,11 @@ instance ToJSON Expr where
 -- specify extension ID instead of fully qualified extension name here.
 --
 -- /See:/ 'context' smart constructor.
-newtype Context = Context'
+newtype Context =
+  Context'
     { _cRules :: Maybe [ContextRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Context' with the minimum fields required to make a request.
 --
@@ -992,10 +989,7 @@ newtype Context = Context'
 -- * 'cRules'
 context
     :: Context
-context =
-    Context'
-    { _cRules = Nothing
-    }
+context = Context' {_cRules = Nothing}
 
 -- | A list of RPC context rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -1018,10 +1012,12 @@ instance ToJSON Context where
 -- the consumer project).
 --
 -- /See:/ 'loggingDestination' smart constructor.
-data LoggingDestination = LoggingDestination'
+data LoggingDestination =
+  LoggingDestination'
     { _ldMonitoredResource :: !(Maybe Text)
     , _ldLogs              :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LoggingDestination' with the minimum fields required to make a request.
 --
@@ -1033,10 +1029,7 @@ data LoggingDestination = LoggingDestination'
 loggingDestination
     :: LoggingDestination
 loggingDestination =
-    LoggingDestination'
-    { _ldMonitoredResource = Nothing
-    , _ldLogs = Nothing
-    }
+  LoggingDestination' {_ldMonitoredResource = Nothing, _ldLogs = Nothing}
 
 -- | The monitored resource type. The type must be defined in the
 -- Service.monitored_resources section.
@@ -1074,7 +1067,8 @@ instance ToJSON LoggingDestination where
 -- metric type\'s existing data unusable.
 --
 -- /See:/ 'metricDescriptor' smart constructor.
-data MetricDescriptor = MetricDescriptor'
+data MetricDescriptor =
+  MetricDescriptor'
     { _mdMetricKind  :: !(Maybe MetricDescriptorMetricKind)
     , _mdName        :: !(Maybe Text)
     , _mdMetadata    :: !(Maybe MetricDescriptorMetadata)
@@ -1084,7 +1078,8 @@ data MetricDescriptor = MetricDescriptor'
     , _mdValueType   :: !(Maybe MetricDescriptorValueType)
     , _mdDescription :: !(Maybe Text)
     , _mdUnit        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
@@ -1110,7 +1105,7 @@ data MetricDescriptor = MetricDescriptor'
 metricDescriptor
     :: MetricDescriptor
 metricDescriptor =
-    MetricDescriptor'
+  MetricDescriptor'
     { _mdMetricKind = Nothing
     , _mdName = Nothing
     , _mdMetadata = Nothing
@@ -1242,10 +1237,12 @@ instance ToJSON MetricDescriptor where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -1257,10 +1254,8 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -1295,8 +1290,8 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
-    GetIAMPolicyRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GetIAMPolicyRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -1315,13 +1310,15 @@ instance ToJSON GetIAMPolicyRequest where
 -- | A backend rule provides configuration for an individual API element.
 --
 -- /See:/ 'backendRule' smart constructor.
-data BackendRule = BackendRule'
+data BackendRule =
+  BackendRule'
     { _brSelector          :: !(Maybe Text)
     , _brMinDeadline       :: !(Maybe (Textual Double))
     , _brAddress           :: !(Maybe Text)
     , _brOperationDeadline :: !(Maybe (Textual Double))
     , _brDeadline          :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendRule' with the minimum fields required to make a request.
 --
@@ -1339,7 +1336,7 @@ data BackendRule = BackendRule'
 backendRule
     :: BackendRule
 backendRule =
-    BackendRule'
+  BackendRule'
     { _brSelector = Nothing
     , _brMinDeadline = Nothing
     , _brAddress = Nothing
@@ -1405,10 +1402,12 @@ instance ToJSON BackendRule where
 -- | Request message for SubmitConfigSource method.
 --
 -- /See:/ 'submitConfigSourceRequest' smart constructor.
-data SubmitConfigSourceRequest = SubmitConfigSourceRequest'
+data SubmitConfigSourceRequest =
+  SubmitConfigSourceRequest'
     { _scsrValidateOnly :: !(Maybe Bool)
     , _scsrConfigSource :: !(Maybe ConfigSource)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubmitConfigSourceRequest' with the minimum fields required to make a request.
 --
@@ -1420,10 +1419,8 @@ data SubmitConfigSourceRequest = SubmitConfigSourceRequest'
 submitConfigSourceRequest
     :: SubmitConfigSourceRequest
 submitConfigSourceRequest =
-    SubmitConfigSourceRequest'
-    { _scsrValidateOnly = Nothing
-    , _scsrConfigSource = Nothing
-    }
+  SubmitConfigSourceRequest'
+    {_scsrValidateOnly = Nothing, _scsrConfigSource = Nothing}
 
 -- | Optional. If set, this will result in the generation of a
 -- \`google.api.Service\` configuration based on the \`ConfigSource\`
@@ -1458,9 +1455,11 @@ instance ToJSON SubmitConfigSourceRequest where
 -- element, like the file in which it is defined.
 --
 -- /See:/ 'sourceContext' smart constructor.
-newtype SourceContext = SourceContext'
+newtype SourceContext =
+  SourceContext'
     { _scFileName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
@@ -1469,10 +1468,7 @@ newtype SourceContext = SourceContext'
 -- * 'scFileName'
 sourceContext
     :: SourceContext
-sourceContext =
-    SourceContext'
-    { _scFileName = Nothing
-    }
+sourceContext = SourceContext' {_scFileName = Nothing}
 
 -- | The path-qualified name of the .proto file that contained the associated
 -- protobuf element. For example:
@@ -1494,7 +1490,8 @@ instance ToJSON SourceContext where
 -- | A single field of a message type.
 --
 -- /See:/ 'field' smart constructor.
-data Field = Field'
+data Field =
+  Field'
     { _fKind         :: !(Maybe FieldKind)
     , _fOneofIndex   :: !(Maybe (Textual Int32))
     , _fName         :: !(Maybe Text)
@@ -1505,7 +1502,8 @@ data Field = Field'
     , _fDefaultValue :: !(Maybe Text)
     , _fNumber       :: !(Maybe (Textual Int32))
     , _fTypeURL      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Field' with the minimum fields required to make a request.
 --
@@ -1533,7 +1531,7 @@ data Field = Field'
 field
     :: Field
 field =
-    Field'
+  Field'
     { _fKind = Nothing
     , _fOneofIndex = Nothing
     , _fName = Nothing
@@ -1634,10 +1632,12 @@ instance ToJSON Field where
 -- metric\'s configured quota behaviors to apply to the method call.
 --
 -- /See:/ 'metricRule' smart constructor.
-data MetricRule = MetricRule'
+data MetricRule =
+  MetricRule'
     { _mrSelector    :: !(Maybe Text)
     , _mrMetricCosts :: !(Maybe MetricRuleMetricCosts)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetricRule' with the minimum fields required to make a request.
 --
@@ -1648,11 +1648,7 @@ data MetricRule = MetricRule'
 -- * 'mrMetricCosts'
 metricRule
     :: MetricRule
-metricRule =
-    MetricRule'
-    { _mrSelector = Nothing
-    , _mrMetricCosts = Nothing
-    }
+metricRule = MetricRule' {_mrSelector = Nothing, _mrMetricCosts = Nothing}
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.
@@ -1695,9 +1691,11 @@ instance ToJSON MetricRule where
 -- percentages: { \"example.googleapis.com\/20160206\": 100.00 } } }
 --
 -- /See:/ 'trafficPercentStrategy' smart constructor.
-newtype TrafficPercentStrategy = TrafficPercentStrategy'
+newtype TrafficPercentStrategy =
+  TrafficPercentStrategy'
     { _tpsPercentages :: Maybe TrafficPercentStrategyPercentages
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrafficPercentStrategy' with the minimum fields required to make a request.
 --
@@ -1706,10 +1704,7 @@ newtype TrafficPercentStrategy = TrafficPercentStrategy'
 -- * 'tpsPercentages'
 trafficPercentStrategy
     :: TrafficPercentStrategy
-trafficPercentStrategy =
-    TrafficPercentStrategy'
-    { _tpsPercentages = Nothing
-    }
+trafficPercentStrategy = TrafficPercentStrategy' {_tpsPercentages = Nothing}
 
 -- | Maps service configuration IDs to their corresponding traffic
 -- percentage. Key is the service configuration ID, Value is the traffic
@@ -1745,7 +1740,8 @@ instance ToJSON TrafficPercentStrategy where
 -- provider_id: google_calendar_auth
 --
 -- /See:/ 'service' smart constructor.
-data Service = Service'
+data Service =
+  Service'
     { _sControl            :: !(Maybe Control)
     , _sMetrics            :: !(Maybe [MetricDescriptor])
     , _sContext            :: !(Maybe Context)
@@ -1774,7 +1770,8 @@ data Service = Service'
     , _sCustomError        :: !(Maybe CustomError)
     , _sLogging            :: !(Maybe Logging)
     , _sQuota              :: !(Maybe Quota)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
@@ -1838,7 +1835,7 @@ data Service = Service'
 service
     :: Service
 service =
-    Service'
+  Service'
     { _sControl = Nothing
     , _sMetrics = Nothing
     , _sContext = Nothing
@@ -2112,13 +2109,15 @@ instance ToJSON Service where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -2136,7 +2135,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -2202,9 +2201,11 @@ instance ToJSON Operation where
 -- | Request message for EnableService method.
 --
 -- /See:/ 'enableServiceRequest' smart constructor.
-newtype EnableServiceRequest = EnableServiceRequest'
+newtype EnableServiceRequest =
+  EnableServiceRequest'
     { _esrConsumerId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableServiceRequest' with the minimum fields required to make a request.
 --
@@ -2213,10 +2214,7 @@ newtype EnableServiceRequest = EnableServiceRequest'
 -- * 'esrConsumerId'
 enableServiceRequest
     :: EnableServiceRequest
-enableServiceRequest =
-    EnableServiceRequest'
-    { _esrConsumerId = Nothing
-    }
+enableServiceRequest = EnableServiceRequest' {_esrConsumerId = Nothing}
 
 -- | The identity of consumer resource which service enablement will be
 -- applied to. The Google Service Management implementation accepts the
@@ -2241,10 +2239,12 @@ instance ToJSON EnableServiceRequest where
 -- | Response message for ListServiceConfigs method.
 --
 -- /See:/ 'listServiceConfigsResponse' smart constructor.
-data ListServiceConfigsResponse = ListServiceConfigsResponse'
+data ListServiceConfigsResponse =
+  ListServiceConfigsResponse'
     { _lscrServiceConfigs :: !(Maybe [Service])
     , _lscrNextPageToken  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListServiceConfigsResponse' with the minimum fields required to make a request.
 --
@@ -2256,10 +2256,8 @@ data ListServiceConfigsResponse = ListServiceConfigsResponse'
 listServiceConfigsResponse
     :: ListServiceConfigsResponse
 listServiceConfigsResponse =
-    ListServiceConfigsResponse'
-    { _lscrServiceConfigs = Nothing
-    , _lscrNextPageToken = Nothing
-    }
+  ListServiceConfigsResponse'
+    {_lscrServiceConfigs = Nothing, _lscrNextPageToken = Nothing}
 
 -- | The list of service configuration resources.
 lscrServiceConfigs :: Lens' ListServiceConfigsResponse [Service]
@@ -2293,10 +2291,12 @@ instance ToJSON ListServiceConfigsResponse where
 -- | A custom error rule.
 --
 -- /See:/ 'customErrorRule' smart constructor.
-data CustomErrorRule = CustomErrorRule'
+data CustomErrorRule =
+  CustomErrorRule'
     { _cerIsErrorType :: !(Maybe Bool)
     , _cerSelector    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomErrorRule' with the minimum fields required to make a request.
 --
@@ -2308,10 +2308,7 @@ data CustomErrorRule = CustomErrorRule'
 customErrorRule
     :: CustomErrorRule
 customErrorRule =
-    CustomErrorRule'
-    { _cerIsErrorType = Nothing
-    , _cerSelector = Nothing
-    }
+  CustomErrorRule' {_cerIsErrorType = Nothing, _cerSelector = Nothing}
 
 -- | Mark this message as possible payload in error response. Otherwise,
 -- objects of this type will be filtered when they appear in error payload.
@@ -2343,9 +2340,11 @@ instance ToJSON CustomErrorRule where
 -- | Response message for SubmitConfigSource method.
 --
 -- /See:/ 'submitConfigSourceResponse' smart constructor.
-newtype SubmitConfigSourceResponse = SubmitConfigSourceResponse'
+newtype SubmitConfigSourceResponse =
+  SubmitConfigSourceResponse'
     { _scsrServiceConfig :: Maybe Service
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubmitConfigSourceResponse' with the minimum fields required to make a request.
 --
@@ -2355,9 +2354,7 @@ newtype SubmitConfigSourceResponse = SubmitConfigSourceResponse'
 submitConfigSourceResponse
     :: SubmitConfigSourceResponse
 submitConfigSourceResponse =
-    SubmitConfigSourceResponse'
-    { _scsrServiceConfig = Nothing
-    }
+  SubmitConfigSourceResponse' {_scsrServiceConfig = Nothing}
 
 -- | The generated service configuration.
 scsrServiceConfig :: Lens' SubmitConfigSourceResponse (Maybe Service)
@@ -2383,9 +2380,11 @@ instance ToJSON SubmitConfigSourceResponse where
 -- service configurations.
 --
 -- /See:/ 'changeReport' smart constructor.
-newtype ChangeReport = ChangeReport'
+newtype ChangeReport =
+  ChangeReport'
     { _crConfigChanges :: Maybe [ConfigChange]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChangeReport' with the minimum fields required to make a request.
 --
@@ -2394,10 +2393,7 @@ newtype ChangeReport = ChangeReport'
 -- * 'crConfigChanges'
 changeReport
     :: ChangeReport
-changeReport =
-    ChangeReport'
-    { _crConfigChanges = Nothing
-    }
+changeReport = ChangeReport' {_crConfigChanges = Nothing}
 
 -- | List of changes between two service configurations. The changes will be
 -- alphabetically sorted based on the identifier of each change. A
@@ -2430,9 +2426,11 @@ instance ToJSON ChangeReport where
 -- google.protobuf.Int32Value type.
 --
 -- /See:/ 'optionValue' smart constructor.
-newtype OptionValue = OptionValue'
+newtype OptionValue =
+  OptionValue'
     { _ovAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OptionValue' with the minimum fields required to make a request.
 --
@@ -2443,9 +2441,7 @@ optionValue
     :: HashMap Text JSONValue -- ^ 'ovAddtional'
     -> OptionValue
 optionValue pOvAddtional_ =
-    OptionValue'
-    { _ovAddtional = _Coerce # pOvAddtional_
-    }
+  OptionValue' {_ovAddtional = _Coerce # pOvAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 ovAddtional :: Lens' OptionValue (HashMap Text JSONValue)
@@ -2464,11 +2460,13 @@ instance ToJSON OptionValue where
 -- | Enum value definition.
 --
 -- /See:/ 'enumValue' smart constructor.
-data EnumValue = EnumValue'
+data EnumValue =
+  EnumValue'
     { _evName    :: !(Maybe Text)
     , _evOptions :: !(Maybe [Option])
     , _evNumber  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnumValue' with the minimum fields required to make a request.
 --
@@ -2482,11 +2480,7 @@ data EnumValue = EnumValue'
 enumValue
     :: EnumValue
 enumValue =
-    EnumValue'
-    { _evName = Nothing
-    , _evOptions = Nothing
-    , _evNumber = Nothing
-    }
+  EnumValue' {_evName = Nothing, _evOptions = Nothing, _evNumber = Nothing}
 
 -- | Enum value name.
 evName :: Lens' EnumValue (Maybe Text)
@@ -2530,10 +2524,12 @@ instance ToJSON EnumValue where
 -- provider_id: google_calendar_auth
 --
 -- /See:/ 'authentication' smart constructor.
-data Authentication = Authentication'
+data Authentication =
+  Authentication'
     { _aRules     :: !(Maybe [AuthenticationRule])
     , _aProviders :: !(Maybe [AuthProvider])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Authentication' with the minimum fields required to make a request.
 --
@@ -2544,11 +2540,7 @@ data Authentication = Authentication'
 -- * 'aProviders'
 authentication
     :: Authentication
-authentication =
-    Authentication'
-    { _aRules = Nothing
-    , _aProviders = Nothing
-    }
+authentication = Authentication' {_aRules = Nothing, _aProviders = Nothing}
 
 -- | A list of authentication rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -2614,10 +2606,12 @@ instance ToJSON Authentication where
 -- (google.api.http).get = \"\/v2\/acls\/{resource=**}:getAcl\"; } ... }
 --
 -- /See:/ 'mixin' smart constructor.
-data Mixin = Mixin'
+data Mixin =
+  Mixin'
     { _mRoot :: !(Maybe Text)
     , _mName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Mixin' with the minimum fields required to make a request.
 --
@@ -2628,11 +2622,7 @@ data Mixin = Mixin'
 -- * 'mName'
 mixin
     :: Mixin
-mixin =
-    Mixin'
-    { _mRoot = Nothing
-    , _mName = Nothing
-    }
+mixin = Mixin' {_mRoot = Nothing, _mName = Nothing}
 
 -- | If non-empty specifies a path under which inherited HTTP paths are
 -- rooted.
@@ -2657,10 +2647,12 @@ instance ToJSON Mixin where
 -- | A custom pattern is used for defining custom HTTP verb.
 --
 -- /See:/ 'customHTTPPattern' smart constructor.
-data CustomHTTPPattern = CustomHTTPPattern'
+data CustomHTTPPattern =
+  CustomHTTPPattern'
     { _chttppPath :: !(Maybe Text)
     , _chttppKind :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomHTTPPattern' with the minimum fields required to make a request.
 --
@@ -2672,10 +2664,7 @@ data CustomHTTPPattern = CustomHTTPPattern'
 customHTTPPattern
     :: CustomHTTPPattern
 customHTTPPattern =
-    CustomHTTPPattern'
-    { _chttppPath = Nothing
-    , _chttppKind = Nothing
-    }
+  CustomHTTPPattern' {_chttppPath = Nothing, _chttppKind = Nothing}
 
 -- | The path matched by this custom verb.
 chttppPath :: Lens' CustomHTTPPattern (Maybe Text)
@@ -2715,11 +2704,13 @@ instance ToJSON CustomHTTPPattern where
 -- allow_unregistered_calls: true
 --
 -- /See:/ 'usageRule' smart constructor.
-data UsageRule = UsageRule'
+data UsageRule =
+  UsageRule'
     { _urSelector               :: !(Maybe Text)
     , _urAllowUnregisteredCalls :: !(Maybe Bool)
     , _urSkipServiceControl     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsageRule' with the minimum fields required to make a request.
 --
@@ -2733,7 +2724,7 @@ data UsageRule = UsageRule'
 usageRule
     :: UsageRule
 usageRule =
-    UsageRule'
+  UsageRule'
     { _urSelector = Nothing
     , _urAllowUnregisteredCalls = Nothing
     , _urSkipServiceControl = Nothing
@@ -2781,9 +2772,11 @@ instance ToJSON UsageRule where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -2794,9 +2787,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2816,11 +2807,13 @@ instance ToJSON StatusDetailsItem where
 -- represent nested documentation set structure.
 --
 -- /See:/ 'page' smart constructor.
-data Page = Page'
+data Page =
+  Page'
     { _pSubpages :: !(Maybe [Page])
     , _pContent  :: !(Maybe Text)
     , _pName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
@@ -2833,12 +2826,7 @@ data Page = Page'
 -- * 'pName'
 page
     :: Page
-page =
-    Page'
-    { _pSubpages = Nothing
-    , _pContent = Nothing
-    , _pName = Nothing
-    }
+page = Page' {_pSubpages = Nothing, _pContent = Nothing, _pName = Nothing}
 
 -- | Subpages of this page. The order of subpages specified here will be
 -- honored in the generated docset.
@@ -2893,9 +2881,11 @@ instance ToJSON Page where
 -- google.api.servicemanagement.v1.ConfigSource, and google.api.Service
 --
 -- /See:/ 'generateConfigReportRequestOldConfig' smart constructor.
-newtype GenerateConfigReportRequestOldConfig = GenerateConfigReportRequestOldConfig'
+newtype GenerateConfigReportRequestOldConfig =
+  GenerateConfigReportRequestOldConfig'
     { _gcrrocAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GenerateConfigReportRequestOldConfig' with the minimum fields required to make a request.
 --
@@ -2906,9 +2896,8 @@ generateConfigReportRequestOldConfig
     :: HashMap Text JSONValue -- ^ 'gcrrocAddtional'
     -> GenerateConfigReportRequestOldConfig
 generateConfigReportRequestOldConfig pGcrrocAddtional_ =
-    GenerateConfigReportRequestOldConfig'
-    { _gcrrocAddtional = _Coerce # pGcrrocAddtional_
-    }
+  GenerateConfigReportRequestOldConfig'
+    {_gcrrocAddtional = _Coerce # pGcrrocAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 gcrrocAddtional :: Lens' GenerateConfigReportRequestOldConfig (HashMap Text JSONValue)
@@ -2918,7 +2907,8 @@ gcrrocAddtional
       . _Coerce
 
 instance FromJSON
-         GenerateConfigReportRequestOldConfig where
+           GenerateConfigReportRequestOldConfig
+         where
         parseJSON
           = withObject "GenerateConfigReportRequestOldConfig"
               (\ o ->
@@ -2937,12 +2927,14 @@ instance ToJSON GenerateConfigReportRequestOldConfig
 -- ignored.
 --
 -- /See:/ 'authenticationRule' smart constructor.
-data AuthenticationRule = AuthenticationRule'
+data AuthenticationRule =
+  AuthenticationRule'
     { _arRequirements           :: !(Maybe [AuthRequirement])
     , _arSelector               :: !(Maybe Text)
     , _arAllowWithoutCredential :: !(Maybe Bool)
     , _arOAuth                  :: !(Maybe OAuthRequirements)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuthenticationRule' with the minimum fields required to make a request.
 --
@@ -2958,7 +2950,7 @@ data AuthenticationRule = AuthenticationRule'
 authenticationRule
     :: AuthenticationRule
 authenticationRule =
-    AuthenticationRule'
+  AuthenticationRule'
     { _arRequirements = Nothing
     , _arSelector = Nothing
     , _arAllowWithoutCredential = Nothing
@@ -3012,10 +3004,12 @@ instance ToJSON AuthenticationRule where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-data SetIAMPolicyRequest = SetIAMPolicyRequest'
+data SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
     , _siprPolicy     :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -3027,10 +3021,7 @@ data SetIAMPolicyRequest = SetIAMPolicyRequest'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprUpdateMask = Nothing
-    , _siprPolicy = Nothing
-    }
+  SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -3069,9 +3060,11 @@ instance ToJSON SetIAMPolicyRequest where
 -- which the quota limits are defined. The value must not be negative.
 --
 -- /See:/ 'metricRuleMetricCosts' smart constructor.
-newtype MetricRuleMetricCosts = MetricRuleMetricCosts'
+newtype MetricRuleMetricCosts =
+  MetricRuleMetricCosts'
     { _mrmcAddtional :: HashMap Text (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetricRuleMetricCosts' with the minimum fields required to make a request.
 --
@@ -3082,9 +3075,7 @@ metricRuleMetricCosts
     :: HashMap Text Int64 -- ^ 'mrmcAddtional'
     -> MetricRuleMetricCosts
 metricRuleMetricCosts pMrmcAddtional_ =
-    MetricRuleMetricCosts'
-    { _mrmcAddtional = _Coerce # pMrmcAddtional_
-    }
+  MetricRuleMetricCosts' {_mrmcAddtional = _Coerce # pMrmcAddtional_}
 
 mrmcAddtional :: Lens' MetricRuleMetricCosts (HashMap Text Int64)
 mrmcAddtional
@@ -3107,9 +3098,11 @@ instance ToJSON MetricRuleMetricCosts where
 -- 100.0.
 --
 -- /See:/ 'trafficPercentStrategyPercentages' smart constructor.
-newtype TrafficPercentStrategyPercentages = TrafficPercentStrategyPercentages'
+newtype TrafficPercentStrategyPercentages =
+  TrafficPercentStrategyPercentages'
     { _tpspAddtional :: HashMap Text (Textual Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TrafficPercentStrategyPercentages' with the minimum fields required to make a request.
 --
@@ -3120,9 +3113,8 @@ trafficPercentStrategyPercentages
     :: HashMap Text Double -- ^ 'tpspAddtional'
     -> TrafficPercentStrategyPercentages
 trafficPercentStrategyPercentages pTpspAddtional_ =
-    TrafficPercentStrategyPercentages'
-    { _tpspAddtional = _Coerce # pTpspAddtional_
-    }
+  TrafficPercentStrategyPercentages'
+    {_tpspAddtional = _Coerce # pTpspAddtional_}
 
 tpspAddtional :: Lens' TrafficPercentStrategyPercentages (HashMap Text Double)
 tpspAddtional
@@ -3148,9 +3140,11 @@ instance ToJSON TrafficPercentStrategyPercentages
 -- firebaserules.googleapis.com
 --
 -- /See:/ 'authorizationConfig' smart constructor.
-newtype AuthorizationConfig = AuthorizationConfig'
+newtype AuthorizationConfig =
+  AuthorizationConfig'
     { _acProvider :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuthorizationConfig' with the minimum fields required to make a request.
 --
@@ -3159,10 +3153,7 @@ newtype AuthorizationConfig = AuthorizationConfig'
 -- * 'acProvider'
 authorizationConfig
     :: AuthorizationConfig
-authorizationConfig =
-    AuthorizationConfig'
-    { _acProvider = Nothing
-    }
+authorizationConfig = AuthorizationConfig' {_acProvider = Nothing}
 
 -- | The name of the authorization provider, such as
 -- firebaserules.googleapis.com.
@@ -3184,9 +3175,11 @@ instance ToJSON AuthorizationConfig where
 -- be used by whitelisted users.
 --
 -- /See:/ 'experimental' smart constructor.
-newtype Experimental = Experimental'
+newtype Experimental =
+  Experimental'
     { _eAuthorization :: Maybe AuthorizationConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Experimental' with the minimum fields required to make a request.
 --
@@ -3195,10 +3188,7 @@ newtype Experimental = Experimental'
 -- * 'eAuthorization'
 experimental
     :: Experimental
-experimental =
-    Experimental'
-    { _eAuthorization = Nothing
-    }
+experimental = Experimental' {_eAuthorization = Nothing}
 
 -- | Authorization configuration.
 eAuthorization :: Lens' Experimental (Maybe AuthorizationConfig)
@@ -3220,10 +3210,12 @@ instance ToJSON Experimental where
 -- | Response message for ListServiceRollouts method.
 --
 -- /See:/ 'listServiceRolloutsResponse' smart constructor.
-data ListServiceRolloutsResponse = ListServiceRolloutsResponse'
+data ListServiceRolloutsResponse =
+  ListServiceRolloutsResponse'
     { _lsrrNextPageToken :: !(Maybe Text)
     , _lsrrRollouts      :: !(Maybe [Rollout])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListServiceRolloutsResponse' with the minimum fields required to make a request.
 --
@@ -3235,10 +3227,8 @@ data ListServiceRolloutsResponse = ListServiceRolloutsResponse'
 listServiceRolloutsResponse
     :: ListServiceRolloutsResponse
 listServiceRolloutsResponse =
-    ListServiceRolloutsResponse'
-    { _lsrrNextPageToken = Nothing
-    , _lsrrRollouts = Nothing
-    }
+  ListServiceRolloutsResponse'
+    {_lsrrNextPageToken = Nothing, _lsrrRollouts = Nothing}
 
 -- | The token of the next page of results.
 lsrrNextPageToken :: Lens' ListServiceRolloutsResponse (Maybe Text)
@@ -3274,13 +3264,15 @@ instance ToJSON ListServiceRolloutsResponse where
 -- change, such as backwards-incompatibility.
 --
 -- /See:/ 'configChange' smart constructor.
-data ConfigChange = ConfigChange'
+data ConfigChange =
+  ConfigChange'
     { _ccOldValue   :: !(Maybe Text)
     , _ccNewValue   :: !(Maybe Text)
     , _ccAdvices    :: !(Maybe [Advice])
     , _ccChangeType :: !(Maybe ConfigChangeChangeType)
     , _ccElement    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConfigChange' with the minimum fields required to make a request.
 --
@@ -3298,7 +3290,7 @@ data ConfigChange = ConfigChange'
 configChange
     :: ConfigChange
 configChange =
-    ConfigChange'
+  ConfigChange'
     { _ccOldValue = Nothing
     , _ccNewValue = Nothing
     , _ccAdvices = Nothing
@@ -3367,9 +3359,11 @@ instance ToJSON ConfigChange where
 -- | \`Backend\` defines the backend configuration for a service.
 --
 -- /See:/ 'backend' smart constructor.
-newtype Backend = Backend'
+newtype Backend =
+  Backend'
     { _bRules :: Maybe [BackendRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
 --
@@ -3378,10 +3372,7 @@ newtype Backend = Backend'
 -- * 'bRules'
 backend
     :: Backend
-backend =
-    Backend'
-    { _bRules = Nothing
-    }
+backend = Backend' {_bRules = Nothing}
 
 -- | A list of API backend rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -3422,10 +3413,12 @@ instance ToJSON Backend where
 -- library.googleapis.com\/book\/overdue_count
 --
 -- /See:/ 'monitoring' smart constructor.
-data Monitoring = Monitoring'
+data Monitoring =
+  Monitoring'
     { _mProducerDestinations :: !(Maybe [MonitoringDestination])
     , _mConsumerDestinations :: !(Maybe [MonitoringDestination])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Monitoring' with the minimum fields required to make a request.
 --
@@ -3437,10 +3430,8 @@ data Monitoring = Monitoring'
 monitoring
     :: Monitoring
 monitoring =
-    Monitoring'
-    { _mProducerDestinations = Nothing
-    , _mConsumerDestinations = Nothing
-    }
+  Monitoring'
+    {_mProducerDestinations = Nothing, _mConsumerDestinations = Nothing}
 
 -- | Monitoring configurations for sending metrics to the producer project.
 -- There can be multiple producer destinations. A monitored resouce type
@@ -3491,12 +3482,14 @@ instance ToJSON Monitoring where
 -- key: \/customer_id description: Identifier of a library customer
 --
 -- /See:/ 'logDescriptor' smart constructor.
-data LogDescriptor = LogDescriptor'
+data LogDescriptor =
+  LogDescriptor'
     { _ldName        :: !(Maybe Text)
     , _ldDisplayName :: !(Maybe Text)
     , _ldLabels      :: !(Maybe [LabelDescriptor])
     , _ldDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LogDescriptor' with the minimum fields required to make a request.
 --
@@ -3512,7 +3505,7 @@ data LogDescriptor = LogDescriptor'
 logDescriptor
     :: LogDescriptor
 logDescriptor =
-    LogDescriptor'
+  LogDescriptor'
     { _ldName = Nothing
     , _ldDisplayName = Nothing
     , _ldLabels = Nothing
@@ -3570,7 +3563,8 @@ instance ToJSON LogDescriptor where
 -- | Method represents a method of an API interface.
 --
 -- /See:/ 'method' smart constructor.
-data Method = Method'
+data Method =
+  Method'
     { _metRequestStreaming  :: !(Maybe Bool)
     , _metResponseTypeURL   :: !(Maybe Text)
     , _metName              :: !(Maybe Text)
@@ -3578,7 +3572,8 @@ data Method = Method'
     , _metRequestTypeURL    :: !(Maybe Text)
     , _metOptions           :: !(Maybe [Option])
     , _metSyntax            :: !(Maybe MethodSyntax)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Method' with the minimum fields required to make a request.
 --
@@ -3600,7 +3595,7 @@ data Method = Method'
 method
     :: Method
 method =
-    Method'
+  Method'
     { _metRequestStreaming = Nothing
     , _metResponseTypeURL = Nothing
     , _metName = Nothing
@@ -3678,11 +3673,13 @@ instance ToJSON Method where
 -- | Represents a diagnostic message (error or warning)
 --
 -- /See:/ 'diagnostic' smart constructor.
-data Diagnostic = Diagnostic'
+data Diagnostic =
+  Diagnostic'
     { _dLocation :: !(Maybe Text)
     , _dKind     :: !(Maybe DiagnosticKind)
     , _dMessage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Diagnostic' with the minimum fields required to make a request.
 --
@@ -3696,11 +3693,7 @@ data Diagnostic = Diagnostic'
 diagnostic
     :: Diagnostic
 diagnostic =
-    Diagnostic'
-    { _dLocation = Nothing
-    , _dKind = Nothing
-    , _dMessage = Nothing
-    }
+  Diagnostic' {_dLocation = Nothing, _dKind = Nothing, _dMessage = Nothing}
 
 -- | File name and line number of the error or warning.
 dLocation :: Lens' Diagnostic (Maybe Text)
@@ -3738,9 +3731,11 @@ instance ToJSON Diagnostic where
 -- parameters.
 --
 -- /See:/ 'systemParameters' smart constructor.
-newtype SystemParameters = SystemParameters'
+newtype SystemParameters =
+  SystemParameters'
     { _spRules :: Maybe [SystemParameterRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SystemParameters' with the minimum fields required to make a request.
 --
@@ -3749,10 +3744,7 @@ newtype SystemParameters = SystemParameters'
 -- * 'spRules'
 systemParameters
     :: SystemParameters
-systemParameters =
-    SystemParameters'
-    { _spRules = Nothing
-    }
+systemParameters = SystemParameters' {_spRules = Nothing}
 
 -- | Define system parameters. The parameters defined here will override the
 -- default parameters implemented by the system. If this field is missing
@@ -3783,10 +3775,12 @@ instance ToJSON SystemParameters where
 -- configuration defined by \`google.api.Service\`.
 --
 -- /See:/ 'configSource' smart constructor.
-data ConfigSource = ConfigSource'
+data ConfigSource =
+  ConfigSource'
     { _csFiles :: !(Maybe [ConfigFile])
     , _csId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConfigSource' with the minimum fields required to make a request.
 --
@@ -3797,11 +3791,7 @@ data ConfigSource = ConfigSource'
 -- * 'csId'
 configSource
     :: ConfigSource
-configSource =
-    ConfigSource'
-    { _csFiles = Nothing
-    , _csId = Nothing
-    }
+configSource = ConfigSource' {_csFiles = Nothing, _csId = Nothing}
 
 -- | Set of source configuration files that are used to generate a service
 -- configuration (\`google.api.Service\`).
@@ -3888,13 +3878,15 @@ instance ToJSON ConfigSource where
 -- documentation and is documented together with service config validation.
 --
 -- /See:/ 'documentation' smart constructor.
-data Documentation = Documentation'
+data Documentation =
+  Documentation'
     { _dSummary              :: !(Maybe Text)
     , _dDocumentationRootURL :: !(Maybe Text)
     , _dRules                :: !(Maybe [DocumentationRule])
     , _dPages                :: !(Maybe [Page])
     , _dOverview             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Documentation' with the minimum fields required to make a request.
 --
@@ -3912,7 +3904,7 @@ data Documentation = Documentation'
 documentation
     :: Documentation
 documentation =
-    Documentation'
+  Documentation'
     { _dSummary = Nothing
     , _dDocumentationRootURL = Nothing
     , _dRules = Nothing
@@ -3987,10 +3979,12 @@ instance ToJSON Documentation where
 -- | Represents the status of one operation step.
 --
 -- /See:/ 'step' smart constructor.
-data Step = Step'
+data Step =
+  Step'
     { _sStatus      :: !(Maybe StepStatus)
     , _sDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Step' with the minimum fields required to make a request.
 --
@@ -4001,11 +3995,7 @@ data Step = Step'
 -- * 'sDescription'
 step
     :: Step
-step =
-    Step'
-    { _sStatus = Nothing
-    , _sDescription = Nothing
-    }
+step = Step' {_sStatus = Nothing, _sDescription = Nothing}
 
 -- | The status code.
 sStatus :: Lens' Step (Maybe StepStatus)
@@ -4032,11 +4022,13 @@ instance ToJSON Step where
 -- | Additional annotations that can be used to guide the usage of a metric.
 --
 -- /See:/ 'metricDescriptorMetadata' smart constructor.
-data MetricDescriptorMetadata = MetricDescriptorMetadata'
+data MetricDescriptorMetadata =
+  MetricDescriptorMetadata'
     { _mdmSamplePeriod :: !(Maybe GDuration)
     , _mdmIngestDelay  :: !(Maybe GDuration)
     , _mdmLaunchStage  :: !(Maybe MetricDescriptorMetadataLaunchStage)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetricDescriptorMetadata' with the minimum fields required to make a request.
 --
@@ -4050,7 +4042,7 @@ data MetricDescriptorMetadata = MetricDescriptorMetadata'
 metricDescriptorMetadata
     :: MetricDescriptorMetadata
 metricDescriptorMetadata =
-    MetricDescriptorMetadata'
+  MetricDescriptorMetadata'
     { _mdmSamplePeriod = Nothing
     , _mdmIngestDelay = Nothing
     , _mdmLaunchStage = Nothing
@@ -4100,9 +4092,11 @@ instance ToJSON MetricDescriptorMetadata where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -4112,9 +4106,7 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -4143,10 +4135,12 @@ instance ToJSON TestIAMPermissionsRequest where
 -- methods.
 --
 -- /See:/ 'systemParameterRule' smart constructor.
-data SystemParameterRule = SystemParameterRule'
+data SystemParameterRule =
+  SystemParameterRule'
     { _sprSelector   :: !(Maybe Text)
     , _sprParameters :: !(Maybe [SystemParameter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SystemParameterRule' with the minimum fields required to make a request.
 --
@@ -4158,10 +4152,7 @@ data SystemParameterRule = SystemParameterRule'
 systemParameterRule
     :: SystemParameterRule
 systemParameterRule =
-    SystemParameterRule'
-    { _sprSelector = Nothing
-    , _sprParameters = Nothing
-    }
+  SystemParameterRule' {_sprSelector = Nothing, _sprParameters = Nothing}
 
 -- | Selects the methods to which this rule applies. Use \'*\' to indicate
 -- all methods in all APIs. Refer to selector for syntax details.
@@ -4198,11 +4189,13 @@ instance ToJSON SystemParameterRule where
 -- | A description of a label.
 --
 -- /See:/ 'labelDescriptor' smart constructor.
-data LabelDescriptor = LabelDescriptor'
+data LabelDescriptor =
+  LabelDescriptor'
     { _lKey         :: !(Maybe Text)
     , _lValueType   :: !(Maybe LabelDescriptorValueType)
     , _lDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LabelDescriptor' with the minimum fields required to make a request.
 --
@@ -4216,11 +4209,8 @@ data LabelDescriptor = LabelDescriptor'
 labelDescriptor
     :: LabelDescriptor
 labelDescriptor =
-    LabelDescriptor'
-    { _lKey = Nothing
-    , _lValueType = Nothing
-    , _lDescription = Nothing
-    }
+  LabelDescriptor'
+    {_lKey = Nothing, _lValueType = Nothing, _lDescription = Nothing}
 
 -- | The label key.
 lKey :: Lens' LabelDescriptor (Maybe Text)
@@ -4255,11 +4245,13 @@ instance ToJSON LabelDescriptor where
 -- | Configuration controlling usage of a service.
 --
 -- /See:/ 'usage' smart constructor.
-data Usage = Usage'
+data Usage =
+  Usage'
     { _uRequirements                :: !(Maybe [Text])
     , _uRules                       :: !(Maybe [UsageRule])
     , _uProducerNotificationChannel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Usage' with the minimum fields required to make a request.
 --
@@ -4273,7 +4265,7 @@ data Usage = Usage'
 usage
     :: Usage
 usage =
-    Usage'
+  Usage'
     { _uRequirements = Nothing
     , _uRules = Nothing
     , _uProducerNotificationChannel = Nothing
@@ -4329,9 +4321,11 @@ instance ToJSON Usage where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -4341,9 +4335,7 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -4373,9 +4365,11 @@ instance ToJSON TestIAMPermissionsResponse where
 -- google.api.servicemanagement.v1.ConfigSource, and google.api.Service
 --
 -- /See:/ 'generateConfigReportRequestNewConfig' smart constructor.
-newtype GenerateConfigReportRequestNewConfig = GenerateConfigReportRequestNewConfig'
+newtype GenerateConfigReportRequestNewConfig =
+  GenerateConfigReportRequestNewConfig'
     { _gcrrncAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GenerateConfigReportRequestNewConfig' with the minimum fields required to make a request.
 --
@@ -4386,9 +4380,8 @@ generateConfigReportRequestNewConfig
     :: HashMap Text JSONValue -- ^ 'gcrrncAddtional'
     -> GenerateConfigReportRequestNewConfig
 generateConfigReportRequestNewConfig pGcrrncAddtional_ =
-    GenerateConfigReportRequestNewConfig'
-    { _gcrrncAddtional = _Coerce # pGcrrncAddtional_
-    }
+  GenerateConfigReportRequestNewConfig'
+    {_gcrrncAddtional = _Coerce # pGcrrncAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 gcrrncAddtional :: Lens' GenerateConfigReportRequestNewConfig (HashMap Text JSONValue)
@@ -4398,7 +4391,8 @@ gcrrncAddtional
       . _Coerce
 
 instance FromJSON
-         GenerateConfigReportRequestNewConfig where
+           GenerateConfigReportRequestNewConfig
+         where
         parseJSON
           = withObject "GenerateConfigReportRequestNewConfig"
               (\ o ->
@@ -4414,10 +4408,12 @@ instance ToJSON GenerateConfigReportRequestNewConfig
 -- HTTP REST API methods.
 --
 -- /See:/ 'hTTP' smart constructor.
-data HTTP = HTTP'
+data HTTP =
+  HTTP'
     { _hRules                        :: !(Maybe [HTTPRule])
     , _hFullyDecodeReservedExpansion :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTP' with the minimum fields required to make a request.
 --
@@ -4428,11 +4424,7 @@ data HTTP = HTTP'
 -- * 'hFullyDecodeReservedExpansion'
 hTTP
     :: HTTP
-hTTP =
-    HTTP'
-    { _hRules = Nothing
-    , _hFullyDecodeReservedExpansion = Nothing
-    }
+hTTP = HTTP' {_hRules = Nothing, _hFullyDecodeReservedExpansion = Nothing}
 
 -- | A list of HTTP configuration rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -4470,9 +4462,11 @@ instance ToJSON HTTP where
 -- | Request message for DisableService method.
 --
 -- /See:/ 'disableServiceRequest' smart constructor.
-newtype DisableServiceRequest = DisableServiceRequest'
+newtype DisableServiceRequest =
+  DisableServiceRequest'
     { _dsrConsumerId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisableServiceRequest' with the minimum fields required to make a request.
 --
@@ -4481,10 +4475,7 @@ newtype DisableServiceRequest = DisableServiceRequest'
 -- * 'dsrConsumerId'
 disableServiceRequest
     :: DisableServiceRequest
-disableServiceRequest =
-    DisableServiceRequest'
-    { _dsrConsumerId = Nothing
-    }
+disableServiceRequest = DisableServiceRequest' {_dsrConsumerId = Nothing}
 
 -- | The identity of consumer resource which service disablement will be
 -- applied to. The Google Service Management implementation accepts the
@@ -4525,12 +4516,14 @@ instance ToJSON DisableServiceRequest where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -4546,7 +4539,7 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
@@ -4609,14 +4602,16 @@ instance ToJSON Policy where
 -- | A protocol buffer message type.
 --
 -- /See:/ 'type'' smart constructor.
-data Type = Type'
+data Type =
+  Type'
     { _tSourceContext :: !(Maybe SourceContext)
     , _tOneofs        :: !(Maybe [Text])
     , _tName          :: !(Maybe Text)
     , _tOptions       :: !(Maybe [Option])
     , _tFields        :: !(Maybe [Field])
     , _tSyntax        :: !(Maybe TypeSyntax)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
@@ -4636,7 +4631,7 @@ data Type = Type'
 type'
     :: Type
 type' =
-    Type'
+  Type'
     { _tSourceContext = Nothing
     , _tOneofs = Nothing
     , _tName = Nothing
@@ -4711,7 +4706,8 @@ instance ToJSON Type where
 -- terminology.
 --
 -- /See:/ 'api' smart constructor.
-data API = API'
+data API =
+  API'
     { _aSourceContext :: !(Maybe SourceContext)
     , _aMixins        :: !(Maybe [Mixin])
     , _aMethods       :: !(Maybe [Method])
@@ -4719,7 +4715,8 @@ data API = API'
     , _aVersion       :: !(Maybe Text)
     , _aOptions       :: !(Maybe [Option])
     , _aSyntax        :: !(Maybe APISyntax)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'API' with the minimum fields required to make a request.
 --
@@ -4741,7 +4738,7 @@ data API = API'
 api
     :: API
 api =
-    API'
+  API'
     { _aSourceContext = Nothing
     , _aMixins = Nothing
     , _aMethods = Nothing
@@ -4833,10 +4830,12 @@ instance ToJSON API where
 -- or the consumer project).
 --
 -- /See:/ 'monitoringDestination' smart constructor.
-data MonitoringDestination = MonitoringDestination'
+data MonitoringDestination =
+  MonitoringDestination'
     { _mdMetrics           :: !(Maybe [Text])
     , _mdMonitoredResource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitoringDestination' with the minimum fields required to make a request.
 --
@@ -4848,10 +4847,7 @@ data MonitoringDestination = MonitoringDestination'
 monitoringDestination
     :: MonitoringDestination
 monitoringDestination =
-    MonitoringDestination'
-    { _mdMetrics = Nothing
-    , _mdMonitoredResource = Nothing
-    }
+  MonitoringDestination' {_mdMetrics = Nothing, _mdMonitoredResource = Nothing}
 
 -- | Types of the metrics to report to this monitoring destination. Each type
 -- must be defined in Service.metrics section.
@@ -4887,10 +4883,12 @@ instance ToJSON MonitoringDestination where
 -- Management.
 --
 -- /See:/ 'managedService' smart constructor.
-data ManagedService = ManagedService'
+data ManagedService =
+  ManagedService'
     { _msServiceName       :: !(Maybe Text)
     , _msProducerProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedService' with the minimum fields required to make a request.
 --
@@ -4902,10 +4900,7 @@ data ManagedService = ManagedService'
 managedService
     :: ManagedService
 managedService =
-    ManagedService'
-    { _msServiceName = Nothing
-    , _msProducerProjectId = Nothing
-    }
+  ManagedService' {_msServiceName = Nothing, _msProducerProjectId = Nothing}
 
 -- | The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements.
@@ -4938,12 +4933,14 @@ instance ToJSON ManagedService where
 -- | The metadata associated with a long running operation resource.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata = OperationMetadata'
+data OperationMetadata =
+  OperationMetadata'
     { _omStartTime          :: !(Maybe DateTime')
     , _omSteps              :: !(Maybe [Step])
     , _omProgressPercentage :: !(Maybe (Textual Int32))
     , _omResourceNames      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -4959,7 +4956,7 @@ data OperationMetadata = OperationMetadata'
 operationMetadata
     :: OperationMetadata
 operationMetadata =
-    OperationMetadata'
+  OperationMetadata'
     { _omStartTime = Nothing
     , _omSteps = Nothing
     , _omProgressPercentage = Nothing
@@ -5024,13 +5021,15 @@ instance ToJSON OperationMetadata where
 -- library-example.googleapis.com allow_cors: true
 --
 -- /See:/ 'endpoint' smart constructor.
-data Endpoint = Endpoint'
+data Endpoint =
+  Endpoint'
     { _eAliases   :: !(Maybe [Text])
     , _eAllowCORS :: !(Maybe Bool)
     , _eName      :: !(Maybe Text)
     , _eFeatures  :: !(Maybe [Text])
     , _eTarget    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Endpoint' with the minimum fields required to make a request.
 --
@@ -5048,7 +5047,7 @@ data Endpoint = Endpoint'
 endpoint
     :: Endpoint
 endpoint =
-    Endpoint'
+  Endpoint'
     { _eAliases = Nothing
     , _eAllowCORS = Nothing
     , _eName = Nothing
@@ -5130,9 +5129,11 @@ instance ToJSON Endpoint where
 -- fail due to the backend requiring additional scopes or permissions.
 --
 -- /See:/ 'oAuthRequirements' smart constructor.
-newtype OAuthRequirements = OAuthRequirements'
+newtype OAuthRequirements =
+  OAuthRequirements'
     { _oarCanonicalScopes :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OAuthRequirements' with the minimum fields required to make a request.
 --
@@ -5141,10 +5142,7 @@ newtype OAuthRequirements = OAuthRequirements'
 -- * 'oarCanonicalScopes'
 oAuthRequirements
     :: OAuthRequirements
-oAuthRequirements =
-    OAuthRequirements'
-    { _oarCanonicalScopes = Nothing
-    }
+oAuthRequirements = OAuthRequirements' {_oarCanonicalScopes = Nothing}
 
 -- | The list of publicly documented OAuth scopes that are allowed access. An
 -- OAuth token containing any of these scopes will be accepted. Example:
@@ -5173,10 +5171,12 @@ instance ToJSON OAuthRequirements where
 -- google.foo.v1.AnotherError
 --
 -- /See:/ 'customError' smart constructor.
-data CustomError = CustomError'
+data CustomError =
+  CustomError'
     { _ceRules :: !(Maybe [CustomErrorRule])
     , _ceTypes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomError' with the minimum fields required to make a request.
 --
@@ -5187,11 +5187,7 @@ data CustomError = CustomError'
 -- * 'ceTypes'
 customError
     :: CustomError
-customError =
-    CustomError'
-    { _ceRules = Nothing
-    , _ceTypes = Nothing
-    }
+customError = CustomError' {_ceRules = Nothing, _ceTypes = Nothing}
 
 -- | The list of custom error rules that apply to individual API messages.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -5228,7 +5224,8 @@ instance ToJSON CustomError where
 -- and limit type combination defined within a \`QuotaGroup\`.
 --
 -- /See:/ 'quotaLimit' smart constructor.
-data QuotaLimit = QuotaLimit'
+data QuotaLimit =
+  QuotaLimit'
     { _qlValues       :: !(Maybe QuotaLimitValues)
     , _qlFreeTier     :: !(Maybe (Textual Int64))
     , _qlMetric       :: !(Maybe Text)
@@ -5239,7 +5236,8 @@ data QuotaLimit = QuotaLimit'
     , _qlDescription  :: !(Maybe Text)
     , _qlUnit         :: !(Maybe Text)
     , _qlMaxLimit     :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuotaLimit' with the minimum fields required to make a request.
 --
@@ -5267,7 +5265,7 @@ data QuotaLimit = QuotaLimit'
 quotaLimit
     :: QuotaLimit
 quotaLimit =
-    QuotaLimit'
+  QuotaLimit'
     { _qlValues = Nothing
     , _qlFreeTier = Nothing
     , _qlMetric = Nothing
@@ -5406,10 +5404,12 @@ instance ToJSON QuotaLimit where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -5421,10 +5421,7 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -5459,10 +5456,12 @@ instance ToJSON AuditLogConfig where
 -- enumeration, etc.
 --
 -- /See:/ 'option' smart constructor.
-data Option = Option'
+data Option =
+  Option'
     { _optValue :: !(Maybe OptionValue)
     , _optName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Option' with the minimum fields required to make a request.
 --
@@ -5473,11 +5472,7 @@ data Option = Option'
 -- * 'optName'
 option
     :: Option
-option =
-    Option'
-    { _optValue = Nothing
-    , _optName = Nothing
-    }
+option = Option' {_optValue = Nothing, _optName = Nothing}
 
 -- | The option\'s value packed in an Any message. If the value is a
 -- primitive, the corresponding wrapper type defined in
@@ -5518,9 +5513,11 @@ instance ToJSON Option where
 -- library.googleapis.com\/book\/borrowed_count
 --
 -- /See:/ 'billing' smart constructor.
-newtype Billing = Billing'
+newtype Billing =
+  Billing'
     { _bConsumerDestinations :: Maybe [BillingDestination]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Billing' with the minimum fields required to make a request.
 --
@@ -5529,10 +5526,7 @@ newtype Billing = Billing'
 -- * 'bConsumerDestinations'
 billing
     :: Billing
-billing =
-    Billing'
-    { _bConsumerDestinations = Nothing
-    }
+billing = Billing' {_bConsumerDestinations = Nothing}
 
 -- | Billing configurations for sending metrics to the consumer project.
 -- There can be multiple consumer destinations per service, each one must
@@ -5562,9 +5556,11 @@ instance ToJSON Billing where
 -- | Source information used to create a Service Config
 --
 -- /See:/ 'sourceInfo' smart constructor.
-newtype SourceInfo = SourceInfo'
+newtype SourceInfo =
+  SourceInfo'
     { _siSourceFiles :: Maybe [SourceInfoSourceFilesItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceInfo' with the minimum fields required to make a request.
 --
@@ -5573,10 +5569,7 @@ newtype SourceInfo = SourceInfo'
 -- * 'siSourceFiles'
 sourceInfo
     :: SourceInfo
-sourceInfo =
-    SourceInfo'
-    { _siSourceFiles = Nothing
-    }
+sourceInfo = SourceInfo' {_siSourceFiles = Nothing}
 
 -- | All files used during config generation.
 siSourceFiles :: Lens' SourceInfo [SourceInfoSourceFilesItem]
@@ -5602,9 +5595,11 @@ instance ToJSON SourceInfo where
 -- specified unit. Currently only STANDARD is supported.
 --
 -- /See:/ 'quotaLimitValues' smart constructor.
-newtype QuotaLimitValues = QuotaLimitValues'
+newtype QuotaLimitValues =
+  QuotaLimitValues'
     { _qlvAddtional :: HashMap Text (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuotaLimitValues' with the minimum fields required to make a request.
 --
@@ -5615,9 +5610,7 @@ quotaLimitValues
     :: HashMap Text Int64 -- ^ 'qlvAddtional'
     -> QuotaLimitValues
 quotaLimitValues pQlvAddtional_ =
-    QuotaLimitValues'
-    { _qlvAddtional = _Coerce # pQlvAddtional_
-    }
+  QuotaLimitValues' {_qlvAddtional = _Coerce # pQlvAddtional_}
 
 qlvAddtional :: Lens' QuotaLimitValues (HashMap Text Int64)
 qlvAddtional
@@ -5638,7 +5631,8 @@ instance ToJSON QuotaLimitValues where
 -- config.
 --
 -- /See:/ 'rollout' smart constructor.
-data Rollout = Rollout'
+data Rollout =
+  Rollout'
     { _rStatus                 :: !(Maybe RolloutStatus)
     , _rDeleteServiceStrategy  :: !(Maybe DeleteServiceStrategy)
     , _rTrafficPercentStrategy :: !(Maybe TrafficPercentStrategy)
@@ -5646,7 +5640,8 @@ data Rollout = Rollout'
     , _rServiceName            :: !(Maybe Text)
     , _rRolloutId              :: !(Maybe Text)
     , _rCreateTime             :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Rollout' with the minimum fields required to make a request.
 --
@@ -5668,7 +5663,7 @@ data Rollout = Rollout'
 rollout
     :: Rollout
 rollout =
-    Rollout'
+  Rollout'
     { _rStatus = Nothing
     , _rDeleteServiceStrategy = Nothing
     , _rTrafficPercentStrategy = Nothing
@@ -5753,13 +5748,15 @@ instance ToJSON Rollout where
 -- | Enum type definition.
 --
 -- /See:/ 'enum' smart constructor.
-data Enum' = Enum''
+data Enum' =
+  Enum''
     { _enuSourceContext :: !(Maybe SourceContext)
     , _enuEnumvalue     :: !(Maybe [EnumValue])
     , _enuName          :: !(Maybe Text)
     , _enuOptions       :: !(Maybe [Option])
     , _enuSyntax        :: !(Maybe EnumSyntax)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Enum' with the minimum fields required to make a request.
 --
@@ -5777,7 +5774,7 @@ data Enum' = Enum''
 enum
     :: Enum'
 enum =
-    Enum''
+  Enum''
     { _enuSourceContext = Nothing
     , _enuEnumvalue = Nothing
     , _enuName = Nothing
@@ -5850,10 +5847,12 @@ instance ToJSON Enum' where
 -- activity_history
 --
 -- /See:/ 'logging' smart constructor.
-data Logging = Logging'
+data Logging =
+  Logging'
     { _lProducerDestinations :: !(Maybe [LoggingDestination])
     , _lConsumerDestinations :: !(Maybe [LoggingDestination])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Logging' with the minimum fields required to make a request.
 --
@@ -5865,10 +5864,7 @@ data Logging = Logging'
 logging
     :: Logging
 logging =
-    Logging'
-    { _lProducerDestinations = Nothing
-    , _lConsumerDestinations = Nothing
-    }
+  Logging' {_lProducerDestinations = Nothing, _lConsumerDestinations = Nothing}
 
 -- | Logging configurations for sending logs to the producer project. There
 -- can be multiple producer destinations, each one must have a different
@@ -5912,9 +5908,11 @@ instance ToJSON Logging where
 -- | Represents a service configuration with its name and id.
 --
 -- /See:/ 'configRef' smart constructor.
-newtype ConfigRef = ConfigRef'
+newtype ConfigRef =
+  ConfigRef'
     { _crName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConfigRef' with the minimum fields required to make a request.
 --
@@ -5923,10 +5921,7 @@ newtype ConfigRef = ConfigRef'
 -- * 'crName'
 configRef
     :: ConfigRef
-configRef =
-    ConfigRef'
-    { _crName = Nothing
-    }
+configRef = ConfigRef' {_crName = Nothing}
 
 -- | Resource name of a service config. It must have the following format:
 -- \"services\/{service name}\/configs\/{config id}\".
@@ -5945,10 +5940,12 @@ instance ToJSON ConfigRef where
 -- | Request message for GenerateConfigReport method.
 --
 -- /See:/ 'generateConfigReportRequest' smart constructor.
-data GenerateConfigReportRequest = GenerateConfigReportRequest'
+data GenerateConfigReportRequest =
+  GenerateConfigReportRequest'
     { _gcrrOldConfig :: !(Maybe GenerateConfigReportRequestOldConfig)
     , _gcrrNewConfig :: !(Maybe GenerateConfigReportRequestNewConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GenerateConfigReportRequest' with the minimum fields required to make a request.
 --
@@ -5960,10 +5957,8 @@ data GenerateConfigReportRequest = GenerateConfigReportRequest'
 generateConfigReportRequest
     :: GenerateConfigReportRequest
 generateConfigReportRequest =
-    GenerateConfigReportRequest'
-    { _gcrrOldConfig = Nothing
-    , _gcrrNewConfig = Nothing
-    }
+  GenerateConfigReportRequest'
+    {_gcrrOldConfig = Nothing, _gcrrNewConfig = Nothing}
 
 -- | Service configuration against which the comparison will be done. For
 -- this version of API, the supported types are
@@ -5999,9 +5994,11 @@ instance ToJSON GenerateConfigReportRequest where
 
 --
 -- /See:/ 'sourceInfoSourceFilesItem' smart constructor.
-newtype SourceInfoSourceFilesItem = SourceInfoSourceFilesItem'
+newtype SourceInfoSourceFilesItem =
+  SourceInfoSourceFilesItem'
     { _sisfiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceInfoSourceFilesItem' with the minimum fields required to make a request.
 --
@@ -6012,9 +6009,7 @@ sourceInfoSourceFilesItem
     :: HashMap Text JSONValue -- ^ 'sisfiAddtional'
     -> SourceInfoSourceFilesItem
 sourceInfoSourceFilesItem pSisfiAddtional_ =
-    SourceInfoSourceFilesItem'
-    { _sisfiAddtional = _Coerce # pSisfiAddtional_
-    }
+  SourceInfoSourceFilesItem' {_sisfiAddtional = _Coerce # pSisfiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sisfiAddtional :: Lens' SourceInfoSourceFilesItem (HashMap Text JSONValue)
@@ -6056,10 +6051,12 @@ instance ToJSON SourceInfoSourceFilesItem where
 -- metric_kind: DELTA value_type: INT64
 --
 -- /See:/ 'quota' smart constructor.
-data Quota = Quota'
+data Quota =
+  Quota'
     { _qLimits      :: !(Maybe [QuotaLimit])
     , _qMetricRules :: !(Maybe [MetricRule])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
 --
@@ -6070,11 +6067,7 @@ data Quota = Quota'
 -- * 'qMetricRules'
 quota
     :: Quota
-quota =
-    Quota'
-    { _qLimits = Nothing
-    , _qMetricRules = Nothing
-    }
+quota = Quota' {_qLimits = Nothing, _qMetricRules = Nothing}
 
 -- | List of \`QuotaLimit\` definitions for the service.
 qLimits :: Lens' Quota [QuotaLimit]
@@ -6257,7 +6250,8 @@ instance ToJSON Quota where
 -- feature.
 --
 -- /See:/ 'hTTPRule' smart constructor.
-data HTTPRule = HTTPRule'
+data HTTPRule =
+  HTTPRule'
     { _httprSelector           :: !(Maybe Text)
     , _httprPost               :: !(Maybe Text)
     , _httprBody               :: !(Maybe Text)
@@ -6268,7 +6262,8 @@ data HTTPRule = HTTPRule'
     , _httprAdditionalBindings :: !(Maybe [HTTPRule])
     , _httprDelete             :: !(Maybe Text)
     , _httprPut                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPRule' with the minimum fields required to make a request.
 --
@@ -6296,7 +6291,7 @@ data HTTPRule = HTTPRule'
 hTTPRule
     :: HTTPRule
 hTTPRule =
-    HTTPRule'
+  HTTPRule'
     { _httprSelector = Nothing
     , _httprPost = Nothing
     , _httprBody = Nothing
@@ -6417,9 +6412,11 @@ instance ToJSON HTTPRule where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -6430,9 +6427,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -6453,13 +6448,15 @@ instance ToJSON OperationResponse where
 -- (JWT)](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32).
 --
 -- /See:/ 'authProvider' smart constructor.
-data AuthProvider = AuthProvider'
+data AuthProvider =
+  AuthProvider'
     { _apJWKsURI          :: !(Maybe Text)
     , _apAudiences        :: !(Maybe Text)
     , _apId               :: !(Maybe Text)
     , _apAuthorizationURL :: !(Maybe Text)
     , _apIssuer           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuthProvider' with the minimum fields required to make a request.
 --
@@ -6477,7 +6474,7 @@ data AuthProvider = AuthProvider'
 authProvider
     :: AuthProvider
 authProvider =
-    AuthProvider'
+  AuthProvider'
     { _apJWKsURI = Nothing
     , _apAudiences = Nothing
     , _apId = Nothing
@@ -6554,11 +6551,13 @@ instance ToJSON AuthProvider where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -6572,11 +6571,7 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -6631,13 +6626,15 @@ instance ToJSON Binding where
 -- API element.
 --
 -- /See:/ 'contextRule' smart constructor.
-data ContextRule = ContextRule'
+data ContextRule =
+  ContextRule'
     { _crSelector                  :: !(Maybe Text)
     , _crRequested                 :: !(Maybe [Text])
     , _crAllowedRequestExtensions  :: !(Maybe [Text])
     , _crProvided                  :: !(Maybe [Text])
     , _crAllowedResponseExtensions :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContextRule' with the minimum fields required to make a request.
 --
@@ -6655,7 +6652,7 @@ data ContextRule = ContextRule'
 contextRule
     :: ContextRule
 contextRule =
-    ContextRule'
+  ContextRule'
     { _crSelector = Nothing
     , _crRequested = Nothing
     , _crAllowedRequestExtensions = Nothing

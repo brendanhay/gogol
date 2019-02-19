@@ -54,10 +54,12 @@ type AccountsContainersWorkspacesVariablesRevertResource
 -- | Reverts changes to a GTM Variable in a GTM Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesVariablesRevert' smart constructor.
-data AccountsContainersWorkspacesVariablesRevert = AccountsContainersWorkspacesVariablesRevert'
+data AccountsContainersWorkspacesVariablesRevert =
+  AccountsContainersWorkspacesVariablesRevert'
     { _acwvrPath        :: !Text
     , _acwvrFingerprint :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesVariablesRevert' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ accountsContainersWorkspacesVariablesRevert
     :: Text -- ^ 'acwvrPath'
     -> AccountsContainersWorkspacesVariablesRevert
 accountsContainersWorkspacesVariablesRevert pAcwvrPath_ =
-    AccountsContainersWorkspacesVariablesRevert'
-    { _acwvrPath = pAcwvrPath_
-    , _acwvrFingerprint = Nothing
-    }
+  AccountsContainersWorkspacesVariablesRevert'
+    {_acwvrPath = pAcwvrPath_, _acwvrFingerprint = Nothing}
 
 -- | GTM Variable\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/variables\/{variable_id}
@@ -89,7 +89,8 @@ acwvrFingerprint
       (\ s a -> s{_acwvrFingerprint = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesVariablesRevert where
+           AccountsContainersWorkspacesVariablesRevert
+         where
         type Rs AccountsContainersWorkspacesVariablesRevert =
              RevertVariableResponse
         type Scopes

@@ -63,14 +63,16 @@ type DiskTypesListResource =
 -- | Retrieves a list of disk types available to the specified project.
 --
 -- /See:/ 'diskTypesList' smart constructor.
-data DiskTypesList = DiskTypesList'
+data DiskTypesList =
+  DiskTypesList'
     { _dtlOrderBy    :: !(Maybe Text)
     , _dtlProject    :: !Text
     , _dtlZone       :: !Text
     , _dtlFilter     :: !(Maybe Text)
     , _dtlPageToken  :: !(Maybe Text)
     , _dtlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypesList' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ diskTypesList
     -> Text -- ^ 'dtlZone'
     -> DiskTypesList
 diskTypesList pDtlProject_ pDtlZone_ =
-    DiskTypesList'
+  DiskTypesList'
     { _dtlOrderBy = Nothing
     , _dtlProject = pDtlProject_
     , _dtlZone = pDtlZone_

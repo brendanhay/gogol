@@ -59,14 +59,16 @@ type PeopleDeleteContactResource =
 -- | Delete a contact person. Any non-contact data will not be deleted.
 --
 -- /See:/ 'peopleDeleteContact' smart constructor.
-data PeopleDeleteContact = PeopleDeleteContact'
+data PeopleDeleteContact =
+  PeopleDeleteContact'
     { _pdcXgafv          :: !(Maybe Xgafv)
     , _pdcUploadProtocol :: !(Maybe Text)
     , _pdcResourceName   :: !Text
     , _pdcAccessToken    :: !(Maybe Text)
     , _pdcUploadType     :: !(Maybe Text)
     , _pdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PeopleDeleteContact' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ peopleDeleteContact
     :: Text -- ^ 'pdcResourceName'
     -> PeopleDeleteContact
 peopleDeleteContact pPdcResourceName_ =
-    PeopleDeleteContact'
+  PeopleDeleteContact'
     { _pdcXgafv = Nothing
     , _pdcUploadProtocol = Nothing
     , _pdcResourceName = pPdcResourceName_

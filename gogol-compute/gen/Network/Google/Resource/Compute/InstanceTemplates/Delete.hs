@@ -61,11 +61,13 @@ type InstanceTemplatesDeleteResource =
 -- templates which are in use by an instance group.
 --
 -- /See:/ 'instanceTemplatesDelete' smart constructor.
-data InstanceTemplatesDelete = InstanceTemplatesDelete'
+data InstanceTemplatesDelete =
+  InstanceTemplatesDelete'
     { _itdRequestId        :: !(Maybe Text)
     , _itdProject          :: !Text
     , _itdInstanceTemplate :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceTemplatesDelete' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ instanceTemplatesDelete
     -> Text -- ^ 'itdInstanceTemplate'
     -> InstanceTemplatesDelete
 instanceTemplatesDelete pItdProject_ pItdInstanceTemplate_ =
-    InstanceTemplatesDelete'
+  InstanceTemplatesDelete'
     { _itdRequestId = Nothing
     , _itdProject = pItdProject_
     , _itdInstanceTemplate = pItdInstanceTemplate_

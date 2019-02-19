@@ -60,14 +60,16 @@ type ProjectsServiceAccountsGetResource =
 -- | Gets a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsGet' smart constructor.
-data ProjectsServiceAccountsGet = ProjectsServiceAccountsGet'
+data ProjectsServiceAccountsGet =
+  ProjectsServiceAccountsGet'
     { _psagXgafv          :: !(Maybe Xgafv)
     , _psagUploadProtocol :: !(Maybe Text)
     , _psagAccessToken    :: !(Maybe Text)
     , _psagUploadType     :: !(Maybe Text)
     , _psagName           :: !Text
     , _psagCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsServiceAccountsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsServiceAccountsGet
     :: Text -- ^ 'psagName'
     -> ProjectsServiceAccountsGet
 projectsServiceAccountsGet pPsagName_ =
-    ProjectsServiceAccountsGet'
+  ProjectsServiceAccountsGet'
     { _psagXgafv = Nothing
     , _psagUploadProtocol = Nothing
     , _psagAccessToken = Nothing

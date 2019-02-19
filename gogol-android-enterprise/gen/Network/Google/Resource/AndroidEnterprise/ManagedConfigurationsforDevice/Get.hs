@@ -61,12 +61,14 @@ type ManagedConfigurationsforDeviceGetResource =
 -- | Retrieves details of a per-device managed configuration.
 --
 -- /See:/ 'managedConfigurationsforDeviceGet' smart constructor.
-data ManagedConfigurationsforDeviceGet = ManagedConfigurationsforDeviceGet'
+data ManagedConfigurationsforDeviceGet =
+  ManagedConfigurationsforDeviceGet'
     { _mcdgEnterpriseId                    :: !Text
     , _mcdgUserId                          :: !Text
     , _mcdgDeviceId                        :: !Text
     , _mcdgManagedConfigurationForDeviceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsforDeviceGet' with the minimum fields required to make a request.
 --
@@ -86,11 +88,12 @@ managedConfigurationsforDeviceGet
     -> Text -- ^ 'mcdgManagedConfigurationForDeviceId'
     -> ManagedConfigurationsforDeviceGet
 managedConfigurationsforDeviceGet pMcdgEnterpriseId_ pMcdgUserId_ pMcdgDeviceId_ pMcdgManagedConfigurationForDeviceId_ =
-    ManagedConfigurationsforDeviceGet'
+  ManagedConfigurationsforDeviceGet'
     { _mcdgEnterpriseId = pMcdgEnterpriseId_
     , _mcdgUserId = pMcdgUserId_
     , _mcdgDeviceId = pMcdgDeviceId_
-    , _mcdgManagedConfigurationForDeviceId = pMcdgManagedConfigurationForDeviceId_
+    , _mcdgManagedConfigurationForDeviceId =
+        pMcdgManagedConfigurationForDeviceId_
     }
 
 -- | The ID of the enterprise.
@@ -118,7 +121,8 @@ mcdgManagedConfigurationForDeviceId
          s{_mcdgManagedConfigurationForDeviceId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforDeviceGet where
+           ManagedConfigurationsforDeviceGet
+         where
         type Rs ManagedConfigurationsforDeviceGet =
              ManagedConfiguration
         type Scopes ManagedConfigurationsforDeviceGet =

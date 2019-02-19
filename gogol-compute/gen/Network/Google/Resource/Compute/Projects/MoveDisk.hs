@@ -57,11 +57,13 @@ type ProjectsMoveDiskResource =
 -- | Moves a persistent disk from one zone to another.
 --
 -- /See:/ 'projectsMoveDisk' smart constructor.
-data ProjectsMoveDisk = ProjectsMoveDisk'
+data ProjectsMoveDisk =
+  ProjectsMoveDisk'
     { _pmdRequestId :: !(Maybe Text)
     , _pmdProject   :: !Text
     , _pmdPayload   :: !DiskMoveRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsMoveDisk' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ projectsMoveDisk
     -> DiskMoveRequest -- ^ 'pmdPayload'
     -> ProjectsMoveDisk
 projectsMoveDisk pPmdProject_ pPmdPayload_ =
-    ProjectsMoveDisk'
+  ProjectsMoveDisk'
     { _pmdRequestId = Nothing
     , _pmdProject = pPmdProject_
     , _pmdPayload = pPmdPayload_

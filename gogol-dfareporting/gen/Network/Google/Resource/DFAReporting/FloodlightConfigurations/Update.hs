@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsUpdate' request conforms to.
 type FloodlightConfigurationsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
@@ -55,10 +55,12 @@ type FloodlightConfigurationsUpdateResource =
 -- | Updates an existing floodlight configuration.
 --
 -- /See:/ 'floodlightConfigurationsUpdate' smart constructor.
-data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate'
+data FloodlightConfigurationsUpdate =
+  FloodlightConfigurationsUpdate'
     { _fcuProFileId :: !(Textual Int64)
     , _fcuPayload   :: !FloodlightConfiguration
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ floodlightConfigurationsUpdate
     -> FloodlightConfiguration -- ^ 'fcuPayload'
     -> FloodlightConfigurationsUpdate
 floodlightConfigurationsUpdate pFcuProFileId_ pFcuPayload_ =
-    FloodlightConfigurationsUpdate'
-    { _fcuProFileId = _Coerce # pFcuProFileId_
-    , _fcuPayload = pFcuPayload_
-    }
+  FloodlightConfigurationsUpdate'
+    {_fcuProFileId = _Coerce # pFcuProFileId_, _fcuPayload = pFcuPayload_}
 
 -- | User profile ID associated with this request.
 fcuProFileId :: Lens' FloodlightConfigurationsUpdate Int64

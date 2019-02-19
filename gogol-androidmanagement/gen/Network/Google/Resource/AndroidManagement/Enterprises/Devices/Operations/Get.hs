@@ -63,14 +63,16 @@ type EnterprisesDevicesOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'enterprisesDevicesOperationsGet' smart constructor.
-data EnterprisesDevicesOperationsGet = EnterprisesDevicesOperationsGet'
+data EnterprisesDevicesOperationsGet =
+  EnterprisesDevicesOperationsGet'
     { _edogXgafv          :: !(Maybe Xgafv)
     , _edogUploadProtocol :: !(Maybe Text)
     , _edogAccessToken    :: !(Maybe Text)
     , _edogUploadType     :: !(Maybe Text)
     , _edogName           :: !Text
     , _edogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesDevicesOperationsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ enterprisesDevicesOperationsGet
     :: Text -- ^ 'edogName'
     -> EnterprisesDevicesOperationsGet
 enterprisesDevicesOperationsGet pEdogName_ =
-    EnterprisesDevicesOperationsGet'
+  EnterprisesDevicesOperationsGet'
     { _edogXgafv = Nothing
     , _edogUploadProtocol = Nothing
     , _edogAccessToken = Nothing
@@ -133,7 +135,8 @@ edogCallback
   = lens _edogCallback (\ s a -> s{_edogCallback = a})
 
 instance GoogleRequest
-         EnterprisesDevicesOperationsGet where
+           EnterprisesDevicesOperationsGet
+         where
         type Rs EnterprisesDevicesOperationsGet = Operation
         type Scopes EnterprisesDevicesOperationsGet =
              '["https://www.googleapis.com/auth/androidmanagement"]

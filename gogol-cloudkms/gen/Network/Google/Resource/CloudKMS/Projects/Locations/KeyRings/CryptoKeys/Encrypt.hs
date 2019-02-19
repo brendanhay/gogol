@@ -65,7 +65,8 @@ type ProjectsLocationsKeyRingsCryptoKeysEncryptResource
 -- The CryptoKey.purpose must be ENCRYPT_DECRYPT.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysEncrypt' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysEncrypt = ProjectsLocationsKeyRingsCryptoKeysEncrypt'
+data ProjectsLocationsKeyRingsCryptoKeysEncrypt =
+  ProjectsLocationsKeyRingsCryptoKeysEncrypt'
     { _plkrckeXgafv          :: !(Maybe Xgafv)
     , _plkrckeUploadProtocol :: !(Maybe Text)
     , _plkrckeAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsLocationsKeyRingsCryptoKeysEncrypt = ProjectsLocationsKeyRingsCrypt
     , _plkrckePayload        :: !EncryptRequest
     , _plkrckeName           :: !Text
     , _plkrckeCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysEncrypt' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsLocationsKeyRingsCryptoKeysEncrypt
     -> Text -- ^ 'plkrckeName'
     -> ProjectsLocationsKeyRingsCryptoKeysEncrypt
 projectsLocationsKeyRingsCryptoKeysEncrypt pPlkrckePayload_ pPlkrckeName_ =
-    ProjectsLocationsKeyRingsCryptoKeysEncrypt'
+  ProjectsLocationsKeyRingsCryptoKeysEncrypt'
     { _plkrckeXgafv = Nothing
     , _plkrckeUploadProtocol = Nothing
     , _plkrckeAccessToken = Nothing
@@ -150,7 +152,8 @@ plkrckeCallback
       (\ s a -> s{_plkrckeCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysEncrypt where
+           ProjectsLocationsKeyRingsCryptoKeysEncrypt
+         where
         type Rs ProjectsLocationsKeyRingsCryptoKeysEncrypt =
              EncryptResponse
         type Scopes

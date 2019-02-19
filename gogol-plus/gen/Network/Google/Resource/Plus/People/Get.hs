@@ -55,9 +55,11 @@ type PeopleGetResource =
 -- guaranteed to return ageRange and language.
 --
 -- /See:/ 'peopleGet' smart constructor.
-newtype PeopleGet = PeopleGet'
+newtype PeopleGet =
+  PeopleGet'
     { _pgUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PeopleGet' with the minimum fields required to make a request.
 --
@@ -67,10 +69,7 @@ newtype PeopleGet = PeopleGet'
 peopleGet
     :: Text -- ^ 'pgUserId'
     -> PeopleGet
-peopleGet pPgUserId_ =
-    PeopleGet'
-    { _pgUserId = pPgUserId_
-    }
+peopleGet pPgUserId_ = PeopleGet' {_pgUserId = pPgUserId_}
 
 -- | The ID of the person to get the profile for. The special value \"me\"
 -- can be used to indicate the authenticated user.

@@ -22,10 +22,12 @@ import           Network.Google.ReplicaPoolUpdater.Types.Sum
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
+data OperationWarningsItemDataItem =
+  OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
 --
@@ -37,10 +39,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem'
-    { _owidiValue = Nothing
-    , _owidiKey = Nothing
-    }
+  OperationWarningsItemDataItem' {_owidiValue = Nothing, _owidiKey = Nothing}
 
 -- | [Output Only] Metadata value for this warning.
 owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
@@ -69,7 +68,8 @@ instance ToJSON OperationWarningsItemDataItem where
 -- of a group of instances to the given template.
 --
 -- /See:/ 'rollingUpdate' smart constructor.
-data RollingUpdate = RollingUpdate'
+data RollingUpdate =
+  RollingUpdate'
     { _ruStatus               :: !(Maybe Text)
     , _ruProgress             :: !(Maybe (Textual Int32))
     , _ruInstanceGroupManager :: !(Maybe Text)
@@ -86,7 +86,8 @@ data RollingUpdate = RollingUpdate'
     , _ruOldInstanceTemplate  :: !(Maybe Text)
     , _ruDescription          :: !(Maybe Text)
     , _ruInstanceGroup        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdate' with the minimum fields required to make a request.
 --
@@ -126,7 +127,7 @@ data RollingUpdate = RollingUpdate'
 rollingUpdate
     :: RollingUpdate
 rollingUpdate =
-    RollingUpdate'
+  RollingUpdate'
     { _ruStatus = Nothing
     , _ruProgress = Nothing
     , _ruInstanceGroupManager = Nothing
@@ -294,9 +295,11 @@ instance ToJSON RollingUpdate where
 -- | [Output Only] Errors that occurred during the rolling update.
 --
 -- /See:/ 'rollingUpdateError' smart constructor.
-newtype RollingUpdateError = RollingUpdateError'
+newtype RollingUpdateError =
+  RollingUpdateError'
     { _rueErrors :: Maybe [RollingUpdateErrorErrorsItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdateError' with the minimum fields required to make a request.
 --
@@ -305,10 +308,7 @@ newtype RollingUpdateError = RollingUpdateError'
 -- * 'rueErrors'
 rollingUpdateError
     :: RollingUpdateError
-rollingUpdateError =
-    RollingUpdateError'
-    { _rueErrors = Nothing
-    }
+rollingUpdateError = RollingUpdateError' {_rueErrors = Nothing}
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -331,13 +331,15 @@ instance ToJSON RollingUpdateError where
 -- | Contains a list of Operation resources.
 --
 -- /See:/ 'operationList' smart constructor.
-data OperationList = OperationList'
+data OperationList =
+  OperationList'
     { _olNextPageToken :: !(Maybe Text)
     , _olKind          :: !Text
     , _olItems         :: !(Maybe [Operation])
     , _olSelfLink      :: !(Maybe Text)
     , _olId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationList' with the minimum fields required to make a request.
 --
@@ -355,7 +357,7 @@ data OperationList = OperationList'
 operationList
     :: OperationList
 operationList =
-    OperationList'
+  OperationList'
     { _olNextPageToken = Nothing
     , _olKind = "replicapoolupdater#operationList"
     , _olItems = Nothing
@@ -412,12 +414,14 @@ instance ToJSON OperationList where
 -- | Response returned by ListInstanceUpdates method.
 --
 -- /See:/ 'instanceUpdateList' smart constructor.
-data InstanceUpdateList = InstanceUpdateList'
+data InstanceUpdateList =
+  InstanceUpdateList'
     { _iulNextPageToken :: !(Maybe Text)
     , _iulKind          :: !Text
     , _iulItems         :: !(Maybe [InstanceUpdate])
     , _iulSelfLink      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceUpdateList' with the minimum fields required to make a request.
 --
@@ -433,7 +437,7 @@ data InstanceUpdateList = InstanceUpdateList'
 instanceUpdateList
     :: InstanceUpdateList
 instanceUpdateList =
-    InstanceUpdateList'
+  InstanceUpdateList'
     { _iulNextPageToken = Nothing
     , _iulKind = "replicapoolupdater#instanceUpdateList"
     , _iulItems = Nothing
@@ -484,11 +488,13 @@ instance ToJSON InstanceUpdateList where
 
 --
 -- /See:/ 'rollingUpdateErrorErrorsItem' smart constructor.
-data RollingUpdateErrorErrorsItem = RollingUpdateErrorErrorsItem'
+data RollingUpdateErrorErrorsItem =
+  RollingUpdateErrorErrorsItem'
     { _rueeiLocation :: !(Maybe Text)
     , _rueeiCode     :: !(Maybe Text)
     , _rueeiMessage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdateErrorErrorsItem' with the minimum fields required to make a request.
 --
@@ -502,11 +508,8 @@ data RollingUpdateErrorErrorsItem = RollingUpdateErrorErrorsItem'
 rollingUpdateErrorErrorsItem
     :: RollingUpdateErrorErrorsItem
 rollingUpdateErrorErrorsItem =
-    RollingUpdateErrorErrorsItem'
-    { _rueeiLocation = Nothing
-    , _rueeiCode = Nothing
-    , _rueeiMessage = Nothing
-    }
+  RollingUpdateErrorErrorsItem'
+    {_rueeiLocation = Nothing, _rueeiCode = Nothing, _rueeiMessage = Nothing}
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -544,7 +547,8 @@ instance ToJSON RollingUpdateErrorErrorsItem where
 -- | An operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
@@ -567,7 +571,8 @@ data Operation = Operation'
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -619,7 +624,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -811,11 +816,13 @@ instance ToJSON Operation where
 -- | Update of a single instance.
 --
 -- /See:/ 'instanceUpdate' smart constructor.
-data InstanceUpdate = InstanceUpdate'
+data InstanceUpdate =
+  InstanceUpdate'
     { _iuStatus   :: !(Maybe Text)
     , _iuError    :: !(Maybe InstanceUpdateError)
     , _iuInstance :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceUpdate' with the minimum fields required to make a request.
 --
@@ -829,11 +836,8 @@ data InstanceUpdate = InstanceUpdate'
 instanceUpdate
     :: InstanceUpdate
 instanceUpdate =
-    InstanceUpdate'
-    { _iuStatus = Nothing
-    , _iuError = Nothing
-    , _iuInstance = Nothing
-    }
+  InstanceUpdate'
+    {_iuStatus = Nothing, _iuError = Nothing, _iuInstance = Nothing}
 
 -- | Status of the instance update. Possible values are: - \"PENDING\": The
 -- instance update is pending execution. - \"ROLLING_FORWARD\": The
@@ -876,9 +880,11 @@ instance ToJSON InstanceUpdate where
 -- | Errors that occurred during the instance update.
 --
 -- /See:/ 'instanceUpdateError' smart constructor.
-newtype InstanceUpdateError = InstanceUpdateError'
+newtype InstanceUpdateError =
+  InstanceUpdateError'
     { _iueErrors :: Maybe [InstanceUpdateErrorErrorsItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceUpdateError' with the minimum fields required to make a request.
 --
@@ -887,10 +893,7 @@ newtype InstanceUpdateError = InstanceUpdateError'
 -- * 'iueErrors'
 instanceUpdateError
     :: InstanceUpdateError
-instanceUpdateError =
-    InstanceUpdateError'
-    { _iueErrors = Nothing
-    }
+instanceUpdateError = InstanceUpdateError' {_iueErrors = Nothing}
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -913,13 +916,15 @@ instance ToJSON InstanceUpdateError where
 -- | Parameters of the update process.
 --
 -- /See:/ 'rollingUpdatePolicy' smart constructor.
-data RollingUpdatePolicy = RollingUpdatePolicy'
+data RollingUpdatePolicy =
+  RollingUpdatePolicy'
     { _rupMinInstanceUpdateTimeSec  :: !(Maybe (Textual Int32))
     , _rupInstanceStartupTimeoutSec :: !(Maybe (Textual Int32))
     , _rupMaxNumFailedInstances     :: !(Maybe (Textual Int32))
     , _rupAutoPauseAfterInstances   :: !(Maybe (Textual Int32))
     , _rupMaxNumConcurrentInstances :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdatePolicy' with the minimum fields required to make a request.
 --
@@ -937,7 +942,7 @@ data RollingUpdatePolicy = RollingUpdatePolicy'
 rollingUpdatePolicy
     :: RollingUpdatePolicy
 rollingUpdatePolicy =
-    RollingUpdatePolicy'
+  RollingUpdatePolicy'
     { _rupMinInstanceUpdateTimeSec = Nothing
     , _rupInstanceStartupTimeoutSec = Nothing
     , _rupMaxNumFailedInstances = Nothing
@@ -1025,9 +1030,11 @@ instance ToJSON RollingUpdatePolicy where
 -- this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError'
+newtype OperationError =
+  OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
@@ -1036,10 +1043,7 @@ newtype OperationError = OperationError'
 -- * 'oeErrors'
 operationError
     :: OperationError
-operationError =
-    OperationError'
-    { _oeErrors = Nothing
-    }
+operationError = OperationError' {_oeErrors = Nothing}
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -1061,11 +1065,13 @@ instance ToJSON OperationError where
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem'
+data OperationErrorErrorsItem =
+  OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
 --
@@ -1079,11 +1085,8 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem'
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem'
-    { _oeeiLocation = Nothing
-    , _oeeiCode = Nothing
-    , _oeeiMessage = Nothing
-    }
+  OperationErrorErrorsItem'
+    {_oeeiLocation = Nothing, _oeeiCode = Nothing, _oeeiMessage = Nothing}
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -1118,11 +1121,13 @@ instance ToJSON OperationErrorErrorsItem where
 
 --
 -- /See:/ 'instanceUpdateErrorErrorsItem' smart constructor.
-data InstanceUpdateErrorErrorsItem = InstanceUpdateErrorErrorsItem'
+data InstanceUpdateErrorErrorsItem =
+  InstanceUpdateErrorErrorsItem'
     { _iueeiLocation :: !(Maybe Text)
     , _iueeiCode     :: !(Maybe Text)
     , _iueeiMessage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceUpdateErrorErrorsItem' with the minimum fields required to make a request.
 --
@@ -1136,11 +1141,8 @@ data InstanceUpdateErrorErrorsItem = InstanceUpdateErrorErrorsItem'
 instanceUpdateErrorErrorsItem
     :: InstanceUpdateErrorErrorsItem
 instanceUpdateErrorErrorsItem =
-    InstanceUpdateErrorErrorsItem'
-    { _iueeiLocation = Nothing
-    , _iueeiCode = Nothing
-    , _iueeiMessage = Nothing
-    }
+  InstanceUpdateErrorErrorsItem'
+    {_iueeiLocation = Nothing, _iueeiCode = Nothing, _iueeiMessage = Nothing}
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -1178,12 +1180,14 @@ instance ToJSON InstanceUpdateErrorErrorsItem where
 -- | Response returned by List method.
 --
 -- /See:/ 'rollingUpdateList' smart constructor.
-data RollingUpdateList = RollingUpdateList'
+data RollingUpdateList =
+  RollingUpdateList'
     { _rulNextPageToken :: !(Maybe Text)
     , _rulKind          :: !Text
     , _rulItems         :: !(Maybe [RollingUpdate])
     , _rulSelfLink      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollingUpdateList' with the minimum fields required to make a request.
 --
@@ -1199,7 +1203,7 @@ data RollingUpdateList = RollingUpdateList'
 rollingUpdateList
     :: RollingUpdateList
 rollingUpdateList =
-    RollingUpdateList'
+  RollingUpdateList'
     { _rulNextPageToken = Nothing
     , _rulKind = "replicapoolupdater#rollingUpdateList"
     , _rulItems = Nothing
@@ -1250,11 +1254,13 @@ instance ToJSON RollingUpdateList where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem'
+data OperationWarningsItem =
+  OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe Text)
     , _owiMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationWarningsItem' with the minimum fields required to make a request.
 --
@@ -1268,11 +1274,8 @@ data OperationWarningsItem = OperationWarningsItem'
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem'
-    { _owiData = Nothing
-    , _owiCode = Nothing
-    , _owiMessage = Nothing
-    }
+  OperationWarningsItem'
+    {_owiData = Nothing, _owiCode = Nothing, _owiMessage = Nothing}
 
 -- | [Output only] Metadata for this warning in key:value format.
 owiData :: Lens' OperationWarningsItem [OperationWarningsItemDataItem]

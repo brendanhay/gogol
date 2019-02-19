@@ -66,7 +66,8 @@ type PromoOfferAcceptResource =
 -- |
 --
 -- /See:/ 'promoOfferAccept' smart constructor.
-data PromoOfferAccept = PromoOfferAccept'
+data PromoOfferAccept =
+  PromoOfferAccept'
     { _poaManufacturer :: !(Maybe Text)
     , _poaSerial       :: !(Maybe Text)
     , _poaDevice       :: !(Maybe Text)
@@ -75,7 +76,8 @@ data PromoOfferAccept = PromoOfferAccept'
     , _poaOfferId      :: !(Maybe Text)
     , _poaProduct      :: !(Maybe Text)
     , _poaAndroidId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PromoOfferAccept' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ data PromoOfferAccept = PromoOfferAccept'
 promoOfferAccept
     :: PromoOfferAccept
 promoOfferAccept =
-    PromoOfferAccept'
+  PromoOfferAccept'
     { _poaManufacturer = Nothing
     , _poaSerial = Nothing
     , _poaDevice = Nothing

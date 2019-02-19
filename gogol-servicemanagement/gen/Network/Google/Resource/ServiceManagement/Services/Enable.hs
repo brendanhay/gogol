@@ -67,7 +67,8 @@ type ServicesEnableResource =
 -- more information. Operation
 --
 -- /See:/ 'servicesEnable' smart constructor.
-data ServicesEnable = ServicesEnable'
+data ServicesEnable =
+  ServicesEnable'
     { _seXgafv          :: !(Maybe Xgafv)
     , _seUploadProtocol :: !(Maybe Text)
     , _seAccessToken    :: !(Maybe Text)
@@ -75,7 +76,8 @@ data ServicesEnable = ServicesEnable'
     , _sePayload        :: !EnableServiceRequest
     , _seServiceName    :: !Text
     , _seCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesEnable' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ servicesEnable
     -> Text -- ^ 'seServiceName'
     -> ServicesEnable
 servicesEnable pSePayload_ pSeServiceName_ =
-    ServicesEnable'
+  ServicesEnable'
     { _seXgafv = Nothing
     , _seUploadProtocol = Nothing
     , _seAccessToken = Nothing

@@ -54,10 +54,12 @@ type CustomChannelsGetResource =
 -- | Get a specific custom channel from the host AdSense account.
 --
 -- /See:/ 'customChannelsGet' smart constructor.
-data CustomChannelsGet = CustomChannelsGet'
+data CustomChannelsGet =
+  CustomChannelsGet'
     { _ccgCustomChannelId :: !Text
     , _ccgAdClientId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomChannelsGet' with the minimum fields required to make a request.
 --
@@ -71,7 +73,7 @@ customChannelsGet
     -> Text -- ^ 'ccgAdClientId'
     -> CustomChannelsGet
 customChannelsGet pCcgCustomChannelId_ pCcgAdClientId_ =
-    CustomChannelsGet'
+  CustomChannelsGet'
     { _ccgCustomChannelId = pCcgCustomChannelId_
     , _ccgAdClientId = pCcgAdClientId_
     }

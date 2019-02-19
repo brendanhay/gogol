@@ -57,11 +57,13 @@ type TargetHTTPSProxiesDeleteResource =
 -- | Deletes the specified TargetHttpsProxy resource.
 --
 -- /See:/ 'targetHTTPSProxiesDelete' smart constructor.
-data TargetHTTPSProxiesDelete = TargetHTTPSProxiesDelete'
+data TargetHTTPSProxiesDelete =
+  TargetHTTPSProxiesDelete'
     { _thpdRequestId        :: !(Maybe Text)
     , _thpdProject          :: !Text
     , _thpdTargetHTTPSProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxiesDelete' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ targetHTTPSProxiesDelete
     -> Text -- ^ 'thpdTargetHTTPSProxy'
     -> TargetHTTPSProxiesDelete
 targetHTTPSProxiesDelete pThpdProject_ pThpdTargetHTTPSProxy_ =
-    TargetHTTPSProxiesDelete'
+  TargetHTTPSProxiesDelete'
     { _thpdRequestId = Nothing
     , _thpdProject = pThpdProject_
     , _thpdTargetHTTPSProxy = pThpdTargetHTTPSProxy_

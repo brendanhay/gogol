@@ -65,14 +65,16 @@ type ProductsListResource =
 -- there is no query.
 --
 -- /See:/ 'productsList' smart constructor.
-data ProductsList = ProductsList'
+data ProductsList =
+  ProductsList'
     { _plEnterpriseId :: !Text
     , _plToken        :: !(Maybe Text)
     , _plQuery        :: !(Maybe Text)
     , _plLanguage     :: !(Maybe Text)
     , _plApproved     :: !(Maybe Bool)
     , _plMaxResults   :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductsList' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ productsList
     :: Text -- ^ 'plEnterpriseId'
     -> ProductsList
 productsList pPlEnterpriseId_ =
-    ProductsList'
+  ProductsList'
     { _plEnterpriseId = pPlEnterpriseId_
     , _plToken = Nothing
     , _plQuery = Nothing

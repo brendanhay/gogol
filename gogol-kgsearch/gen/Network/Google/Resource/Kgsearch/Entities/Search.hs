@@ -77,7 +77,8 @@ type EntitiesSearchResource =
 -- JSON-LD format and compatible with http:\/\/schema.org
 --
 -- /See:/ 'entitiesSearch' smart constructor.
-data EntitiesSearch = EntitiesSearch'
+data EntitiesSearch =
+  EntitiesSearch'
     { _esXgafv          :: !(Maybe Xgafv)
     , _esUploadProtocol :: !(Maybe Text)
     , _esPrefix         :: !(Maybe Bool)
@@ -90,7 +91,8 @@ data EntitiesSearch = EntitiesSearch'
     , _esQuery          :: !(Maybe Text)
     , _esLimit          :: !(Maybe (Textual Int32))
     , _esCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntitiesSearch' with the minimum fields required to make a request.
 --
@@ -122,7 +124,7 @@ data EntitiesSearch = EntitiesSearch'
 entitiesSearch
     :: EntitiesSearch
 entitiesSearch =
-    EntitiesSearch'
+  EntitiesSearch'
     { _esXgafv = Nothing
     , _esUploadProtocol = Nothing
     , _esPrefix = Nothing

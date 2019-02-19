@@ -67,13 +67,15 @@ type RegionInstanceGroupManagersSetTargetPoolsResource
 -- assigned. Existing instances in the group are not affected.
 --
 -- /See:/ 'regionInstanceGroupManagersSetTargetPools' smart constructor.
-data RegionInstanceGroupManagersSetTargetPools = RegionInstanceGroupManagersSetTargetPools'
+data RegionInstanceGroupManagersSetTargetPools =
+  RegionInstanceGroupManagersSetTargetPools'
     { _rigmstpRequestId            :: !(Maybe Text)
     , _rigmstpProject              :: !Text
     , _rigmstpInstanceGroupManager :: !Text
     , _rigmstpPayload              :: !RegionInstanceGroupManagersSetTargetPoolsRequest
     , _rigmstpRegion               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersSetTargetPools' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ regionInstanceGroupManagersSetTargetPools
     -> Text -- ^ 'rigmstpRegion'
     -> RegionInstanceGroupManagersSetTargetPools
 regionInstanceGroupManagersSetTargetPools pRigmstpProject_ pRigmstpInstanceGroupManager_ pRigmstpPayload_ pRigmstpRegion_ =
-    RegionInstanceGroupManagersSetTargetPools'
+  RegionInstanceGroupManagersSetTargetPools'
     { _rigmstpRequestId = Nothing
     , _rigmstpProject = pRigmstpProject_
     , _rigmstpInstanceGroupManager = pRigmstpInstanceGroupManager_
@@ -143,7 +145,8 @@ rigmstpRegion
       (\ s a -> s{_rigmstpRegion = a})
 
 instance GoogleRequest
-         RegionInstanceGroupManagersSetTargetPools where
+           RegionInstanceGroupManagersSetTargetPools
+         where
         type Rs RegionInstanceGroupManagersSetTargetPools =
              Operation
         type Scopes RegionInstanceGroupManagersSetTargetPools

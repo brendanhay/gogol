@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesInsert' request conforms to.
 type PlacementStrategiesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -55,10 +55,12 @@ type PlacementStrategiesInsertResource =
 -- | Inserts a new placement strategy.
 --
 -- /See:/ 'placementStrategiesInsert' smart constructor.
-data PlacementStrategiesInsert = PlacementStrategiesInsert'
+data PlacementStrategiesInsert =
+  PlacementStrategiesInsert'
     { _psiProFileId :: !(Textual Int64)
     , _psiPayload   :: !PlacementStrategy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlacementStrategiesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ placementStrategiesInsert
     -> PlacementStrategy -- ^ 'psiPayload'
     -> PlacementStrategiesInsert
 placementStrategiesInsert pPsiProFileId_ pPsiPayload_ =
-    PlacementStrategiesInsert'
-    { _psiProFileId = _Coerce # pPsiProFileId_
-    , _psiPayload = pPsiPayload_
-    }
+  PlacementStrategiesInsert'
+    {_psiProFileId = _Coerce # pPsiProFileId_, _psiPayload = pPsiPayload_}
 
 -- | User profile ID associated with this request.
 psiProFileId :: Lens' PlacementStrategiesInsert Int64

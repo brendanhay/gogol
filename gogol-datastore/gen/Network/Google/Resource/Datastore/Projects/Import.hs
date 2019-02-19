@@ -72,7 +72,8 @@ type ProjectsImportResource =
 -- that a subset of the data has already been imported to Cloud Datastore.
 --
 -- /See:/ 'projectsImport' smart constructor.
-data ProjectsImport = ProjectsImport'
+data ProjectsImport =
+  ProjectsImport'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ProjectsImport = ProjectsImport'
     , _pPayload        :: !GoogleDatastoreAdminV1ImportEntitiesRequest
     , _pProjectId      :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsImport' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsImport
     -> Text -- ^ 'pProjectId'
     -> ProjectsImport
 projectsImport pPPayload_ pPProjectId_ =
-    ProjectsImport'
+  ProjectsImport'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing

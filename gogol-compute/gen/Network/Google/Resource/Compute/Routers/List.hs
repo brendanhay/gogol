@@ -63,14 +63,16 @@ type RoutersListResource =
 -- | Retrieves a list of Router resources available to the specified project.
 --
 -- /See:/ 'routersList' smart constructor.
-data RoutersList = RoutersList'
+data RoutersList =
+  RoutersList'
     { _rlOrderBy    :: !(Maybe Text)
     , _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlRegion     :: !Text
     , _rlPageToken  :: !(Maybe Text)
     , _rlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutersList' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ routersList
     -> Text -- ^ 'rlRegion'
     -> RoutersList
 routersList pRlProject_ pRlRegion_ =
-    RoutersList'
+  RoutersList'
     { _rlOrderBy = Nothing
     , _rlProject = pRlProject_
     , _rlFilter = Nothing

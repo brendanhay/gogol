@@ -65,7 +65,8 @@ type AppsFirewallIngressRulesCreateResource =
 -- | Creates a firewall rule for the application.
 --
 -- /See:/ 'appsFirewallIngressRulesCreate' smart constructor.
-data AppsFirewallIngressRulesCreate = AppsFirewallIngressRulesCreate'
+data AppsFirewallIngressRulesCreate =
+  AppsFirewallIngressRulesCreate'
     { _afircXgafv          :: !(Maybe Xgafv)
     , _afircUploadProtocol :: !(Maybe Text)
     , _afircAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data AppsFirewallIngressRulesCreate = AppsFirewallIngressRulesCreate'
     , _afircPayload        :: !FirewallRule
     , _afircAppsId         :: !Text
     , _afircCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppsFirewallIngressRulesCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ appsFirewallIngressRulesCreate
     -> Text -- ^ 'afircAppsId'
     -> AppsFirewallIngressRulesCreate
 appsFirewallIngressRulesCreate pAfircPayload_ pAfircAppsId_ =
-    AppsFirewallIngressRulesCreate'
+  AppsFirewallIngressRulesCreate'
     { _afircXgafv = Nothing
     , _afircUploadProtocol = Nothing
     , _afircAccessToken = Nothing

@@ -55,10 +55,12 @@ type AchievementsUpdateMultipleResource =
 -- | Updates multiple achievements for the currently authenticated player.
 --
 -- /See:/ 'achievementsUpdateMultiple' smart constructor.
-data AchievementsUpdateMultiple = AchievementsUpdateMultiple'
+data AchievementsUpdateMultiple =
+  AchievementsUpdateMultiple'
     { _aumBuiltinGameId :: !(Maybe Text)
     , _aumPayload       :: !AchievementUpdateMultipleRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AchievementsUpdateMultiple' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ achievementsUpdateMultiple
     :: AchievementUpdateMultipleRequest -- ^ 'aumPayload'
     -> AchievementsUpdateMultiple
 achievementsUpdateMultiple pAumPayload_ =
-    AchievementsUpdateMultiple'
-    { _aumBuiltinGameId = Nothing
-    , _aumPayload = pAumPayload_
-    }
+  AchievementsUpdateMultiple'
+    {_aumBuiltinGameId = Nothing, _aumPayload = pAumPayload_}
 
 -- | Override used only by built-in games in Play Games application.
 aumBuiltinGameId :: Lens' AchievementsUpdateMultiple (Maybe Text)

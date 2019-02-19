@@ -56,9 +56,11 @@ type RelyingPartySignOutUserResource =
 -- | Sign out user.
 --
 -- /See:/ 'relyingPartySignOutUser' smart constructor.
-newtype RelyingPartySignOutUser = RelyingPartySignOutUser'
+newtype RelyingPartySignOutUser =
+  RelyingPartySignOutUser'
     { _rpsouPayload :: IdentitytoolkitRelyingPartySignOutUserRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartySignOutUser' with the minimum fields required to make a request.
 --
@@ -69,9 +71,7 @@ relyingPartySignOutUser
     :: IdentitytoolkitRelyingPartySignOutUserRequest -- ^ 'rpsouPayload'
     -> RelyingPartySignOutUser
 relyingPartySignOutUser pRpsouPayload_ =
-    RelyingPartySignOutUser'
-    { _rpsouPayload = pRpsouPayload_
-    }
+  RelyingPartySignOutUser' {_rpsouPayload = pRpsouPayload_}
 
 -- | Multipart request metadata.
 rpsouPayload :: Lens' RelyingPartySignOutUser IdentitytoolkitRelyingPartySignOutUserRequest

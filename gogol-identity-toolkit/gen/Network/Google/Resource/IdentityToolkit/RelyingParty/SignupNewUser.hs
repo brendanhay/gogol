@@ -54,9 +54,11 @@ type RelyingPartySignupNewUserResource =
 -- | Signup new user.
 --
 -- /See:/ 'relyingPartySignupNewUser' smart constructor.
-newtype RelyingPartySignupNewUser = RelyingPartySignupNewUser'
+newtype RelyingPartySignupNewUser =
+  RelyingPartySignupNewUser'
     { _rpsnuPayload :: IdentitytoolkitRelyingPartySignupNewUserRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartySignupNewUser' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ relyingPartySignupNewUser
     :: IdentitytoolkitRelyingPartySignupNewUserRequest -- ^ 'rpsnuPayload'
     -> RelyingPartySignupNewUser
 relyingPartySignupNewUser pRpsnuPayload_ =
-    RelyingPartySignupNewUser'
-    { _rpsnuPayload = pRpsnuPayload_
-    }
+  RelyingPartySignupNewUser' {_rpsnuPayload = pRpsnuPayload_}
 
 -- | Multipart request metadata.
 rpsnuPayload :: Lens' RelyingPartySignupNewUser IdentitytoolkitRelyingPartySignupNewUserRequest

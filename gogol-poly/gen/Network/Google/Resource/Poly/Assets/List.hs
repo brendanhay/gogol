@@ -77,7 +77,8 @@ type AssetsListResource =
 -- level of PUBLIC and published under the CC-By license.
 --
 -- /See:/ 'assetsList' smart constructor.
-data AssetsList = AssetsList'
+data AssetsList =
+  AssetsList'
     { _alXgafv          :: !(Maybe Xgafv)
     , _alUploadProtocol :: !(Maybe Text)
     , _alOrderBy        :: !(Maybe Text)
@@ -91,7 +92,8 @@ data AssetsList = AssetsList'
     , _alMaxComplexity  :: !(Maybe Text)
     , _alPageSize       :: !(Maybe (Textual Int32))
     , _alCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssetsList' with the minimum fields required to make a request.
 --
@@ -125,7 +127,7 @@ data AssetsList = AssetsList'
 assetsList
     :: AssetsList
 assetsList =
-    AssetsList'
+  AssetsList'
     { _alXgafv = Nothing
     , _alUploadProtocol = Nothing
     , _alOrderBy = Nothing

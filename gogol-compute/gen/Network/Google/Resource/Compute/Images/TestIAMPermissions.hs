@@ -59,11 +59,13 @@ type ImagesTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'imagesTestIAMPermissions' smart constructor.
-data ImagesTestIAMPermissions = ImagesTestIAMPermissions'
+data ImagesTestIAMPermissions =
+  ImagesTestIAMPermissions'
     { _itiampProject  :: !Text
     , _itiampPayload  :: !TestPermissionsRequest
     , _itiampResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImagesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ imagesTestIAMPermissions
     -> Text -- ^ 'itiampResource'
     -> ImagesTestIAMPermissions
 imagesTestIAMPermissions pItiampProject_ pItiampPayload_ pItiampResource_ =
-    ImagesTestIAMPermissions'
+  ImagesTestIAMPermissions'
     { _itiampProject = pItiampProject_
     , _itiampPayload = pItiampPayload_
     , _itiampResource = pItiampResource_

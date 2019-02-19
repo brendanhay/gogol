@@ -55,9 +55,11 @@ type PawsInitResource =
 -- database.
 --
 -- /See:/ 'pawsInit' smart constructor.
-newtype PawsInit = PawsInit'
+newtype PawsInit =
+  PawsInit'
     { _piPayload :: PawsInitRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PawsInit' with the minimum fields required to make a request.
 --
@@ -67,10 +69,7 @@ newtype PawsInit = PawsInit'
 pawsInit
     :: PawsInitRequest -- ^ 'piPayload'
     -> PawsInit
-pawsInit pPiPayload_ =
-    PawsInit'
-    { _piPayload = pPiPayload_
-    }
+pawsInit pPiPayload_ = PawsInit' {_piPayload = pPiPayload_}
 
 -- | Multipart request metadata.
 piPayload :: Lens' PawsInit PawsInitRequest

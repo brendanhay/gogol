@@ -27,10 +27,12 @@ import           Network.Google.Prelude
 -- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng'
+data LatLng =
+  LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -41,11 +43,7 @@ data LatLng = LatLng'
 -- * 'llLongitude'
 latLng
     :: LatLng
-latLng =
-    LatLng'
-    { _llLatitude = Nothing
-    , _llLongitude = Nothing
-    }
+latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -78,10 +76,12 @@ instance ToJSON LatLng where
 -- setting ReadOptions.new_transaction in read requests.
 --
 -- /See:/ 'transactionOptions' smart constructor.
-data TransactionOptions = TransactionOptions'
+data TransactionOptions =
+  TransactionOptions'
     { _toReadWrite :: !(Maybe ReadWrite)
     , _toReadOnly  :: !(Maybe ReadOnly)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransactionOptions' with the minimum fields required to make a request.
 --
@@ -93,10 +93,7 @@ data TransactionOptions = TransactionOptions'
 transactionOptions
     :: TransactionOptions
 transactionOptions =
-    TransactionOptions'
-    { _toReadWrite = Nothing
-    , _toReadOnly = Nothing
-    }
+  TransactionOptions' {_toReadWrite = Nothing, _toReadOnly = Nothing}
 
 -- | The transaction should allow both reads and writes.
 toReadWrite :: Lens' TransactionOptions (Maybe ReadWrite)
@@ -159,11 +156,13 @@ instance ToJSON TransactionOptions where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -176,12 +175,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -225,9 +219,11 @@ instance ToJSON Status where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'googleLongrunningOperationMetadata' smart constructor.
-newtype GoogleLongrunningOperationMetadata = GoogleLongrunningOperationMetadata'
+newtype GoogleLongrunningOperationMetadata =
+  GoogleLongrunningOperationMetadata'
     { _glomAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleLongrunningOperationMetadata' with the minimum fields required to make a request.
 --
@@ -238,9 +234,8 @@ googleLongrunningOperationMetadata
     :: HashMap Text JSONValue -- ^ 'glomAddtional'
     -> GoogleLongrunningOperationMetadata
 googleLongrunningOperationMetadata pGlomAddtional_ =
-    GoogleLongrunningOperationMetadata'
-    { _glomAddtional = _Coerce # pGlomAddtional_
-    }
+  GoogleLongrunningOperationMetadata'
+    {_glomAddtional = _Coerce # pGlomAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunningOperationMetadata (HashMap Text JSONValue)
@@ -264,9 +259,11 @@ instance ToJSON GoogleLongrunningOperationMetadata
 -- | Options specific to read \/ write transactions.
 --
 -- /See:/ 'readWrite' smart constructor.
-newtype ReadWrite = ReadWrite'
+newtype ReadWrite =
+  ReadWrite'
     { _rwPreviousTransaction :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReadWrite' with the minimum fields required to make a request.
 --
@@ -275,10 +272,7 @@ newtype ReadWrite = ReadWrite'
 -- * 'rwPreviousTransaction'
 readWrite
     :: ReadWrite
-readWrite =
-    ReadWrite'
-    { _rwPreviousTransaction = Nothing
-    }
+readWrite = ReadWrite' {_rwPreviousTransaction = Nothing}
 
 -- | The transaction identifier of the transaction being retried.
 rwPreviousTransaction :: Lens' ReadWrite (Maybe ByteString)
@@ -303,9 +297,11 @@ instance ToJSON ReadWrite where
 -- google.datastore.admin.v1beta1.DatastoreAdmin.ExportEntities.
 --
 -- /See:/ 'googleDatastoreAdminV1beta1ExportEntitiesResponse' smart constructor.
-newtype GoogleDatastoreAdminV1beta1ExportEntitiesResponse = GoogleDatastoreAdminV1beta1ExportEntitiesResponse'
+newtype GoogleDatastoreAdminV1beta1ExportEntitiesResponse =
+  GoogleDatastoreAdminV1beta1ExportEntitiesResponse'
     { _gdaveerOutputURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1ExportEntitiesResponse' with the minimum fields required to make a request.
 --
@@ -315,9 +311,8 @@ newtype GoogleDatastoreAdminV1beta1ExportEntitiesResponse = GoogleDatastoreAdmin
 googleDatastoreAdminV1beta1ExportEntitiesResponse
     :: GoogleDatastoreAdminV1beta1ExportEntitiesResponse
 googleDatastoreAdminV1beta1ExportEntitiesResponse =
-    GoogleDatastoreAdminV1beta1ExportEntitiesResponse'
-    { _gdaveerOutputURL = Nothing
-    }
+  GoogleDatastoreAdminV1beta1ExportEntitiesResponse'
+    {_gdaveerOutputURL = Nothing}
 
 -- | Location of the output metadata file. This can be used to begin an
 -- import into Cloud Datastore (this project or another project). See
@@ -329,7 +324,7 @@ gdaveerOutputURL
       (\ s a -> s{_gdaveerOutputURL = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1beta1ExportEntitiesResponse
+           GoogleDatastoreAdminV1beta1ExportEntitiesResponse
          where
         parseJSON
           = withObject
@@ -339,7 +334,7 @@ instance FromJSON
                    <$> (o .:? "outputUrl"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1beta1ExportEntitiesResponse
+           GoogleDatastoreAdminV1beta1ExportEntitiesResponse
          where
         toJSON
           GoogleDatastoreAdminV1beta1ExportEntitiesResponse'{..}
@@ -349,9 +344,11 @@ instance ToJSON
 -- | The request for Datastore.Rollback.
 --
 -- /See:/ 'rollbackRequest' smart constructor.
-newtype RollbackRequest = RollbackRequest'
+newtype RollbackRequest =
+  RollbackRequest'
     { _rrTransaction :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
 --
@@ -360,10 +357,7 @@ newtype RollbackRequest = RollbackRequest'
 -- * 'rrTransaction'
 rollbackRequest
     :: RollbackRequest
-rollbackRequest =
-    RollbackRequest'
-    { _rrTransaction = Nothing
-    }
+rollbackRequest = RollbackRequest' {_rrTransaction = Nothing}
 
 -- | The transaction identifier, returned by a call to
 -- Datastore.BeginTransaction.
@@ -386,10 +380,12 @@ instance ToJSON RollbackRequest where
 -- | The request for Datastore.ReserveIds.
 --
 -- /See:/ 'reserveIdsRequest' smart constructor.
-data ReserveIdsRequest = ReserveIdsRequest'
+data ReserveIdsRequest =
+  ReserveIdsRequest'
     { _rirKeys       :: !(Maybe [Key])
     , _rirDatabaseId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReserveIdsRequest' with the minimum fields required to make a request.
 --
@@ -401,10 +397,7 @@ data ReserveIdsRequest = ReserveIdsRequest'
 reserveIdsRequest
     :: ReserveIdsRequest
 reserveIdsRequest =
-    ReserveIdsRequest'
-    { _rirKeys = Nothing
-    , _rirDatabaseId = Nothing
-    }
+  ReserveIdsRequest' {_rirKeys = Nothing, _rirDatabaseId = Nothing}
 
 -- | A list of keys with complete key paths whose numeric IDs should not be
 -- auto-allocated.
@@ -446,10 +439,12 @@ instance ToJSON ReserveIdsRequest where
 -- active state.
 --
 -- /See:/ 'partitionId' smart constructor.
-data PartitionId = PartitionId'
+data PartitionId =
+  PartitionId'
     { _piNamespaceId :: !(Maybe Text)
     , _piProjectId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PartitionId' with the minimum fields required to make a request.
 --
@@ -460,11 +455,7 @@ data PartitionId = PartitionId'
 -- * 'piProjectId'
 partitionId
     :: PartitionId
-partitionId =
-    PartitionId'
-    { _piNamespaceId = Nothing
-    , _piProjectId = Nothing
-    }
+partitionId = PartitionId' {_piNamespaceId = Nothing, _piProjectId = Nothing}
 
 -- | If not empty, the ID of the namespace to which the entities belong.
 piNamespaceId :: Lens' PartitionId (Maybe Text)
@@ -494,10 +485,12 @@ instance ToJSON PartitionId where
 -- | The response for google.datastore.admin.v1.DatastoreAdmin.ListIndexes.
 --
 -- /See:/ 'googleDatastoreAdminV1ListIndexesResponse' smart constructor.
-data GoogleDatastoreAdminV1ListIndexesResponse = GoogleDatastoreAdminV1ListIndexesResponse'
+data GoogleDatastoreAdminV1ListIndexesResponse =
+  GoogleDatastoreAdminV1ListIndexesResponse'
     { _gdavlirNextPageToken :: !(Maybe Text)
     , _gdavlirIndexes       :: !(Maybe [GoogleDatastoreAdminV1Index])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1ListIndexesResponse' with the minimum fields required to make a request.
 --
@@ -509,10 +502,8 @@ data GoogleDatastoreAdminV1ListIndexesResponse = GoogleDatastoreAdminV1ListIndex
 googleDatastoreAdminV1ListIndexesResponse
     :: GoogleDatastoreAdminV1ListIndexesResponse
 googleDatastoreAdminV1ListIndexesResponse =
-    GoogleDatastoreAdminV1ListIndexesResponse'
-    { _gdavlirNextPageToken = Nothing
-    , _gdavlirIndexes = Nothing
-    }
+  GoogleDatastoreAdminV1ListIndexesResponse'
+    {_gdavlirNextPageToken = Nothing, _gdavlirIndexes = Nothing}
 
 -- | The standard List next-page token.
 gdavlirNextPageToken :: Lens' GoogleDatastoreAdminV1ListIndexesResponse (Maybe Text)
@@ -529,7 +520,8 @@ gdavlirIndexes
       . _Coerce
 
 instance FromJSON
-         GoogleDatastoreAdminV1ListIndexesResponse where
+           GoogleDatastoreAdminV1ListIndexesResponse
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1ListIndexesResponse"
@@ -539,7 +531,8 @@ instance FromJSON
                      (o .:? "indexes" .!= mempty))
 
 instance ToJSON
-         GoogleDatastoreAdminV1ListIndexesResponse where
+           GoogleDatastoreAdminV1ListIndexesResponse
+         where
         toJSON GoogleDatastoreAdminV1ListIndexesResponse'{..}
           = object
               (catMaybes
@@ -549,7 +542,8 @@ instance ToJSON
 -- | A batch of results produced by a query.
 --
 -- /See:/ 'queryResultBatch' smart constructor.
-data QueryResultBatch = QueryResultBatch'
+data QueryResultBatch =
+  QueryResultBatch'
     { _qrbSkippedResults   :: !(Maybe (Textual Int32))
     , _qrbSkippedCursor    :: !(Maybe Bytes)
     , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
@@ -557,7 +551,8 @@ data QueryResultBatch = QueryResultBatch'
     , _qrbEntityResults    :: !(Maybe [EntityResult])
     , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
     , _qrbEndCursor        :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
 --
@@ -579,7 +574,7 @@ data QueryResultBatch = QueryResultBatch'
 queryResultBatch
     :: QueryResultBatch
 queryResultBatch =
-    QueryResultBatch'
+  QueryResultBatch'
     { _qrbSkippedResults = Nothing
     , _qrbSkippedCursor = Nothing
     , _qrbEntityResultType = Nothing
@@ -674,9 +669,11 @@ instance ToJSON QueryResultBatch where
 -- than 500 characters. The name cannot be \`\"\"\`.
 --
 -- /See:/ 'entityProperties' smart constructor.
-newtype EntityProperties = EntityProperties'
+newtype EntityProperties =
+  EntityProperties'
     { _epAddtional :: HashMap Text Value
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntityProperties' with the minimum fields required to make a request.
 --
@@ -687,9 +684,7 @@ entityProperties
     :: HashMap Text Value -- ^ 'epAddtional'
     -> EntityProperties
 entityProperties pEpAddtional_ =
-    EntityProperties'
-    { _epAddtional = _Coerce # pEpAddtional_
-    }
+  EntityProperties' {_epAddtional = _Coerce # pEpAddtional_}
 
 epAddtional :: Lens' EntityProperties (HashMap Text Value)
 epAddtional
@@ -707,9 +702,11 @@ instance ToJSON EntityProperties where
 -- | Client-assigned labels.
 --
 -- /See:/ 'googleDatastoreAdminV1ImportEntitiesRequestLabels' smart constructor.
-newtype GoogleDatastoreAdminV1ImportEntitiesRequestLabels = GoogleDatastoreAdminV1ImportEntitiesRequestLabels'
+newtype GoogleDatastoreAdminV1ImportEntitiesRequestLabels =
+  GoogleDatastoreAdminV1ImportEntitiesRequestLabels'
     { _gdavierlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1ImportEntitiesRequestLabels' with the minimum fields required to make a request.
 --
@@ -720,9 +717,8 @@ googleDatastoreAdminV1ImportEntitiesRequestLabels
     :: HashMap Text Text -- ^ 'gdavierlAddtional'
     -> GoogleDatastoreAdminV1ImportEntitiesRequestLabels
 googleDatastoreAdminV1ImportEntitiesRequestLabels pGdavierlAddtional_ =
-    GoogleDatastoreAdminV1ImportEntitiesRequestLabels'
-    { _gdavierlAddtional = _Coerce # pGdavierlAddtional_
-    }
+  GoogleDatastoreAdminV1ImportEntitiesRequestLabels'
+    {_gdavierlAddtional = _Coerce # pGdavierlAddtional_}
 
 gdavierlAddtional :: Lens' GoogleDatastoreAdminV1ImportEntitiesRequestLabels (HashMap Text Text)
 gdavierlAddtional
@@ -731,7 +727,7 @@ gdavierlAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleDatastoreAdminV1ImportEntitiesRequestLabels
+           GoogleDatastoreAdminV1ImportEntitiesRequestLabels
          where
         parseJSON
           = withObject
@@ -741,16 +737,18 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleDatastoreAdminV1ImportEntitiesRequestLabels
+           GoogleDatastoreAdminV1ImportEntitiesRequestLabels
          where
         toJSON = toJSON . _gdavierlAddtional
 
 -- | The request for Datastore.BeginTransaction.
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
-newtype BeginTransactionRequest = BeginTransactionRequest'
+newtype BeginTransactionRequest =
+  BeginTransactionRequest'
     { _btrTransactionOptions :: Maybe TransactionOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
 --
@@ -760,9 +758,7 @@ newtype BeginTransactionRequest = BeginTransactionRequest'
 beginTransactionRequest
     :: BeginTransactionRequest
 beginTransactionRequest =
-    BeginTransactionRequest'
-    { _btrTransactionOptions = Nothing
-    }
+  BeginTransactionRequest' {_btrTransactionOptions = Nothing}
 
 -- | Options for a new transaction.
 btrTransactionOptions :: Lens' BeginTransactionRequest (Maybe TransactionOptions)
@@ -787,12 +783,14 @@ instance ToJSON BeginTransactionRequest where
 -- | The request for Datastore.RunQuery.
 --
 -- /See:/ 'runQueryRequest' smart constructor.
-data RunQueryRequest = RunQueryRequest'
+data RunQueryRequest =
+  RunQueryRequest'
     { _rqrPartitionId :: !(Maybe PartitionId)
     , _rqrGqlQuery    :: !(Maybe GqlQuery)
     , _rqrQuery       :: !(Maybe Query)
     , _rqrReadOptions :: !(Maybe ReadOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
 --
@@ -808,7 +806,7 @@ data RunQueryRequest = RunQueryRequest'
 runQueryRequest
     :: RunQueryRequest
 runQueryRequest =
-    RunQueryRequest'
+  RunQueryRequest'
     { _rqrPartitionId = Nothing
     , _rqrGqlQuery = Nothing
     , _rqrQuery = Nothing
@@ -859,9 +857,11 @@ instance ToJSON RunQueryRequest where
 -- | The request for Datastore.AllocateIds.
 --
 -- /See:/ 'allocateIdsRequest' smart constructor.
-newtype AllocateIdsRequest = AllocateIdsRequest'
+newtype AllocateIdsRequest =
+  AllocateIdsRequest'
     { _airKeys :: Maybe [Key]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AllocateIdsRequest' with the minimum fields required to make a request.
 --
@@ -870,10 +870,7 @@ newtype AllocateIdsRequest = AllocateIdsRequest'
 -- * 'airKeys'
 allocateIdsRequest
     :: AllocateIdsRequest
-allocateIdsRequest =
-    AllocateIdsRequest'
-    { _airKeys = Nothing
-    }
+allocateIdsRequest = AllocateIdsRequest' {_airKeys = Nothing}
 
 -- | A list of keys with incomplete key paths for which to allocate IDs. No
 -- key may be reserved\/read-only.
@@ -895,13 +892,15 @@ instance ToJSON AllocateIdsRequest where
 -- | Metadata for ExportEntities operations.
 --
 -- /See:/ 'googleDatastoreAdminV1ExportEntitiesMetadata' smart constructor.
-data GoogleDatastoreAdminV1ExportEntitiesMetadata = GoogleDatastoreAdminV1ExportEntitiesMetadata'
+data GoogleDatastoreAdminV1ExportEntitiesMetadata =
+  GoogleDatastoreAdminV1ExportEntitiesMetadata'
     { _gdaveemProgressBytes    :: !(Maybe GoogleDatastoreAdminV1Progress)
     , _gdaveemOutputURLPrefix  :: !(Maybe Text)
     , _gdaveemProgressEntities :: !(Maybe GoogleDatastoreAdminV1Progress)
     , _gdaveemEntityFilter     :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
     , _gdaveemCommon           :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesMetadata' with the minimum fields required to make a request.
 --
@@ -919,7 +918,7 @@ data GoogleDatastoreAdminV1ExportEntitiesMetadata = GoogleDatastoreAdminV1Export
 googleDatastoreAdminV1ExportEntitiesMetadata
     :: GoogleDatastoreAdminV1ExportEntitiesMetadata
 googleDatastoreAdminV1ExportEntitiesMetadata =
-    GoogleDatastoreAdminV1ExportEntitiesMetadata'
+  GoogleDatastoreAdminV1ExportEntitiesMetadata'
     { _gdaveemProgressBytes = Nothing
     , _gdaveemOutputURLPrefix = Nothing
     , _gdaveemProgressEntities = Nothing
@@ -962,7 +961,8 @@ gdaveemCommon
       (\ s a -> s{_gdaveemCommon = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1ExportEntitiesMetadata where
+           GoogleDatastoreAdminV1ExportEntitiesMetadata
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1ExportEntitiesMetadata"
@@ -974,7 +974,8 @@ instance FromJSON
                      <*> (o .:? "common"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1ExportEntitiesMetadata where
+           GoogleDatastoreAdminV1ExportEntitiesMetadata
+         where
         toJSON
           GoogleDatastoreAdminV1ExportEntitiesMetadata'{..}
           = object
@@ -988,13 +989,15 @@ instance ToJSON
 -- | Metadata common to all Datastore Admin operations.
 --
 -- /See:/ 'googleDatastoreAdminV1beta1CommonMetadata' smart constructor.
-data GoogleDatastoreAdminV1beta1CommonMetadata = GoogleDatastoreAdminV1beta1CommonMetadata'
+data GoogleDatastoreAdminV1beta1CommonMetadata =
+  GoogleDatastoreAdminV1beta1CommonMetadata'
     { _gdavcmState         :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataState)
     , _gdavcmStartTime     :: !(Maybe DateTime')
     , _gdavcmEndTime       :: !(Maybe DateTime')
     , _gdavcmLabels        :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataLabels)
     , _gdavcmOperationType :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataOperationType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1CommonMetadata' with the minimum fields required to make a request.
 --
@@ -1012,7 +1015,7 @@ data GoogleDatastoreAdminV1beta1CommonMetadata = GoogleDatastoreAdminV1beta1Comm
 googleDatastoreAdminV1beta1CommonMetadata
     :: GoogleDatastoreAdminV1beta1CommonMetadata
 googleDatastoreAdminV1beta1CommonMetadata =
-    GoogleDatastoreAdminV1beta1CommonMetadata'
+  GoogleDatastoreAdminV1beta1CommonMetadata'
     { _gdavcmState = Nothing
     , _gdavcmStartTime = Nothing
     , _gdavcmEndTime = Nothing
@@ -1053,7 +1056,8 @@ gdavcmOperationType
       (\ s a -> s{_gdavcmOperationType = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1beta1CommonMetadata where
+           GoogleDatastoreAdminV1beta1CommonMetadata
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1beta1CommonMetadata"
@@ -1065,7 +1069,8 @@ instance FromJSON
                      <*> (o .:? "operationType"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1beta1CommonMetadata where
+           GoogleDatastoreAdminV1beta1CommonMetadata
+         where
         toJSON GoogleDatastoreAdminV1beta1CommonMetadata'{..}
           = object
               (catMaybes
@@ -1083,8 +1088,8 @@ instance ToJSON
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -1101,10 +1106,12 @@ instance ToJSON Empty where
 -- | A filter that merges multiple other filters using the given operator.
 --
 -- /See:/ 'compositeFilter' smart constructor.
-data CompositeFilter = CompositeFilter'
+data CompositeFilter =
+  CompositeFilter'
     { _cfOp      :: !(Maybe CompositeFilterOp)
     , _cfFilters :: !(Maybe [Filter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompositeFilter' with the minimum fields required to make a request.
 --
@@ -1115,11 +1122,7 @@ data CompositeFilter = CompositeFilter'
 -- * 'cfFilters'
 compositeFilter
     :: CompositeFilter
-compositeFilter =
-    CompositeFilter'
-    { _cfOp = Nothing
-    , _cfFilters = Nothing
-    }
+compositeFilter = CompositeFilter' {_cfOp = Nothing, _cfFilters = Nothing}
 
 -- | The operator for combining multiple filters.
 cfOp :: Lens' CompositeFilter (Maybe CompositeFilterOp)
@@ -1148,11 +1151,13 @@ instance ToJSON CompositeFilter where
 -- | Metadata for Index operations.
 --
 -- /See:/ 'googleDatastoreAdminV1IndexOperationMetadata' smart constructor.
-data GoogleDatastoreAdminV1IndexOperationMetadata = GoogleDatastoreAdminV1IndexOperationMetadata'
+data GoogleDatastoreAdminV1IndexOperationMetadata =
+  GoogleDatastoreAdminV1IndexOperationMetadata'
     { _gdaviomProgressEntities :: !(Maybe GoogleDatastoreAdminV1Progress)
     , _gdaviomCommon           :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
     , _gdaviomIndexId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1IndexOperationMetadata' with the minimum fields required to make a request.
 --
@@ -1166,7 +1171,7 @@ data GoogleDatastoreAdminV1IndexOperationMetadata = GoogleDatastoreAdminV1IndexO
 googleDatastoreAdminV1IndexOperationMetadata
     :: GoogleDatastoreAdminV1IndexOperationMetadata
 googleDatastoreAdminV1IndexOperationMetadata =
-    GoogleDatastoreAdminV1IndexOperationMetadata'
+  GoogleDatastoreAdminV1IndexOperationMetadata'
     { _gdaviomProgressEntities = Nothing
     , _gdaviomCommon = Nothing
     , _gdaviomIndexId = Nothing
@@ -1191,7 +1196,8 @@ gdaviomIndexId
       (\ s a -> s{_gdaviomIndexId = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1IndexOperationMetadata where
+           GoogleDatastoreAdminV1IndexOperationMetadata
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1IndexOperationMetadata"
@@ -1201,7 +1207,8 @@ instance FromJSON
                      (o .:? "indexId"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1IndexOperationMetadata where
+           GoogleDatastoreAdminV1IndexOperationMetadata
+         where
         toJSON
           GoogleDatastoreAdminV1IndexOperationMetadata'{..}
           = object
@@ -1214,13 +1221,15 @@ instance ToJSON
 -- | Metadata for ImportEntities operations.
 --
 -- /See:/ 'googleDatastoreAdminV1beta1ImportEntitiesMetadata' smart constructor.
-data GoogleDatastoreAdminV1beta1ImportEntitiesMetadata = GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'
+data GoogleDatastoreAdminV1beta1ImportEntitiesMetadata =
+  GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'
     { _gdaviemProgressBytes    :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
     , _gdaviemProgressEntities :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
     , _gdaviemEntityFilter     :: !(Maybe GoogleDatastoreAdminV1beta1EntityFilter)
     , _gdaviemInputURL         :: !(Maybe Text)
     , _gdaviemCommon           :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1ImportEntitiesMetadata' with the minimum fields required to make a request.
 --
@@ -1238,7 +1247,7 @@ data GoogleDatastoreAdminV1beta1ImportEntitiesMetadata = GoogleDatastoreAdminV1b
 googleDatastoreAdminV1beta1ImportEntitiesMetadata
     :: GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
 googleDatastoreAdminV1beta1ImportEntitiesMetadata =
-    GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'
+  GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'
     { _gdaviemProgressBytes = Nothing
     , _gdaviemProgressEntities = Nothing
     , _gdaviemEntityFilter = Nothing
@@ -1279,7 +1288,7 @@ gdaviemCommon
       (\ s a -> s{_gdaviemCommon = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
+           GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
          where
         parseJSON
           = withObject
@@ -1294,7 +1303,7 @@ instance FromJSON
                      <*> (o .:? "common"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
+           GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
          where
         toJSON
           GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'{..}
@@ -1309,10 +1318,12 @@ instance ToJSON
 -- | Measures the progress of a particular metric.
 --
 -- /See:/ 'googleDatastoreAdminV1beta1Progress' smart constructor.
-data GoogleDatastoreAdminV1beta1Progress = GoogleDatastoreAdminV1beta1Progress'
+data GoogleDatastoreAdminV1beta1Progress =
+  GoogleDatastoreAdminV1beta1Progress'
     { _gdavpWorkCompleted :: !(Maybe (Textual Int64))
     , _gdavpWorkEstimated :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1Progress' with the minimum fields required to make a request.
 --
@@ -1324,10 +1335,8 @@ data GoogleDatastoreAdminV1beta1Progress = GoogleDatastoreAdminV1beta1Progress'
 googleDatastoreAdminV1beta1Progress
     :: GoogleDatastoreAdminV1beta1Progress
 googleDatastoreAdminV1beta1Progress =
-    GoogleDatastoreAdminV1beta1Progress'
-    { _gdavpWorkCompleted = Nothing
-    , _gdavpWorkEstimated = Nothing
-    }
+  GoogleDatastoreAdminV1beta1Progress'
+    {_gdavpWorkCompleted = Nothing, _gdavpWorkEstimated = Nothing}
 
 -- | The amount of work that has been completed. Note that this may be
 -- greater than work_estimated.
@@ -1364,9 +1373,11 @@ instance ToJSON GoogleDatastoreAdminV1beta1Progress
 -- | The response for Datastore.BeginTransaction.
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
-newtype BeginTransactionResponse = BeginTransactionResponse'
+newtype BeginTransactionResponse =
+  BeginTransactionResponse'
     { _btrTransaction :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeginTransactionResponse' with the minimum fields required to make a request.
 --
@@ -1375,10 +1386,7 @@ newtype BeginTransactionResponse = BeginTransactionResponse'
 -- * 'btrTransaction'
 beginTransactionResponse
     :: BeginTransactionResponse
-beginTransactionResponse =
-    BeginTransactionResponse'
-    { _btrTransaction = Nothing
-    }
+beginTransactionResponse = BeginTransactionResponse' {_btrTransaction = Nothing}
 
 -- | The transaction identifier (always present).
 btrTransaction :: Lens' BeginTransactionResponse (Maybe ByteString)
@@ -1401,11 +1409,13 @@ instance ToJSON BeginTransactionResponse where
 -- | The result of applying a mutation.
 --
 -- /See:/ 'mutationResult' smart constructor.
-data MutationResult = MutationResult'
+data MutationResult =
+  MutationResult'
     { _mrConflictDetected :: !(Maybe Bool)
     , _mrKey              :: !(Maybe Key)
     , _mrVersion          :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MutationResult' with the minimum fields required to make a request.
 --
@@ -1419,11 +1429,8 @@ data MutationResult = MutationResult'
 mutationResult
     :: MutationResult
 mutationResult =
-    MutationResult'
-    { _mrConflictDetected = Nothing
-    , _mrKey = Nothing
-    , _mrVersion = Nothing
-    }
+  MutationResult'
+    {_mrConflictDetected = Nothing, _mrKey = Nothing, _mrVersion = Nothing}
 
 -- | Whether a conflict was detected for this mutation. Always false when a
 -- conflict detection strategy field is not set in the mutation.
@@ -1466,9 +1473,11 @@ instance ToJSON MutationResult where
 -- | The response for Datastore.AllocateIds.
 --
 -- /See:/ 'allocateIdsResponse' smart constructor.
-newtype AllocateIdsResponse = AllocateIdsResponse'
+newtype AllocateIdsResponse =
+  AllocateIdsResponse'
     { _aKeys :: Maybe [Key]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AllocateIdsResponse' with the minimum fields required to make a request.
 --
@@ -1477,10 +1486,7 @@ newtype AllocateIdsResponse = AllocateIdsResponse'
 -- * 'aKeys'
 allocateIdsResponse
     :: AllocateIdsResponse
-allocateIdsResponse =
-    AllocateIdsResponse'
-    { _aKeys = Nothing
-    }
+allocateIdsResponse = AllocateIdsResponse' {_aKeys = Nothing}
 
 -- | The keys specified in the request (in the same order), each with its key
 -- path completed with a newly allocated ID.
@@ -1503,12 +1509,14 @@ instance ToJSON AllocateIdsResponse where
 -- query](https:\/\/cloud.google.com\/datastore\/docs\/apis\/gql\/gql_reference).
 --
 -- /See:/ 'gqlQuery' smart constructor.
-data GqlQuery = GqlQuery'
+data GqlQuery =
+  GqlQuery'
     { _gqPositionalBindings :: !(Maybe [GqlQueryParameter])
     , _gqNamedBindings      :: !(Maybe GqlQueryNamedBindings)
     , _gqQueryString        :: !(Maybe Text)
     , _gqAllowLiterals      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GqlQuery' with the minimum fields required to make a request.
 --
@@ -1524,7 +1532,7 @@ data GqlQuery = GqlQuery'
 gqlQuery
     :: GqlQuery
 gqlQuery =
-    GqlQuery'
+  GqlQuery'
     { _gqPositionalBindings = Nothing
     , _gqNamedBindings = Nothing
     , _gqQueryString = Nothing
@@ -1589,10 +1597,12 @@ instance ToJSON GqlQuery where
 -- | The response for Datastore.RunQuery.
 --
 -- /See:/ 'runQueryResponse' smart constructor.
-data RunQueryResponse = RunQueryResponse'
+data RunQueryResponse =
+  RunQueryResponse'
     { _rBatch :: !(Maybe QueryResultBatch)
     , _rQuery :: !(Maybe Query)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RunQueryResponse' with the minimum fields required to make a request.
 --
@@ -1603,11 +1613,7 @@ data RunQueryResponse = RunQueryResponse'
 -- * 'rQuery'
 runQueryResponse
     :: RunQueryResponse
-runQueryResponse =
-    RunQueryResponse'
-    { _rBatch = Nothing
-    , _rQuery = Nothing
-    }
+runQueryResponse = RunQueryResponse' {_rBatch = Nothing, _rQuery = Nothing}
 
 -- | A batch of query results (always present).
 rBatch :: Lens' RunQueryResponse (Maybe QueryResultBatch)
@@ -1633,9 +1639,11 @@ instance ToJSON RunQueryResponse where
 -- | Client-assigned labels.
 --
 -- /See:/ 'googleDatastoreAdminV1ExportEntitiesRequestLabels' smart constructor.
-newtype GoogleDatastoreAdminV1ExportEntitiesRequestLabels = GoogleDatastoreAdminV1ExportEntitiesRequestLabels'
+newtype GoogleDatastoreAdminV1ExportEntitiesRequestLabels =
+  GoogleDatastoreAdminV1ExportEntitiesRequestLabels'
     { _gdaveerlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesRequestLabels' with the minimum fields required to make a request.
 --
@@ -1646,9 +1654,8 @@ googleDatastoreAdminV1ExportEntitiesRequestLabels
     :: HashMap Text Text -- ^ 'gdaveerlAddtional'
     -> GoogleDatastoreAdminV1ExportEntitiesRequestLabels
 googleDatastoreAdminV1ExportEntitiesRequestLabels pGdaveerlAddtional_ =
-    GoogleDatastoreAdminV1ExportEntitiesRequestLabels'
-    { _gdaveerlAddtional = _Coerce # pGdaveerlAddtional_
-    }
+  GoogleDatastoreAdminV1ExportEntitiesRequestLabels'
+    {_gdaveerlAddtional = _Coerce # pGdaveerlAddtional_}
 
 gdaveerlAddtional :: Lens' GoogleDatastoreAdminV1ExportEntitiesRequestLabels (HashMap Text Text)
 gdaveerlAddtional
@@ -1657,7 +1664,7 @@ gdaveerlAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleDatastoreAdminV1ExportEntitiesRequestLabels
+           GoogleDatastoreAdminV1ExportEntitiesRequestLabels
          where
         parseJSON
           = withObject
@@ -1667,7 +1674,7 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleDatastoreAdminV1ExportEntitiesRequestLabels
+           GoogleDatastoreAdminV1ExportEntitiesRequestLabels
          where
         toJSON = toJSON . _gdaveerlAddtional
 
@@ -1675,7 +1682,8 @@ instance ToJSON
 -- metadata.
 --
 -- /See:/ 'value' smart constructor.
-data Value = Value'
+data Value =
+  Value'
     { _vKeyValue           :: !(Maybe Key)
     , _vGeoPointValue      :: !(Maybe LatLng)
     , _vIntegerValue       :: !(Maybe (Textual Int64))
@@ -1689,7 +1697,8 @@ data Value = Value'
     , _vArrayValue         :: !(Maybe ArrayValue)
     , _vNullValue          :: !(Maybe ValueNullValue)
     , _vBlobValue          :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
@@ -1723,7 +1732,7 @@ data Value = Value'
 value
     :: Value
 value =
-    Value'
+  Value'
     { _vKeyValue = Nothing
     , _vGeoPointValue = Nothing
     , _vIntegerValue = Nothing
@@ -1864,9 +1873,11 @@ instance ToJSON Value where
 -- created. May also include additional labels.
 --
 -- /See:/ 'googleDatastoreAdminV1CommonMetadataLabels' smart constructor.
-newtype GoogleDatastoreAdminV1CommonMetadataLabels = GoogleDatastoreAdminV1CommonMetadataLabels'
+newtype GoogleDatastoreAdminV1CommonMetadataLabels =
+  GoogleDatastoreAdminV1CommonMetadataLabels'
     { _gdavcmlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1CommonMetadataLabels' with the minimum fields required to make a request.
 --
@@ -1877,9 +1888,8 @@ googleDatastoreAdminV1CommonMetadataLabels
     :: HashMap Text Text -- ^ 'gdavcmlAddtional'
     -> GoogleDatastoreAdminV1CommonMetadataLabels
 googleDatastoreAdminV1CommonMetadataLabels pGdavcmlAddtional_ =
-    GoogleDatastoreAdminV1CommonMetadataLabels'
-    { _gdavcmlAddtional = _Coerce # pGdavcmlAddtional_
-    }
+  GoogleDatastoreAdminV1CommonMetadataLabels'
+    {_gdavcmlAddtional = _Coerce # pGdavcmlAddtional_}
 
 gdavcmlAddtional :: Lens' GoogleDatastoreAdminV1CommonMetadataLabels (HashMap Text Text)
 gdavcmlAddtional
@@ -1888,7 +1898,8 @@ gdavcmlAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleDatastoreAdminV1CommonMetadataLabels where
+           GoogleDatastoreAdminV1CommonMetadataLabels
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1CommonMetadataLabels"
@@ -1897,14 +1908,17 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleDatastoreAdminV1CommonMetadataLabels where
+           GoogleDatastoreAdminV1CommonMetadataLabels
+         where
         toJSON = toJSON . _gdavcmlAddtional
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1915,9 +1929,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1936,10 +1948,12 @@ instance ToJSON StatusDetailsItem where
 -- | The request for Datastore.Lookup.
 --
 -- /See:/ 'lookupRequest' smart constructor.
-data LookupRequest = LookupRequest'
+data LookupRequest =
+  LookupRequest'
     { _lrKeys        :: !(Maybe [Key])
     , _lrReadOptions :: !(Maybe ReadOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LookupRequest' with the minimum fields required to make a request.
 --
@@ -1950,11 +1964,7 @@ data LookupRequest = LookupRequest'
 -- * 'lrReadOptions'
 lookupRequest
     :: LookupRequest
-lookupRequest =
-    LookupRequest'
-    { _lrKeys = Nothing
-    , _lrReadOptions = Nothing
-    }
+lookupRequest = LookupRequest' {_lrKeys = Nothing, _lrReadOptions = Nothing}
 
 -- | Keys of entities to look up.
 lrKeys :: Lens' LookupRequest [Key]
@@ -1985,13 +1995,15 @@ instance ToJSON LookupRequest where
 -- | Metadata common to all Datastore Admin operations.
 --
 -- /See:/ 'googleDatastoreAdminV1CommonMetadata' smart constructor.
-data GoogleDatastoreAdminV1CommonMetadata = GoogleDatastoreAdminV1CommonMetadata'
+data GoogleDatastoreAdminV1CommonMetadata =
+  GoogleDatastoreAdminV1CommonMetadata'
     { _gState         :: !(Maybe GoogleDatastoreAdminV1CommonMetadataState)
     , _gStartTime     :: !(Maybe DateTime')
     , _gEndTime       :: !(Maybe DateTime')
     , _gLabels        :: !(Maybe GoogleDatastoreAdminV1CommonMetadataLabels)
     , _gOperationType :: !(Maybe GoogleDatastoreAdminV1CommonMetadataOperationType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1CommonMetadata' with the minimum fields required to make a request.
 --
@@ -2009,7 +2021,7 @@ data GoogleDatastoreAdminV1CommonMetadata = GoogleDatastoreAdminV1CommonMetadata
 googleDatastoreAdminV1CommonMetadata
     :: GoogleDatastoreAdminV1CommonMetadata
 googleDatastoreAdminV1CommonMetadata =
-    GoogleDatastoreAdminV1CommonMetadata'
+  GoogleDatastoreAdminV1CommonMetadata'
     { _gState = Nothing
     , _gStartTime = Nothing
     , _gEndTime = Nothing
@@ -2046,7 +2058,8 @@ gOperationType
       (\ s a -> s{_gOperationType = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1CommonMetadata where
+           GoogleDatastoreAdminV1CommonMetadata
+         where
         parseJSON
           = withObject "GoogleDatastoreAdminV1CommonMetadata"
               (\ o ->
@@ -2070,11 +2083,13 @@ instance ToJSON GoogleDatastoreAdminV1CommonMetadata
 -- | The request for google.datastore.admin.v1.DatastoreAdmin.ExportEntities.
 --
 -- /See:/ 'googleDatastoreAdminV1ExportEntitiesRequest' smart constructor.
-data GoogleDatastoreAdminV1ExportEntitiesRequest = GoogleDatastoreAdminV1ExportEntitiesRequest'
+data GoogleDatastoreAdminV1ExportEntitiesRequest =
+  GoogleDatastoreAdminV1ExportEntitiesRequest'
     { _gdaveerOutputURLPrefix :: !(Maybe Text)
     , _gdaveerEntityFilter    :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
     , _gdaveerLabels          :: !(Maybe GoogleDatastoreAdminV1ExportEntitiesRequestLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesRequest' with the minimum fields required to make a request.
 --
@@ -2088,7 +2103,7 @@ data GoogleDatastoreAdminV1ExportEntitiesRequest = GoogleDatastoreAdminV1ExportE
 googleDatastoreAdminV1ExportEntitiesRequest
     :: GoogleDatastoreAdminV1ExportEntitiesRequest
 googleDatastoreAdminV1ExportEntitiesRequest =
-    GoogleDatastoreAdminV1ExportEntitiesRequest'
+  GoogleDatastoreAdminV1ExportEntitiesRequest'
     { _gdaveerOutputURLPrefix = Nothing
     , _gdaveerEntityFilter = Nothing
     , _gdaveerLabels = Nothing
@@ -2127,7 +2142,8 @@ gdaveerLabels
       (\ s a -> s{_gdaveerLabels = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1ExportEntitiesRequest where
+           GoogleDatastoreAdminV1ExportEntitiesRequest
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1ExportEntitiesRequest"
@@ -2137,7 +2153,8 @@ instance FromJSON
                      <*> (o .:? "labels"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1ExportEntitiesRequest where
+           GoogleDatastoreAdminV1ExportEntitiesRequest
+         where
         toJSON
           GoogleDatastoreAdminV1ExportEntitiesRequest'{..}
           = object
@@ -2149,13 +2166,15 @@ instance ToJSON
 -- | A mutation to apply to an entity.
 --
 -- /See:/ 'mutation' smart constructor.
-data Mutation = Mutation'
+data Mutation =
+  Mutation'
     { _mBaseVersion :: !(Maybe (Textual Int64))
     , _mInsert      :: !(Maybe Entity)
     , _mUpsert      :: !(Maybe Entity)
     , _mDelete      :: !(Maybe Key)
     , _mUpdate      :: !(Maybe Entity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Mutation' with the minimum fields required to make a request.
 --
@@ -2173,7 +2192,7 @@ data Mutation = Mutation'
 mutation
     :: Mutation
 mutation =
-    Mutation'
+  Mutation'
     { _mBaseVersion = Nothing
     , _mInsert = Nothing
     , _mUpsert = Nothing
@@ -2236,9 +2255,11 @@ instance ToJSON Mutation where
 -- must not be \`\"\"\`.
 --
 -- /See:/ 'gqlQueryNamedBindings' smart constructor.
-newtype GqlQueryNamedBindings = GqlQueryNamedBindings'
+newtype GqlQueryNamedBindings =
+  GqlQueryNamedBindings'
     { _gqnbAddtional :: HashMap Text GqlQueryParameter
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GqlQueryNamedBindings' with the minimum fields required to make a request.
 --
@@ -2249,9 +2270,7 @@ gqlQueryNamedBindings
     :: HashMap Text GqlQueryParameter -- ^ 'gqnbAddtional'
     -> GqlQueryNamedBindings
 gqlQueryNamedBindings pGqnbAddtional_ =
-    GqlQueryNamedBindings'
-    { _gqnbAddtional = _Coerce # pGqnbAddtional_
-    }
+  GqlQueryNamedBindings' {_gqnbAddtional = _Coerce # pGqnbAddtional_}
 
 gqnbAddtional :: Lens' GqlQueryNamedBindings (HashMap Text GqlQueryParameter)
 gqnbAddtional
@@ -2272,9 +2291,11 @@ instance ToJSON GqlQueryNamedBindings where
 -- google.datastore.admin.v1.DatastoreAdmin.ExportEntities.
 --
 -- /See:/ 'googleDatastoreAdminV1ExportEntitiesResponse' smart constructor.
-newtype GoogleDatastoreAdminV1ExportEntitiesResponse = GoogleDatastoreAdminV1ExportEntitiesResponse'
+newtype GoogleDatastoreAdminV1ExportEntitiesResponse =
+  GoogleDatastoreAdminV1ExportEntitiesResponse'
     { _gOutputURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesResponse' with the minimum fields required to make a request.
 --
@@ -2284,9 +2305,7 @@ newtype GoogleDatastoreAdminV1ExportEntitiesResponse = GoogleDatastoreAdminV1Exp
 googleDatastoreAdminV1ExportEntitiesResponse
     :: GoogleDatastoreAdminV1ExportEntitiesResponse
 googleDatastoreAdminV1ExportEntitiesResponse =
-    GoogleDatastoreAdminV1ExportEntitiesResponse'
-    { _gOutputURL = Nothing
-    }
+  GoogleDatastoreAdminV1ExportEntitiesResponse' {_gOutputURL = Nothing}
 
 -- | Location of the output metadata file. This can be used to begin an
 -- import into Cloud Datastore (this project or another project). See
@@ -2297,7 +2316,8 @@ gOutputURL
   = lens _gOutputURL (\ s a -> s{_gOutputURL = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1ExportEntitiesResponse where
+           GoogleDatastoreAdminV1ExportEntitiesResponse
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1ExportEntitiesResponse"
@@ -2306,7 +2326,8 @@ instance FromJSON
                    (o .:? "outputUrl"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1ExportEntitiesResponse where
+           GoogleDatastoreAdminV1ExportEntitiesResponse
+         where
         toJSON
           GoogleDatastoreAdminV1ExportEntitiesResponse'{..}
           = object
@@ -2315,9 +2336,11 @@ instance ToJSON
 -- | A reference to a property relative to the kind expressions.
 --
 -- /See:/ 'propertyReference' smart constructor.
-newtype PropertyReference = PropertyReference'
+newtype PropertyReference =
+  PropertyReference'
     { _prName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PropertyReference' with the minimum fields required to make a request.
 --
@@ -2326,10 +2349,7 @@ newtype PropertyReference = PropertyReference'
 -- * 'prName'
 propertyReference
     :: PropertyReference
-propertyReference =
-    PropertyReference'
-    { _prName = Nothing
-    }
+propertyReference = PropertyReference' {_prName = Nothing}
 
 -- | The name of the property. If name includes \".\"s, it may be interpreted
 -- as a property name path.
@@ -2351,10 +2371,12 @@ instance ToJSON PropertyReference where
 -- documented contexts.
 --
 -- /See:/ 'key' smart constructor.
-data Key = Key'
+data Key =
+  Key'
     { _kPartitionId :: !(Maybe PartitionId)
     , _kPath        :: !(Maybe [PathElement])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Key' with the minimum fields required to make a request.
 --
@@ -2365,11 +2387,7 @@ data Key = Key'
 -- * 'kPath'
 key
     :: Key
-key =
-    Key'
-    { _kPartitionId = Nothing
-    , _kPath = Nothing
-    }
+key = Key' {_kPartitionId = Nothing, _kPath = Nothing}
 
 -- | Entities are partitioned into subsets, currently identified by a project
 -- ID and namespace ID. Queries are scoped to a single partition.
@@ -2412,11 +2430,13 @@ instance ToJSON Key where
 -- | The request for google.datastore.admin.v1.DatastoreAdmin.ImportEntities.
 --
 -- /See:/ 'googleDatastoreAdminV1ImportEntitiesRequest' smart constructor.
-data GoogleDatastoreAdminV1ImportEntitiesRequest = GoogleDatastoreAdminV1ImportEntitiesRequest'
+data GoogleDatastoreAdminV1ImportEntitiesRequest =
+  GoogleDatastoreAdminV1ImportEntitiesRequest'
     { _gdavierEntityFilter :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
     , _gdavierInputURL     :: !(Maybe Text)
     , _gdavierLabels       :: !(Maybe GoogleDatastoreAdminV1ImportEntitiesRequestLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1ImportEntitiesRequest' with the minimum fields required to make a request.
 --
@@ -2430,7 +2450,7 @@ data GoogleDatastoreAdminV1ImportEntitiesRequest = GoogleDatastoreAdminV1ImportE
 googleDatastoreAdminV1ImportEntitiesRequest
     :: GoogleDatastoreAdminV1ImportEntitiesRequest
 googleDatastoreAdminV1ImportEntitiesRequest =
-    GoogleDatastoreAdminV1ImportEntitiesRequest'
+  GoogleDatastoreAdminV1ImportEntitiesRequest'
     { _gdavierEntityFilter = Nothing
     , _gdavierInputURL = Nothing
     , _gdavierLabels = Nothing
@@ -2468,7 +2488,8 @@ gdavierLabels
       (\ s a -> s{_gdavierLabels = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1ImportEntitiesRequest where
+           GoogleDatastoreAdminV1ImportEntitiesRequest
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1ImportEntitiesRequest"
@@ -2478,7 +2499,8 @@ instance FromJSON
                      (o .:? "labels"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1ImportEntitiesRequest where
+           GoogleDatastoreAdminV1ImportEntitiesRequest
+         where
         toJSON
           GoogleDatastoreAdminV1ImportEntitiesRequest'{..}
           = object
@@ -2490,11 +2512,13 @@ instance ToJSON
 -- | A filter on a specific property.
 --
 -- /See:/ 'propertyFilter' smart constructor.
-data PropertyFilter = PropertyFilter'
+data PropertyFilter =
+  PropertyFilter'
     { _pfProperty :: !(Maybe PropertyReference)
     , _pfOp       :: !(Maybe PropertyFilterOp)
     , _pfValue    :: !(Maybe Value)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PropertyFilter' with the minimum fields required to make a request.
 --
@@ -2508,11 +2532,7 @@ data PropertyFilter = PropertyFilter'
 propertyFilter
     :: PropertyFilter
 propertyFilter =
-    PropertyFilter'
-    { _pfProperty = Nothing
-    , _pfOp = Nothing
-    , _pfValue = Nothing
-    }
+  PropertyFilter' {_pfProperty = Nothing, _pfOp = Nothing, _pfValue = Nothing}
 
 -- | The property to filter by.
 pfProperty :: Lens' PropertyFilter (Maybe PropertyReference)
@@ -2545,7 +2565,8 @@ instance ToJSON PropertyFilter where
 -- | A query for entities.
 --
 -- /See:/ 'query' smart constructor.
-data Query = Query'
+data Query =
+  Query'
     { _qStartCursor :: !(Maybe Bytes)
     , _qOffSet      :: !(Maybe (Textual Int32))
     , _qKind        :: !(Maybe [KindExpression])
@@ -2555,7 +2576,8 @@ data Query = Query'
     , _qProjection  :: !(Maybe [Projection])
     , _qFilter      :: !(Maybe Filter)
     , _qOrder       :: !(Maybe [PropertyOrder])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Query' with the minimum fields required to make a request.
 --
@@ -2581,7 +2603,7 @@ data Query = Query'
 query
     :: Query
 query =
-    Query'
+  Query'
     { _qStartCursor = Nothing
     , _qOffSet = Nothing
     , _qKind = Nothing
@@ -2688,9 +2710,11 @@ instance ToJSON Query where
 -- | An array value.
 --
 -- /See:/ 'arrayValue' smart constructor.
-newtype ArrayValue = ArrayValue'
+newtype ArrayValue =
+  ArrayValue'
     { _avValues :: Maybe [Value]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ArrayValue' with the minimum fields required to make a request.
 --
@@ -2699,10 +2723,7 @@ newtype ArrayValue = ArrayValue'
 -- * 'avValues'
 arrayValue
     :: ArrayValue
-arrayValue =
-    ArrayValue'
-    { _avValues = Nothing
-    }
+arrayValue = ArrayValue' {_avValues = Nothing}
 
 -- | Values in the array. The order of values in an array is preserved as
 -- long as all values have identical settings for \'exclude_from_indexes\'.
@@ -2724,11 +2745,13 @@ instance ToJSON ArrayValue where
 -- | The result of fetching an entity from Datastore.
 --
 -- /See:/ 'entityResult' smart constructor.
-data EntityResult = EntityResult'
+data EntityResult =
+  EntityResult'
     { _erCursor  :: !(Maybe Bytes)
     , _erVersion :: !(Maybe (Textual Int64))
     , _erEntity  :: !(Maybe Entity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EntityResult' with the minimum fields required to make a request.
 --
@@ -2742,11 +2765,7 @@ data EntityResult = EntityResult'
 entityResult
     :: EntityResult
 entityResult =
-    EntityResult'
-    { _erCursor = Nothing
-    , _erVersion = Nothing
-    , _erEntity = Nothing
-    }
+  EntityResult' {_erCursor = Nothing, _erVersion = Nothing, _erEntity = Nothing}
 
 -- | A cursor that points to the position after the result entity. Set only
 -- when the \`EntityResult\` is part of a \`QueryResultBatch\` message.
@@ -2788,10 +2807,12 @@ instance ToJSON EntityResult where
 -- | The response for Datastore.Commit.
 --
 -- /See:/ 'commitResponse' smart constructor.
-data CommitResponse = CommitResponse'
+data CommitResponse =
+  CommitResponse'
     { _crIndexUpdates    :: !(Maybe (Textual Int32))
     , _crMutationResults :: !(Maybe [MutationResult])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitResponse' with the minimum fields required to make a request.
 --
@@ -2803,10 +2824,7 @@ data CommitResponse = CommitResponse'
 commitResponse
     :: CommitResponse
 commitResponse =
-    CommitResponse'
-    { _crIndexUpdates = Nothing
-    , _crMutationResults = Nothing
-    }
+  CommitResponse' {_crIndexUpdates = Nothing, _crMutationResults = Nothing}
 
 -- | The number of index entries updated during the commit, or zero if none
 -- were updated.
@@ -2843,9 +2861,11 @@ instance ToJSON CommitResponse where
 -- | A representation of a kind.
 --
 -- /See:/ 'kindExpression' smart constructor.
-newtype KindExpression = KindExpression'
+newtype KindExpression =
+  KindExpression'
     { _keName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'KindExpression' with the minimum fields required to make a request.
 --
@@ -2854,10 +2874,7 @@ newtype KindExpression = KindExpression'
 -- * 'keName'
 kindExpression
     :: KindExpression
-kindExpression =
-    KindExpression'
-    { _keName = Nothing
-    }
+kindExpression = KindExpression' {_keName = Nothing}
 
 -- | The name of the kind.
 keName :: Lens' KindExpression (Maybe Text)
@@ -2882,9 +2899,11 @@ instance ToJSON KindExpression where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'googleLongrunningOperationResponse' smart constructor.
-newtype GoogleLongrunningOperationResponse = GoogleLongrunningOperationResponse'
+newtype GoogleLongrunningOperationResponse =
+  GoogleLongrunningOperationResponse'
     { _glorAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleLongrunningOperationResponse' with the minimum fields required to make a request.
 --
@@ -2895,9 +2914,8 @@ googleLongrunningOperationResponse
     :: HashMap Text JSONValue -- ^ 'glorAddtional'
     -> GoogleLongrunningOperationResponse
 googleLongrunningOperationResponse pGlorAddtional_ =
-    GoogleLongrunningOperationResponse'
-    { _glorAddtional = _Coerce # pGlorAddtional_
-    }
+  GoogleLongrunningOperationResponse'
+    {_glorAddtional = _Coerce # pGlorAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunningOperationResponse (HashMap Text JSONValue)
@@ -2921,10 +2939,12 @@ instance ToJSON GoogleLongrunningOperationResponse
 -- | The options shared by read requests.
 --
 -- /See:/ 'readOptions' smart constructor.
-data ReadOptions = ReadOptions'
+data ReadOptions =
+  ReadOptions'
     { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
     , _roTransaction     :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReadOptions' with the minimum fields required to make a request.
 --
@@ -2936,10 +2956,7 @@ data ReadOptions = ReadOptions'
 readOptions
     :: ReadOptions
 readOptions =
-    ReadOptions'
-    { _roReadConsistency = Nothing
-    , _roTransaction = Nothing
-    }
+  ReadOptions' {_roReadConsistency = Nothing, _roTransaction = Nothing}
 
 -- | The non-transactional read consistency to use. Cannot be set to
 -- \`STRONG\` for global queries.
@@ -2981,10 +2998,12 @@ instance ToJSON ReadOptions where
 -- kinds=[], namespace_ids=[\'Baz\']
 --
 -- /See:/ 'googleDatastoreAdminV1EntityFilter' smart constructor.
-data GoogleDatastoreAdminV1EntityFilter = GoogleDatastoreAdminV1EntityFilter'
+data GoogleDatastoreAdminV1EntityFilter =
+  GoogleDatastoreAdminV1EntityFilter'
     { _gdavefNamespaceIds :: !(Maybe [Text])
     , _gdavefKinds        :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1EntityFilter' with the minimum fields required to make a request.
 --
@@ -2996,10 +3015,8 @@ data GoogleDatastoreAdminV1EntityFilter = GoogleDatastoreAdminV1EntityFilter'
 googleDatastoreAdminV1EntityFilter
     :: GoogleDatastoreAdminV1EntityFilter
 googleDatastoreAdminV1EntityFilter =
-    GoogleDatastoreAdminV1EntityFilter'
-    { _gdavefNamespaceIds = Nothing
-    , _gdavefKinds = Nothing
-    }
+  GoogleDatastoreAdminV1EntityFilter'
+    {_gdavefNamespaceIds = Nothing, _gdavefKinds = Nothing}
 
 -- | An empty list represents all namespaces. This is the preferred usage for
 -- projects that don\'t use namespaces. An empty string element represents
@@ -3041,8 +3058,8 @@ instance ToJSON GoogleDatastoreAdminV1EntityFilter
 --
 -- /See:/ 'rollbackResponse' smart constructor.
 data RollbackResponse =
-    RollbackResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  RollbackResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RollbackResponse' with the minimum fields required to make a request.
 --
@@ -3061,9 +3078,11 @@ instance ToJSON RollbackResponse where
 -- | A representation of a property in a projection.
 --
 -- /See:/ 'projection' smart constructor.
-newtype Projection = Projection'
+newtype Projection =
+  Projection'
     { _pProperty :: Maybe PropertyReference
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Projection' with the minimum fields required to make a request.
 --
@@ -3072,10 +3091,7 @@ newtype Projection = Projection'
 -- * 'pProperty'
 projection
     :: Projection
-projection =
-    Projection'
-    { _pProperty = Nothing
-    }
+projection = Projection' {_pProperty = Nothing}
 
 -- | The property to project.
 pProperty :: Lens' Projection (Maybe PropertyReference)
@@ -3095,8 +3111,8 @@ instance ToJSON Projection where
 --
 -- /See:/ 'reserveIdsResponse' smart constructor.
 data ReserveIdsResponse =
-    ReserveIdsResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ReserveIdsResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReserveIdsResponse' with the minimum fields required to make a request.
 --
@@ -3115,10 +3131,12 @@ instance ToJSON ReserveIdsResponse where
 -- | A holder for any type of filter.
 --
 -- /See:/ 'filter'' smart constructor.
-data Filter = Filter'
+data Filter =
+  Filter'
     { _fCompositeFilter :: !(Maybe CompositeFilter)
     , _fPropertyFilter  :: !(Maybe PropertyFilter)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
@@ -3129,11 +3147,7 @@ data Filter = Filter'
 -- * 'fPropertyFilter'
 filter'
     :: Filter
-filter' =
-    Filter'
-    { _fCompositeFilter = Nothing
-    , _fPropertyFilter = Nothing
-    }
+filter' = Filter' {_fCompositeFilter = Nothing, _fPropertyFilter = Nothing}
 
 -- | A composite filter.
 fCompositeFilter :: Lens' Filter (Maybe CompositeFilter)
@@ -3165,14 +3179,16 @@ instance ToJSON Filter where
 -- | A minimal index definition.
 --
 -- /See:/ 'googleDatastoreAdminV1Index' smart constructor.
-data GoogleDatastoreAdminV1Index = GoogleDatastoreAdminV1Index'
+data GoogleDatastoreAdminV1Index =
+  GoogleDatastoreAdminV1Index'
     { _gdaviState      :: !(Maybe GoogleDatastoreAdminV1IndexState)
     , _gdaviKind       :: !(Maybe Text)
     , _gdaviProjectId  :: !(Maybe Text)
     , _gdaviIndexId    :: !(Maybe Text)
     , _gdaviAncestor   :: !(Maybe GoogleDatastoreAdminV1IndexAncestor)
     , _gdaviProperties :: !(Maybe [GoogleDatastoreAdminV1IndexedProperty])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1Index' with the minimum fields required to make a request.
 --
@@ -3192,7 +3208,7 @@ data GoogleDatastoreAdminV1Index = GoogleDatastoreAdminV1Index'
 googleDatastoreAdminV1Index
     :: GoogleDatastoreAdminV1Index
 googleDatastoreAdminV1Index =
-    GoogleDatastoreAdminV1Index'
+  GoogleDatastoreAdminV1Index'
     { _gdaviState = Nothing
     , _gdaviKind = Nothing
     , _gdaviProjectId = Nothing
@@ -3264,9 +3280,11 @@ instance ToJSON GoogleDatastoreAdminV1Index where
 -- created. May also include additional labels.
 --
 -- /See:/ 'googleDatastoreAdminV1beta1CommonMetadataLabels' smart constructor.
-newtype GoogleDatastoreAdminV1beta1CommonMetadataLabels = GoogleDatastoreAdminV1beta1CommonMetadataLabels'
+newtype GoogleDatastoreAdminV1beta1CommonMetadataLabels =
+  GoogleDatastoreAdminV1beta1CommonMetadataLabels'
     { _gAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1CommonMetadataLabels' with the minimum fields required to make a request.
 --
@@ -3277,9 +3295,8 @@ googleDatastoreAdminV1beta1CommonMetadataLabels
     :: HashMap Text Text -- ^ 'gAddtional'
     -> GoogleDatastoreAdminV1beta1CommonMetadataLabels
 googleDatastoreAdminV1beta1CommonMetadataLabels pGAddtional_ =
-    GoogleDatastoreAdminV1beta1CommonMetadataLabels'
-    { _gAddtional = _Coerce # pGAddtional_
-    }
+  GoogleDatastoreAdminV1beta1CommonMetadataLabels'
+    {_gAddtional = _Coerce # pGAddtional_}
 
 gAddtional :: Lens' GoogleDatastoreAdminV1beta1CommonMetadataLabels (HashMap Text Text)
 gAddtional
@@ -3287,7 +3304,8 @@ gAddtional
       _Coerce
 
 instance FromJSON
-         GoogleDatastoreAdminV1beta1CommonMetadataLabels where
+           GoogleDatastoreAdminV1beta1CommonMetadataLabels
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1beta1CommonMetadataLabels"
@@ -3296,17 +3314,20 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleDatastoreAdminV1beta1CommonMetadataLabels where
+           GoogleDatastoreAdminV1beta1CommonMetadataLabels
+         where
         toJSON = toJSON . _gAddtional
 
 -- | The request for Datastore.Commit.
 --
 -- /See:/ 'commitRequest' smart constructor.
-data CommitRequest = CommitRequest'
+data CommitRequest =
+  CommitRequest'
     { _crMutations   :: !(Maybe [Mutation])
     , _crMode        :: !(Maybe CommitRequestMode)
     , _crTransaction :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
 --
@@ -3320,11 +3341,8 @@ data CommitRequest = CommitRequest'
 commitRequest
     :: CommitRequest
 commitRequest =
-    CommitRequest'
-    { _crMutations = Nothing
-    , _crMode = Nothing
-    , _crTransaction = Nothing
-    }
+  CommitRequest'
+    {_crMutations = Nothing, _crMode = Nothing, _crTransaction = Nothing}
 
 -- | The mutations to perform. When mode is \`TRANSACTIONAL\`, mutations
 -- affecting a single entity are applied in order. The following sequences
@@ -3371,10 +3389,12 @@ instance ToJSON CommitRequest where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'googleLongrunningListOperationsResponse' smart constructor.
-data GoogleLongrunningListOperationsResponse = GoogleLongrunningListOperationsResponse'
+data GoogleLongrunningListOperationsResponse =
+  GoogleLongrunningListOperationsResponse'
     { _gllorNextPageToken :: !(Maybe Text)
     , _gllorOperations    :: !(Maybe [GoogleLongrunningOperation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleLongrunningListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -3386,10 +3406,8 @@ data GoogleLongrunningListOperationsResponse = GoogleLongrunningListOperationsRe
 googleLongrunningListOperationsResponse
     :: GoogleLongrunningListOperationsResponse
 googleLongrunningListOperationsResponse =
-    GoogleLongrunningListOperationsResponse'
-    { _gllorNextPageToken = Nothing
-    , _gllorOperations = Nothing
-    }
+  GoogleLongrunningListOperationsResponse'
+    {_gllorNextPageToken = Nothing, _gllorOperations = Nothing}
 
 -- | The standard List next-page token.
 gllorNextPageToken :: Lens' GoogleLongrunningListOperationsResponse (Maybe Text)
@@ -3406,7 +3424,8 @@ gllorOperations
       . _Coerce
 
 instance FromJSON
-         GoogleLongrunningListOperationsResponse where
+           GoogleLongrunningListOperationsResponse
+         where
         parseJSON
           = withObject
               "GoogleLongrunningListOperationsResponse"
@@ -3416,7 +3435,8 @@ instance FromJSON
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON
-         GoogleLongrunningListOperationsResponse where
+           GoogleLongrunningListOperationsResponse
+         where
         toJSON GoogleLongrunningListOperationsResponse'{..}
           = object
               (catMaybes
@@ -3426,13 +3446,15 @@ instance ToJSON
 -- | Metadata for ImportEntities operations.
 --
 -- /See:/ 'googleDatastoreAdminV1ImportEntitiesMetadata' smart constructor.
-data GoogleDatastoreAdminV1ImportEntitiesMetadata = GoogleDatastoreAdminV1ImportEntitiesMetadata'
+data GoogleDatastoreAdminV1ImportEntitiesMetadata =
+  GoogleDatastoreAdminV1ImportEntitiesMetadata'
     { _gProgressBytes    :: !(Maybe GoogleDatastoreAdminV1Progress)
     , _gProgressEntities :: !(Maybe GoogleDatastoreAdminV1Progress)
     , _gEntityFilter     :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
     , _gInputURL         :: !(Maybe Text)
     , _gCommon           :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1ImportEntitiesMetadata' with the minimum fields required to make a request.
 --
@@ -3450,7 +3472,7 @@ data GoogleDatastoreAdminV1ImportEntitiesMetadata = GoogleDatastoreAdminV1Import
 googleDatastoreAdminV1ImportEntitiesMetadata
     :: GoogleDatastoreAdminV1ImportEntitiesMetadata
 googleDatastoreAdminV1ImportEntitiesMetadata =
-    GoogleDatastoreAdminV1ImportEntitiesMetadata'
+  GoogleDatastoreAdminV1ImportEntitiesMetadata'
     { _gProgressBytes = Nothing
     , _gProgressEntities = Nothing
     , _gEntityFilter = Nothing
@@ -3487,7 +3509,8 @@ gCommon :: Lens' GoogleDatastoreAdminV1ImportEntitiesMetadata (Maybe GoogleDatas
 gCommon = lens _gCommon (\ s a -> s{_gCommon = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1ImportEntitiesMetadata where
+           GoogleDatastoreAdminV1ImportEntitiesMetadata
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1ImportEntitiesMetadata"
@@ -3500,7 +3523,8 @@ instance FromJSON
                      <*> (o .:? "common"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1ImportEntitiesMetadata where
+           GoogleDatastoreAdminV1ImportEntitiesMetadata
+         where
         toJSON
           GoogleDatastoreAdminV1ImportEntitiesMetadata'{..}
           = object
@@ -3514,10 +3538,12 @@ instance ToJSON
 -- | Measures the progress of a particular metric.
 --
 -- /See:/ 'googleDatastoreAdminV1Progress' smart constructor.
-data GoogleDatastoreAdminV1Progress = GoogleDatastoreAdminV1Progress'
+data GoogleDatastoreAdminV1Progress =
+  GoogleDatastoreAdminV1Progress'
     { _gWorkCompleted :: !(Maybe (Textual Int64))
     , _gWorkEstimated :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1Progress' with the minimum fields required to make a request.
 --
@@ -3529,10 +3555,8 @@ data GoogleDatastoreAdminV1Progress = GoogleDatastoreAdminV1Progress'
 googleDatastoreAdminV1Progress
     :: GoogleDatastoreAdminV1Progress
 googleDatastoreAdminV1Progress =
-    GoogleDatastoreAdminV1Progress'
-    { _gWorkCompleted = Nothing
-    , _gWorkEstimated = Nothing
-    }
+  GoogleDatastoreAdminV1Progress'
+    {_gWorkCompleted = Nothing, _gWorkEstimated = Nothing}
 
 -- | The amount of work that has been completed. Note that this may be
 -- greater than work_estimated.
@@ -3570,11 +3594,13 @@ instance ToJSON GoogleDatastoreAdminV1Progress where
 -- incomplete.
 --
 -- /See:/ 'pathElement' smart constructor.
-data PathElement = PathElement'
+data PathElement =
+  PathElement'
     { _peKind :: !(Maybe Text)
     , _peName :: !(Maybe Text)
     , _peId   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PathElement' with the minimum fields required to make a request.
 --
@@ -3588,11 +3614,7 @@ data PathElement = PathElement'
 pathElement
     :: PathElement
 pathElement =
-    PathElement'
-    { _peKind = Nothing
-    , _peName = Nothing
-    , _peId = Nothing
-    }
+  PathElement' {_peKind = Nothing, _peName = Nothing, _peId = Nothing}
 
 -- | The kind of the entity. A kind matching regex \`__.*__\` is
 -- reserved\/read-only. A kind must not contain more than 1500 bytes when
@@ -3632,10 +3654,12 @@ instance ToJSON PathElement where
 -- form of this message.
 --
 -- /See:/ 'entity' smart constructor.
-data Entity = Entity'
+data Entity =
+  Entity'
     { _eKey        :: !(Maybe Key)
     , _eProperties :: !(Maybe EntityProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Entity' with the minimum fields required to make a request.
 --
@@ -3646,11 +3670,7 @@ data Entity = Entity'
 -- * 'eProperties'
 entity
     :: Entity
-entity =
-    Entity'
-    { _eKey = Nothing
-    , _eProperties = Nothing
-    }
+entity = Entity' {_eKey = Nothing, _eProperties = Nothing}
 
 -- | The entity\'s key. An entity must have a key, unless otherwise
 -- documented (for example, an entity in \`Value.entity_value\` may have no
@@ -3691,10 +3711,12 @@ instance ToJSON Entity where
 -- kinds=[], namespace_ids=[\'Baz\']
 --
 -- /See:/ 'googleDatastoreAdminV1beta1EntityFilter' smart constructor.
-data GoogleDatastoreAdminV1beta1EntityFilter = GoogleDatastoreAdminV1beta1EntityFilter'
+data GoogleDatastoreAdminV1beta1EntityFilter =
+  GoogleDatastoreAdminV1beta1EntityFilter'
     { _gNamespaceIds :: !(Maybe [Text])
     , _gKinds        :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1EntityFilter' with the minimum fields required to make a request.
 --
@@ -3706,10 +3728,8 @@ data GoogleDatastoreAdminV1beta1EntityFilter = GoogleDatastoreAdminV1beta1Entity
 googleDatastoreAdminV1beta1EntityFilter
     :: GoogleDatastoreAdminV1beta1EntityFilter
 googleDatastoreAdminV1beta1EntityFilter =
-    GoogleDatastoreAdminV1beta1EntityFilter'
-    { _gNamespaceIds = Nothing
-    , _gKinds = Nothing
-    }
+  GoogleDatastoreAdminV1beta1EntityFilter'
+    {_gNamespaceIds = Nothing, _gKinds = Nothing}
 
 -- | An empty list represents all namespaces. This is the preferred usage for
 -- projects that don\'t use namespaces. An empty string element represents
@@ -3730,7 +3750,8 @@ gKinds
       _Coerce
 
 instance FromJSON
-         GoogleDatastoreAdminV1beta1EntityFilter where
+           GoogleDatastoreAdminV1beta1EntityFilter
+         where
         parseJSON
           = withObject
               "GoogleDatastoreAdminV1beta1EntityFilter"
@@ -3740,7 +3761,8 @@ instance FromJSON
                      (o .:? "kinds" .!= mempty))
 
 instance ToJSON
-         GoogleDatastoreAdminV1beta1EntityFilter where
+           GoogleDatastoreAdminV1beta1EntityFilter
+         where
         toJSON GoogleDatastoreAdminV1beta1EntityFilter'{..}
           = object
               (catMaybes
@@ -3751,8 +3773,8 @@ instance ToJSON
 --
 -- /See:/ 'readOnly' smart constructor.
 data ReadOnly =
-    ReadOnly'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ReadOnly'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReadOnly' with the minimum fields required to make a request.
 --
@@ -3770,10 +3792,12 @@ instance ToJSON ReadOnly where
 -- | A property of an index.
 --
 -- /See:/ 'googleDatastoreAdminV1IndexedProperty' smart constructor.
-data GoogleDatastoreAdminV1IndexedProperty = GoogleDatastoreAdminV1IndexedProperty'
+data GoogleDatastoreAdminV1IndexedProperty =
+  GoogleDatastoreAdminV1IndexedProperty'
     { _gdavipDirection :: !(Maybe GoogleDatastoreAdminV1IndexedPropertyDirection)
     , _gdavipName      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1IndexedProperty' with the minimum fields required to make a request.
 --
@@ -3785,10 +3809,8 @@ data GoogleDatastoreAdminV1IndexedProperty = GoogleDatastoreAdminV1IndexedProper
 googleDatastoreAdminV1IndexedProperty
     :: GoogleDatastoreAdminV1IndexedProperty
 googleDatastoreAdminV1IndexedProperty =
-    GoogleDatastoreAdminV1IndexedProperty'
-    { _gdavipDirection = Nothing
-    , _gdavipName = Nothing
-    }
+  GoogleDatastoreAdminV1IndexedProperty'
+    {_gdavipDirection = Nothing, _gdavipName = Nothing}
 
 -- | The indexed property\'s direction. Must not be DIRECTION_UNSPECIFIED.
 -- Required.
@@ -3803,7 +3825,8 @@ gdavipName
   = lens _gdavipName (\ s a -> s{_gdavipName = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1IndexedProperty where
+           GoogleDatastoreAdminV1IndexedProperty
+         where
         parseJSON
           = withObject "GoogleDatastoreAdminV1IndexedProperty"
               (\ o ->
@@ -3821,11 +3844,13 @@ instance ToJSON GoogleDatastoreAdminV1IndexedProperty
 -- | The response for Datastore.Lookup.
 --
 -- /See:/ 'lookupResponse' smart constructor.
-data LookupResponse = LookupResponse'
+data LookupResponse =
+  LookupResponse'
     { _lrDeferred :: !(Maybe [Key])
     , _lrFound    :: !(Maybe [EntityResult])
     , _lrMissing  :: !(Maybe [EntityResult])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LookupResponse' with the minimum fields required to make a request.
 --
@@ -3839,11 +3864,8 @@ data LookupResponse = LookupResponse'
 lookupResponse
     :: LookupResponse
 lookupResponse =
-    LookupResponse'
-    { _lrDeferred = Nothing
-    , _lrFound = Nothing
-    , _lrMissing = Nothing
-    }
+  LookupResponse'
+    {_lrDeferred = Nothing, _lrFound = Nothing, _lrMissing = Nothing}
 
 -- | A list of keys that were not looked up due to resource constraints. The
 -- order of results in this field is undefined and has no relation to the
@@ -3892,13 +3914,15 @@ instance ToJSON LookupResponse where
 -- a network API call.
 --
 -- /See:/ 'googleLongrunningOperation' smart constructor.
-data GoogleLongrunningOperation = GoogleLongrunningOperation'
+data GoogleLongrunningOperation =
+  GoogleLongrunningOperation'
     { _gloDone     :: !(Maybe Bool)
     , _gloError    :: !(Maybe Status)
     , _gloResponse :: !(Maybe GoogleLongrunningOperationResponse)
     , _gloName     :: !(Maybe Text)
     , _gloMetadata :: !(Maybe GoogleLongrunningOperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleLongrunningOperation' with the minimum fields required to make a request.
 --
@@ -3916,7 +3940,7 @@ data GoogleLongrunningOperation = GoogleLongrunningOperation'
 googleLongrunningOperation
     :: GoogleLongrunningOperation
 googleLongrunningOperation =
-    GoogleLongrunningOperation'
+  GoogleLongrunningOperation'
     { _gloDone = Nothing
     , _gloError = Nothing
     , _gloResponse = Nothing
@@ -3983,10 +4007,12 @@ instance ToJSON GoogleLongrunningOperation where
 -- | The desired order for a specific property.
 --
 -- /See:/ 'propertyOrder' smart constructor.
-data PropertyOrder = PropertyOrder'
+data PropertyOrder =
+  PropertyOrder'
     { _poProperty  :: !(Maybe PropertyReference)
     , _poDirection :: !(Maybe PropertyOrderDirection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PropertyOrder' with the minimum fields required to make a request.
 --
@@ -3997,11 +4023,7 @@ data PropertyOrder = PropertyOrder'
 -- * 'poDirection'
 propertyOrder
     :: PropertyOrder
-propertyOrder =
-    PropertyOrder'
-    { _poProperty = Nothing
-    , _poDirection = Nothing
-    }
+propertyOrder = PropertyOrder' {_poProperty = Nothing, _poDirection = Nothing}
 
 -- | The property to order by.
 poProperty :: Lens' PropertyOrder (Maybe PropertyReference)
@@ -4030,13 +4052,15 @@ instance ToJSON PropertyOrder where
 -- | Metadata for ExportEntities operations.
 --
 -- /See:/ 'googleDatastoreAdminV1beta1ExportEntitiesMetadata' smart constructor.
-data GoogleDatastoreAdminV1beta1ExportEntitiesMetadata = GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'
+data GoogleDatastoreAdminV1beta1ExportEntitiesMetadata =
+  GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'
     { _gooProgressBytes    :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
     , _gooOutputURLPrefix  :: !(Maybe Text)
     , _gooProgressEntities :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
     , _gooEntityFilter     :: !(Maybe GoogleDatastoreAdminV1beta1EntityFilter)
     , _gooCommon           :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1ExportEntitiesMetadata' with the minimum fields required to make a request.
 --
@@ -4054,7 +4078,7 @@ data GoogleDatastoreAdminV1beta1ExportEntitiesMetadata = GoogleDatastoreAdminV1b
 googleDatastoreAdminV1beta1ExportEntitiesMetadata
     :: GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
 googleDatastoreAdminV1beta1ExportEntitiesMetadata =
-    GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'
+  GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'
     { _gooProgressBytes = Nothing
     , _gooOutputURLPrefix = Nothing
     , _gooProgressEntities = Nothing
@@ -4096,7 +4120,7 @@ gooCommon
   = lens _gooCommon (\ s a -> s{_gooCommon = a})
 
 instance FromJSON
-         GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
+           GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
          where
         parseJSON
           = withObject
@@ -4110,7 +4134,7 @@ instance FromJSON
                      <*> (o .:? "common"))
 
 instance ToJSON
-         GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
+           GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
          where
         toJSON
           GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'{..}
@@ -4125,10 +4149,12 @@ instance ToJSON
 -- | A binding parameter for a GQL query.
 --
 -- /See:/ 'gqlQueryParameter' smart constructor.
-data GqlQueryParameter = GqlQueryParameter'
+data GqlQueryParameter =
+  GqlQueryParameter'
     { _gqpCursor :: !(Maybe Bytes)
     , _gqpValue  :: !(Maybe Value)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GqlQueryParameter' with the minimum fields required to make a request.
 --
@@ -4140,10 +4166,7 @@ data GqlQueryParameter = GqlQueryParameter'
 gqlQueryParameter
     :: GqlQueryParameter
 gqlQueryParameter =
-    GqlQueryParameter'
-    { _gqpCursor = Nothing
-    , _gqpValue = Nothing
-    }
+  GqlQueryParameter' {_gqpCursor = Nothing, _gqpValue = Nothing}
 
 -- | A query cursor. Query cursors are returned in query result batches.
 gqpCursor :: Lens' GqlQueryParameter (Maybe ByteString)

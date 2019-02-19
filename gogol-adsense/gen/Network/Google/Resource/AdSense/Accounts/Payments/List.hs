@@ -52,9 +52,11 @@ type AccountsPaymentsListResource =
 -- | List the payments for the specified AdSense account.
 --
 -- /See:/ 'accountsPaymentsList' smart constructor.
-newtype AccountsPaymentsList = AccountsPaymentsList'
+newtype AccountsPaymentsList =
+  AccountsPaymentsList'
     { _aplAccountId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsPaymentsList' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ accountsPaymentsList
     :: Text -- ^ 'aplAccountId'
     -> AccountsPaymentsList
 accountsPaymentsList pAplAccountId_ =
-    AccountsPaymentsList'
-    { _aplAccountId = pAplAccountId_
-    }
+  AccountsPaymentsList' {_aplAccountId = pAplAccountId_}
 
 -- | Account for which to retrieve the payments.
 aplAccountId :: Lens' AccountsPaymentsList Text

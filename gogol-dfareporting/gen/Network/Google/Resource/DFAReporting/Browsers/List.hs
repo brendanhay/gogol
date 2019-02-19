@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'BrowsersList' request conforms to.
 type BrowsersListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "browsers" :>
@@ -53,9 +53,11 @@ type BrowsersListResource =
 -- | Retrieves a list of browsers.
 --
 -- /See:/ 'browsersList' smart constructor.
-newtype BrowsersList = BrowsersList'
+newtype BrowsersList =
+  BrowsersList'
     { _blProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BrowsersList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ browsersList
     :: Int64 -- ^ 'blProFileId'
     -> BrowsersList
 browsersList pBlProFileId_ =
-    BrowsersList'
-    { _blProFileId = _Coerce # pBlProFileId_
-    }
+  BrowsersList' {_blProFileId = _Coerce # pBlProFileId_}
 
 -- | User profile ID associated with this request.
 blProFileId :: Lens' BrowsersList Int64

@@ -63,7 +63,8 @@ type PresentationsPagesGetResource =
 -- | Gets the latest version of the specified page in the presentation.
 --
 -- /See:/ 'presentationsPagesGet' smart constructor.
-data PresentationsPagesGet = PresentationsPagesGet'
+data PresentationsPagesGet =
+  PresentationsPagesGet'
     { _ppgXgafv          :: !(Maybe Xgafv)
     , _ppgUploadProtocol :: !(Maybe Text)
     , _ppgAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data PresentationsPagesGet = PresentationsPagesGet'
     , _ppgUploadType     :: !(Maybe Text)
     , _ppgPresentationId :: !Text
     , _ppgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PresentationsPagesGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ presentationsPagesGet
     -> Text -- ^ 'ppgPresentationId'
     -> PresentationsPagesGet
 presentationsPagesGet pPpgPageObjectId_ pPpgPresentationId_ =
-    PresentationsPagesGet'
+  PresentationsPagesGet'
     { _ppgXgafv = Nothing
     , _ppgUploadProtocol = Nothing
     , _ppgAccessToken = Nothing

@@ -66,11 +66,13 @@ type QuerySQLResource =
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
 --
 -- /See:/ 'querySQL' smart constructor.
-data QuerySQL = QuerySQL'
+data QuerySQL =
+  QuerySQL'
     { _qsqlTyped :: !(Maybe Bool)
     , _qsqlHdrs  :: !(Maybe Bool)
     , _qsqlSQL   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuerySQL' with the minimum fields required to make a request.
 --
@@ -85,11 +87,7 @@ querySQL
     :: Text -- ^ 'qsqlSQL'
     -> QuerySQL
 querySQL pQsqlSQL_ =
-    QuerySQL'
-    { _qsqlTyped = Nothing
-    , _qsqlHdrs = Nothing
-    , _qsqlSQL = pQsqlSQL_
-    }
+  QuerySQL' {_qsqlTyped = Nothing, _qsqlHdrs = Nothing, _qsqlSQL = pQsqlSQL_}
 
 -- | Whether typed values are returned in the (JSON) response: numbers for
 -- numeric values and parsed geometries for KML values. Default is true.

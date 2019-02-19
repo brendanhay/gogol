@@ -58,11 +58,13 @@ type AcceleratorTypesGetResource =
 -- | Returns the specified accelerator type.
 --
 -- /See:/ 'acceleratorTypesGet' smart constructor.
-data AcceleratorTypesGet = AcceleratorTypesGet'
+data AcceleratorTypesGet =
+  AcceleratorTypesGet'
     { _atgAcceleratorType :: !Text
     , _atgProject         :: !Text
     , _atgZone            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypesGet' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ acceleratorTypesGet
     -> Text -- ^ 'atgZone'
     -> AcceleratorTypesGet
 acceleratorTypesGet pAtgAcceleratorType_ pAtgProject_ pAtgZone_ =
-    AcceleratorTypesGet'
+  AcceleratorTypesGet'
     { _atgAcceleratorType = pAtgAcceleratorType_
     , _atgProject = pAtgProject_
     , _atgZone = pAtgZone_

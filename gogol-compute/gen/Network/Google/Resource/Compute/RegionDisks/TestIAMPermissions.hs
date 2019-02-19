@@ -61,12 +61,14 @@ type RegionDisksTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'regionDisksTestIAMPermissions' smart constructor.
-data RegionDisksTestIAMPermissions = RegionDisksTestIAMPermissions'
+data RegionDisksTestIAMPermissions =
+  RegionDisksTestIAMPermissions'
     { _rdtipProject  :: !Text
     , _rdtipPayload  :: !TestPermissionsRequest
     , _rdtipResource :: !Text
     , _rdtipRegion   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionDisksTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ regionDisksTestIAMPermissions
     -> Text -- ^ 'rdtipRegion'
     -> RegionDisksTestIAMPermissions
 regionDisksTestIAMPermissions pRdtipProject_ pRdtipPayload_ pRdtipResource_ pRdtipRegion_ =
-    RegionDisksTestIAMPermissions'
+  RegionDisksTestIAMPermissions'
     { _rdtipProject = pRdtipProject_
     , _rdtipPayload = pRdtipPayload_
     , _rdtipResource = pRdtipResource_

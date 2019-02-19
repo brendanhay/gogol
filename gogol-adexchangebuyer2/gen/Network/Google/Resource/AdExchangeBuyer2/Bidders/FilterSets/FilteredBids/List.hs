@@ -67,7 +67,8 @@ type BiddersFilterSetsFilteredBidsListResource =
 -- filtered for each reason.
 --
 -- /See:/ 'biddersFilterSetsFilteredBidsList' smart constructor.
-data BiddersFilterSetsFilteredBidsList = BiddersFilterSetsFilteredBidsList'
+data BiddersFilterSetsFilteredBidsList =
+  BiddersFilterSetsFilteredBidsList'
     { _bfsfblXgafv          :: !(Maybe Xgafv)
     , _bfsfblUploadProtocol :: !(Maybe Text)
     , _bfsfblFilterSetName  :: !Text
@@ -76,7 +77,8 @@ data BiddersFilterSetsFilteredBidsList = BiddersFilterSetsFilteredBidsList'
     , _bfsfblPageToken      :: !(Maybe Text)
     , _bfsfblPageSize       :: !(Maybe (Textual Int32))
     , _bfsfblCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BiddersFilterSetsFilteredBidsList' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ biddersFilterSetsFilteredBidsList
     :: Text -- ^ 'bfsfblFilterSetName'
     -> BiddersFilterSetsFilteredBidsList
 biddersFilterSetsFilteredBidsList pBfsfblFilterSetName_ =
-    BiddersFilterSetsFilteredBidsList'
+  BiddersFilterSetsFilteredBidsList'
     { _bfsfblXgafv = Nothing
     , _bfsfblUploadProtocol = Nothing
     , _bfsfblFilterSetName = pBfsfblFilterSetName_
@@ -170,7 +172,8 @@ bfsfblCallback
       (\ s a -> s{_bfsfblCallback = a})
 
 instance GoogleRequest
-         BiddersFilterSetsFilteredBidsList where
+           BiddersFilterSetsFilteredBidsList
+         where
         type Rs BiddersFilterSetsFilteredBidsList =
              ListFilteredBidsResponse
         type Scopes BiddersFilterSetsFilteredBidsList =

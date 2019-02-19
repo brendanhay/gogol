@@ -67,7 +67,8 @@ type ProjectsInstancesTablesListResource =
 -- | Lists all tables served from a specified instance.
 --
 -- /See:/ 'projectsInstancesTablesList' smart constructor.
-data ProjectsInstancesTablesList = ProjectsInstancesTablesList'
+data ProjectsInstancesTablesList =
+  ProjectsInstancesTablesList'
     { _pitlParent         :: !Text
     , _pitlXgafv          :: !(Maybe Xgafv)
     , _pitlUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsInstancesTablesList = ProjectsInstancesTablesList'
     , _pitlPageToken      :: !(Maybe Text)
     , _pitlPageSize       :: !(Maybe (Textual Int32))
     , _pitlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesTablesList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsInstancesTablesList
     :: Text -- ^ 'pitlParent'
     -> ProjectsInstancesTablesList
 projectsInstancesTablesList pPitlParent_ =
-    ProjectsInstancesTablesList'
+  ProjectsInstancesTablesList'
     { _pitlParent = pPitlParent_
     , _pitlXgafv = Nothing
     , _pitlUploadProtocol = Nothing

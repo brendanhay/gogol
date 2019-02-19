@@ -65,7 +65,8 @@ type ProjectsRegionsWorkflowTemplatesSetIAMPolicyResource
 -- existing policy.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesSetIAMPolicy' smart constructor.
-data ProjectsRegionsWorkflowTemplatesSetIAMPolicy = ProjectsRegionsWorkflowTemplatesSetIAMPolicy'
+data ProjectsRegionsWorkflowTemplatesSetIAMPolicy =
+  ProjectsRegionsWorkflowTemplatesSetIAMPolicy'
     { _prwtsipXgafv          :: !(Maybe Xgafv)
     , _prwtsipUploadProtocol :: !(Maybe Text)
     , _prwtsipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsRegionsWorkflowTemplatesSetIAMPolicy = ProjectsRegionsWorkflowTempl
     , _prwtsipPayload        :: !SetIAMPolicyRequest
     , _prwtsipResource       :: !Text
     , _prwtsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ projectsRegionsWorkflowTemplatesSetIAMPolicy
     -> Text -- ^ 'prwtsipResource'
     -> ProjectsRegionsWorkflowTemplatesSetIAMPolicy
 projectsRegionsWorkflowTemplatesSetIAMPolicy pPrwtsipPayload_ pPrwtsipResource_ =
-    ProjectsRegionsWorkflowTemplatesSetIAMPolicy'
+  ProjectsRegionsWorkflowTemplatesSetIAMPolicy'
     { _prwtsipXgafv = Nothing
     , _prwtsipUploadProtocol = Nothing
     , _prwtsipAccessToken = Nothing
@@ -150,7 +152,8 @@ prwtsipCallback
       (\ s a -> s{_prwtsipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsWorkflowTemplatesSetIAMPolicy where
+           ProjectsRegionsWorkflowTemplatesSetIAMPolicy
+         where
         type Rs ProjectsRegionsWorkflowTemplatesSetIAMPolicy
              = Policy
         type Scopes

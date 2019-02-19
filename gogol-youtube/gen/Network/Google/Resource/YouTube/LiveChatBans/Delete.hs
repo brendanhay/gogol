@@ -52,9 +52,11 @@ type LiveChatBansDeleteResource =
 -- | Removes a chat ban.
 --
 -- /See:/ 'liveChatBansDelete' smart constructor.
-newtype LiveChatBansDelete = LiveChatBansDelete'
+newtype LiveChatBansDelete =
+  LiveChatBansDelete'
     { _lcbdId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiveChatBansDelete' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype LiveChatBansDelete = LiveChatBansDelete'
 liveChatBansDelete
     :: Text -- ^ 'lcbdId'
     -> LiveChatBansDelete
-liveChatBansDelete pLcbdId_ =
-    LiveChatBansDelete'
-    { _lcbdId = pLcbdId_
-    }
+liveChatBansDelete pLcbdId_ = LiveChatBansDelete' {_lcbdId = pLcbdId_}
 
 -- | The id parameter identifies the chat ban to remove. The value uniquely
 -- identifies both the ban and the chat.

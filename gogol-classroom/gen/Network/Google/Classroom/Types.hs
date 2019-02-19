@@ -530,76 +530,76 @@ classroomService
 
 -- | View your Google Classroom class rosters
 classroomRostersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.rosters.readonly"]
-classroomRostersReadOnlyScope = Proxy;
+classroomRostersReadOnlyScope = Proxy
 
 -- | Manage your Google Classroom classes
 classroomCoursesScope :: Proxy '["https://www.googleapis.com/auth/classroom.courses"]
-classroomCoursesScope = Proxy;
+classroomCoursesScope = Proxy
 
 -- | Receive notifications about your Google Classroom data
 classroomPushNotificationsScope :: Proxy '["https://www.googleapis.com/auth/classroom.push-notifications"]
-classroomPushNotificationsScope = Proxy;
+classroomPushNotificationsScope = Proxy
 
 -- | View course work and grades for students in the Google Classroom classes
 -- you teach or administer
 classroomCourseworkStudentsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.coursework.students.readonly"]
-classroomCourseworkStudentsReadOnlyScope = Proxy;
+classroomCourseworkStudentsReadOnlyScope = Proxy
 
 -- | View the email addresses of people in your classes
 classroomProFileEmailsScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.emails"]
-classroomProFileEmailsScope = Proxy;
+classroomProFileEmailsScope = Proxy
 
 -- | View the profile photos of people in your classes
 classroomProFilePhotosScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.photos"]
-classroomProFilePhotosScope = Proxy;
+classroomProFilePhotosScope = Proxy
 
 -- | Manage your course work and view your grades in Google Classroom
 classroomCourseworkMeScope :: Proxy '["https://www.googleapis.com/auth/classroom.coursework.me"]
-classroomCourseworkMeScope = Proxy;
+classroomCourseworkMeScope = Proxy
 
 -- | View announcements in Google Classroom
 classroomAnnouncementsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.announcements.readonly"]
-classroomAnnouncementsReadOnlyScope = Proxy;
+classroomAnnouncementsReadOnlyScope = Proxy
 
 -- | View and manage guardians for students in your Google Classroom classes
 classroomGuardianlinksStudentsScope :: Proxy '["https://www.googleapis.com/auth/classroom.guardianlinks.students"]
-classroomGuardianlinksStudentsScope = Proxy;
+classroomGuardianlinksStudentsScope = Proxy
 
 -- | View course work and grades for students in the Google Classroom classes
 -- you teach or administer
 classroomStudentSubmissionsStudentsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"]
-classroomStudentSubmissionsStudentsReadOnlyScope = Proxy;
+classroomStudentSubmissionsStudentsReadOnlyScope = Proxy
 
 -- | View your Google Classroom guardians
 classroomGuardianlinksMeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly"]
-classroomGuardianlinksMeReadOnlyScope = Proxy;
+classroomGuardianlinksMeReadOnlyScope = Proxy
 
 -- | Manage your Google Classroom class rosters
 classroomRostersScope :: Proxy '["https://www.googleapis.com/auth/classroom.rosters"]
-classroomRostersScope = Proxy;
+classroomRostersScope = Proxy
 
 -- | View your Google Classroom classes
 classroomCoursesReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.courses.readonly"]
-classroomCoursesReadOnlyScope = Proxy;
+classroomCoursesReadOnlyScope = Proxy
 
 -- | Manage course work and grades for students in the Google Classroom
 -- classes you teach and view the course work and grades for classes you
 -- administer
 classroomCourseworkStudentsScope :: Proxy '["https://www.googleapis.com/auth/classroom.coursework.students"]
-classroomCourseworkStudentsScope = Proxy;
+classroomCourseworkStudentsScope = Proxy
 
 -- | View and manage announcements in Google Classroom
 classroomAnnouncementsScope :: Proxy '["https://www.googleapis.com/auth/classroom.announcements"]
-classroomAnnouncementsScope = Proxy;
+classroomAnnouncementsScope = Proxy
 
 -- | View your course work and grades in Google Classroom
 classroomCourseworkMeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.coursework.me.readonly"]
-classroomCourseworkMeReadOnlyScope = Proxy;
+classroomCourseworkMeReadOnlyScope = Proxy
 
 -- | View your course work and grades in Google Classroom
 classroomStudentSubmissionsMeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"]
-classroomStudentSubmissionsMeReadOnlyScope = Proxy;
+classroomStudentSubmissionsMeReadOnlyScope = Proxy
 
 -- | View guardians for students in your Google Classroom classes
 classroomGuardianlinksStudentsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"]
-classroomGuardianlinksStudentsReadOnlyScope = Proxy;
+classroomGuardianlinksStudentsReadOnlyScope = Proxy

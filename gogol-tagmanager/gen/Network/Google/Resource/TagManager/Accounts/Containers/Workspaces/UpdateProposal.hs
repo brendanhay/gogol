@@ -54,10 +54,12 @@ type AccountsContainersWorkspacesUpdateProposalResource
 -- | Updates a GTM Workspace Proposal.
 --
 -- /See:/ 'accountsContainersWorkspacesUpdateProposal' smart constructor.
-data AccountsContainersWorkspacesUpdateProposal = AccountsContainersWorkspacesUpdateProposal'
+data AccountsContainersWorkspacesUpdateProposal =
+  AccountsContainersWorkspacesUpdateProposal'
     { _acwupPath    :: !Text
     , _acwupPayload :: !UpdateWorkspaceProposalRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesUpdateProposal' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsContainersWorkspacesUpdateProposal
     -> UpdateWorkspaceProposalRequest -- ^ 'acwupPayload'
     -> AccountsContainersWorkspacesUpdateProposal
 accountsContainersWorkspacesUpdateProposal pAcwupPath_ pAcwupPayload_ =
-    AccountsContainersWorkspacesUpdateProposal'
-    { _acwupPath = pAcwupPath_
-    , _acwupPayload = pAcwupPayload_
-    }
+  AccountsContainersWorkspacesUpdateProposal'
+    {_acwupPath = pAcwupPath_, _acwupPayload = pAcwupPayload_}
 
 -- | GTM workspace proposal\'s relative path: Example:
 -- accounts\/{aid}\/containers\/{cid}\/workspace\/{wid}\/workspace_proposal
@@ -88,7 +88,8 @@ acwupPayload
   = lens _acwupPayload (\ s a -> s{_acwupPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesUpdateProposal where
+           AccountsContainersWorkspacesUpdateProposal
+         where
         type Rs AccountsContainersWorkspacesUpdateProposal =
              WorkspaceProposal
         type Scopes

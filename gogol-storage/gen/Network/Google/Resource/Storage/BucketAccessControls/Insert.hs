@@ -57,11 +57,13 @@ type BucketAccessControlsInsertResource =
 -- | Creates a new ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsInsert' smart constructor.
-data BucketAccessControlsInsert = BucketAccessControlsInsert'
+data BucketAccessControlsInsert =
+  BucketAccessControlsInsert'
     { _baciBucket      :: !Text
     , _baciPayload     :: !BucketAccessControl
     , _baciUserProject :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BucketAccessControlsInsert' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ bucketAccessControlsInsert
     -> BucketAccessControl -- ^ 'baciPayload'
     -> BucketAccessControlsInsert
 bucketAccessControlsInsert pBaciBucket_ pBaciPayload_ =
-    BucketAccessControlsInsert'
+  BucketAccessControlsInsert'
     { _baciBucket = pBaciBucket_
     , _baciPayload = pBaciPayload_
     , _baciUserProject = Nothing

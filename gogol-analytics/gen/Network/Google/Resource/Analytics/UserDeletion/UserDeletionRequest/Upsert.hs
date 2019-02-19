@@ -53,9 +53,11 @@ type UserDeletionUserDeletionRequestUpsertResource =
 -- | Insert or update a user deletion requests.
 --
 -- /See:/ 'userDeletionUserDeletionRequestUpsert' smart constructor.
-newtype UserDeletionUserDeletionRequestUpsert = UserDeletionUserDeletionRequestUpsert'
+newtype UserDeletionUserDeletionRequestUpsert =
+  UserDeletionUserDeletionRequestUpsert'
     { _ududruPayload :: UserDeletionRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserDeletionUserDeletionRequestUpsert' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ userDeletionUserDeletionRequestUpsert
     :: UserDeletionRequest -- ^ 'ududruPayload'
     -> UserDeletionUserDeletionRequestUpsert
 userDeletionUserDeletionRequestUpsert pUdudruPayload_ =
-    UserDeletionUserDeletionRequestUpsert'
-    { _ududruPayload = pUdudruPayload_
-    }
+  UserDeletionUserDeletionRequestUpsert' {_ududruPayload = pUdudruPayload_}
 
 -- | Multipart request metadata.
 ududruPayload :: Lens' UserDeletionUserDeletionRequestUpsert UserDeletionRequest
@@ -77,7 +77,8 @@ ududruPayload
       (\ s a -> s{_ududruPayload = a})
 
 instance GoogleRequest
-         UserDeletionUserDeletionRequestUpsert where
+           UserDeletionUserDeletionRequestUpsert
+         where
         type Rs UserDeletionUserDeletionRequestUpsert =
              UserDeletionRequest
         type Scopes UserDeletionUserDeletionRequestUpsert =

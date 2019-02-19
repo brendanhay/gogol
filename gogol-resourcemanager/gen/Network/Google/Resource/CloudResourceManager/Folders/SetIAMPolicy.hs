@@ -70,7 +70,8 @@ type FoldersSetIAMPolicyResource =
 -- folder.
 --
 -- /See:/ 'foldersSetIAMPolicy' smart constructor.
-data FoldersSetIAMPolicy = FoldersSetIAMPolicy'
+data FoldersSetIAMPolicy =
+  FoldersSetIAMPolicy'
     { _fsipXgafv          :: !(Maybe Xgafv)
     , _fsipUploadProtocol :: !(Maybe Text)
     , _fsipAccessToken    :: !(Maybe Text)
@@ -78,7 +79,8 @@ data FoldersSetIAMPolicy = FoldersSetIAMPolicy'
     , _fsipPayload        :: !SetIAMPolicyRequest
     , _fsipResource       :: !Text
     , _fsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ foldersSetIAMPolicy
     -> Text -- ^ 'fsipResource'
     -> FoldersSetIAMPolicy
 foldersSetIAMPolicy pFsipPayload_ pFsipResource_ =
-    FoldersSetIAMPolicy'
+  FoldersSetIAMPolicy'
     { _fsipXgafv = Nothing
     , _fsipUploadProtocol = Nothing
     , _fsipAccessToken = Nothing

@@ -60,11 +60,13 @@ type NodeGroupsGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'nodeGroupsGetIAMPolicy' smart constructor.
-data NodeGroupsGetIAMPolicy = NodeGroupsGetIAMPolicy'
+data NodeGroupsGetIAMPolicy =
+  NodeGroupsGetIAMPolicy'
     { _nggipProject  :: !Text
     , _nggipZone     :: !Text
     , _nggipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ nodeGroupsGetIAMPolicy
     -> Text -- ^ 'nggipResource'
     -> NodeGroupsGetIAMPolicy
 nodeGroupsGetIAMPolicy pNggipProject_ pNggipZone_ pNggipResource_ =
-    NodeGroupsGetIAMPolicy'
+  NodeGroupsGetIAMPolicy'
     { _nggipProject = pNggipProject_
     , _nggipZone = pNggipZone_
     , _nggipResource = pNggipResource_

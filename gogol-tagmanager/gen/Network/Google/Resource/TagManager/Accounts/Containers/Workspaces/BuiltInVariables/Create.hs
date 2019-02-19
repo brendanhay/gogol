@@ -57,10 +57,12 @@ type AccountsContainersWorkspacesBuiltInVariablesCreateResource
 -- | Creates one or more GTM Built-In Variables.
 --
 -- /See:/ 'accountsContainersWorkspacesBuiltInVariablesCreate' smart constructor.
-data AccountsContainersWorkspacesBuiltInVariablesCreate = AccountsContainersWorkspacesBuiltInVariablesCreate'
+data AccountsContainersWorkspacesBuiltInVariablesCreate =
+  AccountsContainersWorkspacesBuiltInVariablesCreate'
     { _acwbivcParent :: !Text
     , _acwbivcType   :: !(Maybe [AccountsContainersWorkspacesBuilt_in_variablesCreateType])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesBuiltInVariablesCreate' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ accountsContainersWorkspacesBuiltInVariablesCreate
     :: Text -- ^ 'acwbivcParent'
     -> AccountsContainersWorkspacesBuiltInVariablesCreate
 accountsContainersWorkspacesBuiltInVariablesCreate pAcwbivcParent_ =
-    AccountsContainersWorkspacesBuiltInVariablesCreate'
-    { _acwbivcParent = pAcwbivcParent_
-    , _acwbivcType = Nothing
-    }
+  AccountsContainersWorkspacesBuiltInVariablesCreate'
+    {_acwbivcParent = pAcwbivcParent_, _acwbivcType = Nothing}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -93,7 +93,7 @@ acwbivcType
       . _Coerce
 
 instance GoogleRequest
-         AccountsContainersWorkspacesBuiltInVariablesCreate
+           AccountsContainersWorkspacesBuiltInVariablesCreate
          where
         type Rs
                AccountsContainersWorkspacesBuiltInVariablesCreate

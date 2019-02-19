@@ -55,10 +55,12 @@ type PlayersGetResource =
 -- for the currently authenticated user, set playerId to me.
 --
 -- /See:/ 'playersGet' smart constructor.
-data PlayersGet = PlayersGet'
+data PlayersGet =
+  PlayersGet'
     { _pgLanguage :: !(Maybe Text)
     , _pgPlayerId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlayersGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ playersGet
     :: Text -- ^ 'pgPlayerId'
     -> PlayersGet
 playersGet pPgPlayerId_ =
-    PlayersGet'
-    { _pgLanguage = Nothing
-    , _pgPlayerId = pPgPlayerId_
-    }
+  PlayersGet' {_pgLanguage = Nothing, _pgPlayerId = pPgPlayerId_}
 
 -- | The preferred language to use for strings returned by this method.
 pgLanguage :: Lens' PlayersGet (Maybe Text)

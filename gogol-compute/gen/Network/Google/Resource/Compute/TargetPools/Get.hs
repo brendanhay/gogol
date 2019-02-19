@@ -59,11 +59,13 @@ type TargetPoolsGetResource =
 -- by making a list() request.
 --
 -- /See:/ 'targetPoolsGet' smart constructor.
-data TargetPoolsGet = TargetPoolsGet'
+data TargetPoolsGet =
+  TargetPoolsGet'
     { _tpgProject    :: !Text
     , _tpgTargetPool :: !Text
     , _tpgRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ targetPoolsGet
     -> Text -- ^ 'tpgRegion'
     -> TargetPoolsGet
 targetPoolsGet pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
-    TargetPoolsGet'
+  TargetPoolsGet'
     { _tpgProject = pTpgProject_
     , _tpgTargetPool = pTpgTargetPool_
     , _tpgRegion = pTpgRegion_

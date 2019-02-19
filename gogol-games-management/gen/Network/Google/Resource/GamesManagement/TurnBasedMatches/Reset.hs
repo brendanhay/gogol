@@ -52,8 +52,8 @@ type TurnBasedMatchesResetResource =
 --
 -- /See:/ 'turnBasedMatchesReset' smart constructor.
 data TurnBasedMatchesReset =
-    TurnBasedMatchesReset'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  TurnBasedMatchesReset'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesReset' with the minimum fields required to make a request.
 --

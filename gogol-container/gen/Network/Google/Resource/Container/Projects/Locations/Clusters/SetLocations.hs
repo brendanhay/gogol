@@ -62,7 +62,8 @@ type ProjectsLocationsClustersSetLocationsResource =
 -- | Sets the locations for a specific cluster.
 --
 -- /See:/ 'projectsLocationsClustersSetLocations' smart constructor.
-data ProjectsLocationsClustersSetLocations = ProjectsLocationsClustersSetLocations'
+data ProjectsLocationsClustersSetLocations =
+  ProjectsLocationsClustersSetLocations'
     { _plcslsXgafv          :: !(Maybe Xgafv)
     , _plcslsUploadProtocol :: !(Maybe Text)
     , _plcslsAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsLocationsClustersSetLocations = ProjectsLocationsClustersSetLocatio
     , _plcslsPayload        :: !SetLocationsRequest
     , _plcslsName           :: !Text
     , _plcslsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersSetLocations' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsLocationsClustersSetLocations
     -> Text -- ^ 'plcslsName'
     -> ProjectsLocationsClustersSetLocations
 projectsLocationsClustersSetLocations pPlcslsPayload_ pPlcslsName_ =
-    ProjectsLocationsClustersSetLocations'
+  ProjectsLocationsClustersSetLocations'
     { _plcslsXgafv = Nothing
     , _plcslsUploadProtocol = Nothing
     , _plcslsAccessToken = Nothing
@@ -146,7 +148,8 @@ plcslsCallback
       (\ s a -> s{_plcslsCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersSetLocations where
+           ProjectsLocationsClustersSetLocations
+         where
         type Rs ProjectsLocationsClustersSetLocations =
              Operation
         type Scopes ProjectsLocationsClustersSetLocations =

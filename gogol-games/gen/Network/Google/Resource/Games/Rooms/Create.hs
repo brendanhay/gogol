@@ -57,10 +57,12 @@ type RoomsCreateResource =
 -- method directly is unsupported.
 --
 -- /See:/ 'roomsCreate' smart constructor.
-data RoomsCreate = RoomsCreate'
+data RoomsCreate =
+  RoomsCreate'
     { _rcPayload  :: !RoomCreateRequest
     , _rcLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoomsCreate' with the minimum fields required to make a request.
 --
@@ -73,10 +75,7 @@ roomsCreate
     :: RoomCreateRequest -- ^ 'rcPayload'
     -> RoomsCreate
 roomsCreate pRcPayload_ =
-    RoomsCreate'
-    { _rcPayload = pRcPayload_
-    , _rcLanguage = Nothing
-    }
+  RoomsCreate' {_rcPayload = pRcPayload_, _rcLanguage = Nothing}
 
 -- | Multipart request metadata.
 rcPayload :: Lens' RoomsCreate RoomCreateRequest

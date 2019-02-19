@@ -23,7 +23,8 @@ import           Network.Google.Prelude
 -- | A step in the build pipeline.
 --
 -- /See:/ 'buildStep' smart constructor.
-data BuildStep = BuildStep'
+data BuildStep =
+  BuildStep'
     { _bsStatus     :: !(Maybe BuildStepStatus)
     , _bsDir        :: !(Maybe Text)
     , _bsArgs       :: !(Maybe [Text])
@@ -37,7 +38,8 @@ data BuildStep = BuildStep'
     , _bsSecretEnv  :: !(Maybe [Text])
     , _bsTimeout    :: !(Maybe GDuration)
     , _bsVolumes    :: !(Maybe [Volume])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BuildStep' with the minimum fields required to make a request.
 --
@@ -71,7 +73,7 @@ data BuildStep = BuildStep'
 buildStep
     :: BuildStep
 buildStep =
-    BuildStep'
+  BuildStep'
     { _bsStatus = Nothing
     , _bsDir = Nothing
     , _bsArgs = Nothing
@@ -234,11 +236,13 @@ instance ToJSON BuildStep where
 -- that some source was used for this build.
 --
 -- /See:/ 'sourceProvenance' smart constructor.
-data SourceProvenance = SourceProvenance'
+data SourceProvenance =
+  SourceProvenance'
     { _spResolvedRepoSource    :: !(Maybe RepoSource)
     , _spResolvedStorageSource :: !(Maybe StorageSource)
     , _spFileHashes            :: !(Maybe SourceProvenanceFileHashes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceProvenance' with the minimum fields required to make a request.
 --
@@ -252,7 +256,7 @@ data SourceProvenance = SourceProvenance'
 sourceProvenance
     :: SourceProvenance
 sourceProvenance =
-    SourceProvenance'
+  SourceProvenance'
     { _spResolvedRepoSource = Nothing
     , _spResolvedStorageSource = Nothing
     , _spFileHashes = Nothing
@@ -305,10 +309,12 @@ instance ToJSON SourceProvenance where
 -- | Response including listed builds.
 --
 -- /See:/ 'listBuildsResponse' smart constructor.
-data ListBuildsResponse = ListBuildsResponse'
+data ListBuildsResponse =
+  ListBuildsResponse'
     { _lbrNextPageToken :: !(Maybe Text)
     , _lbrBuilds        :: !(Maybe [Build])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListBuildsResponse' with the minimum fields required to make a request.
 --
@@ -320,10 +326,7 @@ data ListBuildsResponse = ListBuildsResponse'
 listBuildsResponse
     :: ListBuildsResponse
 listBuildsResponse =
-    ListBuildsResponse'
-    { _lbrNextPageToken = Nothing
-    , _lbrBuilds = Nothing
-    }
+  ListBuildsResponse' {_lbrNextPageToken = Nothing, _lbrBuilds = Nothing}
 
 -- | Token to receive the next page of results.
 lbrNextPageToken :: Lens' ListBuildsResponse (Maybe Text)
@@ -390,11 +393,13 @@ instance ToJSON ListBuildsResponse where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -407,12 +412,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -454,8 +454,8 @@ instance ToJSON Status where
 --
 -- /See:/ 'retryBuildRequest' smart constructor.
 data RetryBuildRequest =
-    RetryBuildRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  RetryBuildRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RetryBuildRequest' with the minimum fields required to make a request.
 --
@@ -474,10 +474,12 @@ instance ToJSON RetryBuildRequest where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -489,10 +491,8 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -527,8 +527,8 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'cancelOperationRequest' smart constructor.
 data CancelOperationRequest =
-    CancelOperationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
@@ -547,10 +547,12 @@ instance ToJSON CancelOperationRequest where
 -- | Container message for hash values.
 --
 -- /See:/ 'hash' smart constructor.
-data Hash = Hash'
+data Hash =
+  Hash'
     { _hValue :: !(Maybe Bytes)
     , _hType  :: !(Maybe HashType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Hash' with the minimum fields required to make a request.
 --
@@ -561,11 +563,7 @@ data Hash = Hash'
 -- * 'hType'
 hash
     :: Hash
-hash =
-    Hash'
-    { _hValue = Nothing
-    , _hType = Nothing
-    }
+hash = Hash' {_hValue = Nothing, _hType = Nothing}
 
 -- | The hash value.
 hValue :: Lens' Hash (Maybe ByteString)
@@ -591,13 +589,15 @@ instance ToJSON Hash where
 -- | Artifacts created by the build pipeline.
 --
 -- /See:/ 'results' smart constructor.
-data Results = Results'
+data Results =
+  Results'
     { _rImages           :: !(Maybe [BuiltImage])
     , _rBuildStepImages  :: !(Maybe [Text])
     , _rArtifactManifest :: !(Maybe Text)
     , _rBuildStepOutputs :: !(Maybe [Bytes])
     , _rNumArtifacts     :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Results' with the minimum fields required to make a request.
 --
@@ -615,7 +615,7 @@ data Results = Results'
 results
     :: Results
 results =
-    Results'
+  Results'
     { _rImages = Nothing
     , _rBuildStepImages = Nothing
     , _rArtifactManifest = Nothing
@@ -689,9 +689,11 @@ instance ToJSON Results where
 -- | Substitutions data for Build resource.
 --
 -- /See:/ 'buildTriggerSubstitutions' smart constructor.
-newtype BuildTriggerSubstitutions = BuildTriggerSubstitutions'
+newtype BuildTriggerSubstitutions =
+  BuildTriggerSubstitutions'
     { _btsAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BuildTriggerSubstitutions' with the minimum fields required to make a request.
 --
@@ -702,9 +704,7 @@ buildTriggerSubstitutions
     :: HashMap Text Text -- ^ 'btsAddtional'
     -> BuildTriggerSubstitutions
 buildTriggerSubstitutions pBtsAddtional_ =
-    BuildTriggerSubstitutions'
-    { _btsAddtional = _Coerce # pBtsAddtional_
-    }
+  BuildTriggerSubstitutions' {_btsAddtional = _Coerce # pBtsAddtional_}
 
 btsAddtional :: Lens' BuildTriggerSubstitutions (HashMap Text Text)
 btsAddtional
@@ -723,14 +723,16 @@ instance ToJSON BuildTriggerSubstitutions where
 -- | Location of the source in a Google Cloud Source Repository.
 --
 -- /See:/ 'repoSource' smart constructor.
-data RepoSource = RepoSource'
+data RepoSource =
+  RepoSource'
     { _rsRepoName   :: !(Maybe Text)
     , _rsDir        :: !(Maybe Text)
     , _rsCommitSha  :: !(Maybe Text)
     , _rsBranchName :: !(Maybe Text)
     , _rsTagName    :: !(Maybe Text)
     , _rsProjectId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RepoSource' with the minimum fields required to make a request.
 --
@@ -750,7 +752,7 @@ data RepoSource = RepoSource'
 repoSource
     :: RepoSource
 repoSource =
-    RepoSource'
+  RepoSource'
     { _rsRepoName = Nothing
     , _rsDir = Nothing
     , _rsCommitSha = Nothing
@@ -818,13 +820,15 @@ instance ToJSON RepoSource where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -842,7 +846,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -913,8 +917,8 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -935,9 +939,11 @@ instance ToJSON Empty where
 -- secrets.
 --
 -- /See:/ 'secretSecretEnv' smart constructor.
-newtype SecretSecretEnv = SecretSecretEnv'
+newtype SecretSecretEnv =
+  SecretSecretEnv'
     { _sseAddtional :: HashMap Text Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecretSecretEnv' with the minimum fields required to make a request.
 --
@@ -948,9 +954,7 @@ secretSecretEnv
     :: HashMap Text ByteString -- ^ 'sseAddtional'
     -> SecretSecretEnv
 secretSecretEnv pSseAddtional_ =
-    SecretSecretEnv'
-    { _sseAddtional = _Coerce # pSseAddtional_
-    }
+  SecretSecretEnv' {_sseAddtional = _Coerce # pSseAddtional_}
 
 sseAddtional :: Lens' SecretSecretEnv (HashMap Text ByteString)
 sseAddtional
@@ -969,10 +973,12 @@ instance ToJSON SecretSecretEnv where
 -- completion of all build steps.
 --
 -- /See:/ 'artifacts' smart constructor.
-data Artifacts = Artifacts'
+data Artifacts =
+  Artifacts'
     { _aImages  :: !(Maybe [Text])
     , _aObjects :: !(Maybe ArtifactObjects)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Artifacts' with the minimum fields required to make a request.
 --
@@ -983,11 +989,7 @@ data Artifacts = Artifacts'
 -- * 'aObjects'
 artifacts
     :: Artifacts
-artifacts =
-    Artifacts'
-    { _aImages = Nothing
-    , _aObjects = Nothing
-    }
+artifacts = Artifacts' {_aImages = Nothing, _aObjects = Nothing}
 
 -- | A list of images to be pushed upon the successful completion of all
 -- build steps. The images will be pushed using the builder service
@@ -1027,11 +1029,13 @@ instance ToJSON Artifacts where
 -- completion of all build steps.
 --
 -- /See:/ 'artifactObjects' smart constructor.
-data ArtifactObjects = ArtifactObjects'
+data ArtifactObjects =
+  ArtifactObjects'
     { _aoLocation :: !(Maybe Text)
     , _aoTiming   :: !(Maybe TimeSpan)
     , _aoPaths    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ArtifactObjects' with the minimum fields required to make a request.
 --
@@ -1045,11 +1049,8 @@ data ArtifactObjects = ArtifactObjects'
 artifactObjects
     :: ArtifactObjects
 artifactObjects =
-    ArtifactObjects'
-    { _aoLocation = Nothing
-    , _aoTiming = Nothing
-    , _aoPaths = Nothing
-    }
+  ArtifactObjects'
+    {_aoLocation = Nothing, _aoTiming = Nothing, _aoPaths = Nothing}
 
 -- | Cloud Storage bucket and optional object path, in the form
 -- \"gs:\/\/bucket\/path\/to\/somewhere\/\". (see [Bucket Name
@@ -1090,10 +1091,12 @@ instance ToJSON ArtifactObjects where
 -- steps in order to persist files across build step execution.
 --
 -- /See:/ 'volume' smart constructor.
-data Volume = Volume'
+data Volume =
+  Volume'
     { _vPath :: !(Maybe Text)
     , _vName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Volume' with the minimum fields required to make a request.
 --
@@ -1104,11 +1107,7 @@ data Volume = Volume'
 -- * 'vName'
 volume
     :: Volume
-volume =
-    Volume'
-    { _vPath = Nothing
-    , _vName = Nothing
-    }
+volume = Volume' {_vPath = Nothing, _vName = Nothing}
 
 -- | Path at which to mount the volume. Paths must be absolute and cannot
 -- conflict with other volume paths on the same build step or with certain
@@ -1136,9 +1135,11 @@ instance ToJSON Volume where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1149,9 +1150,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1180,7 +1179,8 @@ instance ToJSON StatusDetailsItem where
 -- $SHORT_SHA: first 7 characters of $REVISION_ID or $COMMIT_SHA.
 --
 -- /See:/ 'build' smart constructor.
-data Build = Build'
+data Build =
+  Build'
     { _bImages           :: !(Maybe [Text])
     , _bStatus           :: !(Maybe BuildStatus)
     , _bSourceProvenance :: !(Maybe SourceProvenance)
@@ -1203,7 +1203,8 @@ data Build = Build'
     , _bFinishTime       :: !(Maybe DateTime')
     , _bCreateTime       :: !(Maybe DateTime')
     , _bTags             :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Build' with the minimum fields required to make a request.
 --
@@ -1255,7 +1256,7 @@ data Build = Build'
 build
     :: Build
 build =
-    Build'
+  Build'
     { _bImages = Nothing
     , _bStatus = Nothing
     , _bSourceProvenance = Nothing
@@ -1337,7 +1338,7 @@ bArtifacts
 -- Name
 -- Requirements](https:\/\/cloud.google.com\/storage\/docs\/bucket-naming#requirements)).
 -- Logs file names will be of the format
--- \`/l//o//g//s//b//u//c//k//e//t/\//l//o//g/−{build_id}.txt\`.
+-- \`${logs_bucket}\/log-${build_id}.txt\`.
 bLogsBucket :: Lens' Build (Maybe Text)
 bLogsBucket
   = lens _bLogsBucket (\ s a -> s{_bLogsBucket = a})
@@ -1477,9 +1478,11 @@ instance ToJSON Build where
 -- file.
 --
 -- /See:/ 'sourceProvenanceFileHashes' smart constructor.
-newtype SourceProvenanceFileHashes = SourceProvenanceFileHashes'
+newtype SourceProvenanceFileHashes =
+  SourceProvenanceFileHashes'
     { _spfhAddtional :: HashMap Text FileHashes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceProvenanceFileHashes' with the minimum fields required to make a request.
 --
@@ -1490,9 +1493,7 @@ sourceProvenanceFileHashes
     :: HashMap Text FileHashes -- ^ 'spfhAddtional'
     -> SourceProvenanceFileHashes
 sourceProvenanceFileHashes pSpfhAddtional_ =
-    SourceProvenanceFileHashes'
-    { _spfhAddtional = _Coerce # pSpfhAddtional_
-    }
+  SourceProvenanceFileHashes' {_spfhAddtional = _Coerce # pSpfhAddtional_}
 
 spfhAddtional :: Lens' SourceProvenanceFileHashes (HashMap Text FileHashes)
 spfhAddtional
@@ -1513,10 +1514,12 @@ instance ToJSON SourceProvenanceFileHashes where
 -- with the Cloud KMS key to use to decrypt the value.
 --
 -- /See:/ 'secret' smart constructor.
-data Secret = Secret'
+data Secret =
+  Secret'
     { _sKmsKeyName :: !(Maybe Text)
     , _sSecretEnv  :: !(Maybe SecretSecretEnv)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Secret' with the minimum fields required to make a request.
 --
@@ -1527,11 +1530,7 @@ data Secret = Secret'
 -- * 'sSecretEnv'
 secret
     :: Secret
-secret =
-    Secret'
-    { _sKmsKeyName = Nothing
-    , _sSecretEnv = Nothing
-    }
+secret = Secret' {_sKmsKeyName = Nothing, _sSecretEnv = Nothing}
 
 -- | Cloud KMS key name to use to decrypt these envs.
 sKmsKeyName :: Lens' Secret (Maybe Text)
@@ -1565,8 +1564,8 @@ instance ToJSON Secret where
 --
 -- /See:/ 'cancelBuildRequest' smart constructor.
 data CancelBuildRequest =
-    CancelBuildRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CancelBuildRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelBuildRequest' with the minimum fields required to make a request.
 --
@@ -1585,10 +1584,12 @@ instance ToJSON CancelBuildRequest where
 -- | Start and end times for a build execution phase.
 --
 -- /See:/ 'timeSpan' smart constructor.
-data TimeSpan = TimeSpan'
+data TimeSpan =
+  TimeSpan'
     { _tsStartTime :: !(Maybe DateTime')
     , _tsEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimeSpan' with the minimum fields required to make a request.
 --
@@ -1599,11 +1600,7 @@ data TimeSpan = TimeSpan'
 -- * 'tsEndTime'
 timeSpan
     :: TimeSpan
-timeSpan =
-    TimeSpan'
-    { _tsStartTime = Nothing
-    , _tsEndTime = Nothing
-    }
+timeSpan = TimeSpan' {_tsStartTime = Nothing, _tsEndTime = Nothing}
 
 -- | Start of time span.
 tsStartTime :: Lens' TimeSpan (Maybe UTCTime)
@@ -1634,11 +1631,13 @@ instance ToJSON TimeSpan where
 -- | Location of the source in an archive file in Google Cloud Storage.
 --
 -- /See:/ 'storageSource' smart constructor.
-data StorageSource = StorageSource'
+data StorageSource =
+  StorageSource'
     { _ssBucket     :: !(Maybe Text)
     , _ssObject     :: !(Maybe Text)
     , _ssGeneration :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StorageSource' with the minimum fields required to make a request.
 --
@@ -1652,11 +1651,8 @@ data StorageSource = StorageSource'
 storageSource
     :: StorageSource
 storageSource =
-    StorageSource'
-    { _ssBucket = Nothing
-    , _ssObject = Nothing
-    , _ssGeneration = Nothing
-    }
+  StorageSource'
+    {_ssBucket = Nothing, _ssObject = Nothing, _ssGeneration = Nothing}
 
 -- | Google Cloud Storage bucket containing the source (see [Bucket Name
 -- Requirements](https:\/\/cloud.google.com\/storage\/docs\/bucket-naming#requirements)).
@@ -1694,9 +1690,11 @@ instance ToJSON StorageSource where
 -- | Response containing existing \`BuildTriggers\`.
 --
 -- /See:/ 'listBuildTriggersResponse' smart constructor.
-newtype ListBuildTriggersResponse = ListBuildTriggersResponse'
+newtype ListBuildTriggersResponse =
+  ListBuildTriggersResponse'
     { _lbtrTriggers :: Maybe [BuildTrigger]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListBuildTriggersResponse' with the minimum fields required to make a request.
 --
@@ -1705,10 +1703,7 @@ newtype ListBuildTriggersResponse = ListBuildTriggersResponse'
 -- * 'lbtrTriggers'
 listBuildTriggersResponse
     :: ListBuildTriggersResponse
-listBuildTriggersResponse =
-    ListBuildTriggersResponse'
-    { _lbtrTriggers = Nothing
-    }
+listBuildTriggersResponse = ListBuildTriggersResponse' {_lbtrTriggers = Nothing}
 
 -- | \`BuildTriggers\` for the project, sorted by \`create_time\` descending.
 lbtrTriggers :: Lens' ListBuildTriggersResponse [BuildTrigger]
@@ -1733,10 +1728,12 @@ instance ToJSON ListBuildTriggersResponse where
 -- the artifact manifest JSON file.
 --
 -- /See:/ 'artifactResult' smart constructor.
-data ArtifactResult = ArtifactResult'
+data ArtifactResult =
+  ArtifactResult'
     { _arFileHash :: !(Maybe [FileHashes])
     , _arLocation :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ArtifactResult' with the minimum fields required to make a request.
 --
@@ -1747,11 +1744,7 @@ data ArtifactResult = ArtifactResult'
 -- * 'arLocation'
 artifactResult
     :: ArtifactResult
-artifactResult =
-    ArtifactResult'
-    { _arFileHash = Nothing
-    , _arLocation = Nothing
-    }
+artifactResult = ArtifactResult' {_arFileHash = Nothing, _arLocation = Nothing}
 
 -- | The file hash of the artifact.
 arFileHash :: Lens' ArtifactResult [FileHashes]
@@ -1786,9 +1779,11 @@ instance ToJSON ArtifactResult where
 -- build.
 --
 -- /See:/ 'fileHashes' smart constructor.
-newtype FileHashes = FileHashes'
+newtype FileHashes =
+  FileHashes'
     { _fhFileHash :: Maybe [Hash]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FileHashes' with the minimum fields required to make a request.
 --
@@ -1797,10 +1792,7 @@ newtype FileHashes = FileHashes'
 -- * 'fhFileHash'
 fileHashes
     :: FileHashes
-fileHashes =
-    FileHashes'
-    { _fhFileHash = Nothing
-    }
+fileHashes = FileHashes' {_fhFileHash = Nothing}
 
 -- | Collection of file hashes.
 fhFileHash :: Lens' FileHashes [Hash]
@@ -1823,9 +1815,11 @@ instance ToJSON FileHashes where
 -- | Substitutions data for \`Build\` resource.
 --
 -- /See:/ 'buildSubstitutions' smart constructor.
-newtype BuildSubstitutions = BuildSubstitutions'
+newtype BuildSubstitutions =
+  BuildSubstitutions'
     { _bsAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BuildSubstitutions' with the minimum fields required to make a request.
 --
@@ -1836,9 +1830,7 @@ buildSubstitutions
     :: HashMap Text Text -- ^ 'bsAddtional'
     -> BuildSubstitutions
 buildSubstitutions pBsAddtional_ =
-    BuildSubstitutions'
-    { _bsAddtional = _Coerce # pBsAddtional_
-    }
+  BuildSubstitutions' {_bsAddtional = _Coerce # pBsAddtional_}
 
 bsAddtional :: Lens' BuildSubstitutions (HashMap Text Text)
 bsAddtional
@@ -1856,10 +1848,12 @@ instance ToJSON BuildSubstitutions where
 -- | Location of the source in a supported storage service.
 --
 -- /See:/ 'source' smart constructor.
-data Source = Source'
+data Source =
+  Source'
     { _sRepoSource    :: !(Maybe RepoSource)
     , _sStorageSource :: !(Maybe StorageSource)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
@@ -1870,11 +1864,7 @@ data Source = Source'
 -- * 'sStorageSource'
 source
     :: Source
-source =
-    Source'
-    { _sRepoSource = Nothing
-    , _sStorageSource = Nothing
-    }
+source = Source' {_sRepoSource = Nothing, _sStorageSource = Nothing}
 
 -- | If provided, get the source from this location in a Cloud Source
 -- Repository.
@@ -1908,9 +1898,11 @@ instance ToJSON Source where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -1921,9 +1913,7 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1945,9 +1935,11 @@ instance ToJSON OperationMetadata where
 -- does not specify source or images, these keys will not be included.
 --
 -- /See:/ 'buildTiming' smart constructor.
-newtype BuildTiming = BuildTiming'
+newtype BuildTiming =
+  BuildTiming'
     { _btAddtional :: HashMap Text TimeSpan
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BuildTiming' with the minimum fields required to make a request.
 --
@@ -1958,9 +1950,7 @@ buildTiming
     :: HashMap Text TimeSpan -- ^ 'btAddtional'
     -> BuildTiming
 buildTiming pBtAddtional_ =
-    BuildTiming'
-    { _btAddtional = _Coerce # pBtAddtional_
-    }
+  BuildTiming' {_btAddtional = _Coerce # pBtAddtional_}
 
 btAddtional :: Lens' BuildTiming (HashMap Text TimeSpan)
 btAddtional
@@ -1978,9 +1968,11 @@ instance ToJSON BuildTiming where
 -- | Metadata for build operations.
 --
 -- /See:/ 'buildOperationMetadata' smart constructor.
-newtype BuildOperationMetadata = BuildOperationMetadata'
+newtype BuildOperationMetadata =
+  BuildOperationMetadata'
     { _bomBuild :: Maybe Build
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BuildOperationMetadata' with the minimum fields required to make a request.
 --
@@ -1989,10 +1981,7 @@ newtype BuildOperationMetadata = BuildOperationMetadata'
 -- * 'bomBuild'
 buildOperationMetadata
     :: BuildOperationMetadata
-buildOperationMetadata =
-    BuildOperationMetadata'
-    { _bomBuild = Nothing
-    }
+buildOperationMetadata = BuildOperationMetadata' {_bomBuild = Nothing}
 
 -- | The build that the operation is tracking.
 bomBuild :: Lens' BuildOperationMetadata (Maybe Build)
@@ -2010,7 +1999,8 @@ instance ToJSON BuildOperationMetadata where
 -- | Optional arguments to enable specific features of builds.
 --
 -- /See:/ 'buildOptions' smart constructor.
-data BuildOptions = BuildOptions'
+data BuildOptions =
+  BuildOptions'
     { _boDiskSizeGb            :: !(Maybe (Textual Int64))
     , _boEnv                   :: !(Maybe [Text])
     , _boSubstitutionOption    :: !(Maybe BuildOptionsSubstitutionOption)
@@ -2022,7 +2012,8 @@ data BuildOptions = BuildOptions'
     , _boLogStreamingOption    :: !(Maybe BuildOptionsLogStreamingOption)
     , _boLogging               :: !(Maybe BuildOptionsLogging)
     , _boSourceProvenanceHash  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BuildOptions' with the minimum fields required to make a request.
 --
@@ -2052,7 +2043,7 @@ data BuildOptions = BuildOptions'
 buildOptions
     :: BuildOptions
 buildOptions =
-    BuildOptions'
+  BuildOptions'
     { _boDiskSizeGb = Nothing
     , _boEnv = Nothing
     , _boSubstitutionOption = Nothing
@@ -2200,9 +2191,11 @@ instance ToJSON BuildOptions where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -2213,9 +2206,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -2235,7 +2226,8 @@ instance ToJSON OperationResponse where
 -- changes.
 --
 -- /See:/ 'buildTrigger' smart constructor.
-data BuildTrigger = BuildTrigger'
+data BuildTrigger =
+  BuildTrigger'
     { _btSubstitutions   :: !(Maybe BuildTriggerSubstitutions)
     , _btIncludedFiles   :: !(Maybe [Text])
     , _btDisabled        :: !(Maybe Bool)
@@ -2246,7 +2238,8 @@ data BuildTrigger = BuildTrigger'
     , _btDescription     :: !(Maybe Text)
     , _btFilename        :: !(Maybe Text)
     , _btCreateTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BuildTrigger' with the minimum fields required to make a request.
 --
@@ -2274,7 +2267,7 @@ data BuildTrigger = BuildTrigger'
 buildTrigger
     :: BuildTrigger
 buildTrigger =
-    BuildTrigger'
+  BuildTrigger'
     { _btSubstitutions = Nothing
     , _btIncludedFiles = Nothing
     , _btDisabled = Nothing
@@ -2394,11 +2387,13 @@ instance ToJSON BuildTrigger where
 -- | An image built by the pipeline.
 --
 -- /See:/ 'builtImage' smart constructor.
-data BuiltImage = BuiltImage'
+data BuiltImage =
+  BuiltImage'
     { _biPushTiming :: !(Maybe TimeSpan)
     , _biName       :: !(Maybe Text)
     , _biDigest     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BuiltImage' with the minimum fields required to make a request.
 --
@@ -2412,11 +2407,7 @@ data BuiltImage = BuiltImage'
 builtImage
     :: BuiltImage
 builtImage =
-    BuiltImage'
-    { _biPushTiming = Nothing
-    , _biName = Nothing
-    , _biDigest = Nothing
-    }
+  BuiltImage' {_biPushTiming = Nothing, _biName = Nothing, _biDigest = Nothing}
 
 -- | Output only. Stores timing information for pushing the specified image.
 biPushTiming :: Lens' BuiltImage (Maybe TimeSpan)

@@ -57,10 +57,12 @@ type EditsDetailsGetResource =
 -- and developer support contact information.
 --
 -- /See:/ 'editsDetailsGet' smart constructor.
-data EditsDetailsGet = EditsDetailsGet'
+data EditsDetailsGet =
+  EditsDetailsGet'
     { _edgPackageName :: !Text
     , _edgEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsDetailsGet' with the minimum fields required to make a request.
 --
@@ -74,10 +76,8 @@ editsDetailsGet
     -> Text -- ^ 'edgEditId'
     -> EditsDetailsGet
 editsDetailsGet pEdgPackageName_ pEdgEditId_ =
-    EditsDetailsGet'
-    { _edgPackageName = pEdgPackageName_
-    , _edgEditId = pEdgEditId_
-    }
+  EditsDetailsGet'
+    {_edgPackageName = pEdgPackageName_, _edgEditId = pEdgEditId_}
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

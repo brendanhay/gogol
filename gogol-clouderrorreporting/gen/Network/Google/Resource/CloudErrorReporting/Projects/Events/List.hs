@@ -75,7 +75,8 @@ type ProjectsEventsListResource =
 -- | Lists the specified events.
 --
 -- /See:/ 'projectsEventsList' smart constructor.
-data ProjectsEventsList = ProjectsEventsList'
+data ProjectsEventsList =
+  ProjectsEventsList'
     { _pelXgafv                     :: !(Maybe Xgafv)
     , _pelUploadProtocol            :: !(Maybe Text)
     , _pelAccessToken               :: !(Maybe Text)
@@ -89,7 +90,8 @@ data ProjectsEventsList = ProjectsEventsList'
     , _pelCallback                  :: !(Maybe Text)
     , _pelServiceFilterVersion      :: !(Maybe Text)
     , _pelTimeRangePeriod           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsEventsList' with the minimum fields required to make a request.
 --
@@ -124,7 +126,7 @@ projectsEventsList
     :: Text -- ^ 'pelProjectName'
     -> ProjectsEventsList
 projectsEventsList pPelProjectName_ =
-    ProjectsEventsList'
+  ProjectsEventsList'
     { _pelXgafv = Nothing
     , _pelUploadProtocol = Nothing
     , _pelAccessToken = Nothing

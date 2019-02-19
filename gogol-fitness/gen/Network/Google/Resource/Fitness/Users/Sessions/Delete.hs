@@ -56,11 +56,13 @@ type UsersSessionsDeleteResource =
 -- | Deletes a session specified by the given session ID.
 --
 -- /See:/ 'usersSessionsDelete' smart constructor.
-data UsersSessionsDelete = UsersSessionsDelete'
+data UsersSessionsDelete =
+  UsersSessionsDelete'
     { _usdUserId            :: !Text
     , _usdCurrentTimeMillis :: !(Maybe (Textual Int64))
     , _usdSessionId         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSessionsDelete' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ usersSessionsDelete
     -> Text -- ^ 'usdSessionId'
     -> UsersSessionsDelete
 usersSessionsDelete pUsdUserId_ pUsdSessionId_ =
-    UsersSessionsDelete'
+  UsersSessionsDelete'
     { _usdUserId = pUsdUserId_
     , _usdCurrentTimeMillis = Nothing
     , _usdSessionId = pUsdSessionId_

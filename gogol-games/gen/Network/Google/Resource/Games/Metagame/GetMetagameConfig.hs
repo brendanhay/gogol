@@ -50,8 +50,8 @@ type MetagameGetMetagameConfigResource =
 --
 -- /See:/ 'metagameGetMetagameConfig' smart constructor.
 data MetagameGetMetagameConfig =
-    MetagameGetMetagameConfig'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  MetagameGetMetagameConfig'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetagameGetMetagameConfig' with the minimum fields required to make a request.
 --

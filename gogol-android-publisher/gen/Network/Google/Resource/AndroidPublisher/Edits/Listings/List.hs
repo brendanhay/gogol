@@ -56,10 +56,12 @@ type EditsListingsListResource =
 -- | Returns all of the localized store listings attached to this edit.
 --
 -- /See:/ 'editsListingsList' smart constructor.
-data EditsListingsList = EditsListingsList'
+data EditsListingsList =
+  EditsListingsList'
     { _ellPackageName :: !Text
     , _ellEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsListingsList' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ editsListingsList
     -> Text -- ^ 'ellEditId'
     -> EditsListingsList
 editsListingsList pEllPackageName_ pEllEditId_ =
-    EditsListingsList'
-    { _ellPackageName = pEllPackageName_
-    , _ellEditId = pEllEditId_
-    }
+  EditsListingsList'
+    {_ellPackageName = pEllPackageName_, _ellEditId = pEllEditId_}
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

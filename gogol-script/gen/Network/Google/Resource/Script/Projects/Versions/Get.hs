@@ -63,7 +63,8 @@ type ProjectsVersionsGetResource =
 -- | Gets a version of a script project.
 --
 -- /See:/ 'projectsVersionsGet' smart constructor.
-data ProjectsVersionsGet = ProjectsVersionsGet'
+data ProjectsVersionsGet =
+  ProjectsVersionsGet'
     { _pvgXgafv          :: !(Maybe Xgafv)
     , _pvgUploadProtocol :: !(Maybe Text)
     , _pvgAccessToken    :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsVersionsGet = ProjectsVersionsGet'
     , _pvgVersionNumber  :: !(Textual Int32)
     , _pvgScriptId       :: !Text
     , _pvgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsVersionsGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsVersionsGet
     -> Text -- ^ 'pvgScriptId'
     -> ProjectsVersionsGet
 projectsVersionsGet pPvgVersionNumber_ pPvgScriptId_ =
-    ProjectsVersionsGet'
+  ProjectsVersionsGet'
     { _pvgXgafv = Nothing
     , _pvgUploadProtocol = Nothing
     , _pvgAccessToken = Nothing

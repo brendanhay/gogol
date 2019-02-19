@@ -63,7 +63,8 @@ type ProjectsUptimeCheckConfigsCreateResource =
 -- | Creates a new uptime check configuration.
 --
 -- /See:/ 'projectsUptimeCheckConfigsCreate' smart constructor.
-data ProjectsUptimeCheckConfigsCreate = ProjectsUptimeCheckConfigsCreate'
+data ProjectsUptimeCheckConfigsCreate =
+  ProjectsUptimeCheckConfigsCreate'
     { _pucccParent         :: !Text
     , _pucccXgafv          :: !(Maybe Xgafv)
     , _pucccUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsUptimeCheckConfigsCreate = ProjectsUptimeCheckConfigsCreate'
     , _pucccUploadType     :: !(Maybe Text)
     , _pucccPayload        :: !UptimeCheckConfig
     , _pucccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsUptimeCheckConfigsCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsUptimeCheckConfigsCreate
     -> UptimeCheckConfig -- ^ 'pucccPayload'
     -> ProjectsUptimeCheckConfigsCreate
 projectsUptimeCheckConfigsCreate pPucccParent_ pPucccPayload_ =
-    ProjectsUptimeCheckConfigsCreate'
+  ProjectsUptimeCheckConfigsCreate'
     { _pucccParent = pPucccParent_
     , _pucccXgafv = Nothing
     , _pucccUploadProtocol = Nothing
@@ -146,7 +148,8 @@ pucccCallback
       (\ s a -> s{_pucccCallback = a})
 
 instance GoogleRequest
-         ProjectsUptimeCheckConfigsCreate where
+           ProjectsUptimeCheckConfigsCreate
+         where
         type Rs ProjectsUptimeCheckConfigsCreate =
              UptimeCheckConfig
         type Scopes ProjectsUptimeCheckConfigsCreate =

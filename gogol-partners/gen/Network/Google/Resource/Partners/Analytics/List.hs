@@ -90,7 +90,8 @@ type AnalyticsListResource =
 -- called within the context of an authorized logged in user.
 --
 -- /See:/ 'analyticsList' smart constructor.
-data AnalyticsList = AnalyticsList'
+data AnalyticsList =
+  AnalyticsList'
     { _alXgafv                                       :: !(Maybe Xgafv)
     , _alUploadProtocol                              :: !(Maybe Text)
     , _alAccessToken                                 :: !(Maybe Text)
@@ -105,7 +106,8 @@ data AnalyticsList = AnalyticsList'
     , _alRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _alRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _alCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AnalyticsList' with the minimum fields required to make a request.
 --
@@ -141,7 +143,7 @@ data AnalyticsList = AnalyticsList'
 analyticsList
     :: AnalyticsList
 analyticsList =
-    AnalyticsList'
+  AnalyticsList'
     { _alXgafv = Nothing
     , _alUploadProtocol = Nothing
     , _alAccessToken = Nothing

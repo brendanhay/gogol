@@ -65,7 +65,8 @@ type ProjectsLocationsWorkflowTemplatesListResource =
 -- | Lists workflows that match the specified filter in the request.
 --
 -- /See:/ 'projectsLocationsWorkflowTemplatesList' smart constructor.
-data ProjectsLocationsWorkflowTemplatesList = ProjectsLocationsWorkflowTemplatesList'
+data ProjectsLocationsWorkflowTemplatesList =
+  ProjectsLocationsWorkflowTemplatesList'
     { _plwtlParent         :: !Text
     , _plwtlXgafv          :: !(Maybe Xgafv)
     , _plwtlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data ProjectsLocationsWorkflowTemplatesList = ProjectsLocationsWorkflowTemplates
     , _plwtlPageToken      :: !(Maybe Text)
     , _plwtlPageSize       :: !(Maybe (Textual Int32))
     , _plwtlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsWorkflowTemplatesList
     :: Text -- ^ 'plwtlParent'
     -> ProjectsLocationsWorkflowTemplatesList
 projectsLocationsWorkflowTemplatesList pPlwtlParent_ =
-    ProjectsLocationsWorkflowTemplatesList'
+  ProjectsLocationsWorkflowTemplatesList'
     { _plwtlParent = pPlwtlParent_
     , _plwtlXgafv = Nothing
     , _plwtlUploadProtocol = Nothing
@@ -161,7 +163,8 @@ plwtlCallback
       (\ s a -> s{_plwtlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkflowTemplatesList where
+           ProjectsLocationsWorkflowTemplatesList
+         where
         type Rs ProjectsLocationsWorkflowTemplatesList =
              ListWorkflowTemplatesResponse
         type Scopes ProjectsLocationsWorkflowTemplatesList =

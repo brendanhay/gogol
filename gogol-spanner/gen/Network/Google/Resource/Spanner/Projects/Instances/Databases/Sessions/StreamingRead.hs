@@ -69,7 +69,8 @@ type ProjectsInstancesDatabasesSessionsStreamingReadResource
 -- can exceed 10 MiB.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsStreamingRead' smart constructor.
-data ProjectsInstancesDatabasesSessionsStreamingRead = ProjectsInstancesDatabasesSessionsStreamingRead'
+data ProjectsInstancesDatabasesSessionsStreamingRead =
+  ProjectsInstancesDatabasesSessionsStreamingRead'
     { _pidssrXgafv          :: !(Maybe Xgafv)
     , _pidssrUploadProtocol :: !(Maybe Text)
     , _pidssrAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsInstancesDatabasesSessionsStreamingRead = ProjectsInstancesDatabase
     , _pidssrPayload        :: !ReadRequest
     , _pidssrSession        :: !Text
     , _pidssrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsStreamingRead' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsInstancesDatabasesSessionsStreamingRead
     -> Text -- ^ 'pidssrSession'
     -> ProjectsInstancesDatabasesSessionsStreamingRead
 projectsInstancesDatabasesSessionsStreamingRead pPidssrPayload_ pPidssrSession_ =
-    ProjectsInstancesDatabasesSessionsStreamingRead'
+  ProjectsInstancesDatabasesSessionsStreamingRead'
     { _pidssrXgafv = Nothing
     , _pidssrUploadProtocol = Nothing
     , _pidssrAccessToken = Nothing
@@ -153,7 +155,8 @@ pidssrCallback
       (\ s a -> s{_pidssrCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsStreamingRead where
+           ProjectsInstancesDatabasesSessionsStreamingRead
+         where
         type Rs
                ProjectsInstancesDatabasesSessionsStreamingRead
              = PartialResultSet

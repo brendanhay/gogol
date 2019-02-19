@@ -66,7 +66,8 @@ type MattersUpdateResource =
 -- ignored. Returns the default view of the matter.
 --
 -- /See:/ 'mattersUpdate' smart constructor.
-data MattersUpdate = MattersUpdate'
+data MattersUpdate =
+  MattersUpdate'
     { _matXgafv          :: !(Maybe Xgafv)
     , _matUploadProtocol :: !(Maybe Text)
     , _matAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data MattersUpdate = MattersUpdate'
     , _matPayload        :: !Matter
     , _matMatterId       :: !Text
     , _matCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersUpdate' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ mattersUpdate
     -> Text -- ^ 'matMatterId'
     -> MattersUpdate
 mattersUpdate pMatPayload_ pMatMatterId_ =
-    MattersUpdate'
+  MattersUpdate'
     { _matXgafv = Nothing
     , _matUploadProtocol = Nothing
     , _matAccessToken = Nothing

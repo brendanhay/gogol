@@ -23,12 +23,14 @@ import           Network.Google.QPXExpress.Types.Sum
 -- | A QPX Express search response.
 --
 -- /See:/ 'tripOptionsResponse' smart constructor.
-data TripOptionsResponse = TripOptionsResponse'
+data TripOptionsResponse =
+  TripOptionsResponse'
     { _torRequestId  :: !(Maybe Text)
     , _torKind       :: !Text
     , _torData       :: !(Maybe Data')
     , _torTripOption :: !(Maybe [TripOption])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TripOptionsResponse' with the minimum fields required to make a request.
 --
@@ -44,7 +46,7 @@ data TripOptionsResponse = TripOptionsResponse'
 tripOptionsResponse
     :: TripOptionsResponse
 tripOptionsResponse =
-    TripOptionsResponse'
+  TripOptionsResponse'
     { _torRequestId = Nothing
     , _torKind = "qpxexpress#tripOptions"
     , _torData = Nothing
@@ -95,11 +97,13 @@ instance ToJSON TripOptionsResponse where
 -- that might be useful to display to an end-user.
 --
 -- /See:/ 'carrierData' smart constructor.
-data CarrierData = CarrierData'
+data CarrierData =
+  CarrierData'
     { _cdKind :: !Text
     , _cdName :: !(Maybe Text)
     , _cdCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CarrierData' with the minimum fields required to make a request.
 --
@@ -113,11 +117,8 @@ data CarrierData = CarrierData'
 carrierData
     :: CarrierData
 carrierData =
-    CarrierData'
-    { _cdKind = "qpxexpress#carrierData"
-    , _cdName = Nothing
-    , _cdCode = Nothing
-    }
+  CarrierData'
+    {_cdKind = "qpxexpress#carrierData", _cdName = Nothing, _cdCode = Nothing}
 
 -- | Identifies this as a kind of carrier (ie. an airline, bus line,
 -- railroad, etc). Value: the fixed string qpxexpress#carrierData.
@@ -152,14 +153,16 @@ instance ToJSON CarrierData where
 -- | Information about free baggage allowed on one segment of a trip.
 --
 -- /See:/ 'freeBaggageAllowance' smart constructor.
-data FreeBaggageAllowance = FreeBaggageAllowance'
+data FreeBaggageAllowance =
+  FreeBaggageAllowance'
     { _fbaKind          :: !Text
     , _fbaPounds        :: !(Maybe (Textual Int32))
     , _fbaBagDescriptor :: !(Maybe [BagDescriptor])
     , _fbaKilosPerPiece :: !(Maybe (Textual Int32))
     , _fbaKilos         :: !(Maybe (Textual Int32))
     , _fbaPieces        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FreeBaggageAllowance' with the minimum fields required to make a request.
 --
@@ -179,7 +182,7 @@ data FreeBaggageAllowance = FreeBaggageAllowance'
 freeBaggageAllowance
     :: FreeBaggageAllowance
 freeBaggageAllowance =
-    FreeBaggageAllowance'
+  FreeBaggageAllowance'
     { _fbaKind = "qpxexpress#freeBaggageAllowance"
     , _fbaPounds = Nothing
     , _fbaBagDescriptor = Nothing
@@ -253,11 +256,13 @@ instance ToJSON FreeBaggageAllowance where
 -- | Two times in a single day defining a time range.
 --
 -- /See:/ 'timeOfDayRange' smart constructor.
-data TimeOfDayRange = TimeOfDayRange'
+data TimeOfDayRange =
+  TimeOfDayRange'
     { _todrKind         :: !Text
     , _todrLatestTime   :: !(Maybe Text)
     , _todrEarliestTime :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TimeOfDayRange' with the minimum fields required to make a request.
 --
@@ -271,7 +276,7 @@ data TimeOfDayRange = TimeOfDayRange'
 timeOfDayRange
     :: TimeOfDayRange
 timeOfDayRange =
-    TimeOfDayRange'
+  TimeOfDayRange'
     { _todrKind = "qpxexpress#timeOfDayRange"
     , _todrLatestTime = Nothing
     , _todrEarliestTime = Nothing
@@ -317,14 +322,16 @@ instance ToJSON TimeOfDayRange where
 -- aircraft.
 --
 -- /See:/ 'data'' smart constructor.
-data Data' = Data''
+data Data' =
+  Data''
     { _dCarrier  :: !(Maybe [CarrierData])
     , _dKind     :: !Text
     , _dAircraft :: !(Maybe [AircraftData])
     , _dAirport  :: !(Maybe [AirportData])
     , _dCity     :: !(Maybe [CityData])
     , _dTax      :: !(Maybe [TaxData])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Data' with the minimum fields required to make a request.
 --
@@ -344,7 +351,7 @@ data Data' = Data''
 data'
     :: Data'
 data' =
-    Data''
+  Data''
     { _dCarrier = Nothing
     , _dKind = "qpxexpress#data"
     , _dAircraft = Nothing
@@ -418,11 +425,13 @@ instance ToJSON Data' where
 -- | The make, model, and type of an aircraft.
 --
 -- /See:/ 'aircraftData' smart constructor.
-data AircraftData = AircraftData'
+data AircraftData =
+  AircraftData'
     { _adKind :: !Text
     , _adName :: !(Maybe Text)
     , _adCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AircraftData' with the minimum fields required to make a request.
 --
@@ -436,11 +445,8 @@ data AircraftData = AircraftData'
 aircraftData
     :: AircraftData
 aircraftData =
-    AircraftData'
-    { _adKind = "qpxexpress#aircraftData"
-    , _adName = Nothing
-    , _adCode = Nothing
-    }
+  AircraftData'
+    {_adKind = "qpxexpress#aircraftData", _adName = Nothing, _adCode = Nothing}
 
 -- | Identifies this as an aircraftData object. Value: the fixed string
 -- qpxexpress#aircraftData
@@ -476,7 +482,8 @@ instance ToJSON AircraftData where
 -- points on a particular carrier with a particular flight number.)
 --
 -- /See:/ 'legInfo' smart constructor.
-data LegInfo = LegInfo'
+data LegInfo =
+  LegInfo'
     { _liDestination         :: !(Maybe Text)
     , _liOrigin              :: !(Maybe Text)
     , _liSecure              :: !(Maybe Bool)
@@ -494,7 +501,8 @@ data LegInfo = LegInfo'
     , _liDuration            :: !(Maybe (Textual Int32))
     , _liMileage             :: !(Maybe (Textual Int32))
     , _liDePartureTime       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LegInfo' with the minimum fields required to make a request.
 --
@@ -536,7 +544,7 @@ data LegInfo = LegInfo'
 legInfo
     :: LegInfo
 legInfo =
-    LegInfo'
+  LegInfo'
     { _liDestination = Nothing
     , _liOrigin = Nothing
     , _liSecure = Nothing
@@ -710,12 +718,14 @@ instance ToJSON LegInfo where
 -- | An airport.
 --
 -- /See:/ 'airportData' smart constructor.
-data AirportData = AirportData'
+data AirportData =
+  AirportData'
     { _aKind :: !Text
     , _aName :: !(Maybe Text)
     , _aCity :: !(Maybe Text)
     , _aCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AirportData' with the minimum fields required to make a request.
 --
@@ -731,7 +741,7 @@ data AirportData = AirportData'
 airportData
     :: AirportData
 airportData =
-    AirportData'
+  AirportData'
     { _aKind = "qpxexpress#airportData"
     , _aName = Nothing
     , _aCity = Nothing
@@ -777,12 +787,14 @@ instance ToJSON AirportData where
 -- | The price of this segment.
 --
 -- /See:/ 'segmentPricing' smart constructor.
-data SegmentPricing = SegmentPricing'
+data SegmentPricing =
+  SegmentPricing'
     { _spFreeBaggageOption :: !(Maybe [FreeBaggageAllowance])
     , _spKind              :: !Text
     , _spFareId            :: !(Maybe Text)
     , _spSegmentId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SegmentPricing' with the minimum fields required to make a request.
 --
@@ -798,7 +810,7 @@ data SegmentPricing = SegmentPricing'
 segmentPricing
     :: SegmentPricing
 segmentPricing =
-    SegmentPricing'
+  SegmentPricing'
     { _spFreeBaggageOption = Nothing
     , _spKind = "qpxexpress#segmentPricing"
     , _spFareId = Nothing
@@ -856,11 +868,13 @@ instance ToJSON SegmentPricing where
 -- SYD | BOS | March 22, 2007 | then this is a three slice trip.
 --
 -- /See:/ 'sliceInfo' smart constructor.
-data SliceInfo = SliceInfo'
+data SliceInfo =
+  SliceInfo'
     { _siKind     :: !Text
     , _siSegment  :: !(Maybe [SegmentInfo])
     , _siDuration :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SliceInfo' with the minimum fields required to make a request.
 --
@@ -874,7 +888,7 @@ data SliceInfo = SliceInfo'
 sliceInfo
     :: SliceInfo
 sliceInfo =
-    SliceInfo'
+  SliceInfo'
     { _siKind = "qpxexpress#sliceInfo"
     , _siSegment = Nothing
     , _siDuration = Nothing
@@ -921,10 +935,12 @@ instance ToJSON SliceInfo where
 -- | A QPX Express search response.
 --
 -- /See:/ 'tripsSearchResponse' smart constructor.
-data TripsSearchResponse = TripsSearchResponse'
+data TripsSearchResponse =
+  TripsSearchResponse'
     { _tsrTrips :: !(Maybe TripOptionsResponse)
     , _tsrKind  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TripsSearchResponse' with the minimum fields required to make a request.
 --
@@ -936,10 +952,8 @@ data TripsSearchResponse = TripsSearchResponse'
 tripsSearchResponse
     :: TripsSearchResponse
 tripsSearchResponse =
-    TripsSearchResponse'
-    { _tsrTrips = Nothing
-    , _tsrKind = "qpxExpress#tripsSearch"
-    }
+  TripsSearchResponse'
+    {_tsrTrips = Nothing, _tsrKind = "qpxExpress#tripsSearch"}
 
 -- | All possible solutions to the QPX Express search request.
 tsrTrips :: Lens' TripsSearchResponse (Maybe TripOptionsResponse)
@@ -968,13 +982,15 @@ instance ToJSON TripsSearchResponse where
 -- | Trip information.
 --
 -- /See:/ 'tripOption' smart constructor.
-data TripOption = TripOption'
+data TripOption =
+  TripOption'
     { _toPricing   :: !(Maybe [PricingInfo])
     , _toKind      :: !Text
     , _toId        :: !(Maybe Text)
     , _toSlice     :: !(Maybe [SliceInfo])
     , _toSaleTotal :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TripOption' with the minimum fields required to make a request.
 --
@@ -992,7 +1008,7 @@ data TripOption = TripOption'
 tripOption
     :: TripOption
 tripOption =
-    TripOption'
+  TripOption'
     { _toPricing = Nothing
     , _toKind = "qpxexpress#tripOption"
     , _toId = Nothing
@@ -1051,13 +1067,15 @@ instance ToJSON TripOption where
 -- | Information about an item of baggage.
 --
 -- /See:/ 'bagDescriptor' smart constructor.
-data BagDescriptor = BagDescriptor'
+data BagDescriptor =
+  BagDescriptor'
     { _bdKind           :: !Text
     , _bdCommercialName :: !(Maybe Text)
     , _bdCount          :: !(Maybe (Textual Int32))
     , _bdDescription    :: !(Maybe [Text])
     , _bdSubcode        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BagDescriptor' with the minimum fields required to make a request.
 --
@@ -1075,7 +1093,7 @@ data BagDescriptor = BagDescriptor'
 bagDescriptor
     :: BagDescriptor
 bagDescriptor =
-    BagDescriptor'
+  BagDescriptor'
     { _bdKind = "qpxexpress#bagDescriptor"
     , _bdCommercialName = Nothing
     , _bdCount = Nothing
@@ -1138,12 +1156,14 @@ instance ToJSON BagDescriptor where
 -- the city of an airport.
 --
 -- /See:/ 'cityData' smart constructor.
-data CityData = CityData'
+data CityData =
+  CityData'
     { _cCountry :: !(Maybe Text)
     , _cKind    :: !Text
     , _cName    :: !(Maybe Text)
     , _cCode    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CityData' with the minimum fields required to make a request.
 --
@@ -1159,7 +1179,7 @@ data CityData = CityData'
 cityData
     :: CityData
 cityData =
-    CityData'
+  CityData'
     { _cCountry = Nothing
     , _cKind = "qpxexpress#cityData"
     , _cName = Nothing
@@ -1207,14 +1227,16 @@ instance ToJSON CityData where
 -- reservation systems.
 --
 -- /See:/ 'passengerCounts' smart constructor.
-data PassengerCounts = PassengerCounts'
+data PassengerCounts =
+  PassengerCounts'
     { _pcSeniorCount       :: !(Maybe (Textual Int32))
     , _pcKind              :: !Text
     , _pcInfantInLapCount  :: !(Maybe (Textual Int32))
     , _pcChildCount        :: !(Maybe (Textual Int32))
     , _pcInfantInSeatCount :: !(Maybe (Textual Int32))
     , _pcAdultCount        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PassengerCounts' with the minimum fields required to make a request.
 --
@@ -1234,7 +1256,7 @@ data PassengerCounts = PassengerCounts'
 passengerCounts
     :: PassengerCounts
 passengerCounts =
-    PassengerCounts'
+  PassengerCounts'
     { _pcSeniorCount = Nothing
     , _pcKind = "qpxexpress#passengerCounts"
     , _pcInfantInLapCount = Nothing
@@ -1311,7 +1333,8 @@ instance ToJSON PassengerCounts where
 -- HNL to OGG (leg 2), and DFW to OGG (legs 1 and 2).
 --
 -- /See:/ 'segmentInfo' smart constructor.
-data SegmentInfo = SegmentInfo'
+data SegmentInfo =
+  SegmentInfo'
     { _sBookingCode                 :: !(Maybe Text)
     , _sCabin                       :: !(Maybe Text)
     , _sBookingCodeCount            :: !(Maybe (Textual Int32))
@@ -1323,7 +1346,8 @@ data SegmentInfo = SegmentInfo'
     , _sConnectionDuration          :: !(Maybe (Textual Int32))
     , _sDuration                    :: !(Maybe (Textual Int32))
     , _sLeg                         :: !(Maybe [LegInfo])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SegmentInfo' with the minimum fields required to make a request.
 --
@@ -1353,7 +1377,7 @@ data SegmentInfo = SegmentInfo'
 segmentInfo
     :: SegmentInfo
 segmentInfo =
-    SegmentInfo'
+  SegmentInfo'
     { _sBookingCode = Nothing
     , _sCabin = Nothing
     , _sBookingCodeCount = Nothing
@@ -1475,11 +1499,13 @@ instance ToJSON SegmentInfo where
 -- | Tax data.
 --
 -- /See:/ 'taxData' smart constructor.
-data TaxData = TaxData'
+data TaxData =
+  TaxData'
     { _tdKind :: !Text
     , _tdName :: !(Maybe Text)
     , _tdId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TaxData' with the minimum fields required to make a request.
 --
@@ -1493,11 +1519,7 @@ data TaxData = TaxData'
 taxData
     :: TaxData
 taxData =
-    TaxData'
-    { _tdKind = "qpxexpress#taxData"
-    , _tdName = Nothing
-    , _tdId = Nothing
-    }
+  TaxData' {_tdKind = "qpxexpress#taxData", _tdName = Nothing, _tdId = Nothing}
 
 -- | Identifies this as a tax data object, representing some tax. Value: the
 -- fixed string qpxexpress#taxData.
@@ -1531,9 +1553,11 @@ instance ToJSON TaxData where
 -- | A QPX Express search request.
 --
 -- /See:/ 'tripsSearchRequest' smart constructor.
-newtype TripsSearchRequest = TripsSearchRequest'
+newtype TripsSearchRequest =
+  TripsSearchRequest'
     { _tsrRequest :: Maybe TripOptionsRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TripsSearchRequest' with the minimum fields required to make a request.
 --
@@ -1542,10 +1566,7 @@ newtype TripsSearchRequest = TripsSearchRequest'
 -- * 'tsrRequest'
 tripsSearchRequest
     :: TripsSearchRequest
-tripsSearchRequest =
-    TripsSearchRequest'
-    { _tsrRequest = Nothing
-    }
+tripsSearchRequest = TripsSearchRequest' {_tsrRequest = Nothing}
 
 -- | A QPX Express search request. Required values are at least one adult or
 -- senior passenger, an origin, a destination, and a date.
@@ -1565,14 +1586,16 @@ instance ToJSON TripsSearchRequest where
 -- | Tax information.
 --
 -- /See:/ 'taxInfo' smart constructor.
-data TaxInfo = TaxInfo'
+data TaxInfo =
+  TaxInfo'
     { _tiChargeType :: !(Maybe Text)
     , _tiCountry    :: !(Maybe Text)
     , _tiKind       :: !Text
     , _tiSalePrice  :: !(Maybe Text)
     , _tiCode       :: !(Maybe Text)
     , _tiId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TaxInfo' with the minimum fields required to make a request.
 --
@@ -1592,7 +1615,7 @@ data TaxInfo = TaxInfo'
 taxInfo
     :: TaxInfo
 taxInfo =
-    TaxInfo'
+  TaxInfo'
     { _tiChargeType = Nothing
     , _tiCountry = Nothing
     , _tiKind = "qpxexpress#taxInfo"
@@ -1657,7 +1680,8 @@ instance ToJSON TaxInfo where
 -- defaults to that of the journey origin country.
 --
 -- /See:/ 'pricingInfo' smart constructor.
-data PricingInfo = PricingInfo'
+data PricingInfo =
+  PricingInfo'
     { _piSaleTaxTotal        :: !(Maybe Text)
     , _piRefundable          :: !(Maybe Bool)
     , _piPtc                 :: !(Maybe Text)
@@ -1671,7 +1695,8 @@ data PricingInfo = PricingInfo'
     , _piTax                 :: !(Maybe [TaxInfo])
     , _piSaleTotal           :: !(Maybe Text)
     , _piSaleFareTotal       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PricingInfo' with the minimum fields required to make a request.
 --
@@ -1705,7 +1730,7 @@ data PricingInfo = PricingInfo'
 pricingInfo
     :: PricingInfo
 pricingInfo =
-    PricingInfo'
+  PricingInfo'
     { _piSaleTaxTotal = Nothing
     , _piRefundable = Nothing
     , _piPtc = Nothing
@@ -1849,10 +1874,12 @@ instance ToJSON PricingInfo where
 -- flights that require a change of aircraft between legs.
 --
 -- /See:/ 'flightInfo' smart constructor.
-data FlightInfo = FlightInfo'
+data FlightInfo =
+  FlightInfo'
     { _fiCarrier :: !(Maybe Text)
     , _fiNumber  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FlightInfo' with the minimum fields required to make a request.
 --
@@ -1863,11 +1890,7 @@ data FlightInfo = FlightInfo'
 -- * 'fiNumber'
 flightInfo
     :: FlightInfo
-flightInfo =
-    FlightInfo'
-    { _fiCarrier = Nothing
-    , _fiNumber = Nothing
-    }
+flightInfo = FlightInfo' {_fiCarrier = Nothing, _fiNumber = Nothing}
 
 fiCarrier :: Lens' FlightInfo (Maybe Text)
 fiCarrier
@@ -1898,7 +1921,8 @@ instance ToJSON FlightInfo where
 -- is a one-to-eight character alphanumeric code used to identify a fare.)
 --
 -- /See:/ 'fareInfo' smart constructor.
-data FareInfo = FareInfo'
+data FareInfo =
+  FareInfo'
     { _fCarrier     :: !(Maybe Text)
     , _fDestination :: !(Maybe Text)
     , _fOrigin      :: !(Maybe Text)
@@ -1906,7 +1930,8 @@ data FareInfo = FareInfo'
     , _fKind        :: !Text
     , _fBasisCode   :: !(Maybe Text)
     , _fId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FareInfo' with the minimum fields required to make a request.
 --
@@ -1928,7 +1953,7 @@ data FareInfo = FareInfo'
 fareInfo
     :: FareInfo
 fareInfo =
-    FareInfo'
+  FareInfo'
     { _fCarrier = Nothing
     , _fDestination = Nothing
     , _fOrigin = Nothing
@@ -1997,7 +2022,8 @@ instance ToJSON FareInfo where
 -- | A QPX Express search request, which will yield one or more solutions.
 --
 -- /See:/ 'tripOptionsRequest' smart constructor.
-data TripOptionsRequest = TripOptionsRequest'
+data TripOptionsRequest =
+  TripOptionsRequest'
     { _torRefundable       :: !(Maybe Bool)
     , _torSaleCountry      :: !(Maybe Text)
     , _torPassengers       :: !(Maybe PassengerCounts)
@@ -2005,7 +2031,8 @@ data TripOptionsRequest = TripOptionsRequest'
     , _torSolutions        :: !(Maybe (Textual Int32))
     , _torSlice            :: !(Maybe [SliceInput])
     , _torMaxPrice         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TripOptionsRequest' with the minimum fields required to make a request.
 --
@@ -2027,7 +2054,7 @@ data TripOptionsRequest = TripOptionsRequest'
 tripOptionsRequest
     :: TripOptionsRequest
 tripOptionsRequest =
-    TripOptionsRequest'
+  TripOptionsRequest'
     { _torRefundable = Nothing
     , _torSaleCountry = Nothing
     , _torPassengers = Nothing
@@ -2115,7 +2142,8 @@ instance ToJSON TripOptionsRequest where
 -- | Criteria a desired slice must satisfy.
 --
 -- /See:/ 'sliceInput' smart constructor.
-data SliceInput = SliceInput'
+data SliceInput =
+  SliceInput'
     { _sliDestination            :: !(Maybe Text)
     , _sliOrigin                 :: !(Maybe Text)
     , _sliMaxStops               :: !(Maybe (Textual Int32))
@@ -2127,7 +2155,8 @@ data SliceInput = SliceInput'
     , _sliPermittedDePartureTime :: !(Maybe TimeOfDayRange)
     , _sliPermittedCarrier       :: !(Maybe [Text])
     , _sliAlliance               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SliceInput' with the minimum fields required to make a request.
 --
@@ -2157,7 +2186,7 @@ data SliceInput = SliceInput'
 sliceInput
     :: SliceInput
 sliceInput =
-    SliceInput'
+  SliceInput'
     { _sliDestination = Nothing
     , _sliOrigin = Nothing
     , _sliMaxStops = Nothing

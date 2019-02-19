@@ -58,11 +58,13 @@ type LiaSettingsListResource =
 -- account.
 --
 -- /See:/ 'liaSettingsList' smart constructor.
-data LiaSettingsList = LiaSettingsList'
+data LiaSettingsList =
+  LiaSettingsList'
     { _lslMerchantId :: !(Textual Word64)
     , _lslPageToken  :: !(Maybe Text)
     , _lslMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LiaSettingsList' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ liaSettingsList
     :: Word64 -- ^ 'lslMerchantId'
     -> LiaSettingsList
 liaSettingsList pLslMerchantId_ =
-    LiaSettingsList'
+  LiaSettingsList'
     { _lslMerchantId = _Coerce # pLslMerchantId_
     , _lslPageToken = Nothing
     , _lslMaxResults = Nothing

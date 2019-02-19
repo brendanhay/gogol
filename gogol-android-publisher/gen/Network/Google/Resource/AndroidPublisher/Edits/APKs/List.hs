@@ -53,10 +53,12 @@ type EditsAPKsListResource =
 
 --
 -- /See:/ 'editsAPKsList' smart constructor.
-data EditsAPKsList = EditsAPKsList'
+data EditsAPKsList =
+  EditsAPKsList'
     { _eapklPackageName :: !Text
     , _eapklEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsAPKsList' with the minimum fields required to make a request.
 --
@@ -70,10 +72,8 @@ editsAPKsList
     -> Text -- ^ 'eapklEditId'
     -> EditsAPKsList
 editsAPKsList pEapklPackageName_ pEapklEditId_ =
-    EditsAPKsList'
-    { _eapklPackageName = pEapklPackageName_
-    , _eapklEditId = pEapklEditId_
-    }
+  EditsAPKsList'
+    {_eapklPackageName = pEapklPackageName_, _eapklEditId = pEapklEditId_}
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

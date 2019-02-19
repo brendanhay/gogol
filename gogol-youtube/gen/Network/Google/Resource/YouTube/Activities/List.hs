@@ -76,7 +76,8 @@ type ActivitiesListResource =
 -- each user.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList'
+data ActivitiesList =
+  ActivitiesList'
     { _alPublishedAfter  :: !(Maybe DateTime')
     , _alPart            :: !Text
     , _alHome            :: !(Maybe Bool)
@@ -86,7 +87,8 @@ data ActivitiesList = ActivitiesList'
     , _alPageToken       :: !(Maybe Text)
     , _alMaxResults      :: !(Textual Word32)
     , _alPublishedBefore :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
@@ -113,7 +115,7 @@ activitiesList
     :: Text -- ^ 'alPart'
     -> ActivitiesList
 activitiesList pAlPart_ =
-    ActivitiesList'
+  ActivitiesList'
     { _alPublishedAfter = Nothing
     , _alPart = pAlPart_
     , _alHome = Nothing

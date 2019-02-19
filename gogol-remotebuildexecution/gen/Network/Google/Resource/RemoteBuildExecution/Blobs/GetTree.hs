@@ -94,7 +94,8 @@ type BlobsGetTreeResource =
 -- present in the CAS.
 --
 -- /See:/ 'blobsGetTree' smart constructor.
-data BlobsGetTree = BlobsGetTree'
+data BlobsGetTree =
+  BlobsGetTree'
     { _bgtSizeBytes      :: !(Textual Int64)
     , _bgtXgafv          :: !(Maybe Xgafv)
     , _bgtHash           :: !Text
@@ -105,7 +106,8 @@ data BlobsGetTree = BlobsGetTree'
     , _bgtPageSize       :: !(Maybe (Textual Int32))
     , _bgtInstanceName   :: !Text
     , _bgtCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BlobsGetTree' with the minimum fields required to make a request.
 --
@@ -136,7 +138,7 @@ blobsGetTree
     -> Text -- ^ 'bgtInstanceName'
     -> BlobsGetTree
 blobsGetTree pBgtSizeBytes_ pBgtHash_ pBgtInstanceName_ =
-    BlobsGetTree'
+  BlobsGetTree'
     { _bgtSizeBytes = _Coerce # pBgtSizeBytes_
     , _bgtXgafv = Nothing
     , _bgtHash = pBgtHash_

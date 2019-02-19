@@ -63,10 +63,12 @@ type ServiceAccountkeysInsertResource =
 -- type of the key should be populated in the resource to be inserted.
 --
 -- /See:/ 'serviceAccountkeysInsert' smart constructor.
-data ServiceAccountkeysInsert = ServiceAccountkeysInsert'
+data ServiceAccountkeysInsert =
+  ServiceAccountkeysInsert'
     { _saiEnterpriseId :: !Text
     , _saiPayload      :: !ServiceAccountKey
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServiceAccountkeysInsert' with the minimum fields required to make a request.
 --
@@ -80,10 +82,8 @@ serviceAccountkeysInsert
     -> ServiceAccountKey -- ^ 'saiPayload'
     -> ServiceAccountkeysInsert
 serviceAccountkeysInsert pSaiEnterpriseId_ pSaiPayload_ =
-    ServiceAccountkeysInsert'
-    { _saiEnterpriseId = pSaiEnterpriseId_
-    , _saiPayload = pSaiPayload_
-    }
+  ServiceAccountkeysInsert'
+    {_saiEnterpriseId = pSaiEnterpriseId_, _saiPayload = pSaiPayload_}
 
 -- | The ID of the enterprise.
 saiEnterpriseId :: Lens' ServiceAccountkeysInsert Text

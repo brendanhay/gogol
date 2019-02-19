@@ -79,7 +79,8 @@ type ProjectsDatabasesOperationsCancelResource =
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
 -- /See:/ 'projectsDatabasesOperationsCancel' smart constructor.
-data ProjectsDatabasesOperationsCancel = ProjectsDatabasesOperationsCancel'
+data ProjectsDatabasesOperationsCancel =
+  ProjectsDatabasesOperationsCancel'
     { _pdocXgafv          :: !(Maybe Xgafv)
     , _pdocUploadProtocol :: !(Maybe Text)
     , _pdocAccessToken    :: !(Maybe Text)
@@ -87,7 +88,8 @@ data ProjectsDatabasesOperationsCancel = ProjectsDatabasesOperationsCancel'
     , _pdocPayload        :: !GoogleLongrunningCancelOperationRequest
     , _pdocName           :: !Text
     , _pdocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDatabasesOperationsCancel' with the minimum fields required to make a request.
 --
@@ -111,7 +113,7 @@ projectsDatabasesOperationsCancel
     -> Text -- ^ 'pdocName'
     -> ProjectsDatabasesOperationsCancel
 projectsDatabasesOperationsCancel pPdocPayload_ pPdocName_ =
-    ProjectsDatabasesOperationsCancel'
+  ProjectsDatabasesOperationsCancel'
     { _pdocXgafv = Nothing
     , _pdocUploadProtocol = Nothing
     , _pdocAccessToken = Nothing
@@ -159,7 +161,8 @@ pdocCallback
   = lens _pdocCallback (\ s a -> s{_pdocCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesOperationsCancel where
+           ProjectsDatabasesOperationsCancel
+         where
         type Rs ProjectsDatabasesOperationsCancel = Empty
         type Scopes ProjectsDatabasesOperationsCancel =
              '["https://www.googleapis.com/auth/cloud-platform",

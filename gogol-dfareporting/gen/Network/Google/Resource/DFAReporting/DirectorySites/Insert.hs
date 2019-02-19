@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesInsert' request conforms to.
 type DirectorySitesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>
@@ -55,10 +55,12 @@ type DirectorySitesInsertResource =
 -- | Inserts a new directory site.
 --
 -- /See:/ 'directorySitesInsert' smart constructor.
-data DirectorySitesInsert = DirectorySitesInsert'
+data DirectorySitesInsert =
+  DirectorySitesInsert'
     { _dsiProFileId :: !(Textual Int64)
     , _dsiPayload   :: !DirectorySite
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DirectorySitesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ directorySitesInsert
     -> DirectorySite -- ^ 'dsiPayload'
     -> DirectorySitesInsert
 directorySitesInsert pDsiProFileId_ pDsiPayload_ =
-    DirectorySitesInsert'
-    { _dsiProFileId = _Coerce # pDsiProFileId_
-    , _dsiPayload = pDsiPayload_
-    }
+  DirectorySitesInsert'
+    {_dsiProFileId = _Coerce # pDsiProFileId_, _dsiPayload = pDsiPayload_}
 
 -- | User profile ID associated with this request.
 dsiProFileId :: Lens' DirectorySitesInsert Int64

@@ -74,7 +74,8 @@ type ChannelsListResource =
 -- request criteria.
 --
 -- /See:/ 'channelsList' smart constructor.
-data ChannelsList = ChannelsList'
+data ChannelsList =
+  ChannelsList'
     { _cPart                   :: !Text
     , _cMine                   :: !(Maybe Bool)
     , _cForUsername            :: !(Maybe Text)
@@ -86,7 +87,8 @@ data ChannelsList = ChannelsList'
     , _cPageToken              :: !(Maybe Text)
     , _cManagedByMe            :: !(Maybe Bool)
     , _cMaxResults             :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChannelsList' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ channelsList
     :: Text -- ^ 'cPart'
     -> ChannelsList
 channelsList pCPart_ =
-    ChannelsList'
+  ChannelsList'
     { _cPart = pCPart_
     , _cMine = Nothing
     , _cForUsername = Nothing

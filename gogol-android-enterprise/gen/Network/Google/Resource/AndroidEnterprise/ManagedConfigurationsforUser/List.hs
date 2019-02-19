@@ -58,10 +58,12 @@ type ManagedConfigurationsforUserListResource =
 -- Only the ID is set.
 --
 -- /See:/ 'managedConfigurationsforUserList' smart constructor.
-data ManagedConfigurationsforUserList = ManagedConfigurationsforUserList'
+data ManagedConfigurationsforUserList =
+  ManagedConfigurationsforUserList'
     { _mculEnterpriseId :: !Text
     , _mculUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsforUserList' with the minimum fields required to make a request.
 --
@@ -75,10 +77,8 @@ managedConfigurationsforUserList
     -> Text -- ^ 'mculUserId'
     -> ManagedConfigurationsforUserList
 managedConfigurationsforUserList pMculEnterpriseId_ pMculUserId_ =
-    ManagedConfigurationsforUserList'
-    { _mculEnterpriseId = pMculEnterpriseId_
-    , _mculUserId = pMculUserId_
-    }
+  ManagedConfigurationsforUserList'
+    {_mculEnterpriseId = pMculEnterpriseId_, _mculUserId = pMculUserId_}
 
 -- | The ID of the enterprise.
 mculEnterpriseId :: Lens' ManagedConfigurationsforUserList Text
@@ -92,7 +92,8 @@ mculUserId
   = lens _mculUserId (\ s a -> s{_mculUserId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforUserList where
+           ManagedConfigurationsforUserList
+         where
         type Rs ManagedConfigurationsforUserList =
              ManagedConfigurationsForUserListResponse
         type Scopes ManagedConfigurationsforUserList =

@@ -23,11 +23,13 @@ import           Network.Google.Prelude
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'instanceAggregatedListWarning' smart constructor.
-data InstanceAggregatedListWarning = InstanceAggregatedListWarning'
+data InstanceAggregatedListWarning =
+  InstanceAggregatedListWarning'
     { _ialwData    :: !(Maybe [InstanceAggregatedListWarningDataItem])
     , _ialwCode    :: !(Maybe InstanceAggregatedListWarningCode)
     , _ialwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -41,11 +43,8 @@ data InstanceAggregatedListWarning = InstanceAggregatedListWarning'
 instanceAggregatedListWarning
     :: InstanceAggregatedListWarning
 instanceAggregatedListWarning =
-    InstanceAggregatedListWarning'
-    { _ialwData = Nothing
-    , _ialwCode = Nothing
-    , _ialwMessage = Nothing
-    }
+  InstanceAggregatedListWarning'
+    {_ialwData = Nothing, _ialwCode = Nothing, _ialwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -85,14 +84,16 @@ instance ToJSON InstanceAggregatedListWarning where
 -- | Contains a list of TargetHttpsProxy resources.
 --
 -- /See:/ 'targetHTTPSProxyList' smart constructor.
-data TargetHTTPSProxyList = TargetHTTPSProxyList'
+data TargetHTTPSProxyList =
+  TargetHTTPSProxyList'
     { _thplNextPageToken :: !(Maybe Text)
     , _thplKind          :: !Text
     , _thplItems         :: !(Maybe [TargetHTTPSProxy])
     , _thplSelfLink      :: !(Maybe Text)
     , _thplWarning       :: !(Maybe TargetHTTPSProxyListWarning)
     , _thplId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxyList' with the minimum fields required to make a request.
 --
@@ -112,7 +113,7 @@ data TargetHTTPSProxyList = TargetHTTPSProxyList'
 targetHTTPSProxyList
     :: TargetHTTPSProxyList
 targetHTTPSProxyList =
-    TargetHTTPSProxyList'
+  TargetHTTPSProxyList'
     { _thplNextPageToken = Nothing
     , _thplKind = "compute#targetHttpsProxyList"
     , _thplItems = Nothing
@@ -182,10 +183,12 @@ instance ToJSON TargetHTTPSProxyList where
 
 --
 -- /See:/ 'routersScopedList' smart constructor.
-data RoutersScopedList = RoutersScopedList'
+data RoutersScopedList =
+  RoutersScopedList'
     { _rslRouters :: !(Maybe [Router])
     , _rslWarning :: !(Maybe RoutersScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutersScopedList' with the minimum fields required to make a request.
 --
@@ -197,10 +200,7 @@ data RoutersScopedList = RoutersScopedList'
 routersScopedList
     :: RoutersScopedList
 routersScopedList =
-    RoutersScopedList'
-    { _rslRouters = Nothing
-    , _rslWarning = Nothing
-    }
+  RoutersScopedList' {_rslRouters = Nothing, _rslWarning = Nothing}
 
 -- | A list of routers contained in this scope.
 rslRouters :: Lens' RoutersScopedList [Router]
@@ -231,10 +231,12 @@ instance ToJSON RoutersScopedList where
 
 --
 -- /See:/ 'routerStatusResponse' smart constructor.
-data RouterStatusResponse = RouterStatusResponse'
+data RouterStatusResponse =
+  RouterStatusResponse'
     { _rsrKind   :: !Text
     , _rsrResult :: !(Maybe RouterStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterStatusResponse' with the minimum fields required to make a request.
 --
@@ -246,10 +248,8 @@ data RouterStatusResponse = RouterStatusResponse'
 routerStatusResponse
     :: RouterStatusResponse
 routerStatusResponse =
-    RouterStatusResponse'
-    { _rsrKind = "compute#routerStatusResponse"
-    , _rsrResult = Nothing
-    }
+  RouterStatusResponse'
+    {_rsrKind = "compute#routerStatusResponse", _rsrResult = Nothing}
 
 -- | Type of resource.
 rsrKind :: Lens' RouterStatusResponse Text
@@ -276,9 +276,11 @@ instance ToJSON RouterStatusResponse where
 
 --
 -- /See:/ 'regionInstanceGroupManagersDeleteInstancesRequest' smart constructor.
-newtype RegionInstanceGroupManagersDeleteInstancesRequest = RegionInstanceGroupManagersDeleteInstancesRequest'
+newtype RegionInstanceGroupManagersDeleteInstancesRequest =
+  RegionInstanceGroupManagersDeleteInstancesRequest'
     { _rigmdirInstances :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersDeleteInstancesRequest' with the minimum fields required to make a request.
 --
@@ -288,9 +290,8 @@ newtype RegionInstanceGroupManagersDeleteInstancesRequest = RegionInstanceGroupM
 regionInstanceGroupManagersDeleteInstancesRequest
     :: RegionInstanceGroupManagersDeleteInstancesRequest
 regionInstanceGroupManagersDeleteInstancesRequest =
-    RegionInstanceGroupManagersDeleteInstancesRequest'
-    { _rigmdirInstances = Nothing
-    }
+  RegionInstanceGroupManagersDeleteInstancesRequest'
+    {_rigmdirInstances = Nothing}
 
 -- | The URLs of one or more instances to delete. This can be a full URL or a
 -- partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -302,7 +303,7 @@ rigmdirInstances
       . _Coerce
 
 instance FromJSON
-         RegionInstanceGroupManagersDeleteInstancesRequest
+           RegionInstanceGroupManagersDeleteInstancesRequest
          where
         parseJSON
           = withObject
@@ -312,7 +313,7 @@ instance FromJSON
                    <$> (o .:? "instances" .!= mempty))
 
 instance ToJSON
-         RegionInstanceGroupManagersDeleteInstancesRequest
+           RegionInstanceGroupManagersDeleteInstancesRequest
          where
         toJSON
           RegionInstanceGroupManagersDeleteInstancesRequest'{..}
@@ -321,11 +322,13 @@ instance ToJSON
 
 --
 -- /See:/ 'interconnectDiagnosticsLinkLACPStatus' smart constructor.
-data InterconnectDiagnosticsLinkLACPStatus = InterconnectDiagnosticsLinkLACPStatus'
+data InterconnectDiagnosticsLinkLACPStatus =
+  InterconnectDiagnosticsLinkLACPStatus'
     { _idllacpsState            :: !(Maybe InterconnectDiagnosticsLinkLACPStatusState)
     , _idllacpsNeighborSystemId :: !(Maybe Text)
     , _idllacpsGoogleSystemId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectDiagnosticsLinkLACPStatus' with the minimum fields required to make a request.
 --
@@ -339,7 +342,7 @@ data InterconnectDiagnosticsLinkLACPStatus = InterconnectDiagnosticsLinkLACPStat
 interconnectDiagnosticsLinkLACPStatus
     :: InterconnectDiagnosticsLinkLACPStatus
 interconnectDiagnosticsLinkLACPStatus =
-    InterconnectDiagnosticsLinkLACPStatus'
+  InterconnectDiagnosticsLinkLACPStatus'
     { _idllacpsState = Nothing
     , _idllacpsNeighborSystemId = Nothing
     , _idllacpsGoogleSystemId = Nothing
@@ -363,7 +366,8 @@ idllacpsGoogleSystemId
       (\ s a -> s{_idllacpsGoogleSystemId = a})
 
 instance FromJSON
-         InterconnectDiagnosticsLinkLACPStatus where
+           InterconnectDiagnosticsLinkLACPStatus
+         where
         parseJSON
           = withObject "InterconnectDiagnosticsLinkLACPStatus"
               (\ o ->
@@ -383,10 +387,12 @@ instance ToJSON InterconnectDiagnosticsLinkLACPStatus
 
 --
 -- /See:/ 'addressesScopedList' smart constructor.
-data AddressesScopedList = AddressesScopedList'
+data AddressesScopedList =
+  AddressesScopedList'
     { _aslAddresses :: !(Maybe [Address])
     , _aslWarning   :: !(Maybe AddressesScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressesScopedList' with the minimum fields required to make a request.
 --
@@ -398,10 +404,7 @@ data AddressesScopedList = AddressesScopedList'
 addressesScopedList
     :: AddressesScopedList
 addressesScopedList =
-    AddressesScopedList'
-    { _aslAddresses = Nothing
-    , _aslWarning = Nothing
-    }
+  AddressesScopedList' {_aslAddresses = Nothing, _aslWarning = Nothing}
 
 -- | [Output Only] A list of addresses contained in this scope.
 aslAddresses :: Lens' AddressesScopedList [Address]
@@ -432,10 +435,12 @@ instance ToJSON AddressesScopedList where
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
+data OperationWarningsItemDataItem =
+  OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
 --
@@ -447,10 +452,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem'
-    { _owidiValue = Nothing
-    , _owidiKey = Nothing
-    }
+  OperationWarningsItemDataItem' {_owidiValue = Nothing, _owidiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
@@ -483,10 +485,12 @@ instance ToJSON OperationWarningsItemDataItem where
 
 --
 -- /See:/ 'regionInstanceGroupsListInstancesRequest' smart constructor.
-data RegionInstanceGroupsListInstancesRequest = RegionInstanceGroupsListInstancesRequest'
+data RegionInstanceGroupsListInstancesRequest =
+  RegionInstanceGroupsListInstancesRequest'
     { _riglirInstanceState :: !(Maybe RegionInstanceGroupsListInstancesRequestInstanceState)
     , _riglirPortName      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupsListInstancesRequest' with the minimum fields required to make a request.
 --
@@ -498,10 +502,8 @@ data RegionInstanceGroupsListInstancesRequest = RegionInstanceGroupsListInstance
 regionInstanceGroupsListInstancesRequest
     :: RegionInstanceGroupsListInstancesRequest
 regionInstanceGroupsListInstancesRequest =
-    RegionInstanceGroupsListInstancesRequest'
-    { _riglirInstanceState = Nothing
-    , _riglirPortName = Nothing
-    }
+  RegionInstanceGroupsListInstancesRequest'
+    {_riglirInstanceState = Nothing, _riglirPortName = Nothing}
 
 -- | Instances in which state should be returned. Valid options are: \'ALL\',
 -- \'RUNNING\'. By default, it lists all instances.
@@ -519,7 +521,8 @@ riglirPortName
       (\ s a -> s{_riglirPortName = a})
 
 instance FromJSON
-         RegionInstanceGroupsListInstancesRequest where
+           RegionInstanceGroupsListInstancesRequest
+         where
         parseJSON
           = withObject
               "RegionInstanceGroupsListInstancesRequest"
@@ -528,7 +531,8 @@ instance FromJSON
                    (o .:? "instanceState") <*> (o .:? "portName"))
 
 instance ToJSON
-         RegionInstanceGroupsListInstancesRequest where
+           RegionInstanceGroupsListInstancesRequest
+         where
         toJSON RegionInstanceGroupsListInstancesRequest'{..}
           = object
               (catMaybes
@@ -538,11 +542,13 @@ instance ToJSON
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'backendServiceAggregatedListWarning' smart constructor.
-data BackendServiceAggregatedListWarning = BackendServiceAggregatedListWarning'
+data BackendServiceAggregatedListWarning =
+  BackendServiceAggregatedListWarning'
     { _bsalwData    :: !(Maybe [BackendServiceAggregatedListWarningDataItem])
     , _bsalwCode    :: !(Maybe BackendServiceAggregatedListWarningCode)
     , _bsalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -556,11 +562,8 @@ data BackendServiceAggregatedListWarning = BackendServiceAggregatedListWarning'
 backendServiceAggregatedListWarning
     :: BackendServiceAggregatedListWarning
 backendServiceAggregatedListWarning =
-    BackendServiceAggregatedListWarning'
-    { _bsalwData = Nothing
-    , _bsalwCode = Nothing
-    , _bsalwMessage = Nothing
-    }
+  BackendServiceAggregatedListWarning'
+    {_bsalwData = Nothing, _bsalwCode = Nothing, _bsalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -607,7 +610,8 @@ instance ToJSON BackendServiceAggregatedListWarning
 -- backends.
 --
 -- /See:/ 'sslPolicy' smart constructor.
-data SSLPolicy = SSLPolicy'
+data SSLPolicy =
+  SSLPolicy'
     { _spKind              :: !Text
     , _spFingerprint       :: !(Maybe Bytes)
     , _spProFile           :: !(Maybe SSLPolicyProFile)
@@ -620,7 +624,8 @@ data SSLPolicy = SSLPolicy'
     , _spId                :: !(Maybe (Textual Word64))
     , _spMinTLSVersion     :: !(Maybe SSLPolicyMinTLSVersion)
     , _spDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLPolicy' with the minimum fields required to make a request.
 --
@@ -652,7 +657,7 @@ data SSLPolicy = SSLPolicy'
 sslPolicy
     :: SSLPolicy
 sslPolicy =
-    SSLPolicy'
+  SSLPolicy'
     { _spKind = "compute#sslPolicy"
     , _spFingerprint = Nothing
     , _spProFile = Nothing
@@ -797,10 +802,12 @@ instance ToJSON SSLPolicy where
 
 --
 -- /See:/ 'backendServiceListWarningDataItem' smart constructor.
-data BackendServiceListWarningDataItem = BackendServiceListWarningDataItem'
+data BackendServiceListWarningDataItem =
+  BackendServiceListWarningDataItem'
     { _bslwdiValue :: !(Maybe Text)
     , _bslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -812,10 +819,8 @@ data BackendServiceListWarningDataItem = BackendServiceListWarningDataItem'
 backendServiceListWarningDataItem
     :: BackendServiceListWarningDataItem
 backendServiceListWarningDataItem =
-    BackendServiceListWarningDataItem'
-    { _bslwdiValue = Nothing
-    , _bslwdiKey = Nothing
-    }
+  BackendServiceListWarningDataItem'
+    {_bslwdiValue = Nothing, _bslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 bslwdiValue :: Lens' BackendServiceListWarningDataItem (Maybe Text)
@@ -851,10 +856,12 @@ instance ToJSON BackendServiceListWarningDataItem
 
 --
 -- /See:/ 'firewallDeniedItem' smart constructor.
-data FirewallDeniedItem = FirewallDeniedItem'
+data FirewallDeniedItem =
+  FirewallDeniedItem'
     { _fdiIPProtocol :: !(Maybe Text)
     , _fdiPorts      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FirewallDeniedItem' with the minimum fields required to make a request.
 --
@@ -866,10 +873,7 @@ data FirewallDeniedItem = FirewallDeniedItem'
 firewallDeniedItem
     :: FirewallDeniedItem
 firewallDeniedItem =
-    FirewallDeniedItem'
-    { _fdiIPProtocol = Nothing
-    , _fdiPorts = Nothing
-    }
+  FirewallDeniedItem' {_fdiIPProtocol = Nothing, _fdiPorts = Nothing}
 
 -- | The IP protocol to which this rule applies. The protocol type is
 -- required when creating a firewall rule. This value can either be one of
@@ -907,9 +911,11 @@ instance ToJSON FirewallDeniedItem where
 
 --
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
-newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest'
+newtype InstanceGroupManagersAbandonInstancesRequest =
+  InstanceGroupManagersAbandonInstancesRequest'
     { _igmairInstances :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAbandonInstancesRequest' with the minimum fields required to make a request.
 --
@@ -919,9 +925,7 @@ newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAban
 instanceGroupManagersAbandonInstancesRequest
     :: InstanceGroupManagersAbandonInstancesRequest
 instanceGroupManagersAbandonInstancesRequest =
-    InstanceGroupManagersAbandonInstancesRequest'
-    { _igmairInstances = Nothing
-    }
+  InstanceGroupManagersAbandonInstancesRequest' {_igmairInstances = Nothing}
 
 -- | The URLs of one or more instances to abandon. This can be a full URL or
 -- a partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -933,7 +937,8 @@ igmairInstances
       . _Coerce
 
 instance FromJSON
-         InstanceGroupManagersAbandonInstancesRequest where
+           InstanceGroupManagersAbandonInstancesRequest
+         where
         parseJSON
           = withObject
               "InstanceGroupManagersAbandonInstancesRequest"
@@ -942,7 +947,8 @@ instance FromJSON
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
-         InstanceGroupManagersAbandonInstancesRequest where
+           InstanceGroupManagersAbandonInstancesRequest
+         where
         toJSON
           InstanceGroupManagersAbandonInstancesRequest'{..}
           = object
@@ -951,9 +957,11 @@ instance ToJSON
 -- | A list of MachineTypesScopedList resources.
 --
 -- /See:/ 'machineTypeAggregatedListItems' smart constructor.
-newtype MachineTypeAggregatedListItems = MachineTypeAggregatedListItems'
+newtype MachineTypeAggregatedListItems =
+  MachineTypeAggregatedListItems'
     { _mtaliAddtional :: HashMap Text MachineTypesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypeAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -964,9 +972,7 @@ machineTypeAggregatedListItems
     :: HashMap Text MachineTypesScopedList -- ^ 'mtaliAddtional'
     -> MachineTypeAggregatedListItems
 machineTypeAggregatedListItems pMtaliAddtional_ =
-    MachineTypeAggregatedListItems'
-    { _mtaliAddtional = _Coerce # pMtaliAddtional_
-    }
+  MachineTypeAggregatedListItems' {_mtaliAddtional = _Coerce # pMtaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of machine types.
 mtaliAddtional :: Lens' MachineTypeAggregatedListItems (HashMap Text MachineTypesScopedList)
@@ -989,9 +995,11 @@ instance ToJSON MachineTypeAggregatedListItems where
 -- | A list of DiskTypesScopedList resources.
 --
 -- /See:/ 'diskTypeAggregatedListItems' smart constructor.
-newtype DiskTypeAggregatedListItems = DiskTypeAggregatedListItems'
+newtype DiskTypeAggregatedListItems =
+  DiskTypeAggregatedListItems'
     { _dtaliAddtional :: HashMap Text DiskTypesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypeAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -1002,9 +1010,7 @@ diskTypeAggregatedListItems
     :: HashMap Text DiskTypesScopedList -- ^ 'dtaliAddtional'
     -> DiskTypeAggregatedListItems
 diskTypeAggregatedListItems pDtaliAddtional_ =
-    DiskTypeAggregatedListItems'
-    { _dtaliAddtional = _Coerce # pDtaliAddtional_
-    }
+  DiskTypeAggregatedListItems' {_dtaliAddtional = _Coerce # pDtaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of disk types.
 dtaliAddtional :: Lens' DiskTypeAggregatedListItems (HashMap Text DiskTypesScopedList)
@@ -1024,10 +1030,12 @@ instance ToJSON DiskTypeAggregatedListItems where
 
 --
 -- /See:/ 'instancesSetLabelsRequest' smart constructor.
-data InstancesSetLabelsRequest = InstancesSetLabelsRequest'
+data InstancesSetLabelsRequest =
+  InstancesSetLabelsRequest'
     { _islrLabels           :: !(Maybe InstancesSetLabelsRequestLabels)
     , _islrLabelFingerprint :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetLabelsRequest' with the minimum fields required to make a request.
 --
@@ -1039,10 +1047,8 @@ data InstancesSetLabelsRequest = InstancesSetLabelsRequest'
 instancesSetLabelsRequest
     :: InstancesSetLabelsRequest
 instancesSetLabelsRequest =
-    InstancesSetLabelsRequest'
-    { _islrLabels = Nothing
-    , _islrLabelFingerprint = Nothing
-    }
+  InstancesSetLabelsRequest'
+    {_islrLabels = Nothing, _islrLabelFingerprint = Nothing}
 
 islrLabels :: Lens' InstancesSetLabelsRequest (Maybe InstancesSetLabelsRequestLabels)
 islrLabels
@@ -1074,14 +1080,16 @@ instance ToJSON InstancesSetLabelsRequest where
 -- | Contains a list of routers.
 --
 -- /See:/ 'routerAggregatedList' smart constructor.
-data RouterAggregatedList = RouterAggregatedList'
+data RouterAggregatedList =
+  RouterAggregatedList'
     { _ralNextPageToken :: !(Maybe Text)
     , _ralKind          :: !Text
     , _ralItems         :: !(Maybe RouterAggregatedListItems)
     , _ralSelfLink      :: !(Maybe Text)
     , _ralWarning       :: !(Maybe RouterAggregatedListWarning)
     , _ralId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterAggregatedList' with the minimum fields required to make a request.
 --
@@ -1101,7 +1109,7 @@ data RouterAggregatedList = RouterAggregatedList'
 routerAggregatedList
     :: RouterAggregatedList
 routerAggregatedList =
-    RouterAggregatedList'
+  RouterAggregatedList'
     { _ralNextPageToken = Nothing
     , _ralKind = "compute#routerAggregatedList"
     , _ralItems = Nothing
@@ -1168,14 +1176,16 @@ instance ToJSON RouterAggregatedList where
 -- | Contains a list of firewalls.
 --
 -- /See:/ 'firewallList' smart constructor.
-data FirewallList = FirewallList'
+data FirewallList =
+  FirewallList'
     { _flNextPageToken :: !(Maybe Text)
     , _flKind          :: !Text
     , _flItems         :: !(Maybe [Firewall])
     , _flSelfLink      :: !(Maybe Text)
     , _flWarning       :: !(Maybe FirewallListWarning)
     , _flId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FirewallList' with the minimum fields required to make a request.
 --
@@ -1195,7 +1205,7 @@ data FirewallList = FirewallList'
 firewallList
     :: FirewallList
 firewallList =
-    FirewallList'
+  FirewallList'
     { _flNextPageToken = Nothing
     , _flKind = "compute#firewallList"
     , _flItems = Nothing
@@ -1264,11 +1274,13 @@ instance ToJSON FirewallList where
 -- when the list is empty.
 --
 -- /See:/ 'instancesScopedListWarning' smart constructor.
-data InstancesScopedListWarning = InstancesScopedListWarning'
+data InstancesScopedListWarning =
+  InstancesScopedListWarning'
     { _islwData    :: !(Maybe [InstancesScopedListWarningDataItem])
     , _islwCode    :: !(Maybe InstancesScopedListWarningCode)
     , _islwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -1282,11 +1294,8 @@ data InstancesScopedListWarning = InstancesScopedListWarning'
 instancesScopedListWarning
     :: InstancesScopedListWarning
 instancesScopedListWarning =
-    InstancesScopedListWarning'
-    { _islwData = Nothing
-    , _islwCode = Nothing
-    , _islwMessage = Nothing
-    }
+  InstancesScopedListWarning'
+    {_islwData = Nothing, _islwCode = Nothing, _islwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -1325,9 +1334,11 @@ instance ToJSON InstancesScopedListWarning where
 
 --
 -- /See:/ 'regionInstanceGroupManagersRecreateRequest' smart constructor.
-newtype RegionInstanceGroupManagersRecreateRequest = RegionInstanceGroupManagersRecreateRequest'
+newtype RegionInstanceGroupManagersRecreateRequest =
+  RegionInstanceGroupManagersRecreateRequest'
     { _rigmrrInstances :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersRecreateRequest' with the minimum fields required to make a request.
 --
@@ -1337,9 +1348,7 @@ newtype RegionInstanceGroupManagersRecreateRequest = RegionInstanceGroupManagers
 regionInstanceGroupManagersRecreateRequest
     :: RegionInstanceGroupManagersRecreateRequest
 regionInstanceGroupManagersRecreateRequest =
-    RegionInstanceGroupManagersRecreateRequest'
-    { _rigmrrInstances = Nothing
-    }
+  RegionInstanceGroupManagersRecreateRequest' {_rigmrrInstances = Nothing}
 
 -- | The URLs of one or more instances to recreate. This can be a full URL or
 -- a partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -1351,7 +1360,8 @@ rigmrrInstances
       . _Coerce
 
 instance FromJSON
-         RegionInstanceGroupManagersRecreateRequest where
+           RegionInstanceGroupManagersRecreateRequest
+         where
         parseJSON
           = withObject
               "RegionInstanceGroupManagersRecreateRequest"
@@ -1360,7 +1370,8 @@ instance FromJSON
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
-         RegionInstanceGroupManagersRecreateRequest where
+           RegionInstanceGroupManagersRecreateRequest
+         where
         toJSON
           RegionInstanceGroupManagersRecreateRequest'{..}
           = object
@@ -1370,9 +1381,11 @@ instance ToJSON
 -- setLabels method.
 --
 -- /See:/ 'instanceLabels' smart constructor.
-newtype InstanceLabels = InstanceLabels'
+newtype InstanceLabels =
+  InstanceLabels'
     { _ilAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceLabels' with the minimum fields required to make a request.
 --
@@ -1383,9 +1396,7 @@ instanceLabels
     :: HashMap Text Text -- ^ 'ilAddtional'
     -> InstanceLabels
 instanceLabels pIlAddtional_ =
-    InstanceLabels'
-    { _ilAddtional = _Coerce # pIlAddtional_
-    }
+  InstanceLabels' {_ilAddtional = _Coerce # pIlAddtional_}
 
 ilAddtional :: Lens' InstanceLabels (HashMap Text Text)
 ilAddtional
@@ -1404,11 +1415,13 @@ instance ToJSON InstanceLabels where
 -- the list is empty.
 --
 -- /See:/ 'backendServicesScopedListWarning' smart constructor.
-data BackendServicesScopedListWarning = BackendServicesScopedListWarning'
+data BackendServicesScopedListWarning =
+  BackendServicesScopedListWarning'
     { _bsslwData    :: !(Maybe [BackendServicesScopedListWarningDataItem])
     , _bsslwCode    :: !(Maybe BackendServicesScopedListWarningCode)
     , _bsslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServicesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -1422,11 +1435,8 @@ data BackendServicesScopedListWarning = BackendServicesScopedListWarning'
 backendServicesScopedListWarning
     :: BackendServicesScopedListWarning
 backendServicesScopedListWarning =
-    BackendServicesScopedListWarning'
-    { _bsslwData = Nothing
-    , _bsslwCode = Nothing
-    , _bsslwMessage = Nothing
-    }
+  BackendServicesScopedListWarning'
+    {_bsslwData = Nothing, _bsslwCode = Nothing, _bsslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -1470,10 +1480,12 @@ instance ToJSON BackendServicesScopedListWarning
 -- Exactly one field must be specified.
 --
 -- /See:/ 'securityPolicyRuleMatcher' smart constructor.
-data SecurityPolicyRuleMatcher = SecurityPolicyRuleMatcher'
+data SecurityPolicyRuleMatcher =
+  SecurityPolicyRuleMatcher'
     { _sprmVersionedExpr :: !(Maybe SecurityPolicyRuleMatcherVersionedExpr)
     , _sprmConfig        :: !(Maybe SecurityPolicyRuleMatcherConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPolicyRuleMatcher' with the minimum fields required to make a request.
 --
@@ -1485,10 +1497,8 @@ data SecurityPolicyRuleMatcher = SecurityPolicyRuleMatcher'
 securityPolicyRuleMatcher
     :: SecurityPolicyRuleMatcher
 securityPolicyRuleMatcher =
-    SecurityPolicyRuleMatcher'
-    { _sprmVersionedExpr = Nothing
-    , _sprmConfig = Nothing
-    }
+  SecurityPolicyRuleMatcher'
+    {_sprmVersionedExpr = Nothing, _sprmConfig = Nothing}
 
 -- | Preconfigured versioned expression. If this field is specified, config
 -- must also be specified. Available preconfigured expressions along with
@@ -1523,14 +1533,16 @@ instance ToJSON SecurityPolicyRuleMatcher where
 -- | A list of InstanceGroup resources.
 --
 -- /See:/ 'instanceGroupList' smart constructor.
-data InstanceGroupList = InstanceGroupList'
+data InstanceGroupList =
+  InstanceGroupList'
     { _iglNextPageToken :: !(Maybe Text)
     , _iglKind          :: !Text
     , _iglItems         :: !(Maybe [InstanceGroup])
     , _iglSelfLink      :: !(Maybe Text)
     , _iglWarning       :: !(Maybe InstanceGroupListWarning)
     , _iglId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupList' with the minimum fields required to make a request.
 --
@@ -1550,7 +1562,7 @@ data InstanceGroupList = InstanceGroupList'
 instanceGroupList
     :: InstanceGroupList
 instanceGroupList =
-    InstanceGroupList'
+  InstanceGroupList'
     { _iglNextPageToken = Nothing
     , _iglKind = "compute#instanceGroupList"
     , _iglItems = Nothing
@@ -1620,9 +1632,11 @@ instance ToJSON InstanceGroupList where
 
 --
 -- /See:/ 'instancesSetMachineTypeRequest' smart constructor.
-newtype InstancesSetMachineTypeRequest = InstancesSetMachineTypeRequest'
+newtype InstancesSetMachineTypeRequest =
+  InstancesSetMachineTypeRequest'
     { _ismtrMachineType :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetMachineTypeRequest' with the minimum fields required to make a request.
 --
@@ -1632,9 +1646,7 @@ newtype InstancesSetMachineTypeRequest = InstancesSetMachineTypeRequest'
 instancesSetMachineTypeRequest
     :: InstancesSetMachineTypeRequest
 instancesSetMachineTypeRequest =
-    InstancesSetMachineTypeRequest'
-    { _ismtrMachineType = Nothing
-    }
+  InstancesSetMachineTypeRequest' {_ismtrMachineType = Nothing}
 
 -- | Full or partial URL of the machine type resource. See Machine Types for
 -- a full list of machine types. For example:
@@ -1661,10 +1673,12 @@ instance ToJSON InstancesSetMachineTypeRequest where
 -- | Contain information of Nat mapping for a VM endpoint (i.e., NIC).
 --
 -- /See:/ 'vMEndpointNATMAppings' smart constructor.
-data VMEndpointNATMAppings = VMEndpointNATMAppings'
+data VMEndpointNATMAppings =
+  VMEndpointNATMAppings'
     { _vmenatmaInstanceName         :: !(Maybe Text)
     , _vmenatmaInterfaceNATMAppings :: !(Maybe [VMEndpointNATMAppingsInterfaceNATMAppings])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VMEndpointNATMAppings' with the minimum fields required to make a request.
 --
@@ -1676,10 +1690,8 @@ data VMEndpointNATMAppings = VMEndpointNATMAppings'
 vMEndpointNATMAppings
     :: VMEndpointNATMAppings
 vMEndpointNATMAppings =
-    VMEndpointNATMAppings'
-    { _vmenatmaInstanceName = Nothing
-    , _vmenatmaInterfaceNATMAppings = Nothing
-    }
+  VMEndpointNATMAppings'
+    {_vmenatmaInstanceName = Nothing, _vmenatmaInterfaceNATMAppings = Nothing}
 
 -- | Name of the VM instance which the endpoint belongs to
 vmenatmaInstanceName :: Lens' VMEndpointNATMAppings (Maybe Text)
@@ -1713,11 +1725,13 @@ instance ToJSON VMEndpointNATMAppings where
 -- | Represents a customer-supplied encryption key
 --
 -- /See:/ 'customerEncryptionKey' smart constructor.
-data CustomerEncryptionKey = CustomerEncryptionKey'
+data CustomerEncryptionKey =
+  CustomerEncryptionKey'
     { _cekKmsKeyName :: !(Maybe Text)
     , _cekSha256     :: !(Maybe Text)
     , _cekRawKey     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomerEncryptionKey' with the minimum fields required to make a request.
 --
@@ -1731,11 +1745,8 @@ data CustomerEncryptionKey = CustomerEncryptionKey'
 customerEncryptionKey
     :: CustomerEncryptionKey
 customerEncryptionKey =
-    CustomerEncryptionKey'
-    { _cekKmsKeyName = Nothing
-    , _cekSha256 = Nothing
-    , _cekRawKey = Nothing
-    }
+  CustomerEncryptionKey'
+    {_cekKmsKeyName = Nothing, _cekSha256 = Nothing, _cekRawKey = Nothing}
 
 -- | The name of the encryption key that is stored in Google Cloud KMS.
 cekKmsKeyName :: Lens' CustomerEncryptionKey (Maybe Text)
@@ -1774,9 +1785,11 @@ instance ToJSON CustomerEncryptionKey where
 -- | A list of AutoscalersScopedList resources.
 --
 -- /See:/ 'autoscalerAggregatedListItems' smart constructor.
-newtype AutoscalerAggregatedListItems = AutoscalerAggregatedListItems'
+newtype AutoscalerAggregatedListItems =
+  AutoscalerAggregatedListItems'
     { _aaliAddtional :: HashMap Text AutoscalersScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalerAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -1787,9 +1800,7 @@ autoscalerAggregatedListItems
     :: HashMap Text AutoscalersScopedList -- ^ 'aaliAddtional'
     -> AutoscalerAggregatedListItems
 autoscalerAggregatedListItems pAaliAddtional_ =
-    AutoscalerAggregatedListItems'
-    { _aaliAddtional = _Coerce # pAaliAddtional_
-    }
+  AutoscalerAggregatedListItems' {_aaliAddtional = _Coerce # pAaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of autoscalers.
 aaliAddtional :: Lens' AutoscalerAggregatedListItems (HashMap Text AutoscalersScopedList)
@@ -1810,10 +1821,12 @@ instance ToJSON AutoscalerAggregatedListItems where
 
 --
 -- /See:/ 'instanceListWarningDataItem' smart constructor.
-data InstanceListWarningDataItem = InstanceListWarningDataItem'
+data InstanceListWarningDataItem =
+  InstanceListWarningDataItem'
     { _ilwdiValue :: !(Maybe Text)
     , _ilwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -1825,10 +1838,7 @@ data InstanceListWarningDataItem = InstanceListWarningDataItem'
 instanceListWarningDataItem
     :: InstanceListWarningDataItem
 instanceListWarningDataItem =
-    InstanceListWarningDataItem'
-    { _ilwdiValue = Nothing
-    , _ilwdiKey = Nothing
-    }
+  InstanceListWarningDataItem' {_ilwdiValue = Nothing, _ilwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ilwdiValue :: Lens' InstanceListWarningDataItem (Maybe Text)
@@ -1861,9 +1871,11 @@ instance ToJSON InstanceListWarningDataItem where
 
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
-newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest'
+newtype InstanceGroupManagersSetInstanceTemplateRequest =
+  InstanceGroupManagersSetInstanceTemplateRequest'
     { _igmsitrInstanceTemplate :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetInstanceTemplateRequest' with the minimum fields required to make a request.
 --
@@ -1873,9 +1885,8 @@ newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersS
 instanceGroupManagersSetInstanceTemplateRequest
     :: InstanceGroupManagersSetInstanceTemplateRequest
 instanceGroupManagersSetInstanceTemplateRequest =
-    InstanceGroupManagersSetInstanceTemplateRequest'
-    { _igmsitrInstanceTemplate = Nothing
-    }
+  InstanceGroupManagersSetInstanceTemplateRequest'
+    {_igmsitrInstanceTemplate = Nothing}
 
 -- | The URL of the instance template that is specified for this managed
 -- instance group. The group uses this template to create all new instances
@@ -1886,7 +1897,8 @@ igmsitrInstanceTemplate
       (\ s a -> s{_igmsitrInstanceTemplate = a})
 
 instance FromJSON
-         InstanceGroupManagersSetInstanceTemplateRequest where
+           InstanceGroupManagersSetInstanceTemplateRequest
+         where
         parseJSON
           = withObject
               "InstanceGroupManagersSetInstanceTemplateRequest"
@@ -1895,7 +1907,8 @@ instance FromJSON
                    (o .:? "instanceTemplate"))
 
 instance ToJSON
-         InstanceGroupManagersSetInstanceTemplateRequest where
+           InstanceGroupManagersSetInstanceTemplateRequest
+         where
         toJSON
           InstanceGroupManagersSetInstanceTemplateRequest'{..}
           = object
@@ -1906,13 +1919,15 @@ instance ToJSON
 -- | Deprecation status for a public resource.
 --
 -- /See:/ 'deprecationStatus' smart constructor.
-data DeprecationStatus = DeprecationStatus'
+data DeprecationStatus =
+  DeprecationStatus'
     { _dsState       :: !(Maybe DeprecationStatusState)
     , _dsDeleted     :: !(Maybe Text)
     , _dsReplacement :: !(Maybe Text)
     , _dsObsolete    :: !(Maybe Text)
     , _dsDeprecated  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeprecationStatus' with the minimum fields required to make a request.
 --
@@ -1930,7 +1945,7 @@ data DeprecationStatus = DeprecationStatus'
 deprecationStatus
     :: DeprecationStatus
 deprecationStatus =
-    DeprecationStatus'
+  DeprecationStatus'
     { _dsState = Nothing
     , _dsDeleted = Nothing
     , _dsReplacement = Nothing
@@ -1998,10 +2013,12 @@ instance ToJSON DeprecationStatus where
 
 --
 -- /See:/ 'httpsHealthCheckListWarningDataItem' smart constructor.
-data HTTPSHealthCheckListWarningDataItem = HTTPSHealthCheckListWarningDataItem'
+data HTTPSHealthCheckListWarningDataItem =
+  HTTPSHealthCheckListWarningDataItem'
     { _hhclwdiValue :: !(Maybe Text)
     , _hhclwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPSHealthCheckListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -2013,10 +2030,8 @@ data HTTPSHealthCheckListWarningDataItem = HTTPSHealthCheckListWarningDataItem'
 httpsHealthCheckListWarningDataItem
     :: HTTPSHealthCheckListWarningDataItem
 httpsHealthCheckListWarningDataItem =
-    HTTPSHealthCheckListWarningDataItem'
-    { _hhclwdiValue = Nothing
-    , _hhclwdiKey = Nothing
-    }
+  HTTPSHealthCheckListWarningDataItem'
+    {_hhclwdiValue = Nothing, _hhclwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 hhclwdiValue :: Lens' HTTPSHealthCheckListWarningDataItem (Maybe Text)
@@ -2054,7 +2069,8 @@ instance ToJSON HTTPSHealthCheckListWarningDataItem
 -- (== resource_for v1.snapshots ==)
 --
 -- /See:/ 'snapshot' smart constructor.
-data Snapshot = Snapshot'
+data Snapshot =
+  Snapshot'
     { _sStorageBytesStatus      :: !(Maybe SnapshotStorageBytesStatus)
     , _sStatus                  :: !(Maybe SnapshotStatus)
     , _sDiskSizeGb              :: !(Maybe (Textual Int64))
@@ -2073,7 +2089,8 @@ data Snapshot = Snapshot'
     , _sSourceDisk              :: !(Maybe Text)
     , _sLabelFingerprint        :: !(Maybe Bytes)
     , _sDescription             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
 --
@@ -2117,7 +2134,7 @@ data Snapshot = Snapshot'
 snapshot
     :: Snapshot
 snapshot =
-    Snapshot'
+  Snapshot'
     { _sStorageBytesStatus = Nothing
     , _sStatus = Nothing
     , _sDiskSizeGb = Nothing
@@ -2324,13 +2341,15 @@ instance ToJSON Snapshot where
 
 --
 -- /See:/ 'routerStatus' smart constructor.
-data RouterStatus = RouterStatus'
+data RouterStatus =
+  RouterStatus'
     { _rsBestRoutesForRouter :: !(Maybe [Route])
     , _rsBGPPeerStatus       :: !(Maybe [RouterStatusBGPPeerStatus])
     , _rsNetwork             :: !(Maybe Text)
     , _rsNATStatus           :: !(Maybe [RouterStatusNATStatus])
     , _rsBestRoutes          :: !(Maybe [Route])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterStatus' with the minimum fields required to make a request.
 --
@@ -2348,7 +2367,7 @@ data RouterStatus = RouterStatus'
 routerStatus
     :: RouterStatus
 routerStatus =
-    RouterStatus'
+  RouterStatus'
     { _rsBestRoutesForRouter = Nothing
     , _rsBGPPeerStatus = Nothing
     , _rsNetwork = Nothing
@@ -2414,11 +2433,13 @@ instance ToJSON RouterStatus where
 -- | Custom utilization metric policy.
 --
 -- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
-data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization'
+data AutoscalingPolicyCustomMetricUtilization =
+  AutoscalingPolicyCustomMetricUtilization'
     { _apcmuUtilizationTarget     :: !(Maybe (Textual Double))
     , _apcmuMetric                :: !(Maybe Text)
     , _apcmuUtilizationTargetType :: !(Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalingPolicyCustomMetricUtilization' with the minimum fields required to make a request.
 --
@@ -2432,7 +2453,7 @@ data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUti
 autoscalingPolicyCustomMetricUtilization
     :: AutoscalingPolicyCustomMetricUtilization
 autoscalingPolicyCustomMetricUtilization =
-    AutoscalingPolicyCustomMetricUtilization'
+  AutoscalingPolicyCustomMetricUtilization'
     { _apcmuUtilizationTarget = Nothing
     , _apcmuMetric = Nothing
     , _apcmuUtilizationTargetType = Nothing
@@ -2466,7 +2487,8 @@ apcmuUtilizationTargetType
       (\ s a -> s{_apcmuUtilizationTargetType = a})
 
 instance FromJSON
-         AutoscalingPolicyCustomMetricUtilization where
+           AutoscalingPolicyCustomMetricUtilization
+         where
         parseJSON
           = withObject
               "AutoscalingPolicyCustomMetricUtilization"
@@ -2476,7 +2498,8 @@ instance FromJSON
                      (o .:? "utilizationTargetType"))
 
 instance ToJSON
-         AutoscalingPolicyCustomMetricUtilization where
+           AutoscalingPolicyCustomMetricUtilization
+         where
         toJSON AutoscalingPolicyCustomMetricUtilization'{..}
           = object
               (catMaybes
@@ -2489,14 +2512,16 @@ instance ToJSON
 -- | Contains a list of ForwardingRule resources.
 --
 -- /See:/ 'forwardingRuleList' smart constructor.
-data ForwardingRuleList = ForwardingRuleList'
+data ForwardingRuleList =
+  ForwardingRuleList'
     { _frlNextPageToken :: !(Maybe Text)
     , _frlKind          :: !Text
     , _frlItems         :: !(Maybe [ForwardingRule])
     , _frlSelfLink      :: !(Maybe Text)
     , _frlWarning       :: !(Maybe ForwardingRuleListWarning)
     , _frlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRuleList' with the minimum fields required to make a request.
 --
@@ -2516,7 +2541,7 @@ data ForwardingRuleList = ForwardingRuleList'
 forwardingRuleList
     :: ForwardingRuleList
 forwardingRuleList =
-    ForwardingRuleList'
+  ForwardingRuleList'
     { _frlNextPageToken = Nothing
     , _frlKind = "compute#forwardingRuleList"
     , _frlItems = Nothing
@@ -2586,7 +2611,8 @@ instance ToJSON ForwardingRuleList where
 -- | A NodeGroup resource.
 --
 -- /See:/ 'nodeGroup' smart constructor.
-data NodeGroup = NodeGroup'
+data NodeGroup =
+  NodeGroup'
     { _ngStatus            :: !(Maybe NodeGroupStatus)
     , _ngSize              :: !(Maybe (Textual Int32))
     , _ngKind              :: !Text
@@ -2597,7 +2623,8 @@ data NodeGroup = NodeGroup'
     , _ngId                :: !(Maybe (Textual Word64))
     , _ngNodeTemplate      :: !(Maybe Text)
     , _ngDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroup' with the minimum fields required to make a request.
 --
@@ -2625,7 +2652,7 @@ data NodeGroup = NodeGroup'
 nodeGroup
     :: NodeGroup
 nodeGroup =
-    NodeGroup'
+  NodeGroup'
     { _ngStatus = Nothing
     , _ngSize = Nothing
     , _ngKind = "compute#nodeGroup"
@@ -2729,10 +2756,12 @@ instance ToJSON NodeGroup where
 
 --
 -- /See:/ 'vpnTunnelsScopedList' smart constructor.
-data VPNTunnelsScopedList = VPNTunnelsScopedList'
+data VPNTunnelsScopedList =
+  VPNTunnelsScopedList'
     { _vtslVPNTunnels :: !(Maybe [VPNTunnel])
     , _vtslWarning    :: !(Maybe VPNTunnelsScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelsScopedList' with the minimum fields required to make a request.
 --
@@ -2744,10 +2773,7 @@ data VPNTunnelsScopedList = VPNTunnelsScopedList'
 vpnTunnelsScopedList
     :: VPNTunnelsScopedList
 vpnTunnelsScopedList =
-    VPNTunnelsScopedList'
-    { _vtslVPNTunnels = Nothing
-    , _vtslWarning = Nothing
-    }
+  VPNTunnelsScopedList' {_vtslVPNTunnels = Nothing, _vtslWarning = Nothing}
 
 -- | A list of vpn tunnels contained in this scope.
 vtslVPNTunnels :: Lens' VPNTunnelsScopedList [VPNTunnel]
@@ -2781,10 +2807,12 @@ instance ToJSON VPNTunnelsScopedList where
 -- | Represents a secondary IP range of a subnetwork.
 --
 -- /See:/ 'subnetworkSecondaryRange' smart constructor.
-data SubnetworkSecondaryRange = SubnetworkSecondaryRange'
+data SubnetworkSecondaryRange =
+  SubnetworkSecondaryRange'
     { _ssrRangeName   :: !(Maybe Text)
     , _ssrIPCIdRRange :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworkSecondaryRange' with the minimum fields required to make a request.
 --
@@ -2796,10 +2824,7 @@ data SubnetworkSecondaryRange = SubnetworkSecondaryRange'
 subnetworkSecondaryRange
     :: SubnetworkSecondaryRange
 subnetworkSecondaryRange =
-    SubnetworkSecondaryRange'
-    { _ssrRangeName = Nothing
-    , _ssrIPCIdRRange = Nothing
-    }
+  SubnetworkSecondaryRange' {_ssrRangeName = Nothing, _ssrIPCIdRRange = Nothing}
 
 -- | The name associated with this subnetwork secondary range, used when
 -- adding an alias IP range to a VM instance. The name must be 1-63
@@ -2834,10 +2859,12 @@ instance ToJSON SubnetworkSecondaryRange where
 
 --
 -- /See:/ 'nodeTypesScopedList' smart constructor.
-data NodeTypesScopedList = NodeTypesScopedList'
+data NodeTypesScopedList =
+  NodeTypesScopedList'
     { _ntslNodeTypes :: !(Maybe [NodeType])
     , _ntslWarning   :: !(Maybe NodeTypesScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypesScopedList' with the minimum fields required to make a request.
 --
@@ -2849,10 +2876,7 @@ data NodeTypesScopedList = NodeTypesScopedList'
 nodeTypesScopedList
     :: NodeTypesScopedList
 nodeTypesScopedList =
-    NodeTypesScopedList'
-    { _ntslNodeTypes = Nothing
-    , _ntslWarning = Nothing
-    }
+  NodeTypesScopedList' {_ntslNodeTypes = Nothing, _ntslWarning = Nothing}
 
 -- | [Output Only] A list of node types contained in this scope.
 ntslNodeTypes :: Lens' NodeTypesScopedList [NodeType]
@@ -2885,11 +2909,13 @@ instance ToJSON NodeTypesScopedList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'regionInstanceGroupsListInstancesWarning' smart constructor.
-data RegionInstanceGroupsListInstancesWarning = RegionInstanceGroupsListInstancesWarning'
+data RegionInstanceGroupsListInstancesWarning =
+  RegionInstanceGroupsListInstancesWarning'
     { _rigliwData    :: !(Maybe [RegionInstanceGroupsListInstancesWarningDataItem])
     , _rigliwCode    :: !(Maybe RegionInstanceGroupsListInstancesWarningCode)
     , _rigliwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupsListInstancesWarning' with the minimum fields required to make a request.
 --
@@ -2903,11 +2929,8 @@ data RegionInstanceGroupsListInstancesWarning = RegionInstanceGroupsListInstance
 regionInstanceGroupsListInstancesWarning
     :: RegionInstanceGroupsListInstancesWarning
 regionInstanceGroupsListInstancesWarning =
-    RegionInstanceGroupsListInstancesWarning'
-    { _rigliwData = Nothing
-    , _rigliwCode = Nothing
-    , _rigliwMessage = Nothing
-    }
+  RegionInstanceGroupsListInstancesWarning'
+    {_rigliwData = Nothing, _rigliwCode = Nothing, _rigliwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -2931,7 +2954,8 @@ rigliwMessage
       (\ s a -> s{_rigliwMessage = a})
 
 instance FromJSON
-         RegionInstanceGroupsListInstancesWarning where
+           RegionInstanceGroupsListInstancesWarning
+         where
         parseJSON
           = withObject
               "RegionInstanceGroupsListInstancesWarning"
@@ -2941,7 +2965,8 @@ instance FromJSON
                      (o .:? "message"))
 
 instance ToJSON
-         RegionInstanceGroupsListInstancesWarning where
+           RegionInstanceGroupsListInstancesWarning
+         where
         toJSON RegionInstanceGroupsListInstancesWarning'{..}
           = object
               (catMaybes
@@ -2968,11 +2993,13 @@ instance ToJSON
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     , _acExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -2986,7 +3013,7 @@ data AuditConfig = AuditConfig'
 auditConfig
     :: AuditConfig
 auditConfig =
-    AuditConfig'
+  AuditConfig'
     { _acService = Nothing
     , _acAuditLogConfigs = Nothing
     , _acExemptedMembers = Nothing
@@ -3034,10 +3061,12 @@ instance ToJSON AuditConfig where
 
 --
 -- /See:/ 'acceleratorTypeAggregatedListWarningDataItem' smart constructor.
-data AcceleratorTypeAggregatedListWarningDataItem = AcceleratorTypeAggregatedListWarningDataItem'
+data AcceleratorTypeAggregatedListWarningDataItem =
+  AcceleratorTypeAggregatedListWarningDataItem'
     { _atalwdiValue :: !(Maybe Text)
     , _atalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypeAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -3049,10 +3078,8 @@ data AcceleratorTypeAggregatedListWarningDataItem = AcceleratorTypeAggregatedLis
 acceleratorTypeAggregatedListWarningDataItem
     :: AcceleratorTypeAggregatedListWarningDataItem
 acceleratorTypeAggregatedListWarningDataItem =
-    AcceleratorTypeAggregatedListWarningDataItem'
-    { _atalwdiValue = Nothing
-    , _atalwdiKey = Nothing
-    }
+  AcceleratorTypeAggregatedListWarningDataItem'
+    {_atalwdiValue = Nothing, _atalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 atalwdiValue :: Lens' AcceleratorTypeAggregatedListWarningDataItem (Maybe Text)
@@ -3071,7 +3098,8 @@ atalwdiKey
   = lens _atalwdiKey (\ s a -> s{_atalwdiKey = a})
 
 instance FromJSON
-         AcceleratorTypeAggregatedListWarningDataItem where
+           AcceleratorTypeAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "AcceleratorTypeAggregatedListWarningDataItem"
@@ -3080,7 +3108,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         AcceleratorTypeAggregatedListWarningDataItem where
+           AcceleratorTypeAggregatedListWarningDataItem
+         where
         toJSON
           AcceleratorTypeAggregatedListWarningDataItem'{..}
           = object
@@ -3090,10 +3119,12 @@ instance ToJSON
 
 --
 -- /See:/ 'instanceGroupsSetNamedPortsRequest' smart constructor.
-data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest'
+data InstanceGroupsSetNamedPortsRequest =
+  InstanceGroupsSetNamedPortsRequest'
     { _igsnprFingerprint :: !(Maybe Bytes)
     , _igsnprNamedPorts  :: !(Maybe [NamedPort])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsSetNamedPortsRequest' with the minimum fields required to make a request.
 --
@@ -3105,10 +3136,8 @@ data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest'
 instanceGroupsSetNamedPortsRequest
     :: InstanceGroupsSetNamedPortsRequest
 instanceGroupsSetNamedPortsRequest =
-    InstanceGroupsSetNamedPortsRequest'
-    { _igsnprFingerprint = Nothing
-    , _igsnprNamedPorts = Nothing
-    }
+  InstanceGroupsSetNamedPortsRequest'
+    {_igsnprFingerprint = Nothing, _igsnprNamedPorts = Nothing}
 
 -- | The fingerprint of the named ports information for this instance group.
 -- Use this optional property to prevent conflicts when multiple users
@@ -3152,9 +3181,11 @@ instance ToJSON InstanceGroupsSetNamedPortsRequest
 -- scheduling.
 --
 -- /See:/ 'nodeTemplateNodeAffinityLabels' smart constructor.
-newtype NodeTemplateNodeAffinityLabels = NodeTemplateNodeAffinityLabels'
+newtype NodeTemplateNodeAffinityLabels =
+  NodeTemplateNodeAffinityLabels'
     { _ntnalAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplateNodeAffinityLabels' with the minimum fields required to make a request.
 --
@@ -3165,9 +3196,7 @@ nodeTemplateNodeAffinityLabels
     :: HashMap Text Text -- ^ 'ntnalAddtional'
     -> NodeTemplateNodeAffinityLabels
 nodeTemplateNodeAffinityLabels pNtnalAddtional_ =
-    NodeTemplateNodeAffinityLabels'
-    { _ntnalAddtional = _Coerce # pNtnalAddtional_
-    }
+  NodeTemplateNodeAffinityLabels' {_ntnalAddtional = _Coerce # pNtnalAddtional_}
 
 ntnalAddtional :: Lens' NodeTemplateNodeAffinityLabels (HashMap Text Text)
 ntnalAddtional
@@ -3189,14 +3218,16 @@ instance ToJSON NodeTemplateNodeAffinityLabels where
 -- | Contains a list of Operation resources.
 --
 -- /See:/ 'operationList' smart constructor.
-data OperationList = OperationList'
+data OperationList =
+  OperationList'
     { _olNextPageToken :: !(Maybe Text)
     , _olKind          :: !Text
     , _olItems         :: !(Maybe [Operation])
     , _olSelfLink      :: !(Maybe Text)
     , _olWarning       :: !(Maybe OperationListWarning)
     , _olId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationList' with the minimum fields required to make a request.
 --
@@ -3216,7 +3247,7 @@ data OperationList = OperationList'
 operationList
     :: OperationList
 operationList =
-    OperationList'
+  OperationList'
     { _olNextPageToken = Nothing
     , _olKind = "compute#operationList"
     , _olItems = Nothing
@@ -3285,11 +3316,13 @@ instance ToJSON OperationList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'nodeGroupListWarning' smart constructor.
-data NodeGroupListWarning = NodeGroupListWarning'
+data NodeGroupListWarning =
+  NodeGroupListWarning'
     { _nglwData    :: !(Maybe [NodeGroupListWarningDataItem])
     , _nglwCode    :: !(Maybe NodeGroupListWarningCode)
     , _nglwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupListWarning' with the minimum fields required to make a request.
 --
@@ -3303,11 +3336,8 @@ data NodeGroupListWarning = NodeGroupListWarning'
 nodeGroupListWarning
     :: NodeGroupListWarning
 nodeGroupListWarning =
-    NodeGroupListWarning'
-    { _nglwData = Nothing
-    , _nglwCode = Nothing
-    , _nglwMessage = Nothing
-    }
+  NodeGroupListWarning'
+    {_nglwData = Nothing, _nglwCode = Nothing, _nglwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -3347,14 +3377,16 @@ instance ToJSON NodeGroupListWarning where
 -- | A list of Disk resources.
 --
 -- /See:/ 'diskList' smart constructor.
-data DiskList = DiskList'
+data DiskList =
+  DiskList'
     { _dlNextPageToken :: !(Maybe Text)
     , _dlKind          :: !Text
     , _dlItems         :: !(Maybe [Disk])
     , _dlSelfLink      :: !(Maybe Text)
     , _dlWarning       :: !(Maybe DiskListWarning)
     , _dlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskList' with the minimum fields required to make a request.
 --
@@ -3374,7 +3406,7 @@ data DiskList = DiskList'
 diskList
     :: DiskList
 diskList =
-    DiskList'
+  DiskList'
     { _dlNextPageToken = Nothing
     , _dlKind = "compute#diskList"
     , _dlItems = Nothing
@@ -3441,9 +3473,11 @@ instance ToJSON DiskList where
 
 --
 -- /See:/ 'targetPoolsAddInstanceRequest' smart constructor.
-newtype TargetPoolsAddInstanceRequest = TargetPoolsAddInstanceRequest'
+newtype TargetPoolsAddInstanceRequest =
+  TargetPoolsAddInstanceRequest'
     { _tpairInstances :: Maybe [InstanceReference]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsAddInstanceRequest' with the minimum fields required to make a request.
 --
@@ -3453,9 +3487,7 @@ newtype TargetPoolsAddInstanceRequest = TargetPoolsAddInstanceRequest'
 targetPoolsAddInstanceRequest
     :: TargetPoolsAddInstanceRequest
 targetPoolsAddInstanceRequest =
-    TargetPoolsAddInstanceRequest'
-    { _tpairInstances = Nothing
-    }
+  TargetPoolsAddInstanceRequest' {_tpairInstances = Nothing}
 
 -- | A full or partial URL to an instance to add to this target pool. This
 -- can be a full or partial URL. For example, the following are valid URLs:
@@ -3484,9 +3516,11 @@ instance ToJSON TargetPoolsAddInstanceRequest where
 
 --
 -- /See:/ 'nodeGroupsDeleteNodesRequest' smart constructor.
-newtype NodeGroupsDeleteNodesRequest = NodeGroupsDeleteNodesRequest'
+newtype NodeGroupsDeleteNodesRequest =
+  NodeGroupsDeleteNodesRequest'
     { _ngdnrNodes :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsDeleteNodesRequest' with the minimum fields required to make a request.
 --
@@ -3496,9 +3530,7 @@ newtype NodeGroupsDeleteNodesRequest = NodeGroupsDeleteNodesRequest'
 nodeGroupsDeleteNodesRequest
     :: NodeGroupsDeleteNodesRequest
 nodeGroupsDeleteNodesRequest =
-    NodeGroupsDeleteNodesRequest'
-    { _ngdnrNodes = Nothing
-    }
+  NodeGroupsDeleteNodesRequest' {_ngdnrNodes = Nothing}
 
 ngdnrNodes :: Lens' NodeGroupsDeleteNodesRequest [Text]
 ngdnrNodes
@@ -3520,14 +3552,16 @@ instance ToJSON NodeGroupsDeleteNodesRequest where
 -- | Contains a list of autoscalers.
 --
 -- /See:/ 'regionAutoscalerList' smart constructor.
-data RegionAutoscalerList = RegionAutoscalerList'
+data RegionAutoscalerList =
+  RegionAutoscalerList'
     { _rNextPageToken :: !(Maybe Text)
     , _rKind          :: !Text
     , _rItems         :: !(Maybe [Autoscaler])
     , _rSelfLink      :: !(Maybe Text)
     , _rWarning       :: !(Maybe RegionAutoscalerListWarning)
     , _rId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionAutoscalerList' with the minimum fields required to make a request.
 --
@@ -3547,7 +3581,7 @@ data RegionAutoscalerList = RegionAutoscalerList'
 regionAutoscalerList
     :: RegionAutoscalerList
 regionAutoscalerList =
-    RegionAutoscalerList'
+  RegionAutoscalerList'
     { _rNextPageToken = Nothing
     , _rKind = "compute#regionAutoscalerList"
     , _rItems = Nothing
@@ -3612,10 +3646,12 @@ instance ToJSON RegionAutoscalerList where
 
 --
 -- /See:/ 'healthCheckListWarningDataItem' smart constructor.
-data HealthCheckListWarningDataItem = HealthCheckListWarningDataItem'
+data HealthCheckListWarningDataItem =
+  HealthCheckListWarningDataItem'
     { _hclwdiValue :: !(Maybe Text)
     , _hclwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthCheckListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -3627,10 +3663,7 @@ data HealthCheckListWarningDataItem = HealthCheckListWarningDataItem'
 healthCheckListWarningDataItem
     :: HealthCheckListWarningDataItem
 healthCheckListWarningDataItem =
-    HealthCheckListWarningDataItem'
-    { _hclwdiValue = Nothing
-    , _hclwdiKey = Nothing
-    }
+  HealthCheckListWarningDataItem' {_hclwdiValue = Nothing, _hclwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 hclwdiValue :: Lens' HealthCheckListWarningDataItem (Maybe Text)
@@ -3665,10 +3698,12 @@ instance ToJSON HealthCheckListWarningDataItem where
 
 --
 -- /See:/ 'nodeGroupAggregatedListWarningDataItem' smart constructor.
-data NodeGroupAggregatedListWarningDataItem = NodeGroupAggregatedListWarningDataItem'
+data NodeGroupAggregatedListWarningDataItem =
+  NodeGroupAggregatedListWarningDataItem'
     { _ngalwdiValue :: !(Maybe Text)
     , _ngalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -3680,10 +3715,8 @@ data NodeGroupAggregatedListWarningDataItem = NodeGroupAggregatedListWarningData
 nodeGroupAggregatedListWarningDataItem
     :: NodeGroupAggregatedListWarningDataItem
 nodeGroupAggregatedListWarningDataItem =
-    NodeGroupAggregatedListWarningDataItem'
-    { _ngalwdiValue = Nothing
-    , _ngalwdiKey = Nothing
-    }
+  NodeGroupAggregatedListWarningDataItem'
+    {_ngalwdiValue = Nothing, _ngalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ngalwdiValue :: Lens' NodeGroupAggregatedListWarningDataItem (Maybe Text)
@@ -3702,7 +3735,8 @@ ngalwdiKey
   = lens _ngalwdiKey (\ s a -> s{_ngalwdiKey = a})
 
 instance FromJSON
-         NodeGroupAggregatedListWarningDataItem where
+           NodeGroupAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject "NodeGroupAggregatedListWarningDataItem"
               (\ o ->
@@ -3710,7 +3744,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         NodeGroupAggregatedListWarningDataItem where
+           NodeGroupAggregatedListWarningDataItem
+         where
         toJSON NodeGroupAggregatedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -3719,9 +3754,11 @@ instance ToJSON
 
 --
 -- /See:/ 'instanceGroupsAddInstancesRequest' smart constructor.
-newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest'
+newtype InstanceGroupsAddInstancesRequest =
+  InstanceGroupsAddInstancesRequest'
     { _igairInstances :: Maybe [InstanceReference]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsAddInstancesRequest' with the minimum fields required to make a request.
 --
@@ -3731,9 +3768,7 @@ newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest'
 instanceGroupsAddInstancesRequest
     :: InstanceGroupsAddInstancesRequest
 instanceGroupsAddInstancesRequest =
-    InstanceGroupsAddInstancesRequest'
-    { _igairInstances = Nothing
-    }
+  InstanceGroupsAddInstancesRequest' {_igairInstances = Nothing}
 
 -- | The list of instances to add to the instance group.
 igairInstances :: Lens' InstanceGroupsAddInstancesRequest [InstanceReference]
@@ -3759,12 +3794,14 @@ instance ToJSON InstanceGroupsAddInstancesRequest
 
 --
 -- /See:/ 'nodeGroupNode' smart constructor.
-data NodeGroupNode = NodeGroupNode'
+data NodeGroupNode =
+  NodeGroupNode'
     { _ngnStatus    :: !(Maybe NodeGroupNodeStatus)
     , _ngnName      :: !(Maybe Text)
     , _ngnInstances :: !(Maybe [Text])
     , _ngnNodeType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupNode' with the minimum fields required to make a request.
 --
@@ -3780,7 +3817,7 @@ data NodeGroupNode = NodeGroupNode'
 nodeGroupNode
     :: NodeGroupNode
 nodeGroupNode =
-    NodeGroupNode'
+  NodeGroupNode'
     { _ngnStatus = Nothing
     , _ngnName = Nothing
     , _ngnInstances = Nothing
@@ -3828,14 +3865,16 @@ instance ToJSON NodeGroupNode where
 -- | [Output Only] A list of managed instance groups.
 --
 -- /See:/ 'instanceGroupManagerList' smart constructor.
-data InstanceGroupManagerList = InstanceGroupManagerList'
+data InstanceGroupManagerList =
+  InstanceGroupManagerList'
     { _igmlNextPageToken :: !(Maybe Text)
     , _igmlKind          :: !Text
     , _igmlItems         :: !(Maybe [InstanceGroupManager])
     , _igmlSelfLink      :: !(Maybe Text)
     , _igmlWarning       :: !(Maybe InstanceGroupManagerListWarning)
     , _igmlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagerList' with the minimum fields required to make a request.
 --
@@ -3855,7 +3894,7 @@ data InstanceGroupManagerList = InstanceGroupManagerList'
 instanceGroupManagerList
     :: InstanceGroupManagerList
 instanceGroupManagerList =
-    InstanceGroupManagerList'
+  InstanceGroupManagerList'
     { _igmlNextPageToken = Nothing
     , _igmlKind = "compute#instanceGroupManagerList"
     , _igmlItems = Nothing
@@ -3927,11 +3966,13 @@ instance ToJSON InstanceGroupManagerList where
 -- empty.
 --
 -- /See:/ 'subnetworksScopedListWarning' smart constructor.
-data SubnetworksScopedListWarning = SubnetworksScopedListWarning'
+data SubnetworksScopedListWarning =
+  SubnetworksScopedListWarning'
     { _sslwData    :: !(Maybe [SubnetworksScopedListWarningDataItem])
     , _sslwCode    :: !(Maybe SubnetworksScopedListWarningCode)
     , _sslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksScopedListWarning' with the minimum fields required to make a request.
 --
@@ -3945,11 +3986,8 @@ data SubnetworksScopedListWarning = SubnetworksScopedListWarning'
 subnetworksScopedListWarning
     :: SubnetworksScopedListWarning
 subnetworksScopedListWarning =
-    SubnetworksScopedListWarning'
-    { _sslwData = Nothing
-    , _sslwCode = Nothing
-    , _sslwMessage = Nothing
-    }
+  SubnetworksScopedListWarning'
+    {_sslwData = Nothing, _sslwCode = Nothing, _sslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -3988,9 +4026,11 @@ instance ToJSON SubnetworksScopedListWarning where
 
 --
 -- /See:/ 'nodeGroupsSetNodeTemplateRequest' smart constructor.
-newtype NodeGroupsSetNodeTemplateRequest = NodeGroupsSetNodeTemplateRequest'
+newtype NodeGroupsSetNodeTemplateRequest =
+  NodeGroupsSetNodeTemplateRequest'
     { _ngsntrNodeTemplate :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsSetNodeTemplateRequest' with the minimum fields required to make a request.
 --
@@ -4000,9 +4040,7 @@ newtype NodeGroupsSetNodeTemplateRequest = NodeGroupsSetNodeTemplateRequest'
 nodeGroupsSetNodeTemplateRequest
     :: NodeGroupsSetNodeTemplateRequest
 nodeGroupsSetNodeTemplateRequest =
-    NodeGroupsSetNodeTemplateRequest'
-    { _ngsntrNodeTemplate = Nothing
-    }
+  NodeGroupsSetNodeTemplateRequest' {_ngsntrNodeTemplate = Nothing}
 
 -- | Full or partial URL of the node template resource to be updated for this
 -- node group.
@@ -4029,11 +4067,13 @@ instance ToJSON NodeGroupsSetNodeTemplateRequest
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'acceleratorTypeListWarning' smart constructor.
-data AcceleratorTypeListWarning = AcceleratorTypeListWarning'
+data AcceleratorTypeListWarning =
+  AcceleratorTypeListWarning'
     { _atlwData    :: !(Maybe [AcceleratorTypeListWarningDataItem])
     , _atlwCode    :: !(Maybe AcceleratorTypeListWarningCode)
     , _atlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypeListWarning' with the minimum fields required to make a request.
 --
@@ -4047,11 +4087,8 @@ data AcceleratorTypeListWarning = AcceleratorTypeListWarning'
 acceleratorTypeListWarning
     :: AcceleratorTypeListWarning
 acceleratorTypeListWarning =
-    AcceleratorTypeListWarning'
-    { _atlwData = Nothing
-    , _atlwCode = Nothing
-    , _atlwMessage = Nothing
-    }
+  AcceleratorTypeListWarning'
+    {_atlwData = Nothing, _atlwCode = Nothing, _atlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -4092,7 +4129,8 @@ instance ToJSON AcceleratorTypeListWarning where
 -- v1.images ==)
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image'
+data Image =
+  Image'
     { _iStatus                      :: !(Maybe ImageStatus)
     , _iSourceSnapshotId            :: !(Maybe Text)
     , _iImageEncryptionKey          :: !(Maybe CustomerEncryptionKey)
@@ -4121,7 +4159,8 @@ data Image = Image'
     , _iSourceSnapshotEncryptionKey :: !(Maybe CustomerEncryptionKey)
     , _iDeprecated                  :: !(Maybe DeprecationStatus)
     , _iSourceSnapshot              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -4185,7 +4224,7 @@ data Image = Image'
 image
     :: Image
 image =
-    Image'
+  Image'
     { _iStatus = Nothing
     , _iSourceSnapshotId = Nothing
     , _iImageEncryptionKey = Nothing
@@ -4494,11 +4533,13 @@ instance ToJSON Image where
 
 --
 -- /See:/ 'networksAddPeeringRequest' smart constructor.
-data NetworksAddPeeringRequest = NetworksAddPeeringRequest'
+data NetworksAddPeeringRequest =
+  NetworksAddPeeringRequest'
     { _naprPeerNetwork      :: !(Maybe Text)
     , _naprName             :: !(Maybe Text)
     , _naprAutoCreateRoutes :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworksAddPeeringRequest' with the minimum fields required to make a request.
 --
@@ -4512,7 +4553,7 @@ data NetworksAddPeeringRequest = NetworksAddPeeringRequest'
 networksAddPeeringRequest
     :: NetworksAddPeeringRequest
 networksAddPeeringRequest =
-    NetworksAddPeeringRequest'
+  NetworksAddPeeringRequest'
     { _naprPeerNetwork = Nothing
     , _naprName = Nothing
     , _naprAutoCreateRoutes = Nothing
@@ -4555,10 +4596,12 @@ instance ToJSON NetworksAddPeeringRequest where
 
 --
 -- /See:/ 'nodeTemplatesScopedList' smart constructor.
-data NodeTemplatesScopedList = NodeTemplatesScopedList'
+data NodeTemplatesScopedList =
+  NodeTemplatesScopedList'
     { _nNodeTemplates :: !(Maybe [NodeTemplate])
     , _nWarning       :: !(Maybe NodeTemplatesScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplatesScopedList' with the minimum fields required to make a request.
 --
@@ -4570,10 +4613,7 @@ data NodeTemplatesScopedList = NodeTemplatesScopedList'
 nodeTemplatesScopedList
     :: NodeTemplatesScopedList
 nodeTemplatesScopedList =
-    NodeTemplatesScopedList'
-    { _nNodeTemplates = Nothing
-    , _nWarning = Nothing
-    }
+  NodeTemplatesScopedList' {_nNodeTemplates = Nothing, _nWarning = Nothing}
 
 -- | [Output Only] A list of node templates contained in this scope.
 nNodeTemplates :: Lens' NodeTemplatesScopedList [NodeTemplate]
@@ -4606,11 +4646,13 @@ instance ToJSON NodeTemplatesScopedList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'urlMapListWarning' smart constructor.
-data URLMapListWarning = URLMapListWarning'
+data URLMapListWarning =
+  URLMapListWarning'
     { _umlwData    :: !(Maybe [URLMapListWarningDataItem])
     , _umlwCode    :: !(Maybe URLMapListWarningCode)
     , _umlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapListWarning' with the minimum fields required to make a request.
 --
@@ -4624,11 +4666,8 @@ data URLMapListWarning = URLMapListWarning'
 urlMapListWarning
     :: URLMapListWarning
 urlMapListWarning =
-    URLMapListWarning'
-    { _umlwData = Nothing
-    , _umlwCode = Nothing
-    , _umlwMessage = Nothing
-    }
+  URLMapListWarning'
+    {_umlwData = Nothing, _umlwCode = Nothing, _umlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -4667,10 +4706,12 @@ instance ToJSON URLMapListWarning where
 
 --
 -- /See:/ 'nodeGroupsScopedListWarningDataItem' smart constructor.
-data NodeGroupsScopedListWarningDataItem = NodeGroupsScopedListWarningDataItem'
+data NodeGroupsScopedListWarningDataItem =
+  NodeGroupsScopedListWarningDataItem'
     { _ngslwdiValue :: !(Maybe Text)
     , _ngslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -4682,10 +4723,8 @@ data NodeGroupsScopedListWarningDataItem = NodeGroupsScopedListWarningDataItem'
 nodeGroupsScopedListWarningDataItem
     :: NodeGroupsScopedListWarningDataItem
 nodeGroupsScopedListWarningDataItem =
-    NodeGroupsScopedListWarningDataItem'
-    { _ngslwdiValue = Nothing
-    , _ngslwdiKey = Nothing
-    }
+  NodeGroupsScopedListWarningDataItem'
+    {_ngslwdiValue = Nothing, _ngslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ngslwdiValue :: Lens' NodeGroupsScopedListWarningDataItem (Maybe Text)
@@ -4724,7 +4763,8 @@ instance ToJSON NodeGroupsScopedListWarningDataItem
 -- host and path.
 --
 -- /See:/ 'urlMap' smart constructor.
-data URLMap = URLMap'
+data URLMap =
+  URLMap'
     { _umTests             :: !(Maybe [URLMapTest])
     , _umKind              :: !Text
     , _umFingerprint       :: !(Maybe Bytes)
@@ -4736,7 +4776,8 @@ data URLMap = URLMap'
     , _umId                :: !(Maybe (Textual Word64))
     , _umHostRules         :: !(Maybe [HostRule])
     , _umDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMap' with the minimum fields required to make a request.
 --
@@ -4766,7 +4807,7 @@ data URLMap = URLMap'
 urlMap
     :: URLMap
 urlMap =
-    URLMap'
+  URLMap'
     { _umTests = Nothing
     , _umKind = "compute#urlMap"
     , _umFingerprint = Nothing
@@ -4899,11 +4940,13 @@ instance ToJSON URLMap where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'imageListWarning' smart constructor.
-data ImageListWarning = ImageListWarning'
+data ImageListWarning =
+  ImageListWarning'
     { _ilwData    :: !(Maybe [ImageListWarningDataItem])
     , _ilwCode    :: !(Maybe ImageListWarningCode)
     , _ilwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImageListWarning' with the minimum fields required to make a request.
 --
@@ -4917,11 +4960,8 @@ data ImageListWarning = ImageListWarning'
 imageListWarning
     :: ImageListWarning
 imageListWarning =
-    ImageListWarning'
-    { _ilwData = Nothing
-    , _ilwCode = Nothing
-    , _ilwMessage = Nothing
-    }
+  ImageListWarning'
+    {_ilwData = Nothing, _ilwCode = Nothing, _ilwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -4961,12 +5001,14 @@ instance ToJSON ImageListWarning where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -4982,7 +5024,7 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
@@ -5034,9 +5076,11 @@ instance ToJSON Expr where
 
 --
 -- /See:/ 'sslPolicyReference' smart constructor.
-newtype SSLPolicyReference = SSLPolicyReference'
+newtype SSLPolicyReference =
+  SSLPolicyReference'
     { _sprSSLPolicy :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLPolicyReference' with the minimum fields required to make a request.
 --
@@ -5045,10 +5089,7 @@ newtype SSLPolicyReference = SSLPolicyReference'
 -- * 'sprSSLPolicy'
 sslPolicyReference
     :: SSLPolicyReference
-sslPolicyReference =
-    SSLPolicyReference'
-    { _sprSSLPolicy = Nothing
-    }
+sslPolicyReference = SSLPolicyReference' {_sprSSLPolicy = Nothing}
 
 -- | URL of the SSL policy resource. Set this to empty string to clear any
 -- existing SSL policy associated with the target proxy resource.
@@ -5069,9 +5110,11 @@ instance ToJSON SSLPolicyReference where
 -- | A list of InstanceGroupsScopedList resources.
 --
 -- /See:/ 'instanceGroupAggregatedListItems' smart constructor.
-newtype InstanceGroupAggregatedListItems = InstanceGroupAggregatedListItems'
+newtype InstanceGroupAggregatedListItems =
+  InstanceGroupAggregatedListItems'
     { _igaliAddtional :: HashMap Text InstanceGroupsScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -5082,9 +5125,8 @@ instanceGroupAggregatedListItems
     :: HashMap Text InstanceGroupsScopedList -- ^ 'igaliAddtional'
     -> InstanceGroupAggregatedListItems
 instanceGroupAggregatedListItems pIgaliAddtional_ =
-    InstanceGroupAggregatedListItems'
-    { _igaliAddtional = _Coerce # pIgaliAddtional_
-    }
+  InstanceGroupAggregatedListItems'
+    {_igaliAddtional = _Coerce # pIgaliAddtional_}
 
 -- | The name of the scope that contains this set of instance groups.
 igaliAddtional :: Lens' InstanceGroupAggregatedListItems (HashMap Text InstanceGroupsScopedList)
@@ -5108,14 +5150,16 @@ instance ToJSON InstanceGroupAggregatedListItems
 -- | Contains a list of TargetPool resources.
 --
 -- /See:/ 'targetPoolList' smart constructor.
-data TargetPoolList = TargetPoolList'
+data TargetPoolList =
+  TargetPoolList'
     { _tplNextPageToken :: !(Maybe Text)
     , _tplKind          :: !Text
     , _tplItems         :: !(Maybe [TargetPool])
     , _tplSelfLink      :: !(Maybe Text)
     , _tplWarning       :: !(Maybe TargetPoolListWarning)
     , _tplId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolList' with the minimum fields required to make a request.
 --
@@ -5135,7 +5179,7 @@ data TargetPoolList = TargetPoolList'
 targetPoolList
     :: TargetPoolList
 targetPoolList =
-    TargetPoolList'
+  TargetPoolList'
     { _tplNextPageToken = Nothing
     , _tplKind = "compute#targetPoolList"
     , _tplItems = Nothing
@@ -5207,7 +5251,8 @@ instance ToJSON TargetPoolList where
 -- (== resource_for v1.acceleratorTypes ==)
 --
 -- /See:/ 'acceleratorType' smart constructor.
-data AcceleratorType = AcceleratorType'
+data AcceleratorType =
+  AcceleratorType'
     { _atKind                    :: !Text
     , _atZone                    :: !(Maybe Text)
     , _atMaximumCardsPerInstance :: !(Maybe (Textual Int32))
@@ -5217,7 +5262,8 @@ data AcceleratorType = AcceleratorType'
     , _atId                      :: !(Maybe (Textual Word64))
     , _atDescription             :: !(Maybe Text)
     , _atDeprecated              :: !(Maybe DeprecationStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorType' with the minimum fields required to make a request.
 --
@@ -5243,7 +5289,7 @@ data AcceleratorType = AcceleratorType'
 acceleratorType
     :: AcceleratorType
 acceleratorType =
-    AcceleratorType'
+  AcceleratorType'
     { _atKind = "compute#acceleratorType"
     , _atZone = Nothing
     , _atMaximumCardsPerInstance = Nothing
@@ -5338,10 +5384,12 @@ instance ToJSON AcceleratorType where
 
 --
 -- /See:/ 'backendBucketListWarningDataItem' smart constructor.
-data BackendBucketListWarningDataItem = BackendBucketListWarningDataItem'
+data BackendBucketListWarningDataItem =
+  BackendBucketListWarningDataItem'
     { _bblwdiValue :: !(Maybe Text)
     , _bblwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendBucketListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -5353,10 +5401,8 @@ data BackendBucketListWarningDataItem = BackendBucketListWarningDataItem'
 backendBucketListWarningDataItem
     :: BackendBucketListWarningDataItem
 backendBucketListWarningDataItem =
-    BackendBucketListWarningDataItem'
-    { _bblwdiValue = Nothing
-    , _bblwdiKey = Nothing
-    }
+  BackendBucketListWarningDataItem'
+    {_bblwdiValue = Nothing, _bblwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 bblwdiValue :: Lens' BackendBucketListWarningDataItem (Maybe Text)
@@ -5392,10 +5438,12 @@ instance ToJSON BackendBucketListWarningDataItem
 
 --
 -- /See:/ 'acceleratorTypesScopedListWarningDataItem' smart constructor.
-data AcceleratorTypesScopedListWarningDataItem = AcceleratorTypesScopedListWarningDataItem'
+data AcceleratorTypesScopedListWarningDataItem =
+  AcceleratorTypesScopedListWarningDataItem'
     { _atslwdiValue :: !(Maybe Text)
     , _atslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -5407,10 +5455,8 @@ data AcceleratorTypesScopedListWarningDataItem = AcceleratorTypesScopedListWarni
 acceleratorTypesScopedListWarningDataItem
     :: AcceleratorTypesScopedListWarningDataItem
 acceleratorTypesScopedListWarningDataItem =
-    AcceleratorTypesScopedListWarningDataItem'
-    { _atslwdiValue = Nothing
-    , _atslwdiKey = Nothing
-    }
+  AcceleratorTypesScopedListWarningDataItem'
+    {_atslwdiValue = Nothing, _atslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 atslwdiValue :: Lens' AcceleratorTypesScopedListWarningDataItem (Maybe Text)
@@ -5429,7 +5475,8 @@ atslwdiKey
   = lens _atslwdiKey (\ s a -> s{_atslwdiKey = a})
 
 instance FromJSON
-         AcceleratorTypesScopedListWarningDataItem where
+           AcceleratorTypesScopedListWarningDataItem
+         where
         parseJSON
           = withObject
               "AcceleratorTypesScopedListWarningDataItem"
@@ -5438,7 +5485,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         AcceleratorTypesScopedListWarningDataItem where
+           AcceleratorTypesScopedListWarningDataItem
+         where
         toJSON AcceleratorTypesScopedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -5447,14 +5495,16 @@ instance ToJSON
 
 --
 -- /See:/ 'regionDiskTypeList' smart constructor.
-data RegionDiskTypeList = RegionDiskTypeList'
+data RegionDiskTypeList =
+  RegionDiskTypeList'
     { _rdtlNextPageToken :: !(Maybe Text)
     , _rdtlKind          :: !Text
     , _rdtlItems         :: !(Maybe [DiskType])
     , _rdtlSelfLink      :: !(Maybe Text)
     , _rdtlWarning       :: !(Maybe RegionDiskTypeListWarning)
     , _rdtlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionDiskTypeList' with the minimum fields required to make a request.
 --
@@ -5474,7 +5524,7 @@ data RegionDiskTypeList = RegionDiskTypeList'
 regionDiskTypeList
     :: RegionDiskTypeList
 regionDiskTypeList =
-    RegionDiskTypeList'
+  RegionDiskTypeList'
     { _rdtlNextPageToken = Nothing
     , _rdtlKind = "compute#regionDiskTypeList"
     , _rdtlItems = Nothing
@@ -5544,14 +5594,16 @@ instance ToJSON RegionDiskTypeList where
 
 --
 -- /See:/ 'targetInstanceAggregatedList' smart constructor.
-data TargetInstanceAggregatedList = TargetInstanceAggregatedList'
+data TargetInstanceAggregatedList =
+  TargetInstanceAggregatedList'
     { _tialNextPageToken :: !(Maybe Text)
     , _tialKind          :: !Text
     , _tialItems         :: !(Maybe TargetInstanceAggregatedListItems)
     , _tialSelfLink      :: !(Maybe Text)
     , _tialWarning       :: !(Maybe TargetInstanceAggregatedListWarning)
     , _tialId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstanceAggregatedList' with the minimum fields required to make a request.
 --
@@ -5571,7 +5623,7 @@ data TargetInstanceAggregatedList = TargetInstanceAggregatedList'
 targetInstanceAggregatedList
     :: TargetInstanceAggregatedList
 targetInstanceAggregatedList =
-    TargetInstanceAggregatedList'
+  TargetInstanceAggregatedList'
     { _tialNextPageToken = Nothing
     , _tialKind = "compute#targetInstanceAggregatedList"
     , _tialItems = Nothing
@@ -5639,10 +5691,12 @@ instance ToJSON TargetInstanceAggregatedList where
 
 --
 -- /See:/ 'nodeGroupsListNodesWarningDataItem' smart constructor.
-data NodeGroupsListNodesWarningDataItem = NodeGroupsListNodesWarningDataItem'
+data NodeGroupsListNodesWarningDataItem =
+  NodeGroupsListNodesWarningDataItem'
     { _nglnwdiValue :: !(Maybe Text)
     , _nglnwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsListNodesWarningDataItem' with the minimum fields required to make a request.
 --
@@ -5654,10 +5708,8 @@ data NodeGroupsListNodesWarningDataItem = NodeGroupsListNodesWarningDataItem'
 nodeGroupsListNodesWarningDataItem
     :: NodeGroupsListNodesWarningDataItem
 nodeGroupsListNodesWarningDataItem =
-    NodeGroupsListNodesWarningDataItem'
-    { _nglnwdiValue = Nothing
-    , _nglnwdiKey = Nothing
-    }
+  NodeGroupsListNodesWarningDataItem'
+    {_nglnwdiValue = Nothing, _nglnwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 nglnwdiValue :: Lens' NodeGroupsListNodesWarningDataItem (Maybe Text)
@@ -5693,14 +5745,16 @@ instance ToJSON NodeGroupsListNodesWarningDataItem
 
 --
 -- /See:/ 'usableSubnetworksAggregatedList' smart constructor.
-data UsableSubnetworksAggregatedList = UsableSubnetworksAggregatedList'
+data UsableSubnetworksAggregatedList =
+  UsableSubnetworksAggregatedList'
     { _usalNextPageToken :: !(Maybe Text)
     , _usalKind          :: !Text
     , _usalItems         :: !(Maybe [UsableSubnetwork])
     , _usalSelfLink      :: !(Maybe Text)
     , _usalWarning       :: !(Maybe UsableSubnetworksAggregatedListWarning)
     , _usalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsableSubnetworksAggregatedList' with the minimum fields required to make a request.
 --
@@ -5720,7 +5774,7 @@ data UsableSubnetworksAggregatedList = UsableSubnetworksAggregatedList'
 usableSubnetworksAggregatedList
     :: UsableSubnetworksAggregatedList
 usableSubnetworksAggregatedList =
-    UsableSubnetworksAggregatedList'
+  UsableSubnetworksAggregatedList'
     { _usalNextPageToken = Nothing
     , _usalKind = "compute#usableSubnetworksAggregatedList"
     , _usalItems = Nothing
@@ -5794,10 +5848,12 @@ instance ToJSON UsableSubnetworksAggregatedList where
 
 --
 -- /See:/ 'disksScopedList' smart constructor.
-data DisksScopedList = DisksScopedList'
+data DisksScopedList =
+  DisksScopedList'
     { _dslWarning :: !(Maybe DisksScopedListWarning)
     , _dslDisks   :: !(Maybe [Disk])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisksScopedList' with the minimum fields required to make a request.
 --
@@ -5808,11 +5864,7 @@ data DisksScopedList = DisksScopedList'
 -- * 'dslDisks'
 disksScopedList
     :: DisksScopedList
-disksScopedList =
-    DisksScopedList'
-    { _dslWarning = Nothing
-    , _dslDisks = Nothing
-    }
+disksScopedList = DisksScopedList' {_dslWarning = Nothing, _dslDisks = Nothing}
 
 -- | [Output Only] Informational warning which replaces the list of disks
 -- when the list is empty.
@@ -5843,10 +5895,12 @@ instance ToJSON DisksScopedList where
 
 --
 -- /See:/ 'interconnectLocationListWarningDataItem' smart constructor.
-data InterconnectLocationListWarningDataItem = InterconnectLocationListWarningDataItem'
+data InterconnectLocationListWarningDataItem =
+  InterconnectLocationListWarningDataItem'
     { _illwdiValue :: !(Maybe Text)
     , _illwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectLocationListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -5858,10 +5912,8 @@ data InterconnectLocationListWarningDataItem = InterconnectLocationListWarningDa
 interconnectLocationListWarningDataItem
     :: InterconnectLocationListWarningDataItem
 interconnectLocationListWarningDataItem =
-    InterconnectLocationListWarningDataItem'
-    { _illwdiValue = Nothing
-    , _illwdiKey = Nothing
-    }
+  InterconnectLocationListWarningDataItem'
+    {_illwdiValue = Nothing, _illwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 illwdiValue :: Lens' InterconnectLocationListWarningDataItem (Maybe Text)
@@ -5880,7 +5932,8 @@ illwdiKey
   = lens _illwdiKey (\ s a -> s{_illwdiKey = a})
 
 instance FromJSON
-         InterconnectLocationListWarningDataItem where
+           InterconnectLocationListWarningDataItem
+         where
         parseJSON
           = withObject
               "InterconnectLocationListWarningDataItem"
@@ -5889,7 +5942,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InterconnectLocationListWarningDataItem where
+           InterconnectLocationListWarningDataItem
+         where
         toJSON InterconnectLocationListWarningDataItem'{..}
           = object
               (catMaybes
@@ -5898,10 +5952,12 @@ instance ToJSON
 
 --
 -- /See:/ 'instanceGroupManagersScopedList' smart constructor.
-data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList'
+data InstanceGroupManagersScopedList =
+  InstanceGroupManagersScopedList'
     { _igmslWarning               :: !(Maybe InstanceGroupManagersScopedListWarning)
     , _igmslInstanceGroupManagers :: !(Maybe [InstanceGroupManager])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersScopedList' with the minimum fields required to make a request.
 --
@@ -5913,10 +5969,8 @@ data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList'
 instanceGroupManagersScopedList
     :: InstanceGroupManagersScopedList
 instanceGroupManagersScopedList =
-    InstanceGroupManagersScopedList'
-    { _igmslWarning = Nothing
-    , _igmslInstanceGroupManagers = Nothing
-    }
+  InstanceGroupManagersScopedList'
+    {_igmslWarning = Nothing, _igmslInstanceGroupManagers = Nothing}
 
 -- | [Output Only] The warning that replaces the list of managed instance
 -- groups when the list is empty.
@@ -5953,11 +6007,13 @@ instance ToJSON InstanceGroupManagersScopedList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'subnetworkListWarning' smart constructor.
-data SubnetworkListWarning = SubnetworkListWarning'
+data SubnetworkListWarning =
+  SubnetworkListWarning'
     { _slwData    :: !(Maybe [SubnetworkListWarningDataItem])
     , _slwCode    :: !(Maybe SubnetworkListWarningCode)
     , _slwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworkListWarning' with the minimum fields required to make a request.
 --
@@ -5971,11 +6027,8 @@ data SubnetworkListWarning = SubnetworkListWarning'
 subnetworkListWarning
     :: SubnetworkListWarning
 subnetworkListWarning =
-    SubnetworkListWarning'
-    { _slwData = Nothing
-    , _slwCode = Nothing
-    , _slwMessage = Nothing
-    }
+  SubnetworkListWarning'
+    {_slwData = Nothing, _slwCode = Nothing, _slwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -6015,7 +6068,8 @@ instance ToJSON SubnetworkListWarning where
 -- supported protocols.
 --
 -- /See:/ 'healthCheck' smart constructor.
-data HealthCheck = HealthCheck'
+data HealthCheck =
+  HealthCheck'
     { _hcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _hcTCPHealthCheck     :: !(Maybe TCPHealthCheck)
     , _hcKind               :: !Text
@@ -6031,7 +6085,8 @@ data HealthCheck = HealthCheck'
     , _hcDescription        :: !(Maybe Text)
     , _hcUnhealthyThreshold :: !(Maybe (Textual Int32))
     , _hcHTTPSHealthCheck   :: !(Maybe HTTPSHealthCheck)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
 --
@@ -6069,7 +6124,7 @@ data HealthCheck = HealthCheck'
 healthCheck
     :: HealthCheck
 healthCheck =
-    HealthCheck'
+  HealthCheck'
     { _hcHealthyThreshold = Nothing
     , _hcTCPHealthCheck = Nothing
     , _hcKind = "compute#healthCheck"
@@ -6228,11 +6283,13 @@ instance ToJSON HealthCheck where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'hTTPHealthCheckListWarning' smart constructor.
-data HTTPHealthCheckListWarning = HTTPHealthCheckListWarning'
+data HTTPHealthCheckListWarning =
+  HTTPHealthCheckListWarning'
     { _httphclwData    :: !(Maybe [HTTPHealthCheckListWarningDataItem])
     , _httphclwCode    :: !(Maybe HTTPHealthCheckListWarningCode)
     , _httphclwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPHealthCheckListWarning' with the minimum fields required to make a request.
 --
@@ -6246,7 +6303,7 @@ data HTTPHealthCheckListWarning = HTTPHealthCheckListWarning'
 hTTPHealthCheckListWarning
     :: HTTPHealthCheckListWarning
 hTTPHealthCheckListWarning =
-    HTTPHealthCheckListWarning'
+  HTTPHealthCheckListWarning'
     { _httphclwData = Nothing
     , _httphclwCode = Nothing
     , _httphclwMessage = Nothing
@@ -6292,11 +6349,13 @@ instance ToJSON HTTPHealthCheckListWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'sslPoliciesListWarning' smart constructor.
-data SSLPoliciesListWarning = SSLPoliciesListWarning'
+data SSLPoliciesListWarning =
+  SSLPoliciesListWarning'
     { _splwData    :: !(Maybe [SSLPoliciesListWarningDataItem])
     , _splwCode    :: !(Maybe SSLPoliciesListWarningCode)
     , _splwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLPoliciesListWarning' with the minimum fields required to make a request.
 --
@@ -6310,11 +6369,8 @@ data SSLPoliciesListWarning = SSLPoliciesListWarning'
 sslPoliciesListWarning
     :: SSLPoliciesListWarning
 sslPoliciesListWarning =
-    SSLPoliciesListWarning'
-    { _splwData = Nothing
-    , _splwCode = Nothing
-    , _splwMessage = Nothing
-    }
+  SSLPoliciesListWarning'
+    {_splwData = Nothing, _splwCode = Nothing, _splwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -6354,9 +6410,11 @@ instance ToJSON SSLPoliciesListWarning where
 -- | A list of CommitmentsScopedList resources.
 --
 -- /See:/ 'commitmentAggregatedListItems' smart constructor.
-newtype CommitmentAggregatedListItems = CommitmentAggregatedListItems'
+newtype CommitmentAggregatedListItems =
+  CommitmentAggregatedListItems'
     { _caliAddtional :: HashMap Text CommitmentsScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -6367,9 +6425,7 @@ commitmentAggregatedListItems
     :: HashMap Text CommitmentsScopedList -- ^ 'caliAddtional'
     -> CommitmentAggregatedListItems
 commitmentAggregatedListItems pCaliAddtional_ =
-    CommitmentAggregatedListItems'
-    { _caliAddtional = _Coerce # pCaliAddtional_
-    }
+  CommitmentAggregatedListItems' {_caliAddtional = _Coerce # pCaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of commitments.
 caliAddtional :: Lens' CommitmentAggregatedListItems (HashMap Text CommitmentsScopedList)
@@ -6390,14 +6446,16 @@ instance ToJSON CommitmentAggregatedListItems where
 
 --
 -- /See:/ 'diskAggregatedList' smart constructor.
-data DiskAggregatedList = DiskAggregatedList'
+data DiskAggregatedList =
+  DiskAggregatedList'
     { _dalNextPageToken :: !(Maybe Text)
     , _dalKind          :: !Text
     , _dalItems         :: !(Maybe DiskAggregatedListItems)
     , _dalSelfLink      :: !(Maybe Text)
     , _dalWarning       :: !(Maybe DiskAggregatedListWarning)
     , _dalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskAggregatedList' with the minimum fields required to make a request.
 --
@@ -6417,7 +6475,7 @@ data DiskAggregatedList = DiskAggregatedList'
 diskAggregatedList
     :: DiskAggregatedList
 diskAggregatedList =
-    DiskAggregatedList'
+  DiskAggregatedList'
     { _dalNextPageToken = Nothing
     , _dalKind = "compute#diskAggregatedList"
     , _dalItems = Nothing
@@ -6484,10 +6542,12 @@ instance ToJSON DiskAggregatedList where
 
 --
 -- /See:/ 'instanceGroupsListInstancesWarningDataItem' smart constructor.
-data InstanceGroupsListInstancesWarningDataItem = InstanceGroupsListInstancesWarningDataItem'
+data InstanceGroupsListInstancesWarningDataItem =
+  InstanceGroupsListInstancesWarningDataItem'
     { _igliwdiValue :: !(Maybe Text)
     , _igliwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstancesWarningDataItem' with the minimum fields required to make a request.
 --
@@ -6499,10 +6559,8 @@ data InstanceGroupsListInstancesWarningDataItem = InstanceGroupsListInstancesWar
 instanceGroupsListInstancesWarningDataItem
     :: InstanceGroupsListInstancesWarningDataItem
 instanceGroupsListInstancesWarningDataItem =
-    InstanceGroupsListInstancesWarningDataItem'
-    { _igliwdiValue = Nothing
-    , _igliwdiKey = Nothing
-    }
+  InstanceGroupsListInstancesWarningDataItem'
+    {_igliwdiValue = Nothing, _igliwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 igliwdiValue :: Lens' InstanceGroupsListInstancesWarningDataItem (Maybe Text)
@@ -6521,7 +6579,8 @@ igliwdiKey
   = lens _igliwdiKey (\ s a -> s{_igliwdiKey = a})
 
 instance FromJSON
-         InstanceGroupsListInstancesWarningDataItem where
+           InstanceGroupsListInstancesWarningDataItem
+         where
         parseJSON
           = withObject
               "InstanceGroupsListInstancesWarningDataItem"
@@ -6530,7 +6589,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InstanceGroupsListInstancesWarningDataItem where
+           InstanceGroupsListInstancesWarningDataItem
+         where
         toJSON
           InstanceGroupsListInstancesWarningDataItem'{..}
           = object
@@ -6540,11 +6600,13 @@ instance ToJSON
 
 --
 -- /See:/ 'instanceWithNamedPorts' smart constructor.
-data InstanceWithNamedPorts = InstanceWithNamedPorts'
+data InstanceWithNamedPorts =
+  InstanceWithNamedPorts'
     { _iwnpStatus     :: !(Maybe InstanceWithNamedPortsStatus)
     , _iwnpNamedPorts :: !(Maybe [NamedPort])
     , _iwnpInstance   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceWithNamedPorts' with the minimum fields required to make a request.
 --
@@ -6558,11 +6620,8 @@ data InstanceWithNamedPorts = InstanceWithNamedPorts'
 instanceWithNamedPorts
     :: InstanceWithNamedPorts
 instanceWithNamedPorts =
-    InstanceWithNamedPorts'
-    { _iwnpStatus = Nothing
-    , _iwnpNamedPorts = Nothing
-    , _iwnpInstance = Nothing
-    }
+  InstanceWithNamedPorts'
+    {_iwnpStatus = Nothing, _iwnpNamedPorts = Nothing, _iwnpInstance = Nothing}
 
 -- | [Output Only] The status of the instance.
 iwnpStatus :: Lens' InstanceWithNamedPorts (Maybe InstanceWithNamedPortsStatus)
@@ -6601,11 +6660,13 @@ instance ToJSON InstanceWithNamedPorts where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'interconnectListWarning' smart constructor.
-data InterconnectListWarning = InterconnectListWarning'
+data InterconnectListWarning =
+  InterconnectListWarning'
     { _iData    :: !(Maybe [InterconnectListWarningDataItem])
     , _iCode    :: !(Maybe InterconnectListWarningCode)
     , _iMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectListWarning' with the minimum fields required to make a request.
 --
@@ -6619,11 +6680,8 @@ data InterconnectListWarning = InterconnectListWarning'
 interconnectListWarning
     :: InterconnectListWarning
 interconnectListWarning =
-    InterconnectListWarning'
-    { _iData = Nothing
-    , _iCode = Nothing
-    , _iMessage = Nothing
-    }
+  InterconnectListWarning'
+    {_iData = Nothing, _iCode = Nothing, _iMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -6659,10 +6717,12 @@ instance ToJSON InterconnectListWarning where
 
 --
 -- /See:/ 'forwardingRulesScopedList' smart constructor.
-data ForwardingRulesScopedList = ForwardingRulesScopedList'
+data ForwardingRulesScopedList =
+  ForwardingRulesScopedList'
     { _frslWarning         :: !(Maybe ForwardingRulesScopedListWarning)
     , _frslForwardingRules :: !(Maybe [ForwardingRule])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRulesScopedList' with the minimum fields required to make a request.
 --
@@ -6674,10 +6734,8 @@ data ForwardingRulesScopedList = ForwardingRulesScopedList'
 forwardingRulesScopedList
     :: ForwardingRulesScopedList
 forwardingRulesScopedList =
-    ForwardingRulesScopedList'
-    { _frslWarning = Nothing
-    , _frslForwardingRules = Nothing
-    }
+  ForwardingRulesScopedList'
+    {_frslWarning = Nothing, _frslForwardingRules = Nothing}
 
 -- | Informational warning which replaces the list of forwarding rules when
 -- the list is empty.
@@ -6710,9 +6768,11 @@ instance ToJSON ForwardingRulesScopedList where
 
 --
 -- /See:/ 'instanceReference' smart constructor.
-newtype InstanceReference = InstanceReference'
+newtype InstanceReference =
+  InstanceReference'
     { _iInstance :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceReference' with the minimum fields required to make a request.
 --
@@ -6721,10 +6781,7 @@ newtype InstanceReference = InstanceReference'
 -- * 'iInstance'
 instanceReference
     :: InstanceReference
-instanceReference =
-    InstanceReference'
-    { _iInstance = Nothing
-    }
+instanceReference = InstanceReference' {_iInstance = Nothing}
 
 -- | The URL for a specific instance.
 iInstance :: Lens' InstanceReference (Maybe Text)
@@ -6742,14 +6799,16 @@ instance ToJSON InstanceReference where
 
 --
 -- /See:/ 'operationAggregatedList' smart constructor.
-data OperationAggregatedList = OperationAggregatedList'
+data OperationAggregatedList =
+  OperationAggregatedList'
     { _oalNextPageToken :: !(Maybe Text)
     , _oalKind          :: !Text
     , _oalItems         :: !(Maybe OperationAggregatedListItems)
     , _oalSelfLink      :: !(Maybe Text)
     , _oalWarning       :: !(Maybe OperationAggregatedListWarning)
     , _oalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationAggregatedList' with the minimum fields required to make a request.
 --
@@ -6769,7 +6828,7 @@ data OperationAggregatedList = OperationAggregatedList'
 operationAggregatedList
     :: OperationAggregatedList
 operationAggregatedList =
-    OperationAggregatedList'
+  OperationAggregatedList'
     { _oalNextPageToken = Nothing
     , _oalKind = "compute#operationAggregatedList"
     , _oalItems = Nothing
@@ -6837,10 +6896,12 @@ instance ToJSON OperationAggregatedList where
 
 --
 -- /See:/ 'operationsScopedList' smart constructor.
-data OperationsScopedList = OperationsScopedList'
+data OperationsScopedList =
+  OperationsScopedList'
     { _oslWarning    :: !(Maybe OperationsScopedListWarning)
     , _oslOperations :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationsScopedList' with the minimum fields required to make a request.
 --
@@ -6852,10 +6913,7 @@ data OperationsScopedList = OperationsScopedList'
 operationsScopedList
     :: OperationsScopedList
 operationsScopedList =
-    OperationsScopedList'
-    { _oslWarning = Nothing
-    , _oslOperations = Nothing
-    }
+  OperationsScopedList' {_oslWarning = Nothing, _oslOperations = Nothing}
 
 -- | [Output Only] Informational warning which replaces the list of
 -- operations when the list is empty.
@@ -6889,10 +6947,12 @@ instance ToJSON OperationsScopedList where
 -- | The named port. For example: .
 --
 -- /See:/ 'namedPort' smart constructor.
-data NamedPort = NamedPort'
+data NamedPort =
+  NamedPort'
     { _npName :: !(Maybe Text)
     , _npPort :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NamedPort' with the minimum fields required to make a request.
 --
@@ -6903,11 +6963,7 @@ data NamedPort = NamedPort'
 -- * 'npPort'
 namedPort
     :: NamedPort
-namedPort =
-    NamedPort'
-    { _npName = Nothing
-    , _npPort = Nothing
-    }
+namedPort = NamedPort' {_npName = Nothing, _npPort = Nothing}
 
 -- | The name for this named port. The name must be 1-63 characters long, and
 -- comply with RFC1035.
@@ -6934,10 +6990,12 @@ instance ToJSON NamedPort where
 
 --
 -- /See:/ 'subnetworkAggregatedListWarningDataItem' smart constructor.
-data SubnetworkAggregatedListWarningDataItem = SubnetworkAggregatedListWarningDataItem'
+data SubnetworkAggregatedListWarningDataItem =
+  SubnetworkAggregatedListWarningDataItem'
     { _salwdiValue :: !(Maybe Text)
     , _salwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworkAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -6949,10 +7007,8 @@ data SubnetworkAggregatedListWarningDataItem = SubnetworkAggregatedListWarningDa
 subnetworkAggregatedListWarningDataItem
     :: SubnetworkAggregatedListWarningDataItem
 subnetworkAggregatedListWarningDataItem =
-    SubnetworkAggregatedListWarningDataItem'
-    { _salwdiValue = Nothing
-    , _salwdiKey = Nothing
-    }
+  SubnetworkAggregatedListWarningDataItem'
+    {_salwdiValue = Nothing, _salwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 salwdiValue :: Lens' SubnetworkAggregatedListWarningDataItem (Maybe Text)
@@ -6971,7 +7027,8 @@ salwdiKey
   = lens _salwdiKey (\ s a -> s{_salwdiKey = a})
 
 instance FromJSON
-         SubnetworkAggregatedListWarningDataItem where
+           SubnetworkAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "SubnetworkAggregatedListWarningDataItem"
@@ -6980,7 +7037,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         SubnetworkAggregatedListWarningDataItem where
+           SubnetworkAggregatedListWarningDataItem
+         where
         toJSON SubnetworkAggregatedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -6989,14 +7047,16 @@ instance ToJSON
 
 --
 -- /See:/ 'interconnectDiagnosticsLinkStatus' smart constructor.
-data InterconnectDiagnosticsLinkStatus = InterconnectDiagnosticsLinkStatus'
+data InterconnectDiagnosticsLinkStatus =
+  InterconnectDiagnosticsLinkStatus'
     { _idlsLacpStatus               :: !(Maybe InterconnectDiagnosticsLinkLACPStatus)
     , _idlsReceivingOpticalPower    :: !(Maybe InterconnectDiagnosticsLinkOpticalPower)
     , _idlsGoogleDemarc             :: !(Maybe Text)
     , _idlsCircuitId                :: !(Maybe Text)
     , _idlsArpCaches                :: !(Maybe [InterconnectDiagnosticsARPEntry])
     , _idlsTransmittingOpticalPower :: !(Maybe InterconnectDiagnosticsLinkOpticalPower)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectDiagnosticsLinkStatus' with the minimum fields required to make a request.
 --
@@ -7016,7 +7076,7 @@ data InterconnectDiagnosticsLinkStatus = InterconnectDiagnosticsLinkStatus'
 interconnectDiagnosticsLinkStatus
     :: InterconnectDiagnosticsLinkStatus
 interconnectDiagnosticsLinkStatus =
-    InterconnectDiagnosticsLinkStatus'
+  InterconnectDiagnosticsLinkStatus'
     { _idlsLacpStatus = Nothing
     , _idlsReceivingOpticalPower = Nothing
     , _idlsGoogleDemarc = Nothing
@@ -7092,14 +7152,16 @@ instance ToJSON InterconnectDiagnosticsLinkStatus
 -- | Contains a list of TargetInstance resources.
 --
 -- /See:/ 'targetInstanceList' smart constructor.
-data TargetInstanceList = TargetInstanceList'
+data TargetInstanceList =
+  TargetInstanceList'
     { _tilNextPageToken :: !(Maybe Text)
     , _tilKind          :: !Text
     , _tilItems         :: !(Maybe [TargetInstance])
     , _tilSelfLink      :: !(Maybe Text)
     , _tilWarning       :: !(Maybe TargetInstanceListWarning)
     , _tilId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstanceList' with the minimum fields required to make a request.
 --
@@ -7119,7 +7181,7 @@ data TargetInstanceList = TargetInstanceList'
 targetInstanceList
     :: TargetInstanceList
 targetInstanceList =
-    TargetInstanceList'
+  TargetInstanceList'
     { _tilNextPageToken = Nothing
     , _tilKind = "compute#targetInstanceList"
     , _tilItems = Nothing
@@ -7189,11 +7251,13 @@ instance ToJSON TargetInstanceList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetTCPProxyListWarning' smart constructor.
-data TargetTCPProxyListWarning = TargetTCPProxyListWarning'
+data TargetTCPProxyListWarning =
+  TargetTCPProxyListWarning'
     { _ttplwData    :: !(Maybe [TargetTCPProxyListWarningDataItem])
     , _ttplwCode    :: !(Maybe TargetTCPProxyListWarningCode)
     , _ttplwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxyListWarning' with the minimum fields required to make a request.
 --
@@ -7207,11 +7271,8 @@ data TargetTCPProxyListWarning = TargetTCPProxyListWarning'
 targetTCPProxyListWarning
     :: TargetTCPProxyListWarning
 targetTCPProxyListWarning =
-    TargetTCPProxyListWarning'
-    { _ttplwData = Nothing
-    , _ttplwCode = Nothing
-    , _ttplwMessage = Nothing
-    }
+  TargetTCPProxyListWarning'
+    {_ttplwData = Nothing, _ttplwCode = Nothing, _ttplwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -7251,14 +7312,16 @@ instance ToJSON TargetTCPProxyListWarning where
 
 --
 -- /See:/ 'instanceGroupManagerAggregatedList' smart constructor.
-data InstanceGroupManagerAggregatedList = InstanceGroupManagerAggregatedList'
+data InstanceGroupManagerAggregatedList =
+  InstanceGroupManagerAggregatedList'
     { _igmalNextPageToken :: !(Maybe Text)
     , _igmalKind          :: !Text
     , _igmalItems         :: !(Maybe InstanceGroupManagerAggregatedListItems)
     , _igmalSelfLink      :: !(Maybe Text)
     , _igmalWarning       :: !(Maybe InstanceGroupManagerAggregatedListWarning)
     , _igmalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagerAggregatedList' with the minimum fields required to make a request.
 --
@@ -7278,7 +7341,7 @@ data InstanceGroupManagerAggregatedList = InstanceGroupManagerAggregatedList'
 instanceGroupManagerAggregatedList
     :: InstanceGroupManagerAggregatedList
 instanceGroupManagerAggregatedList =
-    InstanceGroupManagerAggregatedList'
+  InstanceGroupManagerAggregatedList'
     { _igmalNextPageToken = Nothing
     , _igmalKind = "compute#instanceGroupManagerAggregatedList"
     , _igmalItems = Nothing
@@ -7353,7 +7416,8 @@ instance ToJSON InstanceGroupManagerAggregatedList
 -- | A BackendBucket resource. This resource defines a Cloud Storage bucket.
 --
 -- /See:/ 'backendBucket' smart constructor.
-data BackendBucket = BackendBucket'
+data BackendBucket =
+  BackendBucket'
     { _bbKind              :: !Text
     , _bbEnableCdn         :: !(Maybe Bool)
     , _bbBucketName        :: !(Maybe Text)
@@ -7363,7 +7427,8 @@ data BackendBucket = BackendBucket'
     , _bbCreationTimestamp :: !(Maybe Text)
     , _bbId                :: !(Maybe (Textual Word64))
     , _bbDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendBucket' with the minimum fields required to make a request.
 --
@@ -7389,7 +7454,7 @@ data BackendBucket = BackendBucket'
 backendBucket
     :: BackendBucket
 backendBucket =
-    BackendBucket'
+  BackendBucket'
     { _bbKind = "compute#backendBucket"
     , _bbEnableCdn = Nothing
     , _bbBucketName = Nothing
@@ -7485,9 +7550,11 @@ instance ToJSON BackendBucket where
 
 --
 -- /See:/ 'projectsEnableXpnResourceRequest' smart constructor.
-newtype ProjectsEnableXpnResourceRequest = ProjectsEnableXpnResourceRequest'
+newtype ProjectsEnableXpnResourceRequest =
+  ProjectsEnableXpnResourceRequest'
     { _pexrrXpnResource :: Maybe XpnResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsEnableXpnResourceRequest' with the minimum fields required to make a request.
 --
@@ -7497,9 +7564,7 @@ newtype ProjectsEnableXpnResourceRequest = ProjectsEnableXpnResourceRequest'
 projectsEnableXpnResourceRequest
     :: ProjectsEnableXpnResourceRequest
 projectsEnableXpnResourceRequest =
-    ProjectsEnableXpnResourceRequest'
-    { _pexrrXpnResource = Nothing
-    }
+  ProjectsEnableXpnResourceRequest' {_pexrrXpnResource = Nothing}
 
 -- | Service resource (a.k.a service project) ID.
 pexrrXpnResource :: Lens' ProjectsEnableXpnResourceRequest (Maybe XpnResourceId)
@@ -7524,10 +7589,12 @@ instance ToJSON ProjectsEnableXpnResourceRequest
 
 --
 -- /See:/ 'targetPoolsScopedList' smart constructor.
-data TargetPoolsScopedList = TargetPoolsScopedList'
+data TargetPoolsScopedList =
+  TargetPoolsScopedList'
     { _tpslWarning     :: !(Maybe TargetPoolsScopedListWarning)
     , _tpslTargetPools :: !(Maybe [TargetPool])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsScopedList' with the minimum fields required to make a request.
 --
@@ -7539,10 +7606,7 @@ data TargetPoolsScopedList = TargetPoolsScopedList'
 targetPoolsScopedList
     :: TargetPoolsScopedList
 targetPoolsScopedList =
-    TargetPoolsScopedList'
-    { _tpslWarning = Nothing
-    , _tpslTargetPools = Nothing
-    }
+  TargetPoolsScopedList' {_tpslWarning = Nothing, _tpslTargetPools = Nothing}
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -7576,9 +7640,11 @@ instance ToJSON TargetPoolsScopedList where
 -- | A list of InterconnectAttachmentsScopedList resources.
 --
 -- /See:/ 'interconnectAttachmentAggregatedListItems' smart constructor.
-newtype InterconnectAttachmentAggregatedListItems = InterconnectAttachmentAggregatedListItems'
+newtype InterconnectAttachmentAggregatedListItems =
+  InterconnectAttachmentAggregatedListItems'
     { _iaaliAddtional :: HashMap Text InterconnectAttachmentsScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -7589,9 +7655,8 @@ interconnectAttachmentAggregatedListItems
     :: HashMap Text InterconnectAttachmentsScopedList -- ^ 'iaaliAddtional'
     -> InterconnectAttachmentAggregatedListItems
 interconnectAttachmentAggregatedListItems pIaaliAddtional_ =
-    InterconnectAttachmentAggregatedListItems'
-    { _iaaliAddtional = _Coerce # pIaaliAddtional_
-    }
+  InterconnectAttachmentAggregatedListItems'
+    {_iaaliAddtional = _Coerce # pIaaliAddtional_}
 
 -- | Name of the scope containing this set of interconnect attachments.
 iaaliAddtional :: Lens' InterconnectAttachmentAggregatedListItems (HashMap Text InterconnectAttachmentsScopedList)
@@ -7601,7 +7666,8 @@ iaaliAddtional
       . _Coerce
 
 instance FromJSON
-         InterconnectAttachmentAggregatedListItems where
+           InterconnectAttachmentAggregatedListItems
+         where
         parseJSON
           = withObject
               "InterconnectAttachmentAggregatedListItems"
@@ -7610,7 +7676,8 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         InterconnectAttachmentAggregatedListItems where
+           InterconnectAttachmentAggregatedListItems
+         where
         toJSON = toJSON . _iaaliAddtional
 
 -- | Increment a streamz counter with the specified metric and field names.
@@ -7631,10 +7698,12 @@ instance ToJSON
 -- names (though this may be supported in the future).
 --
 -- /See:/ 'logConfigCounterOptions' smart constructor.
-data LogConfigCounterOptions = LogConfigCounterOptions'
+data LogConfigCounterOptions =
+  LogConfigCounterOptions'
     { _lccoField  :: !(Maybe Text)
     , _lccoMetric :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LogConfigCounterOptions' with the minimum fields required to make a request.
 --
@@ -7646,10 +7715,7 @@ data LogConfigCounterOptions = LogConfigCounterOptions'
 logConfigCounterOptions
     :: LogConfigCounterOptions
 logConfigCounterOptions =
-    LogConfigCounterOptions'
-    { _lccoField = Nothing
-    , _lccoMetric = Nothing
-    }
+  LogConfigCounterOptions' {_lccoField = Nothing, _lccoMetric = Nothing}
 
 -- | The field value to attribute.
 lccoField :: Lens' LogConfigCounterOptions (Maybe Text)
@@ -7677,9 +7743,11 @@ instance ToJSON LogConfigCounterOptions where
 
 --
 -- /See:/ 'instancesSetMinCPUPlatformRequest' smart constructor.
-newtype InstancesSetMinCPUPlatformRequest = InstancesSetMinCPUPlatformRequest'
+newtype InstancesSetMinCPUPlatformRequest =
+  InstancesSetMinCPUPlatformRequest'
     { _ismcprMinCPUPlatform :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetMinCPUPlatformRequest' with the minimum fields required to make a request.
 --
@@ -7689,9 +7757,7 @@ newtype InstancesSetMinCPUPlatformRequest = InstancesSetMinCPUPlatformRequest'
 instancesSetMinCPUPlatformRequest
     :: InstancesSetMinCPUPlatformRequest
 instancesSetMinCPUPlatformRequest =
-    InstancesSetMinCPUPlatformRequest'
-    { _ismcprMinCPUPlatform = Nothing
-    }
+  InstancesSetMinCPUPlatformRequest' {_ismcprMinCPUPlatform = Nothing}
 
 -- | Minimum cpu\/platform this instance should be started at.
 ismcprMinCPUPlatform :: Lens' InstancesSetMinCPUPlatformRequest (Maybe Text)
@@ -7716,14 +7782,16 @@ instance ToJSON InstancesSetMinCPUPlatformRequest
 
 --
 -- /See:/ 'forwardingRuleAggregatedList' smart constructor.
-data ForwardingRuleAggregatedList = ForwardingRuleAggregatedList'
+data ForwardingRuleAggregatedList =
+  ForwardingRuleAggregatedList'
     { _fralNextPageToken :: !(Maybe Text)
     , _fralKind          :: !Text
     , _fralItems         :: !(Maybe ForwardingRuleAggregatedListItems)
     , _fralSelfLink      :: !(Maybe Text)
     , _fralWarning       :: !(Maybe ForwardingRuleAggregatedListWarning)
     , _fralId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRuleAggregatedList' with the minimum fields required to make a request.
 --
@@ -7743,7 +7811,7 @@ data ForwardingRuleAggregatedList = ForwardingRuleAggregatedList'
 forwardingRuleAggregatedList
     :: ForwardingRuleAggregatedList
 forwardingRuleAggregatedList =
-    ForwardingRuleAggregatedList'
+  ForwardingRuleAggregatedList'
     { _fralNextPageToken = Nothing
     , _fralKind = "compute#forwardingRuleAggregatedList"
     , _fralItems = Nothing
@@ -7812,9 +7880,11 @@ instance ToJSON ForwardingRuleAggregatedList where
 
 --
 -- /See:/ 'targetReference' smart constructor.
-newtype TargetReference = TargetReference'
+newtype TargetReference =
+  TargetReference'
     { _trTarget :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetReference' with the minimum fields required to make a request.
 --
@@ -7823,10 +7893,7 @@ newtype TargetReference = TargetReference'
 -- * 'trTarget'
 targetReference
     :: TargetReference
-targetReference =
-    TargetReference'
-    { _trTarget = Nothing
-    }
+targetReference = TargetReference' {_trTarget = Nothing}
 
 trTarget :: Lens' TargetReference (Maybe Text)
 trTarget = lens _trTarget (\ s a -> s{_trTarget = a})
@@ -7842,14 +7909,16 @@ instance ToJSON TargetReference where
 
 --
 -- /See:/ 'targetPoolAggregatedList' smart constructor.
-data TargetPoolAggregatedList = TargetPoolAggregatedList'
+data TargetPoolAggregatedList =
+  TargetPoolAggregatedList'
     { _tpalNextPageToken :: !(Maybe Text)
     , _tpalKind          :: !Text
     , _tpalItems         :: !(Maybe TargetPoolAggregatedListItems)
     , _tpalSelfLink      :: !(Maybe Text)
     , _tpalWarning       :: !(Maybe TargetPoolAggregatedListWarning)
     , _tpalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolAggregatedList' with the minimum fields required to make a request.
 --
@@ -7869,7 +7938,7 @@ data TargetPoolAggregatedList = TargetPoolAggregatedList'
 targetPoolAggregatedList
     :: TargetPoolAggregatedList
 targetPoolAggregatedList =
-    TargetPoolAggregatedList'
+  TargetPoolAggregatedList'
     { _tpalNextPageToken = Nothing
     , _tpalKind = "compute#targetPoolAggregatedList"
     , _tpalItems = Nothing
@@ -7937,10 +8006,12 @@ instance ToJSON TargetPoolAggregatedList where
 
 --
 -- /See:/ 'operationsScopedListWarningDataItem' smart constructor.
-data OperationsScopedListWarningDataItem = OperationsScopedListWarningDataItem'
+data OperationsScopedListWarningDataItem =
+  OperationsScopedListWarningDataItem'
     { _oslwdiValue :: !(Maybe Text)
     , _oslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -7952,10 +8023,8 @@ data OperationsScopedListWarningDataItem = OperationsScopedListWarningDataItem'
 operationsScopedListWarningDataItem
     :: OperationsScopedListWarningDataItem
 operationsScopedListWarningDataItem =
-    OperationsScopedListWarningDataItem'
-    { _oslwdiValue = Nothing
-    , _oslwdiKey = Nothing
-    }
+  OperationsScopedListWarningDataItem'
+    {_oslwdiValue = Nothing, _oslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 oslwdiValue :: Lens' OperationsScopedListWarningDataItem (Maybe Text)
@@ -7991,10 +8060,12 @@ instance ToJSON OperationsScopedListWarningDataItem
 
 --
 -- /See:/ 'globalSetLabelsRequest' smart constructor.
-data GlobalSetLabelsRequest = GlobalSetLabelsRequest'
+data GlobalSetLabelsRequest =
+  GlobalSetLabelsRequest'
     { _gslrLabels           :: !(Maybe GlobalSetLabelsRequestLabels)
     , _gslrLabelFingerprint :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GlobalSetLabelsRequest' with the minimum fields required to make a request.
 --
@@ -8006,10 +8077,8 @@ data GlobalSetLabelsRequest = GlobalSetLabelsRequest'
 globalSetLabelsRequest
     :: GlobalSetLabelsRequest
 globalSetLabelsRequest =
-    GlobalSetLabelsRequest'
-    { _gslrLabels = Nothing
-    , _gslrLabelFingerprint = Nothing
-    }
+  GlobalSetLabelsRequest'
+    {_gslrLabels = Nothing, _gslrLabelFingerprint = Nothing}
 
 -- | A list of labels to apply for this resource. Each label key & value must
 -- comply with RFC1035. Specifically, the name must be 1-63 characters long
@@ -8054,7 +8123,8 @@ instance ToJSON GlobalSetLabelsRequest where
 -- resource_for beta.targetPools ==) (== resource_for v1.targetPools ==)
 --
 -- /See:/ 'targetPool' smart constructor.
-data TargetPool = TargetPool'
+data TargetPool =
+  TargetPool'
     { _tpSessionAffinity   :: !(Maybe TargetPoolSessionAffinity)
     , _tpBackupPool        :: !(Maybe Text)
     , _tpKind              :: !Text
@@ -8067,7 +8137,8 @@ data TargetPool = TargetPool'
     , _tpRegion            :: !(Maybe Text)
     , _tpDescription       :: !(Maybe Text)
     , _tpHealthChecks      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPool' with the minimum fields required to make a request.
 --
@@ -8099,7 +8170,7 @@ data TargetPool = TargetPool'
 targetPool
     :: TargetPool
 targetPool =
-    TargetPool'
+  TargetPool'
     { _tpSessionAffinity = Nothing
     , _tpBackupPool = Nothing
     , _tpKind = "compute#targetPool"
@@ -8260,14 +8331,16 @@ instance ToJSON TargetPool where
 -- | Contains a list of images.
 --
 -- /See:/ 'imageList' smart constructor.
-data ImageList = ImageList'
+data ImageList =
+  ImageList'
     { _ilNextPageToken :: !(Maybe Text)
     , _ilKind          :: !Text
     , _ilItems         :: !(Maybe [Image])
     , _ilSelfLink      :: !(Maybe Text)
     , _ilWarning       :: !(Maybe ImageListWarning)
     , _ilId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImageList' with the minimum fields required to make a request.
 --
@@ -8287,7 +8360,7 @@ data ImageList = ImageList'
 imageList
     :: ImageList
 imageList =
-    ImageList'
+  ImageList'
     { _ilNextPageToken = Nothing
     , _ilKind = "compute#imageList"
     , _ilItems = Nothing
@@ -8353,10 +8426,12 @@ instance ToJSON ImageList where
 
 --
 -- /See:/ 'operationAggregatedListWarningDataItem' smart constructor.
-data OperationAggregatedListWarningDataItem = OperationAggregatedListWarningDataItem'
+data OperationAggregatedListWarningDataItem =
+  OperationAggregatedListWarningDataItem'
     { _oalwdiValue :: !(Maybe Text)
     , _oalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -8368,10 +8443,8 @@ data OperationAggregatedListWarningDataItem = OperationAggregatedListWarningData
 operationAggregatedListWarningDataItem
     :: OperationAggregatedListWarningDataItem
 operationAggregatedListWarningDataItem =
-    OperationAggregatedListWarningDataItem'
-    { _oalwdiValue = Nothing
-    , _oalwdiKey = Nothing
-    }
+  OperationAggregatedListWarningDataItem'
+    {_oalwdiValue = Nothing, _oalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 oalwdiValue :: Lens' OperationAggregatedListWarningDataItem (Maybe Text)
@@ -8390,7 +8463,8 @@ oalwdiKey
   = lens _oalwdiKey (\ s a -> s{_oalwdiKey = a})
 
 instance FromJSON
-         OperationAggregatedListWarningDataItem where
+           OperationAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject "OperationAggregatedListWarningDataItem"
               (\ o ->
@@ -8398,7 +8472,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         OperationAggregatedListWarningDataItem where
+           OperationAggregatedListWarningDataItem
+         where
         toJSON OperationAggregatedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -8408,11 +8483,13 @@ instance ToJSON
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'forwardingRuleListWarning' smart constructor.
-data ForwardingRuleListWarning = ForwardingRuleListWarning'
+data ForwardingRuleListWarning =
+  ForwardingRuleListWarning'
     { _frlwData    :: !(Maybe [ForwardingRuleListWarningDataItem])
     , _frlwCode    :: !(Maybe ForwardingRuleListWarningCode)
     , _frlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRuleListWarning' with the minimum fields required to make a request.
 --
@@ -8426,11 +8503,8 @@ data ForwardingRuleListWarning = ForwardingRuleListWarning'
 forwardingRuleListWarning
     :: ForwardingRuleListWarning
 forwardingRuleListWarning =
-    ForwardingRuleListWarning'
-    { _frlwData = Nothing
-    , _frlwCode = Nothing
-    , _frlwMessage = Nothing
-    }
+  ForwardingRuleListWarning'
+    {_frlwData = Nothing, _frlwCode = Nothing, _frlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -8471,11 +8545,13 @@ instance ToJSON ForwardingRuleListWarning where
 -- is empty.
 --
 -- /See:/ 'vpnTunnelsScopedListWarning' smart constructor.
-data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning'
+data VPNTunnelsScopedListWarning =
+  VPNTunnelsScopedListWarning'
     { _vtslwData    :: !(Maybe [VPNTunnelsScopedListWarningDataItem])
     , _vtslwCode    :: !(Maybe VPNTunnelsScopedListWarningCode)
     , _vtslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -8489,11 +8565,8 @@ data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning'
 vpnTunnelsScopedListWarning
     :: VPNTunnelsScopedListWarning
 vpnTunnelsScopedListWarning =
-    VPNTunnelsScopedListWarning'
-    { _vtslwData = Nothing
-    , _vtslwCode = Nothing
-    , _vtslwMessage = Nothing
-    }
+  VPNTunnelsScopedListWarning'
+    {_vtslwData = Nothing, _vtslwCode = Nothing, _vtslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -8533,9 +8606,11 @@ instance ToJSON VPNTunnelsScopedListWarning where
 
 --
 -- /See:/ 'regionDisksResizeRequest' smart constructor.
-newtype RegionDisksResizeRequest = RegionDisksResizeRequest'
+newtype RegionDisksResizeRequest =
+  RegionDisksResizeRequest'
     { _rdrrSizeGb :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionDisksResizeRequest' with the minimum fields required to make a request.
 --
@@ -8544,10 +8619,7 @@ newtype RegionDisksResizeRequest = RegionDisksResizeRequest'
 -- * 'rdrrSizeGb'
 regionDisksResizeRequest
     :: RegionDisksResizeRequest
-regionDisksResizeRequest =
-    RegionDisksResizeRequest'
-    { _rdrrSizeGb = Nothing
-    }
+regionDisksResizeRequest = RegionDisksResizeRequest' {_rdrrSizeGb = Nothing}
 
 -- | The new size of the regional persistent disk, which is specified in GB.
 rdrrSizeGb :: Lens' RegionDisksResizeRequest (Maybe Int64)
@@ -8569,11 +8641,13 @@ instance ToJSON RegionDisksResizeRequest where
 -- list is empty.
 --
 -- /See:/ 'nodeTypesScopedListWarning' smart constructor.
-data NodeTypesScopedListWarning = NodeTypesScopedListWarning'
+data NodeTypesScopedListWarning =
+  NodeTypesScopedListWarning'
     { _ntslwData    :: !(Maybe [NodeTypesScopedListWarningDataItem])
     , _ntslwCode    :: !(Maybe NodeTypesScopedListWarningCode)
     , _ntslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -8587,11 +8661,8 @@ data NodeTypesScopedListWarning = NodeTypesScopedListWarning'
 nodeTypesScopedListWarning
     :: NodeTypesScopedListWarning
 nodeTypesScopedListWarning =
-    NodeTypesScopedListWarning'
-    { _ntslwData = Nothing
-    , _ntslwCode = Nothing
-    , _ntslwMessage = Nothing
-    }
+  NodeTypesScopedListWarning'
+    {_ntslwData = Nothing, _ntslwCode = Nothing, _ntslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -8631,11 +8702,13 @@ instance ToJSON NodeTypesScopedListWarning where
 
 --
 -- /See:/ 'nodeTemplateNodeTypeFlexibility' smart constructor.
-data NodeTemplateNodeTypeFlexibility = NodeTemplateNodeTypeFlexibility'
+data NodeTemplateNodeTypeFlexibility =
+  NodeTemplateNodeTypeFlexibility'
     { _ntntfMemory   :: !(Maybe Text)
     , _ntntfCPUs     :: !(Maybe Text)
     , _ntntfLocalSsd :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplateNodeTypeFlexibility' with the minimum fields required to make a request.
 --
@@ -8649,11 +8722,8 @@ data NodeTemplateNodeTypeFlexibility = NodeTemplateNodeTypeFlexibility'
 nodeTemplateNodeTypeFlexibility
     :: NodeTemplateNodeTypeFlexibility
 nodeTemplateNodeTypeFlexibility =
-    NodeTemplateNodeTypeFlexibility'
-    { _ntntfMemory = Nothing
-    , _ntntfCPUs = Nothing
-    , _ntntfLocalSsd = Nothing
-    }
+  NodeTemplateNodeTypeFlexibility'
+    {_ntntfMemory = Nothing, _ntntfCPUs = Nothing, _ntntfLocalSsd = Nothing}
 
 ntntfMemory :: Lens' NodeTemplateNodeTypeFlexibility (Maybe Text)
 ntntfMemory
@@ -8687,10 +8757,12 @@ instance ToJSON NodeTemplateNodeTypeFlexibility where
 
 --
 -- /See:/ 'licenseResourceRequirements' smart constructor.
-data LicenseResourceRequirements = LicenseResourceRequirements'
+data LicenseResourceRequirements =
+  LicenseResourceRequirements'
     { _lrrMinMemoryMb      :: !(Maybe (Textual Int32))
     , _lrrMinGuestCPUCount :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseResourceRequirements' with the minimum fields required to make a request.
 --
@@ -8702,10 +8774,8 @@ data LicenseResourceRequirements = LicenseResourceRequirements'
 licenseResourceRequirements
     :: LicenseResourceRequirements
 licenseResourceRequirements =
-    LicenseResourceRequirements'
-    { _lrrMinMemoryMb = Nothing
-    , _lrrMinGuestCPUCount = Nothing
-    }
+  LicenseResourceRequirements'
+    {_lrrMinMemoryMb = Nothing, _lrrMinGuestCPUCount = Nothing}
 
 -- | Minimum memory required to use the Instance. Enforced at Instance
 -- creation and Instance start.
@@ -8740,11 +8810,13 @@ instance ToJSON LicenseResourceRequirements where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'regionDiskTypeListWarning' smart constructor.
-data RegionDiskTypeListWarning = RegionDiskTypeListWarning'
+data RegionDiskTypeListWarning =
+  RegionDiskTypeListWarning'
     { _rdtlwData    :: !(Maybe [RegionDiskTypeListWarningDataItem])
     , _rdtlwCode    :: !(Maybe RegionDiskTypeListWarningCode)
     , _rdtlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionDiskTypeListWarning' with the minimum fields required to make a request.
 --
@@ -8758,11 +8830,8 @@ data RegionDiskTypeListWarning = RegionDiskTypeListWarning'
 regionDiskTypeListWarning
     :: RegionDiskTypeListWarning
 regionDiskTypeListWarning =
-    RegionDiskTypeListWarning'
-    { _rdtlwData = Nothing
-    , _rdtlwCode = Nothing
-    , _rdtlwMessage = Nothing
-    }
+  RegionDiskTypeListWarning'
+    {_rdtlwData = Nothing, _rdtlwCode = Nothing, _rdtlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -8802,9 +8871,11 @@ instance ToJSON RegionDiskTypeListWarning where
 
 --
 -- /See:/ 'targetSSLProxiesSetBackendServiceRequest' smart constructor.
-newtype TargetSSLProxiesSetBackendServiceRequest = TargetSSLProxiesSetBackendServiceRequest'
+newtype TargetSSLProxiesSetBackendServiceRequest =
+  TargetSSLProxiesSetBackendServiceRequest'
     { _tspsbsrService :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxiesSetBackendServiceRequest' with the minimum fields required to make a request.
 --
@@ -8814,9 +8885,7 @@ newtype TargetSSLProxiesSetBackendServiceRequest = TargetSSLProxiesSetBackendSer
 targetSSLProxiesSetBackendServiceRequest
     :: TargetSSLProxiesSetBackendServiceRequest
 targetSSLProxiesSetBackendServiceRequest =
-    TargetSSLProxiesSetBackendServiceRequest'
-    { _tspsbsrService = Nothing
-    }
+  TargetSSLProxiesSetBackendServiceRequest' {_tspsbsrService = Nothing}
 
 -- | The URL of the new BackendService resource for the targetSslProxy.
 tspsbsrService :: Lens' TargetSSLProxiesSetBackendServiceRequest (Maybe Text)
@@ -8825,7 +8894,8 @@ tspsbsrService
       (\ s a -> s{_tspsbsrService = a})
 
 instance FromJSON
-         TargetSSLProxiesSetBackendServiceRequest where
+           TargetSSLProxiesSetBackendServiceRequest
+         where
         parseJSON
           = withObject
               "TargetSSLProxiesSetBackendServiceRequest"
@@ -8834,7 +8904,8 @@ instance FromJSON
                    (o .:? "service"))
 
 instance ToJSON
-         TargetSSLProxiesSetBackendServiceRequest where
+           TargetSSLProxiesSetBackendServiceRequest
+         where
         toJSON TargetSSLProxiesSetBackendServiceRequest'{..}
           = object
               (catMaybes [("service" .=) <$> _tspsbsrService])
@@ -8848,7 +8919,8 @@ instance ToJSON
 -- ==) (== resource_for v1.regionForwardingRules ==)
 --
 -- /See:/ 'forwardingRule' smart constructor.
-data ForwardingRule = ForwardingRule'
+data ForwardingRule =
+  ForwardingRule'
     { _frNetworkTier         :: !(Maybe ForwardingRuleNetworkTier)
     , _frIPAddress           :: !(Maybe Text)
     , _frLoadBalancingScheme :: !(Maybe ForwardingRuleLoadBalancingScheme)
@@ -8867,7 +8939,8 @@ data ForwardingRule = ForwardingRule'
     , _frDescription         :: !(Maybe Text)
     , _frTarget              :: !(Maybe Text)
     , _frBackendService      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRule' with the minimum fields required to make a request.
 --
@@ -8911,7 +8984,7 @@ data ForwardingRule = ForwardingRule'
 forwardingRule
     :: ForwardingRule
 forwardingRule =
-    ForwardingRule'
+  ForwardingRule'
     { _frNetworkTier = Nothing
     , _frIPAddress = Nothing
     , _frLoadBalancingScheme = Nothing
@@ -9154,14 +9227,16 @@ instance ToJSON ForwardingRule where
 -- | Contains a list of UrlMap resources.
 --
 -- /See:/ 'urlMapList' smart constructor.
-data URLMapList = URLMapList'
+data URLMapList =
+  URLMapList'
     { _umlNextPageToken :: !(Maybe Text)
     , _umlKind          :: !Text
     , _umlItems         :: !(Maybe [URLMap])
     , _umlSelfLink      :: !(Maybe Text)
     , _umlWarning       :: !(Maybe URLMapListWarning)
     , _umlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapList' with the minimum fields required to make a request.
 --
@@ -9181,7 +9256,7 @@ data URLMapList = URLMapList'
 urlMapList
     :: URLMapList
 urlMapList =
-    URLMapList'
+  URLMapList'
     { _umlNextPageToken = Nothing
     , _umlKind = "compute#urlMapList"
     , _umlItems = Nothing
@@ -9250,10 +9325,12 @@ instance ToJSON URLMapList where
 
 --
 -- /See:/ 'forwardingRulesScopedListWarningDataItem' smart constructor.
-data ForwardingRulesScopedListWarningDataItem = ForwardingRulesScopedListWarningDataItem'
+data ForwardingRulesScopedListWarningDataItem =
+  ForwardingRulesScopedListWarningDataItem'
     { _frslwdiValue :: !(Maybe Text)
     , _frslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRulesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -9265,10 +9342,8 @@ data ForwardingRulesScopedListWarningDataItem = ForwardingRulesScopedListWarning
 forwardingRulesScopedListWarningDataItem
     :: ForwardingRulesScopedListWarningDataItem
 forwardingRulesScopedListWarningDataItem =
-    ForwardingRulesScopedListWarningDataItem'
-    { _frslwdiValue = Nothing
-    , _frslwdiKey = Nothing
-    }
+  ForwardingRulesScopedListWarningDataItem'
+    {_frslwdiValue = Nothing, _frslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 frslwdiValue :: Lens' ForwardingRulesScopedListWarningDataItem (Maybe Text)
@@ -9287,7 +9362,8 @@ frslwdiKey
   = lens _frslwdiKey (\ s a -> s{_frslwdiKey = a})
 
 instance FromJSON
-         ForwardingRulesScopedListWarningDataItem where
+           ForwardingRulesScopedListWarningDataItem
+         where
         parseJSON
           = withObject
               "ForwardingRulesScopedListWarningDataItem"
@@ -9296,7 +9372,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         ForwardingRulesScopedListWarningDataItem where
+           ForwardingRulesScopedListWarningDataItem
+         where
         toJSON ForwardingRulesScopedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -9306,11 +9383,13 @@ instance ToJSON
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetInstanceAggregatedListWarning' smart constructor.
-data TargetInstanceAggregatedListWarning = TargetInstanceAggregatedListWarning'
+data TargetInstanceAggregatedListWarning =
+  TargetInstanceAggregatedListWarning'
     { _tialwData    :: !(Maybe [TargetInstanceAggregatedListWarningDataItem])
     , _tialwCode    :: !(Maybe TargetInstanceAggregatedListWarningCode)
     , _tialwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstanceAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -9324,11 +9403,8 @@ data TargetInstanceAggregatedListWarning = TargetInstanceAggregatedListWarning'
 targetInstanceAggregatedListWarning
     :: TargetInstanceAggregatedListWarning
 targetInstanceAggregatedListWarning =
-    TargetInstanceAggregatedListWarning'
-    { _tialwData = Nothing
-    , _tialwCode = Nothing
-    , _tialwMessage = Nothing
-    }
+  TargetInstanceAggregatedListWarning'
+    {_tialwData = Nothing, _tialwCode = Nothing, _tialwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -9370,10 +9446,12 @@ instance ToJSON TargetInstanceAggregatedListWarning
 
 --
 -- /See:/ 'instanceGroupManagersScopedListWarningDataItem' smart constructor.
-data InstanceGroupManagersScopedListWarningDataItem = InstanceGroupManagersScopedListWarningDataItem'
+data InstanceGroupManagersScopedListWarningDataItem =
+  InstanceGroupManagersScopedListWarningDataItem'
     { _igmslwdiValue :: !(Maybe Text)
     , _igmslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -9385,10 +9463,8 @@ data InstanceGroupManagersScopedListWarningDataItem = InstanceGroupManagersScope
 instanceGroupManagersScopedListWarningDataItem
     :: InstanceGroupManagersScopedListWarningDataItem
 instanceGroupManagersScopedListWarningDataItem =
-    InstanceGroupManagersScopedListWarningDataItem'
-    { _igmslwdiValue = Nothing
-    , _igmslwdiKey = Nothing
-    }
+  InstanceGroupManagersScopedListWarningDataItem'
+    {_igmslwdiValue = Nothing, _igmslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 igmslwdiValue :: Lens' InstanceGroupManagersScopedListWarningDataItem (Maybe Text)
@@ -9408,7 +9484,8 @@ igmslwdiKey
   = lens _igmslwdiKey (\ s a -> s{_igmslwdiKey = a})
 
 instance FromJSON
-         InstanceGroupManagersScopedListWarningDataItem where
+           InstanceGroupManagersScopedListWarningDataItem
+         where
         parseJSON
           = withObject
               "InstanceGroupManagersScopedListWarningDataItem"
@@ -9417,7 +9494,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InstanceGroupManagersScopedListWarningDataItem where
+           InstanceGroupManagersScopedListWarningDataItem
+         where
         toJSON
           InstanceGroupManagersScopedListWarningDataItem'{..}
           = object
@@ -9427,10 +9505,12 @@ instance ToJSON
 
 --
 -- /See:/ 'subnetworksScopedList' smart constructor.
-data SubnetworksScopedList = SubnetworksScopedList'
+data SubnetworksScopedList =
+  SubnetworksScopedList'
     { _sslSubnetworks :: !(Maybe [Subnetwork])
     , _sslWarning     :: !(Maybe SubnetworksScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksScopedList' with the minimum fields required to make a request.
 --
@@ -9442,10 +9522,7 @@ data SubnetworksScopedList = SubnetworksScopedList'
 subnetworksScopedList
     :: SubnetworksScopedList
 subnetworksScopedList =
-    SubnetworksScopedList'
-    { _sslSubnetworks = Nothing
-    , _sslWarning = Nothing
-    }
+  SubnetworksScopedList' {_sslSubnetworks = Nothing, _sslWarning = Nothing}
 
 -- | A list of subnetworks contained in this scope.
 sslSubnetworks :: Lens' SubnetworksScopedList [Subnetwork]
@@ -9479,14 +9556,16 @@ instance ToJSON SubnetworksScopedList where
 -- | Contains a list of accelerator types.
 --
 -- /See:/ 'acceleratorTypeList' smart constructor.
-data AcceleratorTypeList = AcceleratorTypeList'
+data AcceleratorTypeList =
+  AcceleratorTypeList'
     { _atlNextPageToken :: !(Maybe Text)
     , _atlKind          :: !Text
     , _atlItems         :: !(Maybe [AcceleratorType])
     , _atlSelfLink      :: !(Maybe Text)
     , _atlWarning       :: !(Maybe AcceleratorTypeListWarning)
     , _atlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypeList' with the minimum fields required to make a request.
 --
@@ -9506,7 +9585,7 @@ data AcceleratorTypeList = AcceleratorTypeList'
 acceleratorTypeList
     :: AcceleratorTypeList
 acceleratorTypeList =
-    AcceleratorTypeList'
+  AcceleratorTypeList'
     { _atlNextPageToken = Nothing
     , _atlKind = "compute#acceleratorTypeList"
     , _atlItems = Nothing
@@ -9576,10 +9655,12 @@ instance ToJSON AcceleratorTypeList where
 
 --
 -- /See:/ 'diskAggregatedListWarningDataItem' smart constructor.
-data DiskAggregatedListWarningDataItem = DiskAggregatedListWarningDataItem'
+data DiskAggregatedListWarningDataItem =
+  DiskAggregatedListWarningDataItem'
     { _dalwdiValue :: !(Maybe Text)
     , _dalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -9591,10 +9672,8 @@ data DiskAggregatedListWarningDataItem = DiskAggregatedListWarningDataItem'
 diskAggregatedListWarningDataItem
     :: DiskAggregatedListWarningDataItem
 diskAggregatedListWarningDataItem =
-    DiskAggregatedListWarningDataItem'
-    { _dalwdiValue = Nothing
-    , _dalwdiKey = Nothing
-    }
+  DiskAggregatedListWarningDataItem'
+    {_dalwdiValue = Nothing, _dalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 dalwdiValue :: Lens' DiskAggregatedListWarningDataItem (Maybe Text)
@@ -9631,11 +9710,13 @@ instance ToJSON DiskAggregatedListWarningDataItem
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetPoolListWarning' smart constructor.
-data TargetPoolListWarning = TargetPoolListWarning'
+data TargetPoolListWarning =
+  TargetPoolListWarning'
     { _tplwData    :: !(Maybe [TargetPoolListWarningDataItem])
     , _tplwCode    :: !(Maybe TargetPoolListWarningCode)
     , _tplwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolListWarning' with the minimum fields required to make a request.
 --
@@ -9649,11 +9730,8 @@ data TargetPoolListWarning = TargetPoolListWarning'
 targetPoolListWarning
     :: TargetPoolListWarning
 targetPoolListWarning =
-    TargetPoolListWarning'
-    { _tplwData = Nothing
-    , _tplwCode = Nothing
-    , _tplwMessage = Nothing
-    }
+  TargetPoolListWarning'
+    {_tplwData = Nothing, _tplwCode = Nothing, _tplwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -9694,11 +9772,13 @@ instance ToJSON TargetPoolListWarning where
 -- templates list is empty.
 --
 -- /See:/ 'nodeTemplatesScopedListWarning' smart constructor.
-data NodeTemplatesScopedListWarning = NodeTemplatesScopedListWarning'
+data NodeTemplatesScopedListWarning =
+  NodeTemplatesScopedListWarning'
     { _nData    :: !(Maybe [NodeTemplatesScopedListWarningDataItem])
     , _nCode    :: !(Maybe NodeTemplatesScopedListWarningCode)
     , _nMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplatesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -9712,11 +9792,8 @@ data NodeTemplatesScopedListWarning = NodeTemplatesScopedListWarning'
 nodeTemplatesScopedListWarning
     :: NodeTemplatesScopedListWarning
 nodeTemplatesScopedListWarning =
-    NodeTemplatesScopedListWarning'
-    { _nData = Nothing
-    , _nCode = Nothing
-    , _nMessage = Nothing
-    }
+  NodeTemplatesScopedListWarning'
+    {_nData = Nothing, _nCode = Nothing, _nMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -9753,10 +9830,12 @@ instance ToJSON NodeTemplatesScopedListWarning where
 
 --
 -- /See:/ 'targetPoolAggregatedListWarningDataItem' smart constructor.
-data TargetPoolAggregatedListWarningDataItem = TargetPoolAggregatedListWarningDataItem'
+data TargetPoolAggregatedListWarningDataItem =
+  TargetPoolAggregatedListWarningDataItem'
     { _tpalwdiValue :: !(Maybe Text)
     , _tpalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -9768,10 +9847,8 @@ data TargetPoolAggregatedListWarningDataItem = TargetPoolAggregatedListWarningDa
 targetPoolAggregatedListWarningDataItem
     :: TargetPoolAggregatedListWarningDataItem
 targetPoolAggregatedListWarningDataItem =
-    TargetPoolAggregatedListWarningDataItem'
-    { _tpalwdiValue = Nothing
-    , _tpalwdiKey = Nothing
-    }
+  TargetPoolAggregatedListWarningDataItem'
+    {_tpalwdiValue = Nothing, _tpalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tpalwdiValue :: Lens' TargetPoolAggregatedListWarningDataItem (Maybe Text)
@@ -9790,7 +9867,8 @@ tpalwdiKey
   = lens _tpalwdiKey (\ s a -> s{_tpalwdiKey = a})
 
 instance FromJSON
-         TargetPoolAggregatedListWarningDataItem where
+           TargetPoolAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "TargetPoolAggregatedListWarningDataItem"
@@ -9799,7 +9877,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         TargetPoolAggregatedListWarningDataItem where
+           TargetPoolAggregatedListWarningDataItem
+         where
         toJSON TargetPoolAggregatedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -9811,7 +9890,8 @@ instance ToJSON
 -- beta.projects ==)
 --
 -- /See:/ 'project' smart constructor.
-data Project = Project'
+data Project =
+  Project'
     { _pXpnProjectStatus       :: !(Maybe ProjectXpnProjectStatus)
     , _pKind                   :: !Text
     , _pUsageExportLocation    :: !(Maybe UsageExportLocation)
@@ -9825,7 +9905,8 @@ data Project = Project'
     , _pId                     :: !(Maybe (Textual Word64))
     , _pDescription            :: !(Maybe Text)
     , _pCommonInstanceMetadata :: !(Maybe Metadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
@@ -9859,7 +9940,7 @@ data Project = Project'
 project
     :: Project
 project =
-    Project'
+  Project'
     { _pXpnProjectStatus = Nothing
     , _pKind = "compute#project"
     , _pUsageExportLocation = Nothing
@@ -9997,9 +10078,11 @@ instance ToJSON Project where
 
 --
 -- /See:/ 'regionInstanceGroupManagersListInstancesResponse' smart constructor.
-newtype RegionInstanceGroupManagersListInstancesResponse = RegionInstanceGroupManagersListInstancesResponse'
+newtype RegionInstanceGroupManagersListInstancesResponse =
+  RegionInstanceGroupManagersListInstancesResponse'
     { _rigmlirManagedInstances :: Maybe [ManagedInstance]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersListInstancesResponse' with the minimum fields required to make a request.
 --
@@ -10009,9 +10092,8 @@ newtype RegionInstanceGroupManagersListInstancesResponse = RegionInstanceGroupMa
 regionInstanceGroupManagersListInstancesResponse
     :: RegionInstanceGroupManagersListInstancesResponse
 regionInstanceGroupManagersListInstancesResponse =
-    RegionInstanceGroupManagersListInstancesResponse'
-    { _rigmlirManagedInstances = Nothing
-    }
+  RegionInstanceGroupManagersListInstancesResponse'
+    {_rigmlirManagedInstances = Nothing}
 
 -- | A list of managed instances.
 rigmlirManagedInstances :: Lens' RegionInstanceGroupManagersListInstancesResponse [ManagedInstance]
@@ -10022,7 +10104,7 @@ rigmlirManagedInstances
       . _Coerce
 
 instance FromJSON
-         RegionInstanceGroupManagersListInstancesResponse
+           RegionInstanceGroupManagersListInstancesResponse
          where
         parseJSON
           = withObject
@@ -10032,7 +10114,7 @@ instance FromJSON
                    (o .:? "managedInstances" .!= mempty))
 
 instance ToJSON
-         RegionInstanceGroupManagersListInstancesResponse
+           RegionInstanceGroupManagersListInstancesResponse
          where
         toJSON
           RegionInstanceGroupManagersListInstancesResponse'{..}
@@ -10048,7 +10130,8 @@ instance ToJSON
 -- v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
@@ -10072,7 +10155,8 @@ data Operation = Operation'
     , _oDescription         :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -10126,7 +10210,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -10355,10 +10439,12 @@ instance ToJSON Operation where
 
 --
 -- /See:/ 'disksScopedListWarningDataItem' smart constructor.
-data DisksScopedListWarningDataItem = DisksScopedListWarningDataItem'
+data DisksScopedListWarningDataItem =
+  DisksScopedListWarningDataItem'
     { _dslwdiValue :: !(Maybe Text)
     , _dslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisksScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -10370,10 +10456,7 @@ data DisksScopedListWarningDataItem = DisksScopedListWarningDataItem'
 disksScopedListWarningDataItem
     :: DisksScopedListWarningDataItem
 disksScopedListWarningDataItem =
-    DisksScopedListWarningDataItem'
-    { _dslwdiValue = Nothing
-    , _dslwdiKey = Nothing
-    }
+  DisksScopedListWarningDataItem' {_dslwdiValue = Nothing, _dslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 dslwdiValue :: Lens' DisksScopedListWarningDataItem (Maybe Text)
@@ -10410,7 +10493,8 @@ instance ToJSON DisksScopedListWarningDataItem where
 -- v1.disks ==)
 --
 -- /See:/ 'disk' smart constructor.
-data Disk = Disk'
+data Disk =
+  Disk'
     { _dStatus                      :: !(Maybe DiskStatus)
     , _dSourceSnapshotId            :: !(Maybe Text)
     , _dLastAttachTimestamp         :: !(Maybe Text)
@@ -10440,7 +10524,8 @@ data Disk = Disk'
     , _dDescription                 :: !(Maybe Text)
     , _dSourceSnapshotEncryptionKey :: !(Maybe CustomerEncryptionKey)
     , _dSourceSnapshot              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Disk' with the minimum fields required to make a request.
 --
@@ -10506,7 +10591,7 @@ data Disk = Disk'
 disk
     :: Disk
 disk =
-    Disk'
+  Disk'
     { _dStatus = Nothing
     , _dSourceSnapshotId = Nothing
     , _dLastAttachTimestamp = Nothing
@@ -10841,10 +10926,12 @@ instance ToJSON Disk where
 
 --
 -- /See:/ 'usableSubnetworksAggregatedListWarningDataItem' smart constructor.
-data UsableSubnetworksAggregatedListWarningDataItem = UsableSubnetworksAggregatedListWarningDataItem'
+data UsableSubnetworksAggregatedListWarningDataItem =
+  UsableSubnetworksAggregatedListWarningDataItem'
     { _usalwdiValue :: !(Maybe Text)
     , _usalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsableSubnetworksAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -10856,10 +10943,8 @@ data UsableSubnetworksAggregatedListWarningDataItem = UsableSubnetworksAggregate
 usableSubnetworksAggregatedListWarningDataItem
     :: UsableSubnetworksAggregatedListWarningDataItem
 usableSubnetworksAggregatedListWarningDataItem =
-    UsableSubnetworksAggregatedListWarningDataItem'
-    { _usalwdiValue = Nothing
-    , _usalwdiKey = Nothing
-    }
+  UsableSubnetworksAggregatedListWarningDataItem'
+    {_usalwdiValue = Nothing, _usalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 usalwdiValue :: Lens' UsableSubnetworksAggregatedListWarningDataItem (Maybe Text)
@@ -10878,7 +10963,8 @@ usalwdiKey
   = lens _usalwdiKey (\ s a -> s{_usalwdiKey = a})
 
 instance FromJSON
-         UsableSubnetworksAggregatedListWarningDataItem where
+           UsableSubnetworksAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "UsableSubnetworksAggregatedListWarningDataItem"
@@ -10887,7 +10973,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         UsableSubnetworksAggregatedListWarningDataItem where
+           UsableSubnetworksAggregatedListWarningDataItem
+         where
         toJSON
           UsableSubnetworksAggregatedListWarningDataItem'{..}
           = object
@@ -10898,14 +10985,16 @@ instance ToJSON
 -- | Contains a list of nodeGroups.
 --
 -- /See:/ 'nodeGroupList' smart constructor.
-data NodeGroupList = NodeGroupList'
+data NodeGroupList =
+  NodeGroupList'
     { _nglNextPageToken :: !(Maybe Text)
     , _nglKind          :: !Text
     , _nglItems         :: !(Maybe [NodeGroup])
     , _nglSelfLink      :: !(Maybe Text)
     , _nglWarning       :: !(Maybe NodeGroupListWarning)
     , _nglId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupList' with the minimum fields required to make a request.
 --
@@ -10925,7 +11014,7 @@ data NodeGroupList = NodeGroupList'
 nodeGroupList
     :: NodeGroupList
 nodeGroupList =
-    NodeGroupList'
+  NodeGroupList'
     { _nglNextPageToken = Nothing
     , _nglKind = "compute#nodeGroupList"
     , _nglItems = Nothing
@@ -10995,10 +11084,12 @@ instance ToJSON NodeGroupList where
 
 --
 -- /See:/ 'diskMoveRequest' smart constructor.
-data DiskMoveRequest = DiskMoveRequest'
+data DiskMoveRequest =
+  DiskMoveRequest'
     { _dmrTargetDisk      :: !(Maybe Text)
     , _dmrDestinationZone :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskMoveRequest' with the minimum fields required to make a request.
 --
@@ -11010,10 +11101,7 @@ data DiskMoveRequest = DiskMoveRequest'
 diskMoveRequest
     :: DiskMoveRequest
 diskMoveRequest =
-    DiskMoveRequest'
-    { _dmrTargetDisk = Nothing
-    , _dmrDestinationZone = Nothing
-    }
+  DiskMoveRequest' {_dmrTargetDisk = Nothing, _dmrDestinationZone = Nothing}
 
 -- | The URL of the target disk to move. This can be a full or partial URL.
 -- For example, the following are all valid URLs to a disk: -
@@ -11049,10 +11137,12 @@ instance ToJSON DiskMoveRequest where
 
 --
 -- /See:/ 'sslPolicyWarningsItemDataItem' smart constructor.
-data SSLPolicyWarningsItemDataItem = SSLPolicyWarningsItemDataItem'
+data SSLPolicyWarningsItemDataItem =
+  SSLPolicyWarningsItemDataItem'
     { _spwidiValue :: !(Maybe Text)
     , _spwidiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLPolicyWarningsItemDataItem' with the minimum fields required to make a request.
 --
@@ -11064,10 +11154,7 @@ data SSLPolicyWarningsItemDataItem = SSLPolicyWarningsItemDataItem'
 sslPolicyWarningsItemDataItem
     :: SSLPolicyWarningsItemDataItem
 sslPolicyWarningsItemDataItem =
-    SSLPolicyWarningsItemDataItem'
-    { _spwidiValue = Nothing
-    , _spwidiKey = Nothing
-    }
+  SSLPolicyWarningsItemDataItem' {_spwidiValue = Nothing, _spwidiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 spwidiValue :: Lens' SSLPolicyWarningsItemDataItem (Maybe Text)
@@ -11102,9 +11189,11 @@ instance ToJSON SSLPolicyWarningsItemDataItem where
 -- | Configuration parameters of autoscaling based on load balancing.
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
-newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization'
+newtype AutoscalingPolicyLoadBalancingUtilization =
+  AutoscalingPolicyLoadBalancingUtilization'
     { _aplbuUtilizationTarget :: Maybe (Textual Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalingPolicyLoadBalancingUtilization' with the minimum fields required to make a request.
 --
@@ -11114,9 +11203,7 @@ newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalanci
 autoscalingPolicyLoadBalancingUtilization
     :: AutoscalingPolicyLoadBalancingUtilization
 autoscalingPolicyLoadBalancingUtilization =
-    AutoscalingPolicyLoadBalancingUtilization'
-    { _aplbuUtilizationTarget = Nothing
-    }
+  AutoscalingPolicyLoadBalancingUtilization' {_aplbuUtilizationTarget = Nothing}
 
 -- | Fraction of backend capacity utilization (set in HTTP(s) load balancing
 -- configuration) that autoscaler should maintain. Must be a positive float
@@ -11128,7 +11215,8 @@ aplbuUtilizationTarget
       . mapping _Coerce
 
 instance FromJSON
-         AutoscalingPolicyLoadBalancingUtilization where
+           AutoscalingPolicyLoadBalancingUtilization
+         where
         parseJSON
           = withObject
               "AutoscalingPolicyLoadBalancingUtilization"
@@ -11137,7 +11225,8 @@ instance FromJSON
                    (o .:? "utilizationTarget"))
 
 instance ToJSON
-         AutoscalingPolicyLoadBalancingUtilization where
+           AutoscalingPolicyLoadBalancingUtilization
+         where
         toJSON AutoscalingPolicyLoadBalancingUtilization'{..}
           = object
               (catMaybes
@@ -11146,10 +11235,12 @@ instance ToJSON
 
 --
 -- /See:/ 'forwardingRuleAggregatedListWarningDataItem' smart constructor.
-data ForwardingRuleAggregatedListWarningDataItem = ForwardingRuleAggregatedListWarningDataItem'
+data ForwardingRuleAggregatedListWarningDataItem =
+  ForwardingRuleAggregatedListWarningDataItem'
     { _fralwdiValue :: !(Maybe Text)
     , _fralwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRuleAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -11161,10 +11252,8 @@ data ForwardingRuleAggregatedListWarningDataItem = ForwardingRuleAggregatedListW
 forwardingRuleAggregatedListWarningDataItem
     :: ForwardingRuleAggregatedListWarningDataItem
 forwardingRuleAggregatedListWarningDataItem =
-    ForwardingRuleAggregatedListWarningDataItem'
-    { _fralwdiValue = Nothing
-    , _fralwdiKey = Nothing
-    }
+  ForwardingRuleAggregatedListWarningDataItem'
+    {_fralwdiValue = Nothing, _fralwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 fralwdiValue :: Lens' ForwardingRuleAggregatedListWarningDataItem (Maybe Text)
@@ -11183,7 +11272,8 @@ fralwdiKey
   = lens _fralwdiKey (\ s a -> s{_fralwdiKey = a})
 
 instance FromJSON
-         ForwardingRuleAggregatedListWarningDataItem where
+           ForwardingRuleAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "ForwardingRuleAggregatedListWarningDataItem"
@@ -11192,7 +11282,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         ForwardingRuleAggregatedListWarningDataItem where
+           ForwardingRuleAggregatedListWarningDataItem
+         where
         toJSON
           ForwardingRuleAggregatedListWarningDataItem'{..}
           = object
@@ -11202,10 +11293,12 @@ instance ToJSON
 
 --
 -- /See:/ 'targetPoolsScopedListWarningDataItem' smart constructor.
-data TargetPoolsScopedListWarningDataItem = TargetPoolsScopedListWarningDataItem'
+data TargetPoolsScopedListWarningDataItem =
+  TargetPoolsScopedListWarningDataItem'
     { _tpslwdiValue :: !(Maybe Text)
     , _tpslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -11217,10 +11310,8 @@ data TargetPoolsScopedListWarningDataItem = TargetPoolsScopedListWarningDataItem
 targetPoolsScopedListWarningDataItem
     :: TargetPoolsScopedListWarningDataItem
 targetPoolsScopedListWarningDataItem =
-    TargetPoolsScopedListWarningDataItem'
-    { _tpslwdiValue = Nothing
-    , _tpslwdiKey = Nothing
-    }
+  TargetPoolsScopedListWarningDataItem'
+    {_tpslwdiValue = Nothing, _tpslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tpslwdiValue :: Lens' TargetPoolsScopedListWarningDataItem (Maybe Text)
@@ -11239,7 +11330,8 @@ tpslwdiKey
   = lens _tpslwdiKey (\ s a -> s{_tpslwdiKey = a})
 
 instance FromJSON
-         TargetPoolsScopedListWarningDataItem where
+           TargetPoolsScopedListWarningDataItem
+         where
         parseJSON
           = withObject "TargetPoolsScopedListWarningDataItem"
               (\ o ->
@@ -11260,7 +11352,8 @@ instance ToJSON TargetPoolsScopedListWarningDataItem
 -- resource_for v1.regionInstanceGroupManagers ==)
 --
 -- /See:/ 'instanceGroupManager' smart constructor.
-data InstanceGroupManager = InstanceGroupManager'
+data InstanceGroupManager =
+  InstanceGroupManager'
     { _igmKind               :: !Text
     , _igmFingerprint        :: !(Maybe Bytes)
     , _igmBaseInstanceName   :: !(Maybe Text)
@@ -11278,7 +11371,8 @@ data InstanceGroupManager = InstanceGroupManager'
     , _igmDescription        :: !(Maybe Text)
     , _igmInstanceGroup      :: !(Maybe Text)
     , _igmNamedPorts         :: !(Maybe [NamedPort])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManager' with the minimum fields required to make a request.
 --
@@ -11320,7 +11414,7 @@ data InstanceGroupManager = InstanceGroupManager'
 instanceGroupManager
     :: InstanceGroupManager
 instanceGroupManager =
-    InstanceGroupManager'
+  InstanceGroupManager'
     { _igmKind = "compute#instanceGroupManager"
     , _igmFingerprint = Nothing
     , _igmBaseInstanceName = Nothing
@@ -11513,11 +11607,13 @@ instance ToJSON InstanceGroupManager where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'instanceGroupManagerListWarning' smart constructor.
-data InstanceGroupManagerListWarning = InstanceGroupManagerListWarning'
+data InstanceGroupManagerListWarning =
+  InstanceGroupManagerListWarning'
     { _igmlwData    :: !(Maybe [InstanceGroupManagerListWarningDataItem])
     , _igmlwCode    :: !(Maybe InstanceGroupManagerListWarningCode)
     , _igmlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagerListWarning' with the minimum fields required to make a request.
 --
@@ -11531,11 +11627,8 @@ data InstanceGroupManagerListWarning = InstanceGroupManagerListWarning'
 instanceGroupManagerListWarning
     :: InstanceGroupManagerListWarning
 instanceGroupManagerListWarning =
-    InstanceGroupManagerListWarning'
-    { _igmlwData = Nothing
-    , _igmlwCode = Nothing
-    , _igmlwMessage = Nothing
-    }
+  InstanceGroupManagerListWarning'
+    {_igmlwData = Nothing, _igmlwCode = Nothing, _igmlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -11576,14 +11669,16 @@ instance ToJSON InstanceGroupManagerListWarning where
 
 --
 -- /See:/ 'regionInstanceGroupsListInstances' smart constructor.
-data RegionInstanceGroupsListInstances = RegionInstanceGroupsListInstances'
+data RegionInstanceGroupsListInstances =
+  RegionInstanceGroupsListInstances'
     { _rigliNextPageToken :: !(Maybe Text)
     , _rigliKind          :: !Text
     , _rigliItems         :: !(Maybe [InstanceWithNamedPorts])
     , _rigliSelfLink      :: !(Maybe Text)
     , _rigliWarning       :: !(Maybe RegionInstanceGroupsListInstancesWarning)
     , _rigliId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupsListInstances' with the minimum fields required to make a request.
 --
@@ -11603,7 +11698,7 @@ data RegionInstanceGroupsListInstances = RegionInstanceGroupsListInstances'
 regionInstanceGroupsListInstances
     :: RegionInstanceGroupsListInstances
 regionInstanceGroupsListInstances =
-    RegionInstanceGroupsListInstances'
+  RegionInstanceGroupsListInstances'
     { _rigliNextPageToken = Nothing
     , _rigliKind = "compute#regionInstanceGroupsListInstances"
     , _rigliItems = Nothing
@@ -11678,11 +11773,13 @@ instance ToJSON RegionInstanceGroupsListInstances
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'diskListWarning' smart constructor.
-data DiskListWarning = DiskListWarning'
+data DiskListWarning =
+  DiskListWarning'
     { _dlwData    :: !(Maybe [DiskListWarningDataItem])
     , _dlwCode    :: !(Maybe DiskListWarningCode)
     , _dlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskListWarning' with the minimum fields required to make a request.
 --
@@ -11696,11 +11793,8 @@ data DiskListWarning = DiskListWarning'
 diskListWarning
     :: DiskListWarning
 diskListWarning =
-    DiskListWarning'
-    { _dlwData = Nothing
-    , _dlwCode = Nothing
-    , _dlwMessage = Nothing
-    }
+  DiskListWarning'
+    {_dlwData = Nothing, _dlwCode = Nothing, _dlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -11737,13 +11831,15 @@ instance ToJSON DiskListWarning where
 
 --
 -- /See:/ 'tcpHealthCheck' smart constructor.
-data TCPHealthCheck = TCPHealthCheck'
+data TCPHealthCheck =
+  TCPHealthCheck'
     { _thcResponse    :: !(Maybe Text)
     , _thcProxyHeader :: !(Maybe TCPHealthCheckProxyHeader)
     , _thcPortName    :: !(Maybe Text)
     , _thcPort        :: !(Maybe (Textual Int32))
     , _thcRequest     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TCPHealthCheck' with the minimum fields required to make a request.
 --
@@ -11761,7 +11857,7 @@ data TCPHealthCheck = TCPHealthCheck'
 tcpHealthCheck
     :: TCPHealthCheck
 tcpHealthCheck =
-    TCPHealthCheck'
+  TCPHealthCheck'
     { _thcResponse = Nothing
     , _thcProxyHeader = Nothing
     , _thcPortName = Nothing
@@ -11826,10 +11922,12 @@ instance ToJSON TCPHealthCheck where
 
 --
 -- /See:/ 'instanceGroupManagerAggregatedListWarningDataItem' smart constructor.
-data InstanceGroupManagerAggregatedListWarningDataItem = InstanceGroupManagerAggregatedListWarningDataItem'
+data InstanceGroupManagerAggregatedListWarningDataItem =
+  InstanceGroupManagerAggregatedListWarningDataItem'
     { _igmalwdiValue :: !(Maybe Text)
     , _igmalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagerAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -11841,10 +11939,8 @@ data InstanceGroupManagerAggregatedListWarningDataItem = InstanceGroupManagerAgg
 instanceGroupManagerAggregatedListWarningDataItem
     :: InstanceGroupManagerAggregatedListWarningDataItem
 instanceGroupManagerAggregatedListWarningDataItem =
-    InstanceGroupManagerAggregatedListWarningDataItem'
-    { _igmalwdiValue = Nothing
-    , _igmalwdiKey = Nothing
-    }
+  InstanceGroupManagerAggregatedListWarningDataItem'
+    {_igmalwdiValue = Nothing, _igmalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 igmalwdiValue :: Lens' InstanceGroupManagerAggregatedListWarningDataItem (Maybe Text)
@@ -11864,7 +11960,7 @@ igmalwdiKey
   = lens _igmalwdiKey (\ s a -> s{_igmalwdiKey = a})
 
 instance FromJSON
-         InstanceGroupManagerAggregatedListWarningDataItem
+           InstanceGroupManagerAggregatedListWarningDataItem
          where
         parseJSON
           = withObject
@@ -11874,7 +11970,7 @@ instance FromJSON
                    <$> (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InstanceGroupManagerAggregatedListWarningDataItem
+           InstanceGroupManagerAggregatedListWarningDataItem
          where
         toJSON
           InstanceGroupManagerAggregatedListWarningDataItem'{..}
@@ -11885,9 +11981,11 @@ instance ToJSON
 
 --
 -- /See:/ 'testPermissionsResponse' smart constructor.
-newtype TestPermissionsResponse = TestPermissionsResponse'
+newtype TestPermissionsResponse =
+  TestPermissionsResponse'
     { _tprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -11896,10 +11994,7 @@ newtype TestPermissionsResponse = TestPermissionsResponse'
 -- * 'tprPermissions'
 testPermissionsResponse
     :: TestPermissionsResponse
-testPermissionsResponse =
-    TestPermissionsResponse'
-    { _tprPermissions = Nothing
-    }
+testPermissionsResponse = TestPermissionsResponse' {_tprPermissions = Nothing}
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -11925,11 +12020,13 @@ instance ToJSON TestPermissionsResponse where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'regionAutoscalerListWarning' smart constructor.
-data RegionAutoscalerListWarning = RegionAutoscalerListWarning'
+data RegionAutoscalerListWarning =
+  RegionAutoscalerListWarning'
     { _ralwData    :: !(Maybe [RegionAutoscalerListWarningDataItem])
     , _ralwCode    :: !(Maybe RegionAutoscalerListWarningCode)
     , _ralwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionAutoscalerListWarning' with the minimum fields required to make a request.
 --
@@ -11943,11 +12040,8 @@ data RegionAutoscalerListWarning = RegionAutoscalerListWarning'
 regionAutoscalerListWarning
     :: RegionAutoscalerListWarning
 regionAutoscalerListWarning =
-    RegionAutoscalerListWarning'
-    { _ralwData = Nothing
-    , _ralwCode = Nothing
-    , _ralwMessage = Nothing
-    }
+  RegionAutoscalerListWarning'
+    {_ralwData = Nothing, _ralwCode = Nothing, _ralwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -11986,10 +12080,12 @@ instance ToJSON RegionAutoscalerListWarning where
 
 --
 -- /See:/ 'targetInstanceListWarningDataItem' smart constructor.
-data TargetInstanceListWarningDataItem = TargetInstanceListWarningDataItem'
+data TargetInstanceListWarningDataItem =
+  TargetInstanceListWarningDataItem'
     { _tilwdiValue :: !(Maybe Text)
     , _tilwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstanceListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -12001,10 +12097,8 @@ data TargetInstanceListWarningDataItem = TargetInstanceListWarningDataItem'
 targetInstanceListWarningDataItem
     :: TargetInstanceListWarningDataItem
 targetInstanceListWarningDataItem =
-    TargetInstanceListWarningDataItem'
-    { _tilwdiValue = Nothing
-    , _tilwdiKey = Nothing
-    }
+  TargetInstanceListWarningDataItem'
+    {_tilwdiValue = Nothing, _tilwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tilwdiValue :: Lens' TargetInstanceListWarningDataItem (Maybe Text)
@@ -12041,11 +12135,13 @@ instance ToJSON TargetInstanceListWarningDataItem
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'operationListWarning' smart constructor.
-data OperationListWarning = OperationListWarning'
+data OperationListWarning =
+  OperationListWarning'
     { _olwData    :: !(Maybe [OperationListWarningDataItem])
     , _olwCode    :: !(Maybe OperationListWarningCode)
     , _olwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationListWarning' with the minimum fields required to make a request.
 --
@@ -12059,11 +12155,8 @@ data OperationListWarning = OperationListWarning'
 operationListWarning
     :: OperationListWarning
 operationListWarning =
-    OperationListWarning'
-    { _olwData = Nothing
-    , _olwCode = Nothing
-    , _olwMessage = Nothing
-    }
+  OperationListWarning'
+    {_olwData = Nothing, _olwCode = Nothing, _olwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -12100,9 +12193,11 @@ instance ToJSON OperationListWarning where
 
 --
 -- /See:/ 'instanceGroupsRemoveInstancesRequest' smart constructor.
-newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequest'
+newtype InstanceGroupsRemoveInstancesRequest =
+  InstanceGroupsRemoveInstancesRequest'
     { _igrirInstances :: Maybe [InstanceReference]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsRemoveInstancesRequest' with the minimum fields required to make a request.
 --
@@ -12112,9 +12207,7 @@ newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequ
 instanceGroupsRemoveInstancesRequest
     :: InstanceGroupsRemoveInstancesRequest
 instanceGroupsRemoveInstancesRequest =
-    InstanceGroupsRemoveInstancesRequest'
-    { _igrirInstances = Nothing
-    }
+  InstanceGroupsRemoveInstancesRequest' {_igrirInstances = Nothing}
 
 -- | The list of instances to remove from the instance group.
 igrirInstances :: Lens' InstanceGroupsRemoveInstancesRequest [InstanceReference]
@@ -12125,7 +12218,8 @@ igrirInstances
       . _Coerce
 
 instance FromJSON
-         InstanceGroupsRemoveInstancesRequest where
+           InstanceGroupsRemoveInstancesRequest
+         where
         parseJSON
           = withObject "InstanceGroupsRemoveInstancesRequest"
               (\ o ->
@@ -12143,11 +12237,13 @@ instance ToJSON InstanceGroupsRemoveInstancesRequest
 -- attachments to their corresponding PARTNER attachments.
 --
 -- /See:/ 'interconnectAttachmentPartnerMetadata' smart constructor.
-data InterconnectAttachmentPartnerMetadata = InterconnectAttachmentPartnerMetadata'
+data InterconnectAttachmentPartnerMetadata =
+  InterconnectAttachmentPartnerMetadata'
     { _iapmPortalURL        :: !(Maybe Text)
     , _iapmInterconnectName :: !(Maybe Text)
     , _iapmPartnerName      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentPartnerMetadata' with the minimum fields required to make a request.
 --
@@ -12161,7 +12257,7 @@ data InterconnectAttachmentPartnerMetadata = InterconnectAttachmentPartnerMetada
 interconnectAttachmentPartnerMetadata
     :: InterconnectAttachmentPartnerMetadata
 interconnectAttachmentPartnerMetadata =
-    InterconnectAttachmentPartnerMetadata'
+  InterconnectAttachmentPartnerMetadata'
     { _iapmPortalURL = Nothing
     , _iapmInterconnectName = Nothing
     , _iapmPartnerName = Nothing
@@ -12191,7 +12287,8 @@ iapmPartnerName
       (\ s a -> s{_iapmPartnerName = a})
 
 instance FromJSON
-         InterconnectAttachmentPartnerMetadata where
+           InterconnectAttachmentPartnerMetadata
+         where
         parseJSON
           = withObject "InterconnectAttachmentPartnerMetadata"
               (\ o ->
@@ -12210,10 +12307,12 @@ instance ToJSON InterconnectAttachmentPartnerMetadata
 
 --
 -- /See:/ 'machineTypeListWarningDataItem' smart constructor.
-data MachineTypeListWarningDataItem = MachineTypeListWarningDataItem'
+data MachineTypeListWarningDataItem =
+  MachineTypeListWarningDataItem'
     { _mtlwdiValue :: !(Maybe Text)
     , _mtlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypeListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -12225,10 +12324,7 @@ data MachineTypeListWarningDataItem = MachineTypeListWarningDataItem'
 machineTypeListWarningDataItem
     :: MachineTypeListWarningDataItem
 machineTypeListWarningDataItem =
-    MachineTypeListWarningDataItem'
-    { _mtlwdiValue = Nothing
-    , _mtlwdiKey = Nothing
-    }
+  MachineTypeListWarningDataItem' {_mtlwdiValue = Nothing, _mtlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 mtlwdiValue :: Lens' MachineTypeListWarningDataItem (Maybe Text)
@@ -12263,9 +12359,11 @@ instance ToJSON MachineTypeListWarningDataItem where
 
 --
 -- /See:/ 'networksRemovePeeringRequest' smart constructor.
-newtype NetworksRemovePeeringRequest = NetworksRemovePeeringRequest'
+newtype NetworksRemovePeeringRequest =
+  NetworksRemovePeeringRequest'
     { _nrprName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworksRemovePeeringRequest' with the minimum fields required to make a request.
 --
@@ -12275,9 +12373,7 @@ newtype NetworksRemovePeeringRequest = NetworksRemovePeeringRequest'
 networksRemovePeeringRequest
     :: NetworksRemovePeeringRequest
 networksRemovePeeringRequest =
-    NetworksRemovePeeringRequest'
-    { _nrprName = Nothing
-    }
+  NetworksRemovePeeringRequest' {_nrprName = Nothing}
 
 -- | Name of the peering, which should conform to RFC1035.
 nrprName :: Lens' NetworksRemovePeeringRequest (Maybe Text)
@@ -12295,10 +12391,12 @@ instance ToJSON NetworksRemovePeeringRequest where
 
 --
 -- /See:/ 'targetHTTPProxyListWarningDataItem' smart constructor.
-data TargetHTTPProxyListWarningDataItem = TargetHTTPProxyListWarningDataItem'
+data TargetHTTPProxyListWarningDataItem =
+  TargetHTTPProxyListWarningDataItem'
     { _thttpplwdiValue :: !(Maybe Text)
     , _thttpplwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPProxyListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -12310,10 +12408,8 @@ data TargetHTTPProxyListWarningDataItem = TargetHTTPProxyListWarningDataItem'
 targetHTTPProxyListWarningDataItem
     :: TargetHTTPProxyListWarningDataItem
 targetHTTPProxyListWarningDataItem =
-    TargetHTTPProxyListWarningDataItem'
-    { _thttpplwdiValue = Nothing
-    , _thttpplwdiKey = Nothing
-    }
+  TargetHTTPProxyListWarningDataItem'
+    {_thttpplwdiValue = Nothing, _thttpplwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 thttpplwdiValue :: Lens' TargetHTTPProxyListWarningDataItem (Maybe Text)
@@ -12352,11 +12448,13 @@ instance ToJSON TargetHTTPProxyListWarningDataItem
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'machineTypeAggregatedListWarning' smart constructor.
-data MachineTypeAggregatedListWarning = MachineTypeAggregatedListWarning'
+data MachineTypeAggregatedListWarning =
+  MachineTypeAggregatedListWarning'
     { _mtalwData    :: !(Maybe [MachineTypeAggregatedListWarningDataItem])
     , _mtalwCode    :: !(Maybe MachineTypeAggregatedListWarningCode)
     , _mtalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypeAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -12370,11 +12468,8 @@ data MachineTypeAggregatedListWarning = MachineTypeAggregatedListWarning'
 machineTypeAggregatedListWarning
     :: MachineTypeAggregatedListWarning
 machineTypeAggregatedListWarning =
-    MachineTypeAggregatedListWarning'
-    { _mtalwData = Nothing
-    , _mtalwCode = Nothing
-    , _mtalwMessage = Nothing
-    }
+  MachineTypeAggregatedListWarning'
+    {_mtalwData = Nothing, _mtalwCode = Nothing, _mtalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -12416,10 +12511,12 @@ instance ToJSON MachineTypeAggregatedListWarning
 
 --
 -- /See:/ 'nodeTemplateAggregatedListWarningDataItem' smart constructor.
-data NodeTemplateAggregatedListWarningDataItem = NodeTemplateAggregatedListWarningDataItem'
+data NodeTemplateAggregatedListWarningDataItem =
+  NodeTemplateAggregatedListWarningDataItem'
     { _ntalwdiValue :: !(Maybe Text)
     , _ntalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplateAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -12431,10 +12528,8 @@ data NodeTemplateAggregatedListWarningDataItem = NodeTemplateAggregatedListWarni
 nodeTemplateAggregatedListWarningDataItem
     :: NodeTemplateAggregatedListWarningDataItem
 nodeTemplateAggregatedListWarningDataItem =
-    NodeTemplateAggregatedListWarningDataItem'
-    { _ntalwdiValue = Nothing
-    , _ntalwdiKey = Nothing
-    }
+  NodeTemplateAggregatedListWarningDataItem'
+    {_ntalwdiValue = Nothing, _ntalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ntalwdiValue :: Lens' NodeTemplateAggregatedListWarningDataItem (Maybe Text)
@@ -12453,7 +12548,8 @@ ntalwdiKey
   = lens _ntalwdiKey (\ s a -> s{_ntalwdiKey = a})
 
 instance FromJSON
-         NodeTemplateAggregatedListWarningDataItem where
+           NodeTemplateAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "NodeTemplateAggregatedListWarningDataItem"
@@ -12462,7 +12558,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         NodeTemplateAggregatedListWarningDataItem where
+           NodeTemplateAggregatedListWarningDataItem
+         where
         toJSON NodeTemplateAggregatedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -12472,14 +12569,16 @@ instance ToJSON
 -- | Contains a list of BackendBucket resources.
 --
 -- /See:/ 'backendBucketList' smart constructor.
-data BackendBucketList = BackendBucketList'
+data BackendBucketList =
+  BackendBucketList'
     { _bblNextPageToken :: !(Maybe Text)
     , _bblKind          :: !Text
     , _bblItems         :: !(Maybe [BackendBucket])
     , _bblSelfLink      :: !(Maybe Text)
     , _bblWarning       :: !(Maybe BackendBucketListWarning)
     , _bblId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendBucketList' with the minimum fields required to make a request.
 --
@@ -12499,7 +12598,7 @@ data BackendBucketList = BackendBucketList'
 backendBucketList
     :: BackendBucketList
 backendBucketList =
-    BackendBucketList'
+  BackendBucketList'
     { _bblNextPageToken = Nothing
     , _bblKind = "compute#backendBucketList"
     , _bblItems = Nothing
@@ -12570,9 +12669,11 @@ instance ToJSON BackendBucketList where
 -- interconnect of type DEDICATED.
 --
 -- /See:/ 'interconnectAttachmentPrivateInfo' smart constructor.
-newtype InterconnectAttachmentPrivateInfo = InterconnectAttachmentPrivateInfo'
+newtype InterconnectAttachmentPrivateInfo =
+  InterconnectAttachmentPrivateInfo'
     { _iapiTag8021q :: Maybe (Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentPrivateInfo' with the minimum fields required to make a request.
 --
@@ -12582,9 +12683,7 @@ newtype InterconnectAttachmentPrivateInfo = InterconnectAttachmentPrivateInfo'
 interconnectAttachmentPrivateInfo
     :: InterconnectAttachmentPrivateInfo
 interconnectAttachmentPrivateInfo =
-    InterconnectAttachmentPrivateInfo'
-    { _iapiTag8021q = Nothing
-    }
+  InterconnectAttachmentPrivateInfo' {_iapiTag8021q = Nothing}
 
 -- | [Output Only] 802.1q encapsulation tag to be used for traffic between
 -- Google and the customer, going to and from this network and region.
@@ -12609,10 +12708,12 @@ instance ToJSON InterconnectAttachmentPrivateInfo
 
 --
 -- /See:/ 'acceleratorTypesScopedList' smart constructor.
-data AcceleratorTypesScopedList = AcceleratorTypesScopedList'
+data AcceleratorTypesScopedList =
+  AcceleratorTypesScopedList'
     { _atslAcceleratorTypes :: !(Maybe [AcceleratorType])
     , _atslWarning          :: !(Maybe AcceleratorTypesScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypesScopedList' with the minimum fields required to make a request.
 --
@@ -12624,10 +12725,8 @@ data AcceleratorTypesScopedList = AcceleratorTypesScopedList'
 acceleratorTypesScopedList
     :: AcceleratorTypesScopedList
 acceleratorTypesScopedList =
-    AcceleratorTypesScopedList'
-    { _atslAcceleratorTypes = Nothing
-    , _atslWarning = Nothing
-    }
+  AcceleratorTypesScopedList'
+    {_atslAcceleratorTypes = Nothing, _atslWarning = Nothing}
 
 -- | [Output Only] A list of accelerator types contained in this scope.
 atslAcceleratorTypes :: Lens' AcceleratorTypesScopedList [AcceleratorType]
@@ -12661,11 +12760,13 @@ instance ToJSON AcceleratorTypesScopedList where
 -- | Message containing Cloud CDN configuration for a backend service.
 --
 -- /See:/ 'backendServiceCdnPolicy' smart constructor.
-data BackendServiceCdnPolicy = BackendServiceCdnPolicy'
+data BackendServiceCdnPolicy =
+  BackendServiceCdnPolicy'
     { _bscpSignedURLCacheMaxAgeSec :: !(Maybe (Textual Int64))
     , _bscpSignedURLKeyNames       :: !(Maybe [Text])
     , _bscpCacheKeyPolicy          :: !(Maybe CacheKeyPolicy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceCdnPolicy' with the minimum fields required to make a request.
 --
@@ -12679,7 +12780,7 @@ data BackendServiceCdnPolicy = BackendServiceCdnPolicy'
 backendServiceCdnPolicy
     :: BackendServiceCdnPolicy
 backendServiceCdnPolicy =
-    BackendServiceCdnPolicy'
+  BackendServiceCdnPolicy'
     { _bscpSignedURLCacheMaxAgeSec = Nothing
     , _bscpSignedURLKeyNames = Nothing
     , _bscpCacheKeyPolicy = Nothing
@@ -12732,10 +12833,12 @@ instance ToJSON BackendServiceCdnPolicy where
 
 --
 -- /See:/ 'routeWarningsItemDataItem' smart constructor.
-data RouteWarningsItemDataItem = RouteWarningsItemDataItem'
+data RouteWarningsItemDataItem =
+  RouteWarningsItemDataItem'
     { _rwidiValue :: !(Maybe Text)
     , _rwidiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouteWarningsItemDataItem' with the minimum fields required to make a request.
 --
@@ -12747,10 +12850,7 @@ data RouteWarningsItemDataItem = RouteWarningsItemDataItem'
 routeWarningsItemDataItem
     :: RouteWarningsItemDataItem
 routeWarningsItemDataItem =
-    RouteWarningsItemDataItem'
-    { _rwidiValue = Nothing
-    , _rwidiKey = Nothing
-    }
+  RouteWarningsItemDataItem' {_rwidiValue = Nothing, _rwidiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 rwidiValue :: Lens' RouteWarningsItemDataItem (Maybe Text)
@@ -12783,14 +12883,16 @@ instance ToJSON RouteWarningsItemDataItem where
 
 --
 -- /See:/ 'nodeGroupAggregatedList' smart constructor.
-data NodeGroupAggregatedList = NodeGroupAggregatedList'
+data NodeGroupAggregatedList =
+  NodeGroupAggregatedList'
     { _ngalNextPageToken :: !(Maybe Text)
     , _ngalKind          :: !Text
     , _ngalItems         :: !(Maybe NodeGroupAggregatedListItems)
     , _ngalSelfLink      :: !(Maybe Text)
     , _ngalWarning       :: !(Maybe NodeGroupAggregatedListWarning)
     , _ngalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupAggregatedList' with the minimum fields required to make a request.
 --
@@ -12810,7 +12912,7 @@ data NodeGroupAggregatedList = NodeGroupAggregatedList'
 nodeGroupAggregatedList
     :: NodeGroupAggregatedList
 nodeGroupAggregatedList =
-    NodeGroupAggregatedList'
+  NodeGroupAggregatedList'
     { _ngalNextPageToken = Nothing
     , _ngalKind = "compute#nodeGroupAggregatedList"
     , _ngalItems = Nothing
@@ -12879,11 +12981,13 @@ instance ToJSON NodeGroupAggregatedList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'vpnTunnelListWarning' smart constructor.
-data VPNTunnelListWarning = VPNTunnelListWarning'
+data VPNTunnelListWarning =
+  VPNTunnelListWarning'
     { _vtlwData    :: !(Maybe [VPNTunnelListWarningDataItem])
     , _vtlwCode    :: !(Maybe VPNTunnelListWarningCode)
     , _vtlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelListWarning' with the minimum fields required to make a request.
 --
@@ -12897,11 +13001,8 @@ data VPNTunnelListWarning = VPNTunnelListWarning'
 vpnTunnelListWarning
     :: VPNTunnelListWarning
 vpnTunnelListWarning =
-    VPNTunnelListWarning'
-    { _vtlwData = Nothing
-    , _vtlwCode = Nothing
-    , _vtlwMessage = Nothing
-    }
+  VPNTunnelListWarning'
+    {_vtlwData = Nothing, _vtlwCode = Nothing, _vtlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -12941,9 +13042,11 @@ instance ToJSON VPNTunnelListWarning where
 -- | A list of BackendServicesScopedList resources.
 --
 -- /See:/ 'backendServiceAggregatedListItems' smart constructor.
-newtype BackendServiceAggregatedListItems = BackendServiceAggregatedListItems'
+newtype BackendServiceAggregatedListItems =
+  BackendServiceAggregatedListItems'
     { _bsaliAddtional :: HashMap Text BackendServicesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -12954,9 +13057,8 @@ backendServiceAggregatedListItems
     :: HashMap Text BackendServicesScopedList -- ^ 'bsaliAddtional'
     -> BackendServiceAggregatedListItems
 backendServiceAggregatedListItems pBsaliAddtional_ =
-    BackendServiceAggregatedListItems'
-    { _bsaliAddtional = _Coerce # pBsaliAddtional_
-    }
+  BackendServiceAggregatedListItems'
+    {_bsaliAddtional = _Coerce # pBsaliAddtional_}
 
 -- | Name of the scope containing this set of BackendServices.
 bsaliAddtional :: Lens' BackendServiceAggregatedListItems (HashMap Text BackendServicesScopedList)
@@ -12980,9 +13082,11 @@ instance ToJSON BackendServiceAggregatedListItems
 -- | A list of InstancesScopedList resources.
 --
 -- /See:/ 'instanceAggregatedListItems' smart constructor.
-newtype InstanceAggregatedListItems = InstanceAggregatedListItems'
+newtype InstanceAggregatedListItems =
+  InstanceAggregatedListItems'
     { _ialiAddtional :: HashMap Text InstancesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -12993,9 +13097,7 @@ instanceAggregatedListItems
     :: HashMap Text InstancesScopedList -- ^ 'ialiAddtional'
     -> InstanceAggregatedListItems
 instanceAggregatedListItems pIaliAddtional_ =
-    InstanceAggregatedListItems'
-    { _ialiAddtional = _Coerce # pIaliAddtional_
-    }
+  InstanceAggregatedListItems' {_ialiAddtional = _Coerce # pIaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of instances.
 ialiAddtional :: Lens' InstanceAggregatedListItems (HashMap Text InstancesScopedList)
@@ -13017,11 +13119,13 @@ instance ToJSON InstanceAggregatedListItems where
 -- autoscalers when the list is empty.
 --
 -- /See:/ 'autoscalersScopedListWarning' smart constructor.
-data AutoscalersScopedListWarning = AutoscalersScopedListWarning'
+data AutoscalersScopedListWarning =
+  AutoscalersScopedListWarning'
     { _aslwData    :: !(Maybe [AutoscalersScopedListWarningDataItem])
     , _aslwCode    :: !(Maybe AutoscalersScopedListWarningCode)
     , _aslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalersScopedListWarning' with the minimum fields required to make a request.
 --
@@ -13035,11 +13139,8 @@ data AutoscalersScopedListWarning = AutoscalersScopedListWarning'
 autoscalersScopedListWarning
     :: AutoscalersScopedListWarning
 autoscalersScopedListWarning =
-    AutoscalersScopedListWarning'
-    { _aslwData = Nothing
-    , _aslwCode = Nothing
-    , _aslwMessage = Nothing
-    }
+  AutoscalersScopedListWarning'
+    {_aslwData = Nothing, _aslwCode = Nothing, _aslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -13080,12 +13181,14 @@ instance ToJSON AutoscalersScopedListWarning where
 -- template when its created from a source instance.
 --
 -- /See:/ 'diskInstantiationConfig' smart constructor.
-data DiskInstantiationConfig = DiskInstantiationConfig'
+data DiskInstantiationConfig =
+  DiskInstantiationConfig'
     { _dicAutoDelete      :: !(Maybe Bool)
     , _dicInstantiateFrom :: !(Maybe DiskInstantiationConfigInstantiateFrom)
     , _dicCustomImage     :: !(Maybe Text)
     , _dicDeviceName      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskInstantiationConfig' with the minimum fields required to make a request.
 --
@@ -13101,7 +13204,7 @@ data DiskInstantiationConfig = DiskInstantiationConfig'
 diskInstantiationConfig
     :: DiskInstantiationConfig
 diskInstantiationConfig =
-    DiskInstantiationConfig'
+  DiskInstantiationConfig'
     { _dicAutoDelete = Nothing
     , _dicInstantiateFrom = Nothing
     , _dicCustomImage = Nothing
@@ -13167,11 +13270,13 @@ instance ToJSON DiskInstantiationConfig where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'diskTypeAggregatedListWarning' smart constructor.
-data DiskTypeAggregatedListWarning = DiskTypeAggregatedListWarning'
+data DiskTypeAggregatedListWarning =
+  DiskTypeAggregatedListWarning'
     { _dtalwData    :: !(Maybe [DiskTypeAggregatedListWarningDataItem])
     , _dtalwCode    :: !(Maybe DiskTypeAggregatedListWarningCode)
     , _dtalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypeAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -13185,11 +13290,8 @@ data DiskTypeAggregatedListWarning = DiskTypeAggregatedListWarning'
 diskTypeAggregatedListWarning
     :: DiskTypeAggregatedListWarning
 diskTypeAggregatedListWarning =
-    DiskTypeAggregatedListWarning'
-    { _dtalwData = Nothing
-    , _dtalwCode = Nothing
-    , _dtalwMessage = Nothing
-    }
+  DiskTypeAggregatedListWarning'
+    {_dtalwData = Nothing, _dtalwCode = Nothing, _dtalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -13229,10 +13331,12 @@ instance ToJSON DiskTypeAggregatedListWarning where
 
 --
 -- /See:/ 'diskTypeListWarningDataItem' smart constructor.
-data DiskTypeListWarningDataItem = DiskTypeListWarningDataItem'
+data DiskTypeListWarningDataItem =
+  DiskTypeListWarningDataItem'
     { _dtlwdiValue :: !(Maybe Text)
     , _dtlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypeListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -13244,10 +13348,7 @@ data DiskTypeListWarningDataItem = DiskTypeListWarningDataItem'
 diskTypeListWarningDataItem
     :: DiskTypeListWarningDataItem
 diskTypeListWarningDataItem =
-    DiskTypeListWarningDataItem'
-    { _dtlwdiValue = Nothing
-    , _dtlwdiKey = Nothing
-    }
+  DiskTypeListWarningDataItem' {_dtlwdiValue = Nothing, _dtlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 dtlwdiValue :: Lens' DiskTypeListWarningDataItem (Maybe Text)
@@ -13284,14 +13385,16 @@ instance ToJSON DiskTypeListWarningDataItem where
 -- deny).
 --
 -- /See:/ 'securityPolicyRule' smart constructor.
-data SecurityPolicyRule = SecurityPolicyRule'
+data SecurityPolicyRule =
+  SecurityPolicyRule'
     { _sprPriority    :: !(Maybe (Textual Int32))
     , _sprKind        :: !Text
     , _sprAction      :: !(Maybe Text)
     , _sprPreview     :: !(Maybe Bool)
     , _sprMatch       :: !(Maybe SecurityPolicyRuleMatcher)
     , _sprDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPolicyRule' with the minimum fields required to make a request.
 --
@@ -13311,7 +13414,7 @@ data SecurityPolicyRule = SecurityPolicyRule'
 securityPolicyRule
     :: SecurityPolicyRule
 securityPolicyRule =
-    SecurityPolicyRule'
+  SecurityPolicyRule'
     { _sprPriority = Nothing
     , _sprKind = "compute#securityPolicyRule"
     , _sprAction = Nothing
@@ -13384,9 +13487,11 @@ instance ToJSON SecurityPolicyRule where
 -- | Response for the InterconnectsGetDiagnosticsRequest.
 --
 -- /See:/ 'interconnectsGetDiagnosticsResponse' smart constructor.
-newtype InterconnectsGetDiagnosticsResponse = InterconnectsGetDiagnosticsResponse'
+newtype InterconnectsGetDiagnosticsResponse =
+  InterconnectsGetDiagnosticsResponse'
     { _igdrResult :: Maybe InterconnectDiagnostics
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectsGetDiagnosticsResponse' with the minimum fields required to make a request.
 --
@@ -13396,9 +13501,7 @@ newtype InterconnectsGetDiagnosticsResponse = InterconnectsGetDiagnosticsRespons
 interconnectsGetDiagnosticsResponse
     :: InterconnectsGetDiagnosticsResponse
 interconnectsGetDiagnosticsResponse =
-    InterconnectsGetDiagnosticsResponse'
-    { _igdrResult = Nothing
-    }
+  InterconnectsGetDiagnosticsResponse' {_igdrResult = Nothing}
 
 igdrResult :: Lens' InterconnectsGetDiagnosticsResponse (Maybe InterconnectDiagnostics)
 igdrResult
@@ -13419,10 +13522,12 @@ instance ToJSON InterconnectsGetDiagnosticsResponse
 
 --
 -- /See:/ 'vpnTunnelAggregatedListWarningDataItem' smart constructor.
-data VPNTunnelAggregatedListWarningDataItem = VPNTunnelAggregatedListWarningDataItem'
+data VPNTunnelAggregatedListWarningDataItem =
+  VPNTunnelAggregatedListWarningDataItem'
     { _vtalwdiValue :: !(Maybe Text)
     , _vtalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -13434,10 +13539,8 @@ data VPNTunnelAggregatedListWarningDataItem = VPNTunnelAggregatedListWarningData
 vpnTunnelAggregatedListWarningDataItem
     :: VPNTunnelAggregatedListWarningDataItem
 vpnTunnelAggregatedListWarningDataItem =
-    VPNTunnelAggregatedListWarningDataItem'
-    { _vtalwdiValue = Nothing
-    , _vtalwdiKey = Nothing
-    }
+  VPNTunnelAggregatedListWarningDataItem'
+    {_vtalwdiValue = Nothing, _vtalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 vtalwdiValue :: Lens' VPNTunnelAggregatedListWarningDataItem (Maybe Text)
@@ -13456,7 +13559,8 @@ vtalwdiKey
   = lens _vtalwdiKey (\ s a -> s{_vtalwdiKey = a})
 
 instance FromJSON
-         VPNTunnelAggregatedListWarningDataItem where
+           VPNTunnelAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject "VPNTunnelAggregatedListWarningDataItem"
               (\ o ->
@@ -13464,7 +13568,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         VPNTunnelAggregatedListWarningDataItem where
+           VPNTunnelAggregatedListWarningDataItem
+         where
         toJSON VPNTunnelAggregatedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -13474,9 +13579,11 @@ instance ToJSON
 -- | The available logging options for a firewall rule.
 --
 -- /See:/ 'firewallLogConfig' smart constructor.
-newtype FirewallLogConfig = FirewallLogConfig'
+newtype FirewallLogConfig =
+  FirewallLogConfig'
     { _flcEnable :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FirewallLogConfig' with the minimum fields required to make a request.
 --
@@ -13485,10 +13592,7 @@ newtype FirewallLogConfig = FirewallLogConfig'
 -- * 'flcEnable'
 firewallLogConfig
     :: FirewallLogConfig
-firewallLogConfig =
-    FirewallLogConfig'
-    { _flcEnable = Nothing
-    }
+firewallLogConfig = FirewallLogConfig' {_flcEnable = Nothing}
 
 -- | This field denotes whether to enable logging for a particular firewall
 -- rule.
@@ -13513,7 +13617,8 @@ instance ToJSON FirewallLogConfig where
 -- provided.
 --
 -- /See:/ 'routerNAT' smart constructor.
-data RouterNAT = RouterNAT'
+data RouterNAT =
+  RouterNAT'
     { _rnatNATIPAllocateOption           :: !(Maybe RouterNATNATIPAllocateOption)
     , _rnatICMPIdleTimeoutSec            :: !(Maybe (Textual Int32))
     , _rnatUdpIdleTimeoutSec             :: !(Maybe (Textual Int32))
@@ -13524,7 +13629,8 @@ data RouterNAT = RouterNAT'
     , _rnatSourceSubnetworkIPRangesToNAT :: !(Maybe RouterNATSourceSubnetworkIPRangesToNAT)
     , _rnatTCPEstablishedIdleTimeoutSec  :: !(Maybe (Textual Int32))
     , _rnatTCPTransitoryIdleTimeoutSec   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterNAT' with the minimum fields required to make a request.
 --
@@ -13552,7 +13658,7 @@ data RouterNAT = RouterNAT'
 routerNAT
     :: RouterNAT
 routerNAT =
-    RouterNAT'
+  RouterNAT'
     { _rnatNATIPAllocateOption = Nothing
     , _rnatICMPIdleTimeoutSec = Nothing
     , _rnatUdpIdleTimeoutSec = Nothing
@@ -13684,11 +13790,13 @@ instance ToJSON RouterNAT where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'autoscalerAggregatedListWarning' smart constructor.
-data AutoscalerAggregatedListWarning = AutoscalerAggregatedListWarning'
+data AutoscalerAggregatedListWarning =
+  AutoscalerAggregatedListWarning'
     { _aalwData    :: !(Maybe [AutoscalerAggregatedListWarningDataItem])
     , _aalwCode    :: !(Maybe AutoscalerAggregatedListWarningCode)
     , _aalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalerAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -13702,11 +13810,8 @@ data AutoscalerAggregatedListWarning = AutoscalerAggregatedListWarning'
 autoscalerAggregatedListWarning
     :: AutoscalerAggregatedListWarning
 autoscalerAggregatedListWarning =
-    AutoscalerAggregatedListWarning'
-    { _aalwData = Nothing
-    , _aalwCode = Nothing
-    , _aalwMessage = Nothing
-    }
+  AutoscalerAggregatedListWarning'
+    {_aalwData = Nothing, _aalwCode = Nothing, _aalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -13746,10 +13851,12 @@ instance ToJSON AutoscalerAggregatedListWarning where
 
 --
 -- /See:/ 'autoscalerListWarningDataItem' smart constructor.
-data AutoscalerListWarningDataItem = AutoscalerListWarningDataItem'
+data AutoscalerListWarningDataItem =
+  AutoscalerListWarningDataItem'
     { _alwdiValue :: !(Maybe Text)
     , _alwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalerListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -13761,10 +13868,7 @@ data AutoscalerListWarningDataItem = AutoscalerListWarningDataItem'
 autoscalerListWarningDataItem
     :: AutoscalerListWarningDataItem
 autoscalerListWarningDataItem =
-    AutoscalerListWarningDataItem'
-    { _alwdiValue = Nothing
-    , _alwdiKey = Nothing
-    }
+  AutoscalerListWarningDataItem' {_alwdiValue = Nothing, _alwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 alwdiValue :: Lens' AutoscalerListWarningDataItem (Maybe Text)
@@ -13798,11 +13902,13 @@ instance ToJSON AutoscalerListWarningDataItem where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'nodeTypeListWarning' smart constructor.
-data NodeTypeListWarning = NodeTypeListWarning'
+data NodeTypeListWarning =
+  NodeTypeListWarning'
     { _ntlwData    :: !(Maybe [NodeTypeListWarningDataItem])
     , _ntlwCode    :: !(Maybe NodeTypeListWarningCode)
     , _ntlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypeListWarning' with the minimum fields required to make a request.
 --
@@ -13816,11 +13922,8 @@ data NodeTypeListWarning = NodeTypeListWarning'
 nodeTypeListWarning
     :: NodeTypeListWarning
 nodeTypeListWarning =
-    NodeTypeListWarning'
-    { _ntlwData = Nothing
-    , _ntlwCode = Nothing
-    , _ntlwMessage = Nothing
-    }
+  NodeTypeListWarning'
+    {_ntlwData = Nothing, _ntlwCode = Nothing, _ntlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -13860,14 +13963,16 @@ instance ToJSON NodeTypeListWarning where
 -- | Contains a list of HealthCheck resources.
 --
 -- /See:/ 'healthCheckList' smart constructor.
-data HealthCheckList = HealthCheckList'
+data HealthCheckList =
+  HealthCheckList'
     { _hclNextPageToken :: !(Maybe Text)
     , _hclKind          :: !Text
     , _hclItems         :: !(Maybe [HealthCheck])
     , _hclSelfLink      :: !(Maybe Text)
     , _hclWarning       :: !(Maybe HealthCheckListWarning)
     , _hclId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthCheckList' with the minimum fields required to make a request.
 --
@@ -13887,7 +13992,7 @@ data HealthCheckList = HealthCheckList'
 healthCheckList
     :: HealthCheckList
 healthCheckList =
-    HealthCheckList'
+  HealthCheckList'
     { _hclNextPageToken = Nothing
     , _hclKind = "compute#healthCheckList"
     , _hclItems = Nothing
@@ -13958,9 +14063,11 @@ instance ToJSON HealthCheckList where
 -- delete the instance.
 --
 -- /See:/ 'managedInstanceLastAttemptErrors' smart constructor.
-newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors'
+newtype ManagedInstanceLastAttemptErrors =
+  ManagedInstanceLastAttemptErrors'
     { _milaeErrors :: Maybe [ManagedInstanceLastAttemptErrorsErrorsItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedInstanceLastAttemptErrors' with the minimum fields required to make a request.
 --
@@ -13970,9 +14077,7 @@ newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors'
 managedInstanceLastAttemptErrors
     :: ManagedInstanceLastAttemptErrors
 managedInstanceLastAttemptErrors =
-    ManagedInstanceLastAttemptErrors'
-    { _milaeErrors = Nothing
-    }
+  ManagedInstanceLastAttemptErrors' {_milaeErrors = Nothing}
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -13998,14 +14103,16 @@ instance ToJSON ManagedInstanceLastAttemptErrors
 -- | Status of a NAT contained in this router.
 --
 -- /See:/ 'routerStatusNATStatus' smart constructor.
-data RouterStatusNATStatus = RouterStatusNATStatus'
+data RouterStatusNATStatus =
+  RouterStatusNATStatus'
     { _rsnatsUserAllocatedNATIPResources   :: !(Maybe [Text])
     , _rsnatsName                          :: !(Maybe Text)
     , _rsnatsAutoAllocatedNATIPs           :: !(Maybe [Text])
     , _rsnatsMinExtraNATIPsNeeded          :: !(Maybe (Textual Int32))
     , _rsnatsNumVMEndpointsWithNATMAppings :: !(Maybe (Textual Int32))
     , _rsnatsUserAllocatedNATIPs           :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterStatusNATStatus' with the minimum fields required to make a request.
 --
@@ -14025,7 +14132,7 @@ data RouterStatusNATStatus = RouterStatusNATStatus'
 routerStatusNATStatus
     :: RouterStatusNATStatus
 routerStatusNATStatus =
-    RouterStatusNATStatus'
+  RouterStatusNATStatus'
     { _rsnatsUserAllocatedNATIPResources = Nothing
     , _rsnatsName = Nothing
     , _rsnatsAutoAllocatedNATIPs = Nothing
@@ -14113,9 +14220,11 @@ instance ToJSON RouterStatusNATStatus where
 
 --
 -- /See:/ 'targetPoolsRemoveInstanceRequest' smart constructor.
-newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest'
+newtype TargetPoolsRemoveInstanceRequest =
+  TargetPoolsRemoveInstanceRequest'
     { _tprirInstances :: Maybe [InstanceReference]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveInstanceRequest' with the minimum fields required to make a request.
 --
@@ -14125,9 +14234,7 @@ newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest'
 targetPoolsRemoveInstanceRequest
     :: TargetPoolsRemoveInstanceRequest
 targetPoolsRemoveInstanceRequest =
-    TargetPoolsRemoveInstanceRequest'
-    { _tprirInstances = Nothing
-    }
+  TargetPoolsRemoveInstanceRequest' {_tprirInstances = Nothing}
 
 -- | URLs of the instances to be removed from target pool.
 tprirInstances :: Lens' TargetPoolsRemoveInstanceRequest [InstanceReference]
@@ -14153,10 +14260,12 @@ instance ToJSON TargetPoolsRemoveInstanceRequest
 
 --
 -- /See:/ 'nodeTypeAggregatedListWarningDataItem' smart constructor.
-data NodeTypeAggregatedListWarningDataItem = NodeTypeAggregatedListWarningDataItem'
+data NodeTypeAggregatedListWarningDataItem =
+  NodeTypeAggregatedListWarningDataItem'
     { _nValue :: !(Maybe Text)
     , _nKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypeAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -14168,10 +14277,7 @@ data NodeTypeAggregatedListWarningDataItem = NodeTypeAggregatedListWarningDataIt
 nodeTypeAggregatedListWarningDataItem
     :: NodeTypeAggregatedListWarningDataItem
 nodeTypeAggregatedListWarningDataItem =
-    NodeTypeAggregatedListWarningDataItem'
-    { _nValue = Nothing
-    , _nKey = Nothing
-    }
+  NodeTypeAggregatedListWarningDataItem' {_nValue = Nothing, _nKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 nValue :: Lens' NodeTypeAggregatedListWarningDataItem (Maybe Text)
@@ -14188,7 +14294,8 @@ nKey :: Lens' NodeTypeAggregatedListWarningDataItem (Maybe Text)
 nKey = lens _nKey (\ s a -> s{_nKey = a})
 
 instance FromJSON
-         NodeTypeAggregatedListWarningDataItem where
+           NodeTypeAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject "NodeTypeAggregatedListWarningDataItem"
               (\ o ->
@@ -14204,10 +14311,12 @@ instance ToJSON NodeTypeAggregatedListWarningDataItem
 
 --
 -- /See:/ 'targetInstancesScopedListWarningDataItem' smart constructor.
-data TargetInstancesScopedListWarningDataItem = TargetInstancesScopedListWarningDataItem'
+data TargetInstancesScopedListWarningDataItem =
+  TargetInstancesScopedListWarningDataItem'
     { _tislwdiValue :: !(Maybe Text)
     , _tislwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstancesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -14219,10 +14328,8 @@ data TargetInstancesScopedListWarningDataItem = TargetInstancesScopedListWarning
 targetInstancesScopedListWarningDataItem
     :: TargetInstancesScopedListWarningDataItem
 targetInstancesScopedListWarningDataItem =
-    TargetInstancesScopedListWarningDataItem'
-    { _tislwdiValue = Nothing
-    , _tislwdiKey = Nothing
-    }
+  TargetInstancesScopedListWarningDataItem'
+    {_tislwdiValue = Nothing, _tislwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tislwdiValue :: Lens' TargetInstancesScopedListWarningDataItem (Maybe Text)
@@ -14241,7 +14348,8 @@ tislwdiKey
   = lens _tislwdiKey (\ s a -> s{_tislwdiKey = a})
 
 instance FromJSON
-         TargetInstancesScopedListWarningDataItem where
+           TargetInstancesScopedListWarningDataItem
+         where
         parseJSON
           = withObject
               "TargetInstancesScopedListWarningDataItem"
@@ -14250,7 +14358,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         TargetInstancesScopedListWarningDataItem where
+           TargetInstancesScopedListWarningDataItem
+         where
         toJSON TargetInstancesScopedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -14261,11 +14370,13 @@ instance ToJSON
 -- types list is empty.
 --
 -- /See:/ 'machineTypesScopedListWarning' smart constructor.
-data MachineTypesScopedListWarning = MachineTypesScopedListWarning'
+data MachineTypesScopedListWarning =
+  MachineTypesScopedListWarning'
     { _mtslwData    :: !(Maybe [MachineTypesScopedListWarningDataItem])
     , _mtslwCode    :: !(Maybe MachineTypesScopedListWarningCode)
     , _mtslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -14279,11 +14390,8 @@ data MachineTypesScopedListWarning = MachineTypesScopedListWarning'
 machineTypesScopedListWarning
     :: MachineTypesScopedListWarning
 machineTypesScopedListWarning =
-    MachineTypesScopedListWarning'
-    { _mtslwData = Nothing
-    , _mtslwCode = Nothing
-    , _mtslwMessage = Nothing
-    }
+  MachineTypesScopedListWarning'
+    {_mtslwData = Nothing, _mtslwCode = Nothing, _mtslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -14323,10 +14431,12 @@ instance ToJSON MachineTypesScopedListWarning where
 
 --
 -- /See:/ 'zoneSetLabelsRequest' smart constructor.
-data ZoneSetLabelsRequest = ZoneSetLabelsRequest'
+data ZoneSetLabelsRequest =
+  ZoneSetLabelsRequest'
     { _zslrLabels           :: !(Maybe ZoneSetLabelsRequestLabels)
     , _zslrLabelFingerprint :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ZoneSetLabelsRequest' with the minimum fields required to make a request.
 --
@@ -14338,10 +14448,7 @@ data ZoneSetLabelsRequest = ZoneSetLabelsRequest'
 zoneSetLabelsRequest
     :: ZoneSetLabelsRequest
 zoneSetLabelsRequest =
-    ZoneSetLabelsRequest'
-    { _zslrLabels = Nothing
-    , _zslrLabelFingerprint = Nothing
-    }
+  ZoneSetLabelsRequest' {_zslrLabels = Nothing, _zslrLabelFingerprint = Nothing}
 
 -- | The labels to set for this resource.
 zslrLabels :: Lens' ZoneSetLabelsRequest (Maybe ZoneSetLabelsRequestLabels)
@@ -14379,7 +14486,8 @@ instance ToJSON ZoneSetLabelsRequest where
 -- beta.targetInstances ==) (== resource_for v1.targetInstances ==)
 --
 -- /See:/ 'targetInstance' smart constructor.
-data TargetInstance = TargetInstance'
+data TargetInstance =
+  TargetInstance'
     { _tiKind              :: !Text
     , _tiNATPolicy         :: !(Maybe TargetInstanceNATPolicy)
     , _tiZone              :: !(Maybe Text)
@@ -14389,7 +14497,8 @@ data TargetInstance = TargetInstance'
     , _tiId                :: !(Maybe (Textual Word64))
     , _tiDescription       :: !(Maybe Text)
     , _tiInstance          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstance' with the minimum fields required to make a request.
 --
@@ -14415,7 +14524,7 @@ data TargetInstance = TargetInstance'
 targetInstance
     :: TargetInstance
 targetInstance =
-    TargetInstance'
+  TargetInstance'
     { _tiKind = "compute#targetInstance"
     , _tiNATPolicy = Nothing
     , _tiZone = Nothing
@@ -14521,10 +14630,12 @@ instance ToJSON TargetInstance where
 
 --
 -- /See:/ 'targetPoolInstanceHealth' smart constructor.
-data TargetPoolInstanceHealth = TargetPoolInstanceHealth'
+data TargetPoolInstanceHealth =
+  TargetPoolInstanceHealth'
     { _tpihKind         :: !Text
     , _tpihHealthStatus :: !(Maybe [HealthStatus])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolInstanceHealth' with the minimum fields required to make a request.
 --
@@ -14536,7 +14647,7 @@ data TargetPoolInstanceHealth = TargetPoolInstanceHealth'
 targetPoolInstanceHealth
     :: TargetPoolInstanceHealth
 targetPoolInstanceHealth =
-    TargetPoolInstanceHealth'
+  TargetPoolInstanceHealth'
     { _tpihKind = "compute#targetPoolInstanceHealth"
     , _tpihHealthStatus = Nothing
     }
@@ -14570,14 +14681,16 @@ instance ToJSON TargetPoolInstanceHealth where
 
 --
 -- /See:/ 'acceleratorTypeAggregatedList' smart constructor.
-data AcceleratorTypeAggregatedList = AcceleratorTypeAggregatedList'
+data AcceleratorTypeAggregatedList =
+  AcceleratorTypeAggregatedList'
     { _atalNextPageToken :: !(Maybe Text)
     , _atalKind          :: !Text
     , _atalItems         :: !(Maybe AcceleratorTypeAggregatedListItems)
     , _atalSelfLink      :: !(Maybe Text)
     , _atalWarning       :: !(Maybe AcceleratorTypeAggregatedListWarning)
     , _atalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypeAggregatedList' with the minimum fields required to make a request.
 --
@@ -14597,7 +14710,7 @@ data AcceleratorTypeAggregatedList = AcceleratorTypeAggregatedList'
 acceleratorTypeAggregatedList
     :: AcceleratorTypeAggregatedList
 acceleratorTypeAggregatedList =
-    AcceleratorTypeAggregatedList'
+  AcceleratorTypeAggregatedList'
     { _atalNextPageToken = Nothing
     , _atalKind = "compute#acceleratorTypeAggregatedList"
     , _atalItems = Nothing
@@ -14670,9 +14783,11 @@ instance ToJSON AcceleratorTypeAggregatedList where
 -- indicating the type of routing behavior to enforce network-wide.
 --
 -- /See:/ 'networkRoutingConfig' smart constructor.
-newtype NetworkRoutingConfig = NetworkRoutingConfig'
+newtype NetworkRoutingConfig =
+  NetworkRoutingConfig'
     { _nrcRoutingMode :: Maybe NetworkRoutingConfigRoutingMode
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkRoutingConfig' with the minimum fields required to make a request.
 --
@@ -14681,10 +14796,7 @@ newtype NetworkRoutingConfig = NetworkRoutingConfig'
 -- * 'nrcRoutingMode'
 networkRoutingConfig
     :: NetworkRoutingConfig
-networkRoutingConfig =
-    NetworkRoutingConfig'
-    { _nrcRoutingMode = Nothing
-    }
+networkRoutingConfig = NetworkRoutingConfig' {_nrcRoutingMode = Nothing}
 
 -- | The network-wide routing mode to use. If set to REGIONAL, this
 -- network\'s cloud routers will only advertise routes with subnets of this
@@ -14710,11 +14822,13 @@ instance ToJSON NetworkRoutingConfig where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'nodeTemplateListWarning' smart constructor.
-data NodeTemplateListWarning = NodeTemplateListWarning'
+data NodeTemplateListWarning =
+  NodeTemplateListWarning'
     { _nodData    :: !(Maybe [NodeTemplateListWarningDataItem])
     , _nodCode    :: !(Maybe NodeTemplateListWarningCode)
     , _nodMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplateListWarning' with the minimum fields required to make a request.
 --
@@ -14728,11 +14842,8 @@ data NodeTemplateListWarning = NodeTemplateListWarning'
 nodeTemplateListWarning
     :: NodeTemplateListWarning
 nodeTemplateListWarning =
-    NodeTemplateListWarning'
-    { _nodData = Nothing
-    , _nodCode = Nothing
-    , _nodMessage = Nothing
-    }
+  NodeTemplateListWarning'
+    {_nodData = Nothing, _nodCode = Nothing, _nodMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -14769,9 +14880,11 @@ instance ToJSON NodeTemplateListWarning where
 
 --
 -- /See:/ 'instanceGroupManagersListManagedInstancesResponse' smart constructor.
-newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManagersListManagedInstancesResponse'
+newtype InstanceGroupManagersListManagedInstancesResponse =
+  InstanceGroupManagersListManagedInstancesResponse'
     { _igmlmirManagedInstances :: Maybe [ManagedInstance]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersListManagedInstancesResponse' with the minimum fields required to make a request.
 --
@@ -14781,9 +14894,8 @@ newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManager
 instanceGroupManagersListManagedInstancesResponse
     :: InstanceGroupManagersListManagedInstancesResponse
 instanceGroupManagersListManagedInstancesResponse =
-    InstanceGroupManagersListManagedInstancesResponse'
-    { _igmlmirManagedInstances = Nothing
-    }
+  InstanceGroupManagersListManagedInstancesResponse'
+    {_igmlmirManagedInstances = Nothing}
 
 -- | [Output Only] The list of instances in the managed instance group.
 igmlmirManagedInstances :: Lens' InstanceGroupManagersListManagedInstancesResponse [ManagedInstance]
@@ -14794,7 +14906,7 @@ igmlmirManagedInstances
       . _Coerce
 
 instance FromJSON
-         InstanceGroupManagersListManagedInstancesResponse
+           InstanceGroupManagersListManagedInstancesResponse
          where
         parseJSON
           = withObject
@@ -14804,7 +14916,7 @@ instance FromJSON
                    <$> (o .:? "managedInstances" .!= mempty))
 
 instance ToJSON
-         InstanceGroupManagersListManagedInstancesResponse
+           InstanceGroupManagersListManagedInstancesResponse
          where
         toJSON
           InstanceGroupManagersListManagedInstancesResponse'{..}
@@ -14816,7 +14928,8 @@ instance ToJSON
 -- |
 --
 -- /See:/ 'instanceProperties' smart constructor.
-data InstanceProperties = InstanceProperties'
+data InstanceProperties =
+  InstanceProperties'
     { _ipServiceAccounts   :: !(Maybe [ServiceAccount])
     , _ipNetworkInterfaces :: !(Maybe [NetworkInterface])
     , _ipGuestAccelerators :: !(Maybe [AcceleratorConfig])
@@ -14829,7 +14942,8 @@ data InstanceProperties = InstanceProperties'
     , _ipCanIPForward      :: !(Maybe Bool)
     , _ipDescription       :: !(Maybe Text)
     , _ipTags              :: !(Maybe Tags)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceProperties' with the minimum fields required to make a request.
 --
@@ -14861,7 +14975,7 @@ data InstanceProperties = InstanceProperties'
 instanceProperties
     :: InstanceProperties
 instanceProperties =
-    InstanceProperties'
+  InstanceProperties'
     { _ipServiceAccounts = Nothing
     , _ipNetworkInterfaces = Nothing
     , _ipGuestAccelerators = Nothing
@@ -15007,9 +15121,11 @@ instance ToJSON InstanceProperties where
 
 --
 -- /See:/ 'projectsListXpnHostsRequest' smart constructor.
-newtype ProjectsListXpnHostsRequest = ProjectsListXpnHostsRequest'
+newtype ProjectsListXpnHostsRequest =
+  ProjectsListXpnHostsRequest'
     { _plxhrOrganization :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsListXpnHostsRequest' with the minimum fields required to make a request.
 --
@@ -15019,9 +15135,7 @@ newtype ProjectsListXpnHostsRequest = ProjectsListXpnHostsRequest'
 projectsListXpnHostsRequest
     :: ProjectsListXpnHostsRequest
 projectsListXpnHostsRequest =
-    ProjectsListXpnHostsRequest'
-    { _plxhrOrganization = Nothing
-    }
+  ProjectsListXpnHostsRequest' {_plxhrOrganization = Nothing}
 
 -- | Optional organization ID managed by Cloud Resource Manager, for which to
 -- list shared VPC host projects. If not specified, the organization will
@@ -15047,11 +15161,13 @@ instance ToJSON ProjectsListXpnHostsRequest where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'regionListWarning' smart constructor.
-data RegionListWarning = RegionListWarning'
+data RegionListWarning =
+  RegionListWarning'
     { _rlwData    :: !(Maybe [RegionListWarningDataItem])
     , _rlwCode    :: !(Maybe RegionListWarningCode)
     , _rlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionListWarning' with the minimum fields required to make a request.
 --
@@ -15065,11 +15181,8 @@ data RegionListWarning = RegionListWarning'
 regionListWarning
     :: RegionListWarning
 regionListWarning =
-    RegionListWarning'
-    { _rlwData = Nothing
-    , _rlwCode = Nothing
-    , _rlwMessage = Nothing
-    }
+  RegionListWarning'
+    {_rlwData = Nothing, _rlwCode = Nothing, _rlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -15106,10 +15219,12 @@ instance ToJSON RegionListWarning where
 
 --
 -- /See:/ 'nodeGroupsScopedList' smart constructor.
-data NodeGroupsScopedList = NodeGroupsScopedList'
+data NodeGroupsScopedList =
+  NodeGroupsScopedList'
     { _ngslNodeGroups :: !(Maybe [NodeGroup])
     , _ngslWarning    :: !(Maybe NodeGroupsScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsScopedList' with the minimum fields required to make a request.
 --
@@ -15121,10 +15236,7 @@ data NodeGroupsScopedList = NodeGroupsScopedList'
 nodeGroupsScopedList
     :: NodeGroupsScopedList
 nodeGroupsScopedList =
-    NodeGroupsScopedList'
-    { _ngslNodeGroups = Nothing
-    , _ngslWarning = Nothing
-    }
+  NodeGroupsScopedList' {_ngslNodeGroups = Nothing, _ngslWarning = Nothing}
 
 -- | [Output Only] A list of node groups contained in this scope.
 ngslNodeGroups :: Lens' NodeGroupsScopedList [NodeGroup]
@@ -15159,11 +15271,13 @@ instance ToJSON NodeGroupsScopedList where
 -- types when the list is empty.
 --
 -- /See:/ 'diskTypesScopedListWarning' smart constructor.
-data DiskTypesScopedListWarning = DiskTypesScopedListWarning'
+data DiskTypesScopedListWarning =
+  DiskTypesScopedListWarning'
     { _dtslwData    :: !(Maybe [DiskTypesScopedListWarningDataItem])
     , _dtslwCode    :: !(Maybe DiskTypesScopedListWarningCode)
     , _dtslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -15177,11 +15291,8 @@ data DiskTypesScopedListWarning = DiskTypesScopedListWarning'
 diskTypesScopedListWarning
     :: DiskTypesScopedListWarning
 diskTypesScopedListWarning =
-    DiskTypesScopedListWarning'
-    { _dtslwData = Nothing
-    , _dtslwCode = Nothing
-    , _dtslwMessage = Nothing
-    }
+  DiskTypesScopedListWarning'
+    {_dtslwData = Nothing, _dtslwCode = Nothing, _dtslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -15221,10 +15332,12 @@ instance ToJSON DiskTypesScopedListWarning where
 
 --
 -- /See:/ 'regionInstanceGroupManagerListWarningDataItem' smart constructor.
-data RegionInstanceGroupManagerListWarningDataItem = RegionInstanceGroupManagerListWarningDataItem'
+data RegionInstanceGroupManagerListWarningDataItem =
+  RegionInstanceGroupManagerListWarningDataItem'
     { _rigmlwdiValue :: !(Maybe Text)
     , _rigmlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagerListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -15236,10 +15349,8 @@ data RegionInstanceGroupManagerListWarningDataItem = RegionInstanceGroupManagerL
 regionInstanceGroupManagerListWarningDataItem
     :: RegionInstanceGroupManagerListWarningDataItem
 regionInstanceGroupManagerListWarningDataItem =
-    RegionInstanceGroupManagerListWarningDataItem'
-    { _rigmlwdiValue = Nothing
-    , _rigmlwdiKey = Nothing
-    }
+  RegionInstanceGroupManagerListWarningDataItem'
+    {_rigmlwdiValue = Nothing, _rigmlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 rigmlwdiValue :: Lens' RegionInstanceGroupManagerListWarningDataItem (Maybe Text)
@@ -15259,7 +15370,8 @@ rigmlwdiKey
   = lens _rigmlwdiKey (\ s a -> s{_rigmlwdiKey = a})
 
 instance FromJSON
-         RegionInstanceGroupManagerListWarningDataItem where
+           RegionInstanceGroupManagerListWarningDataItem
+         where
         parseJSON
           = withObject
               "RegionInstanceGroupManagerListWarningDataItem"
@@ -15268,7 +15380,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         RegionInstanceGroupManagerListWarningDataItem where
+           RegionInstanceGroupManagerListWarningDataItem
+         where
         toJSON
           RegionInstanceGroupManagerListWarningDataItem'{..}
           = object
@@ -15283,7 +15396,8 @@ instance ToJSON
 -- define one or the other, but not both.
 --
 -- /See:/ 'attachedDiskInitializeParams' smart constructor.
-data AttachedDiskInitializeParams = AttachedDiskInitializeParams'
+data AttachedDiskInitializeParams =
+  AttachedDiskInitializeParams'
     { _adipSourceImage              :: !(Maybe Text)
     , _adipDiskSizeGb               :: !(Maybe (Textual Int64))
     , _adipDiskName                 :: !(Maybe Text)
@@ -15291,7 +15405,8 @@ data AttachedDiskInitializeParams = AttachedDiskInitializeParams'
     , _adipDiskType                 :: !(Maybe Text)
     , _adipLabels                   :: !(Maybe AttachedDiskInitializeParamsLabels)
     , _adipDescription              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachedDiskInitializeParams' with the minimum fields required to make a request.
 --
@@ -15313,7 +15428,7 @@ data AttachedDiskInitializeParams = AttachedDiskInitializeParams'
 attachedDiskInitializeParams
     :: AttachedDiskInitializeParams
 attachedDiskInitializeParams =
-    AttachedDiskInitializeParams'
+  AttachedDiskInitializeParams'
     { _adipSourceImage = Nothing
     , _adipDiskSizeGb = Nothing
     , _adipDiskName = Nothing
@@ -15421,10 +15536,12 @@ instance ToJSON AttachedDiskInitializeParams where
 -- | Secondary IP range of a usable subnetwork.
 --
 -- /See:/ 'usableSubnetworkSecondaryRange' smart constructor.
-data UsableSubnetworkSecondaryRange = UsableSubnetworkSecondaryRange'
+data UsableSubnetworkSecondaryRange =
+  UsableSubnetworkSecondaryRange'
     { _ussrRangeName   :: !(Maybe Text)
     , _ussrIPCIdRRange :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsableSubnetworkSecondaryRange' with the minimum fields required to make a request.
 --
@@ -15436,10 +15553,8 @@ data UsableSubnetworkSecondaryRange = UsableSubnetworkSecondaryRange'
 usableSubnetworkSecondaryRange
     :: UsableSubnetworkSecondaryRange
 usableSubnetworkSecondaryRange =
-    UsableSubnetworkSecondaryRange'
-    { _ussrRangeName = Nothing
-    , _ussrIPCIdRRange = Nothing
-    }
+  UsableSubnetworkSecondaryRange'
+    {_ussrRangeName = Nothing, _ussrIPCIdRRange = Nothing}
 
 -- | The name associated with this subnetwork secondary range, used when
 -- adding an alias IP range to a VM instance. The name must be 1-63
@@ -15473,10 +15588,12 @@ instance ToJSON UsableSubnetworkSecondaryRange where
 
 --
 -- /See:/ 'addressesScopedListWarningDataItem' smart constructor.
-data AddressesScopedListWarningDataItem = AddressesScopedListWarningDataItem'
+data AddressesScopedListWarningDataItem =
+  AddressesScopedListWarningDataItem'
     { _aslwdiValue :: !(Maybe Text)
     , _aslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -15488,10 +15605,8 @@ data AddressesScopedListWarningDataItem = AddressesScopedListWarningDataItem'
 addressesScopedListWarningDataItem
     :: AddressesScopedListWarningDataItem
 addressesScopedListWarningDataItem =
-    AddressesScopedListWarningDataItem'
-    { _aslwdiValue = Nothing
-    , _aslwdiKey = Nothing
-    }
+  AddressesScopedListWarningDataItem'
+    {_aslwdiValue = Nothing, _aslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 aslwdiValue :: Lens' AddressesScopedListWarningDataItem (Maybe Text)
@@ -15527,10 +15642,12 @@ instance ToJSON AddressesScopedListWarningDataItem
 
 --
 -- /See:/ 'instanceGroupListWarningDataItem' smart constructor.
-data InstanceGroupListWarningDataItem = InstanceGroupListWarningDataItem'
+data InstanceGroupListWarningDataItem =
+  InstanceGroupListWarningDataItem'
     { _iglwdiValue :: !(Maybe Text)
     , _iglwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -15542,10 +15659,8 @@ data InstanceGroupListWarningDataItem = InstanceGroupListWarningDataItem'
 instanceGroupListWarningDataItem
     :: InstanceGroupListWarningDataItem
 instanceGroupListWarningDataItem =
-    InstanceGroupListWarningDataItem'
-    { _iglwdiValue = Nothing
-    , _iglwdiKey = Nothing
-    }
+  InstanceGroupListWarningDataItem'
+    {_iglwdiValue = Nothing, _iglwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 iglwdiValue :: Lens' InstanceGroupListWarningDataItem (Maybe Text)
@@ -15582,7 +15697,8 @@ instance ToJSON InstanceGroupListWarningDataItem
 -- | A network interface resource attached to an instance.
 --
 -- /See:/ 'networkInterface' smart constructor.
-data NetworkInterface = NetworkInterface'
+data NetworkInterface =
+  NetworkInterface'
     { _niKind          :: !Text
     , _niFingerprint   :: !(Maybe Bytes)
     , _niAliasIPRanges :: !(Maybe [AliasIPRange])
@@ -15591,7 +15707,8 @@ data NetworkInterface = NetworkInterface'
     , _niNetworkIP     :: !(Maybe Text)
     , _niSubnetwork    :: !(Maybe Text)
     , _niAccessConfigs :: !(Maybe [AccessConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkInterface' with the minimum fields required to make a request.
 --
@@ -15615,7 +15732,7 @@ data NetworkInterface = NetworkInterface'
 networkInterface
     :: NetworkInterface
 networkInterface =
-    NetworkInterface'
+  NetworkInterface'
     { _niKind = "compute#networkInterface"
     , _niFingerprint = Nothing
     , _niAliasIPRanges = Nothing
@@ -15731,11 +15848,13 @@ instance ToJSON NetworkInterface where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'routerListWarning' smart constructor.
-data RouterListWarning = RouterListWarning'
+data RouterListWarning =
+  RouterListWarning'
     { _rData    :: !(Maybe [RouterListWarningDataItem])
     , _rCode    :: !(Maybe RouterListWarningCode)
     , _rMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterListWarning' with the minimum fields required to make a request.
 --
@@ -15749,11 +15868,7 @@ data RouterListWarning = RouterListWarning'
 routerListWarning
     :: RouterListWarning
 routerListWarning =
-    RouterListWarning'
-    { _rData = Nothing
-    , _rCode = Nothing
-    , _rMessage = Nothing
-    }
+  RouterListWarning' {_rData = Nothing, _rCode = Nothing, _rMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -15789,10 +15904,12 @@ instance ToJSON RouterListWarning where
 
 --
 -- /See:/ 'firewallListWarningDataItem' smart constructor.
-data FirewallListWarningDataItem = FirewallListWarningDataItem'
+data FirewallListWarningDataItem =
+  FirewallListWarningDataItem'
     { _flwdiValue :: !(Maybe Text)
     , _flwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FirewallListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -15804,10 +15921,7 @@ data FirewallListWarningDataItem = FirewallListWarningDataItem'
 firewallListWarningDataItem
     :: FirewallListWarningDataItem
 firewallListWarningDataItem =
-    FirewallListWarningDataItem'
-    { _flwdiValue = Nothing
-    , _flwdiKey = Nothing
-    }
+  FirewallListWarningDataItem' {_flwdiValue = Nothing, _flwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 flwdiValue :: Lens' FirewallListWarningDataItem (Maybe Text)
@@ -15840,9 +15954,11 @@ instance ToJSON FirewallListWarningDataItem where
 
 --
 -- /See:/ 'targetPoolsRemoveHealthCheckRequest' smart constructor.
-newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckRequest'
+newtype TargetPoolsRemoveHealthCheckRequest =
+  TargetPoolsRemoveHealthCheckRequest'
     { _tprhcrHealthChecks :: Maybe [HealthCheckReference]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveHealthCheckRequest' with the minimum fields required to make a request.
 --
@@ -15852,9 +15968,7 @@ newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckReques
 targetPoolsRemoveHealthCheckRequest
     :: TargetPoolsRemoveHealthCheckRequest
 targetPoolsRemoveHealthCheckRequest =
-    TargetPoolsRemoveHealthCheckRequest'
-    { _tprhcrHealthChecks = Nothing
-    }
+  TargetPoolsRemoveHealthCheckRequest' {_tprhcrHealthChecks = Nothing}
 
 -- | Health check URL to be removed. This can be a full or valid partial URL.
 -- For example, the following are valid URLs: -
@@ -15885,10 +15999,12 @@ instance ToJSON TargetPoolsRemoveHealthCheckRequest
 
 --
 -- /See:/ 'regionInstanceGroupManagersSetTargetPoolsRequest' smart constructor.
-data RegionInstanceGroupManagersSetTargetPoolsRequest = RegionInstanceGroupManagersSetTargetPoolsRequest'
+data RegionInstanceGroupManagersSetTargetPoolsRequest =
+  RegionInstanceGroupManagersSetTargetPoolsRequest'
     { _rigmstprFingerprint :: !(Maybe Bytes)
     , _rigmstprTargetPools :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersSetTargetPoolsRequest' with the minimum fields required to make a request.
 --
@@ -15900,10 +16016,8 @@ data RegionInstanceGroupManagersSetTargetPoolsRequest = RegionInstanceGroupManag
 regionInstanceGroupManagersSetTargetPoolsRequest
     :: RegionInstanceGroupManagersSetTargetPoolsRequest
 regionInstanceGroupManagersSetTargetPoolsRequest =
-    RegionInstanceGroupManagersSetTargetPoolsRequest'
-    { _rigmstprFingerprint = Nothing
-    , _rigmstprTargetPools = Nothing
-    }
+  RegionInstanceGroupManagersSetTargetPoolsRequest'
+    {_rigmstprFingerprint = Nothing, _rigmstprTargetPools = Nothing}
 
 -- | Fingerprint of the target pools information, which is a hash of the
 -- contents. This field is used for optimistic locking when you update the
@@ -15925,7 +16039,7 @@ rigmstprTargetPools
       . _Coerce
 
 instance FromJSON
-         RegionInstanceGroupManagersSetTargetPoolsRequest
+           RegionInstanceGroupManagersSetTargetPoolsRequest
          where
         parseJSON
           = withObject
@@ -15936,7 +16050,7 @@ instance FromJSON
                      (o .:? "targetPools" .!= mempty))
 
 instance ToJSON
-         RegionInstanceGroupManagersSetTargetPoolsRequest
+           RegionInstanceGroupManagersSetTargetPoolsRequest
          where
         toJSON
           RegionInstanceGroupManagersSetTargetPoolsRequest'{..}
@@ -15948,10 +16062,12 @@ instance ToJSON
 -- | Message containing Cloud CDN configuration for a backend bucket.
 --
 -- /See:/ 'backendBucketCdnPolicy' smart constructor.
-data BackendBucketCdnPolicy = BackendBucketCdnPolicy'
+data BackendBucketCdnPolicy =
+  BackendBucketCdnPolicy'
     { _bbcpSignedURLCacheMaxAgeSec :: !(Maybe (Textual Int64))
     , _bbcpSignedURLKeyNames       :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendBucketCdnPolicy' with the minimum fields required to make a request.
 --
@@ -15963,10 +16079,8 @@ data BackendBucketCdnPolicy = BackendBucketCdnPolicy'
 backendBucketCdnPolicy
     :: BackendBucketCdnPolicy
 backendBucketCdnPolicy =
-    BackendBucketCdnPolicy'
-    { _bbcpSignedURLCacheMaxAgeSec = Nothing
-    , _bbcpSignedURLKeyNames = Nothing
-    }
+  BackendBucketCdnPolicy'
+    {_bbcpSignedURLCacheMaxAgeSec = Nothing, _bbcpSignedURLKeyNames = Nothing}
 
 -- | Maximum number of seconds the response to a signed URL request will be
 -- considered fresh. After this time period, the response will be
@@ -16008,14 +16122,16 @@ instance ToJSON BackendBucketCdnPolicy where
 -- | Contains a list of TargetSslProxy resources.
 --
 -- /See:/ 'targetSSLProxyList' smart constructor.
-data TargetSSLProxyList = TargetSSLProxyList'
+data TargetSSLProxyList =
+  TargetSSLProxyList'
     { _tsplNextPageToken :: !(Maybe Text)
     , _tsplKind          :: !Text
     , _tsplItems         :: !(Maybe [TargetSSLProxy])
     , _tsplSelfLink      :: !(Maybe Text)
     , _tsplWarning       :: !(Maybe TargetSSLProxyListWarning)
     , _tsplId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxyList' with the minimum fields required to make a request.
 --
@@ -16035,7 +16151,7 @@ data TargetSSLProxyList = TargetSSLProxyList'
 targetSSLProxyList
     :: TargetSSLProxyList
 targetSSLProxyList =
-    TargetSSLProxyList'
+  TargetSSLProxyList'
     { _tsplNextPageToken = Nothing
     , _tsplKind = "compute#targetSslProxyList"
     , _tsplItems = Nothing
@@ -16104,10 +16220,12 @@ instance ToJSON TargetSSLProxyList where
 
 --
 -- /See:/ 'customerEncryptionKeyProtectedDisk' smart constructor.
-data CustomerEncryptionKeyProtectedDisk = CustomerEncryptionKeyProtectedDisk'
+data CustomerEncryptionKeyProtectedDisk =
+  CustomerEncryptionKeyProtectedDisk'
     { _cekpdDiskEncryptionKey :: !(Maybe CustomerEncryptionKey)
     , _cekpdSource            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CustomerEncryptionKeyProtectedDisk' with the minimum fields required to make a request.
 --
@@ -16119,10 +16237,8 @@ data CustomerEncryptionKeyProtectedDisk = CustomerEncryptionKeyProtectedDisk'
 customerEncryptionKeyProtectedDisk
     :: CustomerEncryptionKeyProtectedDisk
 customerEncryptionKeyProtectedDisk =
-    CustomerEncryptionKeyProtectedDisk'
-    { _cekpdDiskEncryptionKey = Nothing
-    , _cekpdSource = Nothing
-    }
+  CustomerEncryptionKeyProtectedDisk'
+    {_cekpdDiskEncryptionKey = Nothing, _cekpdSource = Nothing}
 
 -- | Decrypts data associated with the disk with a customer-supplied
 -- encryption key.
@@ -16157,14 +16273,16 @@ instance ToJSON CustomerEncryptionKeyProtectedDisk
 -- | A list of instance templates.
 --
 -- /See:/ 'instanceTemplateList' smart constructor.
-data InstanceTemplateList = InstanceTemplateList'
+data InstanceTemplateList =
+  InstanceTemplateList'
     { _itlNextPageToken :: !(Maybe Text)
     , _itlKind          :: !Text
     , _itlItems         :: !(Maybe [InstanceTemplate])
     , _itlSelfLink      :: !(Maybe Text)
     , _itlWarning       :: !(Maybe InstanceTemplateListWarning)
     , _itlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceTemplateList' with the minimum fields required to make a request.
 --
@@ -16184,7 +16302,7 @@ data InstanceTemplateList = InstanceTemplateList'
 instanceTemplateList
     :: InstanceTemplateList
 instanceTemplateList =
-    InstanceTemplateList'
+  InstanceTemplateList'
     { _itlNextPageToken = Nothing
     , _itlKind = "compute#instanceTemplateList"
     , _itlItems = Nothing
@@ -16255,12 +16373,14 @@ instance ToJSON InstanceTemplateList where
 -- | Represents a reference to a resource.
 --
 -- /See:/ 'reference' smart constructor.
-data Reference = Reference'
+data Reference =
+  Reference'
     { _refKind          :: !Text
     , _refReferrer      :: !(Maybe Text)
     , _refReferenceType :: !(Maybe Text)
     , _refTarget        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Reference' with the minimum fields required to make a request.
 --
@@ -16276,7 +16396,7 @@ data Reference = Reference'
 reference
     :: Reference
 reference =
-    Reference'
+  Reference'
     { _refKind = "compute#reference"
     , _refReferrer = Nothing
     , _refReferenceType = Nothing
@@ -16327,11 +16447,13 @@ instance ToJSON Reference where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'instanceGroupAggregatedListWarning' smart constructor.
-data InstanceGroupAggregatedListWarning = InstanceGroupAggregatedListWarning'
+data InstanceGroupAggregatedListWarning =
+  InstanceGroupAggregatedListWarning'
     { _igalwData    :: !(Maybe [InstanceGroupAggregatedListWarningDataItem])
     , _igalwCode    :: !(Maybe InstanceGroupAggregatedListWarningCode)
     , _igalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -16345,11 +16467,8 @@ data InstanceGroupAggregatedListWarning = InstanceGroupAggregatedListWarning'
 instanceGroupAggregatedListWarning
     :: InstanceGroupAggregatedListWarning
 instanceGroupAggregatedListWarning =
-    InstanceGroupAggregatedListWarning'
-    { _igalwData = Nothing
-    , _igalwCode = Nothing
-    , _igalwMessage = Nothing
-    }
+  InstanceGroupAggregatedListWarning'
+    {_igalwData = Nothing, _igalwCode = Nothing, _igalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -16392,14 +16511,16 @@ instance ToJSON InstanceGroupAggregatedListWarning
 -- | Contains a list of Route resources.
 --
 -- /See:/ 'routeList' smart constructor.
-data RouteList = RouteList'
+data RouteList =
+  RouteList'
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
     , _rlItems         :: !(Maybe [Route])
     , _rlSelfLink      :: !(Maybe Text)
     , _rlWarning       :: !(Maybe RouteListWarning)
     , _rlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouteList' with the minimum fields required to make a request.
 --
@@ -16419,7 +16540,7 @@ data RouteList = RouteList'
 routeList
     :: RouteList
 routeList =
-    RouteList'
+  RouteList'
     { _rlNextPageToken = Nothing
     , _rlKind = "compute#routeList"
     , _rlItems = Nothing
@@ -16486,14 +16607,16 @@ instance ToJSON RouteList where
 -- | Contains a list of instance referrers.
 --
 -- /See:/ 'instanceListReferrers' smart constructor.
-data InstanceListReferrers = InstanceListReferrers'
+data InstanceListReferrers =
+  InstanceListReferrers'
     { _ilrNextPageToken :: !(Maybe Text)
     , _ilrKind          :: !Text
     , _ilrItems         :: !(Maybe [Reference])
     , _ilrSelfLink      :: !(Maybe Text)
     , _ilrWarning       :: !(Maybe InstanceListReferrersWarning)
     , _ilrId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceListReferrers' with the minimum fields required to make a request.
 --
@@ -16513,7 +16636,7 @@ data InstanceListReferrers = InstanceListReferrers'
 instanceListReferrers
     :: InstanceListReferrers
 instanceListReferrers =
-    InstanceListReferrers'
+  InstanceListReferrers'
     { _ilrNextPageToken = Nothing
     , _ilrKind = "compute#instanceListReferrers"
     , _ilrItems = Nothing
@@ -16584,7 +16707,8 @@ instance ToJSON InstanceListReferrers where
 -- | Router resource.
 --
 -- /See:/ 'router' smart constructor.
-data Router = Router'
+data Router =
+  Router'
     { _rouBGPPeers          :: !(Maybe [RouterBGPPeer])
     , _rouBGP               :: !(Maybe RouterBGP)
     , _rouKind              :: !Text
@@ -16597,7 +16721,8 @@ data Router = Router'
     , _rouRegion            :: !(Maybe Text)
     , _rouNATs              :: !(Maybe [RouterNAT])
     , _rouDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Router' with the minimum fields required to make a request.
 --
@@ -16629,7 +16754,7 @@ data Router = Router'
 router
     :: Router
 router =
-    Router'
+  Router'
     { _rouBGPPeers = Nothing
     , _rouBGP = Nothing
     , _rouKind = "compute#router"
@@ -16758,10 +16883,12 @@ instance ToJSON Router where
 
 --
 -- /See:/ 'routerAggregatedListWarningDataItem' smart constructor.
-data RouterAggregatedListWarningDataItem = RouterAggregatedListWarningDataItem'
+data RouterAggregatedListWarningDataItem =
+  RouterAggregatedListWarningDataItem'
     { _ralwdiValue :: !(Maybe Text)
     , _ralwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -16773,10 +16900,8 @@ data RouterAggregatedListWarningDataItem = RouterAggregatedListWarningDataItem'
 routerAggregatedListWarningDataItem
     :: RouterAggregatedListWarningDataItem
 routerAggregatedListWarningDataItem =
-    RouterAggregatedListWarningDataItem'
-    { _ralwdiValue = Nothing
-    , _ralwdiKey = Nothing
-    }
+  RouterAggregatedListWarningDataItem'
+    {_ralwdiValue = Nothing, _ralwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ralwdiValue :: Lens' RouterAggregatedListWarningDataItem (Maybe Text)
@@ -16812,10 +16937,12 @@ instance ToJSON RouterAggregatedListWarningDataItem
 
 --
 -- /See:/ 'routersScopedListWarningDataItem' smart constructor.
-data RoutersScopedListWarningDataItem = RoutersScopedListWarningDataItem'
+data RoutersScopedListWarningDataItem =
+  RoutersScopedListWarningDataItem'
     { _rslwdiValue :: !(Maybe Text)
     , _rslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutersScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -16827,10 +16954,8 @@ data RoutersScopedListWarningDataItem = RoutersScopedListWarningDataItem'
 routersScopedListWarningDataItem
     :: RoutersScopedListWarningDataItem
 routersScopedListWarningDataItem =
-    RoutersScopedListWarningDataItem'
-    { _rslwdiValue = Nothing
-    , _rslwdiKey = Nothing
-    }
+  RoutersScopedListWarningDataItem'
+    {_rslwdiValue = Nothing, _rslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 rslwdiValue :: Lens' RoutersScopedListWarningDataItem (Maybe Text)
@@ -16866,9 +16991,11 @@ instance ToJSON RoutersScopedListWarningDataItem
 
 --
 -- /See:/ 'subnetworksSetPrivateIPGoogleAccessRequest' smart constructor.
-newtype SubnetworksSetPrivateIPGoogleAccessRequest = SubnetworksSetPrivateIPGoogleAccessRequest'
+newtype SubnetworksSetPrivateIPGoogleAccessRequest =
+  SubnetworksSetPrivateIPGoogleAccessRequest'
     { _sspigarPrivateIPGoogleAccess :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksSetPrivateIPGoogleAccessRequest' with the minimum fields required to make a request.
 --
@@ -16878,9 +17005,8 @@ newtype SubnetworksSetPrivateIPGoogleAccessRequest = SubnetworksSetPrivateIPGoog
 subnetworksSetPrivateIPGoogleAccessRequest
     :: SubnetworksSetPrivateIPGoogleAccessRequest
 subnetworksSetPrivateIPGoogleAccessRequest =
-    SubnetworksSetPrivateIPGoogleAccessRequest'
-    { _sspigarPrivateIPGoogleAccess = Nothing
-    }
+  SubnetworksSetPrivateIPGoogleAccessRequest'
+    {_sspigarPrivateIPGoogleAccess = Nothing}
 
 sspigarPrivateIPGoogleAccess :: Lens' SubnetworksSetPrivateIPGoogleAccessRequest (Maybe Bool)
 sspigarPrivateIPGoogleAccess
@@ -16888,7 +17014,8 @@ sspigarPrivateIPGoogleAccess
       (\ s a -> s{_sspigarPrivateIPGoogleAccess = a})
 
 instance FromJSON
-         SubnetworksSetPrivateIPGoogleAccessRequest where
+           SubnetworksSetPrivateIPGoogleAccessRequest
+         where
         parseJSON
           = withObject
               "SubnetworksSetPrivateIPGoogleAccessRequest"
@@ -16897,7 +17024,8 @@ instance FromJSON
                    (o .:? "privateIpGoogleAccess"))
 
 instance ToJSON
-         SubnetworksSetPrivateIPGoogleAccessRequest where
+           SubnetworksSetPrivateIPGoogleAccessRequest
+         where
         toJSON
           SubnetworksSetPrivateIPGoogleAccessRequest'{..}
           = object
@@ -16907,10 +17035,12 @@ instance ToJSON
 
 --
 -- /See:/ 'targetHTTPSProxyListWarningDataItem' smart constructor.
-data TargetHTTPSProxyListWarningDataItem = TargetHTTPSProxyListWarningDataItem'
+data TargetHTTPSProxyListWarningDataItem =
+  TargetHTTPSProxyListWarningDataItem'
     { _thplwdiValue :: !(Maybe Text)
     , _thplwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxyListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -16922,10 +17052,8 @@ data TargetHTTPSProxyListWarningDataItem = TargetHTTPSProxyListWarningDataItem'
 targetHTTPSProxyListWarningDataItem
     :: TargetHTTPSProxyListWarningDataItem
 targetHTTPSProxyListWarningDataItem =
-    TargetHTTPSProxyListWarningDataItem'
-    { _thplwdiValue = Nothing
-    , _thplwdiKey = Nothing
-    }
+  TargetHTTPSProxyListWarningDataItem'
+    {_thplwdiValue = Nothing, _thplwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 thplwdiValue :: Lens' TargetHTTPSProxyListWarningDataItem (Maybe Text)
@@ -16962,14 +17090,16 @@ instance ToJSON TargetHTTPSProxyListWarningDataItem
 -- | Contains a list of TargetVpnGateway resources.
 --
 -- /See:/ 'targetVPNGatewayList' smart constructor.
-data TargetVPNGatewayList = TargetVPNGatewayList'
+data TargetVPNGatewayList =
+  TargetVPNGatewayList'
     { _tvglNextPageToken :: !(Maybe Text)
     , _tvglKind          :: !Text
     , _tvglItems         :: !(Maybe [TargetVPNGateway])
     , _tvglSelfLink      :: !(Maybe Text)
     , _tvglWarning       :: !(Maybe TargetVPNGatewayListWarning)
     , _tvglId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewayList' with the minimum fields required to make a request.
 --
@@ -16989,7 +17119,7 @@ data TargetVPNGatewayList = TargetVPNGatewayList'
 targetVPNGatewayList
     :: TargetVPNGatewayList
 targetVPNGatewayList =
-    TargetVPNGatewayList'
+  TargetVPNGatewayList'
     { _tvglNextPageToken = Nothing
     , _tvglKind = "compute#targetVpnGatewayList"
     , _tvglItems = Nothing
@@ -17060,14 +17190,16 @@ instance ToJSON TargetVPNGatewayList where
 -- | Contains a list of SslCertificate resources.
 --
 -- /See:/ 'sslCertificateList' smart constructor.
-data SSLCertificateList = SSLCertificateList'
+data SSLCertificateList =
+  SSLCertificateList'
     { _sclNextPageToken :: !(Maybe Text)
     , _sclKind          :: !Text
     , _sclItems         :: !(Maybe [SSLCertificate])
     , _sclSelfLink      :: !(Maybe Text)
     , _sclWarning       :: !(Maybe SSLCertificateListWarning)
     , _sclId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLCertificateList' with the minimum fields required to make a request.
 --
@@ -17087,7 +17219,7 @@ data SSLCertificateList = SSLCertificateList'
 sslCertificateList
     :: SSLCertificateList
 sslCertificateList =
-    SSLCertificateList'
+  SSLCertificateList'
     { _sclNextPageToken = Nothing
     , _sclKind = "compute#sslCertificateList"
     , _sclItems = Nothing
@@ -17156,10 +17288,12 @@ instance ToJSON SSLCertificateList where
 
 --
 -- /See:/ 'firewallAllowedItem' smart constructor.
-data FirewallAllowedItem = FirewallAllowedItem'
+data FirewallAllowedItem =
+  FirewallAllowedItem'
     { _faiIPProtocol :: !(Maybe Text)
     , _faiPorts      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FirewallAllowedItem' with the minimum fields required to make a request.
 --
@@ -17171,10 +17305,7 @@ data FirewallAllowedItem = FirewallAllowedItem'
 firewallAllowedItem
     :: FirewallAllowedItem
 firewallAllowedItem =
-    FirewallAllowedItem'
-    { _faiIPProtocol = Nothing
-    , _faiPorts = Nothing
-    }
+  FirewallAllowedItem' {_faiIPProtocol = Nothing, _faiPorts = Nothing}
 
 -- | The IP protocol to which this rule applies. The protocol type is
 -- required when creating a firewall rule. This value can either be one of
@@ -17213,10 +17344,12 @@ instance ToJSON FirewallAllowedItem where
 -- | Description-tagged IP ranges for the router to advertise.
 --
 -- /See:/ 'routerAdvertisedIPRange' smart constructor.
-data RouterAdvertisedIPRange = RouterAdvertisedIPRange'
+data RouterAdvertisedIPRange =
+  RouterAdvertisedIPRange'
     { _rairRange       :: !(Maybe Text)
     , _rairDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterAdvertisedIPRange' with the minimum fields required to make a request.
 --
@@ -17228,10 +17361,7 @@ data RouterAdvertisedIPRange = RouterAdvertisedIPRange'
 routerAdvertisedIPRange
     :: RouterAdvertisedIPRange
 routerAdvertisedIPRange =
-    RouterAdvertisedIPRange'
-    { _rairRange = Nothing
-    , _rairDescription = Nothing
-    }
+  RouterAdvertisedIPRange' {_rairRange = Nothing, _rairDescription = Nothing}
 
 -- | The IP range to advertise. The value must be a CIDR-formatted string.
 rairRange :: Lens' RouterAdvertisedIPRange (Maybe Text)
@@ -17260,10 +17390,12 @@ instance ToJSON RouterAdvertisedIPRange where
 
 --
 -- /See:/ 'routerListWarningDataItem' smart constructor.
-data RouterListWarningDataItem = RouterListWarningDataItem'
+data RouterListWarningDataItem =
+  RouterListWarningDataItem'
     { _rlwdiValue :: !(Maybe Text)
     , _rlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -17275,10 +17407,7 @@ data RouterListWarningDataItem = RouterListWarningDataItem'
 routerListWarningDataItem
     :: RouterListWarningDataItem
 routerListWarningDataItem =
-    RouterListWarningDataItem'
-    { _rlwdiValue = Nothing
-    , _rlwdiKey = Nothing
-    }
+  RouterListWarningDataItem' {_rlwdiValue = Nothing, _rlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 rlwdiValue :: Lens' RouterListWarningDataItem (Maybe Text)
@@ -17312,7 +17441,8 @@ instance ToJSON RouterListWarningDataItem where
 -- | A rule to be applied in a Policy.
 --
 -- /See:/ 'rule' smart constructor.
-data Rule = Rule'
+data Rule =
+  Rule'
     { _rAction      :: !(Maybe RuleAction)
     , _rNotIns      :: !(Maybe [Text])
     , _rIns         :: !(Maybe [Text])
@@ -17320,7 +17450,8 @@ data Rule = Rule'
     , _rConditions  :: !(Maybe [Condition])
     , _rPermissions :: !(Maybe [Text])
     , _rDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Rule' with the minimum fields required to make a request.
 --
@@ -17342,7 +17473,7 @@ data Rule = Rule'
 rule
     :: Rule
 rule =
-    Rule'
+  Rule'
     { _rAction = Nothing
     , _rNotIns = Nothing
     , _rIns = Nothing
@@ -17426,14 +17557,16 @@ instance ToJSON Rule where
 -- | Contains a list of BackendServicesScopedList.
 --
 -- /See:/ 'backendServiceAggregatedList' smart constructor.
-data BackendServiceAggregatedList = BackendServiceAggregatedList'
+data BackendServiceAggregatedList =
+  BackendServiceAggregatedList'
     { _bsalNextPageToken :: !(Maybe Text)
     , _bsalKind          :: !Text
     , _bsalItems         :: !(Maybe BackendServiceAggregatedListItems)
     , _bsalSelfLink      :: !(Maybe Text)
     , _bsalWarning       :: !(Maybe BackendServiceAggregatedListWarning)
     , _bsalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceAggregatedList' with the minimum fields required to make a request.
 --
@@ -17453,7 +17586,7 @@ data BackendServiceAggregatedList = BackendServiceAggregatedList'
 backendServiceAggregatedList
     :: BackendServiceAggregatedList
 backendServiceAggregatedList =
-    BackendServiceAggregatedList'
+  BackendServiceAggregatedList'
     { _bsalNextPageToken = Nothing
     , _bsalKind = "compute#backendServiceAggregatedList"
     , _bsalItems = Nothing
@@ -17524,7 +17657,8 @@ instance ToJSON BackendServiceAggregatedList where
 -- resource_for beta.networks ==)
 --
 -- /See:/ 'network' smart constructor.
-data Network = Network'
+data Network =
+  Network'
     { _nAutoCreateSubnetworks :: !(Maybe Bool)
     , _nKind                  :: !Text
     , _nRoutingConfig         :: !(Maybe NetworkRoutingConfig)
@@ -17537,7 +17671,8 @@ data Network = Network'
     , _nGatewayIPv4           :: !(Maybe Text)
     , _nDescription           :: !(Maybe Text)
     , _nPeerings              :: !(Maybe [NetworkPeering])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
@@ -17569,7 +17704,7 @@ data Network = Network'
 network
     :: Network
 network =
-    Network'
+  Network'
     { _nAutoCreateSubnetworks = Nothing
     , _nKind = "compute#network"
     , _nRoutingConfig = Nothing
@@ -17706,11 +17841,13 @@ instance ToJSON Network where
 -- is empty.
 --
 -- /See:/ 'routersScopedListWarning' smart constructor.
-data RoutersScopedListWarning = RoutersScopedListWarning'
+data RoutersScopedListWarning =
+  RoutersScopedListWarning'
     { _rslwData    :: !(Maybe [RoutersScopedListWarningDataItem])
     , _rslwCode    :: !(Maybe RoutersScopedListWarningCode)
     , _rslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutersScopedListWarning' with the minimum fields required to make a request.
 --
@@ -17724,11 +17861,8 @@ data RoutersScopedListWarning = RoutersScopedListWarning'
 routersScopedListWarning
     :: RoutersScopedListWarning
 routersScopedListWarning =
-    RoutersScopedListWarning'
-    { _rslwData = Nothing
-    , _rslwCode = Nothing
-    , _rslwMessage = Nothing
-    }
+  RoutersScopedListWarning'
+    {_rslwData = Nothing, _rslwCode = Nothing, _rslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -17769,12 +17903,14 @@ instance ToJSON RoutersScopedListWarning where
 -- on.
 --
 -- /See:/ 'usableSubnetwork' smart constructor.
-data UsableSubnetwork = UsableSubnetwork'
+data UsableSubnetwork =
+  UsableSubnetwork'
     { _usNetwork           :: !(Maybe Text)
     , _usSecondaryIPRanges :: !(Maybe [UsableSubnetworkSecondaryRange])
     , _usIPCIdRRange       :: !(Maybe Text)
     , _usSubnetwork        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsableSubnetwork' with the minimum fields required to make a request.
 --
@@ -17790,7 +17926,7 @@ data UsableSubnetwork = UsableSubnetwork'
 usableSubnetwork
     :: UsableSubnetwork
 usableSubnetwork =
-    UsableSubnetwork'
+  UsableSubnetwork'
     { _usNetwork = Nothing
     , _usSecondaryIPRanges = Nothing
     , _usIPCIdRRange = Nothing
@@ -17843,11 +17979,13 @@ instance ToJSON UsableSubnetwork where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetHTTPSProxyListWarning' smart constructor.
-data TargetHTTPSProxyListWarning = TargetHTTPSProxyListWarning'
+data TargetHTTPSProxyListWarning =
+  TargetHTTPSProxyListWarning'
     { _thplwData    :: !(Maybe [TargetHTTPSProxyListWarningDataItem])
     , _thplwCode    :: !(Maybe TargetHTTPSProxyListWarningCode)
     , _thplwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxyListWarning' with the minimum fields required to make a request.
 --
@@ -17861,11 +17999,8 @@ data TargetHTTPSProxyListWarning = TargetHTTPSProxyListWarning'
 targetHTTPSProxyListWarning
     :: TargetHTTPSProxyListWarning
 targetHTTPSProxyListWarning =
-    TargetHTTPSProxyListWarning'
-    { _thplwData = Nothing
-    , _thplwCode = Nothing
-    , _thplwMessage = Nothing
-    }
+  TargetHTTPSProxyListWarning'
+    {_thplwData = Nothing, _thplwCode = Nothing, _thplwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -17907,11 +18042,13 @@ instance ToJSON TargetHTTPSProxyListWarning where
 -- when the list is empty.
 --
 -- /See:/ 'addressesScopedListWarning' smart constructor.
-data AddressesScopedListWarning = AddressesScopedListWarning'
+data AddressesScopedListWarning =
+  AddressesScopedListWarning'
     { _aData    :: !(Maybe [AddressesScopedListWarningDataItem])
     , _aCode    :: !(Maybe AddressesScopedListWarningCode)
     , _aMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -17925,11 +18062,8 @@ data AddressesScopedListWarning = AddressesScopedListWarning'
 addressesScopedListWarning
     :: AddressesScopedListWarning
 addressesScopedListWarning =
-    AddressesScopedListWarning'
-    { _aData = Nothing
-    , _aCode = Nothing
-    , _aMessage = Nothing
-    }
+  AddressesScopedListWarning'
+    {_aData = Nothing, _aCode = Nothing, _aMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -17968,7 +18102,8 @@ instance ToJSON AddressesScopedListWarning where
 -- v1.securityPolicies ==) (== resource_for beta.securityPolicies ==)
 --
 -- /See:/ 'securityPolicy' smart constructor.
-data SecurityPolicy = SecurityPolicy'
+data SecurityPolicy =
+  SecurityPolicy'
     { _secRules             :: !(Maybe [SecurityPolicyRule])
     , _secKind              :: !Text
     , _secFingerprint       :: !(Maybe Bytes)
@@ -17977,7 +18112,8 @@ data SecurityPolicy = SecurityPolicy'
     , _secCreationTimestamp :: !(Maybe Text)
     , _secId                :: !(Maybe (Textual Word64))
     , _secDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPolicy' with the minimum fields required to make a request.
 --
@@ -18001,7 +18137,7 @@ data SecurityPolicy = SecurityPolicy'
 securityPolicy
     :: SecurityPolicy
 securityPolicy =
-    SecurityPolicy'
+  SecurityPolicy'
     { _secRules = Nothing
     , _secKind = "compute#securityPolicy"
     , _secFingerprint = Nothing
@@ -18104,10 +18240,12 @@ instance ToJSON SecurityPolicy where
 
 --
 -- /See:/ 'instanceGroupAggregatedListWarningDataItem' smart constructor.
-data InstanceGroupAggregatedListWarningDataItem = InstanceGroupAggregatedListWarningDataItem'
+data InstanceGroupAggregatedListWarningDataItem =
+  InstanceGroupAggregatedListWarningDataItem'
     { _igalwdiValue :: !(Maybe Text)
     , _igalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -18119,10 +18257,8 @@ data InstanceGroupAggregatedListWarningDataItem = InstanceGroupAggregatedListWar
 instanceGroupAggregatedListWarningDataItem
     :: InstanceGroupAggregatedListWarningDataItem
 instanceGroupAggregatedListWarningDataItem =
-    InstanceGroupAggregatedListWarningDataItem'
-    { _igalwdiValue = Nothing
-    , _igalwdiKey = Nothing
-    }
+  InstanceGroupAggregatedListWarningDataItem'
+    {_igalwdiValue = Nothing, _igalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 igalwdiValue :: Lens' InstanceGroupAggregatedListWarningDataItem (Maybe Text)
@@ -18141,7 +18277,8 @@ igalwdiKey
   = lens _igalwdiKey (\ s a -> s{_igalwdiKey = a})
 
 instance FromJSON
-         InstanceGroupAggregatedListWarningDataItem where
+           InstanceGroupAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "InstanceGroupAggregatedListWarningDataItem"
@@ -18150,7 +18287,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InstanceGroupAggregatedListWarningDataItem where
+           InstanceGroupAggregatedListWarningDataItem
+         where
         toJSON
           InstanceGroupAggregatedListWarningDataItem'{..}
           = object
@@ -18161,11 +18299,13 @@ instance ToJSON
 -- | The parameters of the raw disk image.
 --
 -- /See:/ 'imageRawDisk' smart constructor.
-data ImageRawDisk = ImageRawDisk'
+data ImageRawDisk =
+  ImageRawDisk'
     { _irdContainerType :: !(Maybe ImageRawDiskContainerType)
     , _irdSource        :: !(Maybe Text)
     , _irdSha1Checksum  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImageRawDisk' with the minimum fields required to make a request.
 --
@@ -18179,7 +18319,7 @@ data ImageRawDisk = ImageRawDisk'
 imageRawDisk
     :: ImageRawDisk
 imageRawDisk =
-    ImageRawDisk'
+  ImageRawDisk'
     { _irdContainerType = Nothing
     , _irdSource = Nothing
     , _irdSha1Checksum = Nothing
@@ -18225,14 +18365,16 @@ instance ToJSON ImageRawDisk where
 
 --
 -- /See:/ 'instanceAggregatedList' smart constructor.
-data InstanceAggregatedList = InstanceAggregatedList'
+data InstanceAggregatedList =
+  InstanceAggregatedList'
     { _ialNextPageToken :: !(Maybe Text)
     , _ialKind          :: !Text
     , _ialItems         :: !(Maybe InstanceAggregatedListItems)
     , _ialSelfLink      :: !(Maybe Text)
     , _ialWarning       :: !(Maybe InstanceAggregatedListWarning)
     , _ialId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceAggregatedList' with the minimum fields required to make a request.
 --
@@ -18252,7 +18394,7 @@ data InstanceAggregatedList = InstanceAggregatedList'
 instanceAggregatedList
     :: InstanceAggregatedList
 instanceAggregatedList =
-    InstanceAggregatedList'
+  InstanceAggregatedList'
     { _ialNextPageToken = Nothing
     , _ialKind = "compute#instanceAggregatedList"
     , _ialItems = Nothing
@@ -18319,9 +18461,11 @@ instance ToJSON InstanceAggregatedList where
 
 --
 -- /See:/ 'targetTCPProxiesSetBackendServiceRequest' smart constructor.
-newtype TargetTCPProxiesSetBackendServiceRequest = TargetTCPProxiesSetBackendServiceRequest'
+newtype TargetTCPProxiesSetBackendServiceRequest =
+  TargetTCPProxiesSetBackendServiceRequest'
     { _ttpsbsrService :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxiesSetBackendServiceRequest' with the minimum fields required to make a request.
 --
@@ -18331,9 +18475,7 @@ newtype TargetTCPProxiesSetBackendServiceRequest = TargetTCPProxiesSetBackendSer
 targetTCPProxiesSetBackendServiceRequest
     :: TargetTCPProxiesSetBackendServiceRequest
 targetTCPProxiesSetBackendServiceRequest =
-    TargetTCPProxiesSetBackendServiceRequest'
-    { _ttpsbsrService = Nothing
-    }
+  TargetTCPProxiesSetBackendServiceRequest' {_ttpsbsrService = Nothing}
 
 -- | The URL of the new BackendService resource for the targetTcpProxy.
 ttpsbsrService :: Lens' TargetTCPProxiesSetBackendServiceRequest (Maybe Text)
@@ -18342,7 +18484,8 @@ ttpsbsrService
       (\ s a -> s{_ttpsbsrService = a})
 
 instance FromJSON
-         TargetTCPProxiesSetBackendServiceRequest where
+           TargetTCPProxiesSetBackendServiceRequest
+         where
         parseJSON
           = withObject
               "TargetTCPProxiesSetBackendServiceRequest"
@@ -18351,20 +18494,23 @@ instance FromJSON
                    (o .:? "service"))
 
 instance ToJSON
-         TargetTCPProxiesSetBackendServiceRequest where
+           TargetTCPProxiesSetBackendServiceRequest
+         where
         toJSON TargetTCPProxiesSetBackendServiceRequest'{..}
           = object
               (catMaybes [("service" .=) <$> _ttpsbsrService])
 
 --
 -- /See:/ 'sslHealthCheck' smart constructor.
-data SSLHealthCheck = SSLHealthCheck'
+data SSLHealthCheck =
+  SSLHealthCheck'
     { _shcResponse    :: !(Maybe Text)
     , _shcProxyHeader :: !(Maybe SSLHealthCheckProxyHeader)
     , _shcPortName    :: !(Maybe Text)
     , _shcPort        :: !(Maybe (Textual Int32))
     , _shcRequest     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLHealthCheck' with the minimum fields required to make a request.
 --
@@ -18382,7 +18528,7 @@ data SSLHealthCheck = SSLHealthCheck'
 sslHealthCheck
     :: SSLHealthCheck
 sslHealthCheck =
-    SSLHealthCheck'
+  SSLHealthCheck'
     { _shcResponse = Nothing
     , _shcProxyHeader = Nothing
     , _shcPortName = Nothing
@@ -18450,7 +18596,8 @@ instance ToJSON SSLHealthCheck where
 -- (== resource_for v1.globalAddresses ==)
 --
 -- /See:/ 'address' smart constructor.
-data Address = Address'
+data Address =
+  Address'
     { _aPrefixLength      :: !(Maybe (Textual Int32))
     , _aNetworkTier       :: !(Maybe AddressNetworkTier)
     , _aStatus            :: !(Maybe AddressStatus)
@@ -18468,7 +18615,8 @@ data Address = Address'
     , _aRegion            :: !(Maybe Text)
     , _aDescription       :: !(Maybe Text)
     , _aAddressType       :: !(Maybe AddressAddressType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Address' with the minimum fields required to make a request.
 --
@@ -18510,7 +18658,7 @@ data Address = Address'
 address
     :: Address
 address =
-    Address'
+  Address'
     { _aPrefixLength = Nothing
     , _aNetworkTier = Nothing
     , _aStatus = Nothing
@@ -18685,9 +18833,11 @@ instance ToJSON Address where
 -- | A list of NodeGroupsScopedList resources.
 --
 -- /See:/ 'nodeGroupAggregatedListItems' smart constructor.
-newtype NodeGroupAggregatedListItems = NodeGroupAggregatedListItems'
+newtype NodeGroupAggregatedListItems =
+  NodeGroupAggregatedListItems'
     { _ngaliAddtional :: HashMap Text NodeGroupsScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -18698,9 +18848,7 @@ nodeGroupAggregatedListItems
     :: HashMap Text NodeGroupsScopedList -- ^ 'ngaliAddtional'
     -> NodeGroupAggregatedListItems
 nodeGroupAggregatedListItems pNgaliAddtional_ =
-    NodeGroupAggregatedListItems'
-    { _ngaliAddtional = _Coerce # pNgaliAddtional_
-    }
+  NodeGroupAggregatedListItems' {_ngaliAddtional = _Coerce # pNgaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of node groups.
 ngaliAddtional :: Lens' NodeGroupAggregatedListItems (HashMap Text NodeGroupsScopedList)
@@ -18722,11 +18870,13 @@ instance ToJSON NodeGroupAggregatedListItems where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'instanceGroupListWarning' smart constructor.
-data InstanceGroupListWarning = InstanceGroupListWarning'
+data InstanceGroupListWarning =
+  InstanceGroupListWarning'
     { _iglwData    :: !(Maybe [InstanceGroupListWarningDataItem])
     , _iglwCode    :: !(Maybe InstanceGroupListWarningCode)
     , _iglwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupListWarning' with the minimum fields required to make a request.
 --
@@ -18740,11 +18890,8 @@ data InstanceGroupListWarning = InstanceGroupListWarning'
 instanceGroupListWarning
     :: InstanceGroupListWarning
 instanceGroupListWarning =
-    InstanceGroupListWarning'
-    { _iglwData = Nothing
-    , _iglwCode = Nothing
-    , _iglwMessage = Nothing
-    }
+  InstanceGroupListWarning'
+    {_iglwData = Nothing, _iglwCode = Nothing, _iglwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -18786,9 +18933,11 @@ instance ToJSON InstanceGroupListWarning where
 -- disks.
 --
 -- /See:/ 'attachedDiskInitializeParamsLabels' smart constructor.
-newtype AttachedDiskInitializeParamsLabels = AttachedDiskInitializeParamsLabels'
+newtype AttachedDiskInitializeParamsLabels =
+  AttachedDiskInitializeParamsLabels'
     { _adiplAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachedDiskInitializeParamsLabels' with the minimum fields required to make a request.
 --
@@ -18799,9 +18948,8 @@ attachedDiskInitializeParamsLabels
     :: HashMap Text Text -- ^ 'adiplAddtional'
     -> AttachedDiskInitializeParamsLabels
 attachedDiskInitializeParamsLabels pAdiplAddtional_ =
-    AttachedDiskInitializeParamsLabels'
-    { _adiplAddtional = _Coerce # pAdiplAddtional_
-    }
+  AttachedDiskInitializeParamsLabels'
+    {_adiplAddtional = _Coerce # pAdiplAddtional_}
 
 adiplAddtional :: Lens' AttachedDiskInitializeParamsLabels (HashMap Text Text)
 adiplAddtional
@@ -18825,7 +18973,8 @@ instance ToJSON AttachedDiskInitializeParamsLabels
 -- v1.zones ==)
 --
 -- /See:/ 'zone' smart constructor.
-data Zone = Zone'
+data Zone =
+  Zone'
     { _zStatus                :: !(Maybe ZoneStatus)
     , _zKind                  :: !Text
     , _zSelfLink              :: !(Maybe Text)
@@ -18836,7 +18985,8 @@ data Zone = Zone'
     , _zAvailableCPUPlatforms :: !(Maybe [Text])
     , _zDescription           :: !(Maybe Text)
     , _zDeprecated            :: !(Maybe DeprecationStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
 --
@@ -18864,7 +19014,7 @@ data Zone = Zone'
 zone
     :: Zone
 zone =
-    Zone'
+  Zone'
     { _zStatus = Nothing
     , _zKind = "compute#zone"
     , _zSelfLink = Nothing
@@ -18960,12 +19110,14 @@ instance ToJSON Zone where
 
 --
 -- /See:/ 'routerBGP' smart constructor.
-data RouterBGP = RouterBGP'
+data RouterBGP =
+  RouterBGP'
     { _rbASN                :: !(Maybe (Textual Word32))
     , _rbAdvertiseMode      :: !(Maybe RouterBGPAdvertiseMode)
     , _rbAdvertisedGroups   :: !(Maybe [RouterBGPAdvertisedGroupsItem])
     , _rbAdvertisedIPRanges :: !(Maybe [RouterAdvertisedIPRange])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterBGP' with the minimum fields required to make a request.
 --
@@ -18981,7 +19133,7 @@ data RouterBGP = RouterBGP'
 routerBGP
     :: RouterBGP
 routerBGP =
-    RouterBGP'
+  RouterBGP'
     { _rbASN = Nothing
     , _rbAdvertiseMode = Nothing
     , _rbAdvertisedGroups = Nothing
@@ -19048,11 +19200,13 @@ instance ToJSON RouterBGP where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'firewallListWarning' smart constructor.
-data FirewallListWarning = FirewallListWarning'
+data FirewallListWarning =
+  FirewallListWarning'
     { _flwData    :: !(Maybe [FirewallListWarningDataItem])
     , _flwCode    :: !(Maybe FirewallListWarningCode)
     , _flwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FirewallListWarning' with the minimum fields required to make a request.
 --
@@ -19066,11 +19220,8 @@ data FirewallListWarning = FirewallListWarning'
 firewallListWarning
     :: FirewallListWarning
 firewallListWarning =
-    FirewallListWarning'
-    { _flwData = Nothing
-    , _flwCode = Nothing
-    , _flwMessage = Nothing
-    }
+  FirewallListWarning'
+    {_flwData = Nothing, _flwCode = Nothing, _flwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -19107,10 +19258,12 @@ instance ToJSON FirewallListWarning where
 
 --
 -- /See:/ 'backendServicesScopedList' smart constructor.
-data BackendServicesScopedList = BackendServicesScopedList'
+data BackendServicesScopedList =
+  BackendServicesScopedList'
     { _bsslWarning         :: !(Maybe BackendServicesScopedListWarning)
     , _bsslBackendServices :: !(Maybe [BackendService])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServicesScopedList' with the minimum fields required to make a request.
 --
@@ -19122,10 +19275,8 @@ data BackendServicesScopedList = BackendServicesScopedList'
 backendServicesScopedList
     :: BackendServicesScopedList
 backendServicesScopedList =
-    BackendServicesScopedList'
-    { _bsslWarning = Nothing
-    , _bsslBackendServices = Nothing
-    }
+  BackendServicesScopedList'
+    {_bsslWarning = Nothing, _bsslBackendServices = Nothing}
 
 -- | Informational warning which replaces the list of backend services when
 -- the list is empty.
@@ -19158,9 +19309,11 @@ instance ToJSON BackendServicesScopedList where
 
 --
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
-newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest'
+newtype InstanceGroupManagersRecreateInstancesRequest =
+  InstanceGroupManagersRecreateInstancesRequest'
     { _igmrirInstances :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersRecreateInstancesRequest' with the minimum fields required to make a request.
 --
@@ -19170,9 +19323,7 @@ newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRec
 instanceGroupManagersRecreateInstancesRequest
     :: InstanceGroupManagersRecreateInstancesRequest
 instanceGroupManagersRecreateInstancesRequest =
-    InstanceGroupManagersRecreateInstancesRequest'
-    { _igmrirInstances = Nothing
-    }
+  InstanceGroupManagersRecreateInstancesRequest' {_igmrirInstances = Nothing}
 
 -- | The URLs of one or more instances to recreate. This can be a full URL or
 -- a partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -19184,7 +19335,8 @@ igmrirInstances
       . _Coerce
 
 instance FromJSON
-         InstanceGroupManagersRecreateInstancesRequest where
+           InstanceGroupManagersRecreateInstancesRequest
+         where
         parseJSON
           = withObject
               "InstanceGroupManagersRecreateInstancesRequest"
@@ -19193,7 +19345,8 @@ instance FromJSON
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
-         InstanceGroupManagersRecreateInstancesRequest where
+           InstanceGroupManagersRecreateInstancesRequest
+         where
         toJSON
           InstanceGroupManagersRecreateInstancesRequest'{..}
           = object
@@ -19201,9 +19354,11 @@ instance ToJSON
 
 --
 -- /See:/ 'targetSSLProxiesSetSSLCertificatesRequest' smart constructor.
-newtype TargetSSLProxiesSetSSLCertificatesRequest = TargetSSLProxiesSetSSLCertificatesRequest'
+newtype TargetSSLProxiesSetSSLCertificatesRequest =
+  TargetSSLProxiesSetSSLCertificatesRequest'
     { _tspsscrSSLCertificates :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxiesSetSSLCertificatesRequest' with the minimum fields required to make a request.
 --
@@ -19213,9 +19368,7 @@ newtype TargetSSLProxiesSetSSLCertificatesRequest = TargetSSLProxiesSetSSLCertif
 targetSSLProxiesSetSSLCertificatesRequest
     :: TargetSSLProxiesSetSSLCertificatesRequest
 targetSSLProxiesSetSSLCertificatesRequest =
-    TargetSSLProxiesSetSSLCertificatesRequest'
-    { _tspsscrSSLCertificates = Nothing
-    }
+  TargetSSLProxiesSetSSLCertificatesRequest' {_tspsscrSSLCertificates = Nothing}
 
 -- | New set of URLs to SslCertificate resources to associate with this
 -- TargetSslProxy. Currently exactly one ssl certificate must be specified.
@@ -19227,7 +19380,8 @@ tspsscrSSLCertificates
       . _Coerce
 
 instance FromJSON
-         TargetSSLProxiesSetSSLCertificatesRequest where
+           TargetSSLProxiesSetSSLCertificatesRequest
+         where
         parseJSON
           = withObject
               "TargetSSLProxiesSetSSLCertificatesRequest"
@@ -19236,7 +19390,8 @@ instance FromJSON
                    (o .:? "sslCertificates" .!= mempty))
 
 instance ToJSON
-         TargetSSLProxiesSetSSLCertificatesRequest where
+           TargetSSLProxiesSetSSLCertificatesRequest
+         where
         toJSON TargetSSLProxiesSetSSLCertificatesRequest'{..}
           = object
               (catMaybes
@@ -19245,11 +19400,13 @@ instance ToJSON
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'routerAggregatedListWarning' smart constructor.
-data RouterAggregatedListWarning = RouterAggregatedListWarning'
+data RouterAggregatedListWarning =
+  RouterAggregatedListWarning'
     { _rouData    :: !(Maybe [RouterAggregatedListWarningDataItem])
     , _rouCode    :: !(Maybe RouterAggregatedListWarningCode)
     , _rouMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -19263,11 +19420,8 @@ data RouterAggregatedListWarning = RouterAggregatedListWarning'
 routerAggregatedListWarning
     :: RouterAggregatedListWarning
 routerAggregatedListWarning =
-    RouterAggregatedListWarning'
-    { _rouData = Nothing
-    , _rouCode = Nothing
-    , _rouMessage = Nothing
-    }
+  RouterAggregatedListWarning'
+    {_rouData = Nothing, _rouCode = Nothing, _rouMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -19304,10 +19458,12 @@ instance ToJSON RouterAggregatedListWarning where
 
 --
 -- /See:/ 'instancesScopedList' smart constructor.
-data InstancesScopedList = InstancesScopedList'
+data InstancesScopedList =
+  InstancesScopedList'
     { _islWarning   :: !(Maybe InstancesScopedListWarning)
     , _islInstances :: !(Maybe [Instance])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesScopedList' with the minimum fields required to make a request.
 --
@@ -19319,10 +19475,7 @@ data InstancesScopedList = InstancesScopedList'
 instancesScopedList
     :: InstancesScopedList
 instancesScopedList =
-    InstancesScopedList'
-    { _islWarning = Nothing
-    , _islInstances = Nothing
-    }
+  InstancesScopedList' {_islWarning = Nothing, _islInstances = Nothing}
 
 -- | [Output Only] Informational warning which replaces the list of instances
 -- when the list is empty.
@@ -19354,9 +19507,11 @@ instance ToJSON InstancesScopedList where
 -- | A list of AcceleratorTypesScopedList resources.
 --
 -- /See:/ 'acceleratorTypeAggregatedListItems' smart constructor.
-newtype AcceleratorTypeAggregatedListItems = AcceleratorTypeAggregatedListItems'
+newtype AcceleratorTypeAggregatedListItems =
+  AcceleratorTypeAggregatedListItems'
     { _ataliAddtional :: HashMap Text AcceleratorTypesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypeAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -19367,9 +19522,8 @@ acceleratorTypeAggregatedListItems
     :: HashMap Text AcceleratorTypesScopedList -- ^ 'ataliAddtional'
     -> AcceleratorTypeAggregatedListItems
 acceleratorTypeAggregatedListItems pAtaliAddtional_ =
-    AcceleratorTypeAggregatedListItems'
-    { _ataliAddtional = _Coerce # pAtaliAddtional_
-    }
+  AcceleratorTypeAggregatedListItems'
+    {_ataliAddtional = _Coerce # pAtaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of accelerator
 -- types.
@@ -19393,10 +19547,12 @@ instance ToJSON AcceleratorTypeAggregatedListItems
 
 --
 -- /See:/ 'targetVPNGatewayAggregatedListWarningDataItem' smart constructor.
-data TargetVPNGatewayAggregatedListWarningDataItem = TargetVPNGatewayAggregatedListWarningDataItem'
+data TargetVPNGatewayAggregatedListWarningDataItem =
+  TargetVPNGatewayAggregatedListWarningDataItem'
     { _tvgalwdiValue :: !(Maybe Text)
     , _tvgalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewayAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -19408,10 +19564,8 @@ data TargetVPNGatewayAggregatedListWarningDataItem = TargetVPNGatewayAggregatedL
 targetVPNGatewayAggregatedListWarningDataItem
     :: TargetVPNGatewayAggregatedListWarningDataItem
 targetVPNGatewayAggregatedListWarningDataItem =
-    TargetVPNGatewayAggregatedListWarningDataItem'
-    { _tvgalwdiValue = Nothing
-    , _tvgalwdiKey = Nothing
-    }
+  TargetVPNGatewayAggregatedListWarningDataItem'
+    {_tvgalwdiValue = Nothing, _tvgalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tvgalwdiValue :: Lens' TargetVPNGatewayAggregatedListWarningDataItem (Maybe Text)
@@ -19431,7 +19585,8 @@ tvgalwdiKey
   = lens _tvgalwdiKey (\ s a -> s{_tvgalwdiKey = a})
 
 instance FromJSON
-         TargetVPNGatewayAggregatedListWarningDataItem where
+           TargetVPNGatewayAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "TargetVPNGatewayAggregatedListWarningDataItem"
@@ -19440,7 +19595,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         TargetVPNGatewayAggregatedListWarningDataItem where
+           TargetVPNGatewayAggregatedListWarningDataItem
+         where
         toJSON
           TargetVPNGatewayAggregatedListWarningDataItem'{..}
           = object
@@ -19455,9 +19611,11 @@ instance ToJSON
 -- global\/httpHealthChecks\/health-check
 --
 -- /See:/ 'healthCheckReference' smart constructor.
-newtype HealthCheckReference = HealthCheckReference'
+newtype HealthCheckReference =
+  HealthCheckReference'
     { _hcrHealthCheck :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthCheckReference' with the minimum fields required to make a request.
 --
@@ -19466,10 +19624,7 @@ newtype HealthCheckReference = HealthCheckReference'
 -- * 'hcrHealthCheck'
 healthCheckReference
     :: HealthCheckReference
-healthCheckReference =
-    HealthCheckReference'
-    { _hcrHealthCheck = Nothing
-    }
+healthCheckReference = HealthCheckReference' {_hcrHealthCheck = Nothing}
 
 hcrHealthCheck :: Lens' HealthCheckReference (Maybe Text)
 hcrHealthCheck
@@ -19490,9 +19645,11 @@ instance ToJSON HealthCheckReference where
 -- | A list of TargetInstance resources.
 --
 -- /See:/ 'targetInstanceAggregatedListItems' smart constructor.
-newtype TargetInstanceAggregatedListItems = TargetInstanceAggregatedListItems'
+newtype TargetInstanceAggregatedListItems =
+  TargetInstanceAggregatedListItems'
     { _tialiAddtional :: HashMap Text TargetInstancesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstanceAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -19503,9 +19660,8 @@ targetInstanceAggregatedListItems
     :: HashMap Text TargetInstancesScopedList -- ^ 'tialiAddtional'
     -> TargetInstanceAggregatedListItems
 targetInstanceAggregatedListItems pTialiAddtional_ =
-    TargetInstanceAggregatedListItems'
-    { _tialiAddtional = _Coerce # pTialiAddtional_
-    }
+  TargetInstanceAggregatedListItems'
+    {_tialiAddtional = _Coerce # pTialiAddtional_}
 
 -- | Name of the scope containing this set of target instances.
 tialiAddtional :: Lens' TargetInstanceAggregatedListItems (HashMap Text TargetInstancesScopedList)
@@ -19528,9 +19684,11 @@ instance ToJSON TargetInstanceAggregatedListItems
 
 --
 -- /See:/ 'targetHTTPSProxiesSetQuicOverrideRequest' smart constructor.
-newtype TargetHTTPSProxiesSetQuicOverrideRequest = TargetHTTPSProxiesSetQuicOverrideRequest'
+newtype TargetHTTPSProxiesSetQuicOverrideRequest =
+  TargetHTTPSProxiesSetQuicOverrideRequest'
     { _thpsqorQuicOverride :: Maybe TargetHTTPSProxiesSetQuicOverrideRequestQuicOverride
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxiesSetQuicOverrideRequest' with the minimum fields required to make a request.
 --
@@ -19540,9 +19698,7 @@ newtype TargetHTTPSProxiesSetQuicOverrideRequest = TargetHTTPSProxiesSetQuicOver
 targetHTTPSProxiesSetQuicOverrideRequest
     :: TargetHTTPSProxiesSetQuicOverrideRequest
 targetHTTPSProxiesSetQuicOverrideRequest =
-    TargetHTTPSProxiesSetQuicOverrideRequest'
-    { _thpsqorQuicOverride = Nothing
-    }
+  TargetHTTPSProxiesSetQuicOverrideRequest' {_thpsqorQuicOverride = Nothing}
 
 -- | QUIC policy for the TargetHttpsProxy resource.
 thpsqorQuicOverride :: Lens' TargetHTTPSProxiesSetQuicOverrideRequest (Maybe TargetHTTPSProxiesSetQuicOverrideRequestQuicOverride)
@@ -19551,7 +19707,8 @@ thpsqorQuicOverride
       (\ s a -> s{_thpsqorQuicOverride = a})
 
 instance FromJSON
-         TargetHTTPSProxiesSetQuicOverrideRequest where
+           TargetHTTPSProxiesSetQuicOverrideRequest
+         where
         parseJSON
           = withObject
               "TargetHTTPSProxiesSetQuicOverrideRequest"
@@ -19560,7 +19717,8 @@ instance FromJSON
                    (o .:? "quicOverride"))
 
 instance ToJSON
-         TargetHTTPSProxiesSetQuicOverrideRequest where
+           TargetHTTPSProxiesSetQuicOverrideRequest
+         where
         toJSON TargetHTTPSProxiesSetQuicOverrideRequest'{..}
           = object
               (catMaybes
@@ -19569,11 +19727,13 @@ instance ToJSON
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetSSLProxyListWarning' smart constructor.
-data TargetSSLProxyListWarning = TargetSSLProxyListWarning'
+data TargetSSLProxyListWarning =
+  TargetSSLProxyListWarning'
     { _tsplwData    :: !(Maybe [TargetSSLProxyListWarningDataItem])
     , _tsplwCode    :: !(Maybe TargetSSLProxyListWarningCode)
     , _tsplwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxyListWarning' with the minimum fields required to make a request.
 --
@@ -19587,11 +19747,8 @@ data TargetSSLProxyListWarning = TargetSSLProxyListWarning'
 targetSSLProxyListWarning
     :: TargetSSLProxyListWarning
 targetSSLProxyListWarning =
-    TargetSSLProxyListWarning'
-    { _tsplwData = Nothing
-    , _tsplwCode = Nothing
-    , _tsplwMessage = Nothing
-    }
+  TargetSSLProxyListWarning'
+    {_tsplwData = Nothing, _tsplwCode = Nothing, _tsplwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -19632,11 +19789,13 @@ instance ToJSON TargetSSLProxyListWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'instanceTemplateListWarning' smart constructor.
-data InstanceTemplateListWarning = InstanceTemplateListWarning'
+data InstanceTemplateListWarning =
+  InstanceTemplateListWarning'
     { _itlwData    :: !(Maybe [InstanceTemplateListWarningDataItem])
     , _itlwCode    :: !(Maybe InstanceTemplateListWarningCode)
     , _itlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceTemplateListWarning' with the minimum fields required to make a request.
 --
@@ -19650,11 +19809,8 @@ data InstanceTemplateListWarning = InstanceTemplateListWarning'
 instanceTemplateListWarning
     :: InstanceTemplateListWarning
 instanceTemplateListWarning =
-    InstanceTemplateListWarning'
-    { _itlwData = Nothing
-    , _itlwCode = Nothing
-    , _itlwMessage = Nothing
-    }
+  InstanceTemplateListWarning'
+    {_itlwData = Nothing, _itlwCode = Nothing, _itlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -19694,11 +19850,13 @@ instance ToJSON InstanceTemplateListWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'instanceListReferrersWarning' smart constructor.
-data InstanceListReferrersWarning = InstanceListReferrersWarning'
+data InstanceListReferrersWarning =
+  InstanceListReferrersWarning'
     { _ilrwData    :: !(Maybe [InstanceListReferrersWarningDataItem])
     , _ilrwCode    :: !(Maybe InstanceListReferrersWarningCode)
     , _ilrwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceListReferrersWarning' with the minimum fields required to make a request.
 --
@@ -19712,11 +19870,8 @@ data InstanceListReferrersWarning = InstanceListReferrersWarning'
 instanceListReferrersWarning
     :: InstanceListReferrersWarning
 instanceListReferrersWarning =
-    InstanceListReferrersWarning'
-    { _ilrwData = Nothing
-    , _ilrwCode = Nothing
-    , _ilrwMessage = Nothing
-    }
+  InstanceListReferrersWarning'
+    {_ilrwData = Nothing, _ilrwCode = Nothing, _ilrwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -19756,11 +19911,13 @@ instance ToJSON InstanceListReferrersWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'routeListWarning' smart constructor.
-data RouteListWarning = RouteListWarning'
+data RouteListWarning =
+  RouteListWarning'
     { _rlwlData    :: !(Maybe [RouteListWarningDataItem])
     , _rlwlCode    :: !(Maybe RouteListWarningCode)
     , _rlwlMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouteListWarning' with the minimum fields required to make a request.
 --
@@ -19774,11 +19931,8 @@ data RouteListWarning = RouteListWarning'
 routeListWarning
     :: RouteListWarning
 routeListWarning =
-    RouteListWarning'
-    { _rlwlData = Nothing
-    , _rlwlCode = Nothing
-    , _rlwlMessage = Nothing
-    }
+  RouteListWarning'
+    {_rlwlData = Nothing, _rlwlCode = Nothing, _rlwlMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -19817,14 +19971,16 @@ instance ToJSON RouteListWarning where
 
 --
 -- /See:/ 'instanceGroupAggregatedList' smart constructor.
-data InstanceGroupAggregatedList = InstanceGroupAggregatedList'
+data InstanceGroupAggregatedList =
+  InstanceGroupAggregatedList'
     { _igalNextPageToken :: !(Maybe Text)
     , _igalKind          :: !Text
     , _igalItems         :: !(Maybe InstanceGroupAggregatedListItems)
     , _igalSelfLink      :: !(Maybe Text)
     , _igalWarning       :: !(Maybe InstanceGroupAggregatedListWarning)
     , _igalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupAggregatedList' with the minimum fields required to make a request.
 --
@@ -19844,7 +20000,7 @@ data InstanceGroupAggregatedList = InstanceGroupAggregatedList'
 instanceGroupAggregatedList
     :: InstanceGroupAggregatedList
 instanceGroupAggregatedList =
-    InstanceGroupAggregatedList'
+  InstanceGroupAggregatedList'
     { _igalNextPageToken = Nothing
     , _igalKind = "compute#instanceGroupAggregatedList"
     , _igalItems = Nothing
@@ -19929,7 +20085,8 @@ instance ToJSON InstanceGroupAggregatedList where
 -- resource_for v1.routes ==)
 --
 -- /See:/ 'route' smart constructor.
-data Route = Route'
+data Route =
+  Route'
     { _rrNextHopPeering    :: !(Maybe Text)
     , _rrPriority          :: !(Maybe (Textual Word32))
     , _rrKind              :: !Text
@@ -19947,7 +20104,8 @@ data Route = Route'
     , _rrDescription       :: !(Maybe Text)
     , _rrTags              :: !(Maybe [Text])
     , _rrNextHopInstance   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Route' with the minimum fields required to make a request.
 --
@@ -19989,7 +20147,7 @@ data Route = Route'
 route
     :: Route
 route =
-    Route'
+  Route'
     { _rrNextHopPeering = Nothing
     , _rrPriority = Nothing
     , _rrKind = "compute#route"
@@ -20171,10 +20329,12 @@ instance ToJSON Route where
 
 --
 -- /See:/ 'targetVPNGatewaysScopedListWarningDataItem' smart constructor.
-data TargetVPNGatewaysScopedListWarningDataItem = TargetVPNGatewaysScopedListWarningDataItem'
+data TargetVPNGatewaysScopedListWarningDataItem =
+  TargetVPNGatewaysScopedListWarningDataItem'
     { _tvgslwdiValue :: !(Maybe Text)
     , _tvgslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -20186,10 +20346,8 @@ data TargetVPNGatewaysScopedListWarningDataItem = TargetVPNGatewaysScopedListWar
 targetVPNGatewaysScopedListWarningDataItem
     :: TargetVPNGatewaysScopedListWarningDataItem
 targetVPNGatewaysScopedListWarningDataItem =
-    TargetVPNGatewaysScopedListWarningDataItem'
-    { _tvgslwdiValue = Nothing
-    , _tvgslwdiKey = Nothing
-    }
+  TargetVPNGatewaysScopedListWarningDataItem'
+    {_tvgslwdiValue = Nothing, _tvgslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tvgslwdiValue :: Lens' TargetVPNGatewaysScopedListWarningDataItem (Maybe Text)
@@ -20209,7 +20367,8 @@ tvgslwdiKey
   = lens _tvgslwdiKey (\ s a -> s{_tvgslwdiKey = a})
 
 instance FromJSON
-         TargetVPNGatewaysScopedListWarningDataItem where
+           TargetVPNGatewaysScopedListWarningDataItem
+         where
         parseJSON
           = withObject
               "TargetVPNGatewaysScopedListWarningDataItem"
@@ -20218,7 +20377,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         TargetVPNGatewaysScopedListWarningDataItem where
+           TargetVPNGatewaysScopedListWarningDataItem
+         where
         toJSON
           TargetVPNGatewaysScopedListWarningDataItem'{..}
           = object
@@ -20231,11 +20391,13 @@ instance ToJSON
 -- Region.
 --
 -- /See:/ 'interconnectLocationRegionInfo' smart constructor.
-data InterconnectLocationRegionInfo = InterconnectLocationRegionInfo'
+data InterconnectLocationRegionInfo =
+  InterconnectLocationRegionInfo'
     { _ilriLocationPresence :: !(Maybe InterconnectLocationRegionInfoLocationPresence)
     , _ilriExpectedRttMs    :: !(Maybe (Textual Int64))
     , _ilriRegion           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectLocationRegionInfo' with the minimum fields required to make a request.
 --
@@ -20249,7 +20411,7 @@ data InterconnectLocationRegionInfo = InterconnectLocationRegionInfo'
 interconnectLocationRegionInfo
     :: InterconnectLocationRegionInfo
 interconnectLocationRegionInfo =
-    InterconnectLocationRegionInfo'
+  InterconnectLocationRegionInfo'
     { _ilriLocationPresence = Nothing
     , _ilriExpectedRttMs = Nothing
     , _ilriRegion = Nothing
@@ -20294,9 +20456,11 @@ instance ToJSON InterconnectLocationRegionInfo where
 
 --
 -- /See:/ 'targetHTTPSProxiesSetSSLCertificatesRequest' smart constructor.
-newtype TargetHTTPSProxiesSetSSLCertificatesRequest = TargetHTTPSProxiesSetSSLCertificatesRequest'
+newtype TargetHTTPSProxiesSetSSLCertificatesRequest =
+  TargetHTTPSProxiesSetSSLCertificatesRequest'
     { _thpsscrSSLCertificates :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxiesSetSSLCertificatesRequest' with the minimum fields required to make a request.
 --
@@ -20306,9 +20470,8 @@ newtype TargetHTTPSProxiesSetSSLCertificatesRequest = TargetHTTPSProxiesSetSSLCe
 targetHTTPSProxiesSetSSLCertificatesRequest
     :: TargetHTTPSProxiesSetSSLCertificatesRequest
 targetHTTPSProxiesSetSSLCertificatesRequest =
-    TargetHTTPSProxiesSetSSLCertificatesRequest'
-    { _thpsscrSSLCertificates = Nothing
-    }
+  TargetHTTPSProxiesSetSSLCertificatesRequest'
+    {_thpsscrSSLCertificates = Nothing}
 
 -- | New set of SslCertificate resources to associate with this
 -- TargetHttpsProxy resource. Currently exactly one SslCertificate resource
@@ -20321,7 +20484,8 @@ thpsscrSSLCertificates
       . _Coerce
 
 instance FromJSON
-         TargetHTTPSProxiesSetSSLCertificatesRequest where
+           TargetHTTPSProxiesSetSSLCertificatesRequest
+         where
         parseJSON
           = withObject
               "TargetHTTPSProxiesSetSSLCertificatesRequest"
@@ -20330,7 +20494,8 @@ instance FromJSON
                    (o .:? "sslCertificates" .!= mempty))
 
 instance ToJSON
-         TargetHTTPSProxiesSetSSLCertificatesRequest where
+           TargetHTTPSProxiesSetSSLCertificatesRequest
+         where
         toJSON
           TargetHTTPSProxiesSetSSLCertificatesRequest'{..}
           = object
@@ -20341,7 +20506,8 @@ instance ToJSON
 -- ==) (== resource_for v1.instanceTemplates ==)
 --
 -- /See:/ 'instanceTemplate' smart constructor.
-data InstanceTemplate = InstanceTemplate'
+data InstanceTemplate =
+  InstanceTemplate'
     { _itSourceInstance       :: !(Maybe Text)
     , _itKind                 :: !Text
     , _itSelfLink             :: !(Maybe Text)
@@ -20351,7 +20517,8 @@ data InstanceTemplate = InstanceTemplate'
     , _itSourceInstanceParams :: !(Maybe SourceInstanceParams)
     , _itDescription          :: !(Maybe Text)
     , _itProperties           :: !(Maybe InstanceProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceTemplate' with the minimum fields required to make a request.
 --
@@ -20377,7 +20544,7 @@ data InstanceTemplate = InstanceTemplate'
 instanceTemplate
     :: InstanceTemplate
 instanceTemplate =
-    InstanceTemplate'
+  InstanceTemplate'
     { _itSourceInstance = Nothing
     , _itKind = "compute#instanceTemplate"
     , _itSelfLink = Nothing
@@ -20485,10 +20652,12 @@ instance ToJSON InstanceTemplate where
 -- | Service resource (a.k.a service project) ID.
 --
 -- /See:/ 'xpnResourceId' smart constructor.
-data XpnResourceId = XpnResourceId'
+data XpnResourceId =
+  XpnResourceId'
     { _xriId   :: !(Maybe Text)
     , _xriType :: !(Maybe XpnResourceIdType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'XpnResourceId' with the minimum fields required to make a request.
 --
@@ -20499,11 +20668,7 @@ data XpnResourceId = XpnResourceId'
 -- * 'xriType'
 xpnResourceId
     :: XpnResourceId
-xpnResourceId =
-    XpnResourceId'
-    { _xriId = Nothing
-    , _xriType = Nothing
-    }
+xpnResourceId = XpnResourceId' {_xriId = Nothing, _xriType = Nothing}
 
 -- | The ID of the service resource. In the case of projects, this field
 -- supports project id (e.g., my-project-123) and project number (e.g.
@@ -20530,14 +20695,16 @@ instance ToJSON XpnResourceId where
 -- | Contains a list of Router resources.
 --
 -- /See:/ 'routerList' smart constructor.
-data RouterList = RouterList'
+data RouterList =
+  RouterList'
     { _rllNextPageToken :: !(Maybe Text)
     , _rllKind          :: !Text
     , _rllItems         :: !(Maybe [Router])
     , _rllSelfLink      :: !(Maybe Text)
     , _rllWarning       :: !(Maybe RouterListWarning)
     , _rllId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterList' with the minimum fields required to make a request.
 --
@@ -20557,7 +20724,7 @@ data RouterList = RouterList'
 routerList
     :: RouterList
 routerList =
-    RouterList'
+  RouterList'
     { _rllNextPageToken = Nothing
     , _rllKind = "compute#routerList"
     , _rllItems = Nothing
@@ -20629,7 +20796,8 @@ instance ToJSON RouterList where
 -- v1.targetSslProxies ==)
 --
 -- /See:/ 'targetSSLProxy' smart constructor.
-data TargetSSLProxy = TargetSSLProxy'
+data TargetSSLProxy =
+  TargetSSLProxy'
     { _tspSSLPolicy         :: !(Maybe Text)
     , _tspSSLCertificates   :: !(Maybe [Text])
     , _tspService           :: !(Maybe Text)
@@ -20640,7 +20808,8 @@ data TargetSSLProxy = TargetSSLProxy'
     , _tspId                :: !(Maybe (Textual Word64))
     , _tspProxyHeader       :: !(Maybe TargetSSLProxyProxyHeader)
     , _tspDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxy' with the minimum fields required to make a request.
 --
@@ -20668,7 +20837,7 @@ data TargetSSLProxy = TargetSSLProxy'
 targetSSLProxy
     :: TargetSSLProxy
 targetSSLProxy =
-    TargetSSLProxy'
+  TargetSSLProxy'
     { _tspSSLPolicy = Nothing
     , _tspSSLCertificates = Nothing
     , _tspService = Nothing
@@ -20784,11 +20953,13 @@ instance ToJSON TargetSSLProxy where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'sslCertificateListWarning' smart constructor.
-data SSLCertificateListWarning = SSLCertificateListWarning'
+data SSLCertificateListWarning =
+  SSLCertificateListWarning'
     { _sclwData    :: !(Maybe [SSLCertificateListWarningDataItem])
     , _sclwCode    :: !(Maybe SSLCertificateListWarningCode)
     , _sclwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLCertificateListWarning' with the minimum fields required to make a request.
 --
@@ -20802,11 +20973,8 @@ data SSLCertificateListWarning = SSLCertificateListWarning'
 sslCertificateListWarning
     :: SSLCertificateListWarning
 sslCertificateListWarning =
-    SSLCertificateListWarning'
-    { _sclwData = Nothing
-    , _sclwCode = Nothing
-    , _sclwMessage = Nothing
-    }
+  SSLCertificateListWarning'
+    {_sclwData = Nothing, _sclwCode = Nothing, _sclwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -20845,10 +21013,12 @@ instance ToJSON SSLCertificateListWarning where
 
 --
 -- /See:/ 'snapshotListWarningDataItem' smart constructor.
-data SnapshotListWarningDataItem = SnapshotListWarningDataItem'
+data SnapshotListWarningDataItem =
+  SnapshotListWarningDataItem'
     { _slwdiValue :: !(Maybe Text)
     , _slwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SnapshotListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -20860,10 +21030,7 @@ data SnapshotListWarningDataItem = SnapshotListWarningDataItem'
 snapshotListWarningDataItem
     :: SnapshotListWarningDataItem
 snapshotListWarningDataItem =
-    SnapshotListWarningDataItem'
-    { _slwdiValue = Nothing
-    , _slwdiKey = Nothing
-    }
+  SnapshotListWarningDataItem' {_slwdiValue = Nothing, _slwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 slwdiValue :: Lens' SnapshotListWarningDataItem (Maybe Text)
@@ -20898,7 +21065,8 @@ instance ToJSON SnapshotListWarningDataItem where
 -- beta.targetVpnGateways ==) (== resource_for v1.targetVpnGateways ==)
 --
 -- /See:/ 'targetVPNGateway' smart constructor.
-data TargetVPNGateway = TargetVPNGateway'
+data TargetVPNGateway =
+  TargetVPNGateway'
     { _tvgStatus            :: !(Maybe TargetVPNGatewayStatus)
     , _tvgKind              :: !Text
     , _tvgNetwork           :: !(Maybe Text)
@@ -20910,7 +21078,8 @@ data TargetVPNGateway = TargetVPNGateway'
     , _tvgTunnels           :: !(Maybe [Text])
     , _tvgDescription       :: !(Maybe Text)
     , _tvgForwardingRules   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGateway' with the minimum fields required to make a request.
 --
@@ -20940,7 +21109,7 @@ data TargetVPNGateway = TargetVPNGateway'
 targetVPNGateway
     :: TargetVPNGateway
 targetVPNGateway =
-    TargetVPNGateway'
+  TargetVPNGateway'
     { _tvgStatus = Nothing
     , _tvgKind = "compute#targetVpnGateway"
     , _tvgNetwork = Nothing
@@ -21067,10 +21236,12 @@ instance ToJSON TargetVPNGateway where
 -- more of these).
 --
 -- /See:/ 'resourceCommitment' smart constructor.
-data ResourceCommitment = ResourceCommitment'
+data ResourceCommitment =
+  ResourceCommitment'
     { _rcAmount :: !(Maybe (Textual Int64))
     , _rcType   :: !(Maybe ResourceCommitmentType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourceCommitment' with the minimum fields required to make a request.
 --
@@ -21082,10 +21253,7 @@ data ResourceCommitment = ResourceCommitment'
 resourceCommitment
     :: ResourceCommitment
 resourceCommitment =
-    ResourceCommitment'
-    { _rcAmount = Nothing
-    , _rcType = Nothing
-    }
+  ResourceCommitment' {_rcAmount = Nothing, _rcType = Nothing}
 
 -- | The amount of the resource purchased (in a type-dependent unit, such as
 -- bytes). For vCPUs, this can just be an integer. For memory, this must be
@@ -21118,12 +21286,14 @@ instance ToJSON ResourceCommitment where
 -- | Identity-Aware Proxy
 --
 -- /See:/ 'backendServiceIAP' smart constructor.
-data BackendServiceIAP = BackendServiceIAP'
+data BackendServiceIAP =
+  BackendServiceIAP'
     { _bsiapEnabled                  :: !(Maybe Bool)
     , _bsiapOAuth2ClientSecretSha256 :: !(Maybe Text)
     , _bsiapOAuth2ClientSecret       :: !(Maybe Text)
     , _bsiapOAuth2ClientId           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceIAP' with the minimum fields required to make a request.
 --
@@ -21139,7 +21309,7 @@ data BackendServiceIAP = BackendServiceIAP'
 backendServiceIAP
     :: BackendServiceIAP
 backendServiceIAP =
-    BackendServiceIAP'
+  BackendServiceIAP'
     { _bsiapEnabled = Nothing
     , _bsiapOAuth2ClientSecretSha256 = Nothing
     , _bsiapOAuth2ClientSecret = Nothing
@@ -21191,11 +21361,13 @@ instance ToJSON BackendServiceIAP where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetVPNGatewayListWarning' smart constructor.
-data TargetVPNGatewayListWarning = TargetVPNGatewayListWarning'
+data TargetVPNGatewayListWarning =
+  TargetVPNGatewayListWarning'
     { _tvglwData    :: !(Maybe [TargetVPNGatewayListWarningDataItem])
     , _tvglwCode    :: !(Maybe TargetVPNGatewayListWarningCode)
     , _tvglwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewayListWarning' with the minimum fields required to make a request.
 --
@@ -21209,11 +21381,8 @@ data TargetVPNGatewayListWarning = TargetVPNGatewayListWarning'
 targetVPNGatewayListWarning
     :: TargetVPNGatewayListWarning
 targetVPNGatewayListWarning =
-    TargetVPNGatewayListWarning'
-    { _tvglwData = Nothing
-    , _tvglwCode = Nothing
-    , _tvglwMessage = Nothing
-    }
+  TargetVPNGatewayListWarning'
+    {_tvglwData = Nothing, _tvglwCode = Nothing, _tvglwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -21253,10 +21422,12 @@ instance ToJSON TargetVPNGatewayListWarning where
 
 --
 -- /See:/ 'vMEndpointNATMAppingsListWarningDataItem' smart constructor.
-data VMEndpointNATMAppingsListWarningDataItem = VMEndpointNATMAppingsListWarningDataItem'
+data VMEndpointNATMAppingsListWarningDataItem =
+  VMEndpointNATMAppingsListWarningDataItem'
     { _vmenatmalwdiValue :: !(Maybe Text)
     , _vmenatmalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VMEndpointNATMAppingsListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -21268,10 +21439,8 @@ data VMEndpointNATMAppingsListWarningDataItem = VMEndpointNATMAppingsListWarning
 vMEndpointNATMAppingsListWarningDataItem
     :: VMEndpointNATMAppingsListWarningDataItem
 vMEndpointNATMAppingsListWarningDataItem =
-    VMEndpointNATMAppingsListWarningDataItem'
-    { _vmenatmalwdiValue = Nothing
-    , _vmenatmalwdiKey = Nothing
-    }
+  VMEndpointNATMAppingsListWarningDataItem'
+    {_vmenatmalwdiValue = Nothing, _vmenatmalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 vmenatmalwdiValue :: Lens' VMEndpointNATMAppingsListWarningDataItem (Maybe Text)
@@ -21292,7 +21461,8 @@ vmenatmalwdiKey
       (\ s a -> s{_vmenatmalwdiKey = a})
 
 instance FromJSON
-         VMEndpointNATMAppingsListWarningDataItem where
+           VMEndpointNATMAppingsListWarningDataItem
+         where
         parseJSON
           = withObject
               "VMEndpointNATMAppingsListWarningDataItem"
@@ -21301,7 +21471,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         VMEndpointNATMAppingsListWarningDataItem where
+           VMEndpointNATMAppingsListWarningDataItem
+         where
         toJSON VMEndpointNATMAppingsListWarningDataItem'{..}
           = object
               (catMaybes
@@ -21310,9 +21481,11 @@ instance ToJSON
 
 --
 -- /See:/ 'urlMapsValidateResponse' smart constructor.
-newtype URLMapsValidateResponse = URLMapsValidateResponse'
+newtype URLMapsValidateResponse =
+  URLMapsValidateResponse'
     { _umvrResult :: Maybe URLMapValidationResult
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapsValidateResponse' with the minimum fields required to make a request.
 --
@@ -21321,10 +21494,7 @@ newtype URLMapsValidateResponse = URLMapsValidateResponse'
 -- * 'umvrResult'
 urlMapsValidateResponse
     :: URLMapsValidateResponse
-urlMapsValidateResponse =
-    URLMapsValidateResponse'
-    { _umvrResult = Nothing
-    }
+urlMapsValidateResponse = URLMapsValidateResponse' {_umvrResult = Nothing}
 
 umvrResult :: Lens' URLMapsValidateResponse (Maybe URLMapValidationResult)
 umvrResult
@@ -21346,7 +21516,8 @@ instance ToJSON URLMapsValidateResponse where
 -- resource_for v1.sslCertificates ==)
 --
 -- /See:/ 'sslCertificate' smart constructor.
-data SSLCertificate = SSLCertificate'
+data SSLCertificate =
+  SSLCertificate'
     { _scPrivateKey        :: !(Maybe Text)
     , _scKind              :: !Text
     , _scSelfLink          :: !(Maybe Text)
@@ -21355,7 +21526,8 @@ data SSLCertificate = SSLCertificate'
     , _scId                :: !(Maybe (Textual Word64))
     , _scCertificate       :: !(Maybe Text)
     , _scDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLCertificate' with the minimum fields required to make a request.
 --
@@ -21379,7 +21551,7 @@ data SSLCertificate = SSLCertificate'
 sslCertificate
     :: SSLCertificate
 sslCertificate =
-    SSLCertificate'
+  SSLCertificate'
     { _scPrivateKey = Nothing
     , _scKind = "compute#sslCertificate"
     , _scSelfLink = Nothing
@@ -21473,7 +21645,8 @@ instance ToJSON SSLCertificate where
 
 --
 -- /See:/ 'routerStatusBGPPeerStatus' smart constructor.
-data RouterStatusBGPPeerStatus = RouterStatusBGPPeerStatus'
+data RouterStatusBGPPeerStatus =
+  RouterStatusBGPPeerStatus'
     { _rsbpsStatus           :: !(Maybe RouterStatusBGPPeerStatusStatus)
     , _rsbpsIPAddress        :: !(Maybe Text)
     , _rsbpsState            :: !(Maybe Text)
@@ -21484,7 +21657,8 @@ data RouterStatusBGPPeerStatus = RouterStatusBGPPeerStatus'
     , _rsbpsUptimeSeconds    :: !(Maybe Text)
     , _rsbpsAdvertisedRoutes :: !(Maybe [Route])
     , _rsbpsLinkedVPNTunnel  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterStatusBGPPeerStatus' with the minimum fields required to make a request.
 --
@@ -21512,7 +21686,7 @@ data RouterStatusBGPPeerStatus = RouterStatusBGPPeerStatus'
 routerStatusBGPPeerStatus
     :: RouterStatusBGPPeerStatus
 routerStatusBGPPeerStatus =
-    RouterStatusBGPPeerStatus'
+  RouterStatusBGPPeerStatus'
     { _rsbpsStatus = Nothing
     , _rsbpsIPAddress = Nothing
     , _rsbpsState = Nothing
@@ -21617,9 +21791,11 @@ instance ToJSON RouterStatusBGPPeerStatus where
 
 --
 -- /See:/ 'urlMapReference' smart constructor.
-newtype URLMapReference = URLMapReference'
+newtype URLMapReference =
+  URLMapReference'
     { _umrURLMap :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapReference' with the minimum fields required to make a request.
 --
@@ -21628,10 +21804,7 @@ newtype URLMapReference = URLMapReference'
 -- * 'umrURLMap'
 urlMapReference
     :: URLMapReference
-urlMapReference =
-    URLMapReference'
-    { _umrURLMap = Nothing
-    }
+urlMapReference = URLMapReference' {_umrURLMap = Nothing}
 
 umrURLMap :: Lens' URLMapReference (Maybe Text)
 umrURLMap
@@ -21648,9 +21821,11 @@ instance ToJSON URLMapReference where
 
 --
 -- /See:/ 'targetPoolsAddHealthCheckRequest' smart constructor.
-newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest'
+newtype TargetPoolsAddHealthCheckRequest =
+  TargetPoolsAddHealthCheckRequest'
     { _tpahcrHealthChecks :: Maybe [HealthCheckReference]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsAddHealthCheckRequest' with the minimum fields required to make a request.
 --
@@ -21660,9 +21835,7 @@ newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest'
 targetPoolsAddHealthCheckRequest
     :: TargetPoolsAddHealthCheckRequest
 targetPoolsAddHealthCheckRequest =
-    TargetPoolsAddHealthCheckRequest'
-    { _tpahcrHealthChecks = Nothing
-    }
+  TargetPoolsAddHealthCheckRequest' {_tpahcrHealthChecks = Nothing}
 
 -- | The HttpHealthCheck to add to the target pool.
 tpahcrHealthChecks :: Lens' TargetPoolsAddHealthCheckRequest [HealthCheckReference]
@@ -21689,10 +21862,12 @@ instance ToJSON TargetPoolsAddHealthCheckRequest
 
 --
 -- /See:/ 'commitmentsScopedList' smart constructor.
-data CommitmentsScopedList = CommitmentsScopedList'
+data CommitmentsScopedList =
+  CommitmentsScopedList'
     { _cslWarning     :: !(Maybe CommitmentsScopedListWarning)
     , _cslCommitments :: !(Maybe [Commitment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentsScopedList' with the minimum fields required to make a request.
 --
@@ -21704,10 +21879,7 @@ data CommitmentsScopedList = CommitmentsScopedList'
 commitmentsScopedList
     :: CommitmentsScopedList
 commitmentsScopedList =
-    CommitmentsScopedList'
-    { _cslWarning = Nothing
-    , _cslCommitments = Nothing
-    }
+  CommitmentsScopedList' {_cslWarning = Nothing, _cslCommitments = Nothing}
 
 -- | [Output Only] Informational warning which replaces the list of
 -- commitments when the list is empty.
@@ -21741,9 +21913,11 @@ instance ToJSON CommitmentsScopedList where
 -- | A list of DisksScopedList resources.
 --
 -- /See:/ 'diskAggregatedListItems' smart constructor.
-newtype DiskAggregatedListItems = DiskAggregatedListItems'
+newtype DiskAggregatedListItems =
+  DiskAggregatedListItems'
     { _daliAddtional :: HashMap Text DisksScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -21754,9 +21928,7 @@ diskAggregatedListItems
     :: HashMap Text DisksScopedList -- ^ 'daliAddtional'
     -> DiskAggregatedListItems
 diskAggregatedListItems pDaliAddtional_ =
-    DiskAggregatedListItems'
-    { _daliAddtional = _Coerce # pDaliAddtional_
-    }
+  DiskAggregatedListItems' {_daliAddtional = _Coerce # pDaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of disks.
 daliAddtional :: Lens' DiskAggregatedListItems (HashMap Text DisksScopedList)
@@ -21777,11 +21949,13 @@ instance ToJSON DiskAggregatedListItems where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetVPNGatewayAggregatedListWarning' smart constructor.
-data TargetVPNGatewayAggregatedListWarning = TargetVPNGatewayAggregatedListWarning'
+data TargetVPNGatewayAggregatedListWarning =
+  TargetVPNGatewayAggregatedListWarning'
     { _tvgalwData    :: !(Maybe [TargetVPNGatewayAggregatedListWarningDataItem])
     , _tvgalwCode    :: !(Maybe TargetVPNGatewayAggregatedListWarningCode)
     , _tvgalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewayAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -21795,11 +21969,8 @@ data TargetVPNGatewayAggregatedListWarning = TargetVPNGatewayAggregatedListWarni
 targetVPNGatewayAggregatedListWarning
     :: TargetVPNGatewayAggregatedListWarning
 targetVPNGatewayAggregatedListWarning =
-    TargetVPNGatewayAggregatedListWarning'
-    { _tvgalwData = Nothing
-    , _tvgalwCode = Nothing
-    , _tvgalwMessage = Nothing
-    }
+  TargetVPNGatewayAggregatedListWarning'
+    {_tvgalwData = Nothing, _tvgalwCode = Nothing, _tvgalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -21823,7 +21994,8 @@ tvgalwMessage
       (\ s a -> s{_tvgalwMessage = a})
 
 instance FromJSON
-         TargetVPNGatewayAggregatedListWarning where
+           TargetVPNGatewayAggregatedListWarning
+         where
         parseJSON
           = withObject "TargetVPNGatewayAggregatedListWarning"
               (\ o ->
@@ -21844,10 +22016,12 @@ instance ToJSON TargetVPNGatewayAggregatedListWarning
 -- report. Contains bucket_name and report_name prefix.
 --
 -- /See:/ 'usageExportLocation' smart constructor.
-data UsageExportLocation = UsageExportLocation'
+data UsageExportLocation =
+  UsageExportLocation'
     { _uelReportNamePrefix :: !(Maybe Text)
     , _uelBucketName       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsageExportLocation' with the minimum fields required to make a request.
 --
@@ -21859,10 +22033,8 @@ data UsageExportLocation = UsageExportLocation'
 usageExportLocation
     :: UsageExportLocation
 usageExportLocation =
-    UsageExportLocation'
-    { _uelReportNamePrefix = Nothing
-    , _uelBucketName = Nothing
-    }
+  UsageExportLocation'
+    {_uelReportNamePrefix = Nothing, _uelBucketName = Nothing}
 
 -- | An optional prefix for the name of the usage report object stored in
 -- bucketName. If not supplied, defaults to usage. The report is stored as
@@ -21902,14 +22074,16 @@ instance ToJSON UsageExportLocation where
 -- | Contains a list of zone resources.
 --
 -- /See:/ 'zoneList' smart constructor.
-data ZoneList = ZoneList'
+data ZoneList =
+  ZoneList'
     { _zlNextPageToken :: !(Maybe Text)
     , _zlKind          :: !Text
     , _zlItems         :: !(Maybe [Zone])
     , _zlSelfLink      :: !(Maybe Text)
     , _zlWarning       :: !(Maybe ZoneListWarning)
     , _zlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ZoneList' with the minimum fields required to make a request.
 --
@@ -21929,7 +22103,7 @@ data ZoneList = ZoneList'
 zoneList
     :: ZoneList
 zoneList =
-    ZoneList'
+  ZoneList'
     { _zlNextPageToken = Nothing
     , _zlKind = "compute#zoneList"
     , _zlItems = Nothing
@@ -21995,10 +22169,12 @@ instance ToJSON ZoneList where
 
 --
 -- /See:/ 'sslCertificateListWarningDataItem' smart constructor.
-data SSLCertificateListWarningDataItem = SSLCertificateListWarningDataItem'
+data SSLCertificateListWarningDataItem =
+  SSLCertificateListWarningDataItem'
     { _sclwdiValue :: !(Maybe Text)
     , _sclwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLCertificateListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -22010,10 +22186,8 @@ data SSLCertificateListWarningDataItem = SSLCertificateListWarningDataItem'
 sslCertificateListWarningDataItem
     :: SSLCertificateListWarningDataItem
 sslCertificateListWarningDataItem =
-    SSLCertificateListWarningDataItem'
-    { _sclwdiValue = Nothing
-    , _sclwdiKey = Nothing
-    }
+  SSLCertificateListWarningDataItem'
+    {_sclwdiValue = Nothing, _sclwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 sclwdiValue :: Lens' SSLCertificateListWarningDataItem (Maybe Text)
@@ -22049,9 +22223,11 @@ instance ToJSON SSLCertificateListWarningDataItem
 
 --
 -- /See:/ 'distributionPolicyZoneConfiguration' smart constructor.
-newtype DistributionPolicyZoneConfiguration = DistributionPolicyZoneConfiguration'
+newtype DistributionPolicyZoneConfiguration =
+  DistributionPolicyZoneConfiguration'
     { _dpzcZone :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DistributionPolicyZoneConfiguration' with the minimum fields required to make a request.
 --
@@ -22061,9 +22237,7 @@ newtype DistributionPolicyZoneConfiguration = DistributionPolicyZoneConfiguratio
 distributionPolicyZoneConfiguration
     :: DistributionPolicyZoneConfiguration
 distributionPolicyZoneConfiguration =
-    DistributionPolicyZoneConfiguration'
-    { _dpzcZone = Nothing
-    }
+  DistributionPolicyZoneConfiguration' {_dpzcZone = Nothing}
 
 -- | The URL of the zone. The zone must exist in the region where the managed
 -- instance group is located.
@@ -22085,9 +22259,11 @@ instance ToJSON DistributionPolicyZoneConfiguration
 
 --
 -- /See:/ 'targetTCPProxiesSetProxyHeaderRequest' smart constructor.
-newtype TargetTCPProxiesSetProxyHeaderRequest = TargetTCPProxiesSetProxyHeaderRequest'
+newtype TargetTCPProxiesSetProxyHeaderRequest =
+  TargetTCPProxiesSetProxyHeaderRequest'
     { _ttpsphrProxyHeader :: Maybe TargetTCPProxiesSetProxyHeaderRequestProxyHeader
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxiesSetProxyHeaderRequest' with the minimum fields required to make a request.
 --
@@ -22097,9 +22273,7 @@ newtype TargetTCPProxiesSetProxyHeaderRequest = TargetTCPProxiesSetProxyHeaderRe
 targetTCPProxiesSetProxyHeaderRequest
     :: TargetTCPProxiesSetProxyHeaderRequest
 targetTCPProxiesSetProxyHeaderRequest =
-    TargetTCPProxiesSetProxyHeaderRequest'
-    { _ttpsphrProxyHeader = Nothing
-    }
+  TargetTCPProxiesSetProxyHeaderRequest' {_ttpsphrProxyHeader = Nothing}
 
 -- | The new type of proxy header to append before sending data to the
 -- backend. NONE or PROXY_V1 are allowed.
@@ -22109,7 +22283,8 @@ ttpsphrProxyHeader
       (\ s a -> s{_ttpsphrProxyHeader = a})
 
 instance FromJSON
-         TargetTCPProxiesSetProxyHeaderRequest where
+           TargetTCPProxiesSetProxyHeaderRequest
+         where
         parseJSON
           = withObject "TargetTCPProxiesSetProxyHeaderRequest"
               (\ o ->
@@ -22125,7 +22300,8 @@ instance ToJSON TargetTCPProxiesSetProxyHeaderRequest
 
 --
 -- /See:/ 'routerBGPPeer' smart constructor.
-data RouterBGPPeer = RouterBGPPeer'
+data RouterBGPPeer =
+  RouterBGPPeer'
     { _rbpIPAddress               :: !(Maybe Text)
     , _rbpInterfaceName           :: !(Maybe Text)
     , _rbpPeerIPAddress           :: !(Maybe Text)
@@ -22136,7 +22312,8 @@ data RouterBGPPeer = RouterBGPPeer'
     , _rbpAdvertisedGroups        :: !(Maybe [RouterBGPPeerAdvertisedGroupsItem])
     , _rbpManagementType          :: !(Maybe RouterBGPPeerManagementType)
     , _rbpAdvertisedIPRanges      :: !(Maybe [RouterAdvertisedIPRange])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterBGPPeer' with the minimum fields required to make a request.
 --
@@ -22164,7 +22341,7 @@ data RouterBGPPeer = RouterBGPPeer'
 routerBGPPeer
     :: RouterBGPPeer
 routerBGPPeer =
-    RouterBGPPeer'
+  RouterBGPPeer'
     { _rbpIPAddress = Nothing
     , _rbpInterfaceName = Nothing
     , _rbpPeerIPAddress = Nothing
@@ -22293,9 +22470,11 @@ instance ToJSON RouterBGPPeer where
 
 --
 -- /See:/ 'subnetworksExpandIPCIdRRangeRequest' smart constructor.
-newtype SubnetworksExpandIPCIdRRangeRequest = SubnetworksExpandIPCIdRRangeRequest'
+newtype SubnetworksExpandIPCIdRRangeRequest =
+  SubnetworksExpandIPCIdRRangeRequest'
     { _seicirrrIPCIdRRange :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksExpandIPCIdRRangeRequest' with the minimum fields required to make a request.
 --
@@ -22305,9 +22484,7 @@ newtype SubnetworksExpandIPCIdRRangeRequest = SubnetworksExpandIPCIdRRangeReques
 subnetworksExpandIPCIdRRangeRequest
     :: SubnetworksExpandIPCIdRRangeRequest
 subnetworksExpandIPCIdRRangeRequest =
-    SubnetworksExpandIPCIdRRangeRequest'
-    { _seicirrrIPCIdRRange = Nothing
-    }
+  SubnetworksExpandIPCIdRRangeRequest' {_seicirrrIPCIdRRange = Nothing}
 
 -- | The IP (in CIDR format or netmask) of internal addresses that are legal
 -- on this Subnetwork. This range should be disjoint from other subnetworks
@@ -22336,13 +22513,15 @@ instance ToJSON SubnetworksExpandIPCIdRRangeRequest
 -- | A Managed Instance resource.
 --
 -- /See:/ 'managedInstance' smart constructor.
-data ManagedInstance = ManagedInstance'
+data ManagedInstance =
+  ManagedInstance'
     { _miLastAttempt    :: !(Maybe ManagedInstanceLastAttempt)
     , _miCurrentAction  :: !(Maybe ManagedInstanceCurrentAction)
     , _miId             :: !(Maybe (Textual Word64))
     , _miInstanceStatus :: !(Maybe ManagedInstanceInstanceStatus)
     , _miInstance       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedInstance' with the minimum fields required to make a request.
 --
@@ -22360,7 +22539,7 @@ data ManagedInstance = ManagedInstance'
 managedInstance
     :: ManagedInstance
 managedInstance =
-    ManagedInstance'
+  ManagedInstance'
     { _miLastAttempt = Nothing
     , _miCurrentAction = Nothing
     , _miId = Nothing
@@ -22443,9 +22622,11 @@ instance ToJSON ManagedInstance where
 -- | A list of InstanceGroupManagersScopedList resources.
 --
 -- /See:/ 'instanceGroupManagerAggregatedListItems' smart constructor.
-newtype InstanceGroupManagerAggregatedListItems = InstanceGroupManagerAggregatedListItems'
+newtype InstanceGroupManagerAggregatedListItems =
+  InstanceGroupManagerAggregatedListItems'
     { _igmaliAddtional :: HashMap Text InstanceGroupManagersScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagerAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -22456,9 +22637,8 @@ instanceGroupManagerAggregatedListItems
     :: HashMap Text InstanceGroupManagersScopedList -- ^ 'igmaliAddtional'
     -> InstanceGroupManagerAggregatedListItems
 instanceGroupManagerAggregatedListItems pIgmaliAddtional_ =
-    InstanceGroupManagerAggregatedListItems'
-    { _igmaliAddtional = _Coerce # pIgmaliAddtional_
-    }
+  InstanceGroupManagerAggregatedListItems'
+    {_igmaliAddtional = _Coerce # pIgmaliAddtional_}
 
 -- | [Output Only] The name of the scope that contains this set of managed
 -- instance groups.
@@ -22469,7 +22649,8 @@ igmaliAddtional
       . _Coerce
 
 instance FromJSON
-         InstanceGroupManagerAggregatedListItems where
+           InstanceGroupManagerAggregatedListItems
+         where
         parseJSON
           = withObject
               "InstanceGroupManagerAggregatedListItems"
@@ -22478,14 +22659,17 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         InstanceGroupManagerAggregatedListItems where
+           InstanceGroupManagerAggregatedListItems
+         where
         toJSON = toJSON . _igmaliAddtional
 
 --
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
-newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDeleteInstancesRequest'
+newtype InstanceGroupManagersDeleteInstancesRequest =
+  InstanceGroupManagersDeleteInstancesRequest'
     { _igmdirInstances :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersDeleteInstancesRequest' with the minimum fields required to make a request.
 --
@@ -22495,9 +22679,7 @@ newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDelet
 instanceGroupManagersDeleteInstancesRequest
     :: InstanceGroupManagersDeleteInstancesRequest
 instanceGroupManagersDeleteInstancesRequest =
-    InstanceGroupManagersDeleteInstancesRequest'
-    { _igmdirInstances = Nothing
-    }
+  InstanceGroupManagersDeleteInstancesRequest' {_igmdirInstances = Nothing}
 
 -- | The URLs of one or more instances to delete. This can be a full URL or a
 -- partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -22509,7 +22691,8 @@ igmdirInstances
       . _Coerce
 
 instance FromJSON
-         InstanceGroupManagersDeleteInstancesRequest where
+           InstanceGroupManagersDeleteInstancesRequest
+         where
         parseJSON
           = withObject
               "InstanceGroupManagersDeleteInstancesRequest"
@@ -22518,7 +22701,8 @@ instance FromJSON
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
-         InstanceGroupManagersDeleteInstancesRequest where
+           InstanceGroupManagersDeleteInstancesRequest
+         where
         toJSON
           InstanceGroupManagersDeleteInstancesRequest'{..}
           = object
@@ -22527,7 +22711,8 @@ instance ToJSON
 -- | Message containing information of one individual backend.
 --
 -- /See:/ 'backend' smart constructor.
-data Backend = Backend'
+data Backend =
+  Backend'
     { _bGroup                     :: !(Maybe Text)
     , _bBalancingMode             :: !(Maybe BackendBalancingMode)
     , _bMaxUtilization            :: !(Maybe (Textual Double))
@@ -22537,7 +22722,8 @@ data Backend = Backend'
     , _bMaxRatePerInstance        :: !(Maybe (Textual Double))
     , _bDescription               :: !(Maybe Text)
     , _bCapacityScaler            :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
 --
@@ -22563,7 +22749,7 @@ data Backend = Backend'
 backend
     :: Backend
 backend =
-    Backend'
+  Backend'
     { _bGroup = Nothing
     , _bBalancingMode = Nothing
     , _bMaxUtilization = Nothing
@@ -22704,11 +22890,13 @@ instance ToJSON Backend where
 -- when the list is empty.
 --
 -- /See:/ 'targetVPNGatewaysScopedListWarning' smart constructor.
-data TargetVPNGatewaysScopedListWarning = TargetVPNGatewaysScopedListWarning'
+data TargetVPNGatewaysScopedListWarning =
+  TargetVPNGatewaysScopedListWarning'
     { _tvgslwData    :: !(Maybe [TargetVPNGatewaysScopedListWarningDataItem])
     , _tvgslwCode    :: !(Maybe TargetVPNGatewaysScopedListWarningCode)
     , _tvgslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysScopedListWarning' with the minimum fields required to make a request.
 --
@@ -22722,11 +22910,8 @@ data TargetVPNGatewaysScopedListWarning = TargetVPNGatewaysScopedListWarning'
 targetVPNGatewaysScopedListWarning
     :: TargetVPNGatewaysScopedListWarning
 targetVPNGatewaysScopedListWarning =
-    TargetVPNGatewaysScopedListWarning'
-    { _tvgslwData = Nothing
-    , _tvgslwCode = Nothing
-    , _tvgslwMessage = Nothing
-    }
+  TargetVPNGatewaysScopedListWarning'
+    {_tvgslwData = Nothing, _tvgslwCode = Nothing, _tvgslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -22770,14 +22955,16 @@ instance ToJSON TargetVPNGatewaysScopedListWarning
 -- | Contains a list of addresses.
 --
 -- /See:/ 'addressList' smart constructor.
-data AddressList = AddressList'
+data AddressList =
+  AddressList'
     { _alNextPageToken :: !(Maybe Text)
     , _alKind          :: !Text
     , _alItems         :: !(Maybe [Address])
     , _alSelfLink      :: !(Maybe Text)
     , _alWarning       :: !(Maybe AddressListWarning)
     , _alId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressList' with the minimum fields required to make a request.
 --
@@ -22797,7 +22984,7 @@ data AddressList = AddressList'
 addressList
     :: AddressList
 addressList =
-    AddressList'
+  AddressList'
     { _alNextPageToken = Nothing
     , _alKind = "compute#addressList"
     , _alItems = Nothing
@@ -22864,10 +23051,12 @@ instance ToJSON AddressList where
 
 --
 -- /See:/ 'targetVPNGatewayListWarningDataItem' smart constructor.
-data TargetVPNGatewayListWarningDataItem = TargetVPNGatewayListWarningDataItem'
+data TargetVPNGatewayListWarningDataItem =
+  TargetVPNGatewayListWarningDataItem'
     { _tvglwdiValue :: !(Maybe Text)
     , _tvglwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewayListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -22879,10 +23068,8 @@ data TargetVPNGatewayListWarningDataItem = TargetVPNGatewayListWarningDataItem'
 targetVPNGatewayListWarningDataItem
     :: TargetVPNGatewayListWarningDataItem
 targetVPNGatewayListWarningDataItem =
-    TargetVPNGatewayListWarningDataItem'
-    { _tvglwdiValue = Nothing
-    , _tvglwdiKey = Nothing
-    }
+  TargetVPNGatewayListWarningDataItem'
+    {_tvglwdiValue = Nothing, _tvglwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tvglwdiValue :: Lens' TargetVPNGatewayListWarningDataItem (Maybe Text)
@@ -22919,9 +23106,11 @@ instance ToJSON TargetVPNGatewayListWarningDataItem
 -- | A list of ForwardingRulesScopedList resources.
 --
 -- /See:/ 'forwardingRuleAggregatedListItems' smart constructor.
-newtype ForwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems'
+newtype ForwardingRuleAggregatedListItems =
+  ForwardingRuleAggregatedListItems'
     { _fraliAddtional :: HashMap Text ForwardingRulesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRuleAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -22932,9 +23121,8 @@ forwardingRuleAggregatedListItems
     :: HashMap Text ForwardingRulesScopedList -- ^ 'fraliAddtional'
     -> ForwardingRuleAggregatedListItems
 forwardingRuleAggregatedListItems pFraliAddtional_ =
-    ForwardingRuleAggregatedListItems'
-    { _fraliAddtional = _Coerce # pFraliAddtional_
-    }
+  ForwardingRuleAggregatedListItems'
+    {_fraliAddtional = _Coerce # pFraliAddtional_}
 
 -- | Name of the scope containing this set of addresses.
 fraliAddtional :: Lens' ForwardingRuleAggregatedListItems (HashMap Text ForwardingRulesScopedList)
@@ -22957,14 +23145,16 @@ instance ToJSON ForwardingRuleAggregatedListItems
 
 --
 -- /See:/ 'interconnectAttachmentAggregatedList' smart constructor.
-data InterconnectAttachmentAggregatedList = InterconnectAttachmentAggregatedList'
+data InterconnectAttachmentAggregatedList =
+  InterconnectAttachmentAggregatedList'
     { _iaalNextPageToken :: !(Maybe Text)
     , _iaalKind          :: !Text
     , _iaalItems         :: !(Maybe InterconnectAttachmentAggregatedListItems)
     , _iaalSelfLink      :: !(Maybe Text)
     , _iaalWarning       :: !(Maybe InterconnectAttachmentAggregatedListWarning)
     , _iaalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentAggregatedList' with the minimum fields required to make a request.
 --
@@ -22984,7 +23174,7 @@ data InterconnectAttachmentAggregatedList = InterconnectAttachmentAggregatedList
 interconnectAttachmentAggregatedList
     :: InterconnectAttachmentAggregatedList
 interconnectAttachmentAggregatedList =
-    InterconnectAttachmentAggregatedList'
+  InterconnectAttachmentAggregatedList'
     { _iaalNextPageToken = Nothing
     , _iaalKind = "compute#interconnectAttachmentAggregatedList"
     , _iaalItems = Nothing
@@ -23029,7 +23219,8 @@ iaalId :: Lens' InterconnectAttachmentAggregatedList (Maybe Text)
 iaalId = lens _iaalId (\ s a -> s{_iaalId = a})
 
 instance FromJSON
-         InterconnectAttachmentAggregatedList where
+           InterconnectAttachmentAggregatedList
+         where
         parseJSON
           = withObject "InterconnectAttachmentAggregatedList"
               (\ o ->
@@ -23057,9 +23248,11 @@ instance ToJSON InterconnectAttachmentAggregatedList
 -- | [Output Only] A map of scoped operation lists.
 --
 -- /See:/ 'operationAggregatedListItems' smart constructor.
-newtype OperationAggregatedListItems = OperationAggregatedListItems'
+newtype OperationAggregatedListItems =
+  OperationAggregatedListItems'
     { _oaliAddtional :: HashMap Text OperationsScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -23070,9 +23263,7 @@ operationAggregatedListItems
     :: HashMap Text OperationsScopedList -- ^ 'oaliAddtional'
     -> OperationAggregatedListItems
 operationAggregatedListItems pOaliAddtional_ =
-    OperationAggregatedListItems'
-    { _oaliAddtional = _Coerce # pOaliAddtional_
-    }
+  OperationAggregatedListItems' {_oaliAddtional = _Coerce # pOaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of operations.
 oaliAddtional :: Lens' OperationAggregatedListItems (HashMap Text OperationsScopedList)
@@ -23093,7 +23284,8 @@ instance ToJSON OperationAggregatedListItems where
 
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
-data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary'
+data InstanceGroupManagerActionsSummary =
+  InstanceGroupManagerActionsSummary'
     { _igmasDeleting               :: !(Maybe (Textual Int32))
     , _igmasRestarting             :: !(Maybe (Textual Int32))
     , _igmasNone                   :: !(Maybe (Textual Int32))
@@ -23103,7 +23295,8 @@ data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary'
     , _igmasCreatingWithoutRetries :: !(Maybe (Textual Int32))
     , _igmasRecreating             :: !(Maybe (Textual Int32))
     , _igmasAbandoning             :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagerActionsSummary' with the minimum fields required to make a request.
 --
@@ -23129,7 +23322,7 @@ data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary'
 instanceGroupManagerActionsSummary
     :: InstanceGroupManagerActionsSummary
 instanceGroupManagerActionsSummary =
-    InstanceGroupManagerActionsSummary'
+  InstanceGroupManagerActionsSummary'
     { _igmasDeleting = Nothing
     , _igmasRestarting = Nothing
     , _igmasNone = Nothing
@@ -23258,14 +23451,16 @@ instance ToJSON InstanceGroupManagerActionsSummary
 
 --
 -- /See:/ 'xpnHostList' smart constructor.
-data XpnHostList = XpnHostList'
+data XpnHostList =
+  XpnHostList'
     { _xhlNextPageToken :: !(Maybe Text)
     , _xhlKind          :: !Text
     , _xhlItems         :: !(Maybe [Project])
     , _xhlSelfLink      :: !(Maybe Text)
     , _xhlWarning       :: !(Maybe XpnHostListWarning)
     , _xhlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'XpnHostList' with the minimum fields required to make a request.
 --
@@ -23285,7 +23480,7 @@ data XpnHostList = XpnHostList'
 xpnHostList
     :: XpnHostList
 xpnHostList =
-    XpnHostList'
+  XpnHostList'
     { _xhlNextPageToken = Nothing
     , _xhlKind = "compute#xpnHostList"
     , _xhlItems = Nothing
@@ -23355,10 +23550,12 @@ instance ToJSON XpnHostList where
 
 --
 -- /See:/ 'instanceTemplateListWarningDataItem' smart constructor.
-data InstanceTemplateListWarningDataItem = InstanceTemplateListWarningDataItem'
+data InstanceTemplateListWarningDataItem =
+  InstanceTemplateListWarningDataItem'
     { _itlwdiValue :: !(Maybe Text)
     , _itlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceTemplateListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -23370,10 +23567,8 @@ data InstanceTemplateListWarningDataItem = InstanceTemplateListWarningDataItem'
 instanceTemplateListWarningDataItem
     :: InstanceTemplateListWarningDataItem
 instanceTemplateListWarningDataItem =
-    InstanceTemplateListWarningDataItem'
-    { _itlwdiValue = Nothing
-    , _itlwdiKey = Nothing
-    }
+  InstanceTemplateListWarningDataItem'
+    {_itlwdiValue = Nothing, _itlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 itlwdiValue :: Lens' InstanceTemplateListWarningDataItem (Maybe Text)
@@ -23410,10 +23605,12 @@ instance ToJSON InstanceTemplateListWarningDataItem
 -- | A service account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount'
+data ServiceAccount =
+  ServiceAccount'
     { _saEmail  :: !(Maybe Text)
     , _saScopes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
@@ -23424,11 +23621,7 @@ data ServiceAccount = ServiceAccount'
 -- * 'saScopes'
 serviceAccount
     :: ServiceAccount
-serviceAccount =
-    ServiceAccount'
-    { _saEmail = Nothing
-    , _saScopes = Nothing
-    }
+serviceAccount = ServiceAccount' {_saEmail = Nothing, _saScopes = Nothing}
 
 -- | Email address of the service account.
 saEmail :: Lens' ServiceAccount (Maybe Text)
@@ -23458,11 +23651,13 @@ instance ToJSON ServiceAccount where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'snapshotListWarning' smart constructor.
-data SnapshotListWarning = SnapshotListWarning'
+data SnapshotListWarning =
+  SnapshotListWarning'
     { _sData    :: !(Maybe [SnapshotListWarningDataItem])
     , _sCode    :: !(Maybe SnapshotListWarningCode)
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SnapshotListWarning' with the minimum fields required to make a request.
 --
@@ -23476,11 +23671,7 @@ data SnapshotListWarning = SnapshotListWarning'
 snapshotListWarning
     :: SnapshotListWarning
 snapshotListWarning =
-    SnapshotListWarning'
-    { _sData = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+  SnapshotListWarning' {_sData = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -23516,9 +23707,11 @@ instance ToJSON SnapshotListWarning where
 
 --
 -- /See:/ 'regionInstanceGroupManagersAbandonInstancesRequest' smart constructor.
-newtype RegionInstanceGroupManagersAbandonInstancesRequest = RegionInstanceGroupManagersAbandonInstancesRequest'
+newtype RegionInstanceGroupManagersAbandonInstancesRequest =
+  RegionInstanceGroupManagersAbandonInstancesRequest'
     { _rigmairInstances :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersAbandonInstancesRequest' with the minimum fields required to make a request.
 --
@@ -23528,9 +23721,8 @@ newtype RegionInstanceGroupManagersAbandonInstancesRequest = RegionInstanceGroup
 regionInstanceGroupManagersAbandonInstancesRequest
     :: RegionInstanceGroupManagersAbandonInstancesRequest
 regionInstanceGroupManagersAbandonInstancesRequest =
-    RegionInstanceGroupManagersAbandonInstancesRequest'
-    { _rigmairInstances = Nothing
-    }
+  RegionInstanceGroupManagersAbandonInstancesRequest'
+    {_rigmairInstances = Nothing}
 
 -- | The URLs of one or more instances to abandon. This can be a full URL or
 -- a partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -23542,7 +23734,7 @@ rigmairInstances
       . _Coerce
 
 instance FromJSON
-         RegionInstanceGroupManagersAbandonInstancesRequest
+           RegionInstanceGroupManagersAbandonInstancesRequest
          where
         parseJSON
           = withObject
@@ -23552,7 +23744,7 @@ instance FromJSON
                    <$> (o .:? "instances" .!= mempty))
 
 instance ToJSON
-         RegionInstanceGroupManagersAbandonInstancesRequest
+           RegionInstanceGroupManagersAbandonInstancesRequest
          where
         toJSON
           RegionInstanceGroupManagersAbandonInstancesRequest'{..}
@@ -23562,14 +23754,16 @@ instance ToJSON
 -- | Contains a list of networks.
 --
 -- /See:/ 'networkList' smart constructor.
-data NetworkList = NetworkList'
+data NetworkList =
+  NetworkList'
     { _nlNextPageToken :: !(Maybe Text)
     , _nlKind          :: !Text
     , _nlItems         :: !(Maybe [Network])
     , _nlSelfLink      :: !(Maybe Text)
     , _nlWarning       :: !(Maybe NetworkListWarning)
     , _nlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkList' with the minimum fields required to make a request.
 --
@@ -23589,7 +23783,7 @@ data NetworkList = NetworkList'
 networkList
     :: NetworkList
 networkList =
-    NetworkList'
+  NetworkList'
     { _nlNextPageToken = Nothing
     , _nlKind = "compute#networkList"
     , _nlItems = Nothing
@@ -23660,13 +23854,15 @@ instance ToJSON NetworkList where
 -- peering.
 --
 -- /See:/ 'networkPeering' smart constructor.
-data NetworkPeering = NetworkPeering'
+data NetworkPeering =
+  NetworkPeering'
     { _netState            :: !(Maybe NetworkPeeringState)
     , _netStateDetails     :: !(Maybe Text)
     , _netNetwork          :: !(Maybe Text)
     , _netName             :: !(Maybe Text)
     , _netAutoCreateRoutes :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkPeering' with the minimum fields required to make a request.
 --
@@ -23684,7 +23880,7 @@ data NetworkPeering = NetworkPeering'
 networkPeering
     :: NetworkPeering
 networkPeering =
-    NetworkPeering'
+  NetworkPeering'
     { _netState = Nothing
     , _netStateDetails = Nothing
     , _netNetwork = Nothing
@@ -23752,10 +23948,12 @@ instance ToJSON NetworkPeering where
 
 --
 -- /See:/ 'targetSSLProxyListWarningDataItem' smart constructor.
-data TargetSSLProxyListWarningDataItem = TargetSSLProxyListWarningDataItem'
+data TargetSSLProxyListWarningDataItem =
+  TargetSSLProxyListWarningDataItem'
     { _tsplwdiValue :: !(Maybe Text)
     , _tsplwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxyListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -23767,10 +23965,8 @@ data TargetSSLProxyListWarningDataItem = TargetSSLProxyListWarningDataItem'
 targetSSLProxyListWarningDataItem
     :: TargetSSLProxyListWarningDataItem
 targetSSLProxyListWarningDataItem =
-    TargetSSLProxyListWarningDataItem'
-    { _tsplwdiValue = Nothing
-    , _tsplwdiKey = Nothing
-    }
+  TargetSSLProxyListWarningDataItem'
+    {_tsplwdiValue = Nothing, _tsplwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tsplwdiValue :: Lens' TargetSSLProxyListWarningDataItem (Maybe Text)
@@ -23806,9 +24002,11 @@ instance ToJSON TargetSSLProxyListWarningDataItem
 
 --
 -- /See:/ 'instanceGroupsListInstancesRequest' smart constructor.
-newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest'
+newtype InstanceGroupsListInstancesRequest =
+  InstanceGroupsListInstancesRequest'
     { _iglirInstanceState :: Maybe InstanceGroupsListInstancesRequestInstanceState
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstancesRequest' with the minimum fields required to make a request.
 --
@@ -23818,9 +24016,7 @@ newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest'
 instanceGroupsListInstancesRequest
     :: InstanceGroupsListInstancesRequest
 instanceGroupsListInstancesRequest =
-    InstanceGroupsListInstancesRequest'
-    { _iglirInstanceState = Nothing
-    }
+  InstanceGroupsListInstancesRequest' {_iglirInstanceState = Nothing}
 
 -- | A filter for the state of the instances in the instance group. Valid
 -- options are ALL or RUNNING. If you do not specify this parameter the
@@ -23847,10 +24043,12 @@ instance ToJSON InstanceGroupsListInstancesRequest
 
 --
 -- /See:/ 'instanceListReferrersWarningDataItem' smart constructor.
-data InstanceListReferrersWarningDataItem = InstanceListReferrersWarningDataItem'
+data InstanceListReferrersWarningDataItem =
+  InstanceListReferrersWarningDataItem'
     { _ilrwdiValue :: !(Maybe Text)
     , _ilrwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceListReferrersWarningDataItem' with the minimum fields required to make a request.
 --
@@ -23862,10 +24060,8 @@ data InstanceListReferrersWarningDataItem = InstanceListReferrersWarningDataItem
 instanceListReferrersWarningDataItem
     :: InstanceListReferrersWarningDataItem
 instanceListReferrersWarningDataItem =
-    InstanceListReferrersWarningDataItem'
-    { _ilrwdiValue = Nothing
-    , _ilrwdiKey = Nothing
-    }
+  InstanceListReferrersWarningDataItem'
+    {_ilrwdiValue = Nothing, _ilrwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ilrwdiValue :: Lens' InstanceListReferrersWarningDataItem (Maybe Text)
@@ -23884,7 +24080,8 @@ ilrwdiKey
   = lens _ilrwdiKey (\ s a -> s{_ilrwdiKey = a})
 
 instance FromJSON
-         InstanceListReferrersWarningDataItem where
+           InstanceListReferrersWarningDataItem
+         where
         parseJSON
           = withObject "InstanceListReferrersWarningDataItem"
               (\ o ->
@@ -23901,10 +24098,12 @@ instance ToJSON InstanceListReferrersWarningDataItem
 
 --
 -- /See:/ 'routeListWarningDataItem' smart constructor.
-data RouteListWarningDataItem = RouteListWarningDataItem'
+data RouteListWarningDataItem =
+  RouteListWarningDataItem'
     { _rValue :: !(Maybe Text)
     , _rKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouteListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -23916,10 +24115,7 @@ data RouteListWarningDataItem = RouteListWarningDataItem'
 routeListWarningDataItem
     :: RouteListWarningDataItem
 routeListWarningDataItem =
-    RouteListWarningDataItem'
-    { _rValue = Nothing
-    , _rKey = Nothing
-    }
+  RouteListWarningDataItem' {_rValue = Nothing, _rKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 rValue :: Lens' RouteListWarningDataItem (Maybe Text)
@@ -23950,10 +24146,12 @@ instance ToJSON RouteListWarningDataItem where
 
 --
 -- /See:/ 'interconnectAttachmentsScopedList' smart constructor.
-data InterconnectAttachmentsScopedList = InterconnectAttachmentsScopedList'
+data InterconnectAttachmentsScopedList =
+  InterconnectAttachmentsScopedList'
     { _iaslWarning                 :: !(Maybe InterconnectAttachmentsScopedListWarning)
     , _iaslInterconnectAttachments :: !(Maybe [InterconnectAttachment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentsScopedList' with the minimum fields required to make a request.
 --
@@ -23965,10 +24163,8 @@ data InterconnectAttachmentsScopedList = InterconnectAttachmentsScopedList'
 interconnectAttachmentsScopedList
     :: InterconnectAttachmentsScopedList
 interconnectAttachmentsScopedList =
-    InterconnectAttachmentsScopedList'
-    { _iaslWarning = Nothing
-    , _iaslInterconnectAttachments = Nothing
-    }
+  InterconnectAttachmentsScopedList'
+    {_iaslWarning = Nothing, _iaslInterconnectAttachments = Nothing}
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -24004,13 +24200,15 @@ instance ToJSON InterconnectAttachmentsScopedList
 
 --
 -- /See:/ 'securityPolicyList' smart constructor.
-data SecurityPolicyList = SecurityPolicyList'
+data SecurityPolicyList =
+  SecurityPolicyList'
     { _splNextPageToken :: !(Maybe Text)
     , _splKind          :: !Text
     , _splItems         :: !(Maybe [SecurityPolicy])
     , _splWarning       :: !(Maybe SecurityPolicyListWarning)
     , _splId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPolicyList' with the minimum fields required to make a request.
 --
@@ -24028,7 +24226,7 @@ data SecurityPolicyList = SecurityPolicyList'
 securityPolicyList
     :: SecurityPolicyList
 securityPolicyList =
-    SecurityPolicyList'
+  SecurityPolicyList'
     { _splNextPageToken = Nothing
     , _splKind = "compute#securityPolicyList"
     , _splItems = Nothing
@@ -24090,14 +24288,16 @@ instance ToJSON SecurityPolicyList where
 
 --
 -- /See:/ 'commitmentAggregatedList' smart constructor.
-data CommitmentAggregatedList = CommitmentAggregatedList'
+data CommitmentAggregatedList =
+  CommitmentAggregatedList'
     { _calNextPageToken :: !(Maybe Text)
     , _calKind          :: !Text
     , _calItems         :: !(Maybe CommitmentAggregatedListItems)
     , _calSelfLink      :: !(Maybe Text)
     , _calWarning       :: !(Maybe CommitmentAggregatedListWarning)
     , _calId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentAggregatedList' with the minimum fields required to make a request.
 --
@@ -24117,7 +24317,7 @@ data CommitmentAggregatedList = CommitmentAggregatedList'
 commitmentAggregatedList
     :: CommitmentAggregatedList
 commitmentAggregatedList =
-    CommitmentAggregatedList'
+  CommitmentAggregatedList'
     { _calNextPageToken = Nothing
     , _calKind = "compute#commitmentAggregatedList"
     , _calItems = Nothing
@@ -24185,14 +24385,16 @@ instance ToJSON CommitmentAggregatedList where
 -- | Contains a list of InstanceGroup resources.
 --
 -- /See:/ 'regionInstanceGroupList' smart constructor.
-data RegionInstanceGroupList = RegionInstanceGroupList'
+data RegionInstanceGroupList =
+  RegionInstanceGroupList'
     { _riglNextPageToken :: !(Maybe Text)
     , _riglKind          :: !Text
     , _riglItems         :: !(Maybe [InstanceGroup])
     , _riglSelfLink      :: !(Maybe Text)
     , _riglWarning       :: !(Maybe RegionInstanceGroupListWarning)
     , _riglId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupList' with the minimum fields required to make a request.
 --
@@ -24212,7 +24414,7 @@ data RegionInstanceGroupList = RegionInstanceGroupList'
 regionInstanceGroupList
     :: RegionInstanceGroupList
 regionInstanceGroupList =
-    RegionInstanceGroupList'
+  RegionInstanceGroupList'
     { _riglNextPageToken = Nothing
     , _riglKind = "compute#regionInstanceGroupList"
     , _riglItems = Nothing
@@ -24282,11 +24484,13 @@ instance ToJSON RegionInstanceGroupList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'vMEndpointNATMAppingsListWarning' smart constructor.
-data VMEndpointNATMAppingsListWarning = VMEndpointNATMAppingsListWarning'
+data VMEndpointNATMAppingsListWarning =
+  VMEndpointNATMAppingsListWarning'
     { _vmenatmalwData    :: !(Maybe [VMEndpointNATMAppingsListWarningDataItem])
     , _vmenatmalwCode    :: !(Maybe VMEndpointNATMAppingsListWarningCode)
     , _vmenatmalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VMEndpointNATMAppingsListWarning' with the minimum fields required to make a request.
 --
@@ -24300,7 +24504,7 @@ data VMEndpointNATMAppingsListWarning = VMEndpointNATMAppingsListWarning'
 vMEndpointNATMAppingsListWarning
     :: VMEndpointNATMAppingsListWarning
 vMEndpointNATMAppingsListWarning =
-    VMEndpointNATMAppingsListWarning'
+  VMEndpointNATMAppingsListWarning'
     { _vmenatmalwData = Nothing
     , _vmenatmalwCode = Nothing
     , _vmenatmalwMessage = Nothing
@@ -24350,9 +24554,11 @@ instance ToJSON VMEndpointNATMAppingsListWarning
 -- | A list of TargetPool resources.
 --
 -- /See:/ 'targetPoolAggregatedListItems' smart constructor.
-newtype TargetPoolAggregatedListItems = TargetPoolAggregatedListItems'
+newtype TargetPoolAggregatedListItems =
+  TargetPoolAggregatedListItems'
     { _tpaliAddtional :: HashMap Text TargetPoolsScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -24363,9 +24569,7 @@ targetPoolAggregatedListItems
     :: HashMap Text TargetPoolsScopedList -- ^ 'tpaliAddtional'
     -> TargetPoolAggregatedListItems
 targetPoolAggregatedListItems pTpaliAddtional_ =
-    TargetPoolAggregatedListItems'
-    { _tpaliAddtional = _Coerce # pTpaliAddtional_
-    }
+  TargetPoolAggregatedListItems' {_tpaliAddtional = _Coerce # pTpaliAddtional_}
 
 -- | Name of the scope containing this set of target pools.
 tpaliAddtional :: Lens' TargetPoolAggregatedListItems (HashMap Text TargetPoolsScopedList)
@@ -24386,9 +24590,11 @@ instance ToJSON TargetPoolAggregatedListItems where
 
 --
 -- /See:/ 'nodeGroupsAddNodesRequest' smart constructor.
-newtype NodeGroupsAddNodesRequest = NodeGroupsAddNodesRequest'
+newtype NodeGroupsAddNodesRequest =
+  NodeGroupsAddNodesRequest'
     { _nganrAdditionalNodeCount :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsAddNodesRequest' with the minimum fields required to make a request.
 --
@@ -24398,9 +24604,7 @@ newtype NodeGroupsAddNodesRequest = NodeGroupsAddNodesRequest'
 nodeGroupsAddNodesRequest
     :: NodeGroupsAddNodesRequest
 nodeGroupsAddNodesRequest =
-    NodeGroupsAddNodesRequest'
-    { _nganrAdditionalNodeCount = Nothing
-    }
+  NodeGroupsAddNodesRequest' {_nganrAdditionalNodeCount = Nothing}
 
 -- | Count of additional nodes to be added to the node group.
 nganrAdditionalNodeCount :: Lens' NodeGroupsAddNodesRequest (Maybe Int32)
@@ -24425,14 +24629,16 @@ instance ToJSON NodeGroupsAddNodesRequest where
 
 --
 -- /See:/ 'nodeTypeAggregatedList' smart constructor.
-data NodeTypeAggregatedList = NodeTypeAggregatedList'
+data NodeTypeAggregatedList =
+  NodeTypeAggregatedList'
     { _ntalNextPageToken :: !(Maybe Text)
     , _ntalKind          :: !Text
     , _ntalItems         :: !(Maybe NodeTypeAggregatedListItems)
     , _ntalSelfLink      :: !(Maybe Text)
     , _ntalWarning       :: !(Maybe NodeTypeAggregatedListWarning)
     , _ntalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypeAggregatedList' with the minimum fields required to make a request.
 --
@@ -24452,7 +24658,7 @@ data NodeTypeAggregatedList = NodeTypeAggregatedList'
 nodeTypeAggregatedList
     :: NodeTypeAggregatedList
 nodeTypeAggregatedList =
-    NodeTypeAggregatedList'
+  NodeTypeAggregatedList'
     { _ntalNextPageToken = Nothing
     , _ntalKind = "compute#nodeTypeAggregatedList"
     , _ntalItems = Nothing
@@ -24520,10 +24726,12 @@ instance ToJSON NodeTypeAggregatedList where
 
 --
 -- /See:/ 'targetInstancesScopedList' smart constructor.
-data TargetInstancesScopedList = TargetInstancesScopedList'
+data TargetInstancesScopedList =
+  TargetInstancesScopedList'
     { _tislWarning         :: !(Maybe TargetInstancesScopedListWarning)
     , _tislTargetInstances :: !(Maybe [TargetInstance])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstancesScopedList' with the minimum fields required to make a request.
 --
@@ -24535,10 +24743,8 @@ data TargetInstancesScopedList = TargetInstancesScopedList'
 targetInstancesScopedList
     :: TargetInstancesScopedList
 targetInstancesScopedList =
-    TargetInstancesScopedList'
-    { _tislWarning = Nothing
-    , _tislTargetInstances = Nothing
-    }
+  TargetInstancesScopedList'
+    {_tislWarning = Nothing, _tislTargetInstances = Nothing}
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -24571,10 +24777,12 @@ instance ToJSON TargetInstancesScopedList where
 
 --
 -- /See:/ 'subnetworkListWarningDataItem' smart constructor.
-data SubnetworkListWarningDataItem = SubnetworkListWarningDataItem'
+data SubnetworkListWarningDataItem =
+  SubnetworkListWarningDataItem'
     { _sValue :: !(Maybe Text)
     , _sKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworkListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -24586,10 +24794,7 @@ data SubnetworkListWarningDataItem = SubnetworkListWarningDataItem'
 subnetworkListWarningDataItem
     :: SubnetworkListWarningDataItem
 subnetworkListWarningDataItem =
-    SubnetworkListWarningDataItem'
-    { _sValue = Nothing
-    , _sKey = Nothing
-    }
+  SubnetworkListWarningDataItem' {_sValue = Nothing, _sKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 sValue :: Lens' SubnetworkListWarningDataItem (Maybe Text)
@@ -24620,9 +24825,11 @@ instance ToJSON SubnetworkListWarningDataItem where
 
 --
 -- /See:/ 'projectsDisableXpnResourceRequest' smart constructor.
-newtype ProjectsDisableXpnResourceRequest = ProjectsDisableXpnResourceRequest'
+newtype ProjectsDisableXpnResourceRequest =
+  ProjectsDisableXpnResourceRequest'
     { _pdxrrXpnResource :: Maybe XpnResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDisableXpnResourceRequest' with the minimum fields required to make a request.
 --
@@ -24632,9 +24839,7 @@ newtype ProjectsDisableXpnResourceRequest = ProjectsDisableXpnResourceRequest'
 projectsDisableXpnResourceRequest
     :: ProjectsDisableXpnResourceRequest
 projectsDisableXpnResourceRequest =
-    ProjectsDisableXpnResourceRequest'
-    { _pdxrrXpnResource = Nothing
-    }
+  ProjectsDisableXpnResourceRequest' {_pdxrrXpnResource = Nothing}
 
 -- | Service resource (a.k.a service project) ID.
 pdxrrXpnResource :: Lens' ProjectsDisableXpnResourceRequest (Maybe XpnResourceId)
@@ -24660,9 +24865,11 @@ instance ToJSON ProjectsDisableXpnResourceRequest
 -- | A list of AddressesScopedList resources.
 --
 -- /See:/ 'addressAggregatedListItems' smart constructor.
-newtype AddressAggregatedListItems = AddressAggregatedListItems'
+newtype AddressAggregatedListItems =
+  AddressAggregatedListItems'
     { _aAddtional :: HashMap Text AddressesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -24673,9 +24880,7 @@ addressAggregatedListItems
     :: HashMap Text AddressesScopedList -- ^ 'aAddtional'
     -> AddressAggregatedListItems
 addressAggregatedListItems pAAddtional_ =
-    AddressAggregatedListItems'
-    { _aAddtional = _Coerce # pAAddtional_
-    }
+  AddressAggregatedListItems' {_aAddtional = _Coerce # pAAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of addresses.
 aAddtional :: Lens' AddressAggregatedListItems (HashMap Text AddressesScopedList)
@@ -24695,14 +24900,16 @@ instance ToJSON AddressAggregatedListItems where
 -- | Contains a list of Autoscaler resources.
 --
 -- /See:/ 'autoscalerList' smart constructor.
-data AutoscalerList = AutoscalerList'
+data AutoscalerList =
+  AutoscalerList'
     { _autNextPageToken :: !(Maybe Text)
     , _autKind          :: !Text
     , _autItems         :: !(Maybe [Autoscaler])
     , _autSelfLink      :: !(Maybe Text)
     , _autWarning       :: !(Maybe AutoscalerListWarning)
     , _autId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalerList' with the minimum fields required to make a request.
 --
@@ -24722,7 +24929,7 @@ data AutoscalerList = AutoscalerList'
 autoscalerList
     :: AutoscalerList
 autoscalerList =
-    AutoscalerList'
+  AutoscalerList'
     { _autNextPageToken = Nothing
     , _autKind = "compute#autoscalerList"
     , _autItems = Nothing
@@ -24792,10 +24999,12 @@ instance ToJSON AutoscalerList where
 
 --
 -- /See:/ 'interconnectListWarningDataItem' smart constructor.
-data InterconnectListWarningDataItem = InterconnectListWarningDataItem'
+data InterconnectListWarningDataItem =
+  InterconnectListWarningDataItem'
     { _iValue :: !(Maybe Text)
     , _iKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -24807,10 +25016,7 @@ data InterconnectListWarningDataItem = InterconnectListWarningDataItem'
 interconnectListWarningDataItem
     :: InterconnectListWarningDataItem
 interconnectListWarningDataItem =
-    InterconnectListWarningDataItem'
-    { _iValue = Nothing
-    , _iKey = Nothing
-    }
+  InterconnectListWarningDataItem' {_iValue = Nothing, _iKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 iValue :: Lens' InterconnectListWarningDataItem (Maybe Text)
@@ -24843,11 +25049,13 @@ instance ToJSON InterconnectListWarningDataItem where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'subnetworkAggregatedListWarning' smart constructor.
-data SubnetworkAggregatedListWarning = SubnetworkAggregatedListWarning'
+data SubnetworkAggregatedListWarning =
+  SubnetworkAggregatedListWarning'
     { _salwData    :: !(Maybe [SubnetworkAggregatedListWarningDataItem])
     , _salwCode    :: !(Maybe SubnetworkAggregatedListWarningCode)
     , _salwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworkAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -24861,11 +25069,8 @@ data SubnetworkAggregatedListWarning = SubnetworkAggregatedListWarning'
 subnetworkAggregatedListWarning
     :: SubnetworkAggregatedListWarning
 subnetworkAggregatedListWarning =
-    SubnetworkAggregatedListWarning'
-    { _salwData = Nothing
-    , _salwCode = Nothing
-    , _salwMessage = Nothing
-    }
+  SubnetworkAggregatedListWarning'
+    {_salwData = Nothing, _salwCode = Nothing, _salwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -24908,7 +25113,8 @@ instance ToJSON SubnetworkAggregatedListWarning where
 -- networks. For more information, see Colocation Facilities.
 --
 -- /See:/ 'interconnectLocation' smart constructor.
-data InterconnectLocation = InterconnectLocation'
+data InterconnectLocation =
+  InterconnectLocation'
     { _intFacilityProviderFacilityId :: !(Maybe Text)
     , _intRegionInfos                :: !(Maybe [InterconnectLocationRegionInfo])
     , _intKind                       :: !Text
@@ -24923,7 +25129,8 @@ data InterconnectLocation = InterconnectLocation'
     , _intId                         :: !(Maybe (Textual Word64))
     , _intContinent                  :: !(Maybe InterconnectLocationContinent)
     , _intDescription                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectLocation' with the minimum fields required to make a request.
 --
@@ -24959,7 +25166,7 @@ data InterconnectLocation = InterconnectLocation'
 interconnectLocation
     :: InterconnectLocation
 interconnectLocation =
-    InterconnectLocation'
+  InterconnectLocation'
     { _intFacilityProviderFacilityId = Nothing
     , _intRegionInfos = Nothing
     , _intKind = "compute#interconnectLocation"
@@ -25108,9 +25315,11 @@ instance ToJSON InterconnectLocation where
 
 --
 -- /See:/ 'targetSSLProxiesSetProxyHeaderRequest' smart constructor.
-newtype TargetSSLProxiesSetProxyHeaderRequest = TargetSSLProxiesSetProxyHeaderRequest'
+newtype TargetSSLProxiesSetProxyHeaderRequest =
+  TargetSSLProxiesSetProxyHeaderRequest'
     { _tspsphrProxyHeader :: Maybe TargetSSLProxiesSetProxyHeaderRequestProxyHeader
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxiesSetProxyHeaderRequest' with the minimum fields required to make a request.
 --
@@ -25120,9 +25329,7 @@ newtype TargetSSLProxiesSetProxyHeaderRequest = TargetSSLProxiesSetProxyHeaderRe
 targetSSLProxiesSetProxyHeaderRequest
     :: TargetSSLProxiesSetProxyHeaderRequest
 targetSSLProxiesSetProxyHeaderRequest =
-    TargetSSLProxiesSetProxyHeaderRequest'
-    { _tspsphrProxyHeader = Nothing
-    }
+  TargetSSLProxiesSetProxyHeaderRequest' {_tspsphrProxyHeader = Nothing}
 
 -- | The new type of proxy header to append before sending data to the
 -- backend. NONE or PROXY_V1 are allowed.
@@ -25132,7 +25339,8 @@ tspsphrProxyHeader
       (\ s a -> s{_tspsphrProxyHeader = a})
 
 instance FromJSON
-         TargetSSLProxiesSetProxyHeaderRequest where
+           TargetSSLProxiesSetProxyHeaderRequest
+         where
         parseJSON
           = withObject "TargetSSLProxiesSetProxyHeaderRequest"
               (\ o ->
@@ -25148,14 +25356,16 @@ instance ToJSON TargetSSLProxiesSetProxyHeaderRequest
 
 --
 -- /See:/ 'vpnTunnelAggregatedList' smart constructor.
-data VPNTunnelAggregatedList = VPNTunnelAggregatedList'
+data VPNTunnelAggregatedList =
+  VPNTunnelAggregatedList'
     { _vtalNextPageToken :: !(Maybe Text)
     , _vtalKind          :: !Text
     , _vtalItems         :: !(Maybe VPNTunnelAggregatedListItems)
     , _vtalSelfLink      :: !(Maybe Text)
     , _vtalWarning       :: !(Maybe VPNTunnelAggregatedListWarning)
     , _vtalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelAggregatedList' with the minimum fields required to make a request.
 --
@@ -25175,7 +25385,7 @@ data VPNTunnelAggregatedList = VPNTunnelAggregatedList'
 vpnTunnelAggregatedList
     :: VPNTunnelAggregatedList
 vpnTunnelAggregatedList =
-    VPNTunnelAggregatedList'
+  VPNTunnelAggregatedList'
     { _vtalNextPageToken = Nothing
     , _vtalKind = "compute#vpnTunnelAggregatedList"
     , _vtalItems = Nothing
@@ -25243,10 +25453,12 @@ instance ToJSON VPNTunnelAggregatedList where
 
 --
 -- /See:/ 'sslPoliciesListWarningDataItem' smart constructor.
-data SSLPoliciesListWarningDataItem = SSLPoliciesListWarningDataItem'
+data SSLPoliciesListWarningDataItem =
+  SSLPoliciesListWarningDataItem'
     { _splwdiValue :: !(Maybe Text)
     , _splwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLPoliciesListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -25258,10 +25470,7 @@ data SSLPoliciesListWarningDataItem = SSLPoliciesListWarningDataItem'
 sslPoliciesListWarningDataItem
     :: SSLPoliciesListWarningDataItem
 sslPoliciesListWarningDataItem =
-    SSLPoliciesListWarningDataItem'
-    { _splwdiValue = Nothing
-    , _splwdiKey = Nothing
-    }
+  SSLPoliciesListWarningDataItem' {_splwdiValue = Nothing, _splwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 splwdiValue :: Lens' SSLPoliciesListWarningDataItem (Maybe Text)
@@ -25299,11 +25508,13 @@ instance ToJSON SSLPoliciesListWarningDataItem where
 -- only. Next id: 4
 --
 -- /See:/ 'interconnectCircuitInfo' smart constructor.
-data InterconnectCircuitInfo = InterconnectCircuitInfo'
+data InterconnectCircuitInfo =
+  InterconnectCircuitInfo'
     { _iciGoogleCircuitId  :: !(Maybe Text)
     , _iciCustomerDemarcId :: !(Maybe Text)
     , _iciGoogleDemarcId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectCircuitInfo' with the minimum fields required to make a request.
 --
@@ -25317,7 +25528,7 @@ data InterconnectCircuitInfo = InterconnectCircuitInfo'
 interconnectCircuitInfo
     :: InterconnectCircuitInfo
 interconnectCircuitInfo =
-    InterconnectCircuitInfo'
+  InterconnectCircuitInfo'
     { _iciGoogleCircuitId = Nothing
     , _iciCustomerDemarcId = Nothing
     , _iciGoogleDemarcId = Nothing
@@ -25362,7 +25573,8 @@ instance ToJSON InterconnectCircuitInfo where
 -- | An instance-attached disk resource.
 --
 -- /See:/ 'attachedDisk' smart constructor.
-data AttachedDisk = AttachedDisk'
+data AttachedDisk =
+  AttachedDisk'
     { _adDiskEncryptionKey :: !(Maybe CustomerEncryptionKey)
     , _adKind              :: !Text
     , _adMode              :: !(Maybe AttachedDiskMode)
@@ -25376,7 +25588,8 @@ data AttachedDisk = AttachedDisk'
     , _adLicenses          :: !(Maybe [Text])
     , _adType              :: !(Maybe AttachedDiskType)
     , _adIndex             :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachedDisk' with the minimum fields required to make a request.
 --
@@ -25410,7 +25623,7 @@ data AttachedDisk = AttachedDisk'
 attachedDisk
     :: AttachedDisk
 attachedDisk =
-    AttachedDisk'
+  AttachedDisk'
     { _adDiskEncryptionKey = Nothing
     , _adKind = "compute#attachedDisk"
     , _adMode = Nothing
@@ -25575,10 +25788,12 @@ instance ToJSON AttachedDisk where
 
 --
 -- /See:/ 'hTTPHealthCheckListWarningDataItem' smart constructor.
-data HTTPHealthCheckListWarningDataItem = HTTPHealthCheckListWarningDataItem'
+data HTTPHealthCheckListWarningDataItem =
+  HTTPHealthCheckListWarningDataItem'
     { _httphclwdiValue :: !(Maybe Text)
     , _httphclwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPHealthCheckListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -25590,10 +25805,8 @@ data HTTPHealthCheckListWarningDataItem = HTTPHealthCheckListWarningDataItem'
 hTTPHealthCheckListWarningDataItem
     :: HTTPHealthCheckListWarningDataItem
 hTTPHealthCheckListWarningDataItem =
-    HTTPHealthCheckListWarningDataItem'
-    { _httphclwdiValue = Nothing
-    , _httphclwdiKey = Nothing
-    }
+  HTTPHealthCheckListWarningDataItem'
+    {_httphclwdiValue = Nothing, _httphclwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 httphclwdiValue :: Lens' HTTPHealthCheckListWarningDataItem (Maybe Text)
@@ -25632,14 +25845,16 @@ instance ToJSON HTTPHealthCheckListWarningDataItem
 -- | Contains a list of disk types.
 --
 -- /See:/ 'diskTypeList' smart constructor.
-data DiskTypeList = DiskTypeList'
+data DiskTypeList =
+  DiskTypeList'
     { _dtlNextPageToken :: !(Maybe Text)
     , _dtlKind          :: !Text
     , _dtlItems         :: !(Maybe [DiskType])
     , _dtlSelfLink      :: !(Maybe Text)
     , _dtlWarning       :: !(Maybe DiskTypeListWarning)
     , _dtlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypeList' with the minimum fields required to make a request.
 --
@@ -25659,7 +25874,7 @@ data DiskTypeList = DiskTypeList'
 diskTypeList
     :: DiskTypeList
 diskTypeList =
-    DiskTypeList'
+  DiskTypeList'
     { _dtlNextPageToken = Nothing
     , _dtlKind = "compute#diskTypeList"
     , _dtlItems = Nothing
@@ -25729,10 +25944,12 @@ instance ToJSON DiskTypeList where
 
 --
 -- /See:/ 'regionInstanceGroupsSetNamedPortsRequest' smart constructor.
-data RegionInstanceGroupsSetNamedPortsRequest = RegionInstanceGroupsSetNamedPortsRequest'
+data RegionInstanceGroupsSetNamedPortsRequest =
+  RegionInstanceGroupsSetNamedPortsRequest'
     { _rigsnprFingerprint :: !(Maybe Bytes)
     , _rigsnprNamedPorts  :: !(Maybe [NamedPort])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupsSetNamedPortsRequest' with the minimum fields required to make a request.
 --
@@ -25744,10 +25961,8 @@ data RegionInstanceGroupsSetNamedPortsRequest = RegionInstanceGroupsSetNamedPort
 regionInstanceGroupsSetNamedPortsRequest
     :: RegionInstanceGroupsSetNamedPortsRequest
 regionInstanceGroupsSetNamedPortsRequest =
-    RegionInstanceGroupsSetNamedPortsRequest'
-    { _rigsnprFingerprint = Nothing
-    , _rigsnprNamedPorts = Nothing
-    }
+  RegionInstanceGroupsSetNamedPortsRequest'
+    {_rigsnprFingerprint = Nothing, _rigsnprNamedPorts = Nothing}
 
 -- | The fingerprint of the named ports information for this instance group.
 -- Use this optional property to prevent conflicts when multiple users
@@ -25770,7 +25985,8 @@ rigsnprNamedPorts
       . _Coerce
 
 instance FromJSON
-         RegionInstanceGroupsSetNamedPortsRequest where
+           RegionInstanceGroupsSetNamedPortsRequest
+         where
         parseJSON
           = withObject
               "RegionInstanceGroupsSetNamedPortsRequest"
@@ -25780,7 +25996,8 @@ instance FromJSON
                      (o .:? "namedPorts" .!= mempty))
 
 instance ToJSON
-         RegionInstanceGroupsSetNamedPortsRequest where
+           RegionInstanceGroupsSetNamedPortsRequest
+         where
         toJSON RegionInstanceGroupsSetNamedPortsRequest'{..}
           = object
               (catMaybes
@@ -25789,9 +26006,11 @@ instance ToJSON
 
 --
 -- /See:/ 'testPermissionsRequest' smart constructor.
-newtype TestPermissionsRequest = TestPermissionsRequest'
+newtype TestPermissionsRequest =
+  TestPermissionsRequest'
     { _tPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -25800,10 +26019,7 @@ newtype TestPermissionsRequest = TestPermissionsRequest'
 -- * 'tPermissions'
 testPermissionsRequest
     :: TestPermissionsRequest
-testPermissionsRequest =
-    TestPermissionsRequest'
-    { _tPermissions = Nothing
-    }
+testPermissionsRequest = TestPermissionsRequest' {_tPermissions = Nothing}
 
 -- | The set of permissions to check for the \'resource\'. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed.
@@ -25827,10 +26043,12 @@ instance ToJSON TestPermissionsRequest where
 
 --
 -- /See:/ 'targetTCPProxyListWarningDataItem' smart constructor.
-data TargetTCPProxyListWarningDataItem = TargetTCPProxyListWarningDataItem'
+data TargetTCPProxyListWarningDataItem =
+  TargetTCPProxyListWarningDataItem'
     { _ttplwdiValue :: !(Maybe Text)
     , _ttplwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxyListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -25842,10 +26060,8 @@ data TargetTCPProxyListWarningDataItem = TargetTCPProxyListWarningDataItem'
 targetTCPProxyListWarningDataItem
     :: TargetTCPProxyListWarningDataItem
 targetTCPProxyListWarningDataItem =
-    TargetTCPProxyListWarningDataItem'
-    { _ttplwdiValue = Nothing
-    , _ttplwdiKey = Nothing
-    }
+  TargetTCPProxyListWarningDataItem'
+    {_ttplwdiValue = Nothing, _ttplwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ttplwdiValue :: Lens' TargetTCPProxyListWarningDataItem (Maybe Text)
@@ -25881,11 +26097,13 @@ instance ToJSON TargetTCPProxyListWarningDataItem
 
 --
 -- /See:/ 'projectsGetXpnResources' smart constructor.
-data ProjectsGetXpnResources = ProjectsGetXpnResources'
+data ProjectsGetXpnResources =
+  ProjectsGetXpnResources'
     { _pgxrNextPageToken :: !(Maybe Text)
     , _pgxrKind          :: !Text
     , _pgxrResources     :: !(Maybe [XpnResourceId])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsGetXpnResources' with the minimum fields required to make a request.
 --
@@ -25899,7 +26117,7 @@ data ProjectsGetXpnResources = ProjectsGetXpnResources'
 projectsGetXpnResources
     :: ProjectsGetXpnResources
 projectsGetXpnResources =
-    ProjectsGetXpnResources'
+  ProjectsGetXpnResources'
     { _pgxrNextPageToken = Nothing
     , _pgxrKind = "compute#projectsGetXpnResources"
     , _pgxrResources = Nothing
@@ -25949,14 +26167,16 @@ instance ToJSON ProjectsGetXpnResources where
 -- | Contains a list of machine types.
 --
 -- /See:/ 'machineTypeList' smart constructor.
-data MachineTypeList = MachineTypeList'
+data MachineTypeList =
+  MachineTypeList'
     { _mtlNextPageToken :: !(Maybe Text)
     , _mtlKind          :: !Text
     , _mtlItems         :: !(Maybe [MachineType])
     , _mtlSelfLink      :: !(Maybe Text)
     , _mtlWarning       :: !(Maybe MachineTypeListWarning)
     , _mtlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypeList' with the minimum fields required to make a request.
 --
@@ -25976,7 +26196,7 @@ data MachineTypeList = MachineTypeList'
 machineTypeList
     :: MachineTypeList
 machineTypeList =
-    MachineTypeList'
+  MachineTypeList'
     { _mtlNextPageToken = Nothing
     , _mtlKind = "compute#machineTypeList"
     , _mtlItems = Nothing
@@ -26047,14 +26267,16 @@ instance ToJSON MachineTypeList where
 -- | A list of TargetHttpProxy resources.
 --
 -- /See:/ 'targetHTTPProxyList' smart constructor.
-data TargetHTTPProxyList = TargetHTTPProxyList'
+data TargetHTTPProxyList =
+  TargetHTTPProxyList'
     { _thttpplNextPageToken :: !(Maybe Text)
     , _thttpplKind          :: !Text
     , _thttpplItems         :: !(Maybe [TargetHTTPProxy])
     , _thttpplSelfLink      :: !(Maybe Text)
     , _thttpplWarning       :: !(Maybe TargetHTTPProxyListWarning)
     , _thttpplId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPProxyList' with the minimum fields required to make a request.
 --
@@ -26074,7 +26296,7 @@ data TargetHTTPProxyList = TargetHTTPProxyList'
 targetHTTPProxyList
     :: TargetHTTPProxyList
 targetHTTPProxyList =
-    TargetHTTPProxyList'
+  TargetHTTPProxyList'
     { _thttpplNextPageToken = Nothing
     , _thttpplKind = "compute#targetHttpProxyList"
     , _thttpplItems = Nothing
@@ -26149,11 +26371,13 @@ instance ToJSON TargetHTTPProxyList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'nodeGroupsListNodesWarning' smart constructor.
-data NodeGroupsListNodesWarning = NodeGroupsListNodesWarning'
+data NodeGroupsListNodesWarning =
+  NodeGroupsListNodesWarning'
     { _nglnwData    :: !(Maybe [NodeGroupsListNodesWarningDataItem])
     , _nglnwCode    :: !(Maybe NodeGroupsListNodesWarningCode)
     , _nglnwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsListNodesWarning' with the minimum fields required to make a request.
 --
@@ -26167,11 +26391,8 @@ data NodeGroupsListNodesWarning = NodeGroupsListNodesWarning'
 nodeGroupsListNodesWarning
     :: NodeGroupsListNodesWarning
 nodeGroupsListNodesWarning =
-    NodeGroupsListNodesWarning'
-    { _nglnwData = Nothing
-    , _nglnwCode = Nothing
-    , _nglnwMessage = Nothing
-    }
+  NodeGroupsListNodesWarning'
+    {_nglnwData = Nothing, _nglnwCode = Nothing, _nglnwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -26211,14 +26432,16 @@ instance ToJSON NodeGroupsListNodesWarning where
 
 --
 -- /See:/ 'nodeTemplateAggregatedList' smart constructor.
-data NodeTemplateAggregatedList = NodeTemplateAggregatedList'
+data NodeTemplateAggregatedList =
+  NodeTemplateAggregatedList'
     { _nodNextPageToken :: !(Maybe Text)
     , _nodKind          :: !Text
     , _nodItems         :: !(Maybe NodeTemplateAggregatedListItems)
     , _nodSelfLink      :: !(Maybe Text)
     , _nodWarning       :: !(Maybe NodeTemplateAggregatedListWarning)
     , _nodId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplateAggregatedList' with the minimum fields required to make a request.
 --
@@ -26238,7 +26461,7 @@ data NodeTemplateAggregatedList = NodeTemplateAggregatedList'
 nodeTemplateAggregatedList
     :: NodeTemplateAggregatedList
 nodeTemplateAggregatedList =
-    NodeTemplateAggregatedList'
+  NodeTemplateAggregatedList'
     { _nodNextPageToken = Nothing
     , _nodKind = "compute#nodeTemplateAggregatedList"
     , _nodItems = Nothing
@@ -26307,11 +26530,13 @@ instance ToJSON NodeTemplateAggregatedList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'interconnectLocationListWarning' smart constructor.
-data InterconnectLocationListWarning = InterconnectLocationListWarning'
+data InterconnectLocationListWarning =
+  InterconnectLocationListWarning'
     { _illwData    :: !(Maybe [InterconnectLocationListWarningDataItem])
     , _illwCode    :: !(Maybe InterconnectLocationListWarningCode)
     , _illwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectLocationListWarning' with the minimum fields required to make a request.
 --
@@ -26325,11 +26550,8 @@ data InterconnectLocationListWarning = InterconnectLocationListWarning'
 interconnectLocationListWarning
     :: InterconnectLocationListWarning
 interconnectLocationListWarning =
-    InterconnectLocationListWarning'
-    { _illwData = Nothing
-    , _illwCode = Nothing
-    , _illwMessage = Nothing
-    }
+  InterconnectLocationListWarning'
+    {_illwData = Nothing, _illwCode = Nothing, _illwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -26370,11 +26592,13 @@ instance ToJSON InterconnectLocationListWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'instanceGroupsListInstancesWarning' smart constructor.
-data InstanceGroupsListInstancesWarning = InstanceGroupsListInstancesWarning'
+data InstanceGroupsListInstancesWarning =
+  InstanceGroupsListInstancesWarning'
     { _igliwData    :: !(Maybe [InstanceGroupsListInstancesWarningDataItem])
     , _igliwCode    :: !(Maybe InstanceGroupsListInstancesWarningCode)
     , _igliwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstancesWarning' with the minimum fields required to make a request.
 --
@@ -26388,11 +26612,8 @@ data InstanceGroupsListInstancesWarning = InstanceGroupsListInstancesWarning'
 instanceGroupsListInstancesWarning
     :: InstanceGroupsListInstancesWarning
 instanceGroupsListInstancesWarning =
-    InstanceGroupsListInstancesWarning'
-    { _igliwData = Nothing
-    , _igliwCode = Nothing
-    , _igliwMessage = Nothing
-    }
+  InstanceGroupsListInstancesWarning'
+    {_igliwData = Nothing, _igliwCode = Nothing, _igliwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -26435,14 +26656,16 @@ instance ToJSON InstanceGroupsListInstancesWarning
 -- | Contains a list of managed instance groups.
 --
 -- /See:/ 'regionInstanceGroupManagerList' smart constructor.
-data RegionInstanceGroupManagerList = RegionInstanceGroupManagerList'
+data RegionInstanceGroupManagerList =
+  RegionInstanceGroupManagerList'
     { _rigmlNextPageToken :: !(Maybe Text)
     , _rigmlKind          :: !Text
     , _rigmlItems         :: !(Maybe [InstanceGroupManager])
     , _rigmlSelfLink      :: !(Maybe Text)
     , _rigmlWarning       :: !(Maybe RegionInstanceGroupManagerListWarning)
     , _rigmlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagerList' with the minimum fields required to make a request.
 --
@@ -26462,7 +26685,7 @@ data RegionInstanceGroupManagerList = RegionInstanceGroupManagerList'
 regionInstanceGroupManagerList
     :: RegionInstanceGroupManagerList
 regionInstanceGroupManagerList =
-    RegionInstanceGroupManagerList'
+  RegionInstanceGroupManagerList'
     { _rigmlNextPageToken = Nothing
     , _rigmlKind = "compute#regionInstanceGroupManagerList"
     , _rigmlItems = Nothing
@@ -26537,10 +26760,12 @@ instance ToJSON RegionInstanceGroupManagerList where
 
 --
 -- /See:/ 'diskTypesScopedList' smart constructor.
-data DiskTypesScopedList = DiskTypesScopedList'
+data DiskTypesScopedList =
+  DiskTypesScopedList'
     { _dtslDiskTypes :: !(Maybe [DiskType])
     , _dtslWarning   :: !(Maybe DiskTypesScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypesScopedList' with the minimum fields required to make a request.
 --
@@ -26552,10 +26777,7 @@ data DiskTypesScopedList = DiskTypesScopedList'
 diskTypesScopedList
     :: DiskTypesScopedList
 diskTypesScopedList =
-    DiskTypesScopedList'
-    { _dtslDiskTypes = Nothing
-    , _dtslWarning = Nothing
-    }
+  DiskTypesScopedList' {_dtslDiskTypes = Nothing, _dtslWarning = Nothing}
 
 -- | [Output Only] A list of disk types contained in this scope.
 dtslDiskTypes :: Lens' DiskTypesScopedList [DiskType]
@@ -26588,10 +26810,12 @@ instance ToJSON DiskTypesScopedList where
 -- | Write a Cloud Audit log
 --
 -- /See:/ 'logConfigCloudAuditOptions' smart constructor.
-data LogConfigCloudAuditOptions = LogConfigCloudAuditOptions'
+data LogConfigCloudAuditOptions =
+  LogConfigCloudAuditOptions'
     { _lccaoAuthorizationLoggingOptions :: !(Maybe AuthorizationLoggingOptions)
     , _lccaoLogName                     :: !(Maybe LogConfigCloudAuditOptionsLogName)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LogConfigCloudAuditOptions' with the minimum fields required to make a request.
 --
@@ -26603,10 +26827,8 @@ data LogConfigCloudAuditOptions = LogConfigCloudAuditOptions'
 logConfigCloudAuditOptions
     :: LogConfigCloudAuditOptions
 logConfigCloudAuditOptions =
-    LogConfigCloudAuditOptions'
-    { _lccaoAuthorizationLoggingOptions = Nothing
-    , _lccaoLogName = Nothing
-    }
+  LogConfigCloudAuditOptions'
+    {_lccaoAuthorizationLoggingOptions = Nothing, _lccaoLogName = Nothing}
 
 -- | Information used by the Cloud Audit Logging pipeline.
 lccaoAuthorizationLoggingOptions :: Lens' LogConfigCloudAuditOptions (Maybe AuthorizationLoggingOptions)
@@ -26637,9 +26859,11 @@ instance ToJSON LogConfigCloudAuditOptions where
 
 --
 -- /See:/ 'projectsSetDefaultNetworkTierRequest' smart constructor.
-newtype ProjectsSetDefaultNetworkTierRequest = ProjectsSetDefaultNetworkTierRequest'
+newtype ProjectsSetDefaultNetworkTierRequest =
+  ProjectsSetDefaultNetworkTierRequest'
     { _psdntrNetworkTier :: Maybe ProjectsSetDefaultNetworkTierRequestNetworkTier
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSetDefaultNetworkTierRequest' with the minimum fields required to make a request.
 --
@@ -26649,9 +26873,7 @@ newtype ProjectsSetDefaultNetworkTierRequest = ProjectsSetDefaultNetworkTierRequ
 projectsSetDefaultNetworkTierRequest
     :: ProjectsSetDefaultNetworkTierRequest
 projectsSetDefaultNetworkTierRequest =
-    ProjectsSetDefaultNetworkTierRequest'
-    { _psdntrNetworkTier = Nothing
-    }
+  ProjectsSetDefaultNetworkTierRequest' {_psdntrNetworkTier = Nothing}
 
 -- | Default network tier to be set.
 psdntrNetworkTier :: Lens' ProjectsSetDefaultNetworkTierRequest (Maybe ProjectsSetDefaultNetworkTierRequestNetworkTier)
@@ -26660,7 +26882,8 @@ psdntrNetworkTier
       (\ s a -> s{_psdntrNetworkTier = a})
 
 instance FromJSON
-         ProjectsSetDefaultNetworkTierRequest where
+           ProjectsSetDefaultNetworkTierRequest
+         where
         parseJSON
           = withObject "ProjectsSetDefaultNetworkTierRequest"
               (\ o ->
@@ -26676,10 +26899,12 @@ instance ToJSON ProjectsSetDefaultNetworkTierRequest
 
 --
 -- /See:/ 'imageListWarningDataItem' smart constructor.
-data ImageListWarningDataItem = ImageListWarningDataItem'
+data ImageListWarningDataItem =
+  ImageListWarningDataItem'
     { _imaValue :: !(Maybe Text)
     , _imaKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImageListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -26691,10 +26916,7 @@ data ImageListWarningDataItem = ImageListWarningDataItem'
 imageListWarningDataItem
     :: ImageListWarningDataItem
 imageListWarningDataItem =
-    ImageListWarningDataItem'
-    { _imaValue = Nothing
-    , _imaKey = Nothing
-    }
+  ImageListWarningDataItem' {_imaValue = Nothing, _imaKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 imaValue :: Lens' ImageListWarningDataItem (Maybe Text)
@@ -26725,10 +26947,12 @@ instance ToJSON ImageListWarningDataItem where
 
 --
 -- /See:/ 'acceleratorTypeListWarningDataItem' smart constructor.
-data AcceleratorTypeListWarningDataItem = AcceleratorTypeListWarningDataItem'
+data AcceleratorTypeListWarningDataItem =
+  AcceleratorTypeListWarningDataItem'
     { _atlwdiValue :: !(Maybe Text)
     , _atlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypeListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -26740,10 +26964,8 @@ data AcceleratorTypeListWarningDataItem = AcceleratorTypeListWarningDataItem'
 acceleratorTypeListWarningDataItem
     :: AcceleratorTypeListWarningDataItem
 acceleratorTypeListWarningDataItem =
-    AcceleratorTypeListWarningDataItem'
-    { _atlwdiValue = Nothing
-    , _atlwdiKey = Nothing
-    }
+  AcceleratorTypeListWarningDataItem'
+    {_atlwdiValue = Nothing, _atlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 atlwdiValue :: Lens' AcceleratorTypeListWarningDataItem (Maybe Text)
@@ -26780,7 +27002,8 @@ instance ToJSON AcceleratorTypeListWarningDataItem
 -- | Description of a planned outage on this Interconnect. Next id: 9
 --
 -- /See:/ 'interconnectOutageNotification' smart constructor.
-data InterconnectOutageNotification = InterconnectOutageNotification'
+data InterconnectOutageNotification =
+  InterconnectOutageNotification'
     { _ionState            :: !(Maybe InterconnectOutageNotificationState)
     , _ionAffectedCircuits :: !(Maybe [Text])
     , _ionStartTime        :: !(Maybe (Textual Int64))
@@ -26789,7 +27012,8 @@ data InterconnectOutageNotification = InterconnectOutageNotification'
     , _ionEndTime          :: !(Maybe (Textual Int64))
     , _ionSource           :: !(Maybe InterconnectOutageNotificationSource)
     , _ionDescription      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectOutageNotification' with the minimum fields required to make a request.
 --
@@ -26813,7 +27037,7 @@ data InterconnectOutageNotification = InterconnectOutageNotification'
 interconnectOutageNotification
     :: InterconnectOutageNotification
 interconnectOutageNotification =
-    InterconnectOutageNotification'
+  InterconnectOutageNotification'
     { _ionState = Nothing
     , _ionAffectedCircuits = Nothing
     , _ionStartTime = Nothing
@@ -26903,14 +27127,16 @@ instance ToJSON InterconnectOutageNotification where
 -- | Contains a list of node templates.
 --
 -- /See:/ 'nodeTemplateList' smart constructor.
-data NodeTemplateList = NodeTemplateList'
+data NodeTemplateList =
+  NodeTemplateList'
     { _ntlNextPageToken :: !(Maybe Text)
     , _ntlKind          :: !Text
     , _ntlItems         :: !(Maybe [NodeTemplate])
     , _ntlSelfLink      :: !(Maybe Text)
     , _ntlWarning       :: !(Maybe NodeTemplateListWarning)
     , _ntlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplateList' with the minimum fields required to make a request.
 --
@@ -26930,7 +27156,7 @@ data NodeTemplateList = NodeTemplateList'
 nodeTemplateList
     :: NodeTemplateList
 nodeTemplateList =
-    NodeTemplateList'
+  NodeTemplateList'
     { _ntlNextPageToken = Nothing
     , _ntlKind = "compute#nodeTemplateList"
     , _ntlItems = Nothing
@@ -27000,14 +27226,16 @@ instance ToJSON NodeTemplateList where
 
 --
 -- /See:/ 'diskTypeAggregatedList' smart constructor.
-data DiskTypeAggregatedList = DiskTypeAggregatedList'
+data DiskTypeAggregatedList =
+  DiskTypeAggregatedList'
     { _dtalNextPageToken :: !(Maybe Text)
     , _dtalKind          :: !Text
     , _dtalItems         :: !(Maybe DiskTypeAggregatedListItems)
     , _dtalSelfLink      :: !(Maybe Text)
     , _dtalWarning       :: !(Maybe DiskTypeAggregatedListWarning)
     , _dtalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypeAggregatedList' with the minimum fields required to make a request.
 --
@@ -27027,7 +27255,7 @@ data DiskTypeAggregatedList = DiskTypeAggregatedList'
 diskTypeAggregatedList
     :: DiskTypeAggregatedList
 diskTypeAggregatedList =
-    DiskTypeAggregatedList'
+  DiskTypeAggregatedList'
     { _dtalNextPageToken = Nothing
     , _dtalKind = "compute#diskTypeAggregatedList"
     , _dtalItems = Nothing
@@ -27094,14 +27322,16 @@ instance ToJSON DiskTypeAggregatedList where
 
 --
 -- /See:/ 'hTTPHealthCheck' smart constructor.
-data HTTPHealthCheck = HTTPHealthCheck'
+data HTTPHealthCheck =
+  HTTPHealthCheck'
     { _httphcResponse    :: !(Maybe Text)
     , _httphcRequestPath :: !(Maybe Text)
     , _httphcHost        :: !(Maybe Text)
     , _httphcProxyHeader :: !(Maybe HTTPHealthCheckProxyHeader)
     , _httphcPortName    :: !(Maybe Text)
     , _httphcPort        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPHealthCheck' with the minimum fields required to make a request.
 --
@@ -27121,7 +27351,7 @@ data HTTPHealthCheck = HTTPHealthCheck'
 hTTPHealthCheck
     :: HTTPHealthCheck
 hTTPHealthCheck =
-    HTTPHealthCheck'
+  HTTPHealthCheck'
     { _httphcResponse = Nothing
     , _httphcRequestPath = Nothing
     , _httphcHost = Nothing
@@ -27197,10 +27427,12 @@ instance ToJSON HTTPHealthCheck where
 
 --
 -- /See:/ 'urlMapListWarningDataItem' smart constructor.
-data URLMapListWarningDataItem = URLMapListWarningDataItem'
+data URLMapListWarningDataItem =
+  URLMapListWarningDataItem'
     { _umlwdiValue :: !(Maybe Text)
     , _umlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -27212,10 +27444,7 @@ data URLMapListWarningDataItem = URLMapListWarningDataItem'
 urlMapListWarningDataItem
     :: URLMapListWarningDataItem
 urlMapListWarningDataItem =
-    URLMapListWarningDataItem'
-    { _umlwdiValue = Nothing
-    , _umlwdiKey = Nothing
-    }
+  URLMapListWarningDataItem' {_umlwdiValue = Nothing, _umlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 umlwdiValue :: Lens' URLMapListWarningDataItem (Maybe Text)
@@ -27250,11 +27479,13 @@ instance ToJSON URLMapListWarningDataItem where
 -- | Defines the IP ranges that want to use NAT for a subnetwork.
 --
 -- /See:/ 'routerNATSubnetworkToNAT' smart constructor.
-data RouterNATSubnetworkToNAT = RouterNATSubnetworkToNAT'
+data RouterNATSubnetworkToNAT =
+  RouterNATSubnetworkToNAT'
     { _rnatstnatSourceIPRangesToNAT   :: !(Maybe [RouterNATSubnetworkToNATSourceIPRangesToNATItem])
     , _rnatstnatName                  :: !(Maybe Text)
     , _rnatstnatSecondaryIPRangeNames :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterNATSubnetworkToNAT' with the minimum fields required to make a request.
 --
@@ -27268,7 +27499,7 @@ data RouterNATSubnetworkToNAT = RouterNATSubnetworkToNAT'
 routerNATSubnetworkToNAT
     :: RouterNATSubnetworkToNAT
 routerNATSubnetworkToNAT =
-    RouterNATSubnetworkToNAT'
+  RouterNATSubnetworkToNAT'
     { _rnatstnatSourceIPRangesToNAT = Nothing
     , _rnatstnatName = Nothing
     , _rnatstnatSecondaryIPRangeNames = Nothing
@@ -27322,10 +27553,12 @@ instance ToJSON RouterNATSubnetworkToNAT where
 
 --
 -- /See:/ 'backendServiceGroupHealth' smart constructor.
-data BackendServiceGroupHealth = BackendServiceGroupHealth'
+data BackendServiceGroupHealth =
+  BackendServiceGroupHealth'
     { _bsghKind         :: !Text
     , _bsghHealthStatus :: !(Maybe [HealthStatus])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceGroupHealth' with the minimum fields required to make a request.
 --
@@ -27337,7 +27570,7 @@ data BackendServiceGroupHealth = BackendServiceGroupHealth'
 backendServiceGroupHealth
     :: BackendServiceGroupHealth
 backendServiceGroupHealth =
-    BackendServiceGroupHealth'
+  BackendServiceGroupHealth'
     { _bsghKind = "compute#backendServiceGroupHealth"
     , _bsghHealthStatus = Nothing
     }
@@ -27374,10 +27607,12 @@ instance ToJSON BackendServiceGroupHealth where
 
 --
 -- /See:/ 'autoscalersScopedList' smart constructor.
-data AutoscalersScopedList = AutoscalersScopedList'
+data AutoscalersScopedList =
+  AutoscalersScopedList'
     { _aAutoscalers :: !(Maybe [Autoscaler])
     , _aWarning     :: !(Maybe AutoscalersScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalersScopedList' with the minimum fields required to make a request.
 --
@@ -27389,10 +27624,7 @@ data AutoscalersScopedList = AutoscalersScopedList'
 autoscalersScopedList
     :: AutoscalersScopedList
 autoscalersScopedList =
-    AutoscalersScopedList'
-    { _aAutoscalers = Nothing
-    , _aWarning = Nothing
-    }
+  AutoscalersScopedList' {_aAutoscalers = Nothing, _aWarning = Nothing}
 
 -- | [Output Only] A list of autoscalers contained in this scope.
 aAutoscalers :: Lens' AutoscalersScopedList [Autoscaler]
@@ -27424,9 +27656,11 @@ instance ToJSON AutoscalersScopedList where
 -- | Write a Data Access (Gin) log
 --
 -- /See:/ 'logConfigDataAccessOptions' smart constructor.
-newtype LogConfigDataAccessOptions = LogConfigDataAccessOptions'
+newtype LogConfigDataAccessOptions =
+  LogConfigDataAccessOptions'
     { _lcdaoLogMode :: Maybe LogConfigDataAccessOptionsLogMode
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LogConfigDataAccessOptions' with the minimum fields required to make a request.
 --
@@ -27436,9 +27670,7 @@ newtype LogConfigDataAccessOptions = LogConfigDataAccessOptions'
 logConfigDataAccessOptions
     :: LogConfigDataAccessOptions
 logConfigDataAccessOptions =
-    LogConfigDataAccessOptions'
-    { _lcdaoLogMode = Nothing
-    }
+  LogConfigDataAccessOptions' {_lcdaoLogMode = Nothing}
 
 -- | Whether Gin logging should happen in a fail-closed manner at the caller.
 -- This is relevant only in the LocalIAM implementation, for now. NOTE:
@@ -27463,14 +27695,16 @@ instance ToJSON LogConfigDataAccessOptions where
 
 --
 -- /See:/ 'autoscalerAggregatedList' smart constructor.
-data AutoscalerAggregatedList = AutoscalerAggregatedList'
+data AutoscalerAggregatedList =
+  AutoscalerAggregatedList'
     { _aalNextPageToken :: !(Maybe Text)
     , _aalKind          :: !Text
     , _aalItems         :: !(Maybe AutoscalerAggregatedListItems)
     , _aalSelfLink      :: !(Maybe Text)
     , _aalWarning       :: !(Maybe AutoscalerAggregatedListWarning)
     , _aalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalerAggregatedList' with the minimum fields required to make a request.
 --
@@ -27490,7 +27724,7 @@ data AutoscalerAggregatedList = AutoscalerAggregatedList'
 autoscalerAggregatedList
     :: AutoscalerAggregatedList
 autoscalerAggregatedList =
-    AutoscalerAggregatedList'
+  AutoscalerAggregatedList'
     { _aalNextPageToken = Nothing
     , _aalKind = "compute#autoscalerAggregatedList"
     , _aalItems = Nothing
@@ -27558,9 +27792,11 @@ instance ToJSON AutoscalerAggregatedList where
 -- | A list of Router resources.
 --
 -- /See:/ 'routerAggregatedListItems' smart constructor.
-newtype RouterAggregatedListItems = RouterAggregatedListItems'
+newtype RouterAggregatedListItems =
+  RouterAggregatedListItems'
     { _raliAddtional :: HashMap Text RoutersScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -27571,9 +27807,7 @@ routerAggregatedListItems
     :: HashMap Text RoutersScopedList -- ^ 'raliAddtional'
     -> RouterAggregatedListItems
 routerAggregatedListItems pRaliAddtional_ =
-    RouterAggregatedListItems'
-    { _raliAddtional = _Coerce # pRaliAddtional_
-    }
+  RouterAggregatedListItems' {_raliAddtional = _Coerce # pRaliAddtional_}
 
 -- | Name of the scope containing this set of routers.
 raliAddtional :: Lens' RouterAggregatedListItems (HashMap Text RoutersScopedList)
@@ -27595,11 +27829,13 @@ instance ToJSON RouterAggregatedListItems where
 -- types list is empty.
 --
 -- /See:/ 'acceleratorTypesScopedListWarning' smart constructor.
-data AcceleratorTypesScopedListWarning = AcceleratorTypesScopedListWarning'
+data AcceleratorTypesScopedListWarning =
+  AcceleratorTypesScopedListWarning'
     { _atslwData    :: !(Maybe [AcceleratorTypesScopedListWarningDataItem])
     , _atslwCode    :: !(Maybe AcceleratorTypesScopedListWarningCode)
     , _atslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -27613,11 +27849,8 @@ data AcceleratorTypesScopedListWarning = AcceleratorTypesScopedListWarning'
 acceleratorTypesScopedListWarning
     :: AcceleratorTypesScopedListWarning
 acceleratorTypesScopedListWarning =
-    AcceleratorTypesScopedListWarning'
-    { _atslwData = Nothing
-    , _atslwCode = Nothing
-    , _atslwMessage = Nothing
-    }
+  AcceleratorTypesScopedListWarning'
+    {_atslwData = Nothing, _atslwCode = Nothing, _atslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -27662,7 +27895,8 @@ instance ToJSON AcceleratorTypesScopedListWarning
 -- v1.targetTcpProxies ==)
 --
 -- /See:/ 'targetTCPProxy' smart constructor.
-data TargetTCPProxy = TargetTCPProxy'
+data TargetTCPProxy =
+  TargetTCPProxy'
     { _ttpService           :: !(Maybe Text)
     , _ttpKind              :: !Text
     , _ttpSelfLink          :: !(Maybe Text)
@@ -27671,7 +27905,8 @@ data TargetTCPProxy = TargetTCPProxy'
     , _ttpId                :: !(Maybe (Textual Word64))
     , _ttpProxyHeader       :: !(Maybe TargetTCPProxyProxyHeader)
     , _ttpDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxy' with the minimum fields required to make a request.
 --
@@ -27695,7 +27930,7 @@ data TargetTCPProxy = TargetTCPProxy'
 targetTCPProxy
     :: TargetTCPProxy
 targetTCPProxy =
-    TargetTCPProxy'
+  TargetTCPProxy'
     { _ttpService = Nothing
     , _ttpKind = "compute#targetTcpProxy"
     , _ttpSelfLink = Nothing
@@ -27788,11 +28023,13 @@ instance ToJSON TargetTCPProxy where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'backendBucketListWarning' smart constructor.
-data BackendBucketListWarning = BackendBucketListWarning'
+data BackendBucketListWarning =
+  BackendBucketListWarning'
     { _bblwData    :: !(Maybe [BackendBucketListWarningDataItem])
     , _bblwCode    :: !(Maybe BackendBucketListWarningCode)
     , _bblwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendBucketListWarning' with the minimum fields required to make a request.
 --
@@ -27806,11 +28043,8 @@ data BackendBucketListWarning = BackendBucketListWarning'
 backendBucketListWarning
     :: BackendBucketListWarning
 backendBucketListWarning =
-    BackendBucketListWarning'
-    { _bblwData = Nothing
-    , _bblwCode = Nothing
-    , _bblwMessage = Nothing
-    }
+  BackendBucketListWarning'
+    {_bblwData = Nothing, _bblwCode = Nothing, _bblwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -27851,9 +28085,11 @@ instance ToJSON BackendBucketListWarning where
 -- setLabels method.
 --
 -- /See:/ 'imageLabels' smart constructor.
-newtype ImageLabels = ImageLabels'
+newtype ImageLabels =
+  ImageLabels'
     { _iAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImageLabels' with the minimum fields required to make a request.
 --
@@ -27863,10 +28099,7 @@ newtype ImageLabels = ImageLabels'
 imageLabels
     :: HashMap Text Text -- ^ 'iAddtional'
     -> ImageLabels
-imageLabels pIAddtional_ =
-    ImageLabels'
-    { _iAddtional = _Coerce # pIAddtional_
-    }
+imageLabels pIAddtional_ = ImageLabels' {_iAddtional = _Coerce # pIAddtional_}
 
 iAddtional :: Lens' ImageLabels (HashMap Text Text)
 iAddtional
@@ -27883,9 +28116,11 @@ instance ToJSON ImageLabels where
 
 --
 -- /See:/ 'distributionPolicy' smart constructor.
-newtype DistributionPolicy = DistributionPolicy'
+newtype DistributionPolicy =
+  DistributionPolicy'
     { _dpZones :: Maybe [DistributionPolicyZoneConfiguration]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DistributionPolicy' with the minimum fields required to make a request.
 --
@@ -27894,10 +28129,7 @@ newtype DistributionPolicy = DistributionPolicy'
 -- * 'dpZones'
 distributionPolicy
     :: DistributionPolicy
-distributionPolicy =
-    DistributionPolicy'
-    { _dpZones = Nothing
-    }
+distributionPolicy = DistributionPolicy' {_dpZones = Nothing}
 
 -- | Zones where the regional managed instance group will create and manage
 -- instances.
@@ -27918,10 +28150,12 @@ instance ToJSON DistributionPolicy where
 
 --
 -- /See:/ 'nodeGroupListWarningDataItem' smart constructor.
-data NodeGroupListWarningDataItem = NodeGroupListWarningDataItem'
+data NodeGroupListWarningDataItem =
+  NodeGroupListWarningDataItem'
     { _nglwdiValue :: !(Maybe Text)
     , _nglwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -27933,10 +28167,7 @@ data NodeGroupListWarningDataItem = NodeGroupListWarningDataItem'
 nodeGroupListWarningDataItem
     :: NodeGroupListWarningDataItem
 nodeGroupListWarningDataItem =
-    NodeGroupListWarningDataItem'
-    { _nglwdiValue = Nothing
-    , _nglwdiKey = Nothing
-    }
+  NodeGroupListWarningDataItem' {_nglwdiValue = Nothing, _nglwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 nglwdiValue :: Lens' NodeGroupListWarningDataItem (Maybe Text)
@@ -27971,14 +28202,16 @@ instance ToJSON NodeGroupListWarningDataItem where
 -- | Cloud Autoscaler policy.
 --
 -- /See:/ 'autoscalingPolicy' smart constructor.
-data AutoscalingPolicy = AutoscalingPolicy'
+data AutoscalingPolicy =
+  AutoscalingPolicy'
     { _apCustomMetricUtilizations :: !(Maybe [AutoscalingPolicyCustomMetricUtilization])
     , _apMaxNumReplicas           :: !(Maybe (Textual Int32))
     , _apCPUUtilization           :: !(Maybe AutoscalingPolicyCPUUtilization)
     , _apLoadBalancingUtilization :: !(Maybe AutoscalingPolicyLoadBalancingUtilization)
     , _apMinNumReplicas           :: !(Maybe (Textual Int32))
     , _apCoolDownPeriodSec        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalingPolicy' with the minimum fields required to make a request.
 --
@@ -27998,7 +28231,7 @@ data AutoscalingPolicy = AutoscalingPolicy'
 autoscalingPolicy
     :: AutoscalingPolicy
 autoscalingPolicy =
-    AutoscalingPolicy'
+  AutoscalingPolicy'
     { _apCustomMetricUtilizations = Nothing
     , _apMaxNumReplicas = Nothing
     , _apCPUUtilization = Nothing
@@ -28088,11 +28321,13 @@ instance ToJSON AutoscalingPolicy where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'nodeGroupAggregatedListWarning' smart constructor.
-data NodeGroupAggregatedListWarning = NodeGroupAggregatedListWarning'
+data NodeGroupAggregatedListWarning =
+  NodeGroupAggregatedListWarning'
     { _ngalwData    :: !(Maybe [NodeGroupAggregatedListWarningDataItem])
     , _ngalwCode    :: !(Maybe NodeGroupAggregatedListWarningCode)
     , _ngalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -28106,11 +28341,8 @@ data NodeGroupAggregatedListWarning = NodeGroupAggregatedListWarning'
 nodeGroupAggregatedListWarning
     :: NodeGroupAggregatedListWarning
 nodeGroupAggregatedListWarning =
-    NodeGroupAggregatedListWarning'
-    { _ngalwData = Nothing
-    , _ngalwCode = Nothing
-    , _ngalwMessage = Nothing
-    }
+  NodeGroupAggregatedListWarning'
+    {_ngalwData = Nothing, _ngalwCode = Nothing, _ngalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -28152,14 +28384,16 @@ instance ToJSON NodeGroupAggregatedListWarning where
 -- | Contains a list of region resources.
 --
 -- /See:/ 'regionList' smart constructor.
-data RegionList = RegionList'
+data RegionList =
+  RegionList'
     { _regNextPageToken :: !(Maybe Text)
     , _regKind          :: !Text
     , _regItems         :: !(Maybe [Region])
     , _regSelfLink      :: !(Maybe Text)
     , _regWarning       :: !(Maybe RegionListWarning)
     , _regId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionList' with the minimum fields required to make a request.
 --
@@ -28179,7 +28413,7 @@ data RegionList = RegionList'
 regionList
     :: RegionList
 regionList =
-    RegionList'
+  RegionList'
     { _regNextPageToken = Nothing
     , _regKind = "compute#regionList"
     , _regItems = Nothing
@@ -28251,11 +28485,13 @@ instance ToJSON RegionList where
 -- Instance could be scheduled.
 --
 -- /See:/ 'schedulingNodeAffinity' smart constructor.
-data SchedulingNodeAffinity = SchedulingNodeAffinity'
+data SchedulingNodeAffinity =
+  SchedulingNodeAffinity'
     { _snaOperator :: !(Maybe SchedulingNodeAffinityOperator)
     , _snaValues   :: !(Maybe [Text])
     , _snaKey      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SchedulingNodeAffinity' with the minimum fields required to make a request.
 --
@@ -28269,11 +28505,8 @@ data SchedulingNodeAffinity = SchedulingNodeAffinity'
 schedulingNodeAffinity
     :: SchedulingNodeAffinity
 schedulingNodeAffinity =
-    SchedulingNodeAffinity'
-    { _snaOperator = Nothing
-    , _snaValues = Nothing
-    , _snaKey = Nothing
-    }
+  SchedulingNodeAffinity'
+    {_snaOperator = Nothing, _snaValues = Nothing, _snaKey = Nothing}
 
 -- | Defines the operation of node selection.
 snaOperator :: Lens' SchedulingNodeAffinity (Maybe SchedulingNodeAffinityOperator)
@@ -28310,14 +28543,16 @@ instance ToJSON SchedulingNodeAffinity where
 -- | Contains a list of VpnTunnel resources.
 --
 -- /See:/ 'vpnTunnelList' smart constructor.
-data VPNTunnelList = VPNTunnelList'
+data VPNTunnelList =
+  VPNTunnelList'
     { _vtlNextPageToken :: !(Maybe Text)
     , _vtlKind          :: !Text
     , _vtlItems         :: !(Maybe [VPNTunnel])
     , _vtlSelfLink      :: !(Maybe Text)
     , _vtlWarning       :: !(Maybe VPNTunnelListWarning)
     , _vtlId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelList' with the minimum fields required to make a request.
 --
@@ -28337,7 +28572,7 @@ data VPNTunnelList = VPNTunnelList'
 vpnTunnelList
     :: VPNTunnelList
 vpnTunnelList =
-    VPNTunnelList'
+  VPNTunnelList'
     { _vtlNextPageToken = Nothing
     , _vtlKind = "compute#vpnTunnelList"
     , _vtlItems = Nothing
@@ -28408,11 +28643,13 @@ instance ToJSON VPNTunnelList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'acceleratorTypeAggregatedListWarning' smart constructor.
-data AcceleratorTypeAggregatedListWarning = AcceleratorTypeAggregatedListWarning'
+data AcceleratorTypeAggregatedListWarning =
+  AcceleratorTypeAggregatedListWarning'
     { _atalwData    :: !(Maybe [AcceleratorTypeAggregatedListWarningDataItem])
     , _atalwCode    :: !(Maybe AcceleratorTypeAggregatedListWarningCode)
     , _atalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorTypeAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -28426,11 +28663,8 @@ data AcceleratorTypeAggregatedListWarning = AcceleratorTypeAggregatedListWarning
 acceleratorTypeAggregatedListWarning
     :: AcceleratorTypeAggregatedListWarning
 acceleratorTypeAggregatedListWarning =
-    AcceleratorTypeAggregatedListWarning'
-    { _atalwData = Nothing
-    , _atalwCode = Nothing
-    , _atalwMessage = Nothing
-    }
+  AcceleratorTypeAggregatedListWarning'
+    {_atalwData = Nothing, _atalwCode = Nothing, _atalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -28453,7 +28687,8 @@ atalwMessage
   = lens _atalwMessage (\ s a -> s{_atalwMessage = a})
 
 instance FromJSON
-         AcceleratorTypeAggregatedListWarning where
+           AcceleratorTypeAggregatedListWarning
+         where
         parseJSON
           = withObject "AcceleratorTypeAggregatedListWarning"
               (\ o ->
@@ -28472,10 +28707,12 @@ instance ToJSON AcceleratorTypeAggregatedListWarning
 
 --
 -- /See:/ 'regionInstanceGroupsListInstancesWarningDataItem' smart constructor.
-data RegionInstanceGroupsListInstancesWarningDataItem = RegionInstanceGroupsListInstancesWarningDataItem'
+data RegionInstanceGroupsListInstancesWarningDataItem =
+  RegionInstanceGroupsListInstancesWarningDataItem'
     { _rigliwdiValue :: !(Maybe Text)
     , _rigliwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupsListInstancesWarningDataItem' with the minimum fields required to make a request.
 --
@@ -28487,10 +28724,8 @@ data RegionInstanceGroupsListInstancesWarningDataItem = RegionInstanceGroupsList
 regionInstanceGroupsListInstancesWarningDataItem
     :: RegionInstanceGroupsListInstancesWarningDataItem
 regionInstanceGroupsListInstancesWarningDataItem =
-    RegionInstanceGroupsListInstancesWarningDataItem'
-    { _rigliwdiValue = Nothing
-    , _rigliwdiKey = Nothing
-    }
+  RegionInstanceGroupsListInstancesWarningDataItem'
+    {_rigliwdiValue = Nothing, _rigliwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 rigliwdiValue :: Lens' RegionInstanceGroupsListInstancesWarningDataItem (Maybe Text)
@@ -28510,7 +28745,7 @@ rigliwdiKey
   = lens _rigliwdiKey (\ s a -> s{_rigliwdiKey = a})
 
 instance FromJSON
-         RegionInstanceGroupsListInstancesWarningDataItem
+           RegionInstanceGroupsListInstancesWarningDataItem
          where
         parseJSON
           = withObject
@@ -28520,7 +28755,7 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         RegionInstanceGroupsListInstancesWarningDataItem
+           RegionInstanceGroupsListInstancesWarningDataItem
          where
         toJSON
           RegionInstanceGroupsListInstancesWarningDataItem'{..}
@@ -28536,7 +28771,8 @@ instance ToJSON
 -- ==)
 --
 -- /See:/ 'interconnect' smart constructor.
-data Interconnect = Interconnect'
+data Interconnect =
+  Interconnect'
     { _iiState                   :: !(Maybe InterconnectState)
     , _iiInterconnectType        :: !(Maybe InterconnectInterconnectType)
     , _iiLocation                :: !(Maybe Text)
@@ -28559,7 +28795,8 @@ data Interconnect = Interconnect'
     , _iiDescription             :: !(Maybe Text)
     , _iiNocContactEmail         :: !(Maybe Text)
     , _iiCircuitInfos            :: !(Maybe [InterconnectCircuitInfo])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Interconnect' with the minimum fields required to make a request.
 --
@@ -28611,7 +28848,7 @@ data Interconnect = Interconnect'
 interconnect
     :: Interconnect
 interconnect =
-    Interconnect'
+  Interconnect'
     { _iiState = Nothing
     , _iiInterconnectType = Nothing
     , _iiLocation = Nothing
@@ -28855,9 +29092,11 @@ instance ToJSON Interconnect where
 
 --
 -- /See:/ 'machineTypeScratchDisksItem' smart constructor.
-newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem'
+newtype MachineTypeScratchDisksItem =
+  MachineTypeScratchDisksItem'
     { _mtsdiDiskGb :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypeScratchDisksItem' with the minimum fields required to make a request.
 --
@@ -28867,9 +29106,7 @@ newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem'
 machineTypeScratchDisksItem
     :: MachineTypeScratchDisksItem
 machineTypeScratchDisksItem =
-    MachineTypeScratchDisksItem'
-    { _mtsdiDiskGb = Nothing
-    }
+  MachineTypeScratchDisksItem' {_mtsdiDiskGb = Nothing}
 
 -- | Size of the scratch disk, defined in GB.
 mtsdiDiskGb :: Lens' MachineTypeScratchDisksItem (Maybe Int32)
@@ -28889,10 +29126,12 @@ instance ToJSON MachineTypeScratchDisksItem where
 
 --
 -- /See:/ 'subnetworksScopedListWarningDataItem' smart constructor.
-data SubnetworksScopedListWarningDataItem = SubnetworksScopedListWarningDataItem'
+data SubnetworksScopedListWarningDataItem =
+  SubnetworksScopedListWarningDataItem'
     { _sslwdiValue :: !(Maybe Text)
     , _sslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworksScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -28904,10 +29143,8 @@ data SubnetworksScopedListWarningDataItem = SubnetworksScopedListWarningDataItem
 subnetworksScopedListWarningDataItem
     :: SubnetworksScopedListWarningDataItem
 subnetworksScopedListWarningDataItem =
-    SubnetworksScopedListWarningDataItem'
-    { _sslwdiValue = Nothing
-    , _sslwdiKey = Nothing
-    }
+  SubnetworksScopedListWarningDataItem'
+    {_sslwdiValue = Nothing, _sslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 sslwdiValue :: Lens' SubnetworksScopedListWarningDataItem (Maybe Text)
@@ -28926,7 +29163,8 @@ sslwdiKey
   = lens _sslwdiKey (\ s a -> s{_sslwdiKey = a})
 
 instance FromJSON
-         SubnetworksScopedListWarningDataItem where
+           SubnetworksScopedListWarningDataItem
+         where
         parseJSON
           = withObject "SubnetworksScopedListWarningDataItem"
               (\ o ->
@@ -28943,10 +29181,12 @@ instance ToJSON SubnetworksScopedListWarningDataItem
 
 --
 -- /See:/ 'machineTypesScopedList' smart constructor.
-data MachineTypesScopedList = MachineTypesScopedList'
+data MachineTypesScopedList =
+  MachineTypesScopedList'
     { _mtslMachineTypes :: !(Maybe [MachineType])
     , _mtslWarning      :: !(Maybe MachineTypesScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypesScopedList' with the minimum fields required to make a request.
 --
@@ -28958,10 +29198,7 @@ data MachineTypesScopedList = MachineTypesScopedList'
 machineTypesScopedList
     :: MachineTypesScopedList
 machineTypesScopedList =
-    MachineTypesScopedList'
-    { _mtslMachineTypes = Nothing
-    , _mtslWarning = Nothing
-    }
+  MachineTypesScopedList' {_mtslMachineTypes = Nothing, _mtslWarning = Nothing}
 
 -- | [Output Only] A list of machine types contained in this scope.
 mtslMachineTypes :: Lens' MachineTypesScopedList [MachineType]
@@ -28996,7 +29233,8 @@ instance ToJSON MachineTypesScopedList where
 -- resource_for v1.subnetworks ==)
 --
 -- /See:/ 'subnetwork' smart constructor.
-data Subnetwork = Subnetwork'
+data Subnetwork =
+  Subnetwork'
     { _subKind                  :: !Text
     , _subFingerprint           :: !(Maybe Bytes)
     , _subNetwork               :: !(Maybe Text)
@@ -29011,7 +29249,8 @@ data Subnetwork = Subnetwork'
     , _subRegion                :: !(Maybe Text)
     , _subDescription           :: !(Maybe Text)
     , _subPrivateIPGoogleAccess :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Subnetwork' with the minimum fields required to make a request.
 --
@@ -29047,7 +29286,7 @@ data Subnetwork = Subnetwork'
 subnetwork
     :: Subnetwork
 subnetwork =
-    Subnetwork'
+  Subnetwork'
     { _subKind = "compute#subnetwork"
     , _subFingerprint = Nothing
     , _subNetwork = Nothing
@@ -29218,11 +29457,13 @@ instance ToJSON Subnetwork where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'healthCheckListWarning' smart constructor.
-data HealthCheckListWarning = HealthCheckListWarning'
+data HealthCheckListWarning =
+  HealthCheckListWarning'
     { _hclwData    :: !(Maybe [HealthCheckListWarningDataItem])
     , _hclwCode    :: !(Maybe HealthCheckListWarningCode)
     , _hclwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthCheckListWarning' with the minimum fields required to make a request.
 --
@@ -29236,11 +29477,8 @@ data HealthCheckListWarning = HealthCheckListWarning'
 healthCheckListWarning
     :: HealthCheckListWarning
 healthCheckListWarning =
-    HealthCheckListWarning'
-    { _hclwData = Nothing
-    , _hclwCode = Nothing
-    , _hclwMessage = Nothing
-    }
+  HealthCheckListWarning'
+    {_hclwData = Nothing, _hclwCode = Nothing, _hclwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -29279,14 +29517,16 @@ instance ToJSON HealthCheckListWarning where
 
 --
 -- /See:/ 'machineTypeAggregatedList' smart constructor.
-data MachineTypeAggregatedList = MachineTypeAggregatedList'
+data MachineTypeAggregatedList =
+  MachineTypeAggregatedList'
     { _mtalNextPageToken :: !(Maybe Text)
     , _mtalKind          :: !Text
     , _mtalItems         :: !(Maybe MachineTypeAggregatedListItems)
     , _mtalSelfLink      :: !(Maybe Text)
     , _mtalWarning       :: !(Maybe MachineTypeAggregatedListWarning)
     , _mtalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypeAggregatedList' with the minimum fields required to make a request.
 --
@@ -29306,7 +29546,7 @@ data MachineTypeAggregatedList = MachineTypeAggregatedList'
 machineTypeAggregatedList
     :: MachineTypeAggregatedList
 machineTypeAggregatedList =
-    MachineTypeAggregatedList'
+  MachineTypeAggregatedList'
     { _mtalNextPageToken = Nothing
     , _mtalKind = "compute#machineTypeAggregatedList"
     , _mtalItems = Nothing
@@ -29377,11 +29617,13 @@ instance ToJSON MachineTypeAggregatedList where
 -- list is empty.
 --
 -- /See:/ 'nodeGroupsScopedListWarning' smart constructor.
-data NodeGroupsScopedListWarning = NodeGroupsScopedListWarning'
+data NodeGroupsScopedListWarning =
+  NodeGroupsScopedListWarning'
     { _ngslwData    :: !(Maybe [NodeGroupsScopedListWarningDataItem])
     , _ngslwCode    :: !(Maybe NodeGroupsScopedListWarningCode)
     , _ngslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -29395,11 +29637,8 @@ data NodeGroupsScopedListWarning = NodeGroupsScopedListWarning'
 nodeGroupsScopedListWarning
     :: NodeGroupsScopedListWarning
 nodeGroupsScopedListWarning =
-    NodeGroupsScopedListWarning'
-    { _ngslwData = Nothing
-    , _ngslwCode = Nothing
-    , _ngslwMessage = Nothing
-    }
+  NodeGroupsScopedListWarning'
+    {_ngslwData = Nothing, _ngslwCode = Nothing, _ngslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -29440,14 +29679,16 @@ instance ToJSON NodeGroupsScopedListWarning where
 -- | Contains a list of node types.
 --
 -- /See:/ 'nodeTypeList' smart constructor.
-data NodeTypeList = NodeTypeList'
+data NodeTypeList =
+  NodeTypeList'
     { _ntltNextPageToken :: !(Maybe Text)
     , _ntltKind          :: !Text
     , _ntltItems         :: !(Maybe [NodeType])
     , _ntltSelfLink      :: !(Maybe Text)
     , _ntltWarning       :: !(Maybe NodeTypeListWarning)
     , _ntltId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypeList' with the minimum fields required to make a request.
 --
@@ -29467,7 +29708,7 @@ data NodeTypeList = NodeTypeList'
 nodeTypeList
     :: NodeTypeList
 nodeTypeList =
-    NodeTypeList'
+  NodeTypeList'
     { _ntltNextPageToken = Nothing
     , _ntltKind = "compute#nodeTypeList"
     , _ntltItems = Nothing
@@ -29539,7 +29780,8 @@ instance ToJSON NodeTypeList where
 -- resource_for v1.diskTypes ==)
 --
 -- /See:/ 'diskType' smart constructor.
-data DiskType = DiskType'
+data DiskType =
+  DiskType'
     { _dtKind              :: !Text
     , _dtZone              :: !(Maybe Text)
     , _dtSelfLink          :: !(Maybe Text)
@@ -29551,7 +29793,8 @@ data DiskType = DiskType'
     , _dtDescription       :: !(Maybe Text)
     , _dtDefaultDiskSizeGb :: !(Maybe (Textual Int64))
     , _dtDeprecated        :: !(Maybe DeprecationStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskType' with the minimum fields required to make a request.
 --
@@ -29581,7 +29824,7 @@ data DiskType = DiskType'
 diskType
     :: DiskType
 diskType =
-    DiskType'
+  DiskType'
     { _dtKind = "compute#diskType"
     , _dtZone = Nothing
     , _dtSelfLink = Nothing
@@ -29694,11 +29937,13 @@ instance ToJSON DiskType where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'nodeTemplateAggregatedListWarning' smart constructor.
-data NodeTemplateAggregatedListWarning = NodeTemplateAggregatedListWarning'
+data NodeTemplateAggregatedListWarning =
+  NodeTemplateAggregatedListWarning'
     { _ntalwData    :: !(Maybe [NodeTemplateAggregatedListWarningDataItem])
     , _ntalwCode    :: !(Maybe NodeTemplateAggregatedListWarningCode)
     , _ntalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplateAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -29712,11 +29957,8 @@ data NodeTemplateAggregatedListWarning = NodeTemplateAggregatedListWarning'
 nodeTemplateAggregatedListWarning
     :: NodeTemplateAggregatedListWarning
 nodeTemplateAggregatedListWarning =
-    NodeTemplateAggregatedListWarning'
-    { _ntalwData = Nothing
-    , _ntalwCode = Nothing
-    , _ntalwMessage = Nothing
-    }
+  NodeTemplateAggregatedListWarning'
+    {_ntalwData = Nothing, _ntalwCode = Nothing, _ntalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -29758,10 +30000,12 @@ instance ToJSON NodeTemplateAggregatedListWarning
 
 --
 -- /See:/ 'autoscalerAggregatedListWarningDataItem' smart constructor.
-data AutoscalerAggregatedListWarningDataItem = AutoscalerAggregatedListWarningDataItem'
+data AutoscalerAggregatedListWarningDataItem =
+  AutoscalerAggregatedListWarningDataItem'
     { _aalwdiValue :: !(Maybe Text)
     , _aalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalerAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -29773,10 +30017,8 @@ data AutoscalerAggregatedListWarningDataItem = AutoscalerAggregatedListWarningDa
 autoscalerAggregatedListWarningDataItem
     :: AutoscalerAggregatedListWarningDataItem
 autoscalerAggregatedListWarningDataItem =
-    AutoscalerAggregatedListWarningDataItem'
-    { _aalwdiValue = Nothing
-    , _aalwdiKey = Nothing
-    }
+  AutoscalerAggregatedListWarningDataItem'
+    {_aalwdiValue = Nothing, _aalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 aalwdiValue :: Lens' AutoscalerAggregatedListWarningDataItem (Maybe Text)
@@ -29795,7 +30037,8 @@ aalwdiKey
   = lens _aalwdiKey (\ s a -> s{_aalwdiKey = a})
 
 instance FromJSON
-         AutoscalerAggregatedListWarningDataItem where
+           AutoscalerAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "AutoscalerAggregatedListWarningDataItem"
@@ -29804,7 +30047,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         AutoscalerAggregatedListWarningDataItem where
+           AutoscalerAggregatedListWarningDataItem
+         where
         toJSON AutoscalerAggregatedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -29814,9 +30058,11 @@ instance ToJSON
 -- | The labels to set for this resource.
 --
 -- /See:/ 'zoneSetLabelsRequestLabels' smart constructor.
-newtype ZoneSetLabelsRequestLabels = ZoneSetLabelsRequestLabels'
+newtype ZoneSetLabelsRequestLabels =
+  ZoneSetLabelsRequestLabels'
     { _zslrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ZoneSetLabelsRequestLabels' with the minimum fields required to make a request.
 --
@@ -29827,9 +30073,7 @@ zoneSetLabelsRequestLabels
     :: HashMap Text Text -- ^ 'zslrlAddtional'
     -> ZoneSetLabelsRequestLabels
 zoneSetLabelsRequestLabels pZslrlAddtional_ =
-    ZoneSetLabelsRequestLabels'
-    { _zslrlAddtional = _Coerce # pZslrlAddtional_
-    }
+  ZoneSetLabelsRequestLabels' {_zslrlAddtional = _Coerce # pZslrlAddtional_}
 
 zslrlAddtional :: Lens' ZoneSetLabelsRequestLabels (HashMap Text Text)
 zslrlAddtional
@@ -29848,10 +30092,12 @@ instance ToJSON ZoneSetLabelsRequestLabels where
 
 --
 -- /See:/ 'nodeTypeListWarningDataItem' smart constructor.
-data NodeTypeListWarningDataItem = NodeTypeListWarningDataItem'
+data NodeTypeListWarningDataItem =
+  NodeTypeListWarningDataItem'
     { _ntlwdiValue :: !(Maybe Text)
     , _ntlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypeListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -29863,10 +30109,7 @@ data NodeTypeListWarningDataItem = NodeTypeListWarningDataItem'
 nodeTypeListWarningDataItem
     :: NodeTypeListWarningDataItem
 nodeTypeListWarningDataItem =
-    NodeTypeListWarningDataItem'
-    { _ntlwdiValue = Nothing
-    , _ntlwdiKey = Nothing
-    }
+  NodeTypeListWarningDataItem' {_ntlwdiValue = Nothing, _ntlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ntlwdiValue :: Lens' NodeTypeListWarningDataItem (Maybe Text)
@@ -29901,12 +30144,14 @@ instance ToJSON NodeTypeListWarningDataItem where
 -- | Message representing the validation result for a UrlMap.
 --
 -- /See:/ 'urlMapValidationResult' smart constructor.
-data URLMapValidationResult = URLMapValidationResult'
+data URLMapValidationResult =
+  URLMapValidationResult'
     { _umvrLoadErrors    :: !(Maybe [Text])
     , _umvrLoadSucceeded :: !(Maybe Bool)
     , _umvrTestPassed    :: !(Maybe Bool)
     , _umvrTestFailures  :: !(Maybe [TestFailure])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapValidationResult' with the minimum fields required to make a request.
 --
@@ -29922,7 +30167,7 @@ data URLMapValidationResult = URLMapValidationResult'
 urlMapValidationResult
     :: URLMapValidationResult
 urlMapValidationResult =
-    URLMapValidationResult'
+  URLMapValidationResult'
     { _umvrLoadErrors = Nothing
     , _umvrLoadSucceeded = Nothing
     , _umvrTestPassed = Nothing
@@ -29979,11 +30224,13 @@ instance ToJSON URLMapValidationResult where
 -- | A metadata key\/value entry.
 --
 -- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata'
+data Metadata =
+  Metadata'
     { _mKind        :: !Text
     , _mFingerprint :: !(Maybe Bytes)
     , _mItems       :: !(Maybe [MetadataItemsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
@@ -29997,11 +30244,8 @@ data Metadata = Metadata'
 metadata
     :: Metadata
 metadata =
-    Metadata'
-    { _mKind = "compute#metadata"
-    , _mFingerprint = Nothing
-    , _mItems = Nothing
-    }
+  Metadata'
+    {_mKind = "compute#metadata", _mFingerprint = Nothing, _mItems = Nothing}
 
 -- | [Output Only] Type of the resource. Always compute#metadata for
 -- metadata.
@@ -30046,11 +30290,13 @@ instance ToJSON Metadata where
 
 --
 -- /See:/ 'routeWarningsItem' smart constructor.
-data RouteWarningsItem = RouteWarningsItem'
+data RouteWarningsItem =
+  RouteWarningsItem'
     { _rwiData    :: !(Maybe [RouteWarningsItemDataItem])
     , _rwiCode    :: !(Maybe RouteWarningsItemCode)
     , _rwiMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouteWarningsItem' with the minimum fields required to make a request.
 --
@@ -30064,11 +30310,8 @@ data RouteWarningsItem = RouteWarningsItem'
 routeWarningsItem
     :: RouteWarningsItem
 routeWarningsItem =
-    RouteWarningsItem'
-    { _rwiData = Nothing
-    , _rwiCode = Nothing
-    , _rwiMessage = Nothing
-    }
+  RouteWarningsItem'
+    {_rwiData = Nothing, _rwiCode = Nothing, _rwiMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -30105,14 +30348,16 @@ instance ToJSON RouteWarningsItem where
 
 --
 -- /See:/ 'nodeGroupsListNodes' smart constructor.
-data NodeGroupsListNodes = NodeGroupsListNodes'
+data NodeGroupsListNodes =
+  NodeGroupsListNodes'
     { _nglnNextPageToken :: !(Maybe Text)
     , _nglnKind          :: !Text
     , _nglnItems         :: !(Maybe [NodeGroupNode])
     , _nglnSelfLink      :: !(Maybe Text)
     , _nglnWarning       :: !(Maybe NodeGroupsListNodesWarning)
     , _nglnId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeGroupsListNodes' with the minimum fields required to make a request.
 --
@@ -30132,7 +30377,7 @@ data NodeGroupsListNodes = NodeGroupsListNodes'
 nodeGroupsListNodes
     :: NodeGroupsListNodes
 nodeGroupsListNodes =
-    NodeGroupsListNodes'
+  NodeGroupsListNodes'
     { _nglnNextPageToken = Nothing
     , _nglnKind = "compute#nodeGroupsListNodes"
     , _nglnItems = Nothing
@@ -30205,14 +30450,16 @@ instance ToJSON NodeGroupsListNodes where
 -- locations.
 --
 -- /See:/ 'interconnectLocationList' smart constructor.
-data InterconnectLocationList = InterconnectLocationList'
+data InterconnectLocationList =
+  InterconnectLocationList'
     { _illNextPageToken :: !(Maybe Text)
     , _illKind          :: !Text
     , _illItems         :: !(Maybe [InterconnectLocation])
     , _illSelfLink      :: !(Maybe Text)
     , _illWarning       :: !(Maybe InterconnectLocationListWarning)
     , _illId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectLocationList' with the minimum fields required to make a request.
 --
@@ -30232,7 +30479,7 @@ data InterconnectLocationList = InterconnectLocationList'
 interconnectLocationList
     :: InterconnectLocationList
 interconnectLocationList =
-    InterconnectLocationList'
+  InterconnectLocationList'
     { _illNextPageToken = Nothing
     , _illKind = "compute#interconnectLocationList"
     , _illItems = Nothing
@@ -30302,9 +30549,11 @@ instance ToJSON InterconnectLocationList where
 
 --
 -- /See:/ 'sslPoliciesListAvailableFeaturesResponse' smart constructor.
-newtype SSLPoliciesListAvailableFeaturesResponse = SSLPoliciesListAvailableFeaturesResponse'
+newtype SSLPoliciesListAvailableFeaturesResponse =
+  SSLPoliciesListAvailableFeaturesResponse'
     { _splafrFeatures :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLPoliciesListAvailableFeaturesResponse' with the minimum fields required to make a request.
 --
@@ -30314,9 +30563,7 @@ newtype SSLPoliciesListAvailableFeaturesResponse = SSLPoliciesListAvailableFeatu
 sslPoliciesListAvailableFeaturesResponse
     :: SSLPoliciesListAvailableFeaturesResponse
 sslPoliciesListAvailableFeaturesResponse =
-    SSLPoliciesListAvailableFeaturesResponse'
-    { _splafrFeatures = Nothing
-    }
+  SSLPoliciesListAvailableFeaturesResponse' {_splafrFeatures = Nothing}
 
 splafrFeatures :: Lens' SSLPoliciesListAvailableFeaturesResponse [Text]
 splafrFeatures
@@ -30326,7 +30573,8 @@ splafrFeatures
       . _Coerce
 
 instance FromJSON
-         SSLPoliciesListAvailableFeaturesResponse where
+           SSLPoliciesListAvailableFeaturesResponse
+         where
         parseJSON
           = withObject
               "SSLPoliciesListAvailableFeaturesResponse"
@@ -30335,7 +30583,8 @@ instance FromJSON
                    (o .:? "features" .!= mempty))
 
 instance ToJSON
-         SSLPoliciesListAvailableFeaturesResponse where
+           SSLPoliciesListAvailableFeaturesResponse
+         where
         toJSON SSLPoliciesListAvailableFeaturesResponse'{..}
           = object
               (catMaybes [("features" .=) <$> _splafrFeatures])
@@ -30343,9 +30592,11 @@ instance ToJSON
 -- | Labels to apply to instances that are created from this template.
 --
 -- /See:/ 'instancePropertiesLabels' smart constructor.
-newtype InstancePropertiesLabels = InstancePropertiesLabels'
+newtype InstancePropertiesLabels =
+  InstancePropertiesLabels'
     { _iplAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancePropertiesLabels' with the minimum fields required to make a request.
 --
@@ -30356,9 +30607,7 @@ instancePropertiesLabels
     :: HashMap Text Text -- ^ 'iplAddtional'
     -> InstancePropertiesLabels
 instancePropertiesLabels pIplAddtional_ =
-    InstancePropertiesLabels'
-    { _iplAddtional = _Coerce # pIplAddtional_
-    }
+  InstancePropertiesLabels' {_iplAddtional = _Coerce # pIplAddtional_}
 
 iplAddtional :: Lens' InstancePropertiesLabels (HashMap Text Text)
 iplAddtional
@@ -30376,10 +30625,12 @@ instance ToJSON InstancePropertiesLabels where
 
 --
 -- /See:/ 'machineTypesScopedListWarningDataItem' smart constructor.
-data MachineTypesScopedListWarningDataItem = MachineTypesScopedListWarningDataItem'
+data MachineTypesScopedListWarningDataItem =
+  MachineTypesScopedListWarningDataItem'
     { _mtslwdiValue :: !(Maybe Text)
     , _mtslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -30391,10 +30642,8 @@ data MachineTypesScopedListWarningDataItem = MachineTypesScopedListWarningDataIt
 machineTypesScopedListWarningDataItem
     :: MachineTypesScopedListWarningDataItem
 machineTypesScopedListWarningDataItem =
-    MachineTypesScopedListWarningDataItem'
-    { _mtslwdiValue = Nothing
-    , _mtslwdiKey = Nothing
-    }
+  MachineTypesScopedListWarningDataItem'
+    {_mtslwdiValue = Nothing, _mtslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 mtslwdiValue :: Lens' MachineTypesScopedListWarningDataItem (Maybe Text)
@@ -30413,7 +30662,8 @@ mtslwdiKey
   = lens _mtslwdiKey (\ s a -> s{_mtslwdiKey = a})
 
 instance FromJSON
-         MachineTypesScopedListWarningDataItem where
+           MachineTypesScopedListWarningDataItem
+         where
         parseJSON
           = withObject "MachineTypesScopedListWarningDataItem"
               (\ o ->
@@ -30431,11 +30681,13 @@ instance ToJSON MachineTypesScopedListWarningDataItem
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'diskTypeListWarning' smart constructor.
-data DiskTypeListWarning = DiskTypeListWarning'
+data DiskTypeListWarning =
+  DiskTypeListWarning'
     { _dtlwData    :: !(Maybe [DiskTypeListWarningDataItem])
     , _dtlwCode    :: !(Maybe DiskTypeListWarningCode)
     , _dtlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypeListWarning' with the minimum fields required to make a request.
 --
@@ -30449,11 +30701,8 @@ data DiskTypeListWarning = DiskTypeListWarning'
 diskTypeListWarning
     :: DiskTypeListWarning
 diskTypeListWarning =
-    DiskTypeListWarning'
-    { _dtlwData = Nothing
-    , _dtlwCode = Nothing
-    , _dtlwMessage = Nothing
-    }
+  DiskTypeListWarning'
+    {_dtlwData = Nothing, _dtlwCode = Nothing, _dtlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -30492,10 +30741,12 @@ instance ToJSON DiskTypeListWarning where
 
 --
 -- /See:/ 'nodeTemplateListWarningDataItem' smart constructor.
-data NodeTemplateListWarningDataItem = NodeTemplateListWarningDataItem'
+data NodeTemplateListWarningDataItem =
+  NodeTemplateListWarningDataItem'
     { _nodValue :: !(Maybe Text)
     , _nodKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplateListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -30507,10 +30758,7 @@ data NodeTemplateListWarningDataItem = NodeTemplateListWarningDataItem'
 nodeTemplateListWarningDataItem
     :: NodeTemplateListWarningDataItem
 nodeTemplateListWarningDataItem =
-    NodeTemplateListWarningDataItem'
-    { _nodValue = Nothing
-    , _nodKey = Nothing
-    }
+  NodeTemplateListWarningDataItem' {_nodValue = Nothing, _nodKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 nodValue :: Lens' NodeTemplateListWarningDataItem (Maybe Text)
@@ -30542,10 +30790,12 @@ instance ToJSON NodeTemplateListWarningDataItem where
 
 --
 -- /See:/ 'regionListWarningDataItem' smart constructor.
-data RegionListWarningDataItem = RegionListWarningDataItem'
+data RegionListWarningDataItem =
+  RegionListWarningDataItem'
     { _regValue :: !(Maybe Text)
     , _regKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -30557,10 +30807,7 @@ data RegionListWarningDataItem = RegionListWarningDataItem'
 regionListWarningDataItem
     :: RegionListWarningDataItem
 regionListWarningDataItem =
-    RegionListWarningDataItem'
-    { _regValue = Nothing
-    , _regKey = Nothing
-    }
+  RegionListWarningDataItem' {_regValue = Nothing, _regKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 regValue :: Lens' RegionListWarningDataItem (Maybe Text)
@@ -30591,9 +30838,11 @@ instance ToJSON RegionListWarningDataItem where
 
 --
 -- /See:/ 'instancesSetMachineResourcesRequest' smart constructor.
-newtype InstancesSetMachineResourcesRequest = InstancesSetMachineResourcesRequest'
+newtype InstancesSetMachineResourcesRequest =
+  InstancesSetMachineResourcesRequest'
     { _ismrrGuestAccelerators :: Maybe [AcceleratorConfig]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetMachineResourcesRequest' with the minimum fields required to make a request.
 --
@@ -30603,9 +30852,7 @@ newtype InstancesSetMachineResourcesRequest = InstancesSetMachineResourcesReques
 instancesSetMachineResourcesRequest
     :: InstancesSetMachineResourcesRequest
 instancesSetMachineResourcesRequest =
-    InstancesSetMachineResourcesRequest'
-    { _ismrrGuestAccelerators = Nothing
-    }
+  InstancesSetMachineResourcesRequest' {_ismrrGuestAccelerators = Nothing}
 
 -- | A list of the type and count of accelerator cards attached to the
 -- instance.
@@ -30634,10 +30881,12 @@ instance ToJSON InstancesSetMachineResourcesRequest
 
 --
 -- /See:/ 'instancesSetServiceAccountRequest' smart constructor.
-data InstancesSetServiceAccountRequest = InstancesSetServiceAccountRequest'
+data InstancesSetServiceAccountRequest =
+  InstancesSetServiceAccountRequest'
     { _issarEmail  :: !(Maybe Text)
     , _issarScopes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetServiceAccountRequest' with the minimum fields required to make a request.
 --
@@ -30649,10 +30898,8 @@ data InstancesSetServiceAccountRequest = InstancesSetServiceAccountRequest'
 instancesSetServiceAccountRequest
     :: InstancesSetServiceAccountRequest
 instancesSetServiceAccountRequest =
-    InstancesSetServiceAccountRequest'
-    { _issarEmail = Nothing
-    , _issarScopes = Nothing
-    }
+  InstancesSetServiceAccountRequest'
+    {_issarEmail = Nothing, _issarScopes = Nothing}
 
 -- | Email address of the service account.
 issarEmail :: Lens' InstancesSetServiceAccountRequest (Maybe Text)
@@ -30684,9 +30931,11 @@ instance ToJSON InstancesSetServiceAccountRequest
 
 --
 -- /See:/ 'securityPolicyReference' smart constructor.
-newtype SecurityPolicyReference = SecurityPolicyReference'
+newtype SecurityPolicyReference =
+  SecurityPolicyReference'
     { _sprSecurityPolicy :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPolicyReference' with the minimum fields required to make a request.
 --
@@ -30696,9 +30945,7 @@ newtype SecurityPolicyReference = SecurityPolicyReference'
 securityPolicyReference
     :: SecurityPolicyReference
 securityPolicyReference =
-    SecurityPolicyReference'
-    { _sprSecurityPolicy = Nothing
-    }
+  SecurityPolicyReference' {_sprSecurityPolicy = Nothing}
 
 sprSecurityPolicy :: Lens' SecurityPolicyReference (Maybe Text)
 sprSecurityPolicy
@@ -30720,10 +30967,12 @@ instance ToJSON SecurityPolicyReference where
 
 --
 -- /See:/ 'diskTypesScopedListWarningDataItem' smart constructor.
-data DiskTypesScopedListWarningDataItem = DiskTypesScopedListWarningDataItem'
+data DiskTypesScopedListWarningDataItem =
+  DiskTypesScopedListWarningDataItem'
     { _dtslwdiValue :: !(Maybe Text)
     , _dtslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -30735,10 +30984,8 @@ data DiskTypesScopedListWarningDataItem = DiskTypesScopedListWarningDataItem'
 diskTypesScopedListWarningDataItem
     :: DiskTypesScopedListWarningDataItem
 diskTypesScopedListWarningDataItem =
-    DiskTypesScopedListWarningDataItem'
-    { _dtslwdiValue = Nothing
-    , _dtslwdiKey = Nothing
-    }
+  DiskTypesScopedListWarningDataItem'
+    {_dtslwdiValue = Nothing, _dtslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 dtslwdiValue :: Lens' DiskTypesScopedListWarningDataItem (Maybe Text)
@@ -30775,12 +31022,14 @@ instance ToJSON DiskTypesScopedListWarningDataItem
 -- | Contain information of Nat mapping for an interface of this endpoint.
 --
 -- /See:/ 'vMEndpointNATMAppingsInterfaceNATMAppings' smart constructor.
-data VMEndpointNATMAppingsInterfaceNATMAppings = VMEndpointNATMAppingsInterfaceNATMAppings'
+data VMEndpointNATMAppingsInterfaceNATMAppings =
+  VMEndpointNATMAppingsInterfaceNATMAppings'
     { _vmenatmainatmaSourceAliasIPRange :: !(Maybe Text)
     , _vmenatmainatmaSourceVirtualIP    :: !(Maybe Text)
     , _vmenatmainatmaNATIPPortRanges    :: !(Maybe [Text])
     , _vmenatmainatmaNumTotalNATPorts   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VMEndpointNATMAppingsInterfaceNATMAppings' with the minimum fields required to make a request.
 --
@@ -30796,7 +31045,7 @@ data VMEndpointNATMAppingsInterfaceNATMAppings = VMEndpointNATMAppingsInterfaceN
 vMEndpointNATMAppingsInterfaceNATMAppings
     :: VMEndpointNATMAppingsInterfaceNATMAppings
 vMEndpointNATMAppingsInterfaceNATMAppings =
-    VMEndpointNATMAppingsInterfaceNATMAppings'
+  VMEndpointNATMAppingsInterfaceNATMAppings'
     { _vmenatmainatmaSourceAliasIPRange = Nothing
     , _vmenatmainatmaSourceVirtualIP = Nothing
     , _vmenatmainatmaNATIPPortRanges = Nothing
@@ -30835,7 +31084,8 @@ vmenatmainatmaNumTotalNATPorts
       . mapping _Coerce
 
 instance FromJSON
-         VMEndpointNATMAppingsInterfaceNATMAppings where
+           VMEndpointNATMAppingsInterfaceNATMAppings
+         where
         parseJSON
           = withObject
               "VMEndpointNATMAppingsInterfaceNATMAppings"
@@ -30847,7 +31097,8 @@ instance FromJSON
                      <*> (o .:? "numTotalNatPorts"))
 
 instance ToJSON
-         VMEndpointNATMAppingsInterfaceNATMAppings where
+           VMEndpointNATMAppingsInterfaceNATMAppings
+         where
         toJSON VMEndpointNATMAppingsInterfaceNATMAppings'{..}
           = object
               (catMaybes
@@ -30863,11 +31114,13 @@ instance ToJSON
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'vpnTunnelAggregatedListWarning' smart constructor.
-data VPNTunnelAggregatedListWarning = VPNTunnelAggregatedListWarning'
+data VPNTunnelAggregatedListWarning =
+  VPNTunnelAggregatedListWarning'
     { _vtalwData    :: !(Maybe [VPNTunnelAggregatedListWarningDataItem])
     , _vtalwCode    :: !(Maybe VPNTunnelAggregatedListWarningCode)
     , _vtalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -30881,11 +31134,8 @@ data VPNTunnelAggregatedListWarning = VPNTunnelAggregatedListWarning'
 vpnTunnelAggregatedListWarning
     :: VPNTunnelAggregatedListWarning
 vpnTunnelAggregatedListWarning =
-    VPNTunnelAggregatedListWarning'
-    { _vtalwData = Nothing
-    , _vtalwCode = Nothing
-    , _vtalwMessage = Nothing
-    }
+  VPNTunnelAggregatedListWarning'
+    {_vtalwData = Nothing, _vtalwCode = Nothing, _vtalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -30929,7 +31179,8 @@ instance ToJSON VPNTunnelAggregatedListWarning where
 -- v1.targetHttpProxies ==)
 --
 -- /See:/ 'targetHTTPProxy' smart constructor.
-data TargetHTTPProxy = TargetHTTPProxy'
+data TargetHTTPProxy =
+  TargetHTTPProxy'
     { _thttppURLMap            :: !(Maybe Text)
     , _thttppKind              :: !Text
     , _thttppSelfLink          :: !(Maybe Text)
@@ -30937,7 +31188,8 @@ data TargetHTTPProxy = TargetHTTPProxy'
     , _thttppCreationTimestamp :: !(Maybe Text)
     , _thttppId                :: !(Maybe (Textual Word64))
     , _thttppDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPProxy' with the minimum fields required to make a request.
 --
@@ -30959,7 +31211,7 @@ data TargetHTTPProxy = TargetHTTPProxy'
 targetHTTPProxy
     :: TargetHTTPProxy
 targetHTTPProxy =
-    TargetHTTPProxy'
+  TargetHTTPProxy'
     { _thttppURLMap = Nothing
     , _thttppKind = "compute#targetHttpProxy"
     , _thttppSelfLink = Nothing
@@ -31048,7 +31300,8 @@ instance ToJSON TargetHTTPProxy where
 -- resource_for beta.machineTypes ==)
 --
 -- /See:/ 'machineType' smart constructor.
-data MachineType = MachineType'
+data MachineType =
+  MachineType'
     { _mtIsSharedCPU                  :: !(Maybe Bool)
     , _mtKind                         :: !Text
     , _mtImageSpaceGb                 :: !(Maybe (Textual Int32))
@@ -31064,7 +31317,8 @@ data MachineType = MachineType'
     , _mtMemoryMb                     :: !(Maybe (Textual Int32))
     , _mtDescription                  :: !(Maybe Text)
     , _mtDeprecated                   :: !(Maybe DeprecationStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineType' with the minimum fields required to make a request.
 --
@@ -31102,7 +31356,7 @@ data MachineType = MachineType'
 machineType
     :: MachineType
 machineType =
-    MachineType'
+  MachineType'
     { _mtIsSharedCPU = Nothing
     , _mtKind = "compute#machineType"
     , _mtImageSpaceGb = Nothing
@@ -31261,10 +31515,12 @@ instance ToJSON MachineType where
 -- the instance.
 --
 -- /See:/ 'acceleratorConfig' smart constructor.
-data AcceleratorConfig = AcceleratorConfig'
+data AcceleratorConfig =
+  AcceleratorConfig'
     { _acAcceleratorCount :: !(Maybe (Textual Int32))
     , _acAcceleratorType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceleratorConfig' with the minimum fields required to make a request.
 --
@@ -31276,10 +31532,8 @@ data AcceleratorConfig = AcceleratorConfig'
 acceleratorConfig
     :: AcceleratorConfig
 acceleratorConfig =
-    AcceleratorConfig'
-    { _acAcceleratorCount = Nothing
-    , _acAcceleratorType = Nothing
-    }
+  AcceleratorConfig'
+    {_acAcceleratorCount = Nothing, _acAcceleratorType = Nothing}
 
 -- | The number of the guest accelerator cards exposed to this instance.
 acAcceleratorCount :: Lens' AcceleratorConfig (Maybe Int32)
@@ -31314,11 +31568,13 @@ instance ToJSON AcceleratorConfig where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'autoscalerListWarning' smart constructor.
-data AutoscalerListWarning = AutoscalerListWarning'
+data AutoscalerListWarning =
+  AutoscalerListWarning'
     { _alwData    :: !(Maybe [AutoscalerListWarningDataItem])
     , _alwCode    :: !(Maybe AutoscalerListWarningCode)
     , _alwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalerListWarning' with the minimum fields required to make a request.
 --
@@ -31332,11 +31588,8 @@ data AutoscalerListWarning = AutoscalerListWarning'
 autoscalerListWarning
     :: AutoscalerListWarning
 autoscalerListWarning =
-    AutoscalerListWarning'
-    { _alwData = Nothing
-    , _alwCode = Nothing
-    , _alwMessage = Nothing
-    }
+  AutoscalerListWarning'
+    {_alwData = Nothing, _alwCode = Nothing, _alwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -31373,10 +31626,12 @@ instance ToJSON AutoscalerListWarning where
 
 --
 -- /See:/ 'machineTypeAggregatedListWarningDataItem' smart constructor.
-data MachineTypeAggregatedListWarningDataItem = MachineTypeAggregatedListWarningDataItem'
+data MachineTypeAggregatedListWarningDataItem =
+  MachineTypeAggregatedListWarningDataItem'
     { _mtalwdiValue :: !(Maybe Text)
     , _mtalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypeAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -31388,10 +31643,8 @@ data MachineTypeAggregatedListWarningDataItem = MachineTypeAggregatedListWarning
 machineTypeAggregatedListWarningDataItem
     :: MachineTypeAggregatedListWarningDataItem
 machineTypeAggregatedListWarningDataItem =
-    MachineTypeAggregatedListWarningDataItem'
-    { _mtalwdiValue = Nothing
-    , _mtalwdiKey = Nothing
-    }
+  MachineTypeAggregatedListWarningDataItem'
+    {_mtalwdiValue = Nothing, _mtalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 mtalwdiValue :: Lens' MachineTypeAggregatedListWarningDataItem (Maybe Text)
@@ -31410,7 +31663,8 @@ mtalwdiKey
   = lens _mtalwdiKey (\ s a -> s{_mtalwdiKey = a})
 
 instance FromJSON
-         MachineTypeAggregatedListWarningDataItem where
+           MachineTypeAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "MachineTypeAggregatedListWarningDataItem"
@@ -31419,7 +31673,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         MachineTypeAggregatedListWarningDataItem where
+           MachineTypeAggregatedListWarningDataItem
+         where
         toJSON MachineTypeAggregatedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -31430,9 +31685,11 @@ instance ToJSON
 -- operation, this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError'
+newtype OperationError =
+  OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
@@ -31441,10 +31698,7 @@ newtype OperationError = OperationError'
 -- * 'oeErrors'
 operationError
     :: OperationError
-operationError =
-    OperationError'
-    { _oeErrors = Nothing
-    }
+operationError = OperationError' {_oeErrors = Nothing}
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -31467,11 +31721,13 @@ instance ToJSON OperationError where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'nodeTypeAggregatedListWarning' smart constructor.
-data NodeTypeAggregatedListWarning = NodeTypeAggregatedListWarning'
+data NodeTypeAggregatedListWarning =
+  NodeTypeAggregatedListWarning'
     { _ntalwtData    :: !(Maybe [NodeTypeAggregatedListWarningDataItem])
     , _ntalwtCode    :: !(Maybe NodeTypeAggregatedListWarningCode)
     , _ntalwtMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypeAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -31485,11 +31741,8 @@ data NodeTypeAggregatedListWarning = NodeTypeAggregatedListWarning'
 nodeTypeAggregatedListWarning
     :: NodeTypeAggregatedListWarning
 nodeTypeAggregatedListWarning =
-    NodeTypeAggregatedListWarning'
-    { _ntalwtData = Nothing
-    , _ntalwtCode = Nothing
-    , _ntalwtMessage = Nothing
-    }
+  NodeTypeAggregatedListWarning'
+    {_ntalwtData = Nothing, _ntalwtCode = Nothing, _ntalwtMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -31532,11 +31785,13 @@ instance ToJSON NodeTypeAggregatedListWarning where
 -- is empty.
 --
 -- /See:/ 'targetInstancesScopedListWarning' smart constructor.
-data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning'
+data TargetInstancesScopedListWarning =
+  TargetInstancesScopedListWarning'
     { _tislwData    :: !(Maybe [TargetInstancesScopedListWarningDataItem])
     , _tislwCode    :: !(Maybe TargetInstancesScopedListWarningCode)
     , _tislwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstancesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -31550,11 +31805,8 @@ data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning'
 targetInstancesScopedListWarning
     :: TargetInstancesScopedListWarning
 targetInstancesScopedListWarning =
-    TargetInstancesScopedListWarning'
-    { _tislwData = Nothing
-    , _tislwCode = Nothing
-    , _tislwMessage = Nothing
-    }
+  TargetInstancesScopedListWarning'
+    {_tislwData = Nothing, _tislwCode = Nothing, _tislwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -31596,14 +31848,16 @@ instance ToJSON TargetInstancesScopedListWarning
 
 --
 -- /See:/ 'subnetworkAggregatedList' smart constructor.
-data SubnetworkAggregatedList = SubnetworkAggregatedList'
+data SubnetworkAggregatedList =
+  SubnetworkAggregatedList'
     { _salNextPageToken :: !(Maybe Text)
     , _salKind          :: !Text
     , _salItems         :: !(Maybe SubnetworkAggregatedListItems)
     , _salSelfLink      :: !(Maybe Text)
     , _salWarning       :: !(Maybe SubnetworkAggregatedListWarning)
     , _salId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworkAggregatedList' with the minimum fields required to make a request.
 --
@@ -31623,7 +31877,7 @@ data SubnetworkAggregatedList = SubnetworkAggregatedList'
 subnetworkAggregatedList
     :: SubnetworkAggregatedList
 subnetworkAggregatedList =
-    SubnetworkAggregatedList'
+  SubnetworkAggregatedList'
     { _salNextPageToken = Nothing
     , _salKind = "compute#subnetworkAggregatedList"
     , _salItems = Nothing
@@ -31690,10 +31944,12 @@ instance ToJSON SubnetworkAggregatedList where
 
 --
 -- /See:/ 'vpnTunnelListWarningDataItem' smart constructor.
-data VPNTunnelListWarningDataItem = VPNTunnelListWarningDataItem'
+data VPNTunnelListWarningDataItem =
+  VPNTunnelListWarningDataItem'
     { _vtlwdiValue :: !(Maybe Text)
     , _vtlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -31705,10 +31961,7 @@ data VPNTunnelListWarningDataItem = VPNTunnelListWarningDataItem'
 vpnTunnelListWarningDataItem
     :: VPNTunnelListWarningDataItem
 vpnTunnelListWarningDataItem =
-    VPNTunnelListWarningDataItem'
-    { _vtlwdiValue = Nothing
-    , _vtlwdiKey = Nothing
-    }
+  VPNTunnelListWarningDataItem' {_vtlwdiValue = Nothing, _vtlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 vtlwdiValue :: Lens' VPNTunnelListWarningDataItem (Maybe Text)
@@ -31742,10 +31995,12 @@ instance ToJSON VPNTunnelListWarningDataItem where
 
 --
 -- /See:/ 'interconnectDiagnosticsLinkOpticalPower' smart constructor.
-data InterconnectDiagnosticsLinkOpticalPower = InterconnectDiagnosticsLinkOpticalPower'
+data InterconnectDiagnosticsLinkOpticalPower =
+  InterconnectDiagnosticsLinkOpticalPower'
     { _idlopState :: !(Maybe InterconnectDiagnosticsLinkOpticalPowerState)
     , _idlopValue :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectDiagnosticsLinkOpticalPower' with the minimum fields required to make a request.
 --
@@ -31757,10 +32012,8 @@ data InterconnectDiagnosticsLinkOpticalPower = InterconnectDiagnosticsLinkOptica
 interconnectDiagnosticsLinkOpticalPower
     :: InterconnectDiagnosticsLinkOpticalPower
 interconnectDiagnosticsLinkOpticalPower =
-    InterconnectDiagnosticsLinkOpticalPower'
-    { _idlopState = Nothing
-    , _idlopValue = Nothing
-    }
+  InterconnectDiagnosticsLinkOpticalPower'
+    {_idlopState = Nothing, _idlopValue = Nothing}
 
 idlopState :: Lens' InterconnectDiagnosticsLinkOpticalPower (Maybe InterconnectDiagnosticsLinkOpticalPowerState)
 idlopState
@@ -31776,7 +32029,8 @@ idlopValue
       mapping _Coerce
 
 instance FromJSON
-         InterconnectDiagnosticsLinkOpticalPower where
+           InterconnectDiagnosticsLinkOpticalPower
+         where
         parseJSON
           = withObject
               "InterconnectDiagnosticsLinkOpticalPower"
@@ -31785,7 +32039,8 @@ instance FromJSON
                    (o .:? "state") <*> (o .:? "value"))
 
 instance ToJSON
-         InterconnectDiagnosticsLinkOpticalPower where
+           InterconnectDiagnosticsLinkOpticalPower
+         where
         toJSON InterconnectDiagnosticsLinkOpticalPower'{..}
           = object
               (catMaybes
@@ -31794,9 +32049,11 @@ instance ToJSON
 
 --
 -- /See:/ 'disksResizeRequest' smart constructor.
-newtype DisksResizeRequest = DisksResizeRequest'
+newtype DisksResizeRequest =
+  DisksResizeRequest'
     { _drrSizeGb :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisksResizeRequest' with the minimum fields required to make a request.
 --
@@ -31805,10 +32062,7 @@ newtype DisksResizeRequest = DisksResizeRequest'
 -- * 'drrSizeGb'
 disksResizeRequest
     :: DisksResizeRequest
-disksResizeRequest =
-    DisksResizeRequest'
-    { _drrSizeGb = Nothing
-    }
+disksResizeRequest = DisksResizeRequest' {_drrSizeGb = Nothing}
 
 -- | The new size of the persistent disk, which is specified in GB.
 drrSizeGb :: Lens' DisksResizeRequest (Maybe Int64)
@@ -31827,10 +32081,12 @@ instance ToJSON DisksResizeRequest where
 
 --
 -- /See:/ 'autoscalersScopedListWarningDataItem' smart constructor.
-data AutoscalersScopedListWarningDataItem = AutoscalersScopedListWarningDataItem'
+data AutoscalersScopedListWarningDataItem =
+  AutoscalersScopedListWarningDataItem'
     { _aValue :: !(Maybe Text)
     , _aKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalersScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -31842,10 +32098,7 @@ data AutoscalersScopedListWarningDataItem = AutoscalersScopedListWarningDataItem
 autoscalersScopedListWarningDataItem
     :: AutoscalersScopedListWarningDataItem
 autoscalersScopedListWarningDataItem =
-    AutoscalersScopedListWarningDataItem'
-    { _aValue = Nothing
-    , _aKey = Nothing
-    }
+  AutoscalersScopedListWarningDataItem' {_aValue = Nothing, _aKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 aValue :: Lens' AutoscalersScopedListWarningDataItem (Maybe Text)
@@ -31862,7 +32115,8 @@ aKey :: Lens' AutoscalersScopedListWarningDataItem (Maybe Text)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
 
 instance FromJSON
-         AutoscalersScopedListWarningDataItem where
+           AutoscalersScopedListWarningDataItem
+         where
         parseJSON
           = withObject "AutoscalersScopedListWarningDataItem"
               (\ o ->
@@ -31878,11 +32132,13 @@ instance ToJSON AutoscalersScopedListWarningDataItem
 
 --
 -- /See:/ 'zoneSetPolicyRequest' smart constructor.
-data ZoneSetPolicyRequest = ZoneSetPolicyRequest'
+data ZoneSetPolicyRequest =
+  ZoneSetPolicyRequest'
     { _zsprEtag     :: !(Maybe Bytes)
     , _zsprBindings :: !(Maybe [Binding])
     , _zsprPolicy   :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ZoneSetPolicyRequest' with the minimum fields required to make a request.
 --
@@ -31896,11 +32152,8 @@ data ZoneSetPolicyRequest = ZoneSetPolicyRequest'
 zoneSetPolicyRequest
     :: ZoneSetPolicyRequest
 zoneSetPolicyRequest =
-    ZoneSetPolicyRequest'
-    { _zsprEtag = Nothing
-    , _zsprBindings = Nothing
-    , _zsprPolicy = Nothing
-    }
+  ZoneSetPolicyRequest'
+    {_zsprEtag = Nothing, _zsprBindings = Nothing, _zsprPolicy = Nothing}
 
 -- | Flatten Policy to create a backward compatible wire-format. Deprecated.
 -- Use \'policy\' to specify the etag.
@@ -31943,10 +32196,12 @@ instance ToJSON ZoneSetPolicyRequest where
 
 --
 -- /See:/ 'diskTypeAggregatedListWarningDataItem' smart constructor.
-data DiskTypeAggregatedListWarningDataItem = DiskTypeAggregatedListWarningDataItem'
+data DiskTypeAggregatedListWarningDataItem =
+  DiskTypeAggregatedListWarningDataItem'
     { _dtalwdiValue :: !(Maybe Text)
     , _dtalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskTypeAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -31958,10 +32213,8 @@ data DiskTypeAggregatedListWarningDataItem = DiskTypeAggregatedListWarningDataIt
 diskTypeAggregatedListWarningDataItem
     :: DiskTypeAggregatedListWarningDataItem
 diskTypeAggregatedListWarningDataItem =
-    DiskTypeAggregatedListWarningDataItem'
-    { _dtalwdiValue = Nothing
-    , _dtalwdiKey = Nothing
-    }
+  DiskTypeAggregatedListWarningDataItem'
+    {_dtalwdiValue = Nothing, _dtalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 dtalwdiValue :: Lens' DiskTypeAggregatedListWarningDataItem (Maybe Text)
@@ -31980,7 +32233,8 @@ dtalwdiKey
   = lens _dtalwdiKey (\ s a -> s{_dtalwdiKey = a})
 
 instance FromJSON
-         DiskTypeAggregatedListWarningDataItem where
+           DiskTypeAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject "DiskTypeAggregatedListWarningDataItem"
               (\ o ->
@@ -31998,11 +32252,13 @@ instance ToJSON DiskTypeAggregatedListWarningDataItem
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'regionInstanceGroupManagerListWarning' smart constructor.
-data RegionInstanceGroupManagerListWarning = RegionInstanceGroupManagerListWarning'
+data RegionInstanceGroupManagerListWarning =
+  RegionInstanceGroupManagerListWarning'
     { _rigmlwData    :: !(Maybe [RegionInstanceGroupManagerListWarningDataItem])
     , _rigmlwCode    :: !(Maybe RegionInstanceGroupManagerListWarningCode)
     , _rigmlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagerListWarning' with the minimum fields required to make a request.
 --
@@ -32016,11 +32272,8 @@ data RegionInstanceGroupManagerListWarning = RegionInstanceGroupManagerListWarni
 regionInstanceGroupManagerListWarning
     :: RegionInstanceGroupManagerListWarning
 regionInstanceGroupManagerListWarning =
-    RegionInstanceGroupManagerListWarning'
-    { _rigmlwData = Nothing
-    , _rigmlwCode = Nothing
-    , _rigmlwMessage = Nothing
-    }
+  RegionInstanceGroupManagerListWarning'
+    {_rigmlwData = Nothing, _rigmlwCode = Nothing, _rigmlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32044,7 +32297,8 @@ rigmlwMessage
       (\ s a -> s{_rigmlwMessage = a})
 
 instance FromJSON
-         RegionInstanceGroupManagerListWarning where
+           RegionInstanceGroupManagerListWarning
+         where
         parseJSON
           = withObject "RegionInstanceGroupManagerListWarning"
               (\ o ->
@@ -32063,9 +32317,11 @@ instance ToJSON RegionInstanceGroupManagerListWarning
 
 --
 -- /See:/ 'regionInstanceGroupManagersSetTemplateRequest' smart constructor.
-newtype RegionInstanceGroupManagersSetTemplateRequest = RegionInstanceGroupManagersSetTemplateRequest'
+newtype RegionInstanceGroupManagersSetTemplateRequest =
+  RegionInstanceGroupManagersSetTemplateRequest'
     { _rigmstrInstanceTemplate :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersSetTemplateRequest' with the minimum fields required to make a request.
 --
@@ -32075,9 +32331,8 @@ newtype RegionInstanceGroupManagersSetTemplateRequest = RegionInstanceGroupManag
 regionInstanceGroupManagersSetTemplateRequest
     :: RegionInstanceGroupManagersSetTemplateRequest
 regionInstanceGroupManagersSetTemplateRequest =
-    RegionInstanceGroupManagersSetTemplateRequest'
-    { _rigmstrInstanceTemplate = Nothing
-    }
+  RegionInstanceGroupManagersSetTemplateRequest'
+    {_rigmstrInstanceTemplate = Nothing}
 
 -- | URL of the InstanceTemplate resource from which all new instances will
 -- be created.
@@ -32087,7 +32342,8 @@ rigmstrInstanceTemplate
       (\ s a -> s{_rigmstrInstanceTemplate = a})
 
 instance FromJSON
-         RegionInstanceGroupManagersSetTemplateRequest where
+           RegionInstanceGroupManagersSetTemplateRequest
+         where
         parseJSON
           = withObject
               "RegionInstanceGroupManagersSetTemplateRequest"
@@ -32096,7 +32352,8 @@ instance FromJSON
                    (o .:? "instanceTemplate"))
 
 instance ToJSON
-         RegionInstanceGroupManagersSetTemplateRequest where
+           RegionInstanceGroupManagersSetTemplateRequest
+         where
         toJSON
           RegionInstanceGroupManagersSetTemplateRequest'{..}
           = object
@@ -32106,14 +32363,16 @@ instance ToJSON
 
 --
 -- /See:/ 'instanceGroupsListInstances' smart constructor.
-data InstanceGroupsListInstances = InstanceGroupsListInstances'
+data InstanceGroupsListInstances =
+  InstanceGroupsListInstances'
     { _igliNextPageToken :: !(Maybe Text)
     , _igliKind          :: !Text
     , _igliItems         :: !(Maybe [InstanceWithNamedPorts])
     , _igliSelfLink      :: !(Maybe Text)
     , _igliWarning       :: !(Maybe InstanceGroupsListInstancesWarning)
     , _igliId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstances' with the minimum fields required to make a request.
 --
@@ -32133,7 +32392,7 @@ data InstanceGroupsListInstances = InstanceGroupsListInstances'
 instanceGroupsListInstances
     :: InstanceGroupsListInstances
 instanceGroupsListInstances =
-    InstanceGroupsListInstances'
+  InstanceGroupsListInstances'
     { _igliNextPageToken = Nothing
     , _igliKind = "compute#instanceGroupsListInstances"
     , _igliItems = Nothing
@@ -32212,7 +32471,8 @@ instance ToJSON InstanceGroupsListInstances where
 -- v1.regionAutoscalers ==)
 --
 -- /See:/ 'autoscaler' smart constructor.
-data Autoscaler = Autoscaler'
+data Autoscaler =
+  Autoscaler'
     { _aaStatus            :: !(Maybe AutoscalerStatus)
     , _aaKind              :: !Text
     , _aaZone              :: !(Maybe Text)
@@ -32225,7 +32485,8 @@ data Autoscaler = Autoscaler'
     , _aaRegion            :: !(Maybe Text)
     , _aaDescription       :: !(Maybe Text)
     , _aaTarget            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Autoscaler' with the minimum fields required to make a request.
 --
@@ -32257,7 +32518,7 @@ data Autoscaler = Autoscaler'
 autoscaler
     :: Autoscaler
 autoscaler =
-    Autoscaler'
+  Autoscaler'
     { _aaStatus = Nothing
     , _aaKind = "compute#autoscaler"
     , _aaZone = Nothing
@@ -32386,11 +32647,13 @@ instance ToJSON Autoscaler where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'machineTypeListWarning' smart constructor.
-data MachineTypeListWarning = MachineTypeListWarning'
+data MachineTypeListWarning =
+  MachineTypeListWarning'
     { _mtlwData    :: !(Maybe [MachineTypeListWarningDataItem])
     , _mtlwCode    :: !(Maybe MachineTypeListWarningCode)
     , _mtlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MachineTypeListWarning' with the minimum fields required to make a request.
 --
@@ -32404,11 +32667,8 @@ data MachineTypeListWarning = MachineTypeListWarning'
 machineTypeListWarning
     :: MachineTypeListWarning
 machineTypeListWarning =
-    MachineTypeListWarning'
-    { _mtlwData = Nothing
-    , _mtlwCode = Nothing
-    , _mtlwMessage = Nothing
-    }
+  MachineTypeListWarning'
+    {_mtlwData = Nothing, _mtlwCode = Nothing, _mtlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32448,11 +32708,13 @@ instance ToJSON MachineTypeListWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetHTTPProxyListWarning' smart constructor.
-data TargetHTTPProxyListWarning = TargetHTTPProxyListWarning'
+data TargetHTTPProxyListWarning =
+  TargetHTTPProxyListWarning'
     { _thttpplwData    :: !(Maybe [TargetHTTPProxyListWarningDataItem])
     , _thttpplwCode    :: !(Maybe TargetHTTPProxyListWarningCode)
     , _thttpplwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPProxyListWarning' with the minimum fields required to make a request.
 --
@@ -32466,7 +32728,7 @@ data TargetHTTPProxyListWarning = TargetHTTPProxyListWarning'
 targetHTTPProxyListWarning
     :: TargetHTTPProxyListWarning
 targetHTTPProxyListWarning =
-    TargetHTTPProxyListWarning'
+  TargetHTTPProxyListWarning'
     { _thttpplwData = Nothing
     , _thttpplwCode = Nothing
     , _thttpplwMessage = Nothing
@@ -32512,11 +32774,13 @@ instance ToJSON TargetHTTPProxyListWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'diskAggregatedListWarning' smart constructor.
-data DiskAggregatedListWarning = DiskAggregatedListWarning'
+data DiskAggregatedListWarning =
+  DiskAggregatedListWarning'
     { _dalwData    :: !(Maybe [DiskAggregatedListWarningDataItem])
     , _dalwCode    :: !(Maybe DiskAggregatedListWarningCode)
     , _dalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -32530,11 +32794,8 @@ data DiskAggregatedListWarning = DiskAggregatedListWarning'
 diskAggregatedListWarning
     :: DiskAggregatedListWarning
 diskAggregatedListWarning =
-    DiskAggregatedListWarning'
-    { _dalwData = Nothing
-    , _dalwCode = Nothing
-    , _dalwMessage = Nothing
-    }
+  DiskAggregatedListWarning'
+    {_dalwData = Nothing, _dalwCode = Nothing, _dalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32574,11 +32835,13 @@ instance ToJSON DiskAggregatedListWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetPoolAggregatedListWarning' smart constructor.
-data TargetPoolAggregatedListWarning = TargetPoolAggregatedListWarning'
+data TargetPoolAggregatedListWarning =
+  TargetPoolAggregatedListWarning'
     { _tpalwData    :: !(Maybe [TargetPoolAggregatedListWarningDataItem])
     , _tpalwCode    :: !(Maybe TargetPoolAggregatedListWarningCode)
     , _tpalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -32592,11 +32855,8 @@ data TargetPoolAggregatedListWarning = TargetPoolAggregatedListWarning'
 targetPoolAggregatedListWarning
     :: TargetPoolAggregatedListWarning
 targetPoolAggregatedListWarning =
-    TargetPoolAggregatedListWarning'
-    { _tpalwData = Nothing
-    , _tpalwCode = Nothing
-    , _tpalwMessage = Nothing
-    }
+  TargetPoolAggregatedListWarning'
+    {_tpalwData = Nothing, _tpalwCode = Nothing, _tpalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32638,11 +32898,13 @@ instance ToJSON TargetPoolAggregatedListWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'usableSubnetworksAggregatedListWarning' smart constructor.
-data UsableSubnetworksAggregatedListWarning = UsableSubnetworksAggregatedListWarning'
+data UsableSubnetworksAggregatedListWarning =
+  UsableSubnetworksAggregatedListWarning'
     { _usalwData    :: !(Maybe [UsableSubnetworksAggregatedListWarningDataItem])
     , _usalwCode    :: !(Maybe UsableSubnetworksAggregatedListWarningCode)
     , _usalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsableSubnetworksAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -32656,11 +32918,8 @@ data UsableSubnetworksAggregatedListWarning = UsableSubnetworksAggregatedListWar
 usableSubnetworksAggregatedListWarning
     :: UsableSubnetworksAggregatedListWarning
 usableSubnetworksAggregatedListWarning =
-    UsableSubnetworksAggregatedListWarning'
-    { _usalwData = Nothing
-    , _usalwCode = Nothing
-    , _usalwMessage = Nothing
-    }
+  UsableSubnetworksAggregatedListWarning'
+    {_usalwData = Nothing, _usalwCode = Nothing, _usalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32683,7 +32942,8 @@ usalwMessage
   = lens _usalwMessage (\ s a -> s{_usalwMessage = a})
 
 instance FromJSON
-         UsableSubnetworksAggregatedListWarning where
+           UsableSubnetworksAggregatedListWarning
+         where
         parseJSON
           = withObject "UsableSubnetworksAggregatedListWarning"
               (\ o ->
@@ -32692,7 +32952,8 @@ instance FromJSON
                      (o .:? "message"))
 
 instance ToJSON
-         UsableSubnetworksAggregatedListWarning where
+           UsableSubnetworksAggregatedListWarning
+         where
         toJSON UsableSubnetworksAggregatedListWarning'{..}
           = object
               (catMaybes
@@ -32704,11 +32965,13 @@ instance ToJSON
 -- when the list is empty.
 --
 -- /See:/ 'disksScopedListWarning' smart constructor.
-data DisksScopedListWarning = DisksScopedListWarning'
+data DisksScopedListWarning =
+  DisksScopedListWarning'
     { _dslwData    :: !(Maybe [DisksScopedListWarningDataItem])
     , _dslwCode    :: !(Maybe DisksScopedListWarningCode)
     , _dslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisksScopedListWarning' with the minimum fields required to make a request.
 --
@@ -32722,11 +32985,8 @@ data DisksScopedListWarning = DisksScopedListWarning'
 disksScopedListWarning
     :: DisksScopedListWarning
 disksScopedListWarning =
-    DisksScopedListWarning'
-    { _dslwData = Nothing
-    , _dslwCode = Nothing
-    , _dslwMessage = Nothing
-    }
+  DisksScopedListWarning'
+    {_dslwData = Nothing, _dslwCode = Nothing, _dslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32765,10 +33025,12 @@ instance ToJSON DisksScopedListWarning where
 
 --
 -- /See:/ 'nodeTemplatesScopedListWarningDataItem' smart constructor.
-data NodeTemplatesScopedListWarningDataItem = NodeTemplatesScopedListWarningDataItem'
+data NodeTemplatesScopedListWarningDataItem =
+  NodeTemplatesScopedListWarningDataItem'
     { _ntslwdiValue :: !(Maybe Text)
     , _ntslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplatesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -32780,10 +33042,8 @@ data NodeTemplatesScopedListWarningDataItem = NodeTemplatesScopedListWarningData
 nodeTemplatesScopedListWarningDataItem
     :: NodeTemplatesScopedListWarningDataItem
 nodeTemplatesScopedListWarningDataItem =
-    NodeTemplatesScopedListWarningDataItem'
-    { _ntslwdiValue = Nothing
-    , _ntslwdiKey = Nothing
-    }
+  NodeTemplatesScopedListWarningDataItem'
+    {_ntslwdiValue = Nothing, _ntslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ntslwdiValue :: Lens' NodeTemplatesScopedListWarningDataItem (Maybe Text)
@@ -32802,7 +33062,8 @@ ntslwdiKey
   = lens _ntslwdiKey (\ s a -> s{_ntslwdiKey = a})
 
 instance FromJSON
-         NodeTemplatesScopedListWarningDataItem where
+           NodeTemplatesScopedListWarningDataItem
+         where
         parseJSON
           = withObject "NodeTemplatesScopedListWarningDataItem"
               (\ o ->
@@ -32810,7 +33071,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         NodeTemplatesScopedListWarningDataItem where
+           NodeTemplatesScopedListWarningDataItem
+         where
         toJSON NodeTemplatesScopedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -32820,9 +33082,11 @@ instance ToJSON
 -- | A list of TargetVpnGateway resources.
 --
 -- /See:/ 'targetVPNGatewayAggregatedListItems' smart constructor.
-newtype TargetVPNGatewayAggregatedListItems = TargetVPNGatewayAggregatedListItems'
+newtype TargetVPNGatewayAggregatedListItems =
+  TargetVPNGatewayAggregatedListItems'
     { _tvgaliAddtional :: HashMap Text TargetVPNGatewaysScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewayAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -32833,9 +33097,8 @@ targetVPNGatewayAggregatedListItems
     :: HashMap Text TargetVPNGatewaysScopedList -- ^ 'tvgaliAddtional'
     -> TargetVPNGatewayAggregatedListItems
 targetVPNGatewayAggregatedListItems pTvgaliAddtional_ =
-    TargetVPNGatewayAggregatedListItems'
-    { _tvgaliAddtional = _Coerce # pTvgaliAddtional_
-    }
+  TargetVPNGatewayAggregatedListItems'
+    {_tvgaliAddtional = _Coerce # pTvgaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of target VPN
 -- gateways.
@@ -32861,9 +33124,11 @@ instance ToJSON TargetVPNGatewayAggregatedListItems
 -- setLabels method.
 --
 -- /See:/ 'diskLabels' smart constructor.
-newtype DiskLabels = DiskLabels'
+newtype DiskLabels =
+  DiskLabels'
     { _dlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskLabels' with the minimum fields required to make a request.
 --
@@ -32873,10 +33138,7 @@ newtype DiskLabels = DiskLabels'
 diskLabels
     :: HashMap Text Text -- ^ 'dlAddtional'
     -> DiskLabels
-diskLabels pDlAddtional_ =
-    DiskLabels'
-    { _dlAddtional = _Coerce # pDlAddtional_
-    }
+diskLabels pDlAddtional_ = DiskLabels' {_dlAddtional = _Coerce # pDlAddtional_}
 
 dlAddtional :: Lens' DiskLabels (HashMap Text Text)
 dlAddtional
@@ -32893,10 +33155,12 @@ instance ToJSON DiskLabels where
 
 --
 -- /See:/ 'instanceGroupManagerListWarningDataItem' smart constructor.
-data InstanceGroupManagerListWarningDataItem = InstanceGroupManagerListWarningDataItem'
+data InstanceGroupManagerListWarningDataItem =
+  InstanceGroupManagerListWarningDataItem'
     { _igmlwdiValue :: !(Maybe Text)
     , _igmlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagerListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -32908,10 +33172,8 @@ data InstanceGroupManagerListWarningDataItem = InstanceGroupManagerListWarningDa
 instanceGroupManagerListWarningDataItem
     :: InstanceGroupManagerListWarningDataItem
 instanceGroupManagerListWarningDataItem =
-    InstanceGroupManagerListWarningDataItem'
-    { _igmlwdiValue = Nothing
-    , _igmlwdiKey = Nothing
-    }
+  InstanceGroupManagerListWarningDataItem'
+    {_igmlwdiValue = Nothing, _igmlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 igmlwdiValue :: Lens' InstanceGroupManagerListWarningDataItem (Maybe Text)
@@ -32930,7 +33192,8 @@ igmlwdiKey
   = lens _igmlwdiKey (\ s a -> s{_igmlwdiKey = a})
 
 instance FromJSON
-         InstanceGroupManagerListWarningDataItem where
+           InstanceGroupManagerListWarningDataItem
+         where
         parseJSON
           = withObject
               "InstanceGroupManagerListWarningDataItem"
@@ -32939,7 +33202,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InstanceGroupManagerListWarningDataItem where
+           InstanceGroupManagerListWarningDataItem
+         where
         toJSON InstanceGroupManagerListWarningDataItem'{..}
           = object
               (catMaybes
@@ -32949,11 +33213,13 @@ instance ToJSON
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'forwardingRuleAggregatedListWarning' smart constructor.
-data ForwardingRuleAggregatedListWarning = ForwardingRuleAggregatedListWarning'
+data ForwardingRuleAggregatedListWarning =
+  ForwardingRuleAggregatedListWarning'
     { _fralwData    :: !(Maybe [ForwardingRuleAggregatedListWarningDataItem])
     , _fralwCode    :: !(Maybe ForwardingRuleAggregatedListWarningCode)
     , _fralwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRuleAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -32967,11 +33233,8 @@ data ForwardingRuleAggregatedListWarning = ForwardingRuleAggregatedListWarning'
 forwardingRuleAggregatedListWarning
     :: ForwardingRuleAggregatedListWarning
 forwardingRuleAggregatedListWarning =
-    ForwardingRuleAggregatedListWarning'
-    { _fralwData = Nothing
-    , _fralwCode = Nothing
-    , _fralwMessage = Nothing
-    }
+  ForwardingRuleAggregatedListWarning'
+    {_fralwData = Nothing, _fralwCode = Nothing, _fralwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33013,11 +33276,13 @@ instance ToJSON ForwardingRuleAggregatedListWarning
 
 --
 -- /See:/ 'sslPolicyWarningsItem' smart constructor.
-data SSLPolicyWarningsItem = SSLPolicyWarningsItem'
+data SSLPolicyWarningsItem =
+  SSLPolicyWarningsItem'
     { _spwiData    :: !(Maybe [SSLPolicyWarningsItemDataItem])
     , _spwiCode    :: !(Maybe SSLPolicyWarningsItemCode)
     , _spwiMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLPolicyWarningsItem' with the minimum fields required to make a request.
 --
@@ -33031,11 +33296,8 @@ data SSLPolicyWarningsItem = SSLPolicyWarningsItem'
 sslPolicyWarningsItem
     :: SSLPolicyWarningsItem
 sslPolicyWarningsItem =
-    SSLPolicyWarningsItem'
-    { _spwiData = Nothing
-    , _spwiCode = Nothing
-    , _spwiMessage = Nothing
-    }
+  SSLPolicyWarningsItem'
+    {_spwiData = Nothing, _spwiCode = Nothing, _spwiMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33074,11 +33336,13 @@ instance ToJSON SSLPolicyWarningsItem where
 
 --
 -- /See:/ 'globalSetPolicyRequest' smart constructor.
-data GlobalSetPolicyRequest = GlobalSetPolicyRequest'
+data GlobalSetPolicyRequest =
+  GlobalSetPolicyRequest'
     { _gsprEtag     :: !(Maybe Bytes)
     , _gsprBindings :: !(Maybe [Binding])
     , _gsprPolicy   :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GlobalSetPolicyRequest' with the minimum fields required to make a request.
 --
@@ -33092,11 +33356,8 @@ data GlobalSetPolicyRequest = GlobalSetPolicyRequest'
 globalSetPolicyRequest
     :: GlobalSetPolicyRequest
 globalSetPolicyRequest =
-    GlobalSetPolicyRequest'
-    { _gsprEtag = Nothing
-    , _gsprBindings = Nothing
-    , _gsprPolicy = Nothing
-    }
+  GlobalSetPolicyRequest'
+    {_gsprEtag = Nothing, _gsprBindings = Nothing, _gsprPolicy = Nothing}
 
 -- | Flatten Policy to create a backward compatible wire-format. Deprecated.
 -- Use \'policy\' to specify the etag.
@@ -33139,10 +33400,12 @@ instance ToJSON GlobalSetPolicyRequest where
 
 --
 -- /See:/ 'regionAutoscalerListWarningDataItem' smart constructor.
-data RegionAutoscalerListWarningDataItem = RegionAutoscalerListWarningDataItem'
+data RegionAutoscalerListWarningDataItem =
+  RegionAutoscalerListWarningDataItem'
     { _ralwdiaValue :: !(Maybe Text)
     , _ralwdiaKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionAutoscalerListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -33154,10 +33417,8 @@ data RegionAutoscalerListWarningDataItem = RegionAutoscalerListWarningDataItem'
 regionAutoscalerListWarningDataItem
     :: RegionAutoscalerListWarningDataItem
 regionAutoscalerListWarningDataItem =
-    RegionAutoscalerListWarningDataItem'
-    { _ralwdiaValue = Nothing
-    , _ralwdiaKey = Nothing
-    }
+  RegionAutoscalerListWarningDataItem'
+    {_ralwdiaValue = Nothing, _ralwdiaKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ralwdiaValue :: Lens' RegionAutoscalerListWarningDataItem (Maybe Text)
@@ -33200,9 +33461,11 @@ instance ToJSON RegionAutoscalerListWarningDataItem
 -- \"images\". A label value can also be empty (e.g. \"my-label\": \"\").
 --
 -- /See:/ 'globalSetLabelsRequestLabels' smart constructor.
-newtype GlobalSetLabelsRequestLabels = GlobalSetLabelsRequestLabels'
+newtype GlobalSetLabelsRequestLabels =
+  GlobalSetLabelsRequestLabels'
     { _gslrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GlobalSetLabelsRequestLabels' with the minimum fields required to make a request.
 --
@@ -33213,9 +33476,7 @@ globalSetLabelsRequestLabels
     :: HashMap Text Text -- ^ 'gslrlAddtional'
     -> GlobalSetLabelsRequestLabels
 globalSetLabelsRequestLabels pGslrlAddtional_ =
-    GlobalSetLabelsRequestLabels'
-    { _gslrlAddtional = _Coerce # pGslrlAddtional_
-    }
+  GlobalSetLabelsRequestLabels' {_gslrlAddtional = _Coerce # pGslrlAddtional_}
 
 gslrlAddtional :: Lens' GlobalSetLabelsRequestLabels (HashMap Text Text)
 gslrlAddtional
@@ -33237,11 +33498,13 @@ instance ToJSON GlobalSetLabelsRequestLabels where
 -- is empty.
 --
 -- /See:/ 'targetPoolsScopedListWarning' smart constructor.
-data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning'
+data TargetPoolsScopedListWarning =
+  TargetPoolsScopedListWarning'
     { _tpslwData    :: !(Maybe [TargetPoolsScopedListWarningDataItem])
     , _tpslwCode    :: !(Maybe TargetPoolsScopedListWarningCode)
     , _tpslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -33255,11 +33518,8 @@ data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning'
 targetPoolsScopedListWarning
     :: TargetPoolsScopedListWarning
 targetPoolsScopedListWarning =
-    TargetPoolsScopedListWarning'
-    { _tpslwData = Nothing
-    , _tpslwCode = Nothing
-    , _tpslwMessage = Nothing
-    }
+  TargetPoolsScopedListWarning'
+    {_tpslwData = Nothing, _tpslwCode = Nothing, _tpslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33299,12 +33559,14 @@ instance ToJSON TargetPoolsScopedListWarning where
 
 --
 -- /See:/ 'healthStatus' smart constructor.
-data HealthStatus = HealthStatus'
+data HealthStatus =
+  HealthStatus'
     { _hsIPAddress   :: !(Maybe Text)
     , _hsHealthState :: !(Maybe HealthStatusHealthState)
     , _hsPort        :: !(Maybe (Textual Int32))
     , _hsInstance    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HealthStatus' with the minimum fields required to make a request.
 --
@@ -33320,7 +33582,7 @@ data HealthStatus = HealthStatus'
 healthStatus
     :: HealthStatus
 healthStatus =
-    HealthStatus'
+  HealthStatus'
     { _hsIPAddress = Nothing
     , _hsHealthState = Nothing
     , _hsPort = Nothing
@@ -33370,14 +33632,16 @@ instance ToJSON HealthStatus where
 -- | Contains a list of TargetTcpProxy resources.
 --
 -- /See:/ 'targetTCPProxyList' smart constructor.
-data TargetTCPProxyList = TargetTCPProxyList'
+data TargetTCPProxyList =
+  TargetTCPProxyList'
     { _ttplNextPageToken :: !(Maybe Text)
     , _ttplKind          :: !Text
     , _ttplItems         :: !(Maybe [TargetTCPProxy])
     , _ttplSelfLink      :: !(Maybe Text)
     , _ttplWarning       :: !(Maybe TargetTCPProxyListWarning)
     , _ttplId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetTCPProxyList' with the minimum fields required to make a request.
 --
@@ -33397,7 +33661,7 @@ data TargetTCPProxyList = TargetTCPProxyList'
 targetTCPProxyList
     :: TargetTCPProxyList
 targetTCPProxyList =
-    TargetTCPProxyList'
+  TargetTCPProxyList'
     { _ttplNextPageToken = Nothing
     , _ttplKind = "compute#targetTcpProxyList"
     , _ttplItems = Nothing
@@ -33468,7 +33732,8 @@ instance ToJSON TargetTCPProxyList where
 -- v1.regions ==)
 --
 -- /See:/ 'region' smart constructor.
-data Region = Region'
+data Region =
+  Region'
     { _regeStatus            :: !(Maybe RegionStatus)
     , _regeZones             :: !(Maybe [Text])
     , _regeKind              :: !Text
@@ -33479,7 +33744,8 @@ data Region = Region'
     , _regeId                :: !(Maybe (Textual Word64))
     , _regeDescription       :: !(Maybe Text)
     , _regeDeprecated        :: !(Maybe DeprecationStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Region' with the minimum fields required to make a request.
 --
@@ -33507,7 +33773,7 @@ data Region = Region'
 region
     :: Region
 region =
-    Region'
+  Region'
     { _regeStatus = Nothing
     , _regeZones = Nothing
     , _regeKind = "compute#region"
@@ -33609,10 +33875,12 @@ instance ToJSON Region where
 
 --
 -- /See:/ 'operationListWarningDataItem' smart constructor.
-data OperationListWarningDataItem = OperationListWarningDataItem'
+data OperationListWarningDataItem =
+  OperationListWarningDataItem'
     { _olwdiValue :: !(Maybe Text)
     , _olwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -33624,10 +33892,7 @@ data OperationListWarningDataItem = OperationListWarningDataItem'
 operationListWarningDataItem
     :: OperationListWarningDataItem
 operationListWarningDataItem =
-    OperationListWarningDataItem'
-    { _olwdiValue = Nothing
-    , _olwdiKey = Nothing
-    }
+  OperationListWarningDataItem' {_olwdiValue = Nothing, _olwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 olwdiValue :: Lens' OperationListWarningDataItem (Maybe Text)
@@ -33661,9 +33926,11 @@ instance ToJSON OperationListWarningDataItem where
 -- | Guest OS features.
 --
 -- /See:/ 'guestOSFeature' smart constructor.
-newtype GuestOSFeature = GuestOSFeature'
+newtype GuestOSFeature =
+  GuestOSFeature'
     { _gofType :: Maybe GuestOSFeatureType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GuestOSFeature' with the minimum fields required to make a request.
 --
@@ -33672,10 +33939,7 @@ newtype GuestOSFeature = GuestOSFeature'
 -- * 'gofType'
 guestOSFeature
     :: GuestOSFeature
-guestOSFeature =
-    GuestOSFeature'
-    { _gofType = Nothing
-    }
+guestOSFeature = GuestOSFeature' {_gofType = Nothing}
 
 -- | The ID of a supported feature. Read Enabling guest operating system
 -- features to see a list of available options.
@@ -33695,7 +33959,8 @@ instance ToJSON GuestOSFeature where
 -- resource_for v1.vpnTunnels ==)
 --
 -- /See:/ 'vpnTunnel' smart constructor.
-data VPNTunnel = VPNTunnel'
+data VPNTunnel =
+  VPNTunnel'
     { _vtDetailedStatus        :: !(Maybe Text)
     , _vtStatus                :: !(Maybe VPNTunnelStatus)
     , _vtLocalTrafficSelector  :: !(Maybe [Text])
@@ -33713,7 +33978,8 @@ data VPNTunnel = VPNTunnel'
     , _vtIkeVersion            :: !(Maybe (Textual Int32))
     , _vtRegion                :: !(Maybe Text)
     , _vtDescription           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnel' with the minimum fields required to make a request.
 --
@@ -33755,7 +34021,7 @@ data VPNTunnel = VPNTunnel'
 vpnTunnel
     :: VPNTunnel
 vpnTunnel =
-    VPNTunnel'
+  VPNTunnel'
     { _vtDetailedStatus = Nothing
     , _vtStatus = Nothing
     , _vtLocalTrafficSelector = Nothing
@@ -33936,11 +34202,13 @@ instance ToJSON VPNTunnel where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'instanceGroupManagerAggregatedListWarning' smart constructor.
-data InstanceGroupManagerAggregatedListWarning = InstanceGroupManagerAggregatedListWarning'
+data InstanceGroupManagerAggregatedListWarning =
+  InstanceGroupManagerAggregatedListWarning'
     { _igmalwData    :: !(Maybe [InstanceGroupManagerAggregatedListWarningDataItem])
     , _igmalwCode    :: !(Maybe InstanceGroupManagerAggregatedListWarningCode)
     , _igmalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagerAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -33954,11 +34222,8 @@ data InstanceGroupManagerAggregatedListWarning = InstanceGroupManagerAggregatedL
 instanceGroupManagerAggregatedListWarning
     :: InstanceGroupManagerAggregatedListWarning
 instanceGroupManagerAggregatedListWarning =
-    InstanceGroupManagerAggregatedListWarning'
-    { _igmalwData = Nothing
-    , _igmalwCode = Nothing
-    , _igmalwMessage = Nothing
-    }
+  InstanceGroupManagerAggregatedListWarning'
+    {_igmalwData = Nothing, _igmalwCode = Nothing, _igmalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33982,7 +34247,8 @@ igmalwMessage
       (\ s a -> s{_igmalwMessage = a})
 
 instance FromJSON
-         InstanceGroupManagerAggregatedListWarning where
+           InstanceGroupManagerAggregatedListWarning
+         where
         parseJSON
           = withObject
               "InstanceGroupManagerAggregatedListWarning"
@@ -33992,7 +34258,8 @@ instance FromJSON
                      (o .:? "message"))
 
 instance ToJSON
-         InstanceGroupManagerAggregatedListWarning where
+           InstanceGroupManagerAggregatedListWarning
+         where
         toJSON InstanceGroupManagerAggregatedListWarning'{..}
           = object
               (catMaybes
@@ -34002,10 +34269,12 @@ instance ToJSON
 
 --
 -- /See:/ 'diskListWarningDataItem' smart constructor.
-data DiskListWarningDataItem = DiskListWarningDataItem'
+data DiskListWarningDataItem =
+  DiskListWarningDataItem'
     { _dlwdiValue :: !(Maybe Text)
     , _dlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiskListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -34017,10 +34286,7 @@ data DiskListWarningDataItem = DiskListWarningDataItem'
 diskListWarningDataItem
     :: DiskListWarningDataItem
 diskListWarningDataItem =
-    DiskListWarningDataItem'
-    { _dlwdiValue = Nothing
-    , _dlwdiKey = Nothing
-    }
+  DiskListWarningDataItem' {_dlwdiValue = Nothing, _dlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 dlwdiValue :: Lens' DiskListWarningDataItem (Maybe Text)
@@ -34055,9 +34321,11 @@ instance ToJSON DiskListWarningDataItem where
 -- template from a source instance.
 --
 -- /See:/ 'sourceInstanceParams' smart constructor.
-newtype SourceInstanceParams = SourceInstanceParams'
+newtype SourceInstanceParams =
+  SourceInstanceParams'
     { _sipDiskConfigs :: Maybe [DiskInstantiationConfig]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SourceInstanceParams' with the minimum fields required to make a request.
 --
@@ -34066,10 +34334,7 @@ newtype SourceInstanceParams = SourceInstanceParams'
 -- * 'sipDiskConfigs'
 sourceInstanceParams
     :: SourceInstanceParams
-sourceInstanceParams =
-    SourceInstanceParams'
-    { _sipDiskConfigs = Nothing
-    }
+sourceInstanceParams = SourceInstanceParams' {_sipDiskConfigs = Nothing}
 
 -- | Attached disks configuration. If not provided, defaults are applied: For
 -- boot disk and any other R\/W disks, new custom images will be created
@@ -34097,10 +34362,12 @@ instance ToJSON SourceInstanceParams where
 -- | An alias IP range attached to an instance\'s network interface.
 --
 -- /See:/ 'aliasIPRange' smart constructor.
-data AliasIPRange = AliasIPRange'
+data AliasIPRange =
+  AliasIPRange'
     { _airIPCIdRRange         :: !(Maybe Text)
     , _airSubnetworkRangeName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AliasIPRange' with the minimum fields required to make a request.
 --
@@ -34112,10 +34379,7 @@ data AliasIPRange = AliasIPRange'
 aliasIPRange
     :: AliasIPRange
 aliasIPRange =
-    AliasIPRange'
-    { _airIPCIdRRange = Nothing
-    , _airSubnetworkRangeName = Nothing
-    }
+  AliasIPRange' {_airIPCIdRRange = Nothing, _airSubnetworkRangeName = Nothing}
 
 -- | The IP CIDR range represented by this alias IP range. This IP CIDR range
 -- must belong to the specified subnetwork and cannot contain IP addresses
@@ -34153,10 +34417,12 @@ instance ToJSON AliasIPRange where
 
 --
 -- /See:/ 'nodeTypesScopedListWarningDataItem' smart constructor.
-data NodeTypesScopedListWarningDataItem = NodeTypesScopedListWarningDataItem'
+data NodeTypesScopedListWarningDataItem =
+  NodeTypesScopedListWarningDataItem'
     { _ntslwditValue :: !(Maybe Text)
     , _ntslwditKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -34168,10 +34434,8 @@ data NodeTypesScopedListWarningDataItem = NodeTypesScopedListWarningDataItem'
 nodeTypesScopedListWarningDataItem
     :: NodeTypesScopedListWarningDataItem
 nodeTypesScopedListWarningDataItem =
-    NodeTypesScopedListWarningDataItem'
-    { _ntslwditValue = Nothing
-    , _ntslwditKey = Nothing
-    }
+  NodeTypesScopedListWarningDataItem'
+    {_ntslwditValue = Nothing, _ntslwditKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ntslwditValue :: Lens' NodeTypesScopedListWarningDataItem (Maybe Text)
@@ -34209,11 +34473,13 @@ instance ToJSON NodeTypesScopedListWarningDataItem
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'targetInstanceListWarning' smart constructor.
-data TargetInstanceListWarning = TargetInstanceListWarning'
+data TargetInstanceListWarning =
+  TargetInstanceListWarning'
     { _tilwData    :: !(Maybe [TargetInstanceListWarningDataItem])
     , _tilwCode    :: !(Maybe TargetInstanceListWarningCode)
     , _tilwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstanceListWarning' with the minimum fields required to make a request.
 --
@@ -34227,11 +34493,8 @@ data TargetInstanceListWarning = TargetInstanceListWarning'
 targetInstanceListWarning
     :: TargetInstanceListWarning
 targetInstanceListWarning =
-    TargetInstanceListWarning'
-    { _tilwData = Nothing
-    , _tilwCode = Nothing
-    , _tilwMessage = Nothing
-    }
+  TargetInstanceListWarning'
+    {_tilwData = Nothing, _tilwCode = Nothing, _tilwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -34271,7 +34534,8 @@ instance ToJSON TargetInstanceListWarning where
 -- | A Node Type resource.
 --
 -- /See:/ 'nodeType' smart constructor.
-data NodeType = NodeType'
+data NodeType =
+  NodeType'
     { _ntKind              :: !Text
     , _ntZone              :: !(Maybe Text)
     , _ntCPUPlatform       :: !(Maybe Text)
@@ -34284,7 +34548,8 @@ data NodeType = NodeType'
     , _ntMemoryMb          :: !(Maybe (Textual Int32))
     , _ntDescription       :: !(Maybe Text)
     , _ntDeprecated        :: !(Maybe DeprecationStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeType' with the minimum fields required to make a request.
 --
@@ -34316,7 +34581,7 @@ data NodeType = NodeType'
 nodeType
     :: NodeType
 nodeType =
-    NodeType'
+  NodeType'
     { _ntKind = "compute#nodeType"
     , _ntZone = Nothing
     , _ntCPUPlatform = Nothing
@@ -34437,9 +34702,11 @@ instance ToJSON NodeType where
 -- | Authorization-related information used by Cloud Audit Logging.
 --
 -- /See:/ 'authorizationLoggingOptions' smart constructor.
-newtype AuthorizationLoggingOptions = AuthorizationLoggingOptions'
+newtype AuthorizationLoggingOptions =
+  AuthorizationLoggingOptions'
     { _aloPermissionType :: Maybe AuthorizationLoggingOptionsPermissionType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuthorizationLoggingOptions' with the minimum fields required to make a request.
 --
@@ -34449,9 +34716,7 @@ newtype AuthorizationLoggingOptions = AuthorizationLoggingOptions'
 authorizationLoggingOptions
     :: AuthorizationLoggingOptions
 authorizationLoggingOptions =
-    AuthorizationLoggingOptions'
-    { _aloPermissionType = Nothing
-    }
+  AuthorizationLoggingOptions' {_aloPermissionType = Nothing}
 
 -- | The type of the permission that was checked.
 aloPermissionType :: Lens' AuthorizationLoggingOptions (Maybe AuthorizationLoggingOptionsPermissionType)
@@ -34491,14 +34756,16 @@ instance ToJSON AuthorizationLoggingOptions where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pRules        :: !(Maybe [Rule])
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
     , _pIAMOwned     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -34518,7 +34785,7 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pRules = Nothing
@@ -34604,11 +34871,13 @@ instance ToJSON Policy where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'operationAggregatedListWarning' smart constructor.
-data OperationAggregatedListWarning = OperationAggregatedListWarning'
+data OperationAggregatedListWarning =
+  OperationAggregatedListWarning'
     { _oalwData    :: !(Maybe [OperationAggregatedListWarningDataItem])
     , _oalwCode    :: !(Maybe OperationAggregatedListWarningCode)
     , _oalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -34622,11 +34891,8 @@ data OperationAggregatedListWarning = OperationAggregatedListWarning'
 operationAggregatedListWarning
     :: OperationAggregatedListWarning
 operationAggregatedListWarning =
-    OperationAggregatedListWarning'
-    { _oalwData = Nothing
-    , _oalwCode = Nothing
-    , _oalwMessage = Nothing
-    }
+  OperationAggregatedListWarning'
+    {_oalwData = Nothing, _oalwCode = Nothing, _oalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -34666,10 +34932,12 @@ instance ToJSON OperationAggregatedListWarning where
 
 --
 -- /See:/ 'targetInstanceAggregatedListWarningDataItem' smart constructor.
-data TargetInstanceAggregatedListWarningDataItem = TargetInstanceAggregatedListWarningDataItem'
+data TargetInstanceAggregatedListWarningDataItem =
+  TargetInstanceAggregatedListWarningDataItem'
     { _tialwdiValue :: !(Maybe Text)
     , _tialwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetInstanceAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -34681,10 +34949,8 @@ data TargetInstanceAggregatedListWarningDataItem = TargetInstanceAggregatedListW
 targetInstanceAggregatedListWarningDataItem
     :: TargetInstanceAggregatedListWarningDataItem
 targetInstanceAggregatedListWarningDataItem =
-    TargetInstanceAggregatedListWarningDataItem'
-    { _tialwdiValue = Nothing
-    , _tialwdiKey = Nothing
-    }
+  TargetInstanceAggregatedListWarningDataItem'
+    {_tialwdiValue = Nothing, _tialwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tialwdiValue :: Lens' TargetInstanceAggregatedListWarningDataItem (Maybe Text)
@@ -34703,7 +34969,8 @@ tialwdiKey
   = lens _tialwdiKey (\ s a -> s{_tialwdiKey = a})
 
 instance FromJSON
-         TargetInstanceAggregatedListWarningDataItem where
+           TargetInstanceAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "TargetInstanceAggregatedListWarningDataItem"
@@ -34712,7 +34979,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         TargetInstanceAggregatedListWarningDataItem where
+           TargetInstanceAggregatedListWarningDataItem
+         where
         toJSON
           TargetInstanceAggregatedListWarningDataItem'{..}
           = object
@@ -34724,11 +34992,13 @@ instance ToJSON
 -- operations when the list is empty.
 --
 -- /See:/ 'operationsScopedListWarning' smart constructor.
-data OperationsScopedListWarning = OperationsScopedListWarning'
+data OperationsScopedListWarning =
+  OperationsScopedListWarning'
     { _oslwData    :: !(Maybe [OperationsScopedListWarningDataItem])
     , _oslwCode    :: !(Maybe OperationsScopedListWarningCode)
     , _oslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -34742,11 +35012,8 @@ data OperationsScopedListWarning = OperationsScopedListWarning'
 operationsScopedListWarning
     :: OperationsScopedListWarning
 operationsScopedListWarning =
-    OperationsScopedListWarning'
-    { _oslwData = Nothing
-    , _oslwCode = Nothing
-    , _oslwMessage = Nothing
-    }
+  OperationsScopedListWarning'
+    {_oslwData = Nothing, _oslwCode = Nothing, _oslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -34785,10 +35052,12 @@ instance ToJSON OperationsScopedListWarning where
 
 --
 -- /See:/ 'regionDiskTypeListWarningDataItem' smart constructor.
-data RegionDiskTypeListWarningDataItem = RegionDiskTypeListWarningDataItem'
+data RegionDiskTypeListWarningDataItem =
+  RegionDiskTypeListWarningDataItem'
     { _rdtlwdiValue :: !(Maybe Text)
     , _rdtlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionDiskTypeListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -34800,10 +35069,8 @@ data RegionDiskTypeListWarningDataItem = RegionDiskTypeListWarningDataItem'
 regionDiskTypeListWarningDataItem
     :: RegionDiskTypeListWarningDataItem
 regionDiskTypeListWarningDataItem =
-    RegionDiskTypeListWarningDataItem'
-    { _rdtlwdiValue = Nothing
-    , _rdtlwdiKey = Nothing
-    }
+  RegionDiskTypeListWarningDataItem'
+    {_rdtlwdiValue = Nothing, _rdtlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 rdtlwdiValue :: Lens' RegionDiskTypeListWarningDataItem (Maybe Text)
@@ -34839,10 +35106,12 @@ instance ToJSON RegionDiskTypeListWarningDataItem
 
 --
 -- /See:/ 'forwardingRuleListWarningDataItem' smart constructor.
-data ForwardingRuleListWarningDataItem = ForwardingRuleListWarningDataItem'
+data ForwardingRuleListWarningDataItem =
+  ForwardingRuleListWarningDataItem'
     { _frlwdiValue :: !(Maybe Text)
     , _frlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRuleListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -34854,10 +35123,8 @@ data ForwardingRuleListWarningDataItem = ForwardingRuleListWarningDataItem'
 forwardingRuleListWarningDataItem
     :: ForwardingRuleListWarningDataItem
 forwardingRuleListWarningDataItem =
-    ForwardingRuleListWarningDataItem'
-    { _frlwdiValue = Nothing
-    , _frlwdiKey = Nothing
-    }
+  ForwardingRuleListWarningDataItem'
+    {_frlwdiValue = Nothing, _frlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 frlwdiValue :: Lens' ForwardingRuleListWarningDataItem (Maybe Text)
@@ -34894,12 +35161,14 @@ instance ToJSON ForwardingRuleListWarningDataItem
 -- | Sets the scheduling options for an Instance.
 --
 -- /See:/ 'scheduling' smart constructor.
-data Scheduling = Scheduling'
+data Scheduling =
+  Scheduling'
     { _sAutomaticRestart  :: !(Maybe Bool)
     , _sNodeAffinities    :: !(Maybe [SchedulingNodeAffinity])
     , _sOnHostMaintenance :: !(Maybe SchedulingOnHostMaintenance)
     , _sPreemptible       :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Scheduling' with the minimum fields required to make a request.
 --
@@ -34915,7 +35184,7 @@ data Scheduling = Scheduling'
 scheduling
     :: Scheduling
 scheduling =
-    Scheduling'
+  Scheduling'
     { _sAutomaticRestart = Nothing
     , _sNodeAffinities = Nothing
     , _sOnHostMaintenance = Nothing
@@ -34978,10 +35247,12 @@ instance ToJSON Scheduling where
 
 --
 -- /See:/ 'vpnTunnelsScopedListWarningDataItem' smart constructor.
-data VPNTunnelsScopedListWarningDataItem = VPNTunnelsScopedListWarningDataItem'
+data VPNTunnelsScopedListWarningDataItem =
+  VPNTunnelsScopedListWarningDataItem'
     { _vtslwdiValue :: !(Maybe Text)
     , _vtslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -34993,10 +35264,8 @@ data VPNTunnelsScopedListWarningDataItem = VPNTunnelsScopedListWarningDataItem'
 vpnTunnelsScopedListWarningDataItem
     :: VPNTunnelsScopedListWarningDataItem
 vpnTunnelsScopedListWarningDataItem =
-    VPNTunnelsScopedListWarningDataItem'
-    { _vtslwdiValue = Nothing
-    , _vtslwdiKey = Nothing
-    }
+  VPNTunnelsScopedListWarningDataItem'
+    {_vtslwdiValue = Nothing, _vtslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 vtslwdiValue :: Lens' VPNTunnelsScopedListWarningDataItem (Maybe Text)
@@ -35033,14 +35302,16 @@ instance ToJSON VPNTunnelsScopedListWarningDataItem
 -- | Response to the list request, and contains a list of interconnects.
 --
 -- /See:/ 'interconnectList' smart constructor.
-data InterconnectList = InterconnectList'
+data InterconnectList =
+  InterconnectList'
     { _intnNextPageToken :: !(Maybe Text)
     , _intnKind          :: !Text
     , _intnItems         :: !(Maybe [Interconnect])
     , _intnSelfLink      :: !(Maybe Text)
     , _intnWarning       :: !(Maybe InterconnectListWarning)
     , _intnId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectList' with the minimum fields required to make a request.
 --
@@ -35060,7 +35331,7 @@ data InterconnectList = InterconnectList'
 interconnectList
     :: InterconnectList
 interconnectList =
-    InterconnectList'
+  InterconnectList'
     { _intnNextPageToken = Nothing
     , _intnKind = "compute#interconnectList"
     , _intnItems = Nothing
@@ -35130,10 +35401,12 @@ instance ToJSON InterconnectList where
 
 --
 -- /See:/ 'targetPoolListWarningDataItem' smart constructor.
-data TargetPoolListWarningDataItem = TargetPoolListWarningDataItem'
+data TargetPoolListWarningDataItem =
+  TargetPoolListWarningDataItem'
     { _tplwdiValue :: !(Maybe Text)
     , _tplwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -35145,10 +35418,7 @@ data TargetPoolListWarningDataItem = TargetPoolListWarningDataItem'
 targetPoolListWarningDataItem
     :: TargetPoolListWarningDataItem
 targetPoolListWarningDataItem =
-    TargetPoolListWarningDataItem'
-    { _tplwdiValue = Nothing
-    , _tplwdiKey = Nothing
-    }
+  TargetPoolListWarningDataItem' {_tplwdiValue = Nothing, _tplwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 tplwdiValue :: Lens' TargetPoolListWarningDataItem (Maybe Text)
@@ -35183,7 +35453,8 @@ instance ToJSON TargetPoolListWarningDataItem where
 -- | A Node Template resource.
 --
 -- /See:/ 'nodeTemplate' smart constructor.
-data NodeTemplate = NodeTemplate'
+data NodeTemplate =
+  NodeTemplate'
     { _nttStatus              :: !(Maybe NodeTemplateStatus)
     , _nttKind                :: !Text
     , _nttSelfLink            :: !(Maybe Text)
@@ -35196,7 +35467,8 @@ data NodeTemplate = NodeTemplate'
     , _nttNodeType            :: !(Maybe Text)
     , _nttRegion              :: !(Maybe Text)
     , _nttDescription         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplate' with the minimum fields required to make a request.
 --
@@ -35228,7 +35500,7 @@ data NodeTemplate = NodeTemplate'
 nodeTemplate
     :: NodeTemplate
 nodeTemplate =
-    NodeTemplate'
+  NodeTemplate'
     { _nttStatus = Nothing
     , _nttKind = "compute#nodeTemplate"
     , _nttSelfLink = Nothing
@@ -35362,14 +35634,16 @@ instance ToJSON NodeTemplate where
 -- | Contains a list of Subnetwork resources.
 --
 -- /See:/ 'subnetworkList' smart constructor.
-data SubnetworkList = SubnetworkList'
+data SubnetworkList =
+  SubnetworkList'
     { _slNextPageToken :: !(Maybe Text)
     , _slKind          :: !Text
     , _slItems         :: !(Maybe [Subnetwork])
     , _slSelfLink      :: !(Maybe Text)
     , _slWarning       :: !(Maybe SubnetworkListWarning)
     , _slId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworkList' with the minimum fields required to make a request.
 --
@@ -35389,7 +35663,7 @@ data SubnetworkList = SubnetworkList'
 subnetworkList
     :: SubnetworkList
 subnetworkList =
-    SubnetworkList'
+  SubnetworkList'
     { _slNextPageToken = Nothing
     , _slKind = "compute#subnetworkList"
     , _slItems = Nothing
@@ -35458,11 +35732,13 @@ instance ToJSON SubnetworkList where
 -- the list is empty.
 --
 -- /See:/ 'forwardingRulesScopedListWarning' smart constructor.
-data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning'
+data ForwardingRulesScopedListWarning =
+  ForwardingRulesScopedListWarning'
     { _frslwData    :: !(Maybe [ForwardingRulesScopedListWarningDataItem])
     , _frslwCode    :: !(Maybe ForwardingRulesScopedListWarningCode)
     , _frslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForwardingRulesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -35476,11 +35752,8 @@ data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning'
 forwardingRulesScopedListWarning
     :: ForwardingRulesScopedListWarning
 forwardingRulesScopedListWarning =
-    ForwardingRulesScopedListWarning'
-    { _frslwData = Nothing
-    , _frslwCode = Nothing
-    , _frslwMessage = Nothing
-    }
+  ForwardingRulesScopedListWarning'
+    {_frslwData = Nothing, _frslwCode = Nothing, _frslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -35523,14 +35796,16 @@ instance ToJSON ForwardingRulesScopedListWarning
 -- | Contains a list of HttpHealthCheck resources.
 --
 -- /See:/ 'hTTPHealthCheckList' smart constructor.
-data HTTPHealthCheckList = HTTPHealthCheckList'
+data HTTPHealthCheckList =
+  HTTPHealthCheckList'
     { _httphclNextPageToken :: !(Maybe Text)
     , _httphclKind          :: !Text
     , _httphclItems         :: !(Maybe [HTTPHealthCheck])
     , _httphclSelfLink      :: !(Maybe Text)
     , _httphclWarning       :: !(Maybe HTTPHealthCheckListWarning)
     , _httphclId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPHealthCheckList' with the minimum fields required to make a request.
 --
@@ -35550,7 +35825,7 @@ data HTTPHealthCheckList = HTTPHealthCheckList'
 hTTPHealthCheckList
     :: HTTPHealthCheckList
 hTTPHealthCheckList =
-    HTTPHealthCheckList'
+  HTTPHealthCheckList'
     { _httphclNextPageToken = Nothing
     , _httphclKind = "compute#httpHealthCheckList"
     , _httphclItems = Nothing
@@ -35625,11 +35900,13 @@ instance ToJSON HTTPHealthCheckList where
 -- groups when the list is empty.
 --
 -- /See:/ 'instanceGroupManagersScopedListWarning' smart constructor.
-data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWarning'
+data InstanceGroupManagersScopedListWarning =
+  InstanceGroupManagersScopedListWarning'
     { _igmslwData    :: !(Maybe [InstanceGroupManagersScopedListWarningDataItem])
     , _igmslwCode    :: !(Maybe InstanceGroupManagersScopedListWarningCode)
     , _igmslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersScopedListWarning' with the minimum fields required to make a request.
 --
@@ -35643,11 +35920,8 @@ data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWar
 instanceGroupManagersScopedListWarning
     :: InstanceGroupManagersScopedListWarning
 instanceGroupManagersScopedListWarning =
-    InstanceGroupManagersScopedListWarning'
-    { _igmslwData = Nothing
-    , _igmslwCode = Nothing
-    , _igmslwMessage = Nothing
-    }
+  InstanceGroupManagersScopedListWarning'
+    {_igmslwData = Nothing, _igmslwCode = Nothing, _igmslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -35671,7 +35945,8 @@ igmslwMessage
       (\ s a -> s{_igmslwMessage = a})
 
 instance FromJSON
-         InstanceGroupManagersScopedListWarning where
+           InstanceGroupManagersScopedListWarning
+         where
         parseJSON
           = withObject "InstanceGroupManagersScopedListWarning"
               (\ o ->
@@ -35680,7 +35955,8 @@ instance FromJSON
                      (o .:? "message"))
 
 instance ToJSON
-         InstanceGroupManagersScopedListWarning where
+           InstanceGroupManagersScopedListWarning
+         where
         toJSON InstanceGroupManagersScopedListWarning'{..}
           = object
               (catMaybes
@@ -35690,14 +35966,16 @@ instance ToJSON
 
 --
 -- /See:/ 'sslPoliciesList' smart constructor.
-data SSLPoliciesList = SSLPoliciesList'
+data SSLPoliciesList =
+  SSLPoliciesList'
     { _sslplNextPageToken :: !(Maybe Text)
     , _sslplKind          :: !Text
     , _sslplItems         :: !(Maybe [SSLPolicy])
     , _sslplSelfLink      :: !(Maybe Text)
     , _sslplWarning       :: !(Maybe SSLPoliciesListWarning)
     , _sslplId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLPoliciesList' with the minimum fields required to make a request.
 --
@@ -35717,7 +35995,7 @@ data SSLPoliciesList = SSLPoliciesList'
 sslPoliciesList
     :: SSLPoliciesList
 sslPoliciesList =
-    SSLPoliciesList'
+  SSLPoliciesList'
     { _sslplNextPageToken = Nothing
     , _sslplKind = "compute#sslPoliciesList"
     , _sslplItems = Nothing
@@ -35789,9 +36067,11 @@ instance ToJSON SSLPoliciesList where
 
 --
 -- /See:/ 'urlMapsValidateRequest' smart constructor.
-newtype URLMapsValidateRequest = URLMapsValidateRequest'
+newtype URLMapsValidateRequest =
+  URLMapsValidateRequest'
     { _umvrResource :: Maybe URLMap
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapsValidateRequest' with the minimum fields required to make a request.
 --
@@ -35800,10 +36080,7 @@ newtype URLMapsValidateRequest = URLMapsValidateRequest'
 -- * 'umvrResource'
 urlMapsValidateRequest
     :: URLMapsValidateRequest
-urlMapsValidateRequest =
-    URLMapsValidateRequest'
-    { _umvrResource = Nothing
-    }
+urlMapsValidateRequest = URLMapsValidateRequest' {_umvrResource = Nothing}
 
 -- | Content of the UrlMap to be validated.
 umvrResource :: Lens' URLMapsValidateRequest (Maybe URLMap)
@@ -35823,10 +36100,12 @@ instance ToJSON URLMapsValidateRequest where
 
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
-data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest'
+data InstanceGroupManagersSetTargetPoolsRequest =
+  InstanceGroupManagersSetTargetPoolsRequest'
     { _igmstprFingerprint :: !(Maybe Bytes)
     , _igmstprTargetPools :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetTargetPoolsRequest' with the minimum fields required to make a request.
 --
@@ -35838,10 +36117,8 @@ data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTarget
 instanceGroupManagersSetTargetPoolsRequest
     :: InstanceGroupManagersSetTargetPoolsRequest
 instanceGroupManagersSetTargetPoolsRequest =
-    InstanceGroupManagersSetTargetPoolsRequest'
-    { _igmstprFingerprint = Nothing
-    , _igmstprTargetPools = Nothing
-    }
+  InstanceGroupManagersSetTargetPoolsRequest'
+    {_igmstprFingerprint = Nothing, _igmstprTargetPools = Nothing}
 
 -- | The fingerprint of the target pools information. Use this optional
 -- property to prevent conflicts when multiple users change the target
@@ -35867,7 +36144,8 @@ igmstprTargetPools
       . _Coerce
 
 instance FromJSON
-         InstanceGroupManagersSetTargetPoolsRequest where
+           InstanceGroupManagersSetTargetPoolsRequest
+         where
         parseJSON
           = withObject
               "InstanceGroupManagersSetTargetPoolsRequest"
@@ -35877,7 +36155,8 @@ instance FromJSON
                      (o .:? "targetPools" .!= mempty))
 
 instance ToJSON
-         InstanceGroupManagersSetTargetPoolsRequest where
+           InstanceGroupManagersSetTargetPoolsRequest
+         where
         toJSON
           InstanceGroupManagersSetTargetPoolsRequest'{..}
           = object
@@ -35897,7 +36176,8 @@ instance ToJSON
 -- v1.commitments ==)
 --
 -- /See:/ 'commitment' smart constructor.
-data Commitment = Commitment'
+data Commitment =
+  Commitment'
     { _cStatus            :: !(Maybe CommitmentStatus)
     , _cKind              :: !Text
     , _cPlan              :: !(Maybe CommitmentPlan)
@@ -35911,7 +36191,8 @@ data Commitment = Commitment'
     , _cRegion            :: !(Maybe Text)
     , _cStartTimestamp    :: !(Maybe Text)
     , _cDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Commitment' with the minimum fields required to make a request.
 --
@@ -35945,7 +36226,7 @@ data Commitment = Commitment'
 commitment
     :: Commitment
 commitment =
-    Commitment'
+  Commitment'
     { _cStatus = Nothing
     , _cKind = "compute#commitment"
     , _cPlan = Nothing
@@ -36079,14 +36360,16 @@ instance ToJSON Commitment where
 -- | Contains a list of HttpsHealthCheck resources.
 --
 -- /See:/ 'httpsHealthCheckList' smart constructor.
-data HTTPSHealthCheckList = HTTPSHealthCheckList'
+data HTTPSHealthCheckList =
+  HTTPSHealthCheckList'
     { _hhclNextPageToken :: !(Maybe Text)
     , _hhclKind          :: !Text
     , _hhclItems         :: !(Maybe [HTTPSHealthCheck])
     , _hhclSelfLink      :: !(Maybe Text)
     , _hhclWarning       :: !(Maybe HTTPSHealthCheckListWarning)
     , _hhclId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPSHealthCheckList' with the minimum fields required to make a request.
 --
@@ -36106,7 +36389,7 @@ data HTTPSHealthCheckList = HTTPSHealthCheckList'
 httpsHealthCheckList
     :: HTTPSHealthCheckList
 httpsHealthCheckList =
-    HTTPSHealthCheckList'
+  HTTPSHealthCheckList'
     { _hhclNextPageToken = Nothing
     , _hhclKind = "compute#httpsHealthCheckList"
     , _hhclItems = Nothing
@@ -36175,10 +36458,12 @@ instance ToJSON HTTPSHealthCheckList where
 
 --
 -- /See:/ 'addressListWarningDataItem' smart constructor.
-data AddressListWarningDataItem = AddressListWarningDataItem'
+data AddressListWarningDataItem =
+  AddressListWarningDataItem'
     { _addValue :: !(Maybe Text)
     , _addKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -36190,10 +36475,7 @@ data AddressListWarningDataItem = AddressListWarningDataItem'
 addressListWarningDataItem
     :: AddressListWarningDataItem
 addressListWarningDataItem =
-    AddressListWarningDataItem'
-    { _addValue = Nothing
-    , _addKey = Nothing
-    }
+  AddressListWarningDataItem' {_addValue = Nothing, _addKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 addValue :: Lens' AddressListWarningDataItem (Maybe Text)
@@ -36224,11 +36506,13 @@ instance ToJSON AddressListWarningDataItem where
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem'
+data OperationErrorErrorsItem =
+  OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
 --
@@ -36242,11 +36526,8 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem'
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem'
-    { _oeeiLocation = Nothing
-    , _oeeiCode = Nothing
-    , _oeeiMessage = Nothing
-    }
+  OperationErrorErrorsItem'
+    {_oeeiLocation = Nothing, _oeeiCode = Nothing, _oeeiMessage = Nothing}
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -36282,11 +36563,13 @@ instance ToJSON OperationErrorErrorsItem where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'commitmentListWarning' smart constructor.
-data CommitmentListWarning = CommitmentListWarning'
+data CommitmentListWarning =
+  CommitmentListWarning'
     { _clwData    :: !(Maybe [CommitmentListWarningDataItem])
     , _clwCode    :: !(Maybe CommitmentListWarningCode)
     , _clwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentListWarning' with the minimum fields required to make a request.
 --
@@ -36300,11 +36583,8 @@ data CommitmentListWarning = CommitmentListWarning'
 commitmentListWarning
     :: CommitmentListWarning
 commitmentListWarning =
-    CommitmentListWarning'
-    { _clwData = Nothing
-    , _clwCode = Nothing
-    , _clwMessage = Nothing
-    }
+  CommitmentListWarning'
+    {_clwData = Nothing, _clwCode = Nothing, _clwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -36342,7 +36622,8 @@ instance ToJSON CommitmentListWarning where
 -- | A license resource.
 --
 -- /See:/ 'license' smart constructor.
-data License = License'
+data License =
+  License'
     { _lChargesUseFee        :: !(Maybe Bool)
     , _lKind                 :: !Text
     , _lResourceRequirements :: !(Maybe LicenseResourceRequirements)
@@ -36353,7 +36634,8 @@ data License = License'
     , _lId                   :: !(Maybe (Textual Word64))
     , _lDescription          :: !(Maybe Text)
     , _lLicenseCode          :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'License' with the minimum fields required to make a request.
 --
@@ -36381,7 +36663,7 @@ data License = License'
 license
     :: License
 license =
-    License'
+  License'
     { _lChargesUseFee = Nothing
     , _lKind = "compute#license"
     , _lResourceRequirements = Nothing
@@ -36489,10 +36771,12 @@ instance ToJSON License where
 -- BackendService to handle the traffic arriving at this URL.
 --
 -- /See:/ 'pathRule' smart constructor.
-data PathRule = PathRule'
+data PathRule =
+  PathRule'
     { _prService :: !(Maybe Text)
     , _prPaths   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PathRule' with the minimum fields required to make a request.
 --
@@ -36503,11 +36787,7 @@ data PathRule = PathRule'
 -- * 'prPaths'
 pathRule
     :: PathRule
-pathRule =
-    PathRule'
-    { _prService = Nothing
-    , _prPaths = Nothing
-    }
+pathRule = PathRule' {_prService = Nothing, _prPaths = Nothing}
 
 -- | The URL of the backend service resource if this rule is matched. Use
 -- service instead of routeAction when simple routing to a backend service
@@ -36543,10 +36823,12 @@ instance ToJSON PathRule where
 
 --
 -- /See:/ 'licenseCodeLicenseAlias' smart constructor.
-data LicenseCodeLicenseAlias = LicenseCodeLicenseAlias'
+data LicenseCodeLicenseAlias =
+  LicenseCodeLicenseAlias'
     { _lclaSelfLink    :: !(Maybe Text)
     , _lclaDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseCodeLicenseAlias' with the minimum fields required to make a request.
 --
@@ -36558,10 +36840,7 @@ data LicenseCodeLicenseAlias = LicenseCodeLicenseAlias'
 licenseCodeLicenseAlias
     :: LicenseCodeLicenseAlias
 licenseCodeLicenseAlias =
-    LicenseCodeLicenseAlias'
-    { _lclaSelfLink = Nothing
-    , _lclaDescription = Nothing
-    }
+  LicenseCodeLicenseAlias' {_lclaSelfLink = Nothing, _lclaDescription = Nothing}
 
 -- | [Output Only] URL of license corresponding to this License Code.
 lclaSelfLink :: Lens' LicenseCodeLicenseAlias (Maybe Text)
@@ -36590,10 +36869,12 @@ instance ToJSON LicenseCodeLicenseAlias where
 
 --
 -- /See:/ 'interconnectAttachmentsScopedListWarningDataItem' smart constructor.
-data InterconnectAttachmentsScopedListWarningDataItem = InterconnectAttachmentsScopedListWarningDataItem'
+data InterconnectAttachmentsScopedListWarningDataItem =
+  InterconnectAttachmentsScopedListWarningDataItem'
     { _iaslwdiValue :: !(Maybe Text)
     , _iaslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -36605,10 +36886,8 @@ data InterconnectAttachmentsScopedListWarningDataItem = InterconnectAttachmentsS
 interconnectAttachmentsScopedListWarningDataItem
     :: InterconnectAttachmentsScopedListWarningDataItem
 interconnectAttachmentsScopedListWarningDataItem =
-    InterconnectAttachmentsScopedListWarningDataItem'
-    { _iaslwdiValue = Nothing
-    , _iaslwdiKey = Nothing
-    }
+  InterconnectAttachmentsScopedListWarningDataItem'
+    {_iaslwdiValue = Nothing, _iaslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 iaslwdiValue :: Lens' InterconnectAttachmentsScopedListWarningDataItem (Maybe Text)
@@ -36627,7 +36906,7 @@ iaslwdiKey
   = lens _iaslwdiKey (\ s a -> s{_iaslwdiKey = a})
 
 instance FromJSON
-         InterconnectAttachmentsScopedListWarningDataItem
+           InterconnectAttachmentsScopedListWarningDataItem
          where
         parseJSON
           = withObject
@@ -36637,7 +36916,7 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InterconnectAttachmentsScopedListWarningDataItem
+           InterconnectAttachmentsScopedListWarningDataItem
          where
         toJSON
           InterconnectAttachmentsScopedListWarningDataItem'{..}
@@ -36648,10 +36927,12 @@ instance ToJSON
 
 --
 -- /See:/ 'securityPolicyListWarningDataItem' smart constructor.
-data SecurityPolicyListWarningDataItem = SecurityPolicyListWarningDataItem'
+data SecurityPolicyListWarningDataItem =
+  SecurityPolicyListWarningDataItem'
     { _secValue :: !(Maybe Text)
     , _secKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPolicyListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -36663,10 +36944,7 @@ data SecurityPolicyListWarningDataItem = SecurityPolicyListWarningDataItem'
 securityPolicyListWarningDataItem
     :: SecurityPolicyListWarningDataItem
 securityPolicyListWarningDataItem =
-    SecurityPolicyListWarningDataItem'
-    { _secValue = Nothing
-    , _secKey = Nothing
-    }
+  SecurityPolicyListWarningDataItem' {_secValue = Nothing, _secKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 secValue :: Lens' SecurityPolicyListWarningDataItem (Maybe Text)
@@ -36704,10 +36982,12 @@ instance ToJSON SecurityPolicyListWarningDataItem
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -36719,10 +36999,7 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -36755,10 +37032,12 @@ instance ToJSON AuditLogConfig where
 
 --
 -- /See:/ 'commitmentsScopedListWarningDataItem' smart constructor.
-data CommitmentsScopedListWarningDataItem = CommitmentsScopedListWarningDataItem'
+data CommitmentsScopedListWarningDataItem =
+  CommitmentsScopedListWarningDataItem'
     { _cslwdiValue :: !(Maybe Text)
     , _cslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -36770,10 +37049,8 @@ data CommitmentsScopedListWarningDataItem = CommitmentsScopedListWarningDataItem
 commitmentsScopedListWarningDataItem
     :: CommitmentsScopedListWarningDataItem
 commitmentsScopedListWarningDataItem =
-    CommitmentsScopedListWarningDataItem'
-    { _cslwdiValue = Nothing
-    , _cslwdiKey = Nothing
-    }
+  CommitmentsScopedListWarningDataItem'
+    {_cslwdiValue = Nothing, _cslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 cslwdiValue :: Lens' CommitmentsScopedListWarningDataItem (Maybe Text)
@@ -36792,7 +37069,8 @@ cslwdiKey
   = lens _cslwdiKey (\ s a -> s{_cslwdiKey = a})
 
 instance FromJSON
-         CommitmentsScopedListWarningDataItem where
+           CommitmentsScopedListWarningDataItem
+         where
         parseJSON
           = withObject "CommitmentsScopedListWarningDataItem"
               (\ o ->
@@ -36813,7 +37091,8 @@ instance ToJSON CommitmentsScopedListWarningDataItem
 -- v1.interconnectAttachments ==)
 --
 -- /See:/ 'interconnectAttachment' smart constructor.
-data InterconnectAttachment = InterconnectAttachment'
+data InterconnectAttachment =
+  InterconnectAttachment'
     { _iaState                   :: !(Maybe InterconnectAttachmentState)
     , _iaPartnerASN              :: !(Maybe (Textual Int64))
     , _iaPairingKey              :: !(Maybe Text)
@@ -36838,7 +37117,8 @@ data InterconnectAttachment = InterconnectAttachment'
     , _iaType                    :: !(Maybe InterconnectAttachmentType)
     , _iaDescription             :: !(Maybe Text)
     , _iaPrivateInterconnectInfo :: !(Maybe InterconnectAttachmentPrivateInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachment' with the minimum fields required to make a request.
 --
@@ -36894,7 +37174,7 @@ data InterconnectAttachment = InterconnectAttachment'
 interconnectAttachment
     :: InterconnectAttachment
 interconnectAttachment =
-    InterconnectAttachment'
+  InterconnectAttachment'
     { _iaState = Nothing
     , _iaPartnerASN = Nothing
     , _iaPairingKey = Nothing
@@ -37163,14 +37443,16 @@ instance ToJSON InterconnectAttachment where
 -- | Contains a list of instances.
 --
 -- /See:/ 'instanceList' smart constructor.
-data InstanceList = InstanceList'
+data InstanceList =
+  InstanceList'
     { _insNextPageToken :: !(Maybe Text)
     , _insKind          :: !Text
     , _insItems         :: !(Maybe [Instance])
     , _insSelfLink      :: !(Maybe Text)
     , _insWarning       :: !(Maybe InstanceListWarning)
     , _insId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceList' with the minimum fields required to make a request.
 --
@@ -37190,7 +37472,7 @@ data InstanceList = InstanceList'
 instanceList
     :: InstanceList
 instanceList =
-    InstanceList'
+  InstanceList'
     { _insNextPageToken = Nothing
     , _insKind = "compute#instanceList"
     , _insItems = Nothing
@@ -37261,9 +37543,11 @@ instance ToJSON InstanceList where
 -- | The labels to set for this resource.
 --
 -- /See:/ 'regionSetLabelsRequestLabels' smart constructor.
-newtype RegionSetLabelsRequestLabels = RegionSetLabelsRequestLabels'
+newtype RegionSetLabelsRequestLabels =
+  RegionSetLabelsRequestLabels'
     { _rslrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionSetLabelsRequestLabels' with the minimum fields required to make a request.
 --
@@ -37274,9 +37558,7 @@ regionSetLabelsRequestLabels
     :: HashMap Text Text -- ^ 'rslrlAddtional'
     -> RegionSetLabelsRequestLabels
 regionSetLabelsRequestLabels pRslrlAddtional_ =
-    RegionSetLabelsRequestLabels'
-    { _rslrlAddtional = _Coerce # pRslrlAddtional_
-    }
+  RegionSetLabelsRequestLabels' {_rslrlAddtional = _Coerce # pRslrlAddtional_}
 
 rslrlAddtional :: Lens' RegionSetLabelsRequestLabels (HashMap Text Text)
 rslrlAddtional
@@ -37296,10 +37578,12 @@ instance ToJSON RegionSetLabelsRequestLabels where
 
 --
 -- /See:/ 'networkListWarningDataItem' smart constructor.
-data NetworkListWarningDataItem = NetworkListWarningDataItem'
+data NetworkListWarningDataItem =
+  NetworkListWarningDataItem'
     { _nlwdiValue :: !(Maybe Text)
     , _nlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -37311,10 +37595,7 @@ data NetworkListWarningDataItem = NetworkListWarningDataItem'
 networkListWarningDataItem
     :: NetworkListWarningDataItem
 networkListWarningDataItem =
-    NetworkListWarningDataItem'
-    { _nlwdiValue = Nothing
-    , _nlwdiKey = Nothing
-    }
+  NetworkListWarningDataItem' {_nlwdiValue = Nothing, _nlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 nlwdiValue :: Lens' NetworkListWarningDataItem (Maybe Text)
@@ -37349,13 +37630,15 @@ instance ToJSON NetworkListWarningDataItem where
 -- Cloud CDN.
 --
 -- /See:/ 'cacheKeyPolicy' smart constructor.
-data CacheKeyPolicy = CacheKeyPolicy'
+data CacheKeyPolicy =
+  CacheKeyPolicy'
     { _ckpQueryStringWhiteList :: !(Maybe [Text])
     , _ckpIncludeHost          :: !(Maybe Bool)
     , _ckpIncludeProtocol      :: !(Maybe Bool)
     , _ckpQueryStringBlackList :: !(Maybe [Text])
     , _ckpIncludeQueryString   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CacheKeyPolicy' with the minimum fields required to make a request.
 --
@@ -37373,7 +37656,7 @@ data CacheKeyPolicy = CacheKeyPolicy'
 cacheKeyPolicy
     :: CacheKeyPolicy
 cacheKeyPolicy =
-    CacheKeyPolicy'
+  CacheKeyPolicy'
     { _ckpQueryStringWhiteList = Nothing
     , _ckpIncludeHost = Nothing
     , _ckpIncludeProtocol = Nothing
@@ -37450,10 +37733,12 @@ instance ToJSON CacheKeyPolicy where
 
 --
 -- /See:/ 'commitmentAggregatedListWarningDataItem' smart constructor.
-data CommitmentAggregatedListWarningDataItem = CommitmentAggregatedListWarningDataItem'
+data CommitmentAggregatedListWarningDataItem =
+  CommitmentAggregatedListWarningDataItem'
     { _calwdiValue :: !(Maybe Text)
     , _calwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -37465,10 +37750,8 @@ data CommitmentAggregatedListWarningDataItem = CommitmentAggregatedListWarningDa
 commitmentAggregatedListWarningDataItem
     :: CommitmentAggregatedListWarningDataItem
 commitmentAggregatedListWarningDataItem =
-    CommitmentAggregatedListWarningDataItem'
-    { _calwdiValue = Nothing
-    , _calwdiKey = Nothing
-    }
+  CommitmentAggregatedListWarningDataItem'
+    {_calwdiValue = Nothing, _calwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 calwdiValue :: Lens' CommitmentAggregatedListWarningDataItem (Maybe Text)
@@ -37487,7 +37770,8 @@ calwdiKey
   = lens _calwdiKey (\ s a -> s{_calwdiKey = a})
 
 instance FromJSON
-         CommitmentAggregatedListWarningDataItem where
+           CommitmentAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "CommitmentAggregatedListWarningDataItem"
@@ -37496,7 +37780,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         CommitmentAggregatedListWarningDataItem where
+           CommitmentAggregatedListWarningDataItem
+         where
         toJSON CommitmentAggregatedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -37505,10 +37790,12 @@ instance ToJSON
 
 --
 -- /See:/ 'regionInstanceGroupListWarningDataItem' smart constructor.
-data RegionInstanceGroupListWarningDataItem = RegionInstanceGroupListWarningDataItem'
+data RegionInstanceGroupListWarningDataItem =
+  RegionInstanceGroupListWarningDataItem'
     { _riglwdiValue :: !(Maybe Text)
     , _riglwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -37520,10 +37807,8 @@ data RegionInstanceGroupListWarningDataItem = RegionInstanceGroupListWarningData
 regionInstanceGroupListWarningDataItem
     :: RegionInstanceGroupListWarningDataItem
 regionInstanceGroupListWarningDataItem =
-    RegionInstanceGroupListWarningDataItem'
-    { _riglwdiValue = Nothing
-    , _riglwdiKey = Nothing
-    }
+  RegionInstanceGroupListWarningDataItem'
+    {_riglwdiValue = Nothing, _riglwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 riglwdiValue :: Lens' RegionInstanceGroupListWarningDataItem (Maybe Text)
@@ -37542,7 +37827,8 @@ riglwdiKey
   = lens _riglwdiKey (\ s a -> s{_riglwdiKey = a})
 
 instance FromJSON
-         RegionInstanceGroupListWarningDataItem where
+           RegionInstanceGroupListWarningDataItem
+         where
         parseJSON
           = withObject "RegionInstanceGroupListWarningDataItem"
               (\ o ->
@@ -37550,7 +37836,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         RegionInstanceGroupListWarningDataItem where
+           RegionInstanceGroupListWarningDataItem
+         where
         toJSON RegionInstanceGroupListWarningDataItem'{..}
           = object
               (catMaybes
@@ -37560,9 +37847,11 @@ instance ToJSON
 -- | A list of SubnetworksScopedList resources.
 --
 -- /See:/ 'subnetworkAggregatedListItems' smart constructor.
-newtype SubnetworkAggregatedListItems = SubnetworkAggregatedListItems'
+newtype SubnetworkAggregatedListItems =
+  SubnetworkAggregatedListItems'
     { _saliAddtional :: HashMap Text SubnetworksScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubnetworkAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -37573,9 +37862,7 @@ subnetworkAggregatedListItems
     :: HashMap Text SubnetworksScopedList -- ^ 'saliAddtional'
     -> SubnetworkAggregatedListItems
 subnetworkAggregatedListItems pSaliAddtional_ =
-    SubnetworkAggregatedListItems'
-    { _saliAddtional = _Coerce # pSaliAddtional_
-    }
+  SubnetworkAggregatedListItems' {_saliAddtional = _Coerce # pSaliAddtional_}
 
 -- | Name of the scope containing this set of Subnetworks.
 saliAddtional :: Lens' SubnetworkAggregatedListItems (HashMap Text SubnetworksScopedList)
@@ -37596,10 +37883,12 @@ instance ToJSON SubnetworkAggregatedListItems where
 
 --
 -- /See:/ 'interconnectAttachmentAggregatedListWarningDataItem' smart constructor.
-data InterconnectAttachmentAggregatedListWarningDataItem = InterconnectAttachmentAggregatedListWarningDataItem'
+data InterconnectAttachmentAggregatedListWarningDataItem =
+  InterconnectAttachmentAggregatedListWarningDataItem'
     { _iaalwdiValue :: !(Maybe Text)
     , _iaalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -37611,10 +37900,8 @@ data InterconnectAttachmentAggregatedListWarningDataItem = InterconnectAttachmen
 interconnectAttachmentAggregatedListWarningDataItem
     :: InterconnectAttachmentAggregatedListWarningDataItem
 interconnectAttachmentAggregatedListWarningDataItem =
-    InterconnectAttachmentAggregatedListWarningDataItem'
-    { _iaalwdiValue = Nothing
-    , _iaalwdiKey = Nothing
-    }
+  InterconnectAttachmentAggregatedListWarningDataItem'
+    {_iaalwdiValue = Nothing, _iaalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 iaalwdiValue :: Lens' InterconnectAttachmentAggregatedListWarningDataItem (Maybe Text)
@@ -37633,7 +37920,7 @@ iaalwdiKey
   = lens _iaalwdiKey (\ s a -> s{_iaalwdiKey = a})
 
 instance FromJSON
-         InterconnectAttachmentAggregatedListWarningDataItem
+           InterconnectAttachmentAggregatedListWarningDataItem
          where
         parseJSON
           = withObject
@@ -37643,7 +37930,7 @@ instance FromJSON
                    <$> (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InterconnectAttachmentAggregatedListWarningDataItem
+           InterconnectAttachmentAggregatedListWarningDataItem
          where
         toJSON
           InterconnectAttachmentAggregatedListWarningDataItem'{..}
@@ -37655,11 +37942,13 @@ instance ToJSON
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'interconnectAttachmentListWarning' smart constructor.
-data InterconnectAttachmentListWarning = InterconnectAttachmentListWarning'
+data InterconnectAttachmentListWarning =
+  InterconnectAttachmentListWarning'
     { _intData    :: !(Maybe [InterconnectAttachmentListWarningDataItem])
     , _intCode    :: !(Maybe InterconnectAttachmentListWarningCode)
     , _intMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentListWarning' with the minimum fields required to make a request.
 --
@@ -37673,11 +37962,8 @@ data InterconnectAttachmentListWarning = InterconnectAttachmentListWarning'
 interconnectAttachmentListWarning
     :: InterconnectAttachmentListWarning
 interconnectAttachmentListWarning =
-    InterconnectAttachmentListWarning'
-    { _intData = Nothing
-    , _intCode = Nothing
-    , _intMessage = Nothing
-    }
+  InterconnectAttachmentListWarning'
+    {_intData = Nothing, _intCode = Nothing, _intMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -37717,14 +38003,16 @@ instance ToJSON InterconnectAttachmentListWarning
 -- | A condition to be met.
 --
 -- /See:/ 'condition' smart constructor.
-data Condition = Condition'
+data Condition =
+  Condition'
     { _cOp     :: !(Maybe ConditionOp)
     , _cIAM    :: !(Maybe ConditionIAM)
     , _cValues :: !(Maybe [Text])
     , _cValue  :: !(Maybe Text)
     , _cSys    :: !(Maybe ConditionSys)
     , _cSvc    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
@@ -37744,7 +38032,7 @@ data Condition = Condition'
 condition
     :: Condition
 condition =
-    Condition'
+  Condition'
     { _cOp = Nothing
     , _cIAM = Nothing
     , _cValues = Nothing
@@ -37802,11 +38090,13 @@ instance ToJSON Condition where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'addressAggregatedListWarning' smart constructor.
-data AddressAggregatedListWarning = AddressAggregatedListWarning'
+data AddressAggregatedListWarning =
+  AddressAggregatedListWarning'
     { _addData    :: !(Maybe [AddressAggregatedListWarningDataItem])
     , _addCode    :: !(Maybe AddressAggregatedListWarningCode)
     , _addMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -37820,11 +38110,8 @@ data AddressAggregatedListWarning = AddressAggregatedListWarning'
 addressAggregatedListWarning
     :: AddressAggregatedListWarning
 addressAggregatedListWarning =
-    AddressAggregatedListWarning'
-    { _addData = Nothing
-    , _addCode = Nothing
-    , _addMessage = Nothing
-    }
+  AddressAggregatedListWarning'
+    {_addData = Nothing, _addCode = Nothing, _addMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -37861,9 +38148,11 @@ instance ToJSON AddressAggregatedListWarning where
 
 --
 -- /See:/ 'managedInstanceLastAttempt' smart constructor.
-newtype ManagedInstanceLastAttempt = ManagedInstanceLastAttempt'
+newtype ManagedInstanceLastAttempt =
+  ManagedInstanceLastAttempt'
     { _milaErrors :: Maybe ManagedInstanceLastAttemptErrors
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedInstanceLastAttempt' with the minimum fields required to make a request.
 --
@@ -37872,10 +38161,7 @@ newtype ManagedInstanceLastAttempt = ManagedInstanceLastAttempt'
 -- * 'milaErrors'
 managedInstanceLastAttempt
     :: ManagedInstanceLastAttempt
-managedInstanceLastAttempt =
-    ManagedInstanceLastAttempt'
-    { _milaErrors = Nothing
-    }
+managedInstanceLastAttempt = ManagedInstanceLastAttempt' {_milaErrors = Nothing}
 
 -- | [Output Only] Encountered errors during the last attempt to create or
 -- delete the instance.
@@ -37896,11 +38182,13 @@ instance ToJSON ManagedInstanceLastAttempt where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'licensesListResponseWarning' smart constructor.
-data LicensesListResponseWarning = LicensesListResponseWarning'
+data LicensesListResponseWarning =
+  LicensesListResponseWarning'
     { _llrwData    :: !(Maybe [LicensesListResponseWarningDataItem])
     , _llrwCode    :: !(Maybe LicensesListResponseWarningCode)
     , _llrwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicensesListResponseWarning' with the minimum fields required to make a request.
 --
@@ -37914,11 +38202,8 @@ data LicensesListResponseWarning = LicensesListResponseWarning'
 licensesListResponseWarning
     :: LicensesListResponseWarning
 licensesListResponseWarning =
-    LicensesListResponseWarning'
-    { _llrwData = Nothing
-    , _llrwCode = Nothing
-    , _llrwMessage = Nothing
-    }
+  LicensesListResponseWarning'
+    {_llrwData = Nothing, _llrwCode = Nothing, _llrwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -37957,10 +38242,12 @@ instance ToJSON LicensesListResponseWarning where
 
 --
 -- /See:/ 'autoscalerStatusDetails' smart constructor.
-data AutoscalerStatusDetails = AutoscalerStatusDetails'
+data AutoscalerStatusDetails =
+  AutoscalerStatusDetails'
     { _asdType    :: !(Maybe AutoscalerStatusDetailsType)
     , _asdMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalerStatusDetails' with the minimum fields required to make a request.
 --
@@ -37972,10 +38259,7 @@ data AutoscalerStatusDetails = AutoscalerStatusDetails'
 autoscalerStatusDetails
     :: AutoscalerStatusDetails
 autoscalerStatusDetails =
-    AutoscalerStatusDetails'
-    { _asdType = Nothing
-    , _asdMessage = Nothing
-    }
+  AutoscalerStatusDetails' {_asdType = Nothing, _asdMessage = Nothing}
 
 -- | The type of error returned.
 asdType :: Lens' AutoscalerStatusDetails (Maybe AutoscalerStatusDetailsType)
@@ -38003,14 +38287,16 @@ instance ToJSON AutoscalerStatusDetails where
 -- | Contains a list of BackendService resources.
 --
 -- /See:/ 'backendServiceList' smart constructor.
-data BackendServiceList = BackendServiceList'
+data BackendServiceList =
+  BackendServiceList'
     { _bslNextPageToken :: !(Maybe Text)
     , _bslKind          :: !Text
     , _bslItems         :: !(Maybe [BackendService])
     , _bslSelfLink      :: !(Maybe Text)
     , _bslWarning       :: !(Maybe BackendServiceListWarning)
     , _bslId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceList' with the minimum fields required to make a request.
 --
@@ -38030,7 +38316,7 @@ data BackendServiceList = BackendServiceList'
 backendServiceList
     :: BackendServiceList
 backendServiceList =
-    BackendServiceList'
+  BackendServiceList'
     { _bslNextPageToken = Nothing
     , _bslKind = "compute#backendServiceList"
     , _bslItems = Nothing
@@ -38100,10 +38386,12 @@ instance ToJSON BackendServiceList where
 
 --
 -- /See:/ 'xpnHostListWarningDataItem' smart constructor.
-data XpnHostListWarningDataItem = XpnHostListWarningDataItem'
+data XpnHostListWarningDataItem =
+  XpnHostListWarningDataItem'
     { _xhlwdiValue :: !(Maybe Text)
     , _xhlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'XpnHostListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -38115,10 +38403,7 @@ data XpnHostListWarningDataItem = XpnHostListWarningDataItem'
 xpnHostListWarningDataItem
     :: XpnHostListWarningDataItem
 xpnHostListWarningDataItem =
-    XpnHostListWarningDataItem'
-    { _xhlwdiValue = Nothing
-    , _xhlwdiKey = Nothing
-    }
+  XpnHostListWarningDataItem' {_xhlwdiValue = Nothing, _xhlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 xhlwdiValue :: Lens' XpnHostListWarningDataItem (Maybe Text)
@@ -38152,10 +38437,12 @@ instance ToJSON XpnHostListWarningDataItem where
 
 --
 -- /See:/ 'zoneListWarningDataItem' smart constructor.
-data ZoneListWarningDataItem = ZoneListWarningDataItem'
+data ZoneListWarningDataItem =
+  ZoneListWarningDataItem'
     { _zlwdiValue :: !(Maybe Text)
     , _zlwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ZoneListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -38167,10 +38454,7 @@ data ZoneListWarningDataItem = ZoneListWarningDataItem'
 zoneListWarningDataItem
     :: ZoneListWarningDataItem
 zoneListWarningDataItem =
-    ZoneListWarningDataItem'
-    { _zlwdiValue = Nothing
-    , _zlwdiKey = Nothing
-    }
+  ZoneListWarningDataItem' {_zlwdiValue = Nothing, _zlwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 zlwdiValue :: Lens' ZoneListWarningDataItem (Maybe Text)
@@ -38203,11 +38487,13 @@ instance ToJSON ZoneListWarningDataItem where
 
 --
 -- /See:/ 'regionSetPolicyRequest' smart constructor.
-data RegionSetPolicyRequest = RegionSetPolicyRequest'
+data RegionSetPolicyRequest =
+  RegionSetPolicyRequest'
     { _rsprEtag     :: !(Maybe Bytes)
     , _rsprBindings :: !(Maybe [Binding])
     , _rsprPolicy   :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionSetPolicyRequest' with the minimum fields required to make a request.
 --
@@ -38221,11 +38507,8 @@ data RegionSetPolicyRequest = RegionSetPolicyRequest'
 regionSetPolicyRequest
     :: RegionSetPolicyRequest
 regionSetPolicyRequest =
-    RegionSetPolicyRequest'
-    { _rsprEtag = Nothing
-    , _rsprBindings = Nothing
-    , _rsprPolicy = Nothing
-    }
+  RegionSetPolicyRequest'
+    {_rsprEtag = Nothing, _rsprBindings = Nothing, _rsprPolicy = Nothing}
 
 -- | Flatten Policy to create a backward compatible wire-format. Deprecated.
 -- Use \'policy\' to specify the etag.
@@ -38270,11 +38553,13 @@ instance ToJSON RegionSetPolicyRequest where
 -- instance groups when the list is empty.
 --
 -- /See:/ 'instanceGroupsScopedListWarning' smart constructor.
-data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning'
+data InstanceGroupsScopedListWarning =
+  InstanceGroupsScopedListWarning'
     { _igslwData    :: !(Maybe [InstanceGroupsScopedListWarningDataItem])
     , _igslwCode    :: !(Maybe InstanceGroupsScopedListWarningCode)
     , _igslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -38288,11 +38573,8 @@ data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning'
 instanceGroupsScopedListWarning
     :: InstanceGroupsScopedListWarning
 instanceGroupsScopedListWarning =
-    InstanceGroupsScopedListWarning'
-    { _igslwData = Nothing
-    , _igslwCode = Nothing
-    , _igslwMessage = Nothing
-    }
+  InstanceGroupsScopedListWarning'
+    {_igslwData = Nothing, _igslwCode = Nothing, _igslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -38334,9 +38616,11 @@ instance ToJSON InstanceGroupsScopedListWarning where
 -- | CPU utilization policy.
 --
 -- /See:/ 'autoscalingPolicyCPUUtilization' smart constructor.
-newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization'
+newtype AutoscalingPolicyCPUUtilization =
+  AutoscalingPolicyCPUUtilization'
     { _apcuUtilizationTarget :: Maybe (Textual Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AutoscalingPolicyCPUUtilization' with the minimum fields required to make a request.
 --
@@ -38346,9 +38630,7 @@ newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization'
 autoscalingPolicyCPUUtilization
     :: AutoscalingPolicyCPUUtilization
 autoscalingPolicyCPUUtilization =
-    AutoscalingPolicyCPUUtilization'
-    { _apcuUtilizationTarget = Nothing
-    }
+  AutoscalingPolicyCPUUtilization' {_apcuUtilizationTarget = Nothing}
 
 -- | The target CPU utilization that the autoscaler should maintain. Must be
 -- a float value in the range (0, 1]. If not specified, the default is 0.6.
@@ -38382,10 +38664,12 @@ instance ToJSON AutoscalingPolicyCPUUtilization where
 
 --
 -- /See:/ 'instanceGroupsScopedListWarningDataItem' smart constructor.
-data InstanceGroupsScopedListWarningDataItem = InstanceGroupsScopedListWarningDataItem'
+data InstanceGroupsScopedListWarningDataItem =
+  InstanceGroupsScopedListWarningDataItem'
     { _igslwdiValue :: !(Maybe Text)
     , _igslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -38397,10 +38681,8 @@ data InstanceGroupsScopedListWarningDataItem = InstanceGroupsScopedListWarningDa
 instanceGroupsScopedListWarningDataItem
     :: InstanceGroupsScopedListWarningDataItem
 instanceGroupsScopedListWarningDataItem =
-    InstanceGroupsScopedListWarningDataItem'
-    { _igslwdiValue = Nothing
-    , _igslwdiKey = Nothing
-    }
+  InstanceGroupsScopedListWarningDataItem'
+    {_igslwdiValue = Nothing, _igslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 igslwdiValue :: Lens' InstanceGroupsScopedListWarningDataItem (Maybe Text)
@@ -38419,7 +38701,8 @@ igslwdiKey
   = lens _igslwdiKey (\ s a -> s{_igslwdiKey = a})
 
 instance FromJSON
-         InstanceGroupsScopedListWarningDataItem where
+           InstanceGroupsScopedListWarningDataItem
+         where
         parseJSON
           = withObject
               "InstanceGroupsScopedListWarningDataItem"
@@ -38428,7 +38711,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InstanceGroupsScopedListWarningDataItem where
+           InstanceGroupsScopedListWarningDataItem
+         where
         toJSON InstanceGroupsScopedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -38437,9 +38721,11 @@ instance ToJSON
 
 --
 -- /See:/ 'securityPolicyRuleMatcherConfig' smart constructor.
-newtype SecurityPolicyRuleMatcherConfig = SecurityPolicyRuleMatcherConfig'
+newtype SecurityPolicyRuleMatcherConfig =
+  SecurityPolicyRuleMatcherConfig'
     { _sprmcSrcIPRanges :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPolicyRuleMatcherConfig' with the minimum fields required to make a request.
 --
@@ -38449,9 +38735,7 @@ newtype SecurityPolicyRuleMatcherConfig = SecurityPolicyRuleMatcherConfig'
 securityPolicyRuleMatcherConfig
     :: SecurityPolicyRuleMatcherConfig
 securityPolicyRuleMatcherConfig =
-    SecurityPolicyRuleMatcherConfig'
-    { _sprmcSrcIPRanges = Nothing
-    }
+  SecurityPolicyRuleMatcherConfig' {_sprmcSrcIPRanges = Nothing}
 
 -- | CIDR IP address range.
 sprmcSrcIPRanges :: Lens' SecurityPolicyRuleMatcherConfig [Text]
@@ -38477,10 +38761,12 @@ instance ToJSON SecurityPolicyRuleMatcherConfig where
 
 --
 -- /See:/ 'licensesListResponseWarningDataItem' smart constructor.
-data LicensesListResponseWarningDataItem = LicensesListResponseWarningDataItem'
+data LicensesListResponseWarningDataItem =
+  LicensesListResponseWarningDataItem'
     { _llrwdiValue :: !(Maybe Text)
     , _llrwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicensesListResponseWarningDataItem' with the minimum fields required to make a request.
 --
@@ -38492,10 +38778,8 @@ data LicensesListResponseWarningDataItem = LicensesListResponseWarningDataItem'
 licensesListResponseWarningDataItem
     :: LicensesListResponseWarningDataItem
 licensesListResponseWarningDataItem =
-    LicensesListResponseWarningDataItem'
-    { _llrwdiValue = Nothing
-    , _llrwdiKey = Nothing
-    }
+  LicensesListResponseWarningDataItem'
+    {_llrwdiValue = Nothing, _llrwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 llrwdiValue :: Lens' LicensesListResponseWarningDataItem (Maybe Text)
@@ -38532,11 +38816,13 @@ instance ToJSON LicensesListResponseWarningDataItem
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'xpnHostListWarning' smart constructor.
-data XpnHostListWarning = XpnHostListWarning'
+data XpnHostListWarning =
+  XpnHostListWarning'
     { _xhlwData    :: !(Maybe [XpnHostListWarningDataItem])
     , _xhlwCode    :: !(Maybe XpnHostListWarningCode)
     , _xhlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'XpnHostListWarning' with the minimum fields required to make a request.
 --
@@ -38550,11 +38836,8 @@ data XpnHostListWarning = XpnHostListWarning'
 xpnHostListWarning
     :: XpnHostListWarning
 xpnHostListWarning =
-    XpnHostListWarning'
-    { _xhlwData = Nothing
-    , _xhlwCode = Nothing
-    , _xhlwMessage = Nothing
-    }
+  XpnHostListWarning'
+    {_xhlwData = Nothing, _xhlwCode = Nothing, _xhlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -38593,9 +38876,11 @@ instance ToJSON XpnHostListWarning where
 
 --
 -- /See:/ 'resourceGroupReference' smart constructor.
-newtype ResourceGroupReference = ResourceGroupReference'
+newtype ResourceGroupReference =
+  ResourceGroupReference'
     { _rgrGroup :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourceGroupReference' with the minimum fields required to make a request.
 --
@@ -38604,10 +38889,7 @@ newtype ResourceGroupReference = ResourceGroupReference'
 -- * 'rgrGroup'
 resourceGroupReference
     :: ResourceGroupReference
-resourceGroupReference =
-    ResourceGroupReference'
-    { _rgrGroup = Nothing
-    }
+resourceGroupReference = ResourceGroupReference' {_rgrGroup = Nothing}
 
 -- | A URI referencing one of the instance groups or network endpoint groups
 -- listed in the backend service.
@@ -38626,14 +38908,16 @@ instance ToJSON ResourceGroupReference where
 -- | Contains a list of VmEndpointNatMappings.
 --
 -- /See:/ 'vMEndpointNATMAppingsList' smart constructor.
-data VMEndpointNATMAppingsList = VMEndpointNATMAppingsList'
+data VMEndpointNATMAppingsList =
+  VMEndpointNATMAppingsList'
     { _vmenatmalNextPageToken :: !(Maybe Text)
     , _vmenatmalKind          :: !Text
     , _vmenatmalResult        :: !(Maybe [VMEndpointNATMAppings])
     , _vmenatmalSelfLink      :: !(Maybe Text)
     , _vmenatmalWarning       :: !(Maybe VMEndpointNATMAppingsListWarning)
     , _vmenatmalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VMEndpointNATMAppingsList' with the minimum fields required to make a request.
 --
@@ -38653,7 +38937,7 @@ data VMEndpointNATMAppingsList = VMEndpointNATMAppingsList'
 vMEndpointNATMAppingsList
     :: VMEndpointNATMAppingsList
 vMEndpointNATMAppingsList =
-    VMEndpointNATMAppingsList'
+  VMEndpointNATMAppingsList'
     { _vmenatmalNextPageToken = Nothing
     , _vmenatmalKind = "compute#vmEndpointNatMappingsList"
     , _vmenatmalResult = Nothing
@@ -38732,7 +39016,8 @@ instance ToJSON VMEndpointNATMAppingsList where
 -- | Represents a Firewall resource.
 --
 -- /See:/ 'firewall' smart constructor.
-data Firewall = Firewall'
+data Firewall =
+  Firewall'
     { _fSourceTags            :: !(Maybe [Text])
     , _fSourceServiceAccounts :: !(Maybe [Text])
     , _fPriority              :: !(Maybe (Textual Int32))
@@ -38752,7 +39037,8 @@ data Firewall = Firewall'
     , _fLogConfig             :: !(Maybe FirewallLogConfig)
     , _fTargetServiceAccounts :: !(Maybe [Text])
     , _fDescription           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Firewall' with the minimum fields required to make a request.
 --
@@ -38798,7 +39084,7 @@ data Firewall = Firewall'
 firewall
     :: Firewall
 firewall =
-    Firewall'
+  Firewall'
     { _fSourceTags = Nothing
     , _fSourceServiceAccounts = Nothing
     , _fPriority = Nothing
@@ -39054,11 +39340,13 @@ instance ToJSON Firewall where
 -- is empty.
 --
 -- /See:/ 'interconnectAttachmentsScopedListWarning' smart constructor.
-data InterconnectAttachmentsScopedListWarning = InterconnectAttachmentsScopedListWarning'
+data InterconnectAttachmentsScopedListWarning =
+  InterconnectAttachmentsScopedListWarning'
     { _iaslwData    :: !(Maybe [InterconnectAttachmentsScopedListWarningDataItem])
     , _iaslwCode    :: !(Maybe InterconnectAttachmentsScopedListWarningCode)
     , _iaslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -39072,11 +39360,8 @@ data InterconnectAttachmentsScopedListWarning = InterconnectAttachmentsScopedLis
 interconnectAttachmentsScopedListWarning
     :: InterconnectAttachmentsScopedListWarning
 interconnectAttachmentsScopedListWarning =
-    InterconnectAttachmentsScopedListWarning'
-    { _iaslwData = Nothing
-    , _iaslwCode = Nothing
-    , _iaslwMessage = Nothing
-    }
+  InterconnectAttachmentsScopedListWarning'
+    {_iaslwData = Nothing, _iaslwCode = Nothing, _iaslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -39099,7 +39384,8 @@ iaslwMessage
   = lens _iaslwMessage (\ s a -> s{_iaslwMessage = a})
 
 instance FromJSON
-         InterconnectAttachmentsScopedListWarning where
+           InterconnectAttachmentsScopedListWarning
+         where
         parseJSON
           = withObject
               "InterconnectAttachmentsScopedListWarning"
@@ -39109,7 +39395,8 @@ instance FromJSON
                      (o .:? "message"))
 
 instance ToJSON
-         InterconnectAttachmentsScopedListWarning where
+           InterconnectAttachmentsScopedListWarning
+         where
         toJSON InterconnectAttachmentsScopedListWarning'{..}
           = object
               (catMaybes
@@ -39121,11 +39408,13 @@ instance ToJSON
 -- PathMatcher to select the BackendService.
 --
 -- /See:/ 'hostRule' smart constructor.
-data HostRule = HostRule'
+data HostRule =
+  HostRule'
     { _hrHosts       :: !(Maybe [Text])
     , _hrDescription :: !(Maybe Text)
     , _hrPathMatcher :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HostRule' with the minimum fields required to make a request.
 --
@@ -39139,11 +39428,8 @@ data HostRule = HostRule'
 hostRule
     :: HostRule
 hostRule =
-    HostRule'
-    { _hrHosts = Nothing
-    , _hrDescription = Nothing
-    , _hrPathMatcher = Nothing
-    }
+  HostRule'
+    {_hrHosts = Nothing, _hrDescription = Nothing, _hrPathMatcher = Nothing}
 
 -- | The list of host patterns to match. They must be valid hostnames, except
 -- * will match any string of ([a-z0-9-.]*). In that case, * must be the
@@ -39186,11 +39472,13 @@ instance ToJSON HostRule where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'securityPolicyListWarning' smart constructor.
-data SecurityPolicyListWarning = SecurityPolicyListWarning'
+data SecurityPolicyListWarning =
+  SecurityPolicyListWarning'
     { _secData    :: !(Maybe [SecurityPolicyListWarningDataItem])
     , _secCode    :: !(Maybe SecurityPolicyListWarningCode)
     , _secMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SecurityPolicyListWarning' with the minimum fields required to make a request.
 --
@@ -39204,11 +39492,8 @@ data SecurityPolicyListWarning = SecurityPolicyListWarning'
 securityPolicyListWarning
     :: SecurityPolicyListWarning
 securityPolicyListWarning =
-    SecurityPolicyListWarning'
-    { _secData = Nothing
-    , _secCode = Nothing
-    , _secMessage = Nothing
-    }
+  SecurityPolicyListWarning'
+    {_secData = Nothing, _secCode = Nothing, _secMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -39246,11 +39531,13 @@ instance ToJSON SecurityPolicyListWarning where
 -- | A quotas entry.
 --
 -- /See:/ 'quota' smart constructor.
-data Quota = Quota'
+data Quota =
+  Quota'
     { _qMetric :: !(Maybe QuotaMetric)
     , _qLimit  :: !(Maybe (Textual Double))
     , _qUsage  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
 --
@@ -39263,12 +39550,7 @@ data Quota = Quota'
 -- * 'qUsage'
 quota
     :: Quota
-quota =
-    Quota'
-    { _qMetric = Nothing
-    , _qLimit = Nothing
-    , _qUsage = Nothing
-    }
+quota = Quota' {_qMetric = Nothing, _qLimit = Nothing, _qUsage = Nothing}
 
 -- | [Output Only] Name of the quota metric.
 qMetric :: Lens' Quota (Maybe QuotaMetric)
@@ -39306,7 +39588,8 @@ instance ToJSON Quota where
 -- resource_for v1.regionInstanceGroups ==)
 --
 -- /See:/ 'instanceGroup' smart constructor.
-data InstanceGroup = InstanceGroup'
+data InstanceGroup =
+  InstanceGroup'
     { _ig1Size              :: !(Maybe (Textual Int32))
     , _ig1Kind              :: !Text
     , _ig1Fingerprint       :: !(Maybe Bytes)
@@ -39320,7 +39603,8 @@ data InstanceGroup = InstanceGroup'
     , _ig1Region            :: !(Maybe Text)
     , _ig1Description       :: !(Maybe Text)
     , _ig1NamedPorts        :: !(Maybe [NamedPort])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroup' with the minimum fields required to make a request.
 --
@@ -39354,7 +39638,7 @@ data InstanceGroup = InstanceGroup'
 instanceGroup
     :: InstanceGroup
 instanceGroup =
-    InstanceGroup'
+  InstanceGroup'
     { _ig1Size = Nothing
     , _ig1Kind = "compute#instanceGroup"
     , _ig1Fingerprint = Nothing
@@ -39496,11 +39780,13 @@ instance ToJSON InstanceGroup where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'addressListWarning' smart constructor.
-data AddressListWarning = AddressListWarning'
+data AddressListWarning =
+  AddressListWarning'
     { _alwlData    :: !(Maybe [AddressListWarningDataItem])
     , _alwlCode    :: !(Maybe AddressListWarningCode)
     , _alwlMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressListWarning' with the minimum fields required to make a request.
 --
@@ -39514,11 +39800,8 @@ data AddressListWarning = AddressListWarning'
 addressListWarning
     :: AddressListWarning
 addressListWarning =
-    AddressListWarning'
-    { _alwlData = Nothing
-    , _alwlCode = Nothing
-    , _alwlMessage = Nothing
-    }
+  AddressListWarning'
+    {_alwlData = Nothing, _alwlCode = Nothing, _alwlMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -39557,10 +39840,12 @@ instance ToJSON AddressListWarning where
 
 --
 -- /See:/ 'regionSetLabelsRequest' smart constructor.
-data RegionSetLabelsRequest = RegionSetLabelsRequest'
+data RegionSetLabelsRequest =
+  RegionSetLabelsRequest'
     { _rslrLabels           :: !(Maybe RegionSetLabelsRequestLabels)
     , _rslrLabelFingerprint :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionSetLabelsRequest' with the minimum fields required to make a request.
 --
@@ -39572,10 +39857,8 @@ data RegionSetLabelsRequest = RegionSetLabelsRequest'
 regionSetLabelsRequest
     :: RegionSetLabelsRequest
 regionSetLabelsRequest =
-    RegionSetLabelsRequest'
-    { _rslrLabels = Nothing
-    , _rslrLabelFingerprint = Nothing
-    }
+  RegionSetLabelsRequest'
+    {_rslrLabels = Nothing, _rslrLabelFingerprint = Nothing}
 
 -- | The labels to set for this resource.
 rslrLabels :: Lens' RegionSetLabelsRequest (Maybe RegionSetLabelsRequestLabels)
@@ -39610,13 +39893,15 @@ instance ToJSON RegionSetLabelsRequest where
 
 --
 -- /See:/ 'routerInterface' smart constructor.
-data RouterInterface = RouterInterface'
+data RouterInterface =
+  RouterInterface'
     { _riLinkedInterconnectAttachment :: !(Maybe Text)
     , _riName                         :: !(Maybe Text)
     , _riManagementType               :: !(Maybe RouterInterfaceManagementType)
     , _riIPRange                      :: !(Maybe Text)
     , _riLinkedVPNTunnel              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RouterInterface' with the minimum fields required to make a request.
 --
@@ -39634,7 +39919,7 @@ data RouterInterface = RouterInterface'
 routerInterface
     :: RouterInterface
 routerInterface =
-    RouterInterface'
+  RouterInterface'
     { _riLinkedInterconnectAttachment = Nothing
     , _riName = Nothing
     , _riManagementType = Nothing
@@ -39708,11 +39993,13 @@ instance ToJSON RouterInterface where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'networkListWarning' smart constructor.
-data NetworkListWarning = NetworkListWarning'
+data NetworkListWarning =
+  NetworkListWarning'
     { _nlwData    :: !(Maybe [NetworkListWarningDataItem])
     , _nlwCode    :: !(Maybe NetworkListWarningCode)
     , _nlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NetworkListWarning' with the minimum fields required to make a request.
 --
@@ -39726,11 +40013,8 @@ data NetworkListWarning = NetworkListWarning'
 networkListWarning
     :: NetworkListWarning
 networkListWarning =
-    NetworkListWarning'
-    { _nlwData = Nothing
-    , _nlwCode = Nothing
-    , _nlwMessage = Nothing
-    }
+  NetworkListWarning'
+    {_nlwData = Nothing, _nlwCode = Nothing, _nlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -39768,14 +40052,16 @@ instance ToJSON NetworkListWarning where
 -- | Contains a list of Snapshot resources.
 --
 -- /See:/ 'snapshotList' smart constructor.
-data SnapshotList = SnapshotList'
+data SnapshotList =
+  SnapshotList'
     { _snaNextPageToken :: !(Maybe Text)
     , _snaKind          :: !Text
     , _snaItems         :: !(Maybe [Snapshot])
     , _snaSelfLink      :: !(Maybe Text)
     , _snaWarning       :: !(Maybe SnapshotListWarning)
     , _snaId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SnapshotList' with the minimum fields required to make a request.
 --
@@ -39795,7 +40081,7 @@ data SnapshotList = SnapshotList'
 snapshotList
     :: SnapshotList
 snapshotList =
-    SnapshotList'
+  SnapshotList'
     { _snaNextPageToken = Nothing
     , _snaKind = "compute#snapshotList"
     , _snaItems = Nothing
@@ -39866,11 +40152,13 @@ instance ToJSON SnapshotList where
 -- current technical information about Google?s side of the connection.
 --
 -- /See:/ 'interconnectDiagnostics' smart constructor.
-data InterconnectDiagnostics = InterconnectDiagnostics'
+data InterconnectDiagnostics =
+  InterconnectDiagnostics'
     { _idMACAddress :: !(Maybe Text)
     , _idArpCaches  :: !(Maybe [InterconnectDiagnosticsARPEntry])
     , _idLinks      :: !(Maybe [InterconnectDiagnosticsLinkStatus])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectDiagnostics' with the minimum fields required to make a request.
 --
@@ -39884,11 +40172,8 @@ data InterconnectDiagnostics = InterconnectDiagnostics'
 interconnectDiagnostics
     :: InterconnectDiagnostics
 interconnectDiagnostics =
-    InterconnectDiagnostics'
-    { _idMACAddress = Nothing
-    , _idArpCaches = Nothing
-    , _idLinks = Nothing
-    }
+  InterconnectDiagnostics'
+    {_idMACAddress = Nothing, _idArpCaches = Nothing, _idLinks = Nothing}
 
 -- | The MAC address of the Interconnect\'s bundle interface.
 idMACAddress :: Lens' InterconnectDiagnostics (Maybe Text)
@@ -39931,7 +40216,8 @@ instance ToJSON InterconnectDiagnostics where
 
 --
 -- /See:/ 'licenseCode' smart constructor.
-data LicenseCode = LicenseCode'
+data LicenseCode =
+  LicenseCode'
     { _lcState             :: !(Maybe LicenseCodeState)
     , _lcKind              :: !Text
     , _lcTransferable      :: !(Maybe Bool)
@@ -39941,7 +40227,8 @@ data LicenseCode = LicenseCode'
     , _lcId                :: !(Maybe (Textual Word64))
     , _lcLicenseAlias      :: !(Maybe [LicenseCodeLicenseAlias])
     , _lcDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicenseCode' with the minimum fields required to make a request.
 --
@@ -39967,7 +40254,7 @@ data LicenseCode = LicenseCode'
 licenseCode
     :: LicenseCode
 licenseCode =
-    LicenseCode'
+  LicenseCode'
     { _lcState = Nothing
     , _lcKind = "compute#licenseCode"
     , _lcTransferable = Nothing
@@ -40063,12 +40350,14 @@ instance ToJSON LicenseCode where
 
 --
 -- /See:/ 'testFailure' smart constructor.
-data TestFailure = TestFailure'
+data TestFailure =
+  TestFailure'
     { _tfPath            :: !(Maybe Text)
     , _tfExpectedService :: !(Maybe Text)
     , _tfHost            :: !(Maybe Text)
     , _tfActualService   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestFailure' with the minimum fields required to make a request.
 --
@@ -40084,7 +40373,7 @@ data TestFailure = TestFailure'
 testFailure
     :: TestFailure
 testFailure =
-    TestFailure'
+  TestFailure'
     { _tfPath = Nothing
     , _tfExpectedService = Nothing
     , _tfHost = Nothing
@@ -40127,10 +40416,12 @@ instance ToJSON TestFailure where
 
 --
 -- /See:/ 'commitmentListWarningDataItem' smart constructor.
-data CommitmentListWarningDataItem = CommitmentListWarningDataItem'
+data CommitmentListWarningDataItem =
+  CommitmentListWarningDataItem'
     { _clwdiValue :: !(Maybe Text)
     , _clwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -40142,10 +40433,7 @@ data CommitmentListWarningDataItem = CommitmentListWarningDataItem'
 commitmentListWarningDataItem
     :: CommitmentListWarningDataItem
 commitmentListWarningDataItem =
-    CommitmentListWarningDataItem'
-    { _clwdiValue = Nothing
-    , _clwdiKey = Nothing
-    }
+  CommitmentListWarningDataItem' {_clwdiValue = Nothing, _clwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 clwdiValue :: Lens' CommitmentListWarningDataItem (Maybe Text)
@@ -40180,11 +40468,13 @@ instance ToJSON CommitmentListWarningDataItem where
 -- commitments when the list is empty.
 --
 -- /See:/ 'commitmentsScopedListWarning' smart constructor.
-data CommitmentsScopedListWarning = CommitmentsScopedListWarning'
+data CommitmentsScopedListWarning =
+  CommitmentsScopedListWarning'
     { _cslwData    :: !(Maybe [CommitmentsScopedListWarningDataItem])
     , _cslwCode    :: !(Maybe CommitmentsScopedListWarningCode)
     , _cslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -40198,11 +40488,8 @@ data CommitmentsScopedListWarning = CommitmentsScopedListWarning'
 commitmentsScopedListWarning
     :: CommitmentsScopedListWarning
 commitmentsScopedListWarning =
-    CommitmentsScopedListWarning'
-    { _cslwData = Nothing
-    , _cslwCode = Nothing
-    , _cslwMessage = Nothing
-    }
+  CommitmentsScopedListWarning'
+    {_cslwData = Nothing, _cslwCode = Nothing, _cslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -40242,13 +40529,15 @@ instance ToJSON CommitmentsScopedListWarning where
 -- | An instance\'s serial console output.
 --
 -- /See:/ 'serialPortOutput' smart constructor.
-data SerialPortOutput = SerialPortOutput'
+data SerialPortOutput =
+  SerialPortOutput'
     { _spoNext     :: !(Maybe (Textual Int64))
     , _spoContents :: !(Maybe Text)
     , _spoKind     :: !Text
     , _spoStart    :: !(Maybe (Textual Int64))
     , _spoSelfLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SerialPortOutput' with the minimum fields required to make a request.
 --
@@ -40266,7 +40555,7 @@ data SerialPortOutput = SerialPortOutput'
 serialPortOutput
     :: SerialPortOutput
 serialPortOutput =
-    SerialPortOutput'
+  SerialPortOutput'
     { _spoNext = Nothing
     , _spoContents = Nothing
     , _spoKind = "compute#serialPortOutput"
@@ -40328,14 +40617,16 @@ instance ToJSON SerialPortOutput where
 
 --
 -- /See:/ 'targetVPNGatewayAggregatedList' smart constructor.
-data TargetVPNGatewayAggregatedList = TargetVPNGatewayAggregatedList'
+data TargetVPNGatewayAggregatedList =
+  TargetVPNGatewayAggregatedList'
     { _tvgalNextPageToken :: !(Maybe Text)
     , _tvgalKind          :: !Text
     , _tvgalItems         :: !(Maybe TargetVPNGatewayAggregatedListItems)
     , _tvgalSelfLink      :: !(Maybe Text)
     , _tvgalWarning       :: !(Maybe TargetVPNGatewayAggregatedListWarning)
     , _tvgalId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewayAggregatedList' with the minimum fields required to make a request.
 --
@@ -40355,7 +40646,7 @@ data TargetVPNGatewayAggregatedList = TargetVPNGatewayAggregatedList'
 targetVPNGatewayAggregatedList
     :: TargetVPNGatewayAggregatedList
 targetVPNGatewayAggregatedList =
-    TargetVPNGatewayAggregatedList'
+  TargetVPNGatewayAggregatedList'
     { _tvgalNextPageToken = Nothing
     , _tvgalKind = "compute#targetVpnGatewayAggregatedList"
     , _tvgalItems = Nothing
@@ -40428,11 +40719,13 @@ instance ToJSON TargetVPNGatewayAggregatedList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'interconnectAttachmentAggregatedListWarning' smart constructor.
-data InterconnectAttachmentAggregatedListWarning = InterconnectAttachmentAggregatedListWarning'
+data InterconnectAttachmentAggregatedListWarning =
+  InterconnectAttachmentAggregatedListWarning'
     { _iaalwData    :: !(Maybe [InterconnectAttachmentAggregatedListWarningDataItem])
     , _iaalwCode    :: !(Maybe InterconnectAttachmentAggregatedListWarningCode)
     , _iaalwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -40446,11 +40739,8 @@ data InterconnectAttachmentAggregatedListWarning = InterconnectAttachmentAggrega
 interconnectAttachmentAggregatedListWarning
     :: InterconnectAttachmentAggregatedListWarning
 interconnectAttachmentAggregatedListWarning =
-    InterconnectAttachmentAggregatedListWarning'
-    { _iaalwData = Nothing
-    , _iaalwCode = Nothing
-    , _iaalwMessage = Nothing
-    }
+  InterconnectAttachmentAggregatedListWarning'
+    {_iaalwData = Nothing, _iaalwCode = Nothing, _iaalwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -40473,7 +40763,8 @@ iaalwMessage
   = lens _iaalwMessage (\ s a -> s{_iaalwMessage = a})
 
 instance FromJSON
-         InterconnectAttachmentAggregatedListWarning where
+           InterconnectAttachmentAggregatedListWarning
+         where
         parseJSON
           = withObject
               "InterconnectAttachmentAggregatedListWarning"
@@ -40483,7 +40774,8 @@ instance FromJSON
                      (o .:? "message"))
 
 instance ToJSON
-         InterconnectAttachmentAggregatedListWarning where
+           InterconnectAttachmentAggregatedListWarning
+         where
         toJSON
           InterconnectAttachmentAggregatedListWarning'{..}
           = object
@@ -40494,10 +40786,12 @@ instance ToJSON
 
 --
 -- /See:/ 'metadataItemsItem' smart constructor.
-data MetadataItemsItem = MetadataItemsItem'
+data MetadataItemsItem =
+  MetadataItemsItem'
     { _miiValue :: !(Maybe Text)
     , _miiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MetadataItemsItem' with the minimum fields required to make a request.
 --
@@ -40508,11 +40802,7 @@ data MetadataItemsItem = MetadataItemsItem'
 -- * 'miiKey'
 metadataItemsItem
     :: MetadataItemsItem
-metadataItemsItem =
-    MetadataItemsItem'
-    { _miiValue = Nothing
-    , _miiKey = Nothing
-    }
+metadataItemsItem = MetadataItemsItem' {_miiValue = Nothing, _miiKey = Nothing}
 
 -- | Value for the metadata entry. These are free-form strings, and only have
 -- meaning as interpreted by the image running in the instance. The only
@@ -40545,10 +40835,12 @@ instance ToJSON MetadataItemsItem where
 -- | Represents a customer-supplied Signing Key used by Cloud CDN Signed URLs
 --
 -- /See:/ 'signedURLKey' smart constructor.
-data SignedURLKey = SignedURLKey'
+data SignedURLKey =
+  SignedURLKey'
     { _sukKeyValue :: !(Maybe Text)
     , _sukKeyName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SignedURLKey' with the minimum fields required to make a request.
 --
@@ -40559,11 +40851,7 @@ data SignedURLKey = SignedURLKey'
 -- * 'sukKeyName'
 signedURLKey
     :: SignedURLKey
-signedURLKey =
-    SignedURLKey'
-    { _sukKeyValue = Nothing
-    , _sukKeyName = Nothing
-    }
+signedURLKey = SignedURLKey' {_sukKeyValue = Nothing, _sukKeyName = Nothing}
 
 -- | 128-bit key value used for signing the URL. The key value must be a
 -- valid RFC 4648 Section 5 base64url encoded string.
@@ -40600,7 +40888,8 @@ instance ToJSON SignedURLKey where
 -- v1.targetHttpsProxies ==)
 --
 -- /See:/ 'targetHTTPSProxy' smart constructor.
-data TargetHTTPSProxy = TargetHTTPSProxy'
+data TargetHTTPSProxy =
+  TargetHTTPSProxy'
     { _thpSSLPolicy         :: !(Maybe Text)
     , _thpURLMap            :: !(Maybe Text)
     , _thpSSLCertificates   :: !(Maybe [Text])
@@ -40611,7 +40900,8 @@ data TargetHTTPSProxy = TargetHTTPSProxy'
     , _thpCreationTimestamp :: !(Maybe Text)
     , _thpId                :: !(Maybe (Textual Word64))
     , _thpDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetHTTPSProxy' with the minimum fields required to make a request.
 --
@@ -40639,7 +40929,7 @@ data TargetHTTPSProxy = TargetHTTPSProxy'
 targetHTTPSProxy
     :: TargetHTTPSProxy
 targetHTTPSProxy =
-    TargetHTTPSProxy'
+  TargetHTTPSProxy'
     { _thpSSLPolicy = Nothing
     , _thpURLMap = Nothing
     , _thpSSLCertificates = Nothing
@@ -40764,9 +41054,11 @@ instance ToJSON TargetHTTPSProxy where
 -- | Message containing connection draining configuration.
 --
 -- /See:/ 'connectionDraining' smart constructor.
-newtype ConnectionDraining = ConnectionDraining'
+newtype ConnectionDraining =
+  ConnectionDraining'
     { _cdDrainingTimeoutSec :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConnectionDraining' with the minimum fields required to make a request.
 --
@@ -40775,10 +41067,7 @@ newtype ConnectionDraining = ConnectionDraining'
 -- * 'cdDrainingTimeoutSec'
 connectionDraining
     :: ConnectionDraining
-connectionDraining =
-    ConnectionDraining'
-    { _cdDrainingTimeoutSec = Nothing
-    }
+connectionDraining = ConnectionDraining' {_cdDrainingTimeoutSec = Nothing}
 
 -- | Time for which instance will be drained (not accept new connections, but
 -- still work to finish started).
@@ -40803,10 +41092,12 @@ instance ToJSON ConnectionDraining where
 
 --
 -- /See:/ 'interconnectAttachmentListWarningDataItem' smart constructor.
-data InterconnectAttachmentListWarningDataItem = InterconnectAttachmentListWarningDataItem'
+data InterconnectAttachmentListWarningDataItem =
+  InterconnectAttachmentListWarningDataItem'
     { _ialwdiValue :: !(Maybe Text)
     , _ialwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -40818,10 +41109,8 @@ data InterconnectAttachmentListWarningDataItem = InterconnectAttachmentListWarni
 interconnectAttachmentListWarningDataItem
     :: InterconnectAttachmentListWarningDataItem
 interconnectAttachmentListWarningDataItem =
-    InterconnectAttachmentListWarningDataItem'
-    { _ialwdiValue = Nothing
-    , _ialwdiKey = Nothing
-    }
+  InterconnectAttachmentListWarningDataItem'
+    {_ialwdiValue = Nothing, _ialwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 ialwdiValue :: Lens' InterconnectAttachmentListWarningDataItem (Maybe Text)
@@ -40840,7 +41129,8 @@ ialwdiKey
   = lens _ialwdiKey (\ s a -> s{_ialwdiKey = a})
 
 instance FromJSON
-         InterconnectAttachmentListWarningDataItem where
+           InterconnectAttachmentListWarningDataItem
+         where
         parseJSON
           = withObject
               "InterconnectAttachmentListWarningDataItem"
@@ -40849,7 +41139,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         InterconnectAttachmentListWarningDataItem where
+           InterconnectAttachmentListWarningDataItem
+         where
         toJSON InterconnectAttachmentListWarningDataItem'{..}
           = object
               (catMaybes
@@ -40858,10 +41149,12 @@ instance ToJSON
 
 --
 -- /See:/ 'cacheInvalidationRule' smart constructor.
-data CacheInvalidationRule = CacheInvalidationRule'
+data CacheInvalidationRule =
+  CacheInvalidationRule'
     { _cirPath :: !(Maybe Text)
     , _cirHost :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CacheInvalidationRule' with the minimum fields required to make a request.
 --
@@ -40873,10 +41166,7 @@ data CacheInvalidationRule = CacheInvalidationRule'
 cacheInvalidationRule
     :: CacheInvalidationRule
 cacheInvalidationRule =
-    CacheInvalidationRule'
-    { _cirPath = Nothing
-    , _cirHost = Nothing
-    }
+  CacheInvalidationRule' {_cirPath = Nothing, _cirHost = Nothing}
 
 cirPath :: Lens' CacheInvalidationRule (Maybe Text)
 cirPath = lens _cirPath (\ s a -> s{_cirPath = a})
@@ -40901,10 +41191,12 @@ instance ToJSON CacheInvalidationRule where
 
 --
 -- /See:/ 'addressAggregatedListWarningDataItem' smart constructor.
-data AddressAggregatedListWarningDataItem = AddressAggregatedListWarningDataItem'
+data AddressAggregatedListWarningDataItem =
+  AddressAggregatedListWarningDataItem'
     { _aalwdiaValue :: !(Maybe Text)
     , _aalwdiaKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -40916,10 +41208,8 @@ data AddressAggregatedListWarningDataItem = AddressAggregatedListWarningDataItem
 addressAggregatedListWarningDataItem
     :: AddressAggregatedListWarningDataItem
 addressAggregatedListWarningDataItem =
-    AddressAggregatedListWarningDataItem'
-    { _aalwdiaValue = Nothing
-    , _aalwdiaKey = Nothing
-    }
+  AddressAggregatedListWarningDataItem'
+    {_aalwdiaValue = Nothing, _aalwdiaKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 aalwdiaValue :: Lens' AddressAggregatedListWarningDataItem (Maybe Text)
@@ -40938,7 +41228,8 @@ aalwdiaKey
   = lens _aalwdiaKey (\ s a -> s{_aalwdiaKey = a})
 
 instance FromJSON
-         AddressAggregatedListWarningDataItem where
+           AddressAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject "AddressAggregatedListWarningDataItem"
               (\ o ->
@@ -40955,10 +41246,12 @@ instance ToJSON AddressAggregatedListWarningDataItem
 
 --
 -- /See:/ 'targetVPNGatewaysScopedList' smart constructor.
-data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList'
+data TargetVPNGatewaysScopedList =
+  TargetVPNGatewaysScopedList'
     { _tvgslTargetVPNGateways :: !(Maybe [TargetVPNGateway])
     , _tvgslWarning           :: !(Maybe TargetVPNGatewaysScopedListWarning)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysScopedList' with the minimum fields required to make a request.
 --
@@ -40970,10 +41263,8 @@ data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList'
 targetVPNGatewaysScopedList
     :: TargetVPNGatewaysScopedList
 targetVPNGatewaysScopedList =
-    TargetVPNGatewaysScopedList'
-    { _tvgslTargetVPNGateways = Nothing
-    , _tvgslWarning = Nothing
-    }
+  TargetVPNGatewaysScopedList'
+    {_tvgslTargetVPNGateways = Nothing, _tvgslWarning = Nothing}
 
 -- | [Output Only] A list of target vpn gateways contained in this scope.
 tvgslTargetVPNGateways :: Lens' TargetVPNGatewaysScopedList [TargetVPNGateway]
@@ -41008,11 +41299,13 @@ instance ToJSON TargetVPNGatewaysScopedList where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'commitmentAggregatedListWarning' smart constructor.
-data CommitmentAggregatedListWarning = CommitmentAggregatedListWarning'
+data CommitmentAggregatedListWarning =
+  CommitmentAggregatedListWarning'
     { _calwData    :: !(Maybe [CommitmentAggregatedListWarningDataItem])
     , _calwCode    :: !(Maybe CommitmentAggregatedListWarningCode)
     , _calwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentAggregatedListWarning' with the minimum fields required to make a request.
 --
@@ -41026,11 +41319,8 @@ data CommitmentAggregatedListWarning = CommitmentAggregatedListWarning'
 commitmentAggregatedListWarning
     :: CommitmentAggregatedListWarning
 commitmentAggregatedListWarning =
-    CommitmentAggregatedListWarning'
-    { _calwData = Nothing
-    , _calwCode = Nothing
-    , _calwMessage = Nothing
-    }
+  CommitmentAggregatedListWarning'
+    {_calwData = Nothing, _calwCode = Nothing, _calwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -41071,11 +41361,13 @@ instance ToJSON CommitmentAggregatedListWarning where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'regionInstanceGroupListWarning' smart constructor.
-data RegionInstanceGroupListWarning = RegionInstanceGroupListWarning'
+data RegionInstanceGroupListWarning =
+  RegionInstanceGroupListWarning'
     { _riglwData    :: !(Maybe [RegionInstanceGroupListWarningDataItem])
     , _riglwCode    :: !(Maybe RegionInstanceGroupListWarningCode)
     , _riglwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupListWarning' with the minimum fields required to make a request.
 --
@@ -41089,11 +41381,8 @@ data RegionInstanceGroupListWarning = RegionInstanceGroupListWarning'
 regionInstanceGroupListWarning
     :: RegionInstanceGroupListWarning
 regionInstanceGroupListWarning =
-    RegionInstanceGroupListWarning'
-    { _riglwData = Nothing
-    , _riglwCode = Nothing
-    , _riglwMessage = Nothing
-    }
+  RegionInstanceGroupListWarning'
+    {_riglwData = Nothing, _riglwCode = Nothing, _riglwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -41136,7 +41425,8 @@ instance ToJSON RegionInstanceGroupListWarning where
 -- Only one access config per instance is supported.
 --
 -- /See:/ 'accessConfig' smart constructor.
-data AccessConfig = AccessConfig'
+data AccessConfig =
+  AccessConfig'
     { _acNetworkTier         :: !(Maybe AccessConfigNetworkTier)
     , _acSetPublicPtr        :: !(Maybe Bool)
     , _acKind                :: !Text
@@ -41144,7 +41434,8 @@ data AccessConfig = AccessConfig'
     , _acNATIP               :: !(Maybe Text)
     , _acPublicPtrDomainName :: !(Maybe Text)
     , _acType                :: !AccessConfigType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessConfig' with the minimum fields required to make a request.
 --
@@ -41166,7 +41457,7 @@ data AccessConfig = AccessConfig'
 accessConfig
     :: AccessConfig
 accessConfig =
-    AccessConfig'
+  AccessConfig'
     { _acNetworkTier = Nothing
     , _acSetPublicPtr = Nothing
     , _acKind = "compute#accessConfig"
@@ -41252,11 +41543,13 @@ instance ToJSON AccessConfig where
 -- | Specifies what kind of log the caller must write
 --
 -- /See:/ 'logConfig' smart constructor.
-data LogConfig = LogConfig'
+data LogConfig =
+  LogConfig'
     { _lcCloudAudit :: !(Maybe LogConfigCloudAuditOptions)
     , _lcDataAccess :: !(Maybe LogConfigDataAccessOptions)
     , _lcCounter    :: !(Maybe LogConfigCounterOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LogConfig' with the minimum fields required to make a request.
 --
@@ -41270,11 +41563,8 @@ data LogConfig = LogConfig'
 logConfig
     :: LogConfig
 logConfig =
-    LogConfig'
-    { _lcCloudAudit = Nothing
-    , _lcDataAccess = Nothing
-    , _lcCounter = Nothing
-    }
+  LogConfig'
+    {_lcCloudAudit = Nothing, _lcDataAccess = Nothing, _lcCounter = Nothing}
 
 -- | Cloud audit options.
 lcCloudAudit :: Lens' LogConfig (Maybe LogConfigCloudAuditOptions)
@@ -41310,11 +41600,13 @@ instance ToJSON LogConfig where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'zoneListWarning' smart constructor.
-data ZoneListWarning = ZoneListWarning'
+data ZoneListWarning =
+  ZoneListWarning'
     { _zlwData    :: !(Maybe [ZoneListWarningDataItem])
     , _zlwCode    :: !(Maybe ZoneListWarningCode)
     , _zlwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ZoneListWarning' with the minimum fields required to make a request.
 --
@@ -41328,11 +41620,8 @@ data ZoneListWarning = ZoneListWarning'
 zoneListWarning
     :: ZoneListWarning
 zoneListWarning =
-    ZoneListWarning'
-    { _zlwData = Nothing
-    , _zlwCode = Nothing
-    , _zlwMessage = Nothing
-    }
+  ZoneListWarning'
+    {_zlwData = Nothing, _zlwCode = Nothing, _zlwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -41369,11 +41658,13 @@ instance ToJSON ZoneListWarning where
 
 --
 -- /See:/ 'managedInstanceLastAttemptErrorsErrorsItem' smart constructor.
-data ManagedInstanceLastAttemptErrorsErrorsItem = ManagedInstanceLastAttemptErrorsErrorsItem'
+data ManagedInstanceLastAttemptErrorsErrorsItem =
+  ManagedInstanceLastAttemptErrorsErrorsItem'
     { _milaeeiLocation :: !(Maybe Text)
     , _milaeeiCode     :: !(Maybe Text)
     , _milaeeiMessage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedInstanceLastAttemptErrorsErrorsItem' with the minimum fields required to make a request.
 --
@@ -41387,7 +41678,7 @@ data ManagedInstanceLastAttemptErrorsErrorsItem = ManagedInstanceLastAttemptErro
 managedInstanceLastAttemptErrorsErrorsItem
     :: ManagedInstanceLastAttemptErrorsErrorsItem
 managedInstanceLastAttemptErrorsErrorsItem =
-    ManagedInstanceLastAttemptErrorsErrorsItem'
+  ManagedInstanceLastAttemptErrorsErrorsItem'
     { _milaeeiLocation = Nothing
     , _milaeeiCode = Nothing
     , _milaeeiMessage = Nothing
@@ -41412,7 +41703,8 @@ milaeeiMessage
       (\ s a -> s{_milaeeiMessage = a})
 
 instance FromJSON
-         ManagedInstanceLastAttemptErrorsErrorsItem where
+           ManagedInstanceLastAttemptErrorsErrorsItem
+         where
         parseJSON
           = withObject
               "ManagedInstanceLastAttemptErrorsErrorsItem"
@@ -41422,7 +41714,8 @@ instance FromJSON
                      (o .:? "message"))
 
 instance ToJSON
-         ManagedInstanceLastAttemptErrorsErrorsItem where
+           ManagedInstanceLastAttemptErrorsErrorsItem
+         where
         toJSON
           ManagedInstanceLastAttemptErrorsErrorsItem'{..}
           = object
@@ -41433,10 +41726,12 @@ instance ToJSON
 
 --
 -- /See:/ 'instancesScopedListWarningDataItem' smart constructor.
-data InstancesScopedListWarningDataItem = InstancesScopedListWarningDataItem'
+data InstancesScopedListWarningDataItem =
+  InstancesScopedListWarningDataItem'
     { _islwdiValue :: !(Maybe Text)
     , _islwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -41448,10 +41743,8 @@ data InstancesScopedListWarningDataItem = InstancesScopedListWarningDataItem'
 instancesScopedListWarningDataItem
     :: InstancesScopedListWarningDataItem
 instancesScopedListWarningDataItem =
-    InstancesScopedListWarningDataItem'
-    { _islwdiValue = Nothing
-    , _islwdiKey = Nothing
-    }
+  InstancesScopedListWarningDataItem'
+    {_islwdiValue = Nothing, _islwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 islwdiValue :: Lens' InstancesScopedListWarningDataItem (Maybe Text)
@@ -41489,9 +41782,11 @@ instance ToJSON InstancesScopedListWarningDataItem
 -- setLabels method. Label values may be empty.
 --
 -- /See:/ 'snapshotLabels' smart constructor.
-newtype SnapshotLabels = SnapshotLabels'
+newtype SnapshotLabels =
+  SnapshotLabels'
     { _slAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SnapshotLabels' with the minimum fields required to make a request.
 --
@@ -41502,9 +41797,7 @@ snapshotLabels
     :: HashMap Text Text -- ^ 'slAddtional'
     -> SnapshotLabels
 snapshotLabels pSlAddtional_ =
-    SnapshotLabels'
-    { _slAddtional = _Coerce # pSlAddtional_
-    }
+  SnapshotLabels' {_slAddtional = _Coerce # pSlAddtional_}
 
 slAddtional :: Lens' SnapshotLabels (HashMap Text Text)
 slAddtional
@@ -41521,10 +41814,12 @@ instance ToJSON SnapshotLabels where
 
 --
 -- /See:/ 'backendServicesScopedListWarningDataItem' smart constructor.
-data BackendServicesScopedListWarningDataItem = BackendServicesScopedListWarningDataItem'
+data BackendServicesScopedListWarningDataItem =
+  BackendServicesScopedListWarningDataItem'
     { _bsslwdiValue :: !(Maybe Text)
     , _bsslwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServicesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -41536,10 +41831,8 @@ data BackendServicesScopedListWarningDataItem = BackendServicesScopedListWarning
 backendServicesScopedListWarningDataItem
     :: BackendServicesScopedListWarningDataItem
 backendServicesScopedListWarningDataItem =
-    BackendServicesScopedListWarningDataItem'
-    { _bsslwdiValue = Nothing
-    , _bsslwdiKey = Nothing
-    }
+  BackendServicesScopedListWarningDataItem'
+    {_bsslwdiValue = Nothing, _bsslwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 bsslwdiValue :: Lens' BackendServicesScopedListWarningDataItem (Maybe Text)
@@ -41558,7 +41851,8 @@ bsslwdiKey
   = lens _bsslwdiKey (\ s a -> s{_bsslwdiKey = a})
 
 instance FromJSON
-         BackendServicesScopedListWarningDataItem where
+           BackendServicesScopedListWarningDataItem
+         where
         parseJSON
           = withObject
               "BackendServicesScopedListWarningDataItem"
@@ -41567,7 +41861,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         BackendServicesScopedListWarningDataItem where
+           BackendServicesScopedListWarningDataItem
+         where
         toJSON BackendServicesScopedListWarningDataItem'{..}
           = object
               (catMaybes
@@ -41577,9 +41872,11 @@ instance ToJSON
 -- | A list of NodeTemplatesScopedList resources.
 --
 -- /See:/ 'nodeTemplateAggregatedListItems' smart constructor.
-newtype NodeTemplateAggregatedListItems = NodeTemplateAggregatedListItems'
+newtype NodeTemplateAggregatedListItems =
+  NodeTemplateAggregatedListItems'
     { _ntaliAddtional :: HashMap Text NodeTemplatesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTemplateAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -41590,9 +41887,8 @@ nodeTemplateAggregatedListItems
     :: HashMap Text NodeTemplatesScopedList -- ^ 'ntaliAddtional'
     -> NodeTemplateAggregatedListItems
 nodeTemplateAggregatedListItems pNtaliAddtional_ =
-    NodeTemplateAggregatedListItems'
-    { _ntaliAddtional = _Coerce # pNtaliAddtional_
-    }
+  NodeTemplateAggregatedListItems'
+    {_ntaliAddtional = _Coerce # pNtaliAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of node templates.
 ntaliAddtional :: Lens' NodeTemplateAggregatedListItems (HashMap Text NodeTemplatesScopedList)
@@ -41617,7 +41913,8 @@ instance ToJSON NodeTemplateAggregatedListItems where
 -- v1.backendService ==) (== resource_for beta.backendService ==)
 --
 -- /See:/ 'backendService' smart constructor.
-data BackendService = BackendService'
+data BackendService =
+  BackendService'
     { _bsSessionAffinity      :: !(Maybe BackendServiceSessionAffinity)
     , _bsBackends             :: !(Maybe [Backend])
     , _bsAffinityCookieTtlSec :: !(Maybe (Textual Int32))
@@ -41640,7 +41937,8 @@ data BackendService = BackendService'
     , _bsPortName             :: !(Maybe Text)
     , _bsHealthChecks         :: !(Maybe [Text])
     , _bsPort                 :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendService' with the minimum fields required to make a request.
 --
@@ -41692,7 +41990,7 @@ data BackendService = BackendService'
 backendService
     :: BackendService
 backendService =
-    BackendService'
+  BackendService'
     { _bsSessionAffinity = Nothing
     , _bsBackends = Nothing
     , _bsAffinityCookieTtlSec = Nothing
@@ -41942,11 +42240,13 @@ instance ToJSON BackendService where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'instanceListWarning' smart constructor.
-data InstanceListWarning = InstanceListWarning'
+data InstanceListWarning =
+  InstanceListWarning'
     { _insData    :: !(Maybe [InstanceListWarningDataItem])
     , _insCode    :: !(Maybe InstanceListWarningCode)
     , _insMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceListWarning' with the minimum fields required to make a request.
 --
@@ -41960,11 +42260,8 @@ data InstanceListWarning = InstanceListWarning'
 instanceListWarning
     :: InstanceListWarning
 instanceListWarning =
-    InstanceListWarning'
-    { _insData = Nothing
-    , _insCode = Nothing
-    , _insMessage = Nothing
-    }
+  InstanceListWarning'
+    {_insData = Nothing, _insCode = Nothing, _insMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -42001,10 +42298,12 @@ instance ToJSON InstanceListWarning where
 
 --
 -- /See:/ 'instanceMoveRequest' smart constructor.
-data InstanceMoveRequest = InstanceMoveRequest'
+data InstanceMoveRequest =
+  InstanceMoveRequest'
     { _imrTargetInstance  :: !(Maybe Text)
     , _imrDestinationZone :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceMoveRequest' with the minimum fields required to make a request.
 --
@@ -42016,10 +42315,8 @@ data InstanceMoveRequest = InstanceMoveRequest'
 instanceMoveRequest
     :: InstanceMoveRequest
 instanceMoveRequest =
-    InstanceMoveRequest'
-    { _imrTargetInstance = Nothing
-    , _imrDestinationZone = Nothing
-    }
+  InstanceMoveRequest'
+    {_imrTargetInstance = Nothing, _imrDestinationZone = Nothing}
 
 -- | The URL of the target instance to move. This can be a full or partial
 -- URL. For example, the following are all valid URLs to an instance: -
@@ -42059,10 +42356,12 @@ instance ToJSON InstanceMoveRequest where
 -- | Describing the ARP neighbor entries seen on this link
 --
 -- /See:/ 'interconnectDiagnosticsARPEntry' smart constructor.
-data InterconnectDiagnosticsARPEntry = InterconnectDiagnosticsARPEntry'
+data InterconnectDiagnosticsARPEntry =
+  InterconnectDiagnosticsARPEntry'
     { _idarpeIPAddress  :: !(Maybe Text)
     , _idarpeMACAddress :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectDiagnosticsARPEntry' with the minimum fields required to make a request.
 --
@@ -42074,10 +42373,8 @@ data InterconnectDiagnosticsARPEntry = InterconnectDiagnosticsARPEntry'
 interconnectDiagnosticsARPEntry
     :: InterconnectDiagnosticsARPEntry
 interconnectDiagnosticsARPEntry =
-    InterconnectDiagnosticsARPEntry'
-    { _idarpeIPAddress = Nothing
-    , _idarpeMACAddress = Nothing
-    }
+  InterconnectDiagnosticsARPEntry'
+    {_idarpeIPAddress = Nothing, _idarpeMACAddress = Nothing}
 
 -- | The IP address of this ARP neighbor.
 idarpeIPAddress :: Lens' InterconnectDiagnosticsARPEntry (Maybe Text)
@@ -42109,14 +42406,16 @@ instance ToJSON InterconnectDiagnosticsARPEntry where
 -- | Contains a list of Commitment resources.
 --
 -- /See:/ 'commitmentList' smart constructor.
-data CommitmentList = CommitmentList'
+data CommitmentList =
+  CommitmentList'
     { _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
     , _clItems         :: !(Maybe [Commitment])
     , _clSelfLink      :: !(Maybe Text)
     , _clWarning       :: !(Maybe CommitmentListWarning)
     , _clId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CommitmentList' with the minimum fields required to make a request.
 --
@@ -42136,7 +42435,7 @@ data CommitmentList = CommitmentList'
 commitmentList
     :: CommitmentList
 commitmentList =
-    CommitmentList'
+  CommitmentList'
     { _clNextPageToken = Nothing
     , _clKind = "compute#commitmentList"
     , _clItems = Nothing
@@ -42203,9 +42502,11 @@ instance ToJSON CommitmentList where
 
 --
 -- /See:/ 'instancesSetLabelsRequestLabels' smart constructor.
-newtype InstancesSetLabelsRequestLabels = InstancesSetLabelsRequestLabels'
+newtype InstancesSetLabelsRequestLabels =
+  InstancesSetLabelsRequestLabels'
     { _islrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesSetLabelsRequestLabels' with the minimum fields required to make a request.
 --
@@ -42216,9 +42517,8 @@ instancesSetLabelsRequestLabels
     :: HashMap Text Text -- ^ 'islrlAddtional'
     -> InstancesSetLabelsRequestLabels
 instancesSetLabelsRequestLabels pIslrlAddtional_ =
-    InstancesSetLabelsRequestLabels'
-    { _islrlAddtional = _Coerce # pIslrlAddtional_
-    }
+  InstancesSetLabelsRequestLabels'
+    {_islrlAddtional = _Coerce # pIslrlAddtional_}
 
 islrlAddtional :: Lens' InstancesSetLabelsRequestLabels (HashMap Text Text)
 islrlAddtional
@@ -42239,10 +42539,12 @@ instance ToJSON InstancesSetLabelsRequestLabels where
 
 --
 -- /See:/ 'instanceGroupsScopedList' smart constructor.
-data InstanceGroupsScopedList = InstanceGroupsScopedList'
+data InstanceGroupsScopedList =
+  InstanceGroupsScopedList'
     { _igslWarning        :: !(Maybe InstanceGroupsScopedListWarning)
     , _igslInstanceGroups :: !(Maybe [InstanceGroup])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupsScopedList' with the minimum fields required to make a request.
 --
@@ -42254,10 +42556,8 @@ data InstanceGroupsScopedList = InstanceGroupsScopedList'
 instanceGroupsScopedList
     :: InstanceGroupsScopedList
 instanceGroupsScopedList =
-    InstanceGroupsScopedList'
-    { _igslWarning = Nothing
-    , _igslInstanceGroups = Nothing
-    }
+  InstanceGroupsScopedList'
+    {_igslWarning = Nothing, _igslInstanceGroups = Nothing}
 
 -- | [Output Only] An informational warning that replaces the list of
 -- instance groups when the list is empty.
@@ -42291,9 +42591,11 @@ instance ToJSON InstanceGroupsScopedList where
 
 --
 -- /See:/ 'instancesStartWithEncryptionKeyRequest' smart constructor.
-newtype InstancesStartWithEncryptionKeyRequest = InstancesStartWithEncryptionKeyRequest'
+newtype InstancesStartWithEncryptionKeyRequest =
+  InstancesStartWithEncryptionKeyRequest'
     { _iswekrDisks :: Maybe [CustomerEncryptionKeyProtectedDisk]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstancesStartWithEncryptionKeyRequest' with the minimum fields required to make a request.
 --
@@ -42303,9 +42605,7 @@ newtype InstancesStartWithEncryptionKeyRequest = InstancesStartWithEncryptionKey
 instancesStartWithEncryptionKeyRequest
     :: InstancesStartWithEncryptionKeyRequest
 instancesStartWithEncryptionKeyRequest =
-    InstancesStartWithEncryptionKeyRequest'
-    { _iswekrDisks = Nothing
-    }
+  InstancesStartWithEncryptionKeyRequest' {_iswekrDisks = Nothing}
 
 -- | Array of disks associated with this instance that are protected with a
 -- customer-supplied encryption key. In order to start the instance, the
@@ -42319,7 +42619,8 @@ iswekrDisks
       . _Coerce
 
 instance FromJSON
-         InstancesStartWithEncryptionKeyRequest where
+           InstancesStartWithEncryptionKeyRequest
+         where
         parseJSON
           = withObject "InstancesStartWithEncryptionKeyRequest"
               (\ o ->
@@ -42327,20 +42628,23 @@ instance FromJSON
                    (o .:? "disks" .!= mempty))
 
 instance ToJSON
-         InstancesStartWithEncryptionKeyRequest where
+           InstancesStartWithEncryptionKeyRequest
+         where
         toJSON InstancesStartWithEncryptionKeyRequest'{..}
           = object (catMaybes [("disks" .=) <$> _iswekrDisks])
 
 --
 -- /See:/ 'httpsHealthCheck' smart constructor.
-data HTTPSHealthCheck = HTTPSHealthCheck'
+data HTTPSHealthCheck =
+  HTTPSHealthCheck'
     { _hhcResponse    :: !(Maybe Text)
     , _hhcRequestPath :: !(Maybe Text)
     , _hhcHost        :: !(Maybe Text)
     , _hhcProxyHeader :: !(Maybe HTTPSHealthCheckProxyHeader)
     , _hhcPortName    :: !(Maybe Text)
     , _hhcPort        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPSHealthCheck' with the minimum fields required to make a request.
 --
@@ -42360,7 +42664,7 @@ data HTTPSHealthCheck = HTTPSHealthCheck'
 httpsHealthCheck
     :: HTTPSHealthCheck
 httpsHealthCheck =
-    HTTPSHealthCheck'
+  HTTPSHealthCheck'
     { _hhcResponse = Nothing
     , _hhcRequestPath = Nothing
     , _hhcHost = Nothing
@@ -42434,9 +42738,11 @@ instance ToJSON HTTPSHealthCheck where
 -- | A list of VpnTunnelsScopedList resources.
 --
 -- /See:/ 'vpnTunnelAggregatedListItems' smart constructor.
-newtype VPNTunnelAggregatedListItems = VPNTunnelAggregatedListItems'
+newtype VPNTunnelAggregatedListItems =
+  VPNTunnelAggregatedListItems'
     { _vtaliAddtional :: HashMap Text VPNTunnelsScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VPNTunnelAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -42447,9 +42753,7 @@ vpnTunnelAggregatedListItems
     :: HashMap Text VPNTunnelsScopedList -- ^ 'vtaliAddtional'
     -> VPNTunnelAggregatedListItems
 vpnTunnelAggregatedListItems pVtaliAddtional_ =
-    VPNTunnelAggregatedListItems'
-    { _vtaliAddtional = _Coerce # pVtaliAddtional_
-    }
+  VPNTunnelAggregatedListItems' {_vtaliAddtional = _Coerce # pVtaliAddtional_}
 
 -- | Name of the scope containing this set of vpn tunnels.
 vtaliAddtional :: Lens' VPNTunnelAggregatedListItems (HashMap Text VPNTunnelsScopedList)
@@ -42470,10 +42774,12 @@ instance ToJSON VPNTunnelAggregatedListItems where
 
 --
 -- /See:/ 'instanceAggregatedListWarningDataItem' smart constructor.
-data InstanceAggregatedListWarningDataItem = InstanceAggregatedListWarningDataItem'
+data InstanceAggregatedListWarningDataItem =
+  InstanceAggregatedListWarningDataItem'
     { _insValue :: !(Maybe Text)
     , _insKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -42485,10 +42791,8 @@ data InstanceAggregatedListWarningDataItem = InstanceAggregatedListWarningDataIt
 instanceAggregatedListWarningDataItem
     :: InstanceAggregatedListWarningDataItem
 instanceAggregatedListWarningDataItem =
-    InstanceAggregatedListWarningDataItem'
-    { _insValue = Nothing
-    , _insKey = Nothing
-    }
+  InstanceAggregatedListWarningDataItem'
+    {_insValue = Nothing, _insKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 insValue :: Lens' InstanceAggregatedListWarningDataItem (Maybe Text)
@@ -42505,7 +42809,8 @@ insKey :: Lens' InstanceAggregatedListWarningDataItem (Maybe Text)
 insKey = lens _insKey (\ s a -> s{_insKey = a})
 
 instance FromJSON
-         InstanceAggregatedListWarningDataItem where
+           InstanceAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject "InstanceAggregatedListWarningDataItem"
               (\ o ->
@@ -42522,10 +42827,12 @@ instance ToJSON InstanceAggregatedListWarningDataItem
 -- | A set of instance tags.
 --
 -- /See:/ 'tags' smart constructor.
-data Tags = Tags'
+data Tags =
+  Tags'
     { _tFingerprint :: !(Maybe Bytes)
     , _tItems       :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Tags' with the minimum fields required to make a request.
 --
@@ -42536,11 +42843,7 @@ data Tags = Tags'
 -- * 'tItems'
 tags
     :: Tags
-tags =
-    Tags'
-    { _tFingerprint = Nothing
-    , _tItems = Nothing
-    }
+tags = Tags' {_tFingerprint = Nothing, _tItems = Nothing}
 
 -- | Specifies a fingerprint for this request, which is essentially a hash of
 -- the tags\' contents and used for optimistic locking. The fingerprint is
@@ -42576,14 +42879,16 @@ instance ToJSON Tags where
 
 --
 -- /See:/ 'addressAggregatedList' smart constructor.
-data AddressAggregatedList = AddressAggregatedList'
+data AddressAggregatedList =
+  AddressAggregatedList'
     { _addNextPageToken :: !(Maybe Text)
     , _addKind          :: !Text
     , _addItems         :: !(Maybe AddressAggregatedListItems)
     , _addSelfLink      :: !(Maybe Text)
     , _addWarning       :: !(Maybe AddressAggregatedListWarning)
     , _addId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddressAggregatedList' with the minimum fields required to make a request.
 --
@@ -42603,7 +42908,7 @@ data AddressAggregatedList = AddressAggregatedList'
 addressAggregatedList
     :: AddressAggregatedList
 addressAggregatedList =
-    AddressAggregatedList'
+  AddressAggregatedList'
     { _addNextPageToken = Nothing
     , _addKind = "compute#addressAggregatedList"
     , _addItems = Nothing
@@ -42672,14 +42977,16 @@ instance ToJSON AddressAggregatedList where
 -- attachments.
 --
 -- /See:/ 'interconnectAttachmentList' smart constructor.
-data InterconnectAttachmentList = InterconnectAttachmentList'
+data InterconnectAttachmentList =
+  InterconnectAttachmentList'
     { _ialaNextPageToken :: !(Maybe Text)
     , _ialaKind          :: !Text
     , _ialaItems         :: !(Maybe [InterconnectAttachment])
     , _ialaSelfLink      :: !(Maybe Text)
     , _ialaWarning       :: !(Maybe InterconnectAttachmentListWarning)
     , _ialaId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InterconnectAttachmentList' with the minimum fields required to make a request.
 --
@@ -42699,7 +43006,7 @@ data InterconnectAttachmentList = InterconnectAttachmentList'
 interconnectAttachmentList
     :: InterconnectAttachmentList
 interconnectAttachmentList =
-    InterconnectAttachmentList'
+  InterconnectAttachmentList'
     { _ialaNextPageToken = Nothing
     , _ialaKind = "compute#interconnectAttachmentList"
     , _ialaItems = Nothing
@@ -42771,11 +43078,13 @@ instance ToJSON InterconnectAttachmentList where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem'
+data OperationWarningsItem =
+  OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe OperationWarningsItemCode)
     , _owiMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OperationWarningsItem' with the minimum fields required to make a request.
 --
@@ -42789,11 +43098,8 @@ data OperationWarningsItem = OperationWarningsItem'
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem'
-    { _owiData = Nothing
-    , _owiCode = Nothing
-    , _owiMessage = Nothing
-    }
+  OperationWarningsItem'
+    {_owiData = Nothing, _owiCode = Nothing, _owiMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -42831,11 +43137,13 @@ instance ToJSON OperationWarningsItem where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -42849,11 +43157,7 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -42907,12 +43211,14 @@ instance ToJSON Binding where
 -- | Message for the expected URL mappings.
 --
 -- /See:/ 'urlMapTest' smart constructor.
-data URLMapTest = URLMapTest'
+data URLMapTest =
+  URLMapTest'
     { _umtPath        :: !(Maybe Text)
     , _umtService     :: !(Maybe Text)
     , _umtHost        :: !(Maybe Text)
     , _umtDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLMapTest' with the minimum fields required to make a request.
 --
@@ -42928,7 +43234,7 @@ data URLMapTest = URLMapTest'
 urlMapTest
     :: URLMapTest
 urlMapTest =
-    URLMapTest'
+  URLMapTest'
     { _umtPath = Nothing
     , _umtService = Nothing
     , _umtHost = Nothing
@@ -42975,11 +43281,13 @@ instance ToJSON URLMapTest where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'httpsHealthCheckListWarning' smart constructor.
-data HTTPSHealthCheckListWarning = HTTPSHealthCheckListWarning'
+data HTTPSHealthCheckListWarning =
+  HTTPSHealthCheckListWarning'
     { _hhclwData    :: !(Maybe [HTTPSHealthCheckListWarningDataItem])
     , _hhclwCode    :: !(Maybe HTTPSHealthCheckListWarningCode)
     , _hhclwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'HTTPSHealthCheckListWarning' with the minimum fields required to make a request.
 --
@@ -42993,11 +43301,8 @@ data HTTPSHealthCheckListWarning = HTTPSHealthCheckListWarning'
 httpsHealthCheckListWarning
     :: HTTPSHealthCheckListWarning
 httpsHealthCheckListWarning =
-    HTTPSHealthCheckListWarning'
-    { _hhclwData = Nothing
-    , _hhclwCode = Nothing
-    , _hhclwMessage = Nothing
-    }
+  HTTPSHealthCheckListWarning'
+    {_hhclwData = Nothing, _hhclwCode = Nothing, _hhclwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -43038,9 +43343,11 @@ instance ToJSON HTTPSHealthCheckListWarning where
 -- | A list of NodeTypesScopedList resources.
 --
 -- /See:/ 'nodeTypeAggregatedListItems' smart constructor.
-newtype NodeTypeAggregatedListItems = NodeTypeAggregatedListItems'
+newtype NodeTypeAggregatedListItems =
+  NodeTypeAggregatedListItems'
     { _nAddtional :: HashMap Text NodeTypesScopedList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypeAggregatedListItems' with the minimum fields required to make a request.
 --
@@ -43051,9 +43358,7 @@ nodeTypeAggregatedListItems
     :: HashMap Text NodeTypesScopedList -- ^ 'nAddtional'
     -> NodeTypeAggregatedListItems
 nodeTypeAggregatedListItems pNAddtional_ =
-    NodeTypeAggregatedListItems'
-    { _nAddtional = _Coerce # pNAddtional_
-    }
+  NodeTypeAggregatedListItems' {_nAddtional = _Coerce # pNAddtional_}
 
 -- | [Output Only] Name of the scope containing this set of node types.
 nAddtional :: Lens' NodeTypeAggregatedListItems (HashMap Text NodeTypesScopedList)
@@ -43072,9 +43377,11 @@ instance ToJSON NodeTypeAggregatedListItems where
 
 --
 -- /See:/ 'routersPreviewResponse' smart constructor.
-newtype RoutersPreviewResponse = RoutersPreviewResponse'
+newtype RoutersPreviewResponse =
+  RoutersPreviewResponse'
     { _rprResource :: Maybe Router
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutersPreviewResponse' with the minimum fields required to make a request.
 --
@@ -43083,10 +43390,7 @@ newtype RoutersPreviewResponse = RoutersPreviewResponse'
 -- * 'rprResource'
 routersPreviewResponse
     :: RoutersPreviewResponse
-routersPreviewResponse =
-    RoutersPreviewResponse'
-    { _rprResource = Nothing
-    }
+routersPreviewResponse = RoutersPreviewResponse' {_rprResource = Nothing}
 
 -- | Preview of given router.
 rprResource :: Lens' RoutersPreviewResponse (Maybe Router)
@@ -43106,13 +43410,15 @@ instance ToJSON RoutersPreviewResponse where
 
 --
 -- /See:/ 'licensesListResponse' smart constructor.
-data LicensesListResponse = LicensesListResponse'
+data LicensesListResponse =
+  LicensesListResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrItems         :: !(Maybe [License])
     , _llrSelfLink      :: !(Maybe Text)
     , _llrWarning       :: !(Maybe LicensesListResponseWarning)
     , _llrId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicensesListResponse' with the minimum fields required to make a request.
 --
@@ -43130,7 +43436,7 @@ data LicensesListResponse = LicensesListResponse'
 licensesListResponse
     :: LicensesListResponse
 licensesListResponse =
-    LicensesListResponse'
+  LicensesListResponse'
     { _llrNextPageToken = Nothing
     , _llrItems = Nothing
     , _llrSelfLink = Nothing
@@ -43192,10 +43498,12 @@ instance ToJSON LicensesListResponse where
 
 --
 -- /See:/ 'backendServiceAggregatedListWarningDataItem' smart constructor.
-data BackendServiceAggregatedListWarningDataItem = BackendServiceAggregatedListWarningDataItem'
+data BackendServiceAggregatedListWarningDataItem =
+  BackendServiceAggregatedListWarningDataItem'
     { _bsalwdiValue :: !(Maybe Text)
     , _bsalwdiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
@@ -43207,10 +43515,8 @@ data BackendServiceAggregatedListWarningDataItem = BackendServiceAggregatedListW
 backendServiceAggregatedListWarningDataItem
     :: BackendServiceAggregatedListWarningDataItem
 backendServiceAggregatedListWarningDataItem =
-    BackendServiceAggregatedListWarningDataItem'
-    { _bsalwdiValue = Nothing
-    , _bsalwdiKey = Nothing
-    }
+  BackendServiceAggregatedListWarningDataItem'
+    {_bsalwdiValue = Nothing, _bsalwdiKey = Nothing}
 
 -- | [Output Only] A warning data value corresponding to the key.
 bsalwdiValue :: Lens' BackendServiceAggregatedListWarningDataItem (Maybe Text)
@@ -43229,7 +43535,8 @@ bsalwdiKey
   = lens _bsalwdiKey (\ s a -> s{_bsalwdiKey = a})
 
 instance FromJSON
-         BackendServiceAggregatedListWarningDataItem where
+           BackendServiceAggregatedListWarningDataItem
+         where
         parseJSON
           = withObject
               "BackendServiceAggregatedListWarningDataItem"
@@ -43238,7 +43545,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         BackendServiceAggregatedListWarningDataItem where
+           BackendServiceAggregatedListWarningDataItem
+         where
         toJSON
           BackendServiceAggregatedListWarningDataItem'{..}
           = object
@@ -43250,7 +43558,8 @@ instance ToJSON
 -- resource_for v1.instances ==)
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance'
+data Instance =
+  Instance'
     { _i1Status             :: !(Maybe InstanceStatus)
     , _i1ServiceAccounts    :: !(Maybe [ServiceAccount])
     , _i1DeletionProtection :: !(Maybe Bool)
@@ -43275,7 +43584,8 @@ data Instance = Instance'
     , _i1LabelFingerprint   :: !(Maybe Bytes)
     , _i1Description        :: !(Maybe Text)
     , _i1Tags               :: !(Maybe Tags)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -43331,7 +43641,7 @@ data Instance = Instance'
 instance'
     :: Instance
 instance' =
-    Instance'
+  Instance'
     { _i1Status = Nothing
     , _i1ServiceAccounts = Nothing
     , _i1DeletionProtection = Nothing
@@ -43606,12 +43916,14 @@ instance ToJSON Instance where
 -- default service will be used.
 --
 -- /See:/ 'pathMatcher' smart constructor.
-data PathMatcher = PathMatcher'
+data PathMatcher =
+  PathMatcher'
     { _pmDefaultService :: !(Maybe Text)
     , _pmName           :: !(Maybe Text)
     , _pmPathRules      :: !(Maybe [PathRule])
     , _pmDescription    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PathMatcher' with the minimum fields required to make a request.
 --
@@ -43627,7 +43939,7 @@ data PathMatcher = PathMatcher'
 pathMatcher
     :: PathMatcher
 pathMatcher =
-    PathMatcher'
+  PathMatcher'
     { _pmDefaultService = Nothing
     , _pmName = Nothing
     , _pmPathRules = Nothing
@@ -43699,11 +44011,13 @@ instance ToJSON PathMatcher where
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'backendServiceListWarning' smart constructor.
-data BackendServiceListWarning = BackendServiceListWarning'
+data BackendServiceListWarning =
+  BackendServiceListWarning'
     { _bslwData    :: !(Maybe [BackendServiceListWarningDataItem])
     , _bslwCode    :: !(Maybe BackendServiceListWarningCode)
     , _bslwMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendServiceListWarning' with the minimum fields required to make a request.
 --
@@ -43717,11 +44031,8 @@ data BackendServiceListWarning = BackendServiceListWarning'
 backendServiceListWarning
     :: BackendServiceListWarning
 backendServiceListWarning =
-    BackendServiceListWarning'
-    { _bslwData = Nothing
-    , _bslwCode = Nothing
-    , _bslwMessage = Nothing
-    }
+  BackendServiceListWarning'
+    {_bslwData = Nothing, _bslwCode = Nothing, _bslwMessage = Nothing}
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementGroupsUpdate' request conforms to.
 type PlacementGroupsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
@@ -55,10 +55,12 @@ type PlacementGroupsUpdateResource =
 -- | Updates an existing placement group.
 --
 -- /See:/ 'placementGroupsUpdate' smart constructor.
-data PlacementGroupsUpdate = PlacementGroupsUpdate'
+data PlacementGroupsUpdate =
+  PlacementGroupsUpdate'
     { _pguProFileId :: !(Textual Int64)
     , _pguPayload   :: !PlacementGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PlacementGroupsUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ placementGroupsUpdate
     -> PlacementGroup -- ^ 'pguPayload'
     -> PlacementGroupsUpdate
 placementGroupsUpdate pPguProFileId_ pPguPayload_ =
-    PlacementGroupsUpdate'
-    { _pguProFileId = _Coerce # pPguProFileId_
-    , _pguPayload = pPguPayload_
-    }
+  PlacementGroupsUpdate'
+    {_pguProFileId = _Coerce # pPguProFileId_, _pguPayload = pPguPayload_}
 
 -- | User profile ID associated with this request.
 pguProFileId :: Lens' PlacementGroupsUpdate Int64

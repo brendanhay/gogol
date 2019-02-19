@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'FilesList' request conforms to.
 type FilesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "files" :>
@@ -62,14 +62,16 @@ type FilesListResource =
 -- | Lists files for a user profile.
 --
 -- /See:/ 'filesList' smart constructor.
-data FilesList = FilesList'
+data FilesList =
+  FilesList'
     { _flProFileId  :: !(Textual Int64)
     , _flSortOrder  :: !FilesListSortOrder
     , _flScope      :: !FilesListScope
     , _flPageToken  :: !(Maybe Text)
     , _flSortField  :: !FilesListSortField
     , _flMaxResults :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FilesList' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ filesList
     :: Int64 -- ^ 'flProFileId'
     -> FilesList
 filesList pFlProFileId_ =
-    FilesList'
+  FilesList'
     { _flProFileId = _Coerce # pFlProFileId_
     , _flSortOrder = FLSODescending
     , _flScope = FLSMine

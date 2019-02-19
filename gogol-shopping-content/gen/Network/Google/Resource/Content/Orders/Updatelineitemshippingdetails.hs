@@ -60,11 +60,13 @@ type OrdersUpdatelineitemshippingdetailsResource =
 -- | Updates ship by and delivery by dates for a line item.
 --
 -- /See:/ 'ordersUpdatelineitemshippingdetails' smart constructor.
-data OrdersUpdatelineitemshippingdetails = OrdersUpdatelineitemshippingdetails'
+data OrdersUpdatelineitemshippingdetails =
+  OrdersUpdatelineitemshippingdetails'
     { _ousMerchantId :: !(Textual Word64)
     , _ousPayload    :: !OrdersUpdateLineItemShippingDetailsRequest
     , _ousOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersUpdatelineitemshippingdetails' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ ordersUpdatelineitemshippingdetails
     -> Text -- ^ 'ousOrderId'
     -> OrdersUpdatelineitemshippingdetails
 ordersUpdatelineitemshippingdetails pOusMerchantId_ pOusPayload_ pOusOrderId_ =
-    OrdersUpdatelineitemshippingdetails'
+  OrdersUpdatelineitemshippingdetails'
     { _ousMerchantId = _Coerce # pOusMerchantId_
     , _ousPayload = pOusPayload_
     , _ousOrderId = pOusOrderId_
@@ -106,7 +108,8 @@ ousOrderId
   = lens _ousOrderId (\ s a -> s{_ousOrderId = a})
 
 instance GoogleRequest
-         OrdersUpdatelineitemshippingdetails where
+           OrdersUpdatelineitemshippingdetails
+         where
         type Rs OrdersUpdatelineitemshippingdetails =
              OrdersUpdateLineItemShippingDetailsResponse
         type Scopes OrdersUpdatelineitemshippingdetails =

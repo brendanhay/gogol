@@ -69,7 +69,8 @@ type ProjectsIapTunnelZonesInstancesSetIAMPolicyResource
 -- https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing_access_via_the_api
 --
 -- /See:/ 'projectsIapTunnelZonesInstancesSetIAMPolicy' smart constructor.
-data ProjectsIapTunnelZonesInstancesSetIAMPolicy = ProjectsIapTunnelZonesInstancesSetIAMPolicy'
+data ProjectsIapTunnelZonesInstancesSetIAMPolicy =
+  ProjectsIapTunnelZonesInstancesSetIAMPolicy'
     { _pitzisipXgafv          :: !(Maybe Xgafv)
     , _pitzisipUploadProtocol :: !(Maybe Text)
     , _pitzisipAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsIapTunnelZonesInstancesSetIAMPolicy = ProjectsIapTunnelZonesInstanc
     , _pitzisipPayload        :: !SetIAMPolicyRequest
     , _pitzisipResource       :: !Text
     , _pitzisipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsIapTunnelZonesInstancesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsIapTunnelZonesInstancesSetIAMPolicy
     -> Text -- ^ 'pitzisipResource'
     -> ProjectsIapTunnelZonesInstancesSetIAMPolicy
 projectsIapTunnelZonesInstancesSetIAMPolicy pPitzisipPayload_ pPitzisipResource_ =
-    ProjectsIapTunnelZonesInstancesSetIAMPolicy'
+  ProjectsIapTunnelZonesInstancesSetIAMPolicy'
     { _pitzisipXgafv = Nothing
     , _pitzisipUploadProtocol = Nothing
     , _pitzisipAccessToken = Nothing
@@ -155,7 +157,8 @@ pitzisipCallback
       (\ s a -> s{_pitzisipCallback = a})
 
 instance GoogleRequest
-         ProjectsIapTunnelZonesInstancesSetIAMPolicy where
+           ProjectsIapTunnelZonesInstancesSetIAMPolicy
+         where
         type Rs ProjectsIapTunnelZonesInstancesSetIAMPolicy =
              Policy
         type Scopes

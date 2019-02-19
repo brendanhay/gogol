@@ -66,13 +66,15 @@ type SSLPoliciesListAvailableFeaturesResource =
 -- custom profile.
 --
 -- /See:/ 'sslPoliciesListAvailableFeatures' smart constructor.
-data SSLPoliciesListAvailableFeatures = SSLPoliciesListAvailableFeatures'
+data SSLPoliciesListAvailableFeatures =
+  SSLPoliciesListAvailableFeatures'
     { _splafOrderBy    :: !(Maybe Text)
     , _splafProject    :: !Text
     , _splafFilter     :: !(Maybe Text)
     , _splafPageToken  :: !(Maybe Text)
     , _splafMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SSLPoliciesListAvailableFeatures' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ sslPoliciesListAvailableFeatures
     :: Text -- ^ 'splafProject'
     -> SSLPoliciesListAvailableFeatures
 sslPoliciesListAvailableFeatures pSplafProject_ =
-    SSLPoliciesListAvailableFeatures'
+  SSLPoliciesListAvailableFeatures'
     { _splafOrderBy = Nothing
     , _splafProject = pSplafProject_
     , _splafFilter = Nothing
@@ -155,7 +157,8 @@ splafMaxResults
       . _Coerce
 
 instance GoogleRequest
-         SSLPoliciesListAvailableFeatures where
+           SSLPoliciesListAvailableFeatures
+         where
         type Rs SSLPoliciesListAvailableFeatures =
              SSLPoliciesListAvailableFeaturesResponse
         type Scopes SSLPoliciesListAvailableFeatures =

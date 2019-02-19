@@ -64,14 +64,16 @@ type OrganizationsStoredInfoTypesGetResource =
 -- learn more.
 --
 -- /See:/ 'organizationsStoredInfoTypesGet' smart constructor.
-data OrganizationsStoredInfoTypesGet = OrganizationsStoredInfoTypesGet'
+data OrganizationsStoredInfoTypesGet =
+  OrganizationsStoredInfoTypesGet'
     { _ositgXgafv          :: !(Maybe Xgafv)
     , _ositgUploadProtocol :: !(Maybe Text)
     , _ositgAccessToken    :: !(Maybe Text)
     , _ositgUploadType     :: !(Maybe Text)
     , _ositgName           :: !Text
     , _ositgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsStoredInfoTypesGet' with the minimum fields required to make a request.
 --
@@ -92,7 +94,7 @@ organizationsStoredInfoTypesGet
     :: Text -- ^ 'ositgName'
     -> OrganizationsStoredInfoTypesGet
 organizationsStoredInfoTypesGet pOsitgName_ =
-    OrganizationsStoredInfoTypesGet'
+  OrganizationsStoredInfoTypesGet'
     { _ositgXgafv = Nothing
     , _ositgUploadProtocol = Nothing
     , _ositgAccessToken = Nothing
@@ -138,7 +140,8 @@ ositgCallback
       (\ s a -> s{_ositgCallback = a})
 
 instance GoogleRequest
-         OrganizationsStoredInfoTypesGet where
+           OrganizationsStoredInfoTypesGet
+         where
         type Rs OrganizationsStoredInfoTypesGet =
              GooglePrivacyDlpV2StoredInfoType
         type Scopes OrganizationsStoredInfoTypesGet =

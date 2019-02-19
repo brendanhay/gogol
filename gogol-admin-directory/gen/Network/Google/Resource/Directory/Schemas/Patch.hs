@@ -57,11 +57,13 @@ type SchemasPatchResource =
 -- | Update schema. This method supports patch semantics.
 --
 -- /See:/ 'schemasPatch' smart constructor.
-data SchemasPatch = SchemasPatch'
+data SchemasPatch =
+  SchemasPatch'
     { _spPayload    :: !Schema
     , _spCustomerId :: !Text
     , _spSchemaKey  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SchemasPatch' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ schemasPatch
     -> Text -- ^ 'spSchemaKey'
     -> SchemasPatch
 schemasPatch pSpPayload_ pSpCustomerId_ pSpSchemaKey_ =
-    SchemasPatch'
+  SchemasPatch'
     { _spPayload = pSpPayload_
     , _spCustomerId = pSpCustomerId_
     , _spSchemaKey = pSpSchemaKey_

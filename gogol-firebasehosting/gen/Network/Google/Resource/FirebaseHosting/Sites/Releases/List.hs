@@ -65,7 +65,8 @@ type SitesReleasesListResource =
 -- | Lists the releases that have been created on the specified site.
 --
 -- /See:/ 'sitesReleasesList' smart constructor.
-data SitesReleasesList = SitesReleasesList'
+data SitesReleasesList =
+  SitesReleasesList'
     { _srlParent         :: !Text
     , _srlXgafv          :: !(Maybe Xgafv)
     , _srlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,8 @@ data SitesReleasesList = SitesReleasesList'
     , _srlPageToken      :: !(Maybe Text)
     , _srlPageSize       :: !(Maybe (Textual Int32))
     , _srlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SitesReleasesList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ sitesReleasesList
     :: Text -- ^ 'srlParent'
     -> SitesReleasesList
 sitesReleasesList pSrlParent_ =
-    SitesReleasesList'
+  SitesReleasesList'
     { _srlParent = pSrlParent_
     , _srlXgafv = Nothing
     , _srlUploadProtocol = Nothing

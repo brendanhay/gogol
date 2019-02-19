@@ -66,7 +66,8 @@ type GroupsListResource =
 -- | Retrieve all groups of a domain or of a user given a userKey (paginated)
 --
 -- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList'
+data GroupsList =
+  GroupsList'
     { _glOrderBy    :: !(Maybe GroupsListOrderBy)
     , _glDomain     :: !(Maybe Text)
     , _glSortOrder  :: !(Maybe GroupsListSortOrder)
@@ -75,7 +76,8 @@ data GroupsList = GroupsList'
     , _glPageToken  :: !(Maybe Text)
     , _glUserKey    :: !(Maybe Text)
     , _glMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsList' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ data GroupsList = GroupsList'
 groupsList
     :: GroupsList
 groupsList =
-    GroupsList'
+  GroupsList'
     { _glOrderBy = Nothing
     , _glDomain = Nothing
     , _glSortOrder = Nothing

@@ -54,9 +54,11 @@ type RelyingPartySetAccountInfoResource =
 -- | Set account info for a user.
 --
 -- /See:/ 'relyingPartySetAccountInfo' smart constructor.
-newtype RelyingPartySetAccountInfo = RelyingPartySetAccountInfo'
+newtype RelyingPartySetAccountInfo =
+  RelyingPartySetAccountInfo'
     { _rpsaiPayload :: IdentitytoolkitRelyingPartySetAccountInfoRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartySetAccountInfo' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ relyingPartySetAccountInfo
     :: IdentitytoolkitRelyingPartySetAccountInfoRequest -- ^ 'rpsaiPayload'
     -> RelyingPartySetAccountInfo
 relyingPartySetAccountInfo pRpsaiPayload_ =
-    RelyingPartySetAccountInfo'
-    { _rpsaiPayload = pRpsaiPayload_
-    }
+  RelyingPartySetAccountInfo' {_rpsaiPayload = pRpsaiPayload_}
 
 -- | Multipart request metadata.
 rpsaiPayload :: Lens' RelyingPartySetAccountInfo IdentitytoolkitRelyingPartySetAccountInfoRequest

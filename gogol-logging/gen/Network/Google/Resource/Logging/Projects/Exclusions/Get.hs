@@ -59,14 +59,16 @@ type ProjectsExclusionsGetResource =
 -- | Gets the description of an exclusion.
 --
 -- /See:/ 'projectsExclusionsGet' smart constructor.
-data ProjectsExclusionsGet = ProjectsExclusionsGet'
+data ProjectsExclusionsGet =
+  ProjectsExclusionsGet'
     { _pegXgafv          :: !(Maybe Xgafv)
     , _pegUploadProtocol :: !(Maybe Text)
     , _pegAccessToken    :: !(Maybe Text)
     , _pegUploadType     :: !(Maybe Text)
     , _pegName           :: !Text
     , _pegCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsExclusionsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsExclusionsGet
     :: Text -- ^ 'pegName'
     -> ProjectsExclusionsGet
 projectsExclusionsGet pPegName_ =
-    ProjectsExclusionsGet'
+  ProjectsExclusionsGet'
     { _pegXgafv = Nothing
     , _pegUploadProtocol = Nothing
     , _pegAccessToken = Nothing

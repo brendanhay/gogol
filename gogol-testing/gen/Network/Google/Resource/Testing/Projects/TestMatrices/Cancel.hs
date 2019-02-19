@@ -74,7 +74,8 @@ type ProjectsTestMatricesCancelResource =
 -- malformed - NOT_FOUND - if the Test Matrix does not exist
 --
 -- /See:/ 'projectsTestMatricesCancel' smart constructor.
-data ProjectsTestMatricesCancel = ProjectsTestMatricesCancel'
+data ProjectsTestMatricesCancel =
+  ProjectsTestMatricesCancel'
     { _ptmcXgafv          :: !(Maybe Xgafv)
     , _ptmcUploadProtocol :: !(Maybe Text)
     , _ptmcTestMatrixId   :: !Text
@@ -82,7 +83,8 @@ data ProjectsTestMatricesCancel = ProjectsTestMatricesCancel'
     , _ptmcUploadType     :: !(Maybe Text)
     , _ptmcProjectId      :: !Text
     , _ptmcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTestMatricesCancel' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ projectsTestMatricesCancel
     -> Text -- ^ 'ptmcProjectId'
     -> ProjectsTestMatricesCancel
 projectsTestMatricesCancel pPtmcTestMatrixId_ pPtmcProjectId_ =
-    ProjectsTestMatricesCancel'
+  ProjectsTestMatricesCancel'
     { _ptmcXgafv = Nothing
     , _ptmcUploadProtocol = Nothing
     , _ptmcTestMatrixId = pPtmcTestMatrixId_

@@ -63,7 +63,8 @@ type ProjectsDeploymentsGetResource =
 -- | Gets a deployment of an Apps Script project.
 --
 -- /See:/ 'projectsDeploymentsGet' smart constructor.
-data ProjectsDeploymentsGet = ProjectsDeploymentsGet'
+data ProjectsDeploymentsGet =
+  ProjectsDeploymentsGet'
     { _pdgDeploymentId   :: !Text
     , _pdgXgafv          :: !(Maybe Xgafv)
     , _pdgUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsDeploymentsGet = ProjectsDeploymentsGet'
     , _pdgUploadType     :: !(Maybe Text)
     , _pdgScriptId       :: !Text
     , _pdgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsDeploymentsGet' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsDeploymentsGet
     -> Text -- ^ 'pdgScriptId'
     -> ProjectsDeploymentsGet
 projectsDeploymentsGet pPdgDeploymentId_ pPdgScriptId_ =
-    ProjectsDeploymentsGet'
+  ProjectsDeploymentsGet'
     { _pdgDeploymentId = pPdgDeploymentId_
     , _pdgXgafv = Nothing
     , _pdgUploadProtocol = Nothing

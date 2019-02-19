@@ -56,11 +56,13 @@ type ShippingSettingsUpdateResource =
 -- | Updates the shipping settings of the account.
 --
 -- /See:/ 'shippingSettingsUpdate' smart constructor.
-data ShippingSettingsUpdate = ShippingSettingsUpdate'
+data ShippingSettingsUpdate =
+  ShippingSettingsUpdate'
     { _ssuMerchantId :: !(Textual Word64)
     , _ssuPayload    :: !ShippingSettings
     , _ssuAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShippingSettingsUpdate' with the minimum fields required to make a request.
 --
@@ -77,7 +79,7 @@ shippingSettingsUpdate
     -> Word64 -- ^ 'ssuAccountId'
     -> ShippingSettingsUpdate
 shippingSettingsUpdate pSsuMerchantId_ pSsuPayload_ pSsuAccountId_ =
-    ShippingSettingsUpdate'
+  ShippingSettingsUpdate'
     { _ssuMerchantId = _Coerce # pSsuMerchantId_
     , _ssuPayload = pSsuPayload_
     , _ssuAccountId = _Coerce # pSsuAccountId_

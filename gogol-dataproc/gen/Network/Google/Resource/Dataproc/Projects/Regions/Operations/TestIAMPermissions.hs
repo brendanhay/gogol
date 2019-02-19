@@ -73,7 +73,8 @@ type ProjectsRegionsOperationsTestIAMPermissionsResource
 -- warning.
 --
 -- /See:/ 'projectsRegionsOperationsTestIAMPermissions' smart constructor.
-data ProjectsRegionsOperationsTestIAMPermissions = ProjectsRegionsOperationsTestIAMPermissions'
+data ProjectsRegionsOperationsTestIAMPermissions =
+  ProjectsRegionsOperationsTestIAMPermissions'
     { _protipXgafv          :: !(Maybe Xgafv)
     , _protipUploadProtocol :: !(Maybe Text)
     , _protipAccessToken    :: !(Maybe Text)
@@ -81,7 +82,8 @@ data ProjectsRegionsOperationsTestIAMPermissions = ProjectsRegionsOperationsTest
     , _protipPayload        :: !TestIAMPermissionsRequest
     , _protipResource       :: !Text
     , _protipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsOperationsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsRegionsOperationsTestIAMPermissions
     -> Text -- ^ 'protipResource'
     -> ProjectsRegionsOperationsTestIAMPermissions
 projectsRegionsOperationsTestIAMPermissions pProtipPayload_ pProtipResource_ =
-    ProjectsRegionsOperationsTestIAMPermissions'
+  ProjectsRegionsOperationsTestIAMPermissions'
     { _protipXgafv = Nothing
     , _protipUploadProtocol = Nothing
     , _protipAccessToken = Nothing
@@ -159,7 +161,8 @@ protipCallback
       (\ s a -> s{_protipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsOperationsTestIAMPermissions where
+           ProjectsRegionsOperationsTestIAMPermissions
+         where
         type Rs ProjectsRegionsOperationsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes

@@ -51,9 +51,11 @@ type AccountsGetResource =
 -- | Get information about the selected Ad Exchange account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-newtype AccountsGet = AccountsGet'
+newtype AccountsGet =
+  AccountsGet'
     { _agAccountId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype AccountsGet = AccountsGet'
 accountsGet
     :: Text -- ^ 'agAccountId'
     -> AccountsGet
-accountsGet pAgAccountId_ =
-    AccountsGet'
-    { _agAccountId = pAgAccountId_
-    }
+accountsGet pAgAccountId_ = AccountsGet' {_agAccountId = pAgAccountId_}
 
 -- | Account to get information about. Tip: \'myaccount\' is a valid ID.
 agAccountId :: Lens' AccountsGet Text

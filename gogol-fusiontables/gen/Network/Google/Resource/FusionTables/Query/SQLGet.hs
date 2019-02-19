@@ -64,11 +64,13 @@ type QuerySQLGetResource =
 -- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --
 -- /See:/ 'querySQLGet' smart constructor.
-data QuerySQLGet = QuerySQLGet'
+data QuerySQLGet =
+  QuerySQLGet'
     { _qsqlgTyped :: !(Maybe Bool)
     , _qsqlgHdrs  :: !(Maybe Bool)
     , _qsqlgSQL   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuerySQLGet' with the minimum fields required to make a request.
 --
@@ -83,11 +85,8 @@ querySQLGet
     :: Text -- ^ 'qsqlgSQL'
     -> QuerySQLGet
 querySQLGet pQsqlgSQL_ =
-    QuerySQLGet'
-    { _qsqlgTyped = Nothing
-    , _qsqlgHdrs = Nothing
-    , _qsqlgSQL = pQsqlgSQL_
-    }
+  QuerySQLGet'
+    {_qsqlgTyped = Nothing, _qsqlgHdrs = Nothing, _qsqlgSQL = pQsqlgSQL_}
 
 -- | Whether typed values are returned in the (JSON) response: numbers for
 -- numeric values and parsed geometries for KML values. Default is true.

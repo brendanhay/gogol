@@ -56,10 +56,12 @@ type UsersMessagesBatchModifyResource =
 -- | Modifies the labels on the specified messages.
 --
 -- /See:/ 'usersMessagesBatchModify' smart constructor.
-data UsersMessagesBatchModify = UsersMessagesBatchModify'
+data UsersMessagesBatchModify =
+  UsersMessagesBatchModify'
     { _umbmPayload :: !BatchModifyMessagesRequest
     , _umbmUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersMessagesBatchModify' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ usersMessagesBatchModify
     :: BatchModifyMessagesRequest -- ^ 'umbmPayload'
     -> UsersMessagesBatchModify
 usersMessagesBatchModify pUmbmPayload_ =
-    UsersMessagesBatchModify'
-    { _umbmPayload = pUmbmPayload_
-    , _umbmUserId = "me"
-    }
+  UsersMessagesBatchModify' {_umbmPayload = pUmbmPayload_, _umbmUserId = "me"}
 
 -- | Multipart request metadata.
 umbmPayload :: Lens' UsersMessagesBatchModify BatchModifyMessagesRequest

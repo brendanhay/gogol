@@ -62,13 +62,15 @@ type ObjectAccessControlsGetResource =
 -- | Returns the ACL entry for the specified entity on the specified object.
 --
 -- /See:/ 'objectAccessControlsGet' smart constructor.
-data ObjectAccessControlsGet = ObjectAccessControlsGet'
+data ObjectAccessControlsGet =
+  ObjectAccessControlsGet'
     { _oacgBucket      :: !Text
     , _oacgUserProject :: !(Maybe Text)
     , _oacgObject      :: !Text
     , _oacgEntity      :: !Text
     , _oacgGeneration  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ObjectAccessControlsGet' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ objectAccessControlsGet
     -> Text -- ^ 'oacgEntity'
     -> ObjectAccessControlsGet
 objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
-    ObjectAccessControlsGet'
+  ObjectAccessControlsGet'
     { _oacgBucket = pOacgBucket_
     , _oacgUserProject = Nothing
     , _oacgObject = pOacgObject_

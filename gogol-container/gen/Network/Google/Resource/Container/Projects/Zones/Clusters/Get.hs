@@ -68,7 +68,8 @@ type ProjectsZonesClustersGetResource =
 -- | Gets the details of a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersGet' smart constructor.
-data ProjectsZonesClustersGet = ProjectsZonesClustersGet'
+data ProjectsZonesClustersGet =
+  ProjectsZonesClustersGet'
     { _pzcgXgafv          :: !(Maybe Xgafv)
     , _pzcgUploadProtocol :: !(Maybe Text)
     , _pzcgAccessToken    :: !(Maybe Text)
@@ -78,7 +79,8 @@ data ProjectsZonesClustersGet = ProjectsZonesClustersGet'
     , _pzcgClusterId      :: !Text
     , _pzcgProjectId      :: !Text
     , _pzcgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersGet' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ projectsZonesClustersGet
     -> Text -- ^ 'pzcgProjectId'
     -> ProjectsZonesClustersGet
 projectsZonesClustersGet pPzcgZone_ pPzcgClusterId_ pPzcgProjectId_ =
-    ProjectsZonesClustersGet'
+  ProjectsZonesClustersGet'
     { _pzcgXgafv = Nothing
     , _pzcgUploadProtocol = Nothing
     , _pzcgAccessToken = Nothing

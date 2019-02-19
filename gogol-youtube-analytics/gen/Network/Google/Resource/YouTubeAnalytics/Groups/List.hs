@@ -71,7 +71,8 @@ type GroupsListResource =
 -- owns, or you can retrieve one or more groups by their unique IDs.
 --
 -- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList'
+data GroupsList =
+  GroupsList'
     { _glXgafv                  :: !(Maybe Xgafv)
     , _glMine                   :: !(Maybe Bool)
     , _glUploadProtocol         :: !(Maybe Text)
@@ -81,7 +82,8 @@ data GroupsList = GroupsList'
     , _glId                     :: !(Maybe Text)
     , _glPageToken              :: !(Maybe Text)
     , _glCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupsList' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ data GroupsList = GroupsList'
 groupsList
     :: GroupsList
 groupsList =
-    GroupsList'
+  GroupsList'
     { _glXgafv = Nothing
     , _glMine = Nothing
     , _glUploadProtocol = Nothing

@@ -70,7 +70,8 @@ type MyConfigSyncVolumeLicensesResource =
 -- shelf.
 --
 -- /See:/ 'myConfigSyncVolumeLicenses' smart constructor.
-data MyConfigSyncVolumeLicenses = MyConfigSyncVolumeLicenses'
+data MyConfigSyncVolumeLicenses =
+  MyConfigSyncVolumeLicenses'
     { _mcsvlCpksver                :: !Text
     , _mcsvlLocale                 :: !(Maybe Text)
     , _mcsvlIncludeNonComicsSeries :: !(Maybe Bool)
@@ -79,7 +80,8 @@ data MyConfigSyncVolumeLicenses = MyConfigSyncVolumeLicenses'
     , _mcsvlSource                 :: !Text
     , _mcsvlShowPreOrders          :: !(Maybe Bool)
     , _mcsvlNonce                  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MyConfigSyncVolumeLicenses' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ myConfigSyncVolumeLicenses
     -> Text -- ^ 'mcsvlNonce'
     -> MyConfigSyncVolumeLicenses
 myConfigSyncVolumeLicenses pMcsvlCpksver_ pMcsvlSource_ pMcsvlNonce_ =
-    MyConfigSyncVolumeLicenses'
+  MyConfigSyncVolumeLicenses'
     { _mcsvlCpksver = pMcsvlCpksver_
     , _mcsvlLocale = Nothing
     , _mcsvlIncludeNonComicsSeries = Nothing

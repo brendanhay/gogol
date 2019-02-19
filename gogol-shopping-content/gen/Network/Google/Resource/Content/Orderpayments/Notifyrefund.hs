@@ -57,11 +57,13 @@ type OrderpaymentsNotifyrefundResource =
 -- | Notify about refund on user\'s selected payments method.
 --
 -- /See:/ 'orderpaymentsNotifyrefund' smart constructor.
-data OrderpaymentsNotifyrefund = OrderpaymentsNotifyrefund'
+data OrderpaymentsNotifyrefund =
+  OrderpaymentsNotifyrefund'
     { _ooMerchantId :: !(Textual Word64)
     , _ooPayload    :: !OrderpaymentsNotifyRefundRequest
     , _ooOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrderpaymentsNotifyrefund' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ orderpaymentsNotifyrefund
     -> Text -- ^ 'ooOrderId'
     -> OrderpaymentsNotifyrefund
 orderpaymentsNotifyrefund pOoMerchantId_ pOoPayload_ pOoOrderId_ =
-    OrderpaymentsNotifyrefund'
+  OrderpaymentsNotifyrefund'
     { _ooMerchantId = _Coerce # pOoMerchantId_
     , _ooPayload = pOoPayload_
     , _ooOrderId = pOoOrderId_

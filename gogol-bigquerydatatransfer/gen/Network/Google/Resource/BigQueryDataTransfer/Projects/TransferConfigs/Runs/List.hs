@@ -69,7 +69,8 @@ type ProjectsTransferConfigsRunsListResource =
 -- | Returns information about running and completed jobs.
 --
 -- /See:/ 'projectsTransferConfigsRunsList' smart constructor.
-data ProjectsTransferConfigsRunsList = ProjectsTransferConfigsRunsList'
+data ProjectsTransferConfigsRunsList =
+  ProjectsTransferConfigsRunsList'
     { _ptcrlRunAttempt     :: !(Maybe Text)
     , _ptcrlParent         :: !Text
     , _ptcrlStates         :: !(Maybe [Text])
@@ -80,7 +81,8 @@ data ProjectsTransferConfigsRunsList = ProjectsTransferConfigsRunsList'
     , _ptcrlPageToken      :: !(Maybe Text)
     , _ptcrlPageSize       :: !(Maybe (Textual Int32))
     , _ptcrlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTransferConfigsRunsList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsTransferConfigsRunsList
     :: Text -- ^ 'ptcrlParent'
     -> ProjectsTransferConfigsRunsList
 projectsTransferConfigsRunsList pPtcrlParent_ =
-    ProjectsTransferConfigsRunsList'
+  ProjectsTransferConfigsRunsList'
     { _ptcrlRunAttempt = Nothing
     , _ptcrlParent = pPtcrlParent_
     , _ptcrlStates = Nothing
@@ -189,7 +191,8 @@ ptcrlCallback
       (\ s a -> s{_ptcrlCallback = a})
 
 instance GoogleRequest
-         ProjectsTransferConfigsRunsList where
+           ProjectsTransferConfigsRunsList
+         where
         type Rs ProjectsTransferConfigsRunsList =
              ListTransferRunsResponse
         type Scopes ProjectsTransferConfigsRunsList =

@@ -50,8 +50,8 @@ type ContactsListResource =
 --
 -- /See:/ 'contactsList' smart constructor.
 data ContactsList =
-    ContactsList'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ContactsList'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ContactsList' with the minimum fields required to make a request.
 --

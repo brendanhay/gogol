@@ -191,8 +191,8 @@ adExchangeSellerService
 
 -- | View your Ad Exchange data
 adExchangeSellerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller.readonly"]
-adExchangeSellerReadOnlyScope = Proxy;
+adExchangeSellerReadOnlyScope = Proxy
 
 -- | View and manage your Ad Exchange data
 adExchangeSellerScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller"]
-adExchangeSellerScope = Proxy;
+adExchangeSellerScope = Proxy

@@ -51,9 +51,11 @@ type EnterprisesGetResource =
 -- | Retrieves the name and domain of an enterprise.
 --
 -- /See:/ 'enterprisesGet' smart constructor.
-newtype EnterprisesGet = EnterprisesGet'
+newtype EnterprisesGet =
+  EnterprisesGet'
     { _eEnterpriseId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesGet' with the minimum fields required to make a request.
 --
@@ -64,9 +66,7 @@ enterprisesGet
     :: Text -- ^ 'eEnterpriseId'
     -> EnterprisesGet
 enterprisesGet pEEnterpriseId_ =
-    EnterprisesGet'
-    { _eEnterpriseId = pEEnterpriseId_
-    }
+  EnterprisesGet' {_eEnterpriseId = pEEnterpriseId_}
 
 -- | The ID of the enterprise.
 eEnterpriseId :: Lens' EnterprisesGet Text

@@ -58,11 +58,13 @@ type CalendarListUpdateResource =
 -- | Updates an existing calendar on the user\'s calendar list.
 --
 -- /See:/ 'calendarListUpdate' smart constructor.
-data CalendarListUpdate = CalendarListUpdate'
+data CalendarListUpdate =
+  CalendarListUpdate'
     { _cluCalendarId     :: !Text
     , _cluPayload        :: !CalendarListEntry
     , _cluColorRgbFormat :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CalendarListUpdate' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ calendarListUpdate
     -> CalendarListEntry -- ^ 'cluPayload'
     -> CalendarListUpdate
 calendarListUpdate pCluCalendarId_ pCluPayload_ =
-    CalendarListUpdate'
+  CalendarListUpdate'
     { _cluCalendarId = pCluCalendarId_
     , _cluPayload = pCluPayload_
     , _cluColorRgbFormat = Nothing

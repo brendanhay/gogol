@@ -55,8 +55,8 @@ type ScoresResetAllResource =
 --
 -- /See:/ 'scoresResetAll' smart constructor.
 data ScoresResetAll =
-    ScoresResetAll'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ScoresResetAll'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ScoresResetAll' with the minimum fields required to make a request.
 --

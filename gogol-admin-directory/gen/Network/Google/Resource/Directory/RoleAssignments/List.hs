@@ -62,13 +62,15 @@ type RoleAssignmentsListResource =
 -- | Retrieves a paginated list of all roleAssignments.
 --
 -- /See:/ 'roleAssignmentsList' smart constructor.
-data RoleAssignmentsList = RoleAssignmentsList'
+data RoleAssignmentsList =
+  RoleAssignmentsList'
     { _ralRoleId     :: !(Maybe Text)
     , _ralCustomer   :: !Text
     , _ralPageToken  :: !(Maybe Text)
     , _ralUserKey    :: !(Maybe Text)
     , _ralMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoleAssignmentsList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ roleAssignmentsList
     :: Text -- ^ 'ralCustomer'
     -> RoleAssignmentsList
 roleAssignmentsList pRalCustomer_ =
-    RoleAssignmentsList'
+  RoleAssignmentsList'
     { _ralRoleId = Nothing
     , _ralCustomer = pRalCustomer_
     , _ralPageToken = Nothing

@@ -60,7 +60,7 @@ import           Network.Google.Prelude
 -- 'CreativesList' request conforms to.
 type CreativesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
@@ -96,7 +96,8 @@ type CreativesListResource =
 -- paging.
 --
 -- /See:/ 'creativesList' smart constructor.
-data CreativesList = CreativesList'
+data CreativesList =
+  CreativesList'
     { _cRenderingIds         :: !(Maybe [Textual Int64])
     , _cAdvertiserId         :: !(Maybe (Textual Int64))
     , _cSearchString         :: !(Maybe Text)
@@ -114,7 +115,8 @@ data CreativesList = CreativesList'
     , _cStudioCreativeId     :: !(Maybe (Textual Int64))
     , _cArchived             :: !(Maybe Bool)
     , _cMaxResults           :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativesList' with the minimum fields required to make a request.
 --
@@ -157,7 +159,7 @@ creativesList
     :: Int64 -- ^ 'cProFileId'
     -> CreativesList
 creativesList pCProFileId_ =
-    CreativesList'
+  CreativesList'
     { _cRenderingIds = Nothing
     , _cAdvertiserId = Nothing
     , _cSearchString = Nothing

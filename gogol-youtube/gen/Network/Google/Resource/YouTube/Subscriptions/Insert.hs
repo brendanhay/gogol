@@ -54,10 +54,12 @@ type SubscriptionsInsertResource =
 -- | Adds a subscription for the authenticated user\'s channel.
 --
 -- /See:/ 'subscriptionsInsert' smart constructor.
-data SubscriptionsInsert = SubscriptionsInsert'
+data SubscriptionsInsert =
+  SubscriptionsInsert'
     { _siPart    :: !Text
     , _siPayload :: !Subscription
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscriptionsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ subscriptionsInsert
     -> Subscription -- ^ 'siPayload'
     -> SubscriptionsInsert
 subscriptionsInsert pSiPart_ pSiPayload_ =
-    SubscriptionsInsert'
-    { _siPart = pSiPart_
-    , _siPayload = pSiPayload_
-    }
+  SubscriptionsInsert' {_siPart = pSiPart_, _siPayload = pSiPayload_}
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

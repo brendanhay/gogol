@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesGet' request conforms to.
 type CreativeFieldValuesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -58,11 +58,13 @@ type CreativeFieldValuesGetResource =
 -- | Gets one creative field value by ID.
 --
 -- /See:/ 'creativeFieldValuesGet' smart constructor.
-data CreativeFieldValuesGet = CreativeFieldValuesGet'
+data CreativeFieldValuesGet =
+  CreativeFieldValuesGet'
     { _cfvgCreativeFieldId :: !(Textual Int64)
     , _cfvgProFileId       :: !(Textual Int64)
     , _cfvgId              :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativeFieldValuesGet' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ creativeFieldValuesGet
     -> Int64 -- ^ 'cfvgId'
     -> CreativeFieldValuesGet
 creativeFieldValuesGet pCfvgCreativeFieldId_ pCfvgProFileId_ pCfvgId_ =
-    CreativeFieldValuesGet'
+  CreativeFieldValuesGet'
     { _cfvgCreativeFieldId = _Coerce # pCfvgCreativeFieldId_
     , _cfvgProFileId = _Coerce # pCfvgProFileId_
     , _cfvgId = _Coerce # pCfvgId_

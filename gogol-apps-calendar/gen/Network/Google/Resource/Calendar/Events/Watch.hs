@@ -97,7 +97,8 @@ type EventsWatchResource =
 -- | Watch for changes to Events resources.
 --
 -- /See:/ 'eventsWatch' smart constructor.
-data EventsWatch = EventsWatch'
+data EventsWatch =
+  EventsWatch'
     { _ewSyncToken               :: !(Maybe Text)
     , _ewCalendarId              :: !Text
     , _ewTimeMin                 :: !(Maybe DateTime')
@@ -117,7 +118,8 @@ data EventsWatch = EventsWatch'
     , _ewMaxResults              :: !(Textual Int32)
     , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
     , _ewTimeMax                 :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventsWatch' with the minimum fields required to make a request.
 --
@@ -165,7 +167,7 @@ eventsWatch
     -> Channel -- ^ 'ewPayload'
     -> EventsWatch
 eventsWatch pEwCalendarId_ pEwPayload_ =
-    EventsWatch'
+  EventsWatch'
     { _ewSyncToken = Nothing
     , _ewCalendarId = pEwCalendarId_
     , _ewTimeMin = Nothing

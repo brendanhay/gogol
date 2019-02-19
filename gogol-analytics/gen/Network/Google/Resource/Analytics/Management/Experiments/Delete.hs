@@ -61,12 +61,14 @@ type ManagementExperimentsDeleteResource =
 -- | Delete an experiment.
 --
 -- /See:/ 'managementExperimentsDelete' smart constructor.
-data ManagementExperimentsDelete = ManagementExperimentsDelete'
+data ManagementExperimentsDelete =
+  ManagementExperimentsDelete'
     { _medWebPropertyId :: !Text
     , _medProFileId     :: !Text
     , _medAccountId     :: !Text
     , _medExperimentId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementExperimentsDelete' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ managementExperimentsDelete
     -> Text -- ^ 'medExperimentId'
     -> ManagementExperimentsDelete
 managementExperimentsDelete pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pMedExperimentId_ =
-    ManagementExperimentsDelete'
+  ManagementExperimentsDelete'
     { _medWebPropertyId = pMedWebPropertyId_
     , _medProFileId = pMedProFileId_
     , _medAccountId = pMedAccountId_

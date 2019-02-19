@@ -59,11 +59,13 @@ type AccountsLinkResource =
 -- another account.
 --
 -- /See:/ 'accountsLink' smart constructor.
-data AccountsLink = AccountsLink'
+data AccountsLink =
+  AccountsLink'
     { _alMerchantId :: !(Textual Word64)
     , _alPayload    :: !AccountsLinkRequest
     , _alAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsLink' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ accountsLink
     -> Word64 -- ^ 'alAccountId'
     -> AccountsLink
 accountsLink pAlMerchantId_ pAlPayload_ pAlAccountId_ =
-    AccountsLink'
+  AccountsLink'
     { _alMerchantId = _Coerce # pAlMerchantId_
     , _alPayload = pAlPayload_
     , _alAccountId = _Coerce # pAlAccountId_

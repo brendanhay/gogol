@@ -91,7 +91,8 @@ type BeaconsAttachmentsCreateResource =
 -- the Google Developers Console project.
 --
 -- /See:/ 'beaconsAttachmentsCreate' smart constructor.
-data BeaconsAttachmentsCreate = BeaconsAttachmentsCreate'
+data BeaconsAttachmentsCreate =
+  BeaconsAttachmentsCreate'
     { _bacXgafv          :: !(Maybe Xgafv)
     , _bacUploadProtocol :: !(Maybe Text)
     , _bacAccessToken    :: !(Maybe Text)
@@ -100,7 +101,8 @@ data BeaconsAttachmentsCreate = BeaconsAttachmentsCreate'
     , _bacPayload        :: !BeaconAttachment
     , _bacProjectId      :: !(Maybe Text)
     , _bacCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsCreate' with the minimum fields required to make a request.
 --
@@ -126,7 +128,7 @@ beaconsAttachmentsCreate
     -> BeaconAttachment -- ^ 'bacPayload'
     -> BeaconsAttachmentsCreate
 beaconsAttachmentsCreate pBacBeaconName_ pBacPayload_ =
-    BeaconsAttachmentsCreate'
+  BeaconsAttachmentsCreate'
     { _bacXgafv = Nothing
     , _bacUploadProtocol = Nothing
     , _bacAccessToken = Nothing

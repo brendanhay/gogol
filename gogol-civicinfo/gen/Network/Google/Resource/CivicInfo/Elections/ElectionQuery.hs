@@ -52,9 +52,11 @@ type ElectionsElectionQueryResource =
 -- | List of available elections to query.
 --
 -- /See:/ 'electionsElectionQuery' smart constructor.
-newtype ElectionsElectionQuery = ElectionsElectionQuery'
+newtype ElectionsElectionQuery =
+  ElectionsElectionQuery'
     { _eeqPayload :: ElectionsQueryRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ElectionsElectionQuery' with the minimum fields required to make a request.
 --
@@ -65,9 +67,7 @@ electionsElectionQuery
     :: ElectionsQueryRequest -- ^ 'eeqPayload'
     -> ElectionsElectionQuery
 electionsElectionQuery pEeqPayload_ =
-    ElectionsElectionQuery'
-    { _eeqPayload = pEeqPayload_
-    }
+  ElectionsElectionQuery' {_eeqPayload = pEeqPayload_}
 
 -- | Multipart request metadata.
 eeqPayload :: Lens' ElectionsElectionQuery ElectionsQueryRequest

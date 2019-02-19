@@ -59,11 +59,13 @@ type OrderpaymentsNotifyauthdeclinedResource =
 -- | Notify about failure to authorize user\'s payment method.
 --
 -- /See:/ 'orderpaymentsNotifyauthdeclined' smart constructor.
-data OrderpaymentsNotifyauthdeclined = OrderpaymentsNotifyauthdeclined'
+data OrderpaymentsNotifyauthdeclined =
+  OrderpaymentsNotifyauthdeclined'
     { _onMerchantId :: !(Textual Word64)
     , _onPayload    :: !OrderpaymentsNotifyAuthDeclinedRequest
     , _onOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrderpaymentsNotifyauthdeclined' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ orderpaymentsNotifyauthdeclined
     -> Text -- ^ 'onOrderId'
     -> OrderpaymentsNotifyauthdeclined
 orderpaymentsNotifyauthdeclined pOnMerchantId_ pOnPayload_ pOnOrderId_ =
-    OrderpaymentsNotifyauthdeclined'
+  OrderpaymentsNotifyauthdeclined'
     { _onMerchantId = _Coerce # pOnMerchantId_
     , _onPayload = pOnPayload_
     , _onOrderId = pOnOrderId_
@@ -104,7 +106,8 @@ onOrderId
   = lens _onOrderId (\ s a -> s{_onOrderId = a})
 
 instance GoogleRequest
-         OrderpaymentsNotifyauthdeclined where
+           OrderpaymentsNotifyauthdeclined
+         where
         type Rs OrderpaymentsNotifyauthdeclined =
              OrderpaymentsNotifyAuthDeclinedResponse
         type Scopes OrderpaymentsNotifyauthdeclined =

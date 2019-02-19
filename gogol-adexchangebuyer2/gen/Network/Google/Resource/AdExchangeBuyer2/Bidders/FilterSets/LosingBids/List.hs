@@ -67,7 +67,8 @@ type BiddersFilterSetsLosingBidsListResource =
 -- bids that lost for each reason.
 --
 -- /See:/ 'biddersFilterSetsLosingBidsList' smart constructor.
-data BiddersFilterSetsLosingBidsList = BiddersFilterSetsLosingBidsList'
+data BiddersFilterSetsLosingBidsList =
+  BiddersFilterSetsLosingBidsList'
     { _bfslblXgafv          :: !(Maybe Xgafv)
     , _bfslblUploadProtocol :: !(Maybe Text)
     , _bfslblFilterSetName  :: !Text
@@ -76,7 +77,8 @@ data BiddersFilterSetsLosingBidsList = BiddersFilterSetsLosingBidsList'
     , _bfslblPageToken      :: !(Maybe Text)
     , _bfslblPageSize       :: !(Maybe (Textual Int32))
     , _bfslblCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BiddersFilterSetsLosingBidsList' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ biddersFilterSetsLosingBidsList
     :: Text -- ^ 'bfslblFilterSetName'
     -> BiddersFilterSetsLosingBidsList
 biddersFilterSetsLosingBidsList pBfslblFilterSetName_ =
-    BiddersFilterSetsLosingBidsList'
+  BiddersFilterSetsLosingBidsList'
     { _bfslblXgafv = Nothing
     , _bfslblUploadProtocol = Nothing
     , _bfslblFilterSetName = pBfslblFilterSetName_
@@ -170,7 +172,8 @@ bfslblCallback
       (\ s a -> s{_bfslblCallback = a})
 
 instance GoogleRequest
-         BiddersFilterSetsLosingBidsList where
+           BiddersFilterSetsLosingBidsList
+         where
         type Rs BiddersFilterSetsLosingBidsList =
              ListLosingBidsResponse
         type Scopes BiddersFilterSetsLosingBidsList =

@@ -67,7 +67,8 @@ type BiddersFilterSetsBidResponseErrorsListResource =
 -- responses affected for each reason.
 --
 -- /See:/ 'biddersFilterSetsBidResponseErrorsList' smart constructor.
-data BiddersFilterSetsBidResponseErrorsList = BiddersFilterSetsBidResponseErrorsList'
+data BiddersFilterSetsBidResponseErrorsList =
+  BiddersFilterSetsBidResponseErrorsList'
     { _bfsbrelXgafv          :: !(Maybe Xgafv)
     , _bfsbrelUploadProtocol :: !(Maybe Text)
     , _bfsbrelFilterSetName  :: !Text
@@ -76,7 +77,8 @@ data BiddersFilterSetsBidResponseErrorsList = BiddersFilterSetsBidResponseErrors
     , _bfsbrelPageToken      :: !(Maybe Text)
     , _bfsbrelPageSize       :: !(Maybe (Textual Int32))
     , _bfsbrelCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BiddersFilterSetsBidResponseErrorsList' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ biddersFilterSetsBidResponseErrorsList
     :: Text -- ^ 'bfsbrelFilterSetName'
     -> BiddersFilterSetsBidResponseErrorsList
 biddersFilterSetsBidResponseErrorsList pBfsbrelFilterSetName_ =
-    BiddersFilterSetsBidResponseErrorsList'
+  BiddersFilterSetsBidResponseErrorsList'
     { _bfsbrelXgafv = Nothing
     , _bfsbrelUploadProtocol = Nothing
     , _bfsbrelFilterSetName = pBfsbrelFilterSetName_
@@ -171,7 +173,8 @@ bfsbrelCallback
       (\ s a -> s{_bfsbrelCallback = a})
 
 instance GoogleRequest
-         BiddersFilterSetsBidResponseErrorsList where
+           BiddersFilterSetsBidResponseErrorsList
+         where
         type Rs BiddersFilterSetsBidResponseErrorsList =
              ListBidResponseErrorsResponse
         type Scopes BiddersFilterSetsBidResponseErrorsList =

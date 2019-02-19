@@ -58,11 +58,13 @@ type UsersMessagesModifyResource =
 -- | Modifies the labels on the specified message.
 --
 -- /See:/ 'usersMessagesModify' smart constructor.
-data UsersMessagesModify = UsersMessagesModify'
+data UsersMessagesModify =
+  UsersMessagesModify'
     { _ummPayload :: !ModifyMessageRequest
     , _ummUserId  :: !Text
     , _ummId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersMessagesModify' with the minimum fields required to make a request.
 --
@@ -78,11 +80,8 @@ usersMessagesModify
     -> Text -- ^ 'ummId'
     -> UsersMessagesModify
 usersMessagesModify pUmmPayload_ pUmmId_ =
-    UsersMessagesModify'
-    { _ummPayload = pUmmPayload_
-    , _ummUserId = "me"
-    , _ummId = pUmmId_
-    }
+  UsersMessagesModify'
+    {_ummPayload = pUmmPayload_, _ummUserId = "me", _ummId = pUmmId_}
 
 -- | Multipart request metadata.
 ummPayload :: Lens' UsersMessagesModify ModifyMessageRequest

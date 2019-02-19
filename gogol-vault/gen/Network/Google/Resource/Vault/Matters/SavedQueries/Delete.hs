@@ -63,7 +63,8 @@ type MattersSavedQueriesDeleteResource =
 -- | Deletes a saved query by Id.
 --
 -- /See:/ 'mattersSavedQueriesDelete' smart constructor.
-data MattersSavedQueriesDelete = MattersSavedQueriesDelete'
+data MattersSavedQueriesDelete =
+  MattersSavedQueriesDelete'
     { _msqdXgafv          :: !(Maybe Xgafv)
     , _msqdSavedQueryId   :: !Text
     , _msqdUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data MattersSavedQueriesDelete = MattersSavedQueriesDelete'
     , _msqdUploadType     :: !(Maybe Text)
     , _msqdMatterId       :: !Text
     , _msqdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersSavedQueriesDelete' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ mattersSavedQueriesDelete
     -> Text -- ^ 'msqdMatterId'
     -> MattersSavedQueriesDelete
 mattersSavedQueriesDelete pMsqdSavedQueryId_ pMsqdMatterId_ =
-    MattersSavedQueriesDelete'
+  MattersSavedQueriesDelete'
     { _msqdXgafv = Nothing
     , _msqdSavedQueryId = pMsqdSavedQueryId_
     , _msqdUploadProtocol = Nothing

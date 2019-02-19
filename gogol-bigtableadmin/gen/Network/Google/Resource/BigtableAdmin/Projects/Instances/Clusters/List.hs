@@ -63,7 +63,8 @@ type ProjectsInstancesClustersListResource =
 -- | Lists information about clusters in an instance.
 --
 -- /See:/ 'projectsInstancesClustersList' smart constructor.
-data ProjectsInstancesClustersList = ProjectsInstancesClustersList'
+data ProjectsInstancesClustersList =
+  ProjectsInstancesClustersList'
     { _piclParent         :: !Text
     , _piclXgafv          :: !(Maybe Xgafv)
     , _piclUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsInstancesClustersList = ProjectsInstancesClustersList'
     , _piclUploadType     :: !(Maybe Text)
     , _piclPageToken      :: !(Maybe Text)
     , _piclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesClustersList' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsInstancesClustersList
     :: Text -- ^ 'piclParent'
     -> ProjectsInstancesClustersList
 projectsInstancesClustersList pPiclParent_ =
-    ProjectsInstancesClustersList'
+  ProjectsInstancesClustersList'
     { _piclParent = pPiclParent_
     , _piclXgafv = Nothing
     , _piclUploadProtocol = Nothing

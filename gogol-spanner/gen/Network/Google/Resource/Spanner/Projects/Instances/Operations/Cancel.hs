@@ -75,14 +75,16 @@ type ProjectsInstancesOperationsCancelResource =
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
 -- /See:/ 'projectsInstancesOperationsCancel' smart constructor.
-data ProjectsInstancesOperationsCancel = ProjectsInstancesOperationsCancel'
+data ProjectsInstancesOperationsCancel =
+  ProjectsInstancesOperationsCancel'
     { _piocXgafv          :: !(Maybe Xgafv)
     , _piocUploadProtocol :: !(Maybe Text)
     , _piocAccessToken    :: !(Maybe Text)
     , _piocUploadType     :: !(Maybe Text)
     , _piocName           :: !Text
     , _piocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesOperationsCancel' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ projectsInstancesOperationsCancel
     :: Text -- ^ 'piocName'
     -> ProjectsInstancesOperationsCancel
 projectsInstancesOperationsCancel pPiocName_ =
-    ProjectsInstancesOperationsCancel'
+  ProjectsInstancesOperationsCancel'
     { _piocXgafv = Nothing
     , _piocUploadProtocol = Nothing
     , _piocAccessToken = Nothing
@@ -145,7 +147,8 @@ piocCallback
   = lens _piocCallback (\ s a -> s{_piocCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesOperationsCancel where
+           ProjectsInstancesOperationsCancel
+         where
         type Rs ProjectsInstancesOperationsCancel = Empty
         type Scopes ProjectsInstancesOperationsCancel =
              '["https://www.googleapis.com/auth/cloud-platform",

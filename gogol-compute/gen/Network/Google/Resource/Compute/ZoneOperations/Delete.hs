@@ -57,11 +57,13 @@ type ZoneOperationsDeleteResource =
 -- | Deletes the specified zone-specific Operations resource.
 --
 -- /See:/ 'zoneOperationsDelete' smart constructor.
-data ZoneOperationsDelete = ZoneOperationsDelete'
+data ZoneOperationsDelete =
+  ZoneOperationsDelete'
     { _zodProject   :: !Text
     , _zodOperation :: !Text
     , _zodZone      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ZoneOperationsDelete' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ zoneOperationsDelete
     -> Text -- ^ 'zodZone'
     -> ZoneOperationsDelete
 zoneOperationsDelete pZodProject_ pZodOperation_ pZodZone_ =
-    ZoneOperationsDelete'
+  ZoneOperationsDelete'
     { _zodProject = pZodProject_
     , _zodOperation = pZodOperation_
     , _zodZone = pZodZone_

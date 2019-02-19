@@ -65,14 +65,16 @@ type EnterprisesDevicesOperationsDeleteResource =
 -- google.rpc.Code.UNIMPLEMENTED.
 --
 -- /See:/ 'enterprisesDevicesOperationsDelete' smart constructor.
-data EnterprisesDevicesOperationsDelete = EnterprisesDevicesOperationsDelete'
+data EnterprisesDevicesOperationsDelete =
+  EnterprisesDevicesOperationsDelete'
     { _edodXgafv          :: !(Maybe Xgafv)
     , _edodUploadProtocol :: !(Maybe Text)
     , _edodAccessToken    :: !(Maybe Text)
     , _edodUploadType     :: !(Maybe Text)
     , _edodName           :: !Text
     , _edodCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesDevicesOperationsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ enterprisesDevicesOperationsDelete
     :: Text -- ^ 'edodName'
     -> EnterprisesDevicesOperationsDelete
 enterprisesDevicesOperationsDelete pEdodName_ =
-    EnterprisesDevicesOperationsDelete'
+  EnterprisesDevicesOperationsDelete'
     { _edodXgafv = Nothing
     , _edodUploadProtocol = Nothing
     , _edodAccessToken = Nothing
@@ -135,7 +137,8 @@ edodCallback
   = lens _edodCallback (\ s a -> s{_edodCallback = a})
 
 instance GoogleRequest
-         EnterprisesDevicesOperationsDelete where
+           EnterprisesDevicesOperationsDelete
+         where
         type Rs EnterprisesDevicesOperationsDelete = Empty
         type Scopes EnterprisesDevicesOperationsDelete =
              '["https://www.googleapis.com/auth/androidmanagement"]

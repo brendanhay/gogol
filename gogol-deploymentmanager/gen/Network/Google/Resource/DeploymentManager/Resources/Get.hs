@@ -58,11 +58,13 @@ type ResourcesGetResource =
 -- | Gets information about a single resource.
 --
 -- /See:/ 'resourcesGet' smart constructor.
-data ResourcesGet = ResourcesGet'
+data ResourcesGet =
+  ResourcesGet'
     { _rgProject    :: !Text
     , _rgResource   :: !Text
     , _rgDeployment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesGet' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ resourcesGet
     -> Text -- ^ 'rgDeployment'
     -> ResourcesGet
 resourcesGet pRgProject_ pRgResource_ pRgDeployment_ =
-    ResourcesGet'
+  ResourcesGet'
     { _rgProject = pRgProject_
     , _rgResource = pRgResource_
     , _rgDeployment = pRgDeployment_

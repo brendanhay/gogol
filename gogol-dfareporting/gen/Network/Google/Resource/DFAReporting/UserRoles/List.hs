@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- 'UserRolesList' request conforms to.
 type UserRolesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -71,7 +71,8 @@ type UserRolesListResource =
 -- paging.
 --
 -- /See:/ 'userRolesList' smart constructor.
-data UserRolesList = UserRolesList'
+data UserRolesList =
+  UserRolesList'
     { _urlSearchString        :: !(Maybe Text)
     , _urlIds                 :: !(Maybe [Textual Int64])
     , _urlProFileId           :: !(Textual Int64)
@@ -81,7 +82,8 @@ data UserRolesList = UserRolesList'
     , _urlSortField           :: !UserRolesListSortField
     , _urlSubAccountId        :: !(Maybe (Textual Int64))
     , _urlMaxResults          :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UserRolesList' with the minimum fields required to make a request.
 --
@@ -108,7 +110,7 @@ userRolesList
     :: Int64 -- ^ 'urlProFileId'
     -> UserRolesList
 userRolesList pUrlProFileId_ =
-    UserRolesList'
+  UserRolesList'
     { _urlSearchString = Nothing
     , _urlIds = Nothing
     , _urlProFileId = _Coerce # pUrlProFileId_

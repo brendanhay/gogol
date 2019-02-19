@@ -75,10 +75,12 @@ type UsersSettingsDelegatesCreateResource =
 -- service account clients that have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsDelegatesCreate' smart constructor.
-data UsersSettingsDelegatesCreate = UsersSettingsDelegatesCreate'
+data UsersSettingsDelegatesCreate =
+  UsersSettingsDelegatesCreate'
     { _usdcPayload :: !Delegate
     , _usdcUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersSettingsDelegatesCreate' with the minimum fields required to make a request.
 --
@@ -91,10 +93,8 @@ usersSettingsDelegatesCreate
     :: Delegate -- ^ 'usdcPayload'
     -> UsersSettingsDelegatesCreate
 usersSettingsDelegatesCreate pUsdcPayload_ =
-    UsersSettingsDelegatesCreate'
-    { _usdcPayload = pUsdcPayload_
-    , _usdcUserId = "me"
-    }
+  UsersSettingsDelegatesCreate'
+    {_usdcPayload = pUsdcPayload_, _usdcUserId = "me"}
 
 -- | Multipart request metadata.
 usdcPayload :: Lens' UsersSettingsDelegatesCreate Delegate

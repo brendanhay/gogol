@@ -26,11 +26,13 @@ import           Network.Google.Prelude
 -- a task even if the queue has reached its RateLimits.
 --
 -- /See:/ 'rateLimits' smart constructor.
-data RateLimits = RateLimits'
+data RateLimits =
+  RateLimits'
     { _rlMaxConcurrentDispatches :: !(Maybe (Textual Int32))
     , _rlMaxDispatchesPerSecond  :: !(Maybe (Textual Double))
     , _rlMaxBurstSize            :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RateLimits' with the minimum fields required to make a request.
 --
@@ -44,7 +46,7 @@ data RateLimits = RateLimits'
 rateLimits
     :: RateLimits
 rateLimits =
-    RateLimits'
+  RateLimits'
     { _rlMaxConcurrentDispatches = Nothing
     , _rlMaxDispatchesPerSecond = Nothing
     , _rlMaxBurstSize = Nothing
@@ -156,11 +158,13 @@ instance ToJSON RateLimits where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -173,12 +177,7 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -221,12 +220,14 @@ instance ToJSON Status where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -242,7 +243,7 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
@@ -295,10 +296,12 @@ instance ToJSON Expr where
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
-data ListLocationsResponse = ListLocationsResponse'
+data ListLocationsResponse =
+  ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -310,10 +313,7 @@ data ListLocationsResponse = ListLocationsResponse'
 listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
-    ListLocationsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLocations = Nothing
-    }
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -347,8 +347,8 @@ instance ToJSON ListLocationsResponse where
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
-    GetIAMPolicyRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GetIAMPolicyRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -368,13 +368,15 @@ instance ToJSON GetIAMPolicyRequest where
 -- retried.
 --
 -- /See:/ 'retryConfig' smart constructor.
-data RetryConfig = RetryConfig'
+data RetryConfig =
+  RetryConfig'
     { _rcMaxDoublings     :: !(Maybe (Textual Int32))
     , _rcMaxRetryDuration :: !(Maybe GDuration)
     , _rcMaxAttempts      :: !(Maybe (Textual Int32))
     , _rcMaxBackoff       :: !(Maybe GDuration)
     , _rcMinBackoff       :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RetryConfig' with the minimum fields required to make a request.
 --
@@ -392,7 +394,7 @@ data RetryConfig = RetryConfig'
 retryConfig
     :: RetryConfig
 retryConfig =
-    RetryConfig'
+  RetryConfig'
     { _rcMaxDoublings = Nothing
     , _rcMaxRetryDuration = Nothing
     , _rcMaxAttempts = Nothing
@@ -494,9 +496,11 @@ instance ToJSON RetryConfig where
 -- | Request message for forcing a task to run now using RunTask.
 --
 -- /See:/ 'runTaskRequest' smart constructor.
-newtype RunTaskRequest = RunTaskRequest'
+newtype RunTaskRequest =
+  RunTaskRequest'
     { _rtrResponseView :: Maybe RunTaskRequestResponseView
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RunTaskRequest' with the minimum fields required to make a request.
 --
@@ -505,10 +509,7 @@ newtype RunTaskRequest = RunTaskRequest'
 -- * 'rtrResponseView'
 runTaskRequest
     :: RunTaskRequest
-runTaskRequest =
-    RunTaskRequest'
-    { _rtrResponseView = Nothing
-    }
+runTaskRequest = RunTaskRequest' {_rtrResponseView = Nothing}
 
 -- | The response_view specifies which subset of the Task will be returned.
 -- By default response_view is BASIC; not all information is retrieved by
@@ -536,13 +537,15 @@ instance ToJSON RunTaskRequest where
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lName        :: !(Maybe Text)
     , _lMetadata    :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
     , _lLabels      :: !(Maybe LocationLabels)
     , _lLocationId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -560,7 +563,7 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lName = Nothing
     , _lMetadata = Nothing
     , _lDisplayName = Nothing
@@ -623,8 +626,8 @@ instance ToJSON Location where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -641,10 +644,12 @@ instance ToJSON Empty where
 -- | Request message for CreateTask.
 --
 -- /See:/ 'createTaskRequest' smart constructor.
-data CreateTaskRequest = CreateTaskRequest'
+data CreateTaskRequest =
+  CreateTaskRequest'
     { _ctrResponseView :: !(Maybe CreateTaskRequestResponseView)
     , _ctrTask         :: !(Maybe Task)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTaskRequest' with the minimum fields required to make a request.
 --
@@ -656,10 +661,7 @@ data CreateTaskRequest = CreateTaskRequest'
 createTaskRequest
     :: CreateTaskRequest
 createTaskRequest =
-    CreateTaskRequest'
-    { _ctrResponseView = Nothing
-    , _ctrTask = Nothing
-    }
+  CreateTaskRequest' {_ctrResponseView = Nothing, _ctrTask = Nothing}
 
 -- | The response_view specifies which subset of the Task will be returned.
 -- By default response_view is BASIC; not all information is retrieved by
@@ -715,10 +717,12 @@ instance ToJSON CreateTaskRequest where
 -- | Response message for ListQueues.
 --
 -- /See:/ 'listQueuesResponse' smart constructor.
-data ListQueuesResponse = ListQueuesResponse'
+data ListQueuesResponse =
+  ListQueuesResponse'
     { _lqrNextPageToken :: !(Maybe Text)
     , _lqrQueues        :: !(Maybe [Queue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListQueuesResponse' with the minimum fields required to make a request.
 --
@@ -730,10 +734,7 @@ data ListQueuesResponse = ListQueuesResponse'
 listQueuesResponse
     :: ListQueuesResponse
 listQueuesResponse =
-    ListQueuesResponse'
-    { _lqrNextPageToken = Nothing
-    , _lqrQueues = Nothing
-    }
+  ListQueuesResponse' {_lqrNextPageToken = Nothing, _lqrQueues = Nothing}
 
 -- | A token to retrieve next page of results. To return the next page of
 -- results, call ListQueues with this value as the page_token. If the
@@ -768,9 +769,11 @@ instance ToJSON ListQueuesResponse where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -781,9 +784,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -809,9 +810,11 @@ instance ToJSON StatusDetailsItem where
 -- \`https:\/\/www.googleapis.com\/auth\/cloud-platform\`
 --
 -- /See:/ 'appEngineHTTPQueue' smart constructor.
-newtype AppEngineHTTPQueue = AppEngineHTTPQueue'
+newtype AppEngineHTTPQueue =
+  AppEngineHTTPQueue'
     { _aehttpqAppEngineRoutingOverride :: Maybe AppEngineRouting
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppEngineHTTPQueue' with the minimum fields required to make a request.
 --
@@ -821,9 +824,7 @@ newtype AppEngineHTTPQueue = AppEngineHTTPQueue'
 appEngineHTTPQueue
     :: AppEngineHTTPQueue
 appEngineHTTPQueue =
-    AppEngineHTTPQueue'
-    { _aehttpqAppEngineRoutingOverride = Nothing
-    }
+  AppEngineHTTPQueue' {_aehttpqAppEngineRoutingOverride = Nothing}
 
 -- | Overrides for the task-level app_engine_routing. If set,
 -- \`app_engine_routing_override\` is used for all tasks in the queue, no
@@ -850,9 +851,11 @@ instance ToJSON AppEngineHTTPQueue where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
+newtype SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprPolicy :: Maybe Policy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -861,10 +864,7 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
 -- * 'siprPolicy'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
-setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprPolicy = Nothing
-    }
+setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -888,14 +888,16 @@ instance ToJSON SetIAMPolicyRequest where
 -- limits, retry options, queue types, and others.
 --
 -- /See:/ 'queue' smart constructor.
-data Queue = Queue'
+data Queue =
+  Queue'
     { _qRateLimits         :: !(Maybe RateLimits)
     , _qState              :: !(Maybe QueueState)
     , _qRetryConfig        :: !(Maybe RetryConfig)
     , _qAppEngineHTTPQueue :: !(Maybe AppEngineHTTPQueue)
     , _qName               :: !(Maybe Text)
     , _qPurgeTime          :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Queue' with the minimum fields required to make a request.
 --
@@ -915,7 +917,7 @@ data Queue = Queue'
 queue
     :: Queue
 queue =
-    Queue'
+  Queue'
     { _qRateLimits = Nothing
     , _qState = Nothing
     , _qRetryConfig = Nothing
@@ -1014,10 +1016,12 @@ instance ToJSON Queue where
 -- | Response message for listing tasks using ListTasks.
 --
 -- /See:/ 'listTasksResponse' smart constructor.
-data ListTasksResponse = ListTasksResponse'
+data ListTasksResponse =
+  ListTasksResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTasks         :: !(Maybe [Task])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTasksResponse' with the minimum fields required to make a request.
 --
@@ -1029,10 +1033,7 @@ data ListTasksResponse = ListTasksResponse'
 listTasksResponse
     :: ListTasksResponse
 listTasksResponse =
-    ListTasksResponse'
-    { _ltrNextPageToken = Nothing
-    , _ltrTasks = Nothing
-    }
+  ListTasksResponse' {_ltrNextPageToken = Nothing, _ltrTasks = Nothing}
 
 -- | A token to retrieve next page of results. To return the next page of
 -- results, call ListTasks with this value as the page_token. If the
@@ -1091,9 +1092,11 @@ instance ToJSON ListTasksResponse where
 -- information, see the CreateTask documentation.
 --
 -- /See:/ 'appEngineHTTPRequestHeaders' smart constructor.
-newtype AppEngineHTTPRequestHeaders = AppEngineHTTPRequestHeaders'
+newtype AppEngineHTTPRequestHeaders =
+  AppEngineHTTPRequestHeaders'
     { _aehttprhAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppEngineHTTPRequestHeaders' with the minimum fields required to make a request.
 --
@@ -1104,9 +1107,8 @@ appEngineHTTPRequestHeaders
     :: HashMap Text Text -- ^ 'aehttprhAddtional'
     -> AppEngineHTTPRequestHeaders
 appEngineHTTPRequestHeaders pAehttprhAddtional_ =
-    AppEngineHTTPRequestHeaders'
-    { _aehttprhAddtional = _Coerce # pAehttprhAddtional_
-    }
+  AppEngineHTTPRequestHeaders'
+    {_aehttprhAddtional = _Coerce # pAehttprhAddtional_}
 
 aehttprhAddtional :: Lens' AppEngineHTTPRequestHeaders (HashMap Text Text)
 aehttprhAddtional
@@ -1127,8 +1129,8 @@ instance ToJSON AppEngineHTTPRequestHeaders where
 --
 -- /See:/ 'pauseQueueRequest' smart constructor.
 data PauseQueueRequest =
-    PauseQueueRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  PauseQueueRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PauseQueueRequest' with the minimum fields required to make a request.
 --
@@ -1147,9 +1149,11 @@ instance ToJSON PauseQueueRequest where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1159,9 +1163,7 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1189,12 +1191,14 @@ instance ToJSON TestIAMPermissionsRequest where
 -- | The status of a task attempt.
 --
 -- /See:/ 'attempt' smart constructor.
-data Attempt = Attempt'
+data Attempt =
+  Attempt'
     { _aResponseStatus :: !(Maybe Status)
     , _aScheduleTime   :: !(Maybe DateTime')
     , _aDispatchTime   :: !(Maybe DateTime')
     , _aResponseTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Attempt' with the minimum fields required to make a request.
 --
@@ -1210,7 +1214,7 @@ data Attempt = Attempt'
 attempt
     :: Attempt
 attempt =
-    Attempt'
+  Attempt'
     { _aResponseStatus = Nothing
     , _aScheduleTime = Nothing
     , _aDispatchTime = Nothing
@@ -1271,8 +1275,8 @@ instance ToJSON Attempt where
 --
 -- /See:/ 'purgeQueueRequest' smart constructor.
 data PurgeQueueRequest =
-    PurgeQueueRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  PurgeQueueRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PurgeQueueRequest' with the minimum fields required to make a request.
 --
@@ -1291,7 +1295,8 @@ instance ToJSON PurgeQueueRequest where
 -- | A unit of scheduled work.
 --
 -- /See:/ 'task' smart constructor.
-data Task = Task'
+data Task =
+  Task'
     { _tLastAttempt          :: !(Maybe Attempt)
     , _tScheduleTime         :: !(Maybe DateTime')
     , _tName                 :: !(Maybe Text)
@@ -1301,7 +1306,8 @@ data Task = Task'
     , _tDispatchCount        :: !(Maybe (Textual Int32))
     , _tAppEngineHTTPRequest :: !(Maybe AppEngineHTTPRequest)
     , _tCreateTime           :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Task' with the minimum fields required to make a request.
 --
@@ -1327,7 +1333,7 @@ data Task = Task'
 task
     :: Task
 task =
-    Task'
+  Task'
     { _tLastAttempt = Nothing
     , _tScheduleTime = Nothing
     , _tName = Nothing
@@ -1445,9 +1451,11 @@ instance ToJSON Task where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -1457,9 +1465,7 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1502,11 +1508,13 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pEtag     :: !(Maybe Bytes)
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -1519,12 +1527,7 @@ data Policy = Policy'
 -- * 'pBindings'
 policy
     :: Policy
-policy =
-    Policy'
-    { _pEtag = Nothing
-    , _pVersion = Nothing
-    , _pBindings = Nothing
-    }
+policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -1574,9 +1577,11 @@ instance ToJSON Policy where
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
 -- /See:/ 'locationLabels' smart constructor.
-newtype LocationLabels = LocationLabels'
+newtype LocationLabels =
+  LocationLabels'
     { _llAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
@@ -1587,9 +1592,7 @@ locationLabels
     :: HashMap Text Text -- ^ 'llAddtional'
     -> LocationLabels
 locationLabels pLlAddtional_ =
-    LocationLabels'
-    { _llAddtional = _Coerce # pLlAddtional_
-    }
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1608,9 +1611,11 @@ instance ToJSON LocationLabels where
 -- given location.
 --
 -- /See:/ 'locationMetadata' smart constructor.
-newtype LocationMetadata = LocationMetadata'
+newtype LocationMetadata =
+  LocationMetadata'
     { _lmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
@@ -1621,9 +1626,7 @@ locationMetadata
     :: HashMap Text JSONValue -- ^ 'lmAddtional'
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
-    LocationMetadata'
-    { _lmAddtional = _Coerce # pLmAddtional_
-    }
+  LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -1651,12 +1654,14 @@ instance ToJSON LocationMetadata where
 -- routing](https:\/\/cloud.google.com\/appengine\/docs\/flexible\/python\/how-requests-are-routed).
 --
 -- /See:/ 'appEngineRouting' smart constructor.
-data AppEngineRouting = AppEngineRouting'
+data AppEngineRouting =
+  AppEngineRouting'
     { _aerService  :: !(Maybe Text)
     , _aerVersion  :: !(Maybe Text)
     , _aerHost     :: !(Maybe Text)
     , _aerInstance :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppEngineRouting' with the minimum fields required to make a request.
 --
@@ -1672,7 +1677,7 @@ data AppEngineRouting = AppEngineRouting'
 appEngineRouting
     :: AppEngineRouting
 appEngineRouting =
-    AppEngineRouting'
+  AppEngineRouting'
     { _aerService = Nothing
     , _aerVersion = Nothing
     , _aerHost = Nothing
@@ -1778,13 +1783,15 @@ instance ToJSON AppEngineRouting where
 -- receive a response before the deadline is a failed attempt.
 --
 -- /See:/ 'appEngineHTTPRequest' smart constructor.
-data AppEngineHTTPRequest = AppEngineHTTPRequest'
+data AppEngineHTTPRequest =
+  AppEngineHTTPRequest'
     { _aehttprHTTPMethod       :: !(Maybe AppEngineHTTPRequestHTTPMethod)
     , _aehttprRelativeURI      :: !(Maybe Text)
     , _aehttprBody             :: !(Maybe Bytes)
     , _aehttprHeaders          :: !(Maybe AppEngineHTTPRequestHeaders)
     , _aehttprAppEngineRouting :: !(Maybe AppEngineRouting)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AppEngineHTTPRequest' with the minimum fields required to make a request.
 --
@@ -1802,7 +1809,7 @@ data AppEngineHTTPRequest = AppEngineHTTPRequest'
 appEngineHTTPRequest
     :: AppEngineHTTPRequest
 appEngineHTTPRequest =
-    AppEngineHTTPRequest'
+  AppEngineHTTPRequest'
     { _aehttprHTTPMethod = Nothing
     , _aehttprRelativeURI = Nothing
     , _aehttprBody = Nothing
@@ -1905,8 +1912,8 @@ instance ToJSON AppEngineHTTPRequest where
 --
 -- /See:/ 'resumeQueueRequest' smart constructor.
 data ResumeQueueRequest =
-    ResumeQueueRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ResumeQueueRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResumeQueueRequest' with the minimum fields required to make a request.
 --
@@ -1925,11 +1932,13 @@ instance ToJSON ResumeQueueRequest where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -1943,11 +1952,7 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

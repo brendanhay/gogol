@@ -64,7 +64,8 @@ type ProjectsAgentEntityTypesBatchUpdateResource =
 -- | Updates\/Creates multiple entity types in the specified agent. Operation
 --
 -- /See:/ 'projectsAgentEntityTypesBatchUpdate' smart constructor.
-data ProjectsAgentEntityTypesBatchUpdate = ProjectsAgentEntityTypesBatchUpdate'
+data ProjectsAgentEntityTypesBatchUpdate =
+  ProjectsAgentEntityTypesBatchUpdate'
     { _paetbuParent         :: !Text
     , _paetbuXgafv          :: !(Maybe Xgafv)
     , _paetbuUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsAgentEntityTypesBatchUpdate = ProjectsAgentEntityTypesBatchUpdate'
     , _paetbuUploadType     :: !(Maybe Text)
     , _paetbuPayload        :: !GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest
     , _paetbuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentEntityTypesBatchUpdate' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsAgentEntityTypesBatchUpdate
     -> GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest -- ^ 'paetbuPayload'
     -> ProjectsAgentEntityTypesBatchUpdate
 projectsAgentEntityTypesBatchUpdate pPaetbuParent_ pPaetbuPayload_ =
-    ProjectsAgentEntityTypesBatchUpdate'
+  ProjectsAgentEntityTypesBatchUpdate'
     { _paetbuParent = pPaetbuParent_
     , _paetbuXgafv = Nothing
     , _paetbuUploadProtocol = Nothing
@@ -148,7 +150,8 @@ paetbuCallback
       (\ s a -> s{_paetbuCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentEntityTypesBatchUpdate where
+           ProjectsAgentEntityTypesBatchUpdate
+         where
         type Rs ProjectsAgentEntityTypesBatchUpdate =
              GoogleLongrunningOperation
         type Scopes ProjectsAgentEntityTypesBatchUpdate =

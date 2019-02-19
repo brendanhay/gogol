@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountActiveAdSummariesGet' request conforms to.
 type AccountActiveAdSummariesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountActiveAdSummaries" :>
@@ -55,10 +55,12 @@ type AccountActiveAdSummariesGetResource =
 -- | Gets the account\'s active ad summary by account ID.
 --
 -- /See:/ 'accountActiveAdSummariesGet' smart constructor.
-data AccountActiveAdSummariesGet = AccountActiveAdSummariesGet'
+data AccountActiveAdSummariesGet =
+  AccountActiveAdSummariesGet'
     { _aaasgProFileId        :: !(Textual Int64)
     , _aaasgSummaryAccountId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountActiveAdSummariesGet' with the minimum fields required to make a request.
 --
@@ -72,7 +74,7 @@ accountActiveAdSummariesGet
     -> Int64 -- ^ 'aaasgSummaryAccountId'
     -> AccountActiveAdSummariesGet
 accountActiveAdSummariesGet pAaasgProFileId_ pAaasgSummaryAccountId_ =
-    AccountActiveAdSummariesGet'
+  AccountActiveAdSummariesGet'
     { _aaasgProFileId = _Coerce # pAaasgProFileId_
     , _aaasgSummaryAccountId = _Coerce # pAaasgSummaryAccountId_
     }

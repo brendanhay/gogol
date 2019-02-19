@@ -54,10 +54,12 @@ type EditsCommitResource =
 -- | Commits\/applies the changes made in this edit back to the app.
 --
 -- /See:/ 'editsCommit' smart constructor.
-data EditsCommit = EditsCommit'
+data EditsCommit =
+  EditsCommit'
     { _ecPackageName :: !Text
     , _ecEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EditsCommit' with the minimum fields required to make a request.
 --
@@ -71,10 +73,7 @@ editsCommit
     -> Text -- ^ 'ecEditId'
     -> EditsCommit
 editsCommit pEcPackageName_ pEcEditId_ =
-    EditsCommit'
-    { _ecPackageName = pEcPackageName_
-    , _ecEditId = pEcEditId_
-    }
+  EditsCommit' {_ecPackageName = pEcPackageName_, _ecEditId = pEcEditId_}
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

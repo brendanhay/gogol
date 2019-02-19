@@ -58,11 +58,13 @@ type ProjectsSetCommonInstanceMetadataResource =
 -- the data included in the request.
 --
 -- /See:/ 'projectsSetCommonInstanceMetadata' smart constructor.
-data ProjectsSetCommonInstanceMetadata = ProjectsSetCommonInstanceMetadata'
+data ProjectsSetCommonInstanceMetadata =
+  ProjectsSetCommonInstanceMetadata'
     { _pscimRequestId :: !(Maybe Text)
     , _pscimProject   :: !Text
     , _pscimPayload   :: !Metadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSetCommonInstanceMetadata' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ projectsSetCommonInstanceMetadata
     -> Metadata -- ^ 'pscimPayload'
     -> ProjectsSetCommonInstanceMetadata
 projectsSetCommonInstanceMetadata pPscimProject_ pPscimPayload_ =
-    ProjectsSetCommonInstanceMetadata'
+  ProjectsSetCommonInstanceMetadata'
     { _pscimRequestId = Nothing
     , _pscimProject = pPscimProject_
     , _pscimPayload = pPscimPayload_
@@ -110,7 +112,8 @@ pscimPayload
   = lens _pscimPayload (\ s a -> s{_pscimPayload = a})
 
 instance GoogleRequest
-         ProjectsSetCommonInstanceMetadata where
+           ProjectsSetCommonInstanceMetadata
+         where
         type Rs ProjectsSetCommonInstanceMetadata = Operation
         type Scopes ProjectsSetCommonInstanceMetadata =
              '["https://www.googleapis.com/auth/cloud-platform",

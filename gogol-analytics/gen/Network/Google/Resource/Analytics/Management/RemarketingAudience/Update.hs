@@ -61,12 +61,14 @@ type ManagementRemarketingAudienceUpdateResource =
 -- | Updates an existing remarketing audience.
 --
 -- /See:/ 'managementRemarketingAudienceUpdate' smart constructor.
-data ManagementRemarketingAudienceUpdate = ManagementRemarketingAudienceUpdate'
+data ManagementRemarketingAudienceUpdate =
+  ManagementRemarketingAudienceUpdate'
     { _mrauWebPropertyId         :: !Text
     , _mrauPayload               :: !RemarketingAudience
     , _mrauAccountId             :: !Text
     , _mrauRemarketingAudienceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementRemarketingAudienceUpdate' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ managementRemarketingAudienceUpdate
     -> Text -- ^ 'mrauRemarketingAudienceId'
     -> ManagementRemarketingAudienceUpdate
 managementRemarketingAudienceUpdate pMrauWebPropertyId_ pMrauPayload_ pMrauAccountId_ pMrauRemarketingAudienceId_ =
-    ManagementRemarketingAudienceUpdate'
+  ManagementRemarketingAudienceUpdate'
     { _mrauWebPropertyId = pMrauWebPropertyId_
     , _mrauPayload = pMrauPayload_
     , _mrauAccountId = pMrauAccountId_
@@ -117,7 +119,8 @@ mrauRemarketingAudienceId
       (\ s a -> s{_mrauRemarketingAudienceId = a})
 
 instance GoogleRequest
-         ManagementRemarketingAudienceUpdate where
+           ManagementRemarketingAudienceUpdate
+         where
         type Rs ManagementRemarketingAudienceUpdate =
              RemarketingAudience
         type Scopes ManagementRemarketingAudienceUpdate =

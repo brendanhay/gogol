@@ -22,12 +22,14 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'surveysListResponse' smart constructor.
-data SurveysListResponse = SurveysListResponse'
+data SurveysListResponse =
+  SurveysListResponse'
     { _slrRequestId       :: !(Maybe Text)
     , _slrTokenPagination :: !(Maybe TokenPagination)
     , _slrPageInfo        :: !(Maybe PageInfo)
     , _slrResources       :: !(Maybe [Survey])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveysListResponse' with the minimum fields required to make a request.
 --
@@ -43,7 +45,7 @@ data SurveysListResponse = SurveysListResponse'
 surveysListResponse
     :: SurveysListResponse
 surveysListResponse =
-    SurveysListResponse'
+  SurveysListResponse'
     { _slrRequestId = Nothing
     , _slrTokenPagination = Nothing
     , _slrPageInfo = Nothing
@@ -92,14 +94,16 @@ instance ToJSON SurveysListResponse where
 
 --
 -- /See:/ 'mobileAppPanel' smart constructor.
-data MobileAppPanel = MobileAppPanel'
+data MobileAppPanel =
+  MobileAppPanel'
     { _mapOwners           :: !(Maybe [Text])
     , _mapCountry          :: !(Maybe Text)
     , _mapName             :: !(Maybe Text)
     , _mapMobileAppPanelId :: !(Maybe Text)
     , _mapLanguage         :: !(Maybe Text)
     , _mapIsPublicPanel    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileAppPanel' with the minimum fields required to make a request.
 --
@@ -119,7 +123,7 @@ data MobileAppPanel = MobileAppPanel'
 mobileAppPanel
     :: MobileAppPanel
 mobileAppPanel =
-    MobileAppPanel'
+  MobileAppPanel'
     { _mapOwners = Nothing
     , _mapCountry = Nothing
     , _mapName = Nothing
@@ -179,10 +183,12 @@ instance ToJSON MobileAppPanel where
 
 --
 -- /See:/ 'tokenPagination' smart constructor.
-data TokenPagination = TokenPagination'
+data TokenPagination =
+  TokenPagination'
     { _tpNextPageToken     :: !(Maybe Text)
     , _tpPreviousPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
@@ -194,10 +200,7 @@ data TokenPagination = TokenPagination'
 tokenPagination
     :: TokenPagination
 tokenPagination =
-    TokenPagination'
-    { _tpNextPageToken = Nothing
-    , _tpPreviousPageToken = Nothing
-    }
+  TokenPagination' {_tpNextPageToken = Nothing, _tpPreviousPageToken = Nothing}
 
 tpNextPageToken :: Lens' TokenPagination (Maybe Text)
 tpNextPageToken
@@ -226,9 +229,11 @@ instance ToJSON TokenPagination where
 
 --
 -- /See:/ 'resultsGetRequest' smart constructor.
-newtype ResultsGetRequest = ResultsGetRequest'
+newtype ResultsGetRequest =
+  ResultsGetRequest'
     { _rgrResultMask :: Maybe ResultsMask
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResultsGetRequest' with the minimum fields required to make a request.
 --
@@ -237,10 +242,7 @@ newtype ResultsGetRequest = ResultsGetRequest'
 -- * 'rgrResultMask'
 resultsGetRequest
     :: ResultsGetRequest
-resultsGetRequest =
-    ResultsGetRequest'
-    { _rgrResultMask = Nothing
-    }
+resultsGetRequest = ResultsGetRequest' {_rgrResultMask = Nothing}
 
 rgrResultMask :: Lens' ResultsGetRequest (Maybe ResultsMask)
 rgrResultMask
@@ -259,12 +261,14 @@ instance ToJSON ResultsGetRequest where
 
 --
 -- /See:/ 'mobileAppPanelsListResponse' smart constructor.
-data MobileAppPanelsListResponse = MobileAppPanelsListResponse'
+data MobileAppPanelsListResponse =
+  MobileAppPanelsListResponse'
     { _maplrRequestId       :: !(Maybe Text)
     , _maplrTokenPagination :: !(Maybe TokenPagination)
     , _maplrPageInfo        :: !(Maybe PageInfo)
     , _maplrResources       :: !(Maybe [MobileAppPanel])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileAppPanelsListResponse' with the minimum fields required to make a request.
 --
@@ -280,7 +284,7 @@ data MobileAppPanelsListResponse = MobileAppPanelsListResponse'
 mobileAppPanelsListResponse
     :: MobileAppPanelsListResponse
 mobileAppPanelsListResponse =
-    MobileAppPanelsListResponse'
+  MobileAppPanelsListResponse'
     { _maplrRequestId = Nothing
     , _maplrTokenPagination = Nothing
     , _maplrPageInfo = Nothing
@@ -332,11 +336,13 @@ instance ToJSON MobileAppPanelsListResponse where
 
 --
 -- /See:/ 'pageInfo' smart constructor.
-data PageInfo = PageInfo'
+data PageInfo =
+  PageInfo'
     { _piResultPerPage :: !(Maybe (Textual Int32))
     , _piTotalResults  :: !(Maybe (Textual Int32))
     , _piStartIndex    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
@@ -350,7 +356,7 @@ data PageInfo = PageInfo'
 pageInfo
     :: PageInfo
 pageInfo =
-    PageInfo'
+  PageInfo'
     { _piResultPerPage = Nothing
     , _piTotalResults = Nothing
     , _piStartIndex = Nothing
@@ -391,10 +397,12 @@ instance ToJSON PageInfo where
 
 --
 -- /See:/ 'fieldMask' smart constructor.
-data FieldMask = FieldMask'
+data FieldMask =
+  FieldMask'
     { _fmId     :: !(Maybe (Textual Int32))
     , _fmFields :: !(Maybe [FieldMask])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FieldMask' with the minimum fields required to make a request.
 --
@@ -405,11 +413,7 @@ data FieldMask = FieldMask'
 -- * 'fmFields'
 fieldMask
     :: FieldMask
-fieldMask =
-    FieldMask'
-    { _fmId = Nothing
-    , _fmFields = Nothing
-    }
+fieldMask = FieldMask' {_fmId = Nothing, _fmFields = Nothing}
 
 fmId :: Lens' FieldMask (Maybe Int32)
 fmId
@@ -437,7 +441,8 @@ instance ToJSON FieldMask where
 
 --
 -- /See:/ 'survey' smart constructor.
-data Survey = Survey'
+data Survey =
+  Survey'
     { _sAudience            :: !(Maybe SurveyAudience)
     , _sState               :: !(Maybe Text)
     , _sOwners              :: !(Maybe [Text])
@@ -449,7 +454,8 @@ data Survey = Survey'
     , _sQuestions           :: !(Maybe [SurveyQuestion])
     , _sTitle               :: !(Maybe Text)
     , _sDescription         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Survey' with the minimum fields required to make a request.
 --
@@ -479,7 +485,7 @@ data Survey = Survey'
 survey
     :: Survey
 survey =
-    Survey'
+  Survey'
     { _sAudience = Nothing
     , _sState = Nothing
     , _sOwners = Nothing
@@ -575,9 +581,11 @@ instance ToJSON Survey where
 
 --
 -- /See:/ 'surveysStartResponse' smart constructor.
-newtype SurveysStartResponse = SurveysStartResponse'
+newtype SurveysStartResponse =
+  SurveysStartResponse'
     { _ssrRequestId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveysStartResponse' with the minimum fields required to make a request.
 --
@@ -586,10 +594,7 @@ newtype SurveysStartResponse = SurveysStartResponse'
 -- * 'ssrRequestId'
 surveysStartResponse
     :: SurveysStartResponse
-surveysStartResponse =
-    SurveysStartResponse'
-    { _ssrRequestId = Nothing
-    }
+surveysStartResponse = SurveysStartResponse' {_ssrRequestId = Nothing}
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -610,9 +615,11 @@ instance ToJSON SurveysStartResponse where
 
 --
 -- /See:/ 'surveysStopResponse' smart constructor.
-newtype SurveysStopResponse = SurveysStopResponse'
+newtype SurveysStopResponse =
+  SurveysStopResponse'
     { _sRequestId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveysStopResponse' with the minimum fields required to make a request.
 --
@@ -621,10 +628,7 @@ newtype SurveysStopResponse = SurveysStopResponse'
 -- * 'sRequestId'
 surveysStopResponse
     :: SurveysStopResponse
-surveysStopResponse =
-    SurveysStopResponse'
-    { _sRequestId = Nothing
-    }
+surveysStopResponse = SurveysStopResponse' {_sRequestId = Nothing}
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -644,10 +648,12 @@ instance ToJSON SurveysStopResponse where
 
 --
 -- /See:/ 'resultsMask' smart constructor.
-data ResultsMask = ResultsMask'
+data ResultsMask =
+  ResultsMask'
     { _rmProjection :: !(Maybe Text)
     , _rmFields     :: !(Maybe [FieldMask])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResultsMask' with the minimum fields required to make a request.
 --
@@ -658,11 +664,7 @@ data ResultsMask = ResultsMask'
 -- * 'rmFields'
 resultsMask
     :: ResultsMask
-resultsMask =
-    ResultsMask'
-    { _rmProjection = Nothing
-    , _rmFields = Nothing
-    }
+resultsMask = ResultsMask' {_rmProjection = Nothing, _rmFields = Nothing}
 
 rmProjection :: Lens' ResultsMask (Maybe Text)
 rmProjection
@@ -690,10 +692,12 @@ instance ToJSON ResultsMask where
 
 --
 -- /See:/ 'surveyRejection' smart constructor.
-data SurveyRejection = SurveyRejection'
+data SurveyRejection =
+  SurveyRejection'
     { _srExplanation :: !(Maybe Text)
     , _srType        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveyRejection' with the minimum fields required to make a request.
 --
@@ -704,11 +708,7 @@ data SurveyRejection = SurveyRejection'
 -- * 'srType'
 surveyRejection
     :: SurveyRejection
-surveyRejection =
-    SurveyRejection'
-    { _srExplanation = Nothing
-    , _srType = Nothing
-    }
+surveyRejection = SurveyRejection' {_srExplanation = Nothing, _srType = Nothing}
 
 srExplanation :: Lens' SurveyRejection (Maybe Text)
 srExplanation
@@ -734,10 +734,12 @@ instance ToJSON SurveyRejection where
 
 --
 -- /See:/ 'surveyResults' smart constructor.
-data SurveyResults = SurveyResults'
+data SurveyResults =
+  SurveyResults'
     { _srStatus      :: !(Maybe Text)
     , _srSurveyURLId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveyResults' with the minimum fields required to make a request.
 --
@@ -748,11 +750,7 @@ data SurveyResults = SurveyResults'
 -- * 'srSurveyURLId'
 surveyResults
     :: SurveyResults
-surveyResults =
-    SurveyResults'
-    { _srStatus = Nothing
-    , _srSurveyURLId = Nothing
-    }
+surveyResults = SurveyResults' {_srStatus = Nothing, _srSurveyURLId = Nothing}
 
 srStatus :: Lens' SurveyResults (Maybe Text)
 srStatus = lens _srStatus (\ s a -> s{_srStatus = a})
@@ -778,9 +776,11 @@ instance ToJSON SurveyResults where
 
 --
 -- /See:/ 'surveysStartRequest' smart constructor.
-newtype SurveysStartRequest = SurveysStartRequest'
+newtype SurveysStartRequest =
+  SurveysStartRequest'
     { _ssrMaxCostPerResponseNanos :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveysStartRequest' with the minimum fields required to make a request.
 --
@@ -790,9 +790,7 @@ newtype SurveysStartRequest = SurveysStartRequest'
 surveysStartRequest
     :: SurveysStartRequest
 surveysStartRequest =
-    SurveysStartRequest'
-    { _ssrMaxCostPerResponseNanos = Nothing
-    }
+  SurveysStartRequest' {_ssrMaxCostPerResponseNanos = Nothing}
 
 -- | Threshold to start a survey automically if the quoted prices is less
 -- than or equal to this value. See Survey.Cost for more details.
@@ -818,9 +816,11 @@ instance ToJSON SurveysStartRequest where
 
 --
 -- /See:/ 'surveysDeleteResponse' smart constructor.
-newtype SurveysDeleteResponse = SurveysDeleteResponse'
+newtype SurveysDeleteResponse =
+  SurveysDeleteResponse'
     { _sdrRequestId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveysDeleteResponse' with the minimum fields required to make a request.
 --
@@ -829,10 +829,7 @@ newtype SurveysDeleteResponse = SurveysDeleteResponse'
 -- * 'sdrRequestId'
 surveysDeleteResponse
     :: SurveysDeleteResponse
-surveysDeleteResponse =
-    SurveysDeleteResponse'
-    { _sdrRequestId = Nothing
-    }
+surveysDeleteResponse = SurveysDeleteResponse' {_sdrRequestId = Nothing}
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -853,11 +850,13 @@ instance ToJSON SurveysDeleteResponse where
 
 --
 -- /See:/ 'surveyQuestionImage' smart constructor.
-data SurveyQuestionImage = SurveyQuestionImage'
+data SurveyQuestionImage =
+  SurveyQuestionImage'
     { _sqiData    :: !(Maybe Bytes)
     , _sqiURL     :: !(Maybe Text)
     , _sqiAltText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveyQuestionImage' with the minimum fields required to make a request.
 --
@@ -871,11 +870,8 @@ data SurveyQuestionImage = SurveyQuestionImage'
 surveyQuestionImage
     :: SurveyQuestionImage
 surveyQuestionImage =
-    SurveyQuestionImage'
-    { _sqiData = Nothing
-    , _sqiURL = Nothing
-    , _sqiAltText = Nothing
-    }
+  SurveyQuestionImage'
+    {_sqiData = Nothing, _sqiURL = Nothing, _sqiAltText = Nothing}
 
 sqiData :: Lens' SurveyQuestionImage (Maybe ByteString)
 sqiData
@@ -906,7 +902,8 @@ instance ToJSON SurveyQuestionImage where
 
 --
 -- /See:/ 'surveyAudience' smart constructor.
-data SurveyAudience = SurveyAudience'
+data SurveyAudience =
+  SurveyAudience'
     { _saCountry            :: !(Maybe Text)
     , _saAges               :: !(Maybe [Text])
     , _saLanguages          :: !(Maybe [Text])
@@ -914,7 +911,8 @@ data SurveyAudience = SurveyAudience'
     , _saMobileAppPanelId   :: !(Maybe Text)
     , _saCountrySubdivision :: !(Maybe Text)
     , _saPopulationSource   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveyAudience' with the minimum fields required to make a request.
 --
@@ -936,7 +934,7 @@ data SurveyAudience = SurveyAudience'
 surveyAudience
     :: SurveyAudience
 surveyAudience =
-    SurveyAudience'
+  SurveyAudience'
     { _saCountry = Nothing
     , _saAges = Nothing
     , _saLanguages = Nothing
@@ -1005,12 +1003,14 @@ instance ToJSON SurveyAudience where
 
 --
 -- /See:/ 'surveyCost' smart constructor.
-data SurveyCost = SurveyCost'
+data SurveyCost =
+  SurveyCost'
     { _scCurrencyCode            :: !(Maybe Text)
     , _scNanos                   :: !(Maybe (Textual Int64))
     , _scMaxCostPerResponseNanos :: !(Maybe (Textual Int64))
     , _scCostPerResponseNanos    :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveyCost' with the minimum fields required to make a request.
 --
@@ -1026,7 +1026,7 @@ data SurveyCost = SurveyCost'
 surveyCost
     :: SurveyCost
 surveyCost =
-    SurveyCost'
+  SurveyCost'
     { _scCurrencyCode = Nothing
     , _scNanos = Nothing
     , _scMaxCostPerResponseNanos = Nothing
@@ -1077,7 +1077,8 @@ instance ToJSON SurveyCost where
 
 --
 -- /See:/ 'surveyQuestion' smart constructor.
-data SurveyQuestion = SurveyQuestion'
+data SurveyQuestion =
+  SurveyQuestion'
     { _sqImages                   :: !(Maybe [SurveyQuestionImage])
     , _sqAnswers                  :: !(Maybe [Text])
     , _sqSingleLineResponse       :: !(Maybe Bool)
@@ -1096,7 +1097,8 @@ data SurveyQuestion = SurveyQuestion'
     , _sqQuestion                 :: !(Maybe Text)
     , _sqNumStars                 :: !(Maybe Text)
     , _sqLowValueLabel            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SurveyQuestion' with the minimum fields required to make a request.
 --
@@ -1140,7 +1142,7 @@ data SurveyQuestion = SurveyQuestion'
 surveyQuestion
     :: SurveyQuestion
 surveyQuestion =
-    SurveyQuestion'
+  SurveyQuestion'
     { _sqImages = Nothing
     , _sqAnswers = Nothing
     , _sqSingleLineResponse = Nothing

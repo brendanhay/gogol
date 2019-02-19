@@ -62,12 +62,14 @@ type TargetSSLProxiesSetSSLCertificatesResource =
 -- | Changes SslCertificates for TargetSslProxy.
 --
 -- /See:/ 'targetSSLProxiesSetSSLCertificates' smart constructor.
-data TargetSSLProxiesSetSSLCertificates = TargetSSLProxiesSetSSLCertificates'
+data TargetSSLProxiesSetSSLCertificates =
+  TargetSSLProxiesSetSSLCertificates'
     { _tspsscRequestId      :: !(Maybe Text)
     , _tspsscProject        :: !Text
     , _tspsscPayload        :: !TargetSSLProxiesSetSSLCertificatesRequest
     , _tspsscTargetSSLProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetSSLProxiesSetSSLCertificates' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ targetSSLProxiesSetSSLCertificates
     -> Text -- ^ 'tspsscTargetSSLProxy'
     -> TargetSSLProxiesSetSSLCertificates
 targetSSLProxiesSetSSLCertificates pTspsscProject_ pTspsscPayload_ pTspsscTargetSSLProxy_ =
-    TargetSSLProxiesSetSSLCertificates'
+  TargetSSLProxiesSetSSLCertificates'
     { _tspsscRequestId = Nothing
     , _tspsscProject = pTspsscProject_
     , _tspsscPayload = pTspsscPayload_
@@ -128,7 +130,8 @@ tspsscTargetSSLProxy
       (\ s a -> s{_tspsscTargetSSLProxy = a})
 
 instance GoogleRequest
-         TargetSSLProxiesSetSSLCertificates where
+           TargetSSLProxiesSetSSLCertificates
+         where
         type Rs TargetSSLProxiesSetSSLCertificates =
              Operation
         type Scopes TargetSSLProxiesSetSSLCertificates =

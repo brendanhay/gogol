@@ -59,10 +59,12 @@ type AccountsContainersWorkspacesCreateVersionResource
 -- created version.
 --
 -- /See:/ 'accountsContainersWorkspacesCreateVersion' smart constructor.
-data AccountsContainersWorkspacesCreateVersion = AccountsContainersWorkspacesCreateVersion'
+data AccountsContainersWorkspacesCreateVersion =
+  AccountsContainersWorkspacesCreateVersion'
     { _acwcvPath    :: !Text
     , _acwcvPayload :: !CreateContainerVersionRequestVersionOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsContainersWorkspacesCreateVersion' with the minimum fields required to make a request.
 --
@@ -76,10 +78,8 @@ accountsContainersWorkspacesCreateVersion
     -> CreateContainerVersionRequestVersionOptions -- ^ 'acwcvPayload'
     -> AccountsContainersWorkspacesCreateVersion
 accountsContainersWorkspacesCreateVersion pAcwcvPath_ pAcwcvPayload_ =
-    AccountsContainersWorkspacesCreateVersion'
-    { _acwcvPath = pAcwcvPath_
-    , _acwcvPayload = pAcwcvPayload_
-    }
+  AccountsContainersWorkspacesCreateVersion'
+    {_acwcvPath = pAcwcvPath_, _acwcvPayload = pAcwcvPayload_}
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -93,7 +93,8 @@ acwcvPayload
   = lens _acwcvPayload (\ s a -> s{_acwcvPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesCreateVersion where
+           AccountsContainersWorkspacesCreateVersion
+         where
         type Rs AccountsContainersWorkspacesCreateVersion =
              CreateContainerVersionResponse
         type Scopes AccountsContainersWorkspacesCreateVersion

@@ -79,7 +79,8 @@ type ServicesListResource =
 -- services enabled on the project.
 --
 -- /See:/ 'servicesList' smart constructor.
-data ServicesList = ServicesList'
+data ServicesList =
+  ServicesList'
     { _slParent         :: !Text
     , _slXgafv          :: !(Maybe Xgafv)
     , _slUploadProtocol :: !(Maybe Text)
@@ -89,7 +90,8 @@ data ServicesList = ServicesList'
     , _slPageToken      :: !(Maybe Text)
     , _slPageSize       :: !(Maybe (Textual Int32))
     , _slCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesList' with the minimum fields required to make a request.
 --
@@ -116,7 +118,7 @@ servicesList
     :: Text -- ^ 'slParent'
     -> ServicesList
 servicesList pSlParent_ =
-    ServicesList'
+  ServicesList'
     { _slParent = pSlParent_
     , _slXgafv = Nothing
     , _slUploadProtocol = Nothing

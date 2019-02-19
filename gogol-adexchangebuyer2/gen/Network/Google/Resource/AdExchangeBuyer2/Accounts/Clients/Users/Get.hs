@@ -66,7 +66,8 @@ type AccountsClientsUsersGetResource =
 -- | Retrieves an existing client user.
 --
 -- /See:/ 'accountsClientsUsersGet' smart constructor.
-data AccountsClientsUsersGet = AccountsClientsUsersGet'
+data AccountsClientsUsersGet =
+  AccountsClientsUsersGet'
     { _acugXgafv           :: !(Maybe Xgafv)
     , _acugUploadProtocol  :: !(Maybe Text)
     , _acugAccessToken     :: !(Maybe Text)
@@ -75,7 +76,8 @@ data AccountsClientsUsersGet = AccountsClientsUsersGet'
     , _acugAccountId       :: !(Textual Int64)
     , _acugClientAccountId :: !(Textual Int64)
     , _acugCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsClientsUsersGet' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ accountsClientsUsersGet
     -> Int64 -- ^ 'acugClientAccountId'
     -> AccountsClientsUsersGet
 accountsClientsUsersGet pAcugUserId_ pAcugAccountId_ pAcugClientAccountId_ =
-    AccountsClientsUsersGet'
+  AccountsClientsUsersGet'
     { _acugXgafv = Nothing
     , _acugUploadProtocol = Nothing
     , _acugAccessToken = Nothing

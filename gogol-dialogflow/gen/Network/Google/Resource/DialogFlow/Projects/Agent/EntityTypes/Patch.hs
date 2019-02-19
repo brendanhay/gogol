@@ -66,7 +66,8 @@ type ProjectsAgentEntityTypesPatchResource =
 -- | Updates the specified entity type.
 --
 -- /See:/ 'projectsAgentEntityTypesPatch' smart constructor.
-data ProjectsAgentEntityTypesPatch = ProjectsAgentEntityTypesPatch'
+data ProjectsAgentEntityTypesPatch =
+  ProjectsAgentEntityTypesPatch'
     { _paetpXgafv          :: !(Maybe Xgafv)
     , _paetpLanguageCode   :: !(Maybe Text)
     , _paetpUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data ProjectsAgentEntityTypesPatch = ProjectsAgentEntityTypesPatch'
     , _paetpPayload        :: !GoogleCloudDialogflowV2EntityType
     , _paetpName           :: !Text
     , _paetpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentEntityTypesPatch' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsAgentEntityTypesPatch
     -> Text -- ^ 'paetpName'
     -> ProjectsAgentEntityTypesPatch
 projectsAgentEntityTypesPatch pPaetpPayload_ pPaetpName_ =
-    ProjectsAgentEntityTypesPatch'
+  ProjectsAgentEntityTypesPatch'
     { _paetpXgafv = Nothing
     , _paetpLanguageCode = Nothing
     , _paetpUploadProtocol = Nothing

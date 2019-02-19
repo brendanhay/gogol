@@ -78,7 +78,8 @@ type PostUserInfosListResource =
 -- access rights, specific to the user.
 --
 -- /See:/ 'postUserInfosList'' smart constructor.
-data PostUserInfosList' = PostUserInfosList''
+data PostUserInfosList' =
+  PostUserInfosList''
     { _puilStatus      :: !(Maybe [PostUserInfosListStatus])
     , _puilOrderBy     :: !PostUserInfosListOrderBy
     , _puilEndDate     :: !(Maybe DateTime')
@@ -90,7 +91,8 @@ data PostUserInfosList' = PostUserInfosList''
     , _puilLabels      :: !(Maybe Text)
     , _puilPageToken   :: !(Maybe Text)
     , _puilMaxResults  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostUserInfosList'' with the minimum fields required to make a request.
 --
@@ -122,7 +124,7 @@ postUserInfosList'
     -> Text -- ^ 'puilUserId'
     -> PostUserInfosList'
 postUserInfosList' pPuilBlogId_ pPuilUserId_ =
-    PostUserInfosList''
+  PostUserInfosList''
     { _puilStatus = Nothing
     , _puilOrderBy = PUILOBPublished
     , _puilEndDate = Nothing

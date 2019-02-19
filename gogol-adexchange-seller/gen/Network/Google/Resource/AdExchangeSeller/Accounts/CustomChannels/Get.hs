@@ -57,11 +57,13 @@ type AccountsCustomChannelsGetResource =
 -- | Get the specified custom channel from the specified ad client.
 --
 -- /See:/ 'accountsCustomChannelsGet' smart constructor.
-data AccountsCustomChannelsGet = AccountsCustomChannelsGet'
+data AccountsCustomChannelsGet =
+  AccountsCustomChannelsGet'
     { _accgCustomChannelId :: !Text
     , _accgAdClientId      :: !Text
     , _accgAccountId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsCustomChannelsGet' with the minimum fields required to make a request.
 --
@@ -78,7 +80,7 @@ accountsCustomChannelsGet
     -> Text -- ^ 'accgAccountId'
     -> AccountsCustomChannelsGet
 accountsCustomChannelsGet pAccgCustomChannelId_ pAccgAdClientId_ pAccgAccountId_ =
-    AccountsCustomChannelsGet'
+  AccountsCustomChannelsGet'
     { _accgCustomChannelId = pAccgCustomChannelId_
     , _accgAdClientId = pAccgAdClientId_
     , _accgAccountId = pAccgAccountId_

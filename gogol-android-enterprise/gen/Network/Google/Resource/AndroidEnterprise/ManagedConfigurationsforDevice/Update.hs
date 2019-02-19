@@ -65,13 +65,15 @@ type ManagedConfigurationsforDeviceUpdateResource =
 -- specified device.
 --
 -- /See:/ 'managedConfigurationsforDeviceUpdate' smart constructor.
-data ManagedConfigurationsforDeviceUpdate = ManagedConfigurationsforDeviceUpdate'
+data ManagedConfigurationsforDeviceUpdate =
+  ManagedConfigurationsforDeviceUpdate'
     { _mcduEnterpriseId                    :: !Text
     , _mcduPayload                         :: !ManagedConfiguration
     , _mcduUserId                          :: !Text
     , _mcduDeviceId                        :: !Text
     , _mcduManagedConfigurationForDeviceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagedConfigurationsforDeviceUpdate' with the minimum fields required to make a request.
 --
@@ -94,12 +96,13 @@ managedConfigurationsforDeviceUpdate
     -> Text -- ^ 'mcduManagedConfigurationForDeviceId'
     -> ManagedConfigurationsforDeviceUpdate
 managedConfigurationsforDeviceUpdate pMcduEnterpriseId_ pMcduPayload_ pMcduUserId_ pMcduDeviceId_ pMcduManagedConfigurationForDeviceId_ =
-    ManagedConfigurationsforDeviceUpdate'
+  ManagedConfigurationsforDeviceUpdate'
     { _mcduEnterpriseId = pMcduEnterpriseId_
     , _mcduPayload = pMcduPayload_
     , _mcduUserId = pMcduUserId_
     , _mcduDeviceId = pMcduDeviceId_
-    , _mcduManagedConfigurationForDeviceId = pMcduManagedConfigurationForDeviceId_
+    , _mcduManagedConfigurationForDeviceId =
+        pMcduManagedConfigurationForDeviceId_
     }
 
 -- | The ID of the enterprise.
@@ -132,7 +135,8 @@ mcduManagedConfigurationForDeviceId
          s{_mcduManagedConfigurationForDeviceId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforDeviceUpdate where
+           ManagedConfigurationsforDeviceUpdate
+         where
         type Rs ManagedConfigurationsforDeviceUpdate =
              ManagedConfiguration
         type Scopes ManagedConfigurationsforDeviceUpdate =

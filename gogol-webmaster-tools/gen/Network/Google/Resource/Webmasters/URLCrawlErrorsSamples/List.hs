@@ -63,11 +63,13 @@ type URLCrawlErrorsSamplesListResource =
 -- platform.
 --
 -- /See:/ 'urlCrawlErrorsSamplesList' smart constructor.
-data URLCrawlErrorsSamplesList = URLCrawlErrorsSamplesList'
+data URLCrawlErrorsSamplesList =
+  URLCrawlErrorsSamplesList'
     { _uceslPlatform :: !URLCrawlErrorsSamplesListPlatform
     , _uceslCategory :: !URLCrawlErrorsSamplesListCategory
     , _uceslSiteURL  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'URLCrawlErrorsSamplesList' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ urlCrawlErrorsSamplesList
     -> Text -- ^ 'uceslSiteURL'
     -> URLCrawlErrorsSamplesList
 urlCrawlErrorsSamplesList pUceslPlatform_ pUceslCategory_ pUceslSiteURL_ =
-    URLCrawlErrorsSamplesList'
+  URLCrawlErrorsSamplesList'
     { _uceslPlatform = pUceslPlatform_
     , _uceslCategory = pUceslCategory_
     , _uceslSiteURL = pUceslSiteURL_

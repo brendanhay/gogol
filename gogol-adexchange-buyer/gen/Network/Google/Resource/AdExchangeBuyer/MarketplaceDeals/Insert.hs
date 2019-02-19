@@ -56,10 +56,12 @@ type MarketplaceDealsInsertResource =
 -- | Add new deals for the specified proposal
 --
 -- /See:/ 'marketplaceDealsInsert' smart constructor.
-data MarketplaceDealsInsert = MarketplaceDealsInsert'
+data MarketplaceDealsInsert =
+  MarketplaceDealsInsert'
     { _mdiPayload    :: !AddOrderDealsRequest
     , _mdiProposalId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MarketplaceDealsInsert' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ marketplaceDealsInsert
     -> Text -- ^ 'mdiProposalId'
     -> MarketplaceDealsInsert
 marketplaceDealsInsert pMdiPayload_ pMdiProposalId_ =
-    MarketplaceDealsInsert'
-    { _mdiPayload = pMdiPayload_
-    , _mdiProposalId = pMdiProposalId_
-    }
+  MarketplaceDealsInsert'
+    {_mdiPayload = pMdiPayload_, _mdiProposalId = pMdiProposalId_}
 
 -- | Multipart request metadata.
 mdiPayload :: Lens' MarketplaceDealsInsert AddOrderDealsRequest

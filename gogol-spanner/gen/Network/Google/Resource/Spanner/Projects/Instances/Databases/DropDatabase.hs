@@ -59,14 +59,16 @@ type ProjectsInstancesDatabasesDropDatabaseResource =
 -- | Drops (aka deletes) a Cloud Spanner database.
 --
 -- /See:/ 'projectsInstancesDatabasesDropDatabase' smart constructor.
-data ProjectsInstancesDatabasesDropDatabase = ProjectsInstancesDatabasesDropDatabase'
+data ProjectsInstancesDatabasesDropDatabase =
+  ProjectsInstancesDatabasesDropDatabase'
     { _pidddXgafv          :: !(Maybe Xgafv)
     , _pidddUploadProtocol :: !(Maybe Text)
     , _pidddDatabase       :: !Text
     , _pidddAccessToken    :: !(Maybe Text)
     , _pidddUploadType     :: !(Maybe Text)
     , _pidddCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesDropDatabase' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsInstancesDatabasesDropDatabase
     :: Text -- ^ 'pidddDatabase'
     -> ProjectsInstancesDatabasesDropDatabase
 projectsInstancesDatabasesDropDatabase pPidddDatabase_ =
-    ProjectsInstancesDatabasesDropDatabase'
+  ProjectsInstancesDatabasesDropDatabase'
     { _pidddXgafv = Nothing
     , _pidddUploadProtocol = Nothing
     , _pidddDatabase = pPidddDatabase_
@@ -132,7 +134,8 @@ pidddCallback
       (\ s a -> s{_pidddCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesDropDatabase where
+           ProjectsInstancesDatabasesDropDatabase
+         where
         type Rs ProjectsInstancesDatabasesDropDatabase =
              Empty
         type Scopes ProjectsInstancesDatabasesDropDatabase =

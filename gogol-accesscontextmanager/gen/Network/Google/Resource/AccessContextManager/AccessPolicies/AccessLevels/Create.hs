@@ -68,7 +68,8 @@ type AccessPoliciesAccessLevelsCreateResource =
 -- error response for the first error encountered.
 --
 -- /See:/ 'accessPoliciesAccessLevelsCreate' smart constructor.
-data AccessPoliciesAccessLevelsCreate = AccessPoliciesAccessLevelsCreate'
+data AccessPoliciesAccessLevelsCreate =
+  AccessPoliciesAccessLevelsCreate'
     { _apalcParent         :: !Text
     , _apalcXgafv          :: !(Maybe Xgafv)
     , _apalcUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,8 @@ data AccessPoliciesAccessLevelsCreate = AccessPoliciesAccessLevelsCreate'
     , _apalcUploadType     :: !(Maybe Text)
     , _apalcPayload        :: !AccessLevel
     , _apalcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccessPoliciesAccessLevelsCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +102,7 @@ accessPoliciesAccessLevelsCreate
     -> AccessLevel -- ^ 'apalcPayload'
     -> AccessPoliciesAccessLevelsCreate
 accessPoliciesAccessLevelsCreate pApalcParent_ pApalcPayload_ =
-    AccessPoliciesAccessLevelsCreate'
+  AccessPoliciesAccessLevelsCreate'
     { _apalcParent = pApalcParent_
     , _apalcXgafv = Nothing
     , _apalcUploadProtocol = Nothing
@@ -151,7 +153,8 @@ apalcCallback
       (\ s a -> s{_apalcCallback = a})
 
 instance GoogleRequest
-         AccessPoliciesAccessLevelsCreate where
+           AccessPoliciesAccessLevelsCreate
+         where
         type Rs AccessPoliciesAccessLevelsCreate = Operation
         type Scopes AccessPoliciesAccessLevelsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

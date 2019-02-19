@@ -59,12 +59,14 @@ type RegionBackendServicesDeleteResource =
 -- | Deletes the specified regional BackendService resource.
 --
 -- /See:/ 'regionBackendServicesDelete' smart constructor.
-data RegionBackendServicesDelete = RegionBackendServicesDelete'
+data RegionBackendServicesDelete =
+  RegionBackendServicesDelete'
     { _rbsdRequestId      :: !(Maybe Text)
     , _rbsdProject        :: !Text
     , _rbsdRegion         :: !Text
     , _rbsdBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionBackendServicesDelete' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ regionBackendServicesDelete
     -> Text -- ^ 'rbsdBackendService'
     -> RegionBackendServicesDelete
 regionBackendServicesDelete pRbsdProject_ pRbsdRegion_ pRbsdBackendService_ =
-    RegionBackendServicesDelete'
+  RegionBackendServicesDelete'
     { _rbsdRequestId = Nothing
     , _rbsdProject = pRbsdProject_
     , _rbsdRegion = pRbsdRegion_

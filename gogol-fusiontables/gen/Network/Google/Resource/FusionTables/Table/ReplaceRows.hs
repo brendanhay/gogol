@@ -79,14 +79,16 @@ type TableReplaceRowsResource =
 -- all replacement rows are ready.
 --
 -- /See:/ 'tableReplaceRows' smart constructor.
-data TableReplaceRows = TableReplaceRows'
+data TableReplaceRows =
+  TableReplaceRows'
     { _trrStartLine :: !(Maybe (Textual Int32))
     , _trrEndLine   :: !(Maybe (Textual Int32))
     , _trrTableId   :: !Text
     , _trrDelimiter :: !(Maybe Text)
     , _trrEncoding  :: !(Maybe Text)
     , _trrIsStrict  :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableReplaceRows' with the minimum fields required to make a request.
 --
@@ -107,7 +109,7 @@ tableReplaceRows
     :: Text -- ^ 'trrTableId'
     -> TableReplaceRows
 tableReplaceRows pTrrTableId_ =
-    TableReplaceRows'
+  TableReplaceRows'
     { _trrStartLine = Nothing
     , _trrEndLine = Nothing
     , _trrTableId = pTrrTableId_

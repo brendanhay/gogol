@@ -65,7 +65,8 @@ type SettingsSearchApplicationsResetResource =
 -- empty response.
 --
 -- /See:/ 'settingsSearchApplicationsReset' smart constructor.
-data SettingsSearchApplicationsReset = SettingsSearchApplicationsReset'
+data SettingsSearchApplicationsReset =
+  SettingsSearchApplicationsReset'
     { _ssarXgafv          :: !(Maybe Xgafv)
     , _ssarUploadProtocol :: !(Maybe Text)
     , _ssarAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data SettingsSearchApplicationsReset = SettingsSearchApplicationsReset'
     , _ssarPayload        :: !ResetSearchApplicationRequest
     , _ssarName           :: !Text
     , _ssarCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SettingsSearchApplicationsReset' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ settingsSearchApplicationsReset
     -> Text -- ^ 'ssarName'
     -> SettingsSearchApplicationsReset
 settingsSearchApplicationsReset pSsarPayload_ pSsarName_ =
-    SettingsSearchApplicationsReset'
+  SettingsSearchApplicationsReset'
     { _ssarXgafv = Nothing
     , _ssarUploadProtocol = Nothing
     , _ssarAccessToken = Nothing
@@ -146,7 +148,8 @@ ssarCallback
   = lens _ssarCallback (\ s a -> s{_ssarCallback = a})
 
 instance GoogleRequest
-         SettingsSearchApplicationsReset where
+           SettingsSearchApplicationsReset
+         where
         type Rs SettingsSearchApplicationsReset = Operation
         type Scopes SettingsSearchApplicationsReset =
              '["https://www.googleapis.com/auth/cloud_search",

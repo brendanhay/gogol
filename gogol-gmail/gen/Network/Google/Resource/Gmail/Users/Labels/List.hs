@@ -53,9 +53,11 @@ type UsersLabelsListResource =
 -- | Lists all labels in the user\'s mailbox.
 --
 -- /See:/ 'usersLabelsList' smart constructor.
-newtype UsersLabelsList = UsersLabelsList'
+newtype UsersLabelsList =
+  UsersLabelsList'
     { _ullUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersLabelsList' with the minimum fields required to make a request.
 --
@@ -64,10 +66,7 @@ newtype UsersLabelsList = UsersLabelsList'
 -- * 'ullUserId'
 usersLabelsList
     :: UsersLabelsList
-usersLabelsList =
-    UsersLabelsList'
-    { _ullUserId = "me"
-    }
+usersLabelsList = UsersLabelsList' {_ullUserId = "me"}
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

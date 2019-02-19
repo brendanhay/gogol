@@ -78,7 +78,8 @@ type ProjectsLocationsJobsMessagesListResource =
 -- | Request the job status.
 --
 -- /See:/ 'projectsLocationsJobsMessagesList' smart constructor.
-data ProjectsLocationsJobsMessagesList = ProjectsLocationsJobsMessagesList'
+data ProjectsLocationsJobsMessagesList =
+  ProjectsLocationsJobsMessagesList'
     { _pljmlXgafv             :: !(Maybe Xgafv)
     , _pljmlJobId             :: !Text
     , _pljmlUploadProtocol    :: !(Maybe Text)
@@ -92,7 +93,8 @@ data ProjectsLocationsJobsMessagesList = ProjectsLocationsJobsMessagesList'
     , _pljmlProjectId         :: !Text
     , _pljmlPageSize          :: !(Maybe (Textual Int32))
     , _pljmlCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsJobsMessagesList' with the minimum fields required to make a request.
 --
@@ -129,7 +131,7 @@ projectsLocationsJobsMessagesList
     -> Text -- ^ 'pljmlProjectId'
     -> ProjectsLocationsJobsMessagesList
 projectsLocationsJobsMessagesList pPljmlJobId_ pPljmlLocation_ pPljmlProjectId_ =
-    ProjectsLocationsJobsMessagesList'
+  ProjectsLocationsJobsMessagesList'
     { _pljmlXgafv = Nothing
     , _pljmlJobId = pPljmlJobId_
     , _pljmlUploadProtocol = Nothing
@@ -229,7 +231,8 @@ pljmlCallback
       (\ s a -> s{_pljmlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsJobsMessagesList where
+           ProjectsLocationsJobsMessagesList
+         where
         type Rs ProjectsLocationsJobsMessagesList =
              ListJobMessagesResponse
         type Scopes ProjectsLocationsJobsMessagesList =

@@ -72,7 +72,8 @@ type SpreadsheetsValuesBatchGetResource =
 -- specify the spreadsheet ID and one or more ranges.
 --
 -- /See:/ 'spreadsheetsValuesBatchGet' smart constructor.
-data SpreadsheetsValuesBatchGet = SpreadsheetsValuesBatchGet'
+data SpreadsheetsValuesBatchGet =
+  SpreadsheetsValuesBatchGet'
     { _svbgXgafv                :: !(Maybe Xgafv)
     , _svbgValueRenderOption    :: !(Maybe Text)
     , _svbgUploadProtocol       :: !(Maybe Text)
@@ -83,7 +84,8 @@ data SpreadsheetsValuesBatchGet = SpreadsheetsValuesBatchGet'
     , _svbgDateTimeRenderOption :: !(Maybe Text)
     , _svbgMajorDimension       :: !(Maybe Text)
     , _svbgCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SpreadsheetsValuesBatchGet' with the minimum fields required to make a request.
 --
@@ -112,7 +114,7 @@ spreadsheetsValuesBatchGet
     :: Text -- ^ 'svbgSpreadsheetId'
     -> SpreadsheetsValuesBatchGet
 spreadsheetsValuesBatchGet pSvbgSpreadsheetId_ =
-    SpreadsheetsValuesBatchGet'
+  SpreadsheetsValuesBatchGet'
     { _svbgXgafv = Nothing
     , _svbgValueRenderOption = Nothing
     , _svbgUploadProtocol = Nothing

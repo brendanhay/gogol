@@ -61,12 +61,14 @@ type ManagementWebPropertyAdWordsLinksListResource =
 -- | Lists webProperty-AdWords links for a given web property.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksList' smart constructor.
-data ManagementWebPropertyAdWordsLinksList = ManagementWebPropertyAdWordsLinksList'
+data ManagementWebPropertyAdWordsLinksList =
+  ManagementWebPropertyAdWordsLinksList'
     { _mwpawllWebPropertyId :: !Text
     , _mwpawllAccountId     :: !Text
     , _mwpawllStartIndex    :: !(Maybe (Textual Int32))
     , _mwpawllMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksList' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ managementWebPropertyAdWordsLinksList
     -> Text -- ^ 'mwpawllAccountId'
     -> ManagementWebPropertyAdWordsLinksList
 managementWebPropertyAdWordsLinksList pMwpawllWebPropertyId_ pMwpawllAccountId_ =
-    ManagementWebPropertyAdWordsLinksList'
+  ManagementWebPropertyAdWordsLinksList'
     { _mwpawllWebPropertyId = pMwpawllWebPropertyId_
     , _mwpawllAccountId = pMwpawllAccountId_
     , _mwpawllStartIndex = Nothing
@@ -121,7 +123,8 @@ mwpawllMaxResults
       . mapping _Coerce
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksList where
+           ManagementWebPropertyAdWordsLinksList
+         where
         type Rs ManagementWebPropertyAdWordsLinksList =
              EntityAdWordsLinks
         type Scopes ManagementWebPropertyAdWordsLinksList =

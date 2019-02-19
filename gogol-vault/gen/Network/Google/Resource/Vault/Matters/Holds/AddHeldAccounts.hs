@@ -70,7 +70,8 @@ type MattersHoldsAddHeldAccountsResource =
 -- account-based hold.
 --
 -- /See:/ 'mattersHoldsAddHeldAccounts' smart constructor.
-data MattersHoldsAddHeldAccounts = MattersHoldsAddHeldAccounts'
+data MattersHoldsAddHeldAccounts =
+  MattersHoldsAddHeldAccounts'
     { _mhahaXgafv          :: !(Maybe Xgafv)
     , _mhahaUploadProtocol :: !(Maybe Text)
     , _mhahaHoldId         :: !Text
@@ -79,7 +80,8 @@ data MattersHoldsAddHeldAccounts = MattersHoldsAddHeldAccounts'
     , _mhahaPayload        :: !AddHeldAccountsRequest
     , _mhahaMatterId       :: !Text
     , _mhahaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MattersHoldsAddHeldAccounts' with the minimum fields required to make a request.
 --
@@ -106,7 +108,7 @@ mattersHoldsAddHeldAccounts
     -> Text -- ^ 'mhahaMatterId'
     -> MattersHoldsAddHeldAccounts
 mattersHoldsAddHeldAccounts pMhahaHoldId_ pMhahaPayload_ pMhahaMatterId_ =
-    MattersHoldsAddHeldAccounts'
+  MattersHoldsAddHeldAccounts'
     { _mhahaXgafv = Nothing
     , _mhahaUploadProtocol = Nothing
     , _mhahaHoldId = pMhahaHoldId_

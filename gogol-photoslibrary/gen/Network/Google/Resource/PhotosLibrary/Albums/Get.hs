@@ -64,7 +64,8 @@ type AlbumsGetResource =
 -- | Returns the album specified by the given album id.
 --
 -- /See:/ 'albumsGet' smart constructor.
-data AlbumsGet = AlbumsGet'
+data AlbumsGet =
+  AlbumsGet'
     { _agXgafv          :: !(Maybe Xgafv)
     , _agAlbumId        :: !Text
     , _agUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data AlbumsGet = AlbumsGet'
     , _agUploadType     :: !(Maybe Text)
     , _agBearerToken    :: !(Maybe Text)
     , _agCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AlbumsGet' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ albumsGet
     :: Text -- ^ 'agAlbumId'
     -> AlbumsGet
 albumsGet pAgAlbumId_ =
-    AlbumsGet'
+  AlbumsGet'
     { _agXgafv = Nothing
     , _agAlbumId = pAgAlbumId_
     , _agUploadProtocol = Nothing

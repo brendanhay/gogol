@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'DynamicTargetingKeysInsert' request conforms to.
 type DynamicTargetingKeysInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dynamicTargetingKeys" :>
@@ -63,10 +63,12 @@ type DynamicTargetingKeysInsertResource =
 -- creative, or placement.
 --
 -- /See:/ 'dynamicTargetingKeysInsert' smart constructor.
-data DynamicTargetingKeysInsert = DynamicTargetingKeysInsert'
+data DynamicTargetingKeysInsert =
+  DynamicTargetingKeysInsert'
     { _dtkiProFileId :: !(Textual Int64)
     , _dtkiPayload   :: !DynamicTargetingKey
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DynamicTargetingKeysInsert' with the minimum fields required to make a request.
 --
@@ -80,10 +82,8 @@ dynamicTargetingKeysInsert
     -> DynamicTargetingKey -- ^ 'dtkiPayload'
     -> DynamicTargetingKeysInsert
 dynamicTargetingKeysInsert pDtkiProFileId_ pDtkiPayload_ =
-    DynamicTargetingKeysInsert'
-    { _dtkiProFileId = _Coerce # pDtkiProFileId_
-    , _dtkiPayload = pDtkiPayload_
-    }
+  DynamicTargetingKeysInsert'
+    {_dtkiProFileId = _Coerce # pDtkiProFileId_, _dtkiPayload = pDtkiPayload_}
 
 -- | User profile ID associated with this request.
 dtkiProFileId :: Lens' DynamicTargetingKeysInsert Int64

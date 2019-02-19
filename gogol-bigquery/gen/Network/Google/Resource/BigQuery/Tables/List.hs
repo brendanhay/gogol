@@ -61,12 +61,14 @@ type TablesListResource =
 -- role.
 --
 -- /See:/ 'tablesList' smart constructor.
-data TablesList = TablesList'
+data TablesList =
+  TablesList'
     { _tlDataSetId  :: !Text
     , _tlPageToken  :: !(Maybe Text)
     , _tlProjectId  :: !Text
     , _tlMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TablesList' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ tablesList
     -> Text -- ^ 'tlProjectId'
     -> TablesList
 tablesList pTlDataSetId_ pTlProjectId_ =
-    TablesList'
+  TablesList'
     { _tlDataSetId = pTlDataSetId_
     , _tlPageToken = Nothing
     , _tlProjectId = pTlProjectId_

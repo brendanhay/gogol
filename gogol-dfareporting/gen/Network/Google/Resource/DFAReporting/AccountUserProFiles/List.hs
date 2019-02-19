@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesList' request conforms to.
 type AccountUserProFilesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
@@ -77,7 +77,8 @@ type AccountUserProFilesListResource =
 -- method supports paging.
 --
 -- /See:/ 'accountUserProFilesList' smart constructor.
-data AccountUserProFilesList = AccountUserProFilesList'
+data AccountUserProFilesList =
+  AccountUserProFilesList'
     { _aupflUserRoleId   :: !(Maybe (Textual Int64))
     , _aupflSearchString :: !(Maybe Text)
     , _aupflIds          :: !(Maybe [Textual Int64])
@@ -88,7 +89,8 @@ data AccountUserProFilesList = AccountUserProFilesList'
     , _aupflSortField    :: !AccountUserProFilesListSortField
     , _aupflSubAccountId :: !(Maybe (Textual Int64))
     , _aupflMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountUserProFilesList' with the minimum fields required to make a request.
 --
@@ -117,7 +119,7 @@ accountUserProFilesList
     :: Int64 -- ^ 'aupflProFileId'
     -> AccountUserProFilesList
 accountUserProFilesList pAupflProFileId_ =
-    AccountUserProFilesList'
+  AccountUserProFilesList'
     { _aupflUserRoleId = Nothing
     , _aupflSearchString = Nothing
     , _aupflIds = Nothing

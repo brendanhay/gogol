@@ -55,9 +55,11 @@ type TaskListsInsertResource =
 -- lists.
 --
 -- /See:/ 'taskListsInsert' smart constructor.
-newtype TaskListsInsert = TaskListsInsert'
+newtype TaskListsInsert =
+  TaskListsInsert'
     { _tliPayload :: TaskList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TaskListsInsert' with the minimum fields required to make a request.
 --
@@ -67,10 +69,7 @@ newtype TaskListsInsert = TaskListsInsert'
 taskListsInsert
     :: TaskList -- ^ 'tliPayload'
     -> TaskListsInsert
-taskListsInsert pTliPayload_ =
-    TaskListsInsert'
-    { _tliPayload = pTliPayload_
-    }
+taskListsInsert pTliPayload_ = TaskListsInsert' {_tliPayload = pTliPayload_}
 
 -- | Multipart request metadata.
 tliPayload :: Lens' TaskListsInsert TaskList

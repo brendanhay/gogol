@@ -64,13 +64,15 @@ type ManagementProFileFilterLinksUpdateResource =
 -- | Update an existing profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksUpdate' smart constructor.
-data ManagementProFileFilterLinksUpdate = ManagementProFileFilterLinksUpdate'
+data ManagementProFileFilterLinksUpdate =
+  ManagementProFileFilterLinksUpdate'
     { _mpffluWebPropertyId :: !Text
     , _mpffluProFileId     :: !Text
     , _mpffluPayload       :: !ProFileFilterLink
     , _mpffluAccountId     :: !Text
     , _mpffluLinkId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksUpdate' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ managementProFileFilterLinksUpdate
     -> Text -- ^ 'mpffluLinkId'
     -> ManagementProFileFilterLinksUpdate
 managementProFileFilterLinksUpdate pMpffluWebPropertyId_ pMpffluProFileId_ pMpffluPayload_ pMpffluAccountId_ pMpffluLinkId_ =
-    ManagementProFileFilterLinksUpdate'
+  ManagementProFileFilterLinksUpdate'
     { _mpffluWebPropertyId = pMpffluWebPropertyId_
     , _mpffluProFileId = pMpffluProFileId_
     , _mpffluPayload = pMpffluPayload_
@@ -131,7 +133,8 @@ mpffluLinkId
   = lens _mpffluLinkId (\ s a -> s{_mpffluLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileFilterLinksUpdate where
+           ManagementProFileFilterLinksUpdate
+         where
         type Rs ManagementProFileFilterLinksUpdate =
              ProFileFilterLink
         type Scopes ManagementProFileFilterLinksUpdate =

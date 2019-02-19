@@ -59,11 +59,13 @@ type RoutersGetResource =
 -- by making a list() request.
 --
 -- /See:/ 'routersGet' smart constructor.
-data RoutersGet = RoutersGet'
+data RoutersGet =
+  RoutersGet'
     { _rggProject :: !Text
     , _rggRouter  :: !Text
     , _rggRegion  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutersGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ routersGet
     -> Text -- ^ 'rggRegion'
     -> RoutersGet
 routersGet pRggProject_ pRggRouter_ pRggRegion_ =
-    RoutersGet'
+  RoutersGet'
     { _rggProject = pRggProject_
     , _rggRouter = pRggRouter_
     , _rggRegion = pRggRegion_

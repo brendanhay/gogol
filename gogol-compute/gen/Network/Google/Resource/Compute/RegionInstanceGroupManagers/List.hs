@@ -66,14 +66,16 @@ type RegionInstanceGroupManagersListResource =
 -- the specified region.
 --
 -- /See:/ 'regionInstanceGroupManagersList' smart constructor.
-data RegionInstanceGroupManagersList = RegionInstanceGroupManagersList'
+data RegionInstanceGroupManagersList =
+  RegionInstanceGroupManagersList'
     { _rigmlOrderBy    :: !(Maybe Text)
     , _rigmlProject    :: !Text
     , _rigmlFilter     :: !(Maybe Text)
     , _rigmlRegion     :: !Text
     , _rigmlPageToken  :: !(Maybe Text)
     , _rigmlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersList' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ regionInstanceGroupManagersList
     -> Text -- ^ 'rigmlRegion'
     -> RegionInstanceGroupManagersList
 regionInstanceGroupManagersList pRigmlProject_ pRigmlRegion_ =
-    RegionInstanceGroupManagersList'
+  RegionInstanceGroupManagersList'
     { _rigmlOrderBy = Nothing
     , _rigmlProject = pRigmlProject_
     , _rigmlFilter = Nothing
@@ -165,7 +167,8 @@ rigmlMaxResults
       . _Coerce
 
 instance GoogleRequest
-         RegionInstanceGroupManagersList where
+           RegionInstanceGroupManagersList
+         where
         type Rs RegionInstanceGroupManagersList =
              RegionInstanceGroupManagerList
         type Scopes RegionInstanceGroupManagersList =

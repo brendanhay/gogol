@@ -61,14 +61,16 @@ type ProjectsReposGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsReposGetIAMPolicy' smart constructor.
-data ProjectsReposGetIAMPolicy = ProjectsReposGetIAMPolicy'
+data ProjectsReposGetIAMPolicy =
+  ProjectsReposGetIAMPolicy'
     { _prgipXgafv          :: !(Maybe Xgafv)
     , _prgipUploadProtocol :: !(Maybe Text)
     , _prgipAccessToken    :: !(Maybe Text)
     , _prgipUploadType     :: !(Maybe Text)
     , _prgipResource       :: !Text
     , _prgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsReposGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsReposGetIAMPolicy
     :: Text -- ^ 'prgipResource'
     -> ProjectsReposGetIAMPolicy
 projectsReposGetIAMPolicy pPrgipResource_ =
-    ProjectsReposGetIAMPolicy'
+  ProjectsReposGetIAMPolicy'
     { _prgipXgafv = Nothing
     , _prgipUploadProtocol = Nothing
     , _prgipAccessToken = Nothing

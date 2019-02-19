@@ -64,14 +64,16 @@ type AccountsCustomChannelsAdUnitsListResource =
 -- | List all ad units in the specified custom channel.
 --
 -- /See:/ 'accountsCustomChannelsAdUnitsList' smart constructor.
-data AccountsCustomChannelsAdUnitsList = AccountsCustomChannelsAdUnitsList'
+data AccountsCustomChannelsAdUnitsList =
+  AccountsCustomChannelsAdUnitsList'
     { _accaulIncludeInactive :: !(Maybe Bool)
     , _accaulCustomChannelId :: !Text
     , _accaulAdClientId      :: !Text
     , _accaulAccountId       :: !Text
     , _accaulPageToken       :: !(Maybe Text)
     , _accaulMaxResults      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsCustomChannelsAdUnitsList' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ accountsCustomChannelsAdUnitsList
     -> Text -- ^ 'accaulAccountId'
     -> AccountsCustomChannelsAdUnitsList
 accountsCustomChannelsAdUnitsList pAccaulCustomChannelId_ pAccaulAdClientId_ pAccaulAccountId_ =
-    AccountsCustomChannelsAdUnitsList'
+  AccountsCustomChannelsAdUnitsList'
     { _accaulIncludeInactive = Nothing
     , _accaulCustomChannelId = pAccaulCustomChannelId_
     , _accaulAdClientId = pAccaulAdClientId_
@@ -144,7 +146,8 @@ accaulMaxResults
       . mapping _Coerce
 
 instance GoogleRequest
-         AccountsCustomChannelsAdUnitsList where
+           AccountsCustomChannelsAdUnitsList
+         where
         type Rs AccountsCustomChannelsAdUnitsList = AdUnits
         type Scopes AccountsCustomChannelsAdUnitsList =
              '["https://www.googleapis.com/auth/adsense",

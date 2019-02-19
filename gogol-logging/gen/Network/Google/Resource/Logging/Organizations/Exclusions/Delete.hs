@@ -59,14 +59,16 @@ type OrganizationsExclusionsDeleteResource =
 -- | Deletes an exclusion.
 --
 -- /See:/ 'organizationsExclusionsDelete' smart constructor.
-data OrganizationsExclusionsDelete = OrganizationsExclusionsDelete'
+data OrganizationsExclusionsDelete =
+  OrganizationsExclusionsDelete'
     { _oedXgafv          :: !(Maybe Xgafv)
     , _oedUploadProtocol :: !(Maybe Text)
     , _oedAccessToken    :: !(Maybe Text)
     , _oedUploadType     :: !(Maybe Text)
     , _oedName           :: !Text
     , _oedCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsExclusionsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ organizationsExclusionsDelete
     :: Text -- ^ 'oedName'
     -> OrganizationsExclusionsDelete
 organizationsExclusionsDelete pOedName_ =
-    OrganizationsExclusionsDelete'
+  OrganizationsExclusionsDelete'
     { _oedXgafv = Nothing
     , _oedUploadProtocol = Nothing
     , _oedAccessToken = Nothing

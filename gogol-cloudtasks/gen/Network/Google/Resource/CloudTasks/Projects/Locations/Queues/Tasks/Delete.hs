@@ -63,14 +63,16 @@ type ProjectsLocationsQueuesTasksDeleteResource =
 -- failed.
 --
 -- /See:/ 'projectsLocationsQueuesTasksDelete' smart constructor.
-data ProjectsLocationsQueuesTasksDelete = ProjectsLocationsQueuesTasksDelete'
+data ProjectsLocationsQueuesTasksDelete =
+  ProjectsLocationsQueuesTasksDelete'
     { _plqtdXgafv          :: !(Maybe Xgafv)
     , _plqtdUploadProtocol :: !(Maybe Text)
     , _plqtdAccessToken    :: !(Maybe Text)
     , _plqtdUploadType     :: !(Maybe Text)
     , _plqtdName           :: !Text
     , _plqtdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsQueuesTasksDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ projectsLocationsQueuesTasksDelete
     :: Text -- ^ 'plqtdName'
     -> ProjectsLocationsQueuesTasksDelete
 projectsLocationsQueuesTasksDelete pPlqtdName_ =
-    ProjectsLocationsQueuesTasksDelete'
+  ProjectsLocationsQueuesTasksDelete'
     { _plqtdXgafv = Nothing
     , _plqtdUploadProtocol = Nothing
     , _plqtdAccessToken = Nothing
@@ -136,7 +138,8 @@ plqtdCallback
       (\ s a -> s{_plqtdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsQueuesTasksDelete where
+           ProjectsLocationsQueuesTasksDelete
+         where
         type Rs ProjectsLocationsQueuesTasksDelete = Empty
         type Scopes ProjectsLocationsQueuesTasksDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]

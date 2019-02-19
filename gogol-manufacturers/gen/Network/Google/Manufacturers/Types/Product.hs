@@ -23,11 +23,13 @@ import           Network.Google.Prelude
 -- | An image.
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image'
+data Image =
+  Image'
     { _iStatus   :: !(Maybe ImageStatus)
     , _iImageURL :: !(Maybe Text)
     , _iType     :: !(Maybe ImageType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -40,12 +42,7 @@ data Image = Image'
 -- * 'iType'
 image
     :: Image
-image =
-    Image'
-    { _iStatus = Nothing
-    , _iImageURL = Nothing
-    , _iType = Nothing
-    }
+image = Image' {_iStatus = Nothing, _iImageURL = Nothing, _iType = Nothing}
 
 -- | The status of the image. \'OutputOnly
 iStatus :: Lens' Image (Maybe ImageStatus)
@@ -82,11 +79,13 @@ instance ToJSON Image where
 -- https:\/\/support.google.com\/manufacturers\/answer\/6124116#featuredesc.
 --
 -- /See:/ 'featureDescription' smart constructor.
-data FeatureDescription = FeatureDescription'
+data FeatureDescription =
+  FeatureDescription'
     { _fdImage    :: !(Maybe Image)
     , _fdText     :: !(Maybe Text)
     , _fdHeadline :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FeatureDescription' with the minimum fields required to make a request.
 --
@@ -100,11 +99,8 @@ data FeatureDescription = FeatureDescription'
 featureDescription
     :: FeatureDescription
 featureDescription =
-    FeatureDescription'
-    { _fdImage = Nothing
-    , _fdText = Nothing
-    , _fdHeadline = Nothing
-    }
+  FeatureDescription'
+    {_fdImage = Nothing, _fdText = Nothing, _fdHeadline = Nothing}
 
 -- | An optional image describing the feature.
 fdImage :: Lens' FeatureDescription (Maybe Image)
@@ -138,11 +134,13 @@ instance ToJSON FeatureDescription where
 -- https:\/\/support.google.com\/manufacturers\/answer\/6124116#productdetail.
 --
 -- /See:/ 'productDetail' smart constructor.
-data ProductDetail = ProductDetail'
+data ProductDetail =
+  ProductDetail'
     { _pdAttributeValue :: !(Maybe Text)
     , _pdAttributeName  :: !(Maybe Text)
     , _pdSectionName    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProductDetail' with the minimum fields required to make a request.
 --
@@ -156,7 +154,7 @@ data ProductDetail = ProductDetail'
 productDetail
     :: ProductDetail
 productDetail =
-    ProductDetail'
+  ProductDetail'
     { _pdAttributeValue = Nothing
     , _pdAttributeName = Nothing
     , _pdSectionName = Nothing
@@ -205,8 +203,8 @@ instance ToJSON ProductDetail where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -223,10 +221,12 @@ instance ToJSON Empty where
 -- | The destination status.
 --
 -- /See:/ 'destinationStatus' smart constructor.
-data DestinationStatus = DestinationStatus'
+data DestinationStatus =
+  DestinationStatus'
     { _dsDestination :: !(Maybe Text)
     , _dsStatus      :: !(Maybe DestinationStatusStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DestinationStatus' with the minimum fields required to make a request.
 --
@@ -238,10 +238,7 @@ data DestinationStatus = DestinationStatus'
 destinationStatus
     :: DestinationStatus
 destinationStatus =
-    DestinationStatus'
-    { _dsDestination = Nothing
-    , _dsStatus = Nothing
-    }
+  DestinationStatus' {_dsDestination = Nothing, _dsStatus = Nothing}
 
 -- | The name of the destination.
 dsDestination :: Lens' DestinationStatus (Maybe Text)
@@ -271,10 +268,12 @@ instance ToJSON DestinationStatus where
 -- https:\/\/support.google.com\/manufacturers\/answer\/6124116#count.
 --
 -- /See:/ 'count' smart constructor.
-data Count = Count'
+data Count =
+  Count'
     { _cValue :: !(Maybe (Textual Int64))
     , _cUnit  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Count' with the minimum fields required to make a request.
 --
@@ -285,11 +284,7 @@ data Count = Count'
 -- * 'cUnit'
 count
     :: Count
-count =
-    Count'
-    { _cValue = Nothing
-    , _cUnit = Nothing
-    }
+count = Count' {_cValue = Nothing, _cUnit = Nothing}
 
 -- | The numeric value of the number of products in a package.
 cValue :: Lens' Count (Maybe Int64)
@@ -317,10 +312,12 @@ instance ToJSON Count where
 -- https:\/\/support.google.com\/manufacturers\/answer\/6124116#capacity.
 --
 -- /See:/ 'capacity' smart constructor.
-data Capacity = Capacity'
+data Capacity =
+  Capacity'
     { _capValue :: !(Maybe (Textual Int64))
     , _capUnit  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Capacity' with the minimum fields required to make a request.
 --
@@ -331,11 +328,7 @@ data Capacity = Capacity'
 -- * 'capUnit'
 capacity
     :: Capacity
-capacity =
-    Capacity'
-    { _capValue = Nothing
-    , _capUnit = Nothing
-    }
+capacity = Capacity' {_capValue = Nothing, _capUnit = Nothing}
 
 -- | The numeric value of the capacity.
 capValue :: Lens' Capacity (Maybe Int64)
@@ -364,7 +357,8 @@ instance ToJSON Capacity where
 -- https:\/\/support.google.com\/manufacturers\/answer\/6124116.
 --
 -- /See:/ 'attributes' smart constructor.
-data Attributes = Attributes'
+data Attributes =
+  Attributes'
     { _aProductName          :: !(Maybe Text)
     , _aScent                :: !(Maybe Text)
     , _aImageLink            :: !(Maybe Image)
@@ -400,7 +394,8 @@ data Attributes = Attributes'
     , _aProductPageURL       :: !(Maybe Text)
     , _aDescription          :: !(Maybe Text)
     , _aTheme                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Attributes' with the minimum fields required to make a request.
 --
@@ -478,7 +473,7 @@ data Attributes = Attributes'
 attributes
     :: Attributes
 attributes =
-    Attributes'
+  Attributes'
     { _aProductName = Nothing
     , _aScent = Nothing
     , _aImageLink = Nothing
@@ -820,10 +815,12 @@ instance ToJSON Attributes where
 -- | A price.
 --
 -- /See:/ 'price' smart constructor.
-data Price = Price'
+data Price =
+  Price'
     { _pAmount   :: !(Maybe Text)
     , _pCurrency :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
@@ -834,11 +831,7 @@ data Price = Price'
 -- * 'pCurrency'
 price
     :: Price
-price =
-    Price'
-    { _pAmount = Nothing
-    , _pCurrency = Nothing
-    }
+price = Price' {_pAmount = Nothing, _pCurrency = Nothing}
 
 -- | The numeric value of the price.
 pAmount :: Lens' Price (Maybe Text)
@@ -865,7 +858,8 @@ instance ToJSON Price where
 -- | Product data.
 --
 -- /See:/ 'product' smart constructor.
-data Product = Product'
+data Product =
+  Product'
     { _pParent              :: !(Maybe Text)
     , _pDestinationStatuses :: !(Maybe [DestinationStatus])
     , _pTargetCountry       :: !(Maybe Text)
@@ -874,7 +868,8 @@ data Product = Product'
     , _pIssues              :: !(Maybe [Issue])
     , _pContentLanguage     :: !(Maybe Text)
     , _pProductId           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
@@ -898,7 +893,7 @@ data Product = Product'
 product
     :: Product
 product =
-    Product'
+  Product'
     { _pParent = Nothing
     , _pDestinationStatuses = Nothing
     , _pTargetCountry = Nothing
@@ -994,7 +989,8 @@ instance ToJSON Product where
 -- | Product issue.
 --
 -- /See:/ 'issue' smart constructor.
-data Issue = Issue'
+data Issue =
+  Issue'
     { _issAttribute   :: !(Maybe Text)
     , _issDestination :: !(Maybe Text)
     , _issSeverity    :: !(Maybe IssueSeverity)
@@ -1003,7 +999,8 @@ data Issue = Issue'
     , _issType        :: !(Maybe Text)
     , _issTimestamp   :: !(Maybe DateTime')
     , _issDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Issue' with the minimum fields required to make a request.
 --
@@ -1027,7 +1024,7 @@ data Issue = Issue'
 issue
     :: Issue
 issue =
-    Issue'
+  Issue'
     { _issAttribute = Nothing
     , _issDestination = Nothing
     , _issSeverity = Nothing
@@ -1110,10 +1107,12 @@ instance ToJSON Issue where
 
 --
 -- /See:/ 'listProductsResponse' smart constructor.
-data ListProductsResponse = ListProductsResponse'
+data ListProductsResponse =
+  ListProductsResponse'
     { _lprNextPageToken :: !(Maybe Text)
     , _lprProducts      :: !(Maybe [Product])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListProductsResponse' with the minimum fields required to make a request.
 --
@@ -1125,10 +1124,7 @@ data ListProductsResponse = ListProductsResponse'
 listProductsResponse
     :: ListProductsResponse
 listProductsResponse =
-    ListProductsResponse'
-    { _lprNextPageToken = Nothing
-    , _lprProducts = Nothing
-    }
+  ListProductsResponse' {_lprNextPageToken = Nothing, _lprProducts = Nothing}
 
 -- | The token for the retrieval of the next page of product statuses.
 lprNextPageToken :: Lens' ListProductsResponse (Maybe Text)

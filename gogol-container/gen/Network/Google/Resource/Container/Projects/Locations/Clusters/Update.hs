@@ -62,7 +62,8 @@ type ProjectsLocationsClustersUpdateResource =
 -- | Updates the settings of a specific cluster.
 --
 -- /See:/ 'projectsLocationsClustersUpdate' smart constructor.
-data ProjectsLocationsClustersUpdate = ProjectsLocationsClustersUpdate'
+data ProjectsLocationsClustersUpdate =
+  ProjectsLocationsClustersUpdate'
     { _plcuXgafv          :: !(Maybe Xgafv)
     , _plcuUploadProtocol :: !(Maybe Text)
     , _plcuAccessToken    :: !(Maybe Text)
@@ -70,7 +71,8 @@ data ProjectsLocationsClustersUpdate = ProjectsLocationsClustersUpdate'
     , _plcuPayload        :: !UpdateClusterRequest
     , _plcuName           :: !Text
     , _plcuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsClustersUpdate' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsLocationsClustersUpdate
     -> Text -- ^ 'plcuName'
     -> ProjectsLocationsClustersUpdate
 projectsLocationsClustersUpdate pPlcuPayload_ pPlcuName_ =
-    ProjectsLocationsClustersUpdate'
+  ProjectsLocationsClustersUpdate'
     { _plcuXgafv = Nothing
     , _plcuUploadProtocol = Nothing
     , _plcuAccessToken = Nothing
@@ -143,7 +145,8 @@ plcuCallback
   = lens _plcuCallback (\ s a -> s{_plcuCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersUpdate where
+           ProjectsLocationsClustersUpdate
+         where
         type Rs ProjectsLocationsClustersUpdate = Operation
         type Scopes ProjectsLocationsClustersUpdate =
              '["https://www.googleapis.com/auth/cloud-platform"]

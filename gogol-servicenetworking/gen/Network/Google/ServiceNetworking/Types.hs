@@ -545,8 +545,8 @@ serviceNetworkingService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | Manage your Google API service configuration
 serviceManagementScope :: Proxy '["https://www.googleapis.com/auth/service.management"]
-serviceManagementScope = Proxy;
+serviceManagementScope = Proxy

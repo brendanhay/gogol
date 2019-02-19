@@ -51,9 +51,11 @@ type CreativesInsertResource =
 -- | Submit a new creative.
 --
 -- /See:/ 'creativesInsert' smart constructor.
-newtype CreativesInsert = CreativesInsert'
+newtype CreativesInsert =
+  CreativesInsert'
     { _ciPayload :: Creative
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreativesInsert' with the minimum fields required to make a request.
 --
@@ -63,10 +65,7 @@ newtype CreativesInsert = CreativesInsert'
 creativesInsert
     :: Creative -- ^ 'ciPayload'
     -> CreativesInsert
-creativesInsert pCiPayload_ =
-    CreativesInsert'
-    { _ciPayload = pCiPayload_
-    }
+creativesInsert pCiPayload_ = CreativesInsert' {_ciPayload = pCiPayload_}
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CreativesInsert Creative

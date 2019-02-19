@@ -56,9 +56,11 @@ type TableRefetchSheetResource =
 -- rows are ready.
 --
 -- /See:/ 'tableRefetchSheet' smart constructor.
-newtype TableRefetchSheet = TableRefetchSheet'
+newtype TableRefetchSheet =
+  TableRefetchSheet'
     { _trsTableId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TableRefetchSheet' with the minimum fields required to make a request.
 --
@@ -68,10 +70,7 @@ newtype TableRefetchSheet = TableRefetchSheet'
 tableRefetchSheet
     :: Text -- ^ 'trsTableId'
     -> TableRefetchSheet
-tableRefetchSheet pTrsTableId_ =
-    TableRefetchSheet'
-    { _trsTableId = pTrsTableId_
-    }
+tableRefetchSheet pTrsTableId_ = TableRefetchSheet' {_trsTableId = pTrsTableId_}
 
 -- | Table whose rows will be replaced from the spreadsheet.
 trsTableId :: Lens' TableRefetchSheet Text

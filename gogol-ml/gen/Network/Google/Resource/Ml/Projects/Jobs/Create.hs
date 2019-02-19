@@ -63,7 +63,8 @@ type ProjectsJobsCreateResource =
 -- | Creates a training or a batch prediction job.
 --
 -- /See:/ 'projectsJobsCreate' smart constructor.
-data ProjectsJobsCreate = ProjectsJobsCreate'
+data ProjectsJobsCreate =
+  ProjectsJobsCreate'
     { _pParent         :: !Text
     , _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,8 @@ data ProjectsJobsCreate = ProjectsJobsCreate'
     , _pUploadType     :: !(Maybe Text)
     , _pPayload        :: !GoogleCloudMlV1__Job
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsJobsCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +97,7 @@ projectsJobsCreate
     -> GoogleCloudMlV1__Job -- ^ 'pPayload'
     -> ProjectsJobsCreate
 projectsJobsCreate pPParent_ pPPayload_ =
-    ProjectsJobsCreate'
+  ProjectsJobsCreate'
     { _pParent = pPParent_
     , _pXgafv = Nothing
     , _pUploadProtocol = Nothing

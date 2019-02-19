@@ -61,12 +61,14 @@ type TargetPoolsInsertResource =
 -- included in the request.
 --
 -- /See:/ 'targetPoolsInsert' smart constructor.
-data TargetPoolsInsert = TargetPoolsInsert'
+data TargetPoolsInsert =
+  TargetPoolsInsert'
     { _tpiRequestId :: !(Maybe Text)
     , _tpiProject   :: !Text
     , _tpiPayload   :: !TargetPool
     , _tpiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetPoolsInsert' with the minimum fields required to make a request.
 --
@@ -85,7 +87,7 @@ targetPoolsInsert
     -> Text -- ^ 'tpiRegion'
     -> TargetPoolsInsert
 targetPoolsInsert pTpiProject_ pTpiPayload_ pTpiRegion_ =
-    TargetPoolsInsert'
+  TargetPoolsInsert'
     { _tpiRequestId = Nothing
     , _tpiProject = pTpiProject_
     , _tpiPayload = pTpiPayload_

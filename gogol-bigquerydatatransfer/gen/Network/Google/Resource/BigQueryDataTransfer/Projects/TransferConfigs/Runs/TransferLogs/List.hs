@@ -68,7 +68,8 @@ type ProjectsTransferConfigsRunsTransferLogsListResource
 -- | Returns user facing log messages for the data transfer run.
 --
 -- /See:/ 'projectsTransferConfigsRunsTransferLogsList' smart constructor.
-data ProjectsTransferConfigsRunsTransferLogsList = ProjectsTransferConfigsRunsTransferLogsList'
+data ProjectsTransferConfigsRunsTransferLogsList =
+  ProjectsTransferConfigsRunsTransferLogsList'
     { _ptcrtllParent         :: !Text
     , _ptcrtllXgafv          :: !(Maybe Xgafv)
     , _ptcrtllUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,8 @@ data ProjectsTransferConfigsRunsTransferLogsList = ProjectsTransferConfigsRunsTr
     , _ptcrtllPageToken      :: !(Maybe Text)
     , _ptcrtllPageSize       :: !(Maybe (Textual Int32))
     , _ptcrtllCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTransferConfigsRunsTransferLogsList' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ projectsTransferConfigsRunsTransferLogsList
     :: Text -- ^ 'ptcrtllParent'
     -> ProjectsTransferConfigsRunsTransferLogsList
 projectsTransferConfigsRunsTransferLogsList pPtcrtllParent_ =
-    ProjectsTransferConfigsRunsTransferLogsList'
+  ProjectsTransferConfigsRunsTransferLogsList'
     { _ptcrtllParent = pPtcrtllParent_
     , _ptcrtllXgafv = Nothing
     , _ptcrtllUploadProtocol = Nothing
@@ -180,7 +182,8 @@ ptcrtllCallback
       (\ s a -> s{_ptcrtllCallback = a})
 
 instance GoogleRequest
-         ProjectsTransferConfigsRunsTransferLogsList where
+           ProjectsTransferConfigsRunsTransferLogsList
+         where
         type Rs ProjectsTransferConfigsRunsTransferLogsList =
              ListTransferLogsResponse
         type Scopes

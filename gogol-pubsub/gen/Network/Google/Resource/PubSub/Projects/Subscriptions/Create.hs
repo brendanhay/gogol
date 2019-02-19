@@ -80,7 +80,8 @@ type ProjectsSubscriptionsCreateResource =
 -- that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ 'projectsSubscriptionsCreate' smart constructor.
-data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'
+data ProjectsSubscriptionsCreate =
+  ProjectsSubscriptionsCreate'
     { _pscXgafv          :: !(Maybe Xgafv)
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscAccessToken    :: !(Maybe Text)
@@ -88,7 +89,8 @@ data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'
     , _pscPayload        :: !Subscription
     , _pscName           :: !Text
     , _pscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsCreate' with the minimum fields required to make a request.
 --
@@ -112,7 +114,7 @@ projectsSubscriptionsCreate
     -> Text -- ^ 'pscName'
     -> ProjectsSubscriptionsCreate
 projectsSubscriptionsCreate pPscPayload_ pPscName_ =
-    ProjectsSubscriptionsCreate'
+  ProjectsSubscriptionsCreate'
     { _pscXgafv = Nothing
     , _pscUploadProtocol = Nothing
     , _pscAccessToken = Nothing

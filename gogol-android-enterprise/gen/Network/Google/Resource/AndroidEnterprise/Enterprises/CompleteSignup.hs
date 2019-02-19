@@ -58,10 +58,12 @@ type EnterprisesCompleteSignupResource =
 -- given Enterprise Token.
 --
 -- /See:/ 'enterprisesCompleteSignup' smart constructor.
-data EnterprisesCompleteSignup = EnterprisesCompleteSignup'
+data EnterprisesCompleteSignup =
+  EnterprisesCompleteSignup'
     { _ecsCompletionToken :: !(Maybe Text)
     , _ecsEnterpriseToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesCompleteSignup' with the minimum fields required to make a request.
 --
@@ -73,10 +75,8 @@ data EnterprisesCompleteSignup = EnterprisesCompleteSignup'
 enterprisesCompleteSignup
     :: EnterprisesCompleteSignup
 enterprisesCompleteSignup =
-    EnterprisesCompleteSignup'
-    { _ecsCompletionToken = Nothing
-    , _ecsEnterpriseToken = Nothing
-    }
+  EnterprisesCompleteSignup'
+    {_ecsCompletionToken = Nothing, _ecsEnterpriseToken = Nothing}
 
 -- | The Completion token initially returned by GenerateSignupUrl.
 ecsCompletionToken :: Lens' EnterprisesCompleteSignup (Maybe Text)

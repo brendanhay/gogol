@@ -69,14 +69,16 @@ type FoldersDeleteResource =
 -- \`resourcemanager.folders.delete\` permission on the identified folder.
 --
 -- /See:/ 'foldersDelete' smart constructor.
-data FoldersDelete = FoldersDelete'
+data FoldersDelete =
+  FoldersDelete'
     { _fdXgafv          :: !(Maybe Xgafv)
     , _fdUploadProtocol :: !(Maybe Text)
     , _fdAccessToken    :: !(Maybe Text)
     , _fdUploadType     :: !(Maybe Text)
     , _fdName           :: !Text
     , _fdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'FoldersDelete' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ foldersDelete
     :: Text -- ^ 'fdName'
     -> FoldersDelete
 foldersDelete pFdName_ =
-    FoldersDelete'
+  FoldersDelete'
     { _fdXgafv = Nothing
     , _fdUploadProtocol = Nothing
     , _fdAccessToken = Nothing

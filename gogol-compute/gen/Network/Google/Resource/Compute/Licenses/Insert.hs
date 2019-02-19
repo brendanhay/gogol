@@ -57,11 +57,13 @@ type LicensesInsertResource =
 -- | Create a License resource in the specified project.
 --
 -- /See:/ 'licensesInsert' smart constructor.
-data LicensesInsert = LicensesInsert'
+data LicensesInsert =
+  LicensesInsert'
     { _liRequestId :: !(Maybe Text)
     , _liProject   :: !Text
     , _liPayload   :: !License
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LicensesInsert' with the minimum fields required to make a request.
 --
@@ -77,11 +79,8 @@ licensesInsert
     -> License -- ^ 'liPayload'
     -> LicensesInsert
 licensesInsert pLiProject_ pLiPayload_ =
-    LicensesInsert'
-    { _liRequestId = Nothing
-    , _liProject = pLiProject_
-    , _liPayload = pLiPayload_
-    }
+  LicensesInsert'
+    {_liRequestId = Nothing, _liProject = pLiProject_, _liPayload = pLiPayload_}
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

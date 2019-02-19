@@ -63,12 +63,14 @@ type RegionBackendServicesGetHealthResource =
 -- BackendService.
 --
 -- /See:/ 'regionBackendServicesGetHealth' smart constructor.
-data RegionBackendServicesGetHealth = RegionBackendServicesGetHealth'
+data RegionBackendServicesGetHealth =
+  RegionBackendServicesGetHealth'
     { _rbsghProject        :: !Text
     , _rbsghPayload        :: !ResourceGroupReference
     , _rbsghRegion         :: !Text
     , _rbsghBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegionBackendServicesGetHealth' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ regionBackendServicesGetHealth
     -> Text -- ^ 'rbsghBackendService'
     -> RegionBackendServicesGetHealth
 regionBackendServicesGetHealth pRbsghProject_ pRbsghPayload_ pRbsghRegion_ pRbsghBackendService_ =
-    RegionBackendServicesGetHealth'
+  RegionBackendServicesGetHealth'
     { _rbsghProject = pRbsghProject_
     , _rbsghPayload = pRbsghPayload_
     , _rbsghRegion = pRbsghRegion_

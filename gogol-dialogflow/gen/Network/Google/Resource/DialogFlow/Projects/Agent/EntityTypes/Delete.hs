@@ -60,14 +60,16 @@ type ProjectsAgentEntityTypesDeleteResource =
 -- | Deletes the specified entity type.
 --
 -- /See:/ 'projectsAgentEntityTypesDelete' smart constructor.
-data ProjectsAgentEntityTypesDelete = ProjectsAgentEntityTypesDelete'
+data ProjectsAgentEntityTypesDelete =
+  ProjectsAgentEntityTypesDelete'
     { _paetdXgafv          :: !(Maybe Xgafv)
     , _paetdUploadProtocol :: !(Maybe Text)
     , _paetdAccessToken    :: !(Maybe Text)
     , _paetdUploadType     :: !(Maybe Text)
     , _paetdName           :: !Text
     , _paetdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsAgentEntityTypesDelete' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ projectsAgentEntityTypesDelete
     :: Text -- ^ 'paetdName'
     -> ProjectsAgentEntityTypesDelete
 projectsAgentEntityTypesDelete pPaetdName_ =
-    ProjectsAgentEntityTypesDelete'
+  ProjectsAgentEntityTypesDelete'
     { _paetdXgafv = Nothing
     , _paetdUploadProtocol = Nothing
     , _paetdAccessToken = Nothing

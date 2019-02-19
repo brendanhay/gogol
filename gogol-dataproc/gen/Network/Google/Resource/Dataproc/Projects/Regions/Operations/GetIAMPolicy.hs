@@ -64,7 +64,8 @@ type ProjectsRegionsOperationsGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsRegionsOperationsGetIAMPolicy' smart constructor.
-data ProjectsRegionsOperationsGetIAMPolicy = ProjectsRegionsOperationsGetIAMPolicy'
+data ProjectsRegionsOperationsGetIAMPolicy =
+  ProjectsRegionsOperationsGetIAMPolicy'
     { _progipXgafv          :: !(Maybe Xgafv)
     , _progipUploadProtocol :: !(Maybe Text)
     , _progipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,8 @@ data ProjectsRegionsOperationsGetIAMPolicy = ProjectsRegionsOperationsGetIAMPoli
     , _progipPayload        :: !GetIAMPolicyRequest
     , _progipResource       :: !Text
     , _progipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsRegionsOperationsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +98,7 @@ projectsRegionsOperationsGetIAMPolicy
     -> Text -- ^ 'progipResource'
     -> ProjectsRegionsOperationsGetIAMPolicy
 projectsRegionsOperationsGetIAMPolicy pProgipPayload_ pProgipResource_ =
-    ProjectsRegionsOperationsGetIAMPolicy'
+  ProjectsRegionsOperationsGetIAMPolicy'
     { _progipXgafv = Nothing
     , _progipUploadProtocol = Nothing
     , _progipAccessToken = Nothing
@@ -149,7 +151,8 @@ progipCallback
       (\ s a -> s{_progipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsOperationsGetIAMPolicy where
+           ProjectsRegionsOperationsGetIAMPolicy
+         where
         type Rs ProjectsRegionsOperationsGetIAMPolicy =
              Policy
         type Scopes ProjectsRegionsOperationsGetIAMPolicy =

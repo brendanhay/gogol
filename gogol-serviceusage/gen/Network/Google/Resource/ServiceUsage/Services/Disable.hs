@@ -72,7 +72,8 @@ type ServicesDisableResource =
 -- enabled. Operation
 --
 -- /See:/ 'servicesDisable' smart constructor.
-data ServicesDisable = ServicesDisable'
+data ServicesDisable =
+  ServicesDisable'
     { _sdXgafv          :: !(Maybe Xgafv)
     , _sdUploadProtocol :: !(Maybe Text)
     , _sdAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data ServicesDisable = ServicesDisable'
     , _sdPayload        :: !DisableServiceRequest
     , _sdName           :: !Text
     , _sdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ServicesDisable' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ servicesDisable
     -> Text -- ^ 'sdName'
     -> ServicesDisable
 servicesDisable pSdPayload_ pSdName_ =
-    ServicesDisable'
+  ServicesDisable'
     { _sdXgafv = Nothing
     , _sdUploadProtocol = Nothing
     , _sdAccessToken = Nothing

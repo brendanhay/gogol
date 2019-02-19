@@ -59,14 +59,16 @@ type ProjectsLocationsNodesGetResource =
 -- | Gets the details of a node.
 --
 -- /See:/ 'projectsLocationsNodesGet' smart constructor.
-data ProjectsLocationsNodesGet = ProjectsLocationsNodesGet'
+data ProjectsLocationsNodesGet =
+  ProjectsLocationsNodesGet'
     { _plngXgafv          :: !(Maybe Xgafv)
     , _plngUploadProtocol :: !(Maybe Text)
     , _plngAccessToken    :: !(Maybe Text)
     , _plngUploadType     :: !(Maybe Text)
     , _plngName           :: !Text
     , _plngCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsNodesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ projectsLocationsNodesGet
     :: Text -- ^ 'plngName'
     -> ProjectsLocationsNodesGet
 projectsLocationsNodesGet pPlngName_ =
-    ProjectsLocationsNodesGet'
+  ProjectsLocationsNodesGet'
     { _plngXgafv = Nothing
     , _plngUploadProtocol = Nothing
     , _plngAccessToken = Nothing

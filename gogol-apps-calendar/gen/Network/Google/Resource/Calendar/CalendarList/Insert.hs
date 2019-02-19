@@ -56,10 +56,12 @@ type CalendarListInsertResource =
 -- | Inserts an existing calendar into the user\'s calendar list.
 --
 -- /See:/ 'calendarListInsert' smart constructor.
-data CalendarListInsert = CalendarListInsert'
+data CalendarListInsert =
+  CalendarListInsert'
     { _cliPayload        :: !CalendarListEntry
     , _cliColorRgbFormat :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CalendarListInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +74,7 @@ calendarListInsert
     :: CalendarListEntry -- ^ 'cliPayload'
     -> CalendarListInsert
 calendarListInsert pCliPayload_ =
-    CalendarListInsert'
-    { _cliPayload = pCliPayload_
-    , _cliColorRgbFormat = Nothing
-    }
+  CalendarListInsert' {_cliPayload = pCliPayload_, _cliColorRgbFormat = Nothing}
 
 -- | Multipart request metadata.
 cliPayload :: Lens' CalendarListInsert CalendarListEntry

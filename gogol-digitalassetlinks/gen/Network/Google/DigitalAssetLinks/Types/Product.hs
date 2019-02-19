@@ -23,10 +23,12 @@ import           Network.Google.Prelude
 -- | Describes an android app asset.
 --
 -- /See:/ 'androidAppAsset' smart constructor.
-data AndroidAppAsset = AndroidAppAsset'
+data AndroidAppAsset =
+  AndroidAppAsset'
     { _aaaPackageName :: !(Maybe Text)
     , _aaaCertificate :: !(Maybe CertificateInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AndroidAppAsset' with the minimum fields required to make a request.
 --
@@ -38,10 +40,7 @@ data AndroidAppAsset = AndroidAppAsset'
 androidAppAsset
     :: AndroidAppAsset
 androidAppAsset =
-    AndroidAppAsset'
-    { _aaaPackageName = Nothing
-    , _aaaCertificate = Nothing
-    }
+  AndroidAppAsset' {_aaaPackageName = Nothing, _aaaCertificate = Nothing}
 
 -- | Android App assets are naturally identified by their Java package name.
 -- For example, the Google Maps app uses the package name
@@ -89,11 +88,13 @@ instance ToJSON AndroidAppAsset where
 -- page](\/digital-asset-links\/v1\/getting-started).
 --
 -- /See:/ 'statement' smart constructor.
-data Statement = Statement'
+data Statement =
+  Statement'
     { _sRelation :: !(Maybe Text)
     , _sSource   :: !(Maybe Asset)
     , _sTarget   :: !(Maybe Asset)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Statement' with the minimum fields required to make a request.
 --
@@ -107,11 +108,7 @@ data Statement = Statement'
 statement
     :: Statement
 statement =
-    Statement'
-    { _sRelation = Nothing
-    , _sSource = Nothing
-    , _sTarget = Nothing
-    }
+  Statement' {_sRelation = Nothing, _sSource = Nothing, _sTarget = Nothing}
 
 -- | The relation identifies the use of the statement as intended by the
 -- source asset\'s owner (that is, the person or entity who issued the
@@ -157,10 +154,12 @@ instance ToJSON Statement where
 -- and Plus Pages.
 --
 -- /See:/ 'asset' smart constructor.
-data Asset = Asset'
+data Asset =
+  Asset'
     { _aAndroidApp :: !(Maybe AndroidAppAsset)
     , _aWeb        :: !(Maybe WebAsset)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Asset' with the minimum fields required to make a request.
 --
@@ -171,11 +170,7 @@ data Asset = Asset'
 -- * 'aWeb'
 asset
     :: Asset
-asset =
-    Asset'
-    { _aAndroidApp = Nothing
-    , _aWeb = Nothing
-    }
+asset = Asset' {_aAndroidApp = Nothing, _aWeb = Nothing}
 
 -- | Set if this is an Android App asset.
 aAndroidApp :: Lens' Asset (Maybe AndroidAppAsset)
@@ -202,12 +197,14 @@ instance ToJSON Asset where
 -- | Response message for the List call.
 --
 -- /See:/ 'listResponse' smart constructor.
-data ListResponse = ListResponse'
+data ListResponse =
+  ListResponse'
     { _lrDebugString :: !(Maybe Text)
     , _lrMaxAge      :: !(Maybe GDuration)
     , _lrErrorCode   :: !(Maybe [Text])
     , _lrStatements  :: !(Maybe [Statement])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListResponse' with the minimum fields required to make a request.
 --
@@ -223,7 +220,7 @@ data ListResponse = ListResponse'
 listResponse
     :: ListResponse
 listResponse =
-    ListResponse'
+  ListResponse'
     { _lrDebugString = Nothing
     , _lrMaxAge = Nothing
     , _lrErrorCode = Nothing
@@ -284,12 +281,14 @@ instance ToJSON ListResponse where
 -- | Response message for the CheckAssetLinks call.
 --
 -- /See:/ 'checkResponse' smart constructor.
-data CheckResponse = CheckResponse'
+data CheckResponse =
+  CheckResponse'
     { _crDebugString :: !(Maybe Text)
     , _crMaxAge      :: !(Maybe GDuration)
     , _crErrorCode   :: !(Maybe [Text])
     , _crLinked      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CheckResponse' with the minimum fields required to make a request.
 --
@@ -305,7 +304,7 @@ data CheckResponse = CheckResponse'
 checkResponse
     :: CheckResponse
 checkResponse =
-    CheckResponse'
+  CheckResponse'
     { _crDebugString = Nothing
     , _crMaxAge = Nothing
     , _crErrorCode = Nothing
@@ -364,9 +363,11 @@ instance ToJSON CheckResponse where
 -- | Describes a web asset.
 --
 -- /See:/ 'webAsset' smart constructor.
-newtype WebAsset = WebAsset'
+newtype WebAsset =
+  WebAsset'
     { _waSite :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebAsset' with the minimum fields required to make a request.
 --
@@ -375,10 +376,7 @@ newtype WebAsset = WebAsset'
 -- * 'waSite'
 webAsset
     :: WebAsset
-webAsset =
-    WebAsset'
-    { _waSite = Nothing
-    }
+webAsset = WebAsset' {_waSite = Nothing}
 
 -- | Web assets are identified by a URL that contains only the scheme,
 -- hostname and port parts. The format is http[s]:\/\/[:] Hostnames must be
@@ -412,9 +410,11 @@ instance ToJSON WebAsset where
 -- | Describes an X509 certificate.
 --
 -- /See:/ 'certificateInfo' smart constructor.
-newtype CertificateInfo = CertificateInfo'
+newtype CertificateInfo =
+  CertificateInfo'
     { _ciSha256Fingerprint :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CertificateInfo' with the minimum fields required to make a request.
 --
@@ -423,10 +423,7 @@ newtype CertificateInfo = CertificateInfo'
 -- * 'ciSha256Fingerprint'
 certificateInfo
     :: CertificateInfo
-certificateInfo =
-    CertificateInfo'
-    { _ciSha256Fingerprint = Nothing
-    }
+certificateInfo = CertificateInfo' {_ciSha256Fingerprint = Nothing}
 
 -- | The uppercase SHA-265 fingerprint of the certificate. From the PEM
 -- certificate, it can be acquired like this: $ keytool -printcert -file

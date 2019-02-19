@@ -50,7 +50,7 @@ import           Network.Google.VideoIntelligence.Types
 -- | A resource alias for @videointelligence.videos.annotate@ method which the
 -- 'VideosAnnotate' request conforms to.
 type VideosAnnotateResource =
-     "v1p1beta1" :>
+     "v1p2beta1" :>
        "videos:annotate" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -59,7 +59,7 @@ type VideosAnnotateResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
-                       GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
+                       GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
                        :> Post '[JSON] GoogleLongrunning_Operation
 
 -- | Performs asynchronous video annotation. Progress and results can be
@@ -68,14 +68,16 @@ type VideosAnnotateResource =
 -- \`Operation.response\` contains \`AnnotateVideoResponse\` (results).
 --
 -- /See:/ 'videosAnnotate' smart constructor.
-data VideosAnnotate = VideosAnnotate'
+data VideosAnnotate =
+  VideosAnnotate'
     { _vaXgafv          :: !(Maybe Xgafv)
     , _vaUploadProtocol :: !(Maybe Text)
     , _vaAccessToken    :: !(Maybe Text)
     , _vaUploadType     :: !(Maybe Text)
-    , _vaPayload        :: !GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
+    , _vaPayload        :: !GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
     , _vaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VideosAnnotate' with the minimum fields required to make a request.
 --
@@ -93,10 +95,10 @@ data VideosAnnotate = VideosAnnotate'
 --
 -- * 'vaCallback'
 videosAnnotate
-    :: GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest -- ^ 'vaPayload'
+    :: GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest -- ^ 'vaPayload'
     -> VideosAnnotate
 videosAnnotate pVaPayload_ =
-    VideosAnnotate'
+  VideosAnnotate'
     { _vaXgafv = Nothing
     , _vaUploadProtocol = Nothing
     , _vaAccessToken = Nothing
@@ -127,7 +129,7 @@ vaUploadType
   = lens _vaUploadType (\ s a -> s{_vaUploadType = a})
 
 -- | Multipart request metadata.
-vaPayload :: Lens' VideosAnnotate GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
+vaPayload :: Lens' VideosAnnotate GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
 vaPayload
   = lens _vaPayload (\ s a -> s{_vaPayload = a})
 

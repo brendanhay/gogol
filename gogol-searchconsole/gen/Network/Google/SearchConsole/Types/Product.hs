@@ -23,10 +23,12 @@ import           Network.Google.SearchConsole.Types.Sum
 -- | Describe image data.
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image'
+data Image =
+  Image'
     { _iData     :: !(Maybe Bytes)
     , _iMimeType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -37,11 +39,7 @@ data Image = Image'
 -- * 'iMimeType'
 image
     :: Image
-image =
-    Image'
-    { _iData = Nothing
-    , _iMimeType = Nothing
-    }
+image = Image' {_iData = Nothing, _iMimeType = Nothing}
 
 -- | Image data in format determined by the mime type. Currently, the format
 -- will always be \"image\/png\", but this might change in the future.
@@ -71,9 +69,11 @@ instance ToJSON Image where
 -- | Blocked resource.
 --
 -- /See:/ 'blockedResource' smart constructor.
-newtype BlockedResource = BlockedResource'
+newtype BlockedResource =
+  BlockedResource'
     { _brURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BlockedResource' with the minimum fields required to make a request.
 --
@@ -82,10 +82,7 @@ newtype BlockedResource = BlockedResource'
 -- * 'brURL'
 blockedResource
     :: BlockedResource
-blockedResource =
-    BlockedResource'
-    { _brURL = Nothing
-    }
+blockedResource = BlockedResource' {_brURL = Nothing}
 
 -- | URL of the blocked resource.
 brURL :: Lens' BlockedResource (Maybe Text)
@@ -103,9 +100,11 @@ instance ToJSON BlockedResource where
 -- | Information about a resource with issue.
 --
 -- /See:/ 'resourceIssue' smart constructor.
-newtype ResourceIssue = ResourceIssue'
+newtype ResourceIssue =
+  ResourceIssue'
     { _riBlockedResource :: Maybe BlockedResource
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourceIssue' with the minimum fields required to make a request.
 --
@@ -114,10 +113,7 @@ newtype ResourceIssue = ResourceIssue'
 -- * 'riBlockedResource'
 resourceIssue
     :: ResourceIssue
-resourceIssue =
-    ResourceIssue'
-    { _riBlockedResource = Nothing
-    }
+resourceIssue = ResourceIssue' {_riBlockedResource = Nothing}
 
 -- | Describes a blocked resource issue.
 riBlockedResource :: Lens' ResourceIssue (Maybe BlockedResource)
@@ -139,10 +135,12 @@ instance ToJSON ResourceIssue where
 -- | Mobile-friendly test request.
 --
 -- /See:/ 'runMobileFriendlyTestRequest' smart constructor.
-data RunMobileFriendlyTestRequest = RunMobileFriendlyTestRequest'
+data RunMobileFriendlyTestRequest =
+  RunMobileFriendlyTestRequest'
     { _rmftrURL               :: !(Maybe Text)
     , _rmftrRequestScreenshot :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RunMobileFriendlyTestRequest' with the minimum fields required to make a request.
 --
@@ -154,10 +152,8 @@ data RunMobileFriendlyTestRequest = RunMobileFriendlyTestRequest'
 runMobileFriendlyTestRequest
     :: RunMobileFriendlyTestRequest
 runMobileFriendlyTestRequest =
-    RunMobileFriendlyTestRequest'
-    { _rmftrURL = Nothing
-    , _rmftrRequestScreenshot = Nothing
-    }
+  RunMobileFriendlyTestRequest'
+    {_rmftrURL = Nothing, _rmftrRequestScreenshot = Nothing}
 
 -- | URL for inspection.
 rmftrURL :: Lens' RunMobileFriendlyTestRequest (Maybe Text)
@@ -187,10 +183,12 @@ instance ToJSON RunMobileFriendlyTestRequest where
 -- | Final state of the test, including error details if necessary.
 --
 -- /See:/ 'testStatus' smart constructor.
-data TestStatus = TestStatus'
+data TestStatus =
+  TestStatus'
     { _tsStatus  :: !(Maybe TestStatusStatus)
     , _tsDetails :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestStatus' with the minimum fields required to make a request.
 --
@@ -201,11 +199,7 @@ data TestStatus = TestStatus'
 -- * 'tsDetails'
 testStatus
     :: TestStatus
-testStatus =
-    TestStatus'
-    { _tsStatus = Nothing
-    , _tsDetails = Nothing
-    }
+testStatus = TestStatus' {_tsStatus = Nothing, _tsDetails = Nothing}
 
 -- | Status of the test.
 tsStatus :: Lens' TestStatus (Maybe TestStatusStatus)
@@ -234,13 +228,15 @@ instance ToJSON TestStatus where
 -- resource issues.
 --
 -- /See:/ 'runMobileFriendlyTestResponse' smart constructor.
-data RunMobileFriendlyTestResponse = RunMobileFriendlyTestResponse'
+data RunMobileFriendlyTestResponse =
+  RunMobileFriendlyTestResponse'
     { _rmftrScreenshot           :: !(Maybe Image)
     , _rmftrResourceIssues       :: !(Maybe [ResourceIssue])
     , _rmftrMobileFriendliness   :: !(Maybe RunMobileFriendlyTestResponseMobileFriendliness)
     , _rmftrTestStatus           :: !(Maybe TestStatus)
     , _rmftrMobileFriendlyIssues :: !(Maybe [MobileFriendlyIssue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RunMobileFriendlyTestResponse' with the minimum fields required to make a request.
 --
@@ -258,7 +254,7 @@ data RunMobileFriendlyTestResponse = RunMobileFriendlyTestResponse'
 runMobileFriendlyTestResponse
     :: RunMobileFriendlyTestResponse
 runMobileFriendlyTestResponse =
-    RunMobileFriendlyTestResponse'
+  RunMobileFriendlyTestResponse'
     { _rmftrScreenshot = Nothing
     , _rmftrResourceIssues = Nothing
     , _rmftrMobileFriendliness = Nothing
@@ -326,9 +322,11 @@ instance ToJSON RunMobileFriendlyTestResponse where
 -- | Mobile-friendly issue.
 --
 -- /See:/ 'mobileFriendlyIssue' smart constructor.
-newtype MobileFriendlyIssue = MobileFriendlyIssue'
+newtype MobileFriendlyIssue =
+  MobileFriendlyIssue'
     { _mfiRule :: Maybe MobileFriendlyIssueRule
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileFriendlyIssue' with the minimum fields required to make a request.
 --
@@ -337,10 +335,7 @@ newtype MobileFriendlyIssue = MobileFriendlyIssue'
 -- * 'mfiRule'
 mobileFriendlyIssue
     :: MobileFriendlyIssue
-mobileFriendlyIssue =
-    MobileFriendlyIssue'
-    { _mfiRule = Nothing
-    }
+mobileFriendlyIssue = MobileFriendlyIssue' {_mfiRule = Nothing}
 
 -- | Rule violated.
 mfiRule :: Lens' MobileFriendlyIssue (Maybe MobileFriendlyIssueRule)

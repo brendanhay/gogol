@@ -53,9 +53,11 @@ type WebAppsListResource =
 -- | Retrieves the details of all web apps for a given enterprise.
 --
 -- /See:/ 'webAppsList' smart constructor.
-newtype WebAppsList = WebAppsList'
+newtype WebAppsList =
+  WebAppsList'
     { _walEnterpriseId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WebAppsList' with the minimum fields required to make a request.
 --
@@ -66,9 +68,7 @@ webAppsList
     :: Text -- ^ 'walEnterpriseId'
     -> WebAppsList
 webAppsList pWalEnterpriseId_ =
-    WebAppsList'
-    { _walEnterpriseId = pWalEnterpriseId_
-    }
+  WebAppsList' {_walEnterpriseId = pWalEnterpriseId_}
 
 -- | The ID of the enterprise.
 walEnterpriseId :: Lens' WebAppsList Text

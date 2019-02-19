@@ -79,7 +79,8 @@ type InstanceGroupManagersListManagedInstancesResource
 -- failed action.
 --
 -- /See:/ 'instanceGroupManagersListManagedInstances' smart constructor.
-data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManagedInstances'
+data InstanceGroupManagersListManagedInstances =
+  InstanceGroupManagersListManagedInstances'
     { _igmlmiProject              :: !Text
     , _igmlmiInstanceGroupManager :: !Text
     , _igmlmiZone                 :: !Text
@@ -87,7 +88,8 @@ data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManage
     , _igmlmiFilter               :: !(Maybe Text)
     , _igmlmiPageToken            :: !(Maybe Text)
     , _igmlmiMaxResults           :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersListManagedInstances' with the minimum fields required to make a request.
 --
@@ -112,7 +114,7 @@ instanceGroupManagersListManagedInstances
     -> Text -- ^ 'igmlmiZone'
     -> InstanceGroupManagersListManagedInstances
 instanceGroupManagersListManagedInstances pIgmlmiProject_ pIgmlmiInstanceGroupManager_ pIgmlmiZone_ =
-    InstanceGroupManagersListManagedInstances'
+  InstanceGroupManagersListManagedInstances'
     { _igmlmiProject = pIgmlmiProject_
     , _igmlmiInstanceGroupManager = pIgmlmiInstanceGroupManager_
     , _igmlmiZone = pIgmlmiZone_
@@ -191,7 +193,8 @@ igmlmiMaxResults
       . _Coerce
 
 instance GoogleRequest
-         InstanceGroupManagersListManagedInstances where
+           InstanceGroupManagersListManagedInstances
+         where
         type Rs InstanceGroupManagersListManagedInstances =
              InstanceGroupManagersListManagedInstancesResponse
         type Scopes InstanceGroupManagersListManagedInstances

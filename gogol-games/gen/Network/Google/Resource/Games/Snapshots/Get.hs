@@ -53,10 +53,12 @@ type SnapshotsGetResource =
 -- | Retrieves the metadata for a given snapshot ID.
 --
 -- /See:/ 'snapshotsGet' smart constructor.
-data SnapshotsGet = SnapshotsGet'
+data SnapshotsGet =
+  SnapshotsGet'
     { _sLanguage   :: !(Maybe Text)
     , _sSnapshotId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SnapshotsGet' with the minimum fields required to make a request.
 --
@@ -69,10 +71,7 @@ snapshotsGet
     :: Text -- ^ 'sSnapshotId'
     -> SnapshotsGet
 snapshotsGet pSSnapshotId_ =
-    SnapshotsGet'
-    { _sLanguage = Nothing
-    , _sSnapshotId = pSSnapshotId_
-    }
+  SnapshotsGet' {_sLanguage = Nothing, _sSnapshotId = pSSnapshotId_}
 
 -- | The preferred language to use for strings returned by this method.
 sLanguage :: Lens' SnapshotsGet (Maybe Text)

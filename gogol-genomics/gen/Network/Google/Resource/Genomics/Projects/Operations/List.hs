@@ -72,7 +72,8 @@ type ProjectsOperationsListResource =
 -- \`genomics.operations.list\`
 --
 -- /See:/ 'projectsOperationsList' smart constructor.
-data ProjectsOperationsList = ProjectsOperationsList'
+data ProjectsOperationsList =
+  ProjectsOperationsList'
     { _polXgafv          :: !(Maybe Xgafv)
     , _polUploadProtocol :: !(Maybe Text)
     , _polAccessToken    :: !(Maybe Text)
@@ -82,7 +83,8 @@ data ProjectsOperationsList = ProjectsOperationsList'
     , _polPageToken      :: !(Maybe Text)
     , _polPageSize       :: !(Maybe (Textual Int32))
     , _polCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsOperationsList' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ projectsOperationsList
     :: Text -- ^ 'polName'
     -> ProjectsOperationsList
 projectsOperationsList pPolName_ =
-    ProjectsOperationsList'
+  ProjectsOperationsList'
     { _polXgafv = Nothing
     , _polUploadProtocol = Nothing
     , _polAccessToken = Nothing

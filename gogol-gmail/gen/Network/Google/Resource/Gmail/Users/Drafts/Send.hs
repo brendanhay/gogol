@@ -69,10 +69,12 @@ type UsersDraftsSendResource =
 -- Bcc headers.
 --
 -- /See:/ 'usersDraftsSend' smart constructor.
-data UsersDraftsSend = UsersDraftsSend'
+data UsersDraftsSend =
+  UsersDraftsSend'
     { _udsPayload :: !Draft
     , _udsUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersDraftsSend' with the minimum fields required to make a request.
 --
@@ -85,10 +87,7 @@ usersDraftsSend
     :: Draft -- ^ 'udsPayload'
     -> UsersDraftsSend
 usersDraftsSend pUdsPayload_ =
-    UsersDraftsSend'
-    { _udsPayload = pUdsPayload_
-    , _udsUserId = "me"
-    }
+  UsersDraftsSend' {_udsPayload = pUdsPayload_, _udsUserId = "me"}
 
 -- | Multipart request metadata.
 udsPayload :: Lens' UsersDraftsSend Draft

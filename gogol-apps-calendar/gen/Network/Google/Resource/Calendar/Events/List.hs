@@ -92,7 +92,8 @@ type EventsListResource =
 -- | Returns events on the specified calendar.
 --
 -- /See:/ 'eventsList' smart constructor.
-data EventsList = EventsList'
+data EventsList =
+  EventsList'
     { _elSyncToken               :: !(Maybe Text)
     , _elCalendarId              :: !Text
     , _elTimeMin                 :: !(Maybe DateTime')
@@ -111,7 +112,8 @@ data EventsList = EventsList'
     , _elMaxResults              :: !(Textual Int32)
     , _elAlwaysIncludeEmail      :: !(Maybe Bool)
     , _elTimeMax                 :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EventsList' with the minimum fields required to make a request.
 --
@@ -156,7 +158,7 @@ eventsList
     :: Text -- ^ 'elCalendarId'
     -> EventsList
 eventsList pElCalendarId_ =
-    EventsList'
+  EventsList'
     { _elSyncToken = Nothing
     , _elCalendarId = pElCalendarId_
     , _elTimeMin = Nothing

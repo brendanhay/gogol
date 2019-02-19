@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsUpdate' request conforms to.
 type AdvertiserGroupsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -55,10 +55,12 @@ type AdvertiserGroupsUpdateResource =
 -- | Updates an existing advertiser group.
 --
 -- /See:/ 'advertiserGroupsUpdate' smart constructor.
-data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate'
+data AdvertiserGroupsUpdate =
+  AdvertiserGroupsUpdate'
     { _aguProFileId :: !(Textual Int64)
     , _aguPayload   :: !AdvertiserGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdvertiserGroupsUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ advertiserGroupsUpdate
     -> AdvertiserGroup -- ^ 'aguPayload'
     -> AdvertiserGroupsUpdate
 advertiserGroupsUpdate pAguProFileId_ pAguPayload_ =
-    AdvertiserGroupsUpdate'
-    { _aguProFileId = _Coerce # pAguProFileId_
-    , _aguPayload = pAguPayload_
-    }
+  AdvertiserGroupsUpdate'
+    {_aguProFileId = _Coerce # pAguProFileId_, _aguPayload = pAguPayload_}
 
 -- | User profile ID associated with this request.
 aguProFileId :: Lens' AdvertiserGroupsUpdate Int64

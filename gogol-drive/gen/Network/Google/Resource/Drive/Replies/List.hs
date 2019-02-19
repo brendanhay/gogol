@@ -61,13 +61,15 @@ type RepliesListResource =
 -- | Lists a comment\'s replies.
 --
 -- /See:/ 'repliesList' smart constructor.
-data RepliesList = RepliesList'
+data RepliesList =
+  RepliesList'
     { _rlPageToken      :: !(Maybe Text)
     , _rlFileId         :: !Text
     , _rlCommentId      :: !Text
     , _rlPageSize       :: !(Textual Int32)
     , _rlIncludeDeleted :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RepliesList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ repliesList
     -> Text -- ^ 'rlCommentId'
     -> RepliesList
 repliesList pRlFileId_ pRlCommentId_ =
-    RepliesList'
+  RepliesList'
     { _rlPageToken = Nothing
     , _rlFileId = pRlFileId_
     , _rlCommentId = pRlCommentId_

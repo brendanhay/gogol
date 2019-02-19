@@ -54,10 +54,12 @@ type AccountsPreferredDealsGetResource =
 -- | Get information about the selected Ad Exchange Preferred Deal.
 --
 -- /See:/ 'accountsPreferredDealsGet' smart constructor.
-data AccountsPreferredDealsGet = AccountsPreferredDealsGet'
+data AccountsPreferredDealsGet =
+  AccountsPreferredDealsGet'
     { _apdgDealId    :: !Text
     , _apdgAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountsPreferredDealsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +73,8 @@ accountsPreferredDealsGet
     -> Text -- ^ 'apdgAccountId'
     -> AccountsPreferredDealsGet
 accountsPreferredDealsGet pApdgDealId_ pApdgAccountId_ =
-    AccountsPreferredDealsGet'
-    { _apdgDealId = pApdgDealId_
-    , _apdgAccountId = pApdgAccountId_
-    }
+  AccountsPreferredDealsGet'
+    {_apdgDealId = pApdgDealId_, _apdgAccountId = pApdgAccountId_}
 
 -- | Preferred deal to get information about.
 apdgDealId :: Lens' AccountsPreferredDealsGet Text

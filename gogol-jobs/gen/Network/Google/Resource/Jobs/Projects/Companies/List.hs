@@ -67,7 +67,8 @@ type ProjectsCompaniesListResource =
 -- | Lists all companies associated with the service account.
 --
 -- /See:/ 'projectsCompaniesList' smart constructor.
-data ProjectsCompaniesList = ProjectsCompaniesList'
+data ProjectsCompaniesList =
+  ProjectsCompaniesList'
     { _pclParent          :: !Text
     , _pclXgafv           :: !(Maybe Xgafv)
     , _pclUploadProtocol  :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsCompaniesList = ProjectsCompaniesList'
     , _pclPageToken       :: !(Maybe Text)
     , _pclPageSize        :: !(Maybe (Textual Int32))
     , _pclCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsCompaniesList' with the minimum fields required to make a request.
 --
@@ -104,7 +106,7 @@ projectsCompaniesList
     :: Text -- ^ 'pclParent'
     -> ProjectsCompaniesList
 projectsCompaniesList pPclParent_ =
-    ProjectsCompaniesList'
+  ProjectsCompaniesList'
     { _pclParent = pPclParent_
     , _pclXgafv = Nothing
     , _pclUploadProtocol = Nothing

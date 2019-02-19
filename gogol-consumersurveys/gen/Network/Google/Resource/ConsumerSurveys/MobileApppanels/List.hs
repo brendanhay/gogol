@@ -56,11 +56,13 @@ type MobileApppanelsListResource =
 -- | Lists the MobileAppPanels available to the authenticated user.
 --
 -- /See:/ 'mobileApppanelsList' smart constructor.
-data MobileApppanelsList = MobileApppanelsList'
+data MobileApppanelsList =
+  MobileApppanelsList'
     { _malToken      :: !(Maybe Text)
     , _malStartIndex :: !(Maybe (Textual Word32))
     , _malMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MobileApppanelsList' with the minimum fields required to make a request.
 --
@@ -74,11 +76,8 @@ data MobileApppanelsList = MobileApppanelsList'
 mobileApppanelsList
     :: MobileApppanelsList
 mobileApppanelsList =
-    MobileApppanelsList'
-    { _malToken = Nothing
-    , _malStartIndex = Nothing
-    , _malMaxResults = Nothing
-    }
+  MobileApppanelsList'
+    {_malToken = Nothing, _malStartIndex = Nothing, _malMaxResults = Nothing}
 
 malToken :: Lens' MobileApppanelsList (Maybe Text)
 malToken = lens _malToken (\ s a -> s{_malToken = a})

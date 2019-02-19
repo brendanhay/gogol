@@ -66,7 +66,8 @@ type DebugDatasourcesItemsSearchByViewURLResource =
 -- in the request.
 --
 -- /See:/ 'debugDatasourcesItemsSearchByViewURL' smart constructor.
-data DebugDatasourcesItemsSearchByViewURL = DebugDatasourcesItemsSearchByViewURL'
+data DebugDatasourcesItemsSearchByViewURL =
+  DebugDatasourcesItemsSearchByViewURL'
     { _ddisbvuXgafv          :: !(Maybe Xgafv)
     , _ddisbvuUploadProtocol :: !(Maybe Text)
     , _ddisbvuAccessToken    :: !(Maybe Text)
@@ -74,7 +75,8 @@ data DebugDatasourcesItemsSearchByViewURL = DebugDatasourcesItemsSearchByViewURL
     , _ddisbvuPayload        :: !SearchItemsByViewURLRequest
     , _ddisbvuName           :: !Text
     , _ddisbvuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DebugDatasourcesItemsSearchByViewURL' with the minimum fields required to make a request.
 --
@@ -98,7 +100,7 @@ debugDatasourcesItemsSearchByViewURL
     -> Text -- ^ 'ddisbvuName'
     -> DebugDatasourcesItemsSearchByViewURL
 debugDatasourcesItemsSearchByViewURL pDdisbvuPayload_ pDdisbvuName_ =
-    DebugDatasourcesItemsSearchByViewURL'
+  DebugDatasourcesItemsSearchByViewURL'
     { _ddisbvuXgafv = Nothing
     , _ddisbvuUploadProtocol = Nothing
     , _ddisbvuAccessToken = Nothing
@@ -149,7 +151,8 @@ ddisbvuCallback
       (\ s a -> s{_ddisbvuCallback = a})
 
 instance GoogleRequest
-         DebugDatasourcesItemsSearchByViewURL where
+           DebugDatasourcesItemsSearchByViewURL
+         where
         type Rs DebugDatasourcesItemsSearchByViewURL =
              SearchItemsByViewURLResponse
         type Scopes DebugDatasourcesItemsSearchByViewURL =

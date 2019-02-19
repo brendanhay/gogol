@@ -66,14 +66,16 @@ type ProjectsOperationsDeleteResource =
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
 -- /See:/ 'projectsOperationsDelete' smart constructor.
-data ProjectsOperationsDelete = ProjectsOperationsDelete'
+data ProjectsOperationsDelete =
+  ProjectsOperationsDelete'
     { _podXgafv          :: !(Maybe Xgafv)
     , _podUploadProtocol :: !(Maybe Text)
     , _podAccessToken    :: !(Maybe Text)
     , _podUploadType     :: !(Maybe Text)
     , _podName           :: !Text
     , _podCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsOperationsDelete' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ projectsOperationsDelete
     :: Text -- ^ 'podName'
     -> ProjectsOperationsDelete
 projectsOperationsDelete pPodName_ =
-    ProjectsOperationsDelete'
+  ProjectsOperationsDelete'
     { _podXgafv = Nothing
     , _podUploadProtocol = Nothing
     , _podAccessToken = Nothing

@@ -65,12 +65,14 @@ type ProjectsHistoriesExecutionsStepsGetPerfMetricsSummaryResource
 -- code(s): - NOT_FOUND - The specified PerfMetricsSummary does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsGetPerfMetricsSummary' smart constructor.
-data ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary = ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary'
+data ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary =
+  ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary'
     { _phesgpmsExecutionId :: !Text
     , _phesgpmsStepId      :: !Text
     , _phesgpmsHistoryId   :: !Text
     , _phesgpmsProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary' with the minimum fields required to make a request.
 --
@@ -90,7 +92,7 @@ projectsHistoriesExecutionsStepsGetPerfMetricsSummary
     -> Text -- ^ 'phesgpmsProjectId'
     -> ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary
 projectsHistoriesExecutionsStepsGetPerfMetricsSummary pPhesgpmsExecutionId_ pPhesgpmsStepId_ pPhesgpmsHistoryId_ pPhesgpmsProjectId_ =
-    ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary'
+  ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary'
     { _phesgpmsExecutionId = pPhesgpmsExecutionId_
     , _phesgpmsStepId = pPhesgpmsStepId_
     , _phesgpmsHistoryId = pPhesgpmsHistoryId_
@@ -122,7 +124,7 @@ phesgpmsProjectId
       (\ s a -> s{_phesgpmsProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary
+           ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary
          where
         type Rs
                ProjectsHistoriesExecutionsStepsGetPerfMetricsSummary

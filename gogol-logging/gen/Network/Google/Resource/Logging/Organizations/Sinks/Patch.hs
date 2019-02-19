@@ -71,7 +71,8 @@ type OrganizationsSinksPatchResource =
 -- unique_writer_identity field.
 --
 -- /See:/ 'organizationsSinksPatch' smart constructor.
-data OrganizationsSinksPatch = OrganizationsSinksPatch'
+data OrganizationsSinksPatch =
+  OrganizationsSinksPatch'
     { _ospXgafv                :: !(Maybe Xgafv)
     , _ospUniqueWriterIdentity :: !(Maybe Bool)
     , _ospUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,8 @@ data OrganizationsSinksPatch = OrganizationsSinksPatch'
     , _ospPayload              :: !LogSink
     , _ospSinkName             :: !Text
     , _ospCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrganizationsSinksPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +111,7 @@ organizationsSinksPatch
     -> Text -- ^ 'ospSinkName'
     -> OrganizationsSinksPatch
 organizationsSinksPatch pOspPayload_ pOspSinkName_ =
-    OrganizationsSinksPatch'
+  OrganizationsSinksPatch'
     { _ospXgafv = Nothing
     , _ospUniqueWriterIdentity = Nothing
     , _ospUploadProtocol = Nothing

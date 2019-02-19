@@ -64,14 +64,16 @@ type VolumesUserUploadedListResource =
 -- | Return a list of books uploaded by the current user.
 --
 -- /See:/ 'volumesUserUploadedList' smart constructor.
-data VolumesUserUploadedList = VolumesUserUploadedList'
+data VolumesUserUploadedList =
+  VolumesUserUploadedList'
     { _vuulProcessingState :: !(Maybe [VolumesUserUploadedListProcessingState])
     , _vuulLocale          :: !(Maybe Text)
     , _vuulVolumeId        :: !(Maybe [Text])
     , _vuulSource          :: !(Maybe Text)
     , _vuulStartIndex      :: !(Maybe (Textual Word32))
     , _vuulMaxResults      :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VolumesUserUploadedList' with the minimum fields required to make a request.
 --
@@ -91,7 +93,7 @@ data VolumesUserUploadedList = VolumesUserUploadedList'
 volumesUserUploadedList
     :: VolumesUserUploadedList
 volumesUserUploadedList =
-    VolumesUserUploadedList'
+  VolumesUserUploadedList'
     { _vuulProcessingState = Nothing
     , _vuulLocale = Nothing
     , _vuulVolumeId = Nothing

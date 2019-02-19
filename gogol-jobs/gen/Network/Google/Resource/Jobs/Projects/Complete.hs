@@ -76,7 +76,8 @@ type ProjectsCompleteResource =
 -- use by a job search auto-complete search box.
 --
 -- /See:/ 'projectsComplete' smart constructor.
-data ProjectsComplete = ProjectsComplete'
+data ProjectsComplete =
+  ProjectsComplete'
     { _pcLanguageCodes  :: !(Maybe [Text])
     , _pcXgafv          :: !(Maybe Xgafv)
     , _pcLanguageCode   :: !(Maybe Text)
@@ -90,7 +91,8 @@ data ProjectsComplete = ProjectsComplete'
     , _pcType           :: !(Maybe Text)
     , _pcPageSize       :: !(Maybe (Textual Int32))
     , _pcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsComplete' with the minimum fields required to make a request.
 --
@@ -125,7 +127,7 @@ projectsComplete
     :: Text -- ^ 'pcName'
     -> ProjectsComplete
 projectsComplete pPcName_ =
-    ProjectsComplete'
+  ProjectsComplete'
     { _pcLanguageCodes = Nothing
     , _pcXgafv = Nothing
     , _pcLanguageCode = Nothing

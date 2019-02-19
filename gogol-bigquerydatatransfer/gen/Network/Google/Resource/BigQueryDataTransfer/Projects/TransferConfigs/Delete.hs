@@ -61,14 +61,16 @@ type ProjectsTransferConfigsDeleteResource =
 -- runs and logs.
 --
 -- /See:/ 'projectsTransferConfigsDelete' smart constructor.
-data ProjectsTransferConfigsDelete = ProjectsTransferConfigsDelete'
+data ProjectsTransferConfigsDelete =
+  ProjectsTransferConfigsDelete'
     { _ptcdXgafv          :: !(Maybe Xgafv)
     , _ptcdUploadProtocol :: !(Maybe Text)
     , _ptcdAccessToken    :: !(Maybe Text)
     , _ptcdUploadType     :: !(Maybe Text)
     , _ptcdName           :: !Text
     , _ptcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsTransferConfigsDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +91,7 @@ projectsTransferConfigsDelete
     :: Text -- ^ 'ptcdName'
     -> ProjectsTransferConfigsDelete
 projectsTransferConfigsDelete pPtcdName_ =
-    ProjectsTransferConfigsDelete'
+  ProjectsTransferConfigsDelete'
     { _ptcdXgafv = Nothing
     , _ptcdUploadProtocol = Nothing
     , _ptcdAccessToken = Nothing

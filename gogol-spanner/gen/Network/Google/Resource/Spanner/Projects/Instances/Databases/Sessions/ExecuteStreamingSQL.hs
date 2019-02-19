@@ -69,7 +69,8 @@ type ProjectsInstancesDatabasesSessionsExecuteStreamingSQLResource
 -- column value can exceed 10 MiB.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsExecuteStreamingSQL' smart constructor.
-data ProjectsInstancesDatabasesSessionsExecuteStreamingSQL = ProjectsInstancesDatabasesSessionsExecuteStreamingSQL'
+data ProjectsInstancesDatabasesSessionsExecuteStreamingSQL =
+  ProjectsInstancesDatabasesSessionsExecuteStreamingSQL'
     { _pidsessqlXgafv          :: !(Maybe Xgafv)
     , _pidsessqlUploadProtocol :: !(Maybe Text)
     , _pidsessqlAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsInstancesDatabasesSessionsExecuteStreamingSQL = ProjectsInstancesDa
     , _pidsessqlPayload        :: !ExecuteSQLRequest
     , _pidsessqlSession        :: !Text
     , _pidsessqlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsExecuteStreamingSQL' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsInstancesDatabasesSessionsExecuteStreamingSQL
     -> Text -- ^ 'pidsessqlSession'
     -> ProjectsInstancesDatabasesSessionsExecuteStreamingSQL
 projectsInstancesDatabasesSessionsExecuteStreamingSQL pPidsessqlPayload_ pPidsessqlSession_ =
-    ProjectsInstancesDatabasesSessionsExecuteStreamingSQL'
+  ProjectsInstancesDatabasesSessionsExecuteStreamingSQL'
     { _pidsessqlXgafv = Nothing
     , _pidsessqlUploadProtocol = Nothing
     , _pidsessqlAccessToken = Nothing
@@ -154,7 +156,7 @@ pidsessqlCallback
       (\ s a -> s{_pidsessqlCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsExecuteStreamingSQL
+           ProjectsInstancesDatabasesSessionsExecuteStreamingSQL
          where
         type Rs
                ProjectsInstancesDatabasesSessionsExecuteStreamingSQL

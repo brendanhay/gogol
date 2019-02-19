@@ -61,12 +61,14 @@ type ManagementWebPropertyUserLinksListResource =
 -- | Lists webProperty-user links for a given web property.
 --
 -- /See:/ 'managementWebPropertyUserLinksList' smart constructor.
-data ManagementWebPropertyUserLinksList = ManagementWebPropertyUserLinksList'
+data ManagementWebPropertyUserLinksList =
+  ManagementWebPropertyUserLinksList'
     { _mwpullWebPropertyId :: !Text
     , _mwpullAccountId     :: !Text
     , _mwpullStartIndex    :: !(Maybe (Textual Int32))
     , _mwpullMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksList' with the minimum fields required to make a request.
 --
@@ -84,7 +86,7 @@ managementWebPropertyUserLinksList
     -> Text -- ^ 'mwpullAccountId'
     -> ManagementWebPropertyUserLinksList
 managementWebPropertyUserLinksList pMwpullWebPropertyId_ pMwpullAccountId_ =
-    ManagementWebPropertyUserLinksList'
+  ManagementWebPropertyUserLinksList'
     { _mwpullWebPropertyId = pMwpullWebPropertyId_
     , _mwpullAccountId = pMwpullAccountId_
     , _mwpullStartIndex = Nothing
@@ -123,7 +125,8 @@ mwpullMaxResults
       . mapping _Coerce
 
 instance GoogleRequest
-         ManagementWebPropertyUserLinksList where
+           ManagementWebPropertyUserLinksList
+         where
         type Rs ManagementWebPropertyUserLinksList =
              EntityUserLinks
         type Scopes ManagementWebPropertyUserLinksList =

@@ -58,12 +58,14 @@ type TasksInsertResource =
 -- | Creates a new task on the specified task list.
 --
 -- /See:/ 'tasksInsert' smart constructor.
-data TasksInsert = TasksInsert'
+data TasksInsert =
+  TasksInsert'
     { _tiParent   :: !(Maybe Text)
     , _tiPayload  :: !Task
     , _tiTaskList :: !Text
     , _tiPrevious :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TasksInsert' with the minimum fields required to make a request.
 --
@@ -81,7 +83,7 @@ tasksInsert
     -> Text -- ^ 'tiTaskList'
     -> TasksInsert
 tasksInsert pTiPayload_ pTiTaskList_ =
-    TasksInsert'
+  TasksInsert'
     { _tiParent = Nothing
     , _tiPayload = pTiPayload_
     , _tiTaskList = pTiTaskList_

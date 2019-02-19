@@ -71,7 +71,8 @@ type BillingAccountsProjectsListResource =
 -- [viewers](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
 -- /See:/ 'billingAccountsProjectsList' smart constructor.
-data BillingAccountsProjectsList = BillingAccountsProjectsList'
+data BillingAccountsProjectsList =
+  BillingAccountsProjectsList'
     { _baplXgafv          :: !(Maybe Xgafv)
     , _baplUploadProtocol :: !(Maybe Text)
     , _baplAccessToken    :: !(Maybe Text)
@@ -80,7 +81,8 @@ data BillingAccountsProjectsList = BillingAccountsProjectsList'
     , _baplPageToken      :: !(Maybe Text)
     , _baplPageSize       :: !(Maybe (Textual Int32))
     , _baplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BillingAccountsProjectsList' with the minimum fields required to make a request.
 --
@@ -105,7 +107,7 @@ billingAccountsProjectsList
     :: Text -- ^ 'baplName'
     -> BillingAccountsProjectsList
 billingAccountsProjectsList pBaplName_ =
-    BillingAccountsProjectsList'
+  BillingAccountsProjectsList'
     { _baplXgafv = Nothing
     , _baplUploadProtocol = Nothing
     , _baplAccessToken = Nothing

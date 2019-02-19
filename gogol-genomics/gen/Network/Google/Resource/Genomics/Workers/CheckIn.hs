@@ -65,7 +65,8 @@ type WorkersCheckInResource =
 -- provide periodic status updates.
 --
 -- /See:/ 'workersCheckIn' smart constructor.
-data WorkersCheckIn = WorkersCheckIn'
+data WorkersCheckIn =
+  WorkersCheckIn'
     { _wciXgafv          :: !(Maybe Xgafv)
     , _wciUploadProtocol :: !(Maybe Text)
     , _wciAccessToken    :: !(Maybe Text)
@@ -73,7 +74,8 @@ data WorkersCheckIn = WorkersCheckIn'
     , _wciPayload        :: !CheckInRequest
     , _wciId             :: !Text
     , _wciCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'WorkersCheckIn' with the minimum fields required to make a request.
 --
@@ -97,7 +99,7 @@ workersCheckIn
     -> Text -- ^ 'wciId'
     -> WorkersCheckIn
 workersCheckIn pWciPayload_ pWciId_ =
-    WorkersCheckIn'
+  WorkersCheckIn'
     { _wciXgafv = Nothing
     , _wciUploadProtocol = Nothing
     , _wciAccessToken = Nothing

@@ -569,8 +569,8 @@ jobsService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | Manage job postings
 jobsScope :: Proxy '["https://www.googleapis.com/auth/jobs"]
-jobsScope = Proxy;
+jobsScope = Proxy

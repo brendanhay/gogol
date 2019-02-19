@@ -62,13 +62,15 @@ type InstanceGroupManagersAggregatedListResource =
 -- | Retrieves the list of managed instance groups and groups them by zone.
 --
 -- /See:/ 'instanceGroupManagersAggregatedList' smart constructor.
-data InstanceGroupManagersAggregatedList = InstanceGroupManagersAggregatedList'
+data InstanceGroupManagersAggregatedList =
+  InstanceGroupManagersAggregatedList'
     { _igmalOrderBy    :: !(Maybe Text)
     , _igmalProject    :: !Text
     , _igmalFilter     :: !(Maybe Text)
     , _igmalPageToken  :: !(Maybe Text)
     , _igmalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,7 +89,7 @@ instanceGroupManagersAggregatedList
     :: Text -- ^ 'igmalProject'
     -> InstanceGroupManagersAggregatedList
 instanceGroupManagersAggregatedList pIgmalProject_ =
-    InstanceGroupManagersAggregatedList'
+  InstanceGroupManagersAggregatedList'
     { _igmalOrderBy = Nothing
     , _igmalProject = pIgmalProject_
     , _igmalFilter = Nothing
@@ -151,7 +153,8 @@ igmalMaxResults
       . _Coerce
 
 instance GoogleRequest
-         InstanceGroupManagersAggregatedList where
+           InstanceGroupManagersAggregatedList
+         where
         type Rs InstanceGroupManagersAggregatedList =
              InstanceGroupManagerAggregatedList
         type Scopes InstanceGroupManagersAggregatedList =

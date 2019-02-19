@@ -56,9 +56,11 @@ type QuestsResetResource =
 -- whitelisted tester accounts for your application.
 --
 -- /See:/ 'questsReset' smart constructor.
-newtype QuestsReset = QuestsReset'
+newtype QuestsReset =
+  QuestsReset'
     { _qrQuestId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'QuestsReset' with the minimum fields required to make a request.
 --
@@ -68,10 +70,7 @@ newtype QuestsReset = QuestsReset'
 questsReset
     :: Text -- ^ 'qrQuestId'
     -> QuestsReset
-questsReset pQrQuestId_ =
-    QuestsReset'
-    { _qrQuestId = pQrQuestId_
-    }
+questsReset pQrQuestId_ = QuestsReset' {_qrQuestId = pQrQuestId_}
 
 -- | The ID of the quest.
 qrQuestId :: Lens' QuestsReset Text

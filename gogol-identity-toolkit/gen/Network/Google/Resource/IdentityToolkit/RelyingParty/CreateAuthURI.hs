@@ -54,9 +54,11 @@ type RelyingPartyCreateAuthURIResource =
 -- | Creates the URI used by the IdP to authenticate the user.
 --
 -- /See:/ 'relyingPartyCreateAuthURI' smart constructor.
-newtype RelyingPartyCreateAuthURI = RelyingPartyCreateAuthURI'
+newtype RelyingPartyCreateAuthURI =
+  RelyingPartyCreateAuthURI'
     { _rpcauPayload :: IdentitytoolkitRelyingPartyCreateAuthURIRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RelyingPartyCreateAuthURI' with the minimum fields required to make a request.
 --
@@ -67,9 +69,7 @@ relyingPartyCreateAuthURI
     :: IdentitytoolkitRelyingPartyCreateAuthURIRequest -- ^ 'rpcauPayload'
     -> RelyingPartyCreateAuthURI
 relyingPartyCreateAuthURI pRpcauPayload_ =
-    RelyingPartyCreateAuthURI'
-    { _rpcauPayload = pRpcauPayload_
-    }
+  RelyingPartyCreateAuthURI' {_rpcauPayload = pRpcauPayload_}
 
 -- | Multipart request metadata.
 rpcauPayload :: Lens' RelyingPartyCreateAuthURI IdentitytoolkitRelyingPartyCreateAuthURIRequest

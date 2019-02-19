@@ -59,11 +59,13 @@ type NodeTypesGetResource =
 -- making a list() request.
 --
 -- /See:/ 'nodeTypesGet' smart constructor.
-data NodeTypesGet = NodeTypesGet'
+data NodeTypesGet =
+  NodeTypesGet'
     { _ntgProject  :: !Text
     , _ntgZone     :: !Text
     , _ntgNodeType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NodeTypesGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ nodeTypesGet
     -> Text -- ^ 'ntgNodeType'
     -> NodeTypesGet
 nodeTypesGet pNtgProject_ pNtgZone_ pNtgNodeType_ =
-    NodeTypesGet'
+  NodeTypesGet'
     { _ntgProject = pNtgProject_
     , _ntgZone = pNtgZone_
     , _ntgNodeType = pNtgNodeType_

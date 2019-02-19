@@ -49,8 +49,8 @@ type PaymentsListResource =
 --
 -- /See:/ 'paymentsList' smart constructor.
 data PaymentsList =
-    PaymentsList'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  PaymentsList'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PaymentsList' with the minimum fields required to make a request.
 --

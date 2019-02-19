@@ -65,11 +65,13 @@ type ResourcesCalendarsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'resourcesCalendarsPatch' smart constructor.
-data ResourcesCalendarsPatch = ResourcesCalendarsPatch'
+data ResourcesCalendarsPatch =
+  ResourcesCalendarsPatch'
     { _rcpPayload            :: !CalendarResource
     , _rcpCustomer           :: !Text
     , _rcpCalendarResourceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResourcesCalendarsPatch' with the minimum fields required to make a request.
 --
@@ -86,7 +88,7 @@ resourcesCalendarsPatch
     -> Text -- ^ 'rcpCalendarResourceId'
     -> ResourcesCalendarsPatch
 resourcesCalendarsPatch pRcpPayload_ pRcpCustomer_ pRcpCalendarResourceId_ =
-    ResourcesCalendarsPatch'
+  ResourcesCalendarsPatch'
     { _rcpPayload = pRcpPayload_
     , _rcpCustomer = pRcpCustomer_
     , _rcpCalendarResourceId = pRcpCalendarResourceId_

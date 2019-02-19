@@ -69,7 +69,8 @@ type ProjectsIapWebServicesVersionsSetIAMPolicyResource
 -- https:\/\/cloud.google.com\/iap\/docs\/managing-access#managing_access_via_the_api
 --
 -- /See:/ 'projectsIapWebServicesVersionsSetIAMPolicy' smart constructor.
-data ProjectsIapWebServicesVersionsSetIAMPolicy = ProjectsIapWebServicesVersionsSetIAMPolicy'
+data ProjectsIapWebServicesVersionsSetIAMPolicy =
+  ProjectsIapWebServicesVersionsSetIAMPolicy'
     { _piwsvsipXgafv          :: !(Maybe Xgafv)
     , _piwsvsipUploadProtocol :: !(Maybe Text)
     , _piwsvsipAccessToken    :: !(Maybe Text)
@@ -77,7 +78,8 @@ data ProjectsIapWebServicesVersionsSetIAMPolicy = ProjectsIapWebServicesVersions
     , _piwsvsipPayload        :: !SetIAMPolicyRequest
     , _piwsvsipResource       :: !Text
     , _piwsvsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsIapWebServicesVersionsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -101,7 +103,7 @@ projectsIapWebServicesVersionsSetIAMPolicy
     -> Text -- ^ 'piwsvsipResource'
     -> ProjectsIapWebServicesVersionsSetIAMPolicy
 projectsIapWebServicesVersionsSetIAMPolicy pPiwsvsipPayload_ pPiwsvsipResource_ =
-    ProjectsIapWebServicesVersionsSetIAMPolicy'
+  ProjectsIapWebServicesVersionsSetIAMPolicy'
     { _piwsvsipXgafv = Nothing
     , _piwsvsipUploadProtocol = Nothing
     , _piwsvsipAccessToken = Nothing
@@ -155,7 +157,8 @@ piwsvsipCallback
       (\ s a -> s{_piwsvsipCallback = a})
 
 instance GoogleRequest
-         ProjectsIapWebServicesVersionsSetIAMPolicy where
+           ProjectsIapWebServicesVersionsSetIAMPolicy
+         where
         type Rs ProjectsIapWebServicesVersionsSetIAMPolicy =
              Policy
         type Scopes

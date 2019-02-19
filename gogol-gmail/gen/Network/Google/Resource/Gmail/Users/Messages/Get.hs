@@ -58,12 +58,14 @@ type UsersMessagesGetResource =
 -- | Gets the specified message.
 --
 -- /See:/ 'usersMessagesGet' smart constructor.
-data UsersMessagesGet = UsersMessagesGet'
+data UsersMessagesGet =
+  UsersMessagesGet'
     { _umgFormat          :: !UsersMessagesGetFormat
     , _umgUserId          :: !Text
     , _umgId              :: !Text
     , _umgMetadataHeaders :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersMessagesGet' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ usersMessagesGet
     :: Text -- ^ 'umgId'
     -> UsersMessagesGet
 usersMessagesGet pUmgId_ =
-    UsersMessagesGet'
+  UsersMessagesGet'
     { _umgFormat = Full
     , _umgUserId = "me"
     , _umgId = pUmgId_

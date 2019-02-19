@@ -66,7 +66,8 @@ type PostsPatchResource =
 -- | Update a post. This method supports patch semantics.
 --
 -- /See:/ 'postsPatch' smart constructor.
-data PostsPatch = PostsPatch'
+data PostsPatch =
+  PostsPatch'
     { _posoFetchBody   :: !Bool
     , _posoFetchImages :: !(Maybe Bool)
     , _posoBlogId      :: !Text
@@ -75,7 +76,8 @@ data PostsPatch = PostsPatch'
     , _posoRevert      :: !(Maybe Bool)
     , _posoPostId      :: !Text
     , _posoPublish     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PostsPatch' with the minimum fields required to make a request.
 --
@@ -102,7 +104,7 @@ postsPatch
     -> Text -- ^ 'posoPostId'
     -> PostsPatch
 postsPatch pPosoBlogId_ pPosoPayload_ pPosoPostId_ =
-    PostsPatch'
+  PostsPatch'
     { _posoFetchBody = True
     , _posoFetchImages = Nothing
     , _posoBlogId = pPosoBlogId_

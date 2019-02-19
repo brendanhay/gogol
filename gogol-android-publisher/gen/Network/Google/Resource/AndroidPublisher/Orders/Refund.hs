@@ -56,11 +56,13 @@ type OrdersRefundResource =
 -- | Refund a user\'s subscription or in-app purchase order.
 --
 -- /See:/ 'ordersRefund' smart constructor.
-data OrdersRefund = OrdersRefund'
+data OrdersRefund =
+  OrdersRefund'
     { _orPackageName :: !Text
     , _orRevoke      :: !(Maybe Bool)
     , _orOrderId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'OrdersRefund' with the minimum fields required to make a request.
 --
@@ -76,7 +78,7 @@ ordersRefund
     -> Text -- ^ 'orOrderId'
     -> OrdersRefund
 ordersRefund pOrPackageName_ pOrOrderId_ =
-    OrdersRefund'
+  OrdersRefund'
     { _orPackageName = pOrPackageName_
     , _orRevoke = Nothing
     , _orOrderId = pOrOrderId_

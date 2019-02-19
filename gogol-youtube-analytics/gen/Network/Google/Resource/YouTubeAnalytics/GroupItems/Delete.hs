@@ -63,7 +63,8 @@ type GroupItemsDeleteResource =
 -- | Removes an item from a group.
 --
 -- /See:/ 'groupItemsDelete' smart constructor.
-data GroupItemsDelete = GroupItemsDelete'
+data GroupItemsDelete =
+  GroupItemsDelete'
     { _gidXgafv                  :: !(Maybe Xgafv)
     , _gidUploadProtocol         :: !(Maybe Text)
     , _gidAccessToken            :: !(Maybe Text)
@@ -71,7 +72,8 @@ data GroupItemsDelete = GroupItemsDelete'
     , _gidOnBehalfOfContentOwner :: !(Maybe Text)
     , _gidId                     :: !(Maybe Text)
     , _gidCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GroupItemsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +95,7 @@ data GroupItemsDelete = GroupItemsDelete'
 groupItemsDelete
     :: GroupItemsDelete
 groupItemsDelete =
-    GroupItemsDelete'
+  GroupItemsDelete'
     { _gidXgafv = Nothing
     , _gidUploadProtocol = Nothing
     , _gidAccessToken = Nothing

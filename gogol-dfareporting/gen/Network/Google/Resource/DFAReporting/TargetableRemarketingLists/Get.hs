@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'TargetableRemarketingListsGet' request conforms to.
 type TargetableRemarketingListsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetableRemarketingLists" :>
@@ -55,10 +55,12 @@ type TargetableRemarketingListsGetResource =
 -- | Gets one remarketing list by ID.
 --
 -- /See:/ 'targetableRemarketingListsGet' smart constructor.
-data TargetableRemarketingListsGet = TargetableRemarketingListsGet'
+data TargetableRemarketingListsGet =
+  TargetableRemarketingListsGet'
     { _trlgProFileId :: !(Textual Int64)
     , _trlgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +74,8 @@ targetableRemarketingListsGet
     -> Int64 -- ^ 'trlgId'
     -> TargetableRemarketingListsGet
 targetableRemarketingListsGet pTrlgProFileId_ pTrlgId_ =
-    TargetableRemarketingListsGet'
-    { _trlgProFileId = _Coerce # pTrlgProFileId_
-    , _trlgId = _Coerce # pTrlgId_
-    }
+  TargetableRemarketingListsGet'
+    {_trlgProFileId = _Coerce # pTrlgProFileId_, _trlgId = _Coerce # pTrlgId_}
 
 -- | User profile ID associated with this request.
 trlgProFileId :: Lens' TargetableRemarketingListsGet Int64

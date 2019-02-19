@@ -54,8 +54,8 @@ type TurnBasedMatchesResetForAllPlayersResource =
 --
 -- /See:/ 'turnBasedMatchesResetForAllPlayers' smart constructor.
 data TurnBasedMatchesResetForAllPlayers =
-    TurnBasedMatchesResetForAllPlayers'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  TurnBasedMatchesResetForAllPlayers'
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TurnBasedMatchesResetForAllPlayers' with the minimum fields required to make a request.
 --
@@ -64,7 +64,8 @@ turnBasedMatchesResetForAllPlayers
 turnBasedMatchesResetForAllPlayers = TurnBasedMatchesResetForAllPlayers'
 
 instance GoogleRequest
-         TurnBasedMatchesResetForAllPlayers where
+           TurnBasedMatchesResetForAllPlayers
+         where
         type Rs TurnBasedMatchesResetForAllPlayers = ()
         type Scopes TurnBasedMatchesResetForAllPlayers =
              '["https://www.googleapis.com/auth/games"]

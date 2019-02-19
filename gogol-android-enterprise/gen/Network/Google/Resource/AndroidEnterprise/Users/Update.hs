@@ -62,11 +62,13 @@ type UsersUpdateResource =
 -- Other fields must either be unset or have the currently active value.
 --
 -- /See:/ 'usersUpdate' smart constructor.
-data UsersUpdate = UsersUpdate'
+data UsersUpdate =
+  UsersUpdate'
     { _uuEnterpriseId :: !Text
     , _uuPayload      :: !User
     , _uuUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UsersUpdate' with the minimum fields required to make a request.
 --
@@ -83,7 +85,7 @@ usersUpdate
     -> Text -- ^ 'uuUserId'
     -> UsersUpdate
 usersUpdate pUuEnterpriseId_ pUuPayload_ pUuUserId_ =
-    UsersUpdate'
+  UsersUpdate'
     { _uuEnterpriseId = pUuEnterpriseId_
     , _uuPayload = pUuPayload_
     , _uuUserId = pUuUserId_

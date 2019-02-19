@@ -63,12 +63,14 @@ type RoutersPreviewResource =
 -- operations. Calling this method does NOT create or update the router.
 --
 -- /See:/ 'routersPreview' smart constructor.
-data RoutersPreview = RoutersPreview'
+data RoutersPreview =
+  RoutersPreview'
     { _rppProject :: !Text
     , _rppRouter  :: !Text
     , _rppPayload :: !Router
     , _rppRegion  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RoutersPreview' with the minimum fields required to make a request.
 --
@@ -88,7 +90,7 @@ routersPreview
     -> Text -- ^ 'rppRegion'
     -> RoutersPreview
 routersPreview pRppProject_ pRppRouter_ pRppPayload_ pRppRegion_ =
-    RoutersPreview'
+  RoutersPreview'
     { _rppProject = pRppProject_
     , _rppRouter = pRppRouter_
     , _rppPayload = pRppPayload_

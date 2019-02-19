@@ -64,7 +64,8 @@ type ProjectsLocationsNodesCreateResource =
 -- | Creates a node.
 --
 -- /See:/ 'projectsLocationsNodesCreate' smart constructor.
-data ProjectsLocationsNodesCreate = ProjectsLocationsNodesCreate'
+data ProjectsLocationsNodesCreate =
+  ProjectsLocationsNodesCreate'
     { _plncParent         :: !Text
     , _plncXgafv          :: !(Maybe Xgafv)
     , _plncUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,8 @@ data ProjectsLocationsNodesCreate = ProjectsLocationsNodesCreate'
     , _plncPayload        :: !Node
     , _plncNodeId         :: !(Maybe Text)
     , _plncCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ProjectsLocationsNodesCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ projectsLocationsNodesCreate
     -> Node -- ^ 'plncPayload'
     -> ProjectsLocationsNodesCreate
 projectsLocationsNodesCreate pPlncParent_ pPlncPayload_ =
-    ProjectsLocationsNodesCreate'
+  ProjectsLocationsNodesCreate'
     { _plncParent = pPlncParent_
     , _plncXgafv = Nothing
     , _plncUploadProtocol = Nothing

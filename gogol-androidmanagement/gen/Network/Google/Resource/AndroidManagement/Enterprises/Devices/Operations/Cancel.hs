@@ -75,14 +75,16 @@ type EnterprisesDevicesOperationsCancelResource =
 -- 1, corresponding to Code.CANCELLED.
 --
 -- /See:/ 'enterprisesDevicesOperationsCancel' smart constructor.
-data EnterprisesDevicesOperationsCancel = EnterprisesDevicesOperationsCancel'
+data EnterprisesDevicesOperationsCancel =
+  EnterprisesDevicesOperationsCancel'
     { _edocXgafv          :: !(Maybe Xgafv)
     , _edocUploadProtocol :: !(Maybe Text)
     , _edocAccessToken    :: !(Maybe Text)
     , _edocUploadType     :: !(Maybe Text)
     , _edocName           :: !Text
     , _edocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterprisesDevicesOperationsCancel' with the minimum fields required to make a request.
 --
@@ -103,7 +105,7 @@ enterprisesDevicesOperationsCancel
     :: Text -- ^ 'edocName'
     -> EnterprisesDevicesOperationsCancel
 enterprisesDevicesOperationsCancel pEdocName_ =
-    EnterprisesDevicesOperationsCancel'
+  EnterprisesDevicesOperationsCancel'
     { _edocXgafv = Nothing
     , _edocUploadProtocol = Nothing
     , _edocAccessToken = Nothing
@@ -145,7 +147,8 @@ edocCallback
   = lens _edocCallback (\ s a -> s{_edocCallback = a})
 
 instance GoogleRequest
-         EnterprisesDevicesOperationsCancel where
+           EnterprisesDevicesOperationsCancel
+         where
         type Rs EnterprisesDevicesOperationsCancel = Empty
         type Scopes EnterprisesDevicesOperationsCancel =
              '["https://www.googleapis.com/auth/androidmanagement"]
