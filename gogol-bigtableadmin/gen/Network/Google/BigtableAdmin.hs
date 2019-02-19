@@ -265,8 +265,16 @@ module Network.Google.BigtableAdmin
     , CreateClusterMetadata
     , createClusterMetadata
     , ccmRequestTime
+    , ccmTables
     , ccmOriginalRequest
     , ccmFinishTime
+
+    -- ** TableProgress
+    , TableProgress
+    , tableProgress
+    , tpState
+    , tpEstimatedSizeBytes
+    , tpEstimatedCopiedBytes
 
     -- ** Union
     , Union
@@ -277,6 +285,11 @@ module Network.Google.BigtableAdmin
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- ** CreateClusterMetadataTables
+    , CreateClusterMetadataTables
+    , createClusterMetadataTables
+    , ccmtAddtional
 
     -- ** UpdateAppProFileMetadata
     , UpdateAppProFileMetadata
@@ -311,6 +324,9 @@ module Network.Google.BigtableAdmin
     , listTablesResponse
     , ltrNextPageToken
     , ltrTables
+
+    -- ** TableProgressState
+    , TableProgressState (..)
 
     -- ** AuditLogConfigLogType
     , AuditLogConfigLogType (..)

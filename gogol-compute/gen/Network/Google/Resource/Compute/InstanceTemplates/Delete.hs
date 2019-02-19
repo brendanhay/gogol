@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the specified instance template. Deleting an instance template
--- is permanent and cannot be undone. It\'s not possible to delete
--- templates which are in use by an instance group.
+-- is permanent and cannot be undone. It is not possible to delete
+-- templates that are already in use by a managed instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.delete@.
 module Network.Google.Resource.Compute.InstanceTemplates.Delete
@@ -57,8 +57,8 @@ type InstanceTemplatesDeleteResource =
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance template. Deleting an instance template
--- is permanent and cannot be undone. It\'s not possible to delete
--- templates which are in use by an instance group.
+-- is permanent and cannot be undone. It is not possible to delete
+-- templates that are already in use by a managed instance group.
 --
 -- /See:/ 'instanceTemplatesDelete' smart constructor.
 data InstanceTemplatesDelete =

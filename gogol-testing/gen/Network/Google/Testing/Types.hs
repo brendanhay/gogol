@@ -258,6 +258,7 @@ module Network.Google.Testing.Types
     , roboStartingIntent
     , rsiLauncherActivity
     , rsiStartActivity
+    , rsiTimeout
 
     -- * Date
     , Date

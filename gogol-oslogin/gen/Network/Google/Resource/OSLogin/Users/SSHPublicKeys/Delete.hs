@@ -22,7 +22,7 @@
 --
 -- Deletes an SSH public key.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.delete@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.delete@.
 module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Delete
     (
     -- * REST Resource

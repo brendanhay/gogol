@@ -23,9 +23,10 @@
 -- Removes specified project resource identified by tenant resource tag. It
 -- will remove project lien with \'TenantManager\' origin if that was
 -- added. It will then attempt to delete the project. If that operation
--- fails, this method fails. After the project has been deleted, or if was
--- already in DELETED state, resource metadata is permanently removed from
--- the tenancy unit. Operation.
+-- fails, this method fails. Calls to remove already removed or
+-- non-existent tenant project will succeed. After the project has been
+-- deleted, or if was already in DELETED state, resource metadata is
+-- permanently removed from the tenancy unit. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.removeProject@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
@@ -67,9 +68,10 @@ type ServicesTenancyUnitsRemoveProjectResource =
 -- | Removes specified project resource identified by tenant resource tag. It
 -- will remove project lien with \'TenantManager\' origin if that was
 -- added. It will then attempt to delete the project. If that operation
--- fails, this method fails. After the project has been deleted, or if was
--- already in DELETED state, resource metadata is permanently removed from
--- the tenancy unit. Operation.
+-- fails, this method fails. Calls to remove already removed or
+-- non-existent tenant project will succeed. After the project has been
+-- deleted, or if was already in DELETED state, resource metadata is
+-- permanently removed from the tenancy unit. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsRemoveProject' smart constructor.
 data ServicesTenancyUnitsRemoveProject =

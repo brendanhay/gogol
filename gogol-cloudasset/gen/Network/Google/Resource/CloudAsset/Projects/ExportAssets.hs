@@ -114,8 +114,8 @@ projectsExportAssets pPeaParent_ pPeaPayload_ =
 
 -- | Required. The relative name of the root asset. This can only be an
 -- organization number (such as \"organizations\/123\"), a project ID (such
--- as \"projects\/my-project-id\"), or a project number (such as
--- \"projects\/12345\").
+-- as \"projects\/my-project-id\"), a project number (such as
+-- \"projects\/12345\"), or a folder number (such as \"folders\/123\").
 peaParent :: Lens' ProjectsExportAssets Text
 peaParent
   = lens _peaParent (\ s a -> s{_peaParent = a})

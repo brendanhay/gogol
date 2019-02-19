@@ -104,7 +104,8 @@ tbmttMatchId
 instance GoogleRequest TurnBasedMatchesTakeTurn where
         type Rs TurnBasedMatchesTakeTurn = TurnBasedMatch
         type Scopes TurnBasedMatchesTakeTurn =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesTakeTurn'{..}
           = go _tbmttMatchId _tbmttLanguage (Just AltJSON)
               _tbmttPayload

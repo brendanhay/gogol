@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves a list of instance templates that are contained within the
--- specified project and zone.
+-- specified project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.list@.
 module Network.Google.Resource.Compute.InstanceTemplates.List
@@ -61,7 +61,7 @@ type InstanceTemplatesListResource =
                            Get '[JSON] InstanceTemplateList
 
 -- | Retrieves a list of instance templates that are contained within the
--- specified project and zone.
+-- specified project.
 --
 -- /See:/ 'instanceTemplatesList' smart constructor.
 data InstanceTemplatesList =

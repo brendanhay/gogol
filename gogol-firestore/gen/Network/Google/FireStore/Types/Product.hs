@@ -4491,8 +4491,11 @@ data FieldTransform =
   FieldTransform'
     { _ftFieldPath             :: !(Maybe Text)
     , _ftAppendMissingElements :: !(Maybe ArrayValue)
+    , _ftMaximum               :: !(Maybe Value)
+    , _ftMinimum               :: !(Maybe Value)
     , _ftSetToServerValue      :: !(Maybe FieldTransformSetToServerValue)
     , _ftRemoveAllFromArray    :: !(Maybe ArrayValue)
+    , _ftIncrement             :: !(Maybe Value)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4504,17 +4507,26 @@ data FieldTransform =
 --
 -- * 'ftAppendMissingElements'
 --
+-- * 'ftMaximum'
+--
+-- * 'ftMinimum'
+--
 -- * 'ftSetToServerValue'
 --
 -- * 'ftRemoveAllFromArray'
+--
+-- * 'ftIncrement'
 fieldTransform
     :: FieldTransform
 fieldTransform =
   FieldTransform'
     { _ftFieldPath = Nothing
     , _ftAppendMissingElements = Nothing
+    , _ftMaximum = Nothing
+    , _ftMinimum = Nothing
     , _ftSetToServerValue = Nothing
     , _ftRemoveAllFromArray = Nothing
+    , _ftIncrement = Nothing
     }
 
 -- | The path of the field. See Document.fields for the field path syntax
@@ -4536,6 +4548,34 @@ ftAppendMissingElements
   = lens _ftAppendMissingElements
       (\ s a -> s{_ftAppendMissingElements = a})
 
+-- | Sets the field to the maximum of its current value and the given value.
+-- This must be an integer or a double value. If the field is not an
+-- integer or double, or if the field does not yet exist, the
+-- transformation will set the field to the given value. If a maximum
+-- operation is applied where the field and the input value are of mixed
+-- types (that is - one is an integer and one is a double) the field takes
+-- on the type of the larger operand. If the operands are equivalent (e.g.
+-- 3 and 3.0), the field does not change. 0, 0.0, and -0.0 are all zero.
+-- The maximum of a zero stored value and zero input value is always the
+-- stored value. The maximum of any numeric value x and NaN is NaN.
+ftMaximum :: Lens' FieldTransform (Maybe Value)
+ftMaximum
+  = lens _ftMaximum (\ s a -> s{_ftMaximum = a})
+
+-- | Sets the field to the minimum of its current value and the given value.
+-- This must be an integer or a double value. If the field is not an
+-- integer or double, or if the field does not yet exist, the
+-- transformation will set the field to the input value. If a minimum
+-- operation is applied where the field and the input value are of mixed
+-- types (that is - one is an integer and one is a double) the field takes
+-- on the type of the smaller operand. If the operands are equivalent (e.g.
+-- 3 and 3.0), the field does not change. 0, 0.0, and -0.0 are all zero.
+-- The minimum of a zero stored value and zero input value is always the
+-- stored value. The minimum of any numeric value x and NaN is NaN.
+ftMinimum :: Lens' FieldTransform (Maybe Value)
+ftMinimum
+  = lens _ftMinimum (\ s a -> s{_ftMinimum = a})
+
 -- | Sets the field to the given server value.
 ftSetToServerValue :: Lens' FieldTransform (Maybe FieldTransformSetToServerValue)
 ftSetToServerValue
@@ -4554,6 +4594,18 @@ ftRemoveAllFromArray
   = lens _ftRemoveAllFromArray
       (\ s a -> s{_ftRemoveAllFromArray = a})
 
+-- | Adds the given value to the field\'s current value. This must be an
+-- integer or a double value. If the field is not an integer or double, or
+-- if the field does not yet exist, the transformation will set the field
+-- to the given value. If either of the given value or the current field
+-- value are doubles, both values will be interpreted as doubles. Double
+-- arithmetic and representation of double values follow IEEE 754
+-- semantics. If there is positive\/negative integer overflow, the field is
+-- resolved to the largest magnitude positive\/negative integer.
+ftIncrement :: Lens' FieldTransform (Maybe Value)
+ftIncrement
+  = lens _ftIncrement (\ s a -> s{_ftIncrement = a})
+
 instance FromJSON FieldTransform where
         parseJSON
           = withObject "FieldTransform"
@@ -4561,8 +4613,11 @@ instance FromJSON FieldTransform where
                  FieldTransform' <$>
                    (o .:? "fieldPath") <*>
                      (o .:? "appendMissingElements")
+                     <*> (o .:? "maximum")
+                     <*> (o .:? "minimum")
                      <*> (o .:? "setToServerValue")
-                     <*> (o .:? "removeAllFromArray"))
+                     <*> (o .:? "removeAllFromArray")
+                     <*> (o .:? "increment"))
 
 instance ToJSON FieldTransform where
         toJSON FieldTransform'{..}
@@ -4571,8 +4626,11 @@ instance ToJSON FieldTransform where
                  [("fieldPath" .=) <$> _ftFieldPath,
                   ("appendMissingElements" .=) <$>
                     _ftAppendMissingElements,
+                  ("maximum" .=) <$> _ftMaximum,
+                  ("minimum" .=) <$> _ftMinimum,
                   ("setToServerValue" .=) <$> _ftSetToServerValue,
-                  ("removeAllFromArray" .=) <$> _ftRemoveAllFromArray])
+                  ("removeAllFromArray" .=) <$> _ftRemoveAllFromArray,
+                  ("increment" .=) <$> _ftIncrement])
 
 -- | The map\'s fields. The map keys represent field names. Field names
 -- matching the regular expression \`__.*__\` are reserved. Reserved field

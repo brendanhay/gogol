@@ -22,7 +22,7 @@
 --
 -- Retrieve the description of a particular version of an api.
 --
--- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @discovery.apis.getRest@.
+-- /See:/ <https://developers.google.com/discovery/ API Discovery Service Reference> for @discovery.apis.getRest@.
 module Network.Google.Resource.Discovery.APIs.GetRest
     (
     -- * REST Resource

@@ -89,7 +89,8 @@ erLanguage
 instance GoogleRequest EventsRecord where
         type Rs EventsRecord = EventUpdateResponse
         type Scopes EventsRecord =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient EventsRecord'{..}
           = go _erLanguage (Just AltJSON) _erPayload
               gamesService

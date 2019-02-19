@@ -82,7 +82,8 @@ rcClientRevision
 instance GoogleRequest RevisionsCheck where
         type Rs RevisionsCheck = RevisionCheckResponse
         type Scopes RevisionsCheck =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient RevisionsCheck'{..}
           = go (Just _rcClientRevision) (Just AltJSON)
               gamesService

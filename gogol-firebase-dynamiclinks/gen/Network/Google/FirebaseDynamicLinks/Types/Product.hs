@@ -696,6 +696,7 @@ data DynamicLinkInfo =
     , _dliDynamicLinkDomain :: !(Maybe Text)
     , _dliLink              :: !(Maybe Text)
     , _dliIosInfo           :: !(Maybe IosInfo)
+    , _dliAppPreview        :: !(Maybe AppPreview)
     , _dliDomainURIPrefix   :: !(Maybe Text)
     , _dliAndroidInfo       :: !(Maybe AndroidInfo)
     , _dliAnalyticsInfo     :: !(Maybe AnalyticsInfo)
@@ -718,6 +719,8 @@ data DynamicLinkInfo =
 --
 -- * 'dliIosInfo'
 --
+-- * 'dliAppPreview'
+--
 -- * 'dliDomainURIPrefix'
 --
 -- * 'dliAndroidInfo'
@@ -733,6 +736,7 @@ dynamicLinkInfo =
     , _dliDynamicLinkDomain = Nothing
     , _dliLink = Nothing
     , _dliIosInfo = Nothing
+    , _dliAppPreview = Nothing
     , _dliDomainURIPrefix = Nothing
     , _dliAndroidInfo = Nothing
     , _dliAnalyticsInfo = Nothing
@@ -781,6 +785,12 @@ dliIosInfo :: Lens' DynamicLinkInfo (Maybe IosInfo)
 dliIosInfo
   = lens _dliIosInfo (\ s a -> s{_dliIosInfo = a})
 
+-- | Optional customizable parameters on the app preview page
+dliAppPreview :: Lens' DynamicLinkInfo (Maybe AppPreview)
+dliAppPreview
+  = lens _dliAppPreview
+      (\ s a -> s{_dliAppPreview = a})
+
 -- | E.g. https:\/\/maps.app.goo.gl, https:\/\/maps.page.link,
 -- https:\/\/g.co\/maps More examples can be found in description of
 -- getNormalizedUriPrefix in
@@ -815,6 +825,7 @@ instance FromJSON DynamicLinkInfo where
                      <*> (o .:? "dynamicLinkDomain")
                      <*> (o .:? "link")
                      <*> (o .:? "iosInfo")
+                     <*> (o .:? "appPreview")
                      <*> (o .:? "domainUriPrefix")
                      <*> (o .:? "androidInfo")
                      <*> (o .:? "analyticsInfo"))
@@ -829,9 +840,63 @@ instance ToJSON DynamicLinkInfo where
                   ("dynamicLinkDomain" .=) <$> _dliDynamicLinkDomain,
                   ("link" .=) <$> _dliLink,
                   ("iosInfo" .=) <$> _dliIosInfo,
+                  ("appPreview" .=) <$> _dliAppPreview,
                   ("domainUriPrefix" .=) <$> _dliDomainURIPrefix,
                   ("androidInfo" .=) <$> _dliAndroidInfo,
                   ("analyticsInfo" .=) <$> _dliAnalyticsInfo])
+
+-- | Customizable parameters on the app preview page. The text fields no
+-- longer need translation.
+--
+-- /See:/ 'appPreview' smart constructor.
+data AppPreview =
+  AppPreview'
+    { _apOpenButtonText   :: !(Maybe Text)
+    , _apSavePositionText :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'AppPreview' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apOpenButtonText'
+--
+-- * 'apSavePositionText'
+appPreview
+    :: AppPreview
+appPreview =
+  AppPreview' {_apOpenButtonText = Nothing, _apSavePositionText = Nothing}
+
+-- | Text that appears on the button to open up the app. Optional Defaults to
+-- \"Open\"
+apOpenButtonText :: Lens' AppPreview (Maybe Text)
+apOpenButtonText
+  = lens _apOpenButtonText
+      (\ s a -> s{_apOpenButtonText = a})
+
+-- | Text that asks if user wants to save place in app. Optional. Defaults to
+-- \"Save my place in the app. A link will be copied to continue to this
+-- page\"
+apSavePositionText :: Lens' AppPreview (Maybe Text)
+apSavePositionText
+  = lens _apSavePositionText
+      (\ s a -> s{_apSavePositionText = a})
+
+instance FromJSON AppPreview where
+        parseJSON
+          = withObject "AppPreview"
+              (\ o ->
+                 AppPreview' <$>
+                   (o .:? "openButtonText") <*>
+                     (o .:? "savePositionText"))
+
+instance ToJSON AppPreview where
+        toJSON AppPreview'{..}
+          = object
+              (catMaybes
+                 [("openButtonText" .=) <$> _apOpenButtonText,
+                  ("savePositionText" .=) <$> _apSavePositionText])
 
 -- | Analytics stats of a Dynamic Link for a given timeframe.
 --

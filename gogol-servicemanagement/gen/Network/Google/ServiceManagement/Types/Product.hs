@@ -1312,17 +1312,21 @@ instance ToJSON GetIAMPolicyRequest where
 -- /See:/ 'backendRule' smart constructor.
 data BackendRule =
   BackendRule'
-    { _brSelector          :: !(Maybe Text)
+    { _brJwtAudience       :: !(Maybe Text)
+    , _brSelector          :: !(Maybe Text)
     , _brMinDeadline       :: !(Maybe (Textual Double))
     , _brAddress           :: !(Maybe Text)
     , _brOperationDeadline :: !(Maybe (Textual Double))
     , _brDeadline          :: !(Maybe (Textual Double))
+    , _brPathTranslation   :: !(Maybe BackendRulePathTranslation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BackendRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'brJwtAudience'
 --
 -- * 'brSelector'
 --
@@ -1333,16 +1337,26 @@ data BackendRule =
 -- * 'brOperationDeadline'
 --
 -- * 'brDeadline'
+--
+-- * 'brPathTranslation'
 backendRule
     :: BackendRule
 backendRule =
   BackendRule'
-    { _brSelector = Nothing
+    { _brJwtAudience = Nothing
+    , _brSelector = Nothing
     , _brMinDeadline = Nothing
     , _brAddress = Nothing
     , _brOperationDeadline = Nothing
     , _brDeadline = Nothing
+    , _brPathTranslation = Nothing
     }
+
+-- | The JWT audience is used when generating a JWT id token for the backend.
+brJwtAudience :: Lens' BackendRule (Maybe Text)
+brJwtAudience
+  = lens _brJwtAudience
+      (\ s a -> s{_brJwtAudience = a})
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.
@@ -1379,25 +1393,34 @@ brDeadline
   = lens _brDeadline (\ s a -> s{_brDeadline = a}) .
       mapping _Coerce
 
+brPathTranslation :: Lens' BackendRule (Maybe BackendRulePathTranslation)
+brPathTranslation
+  = lens _brPathTranslation
+      (\ s a -> s{_brPathTranslation = a})
+
 instance FromJSON BackendRule where
         parseJSON
           = withObject "BackendRule"
               (\ o ->
                  BackendRule' <$>
-                   (o .:? "selector") <*> (o .:? "minDeadline") <*>
-                     (o .:? "address")
+                   (o .:? "jwtAudience") <*> (o .:? "selector") <*>
+                     (o .:? "minDeadline")
+                     <*> (o .:? "address")
                      <*> (o .:? "operationDeadline")
-                     <*> (o .:? "deadline"))
+                     <*> (o .:? "deadline")
+                     <*> (o .:? "pathTranslation"))
 
 instance ToJSON BackendRule where
         toJSON BackendRule'{..}
           = object
               (catMaybes
-                 [("selector" .=) <$> _brSelector,
+                 [("jwtAudience" .=) <$> _brJwtAudience,
+                  ("selector" .=) <$> _brSelector,
                   ("minDeadline" .=) <$> _brMinDeadline,
                   ("address" .=) <$> _brAddress,
                   ("operationDeadline" .=) <$> _brOperationDeadline,
-                  ("deadline" .=) <$> _brDeadline])
+                  ("deadline" .=) <$> _brDeadline,
+                  ("pathTranslation" .=) <$> _brPathTranslation])
 
 -- | Request message for SubmitConfigSource method.
 --

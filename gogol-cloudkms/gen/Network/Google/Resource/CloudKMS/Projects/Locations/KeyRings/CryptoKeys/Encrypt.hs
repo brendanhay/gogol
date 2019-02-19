@@ -158,7 +158,9 @@ instance GoogleRequest
              EncryptResponse
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysEncrypt
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysEncrypt'{..}
           = go _plkrckeName _plkrckeXgafv

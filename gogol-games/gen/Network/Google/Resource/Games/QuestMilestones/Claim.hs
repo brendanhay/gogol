@@ -111,7 +111,8 @@ qmcQuestId
 instance GoogleRequest QuestMilestonesClaim where
         type Rs QuestMilestonesClaim = ()
         type Scopes QuestMilestonesClaim =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient QuestMilestonesClaim'{..}
           = go _qmcQuestId _qmcMilestoneId (Just _qmcRequestId)
               (Just AltJSON)

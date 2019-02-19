@@ -234,12 +234,16 @@ instance ToJSON Xgafv where
 data BuildBazelRemoteExecutionV2ExecutionCapabilitiesDigestFunction
     = BBREVECDFUnknown
       -- ^ @UNKNOWN@
+      -- It is an error for the server to return this value.
     | BBREVECDFSHA256
       -- ^ @SHA256@
+      -- The Sha-256 digest function.
     | BBREVECDFSHA1
       -- ^ @SHA1@
+      -- The Sha-1 digest function.
     | BBREVECDFMD5
       -- ^ @MD5@
+      -- The MD5 digest function.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BuildBazelRemoteExecutionV2ExecutionCapabilitiesDigestFunction
@@ -271,9 +275,9 @@ data BuildBazelRemoteExecutionV2CacheCapabilitiesSymlinkAbsolutePathStrategy
       -- ^ @UNKNOWN@
     | BBREVCCSAPSDisallowed
       -- ^ @DISALLOWED@
-      -- Server will return an INVALID_ARGUMENT on input symlinks with absolute
-      -- targets. If an action tries to create an output symlink with an absolute
-      -- target, a FAILED_PRECONDITION will be returned.
+      -- Server will return an \`INVALID_ARGUMENT\` on input symlinks with
+      -- absolute targets. If an action tries to create an output symlink with an
+      -- absolute target, a \`FAILED_PRECONDITION\` will be returned.
     | BBREVCCSAPSAllowed
       -- ^ @ALLOWED@
       -- Server will allow symlink targets to escape the input root tree,

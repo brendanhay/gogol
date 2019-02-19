@@ -142,7 +142,8 @@ instance GoogleRequest
         type Rs ProjectsLocationsKeyRingsGetIAMPolicy =
              Policy
         type Scopes ProjectsLocationsKeyRingsGetIAMPolicy =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsGetIAMPolicy'{..}
           = go _plkrgipResource _plkrgipXgafv

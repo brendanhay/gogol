@@ -20,12 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that a caller has on the specified resource. If the
--- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
--- authorization checking. This operation may \"fail open\" without
--- warning.
+-- Tests the specified permissions against the IAM access control policy
+-- for a function. If the function does not exist, this will return an
+-- empty set of permissions, not a NOT_FOUND error.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.testIamPermissions@.
 module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.TestIAMPermissions
@@ -65,12 +62,9 @@ type ProjectsLocationsFunctionsTestIAMPermissionsResource
                      ReqBody '[JSON] TestIAMPermissionsRequest :>
                        Post '[JSON] TestIAMPermissionsResponse
 
--- | Returns permissions that a caller has on the specified resource. If the
--- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
--- authorization checking. This operation may \"fail open\" without
--- warning.
+-- | Tests the specified permissions against the IAM access control policy
+-- for a function. If the function does not exist, this will return an
+-- empty set of permissions, not a NOT_FOUND error.
 --
 -- /See:/ 'projectsLocationsFunctionsTestIAMPermissions' smart constructor.
 data ProjectsLocationsFunctionsTestIAMPermissions =

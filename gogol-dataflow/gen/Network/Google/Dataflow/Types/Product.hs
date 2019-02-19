@@ -310,6 +310,49 @@ instance ToJSON ParameterMetadata where
                   ("regexes" .=) <$> _pmRegexes,
                   ("label" .=) <$> _pmLabel])
 
+-- | Untranslated bag-of-bytes WorkProgressUpdateRequest from UnifiedWorker.
+--
+-- /See:/ 'reportWorkItemStatusRequestUnifiedWorkerRequest' smart constructor.
+newtype ReportWorkItemStatusRequestUnifiedWorkerRequest =
+  ReportWorkItemStatusRequestUnifiedWorkerRequest'
+    { _rwisruwrAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'ReportWorkItemStatusRequestUnifiedWorkerRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rwisruwrAddtional'
+reportWorkItemStatusRequestUnifiedWorkerRequest
+    :: HashMap Text JSONValue -- ^ 'rwisruwrAddtional'
+    -> ReportWorkItemStatusRequestUnifiedWorkerRequest
+reportWorkItemStatusRequestUnifiedWorkerRequest pRwisruwrAddtional_ =
+  ReportWorkItemStatusRequestUnifiedWorkerRequest'
+    {_rwisruwrAddtional = _Coerce # pRwisruwrAddtional_}
+
+-- | Properties of the object. Contains field \'type with type URL.
+rwisruwrAddtional :: Lens' ReportWorkItemStatusRequestUnifiedWorkerRequest (HashMap Text JSONValue)
+rwisruwrAddtional
+  = lens _rwisruwrAddtional
+      (\ s a -> s{_rwisruwrAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           ReportWorkItemStatusRequestUnifiedWorkerRequest
+         where
+        parseJSON
+          = withObject
+              "ReportWorkItemStatusRequestUnifiedWorkerRequest"
+              (\ o ->
+                 ReportWorkItemStatusRequestUnifiedWorkerRequest' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           ReportWorkItemStatusRequestUnifiedWorkerRequest
+         where
+        toJSON = toJSON . _rwisruwrAddtional
+
 -- | A request to create a Cloud Dataflow job from a template.
 --
 -- /See:/ 'createJobFromTemplateRequest' smart constructor.
@@ -1330,10 +1373,11 @@ instance ToJSON LaunchTemplateParameters where
 -- /See:/ 'reportWorkItemStatusRequest' smart constructor.
 data ReportWorkItemStatusRequest =
   ReportWorkItemStatusRequest'
-    { _rwisrCurrentWorkerTime :: !(Maybe DateTime')
-    , _rwisrLocation          :: !(Maybe Text)
-    , _rwisrWorkItemStatuses  :: !(Maybe [WorkItemStatus])
-    , _rwisrWorkerId          :: !(Maybe Text)
+    { _rwisrCurrentWorkerTime    :: !(Maybe DateTime')
+    , _rwisrLocation             :: !(Maybe Text)
+    , _rwisrUnifiedWorkerRequest :: !(Maybe ReportWorkItemStatusRequestUnifiedWorkerRequest)
+    , _rwisrWorkItemStatuses     :: !(Maybe [WorkItemStatus])
+    , _rwisrWorkerId             :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1345,6 +1389,8 @@ data ReportWorkItemStatusRequest =
 --
 -- * 'rwisrLocation'
 --
+-- * 'rwisrUnifiedWorkerRequest'
+--
 -- * 'rwisrWorkItemStatuses'
 --
 -- * 'rwisrWorkerId'
@@ -1354,6 +1400,7 @@ reportWorkItemStatusRequest =
   ReportWorkItemStatusRequest'
     { _rwisrCurrentWorkerTime = Nothing
     , _rwisrLocation = Nothing
+    , _rwisrUnifiedWorkerRequest = Nothing
     , _rwisrWorkItemStatuses = Nothing
     , _rwisrWorkerId = Nothing
     }
@@ -1370,6 +1417,12 @@ rwisrLocation :: Lens' ReportWorkItemStatusRequest (Maybe Text)
 rwisrLocation
   = lens _rwisrLocation
       (\ s a -> s{_rwisrLocation = a})
+
+-- | Untranslated bag-of-bytes WorkProgressUpdateRequest from UnifiedWorker.
+rwisrUnifiedWorkerRequest :: Lens' ReportWorkItemStatusRequest (Maybe ReportWorkItemStatusRequestUnifiedWorkerRequest)
+rwisrUnifiedWorkerRequest
+  = lens _rwisrUnifiedWorkerRequest
+      (\ s a -> s{_rwisrUnifiedWorkerRequest = a})
 
 -- | The order is unimportant, except that the order of the
 -- WorkItemServiceState messages in the ReportWorkItemStatusResponse
@@ -1396,6 +1449,7 @@ instance FromJSON ReportWorkItemStatusRequest where
               (\ o ->
                  ReportWorkItemStatusRequest' <$>
                    (o .:? "currentWorkerTime") <*> (o .:? "location")
+                     <*> (o .:? "unifiedWorkerRequest")
                      <*> (o .:? "workItemStatuses" .!= mempty)
                      <*> (o .:? "workerId"))
 
@@ -1406,6 +1460,8 @@ instance ToJSON ReportWorkItemStatusRequest where
                  [("currentWorkerTime" .=) <$>
                     _rwisrCurrentWorkerTime,
                   ("location" .=) <$> _rwisrLocation,
+                  ("unifiedWorkerRequest" .=) <$>
+                    _rwisrUnifiedWorkerRequest,
                   ("workItemStatuses" .=) <$> _rwisrWorkItemStatuses,
                   ("workerId" .=) <$> _rwisrWorkerId])
 
@@ -3302,6 +3358,49 @@ instance ToJSON StreamingStageLocation where
           = object
               (catMaybes [("streamId" .=) <$> _sslStreamId])
 
+-- | Untranslated bag-of-bytes WorkRequest from UnifiedWorker.
+--
+-- /See:/ 'leaseWorkItemRequestUnifiedWorkerRequest' smart constructor.
+newtype LeaseWorkItemRequestUnifiedWorkerRequest =
+  LeaseWorkItemRequestUnifiedWorkerRequest'
+    { _lwiruwrAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'LeaseWorkItemRequestUnifiedWorkerRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lwiruwrAddtional'
+leaseWorkItemRequestUnifiedWorkerRequest
+    :: HashMap Text JSONValue -- ^ 'lwiruwrAddtional'
+    -> LeaseWorkItemRequestUnifiedWorkerRequest
+leaseWorkItemRequestUnifiedWorkerRequest pLwiruwrAddtional_ =
+  LeaseWorkItemRequestUnifiedWorkerRequest'
+    {_lwiruwrAddtional = _Coerce # pLwiruwrAddtional_}
+
+-- | Properties of the object. Contains field \'type with type URL.
+lwiruwrAddtional :: Lens' LeaseWorkItemRequestUnifiedWorkerRequest (HashMap Text JSONValue)
+lwiruwrAddtional
+  = lens _lwiruwrAddtional
+      (\ s a -> s{_lwiruwrAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           LeaseWorkItemRequestUnifiedWorkerRequest
+         where
+        parseJSON
+          = withObject
+              "LeaseWorkItemRequestUnifiedWorkerRequest"
+              (\ o ->
+                 LeaseWorkItemRequestUnifiedWorkerRequest' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           LeaseWorkItemRequestUnifiedWorkerRequest
+         where
+        toJSON = toJSON . _lwiruwrAddtional
+
 -- | Specification of one of the bundles produced as a result of splitting a
 -- Source (e.g. when executing a SourceSplitRequest, or when splitting an
 -- active task using WorkItemStatus.dynamic_source_split), relative to the
@@ -4409,10 +4508,11 @@ instance ToJSON TaskRunnerSettings where
 -- /See:/ 'streamingComputationConfig' smart constructor.
 data StreamingComputationConfig =
   StreamingComputationConfig'
-    { _sccInstructions  :: !(Maybe [ParallelInstruction])
-    , _sccSystemName    :: !(Maybe Text)
-    , _sccComputationId :: !(Maybe Text)
-    , _sccStageName     :: !(Maybe Text)
+    { _sccInstructions                   :: !(Maybe [ParallelInstruction])
+    , _sccSystemName                     :: !(Maybe Text)
+    , _sccComputationId                  :: !(Maybe Text)
+    , _sccTransformUserNameToStateFamily :: !(Maybe StreamingComputationConfigTransformUserNameToStateFamily)
+    , _sccStageName                      :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4426,6 +4526,8 @@ data StreamingComputationConfig =
 --
 -- * 'sccComputationId'
 --
+-- * 'sccTransformUserNameToStateFamily'
+--
 -- * 'sccStageName'
 streamingComputationConfig
     :: StreamingComputationConfig
@@ -4434,6 +4536,7 @@ streamingComputationConfig =
     { _sccInstructions = Nothing
     , _sccSystemName = Nothing
     , _sccComputationId = Nothing
+    , _sccTransformUserNameToStateFamily = Nothing
     , _sccStageName = Nothing
     }
 
@@ -4457,6 +4560,13 @@ sccComputationId
   = lens _sccComputationId
       (\ s a -> s{_sccComputationId = a})
 
+-- | Map from user name of stateful transforms in this stage to their state
+-- family.
+sccTransformUserNameToStateFamily :: Lens' StreamingComputationConfig (Maybe StreamingComputationConfigTransformUserNameToStateFamily)
+sccTransformUserNameToStateFamily
+  = lens _sccTransformUserNameToStateFamily
+      (\ s a -> s{_sccTransformUserNameToStateFamily = a})
+
 -- | Stage name of this computation.
 sccStageName :: Lens' StreamingComputationConfig (Maybe Text)
 sccStageName
@@ -4470,6 +4580,7 @@ instance FromJSON StreamingComputationConfig where
                    (o .:? "instructions" .!= mempty) <*>
                      (o .:? "systemName")
                      <*> (o .:? "computationId")
+                     <*> (o .:? "transformUserNameToStateFamily")
                      <*> (o .:? "stageName"))
 
 instance ToJSON StreamingComputationConfig where
@@ -4479,6 +4590,8 @@ instance ToJSON StreamingComputationConfig where
                  [("instructions" .=) <$> _sccInstructions,
                   ("systemName" .=) <$> _sccSystemName,
                   ("computationId" .=) <$> _sccComputationId,
+                  ("transformUserNameToStateFamily" .=) <$>
+                    _sccTransformUserNameToStateFamily,
                   ("stageName" .=) <$> _sccStageName])
 
 -- | The Cloud Dataflow SDK pipeline options specified by the user. These
@@ -4635,6 +4748,7 @@ data LeaseWorkItemRequest =
     , _lwirCurrentWorkerTime      :: !(Maybe DateTime')
     , _lwirLocation               :: !(Maybe Text)
     , _lwirWorkerCapabilities     :: !(Maybe [Text])
+    , _lwirUnifiedWorkerRequest   :: !(Maybe LeaseWorkItemRequestUnifiedWorkerRequest)
     , _lwirRequestedLeaseDuration :: !(Maybe GDuration)
     , _lwirWorkerId               :: !(Maybe Text)
     }
@@ -4652,6 +4766,8 @@ data LeaseWorkItemRequest =
 --
 -- * 'lwirWorkerCapabilities'
 --
+-- * 'lwirUnifiedWorkerRequest'
+--
 -- * 'lwirRequestedLeaseDuration'
 --
 -- * 'lwirWorkerId'
@@ -4663,6 +4779,7 @@ leaseWorkItemRequest =
     , _lwirCurrentWorkerTime = Nothing
     , _lwirLocation = Nothing
     , _lwirWorkerCapabilities = Nothing
+    , _lwirUnifiedWorkerRequest = Nothing
     , _lwirRequestedLeaseDuration = Nothing
     , _lwirWorkerId = Nothing
     }
@@ -4696,6 +4813,12 @@ lwirWorkerCapabilities
       . _Default
       . _Coerce
 
+-- | Untranslated bag-of-bytes WorkRequest from UnifiedWorker.
+lwirUnifiedWorkerRequest :: Lens' LeaseWorkItemRequest (Maybe LeaseWorkItemRequestUnifiedWorkerRequest)
+lwirUnifiedWorkerRequest
+  = lens _lwirUnifiedWorkerRequest
+      (\ s a -> s{_lwirUnifiedWorkerRequest = a})
+
 -- | The initial lease period.
 lwirRequestedLeaseDuration :: Lens' LeaseWorkItemRequest (Maybe Scientific)
 lwirRequestedLeaseDuration
@@ -4718,6 +4841,7 @@ instance FromJSON LeaseWorkItemRequest where
                      (o .:? "currentWorkerTime")
                      <*> (o .:? "location")
                      <*> (o .:? "workerCapabilities" .!= mempty)
+                     <*> (o .:? "unifiedWorkerRequest")
                      <*> (o .:? "requestedLeaseDuration")
                      <*> (o .:? "workerId"))
 
@@ -4730,6 +4854,8 @@ instance ToJSON LeaseWorkItemRequest where
                   ("location" .=) <$> _lwirLocation,
                   ("workerCapabilities" .=) <$>
                     _lwirWorkerCapabilities,
+                  ("unifiedWorkerRequest" .=) <$>
+                    _lwirUnifiedWorkerRequest,
                   ("requestedLeaseDuration" .=) <$>
                     _lwirRequestedLeaseDuration,
                   ("workerId" .=) <$> _lwirWorkerId])
@@ -7304,6 +7430,48 @@ instance ToJSON WorkerLifecycleEvent where
                   ("containerStartTime" .=) <$> _wleContainerStartTime,
                   ("metadata" .=) <$> _wleMetadata])
 
+-- | Untranslated bag-of-bytes WorkProgressUpdateResponse for UnifiedWorker.
+--
+-- /See:/ 'reportWorkItemStatusResponseUnifiedWorkerResponse' smart constructor.
+newtype ReportWorkItemStatusResponseUnifiedWorkerResponse =
+  ReportWorkItemStatusResponseUnifiedWorkerResponse'
+    { _rAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'ReportWorkItemStatusResponseUnifiedWorkerResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rAddtional'
+reportWorkItemStatusResponseUnifiedWorkerResponse
+    :: HashMap Text JSONValue -- ^ 'rAddtional'
+    -> ReportWorkItemStatusResponseUnifiedWorkerResponse
+reportWorkItemStatusResponseUnifiedWorkerResponse pRAddtional_ =
+  ReportWorkItemStatusResponseUnifiedWorkerResponse'
+    {_rAddtional = _Coerce # pRAddtional_}
+
+-- | Properties of the object. Contains field \'type with type URL.
+rAddtional :: Lens' ReportWorkItemStatusResponseUnifiedWorkerResponse (HashMap Text JSONValue)
+rAddtional
+  = lens _rAddtional (\ s a -> s{_rAddtional = a}) .
+      _Coerce
+
+instance FromJSON
+           ReportWorkItemStatusResponseUnifiedWorkerResponse
+         where
+        parseJSON
+          = withObject
+              "ReportWorkItemStatusResponseUnifiedWorkerResponse"
+              (\ o ->
+                 ReportWorkItemStatusResponseUnifiedWorkerResponse'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           ReportWorkItemStatusResponseUnifiedWorkerResponse
+         where
+        toJSON = toJSON . _rAddtional
+
 -- | Additional user labels attached to the job.
 --
 -- /See:/ 'runtimeEnvironmentAdditionalUserLabels' smart constructor.
@@ -8847,9 +9015,10 @@ instance ToJSON SnapshotJobRequest where
 -- | Response from a request to report the status of WorkItems.
 --
 -- /See:/ 'reportWorkItemStatusResponse' smart constructor.
-newtype ReportWorkItemStatusResponse =
+data ReportWorkItemStatusResponse =
   ReportWorkItemStatusResponse'
-    { _rwisrWorkItemServiceStates :: Maybe [WorkItemServiceState]
+    { _rwisrWorkItemServiceStates :: !(Maybe [WorkItemServiceState])
+    , _rwisrUnifiedWorkerResponse :: !(Maybe ReportWorkItemStatusResponseUnifiedWorkerResponse)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8858,10 +9027,15 @@ newtype ReportWorkItemStatusResponse =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rwisrWorkItemServiceStates'
+--
+-- * 'rwisrUnifiedWorkerResponse'
 reportWorkItemStatusResponse
     :: ReportWorkItemStatusResponse
 reportWorkItemStatusResponse =
-  ReportWorkItemStatusResponse' {_rwisrWorkItemServiceStates = Nothing}
+  ReportWorkItemStatusResponse'
+    { _rwisrWorkItemServiceStates = Nothing
+    , _rwisrUnifiedWorkerResponse = Nothing
+    }
 
 -- | A set of messages indicating the service-side state for each WorkItem
 -- whose status was reported, in the same order as the WorkItemStatus
@@ -8874,19 +9048,28 @@ rwisrWorkItemServiceStates
       . _Default
       . _Coerce
 
+-- | Untranslated bag-of-bytes WorkProgressUpdateResponse for UnifiedWorker.
+rwisrUnifiedWorkerResponse :: Lens' ReportWorkItemStatusResponse (Maybe ReportWorkItemStatusResponseUnifiedWorkerResponse)
+rwisrUnifiedWorkerResponse
+  = lens _rwisrUnifiedWorkerResponse
+      (\ s a -> s{_rwisrUnifiedWorkerResponse = a})
+
 instance FromJSON ReportWorkItemStatusResponse where
         parseJSON
           = withObject "ReportWorkItemStatusResponse"
               (\ o ->
                  ReportWorkItemStatusResponse' <$>
-                   (o .:? "workItemServiceStates" .!= mempty))
+                   (o .:? "workItemServiceStates" .!= mempty) <*>
+                     (o .:? "unifiedWorkerResponse"))
 
 instance ToJSON ReportWorkItemStatusResponse where
         toJSON ReportWorkItemStatusResponse'{..}
           = object
               (catMaybes
                  [("workItemServiceStates" .=) <$>
-                    _rwisrWorkItemServiceStates])
+                    _rwisrWorkItemServiceStates,
+                  ("unifiedWorkerResponse" .=) <$>
+                    _rwisrUnifiedWorkerResponse])
 
 -- | DEPRECATED in favor of DynamicSourceSplit.
 --
@@ -9722,6 +9905,48 @@ instance ToJSON PartialGroupByKeyInstruction where
                   ("originalCombineValuesInputStoreName" .=) <$>
                     _pgbkiOriginalCombineValuesInputStoreName])
 
+-- | Untranslated bag-of-bytes WorkResponse for UnifiedWorker.
+--
+-- /See:/ 'leaseWorkItemResponseUnifiedWorkerResponse' smart constructor.
+newtype LeaseWorkItemResponseUnifiedWorkerResponse =
+  LeaseWorkItemResponseUnifiedWorkerResponse'
+    { _lAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'LeaseWorkItemResponseUnifiedWorkerResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lAddtional'
+leaseWorkItemResponseUnifiedWorkerResponse
+    :: HashMap Text JSONValue -- ^ 'lAddtional'
+    -> LeaseWorkItemResponseUnifiedWorkerResponse
+leaseWorkItemResponseUnifiedWorkerResponse pLAddtional_ =
+  LeaseWorkItemResponseUnifiedWorkerResponse'
+    {_lAddtional = _Coerce # pLAddtional_}
+
+-- | Properties of the object. Contains field \'type with type URL.
+lAddtional :: Lens' LeaseWorkItemResponseUnifiedWorkerResponse (HashMap Text JSONValue)
+lAddtional
+  = lens _lAddtional (\ s a -> s{_lAddtional = a}) .
+      _Coerce
+
+instance FromJSON
+           LeaseWorkItemResponseUnifiedWorkerResponse
+         where
+        parseJSON
+          = withObject
+              "LeaseWorkItemResponseUnifiedWorkerResponse"
+              (\ o ->
+                 LeaseWorkItemResponseUnifiedWorkerResponse' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           LeaseWorkItemResponseUnifiedWorkerResponse
+         where
+        toJSON = toJSON . _lAddtional
+
 -- | An instruction that does a ParDo operation. Takes one main input and
 -- zero or more side inputs, and produces zero or more outputs. Runs user
 -- code.
@@ -10484,6 +10709,49 @@ instance ToJSON ComponentTransform where
                  [("originalTransform" .=) <$> _ctOriginalTransform,
                   ("userName" .=) <$> _ctUserName,
                   ("name" .=) <$> _ctName])
+
+-- | Map from user name of stateful transforms in this stage to their state
+-- family.
+--
+-- /See:/ 'streamingComputationConfigTransformUserNameToStateFamily' smart constructor.
+newtype StreamingComputationConfigTransformUserNameToStateFamily =
+  StreamingComputationConfigTransformUserNameToStateFamily'
+    { _scctuntsfAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'StreamingComputationConfigTransformUserNameToStateFamily' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scctuntsfAddtional'
+streamingComputationConfigTransformUserNameToStateFamily
+    :: HashMap Text Text -- ^ 'scctuntsfAddtional'
+    -> StreamingComputationConfigTransformUserNameToStateFamily
+streamingComputationConfigTransformUserNameToStateFamily pScctuntsfAddtional_ =
+  StreamingComputationConfigTransformUserNameToStateFamily'
+    {_scctuntsfAddtional = _Coerce # pScctuntsfAddtional_}
+
+scctuntsfAddtional :: Lens' StreamingComputationConfigTransformUserNameToStateFamily (HashMap Text Text)
+scctuntsfAddtional
+  = lens _scctuntsfAddtional
+      (\ s a -> s{_scctuntsfAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           StreamingComputationConfigTransformUserNameToStateFamily
+         where
+        parseJSON
+          = withObject
+              "StreamingComputationConfigTransformUserNameToStateFamily"
+              (\ o ->
+                 StreamingComputationConfigTransformUserNameToStateFamily'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           StreamingComputationConfigTransformUserNameToStateFamily
+         where
+        toJSON = toJSON . _scctuntsfAddtional
 
 -- | Additional information about how a Cloud Dataflow job will be executed
 -- that isn\'t contained in the submitted job.
@@ -11541,9 +11809,10 @@ instance ToJSON SpannerIODetails where
 -- | Response to a request to lease WorkItems.
 --
 -- /See:/ 'leaseWorkItemResponse' smart constructor.
-newtype LeaseWorkItemResponse =
+data LeaseWorkItemResponse =
   LeaseWorkItemResponse'
-    { _lwirWorkItems :: Maybe [WorkItem]
+    { _lwirWorkItems             :: !(Maybe [WorkItem])
+    , _lwirUnifiedWorkerResponse :: !(Maybe LeaseWorkItemResponseUnifiedWorkerResponse)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -11552,9 +11821,13 @@ newtype LeaseWorkItemResponse =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lwirWorkItems'
+--
+-- * 'lwirUnifiedWorkerResponse'
 leaseWorkItemResponse
     :: LeaseWorkItemResponse
-leaseWorkItemResponse = LeaseWorkItemResponse' {_lwirWorkItems = Nothing}
+leaseWorkItemResponse =
+  LeaseWorkItemResponse'
+    {_lwirWorkItems = Nothing, _lwirUnifiedWorkerResponse = Nothing}
 
 -- | A list of the leased WorkItems.
 lwirWorkItems :: Lens' LeaseWorkItemResponse [WorkItem]
@@ -11564,17 +11837,27 @@ lwirWorkItems
       . _Default
       . _Coerce
 
+-- | Untranslated bag-of-bytes WorkResponse for UnifiedWorker.
+lwirUnifiedWorkerResponse :: Lens' LeaseWorkItemResponse (Maybe LeaseWorkItemResponseUnifiedWorkerResponse)
+lwirUnifiedWorkerResponse
+  = lens _lwirUnifiedWorkerResponse
+      (\ s a -> s{_lwirUnifiedWorkerResponse = a})
+
 instance FromJSON LeaseWorkItemResponse where
         parseJSON
           = withObject "LeaseWorkItemResponse"
               (\ o ->
                  LeaseWorkItemResponse' <$>
-                   (o .:? "workItems" .!= mempty))
+                   (o .:? "workItems" .!= mempty) <*>
+                     (o .:? "unifiedWorkerResponse"))
 
 instance ToJSON LeaseWorkItemResponse where
         toJSON LeaseWorkItemResponse'{..}
           = object
-              (catMaybes [("workItems" .=) <$> _lwirWorkItems])
+              (catMaybes
+                 [("workItems" .=) <$> _lwirWorkItems,
+                  ("unifiedWorkerResponse" .=) <$>
+                    _lwirUnifiedWorkerResponse])
 
 -- | Position defines a position within a collection of data. The value can
 -- be either the end position, a key (used with ordered collections), a

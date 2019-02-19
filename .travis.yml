@@ -253,6 +253,8 @@ matrix:
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-groups-settings
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-healthcare
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-iam
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-iamcredentials

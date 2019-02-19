@@ -174,6 +174,7 @@ module Network.Google.DoubleClickBids.Types
     -- * DownloadResponse
     , DownloadResponse
     , downloadResponse
+    , drInventorySources
     , drInsertionOrders
     , drCampaigns
     , drLineItems

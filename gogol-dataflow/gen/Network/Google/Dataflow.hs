@@ -161,6 +161,11 @@ module Network.Google.Dataflow
     , pmRegexes
     , pmLabel
 
+    -- ** ReportWorkItemStatusRequestUnifiedWorkerRequest
+    , ReportWorkItemStatusRequestUnifiedWorkerRequest
+    , reportWorkItemStatusRequestUnifiedWorkerRequest
+    , rwisruwrAddtional
+
     -- ** CreateJobFromTemplateRequest
     , CreateJobFromTemplateRequest
     , createJobFromTemplateRequest
@@ -274,6 +279,7 @@ module Network.Google.Dataflow
     , reportWorkItemStatusRequest
     , rwisrCurrentWorkerTime
     , rwisrLocation
+    , rwisrUnifiedWorkerRequest
     , rwisrWorkItemStatuses
     , rwisrWorkerId
 
@@ -490,6 +496,11 @@ module Network.Google.Dataflow
     -- ** AutoscalingSettingsAlgorithm
     , AutoscalingSettingsAlgorithm (..)
 
+    -- ** LeaseWorkItemRequestUnifiedWorkerRequest
+    , LeaseWorkItemRequestUnifiedWorkerRequest
+    , leaseWorkItemRequestUnifiedWorkerRequest
+    , lwiruwrAddtional
+
     -- ** DerivedSource
     , DerivedSource
     , derivedSource
@@ -608,6 +619,7 @@ module Network.Google.Dataflow
     , sccInstructions
     , sccSystemName
     , sccComputationId
+    , sccTransformUserNameToStateFamily
     , sccStageName
 
     -- ** EnvironmentSdkPipelineOptions
@@ -635,6 +647,7 @@ module Network.Google.Dataflow
     , lwirCurrentWorkerTime
     , lwirLocation
     , lwirWorkerCapabilities
+    , lwirUnifiedWorkerRequest
     , lwirRequestedLeaseDuration
     , lwirWorkerId
 
@@ -951,6 +964,11 @@ module Network.Google.Dataflow
     , wleContainerStartTime
     , wleMetadata
 
+    -- ** ReportWorkItemStatusResponseUnifiedWorkerResponse
+    , ReportWorkItemStatusResponseUnifiedWorkerResponse
+    , reportWorkItemStatusResponseUnifiedWorkerResponse
+    , rAddtional
+
     -- ** RuntimeEnvironmentAdditionalUserLabels
     , RuntimeEnvironmentAdditionalUserLabels
     , runtimeEnvironmentAdditionalUserLabels
@@ -1125,6 +1143,7 @@ module Network.Google.Dataflow
     , ReportWorkItemStatusResponse
     , reportWorkItemStatusResponse
     , rwisrWorkItemServiceStates
+    , rwisrUnifiedWorkerResponse
 
     -- ** SourceFork
     , SourceFork
@@ -1215,6 +1234,11 @@ module Network.Google.Dataflow
     , pgbkiOriginalCombineValuesStepName
     , pgbkiInputElementCodec
     , pgbkiOriginalCombineValuesInputStoreName
+
+    -- ** LeaseWorkItemResponseUnifiedWorkerResponse
+    , LeaseWorkItemResponseUnifiedWorkerResponse
+    , leaseWorkItemResponseUnifiedWorkerResponse
+    , lAddtional
 
     -- ** WorkerLifecycleEventEvent
     , WorkerLifecycleEventEvent (..)
@@ -1308,6 +1332,11 @@ module Network.Google.Dataflow
     , ctOriginalTransform
     , ctUserName
     , ctName
+
+    -- ** StreamingComputationConfigTransformUserNameToStateFamily
+    , StreamingComputationConfigTransformUserNameToStateFamily
+    , streamingComputationConfigTransformUserNameToStateFamily
+    , scctuntsfAddtional
 
     -- ** WorkerPoolIPConfiguration
     , WorkerPoolIPConfiguration (..)
@@ -1440,6 +1469,7 @@ module Network.Google.Dataflow
     , LeaseWorkItemResponse
     , leaseWorkItemResponse
     , lwirWorkItems
+    , lwirUnifiedWorkerResponse
 
     -- ** Position
     , Position

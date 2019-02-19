@@ -122,7 +122,8 @@ ssLanguage
 instance GoogleRequest ScoresSubmit where
         type Rs ScoresSubmit = PlayerScoreResponse
         type Scopes ScoresSubmit =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ScoresSubmit'{..}
           = go _ssLeaderboardId (Just _ssScore) _ssScoreTag
               _ssLanguage

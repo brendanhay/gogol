@@ -2804,8 +2804,8 @@ instance ToJSON AccountRef where
                  [Just ("kind" .= _arKind), ("href" .=) <$> _arHref,
                   ("name" .=) <$> _arName, ("id" .=) <$> _arId])
 
--- | An entity AdWords link collection provides a list of GA-AdWords links
--- Each resource in this collection corresponds to a single link.
+-- | An entity Google Ads link collection provides a list of GA-Google Ads
+-- links Each resource in this collection corresponds to a single link.
 --
 -- /See:/ 'entityAdWordsLinks' smart constructor.
 data EntityAdWordsLinks =
@@ -2850,7 +2850,7 @@ entityAdWordsLinks =
     , _eawlPreviousLink = Nothing
     }
 
--- | Next link for this AdWords link collection.
+-- | Next link for this Google Ads link collection.
 eawlNextLink :: Lens' EntityAdWordsLinks (Maybe Text)
 eawlNextLink
   = lens _eawlNextLink (\ s a -> s{_eawlNextLink = a})
@@ -2869,7 +2869,7 @@ eawlItemsPerPage
 eawlKind :: Lens' EntityAdWordsLinks Text
 eawlKind = lens _eawlKind (\ s a -> s{_eawlKind = a})
 
--- | A list of entity AdWords links.
+-- | A list of entity Google Ads links.
 eawlItems :: Lens' EntityAdWordsLinks [EntityAdWordsLink]
 eawlItems
   = lens _eawlItems (\ s a -> s{_eawlItems = a}) .
@@ -2892,7 +2892,7 @@ eawlStartIndex
       (\ s a -> s{_eawlStartIndex = a})
       . mapping _Coerce
 
--- | Previous link for this AdWords link collection.
+-- | Previous link for this Google Ads link collection.
 eawlPreviousLink :: Lens' EntityAdWordsLinks (Maybe Text)
 eawlPreviousLink
   = lens _eawlPreviousLink
@@ -3098,7 +3098,7 @@ instance ToJSON
                  [("customDataImportUids" .=) <$>
                     _addudrCustomDataImportUids])
 
--- | JSON template for Analytics Entity AdWords Link.
+-- | JSON template for Analytics Entity Google Ads Link.
 --
 -- /See:/ 'entityAdWordsLink' smart constructor.
 data EntityAdWordsLink =
@@ -3143,8 +3143,8 @@ entityAdWordsLink =
     , _entEntity = Nothing
     }
 
--- | A list of AdWords client accounts. These cannot be MCC accounts. This
--- field is required when creating an AdWords link. It cannot be empty.
+-- | A list of Google Ads client accounts. These cannot be MCC accounts. This
+-- field is required when creating a Google Ads link. It cannot be empty.
 entAdWordsAccounts :: Lens' EntityAdWordsLink [AdWordsAccount]
 entAdWordsAccounts
   = lens _entAdWordsAccounts
@@ -3160,20 +3160,21 @@ entProFileIds
       . _Default
       . _Coerce
 
--- | Resource type for entity AdWords link.
+-- | Resource type for entity Google Ads link.
 entKind :: Lens' EntityAdWordsLink Text
 entKind = lens _entKind (\ s a -> s{_entKind = a})
 
--- | URL link for this Google Analytics - Google AdWords link.
+-- | URL link for this Google Analytics - Google Ads link.
 entSelfLink :: Lens' EntityAdWordsLink (Maybe Text)
 entSelfLink
   = lens _entSelfLink (\ s a -> s{_entSelfLink = a})
 
--- | Name of the link. This field is required when creating an AdWords link.
+-- | Name of the link. This field is required when creating a Google Ads
+-- link.
 entName :: Lens' EntityAdWordsLink (Maybe Text)
 entName = lens _entName (\ s a -> s{_entName = a})
 
--- | Entity AdWords link ID
+-- | Entity Google Ads link ID
 entId :: Lens' EntityAdWordsLink (Maybe Text)
 entId = lens _entId (\ s a -> s{_entId = a})
 
@@ -4589,8 +4590,7 @@ instance ToJSON CustomDataSource where
 -- /See:/ 'accountTreeRequest' smart constructor.
 data AccountTreeRequest =
   AccountTreeRequest'
-    { _atrAccountSettings :: !(Maybe AccountTreeRequestAccountSettings)
-    , _atrWebPropertyName :: !(Maybe Text)
+    { _atrWebPropertyName :: !(Maybe Text)
     , _atrKind            :: !Text
     , _atrAccountName     :: !(Maybe Text)
     , _atrProFileName     :: !(Maybe Text)
@@ -4602,8 +4602,6 @@ data AccountTreeRequest =
 -- | Creates a value of 'AccountTreeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'atrAccountSettings'
 --
 -- * 'atrWebPropertyName'
 --
@@ -4620,19 +4618,13 @@ accountTreeRequest
     :: AccountTreeRequest
 accountTreeRequest =
   AccountTreeRequest'
-    { _atrAccountSettings = Nothing
-    , _atrWebPropertyName = Nothing
+    { _atrWebPropertyName = Nothing
     , _atrKind = "analytics#accountTreeRequest"
     , _atrAccountName = Nothing
     , _atrProFileName = Nothing
     , _atrWebsiteURL = Nothing
     , _atrTimezone = Nothing
     }
-
-atrAccountSettings :: Lens' AccountTreeRequest (Maybe AccountTreeRequestAccountSettings)
-atrAccountSettings
-  = lens _atrAccountSettings
-      (\ s a -> s{_atrAccountSettings = a})
 
 atrWebPropertyName :: Lens' AccountTreeRequest (Maybe Text)
 atrWebPropertyName
@@ -4667,9 +4659,8 @@ instance FromJSON AccountTreeRequest where
           = withObject "AccountTreeRequest"
               (\ o ->
                  AccountTreeRequest' <$>
-                   (o .:? "accountSettings") <*>
-                     (o .:? "webpropertyName")
-                     <*> (o .:? "kind" .!= "analytics#accountTreeRequest")
+                   (o .:? "webpropertyName") <*>
+                     (o .:? "kind" .!= "analytics#accountTreeRequest")
                      <*> (o .:? "accountName")
                      <*> (o .:? "profileName")
                      <*> (o .:? "websiteUrl")
@@ -4679,8 +4670,7 @@ instance ToJSON AccountTreeRequest where
         toJSON AccountTreeRequest'{..}
           = object
               (catMaybes
-                 [("accountSettings" .=) <$> _atrAccountSettings,
-                  ("webpropertyName" .=) <$> _atrWebPropertyName,
+                 [("webpropertyName" .=) <$> _atrWebPropertyName,
                   Just ("kind" .= _atrKind),
                   ("accountName" .=) <$> _atrAccountName,
                   ("profileName" .=) <$> _atrProFileName,
@@ -4868,8 +4858,8 @@ lfaRemarketingAudienceId
   = lens _lfaRemarketingAudienceId
       (\ s a -> s{_lfaRemarketingAudienceId = a})
 
--- | The foreign account ID. For example the an AdWords \`linkedAccountId\`
--- has the following format XXX-XXX-XXXX.
+-- | The foreign account ID. For example the an Google Ads
+-- \`linkedAccountId\` has the following format XXX-XXX-XXXX.
 lfaLinkedAccountId :: Lens' LinkedForeignAccount (Maybe Text)
 lfaLinkedAccountId
   = lens _lfaLinkedAccountId
@@ -5866,7 +5856,7 @@ instance ToJSON EntityUserLinks where
                   ("startIndex" .=) <$> _eulStartIndex,
                   ("previousLink" .=) <$> _eulPreviousLink])
 
--- | JSON template for an AdWords account.
+-- | JSON template for an Google Ads account.
 --
 -- /See:/ 'adWordsAccount' smart constructor.
 data AdWordsAccount =
@@ -5895,18 +5885,18 @@ adWordsAccount =
     , _awaCustomerId = Nothing
     }
 
--- | True if auto-tagging is enabled on the AdWords account. Read-only after
--- the insert operation.
+-- | True if auto-tagging is enabled on the Google Ads account. Read-only
+-- after the insert operation.
 awaAutoTaggingEnabled :: Lens' AdWordsAccount (Maybe Bool)
 awaAutoTaggingEnabled
   = lens _awaAutoTaggingEnabled
       (\ s a -> s{_awaAutoTaggingEnabled = a})
 
--- | Resource type for AdWords account.
+-- | Resource type for Google Ads account.
 awaKind :: Lens' AdWordsAccount Text
 awaKind = lens _awaKind (\ s a -> s{_awaKind = a})
 
--- | Customer ID. This field is required when creating an AdWords link.
+-- | Customer ID. This field is required when creating a Google Ads link.
 awaCustomerId :: Lens' AdWordsAccount (Maybe Text)
 awaCustomerId
   = lens _awaCustomerId
@@ -6508,19 +6498,16 @@ instance ToJSON FilterAdvancedDetails where
 -- /See:/ 'accountTreeResponse' smart constructor.
 data AccountTreeResponse =
   AccountTreeResponse'
-    { _atrtAccountSettings :: !(Maybe AccountTreeResponseAccountSettings)
-    , _atrtKind            :: !Text
-    , _atrtProFile         :: !(Maybe ProFile)
-    , _atrtAccount         :: !(Maybe Account)
-    , _atrtWebProperty     :: !(Maybe WebProperty)
+    { _atrtKind        :: !Text
+    , _atrtProFile     :: !(Maybe ProFile)
+    , _atrtAccount     :: !(Maybe Account)
+    , _atrtWebProperty :: !(Maybe WebProperty)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AccountTreeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'atrtAccountSettings'
 --
 -- * 'atrtKind'
 --
@@ -6533,17 +6520,11 @@ accountTreeResponse
     :: AccountTreeResponse
 accountTreeResponse =
   AccountTreeResponse'
-    { _atrtAccountSettings = Nothing
-    , _atrtKind = "analytics#accountTreeResponse"
+    { _atrtKind = "analytics#accountTreeResponse"
     , _atrtProFile = Nothing
     , _atrtAccount = Nothing
     , _atrtWebProperty = Nothing
     }
-
-atrtAccountSettings :: Lens' AccountTreeResponse (Maybe AccountTreeResponseAccountSettings)
-atrtAccountSettings
-  = lens _atrtAccountSettings
-      (\ s a -> s{_atrtAccountSettings = a})
 
 -- | Resource type for account ticket.
 atrtKind :: Lens' AccountTreeResponse Text
@@ -6570,8 +6551,7 @@ instance FromJSON AccountTreeResponse where
           = withObject "AccountTreeResponse"
               (\ o ->
                  AccountTreeResponse' <$>
-                   (o .:? "accountSettings") <*>
-                     (o .:? "kind" .!= "analytics#accountTreeResponse")
+                   (o .:? "kind" .!= "analytics#accountTreeResponse")
                      <*> (o .:? "profile")
                      <*> (o .:? "account")
                      <*> (o .:? "webproperty"))
@@ -6580,8 +6560,7 @@ instance ToJSON AccountTreeResponse where
         toJSON AccountTreeResponse'{..}
           = object
               (catMaybes
-                 [("accountSettings" .=) <$> _atrtAccountSettings,
-                  Just ("kind" .= _atrtKind),
+                 [Just ("kind" .= _atrtKind),
                   ("profile" .=) <$> _atrtProFile,
                   ("account" .=) <$> _atrtAccount,
                   ("webproperty" .=) <$> _atrtWebProperty])
@@ -7854,82 +7833,6 @@ instance ToJSON GoalEventDetailsEventConditionsItem
                   ("comparisonValue" .=) <$> _gedeciComparisonValue,
                   ("type" .=) <$> _gedeciType,
                   ("comparisonType" .=) <$> _gedeciComparisonType])
-
---
--- /See:/ 'accountTreeRequestAccountSettings' smart constructor.
-data AccountTreeRequestAccountSettings =
-  AccountTreeRequestAccountSettings'
-    { _atrasShareWithSpeciaLists       :: !(Maybe Bool)
-    , _atrasShareWithSupport           :: !(Maybe Bool)
-    , _atrasShareAnonymouslyWithOthers :: !(Maybe Bool)
-    , _atrasShareWithGoogleProducts    :: !(Maybe Bool)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'AccountTreeRequestAccountSettings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'atrasShareWithSpeciaLists'
---
--- * 'atrasShareWithSupport'
---
--- * 'atrasShareAnonymouslyWithOthers'
---
--- * 'atrasShareWithGoogleProducts'
-accountTreeRequestAccountSettings
-    :: AccountTreeRequestAccountSettings
-accountTreeRequestAccountSettings =
-  AccountTreeRequestAccountSettings'
-    { _atrasShareWithSpeciaLists = Nothing
-    , _atrasShareWithSupport = Nothing
-    , _atrasShareAnonymouslyWithOthers = Nothing
-    , _atrasShareWithGoogleProducts = Nothing
-    }
-
-atrasShareWithSpeciaLists :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
-atrasShareWithSpeciaLists
-  = lens _atrasShareWithSpeciaLists
-      (\ s a -> s{_atrasShareWithSpeciaLists = a})
-
-atrasShareWithSupport :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
-atrasShareWithSupport
-  = lens _atrasShareWithSupport
-      (\ s a -> s{_atrasShareWithSupport = a})
-
-atrasShareAnonymouslyWithOthers :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
-atrasShareAnonymouslyWithOthers
-  = lens _atrasShareAnonymouslyWithOthers
-      (\ s a -> s{_atrasShareAnonymouslyWithOthers = a})
-
-atrasShareWithGoogleProducts :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
-atrasShareWithGoogleProducts
-  = lens _atrasShareWithGoogleProducts
-      (\ s a -> s{_atrasShareWithGoogleProducts = a})
-
-instance FromJSON AccountTreeRequestAccountSettings
-         where
-        parseJSON
-          = withObject "AccountTreeRequestAccountSettings"
-              (\ o ->
-                 AccountTreeRequestAccountSettings' <$>
-                   (o .:? "shareWithSpecialists") <*>
-                     (o .:? "shareWithSupport")
-                     <*> (o .:? "shareAnonymouslyWithOthers")
-                     <*> (o .:? "shareWithGoogleProducts"))
-
-instance ToJSON AccountTreeRequestAccountSettings
-         where
-        toJSON AccountTreeRequestAccountSettings'{..}
-          = object
-              (catMaybes
-                 [("shareWithSpecialists" .=) <$>
-                    _atrasShareWithSpeciaLists,
-                  ("shareWithSupport" .=) <$> _atrasShareWithSupport,
-                  ("shareAnonymouslyWithOthers" .=) <$>
-                    _atrasShareAnonymouslyWithOthers,
-                  ("shareWithGoogleProducts" .=) <$>
-                    _atrasShareWithGoogleProducts])
 
 -- | Analytics data request query parameters.
 --
@@ -9456,82 +9359,6 @@ instance ToJSON
                     _rasbadExcludeConditions,
                   ("includeConditions" .=) <$>
                     _rasbadIncludeConditions])
-
---
--- /See:/ 'accountTreeResponseAccountSettings' smart constructor.
-data AccountTreeResponseAccountSettings =
-  AccountTreeResponseAccountSettings'
-    { _aShareWithSpeciaLists       :: !(Maybe Bool)
-    , _aShareWithSupport           :: !(Maybe Bool)
-    , _aShareAnonymouslyWithOthers :: !(Maybe Bool)
-    , _aShareWithGoogleProducts    :: !(Maybe Bool)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'AccountTreeResponseAccountSettings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aShareWithSpeciaLists'
---
--- * 'aShareWithSupport'
---
--- * 'aShareAnonymouslyWithOthers'
---
--- * 'aShareWithGoogleProducts'
-accountTreeResponseAccountSettings
-    :: AccountTreeResponseAccountSettings
-accountTreeResponseAccountSettings =
-  AccountTreeResponseAccountSettings'
-    { _aShareWithSpeciaLists = Nothing
-    , _aShareWithSupport = Nothing
-    , _aShareAnonymouslyWithOthers = Nothing
-    , _aShareWithGoogleProducts = Nothing
-    }
-
-aShareWithSpeciaLists :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
-aShareWithSpeciaLists
-  = lens _aShareWithSpeciaLists
-      (\ s a -> s{_aShareWithSpeciaLists = a})
-
-aShareWithSupport :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
-aShareWithSupport
-  = lens _aShareWithSupport
-      (\ s a -> s{_aShareWithSupport = a})
-
-aShareAnonymouslyWithOthers :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
-aShareAnonymouslyWithOthers
-  = lens _aShareAnonymouslyWithOthers
-      (\ s a -> s{_aShareAnonymouslyWithOthers = a})
-
-aShareWithGoogleProducts :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
-aShareWithGoogleProducts
-  = lens _aShareWithGoogleProducts
-      (\ s a -> s{_aShareWithGoogleProducts = a})
-
-instance FromJSON AccountTreeResponseAccountSettings
-         where
-        parseJSON
-          = withObject "AccountTreeResponseAccountSettings"
-              (\ o ->
-                 AccountTreeResponseAccountSettings' <$>
-                   (o .:? "shareWithSpecialists") <*>
-                     (o .:? "shareWithSupport")
-                     <*> (o .:? "shareAnonymouslyWithOthers")
-                     <*> (o .:? "shareWithGoogleProducts"))
-
-instance ToJSON AccountTreeResponseAccountSettings
-         where
-        toJSON AccountTreeResponseAccountSettings'{..}
-          = object
-              (catMaybes
-                 [("shareWithSpecialists" .=) <$>
-                    _aShareWithSpeciaLists,
-                  ("shareWithSupport" .=) <$> _aShareWithSupport,
-                  ("shareAnonymouslyWithOthers" .=) <$>
-                    _aShareAnonymouslyWithOthers,
-                  ("shareWithGoogleProducts" .=) <$>
-                    _aShareWithGoogleProducts])
 
 -- | Details for the goal of the type URL_DESTINATION.
 --

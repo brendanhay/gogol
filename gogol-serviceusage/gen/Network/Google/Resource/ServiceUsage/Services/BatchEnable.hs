@@ -22,7 +22,7 @@
 --
 -- Enable multiple services on a project. The operation is atomic: if
 -- enabling any service fails, then the entire batch fails, and no state
--- changes occur. Operation
+-- changes occur.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.batchEnable@.
 module Network.Google.Resource.ServiceUsage.Services.BatchEnable
@@ -64,7 +64,7 @@ type ServicesBatchEnableResource =
 
 -- | Enable multiple services on a project. The operation is atomic: if
 -- enabling any service fails, then the entire batch fails, and no state
--- changes occur. Operation
+-- changes occur.
 --
 -- /See:/ 'servicesBatchEnable' smart constructor.
 data ServicesBatchEnable =

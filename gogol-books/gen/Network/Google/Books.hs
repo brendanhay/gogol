@@ -462,6 +462,7 @@ module Network.Google.Books
     , nKind
     , nBody
     , nCrmExperimentIds
+    , nTimeToExpireMs
     , nPcampaignId
     , nReason
     , nIsDocumentMature

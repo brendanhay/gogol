@@ -167,7 +167,8 @@ instance GoogleRequest ScoresGet where
         type Rs ScoresGet =
              PlayerLeaderboardScoreListResponse
         type Scopes ScoresGet =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ScoresGet'{..}
           = go _sgPlayerId _sgLeaderboardId _sgTimeSpan
               _sgIncludeRankType

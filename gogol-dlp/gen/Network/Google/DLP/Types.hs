@@ -413,6 +413,7 @@ module Network.Google.DLP.Types
     , gpdvitdName
     , gpdvitdDisplayName
     , gpdvitdSupportedBy
+    , gpdvitdDescription
 
     -- * GoogleProtobufEmpty
     , GoogleProtobufEmpty
@@ -515,6 +516,7 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2Regex
     , GooglePrivacyDlpV2Regex
     , googlePrivacyDlpV2Regex
+    , gpdvrGroupIndexes
     , gpdvrPattern
 
     -- * GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
@@ -540,6 +542,10 @@ module Network.Google.DLP.Types
     , googlePrivacyDlpV2LDiversityConfig
     , gpdvldcSensitiveAttribute
     , gpdvldcQuasiIds
+
+    -- * GooglePrivacyDlpV2JobNotificationEmails
+    , GooglePrivacyDlpV2JobNotificationEmails
+    , googlePrivacyDlpV2JobNotificationEmails
 
     -- * GooglePrivacyDlpV2DeidentifyContentRequest
     , GooglePrivacyDlpV2DeidentifyContentRequest
@@ -890,6 +896,7 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2Action
     , GooglePrivacyDlpV2Action
     , googlePrivacyDlpV2Action
+    , gpdvaJobNotificationEmails
     , gpdvaPubSub
     , gpdvaSaveFindings
     , gpdvaPublishSummaryToCscc

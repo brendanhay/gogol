@@ -2471,6 +2471,7 @@ data Notification =
     , _nKind                           :: !Text
     , _nBody                           :: !(Maybe Text)
     , _nCrmExperimentIds               :: !(Maybe [Textual Int64])
+    , _nTimeToExpireMs                 :: !(Maybe (Textual Int64))
     , _nPcampaignId                    :: !(Maybe Text)
     , _nReason                         :: !(Maybe Text)
     , _nIsDocumentMature               :: !(Maybe Bool)
@@ -2500,6 +2501,8 @@ data Notification =
 --
 -- * 'nCrmExperimentIds'
 --
+-- * 'nTimeToExpireMs'
+--
 -- * 'nPcampaignId'
 --
 -- * 'nReason'
@@ -2526,6 +2529,7 @@ notification =
     , _nKind = "books#notification"
     , _nBody = Nothing
     , _nCrmExperimentIds = Nothing
+    , _nTimeToExpireMs = Nothing
     , _nPcampaignId = Nothing
     , _nReason = Nothing
     , _nIsDocumentMature = Nothing
@@ -2565,6 +2569,12 @@ nCrmExperimentIds
       (\ s a -> s{_nCrmExperimentIds = a})
       . _Default
       . _Coerce
+
+nTimeToExpireMs :: Lens' Notification (Maybe Int64)
+nTimeToExpireMs
+  = lens _nTimeToExpireMs
+      (\ s a -> s{_nTimeToExpireMs = a})
+      . mapping _Coerce
 
 nPcampaignId :: Lens' Notification (Maybe Text)
 nPcampaignId
@@ -2610,6 +2620,7 @@ instance FromJSON Notification where
                      <*> (o .:? "kind" .!= "books#notification")
                      <*> (o .:? "body")
                      <*> (o .:? "crmExperimentIds" .!= mempty)
+                     <*> (o .:? "timeToExpireMs")
                      <*> (o .:? "pcampaign_id")
                      <*> (o .:? "reason")
                      <*> (o .:? "is_document_mature")
@@ -2630,6 +2641,7 @@ instance ToJSON Notification where
                   ("doc_id" .=) <$> _nDocId, Just ("kind" .= _nKind),
                   ("body" .=) <$> _nBody,
                   ("crmExperimentIds" .=) <$> _nCrmExperimentIds,
+                  ("timeToExpireMs" .=) <$> _nTimeToExpireMs,
                   ("pcampaign_id" .=) <$> _nPcampaignId,
                   ("reason" .=) <$> _nReason,
                   ("is_document_mature" .=) <$> _nIsDocumentMature,

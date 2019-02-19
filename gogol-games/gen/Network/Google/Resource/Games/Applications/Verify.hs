@@ -84,7 +84,8 @@ instance GoogleRequest ApplicationsVerify where
         type Rs ApplicationsVerify =
              ApplicationVerifyResponse
         type Scopes ApplicationsVerify =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ApplicationsVerify'{..}
           = go _avApplicationId (Just AltJSON) gamesService
           where go

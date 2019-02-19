@@ -1,5 +1,5 @@
 name:                  gogol-apps-tasks
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Tasks SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -55,5 +55,5 @@ library
         , Network.Google.AppsTasks.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

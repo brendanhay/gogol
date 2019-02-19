@@ -107,9 +107,16 @@ module Network.Google.FirebaseDynamicLinks.Types
     , dliDynamicLinkDomain
     , dliLink
     , dliIosInfo
+    , dliAppPreview
     , dliDomainURIPrefix
     , dliAndroidInfo
     , dliAnalyticsInfo
+
+    -- * AppPreview
+    , AppPreview
+    , appPreview
+    , apOpenButtonText
+    , apSavePositionText
 
     -- * GetIosPostInstallAttributionRequestVisualStyle
     , GetIosPostInstallAttributionRequestVisualStyle (..)

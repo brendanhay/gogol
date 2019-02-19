@@ -204,6 +204,7 @@ module Network.Google.WebSecurityScanner
     -- ** ScanConfig
     , ScanConfig
     , scanConfig
+    , scLatestRun
     , scSchedule
     , scTargetPlatforms
     , scStartingURLs

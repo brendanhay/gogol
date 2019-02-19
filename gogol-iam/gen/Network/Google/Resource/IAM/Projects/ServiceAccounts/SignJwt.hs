@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Signs a JWT using a service account\'s system-managed private key. If no
--- expiry time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an
--- an expiry time of one hour by default. If you request an expiry time of
+-- **Note**: This method is in the process of being deprecated. Call the
+-- [\`signJwt()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signJwt)
+-- method of the Cloud IAM Service Account Credentials API instead. Signs a
+-- JWT using a service account\'s system-managed private key. If no expiry
+-- time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an an
+-- expiry time of one hour by default. If you request an expiry time of
 -- more than one hour, the request will fail.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.signJwt@.
@@ -62,9 +65,12 @@ type ProjectsServiceAccountsSignJwtResource =
                      ReqBody '[JSON] SignJwtRequest :>
                        Post '[JSON] SignJwtResponse
 
--- | Signs a JWT using a service account\'s system-managed private key. If no
--- expiry time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an
--- an expiry time of one hour by default. If you request an expiry time of
+-- | **Note**: This method is in the process of being deprecated. Call the
+-- [\`signJwt()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signJwt)
+-- method of the Cloud IAM Service Account Credentials API instead. Signs a
+-- JWT using a service account\'s system-managed private key. If no expiry
+-- time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an an
+-- expiry time of one hour by default. If you request an expiry time of
 -- more than one hour, the request will fail.
 --
 -- /See:/ 'projectsServiceAccountsSignJwt' smart constructor.

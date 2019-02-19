@@ -131,7 +131,8 @@ instance GoogleRequest AchievementsList where
         type Rs AchievementsList =
              PlayerAchievementListResponse
         type Scopes AchievementsList =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient AchievementsList'{..}
           = go _alPlayerId _alState _alLanguage _alPageToken
               _alMaxResults

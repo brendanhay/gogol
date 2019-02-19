@@ -190,6 +190,12 @@ data AppEngineHTTPRequestHTTPMethod
     | Delete'
       -- ^ @DELETE@
       -- HTTP DELETE
+    | Patch'
+      -- ^ @PATCH@
+      -- HTTP PATCH
+    | Options
+      -- ^ @OPTIONS@
+      -- HTTP OPTIONS
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AppEngineHTTPRequestHTTPMethod
@@ -202,6 +208,8 @@ instance FromHttpApiData AppEngineHTTPRequestHTTPMethod where
         "HEAD" -> Right Head'
         "PUT" -> Right Put'
         "DELETE" -> Right Delete'
+        "PATCH" -> Right Patch'
+        "OPTIONS" -> Right Options
         x -> Left ("Unable to parse AppEngineHTTPRequestHTTPMethod from: " <> x)
 
 instance ToHttpApiData AppEngineHTTPRequestHTTPMethod where
@@ -212,6 +220,8 @@ instance ToHttpApiData AppEngineHTTPRequestHTTPMethod where
         Head' -> "HEAD"
         Put' -> "PUT"
         Delete' -> "DELETE"
+        Patch' -> "PATCH"
+        Options -> "OPTIONS"
 
 instance FromJSON AppEngineHTTPRequestHTTPMethod where
     parseJSON = parseJSONText "AppEngineHTTPRequestHTTPMethod"

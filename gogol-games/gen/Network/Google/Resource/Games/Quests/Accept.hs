@@ -89,7 +89,8 @@ qaQuestId
 instance GoogleRequest QuestsAccept where
         type Rs QuestsAccept = Quest
         type Scopes QuestsAccept =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient QuestsAccept'{..}
           = go _qaQuestId _qaLanguage (Just AltJSON)
               gamesService

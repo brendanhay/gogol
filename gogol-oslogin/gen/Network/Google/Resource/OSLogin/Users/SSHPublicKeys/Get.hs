@@ -22,7 +22,7 @@
 --
 -- Retrieves an SSH public key.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.get@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.get@.
 module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Get
     (
     -- * REST Resource

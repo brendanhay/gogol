@@ -2835,7 +2835,7 @@ uccInternalCheckers
 
 -- | How often, in seconds, the uptime check is performed. Currently, the
 -- only supported values are 60s (1 minute), 300s (5 minutes), 600s (10
--- minutes), and 900s (15 minutes). Optional, defaults to 300s.
+-- minutes), and 900s (15 minutes). Optional, defaults to 60s.
 uccPeriod :: Lens' UptimeCheckConfig (Maybe Scientific)
 uccPeriod
   = lens _uccPeriod (\ s a -> s{_uccPeriod = a}) .

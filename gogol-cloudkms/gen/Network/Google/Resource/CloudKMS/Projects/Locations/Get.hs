@@ -132,7 +132,8 @@ plgCallback
 instance GoogleRequest ProjectsLocationsGet where
         type Rs ProjectsLocationsGet = Location
         type Scopes ProjectsLocationsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient ProjectsLocationsGet'{..}
           = go _plgName _plgXgafv _plgUploadProtocol
               _plgAccessToken

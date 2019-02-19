@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the specified alert.
+-- Gets the specified alert. Attempting to get a nonexistent alert returns
+-- \`NOT_FOUND\` error.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.get@.
 module Network.Google.Resource.AlertCenter.Alerts.Get
@@ -59,7 +60,8 @@ type AlertsGetResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Alert
 
--- | Gets the specified alert.
+-- | Gets the specified alert. Attempting to get a nonexistent alert returns
+-- \`NOT_FOUND\` error.
 --
 -- /See:/ 'alertsGet' smart constructor.
 data AlertsGet =
@@ -121,8 +123,7 @@ agAccessToken
   = lens _agAccessToken
       (\ s a -> s{_agAccessToken = a})
 
--- | Required. The identifier of the alert to retrieve. Returns a NOT_FOUND
--- error if no such alert.
+-- | Required. The identifier of the alert to retrieve.
 agAlertId :: Lens' AlertsGet Text
 agAlertId
   = lens _agAlertId (\ s a -> s{_agAlertId = a})

@@ -22,7 +22,7 @@
 --
 -- Retrieve the list of APIs supported at this endpoint.
 --
--- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @discovery.apis.list@.
+-- /See:/ <https://developers.google.com/discovery/ API Discovery Service Reference> for @discovery.apis.list@.
 module Network.Google.Resource.Discovery.APIs.List
     (
     -- * REST Resource

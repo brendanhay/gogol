@@ -89,7 +89,8 @@ tbmcLanguage
 instance GoogleRequest TurnBasedMatchesCreate where
         type Rs TurnBasedMatchesCreate = TurnBasedMatch
         type Scopes TurnBasedMatchesCreate =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesCreate'{..}
           = go _tbmcLanguage (Just AltJSON) _tbmcPayload
               gamesService

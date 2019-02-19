@@ -157,7 +157,9 @@ instance GoogleRequest
              DecryptResponse
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysDecrypt
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysDecrypt'{..}
           = go _plkrckdName _plkrckdXgafv

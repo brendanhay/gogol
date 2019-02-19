@@ -586,7 +586,8 @@ instance ToJSON
 -- | Events allow for matching intents by event name instead of the natural
 -- language input. For instance, input \`\` can trigger a personalized
 -- welcome response. The parameter \`name\` may be used by the agent in the
--- response: \`“Hello #welcome_event.name! What can I do for you today?”\`.
+-- response: \`\"Hello #welcome_event.name! What can I do for you
+-- today?\"\`.
 --
 -- /See:/ 'googleCloudDialogflowV2EventInput' smart constructor.
 data GoogleCloudDialogflowV2EventInput =
@@ -768,7 +769,7 @@ instance ToJSON GoogleLongrunningOperationMetadata
          where
         toJSON = toJSON . _glomAddtional
 
--- | Represents an example or template that the agent is trained on.
+-- | Represents an example that the agent is trained on.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentTrainingPhrase' smart constructor.
 data GoogleCloudDialogflowV2IntentTrainingPhrase =
@@ -815,9 +816,9 @@ gcdvitpName :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrase (Maybe Text)
 gcdvitpName
   = lens _gcdvitpName (\ s a -> s{_gcdvitpName = a})
 
--- | Optional. Indicates how many times this example or template was added to
--- the intent. Each time a developer adds an existing sample by editing an
--- intent or training, this counter is increased.
+-- | Optional. Indicates how many times this example was added to the intent.
+-- Each time a developer adds an existing sample by editing an intent or
+-- training, this counter is increased.
 gcdvitpTimesAddedCount :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrase (Maybe Int32)
 gcdvitpTimesAddedCount
   = lens _gcdvitpTimesAddedCount
@@ -1219,8 +1220,8 @@ gcdviRootFollowupIntentName
   = lens _gcdviRootFollowupIntentName
       (\ s a -> s{_gcdviRootFollowupIntentName = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of this intent. Format:
+-- | The unique identifier of this intent. Required for Intents.UpdateIntent
+-- and Intents.BatchUpdateIntents methods. Format:
 -- \`projects\/\/agent\/intents\/\`.
 gcdviName :: Lens' GoogleCloudDialogflowV2Intent (Maybe Text)
 gcdviName
@@ -1289,8 +1290,7 @@ gcdviOutputContexts
       . _Default
       . _Coerce
 
--- | Optional. The collection of examples\/templates that the agent is
--- trained on.
+-- | Optional. The collection of examples that the agent is trained on.
 gcdviTrainingPhrases :: Lens' GoogleCloudDialogflowV2Intent [GoogleCloudDialogflowV2IntentTrainingPhrase]
 gcdviTrainingPhrases
   = lens _gcdviTrainingPhrases
@@ -1737,7 +1737,8 @@ gcdvqrQueryText
   = lens _gcdvqrQueryText
       (\ s a -> s{_gcdvqrQueryText = a})
 
--- | The text to be pronounced to the user or shown on the screen.
+-- | The text to be pronounced to the user or shown on the screen. Note: This
+-- is a legacy field, \`fulfillment_messages\` should be preferred.
 gcdvqrFulfillmentText :: Lens' GoogleCloudDialogflowV2QueryResult (Maybe Text)
 gcdvqrFulfillmentText
   = lens _gcdvqrFulfillmentText
@@ -2622,9 +2623,9 @@ googleCloudDialogflowV2IntentTrainingPhrasePart =
     , _gcdvitppAlias = Nothing
     }
 
--- | Required. The text corresponding to the example or template, if there
--- are no annotations. For annotated examples, it is the text for one of
--- the example\'s parts.
+-- | Required. The text corresponding to the example, if there are no
+-- annotations. For annotated examples, it is the text for one of the
+-- example\'s parts.
 gcdvitppText :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrasePart (Maybe Text)
 gcdvitppText
   = lens _gcdvitppText (\ s a -> s{_gcdvitppText = a})
@@ -4255,7 +4256,7 @@ instance ToJSON
                   ("title" .=) <$> _gcdvimbccTitle,
                   ("formattedText" .=) <$> _gcdvimbccFormattedText])
 
--- | Represents an example or template that the agent is trained on.
+-- | Represents an example that the agent is trained on.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentTrainingPhrase' smart constructor.
 data GoogleCloudDialogflowV2beta1IntentTrainingPhrase =
@@ -4300,9 +4301,9 @@ gParts
 gName :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrase (Maybe Text)
 gName = lens _gName (\ s a -> s{_gName = a})
 
--- | Optional. Indicates how many times this example or template was added to
--- the intent. Each time a developer adds an existing sample by editing an
--- intent or training, this counter is increased.
+-- | Optional. Indicates how many times this example was added to the intent.
+-- Each time a developer adds an existing sample by editing an intent or
+-- training, this counter is increased.
 gTimesAddedCount :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrase (Maybe Int32)
 gTimesAddedCount
   = lens _gTimesAddedCount
@@ -4449,7 +4450,8 @@ instance ToJSON
 -- | Events allow for matching intents by event name instead of the natural
 -- language input. For instance, input \`\` can trigger a personalized
 -- welcome response. The parameter \`name\` may be used by the agent in the
--- response: \`“Hello #welcome_event.name! What can I do for you today?”\`.
+-- response: \`\"Hello #welcome_event.name! What can I do for you
+-- today?\"\`.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1EventInput' smart constructor.
 data GoogleCloudDialogflowV2beta1EventInput =
@@ -6289,7 +6291,7 @@ instance ToJSON
           = object
               (catMaybes [("title" .=) <$> _gcdvimscTitle])
 
--- | Optional. Represents an entity.
+-- | An **entity entry** for an associated entity type.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1EntityTypeEntity' smart constructor.
 data GoogleCloudDialogflowV2beta1EntityTypeEntity =
@@ -6312,15 +6314,20 @@ googleCloudDialogflowV2beta1EntityTypeEntity =
   GoogleCloudDialogflowV2beta1EntityTypeEntity'
     {_gcdveteValue = Nothing, _gcdveteSynonyms = Nothing}
 
--- | Required. For \`KIND_MAP\` entity types: A canonical name to be used in
--- place of synonyms. For \`KIND_LIST\` entity types: A string that can
--- contain references to other entity types (with or without aliases).
+-- | Required. The primary value associated with this entity entry. For
+-- example, if the entity type is *vegetable*, the value could be
+-- *scallions*. For \`KIND_MAP\` entity types: * A canonical value to be
+-- used in place of synonyms. For \`KIND_LIST\` entity types: * A string
+-- that can contain references to other entity types (with or without
+-- aliases).
 gcdveteValue :: Lens' GoogleCloudDialogflowV2beta1EntityTypeEntity (Maybe Text)
 gcdveteValue
   = lens _gcdveteValue (\ s a -> s{_gcdveteValue = a})
 
--- | Required. A collection of synonyms. For \`KIND_LIST\` entity types this
--- must contain exactly one synonym equal to \`value\`.
+-- | Required. A collection of value synonyms. For example, if the entity
+-- type is *vegetable*, and \`value\` is *scallions*, a synonym could be
+-- *green onions*. For \`KIND_LIST\` entity types: * This collection must
+-- contain exactly one synonym equal to \`value\`.
 gcdveteSynonyms :: Lens' GoogleCloudDialogflowV2beta1EntityTypeEntity [Text]
 gcdveteSynonyms
   = lens _gcdveteSynonyms
@@ -6386,7 +6393,8 @@ googleCloudDialogflowV2EntityType =
     , _gcdvetDisplayName = Nothing
     }
 
--- | Optional. The collection of entities associated with the entity type.
+-- | Optional. The collection of entity entries associated with the entity
+-- type.
 gcdvetEntities :: Lens' GoogleCloudDialogflowV2EntityType [GoogleCloudDialogflowV2EntityTypeEntity]
 gcdvetEntities
   = lens _gcdvetEntities
@@ -6399,9 +6407,9 @@ gcdvetKind :: Lens' GoogleCloudDialogflowV2EntityType (Maybe GoogleCloudDialogfl
 gcdvetKind
   = lens _gcdvetKind (\ s a -> s{_gcdvetKind = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of the entity type. Format:
--- \`projects\/\/agent\/entityTypes\/\`.
+-- | The unique identifier of the entity type. Required for
+-- EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes
+-- methods. Format: \`projects\/\/agent\/entityTypes\/\`.
 gcdvetName :: Lens' GoogleCloudDialogflowV2EntityType (Maybe Text)
 gcdvetName
   = lens _gcdvetName (\ s a -> s{_gcdvetName = a})
@@ -7449,9 +7457,9 @@ googleCloudDialogflowV2beta1IntentTrainingPhrasePart =
     , _gcdvitppcAlias = Nothing
     }
 
--- | Required. The text corresponding to the example or template, if there
--- are no annotations. For annotated examples, it is the text for one of
--- the example\'s parts.
+-- | Required. The text corresponding to the example, if there are no
+-- annotations. For annotated examples, it is the text for one of the
+-- example\'s parts.
 gcdvitppcText :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart (Maybe Text)
 gcdvitppcText
   = lens _gcdvitppcText
@@ -7817,7 +7825,7 @@ instance ToJSON
                   ("entities" .=) <$> _gcdvSetEntities,
                   ("name" .=) <$> _gcdvSetName])
 
--- | Optional. Represents an entity.
+-- | An **entity entry** for an associated entity type.
 --
 -- /See:/ 'googleCloudDialogflowV2EntityTypeEntity' smart constructor.
 data GoogleCloudDialogflowV2EntityTypeEntity =
@@ -7840,14 +7848,19 @@ googleCloudDialogflowV2EntityTypeEntity =
   GoogleCloudDialogflowV2EntityTypeEntity'
     {_gValue = Nothing, _gSynonyms = Nothing}
 
--- | Required. For \`KIND_MAP\` entity types: A canonical name to be used in
--- place of synonyms. For \`KIND_LIST\` entity types: A string that can
--- contain references to other entity types (with or without aliases).
+-- | Required. The primary value associated with this entity entry. For
+-- example, if the entity type is *vegetable*, the value could be
+-- *scallions*. For \`KIND_MAP\` entity types: * A canonical value to be
+-- used in place of synonyms. For \`KIND_LIST\` entity types: * A string
+-- that can contain references to other entity types (with or without
+-- aliases).
 gValue :: Lens' GoogleCloudDialogflowV2EntityTypeEntity (Maybe Text)
 gValue = lens _gValue (\ s a -> s{_gValue = a})
 
--- | Required. A collection of synonyms. For \`KIND_LIST\` entity types this
--- must contain exactly one synonym equal to \`value\`.
+-- | Required. A collection of value synonyms. For example, if the entity
+-- type is *vegetable*, and \`value\` is *scallions*, a synonym could be
+-- *green onions*. For \`KIND_LIST\` entity types: * This collection must
+-- contain exactly one synonym equal to \`value\`.
 gSynonyms :: Lens' GoogleCloudDialogflowV2EntityTypeEntity [Text]
 gSynonyms
   = lens _gSynonyms (\ s a -> s{_gSynonyms = a}) .
@@ -8037,7 +8050,8 @@ gQueryText :: Lens' GoogleCloudDialogflowV2beta1QueryResult (Maybe Text)
 gQueryText
   = lens _gQueryText (\ s a -> s{_gQueryText = a})
 
--- | The text to be pronounced to the user or shown on the screen.
+-- | The text to be pronounced to the user or shown on the screen. Note: This
+-- is a legacy field, \`fulfillment_messages\` should be preferred.
 gFulfillmentText :: Lens' GoogleCloudDialogflowV2beta1QueryResult (Maybe Text)
 gFulfillmentText
   = lens _gFulfillmentText
@@ -8427,7 +8441,8 @@ googleCloudDialogflowV2beta1EntityType =
     , _gcdvetcDisplayName = Nothing
     }
 
--- | Optional. The collection of entities associated with the entity type.
+-- | Optional. The collection of entity entries associated with the entity
+-- type.
 gcdvetcEntities :: Lens' GoogleCloudDialogflowV2beta1EntityType [GoogleCloudDialogflowV2beta1EntityTypeEntity]
 gcdvetcEntities
   = lens _gcdvetcEntities
@@ -8440,9 +8455,9 @@ gcdvetcKind :: Lens' GoogleCloudDialogflowV2beta1EntityType (Maybe GoogleCloudDi
 gcdvetcKind
   = lens _gcdvetcKind (\ s a -> s{_gcdvetcKind = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of the entity type. Format:
--- \`projects\/\/agent\/entityTypes\/\`.
+-- | The unique identifier of the entity type. Required for
+-- EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes
+-- methods. Format: \`projects\/\/agent\/entityTypes\/\`.
 gcdvetcName :: Lens' GoogleCloudDialogflowV2beta1EntityType (Maybe Text)
 gcdvetcName
   = lens _gcdvetcName (\ s a -> s{_gcdvetcName = a})
@@ -9126,8 +9141,8 @@ gcdvicRootFollowupIntentName
   = lens _gcdvicRootFollowupIntentName
       (\ s a -> s{_gcdvicRootFollowupIntentName = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of this intent. Format:
+-- | The unique identifier of this intent. Required for Intents.UpdateIntent
+-- and Intents.BatchUpdateIntents methods. Format:
 -- \`projects\/\/agent\/intents\/\`.
 gcdvicName :: Lens' GoogleCloudDialogflowV2beta1Intent (Maybe Text)
 gcdvicName
@@ -9205,8 +9220,7 @@ gcdvicOutputContexts
       . _Default
       . _Coerce
 
--- | Optional. The collection of examples\/templates that the agent is
--- trained on.
+-- | Optional. The collection of examples that the agent is trained on.
 gcdvicTrainingPhrases :: Lens' GoogleCloudDialogflowV2beta1Intent [GoogleCloudDialogflowV2beta1IntentTrainingPhrase]
 gcdvicTrainingPhrases
   = lens _gcdvicTrainingPhrases

@@ -22,6 +22,7 @@ module Network.Google.Games.Types
     -- * OAuth Scopes
     , gamesScope
     , driveAppDataScope
+    , plusMeScope
 
     -- * PlayersListCollection
     , PlayersListCollection (..)
@@ -952,3 +953,7 @@ gamesScope = Proxy
 -- | View and manage its own configuration data in your Google Drive
 driveAppDataScope :: Proxy '["https://www.googleapis.com/auth/drive.appdata"]
 driveAppDataScope = Proxy
+
+-- | Know who you are on Google
+plusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
+plusMeScope = Proxy

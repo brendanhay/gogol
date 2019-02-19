@@ -1187,12 +1187,11 @@ gcvvfaBlurredLikelihood
       (\ s a -> s{_gcvvfaBlurredLikelihood = a})
 
 -- | The bounding polygon around the face. The coordinates of the bounding
--- box are in the original image\'s scale, as returned in \`ImageParams\`.
--- The bounding box is computed to \"frame\" the face in accordance with
--- human expectations. It is based on the landmarker results. Note that one
--- or more x and\/or y coordinates may not be generated in the
--- \`BoundingPoly\` (the polygon will be unbounded) if only a partial face
--- appears in the image to be annotated.
+-- box are in the original image\'s scale. The bounding box is computed to
+-- \"frame\" the face in accordance with human expectations. It is based on
+-- the landmarker results. Note that one or more x and\/or y coordinates
+-- may not be generated in the \`BoundingPoly\` (the polygon will be
+-- unbounded) if only a partial face appears in the image to be annotated.
 gcvvfaBoundingPoly :: Lens' GoogleCloudVisionV1p2beta1FaceAnnotation (Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
 gcvvfaBoundingPoly
   = lens _gcvvfaBoundingPoly
@@ -1404,8 +1403,7 @@ googleCloudVisionV1p1beta1CropHint =
     }
 
 -- | The bounding polygon for the crop region. The coordinates of the
--- bounding box are in the original image\'s scale, as returned in
--- \`ImageParams\`.
+-- bounding box are in the original image\'s scale.
 gcvvchBoundingPoly :: Lens' GoogleCloudVisionV1p1beta1CropHint (Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
 gcvvchBoundingPoly
   = lens _gcvvchBoundingPoly
@@ -1847,8 +1845,7 @@ googleCloudVisionV1p2beta1CropHint =
     }
 
 -- | The bounding polygon for the crop region. The coordinates of the
--- bounding box are in the original image\'s scale, as returned in
--- \`ImageParams\`.
+-- bounding box are in the original image\'s scale.
 gcvvchcBoundingPoly :: Lens' GoogleCloudVisionV1p2beta1CropHint (Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
 gcvvchcBoundingPoly
   = lens _gcvvchcBoundingPoly
@@ -2033,12 +2030,11 @@ gBlurredLikelihood
       (\ s a -> s{_gBlurredLikelihood = a})
 
 -- | The bounding polygon around the face. The coordinates of the bounding
--- box are in the original image\'s scale, as returned in \`ImageParams\`.
--- The bounding box is computed to \"frame\" the face in accordance with
--- human expectations. It is based on the landmarker results. Note that one
--- or more x and\/or y coordinates may not be generated in the
--- \`BoundingPoly\` (the polygon will be unbounded) if only a partial face
--- appears in the image to be annotated.
+-- box are in the original image\'s scale. The bounding box is computed to
+-- \"frame\" the face in accordance with human expectations. It is based on
+-- the landmarker results. Note that one or more x and\/or y coordinates
+-- may not be generated in the \`BoundingPoly\` (the polygon will be
+-- unbounded) if only a partial face appears in the image to be annotated.
 gBoundingPoly :: Lens' GoogleCloudVisionV1p1beta1FaceAnnotation (Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
 gBoundingPoly
   = lens _gBoundingPoly
@@ -6953,8 +6949,7 @@ googleCloudVisionV1p3beta1CropHint =
     }
 
 -- | The bounding polygon for the crop region. The coordinates of the
--- bounding box are in the original image\'s scale, as returned in
--- \`ImageParams\`.
+-- bounding box are in the original image\'s scale.
 goooBoundingPoly :: Lens' GoogleCloudVisionV1p3beta1CropHint (Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
 goooBoundingPoly
   = lens _goooBoundingPoly
@@ -7085,12 +7080,11 @@ faBlurredLikelihood
       (\ s a -> s{_faBlurredLikelihood = a})
 
 -- | The bounding polygon around the face. The coordinates of the bounding
--- box are in the original image\'s scale, as returned in \`ImageParams\`.
--- The bounding box is computed to \"frame\" the face in accordance with
--- human expectations. It is based on the landmarker results. Note that one
--- or more x and\/or y coordinates may not be generated in the
--- \`BoundingPoly\` (the polygon will be unbounded) if only a partial face
--- appears in the image to be annotated.
+-- box are in the original image\'s scale. The bounding box is computed to
+-- \"frame\" the face in accordance with human expectations. It is based on
+-- the landmarker results. Note that one or more x and\/or y coordinates
+-- may not be generated in the \`BoundingPoly\` (the polygon will be
+-- unbounded) if only a partial face appears in the image to be annotated.
 faBoundingPoly :: Lens' FaceAnnotation (Maybe BoundingPoly)
 faBoundingPoly
   = lens _faBoundingPoly
@@ -11134,8 +11128,7 @@ cropHint =
     }
 
 -- | The bounding polygon for the crop region. The coordinates of the
--- bounding box are in the original image\'s scale, as returned in
--- \`ImageParams\`.
+-- bounding box are in the original image\'s scale.
 chBoundingPoly :: Lens' CropHint (Maybe BoundingPoly)
 chBoundingPoly
   = lens _chBoundingPoly
@@ -11565,12 +11558,11 @@ gcvvfacBlurredLikelihood
       (\ s a -> s{_gcvvfacBlurredLikelihood = a})
 
 -- | The bounding polygon around the face. The coordinates of the bounding
--- box are in the original image\'s scale, as returned in \`ImageParams\`.
--- The bounding box is computed to \"frame\" the face in accordance with
--- human expectations. It is based on the landmarker results. Note that one
--- or more x and\/or y coordinates may not be generated in the
--- \`BoundingPoly\` (the polygon will be unbounded) if only a partial face
--- appears in the image to be annotated.
+-- box are in the original image\'s scale. The bounding box is computed to
+-- \"frame\" the face in accordance with human expectations. It is based on
+-- the landmarker results. Note that one or more x and\/or y coordinates
+-- may not be generated in the \`BoundingPoly\` (the polygon will be
+-- unbounded) if only a partial face appears in the image to be annotated.
 gcvvfacBoundingPoly :: Lens' GoogleCloudVisionV1p3beta1FaceAnnotation (Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
 gcvvfacBoundingPoly
   = lens _gcvvfacBoundingPoly
@@ -13868,7 +13860,8 @@ instance ToJSON
                   ("position" .=) <$> _gcvvfalcPosition])
 
 -- | Request for performing Google Cloud Vision API tasks over a
--- user-provided image, with user-requested features.
+-- user-provided image, with user-requested features, and with context
+-- information.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1AnnotateImageRequest' smart constructor.
 data GoogleCloudVisionV1p2beta1AnnotateImageRequest =

@@ -2698,6 +2698,243 @@ instance ToJSON SetLabelsRequest where
                   ("projectId" .=) <$> _slrProjectId,
                   ("labelFingerprint" .=) <$> _slrLabelFingerprint])
 
+-- | GetOpenIDConfigResponse is an OIDC discovery document for the cluster.
+-- See the OpenID Connect Discovery 1.0 specification for details.
+--
+-- /See:/ 'getOpenIdConfigResponse' smart constructor.
+data GetOpenIdConfigResponse =
+  GetOpenIdConfigResponse'
+    { _goicrIdTokenSigningAlgValuesSupported :: !(Maybe [Text])
+    , _goicrResponseTypesSupported           :: !(Maybe [Text])
+    , _goicrJWKsURI                          :: !(Maybe Text)
+    , _goicrGrantTypes                       :: !(Maybe [Text])
+    , _goicrClaimsSupported                  :: !(Maybe [Text])
+    , _goicrIssuer                           :: !(Maybe Text)
+    , _goicrSubjectTypesSupported            :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'GetOpenIdConfigResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'goicrIdTokenSigningAlgValuesSupported'
+--
+-- * 'goicrResponseTypesSupported'
+--
+-- * 'goicrJWKsURI'
+--
+-- * 'goicrGrantTypes'
+--
+-- * 'goicrClaimsSupported'
+--
+-- * 'goicrIssuer'
+--
+-- * 'goicrSubjectTypesSupported'
+getOpenIdConfigResponse
+    :: GetOpenIdConfigResponse
+getOpenIdConfigResponse =
+  GetOpenIdConfigResponse'
+    { _goicrIdTokenSigningAlgValuesSupported = Nothing
+    , _goicrResponseTypesSupported = Nothing
+    , _goicrJWKsURI = Nothing
+    , _goicrGrantTypes = Nothing
+    , _goicrClaimsSupported = Nothing
+    , _goicrIssuer = Nothing
+    , _goicrSubjectTypesSupported = Nothing
+    }
+
+-- | NOLINT
+goicrIdTokenSigningAlgValuesSupported :: Lens' GetOpenIdConfigResponse [Text]
+goicrIdTokenSigningAlgValuesSupported
+  = lens _goicrIdTokenSigningAlgValuesSupported
+      (\ s a ->
+         s{_goicrIdTokenSigningAlgValuesSupported = a})
+      . _Default
+      . _Coerce
+
+-- | NOLINT
+goicrResponseTypesSupported :: Lens' GetOpenIdConfigResponse [Text]
+goicrResponseTypesSupported
+  = lens _goicrResponseTypesSupported
+      (\ s a -> s{_goicrResponseTypesSupported = a})
+      . _Default
+      . _Coerce
+
+-- | NOLINT
+goicrJWKsURI :: Lens' GetOpenIdConfigResponse (Maybe Text)
+goicrJWKsURI
+  = lens _goicrJWKsURI (\ s a -> s{_goicrJWKsURI = a})
+
+-- | NOLINT
+goicrGrantTypes :: Lens' GetOpenIdConfigResponse [Text]
+goicrGrantTypes
+  = lens _goicrGrantTypes
+      (\ s a -> s{_goicrGrantTypes = a})
+      . _Default
+      . _Coerce
+
+-- | NOLINT
+goicrClaimsSupported :: Lens' GetOpenIdConfigResponse [Text]
+goicrClaimsSupported
+  = lens _goicrClaimsSupported
+      (\ s a -> s{_goicrClaimsSupported = a})
+      . _Default
+      . _Coerce
+
+-- | NOLINT
+goicrIssuer :: Lens' GetOpenIdConfigResponse (Maybe Text)
+goicrIssuer
+  = lens _goicrIssuer (\ s a -> s{_goicrIssuer = a})
+
+-- | NOLINT
+goicrSubjectTypesSupported :: Lens' GetOpenIdConfigResponse [Text]
+goicrSubjectTypesSupported
+  = lens _goicrSubjectTypesSupported
+      (\ s a -> s{_goicrSubjectTypesSupported = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON GetOpenIdConfigResponse where
+        parseJSON
+          = withObject "GetOpenIdConfigResponse"
+              (\ o ->
+                 GetOpenIdConfigResponse' <$>
+                   (o .:? "id_token_signing_alg_values_supported" .!=
+                      mempty)
+                     <*> (o .:? "response_types_supported" .!= mempty)
+                     <*> (o .:? "jwks_uri")
+                     <*> (o .:? "grant_types" .!= mempty)
+                     <*> (o .:? "claims_supported" .!= mempty)
+                     <*> (o .:? "issuer")
+                     <*> (o .:? "subject_types_supported" .!= mempty))
+
+instance ToJSON GetOpenIdConfigResponse where
+        toJSON GetOpenIdConfigResponse'{..}
+          = object
+              (catMaybes
+                 [("id_token_signing_alg_values_supported" .=) <$>
+                    _goicrIdTokenSigningAlgValuesSupported,
+                  ("response_types_supported" .=) <$>
+                    _goicrResponseTypesSupported,
+                  ("jwks_uri" .=) <$> _goicrJWKsURI,
+                  ("grant_types" .=) <$> _goicrGrantTypes,
+                  ("claims_supported" .=) <$> _goicrClaimsSupported,
+                  ("issuer" .=) <$> _goicrIssuer,
+                  ("subject_types_supported" .=) <$>
+                    _goicrSubjectTypesSupported])
+
+-- | Jwk is a JSON Web Key as specified in RFC 7517
+--
+-- /See:/ 'jwk' smart constructor.
+data JWK =
+  JWK'
+    { _jCrv :: !(Maybe Text)
+    , _jAlg :: !(Maybe Text)
+    , _jUse :: !(Maybe Text)
+    , _jKid :: !(Maybe Text)
+    , _jN   :: !(Maybe Text)
+    , _jE   :: !(Maybe Text)
+    , _jX   :: !(Maybe Text)
+    , _jKty :: !(Maybe Text)
+    , _jY   :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'JWK' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jCrv'
+--
+-- * 'jAlg'
+--
+-- * 'jUse'
+--
+-- * 'jKid'
+--
+-- * 'jN'
+--
+-- * 'jE'
+--
+-- * 'jX'
+--
+-- * 'jKty'
+--
+-- * 'jY'
+jwk
+    :: JWK
+jwk =
+  JWK'
+    { _jCrv = Nothing
+    , _jAlg = Nothing
+    , _jUse = Nothing
+    , _jKid = Nothing
+    , _jN = Nothing
+    , _jE = Nothing
+    , _jX = Nothing
+    , _jKty = Nothing
+    , _jY = Nothing
+    }
+
+-- | NOLINT
+jCrv :: Lens' JWK (Maybe Text)
+jCrv = lens _jCrv (\ s a -> s{_jCrv = a})
+
+-- | NOLINT
+jAlg :: Lens' JWK (Maybe Text)
+jAlg = lens _jAlg (\ s a -> s{_jAlg = a})
+
+-- | NOLINT
+jUse :: Lens' JWK (Maybe Text)
+jUse = lens _jUse (\ s a -> s{_jUse = a})
+
+-- | NOLINT
+jKid :: Lens' JWK (Maybe Text)
+jKid = lens _jKid (\ s a -> s{_jKid = a})
+
+-- | Fields for RSA keys. NOLINT
+jN :: Lens' JWK (Maybe Text)
+jN = lens _jN (\ s a -> s{_jN = a})
+
+-- | NOLINT
+jE :: Lens' JWK (Maybe Text)
+jE = lens _jE (\ s a -> s{_jE = a})
+
+-- | Fields for ECDSA keys. NOLINT
+jX :: Lens' JWK (Maybe Text)
+jX = lens _jX (\ s a -> s{_jX = a})
+
+-- | NOLINT
+jKty :: Lens' JWK (Maybe Text)
+jKty = lens _jKty (\ s a -> s{_jKty = a})
+
+-- | NOLINT
+jY :: Lens' JWK (Maybe Text)
+jY = lens _jY (\ s a -> s{_jY = a})
+
+instance FromJSON JWK where
+        parseJSON
+          = withObject "JWK"
+              (\ o ->
+                 JWK' <$>
+                   (o .:? "crv") <*> (o .:? "alg") <*> (o .:? "use") <*>
+                     (o .:? "kid")
+                     <*> (o .:? "n")
+                     <*> (o .:? "e")
+                     <*> (o .:? "x")
+                     <*> (o .:? "kty")
+                     <*> (o .:? "y"))
+
+instance ToJSON JWK where
+        toJSON JWK'{..}
+          = object
+              (catMaybes
+                 [("crv" .=) <$> _jCrv, ("alg" .=) <$> _jAlg,
+                  ("use" .=) <$> _jUse, ("kid" .=) <$> _jKid,
+                  ("n" .=) <$> _jN, ("e" .=) <$> _jE, ("x" .=) <$> _jX,
+                  ("kty" .=) <$> _jKty, ("y" .=) <$> _jY])
+
 -- | MaintenanceWindow defines the maintenance window to be used for the
 -- cluster.
 --
@@ -4984,6 +5221,44 @@ instance ToJSON ListNodePoolsResponse where
         toJSON ListNodePoolsResponse'{..}
           = object
               (catMaybes [("nodePools" .=) <$> _lnprNodePools])
+
+-- | GetJSONWebKeysResponse is a valid JSON Web Key Set as specififed in rfc
+-- 7517
+--
+-- /See:/ 'getJSONWebKeysResponse' smart constructor.
+newtype GetJSONWebKeysResponse =
+  GetJSONWebKeysResponse'
+    { _gjwkrKeys :: Maybe [JWK]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'GetJSONWebKeysResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gjwkrKeys'
+getJSONWebKeysResponse
+    :: GetJSONWebKeysResponse
+getJSONWebKeysResponse = GetJSONWebKeysResponse' {_gjwkrKeys = Nothing}
+
+-- | The public component of the keys used by the cluster to sign token
+-- requests.
+gjwkrKeys :: Lens' GetJSONWebKeysResponse [JWK]
+gjwkrKeys
+  = lens _gjwkrKeys (\ s a -> s{_gjwkrKeys = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON GetJSONWebKeysResponse where
+        parseJSON
+          = withObject "GetJSONWebKeysResponse"
+              (\ o ->
+                 GetJSONWebKeysResponse' <$>
+                   (o .:? "keys" .!= mempty))
+
+instance ToJSON GetJSONWebKeysResponse where
+        toJSON GetJSONWebKeysResponse'{..}
+          = object (catMaybes [("keys" .=) <$> _gjwkrKeys])
 
 -- | CreateNodePoolRequest creates a node pool for a cluster.
 --

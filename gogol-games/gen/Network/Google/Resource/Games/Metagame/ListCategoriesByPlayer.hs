@@ -140,7 +140,8 @@ instance GoogleRequest MetagameListCategoriesByPlayer
         type Rs MetagameListCategoriesByPlayer =
              CategoryListResponse
         type Scopes MetagameListCategoriesByPlayer =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient MetagameListCategoriesByPlayer'{..}
           = go _mlcbpPlayerId _mlcbpCollection _mlcbpLanguage
               _mlcbpPageToken

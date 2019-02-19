@@ -107,7 +107,8 @@ elbpMaxResults
 instance GoogleRequest EventsListByPlayer where
         type Rs EventsListByPlayer = PlayerEventListResponse
         type Scopes EventsListByPlayer =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient EventsListByPlayer'{..}
           = go _elbpLanguage _elbpPageToken _elbpMaxResults
               (Just AltJSON)

@@ -277,13 +277,13 @@ spResolvedStorageSource
       (\ s a -> s{_spResolvedStorageSource = a})
 
 -- | Output only. Hash(es) of the build source, which can be used to verify
--- that the originalsource integrity was maintained in the build. Note that
--- \`FileHashes\` willonly be populated if \`BuildOptions\` has requested a
--- \`SourceProvenanceHash\`. The keys to this map are file paths used as
--- build source and the values contain the hash values for those files. If
--- the build source came in a single package such as a gzipped tarfile
--- (\`.tar.gz\`), the \`FileHash\` will be for the single path to that
--- file.
+-- that the original source integrity was maintained in the build. Note
+-- that \`FileHashes\` will only be populated if \`BuildOptions\` has
+-- requested a \`SourceProvenanceHash\`. The keys to this map are file
+-- paths used as build source and the values contain the hash values for
+-- those files. If the build source came in a single package such as a
+-- gzipped tarfile (\`.tar.gz\`), the \`FileHash\` will be for the single
+-- path to that file.
 spFileHashes :: Lens' SourceProvenance (Maybe SourceProvenanceFileHashes)
 spFileHashes
   = lens _spFileHashes (\ s a -> s{_spFileHashes = a})
@@ -1469,13 +1469,13 @@ instance ToJSON Build where
                   ("tags" .=) <$> _bTags])
 
 -- | Output only. Hash(es) of the build source, which can be used to verify
--- that the originalsource integrity was maintained in the build. Note that
--- \`FileHashes\` willonly be populated if \`BuildOptions\` has requested a
--- \`SourceProvenanceHash\`. The keys to this map are file paths used as
--- build source and the values contain the hash values for those files. If
--- the build source came in a single package such as a gzipped tarfile
--- (\`.tar.gz\`), the \`FileHash\` will be for the single path to that
--- file.
+-- that the original source integrity was maintained in the build. Note
+-- that \`FileHashes\` will only be populated if \`BuildOptions\` has
+-- requested a \`SourceProvenanceHash\`. The keys to this map are file
+-- paths used as build source and the values contain the hash values for
+-- those files. If the build source came in a single package such as a
+-- gzipped tarfile (\`.tar.gz\`), the \`FileHash\` will be for the single
+-- path to that file.
 --
 -- /See:/ 'sourceProvenanceFileHashes' smart constructor.
 newtype SourceProvenanceFileHashes =

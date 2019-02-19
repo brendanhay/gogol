@@ -3613,6 +3613,7 @@ data GooglePrivacyDlpV2InfoTypeDescription =
     { _gpdvitdName        :: !(Maybe Text)
     , _gpdvitdDisplayName :: !(Maybe Text)
     , _gpdvitdSupportedBy :: !(Maybe [Text])
+    , _gpdvitdDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3625,6 +3626,8 @@ data GooglePrivacyDlpV2InfoTypeDescription =
 -- * 'gpdvitdDisplayName'
 --
 -- * 'gpdvitdSupportedBy'
+--
+-- * 'gpdvitdDescription'
 googlePrivacyDlpV2InfoTypeDescription
     :: GooglePrivacyDlpV2InfoTypeDescription
 googlePrivacyDlpV2InfoTypeDescription =
@@ -3632,6 +3635,7 @@ googlePrivacyDlpV2InfoTypeDescription =
     { _gpdvitdName = Nothing
     , _gpdvitdDisplayName = Nothing
     , _gpdvitdSupportedBy = Nothing
+    , _gpdvitdDescription = Nothing
     }
 
 -- | Internal name of the infoType.
@@ -3653,6 +3657,13 @@ gpdvitdSupportedBy
       . _Default
       . _Coerce
 
+-- | Description of the infotype. Translated when language is provided in the
+-- request.
+gpdvitdDescription :: Lens' GooglePrivacyDlpV2InfoTypeDescription (Maybe Text)
+gpdvitdDescription
+  = lens _gpdvitdDescription
+      (\ s a -> s{_gpdvitdDescription = a})
+
 instance FromJSON
            GooglePrivacyDlpV2InfoTypeDescription
          where
@@ -3661,7 +3672,8 @@ instance FromJSON
               (\ o ->
                  GooglePrivacyDlpV2InfoTypeDescription' <$>
                    (o .:? "name") <*> (o .:? "displayName") <*>
-                     (o .:? "supportedBy" .!= mempty))
+                     (o .:? "supportedBy" .!= mempty)
+                     <*> (o .:? "description"))
 
 instance ToJSON GooglePrivacyDlpV2InfoTypeDescription
          where
@@ -3670,7 +3682,8 @@ instance ToJSON GooglePrivacyDlpV2InfoTypeDescription
               (catMaybes
                  [("name" .=) <$> _gpdvitdName,
                   ("displayName" .=) <$> _gpdvitdDisplayName,
-                  ("supportedBy" .=) <$> _gpdvitdSupportedBy])
+                  ("supportedBy" .=) <$> _gpdvitdSupportedBy,
+                  ("description" .=) <$> _gpdvitdDescription])
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
@@ -4625,9 +4638,10 @@ instance ToJSON
 -- | Message defining a custom regular expression.
 --
 -- /See:/ 'googlePrivacyDlpV2Regex' smart constructor.
-newtype GooglePrivacyDlpV2Regex =
+data GooglePrivacyDlpV2Regex =
   GooglePrivacyDlpV2Regex'
-    { _gpdvrPattern :: Maybe Text
+    { _gpdvrGroupIndexes :: !(Maybe [Textual Int32])
+    , _gpdvrPattern      :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4635,10 +4649,23 @@ newtype GooglePrivacyDlpV2Regex =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gpdvrGroupIndexes'
+--
 -- * 'gpdvrPattern'
 googlePrivacyDlpV2Regex
     :: GooglePrivacyDlpV2Regex
-googlePrivacyDlpV2Regex = GooglePrivacyDlpV2Regex' {_gpdvrPattern = Nothing}
+googlePrivacyDlpV2Regex =
+  GooglePrivacyDlpV2Regex'
+    {_gpdvrGroupIndexes = Nothing, _gpdvrPattern = Nothing}
+
+-- | The index of the submatch to extract as findings. When not specified,
+-- the entire match is returned. No more than 3 may be included.
+gpdvrGroupIndexes :: Lens' GooglePrivacyDlpV2Regex [Int32]
+gpdvrGroupIndexes
+  = lens _gpdvrGroupIndexes
+      (\ s a -> s{_gpdvrGroupIndexes = a})
+      . _Default
+      . _Coerce
 
 -- | Pattern defining the regular expression. Its syntax
 -- (https:\/\/github.com\/google\/re2\/wiki\/Syntax) can be found under the
@@ -4651,12 +4678,16 @@ instance FromJSON GooglePrivacyDlpV2Regex where
         parseJSON
           = withObject "GooglePrivacyDlpV2Regex"
               (\ o ->
-                 GooglePrivacyDlpV2Regex' <$> (o .:? "pattern"))
+                 GooglePrivacyDlpV2Regex' <$>
+                   (o .:? "groupIndexes" .!= mempty) <*>
+                     (o .:? "pattern"))
 
 instance ToJSON GooglePrivacyDlpV2Regex where
         toJSON GooglePrivacyDlpV2Regex'{..}
           = object
-              (catMaybes [("pattern" .=) <$> _gpdvrPattern])
+              (catMaybes
+                 [("groupIndexes" .=) <$> _gpdvrGroupIndexes,
+                  ("pattern" .=) <$> _gpdvrPattern])
 
 -- | Request message for UpdateStoredInfoType.
 --
@@ -4892,6 +4923,35 @@ instance ToJSON GooglePrivacyDlpV2LDiversityConfig
                  [("sensitiveAttribute" .=) <$>
                     _gpdvldcSensitiveAttribute,
                   ("quasiIds" .=) <$> _gpdvldcQuasiIds])
+
+-- | Enable email notification to project owners and editors on jobs\'s
+-- completion\/failure.
+--
+-- /See:/ 'googlePrivacyDlpV2JobNotificationEmails' smart constructor.
+data GooglePrivacyDlpV2JobNotificationEmails =
+  GooglePrivacyDlpV2JobNotificationEmails'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2JobNotificationEmails' with the minimum fields required to make a request.
+--
+googlePrivacyDlpV2JobNotificationEmails
+    :: GooglePrivacyDlpV2JobNotificationEmails
+googlePrivacyDlpV2JobNotificationEmails =
+  GooglePrivacyDlpV2JobNotificationEmails'
+
+instance FromJSON
+           GooglePrivacyDlpV2JobNotificationEmails
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2JobNotificationEmails"
+              (\ o ->
+                 pure GooglePrivacyDlpV2JobNotificationEmails')
+
+instance ToJSON
+           GooglePrivacyDlpV2JobNotificationEmails
+         where
+        toJSON = const emptyObject
 
 -- | Request to de-identify a list of items.
 --
@@ -8057,15 +8117,18 @@ instance ToJSON GooglePrivacyDlpV2Bucket where
 -- /See:/ 'googlePrivacyDlpV2Action' smart constructor.
 data GooglePrivacyDlpV2Action =
   GooglePrivacyDlpV2Action'
-    { _gpdvaPubSub               :: !(Maybe GooglePrivacyDlpV2PublishToPubSub)
-    , _gpdvaSaveFindings         :: !(Maybe GooglePrivacyDlpV2SaveFindings)
-    , _gpdvaPublishSummaryToCscc :: !(Maybe GooglePrivacyDlpV2PublishSummaryToCscc)
+    { _gpdvaJobNotificationEmails :: !(Maybe GooglePrivacyDlpV2JobNotificationEmails)
+    , _gpdvaPubSub                :: !(Maybe GooglePrivacyDlpV2PublishToPubSub)
+    , _gpdvaSaveFindings          :: !(Maybe GooglePrivacyDlpV2SaveFindings)
+    , _gpdvaPublishSummaryToCscc  :: !(Maybe GooglePrivacyDlpV2PublishSummaryToCscc)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GooglePrivacyDlpV2Action' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvaJobNotificationEmails'
 --
 -- * 'gpdvaPubSub'
 --
@@ -8076,10 +8139,18 @@ googlePrivacyDlpV2Action
     :: GooglePrivacyDlpV2Action
 googlePrivacyDlpV2Action =
   GooglePrivacyDlpV2Action'
-    { _gpdvaPubSub = Nothing
+    { _gpdvaJobNotificationEmails = Nothing
+    , _gpdvaPubSub = Nothing
     , _gpdvaSaveFindings = Nothing
     , _gpdvaPublishSummaryToCscc = Nothing
     }
+
+-- | Enable email notification to project owners and editors on job‘s
+-- completion\/failure.
+gpdvaJobNotificationEmails :: Lens' GooglePrivacyDlpV2Action (Maybe GooglePrivacyDlpV2JobNotificationEmails)
+gpdvaJobNotificationEmails
+  = lens _gpdvaJobNotificationEmails
+      (\ s a -> s{_gpdvaJobNotificationEmails = a})
 
 -- | Publish a notification to a pubsub topic.
 gpdvaPubSub :: Lens' GooglePrivacyDlpV2Action (Maybe GooglePrivacyDlpV2PublishToPubSub)
@@ -8103,14 +8174,17 @@ instance FromJSON GooglePrivacyDlpV2Action where
           = withObject "GooglePrivacyDlpV2Action"
               (\ o ->
                  GooglePrivacyDlpV2Action' <$>
-                   (o .:? "pubSub") <*> (o .:? "saveFindings") <*>
-                     (o .:? "publishSummaryToCscc"))
+                   (o .:? "jobNotificationEmails") <*> (o .:? "pubSub")
+                     <*> (o .:? "saveFindings")
+                     <*> (o .:? "publishSummaryToCscc"))
 
 instance ToJSON GooglePrivacyDlpV2Action where
         toJSON GooglePrivacyDlpV2Action'{..}
           = object
               (catMaybes
-                 [("pubSub" .=) <$> _gpdvaPubSub,
+                 [("jobNotificationEmails" .=) <$>
+                    _gpdvaJobNotificationEmails,
+                  ("pubSub" .=) <$> _gpdvaPubSub,
                   ("saveFindings" .=) <$> _gpdvaSaveFindings,
                   ("publishSummaryToCscc" .=) <$>
                     _gpdvaPublishSummaryToCscc])

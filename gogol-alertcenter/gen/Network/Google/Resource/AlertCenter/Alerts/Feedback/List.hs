@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all the feedback for an alert.
+-- Lists all the feedback for an alert. Attempting to list feedbacks for a
+-- non-existent alert returns \`NOT_FOUND\` error.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.feedback.list@.
 module Network.Google.Resource.AlertCenter.Alerts.Feedback.List
@@ -63,7 +64,8 @@ type AlertsFeedbackListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListAlertFeedbackResponse
 
--- | Lists all the feedback for an alert.
+-- | Lists all the feedback for an alert. Attempting to list feedbacks for a
+-- non-existent alert returns \`NOT_FOUND\` error.
 --
 -- /See:/ 'alertsFeedbackList' smart constructor.
 data AlertsFeedbackList =
@@ -130,8 +132,7 @@ aflAccessToken
       (\ s a -> s{_aflAccessToken = a})
 
 -- | Required. The alert identifier. The \"-\" wildcard could be used to
--- represent all alerts. If alert does not exist returns a \`NOT_FOUND\`
--- error.
+-- represent all alerts.
 aflAlertId :: Lens' AlertsFeedbackList Text
 aflAlertId
   = lens _aflAlertId (\ s a -> s{_aflAlertId = a})

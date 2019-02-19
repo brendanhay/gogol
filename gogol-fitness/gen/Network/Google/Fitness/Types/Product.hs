@@ -96,7 +96,7 @@ dsMinStartTimeNs
 
 -- | The largest end time of all data points in this possibly partial
 -- representation of the dataset. Time is in nanoseconds from epoch. This
--- should also match the first part of the dataset identifier.
+-- should also match the second part of the dataset identifier.
 dsMaxEndTimeNs :: Lens' DataSet (Maybe Int64)
 dsMaxEndTimeNs
   = lens _dsMaxEndTimeNs
@@ -397,9 +397,9 @@ arEndTimeMillis
       (\ s a -> s{_arEndTimeMillis = a})
       . mapping _Coerce
 
--- | A list of acceptable data quality standards. Only data points which
--- conform to at least one of the specified data quality standards will be
--- returned. If the list is empty, all data points are returned.
+-- | DO NOT POPULATE THIS FIELD. As data quality standards are deprecated,
+-- filling it in will result in no data sources being returned. It will be
+-- removed in a future version entirely.
 arFilteredDataQualityStandard :: Lens' AggregateRequest [AggregateRequestFilteredDataQualityStandardItem]
 arFilteredDataQualityStandard
   = lens _arFilteredDataQualityStandard
@@ -1238,7 +1238,9 @@ dsApplication
 dsDevice :: Lens' DataSource (Maybe Device)
 dsDevice = lens _dsDevice (\ s a -> s{_dsDevice = a})
 
--- |
+-- | DO NOT POPULATE THIS FIELD. It is never populated in responses from the
+-- platform, and is ignored in queries. It will be removed in a future
+-- version entirely.
 dsDataQualityStandard :: Lens' DataSource [DataSourceDataQualityStandardItem]
 dsDataQualityStandard
   = lens _dsDataQualityStandard

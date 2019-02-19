@@ -190,7 +190,7 @@ instance ToJSON GoogleCloudMlV1__ParameterSpecScaleType where
 data GoogleCloudMlV1__VersionFramework
     = FrameworkUnspecified
       -- ^ @FRAMEWORK_UNSPECIFIED@
-      -- Unspecified framework. Defaults to TensorFlow.
+      -- Unspecified framework. Assigns a value based on the file suffix.
     | Tensorflow
       -- ^ @TENSORFLOW@
       -- Tensorflow framework.
@@ -284,7 +284,8 @@ instance ToJSON GoogleCloudMlV1__VersionState where
 data GoogleCloudMlV1__HyperparameterSpecAlgorithm
     = AlgorithmUnspecified
       -- ^ @ALGORITHM_UNSPECIFIED@
-      -- The default algorithm used by hyperparameter tuning service.
+      -- The default algorithm used by the hyperparameter tuning service. This is
+      -- a Bayesian optimization algorithm.
     | GridSearch
       -- ^ @GRID_SEARCH@
       -- Simple grid search within the feasible space. To use grid search, all
@@ -685,9 +686,9 @@ data GoogleCloudMlV1__AcceleratorConfigType
     | NvidiaTeslaP4
       -- ^ @NVIDIA_TESLA_P4@
       -- Nvidia Tesla P4 GPU.
-    | NvidiaTeslaT4
-      -- ^ @NVIDIA_TESLA_T4@
-      -- Nvidia Tesla T4 GPU.
+    | TpuV2
+      -- ^ @TPU_V2@
+      -- TPU V2
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudMlV1__AcceleratorConfigType
@@ -699,7 +700,7 @@ instance FromHttpApiData GoogleCloudMlV1__AcceleratorConfigType where
         "NVIDIA_TESLA_P100" -> Right NvidiaTeslaP100
         "NVIDIA_TESLA_V100" -> Right NvidiaTeslaV100
         "NVIDIA_TESLA_P4" -> Right NvidiaTeslaP4
-        "NVIDIA_TESLA_T4" -> Right NvidiaTeslaT4
+        "TPU_V2" -> Right TpuV2
         x -> Left ("Unable to parse GoogleCloudMlV1__AcceleratorConfigType from: " <> x)
 
 instance ToHttpApiData GoogleCloudMlV1__AcceleratorConfigType where
@@ -709,7 +710,7 @@ instance ToHttpApiData GoogleCloudMlV1__AcceleratorConfigType where
         NvidiaTeslaP100 -> "NVIDIA_TESLA_P100"
         NvidiaTeslaV100 -> "NVIDIA_TESLA_V100"
         NvidiaTeslaP4 -> "NVIDIA_TESLA_P4"
-        NvidiaTeslaT4 -> "NVIDIA_TESLA_T4"
+        TpuV2 -> "TPU_V2"
 
 instance FromJSON GoogleCloudMlV1__AcceleratorConfigType where
     parseJSON = parseJSONText "GoogleCloudMlV1__AcceleratorConfigType"

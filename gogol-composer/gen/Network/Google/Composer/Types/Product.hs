@@ -151,6 +151,58 @@ instance FromJSON OperationSchema where
 instance ToJSON OperationSchema where
         toJSON = toJSON . _osAddtional
 
+-- | The ImageVersions in a project and location.
+--
+-- /See:/ 'listImageVersionsResponse' smart constructor.
+data ListImageVersionsResponse =
+  ListImageVersionsResponse'
+    { _livrNextPageToken :: !(Maybe Text)
+    , _livrImageVersions :: !(Maybe [ImageVersion])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'ListImageVersionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'livrNextPageToken'
+--
+-- * 'livrImageVersions'
+listImageVersionsResponse
+    :: ListImageVersionsResponse
+listImageVersionsResponse =
+  ListImageVersionsResponse'
+    {_livrNextPageToken = Nothing, _livrImageVersions = Nothing}
+
+-- | The page token used to query for the next page if one exists.
+livrNextPageToken :: Lens' ListImageVersionsResponse (Maybe Text)
+livrNextPageToken
+  = lens _livrNextPageToken
+      (\ s a -> s{_livrNextPageToken = a})
+
+-- | The list of supported ImageVersions in a location.
+livrImageVersions :: Lens' ListImageVersionsResponse [ImageVersion]
+livrImageVersions
+  = lens _livrImageVersions
+      (\ s a -> s{_livrImageVersions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListImageVersionsResponse where
+        parseJSON
+          = withObject "ListImageVersionsResponse"
+              (\ o ->
+                 ListImageVersionsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "imageVersions" .!= mempty))
+
+instance ToJSON ListImageVersionsResponse where
+        toJSON ListImageVersionsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _livrNextPageToken,
+                  ("imageVersions" .=) <$> _livrImageVersions])
+
 -- | The environments in a project and location.
 --
 -- /See:/ 'listEnvironmentsResponse' smart constructor.
@@ -692,6 +744,74 @@ instance FromJSON SoftwareConfigEnvVariables where
 instance ToJSON SoftwareConfigEnvVariables where
         toJSON = toJSON . _scevAddtional
 
+-- | ImageVersion information
+--
+-- /See:/ 'imageVersion' smart constructor.
+data ImageVersion =
+  ImageVersion'
+    { _ivImageVersionId          :: !(Maybe Text)
+    , _ivSupportedPythonVersions :: !(Maybe [Text])
+    , _ivIsDefault               :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'ImageVersion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ivImageVersionId'
+--
+-- * 'ivSupportedPythonVersions'
+--
+-- * 'ivIsDefault'
+imageVersion
+    :: ImageVersion
+imageVersion =
+  ImageVersion'
+    { _ivImageVersionId = Nothing
+    , _ivSupportedPythonVersions = Nothing
+    , _ivIsDefault = Nothing
+    }
+
+-- | The string identifier of the ImageVersion, in the form:
+-- \"composer-x.y.z-airflow-a.b(.c)\"
+ivImageVersionId :: Lens' ImageVersion (Maybe Text)
+ivImageVersionId
+  = lens _ivImageVersionId
+      (\ s a -> s{_ivImageVersionId = a})
+
+-- | supported python versions
+ivSupportedPythonVersions :: Lens' ImageVersion [Text]
+ivSupportedPythonVersions
+  = lens _ivSupportedPythonVersions
+      (\ s a -> s{_ivSupportedPythonVersions = a})
+      . _Default
+      . _Coerce
+
+-- | Whether this is the default ImageVersion used by Composer during
+-- environment creation if no input ImageVersion is specified.
+ivIsDefault :: Lens' ImageVersion (Maybe Bool)
+ivIsDefault
+  = lens _ivIsDefault (\ s a -> s{_ivIsDefault = a})
+
+instance FromJSON ImageVersion where
+        parseJSON
+          = withObject "ImageVersion"
+              (\ o ->
+                 ImageVersion' <$>
+                   (o .:? "imageVersionId") <*>
+                     (o .:? "supportedPythonVersions" .!= mempty)
+                     <*> (o .:? "isDefault"))
+
+instance ToJSON ImageVersion where
+        toJSON ImageVersion'{..}
+          = object
+              (catMaybes
+                 [("imageVersionId" .=) <$> _ivImageVersionId,
+                  ("supportedPythonVersions" .=) <$>
+                    _ivSupportedPythonVersions,
+                  ("isDefault" .=) <$> _ivIsDefault])
+
 -- | An environment for running orchestration tasks.
 --
 -- /See:/ 'environment' smart constructor.
@@ -962,15 +1082,23 @@ softwareConfig =
     , _scEnvVariables = Nothing
     }
 
--- | Output only. The version of the software running in the environment.
--- This encapsulates both the version of Cloud Composer functionality and
--- the version of Apache Airflow. It must match the regular expression
--- \`composer-[0-9]+\\.[0-9]+(\\.[0-9]+)?-airflow-[0-9]+\\.[0-9]+(\\.[0-9]+.*)?\`.
--- The Cloud Composer portion of the version is a [semantic
--- version](https:\/\/semver.org). The portion of the image version
--- following _airflow-_ is an official Apache Airflow repository [release
+-- | The version of the software running in the environment. This
+-- encapsulates both the version of Cloud Composer functionality and the
+-- version of Apache Airflow. It must match the regular expression
+-- \`composer-([0-9]+\\.[0-9]+\\.[0-9]+|latest)-airflow-[0-9]+\\.[0-9]+(\\.[0-9]+.*)?\`.
+-- When used as input, the server also checks if the provided version is
+-- supported and denies the request for an unsupported version. The Cloud
+-- Composer portion of the version is a [semantic
+-- version](https:\/\/semver.org) or \`latest\`. When the patch version is
+-- omitted, the current Cloud Composer patch version is selected. When
+-- \`latest\` is provided instead of an explicit version number, the server
+-- replaces \`latest\` with the current Cloud Composer version and stores
+-- that version number in the same field. The portion of the image version
+-- that follows /airflow-/ is an official Apache Airflow repository
+-- [release
 -- name](https:\/\/github.com\/apache\/incubator-airflow\/releases). See
--- also [Release Notes](\/composer\/docs\/release-notes).
+-- also [Version
+-- List](\/composer\/docs\/concepts\/versioning\/composer-versions).
 scImageVersion :: Lens' SoftwareConfig (Maybe Text)
 scImageVersion
   = lens _scImageVersion

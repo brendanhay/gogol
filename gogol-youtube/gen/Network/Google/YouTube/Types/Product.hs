@@ -292,7 +292,6 @@ instance ToJSON IngestionInfo where
 data ChannelAuditDetails =
   ChannelAuditDetails'
     { _cadContentIdClaimsGoodStanding     :: !(Maybe Bool)
-    , _cadOverallGoodStanding             :: !(Maybe Bool)
     , _cadCopyrightStrikesGoodStanding    :: !(Maybe Bool)
     , _cadCommUnityGuidelinesGoodStanding :: !(Maybe Bool)
     }
@@ -304,8 +303,6 @@ data ChannelAuditDetails =
 --
 -- * 'cadContentIdClaimsGoodStanding'
 --
--- * 'cadOverallGoodStanding'
---
 -- * 'cadCopyrightStrikesGoodStanding'
 --
 -- * 'cadCommUnityGuidelinesGoodStanding'
@@ -314,7 +311,6 @@ channelAuditDetails
 channelAuditDetails =
   ChannelAuditDetails'
     { _cadContentIdClaimsGoodStanding = Nothing
-    , _cadOverallGoodStanding = Nothing
     , _cadCopyrightStrikesGoodStanding = Nothing
     , _cadCommUnityGuidelinesGoodStanding = Nothing
     }
@@ -324,17 +320,6 @@ cadContentIdClaimsGoodStanding :: Lens' ChannelAuditDetails (Maybe Bool)
 cadContentIdClaimsGoodStanding
   = lens _cadContentIdClaimsGoodStanding
       (\ s a -> s{_cadContentIdClaimsGoodStanding = a})
-
--- | Describes the general state of the channel. This field will always show
--- if there are any issues whatsoever with the channel. Currently this
--- field represents the result of the logical and operation over the
--- community guidelines good standing, the copyright strikes good standing
--- and the content ID claims good standing, but this may change in the
--- future.
-cadOverallGoodStanding :: Lens' ChannelAuditDetails (Maybe Bool)
-cadOverallGoodStanding
-  = lens _cadOverallGoodStanding
-      (\ s a -> s{_cadOverallGoodStanding = a})
 
 -- | Whether or not the channel has any copyright strikes.
 cadCopyrightStrikesGoodStanding :: Lens' ChannelAuditDetails (Maybe Bool)
@@ -354,8 +339,7 @@ instance FromJSON ChannelAuditDetails where
               (\ o ->
                  ChannelAuditDetails' <$>
                    (o .:? "contentIdClaimsGoodStanding") <*>
-                     (o .:? "overallGoodStanding")
-                     <*> (o .:? "copyrightStrikesGoodStanding")
+                     (o .:? "copyrightStrikesGoodStanding")
                      <*> (o .:? "communityGuidelinesGoodStanding"))
 
 instance ToJSON ChannelAuditDetails where
@@ -364,8 +348,6 @@ instance ToJSON ChannelAuditDetails where
               (catMaybes
                  [("contentIdClaimsGoodStanding" .=) <$>
                     _cadContentIdClaimsGoodStanding,
-                  ("overallGoodStanding" .=) <$>
-                    _cadOverallGoodStanding,
                   ("copyrightStrikesGoodStanding" .=) <$>
                     _cadCopyrightStrikesGoodStanding,
                   ("communityGuidelinesGoodStanding" .=) <$>
@@ -3416,6 +3398,69 @@ instance ToJSON ActivityContentDetailsPlayListItem
                   ("playlistId" .=) <$> _acdpliPlayListId,
                   ("playlistItemId" .=) <$> _acdpliPlayListItemId])
 
+--
+-- /See:/ 'superStickerMetadata' smart constructor.
+data SuperStickerMetadata =
+  SuperStickerMetadata'
+    { _ssmAltText         :: !(Maybe Text)
+    , _ssmStickerId       :: !(Maybe Text)
+    , _ssmAltTextLanguage :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'SuperStickerMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssmAltText'
+--
+-- * 'ssmStickerId'
+--
+-- * 'ssmAltTextLanguage'
+superStickerMetadata
+    :: SuperStickerMetadata
+superStickerMetadata =
+  SuperStickerMetadata'
+    { _ssmAltText = Nothing
+    , _ssmStickerId = Nothing
+    , _ssmAltTextLanguage = Nothing
+    }
+
+-- | Internationalized alt text that describes the sticker image and any
+-- animation associated with it.
+ssmAltText :: Lens' SuperStickerMetadata (Maybe Text)
+ssmAltText
+  = lens _ssmAltText (\ s a -> s{_ssmAltText = a})
+
+-- | Unique identifier of the Super Sticker. This is a shorter form of the
+-- alt_text that includes pack name and a recognizable characteristic of
+-- the sticker.
+ssmStickerId :: Lens' SuperStickerMetadata (Maybe Text)
+ssmStickerId
+  = lens _ssmStickerId (\ s a -> s{_ssmStickerId = a})
+
+-- | Specifies the localization language in which the alt text is returned.
+ssmAltTextLanguage :: Lens' SuperStickerMetadata (Maybe Text)
+ssmAltTextLanguage
+  = lens _ssmAltTextLanguage
+      (\ s a -> s{_ssmAltTextLanguage = a})
+
+instance FromJSON SuperStickerMetadata where
+        parseJSON
+          = withObject "SuperStickerMetadata"
+              (\ o ->
+                 SuperStickerMetadata' <$>
+                   (o .:? "altText") <*> (o .:? "stickerId") <*>
+                     (o .:? "altTextLanguage"))
+
+instance ToJSON SuperStickerMetadata where
+        toJSON SuperStickerMetadata'{..}
+          = object
+              (catMaybes
+                 [("altText" .=) <$> _ssmAltText,
+                  ("stickerId" .=) <$> _ssmStickerId,
+                  ("altTextLanguage" .=) <$> _ssmAltTextLanguage])
+
 -- | Details about a social network post.
 --
 -- /See:/ 'activityContentDetailsSocial' smart constructor.
@@ -3741,8 +3786,8 @@ lcscdCurrency
   = lens _lcscdCurrency
       (\ s a -> s{_lcscdCurrency = a})
 
--- | The tier in which the amount belongs to. Lower amounts belong to lower
--- tiers. Starts at 1.
+-- | The tier in which the amount belongs. Lower amounts belong to lower
+-- tiers. The lowest tier is 1.
 lcscdTier :: Lens' LiveChatSuperChatDetails (Maybe Word32)
 lcscdTier
   = lens _lcscdTier (\ s a -> s{_lcscdTier = a}) .
@@ -6381,16 +6426,18 @@ instance ToJSON VideoGetRatingResponse where
 -- /See:/ 'superChatEventSnippet' smart constructor.
 data SuperChatEventSnippet =
   SuperChatEventSnippet'
-    { _scesDisplayString      :: !(Maybe Text)
-    , _scesSupporterDetails   :: !(Maybe ChannelProFileDetails)
-    , _scesCreatedAt          :: !(Maybe DateTime')
-    , _scesAmountMicros       :: !(Maybe (Textual Word64))
-    , _scesMessageType        :: !(Maybe (Textual Word32))
-    , _scesChannelId          :: !(Maybe Text)
-    , _scesCommentText        :: !(Maybe Text)
-    , _scesNonprofit          :: !(Maybe Nonprofit)
-    , _scesCurrency           :: !(Maybe Text)
-    , _scesIsSuperChatForGood :: !(Maybe Bool)
+    { _scesDisplayString        :: !(Maybe Text)
+    , _scesSupporterDetails     :: !(Maybe ChannelProFileDetails)
+    , _scesCreatedAt            :: !(Maybe DateTime')
+    , _scesSuperStickerMetadata :: !(Maybe SuperStickerMetadata)
+    , _scesAmountMicros         :: !(Maybe (Textual Word64))
+    , _scesMessageType          :: !(Maybe (Textual Word32))
+    , _scesChannelId            :: !(Maybe Text)
+    , _scesCommentText          :: !(Maybe Text)
+    , _scesNonprofit            :: !(Maybe Nonprofit)
+    , _scesCurrency             :: !(Maybe Text)
+    , _scesIsSuperChatForGood   :: !(Maybe Bool)
+    , _scesIsSuperStickerEvent  :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6403,6 +6450,8 @@ data SuperChatEventSnippet =
 -- * 'scesSupporterDetails'
 --
 -- * 'scesCreatedAt'
+--
+-- * 'scesSuperStickerMetadata'
 --
 -- * 'scesAmountMicros'
 --
@@ -6417,6 +6466,8 @@ data SuperChatEventSnippet =
 -- * 'scesCurrency'
 --
 -- * 'scesIsSuperChatForGood'
+--
+-- * 'scesIsSuperStickerEvent'
 superChatEventSnippet
     :: SuperChatEventSnippet
 superChatEventSnippet =
@@ -6424,6 +6475,7 @@ superChatEventSnippet =
     { _scesDisplayString = Nothing
     , _scesSupporterDetails = Nothing
     , _scesCreatedAt = Nothing
+    , _scesSuperStickerMetadata = Nothing
     , _scesAmountMicros = Nothing
     , _scesMessageType = Nothing
     , _scesChannelId = Nothing
@@ -6431,6 +6483,7 @@ superChatEventSnippet =
     , _scesNonprofit = Nothing
     , _scesCurrency = Nothing
     , _scesIsSuperChatForGood = Nothing
+    , _scesIsSuperStickerEvent = Nothing
     }
 
 -- | A rendered string that displays the purchase amount and currency (e.g.,
@@ -6453,6 +6506,13 @@ scesCreatedAt
   = lens _scesCreatedAt
       (\ s a -> s{_scesCreatedAt = a})
       . mapping _DateTime
+
+-- | If this event is a Super Sticker event, this field will contain metadata
+-- about the Super Sticker.
+scesSuperStickerMetadata :: Lens' SuperChatEventSnippet (Maybe SuperStickerMetadata)
+scesSuperStickerMetadata
+  = lens _scesSuperStickerMetadata
+      (\ s a -> s{_scesSuperStickerMetadata = a})
 
 -- | The purchase amount, in micros of the purchase currency. e.g., 1 is
 -- represented as 1000000.
@@ -6500,6 +6560,12 @@ scesIsSuperChatForGood
   = lens _scesIsSuperChatForGood
       (\ s a -> s{_scesIsSuperChatForGood = a})
 
+-- | True if this event is a Super Sticker event.
+scesIsSuperStickerEvent :: Lens' SuperChatEventSnippet (Maybe Bool)
+scesIsSuperStickerEvent
+  = lens _scesIsSuperStickerEvent
+      (\ s a -> s{_scesIsSuperStickerEvent = a})
+
 instance FromJSON SuperChatEventSnippet where
         parseJSON
           = withObject "SuperChatEventSnippet"
@@ -6508,13 +6574,15 @@ instance FromJSON SuperChatEventSnippet where
                    (o .:? "displayString") <*>
                      (o .:? "supporterDetails")
                      <*> (o .:? "createdAt")
+                     <*> (o .:? "superStickerMetadata")
                      <*> (o .:? "amountMicros")
                      <*> (o .:? "messageType")
                      <*> (o .:? "channelId")
                      <*> (o .:? "commentText")
                      <*> (o .:? "nonprofit")
                      <*> (o .:? "currency")
-                     <*> (o .:? "isSuperChatForGood"))
+                     <*> (o .:? "isSuperChatForGood")
+                     <*> (o .:? "isSuperStickerEvent"))
 
 instance ToJSON SuperChatEventSnippet where
         toJSON SuperChatEventSnippet'{..}
@@ -6523,6 +6591,8 @@ instance ToJSON SuperChatEventSnippet where
                  [("displayString" .=) <$> _scesDisplayString,
                   ("supporterDetails" .=) <$> _scesSupporterDetails,
                   ("createdAt" .=) <$> _scesCreatedAt,
+                  ("superStickerMetadata" .=) <$>
+                    _scesSuperStickerMetadata,
                   ("amountMicros" .=) <$> _scesAmountMicros,
                   ("messageType" .=) <$> _scesMessageType,
                   ("channelId" .=) <$> _scesChannelId,
@@ -6530,7 +6600,9 @@ instance ToJSON SuperChatEventSnippet where
                   ("nonprofit" .=) <$> _scesNonprofit,
                   ("currency" .=) <$> _scesCurrency,
                   ("isSuperChatForGood" .=) <$>
-                    _scesIsSuperChatForGood])
+                    _scesIsSuperChatForGood,
+                  ("isSuperStickerEvent" .=) <$>
+                    _scesIsSuperStickerEvent])
 
 -- | Basic details about a video category, such as its localized title.
 --
@@ -6961,7 +7033,15 @@ csCountry
 
 -- | A map of thumbnail images associated with the channel. For each object
 -- in the map, the key is the name of the thumbnail image, and the value is
--- an object that contains other information about the thumbnail.
+-- an object that contains other information about the thumbnail. When
+-- displaying thumbnails in your application, make sure that your code uses
+-- the image URLs exactly as they are returned in API responses. For
+-- example, your application should not use the http domain instead of the
+-- https domain in a URL returned in an API response. Beginning in July
+-- 2018, channel thumbnail URLs will only be available in the https domain,
+-- which is how the URLs appear in API responses. After that time, you
+-- might see broken images in your application if it tries to load YouTube
+-- images from the http domain.
 csThumbnails :: Lens' ChannelSnippet (Maybe ThumbnailDetails)
 csThumbnails
   = lens _csThumbnails (\ s a -> s{_csThumbnails = a})
@@ -7176,6 +7256,7 @@ instance ToJSON MonitorStreamInfo where
 data LiveChatMessageSnippet =
   LiveChatMessageSnippet'
     { _lcmsMessageDeletedDetails   :: !(Maybe LiveChatMessageDeletedDetails)
+    , _lcmsSuperStickerDetails     :: !(Maybe LiveChatSuperStickerDetails)
     , _lcmsLiveChatId              :: !(Maybe Text)
     , _lcmsPublishedAt             :: !(Maybe DateTime')
     , _lcmsPollOpenedDetails       :: !(Maybe LiveChatPollOpenedDetails)
@@ -7199,6 +7280,8 @@ data LiveChatMessageSnippet =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lcmsMessageDeletedDetails'
+--
+-- * 'lcmsSuperStickerDetails'
 --
 -- * 'lcmsLiveChatId'
 --
@@ -7234,6 +7317,7 @@ liveChatMessageSnippet
 liveChatMessageSnippet =
   LiveChatMessageSnippet'
     { _lcmsMessageDeletedDetails = Nothing
+    , _lcmsSuperStickerDetails = Nothing
     , _lcmsLiveChatId = Nothing
     , _lcmsPublishedAt = Nothing
     , _lcmsPollOpenedDetails = Nothing
@@ -7255,6 +7339,13 @@ lcmsMessageDeletedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatMessage
 lcmsMessageDeletedDetails
   = lens _lcmsMessageDeletedDetails
       (\ s a -> s{_lcmsMessageDeletedDetails = a})
+
+-- | Details about the Super Sticker event, this is only set if the type is
+-- \'superStickerEvent\'.
+lcmsSuperStickerDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatSuperStickerDetails)
+lcmsSuperStickerDetails
+  = lens _lcmsSuperStickerDetails
+      (\ s a -> s{_lcmsSuperStickerDetails = a})
 
 lcmsLiveChatId :: Lens' LiveChatMessageSnippet (Maybe Text)
 lcmsLiveChatId
@@ -7358,7 +7449,8 @@ instance FromJSON LiveChatMessageSnippet where
               (\ o ->
                  LiveChatMessageSnippet' <$>
                    (o .:? "messageDeletedDetails") <*>
-                     (o .:? "liveChatId")
+                     (o .:? "superStickerDetails")
+                     <*> (o .:? "liveChatId")
                      <*> (o .:? "publishedAt")
                      <*> (o .:? "pollOpenedDetails")
                      <*> (o .:? "pollVotedDetails")
@@ -7380,6 +7472,8 @@ instance ToJSON LiveChatMessageSnippet where
               (catMaybes
                  [("messageDeletedDetails" .=) <$>
                     _lcmsMessageDeletedDetails,
+                  ("superStickerDetails" .=) <$>
+                    _lcmsSuperStickerDetails,
                   ("liveChatId" .=) <$> _lcmsLiveChatId,
                   ("publishedAt" .=) <$> _lcmsPublishedAt,
                   ("pollOpenedDetails" .=) <$> _lcmsPollOpenedDetails,
@@ -10300,6 +10394,98 @@ instance ToJSON InvideoPosition where
               (catMaybes
                  [("cornerPosition" .=) <$> _ipCornerPosition,
                   ("type" .=) <$> _ipType])
+
+--
+-- /See:/ 'liveChatSuperStickerDetails' smart constructor.
+data LiveChatSuperStickerDetails =
+  LiveChatSuperStickerDetails'
+    { _lcssdSuperStickerMetadata :: !(Maybe SuperStickerMetadata)
+    , _lcssdAmountMicros         :: !(Maybe (Textual Word64))
+    , _lcssdAmountDisplayString  :: !(Maybe Text)
+    , _lcssdCurrency             :: !(Maybe Text)
+    , _lcssdTier                 :: !(Maybe (Textual Word32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'LiveChatSuperStickerDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcssdSuperStickerMetadata'
+--
+-- * 'lcssdAmountMicros'
+--
+-- * 'lcssdAmountDisplayString'
+--
+-- * 'lcssdCurrency'
+--
+-- * 'lcssdTier'
+liveChatSuperStickerDetails
+    :: LiveChatSuperStickerDetails
+liveChatSuperStickerDetails =
+  LiveChatSuperStickerDetails'
+    { _lcssdSuperStickerMetadata = Nothing
+    , _lcssdAmountMicros = Nothing
+    , _lcssdAmountDisplayString = Nothing
+    , _lcssdCurrency = Nothing
+    , _lcssdTier = Nothing
+    }
+
+-- | Information about the Super Sticker.
+lcssdSuperStickerMetadata :: Lens' LiveChatSuperStickerDetails (Maybe SuperStickerMetadata)
+lcssdSuperStickerMetadata
+  = lens _lcssdSuperStickerMetadata
+      (\ s a -> s{_lcssdSuperStickerMetadata = a})
+
+-- | The amount purchased by the user, in micros (1,750,000 micros = 1.75).
+lcssdAmountMicros :: Lens' LiveChatSuperStickerDetails (Maybe Word64)
+lcssdAmountMicros
+  = lens _lcssdAmountMicros
+      (\ s a -> s{_lcssdAmountMicros = a})
+      . mapping _Coerce
+
+-- | A rendered string that displays the fund amount and currency to the
+-- user.
+lcssdAmountDisplayString :: Lens' LiveChatSuperStickerDetails (Maybe Text)
+lcssdAmountDisplayString
+  = lens _lcssdAmountDisplayString
+      (\ s a -> s{_lcssdAmountDisplayString = a})
+
+-- | The currency in which the purchase was made.
+lcssdCurrency :: Lens' LiveChatSuperStickerDetails (Maybe Text)
+lcssdCurrency
+  = lens _lcssdCurrency
+      (\ s a -> s{_lcssdCurrency = a})
+
+-- | The tier in which the amount belongs. Lower amounts belong to lower
+-- tiers. The lowest tier is 1.
+lcssdTier :: Lens' LiveChatSuperStickerDetails (Maybe Word32)
+lcssdTier
+  = lens _lcssdTier (\ s a -> s{_lcssdTier = a}) .
+      mapping _Coerce
+
+instance FromJSON LiveChatSuperStickerDetails where
+        parseJSON
+          = withObject "LiveChatSuperStickerDetails"
+              (\ o ->
+                 LiveChatSuperStickerDetails' <$>
+                   (o .:? "superStickerMetadata") <*>
+                     (o .:? "amountMicros")
+                     <*> (o .:? "amountDisplayString")
+                     <*> (o .:? "currency")
+                     <*> (o .:? "tier"))
+
+instance ToJSON LiveChatSuperStickerDetails where
+        toJSON LiveChatSuperStickerDetails'{..}
+          = object
+              (catMaybes
+                 [("superStickerMetadata" .=) <$>
+                    _lcssdSuperStickerMetadata,
+                  ("amountMicros" .=) <$> _lcssdAmountMicros,
+                  ("amountDisplayString" .=) <$>
+                    _lcssdAmountDisplayString,
+                  ("currency" .=) <$> _lcssdCurrency,
+                  ("tier" .=) <$> _lcssdTier])
 
 --
 -- /See:/ 'liveStreamHealthStatus' smart constructor.

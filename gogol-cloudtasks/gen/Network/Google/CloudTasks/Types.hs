@@ -169,6 +169,7 @@ module Network.Google.CloudTasks.Types
     , Task
     , task
     , tLastAttempt
+    , tDispatchDeadline
     , tScheduleTime
     , tName
     , tFirstAttempt

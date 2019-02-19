@@ -75,7 +75,8 @@ puPayload
 instance GoogleRequest PushtokensUpdate where
         type Rs PushtokensUpdate = ()
         type Scopes PushtokensUpdate =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient PushtokensUpdate'{..}
           = go (Just AltJSON) _puPayload gamesService
           where go

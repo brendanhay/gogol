@@ -61,7 +61,8 @@ esErrorCode :: Lens' ErrorSummary (Maybe ErrorSummaryErrorCode)
 esErrorCode
   = lens _esErrorCode (\ s a -> s{_esErrorCode = a})
 
--- | Error samples.
+-- | Error samples. No more than 100 error log entries may be recorded for a
+-- given error code for a single task.
 esErrorLogEntries :: Lens' ErrorSummary [ErrorLogEntry]
 esErrorLogEntries
   = lens _esErrorLogEntries
@@ -1113,7 +1114,7 @@ tjDeletionTime
 tjName :: Lens' TransferJob (Maybe Text)
 tjName = lens _tjName (\ s a -> s{_tjName = a})
 
--- | The ID of the Google Cloud Platform Console project that owns the job.
+-- | The ID of the Google Cloud Platform Project that owns the job.
 tjProjectId :: Lens' TransferJob (Maybe Text)
 tjProjectId
   = lens _tjProjectId (\ s a -> s{_tjProjectId = a})
@@ -1639,8 +1640,8 @@ toEndTime
   = lens _toEndTime (\ s a -> s{_toEndTime = a}) .
       mapping _DateTime
 
--- | The ID of the Google Cloud Platform Console project that owns the
--- operation. Required.
+-- | The ID of the Google Cloud Platform Project that owns the operation.
+-- Required.
 toProjectId :: Lens' TransferOperation (Maybe Text)
 toProjectId
   = lens _toProjectId (\ s a -> s{_toProjectId = a})

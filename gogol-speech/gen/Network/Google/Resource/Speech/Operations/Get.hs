@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference> for @speech.operations.get@.
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.operations.get@.
 module Network.Google.Resource.Speech.Operations.Get
     (
     -- * REST Resource

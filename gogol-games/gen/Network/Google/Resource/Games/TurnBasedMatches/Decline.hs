@@ -89,7 +89,8 @@ tbmdMatchId
 instance GoogleRequest TurnBasedMatchesDecline where
         type Rs TurnBasedMatchesDecline = TurnBasedMatch
         type Scopes TurnBasedMatchesDecline =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesDecline'{..}
           = go _tbmdMatchId _tbmdLanguage (Just AltJSON)
               gamesService

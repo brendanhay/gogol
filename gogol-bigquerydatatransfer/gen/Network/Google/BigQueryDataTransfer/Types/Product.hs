@@ -571,6 +571,81 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
+-- | Options customizing the data transfer schedule.
+--
+-- /See:/ 'scheduleOptions' smart constructor.
+data ScheduleOptions =
+  ScheduleOptions'
+    { _soStartTime             :: !(Maybe DateTime')
+    , _soDisableAutoScheduling :: !(Maybe Bool)
+    , _soEndTime               :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'ScheduleOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'soStartTime'
+--
+-- * 'soDisableAutoScheduling'
+--
+-- * 'soEndTime'
+scheduleOptions
+    :: ScheduleOptions
+scheduleOptions =
+  ScheduleOptions'
+    { _soStartTime = Nothing
+    , _soDisableAutoScheduling = Nothing
+    , _soEndTime = Nothing
+    }
+
+-- | Specifies time to start scheduling transfer runs. The first run will be
+-- scheduled at or after the start time according to a recurrence pattern
+-- defined in the schedule string. The start time can be changed at any
+-- moment. The time when a data transfer can be trigerred manually is not
+-- limited by this option.
+soStartTime :: Lens' ScheduleOptions (Maybe UTCTime)
+soStartTime
+  = lens _soStartTime (\ s a -> s{_soStartTime = a}) .
+      mapping _DateTime
+
+-- | If true, automatic scheduling of data transfer runs for this
+-- configuration will be disabled. The runs can be started on ad-hoc basis
+-- using StartManualTransferRuns API. When automatic scheduling is
+-- disabled, the TransferConfig.schedule field will be ignored.
+soDisableAutoScheduling :: Lens' ScheduleOptions (Maybe Bool)
+soDisableAutoScheduling
+  = lens _soDisableAutoScheduling
+      (\ s a -> s{_soDisableAutoScheduling = a})
+
+-- | Defines time to stop scheduling transfer runs. A transfer run cannot be
+-- scheduled at or after the end time. The end time can be changed at any
+-- moment. The time when a data transfer can be trigerred manually is not
+-- limited by this option.
+soEndTime :: Lens' ScheduleOptions (Maybe UTCTime)
+soEndTime
+  = lens _soEndTime (\ s a -> s{_soEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON ScheduleOptions where
+        parseJSON
+          = withObject "ScheduleOptions"
+              (\ o ->
+                 ScheduleOptions' <$>
+                   (o .:? "startTime") <*>
+                     (o .:? "disableAutoScheduling")
+                     <*> (o .:? "endTime"))
+
+instance ToJSON ScheduleOptions where
+        toJSON ScheduleOptions'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _soStartTime,
+                  ("disableAutoScheduling" .=) <$>
+                    _soDisableAutoScheduling,
+                  ("endTime" .=) <$> _soEndTime])
+
 -- | The returned list transfer run messages.
 --
 -- /See:/ 'listTransferLogsResponse' smart constructor.
@@ -1540,6 +1615,7 @@ data TransferConfig =
   TransferConfig'
     { _tcState                 :: !(Maybe TransferConfigState)
     , _tcSchedule              :: !(Maybe Text)
+    , _tcScheduleOptions       :: !(Maybe ScheduleOptions)
     , _tcDisabled              :: !(Maybe Bool)
     , _tcDataSourceId          :: !(Maybe Text)
     , _tcParams                :: !(Maybe TransferConfigParams)
@@ -1561,6 +1637,8 @@ data TransferConfig =
 -- * 'tcState'
 --
 -- * 'tcSchedule'
+--
+-- * 'tcScheduleOptions'
 --
 -- * 'tcDisabled'
 --
@@ -1589,6 +1667,7 @@ transferConfig =
   TransferConfig'
     { _tcState = Nothing
     , _tcSchedule = Nothing
+    , _tcScheduleOptions = Nothing
     , _tcDisabled = Nothing
     , _tcDataSourceId = Nothing
     , _tcParams = Nothing
@@ -1617,6 +1696,12 @@ tcState = lens _tcState (\ s a -> s{_tcState = a})
 tcSchedule :: Lens' TransferConfig (Maybe Text)
 tcSchedule
   = lens _tcSchedule (\ s a -> s{_tcSchedule = a})
+
+-- | Options customizing the data transfer schedule.
+tcScheduleOptions :: Lens' TransferConfig (Maybe ScheduleOptions)
+tcScheduleOptions
+  = lens _tcScheduleOptions
+      (\ s a -> s{_tcScheduleOptions = a})
 
 -- | Is this config disabled. When set to true, no runs are scheduled for a
 -- given transfer.
@@ -1699,7 +1784,8 @@ instance FromJSON TransferConfig where
               (\ o ->
                  TransferConfig' <$>
                    (o .:? "state") <*> (o .:? "schedule") <*>
-                     (o .:? "disabled")
+                     (o .:? "scheduleOptions")
+                     <*> (o .:? "disabled")
                      <*> (o .:? "dataSourceId")
                      <*> (o .:? "params")
                      <*> (o .:? "userId")
@@ -1717,6 +1803,7 @@ instance ToJSON TransferConfig where
               (catMaybes
                  [("state" .=) <$> _tcState,
                   ("schedule" .=) <$> _tcSchedule,
+                  ("scheduleOptions" .=) <$> _tcScheduleOptions,
                   ("disabled" .=) <$> _tcDisabled,
                   ("dataSourceId" .=) <$> _tcDataSourceId,
                   ("params" .=) <$> _tcParams,

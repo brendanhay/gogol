@@ -20,6 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
+-- Retrieves multiple Merchant Center account statuses in a single request.
+--
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountstatuses.custombatch@.
 module Network.Google.Resource.Content.Accountstatuses.Custombatch
     (
@@ -48,6 +50,7 @@ type AccountstatusesCustombatchResource =
                ReqBody '[JSON] AccountstatusesCustomBatchRequest :>
                  Post '[JSON] AccountstatusesCustomBatchResponse
 
+-- | Retrieves multiple Merchant Center account statuses in a single request.
 --
 -- /See:/ 'accountstatusesCustombatch' smart constructor.
 newtype AccountstatusesCustombatch =

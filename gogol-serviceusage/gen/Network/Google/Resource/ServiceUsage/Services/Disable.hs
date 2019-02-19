@@ -25,7 +25,7 @@
 -- security leaks. It is not valid to call the disable method on a service
 -- that is not currently enabled. Callers will receive a
 -- \`FAILED_PRECONDITION\` status if the target service is not currently
--- enabled. Operation
+-- enabled.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.disable@.
 module Network.Google.Resource.ServiceUsage.Services.Disable
@@ -69,7 +69,7 @@ type ServicesDisableResource =
 -- security leaks. It is not valid to call the disable method on a service
 -- that is not currently enabled. Callers will receive a
 -- \`FAILED_PRECONDITION\` status if the target service is not currently
--- enabled. Operation
+-- enabled.
 --
 -- /See:/ 'servicesDisable' smart constructor.
 data ServicesDisable =

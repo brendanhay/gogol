@@ -23,7 +23,7 @@
 -- Retrieves the profile information used for logging in to a virtual
 -- machine on Google Compute Engine.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.getLoginProfile@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.getLoginProfile@.
 module Network.Google.Resource.OSLogin.Users.GetLoginProFile
     (
     -- * REST Resource

@@ -78,7 +78,8 @@ apBuiltinGameId
 instance GoogleRequest ApplicationsPlayed where
         type Rs ApplicationsPlayed = ()
         type Scopes ApplicationsPlayed =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ApplicationsPlayed'{..}
           = go _apBuiltinGameId (Just AltJSON) gamesService
           where go

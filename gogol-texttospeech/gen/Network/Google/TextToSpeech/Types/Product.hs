@@ -25,11 +25,12 @@ import           Network.Google.TextToSpeech.Types.Sum
 -- /See:/ 'audioConfig' smart constructor.
 data AudioConfig =
   AudioConfig'
-    { _acVolumeGainDB    :: !(Maybe (Textual Double))
-    , _acSampleRateHertz :: !(Maybe (Textual Int32))
-    , _acAudioEncoding   :: !(Maybe AudioConfigAudioEncoding)
-    , _acSpeakingRate    :: !(Maybe (Textual Double))
-    , _acPitch           :: !(Maybe (Textual Double))
+    { _acVolumeGainDB     :: !(Maybe (Textual Double))
+    , _acSampleRateHertz  :: !(Maybe (Textual Int32))
+    , _acEffectsProFileId :: !(Maybe [Text])
+    , _acAudioEncoding    :: !(Maybe AudioConfigAudioEncoding)
+    , _acSpeakingRate     :: !(Maybe (Textual Double))
+    , _acPitch            :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -40,6 +41,8 @@ data AudioConfig =
 -- * 'acVolumeGainDB'
 --
 -- * 'acSampleRateHertz'
+--
+-- * 'acEffectsProFileId'
 --
 -- * 'acAudioEncoding'
 --
@@ -52,6 +55,7 @@ audioConfig =
   AudioConfig'
     { _acVolumeGainDB = Nothing
     , _acSampleRateHertz = Nothing
+    , _acEffectsProFileId = Nothing
     , _acAudioEncoding = Nothing
     , _acSpeakingRate = Nothing
     , _acPitch = Nothing
@@ -83,6 +87,18 @@ acSampleRateHertz
       (\ s a -> s{_acSampleRateHertz = a})
       . mapping _Coerce
 
+-- | An identifier which selects \'audio effects\' profiles that are applied
+-- on (post synthesized) text to speech. Effects are applied on top of each
+-- other in the order they are given. See [audio-profiles](https:
+-- \/\/cloud.google.com\/text-to-speech\/docs\/audio-profiles) for current
+-- supported profile ids.
+acEffectsProFileId :: Lens' AudioConfig [Text]
+acEffectsProFileId
+  = lens _acEffectsProFileId
+      (\ s a -> s{_acEffectsProFileId = a})
+      . _Default
+      . _Coerce
+
 -- | Required. The format of the requested audio byte stream.
 acAudioEncoding :: Lens' AudioConfig (Maybe AudioConfigAudioEncoding)
 acAudioEncoding
@@ -113,6 +129,7 @@ instance FromJSON AudioConfig where
               (\ o ->
                  AudioConfig' <$>
                    (o .:? "volumeGainDb") <*> (o .:? "sampleRateHertz")
+                     <*> (o .:? "effectsProfileId" .!= mempty)
                      <*> (o .:? "audioEncoding")
                      <*> (o .:? "speakingRate")
                      <*> (o .:? "pitch"))
@@ -123,6 +140,7 @@ instance ToJSON AudioConfig where
               (catMaybes
                  [("volumeGainDb" .=) <$> _acVolumeGainDB,
                   ("sampleRateHertz" .=) <$> _acSampleRateHertz,
+                  ("effectsProfileId" .=) <$> _acEffectsProFileId,
                   ("audioEncoding" .=) <$> _acAudioEncoding,
                   ("speakingRate" .=) <$> _acSpeakingRate,
                   ("pitch" .=) <$> _acPitch])

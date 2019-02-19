@@ -354,7 +354,9 @@ operation =
     }
 
 -- | Status of the operation. Can be one of the following: \"PENDING\" or
--- \"DONE\" (output only).
+-- \"DONE\" (output only). A status of \"DONE\" means that the request to
+-- update the authoritative servers has been sent, but the servers might
+-- not be updated yet.
 oStatus :: Lens' Operation (Maybe OperationStatus)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
@@ -456,11 +458,11 @@ dnsKeySpec =
     , _dksKeyLength = Nothing
     }
 
--- | One of \"KEY_SIGNING\" or \"ZONE_SIGNING\". Keys of type KEY_SIGNING
--- have the Secure Entry Point flag set and, when active, will be used to
--- sign only resource record sets of type DNSKEY. Otherwise, the Secure
--- Entry Point flag will be cleared and this key will be used to sign only
--- resource record sets of other types.
+-- | Specifies whether this is a key signing key (KSK) or a zone signing key
+-- (ZSK). Key signing keys have the Secure Entry Point flag set and, when
+-- active, will only be used to sign resource record sets of type DNSKEY.
+-- Zone signing keys do not have the Secure Entry Point flag set and will
+-- be used to sign all other types of resource record sets.
 dksKeyType :: Lens' DNSKeySpec (Maybe DNSKeySpecKeyType)
 dksKeyType
   = lens _dksKeyType (\ s a -> s{_dksKeyType = a})
@@ -500,7 +502,13 @@ instance ToJSON DNSKeySpec where
                   ("algorithm" .=) <$> _dksAlgorithm,
                   ("keyLength" .=) <$> _dksKeyLength])
 
--- | An atomic update to a collection of ResourceRecordSets.
+-- | A Change represents a set of ResourceRecordSet additions and deletions
+-- applied atomically to a ManagedZone. ResourceRecordSets within a
+-- ManagedZone are modified by creating a new Change element in the Changes
+-- collection. In turn the Changes collection also records the past
+-- modifications to the ResourceRecordSets in a ManagedZone. The current
+-- state of the ManagedZone is the sum effect of applying all Change
+-- elements in the Changes collection in sequence.
 --
 -- /See:/ 'change' smart constructor.
 data Change =
@@ -545,7 +553,9 @@ change =
     , _cIsServing = Nothing
     }
 
--- | Status of the operation (output only).
+-- | Status of the operation (output only). A status of \"done\" means that
+-- the request to update the authoritative servers has been sent, but the
+-- servers might not be updated yet.
 cStatus :: Lens' Change (Maybe ChangeStatus)
 cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
 
@@ -1168,8 +1178,8 @@ rrsSignatureRrDatas
 rrsName :: Lens' ResourceRecordSet (Maybe Text)
 rrsName = lens _rrsName (\ s a -> s{_rrsName = a})
 
--- | The identifier of a supported record type, for example, A, AAAA, MX,
--- TXT, and so on.
+-- | The identifier of a supported record type. See the list of Supported DNS
+-- record types.
 rrsType :: Lens' ResourceRecordSet (Maybe Text)
 rrsType = lens _rrsType (\ s a -> s{_rrsType = a})
 

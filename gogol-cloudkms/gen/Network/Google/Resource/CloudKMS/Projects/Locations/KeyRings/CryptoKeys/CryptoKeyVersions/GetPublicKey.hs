@@ -146,7 +146,9 @@ instance GoogleRequest
              = PublicKey
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey'{..}
           = go _plkrckckvgpkName _plkrckckvgpkXgafv

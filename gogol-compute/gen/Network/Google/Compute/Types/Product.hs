@@ -484,6 +484,102 @@ instance ToJSON OperationWarningsItemDataItem where
                   ("key" .=) <$> _owidiKey])
 
 --
+-- /See:/ 'instanceGroupManagerUpdatePolicy' smart constructor.
+data InstanceGroupManagerUpdatePolicy =
+  InstanceGroupManagerUpdatePolicy'
+    { _igmupMaxSurge       :: !(Maybe FixedOrPercent)
+    , _igmupMaxUnavailable :: !(Maybe FixedOrPercent)
+    , _igmupMinimalAction  :: !(Maybe InstanceGroupManagerUpdatePolicyMinimalAction)
+    , _igmupType           :: !(Maybe InstanceGroupManagerUpdatePolicyType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'InstanceGroupManagerUpdatePolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmupMaxSurge'
+--
+-- * 'igmupMaxUnavailable'
+--
+-- * 'igmupMinimalAction'
+--
+-- * 'igmupType'
+instanceGroupManagerUpdatePolicy
+    :: InstanceGroupManagerUpdatePolicy
+instanceGroupManagerUpdatePolicy =
+  InstanceGroupManagerUpdatePolicy'
+    { _igmupMaxSurge = Nothing
+    , _igmupMaxUnavailable = Nothing
+    , _igmupMinimalAction = Nothing
+    , _igmupType = Nothing
+    }
+
+-- | The maximum number of instances that can be created above the specified
+-- targetSize during the update process. By default, a fixed value of 1 is
+-- used. This value can be either a fixed number or a percentage if the
+-- instance group has 10 or more instances. If you set a percentage, the
+-- number of instances will be rounded up if necessary. At least one of
+-- either maxSurge or maxUnavailable must be greater than 0. Learn more
+-- about maxSurge.
+igmupMaxSurge :: Lens' InstanceGroupManagerUpdatePolicy (Maybe FixedOrPercent)
+igmupMaxSurge
+  = lens _igmupMaxSurge
+      (\ s a -> s{_igmupMaxSurge = a})
+
+-- | The maximum number of instances that can be unavailable during the
+-- update process. An instance is considered available if all of the
+-- following conditions are satisfied: - The instance\'s status is RUNNING.
+-- - If there is a health check on the instance group, the instance\'s
+-- liveness health check result must be HEALTHY at least once. If there is
+-- no health check on the group, then the instance only needs to have a
+-- status of RUNNING to be considered available. By default, a fixed value
+-- of 1 is used. This value can be either a fixed number or a percentage if
+-- the instance group has 10 or more instances. If you set a percentage,
+-- the number of instances will be rounded up if necessary. At least one of
+-- either maxSurge or maxUnavailable must be greater than 0. Learn more
+-- about maxUnavailable.
+igmupMaxUnavailable :: Lens' InstanceGroupManagerUpdatePolicy (Maybe FixedOrPercent)
+igmupMaxUnavailable
+  = lens _igmupMaxUnavailable
+      (\ s a -> s{_igmupMaxUnavailable = a})
+
+-- | Minimal action to be taken on an instance. You can specify either
+-- RESTART to restart existing instances or REPLACE to delete and create
+-- new instances from the target template. If you specify a RESTART, the
+-- Updater will attempt to perform that action only. However, if the
+-- Updater determines that the minimal action you specify is not enough to
+-- perform the update, it might perform a more disruptive action.
+igmupMinimalAction :: Lens' InstanceGroupManagerUpdatePolicy (Maybe InstanceGroupManagerUpdatePolicyMinimalAction)
+igmupMinimalAction
+  = lens _igmupMinimalAction
+      (\ s a -> s{_igmupMinimalAction = a})
+
+igmupType :: Lens' InstanceGroupManagerUpdatePolicy (Maybe InstanceGroupManagerUpdatePolicyType)
+igmupType
+  = lens _igmupType (\ s a -> s{_igmupType = a})
+
+instance FromJSON InstanceGroupManagerUpdatePolicy
+         where
+        parseJSON
+          = withObject "InstanceGroupManagerUpdatePolicy"
+              (\ o ->
+                 InstanceGroupManagerUpdatePolicy' <$>
+                   (o .:? "maxSurge") <*> (o .:? "maxUnavailable") <*>
+                     (o .:? "minimalAction")
+                     <*> (o .:? "type"))
+
+instance ToJSON InstanceGroupManagerUpdatePolicy
+         where
+        toJSON InstanceGroupManagerUpdatePolicy'{..}
+          = object
+              (catMaybes
+                 [("maxSurge" .=) <$> _igmupMaxSurge,
+                  ("maxUnavailable" .=) <$> _igmupMaxUnavailable,
+                  ("minimalAction" .=) <$> _igmupMinimalAction,
+                  ("type" .=) <$> _igmupType])
+
+--
 -- /See:/ 'regionInstanceGroupsListInstancesRequest' smart constructor.
 data RegionInstanceGroupsListInstancesRequest =
   RegionInstanceGroupsListInstancesRequest'
@@ -3962,6 +4058,74 @@ instance ToJSON InstanceGroupManagerList where
                   ("warning" .=) <$> _igmlWarning,
                   ("id" .=) <$> _igmlId])
 
+--
+-- /See:/ 'instanceGroupManagerVersion' smart constructor.
+data InstanceGroupManagerVersion =
+  InstanceGroupManagerVersion'
+    { _igmvInstanceTemplate :: !(Maybe Text)
+    , _igmvTargetSize       :: !(Maybe FixedOrPercent)
+    , _igmvName             :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'InstanceGroupManagerVersion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmvInstanceTemplate'
+--
+-- * 'igmvTargetSize'
+--
+-- * 'igmvName'
+instanceGroupManagerVersion
+    :: InstanceGroupManagerVersion
+instanceGroupManagerVersion =
+  InstanceGroupManagerVersion'
+    { _igmvInstanceTemplate = Nothing
+    , _igmvTargetSize = Nothing
+    , _igmvName = Nothing
+    }
+
+igmvInstanceTemplate :: Lens' InstanceGroupManagerVersion (Maybe Text)
+igmvInstanceTemplate
+  = lens _igmvInstanceTemplate
+      (\ s a -> s{_igmvInstanceTemplate = a})
+
+-- | Specifies the intended number of instances to be created from the
+-- instanceTemplate. The final number of instances created from the
+-- template will be equal to: - If expressed as a fixed number, the minimum
+-- of either targetSize.fixed or instanceGroupManager.targetSize is used. -
+-- if expressed as a percent, the targetSize would be
+-- (targetSize.percent\/100 * InstanceGroupManager.targetSize) If there is
+-- a remainder, the number is rounded up. If unset, this version will
+-- update any remaining instances not updated by another version. Read
+-- Starting a canary update for more information.
+igmvTargetSize :: Lens' InstanceGroupManagerVersion (Maybe FixedOrPercent)
+igmvTargetSize
+  = lens _igmvTargetSize
+      (\ s a -> s{_igmvTargetSize = a})
+
+-- | Name of the version. Unique among all versions in the scope of this
+-- managed instance group.
+igmvName :: Lens' InstanceGroupManagerVersion (Maybe Text)
+igmvName = lens _igmvName (\ s a -> s{_igmvName = a})
+
+instance FromJSON InstanceGroupManagerVersion where
+        parseJSON
+          = withObject "InstanceGroupManagerVersion"
+              (\ o ->
+                 InstanceGroupManagerVersion' <$>
+                   (o .:? "instanceTemplate") <*> (o .:? "targetSize")
+                     <*> (o .:? "name"))
+
+instance ToJSON InstanceGroupManagerVersion where
+        toJSON InstanceGroupManagerVersion'{..}
+          = object
+              (catMaybes
+                 [("instanceTemplate" .=) <$> _igmvInstanceTemplate,
+                  ("targetSize" .=) <$> _igmvTargetSize,
+                  ("name" .=) <$> _igmvName])
+
 -- | An informational warning that appears when the list of addresses is
 -- empty.
 --
@@ -4845,11 +5009,15 @@ umFingerprint
       (\ s a -> s{_umFingerprint = a})
       . mapping _Bytes
 
--- | The URL of the backendService resource if none of the hostRules match.
--- Use defaultService instead of defaultRouteAction when simple routing to
--- a backendService is desired and other advanced capabilities like traffic
--- splitting and rewrites are not required. Only one of defaultService,
--- defaultRouteAction or defaultUrlRedirect should must be set.
+-- | The full or partial URL of the defaultService resource to which traffic
+-- is directed if none of the hostRules match. If defaultRouteAction is
+-- additionally specified, advanced routing actions like URL Rewrites, etc.
+-- take effect prior to sending the request to the backend. However, if
+-- defaultService is specified, defaultRouteAction cannot contain any
+-- weightedBackendServices. Conversely, if routeAction specifies any
+-- weightedBackendServices, service must not be specified. Only one of
+-- defaultService, defaultUrlRedirect or
+-- defaultRouteAction.weightedBackendService must be set.
 umDefaultService :: Lens' URLMap (Maybe Text)
 umDefaultService
   = lens _umDefaultService
@@ -7680,6 +7848,64 @@ instance ToJSON
          where
         toJSON = toJSON . _iaaliAddtional
 
+-- |
+--
+-- /See:/ 'instanceGroupManagerAutoHealingPolicy' smart constructor.
+data InstanceGroupManagerAutoHealingPolicy =
+  InstanceGroupManagerAutoHealingPolicy'
+    { _igmahpHealthCheck     :: !(Maybe Text)
+    , _igmahpInitialDelaySec :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'InstanceGroupManagerAutoHealingPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmahpHealthCheck'
+--
+-- * 'igmahpInitialDelaySec'
+instanceGroupManagerAutoHealingPolicy
+    :: InstanceGroupManagerAutoHealingPolicy
+instanceGroupManagerAutoHealingPolicy =
+  InstanceGroupManagerAutoHealingPolicy'
+    {_igmahpHealthCheck = Nothing, _igmahpInitialDelaySec = Nothing}
+
+-- | The URL for the health check that signals autohealing.
+igmahpHealthCheck :: Lens' InstanceGroupManagerAutoHealingPolicy (Maybe Text)
+igmahpHealthCheck
+  = lens _igmahpHealthCheck
+      (\ s a -> s{_igmahpHealthCheck = a})
+
+-- | The number of seconds that the managed instance group waits before it
+-- applies autohealing policies to new instances or recently recreated
+-- instances. This initial delay allows instances to initialize and run
+-- their startup scripts before the instance group determines that they are
+-- UNHEALTHY. This prevents the managed instance group from recreating its
+-- instances prematurely. This value must be from range [0, 3600].
+igmahpInitialDelaySec :: Lens' InstanceGroupManagerAutoHealingPolicy (Maybe Int32)
+igmahpInitialDelaySec
+  = lens _igmahpInitialDelaySec
+      (\ s a -> s{_igmahpInitialDelaySec = a})
+      . mapping _Coerce
+
+instance FromJSON
+           InstanceGroupManagerAutoHealingPolicy
+         where
+        parseJSON
+          = withObject "InstanceGroupManagerAutoHealingPolicy"
+              (\ o ->
+                 InstanceGroupManagerAutoHealingPolicy' <$>
+                   (o .:? "healthCheck") <*> (o .:? "initialDelaySec"))
+
+instance ToJSON InstanceGroupManagerAutoHealingPolicy
+         where
+        toJSON InstanceGroupManagerAutoHealingPolicy'{..}
+          = object
+              (catMaybes
+                 [("healthCheck" .=) <$> _igmahpHealthCheck,
+                  ("initialDelaySec" .=) <$> _igmahpInitialDelaySec])
+
 -- | Increment a streamz counter with the specified metric and field names.
 -- Metric names should start with a \'\/\', generally be lowercase-only,
 -- and end in \"_count\". Field names should not contain an initial slash.
@@ -8932,10 +9158,12 @@ data ForwardingRule =
     , _frName                :: !(Maybe Text)
     , _frIPProtocol          :: !(Maybe ForwardingRuleIPProtocol)
     , _frCreationTimestamp   :: !(Maybe Text)
+    , _frServiceName         :: !(Maybe Text)
     , _frSubnetwork          :: !(Maybe Text)
     , _frPorts               :: !(Maybe [Text])
     , _frId                  :: !(Maybe (Textual Word64))
     , _frRegion              :: !(Maybe Text)
+    , _frServiceLabel        :: !(Maybe Text)
     , _frDescription         :: !(Maybe Text)
     , _frTarget              :: !(Maybe Text)
     , _frBackendService      :: !(Maybe Text)
@@ -8968,6 +9196,8 @@ data ForwardingRule =
 --
 -- * 'frCreationTimestamp'
 --
+-- * 'frServiceName'
+--
 -- * 'frSubnetwork'
 --
 -- * 'frPorts'
@@ -8975,6 +9205,8 @@ data ForwardingRule =
 -- * 'frId'
 --
 -- * 'frRegion'
+--
+-- * 'frServiceLabel'
 --
 -- * 'frDescription'
 --
@@ -8996,10 +9228,12 @@ forwardingRule =
     , _frName = Nothing
     , _frIPProtocol = Nothing
     , _frCreationTimestamp = Nothing
+    , _frServiceName = Nothing
     , _frSubnetwork = Nothing
     , _frPorts = Nothing
     , _frId = Nothing
     , _frRegion = Nothing
+    , _frServiceLabel = Nothing
     , _frDescription = Nothing
     , _frTarget = Nothing
     , _frBackendService = Nothing
@@ -9120,6 +9354,13 @@ frCreationTimestamp
   = lens _frCreationTimestamp
       (\ s a -> s{_frCreationTimestamp = a})
 
+-- | [Output Only] The internal fully qualified service name for this
+-- Forwarding Rule. This field is only used for internal load balancing.
+frServiceName :: Lens' ForwardingRule (Maybe Text)
+frServiceName
+  = lens _frServiceName
+      (\ s a -> s{_frServiceName = a})
+
 -- | This field is only used for INTERNAL load balancing. For internal load
 -- balancing, this field identifies the subnetwork that the load balanced
 -- IP should belong to for this Forwarding Rule. If the network specified
@@ -9153,6 +9394,19 @@ frId
 -- settable as a field in the request body.
 frRegion :: Lens' ForwardingRule (Maybe Text)
 frRegion = lens _frRegion (\ s a -> s{_frRegion = a})
+
+-- | An optional prefix to the service name for this Forwarding Rule. If
+-- specified, will be the first label of the fully qualified service name.
+-- The label must be 1-63 characters long, and comply with RFC1035.
+-- Specifically, the label must be 1-63 characters long and match the
+-- regular expression \`[a-z]([-a-z0-9]*[a-z0-9])?\` which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash. This field is only used for internal load balancing.
+frServiceLabel :: Lens' ForwardingRule (Maybe Text)
+frServiceLabel
+  = lens _frServiceLabel
+      (\ s a -> s{_frServiceLabel = a})
 
 -- | An optional description of this resource. Provide this property when you
 -- create the resource.
@@ -9193,10 +9447,12 @@ instance FromJSON ForwardingRule where
                      <*> (o .:? "name")
                      <*> (o .:? "IPProtocol")
                      <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "serviceName")
                      <*> (o .:? "subnetwork")
                      <*> (o .:? "ports" .!= mempty)
                      <*> (o .:? "id")
                      <*> (o .:? "region")
+                     <*> (o .:? "serviceLabel")
                      <*> (o .:? "description")
                      <*> (o .:? "target")
                      <*> (o .:? "backendService"))
@@ -9217,9 +9473,11 @@ instance ToJSON ForwardingRule where
                   ("name" .=) <$> _frName,
                   ("IPProtocol" .=) <$> _frIPProtocol,
                   ("creationTimestamp" .=) <$> _frCreationTimestamp,
+                  ("serviceName" .=) <$> _frServiceName,
                   ("subnetwork" .=) <$> _frSubnetwork,
                   ("ports" .=) <$> _frPorts, ("id" .=) <$> _frId,
                   ("region" .=) <$> _frRegion,
+                  ("serviceLabel" .=) <$> _frServiceLabel,
                   ("description" .=) <$> _frDescription,
                   ("target" .=) <$> _frTarget,
                   ("backendService" .=) <$> _frBackendService])
@@ -11205,7 +11463,7 @@ autoscalingPolicyLoadBalancingUtilization
 autoscalingPolicyLoadBalancingUtilization =
   AutoscalingPolicyLoadBalancingUtilization' {_aplbuUtilizationTarget = Nothing}
 
--- | Fraction of backend capacity utilization (set in HTTP(s) load balancing
+-- | Fraction of backend capacity utilization (set in HTTP(S) load balancing
 -- configuration) that autoscaler should maintain. Must be a positive float
 -- value. If not defined, the default is 0.8.
 aplbuUtilizationTarget :: Lens' AutoscalingPolicyLoadBalancingUtilization (Maybe Double)
@@ -11354,29 +11612,35 @@ instance ToJSON TargetPoolsScopedListWarningDataItem
 -- /See:/ 'instanceGroupManager' smart constructor.
 data InstanceGroupManager =
   InstanceGroupManager'
-    { _igmKind               :: !Text
-    , _igmFingerprint        :: !(Maybe Bytes)
-    , _igmBaseInstanceName   :: !(Maybe Text)
-    , _igmZone               :: !(Maybe Text)
-    , _igmInstanceTemplate   :: !(Maybe Text)
-    , _igmTargetSize         :: !(Maybe (Textual Int32))
-    , _igmSelfLink           :: !(Maybe Text)
-    , _igmCurrentActions     :: !(Maybe InstanceGroupManagerActionsSummary)
-    , _igmName               :: !(Maybe Text)
-    , _igmCreationTimestamp  :: !(Maybe Text)
-    , _igmDistributionPolicy :: !(Maybe DistributionPolicy)
-    , _igmId                 :: !(Maybe (Textual Word64))
-    , _igmRegion             :: !(Maybe Text)
-    , _igmTargetPools        :: !(Maybe [Text])
-    , _igmDescription        :: !(Maybe Text)
-    , _igmInstanceGroup      :: !(Maybe Text)
-    , _igmNamedPorts         :: !(Maybe [NamedPort])
+    { _igmStatus              :: !(Maybe InstanceGroupManagerStatus)
+    , _igmKind                :: !Text
+    , _igmFingerprint         :: !(Maybe Bytes)
+    , _igmBaseInstanceName    :: !(Maybe Text)
+    , _igmZone                :: !(Maybe Text)
+    , _igmAutoHealingPolicies :: !(Maybe [InstanceGroupManagerAutoHealingPolicy])
+    , _igmVersions            :: !(Maybe [InstanceGroupManagerVersion])
+    , _igmInstanceTemplate    :: !(Maybe Text)
+    , _igmUpdatePolicy        :: !(Maybe InstanceGroupManagerUpdatePolicy)
+    , _igmTargetSize          :: !(Maybe (Textual Int32))
+    , _igmSelfLink            :: !(Maybe Text)
+    , _igmCurrentActions      :: !(Maybe InstanceGroupManagerActionsSummary)
+    , _igmName                :: !(Maybe Text)
+    , _igmCreationTimestamp   :: !(Maybe Text)
+    , _igmDistributionPolicy  :: !(Maybe DistributionPolicy)
+    , _igmId                  :: !(Maybe (Textual Word64))
+    , _igmRegion              :: !(Maybe Text)
+    , _igmTargetPools         :: !(Maybe [Text])
+    , _igmDescription         :: !(Maybe Text)
+    , _igmInstanceGroup       :: !(Maybe Text)
+    , _igmNamedPorts          :: !(Maybe [NamedPort])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InstanceGroupManager' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmStatus'
 --
 -- * 'igmKind'
 --
@@ -11386,7 +11650,13 @@ data InstanceGroupManager =
 --
 -- * 'igmZone'
 --
+-- * 'igmAutoHealingPolicies'
+--
+-- * 'igmVersions'
+--
 -- * 'igmInstanceTemplate'
+--
+-- * 'igmUpdatePolicy'
 --
 -- * 'igmTargetSize'
 --
@@ -11415,11 +11685,15 @@ instanceGroupManager
     :: InstanceGroupManager
 instanceGroupManager =
   InstanceGroupManager'
-    { _igmKind = "compute#instanceGroupManager"
+    { _igmStatus = Nothing
+    , _igmKind = "compute#instanceGroupManager"
     , _igmFingerprint = Nothing
     , _igmBaseInstanceName = Nothing
     , _igmZone = Nothing
+    , _igmAutoHealingPolicies = Nothing
+    , _igmVersions = Nothing
     , _igmInstanceTemplate = Nothing
+    , _igmUpdatePolicy = Nothing
     , _igmTargetSize = Nothing
     , _igmSelfLink = Nothing
     , _igmCurrentActions = Nothing
@@ -11433,6 +11707,11 @@ instanceGroupManager =
     , _igmInstanceGroup = Nothing
     , _igmNamedPorts = Nothing
     }
+
+-- | [Output Only] The status of this managed instance group.
+igmStatus :: Lens' InstanceGroupManager (Maybe InstanceGroupManagerStatus)
+igmStatus
+  = lens _igmStatus (\ s a -> s{_igmStatus = a})
 
 -- | [Output Only] The resource type, which is always
 -- compute#instanceGroupManager for managed instance groups.
@@ -11465,6 +11744,28 @@ igmBaseInstanceName
 igmZone :: Lens' InstanceGroupManager (Maybe Text)
 igmZone = lens _igmZone (\ s a -> s{_igmZone = a})
 
+-- | The autohealing policy for this managed instance group. You can specify
+-- only one value.
+igmAutoHealingPolicies :: Lens' InstanceGroupManager [InstanceGroupManagerAutoHealingPolicy]
+igmAutoHealingPolicies
+  = lens _igmAutoHealingPolicies
+      (\ s a -> s{_igmAutoHealingPolicies = a})
+      . _Default
+      . _Coerce
+
+-- | Specifies the instance templates used by this managed instance group to
+-- create instances. Each version is defined by an instanceTemplate. Every
+-- template can appear at most once per instance group. This field
+-- overrides the top-level instanceTemplate field. Read more about the
+-- relationships between these fields. Exactly one version must leave the
+-- targetSize field unset. That version will be applied to all remaining
+-- instances. For more information, read about canary updates.
+igmVersions :: Lens' InstanceGroupManager [InstanceGroupManagerVersion]
+igmVersions
+  = lens _igmVersions (\ s a -> s{_igmVersions = a}) .
+      _Default
+      . _Coerce
+
 -- | The URL of the instance template that is specified for this managed
 -- instance group. The group uses this template to create all new instances
 -- in the managed instance group.
@@ -11472,6 +11773,12 @@ igmInstanceTemplate :: Lens' InstanceGroupManager (Maybe Text)
 igmInstanceTemplate
   = lens _igmInstanceTemplate
       (\ s a -> s{_igmInstanceTemplate = a})
+
+-- | The update policy for this managed instance group.
+igmUpdatePolicy :: Lens' InstanceGroupManager (Maybe InstanceGroupManagerUpdatePolicy)
+igmUpdatePolicy
+  = lens _igmUpdatePolicy
+      (\ s a -> s{_igmUpdatePolicy = a})
 
 -- | The target number of running instances for this managed instance group.
 -- Deleting or abandoning instances reduces this number. Resizing the group
@@ -11565,11 +11872,15 @@ instance FromJSON InstanceGroupManager where
           = withObject "InstanceGroupManager"
               (\ o ->
                  InstanceGroupManager' <$>
-                   (o .:? "kind" .!= "compute#instanceGroupManager") <*>
-                     (o .:? "fingerprint")
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "compute#instanceGroupManager")
+                     <*> (o .:? "fingerprint")
                      <*> (o .:? "baseInstanceName")
                      <*> (o .:? "zone")
+                     <*> (o .:? "autoHealingPolicies" .!= mempty)
+                     <*> (o .:? "versions" .!= mempty)
                      <*> (o .:? "instanceTemplate")
+                     <*> (o .:? "updatePolicy")
                      <*> (o .:? "targetSize")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "currentActions")
@@ -11587,11 +11898,16 @@ instance ToJSON InstanceGroupManager where
         toJSON InstanceGroupManager'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _igmKind),
+                 [("status" .=) <$> _igmStatus,
+                  Just ("kind" .= _igmKind),
                   ("fingerprint" .=) <$> _igmFingerprint,
                   ("baseInstanceName" .=) <$> _igmBaseInstanceName,
                   ("zone" .=) <$> _igmZone,
+                  ("autoHealingPolicies" .=) <$>
+                    _igmAutoHealingPolicies,
+                  ("versions" .=) <$> _igmVersions,
                   ("instanceTemplate" .=) <$> _igmInstanceTemplate,
+                  ("updatePolicy" .=) <$> _igmUpdatePolicy,
                   ("targetSize" .=) <$> _igmTargetSize,
                   ("selfLink" .=) <$> _igmSelfLink,
                   ("currentActions" .=) <$> _igmCurrentActions,
@@ -13575,6 +13891,75 @@ instance ToJSON
               (catMaybes
                  [("value" .=) <$> _vtalwdiValue,
                   ("key" .=) <$> _vtalwdiKey])
+
+-- | Encapsulates numeric value that can be either absolute or relative.
+--
+-- /See:/ 'fixedOrPercent' smart constructor.
+data FixedOrPercent =
+  FixedOrPercent'
+    { _fopCalculated :: !(Maybe (Textual Int32))
+    , _fopPercent    :: !(Maybe (Textual Int32))
+    , _fopFixed      :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'FixedOrPercent' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fopCalculated'
+--
+-- * 'fopPercent'
+--
+-- * 'fopFixed'
+fixedOrPercent
+    :: FixedOrPercent
+fixedOrPercent =
+  FixedOrPercent'
+    {_fopCalculated = Nothing, _fopPercent = Nothing, _fopFixed = Nothing}
+
+-- | [Output Only] Absolute value of VM instances calculated based on the
+-- specific mode. - If the value is fixed, then the caculated value is
+-- equal to the fixed value. - If the value is a percent, then the
+-- calculated value is percent\/100 * targetSize. For example, the
+-- calculated value of a 80% of a managed instance group with 150 instances
+-- would be (80\/100 * 150) = 120 VM instances. If there is a remainder,
+-- the number is rounded up.
+fopCalculated :: Lens' FixedOrPercent (Maybe Int32)
+fopCalculated
+  = lens _fopCalculated
+      (\ s a -> s{_fopCalculated = a})
+      . mapping _Coerce
+
+-- | Specifies a percentage of instances between 0 to 100%, inclusive. For
+-- example, specify 80 for 80%.
+fopPercent :: Lens' FixedOrPercent (Maybe Int32)
+fopPercent
+  = lens _fopPercent (\ s a -> s{_fopPercent = a}) .
+      mapping _Coerce
+
+-- | Specifies a fixed number of VM instances. This must be a positive
+-- integer.
+fopFixed :: Lens' FixedOrPercent (Maybe Int32)
+fopFixed
+  = lens _fopFixed (\ s a -> s{_fopFixed = a}) .
+      mapping _Coerce
+
+instance FromJSON FixedOrPercent where
+        parseJSON
+          = withObject "FixedOrPercent"
+              (\ o ->
+                 FixedOrPercent' <$>
+                   (o .:? "calculated") <*> (o .:? "percent") <*>
+                     (o .:? "fixed"))
+
+instance ToJSON FixedOrPercent where
+        toJSON FixedOrPercent'{..}
+          = object
+              (catMaybes
+                 [("calculated" .=) <$> _fopCalculated,
+                  ("percent" .=) <$> _fopPercent,
+                  ("fixed" .=) <$> _fopFixed])
 
 -- | The available logging options for a firewall rule.
 --
@@ -20950,6 +21335,45 @@ instance ToJSON TargetSSLProxy where
                   ("proxyHeader" .=) <$> _tspProxyHeader,
                   ("description" .=) <$> _tspDescription])
 
+--
+-- /See:/ 'instanceGroupManagerStatus' smart constructor.
+newtype InstanceGroupManagerStatus =
+  InstanceGroupManagerStatus'
+    { _igmsIsStable :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'InstanceGroupManagerStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmsIsStable'
+instanceGroupManagerStatus
+    :: InstanceGroupManagerStatus
+instanceGroupManagerStatus =
+  InstanceGroupManagerStatus' {_igmsIsStable = Nothing}
+
+-- | [Output Only] A bit indicating whether the managed instance group is in
+-- a stable state. A stable state means that: none of the instances in the
+-- managed instance group is currently undergoing any type of change (for
+-- example, creation, restart, or deletion); no future changes are
+-- scheduled for instances in the managed instance group; and the managed
+-- instance group itself is not being modified.
+igmsIsStable :: Lens' InstanceGroupManagerStatus (Maybe Bool)
+igmsIsStable
+  = lens _igmsIsStable (\ s a -> s{_igmsIsStable = a})
+
+instance FromJSON InstanceGroupManagerStatus where
+        parseJSON
+          = withObject "InstanceGroupManagerStatus"
+              (\ o ->
+                 InstanceGroupManagerStatus' <$> (o .:? "isStable"))
+
+instance ToJSON InstanceGroupManagerStatus where
+        toJSON InstanceGroupManagerStatus'{..}
+          = object
+              (catMaybes [("isStable" .=) <$> _igmsIsStable])
+
 -- | [Output Only] Informational warning message.
 --
 -- /See:/ 'sslCertificateListWarning' smart constructor.
@@ -25116,6 +25540,7 @@ instance ToJSON SubnetworkAggregatedListWarning where
 data InterconnectLocation =
   InterconnectLocation'
     { _intFacilityProviderFacilityId :: !(Maybe Text)
+    , _intStatus                     :: !(Maybe InterconnectLocationStatus)
     , _intRegionInfos                :: !(Maybe [InterconnectLocationRegionInfo])
     , _intKind                       :: !Text
     , _intAddress                    :: !(Maybe Text)
@@ -25137,6 +25562,8 @@ data InterconnectLocation =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'intFacilityProviderFacilityId'
+--
+-- * 'intStatus'
 --
 -- * 'intRegionInfos'
 --
@@ -25168,6 +25595,7 @@ interconnectLocation
 interconnectLocation =
   InterconnectLocation'
     { _intFacilityProviderFacilityId = Nothing
+    , _intStatus = Nothing
     , _intRegionInfos = Nothing
     , _intKind = "compute#interconnectLocation"
     , _intAddress = Nothing
@@ -25189,6 +25617,14 @@ intFacilityProviderFacilityId :: Lens' InterconnectLocation (Maybe Text)
 intFacilityProviderFacilityId
   = lens _intFacilityProviderFacilityId
       (\ s a -> s{_intFacilityProviderFacilityId = a})
+
+-- | [Output Only] The status of this InterconnectLocation. If the status is
+-- AVAILABLE, new Interconnects may be provisioned in this
+-- InterconnectLocation. Otherwise, no new Interconnects may be
+-- provisioned.
+intStatus :: Lens' InterconnectLocation (Maybe InterconnectLocationStatus)
+intStatus
+  = lens _intStatus (\ s a -> s{_intStatus = a})
 
 -- | [Output Only] A list of InterconnectLocation.RegionInfo objects, that
 -- describe parameters pertaining to the relation between this
@@ -25279,7 +25715,8 @@ instance FromJSON InterconnectLocation where
               (\ o ->
                  InterconnectLocation' <$>
                    (o .:? "facilityProviderFacilityId") <*>
-                     (o .:? "regionInfos" .!= mempty)
+                     (o .:? "status")
+                     <*> (o .:? "regionInfos" .!= mempty)
                      <*> (o .:? "kind" .!= "compute#interconnectLocation")
                      <*> (o .:? "address")
                      <*> (o .:? "facilityProvider")
@@ -25299,6 +25736,7 @@ instance ToJSON InterconnectLocation where
               (catMaybes
                  [("facilityProviderFacilityId" .=) <$>
                     _intFacilityProviderFacilityId,
+                  ("status" .=) <$> _intStatus,
                   ("regionInfos" .=) <$> _intRegionInfos,
                   Just ("kind" .= _intKind),
                   ("address" .=) <$> _intAddress,
@@ -25704,7 +26142,7 @@ adInitializeParams
 -- within the instance. This name can be used to reference the device for
 -- mounting, resizing, and so on, from within the instance. If not
 -- specified, the server chooses a default device name to apply to this
--- disk, in the form persistent-disks-x, where x is a number assigned by
+-- disk, in the form persistent-disk-x, where x is a number assigned by
 -- Google Compute Engine. This field is only applicable for persistent
 -- disks.
 adDeviceName :: Lens' AttachedDisk (Maybe Text)
@@ -28996,8 +29434,7 @@ iiInterconnectAttachments
       . _Coerce
 
 -- | Type of link requested. This field indicates speed of each of the links
--- in the bundle, not the entire bundle. Only 10G per link is allowed for a
--- dedicated interconnect. Options: Ethernet_10G_LR
+-- in the bundle, not the entire bundle.
 iiLinkType :: Lens' Interconnect (Maybe InterconnectLinkType)
 iiLinkType
   = lens _iiLinkType (\ s a -> s{_iiLinkType = a})
@@ -31543,8 +31980,10 @@ acAcceleratorCount
       . mapping _Coerce
 
 -- | Full or partial URL of the accelerator type resource to attach to this
--- instance. If you are creating an instance template, specify only the
--- accelerator name.
+-- instance. For example:
+-- projects\/my-project\/zones\/us-central1-c\/acceleratorTypes\/nvidia-tesla-p100
+-- If you are creating an instance template, specify only the accelerator
+-- name. See GPUs on Compute Engine for a full list of accelerator types.
 acAcceleratorType :: Lens' AcceleratorConfig (Maybe Text)
 acAcceleratorType
   = lens _acAcceleratorType
@@ -36789,11 +37228,14 @@ pathRule
     :: PathRule
 pathRule = PathRule' {_prService = Nothing, _prPaths = Nothing}
 
--- | The URL of the backend service resource if this rule is matched. Use
--- service instead of routeAction when simple routing to a backend service
--- is desired and other advanced capabilities like traffic splitting and
--- rewrites are not required. Only one of service, routeAction or
--- urlRedirect should must be set.
+-- | The full or partial URL of the backend service resource to which traffic
+-- is directed if this rule is matched. If routeAction is additionally
+-- specified, advanced routing actions like URL Rewrites, etc. take effect
+-- prior to sending the request to the backend. However, if service is
+-- specified, routeAction cannot contain any weightedBackendService s.
+-- Conversely, if routeAction specifies any weightedBackendServices,
+-- service must not be specified. Only one of urlRedirect, service or
+-- routeAction.weightedBackendService must be set.
 prService :: Lens' PathRule (Maybe Text)
 prService
   = lens _prService (\ s a -> s{_prService = a})
@@ -39533,7 +39975,8 @@ instance ToJSON SecurityPolicyListWarning where
 -- /See:/ 'quota' smart constructor.
 data Quota =
   Quota'
-    { _qMetric :: !(Maybe QuotaMetric)
+    { _qOwner  :: !(Maybe Text)
+    , _qMetric :: !(Maybe QuotaMetric)
     , _qLimit  :: !(Maybe (Textual Double))
     , _qUsage  :: !(Maybe (Textual Double))
     }
@@ -39543,6 +39986,8 @@ data Quota =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'qOwner'
+--
 -- * 'qMetric'
 --
 -- * 'qLimit'
@@ -39550,7 +39995,18 @@ data Quota =
 -- * 'qUsage'
 quota
     :: Quota
-quota = Quota' {_qMetric = Nothing, _qLimit = Nothing, _qUsage = Nothing}
+quota =
+  Quota'
+    { _qOwner = Nothing
+    , _qMetric = Nothing
+    , _qLimit = Nothing
+    , _qUsage = Nothing
+    }
+
+-- | [Output Only] Owning resource. This is the resource on which this quota
+-- is applied.
+qOwner :: Lens' Quota (Maybe Text)
+qOwner = lens _qOwner (\ s a -> s{_qOwner = a})
 
 -- | [Output Only] Name of the quota metric.
 qMetric :: Lens' Quota (Maybe QuotaMetric)
@@ -39573,15 +40029,17 @@ instance FromJSON Quota where
           = withObject "Quota"
               (\ o ->
                  Quota' <$>
-                   (o .:? "metric") <*> (o .:? "limit") <*>
-                     (o .:? "usage"))
+                   (o .:? "owner") <*> (o .:? "metric") <*>
+                     (o .:? "limit")
+                     <*> (o .:? "usage"))
 
 instance ToJSON Quota where
         toJSON Quota'{..}
           = object
               (catMaybes
-                 [("metric" .=) <$> _qMetric,
-                  ("limit" .=) <$> _qLimit, ("usage" .=) <$> _qUsage])
+                 [("owner" .=) <$> _qOwner,
+                  ("metric" .=) <$> _qMetric, ("limit" .=) <$> _qLimit,
+                  ("usage" .=) <$> _qUsage])
 
 -- | InstanceGroups (== resource_for beta.instanceGroups ==) (== resource_for
 -- v1.instanceGroups ==) (== resource_for beta.regionInstanceGroups ==) (==
@@ -43563,6 +44021,7 @@ data Instance =
     { _i1Status             :: !(Maybe InstanceStatus)
     , _i1ServiceAccounts    :: !(Maybe [ServiceAccount])
     , _i1DeletionProtection :: !(Maybe Bool)
+    , _i1Hostname           :: !(Maybe Text)
     , _i1NetworkInterfaces  :: !(Maybe [NetworkInterface])
     , _i1Kind               :: !Text
     , _i1Zone               :: !(Maybe Text)
@@ -43596,6 +44055,8 @@ data Instance =
 -- * 'i1ServiceAccounts'
 --
 -- * 'i1DeletionProtection'
+--
+-- * 'i1Hostname'
 --
 -- * 'i1NetworkInterfaces'
 --
@@ -43645,6 +44106,7 @@ instance' =
     { _i1Status = Nothing
     , _i1ServiceAccounts = Nothing
     , _i1DeletionProtection = Nothing
+    , _i1Hostname = Nothing
     , _i1NetworkInterfaces = Nothing
     , _i1Kind = "compute#instance"
     , _i1Zone = Nothing
@@ -43691,6 +44153,10 @@ i1DeletionProtection :: Lens' Instance (Maybe Bool)
 i1DeletionProtection
   = lens _i1DeletionProtection
       (\ s a -> s{_i1DeletionProtection = a})
+
+i1Hostname :: Lens' Instance (Maybe Text)
+i1Hostname
+  = lens _i1Hostname (\ s a -> s{_i1Hostname = a})
 
 -- | An array of network configurations for this instance. These specify how
 -- interfaces are configured to interact with other network services, such
@@ -43862,6 +44328,7 @@ instance FromJSON Instance where
                    (o .:? "status") <*>
                      (o .:? "serviceAccounts" .!= mempty)
                      <*> (o .:? "deletionProtection")
+                     <*> (o .:? "hostname")
                      <*> (o .:? "networkInterfaces" .!= mempty)
                      <*> (o .:? "kind" .!= "compute#instance")
                      <*> (o .:? "zone")
@@ -43891,6 +44358,7 @@ instance ToJSON Instance where
                  [("status" .=) <$> _i1Status,
                   ("serviceAccounts" .=) <$> _i1ServiceAccounts,
                   ("deletionProtection" .=) <$> _i1DeletionProtection,
+                  ("hostname" .=) <$> _i1Hostname,
                   ("networkInterfaces" .=) <$> _i1NetworkInterfaces,
                   Just ("kind" .= _i1Kind), ("zone" .=) <$> _i1Zone,
                   ("cpuPlatform" .=) <$> _i1CPUPlatform,
@@ -43953,13 +44421,16 @@ pathMatcher =
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/global\/backendServices\/backendService
 -- -
 -- compute\/v1\/projects\/project\/global\/backendServices\/backendService
--- - global\/backendServices\/backendService Use defaultService instead of
--- defaultRouteAction when simple routing to a backend service is desired
--- and other advanced capabilities like traffic splitting and URL rewrites
--- are not required. Only one of defaultService, defaultRouteAction or
--- defaultUrlRedirect must be set. Authorization requires one or more of
--- the following Google IAM permissions on the specified resource
--- default_service: - compute.backendBuckets.use -
+-- - global\/backendServices\/backendService If defaultRouteAction is
+-- additionally specified, advanced routing actions like URL Rewrites, etc.
+-- take effect prior to sending the request to the backend. However, if
+-- defaultService is specified, defaultRouteAction cannot contain any
+-- weightedBackendServices. Conversely, if defaultRouteAction specifies any
+-- weightedBackendServices, defaultService must not be specified. Only one
+-- of defaultService, defaultUrlRedirect or
+-- defaultRouteAction.weightedBackendService must be set. Authorization
+-- requires one or more of the following Google IAM permissions on the
+-- specified resource default_service: - compute.backendBuckets.use -
 -- compute.backendServices.use
 pmDefaultService :: Lens' PathMatcher (Maybe Text)
 pmDefaultService

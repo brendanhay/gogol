@@ -490,7 +490,6 @@ module Network.Google.Analytics.Types
     -- * AccountTreeRequest
     , AccountTreeRequest
     , accountTreeRequest
-    , atrAccountSettings
     , atrWebPropertyName
     , atrKind
     , atrAccountName
@@ -674,7 +673,6 @@ module Network.Google.Analytics.Types
     -- * AccountTreeResponse
     , AccountTreeResponse
     , accountTreeResponse
-    , atrtAccountSettings
     , atrtKind
     , atrtProFile
     , atrtAccount
@@ -816,14 +814,6 @@ module Network.Google.Analytics.Types
     , gedeciComparisonValue
     , gedeciType
     , gedeciComparisonType
-
-    -- * AccountTreeRequestAccountSettings
-    , AccountTreeRequestAccountSettings
-    , accountTreeRequestAccountSettings
-    , atrasShareWithSpeciaLists
-    , atrasShareWithSupport
-    , atrasShareAnonymouslyWithOthers
-    , atrasShareWithGoogleProducts
 
     -- * McfDataQuery
     , McfDataQuery
@@ -976,14 +966,6 @@ module Network.Google.Analytics.Types
     , remarketingAudienceStateBasedAudienceDefinition
     , rasbadExcludeConditions
     , rasbadIncludeConditions
-
-    -- * AccountTreeResponseAccountSettings
-    , AccountTreeResponseAccountSettings
-    , accountTreeResponseAccountSettings
-    , aShareWithSpeciaLists
-    , aShareWithSupport
-    , aShareAnonymouslyWithOthers
-    , aShareWithGoogleProducts
 
     -- * GoalURLDestinationDetails
     , GoalURLDestinationDetails

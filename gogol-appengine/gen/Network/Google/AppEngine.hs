@@ -467,6 +467,7 @@ module Network.Google.AppEngine
     -- ** Network
     , Network
     , network
+    , nSessionAffinity
     , nSubnetworkName
     , nForwardedPorts
     , nInstanceTag

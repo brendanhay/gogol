@@ -1926,6 +1926,7 @@ data RoboStartingIntent =
   RoboStartingIntent'
     { _rsiLauncherActivity :: !(Maybe LauncherActivityIntent)
     , _rsiStartActivity    :: !(Maybe StartActivityIntent)
+    , _rsiTimeout          :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1936,11 +1937,16 @@ data RoboStartingIntent =
 -- * 'rsiLauncherActivity'
 --
 -- * 'rsiStartActivity'
+--
+-- * 'rsiTimeout'
 roboStartingIntent
     :: RoboStartingIntent
 roboStartingIntent =
   RoboStartingIntent'
-    {_rsiLauncherActivity = Nothing, _rsiStartActivity = Nothing}
+    { _rsiLauncherActivity = Nothing
+    , _rsiStartActivity = Nothing
+    , _rsiTimeout = Nothing
+    }
 
 rsiLauncherActivity :: Lens' RoboStartingIntent (Maybe LauncherActivityIntent)
 rsiLauncherActivity
@@ -1952,20 +1958,28 @@ rsiStartActivity
   = lens _rsiStartActivity
       (\ s a -> s{_rsiStartActivity = a})
 
+-- | Timeout in seconds for each intent.
+rsiTimeout :: Lens' RoboStartingIntent (Maybe Scientific)
+rsiTimeout
+  = lens _rsiTimeout (\ s a -> s{_rsiTimeout = a}) .
+      mapping _GDuration
+
 instance FromJSON RoboStartingIntent where
         parseJSON
           = withObject "RoboStartingIntent"
               (\ o ->
                  RoboStartingIntent' <$>
                    (o .:? "launcherActivity") <*>
-                     (o .:? "startActivity"))
+                     (o .:? "startActivity")
+                     <*> (o .:? "timeout"))
 
 instance ToJSON RoboStartingIntent where
         toJSON RoboStartingIntent'{..}
           = object
               (catMaybes
                  [("launcherActivity" .=) <$> _rsiLauncherActivity,
-                  ("startActivity" .=) <$> _rsiStartActivity])
+                  ("startActivity" .=) <$> _rsiStartActivity,
+                  ("timeout" .=) <$> _rsiTimeout])
 
 -- | Represents a whole or partial calendar date, e.g. a birthday. The time
 -- of day and time zone are either specified elsewhere or are not

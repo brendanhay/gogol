@@ -501,8 +501,8 @@ instance ToJSON DownloadLineItemsRequest where
                   ("fileSpec" .=) <$> _dlirFileSpec,
                   ("filterIds" .=) <$> _dlirFilterIds])
 
--- | Request to fetch stored campaigns, insertion orders, line items,
--- TrueView ad groups and ads.
+-- | Request to fetch stored inventory sources, campaigns, insertion orders,
+-- line items, TrueView ad groups and ads.
 --
 -- /See:/ 'downloadRequest' smart constructor.
 data DownloadRequest =
@@ -536,7 +536,8 @@ downloadRequest =
     }
 
 -- | File types that will be returned. Acceptable values are: - \"AD\" -
--- \"AD_GROUP\" - \"CAMPAIGN\" - \"INSERTION_ORDER\" - \"LINE_ITEM\"
+-- \"AD_GROUP\" - \"CAMPAIGN\" - \"INSERTION_ORDER\" - \"LINE_ITEM\" -
+-- \"INVENTORY_SOURCE\"
 drFileTypes :: Lens' DownloadRequest [DownloadRequestFileTypesItem]
 drFileTypes
   = lens _drFileTypes (\ s a -> s{_drFileTypes = a}) .
@@ -1116,17 +1117,20 @@ instance ToJSON DownloadLineItemsResponse where
 -- /See:/ 'downloadResponse' smart constructor.
 data DownloadResponse =
   DownloadResponse'
-    { _drInsertionOrders :: !(Maybe Text)
-    , _drCampaigns       :: !(Maybe Text)
-    , _drLineItems       :: !(Maybe Text)
-    , _drAdGroups        :: !(Maybe Text)
-    , _drAds             :: !(Maybe Text)
+    { _drInventorySources :: !(Maybe Text)
+    , _drInsertionOrders  :: !(Maybe Text)
+    , _drCampaigns        :: !(Maybe Text)
+    , _drLineItems        :: !(Maybe Text)
+    , _drAdGroups         :: !(Maybe Text)
+    , _drAds              :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DownloadResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drInventorySources'
 --
 -- * 'drInsertionOrders'
 --
@@ -1141,12 +1145,18 @@ downloadResponse
     :: DownloadResponse
 downloadResponse =
   DownloadResponse'
-    { _drInsertionOrders = Nothing
+    { _drInventorySources = Nothing
+    , _drInsertionOrders = Nothing
     , _drCampaigns = Nothing
     , _drLineItems = Nothing
     , _drAdGroups = Nothing
     , _drAds = Nothing
     }
+
+drInventorySources :: Lens' DownloadResponse (Maybe Text)
+drInventorySources
+  = lens _drInventorySources
+      (\ s a -> s{_drInventorySources = a})
 
 -- | Retrieved insertion orders in SDF format.
 drInsertionOrders :: Lens' DownloadResponse (Maybe Text)
@@ -1178,8 +1188,10 @@ instance FromJSON DownloadResponse where
           = withObject "DownloadResponse"
               (\ o ->
                  DownloadResponse' <$>
-                   (o .:? "insertionOrders") <*> (o .:? "campaigns") <*>
-                     (o .:? "lineItems")
+                   (o .:? "inventorySources") <*>
+                     (o .:? "insertionOrders")
+                     <*> (o .:? "campaigns")
+                     <*> (o .:? "lineItems")
                      <*> (o .:? "adGroups")
                      <*> (o .:? "ads"))
 
@@ -1187,7 +1199,8 @@ instance ToJSON DownloadResponse where
         toJSON DownloadResponse'{..}
           = object
               (catMaybes
-                 [("insertionOrders" .=) <$> _drInsertionOrders,
+                 [("inventorySources" .=) <$> _drInventorySources,
+                  ("insertionOrders" .=) <$> _drInsertionOrders,
                   ("campaigns" .=) <$> _drCampaigns,
                   ("lineItems" .=) <$> _drLineItems,
                   ("adGroups" .=) <$> _drAdGroups,

@@ -107,7 +107,8 @@ tbmfMatchId
 instance GoogleRequest TurnBasedMatchesFinish where
         type Rs TurnBasedMatchesFinish = TurnBasedMatch
         type Scopes TurnBasedMatchesFinish =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesFinish'{..}
           = go _tbmfMatchId _tbmfLanguage (Just AltJSON)
               _tbmfPayload

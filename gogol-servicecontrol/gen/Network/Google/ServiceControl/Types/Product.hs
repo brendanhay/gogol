@@ -446,7 +446,8 @@ crServiceConfigId
 
 -- | Indicates if service activation check should be skipped for this
 -- request. Default behavior is to perform the check and apply relevant
--- quota.
+-- quota. WARNING: Setting this flag to \"true\" will disable quota
+-- enforcement.
 crSkipActivationCheck :: Lens' CheckRequest (Maybe Bool)
 crSkipActivationCheck
   = lens _crSkipActivationCheck
@@ -1065,8 +1066,9 @@ oOperationId
 -- | Identity of the consumer who is using the service. This field should be
 -- filled in for the operations initiated by a consumer, but not for
 -- service-initiated operations that are not related to a specific
--- consumer. This can be in one of the following formats: project:,
--- project_number:, api_key:.
+-- consumer. - This can be in one of the following formats: -
+-- project:PROJECT_ID, - project\`_\`number:PROJECT_NUMBER, -
+-- api\`_\`key:API_KEY.
 oConsumerId :: Lens' Operation (Maybe Text)
 oConsumerId
   = lens _oConsumerId (\ s a -> s{_oConsumerId = a})
@@ -1851,6 +1853,7 @@ instance ToJSON StatusDetailsItem where
 data CheckError =
   CheckError'
     { _ceSubject :: !(Maybe Text)
+    , _ceStatus  :: !(Maybe Status)
     , _ceCode    :: !(Maybe CheckErrorCode)
     , _ceDetail  :: !(Maybe Text)
     }
@@ -1862,13 +1865,20 @@ data CheckError =
 --
 -- * 'ceSubject'
 --
+-- * 'ceStatus'
+--
 -- * 'ceCode'
 --
 -- * 'ceDetail'
 checkError
     :: CheckError
 checkError =
-  CheckError' {_ceSubject = Nothing, _ceCode = Nothing, _ceDetail = Nothing}
+  CheckError'
+    { _ceSubject = Nothing
+    , _ceStatus = Nothing
+    , _ceCode = Nothing
+    , _ceDetail = Nothing
+    }
 
 -- | Subject to whom this error applies. See the specific code enum for more
 -- details on this field. For example: - “project:” - “folder:” -
@@ -1876,6 +1886,12 @@ checkError =
 ceSubject :: Lens' CheckError (Maybe Text)
 ceSubject
   = lens _ceSubject (\ s a -> s{_ceSubject = a})
+
+-- | Contains public information about the check error. If available,
+-- \`status.code\` will be non zero and client can propagate it out as
+-- public error.
+ceStatus :: Lens' CheckError (Maybe Status)
+ceStatus = lens _ceStatus (\ s a -> s{_ceStatus = a})
 
 -- | The error code.
 ceCode :: Lens' CheckError (Maybe CheckErrorCode)
@@ -1890,15 +1906,16 @@ instance FromJSON CheckError where
           = withObject "CheckError"
               (\ o ->
                  CheckError' <$>
-                   (o .:? "subject") <*> (o .:? "code") <*>
-                     (o .:? "detail"))
+                   (o .:? "subject") <*> (o .:? "status") <*>
+                     (o .:? "code")
+                     <*> (o .:? "detail"))
 
 instance ToJSON CheckError where
         toJSON CheckError'{..}
           = object
               (catMaybes
                  [("subject" .=) <$> _ceSubject,
-                  ("code" .=) <$> _ceCode,
+                  ("status" .=) <$> _ceStatus, ("code" .=) <$> _ceCode,
                   ("detail" .=) <$> _ceDetail])
 
 -- | Labels describing the operation.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enable a service so that it can be used with a project. Operation
+-- Enable a service so that it can be used with a project.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.enable@.
 module Network.Google.Resource.ServiceUsage.Services.Enable
@@ -59,7 +59,7 @@ type ServicesEnableResource =
                      ReqBody '[JSON] EnableServiceRequest :>
                        Post '[JSON] Operation
 
--- | Enable a service so that it can be used with a project. Operation
+-- | Enable a service so that it can be used with a project.
 --
 -- /See:/ 'servicesEnable' smart constructor.
 data ServicesEnable =

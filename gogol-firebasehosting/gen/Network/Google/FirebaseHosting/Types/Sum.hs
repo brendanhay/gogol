@@ -210,8 +210,8 @@ data VersionStatus
       -- automatically deleted.
     | Expired
       -- ^ @EXPIRED@
-      -- The version has fallen out of the site-configured retention window and
-      -- its associated files in GCS have been\/been scheduled for deletion.
+      -- The version is outside the site-configured limit for the number of
+      -- retained versions, so the version\'s content is scheduled for deletion.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VersionStatus

@@ -2152,7 +2152,7 @@ instance ToJSON PricePerBuyer where
                   ("advertiserIds" .=) <$> _ppbAdvertiserIds,
                   ("buyer" .=) <$> _ppbBuyer])
 
--- | A creative and its classification data. Next ID: 39
+-- | A creative and its classification data. Next ID: 40
 --
 -- /See:/ 'creative' smart constructor.
 data Creative =
@@ -4198,7 +4198,7 @@ pauseProposalRequest
 pauseProposalRequest = PauseProposalRequest' {_pprReason = Nothing}
 
 -- | The reason why the proposal is being paused. This human readable message
--- will be displayed in the seller\'s UI. (Max length: 100 unicode code
+-- will be displayed in the seller\'s UI. (Max length: 1000 unicode code
 -- units.)
 pprReason :: Lens' PauseProposalRequest (Maybe Text)
 pprReason

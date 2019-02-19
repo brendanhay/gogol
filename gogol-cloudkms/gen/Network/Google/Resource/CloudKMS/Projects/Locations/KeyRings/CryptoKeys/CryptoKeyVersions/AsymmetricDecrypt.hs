@@ -162,7 +162,9 @@ instance GoogleRequest
              = AsymmetricDecryptResponse
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt'{..}
           = go _plkrckckvadName _plkrckckvadXgafv

@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Signs a blob using a service account\'s system-managed private key.
+-- **Note**: This method is in the process of being deprecated. Call the
+-- [\`signBlob()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signBlob)
+-- method of the Cloud IAM Service Account Credentials API instead. Signs a
+-- blob using a service account\'s system-managed private key.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.signBlob@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
@@ -59,7 +62,10 @@ type ProjectsServiceAccountsSignBlobResource =
                      ReqBody '[JSON] SignBlobRequest :>
                        Post '[JSON] SignBlobResponse
 
--- | Signs a blob using a service account\'s system-managed private key.
+-- | **Note**: This method is in the process of being deprecated. Call the
+-- [\`signBlob()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signBlob)
+-- method of the Cloud IAM Service Account Credentials API instead. Signs a
+-- blob using a service account\'s system-managed private key.
 --
 -- /See:/ 'projectsServiceAccountsSignBlob' smart constructor.
 data ProjectsServiceAccountsSignBlob =

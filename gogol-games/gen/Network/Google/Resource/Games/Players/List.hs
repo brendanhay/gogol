@@ -117,7 +117,8 @@ plMaxResults
 instance GoogleRequest PlayersList where
         type Rs PlayersList = PlayerListResponse
         type Scopes PlayersList =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient PlayersList'{..}
           = go _plCollection _plLanguage _plPageToken
               _plMaxResults

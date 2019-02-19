@@ -31,7 +31,7 @@
 -- name binding is the parent resource, without the operations collection
 -- id.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference> for @speech.operations.list@.
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.operations.list@.
 module Network.Google.Resource.Speech.Operations.List
     (
     -- * REST Resource

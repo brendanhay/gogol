@@ -24,7 +24,7 @@
 -- POSIX account information is set when no username and UID exist as part
 -- of the login profile.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.importSshPublicKey@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.importSshPublicKey@.
 module Network.Google.Resource.OSLogin.Users.ImportSSHPublicKey
     (
     -- * REST Resource

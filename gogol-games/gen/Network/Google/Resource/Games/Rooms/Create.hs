@@ -90,7 +90,8 @@ rcLanguage
 instance GoogleRequest RoomsCreate where
         type Rs RoomsCreate = Room
         type Scopes RoomsCreate =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient RoomsCreate'{..}
           = go _rcLanguage (Just AltJSON) _rcPayload
               gamesService

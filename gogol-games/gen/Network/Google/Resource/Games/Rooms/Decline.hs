@@ -89,7 +89,8 @@ rooLanguage
 instance GoogleRequest RoomsDecline where
         type Rs RoomsDecline = Room
         type Scopes RoomsDecline =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient RoomsDecline'{..}
           = go _rooRoomId _rooLanguage (Just AltJSON)
               gamesService

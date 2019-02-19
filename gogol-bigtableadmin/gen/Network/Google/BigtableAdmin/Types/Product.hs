@@ -1152,6 +1152,7 @@ instance ToJSON CreateTableRequest where
 data CreateClusterMetadata =
   CreateClusterMetadata'
     { _ccmRequestTime     :: !(Maybe DateTime')
+    , _ccmTables          :: !(Maybe CreateClusterMetadataTables)
     , _ccmOriginalRequest :: !(Maybe CreateClusterRequest)
     , _ccmFinishTime      :: !(Maybe DateTime')
     }
@@ -1163,6 +1164,8 @@ data CreateClusterMetadata =
 --
 -- * 'ccmRequestTime'
 --
+-- * 'ccmTables'
+--
 -- * 'ccmOriginalRequest'
 --
 -- * 'ccmFinishTime'
@@ -1171,6 +1174,7 @@ createClusterMetadata
 createClusterMetadata =
   CreateClusterMetadata'
     { _ccmRequestTime = Nothing
+    , _ccmTables = Nothing
     , _ccmOriginalRequest = Nothing
     , _ccmFinishTime = Nothing
     }
@@ -1181,6 +1185,16 @@ ccmRequestTime
   = lens _ccmRequestTime
       (\ s a -> s{_ccmRequestTime = a})
       . mapping _DateTime
+
+-- | Keys: the full \`name\` of each table that existed in the instance when
+-- CreateCluster was first called, i.e. \`projects\/\/instances\/\/tables\/
+-- \`. Any table added to the instance by a later API call will be created
+-- in the new cluster by that API call, not this one. Values: information
+-- on how much of a table\'s data has been copied to the newly-created
+-- cluster so far.
+ccmTables :: Lens' CreateClusterMetadata (Maybe CreateClusterMetadataTables)
+ccmTables
+  = lens _ccmTables (\ s a -> s{_ccmTables = a})
 
 -- | The request that prompted the initiation of this CreateCluster
 -- operation.
@@ -1201,7 +1215,8 @@ instance FromJSON CreateClusterMetadata where
           = withObject "CreateClusterMetadata"
               (\ o ->
                  CreateClusterMetadata' <$>
-                   (o .:? "requestTime") <*> (o .:? "originalRequest")
+                   (o .:? "requestTime") <*> (o .:? "tables") <*>
+                     (o .:? "originalRequest")
                      <*> (o .:? "finishTime"))
 
 instance ToJSON CreateClusterMetadata where
@@ -1209,8 +1224,74 @@ instance ToJSON CreateClusterMetadata where
           = object
               (catMaybes
                  [("requestTime" .=) <$> _ccmRequestTime,
+                  ("tables" .=) <$> _ccmTables,
                   ("originalRequest" .=) <$> _ccmOriginalRequest,
                   ("finishTime" .=) <$> _ccmFinishTime])
+
+-- | Progress info for copying a table\'s data to the new cluster.
+--
+-- /See:/ 'tableProgress' smart constructor.
+data TableProgress =
+  TableProgress'
+    { _tpState                :: !(Maybe TableProgressState)
+    , _tpEstimatedSizeBytes   :: !(Maybe (Textual Int64))
+    , _tpEstimatedCopiedBytes :: !(Maybe (Textual Int64))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'TableProgress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpState'
+--
+-- * 'tpEstimatedSizeBytes'
+--
+-- * 'tpEstimatedCopiedBytes'
+tableProgress
+    :: TableProgress
+tableProgress =
+  TableProgress'
+    { _tpState = Nothing
+    , _tpEstimatedSizeBytes = Nothing
+    , _tpEstimatedCopiedBytes = Nothing
+    }
+
+tpState :: Lens' TableProgress (Maybe TableProgressState)
+tpState = lens _tpState (\ s a -> s{_tpState = a})
+
+-- | Estimate of the size of the table to be copied.
+tpEstimatedSizeBytes :: Lens' TableProgress (Maybe Int64)
+tpEstimatedSizeBytes
+  = lens _tpEstimatedSizeBytes
+      (\ s a -> s{_tpEstimatedSizeBytes = a})
+      . mapping _Coerce
+
+-- | Estimate of the number of bytes copied so far for this table. This will
+-- eventually reach \'estimated_size_bytes\' unless the table copy is
+-- CANCELLED.
+tpEstimatedCopiedBytes :: Lens' TableProgress (Maybe Int64)
+tpEstimatedCopiedBytes
+  = lens _tpEstimatedCopiedBytes
+      (\ s a -> s{_tpEstimatedCopiedBytes = a})
+      . mapping _Coerce
+
+instance FromJSON TableProgress where
+        parseJSON
+          = withObject "TableProgress"
+              (\ o ->
+                 TableProgress' <$>
+                   (o .:? "state") <*> (o .:? "estimatedSizeBytes") <*>
+                     (o .:? "estimatedCopiedBytes"))
+
+instance ToJSON TableProgress where
+        toJSON TableProgress'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _tpState,
+                  ("estimatedSizeBytes" .=) <$> _tpEstimatedSizeBytes,
+                  ("estimatedCopiedBytes" .=) <$>
+                    _tpEstimatedCopiedBytes])
 
 -- | A GcRule which deletes cells matching any of the given rules.
 --
@@ -1277,6 +1358,46 @@ instance FromJSON StatusDetailsItem where
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
+
+-- | Keys: the full \`name\` of each table that existed in the instance when
+-- CreateCluster was first called, i.e. \`projects\/\/instances\/\/tables\/
+-- \`. Any table added to the instance by a later API call will be created
+-- in the new cluster by that API call, not this one. Values: information
+-- on how much of a table\'s data has been copied to the newly-created
+-- cluster so far.
+--
+-- /See:/ 'createClusterMetadataTables' smart constructor.
+newtype CreateClusterMetadataTables =
+  CreateClusterMetadataTables'
+    { _ccmtAddtional :: HashMap Text TableProgress
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'CreateClusterMetadataTables' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccmtAddtional'
+createClusterMetadataTables
+    :: HashMap Text TableProgress -- ^ 'ccmtAddtional'
+    -> CreateClusterMetadataTables
+createClusterMetadataTables pCcmtAddtional_ =
+  CreateClusterMetadataTables' {_ccmtAddtional = _Coerce # pCcmtAddtional_}
+
+ccmtAddtional :: Lens' CreateClusterMetadataTables (HashMap Text TableProgress)
+ccmtAddtional
+  = lens _ccmtAddtional
+      (\ s a -> s{_ccmtAddtional = a})
+      . _Coerce
+
+instance FromJSON CreateClusterMetadataTables where
+        parseJSON
+          = withObject "CreateClusterMetadataTables"
+              (\ o ->
+                 CreateClusterMetadataTables' <$> (parseJSONObject o))
+
+instance ToJSON CreateClusterMetadataTables where
+        toJSON = toJSON . _ccmtAddtional
 
 -- | The metadata for the Operation returned by UpdateAppProfile.
 --

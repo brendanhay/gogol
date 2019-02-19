@@ -120,7 +120,8 @@ instance GoogleRequest SnapshotsList where
         type Rs SnapshotsList = SnapshotListResponse
         type Scopes SnapshotsList =
              '["https://www.googleapis.com/auth/drive.appdata",
-               "https://www.googleapis.com/auth/games"]
+               "https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient SnapshotsList'{..}
           = go _slPlayerId _slLanguage _slPageToken
               _slMaxResults

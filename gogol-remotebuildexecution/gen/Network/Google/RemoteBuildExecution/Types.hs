@@ -176,6 +176,7 @@ module Network.Google.RemoteBuildExecution.Types
     , gdraviState
     , gdraviLocation
     , gdraviName
+    , gdraviLoggingEnabled
 
     -- * GoogleDevtoolsRemoteexecutionV1testToolDetails
     , GoogleDevtoolsRemoteexecutionV1testToolDetails
@@ -341,6 +342,11 @@ module Network.Google.RemoteBuildExecution.Types
     , buildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
     , bbrevacucUpdateEnabled
 
+    -- * GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+    , GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+    , googleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+    , gdrvcrmiAddtional
+
     -- * BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
     , BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
     , buildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
@@ -359,16 +365,11 @@ module Network.Google.RemoteBuildExecution.Types
     , gdrvcrOverhead
     , gdrvcrOutputs
     , gdrvcrExitCode
-    , gdrvcrStatistics
+    , gdrvcrMetadata
     , gdrvcrDuration
 
     -- * GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadataStage
     , GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadataStage (..)
-
-    -- * GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-    , GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-    , googleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-    , gdrvcrsiAddtional
 
     -- * GoogleDevtoolsRemoteexecutionV1testFileNode
     , GoogleDevtoolsRemoteexecutionV1testFileNode
@@ -544,6 +545,7 @@ module Network.Google.RemoteBuildExecution.Types
     , bbreverServerLogs
     , bbreverResult
     , bbreverCachedResult
+    , bbreverMessage
 
     -- * GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
     , GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest

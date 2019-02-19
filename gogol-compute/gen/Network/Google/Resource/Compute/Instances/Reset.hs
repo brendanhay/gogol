@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Performs a reset on the instance. For more information, see Resetting an
--- instance.
+-- Performs a reset on the instance. This is a hard reset; the VM does not
+-- do a graceful shutdown. For more information, see Resetting an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.reset@.
 module Network.Google.Resource.Compute.Instances.Reset
@@ -58,8 +58,8 @@ type InstancesResetResource =
                        QueryParam "requestId" Text :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
--- | Performs a reset on the instance. For more information, see Resetting an
--- instance.
+-- | Performs a reset on the instance. This is a hard reset; the VM does not
+-- do a graceful shutdown. For more information, see Resetting an instance.
 --
 -- /See:/ 'instancesReset' smart constructor.
 data InstancesReset =

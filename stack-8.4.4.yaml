@@ -100,6 +100,7 @@ packages:
   - gogol-gmail
   - gogol-groups-migration
   - gogol-groups-settings
+  - gogol-healthcare
   - gogol-iam
   - gogol-iamcredentials
   - gogol-iap

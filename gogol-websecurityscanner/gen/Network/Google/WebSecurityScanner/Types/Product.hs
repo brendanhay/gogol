@@ -1049,12 +1049,14 @@ instance ToJSON CustomAccount where
                   ("username" .=) <$> _caUsername,
                   ("password" .=) <$> _caPassword])
 
--- | A ScanConfig resource contains the configurations to launch a scan.
+-- | A ScanConfig resource contains the configurations to launch a scan. next
+-- id: 12
 --
 -- /See:/ 'scanConfig' smart constructor.
 data ScanConfig =
   ScanConfig'
-    { _scSchedule          :: !(Maybe Schedule)
+    { _scLatestRun         :: !(Maybe ScanRun)
+    , _scSchedule          :: !(Maybe Schedule)
     , _scTargetPlatforms   :: !(Maybe [Text])
     , _scStartingURLs      :: !(Maybe [Text])
     , _scAuthentication    :: !(Maybe Authentication)
@@ -1069,6 +1071,8 @@ data ScanConfig =
 -- | Creates a value of 'ScanConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scLatestRun'
 --
 -- * 'scSchedule'
 --
@@ -1091,7 +1095,8 @@ scanConfig
     :: ScanConfig
 scanConfig =
   ScanConfig'
-    { _scSchedule = Nothing
+    { _scLatestRun = Nothing
+    , _scSchedule = Nothing
     , _scTargetPlatforms = Nothing
     , _scStartingURLs = Nothing
     , _scAuthentication = Nothing
@@ -1101,6 +1106,11 @@ scanConfig =
     , _scUserAgent = Nothing
     , _scBlackListPatterns = Nothing
     }
+
+-- | Latest ScanRun if available.
+scLatestRun :: Lens' ScanConfig (Maybe ScanRun)
+scLatestRun
+  = lens _scLatestRun (\ s a -> s{_scLatestRun = a})
 
 -- | The schedule of the ScanConfig.
 scSchedule :: Lens' ScanConfig (Maybe Schedule)
@@ -1171,7 +1181,7 @@ instance FromJSON ScanConfig where
           = withObject "ScanConfig"
               (\ o ->
                  ScanConfig' <$>
-                   (o .:? "schedule") <*>
+                   (o .:? "latestRun") <*> (o .:? "schedule") <*>
                      (o .:? "targetPlatforms" .!= mempty)
                      <*> (o .:? "startingUrls" .!= mempty)
                      <*> (o .:? "authentication")
@@ -1185,7 +1195,8 @@ instance ToJSON ScanConfig where
         toJSON ScanConfig'{..}
           = object
               (catMaybes
-                 [("schedule" .=) <$> _scSchedule,
+                 [("latestRun" .=) <$> _scLatestRun,
+                  ("schedule" .=) <$> _scSchedule,
                   ("targetPlatforms" .=) <$> _scTargetPlatforms,
                   ("startingUrls" .=) <$> _scStartingURLs,
                   ("authentication" .=) <$> _scAuthentication,

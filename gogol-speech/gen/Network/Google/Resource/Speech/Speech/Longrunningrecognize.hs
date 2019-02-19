@@ -25,7 +25,7 @@
 -- \`Operation.error\` or an \`Operation.response\` which contains a
 -- \`LongRunningRecognizeResponse\` message.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference> for @speech.speech.longrunningrecognize@.
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.speech.longrunningrecognize@.
 module Network.Google.Resource.Speech.Speech.Longrunningrecognize
     (
     -- * REST Resource

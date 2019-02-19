@@ -168,7 +168,8 @@ pllCallback
 instance GoogleRequest ProjectsLocationsList where
         type Rs ProjectsLocationsList = ListLocationsResponse
         type Scopes ProjectsLocationsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient ProjectsLocationsList'{..}
           = go _pllName _pllXgafv _pllUploadProtocol
               _pllAccessToken

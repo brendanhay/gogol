@@ -233,7 +233,7 @@ data OrderReportTransaction =
     , _ortTransactionDate          :: !(Maybe Text)
     , _ortDisbursementDate         :: !(Maybe Text)
     , _ortMerchantOrderId          :: !(Maybe Text)
-    , _ortProductAmount            :: !(Maybe Amount)
+    , _ortProductAmount            :: !(Maybe ProductAmount)
     , _ortOrderId                  :: !(Maybe Text)
     , _ortDisbursementAmount       :: !(Maybe Price)
     }
@@ -313,7 +313,7 @@ ortMerchantOrderId
       (\ s a -> s{_ortMerchantOrderId = a})
 
 -- | Total amount for the items.
-ortProductAmount :: Lens' OrderReportTransaction (Maybe Amount)
+ortProductAmount :: Lens' OrderReportTransaction (Maybe ProductAmount)
 ortProductAmount
   = lens _ortProductAmount
       (\ s a -> s{_ortProductAmount = a})
@@ -910,8 +910,8 @@ instance ToJSON PosSaleResponse where
 -- /See:/ 'amount' smart constructor.
 data Amount =
   Amount'
-    { _aPretax :: !(Maybe Price)
-    , _aTax    :: !(Maybe Price)
+    { _aTaxAmount   :: !(Maybe Price)
+    , _aPriceAmount :: !(Maybe Price)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -919,32 +919,37 @@ data Amount =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aPretax'
+-- * 'aTaxAmount'
 --
--- * 'aTax'
+-- * 'aPriceAmount'
 amount
     :: Amount
-amount = Amount' {_aPretax = Nothing, _aTax = Nothing}
-
--- | [required] Value before taxes.
-aPretax :: Lens' Amount (Maybe Price)
-aPretax = lens _aPretax (\ s a -> s{_aPretax = a})
+amount = Amount' {_aTaxAmount = Nothing, _aPriceAmount = Nothing}
 
 -- | [required] Tax value.
-aTax :: Lens' Amount (Maybe Price)
-aTax = lens _aTax (\ s a -> s{_aTax = a})
+aTaxAmount :: Lens' Amount (Maybe Price)
+aTaxAmount
+  = lens _aTaxAmount (\ s a -> s{_aTaxAmount = a})
+
+-- | [required] The pre-tax or post-tax price depending on the location of
+-- the order.
+aPriceAmount :: Lens' Amount (Maybe Price)
+aPriceAmount
+  = lens _aPriceAmount (\ s a -> s{_aPriceAmount = a})
 
 instance FromJSON Amount where
         parseJSON
           = withObject "Amount"
               (\ o ->
-                 Amount' <$> (o .:? "pretax") <*> (o .:? "tax"))
+                 Amount' <$>
+                   (o .:? "taxAmount") <*> (o .:? "priceAmount"))
 
 instance ToJSON Amount where
         toJSON Amount'{..}
           = object
               (catMaybes
-                 [("pretax" .=) <$> _aPretax, ("tax" .=) <$> _aTax])
+                 [("taxAmount" .=) <$> _aTaxAmount,
+                  ("priceAmount" .=) <$> _aPriceAmount])
 
 --
 -- /See:/ 'accountsAuthInfoResponse' smart constructor.
@@ -1099,7 +1104,7 @@ data UnitInvoice =
     { _uiUnitPriceTaxes    :: !(Maybe [UnitInvoiceTaxLine])
     , _uiPromotions        :: !(Maybe [Promotion])
     , _uiAdditionalCharges :: !(Maybe [UnitInvoiceAdditionalCharge])
-    , _uiUnitPricePretax   :: !(Maybe Price)
+    , _uiUnitPrice         :: !(Maybe Price)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1113,7 +1118,7 @@ data UnitInvoice =
 --
 -- * 'uiAdditionalCharges'
 --
--- * 'uiUnitPricePretax'
+-- * 'uiUnitPrice'
 unitInvoice
     :: UnitInvoice
 unitInvoice =
@@ -1121,7 +1126,7 @@ unitInvoice =
     { _uiUnitPriceTaxes = Nothing
     , _uiPromotions = Nothing
     , _uiAdditionalCharges = Nothing
-    , _uiUnitPricePretax = Nothing
+    , _uiUnitPrice = Nothing
     }
 
 -- | Tax amounts to apply to the unit price.
@@ -1147,11 +1152,11 @@ uiAdditionalCharges
       . _Default
       . _Coerce
 
--- | [required] Price of the unit, before applying taxes.
-uiUnitPricePretax :: Lens' UnitInvoice (Maybe Price)
-uiUnitPricePretax
-  = lens _uiUnitPricePretax
-      (\ s a -> s{_uiUnitPricePretax = a})
+-- | [required] Pre-tax or post-tax price of the unit depending on the
+-- locality of the order.
+uiUnitPrice :: Lens' UnitInvoice (Maybe Price)
+uiUnitPrice
+  = lens _uiUnitPrice (\ s a -> s{_uiUnitPrice = a})
 
 instance FromJSON UnitInvoice where
         parseJSON
@@ -1161,7 +1166,7 @@ instance FromJSON UnitInvoice where
                    (o .:? "unitPriceTaxes" .!= mempty) <*>
                      (o .:? "promotions" .!= mempty)
                      <*> (o .:? "additionalCharges" .!= mempty)
-                     <*> (o .:? "unitPricePretax"))
+                     <*> (o .:? "unitPrice"))
 
 instance ToJSON UnitInvoice where
         toJSON UnitInvoice'{..}
@@ -1170,7 +1175,7 @@ instance ToJSON UnitInvoice where
                  [("unitPriceTaxes" .=) <$> _uiUnitPriceTaxes,
                   ("promotions" .=) <$> _uiPromotions,
                   ("additionalCharges" .=) <$> _uiAdditionalCharges,
-                  ("unitPricePretax" .=) <$> _uiUnitPricePretax])
+                  ("unitPrice" .=) <$> _uiUnitPrice])
 
 -- | The change of the available quantity of an item at the given store.
 --
@@ -1703,60 +1708,6 @@ instance ToJSON DatafeedsCustomBatchRequest where
           = object (catMaybes [("entries" .=) <$> _dEntries])
 
 --
--- /See:/ 'orderpaymentsNotifyChargeRequest' smart constructor.
-data OrderpaymentsNotifyChargeRequest =
-  OrderpaymentsNotifyChargeRequest'
-    { _oncrInvoiceIds  :: !(Maybe [Text])
-    , _oncrChargeState :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'OrderpaymentsNotifyChargeRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oncrInvoiceIds'
---
--- * 'oncrChargeState'
-orderpaymentsNotifyChargeRequest
-    :: OrderpaymentsNotifyChargeRequest
-orderpaymentsNotifyChargeRequest =
-  OrderpaymentsNotifyChargeRequest'
-    {_oncrInvoiceIds = Nothing, _oncrChargeState = Nothing}
-
--- | Invoice IDs from the orderinvoices service that correspond to the
--- charge.
-oncrInvoiceIds :: Lens' OrderpaymentsNotifyChargeRequest [Text]
-oncrInvoiceIds
-  = lens _oncrInvoiceIds
-      (\ s a -> s{_oncrInvoiceIds = a})
-      . _Default
-      . _Coerce
-
--- | Whether charge was successful.
-oncrChargeState :: Lens' OrderpaymentsNotifyChargeRequest (Maybe Text)
-oncrChargeState
-  = lens _oncrChargeState
-      (\ s a -> s{_oncrChargeState = a})
-
-instance FromJSON OrderpaymentsNotifyChargeRequest
-         where
-        parseJSON
-          = withObject "OrderpaymentsNotifyChargeRequest"
-              (\ o ->
-                 OrderpaymentsNotifyChargeRequest' <$>
-                   (o .:? "invoiceIds" .!= mempty) <*>
-                     (o .:? "chargeState"))
-
-instance ToJSON OrderpaymentsNotifyChargeRequest
-         where
-        toJSON OrderpaymentsNotifyChargeRequest'{..}
-          = object
-              (catMaybes
-                 [("invoiceIds" .=) <$> _oncrInvoiceIds,
-                  ("chargeState" .=) <$> _oncrChargeState])
-
---
 -- /See:/ 'ordersCancelTestOrderByCustomerResponse' smart constructor.
 newtype OrdersCancelTestOrderByCustomerResponse =
   OrdersCancelTestOrderByCustomerResponse'
@@ -1845,63 +1796,6 @@ instance ToJSON LiaOnDisplayToOrderSettings where
                  [("status" .=) <$> _lodtosStatus,
                   ("shippingCostPolicyUrl" .=) <$>
                     _lodtosShippingCostPolicyURL])
-
---
--- /See:/ 'orderpaymentsNotifyAuthDeclinedResponse' smart constructor.
-data OrderpaymentsNotifyAuthDeclinedResponse =
-  OrderpaymentsNotifyAuthDeclinedResponse'
-    { _onadrKind            :: !Text
-    , _onadrExecutionStatus :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'OrderpaymentsNotifyAuthDeclinedResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'onadrKind'
---
--- * 'onadrExecutionStatus'
-orderpaymentsNotifyAuthDeclinedResponse
-    :: OrderpaymentsNotifyAuthDeclinedResponse
-orderpaymentsNotifyAuthDeclinedResponse =
-  OrderpaymentsNotifyAuthDeclinedResponse'
-    { _onadrKind = "content#orderpaymentsNotifyAuthDeclinedResponse"
-    , _onadrExecutionStatus = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#orderpaymentsNotifyAuthDeclinedResponse\".
-onadrKind :: Lens' OrderpaymentsNotifyAuthDeclinedResponse Text
-onadrKind
-  = lens _onadrKind (\ s a -> s{_onadrKind = a})
-
--- | The status of the execution.
-onadrExecutionStatus :: Lens' OrderpaymentsNotifyAuthDeclinedResponse (Maybe Text)
-onadrExecutionStatus
-  = lens _onadrExecutionStatus
-      (\ s a -> s{_onadrExecutionStatus = a})
-
-instance FromJSON
-           OrderpaymentsNotifyAuthDeclinedResponse
-         where
-        parseJSON
-          = withObject
-              "OrderpaymentsNotifyAuthDeclinedResponse"
-              (\ o ->
-                 OrderpaymentsNotifyAuthDeclinedResponse' <$>
-                   (o .:? "kind" .!=
-                      "content#orderpaymentsNotifyAuthDeclinedResponse")
-                     <*> (o .:? "executionStatus"))
-
-instance ToJSON
-           OrderpaymentsNotifyAuthDeclinedResponse
-         where
-        toJSON OrderpaymentsNotifyAuthDeclinedResponse'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _onadrKind),
-                  ("executionStatus" .=) <$> _onadrExecutionStatus])
 
 --
 -- /See:/ 'accountAddress' smart constructor.
@@ -4687,8 +4581,11 @@ instance ToJSON OrdersCreateTestOrderRequest where
 -- /See:/ 'accountUser' smart constructor.
 data AccountUser =
   AccountUser'
-    { _auAdmin        :: !(Maybe Bool)
-    , _auEmailAddress :: !(Maybe Text)
+    { _auAdmin           :: !(Maybe Bool)
+    , _auPaymentsManager :: !(Maybe Bool)
+    , _auOrderManager    :: !(Maybe Bool)
+    , _auEmailAddress    :: !(Maybe Text)
+    , _auPaymentsAnalyst :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4698,14 +4595,39 @@ data AccountUser =
 --
 -- * 'auAdmin'
 --
+-- * 'auPaymentsManager'
+--
+-- * 'auOrderManager'
+--
 -- * 'auEmailAddress'
+--
+-- * 'auPaymentsAnalyst'
 accountUser
     :: AccountUser
-accountUser = AccountUser' {_auAdmin = Nothing, _auEmailAddress = Nothing}
+accountUser =
+  AccountUser'
+    { _auAdmin = Nothing
+    , _auPaymentsManager = Nothing
+    , _auOrderManager = Nothing
+    , _auEmailAddress = Nothing
+    , _auPaymentsAnalyst = Nothing
+    }
 
 -- | Whether user is an admin.
 auAdmin :: Lens' AccountUser (Maybe Bool)
 auAdmin = lens _auAdmin (\ s a -> s{_auAdmin = a})
+
+-- | Whether user can manage payment settings.
+auPaymentsManager :: Lens' AccountUser (Maybe Bool)
+auPaymentsManager
+  = lens _auPaymentsManager
+      (\ s a -> s{_auPaymentsManager = a})
+
+-- | Whether user is an order manager.
+auOrderManager :: Lens' AccountUser (Maybe Bool)
+auOrderManager
+  = lens _auOrderManager
+      (\ s a -> s{_auOrderManager = a})
 
 -- | User\'s email address.
 auEmailAddress :: Lens' AccountUser (Maybe Text)
@@ -4713,19 +4635,31 @@ auEmailAddress
   = lens _auEmailAddress
       (\ s a -> s{_auEmailAddress = a})
 
+-- | Whether user can access payment statements.
+auPaymentsAnalyst :: Lens' AccountUser (Maybe Bool)
+auPaymentsAnalyst
+  = lens _auPaymentsAnalyst
+      (\ s a -> s{_auPaymentsAnalyst = a})
+
 instance FromJSON AccountUser where
         parseJSON
           = withObject "AccountUser"
               (\ o ->
                  AccountUser' <$>
-                   (o .:? "admin") <*> (o .:? "emailAddress"))
+                   (o .:? "admin") <*> (o .:? "paymentsManager") <*>
+                     (o .:? "orderManager")
+                     <*> (o .:? "emailAddress")
+                     <*> (o .:? "paymentsAnalyst"))
 
 instance ToJSON AccountUser where
         toJSON AccountUser'{..}
           = object
               (catMaybes
                  [("admin" .=) <$> _auAdmin,
-                  ("emailAddress" .=) <$> _auEmailAddress])
+                  ("paymentsManager" .=) <$> _auPaymentsManager,
+                  ("orderManager" .=) <$> _auOrderManager,
+                  ("emailAddress" .=) <$> _auEmailAddress,
+                  ("paymentsAnalyst" .=) <$> _auPaymentsAnalyst])
 
 --
 -- /See:/ 'accountCustomerService' smart constructor.
@@ -5937,60 +5871,6 @@ instance ToJSON AccountsListResponse where
                   ("resources" .=) <$> _accResources])
 
 --
--- /See:/ 'orderpaymentsNotifyRefundRequest' smart constructor.
-data OrderpaymentsNotifyRefundRequest =
-  OrderpaymentsNotifyRefundRequest'
-    { _onrrInvoiceIds  :: !(Maybe [Text])
-    , _onrrRefundState :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'OrderpaymentsNotifyRefundRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'onrrInvoiceIds'
---
--- * 'onrrRefundState'
-orderpaymentsNotifyRefundRequest
-    :: OrderpaymentsNotifyRefundRequest
-orderpaymentsNotifyRefundRequest =
-  OrderpaymentsNotifyRefundRequest'
-    {_onrrInvoiceIds = Nothing, _onrrRefundState = Nothing}
-
--- | Invoice IDs from the orderinvoices service that correspond to the
--- refund.
-onrrInvoiceIds :: Lens' OrderpaymentsNotifyRefundRequest [Text]
-onrrInvoiceIds
-  = lens _onrrInvoiceIds
-      (\ s a -> s{_onrrInvoiceIds = a})
-      . _Default
-      . _Coerce
-
--- | Whether refund was successful.
-onrrRefundState :: Lens' OrderpaymentsNotifyRefundRequest (Maybe Text)
-onrrRefundState
-  = lens _onrrRefundState
-      (\ s a -> s{_onrrRefundState = a})
-
-instance FromJSON OrderpaymentsNotifyRefundRequest
-         where
-        parseJSON
-          = withObject "OrderpaymentsNotifyRefundRequest"
-              (\ o ->
-                 OrderpaymentsNotifyRefundRequest' <$>
-                   (o .:? "invoiceIds" .!= mempty) <*>
-                     (o .:? "refundState"))
-
-instance ToJSON OrderpaymentsNotifyRefundRequest
-         where
-        toJSON OrderpaymentsNotifyRefundRequest'{..}
-          = object
-              (catMaybes
-                 [("invoiceIds" .=) <$> _onrrInvoiceIds,
-                  ("refundState" .=) <$> _onrrRefundState])
-
---
 -- /See:/ 'accountBusinessInformation' smart constructor.
 data AccountBusinessInformation =
   AccountBusinessInformation'
@@ -6527,57 +6407,6 @@ instance ToJSON AccountsCustomBatchResponse where
               (catMaybes
                  [("entries" .=) <$> _acbrcEntries,
                   Just ("kind" .= _acbrcKind)])
-
---
--- /See:/ 'orderpaymentsNotifyAuthApprovedRequest' smart constructor.
-data OrderpaymentsNotifyAuthApprovedRequest =
-  OrderpaymentsNotifyAuthApprovedRequest'
-    { _onaarAuthAmountPretax :: !(Maybe Price)
-    , _onaarAuthAmountTax    :: !(Maybe Price)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'OrderpaymentsNotifyAuthApprovedRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'onaarAuthAmountPretax'
---
--- * 'onaarAuthAmountTax'
-orderpaymentsNotifyAuthApprovedRequest
-    :: OrderpaymentsNotifyAuthApprovedRequest
-orderpaymentsNotifyAuthApprovedRequest =
-  OrderpaymentsNotifyAuthApprovedRequest'
-    {_onaarAuthAmountPretax = Nothing, _onaarAuthAmountTax = Nothing}
-
-onaarAuthAmountPretax :: Lens' OrderpaymentsNotifyAuthApprovedRequest (Maybe Price)
-onaarAuthAmountPretax
-  = lens _onaarAuthAmountPretax
-      (\ s a -> s{_onaarAuthAmountPretax = a})
-
-onaarAuthAmountTax :: Lens' OrderpaymentsNotifyAuthApprovedRequest (Maybe Price)
-onaarAuthAmountTax
-  = lens _onaarAuthAmountTax
-      (\ s a -> s{_onaarAuthAmountTax = a})
-
-instance FromJSON
-           OrderpaymentsNotifyAuthApprovedRequest
-         where
-        parseJSON
-          = withObject "OrderpaymentsNotifyAuthApprovedRequest"
-              (\ o ->
-                 OrderpaymentsNotifyAuthApprovedRequest' <$>
-                   (o .:? "authAmountPretax") <*>
-                     (o .:? "authAmountTax"))
-
-instance ToJSON
-           OrderpaymentsNotifyAuthApprovedRequest
-         where
-        toJSON OrderpaymentsNotifyAuthApprovedRequest'{..}
-          = object
-              (catMaybes
-                 [("authAmountPretax" .=) <$> _onaarAuthAmountPretax,
-                  ("authAmountTax" .=) <$> _onaarAuthAmountTax])
 
 --
 -- /See:/ 'ordersUpdateLineItemShippingDetailsRequest' smart constructor.
@@ -8635,63 +8464,6 @@ instance ToJSON PosCustomBatchResponseEntry where
                   ("batchId" .=) <$> _pcbrecBatchId])
 
 --
--- /See:/ 'orderpaymentsNotifyAuthApprovedResponse' smart constructor.
-data OrderpaymentsNotifyAuthApprovedResponse =
-  OrderpaymentsNotifyAuthApprovedResponse'
-    { _onaarKind            :: !Text
-    , _onaarExecutionStatus :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'OrderpaymentsNotifyAuthApprovedResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'onaarKind'
---
--- * 'onaarExecutionStatus'
-orderpaymentsNotifyAuthApprovedResponse
-    :: OrderpaymentsNotifyAuthApprovedResponse
-orderpaymentsNotifyAuthApprovedResponse =
-  OrderpaymentsNotifyAuthApprovedResponse'
-    { _onaarKind = "content#orderpaymentsNotifyAuthApprovedResponse"
-    , _onaarExecutionStatus = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#orderpaymentsNotifyAuthApprovedResponse\".
-onaarKind :: Lens' OrderpaymentsNotifyAuthApprovedResponse Text
-onaarKind
-  = lens _onaarKind (\ s a -> s{_onaarKind = a})
-
--- | The status of the execution.
-onaarExecutionStatus :: Lens' OrderpaymentsNotifyAuthApprovedResponse (Maybe Text)
-onaarExecutionStatus
-  = lens _onaarExecutionStatus
-      (\ s a -> s{_onaarExecutionStatus = a})
-
-instance FromJSON
-           OrderpaymentsNotifyAuthApprovedResponse
-         where
-        parseJSON
-          = withObject
-              "OrderpaymentsNotifyAuthApprovedResponse"
-              (\ o ->
-                 OrderpaymentsNotifyAuthApprovedResponse' <$>
-                   (o .:? "kind" .!=
-                      "content#orderpaymentsNotifyAuthApprovedResponse")
-                     <*> (o .:? "executionStatus"))
-
-instance ToJSON
-           OrderpaymentsNotifyAuthApprovedResponse
-         where
-        toJSON OrderpaymentsNotifyAuthApprovedResponse'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _onaarKind),
-                  ("executionStatus" .=) <$> _onaarExecutionStatus])
-
---
 -- /See:/ 'orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption' smart constructor.
 data OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption =
   OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption'
@@ -9258,6 +9030,67 @@ instance ToJSON ShippingSettings where
                  [("postalCodeGroups" .=) <$> _ssPostalCodeGroups,
                   ("accountId" .=) <$> _ssAccountId,
                   ("services" .=) <$> _ssServices])
+
+--
+-- /See:/ 'productAmount' smart constructor.
+data ProductAmount =
+  ProductAmount'
+    { _paRemittedTaxAmount :: !(Maybe Price)
+    , _paTaxAmount         :: !(Maybe Price)
+    , _paPriceAmount       :: !(Maybe Price)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'ProductAmount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'paRemittedTaxAmount'
+--
+-- * 'paTaxAmount'
+--
+-- * 'paPriceAmount'
+productAmount
+    :: ProductAmount
+productAmount =
+  ProductAmount'
+    { _paRemittedTaxAmount = Nothing
+    , _paTaxAmount = Nothing
+    , _paPriceAmount = Nothing
+    }
+
+-- | Remitted tax value.
+paRemittedTaxAmount :: Lens' ProductAmount (Maybe Price)
+paRemittedTaxAmount
+  = lens _paRemittedTaxAmount
+      (\ s a -> s{_paRemittedTaxAmount = a})
+
+-- | Tax value.
+paTaxAmount :: Lens' ProductAmount (Maybe Price)
+paTaxAmount
+  = lens _paTaxAmount (\ s a -> s{_paTaxAmount = a})
+
+-- | The pre-tax or post-tax price depending on the location of the order.
+paPriceAmount :: Lens' ProductAmount (Maybe Price)
+paPriceAmount
+  = lens _paPriceAmount
+      (\ s a -> s{_paPriceAmount = a})
+
+instance FromJSON ProductAmount where
+        parseJSON
+          = withObject "ProductAmount"
+              (\ o ->
+                 ProductAmount' <$>
+                   (o .:? "remittedTaxAmount") <*> (o .:? "taxAmount")
+                     <*> (o .:? "priceAmount"))
+
+instance ToJSON ProductAmount where
+        toJSON ProductAmount'{..}
+          = object
+              (catMaybes
+                 [("remittedTaxAmount" .=) <$> _paRemittedTaxAmount,
+                  ("taxAmount" .=) <$> _paTaxAmount,
+                  ("priceAmount" .=) <$> _paPriceAmount])
 
 --
 -- /See:/ 'postalCodeRange' smart constructor.
@@ -11232,12 +11065,12 @@ data OrderPromotion =
   OrderPromotion'
     { _opShortTitle          :: !(Maybe Text)
     , _opAppliedItems        :: !(Maybe [OrderPromotionItem])
-    , _opPretaxValue         :: !(Maybe Price)
     , _opMerchantPromotionId :: !(Maybe Text)
     , _opSubtype             :: !(Maybe Text)
     , _opTitle               :: !(Maybe Text)
     , _opType                :: !(Maybe Text)
     , _opApplicableItems     :: !(Maybe [OrderPromotionItem])
+    , _opPriceValue          :: !(Maybe Price)
     , _opTaxValue            :: !(Maybe Price)
     , _opFunder              :: !(Maybe Text)
     }
@@ -11251,8 +11084,6 @@ data OrderPromotion =
 --
 -- * 'opAppliedItems'
 --
--- * 'opPretaxValue'
---
 -- * 'opMerchantPromotionId'
 --
 -- * 'opSubtype'
@@ -11263,6 +11094,8 @@ data OrderPromotion =
 --
 -- * 'opApplicableItems'
 --
+-- * 'opPriceValue'
+--
 -- * 'opTaxValue'
 --
 -- * 'opFunder'
@@ -11272,12 +11105,12 @@ orderPromotion =
   OrderPromotion'
     { _opShortTitle = Nothing
     , _opAppliedItems = Nothing
-    , _opPretaxValue = Nothing
     , _opMerchantPromotionId = Nothing
     , _opSubtype = Nothing
     , _opTitle = Nothing
     , _opType = Nothing
     , _opApplicableItems = Nothing
+    , _opPriceValue = Nothing
     , _opTaxValue = Nothing
     , _opFunder = Nothing
     }
@@ -11294,12 +11127,6 @@ opAppliedItems
       (\ s a -> s{_opAppliedItems = a})
       . _Default
       . _Coerce
-
--- | Estimated discount applied to pre-tax amount.
-opPretaxValue :: Lens' OrderPromotion (Maybe Price)
-opPretaxValue
-  = lens _opPretaxValue
-      (\ s a -> s{_opPretaxValue = a})
 
 -- | This field is used to identify promotions within merchants\' own
 -- systems.
@@ -11330,6 +11157,12 @@ opApplicableItems
       . _Default
       . _Coerce
 
+-- | Estimated discount applied to price. Amount is pre-tax or post-tax
+-- depending on location of order.
+opPriceValue :: Lens' OrderPromotion (Maybe Price)
+opPriceValue
+  = lens _opPriceValue (\ s a -> s{_opPriceValue = a})
+
 -- | Estimated discount applied to tax (if allowed by law).
 opTaxValue :: Lens' OrderPromotion (Maybe Price)
 opTaxValue
@@ -11346,12 +11179,12 @@ instance FromJSON OrderPromotion where
                  OrderPromotion' <$>
                    (o .:? "shortTitle") <*>
                      (o .:? "appliedItems" .!= mempty)
-                     <*> (o .:? "pretaxValue")
                      <*> (o .:? "merchantPromotionId")
                      <*> (o .:? "subtype")
                      <*> (o .:? "title")
                      <*> (o .:? "type")
                      <*> (o .:? "applicableItems" .!= mempty)
+                     <*> (o .:? "priceValue")
                      <*> (o .:? "taxValue")
                      <*> (o .:? "funder"))
 
@@ -11361,12 +11194,12 @@ instance ToJSON OrderPromotion where
               (catMaybes
                  [("shortTitle" .=) <$> _opShortTitle,
                   ("appliedItems" .=) <$> _opAppliedItems,
-                  ("pretaxValue" .=) <$> _opPretaxValue,
                   ("merchantPromotionId" .=) <$>
                     _opMerchantPromotionId,
                   ("subtype" .=) <$> _opSubtype,
                   ("title" .=) <$> _opTitle, ("type" .=) <$> _opType,
                   ("applicableItems" .=) <$> _opApplicableItems,
+                  ("priceValue" .=) <$> _opPriceValue,
                   ("taxValue" .=) <$> _opTaxValue,
                   ("funder" .=) <$> _opFunder])
 
@@ -11723,100 +11556,6 @@ instance ToJSON InvoiceSummary where
                   ("additionalChargeSummaries" .=) <$>
                     _isAdditionalChargeSummaries,
                   ("promotionSummaries" .=) <$> _isPromotionSummaries])
-
---
--- /See:/ 'orderpaymentsNotifyChargeResponse' smart constructor.
-data OrderpaymentsNotifyChargeResponse =
-  OrderpaymentsNotifyChargeResponse'
-    { _oncrKind            :: !Text
-    , _oncrExecutionStatus :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'OrderpaymentsNotifyChargeResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oncrKind'
---
--- * 'oncrExecutionStatus'
-orderpaymentsNotifyChargeResponse
-    :: OrderpaymentsNotifyChargeResponse
-orderpaymentsNotifyChargeResponse =
-  OrderpaymentsNotifyChargeResponse'
-    { _oncrKind = "content#orderpaymentsNotifyChargeResponse"
-    , _oncrExecutionStatus = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#orderpaymentsNotifyChargeResponse\".
-oncrKind :: Lens' OrderpaymentsNotifyChargeResponse Text
-oncrKind = lens _oncrKind (\ s a -> s{_oncrKind = a})
-
--- | The status of the execution.
-oncrExecutionStatus :: Lens' OrderpaymentsNotifyChargeResponse (Maybe Text)
-oncrExecutionStatus
-  = lens _oncrExecutionStatus
-      (\ s a -> s{_oncrExecutionStatus = a})
-
-instance FromJSON OrderpaymentsNotifyChargeResponse
-         where
-        parseJSON
-          = withObject "OrderpaymentsNotifyChargeResponse"
-              (\ o ->
-                 OrderpaymentsNotifyChargeResponse' <$>
-                   (o .:? "kind" .!=
-                      "content#orderpaymentsNotifyChargeResponse")
-                     <*> (o .:? "executionStatus"))
-
-instance ToJSON OrderpaymentsNotifyChargeResponse
-         where
-        toJSON OrderpaymentsNotifyChargeResponse'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _oncrKind),
-                  ("executionStatus" .=) <$> _oncrExecutionStatus])
-
---
--- /See:/ 'orderpaymentsNotifyAuthDeclinedRequest' smart constructor.
-newtype OrderpaymentsNotifyAuthDeclinedRequest =
-  OrderpaymentsNotifyAuthDeclinedRequest'
-    { _onadrDeclineReason :: Maybe Text
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'OrderpaymentsNotifyAuthDeclinedRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'onadrDeclineReason'
-orderpaymentsNotifyAuthDeclinedRequest
-    :: OrderpaymentsNotifyAuthDeclinedRequest
-orderpaymentsNotifyAuthDeclinedRequest =
-  OrderpaymentsNotifyAuthDeclinedRequest' {_onadrDeclineReason = Nothing}
-
--- | Reason why payment authorization was declined.
-onadrDeclineReason :: Lens' OrderpaymentsNotifyAuthDeclinedRequest (Maybe Text)
-onadrDeclineReason
-  = lens _onadrDeclineReason
-      (\ s a -> s{_onadrDeclineReason = a})
-
-instance FromJSON
-           OrderpaymentsNotifyAuthDeclinedRequest
-         where
-        parseJSON
-          = withObject "OrderpaymentsNotifyAuthDeclinedRequest"
-              (\ o ->
-                 OrderpaymentsNotifyAuthDeclinedRequest' <$>
-                   (o .:? "declineReason"))
-
-instance ToJSON
-           OrderpaymentsNotifyAuthDeclinedRequest
-         where
-        toJSON OrderpaymentsNotifyAuthDeclinedRequest'{..}
-          = object
-              (catMaybes
-                 [("declineReason" .=) <$> _onadrDeclineReason])
 
 --
 -- /See:/ 'posListResponse' smart constructor.
@@ -12616,7 +12355,9 @@ tolipOfferId :: Lens' TestOrderLineItemProduct (Maybe Text)
 tolipOfferId
   = lens _tolipOfferId (\ s a -> s{_tolipOfferId = a})
 
--- | The price for the product.
+-- | The price for the product. Tax is automatically calculated for MFL
+-- orders. For non-MFL orders, tax settings from Merchant Center are
+-- applied.
 tolipPrice :: Lens' TestOrderLineItemProduct (Maybe Price)
 tolipPrice
   = lens _tolipPrice (\ s a -> s{_tolipPrice = a})
@@ -14749,7 +14490,6 @@ data TestOrderLineItem =
     , _toliReturnInfo      :: !(Maybe OrderLineItemReturnInfo)
     , _toliShippingDetails :: !(Maybe OrderLineItemShippingDetails)
     , _toliProduct         :: !(Maybe TestOrderLineItemProduct)
-    , _toliUnitTax         :: !(Maybe Price)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -14764,8 +14504,6 @@ data TestOrderLineItem =
 -- * 'toliShippingDetails'
 --
 -- * 'toliProduct'
---
--- * 'toliUnitTax'
 testOrderLineItem
     :: TestOrderLineItem
 testOrderLineItem =
@@ -14774,7 +14512,6 @@ testOrderLineItem =
     , _toliReturnInfo = Nothing
     , _toliShippingDetails = Nothing
     , _toliProduct = Nothing
-    , _toliUnitTax = Nothing
     }
 
 -- | Number of items ordered.
@@ -14801,11 +14538,6 @@ toliProduct :: Lens' TestOrderLineItem (Maybe TestOrderLineItemProduct)
 toliProduct
   = lens _toliProduct (\ s a -> s{_toliProduct = a})
 
--- | Unit tax for the line item.
-toliUnitTax :: Lens' TestOrderLineItem (Maybe Price)
-toliUnitTax
-  = lens _toliUnitTax (\ s a -> s{_toliUnitTax = a})
-
 instance FromJSON TestOrderLineItem where
         parseJSON
           = withObject "TestOrderLineItem"
@@ -14813,8 +14545,7 @@ instance FromJSON TestOrderLineItem where
                  TestOrderLineItem' <$>
                    (o .:? "quantityOrdered") <*> (o .:? "returnInfo")
                      <*> (o .:? "shippingDetails")
-                     <*> (o .:? "product")
-                     <*> (o .:? "unitTax"))
+                     <*> (o .:? "product"))
 
 instance ToJSON TestOrderLineItem where
         toJSON TestOrderLineItem'{..}
@@ -14823,8 +14554,7 @@ instance ToJSON TestOrderLineItem where
                  [("quantityOrdered" .=) <$> _toliQuantityOrdered,
                   ("returnInfo" .=) <$> _toliReturnInfo,
                   ("shippingDetails" .=) <$> _toliShippingDetails,
-                  ("product" .=) <$> _toliProduct,
-                  ("unitTax" .=) <$> _toliUnitTax])
+                  ("product" .=) <$> _toliProduct])
 
 -- | A batch entry encoding a single non-batch productstatuses request.
 --
@@ -15063,7 +14793,8 @@ orrlirrProductId
   = lens _orrlirrProductId
       (\ s a -> s{_orrlirrProductId = a})
 
--- | The amount of tax to be refunded.
+-- | The amount of tax to be refunded. Optional, but if filled, then
+-- priceAmount must be set. Calculated automatically if not provided.
 orrlirrTaxAmount :: Lens' OrdersReturnRefundLineItemRequest (Maybe Price)
 orrlirrTaxAmount
   = lens _orrlirrTaxAmount
@@ -15071,7 +14802,6 @@ orrlirrTaxAmount
 
 -- | The amount to be refunded. This may be pre-tax or post-tax depending on
 -- the location of the order. If omitted, refundless return is assumed.
--- Optional, but if filled then both priceAmount and taxAmount must be set.
 orrlirrPriceAmount :: Lens' OrdersReturnRefundLineItemRequest (Maybe Price)
 orrlirrPriceAmount
   = lens _orrlirrPriceAmount
@@ -15908,6 +15638,7 @@ data Order =
     , _o1Id              :: !(Maybe Text)
     , _o1Promotions      :: !(Maybe [OrderPromotion])
     , _o1ChannelType     :: !(Maybe Text)
+    , _o1TaxCollector    :: !(Maybe Text)
     , _o1PaymentStatus   :: !(Maybe Text)
     , _o1ShippingCost    :: !(Maybe Price)
     }
@@ -15953,6 +15684,8 @@ data Order =
 --
 -- * 'o1ChannelType'
 --
+-- * 'o1TaxCollector'
+--
 -- * 'o1PaymentStatus'
 --
 -- * 'o1ShippingCost'
@@ -15978,6 +15711,7 @@ order =
     , _o1Id = Nothing
     , _o1Promotions = Nothing
     , _o1ChannelType = Nothing
+    , _o1TaxCollector = Nothing
     , _o1PaymentStatus = Nothing
     , _o1ShippingCost = Nothing
     }
@@ -16088,6 +15822,12 @@ o1ChannelType
   = lens _o1ChannelType
       (\ s a -> s{_o1ChannelType = a})
 
+-- | The party responsible for collecting and remitting taxes.
+o1TaxCollector :: Lens' Order (Maybe Text)
+o1TaxCollector
+  = lens _o1TaxCollector
+      (\ s a -> s{_o1TaxCollector = a})
+
 -- | The status of the payment.
 o1PaymentStatus :: Lens' Order (Maybe Text)
 o1PaymentStatus
@@ -16122,6 +15862,7 @@ instance FromJSON Order where
                      <*> (o .:? "id")
                      <*> (o .:? "promotions" .!= mempty)
                      <*> (o .:? "channelType")
+                     <*> (o .:? "taxCollector")
                      <*> (o .:? "paymentStatus")
                      <*> (o .:? "shippingCost"))
 
@@ -16147,6 +15888,7 @@ instance ToJSON Order where
                   ("id" .=) <$> _o1Id,
                   ("promotions" .=) <$> _o1Promotions,
                   ("channelType" .=) <$> _o1ChannelType,
+                  ("taxCollector" .=) <$> _o1TaxCollector,
                   ("paymentStatus" .=) <$> _o1PaymentStatus,
                   ("shippingCost" .=) <$> _o1ShippingCost])
 
@@ -17078,59 +16820,6 @@ instance ToJSON DatafeedstatusesCustomBatchRequest
         toJSON DatafeedstatusesCustomBatchRequest'{..}
           = object
               (catMaybes [("entries" .=) <$> _dcbrcEntries])
-
---
--- /See:/ 'orderpaymentsNotifyRefundResponse' smart constructor.
-data OrderpaymentsNotifyRefundResponse =
-  OrderpaymentsNotifyRefundResponse'
-    { _onrrKind            :: !Text
-    , _onrrExecutionStatus :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'OrderpaymentsNotifyRefundResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'onrrKind'
---
--- * 'onrrExecutionStatus'
-orderpaymentsNotifyRefundResponse
-    :: OrderpaymentsNotifyRefundResponse
-orderpaymentsNotifyRefundResponse =
-  OrderpaymentsNotifyRefundResponse'
-    { _onrrKind = "content#orderpaymentsNotifyRefundResponse"
-    , _onrrExecutionStatus = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#orderpaymentsNotifyRefundResponse\".
-onrrKind :: Lens' OrderpaymentsNotifyRefundResponse Text
-onrrKind = lens _onrrKind (\ s a -> s{_onrrKind = a})
-
--- | The status of the execution.
-onrrExecutionStatus :: Lens' OrderpaymentsNotifyRefundResponse (Maybe Text)
-onrrExecutionStatus
-  = lens _onrrExecutionStatus
-      (\ s a -> s{_onrrExecutionStatus = a})
-
-instance FromJSON OrderpaymentsNotifyRefundResponse
-         where
-        parseJSON
-          = withObject "OrderpaymentsNotifyRefundResponse"
-              (\ o ->
-                 OrderpaymentsNotifyRefundResponse' <$>
-                   (o .:? "kind" .!=
-                      "content#orderpaymentsNotifyRefundResponse")
-                     <*> (o .:? "executionStatus"))
-
-instance ToJSON OrderpaymentsNotifyRefundResponse
-         where
-        toJSON OrderpaymentsNotifyRefundResponse'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _onrrKind),
-                  ("executionStatus" .=) <$> _onrrExecutionStatus])
 
 --
 -- /See:/ 'ordersInStoreRefundLineItemRequest' smart constructor.

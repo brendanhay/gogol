@@ -1147,7 +1147,8 @@ ppPurchaseTimeMillis
 -- | The type of purchase of the inapp product. This field is only set if
 -- this purchase was not made using the standard in-app billing flow.
 -- Possible values are: - Test (i.e. purchased from a license testing
--- account) - Promo (i.e. purchased using a promo code)
+-- account) - Promo (i.e. purchased using a promo code) - Rewarded (i.e.
+-- from watching a video ad instead of paying)
 ppPurchaseType :: Lens' ProductPurchase (Maybe Int32)
 ppPurchaseType
   = lens _ppPurchaseType

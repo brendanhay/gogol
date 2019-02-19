@@ -20,15 +20,15 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Upload a new execution result. This method is intended for servers which
--- implement the distributed cache independently of the Execution API. As a
--- result, it is OPTIONAL for servers to implement. In order to allow the
--- server to perform access control based on the type of action, and to
--- assist with client debugging, the client MUST first upload the Action
--- that produced the result, along with its Command, into the
--- \`ContentAddressableStorage\`. Errors: * \`UNIMPLEMENTED\`: This method
--- is not supported by the server. * \`RESOURCE_EXHAUSTED\`: There is
--- insufficient storage space to add the entry to the cache.
+-- Upload a new execution result. In order to allow the server to perform
+-- access control based on the type of action, and to assist with client
+-- debugging, the client MUST first upload the Action that produced the
+-- result, along with its Command, into the \`ContentAddressableStorage\`.
+-- Errors: * \`INVALID_ARGUMENT\`: One or more arguments are invalid. *
+-- \`FAILED_PRECONDITION\`: One or more errors occurred in updating the
+-- action result, such as a missing command or action. *
+-- \`RESOURCE_EXHAUSTED\`: There is insufficient storage space to add the
+-- entry to the cache.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actionResults.update@.
 module Network.Google.Resource.RemoteBuildExecution.ActionResults.Update
@@ -79,15 +79,15 @@ type ActionResultsUpdateResource =
                                Put '[JSON]
                                  BuildBazelRemoteExecutionV2ActionResult
 
--- | Upload a new execution result. This method is intended for servers which
--- implement the distributed cache independently of the Execution API. As a
--- result, it is OPTIONAL for servers to implement. In order to allow the
--- server to perform access control based on the type of action, and to
--- assist with client debugging, the client MUST first upload the Action
--- that produced the result, along with its Command, into the
--- \`ContentAddressableStorage\`. Errors: * \`UNIMPLEMENTED\`: This method
--- is not supported by the server. * \`RESOURCE_EXHAUSTED\`: There is
--- insufficient storage space to add the entry to the cache.
+-- | Upload a new execution result. In order to allow the server to perform
+-- access control based on the type of action, and to assist with client
+-- debugging, the client MUST first upload the Action that produced the
+-- result, along with its Command, into the \`ContentAddressableStorage\`.
+-- Errors: * \`INVALID_ARGUMENT\`: One or more arguments are invalid. *
+-- \`FAILED_PRECONDITION\`: One or more errors occurred in updating the
+-- action result, such as a missing command or action. *
+-- \`RESOURCE_EXHAUSTED\`: There is insufficient storage space to add the
+-- entry to the cache.
 --
 -- /See:/ 'actionResultsUpdate' smart constructor.
 data ActionResultsUpdate =

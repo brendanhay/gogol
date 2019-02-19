@@ -555,8 +555,11 @@ module Network.Google.FireStore.Types
     , fieldTransform
     , ftFieldPath
     , ftAppendMissingElements
+    , ftMaximum
+    , ftMinimum
     , ftSetToServerValue
     , ftRemoveAllFromArray
+    , ftIncrement
 
     -- * MapValueFields
     , MapValueFields

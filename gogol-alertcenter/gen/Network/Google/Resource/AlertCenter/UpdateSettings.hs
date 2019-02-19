@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the customer-level settings.
+-- Updates the customer-level settings.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.updateSettings@.
 module Network.Google.Resource.AlertCenter.UpdateSettings
@@ -59,7 +59,7 @@ type UpdateSettingsResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Settings :> Patch '[JSON] Settings
 
--- | Update the customer-level settings.
+-- | Updates the customer-level settings.
 --
 -- /See:/ 'updateSettings' smart constructor.
 data UpdateSettings =

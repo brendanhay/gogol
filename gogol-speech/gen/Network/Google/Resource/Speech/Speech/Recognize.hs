@@ -23,7 +23,7 @@
 -- Performs synchronous speech recognition: receive results after all audio
 -- has been sent and processed.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference> for @speech.speech.recognize@.
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.speech.recognize@.
 module Network.Google.Resource.Speech.Speech.Recognize
     (
     -- * REST Resource

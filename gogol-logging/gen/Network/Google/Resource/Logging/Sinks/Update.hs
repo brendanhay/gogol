@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.sinks.update@.
@@ -66,8 +66,8 @@ type SinksUpdateResource =
                          ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
 
 -- | Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ 'sinksUpdate' smart constructor.

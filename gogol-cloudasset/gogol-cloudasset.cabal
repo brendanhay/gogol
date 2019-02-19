@@ -1,5 +1,5 @@
 name:                  gogol-cloudasset
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Cloud Asset SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -36,6 +36,8 @@ library
     exposed-modules:
           Network.Google.CloudAsset
         , Network.Google.CloudAsset.Types
+        , Network.Google.Resource.CloudAsset.Folders.ExportAssets
+        , Network.Google.Resource.CloudAsset.Folders.Operations.Get
         , Network.Google.Resource.CloudAsset.Organizations.BatchGetAssetsHistory
         , Network.Google.Resource.CloudAsset.Organizations.ExportAssets
         , Network.Google.Resource.CloudAsset.Organizations.Operations.Get
@@ -48,5 +50,5 @@ library
         , Network.Google.CloudAsset.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

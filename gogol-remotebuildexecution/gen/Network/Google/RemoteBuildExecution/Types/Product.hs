@@ -40,8 +40,8 @@ import           Network.Google.RemoteBuildExecution.Types.Sum
 -- to the message in binary encoded form. To ensure consistent hashing,
 -- clients and servers MUST ensure that they serialize messages according
 -- to the following rules, even if there are alternate valid encodings for
--- the same message. - Fields are serialized in tag order. - There are no
--- unknown fields. - There are no duplicate fields. - Fields are serialized
+-- the same message: * Fields are serialized in tag order. * There are no
+-- unknown fields. * There are no duplicate fields. * Fields are serialized
 -- according to the default semantics for their type. Most protocol buffer
 -- implementations will always follow these rules when serializing, but
 -- care should be taken to avoid shortcuts. For instance, concatenating two
@@ -1352,7 +1352,7 @@ gdravcirParent
       (\ s a -> s{_gdravcirParent = a})
 
 -- | ID of the created instance. A valid \`instance_id\` must: be 6-50
--- characters long, contains only lowercase letters, digits, hyphens and
+-- characters long, contain only lowercase letters, digits, hyphens and
 -- underscores, start with a lowercase letter, and end with a lowercase
 -- letter or a digit.
 gdravcirInstanceId :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest (Maybe Text)
@@ -1397,10 +1397,10 @@ instance ToJSON
 -- target, as well as possibly some metadata about the file or directory.
 -- In order to ensure that two equivalent directory trees hash to the same
 -- value, the following restrictions MUST be obeyed when constructing a a
--- \`Directory\`: - Every child in the directory must have a path of
+-- \`Directory\`: * Every child in the directory must have a path of
 -- exactly one segment. Multiple levels of directory hierarchy may not be
--- collapsed. - Each child in the directory must have a unique path segment
--- (file name). - The files, directories and symlinks in the directory must
+-- collapsed. * Each child in the directory must have a unique path segment
+-- (file name). * The files, directories and symlinks in the directory must
 -- each be sorted in lexicographical order by path. The path strings must
 -- be sorted by code point, equivalently, by UTF-8 bytes. A \`Directory\`
 -- that obeys the restrictions is said to be in canonical form. As an
@@ -1629,9 +1629,10 @@ instance ToJSON
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaInstance' smart constructor.
 data GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance'
-    { _gdraviState    :: !(Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceState)
-    , _gdraviLocation :: !(Maybe Text)
-    , _gdraviName     :: !(Maybe Text)
+    { _gdraviState          :: !(Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceState)
+    , _gdraviLocation       :: !(Maybe Text)
+    , _gdraviName           :: !(Maybe Text)
+    , _gdraviLoggingEnabled :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1644,11 +1645,17 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance =
 -- * 'gdraviLocation'
 --
 -- * 'gdraviName'
+--
+-- * 'gdraviLoggingEnabled'
 googleDevtoolsRemotebuildexecutionAdminV1alphaInstance
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
 googleDevtoolsRemotebuildexecutionAdminV1alphaInstance =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance'
-    {_gdraviState = Nothing, _gdraviLocation = Nothing, _gdraviName = Nothing}
+    { _gdraviState = Nothing
+    , _gdraviLocation = Nothing
+    , _gdraviName = Nothing
+    , _gdraviLoggingEnabled = Nothing
+    }
 
 -- | Output only. State of the instance.
 gdraviState :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance (Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceState)
@@ -1670,6 +1677,12 @@ gdraviName :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance (Mayb
 gdraviName
   = lens _gdraviName (\ s a -> s{_gdraviName = a})
 
+-- | Output only. Whether stack driver logging is enabled for the instance.
+gdraviLoggingEnabled :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance (Maybe Bool)
+gdraviLoggingEnabled
+  = lens _gdraviLoggingEnabled
+      (\ s a -> s{_gdraviLoggingEnabled = a})
+
 instance FromJSON
            GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
          where
@@ -1680,7 +1693,8 @@ instance FromJSON
                  GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance'
                    <$>
                    (o .:? "state") <*> (o .:? "location") <*>
-                     (o .:? "name"))
+                     (o .:? "name")
+                     <*> (o .:? "loggingEnabled"))
 
 instance ToJSON
            GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
@@ -1691,7 +1705,8 @@ instance ToJSON
               (catMaybes
                  [("state" .=) <$> _gdraviState,
                   ("location" .=) <$> _gdraviLocation,
-                  ("name" .=) <$> _gdraviName])
+                  ("name" .=) <$> _gdraviName,
+                  ("loggingEnabled" .=) <$> _gdraviLoggingEnabled])
 
 -- | Details for the tool used to call the API.
 --
@@ -2808,6 +2823,7 @@ instance ToJSON
                   ("result" .=) <$> _gdrverResult,
                   ("cachedResult" .=) <$> _gdrverCachedResult])
 
+-- | The full version of a given tool.
 --
 -- /See:/ 'buildBazelSemverSemVer' smart constructor.
 data BuildBazelSemverSemVer =
@@ -2840,21 +2856,27 @@ buildBazelSemverSemVer =
     , _bbssvPrerelease = Nothing
     }
 
+-- | The minor version, e.g. 2 for 10.2.3.
 bbssvMinor :: Lens' BuildBazelSemverSemVer (Maybe Int32)
 bbssvMinor
   = lens _bbssvMinor (\ s a -> s{_bbssvMinor = a}) .
       mapping _Coerce
 
+-- | The major version, e.g 10 for 10.2.3.
 bbssvMajor :: Lens' BuildBazelSemverSemVer (Maybe Int32)
 bbssvMajor
   = lens _bbssvMajor (\ s a -> s{_bbssvMajor = a}) .
       mapping _Coerce
 
+-- | The patch version, e.g 3 for 10.2.3.
 bbssvPatch :: Lens' BuildBazelSemverSemVer (Maybe Int32)
 bbssvPatch
   = lens _bbssvPatch (\ s a -> s{_bbssvPatch = a}) .
       mapping _Coerce
 
+-- | The pre-release version. Either this field or major\/minor\/patch fields
+-- must be filled. They are mutually exclusive. Pre-release versions are
+-- assumed to be earlier than any released versions.
 bbssvPrerelease :: Lens' BuildBazelSemverSemVer (Maybe Text)
 bbssvPrerelease
   = lens _bbssvPrerelease
@@ -3421,6 +3443,48 @@ instance ToJSON
               (catMaybes
                  [("updateEnabled" .=) <$> _bbrevacucUpdateEnabled])
 
+--
+-- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandResultMetadataItem' smart constructor.
+newtype GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem =
+  GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem'
+    { _gdrvcrmiAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdrvcrmiAddtional'
+googleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+    :: HashMap Text JSONValue -- ^ 'gdrvcrmiAddtional'
+    -> GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+googleDevtoolsRemoteworkersV1test2CommandResultMetadataItem pGdrvcrmiAddtional_ =
+  GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem'
+    {_gdrvcrmiAddtional = _Coerce # pGdrvcrmiAddtional_}
+
+-- | Properties of the object. Contains field \'type with type URL.
+gdrvcrmiAddtional :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem (HashMap Text JSONValue)
+gdrvcrmiAddtional
+  = lens _gdrvcrmiAddtional
+      (\ s a -> s{_gdrvcrmiAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+         where
+        parseJSON
+          = withObject
+              "GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem"
+              (\ o ->
+                 GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+         where
+        toJSON = toJSON . _gdrvcrmiAddtional
+
 -- | A request corresponding to a single blob that the client wants to
 -- upload.
 --
@@ -3530,12 +3594,12 @@ instance ToJSON
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandResult' smart constructor.
 data GoogleDevtoolsRemoteworkersV1test2CommandResult =
   GoogleDevtoolsRemoteworkersV1test2CommandResult'
-    { _gdrvcrStatus     :: !(Maybe GoogleRpcStatus)
-    , _gdrvcrOverhead   :: !(Maybe GDuration)
-    , _gdrvcrOutputs    :: !(Maybe GoogleDevtoolsRemoteworkersV1test2Digest)
-    , _gdrvcrExitCode   :: !(Maybe (Textual Int32))
-    , _gdrvcrStatistics :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem])
-    , _gdrvcrDuration   :: !(Maybe GDuration)
+    { _gdrvcrStatus   :: !(Maybe GoogleRpcStatus)
+    , _gdrvcrOverhead :: !(Maybe GDuration)
+    , _gdrvcrOutputs  :: !(Maybe GoogleDevtoolsRemoteworkersV1test2Digest)
+    , _gdrvcrExitCode :: !(Maybe (Textual Int32))
+    , _gdrvcrMetadata :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem])
+    , _gdrvcrDuration :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3551,7 +3615,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandResult =
 --
 -- * 'gdrvcrExitCode'
 --
--- * 'gdrvcrStatistics'
+-- * 'gdrvcrMetadata'
 --
 -- * 'gdrvcrDuration'
 googleDevtoolsRemoteworkersV1test2CommandResult
@@ -3562,7 +3626,7 @@ googleDevtoolsRemoteworkersV1test2CommandResult =
     , _gdrvcrOverhead = Nothing
     , _gdrvcrOutputs = Nothing
     , _gdrvcrExitCode = Nothing
-    , _gdrvcrStatistics = Nothing
+    , _gdrvcrMetadata = Nothing
     , _gdrvcrDuration = Nothing
     }
 
@@ -3600,16 +3664,16 @@ gdrvcrExitCode
       (\ s a -> s{_gdrvcrExitCode = a})
       . mapping _Coerce
 
--- | Implementation-dependent statistics about the task. Both servers and
--- bots may define messages which can be encoded here; bots are free to
--- provide statistics in multiple formats, and servers are free to choose
--- one or more of the values to process and ignore others. In particular,
--- it is *not* considered an error for the bot to provide the server with a
--- field that it doesn\'t know about.
-gdrvcrStatistics :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandResult [GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem]
-gdrvcrStatistics
-  = lens _gdrvcrStatistics
-      (\ s a -> s{_gdrvcrStatistics = a})
+-- | Implementation-dependent metadata about the task. Both servers and bots
+-- may define messages which can be encoded here; bots are free to provide
+-- metadata in multiple formats, and servers are free to choose one or more
+-- of the values to process and ignore others. In particular, it is *not*
+-- considered an error for the bot to provide the server with a field that
+-- it doesn\'t know about.
+gdrvcrMetadata :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandResult [GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem]
+gdrvcrMetadata
+  = lens _gdrvcrMetadata
+      (\ s a -> s{_gdrvcrMetadata = a})
       . _Default
       . _Coerce
 
@@ -3633,7 +3697,7 @@ instance FromJSON
                    (o .:? "status") <*> (o .:? "overhead") <*>
                      (o .:? "outputs")
                      <*> (o .:? "exitCode")
-                     <*> (o .:? "statistics" .!= mempty)
+                     <*> (o .:? "metadata" .!= mempty)
                      <*> (o .:? "duration"))
 
 instance ToJSON
@@ -3647,50 +3711,8 @@ instance ToJSON
                   ("overhead" .=) <$> _gdrvcrOverhead,
                   ("outputs" .=) <$> _gdrvcrOutputs,
                   ("exitCode" .=) <$> _gdrvcrExitCode,
-                  ("statistics" .=) <$> _gdrvcrStatistics,
+                  ("metadata" .=) <$> _gdrvcrMetadata,
                   ("duration" .=) <$> _gdrvcrDuration])
-
---
--- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem' smart constructor.
-newtype GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem =
-  GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem'
-    { _gdrvcrsiAddtional :: HashMap Text JSONValue
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
--- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gdrvcrsiAddtional'
-googleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-    :: HashMap Text JSONValue -- ^ 'gdrvcrsiAddtional'
-    -> GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-googleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem pGdrvcrsiAddtional_ =
-  GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem'
-    {_gdrvcrsiAddtional = _Coerce # pGdrvcrsiAddtional_}
-
--- | Properties of the object. Contains field \'type with type URL.
-gdrvcrsiAddtional :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem (HashMap Text JSONValue)
-gdrvcrsiAddtional
-  = lens _gdrvcrsiAddtional
-      (\ s a -> s{_gdrvcrsiAddtional = a})
-      . _Coerce
-
-instance FromJSON
-           GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-         where
-        parseJSON
-          = withObject
-              "GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem"
-              (\ o ->
-                 GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem'
-                   <$> (parseJSONObject o))
-
-instance ToJSON
-           GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-         where
-        toJSON = toJSON . _gdrvcrsiAddtional
 
 -- | A \`FileNode\` represents a single file and associated metadata.
 --
@@ -5263,16 +5285,18 @@ gdravwcDiskSizeGb
       (\ s a -> s{_gdravwcDiskSizeGb = a})
       . mapping _Coerce
 
--- | Output only. \`reserved=true\` means the worker is reserved and won\'t
--- be preempted.
+-- | Determines whether the worker is reserved (and therefore won\'t be
+-- preempted). See [Preemptible
+-- VMs](https:\/\/cloud.google.com\/preemptible-vms\/) for more details.
 gdravwcReserved :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig (Maybe Bool)
 gdravwcReserved
   = lens _gdravwcReserved
       (\ s a -> s{_gdravwcReserved = a})
 
--- | Required. Machine type of the worker, such as n1-standard-2. See
+-- | Required. Machine type of the worker, such as \`n1-standard-2\`. See
 -- https:\/\/cloud.google.com\/compute\/docs\/machine-types for a list of
--- supported machine types.
+-- supported machine types. Note that \`f1-micro\` and \`g1-small\` are not
+-- yet supported.
 gdravwcMachineType :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig (Maybe Text)
 gdravwcMachineType
   = lens _gdravwcMachineType
@@ -5330,6 +5354,7 @@ data BuildBazelRemoteExecutionV2ExecuteResponse =
     , _bbreverServerLogs   :: !(Maybe BuildBazelRemoteExecutionV2ExecuteResponseServerLogs)
     , _bbreverResult       :: !(Maybe BuildBazelRemoteExecutionV2ActionResult)
     , _bbreverCachedResult :: !(Maybe Bool)
+    , _bbreverMessage      :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5344,6 +5369,8 @@ data BuildBazelRemoteExecutionV2ExecuteResponse =
 -- * 'bbreverResult'
 --
 -- * 'bbreverCachedResult'
+--
+-- * 'bbreverMessage'
 buildBazelRemoteExecutionV2ExecuteResponse
     :: BuildBazelRemoteExecutionV2ExecuteResponse
 buildBazelRemoteExecutionV2ExecuteResponse =
@@ -5352,6 +5379,7 @@ buildBazelRemoteExecutionV2ExecuteResponse =
     , _bbreverServerLogs = Nothing
     , _bbreverResult = Nothing
     , _bbreverCachedResult = Nothing
+    , _bbreverMessage = Nothing
     }
 
 -- | If the status has a code other than \`OK\`, it indicates that the action
@@ -5392,6 +5420,14 @@ bbreverCachedResult
   = lens _bbreverCachedResult
       (\ s a -> s{_bbreverCachedResult = a})
 
+-- | Freeform informational message with details on the execution of the
+-- action that may be displayed to the user upon failure or when requested
+-- explicitly.
+bbreverMessage :: Lens' BuildBazelRemoteExecutionV2ExecuteResponse (Maybe Text)
+bbreverMessage
+  = lens _bbreverMessage
+      (\ s a -> s{_bbreverMessage = a})
+
 instance FromJSON
            BuildBazelRemoteExecutionV2ExecuteResponse
          where
@@ -5402,7 +5438,8 @@ instance FromJSON
                  BuildBazelRemoteExecutionV2ExecuteResponse' <$>
                    (o .:? "status") <*> (o .:? "serverLogs") <*>
                      (o .:? "result")
-                     <*> (o .:? "cachedResult"))
+                     <*> (o .:? "cachedResult")
+                     <*> (o .:? "message"))
 
 instance ToJSON
            BuildBazelRemoteExecutionV2ExecuteResponse
@@ -5414,7 +5451,8 @@ instance ToJSON
                  [("status" .=) <$> _bbreverStatus,
                   ("serverLogs" .=) <$> _bbreverServerLogs,
                   ("result" .=) <$> _bbreverResult,
-                  ("cachedResult" .=) <$> _bbreverCachedResult])
+                  ("cachedResult" .=) <$> _bbreverCachedResult,
+                  ("message" .=) <$> _bbreverMessage])
 
 -- | The request used for \`DeleteInstance\`.
 --
@@ -5819,9 +5857,9 @@ instance ToJSON
 -- | An optional Metadata to attach to any RPC request to tell the server
 -- about an external context of the request. The server may use this for
 -- logging or other purposes. To use it, the client attaches the header to
--- the call using the canonical proto serialization: name:
--- build.bazel.remote.execution.v2.requestmetadata-bin contents: the base64
--- encoded binary RequestMetadata message.
+-- the call using the canonical proto serialization: * name:
+-- \`build.bazel.remote.execution.v2.requestmetadata-bin\` * contents: the
+-- base64 encoded binary \`RequestMetadata\` message.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2RequestMetadata' smart constructor.
 data BuildBazelRemoteExecutionV2RequestMetadata =
@@ -6141,22 +6179,24 @@ bbrevcPlatform
       (\ s a -> s{_bbrevcPlatform = a})
 
 -- | A list of the output directories that the client expects to retrieve
--- from the action. Only the contents of the indicated directories
--- (recursively including the contents of their subdirectories) will be
--- returned, as well as files listed in \`output_files\`. Other files that
--- may be created during command execution are discarded. The paths are
--- relative to the working directory of the action execution. The paths are
--- specified using a single forward slash (\`\/\`) as a path separator,
--- even if the execution platform natively uses a different separator. The
--- path MUST NOT include a trailing slash, nor a leading slash, being a
--- relative path. The special value of empty string is allowed, although
--- not recommended, and can be used to capture the entire working directory
--- tree, including inputs. In order to ensure consistent hashing of the
--- same Action, the output paths MUST be sorted lexicographically by code
--- point (or, equivalently, by UTF-8 bytes). An output directory cannot be
--- duplicated, be a parent of another output directory, be a parent of a
--- listed output file, or have the same path as any of the listed output
--- files.
+-- from the action. Only the listed directories will be returned (an entire
+-- directory structure will be returned as a Tree message digest, see
+-- OutputDirectory), as well as files listed in \`output_files\`. Other
+-- files or directories that may be created during command execution are
+-- discarded. The paths are relative to the working directory of the action
+-- execution. The paths are specified using a single forward slash (\`\/\`)
+-- as a path separator, even if the execution platform natively uses a
+-- different separator. The path MUST NOT include a trailing slash, nor a
+-- leading slash, being a relative path. The special value of empty string
+-- is allowed, although not recommended, and can be used to capture the
+-- entire working directory tree, including inputs. In order to ensure
+-- consistent hashing of the same Action, the output paths MUST be sorted
+-- lexicographically by code point (or, equivalently, by UTF-8 bytes). An
+-- output directory cannot be duplicated or have the same path as any of
+-- the listed output files. Directories leading up to the output
+-- directories (but not the output directories themselves) are created by
+-- the worker prior to execution, even if they are not explicitly part of
+-- the input root.
 bbrevcOutputDirectories :: Lens' BuildBazelRemoteExecutionV2Command [Text]
 bbrevcOutputDirectories
   = lens _bbrevcOutputDirectories
@@ -6185,17 +6225,18 @@ bbrevcArguments
 -- | A list of the output files that the client expects to retrieve from the
 -- action. Only the listed files, as well as directories listed in
 -- \`output_directories\`, will be returned to the client as output. Other
--- files that may be created during command execution are discarded. The
--- paths are relative to the working directory of the action execution. The
--- paths are specified using a single forward slash (\`\/\`) as a path
--- separator, even if the execution platform natively uses a different
--- separator. The path MUST NOT include a trailing slash, nor a leading
--- slash, being a relative path. In order to ensure consistent hashing of
--- the same Action, the output paths MUST be sorted lexicographically by
--- code point (or, equivalently, by UTF-8 bytes). An output file cannot be
--- duplicated, be a parent of another output file, be a child of a listed
--- output directory, or have the same path as any of the listed output
--- directories.
+-- files or directories that may be created during command execution are
+-- discarded. The paths are relative to the working directory of the action
+-- execution. The paths are specified using a single forward slash (\`\/\`)
+-- as a path separator, even if the execution platform natively uses a
+-- different separator. The path MUST NOT include a trailing slash, nor a
+-- leading slash, being a relative path. In order to ensure consistent
+-- hashing of the same Action, the output paths MUST be sorted
+-- lexicographically by code point (or, equivalently, by UTF-8 bytes). An
+-- output file cannot be duplicated, be a parent of another output file, or
+-- have the same path as any of the listed output directories. Directories
+-- leading up to the output files are created by the worker prior to
+-- execution, even if they are not explicitly part of the input root.
 bbrevcOutputFiles :: Lens' BuildBazelRemoteExecutionV2Command [Text]
 bbrevcOutputFiles
   = lens _bbrevcOutputFiles
@@ -6206,7 +6247,7 @@ bbrevcOutputFiles
 -- | The environment variables to set when running the program. The worker
 -- may provide its own default environment variables; these defaults can be
 -- overridden using this field. Additional variables can also be specified.
--- In order to ensure that equivalent \`Command\`s always hash to the same
+-- In order to ensure that equivalent Commands always hash to the same
 -- value, the environment variables MUST be lexicographically sorted by
 -- name. Sorting of strings is done by code point, equivalently, by the
 -- UTF-8 bytes.

@@ -36,9 +36,9 @@
 -- not provided in the request, the server will assign a random name for
 -- this snapshot on the same project as the subscription, conforming to the
 -- [resource name
--- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
--- generated name is populated in the returned Snapshot object. Note that
--- for REST API requests, you must specify a name in the request.
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- The generated name is populated in the returned Snapshot object. Note
+-- that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.create@.
 module Network.Google.Resource.PubSub.Projects.Snapshots.Create
@@ -93,9 +93,9 @@ type ProjectsSnapshotsCreateResource =
 -- not provided in the request, the server will assign a random name for
 -- this snapshot on the same project as the subscription, conforming to the
 -- [resource name
--- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
--- generated name is populated in the returned Snapshot object. Note that
--- for REST API requests, you must specify a name in the request.
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- The generated name is populated in the returned Snapshot object. Note
+-- that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ 'projectsSnapshotsCreate' smart constructor.
 data ProjectsSnapshotsCreate =

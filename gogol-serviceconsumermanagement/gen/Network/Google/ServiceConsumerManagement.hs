@@ -86,6 +86,9 @@ module Network.Google.ServiceConsumerManagement
     , mrdType
     , mrdDescription
 
+    -- ** BackendRulePathTranslation
+    , BackendRulePathTranslation (..)
+
     -- ** DocumentationRule
     , DocumentationRule
     , documentationRule
@@ -157,11 +160,13 @@ module Network.Google.ServiceConsumerManagement
     -- ** BackendRule
     , BackendRule
     , backendRule
+    , brJwtAudience
     , brSelector
     , brMinDeadline
     , brAddress
     , brOperationDeadline
     , brDeadline
+    , brPathTranslation
 
     -- ** SourceContext
     , SourceContext

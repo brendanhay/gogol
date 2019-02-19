@@ -1918,8 +1918,7 @@ textValues
     :: TextValues
 textValues = TextValues' {_tvValues = Nothing}
 
--- | The maximum allowable length for text values is 2048 characters. The
--- maximum number of string elements is 100.
+-- | The maximum allowable length for text values is 2048 characters.
 tvValues :: Lens' TextValues [Text]
 tvValues
   = lens _tvValues (\ s a -> s{_tvValues = a}) .
@@ -2338,7 +2337,6 @@ doubleValues
     :: DoubleValues
 doubleValues = DoubleValues' {_dvValues = Nothing}
 
--- | The maximum number of elements is 100.
 dvValues :: Lens' DoubleValues [Double]
 dvValues
   = lens _dvValues (\ s a -> s{_dvValues = a}) .
@@ -4540,7 +4538,6 @@ dateValues
     :: DateValues
 dateValues = DateValues' {_dValues = Nothing}
 
--- | The maximum number of elements is 100.
 dValues :: Lens' DateValues [Date]
 dValues
   = lens _dValues (\ s a -> s{_dValues = a}) . _Default
@@ -6390,8 +6387,8 @@ dataSource =
 -- source. The value must be unique across all data sources. The value must
 -- only contain alphanumeric characters (a-zA-Z0-9). The value cannot start
 -- with \'google\' and cannot be one of the following: mail, gmail, docs,
--- drive, groups, sites, calendar, hangouts, gplus, keep. Its maximum
--- length is 32 characters.
+-- drive, groups, sites, calendar, hangouts, gplus, keep, people, teams.
+-- Its maximum length is 32 characters.
 dsShortName :: Lens' DataSource (Maybe Text)
 dsShortName
   = lens _dsShortName (\ s a -> s{_dsShortName = a})
@@ -6499,8 +6496,7 @@ htmlValues
     :: HTMLValues
 htmlValues = HTMLValues' {_hvValues = Nothing}
 
--- | The maximum allowable length for html values is 2048 characters. The
--- maximum number of string elements is 100.
+-- | The maximum allowable length for html values is 2048 characters.
 hvValues :: Lens' HTMLValues [Text]
 hvValues
   = lens _hvValues (\ s a -> s{_hvValues = a}) .
@@ -6812,7 +6808,6 @@ objectValues
     :: ObjectValues
 objectValues = ObjectValues' {_ovValues = Nothing}
 
--- | The maximum number of elements is 100.
 ovValues :: Lens' ObjectValues [StructuredDataObject]
 ovValues
   = lens _ovValues (\ s a -> s{_ovValues = a}) .
@@ -7759,8 +7754,7 @@ enumValues
     :: EnumValues
 enumValues = EnumValues' {_evValues = Nothing}
 
--- | The maximum allowable length for string values is 32 characters. The
--- maximum number of elements is 100.
+-- | The maximum allowable length for string values is 32 characters.
 evValues :: Lens' EnumValues [Text]
 evValues
   = lens _evValues (\ s a -> s{_evValues = a}) .
@@ -7893,7 +7887,6 @@ timestampValues
     :: TimestampValues
 timestampValues = TimestampValues' {_tValues = Nothing}
 
--- | The maximum number of elements is 100.
 tValues :: Lens' TimestampValues [UTCTime]
 tValues
   = lens _tValues (\ s a -> s{_tValues = a}) . _Default
@@ -8055,7 +8048,6 @@ integerValues
     :: IntegerValues
 integerValues = IntegerValues' {_ivValues = Nothing}
 
--- | The maximum number of elements is 100.
 ivValues :: Lens' IntegerValues [Int64]
 ivValues
   = lens _ivValues (\ s a -> s{_ivValues = a}) .

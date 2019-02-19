@@ -300,6 +300,7 @@ module Network.Google.Books.Types
     , nKind
     , nBody
     , nCrmExperimentIds
+    , nTimeToExpireMs
     , nPcampaignId
     , nReason
     , nIsDocumentMature

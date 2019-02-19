@@ -74,9 +74,10 @@ instance ToJSON Installation where
 -- /See:/ 'vulnerability' smart constructor.
 data Vulnerability =
   Vulnerability'
-    { _vCvssScore :: !(Maybe (Textual Double))
-    , _vSeverity  :: !(Maybe VulnerabilitySeverity)
-    , _vDetails   :: !(Maybe [Detail])
+    { _vCvssScore      :: !(Maybe (Textual Double))
+    , _vSeverity       :: !(Maybe VulnerabilitySeverity)
+    , _vDetails        :: !(Maybe [Detail])
+    , _vWindowsDetails :: !(Maybe [WindowsDetail])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -89,11 +90,17 @@ data Vulnerability =
 -- * 'vSeverity'
 --
 -- * 'vDetails'
+--
+-- * 'vWindowsDetails'
 vulnerability
     :: Vulnerability
 vulnerability =
   Vulnerability'
-    {_vCvssScore = Nothing, _vSeverity = Nothing, _vDetails = Nothing}
+    { _vCvssScore = Nothing
+    , _vSeverity = Nothing
+    , _vDetails = Nothing
+    , _vWindowsDetails = Nothing
+    }
 
 -- | The CVSS score for this vulnerability.
 vCvssScore :: Lens' Vulnerability (Maybe Double)
@@ -115,13 +122,25 @@ vDetails
       _Default
       . _Coerce
 
+-- | Windows details get their own format because the information format and
+-- model don\'t match a normal detail. Specifically Windows updates are
+-- done as patches, thus Windows vulnerabilities really are a missing
+-- package, rather than a package being at an incorrect version.
+vWindowsDetails :: Lens' Vulnerability [WindowsDetail]
+vWindowsDetails
+  = lens _vWindowsDetails
+      (\ s a -> s{_vWindowsDetails = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON Vulnerability where
         parseJSON
           = withObject "Vulnerability"
               (\ o ->
                  Vulnerability' <$>
                    (o .:? "cvssScore") <*> (o .:? "severity") <*>
-                     (o .:? "details" .!= mempty))
+                     (o .:? "details" .!= mempty)
+                     <*> (o .:? "windowsDetails" .!= mempty))
 
 instance ToJSON Vulnerability where
         toJSON Vulnerability'{..}
@@ -129,7 +148,8 @@ instance ToJSON Vulnerability where
               (catMaybes
                  [("cvssScore" .=) <$> _vCvssScore,
                   ("severity" .=) <$> _vSeverity,
-                  ("details" .=) <$> _vDetails])
+                  ("details" .=) <$> _vDetails,
+                  ("windowsDetails" .=) <$> _vWindowsDetails])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
@@ -1033,6 +1053,47 @@ instance ToJSON Command where
                  [("dir" .=) <$> _cDir, ("args" .=) <$> _cArgs,
                   ("env" .=) <$> _cEnv, ("waitFor" .=) <$> _cWaitFor,
                   ("name" .=) <$> _cName, ("id" .=) <$> _cId])
+
+--
+-- /See:/ 'knowledgeBase' smart constructor.
+data KnowledgeBase =
+  KnowledgeBase'
+    { _kbURL  :: !(Maybe Text)
+    , _kbName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'KnowledgeBase' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'kbURL'
+--
+-- * 'kbName'
+knowledgeBase
+    :: KnowledgeBase
+knowledgeBase = KnowledgeBase' {_kbURL = Nothing, _kbName = Nothing}
+
+-- | A link to the KB in the Windows update catalog -
+-- https:\/\/www.catalog.update.microsoft.com\/
+kbURL :: Lens' KnowledgeBase (Maybe Text)
+kbURL = lens _kbURL (\ s a -> s{_kbURL = a})
+
+-- | The KB name (generally of the form KB[0-9]+ i.e. KB123456).
+kbName :: Lens' KnowledgeBase (Maybe Text)
+kbName = lens _kbName (\ s a -> s{_kbName = a})
+
+instance FromJSON KnowledgeBase where
+        parseJSON
+          = withObject "KnowledgeBase"
+              (\ o ->
+                 KnowledgeBase' <$> (o .:? "url") <*> (o .:? "name"))
+
+instance ToJSON KnowledgeBase where
+        toJSON KnowledgeBase'{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _kbURL, ("name" .=) <$> _kbName])
 
 -- | Request message for \`GetIamPolicy\` method.
 --
@@ -4225,6 +4286,83 @@ instance ToJSON PgpSignedAttestation where
                  [("signature" .=) <$> _psaSignature,
                   ("pgpKeyId" .=) <$> _psaPgpKeyId,
                   ("contentType" .=) <$> _psaContentType])
+
+--
+-- /See:/ 'windowsDetail' smart constructor.
+data WindowsDetail =
+  WindowsDetail'
+    { _wdName        :: !(Maybe Text)
+    , _wdFixingKbs   :: !(Maybe [KnowledgeBase])
+    , _wdCpeURI      :: !(Maybe Text)
+    , _wdDescription :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'WindowsDetail' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wdName'
+--
+-- * 'wdFixingKbs'
+--
+-- * 'wdCpeURI'
+--
+-- * 'wdDescription'
+windowsDetail
+    :: WindowsDetail
+windowsDetail =
+  WindowsDetail'
+    { _wdName = Nothing
+    , _wdFixingKbs = Nothing
+    , _wdCpeURI = Nothing
+    , _wdDescription = Nothing
+    }
+
+-- | Required. The name of the vulnerability.
+wdName :: Lens' WindowsDetail (Maybe Text)
+wdName = lens _wdName (\ s a -> s{_wdName = a})
+
+-- | Required. The names of the KBs which have hotfixes to mitigate this
+-- vulnerability. Note that there may be multiple hotfixes (and thus
+-- multiple KBs) that mitigate a given vulnerability. Currently any listed
+-- kb\'s presence is considered a fix.
+wdFixingKbs :: Lens' WindowsDetail [KnowledgeBase]
+wdFixingKbs
+  = lens _wdFixingKbs (\ s a -> s{_wdFixingKbs = a}) .
+      _Default
+      . _Coerce
+
+-- | Required. The CPE URI in [cpe
+-- format](https:\/\/cpe.mitre.org\/specification\/) in which the
+-- vulnerability manifests. Examples include distro or storage location for
+-- vulnerable jar.
+wdCpeURI :: Lens' WindowsDetail (Maybe Text)
+wdCpeURI = lens _wdCpeURI (\ s a -> s{_wdCpeURI = a})
+
+-- | The description of the vulnerability.
+wdDescription :: Lens' WindowsDetail (Maybe Text)
+wdDescription
+  = lens _wdDescription
+      (\ s a -> s{_wdDescription = a})
+
+instance FromJSON WindowsDetail where
+        parseJSON
+          = withObject "WindowsDetail"
+              (\ o ->
+                 WindowsDetail' <$>
+                   (o .:? "name") <*> (o .:? "fixingKbs" .!= mempty) <*>
+                     (o .:? "cpeUri")
+                     <*> (o .:? "description"))
+
+instance ToJSON WindowsDetail where
+        toJSON WindowsDetail'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _wdName,
+                  ("fixingKbs" .=) <$> _wdFixingKbs,
+                  ("cpeUri" .=) <$> _wdCpeURI,
+                  ("description" .=) <$> _wdDescription])
 
 -- | The notes to create. Max allowed length is 1000.
 --

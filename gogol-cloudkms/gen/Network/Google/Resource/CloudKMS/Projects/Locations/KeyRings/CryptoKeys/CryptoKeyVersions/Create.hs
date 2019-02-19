@@ -161,7 +161,9 @@ instance GoogleRequest
              = CryptoKeyVersion
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate'{..}
           = go _plkrckckvcParent _plkrckckvcXgafv

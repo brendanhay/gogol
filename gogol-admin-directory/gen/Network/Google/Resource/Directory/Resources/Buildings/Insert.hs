@@ -35,6 +35,7 @@ module Network.Google.Resource.Directory.Resources.Buildings.Insert
     -- * Request Lenses
     , rbiPayload
     , rbiCustomer
+    , rbiCoordinatesSource
     ) where
 
 import           Network.Google.Directory.Types
@@ -50,16 +51,20 @@ type ResourcesBuildingsInsertResource =
              Capture "customer" Text :>
                "resources" :>
                  "buildings" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Building :> Post '[JSON] Building
+                   QueryParam "coordinatesSource"
+                     ResourcesBuildingsInsertCoordinatesSource
+                     :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Building :> Post '[JSON] Building
 
 -- | Inserts a building.
 --
 -- /See:/ 'resourcesBuildingsInsert' smart constructor.
 data ResourcesBuildingsInsert =
   ResourcesBuildingsInsert'
-    { _rbiPayload  :: !Building
-    , _rbiCustomer :: !Text
+    { _rbiPayload           :: !Building
+    , _rbiCustomer          :: !Text
+    , _rbiCoordinatesSource :: !ResourcesBuildingsInsertCoordinatesSource
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,13 +75,18 @@ data ResourcesBuildingsInsert =
 -- * 'rbiPayload'
 --
 -- * 'rbiCustomer'
+--
+-- * 'rbiCoordinatesSource'
 resourcesBuildingsInsert
     :: Building -- ^ 'rbiPayload'
     -> Text -- ^ 'rbiCustomer'
     -> ResourcesBuildingsInsert
 resourcesBuildingsInsert pRbiPayload_ pRbiCustomer_ =
   ResourcesBuildingsInsert'
-    {_rbiPayload = pRbiPayload_, _rbiCustomer = pRbiCustomer_}
+    { _rbiPayload = pRbiPayload_
+    , _rbiCustomer = pRbiCustomer_
+    , _rbiCoordinatesSource = RBICSSourceUnspecified
+    }
 
 -- | Multipart request metadata.
 rbiPayload :: Lens' ResourcesBuildingsInsert Building
@@ -90,12 +100,20 @@ rbiCustomer :: Lens' ResourcesBuildingsInsert Text
 rbiCustomer
   = lens _rbiCustomer (\ s a -> s{_rbiCustomer = a})
 
+-- | Source from which Building.coordinates are derived.
+rbiCoordinatesSource :: Lens' ResourcesBuildingsInsert ResourcesBuildingsInsertCoordinatesSource
+rbiCoordinatesSource
+  = lens _rbiCoordinatesSource
+      (\ s a -> s{_rbiCoordinatesSource = a})
+
 instance GoogleRequest ResourcesBuildingsInsert where
         type Rs ResourcesBuildingsInsert = Building
         type Scopes ResourcesBuildingsInsert =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
         requestClient ResourcesBuildingsInsert'{..}
-          = go _rbiCustomer (Just AltJSON) _rbiPayload
+          = go _rbiCustomer (Just _rbiCoordinatesSource)
+              (Just AltJSON)
+              _rbiPayload
               directoryService
           where go
                   = buildClient

@@ -370,6 +370,42 @@ instance FromJSON GroupsListOrderBy where
 instance ToJSON GroupsListOrderBy where
     toJSON = toJSONText
 
+-- | Source from which Building.coordinates are derived.
+data ResourcesBuildingsPatchCoordinatesSource
+    = ClientSpecified
+      -- ^ @CLIENT_SPECIFIED@
+      -- Building.coordinates are set to the coordinates included in the request.
+    | ResolvedFromAddress
+      -- ^ @RESOLVED_FROM_ADDRESS@
+      -- Building.coordinates are automatically populated based on the postal
+      -- address.
+    | SourceUnspecified
+      -- ^ @SOURCE_UNSPECIFIED@
+      -- Defaults to RESOLVED_FROM_ADDRESS if postal address is provided.
+      -- Otherwise, defaults to CLIENT_SPECIFIED if coordinates are provided.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcesBuildingsPatchCoordinatesSource
+
+instance FromHttpApiData ResourcesBuildingsPatchCoordinatesSource where
+    parseQueryParam = \case
+        "CLIENT_SPECIFIED" -> Right ClientSpecified
+        "RESOLVED_FROM_ADDRESS" -> Right ResolvedFromAddress
+        "SOURCE_UNSPECIFIED" -> Right SourceUnspecified
+        x -> Left ("Unable to parse ResourcesBuildingsPatchCoordinatesSource from: " <> x)
+
+instance ToHttpApiData ResourcesBuildingsPatchCoordinatesSource where
+    toQueryParam = \case
+        ClientSpecified -> "CLIENT_SPECIFIED"
+        ResolvedFromAddress -> "RESOLVED_FROM_ADDRESS"
+        SourceUnspecified -> "SOURCE_UNSPECIFIED"
+
+instance FromJSON ResourcesBuildingsPatchCoordinatesSource where
+    parseJSON = parseJSONText "ResourcesBuildingsPatchCoordinatesSource"
+
+instance ToJSON ResourcesBuildingsPatchCoordinatesSource where
+    toJSON = toJSONText
+
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
 data UsersWatchViewType
     = UWVTAdminView
@@ -431,6 +467,42 @@ instance FromJSON UsersGetProjection where
     parseJSON = parseJSONText "UsersGetProjection"
 
 instance ToJSON UsersGetProjection where
+    toJSON = toJSONText
+
+-- | Source from which Building.coordinates are derived.
+data ResourcesBuildingsUpdateCoordinatesSource
+    = RBUCSClientSpecified
+      -- ^ @CLIENT_SPECIFIED@
+      -- Building.coordinates are set to the coordinates included in the request.
+    | RBUCSResolvedFromAddress
+      -- ^ @RESOLVED_FROM_ADDRESS@
+      -- Building.coordinates are automatically populated based on the postal
+      -- address.
+    | RBUCSSourceUnspecified
+      -- ^ @SOURCE_UNSPECIFIED@
+      -- Defaults to RESOLVED_FROM_ADDRESS if postal address is provided.
+      -- Otherwise, defaults to CLIENT_SPECIFIED if coordinates are provided.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcesBuildingsUpdateCoordinatesSource
+
+instance FromHttpApiData ResourcesBuildingsUpdateCoordinatesSource where
+    parseQueryParam = \case
+        "CLIENT_SPECIFIED" -> Right RBUCSClientSpecified
+        "RESOLVED_FROM_ADDRESS" -> Right RBUCSResolvedFromAddress
+        "SOURCE_UNSPECIFIED" -> Right RBUCSSourceUnspecified
+        x -> Left ("Unable to parse ResourcesBuildingsUpdateCoordinatesSource from: " <> x)
+
+instance ToHttpApiData ResourcesBuildingsUpdateCoordinatesSource where
+    toQueryParam = \case
+        RBUCSClientSpecified -> "CLIENT_SPECIFIED"
+        RBUCSResolvedFromAddress -> "RESOLVED_FROM_ADDRESS"
+        RBUCSSourceUnspecified -> "SOURCE_UNSPECIFIED"
+
+instance FromJSON ResourcesBuildingsUpdateCoordinatesSource where
+    parseJSON = parseJSONText "ResourcesBuildingsUpdateCoordinatesSource"
+
+instance ToJSON ResourcesBuildingsUpdateCoordinatesSource where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
@@ -549,6 +621,42 @@ instance FromJSON UsersListSortOrder where
     parseJSON = parseJSONText "UsersListSortOrder"
 
 instance ToJSON UsersListSortOrder where
+    toJSON = toJSONText
+
+-- | Source from which Building.coordinates are derived.
+data ResourcesBuildingsInsertCoordinatesSource
+    = RBICSClientSpecified
+      -- ^ @CLIENT_SPECIFIED@
+      -- Building.coordinates are set to the coordinates included in the request.
+    | RBICSResolvedFromAddress
+      -- ^ @RESOLVED_FROM_ADDRESS@
+      -- Building.coordinates are automatically populated based on the postal
+      -- address.
+    | RBICSSourceUnspecified
+      -- ^ @SOURCE_UNSPECIFIED@
+      -- Defaults to RESOLVED_FROM_ADDRESS if postal address is provided.
+      -- Otherwise, defaults to CLIENT_SPECIFIED if coordinates are provided.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcesBuildingsInsertCoordinatesSource
+
+instance FromHttpApiData ResourcesBuildingsInsertCoordinatesSource where
+    parseQueryParam = \case
+        "CLIENT_SPECIFIED" -> Right RBICSClientSpecified
+        "RESOLVED_FROM_ADDRESS" -> Right RBICSResolvedFromAddress
+        "SOURCE_UNSPECIFIED" -> Right RBICSSourceUnspecified
+        x -> Left ("Unable to parse ResourcesBuildingsInsertCoordinatesSource from: " <> x)
+
+instance ToHttpApiData ResourcesBuildingsInsertCoordinatesSource where
+    toQueryParam = \case
+        RBICSClientSpecified -> "CLIENT_SPECIFIED"
+        RBICSResolvedFromAddress -> "RESOLVED_FROM_ADDRESS"
+        RBICSSourceUnspecified -> "SOURCE_UNSPECIFIED"
+
+instance FromJSON ResourcesBuildingsInsertCoordinatesSource where
+    parseJSON = parseJSONText "ResourcesBuildingsInsertCoordinatesSource"
+
+instance ToJSON ResourcesBuildingsInsertCoordinatesSource where
     toJSON = toJSONText
 
 -- | Whether to return results in ascending or descending order. Only of use

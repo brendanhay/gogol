@@ -22,7 +22,7 @@
 --
 -- Deletes a POSIX account.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.projects.delete@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.projects.delete@.
 module Network.Google.Resource.OSLogin.Users.Projects.Delete
     (
     -- * REST Resource

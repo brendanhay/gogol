@@ -1117,9 +1117,9 @@ rcDiarizationConfig
 -- messages. Valid values are: 8000-48000. 16000 is optimal. For best
 -- results, set the sampling rate of the audio source to 16000 Hz. If
 -- that\'s not possible, use the native sample rate of the audio source
--- (instead of re-sampling). This field is optional for \`FLAC\` and
--- \`WAV\` audio files and required for all other audio formats. For
--- details, see AudioEncoding.
+-- (instead of re-sampling). This field is optional for \`FLAC\`, \`WAV\`.
+-- and \'MP3\' audio files, and is required for all other audio formats.
+-- For details, see AudioEncoding.
 rcSampleRateHertz :: Lens' RecognitionConfig (Maybe Int32)
 rcSampleRateHertz
   = lens _rcSampleRateHertz
@@ -1164,9 +1164,9 @@ rcAudioChannelCount
       (\ s a -> s{_rcAudioChannelCount = a})
       . mapping _Coerce
 
--- | This needs to be set to ‘true’ explicitly and \`audio_channel_count\` >
--- 1 to get each channel recognized separately. The recognition result will
--- contain a \`channel_tag\` field to state which channel that result
+-- | This needs to be set to \`true\` explicitly and \`audio_channel_count\`
+-- > 1 to get each channel recognized separately. The recognition result
+-- will contain a \`channel_tag\` field to state which channel that result
 -- belongs to. If this is not true, we will only recognize the first
 -- channel. The request is billed cumulatively for all channels recognized:
 -- \`audio_channel_count\` multiplied by the length of the audio.

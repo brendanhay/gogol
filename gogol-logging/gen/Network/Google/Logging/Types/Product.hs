@@ -1327,9 +1327,11 @@ instance ToJSON LogEntrySourceLocation where
 data LogExclusion =
   LogExclusion'
     { _leDisabled    :: !(Maybe Bool)
+    , _leUpdateTime  :: !(Maybe DateTime')
     , _leName        :: !(Maybe Text)
     , _leFilter      :: !(Maybe Text)
     , _leDescription :: !(Maybe Text)
+    , _leCreateTime  :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1339,27 +1341,40 @@ data LogExclusion =
 --
 -- * 'leDisabled'
 --
+-- * 'leUpdateTime'
+--
 -- * 'leName'
 --
 -- * 'leFilter'
 --
 -- * 'leDescription'
+--
+-- * 'leCreateTime'
 logExclusion
     :: LogExclusion
 logExclusion =
   LogExclusion'
     { _leDisabled = Nothing
+    , _leUpdateTime = Nothing
     , _leName = Nothing
     , _leFilter = Nothing
     , _leDescription = Nothing
+    , _leCreateTime = Nothing
     }
 
 -- | Optional. If set to True, then this exclusion is disabled and it does
--- not exclude any log entries. You can use exclusions.patch to change the
+-- not exclude any log entries. You can update an exclusion to change the
 -- value of this field.
 leDisabled :: Lens' LogExclusion (Maybe Bool)
 leDisabled
   = lens _leDisabled (\ s a -> s{_leDisabled = a})
+
+-- | Output only. The last update timestamp of the exclusion.This field may
+-- not be present for older exclusions.
+leUpdateTime :: Lens' LogExclusion (Maybe UTCTime)
+leUpdateTime
+  = lens _leUpdateTime (\ s a -> s{_leUpdateTime = a})
+      . mapping _DateTime
 
 -- | Required. A client-assigned identifier, such as
 -- \"load-balancer-exclusion\". Identifiers are limited to 100 characters
@@ -1381,22 +1396,33 @@ leDescription
   = lens _leDescription
       (\ s a -> s{_leDescription = a})
 
+-- | Output only. The creation timestamp of the exclusion.This field may not
+-- be present for older exclusions.
+leCreateTime :: Lens' LogExclusion (Maybe UTCTime)
+leCreateTime
+  = lens _leCreateTime (\ s a -> s{_leCreateTime = a})
+      . mapping _DateTime
+
 instance FromJSON LogExclusion where
         parseJSON
           = withObject "LogExclusion"
               (\ o ->
                  LogExclusion' <$>
-                   (o .:? "disabled") <*> (o .:? "name") <*>
-                     (o .:? "filter")
-                     <*> (o .:? "description"))
+                   (o .:? "disabled") <*> (o .:? "updateTime") <*>
+                     (o .:? "name")
+                     <*> (o .:? "filter")
+                     <*> (o .:? "description")
+                     <*> (o .:? "createTime"))
 
 instance ToJSON LogExclusion where
         toJSON LogExclusion'{..}
           = object
               (catMaybes
                  [("disabled" .=) <$> _leDisabled,
+                  ("updateTime" .=) <$> _leUpdateTime,
                   ("name" .=) <$> _leName, ("filter" .=) <$> _leFilter,
-                  ("description" .=) <$> _leDescription])
+                  ("description" .=) <$> _leDescription,
+                  ("createTime" .=) <$> _leCreateTime])
 
 -- | Result returned from WriteLogEntries. empty
 --
@@ -1432,8 +1458,10 @@ data LogSink =
     , _lsIncludeChildren     :: !(Maybe Bool)
     , _lsOutputVersionFormat :: !(Maybe LogSinkOutputVersionFormat)
     , _lsWriterIdentity      :: !(Maybe Text)
+    , _lsUpdateTime          :: !(Maybe DateTime')
     , _lsName                :: !(Maybe Text)
     , _lsFilter              :: !(Maybe Text)
+    , _lsCreateTime          :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1449,9 +1477,13 @@ data LogSink =
 --
 -- * 'lsWriterIdentity'
 --
+-- * 'lsUpdateTime'
+--
 -- * 'lsName'
 --
 -- * 'lsFilter'
+--
+-- * 'lsCreateTime'
 logSink
     :: LogSink
 logSink =
@@ -1460,8 +1492,10 @@ logSink =
     , _lsIncludeChildren = Nothing
     , _lsOutputVersionFormat = Nothing
     , _lsWriterIdentity = Nothing
+    , _lsUpdateTime = Nothing
     , _lsName = Nothing
     , _lsFilter = Nothing
+    , _lsCreateTime = Nothing
     }
 
 -- | Required. The export destination:
@@ -1470,7 +1504,7 @@ logSink =
 -- \"pubsub.googleapis.com\/projects\/[PROJECT_ID]\/topics\/[TOPIC_ID]\"
 -- The sink\'s writer_identity, set when the sink is created, must have
 -- permission to write to the destination or else the log entries are not
--- exported. For more information, see Exporting Logs With Sinks.
+-- exported. For more information, see Exporting Logs with Sinks.
 lsDestination :: Lens' LogSink (Maybe Text)
 lsDestination
   = lens _lsDestination
@@ -1502,16 +1536,23 @@ lsOutputVersionFormat
 
 -- | Output only. An IAM identity—a service account or group—under which
 -- Logging writes the exported log entries to the sink\'s destination. This
--- field is set by sinks.create and sinks.update, based on the setting of
+-- field is set by sinks.create and sinks.update based on the value of
 -- unique_writer_identity in those methods.Until you grant this identity
 -- write-access to the destination, log entry exports from this sink will
--- fail. For more information, see Granting access for a resource. Consult
+-- fail. For more information, see Granting Access for a Resource. Consult
 -- the destination service\'s documentation to determine the appropriate
 -- IAM roles to assign to the identity.
 lsWriterIdentity :: Lens' LogSink (Maybe Text)
 lsWriterIdentity
   = lens _lsWriterIdentity
       (\ s a -> s{_lsWriterIdentity = a})
+
+-- | Output only. The last update timestamp of the sink.This field may not be
+-- present for older sinks.
+lsUpdateTime :: Lens' LogSink (Maybe UTCTime)
+lsUpdateTime
+  = lens _lsUpdateTime (\ s a -> s{_lsUpdateTime = a})
+      . mapping _DateTime
 
 -- | Required. The client-assigned sink identifier, unique within the
 -- project. Example: \"my-syslog-errors-to-pubsub\". Sink identifiers are
@@ -1528,6 +1569,13 @@ lsName = lens _lsName (\ s a -> s{_lsName = a})
 lsFilter :: Lens' LogSink (Maybe Text)
 lsFilter = lens _lsFilter (\ s a -> s{_lsFilter = a})
 
+-- | Output only. The creation timestamp of the sink.This field may not be
+-- present for older sinks.
+lsCreateTime :: Lens' LogSink (Maybe UTCTime)
+lsCreateTime
+  = lens _lsCreateTime (\ s a -> s{_lsCreateTime = a})
+      . mapping _DateTime
+
 instance FromJSON LogSink where
         parseJSON
           = withObject "LogSink"
@@ -1536,8 +1584,10 @@ instance FromJSON LogSink where
                    (o .:? "destination") <*> (o .:? "includeChildren")
                      <*> (o .:? "outputVersionFormat")
                      <*> (o .:? "writerIdentity")
+                     <*> (o .:? "updateTime")
                      <*> (o .:? "name")
-                     <*> (o .:? "filter"))
+                     <*> (o .:? "filter")
+                     <*> (o .:? "createTime"))
 
 instance ToJSON LogSink where
         toJSON LogSink'{..}
@@ -1548,8 +1598,9 @@ instance ToJSON LogSink where
                   ("outputVersionFormat" .=) <$>
                     _lsOutputVersionFormat,
                   ("writerIdentity" .=) <$> _lsWriterIdentity,
-                  ("name" .=) <$> _lsName,
-                  ("filter" .=) <$> _lsFilter])
+                  ("updateTime" .=) <$> _lsUpdateTime,
+                  ("name" .=) <$> _lsName, ("filter" .=) <$> _lsFilter,
+                  ("createTime" .=) <$> _lsCreateTime])
 
 -- | Output only. A map of user-defined metadata labels.
 --
@@ -2706,6 +2757,7 @@ instance ToJSON LogEntryOperation where
 data LogMetric =
   LogMetric'
     { _lmMetricDescriptor :: !(Maybe MetricDescriptor)
+    , _lmUpdateTime       :: !(Maybe DateTime')
     , _lmName             :: !(Maybe Text)
     , _lmVersion          :: !(Maybe LogMetricVersion)
     , _lmLabelExtractors  :: !(Maybe LogMetricLabelExtractors)
@@ -2713,6 +2765,7 @@ data LogMetric =
     , _lmValueExtractor   :: !(Maybe Text)
     , _lmBucketOptions    :: !(Maybe BucketOptions)
     , _lmDescription      :: !(Maybe Text)
+    , _lmCreateTime       :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2721,6 +2774,8 @@ data LogMetric =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lmMetricDescriptor'
+--
+-- * 'lmUpdateTime'
 --
 -- * 'lmName'
 --
@@ -2735,11 +2790,14 @@ data LogMetric =
 -- * 'lmBucketOptions'
 --
 -- * 'lmDescription'
+--
+-- * 'lmCreateTime'
 logMetric
     :: LogMetric
 logMetric =
   LogMetric'
     { _lmMetricDescriptor = Nothing
+    , _lmUpdateTime = Nothing
     , _lmName = Nothing
     , _lmVersion = Nothing
     , _lmLabelExtractors = Nothing
@@ -2747,6 +2805,7 @@ logMetric =
     , _lmValueExtractor = Nothing
     , _lmBucketOptions = Nothing
     , _lmDescription = Nothing
+    , _lmCreateTime = Nothing
     }
 
 -- | Optional. The metric descriptor associated with the logs-based metric.
@@ -2768,6 +2827,13 @@ lmMetricDescriptor :: Lens' LogMetric (Maybe MetricDescriptor)
 lmMetricDescriptor
   = lens _lmMetricDescriptor
       (\ s a -> s{_lmMetricDescriptor = a})
+
+-- | Output only. The last update timestamp of the metric.This field may not
+-- be present for older metrics.
+lmUpdateTime :: Lens' LogMetric (Maybe UTCTime)
+lmUpdateTime
+  = lens _lmUpdateTime (\ s a -> s{_lmUpdateTime = a})
+      . mapping _DateTime
 
 -- | Required. The client-assigned metric identifier. Examples:
 -- \"error_count\", \"nginx\/requests\".Metric identifiers are limited to
@@ -2846,31 +2912,42 @@ lmDescription
   = lens _lmDescription
       (\ s a -> s{_lmDescription = a})
 
+-- | Output only. The creation timestamp of the metric.This field may not be
+-- present for older metrics.
+lmCreateTime :: Lens' LogMetric (Maybe UTCTime)
+lmCreateTime
+  = lens _lmCreateTime (\ s a -> s{_lmCreateTime = a})
+      . mapping _DateTime
+
 instance FromJSON LogMetric where
         parseJSON
           = withObject "LogMetric"
               (\ o ->
                  LogMetric' <$>
-                   (o .:? "metricDescriptor") <*> (o .:? "name") <*>
-                     (o .:? "version")
+                   (o .:? "metricDescriptor") <*> (o .:? "updateTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "version")
                      <*> (o .:? "labelExtractors")
                      <*> (o .:? "filter")
                      <*> (o .:? "valueExtractor")
                      <*> (o .:? "bucketOptions")
-                     <*> (o .:? "description"))
+                     <*> (o .:? "description")
+                     <*> (o .:? "createTime"))
 
 instance ToJSON LogMetric where
         toJSON LogMetric'{..}
           = object
               (catMaybes
                  [("metricDescriptor" .=) <$> _lmMetricDescriptor,
+                  ("updateTime" .=) <$> _lmUpdateTime,
                   ("name" .=) <$> _lmName,
                   ("version" .=) <$> _lmVersion,
                   ("labelExtractors" .=) <$> _lmLabelExtractors,
                   ("filter" .=) <$> _lmFilter,
                   ("valueExtractor" .=) <$> _lmValueExtractor,
                   ("bucketOptions" .=) <$> _lmBucketOptions,
-                  ("description" .=) <$> _lmDescription])
+                  ("description" .=) <$> _lmDescription,
+                  ("createTime" .=) <$> _lmCreateTime])
 
 -- | An individual entry in a log.
 --
@@ -2989,10 +3066,10 @@ leHTTPRequest
   = lens _leHTTPRequest
       (\ s a -> s{_leHTTPRequest = a})
 
--- | Required. The primary monitored resource associated with this log entry.
--- Example: a log entry that reports a database error would be associated
--- with the monitored resource designating the particular database that
--- reported the error.
+-- | Required. The primary monitored resource associated with this log
+-- entry.Example: a log entry that reports a database error would be
+-- associated with the monitored resource designating the particular
+-- database that reported the error.
 leResource :: Lens' LogEntry (Maybe MonitoredResource)
 leResource
   = lens _leResource (\ s a -> s{_leResource = a})
@@ -3007,7 +3084,7 @@ leInsertId :: Lens' LogEntry (Maybe Text)
 leInsertId
   = lens _leInsertId (\ s a -> s{_leInsertId = a})
 
--- | Output only. Additional metadata about the monitored resource. Only
+-- | Output only. Additional metadata about the monitored resource.Only
 -- k8s_container, k8s_pod, and k8s_node MonitoredResources have this field
 -- populated.
 leMetadata :: Lens' LogEntry (Maybe MonitoredResourceMetadata)
@@ -3041,7 +3118,7 @@ leSourceLocation
       (\ s a -> s{_leSourceLocation = a})
 
 -- | Optional. The sampling decision of the trace associated with the log
--- entry. True means that the trace resource name in the trace field was
+-- entry.True means that the trace resource name in the trace field was
 -- sampled for storage in a trace backend. False means that the trace was
 -- not sampled for storage when this log entry was written, or the sampling
 -- decision was unknown at the time. A non-sampled trace value is still
@@ -3095,8 +3172,8 @@ leTimestamp
 leTrace :: Lens' LogEntry (Maybe Text)
 leTrace = lens _leTrace (\ s a -> s{_leTrace = a})
 
--- | Optional. The span ID within the trace associated with the log entry.
--- For Trace spans, this is the same format that the Trace API v2 uses: a
+-- | Optional. The span ID within the trace associated with the log entry.For
+-- Trace spans, this is the same format that the Trace API v2 uses: a
 -- 16-character hexadecimal encoding of an 8-byte array, such as
 -- '\"000000000000004a\"'.
 leSpanId :: Lens' LogEntry (Maybe Text)

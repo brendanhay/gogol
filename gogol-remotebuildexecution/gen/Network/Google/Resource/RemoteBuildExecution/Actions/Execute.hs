@@ -55,11 +55,14 @@
 -- support a queue), the action could not be started. The client should
 -- retry. * \`INTERNAL\`: An internal error occurred in the execution
 -- engine or the worker. * \`DEADLINE_EXCEEDED\`: The execution timed out.
--- In the case of a missing input or command, the server SHOULD
--- additionally send a PreconditionFailure error detail where, for each
--- requested blob not present in the CAS, there is a \`Violation\` with a
--- \`type\` of \`MISSING\` and a \`subject\` of
--- \`\"blobs\/{hash}\/{size}\"\` indicating the digest of the missing blob.
+-- * \`CANCELLED\`: The operation was cancelled by the client. This status
+-- is only possible if the server implements the Operations API
+-- CancelOperation method, and it was called for the current execution. In
+-- the case of a missing input or command, the server SHOULD additionally
+-- send a PreconditionFailure error detail where, for each requested blob
+-- not present in the CAS, there is a \`Violation\` with a \`type\` of
+-- \`MISSING\` and a \`subject\` of \`\"blobs\/{hash}\/{size}\"\`
+-- indicating the digest of the missing blob.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actions.execute@.
 module Network.Google.Resource.RemoteBuildExecution.Actions.Execute
@@ -135,11 +138,14 @@ type ActionsExecuteResource =
 -- support a queue), the action could not be started. The client should
 -- retry. * \`INTERNAL\`: An internal error occurred in the execution
 -- engine or the worker. * \`DEADLINE_EXCEEDED\`: The execution timed out.
--- In the case of a missing input or command, the server SHOULD
--- additionally send a PreconditionFailure error detail where, for each
--- requested blob not present in the CAS, there is a \`Violation\` with a
--- \`type\` of \`MISSING\` and a \`subject\` of
--- \`\"blobs\/{hash}\/{size}\"\` indicating the digest of the missing blob.
+-- * \`CANCELLED\`: The operation was cancelled by the client. This status
+-- is only possible if the server implements the Operations API
+-- CancelOperation method, and it was called for the current execution. In
+-- the case of a missing input or command, the server SHOULD additionally
+-- send a PreconditionFailure error detail where, for each requested blob
+-- not present in the CAS, there is a \`Violation\` with a \`type\` of
+-- \`MISSING\` and a \`subject\` of \`\"blobs\/{hash}\/{size}\"\`
+-- indicating the digest of the missing blob.
 --
 -- /See:/ 'actionsExecute' smart constructor.
 data ActionsExecute =

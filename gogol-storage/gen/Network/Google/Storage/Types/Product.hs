@@ -96,6 +96,96 @@ instance ToJSON BucketVersioning where
         toJSON BucketVersioning'{..}
           = object (catMaybes [("enabled" .=) <$> _bvEnabled])
 
+-- | Represents an expression text. Example: title: \"User account presence\"
+-- description: \"Determines whether the request has a user account\"
+-- expression: \"size(request.user) > 0\"
+--
+-- /See:/ 'expr' smart constructor.
+data Expr =
+  Expr'
+    { _eLocation    :: !(Maybe Text)
+    , _eKind        :: !Text
+    , _eExpression  :: !(Maybe Text)
+    , _eTitle       :: !(Maybe Text)
+    , _eDescription :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'Expr' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eLocation'
+--
+-- * 'eKind'
+--
+-- * 'eExpression'
+--
+-- * 'eTitle'
+--
+-- * 'eDescription'
+expr
+    :: Expr
+expr =
+  Expr'
+    { _eLocation = Nothing
+    , _eKind = "storage#expr"
+    , _eExpression = Nothing
+    , _eTitle = Nothing
+    , _eDescription = Nothing
+    }
+
+-- | An optional string indicating the location of the expression for error
+-- reporting, e.g. a file name and a position in the file.
+eLocation :: Lens' Expr (Maybe Text)
+eLocation
+  = lens _eLocation (\ s a -> s{_eLocation = a})
+
+-- | The kind of item this is. For storage, this is always storage#expr. This
+-- field is ignored on input.
+eKind :: Lens' Expr Text
+eKind = lens _eKind (\ s a -> s{_eKind = a})
+
+-- | Textual representation of an expression in Common Expression Language
+-- syntax. The application context of the containing message determines
+-- which well-known feature set of CEL is supported.
+eExpression :: Lens' Expr (Maybe Text)
+eExpression
+  = lens _eExpression (\ s a -> s{_eExpression = a})
+
+-- | An optional title for the expression, i.e. a short string describing its
+-- purpose. This can be used e.g. in UIs which allow to enter the
+-- expression.
+eTitle :: Lens' Expr (Maybe Text)
+eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
+
+-- | An optional description of the expression. This is a longer text which
+-- describes the expression, e.g. when hovered over it in a UI.
+eDescription :: Lens' Expr (Maybe Text)
+eDescription
+  = lens _eDescription (\ s a -> s{_eDescription = a})
+
+instance FromJSON Expr where
+        parseJSON
+          = withObject "Expr"
+              (\ o ->
+                 Expr' <$>
+                   (o .:? "location") <*>
+                     (o .:? "kind" .!= "storage#expr")
+                     <*> (o .:? "expression")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON Expr where
+        toJSON Expr'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _eLocation,
+                  Just ("kind" .= _eKind),
+                  ("expression" .=) <$> _eExpression,
+                  ("title" .=) <$> _eTitle,
+                  ("description" .=) <$> _eDescription])
+
 -- | The bucket\'s retention policy. The retention policy enforces a minimum
 -- retention time for all objects contained in the bucket, based on their
 -- creation time. Any attempt to overwrite or delete objects younger than
@@ -1810,7 +1900,7 @@ data PolicyBindingsItem =
   PolicyBindingsItem'
     { _pbiMembers   :: !(Maybe [Text])
     , _pbiRole      :: !(Maybe Text)
-    , _pbiCondition :: !(Maybe JSONValue)
+    , _pbiCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1878,7 +1968,10 @@ pbiMembers
 pbiRole :: Lens' PolicyBindingsItem (Maybe Text)
 pbiRole = lens _pbiRole (\ s a -> s{_pbiRole = a})
 
-pbiCondition :: Lens' PolicyBindingsItem (Maybe JSONValue)
+-- | The condition that is associated with this binding. NOTE: an unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
+pbiCondition :: Lens' PolicyBindingsItem (Maybe Expr)
 pbiCondition
   = lens _pbiCondition (\ s a -> s{_pbiCondition = a})
 
@@ -2897,6 +2990,7 @@ bucketIAMConfiguration
 bucketIAMConfiguration =
   BucketIAMConfiguration' {_bicBucketPolicyOnly = Nothing}
 
+-- | The bucket\'s Bucket Policy Only configuration.
 bicBucketPolicyOnly :: Lens' BucketIAMConfiguration (Maybe BucketIAMConfigurationBucketPolicyOnly)
 bicBucketPolicyOnly
   = lens _bicBucketPolicyOnly
@@ -3175,6 +3269,7 @@ instance FromJSON NotificationCustom_attributes where
 instance ToJSON NotificationCustom_attributes where
         toJSON = toJSON . _ncAddtional
 
+-- | The bucket\'s Bucket Policy Only configuration.
 --
 -- /See:/ 'bucketIAMConfigurationBucketPolicyOnly' smart constructor.
 data BucketIAMConfigurationBucketPolicyOnly =

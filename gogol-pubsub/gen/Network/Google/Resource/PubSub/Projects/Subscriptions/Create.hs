@@ -27,9 +27,9 @@
 -- is not provided in the request, the server will assign a random name for
 -- this subscription on the same project as the topic, conforming to the
 -- [resource name
--- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
--- generated name is populated in the returned Subscription object. Note
--- that for REST API requests, you must specify a name in the request.
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- The generated name is populated in the returned Subscription object.
+-- Note that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
@@ -75,9 +75,9 @@ type ProjectsSubscriptionsCreateResource =
 -- is not provided in the request, the server will assign a random name for
 -- this subscription on the same project as the topic, conforming to the
 -- [resource name
--- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
--- generated name is populated in the returned Subscription object. Note
--- that for REST API requests, you must specify a name in the request.
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- The generated name is populated in the returned Subscription object.
+-- Note that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ 'projectsSubscriptionsCreate' smart constructor.
 data ProjectsSubscriptionsCreate =

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates new feedback for an alert.
+-- Creates new feedback for an alert. Attempting to create a feedback for a
+-- non-existent alert returns \`NOT_FOUND\` error.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.feedback.create@.
 module Network.Google.Resource.AlertCenter.Alerts.Feedback.Create
@@ -63,7 +64,8 @@ type AlertsFeedbackCreateResource =
                            ReqBody '[JSON] AlertFeedback :>
                              Post '[JSON] AlertFeedback
 
--- | Creates new feedback for an alert.
+-- | Creates new feedback for an alert. Attempting to create a feedback for a
+-- non-existent alert returns \`NOT_FOUND\` error.
 --
 -- /See:/ 'alertsFeedbackCreate' smart constructor.
 data AlertsFeedbackCreate =
@@ -130,8 +132,7 @@ afcAccessToken
   = lens _afcAccessToken
       (\ s a -> s{_afcAccessToken = a})
 
--- | Required. The identifier of the alert this feedback belongs to. Returns
--- a \`NOT_FOUND\` error if no such alert.
+-- | Required. The identifier of the alert this feedback belongs to.
 afcAlertId :: Lens' AlertsFeedbackCreate Text
 afcAlertId
   = lens _afcAlertId (\ s a -> s{_afcAlertId = a})

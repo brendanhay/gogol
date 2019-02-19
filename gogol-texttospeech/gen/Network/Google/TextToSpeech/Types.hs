@@ -27,6 +27,7 @@ module Network.Google.TextToSpeech.Types
     , audioConfig
     , acVolumeGainDB
     , acSampleRateHertz
+    , acEffectsProFileId
     , acAudioEncoding
     , acSpeakingRate
     , acPitch

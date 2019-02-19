@@ -2842,16 +2842,19 @@ instance ToJSON ListIngressRulesResponse where
 -- /See:/ 'network' smart constructor.
 data Network =
   Network'
-    { _nSubnetworkName :: !(Maybe Text)
-    , _nForwardedPorts :: !(Maybe [Text])
-    , _nInstanceTag    :: !(Maybe Text)
-    , _nName           :: !(Maybe Text)
+    { _nSessionAffinity :: !(Maybe Bool)
+    , _nSubnetworkName  :: !(Maybe Text)
+    , _nForwardedPorts  :: !(Maybe [Text])
+    , _nInstanceTag     :: !(Maybe Text)
+    , _nName            :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nSessionAffinity'
 --
 -- * 'nSubnetworkName'
 --
@@ -2864,11 +2867,19 @@ network
     :: Network
 network =
   Network'
-    { _nSubnetworkName = Nothing
+    { _nSessionAffinity = Nothing
+    , _nSubnetworkName = Nothing
     , _nForwardedPorts = Nothing
     , _nInstanceTag = Nothing
     , _nName = Nothing
     }
+
+-- | Enable session affinity. Only applicable in the App Engine flexible
+-- environment.
+nSessionAffinity :: Lens' Network (Maybe Bool)
+nSessionAffinity
+  = lens _nSessionAffinity
+      (\ s a -> s{_nSessionAffinity = a})
 
 -- | Google Cloud Platform sub-network where the virtual machines are
 -- created. Specify the short name, not the resource path.If a subnetwork
@@ -2915,8 +2926,9 @@ instance FromJSON Network where
           = withObject "Network"
               (\ o ->
                  Network' <$>
-                   (o .:? "subnetworkName") <*>
-                     (o .:? "forwardedPorts" .!= mempty)
+                   (o .:? "sessionAffinity") <*>
+                     (o .:? "subnetworkName")
+                     <*> (o .:? "forwardedPorts" .!= mempty)
                      <*> (o .:? "instanceTag")
                      <*> (o .:? "name"))
 
@@ -2924,7 +2936,8 @@ instance ToJSON Network where
         toJSON Network'{..}
           = object
               (catMaybes
-                 [("subnetworkName" .=) <$> _nSubnetworkName,
+                 [("sessionAffinity" .=) <$> _nSessionAffinity,
+                  ("subnetworkName" .=) <$> _nSubnetworkName,
                   ("forwardedPorts" .=) <$> _nForwardedPorts,
                   ("instanceTag" .=) <$> _nInstanceTag,
                   ("name" .=) <$> _nName])

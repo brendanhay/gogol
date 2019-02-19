@@ -33,9 +33,9 @@ module Network.Google.Resource.Content.Orders.Cancel
     , OrdersCancel
 
     -- * Request Lenses
-    , o2MerchantId
-    , o2Payload
-    , o2OrderId
+    , oc1MerchantId
+    , oc1Payload
+    , oc1OrderId
     ) where
 
 import           Network.Google.Prelude
@@ -59,9 +59,9 @@ type OrdersCancelResource =
 -- /See:/ 'ordersCancel' smart constructor.
 data OrdersCancel =
   OrdersCancel'
-    { _o2MerchantId :: !(Textual Word64)
-    , _o2Payload    :: !OrdersCancelRequest
-    , _o2OrderId    :: !Text
+    { _oc1MerchantId :: !(Textual Word64)
+    , _oc1Payload    :: !OrdersCancelRequest
+    , _oc1OrderId    :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,47 +69,48 @@ data OrdersCancel =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'o2MerchantId'
+-- * 'oc1MerchantId'
 --
--- * 'o2Payload'
+-- * 'oc1Payload'
 --
--- * 'o2OrderId'
+-- * 'oc1OrderId'
 ordersCancel
-    :: Word64 -- ^ 'o2MerchantId'
-    -> OrdersCancelRequest -- ^ 'o2Payload'
-    -> Text -- ^ 'o2OrderId'
+    :: Word64 -- ^ 'oc1MerchantId'
+    -> OrdersCancelRequest -- ^ 'oc1Payload'
+    -> Text -- ^ 'oc1OrderId'
     -> OrdersCancel
-ordersCancel pO2MerchantId_ pO2Payload_ pO2OrderId_ =
+ordersCancel pOc1MerchantId_ pOc1Payload_ pOc1OrderId_ =
   OrdersCancel'
-    { _o2MerchantId = _Coerce # pO2MerchantId_
-    , _o2Payload = pO2Payload_
-    , _o2OrderId = pO2OrderId_
+    { _oc1MerchantId = _Coerce # pOc1MerchantId_
+    , _oc1Payload = pOc1Payload_
+    , _oc1OrderId = pOc1OrderId_
     }
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
-o2MerchantId :: Lens' OrdersCancel Word64
-o2MerchantId
-  = lens _o2MerchantId (\ s a -> s{_o2MerchantId = a})
+oc1MerchantId :: Lens' OrdersCancel Word64
+oc1MerchantId
+  = lens _oc1MerchantId
+      (\ s a -> s{_oc1MerchantId = a})
       . _Coerce
 
 -- | Multipart request metadata.
-o2Payload :: Lens' OrdersCancel OrdersCancelRequest
-o2Payload
-  = lens _o2Payload (\ s a -> s{_o2Payload = a})
+oc1Payload :: Lens' OrdersCancel OrdersCancelRequest
+oc1Payload
+  = lens _oc1Payload (\ s a -> s{_oc1Payload = a})
 
 -- | The ID of the order to cancel.
-o2OrderId :: Lens' OrdersCancel Text
-o2OrderId
-  = lens _o2OrderId (\ s a -> s{_o2OrderId = a})
+oc1OrderId :: Lens' OrdersCancel Text
+oc1OrderId
+  = lens _oc1OrderId (\ s a -> s{_oc1OrderId = a})
 
 instance GoogleRequest OrdersCancel where
         type Rs OrdersCancel = OrdersCancelResponse
         type Scopes OrdersCancel =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCancel'{..}
-          = go _o2MerchantId _o2OrderId (Just AltJSON)
-              _o2Payload
+          = go _oc1MerchantId _oc1OrderId (Just AltJSON)
+              _oc1Payload
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy OrdersCancelResource)

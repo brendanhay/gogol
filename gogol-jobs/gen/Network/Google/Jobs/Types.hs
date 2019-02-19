@@ -48,6 +48,13 @@ module Network.Google.Jobs.Types
     -- * CompensationFilterType
     , CompensationFilterType (..)
 
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
     -- * RequestMetadata
     , RequestMetadata
     , requestMetadata
@@ -122,6 +129,15 @@ module Network.Google.Jobs.Types
     , lLocationType
     , lPostalAddress
     , lRadiusInMiles
+
+    -- * Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
 
     -- * Empty
     , Empty
@@ -209,6 +225,11 @@ module Network.Google.Jobs.Types
     , HistogramQueryResultHistogram
     , histogramQueryResultHistogram
     , hqrhAddtional
+
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
 
     -- * HistogramQueryResult
     , HistogramQueryResult
@@ -448,6 +469,11 @@ module Network.Google.Jobs.Types
     , ceDescription
     , ceUnit
 
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
+
     -- * CompensationRange
     , CompensationRange
     , compensationRange
@@ -495,6 +521,11 @@ module Network.Google.Jobs.Types
     , numericBucketingOption
     , nboBucketBounds
     , nboRequiresMinMax
+
+    -- * OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
 
     -- * SearchJobsRequestSearchMode
     , SearchJobsRequestSearchMode (..)

@@ -126,6 +126,10 @@ data TestMatrixInvalidMatrixDetails
     | NoPackageName
       -- ^ @NO_PACKAGE_NAME@
       -- The APK manifest does not declare a package name.
+    | InvalidPackageName
+      -- ^ @INVALID_PACKAGE_NAME@
+      -- The APK application ID (aka package name) is invalid. See also
+      -- https:\/\/developer.android.com\/studio\/build\/application-id
     | TestSameAsApp
       -- ^ @TEST_SAME_AS_APP@
       -- The test package and app package are the same.
@@ -228,6 +232,7 @@ instance FromHttpApiData TestMatrixInvalidMatrixDetails where
         "MALFORMED_TEST_APK" -> Right MalformedTestAPK
         "NO_MANIFEST" -> Right NoManifest
         "NO_PACKAGE_NAME" -> Right NoPackageName
+        "INVALID_PACKAGE_NAME" -> Right InvalidPackageName
         "TEST_SAME_AS_APP" -> Right TestSameAsApp
         "NO_INSTRUMENTATION" -> Right NoInstrumentation
         "NO_SIGNATURE" -> Right NoSignature
@@ -262,6 +267,7 @@ instance ToHttpApiData TestMatrixInvalidMatrixDetails where
         MalformedTestAPK -> "MALFORMED_TEST_APK"
         NoManifest -> "NO_MANIFEST"
         NoPackageName -> "NO_PACKAGE_NAME"
+        InvalidPackageName -> "INVALID_PACKAGE_NAME"
         TestSameAsApp -> "TEST_SAME_AS_APP"
         NoInstrumentation -> "NO_INSTRUMENTATION"
         NoSignature -> "NO_SIGNATURE"

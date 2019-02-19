@@ -38,6 +38,7 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Delete
     , pgdAccessToken
     , pgdUploadType
     , pgdName
+    , pgdRecursive
     , pgdCallback
     ) where
 
@@ -53,8 +54,9 @@ type ProjectsGroupsDeleteResource =
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                 QueryParam "recursive" Bool :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes an existing group.
 --
@@ -66,6 +68,7 @@ data ProjectsGroupsDelete =
     , _pgdAccessToken    :: !(Maybe Text)
     , _pgdUploadType     :: !(Maybe Text)
     , _pgdName           :: !Text
+    , _pgdRecursive      :: !(Maybe Bool)
     , _pgdCallback       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -84,6 +87,8 @@ data ProjectsGroupsDelete =
 --
 -- * 'pgdName'
 --
+-- * 'pgdRecursive'
+--
 -- * 'pgdCallback'
 projectsGroupsDelete
     :: Text -- ^ 'pgdName'
@@ -95,6 +100,7 @@ projectsGroupsDelete pPgdName_ =
     , _pgdAccessToken = Nothing
     , _pgdUploadType = Nothing
     , _pgdName = pPgdName_
+    , _pgdRecursive = Nothing
     , _pgdCallback = Nothing
     }
 
@@ -125,6 +131,13 @@ pgdUploadType
 pgdName :: Lens' ProjectsGroupsDelete Text
 pgdName = lens _pgdName (\ s a -> s{_pgdName = a})
 
+-- | If this field is true, then the request means to delete a group with all
+-- its descendants. Otherwise, the request means to delete a group only
+-- when it has no descendants. The default value is false.
+pgdRecursive :: Lens' ProjectsGroupsDelete (Maybe Bool)
+pgdRecursive
+  = lens _pgdRecursive (\ s a -> s{_pgdRecursive = a})
+
 -- | JSONP
 pgdCallback :: Lens' ProjectsGroupsDelete (Maybe Text)
 pgdCallback
@@ -139,6 +152,7 @@ instance GoogleRequest ProjectsGroupsDelete where
           = go _pgdName _pgdXgafv _pgdUploadProtocol
               _pgdAccessToken
               _pgdUploadType
+              _pgdRecursive
               _pgdCallback
               (Just AltJSON)
               monitoringService

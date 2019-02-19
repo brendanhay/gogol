@@ -2456,6 +2456,156 @@ instance ToJSON UserIm where
                   ("type" .=) <$> _uiType,
                   ("customType" .=) <$> _uiCustomType])
 
+-- | JSON template for the postal address of a building in Directory API.
+--
+-- /See:/ 'buildingAddress' smart constructor.
+data BuildingAddress =
+  BuildingAddress'
+    { _baLanguageCode       :: !(Maybe Text)
+    , _baRegionCode         :: !(Maybe Text)
+    , _baSublocality        :: !(Maybe Text)
+    , _baPostalCode         :: !(Maybe Text)
+    , _baLocality           :: !(Maybe Text)
+    , _baAdministrativeArea :: !(Maybe Text)
+    , _baAddressLines       :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'BuildingAddress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'baLanguageCode'
+--
+-- * 'baRegionCode'
+--
+-- * 'baSublocality'
+--
+-- * 'baPostalCode'
+--
+-- * 'baLocality'
+--
+-- * 'baAdministrativeArea'
+--
+-- * 'baAddressLines'
+buildingAddress
+    :: BuildingAddress
+buildingAddress =
+  BuildingAddress'
+    { _baLanguageCode = Nothing
+    , _baRegionCode = Nothing
+    , _baSublocality = Nothing
+    , _baPostalCode = Nothing
+    , _baLocality = Nothing
+    , _baAdministrativeArea = Nothing
+    , _baAddressLines = Nothing
+    }
+
+-- | Optional. BCP-47 language code of the contents of this address (if
+-- known). This is often the UI language of the input form or is expected
+-- to match one of the languages used in the address\' country\/region, or
+-- their transliterated equivalents. This can affect formatting in certain
+-- countries, but is not critical to the correctness of the data and will
+-- never affect any validation or other non-formatting related operations.
+-- If this value is not known, it should be omitted (rather than specifying
+-- a possibly incorrect default). Examples: \"zh-Hant\", \"ja\",
+-- \"ja-Latn\", \"en\".
+baLanguageCode :: Lens' BuildingAddress (Maybe Text)
+baLanguageCode
+  = lens _baLanguageCode
+      (\ s a -> s{_baLanguageCode = a})
+
+-- | Required. CLDR region code of the country\/region of the address. This
+-- is never inferred and it is up to the user to ensure the value is
+-- correct. See http:\/\/cldr.unicode.org\/ and
+-- http:\/\/www.unicode.org\/cldr\/charts\/30\/supplemental\/territory_information.html
+baRegionCode :: Lens' BuildingAddress (Maybe Text)
+baRegionCode
+  = lens _baRegionCode (\ s a -> s{_baRegionCode = a})
+
+-- | Optional. Sublocality of the address. For example, this can be
+-- neighborhoods, boroughs, districts.
+baSublocality :: Lens' BuildingAddress (Maybe Text)
+baSublocality
+  = lens _baSublocality
+      (\ s a -> s{_baSublocality = a})
+
+-- | Optional. Postal code of the address. Not all countries use or require
+-- postal codes to be present, but where they are used, they may trigger
+-- additional validation with other parts of the address (e.g. state\/zip
+-- validation in the U.S.A.).
+baPostalCode :: Lens' BuildingAddress (Maybe Text)
+baPostalCode
+  = lens _baPostalCode (\ s a -> s{_baPostalCode = a})
+
+-- | Optional. Generally refers to the city\/town portion of the address.
+-- Examples: US city, IT comune, UK post town. In regions of the world
+-- where localities are not well defined or do not fit into this structure
+-- well, leave locality empty and use addressLines.
+baLocality :: Lens' BuildingAddress (Maybe Text)
+baLocality
+  = lens _baLocality (\ s a -> s{_baLocality = a})
+
+-- | Optional. Highest administrative subdivision which is used for postal
+-- addresses of a country or region. For example, this can be a state, a
+-- province, an oblast, or a prefecture. Specifically, for Spain this is
+-- the province and not the autonomous community (e.g. \"Barcelona\" and
+-- not \"Catalonia\"). Many countries don\'t use an administrative area in
+-- postal addresses. E.g. in Switzerland this should be left unpopulated.
+baAdministrativeArea :: Lens' BuildingAddress (Maybe Text)
+baAdministrativeArea
+  = lens _baAdministrativeArea
+      (\ s a -> s{_baAdministrativeArea = a})
+
+-- | Unstructured address lines describing the lower levels of an address.
+-- Because values in addressLines do not have type information and may
+-- sometimes contain multiple values in a single field (e.g. \"Austin,
+-- TX\"), it is important that the line order is clear. The order of
+-- address lines should be \"envelope order\" for the country\/region of
+-- the address. In places where this can vary (e.g. Japan),
+-- address_language is used to make it explicit (e.g. \"ja\" for
+-- large-to-small ordering and \"ja-Latn\" or \"en\" for small-to-large).
+-- This way, the most specific line of an address can be selected based on
+-- the language. The minimum permitted structural representation of an
+-- address consists of a regionCode with all remaining information placed
+-- in the addressLines. It would be possible to format such an address very
+-- approximately without geocoding, but no semantic reasoning could be made
+-- about any of the address components until it was at least partially
+-- resolved. Creating an address only containing a regionCode and
+-- addressLines, and then geocoding is the recommended way to handle
+-- completely unstructured addresses (as opposed to guessing which parts of
+-- the address should be localities or administrative areas).
+baAddressLines :: Lens' BuildingAddress [Text]
+baAddressLines
+  = lens _baAddressLines
+      (\ s a -> s{_baAddressLines = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BuildingAddress where
+        parseJSON
+          = withObject "BuildingAddress"
+              (\ o ->
+                 BuildingAddress' <$>
+                   (o .:? "languageCode") <*> (o .:? "regionCode") <*>
+                     (o .:? "sublocality")
+                     <*> (o .:? "postalCode")
+                     <*> (o .:? "locality")
+                     <*> (o .:? "administrativeArea")
+                     <*> (o .:? "addressLines" .!= mempty))
+
+instance ToJSON BuildingAddress where
+        toJSON BuildingAddress'{..}
+          = object
+              (catMaybes
+                 [("languageCode" .=) <$> _baLanguageCode,
+                  ("regionCode" .=) <$> _baRegionCode,
+                  ("sublocality" .=) <$> _baSublocality,
+                  ("postalCode" .=) <$> _baPostalCode,
+                  ("locality" .=) <$> _baLocality,
+                  ("administrativeArea" .=) <$> _baAdministrativeArea,
+                  ("addressLines" .=) <$> _baAddressLines])
+
 -- | JSON response template for List tokens operation in Directory API.
 --
 -- /See:/ 'tokens' smart constructor.
@@ -3429,6 +3579,7 @@ data Building =
     { _buiEtags        :: !(Maybe Text)
     , _buiKind         :: !Text
     , _buiBuildingId   :: !(Maybe Text)
+    , _buiAddress      :: !(Maybe BuildingAddress)
     , _buiCoordinates  :: !(Maybe BuildingCoordinates)
     , _buiBuildingName :: !(Maybe Text)
     , _buiFloorNames   :: !(Maybe [Text])
@@ -3446,6 +3597,8 @@ data Building =
 --
 -- * 'buiBuildingId'
 --
+-- * 'buiAddress'
+--
 -- * 'buiCoordinates'
 --
 -- * 'buiBuildingName'
@@ -3460,6 +3613,7 @@ building =
     { _buiEtags = Nothing
     , _buiKind = "admin#directory#resources#buildings#Building"
     , _buiBuildingId = Nothing
+    , _buiAddress = Nothing
     , _buiCoordinates = Nothing
     , _buiBuildingName = Nothing
     , _buiFloorNames = Nothing
@@ -3480,6 +3634,12 @@ buiBuildingId :: Lens' Building (Maybe Text)
 buiBuildingId
   = lens _buiBuildingId
       (\ s a -> s{_buiBuildingId = a})
+
+-- | The postal address of the building. See PostalAddress for details. Note
+-- that only a single address line and region code are required.
+buiAddress :: Lens' Building (Maybe BuildingAddress)
+buiAddress
+  = lens _buiAddress (\ s a -> s{_buiAddress = a})
 
 -- | The geographic coordinates of the center of the building, expressed as
 -- latitude and longitude in decimal degrees.
@@ -3522,6 +3682,7 @@ instance FromJSON Building where
                      (o .:? "kind" .!=
                         "admin#directory#resources#buildings#Building")
                      <*> (o .:? "buildingId")
+                     <*> (o .:? "address")
                      <*> (o .:? "coordinates")
                      <*> (o .:? "buildingName")
                      <*> (o .:? "floorNames" .!= mempty)
@@ -3534,6 +3695,7 @@ instance ToJSON Building where
                  [("etags" .=) <$> _buiEtags,
                   Just ("kind" .= _buiKind),
                   ("buildingId" .=) <$> _buiBuildingId,
+                  ("address" .=) <$> _buiAddress,
                   ("coordinates" .=) <$> _buiCoordinates,
                   ("buildingName" .=) <$> _buiBuildingName,
                   ("floorNames" .=) <$> _buiFloorNames,
@@ -3981,9 +4143,11 @@ data User =
     , _useIncludeInGlobalAddressList :: !(Maybe Bool)
     , _useGender                     :: !(Maybe JSONValue)
     , _usePhones                     :: !(Maybe JSONValue)
+    , _useRecoveryEmail              :: !(Maybe Text)
     , _useName                       :: !(Maybe UserName)
     , _usePassword                   :: !(Maybe Text)
     , _useEmails                     :: !(Maybe JSONValue)
+    , _useRecoveryPhone              :: !(Maybe Text)
     , _useIms                        :: !(Maybe JSONValue)
     , _useKeywords                   :: !(Maybe JSONValue)
     , _useIsAdmin                    :: !(Maybe Bool)
@@ -4058,11 +4222,15 @@ data User =
 --
 -- * 'usePhones'
 --
+-- * 'useRecoveryEmail'
+--
 -- * 'useName'
 --
 -- * 'usePassword'
 --
 -- * 'useEmails'
+--
+-- * 'useRecoveryPhone'
 --
 -- * 'useIms'
 --
@@ -4123,9 +4291,11 @@ user =
     , _useIncludeInGlobalAddressList = Nothing
     , _useGender = Nothing
     , _usePhones = Nothing
+    , _useRecoveryEmail = Nothing
     , _useName = Nothing
     , _usePassword = Nothing
     , _useEmails = Nothing
+    , _useRecoveryPhone = Nothing
     , _useIms = Nothing
     , _useKeywords = Nothing
     , _useIsAdmin = Nothing
@@ -4284,6 +4454,12 @@ usePhones :: Lens' User (Maybe JSONValue)
 usePhones
   = lens _usePhones (\ s a -> s{_usePhones = a})
 
+-- | Recovery email of the user.
+useRecoveryEmail :: Lens' User (Maybe Text)
+useRecoveryEmail
+  = lens _useRecoveryEmail
+      (\ s a -> s{_useRecoveryEmail = a})
+
 -- | User\'s name
 useName :: Lens' User (Maybe UserName)
 useName = lens _useName (\ s a -> s{_useName = a})
@@ -4296,6 +4472,12 @@ usePassword
 useEmails :: Lens' User (Maybe JSONValue)
 useEmails
   = lens _useEmails (\ s a -> s{_useEmails = a})
+
+-- | Recovery phone of the user.
+useRecoveryPhone :: Lens' User (Maybe Text)
+useRecoveryPhone
+  = lens _useRecoveryPhone
+      (\ s a -> s{_useRecoveryPhone = a})
 
 useIms :: Lens' User (Maybe JSONValue)
 useIms = lens _useIms (\ s a -> s{_useIms = a})
@@ -4402,9 +4584,11 @@ instance FromJSON User where
                      <*> (o .:? "includeInGlobalAddressList")
                      <*> (o .:? "gender")
                      <*> (o .:? "phones")
+                     <*> (o .:? "recoveryEmail")
                      <*> (o .:? "name")
                      <*> (o .:? "password")
                      <*> (o .:? "emails")
+                     <*> (o .:? "recoveryPhone")
                      <*> (o .:? "ims")
                      <*> (o .:? "keywords")
                      <*> (o .:? "isAdmin")
@@ -4453,9 +4637,12 @@ instance ToJSON User where
                     _useIncludeInGlobalAddressList,
                   ("gender" .=) <$> _useGender,
                   ("phones" .=) <$> _usePhones,
+                  ("recoveryEmail" .=) <$> _useRecoveryEmail,
                   ("name" .=) <$> _useName,
                   ("password" .=) <$> _usePassword,
-                  ("emails" .=) <$> _useEmails, ("ims" .=) <$> _useIms,
+                  ("emails" .=) <$> _useEmails,
+                  ("recoveryPhone" .=) <$> _useRecoveryPhone,
+                  ("ims" .=) <$> _useIms,
                   ("keywords" .=) <$> _useKeywords,
                   ("isAdmin" .=) <$> _useIsAdmin,
                   ("isEnrolledIn2Sv" .=) <$> _useIsEnrolledIn2Sv,
@@ -6215,7 +6402,7 @@ upaPrimary :: Lens' UserPosixAccount (Maybe Bool)
 upaPrimary
   = lens _upaPrimary (\ s a -> s{_upaPrimary = a})
 
--- | A POSIX account field identifier. (Read-only)
+-- | A POSIX account field identifier.
 upaAccountId :: Lens' UserPosixAccount (Maybe Text)
 upaAccountId
   = lens _upaAccountId (\ s a -> s{_upaAccountId = a})

@@ -615,6 +615,40 @@ instance FromJSON PolicyOpenNetworkConfiguration
 instance ToJSON PolicyOpenNetworkConfiguration where
         toJSON = toJSON . _poncAddtional
 
+-- | An action to launch an app.
+--
+-- /See:/ 'launchAppAction' smart constructor.
+newtype LaunchAppAction =
+  LaunchAppAction'
+    { _laaPackageName :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'LaunchAppAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'laaPackageName'
+launchAppAction
+    :: LaunchAppAction
+launchAppAction = LaunchAppAction' {_laaPackageName = Nothing}
+
+-- | Package name of app to be launched
+laaPackageName :: Lens' LaunchAppAction (Maybe Text)
+laaPackageName
+  = lens _laaPackageName
+      (\ s a -> s{_laaPackageName = a})
+
+instance FromJSON LaunchAppAction where
+        parseJSON
+          = withObject "LaunchAppAction"
+              (\ o -> LaunchAppAction' <$> (o .:? "packageName"))
+
+instance ToJSON LaunchAppAction where
+        toJSON LaunchAppAction'{..}
+          = object
+              (catMaybes [("packageName" .=) <$> _laaPackageName])
+
 -- | Hardware status. Temperatures may be compared to the temperature
 -- thresholds available in hardwareInfo to determine hardware health.
 --
@@ -3764,6 +3798,7 @@ data Policy =
     , _pEnsureVerifyAppsEnabled            :: !(Maybe Bool)
     , _pSetWallpaperDisabled               :: !(Maybe Bool)
     , _pVPNConfigDisabled                  :: !(Maybe Bool)
+    , _pSetupActions                       :: !(Maybe [SetupAction])
     , _pOpenNetworkConfiguration           :: !(Maybe PolicyOpenNetworkConfiguration)
     , _pModifyAccountsDisabled             :: !(Maybe Bool)
     , _pBlockApplicationsEnabled           :: !(Maybe Bool)
@@ -3893,6 +3928,8 @@ data Policy =
 --
 -- * 'pVPNConfigDisabled'
 --
+-- * 'pSetupActions'
+--
 -- * 'pOpenNetworkConfiguration'
 --
 -- * 'pModifyAccountsDisabled'
@@ -3996,6 +4033,7 @@ policy =
     , _pEnsureVerifyAppsEnabled = Nothing
     , _pSetWallpaperDisabled = Nothing
     , _pVPNConfigDisabled = Nothing
+    , _pSetupActions = Nothing
     , _pOpenNetworkConfiguration = Nothing
     , _pModifyAccountsDisabled = Nothing
     , _pBlockApplicationsEnabled = Nothing
@@ -4262,8 +4300,7 @@ pKioskCustomLauncherEnabled
   = lens _pKioskCustomLauncherEnabled
       (\ s a -> s{_pKioskCustomLauncherEnabled = a})
 
--- | Whether Wi-Fi networks defined in Open Network Configuration are locked
--- so they can\'t be edited by the user.
+-- | DEPRECATED - Use wifi_config_disabled.
 pWifiConfigsLockdownEnabled :: Lens' Policy (Maybe Bool)
 pWifiConfigsLockdownEnabled
   = lens _pWifiConfigsLockdownEnabled
@@ -4364,6 +4401,14 @@ pVPNConfigDisabled :: Lens' Policy (Maybe Bool)
 pVPNConfigDisabled
   = lens _pVPNConfigDisabled
       (\ s a -> s{_pVPNConfigDisabled = a})
+
+-- | Actions to take during the setup process.
+pSetupActions :: Lens' Policy [SetupAction]
+pSetupActions
+  = lens _pSetupActions
+      (\ s a -> s{_pSetupActions = a})
+      . _Default
+      . _Coerce
 
 -- | Network configuration for the device. See configure networks for more
 -- information.
@@ -4605,6 +4650,7 @@ instance FromJSON Policy where
                      <*> (o .:? "ensureVerifyAppsEnabled")
                      <*> (o .:? "setWallpaperDisabled")
                      <*> (o .:? "vpnConfigDisabled")
+                     <*> (o .:? "setupActions" .!= mempty)
                      <*> (o .:? "openNetworkConfiguration")
                      <*> (o .:? "modifyAccountsDisabled")
                      <*> (o .:? "blockApplicationsEnabled")
@@ -4716,6 +4762,7 @@ instance ToJSON Policy where
                   ("setWallpaperDisabled" .=) <$>
                     _pSetWallpaperDisabled,
                   ("vpnConfigDisabled" .=) <$> _pVPNConfigDisabled,
+                  ("setupActions" .=) <$> _pSetupActions,
                   ("openNetworkConfiguration" .=) <$>
                     _pOpenNetworkConfiguration,
                   ("modifyAccountsDisabled" .=) <$>
@@ -5757,3 +5804,60 @@ instance ToJSON ApplicationPermission where
                  [("name" .=) <$> _apName,
                   ("description" .=) <$> _apDescription,
                   ("permissionId" .=) <$> _apPermissionId])
+
+-- | An action executed during setup.
+--
+-- /See:/ 'setupAction' smart constructor.
+data SetupAction =
+  SetupAction'
+    { _saLaunchApp   :: !(Maybe LaunchAppAction)
+    , _saTitle       :: !(Maybe UserFacingMessage)
+    , _saDescription :: !(Maybe UserFacingMessage)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'SetupAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'saLaunchApp'
+--
+-- * 'saTitle'
+--
+-- * 'saDescription'
+setupAction
+    :: SetupAction
+setupAction =
+  SetupAction'
+    {_saLaunchApp = Nothing, _saTitle = Nothing, _saDescription = Nothing}
+
+-- | An action to launch an app.
+saLaunchApp :: Lens' SetupAction (Maybe LaunchAppAction)
+saLaunchApp
+  = lens _saLaunchApp (\ s a -> s{_saLaunchApp = a})
+
+-- | Title of this action.
+saTitle :: Lens' SetupAction (Maybe UserFacingMessage)
+saTitle = lens _saTitle (\ s a -> s{_saTitle = a})
+
+-- | Description of this action.
+saDescription :: Lens' SetupAction (Maybe UserFacingMessage)
+saDescription
+  = lens _saDescription
+      (\ s a -> s{_saDescription = a})
+
+instance FromJSON SetupAction where
+        parseJSON
+          = withObject "SetupAction"
+              (\ o ->
+                 SetupAction' <$>
+                   (o .:? "launchApp") <*> (o .:? "title") <*>
+                     (o .:? "description"))
+
+instance ToJSON SetupAction where
+        toJSON SetupAction'{..}
+          = object
+              (catMaybes
+                 [("launchApp" .=) <$> _saLaunchApp,
+                  ("title" .=) <$> _saTitle,
+                  ("description" .=) <$> _saDescription])

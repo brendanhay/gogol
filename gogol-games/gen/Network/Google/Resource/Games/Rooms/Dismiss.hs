@@ -77,7 +77,8 @@ rdRoomId = lens _rdRoomId (\ s a -> s{_rdRoomId = a})
 instance GoogleRequest RoomsDismiss where
         type Rs RoomsDismiss = ()
         type Scopes RoomsDismiss =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient RoomsDismiss'{..}
           = go _rdRoomId (Just AltJSON) gamesService
           where go

@@ -1540,8 +1540,7 @@ instance ToJSON InterconnectOutageNotificationSource where
     toJSON = toJSONText
 
 -- | Type of link requested. This field indicates speed of each of the links
--- in the bundle, not the entire bundle. Only 10G per link is allowed for a
--- dedicated interconnect. Options: Ethernet_10G_LR
+-- in the bundle, not the entire bundle.
 data InterconnectLinkType
     = LinkTypeEthernet10GLr
       -- ^ @LINK_TYPE_ETHERNET_10G_LR@
@@ -5332,7 +5331,9 @@ instance ToJSON AddressesScopedListWarningCode where
 -- successfully created and the status is set to READY. Possible values are
 -- FAILED, PENDING, or READY.
 data ImageStatus
-    = ISFailed
+    = ISDeleting
+      -- ^ @DELETING@
+    | ISFailed
       -- ^ @FAILED@
     | ISPending
       -- ^ @PENDING@
@@ -5344,6 +5345,7 @@ instance Hashable ImageStatus
 
 instance FromHttpApiData ImageStatus where
     parseQueryParam = \case
+        "DELETING" -> Right ISDeleting
         "FAILED" -> Right ISFailed
         "PENDING" -> Right ISPending
         "READY" -> Right ISReady
@@ -5351,6 +5353,7 @@ instance FromHttpApiData ImageStatus where
 
 instance ToHttpApiData ImageStatus where
     toQueryParam = \case
+        ISDeleting -> "DELETING"
         ISFailed -> "FAILED"
         ISPending -> "PENDING"
         ISReady -> "READY"
@@ -7072,6 +7075,8 @@ instance ToJSON TargetVPNGatewaysScopedListWarningCode where
 data DiskStatus
     = DSCreating
       -- ^ @CREATING@
+    | DSDeleting
+      -- ^ @DELETING@
     | DSFailed
       -- ^ @FAILED@
     | DSReady
@@ -7085,6 +7090,7 @@ instance Hashable DiskStatus
 instance FromHttpApiData DiskStatus where
     parseQueryParam = \case
         "CREATING" -> Right DSCreating
+        "DELETING" -> Right DSDeleting
         "FAILED" -> Right DSFailed
         "READY" -> Right DSReady
         "RESTORING" -> Right DSRestoring
@@ -7093,6 +7099,7 @@ instance FromHttpApiData DiskStatus where
 instance ToHttpApiData DiskStatus where
     toQueryParam = \case
         DSCreating -> "CREATING"
+        DSDeleting -> "DELETING"
         DSFailed -> "FAILED"
         DSReady -> "READY"
         DSRestoring -> "RESTORING"
@@ -7565,6 +7572,32 @@ instance FromJSON AttachedDiskMode where
     parseJSON = parseJSONText "AttachedDiskMode"
 
 instance ToJSON AttachedDiskMode where
+    toJSON = toJSONText
+
+data InstanceGroupManagerUpdatePolicyType
+    = Opportunistic
+      -- ^ @OPPORTUNISTIC@
+    | Proactive
+      -- ^ @PROACTIVE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupManagerUpdatePolicyType
+
+instance FromHttpApiData InstanceGroupManagerUpdatePolicyType where
+    parseQueryParam = \case
+        "OPPORTUNISTIC" -> Right Opportunistic
+        "PROACTIVE" -> Right Proactive
+        x -> Left ("Unable to parse InstanceGroupManagerUpdatePolicyType from: " <> x)
+
+instance ToHttpApiData InstanceGroupManagerUpdatePolicyType where
+    toQueryParam = \case
+        Opportunistic -> "OPPORTUNISTIC"
+        Proactive -> "PROACTIVE"
+
+instance FromJSON InstanceGroupManagerUpdatePolicyType where
+    parseJSON = parseJSONText "InstanceGroupManagerUpdatePolicyType"
+
+instance ToJSON InstanceGroupManagerUpdatePolicyType where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -10391,6 +10424,8 @@ data QuotaMetric
       -- ^ @IN_USE_ADDRESSES@
     | InUseBackupSchedules
       -- ^ @IN_USE_BACKUP_SCHEDULES@
+    | InUseSnapshotSchedules
+      -- ^ @IN_USE_SNAPSHOT_SCHEDULES@
     | LocalSsdTotalGb
       -- ^ @LOCAL_SSD_TOTAL_GB@
     | Networks
@@ -10504,6 +10539,7 @@ instance FromHttpApiData QuotaMetric where
         "INTERNAL_ADDRESSES" -> Right InternalAddresses
         "IN_USE_ADDRESSES" -> Right InUseAddresses
         "IN_USE_BACKUP_SCHEDULES" -> Right InUseBackupSchedules
+        "IN_USE_SNAPSHOT_SCHEDULES" -> Right InUseSnapshotSchedules
         "LOCAL_SSD_TOTAL_GB" -> Right LocalSsdTotalGb
         "NETWORKS" -> Right Networks
         "NVIDIA_K80_GPUS" -> Right NvidiaK80Gpus
@@ -10573,6 +10609,7 @@ instance ToHttpApiData QuotaMetric where
         InternalAddresses -> "INTERNAL_ADDRESSES"
         InUseAddresses -> "IN_USE_ADDRESSES"
         InUseBackupSchedules -> "IN_USE_BACKUP_SCHEDULES"
+        InUseSnapshotSchedules -> "IN_USE_SNAPSHOT_SCHEDULES"
         LocalSsdTotalGb -> "LOCAL_SSD_TOTAL_GB"
         Networks -> "NETWORKS"
         NvidiaK80Gpus -> "NVIDIA_K80_GPUS"
@@ -14575,6 +14612,36 @@ instance FromJSON RegionInstanceGroupListWarningCode where
 instance ToJSON RegionInstanceGroupListWarningCode where
     toJSON = toJSONText
 
+-- | [Output Only] The status of this InterconnectLocation. If the status is
+-- AVAILABLE, new Interconnects may be provisioned in this
+-- InterconnectLocation. Otherwise, no new Interconnects may be
+-- provisioned.
+data InterconnectLocationStatus
+    = Available
+      -- ^ @AVAILABLE@
+    | Closed
+      -- ^ @CLOSED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InterconnectLocationStatus
+
+instance FromHttpApiData InterconnectLocationStatus where
+    parseQueryParam = \case
+        "AVAILABLE" -> Right Available
+        "CLOSED" -> Right Closed
+        x -> Left ("Unable to parse InterconnectLocationStatus from: " <> x)
+
+instance ToHttpApiData InterconnectLocationStatus where
+    toQueryParam = \case
+        Available -> "AVAILABLE"
+        Closed -> "CLOSED"
+
+instance FromJSON InterconnectLocationStatus where
+    parseJSON = parseJSONText "InterconnectLocationStatus"
+
+instance ToJSON InterconnectLocationStatus where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstanceGroupsScopedListWarningCode
@@ -15819,6 +15886,38 @@ instance FromJSON ForwardingRuleNetworkTier where
     parseJSON = parseJSONText "ForwardingRuleNetworkTier"
 
 instance ToJSON ForwardingRuleNetworkTier where
+    toJSON = toJSONText
+
+-- | Minimal action to be taken on an instance. You can specify either
+-- RESTART to restart existing instances or REPLACE to delete and create
+-- new instances from the target template. If you specify a RESTART, the
+-- Updater will attempt to perform that action only. However, if the
+-- Updater determines that the minimal action you specify is not enough to
+-- perform the update, it might perform a more disruptive action.
+data InstanceGroupManagerUpdatePolicyMinimalAction
+    = Replace
+      -- ^ @REPLACE@
+    | Restart
+      -- ^ @RESTART@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupManagerUpdatePolicyMinimalAction
+
+instance FromHttpApiData InstanceGroupManagerUpdatePolicyMinimalAction where
+    parseQueryParam = \case
+        "REPLACE" -> Right Replace
+        "RESTART" -> Right Restart
+        x -> Left ("Unable to parse InstanceGroupManagerUpdatePolicyMinimalAction from: " <> x)
+
+instance ToHttpApiData InstanceGroupManagerUpdatePolicyMinimalAction where
+    toQueryParam = \case
+        Replace -> "REPLACE"
+        Restart -> "RESTART"
+
+instance FromJSON InstanceGroupManagerUpdatePolicyMinimalAction where
+    parseJSON = parseJSONText "InstanceGroupManagerUpdatePolicyMinimalAction"
+
+instance ToJSON InstanceGroupManagerUpdatePolicyMinimalAction where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine

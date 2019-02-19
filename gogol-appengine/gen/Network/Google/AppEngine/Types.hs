@@ -344,6 +344,7 @@ module Network.Google.AppEngine.Types
     -- * Network
     , Network
     , network
+    , nSessionAffinity
     , nSubnetworkName
     , nForwardedPorts
     , nInstanceTag

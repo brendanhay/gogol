@@ -154,8 +154,8 @@ gsPageToken :: Lens' GroupsSearch (Maybe Text)
 gsPageToken
   = lens _gsPageToken (\ s a -> s{_gsPageToken = a})
 
--- | Maximum number of Groups to return. View | Default | Maximum
--- -----|---------|-------- BASIC | 200 | 1000 FULL | 50 | 500
+-- | Maximum number of groups to return. View | Default | Maximum ----- |
+-- ------- | ------- BASIC | 200 | 1000 FULL | 50 | 500
 gsPageSize :: Lens' GroupsSearch (Maybe Int32)
 gsPageSize
   = lens _gsPageSize (\ s a -> s{_gsPageSize = a}) .

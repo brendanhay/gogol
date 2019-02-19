@@ -162,9 +162,9 @@ paetpPayload :: Lens' ProjectsAgentEntityTypesPatch GoogleCloudDialogflowV2Entit
 paetpPayload
   = lens _paetpPayload (\ s a -> s{_paetpPayload = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of the entity type. Format:
--- \`projects\/\/agent\/entityTypes\/\`.
+-- | The unique identifier of the entity type. Required for
+-- EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes
+-- methods. Format: \`projects\/\/agent\/entityTypes\/\`.
 paetpName :: Lens' ProjectsAgentEntityTypesPatch Text
 paetpName
   = lens _paetpName (\ s a -> s{_paetpName = a})

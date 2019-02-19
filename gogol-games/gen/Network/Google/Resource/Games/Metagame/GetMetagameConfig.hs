@@ -63,7 +63,8 @@ instance GoogleRequest MetagameGetMetagameConfig
          where
         type Rs MetagameGetMetagameConfig = MetagameConfig
         type Scopes MetagameGetMetagameConfig =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient MetagameGetMetagameConfig'{}
           = go (Just AltJSON) gamesService
           where go

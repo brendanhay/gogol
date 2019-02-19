@@ -158,7 +158,7 @@ groPageToken
   = lens _groPageToken (\ s a -> s{_groPageToken = a})
 
 -- | Maximum number of Memberships to return. View | Default | Maximum
--- -----|---------|-------- BASIC | 200 | 1000 FULL | 50 | 500
+-- -----|---------|-------- BASIC| 200 | 1000 FULL | 50 | 500
 groPageSize :: Lens' GroupsMembershipsList (Maybe Int32)
 groPageSize
   = lens _groPageSize (\ s a -> s{_groPageSize = a}) .

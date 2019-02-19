@@ -102,7 +102,8 @@ instance GoogleRequest EventsListDefinitions where
         type Rs EventsListDefinitions =
              EventDefinitionListResponse
         type Scopes EventsListDefinitions =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient EventsListDefinitions'{..}
           = go _eldLanguage _eldPageToken _eldMaxResults
               (Just AltJSON)

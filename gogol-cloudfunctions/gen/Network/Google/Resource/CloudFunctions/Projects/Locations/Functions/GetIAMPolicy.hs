@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a resource. Returns an empty policy
--- if the resource exists and does not have a policy set.
+-- Gets the IAM access control policy for a function. Returns an empty
+-- policy if the function exists and does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.getIamPolicy@.
 module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GetIAMPolicy
@@ -57,8 +57,8 @@ type ProjectsLocationsFunctionsGetIAMPolicyResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
--- | Gets the access control policy for a resource. Returns an empty policy
--- if the resource exists and does not have a policy set.
+-- | Gets the IAM access control policy for a function. Returns an empty
+-- policy if the function exists and does not have a policy set.
 --
 -- /See:/ 'projectsLocationsFunctionsGetIAMPolicy' smart constructor.
 data ProjectsLocationsFunctionsGetIAMPolicy =

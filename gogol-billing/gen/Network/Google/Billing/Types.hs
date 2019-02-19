@@ -53,6 +53,7 @@ module Network.Google.Billing.Types
     -- * Service
     , Service
     , service
+    , sBusinessEntityName
     , sName
     , sDisplayName
     , sServiceId

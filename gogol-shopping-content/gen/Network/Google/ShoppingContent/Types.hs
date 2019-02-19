@@ -126,8 +126,8 @@ module Network.Google.ShoppingContent.Types
     -- * Amount
     , Amount
     , amount
-    , aPretax
-    , aTax
+    , aTaxAmount
+    , aPriceAmount
 
     -- * AccountsAuthInfoResponse
     , AccountsAuthInfoResponse
@@ -150,7 +150,7 @@ module Network.Google.ShoppingContent.Types
     , uiUnitPriceTaxes
     , uiPromotions
     , uiAdditionalCharges
-    , uiUnitPricePretax
+    , uiUnitPrice
 
     -- * PosSale
     , PosSale
@@ -210,12 +210,6 @@ module Network.Google.ShoppingContent.Types
     , datafeedsCustomBatchRequest
     , dEntries
 
-    -- * OrderpaymentsNotifyChargeRequest
-    , OrderpaymentsNotifyChargeRequest
-    , orderpaymentsNotifyChargeRequest
-    , oncrInvoiceIds
-    , oncrChargeState
-
     -- * OrdersCancelTestOrderByCustomerResponse
     , OrdersCancelTestOrderByCustomerResponse
     , ordersCancelTestOrderByCustomerResponse
@@ -226,12 +220,6 @@ module Network.Google.ShoppingContent.Types
     , liaOnDisplayToOrderSettings
     , lodtosStatus
     , lodtosShippingCostPolicyURL
-
-    -- * OrderpaymentsNotifyAuthDeclinedResponse
-    , OrderpaymentsNotifyAuthDeclinedResponse
-    , orderpaymentsNotifyAuthDeclinedResponse
-    , onadrKind
-    , onadrExecutionStatus
 
     -- * AccountAddress
     , AccountAddress
@@ -546,7 +534,10 @@ module Network.Google.ShoppingContent.Types
     , AccountUser
     , accountUser
     , auAdmin
+    , auPaymentsManager
+    , auOrderManager
     , auEmailAddress
+    , auPaymentsAnalyst
 
     -- * AccountCustomerService
     , AccountCustomerService
@@ -679,12 +670,6 @@ module Network.Google.ShoppingContent.Types
     , accKind
     , accResources
 
-    -- * OrderpaymentsNotifyRefundRequest
-    , OrderpaymentsNotifyRefundRequest
-    , orderpaymentsNotifyRefundRequest
-    , onrrInvoiceIds
-    , onrrRefundState
-
     -- * AccountBusinessInformation
     , AccountBusinessInformation
     , accountBusinessInformation
@@ -742,12 +727,6 @@ module Network.Google.ShoppingContent.Types
     , accountsCustomBatchResponse
     , acbrcEntries
     , acbrcKind
-
-    -- * OrderpaymentsNotifyAuthApprovedRequest
-    , OrderpaymentsNotifyAuthApprovedRequest
-    , orderpaymentsNotifyAuthApprovedRequest
-    , onaarAuthAmountPretax
-    , onaarAuthAmountTax
 
     -- * OrdersUpdateLineItemShippingDetailsRequest
     , OrdersUpdateLineItemShippingDetailsRequest
@@ -961,12 +940,6 @@ module Network.Google.ShoppingContent.Types
     , pcbrecSale
     , pcbrecBatchId
 
-    -- * OrderpaymentsNotifyAuthApprovedResponse
-    , OrderpaymentsNotifyAuthApprovedResponse
-    , orderpaymentsNotifyAuthApprovedResponse
-    , onaarKind
-    , onaarExecutionStatus
-
     -- * OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
     , OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
     , orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
@@ -1026,6 +999,13 @@ module Network.Google.ShoppingContent.Types
     , ssPostalCodeGroups
     , ssAccountId
     , ssServices
+
+    -- * ProductAmount
+    , ProductAmount
+    , productAmount
+    , paRemittedTaxAmount
+    , paTaxAmount
+    , paPriceAmount
 
     -- * PostalCodeRange
     , PostalCodeRange
@@ -1248,12 +1228,12 @@ module Network.Google.ShoppingContent.Types
     , orderPromotion
     , opShortTitle
     , opAppliedItems
-    , opPretaxValue
     , opMerchantPromotionId
     , opSubtype
     , opTitle
     , opType
     , opApplicableItems
+    , opPriceValue
     , opTaxValue
     , opFunder
 
@@ -1294,17 +1274,6 @@ module Network.Google.ShoppingContent.Types
     , isProductTotal
     , isAdditionalChargeSummaries
     , isPromotionSummaries
-
-    -- * OrderpaymentsNotifyChargeResponse
-    , OrderpaymentsNotifyChargeResponse
-    , orderpaymentsNotifyChargeResponse
-    , oncrKind
-    , oncrExecutionStatus
-
-    -- * OrderpaymentsNotifyAuthDeclinedRequest
-    , OrderpaymentsNotifyAuthDeclinedRequest
-    , orderpaymentsNotifyAuthDeclinedRequest
-    , onadrDeclineReason
 
     -- * PosListResponse
     , PosListResponse
@@ -1600,7 +1569,6 @@ module Network.Google.ShoppingContent.Types
     , toliReturnInfo
     , toliShippingDetails
     , toliProduct
-    , toliUnitTax
 
     -- * ProductstatusesCustomBatchRequestEntry
     , ProductstatusesCustomBatchRequestEntry
@@ -1734,6 +1702,7 @@ module Network.Google.ShoppingContent.Types
     , o1Id
     , o1Promotions
     , o1ChannelType
+    , o1TaxCollector
     , o1PaymentStatus
     , o1ShippingCost
 
@@ -1831,12 +1800,6 @@ module Network.Google.ShoppingContent.Types
     , DatafeedstatusesCustomBatchRequest
     , datafeedstatusesCustomBatchRequest
     , dcbrcEntries
-
-    -- * OrderpaymentsNotifyRefundResponse
-    , OrderpaymentsNotifyRefundResponse
-    , orderpaymentsNotifyRefundResponse
-    , onrrKind
-    , onrrExecutionStatus
 
     -- * OrdersInStoreRefundLineItemRequest
     , OrdersInStoreRefundLineItemRequest

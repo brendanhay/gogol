@@ -169,7 +169,9 @@ instance GoogleRequest
              = TestIAMPermissionsResponse
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions'{..}
           = go _plkrcktipResource _plkrcktipXgafv

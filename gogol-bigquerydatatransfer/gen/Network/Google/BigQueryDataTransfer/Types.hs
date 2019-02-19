@@ -85,6 +85,13 @@ module Network.Google.BigQueryDataTransfer.Types
     , Empty
     , empty
 
+    -- * ScheduleOptions
+    , ScheduleOptions
+    , scheduleOptions
+    , soStartTime
+    , soDisableAutoScheduling
+    , soEndTime
+
     -- * TransferRunState
     , TransferRunState (..)
 
@@ -213,6 +220,7 @@ module Network.Google.BigQueryDataTransfer.Types
     , transferConfig
     , tcState
     , tcSchedule
+    , tcScheduleOptions
     , tcDisabled
     , tcDataSourceId
     , tcParams

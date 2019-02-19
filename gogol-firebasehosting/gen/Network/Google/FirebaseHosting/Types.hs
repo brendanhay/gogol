@@ -165,6 +165,12 @@ module Network.Google.FirebaseHosting.Types
     , rGlob
     , rStatusCode
 
+    -- * CloudRunRewrite
+    , CloudRunRewrite
+    , cloudRunRewrite
+    , crrServiceId
+    , crrRegion
+
     -- * DomainRedirect
     , DomainRedirect
     , domainRedirect
@@ -176,6 +182,7 @@ module Network.Google.FirebaseHosting.Types
     , rewrite
     , rewFunction
     , rewPath
+    , rewRun
     , rewGlob
     , rewDynamicLinks
 

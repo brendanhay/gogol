@@ -305,15 +305,18 @@ instance ToJSON BillingAccount where
 -- /See:/ 'service' smart constructor.
 data Service =
   Service'
-    { _sName        :: !(Maybe Text)
-    , _sDisplayName :: !(Maybe Text)
-    , _sServiceId   :: !(Maybe Text)
+    { _sBusinessEntityName :: !(Maybe Text)
+    , _sName               :: !(Maybe Text)
+    , _sDisplayName        :: !(Maybe Text)
+    , _sServiceId          :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sBusinessEntityName'
 --
 -- * 'sName'
 --
@@ -323,7 +326,19 @@ data Service =
 service
     :: Service
 service =
-  Service' {_sName = Nothing, _sDisplayName = Nothing, _sServiceId = Nothing}
+  Service'
+    { _sBusinessEntityName = Nothing
+    , _sName = Nothing
+    , _sDisplayName = Nothing
+    , _sServiceId = Nothing
+    }
+
+-- | The business under which the service is offered. Ex.
+-- \"businessEntities\/GCP\", \"businessEntities\/Maps\"
+sBusinessEntityName :: Lens' Service (Maybe Text)
+sBusinessEntityName
+  = lens _sBusinessEntityName
+      (\ s a -> s{_sBusinessEntityName = a})
 
 -- | The resource name for the service. Example: \"services\/DA34-426B-A397\"
 sName :: Lens' Service (Maybe Text)
@@ -344,14 +359,16 @@ instance FromJSON Service where
           = withObject "Service"
               (\ o ->
                  Service' <$>
-                   (o .:? "name") <*> (o .:? "displayName") <*>
-                     (o .:? "serviceId"))
+                   (o .:? "businessEntityName") <*> (o .:? "name") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "serviceId"))
 
 instance ToJSON Service where
         toJSON Service'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _sName,
+                 [("businessEntityName" .=) <$> _sBusinessEntityName,
+                  ("name" .=) <$> _sName,
                   ("displayName" .=) <$> _sDisplayName,
                   ("serviceId" .=) <$> _sServiceId])
 

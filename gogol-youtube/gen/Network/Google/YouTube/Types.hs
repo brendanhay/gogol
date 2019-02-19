@@ -70,7 +70,6 @@ module Network.Google.YouTube.Types
     , ChannelAuditDetails
     , channelAuditDetails
     , cadContentIdClaimsGoodStanding
-    , cadOverallGoodStanding
     , cadCopyrightStrikesGoodStanding
     , cadCommUnityGuidelinesGoodStanding
 
@@ -459,6 +458,13 @@ module Network.Google.YouTube.Types
     , acdpliPlayListId
     , acdpliPlayListItemId
 
+    -- * SuperStickerMetadata
+    , SuperStickerMetadata
+    , superStickerMetadata
+    , ssmAltText
+    , ssmStickerId
+    , ssmAltTextLanguage
+
     -- * ActivityContentDetailsSocial
     , ActivityContentDetailsSocial
     , activityContentDetailsSocial
@@ -845,6 +851,7 @@ module Network.Google.YouTube.Types
     , scesDisplayString
     , scesSupporterDetails
     , scesCreatedAt
+    , scesSuperStickerMetadata
     , scesAmountMicros
     , scesMessageType
     , scesChannelId
@@ -852,6 +859,7 @@ module Network.Google.YouTube.Types
     , scesNonprofit
     , scesCurrency
     , scesIsSuperChatForGood
+    , scesIsSuperStickerEvent
 
     -- * VideoAbuseReportReasonSnippet
     , VideoAbuseReportReasonSnippet
@@ -930,6 +938,7 @@ module Network.Google.YouTube.Types
     , LiveChatMessageSnippet
     , liveChatMessageSnippet
     , lcmsMessageDeletedDetails
+    , lcmsSuperStickerDetails
     , lcmsLiveChatId
     , lcmsPublishedAt
     , lcmsPollOpenedDetails
@@ -1371,6 +1380,15 @@ module Network.Google.YouTube.Types
 
     -- * ContentRatingGrfilmRating
     , ContentRatingGrfilmRating (..)
+
+    -- * LiveChatSuperStickerDetails
+    , LiveChatSuperStickerDetails
+    , liveChatSuperStickerDetails
+    , lcssdSuperStickerMetadata
+    , lcssdAmountMicros
+    , lcssdAmountDisplayString
+    , lcssdCurrency
+    , lcssdTier
 
     -- * LiveBroadcastContentDetailsStereoLayout
     , LiveBroadcastContentDetailsStereoLayout (..)

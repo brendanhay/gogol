@@ -139,6 +139,7 @@ module Network.Google.AndroidEnterprise.Types
     , awtsWebApps
     , awtsPermission
     , awtsStoreBuilder
+    , awtsManagedConfigurations
 
     -- * ProductVisibility
     , ProductVisibility
@@ -560,6 +561,11 @@ module Network.Google.AndroidEnterprise.Types
     , ppsKind
     , ppsPermission
     , ppsProductId
+
+    -- * AdministratorWebTokenSpecManagedConfigurations
+    , AdministratorWebTokenSpecManagedConfigurations
+    , administratorWebTokenSpecManagedConfigurations
+    , awtsmcEnabled
 
     -- * Permission
     , Permission

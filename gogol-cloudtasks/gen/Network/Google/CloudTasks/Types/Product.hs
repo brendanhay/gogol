@@ -927,13 +927,18 @@ queue =
     }
 
 -- | Rate limits for task dispatches. rate_limits and retry_config are
--- related because they both control task attempts however they control how
--- tasks are attempted in different ways: * rate_limits controls the total
--- rate of dispatches from a queue (i.e. all traffic dispatched from the
--- queue, regardless of whether the dispatch is from a first attempt or a
--- retry). * retry_config controls what happens to particular a task after
--- its first attempt fails. That is, retry_config controls task retries
--- (the second attempt, third attempt, etc).
+-- related because they both control task attempts. However they control
+-- task attempts in different ways: * rate_limits controls the total rate
+-- of dispatches from a queue (i.e. all traffic dispatched from the queue,
+-- regardless of whether the dispatch is from a first attempt or a retry).
+-- * retry_config controls what happens to particular a task after its
+-- first attempt fails. That is, retry_config controls task retries (the
+-- second attempt, third attempt, etc). The queue\'s actual dispatch rate
+-- is the result of: * Number of tasks in the queue * User-specified
+-- throttling: rate limits retry configuration, and the queue\'s state. *
+-- System throttling due to \`429\` (Too Many Requests) or \`503\` (Service
+-- Unavailable) responses from the worker, high error rates, or to smooth
+-- sudden large traffic spikes.
 qRateLimits :: Lens' Queue (Maybe RateLimits)
 qRateLimits
   = lens _qRateLimits (\ s a -> s{_qRateLimits = a})
@@ -957,8 +962,8 @@ qRetryConfig :: Lens' Queue (Maybe RetryConfig)
 qRetryConfig
   = lens _qRetryConfig (\ s a -> s{_qRetryConfig = a})
 
--- | App Engine HTTP queue. An App Engine queue is a queue that has an
--- AppEngineHttpQueue type.
+-- | AppEngineHttpQueue settings apply only to App Engine tasks in this
+-- queue.
 qAppEngineHTTPQueue :: Lens' Queue (Maybe AppEngineHTTPQueue)
 qAppEngineHTTPQueue
   = lens _qAppEngineHTTPQueue
@@ -1221,7 +1226,7 @@ attempt =
     , _aResponseTime = Nothing
     }
 
--- | Output only. The response from the target for this attempt. If
+-- | Output only. The response from the worker for this attempt. If
 -- \`response_time\` is unset, then the task has not been attempted or is
 -- currently running and the \`response_status\` field is meaningless.
 aResponseStatus :: Lens' Attempt (Maybe Status)
@@ -1298,6 +1303,7 @@ instance ToJSON PurgeQueueRequest where
 data Task =
   Task'
     { _tLastAttempt          :: !(Maybe Attempt)
+    , _tDispatchDeadline     :: !(Maybe GDuration)
     , _tScheduleTime         :: !(Maybe DateTime')
     , _tName                 :: !(Maybe Text)
     , _tFirstAttempt         :: !(Maybe Attempt)
@@ -1314,6 +1320,8 @@ data Task =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tLastAttempt'
+--
+-- * 'tDispatchDeadline'
 --
 -- * 'tScheduleTime'
 --
@@ -1335,6 +1343,7 @@ task
 task =
   Task'
     { _tLastAttempt = Nothing
+    , _tDispatchDeadline = Nothing
     , _tScheduleTime = Nothing
     , _tName = Nothing
     , _tFirstAttempt = Nothing
@@ -1349,6 +1358,34 @@ task =
 tLastAttempt :: Lens' Task (Maybe Attempt)
 tLastAttempt
   = lens _tLastAttempt (\ s a -> s{_tLastAttempt = a})
+
+-- | The deadline for requests sent to the worker. If the worker does not
+-- respond by this deadline then the request is cancelled and the attempt
+-- is marked as a \`DEADLINE_EXCEEDED\` failure. Cloud Tasks will retry the
+-- task according to the RetryConfig. Note that when the request is
+-- cancelled, Cloud Tasks will stop listing for the response, but whether
+-- the worker stops processing depends on the worker. For example, if the
+-- worker is stuck, it may not react to cancelled requests. The default and
+-- maximum values depend on the type of request: * For App Engine tasks, 0
+-- indicates that the request has the default deadline. The default
+-- deadline depends on the [scaling
+-- type](https:\/\/cloud.google.com\/appengine\/docs\/standard\/go\/how-instances-are-managed#instance_scaling)
+-- of the service: 10 minutes for standard apps with automatic scaling, 24
+-- hours for standard apps with manual and basic scaling, and 60 minutes
+-- for flex apps. If the request deadline is set, it must be in the
+-- interval [15 seconds, 24 hours 15 seconds]. Regardless of the task\'s
+-- \`dispatch_deadline\`, the app handler will not run for longer than than
+-- the service\'s timeout. We recommend setting the \`dispatch_deadline\`
+-- to at most a few seconds more than the app handler\'s timeout. For more
+-- information see
+-- [Timeouts](https:\/\/cloud.google.com\/tasks\/docs\/creating-appengine-handlers#timeouts).
+-- \`dispatch_deadline\` will be truncated to the nearest millisecond. The
+-- deadline is an approximate deadline.
+tDispatchDeadline :: Lens' Task (Maybe Scientific)
+tDispatchDeadline
+  = lens _tDispatchDeadline
+      (\ s a -> s{_tDispatchDeadline = a})
+      . mapping _GDuration
 
 -- | The time when the task is scheduled to be attempted. For App Engine
 -- queues, this is when the task will be attempted or retried.
@@ -1404,9 +1441,8 @@ tDispatchCount
       (\ s a -> s{_tDispatchCount = a})
       . mapping _Coerce
 
--- | App Engine HTTP request that is sent to the task\'s target. Can be set
--- only if app_engine_http_queue is set on the queue. An App Engine task is
--- a task that has AppEngineHttpRequest set.
+-- | HTTP request that is sent to the App Engine app handler. An App Engine
+-- task is a task that has AppEngineHttpRequest set.
 tAppEngineHTTPRequest :: Lens' Task (Maybe AppEngineHTTPRequest)
 tAppEngineHTTPRequest
   = lens _tAppEngineHTTPRequest
@@ -1424,8 +1460,9 @@ instance FromJSON Task where
           = withObject "Task"
               (\ o ->
                  Task' <$>
-                   (o .:? "lastAttempt") <*> (o .:? "scheduleTime") <*>
-                     (o .:? "name")
+                   (o .:? "lastAttempt") <*> (o .:? "dispatchDeadline")
+                     <*> (o .:? "scheduleTime")
+                     <*> (o .:? "name")
                      <*> (o .:? "firstAttempt")
                      <*> (o .:? "view")
                      <*> (o .:? "responseCount")
@@ -1438,6 +1475,7 @@ instance ToJSON Task where
           = object
               (catMaybes
                  [("lastAttempt" .=) <$> _tLastAttempt,
+                  ("dispatchDeadline" .=) <$> _tDispatchDeadline,
                   ("scheduleTime" .=) <$> _tScheduleTime,
                   ("name" .=) <$> _tName,
                   ("firstAttempt" .=) <$> _tFirstAttempt,

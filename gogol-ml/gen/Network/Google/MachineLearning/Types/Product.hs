@@ -1941,6 +1941,57 @@ instance ToJSON GoogleRpc__Status where
                   ("code" .=) <$> _grsCode,
                   ("message" .=) <$> _grsMessage])
 
+-- | Represents the configration for a replica in a cluster.
+--
+-- /See:/ 'googleCloudMlV1__ReplicaConfig' smart constructor.
+data GoogleCloudMlV1__ReplicaConfig =
+  GoogleCloudMlV1__ReplicaConfig'
+    { _gcmvrcImageURI          :: !(Maybe Text)
+    , _gcmvrcAcceleratorConfig :: !(Maybe GoogleCloudMlV1__AcceleratorConfig)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'GoogleCloudMlV1__ReplicaConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcmvrcImageURI'
+--
+-- * 'gcmvrcAcceleratorConfig'
+googleCloudMlV1__ReplicaConfig
+    :: GoogleCloudMlV1__ReplicaConfig
+googleCloudMlV1__ReplicaConfig =
+  GoogleCloudMlV1__ReplicaConfig'
+    {_gcmvrcImageURI = Nothing, _gcmvrcAcceleratorConfig = Nothing}
+
+-- | The docker image to run on worker. This image must be in Google
+-- Container Registry.
+gcmvrcImageURI :: Lens' GoogleCloudMlV1__ReplicaConfig (Maybe Text)
+gcmvrcImageURI
+  = lens _gcmvrcImageURI
+      (\ s a -> s{_gcmvrcImageURI = a})
+
+gcmvrcAcceleratorConfig :: Lens' GoogleCloudMlV1__ReplicaConfig (Maybe GoogleCloudMlV1__AcceleratorConfig)
+gcmvrcAcceleratorConfig
+  = lens _gcmvrcAcceleratorConfig
+      (\ s a -> s{_gcmvrcAcceleratorConfig = a})
+
+instance FromJSON GoogleCloudMlV1__ReplicaConfig
+         where
+        parseJSON
+          = withObject "GoogleCloudMlV1ReplicaConfig"
+              (\ o ->
+                 GoogleCloudMlV1__ReplicaConfig' <$>
+                   (o .:? "imageUri") <*> (o .:? "acceleratorConfig"))
+
+instance ToJSON GoogleCloudMlV1__ReplicaConfig where
+        toJSON GoogleCloudMlV1__ReplicaConfig'{..}
+          = object
+              (catMaybes
+                 [("imageUri" .=) <$> _gcmvrcImageURI,
+                  ("acceleratorConfig" .=) <$>
+                    _gcmvrcAcceleratorConfig])
+
 --
 -- /See:/ 'googleCloudMlV1__Config' smart constructor.
 newtype GoogleCloudMlV1__Config =
@@ -2555,7 +2606,7 @@ instance ToJSON GoogleIAMV1__SetIAMPolicyRequest
                  [("updateMask" .=) <$> _givsiprUpdateMask,
                   ("policy" .=) <$> _givsiprPolicy])
 
--- | Represents input parameters for a prediction job. Next field: 20
+-- | Represents input parameters for a prediction job.
 --
 -- /See:/ 'googleCloudMlV1__PredictionInput' smart constructor.
 data GoogleCloudMlV1__PredictionInput =
@@ -2775,20 +2826,23 @@ instance ToJSON GoogleCloudMlV1__PredictionInput
 -- /See:/ 'googleCloudMlV1__TrainingInput' smart constructor.
 data GoogleCloudMlV1__TrainingInput =
   GoogleCloudMlV1__TrainingInput'
-    { _gcmvtiMasterType           :: !(Maybe Text)
-    , _gcmvtiParameterServerCount :: !(Maybe (Textual Int64))
-    , _gcmvtiArgs                 :: !(Maybe [Text])
-    , _gcmvtiWorkerCount          :: !(Maybe (Textual Int64))
-    , _gcmvtiJobDir               :: !(Maybe Text)
-    , _gcmvtiPythonVersion        :: !(Maybe Text)
-    , _gcmvtiRuntimeVersion       :: !(Maybe Text)
-    , _gcmvtiWorkerType           :: !(Maybe Text)
-    , _gcmvtiPythonModule         :: !(Maybe Text)
-    , _gcmvtiParameterServerType  :: !(Maybe Text)
-    , _gcmvtiHyperparameters      :: !(Maybe GoogleCloudMlV1__HyperparameterSpec)
-    , _gcmvtiPackageURIs          :: !(Maybe [Text])
-    , _gcmvtiScaleTier            :: !(Maybe GoogleCloudMlV1__TrainingInputScaleTier)
-    , _gcmvtiRegion               :: !(Maybe Text)
+    { _gcmvtiMasterType            :: !(Maybe Text)
+    , _gcmvtiWorkerConfig          :: !(Maybe GoogleCloudMlV1__ReplicaConfig)
+    , _gcmvtiParameterServerCount  :: !(Maybe (Textual Int64))
+    , _gcmvtiArgs                  :: !(Maybe [Text])
+    , _gcmvtiWorkerCount           :: !(Maybe (Textual Int64))
+    , _gcmvtiJobDir                :: !(Maybe Text)
+    , _gcmvtiPythonVersion         :: !(Maybe Text)
+    , _gcmvtiRuntimeVersion        :: !(Maybe Text)
+    , _gcmvtiWorkerType            :: !(Maybe Text)
+    , _gcmvtiMasterConfig          :: !(Maybe GoogleCloudMlV1__ReplicaConfig)
+    , _gcmvtiPythonModule          :: !(Maybe Text)
+    , _gcmvtiParameterServerType   :: !(Maybe Text)
+    , _gcmvtiHyperparameters       :: !(Maybe GoogleCloudMlV1__HyperparameterSpec)
+    , _gcmvtiPackageURIs           :: !(Maybe [Text])
+    , _gcmvtiScaleTier             :: !(Maybe GoogleCloudMlV1__TrainingInputScaleTier)
+    , _gcmvtiRegion                :: !(Maybe Text)
+    , _gcmvtiParameterServerConfig :: !(Maybe GoogleCloudMlV1__ReplicaConfig)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2797,6 +2851,8 @@ data GoogleCloudMlV1__TrainingInput =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gcmvtiMasterType'
+--
+-- * 'gcmvtiWorkerConfig'
 --
 -- * 'gcmvtiParameterServerCount'
 --
@@ -2812,6 +2868,8 @@ data GoogleCloudMlV1__TrainingInput =
 --
 -- * 'gcmvtiWorkerType'
 --
+-- * 'gcmvtiMasterConfig'
+--
 -- * 'gcmvtiPythonModule'
 --
 -- * 'gcmvtiParameterServerType'
@@ -2823,11 +2881,14 @@ data GoogleCloudMlV1__TrainingInput =
 -- * 'gcmvtiScaleTier'
 --
 -- * 'gcmvtiRegion'
+--
+-- * 'gcmvtiParameterServerConfig'
 googleCloudMlV1__TrainingInput
     :: GoogleCloudMlV1__TrainingInput
 googleCloudMlV1__TrainingInput =
   GoogleCloudMlV1__TrainingInput'
     { _gcmvtiMasterType = Nothing
+    , _gcmvtiWorkerConfig = Nothing
     , _gcmvtiParameterServerCount = Nothing
     , _gcmvtiArgs = Nothing
     , _gcmvtiWorkerCount = Nothing
@@ -2835,12 +2896,14 @@ googleCloudMlV1__TrainingInput =
     , _gcmvtiPythonVersion = Nothing
     , _gcmvtiRuntimeVersion = Nothing
     , _gcmvtiWorkerType = Nothing
+    , _gcmvtiMasterConfig = Nothing
     , _gcmvtiPythonModule = Nothing
     , _gcmvtiParameterServerType = Nothing
     , _gcmvtiHyperparameters = Nothing
     , _gcmvtiPackageURIs = Nothing
     , _gcmvtiScaleTier = Nothing
     , _gcmvtiRegion = Nothing
+    , _gcmvtiParameterServerConfig = Nothing
     }
 
 -- | Optional. Specifies the type of virtual machine to use for your training
@@ -2881,20 +2944,16 @@ googleCloudMlV1__TrainingInput =
 --     NVIDIA Tesla P100 GPUs.
 -- [standard_v100]
 --     A machine equivalent to /standard/ that also includes a single
---     NVIDIA Tesla V100 GPU. The availability of these GPUs is in the
---     /Beta/ launch stage.
+--     NVIDIA Tesla V100 GPU.
 -- [large_model_v100]
 --     A machine equivalent to /large_model/ that also includes a single
---     NVIDIA Tesla V100 GPU. The availability of these GPUs is in the
---     /Beta/ launch stage.
+--     NVIDIA Tesla V100 GPU.
 -- [complex_model_m_v100]
 --     A machine equivalent to /complex_model_m/ that also includes four
---     NVIDIA Tesla V100 GPUs. The availability of these GPUs is in the
---     /Beta/ launch stage.
+--     NVIDIA Tesla V100 GPUs.
 -- [complex_model_l_v100]
 --     A machine equivalent to /complex_model_l/ that also includes eight
---     NVIDIA Tesla V100 GPUs. The availability of these GPUs is in the
---     /Beta/ launch stage.
+--     NVIDIA Tesla V100 GPUs.
 -- [cloud_tpu]
 --     A TPU VM including one Cloud TPU. See more about
 --     </ml-engine/docs/tensorflow/using-tpus using TPUs to train your model>.
@@ -2905,11 +2964,18 @@ gcmvtiMasterType
   = lens _gcmvtiMasterType
       (\ s a -> s{_gcmvtiMasterType = a})
 
+-- | Optional. The configrations for workers. If \`workerConfig.imageUri\`
+-- has not been set, the value of \`masterConfig.imageUri\` will be used.
+gcmvtiWorkerConfig :: Lens' GoogleCloudMlV1__TrainingInput (Maybe GoogleCloudMlV1__ReplicaConfig)
+gcmvtiWorkerConfig
+  = lens _gcmvtiWorkerConfig
+      (\ s a -> s{_gcmvtiWorkerConfig = a})
+
 -- | Optional. The number of parameter server replicas to use for the
 -- training job. Each replica in the cluster will be of the type specified
 -- in \`parameter_server_type\`. This value can only be used when
 -- \`scale_tier\` is set to \`CUSTOM\`.If you set this value, you must also
--- set \`parameter_server_type\`.
+-- set \`parameter_server_type\`. The default value is zero.
 gcmvtiParameterServerCount :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Int64)
 gcmvtiParameterServerCount
   = lens _gcmvtiParameterServerCount
@@ -2927,6 +2993,7 @@ gcmvtiArgs
 -- Each replica in the cluster will be of the type specified in
 -- \`worker_type\`. This value can only be used when \`scale_tier\` is set
 -- to \`CUSTOM\`. If you set this value, you must also set \`worker_type\`.
+-- The default value is zero.
 gcmvtiWorkerCount :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Int64)
 gcmvtiWorkerCount
   = lens _gcmvtiWorkerCount
@@ -2971,6 +3038,13 @@ gcmvtiWorkerType :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiWorkerType
   = lens _gcmvtiWorkerType
       (\ s a -> s{_gcmvtiWorkerType = a})
+
+-- | Optional. The configuration for master. Only one of
+-- \`masterConfig.imageUri\` and \`runtimeVersion\` should be set.
+gcmvtiMasterConfig :: Lens' GoogleCloudMlV1__TrainingInput (Maybe GoogleCloudMlV1__ReplicaConfig)
+gcmvtiMasterConfig
+  = lens _gcmvtiMasterConfig
+      (\ s a -> s{_gcmvtiMasterConfig = a})
 
 -- | Required. The Python module name to run after installing the packages.
 gcmvtiPythonModule :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
@@ -3018,13 +3092,21 @@ gcmvtiRegion :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiRegion
   = lens _gcmvtiRegion (\ s a -> s{_gcmvtiRegion = a})
 
+-- | Optional. The config of parameter servers. If
+-- \`parameterServerConfig.imageUri\` has not been set, the value of
+-- \`masterConfig.imageUri\` will be used.
+gcmvtiParameterServerConfig :: Lens' GoogleCloudMlV1__TrainingInput (Maybe GoogleCloudMlV1__ReplicaConfig)
+gcmvtiParameterServerConfig
+  = lens _gcmvtiParameterServerConfig
+      (\ s a -> s{_gcmvtiParameterServerConfig = a})
+
 instance FromJSON GoogleCloudMlV1__TrainingInput
          where
         parseJSON
           = withObject "GoogleCloudMlV1TrainingInput"
               (\ o ->
                  GoogleCloudMlV1__TrainingInput' <$>
-                   (o .:? "masterType") <*>
+                   (o .:? "masterType") <*> (o .:? "workerConfig") <*>
                      (o .:? "parameterServerCount")
                      <*> (o .:? "args" .!= mempty)
                      <*> (o .:? "workerCount")
@@ -3032,18 +3114,21 @@ instance FromJSON GoogleCloudMlV1__TrainingInput
                      <*> (o .:? "pythonVersion")
                      <*> (o .:? "runtimeVersion")
                      <*> (o .:? "workerType")
+                     <*> (o .:? "masterConfig")
                      <*> (o .:? "pythonModule")
                      <*> (o .:? "parameterServerType")
                      <*> (o .:? "hyperparameters")
                      <*> (o .:? "packageUris" .!= mempty)
                      <*> (o .:? "scaleTier")
-                     <*> (o .:? "region"))
+                     <*> (o .:? "region")
+                     <*> (o .:? "parameterServerConfig"))
 
 instance ToJSON GoogleCloudMlV1__TrainingInput where
         toJSON GoogleCloudMlV1__TrainingInput'{..}
           = object
               (catMaybes
                  [("masterType" .=) <$> _gcmvtiMasterType,
+                  ("workerConfig" .=) <$> _gcmvtiWorkerConfig,
                   ("parameterServerCount" .=) <$>
                     _gcmvtiParameterServerCount,
                   ("args" .=) <$> _gcmvtiArgs,
@@ -3052,13 +3137,16 @@ instance ToJSON GoogleCloudMlV1__TrainingInput where
                   ("pythonVersion" .=) <$> _gcmvtiPythonVersion,
                   ("runtimeVersion" .=) <$> _gcmvtiRuntimeVersion,
                   ("workerType" .=) <$> _gcmvtiWorkerType,
+                  ("masterConfig" .=) <$> _gcmvtiMasterConfig,
                   ("pythonModule" .=) <$> _gcmvtiPythonModule,
                   ("parameterServerType" .=) <$>
                     _gcmvtiParameterServerType,
                   ("hyperparameters" .=) <$> _gcmvtiHyperparameters,
                   ("packageUris" .=) <$> _gcmvtiPackageURIs,
                   ("scaleTier" .=) <$> _gcmvtiScaleTier,
-                  ("region" .=) <$> _gcmvtiRegion])
+                  ("region" .=) <$> _gcmvtiRegion,
+                  ("parameterServerConfig" .=) <$>
+                    _gcmvtiParameterServerConfig])
 
 --
 -- /See:/ 'googleRpc__StatusDetailsItem' smart constructor.
@@ -3604,13 +3692,14 @@ gahttpbExtensions
       . _Default
       . _Coerce
 
--- | HTTP body binary data.
+-- | The HTTP request\/response body as raw binary.
 gahttpbData :: Lens' GoogleAPI__HTTPBody (Maybe ByteString)
 gahttpbData
   = lens _gahttpbData (\ s a -> s{_gahttpbData = a}) .
       mapping _Bytes
 
--- | The HTTP Content-Type string representing the content type of the body.
+-- | The HTTP Content-Type header value specifying the content type of the
+-- body.
 gahttpbContentType :: Lens' GoogleAPI__HTTPBody (Maybe Text)
 gahttpbContentType
   = lens _gahttpbContentType

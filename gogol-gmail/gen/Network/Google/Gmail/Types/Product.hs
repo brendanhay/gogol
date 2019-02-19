@@ -1067,7 +1067,9 @@ ltrResultSizeEstimate
       (\ s a -> s{_ltrResultSizeEstimate = a})
       . mapping _Coerce
 
--- | List of threads.
+-- | List of threads. Note that each thread resource does not contain a list
+-- of messages. The list of messages for a given thread can be fetched
+-- using the threads.get method.
 ltrThreads :: Lens' ListThreadsResponse [Thread]
 ltrThreads
   = lens _ltrThreads (\ s a -> s{_ltrThreads = a}) .
@@ -2831,7 +2833,9 @@ lmrResultSizeEstimate
       (\ s a -> s{_lmrResultSizeEstimate = a})
       . mapping _Coerce
 
--- | List of messages.
+-- | List of messages. Note that each message resource contains only an id
+-- and a threadId. Additional message details can be fetched using the
+-- messages.get method.
 lmrMessages :: Lens' ListMessagesResponse [Message]
 lmrMessages
   = lens _lmrMessages (\ s a -> s{_lmrMessages = a}) .

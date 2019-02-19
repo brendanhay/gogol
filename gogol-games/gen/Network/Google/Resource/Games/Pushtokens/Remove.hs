@@ -78,7 +78,8 @@ prPayload
 instance GoogleRequest PushtokensRemove where
         type Rs PushtokensRemove = ()
         type Scopes PushtokensRemove =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient PushtokensRemove'{..}
           = go (Just AltJSON) _prPayload gamesService
           where go

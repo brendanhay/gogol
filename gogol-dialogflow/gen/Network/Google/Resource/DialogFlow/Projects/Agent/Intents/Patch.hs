@@ -175,8 +175,8 @@ paipIntentView
   = lens _paipIntentView
       (\ s a -> s{_paipIntentView = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of this intent. Format:
+-- | The unique identifier of this intent. Required for Intents.UpdateIntent
+-- and Intents.BatchUpdateIntents methods. Format:
 -- \`projects\/\/agent\/intents\/\`.
 paipName :: Lens' ProjectsAgentIntentsPatch Text
 paipName = lens _paipName (\ s a -> s{_paipName = a})

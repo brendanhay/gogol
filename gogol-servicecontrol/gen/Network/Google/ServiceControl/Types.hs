@@ -211,6 +211,7 @@ module Network.Google.ServiceControl.Types
     , CheckError
     , checkError
     , ceSubject
+    , ceStatus
     , ceCode
     , ceDetail
 

@@ -2495,6 +2495,7 @@ data Step =
     , _sName                :: !(Maybe Text)
     , _sOutcome             :: !(Maybe Outcome)
     , _sLabels              :: !(Maybe [StepLabelsEntry])
+    , _sMultiStep           :: !(Maybe MultiStep)
     , _sDeviceUsageDuration :: !(Maybe Duration)
     , _sDescription         :: !(Maybe Text)
     }
@@ -2528,6 +2529,8 @@ data Step =
 --
 -- * 'sLabels'
 --
+-- * 'sMultiStep'
+--
 -- * 'sDeviceUsageDuration'
 --
 -- * 'sDescription'
@@ -2547,6 +2550,7 @@ step =
     , _sName = Nothing
     , _sOutcome = Nothing
     , _sLabels = Nothing
+    , _sMultiStep = Nothing
     , _sDeviceUsageDuration = Nothing
     , _sDescription = Nothing
     }
@@ -2675,6 +2679,16 @@ sLabels
   = lens _sLabels (\ s a -> s{_sLabels = a}) . _Default
       . _Coerce
 
+-- | Details when multiple steps are run with the same configuration as a
+-- group. These details can be used identify which group this step is part
+-- of. It also identifies the groups \'primary step\' which indexes all the
+-- group members. - In response: present if previously set. - In create
+-- request: optional, set iff this step was performed more than once. - In
+-- update request: optional
+sMultiStep :: Lens' Step (Maybe MultiStep)
+sMultiStep
+  = lens _sMultiStep (\ s a -> s{_sMultiStep = a})
+
 -- | How much the device resource is used to perform the test. This is the
 -- device usage used for billing purpose, which is different from the
 -- run_duration, for example, infrastructure failure won\'t be charged for
@@ -2710,6 +2724,7 @@ instance FromJSON Step where
                      <*> (o .:? "name")
                      <*> (o .:? "outcome")
                      <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "multiStep")
                      <*> (o .:? "deviceUsageDuration")
                      <*> (o .:? "description"))
 
@@ -2727,6 +2742,7 @@ instance ToJSON Step where
                   ("completionTime" .=) <$> _sCompletionTime,
                   ("name" .=) <$> _sName, ("outcome" .=) <$> _sOutcome,
                   ("labels" .=) <$> _sLabels,
+                  ("multiStep" .=) <$> _sMultiStep,
                   ("deviceUsageDuration" .=) <$> _sDeviceUsageDuration,
                   ("description" .=) <$> _sDescription])
 
@@ -3277,6 +3293,51 @@ instance ToJSON Specification where
           = object
               (catMaybes [("androidTest" .=) <$> _sAndroidTest])
 
+-- | Step Id and outcome of each individual step that was run as a group with
+-- other steps with the same configuration.
+--
+-- /See:/ 'individualOutcome' smart constructor.
+data IndividualOutcome =
+  IndividualOutcome'
+    { _ioStepId         :: !(Maybe Text)
+    , _ioOutcomeSummary :: !(Maybe IndividualOutcomeOutcomeSummary)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'IndividualOutcome' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ioStepId'
+--
+-- * 'ioOutcomeSummary'
+individualOutcome
+    :: IndividualOutcome
+individualOutcome =
+  IndividualOutcome' {_ioStepId = Nothing, _ioOutcomeSummary = Nothing}
+
+ioStepId :: Lens' IndividualOutcome (Maybe Text)
+ioStepId = lens _ioStepId (\ s a -> s{_ioStepId = a})
+
+ioOutcomeSummary :: Lens' IndividualOutcome (Maybe IndividualOutcomeOutcomeSummary)
+ioOutcomeSummary
+  = lens _ioOutcomeSummary
+      (\ s a -> s{_ioOutcomeSummary = a})
+
+instance FromJSON IndividualOutcome where
+        parseJSON
+          = withObject "IndividualOutcome"
+              (\ o ->
+                 IndividualOutcome' <$>
+                   (o .:? "stepId") <*> (o .:? "outcomeSummary"))
+
+instance ToJSON IndividualOutcome where
+        toJSON IndividualOutcome'{..}
+          = object
+              (catMaybes
+                 [("stepId" .=) <$> _ioStepId,
+                  ("outcomeSummary" .=) <$> _ioOutcomeSummary])
+
 -- | A summary of a test suite result either parsed from XML or uploaded
 -- directly by a user. Note: the API related comments are for StepService
 -- only. This message is also being used in ExecutionService in a read only
@@ -3390,6 +3451,72 @@ instance ToJSON TestSuiteOverview where
                   ("name" .=) <$> _tsoName,
                   ("failureCount" .=) <$> _tsoFailureCount,
                   ("totalCount" .=) <$> _tsoTotalCount])
+
+-- | Details when multiple steps are run with the same configuration as a
+-- group.
+--
+-- /See:/ 'multiStep' smart constructor.
+data MultiStep =
+  MultiStep'
+    { _msMultistepNumber :: !(Maybe (Textual Int32))
+    , _msPrimaryStepId   :: !(Maybe Text)
+    , _msPrimaryStep     :: !(Maybe PrimaryStep)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'MultiStep' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'msMultistepNumber'
+--
+-- * 'msPrimaryStepId'
+--
+-- * 'msPrimaryStep'
+multiStep
+    :: MultiStep
+multiStep =
+  MultiStep'
+    { _msMultistepNumber = Nothing
+    , _msPrimaryStepId = Nothing
+    , _msPrimaryStep = Nothing
+    }
+
+-- | Unique int given to each step. Ranges from 0(inclusive) to total number
+-- of steps(exclusive). The primary step is 0.
+msMultistepNumber :: Lens' MultiStep (Maybe Int32)
+msMultistepNumber
+  = lens _msMultistepNumber
+      (\ s a -> s{_msMultistepNumber = a})
+      . mapping _Coerce
+
+-- | Step Id of the primary (original) step, which might be this step.
+msPrimaryStepId :: Lens' MultiStep (Maybe Text)
+msPrimaryStepId
+  = lens _msPrimaryStepId
+      (\ s a -> s{_msPrimaryStepId = a})
+
+-- | Present if it is a primary (original) step.
+msPrimaryStep :: Lens' MultiStep (Maybe PrimaryStep)
+msPrimaryStep
+  = lens _msPrimaryStep
+      (\ s a -> s{_msPrimaryStep = a})
+
+instance FromJSON MultiStep where
+        parseJSON
+          = withObject "MultiStep"
+              (\ o ->
+                 MultiStep' <$>
+                   (o .:? "multistepNumber") <*> (o .:? "primaryStepId")
+                     <*> (o .:? "primaryStep"))
+
+instance ToJSON MultiStep where
+        toJSON MultiStep'{..}
+          = object
+              (catMaybes
+                 [("multistepNumber" .=) <$> _msMultistepNumber,
+                  ("primaryStepId" .=) <$> _msPrimaryStepId,
+                  ("primaryStep" .=) <$> _msPrimaryStep])
 
 -- | A Duration represents a signed, fixed-length span of time represented as
 -- a count of seconds and fractions of seconds at nanosecond resolution. It
@@ -3834,6 +3961,56 @@ instance ToJSON BasicPerfSampleSeries where
                  [("perfUnit" .=) <$> _bpssPerfUnit,
                   ("perfMetricType" .=) <$> _bpssPerfMetricType,
                   ("sampleSeriesLabel" .=) <$> _bpssSampleSeriesLabel])
+
+-- | Stores rollup test status of multiple steps that were run as a group and
+-- outcome of each individual step.
+--
+-- /See:/ 'primaryStep' smart constructor.
+data PrimaryStep =
+  PrimaryStep'
+    { _psRollUp            :: !(Maybe PrimaryStepRollUp)
+    , _psIndividualOutcome :: !(Maybe [IndividualOutcome])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'PrimaryStep' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psRollUp'
+--
+-- * 'psIndividualOutcome'
+primaryStep
+    :: PrimaryStep
+primaryStep = PrimaryStep' {_psRollUp = Nothing, _psIndividualOutcome = Nothing}
+
+-- | Rollup test status of multiple steps that were run with the same
+-- configuration as a group.
+psRollUp :: Lens' PrimaryStep (Maybe PrimaryStepRollUp)
+psRollUp = lens _psRollUp (\ s a -> s{_psRollUp = a})
+
+-- | Step Id and outcome of each individual step.
+psIndividualOutcome :: Lens' PrimaryStep [IndividualOutcome]
+psIndividualOutcome
+  = lens _psIndividualOutcome
+      (\ s a -> s{_psIndividualOutcome = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON PrimaryStep where
+        parseJSON
+          = withObject "PrimaryStep"
+              (\ o ->
+                 PrimaryStep' <$>
+                   (o .:? "rollUp") <*>
+                     (o .:? "individualOutcome" .!= mempty))
+
+instance ToJSON PrimaryStep where
+        toJSON PrimaryStep'{..}
+          = object
+              (catMaybes
+                 [("rollUp" .=) <$> _psRollUp,
+                  ("individualOutcome" .=) <$> _psIndividualOutcome])
 
 --
 -- /See:/ 'skippedDetail' smart constructor.

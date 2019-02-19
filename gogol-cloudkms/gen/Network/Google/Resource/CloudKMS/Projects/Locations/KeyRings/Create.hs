@@ -164,7 +164,8 @@ instance GoogleRequest
          where
         type Rs ProjectsLocationsKeyRingsCreate = KeyRing
         type Scopes ProjectsLocationsKeyRingsCreate =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient ProjectsLocationsKeyRingsCreate'{..}
           = go _plkrcParent _plkrcXgafv _plkrcUploadProtocol
               _plkrcAccessToken

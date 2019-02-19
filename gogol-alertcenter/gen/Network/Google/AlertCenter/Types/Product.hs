@@ -649,7 +649,8 @@ awEmail = lens _awEmail (\ s a -> s{_awEmail = a})
 
 -- | Optional. Details of the login action associated with the warning event.
 -- This is only available for: * Suspicious login * Suspicious login (less
--- secure app) * User suspended (suspicious activity)
+-- secure app) * Suspicious programmatic login * User suspended (suspicious
+-- activity)
 awLoginDetails :: Lens' AccountWarning (Maybe LoginDetails)
 awLoginDetails
   = lens _awLoginDetails
@@ -1034,7 +1035,7 @@ instance ToJSON CSV where
                  [("dataRows" .=) <$> _cDataRows,
                   ("headers" .=) <$> _cHeaders])
 
--- | An alert affecting a customer. All fields are read-only once created.
+-- | An alert affecting a customer.
 --
 -- /See:/ 'alert' smart constructor.
 data Alert =
@@ -1130,9 +1131,10 @@ aEndTime
       mapping _DateTime
 
 -- | Required. A unique identifier for the system that reported the alert.
--- Supported sources are any of the following: * Google Operations * Mobile
--- device management * Gmail phishing * Domain wide takeout * Government
--- attack warning * Google identity
+-- This is output only after alert is created. Supported sources are any of
+-- the following: * Google Operations * Mobile device management * Gmail
+-- phishing * Domain wide takeout * Government attack warning * Google
+-- identity
 aSource :: Lens' Alert (Maybe Text)
 aSource = lens _aSource (\ s a -> s{_aSource = a})
 
@@ -1140,8 +1142,9 @@ aSource = lens _aSource (\ s a -> s{_aSource = a})
 aDeleted :: Lens' Alert (Maybe Bool)
 aDeleted = lens _aDeleted (\ s a -> s{_aDeleted = a})
 
--- | Required. The type of the alert. For a list of available alert types see
--- [G Suite Alert types](\/admin-sdk\/alertcenter\/reference\/alert-types).
+-- | Required. The type of the alert. This is output only after alert is
+-- created. For a list of available alert types see [G Suite Alert
+-- types](\/admin-sdk\/alertcenter\/reference\/alert-types).
 aType :: Lens' Alert (Maybe Text)
 aType = lens _aType (\ s a -> s{_aType = a})
 
@@ -1210,6 +1213,74 @@ instance FromJSON Attachment where
 instance ToJSON Attachment where
         toJSON Attachment'{..}
           = object (catMaybes [("csv" .=) <$> _aCSV])
+
+-- | Requests for one application that needs default SQL setup.
+--
+-- /See:/ 'requestInfo' smart constructor.
+data RequestInfo =
+  RequestInfo'
+    { _riNumberOfRequests  :: !(Maybe (Textual Int64))
+    , _riAppDeveloperEmail :: !(Maybe [Text])
+    , _riAppName           :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'RequestInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riNumberOfRequests'
+--
+-- * 'riAppDeveloperEmail'
+--
+-- * 'riAppName'
+requestInfo
+    :: RequestInfo
+requestInfo =
+  RequestInfo'
+    { _riNumberOfRequests = Nothing
+    , _riAppDeveloperEmail = Nothing
+    , _riAppName = Nothing
+    }
+
+-- | Required. Number of requests sent for this application to set up default
+-- SQL instance.
+riNumberOfRequests :: Lens' RequestInfo (Maybe Int64)
+riNumberOfRequests
+  = lens _riNumberOfRequests
+      (\ s a -> s{_riNumberOfRequests = a})
+      . mapping _Coerce
+
+-- | List of app developers who triggered notifications for above
+-- application.
+riAppDeveloperEmail :: Lens' RequestInfo [Text]
+riAppDeveloperEmail
+  = lens _riAppDeveloperEmail
+      (\ s a -> s{_riAppDeveloperEmail = a})
+      . _Default
+      . _Coerce
+
+-- | Required. The application that requires the SQL setup.
+riAppName :: Lens' RequestInfo (Maybe Text)
+riAppName
+  = lens _riAppName (\ s a -> s{_riAppName = a})
+
+instance FromJSON RequestInfo where
+        parseJSON
+          = withObject "RequestInfo"
+              (\ o ->
+                 RequestInfo' <$>
+                   (o .:? "numberOfRequests") <*>
+                     (o .:? "appDeveloperEmail" .!= mempty)
+                     <*> (o .:? "appName"))
+
+instance ToJSON RequestInfo where
+        toJSON RequestInfo'{..}
+          = object
+              (catMaybes
+                 [("numberOfRequests" .=) <$> _riNumberOfRequests,
+                  ("appDeveloperEmail" .=) <$> _riAppDeveloperEmail,
+                  ("appName" .=) <$> _riAppName])
 
 -- | An incident reported by Google Operations for a G Suite application.
 --
@@ -1336,6 +1407,46 @@ instance ToJSON SuspiciousActivity where
               (catMaybes
                  [("email" .=) <$> _saEmail,
                   ("events" .=) <$> _saEvents])
+
+-- | Alerts from App Maker to notify admins to set up default SQL instance.
+--
+-- /See:/ 'appMakerSQLSetupNotification' smart constructor.
+newtype AppMakerSQLSetupNotification =
+  AppMakerSQLSetupNotification'
+    { _amsqlsnRequestInfo :: Maybe [RequestInfo]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'AppMakerSQLSetupNotification' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'amsqlsnRequestInfo'
+appMakerSQLSetupNotification
+    :: AppMakerSQLSetupNotification
+appMakerSQLSetupNotification =
+  AppMakerSQLSetupNotification' {_amsqlsnRequestInfo = Nothing}
+
+-- | List of applications with requests for default SQL set up.
+amsqlsnRequestInfo :: Lens' AppMakerSQLSetupNotification [RequestInfo]
+amsqlsnRequestInfo
+  = lens _amsqlsnRequestInfo
+      (\ s a -> s{_amsqlsnRequestInfo = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AppMakerSQLSetupNotification where
+        parseJSON
+          = withObject "AppMakerSQLSetupNotification"
+              (\ o ->
+                 AppMakerSQLSetupNotification' <$>
+                   (o .:? "requestInfo" .!= mempty))
+
+instance ToJSON AppMakerSQLSetupNotification where
+        toJSON AppMakerSQLSetupNotification'{..}
+          = object
+              (catMaybes
+                 [("requestInfo" .=) <$> _amsqlsnRequestInfo])
 
 -- | A takeout operation for the entire domain was initiated by an admin.
 -- Derived from audit logs.

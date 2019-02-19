@@ -1139,6 +1139,57 @@ instance ToJSON Redirect where
                   ("glob" .=) <$> _rGlob,
                   ("statusCode" .=) <$> _rStatusCode])
 
+-- | A configured rewrite that will direct any requests to a Cloud Run
+-- service. If the Cloud Run service does not exist when setting or
+-- updating your Firebase Hosting configuration then the request will fail.
+-- Any errors from the Cloud Run service (including when the service has
+-- been deleted) will be passed back down to the end user.
+--
+-- /See:/ 'cloudRunRewrite' smart constructor.
+data CloudRunRewrite =
+  CloudRunRewrite'
+    { _crrServiceId :: !(Maybe Text)
+    , _crrRegion    :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'CloudRunRewrite' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crrServiceId'
+--
+-- * 'crrRegion'
+cloudRunRewrite
+    :: CloudRunRewrite
+cloudRunRewrite =
+  CloudRunRewrite' {_crrServiceId = Nothing, _crrRegion = Nothing}
+
+-- | Required. User supplied ID of the Cloud Run service.
+crrServiceId :: Lens' CloudRunRewrite (Maybe Text)
+crrServiceId
+  = lens _crrServiceId (\ s a -> s{_crrServiceId = a})
+
+-- | Optional. The region where the Cloud Run service is hosted. Defaults to
+-- \`us-central1\` if not supplied.
+crrRegion :: Lens' CloudRunRewrite (Maybe Text)
+crrRegion
+  = lens _crrRegion (\ s a -> s{_crrRegion = a})
+
+instance FromJSON CloudRunRewrite where
+        parseJSON
+          = withObject "CloudRunRewrite"
+              (\ o ->
+                 CloudRunRewrite' <$>
+                   (o .:? "serviceId") <*> (o .:? "region"))
+
+instance ToJSON CloudRunRewrite where
+        toJSON CloudRunRewrite'{..}
+          = object
+              (catMaybes
+                 [("serviceId" .=) <$> _crrServiceId,
+                  ("region" .=) <$> _crrRegion])
+
 -- | Defines the behavior of a domain-level redirect. Domain redirects
 -- preserve the path of the redirect but replace the requested domain with
 -- the one specified in the redirect configuration.
@@ -1195,6 +1246,7 @@ data Rewrite =
   Rewrite'
     { _rewFunction     :: !(Maybe Text)
     , _rewPath         :: !(Maybe Text)
+    , _rewRun          :: !(Maybe CloudRunRewrite)
     , _rewGlob         :: !(Maybe Text)
     , _rewDynamicLinks :: !(Maybe Bool)
     }
@@ -1208,6 +1260,8 @@ data Rewrite =
 --
 -- * 'rewPath'
 --
+-- * 'rewRun'
+--
 -- * 'rewGlob'
 --
 -- * 'rewDynamicLinks'
@@ -1217,6 +1271,7 @@ rewrite =
   Rewrite'
     { _rewFunction = Nothing
     , _rewPath = Nothing
+    , _rewRun = Nothing
     , _rewGlob = Nothing
     , _rewDynamicLinks = Nothing
     }
@@ -1230,6 +1285,10 @@ rewFunction
 -- | The URL path to rewrite the request to.
 rewPath :: Lens' Rewrite (Maybe Text)
 rewPath = lens _rewPath (\ s a -> s{_rewPath = a})
+
+-- | The request will be forwarded to Cloud Run.
+rewRun :: Lens' Rewrite (Maybe CloudRunRewrite)
+rewRun = lens _rewRun (\ s a -> s{_rewRun = a})
 
 -- | Required. The user-supplied [glob
 -- pattern](\/docs\/hosting\/full-config#glob_pattern_matching) to match
@@ -1249,7 +1308,8 @@ instance FromJSON Rewrite where
               (\ o ->
                  Rewrite' <$>
                    (o .:? "function") <*> (o .:? "path") <*>
-                     (o .:? "glob")
+                     (o .:? "run")
+                     <*> (o .:? "glob")
                      <*> (o .:? "dynamicLinks"))
 
 instance ToJSON Rewrite where
@@ -1257,7 +1317,8 @@ instance ToJSON Rewrite where
           = object
               (catMaybes
                  [("function" .=) <$> _rewFunction,
-                  ("path" .=) <$> _rewPath, ("glob" .=) <$> _rewGlob,
+                  ("path" .=) <$> _rewPath, ("run" .=) <$> _rewRun,
+                  ("glob" .=) <$> _rewGlob,
                   ("dynamicLinks" .=) <$> _rewDynamicLinks])
 
 -- | A set of file paths to the hashes corresponding to assets that should be

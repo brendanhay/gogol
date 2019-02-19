@@ -320,7 +320,7 @@ data PolicyPlayStoreMode
     | BlackList
       -- ^ @BLACKLIST@
       -- All apps are available and any app that should not be on the device
-      -- should be explicitly markeds as \'BLOCKED\' in the applications policy.
+      -- should be explicitly marked as \'BLOCKED\' in the applications policy.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PolicyPlayStoreMode
@@ -437,6 +437,10 @@ data ApplicationPolicyInstallType
     | Available
       -- ^ @AVAILABLE@
       -- The app is available to install.
+    | RequiredForSetup
+      -- ^ @REQUIRED_FOR_SETUP@
+      -- The app is automatically installed and can\'t be removed by the user and
+      -- will prevent setup from completion until installation is complete.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ApplicationPolicyInstallType
@@ -448,6 +452,7 @@ instance FromHttpApiData ApplicationPolicyInstallType where
         "FORCE_INSTALLED" -> Right ForceInstalled
         "BLOCKED" -> Right Blocked
         "AVAILABLE" -> Right Available
+        "REQUIRED_FOR_SETUP" -> Right RequiredForSetup
         x -> Left ("Unable to parse ApplicationPolicyInstallType from: " <> x)
 
 instance ToHttpApiData ApplicationPolicyInstallType where
@@ -457,6 +462,7 @@ instance ToHttpApiData ApplicationPolicyInstallType where
         ForceInstalled -> "FORCE_INSTALLED"
         Blocked -> "BLOCKED"
         Available -> "AVAILABLE"
+        RequiredForSetup -> "REQUIRED_FOR_SETUP"
 
 instance FromJSON ApplicationPolicyInstallType where
     parseJSON = parseJSONText "ApplicationPolicyInstallType"

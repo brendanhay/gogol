@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing webProperty-AdWords link.
+-- Updates an existing webProperty-Google Ads link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.update@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
@@ -59,7 +59,7 @@ type ManagementWebPropertyAdWordsLinksUpdateResource
                          ReqBody '[JSON] EntityAdWordsLink :>
                            Put '[JSON] EntityAdWordsLink
 
--- | Updates an existing webProperty-AdWords link.
+-- | Updates an existing webProperty-Google Ads link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksUpdate' smart constructor.
 data ManagementWebPropertyAdWordsLinksUpdate =
@@ -96,7 +96,7 @@ managementWebPropertyAdWordsLinksUpdate pMwpawluWebPropertyId_ pMwpawluPayload_ 
     , _mwpawluWebPropertyAdWordsLinkId = pMwpawluWebPropertyAdWordsLinkId_
     }
 
--- | Web property ID to retrieve the AdWords link for.
+-- | Web property ID to retrieve the Google Ads link for.
 mwpawluWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksUpdate Text
 mwpawluWebPropertyId
   = lens _mwpawluWebPropertyId
@@ -114,7 +114,7 @@ mwpawluAccountId
   = lens _mwpawluAccountId
       (\ s a -> s{_mwpawluAccountId = a})
 
--- | Web property-AdWords link ID.
+-- | Web property-Google Ads link ID.
 mwpawluWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksUpdate Text
 mwpawluWebPropertyAdWordsLinkId
   = lens _mwpawluWebPropertyAdWordsLinkId

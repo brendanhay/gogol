@@ -154,8 +154,8 @@ gllPageToken :: Lens' GroupsList (Maybe Text)
 gllPageToken
   = lens _gllPageToken (\ s a -> s{_gllPageToken = a})
 
--- | Maximum number of Groups to return. View | Default | Maximum
--- -----|---------|-------- BASIC | 200 | 1000 FULL | 50 | 500
+-- | Maximum number of groups to return. View | Default | Maximum ----- |
+-- ------- | ------- BASIC | 200 | 1000 FULL | 50 | 500
 gllPageSize :: Lens' GroupsList (Maybe Int32)
 gllPageSize
   = lens _gllPageSize (\ s a -> s{_gllPageSize = a}) .

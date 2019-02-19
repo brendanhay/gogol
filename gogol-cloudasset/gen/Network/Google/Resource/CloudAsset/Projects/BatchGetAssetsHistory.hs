@@ -24,7 +24,8 @@
 -- RESOURCE content, this API outputs history with asset in both non-delete
 -- or deleted status. For IAM_POLICY content, this API outputs history when
 -- the asset and its attached IAM POLICY both exist. This can create gaps
--- in the output history.
+-- in the output history. If a specified asset does not exist, this API
+-- returns an INVALID_ARGUMENT error.
 --
 -- /See:/ <https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview Cloud Asset API Reference> for @cloudasset.projects.batchGetAssetsHistory@.
 module Network.Google.Resource.CloudAsset.Projects.BatchGetAssetsHistory
@@ -73,7 +74,8 @@ type ProjectsBatchGetAssetsHistoryResource =
 -- RESOURCE content, this API outputs history with asset in both non-delete
 -- or deleted status. For IAM_POLICY content, this API outputs history when
 -- the asset and its attached IAM POLICY both exist. This can create gaps
--- in the output history.
+-- in the output history. If a specified asset does not exist, this API
+-- returns an INVALID_ARGUMENT error.
 --
 -- /See:/ 'projectsBatchGetAssetsHistory' smart constructor.
 data ProjectsBatchGetAssetsHistory =

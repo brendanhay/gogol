@@ -116,7 +116,7 @@ ngsntRequestId
   = lens _ngsntRequestId
       (\ s a -> s{_ngsntRequestId = a})
 
--- | Name of the NodeGroup resource to delete.
+-- | Name of the NodeGroup resource to update.
 ngsntNodeGroup :: Lens' NodeGroupsSetNodeTemplate Text
 ngsntNodeGroup
   = lens _ngsntNodeGroup

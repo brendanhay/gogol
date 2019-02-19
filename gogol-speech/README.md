@@ -8,12 +8,12 @@
 
 ## Version
 
-`0.4.0`
+`0.5.0`
 
 
 ## Description
 
-A client library for the Google Cloud Speech.
+A client library for the Google Cloud Speech-to-Text.
 
 
 ## Contribute

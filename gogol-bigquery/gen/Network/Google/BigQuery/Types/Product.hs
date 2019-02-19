@@ -1686,16 +1686,17 @@ instance ToJSON Clustering where
 -- /See:/ 'externalDataConfiguration' smart constructor.
 data ExternalDataConfiguration =
   ExternalDataConfiguration'
-    { _edcBigtableOptions     :: !(Maybe BigtableOptions)
-    , _edcIgnoreUnknownValues :: !(Maybe Bool)
-    , _edcCompression         :: !(Maybe Text)
-    , _edcSourceFormat        :: !(Maybe Text)
-    , _edcSchema              :: !(Maybe TableSchema)
-    , _edcMaxBadRecords       :: !(Maybe (Textual Int32))
-    , _edcGoogleSheetsOptions :: !(Maybe GoogleSheetsOptions)
-    , _edcAutodetect          :: !(Maybe Bool)
-    , _edcSourceURIs          :: !(Maybe [Text])
-    , _edcCSVOptions          :: !(Maybe CSVOptions)
+    { _edcBigtableOptions      :: !(Maybe BigtableOptions)
+    , _edcIgnoreUnknownValues  :: !(Maybe Bool)
+    , _edcHivePartitioningMode :: !(Maybe Text)
+    , _edcCompression          :: !(Maybe Text)
+    , _edcSourceFormat         :: !(Maybe Text)
+    , _edcSchema               :: !(Maybe TableSchema)
+    , _edcMaxBadRecords        :: !(Maybe (Textual Int32))
+    , _edcGoogleSheetsOptions  :: !(Maybe GoogleSheetsOptions)
+    , _edcAutodetect           :: !(Maybe Bool)
+    , _edcSourceURIs           :: !(Maybe [Text])
+    , _edcCSVOptions           :: !(Maybe CSVOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1706,6 +1707,8 @@ data ExternalDataConfiguration =
 -- * 'edcBigtableOptions'
 --
 -- * 'edcIgnoreUnknownValues'
+--
+-- * 'edcHivePartitioningMode'
 --
 -- * 'edcCompression'
 --
@@ -1728,6 +1731,7 @@ externalDataConfiguration =
   ExternalDataConfiguration'
     { _edcBigtableOptions = Nothing
     , _edcIgnoreUnknownValues = Nothing
+    , _edcHivePartitioningMode = Nothing
     , _edcCompression = Nothing
     , _edcSourceFormat = Nothing
     , _edcSchema = Nothing
@@ -1757,6 +1761,17 @@ edcIgnoreUnknownValues :: Lens' ExternalDataConfiguration (Maybe Bool)
 edcIgnoreUnknownValues
   = lens _edcIgnoreUnknownValues
       (\ s a -> s{_edcIgnoreUnknownValues = a})
+
+-- | [Optional, Experimental] If hive partitioning is enabled, which mode to
+-- use. Two modes are supported: - AUTO: automatically infer partition key
+-- name(s) and type(s). - STRINGS: automatic infer partition key name(s).
+-- All types are strings. Not all storage formats support hive partitioning
+-- -- requesting hive partitioning on an unsupported format will lead to an
+-- error.
+edcHivePartitioningMode :: Lens' ExternalDataConfiguration (Maybe Text)
+edcHivePartitioningMode
+  = lens _edcHivePartitioningMode
+      (\ s a -> s{_edcHivePartitioningMode = a})
 
 -- | [Optional] The compression type of the data source. Possible values
 -- include GZIP and NONE. The default value is NONE. This setting is
@@ -1837,6 +1852,7 @@ instance FromJSON ExternalDataConfiguration where
                  ExternalDataConfiguration' <$>
                    (o .:? "bigtableOptions") <*>
                      (o .:? "ignoreUnknownValues")
+                     <*> (o .:? "hivePartitioningMode")
                      <*> (o .:? "compression")
                      <*> (o .:? "sourceFormat")
                      <*> (o .:? "schema")
@@ -1853,6 +1869,8 @@ instance ToJSON ExternalDataConfiguration where
                  [("bigtableOptions" .=) <$> _edcBigtableOptions,
                   ("ignoreUnknownValues" .=) <$>
                     _edcIgnoreUnknownValues,
+                  ("hivePartitioningMode" .=) <$>
+                    _edcHivePartitioningMode,
                   ("compression" .=) <$> _edcCompression,
                   ("sourceFormat" .=) <$> _edcSourceFormat,
                   ("schema" .=) <$> _edcSchema,
@@ -2029,6 +2047,7 @@ instance ToJSON RangePartitioning where
 data TableFieldSchema =
   TableFieldSchema'
     { _tfsMode        :: !(Maybe Text)
+    , _tfsCategories  :: !(Maybe TableFieldSchemaCategories)
     , _tfsName        :: !(Maybe Text)
     , _tfsType        :: !(Maybe Text)
     , _tfsDescription :: !(Maybe Text)
@@ -2042,6 +2061,8 @@ data TableFieldSchema =
 --
 -- * 'tfsMode'
 --
+-- * 'tfsCategories'
+--
 -- * 'tfsName'
 --
 -- * 'tfsType'
@@ -2054,6 +2075,7 @@ tableFieldSchema
 tableFieldSchema =
   TableFieldSchema'
     { _tfsMode = Nothing
+    , _tfsCategories = Nothing
     , _tfsName = Nothing
     , _tfsType = Nothing
     , _tfsDescription = Nothing
@@ -2064,6 +2086,13 @@ tableFieldSchema =
 -- and REPEATED. The default value is NULLABLE.
 tfsMode :: Lens' TableFieldSchema (Maybe Text)
 tfsMode = lens _tfsMode (\ s a -> s{_tfsMode = a})
+
+-- | [Optional] The categories attached to this field, used for field-level
+-- access control.
+tfsCategories :: Lens' TableFieldSchema (Maybe TableFieldSchemaCategories)
+tfsCategories
+  = lens _tfsCategories
+      (\ s a -> s{_tfsCategories = a})
 
 -- | [Required] The field name. The name must contain only letters (a-z,
 -- A-Z), numbers (0-9), or underscores (_), and must start with a letter or
@@ -2099,7 +2128,9 @@ instance FromJSON TableFieldSchema where
           = withObject "TableFieldSchema"
               (\ o ->
                  TableFieldSchema' <$>
-                   (o .:? "mode") <*> (o .:? "name") <*> (o .:? "type")
+                   (o .:? "mode") <*> (o .:? "categories") <*>
+                     (o .:? "name")
+                     <*> (o .:? "type")
                      <*> (o .:? "description")
                      <*> (o .:? "fields" .!= mempty))
 
@@ -2107,8 +2138,9 @@ instance ToJSON TableFieldSchema where
         toJSON TableFieldSchema'{..}
           = object
               (catMaybes
-                 [("mode" .=) <$> _tfsMode, ("name" .=) <$> _tfsName,
-                  ("type" .=) <$> _tfsType,
+                 [("mode" .=) <$> _tfsMode,
+                  ("categories" .=) <$> _tfsCategories,
+                  ("name" .=) <$> _tfsName, ("type" .=) <$> _tfsType,
                   ("description" .=) <$> _tfsDescription,
                   ("fields" .=) <$> _tfsFields])
 
@@ -3401,6 +3433,7 @@ data JobConfigurationLoad =
     , _jclSchemaInline                       :: !(Maybe Text)
     , _jclIgnoreUnknownValues                :: !(Maybe Bool)
     , _jclSchemaUpdateOptions                :: !(Maybe [Text])
+    , _jclHivePartitioningMode               :: !(Maybe Text)
     , _jclCreateDisPosition                  :: !(Maybe Text)
     , _jclSchemaInlineFormat                 :: !(Maybe Text)
     , _jclAllowQuotedNewlines                :: !(Maybe Bool)
@@ -3443,6 +3476,8 @@ data JobConfigurationLoad =
 -- * 'jclIgnoreUnknownValues'
 --
 -- * 'jclSchemaUpdateOptions'
+--
+-- * 'jclHivePartitioningMode'
 --
 -- * 'jclCreateDisPosition'
 --
@@ -3489,6 +3524,7 @@ jobConfigurationLoad =
     , _jclSchemaInline = Nothing
     , _jclIgnoreUnknownValues = Nothing
     , _jclSchemaUpdateOptions = Nothing
+    , _jclHivePartitioningMode = Nothing
     , _jclCreateDisPosition = Nothing
     , _jclSchemaInlineFormat = Nothing
     , _jclAllowQuotedNewlines = Nothing
@@ -3610,6 +3646,17 @@ jclSchemaUpdateOptions
       (\ s a -> s{_jclSchemaUpdateOptions = a})
       . _Default
       . _Coerce
+
+-- | [Optional, Experimental] If hive partitioning is enabled, which mode to
+-- use. Two modes are supported: - AUTO: automatically infer partition key
+-- name(s) and type(s). - STRINGS: automatic infer partition key name(s).
+-- All types are strings. Not all storage formats support hive partitioning
+-- -- requesting hive partitioning on an unsupported format will lead to an
+-- error.
+jclHivePartitioningMode :: Lens' JobConfigurationLoad (Maybe Text)
+jclHivePartitioningMode
+  = lens _jclHivePartitioningMode
+      (\ s a -> s{_jclHivePartitioningMode = a})
 
 -- | [Optional] Specifies whether the job is allowed to create new tables.
 -- The following values are supported: CREATE_IF_NEEDED: If the table does
@@ -3771,6 +3818,7 @@ instance FromJSON JobConfigurationLoad where
                      <*> (o .:? "schemaInline")
                      <*> (o .:? "ignoreUnknownValues")
                      <*> (o .:? "schemaUpdateOptions" .!= mempty)
+                     <*> (o .:? "hivePartitioningMode")
                      <*> (o .:? "createDisposition")
                      <*> (o .:? "schemaInlineFormat")
                      <*> (o .:? "allowQuotedNewlines")
@@ -3804,6 +3852,8 @@ instance ToJSON JobConfigurationLoad where
                     _jclIgnoreUnknownValues,
                   ("schemaUpdateOptions" .=) <$>
                     _jclSchemaUpdateOptions,
+                  ("hivePartitioningMode" .=) <$>
+                    _jclHivePartitioningMode,
                   ("createDisposition" .=) <$> _jclCreateDisPosition,
                   ("schemaInlineFormat" .=) <$> _jclSchemaInlineFormat,
                   ("allowQuotedNewlines" .=) <$>
@@ -6403,6 +6453,45 @@ instance ToJSON JobStatistics2 where
                     _jDdlOperationPerformed,
                   ("totalPartitionsProcessed" .=) <$>
                     _jTotalPartitionsProcessed])
+
+-- | [Optional] The categories attached to this field, used for field-level
+-- access control.
+--
+-- /See:/ 'tableFieldSchemaCategories' smart constructor.
+newtype TableFieldSchemaCategories =
+  TableFieldSchemaCategories'
+    { _tfscNames :: Maybe [Text]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'TableFieldSchemaCategories' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tfscNames'
+tableFieldSchemaCategories
+    :: TableFieldSchemaCategories
+tableFieldSchemaCategories = TableFieldSchemaCategories' {_tfscNames = Nothing}
+
+-- | A list of category resource names. For example,
+-- \"projects\/1\/taxonomies\/2\/categories\/3\". At most 5 categories are
+-- allowed.
+tfscNames :: Lens' TableFieldSchemaCategories [Text]
+tfscNames
+  = lens _tfscNames (\ s a -> s{_tfscNames = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON TableFieldSchemaCategories where
+        parseJSON
+          = withObject "TableFieldSchemaCategories"
+              (\ o ->
+                 TableFieldSchemaCategories' <$>
+                   (o .:? "names" .!= mempty))
+
+instance ToJSON TableFieldSchemaCategories where
+        toJSON TableFieldSchemaCategories'{..}
+          = object (catMaybes [("names" .=) <$> _tfscNames])
 
 --
 -- /See:/ 'jobStatus' smart constructor.

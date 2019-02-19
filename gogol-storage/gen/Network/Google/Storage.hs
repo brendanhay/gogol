@@ -190,6 +190,15 @@ module Network.Google.Storage
     , bucketVersioning
     , bvEnabled
 
+    -- ** Expr
+    , Expr
+    , expr
+    , eLocation
+    , eKind
+    , eExpression
+    , eTitle
+    , eDescription
+
     -- ** BucketsUpdatePredefinedDefaultObjectACL
     , BucketsUpdatePredefinedDefaultObjectACL (..)
 

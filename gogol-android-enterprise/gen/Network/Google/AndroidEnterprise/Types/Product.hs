@@ -1086,13 +1086,14 @@ instance ToJSON StoreCluster where
 -- /See:/ 'administratorWebTokenSpec' smart constructor.
 data AdministratorWebTokenSpec =
   AdministratorWebTokenSpec'
-    { _awtsParent       :: !(Maybe Text)
-    , _awtsPrivateApps  :: !(Maybe AdministratorWebTokenSpecPrivateApps)
-    , _awtsPlaySearch   :: !(Maybe AdministratorWebTokenSpecPlaySearch)
-    , _awtsKind         :: !Text
-    , _awtsWebApps      :: !(Maybe AdministratorWebTokenSpecWebApps)
-    , _awtsPermission   :: !(Maybe [Text])
-    , _awtsStoreBuilder :: !(Maybe AdministratorWebTokenSpecStoreBuilder)
+    { _awtsParent                :: !(Maybe Text)
+    , _awtsPrivateApps           :: !(Maybe AdministratorWebTokenSpecPrivateApps)
+    , _awtsPlaySearch            :: !(Maybe AdministratorWebTokenSpecPlaySearch)
+    , _awtsKind                  :: !Text
+    , _awtsWebApps               :: !(Maybe AdministratorWebTokenSpecWebApps)
+    , _awtsPermission            :: !(Maybe [Text])
+    , _awtsStoreBuilder          :: !(Maybe AdministratorWebTokenSpecStoreBuilder)
+    , _awtsManagedConfigurations :: !(Maybe AdministratorWebTokenSpecManagedConfigurations)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1113,6 +1114,8 @@ data AdministratorWebTokenSpec =
 -- * 'awtsPermission'
 --
 -- * 'awtsStoreBuilder'
+--
+-- * 'awtsManagedConfigurations'
 administratorWebTokenSpec
     :: AdministratorWebTokenSpec
 administratorWebTokenSpec =
@@ -1124,6 +1127,7 @@ administratorWebTokenSpec =
     , _awtsWebApps = Nothing
     , _awtsPermission = Nothing
     , _awtsStoreBuilder = Nothing
+    , _awtsManagedConfigurations = Nothing
     }
 
 -- | The URI of the parent frame hosting the iframe. To prevent XSS, the
@@ -1168,6 +1172,12 @@ awtsStoreBuilder
   = lens _awtsStoreBuilder
       (\ s a -> s{_awtsStoreBuilder = a})
 
+-- | Options for displaying the Managed Configuration page.
+awtsManagedConfigurations :: Lens' AdministratorWebTokenSpec (Maybe AdministratorWebTokenSpecManagedConfigurations)
+awtsManagedConfigurations
+  = lens _awtsManagedConfigurations
+      (\ s a -> s{_awtsManagedConfigurations = a})
+
 instance FromJSON AdministratorWebTokenSpec where
         parseJSON
           = withObject "AdministratorWebTokenSpec"
@@ -1180,7 +1190,8 @@ instance FromJSON AdministratorWebTokenSpec where
                         "androidenterprise#administratorWebTokenSpec")
                      <*> (o .:? "webApps")
                      <*> (o .:? "permission" .!= mempty)
-                     <*> (o .:? "storeBuilder"))
+                     <*> (o .:? "storeBuilder")
+                     <*> (o .:? "managedConfigurations"))
 
 instance ToJSON AdministratorWebTokenSpec where
         toJSON AdministratorWebTokenSpec'{..}
@@ -1192,7 +1203,9 @@ instance ToJSON AdministratorWebTokenSpec where
                   Just ("kind" .= _awtsKind),
                   ("webApps" .=) <$> _awtsWebApps,
                   ("permission" .=) <$> _awtsPermission,
-                  ("storeBuilder" .=) <$> _awtsStoreBuilder])
+                  ("storeBuilder" .=) <$> _awtsStoreBuilder,
+                  ("managedConfigurations" .=) <$>
+                    _awtsManagedConfigurations])
 
 -- | A product to be made visible to a user.
 --
@@ -1779,7 +1792,7 @@ instance ToJSON Device where
                   ("managementType" .=) <$> _dManagementType,
                   ("androidId" .=) <$> _dAndroidId])
 
--- | The Auto install constraint. Defines a set of restrictions for
+-- | The auto-install constraint. Defines a set of restrictions for
 -- installation. At least one of the fields must be set.
 --
 -- /See:/ 'autoInstallConstraint' smart constructor.
@@ -1809,19 +1822,19 @@ autoInstallConstraint =
     , _aicNetworkTypeConstraint = Nothing
     }
 
--- | Charging state to constrain on.
+-- | Charging state constraint.
 aicChargingStateConstraint :: Lens' AutoInstallConstraint (Maybe Text)
 aicChargingStateConstraint
   = lens _aicChargingStateConstraint
       (\ s a -> s{_aicChargingStateConstraint = a})
 
--- | The idle state of the device to constrain on.
+-- | Device idle state constraint.
 aicDeviceIdleStateConstraint :: Lens' AutoInstallConstraint (Maybe Text)
 aicDeviceIdleStateConstraint
   = lens _aicDeviceIdleStateConstraint
       (\ s a -> s{_aicDeviceIdleStateConstraint = a})
 
--- | Network type to constrain on.
+-- | Network type constraint.
 aicNetworkTypeConstraint :: Lens' AutoInstallConstraint (Maybe Text)
 aicNetworkTypeConstraint
   = lens _aicNetworkTypeConstraint
@@ -2171,7 +2184,7 @@ ppTrackIds
       _Default
       . _Coerce
 
--- | The auto install policy for the product.
+-- | The auto-install policy for the product.
 ppAutoInstallPolicy :: Lens' ProductPolicy (Maybe AutoInstallPolicy)
 ppAutoInstallPolicy
   = lens _ppAutoInstallPolicy
@@ -5195,6 +5208,48 @@ instance ToJSON ProductPermissions where
                   ("permission" .=) <$> _ppsPermission,
                   ("productId" .=) <$> _ppsProductId])
 
+--
+-- /See:/ 'administratorWebTokenSpecManagedConfigurations' smart constructor.
+newtype AdministratorWebTokenSpecManagedConfigurations =
+  AdministratorWebTokenSpecManagedConfigurations'
+    { _awtsmcEnabled :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+-- | Creates a value of 'AdministratorWebTokenSpecManagedConfigurations' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'awtsmcEnabled'
+administratorWebTokenSpecManagedConfigurations
+    :: AdministratorWebTokenSpecManagedConfigurations
+administratorWebTokenSpecManagedConfigurations =
+  AdministratorWebTokenSpecManagedConfigurations' {_awtsmcEnabled = Nothing}
+
+-- | Whether the Managed Configuration page is displayed. Default is true.
+awtsmcEnabled :: Lens' AdministratorWebTokenSpecManagedConfigurations (Maybe Bool)
+awtsmcEnabled
+  = lens _awtsmcEnabled
+      (\ s a -> s{_awtsmcEnabled = a})
+
+instance FromJSON
+           AdministratorWebTokenSpecManagedConfigurations
+         where
+        parseJSON
+          = withObject
+              "AdministratorWebTokenSpecManagedConfigurations"
+              (\ o ->
+                 AdministratorWebTokenSpecManagedConfigurations' <$>
+                   (o .:? "enabled"))
+
+instance ToJSON
+           AdministratorWebTokenSpecManagedConfigurations
+         where
+        toJSON
+          AdministratorWebTokenSpecManagedConfigurations'{..}
+          = object
+              (catMaybes [("enabled" .=) <$> _awtsmcEnabled])
+
 -- | A Permissions resource represents some extra capability, to be granted
 -- to an Android app, which requires explicit consent. An enterprise admin
 -- must consent to these permissions on behalf of their users before an
@@ -5417,8 +5472,8 @@ autoInstallPolicy =
     , _aipMinimumVersionCode = Nothing
     }
 
--- | The constraints for the install. Currently there can be at most one
--- constraint.
+-- | The constraints for auto-installing the app. You can specify a maximum
+-- of one constraint.
 aipAutoInstallConstraint :: Lens' AutoInstallPolicy [AutoInstallConstraint]
 aipAutoInstallConstraint
   = lens _aipAutoInstallConstraint
@@ -5426,22 +5481,22 @@ aipAutoInstallConstraint
       . _Default
       . _Coerce
 
--- | The priority of the install, as an unsigned integer. Lower number means
--- higher priority.
+-- | The priority of the install, as an unsigned integer. A lower number
+-- means higher priority.
 aipAutoInstallPriority :: Lens' AutoInstallPolicy (Maybe Int32)
 aipAutoInstallPriority
   = lens _aipAutoInstallPriority
       (\ s a -> s{_aipAutoInstallPriority = a})
       . mapping _Coerce
 
--- | The auto install mode. If unset defaults to AVAILABLE.
+-- | The auto-install mode. If unset defaults to \"doNotAutoInstall\".
 aipAutoInstallMode :: Lens' AutoInstallPolicy (Maybe Text)
 aipAutoInstallMode
   = lens _aipAutoInstallMode
       (\ s a -> s{_aipAutoInstallMode = a})
 
 -- | The minimum version of the app. If a lower version of the app is
--- installed then the app will be auto-updated according to the
+-- installed, then the app will be auto-updated according to the
 -- auto-install constraints, instead of waiting for the regular
 -- auto-update.
 aipMinimumVersionCode :: Lens' AutoInstallPolicy (Maybe Int32)
@@ -5689,8 +5744,8 @@ waVersionCode
       (\ s a -> s{_waVersionCode = a})
       . mapping _Coerce
 
--- | A list of icons representing this website. Must have at least one
--- element.
+-- | A list of icons representing this website. If absent, a default icon
+-- (for create) or the current icon (for update) will be used.
 waIcons :: Lens' WebApp [WebAppIcon]
 waIcons
   = lens _waIcons (\ s a -> s{_waIcons = a}) . _Default

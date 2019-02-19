@@ -77,6 +77,9 @@ module Network.Google.Jobs
     -- ** jobs.projects.jobs.searchForAlert
     , module Network.Google.Resource.Jobs.Projects.Jobs.SearchForAlert
 
+    -- ** jobs.projects.operations.get
+    , module Network.Google.Resource.Jobs.Projects.Operations.Get
+
     -- * Types
 
     -- ** LatLng
@@ -103,6 +106,13 @@ module Network.Google.Jobs
 
     -- ** CompensationFilterType
     , CompensationFilterType (..)
+
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
 
     -- ** RequestMetadata
     , RequestMetadata
@@ -178,6 +188,15 @@ module Network.Google.Jobs
     , lLocationType
     , lPostalAddress
     , lRadiusInMiles
+
+    -- ** Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
 
     -- ** Empty
     , Empty
@@ -265,6 +284,11 @@ module Network.Google.Jobs
     , HistogramQueryResultHistogram
     , histogramQueryResultHistogram
     , hqrhAddtional
+
+    -- ** StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
 
     -- ** HistogramQueryResult
     , HistogramQueryResult
@@ -504,6 +528,11 @@ module Network.Google.Jobs
     , ceDescription
     , ceUnit
 
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
+
     -- ** CompensationRange
     , CompensationRange
     , compensationRange
@@ -551,6 +580,11 @@ module Network.Google.Jobs
     , numericBucketingOption
     , nboBucketBounds
     , nboRequiresMinMax
+
+    -- ** OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
 
     -- ** SearchJobsRequestSearchMode
     , SearchJobsRequestSearchMode (..)
@@ -630,6 +664,7 @@ import           Network.Google.Resource.Jobs.Projects.Jobs.List
 import           Network.Google.Resource.Jobs.Projects.Jobs.Patch
 import           Network.Google.Resource.Jobs.Projects.Jobs.Search
 import           Network.Google.Resource.Jobs.Projects.Jobs.SearchForAlert
+import           Network.Google.Resource.Jobs.Projects.Operations.Get
 
 {- $resources
 TODO
@@ -651,4 +686,5 @@ type JobsAPI =
        :<|> ProjectsJobsSearchResource
        :<|> ProjectsJobsDeleteResource
        :<|> ProjectsClientEventsCreateResource
+       :<|> ProjectsOperationsGetResource
        :<|> ProjectsCompleteResource

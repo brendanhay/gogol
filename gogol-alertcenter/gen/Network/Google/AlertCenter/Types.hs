@@ -161,6 +161,13 @@ module Network.Google.AlertCenter.Types
     , attachment
     , aCSV
 
+    -- * RequestInfo
+    , RequestInfo
+    , requestInfo
+    , riNumberOfRequests
+    , riAppDeveloperEmail
+    , riAppName
+
     -- * GoogleOperations
     , GoogleOperations
     , googleOperations
@@ -180,6 +187,11 @@ module Network.Google.AlertCenter.Types
 
     -- * Xgafv
     , Xgafv (..)
+
+    -- * AppMakerSQLSetupNotification
+    , AppMakerSQLSetupNotification
+    , appMakerSQLSetupNotification
+    , amsqlsnRequestInfo
 
     -- * DomainWideTakeoutInitiated
     , DomainWideTakeoutInitiated

@@ -8817,7 +8817,7 @@ instance ToJSON ReplaceAllTextRequest where
 -- necessarily form a rectangle. For example, let\'s say we have a 3 x 3
 -- table where all the cells of the last row are merged together. The table
 -- looks like this: [ ] A table range with location = (0, 0), row span = 3
--- and column span = 2 specifies the following cells: x x [ x ]
+-- and column span = 2 specifies the following cells: x x [ x x x ]
 --
 -- /See:/ 'tableRange' smart constructor.
 data TableRange =

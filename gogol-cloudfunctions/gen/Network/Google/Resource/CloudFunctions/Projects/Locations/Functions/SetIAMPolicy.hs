@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- Sets the IAM access control policy on the specified function. Replaces
+-- any existing policy.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.setIamPolicy@.
 module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.SetIAMPolicy
@@ -60,8 +60,8 @@ type ProjectsLocationsFunctionsSetIAMPolicyResource =
                      ReqBody '[JSON] SetIAMPolicyRequest :>
                        Post '[JSON] Policy
 
--- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- | Sets the IAM access control policy on the specified function. Replaces
+-- any existing policy.
 --
 -- /See:/ 'projectsLocationsFunctionsSetIAMPolicy' smart constructor.
 data ProjectsLocationsFunctionsSetIAMPolicy =

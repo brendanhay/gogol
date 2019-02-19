@@ -43,6 +43,9 @@ module Network.Google.ServiceUsage.Types
     , mrdType
     , mrdDescription
 
+    -- * BackendRulePathTranslation
+    , BackendRulePathTranslation (..)
+
     -- * GoogleAPIService
     , GoogleAPIService
     , googleAPIService
@@ -157,11 +160,13 @@ module Network.Google.ServiceUsage.Types
     -- * BackendRule
     , BackendRule
     , backendRule
+    , brJwtAudience
     , brSelector
     , brMinDeadline
     , brAddress
     , brOperationDeadline
     , brDeadline
+    , brPathTranslation
 
     -- * BatchEnableServicesRequest
     , BatchEnableServicesRequest
