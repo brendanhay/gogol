@@ -167,7 +167,7 @@ instance Show GSecret where
 
 newtype MediaDownload a = MediaDownload a
 
-data MediaUpload a = MediaUpload a Body
+data MediaUpload a = MediaUpload a GBody
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
@@ -290,21 +290,21 @@ serviceTimeout = lens _svcTimeout (\s a -> s { _svcTimeout = a })
 -- | A single part of a (potentially multipart) request body.
 --
 -- /Note:/ The 'IsString' instance defaults to a @text/plain@ MIME type.
-data Body = Body !MediaType !RequestBody
+data GBody = GBody !MediaType !RequestBody
 
-instance IsString Body where
-    fromString = Body ("text" // "plain") . fromString
+instance IsString GBody where
+    fromString = GBody ("text" // "plain") . fromString
 
 -- | A lens into the 'MediaType' of a request 'Body'.
-bodyContentType :: Lens' Body MediaType
-bodyContentType = lens (\(Body m _) -> m) (\(Body _ b) m -> Body m b)
+bodyContentType :: Lens' GBody MediaType
+bodyContentType = lens (\(GBody m _) -> m) (\(GBody _ b) m -> GBody m b)
 
 -- | An intermediary request builder.
 data Request = Request
     { _rqPath    :: !Builder
     , _rqQuery   :: !(DList (ByteString, Maybe ByteString))
     , _rqHeaders :: !(DList (HeaderName, ByteString))
-    , _rqBody    :: ![Body]
+    , _rqBody    :: ![GBody]
     }
 
 instance Monoid Request where
@@ -335,7 +335,7 @@ appendHeader rq k (Just v) = rq
     { _rqHeaders = DList.snoc (_rqHeaders rq) (k, Text.encodeUtf8 v)
     }
 
-setBody :: Request -> [Body] -> Request
+setBody :: Request -> [GBody] -> Request
 setBody rq bs = rq { _rqBody = bs }
 
 -- | A materialised 'http-client' request and associated response parser.
@@ -384,22 +384,22 @@ gClient f cs m statuses rq s = GClient
     }
 
 class Accept c => ToBody c a where
-    toBody :: Proxy c -> a -> Body
+    toBody :: Proxy c -> a -> GBody
 
 instance ToBody OctetStream ByteString where
-    toBody p = Body (contentType p) . RequestBodyBS
+    toBody p = GBody (contentType p) . RequestBodyBS
 
 instance ToBody OctetStream LBS.ByteString where
-    toBody p = Body (contentType p) . RequestBodyLBS
+    toBody p = GBody (contentType p) . RequestBodyLBS
 
 instance ToBody PlainText ByteString where
-    toBody p = Body (contentType p) . RequestBodyBS
+    toBody p = GBody (contentType p) . RequestBodyBS
 
 instance ToBody PlainText LBS.ByteString where
-    toBody p = Body (contentType p) . RequestBodyLBS
+    toBody p = GBody (contentType p) . RequestBodyLBS
 
 instance ToJSON a => ToBody JSON a where
-    toBody p = Body (contentType p) . RequestBodyLBS . encode
+    toBody p = GBody (contentType p) . RequestBodyLBS . encode
 
 class Accept c => FromStream c a where
     fromStream :: Proxy c
@@ -441,14 +441,14 @@ data MultipartRelated (cs :: [*]) m
 instance ( ToBody c m
          , GoogleClient fn
          ) => GoogleClient (MultipartRelated (c ': cs) m :> fn) where
-    type Fn (MultipartRelated (c ': cs) m :> fn) = m -> Body -> Fn fn
+    type Fn (MultipartRelated (c ': cs) m :> fn) = m -> GBody -> Fn fn
 
     buildClient Proxy rq m b =
         buildClient (Proxy :: Proxy fn) $
            setBody rq [toBody (Proxy :: Proxy c) m, b]
 
 instance GoogleClient fn => GoogleClient (AltMedia :> fn) where
-    type Fn (AltMedia :> fn) = Body -> Fn fn
+    type Fn (AltMedia :> fn) = GBody -> Fn fn
 
     buildClient Proxy rq b =
         buildClient (Proxy :: Proxy fn) $
