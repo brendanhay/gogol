@@ -63,13 +63,16 @@ type InstancesGetSerialPortOutputResource =
 -- | Returns the last 1 MB of serial port output from the specified instance.
 --
 -- /See:/ 'instancesGetSerialPortOutput' smart constructor.
-data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput'
+data InstancesGetSerialPortOutput =
+  InstancesGetSerialPortOutput'
     { _igspoProject  :: !Text
     , _igspoStart    :: !(Maybe (Textual Int64))
     , _igspoZone     :: !Text
     , _igspoPort     :: !(Textual Int32)
     , _igspoInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesGetSerialPortOutput' with the minimum fields required to make a request.
 --
@@ -90,13 +93,14 @@ instancesGetSerialPortOutput
     -> Text -- ^ 'igspoInstance'
     -> InstancesGetSerialPortOutput
 instancesGetSerialPortOutput pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
-    InstancesGetSerialPortOutput'
+  InstancesGetSerialPortOutput'
     { _igspoProject = pIgspoProject_
     , _igspoStart = Nothing
     , _igspoZone = pIgspoZone_
     , _igspoPort = 1
     , _igspoInstance = pIgspoInstance_
     }
+
 
 -- | Project ID for this request.
 igspoProject :: Lens' InstancesGetSerialPortOutput Text

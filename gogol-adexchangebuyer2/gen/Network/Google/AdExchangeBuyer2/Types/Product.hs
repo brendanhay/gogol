@@ -23,11 +23,14 @@ import           Network.Google.Prelude
 -- | HTML content for a creative.
 --
 -- /See:/ 'htmlContent' smart constructor.
-data HTMLContent = HTMLContent'
+data HTMLContent =
+  HTMLContent'
     { _hcHeight  :: !(Maybe (Textual Int32))
     , _hcSnippet :: !(Maybe Text)
     , _hcWidth   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTMLContent' with the minimum fields required to make a request.
 --
@@ -41,11 +44,8 @@ data HTMLContent = HTMLContent'
 htmlContent
     :: HTMLContent
 htmlContent =
-    HTMLContent'
-    { _hcHeight = Nothing
-    , _hcSnippet = Nothing
-    , _hcWidth = Nothing
-    }
+  HTMLContent' {_hcHeight = Nothing, _hcSnippet = Nothing, _hcWidth = Nothing}
+
 
 -- | The height of the HTML snippet in pixels.
 hcHeight :: Lens' HTMLContent (Maybe Int32)
@@ -84,10 +84,13 @@ instance ToJSON HTMLContent where
 -- the auction.
 --
 -- /See:/ 'listFilteredBidsResponse' smart constructor.
-data ListFilteredBidsResponse = ListFilteredBidsResponse'
+data ListFilteredBidsResponse =
+  ListFilteredBidsResponse'
     { _lfbrNextPageToken      :: !(Maybe Text)
     , _lfbrCreativeStatusRows :: !(Maybe [CreativeStatusRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListFilteredBidsResponse' with the minimum fields required to make a request.
 --
@@ -99,10 +102,9 @@ data ListFilteredBidsResponse = ListFilteredBidsResponse'
 listFilteredBidsResponse
     :: ListFilteredBidsResponse
 listFilteredBidsResponse =
-    ListFilteredBidsResponse'
-    { _lfbrNextPageToken = Nothing
-    , _lfbrCreativeStatusRows = Nothing
-    }
+  ListFilteredBidsResponse'
+    {_lfbrNextPageToken = Nothing, _lfbrCreativeStatusRows = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListFilteredBidsRequest.pageToken field in the subsequent call to the
@@ -142,14 +144,16 @@ instance ToJSON ListFilteredBidsResponse where
 --
 -- /See:/ 'resumeProposalRequest' smart constructor.
 data ResumeProposalRequest =
-    ResumeProposalRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ResumeProposalRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResumeProposalRequest' with the minimum fields required to make a request.
 --
 resumeProposalRequest
     :: ResumeProposalRequest
 resumeProposalRequest = ResumeProposalRequest'
+
 
 instance FromJSON ResumeProposalRequest where
         parseJSON
@@ -163,9 +167,12 @@ instance ToJSON ResumeProposalRequest where
 -- via the API at this time, but can be returned in a get or list request.
 --
 -- /See:/ 'nonGuaranteedFixedPriceTerms' smart constructor.
-newtype NonGuaranteedFixedPriceTerms = NonGuaranteedFixedPriceTerms'
+newtype NonGuaranteedFixedPriceTerms =
+  NonGuaranteedFixedPriceTerms'
     { _ngfptFixedPrices :: Maybe [PricePerBuyer]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NonGuaranteedFixedPriceTerms' with the minimum fields required to make a request.
 --
@@ -175,9 +182,8 @@ newtype NonGuaranteedFixedPriceTerms = NonGuaranteedFixedPriceTerms'
 nonGuaranteedFixedPriceTerms
     :: NonGuaranteedFixedPriceTerms
 nonGuaranteedFixedPriceTerms =
-    NonGuaranteedFixedPriceTerms'
-    { _ngfptFixedPrices = Nothing
-    }
+  NonGuaranteedFixedPriceTerms' {_ngfptFixedPrices = Nothing}
+
 
 -- | Fixed price for the specified buyer.
 ngfptFixedPrices :: Lens' NonGuaranteedFixedPriceTerms [PricePerBuyer]
@@ -203,10 +209,13 @@ instance ToJSON NonGuaranteedFixedPriceTerms where
 -- | A response for listing creative and deal associations
 --
 -- /See:/ 'listDealAssociationsResponse' smart constructor.
-data ListDealAssociationsResponse = ListDealAssociationsResponse'
+data ListDealAssociationsResponse =
+  ListDealAssociationsResponse'
     { _ldarNextPageToken :: !(Maybe Text)
     , _ldarAssociations  :: !(Maybe [CreativeDealAssociation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDealAssociationsResponse' with the minimum fields required to make a request.
 --
@@ -218,10 +227,9 @@ data ListDealAssociationsResponse = ListDealAssociationsResponse'
 listDealAssociationsResponse
     :: ListDealAssociationsResponse
 listDealAssociationsResponse =
-    ListDealAssociationsResponse'
-    { _ldarNextPageToken = Nothing
-    , _ldarAssociations = Nothing
-    }
+  ListDealAssociationsResponse'
+    {_ldarNextPageToken = Nothing, _ldarAssociations = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListDealAssociationsRequest.page_token field in the subsequent call to
@@ -258,11 +266,14 @@ instance ToJSON ListDealAssociationsResponse where
 -- long as the aspect ratio is preserved.
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image'
+data Image =
+  Image'
     { _iHeight :: !(Maybe (Textual Int32))
     , _iURL    :: !(Maybe Text)
     , _iWidth  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -275,12 +286,8 @@ data Image = Image'
 -- * 'iWidth'
 image
     :: Image
-image =
-    Image'
-    { _iHeight = Nothing
-    , _iURL = Nothing
-    , _iWidth = Nothing
-    }
+image = Image' {_iHeight = Nothing, _iURL = Nothing, _iWidth = Nothing}
+
 
 -- | Image height in pixels.
 iHeight :: Lens' Image (Maybe Int32)
@@ -316,11 +323,14 @@ instance ToJSON Image where
 -- | Represents targeting about various types of technology.
 --
 -- /See:/ 'technologyTargeting' smart constructor.
-data TechnologyTargeting = TechnologyTargeting'
+data TechnologyTargeting =
+  TechnologyTargeting'
     { _ttDeviceCategoryTargeting   :: !(Maybe CriteriaTargeting)
     , _ttOperatingSystemTargeting  :: !(Maybe OperatingSystemTargeting)
     , _ttDeviceCapabilityTargeting :: !(Maybe CriteriaTargeting)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TechnologyTargeting' with the minimum fields required to make a request.
 --
@@ -334,11 +344,12 @@ data TechnologyTargeting = TechnologyTargeting'
 technologyTargeting
     :: TechnologyTargeting
 technologyTargeting =
-    TechnologyTargeting'
+  TechnologyTargeting'
     { _ttDeviceCategoryTargeting = Nothing
     , _ttOperatingSystemTargeting = Nothing
     , _ttDeviceCapabilityTargeting = Nothing
     }
+
 
 -- | IDs of device categories to be included\/excluded.
 ttDeviceCategoryTargeting :: Lens' TechnologyTargeting (Maybe CriteriaTargeting)
@@ -381,10 +392,13 @@ instance ToJSON TechnologyTargeting where
 -- | Response message for profiles visible to the buyer.
 --
 -- /See:/ 'listPublisherProFilesResponse' smart constructor.
-data ListPublisherProFilesResponse = ListPublisherProFilesResponse'
+data ListPublisherProFilesResponse =
+  ListPublisherProFilesResponse'
     { _lppfrNextPageToken     :: !(Maybe Text)
     , _lppfrPublisherProFiles :: !(Maybe [PublisherProFile])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListPublisherProFilesResponse' with the minimum fields required to make a request.
 --
@@ -396,10 +410,9 @@ data ListPublisherProFilesResponse = ListPublisherProFilesResponse'
 listPublisherProFilesResponse
     :: ListPublisherProFilesResponse
 listPublisherProFilesResponse =
-    ListPublisherProFilesResponse'
-    { _lppfrNextPageToken = Nothing
-    , _lppfrPublisherProFiles = Nothing
-    }
+  ListPublisherProFilesResponse'
+    {_lppfrNextPageToken = Nothing, _lppfrPublisherProFiles = Nothing}
+
 
 -- | List pagination support
 lppfrNextPageToken :: Lens' ListPublisherProFilesResponse (Maybe Text)
@@ -435,10 +448,13 @@ instance ToJSON ListPublisherProFilesResponse where
 -- only by the seller, but they can be returned in a get or list request.
 --
 -- /See:/ 'nonGuaranteedAuctionTerms' smart constructor.
-data NonGuaranteedAuctionTerms = NonGuaranteedAuctionTerms'
+data NonGuaranteedAuctionTerms =
+  NonGuaranteedAuctionTerms'
     { _ngatReservePricesPerBuyer      :: !(Maybe [PricePerBuyer])
     , _ngatAutoOptimizePrivateAuction :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NonGuaranteedAuctionTerms' with the minimum fields required to make a request.
 --
@@ -450,10 +466,11 @@ data NonGuaranteedAuctionTerms = NonGuaranteedAuctionTerms'
 nonGuaranteedAuctionTerms
     :: NonGuaranteedAuctionTerms
 nonGuaranteedAuctionTerms =
-    NonGuaranteedAuctionTerms'
+  NonGuaranteedAuctionTerms'
     { _ngatReservePricesPerBuyer = Nothing
     , _ngatAutoOptimizePrivateAuction = Nothing
     }
+
 
 -- | Reserve price for the specified buyer.
 ngatReservePricesPerBuyer :: Lens' NonGuaranteedAuctionTerms [PricePerBuyer]
@@ -489,10 +506,13 @@ instance ToJSON NonGuaranteedAuctionTerms where
 
 --
 -- /See:/ 'listClientUsersResponse' smart constructor.
-data ListClientUsersResponse = ListClientUsersResponse'
+data ListClientUsersResponse =
+  ListClientUsersResponse'
     { _lcurNextPageToken :: !(Maybe Text)
     , _lcurUsers         :: !(Maybe [ClientUser])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListClientUsersResponse' with the minimum fields required to make a request.
 --
@@ -504,10 +524,8 @@ data ListClientUsersResponse = ListClientUsersResponse'
 listClientUsersResponse
     :: ListClientUsersResponse
 listClientUsersResponse =
-    ListClientUsersResponse'
-    { _lcurNextPageToken = Nothing
-    , _lcurUsers = Nothing
-    }
+  ListClientUsersResponse' {_lcurNextPageToken = Nothing, _lcurUsers = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListClientUsersRequest.pageToken field in the subsequent call to the
@@ -544,7 +562,8 @@ instance ToJSON ListClientUsersResponse where
 -- eligible at each stage of the bidding funnel;
 --
 -- /See:/ 'bidMetricsRow' smart constructor.
-data BidMetricsRow = BidMetricsRow'
+data BidMetricsRow =
+  BidMetricsRow'
     { _bmrBids                  :: !(Maybe MetricValue)
     , _bmrBidsInAuction         :: !(Maybe MetricValue)
     , _bmrImpressionsWon        :: !(Maybe MetricValue)
@@ -552,7 +571,9 @@ data BidMetricsRow = BidMetricsRow'
     , _bmrMeasurableImpressions :: !(Maybe MetricValue)
     , _bmrViewableImpressions   :: !(Maybe MetricValue)
     , _bmrBilledImpressions     :: !(Maybe MetricValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BidMetricsRow' with the minimum fields required to make a request.
 --
@@ -574,7 +595,7 @@ data BidMetricsRow = BidMetricsRow'
 bidMetricsRow
     :: BidMetricsRow
 bidMetricsRow =
-    BidMetricsRow'
+  BidMetricsRow'
     { _bmrBids = Nothing
     , _bmrBidsInAuction = Nothing
     , _bmrImpressionsWon = Nothing
@@ -583,6 +604,7 @@ bidMetricsRow =
     , _bmrViewableImpressions = Nothing
     , _bmrBilledImpressions = Nothing
     }
+
 
 -- | The number of bids that Ad Exchange received from the buyer.
 bmrBids :: Lens' BidMetricsRow (Maybe MetricValue)
@@ -655,10 +677,13 @@ instance ToJSON BidMetricsRow where
 -- | Specifies the day part targeting criteria.
 --
 -- /See:/ 'dayPartTargeting' smart constructor.
-data DayPartTargeting = DayPartTargeting'
+data DayPartTargeting =
+  DayPartTargeting'
     { _dptTimeZoneType :: !(Maybe DayPartTargetingTimeZoneType)
     , _dptDayParts     :: !(Maybe [DayPart])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DayPartTargeting' with the minimum fields required to make a request.
 --
@@ -670,10 +695,8 @@ data DayPartTargeting = DayPartTargeting'
 dayPartTargeting
     :: DayPartTargeting
 dayPartTargeting =
-    DayPartTargeting'
-    { _dptTimeZoneType = Nothing
-    , _dptDayParts = Nothing
-    }
+  DayPartTargeting' {_dptTimeZoneType = Nothing, _dptDayParts = Nothing}
+
 
 -- | The timezone to use for interpreting the day part targeting.
 dptTimeZoneType :: Lens' DayPartTargeting (Maybe DayPartTargetingTimeZoneType)
@@ -707,10 +730,13 @@ instance ToJSON DayPartTargeting where
 -- included and excluded numeric IDs.
 --
 -- /See:/ 'criteriaTargeting' smart constructor.
-data CriteriaTargeting = CriteriaTargeting'
+data CriteriaTargeting =
+  CriteriaTargeting'
     { _ctExcludedCriteriaIds :: !(Maybe [Textual Int64])
     , _ctTargetedCriteriaIds :: !(Maybe [Textual Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CriteriaTargeting' with the minimum fields required to make a request.
 --
@@ -722,10 +748,9 @@ data CriteriaTargeting = CriteriaTargeting'
 criteriaTargeting
     :: CriteriaTargeting
 criteriaTargeting =
-    CriteriaTargeting'
-    { _ctExcludedCriteriaIds = Nothing
-    , _ctTargetedCriteriaIds = Nothing
-    }
+  CriteriaTargeting'
+    {_ctExcludedCriteriaIds = Nothing, _ctTargetedCriteriaIds = Nothing}
+
 
 -- | A list of numeric IDs to be excluded.
 ctExcludedCriteriaIds :: Lens' CriteriaTargeting [Int64]
@@ -764,13 +789,16 @@ instance ToJSON CriteriaTargeting where
 -- paused if either hasBuyerPaused or hasSellPaused is true.
 --
 -- /See:/ 'dealPauseStatus' smart constructor.
-data DealPauseStatus = DealPauseStatus'
+data DealPauseStatus =
+  DealPauseStatus'
     { _dpsFirstPausedBy     :: !(Maybe DealPauseStatusFirstPausedBy)
     , _dpsBuyerPauseReason  :: !(Maybe Text)
     , _dpsHasBuyerPaused    :: !(Maybe Bool)
     , _dpsSellerPauseReason :: !(Maybe Text)
     , _dpsHasSellerPaused   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DealPauseStatus' with the minimum fields required to make a request.
 --
@@ -788,13 +816,14 @@ data DealPauseStatus = DealPauseStatus'
 dealPauseStatus
     :: DealPauseStatus
 dealPauseStatus =
-    DealPauseStatus'
+  DealPauseStatus'
     { _dpsFirstPausedBy = Nothing
     , _dpsBuyerPauseReason = Nothing
     , _dpsHasBuyerPaused = Nothing
     , _dpsSellerPauseReason = Nothing
     , _dpsHasSellerPaused = Nothing
     }
+
 
 -- | The role of the person who first paused this deal.
 dpsFirstPausedBy :: Lens' DealPauseStatus (Maybe DealPauseStatusFirstPausedBy)
@@ -852,11 +881,14 @@ instance ToJSON DealPauseStatus where
 -- status), that have the specified detail.
 --
 -- /See:/ 'filteredBidDetailRow' smart constructor.
-data FilteredBidDetailRow = FilteredBidDetailRow'
+data FilteredBidDetailRow =
+  FilteredBidDetailRow'
     { _fbdrDetailId      :: !(Maybe (Textual Int32))
     , _fbdrRowDimensions :: !(Maybe RowDimensions)
     , _fbdrBidCount      :: !(Maybe MetricValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilteredBidDetailRow' with the minimum fields required to make a request.
 --
@@ -870,11 +902,12 @@ data FilteredBidDetailRow = FilteredBidDetailRow'
 filteredBidDetailRow
     :: FilteredBidDetailRow
 filteredBidDetailRow =
-    FilteredBidDetailRow'
+  FilteredBidDetailRow'
     { _fbdrDetailId = Nothing
     , _fbdrRowDimensions = Nothing
     , _fbdrBidCount = Nothing
     }
+
 
 -- | The ID of the detail. The associated value can be looked up in the
 -- dictionary file corresponding to the DetailType in the response message.
@@ -914,9 +947,12 @@ instance ToJSON FilteredBidDetailRow where
 -- proposal\/deal.
 --
 -- /See:/ 'privateData' smart constructor.
-newtype PrivateData = PrivateData'
+newtype PrivateData =
+  PrivateData'
     { _pdReferenceId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PrivateData' with the minimum fields required to make a request.
 --
@@ -925,10 +961,8 @@ newtype PrivateData = PrivateData'
 -- * 'pdReferenceId'
 privateData
     :: PrivateData
-privateData =
-    PrivateData'
-    { _pdReferenceId = Nothing
-    }
+privateData = PrivateData' {_pdReferenceId = Nothing}
+
 
 -- | A buyer or seller specified reference ID. This can be queried in the
 -- list operations (max-length: 1024 unicode code units).
@@ -955,14 +989,16 @@ instance ToJSON PrivateData where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -973,14 +1009,17 @@ instance ToJSON Empty where
 -- | The serving context for this restriction.
 --
 -- /See:/ 'servingContext' smart constructor.
-data ServingContext = ServingContext'
+data ServingContext =
+  ServingContext'
     { _scPlatform     :: !(Maybe PlatformContext)
     , _scLocation     :: !(Maybe LocationContext)
     , _scSecurityType :: !(Maybe SecurityContext)
     , _scAll          :: !(Maybe ServingContextAll)
     , _scAuctionType  :: !(Maybe AuctionContext)
     , _scAppType      :: !(Maybe AppContext)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServingContext' with the minimum fields required to make a request.
 --
@@ -1000,7 +1039,7 @@ data ServingContext = ServingContext'
 servingContext
     :: ServingContext
 servingContext =
-    ServingContext'
+  ServingContext'
     { _scPlatform = Nothing
     , _scLocation = Nothing
     , _scSecurityType = Nothing
@@ -1008,6 +1047,7 @@ servingContext =
     , _scAuctionType = Nothing
     , _scAppType = Nothing
     }
+
 
 -- | Matches impressions coming from a particular platform.
 scPlatform :: Lens' ServingContext (Maybe PlatformContext)
@@ -1070,7 +1110,8 @@ instance ToJSON ServingContext where
 -- otherwise.
 --
 -- /See:/ 'publisherProFile' smart constructor.
-data PublisherProFile = PublisherProFile'
+data PublisherProFile =
+  PublisherProFile'
     { _ppfDirectDealsContact       :: !(Maybe Text)
     , _ppfAudienceDescription      :: !(Maybe Text)
     , _ppfLogoURL                  :: !(Maybe Text)
@@ -1086,7 +1127,9 @@ data PublisherProFile = PublisherProFile'
     , _ppfRateCardInfoURL          :: !(Maybe Text)
     , _ppfTopHeadlines             :: !(Maybe [Text])
     , _ppfProgrammaticDealsContact :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublisherProFile' with the minimum fields required to make a request.
 --
@@ -1124,7 +1167,7 @@ data PublisherProFile = PublisherProFile'
 publisherProFile
     :: PublisherProFile
 publisherProFile =
-    PublisherProFile'
+  PublisherProFile'
     { _ppfDirectDealsContact = Nothing
     , _ppfAudienceDescription = Nothing
     , _ppfLogoURL = Nothing
@@ -1141,6 +1184,7 @@ publisherProFile =
     , _ppfTopHeadlines = Nothing
     , _ppfProgrammaticDealsContact = Nothing
     }
+
 
 -- | Contact information for direct reservation deals. This is free text
 -- entered by the publisher and may include information like names, phone
@@ -1290,9 +1334,12 @@ instance ToJSON PublisherProFile where
 -- | Request to accept a proposal.
 --
 -- /See:/ 'acceptProposalRequest' smart constructor.
-newtype AcceptProposalRequest = AcceptProposalRequest'
+newtype AcceptProposalRequest =
+  AcceptProposalRequest'
     { _aprProposalRevision :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AcceptProposalRequest' with the minimum fields required to make a request.
 --
@@ -1301,10 +1348,8 @@ newtype AcceptProposalRequest = AcceptProposalRequest'
 -- * 'aprProposalRevision'
 acceptProposalRequest
     :: AcceptProposalRequest
-acceptProposalRequest =
-    AcceptProposalRequest'
-    { _aprProposalRevision = Nothing
-    }
+acceptProposalRequest = AcceptProposalRequest' {_aprProposalRevision = Nothing}
+
 
 -- | The last known client revision number of the proposal.
 aprProposalRevision :: Lens' AcceptProposalRequest (Maybe Int64)
@@ -1330,10 +1375,13 @@ instance ToJSON AcceptProposalRequest where
 -- height depend on the type of the targeting.
 --
 -- /See:/ 'size' smart constructor.
-data Size = Size'
+data Size =
+  Size'
     { _sHeight :: !(Maybe (Textual Int32))
     , _sWidth  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Size' with the minimum fields required to make a request.
 --
@@ -1344,11 +1392,8 @@ data Size = Size'
 -- * 'sWidth'
 size
     :: Size
-size =
-    Size'
-    { _sHeight = Nothing
-    , _sWidth = Nothing
-    }
+size = Size' {_sHeight = Nothing, _sWidth = Nothing}
+
 
 -- | The height of the creative.
 sHeight :: Lens' Size (Maybe Int32)
@@ -1379,10 +1424,13 @@ instance ToJSON Size where
 -- and not sent to the buyer.
 --
 -- /See:/ 'listFilteredBidRequestsResponse' smart constructor.
-data ListFilteredBidRequestsResponse = ListFilteredBidRequestsResponse'
+data ListFilteredBidRequestsResponse =
+  ListFilteredBidRequestsResponse'
     { _lfbrrNextPageToken     :: !(Maybe Text)
     , _lfbrrCalloutStatusRows :: !(Maybe [CalloutStatusRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListFilteredBidRequestsResponse' with the minimum fields required to make a request.
 --
@@ -1394,10 +1442,9 @@ data ListFilteredBidRequestsResponse = ListFilteredBidRequestsResponse'
 listFilteredBidRequestsResponse
     :: ListFilteredBidRequestsResponse
 listFilteredBidRequestsResponse =
-    ListFilteredBidRequestsResponse'
-    { _lfbrrNextPageToken = Nothing
-    , _lfbrrCalloutStatusRows = Nothing
-    }
+  ListFilteredBidRequestsResponse'
+    {_lfbrrNextPageToken = Nothing, _lfbrrCalloutStatusRows = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListFilteredBidRequestsRequest.pageToken field in the subsequent call to
@@ -1437,9 +1484,12 @@ instance ToJSON ListFilteredBidRequestsResponse where
 -- | A request for associating a deal and a creative.
 --
 -- /See:/ 'addDealAssociationRequest' smart constructor.
-newtype AddDealAssociationRequest = AddDealAssociationRequest'
+newtype AddDealAssociationRequest =
+  AddDealAssociationRequest'
     { _adarAssociation :: Maybe CreativeDealAssociation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AddDealAssociationRequest' with the minimum fields required to make a request.
 --
@@ -1449,9 +1499,8 @@ newtype AddDealAssociationRequest = AddDealAssociationRequest'
 addDealAssociationRequest
     :: AddDealAssociationRequest
 addDealAssociationRequest =
-    AddDealAssociationRequest'
-    { _adarAssociation = Nothing
-    }
+  AddDealAssociationRequest' {_adarAssociation = Nothing}
+
 
 -- | The association between a creative and a deal that should be added.
 adarAssociation :: Lens' AddDealAssociationRequest (Maybe CreativeDealAssociation)
@@ -1475,11 +1524,14 @@ instance ToJSON AddDealAssociationRequest where
 -- described by the specified creative status.
 --
 -- /See:/ 'creativeStatusRow' smart constructor.
-data CreativeStatusRow = CreativeStatusRow'
+data CreativeStatusRow =
+  CreativeStatusRow'
     { _csrRowDimensions    :: !(Maybe RowDimensions)
     , _csrBidCount         :: !(Maybe MetricValue)
     , _csrCreativeStatusId :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeStatusRow' with the minimum fields required to make a request.
 --
@@ -1493,11 +1545,12 @@ data CreativeStatusRow = CreativeStatusRow'
 creativeStatusRow
     :: CreativeStatusRow
 creativeStatusRow =
-    CreativeStatusRow'
+  CreativeStatusRow'
     { _csrRowDimensions = Nothing
     , _csrBidCount = Nothing
     , _csrCreativeStatusId = Nothing
     }
+
 
 -- | The values of all dimensions associated with metric values in this row.
 csrRowDimensions :: Lens' CreativeStatusRow (Maybe RowDimensions)
@@ -1539,9 +1592,12 @@ instance ToJSON CreativeStatusRow where
 -- be aggregated throughout the lifetime of the filter set.
 --
 -- /See:/ 'realtimeTimeRange' smart constructor.
-newtype RealtimeTimeRange = RealtimeTimeRange'
+newtype RealtimeTimeRange =
+  RealtimeTimeRange'
     { _rtrStartTimestamp :: Maybe DateTime'
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RealtimeTimeRange' with the minimum fields required to make a request.
 --
@@ -1550,10 +1606,8 @@ newtype RealtimeTimeRange = RealtimeTimeRange'
 -- * 'rtrStartTimestamp'
 realtimeTimeRange
     :: RealtimeTimeRange
-realtimeTimeRange =
-    RealtimeTimeRange'
-    { _rtrStartTimestamp = Nothing
-    }
+realtimeTimeRange = RealtimeTimeRange' {_rtrStartTimestamp = Nothing}
+
 
 -- | The start timestamp of the real-time RTB metrics aggregation.
 rtrStartTimestamp :: Lens' RealtimeTimeRange (Maybe UTCTime)
@@ -1577,13 +1631,16 @@ instance ToJSON RealtimeTimeRange where
 -- | A proposal may be associated to several notes.
 --
 -- /See:/ 'note' smart constructor.
-data Note = Note'
+data Note =
+  Note'
     { _nProposalRevision :: !(Maybe (Textual Int64))
     , _nNote             :: !(Maybe Text)
     , _nNoteId           :: !(Maybe Text)
     , _nCreatorRole      :: !(Maybe NoteCreatorRole)
     , _nCreateTime       :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Note' with the minimum fields required to make a request.
 --
@@ -1601,13 +1658,14 @@ data Note = Note'
 note
     :: Note
 note =
-    Note'
+  Note'
     { _nProposalRevision = Nothing
     , _nNote = Nothing
     , _nNoteId = Nothing
     , _nCreatorRole = Nothing
     , _nCreateTime = Nothing
     }
+
 
 -- | The revision number of the proposal when the note is created.
 -- \'OutputOnly
@@ -1660,10 +1718,13 @@ instance ToJSON Note where
 -- | Response message for listing filter sets.
 --
 -- /See:/ 'listFilterSetsResponse' smart constructor.
-data ListFilterSetsResponse = ListFilterSetsResponse'
+data ListFilterSetsResponse =
+  ListFilterSetsResponse'
     { _lfsrNextPageToken :: !(Maybe Text)
     , _lfsrFilterSets    :: !(Maybe [FilterSet])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListFilterSetsResponse' with the minimum fields required to make a request.
 --
@@ -1675,10 +1736,9 @@ data ListFilterSetsResponse = ListFilterSetsResponse'
 listFilterSetsResponse
     :: ListFilterSetsResponse
 listFilterSetsResponse =
-    ListFilterSetsResponse'
-    { _lfsrNextPageToken = Nothing
-    , _lfsrFilterSets = Nothing
-    }
+  ListFilterSetsResponse'
+    {_lfsrNextPageToken = Nothing, _lfsrFilterSets = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListFilterSetsRequest.pageToken field in the subsequent call to the
@@ -1714,11 +1774,14 @@ instance ToJSON ListFilterSetsResponse where
 -- | Represents an amount of money with its currency type.
 --
 -- /See:/ 'money' smart constructor.
-data Money = Money'
+data Money =
+  Money'
     { _mCurrencyCode :: !(Maybe Text)
     , _mNanos        :: !(Maybe (Textual Int32))
     , _mUnits        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
@@ -1731,12 +1794,8 @@ data Money = Money'
 -- * 'mUnits'
 money
     :: Money
-money =
-    Money'
-    { _mCurrencyCode = Nothing
-    , _mNanos = Nothing
-    , _mUnits = Nothing
-    }
+money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
+
 
 -- | The 3-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -1780,9 +1839,12 @@ instance ToJSON Money where
 -- | Request message for adding a note to a given proposal.
 --
 -- /See:/ 'addNoteRequest' smart constructor.
-newtype AddNoteRequest = AddNoteRequest'
+newtype AddNoteRequest =
+  AddNoteRequest'
     { _anrNote :: Maybe Note
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AddNoteRequest' with the minimum fields required to make a request.
 --
@@ -1791,10 +1853,8 @@ newtype AddNoteRequest = AddNoteRequest'
 -- * 'anrNote'
 addNoteRequest
     :: AddNoteRequest
-addNoteRequest =
-    AddNoteRequest'
-    { _anrNote = Nothing
-    }
+addNoteRequest = AddNoteRequest' {_anrNote = Nothing}
+
 
 -- | Details of the note to add.
 anrNote :: Lens' AddNoteRequest (Maybe Note)
@@ -1814,10 +1874,13 @@ instance ToJSON AddNoteRequest where
 -- logically OR\'ed.
 --
 -- /See:/ 'placementTargeting' smart constructor.
-data PlacementTargeting = PlacementTargeting'
+data PlacementTargeting =
+  PlacementTargeting'
     { _ptURLTargeting               :: !(Maybe URLTargeting)
     , _ptMobileApplicationTargeting :: !(Maybe MobileApplicationTargeting)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacementTargeting' with the minimum fields required to make a request.
 --
@@ -1829,10 +1892,9 @@ data PlacementTargeting = PlacementTargeting'
 placementTargeting
     :: PlacementTargeting
 placementTargeting =
-    PlacementTargeting'
-    { _ptURLTargeting = Nothing
-    , _ptMobileApplicationTargeting = Nothing
-    }
+  PlacementTargeting'
+    {_ptURLTargeting = Nothing, _ptMobileApplicationTargeting = Nothing}
+
 
 -- | URLs to be included\/excluded.
 ptURLTargeting :: Lens' PlacementTargeting (Maybe URLTargeting)
@@ -1866,11 +1928,14 @@ instance ToJSON PlacementTargeting where
 -- | Represents size of a single ad slot, or a creative.
 --
 -- /See:/ 'adSize' smart constructor.
-data AdSize = AdSize'
+data AdSize =
+  AdSize'
     { _asHeight   :: !(Maybe (Textual Int64))
     , _asWidth    :: !(Maybe (Textual Int64))
     , _asSizeType :: !(Maybe AdSizeSizeType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdSize' with the minimum fields required to make a request.
 --
@@ -1884,11 +1949,8 @@ data AdSize = AdSize'
 adSize
     :: AdSize
 adSize =
-    AdSize'
-    { _asHeight = Nothing
-    , _asWidth = Nothing
-    , _asSizeType = Nothing
-    }
+  AdSize' {_asHeight = Nothing, _asWidth = Nothing, _asSizeType = Nothing}
+
 
 -- | The height of the ad slot in pixels. This field will be present only
 -- when size type is \`PIXEL\`.
@@ -1929,14 +1991,16 @@ instance ToJSON AdSize where
 --
 -- /See:/ 'stopWatchingCreativeRequest' smart constructor.
 data StopWatchingCreativeRequest =
-    StopWatchingCreativeRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  StopWatchingCreativeRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StopWatchingCreativeRequest' with the minimum fields required to make a request.
 --
 stopWatchingCreativeRequest
     :: StopWatchingCreativeRequest
 stopWatchingCreativeRequest = StopWatchingCreativeRequest'
+
 
 instance FromJSON StopWatchingCreativeRequest where
         parseJSON
@@ -1949,9 +2013,12 @@ instance ToJSON StopWatchingCreativeRequest where
 -- | A request for watching changes to creative Status.
 --
 -- /See:/ 'watchCreativeRequest' smart constructor.
-newtype WatchCreativeRequest = WatchCreativeRequest'
+newtype WatchCreativeRequest =
+  WatchCreativeRequest'
     { _wcrTopic :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WatchCreativeRequest' with the minimum fields required to make a request.
 --
@@ -1960,10 +2027,8 @@ newtype WatchCreativeRequest = WatchCreativeRequest'
 -- * 'wcrTopic'
 watchCreativeRequest
     :: WatchCreativeRequest
-watchCreativeRequest =
-    WatchCreativeRequest'
-    { _wcrTopic = Nothing
-    }
+watchCreativeRequest = WatchCreativeRequest' {_wcrTopic = Nothing}
+
 
 -- | The Pub\/Sub topic to publish notifications to. This topic must already
 -- exist and must give permission to
@@ -1985,9 +2050,12 @@ instance ToJSON WatchCreativeRequest where
 -- | Message captures metadata about the serving status of a deal.
 --
 -- /See:/ 'dealServingMetadata' smart constructor.
-newtype DealServingMetadata = DealServingMetadata'
+newtype DealServingMetadata =
+  DealServingMetadata'
     { _dsmDealPauseStatus :: Maybe DealPauseStatus
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DealServingMetadata' with the minimum fields required to make a request.
 --
@@ -1996,10 +2064,8 @@ newtype DealServingMetadata = DealServingMetadata'
 -- * 'dsmDealPauseStatus'
 dealServingMetadata
     :: DealServingMetadata
-dealServingMetadata =
-    DealServingMetadata'
-    { _dsmDealPauseStatus = Nothing
-    }
+dealServingMetadata = DealServingMetadata' {_dsmDealPauseStatus = Nothing}
+
 
 -- | Tracks which parties (if any) have paused a deal. \'OutputOnly
 dsmDealPauseStatus :: Lens' DealServingMetadata (Maybe DealPauseStatus)
@@ -2022,11 +2088,14 @@ instance ToJSON DealServingMetadata where
 -- | Message contains details about how the deals will be paced.
 --
 -- /See:/ 'deliveryControl' smart constructor.
-data DeliveryControl = DeliveryControl'
+data DeliveryControl =
+  DeliveryControl'
     { _dcCreativeBlockingLevel :: !(Maybe DeliveryControlCreativeBlockingLevel)
     , _dcFrequencyCaps         :: !(Maybe [FrequencyCap])
     , _dcDeliveryRateType      :: !(Maybe DeliveryControlDeliveryRateType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeliveryControl' with the minimum fields required to make a request.
 --
@@ -2040,11 +2109,12 @@ data DeliveryControl = DeliveryControl'
 deliveryControl
     :: DeliveryControl
 deliveryControl =
-    DeliveryControl'
+  DeliveryControl'
     { _dcCreativeBlockingLevel = Nothing
     , _dcFrequencyCaps = Nothing
     , _dcDeliveryRateType = Nothing
     }
+
 
 -- | Specified the creative blocking levels to be applied. \'OutputOnly
 dcCreativeBlockingLevel :: Lens' DeliveryControl (Maybe DeliveryControlCreativeBlockingLevel)
@@ -2093,11 +2163,14 @@ instance ToJSON DeliveryControl where
 -- buyer is set.
 --
 -- /See:/ 'pricePerBuyer' smart constructor.
-data PricePerBuyer = PricePerBuyer'
+data PricePerBuyer =
+  PricePerBuyer'
     { _ppbPrice         :: !(Maybe Price)
     , _ppbAdvertiserIds :: !(Maybe [Text])
     , _ppbBuyer         :: !(Maybe Buyer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PricePerBuyer' with the minimum fields required to make a request.
 --
@@ -2111,11 +2184,9 @@ data PricePerBuyer = PricePerBuyer'
 pricePerBuyer
     :: PricePerBuyer
 pricePerBuyer =
-    PricePerBuyer'
-    { _ppbPrice = Nothing
-    , _ppbAdvertiserIds = Nothing
-    , _ppbBuyer = Nothing
-    }
+  PricePerBuyer'
+    {_ppbPrice = Nothing, _ppbAdvertiserIds = Nothing, _ppbBuyer = Nothing}
+
 
 -- | The specified price.
 ppbPrice :: Lens' PricePerBuyer (Maybe Price)
@@ -2153,10 +2224,11 @@ instance ToJSON PricePerBuyer where
                   ("advertiserIds" .=) <$> _ppbAdvertiserIds,
                   ("buyer" .=) <$> _ppbBuyer])
 
--- | A creative and its classification data. Next ID: 39
+-- | A creative and its classification data. Next ID: 40
 --
 -- /See:/ 'creative' smart constructor.
-data Creative = Creative'
+data Creative =
+  Creative'
     { _cAPIUpdateTime               :: !(Maybe DateTime')
     , _cDetectedLanguages           :: !(Maybe [Text])
     , _cAdvertiserName              :: !(Maybe Text)
@@ -2183,7 +2255,9 @@ data Creative = Creative'
     , _cOpenAuctionStatus           :: !(Maybe CreativeOpenAuctionStatus)
     , _cFilteringStats              :: !(Maybe FilteringStats)
     , _cDeclaredClickThroughURLs    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Creative' with the minimum fields required to make a request.
 --
@@ -2243,7 +2317,7 @@ data Creative = Creative'
 creative
     :: Creative
 creative =
-    Creative'
+  Creative'
     { _cAPIUpdateTime = Nothing
     , _cDetectedLanguages = Nothing
     , _cAdvertiserName = Nothing
@@ -2271,6 +2345,7 @@ creative =
     , _cFilteringStats = Nothing
     , _cDeclaredClickThroughURLs = Nothing
     }
+
 
 -- | \'OutputOnly The last update timestamp of the creative via API.
 cAPIUpdateTime :: Lens' Creative (Maybe UTCTime)
@@ -2542,9 +2617,12 @@ instance ToJSON Creative where
 -- | \'OutputOnly The app type the restriction applies to for mobile device.
 --
 -- /See:/ 'appContext' smart constructor.
-newtype AppContext = AppContext'
+newtype AppContext =
+  AppContext'
     { _acAppTypes :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppContext' with the minimum fields required to make a request.
 --
@@ -2553,10 +2631,8 @@ newtype AppContext = AppContext'
 -- * 'acAppTypes'
 appContext
     :: AppContext
-appContext =
-    AppContext'
-    { _acAppTypes = Nothing
-    }
+appContext = AppContext' {_acAppTypes = Nothing}
+
 
 -- | The app types this restriction applies to.
 acAppTypes :: Lens' AppContext [Text]
@@ -2582,13 +2658,16 @@ instance ToJSON AppContext where
 -- always applied as a logical AND, unless noted otherwise.
 --
 -- /See:/ 'marketplaceTargeting' smart constructor.
-data MarketplaceTargeting = MarketplaceTargeting'
+data MarketplaceTargeting =
+  MarketplaceTargeting'
     { _mtGeoTargeting           :: !(Maybe CriteriaTargeting)
     , _mtTechnologyTargeting    :: !(Maybe TechnologyTargeting)
     , _mtPlacementTargeting     :: !(Maybe PlacementTargeting)
     , _mtVideoTargeting         :: !(Maybe VideoTargeting)
     , _mtInventorySizeTargeting :: !(Maybe InventorySizeTargeting)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MarketplaceTargeting' with the minimum fields required to make a request.
 --
@@ -2606,13 +2685,14 @@ data MarketplaceTargeting = MarketplaceTargeting'
 marketplaceTargeting
     :: MarketplaceTargeting
 marketplaceTargeting =
-    MarketplaceTargeting'
+  MarketplaceTargeting'
     { _mtGeoTargeting = Nothing
     , _mtTechnologyTargeting = Nothing
     , _mtPlacementTargeting = Nothing
     , _mtVideoTargeting = Nothing
     , _mtInventorySizeTargeting = Nothing
     }
+
 
 -- | Geo criteria IDs to be included\/excluded.
 mtGeoTargeting :: Lens' MarketplaceTargeting (Maybe CriteriaTargeting)
@@ -2672,10 +2752,13 @@ instance ToJSON MarketplaceTargeting where
 -- an error.
 --
 -- /See:/ 'listBidResponseErrorsResponse' smart constructor.
-data ListBidResponseErrorsResponse = ListBidResponseErrorsResponse'
+data ListBidResponseErrorsResponse =
+  ListBidResponseErrorsResponse'
     { _lbrerNextPageToken     :: !(Maybe Text)
     , _lbrerCalloutStatusRows :: !(Maybe [CalloutStatusRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListBidResponseErrorsResponse' with the minimum fields required to make a request.
 --
@@ -2687,10 +2770,9 @@ data ListBidResponseErrorsResponse = ListBidResponseErrorsResponse'
 listBidResponseErrorsResponse
     :: ListBidResponseErrorsResponse
 listBidResponseErrorsResponse =
-    ListBidResponseErrorsResponse'
-    { _lbrerNextPageToken = Nothing
-    , _lbrerCalloutStatusRows = Nothing
-    }
+  ListBidResponseErrorsResponse'
+    {_lbrerNextPageToken = Nothing, _lbrerCalloutStatusRows = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListBidResponseErrorsRequest.pageToken field in the subsequent call to
@@ -2727,11 +2809,14 @@ instance ToJSON ListBidResponseErrorsResponse where
 -- | \'OutputOnly Shows any corrections that were applied to this creative.
 --
 -- /See:/ 'correction' smart constructor.
-data Correction = Correction'
+data Correction =
+  Correction'
     { _cContexts :: !(Maybe [ServingContext])
     , _cDetails  :: !(Maybe [Text])
     , _cType     :: !(Maybe CorrectionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Correction' with the minimum fields required to make a request.
 --
@@ -2745,11 +2830,8 @@ data Correction = Correction'
 correction
     :: Correction
 correction =
-    Correction'
-    { _cContexts = Nothing
-    , _cDetails = Nothing
-    , _cType = Nothing
-    }
+  Correction' {_cContexts = Nothing, _cDetails = Nothing, _cType = Nothing}
+
 
 -- | The contexts for the correction.
 cContexts :: Lens' Correction [ServingContext]
@@ -2789,11 +2871,14 @@ instance ToJSON Correction where
 -- | The association between a creative and a deal.
 --
 -- /See:/ 'creativeDealAssociation' smart constructor.
-data CreativeDealAssociation = CreativeDealAssociation'
+data CreativeDealAssociation =
+  CreativeDealAssociation'
     { _cdaCreativeId :: !(Maybe Text)
     , _cdaAccountId  :: !(Maybe Text)
     , _cdaDealsId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeDealAssociation' with the minimum fields required to make a request.
 --
@@ -2807,11 +2892,9 @@ data CreativeDealAssociation = CreativeDealAssociation'
 creativeDealAssociation
     :: CreativeDealAssociation
 creativeDealAssociation =
-    CreativeDealAssociation'
-    { _cdaCreativeId = Nothing
-    , _cdaAccountId = Nothing
-    , _cdaDealsId = Nothing
-    }
+  CreativeDealAssociation'
+    {_cdaCreativeId = Nothing, _cdaAccountId = Nothing, _cdaDealsId = Nothing}
+
 
 -- | The ID of the creative associated with the deal.
 cdaCreativeId :: Lens' CreativeDealAssociation (Maybe Text)
@@ -2849,10 +2932,13 @@ instance ToJSON CreativeDealAssociation where
 -- Ad Manager account ID.
 --
 -- /See:/ 'seller' smart constructor.
-data Seller = Seller'
+data Seller =
+  Seller'
     { _sAccountId    :: !(Maybe Text)
     , _sSubAccountId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Seller' with the minimum fields required to make a request.
 --
@@ -2863,11 +2949,8 @@ data Seller = Seller'
 -- * 'sSubAccountId'
 seller
     :: Seller
-seller =
-    Seller'
-    { _sAccountId = Nothing
-    , _sSubAccountId = Nothing
-    }
+seller = Seller' {_sAccountId = Nothing, _sSubAccountId = Nothing}
+
 
 -- | The unique ID for the seller. The seller fills in this field. The seller
 -- account ID is then available to buyer in the product.
@@ -2898,10 +2981,13 @@ instance ToJSON Seller where
 -- | A response for listing creatives.
 --
 -- /See:/ 'listCreativesResponse' smart constructor.
-data ListCreativesResponse = ListCreativesResponse'
+data ListCreativesResponse =
+  ListCreativesResponse'
     { _lcrNextPageToken :: !(Maybe Text)
     , _lcrCreatives     :: !(Maybe [Creative])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListCreativesResponse' with the minimum fields required to make a request.
 --
@@ -2913,10 +2999,8 @@ data ListCreativesResponse = ListCreativesResponse'
 listCreativesResponse
     :: ListCreativesResponse
 listCreativesResponse =
-    ListCreativesResponse'
-    { _lcrNextPageToken = Nothing
-    , _lcrCreatives = Nothing
-    }
+  ListCreativesResponse' {_lcrNextPageToken = Nothing, _lcrCreatives = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListCreativesRequest.page_token field in the subsequent call to
@@ -2952,10 +3036,13 @@ instance ToJSON ListCreativesResponse where
 -- dimensions. Encapsulates the values of all dimensions for a given row.
 --
 -- /See:/ 'rowDimensions' smart constructor.
-data RowDimensions = RowDimensions'
+data RowDimensions =
+  RowDimensions'
     { _rdPublisherIdentifier :: !(Maybe Text)
     , _rdTimeInterval        :: !(Maybe TimeInterval)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RowDimensions' with the minimum fields required to make a request.
 --
@@ -2967,10 +3054,8 @@ data RowDimensions = RowDimensions'
 rowDimensions
     :: RowDimensions
 rowDimensions =
-    RowDimensions'
-    { _rdPublisherIdentifier = Nothing
-    , _rdTimeInterval = Nothing
-    }
+  RowDimensions' {_rdPublisherIdentifier = Nothing, _rdTimeInterval = Nothing}
+
 
 -- | The publisher identifier for this row, if a breakdown by
 -- [BreakdownDimension.PUBLISHER_IDENTIFIER](https:\/\/developers.google.com\/authorized-buyers\/apis\/reference\/rest\/v2beta1\/bidders.accounts.filterSets#FilterSet.BreakdownDimension)
@@ -3005,10 +3090,13 @@ instance ToJSON RowDimensions where
 -- | Represents targeting information for operating systems.
 --
 -- /See:/ 'operatingSystemTargeting' smart constructor.
-data OperatingSystemTargeting = OperatingSystemTargeting'
+data OperatingSystemTargeting =
+  OperatingSystemTargeting'
     { _ostOperatingSystemVersionCriteria :: !(Maybe CriteriaTargeting)
     , _ostOperatingSystemCriteria        :: !(Maybe CriteriaTargeting)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperatingSystemTargeting' with the minimum fields required to make a request.
 --
@@ -3020,10 +3108,11 @@ data OperatingSystemTargeting = OperatingSystemTargeting'
 operatingSystemTargeting
     :: OperatingSystemTargeting
 operatingSystemTargeting =
-    OperatingSystemTargeting'
+  OperatingSystemTargeting'
     { _ostOperatingSystemVersionCriteria = Nothing
     , _ostOperatingSystemCriteria = Nothing
     }
+
 
 -- | IDs of operating system versions to be included\/excluded.
 ostOperatingSystemVersionCriteria :: Lens' OperatingSystemTargeting (Maybe CriteriaTargeting)
@@ -3058,11 +3147,14 @@ instance ToJSON OperatingSystemTargeting where
 -- filtered bid reason.
 --
 -- /See:/ 'listCreativeStatusBreakdownByDetailResponse' smart constructor.
-data ListCreativeStatusBreakdownByDetailResponse = ListCreativeStatusBreakdownByDetailResponse'
+data ListCreativeStatusBreakdownByDetailResponse =
+  ListCreativeStatusBreakdownByDetailResponse'
     { _lcsbbdrNextPageToken         :: !(Maybe Text)
     , _lcsbbdrDetailType            :: !(Maybe ListCreativeStatusBreakdownByDetailResponseDetailType)
     , _lcsbbdrFilteredBidDetailRows :: !(Maybe [FilteredBidDetailRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListCreativeStatusBreakdownByDetailResponse' with the minimum fields required to make a request.
 --
@@ -3076,11 +3168,12 @@ data ListCreativeStatusBreakdownByDetailResponse = ListCreativeStatusBreakdownBy
 listCreativeStatusBreakdownByDetailResponse
     :: ListCreativeStatusBreakdownByDetailResponse
 listCreativeStatusBreakdownByDetailResponse =
-    ListCreativeStatusBreakdownByDetailResponse'
+  ListCreativeStatusBreakdownByDetailResponse'
     { _lcsbbdrNextPageToken = Nothing
     , _lcsbbdrDetailType = Nothing
     , _lcsbbdrFilteredBidDetailRows = Nothing
     }
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListCreativeStatusBreakdownByDetailRequest.pageToken field in the
@@ -3107,7 +3200,8 @@ lcsbbdrFilteredBidDetailRows
       . _Coerce
 
 instance FromJSON
-         ListCreativeStatusBreakdownByDetailResponse where
+           ListCreativeStatusBreakdownByDetailResponse
+         where
         parseJSON
           = withObject
               "ListCreativeStatusBreakdownByDetailResponse"
@@ -3117,7 +3211,8 @@ instance FromJSON
                      (o .:? "filteredBidDetailRows" .!= mempty))
 
 instance ToJSON
-         ListCreativeStatusBreakdownByDetailResponse where
+           ListCreativeStatusBreakdownByDetailResponse
+         where
         toJSON
           ListCreativeStatusBreakdownByDetailResponse'{..}
           = object
@@ -3130,9 +3225,12 @@ instance ToJSON
 -- | \'OutputOnly A security context.
 --
 -- /See:/ 'securityContext' smart constructor.
-newtype SecurityContext = SecurityContext'
+newtype SecurityContext =
+  SecurityContext'
     { _scSecurities :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SecurityContext' with the minimum fields required to make a request.
 --
@@ -3141,10 +3239,8 @@ newtype SecurityContext = SecurityContext'
 -- * 'scSecurities'
 securityContext
     :: SecurityContext
-securityContext =
-    SecurityContext'
-    { _scSecurities = Nothing
-    }
+securityContext = SecurityContext' {_scSecurities = Nothing}
+
 
 -- | The security types in this context.
 scSecurities :: Lens' SecurityContext [Text]
@@ -3174,11 +3270,14 @@ instance ToJSON SecurityContext where
 -- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date'
+data Date =
+  Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -3191,12 +3290,8 @@ data Date = Date'
 -- * 'dMonth'
 date
     :: Date
-date =
-    Date'
-    { _dDay = Nothing
-    , _dYear = Nothing
-    , _dMonth = Nothing
-    }
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -3238,14 +3333,16 @@ instance ToJSON Date where
 --
 -- /See:/ 'cancelNegotiationRequest' smart constructor.
 data CancelNegotiationRequest =
-    CancelNegotiationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CancelNegotiationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CancelNegotiationRequest' with the minimum fields required to make a request.
 --
 cancelNegotiationRequest
     :: CancelNegotiationRequest
 cancelNegotiationRequest = CancelNegotiationRequest'
+
 
 instance FromJSON CancelNegotiationRequest where
         parseJSON
@@ -3258,10 +3355,13 @@ instance ToJSON CancelNegotiationRequest where
 -- | Contains information on how a buyer or seller can be reached.
 --
 -- /See:/ 'contactInformation' smart constructor.
-data ContactInformation = ContactInformation'
+data ContactInformation =
+  ContactInformation'
     { _ciEmail :: !(Maybe Text)
     , _ciName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactInformation' with the minimum fields required to make a request.
 --
@@ -3272,11 +3372,8 @@ data ContactInformation = ContactInformation'
 -- * 'ciName'
 contactInformation
     :: ContactInformation
-contactInformation =
-    ContactInformation'
-    { _ciEmail = Nothing
-    , _ciName = Nothing
-    }
+contactInformation = ContactInformation' {_ciEmail = Nothing, _ciName = Nothing}
+
 
 -- | Email address for the contact.
 ciEmail :: Lens' ContactInformation (Maybe Text)
@@ -3306,10 +3403,13 @@ instance ToJSON ContactInformation where
 -- start_date, it will fail.
 --
 -- /See:/ 'absoluteDateRange' smart constructor.
-data AbsoluteDateRange = AbsoluteDateRange'
+data AbsoluteDateRange =
+  AbsoluteDateRange'
     { _adrEndDate   :: !(Maybe Date)
     , _adrStartDate :: !(Maybe Date)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AbsoluteDateRange' with the minimum fields required to make a request.
 --
@@ -3321,10 +3421,8 @@ data AbsoluteDateRange = AbsoluteDateRange'
 absoluteDateRange
     :: AbsoluteDateRange
 absoluteDateRange =
-    AbsoluteDateRange'
-    { _adrEndDate = Nothing
-    , _adrStartDate = Nothing
-    }
+  AbsoluteDateRange' {_adrEndDate = Nothing, _adrStartDate = Nothing}
+
 
 -- | The end date of the range (inclusive). Must be within the 30 days
 -- leading up to current date, and must be equal to or after start_date.
@@ -3355,10 +3453,13 @@ instance ToJSON AbsoluteDateRange where
 -- | A specific filtering status and how many times it occurred.
 --
 -- /See:/ 'reason' smart constructor.
-data Reason = Reason'
+data Reason =
+  Reason'
     { _rStatus :: !(Maybe (Textual Int32))
     , _rCount  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Reason' with the minimum fields required to make a request.
 --
@@ -3369,11 +3470,8 @@ data Reason = Reason'
 -- * 'rCount'
 reason
     :: Reason
-reason =
-    Reason'
-    { _rStatus = Nothing
-    , _rCount = Nothing
-    }
+reason = Reason' {_rStatus = Nothing, _rCount = Nothing}
+
 
 -- | The filtering status code. Please refer to the
 -- [creative-status-codes.txt](https:\/\/storage.googleapis.com\/adx-rtb-dictionaries\/creative-status-codes.txt)
@@ -3406,9 +3504,12 @@ instance ToJSON Reason where
 -- | \'OutputOnly The auction type the restriction applies to.
 --
 -- /See:/ 'auctionContext' smart constructor.
-newtype AuctionContext = AuctionContext'
+newtype AuctionContext =
+  AuctionContext'
     { _acAuctionTypes :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuctionContext' with the minimum fields required to make a request.
 --
@@ -3417,10 +3518,8 @@ newtype AuctionContext = AuctionContext'
 -- * 'acAuctionTypes'
 auctionContext
     :: AuctionContext
-auctionContext =
-    AuctionContext'
-    { _acAuctionTypes = Nothing
-    }
+auctionContext = AuctionContext' {_acAuctionTypes = Nothing}
+
 
 -- | The auction types this restriction applies to.
 acAuctionTypes :: Lens' AuctionContext [Text]
@@ -3447,7 +3546,8 @@ instance ToJSON AuctionContext where
 -- targeting information that is used for serving.
 --
 -- /See:/ 'deal' smart constructor.
-data Deal = Deal'
+data Deal =
+  Deal'
     { _dAvailableStartTime             :: !(Maybe DateTime')
     , _dExternalDealId                 :: !(Maybe Text)
     , _dBuyerPrivateData               :: !(Maybe PrivateData)
@@ -3473,7 +3573,9 @@ data Deal = Deal'
     , _dCreateTime                     :: !(Maybe DateTime')
     , _dCreativeSafeFrameCompatibility :: !(Maybe DealCreativeSafeFrameCompatibility)
     , _dDealTerms                      :: !(Maybe DealTerms)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Deal' with the minimum fields required to make a request.
 --
@@ -3531,7 +3633,7 @@ data Deal = Deal'
 deal
     :: Deal
 deal =
-    Deal'
+  Deal'
     { _dAvailableStartTime = Nothing
     , _dExternalDealId = Nothing
     , _dBuyerPrivateData = Nothing
@@ -3558,6 +3660,7 @@ deal =
     , _dCreativeSafeFrameCompatibility = Nothing
     , _dDealTerms = Nothing
     }
+
 
 -- | Optional proposed flight start time of the deal. This will generally be
 -- stored in the granularity of one second since deal serving starts at
@@ -3803,11 +3906,14 @@ instance ToJSON Deal where
 -- AdX Preferred Deals.
 --
 -- /See:/ 'creativeRestrictions' smart constructor.
-data CreativeRestrictions = CreativeRestrictions'
+data CreativeRestrictions =
+  CreativeRestrictions'
     { _crCreativeFormat         :: !(Maybe CreativeRestrictionsCreativeFormat)
     , _crSkippableAdType        :: !(Maybe CreativeRestrictionsSkippableAdType)
     , _crCreativeSpecifications :: !(Maybe [CreativeSpecification])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeRestrictions' with the minimum fields required to make a request.
 --
@@ -3821,11 +3927,12 @@ data CreativeRestrictions = CreativeRestrictions'
 creativeRestrictions
     :: CreativeRestrictions
 creativeRestrictions =
-    CreativeRestrictions'
+  CreativeRestrictions'
     { _crCreativeFormat = Nothing
     , _crSkippableAdType = Nothing
     , _crCreativeSpecifications = Nothing
     }
+
 
 -- | The format of the environment that the creatives will be displayed in.
 crCreativeFormat :: Lens' CreativeRestrictions (Maybe CreativeRestrictionsCreativeFormat)
@@ -3873,7 +3980,8 @@ instance ToJSON CreativeRestrictions where
 -- otherwise.
 --
 -- /See:/ 'proposal' smart constructor.
-data Proposal = Proposal'
+data Proposal =
+  Proposal'
     { _pBuyerPrivateData           :: !(Maybe PrivateData)
     , _pIsSetupComplete            :: !(Maybe Bool)
     , _pDeals                      :: !(Maybe [Deal])
@@ -3892,7 +4000,9 @@ data Proposal = Proposal'
     , _pProposalState              :: !(Maybe ProposalProposalState)
     , _pLastUpdaterOrCommentorRole :: !(Maybe ProposalLastUpdaterOrCommentorRole)
     , _pBuyer                      :: !(Maybe Buyer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Proposal' with the minimum fields required to make a request.
 --
@@ -3936,7 +4046,7 @@ data Proposal = Proposal'
 proposal
     :: Proposal
 proposal =
-    Proposal'
+  Proposal'
     { _pBuyerPrivateData = Nothing
     , _pIsSetupComplete = Nothing
     , _pDeals = Nothing
@@ -3956,6 +4066,7 @@ proposal =
     , _pLastUpdaterOrCommentorRole = Nothing
     , _pBuyer = Nothing
     }
+
 
 -- | Private data for buyer. (hidden from seller).
 pBuyerPrivateData :: Lens' Proposal (Maybe PrivateData)
@@ -4133,10 +4244,13 @@ instance ToJSON Proposal where
 -- 1 offset_days + duration_days \<= 30
 --
 -- /See:/ 'relativeDateRange' smart constructor.
-data RelativeDateRange = RelativeDateRange'
+data RelativeDateRange =
+  RelativeDateRange'
     { _rdrOffSetDays   :: !(Maybe (Textual Int32))
     , _rdrDurationDays :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelativeDateRange' with the minimum fields required to make a request.
 --
@@ -4148,10 +4262,8 @@ data RelativeDateRange = RelativeDateRange'
 relativeDateRange
     :: RelativeDateRange
 relativeDateRange =
-    RelativeDateRange'
-    { _rdrOffSetDays = Nothing
-    , _rdrDurationDays = Nothing
-    }
+  RelativeDateRange' {_rdrOffSetDays = Nothing, _rdrDurationDays = Nothing}
+
 
 -- | The end date of the filter set, specified as the number of days before
 -- today, e.g., for a range where the last date is today: 0.
@@ -4186,9 +4298,12 @@ instance ToJSON RelativeDateRange where
 -- | Request message to pause serving for an already-finalized proposal.
 --
 -- /See:/ 'pauseProposalRequest' smart constructor.
-newtype PauseProposalRequest = PauseProposalRequest'
+newtype PauseProposalRequest =
+  PauseProposalRequest'
     { _pprReason :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PauseProposalRequest' with the minimum fields required to make a request.
 --
@@ -4197,13 +4312,11 @@ newtype PauseProposalRequest = PauseProposalRequest'
 -- * 'pprReason'
 pauseProposalRequest
     :: PauseProposalRequest
-pauseProposalRequest =
-    PauseProposalRequest'
-    { _pprReason = Nothing
-    }
+pauseProposalRequest = PauseProposalRequest' {_pprReason = Nothing}
+
 
 -- | The reason why the proposal is being paused. This human readable message
--- will be displayed in the seller\'s UI. (Max length: 100 unicode code
+-- will be displayed in the seller\'s UI. (Max length: 1000 unicode code
 -- units.)
 pprReason :: Lens' PauseProposalRequest (Maybe Text)
 pprReason
@@ -4226,10 +4339,13 @@ instance ToJSON PauseProposalRequest where
 -- applications is either included or excluded.
 --
 -- /See:/ 'firstPartyMobileApplicationTargeting' smart constructor.
-data FirstPartyMobileApplicationTargeting = FirstPartyMobileApplicationTargeting'
+data FirstPartyMobileApplicationTargeting =
+  FirstPartyMobileApplicationTargeting'
     { _fpmatTargetedAppIds :: !(Maybe [Text])
     , _fpmatExcludedAppIds :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FirstPartyMobileApplicationTargeting' with the minimum fields required to make a request.
 --
@@ -4241,10 +4357,9 @@ data FirstPartyMobileApplicationTargeting = FirstPartyMobileApplicationTargeting
 firstPartyMobileApplicationTargeting
     :: FirstPartyMobileApplicationTargeting
 firstPartyMobileApplicationTargeting =
-    FirstPartyMobileApplicationTargeting'
-    { _fpmatTargetedAppIds = Nothing
-    , _fpmatExcludedAppIds = Nothing
-    }
+  FirstPartyMobileApplicationTargeting'
+    {_fpmatTargetedAppIds = Nothing, _fpmatExcludedAppIds = Nothing}
+
 
 -- | A list of application IDs to be included.
 fpmatTargetedAppIds :: Lens' FirstPartyMobileApplicationTargeting [Text]
@@ -4263,7 +4378,8 @@ fpmatExcludedAppIds
       . _Coerce
 
 instance FromJSON
-         FirstPartyMobileApplicationTargeting where
+           FirstPartyMobileApplicationTargeting
+         where
         parseJSON
           = withObject "FirstPartyMobileApplicationTargeting"
               (\ o ->
@@ -4283,10 +4399,13 @@ instance ToJSON FirstPartyMobileApplicationTargeting
 -- count that may be either exact or estimated (i.e. when sampled).
 --
 -- /See:/ 'metricValue' smart constructor.
-data MetricValue = MetricValue'
+data MetricValue =
+  MetricValue'
     { _mvValue    :: !(Maybe (Textual Int64))
     , _mvVariance :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricValue' with the minimum fields required to make a request.
 --
@@ -4297,11 +4416,8 @@ data MetricValue = MetricValue'
 -- * 'mvVariance'
 metricValue
     :: MetricValue
-metricValue =
-    MetricValue'
-    { _mvValue = Nothing
-    , _mvVariance = Nothing
-    }
+metricValue = MetricValue' {_mvValue = Nothing, _mvVariance = Nothing}
+
 
 -- | The expected value of the metric.
 mvValue :: Lens' MetricValue (Maybe Int64)
@@ -4339,14 +4455,16 @@ instance ToJSON MetricValue where
 --
 -- /See:/ 'completeSetupRequest' smart constructor.
 data CompleteSetupRequest =
-    CompleteSetupRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CompleteSetupRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CompleteSetupRequest' with the minimum fields required to make a request.
 --
 completeSetupRequest
     :: CompleteSetupRequest
 completeSetupRequest = CompleteSetupRequest'
+
 
 instance FromJSON CompleteSetupRequest where
         parseJSON
@@ -4360,11 +4478,14 @@ instance ToJSON CompleteSetupRequest where
 -- have the specified creative.
 --
 -- /See:/ 'filteredBidCreativeRow' smart constructor.
-data FilteredBidCreativeRow = FilteredBidCreativeRow'
+data FilteredBidCreativeRow =
+  FilteredBidCreativeRow'
     { _fbcrCreativeId    :: !(Maybe Text)
     , _fbcrRowDimensions :: !(Maybe RowDimensions)
     , _fbcrBidCount      :: !(Maybe MetricValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilteredBidCreativeRow' with the minimum fields required to make a request.
 --
@@ -4378,11 +4499,12 @@ data FilteredBidCreativeRow = FilteredBidCreativeRow'
 filteredBidCreativeRow
     :: FilteredBidCreativeRow
 filteredBidCreativeRow =
-    FilteredBidCreativeRow'
+  FilteredBidCreativeRow'
     { _fbcrCreativeId = Nothing
     , _fbcrRowDimensions = Nothing
     , _fbcrBidCount = Nothing
     }
+
 
 -- | The ID of the creative.
 fbcrCreativeId :: Lens' FilteredBidCreativeRow (Maybe Text)
@@ -4420,9 +4542,12 @@ instance ToJSON FilteredBidCreativeRow where
 -- | \'OutputOnly The Geo criteria the restriction applies to.
 --
 -- /See:/ 'locationContext' smart constructor.
-newtype LocationContext = LocationContext'
+newtype LocationContext =
+  LocationContext'
     { _lcGeoCriteriaIds :: Maybe [Textual Int32]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationContext' with the minimum fields required to make a request.
 --
@@ -4431,10 +4556,8 @@ newtype LocationContext = LocationContext'
 -- * 'lcGeoCriteriaIds'
 locationContext
     :: LocationContext
-locationContext =
-    LocationContext'
-    { _lcGeoCriteriaIds = Nothing
-    }
+locationContext = LocationContext' {_lcGeoCriteriaIds = Nothing}
+
 
 -- | IDs representing the geo location for this context. Please refer to the
 -- [geo-table.csv](https:\/\/storage.googleapis.com\/adx-rtb-dictionaries\/geo-table.csv)
@@ -4464,11 +4587,14 @@ instance ToJSON LocationContext where
 -- targeting criteria can be specified as part of Shared Targeting.
 --
 -- /See:/ 'targetingCriteria' smart constructor.
-data TargetingCriteria = TargetingCriteria'
+data TargetingCriteria =
+  TargetingCriteria'
     { _tcKey        :: !(Maybe Text)
     , _tcExclusions :: !(Maybe [TargetingValue])
     , _tcInclusions :: !(Maybe [TargetingValue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetingCriteria' with the minimum fields required to make a request.
 --
@@ -4482,11 +4608,9 @@ data TargetingCriteria = TargetingCriteria'
 targetingCriteria
     :: TargetingCriteria
 targetingCriteria =
-    TargetingCriteria'
-    { _tcKey = Nothing
-    , _tcExclusions = Nothing
-    , _tcInclusions = Nothing
-    }
+  TargetingCriteria'
+    {_tcKey = Nothing, _tcExclusions = Nothing, _tcInclusions = Nothing}
+
 
 -- | The key representing the shared targeting criterion. Targeting criteria
 -- defined by Google ad servers will begin with GOOG_. Third parties may
@@ -4533,11 +4657,14 @@ instance ToJSON TargetingCriteria where
 -- described by the specified callout status.
 --
 -- /See:/ 'calloutStatusRow' smart constructor.
-data CalloutStatusRow = CalloutStatusRow'
+data CalloutStatusRow =
+  CalloutStatusRow'
     { _cRowDimensions   :: !(Maybe RowDimensions)
     , _cCalloutStatusId :: !(Maybe (Textual Int32))
     , _cImpressionCount :: !(Maybe MetricValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CalloutStatusRow' with the minimum fields required to make a request.
 --
@@ -4551,11 +4678,12 @@ data CalloutStatusRow = CalloutStatusRow'
 calloutStatusRow
     :: CalloutStatusRow
 calloutStatusRow =
-    CalloutStatusRow'
+  CalloutStatusRow'
     { _cRowDimensions = Nothing
     , _cCalloutStatusId = Nothing
     , _cImpressionCount = Nothing
     }
+
 
 -- | The values of all dimensions associated with metric values in this row.
 cRowDimensions :: Lens' CalloutStatusRow (Maybe RowDimensions)
@@ -4600,10 +4728,13 @@ instance ToJSON CalloutStatusRow where
 -- apply.
 --
 -- /See:/ 'urlTargeting' smart constructor.
-data URLTargeting = URLTargeting'
+data URLTargeting =
+  URLTargeting'
     { _utTargetedURLs :: !(Maybe [Text])
     , _utExcludedURLs :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLTargeting' with the minimum fields required to make a request.
 --
@@ -4615,10 +4746,8 @@ data URLTargeting = URLTargeting'
 urlTargeting
     :: URLTargeting
 urlTargeting =
-    URLTargeting'
-    { _utTargetedURLs = Nothing
-    , _utExcludedURLs = Nothing
-    }
+  URLTargeting' {_utTargetedURLs = Nothing, _utExcludedURLs = Nothing}
+
 
 -- | A list of URLs to be included.
 utTargetedURLs :: Lens' URLTargeting [Text]
@@ -4656,11 +4785,14 @@ instance ToJSON URLTargeting where
 -- status.
 --
 -- /See:/ 'bidResponseWithoutBidsStatusRow' smart constructor.
-data BidResponseWithoutBidsStatusRow = BidResponseWithoutBidsStatusRow'
+data BidResponseWithoutBidsStatusRow =
+  BidResponseWithoutBidsStatusRow'
     { _brwbsrStatus          :: !(Maybe BidResponseWithoutBidsStatusRowStatus)
     , _brwbsrRowDimensions   :: !(Maybe RowDimensions)
     , _brwbsrImpressionCount :: !(Maybe MetricValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BidResponseWithoutBidsStatusRow' with the minimum fields required to make a request.
 --
@@ -4674,11 +4806,12 @@ data BidResponseWithoutBidsStatusRow = BidResponseWithoutBidsStatusRow'
 bidResponseWithoutBidsStatusRow
     :: BidResponseWithoutBidsStatusRow
 bidResponseWithoutBidsStatusRow =
-    BidResponseWithoutBidsStatusRow'
+  BidResponseWithoutBidsStatusRow'
     { _brwbsrStatus = Nothing
     , _brwbsrRowDimensions = Nothing
     , _brwbsrImpressionCount = Nothing
     }
+
 
 -- | The status specifying why the bid responses were considered to have no
 -- applicable bids.
@@ -4723,7 +4856,8 @@ instance ToJSON BidResponseWithoutBidsStatusRow where
 -- deal_id=12 AND (seller_network_id=34 OR seller_network_id=56)\".
 --
 -- /See:/ 'filterSet' smart constructor.
-data FilterSet = FilterSet'
+data FilterSet =
+  FilterSet'
     { _fsPlatforms             :: !(Maybe [Text])
     , _fsRealtimeTimeRange     :: !(Maybe RealtimeTimeRange)
     , _fsEnvironment           :: !(Maybe FilterSetEnvironment)
@@ -4737,7 +4871,9 @@ data FilterSet = FilterSet'
     , _fsRelativeDateRange     :: !(Maybe RelativeDateRange)
     , _fsTimeSeriesGranularity :: !(Maybe FilterSetTimeSeriesGranularity)
     , _fsPublisherIdentifiers  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilterSet' with the minimum fields required to make a request.
 --
@@ -4771,7 +4907,7 @@ data FilterSet = FilterSet'
 filterSet
     :: FilterSet
 filterSet =
-    FilterSet'
+  FilterSet'
     { _fsPlatforms = Nothing
     , _fsRealtimeTimeRange = Nothing
     , _fsEnvironment = Nothing
@@ -4786,6 +4922,7 @@ filterSet =
     , _fsTimeSeriesGranularity = Nothing
     , _fsPublisherIdentifiers = Nothing
     }
+
 
 -- | The list of platforms on which to filter; may be empty. The filters
 -- represented by multiple platforms are ORed together (i.e., if non-empty,
@@ -4940,10 +5077,13 @@ instance ToJSON FilterSet where
 -- | An interval of time, with an absolute start and end.
 --
 -- /See:/ 'timeInterval' smart constructor.
-data TimeInterval = TimeInterval'
+data TimeInterval =
+  TimeInterval'
     { _tiStartTime :: !(Maybe DateTime')
     , _tiEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimeInterval' with the minimum fields required to make a request.
 --
@@ -4954,11 +5094,8 @@ data TimeInterval = TimeInterval'
 -- * 'tiEndTime'
 timeInterval
     :: TimeInterval
-timeInterval =
-    TimeInterval'
-    { _tiStartTime = Nothing
-    , _tiEndTime = Nothing
-    }
+timeInterval = TimeInterval' {_tiStartTime = Nothing, _tiEndTime = Nothing}
+
 
 -- | The timestamp marking the start of the range (inclusive) for which data
 -- is included.
@@ -4991,9 +5128,12 @@ instance ToJSON TimeInterval where
 -- | A request for removing the association between a deal and a creative.
 --
 -- /See:/ 'removeDealAssociationRequest' smart constructor.
-newtype RemoveDealAssociationRequest = RemoveDealAssociationRequest'
+newtype RemoveDealAssociationRequest =
+  RemoveDealAssociationRequest'
     { _rdarAssociation :: Maybe CreativeDealAssociation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoveDealAssociationRequest' with the minimum fields required to make a request.
 --
@@ -5003,9 +5143,8 @@ newtype RemoveDealAssociationRequest = RemoveDealAssociationRequest'
 removeDealAssociationRequest
     :: RemoveDealAssociationRequest
 removeDealAssociationRequest =
-    RemoveDealAssociationRequest'
-    { _rdarAssociation = Nothing
-    }
+  RemoveDealAssociationRequest' {_rdarAssociation = Nothing}
+
 
 -- | The association between a creative and a deal that should be removed.
 rdarAssociation :: Lens' RemoveDealAssociationRequest (Maybe CreativeDealAssociation)
@@ -5028,12 +5167,15 @@ instance ToJSON RemoveDealAssociationRequest where
 -- | A polymorphic targeting value used as part of Shared Targeting.
 --
 -- /See:/ 'targetingValue' smart constructor.
-data TargetingValue = TargetingValue'
+data TargetingValue =
+  TargetingValue'
     { _tvCreativeSizeValue     :: !(Maybe CreativeSize)
     , _tvStringValue           :: !(Maybe Text)
     , _tvLongValue             :: !(Maybe (Textual Int64))
     , _tvDayPartTargetingValue :: !(Maybe DayPartTargeting)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetingValue' with the minimum fields required to make a request.
 --
@@ -5049,12 +5191,13 @@ data TargetingValue = TargetingValue'
 targetingValue
     :: TargetingValue
 targetingValue =
-    TargetingValue'
+  TargetingValue'
     { _tvCreativeSizeValue = Nothing
     , _tvStringValue = Nothing
     , _tvLongValue = Nothing
     , _tvDayPartTargetingValue = Nothing
     }
+
 
 -- | The creative size value to include\/exclude. Filled in when key =
 -- GOOG_CREATIVE_SIZE
@@ -5106,10 +5249,13 @@ instance ToJSON TargetingValue where
 -- billed for a winning bid.
 --
 -- /See:/ 'listNonBillableWinningBidsResponse' smart constructor.
-data ListNonBillableWinningBidsResponse = ListNonBillableWinningBidsResponse'
+data ListNonBillableWinningBidsResponse =
+  ListNonBillableWinningBidsResponse'
     { _lnbwbrNextPageToken                   :: !(Maybe Text)
     , _lnbwbrNonBillableWinningBidStatusRows :: !(Maybe [NonBillableWinningBidStatusRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListNonBillableWinningBidsResponse' with the minimum fields required to make a request.
 --
@@ -5121,10 +5267,11 @@ data ListNonBillableWinningBidsResponse = ListNonBillableWinningBidsResponse'
 listNonBillableWinningBidsResponse
     :: ListNonBillableWinningBidsResponse
 listNonBillableWinningBidsResponse =
-    ListNonBillableWinningBidsResponse'
+  ListNonBillableWinningBidsResponse'
     { _lnbwbrNextPageToken = Nothing
     , _lnbwbrNonBillableWinningBidStatusRows = Nothing
     }
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListNonBillableWinningBidsRequest.pageToken field in the subsequent call
@@ -5165,10 +5312,13 @@ instance ToJSON ListNonBillableWinningBidsResponse
 -- | Response message for listing all reasons that bids lost in the auction.
 --
 -- /See:/ 'listLosingBidsResponse' smart constructor.
-data ListLosingBidsResponse = ListLosingBidsResponse'
+data ListLosingBidsResponse =
+  ListLosingBidsResponse'
     { _llbrNextPageToken      :: !(Maybe Text)
     , _llbrCreativeStatusRows :: !(Maybe [CreativeStatusRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLosingBidsResponse' with the minimum fields required to make a request.
 --
@@ -5180,10 +5330,9 @@ data ListLosingBidsResponse = ListLosingBidsResponse'
 listLosingBidsResponse
     :: ListLosingBidsResponse
 listLosingBidsResponse =
-    ListLosingBidsResponse'
-    { _llbrNextPageToken = Nothing
-    , _llbrCreativeStatusRows = Nothing
-    }
+  ListLosingBidsResponse'
+    {_llbrNextPageToken = Nothing, _llbrCreativeStatusRows = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListLosingBidsRequest.pageToken field in the subsequent call to the
@@ -5221,10 +5370,13 @@ instance ToJSON ListLosingBidsResponse where
 -- | Represents a price and a pricing type for a product \/ deal.
 --
 -- /See:/ 'price' smart constructor.
-data Price = Price'
+data Price =
+  Price'
     { _pAmount      :: !(Maybe Money)
     , _pPricingType :: !(Maybe PricePricingType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
@@ -5235,11 +5387,8 @@ data Price = Price'
 -- * 'pPricingType'
 price
     :: Price
-price =
-    Price'
-    { _pAmount = Nothing
-    , _pPricingType = Nothing
-    }
+price = Price' {_pAmount = Nothing, _pPricingType = Nothing}
+
 
 -- | The actual price with currency specified.
 pAmount :: Lens' Price (Maybe Money)
@@ -5268,10 +5417,13 @@ instance ToJSON Price where
 -- impressions.
 --
 -- /See:/ 'listImpressionMetricsResponse' smart constructor.
-data ListImpressionMetricsResponse = ListImpressionMetricsResponse'
+data ListImpressionMetricsResponse =
+  ListImpressionMetricsResponse'
     { _limrNextPageToken         :: !(Maybe Text)
     , _limrImpressionMetricsRows :: !(Maybe [ImpressionMetricsRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListImpressionMetricsResponse' with the minimum fields required to make a request.
 --
@@ -5283,10 +5435,9 @@ data ListImpressionMetricsResponse = ListImpressionMetricsResponse'
 listImpressionMetricsResponse
     :: ListImpressionMetricsResponse
 listImpressionMetricsResponse =
-    ListImpressionMetricsResponse'
-    { _limrNextPageToken = Nothing
-    , _limrImpressionMetricsRows = Nothing
-    }
+  ListImpressionMetricsResponse'
+    {_limrNextPageToken = Nothing, _limrImpressionMetricsRows = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListImpressionMetricsRequest.pageToken field in the subsequent call to
@@ -5323,9 +5474,12 @@ instance ToJSON ListImpressionMetricsResponse where
 -- | \'OutputOnly The type of platform the restriction applies to.
 --
 -- /See:/ 'platformContext' smart constructor.
-newtype PlatformContext = PlatformContext'
+newtype PlatformContext =
+  PlatformContext'
     { _pcPlatforms :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlatformContext' with the minimum fields required to make a request.
 --
@@ -5334,10 +5488,8 @@ newtype PlatformContext = PlatformContext'
 -- * 'pcPlatforms'
 platformContext
     :: PlatformContext
-platformContext =
-    PlatformContext'
-    { _pcPlatforms = Nothing
-    }
+platformContext = PlatformContext' {_pcPlatforms = Nothing}
+
 
 -- | The platforms this restriction applies to.
 pcPlatforms :: Lens' PlatformContext [Text]
@@ -5360,10 +5512,13 @@ instance ToJSON PlatformContext where
 -- | Video content for a creative.
 --
 -- /See:/ 'videoContent' smart constructor.
-data VideoContent = VideoContent'
+data VideoContent =
+  VideoContent'
     { _vcVideoVastXML :: !(Maybe Text)
     , _vcVideoURL     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VideoContent' with the minimum fields required to make a request.
 --
@@ -5374,11 +5529,8 @@ data VideoContent = VideoContent'
 -- * 'vcVideoURL'
 videoContent
     :: VideoContent
-videoContent =
-    VideoContent'
-    { _vcVideoVastXML = Nothing
-    , _vcVideoURL = Nothing
-    }
+videoContent = VideoContent' {_vcVideoVastXML = Nothing, _vcVideoURL = Nothing}
+
 
 -- | The contents of a VAST document for a video ad. This document should
 -- conform to the VAST 2.0 or 3.0 standard.
@@ -5412,12 +5564,15 @@ instance ToJSON VideoContent where
 -- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'timeOfDay' smart constructor.
-data TimeOfDay' = TimeOfDay''
+data TimeOfDay' =
+  TimeOfDay''
     { _todNanos   :: !(Maybe (Textual Int32))
     , _todHours   :: !(Maybe (Textual Int32))
     , _todMinutes :: !(Maybe (Textual Int32))
     , _todSeconds :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
 --
@@ -5433,12 +5588,13 @@ data TimeOfDay' = TimeOfDay''
 timeOfDay
     :: TimeOfDay'
 timeOfDay =
-    TimeOfDay''
+  TimeOfDay''
     { _todNanos = Nothing
     , _todHours = Nothing
     , _todMinutes = Nothing
     , _todSeconds = Nothing
     }
+
 
 -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
 todNanos :: Lens' TimeOfDay' (Maybe Int32)
@@ -5488,12 +5644,15 @@ instance ToJSON TimeOfDay' where
 -- | Terms for Programmatic Guaranteed Deals.
 --
 -- /See:/ 'guaranteedFixedPriceTerms' smart constructor.
-data GuaranteedFixedPriceTerms = GuaranteedFixedPriceTerms'
+data GuaranteedFixedPriceTerms =
+  GuaranteedFixedPriceTerms'
     { _gfptGuaranteedLooks       :: !(Maybe (Textual Int64))
     , _gfptGuaranteedImpressions :: !(Maybe (Textual Int64))
     , _gfptFixedPrices           :: !(Maybe [PricePerBuyer])
     , _gfptMinimumDailyLooks     :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GuaranteedFixedPriceTerms' with the minimum fields required to make a request.
 --
@@ -5509,12 +5668,13 @@ data GuaranteedFixedPriceTerms = GuaranteedFixedPriceTerms'
 guaranteedFixedPriceTerms
     :: GuaranteedFixedPriceTerms
 guaranteedFixedPriceTerms =
-    GuaranteedFixedPriceTerms'
+  GuaranteedFixedPriceTerms'
     { _gfptGuaranteedLooks = Nothing
     , _gfptGuaranteedImpressions = Nothing
     , _gfptFixedPrices = Nothing
     , _gfptMinimumDailyLooks = Nothing
     }
+
 
 -- | Count of guaranteed looks. Required for deal, optional for product.
 gfptGuaranteedLooks :: Lens' GuaranteedFixedPriceTerms (Maybe Int64)
@@ -5569,7 +5729,8 @@ instance ToJSON GuaranteedFixedPriceTerms where
 -- | Native content for a creative.
 --
 -- /See:/ 'nATiveContent' smart constructor.
-data NATiveContent = NATiveContent'
+data NATiveContent =
+  NATiveContent'
     { _natcStoreURL         :: !(Maybe Text)
     , _natcImage            :: !(Maybe Image)
     , _natcAdvertiserName   :: !(Maybe Text)
@@ -5583,7 +5744,9 @@ data NATiveContent = NATiveContent'
     , _natcVideoURL         :: !(Maybe Text)
     , _natcStarRating       :: !(Maybe (Textual Double))
     , _natcLogo             :: !(Maybe Image)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NATiveContent' with the minimum fields required to make a request.
 --
@@ -5617,7 +5780,7 @@ data NATiveContent = NATiveContent'
 nATiveContent
     :: NATiveContent
 nATiveContent =
-    NATiveContent'
+  NATiveContent'
     { _natcStoreURL = Nothing
     , _natcImage = Nothing
     , _natcAdvertiserName = Nothing
@@ -5632,6 +5795,7 @@ nATiveContent =
     , _natcStarRating = Nothing
     , _natcLogo = Nothing
     }
+
 
 -- | The URL to the app store to purchase\/download the promoted app.
 natcStoreURL :: Lens' NATiveContent (Maybe Text)
@@ -5743,10 +5907,13 @@ instance ToJSON NATiveContent where
 -- | Represents targeting information about video.
 --
 -- /See:/ 'videoTargeting' smart constructor.
-data VideoTargeting = VideoTargeting'
+data VideoTargeting =
+  VideoTargeting'
     { _vtTargetedPositionTypes :: !(Maybe [Text])
     , _vtExcludedPositionTypes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VideoTargeting' with the minimum fields required to make a request.
 --
@@ -5758,10 +5925,9 @@ data VideoTargeting = VideoTargeting'
 videoTargeting
     :: VideoTargeting
 videoTargeting =
-    VideoTargeting'
-    { _vtTargetedPositionTypes = Nothing
-    , _vtExcludedPositionTypes = Nothing
-    }
+  VideoTargeting'
+    {_vtTargetedPositionTypes = Nothing, _vtExcludedPositionTypes = Nothing}
+
 
 -- | A list of video positions to be included. When the included list is
 -- present, the excluded list must be empty. When the excluded list is
@@ -5807,12 +5973,15 @@ instance ToJSON VideoTargeting where
 -- fields are required unless otherwise specified.
 --
 -- /See:/ 'clientUser' smart constructor.
-data ClientUser = ClientUser'
+data ClientUser =
+  ClientUser'
     { _cuEmail           :: !(Maybe Text)
     , _cuStatus          :: !(Maybe ClientUserStatus)
     , _cuUserId          :: !(Maybe (Textual Int64))
     , _cuClientAccountId :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClientUser' with the minimum fields required to make a request.
 --
@@ -5828,12 +5997,13 @@ data ClientUser = ClientUser'
 clientUser
     :: ClientUser
 clientUser =
-    ClientUser'
+  ClientUser'
     { _cuEmail = Nothing
     , _cuStatus = Nothing
     , _cuUserId = Nothing
     , _cuClientAccountId = Nothing
     }
+
 
 -- | User\'s email address. The value of this field is ignored in an update
 -- operation.
@@ -5885,7 +6055,8 @@ instance ToJSON ClientUser where
 -- about the inventory.
 --
 -- /See:/ 'product' smart constructor.
-data Product = Product'
+data Product =
+  Product'
     { _proAvailableStartTime  :: !(Maybe DateTime')
     , _proWebPropertyCode     :: !(Maybe Text)
     , _proTerms               :: !(Maybe DealTerms)
@@ -5901,7 +6072,9 @@ data Product = Product'
     , _proAvailableEndTime    :: !(Maybe DateTime')
     , _proProductId           :: !(Maybe Text)
     , _proCreateTime          :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
@@ -5939,7 +6112,7 @@ data Product = Product'
 product
     :: Product
 product =
-    Product'
+  Product'
     { _proAvailableStartTime = Nothing
     , _proWebPropertyCode = Nothing
     , _proTerms = Nothing
@@ -5956,6 +6129,7 @@ product =
     , _proProductId = Nothing
     , _proCreateTime = Nothing
     }
+
 
 -- | Inventory availability dates. The start time will be truncated to
 -- seconds during serving. Thus, a field specified as 3:23:34.456
@@ -6107,10 +6281,13 @@ instance ToJSON Product where
 
 --
 -- /See:/ 'listClientUserInvitationsResponse' smart constructor.
-data ListClientUserInvitationsResponse = ListClientUserInvitationsResponse'
+data ListClientUserInvitationsResponse =
+  ListClientUserInvitationsResponse'
     { _lcuirNextPageToken :: !(Maybe Text)
     , _lcuirInvitations   :: !(Maybe [ClientUserInvitation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListClientUserInvitationsResponse' with the minimum fields required to make a request.
 --
@@ -6122,10 +6299,9 @@ data ListClientUserInvitationsResponse = ListClientUserInvitationsResponse'
 listClientUserInvitationsResponse
     :: ListClientUserInvitationsResponse
 listClientUserInvitationsResponse =
-    ListClientUserInvitationsResponse'
-    { _lcuirNextPageToken = Nothing
-    , _lcuirInvitations = Nothing
-    }
+  ListClientUserInvitationsResponse'
+    {_lcuirNextPageToken = Nothing, _lcuirInvitations = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListClientUserInvitationsRequest.pageToken field in the subsequent call
@@ -6165,11 +6341,14 @@ instance ToJSON ListClientUserInvitationsResponse
 -- during certain parts of a day\/week.
 --
 -- /See:/ 'dayPart' smart constructor.
-data DayPart = DayPart'
+data DayPart =
+  DayPart'
     { _dpStartTime :: !(Maybe TimeOfDay')
     , _dpEndTime   :: !(Maybe TimeOfDay')
     , _dpDayOfWeek :: !(Maybe DayPartDayOfWeek)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DayPart' with the minimum fields required to make a request.
 --
@@ -6183,11 +6362,9 @@ data DayPart = DayPart'
 dayPart
     :: DayPart
 dayPart =
-    DayPart'
-    { _dpStartTime = Nothing
-    , _dpEndTime = Nothing
-    , _dpDayOfWeek = Nothing
-    }
+  DayPart'
+    {_dpStartTime = Nothing, _dpEndTime = Nothing, _dpDayOfWeek = Nothing}
+
 
 -- | The starting time of day for the ad to show (minute level granularity).
 -- The start time is inclusive. This field is not available for filtering
@@ -6227,9 +6404,12 @@ instance ToJSON DayPart where
 -- | Mobile application targeting settings.
 --
 -- /See:/ 'mobileApplicationTargeting' smart constructor.
-newtype MobileApplicationTargeting = MobileApplicationTargeting'
+newtype MobileApplicationTargeting =
+  MobileApplicationTargeting'
     { _matFirstPartyTargeting :: Maybe FirstPartyMobileApplicationTargeting
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MobileApplicationTargeting' with the minimum fields required to make a request.
 --
@@ -6239,9 +6419,8 @@ newtype MobileApplicationTargeting = MobileApplicationTargeting'
 mobileApplicationTargeting
     :: MobileApplicationTargeting
 mobileApplicationTargeting =
-    MobileApplicationTargeting'
-    { _matFirstPartyTargeting = Nothing
-    }
+  MobileApplicationTargeting' {_matFirstPartyTargeting = Nothing}
+
 
 -- | Publisher owned apps to be targeted or excluded by the publisher to
 -- display the ads in.
@@ -6266,10 +6445,13 @@ instance ToJSON MobileApplicationTargeting where
 
 --
 -- /See:/ 'listClientsResponse' smart constructor.
-data ListClientsResponse = ListClientsResponse'
+data ListClientsResponse =
+  ListClientsResponse'
     { _lNextPageToken :: !(Maybe Text)
     , _lClients       :: !(Maybe [Client])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListClientsResponse' with the minimum fields required to make a request.
 --
@@ -6281,10 +6463,8 @@ data ListClientsResponse = ListClientsResponse'
 listClientsResponse
     :: ListClientsResponse
 listClientsResponse =
-    ListClientsResponse'
-    { _lNextPageToken = Nothing
-    , _lClients = Nothing
-    }
+  ListClientsResponse' {_lNextPageToken = Nothing, _lClients = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListClientsRequest.pageToken field in the subsequent call to the
@@ -6320,10 +6500,13 @@ instance ToJSON ListClientsResponse where
 -- filtered bid reason.
 --
 -- /See:/ 'listCreativeStatusBreakdownByCreativeResponse' smart constructor.
-data ListCreativeStatusBreakdownByCreativeResponse = ListCreativeStatusBreakdownByCreativeResponse'
+data ListCreativeStatusBreakdownByCreativeResponse =
+  ListCreativeStatusBreakdownByCreativeResponse'
     { _lcsbbcrNextPageToken           :: !(Maybe Text)
     , _lcsbbcrFilteredBidCreativeRows :: !(Maybe [FilteredBidCreativeRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListCreativeStatusBreakdownByCreativeResponse' with the minimum fields required to make a request.
 --
@@ -6335,10 +6518,9 @@ data ListCreativeStatusBreakdownByCreativeResponse = ListCreativeStatusBreakdown
 listCreativeStatusBreakdownByCreativeResponse
     :: ListCreativeStatusBreakdownByCreativeResponse
 listCreativeStatusBreakdownByCreativeResponse =
-    ListCreativeStatusBreakdownByCreativeResponse'
-    { _lcsbbcrNextPageToken = Nothing
-    , _lcsbbcrFilteredBidCreativeRows = Nothing
-    }
+  ListCreativeStatusBreakdownByCreativeResponse'
+    {_lcsbbcrNextPageToken = Nothing, _lcsbbcrFilteredBidCreativeRows = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListCreativeStatusBreakdownByCreativeRequest.pageToken field in the
@@ -6359,7 +6541,8 @@ lcsbbcrFilteredBidCreativeRows
       . _Coerce
 
 instance FromJSON
-         ListCreativeStatusBreakdownByCreativeResponse where
+           ListCreativeStatusBreakdownByCreativeResponse
+         where
         parseJSON
           = withObject
               "ListCreativeStatusBreakdownByCreativeResponse"
@@ -6369,7 +6552,8 @@ instance FromJSON
                      (o .:? "filteredBidCreativeRows" .!= mempty))
 
 instance ToJSON
-         ListCreativeStatusBreakdownByCreativeResponse where
+           ListCreativeStatusBreakdownByCreativeResponse
+         where
         toJSON
           ListCreativeStatusBreakdownByCreativeResponse'{..}
           = object
@@ -6381,11 +6565,14 @@ instance ToJSON
 -- | Frequency cap.
 --
 -- /See:/ 'frequencyCap' smart constructor.
-data FrequencyCap = FrequencyCap'
+data FrequencyCap =
+  FrequencyCap'
     { _fcMaxImpressions :: !(Maybe (Textual Int32))
     , _fcNumTimeUnits   :: !(Maybe (Textual Int32))
     , _fcTimeUnitType   :: !(Maybe FrequencyCapTimeUnitType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FrequencyCap' with the minimum fields required to make a request.
 --
@@ -6399,11 +6586,12 @@ data FrequencyCap = FrequencyCap'
 frequencyCap
     :: FrequencyCap
 frequencyCap =
-    FrequencyCap'
+  FrequencyCap'
     { _fcMaxImpressions = Nothing
     , _fcNumTimeUnits = Nothing
     , _fcTimeUnitType = Nothing
     }
+
 
 -- | The maximum number of impressions that can be served to a user within
 -- the specified time period.
@@ -6449,10 +6637,13 @@ instance ToJSON FrequencyCap where
 -- considered to have no applicable bids.
 --
 -- /See:/ 'listBidResponsesWithoutBidsResponse' smart constructor.
-data ListBidResponsesWithoutBidsResponse = ListBidResponsesWithoutBidsResponse'
+data ListBidResponsesWithoutBidsResponse =
+  ListBidResponsesWithoutBidsResponse'
     { _lbrwbrNextPageToken                    :: !(Maybe Text)
     , _lbrwbrBidResponseWithoutBidsStatusRows :: !(Maybe [BidResponseWithoutBidsStatusRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListBidResponsesWithoutBidsResponse' with the minimum fields required to make a request.
 --
@@ -6464,10 +6655,11 @@ data ListBidResponsesWithoutBidsResponse = ListBidResponsesWithoutBidsResponse'
 listBidResponsesWithoutBidsResponse
     :: ListBidResponsesWithoutBidsResponse
 listBidResponsesWithoutBidsResponse =
-    ListBidResponsesWithoutBidsResponse'
+  ListBidResponsesWithoutBidsResponse'
     { _lbrwbrNextPageToken = Nothing
     , _lbrwbrBidResponseWithoutBidsStatusRows = Nothing
     }
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListBidResponsesWithoutBidsRequest.pageToken field in the subsequent
@@ -6513,12 +6705,15 @@ instance ToJSON ListBidResponsesWithoutBidsResponse
 -- request, or the type of auction).
 --
 -- /See:/ 'servingRestriction' smart constructor.
-data ServingRestriction = ServingRestriction'
+data ServingRestriction =
+  ServingRestriction'
     { _srStatus             :: !(Maybe ServingRestrictionStatus)
     , _srContexts           :: !(Maybe [ServingContext])
     , _srDisApprovalReasons :: !(Maybe [DisApproval])
     , _srDisApproval        :: !(Maybe DisApproval)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServingRestriction' with the minimum fields required to make a request.
 --
@@ -6534,12 +6729,13 @@ data ServingRestriction = ServingRestriction'
 servingRestriction
     :: ServingRestriction
 servingRestriction =
-    ServingRestriction'
+  ServingRestriction'
     { _srStatus = Nothing
     , _srContexts = Nothing
     , _srDisApprovalReasons = Nothing
     , _srDisApproval = Nothing
     }
+
 
 -- | The status of the creative in this context (for example, it has been
 -- explicitly disapproved or is pending review).
@@ -6593,10 +6789,13 @@ instance ToJSON ServingRestriction where
 -- Programmatic Guaranteed\/Preferred Deal in Ad Manager.
 --
 -- /See:/ 'creativeSpecification' smart constructor.
-data CreativeSpecification = CreativeSpecification'
+data CreativeSpecification =
+  CreativeSpecification'
     { _csCreativeCompanionSizes :: !(Maybe [AdSize])
     , _csCreativeSize           :: !(Maybe AdSize)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeSpecification' with the minimum fields required to make a request.
 --
@@ -6608,10 +6807,9 @@ data CreativeSpecification = CreativeSpecification'
 creativeSpecification
     :: CreativeSpecification
 creativeSpecification =
-    CreativeSpecification'
-    { _csCreativeCompanionSizes = Nothing
-    , _csCreativeSize = Nothing
-    }
+  CreativeSpecification'
+    {_csCreativeCompanionSizes = Nothing, _csCreativeSize = Nothing}
+
 
 -- | Companion sizes may be filled in only when this is a video creative.
 csCreativeCompanionSizes :: Lens' CreativeSpecification [AdSize]
@@ -6648,14 +6846,17 @@ instance ToJSON CreativeSpecification where
 -- were considered eligible at each stage of the bidding funnel.
 --
 -- /See:/ 'impressionMetricsRow' smart constructor.
-data ImpressionMetricsRow = ImpressionMetricsRow'
+data ImpressionMetricsRow =
+  ImpressionMetricsRow'
     { _imrRowDimensions        :: !(Maybe RowDimensions)
     , _imrAvailableImpressions :: !(Maybe MetricValue)
     , _imrSuccessfulResponses  :: !(Maybe MetricValue)
     , _imrInventoryMatches     :: !(Maybe MetricValue)
     , _imrBidRequests          :: !(Maybe MetricValue)
     , _imrResponsesWithBids    :: !(Maybe MetricValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImpressionMetricsRow' with the minimum fields required to make a request.
 --
@@ -6675,7 +6876,7 @@ data ImpressionMetricsRow = ImpressionMetricsRow'
 impressionMetricsRow
     :: ImpressionMetricsRow
 impressionMetricsRow =
-    ImpressionMetricsRow'
+  ImpressionMetricsRow'
     { _imrRowDimensions = Nothing
     , _imrAvailableImpressions = Nothing
     , _imrSuccessfulResponses = Nothing
@@ -6683,6 +6884,7 @@ impressionMetricsRow =
     , _imrBidRequests = Nothing
     , _imrResponsesWithBids = Nothing
     }
+
 
 -- | The values of all dimensions associated with metric values in this row.
 imrRowDimensions :: Lens' ImpressionMetricsRow (Maybe RowDimensions)
@@ -6753,14 +6955,17 @@ instance ToJSON ImpressionMetricsRow where
 -- | Specifies the size of the creative.
 --
 -- /See:/ 'creativeSize' smart constructor.
-data CreativeSize = CreativeSize'
+data CreativeSize =
+  CreativeSize'
     { _csSize             :: !(Maybe Size)
     , _csCompanionSizes   :: !(Maybe [Size])
     , _csSkippableAdType  :: !(Maybe CreativeSizeSkippableAdType)
     , _csCreativeSizeType :: !(Maybe CreativeSizeCreativeSizeType)
     , _csAllowedFormats   :: !(Maybe [Text])
     , _csNATiveTemplate   :: !(Maybe CreativeSizeNATiveTemplate)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeSize' with the minimum fields required to make a request.
 --
@@ -6780,7 +6985,7 @@ data CreativeSize = CreativeSize'
 creativeSize
     :: CreativeSize
 creativeSize =
-    CreativeSize'
+  CreativeSize'
     { _csSize = Nothing
     , _csCompanionSizes = Nothing
     , _csSkippableAdType = Nothing
@@ -6788,6 +6993,7 @@ creativeSize =
     , _csAllowedFormats = Nothing
     , _csNATiveTemplate = Nothing
     }
+
 
 -- | For regular or video creative size type, specifies the size of the
 -- creative
@@ -6860,10 +7066,13 @@ instance ToJSON CreativeSize where
 -- | Response message for listing proposals.
 --
 -- /See:/ 'listProposalsResponse' smart constructor.
-data ListProposalsResponse = ListProposalsResponse'
+data ListProposalsResponse =
+  ListProposalsResponse'
     { _lprProposals     :: !(Maybe [Proposal])
     , _lprNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListProposalsResponse' with the minimum fields required to make a request.
 --
@@ -6875,10 +7084,8 @@ data ListProposalsResponse = ListProposalsResponse'
 listProposalsResponse
     :: ListProposalsResponse
 listProposalsResponse =
-    ListProposalsResponse'
-    { _lprProposals = Nothing
-    , _lprNextPageToken = Nothing
-    }
+  ListProposalsResponse' {_lprProposals = Nothing, _lprNextPageToken = Nothing}
+
 
 -- | The list of proposals.
 lprProposals :: Lens' ListProposalsResponse [Proposal]
@@ -6914,10 +7121,13 @@ instance ToJSON ListProposalsResponse where
 -- Preferred Deals in Ad Manager.
 --
 -- /See:/ 'inventorySizeTargeting' smart constructor.
-data InventorySizeTargeting = InventorySizeTargeting'
+data InventorySizeTargeting =
+  InventorySizeTargeting'
     { _istTargetedInventorySizes :: !(Maybe [AdSize])
     , _istExcludedInventorySizes :: !(Maybe [AdSize])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InventorySizeTargeting' with the minimum fields required to make a request.
 --
@@ -6929,10 +7139,9 @@ data InventorySizeTargeting = InventorySizeTargeting'
 inventorySizeTargeting
     :: InventorySizeTargeting
 inventorySizeTargeting =
-    InventorySizeTargeting'
-    { _istTargetedInventorySizes = Nothing
-    , _istExcludedInventorySizes = Nothing
-    }
+  InventorySizeTargeting'
+    {_istTargetedInventorySizes = Nothing, _istExcludedInventorySizes = Nothing}
+
 
 -- | A list of inventory sizes to be included.
 istTargetedInventorySizes :: Lens' InventorySizeTargeting [AdSize]
@@ -6972,7 +7181,8 @@ instance ToJSON InventorySizeTargeting where
 -- price, auction) and expected impressions from the publisher.
 --
 -- /See:/ 'dealTerms' smart constructor.
-data DealTerms = DealTerms'
+data DealTerms =
+  DealTerms'
     { _dtEstimatedGrossSpend          :: !(Maybe Price)
     , _dtNonGuaranteedFixedPriceTerms :: !(Maybe NonGuaranteedFixedPriceTerms)
     , _dtNonGuaranteedAuctionTerms    :: !(Maybe NonGuaranteedAuctionTerms)
@@ -6981,7 +7191,9 @@ data DealTerms = DealTerms'
     , _dtSellerTimeZone               :: !(Maybe Text)
     , _dtGuaranteedFixedPriceTerms    :: !(Maybe GuaranteedFixedPriceTerms)
     , _dtDescription                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DealTerms' with the minimum fields required to make a request.
 --
@@ -7005,7 +7217,7 @@ data DealTerms = DealTerms'
 dealTerms
     :: DealTerms
 dealTerms =
-    DealTerms'
+  DealTerms'
     { _dtEstimatedGrossSpend = Nothing
     , _dtNonGuaranteedFixedPriceTerms = Nothing
     , _dtNonGuaranteedAuctionTerms = Nothing
@@ -7015,6 +7227,7 @@ dealTerms =
     , _dtGuaranteedFixedPriceTerms = Nothing
     , _dtDescription = Nothing
     }
+
 
 -- | Non-binding estimate of the estimated gross spend for this deal. Can be
 -- set by buyer or seller.
@@ -7106,10 +7319,13 @@ instance ToJSON DealTerms where
 -- single day (from midnight to midnight Pacific).
 --
 -- /See:/ 'filteringStats' smart constructor.
-data FilteringStats = FilteringStats'
+data FilteringStats =
+  FilteringStats'
     { _fsReasons :: !(Maybe [Reason])
     , _fsDate    :: !(Maybe Date)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilteringStats' with the minimum fields required to make a request.
 --
@@ -7120,11 +7336,8 @@ data FilteringStats = FilteringStats'
 -- * 'fsDate'
 filteringStats
     :: FilteringStats
-filteringStats =
-    FilteringStats'
-    { _fsReasons = Nothing
-    , _fsDate = Nothing
-    }
+filteringStats = FilteringStats' {_fsReasons = Nothing, _fsDate = Nothing}
+
 
 -- | The set of filtering reasons for this date.
 fsReasons :: Lens' FilteringStats [Reason]
@@ -7157,11 +7370,14 @@ instance ToJSON FilteringStats where
 -- Buyers UI. All fields are required unless otherwise specified.
 --
 -- /See:/ 'clientUserInvitation' smart constructor.
-data ClientUserInvitation = ClientUserInvitation'
+data ClientUserInvitation =
+  ClientUserInvitation'
     { _cuiEmail           :: !(Maybe Text)
     , _cuiInvitationId    :: !(Maybe (Textual Int64))
     , _cuiClientAccountId :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClientUserInvitation' with the minimum fields required to make a request.
 --
@@ -7175,11 +7391,12 @@ data ClientUserInvitation = ClientUserInvitation'
 clientUserInvitation
     :: ClientUserInvitation
 clientUserInvitation =
-    ClientUserInvitation'
+  ClientUserInvitation'
     { _cuiEmail = Nothing
     , _cuiInvitationId = Nothing
     , _cuiClientAccountId = Nothing
     }
+
 
 -- | The email address to which the invitation is sent. Email addresses
 -- should be unique among all client users under each sponsor buyer.
@@ -7223,11 +7440,14 @@ instance ToJSON ClientUserInvitation where
 -- the buyer was not billed, as described by the specified status.
 --
 -- /See:/ 'nonBillableWinningBidStatusRow' smart constructor.
-data NonBillableWinningBidStatusRow = NonBillableWinningBidStatusRow'
+data NonBillableWinningBidStatusRow =
+  NonBillableWinningBidStatusRow'
     { _nbwbsrStatus        :: !(Maybe NonBillableWinningBidStatusRowStatus)
     , _nbwbsrRowDimensions :: !(Maybe RowDimensions)
     , _nbwbsrBidCount      :: !(Maybe MetricValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NonBillableWinningBidStatusRow' with the minimum fields required to make a request.
 --
@@ -7241,11 +7461,12 @@ data NonBillableWinningBidStatusRow = NonBillableWinningBidStatusRow'
 nonBillableWinningBidStatusRow
     :: NonBillableWinningBidStatusRow
 nonBillableWinningBidStatusRow =
-    NonBillableWinningBidStatusRow'
+  NonBillableWinningBidStatusRow'
     { _nbwbsrStatus = Nothing
     , _nbwbsrRowDimensions = Nothing
     , _nbwbsrBidCount = Nothing
     }
+
 
 -- | The status specifying why the winning bids were not billed.
 nbwbsrStatus :: Lens' NonBillableWinningBidStatusRow (Maybe NonBillableWinningBidStatusRowStatus)
@@ -7284,10 +7505,13 @@ instance ToJSON NonBillableWinningBidStatusRow where
 -- | Response message for listing products visible to the buyer.
 --
 -- /See:/ 'listProductsResponse' smart constructor.
-data ListProductsResponse = ListProductsResponse'
+data ListProductsResponse =
+  ListProductsResponse'
     { _lisNextPageToken :: !(Maybe Text)
     , _lisProducts      :: !(Maybe [Product])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListProductsResponse' with the minimum fields required to make a request.
 --
@@ -7299,10 +7523,8 @@ data ListProductsResponse = ListProductsResponse'
 listProductsResponse
     :: ListProductsResponse
 listProductsResponse =
-    ListProductsResponse'
-    { _lisNextPageToken = Nothing
-    , _lisProducts = Nothing
-    }
+  ListProductsResponse' {_lisNextPageToken = Nothing, _lisProducts = Nothing}
+
 
 -- | List pagination support.
 lisNextPageToken :: Lens' ListProductsResponse (Maybe Text)
@@ -7336,9 +7558,12 @@ instance ToJSON ListProductsResponse where
 -- Authorized Buyers account ID.
 --
 -- /See:/ 'buyer' smart constructor.
-newtype Buyer = Buyer'
+newtype Buyer =
+  Buyer'
     { _bAccountId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Buyer' with the minimum fields required to make a request.
 --
@@ -7347,10 +7572,8 @@ newtype Buyer = Buyer'
 -- * 'bAccountId'
 buyer
     :: Buyer
-buyer =
-    Buyer'
-    { _bAccountId = Nothing
-    }
+buyer = Buyer' {_bAccountId = Nothing}
+
 
 -- | Authorized Buyers account ID of the buyer.
 bAccountId :: Lens' Buyer (Maybe Text)
@@ -7371,10 +7594,13 @@ instance ToJSON Buyer where
 -- bids.
 --
 -- /See:/ 'listBidMetricsResponse' smart constructor.
-data ListBidMetricsResponse = ListBidMetricsResponse'
+data ListBidMetricsResponse =
+  ListBidMetricsResponse'
     { _lbmrNextPageToken  :: !(Maybe Text)
     , _lbmrBidMetricsRows :: !(Maybe [BidMetricsRow])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListBidMetricsResponse' with the minimum fields required to make a request.
 --
@@ -7386,10 +7612,9 @@ data ListBidMetricsResponse = ListBidMetricsResponse'
 listBidMetricsResponse
     :: ListBidMetricsResponse
 listBidMetricsResponse =
-    ListBidMetricsResponse'
-    { _lbmrNextPageToken = Nothing
-    , _lbmrBidMetricsRows = Nothing
-    }
+  ListBidMetricsResponse'
+    {_lbmrNextPageToken = Nothing, _lbmrBidMetricsRows = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListBidMetricsRequest.pageToken field in the subsequent call to the
@@ -7429,7 +7654,8 @@ instance ToJSON ListBidMetricsResponse where
 -- client buyer. All fields are required unless otherwise specified.
 --
 -- /See:/ 'client' smart constructor.
-data Client = Client'
+data Client =
+  Client'
     { _cEntityName      :: !(Maybe Text)
     , _cStatus          :: !(Maybe ClientStatus)
     , _cEntityType      :: !(Maybe ClientEntityType)
@@ -7439,7 +7665,9 @@ data Client = Client'
     , _cClientAccountId :: !(Maybe (Textual Int64))
     , _cClientName      :: !(Maybe Text)
     , _cEntityId        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Client' with the minimum fields required to make a request.
 --
@@ -7465,7 +7693,7 @@ data Client = Client'
 client
     :: Client
 client =
-    Client'
+  Client'
     { _cEntityName = Nothing
     , _cStatus = Nothing
     , _cEntityType = Nothing
@@ -7476,6 +7704,7 @@ client =
     , _cClientName = Nothing
     , _cEntityId = Nothing
     }
+
 
 -- | The name of the entity. This field is automatically fetched based on the
 -- type and ID. The value of this field is ignored in create and update
@@ -7582,10 +7811,13 @@ instance ToJSON Client where
 -- | \'OutputOnly The reason and details for a disapproval.
 --
 -- /See:/ 'disApproval' smart constructor.
-data DisApproval = DisApproval'
+data DisApproval =
+  DisApproval'
     { _daReason  :: !(Maybe DisApprovalReason)
     , _daDetails :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisApproval' with the minimum fields required to make a request.
 --
@@ -7596,11 +7828,8 @@ data DisApproval = DisApproval'
 -- * 'daDetails'
 disApproval
     :: DisApproval
-disApproval =
-    DisApproval'
-    { _daReason = Nothing
-    , _daDetails = Nothing
-    }
+disApproval = DisApproval' {_daReason = Nothing, _daDetails = Nothing}
+
 
 -- | The categorized reason for disapproval.
 daReason :: Lens' DisApproval (Maybe DisApprovalReason)

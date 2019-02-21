@@ -73,14 +73,17 @@ type ProjectsSnapshotsGetResource =
 -- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'projectsSnapshotsGet' smart constructor.
-data ProjectsSnapshotsGet = ProjectsSnapshotsGet'
+data ProjectsSnapshotsGet =
+  ProjectsSnapshotsGet'
     { _psgsXgafv          :: !(Maybe Xgafv)
     , _psgsSnapshot       :: !Text
     , _psgsUploadProtocol :: !(Maybe Text)
     , _psgsAccessToken    :: !(Maybe Text)
     , _psgsUploadType     :: !(Maybe Text)
     , _psgsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSnapshotsGet' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsSnapshotsGet
     :: Text -- ^ 'psgsSnapshot'
     -> ProjectsSnapshotsGet
 projectsSnapshotsGet pPsgsSnapshot_ =
-    ProjectsSnapshotsGet'
+  ProjectsSnapshotsGet'
     { _psgsXgafv = Nothing
     , _psgsSnapshot = pPsgsSnapshot_
     , _psgsUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsSnapshotsGet pPsgsSnapshot_ =
     , _psgsUploadType = Nothing
     , _psgsCallback = Nothing
     }
+
 
 -- | V1 error format.
 psgsXgafv :: Lens' ProjectsSnapshotsGet (Maybe Xgafv)

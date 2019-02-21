@@ -56,10 +56,13 @@ type SavedColumnsListResource =
 -- | Retrieve the list of saved columns for a specified advertiser.
 --
 -- /See:/ 'savedColumnsList' smart constructor.
-data SavedColumnsList = SavedColumnsList'
+data SavedColumnsList =
+  SavedColumnsList'
     { _sclAgencyId     :: !(Textual Int64)
     , _sclAdvertiserId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SavedColumnsList' with the minimum fields required to make a request.
 --
@@ -73,10 +76,11 @@ savedColumnsList
     -> Int64 -- ^ 'sclAdvertiserId'
     -> SavedColumnsList
 savedColumnsList pSclAgencyId_ pSclAdvertiserId_ =
-    SavedColumnsList'
+  SavedColumnsList'
     { _sclAgencyId = _Coerce # pSclAgencyId_
     , _sclAdvertiserId = _Coerce # pSclAdvertiserId_
     }
+
 
 -- | DS ID of the agency.
 sclAgencyId :: Lens' SavedColumnsList Int64

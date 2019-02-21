@@ -104,7 +104,8 @@ type ProjectsInstancesPatchResource =
 -- permission on resource name.
 --
 -- /See:/ 'projectsInstancesPatch' smart constructor.
-data ProjectsInstancesPatch = ProjectsInstancesPatch'
+data ProjectsInstancesPatch =
+  ProjectsInstancesPatch'
     { _pipXgafv          :: !(Maybe Xgafv)
     , _pipUploadProtocol :: !(Maybe Text)
     , _pipAccessToken    :: !(Maybe Text)
@@ -112,7 +113,9 @@ data ProjectsInstancesPatch = ProjectsInstancesPatch'
     , _pipPayload        :: !UpdateInstanceRequest
     , _pipName           :: !Text
     , _pipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesPatch' with the minimum fields required to make a request.
 --
@@ -136,7 +139,7 @@ projectsInstancesPatch
     -> Text -- ^ 'pipName'
     -> ProjectsInstancesPatch
 projectsInstancesPatch pPipPayload_ pPipName_ =
-    ProjectsInstancesPatch'
+  ProjectsInstancesPatch'
     { _pipXgafv = Nothing
     , _pipUploadProtocol = Nothing
     , _pipAccessToken = Nothing
@@ -145,6 +148,7 @@ projectsInstancesPatch pPipPayload_ pPipName_ =
     , _pipName = pPipName_
     , _pipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pipXgafv :: Lens' ProjectsInstancesPatch (Maybe Xgafv)

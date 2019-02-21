@@ -51,9 +51,12 @@ type AccountsGetResource =
 -- | Gets one account by ID.
 --
 -- /See:/ 'accountsGet' smart constructor.
-newtype AccountsGet = AccountsGet'
+newtype AccountsGet =
+  AccountsGet'
     { _agId :: Textual Int32
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype AccountsGet = AccountsGet'
 accountsGet
     :: Int32 -- ^ 'agId'
     -> AccountsGet
-accountsGet pAgId_ =
-    AccountsGet'
-    { _agId = _Coerce # pAgId_
-    }
+accountsGet pAgId_ = AccountsGet' {_agId = _Coerce # pAgId_}
+
 
 -- | The account id
 agId :: Lens' AccountsGet Int32

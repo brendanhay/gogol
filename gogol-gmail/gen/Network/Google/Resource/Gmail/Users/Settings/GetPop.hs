@@ -53,9 +53,12 @@ type UsersSettingsGetPopResource =
 -- | Gets POP settings.
 --
 -- /See:/ 'usersSettingsGetPop' smart constructor.
-newtype UsersSettingsGetPop = UsersSettingsGetPop'
+newtype UsersSettingsGetPop =
+  UsersSettingsGetPop'
     { _usgpUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsGetPop' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype UsersSettingsGetPop = UsersSettingsGetPop'
 -- * 'usgpUserId'
 usersSettingsGetPop
     :: UsersSettingsGetPop
-usersSettingsGetPop =
-    UsersSettingsGetPop'
-    { _usgpUserId = "me"
-    }
+usersSettingsGetPop = UsersSettingsGetPop' {_usgpUserId = "me"}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

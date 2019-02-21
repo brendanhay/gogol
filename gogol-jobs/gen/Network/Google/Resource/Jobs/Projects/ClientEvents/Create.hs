@@ -75,7 +75,8 @@ type ProjectsClientEventsCreateResource =
 -- about self service tools.
 --
 -- /See:/ 'projectsClientEventsCreate' smart constructor.
-data ProjectsClientEventsCreate = ProjectsClientEventsCreate'
+data ProjectsClientEventsCreate =
+  ProjectsClientEventsCreate'
     { _pcecParent         :: !Text
     , _pcecXgafv          :: !(Maybe Xgafv)
     , _pcecUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsClientEventsCreate = ProjectsClientEventsCreate'
     , _pcecUploadType     :: !(Maybe Text)
     , _pcecPayload        :: !CreateClientEventRequest
     , _pcecCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsClientEventsCreate' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsClientEventsCreate
     -> CreateClientEventRequest -- ^ 'pcecPayload'
     -> ProjectsClientEventsCreate
 projectsClientEventsCreate pPcecParent_ pPcecPayload_ =
-    ProjectsClientEventsCreate'
+  ProjectsClientEventsCreate'
     { _pcecParent = pPcecParent_
     , _pcecXgafv = Nothing
     , _pcecUploadProtocol = Nothing
@@ -116,6 +119,7 @@ projectsClientEventsCreate pPcecParent_ pPcecPayload_ =
     , _pcecPayload = pPcecPayload_
     , _pcecCallback = Nothing
     }
+
 
 -- | Parent project name.
 pcecParent :: Lens' ProjectsClientEventsCreate Text

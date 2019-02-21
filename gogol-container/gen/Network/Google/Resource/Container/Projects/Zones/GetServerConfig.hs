@@ -67,7 +67,8 @@ type ProjectsZonesGetServerConfigResource =
 -- | Returns configuration info about the Kubernetes Engine service.
 --
 -- /See:/ 'projectsZonesGetServerConfig' smart constructor.
-data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig'
+data ProjectsZonesGetServerConfig =
+  ProjectsZonesGetServerConfig'
     { _pzgscXgafv          :: !(Maybe Xgafv)
     , _pzgscUploadProtocol :: !(Maybe Text)
     , _pzgscAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig'
     , _pzgscName           :: !(Maybe Text)
     , _pzgscProjectId      :: !Text
     , _pzgscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesGetServerConfig' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsZonesGetServerConfig
     -> Text -- ^ 'pzgscProjectId'
     -> ProjectsZonesGetServerConfig
 projectsZonesGetServerConfig pPzgscZone_ pPzgscProjectId_ =
-    ProjectsZonesGetServerConfig'
+  ProjectsZonesGetServerConfig'
     { _pzgscXgafv = Nothing
     , _pzgscUploadProtocol = Nothing
     , _pzgscAccessToken = Nothing
@@ -112,6 +115,7 @@ projectsZonesGetServerConfig pPzgscZone_ pPzgscProjectId_ =
     , _pzgscProjectId = pPzgscProjectId_
     , _pzgscCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzgscXgafv :: Lens' ProjectsZonesGetServerConfig (Maybe Xgafv)

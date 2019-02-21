@@ -64,10 +64,13 @@ type JobsInsertResource =
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
 -- /See:/ 'jobsInsert' smart constructor.
-data JobsInsert = JobsInsert'
+data JobsInsert =
+  JobsInsert'
     { _jiPayload   :: !Job
     , _jiProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobsInsert' with the minimum fields required to make a request.
 --
@@ -81,10 +84,8 @@ jobsInsert
     -> Text -- ^ 'jiProjectId'
     -> JobsInsert
 jobsInsert pJiPayload_ pJiProjectId_ =
-    JobsInsert'
-    { _jiPayload = pJiPayload_
-    , _jiProjectId = pJiProjectId_
-    }
+  JobsInsert' {_jiPayload = pJiPayload_, _jiProjectId = pJiProjectId_}
+
 
 -- | Multipart request metadata.
 jiPayload :: Lens' JobsInsert Job

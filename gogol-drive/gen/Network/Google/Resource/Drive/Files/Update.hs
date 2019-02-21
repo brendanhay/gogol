@@ -81,7 +81,8 @@ type FilesUpdateResource =
 -- | Updates a file\'s metadata and\/or content with patch semantics.
 --
 -- /See:/ 'filesUpdate' smart constructor.
-data FilesUpdate = FilesUpdate'
+data FilesUpdate =
+  FilesUpdate'
     { _fuPayload                   :: !File
     , _fuRemoveParents             :: !(Maybe Text)
     , _fuUseContentAsIndexableText :: !Bool
@@ -90,7 +91,9 @@ data FilesUpdate = FilesUpdate'
     , _fuFileId                    :: !Text
     , _fuAddParents                :: !(Maybe Text)
     , _fuSupportsTeamDrives        :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilesUpdate' with the minimum fields required to make a request.
 --
@@ -116,7 +119,7 @@ filesUpdate
     -> Text -- ^ 'fuFileId'
     -> FilesUpdate
 filesUpdate pFuPayload_ pFuFileId_ =
-    FilesUpdate'
+  FilesUpdate'
     { _fuPayload = pFuPayload_
     , _fuRemoveParents = Nothing
     , _fuUseContentAsIndexableText = False
@@ -126,6 +129,7 @@ filesUpdate pFuPayload_ pFuFileId_ =
     , _fuAddParents = Nothing
     , _fuSupportsTeamDrives = False
     }
+
 
 -- | Multipart request metadata.
 fuPayload :: Lens' FilesUpdate File

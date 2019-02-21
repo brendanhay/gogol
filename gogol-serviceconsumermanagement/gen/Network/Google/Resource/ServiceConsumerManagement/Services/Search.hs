@@ -66,7 +66,8 @@ type ServicesSearchResource =
 -- | Search tenancy units for a service.
 --
 -- /See:/ 'servicesSearch' smart constructor.
-data ServicesSearch = ServicesSearch'
+data ServicesSearch =
+  ServicesSearch'
     { _ssParent         :: !Text
     , _ssXgafv          :: !(Maybe Xgafv)
     , _ssUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ServicesSearch = ServicesSearch'
     , _ssPageToken      :: !(Maybe Text)
     , _ssPageSize       :: !(Maybe (Textual Int32))
     , _ssCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesSearch' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ servicesSearch
     :: Text -- ^ 'ssParent'
     -> ServicesSearch
 servicesSearch pSsParent_ =
-    ServicesSearch'
+  ServicesSearch'
     { _ssParent = pSsParent_
     , _ssXgafv = Nothing
     , _ssUploadProtocol = Nothing
@@ -114,6 +117,7 @@ servicesSearch pSsParent_ =
     , _ssPageSize = Nothing
     , _ssCallback = Nothing
     }
+
 
 -- | Service for which search is performed. services\/{service} {service} the
 -- name of a service, for example \'service.googleapis.com\'.

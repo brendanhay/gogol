@@ -57,11 +57,14 @@ type LiaSettingsRequestgmbAccessResource =
 -- | Requests access to a specified Google My Business account.
 --
 -- /See:/ 'liaSettingsRequestgmbAccess' smart constructor.
-data LiaSettingsRequestgmbAccess = LiaSettingsRequestgmbAccess'
+data LiaSettingsRequestgmbAccess =
+  LiaSettingsRequestgmbAccess'
     { _lsraGmbEmail   :: !Text
     , _lsraMerchantId :: !(Textual Word64)
     , _lsraAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiaSettingsRequestgmbAccess' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ liaSettingsRequestgmbAccess
     -> Word64 -- ^ 'lsraAccountId'
     -> LiaSettingsRequestgmbAccess
 liaSettingsRequestgmbAccess pLsraGmbEmail_ pLsraMerchantId_ pLsraAccountId_ =
-    LiaSettingsRequestgmbAccess'
+  LiaSettingsRequestgmbAccess'
     { _lsraGmbEmail = pLsraGmbEmail_
     , _lsraMerchantId = _Coerce # pLsraMerchantId_
     , _lsraAccountId = _Coerce # pLsraAccountId_
     }
+
 
 -- | The email of the Google My Business account.
 lsraGmbEmail :: Lens' LiaSettingsRequestgmbAccess Text

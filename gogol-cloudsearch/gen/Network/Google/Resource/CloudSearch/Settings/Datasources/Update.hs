@@ -63,7 +63,8 @@ type SettingsDatasourcesUpdateResource =
 -- | Updates a data source.
 --
 -- /See:/ 'settingsDatasourcesUpdate' smart constructor.
-data SettingsDatasourcesUpdate = SettingsDatasourcesUpdate'
+data SettingsDatasourcesUpdate =
+  SettingsDatasourcesUpdate'
     { _sduXgafv          :: !(Maybe Xgafv)
     , _sduUploadProtocol :: !(Maybe Text)
     , _sduAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data SettingsDatasourcesUpdate = SettingsDatasourcesUpdate'
     , _sduPayload        :: !UpdateDataSourceRequest
     , _sduName           :: !Text
     , _sduCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsDatasourcesUpdate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ settingsDatasourcesUpdate
     -> Text -- ^ 'sduName'
     -> SettingsDatasourcesUpdate
 settingsDatasourcesUpdate pSduPayload_ pSduName_ =
-    SettingsDatasourcesUpdate'
+  SettingsDatasourcesUpdate'
     { _sduXgafv = Nothing
     , _sduUploadProtocol = Nothing
     , _sduAccessToken = Nothing
@@ -104,6 +107,7 @@ settingsDatasourcesUpdate pSduPayload_ pSduName_ =
     , _sduName = pSduName_
     , _sduCallback = Nothing
     }
+
 
 -- | V1 error format.
 sduXgafv :: Lens' SettingsDatasourcesUpdate (Maybe Xgafv)

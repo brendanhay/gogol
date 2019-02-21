@@ -65,7 +65,8 @@ type ProjectsLocationsClustersGetResource =
 -- | Gets the details of a specific cluster.
 --
 -- /See:/ 'projectsLocationsClustersGet' smart constructor.
-data ProjectsLocationsClustersGet = ProjectsLocationsClustersGet'
+data ProjectsLocationsClustersGet =
+  ProjectsLocationsClustersGet'
     { _plcgXgafv          :: !(Maybe Xgafv)
     , _plcgUploadProtocol :: !(Maybe Text)
     , _plcgAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsLocationsClustersGet = ProjectsLocationsClustersGet'
     , _plcgClusterId      :: !(Maybe Text)
     , _plcgProjectId      :: !(Maybe Text)
     , _plcgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersGet' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsLocationsClustersGet
     :: Text -- ^ 'plcgName'
     -> ProjectsLocationsClustersGet
 projectsLocationsClustersGet pPlcgName_ =
-    ProjectsLocationsClustersGet'
+  ProjectsLocationsClustersGet'
     { _plcgXgafv = Nothing
     , _plcgUploadProtocol = Nothing
     , _plcgAccessToken = Nothing
@@ -113,6 +116,7 @@ projectsLocationsClustersGet pPlcgName_ =
     , _plcgProjectId = Nothing
     , _plcgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcgXgafv :: Lens' ProjectsLocationsClustersGet (Maybe Xgafv)

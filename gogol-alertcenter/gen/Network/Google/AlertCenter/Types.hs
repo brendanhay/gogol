@@ -161,6 +161,13 @@ module Network.Google.AlertCenter.Types
     , attachment
     , aCSV
 
+    -- * RequestInfo
+    , RequestInfo
+    , requestInfo
+    , riNumberOfRequests
+    , riAppDeveloperEmail
+    , riAppName
+
     -- * GoogleOperations
     , GoogleOperations
     , googleOperations
@@ -180,6 +187,11 @@ module Network.Google.AlertCenter.Types
 
     -- * Xgafv
     , Xgafv (..)
+
+    -- * AppMakerSQLSetupNotification
+    , AppMakerSQLSetupNotification
+    , appMakerSQLSetupNotification
+    , amsqlsnRequestInfo
 
     -- * DomainWideTakeoutInitiated
     , DomainWideTakeoutInitiated
@@ -238,4 +250,4 @@ alertCenterService
 
 -- | See and delete your domain\'s G Suite alerts, and send alert feedback
 appsAlertsScope :: Proxy '["https://www.googleapis.com/auth/apps.alerts"]
-appsAlertsScope = Proxy;
+appsAlertsScope = Proxy

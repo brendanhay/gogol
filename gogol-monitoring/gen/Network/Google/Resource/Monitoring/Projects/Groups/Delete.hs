@@ -38,6 +38,7 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Delete
     , pgdAccessToken
     , pgdUploadType
     , pgdName
+    , pgdRecursive
     , pgdCallback
     ) where
 
@@ -53,20 +54,25 @@ type ProjectsGroupsDeleteResource =
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                 QueryParam "recursive" Bool :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes an existing group.
 --
 -- /See:/ 'projectsGroupsDelete' smart constructor.
-data ProjectsGroupsDelete = ProjectsGroupsDelete'
+data ProjectsGroupsDelete =
+  ProjectsGroupsDelete'
     { _pgdXgafv          :: !(Maybe Xgafv)
     , _pgdUploadProtocol :: !(Maybe Text)
     , _pgdAccessToken    :: !(Maybe Text)
     , _pgdUploadType     :: !(Maybe Text)
     , _pgdName           :: !Text
+    , _pgdRecursive      :: !(Maybe Bool)
     , _pgdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGroupsDelete' with the minimum fields required to make a request.
 --
@@ -82,19 +88,23 @@ data ProjectsGroupsDelete = ProjectsGroupsDelete'
 --
 -- * 'pgdName'
 --
+-- * 'pgdRecursive'
+--
 -- * 'pgdCallback'
 projectsGroupsDelete
     :: Text -- ^ 'pgdName'
     -> ProjectsGroupsDelete
 projectsGroupsDelete pPgdName_ =
-    ProjectsGroupsDelete'
+  ProjectsGroupsDelete'
     { _pgdXgafv = Nothing
     , _pgdUploadProtocol = Nothing
     , _pgdAccessToken = Nothing
     , _pgdUploadType = Nothing
     , _pgdName = pPgdName_
+    , _pgdRecursive = Nothing
     , _pgdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgdXgafv :: Lens' ProjectsGroupsDelete (Maybe Xgafv)
@@ -123,6 +133,13 @@ pgdUploadType
 pgdName :: Lens' ProjectsGroupsDelete Text
 pgdName = lens _pgdName (\ s a -> s{_pgdName = a})
 
+-- | If this field is true, then the request means to delete a group with all
+-- its descendants. Otherwise, the request means to delete a group only
+-- when it has no descendants. The default value is false.
+pgdRecursive :: Lens' ProjectsGroupsDelete (Maybe Bool)
+pgdRecursive
+  = lens _pgdRecursive (\ s a -> s{_pgdRecursive = a})
+
 -- | JSONP
 pgdCallback :: Lens' ProjectsGroupsDelete (Maybe Text)
 pgdCallback
@@ -137,6 +154,7 @@ instance GoogleRequest ProjectsGroupsDelete where
           = go _pgdName _pgdXgafv _pgdUploadProtocol
               _pgdAccessToken
               _pgdUploadType
+              _pgdRecursive
               _pgdCallback
               (Just AltJSON)
               monitoringService

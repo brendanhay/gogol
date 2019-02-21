@@ -52,9 +52,12 @@ type LiveChatMessagesDeleteResource =
 -- | Deletes a chat message.
 --
 -- /See:/ 'liveChatMessagesDelete' smart constructor.
-newtype LiveChatMessagesDelete = LiveChatMessagesDelete'
+newtype LiveChatMessagesDelete =
+  LiveChatMessagesDelete'
     { _lId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveChatMessagesDelete' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype LiveChatMessagesDelete = LiveChatMessagesDelete'
 liveChatMessagesDelete
     :: Text -- ^ 'lId'
     -> LiveChatMessagesDelete
-liveChatMessagesDelete pLId_ =
-    LiveChatMessagesDelete'
-    { _lId = pLId_
-    }
+liveChatMessagesDelete pLId_ = LiveChatMessagesDelete' {_lId = pLId_}
+
 
 -- | The id parameter specifies the YouTube chat message ID of the resource
 -- that is being deleted.

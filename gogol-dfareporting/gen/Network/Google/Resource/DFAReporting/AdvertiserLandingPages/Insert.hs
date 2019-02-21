@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserLandingPagesInsert' request conforms to.
 type AdvertiserLandingPagesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserLandingPages" :>
@@ -55,10 +55,13 @@ type AdvertiserLandingPagesInsertResource =
 -- | Inserts a new landing page.
 --
 -- /See:/ 'advertiserLandingPagesInsert' smart constructor.
-data AdvertiserLandingPagesInsert = AdvertiserLandingPagesInsert'
+data AdvertiserLandingPagesInsert =
+  AdvertiserLandingPagesInsert'
     { _alpiProFileId :: !(Textual Int64)
     , _alpiPayload   :: !LandingPage
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdvertiserLandingPagesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ advertiserLandingPagesInsert
     -> LandingPage -- ^ 'alpiPayload'
     -> AdvertiserLandingPagesInsert
 advertiserLandingPagesInsert pAlpiProFileId_ pAlpiPayload_ =
-    AdvertiserLandingPagesInsert'
-    { _alpiProFileId = _Coerce # pAlpiProFileId_
-    , _alpiPayload = pAlpiPayload_
-    }
+  AdvertiserLandingPagesInsert'
+    {_alpiProFileId = _Coerce # pAlpiProFileId_, _alpiPayload = pAlpiPayload_}
+
 
 -- | User profile ID associated with this request.
 alpiProFileId :: Lens' AdvertiserLandingPagesInsert Int64

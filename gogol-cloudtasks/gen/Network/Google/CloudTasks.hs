@@ -232,6 +232,7 @@ module Network.Google.CloudTasks
     , Task
     , task
     , tLastAttempt
+    , tDispatchDeadline
     , tScheduleTime
     , tName
     , tFirstAttempt

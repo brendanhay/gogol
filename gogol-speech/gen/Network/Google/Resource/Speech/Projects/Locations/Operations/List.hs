@@ -31,7 +31,7 @@
 -- name binding is the parent resource, without the operations collection
 -- id.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference> for @speech.projects.locations.operations.list@.
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.projects.locations.operations.list@.
 module Network.Google.Resource.Speech.Projects.Locations.Operations.List
     (
     -- * REST Resource
@@ -85,7 +85,8 @@ type ProjectsLocationsOperationsListResource =
 -- id.
 --
 -- /See:/ 'projectsLocationsOperationsList' smart constructor.
-data ProjectsLocationsOperationsList = ProjectsLocationsOperationsList'
+data ProjectsLocationsOperationsList =
+  ProjectsLocationsOperationsList'
     { _plolXgafv          :: !(Maybe Xgafv)
     , _plolUploadProtocol :: !(Maybe Text)
     , _plolAccessToken    :: !(Maybe Text)
@@ -95,7 +96,9 @@ data ProjectsLocationsOperationsList = ProjectsLocationsOperationsList'
     , _plolPageToken      :: !(Maybe Text)
     , _plolPageSize       :: !(Maybe (Textual Int32))
     , _plolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsOperationsList' with the minimum fields required to make a request.
 --
@@ -122,7 +125,7 @@ projectsLocationsOperationsList
     :: Text -- ^ 'plolName'
     -> ProjectsLocationsOperationsList
 projectsLocationsOperationsList pPlolName_ =
-    ProjectsLocationsOperationsList'
+  ProjectsLocationsOperationsList'
     { _plolXgafv = Nothing
     , _plolUploadProtocol = Nothing
     , _plolAccessToken = Nothing
@@ -133,6 +136,7 @@ projectsLocationsOperationsList pPlolName_ =
     , _plolPageSize = Nothing
     , _plolCallback = Nothing
     }
+
 
 -- | V1 error format.
 plolXgafv :: Lens' ProjectsLocationsOperationsList (Maybe Xgafv)
@@ -184,7 +188,8 @@ plolCallback
   = lens _plolCallback (\ s a -> s{_plolCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsOperationsList where
+           ProjectsLocationsOperationsList
+         where
         type Rs ProjectsLocationsOperationsList =
              ListOperationsResponse
         type Scopes ProjectsLocationsOperationsList =

@@ -59,11 +59,14 @@ type ProjectsMoveInstanceResource =
 -- another.
 --
 -- /See:/ 'projectsMoveInstance' smart constructor.
-data ProjectsMoveInstance = ProjectsMoveInstance'
+data ProjectsMoveInstance =
+  ProjectsMoveInstance'
     { _pmiRequestId :: !(Maybe Text)
     , _pmiProject   :: !Text
     , _pmiPayload   :: !InstanceMoveRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsMoveInstance' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ projectsMoveInstance
     -> InstanceMoveRequest -- ^ 'pmiPayload'
     -> ProjectsMoveInstance
 projectsMoveInstance pPmiProject_ pPmiPayload_ =
-    ProjectsMoveInstance'
+  ProjectsMoveInstance'
     { _pmiRequestId = Nothing
     , _pmiProject = pPmiProject_
     , _pmiPayload = pPmiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

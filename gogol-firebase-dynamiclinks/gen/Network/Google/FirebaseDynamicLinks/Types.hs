@@ -107,9 +107,16 @@ module Network.Google.FirebaseDynamicLinks.Types
     , dliDynamicLinkDomain
     , dliLink
     , dliIosInfo
+    , dliAppPreview
     , dliDomainURIPrefix
     , dliAndroidInfo
     , dliAnalyticsInfo
+
+    -- * AppPreview
+    , AppPreview
+    , appPreview
+    , apOpenButtonText
+    , apSavePositionText
 
     -- * GetIosPostInstallAttributionRequestVisualStyle
     , GetIosPostInstallAttributionRequestVisualStyle (..)
@@ -264,4 +271,4 @@ firebaseDynamicLinksService
 
 -- | View and administer all your Firebase data and settings
 firebaseScope :: Proxy '["https://www.googleapis.com/auth/firebase"]
-firebaseScope = Proxy;
+firebaseScope = Proxy

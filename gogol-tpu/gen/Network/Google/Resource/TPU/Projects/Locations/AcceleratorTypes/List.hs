@@ -69,7 +69,8 @@ type ProjectsLocationsAcceleratorTypesListResource =
 -- | Lists accelerator types supported by this API.
 --
 -- /See:/ 'projectsLocationsAcceleratorTypesList' smart constructor.
-data ProjectsLocationsAcceleratorTypesList = ProjectsLocationsAcceleratorTypesList'
+data ProjectsLocationsAcceleratorTypesList =
+  ProjectsLocationsAcceleratorTypesList'
     { _platlParent         :: !Text
     , _platlXgafv          :: !(Maybe Xgafv)
     , _platlUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsLocationsAcceleratorTypesList = ProjectsLocationsAcceleratorTypesLi
     , _platlPageToken      :: !(Maybe Text)
     , _platlPageSize       :: !(Maybe (Textual Int32))
     , _platlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsAcceleratorTypesList' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsLocationsAcceleratorTypesList
     :: Text -- ^ 'platlParent'
     -> ProjectsLocationsAcceleratorTypesList
 projectsLocationsAcceleratorTypesList pPlatlParent_ =
-    ProjectsLocationsAcceleratorTypesList'
+  ProjectsLocationsAcceleratorTypesList'
     { _platlParent = pPlatlParent_
     , _platlXgafv = Nothing
     , _platlUploadProtocol = Nothing
@@ -121,6 +124,7 @@ projectsLocationsAcceleratorTypesList pPlatlParent_ =
     , _platlPageSize = Nothing
     , _platlCallback = Nothing
     }
+
 
 -- | The parent resource name.
 platlParent :: Lens' ProjectsLocationsAcceleratorTypesList Text
@@ -180,7 +184,8 @@ platlCallback
       (\ s a -> s{_platlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsAcceleratorTypesList where
+           ProjectsLocationsAcceleratorTypesList
+         where
         type Rs ProjectsLocationsAcceleratorTypesList =
              ListAcceleratorTypesResponse
         type Scopes ProjectsLocationsAcceleratorTypesList =

@@ -62,14 +62,17 @@ type URLTestingToolsMobileFriendlyTestRunResource =
 -- | Runs Mobile-Friendly Test for a given URL.
 --
 -- /See:/ 'urlTestingToolsMobileFriendlyTestRun' smart constructor.
-data URLTestingToolsMobileFriendlyTestRun = URLTestingToolsMobileFriendlyTestRun'
+data URLTestingToolsMobileFriendlyTestRun =
+  URLTestingToolsMobileFriendlyTestRun'
     { _uttmftrXgafv          :: !(Maybe Xgafv)
     , _uttmftrUploadProtocol :: !(Maybe Text)
     , _uttmftrAccessToken    :: !(Maybe Text)
     , _uttmftrUploadType     :: !(Maybe Text)
     , _uttmftrPayload        :: !RunMobileFriendlyTestRequest
     , _uttmftrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLTestingToolsMobileFriendlyTestRun' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ urlTestingToolsMobileFriendlyTestRun
     :: RunMobileFriendlyTestRequest -- ^ 'uttmftrPayload'
     -> URLTestingToolsMobileFriendlyTestRun
 urlTestingToolsMobileFriendlyTestRun pUttmftrPayload_ =
-    URLTestingToolsMobileFriendlyTestRun'
+  URLTestingToolsMobileFriendlyTestRun'
     { _uttmftrXgafv = Nothing
     , _uttmftrUploadProtocol = Nothing
     , _uttmftrAccessToken = Nothing
@@ -98,6 +101,7 @@ urlTestingToolsMobileFriendlyTestRun pUttmftrPayload_ =
     , _uttmftrPayload = pUttmftrPayload_
     , _uttmftrCallback = Nothing
     }
+
 
 -- | V1 error format.
 uttmftrXgafv :: Lens' URLTestingToolsMobileFriendlyTestRun (Maybe Xgafv)
@@ -135,7 +139,8 @@ uttmftrCallback
       (\ s a -> s{_uttmftrCallback = a})
 
 instance GoogleRequest
-         URLTestingToolsMobileFriendlyTestRun where
+           URLTestingToolsMobileFriendlyTestRun
+         where
         type Rs URLTestingToolsMobileFriendlyTestRun =
              RunMobileFriendlyTestResponse
         type Scopes URLTestingToolsMobileFriendlyTestRun =

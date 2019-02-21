@@ -57,11 +57,14 @@ type EditsListingsDeleteResource =
 -- | Deletes the specified localized store listing from an edit.
 --
 -- /See:/ 'editsListingsDelete' smart constructor.
-data EditsListingsDelete = EditsListingsDelete'
+data EditsListingsDelete =
+  EditsListingsDelete'
     { _eldPackageName :: !Text
     , _eldLanguage    :: !Text
     , _eldEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsListingsDelete' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ editsListingsDelete
     -> Text -- ^ 'eldEditId'
     -> EditsListingsDelete
 editsListingsDelete pEldPackageName_ pEldLanguage_ pEldEditId_ =
-    EditsListingsDelete'
+  EditsListingsDelete'
     { _eldPackageName = pEldPackageName_
     , _eldLanguage = pEldLanguage_
     , _eldEditId = pEldEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

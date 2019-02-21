@@ -69,7 +69,8 @@ type MyLibraryBookshelvesVolumesListResource =
 -- | Gets volume information for volumes on a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesVolumesList' smart constructor.
-data MyLibraryBookshelvesVolumesList = MyLibraryBookshelvesVolumesList'
+data MyLibraryBookshelvesVolumesList =
+  MyLibraryBookshelvesVolumesList'
     { _mlbvlCountry       :: !(Maybe Text)
     , _mlbvlQ             :: !(Maybe Text)
     , _mlbvlShelf         :: !Text
@@ -78,7 +79,9 @@ data MyLibraryBookshelvesVolumesList = MyLibraryBookshelvesVolumesList'
     , _mlbvlStartIndex    :: !(Maybe (Textual Word32))
     , _mlbvlMaxResults    :: !(Maybe (Textual Word32))
     , _mlbvlShowPreOrders :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MyLibraryBookshelvesVolumesList' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ myLibraryBookshelvesVolumesList
     :: Text -- ^ 'mlbvlShelf'
     -> MyLibraryBookshelvesVolumesList
 myLibraryBookshelvesVolumesList pMlbvlShelf_ =
-    MyLibraryBookshelvesVolumesList'
+  MyLibraryBookshelvesVolumesList'
     { _mlbvlCountry = Nothing
     , _mlbvlQ = Nothing
     , _mlbvlShelf = pMlbvlShelf_
@@ -113,6 +116,7 @@ myLibraryBookshelvesVolumesList pMlbvlShelf_ =
     , _mlbvlMaxResults = Nothing
     , _mlbvlShowPreOrders = Nothing
     }
+
 
 -- | ISO-3166-1 code to override the IP-based location.
 mlbvlCountry :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
@@ -160,7 +164,8 @@ mlbvlShowPreOrders
       (\ s a -> s{_mlbvlShowPreOrders = a})
 
 instance GoogleRequest
-         MyLibraryBookshelvesVolumesList where
+           MyLibraryBookshelvesVolumesList
+         where
         type Rs MyLibraryBookshelvesVolumesList = Volumes
         type Scopes MyLibraryBookshelvesVolumesList =
              '["https://www.googleapis.com/auth/books"]

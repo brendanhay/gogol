@@ -60,14 +60,17 @@ type ProjectsLocationsTransferConfigsRunsDeleteResource
 -- | Deletes the specified transfer run.
 --
 -- /See:/ 'projectsLocationsTransferConfigsRunsDelete' smart constructor.
-data ProjectsLocationsTransferConfigsRunsDelete = ProjectsLocationsTransferConfigsRunsDelete'
+data ProjectsLocationsTransferConfigsRunsDelete =
+  ProjectsLocationsTransferConfigsRunsDelete'
     { _pltcrdXgafv          :: !(Maybe Xgafv)
     , _pltcrdUploadProtocol :: !(Maybe Text)
     , _pltcrdAccessToken    :: !(Maybe Text)
     , _pltcrdUploadType     :: !(Maybe Text)
     , _pltcrdName           :: !Text
     , _pltcrdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsTransferConfigsRunsDelete' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ projectsLocationsTransferConfigsRunsDelete
     :: Text -- ^ 'pltcrdName'
     -> ProjectsLocationsTransferConfigsRunsDelete
 projectsLocationsTransferConfigsRunsDelete pPltcrdName_ =
-    ProjectsLocationsTransferConfigsRunsDelete'
+  ProjectsLocationsTransferConfigsRunsDelete'
     { _pltcrdXgafv = Nothing
     , _pltcrdUploadProtocol = Nothing
     , _pltcrdAccessToken = Nothing
@@ -96,6 +99,7 @@ projectsLocationsTransferConfigsRunsDelete pPltcrdName_ =
     , _pltcrdName = pPltcrdName_
     , _pltcrdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltcrdXgafv :: Lens' ProjectsLocationsTransferConfigsRunsDelete (Maybe Xgafv)
@@ -133,7 +137,8 @@ pltcrdCallback
       (\ s a -> s{_pltcrdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTransferConfigsRunsDelete where
+           ProjectsLocationsTransferConfigsRunsDelete
+         where
         type Rs ProjectsLocationsTransferConfigsRunsDelete =
              Empty
         type Scopes

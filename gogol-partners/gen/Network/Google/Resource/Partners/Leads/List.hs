@@ -93,7 +93,8 @@ type LeadsListResource =
 -- called within the context of an authorized logged in user.
 --
 -- /See:/ 'leadsList' smart constructor.
-data LeadsList = LeadsList'
+data LeadsList =
+  LeadsList'
     { _llXgafv                                       :: !(Maybe Xgafv)
     , _llUploadProtocol                              :: !(Maybe Text)
     , _llOrderBy                                     :: !(Maybe Text)
@@ -109,7 +110,9 @@ data LeadsList = LeadsList'
     , _llRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _llRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _llCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeadsList' with the minimum fields required to make a request.
 --
@@ -147,7 +150,7 @@ data LeadsList = LeadsList'
 leadsList
     :: LeadsList
 leadsList =
-    LeadsList'
+  LeadsList'
     { _llXgafv = Nothing
     , _llUploadProtocol = Nothing
     , _llOrderBy = Nothing
@@ -164,6 +167,7 @@ leadsList =
     , _llRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _llCallback = Nothing
     }
+
 
 -- | V1 error format.
 llXgafv :: Lens' LeadsList (Maybe Xgafv)

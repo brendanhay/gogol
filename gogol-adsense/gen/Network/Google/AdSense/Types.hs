@@ -294,8 +294,8 @@ adSenseService
 
 -- | View your AdSense data
 adSenseReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/adsense.readonly"]
-adSenseReadOnlyScope = Proxy;
+adSenseReadOnlyScope = Proxy
 
 -- | View and manage your AdSense data
 adSenseScope :: Proxy '["https://www.googleapis.com/auth/adsense"]
-adSenseScope = Proxy;
+adSenseScope = Proxy

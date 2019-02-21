@@ -64,7 +64,8 @@ type ProjectsTopicsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsTopicsSetIAMPolicy' smart constructor.
-data ProjectsTopicsSetIAMPolicy = ProjectsTopicsSetIAMPolicy'
+data ProjectsTopicsSetIAMPolicy =
+  ProjectsTopicsSetIAMPolicy'
     { _ptsipXgafv          :: !(Maybe Xgafv)
     , _ptsipUploadProtocol :: !(Maybe Text)
     , _ptsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsTopicsSetIAMPolicy = ProjectsTopicsSetIAMPolicy'
     , _ptsipPayload        :: !SetIAMPolicyRequest
     , _ptsipResource       :: !Text
     , _ptsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTopicsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsTopicsSetIAMPolicy
     -> Text -- ^ 'ptsipResource'
     -> ProjectsTopicsSetIAMPolicy
 projectsTopicsSetIAMPolicy pPtsipPayload_ pPtsipResource_ =
-    ProjectsTopicsSetIAMPolicy'
+  ProjectsTopicsSetIAMPolicy'
     { _ptsipXgafv = Nothing
     , _ptsipUploadProtocol = Nothing
     , _ptsipAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsTopicsSetIAMPolicy pPtsipPayload_ pPtsipResource_ =
     , _ptsipResource = pPtsipResource_
     , _ptsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptsipXgafv :: Lens' ProjectsTopicsSetIAMPolicy (Maybe Xgafv)

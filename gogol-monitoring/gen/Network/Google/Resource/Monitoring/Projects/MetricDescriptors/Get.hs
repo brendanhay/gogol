@@ -62,14 +62,17 @@ type ProjectsMetricDescriptorsGetResource =
 -- Stackdriver account.
 --
 -- /See:/ 'projectsMetricDescriptorsGet' smart constructor.
-data ProjectsMetricDescriptorsGet = ProjectsMetricDescriptorsGet'
+data ProjectsMetricDescriptorsGet =
+  ProjectsMetricDescriptorsGet'
     { _pmdgXgafv          :: !(Maybe Xgafv)
     , _pmdgUploadProtocol :: !(Maybe Text)
     , _pmdgAccessToken    :: !(Maybe Text)
     , _pmdgUploadType     :: !(Maybe Text)
     , _pmdgName           :: !Text
     , _pmdgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsMetricDescriptorsGet' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ projectsMetricDescriptorsGet
     :: Text -- ^ 'pmdgName'
     -> ProjectsMetricDescriptorsGet
 projectsMetricDescriptorsGet pPmdgName_ =
-    ProjectsMetricDescriptorsGet'
+  ProjectsMetricDescriptorsGet'
     { _pmdgXgafv = Nothing
     , _pmdgUploadProtocol = Nothing
     , _pmdgAccessToken = Nothing
@@ -98,6 +101,7 @@ projectsMetricDescriptorsGet pPmdgName_ =
     , _pmdgName = pPmdgName_
     , _pmdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmdgXgafv :: Lens' ProjectsMetricDescriptorsGet (Maybe Xgafv)

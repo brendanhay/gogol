@@ -57,12 +57,15 @@ type AccountsInsertResource =
 -- | Inserts a new account for a user
 --
 -- /See:/ 'accountsInsert' smart constructor.
-data AccountsInsert = AccountsInsert'
+data AccountsInsert =
+  AccountsInsert'
     { _aiAccountName :: !Text
     , _aiPayload     :: !Account
     , _aiUserToken   :: !Text
     , _aiAccountType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsInsert' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ accountsInsert
     -> Text -- ^ 'aiAccountType'
     -> AccountsInsert
 accountsInsert pAiAccountName_ pAiPayload_ pAiUserToken_ pAiAccountType_ =
-    AccountsInsert'
+  AccountsInsert'
     { _aiAccountName = pAiAccountName_
     , _aiPayload = pAiPayload_
     , _aiUserToken = pAiUserToken_
     , _aiAccountType = pAiAccountType_
     }
+
 
 -- | The name of the account to be passed to the Android Account Manager.
 aiAccountName :: Lens' AccountsInsert Text

@@ -63,14 +63,17 @@ type LogsDeleteResource =
 -- might not be deleted.
 --
 -- /See:/ 'logsDelete' smart constructor.
-data LogsDelete = LogsDelete'
+data LogsDelete =
+  LogsDelete'
     { _ldXgafv          :: !(Maybe Xgafv)
     , _ldUploadProtocol :: !(Maybe Text)
     , _ldAccessToken    :: !(Maybe Text)
     , _ldUploadType     :: !(Maybe Text)
     , _ldLogName        :: !Text
     , _ldCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogsDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ logsDelete
     :: Text -- ^ 'ldLogName'
     -> LogsDelete
 logsDelete pLdLogName_ =
-    LogsDelete'
+  LogsDelete'
     { _ldXgafv = Nothing
     , _ldUploadProtocol = Nothing
     , _ldAccessToken = Nothing
@@ -99,6 +102,7 @@ logsDelete pLdLogName_ =
     , _ldLogName = pLdLogName_
     , _ldCallback = Nothing
     }
+
 
 -- | V1 error format.
 ldXgafv :: Lens' LogsDelete (Maybe Xgafv)

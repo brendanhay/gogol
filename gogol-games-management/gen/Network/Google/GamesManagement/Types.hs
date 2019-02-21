@@ -151,4 +151,4 @@ gamesManagementService
 -- | Share your Google+ profile information and view and manage your game
 -- activity
 gamesScope :: Proxy '["https://www.googleapis.com/auth/games"]
-gamesScope = Proxy;
+gamesScope = Proxy

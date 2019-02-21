@@ -59,11 +59,14 @@ type SSLCertsDeleteResource =
 -- certificate remains valid until the instance is restarted.
 --
 -- /See:/ 'sslCertsDelete' smart constructor.
-data SSLCertsDelete = SSLCertsDelete'
+data SSLCertsDelete =
+  SSLCertsDelete'
     { _scdProject         :: !Text
     , _scdSha1Fingerprint :: !Text
     , _scdInstance        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertsDelete' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ sslCertsDelete
     -> Text -- ^ 'scdInstance'
     -> SSLCertsDelete
 sslCertsDelete pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
-    SSLCertsDelete'
+  SSLCertsDelete'
     { _scdProject = pScdProject_
     , _scdSha1Fingerprint = pScdSha1Fingerprint_
     , _scdInstance = pScdInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 scdProject :: Lens' SSLCertsDelete Text

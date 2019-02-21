@@ -60,14 +60,17 @@ type ProjectsGetResource =
 -- | Gets a script project\'s metadata.
 --
 -- /See:/ 'projectsGet' smart constructor.
-data ProjectsGet = ProjectsGet'
+data ProjectsGet =
+  ProjectsGet'
     { _pgXgafv          :: !(Maybe Xgafv)
     , _pgUploadProtocol :: !(Maybe Text)
     , _pgAccessToken    :: !(Maybe Text)
     , _pgUploadType     :: !(Maybe Text)
     , _pgScriptId       :: !Text
     , _pgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ projectsGet
     :: Text -- ^ 'pgScriptId'
     -> ProjectsGet
 projectsGet pPgScriptId_ =
-    ProjectsGet'
+  ProjectsGet'
     { _pgXgafv = Nothing
     , _pgUploadProtocol = Nothing
     , _pgAccessToken = Nothing
@@ -96,6 +99,7 @@ projectsGet pPgScriptId_ =
     , _pgScriptId = pPgScriptId_
     , _pgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgXgafv :: Lens' ProjectsGet (Maybe Xgafv)

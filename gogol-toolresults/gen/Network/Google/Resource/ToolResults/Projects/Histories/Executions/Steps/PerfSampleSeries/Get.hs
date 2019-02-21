@@ -67,13 +67,16 @@ type ProjectsHistoriesExecutionsStepsPerfSampleSeriesGetResource
 -- - NOT_FOUND - The specified PerfSampleSeries does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsPerfSampleSeriesGet' smart constructor.
-data ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet = ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet'
+data ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet =
+  ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet'
     { _phespssgExecutionId    :: !Text
     , _phespssgStepId         :: !Text
     , _phespssgHistoryId      :: !Text
     , _phespssgProjectId      :: !Text
     , _phespssgSampleSeriesId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet' with the minimum fields required to make a request.
 --
@@ -96,13 +99,14 @@ projectsHistoriesExecutionsStepsPerfSampleSeriesGet
     -> Text -- ^ 'phespssgSampleSeriesId'
     -> ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet
 projectsHistoriesExecutionsStepsPerfSampleSeriesGet pPhespssgExecutionId_ pPhespssgStepId_ pPhespssgHistoryId_ pPhespssgProjectId_ pPhespssgSampleSeriesId_ =
-    ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet'
+  ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet'
     { _phespssgExecutionId = pPhespssgExecutionId_
     , _phespssgStepId = pPhespssgStepId_
     , _phespssgHistoryId = pPhespssgHistoryId_
     , _phespssgProjectId = pPhespssgProjectId_
     , _phespssgSampleSeriesId = pPhespssgSampleSeriesId_
     }
+
 
 -- | A tool results execution ID.
 phespssgExecutionId :: Lens' ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet Text
@@ -135,7 +139,7 @@ phespssgSampleSeriesId
       (\ s a -> s{_phespssgSampleSeriesId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet
+           ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet
          where
         type Rs
                ProjectsHistoriesExecutionsStepsPerfSampleSeriesGet

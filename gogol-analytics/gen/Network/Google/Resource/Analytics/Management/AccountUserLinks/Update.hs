@@ -58,11 +58,14 @@ type ManagementAccountUserLinksUpdateResource =
 -- | Updates permissions for an existing user on the given account.
 --
 -- /See:/ 'managementAccountUserLinksUpdate' smart constructor.
-data ManagementAccountUserLinksUpdate = ManagementAccountUserLinksUpdate'
+data ManagementAccountUserLinksUpdate =
+  ManagementAccountUserLinksUpdate'
     { _mauluPayload   :: !EntityUserLink
     , _mauluAccountId :: !Text
     , _mauluLinkId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementAccountUserLinksUpdate' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ managementAccountUserLinksUpdate
     -> Text -- ^ 'mauluLinkId'
     -> ManagementAccountUserLinksUpdate
 managementAccountUserLinksUpdate pMauluPayload_ pMauluAccountId_ pMauluLinkId_ =
-    ManagementAccountUserLinksUpdate'
+  ManagementAccountUserLinksUpdate'
     { _mauluPayload = pMauluPayload_
     , _mauluAccountId = pMauluAccountId_
     , _mauluLinkId = pMauluLinkId_
     }
+
 
 -- | Multipart request metadata.
 mauluPayload :: Lens' ManagementAccountUserLinksUpdate EntityUserLink
@@ -102,7 +106,8 @@ mauluLinkId
   = lens _mauluLinkId (\ s a -> s{_mauluLinkId = a})
 
 instance GoogleRequest
-         ManagementAccountUserLinksUpdate where
+           ManagementAccountUserLinksUpdate
+         where
         type Rs ManagementAccountUserLinksUpdate =
              EntityUserLink
         type Scopes ManagementAccountUserLinksUpdate =

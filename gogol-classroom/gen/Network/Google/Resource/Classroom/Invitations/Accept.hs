@@ -76,14 +76,17 @@ type InvitationsAcceptResource =
 -- \`NOT_FOUND\` if no invitation exists with the requested ID.
 --
 -- /See:/ 'invitationsAccept' smart constructor.
-data InvitationsAccept = InvitationsAccept'
+data InvitationsAccept =
+  InvitationsAccept'
     { _iaXgafv          :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
     , _iaAccessToken    :: !(Maybe Text)
     , _iaUploadType     :: !(Maybe Text)
     , _iaId             :: !Text
     , _iaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InvitationsAccept' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ invitationsAccept
     :: Text -- ^ 'iaId'
     -> InvitationsAccept
 invitationsAccept pIaId_ =
-    InvitationsAccept'
+  InvitationsAccept'
     { _iaXgafv = Nothing
     , _iaUploadProtocol = Nothing
     , _iaAccessToken = Nothing
@@ -112,6 +115,7 @@ invitationsAccept pIaId_ =
     , _iaId = pIaId_
     , _iaCallback = Nothing
     }
+
 
 -- | V1 error format.
 iaXgafv :: Lens' InvitationsAccept (Maybe Xgafv)

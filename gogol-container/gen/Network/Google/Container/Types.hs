@@ -286,6 +286,30 @@ module Network.Google.Container.Types
     , slrProjectId
     , slrLabelFingerprint
 
+    -- * GetOpenIdConfigResponse
+    , GetOpenIdConfigResponse
+    , getOpenIdConfigResponse
+    , goicrIdTokenSigningAlgValuesSupported
+    , goicrResponseTypesSupported
+    , goicrJWKsURI
+    , goicrGrantTypes
+    , goicrClaimsSupported
+    , goicrIssuer
+    , goicrSubjectTypesSupported
+
+    -- * JWK
+    , JWK
+    , jwk
+    , jCrv
+    , jAlg
+    , jUse
+    , jKid
+    , jN
+    , jE
+    , jX
+    , jKty
+    , jY
+
     -- * OperationStatus
     , OperationStatus (..)
 
@@ -529,6 +553,11 @@ module Network.Google.Container.Types
     -- * ClusterStatus
     , ClusterStatus (..)
 
+    -- * GetJSONWebKeysResponse
+    , GetJSONWebKeysResponse
+    , getJSONWebKeysResponse
+    , gjwkrKeys
+
     -- * NodeTaintEffect
     , NodeTaintEffect (..)
 
@@ -562,4 +591,4 @@ containerService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

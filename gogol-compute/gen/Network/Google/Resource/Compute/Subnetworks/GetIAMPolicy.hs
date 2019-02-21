@@ -60,11 +60,14 @@ type SubnetworksGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'subnetworksGetIAMPolicy' smart constructor.
-data SubnetworksGetIAMPolicy = SubnetworksGetIAMPolicy'
+data SubnetworksGetIAMPolicy =
+  SubnetworksGetIAMPolicy'
     { _sgipProject  :: !Text
     , _sgipResource :: !Text
     , _sgipRegion   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubnetworksGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ subnetworksGetIAMPolicy
     -> Text -- ^ 'sgipRegion'
     -> SubnetworksGetIAMPolicy
 subnetworksGetIAMPolicy pSgipProject_ pSgipResource_ pSgipRegion_ =
-    SubnetworksGetIAMPolicy'
+  SubnetworksGetIAMPolicy'
     { _sgipProject = pSgipProject_
     , _sgipResource = pSgipResource_
     , _sgipRegion = pSgipRegion_
     }
+
 
 -- | Project ID for this request.
 sgipProject :: Lens' SubnetworksGetIAMPolicy Text

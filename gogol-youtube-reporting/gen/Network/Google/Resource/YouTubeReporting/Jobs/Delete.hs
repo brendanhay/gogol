@@ -62,7 +62,8 @@ type JobsDeleteResource =
 -- | Deletes a job.
 --
 -- /See:/ 'jobsDelete' smart constructor.
-data JobsDelete = JobsDelete'
+data JobsDelete =
+  JobsDelete'
     { _jdXgafv                  :: !(Maybe Xgafv)
     , _jdJobId                  :: !Text
     , _jdUploadProtocol         :: !(Maybe Text)
@@ -70,7 +71,9 @@ data JobsDelete = JobsDelete'
     , _jdUploadType             :: !(Maybe Text)
     , _jdOnBehalfOfContentOwner :: !(Maybe Text)
     , _jdCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ jobsDelete
     :: Text -- ^ 'jdJobId'
     -> JobsDelete
 jobsDelete pJdJobId_ =
-    JobsDelete'
+  JobsDelete'
     { _jdXgafv = Nothing
     , _jdJobId = pJdJobId_
     , _jdUploadProtocol = Nothing
@@ -102,6 +105,7 @@ jobsDelete pJdJobId_ =
     , _jdOnBehalfOfContentOwner = Nothing
     , _jdCallback = Nothing
     }
+
 
 -- | V1 error format.
 jdXgafv :: Lens' JobsDelete (Maybe Xgafv)

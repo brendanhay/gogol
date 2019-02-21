@@ -64,7 +64,8 @@ type ProjectsAgentIntentsGetResource =
 -- | Retrieves the specified intent.
 --
 -- /See:/ 'projectsAgentIntentsGet' smart constructor.
-data ProjectsAgentIntentsGet = ProjectsAgentIntentsGet'
+data ProjectsAgentIntentsGet =
+  ProjectsAgentIntentsGet'
     { _paigXgafv          :: !(Maybe Xgafv)
     , _paigLanguageCode   :: !(Maybe Text)
     , _paigUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsAgentIntentsGet = ProjectsAgentIntentsGet'
     , _paigIntentView     :: !(Maybe Text)
     , _paigName           :: !Text
     , _paigCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentIntentsGet' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsAgentIntentsGet
     :: Text -- ^ 'paigName'
     -> ProjectsAgentIntentsGet
 projectsAgentIntentsGet pPaigName_ =
-    ProjectsAgentIntentsGet'
+  ProjectsAgentIntentsGet'
     { _paigXgafv = Nothing
     , _paigLanguageCode = Nothing
     , _paigUploadProtocol = Nothing
@@ -108,6 +111,7 @@ projectsAgentIntentsGet pPaigName_ =
     , _paigName = pPaigName_
     , _paigCallback = Nothing
     }
+
 
 -- | V1 error format.
 paigXgafv :: Lens' ProjectsAgentIntentsGet (Maybe Xgafv)

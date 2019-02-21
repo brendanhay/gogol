@@ -67,7 +67,8 @@ type ProjectsCollectdTimeSeriesCreateResource =
 -- projects.timeSeries.create instead.
 --
 -- /See:/ 'projectsCollectdTimeSeriesCreate' smart constructor.
-data ProjectsCollectdTimeSeriesCreate = ProjectsCollectdTimeSeriesCreate'
+data ProjectsCollectdTimeSeriesCreate =
+  ProjectsCollectdTimeSeriesCreate'
     { _pctscXgafv          :: !(Maybe Xgafv)
     , _pctscUploadProtocol :: !(Maybe Text)
     , _pctscAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsCollectdTimeSeriesCreate = ProjectsCollectdTimeSeriesCreate'
     , _pctscPayload        :: !CreateCollectdTimeSeriesRequest
     , _pctscName           :: !Text
     , _pctscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsCollectdTimeSeriesCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsCollectdTimeSeriesCreate
     -> Text -- ^ 'pctscName'
     -> ProjectsCollectdTimeSeriesCreate
 projectsCollectdTimeSeriesCreate pPctscPayload_ pPctscName_ =
-    ProjectsCollectdTimeSeriesCreate'
+  ProjectsCollectdTimeSeriesCreate'
     { _pctscXgafv = Nothing
     , _pctscUploadProtocol = Nothing
     , _pctscAccessToken = Nothing
@@ -108,6 +111,7 @@ projectsCollectdTimeSeriesCreate pPctscPayload_ pPctscName_ =
     , _pctscName = pPctscName_
     , _pctscCallback = Nothing
     }
+
 
 -- | V1 error format.
 pctscXgafv :: Lens' ProjectsCollectdTimeSeriesCreate (Maybe Xgafv)
@@ -150,7 +154,8 @@ pctscCallback
       (\ s a -> s{_pctscCallback = a})
 
 instance GoogleRequest
-         ProjectsCollectdTimeSeriesCreate where
+           ProjectsCollectdTimeSeriesCreate
+         where
         type Rs ProjectsCollectdTimeSeriesCreate =
              CreateCollectdTimeSeriesResponse
         type Scopes ProjectsCollectdTimeSeriesCreate =

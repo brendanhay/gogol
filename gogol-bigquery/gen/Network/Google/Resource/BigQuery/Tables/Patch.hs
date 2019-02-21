@@ -65,12 +65,15 @@ type TablesPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'tablesPatch' smart constructor.
-data TablesPatch = TablesPatch'
+data TablesPatch =
+  TablesPatch'
     { _tpPayload   :: !Table
     , _tpDataSetId :: !Text
     , _tpProjectId :: !Text
     , _tpTableId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TablesPatch' with the minimum fields required to make a request.
 --
@@ -90,12 +93,13 @@ tablesPatch
     -> Text -- ^ 'tpTableId'
     -> TablesPatch
 tablesPatch pTpPayload_ pTpDataSetId_ pTpProjectId_ pTpTableId_ =
-    TablesPatch'
+  TablesPatch'
     { _tpPayload = pTpPayload_
     , _tpDataSetId = pTpDataSetId_
     , _tpProjectId = pTpProjectId_
     , _tpTableId = pTpTableId_
     }
+
 
 -- | Multipart request metadata.
 tpPayload :: Lens' TablesPatch Table

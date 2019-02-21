@@ -57,11 +57,14 @@ type PosSaleResource =
 -- | Submit a sale event for the given merchant.
 --
 -- /See:/ 'posSale'' smart constructor.
-data PosSale' = PosSale''
+data PosSale' =
+  PosSale''
     { _psMerchantId       :: !(Textual Word64)
     , _psTargetMerchantId :: !(Textual Word64)
     , _psPayload          :: !PosSaleRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PosSale'' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ posSale'
     -> PosSaleRequest -- ^ 'psPayload'
     -> PosSale'
 posSale' pPsMerchantId_ pPsTargetMerchantId_ pPsPayload_ =
-    PosSale''
+  PosSale''
     { _psMerchantId = _Coerce # pPsMerchantId_
     , _psTargetMerchantId = _Coerce # pPsTargetMerchantId_
     , _psPayload = pPsPayload_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 psMerchantId :: Lens' PosSale' Word64

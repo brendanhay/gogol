@@ -75,7 +75,8 @@ type InvitationsListResource =
 -- \`PERMISSION_DENIED\` for access errors.
 --
 -- /See:/ 'invitationsList' smart constructor.
-data InvitationsList = InvitationsList'
+data InvitationsList =
+  InvitationsList'
     { _ilXgafv          :: !(Maybe Xgafv)
     , _ilUploadProtocol :: !(Maybe Text)
     , _ilCourseId       :: !(Maybe Text)
@@ -85,7 +86,9 @@ data InvitationsList = InvitationsList'
     , _ilPageToken      :: !(Maybe Text)
     , _ilPageSize       :: !(Maybe (Textual Int32))
     , _ilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InvitationsList' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ data InvitationsList = InvitationsList'
 invitationsList
     :: InvitationsList
 invitationsList =
-    InvitationsList'
+  InvitationsList'
     { _ilXgafv = Nothing
     , _ilUploadProtocol = Nothing
     , _ilCourseId = Nothing
@@ -122,6 +125,7 @@ invitationsList =
     , _ilPageSize = Nothing
     , _ilCallback = Nothing
     }
+
 
 -- | V1 error format.
 ilXgafv :: Lens' InvitationsList (Maybe Xgafv)

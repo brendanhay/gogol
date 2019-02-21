@@ -54,10 +54,13 @@ type URLChannelsInsertResource =
 -- | Add a new URL channel to the host AdSense account.
 --
 -- /See:/ 'urlChannelsInsert' smart constructor.
-data URLChannelsInsert = URLChannelsInsert'
+data URLChannelsInsert =
+  URLChannelsInsert'
     { _uciPayload    :: !URLChannel
     , _uciAdClientId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLChannelsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ urlChannelsInsert
     -> Text -- ^ 'uciAdClientId'
     -> URLChannelsInsert
 urlChannelsInsert pUciPayload_ pUciAdClientId_ =
-    URLChannelsInsert'
-    { _uciPayload = pUciPayload_
-    , _uciAdClientId = pUciAdClientId_
-    }
+  URLChannelsInsert'
+    {_uciPayload = pUciPayload_, _uciAdClientId = pUciAdClientId_}
+
 
 -- | Multipart request metadata.
 uciPayload :: Lens' URLChannelsInsert URLChannel

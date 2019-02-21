@@ -61,12 +61,15 @@ type LicenseAssignmentsPatchResource =
 -- | Assign License. This method supports patch semantics.
 --
 -- /See:/ 'licenseAssignmentsPatch' smart constructor.
-data LicenseAssignmentsPatch = LicenseAssignmentsPatch'
+data LicenseAssignmentsPatch =
+  LicenseAssignmentsPatch'
     { _lapSKUId     :: !Text
     , _lapPayload   :: !LicenseAssignment
     , _lapUserId    :: !Text
     , _lapProductId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LicenseAssignmentsPatch' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ licenseAssignmentsPatch
     -> Text -- ^ 'lapProductId'
     -> LicenseAssignmentsPatch
 licenseAssignmentsPatch pLapSKUId_ pLapPayload_ pLapUserId_ pLapProductId_ =
-    LicenseAssignmentsPatch'
+  LicenseAssignmentsPatch'
     { _lapSKUId = pLapSKUId_
     , _lapPayload = pLapPayload_
     , _lapUserId = pLapUserId_
     , _lapProductId = pLapProductId_
     }
+
 
 -- | Name for sku for which license would be revoked
 lapSKUId :: Lens' LicenseAssignmentsPatch Text

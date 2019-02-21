@@ -68,7 +68,8 @@ type ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfigResource
 -- and its metadata.
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig' smart constructor.
-data ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig = ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig'
+data ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig =
+  ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig'
     { _plrgdmctdcXgafv          :: !(Maybe Xgafv)
     , _plrgdmctdcUploadProtocol :: !(Maybe Text)
     , _plrgdmctdcAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig = Project
     , _plrgdmctdcPayload        :: !ModifyCloudToDeviceConfigRequest
     , _plrgdmctdcName           :: !Text
     , _plrgdmctdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig
     -> Text -- ^ 'plrgdmctdcName'
     -> ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig
 projectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig pPlrgdmctdcPayload_ pPlrgdmctdcName_ =
-    ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig'
+  ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig'
     { _plrgdmctdcXgafv = Nothing
     , _plrgdmctdcUploadProtocol = Nothing
     , _plrgdmctdcAccessToken = Nothing
@@ -109,6 +112,7 @@ projectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig pPlrgdmctdcPay
     , _plrgdmctdcName = pPlrgdmctdcName_
     , _plrgdmctdcCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrgdmctdcXgafv :: Lens' ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig (Maybe Xgafv)
@@ -156,7 +160,7 @@ plrgdmctdcCallback
       (\ s a -> s{_plrgdmctdcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig
+           ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig
          where
         type Rs
                ProjectsLocationsRegistriesGroupsDevicesModifyCloudToDeviceConfig

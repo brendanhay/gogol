@@ -23,13 +23,16 @@ import           Network.Google.Vision.Types.Sum
 -- | Set of detected objects with bounding boxes.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1LocalizedObjectAnnotation' smart constructor.
-data GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation = GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation'
+data GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation =
+  GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation'
     { _gcvvloaLanguageCode :: !(Maybe Text)
     , _gcvvloaScore        :: !(Maybe (Textual Double))
     , _gcvvloaBoundingPoly :: !(Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
     , _gcvvloaName         :: !(Maybe Text)
     , _gcvvloaMid          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation' with the minimum fields required to make a request.
 --
@@ -47,13 +50,14 @@ data GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation = GoogleCloudVisionV1p1
 googleCloudVisionV1p1beta1LocalizedObjectAnnotation
     :: GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
 googleCloudVisionV1p1beta1LocalizedObjectAnnotation =
-    GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation'
+  GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation'
     { _gcvvloaLanguageCode = Nothing
     , _gcvvloaScore = Nothing
     , _gcvvloaBoundingPoly = Nothing
     , _gcvvloaName = Nothing
     , _gcvvloaMid = Nothing
     }
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -86,7 +90,7 @@ gcvvloaMid
   = lens _gcvvloaMid (\ s a -> s{_gcvvloaMid = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
+           GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
          where
         parseJSON
           = withObject
@@ -100,7 +104,7 @@ instance FromJSON
                      <*> (o .:? "mid"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
+           GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
          where
         toJSON
           GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation'{..}
@@ -119,10 +123,13 @@ instance ToJSON
 -- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng'
+data LatLng =
+  LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -133,11 +140,8 @@ data LatLng = LatLng'
 -- * 'llLongitude'
 latLng
     :: LatLng
-latLng =
-    LatLng'
-    { _llLatitude = Nothing
-    , _llLongitude = Nothing
-    }
+latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -168,10 +172,13 @@ instance ToJSON LatLng where
 -- | The desired output location and metadata.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1OutputConfig' smart constructor.
-data GoogleCloudVisionV1p1beta1OutputConfig = GoogleCloudVisionV1p1beta1OutputConfig'
+data GoogleCloudVisionV1p1beta1OutputConfig =
+  GoogleCloudVisionV1p1beta1OutputConfig'
     { _gcvvocGcsDestination :: !(Maybe GoogleCloudVisionV1p1beta1GcsDestination)
     , _gcvvocBatchSize      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1OutputConfig' with the minimum fields required to make a request.
 --
@@ -183,10 +190,9 @@ data GoogleCloudVisionV1p1beta1OutputConfig = GoogleCloudVisionV1p1beta1OutputCo
 googleCloudVisionV1p1beta1OutputConfig
     :: GoogleCloudVisionV1p1beta1OutputConfig
 googleCloudVisionV1p1beta1OutputConfig =
-    GoogleCloudVisionV1p1beta1OutputConfig'
-    { _gcvvocGcsDestination = Nothing
-    , _gcvvocBatchSize = Nothing
-    }
+  GoogleCloudVisionV1p1beta1OutputConfig'
+    {_gcvvocGcsDestination = Nothing, _gcvvocBatchSize = Nothing}
+
 
 -- | The Google Cloud Storage location to write the output(s) to.
 gcvvocGcsDestination :: Lens' GoogleCloudVisionV1p1beta1OutputConfig (Maybe GoogleCloudVisionV1p1beta1GcsDestination)
@@ -209,7 +215,8 @@ gcvvocBatchSize
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1OutputConfig where
+           GoogleCloudVisionV1p1beta1OutputConfig
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p1beta1OutputConfig"
               (\ o ->
@@ -217,7 +224,8 @@ instance FromJSON
                    (o .:? "gcsDestination") <*> (o .:? "batchSize"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1OutputConfig where
+           GoogleCloudVisionV1p1beta1OutputConfig
+         where
         toJSON GoogleCloudVisionV1p1beta1OutputConfig'{..}
           = object
               (catMaybes
@@ -227,10 +235,13 @@ instance ToJSON
 -- | A product label represented as a key-value pair.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1ProductKeyValue' smart constructor.
-data GoogleCloudVisionV1p3beta1ProductKeyValue = GoogleCloudVisionV1p3beta1ProductKeyValue'
+data GoogleCloudVisionV1p3beta1ProductKeyValue =
+  GoogleCloudVisionV1p3beta1ProductKeyValue'
     { _gcvvpkvValue :: !(Maybe Text)
     , _gcvvpkvKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ProductKeyValue' with the minimum fields required to make a request.
 --
@@ -242,10 +253,9 @@ data GoogleCloudVisionV1p3beta1ProductKeyValue = GoogleCloudVisionV1p3beta1Produ
 googleCloudVisionV1p3beta1ProductKeyValue
     :: GoogleCloudVisionV1p3beta1ProductKeyValue
 googleCloudVisionV1p3beta1ProductKeyValue =
-    GoogleCloudVisionV1p3beta1ProductKeyValue'
-    { _gcvvpkvValue = Nothing
-    , _gcvvpkvKey = Nothing
-    }
+  GoogleCloudVisionV1p3beta1ProductKeyValue'
+    {_gcvvpkvValue = Nothing, _gcvvpkvKey = Nothing}
+
 
 -- | The value of the label attached to the product. Cannot be empty and
 -- cannot exceed 128 bytes.
@@ -260,7 +270,8 @@ gcvvpkvKey
   = lens _gcvvpkvKey (\ s a -> s{_gcvvpkvKey = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1ProductKeyValue where
+           GoogleCloudVisionV1p3beta1ProductKeyValue
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1ProductKeyValue"
@@ -269,7 +280,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1ProductKeyValue where
+           GoogleCloudVisionV1p3beta1ProductKeyValue
+         where
         toJSON GoogleCloudVisionV1p3beta1ProductKeyValue'{..}
           = object
               (catMaybes
@@ -279,9 +291,12 @@ instance ToJSON
 -- | Response to an async batch file annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse' smart constructor.
-newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse = GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse'
+newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse =
+  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse'
     { _gcvvabafrResponses :: Maybe [GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse' with the minimum fields required to make a request.
 --
@@ -291,9 +306,9 @@ newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse = GoogleCloudV
 googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
     :: GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
 googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse =
-    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse'
-    { _gcvvabafrResponses = Nothing
-    }
+  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse'
+    {_gcvvabafrResponses = Nothing}
+
 
 -- | The list of file annotation responses, one for each request in
 -- AsyncBatchAnnotateFilesRequest.
@@ -305,7 +320,7 @@ gcvvabafrResponses
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
+           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
          where
         parseJSON
           = withObject
@@ -315,7 +330,7 @@ instance FromJSON
                    <$> (o .:? "responses" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
+           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
          where
         toJSON
           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse'{..}
@@ -327,10 +342,13 @@ instance ToJSON
 -- information about the source of that image.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1ImageAnnotationContext' smart constructor.
-data GoogleCloudVisionV1p3beta1ImageAnnotationContext = GoogleCloudVisionV1p3beta1ImageAnnotationContext'
+data GoogleCloudVisionV1p3beta1ImageAnnotationContext =
+  GoogleCloudVisionV1p3beta1ImageAnnotationContext'
     { _gcvviacURI        :: !(Maybe Text)
     , _gcvviacPageNumber :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ImageAnnotationContext' with the minimum fields required to make a request.
 --
@@ -342,10 +360,9 @@ data GoogleCloudVisionV1p3beta1ImageAnnotationContext = GoogleCloudVisionV1p3bet
 googleCloudVisionV1p3beta1ImageAnnotationContext
     :: GoogleCloudVisionV1p3beta1ImageAnnotationContext
 googleCloudVisionV1p3beta1ImageAnnotationContext =
-    GoogleCloudVisionV1p3beta1ImageAnnotationContext'
-    { _gcvviacURI = Nothing
-    , _gcvviacPageNumber = Nothing
-    }
+  GoogleCloudVisionV1p3beta1ImageAnnotationContext'
+    {_gcvviacURI = Nothing, _gcvviacPageNumber = Nothing}
+
 
 -- | The URI of the file used to produce the image.
 gcvviacURI :: Lens' GoogleCloudVisionV1p3beta1ImageAnnotationContext (Maybe Text)
@@ -361,7 +378,7 @@ gcvviacPageNumber
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1ImageAnnotationContext
+           GoogleCloudVisionV1p3beta1ImageAnnotationContext
          where
         parseJSON
           = withObject
@@ -371,7 +388,7 @@ instance FromJSON
                    (o .:? "uri") <*> (o .:? "pageNumber"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1ImageAnnotationContext
+           GoogleCloudVisionV1p3beta1ImageAnnotationContext
          where
         toJSON
           GoogleCloudVisionV1p3beta1ImageAnnotationContext'{..}
@@ -383,11 +400,14 @@ instance ToJSON
 -- | A \`Property\` consists of a user-supplied name\/value pair.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1Property' smart constructor.
-data GoogleCloudVisionV1p3beta1Property = GoogleCloudVisionV1p3beta1Property'
+data GoogleCloudVisionV1p3beta1Property =
+  GoogleCloudVisionV1p3beta1Property'
     { _gcvvpUint64Value :: !(Maybe (Textual Word64))
     , _gcvvpValue       :: !(Maybe Text)
     , _gcvvpName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Property' with the minimum fields required to make a request.
 --
@@ -401,11 +421,9 @@ data GoogleCloudVisionV1p3beta1Property = GoogleCloudVisionV1p3beta1Property'
 googleCloudVisionV1p3beta1Property
     :: GoogleCloudVisionV1p3beta1Property
 googleCloudVisionV1p3beta1Property =
-    GoogleCloudVisionV1p3beta1Property'
-    { _gcvvpUint64Value = Nothing
-    , _gcvvpValue = Nothing
-    , _gcvvpName = Nothing
-    }
+  GoogleCloudVisionV1p3beta1Property'
+    {_gcvvpUint64Value = Nothing, _gcvvpValue = Nothing, _gcvvpName = Nothing}
+
 
 -- | Value of numeric properties.
 gcvvpUint64Value :: Lens' GoogleCloudVisionV1p3beta1Property (Maybe Word64)
@@ -445,10 +463,13 @@ instance ToJSON GoogleCloudVisionV1p3beta1Property
 -- | Detected language for a structural component.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1TextAnnotationDetectedLanguage' smart constructor.
-data GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage = GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage'
+data GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage =
+  GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage'
     { _gcvvtadlLanguageCode :: !(Maybe Text)
     , _gcvvtadlConfidence   :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage' with the minimum fields required to make a request.
 --
@@ -460,10 +481,9 @@ data GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage = GoogleCloudVisio
 googleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
     :: GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
 googleCloudVisionV1p2beta1TextAnnotationDetectedLanguage =
-    GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage'
-    { _gcvvtadlLanguageCode = Nothing
-    , _gcvvtadlConfidence = Nothing
-    }
+  GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage'
+    {_gcvvtadlLanguageCode = Nothing, _gcvvtadlConfidence = Nothing}
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -481,7 +501,7 @@ gcvvtadlConfidence
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
+           GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
          where
         parseJSON
           = withObject
@@ -491,7 +511,7 @@ instance FromJSON
                    <$> (o .:? "languageCode") <*> (o .:? "confidence"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
+           GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
          where
         toJSON
           GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage'{..}
@@ -503,10 +523,13 @@ instance ToJSON
 -- | A product label represented as a key-value pair.
 --
 -- /See:/ 'keyValue' smart constructor.
-data KeyValue = KeyValue'
+data KeyValue =
+  KeyValue'
     { _kvValue :: !(Maybe Text)
     , _kvKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'KeyValue' with the minimum fields required to make a request.
 --
@@ -517,11 +540,8 @@ data KeyValue = KeyValue'
 -- * 'kvKey'
 keyValue
     :: KeyValue
-keyValue =
-    KeyValue'
-    { _kvValue = Nothing
-    , _kvKey = Nothing
-    }
+keyValue = KeyValue' {_kvValue = Nothing, _kvKey = Nothing}
+
 
 -- | The value of the label attached to the product. Cannot be empty and
 -- cannot exceed 128 bytes.
@@ -548,7 +568,8 @@ instance ToJSON KeyValue where
 -- | Response to an image annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1AnnotateImageResponse' smart constructor.
-data GoogleCloudVisionV1p2beta1AnnotateImageResponse = GoogleCloudVisionV1p2beta1AnnotateImageResponse'
+data GoogleCloudVisionV1p2beta1AnnotateImageResponse =
+  GoogleCloudVisionV1p2beta1AnnotateImageResponse'
     { _gcvvairLogoAnnotations            :: !(Maybe [GoogleCloudVisionV1p2beta1EntityAnnotation])
     , _gcvvairProductSearchResults       :: !(Maybe GoogleCloudVisionV1p2beta1ProductSearchResults)
     , _gcvvairContext                    :: !(Maybe GoogleCloudVisionV1p2beta1ImageAnnotationContext)
@@ -563,7 +584,9 @@ data GoogleCloudVisionV1p2beta1AnnotateImageResponse = GoogleCloudVisionV1p2beta
     , _gcvvairCropHintsAnnotation        :: !(Maybe GoogleCloudVisionV1p2beta1CropHintsAnnotation)
     , _gcvvairFullTextAnnotation         :: !(Maybe GoogleCloudVisionV1p2beta1TextAnnotation)
     , _gcvvairImagePropertiesAnnotation  :: !(Maybe GoogleCloudVisionV1p2beta1ImageProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AnnotateImageResponse' with the minimum fields required to make a request.
 --
@@ -599,7 +622,7 @@ data GoogleCloudVisionV1p2beta1AnnotateImageResponse = GoogleCloudVisionV1p2beta
 googleCloudVisionV1p2beta1AnnotateImageResponse
     :: GoogleCloudVisionV1p2beta1AnnotateImageResponse
 googleCloudVisionV1p2beta1AnnotateImageResponse =
-    GoogleCloudVisionV1p2beta1AnnotateImageResponse'
+  GoogleCloudVisionV1p2beta1AnnotateImageResponse'
     { _gcvvairLogoAnnotations = Nothing
     , _gcvvairProductSearchResults = Nothing
     , _gcvvairContext = Nothing
@@ -615,6 +638,7 @@ googleCloudVisionV1p2beta1AnnotateImageResponse =
     , _gcvvairFullTextAnnotation = Nothing
     , _gcvvairImagePropertiesAnnotation = Nothing
     }
+
 
 -- | If present, logo detection has completed successfully.
 gcvvairLogoAnnotations :: Lens' GoogleCloudVisionV1p2beta1AnnotateImageResponse [GoogleCloudVisionV1p2beta1EntityAnnotation]
@@ -718,7 +742,8 @@ gcvvairImagePropertiesAnnotation
       (\ s a -> s{_gcvvairImagePropertiesAnnotation = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1AnnotateImageResponse where
+           GoogleCloudVisionV1p2beta1AnnotateImageResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1AnnotateImageResponse"
@@ -740,7 +765,8 @@ instance FromJSON
                      <*> (o .:? "imagePropertiesAnnotation"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1AnnotateImageResponse where
+           GoogleCloudVisionV1p2beta1AnnotateImageResponse
+         where
         toJSON
           GoogleCloudVisionV1p2beta1AnnotateImageResponse'{..}
           = object
@@ -772,10 +798,13 @@ instance ToJSON
 -- returned google.longrunning.Operation.response field.
 --
 -- /See:/ 'importProductSetsResponse' smart constructor.
-data ImportProductSetsResponse = ImportProductSetsResponse'
+data ImportProductSetsResponse =
+  ImportProductSetsResponse'
     { _ipsrReferenceImages :: !(Maybe [ReferenceImage])
     , _ipsrStatuses        :: !(Maybe [Status])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImportProductSetsResponse' with the minimum fields required to make a request.
 --
@@ -787,10 +816,9 @@ data ImportProductSetsResponse = ImportProductSetsResponse'
 importProductSetsResponse
     :: ImportProductSetsResponse
 importProductSetsResponse =
-    ImportProductSetsResponse'
-    { _ipsrReferenceImages = Nothing
-    , _ipsrStatuses = Nothing
-    }
+  ImportProductSetsResponse'
+    {_ipsrReferenceImages = Nothing, _ipsrStatuses = Nothing}
+
 
 -- | The list of reference_images that are imported successfully.
 ipsrReferenceImages :: Lens' ImportProductSetsResponse [ReferenceImage]
@@ -828,12 +856,15 @@ instance ToJSON ImportProductSetsResponse where
 -- | A single symbol representation.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Symbol' smart constructor.
-data GoogleCloudVisionV1p2beta1Symbol = GoogleCloudVisionV1p2beta1Symbol'
+data GoogleCloudVisionV1p2beta1Symbol =
+  GoogleCloudVisionV1p2beta1Symbol'
     { _gcvvsProperty    :: !(Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
     , _gcvvsBoundingBox :: !(Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
     , _gcvvsText        :: !(Maybe Text)
     , _gcvvsConfidence  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Symbol' with the minimum fields required to make a request.
 --
@@ -849,12 +880,13 @@ data GoogleCloudVisionV1p2beta1Symbol = GoogleCloudVisionV1p2beta1Symbol'
 googleCloudVisionV1p2beta1Symbol
     :: GoogleCloudVisionV1p2beta1Symbol
 googleCloudVisionV1p2beta1Symbol =
-    GoogleCloudVisionV1p2beta1Symbol'
+  GoogleCloudVisionV1p2beta1Symbol'
     { _gcvvsProperty = Nothing
     , _gcvvsBoundingBox = Nothing
     , _gcvvsText = Nothing
     , _gcvvsConfidence = Nothing
     }
+
 
 -- | Additional information detected for the symbol.
 gcvvsProperty :: Lens' GoogleCloudVisionV1p2beta1Symbol (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -910,12 +942,15 @@ instance ToJSON GoogleCloudVisionV1p2beta1Symbol
 -- | Structural unit of text representing a number of words in certain order.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Paragraph' smart constructor.
-data GoogleCloudVisionV1p2beta1Paragraph = GoogleCloudVisionV1p2beta1Paragraph'
+data GoogleCloudVisionV1p2beta1Paragraph =
+  GoogleCloudVisionV1p2beta1Paragraph'
     { _gcvvpProperty    :: !(Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
     , _gcvvpBoundingBox :: !(Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
     , _gcvvpConfidence  :: !(Maybe (Textual Double))
     , _gcvvpWords       :: !(Maybe [GoogleCloudVisionV1p2beta1Word])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Paragraph' with the minimum fields required to make a request.
 --
@@ -931,12 +966,13 @@ data GoogleCloudVisionV1p2beta1Paragraph = GoogleCloudVisionV1p2beta1Paragraph'
 googleCloudVisionV1p2beta1Paragraph
     :: GoogleCloudVisionV1p2beta1Paragraph
 googleCloudVisionV1p2beta1Paragraph =
-    GoogleCloudVisionV1p2beta1Paragraph'
+  GoogleCloudVisionV1p2beta1Paragraph'
     { _gcvvpProperty = Nothing
     , _gcvvpBoundingBox = Nothing
     , _gcvvpConfidence = Nothing
     , _gcvvpWords = Nothing
     }
+
 
 -- | Additional information detected for the paragraph.
 gcvvpProperty :: Lens' GoogleCloudVisionV1p2beta1Paragraph (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -1028,11 +1064,14 @@ instance ToJSON GoogleCloudVisionV1p2beta1Paragraph
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -1045,12 +1084,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -1091,7 +1126,8 @@ instance ToJSON Status where
 -- | A face annotation object contains the results of face detection.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1FaceAnnotation' smart constructor.
-data GoogleCloudVisionV1p2beta1FaceAnnotation = GoogleCloudVisionV1p2beta1FaceAnnotation'
+data GoogleCloudVisionV1p2beta1FaceAnnotation =
+  GoogleCloudVisionV1p2beta1FaceAnnotation'
     { _gcvvfaTiltAngle              :: !(Maybe (Textual Double))
     , _gcvvfaBlurredLikelihood      :: !(Maybe GoogleCloudVisionV1p2beta1FaceAnnotationBlurredLikelihood)
     , _gcvvfaBoundingPoly           :: !(Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
@@ -1107,7 +1143,9 @@ data GoogleCloudVisionV1p2beta1FaceAnnotation = GoogleCloudVisionV1p2beta1FaceAn
     , _gcvvfaSorrowLikelihood       :: !(Maybe GoogleCloudVisionV1p2beta1FaceAnnotationSorrowLikelihood)
     , _gcvvfaJoyLikelihood          :: !(Maybe GoogleCloudVisionV1p2beta1FaceAnnotationJoyLikelihood)
     , _gcvvfaLandmarks              :: !(Maybe [GoogleCloudVisionV1p2beta1FaceAnnotationLandmark])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1FaceAnnotation' with the minimum fields required to make a request.
 --
@@ -1145,7 +1183,7 @@ data GoogleCloudVisionV1p2beta1FaceAnnotation = GoogleCloudVisionV1p2beta1FaceAn
 googleCloudVisionV1p2beta1FaceAnnotation
     :: GoogleCloudVisionV1p2beta1FaceAnnotation
 googleCloudVisionV1p2beta1FaceAnnotation =
-    GoogleCloudVisionV1p2beta1FaceAnnotation'
+  GoogleCloudVisionV1p2beta1FaceAnnotation'
     { _gcvvfaTiltAngle = Nothing
     , _gcvvfaBlurredLikelihood = Nothing
     , _gcvvfaBoundingPoly = Nothing
@@ -1163,6 +1201,7 @@ googleCloudVisionV1p2beta1FaceAnnotation =
     , _gcvvfaLandmarks = Nothing
     }
 
+
 -- | Pitch angle, which indicates the upwards\/downwards angle that the face
 -- is pointing relative to the image\'s horizontal plane. Range [-180,180].
 gcvvfaTiltAngle :: Lens' GoogleCloudVisionV1p2beta1FaceAnnotation (Maybe Double)
@@ -1178,12 +1217,11 @@ gcvvfaBlurredLikelihood
       (\ s a -> s{_gcvvfaBlurredLikelihood = a})
 
 -- | The bounding polygon around the face. The coordinates of the bounding
--- box are in the original image\'s scale, as returned in \`ImageParams\`.
--- The bounding box is computed to \"frame\" the face in accordance with
--- human expectations. It is based on the landmarker results. Note that one
--- or more x and\/or y coordinates may not be generated in the
--- \`BoundingPoly\` (the polygon will be unbounded) if only a partial face
--- appears in the image to be annotated.
+-- box are in the original image\'s scale. The bounding box is computed to
+-- \"frame\" the face in accordance with human expectations. It is based on
+-- the landmarker results. Note that one or more x and\/or y coordinates
+-- may not be generated in the \`BoundingPoly\` (the polygon will be
+-- unbounded) if only a partial face appears in the image to be annotated.
 gcvvfaBoundingPoly :: Lens' GoogleCloudVisionV1p2beta1FaceAnnotation (Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
 gcvvfaBoundingPoly
   = lens _gcvvfaBoundingPoly
@@ -1277,7 +1315,8 @@ gcvvfaLandmarks
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1FaceAnnotation where
+           GoogleCloudVisionV1p2beta1FaceAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1FaceAnnotation"
@@ -1299,7 +1338,8 @@ instance FromJSON
                      <*> (o .:? "landmarks" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1FaceAnnotation where
+           GoogleCloudVisionV1p2beta1FaceAnnotation
+         where
         toJSON GoogleCloudVisionV1p2beta1FaceAnnotation'{..}
           = object
               (catMaybes
@@ -1331,9 +1371,12 @@ instance ToJSON
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema = OperationSchema'
+newtype OperationSchema =
+  OperationSchema'
     { _osAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
@@ -1344,9 +1387,8 @@ operationSchema
     :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
-    OperationSchema'
-    { _osAddtional = _Coerce # pOsAddtional_
-    }
+  OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -1366,11 +1408,14 @@ instance ToJSON OperationSchema where
 -- image.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1CropHint' smart constructor.
-data GoogleCloudVisionV1p1beta1CropHint = GoogleCloudVisionV1p1beta1CropHint'
+data GoogleCloudVisionV1p1beta1CropHint =
+  GoogleCloudVisionV1p1beta1CropHint'
     { _gcvvchBoundingPoly       :: !(Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
     , _gcvvchConfidence         :: !(Maybe (Textual Double))
     , _gcvvchImportanceFraction :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1CropHint' with the minimum fields required to make a request.
 --
@@ -1384,15 +1429,15 @@ data GoogleCloudVisionV1p1beta1CropHint = GoogleCloudVisionV1p1beta1CropHint'
 googleCloudVisionV1p1beta1CropHint
     :: GoogleCloudVisionV1p1beta1CropHint
 googleCloudVisionV1p1beta1CropHint =
-    GoogleCloudVisionV1p1beta1CropHint'
+  GoogleCloudVisionV1p1beta1CropHint'
     { _gcvvchBoundingPoly = Nothing
     , _gcvvchConfidence = Nothing
     , _gcvvchImportanceFraction = Nothing
     }
 
+
 -- | The bounding polygon for the crop region. The coordinates of the
--- bounding box are in the original image\'s scale, as returned in
--- \`ImageParams\`.
+-- bounding box are in the original image\'s scale.
 gcvvchBoundingPoly :: Lens' GoogleCloudVisionV1p1beta1CropHint (Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
 gcvvchBoundingPoly
   = lens _gcvvchBoundingPoly
@@ -1435,9 +1480,12 @@ instance ToJSON GoogleCloudVisionV1p1beta1CropHint
 -- | Stores image properties, such as dominant colors.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ImageProperties' smart constructor.
-newtype GoogleCloudVisionV1p2beta1ImageProperties = GoogleCloudVisionV1p2beta1ImageProperties'
+newtype GoogleCloudVisionV1p2beta1ImageProperties =
+  GoogleCloudVisionV1p2beta1ImageProperties'
     { _gcvvipDominantColors :: Maybe GoogleCloudVisionV1p2beta1DominantColorsAnnotation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ImageProperties' with the minimum fields required to make a request.
 --
@@ -1447,9 +1495,8 @@ newtype GoogleCloudVisionV1p2beta1ImageProperties = GoogleCloudVisionV1p2beta1Im
 googleCloudVisionV1p2beta1ImageProperties
     :: GoogleCloudVisionV1p2beta1ImageProperties
 googleCloudVisionV1p2beta1ImageProperties =
-    GoogleCloudVisionV1p2beta1ImageProperties'
-    { _gcvvipDominantColors = Nothing
-    }
+  GoogleCloudVisionV1p2beta1ImageProperties' {_gcvvipDominantColors = Nothing}
+
 
 -- | If present, dominant colors completed successfully.
 gcvvipDominantColors :: Lens' GoogleCloudVisionV1p2beta1ImageProperties (Maybe GoogleCloudVisionV1p2beta1DominantColorsAnnotation)
@@ -1458,7 +1505,8 @@ gcvvipDominantColors
       (\ s a -> s{_gcvvipDominantColors = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1ImageProperties where
+           GoogleCloudVisionV1p2beta1ImageProperties
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1ImageProperties"
@@ -1467,7 +1515,8 @@ instance FromJSON
                    (o .:? "dominantColors"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1ImageProperties where
+           GoogleCloudVisionV1p2beta1ImageProperties
+         where
         toJSON GoogleCloudVisionV1p2beta1ImageProperties'{..}
           = object
               (catMaybes
@@ -1476,11 +1525,14 @@ instance ToJSON
 -- | Results for a product search request.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1ProductSearchResults' smart constructor.
-data GoogleCloudVisionV1p3beta1ProductSearchResults = GoogleCloudVisionV1p3beta1ProductSearchResults'
+data GoogleCloudVisionV1p3beta1ProductSearchResults =
+  GoogleCloudVisionV1p3beta1ProductSearchResults'
     { _gcvvpsrProductGroupedResults :: !(Maybe [GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult])
     , _gcvvpsrResults               :: !(Maybe [GoogleCloudVisionV1p3beta1ProductSearchResultsResult])
     , _gcvvpsrIndexTime             :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ProductSearchResults' with the minimum fields required to make a request.
 --
@@ -1494,11 +1546,12 @@ data GoogleCloudVisionV1p3beta1ProductSearchResults = GoogleCloudVisionV1p3beta1
 googleCloudVisionV1p3beta1ProductSearchResults
     :: GoogleCloudVisionV1p3beta1ProductSearchResults
 googleCloudVisionV1p3beta1ProductSearchResults =
-    GoogleCloudVisionV1p3beta1ProductSearchResults'
+  GoogleCloudVisionV1p3beta1ProductSearchResults'
     { _gcvvpsrProductGroupedResults = Nothing
     , _gcvvpsrResults = Nothing
     , _gcvvpsrIndexTime = Nothing
     }
+
 
 -- | List of results grouped by products detected in the query image. Each
 -- entry corresponds to one bounding polygon in the query image, and
@@ -1528,7 +1581,8 @@ gcvvpsrIndexTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1ProductSearchResults where
+           GoogleCloudVisionV1p3beta1ProductSearchResults
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1ProductSearchResults"
@@ -1539,7 +1593,8 @@ instance FromJSON
                      <*> (o .:? "indexTime"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1ProductSearchResults where
+           GoogleCloudVisionV1p3beta1ProductSearchResults
+         where
         toJSON
           GoogleCloudVisionV1p3beta1ProductSearchResults'{..}
           = object
@@ -1552,10 +1607,13 @@ instance ToJSON
 -- | The desired output location and metadata.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1OutputConfig' smart constructor.
-data GoogleCloudVisionV1p2beta1OutputConfig = GoogleCloudVisionV1p2beta1OutputConfig'
+data GoogleCloudVisionV1p2beta1OutputConfig =
+  GoogleCloudVisionV1p2beta1OutputConfig'
     { _gGcsDestination :: !(Maybe GoogleCloudVisionV1p2beta1GcsDestination)
     , _gBatchSize      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1OutputConfig' with the minimum fields required to make a request.
 --
@@ -1567,10 +1625,9 @@ data GoogleCloudVisionV1p2beta1OutputConfig = GoogleCloudVisionV1p2beta1OutputCo
 googleCloudVisionV1p2beta1OutputConfig
     :: GoogleCloudVisionV1p2beta1OutputConfig
 googleCloudVisionV1p2beta1OutputConfig =
-    GoogleCloudVisionV1p2beta1OutputConfig'
-    { _gGcsDestination = Nothing
-    , _gBatchSize = Nothing
-    }
+  GoogleCloudVisionV1p2beta1OutputConfig'
+    {_gGcsDestination = Nothing, _gBatchSize = Nothing}
+
 
 -- | The Google Cloud Storage location to write the output(s) to.
 gGcsDestination :: Lens' GoogleCloudVisionV1p2beta1OutputConfig (Maybe GoogleCloudVisionV1p2beta1GcsDestination)
@@ -1592,7 +1649,8 @@ gBatchSize
       mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1OutputConfig where
+           GoogleCloudVisionV1p2beta1OutputConfig
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p2beta1OutputConfig"
               (\ o ->
@@ -1600,7 +1658,8 @@ instance FromJSON
                    (o .:? "gcsDestination") <*> (o .:? "batchSize"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1OutputConfig where
+           GoogleCloudVisionV1p2beta1OutputConfig
+         where
         toJSON GoogleCloudVisionV1p2beta1OutputConfig'{..}
           = object
               (catMaybes
@@ -1610,10 +1669,13 @@ instance ToJSON
 -- | Detected language for a structural component.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1TextAnnotationDetectedLanguage' smart constructor.
-data GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage = GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage'
+data GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage =
+  GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage'
     { _gLanguageCode :: !(Maybe Text)
     , _gConfidence   :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage' with the minimum fields required to make a request.
 --
@@ -1625,10 +1687,9 @@ data GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage = GoogleCloudVisio
 googleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
     :: GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
 googleCloudVisionV1p1beta1TextAnnotationDetectedLanguage =
-    GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage'
-    { _gLanguageCode = Nothing
-    , _gConfidence = Nothing
-    }
+  GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage'
+    {_gLanguageCode = Nothing, _gConfidence = Nothing}
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -1645,7 +1706,7 @@ gConfidence
       mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
+           GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
          where
         parseJSON
           = withObject
@@ -1655,7 +1716,7 @@ instance FromJSON
                    <$> (o .:? "languageCode") <*> (o .:? "confidence"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
+           GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
          where
         toJSON
           GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage'{..}
@@ -1667,12 +1728,15 @@ instance ToJSON
 -- | A single symbol representation.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1Symbol' smart constructor.
-data GoogleCloudVisionV1p1beta1Symbol = GoogleCloudVisionV1p1beta1Symbol'
+data GoogleCloudVisionV1p1beta1Symbol =
+  GoogleCloudVisionV1p1beta1Symbol'
     { _gooProperty    :: !(Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
     , _gooBoundingBox :: !(Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
     , _gooText        :: !(Maybe Text)
     , _gooConfidence  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Symbol' with the minimum fields required to make a request.
 --
@@ -1688,12 +1752,13 @@ data GoogleCloudVisionV1p1beta1Symbol = GoogleCloudVisionV1p1beta1Symbol'
 googleCloudVisionV1p1beta1Symbol
     :: GoogleCloudVisionV1p1beta1Symbol
 googleCloudVisionV1p1beta1Symbol =
-    GoogleCloudVisionV1p1beta1Symbol'
+  GoogleCloudVisionV1p1beta1Symbol'
     { _gooProperty = Nothing
     , _gooBoundingBox = Nothing
     , _gooText = Nothing
     , _gooConfidence = Nothing
     }
+
 
 -- | Additional information detected for the symbol.
 gooProperty :: Lens' GoogleCloudVisionV1p1beta1Symbol (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -1748,10 +1813,13 @@ instance ToJSON GoogleCloudVisionV1p1beta1Symbol
 -- information about the source of that image.
 --
 -- /See:/ 'imageAnnotationContext' smart constructor.
-data ImageAnnotationContext = ImageAnnotationContext'
+data ImageAnnotationContext =
+  ImageAnnotationContext'
     { _iacURI        :: !(Maybe Text)
     , _iacPageNumber :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImageAnnotationContext' with the minimum fields required to make a request.
 --
@@ -1763,10 +1831,8 @@ data ImageAnnotationContext = ImageAnnotationContext'
 imageAnnotationContext
     :: ImageAnnotationContext
 imageAnnotationContext =
-    ImageAnnotationContext'
-    { _iacURI = Nothing
-    , _iacPageNumber = Nothing
-    }
+  ImageAnnotationContext' {_iacURI = Nothing, _iacPageNumber = Nothing}
+
 
 -- | The URI of the file used to produce the image.
 iacURI :: Lens' ImageAnnotationContext (Maybe Text)
@@ -1798,11 +1864,14 @@ instance ToJSON ImageAnnotationContext where
 -- image.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1CropHint' smart constructor.
-data GoogleCloudVisionV1p2beta1CropHint = GoogleCloudVisionV1p2beta1CropHint'
+data GoogleCloudVisionV1p2beta1CropHint =
+  GoogleCloudVisionV1p2beta1CropHint'
     { _gcvvchcBoundingPoly       :: !(Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
     , _gcvvchcConfidence         :: !(Maybe (Textual Double))
     , _gcvvchcImportanceFraction :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1CropHint' with the minimum fields required to make a request.
 --
@@ -1816,15 +1885,15 @@ data GoogleCloudVisionV1p2beta1CropHint = GoogleCloudVisionV1p2beta1CropHint'
 googleCloudVisionV1p2beta1CropHint
     :: GoogleCloudVisionV1p2beta1CropHint
 googleCloudVisionV1p2beta1CropHint =
-    GoogleCloudVisionV1p2beta1CropHint'
+  GoogleCloudVisionV1p2beta1CropHint'
     { _gcvvchcBoundingPoly = Nothing
     , _gcvvchcConfidence = Nothing
     , _gcvvchcImportanceFraction = Nothing
     }
 
+
 -- | The bounding polygon for the crop region. The coordinates of the
--- bounding box are in the original image\'s scale, as returned in
--- \`ImageParams\`.
+-- bounding box are in the original image\'s scale.
 gcvvchcBoundingPoly :: Lens' GoogleCloudVisionV1p2beta1CropHint (Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
 gcvvchcBoundingPoly
   = lens _gcvvchcBoundingPoly
@@ -1867,11 +1936,14 @@ instance ToJSON GoogleCloudVisionV1p2beta1CropHint
 -- | A \`Property\` consists of a user-supplied name\/value pair.
 --
 -- /See:/ 'property' smart constructor.
-data Property = Property'
+data Property =
+  Property'
     { _pUint64Value :: !(Maybe (Textual Word64))
     , _pValue       :: !(Maybe Text)
     , _pName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Property' with the minimum fields required to make a request.
 --
@@ -1885,11 +1957,8 @@ data Property = Property'
 property
     :: Property
 property =
-    Property'
-    { _pUint64Value = Nothing
-    , _pValue = Nothing
-    , _pName = Nothing
-    }
+  Property' {_pUint64Value = Nothing, _pValue = Nothing, _pName = Nothing}
+
 
 -- | Value of numeric properties.
 pUint64Value :: Lens' Property (Maybe Word64)
@@ -1923,7 +1992,8 @@ instance ToJSON Property where
 -- | A face annotation object contains the results of face detection.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1FaceAnnotation' smart constructor.
-data GoogleCloudVisionV1p1beta1FaceAnnotation = GoogleCloudVisionV1p1beta1FaceAnnotation'
+data GoogleCloudVisionV1p1beta1FaceAnnotation =
+  GoogleCloudVisionV1p1beta1FaceAnnotation'
     { _gTiltAngle              :: !(Maybe (Textual Double))
     , _gBlurredLikelihood      :: !(Maybe GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihood)
     , _gBoundingPoly           :: !(Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
@@ -1939,7 +2009,9 @@ data GoogleCloudVisionV1p1beta1FaceAnnotation = GoogleCloudVisionV1p1beta1FaceAn
     , _gSorrowLikelihood       :: !(Maybe GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood)
     , _gJoyLikelihood          :: !(Maybe GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihood)
     , _gLandmarks              :: !(Maybe [GoogleCloudVisionV1p1beta1FaceAnnotationLandmark])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1FaceAnnotation' with the minimum fields required to make a request.
 --
@@ -1977,7 +2049,7 @@ data GoogleCloudVisionV1p1beta1FaceAnnotation = GoogleCloudVisionV1p1beta1FaceAn
 googleCloudVisionV1p1beta1FaceAnnotation
     :: GoogleCloudVisionV1p1beta1FaceAnnotation
 googleCloudVisionV1p1beta1FaceAnnotation =
-    GoogleCloudVisionV1p1beta1FaceAnnotation'
+  GoogleCloudVisionV1p1beta1FaceAnnotation'
     { _gTiltAngle = Nothing
     , _gBlurredLikelihood = Nothing
     , _gBoundingPoly = Nothing
@@ -1995,6 +2067,7 @@ googleCloudVisionV1p1beta1FaceAnnotation =
     , _gLandmarks = Nothing
     }
 
+
 -- | Pitch angle, which indicates the upwards\/downwards angle that the face
 -- is pointing relative to the image\'s horizontal plane. Range [-180,180].
 gTiltAngle :: Lens' GoogleCloudVisionV1p1beta1FaceAnnotation (Maybe Double)
@@ -2009,12 +2082,11 @@ gBlurredLikelihood
       (\ s a -> s{_gBlurredLikelihood = a})
 
 -- | The bounding polygon around the face. The coordinates of the bounding
--- box are in the original image\'s scale, as returned in \`ImageParams\`.
--- The bounding box is computed to \"frame\" the face in accordance with
--- human expectations. It is based on the landmarker results. Note that one
--- or more x and\/or y coordinates may not be generated in the
--- \`BoundingPoly\` (the polygon will be unbounded) if only a partial face
--- appears in the image to be annotated.
+-- box are in the original image\'s scale. The bounding box is computed to
+-- \"frame\" the face in accordance with human expectations. It is based on
+-- the landmarker results. Note that one or more x and\/or y coordinates
+-- may not be generated in the \`BoundingPoly\` (the polygon will be
+-- unbounded) if only a partial face appears in the image to be annotated.
 gBoundingPoly :: Lens' GoogleCloudVisionV1p1beta1FaceAnnotation (Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
 gBoundingPoly
   = lens _gBoundingPoly
@@ -2105,7 +2177,8 @@ gLandmarks
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1FaceAnnotation where
+           GoogleCloudVisionV1p1beta1FaceAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1FaceAnnotation"
@@ -2127,7 +2200,8 @@ instance FromJSON
                      <*> (o .:? "landmarks" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1FaceAnnotation where
+           GoogleCloudVisionV1p1beta1FaceAnnotation
+         where
         toJSON GoogleCloudVisionV1p1beta1FaceAnnotation'{..}
           = object
               (catMaybes
@@ -2152,10 +2226,13 @@ instance ToJSON
 -- | The desired input location and metadata.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1InputConfig' smart constructor.
-data GoogleCloudVisionV1p3beta1InputConfig = GoogleCloudVisionV1p3beta1InputConfig'
+data GoogleCloudVisionV1p3beta1InputConfig =
+  GoogleCloudVisionV1p3beta1InputConfig'
     { _gcvvicGcsSource :: !(Maybe GoogleCloudVisionV1p3beta1GcsSource)
     , _gcvvicMimeType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1InputConfig' with the minimum fields required to make a request.
 --
@@ -2167,10 +2244,9 @@ data GoogleCloudVisionV1p3beta1InputConfig = GoogleCloudVisionV1p3beta1InputConf
 googleCloudVisionV1p3beta1InputConfig
     :: GoogleCloudVisionV1p3beta1InputConfig
 googleCloudVisionV1p3beta1InputConfig =
-    GoogleCloudVisionV1p3beta1InputConfig'
-    { _gcvvicGcsSource = Nothing
-    , _gcvvicMimeType = Nothing
-    }
+  GoogleCloudVisionV1p3beta1InputConfig'
+    {_gcvvicGcsSource = Nothing, _gcvvicMimeType = Nothing}
+
 
 -- | The Google Cloud Storage location to read the input from.
 gcvvicGcsSource :: Lens' GoogleCloudVisionV1p3beta1InputConfig (Maybe GoogleCloudVisionV1p3beta1GcsSource)
@@ -2186,7 +2262,8 @@ gcvvicMimeType
       (\ s a -> s{_gcvvicMimeType = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1InputConfig where
+           GoogleCloudVisionV1p3beta1InputConfig
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p3beta1InputConfig"
               (\ o ->
@@ -2204,13 +2281,16 @@ instance ToJSON GoogleCloudVisionV1p3beta1InputConfig
 -- | Metadata for web pages.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1WebDetectionWebPage' smart constructor.
-data GoogleCloudVisionV1p3beta1WebDetectionWebPage = GoogleCloudVisionV1p3beta1WebDetectionWebPage'
+data GoogleCloudVisionV1p3beta1WebDetectionWebPage =
+  GoogleCloudVisionV1p3beta1WebDetectionWebPage'
     { _gcvvwdwpScore                 :: !(Maybe (Textual Double))
     , _gcvvwdwpURL                   :: !(Maybe Text)
     , _gcvvwdwpPageTitle             :: !(Maybe Text)
     , _gcvvwdwpPartialMatchingImages :: !(Maybe [GoogleCloudVisionV1p3beta1WebDetectionWebImage])
     , _gcvvwdwpFullMatchingImages    :: !(Maybe [GoogleCloudVisionV1p3beta1WebDetectionWebImage])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetectionWebPage' with the minimum fields required to make a request.
 --
@@ -2228,13 +2308,14 @@ data GoogleCloudVisionV1p3beta1WebDetectionWebPage = GoogleCloudVisionV1p3beta1W
 googleCloudVisionV1p3beta1WebDetectionWebPage
     :: GoogleCloudVisionV1p3beta1WebDetectionWebPage
 googleCloudVisionV1p3beta1WebDetectionWebPage =
-    GoogleCloudVisionV1p3beta1WebDetectionWebPage'
+  GoogleCloudVisionV1p3beta1WebDetectionWebPage'
     { _gcvvwdwpScore = Nothing
     , _gcvvwdwpURL = Nothing
     , _gcvvwdwpPageTitle = Nothing
     , _gcvvwdwpPartialMatchingImages = Nothing
     , _gcvvwdwpFullMatchingImages = Nothing
     }
+
 
 -- | (Deprecated) Overall relevancy score for the web page.
 gcvvwdwpScore :: Lens' GoogleCloudVisionV1p3beta1WebDetectionWebPage (Maybe Double)
@@ -2274,7 +2355,8 @@ gcvvwdwpFullMatchingImages
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1WebDetectionWebPage where
+           GoogleCloudVisionV1p3beta1WebDetectionWebPage
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1WebDetectionWebPage"
@@ -2286,7 +2368,8 @@ instance FromJSON
                      <*> (o .:? "fullMatchingImages" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1WebDetectionWebPage where
+           GoogleCloudVisionV1p3beta1WebDetectionWebPage
+         where
         toJSON
           GoogleCloudVisionV1p3beta1WebDetectionWebPage'{..}
           = object
@@ -2302,11 +2385,14 @@ instance ToJSON
 -- | Results for a product search request.
 --
 -- /See:/ 'productSearchResults' smart constructor.
-data ProductSearchResults = ProductSearchResults'
+data ProductSearchResults =
+  ProductSearchResults'
     { _psrProductGroupedResults :: !(Maybe [GroupedResult])
     , _psrResults               :: !(Maybe [Result])
     , _psrIndexTime             :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductSearchResults' with the minimum fields required to make a request.
 --
@@ -2320,11 +2406,12 @@ data ProductSearchResults = ProductSearchResults'
 productSearchResults
     :: ProductSearchResults
 productSearchResults =
-    ProductSearchResults'
+  ProductSearchResults'
     { _psrProductGroupedResults = Nothing
     , _psrResults = Nothing
     , _psrIndexTime = Nothing
     }
+
 
 -- | List of results grouped by products detected in the query image. Each
 -- entry corresponds to one bounding polygon in the query image, and
@@ -2372,10 +2459,13 @@ instance ToJSON ProductSearchResults where
 -- | A face-specific landmark (for example, a face feature).
 --
 -- /See:/ 'landmark' smart constructor.
-data Landmark = Landmark'
+data Landmark =
+  Landmark'
     { _lType     :: !(Maybe LandmarkType)
     , _lPosition :: !(Maybe Position)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Landmark' with the minimum fields required to make a request.
 --
@@ -2386,11 +2476,8 @@ data Landmark = Landmark'
 -- * 'lPosition'
 landmark
     :: Landmark
-landmark =
-    Landmark'
-    { _lType = Nothing
-    , _lPosition = Nothing
-    }
+landmark = Landmark' {_lType = Nothing, _lPosition = Nothing}
+
 
 -- | Face landmark type.
 lType :: Lens' Landmark (Maybe LandmarkType)
@@ -2419,13 +2506,16 @@ instance ToJSON Landmark where
 -- violence).
 --
 -- /See:/ 'googleCloudVisionV1p2beta1SafeSearchAnnotation' smart constructor.
-data GoogleCloudVisionV1p2beta1SafeSearchAnnotation = GoogleCloudVisionV1p2beta1SafeSearchAnnotation'
+data GoogleCloudVisionV1p2beta1SafeSearchAnnotation =
+  GoogleCloudVisionV1p2beta1SafeSearchAnnotation'
     { _gcvvssaSpoof    :: !(Maybe GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoof)
     , _gcvvssaRacy     :: !(Maybe GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacy)
     , _gcvvssaAdult    :: !(Maybe GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdult)
     , _gcvvssaMedical  :: !(Maybe GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedical)
     , _gcvvssaViolence :: !(Maybe GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolence)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1SafeSearchAnnotation' with the minimum fields required to make a request.
 --
@@ -2443,13 +2533,14 @@ data GoogleCloudVisionV1p2beta1SafeSearchAnnotation = GoogleCloudVisionV1p2beta1
 googleCloudVisionV1p2beta1SafeSearchAnnotation
     :: GoogleCloudVisionV1p2beta1SafeSearchAnnotation
 googleCloudVisionV1p2beta1SafeSearchAnnotation =
-    GoogleCloudVisionV1p2beta1SafeSearchAnnotation'
+  GoogleCloudVisionV1p2beta1SafeSearchAnnotation'
     { _gcvvssaSpoof = Nothing
     , _gcvvssaRacy = Nothing
     , _gcvvssaAdult = Nothing
     , _gcvvssaMedical = Nothing
     , _gcvvssaViolence = Nothing
     }
+
 
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
@@ -2485,7 +2576,8 @@ gcvvssaViolence
       (\ s a -> s{_gcvvssaViolence = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1SafeSearchAnnotation where
+           GoogleCloudVisionV1p2beta1SafeSearchAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1SafeSearchAnnotation"
@@ -2497,7 +2589,8 @@ instance FromJSON
                      <*> (o .:? "violence"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1SafeSearchAnnotation where
+           GoogleCloudVisionV1p2beta1SafeSearchAnnotation
+         where
         toJSON
           GoogleCloudVisionV1p2beta1SafeSearchAnnotation'{..}
           = object
@@ -2511,11 +2604,14 @@ instance ToJSON
 -- | Contains metadata for the BatchAnnotateImages operation.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1OperationMetadata' smart constructor.
-data GoogleCloudVisionV1p2beta1OperationMetadata = GoogleCloudVisionV1p2beta1OperationMetadata'
+data GoogleCloudVisionV1p2beta1OperationMetadata =
+  GoogleCloudVisionV1p2beta1OperationMetadata'
     { _gcvvomState      :: !(Maybe GoogleCloudVisionV1p2beta1OperationMetadataState)
     , _gcvvomUpdateTime :: !(Maybe DateTime')
     , _gcvvomCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1OperationMetadata' with the minimum fields required to make a request.
 --
@@ -2529,11 +2625,12 @@ data GoogleCloudVisionV1p2beta1OperationMetadata = GoogleCloudVisionV1p2beta1Ope
 googleCloudVisionV1p2beta1OperationMetadata
     :: GoogleCloudVisionV1p2beta1OperationMetadata
 googleCloudVisionV1p2beta1OperationMetadata =
-    GoogleCloudVisionV1p2beta1OperationMetadata'
+  GoogleCloudVisionV1p2beta1OperationMetadata'
     { _gcvvomState = Nothing
     , _gcvvomUpdateTime = Nothing
     , _gcvvomCreateTime = Nothing
     }
+
 
 -- | Current state of the batch operation.
 gcvvomState :: Lens' GoogleCloudVisionV1p2beta1OperationMetadata (Maybe GoogleCloudVisionV1p2beta1OperationMetadataState)
@@ -2555,7 +2652,8 @@ gcvvomCreateTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1OperationMetadata where
+           GoogleCloudVisionV1p2beta1OperationMetadata
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1OperationMetadata"
@@ -2565,7 +2663,8 @@ instance FromJSON
                      (o .:? "createTime"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1OperationMetadata where
+           GoogleCloudVisionV1p2beta1OperationMetadata
+         where
         toJSON
           GoogleCloudVisionV1p2beta1OperationMetadata'{..}
           = object
@@ -2578,9 +2677,12 @@ instance ToJSON
 -- images.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1CropHintsAnnotation' smart constructor.
-newtype GoogleCloudVisionV1p3beta1CropHintsAnnotation = GoogleCloudVisionV1p3beta1CropHintsAnnotation'
+newtype GoogleCloudVisionV1p3beta1CropHintsAnnotation =
+  GoogleCloudVisionV1p3beta1CropHintsAnnotation'
     { _gcvvchaCropHints :: Maybe [GoogleCloudVisionV1p3beta1CropHint]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1CropHintsAnnotation' with the minimum fields required to make a request.
 --
@@ -2590,9 +2692,8 @@ newtype GoogleCloudVisionV1p3beta1CropHintsAnnotation = GoogleCloudVisionV1p3bet
 googleCloudVisionV1p3beta1CropHintsAnnotation
     :: GoogleCloudVisionV1p3beta1CropHintsAnnotation
 googleCloudVisionV1p3beta1CropHintsAnnotation =
-    GoogleCloudVisionV1p3beta1CropHintsAnnotation'
-    { _gcvvchaCropHints = Nothing
-    }
+  GoogleCloudVisionV1p3beta1CropHintsAnnotation' {_gcvvchaCropHints = Nothing}
+
 
 -- | Crop hint results.
 gcvvchaCropHints :: Lens' GoogleCloudVisionV1p3beta1CropHintsAnnotation [GoogleCloudVisionV1p3beta1CropHint]
@@ -2603,7 +2704,8 @@ gcvvchaCropHints
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1CropHintsAnnotation where
+           GoogleCloudVisionV1p3beta1CropHintsAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1CropHintsAnnotation"
@@ -2612,7 +2714,8 @@ instance FromJSON
                    (o .:? "cropHints" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1CropHintsAnnotation where
+           GoogleCloudVisionV1p3beta1CropHintsAnnotation
+         where
         toJSON
           GoogleCloudVisionV1p3beta1CropHintsAnnotation'{..}
           = object
@@ -2622,11 +2725,14 @@ instance ToJSON
 -- the image that the color occupies in the image.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1ColorInfo' smart constructor.
-data GoogleCloudVisionV1p1beta1ColorInfo = GoogleCloudVisionV1p1beta1ColorInfo'
+data GoogleCloudVisionV1p1beta1ColorInfo =
+  GoogleCloudVisionV1p1beta1ColorInfo'
     { _gcvvciColor         :: !(Maybe Color)
     , _gcvvciScore         :: !(Maybe (Textual Double))
     , _gcvvciPixelFraction :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ColorInfo' with the minimum fields required to make a request.
 --
@@ -2640,11 +2746,12 @@ data GoogleCloudVisionV1p1beta1ColorInfo = GoogleCloudVisionV1p1beta1ColorInfo'
 googleCloudVisionV1p1beta1ColorInfo
     :: GoogleCloudVisionV1p1beta1ColorInfo
 googleCloudVisionV1p1beta1ColorInfo =
-    GoogleCloudVisionV1p1beta1ColorInfo'
+  GoogleCloudVisionV1p1beta1ColorInfo'
     { _gcvvciColor = Nothing
     , _gcvvciScore = Nothing
     , _gcvvciPixelFraction = Nothing
     }
+
 
 -- | RGB components of the color.
 gcvvciColor :: Lens' GoogleCloudVisionV1p1beta1ColorInfo (Maybe Color)
@@ -2686,9 +2793,12 @@ instance ToJSON GoogleCloudVisionV1p1beta1ColorInfo
 -- | The Google Cloud Storage location where the input will be read from.
 --
 -- /See:/ 'gcsSource' smart constructor.
-newtype GcsSource = GcsSource'
+newtype GcsSource =
+  GcsSource'
     { _gsURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GcsSource' with the minimum fields required to make a request.
 --
@@ -2697,10 +2807,8 @@ newtype GcsSource = GcsSource'
 -- * 'gsURI'
 gcsSource
     :: GcsSource
-gcsSource =
-    GcsSource'
-    { _gsURI = Nothing
-    }
+gcsSource = GcsSource' {_gsURI = Nothing}
+
 
 -- | Google Cloud Storage URI for the input file. This must only be a Google
 -- Cloud Storage object. Wildcards are not currently supported.
@@ -2719,10 +2827,13 @@ instance ToJSON GcsSource where
 -- | Detected start or end of a structural component.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1TextAnnotationDetectedBreak' smart constructor.
-data GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak = GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak'
+data GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak =
+  GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak'
     { _gcvvtadbIsPrefix :: !(Maybe Bool)
     , _gcvvtadbType     :: !(Maybe GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak' with the minimum fields required to make a request.
 --
@@ -2734,10 +2845,9 @@ data GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak = GoogleCloudVisionV1
 googleCloudVisionV1p1beta1TextAnnotationDetectedBreak
     :: GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
 googleCloudVisionV1p1beta1TextAnnotationDetectedBreak =
-    GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak'
-    { _gcvvtadbIsPrefix = Nothing
-    , _gcvvtadbType = Nothing
-    }
+  GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak'
+    {_gcvvtadbIsPrefix = Nothing, _gcvvtadbType = Nothing}
+
 
 -- | True if break prepends the element.
 gcvvtadbIsPrefix :: Lens' GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak (Maybe Bool)
@@ -2751,7 +2861,7 @@ gcvvtadbType
   = lens _gcvvtadbType (\ s a -> s{_gcvvtadbType = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
+           GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
          where
         parseJSON
           = withObject
@@ -2761,7 +2871,7 @@ instance FromJSON
                    <$> (o .:? "isPrefix") <*> (o .:? "type"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
+           GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
          where
         toJSON
           GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak'{..}
@@ -2773,9 +2883,12 @@ instance ToJSON
 -- | Set of dominant colors and their corresponding scores.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1DominantColorsAnnotation' smart constructor.
-newtype GoogleCloudVisionV1p1beta1DominantColorsAnnotation = GoogleCloudVisionV1p1beta1DominantColorsAnnotation'
+newtype GoogleCloudVisionV1p1beta1DominantColorsAnnotation =
+  GoogleCloudVisionV1p1beta1DominantColorsAnnotation'
     { _gcvvdcaColors :: Maybe [GoogleCloudVisionV1p1beta1ColorInfo]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1DominantColorsAnnotation' with the minimum fields required to make a request.
 --
@@ -2785,9 +2898,8 @@ newtype GoogleCloudVisionV1p1beta1DominantColorsAnnotation = GoogleCloudVisionV1
 googleCloudVisionV1p1beta1DominantColorsAnnotation
     :: GoogleCloudVisionV1p1beta1DominantColorsAnnotation
 googleCloudVisionV1p1beta1DominantColorsAnnotation =
-    GoogleCloudVisionV1p1beta1DominantColorsAnnotation'
-    { _gcvvdcaColors = Nothing
-    }
+  GoogleCloudVisionV1p1beta1DominantColorsAnnotation' {_gcvvdcaColors = Nothing}
+
 
 -- | RGB color values with their score and pixel fraction.
 gcvvdcaColors :: Lens' GoogleCloudVisionV1p1beta1DominantColorsAnnotation [GoogleCloudVisionV1p1beta1ColorInfo]
@@ -2798,7 +2910,7 @@ gcvvdcaColors
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1DominantColorsAnnotation
+           GoogleCloudVisionV1p1beta1DominantColorsAnnotation
          where
         parseJSON
           = withObject
@@ -2808,7 +2920,7 @@ instance FromJSON
                    <$> (o .:? "colors" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1DominantColorsAnnotation
+           GoogleCloudVisionV1p1beta1DominantColorsAnnotation
          where
         toJSON
           GoogleCloudVisionV1p1beta1DominantColorsAnnotation'{..}
@@ -2818,10 +2930,13 @@ instance ToJSON
 -- | Label to provide extra metadata for the web detection.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1WebDetectionWebLabel' smart constructor.
-data GoogleCloudVisionV1p3beta1WebDetectionWebLabel = GoogleCloudVisionV1p3beta1WebDetectionWebLabel'
+data GoogleCloudVisionV1p3beta1WebDetectionWebLabel =
+  GoogleCloudVisionV1p3beta1WebDetectionWebLabel'
     { _gcvvwdwlLanguageCode :: !(Maybe Text)
     , _gcvvwdwlLabel        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetectionWebLabel' with the minimum fields required to make a request.
 --
@@ -2833,10 +2948,9 @@ data GoogleCloudVisionV1p3beta1WebDetectionWebLabel = GoogleCloudVisionV1p3beta1
 googleCloudVisionV1p3beta1WebDetectionWebLabel
     :: GoogleCloudVisionV1p3beta1WebDetectionWebLabel
 googleCloudVisionV1p3beta1WebDetectionWebLabel =
-    GoogleCloudVisionV1p3beta1WebDetectionWebLabel'
-    { _gcvvwdwlLanguageCode = Nothing
-    , _gcvvwdwlLabel = Nothing
-    }
+  GoogleCloudVisionV1p3beta1WebDetectionWebLabel'
+    {_gcvvwdwlLanguageCode = Nothing, _gcvvwdwlLabel = Nothing}
+
 
 -- | The BCP-47 language code for \`label\`, such as \"en-US\" or
 -- \"sr-Latn\". For more information, see
@@ -2853,7 +2967,8 @@ gcvvwdwlLabel
       (\ s a -> s{_gcvvwdwlLabel = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1WebDetectionWebLabel where
+           GoogleCloudVisionV1p3beta1WebDetectionWebLabel
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1WebDetectionWebLabel"
@@ -2862,7 +2977,8 @@ instance FromJSON
                    (o .:? "languageCode") <*> (o .:? "label"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1WebDetectionWebLabel where
+           GoogleCloudVisionV1p3beta1WebDetectionWebLabel
+         where
         toJSON
           GoogleCloudVisionV1p3beta1WebDetectionWebLabel'{..}
           = object
@@ -2873,13 +2989,16 @@ instance ToJSON
 -- | Image context and\/or feature-specific parameters.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ImageContext' smart constructor.
-data GoogleCloudVisionV1p2beta1ImageContext = GoogleCloudVisionV1p2beta1ImageContext'
+data GoogleCloudVisionV1p2beta1ImageContext =
+  GoogleCloudVisionV1p2beta1ImageContext'
     { _gcvvicCropHintsParams     :: !(Maybe GoogleCloudVisionV1p2beta1CropHintsParams)
     , _gcvvicWebDetectionParams  :: !(Maybe GoogleCloudVisionV1p2beta1WebDetectionParams)
     , _gcvvicProductSearchParams :: !(Maybe GoogleCloudVisionV1p2beta1ProductSearchParams)
     , _gcvvicLanguageHints       :: !(Maybe [Text])
     , _gcvvicLatLongRect         :: !(Maybe GoogleCloudVisionV1p2beta1LatLongRect)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ImageContext' with the minimum fields required to make a request.
 --
@@ -2897,13 +3016,14 @@ data GoogleCloudVisionV1p2beta1ImageContext = GoogleCloudVisionV1p2beta1ImageCon
 googleCloudVisionV1p2beta1ImageContext
     :: GoogleCloudVisionV1p2beta1ImageContext
 googleCloudVisionV1p2beta1ImageContext =
-    GoogleCloudVisionV1p2beta1ImageContext'
+  GoogleCloudVisionV1p2beta1ImageContext'
     { _gcvvicCropHintsParams = Nothing
     , _gcvvicWebDetectionParams = Nothing
     , _gcvvicProductSearchParams = Nothing
     , _gcvvicLanguageHints = Nothing
     , _gcvvicLatLongRect = Nothing
     }
+
 
 -- | Parameters for crop hints annotation request.
 gcvvicCropHintsParams :: Lens' GoogleCloudVisionV1p2beta1ImageContext (Maybe GoogleCloudVisionV1p2beta1CropHintsParams)
@@ -2946,7 +3066,8 @@ gcvvicLatLongRect
       (\ s a -> s{_gcvvicLatLongRect = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1ImageContext where
+           GoogleCloudVisionV1p2beta1ImageContext
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p2beta1ImageContext"
               (\ o ->
@@ -2958,7 +3079,8 @@ instance FromJSON
                      <*> (o .:? "latLongRect"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1ImageContext where
+           GoogleCloudVisionV1p2beta1ImageContext
+         where
         toJSON GoogleCloudVisionV1p2beta1ImageContext'{..}
           = object
               (catMaybes
@@ -2973,10 +3095,13 @@ instance ToJSON
 -- | Additional information detected on the structural component.
 --
 -- /See:/ 'textProperty' smart constructor.
-data TextProperty = TextProperty'
+data TextProperty =
+  TextProperty'
     { _tpDetectedLanguages :: !(Maybe [DetectedLanguage])
     , _tpDetectedBreak     :: !(Maybe DetectedBreak)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TextProperty' with the minimum fields required to make a request.
 --
@@ -2988,10 +3113,8 @@ data TextProperty = TextProperty'
 textProperty
     :: TextProperty
 textProperty =
-    TextProperty'
-    { _tpDetectedLanguages = Nothing
-    , _tpDetectedBreak = Nothing
-    }
+  TextProperty' {_tpDetectedLanguages = Nothing, _tpDetectedBreak = Nothing}
+
 
 -- | A list of detected languages together with confidence.
 tpDetectedLanguages :: Lens' TextProperty [DetectedLanguage]
@@ -3031,10 +3154,13 @@ instance ToJSON TextProperty where
 -- more detail.
 --
 -- /See:/ 'textAnnotation' smart constructor.
-data TextAnnotation = TextAnnotation'
+data TextAnnotation =
+  TextAnnotation'
     { _taText  :: !(Maybe Text)
     , _taPages :: !(Maybe [Page])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TextAnnotation' with the minimum fields required to make a request.
 --
@@ -3045,11 +3171,8 @@ data TextAnnotation = TextAnnotation'
 -- * 'taPages'
 textAnnotation
     :: TextAnnotation
-textAnnotation =
-    TextAnnotation'
-    { _taText = Nothing
-    , _taPages = Nothing
-    }
+textAnnotation = TextAnnotation' {_taText = Nothing, _taPages = Nothing}
+
 
 -- | UTF-8 text detected on the pages.
 taText :: Lens' TextAnnotation (Maybe Text)
@@ -3077,11 +3200,14 @@ instance ToJSON TextAnnotation where
 -- | Information about a product.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1ProductSearchResultsResult' smart constructor.
-data GoogleCloudVisionV1p3beta1ProductSearchResultsResult = GoogleCloudVisionV1p3beta1ProductSearchResultsResult'
+data GoogleCloudVisionV1p3beta1ProductSearchResultsResult =
+  GoogleCloudVisionV1p3beta1ProductSearchResultsResult'
     { _gcvvpsrrImage   :: !(Maybe Text)
     , _gcvvpsrrScore   :: !(Maybe (Textual Double))
     , _gcvvpsrrProduct :: !(Maybe GoogleCloudVisionV1p3beta1Product)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ProductSearchResultsResult' with the minimum fields required to make a request.
 --
@@ -3095,11 +3221,12 @@ data GoogleCloudVisionV1p3beta1ProductSearchResultsResult = GoogleCloudVisionV1p
 googleCloudVisionV1p3beta1ProductSearchResultsResult
     :: GoogleCloudVisionV1p3beta1ProductSearchResultsResult
 googleCloudVisionV1p3beta1ProductSearchResultsResult =
-    GoogleCloudVisionV1p3beta1ProductSearchResultsResult'
+  GoogleCloudVisionV1p3beta1ProductSearchResultsResult'
     { _gcvvpsrrImage = Nothing
     , _gcvvpsrrScore = Nothing
     , _gcvvpsrrProduct = Nothing
     }
+
 
 -- | The resource name of the image from the product that is the closest
 -- match to the query.
@@ -3123,7 +3250,7 @@ gcvvpsrrProduct
       (\ s a -> s{_gcvvpsrrProduct = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1ProductSearchResultsResult
+           GoogleCloudVisionV1p3beta1ProductSearchResultsResult
          where
         parseJSON
           = withObject
@@ -3135,7 +3262,7 @@ instance FromJSON
                      (o .:? "product"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1ProductSearchResultsResult
+           GoogleCloudVisionV1p3beta1ProductSearchResultsResult
          where
         toJSON
           GoogleCloudVisionV1p3beta1ProductSearchResultsResult'{..}
@@ -3148,12 +3275,15 @@ instance ToJSON
 -- | Structural unit of text representing a number of words in certain order.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1Paragraph' smart constructor.
-data GoogleCloudVisionV1p3beta1Paragraph = GoogleCloudVisionV1p3beta1Paragraph'
+data GoogleCloudVisionV1p3beta1Paragraph =
+  GoogleCloudVisionV1p3beta1Paragraph'
     { _gcvvpcProperty    :: !(Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
     , _gcvvpcBoundingBox :: !(Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
     , _gcvvpcConfidence  :: !(Maybe (Textual Double))
     , _gcvvpcWords       :: !(Maybe [GoogleCloudVisionV1p3beta1Word])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Paragraph' with the minimum fields required to make a request.
 --
@@ -3169,12 +3299,13 @@ data GoogleCloudVisionV1p3beta1Paragraph = GoogleCloudVisionV1p3beta1Paragraph'
 googleCloudVisionV1p3beta1Paragraph
     :: GoogleCloudVisionV1p3beta1Paragraph
 googleCloudVisionV1p3beta1Paragraph =
-    GoogleCloudVisionV1p3beta1Paragraph'
+  GoogleCloudVisionV1p3beta1Paragraph'
     { _gcvvpcProperty = Nothing
     , _gcvvpcBoundingBox = Nothing
     , _gcvvpcConfidence = Nothing
     , _gcvvpcWords = Nothing
     }
+
 
 -- | Additional information detected for the paragraph.
 gcvvpcProperty :: Lens' GoogleCloudVisionV1p3beta1Paragraph (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -3232,11 +3363,14 @@ instance ToJSON GoogleCloudVisionV1p3beta1Paragraph
 -- | Entity deduced from similar images on the Internet.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1WebDetectionWebEntity' smart constructor.
-data GoogleCloudVisionV1p1beta1WebDetectionWebEntity = GoogleCloudVisionV1p1beta1WebDetectionWebEntity'
+data GoogleCloudVisionV1p1beta1WebDetectionWebEntity =
+  GoogleCloudVisionV1p1beta1WebDetectionWebEntity'
     { _gcvvwdweScore       :: !(Maybe (Textual Double))
     , _gcvvwdweEntityId    :: !(Maybe Text)
     , _gcvvwdweDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetectionWebEntity' with the minimum fields required to make a request.
 --
@@ -3250,11 +3384,12 @@ data GoogleCloudVisionV1p1beta1WebDetectionWebEntity = GoogleCloudVisionV1p1beta
 googleCloudVisionV1p1beta1WebDetectionWebEntity
     :: GoogleCloudVisionV1p1beta1WebDetectionWebEntity
 googleCloudVisionV1p1beta1WebDetectionWebEntity =
-    GoogleCloudVisionV1p1beta1WebDetectionWebEntity'
+  GoogleCloudVisionV1p1beta1WebDetectionWebEntity'
     { _gcvvwdweScore = Nothing
     , _gcvvwdweEntityId = Nothing
     , _gcvvwdweDescription = Nothing
     }
+
 
 -- | Overall relevancy score for the entity. Not normalized and not
 -- comparable across different image queries.
@@ -3277,7 +3412,8 @@ gcvvwdweDescription
       (\ s a -> s{_gcvvwdweDescription = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1WebDetectionWebEntity where
+           GoogleCloudVisionV1p1beta1WebDetectionWebEntity
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1WebDetectionWebEntity"
@@ -3287,7 +3423,8 @@ instance FromJSON
                      (o .:? "description"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1WebDetectionWebEntity where
+           GoogleCloudVisionV1p1beta1WebDetectionWebEntity
+         where
         toJSON
           GoogleCloudVisionV1p1beta1WebDetectionWebEntity'{..}
           = object
@@ -3300,10 +3437,13 @@ instance ToJSON
 -- more images, which individually have their own responses.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1AnnotateFileResponse' smart constructor.
-data GoogleCloudVisionV1p2beta1AnnotateFileResponse = GoogleCloudVisionV1p2beta1AnnotateFileResponse'
+data GoogleCloudVisionV1p2beta1AnnotateFileResponse =
+  GoogleCloudVisionV1p2beta1AnnotateFileResponse'
     { _gcvvafrResponses   :: !(Maybe [GoogleCloudVisionV1p2beta1AnnotateImageResponse])
     , _gcvvafrInputConfig :: !(Maybe GoogleCloudVisionV1p2beta1InputConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AnnotateFileResponse' with the minimum fields required to make a request.
 --
@@ -3315,10 +3455,9 @@ data GoogleCloudVisionV1p2beta1AnnotateFileResponse = GoogleCloudVisionV1p2beta1
 googleCloudVisionV1p2beta1AnnotateFileResponse
     :: GoogleCloudVisionV1p2beta1AnnotateFileResponse
 googleCloudVisionV1p2beta1AnnotateFileResponse =
-    GoogleCloudVisionV1p2beta1AnnotateFileResponse'
-    { _gcvvafrResponses = Nothing
-    , _gcvvafrInputConfig = Nothing
-    }
+  GoogleCloudVisionV1p2beta1AnnotateFileResponse'
+    {_gcvvafrResponses = Nothing, _gcvvafrInputConfig = Nothing}
+
 
 -- | Individual responses to images found within the file.
 gcvvafrResponses :: Lens' GoogleCloudVisionV1p2beta1AnnotateFileResponse [GoogleCloudVisionV1p2beta1AnnotateImageResponse]
@@ -3335,7 +3474,8 @@ gcvvafrInputConfig
       (\ s a -> s{_gcvvafrInputConfig = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1AnnotateFileResponse where
+           GoogleCloudVisionV1p2beta1AnnotateFileResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1AnnotateFileResponse"
@@ -3345,7 +3485,8 @@ instance FromJSON
                      (o .:? "inputConfig"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1AnnotateFileResponse where
+           GoogleCloudVisionV1p2beta1AnnotateFileResponse
+         where
         toJSON
           GoogleCloudVisionV1p2beta1AnnotateFileResponse'{..}
           = object
@@ -3356,12 +3497,15 @@ instance ToJSON
 -- | A word representation.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1Word' smart constructor.
-data GoogleCloudVisionV1p3beta1Word = GoogleCloudVisionV1p3beta1Word'
+data GoogleCloudVisionV1p3beta1Word =
+  GoogleCloudVisionV1p3beta1Word'
     { _gcvvwProperty    :: !(Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
     , _gcvvwBoundingBox :: !(Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
     , _gcvvwSymbols     :: !(Maybe [GoogleCloudVisionV1p3beta1Symbol])
     , _gcvvwConfidence  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Word' with the minimum fields required to make a request.
 --
@@ -3377,12 +3521,13 @@ data GoogleCloudVisionV1p3beta1Word = GoogleCloudVisionV1p3beta1Word'
 googleCloudVisionV1p3beta1Word
     :: GoogleCloudVisionV1p3beta1Word
 googleCloudVisionV1p3beta1Word =
-    GoogleCloudVisionV1p3beta1Word'
+  GoogleCloudVisionV1p3beta1Word'
     { _gcvvwProperty = Nothing
     , _gcvvwBoundingBox = Nothing
     , _gcvvwSymbols = Nothing
     , _gcvvwConfidence = Nothing
     }
+
 
 -- | Additional information detected for the word.
 gcvvwProperty :: Lens' GoogleCloudVisionV1p3beta1Word (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -3440,13 +3585,16 @@ instance ToJSON GoogleCloudVisionV1p3beta1Word where
 -- | Set of detected objects with bounding boxes.
 --
 -- /See:/ 'localizedObjectAnnotation' smart constructor.
-data LocalizedObjectAnnotation = LocalizedObjectAnnotation'
+data LocalizedObjectAnnotation =
+  LocalizedObjectAnnotation'
     { _loaLanguageCode :: !(Maybe Text)
     , _loaScore        :: !(Maybe (Textual Double))
     , _loaBoundingPoly :: !(Maybe BoundingPoly)
     , _loaName         :: !(Maybe Text)
     , _loaMid          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocalizedObjectAnnotation' with the minimum fields required to make a request.
 --
@@ -3464,13 +3612,14 @@ data LocalizedObjectAnnotation = LocalizedObjectAnnotation'
 localizedObjectAnnotation
     :: LocalizedObjectAnnotation
 localizedObjectAnnotation =
-    LocalizedObjectAnnotation'
+  LocalizedObjectAnnotation'
     { _loaLanguageCode = Nothing
     , _loaScore = Nothing
     , _loaBoundingPoly = Nothing
     , _loaName = Nothing
     , _loaMid = Nothing
     }
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -3522,14 +3671,17 @@ instance ToJSON LocalizedObjectAnnotation where
 -- | Relevant information for the image from the Internet.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1WebDetection' smart constructor.
-data GoogleCloudVisionV1p2beta1WebDetection = GoogleCloudVisionV1p2beta1WebDetection'
+data GoogleCloudVisionV1p2beta1WebDetection =
+  GoogleCloudVisionV1p2beta1WebDetection'
     { _gcvvwdVisuallySimilarImages   :: !(Maybe [GoogleCloudVisionV1p2beta1WebDetectionWebImage])
     , _gcvvwdBestGuessLabels         :: !(Maybe [GoogleCloudVisionV1p2beta1WebDetectionWebLabel])
     , _gcvvwdPagesWithMatchingImages :: !(Maybe [GoogleCloudVisionV1p2beta1WebDetectionWebPage])
     , _gcvvwdPartialMatchingImages   :: !(Maybe [GoogleCloudVisionV1p2beta1WebDetectionWebImage])
     , _gcvvwdFullMatchingImages      :: !(Maybe [GoogleCloudVisionV1p2beta1WebDetectionWebImage])
     , _gcvvwdWebEntities             :: !(Maybe [GoogleCloudVisionV1p2beta1WebDetectionWebEntity])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetection' with the minimum fields required to make a request.
 --
@@ -3549,7 +3701,7 @@ data GoogleCloudVisionV1p2beta1WebDetection = GoogleCloudVisionV1p2beta1WebDetec
 googleCloudVisionV1p2beta1WebDetection
     :: GoogleCloudVisionV1p2beta1WebDetection
 googleCloudVisionV1p2beta1WebDetection =
-    GoogleCloudVisionV1p2beta1WebDetection'
+  GoogleCloudVisionV1p2beta1WebDetection'
     { _gcvvwdVisuallySimilarImages = Nothing
     , _gcvvwdBestGuessLabels = Nothing
     , _gcvvwdPagesWithMatchingImages = Nothing
@@ -3557,6 +3709,7 @@ googleCloudVisionV1p2beta1WebDetection =
     , _gcvvwdFullMatchingImages = Nothing
     , _gcvvwdWebEntities = Nothing
     }
+
 
 -- | The visually similar image results.
 gcvvwdVisuallySimilarImages :: Lens' GoogleCloudVisionV1p2beta1WebDetection [GoogleCloudVisionV1p2beta1WebDetectionWebImage]
@@ -3611,7 +3764,8 @@ gcvvwdWebEntities
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1WebDetection where
+           GoogleCloudVisionV1p2beta1WebDetection
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p2beta1WebDetection"
               (\ o ->
@@ -3624,7 +3778,8 @@ instance FromJSON
                      <*> (o .:? "webEntities" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1WebDetection where
+           GoogleCloudVisionV1p2beta1WebDetection
+         where
         toJSON GoogleCloudVisionV1p2beta1WebDetection'{..}
           = object
               (catMaybes
@@ -3643,13 +3798,16 @@ instance ToJSON
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -3667,13 +3825,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -3777,12 +3936,15 @@ instance ToJSON Operation where
 -- ...
 --
 -- /See:/ 'color' smart constructor.
-data Color = Color'
+data Color =
+  Color'
     { _cRed   :: !(Maybe (Textual Double))
     , _cAlpha :: !(Maybe (Textual Double))
     , _cGreen :: !(Maybe (Textual Double))
     , _cBlue  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Color' with the minimum fields required to make a request.
 --
@@ -3798,12 +3960,9 @@ data Color = Color'
 color
     :: Color
 color =
-    Color'
-    { _cRed = Nothing
-    , _cAlpha = Nothing
-    , _cGreen = Nothing
-    , _cBlue = Nothing
-    }
+  Color'
+    {_cRed = Nothing, _cAlpha = Nothing, _cGreen = Nothing, _cBlue = Nothing}
+
 
 -- | The amount of red in the color as a value in the interval [0, 1].
 cRed :: Lens' Color (Maybe Double)
@@ -3855,10 +4014,13 @@ instance ToJSON Color where
 -- | A product label represented as a key-value pair.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ProductKeyValue' smart constructor.
-data GoogleCloudVisionV1p2beta1ProductKeyValue = GoogleCloudVisionV1p2beta1ProductKeyValue'
+data GoogleCloudVisionV1p2beta1ProductKeyValue =
+  GoogleCloudVisionV1p2beta1ProductKeyValue'
     { _gValue :: !(Maybe Text)
     , _gKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductKeyValue' with the minimum fields required to make a request.
 --
@@ -3870,10 +4032,9 @@ data GoogleCloudVisionV1p2beta1ProductKeyValue = GoogleCloudVisionV1p2beta1Produ
 googleCloudVisionV1p2beta1ProductKeyValue
     :: GoogleCloudVisionV1p2beta1ProductKeyValue
 googleCloudVisionV1p2beta1ProductKeyValue =
-    GoogleCloudVisionV1p2beta1ProductKeyValue'
-    { _gValue = Nothing
-    , _gKey = Nothing
-    }
+  GoogleCloudVisionV1p2beta1ProductKeyValue'
+    {_gValue = Nothing, _gKey = Nothing}
+
 
 -- | The value of the label attached to the product. Cannot be empty and
 -- cannot exceed 128 bytes.
@@ -3886,7 +4047,8 @@ gKey :: Lens' GoogleCloudVisionV1p2beta1ProductKeyValue (Maybe Text)
 gKey = lens _gKey (\ s a -> s{_gKey = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1ProductKeyValue where
+           GoogleCloudVisionV1p2beta1ProductKeyValue
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1ProductKeyValue"
@@ -3895,7 +4057,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1ProductKeyValue where
+           GoogleCloudVisionV1p2beta1ProductKeyValue
+         where
         toJSON GoogleCloudVisionV1p2beta1ProductKeyValue'{..}
           = object
               (catMaybes
@@ -3904,10 +4067,13 @@ instance ToJSON
 -- | A face-specific landmark (for example, a face feature).
 --
 -- /See:/ 'googleCloudVisionV1p1beta1FaceAnnotationLandmark' smart constructor.
-data GoogleCloudVisionV1p1beta1FaceAnnotationLandmark = GoogleCloudVisionV1p1beta1FaceAnnotationLandmark'
+data GoogleCloudVisionV1p1beta1FaceAnnotationLandmark =
+  GoogleCloudVisionV1p1beta1FaceAnnotationLandmark'
     { _gcvvfalType     :: !(Maybe GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType)
     , _gcvvfalPosition :: !(Maybe GoogleCloudVisionV1p1beta1Position)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1FaceAnnotationLandmark' with the minimum fields required to make a request.
 --
@@ -3919,10 +4085,9 @@ data GoogleCloudVisionV1p1beta1FaceAnnotationLandmark = GoogleCloudVisionV1p1bet
 googleCloudVisionV1p1beta1FaceAnnotationLandmark
     :: GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
 googleCloudVisionV1p1beta1FaceAnnotationLandmark =
-    GoogleCloudVisionV1p1beta1FaceAnnotationLandmark'
-    { _gcvvfalType = Nothing
-    , _gcvvfalPosition = Nothing
-    }
+  GoogleCloudVisionV1p1beta1FaceAnnotationLandmark'
+    {_gcvvfalType = Nothing, _gcvvfalPosition = Nothing}
+
 
 -- | Face landmark type.
 gcvvfalType :: Lens' GoogleCloudVisionV1p1beta1FaceAnnotationLandmark (Maybe GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType)
@@ -3936,7 +4101,7 @@ gcvvfalPosition
       (\ s a -> s{_gcvvfalPosition = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
+           GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
          where
         parseJSON
           = withObject
@@ -3946,7 +4111,7 @@ instance FromJSON
                    (o .:? "type") <*> (o .:? "position"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
+           GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
          where
         toJSON
           GoogleCloudVisionV1p1beta1FaceAnnotationLandmark'{..}
@@ -3958,9 +4123,12 @@ instance ToJSON
 -- | Response to an async batch file annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse' smart constructor.
-newtype GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse = GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse'
+newtype GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse =
+  GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse'
     { _gResponses :: Maybe [GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse' with the minimum fields required to make a request.
 --
@@ -3970,9 +4138,9 @@ newtype GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse = GoogleCloudV
 googleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
     :: GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
 googleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse =
-    GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse'
-    { _gResponses = Nothing
-    }
+  GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse'
+    {_gResponses = Nothing}
+
 
 -- | The list of file annotation responses, one for each request in
 -- AsyncBatchAnnotateFilesRequest.
@@ -3983,7 +4151,7 @@ gResponses
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
+           GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
          where
         parseJSON
           = withObject
@@ -3993,7 +4161,7 @@ instance FromJSON
                    <$> (o .:? "responses" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
+           GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
          where
         toJSON
           GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse'{..}
@@ -4003,7 +4171,8 @@ instance ToJSON
 -- | Set of detected entity features.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1EntityAnnotation' smart constructor.
-data GoogleCloudVisionV1p1beta1EntityAnnotation = GoogleCloudVisionV1p1beta1EntityAnnotation'
+data GoogleCloudVisionV1p1beta1EntityAnnotation =
+  GoogleCloudVisionV1p1beta1EntityAnnotation'
     { _gcvveaScore        :: !(Maybe (Textual Double))
     , _gcvveaTopicality   :: !(Maybe (Textual Double))
     , _gcvveaLocale       :: !(Maybe Text)
@@ -4013,7 +4182,9 @@ data GoogleCloudVisionV1p1beta1EntityAnnotation = GoogleCloudVisionV1p1beta1Enti
     , _gcvveaLocations    :: !(Maybe [GoogleCloudVisionV1p1beta1LocationInfo])
     , _gcvveaDescription  :: !(Maybe Text)
     , _gcvveaProperties   :: !(Maybe [GoogleCloudVisionV1p1beta1Property])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1EntityAnnotation' with the minimum fields required to make a request.
 --
@@ -4039,7 +4210,7 @@ data GoogleCloudVisionV1p1beta1EntityAnnotation = GoogleCloudVisionV1p1beta1Enti
 googleCloudVisionV1p1beta1EntityAnnotation
     :: GoogleCloudVisionV1p1beta1EntityAnnotation
 googleCloudVisionV1p1beta1EntityAnnotation =
-    GoogleCloudVisionV1p1beta1EntityAnnotation'
+  GoogleCloudVisionV1p1beta1EntityAnnotation'
     { _gcvveaScore = Nothing
     , _gcvveaTopicality = Nothing
     , _gcvveaLocale = Nothing
@@ -4050,6 +4221,7 @@ googleCloudVisionV1p1beta1EntityAnnotation =
     , _gcvveaDescription = Nothing
     , _gcvveaProperties = Nothing
     }
+
 
 -- | Overall score of the result. Range [0, 1].
 gcvveaScore :: Lens' GoogleCloudVisionV1p1beta1EntityAnnotation (Maybe Double)
@@ -4125,7 +4297,8 @@ gcvveaProperties
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1EntityAnnotation where
+           GoogleCloudVisionV1p1beta1EntityAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1EntityAnnotation"
@@ -4141,7 +4314,8 @@ instance FromJSON
                      <*> (o .:? "properties" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1EntityAnnotation where
+           GoogleCloudVisionV1p1beta1EntityAnnotation
+         where
         toJSON
           GoogleCloudVisionV1p1beta1EntityAnnotation'{..}
           = object
@@ -4159,7 +4333,8 @@ instance ToJSON
 -- | Response to an image annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1AnnotateImageResponse' smart constructor.
-data GoogleCloudVisionV1p3beta1AnnotateImageResponse = GoogleCloudVisionV1p3beta1AnnotateImageResponse'
+data GoogleCloudVisionV1p3beta1AnnotateImageResponse =
+  GoogleCloudVisionV1p3beta1AnnotateImageResponse'
     { _gLogoAnnotations            :: !(Maybe [GoogleCloudVisionV1p3beta1EntityAnnotation])
     , _gProductSearchResults       :: !(Maybe GoogleCloudVisionV1p3beta1ProductSearchResults)
     , _gContext                    :: !(Maybe GoogleCloudVisionV1p3beta1ImageAnnotationContext)
@@ -4174,7 +4349,9 @@ data GoogleCloudVisionV1p3beta1AnnotateImageResponse = GoogleCloudVisionV1p3beta
     , _gCropHintsAnnotation        :: !(Maybe GoogleCloudVisionV1p3beta1CropHintsAnnotation)
     , _gFullTextAnnotation         :: !(Maybe GoogleCloudVisionV1p3beta1TextAnnotation)
     , _gImagePropertiesAnnotation  :: !(Maybe GoogleCloudVisionV1p3beta1ImageProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1AnnotateImageResponse' with the minimum fields required to make a request.
 --
@@ -4210,7 +4387,7 @@ data GoogleCloudVisionV1p3beta1AnnotateImageResponse = GoogleCloudVisionV1p3beta
 googleCloudVisionV1p3beta1AnnotateImageResponse
     :: GoogleCloudVisionV1p3beta1AnnotateImageResponse
 googleCloudVisionV1p3beta1AnnotateImageResponse =
-    GoogleCloudVisionV1p3beta1AnnotateImageResponse'
+  GoogleCloudVisionV1p3beta1AnnotateImageResponse'
     { _gLogoAnnotations = Nothing
     , _gProductSearchResults = Nothing
     , _gContext = Nothing
@@ -4226,6 +4403,7 @@ googleCloudVisionV1p3beta1AnnotateImageResponse =
     , _gFullTextAnnotation = Nothing
     , _gImagePropertiesAnnotation = Nothing
     }
+
 
 -- | If present, logo detection has completed successfully.
 gLogoAnnotations :: Lens' GoogleCloudVisionV1p3beta1AnnotateImageResponse [GoogleCloudVisionV1p3beta1EntityAnnotation]
@@ -4326,7 +4504,8 @@ gImagePropertiesAnnotation
       (\ s a -> s{_gImagePropertiesAnnotation = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1AnnotateImageResponse where
+           GoogleCloudVisionV1p3beta1AnnotateImageResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1AnnotateImageResponse"
@@ -4348,7 +4527,8 @@ instance FromJSON
                      <*> (o .:? "imagePropertiesAnnotation"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1AnnotateImageResponse where
+           GoogleCloudVisionV1p3beta1AnnotateImageResponse
+         where
         toJSON
           GoogleCloudVisionV1p3beta1AnnotateImageResponse'{..}
           = object
@@ -4375,9 +4555,12 @@ instance ToJSON
 -- | Stores image properties, such as dominant colors.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1ImageProperties' smart constructor.
-newtype GoogleCloudVisionV1p3beta1ImageProperties = GoogleCloudVisionV1p3beta1ImageProperties'
+newtype GoogleCloudVisionV1p3beta1ImageProperties =
+  GoogleCloudVisionV1p3beta1ImageProperties'
     { _gDominantColors :: Maybe GoogleCloudVisionV1p3beta1DominantColorsAnnotation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ImageProperties' with the minimum fields required to make a request.
 --
@@ -4387,9 +4570,8 @@ newtype GoogleCloudVisionV1p3beta1ImageProperties = GoogleCloudVisionV1p3beta1Im
 googleCloudVisionV1p3beta1ImageProperties
     :: GoogleCloudVisionV1p3beta1ImageProperties
 googleCloudVisionV1p3beta1ImageProperties =
-    GoogleCloudVisionV1p3beta1ImageProperties'
-    { _gDominantColors = Nothing
-    }
+  GoogleCloudVisionV1p3beta1ImageProperties' {_gDominantColors = Nothing}
+
 
 -- | If present, dominant colors completed successfully.
 gDominantColors :: Lens' GoogleCloudVisionV1p3beta1ImageProperties (Maybe GoogleCloudVisionV1p3beta1DominantColorsAnnotation)
@@ -4398,7 +4580,8 @@ gDominantColors
       (\ s a -> s{_gDominantColors = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1ImageProperties where
+           GoogleCloudVisionV1p3beta1ImageProperties
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1ImageProperties"
@@ -4407,7 +4590,8 @@ instance FromJSON
                    (o .:? "dominantColors"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1ImageProperties where
+           GoogleCloudVisionV1p3beta1ImageProperties
+         where
         toJSON GoogleCloudVisionV1p3beta1ImageProperties'{..}
           = object
               (catMaybes
@@ -4416,10 +4600,13 @@ instance ToJSON
 -- | External image source (Google Cloud Storage or web URL image location).
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ImageSource' smart constructor.
-data GoogleCloudVisionV1p2beta1ImageSource = GoogleCloudVisionV1p2beta1ImageSource'
+data GoogleCloudVisionV1p2beta1ImageSource =
+  GoogleCloudVisionV1p2beta1ImageSource'
     { _gcvvisGcsImageURI :: !(Maybe Text)
     , _gcvvisImageURI    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ImageSource' with the minimum fields required to make a request.
 --
@@ -4431,10 +4618,9 @@ data GoogleCloudVisionV1p2beta1ImageSource = GoogleCloudVisionV1p2beta1ImageSour
 googleCloudVisionV1p2beta1ImageSource
     :: GoogleCloudVisionV1p2beta1ImageSource
 googleCloudVisionV1p2beta1ImageSource =
-    GoogleCloudVisionV1p2beta1ImageSource'
-    { _gcvvisGcsImageURI = Nothing
-    , _gcvvisImageURI = Nothing
-    }
+  GoogleCloudVisionV1p2beta1ImageSource'
+    {_gcvvisGcsImageURI = Nothing, _gcvvisImageURI = Nothing}
+
 
 -- | **Use \`image_uri\` instead.** The Google Cloud Storage URI of the form
 -- \`gs:\/\/bucket_name\/object_name\`. Object versioning is not supported.
@@ -4464,7 +4650,8 @@ gcvvisImageURI
       (\ s a -> s{_gcvvisImageURI = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1ImageSource where
+           GoogleCloudVisionV1p2beta1ImageSource
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p2beta1ImageSource"
               (\ o ->
@@ -4482,13 +4669,16 @@ instance ToJSON GoogleCloudVisionV1p2beta1ImageSource
 -- | Detected page from OCR.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1Page' smart constructor.
-data GoogleCloudVisionV1p3beta1Page = GoogleCloudVisionV1p3beta1Page'
+data GoogleCloudVisionV1p3beta1Page =
+  GoogleCloudVisionV1p3beta1Page'
     { _ggProperty   :: !(Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
     , _ggHeight     :: !(Maybe (Textual Int32))
     , _ggBlocks     :: !(Maybe [GoogleCloudVisionV1p3beta1Block])
     , _ggWidth      :: !(Maybe (Textual Int32))
     , _ggConfidence :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Page' with the minimum fields required to make a request.
 --
@@ -4506,13 +4696,14 @@ data GoogleCloudVisionV1p3beta1Page = GoogleCloudVisionV1p3beta1Page'
 googleCloudVisionV1p3beta1Page
     :: GoogleCloudVisionV1p3beta1Page
 googleCloudVisionV1p3beta1Page =
-    GoogleCloudVisionV1p3beta1Page'
+  GoogleCloudVisionV1p3beta1Page'
     { _ggProperty = Nothing
     , _ggHeight = Nothing
     , _ggBlocks = Nothing
     , _ggWidth = Nothing
     , _ggConfidence = Nothing
     }
+
 
 -- | Additional information detected on the page.
 ggProperty :: Lens' GoogleCloudVisionV1p3beta1Page (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -4570,13 +4761,16 @@ instance ToJSON GoogleCloudVisionV1p3beta1Page where
 -- | Logical element on the page.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1Block' smart constructor.
-data GoogleCloudVisionV1p1beta1Block = GoogleCloudVisionV1p1beta1Block'
+data GoogleCloudVisionV1p1beta1Block =
+  GoogleCloudVisionV1p1beta1Block'
     { _gcvvbProperty    :: !(Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
     , _gcvvbBoundingBox :: !(Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
     , _gcvvbParagraphs  :: !(Maybe [GoogleCloudVisionV1p1beta1Paragraph])
     , _gcvvbConfidence  :: !(Maybe (Textual Double))
     , _gcvvbBlockType   :: !(Maybe GoogleCloudVisionV1p1beta1BlockBlockType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Block' with the minimum fields required to make a request.
 --
@@ -4594,13 +4788,14 @@ data GoogleCloudVisionV1p1beta1Block = GoogleCloudVisionV1p1beta1Block'
 googleCloudVisionV1p1beta1Block
     :: GoogleCloudVisionV1p1beta1Block
 googleCloudVisionV1p1beta1Block =
-    GoogleCloudVisionV1p1beta1Block'
+  GoogleCloudVisionV1p1beta1Block'
     { _gcvvbProperty = Nothing
     , _gcvvbBoundingBox = Nothing
     , _gcvvbParagraphs = Nothing
     , _gcvvbConfidence = Nothing
     , _gcvvbBlockType = Nothing
     }
+
 
 -- | Additional information detected for the block.
 gcvvbProperty :: Lens' GoogleCloudVisionV1p1beta1Block (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -4666,9 +4861,12 @@ instance ToJSON GoogleCloudVisionV1p1beta1Block where
 -- | The Google Cloud Storage location where the output will be written to.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1GcsDestination' smart constructor.
-newtype GoogleCloudVisionV1p3beta1GcsDestination = GoogleCloudVisionV1p3beta1GcsDestination'
+newtype GoogleCloudVisionV1p3beta1GcsDestination =
+  GoogleCloudVisionV1p3beta1GcsDestination'
     { _gcvvgdURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1GcsDestination' with the minimum fields required to make a request.
 --
@@ -4678,9 +4876,8 @@ newtype GoogleCloudVisionV1p3beta1GcsDestination = GoogleCloudVisionV1p3beta1Gcs
 googleCloudVisionV1p3beta1GcsDestination
     :: GoogleCloudVisionV1p3beta1GcsDestination
 googleCloudVisionV1p3beta1GcsDestination =
-    GoogleCloudVisionV1p3beta1GcsDestination'
-    { _gcvvgdURI = Nothing
-    }
+  GoogleCloudVisionV1p3beta1GcsDestination' {_gcvvgdURI = Nothing}
+
 
 -- | Google Cloud Storage URI where the results will be stored. Results will
 -- be in JSON format and preceded by its corresponding input URI. This
@@ -4698,7 +4895,8 @@ gcvvgdURI
   = lens _gcvvgdURI (\ s a -> s{_gcvvgdURI = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1GcsDestination where
+           GoogleCloudVisionV1p3beta1GcsDestination
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1GcsDestination"
@@ -4707,20 +4905,24 @@ instance FromJSON
                    (o .:? "uri"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1GcsDestination where
+           GoogleCloudVisionV1p3beta1GcsDestination
+         where
         toJSON GoogleCloudVisionV1p3beta1GcsDestination'{..}
           = object (catMaybes [("uri" .=) <$> _gcvvgdURI])
 
 -- | A Product contains ReferenceImages.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1Product' smart constructor.
-data GoogleCloudVisionV1p3beta1Product = GoogleCloudVisionV1p3beta1Product'
+data GoogleCloudVisionV1p3beta1Product =
+  GoogleCloudVisionV1p3beta1Product'
     { _gName            :: !(Maybe Text)
     , _gDisplayName     :: !(Maybe Text)
     , _gProductCategory :: !(Maybe Text)
     , _gProductLabels   :: !(Maybe [GoogleCloudVisionV1p3beta1ProductKeyValue])
     , _gDescription     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Product' with the minimum fields required to make a request.
 --
@@ -4738,13 +4940,14 @@ data GoogleCloudVisionV1p3beta1Product = GoogleCloudVisionV1p3beta1Product'
 googleCloudVisionV1p3beta1Product
     :: GoogleCloudVisionV1p3beta1Product
 googleCloudVisionV1p3beta1Product =
-    GoogleCloudVisionV1p3beta1Product'
+  GoogleCloudVisionV1p3beta1Product'
     { _gName = Nothing
     , _gDisplayName = Nothing
     , _gProductCategory = Nothing
     , _gProductLabels = Nothing
     , _gDescription = Nothing
     }
+
 
 -- | The resource name of the product. Format is:
 -- \`projects\/PROJECT_ID\/locations\/LOC_ID\/products\/PRODUCT_ID\`. This
@@ -4810,10 +5013,13 @@ instance ToJSON GoogleCloudVisionV1p3beta1Product
 -- | A bounding polygon for the detected image annotation.
 --
 -- /See:/ 'boundingPoly' smart constructor.
-data BoundingPoly = BoundingPoly'
+data BoundingPoly =
+  BoundingPoly'
     { _bpNormalizedVertices :: !(Maybe [NormalizedVertex])
     , _bpVertices           :: !(Maybe [Vertex])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BoundingPoly' with the minimum fields required to make a request.
 --
@@ -4825,10 +5031,8 @@ data BoundingPoly = BoundingPoly'
 boundingPoly
     :: BoundingPoly
 boundingPoly =
-    BoundingPoly'
-    { _bpNormalizedVertices = Nothing
-    , _bpVertices = Nothing
-    }
+  BoundingPoly' {_bpNormalizedVertices = Nothing, _bpVertices = Nothing}
+
 
 -- | The bounding polygon normalized vertices.
 bpNormalizedVertices :: Lens' BoundingPoly [NormalizedVertex]
@@ -4864,10 +5068,13 @@ instance ToJSON BoundingPoly where
 -- coordinates are relative to the original image and range from 0 to 1.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1NormalizedVertex' smart constructor.
-data GoogleCloudVisionV1p1beta1NormalizedVertex = GoogleCloudVisionV1p1beta1NormalizedVertex'
+data GoogleCloudVisionV1p1beta1NormalizedVertex =
+  GoogleCloudVisionV1p1beta1NormalizedVertex'
     { _gcvvnvX :: !(Maybe (Textual Double))
     , _gcvvnvY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1NormalizedVertex' with the minimum fields required to make a request.
 --
@@ -4879,10 +5086,9 @@ data GoogleCloudVisionV1p1beta1NormalizedVertex = GoogleCloudVisionV1p1beta1Norm
 googleCloudVisionV1p1beta1NormalizedVertex
     :: GoogleCloudVisionV1p1beta1NormalizedVertex
 googleCloudVisionV1p1beta1NormalizedVertex =
-    GoogleCloudVisionV1p1beta1NormalizedVertex'
-    { _gcvvnvX = Nothing
-    , _gcvvnvY = Nothing
-    }
+  GoogleCloudVisionV1p1beta1NormalizedVertex'
+    {_gcvvnvX = Nothing, _gcvvnvY = Nothing}
+
 
 -- | X coordinate.
 gcvvnvX :: Lens' GoogleCloudVisionV1p1beta1NormalizedVertex (Maybe Double)
@@ -4897,7 +5103,8 @@ gcvvnvY
       mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1NormalizedVertex where
+           GoogleCloudVisionV1p1beta1NormalizedVertex
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1NormalizedVertex"
@@ -4906,7 +5113,8 @@ instance FromJSON
                    (o .:? "x") <*> (o .:? "y"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1NormalizedVertex where
+           GoogleCloudVisionV1p1beta1NormalizedVertex
+         where
         toJSON
           GoogleCloudVisionV1p1beta1NormalizedVertex'{..}
           = object
@@ -4916,9 +5124,12 @@ instance ToJSON
 -- | Detected entity location information.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1LocationInfo' smart constructor.
-newtype GoogleCloudVisionV1p3beta1LocationInfo = GoogleCloudVisionV1p3beta1LocationInfo'
+newtype GoogleCloudVisionV1p3beta1LocationInfo =
+  GoogleCloudVisionV1p3beta1LocationInfo'
     { _gcvvliLatLng :: Maybe LatLng
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1LocationInfo' with the minimum fields required to make a request.
 --
@@ -4928,9 +5139,8 @@ newtype GoogleCloudVisionV1p3beta1LocationInfo = GoogleCloudVisionV1p3beta1Locat
 googleCloudVisionV1p3beta1LocationInfo
     :: GoogleCloudVisionV1p3beta1LocationInfo
 googleCloudVisionV1p3beta1LocationInfo =
-    GoogleCloudVisionV1p3beta1LocationInfo'
-    { _gcvvliLatLng = Nothing
-    }
+  GoogleCloudVisionV1p3beta1LocationInfo' {_gcvvliLatLng = Nothing}
+
 
 -- | lat\/long location coordinates.
 gcvvliLatLng :: Lens' GoogleCloudVisionV1p3beta1LocationInfo (Maybe LatLng)
@@ -4938,7 +5148,8 @@ gcvvliLatLng
   = lens _gcvvliLatLng (\ s a -> s{_gcvvliLatLng = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1LocationInfo where
+           GoogleCloudVisionV1p3beta1LocationInfo
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p3beta1LocationInfo"
               (\ o ->
@@ -4946,7 +5157,8 @@ instance FromJSON
                    (o .:? "latLng"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1LocationInfo where
+           GoogleCloudVisionV1p3beta1LocationInfo
+         where
         toJSON GoogleCloudVisionV1p3beta1LocationInfo'{..}
           = object
               (catMaybes [("latLng" .=) <$> _gcvvliLatLng])
@@ -4955,10 +5167,13 @@ instance ToJSON
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'vertex' smart constructor.
-data Vertex = Vertex'
+data Vertex =
+  Vertex'
     { _vX :: !(Maybe (Textual Int32))
     , _vY :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Vertex' with the minimum fields required to make a request.
 --
@@ -4969,11 +5184,8 @@ data Vertex = Vertex'
 -- * 'vY'
 vertex
     :: Vertex
-vertex =
-    Vertex'
-    { _vX = Nothing
-    , _vY = Nothing
-    }
+vertex = Vertex' {_vX = Nothing, _vY = Nothing}
+
 
 -- | X coordinate.
 vX :: Lens' Vertex (Maybe Int32)
@@ -4998,11 +5210,14 @@ instance ToJSON Vertex where
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1Position' smart constructor.
-data GoogleCloudVisionV1p1beta1Position = GoogleCloudVisionV1p1beta1Position'
+data GoogleCloudVisionV1p1beta1Position =
+  GoogleCloudVisionV1p1beta1Position'
     { _gcvvpZ :: !(Maybe (Textual Double))
     , _gcvvpX :: !(Maybe (Textual Double))
     , _gcvvpY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Position' with the minimum fields required to make a request.
 --
@@ -5016,11 +5231,9 @@ data GoogleCloudVisionV1p1beta1Position = GoogleCloudVisionV1p1beta1Position'
 googleCloudVisionV1p1beta1Position
     :: GoogleCloudVisionV1p1beta1Position
 googleCloudVisionV1p1beta1Position =
-    GoogleCloudVisionV1p1beta1Position'
-    { _gcvvpZ = Nothing
-    , _gcvvpX = Nothing
-    , _gcvvpY = Nothing
-    }
+  GoogleCloudVisionV1p1beta1Position'
+    {_gcvvpZ = Nothing, _gcvvpX = Nothing, _gcvvpY = Nothing}
+
 
 -- | Z coordinate (or depth).
 gcvvpZ :: Lens' GoogleCloudVisionV1p1beta1Position (Maybe Double)
@@ -5059,9 +5272,12 @@ instance ToJSON GoogleCloudVisionV1p1beta1Position
 -- | The response for a single offline file annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1AsyncAnnotateFileResponse' smart constructor.
-newtype GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse = GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse'
+newtype GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse =
+  GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse'
     { _gcvvaafrOutputConfig :: Maybe GoogleCloudVisionV1p1beta1OutputConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse' with the minimum fields required to make a request.
 --
@@ -5071,9 +5287,9 @@ newtype GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse = GoogleCloudVisionV
 googleCloudVisionV1p1beta1AsyncAnnotateFileResponse
     :: GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse
 googleCloudVisionV1p1beta1AsyncAnnotateFileResponse =
-    GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse'
-    { _gcvvaafrOutputConfig = Nothing
-    }
+  GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse'
+    {_gcvvaafrOutputConfig = Nothing}
+
 
 -- | The output location and metadata from AsyncAnnotateFileRequest.
 gcvvaafrOutputConfig :: Lens' GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse (Maybe GoogleCloudVisionV1p1beta1OutputConfig)
@@ -5082,7 +5298,7 @@ gcvvaafrOutputConfig
       (\ s a -> s{_gcvvaafrOutputConfig = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse
+           GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse
          where
         parseJSON
           = withObject
@@ -5092,7 +5308,7 @@ instance FromJSON
                    <$> (o .:? "outputConfig"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse
+           GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse
          where
         toJSON
           GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse'{..}
@@ -5103,10 +5319,13 @@ instance ToJSON
 -- | Metadata for online images.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1WebDetectionWebImage' smart constructor.
-data GoogleCloudVisionV1p3beta1WebDetectionWebImage = GoogleCloudVisionV1p3beta1WebDetectionWebImage'
+data GoogleCloudVisionV1p3beta1WebDetectionWebImage =
+  GoogleCloudVisionV1p3beta1WebDetectionWebImage'
     { _gcvvwdwiScore :: !(Maybe (Textual Double))
     , _gcvvwdwiURL   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetectionWebImage' with the minimum fields required to make a request.
 --
@@ -5118,10 +5337,9 @@ data GoogleCloudVisionV1p3beta1WebDetectionWebImage = GoogleCloudVisionV1p3beta1
 googleCloudVisionV1p3beta1WebDetectionWebImage
     :: GoogleCloudVisionV1p3beta1WebDetectionWebImage
 googleCloudVisionV1p3beta1WebDetectionWebImage =
-    GoogleCloudVisionV1p3beta1WebDetectionWebImage'
-    { _gcvvwdwiScore = Nothing
-    , _gcvvwdwiURL = Nothing
-    }
+  GoogleCloudVisionV1p3beta1WebDetectionWebImage'
+    {_gcvvwdwiScore = Nothing, _gcvvwdwiURL = Nothing}
+
 
 -- | (Deprecated) Overall relevancy score for the image.
 gcvvwdwiScore :: Lens' GoogleCloudVisionV1p3beta1WebDetectionWebImage (Maybe Double)
@@ -5136,7 +5354,8 @@ gcvvwdwiURL
   = lens _gcvvwdwiURL (\ s a -> s{_gcvvwdwiURL = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1WebDetectionWebImage where
+           GoogleCloudVisionV1p3beta1WebDetectionWebImage
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1WebDetectionWebImage"
@@ -5145,7 +5364,8 @@ instance FromJSON
                    (o .:? "score") <*> (o .:? "url"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1WebDetectionWebImage where
+           GoogleCloudVisionV1p3beta1WebDetectionWebImage
+         where
         toJSON
           GoogleCloudVisionV1p3beta1WebDetectionWebImage'{..}
           = object
@@ -5157,10 +5377,13 @@ instance ToJSON
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1Vertex' smart constructor.
-data GoogleCloudVisionV1p3beta1Vertex = GoogleCloudVisionV1p3beta1Vertex'
+data GoogleCloudVisionV1p3beta1Vertex =
+  GoogleCloudVisionV1p3beta1Vertex'
     { _gcvvvX :: !(Maybe (Textual Int32))
     , _gcvvvY :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Vertex' with the minimum fields required to make a request.
 --
@@ -5172,10 +5395,8 @@ data GoogleCloudVisionV1p3beta1Vertex = GoogleCloudVisionV1p3beta1Vertex'
 googleCloudVisionV1p3beta1Vertex
     :: GoogleCloudVisionV1p3beta1Vertex
 googleCloudVisionV1p3beta1Vertex =
-    GoogleCloudVisionV1p3beta1Vertex'
-    { _gcvvvX = Nothing
-    , _gcvvvY = Nothing
-    }
+  GoogleCloudVisionV1p3beta1Vertex' {_gcvvvX = Nothing, _gcvvvY = Nothing}
+
 
 -- | X coordinate.
 gcvvvX :: Lens' GoogleCloudVisionV1p3beta1Vertex (Maybe Int32)
@@ -5207,11 +5428,14 @@ instance ToJSON GoogleCloudVisionV1p3beta1Vertex
 -- | Entity deduced from similar images on the Internet.
 --
 -- /See:/ 'webEntity' smart constructor.
-data WebEntity = WebEntity'
+data WebEntity =
+  WebEntity'
     { _weScore       :: !(Maybe (Textual Double))
     , _weEntityId    :: !(Maybe Text)
     , _weDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebEntity' with the minimum fields required to make a request.
 --
@@ -5225,11 +5449,9 @@ data WebEntity = WebEntity'
 webEntity
     :: WebEntity
 webEntity =
-    WebEntity'
-    { _weScore = Nothing
-    , _weEntityId = Nothing
-    , _weDescription = Nothing
-    }
+  WebEntity'
+    {_weScore = Nothing, _weEntityId = Nothing, _weDescription = Nothing}
+
 
 -- | Overall relevancy score for the entity. Not normalized and not
 -- comparable across different image queries.
@@ -5268,9 +5490,12 @@ instance ToJSON WebEntity where
 -- | Response to a batch image annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1BatchAnnotateImagesResponse' smart constructor.
-newtype GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse = GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse'
+newtype GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse =
+  GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse'
     { _gcvvbairResponses :: Maybe [GoogleCloudVisionV1p2beta1AnnotateImageResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse' with the minimum fields required to make a request.
 --
@@ -5280,9 +5505,9 @@ newtype GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse = GoogleCloudVisio
 googleCloudVisionV1p2beta1BatchAnnotateImagesResponse
     :: GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
 googleCloudVisionV1p2beta1BatchAnnotateImagesResponse =
-    GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse'
-    { _gcvvbairResponses = Nothing
-    }
+  GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse'
+    {_gcvvbairResponses = Nothing}
+
 
 -- | Individual responses to image annotation requests within the batch.
 gcvvbairResponses :: Lens' GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse [GoogleCloudVisionV1p2beta1AnnotateImageResponse]
@@ -5293,7 +5518,7 @@ gcvvbairResponses
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
+           GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
          where
         parseJSON
           = withObject
@@ -5303,7 +5528,7 @@ instance FromJSON
                    <$> (o .:? "responses" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
+           GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
          where
         toJSON
           GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse'{..}
@@ -5313,9 +5538,12 @@ instance ToJSON
 -- | The Google Cloud Storage location where the input will be read from.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1GcsSource' smart constructor.
-newtype GoogleCloudVisionV1p1beta1GcsSource = GoogleCloudVisionV1p1beta1GcsSource'
+newtype GoogleCloudVisionV1p1beta1GcsSource =
+  GoogleCloudVisionV1p1beta1GcsSource'
     { _gcvvgsURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1GcsSource' with the minimum fields required to make a request.
 --
@@ -5325,9 +5553,8 @@ newtype GoogleCloudVisionV1p1beta1GcsSource = GoogleCloudVisionV1p1beta1GcsSourc
 googleCloudVisionV1p1beta1GcsSource
     :: GoogleCloudVisionV1p1beta1GcsSource
 googleCloudVisionV1p1beta1GcsSource =
-    GoogleCloudVisionV1p1beta1GcsSource'
-    { _gcvvgsURI = Nothing
-    }
+  GoogleCloudVisionV1p1beta1GcsSource' {_gcvvgsURI = Nothing}
+
 
 -- | Google Cloud Storage URI for the input file. This must only be a Google
 -- Cloud Storage object. Wildcards are not currently supported.
@@ -5352,9 +5579,12 @@ instance ToJSON GoogleCloudVisionV1p1beta1GcsSource
 -- images.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1CropHintsAnnotation' smart constructor.
-newtype GoogleCloudVisionV1p2beta1CropHintsAnnotation = GoogleCloudVisionV1p2beta1CropHintsAnnotation'
+newtype GoogleCloudVisionV1p2beta1CropHintsAnnotation =
+  GoogleCloudVisionV1p2beta1CropHintsAnnotation'
     { _gCropHints :: Maybe [GoogleCloudVisionV1p2beta1CropHint]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1CropHintsAnnotation' with the minimum fields required to make a request.
 --
@@ -5364,9 +5594,8 @@ newtype GoogleCloudVisionV1p2beta1CropHintsAnnotation = GoogleCloudVisionV1p2bet
 googleCloudVisionV1p2beta1CropHintsAnnotation
     :: GoogleCloudVisionV1p2beta1CropHintsAnnotation
 googleCloudVisionV1p2beta1CropHintsAnnotation =
-    GoogleCloudVisionV1p2beta1CropHintsAnnotation'
-    { _gCropHints = Nothing
-    }
+  GoogleCloudVisionV1p2beta1CropHintsAnnotation' {_gCropHints = Nothing}
+
 
 -- | Crop hint results.
 gCropHints :: Lens' GoogleCloudVisionV1p2beta1CropHintsAnnotation [GoogleCloudVisionV1p2beta1CropHint]
@@ -5376,7 +5605,8 @@ gCropHints
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1CropHintsAnnotation where
+           GoogleCloudVisionV1p2beta1CropHintsAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1CropHintsAnnotation"
@@ -5385,7 +5615,8 @@ instance FromJSON
                    (o .:? "cropHints" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1CropHintsAnnotation where
+           GoogleCloudVisionV1p2beta1CropHintsAnnotation
+         where
         toJSON
           GoogleCloudVisionV1p2beta1CropHintsAnnotation'{..}
           = object
@@ -5394,9 +5625,12 @@ instance ToJSON
 -- | The Google Cloud Storage location where the output will be written to.
 --
 -- /See:/ 'gcsDestination' smart constructor.
-newtype GcsDestination = GcsDestination'
+newtype GcsDestination =
+  GcsDestination'
     { _gdURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GcsDestination' with the minimum fields required to make a request.
 --
@@ -5405,10 +5639,8 @@ newtype GcsDestination = GcsDestination'
 -- * 'gdURI'
 gcsDestination
     :: GcsDestination
-gcsDestination =
-    GcsDestination'
-    { _gdURI = Nothing
-    }
+gcsDestination = GcsDestination' {_gdURI = Nothing}
+
 
 -- | Google Cloud Storage URI where the results will be stored. Results will
 -- be in JSON format and preceded by its corresponding input URI. This
@@ -5436,10 +5668,13 @@ instance ToJSON GcsDestination where
 -- | A bounding polygon for the detected image annotation.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1BoundingPoly' smart constructor.
-data GoogleCloudVisionV1p3beta1BoundingPoly = GoogleCloudVisionV1p3beta1BoundingPoly'
+data GoogleCloudVisionV1p3beta1BoundingPoly =
+  GoogleCloudVisionV1p3beta1BoundingPoly'
     { _gcvvbpNormalizedVertices :: !(Maybe [GoogleCloudVisionV1p3beta1NormalizedVertex])
     , _gcvvbpVertices           :: !(Maybe [GoogleCloudVisionV1p3beta1Vertex])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1BoundingPoly' with the minimum fields required to make a request.
 --
@@ -5451,10 +5686,9 @@ data GoogleCloudVisionV1p3beta1BoundingPoly = GoogleCloudVisionV1p3beta1Bounding
 googleCloudVisionV1p3beta1BoundingPoly
     :: GoogleCloudVisionV1p3beta1BoundingPoly
 googleCloudVisionV1p3beta1BoundingPoly =
-    GoogleCloudVisionV1p3beta1BoundingPoly'
-    { _gcvvbpNormalizedVertices = Nothing
-    , _gcvvbpVertices = Nothing
-    }
+  GoogleCloudVisionV1p3beta1BoundingPoly'
+    {_gcvvbpNormalizedVertices = Nothing, _gcvvbpVertices = Nothing}
+
 
 -- | The bounding polygon normalized vertices.
 gcvvbpNormalizedVertices :: Lens' GoogleCloudVisionV1p3beta1BoundingPoly [GoogleCloudVisionV1p3beta1NormalizedVertex]
@@ -5473,7 +5707,8 @@ gcvvbpVertices
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1BoundingPoly where
+           GoogleCloudVisionV1p3beta1BoundingPoly
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p3beta1BoundingPoly"
               (\ o ->
@@ -5482,7 +5717,8 @@ instance FromJSON
                      (o .:? "vertices" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1BoundingPoly where
+           GoogleCloudVisionV1p3beta1BoundingPoly
+         where
         toJSON GoogleCloudVisionV1p3beta1BoundingPoly'{..}
           = object
               (catMaybes
@@ -5494,10 +5730,13 @@ instance ToJSON
 -- coordinates are relative to the original image and range from 0 to 1.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1NormalizedVertex' smart constructor.
-data GoogleCloudVisionV1p2beta1NormalizedVertex = GoogleCloudVisionV1p2beta1NormalizedVertex'
+data GoogleCloudVisionV1p2beta1NormalizedVertex =
+  GoogleCloudVisionV1p2beta1NormalizedVertex'
     { _gX :: !(Maybe (Textual Double))
     , _gY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1NormalizedVertex' with the minimum fields required to make a request.
 --
@@ -5509,10 +5748,8 @@ data GoogleCloudVisionV1p2beta1NormalizedVertex = GoogleCloudVisionV1p2beta1Norm
 googleCloudVisionV1p2beta1NormalizedVertex
     :: GoogleCloudVisionV1p2beta1NormalizedVertex
 googleCloudVisionV1p2beta1NormalizedVertex =
-    GoogleCloudVisionV1p2beta1NormalizedVertex'
-    { _gX = Nothing
-    , _gY = Nothing
-    }
+  GoogleCloudVisionV1p2beta1NormalizedVertex' {_gX = Nothing, _gY = Nothing}
+
 
 -- | X coordinate.
 gX :: Lens' GoogleCloudVisionV1p2beta1NormalizedVertex (Maybe Double)
@@ -5523,7 +5760,8 @@ gY :: Lens' GoogleCloudVisionV1p2beta1NormalizedVertex (Maybe Double)
 gY = lens _gY (\ s a -> s{_gY = a}) . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1NormalizedVertex where
+           GoogleCloudVisionV1p2beta1NormalizedVertex
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1NormalizedVertex"
@@ -5532,7 +5770,8 @@ instance FromJSON
                    (o .:? "x") <*> (o .:? "y"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1NormalizedVertex where
+           GoogleCloudVisionV1p2beta1NormalizedVertex
+         where
         toJSON
           GoogleCloudVisionV1p2beta1NormalizedVertex'{..}
           = object
@@ -5543,11 +5782,14 @@ instance ToJSON
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Position' smart constructor.
-data GoogleCloudVisionV1p2beta1Position = GoogleCloudVisionV1p2beta1Position'
+data GoogleCloudVisionV1p2beta1Position =
+  GoogleCloudVisionV1p2beta1Position'
     { _gooZ :: !(Maybe (Textual Double))
     , _gooX :: !(Maybe (Textual Double))
     , _gooY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Position' with the minimum fields required to make a request.
 --
@@ -5561,11 +5803,9 @@ data GoogleCloudVisionV1p2beta1Position = GoogleCloudVisionV1p2beta1Position'
 googleCloudVisionV1p2beta1Position
     :: GoogleCloudVisionV1p2beta1Position
 googleCloudVisionV1p2beta1Position =
-    GoogleCloudVisionV1p2beta1Position'
-    { _gooZ = Nothing
-    , _gooX = Nothing
-    , _gooY = Nothing
-    }
+  GoogleCloudVisionV1p2beta1Position'
+    {_gooZ = Nothing, _gooX = Nothing, _gooY = Nothing}
+
 
 -- | Z coordinate (or depth).
 gooZ :: Lens' GoogleCloudVisionV1p2beta1Position (Maybe Double)
@@ -5604,10 +5844,13 @@ instance ToJSON GoogleCloudVisionV1p2beta1Position
 -- | Additional information detected on the structural component.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1TextAnnotationTextProperty' smart constructor.
-data GoogleCloudVisionV1p3beta1TextAnnotationTextProperty = GoogleCloudVisionV1p3beta1TextAnnotationTextProperty'
+data GoogleCloudVisionV1p3beta1TextAnnotationTextProperty =
+  GoogleCloudVisionV1p3beta1TextAnnotationTextProperty'
     { _gcvvtatpDetectedLanguages :: !(Maybe [GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage])
     , _gcvvtatpDetectedBreak     :: !(Maybe GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1TextAnnotationTextProperty' with the minimum fields required to make a request.
 --
@@ -5619,10 +5862,9 @@ data GoogleCloudVisionV1p3beta1TextAnnotationTextProperty = GoogleCloudVisionV1p
 googleCloudVisionV1p3beta1TextAnnotationTextProperty
     :: GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
 googleCloudVisionV1p3beta1TextAnnotationTextProperty =
-    GoogleCloudVisionV1p3beta1TextAnnotationTextProperty'
-    { _gcvvtatpDetectedLanguages = Nothing
-    , _gcvvtatpDetectedBreak = Nothing
-    }
+  GoogleCloudVisionV1p3beta1TextAnnotationTextProperty'
+    {_gcvvtatpDetectedLanguages = Nothing, _gcvvtatpDetectedBreak = Nothing}
+
 
 -- | A list of detected languages together with confidence.
 gcvvtatpDetectedLanguages :: Lens' GoogleCloudVisionV1p3beta1TextAnnotationTextProperty [GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage]
@@ -5639,7 +5881,7 @@ gcvvtatpDetectedBreak
       (\ s a -> s{_gcvvtatpDetectedBreak = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
+           GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
          where
         parseJSON
           = withObject
@@ -5651,7 +5893,7 @@ instance FromJSON
                      (o .:? "detectedBreak"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
+           GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
          where
         toJSON
           GoogleCloudVisionV1p3beta1TextAnnotationTextProperty'{..}
@@ -5664,9 +5906,12 @@ instance ToJSON
 -- | Detected entity location information.
 --
 -- /See:/ 'locationInfo' smart constructor.
-newtype LocationInfo = LocationInfo'
+newtype LocationInfo =
+  LocationInfo'
     { _liLatLng :: Maybe LatLng
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationInfo' with the minimum fields required to make a request.
 --
@@ -5675,10 +5920,8 @@ newtype LocationInfo = LocationInfo'
 -- * 'liLatLng'
 locationInfo
     :: LocationInfo
-locationInfo =
-    LocationInfo'
-    { _liLatLng = Nothing
-    }
+locationInfo = LocationInfo' {_liLatLng = Nothing}
+
 
 -- | lat\/long location coordinates.
 liLatLng :: Lens' LocationInfo (Maybe LatLng)
@@ -5695,9 +5938,12 @@ instance ToJSON LocationInfo where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -5708,9 +5954,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -5729,13 +5974,16 @@ instance ToJSON StatusDetailsItem where
 -- | Detected page from OCR.
 --
 -- /See:/ 'page' smart constructor.
-data Page = Page'
+data Page =
+  Page'
     { _pProperty   :: !(Maybe TextProperty)
     , _pHeight     :: !(Maybe (Textual Int32))
     , _pBlocks     :: !(Maybe [Block])
     , _pWidth      :: !(Maybe (Textual Int32))
     , _pConfidence :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
@@ -5753,13 +6001,14 @@ data Page = Page'
 page
     :: Page
 page =
-    Page'
+  Page'
     { _pProperty = Nothing
     , _pHeight = Nothing
     , _pBlocks = Nothing
     , _pWidth = Nothing
     , _pConfidence = Nothing
     }
+
 
 -- | Additional information detected on the page.
 pProperty :: Lens' Page (Maybe TextProperty)
@@ -5815,11 +6064,14 @@ instance ToJSON Page where
 -- the image that the color occupies in the image.
 --
 -- /See:/ 'colorInfo' smart constructor.
-data ColorInfo = ColorInfo'
+data ColorInfo =
+  ColorInfo'
     { _ciColor         :: !(Maybe Color)
     , _ciScore         :: !(Maybe (Textual Double))
     , _ciPixelFraction :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ColorInfo' with the minimum fields required to make a request.
 --
@@ -5833,11 +6085,9 @@ data ColorInfo = ColorInfo'
 colorInfo
     :: ColorInfo
 colorInfo =
-    ColorInfo'
-    { _ciColor = Nothing
-    , _ciScore = Nothing
-    , _ciPixelFraction = Nothing
-    }
+  ColorInfo'
+    {_ciColor = Nothing, _ciScore = Nothing, _ciPixelFraction = Nothing}
+
 
 -- | RGB components of the color.
 ciColor :: Lens' ColorInfo (Maybe Color)
@@ -5876,11 +6126,14 @@ instance ToJSON ColorInfo where
 -- | Contains metadata for the BatchAnnotateImages operation.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1OperationMetadata' smart constructor.
-data GoogleCloudVisionV1p3beta1OperationMetadata = GoogleCloudVisionV1p3beta1OperationMetadata'
+data GoogleCloudVisionV1p3beta1OperationMetadata =
+  GoogleCloudVisionV1p3beta1OperationMetadata'
     { _gState      :: !(Maybe GoogleCloudVisionV1p3beta1OperationMetadataState)
     , _gUpdateTime :: !(Maybe DateTime')
     , _gCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1OperationMetadata' with the minimum fields required to make a request.
 --
@@ -5894,11 +6147,9 @@ data GoogleCloudVisionV1p3beta1OperationMetadata = GoogleCloudVisionV1p3beta1Ope
 googleCloudVisionV1p3beta1OperationMetadata
     :: GoogleCloudVisionV1p3beta1OperationMetadata
 googleCloudVisionV1p3beta1OperationMetadata =
-    GoogleCloudVisionV1p3beta1OperationMetadata'
-    { _gState = Nothing
-    , _gUpdateTime = Nothing
-    , _gCreateTime = Nothing
-    }
+  GoogleCloudVisionV1p3beta1OperationMetadata'
+    {_gState = Nothing, _gUpdateTime = Nothing, _gCreateTime = Nothing}
+
 
 -- | Current state of the batch operation.
 gState :: Lens' GoogleCloudVisionV1p3beta1OperationMetadata (Maybe GoogleCloudVisionV1p3beta1OperationMetadataState)
@@ -5917,7 +6168,8 @@ gCreateTime
       mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1OperationMetadata where
+           GoogleCloudVisionV1p3beta1OperationMetadata
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1OperationMetadata"
@@ -5927,7 +6179,8 @@ instance FromJSON
                      (o .:? "createTime"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1OperationMetadata where
+           GoogleCloudVisionV1p3beta1OperationMetadata
+         where
         toJSON
           GoogleCloudVisionV1p3beta1OperationMetadata'{..}
           = object
@@ -5941,11 +6194,14 @@ instance ToJSON
 -- objects can be specified in the \`features\` list.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Feature' smart constructor.
-data GoogleCloudVisionV1p2beta1Feature = GoogleCloudVisionV1p2beta1Feature'
+data GoogleCloudVisionV1p2beta1Feature =
+  GoogleCloudVisionV1p2beta1Feature'
     { _gcvvfModel      :: !(Maybe Text)
     , _gcvvfType       :: !(Maybe GoogleCloudVisionV1p2beta1FeatureType)
     , _gcvvfMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Feature' with the minimum fields required to make a request.
 --
@@ -5959,11 +6215,9 @@ data GoogleCloudVisionV1p2beta1Feature = GoogleCloudVisionV1p2beta1Feature'
 googleCloudVisionV1p2beta1Feature
     :: GoogleCloudVisionV1p2beta1Feature
 googleCloudVisionV1p2beta1Feature =
-    GoogleCloudVisionV1p2beta1Feature'
-    { _gcvvfModel = Nothing
-    , _gcvvfType = Nothing
-    , _gcvvfMaxResults = Nothing
-    }
+  GoogleCloudVisionV1p2beta1Feature'
+    {_gcvvfModel = Nothing, _gcvvfType = Nothing, _gcvvfMaxResults = Nothing}
+
 
 -- | Model to use for the feature. Supported values: \"builtin\/stable\" (the
 -- default if unset) and \"builtin\/latest\".
@@ -6005,10 +6259,13 @@ instance ToJSON GoogleCloudVisionV1p2beta1Feature
 -- | Label to provide extra metadata for the web detection.
 --
 -- /See:/ 'webLabel' smart constructor.
-data WebLabel = WebLabel'
+data WebLabel =
+  WebLabel'
     { _wlLanguageCode :: !(Maybe Text)
     , _wlLabel        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebLabel' with the minimum fields required to make a request.
 --
@@ -6019,11 +6276,8 @@ data WebLabel = WebLabel'
 -- * 'wlLabel'
 webLabel
     :: WebLabel
-webLabel =
-    WebLabel'
-    { _wlLanguageCode = Nothing
-    , _wlLabel = Nothing
-    }
+webLabel = WebLabel' {_wlLanguageCode = Nothing, _wlLabel = Nothing}
+
 
 -- | The BCP-47 language code for \`label\`, such as \"en-US\" or
 -- \"sr-Latn\". For more information, see
@@ -6054,10 +6308,13 @@ instance ToJSON WebLabel where
 -- | A product label represented as a key-value pair.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1ProductKeyValue' smart constructor.
-data GoogleCloudVisionV1p1beta1ProductKeyValue = GoogleCloudVisionV1p1beta1ProductKeyValue'
+data GoogleCloudVisionV1p1beta1ProductKeyValue =
+  GoogleCloudVisionV1p1beta1ProductKeyValue'
     { _gooValue :: !(Maybe Text)
     , _gooKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ProductKeyValue' with the minimum fields required to make a request.
 --
@@ -6069,10 +6326,9 @@ data GoogleCloudVisionV1p1beta1ProductKeyValue = GoogleCloudVisionV1p1beta1Produ
 googleCloudVisionV1p1beta1ProductKeyValue
     :: GoogleCloudVisionV1p1beta1ProductKeyValue
 googleCloudVisionV1p1beta1ProductKeyValue =
-    GoogleCloudVisionV1p1beta1ProductKeyValue'
-    { _gooValue = Nothing
-    , _gooKey = Nothing
-    }
+  GoogleCloudVisionV1p1beta1ProductKeyValue'
+    {_gooValue = Nothing, _gooKey = Nothing}
+
 
 -- | The value of the label attached to the product. Cannot be empty and
 -- cannot exceed 128 bytes.
@@ -6085,7 +6341,8 @@ gooKey :: Lens' GoogleCloudVisionV1p1beta1ProductKeyValue (Maybe Text)
 gooKey = lens _gooKey (\ s a -> s{_gooKey = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1ProductKeyValue where
+           GoogleCloudVisionV1p1beta1ProductKeyValue
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1ProductKeyValue"
@@ -6094,7 +6351,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1ProductKeyValue where
+           GoogleCloudVisionV1p1beta1ProductKeyValue
+         where
         toJSON GoogleCloudVisionV1p1beta1ProductKeyValue'{..}
           = object
               (catMaybes
@@ -6104,10 +6362,13 @@ instance ToJSON
 -- information about the source of that image.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1ImageAnnotationContext' smart constructor.
-data GoogleCloudVisionV1p1beta1ImageAnnotationContext = GoogleCloudVisionV1p1beta1ImageAnnotationContext'
+data GoogleCloudVisionV1p1beta1ImageAnnotationContext =
+  GoogleCloudVisionV1p1beta1ImageAnnotationContext'
     { _gURI        :: !(Maybe Text)
     , _gPageNumber :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ImageAnnotationContext' with the minimum fields required to make a request.
 --
@@ -6119,10 +6380,9 @@ data GoogleCloudVisionV1p1beta1ImageAnnotationContext = GoogleCloudVisionV1p1bet
 googleCloudVisionV1p1beta1ImageAnnotationContext
     :: GoogleCloudVisionV1p1beta1ImageAnnotationContext
 googleCloudVisionV1p1beta1ImageAnnotationContext =
-    GoogleCloudVisionV1p1beta1ImageAnnotationContext'
-    { _gURI = Nothing
-    , _gPageNumber = Nothing
-    }
+  GoogleCloudVisionV1p1beta1ImageAnnotationContext'
+    {_gURI = Nothing, _gPageNumber = Nothing}
+
 
 -- | The URI of the file used to produce the image.
 gURI :: Lens' GoogleCloudVisionV1p1beta1ImageAnnotationContext (Maybe Text)
@@ -6136,7 +6396,7 @@ gPageNumber
       mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1ImageAnnotationContext
+           GoogleCloudVisionV1p1beta1ImageAnnotationContext
          where
         parseJSON
           = withObject
@@ -6146,7 +6406,7 @@ instance FromJSON
                    (o .:? "uri") <*> (o .:? "pageNumber"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1ImageAnnotationContext
+           GoogleCloudVisionV1p1beta1ImageAnnotationContext
          where
         toJSON
           GoogleCloudVisionV1p1beta1ImageAnnotationContext'{..}
@@ -6158,12 +6418,15 @@ instance ToJSON
 -- | Structural unit of text representing a number of words in certain order.
 --
 -- /See:/ 'paragraph' smart constructor.
-data Paragraph = Paragraph'
+data Paragraph =
+  Paragraph'
     { _parProperty    :: !(Maybe TextProperty)
     , _parBoundingBox :: !(Maybe BoundingPoly)
     , _parConfidence  :: !(Maybe (Textual Double))
     , _parWords       :: !(Maybe [Word])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Paragraph' with the minimum fields required to make a request.
 --
@@ -6179,12 +6442,13 @@ data Paragraph = Paragraph'
 paragraph
     :: Paragraph
 paragraph =
-    Paragraph'
+  Paragraph'
     { _parProperty = Nothing
     , _parBoundingBox = Nothing
     , _parConfidence = Nothing
     , _parWords = Nothing
     }
+
 
 -- | Additional information detected for the paragraph.
 parProperty :: Lens' Paragraph (Maybe TextProperty)
@@ -6239,12 +6503,15 @@ instance ToJSON Paragraph where
 -- | A single symbol representation.
 --
 -- /See:/ 'symbol' smart constructor.
-data Symbol = Symbol'
+data Symbol =
+  Symbol'
     { _sProperty    :: !(Maybe TextProperty)
     , _sBoundingBox :: !(Maybe BoundingPoly)
     , _sText        :: !(Maybe Text)
     , _sConfidence  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Symbol' with the minimum fields required to make a request.
 --
@@ -6260,12 +6527,13 @@ data Symbol = Symbol'
 symbol
     :: Symbol
 symbol =
-    Symbol'
+  Symbol'
     { _sProperty = Nothing
     , _sBoundingBox = Nothing
     , _sText = Nothing
     , _sConfidence = Nothing
     }
+
 
 -- | Additional information detected for the symbol.
 sProperty :: Lens' Symbol (Maybe TextProperty)
@@ -6315,7 +6583,8 @@ instance ToJSON Symbol where
 -- | Response to an image annotation request.
 --
 -- /See:/ 'annotateImageResponse' smart constructor.
-data AnnotateImageResponse = AnnotateImageResponse'
+data AnnotateImageResponse =
+  AnnotateImageResponse'
     { _airLogoAnnotations            :: !(Maybe [EntityAnnotation])
     , _airProductSearchResults       :: !(Maybe ProductSearchResults)
     , _airContext                    :: !(Maybe ImageAnnotationContext)
@@ -6330,7 +6599,9 @@ data AnnotateImageResponse = AnnotateImageResponse'
     , _airCropHintsAnnotation        :: !(Maybe CropHintsAnnotation)
     , _airFullTextAnnotation         :: !(Maybe TextAnnotation)
     , _airImagePropertiesAnnotation  :: !(Maybe ImageProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnnotateImageResponse' with the minimum fields required to make a request.
 --
@@ -6366,7 +6637,7 @@ data AnnotateImageResponse = AnnotateImageResponse'
 annotateImageResponse
     :: AnnotateImageResponse
 annotateImageResponse =
-    AnnotateImageResponse'
+  AnnotateImageResponse'
     { _airLogoAnnotations = Nothing
     , _airProductSearchResults = Nothing
     , _airContext = Nothing
@@ -6382,6 +6653,7 @@ annotateImageResponse =
     , _airFullTextAnnotation = Nothing
     , _airImagePropertiesAnnotation = Nothing
     }
+
 
 -- | If present, logo detection has completed successfully.
 airLogoAnnotations :: Lens' AnnotateImageResponse [EntityAnnotation]
@@ -6530,10 +6802,13 @@ instance ToJSON AnnotateImageResponse where
 -- | The desired output location and metadata.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1OutputConfig' smart constructor.
-data GoogleCloudVisionV1p3beta1OutputConfig = GoogleCloudVisionV1p3beta1OutputConfig'
+data GoogleCloudVisionV1p3beta1OutputConfig =
+  GoogleCloudVisionV1p3beta1OutputConfig'
     { _gooGcsDestination :: !(Maybe GoogleCloudVisionV1p3beta1GcsDestination)
     , _gooBatchSize      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1OutputConfig' with the minimum fields required to make a request.
 --
@@ -6545,10 +6820,9 @@ data GoogleCloudVisionV1p3beta1OutputConfig = GoogleCloudVisionV1p3beta1OutputCo
 googleCloudVisionV1p3beta1OutputConfig
     :: GoogleCloudVisionV1p3beta1OutputConfig
 googleCloudVisionV1p3beta1OutputConfig =
-    GoogleCloudVisionV1p3beta1OutputConfig'
-    { _gooGcsDestination = Nothing
-    , _gooBatchSize = Nothing
-    }
+  GoogleCloudVisionV1p3beta1OutputConfig'
+    {_gooGcsDestination = Nothing, _gooBatchSize = Nothing}
+
 
 -- | The Google Cloud Storage location to write the output(s) to.
 gooGcsDestination :: Lens' GoogleCloudVisionV1p3beta1OutputConfig (Maybe GoogleCloudVisionV1p3beta1GcsDestination)
@@ -6570,7 +6844,8 @@ gooBatchSize
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1OutputConfig where
+           GoogleCloudVisionV1p3beta1OutputConfig
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p3beta1OutputConfig"
               (\ o ->
@@ -6578,7 +6853,8 @@ instance FromJSON
                    (o .:? "gcsDestination") <*> (o .:? "batchSize"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1OutputConfig where
+           GoogleCloudVisionV1p3beta1OutputConfig
+         where
         toJSON GoogleCloudVisionV1p3beta1OutputConfig'{..}
           = object
               (catMaybes
@@ -6588,9 +6864,12 @@ instance ToJSON
 -- | Stores image properties, such as dominant colors.
 --
 -- /See:/ 'imageProperties' smart constructor.
-newtype ImageProperties = ImageProperties'
+newtype ImageProperties =
+  ImageProperties'
     { _ipDominantColors :: Maybe DominantColorsAnnotation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImageProperties' with the minimum fields required to make a request.
 --
@@ -6599,10 +6878,8 @@ newtype ImageProperties = ImageProperties'
 -- * 'ipDominantColors'
 imageProperties
     :: ImageProperties
-imageProperties =
-    ImageProperties'
-    { _ipDominantColors = Nothing
-    }
+imageProperties = ImageProperties' {_ipDominantColors = Nothing}
+
 
 -- | If present, dominant colors completed successfully.
 ipDominantColors :: Lens' ImageProperties (Maybe DominantColorsAnnotation)
@@ -6625,13 +6902,16 @@ instance ToJSON ImageProperties where
 -- | Set of detected objects with bounding boxes.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1LocalizedObjectAnnotation' smart constructor.
-data GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation = GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation'
+data GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation =
+  GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation'
     { _gooLanguageCode :: !(Maybe Text)
     , _gooScore        :: !(Maybe (Textual Double))
     , _gooBoundingPoly :: !(Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
     , _gooName         :: !(Maybe Text)
     , _gooMid          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation' with the minimum fields required to make a request.
 --
@@ -6649,13 +6929,14 @@ data GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation = GoogleCloudVisionV1p3
 googleCloudVisionV1p3beta1LocalizedObjectAnnotation
     :: GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation
 googleCloudVisionV1p3beta1LocalizedObjectAnnotation =
-    GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation'
+  GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation'
     { _gooLanguageCode = Nothing
     , _gooScore = Nothing
     , _gooBoundingPoly = Nothing
     , _gooName = Nothing
     , _gooMid = Nothing
     }
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -6686,7 +6967,7 @@ gooMid :: Lens' GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation (Maybe Text)
 gooMid = lens _gooMid (\ s a -> s{_gooMid = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation
+           GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation
          where
         parseJSON
           = withObject
@@ -6700,7 +6981,7 @@ instance FromJSON
                      <*> (o .:? "mid"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation
+           GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation
          where
         toJSON
           GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation'{..}
@@ -6714,11 +6995,14 @@ instance ToJSON
 -- | Entity deduced from similar images on the Internet.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1WebDetectionWebEntity' smart constructor.
-data GoogleCloudVisionV1p2beta1WebDetectionWebEntity = GoogleCloudVisionV1p2beta1WebDetectionWebEntity'
+data GoogleCloudVisionV1p2beta1WebDetectionWebEntity =
+  GoogleCloudVisionV1p2beta1WebDetectionWebEntity'
     { _gcvvwdwecScore       :: !(Maybe (Textual Double))
     , _gcvvwdwecEntityId    :: !(Maybe Text)
     , _gcvvwdwecDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionWebEntity' with the minimum fields required to make a request.
 --
@@ -6732,11 +7016,12 @@ data GoogleCloudVisionV1p2beta1WebDetectionWebEntity = GoogleCloudVisionV1p2beta
 googleCloudVisionV1p2beta1WebDetectionWebEntity
     :: GoogleCloudVisionV1p2beta1WebDetectionWebEntity
 googleCloudVisionV1p2beta1WebDetectionWebEntity =
-    GoogleCloudVisionV1p2beta1WebDetectionWebEntity'
+  GoogleCloudVisionV1p2beta1WebDetectionWebEntity'
     { _gcvvwdwecScore = Nothing
     , _gcvvwdwecEntityId = Nothing
     , _gcvvwdwecDescription = Nothing
     }
+
 
 -- | Overall relevancy score for the entity. Not normalized and not
 -- comparable across different image queries.
@@ -6759,7 +7044,8 @@ gcvvwdwecDescription
       (\ s a -> s{_gcvvwdwecDescription = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1WebDetectionWebEntity where
+           GoogleCloudVisionV1p2beta1WebDetectionWebEntity
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1WebDetectionWebEntity"
@@ -6769,7 +7055,8 @@ instance FromJSON
                      (o .:? "description"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1WebDetectionWebEntity where
+           GoogleCloudVisionV1p2beta1WebDetectionWebEntity
+         where
         toJSON
           GoogleCloudVisionV1p2beta1WebDetectionWebEntity'{..}
           = object
@@ -6781,9 +7068,12 @@ instance ToJSON
 -- | Response to an async batch file annotation request.
 --
 -- /See:/ 'asyncBatchAnnotateFilesResponse' smart constructor.
-newtype AsyncBatchAnnotateFilesResponse = AsyncBatchAnnotateFilesResponse'
+newtype AsyncBatchAnnotateFilesResponse =
+  AsyncBatchAnnotateFilesResponse'
     { _abafrResponses :: Maybe [AsyncAnnotateFileResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AsyncBatchAnnotateFilesResponse' with the minimum fields required to make a request.
 --
@@ -6793,9 +7083,8 @@ newtype AsyncBatchAnnotateFilesResponse = AsyncBatchAnnotateFilesResponse'
 asyncBatchAnnotateFilesResponse
     :: AsyncBatchAnnotateFilesResponse
 asyncBatchAnnotateFilesResponse =
-    AsyncBatchAnnotateFilesResponse'
-    { _abafrResponses = Nothing
-    }
+  AsyncBatchAnnotateFilesResponse' {_abafrResponses = Nothing}
+
 
 -- | The list of file annotation responses, one for each request in
 -- AsyncBatchAnnotateFilesRequest.
@@ -6823,11 +7112,14 @@ instance ToJSON AsyncBatchAnnotateFilesResponse where
 -- image.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1CropHint' smart constructor.
-data GoogleCloudVisionV1p3beta1CropHint = GoogleCloudVisionV1p3beta1CropHint'
+data GoogleCloudVisionV1p3beta1CropHint =
+  GoogleCloudVisionV1p3beta1CropHint'
     { _goooBoundingPoly       :: !(Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
     , _goooConfidence         :: !(Maybe (Textual Double))
     , _goooImportanceFraction :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1CropHint' with the minimum fields required to make a request.
 --
@@ -6841,15 +7133,15 @@ data GoogleCloudVisionV1p3beta1CropHint = GoogleCloudVisionV1p3beta1CropHint'
 googleCloudVisionV1p3beta1CropHint
     :: GoogleCloudVisionV1p3beta1CropHint
 googleCloudVisionV1p3beta1CropHint =
-    GoogleCloudVisionV1p3beta1CropHint'
+  GoogleCloudVisionV1p3beta1CropHint'
     { _goooBoundingPoly = Nothing
     , _goooConfidence = Nothing
     , _goooImportanceFraction = Nothing
     }
 
+
 -- | The bounding polygon for the crop region. The coordinates of the
--- bounding box are in the original image\'s scale, as returned in
--- \`ImageParams\`.
+-- bounding box are in the original image\'s scale.
 goooBoundingPoly :: Lens' GoogleCloudVisionV1p3beta1CropHint (Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
 goooBoundingPoly
   = lens _goooBoundingPoly
@@ -6892,7 +7184,8 @@ instance ToJSON GoogleCloudVisionV1p3beta1CropHint
 -- | A face annotation object contains the results of face detection.
 --
 -- /See:/ 'faceAnnotation' smart constructor.
-data FaceAnnotation = FaceAnnotation'
+data FaceAnnotation =
+  FaceAnnotation'
     { _faTiltAngle              :: !(Maybe (Textual Double))
     , _faBlurredLikelihood      :: !(Maybe FaceAnnotationBlurredLikelihood)
     , _faBoundingPoly           :: !(Maybe BoundingPoly)
@@ -6908,7 +7201,9 @@ data FaceAnnotation = FaceAnnotation'
     , _faSorrowLikelihood       :: !(Maybe FaceAnnotationSorrowLikelihood)
     , _faJoyLikelihood          :: !(Maybe FaceAnnotationJoyLikelihood)
     , _faLandmarks              :: !(Maybe [Landmark])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FaceAnnotation' with the minimum fields required to make a request.
 --
@@ -6946,7 +7241,7 @@ data FaceAnnotation = FaceAnnotation'
 faceAnnotation
     :: FaceAnnotation
 faceAnnotation =
-    FaceAnnotation'
+  FaceAnnotation'
     { _faTiltAngle = Nothing
     , _faBlurredLikelihood = Nothing
     , _faBoundingPoly = Nothing
@@ -6964,6 +7259,7 @@ faceAnnotation =
     , _faLandmarks = Nothing
     }
 
+
 -- | Pitch angle, which indicates the upwards\/downwards angle that the face
 -- is pointing relative to the image\'s horizontal plane. Range [-180,180].
 faTiltAngle :: Lens' FaceAnnotation (Maybe Double)
@@ -6978,12 +7274,11 @@ faBlurredLikelihood
       (\ s a -> s{_faBlurredLikelihood = a})
 
 -- | The bounding polygon around the face. The coordinates of the bounding
--- box are in the original image\'s scale, as returned in \`ImageParams\`.
--- The bounding box is computed to \"frame\" the face in accordance with
--- human expectations. It is based on the landmarker results. Note that one
--- or more x and\/or y coordinates may not be generated in the
--- \`BoundingPoly\` (the polygon will be unbounded) if only a partial face
--- appears in the image to be annotated.
+-- box are in the original image\'s scale. The bounding box is computed to
+-- \"frame\" the face in accordance with human expectations. It is based on
+-- the landmarker results. Note that one or more x and\/or y coordinates
+-- may not be generated in the \`BoundingPoly\` (the polygon will be
+-- unbounded) if only a partial face appears in the image to be annotated.
 faBoundingPoly :: Lens' FaceAnnotation (Maybe BoundingPoly)
 faBoundingPoly
   = lens _faBoundingPoly
@@ -7119,11 +7414,14 @@ instance ToJSON FaceAnnotation where
 -- | A \`Property\` consists of a user-supplied name\/value pair.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1Property' smart constructor.
-data GoogleCloudVisionV1p1beta1Property = GoogleCloudVisionV1p1beta1Property'
+data GoogleCloudVisionV1p1beta1Property =
+  GoogleCloudVisionV1p1beta1Property'
     { _gcvvpcUint64Value :: !(Maybe (Textual Word64))
     , _gcvvpcValue       :: !(Maybe Text)
     , _gcvvpcName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Property' with the minimum fields required to make a request.
 --
@@ -7137,11 +7435,12 @@ data GoogleCloudVisionV1p1beta1Property = GoogleCloudVisionV1p1beta1Property'
 googleCloudVisionV1p1beta1Property
     :: GoogleCloudVisionV1p1beta1Property
 googleCloudVisionV1p1beta1Property =
-    GoogleCloudVisionV1p1beta1Property'
+  GoogleCloudVisionV1p1beta1Property'
     { _gcvvpcUint64Value = Nothing
     , _gcvvpcValue = Nothing
     , _gcvvpcName = Nothing
     }
+
 
 -- | Value of numeric properties.
 gcvvpcUint64Value :: Lens' GoogleCloudVisionV1p1beta1Property (Maybe Word64)
@@ -7181,11 +7480,14 @@ instance ToJSON GoogleCloudVisionV1p1beta1Property
 -- | Results for a product search request.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1ProductSearchResults' smart constructor.
-data GoogleCloudVisionV1p1beta1ProductSearchResults = GoogleCloudVisionV1p1beta1ProductSearchResults'
+data GoogleCloudVisionV1p1beta1ProductSearchResults =
+  GoogleCloudVisionV1p1beta1ProductSearchResults'
     { _gProductGroupedResults :: !(Maybe [GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult])
     , _gResults               :: !(Maybe [GoogleCloudVisionV1p1beta1ProductSearchResultsResult])
     , _gIndexTime             :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ProductSearchResults' with the minimum fields required to make a request.
 --
@@ -7199,11 +7501,12 @@ data GoogleCloudVisionV1p1beta1ProductSearchResults = GoogleCloudVisionV1p1beta1
 googleCloudVisionV1p1beta1ProductSearchResults
     :: GoogleCloudVisionV1p1beta1ProductSearchResults
 googleCloudVisionV1p1beta1ProductSearchResults =
-    GoogleCloudVisionV1p1beta1ProductSearchResults'
+  GoogleCloudVisionV1p1beta1ProductSearchResults'
     { _gProductGroupedResults = Nothing
     , _gResults = Nothing
     , _gIndexTime = Nothing
     }
+
 
 -- | List of results grouped by products detected in the query image. Each
 -- entry corresponds to one bounding polygon in the query image, and
@@ -7231,7 +7534,8 @@ gIndexTime
       mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1ProductSearchResults where
+           GoogleCloudVisionV1p1beta1ProductSearchResults
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1ProductSearchResults"
@@ -7242,7 +7546,8 @@ instance FromJSON
                      <*> (o .:? "indexTime"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1ProductSearchResults where
+           GoogleCloudVisionV1p1beta1ProductSearchResults
+         where
         toJSON
           GoogleCloudVisionV1p1beta1ProductSearchResults'{..}
           = object
@@ -7255,10 +7560,13 @@ instance ToJSON
 -- | Rectangle determined by min and max \`LatLng\` pairs.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1LatLongRect' smart constructor.
-data GoogleCloudVisionV1p2beta1LatLongRect = GoogleCloudVisionV1p2beta1LatLongRect'
+data GoogleCloudVisionV1p2beta1LatLongRect =
+  GoogleCloudVisionV1p2beta1LatLongRect'
     { _gcvvllrMaxLatLng :: !(Maybe LatLng)
     , _gcvvllrMinLatLng :: !(Maybe LatLng)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1LatLongRect' with the minimum fields required to make a request.
 --
@@ -7270,10 +7578,9 @@ data GoogleCloudVisionV1p2beta1LatLongRect = GoogleCloudVisionV1p2beta1LatLongRe
 googleCloudVisionV1p2beta1LatLongRect
     :: GoogleCloudVisionV1p2beta1LatLongRect
 googleCloudVisionV1p2beta1LatLongRect =
-    GoogleCloudVisionV1p2beta1LatLongRect'
-    { _gcvvllrMaxLatLng = Nothing
-    , _gcvvllrMinLatLng = Nothing
-    }
+  GoogleCloudVisionV1p2beta1LatLongRect'
+    {_gcvvllrMaxLatLng = Nothing, _gcvvllrMinLatLng = Nothing}
+
 
 -- | Max lat\/long pair.
 gcvvllrMaxLatLng :: Lens' GoogleCloudVisionV1p2beta1LatLongRect (Maybe LatLng)
@@ -7288,7 +7595,8 @@ gcvvllrMinLatLng
       (\ s a -> s{_gcvvllrMinLatLng = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1LatLongRect where
+           GoogleCloudVisionV1p2beta1LatLongRect
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p2beta1LatLongRect"
               (\ o ->
@@ -7306,10 +7614,13 @@ instance ToJSON GoogleCloudVisionV1p2beta1LatLongRect
 -- | Detected start or end of a structural component.
 --
 -- /See:/ 'detectedBreak' smart constructor.
-data DetectedBreak = DetectedBreak'
+data DetectedBreak =
+  DetectedBreak'
     { _dbIsPrefix :: !(Maybe Bool)
     , _dbType     :: !(Maybe DetectedBreakType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DetectedBreak' with the minimum fields required to make a request.
 --
@@ -7320,11 +7631,8 @@ data DetectedBreak = DetectedBreak'
 -- * 'dbType'
 detectedBreak
     :: DetectedBreak
-detectedBreak =
-    DetectedBreak'
-    { _dbIsPrefix = Nothing
-    , _dbType = Nothing
-    }
+detectedBreak = DetectedBreak' {_dbIsPrefix = Nothing, _dbType = Nothing}
+
 
 -- | True if break prepends the element.
 dbIsPrefix :: Lens' DetectedBreak (Maybe Bool)
@@ -7352,11 +7660,14 @@ instance ToJSON DetectedBreak where
 -- | Information about a product.
 --
 -- /See:/ 'result' smart constructor.
-data Result = Result'
+data Result =
+  Result'
     { _rImage   :: !(Maybe Text)
     , _rScore   :: !(Maybe (Textual Double))
     , _rProduct :: !(Maybe Product)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Result' with the minimum fields required to make a request.
 --
@@ -7369,12 +7680,8 @@ data Result = Result'
 -- * 'rProduct'
 result
     :: Result
-result =
-    Result'
-    { _rImage = Nothing
-    , _rScore = Nothing
-    , _rProduct = Nothing
-    }
+result = Result' {_rImage = Nothing, _rScore = Nothing, _rProduct = Nothing}
+
 
 -- | The resource name of the image from the product that is the closest
 -- match to the query.
@@ -7411,10 +7718,13 @@ instance ToJSON Result where
 -- image.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1ProductSearchResultsGroupedResult' smart constructor.
-data GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult = GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult'
+data GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult =
+  GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult'
     { _gcvvpsrgrResults      :: !(Maybe [GoogleCloudVisionV1p1beta1ProductSearchResultsResult])
     , _gcvvpsrgrBoundingPoly :: !(Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult' with the minimum fields required to make a request.
 --
@@ -7426,10 +7736,9 @@ data GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult = GoogleCloudVi
 googleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
     :: GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
 googleCloudVisionV1p1beta1ProductSearchResultsGroupedResult =
-    GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult'
-    { _gcvvpsrgrResults = Nothing
-    , _gcvvpsrgrBoundingPoly = Nothing
-    }
+  GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult'
+    {_gcvvpsrgrResults = Nothing, _gcvvpsrgrBoundingPoly = Nothing}
+
 
 -- | List of results, one for each product match.
 gcvvpsrgrResults :: Lens' GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult [GoogleCloudVisionV1p1beta1ProductSearchResultsResult]
@@ -7446,7 +7755,7 @@ gcvvpsrgrBoundingPoly
       (\ s a -> s{_gcvvpsrgrBoundingPoly = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
+           GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
          where
         parseJSON
           = withObject
@@ -7458,7 +7767,7 @@ instance FromJSON
                      (o .:? "boundingPoly"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
+           GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
          where
         toJSON
           GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult'{..}
@@ -7472,13 +7781,16 @@ instance ToJSON
 -- violence).
 --
 -- /See:/ 'googleCloudVisionV1p1beta1SafeSearchAnnotation' smart constructor.
-data GoogleCloudVisionV1p1beta1SafeSearchAnnotation = GoogleCloudVisionV1p1beta1SafeSearchAnnotation'
+data GoogleCloudVisionV1p1beta1SafeSearchAnnotation =
+  GoogleCloudVisionV1p1beta1SafeSearchAnnotation'
     { _gSpoof    :: !(Maybe GoogleCloudVisionV1p1beta1SafeSearchAnnotationSpoof)
     , _gRacy     :: !(Maybe GoogleCloudVisionV1p1beta1SafeSearchAnnotationRacy)
     , _gAdult    :: !(Maybe GoogleCloudVisionV1p1beta1SafeSearchAnnotationAdult)
     , _gMedical  :: !(Maybe GoogleCloudVisionV1p1beta1SafeSearchAnnotationMedical)
     , _gViolence :: !(Maybe GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1SafeSearchAnnotation' with the minimum fields required to make a request.
 --
@@ -7496,13 +7808,14 @@ data GoogleCloudVisionV1p1beta1SafeSearchAnnotation = GoogleCloudVisionV1p1beta1
 googleCloudVisionV1p1beta1SafeSearchAnnotation
     :: GoogleCloudVisionV1p1beta1SafeSearchAnnotation
 googleCloudVisionV1p1beta1SafeSearchAnnotation =
-    GoogleCloudVisionV1p1beta1SafeSearchAnnotation'
+  GoogleCloudVisionV1p1beta1SafeSearchAnnotation'
     { _gSpoof = Nothing
     , _gRacy = Nothing
     , _gAdult = Nothing
     , _gMedical = Nothing
     , _gViolence = Nothing
     }
+
 
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
@@ -7532,7 +7845,8 @@ gViolence
   = lens _gViolence (\ s a -> s{_gViolence = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1SafeSearchAnnotation where
+           GoogleCloudVisionV1p1beta1SafeSearchAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1SafeSearchAnnotation"
@@ -7544,7 +7858,8 @@ instance FromJSON
                      <*> (o .:? "violence"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1SafeSearchAnnotation where
+           GoogleCloudVisionV1p1beta1SafeSearchAnnotation
+         where
         toJSON
           GoogleCloudVisionV1p1beta1SafeSearchAnnotation'{..}
           = object
@@ -7557,13 +7872,16 @@ instance ToJSON
 -- | A Product contains ReferenceImages.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Product' smart constructor.
-data GoogleCloudVisionV1p2beta1Product = GoogleCloudVisionV1p2beta1Product'
+data GoogleCloudVisionV1p2beta1Product =
+  GoogleCloudVisionV1p2beta1Product'
     { _ggName            :: !(Maybe Text)
     , _ggDisplayName     :: !(Maybe Text)
     , _ggProductCategory :: !(Maybe Text)
     , _ggProductLabels   :: !(Maybe [GoogleCloudVisionV1p2beta1ProductKeyValue])
     , _ggDescription     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Product' with the minimum fields required to make a request.
 --
@@ -7581,13 +7899,14 @@ data GoogleCloudVisionV1p2beta1Product = GoogleCloudVisionV1p2beta1Product'
 googleCloudVisionV1p2beta1Product
     :: GoogleCloudVisionV1p2beta1Product
 googleCloudVisionV1p2beta1Product =
-    GoogleCloudVisionV1p2beta1Product'
+  GoogleCloudVisionV1p2beta1Product'
     { _ggName = Nothing
     , _ggDisplayName = Nothing
     , _ggProductCategory = Nothing
     , _ggProductLabels = Nothing
     , _ggDescription = Nothing
     }
+
 
 -- | The resource name of the product. Format is:
 -- \`projects\/PROJECT_ID\/locations\/LOC_ID\/products\/PRODUCT_ID\`. This
@@ -7655,13 +7974,16 @@ instance ToJSON GoogleCloudVisionV1p2beta1Product
 -- | Logical element on the page.
 --
 -- /See:/ 'block' smart constructor.
-data Block = Block'
+data Block =
+  Block'
     { _bProperty    :: !(Maybe TextProperty)
     , _bBoundingBox :: !(Maybe BoundingPoly)
     , _bParagraphs  :: !(Maybe [Paragraph])
     , _bConfidence  :: !(Maybe (Textual Double))
     , _bBlockType   :: !(Maybe BlockBlockType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Block' with the minimum fields required to make a request.
 --
@@ -7679,13 +8001,14 @@ data Block = Block'
 block
     :: Block
 block =
-    Block'
+  Block'
     { _bProperty = Nothing
     , _bBoundingBox = Nothing
     , _bParagraphs = Nothing
     , _bConfidence = Nothing
     , _bBlockType = Nothing
     }
+
 
 -- | Additional information detected for the block.
 bProperty :: Lens' Block (Maybe TextProperty)
@@ -7745,12 +8068,15 @@ instance ToJSON Block where
 -- | An offline file annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1AsyncAnnotateFileRequest' smart constructor.
-data GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest = GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest'
+data GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest =
+  GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest'
     { _gInputConfig  :: !(Maybe GoogleCloudVisionV1p2beta1InputConfig)
     , _gFeatures     :: !(Maybe [GoogleCloudVisionV1p2beta1Feature])
     , _gOutputConfig :: !(Maybe GoogleCloudVisionV1p2beta1OutputConfig)
     , _gImageContext :: !(Maybe GoogleCloudVisionV1p2beta1ImageContext)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest' with the minimum fields required to make a request.
 --
@@ -7766,12 +8092,13 @@ data GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest = GoogleCloudVisionV1p2b
 googleCloudVisionV1p2beta1AsyncAnnotateFileRequest
     :: GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
 googleCloudVisionV1p2beta1AsyncAnnotateFileRequest =
-    GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest'
+  GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest'
     { _gInputConfig = Nothing
     , _gFeatures = Nothing
     , _gOutputConfig = Nothing
     , _gImageContext = Nothing
     }
+
 
 -- | Required. Information about the input file.
 gInputConfig :: Lens' GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest (Maybe GoogleCloudVisionV1p2beta1InputConfig)
@@ -7798,7 +8125,7 @@ gImageContext
       (\ s a -> s{_gImageContext = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
+           GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
          where
         parseJSON
           = withObject
@@ -7812,7 +8139,7 @@ instance FromJSON
                      <*> (o .:? "imageContext"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
+           GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
          where
         toJSON
           GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest'{..}
@@ -7826,9 +8153,12 @@ instance ToJSON
 -- | Set of dominant colors and their corresponding scores.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1DominantColorsAnnotation' smart constructor.
-newtype GoogleCloudVisionV1p2beta1DominantColorsAnnotation = GoogleCloudVisionV1p2beta1DominantColorsAnnotation'
+newtype GoogleCloudVisionV1p2beta1DominantColorsAnnotation =
+  GoogleCloudVisionV1p2beta1DominantColorsAnnotation'
     { _gColors :: Maybe [GoogleCloudVisionV1p2beta1ColorInfo]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1DominantColorsAnnotation' with the minimum fields required to make a request.
 --
@@ -7838,9 +8168,8 @@ newtype GoogleCloudVisionV1p2beta1DominantColorsAnnotation = GoogleCloudVisionV1
 googleCloudVisionV1p2beta1DominantColorsAnnotation
     :: GoogleCloudVisionV1p2beta1DominantColorsAnnotation
 googleCloudVisionV1p2beta1DominantColorsAnnotation =
-    GoogleCloudVisionV1p2beta1DominantColorsAnnotation'
-    { _gColors = Nothing
-    }
+  GoogleCloudVisionV1p2beta1DominantColorsAnnotation' {_gColors = Nothing}
+
 
 -- | RGB color values with their score and pixel fraction.
 gColors :: Lens' GoogleCloudVisionV1p2beta1DominantColorsAnnotation [GoogleCloudVisionV1p2beta1ColorInfo]
@@ -7849,7 +8178,7 @@ gColors
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1DominantColorsAnnotation
+           GoogleCloudVisionV1p2beta1DominantColorsAnnotation
          where
         parseJSON
           = withObject
@@ -7859,7 +8188,7 @@ instance FromJSON
                    <$> (o .:? "colors" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1DominantColorsAnnotation
+           GoogleCloudVisionV1p2beta1DominantColorsAnnotation
          where
         toJSON
           GoogleCloudVisionV1p2beta1DominantColorsAnnotation'{..}
@@ -7874,10 +8203,13 @@ instance ToJSON
 -- more detail.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1TextAnnotation' smart constructor.
-data GoogleCloudVisionV1p3beta1TextAnnotation = GoogleCloudVisionV1p3beta1TextAnnotation'
+data GoogleCloudVisionV1p3beta1TextAnnotation =
+  GoogleCloudVisionV1p3beta1TextAnnotation'
     { _gcvvtaText  :: !(Maybe Text)
     , _gcvvtaPages :: !(Maybe [GoogleCloudVisionV1p3beta1Page])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1TextAnnotation' with the minimum fields required to make a request.
 --
@@ -7889,10 +8221,9 @@ data GoogleCloudVisionV1p3beta1TextAnnotation = GoogleCloudVisionV1p3beta1TextAn
 googleCloudVisionV1p3beta1TextAnnotation
     :: GoogleCloudVisionV1p3beta1TextAnnotation
 googleCloudVisionV1p3beta1TextAnnotation =
-    GoogleCloudVisionV1p3beta1TextAnnotation'
-    { _gcvvtaText = Nothing
-    , _gcvvtaPages = Nothing
-    }
+  GoogleCloudVisionV1p3beta1TextAnnotation'
+    {_gcvvtaText = Nothing, _gcvvtaPages = Nothing}
+
 
 -- | UTF-8 text detected on the pages.
 gcvvtaText :: Lens' GoogleCloudVisionV1p3beta1TextAnnotation (Maybe Text)
@@ -7907,7 +8238,8 @@ gcvvtaPages
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1TextAnnotation where
+           GoogleCloudVisionV1p3beta1TextAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1TextAnnotation"
@@ -7916,7 +8248,8 @@ instance FromJSON
                    (o .:? "text") <*> (o .:? "pages" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1TextAnnotation where
+           GoogleCloudVisionV1p3beta1TextAnnotation
+         where
         toJSON GoogleCloudVisionV1p3beta1TextAnnotation'{..}
           = object
               (catMaybes
@@ -7926,9 +8259,12 @@ instance ToJSON
 -- | The response for a single offline file annotation request.
 --
 -- /See:/ 'asyncAnnotateFileResponse' smart constructor.
-newtype AsyncAnnotateFileResponse = AsyncAnnotateFileResponse'
+newtype AsyncAnnotateFileResponse =
+  AsyncAnnotateFileResponse'
     { _aafrOutputConfig :: Maybe OutputConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AsyncAnnotateFileResponse' with the minimum fields required to make a request.
 --
@@ -7938,9 +8274,8 @@ newtype AsyncAnnotateFileResponse = AsyncAnnotateFileResponse'
 asyncAnnotateFileResponse
     :: AsyncAnnotateFileResponse
 asyncAnnotateFileResponse =
-    AsyncAnnotateFileResponse'
-    { _aafrOutputConfig = Nothing
-    }
+  AsyncAnnotateFileResponse' {_aafrOutputConfig = Nothing}
+
 
 -- | The output location and metadata from AsyncAnnotateFileRequest.
 aafrOutputConfig :: Lens' AsyncAnnotateFileResponse (Maybe OutputConfig)
@@ -7964,10 +8299,13 @@ instance ToJSON AsyncAnnotateFileResponse where
 -- | The desired input location and metadata.
 --
 -- /See:/ 'inputConfig' smart constructor.
-data InputConfig = InputConfig'
+data InputConfig =
+  InputConfig'
     { _icGcsSource :: !(Maybe GcsSource)
     , _icMimeType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InputConfig' with the minimum fields required to make a request.
 --
@@ -7978,11 +8316,8 @@ data InputConfig = InputConfig'
 -- * 'icMimeType'
 inputConfig
     :: InputConfig
-inputConfig =
-    InputConfig'
-    { _icGcsSource = Nothing
-    , _icMimeType = Nothing
-    }
+inputConfig = InputConfig' {_icGcsSource = Nothing, _icMimeType = Nothing}
+
 
 -- | The Google Cloud Storage location to read the input from.
 icGcsSource :: Lens' InputConfig (Maybe GcsSource)
@@ -8012,7 +8347,8 @@ instance ToJSON InputConfig where
 -- | Set of detected entity features.
 --
 -- /See:/ 'entityAnnotation' smart constructor.
-data EntityAnnotation = EntityAnnotation'
+data EntityAnnotation =
+  EntityAnnotation'
     { _eaScore        :: !(Maybe (Textual Double))
     , _eaTopicality   :: !(Maybe (Textual Double))
     , _eaLocale       :: !(Maybe Text)
@@ -8022,7 +8358,9 @@ data EntityAnnotation = EntityAnnotation'
     , _eaLocations    :: !(Maybe [LocationInfo])
     , _eaDescription  :: !(Maybe Text)
     , _eaProperties   :: !(Maybe [Property])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntityAnnotation' with the minimum fields required to make a request.
 --
@@ -8048,7 +8386,7 @@ data EntityAnnotation = EntityAnnotation'
 entityAnnotation
     :: EntityAnnotation
 entityAnnotation =
-    EntityAnnotation'
+  EntityAnnotation'
     { _eaScore = Nothing
     , _eaTopicality = Nothing
     , _eaLocale = Nothing
@@ -8059,6 +8397,7 @@ entityAnnotation =
     , _eaDescription = Nothing
     , _eaProperties = Nothing
     }
+
 
 -- | Overall score of the result. Range [0, 1].
 eaScore :: Lens' EntityAnnotation (Maybe Double)
@@ -8159,11 +8498,14 @@ instance ToJSON EntityAnnotation where
 -- metadata, such as bounding boxes.
 --
 -- /See:/ 'referenceImage' smart constructor.
-data ReferenceImage = ReferenceImage'
+data ReferenceImage =
+  ReferenceImage'
     { _riURI           :: !(Maybe Text)
     , _riName          :: !(Maybe Text)
     , _riBoundingPolys :: !(Maybe [BoundingPoly])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReferenceImage' with the minimum fields required to make a request.
 --
@@ -8177,11 +8519,9 @@ data ReferenceImage = ReferenceImage'
 referenceImage
     :: ReferenceImage
 referenceImage =
-    ReferenceImage'
-    { _riURI = Nothing
-    , _riName = Nothing
-    , _riBoundingPolys = Nothing
-    }
+  ReferenceImage'
+    {_riURI = Nothing, _riName = Nothing, _riBoundingPolys = Nothing}
+
 
 -- | The Google Cloud Storage URI of the reference image. The URI must start
 -- with \`gs:\/\/\`. Required.
@@ -8228,11 +8568,14 @@ instance ToJSON ReferenceImage where
 -- service.
 --
 -- /See:/ 'batchOperationMetadata' smart constructor.
-data BatchOperationMetadata = BatchOperationMetadata'
+data BatchOperationMetadata =
+  BatchOperationMetadata'
     { _bomState      :: !(Maybe BatchOperationMetadataState)
     , _bomEndTime    :: !(Maybe DateTime')
     , _bomSubmitTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchOperationMetadata' with the minimum fields required to make a request.
 --
@@ -8246,11 +8589,9 @@ data BatchOperationMetadata = BatchOperationMetadata'
 batchOperationMetadata
     :: BatchOperationMetadata
 batchOperationMetadata =
-    BatchOperationMetadata'
-    { _bomState = Nothing
-    , _bomEndTime = Nothing
-    , _bomSubmitTime = Nothing
-    }
+  BatchOperationMetadata'
+    {_bomState = Nothing, _bomEndTime = Nothing, _bomSubmitTime = Nothing}
+
 
 -- | The current state of the batch operation.
 bomState :: Lens' BatchOperationMetadata (Maybe BatchOperationMetadataState)
@@ -8289,14 +8630,17 @@ instance ToJSON BatchOperationMetadata where
 -- | Relevant information for the image from the Internet.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1WebDetection' smart constructor.
-data GoogleCloudVisionV1p3beta1WebDetection = GoogleCloudVisionV1p3beta1WebDetection'
+data GoogleCloudVisionV1p3beta1WebDetection =
+  GoogleCloudVisionV1p3beta1WebDetection'
     { _gVisuallySimilarImages   :: !(Maybe [GoogleCloudVisionV1p3beta1WebDetectionWebImage])
     , _gBestGuessLabels         :: !(Maybe [GoogleCloudVisionV1p3beta1WebDetectionWebLabel])
     , _gPagesWithMatchingImages :: !(Maybe [GoogleCloudVisionV1p3beta1WebDetectionWebPage])
     , _gPartialMatchingImages   :: !(Maybe [GoogleCloudVisionV1p3beta1WebDetectionWebImage])
     , _gFullMatchingImages      :: !(Maybe [GoogleCloudVisionV1p3beta1WebDetectionWebImage])
     , _gWebEntities             :: !(Maybe [GoogleCloudVisionV1p3beta1WebDetectionWebEntity])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetection' with the minimum fields required to make a request.
 --
@@ -8316,7 +8660,7 @@ data GoogleCloudVisionV1p3beta1WebDetection = GoogleCloudVisionV1p3beta1WebDetec
 googleCloudVisionV1p3beta1WebDetection
     :: GoogleCloudVisionV1p3beta1WebDetection
 googleCloudVisionV1p3beta1WebDetection =
-    GoogleCloudVisionV1p3beta1WebDetection'
+  GoogleCloudVisionV1p3beta1WebDetection'
     { _gVisuallySimilarImages = Nothing
     , _gBestGuessLabels = Nothing
     , _gPagesWithMatchingImages = Nothing
@@ -8324,6 +8668,7 @@ googleCloudVisionV1p3beta1WebDetection =
     , _gFullMatchingImages = Nothing
     , _gWebEntities = Nothing
     }
+
 
 -- | The visually similar image results.
 gVisuallySimilarImages :: Lens' GoogleCloudVisionV1p3beta1WebDetection [GoogleCloudVisionV1p3beta1WebDetectionWebImage]
@@ -8377,7 +8722,8 @@ gWebEntities
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1WebDetection where
+           GoogleCloudVisionV1p3beta1WebDetection
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p3beta1WebDetection"
               (\ o ->
@@ -8390,7 +8736,8 @@ instance FromJSON
                      <*> (o .:? "webEntities" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1WebDetection where
+           GoogleCloudVisionV1p3beta1WebDetection
+         where
         toJSON GoogleCloudVisionV1p3beta1WebDetection'{..}
           = object
               (catMaybes
@@ -8407,10 +8754,13 @@ instance ToJSON
 -- | Detected language for a structural component.
 --
 -- /See:/ 'detectedLanguage' smart constructor.
-data DetectedLanguage = DetectedLanguage'
+data DetectedLanguage =
+  DetectedLanguage'
     { _dlLanguageCode :: !(Maybe Text)
     , _dlConfidence   :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DetectedLanguage' with the minimum fields required to make a request.
 --
@@ -8422,10 +8772,8 @@ data DetectedLanguage = DetectedLanguage'
 detectedLanguage
     :: DetectedLanguage
 detectedLanguage =
-    DetectedLanguage'
-    { _dlLanguageCode = Nothing
-    , _dlConfidence = Nothing
-    }
+  DetectedLanguage' {_dlLanguageCode = Nothing, _dlConfidence = Nothing}
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -8459,10 +8807,13 @@ instance ToJSON DetectedLanguage where
 -- more images, which individually have their own responses.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1AnnotateFileResponse' smart constructor.
-data GoogleCloudVisionV1p3beta1AnnotateFileResponse = GoogleCloudVisionV1p3beta1AnnotateFileResponse'
+data GoogleCloudVisionV1p3beta1AnnotateFileResponse =
+  GoogleCloudVisionV1p3beta1AnnotateFileResponse'
     { _gooResponses   :: !(Maybe [GoogleCloudVisionV1p3beta1AnnotateImageResponse])
     , _gooInputConfig :: !(Maybe GoogleCloudVisionV1p3beta1InputConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1AnnotateFileResponse' with the minimum fields required to make a request.
 --
@@ -8474,10 +8825,9 @@ data GoogleCloudVisionV1p3beta1AnnotateFileResponse = GoogleCloudVisionV1p3beta1
 googleCloudVisionV1p3beta1AnnotateFileResponse
     :: GoogleCloudVisionV1p3beta1AnnotateFileResponse
 googleCloudVisionV1p3beta1AnnotateFileResponse =
-    GoogleCloudVisionV1p3beta1AnnotateFileResponse'
-    { _gooResponses = Nothing
-    , _gooInputConfig = Nothing
-    }
+  GoogleCloudVisionV1p3beta1AnnotateFileResponse'
+    {_gooResponses = Nothing, _gooInputConfig = Nothing}
+
 
 -- | Individual responses to images found within the file.
 gooResponses :: Lens' GoogleCloudVisionV1p3beta1AnnotateFileResponse [GoogleCloudVisionV1p3beta1AnnotateImageResponse]
@@ -8493,7 +8843,8 @@ gooInputConfig
       (\ s a -> s{_gooInputConfig = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1AnnotateFileResponse where
+           GoogleCloudVisionV1p3beta1AnnotateFileResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1AnnotateFileResponse"
@@ -8503,7 +8854,8 @@ instance FromJSON
                      (o .:? "inputConfig"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1AnnotateFileResponse where
+           GoogleCloudVisionV1p3beta1AnnotateFileResponse
+         where
         toJSON
           GoogleCloudVisionV1p3beta1AnnotateFileResponse'{..}
           = object
@@ -8514,11 +8866,14 @@ instance ToJSON
 -- | Information about a product.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ProductSearchResultsResult' smart constructor.
-data GoogleCloudVisionV1p2beta1ProductSearchResultsResult = GoogleCloudVisionV1p2beta1ProductSearchResultsResult'
+data GoogleCloudVisionV1p2beta1ProductSearchResultsResult =
+  GoogleCloudVisionV1p2beta1ProductSearchResultsResult'
     { _gImage   :: !(Maybe Text)
     , _gScore   :: !(Maybe (Textual Double))
     , _gProduct :: !(Maybe GoogleCloudVisionV1p2beta1Product)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductSearchResultsResult' with the minimum fields required to make a request.
 --
@@ -8532,11 +8887,9 @@ data GoogleCloudVisionV1p2beta1ProductSearchResultsResult = GoogleCloudVisionV1p
 googleCloudVisionV1p2beta1ProductSearchResultsResult
     :: GoogleCloudVisionV1p2beta1ProductSearchResultsResult
 googleCloudVisionV1p2beta1ProductSearchResultsResult =
-    GoogleCloudVisionV1p2beta1ProductSearchResultsResult'
-    { _gImage = Nothing
-    , _gScore = Nothing
-    , _gProduct = Nothing
-    }
+  GoogleCloudVisionV1p2beta1ProductSearchResultsResult'
+    {_gImage = Nothing, _gScore = Nothing, _gProduct = Nothing}
+
 
 -- | The resource name of the image from the product that is the closest
 -- match to the query.
@@ -8555,7 +8908,7 @@ gProduct :: Lens' GoogleCloudVisionV1p2beta1ProductSearchResultsResult (Maybe Go
 gProduct = lens _gProduct (\ s a -> s{_gProduct = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1ProductSearchResultsResult
+           GoogleCloudVisionV1p2beta1ProductSearchResultsResult
          where
         parseJSON
           = withObject
@@ -8567,7 +8920,7 @@ instance FromJSON
                      (o .:? "product"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1ProductSearchResultsResult
+           GoogleCloudVisionV1p2beta1ProductSearchResultsResult
          where
         toJSON
           GoogleCloudVisionV1p2beta1ProductSearchResultsResult'{..}
@@ -8579,12 +8932,15 @@ instance ToJSON
 -- | A word representation.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Word' smart constructor.
-data GoogleCloudVisionV1p2beta1Word = GoogleCloudVisionV1p2beta1Word'
+data GoogleCloudVisionV1p2beta1Word =
+  GoogleCloudVisionV1p2beta1Word'
     { _gcvvwcProperty    :: !(Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
     , _gcvvwcBoundingBox :: !(Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
     , _gcvvwcSymbols     :: !(Maybe [GoogleCloudVisionV1p2beta1Symbol])
     , _gcvvwcConfidence  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Word' with the minimum fields required to make a request.
 --
@@ -8600,12 +8956,13 @@ data GoogleCloudVisionV1p2beta1Word = GoogleCloudVisionV1p2beta1Word'
 googleCloudVisionV1p2beta1Word
     :: GoogleCloudVisionV1p2beta1Word
 googleCloudVisionV1p2beta1Word =
-    GoogleCloudVisionV1p2beta1Word'
+  GoogleCloudVisionV1p2beta1Word'
     { _gcvvwcProperty = Nothing
     , _gcvvwcBoundingBox = Nothing
     , _gcvvwcSymbols = Nothing
     , _gcvvwcConfidence = Nothing
     }
+
 
 -- | Additional information detected for the word.
 gcvvwcProperty :: Lens' GoogleCloudVisionV1p2beta1Word (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -8664,12 +9021,15 @@ instance ToJSON GoogleCloudVisionV1p2beta1Word where
 -- | A word representation.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1Word' smart constructor.
-data GoogleCloudVisionV1p1beta1Word = GoogleCloudVisionV1p1beta1Word'
+data GoogleCloudVisionV1p1beta1Word =
+  GoogleCloudVisionV1p1beta1Word'
     { _gcvvw1Property    :: !(Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
     , _gcvvw1BoundingBox :: !(Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
     , _gcvvw1Symbols     :: !(Maybe [GoogleCloudVisionV1p1beta1Symbol])
     , _gcvvw1Confidence  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Word' with the minimum fields required to make a request.
 --
@@ -8685,12 +9045,13 @@ data GoogleCloudVisionV1p1beta1Word = GoogleCloudVisionV1p1beta1Word'
 googleCloudVisionV1p1beta1Word
     :: GoogleCloudVisionV1p1beta1Word
 googleCloudVisionV1p1beta1Word =
-    GoogleCloudVisionV1p1beta1Word'
+  GoogleCloudVisionV1p1beta1Word'
     { _gcvvw1Property = Nothing
     , _gcvvw1BoundingBox = Nothing
     , _gcvvw1Symbols = Nothing
     , _gcvvw1Confidence = Nothing
     }
+
 
 -- | Additional information detected for the word.
 gcvvw1Property :: Lens' GoogleCloudVisionV1p1beta1Word (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -8749,11 +9110,14 @@ instance ToJSON GoogleCloudVisionV1p1beta1Word where
 -- | Information about a product.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1ProductSearchResultsResult' smart constructor.
-data GoogleCloudVisionV1p1beta1ProductSearchResultsResult = GoogleCloudVisionV1p1beta1ProductSearchResultsResult'
+data GoogleCloudVisionV1p1beta1ProductSearchResultsResult =
+  GoogleCloudVisionV1p1beta1ProductSearchResultsResult'
     { _gcvvpsrrcImage   :: !(Maybe Text)
     , _gcvvpsrrcScore   :: !(Maybe (Textual Double))
     , _gcvvpsrrcProduct :: !(Maybe GoogleCloudVisionV1p1beta1Product)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ProductSearchResultsResult' with the minimum fields required to make a request.
 --
@@ -8767,11 +9131,12 @@ data GoogleCloudVisionV1p1beta1ProductSearchResultsResult = GoogleCloudVisionV1p
 googleCloudVisionV1p1beta1ProductSearchResultsResult
     :: GoogleCloudVisionV1p1beta1ProductSearchResultsResult
 googleCloudVisionV1p1beta1ProductSearchResultsResult =
-    GoogleCloudVisionV1p1beta1ProductSearchResultsResult'
+  GoogleCloudVisionV1p1beta1ProductSearchResultsResult'
     { _gcvvpsrrcImage = Nothing
     , _gcvvpsrrcScore = Nothing
     , _gcvvpsrrcProduct = Nothing
     }
+
 
 -- | The resource name of the image from the product that is the closest
 -- match to the query.
@@ -8795,7 +9160,7 @@ gcvvpsrrcProduct
       (\ s a -> s{_gcvvpsrrcProduct = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1ProductSearchResultsResult
+           GoogleCloudVisionV1p1beta1ProductSearchResultsResult
          where
         parseJSON
           = withObject
@@ -8807,7 +9172,7 @@ instance FromJSON
                      (o .:? "product"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1ProductSearchResultsResult
+           GoogleCloudVisionV1p1beta1ProductSearchResultsResult
          where
         toJSON
           GoogleCloudVisionV1p1beta1ProductSearchResultsResult'{..}
@@ -8822,10 +9187,13 @@ instance ToJSON
 -- returned google.longrunning.Operation.response field.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1ImportProductSetsResponse' smart constructor.
-data GoogleCloudVisionV1p3beta1ImportProductSetsResponse = GoogleCloudVisionV1p3beta1ImportProductSetsResponse'
+data GoogleCloudVisionV1p3beta1ImportProductSetsResponse =
+  GoogleCloudVisionV1p3beta1ImportProductSetsResponse'
     { _gcvvipsrReferenceImages :: !(Maybe [GoogleCloudVisionV1p3beta1ReferenceImage])
     , _gcvvipsrStatuses        :: !(Maybe [Status])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ImportProductSetsResponse' with the minimum fields required to make a request.
 --
@@ -8837,10 +9205,9 @@ data GoogleCloudVisionV1p3beta1ImportProductSetsResponse = GoogleCloudVisionV1p3
 googleCloudVisionV1p3beta1ImportProductSetsResponse
     :: GoogleCloudVisionV1p3beta1ImportProductSetsResponse
 googleCloudVisionV1p3beta1ImportProductSetsResponse =
-    GoogleCloudVisionV1p3beta1ImportProductSetsResponse'
-    { _gcvvipsrReferenceImages = Nothing
-    , _gcvvipsrStatuses = Nothing
-    }
+  GoogleCloudVisionV1p3beta1ImportProductSetsResponse'
+    {_gcvvipsrReferenceImages = Nothing, _gcvvipsrStatuses = Nothing}
+
 
 -- | The list of reference_images that are imported successfully.
 gcvvipsrReferenceImages :: Lens' GoogleCloudVisionV1p3beta1ImportProductSetsResponse [GoogleCloudVisionV1p3beta1ReferenceImage]
@@ -8862,7 +9229,7 @@ gcvvipsrStatuses
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1ImportProductSetsResponse
+           GoogleCloudVisionV1p3beta1ImportProductSetsResponse
          where
         parseJSON
           = withObject
@@ -8874,7 +9241,7 @@ instance FromJSON
                      (o .:? "statuses" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1ImportProductSetsResponse
+           GoogleCloudVisionV1p3beta1ImportProductSetsResponse
          where
         toJSON
           GoogleCloudVisionV1p3beta1ImportProductSetsResponse'{..}
@@ -8886,9 +9253,12 @@ instance ToJSON
 -- | Response to an async batch file annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse' smart constructor.
-newtype GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse = GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse'
+newtype GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse =
+  GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse'
     { _gcvvabafrcResponses :: Maybe [GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse' with the minimum fields required to make a request.
 --
@@ -8898,9 +9268,9 @@ newtype GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse = GoogleCloudV
 googleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
     :: GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
 googleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse =
-    GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse'
-    { _gcvvabafrcResponses = Nothing
-    }
+  GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse'
+    {_gcvvabafrcResponses = Nothing}
+
 
 -- | The list of file annotation responses, one for each request in
 -- AsyncBatchAnnotateFilesRequest.
@@ -8912,7 +9282,7 @@ gcvvabafrcResponses
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
+           GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
          where
         parseJSON
           = withObject
@@ -8922,7 +9292,7 @@ instance FromJSON
                    <$> (o .:? "responses" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
+           GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
          where
         toJSON
           GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse'{..}
@@ -8933,9 +9303,12 @@ instance ToJSON
 -- | Stores image properties, such as dominant colors.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1ImageProperties' smart constructor.
-newtype GoogleCloudVisionV1p1beta1ImageProperties = GoogleCloudVisionV1p1beta1ImageProperties'
+newtype GoogleCloudVisionV1p1beta1ImageProperties =
+  GoogleCloudVisionV1p1beta1ImageProperties'
     { _gcvvipsDominantColors :: Maybe GoogleCloudVisionV1p1beta1DominantColorsAnnotation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ImageProperties' with the minimum fields required to make a request.
 --
@@ -8945,9 +9318,8 @@ newtype GoogleCloudVisionV1p1beta1ImageProperties = GoogleCloudVisionV1p1beta1Im
 googleCloudVisionV1p1beta1ImageProperties
     :: GoogleCloudVisionV1p1beta1ImageProperties
 googleCloudVisionV1p1beta1ImageProperties =
-    GoogleCloudVisionV1p1beta1ImageProperties'
-    { _gcvvipsDominantColors = Nothing
-    }
+  GoogleCloudVisionV1p1beta1ImageProperties' {_gcvvipsDominantColors = Nothing}
+
 
 -- | If present, dominant colors completed successfully.
 gcvvipsDominantColors :: Lens' GoogleCloudVisionV1p1beta1ImageProperties (Maybe GoogleCloudVisionV1p1beta1DominantColorsAnnotation)
@@ -8956,7 +9328,8 @@ gcvvipsDominantColors
       (\ s a -> s{_gcvvipsDominantColors = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1ImageProperties where
+           GoogleCloudVisionV1p1beta1ImageProperties
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1ImageProperties"
@@ -8965,7 +9338,8 @@ instance FromJSON
                    (o .:? "dominantColors"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1ImageProperties where
+           GoogleCloudVisionV1p1beta1ImageProperties
+         where
         toJSON GoogleCloudVisionV1p1beta1ImageProperties'{..}
           = object
               (catMaybes
@@ -8974,11 +9348,14 @@ instance ToJSON
 -- | Entity deduced from similar images on the Internet.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1WebDetectionWebEntity' smart constructor.
-data GoogleCloudVisionV1p3beta1WebDetectionWebEntity = GoogleCloudVisionV1p3beta1WebDetectionWebEntity'
+data GoogleCloudVisionV1p3beta1WebDetectionWebEntity =
+  GoogleCloudVisionV1p3beta1WebDetectionWebEntity'
     { _goooScore       :: !(Maybe (Textual Double))
     , _goooEntityId    :: !(Maybe Text)
     , _goooDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetectionWebEntity' with the minimum fields required to make a request.
 --
@@ -8992,11 +9369,9 @@ data GoogleCloudVisionV1p3beta1WebDetectionWebEntity = GoogleCloudVisionV1p3beta
 googleCloudVisionV1p3beta1WebDetectionWebEntity
     :: GoogleCloudVisionV1p3beta1WebDetectionWebEntity
 googleCloudVisionV1p3beta1WebDetectionWebEntity =
-    GoogleCloudVisionV1p3beta1WebDetectionWebEntity'
-    { _goooScore = Nothing
-    , _goooEntityId = Nothing
-    , _goooDescription = Nothing
-    }
+  GoogleCloudVisionV1p3beta1WebDetectionWebEntity'
+    {_goooScore = Nothing, _goooEntityId = Nothing, _goooDescription = Nothing}
+
 
 -- | Overall relevancy score for the entity. Not normalized and not
 -- comparable across different image queries.
@@ -9017,7 +9392,8 @@ goooDescription
       (\ s a -> s{_goooDescription = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1WebDetectionWebEntity where
+           GoogleCloudVisionV1p3beta1WebDetectionWebEntity
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1WebDetectionWebEntity"
@@ -9027,7 +9403,8 @@ instance FromJSON
                      (o .:? "description"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1WebDetectionWebEntity where
+           GoogleCloudVisionV1p3beta1WebDetectionWebEntity
+         where
         toJSON
           GoogleCloudVisionV1p3beta1WebDetectionWebEntity'{..}
           = object
@@ -9039,7 +9416,8 @@ instance ToJSON
 -- | Response to an image annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1AnnotateImageResponse' smart constructor.
-data GoogleCloudVisionV1p1beta1AnnotateImageResponse = GoogleCloudVisionV1p1beta1AnnotateImageResponse'
+data GoogleCloudVisionV1p1beta1AnnotateImageResponse =
+  GoogleCloudVisionV1p1beta1AnnotateImageResponse'
     { _gooLogoAnnotations            :: !(Maybe [GoogleCloudVisionV1p1beta1EntityAnnotation])
     , _gooProductSearchResults       :: !(Maybe GoogleCloudVisionV1p1beta1ProductSearchResults)
     , _gooContext                    :: !(Maybe GoogleCloudVisionV1p1beta1ImageAnnotationContext)
@@ -9054,7 +9432,9 @@ data GoogleCloudVisionV1p1beta1AnnotateImageResponse = GoogleCloudVisionV1p1beta
     , _gooCropHintsAnnotation        :: !(Maybe GoogleCloudVisionV1p1beta1CropHintsAnnotation)
     , _gooFullTextAnnotation         :: !(Maybe GoogleCloudVisionV1p1beta1TextAnnotation)
     , _gooImagePropertiesAnnotation  :: !(Maybe GoogleCloudVisionV1p1beta1ImageProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1AnnotateImageResponse' with the minimum fields required to make a request.
 --
@@ -9090,7 +9470,7 @@ data GoogleCloudVisionV1p1beta1AnnotateImageResponse = GoogleCloudVisionV1p1beta
 googleCloudVisionV1p1beta1AnnotateImageResponse
     :: GoogleCloudVisionV1p1beta1AnnotateImageResponse
 googleCloudVisionV1p1beta1AnnotateImageResponse =
-    GoogleCloudVisionV1p1beta1AnnotateImageResponse'
+  GoogleCloudVisionV1p1beta1AnnotateImageResponse'
     { _gooLogoAnnotations = Nothing
     , _gooProductSearchResults = Nothing
     , _gooContext = Nothing
@@ -9106,6 +9486,7 @@ googleCloudVisionV1p1beta1AnnotateImageResponse =
     , _gooFullTextAnnotation = Nothing
     , _gooImagePropertiesAnnotation = Nothing
     }
+
 
 -- | If present, logo detection has completed successfully.
 gooLogoAnnotations :: Lens' GoogleCloudVisionV1p1beta1AnnotateImageResponse [GoogleCloudVisionV1p1beta1EntityAnnotation]
@@ -9207,7 +9588,8 @@ gooImagePropertiesAnnotation
       (\ s a -> s{_gooImagePropertiesAnnotation = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1AnnotateImageResponse where
+           GoogleCloudVisionV1p1beta1AnnotateImageResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1AnnotateImageResponse"
@@ -9229,7 +9611,8 @@ instance FromJSON
                      <*> (o .:? "imagePropertiesAnnotation"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1AnnotateImageResponse where
+           GoogleCloudVisionV1p1beta1AnnotateImageResponse
+         where
         toJSON
           GoogleCloudVisionV1p1beta1AnnotateImageResponse'{..}
           = object
@@ -9258,10 +9641,13 @@ instance ToJSON
 -- | A face-specific landmark (for example, a face feature).
 --
 -- /See:/ 'googleCloudVisionV1p3beta1FaceAnnotationLandmark' smart constructor.
-data GoogleCloudVisionV1p3beta1FaceAnnotationLandmark = GoogleCloudVisionV1p3beta1FaceAnnotationLandmark'
+data GoogleCloudVisionV1p3beta1FaceAnnotationLandmark =
+  GoogleCloudVisionV1p3beta1FaceAnnotationLandmark'
     { _gType     :: !(Maybe GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType)
     , _gPosition :: !(Maybe GoogleCloudVisionV1p3beta1Position)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1FaceAnnotationLandmark' with the minimum fields required to make a request.
 --
@@ -9273,10 +9659,9 @@ data GoogleCloudVisionV1p3beta1FaceAnnotationLandmark = GoogleCloudVisionV1p3bet
 googleCloudVisionV1p3beta1FaceAnnotationLandmark
     :: GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
 googleCloudVisionV1p3beta1FaceAnnotationLandmark =
-    GoogleCloudVisionV1p3beta1FaceAnnotationLandmark'
-    { _gType = Nothing
-    , _gPosition = Nothing
-    }
+  GoogleCloudVisionV1p3beta1FaceAnnotationLandmark'
+    {_gType = Nothing, _gPosition = Nothing}
+
 
 -- | Face landmark type.
 gType :: Lens' GoogleCloudVisionV1p3beta1FaceAnnotationLandmark (Maybe GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType)
@@ -9288,7 +9673,7 @@ gPosition
   = lens _gPosition (\ s a -> s{_gPosition = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
+           GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
          where
         parseJSON
           = withObject
@@ -9298,7 +9683,7 @@ instance FromJSON
                    (o .:? "type") <*> (o .:? "position"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
+           GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
          where
         toJSON
           GoogleCloudVisionV1p3beta1FaceAnnotationLandmark'{..}
@@ -9313,11 +9698,14 @@ instance ToJSON
 -- service.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1BatchOperationMetadata' smart constructor.
-data GoogleCloudVisionV1p3beta1BatchOperationMetadata = GoogleCloudVisionV1p3beta1BatchOperationMetadata'
+data GoogleCloudVisionV1p3beta1BatchOperationMetadata =
+  GoogleCloudVisionV1p3beta1BatchOperationMetadata'
     { _gcvvbomState      :: !(Maybe GoogleCloudVisionV1p3beta1BatchOperationMetadataState)
     , _gcvvbomEndTime    :: !(Maybe DateTime')
     , _gcvvbomSubmitTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1BatchOperationMetadata' with the minimum fields required to make a request.
 --
@@ -9331,11 +9719,12 @@ data GoogleCloudVisionV1p3beta1BatchOperationMetadata = GoogleCloudVisionV1p3bet
 googleCloudVisionV1p3beta1BatchOperationMetadata
     :: GoogleCloudVisionV1p3beta1BatchOperationMetadata
 googleCloudVisionV1p3beta1BatchOperationMetadata =
-    GoogleCloudVisionV1p3beta1BatchOperationMetadata'
+  GoogleCloudVisionV1p3beta1BatchOperationMetadata'
     { _gcvvbomState = Nothing
     , _gcvvbomEndTime = Nothing
     , _gcvvbomSubmitTime = Nothing
     }
+
 
 -- | The current state of the batch operation.
 gcvvbomState :: Lens' GoogleCloudVisionV1p3beta1BatchOperationMetadata (Maybe GoogleCloudVisionV1p3beta1BatchOperationMetadataState)
@@ -9358,7 +9747,7 @@ gcvvbomSubmitTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1BatchOperationMetadata
+           GoogleCloudVisionV1p3beta1BatchOperationMetadata
          where
         parseJSON
           = withObject
@@ -9369,7 +9758,7 @@ instance FromJSON
                      (o .:? "submitTime"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1BatchOperationMetadata
+           GoogleCloudVisionV1p3beta1BatchOperationMetadata
          where
         toJSON
           GoogleCloudVisionV1p3beta1BatchOperationMetadata'{..}
@@ -9382,10 +9771,13 @@ instance ToJSON
 -- | Metadata for online images.
 --
 -- /See:/ 'webImage' smart constructor.
-data WebImage = WebImage'
+data WebImage =
+  WebImage'
     { _wiScore :: !(Maybe (Textual Double))
     , _wiURL   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebImage' with the minimum fields required to make a request.
 --
@@ -9396,11 +9788,8 @@ data WebImage = WebImage'
 -- * 'wiURL'
 webImage
     :: WebImage
-webImage =
-    WebImage'
-    { _wiScore = Nothing
-    , _wiURL = Nothing
-    }
+webImage = WebImage' {_wiScore = Nothing, _wiURL = Nothing}
+
 
 -- | (Deprecated) Overall relevancy score for the image.
 wiScore :: Lens' WebImage (Maybe Double)
@@ -9427,12 +9816,15 @@ instance ToJSON WebImage where
 -- | Structural unit of text representing a number of words in certain order.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1Paragraph' smart constructor.
-data GoogleCloudVisionV1p1beta1Paragraph = GoogleCloudVisionV1p1beta1Paragraph'
+data GoogleCloudVisionV1p1beta1Paragraph =
+  GoogleCloudVisionV1p1beta1Paragraph'
     { _gcvvp1Property    :: !(Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
     , _gcvvp1BoundingBox :: !(Maybe GoogleCloudVisionV1p1beta1BoundingPoly)
     , _gcvvp1Confidence  :: !(Maybe (Textual Double))
     , _gcvvp1Words       :: !(Maybe [GoogleCloudVisionV1p1beta1Word])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Paragraph' with the minimum fields required to make a request.
 --
@@ -9448,12 +9840,13 @@ data GoogleCloudVisionV1p1beta1Paragraph = GoogleCloudVisionV1p1beta1Paragraph'
 googleCloudVisionV1p1beta1Paragraph
     :: GoogleCloudVisionV1p1beta1Paragraph
 googleCloudVisionV1p1beta1Paragraph =
-    GoogleCloudVisionV1p1beta1Paragraph'
+  GoogleCloudVisionV1p1beta1Paragraph'
     { _gcvvp1Property = Nothing
     , _gcvvp1BoundingBox = Nothing
     , _gcvvp1Confidence = Nothing
     , _gcvvp1Words = Nothing
     }
+
 
 -- | Additional information detected for the paragraph.
 gcvvp1Property :: Lens' GoogleCloudVisionV1p1beta1Paragraph (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -9511,14 +9904,17 @@ instance ToJSON GoogleCloudVisionV1p1beta1Paragraph
 -- | Relevant information for the image from the Internet.
 --
 -- /See:/ 'webDetection' smart constructor.
-data WebDetection = WebDetection'
+data WebDetection =
+  WebDetection'
     { _wdVisuallySimilarImages   :: !(Maybe [WebImage])
     , _wdBestGuessLabels         :: !(Maybe [WebLabel])
     , _wdPagesWithMatchingImages :: !(Maybe [WebPage])
     , _wdPartialMatchingImages   :: !(Maybe [WebImage])
     , _wdFullMatchingImages      :: !(Maybe [WebImage])
     , _wdWebEntities             :: !(Maybe [WebEntity])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebDetection' with the minimum fields required to make a request.
 --
@@ -9538,7 +9934,7 @@ data WebDetection = WebDetection'
 webDetection
     :: WebDetection
 webDetection =
-    WebDetection'
+  WebDetection'
     { _wdVisuallySimilarImages = Nothing
     , _wdBestGuessLabels = Nothing
     , _wdPagesWithMatchingImages = Nothing
@@ -9546,6 +9942,7 @@ webDetection =
     , _wdFullMatchingImages = Nothing
     , _wdWebEntities = Nothing
     }
+
 
 -- | The visually similar image results.
 wdVisuallySimilarImages :: Lens' WebDetection [WebImage]
@@ -9629,10 +10026,13 @@ instance ToJSON WebDetection where
 -- more images, which individually have their own responses.
 --
 -- /See:/ 'annotateFileResponse' smart constructor.
-data AnnotateFileResponse = AnnotateFileResponse'
+data AnnotateFileResponse =
+  AnnotateFileResponse'
     { _afrResponses   :: !(Maybe [AnnotateImageResponse])
     , _afrInputConfig :: !(Maybe InputConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnnotateFileResponse' with the minimum fields required to make a request.
 --
@@ -9644,10 +10044,8 @@ data AnnotateFileResponse = AnnotateFileResponse'
 annotateFileResponse
     :: AnnotateFileResponse
 annotateFileResponse =
-    AnnotateFileResponse'
-    { _afrResponses = Nothing
-    , _afrInputConfig = Nothing
-    }
+  AnnotateFileResponse' {_afrResponses = Nothing, _afrInputConfig = Nothing}
+
 
 -- | Individual responses to images found within the file.
 afrResponses :: Lens' AnnotateFileResponse [AnnotateImageResponse]
@@ -9680,7 +10078,8 @@ instance ToJSON AnnotateFileResponse where
 -- | Set of detected entity features.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1EntityAnnotation' smart constructor.
-data GoogleCloudVisionV1p3beta1EntityAnnotation = GoogleCloudVisionV1p3beta1EntityAnnotation'
+data GoogleCloudVisionV1p3beta1EntityAnnotation =
+  GoogleCloudVisionV1p3beta1EntityAnnotation'
     { _gcvveacScore        :: !(Maybe (Textual Double))
     , _gcvveacTopicality   :: !(Maybe (Textual Double))
     , _gcvveacLocale       :: !(Maybe Text)
@@ -9690,7 +10089,9 @@ data GoogleCloudVisionV1p3beta1EntityAnnotation = GoogleCloudVisionV1p3beta1Enti
     , _gcvveacLocations    :: !(Maybe [GoogleCloudVisionV1p3beta1LocationInfo])
     , _gcvveacDescription  :: !(Maybe Text)
     , _gcvveacProperties   :: !(Maybe [GoogleCloudVisionV1p3beta1Property])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1EntityAnnotation' with the minimum fields required to make a request.
 --
@@ -9716,7 +10117,7 @@ data GoogleCloudVisionV1p3beta1EntityAnnotation = GoogleCloudVisionV1p3beta1Enti
 googleCloudVisionV1p3beta1EntityAnnotation
     :: GoogleCloudVisionV1p3beta1EntityAnnotation
 googleCloudVisionV1p3beta1EntityAnnotation =
-    GoogleCloudVisionV1p3beta1EntityAnnotation'
+  GoogleCloudVisionV1p3beta1EntityAnnotation'
     { _gcvveacScore = Nothing
     , _gcvveacTopicality = Nothing
     , _gcvveacLocale = Nothing
@@ -9727,6 +10128,7 @@ googleCloudVisionV1p3beta1EntityAnnotation =
     , _gcvveacDescription = Nothing
     , _gcvveacProperties = Nothing
     }
+
 
 -- | Overall score of the result. Range [0, 1].
 gcvveacScore :: Lens' GoogleCloudVisionV1p3beta1EntityAnnotation (Maybe Double)
@@ -9803,7 +10205,8 @@ gcvveacProperties
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1EntityAnnotation where
+           GoogleCloudVisionV1p3beta1EntityAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1EntityAnnotation"
@@ -9819,7 +10222,8 @@ instance FromJSON
                      <*> (o .:? "properties" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1EntityAnnotation where
+           GoogleCloudVisionV1p3beta1EntityAnnotation
+         where
         toJSON
           GoogleCloudVisionV1p3beta1EntityAnnotation'{..}
           = object
@@ -9838,10 +10242,13 @@ instance ToJSON
 -- image.
 --
 -- /See:/ 'groupedResult' smart constructor.
-data GroupedResult = GroupedResult'
+data GroupedResult =
+  GroupedResult'
     { _grResults      :: !(Maybe [Result])
     , _grBoundingPoly :: !(Maybe BoundingPoly)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupedResult' with the minimum fields required to make a request.
 --
@@ -9852,11 +10259,8 @@ data GroupedResult = GroupedResult'
 -- * 'grBoundingPoly'
 groupedResult
     :: GroupedResult
-groupedResult =
-    GroupedResult'
-    { _grResults = Nothing
-    , _grBoundingPoly = Nothing
-    }
+groupedResult = GroupedResult' {_grResults = Nothing, _grBoundingPoly = Nothing}
+
 
 -- | List of results, one for each product match.
 grResults :: Lens' GroupedResult [Result]
@@ -9890,11 +10294,14 @@ instance ToJSON GroupedResult where
 -- metadata, such as bounding boxes.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1ReferenceImage' smart constructor.
-data GoogleCloudVisionV1p3beta1ReferenceImage = GoogleCloudVisionV1p3beta1ReferenceImage'
+data GoogleCloudVisionV1p3beta1ReferenceImage =
+  GoogleCloudVisionV1p3beta1ReferenceImage'
     { _gcvvriURI           :: !(Maybe Text)
     , _gcvvriName          :: !(Maybe Text)
     , _gcvvriBoundingPolys :: !(Maybe [GoogleCloudVisionV1p3beta1BoundingPoly])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ReferenceImage' with the minimum fields required to make a request.
 --
@@ -9908,11 +10315,12 @@ data GoogleCloudVisionV1p3beta1ReferenceImage = GoogleCloudVisionV1p3beta1Refere
 googleCloudVisionV1p3beta1ReferenceImage
     :: GoogleCloudVisionV1p3beta1ReferenceImage
 googleCloudVisionV1p3beta1ReferenceImage =
-    GoogleCloudVisionV1p3beta1ReferenceImage'
+  GoogleCloudVisionV1p3beta1ReferenceImage'
     { _gcvvriURI = Nothing
     , _gcvvriName = Nothing
     , _gcvvriBoundingPolys = Nothing
     }
+
 
 -- | The Google Cloud Storage URI of the reference image. The URI must start
 -- with \`gs:\/\/\`. Required.
@@ -9941,7 +10349,8 @@ gcvvriBoundingPolys
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1ReferenceImage where
+           GoogleCloudVisionV1p3beta1ReferenceImage
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1ReferenceImage"
@@ -9951,7 +10360,8 @@ instance FromJSON
                      (o .:? "boundingPolys" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1ReferenceImage where
+           GoogleCloudVisionV1p3beta1ReferenceImage
+         where
         toJSON GoogleCloudVisionV1p3beta1ReferenceImage'{..}
           = object
               (catMaybes
@@ -9962,13 +10372,16 @@ instance ToJSON
 -- | Set of detected objects with bounding boxes.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1LocalizedObjectAnnotation' smart constructor.
-data GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation = GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation'
+data GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation =
+  GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation'
     { _gcvvloacLanguageCode :: !(Maybe Text)
     , _gcvvloacScore        :: !(Maybe (Textual Double))
     , _gcvvloacBoundingPoly :: !(Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
     , _gcvvloacName         :: !(Maybe Text)
     , _gcvvloacMid          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation' with the minimum fields required to make a request.
 --
@@ -9986,13 +10399,14 @@ data GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation = GoogleCloudVisionV1p2
 googleCloudVisionV1p2beta1LocalizedObjectAnnotation
     :: GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
 googleCloudVisionV1p2beta1LocalizedObjectAnnotation =
-    GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation'
+  GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation'
     { _gcvvloacLanguageCode = Nothing
     , _gcvvloacScore = Nothing
     , _gcvvloacBoundingPoly = Nothing
     , _gcvvloacName = Nothing
     , _gcvvloacMid = Nothing
     }
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -10026,7 +10440,7 @@ gcvvloacMid
   = lens _gcvvloacMid (\ s a -> s{_gcvvloacMid = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
+           GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
          where
         parseJSON
           = withObject
@@ -10040,7 +10454,7 @@ instance FromJSON
                      <*> (o .:? "mid"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
+           GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
          where
         toJSON
           GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation'{..}
@@ -10055,13 +10469,16 @@ instance ToJSON
 -- | Logical element on the page.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1Block' smart constructor.
-data GoogleCloudVisionV1p3beta1Block = GoogleCloudVisionV1p3beta1Block'
+data GoogleCloudVisionV1p3beta1Block =
+  GoogleCloudVisionV1p3beta1Block'
     { _gcvvbcProperty    :: !(Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
     , _gcvvbcBoundingBox :: !(Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
     , _gcvvbcParagraphs  :: !(Maybe [GoogleCloudVisionV1p3beta1Paragraph])
     , _gcvvbcConfidence  :: !(Maybe (Textual Double))
     , _gcvvbcBlockType   :: !(Maybe GoogleCloudVisionV1p3beta1BlockBlockType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Block' with the minimum fields required to make a request.
 --
@@ -10079,13 +10496,14 @@ data GoogleCloudVisionV1p3beta1Block = GoogleCloudVisionV1p3beta1Block'
 googleCloudVisionV1p3beta1Block
     :: GoogleCloudVisionV1p3beta1Block
 googleCloudVisionV1p3beta1Block =
-    GoogleCloudVisionV1p3beta1Block'
+  GoogleCloudVisionV1p3beta1Block'
     { _gcvvbcProperty = Nothing
     , _gcvvbcBoundingBox = Nothing
     , _gcvvbcParagraphs = Nothing
     , _gcvvbcConfidence = Nothing
     , _gcvvbcBlockType = Nothing
     }
+
 
 -- | Additional information detected for the block.
 gcvvbcProperty :: Lens' GoogleCloudVisionV1p3beta1Block (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -10152,10 +10570,13 @@ instance ToJSON GoogleCloudVisionV1p3beta1Block where
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Vertex' smart constructor.
-data GoogleCloudVisionV1p2beta1Vertex = GoogleCloudVisionV1p2beta1Vertex'
+data GoogleCloudVisionV1p2beta1Vertex =
+  GoogleCloudVisionV1p2beta1Vertex'
     { _gcvvvcX :: !(Maybe (Textual Int32))
     , _gcvvvcY :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Vertex' with the minimum fields required to make a request.
 --
@@ -10167,10 +10588,8 @@ data GoogleCloudVisionV1p2beta1Vertex = GoogleCloudVisionV1p2beta1Vertex'
 googleCloudVisionV1p2beta1Vertex
     :: GoogleCloudVisionV1p2beta1Vertex
 googleCloudVisionV1p2beta1Vertex =
-    GoogleCloudVisionV1p2beta1Vertex'
-    { _gcvvvcX = Nothing
-    , _gcvvvcY = Nothing
-    }
+  GoogleCloudVisionV1p2beta1Vertex' {_gcvvvcX = Nothing, _gcvvvcY = Nothing}
+
 
 -- | X coordinate.
 gcvvvcX :: Lens' GoogleCloudVisionV1p2beta1Vertex (Maybe Int32)
@@ -10202,9 +10621,12 @@ instance ToJSON GoogleCloudVisionV1p2beta1Vertex
 -- | The response for a single offline file annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1AsyncAnnotateFileResponse' smart constructor.
-newtype GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse = GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse'
+newtype GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse =
+  GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse'
     { _gooOutputConfig :: Maybe GoogleCloudVisionV1p3beta1OutputConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse' with the minimum fields required to make a request.
 --
@@ -10214,9 +10636,9 @@ newtype GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse = GoogleCloudVisionV
 googleCloudVisionV1p3beta1AsyncAnnotateFileResponse
     :: GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse
 googleCloudVisionV1p3beta1AsyncAnnotateFileResponse =
-    GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse'
-    { _gooOutputConfig = Nothing
-    }
+  GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse'
+    {_gooOutputConfig = Nothing}
+
 
 -- | The output location and metadata from AsyncAnnotateFileRequest.
 gooOutputConfig :: Lens' GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse (Maybe GoogleCloudVisionV1p3beta1OutputConfig)
@@ -10225,7 +10647,7 @@ gooOutputConfig
       (\ s a -> s{_gooOutputConfig = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse
+           GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse
          where
         parseJSON
           = withObject
@@ -10235,7 +10657,7 @@ instance FromJSON
                    <$> (o .:? "outputConfig"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse
+           GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse
          where
         toJSON
           GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse'{..}
@@ -10246,10 +10668,13 @@ instance ToJSON
 -- | Additional information detected on the structural component.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1TextAnnotationTextProperty' smart constructor.
-data GoogleCloudVisionV1p2beta1TextAnnotationTextProperty = GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
+data GoogleCloudVisionV1p2beta1TextAnnotationTextProperty =
+  GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
     { _gDetectedLanguages :: !(Maybe [GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage])
     , _gDetectedBreak     :: !(Maybe GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1TextAnnotationTextProperty' with the minimum fields required to make a request.
 --
@@ -10261,10 +10686,9 @@ data GoogleCloudVisionV1p2beta1TextAnnotationTextProperty = GoogleCloudVisionV1p
 googleCloudVisionV1p2beta1TextAnnotationTextProperty
     :: GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
 googleCloudVisionV1p2beta1TextAnnotationTextProperty =
-    GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
-    { _gDetectedLanguages = Nothing
-    , _gDetectedBreak = Nothing
-    }
+  GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
+    {_gDetectedLanguages = Nothing, _gDetectedBreak = Nothing}
+
 
 -- | A list of detected languages together with confidence.
 gDetectedLanguages :: Lens' GoogleCloudVisionV1p2beta1TextAnnotationTextProperty [GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage]
@@ -10281,7 +10705,7 @@ gDetectedBreak
       (\ s a -> s{_gDetectedBreak = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
+           GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
          where
         parseJSON
           = withObject
@@ -10293,7 +10717,7 @@ instance FromJSON
                      (o .:? "detectedBreak"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
+           GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
          where
         toJSON
           GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'{..}
@@ -10305,10 +10729,13 @@ instance ToJSON
 -- | A bounding polygon for the detected image annotation.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1BoundingPoly' smart constructor.
-data GoogleCloudVisionV1p2beta1BoundingPoly = GoogleCloudVisionV1p2beta1BoundingPoly'
+data GoogleCloudVisionV1p2beta1BoundingPoly =
+  GoogleCloudVisionV1p2beta1BoundingPoly'
     { _gNormalizedVertices :: !(Maybe [GoogleCloudVisionV1p2beta1NormalizedVertex])
     , _gVertices           :: !(Maybe [GoogleCloudVisionV1p2beta1Vertex])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1BoundingPoly' with the minimum fields required to make a request.
 --
@@ -10320,10 +10747,9 @@ data GoogleCloudVisionV1p2beta1BoundingPoly = GoogleCloudVisionV1p2beta1Bounding
 googleCloudVisionV1p2beta1BoundingPoly
     :: GoogleCloudVisionV1p2beta1BoundingPoly
 googleCloudVisionV1p2beta1BoundingPoly =
-    GoogleCloudVisionV1p2beta1BoundingPoly'
-    { _gNormalizedVertices = Nothing
-    , _gVertices = Nothing
-    }
+  GoogleCloudVisionV1p2beta1BoundingPoly'
+    {_gNormalizedVertices = Nothing, _gVertices = Nothing}
+
 
 -- | The bounding polygon normalized vertices.
 gNormalizedVertices :: Lens' GoogleCloudVisionV1p2beta1BoundingPoly [GoogleCloudVisionV1p2beta1NormalizedVertex]
@@ -10341,7 +10767,8 @@ gVertices
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1BoundingPoly where
+           GoogleCloudVisionV1p2beta1BoundingPoly
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p2beta1BoundingPoly"
               (\ o ->
@@ -10350,7 +10777,8 @@ instance FromJSON
                      (o .:? "vertices" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1BoundingPoly where
+           GoogleCloudVisionV1p2beta1BoundingPoly
+         where
         toJSON GoogleCloudVisionV1p2beta1BoundingPoly'{..}
           = object
               (catMaybes
@@ -10362,11 +10790,14 @@ instance ToJSON
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1Position' smart constructor.
-data GoogleCloudVisionV1p3beta1Position = GoogleCloudVisionV1p3beta1Position'
+data GoogleCloudVisionV1p3beta1Position =
+  GoogleCloudVisionV1p3beta1Position'
     { _gcvvpcZ :: !(Maybe (Textual Double))
     , _gcvvpcX :: !(Maybe (Textual Double))
     , _gcvvpcY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Position' with the minimum fields required to make a request.
 --
@@ -10380,11 +10811,9 @@ data GoogleCloudVisionV1p3beta1Position = GoogleCloudVisionV1p3beta1Position'
 googleCloudVisionV1p3beta1Position
     :: GoogleCloudVisionV1p3beta1Position
 googleCloudVisionV1p3beta1Position =
-    GoogleCloudVisionV1p3beta1Position'
-    { _gcvvpcZ = Nothing
-    , _gcvvpcX = Nothing
-    , _gcvvpcY = Nothing
-    }
+  GoogleCloudVisionV1p3beta1Position'
+    {_gcvvpcZ = Nothing, _gcvvpcX = Nothing, _gcvvpcY = Nothing}
+
 
 -- | Z coordinate (or depth).
 gcvvpcZ :: Lens' GoogleCloudVisionV1p3beta1Position (Maybe Double)
@@ -10423,9 +10852,12 @@ instance ToJSON GoogleCloudVisionV1p3beta1Position
 -- | The Google Cloud Storage location where the output will be written to.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1GcsDestination' smart constructor.
-newtype GoogleCloudVisionV1p1beta1GcsDestination = GoogleCloudVisionV1p1beta1GcsDestination'
+newtype GoogleCloudVisionV1p1beta1GcsDestination =
+  GoogleCloudVisionV1p1beta1GcsDestination'
     { _gooURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1GcsDestination' with the minimum fields required to make a request.
 --
@@ -10435,9 +10867,8 @@ newtype GoogleCloudVisionV1p1beta1GcsDestination = GoogleCloudVisionV1p1beta1Gcs
 googleCloudVisionV1p1beta1GcsDestination
     :: GoogleCloudVisionV1p1beta1GcsDestination
 googleCloudVisionV1p1beta1GcsDestination =
-    GoogleCloudVisionV1p1beta1GcsDestination'
-    { _gooURI = Nothing
-    }
+  GoogleCloudVisionV1p1beta1GcsDestination' {_gooURI = Nothing}
+
 
 -- | Google Cloud Storage URI where the results will be stored. Results will
 -- be in JSON format and preceded by its corresponding input URI. This
@@ -10454,7 +10885,8 @@ gooURI :: Lens' GoogleCloudVisionV1p1beta1GcsDestination (Maybe Text)
 gooURI = lens _gooURI (\ s a -> s{_gooURI = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1GcsDestination where
+           GoogleCloudVisionV1p1beta1GcsDestination
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1GcsDestination"
@@ -10463,16 +10895,20 @@ instance FromJSON
                    (o .:? "uri"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1GcsDestination where
+           GoogleCloudVisionV1p1beta1GcsDestination
+         where
         toJSON GoogleCloudVisionV1p1beta1GcsDestination'{..}
           = object (catMaybes [("uri" .=) <$> _gooURI])
 
 -- | Detected entity location information.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1LocationInfo' smart constructor.
-newtype GoogleCloudVisionV1p1beta1LocationInfo = GoogleCloudVisionV1p1beta1LocationInfo'
+newtype GoogleCloudVisionV1p1beta1LocationInfo =
+  GoogleCloudVisionV1p1beta1LocationInfo'
     { _gLatLng :: Maybe LatLng
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1LocationInfo' with the minimum fields required to make a request.
 --
@@ -10482,16 +10918,16 @@ newtype GoogleCloudVisionV1p1beta1LocationInfo = GoogleCloudVisionV1p1beta1Locat
 googleCloudVisionV1p1beta1LocationInfo
     :: GoogleCloudVisionV1p1beta1LocationInfo
 googleCloudVisionV1p1beta1LocationInfo =
-    GoogleCloudVisionV1p1beta1LocationInfo'
-    { _gLatLng = Nothing
-    }
+  GoogleCloudVisionV1p1beta1LocationInfo' {_gLatLng = Nothing}
+
 
 -- | lat\/long location coordinates.
 gLatLng :: Lens' GoogleCloudVisionV1p1beta1LocationInfo (Maybe LatLng)
 gLatLng = lens _gLatLng (\ s a -> s{_gLatLng = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1LocationInfo where
+           GoogleCloudVisionV1p1beta1LocationInfo
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p1beta1LocationInfo"
               (\ o ->
@@ -10499,20 +10935,24 @@ instance FromJSON
                    (o .:? "latLng"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1LocationInfo where
+           GoogleCloudVisionV1p1beta1LocationInfo
+         where
         toJSON GoogleCloudVisionV1p1beta1LocationInfo'{..}
           = object (catMaybes [("latLng" .=) <$> _gLatLng])
 
 -- | A Product contains ReferenceImages.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1Product' smart constructor.
-data GoogleCloudVisionV1p1beta1Product = GoogleCloudVisionV1p1beta1Product'
+data GoogleCloudVisionV1p1beta1Product =
+  GoogleCloudVisionV1p1beta1Product'
     { _gcvvp1Name            :: !(Maybe Text)
     , _gcvvp1DisplayName     :: !(Maybe Text)
     , _gcvvp1ProductCategory :: !(Maybe Text)
     , _gcvvp1ProductLabels   :: !(Maybe [GoogleCloudVisionV1p1beta1ProductKeyValue])
     , _gcvvp1Description     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Product' with the minimum fields required to make a request.
 --
@@ -10530,13 +10970,14 @@ data GoogleCloudVisionV1p1beta1Product = GoogleCloudVisionV1p1beta1Product'
 googleCloudVisionV1p1beta1Product
     :: GoogleCloudVisionV1p1beta1Product
 googleCloudVisionV1p1beta1Product =
-    GoogleCloudVisionV1p1beta1Product'
+  GoogleCloudVisionV1p1beta1Product'
     { _gcvvp1Name = Nothing
     , _gcvvp1DisplayName = Nothing
     , _gcvvp1ProductCategory = Nothing
     , _gcvvp1ProductLabels = Nothing
     , _gcvvp1Description = Nothing
     }
+
 
 -- | The resource name of the product. Format is:
 -- \`projects\/PROJECT_ID\/locations\/LOC_ID\/products\/PRODUCT_ID\`. This
@@ -10606,10 +11047,13 @@ instance ToJSON GoogleCloudVisionV1p1beta1Product
 -- coordinates are relative to the original image and range from 0 to 1.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1NormalizedVertex' smart constructor.
-data GoogleCloudVisionV1p3beta1NormalizedVertex = GoogleCloudVisionV1p3beta1NormalizedVertex'
+data GoogleCloudVisionV1p3beta1NormalizedVertex =
+  GoogleCloudVisionV1p3beta1NormalizedVertex'
     { _gcvvnvcX :: !(Maybe (Textual Double))
     , _gcvvnvcY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1NormalizedVertex' with the minimum fields required to make a request.
 --
@@ -10621,10 +11065,9 @@ data GoogleCloudVisionV1p3beta1NormalizedVertex = GoogleCloudVisionV1p3beta1Norm
 googleCloudVisionV1p3beta1NormalizedVertex
     :: GoogleCloudVisionV1p3beta1NormalizedVertex
 googleCloudVisionV1p3beta1NormalizedVertex =
-    GoogleCloudVisionV1p3beta1NormalizedVertex'
-    { _gcvvnvcX = Nothing
-    , _gcvvnvcY = Nothing
-    }
+  GoogleCloudVisionV1p3beta1NormalizedVertex'
+    {_gcvvnvcX = Nothing, _gcvvnvcY = Nothing}
+
 
 -- | X coordinate.
 gcvvnvcX :: Lens' GoogleCloudVisionV1p3beta1NormalizedVertex (Maybe Double)
@@ -10639,7 +11082,8 @@ gcvvnvcY
       mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1NormalizedVertex where
+           GoogleCloudVisionV1p3beta1NormalizedVertex
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1NormalizedVertex"
@@ -10648,7 +11092,8 @@ instance FromJSON
                    (o .:? "x") <*> (o .:? "y"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1NormalizedVertex where
+           GoogleCloudVisionV1p3beta1NormalizedVertex
+         where
         toJSON
           GoogleCloudVisionV1p3beta1NormalizedVertex'{..}
           = object
@@ -10658,10 +11103,13 @@ instance ToJSON
 -- | Metadata for online images.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1WebDetectionWebImage' smart constructor.
-data GoogleCloudVisionV1p2beta1WebDetectionWebImage = GoogleCloudVisionV1p2beta1WebDetectionWebImage'
+data GoogleCloudVisionV1p2beta1WebDetectionWebImage =
+  GoogleCloudVisionV1p2beta1WebDetectionWebImage'
     { _gcvvwdwicScore :: !(Maybe (Textual Double))
     , _gcvvwdwicURL   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionWebImage' with the minimum fields required to make a request.
 --
@@ -10673,10 +11121,9 @@ data GoogleCloudVisionV1p2beta1WebDetectionWebImage = GoogleCloudVisionV1p2beta1
 googleCloudVisionV1p2beta1WebDetectionWebImage
     :: GoogleCloudVisionV1p2beta1WebDetectionWebImage
 googleCloudVisionV1p2beta1WebDetectionWebImage =
-    GoogleCloudVisionV1p2beta1WebDetectionWebImage'
-    { _gcvvwdwicScore = Nothing
-    , _gcvvwdwicURL = Nothing
-    }
+  GoogleCloudVisionV1p2beta1WebDetectionWebImage'
+    {_gcvvwdwicScore = Nothing, _gcvvwdwicURL = Nothing}
+
 
 -- | (Deprecated) Overall relevancy score for the image.
 gcvvwdwicScore :: Lens' GoogleCloudVisionV1p2beta1WebDetectionWebImage (Maybe Double)
@@ -10691,7 +11138,8 @@ gcvvwdwicURL
   = lens _gcvvwdwicURL (\ s a -> s{_gcvvwdwicURL = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1WebDetectionWebImage where
+           GoogleCloudVisionV1p2beta1WebDetectionWebImage
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1WebDetectionWebImage"
@@ -10700,7 +11148,8 @@ instance FromJSON
                    (o .:? "score") <*> (o .:? "url"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1WebDetectionWebImage where
+           GoogleCloudVisionV1p2beta1WebDetectionWebImage
+         where
         toJSON
           GoogleCloudVisionV1p2beta1WebDetectionWebImage'{..}
           = object
@@ -10711,13 +11160,16 @@ instance ToJSON
 -- | Detected page from OCR.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1Page' smart constructor.
-data GoogleCloudVisionV1p1beta1Page = GoogleCloudVisionV1p1beta1Page'
+data GoogleCloudVisionV1p1beta1Page =
+  GoogleCloudVisionV1p1beta1Page'
     { _g2Property   :: !(Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
     , _g2Height     :: !(Maybe (Textual Int32))
     , _g2Blocks     :: !(Maybe [GoogleCloudVisionV1p1beta1Block])
     , _g2Width      :: !(Maybe (Textual Int32))
     , _g2Confidence :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Page' with the minimum fields required to make a request.
 --
@@ -10735,13 +11187,14 @@ data GoogleCloudVisionV1p1beta1Page = GoogleCloudVisionV1p1beta1Page'
 googleCloudVisionV1p1beta1Page
     :: GoogleCloudVisionV1p1beta1Page
 googleCloudVisionV1p1beta1Page =
-    GoogleCloudVisionV1p1beta1Page'
+  GoogleCloudVisionV1p1beta1Page'
     { _g2Property = Nothing
     , _g2Height = Nothing
     , _g2Blocks = Nothing
     , _g2Width = Nothing
     , _g2Confidence = Nothing
     }
+
 
 -- | Additional information detected on the page.
 g2Property :: Lens' GoogleCloudVisionV1p1beta1Page (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -10800,10 +11253,13 @@ instance ToJSON GoogleCloudVisionV1p1beta1Page where
 -- image.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ProductSearchResultsGroupedResult' smart constructor.
-data GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult = GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult'
+data GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult =
+  GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult'
     { _gcvvpsrgrcResults      :: !(Maybe [GoogleCloudVisionV1p2beta1ProductSearchResultsResult])
     , _gcvvpsrgrcBoundingPoly :: !(Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult' with the minimum fields required to make a request.
 --
@@ -10815,10 +11271,9 @@ data GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult = GoogleCloudVi
 googleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
     :: GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
 googleCloudVisionV1p2beta1ProductSearchResultsGroupedResult =
-    GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult'
-    { _gcvvpsrgrcResults = Nothing
-    , _gcvvpsrgrcBoundingPoly = Nothing
-    }
+  GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult'
+    {_gcvvpsrgrcResults = Nothing, _gcvvpsrgrcBoundingPoly = Nothing}
+
 
 -- | List of results, one for each product match.
 gcvvpsrgrcResults :: Lens' GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult [GoogleCloudVisionV1p2beta1ProductSearchResultsResult]
@@ -10835,7 +11290,7 @@ gcvvpsrgrcBoundingPoly
       (\ s a -> s{_gcvvpsrgrcBoundingPoly = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
+           GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
          where
         parseJSON
           = withObject
@@ -10847,7 +11302,7 @@ instance FromJSON
                      (o .:? "boundingPoly"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
+           GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
          where
         toJSON
           GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult'{..}
@@ -10859,12 +11314,15 @@ instance ToJSON
 -- | A single symbol representation.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1Symbol' smart constructor.
-data GoogleCloudVisionV1p3beta1Symbol = GoogleCloudVisionV1p3beta1Symbol'
+data GoogleCloudVisionV1p3beta1Symbol =
+  GoogleCloudVisionV1p3beta1Symbol'
     { _gcvvscProperty    :: !(Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
     , _gcvvscBoundingBox :: !(Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
     , _gcvvscText        :: !(Maybe Text)
     , _gcvvscConfidence  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Symbol' with the minimum fields required to make a request.
 --
@@ -10880,12 +11338,13 @@ data GoogleCloudVisionV1p3beta1Symbol = GoogleCloudVisionV1p3beta1Symbol'
 googleCloudVisionV1p3beta1Symbol
     :: GoogleCloudVisionV1p3beta1Symbol
 googleCloudVisionV1p3beta1Symbol =
-    GoogleCloudVisionV1p3beta1Symbol'
+  GoogleCloudVisionV1p3beta1Symbol'
     { _gcvvscProperty = Nothing
     , _gcvvscBoundingBox = Nothing
     , _gcvvscText = Nothing
     , _gcvvscConfidence = Nothing
     }
+
 
 -- | Additional information detected for the symbol.
 gcvvscProperty :: Lens' GoogleCloudVisionV1p3beta1Symbol (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -10942,11 +11401,14 @@ instance ToJSON GoogleCloudVisionV1p3beta1Symbol
 -- image.
 --
 -- /See:/ 'cropHint' smart constructor.
-data CropHint = CropHint'
+data CropHint =
+  CropHint'
     { _chBoundingPoly       :: !(Maybe BoundingPoly)
     , _chConfidence         :: !(Maybe (Textual Double))
     , _chImportanceFraction :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CropHint' with the minimum fields required to make a request.
 --
@@ -10960,15 +11422,15 @@ data CropHint = CropHint'
 cropHint
     :: CropHint
 cropHint =
-    CropHint'
+  CropHint'
     { _chBoundingPoly = Nothing
     , _chConfidence = Nothing
     , _chImportanceFraction = Nothing
     }
 
+
 -- | The bounding polygon for the crop region. The coordinates of the
--- bounding box are in the original image\'s scale, as returned in
--- \`ImageParams\`.
+-- bounding box are in the original image\'s scale.
 chBoundingPoly :: Lens' CropHint (Maybe BoundingPoly)
 chBoundingPoly
   = lens _chBoundingPoly
@@ -11007,10 +11469,13 @@ instance ToJSON CropHint where
 -- | Client image to perform Google Cloud Vision API tasks over.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Image' smart constructor.
-data GoogleCloudVisionV1p2beta1Image = GoogleCloudVisionV1p2beta1Image'
+data GoogleCloudVisionV1p2beta1Image =
+  GoogleCloudVisionV1p2beta1Image'
     { _gcvviContent :: !(Maybe Bytes)
     , _gcvviSource  :: !(Maybe GoogleCloudVisionV1p2beta1ImageSource)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Image' with the minimum fields required to make a request.
 --
@@ -11022,10 +11487,9 @@ data GoogleCloudVisionV1p2beta1Image = GoogleCloudVisionV1p2beta1Image'
 googleCloudVisionV1p2beta1Image
     :: GoogleCloudVisionV1p2beta1Image
 googleCloudVisionV1p2beta1Image =
-    GoogleCloudVisionV1p2beta1Image'
-    { _gcvviContent = Nothing
-    , _gcvviSource = Nothing
-    }
+  GoogleCloudVisionV1p2beta1Image'
+    {_gcvviContent = Nothing, _gcvviSource = Nothing}
+
 
 -- | Image content, represented as a stream of bytes. Note: As with all
 -- \`bytes\` fields, protobuffers use a pure binary representation, whereas
@@ -11061,10 +11525,13 @@ instance ToJSON GoogleCloudVisionV1p2beta1Image where
 -- | The desired input location and metadata.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1InputConfig' smart constructor.
-data GoogleCloudVisionV1p1beta1InputConfig = GoogleCloudVisionV1p1beta1InputConfig'
+data GoogleCloudVisionV1p1beta1InputConfig =
+  GoogleCloudVisionV1p1beta1InputConfig'
     { _gGcsSource :: !(Maybe GoogleCloudVisionV1p1beta1GcsSource)
     , _gMimeType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1InputConfig' with the minimum fields required to make a request.
 --
@@ -11076,10 +11543,9 @@ data GoogleCloudVisionV1p1beta1InputConfig = GoogleCloudVisionV1p1beta1InputConf
 googleCloudVisionV1p1beta1InputConfig
     :: GoogleCloudVisionV1p1beta1InputConfig
 googleCloudVisionV1p1beta1InputConfig =
-    GoogleCloudVisionV1p1beta1InputConfig'
-    { _gGcsSource = Nothing
-    , _gMimeType = Nothing
-    }
+  GoogleCloudVisionV1p1beta1InputConfig'
+    {_gGcsSource = Nothing, _gMimeType = Nothing}
+
 
 -- | The Google Cloud Storage location to read the input from.
 gGcsSource :: Lens' GoogleCloudVisionV1p1beta1InputConfig (Maybe GoogleCloudVisionV1p1beta1GcsSource)
@@ -11093,7 +11559,8 @@ gMimeType
   = lens _gMimeType (\ s a -> s{_gMimeType = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1InputConfig where
+           GoogleCloudVisionV1p1beta1InputConfig
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p1beta1InputConfig"
               (\ o ->
@@ -11112,10 +11579,13 @@ instance ToJSON GoogleCloudVisionV1p1beta1InputConfig
 -- information about the source of that image.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ImageAnnotationContext' smart constructor.
-data GoogleCloudVisionV1p2beta1ImageAnnotationContext = GoogleCloudVisionV1p2beta1ImageAnnotationContext'
+data GoogleCloudVisionV1p2beta1ImageAnnotationContext =
+  GoogleCloudVisionV1p2beta1ImageAnnotationContext'
     { _gcvviaccURI        :: !(Maybe Text)
     , _gcvviaccPageNumber :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ImageAnnotationContext' with the minimum fields required to make a request.
 --
@@ -11127,10 +11597,9 @@ data GoogleCloudVisionV1p2beta1ImageAnnotationContext = GoogleCloudVisionV1p2bet
 googleCloudVisionV1p2beta1ImageAnnotationContext
     :: GoogleCloudVisionV1p2beta1ImageAnnotationContext
 googleCloudVisionV1p2beta1ImageAnnotationContext =
-    GoogleCloudVisionV1p2beta1ImageAnnotationContext'
-    { _gcvviaccURI = Nothing
-    , _gcvviaccPageNumber = Nothing
-    }
+  GoogleCloudVisionV1p2beta1ImageAnnotationContext'
+    {_gcvviaccURI = Nothing, _gcvviaccPageNumber = Nothing}
+
 
 -- | The URI of the file used to produce the image.
 gcvviaccURI :: Lens' GoogleCloudVisionV1p2beta1ImageAnnotationContext (Maybe Text)
@@ -11146,7 +11615,7 @@ gcvviaccPageNumber
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1ImageAnnotationContext
+           GoogleCloudVisionV1p2beta1ImageAnnotationContext
          where
         parseJSON
           = withObject
@@ -11156,7 +11625,7 @@ instance FromJSON
                    (o .:? "uri") <*> (o .:? "pageNumber"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1ImageAnnotationContext
+           GoogleCloudVisionV1p2beta1ImageAnnotationContext
          where
         toJSON
           GoogleCloudVisionV1p2beta1ImageAnnotationContext'{..}
@@ -11168,11 +11637,14 @@ instance ToJSON
 -- | Results for a product search request.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ProductSearchResults' smart constructor.
-data GoogleCloudVisionV1p2beta1ProductSearchResults = GoogleCloudVisionV1p2beta1ProductSearchResults'
+data GoogleCloudVisionV1p2beta1ProductSearchResults =
+  GoogleCloudVisionV1p2beta1ProductSearchResults'
     { _gcvvpsrsProductGroupedResults :: !(Maybe [GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult])
     , _gcvvpsrsResults               :: !(Maybe [GoogleCloudVisionV1p2beta1ProductSearchResultsResult])
     , _gcvvpsrsIndexTime             :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductSearchResults' with the minimum fields required to make a request.
 --
@@ -11186,11 +11658,12 @@ data GoogleCloudVisionV1p2beta1ProductSearchResults = GoogleCloudVisionV1p2beta1
 googleCloudVisionV1p2beta1ProductSearchResults
     :: GoogleCloudVisionV1p2beta1ProductSearchResults
 googleCloudVisionV1p2beta1ProductSearchResults =
-    GoogleCloudVisionV1p2beta1ProductSearchResults'
+  GoogleCloudVisionV1p2beta1ProductSearchResults'
     { _gcvvpsrsProductGroupedResults = Nothing
     , _gcvvpsrsResults = Nothing
     , _gcvvpsrsIndexTime = Nothing
     }
+
 
 -- | List of results grouped by products detected in the query image. Each
 -- entry corresponds to one bounding polygon in the query image, and
@@ -11220,7 +11693,8 @@ gcvvpsrsIndexTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1ProductSearchResults where
+           GoogleCloudVisionV1p2beta1ProductSearchResults
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1ProductSearchResults"
@@ -11231,7 +11705,8 @@ instance FromJSON
                      <*> (o .:? "indexTime"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1ProductSearchResults where
+           GoogleCloudVisionV1p2beta1ProductSearchResults
+         where
         toJSON
           GoogleCloudVisionV1p2beta1ProductSearchResults'{..}
           = object
@@ -11244,11 +11719,14 @@ instance ToJSON
 -- | A \`Property\` consists of a user-supplied name\/value pair.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Property' smart constructor.
-data GoogleCloudVisionV1p2beta1Property = GoogleCloudVisionV1p2beta1Property'
+data GoogleCloudVisionV1p2beta1Property =
+  GoogleCloudVisionV1p2beta1Property'
     { _goooUint64Value :: !(Maybe (Textual Word64))
     , _goooValue       :: !(Maybe Text)
     , _goooName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Property' with the minimum fields required to make a request.
 --
@@ -11262,11 +11740,9 @@ data GoogleCloudVisionV1p2beta1Property = GoogleCloudVisionV1p2beta1Property'
 googleCloudVisionV1p2beta1Property
     :: GoogleCloudVisionV1p2beta1Property
 googleCloudVisionV1p2beta1Property =
-    GoogleCloudVisionV1p2beta1Property'
-    { _goooUint64Value = Nothing
-    , _goooValue = Nothing
-    , _goooName = Nothing
-    }
+  GoogleCloudVisionV1p2beta1Property'
+    {_goooUint64Value = Nothing, _goooValue = Nothing, _goooName = Nothing}
+
 
 -- | Value of numeric properties.
 goooUint64Value :: Lens' GoogleCloudVisionV1p2beta1Property (Maybe Word64)
@@ -11305,7 +11781,8 @@ instance ToJSON GoogleCloudVisionV1p2beta1Property
 -- | A face annotation object contains the results of face detection.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1FaceAnnotation' smart constructor.
-data GoogleCloudVisionV1p3beta1FaceAnnotation = GoogleCloudVisionV1p3beta1FaceAnnotation'
+data GoogleCloudVisionV1p3beta1FaceAnnotation =
+  GoogleCloudVisionV1p3beta1FaceAnnotation'
     { _gcvvfacTiltAngle              :: !(Maybe (Textual Double))
     , _gcvvfacBlurredLikelihood      :: !(Maybe GoogleCloudVisionV1p3beta1FaceAnnotationBlurredLikelihood)
     , _gcvvfacBoundingPoly           :: !(Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
@@ -11321,7 +11798,9 @@ data GoogleCloudVisionV1p3beta1FaceAnnotation = GoogleCloudVisionV1p3beta1FaceAn
     , _gcvvfacSorrowLikelihood       :: !(Maybe GoogleCloudVisionV1p3beta1FaceAnnotationSorrowLikelihood)
     , _gcvvfacJoyLikelihood          :: !(Maybe GoogleCloudVisionV1p3beta1FaceAnnotationJoyLikelihood)
     , _gcvvfacLandmarks              :: !(Maybe [GoogleCloudVisionV1p3beta1FaceAnnotationLandmark])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1FaceAnnotation' with the minimum fields required to make a request.
 --
@@ -11359,7 +11838,7 @@ data GoogleCloudVisionV1p3beta1FaceAnnotation = GoogleCloudVisionV1p3beta1FaceAn
 googleCloudVisionV1p3beta1FaceAnnotation
     :: GoogleCloudVisionV1p3beta1FaceAnnotation
 googleCloudVisionV1p3beta1FaceAnnotation =
-    GoogleCloudVisionV1p3beta1FaceAnnotation'
+  GoogleCloudVisionV1p3beta1FaceAnnotation'
     { _gcvvfacTiltAngle = Nothing
     , _gcvvfacBlurredLikelihood = Nothing
     , _gcvvfacBoundingPoly = Nothing
@@ -11377,6 +11856,7 @@ googleCloudVisionV1p3beta1FaceAnnotation =
     , _gcvvfacLandmarks = Nothing
     }
 
+
 -- | Pitch angle, which indicates the upwards\/downwards angle that the face
 -- is pointing relative to the image\'s horizontal plane. Range [-180,180].
 gcvvfacTiltAngle :: Lens' GoogleCloudVisionV1p3beta1FaceAnnotation (Maybe Double)
@@ -11392,12 +11872,11 @@ gcvvfacBlurredLikelihood
       (\ s a -> s{_gcvvfacBlurredLikelihood = a})
 
 -- | The bounding polygon around the face. The coordinates of the bounding
--- box are in the original image\'s scale, as returned in \`ImageParams\`.
--- The bounding box is computed to \"frame\" the face in accordance with
--- human expectations. It is based on the landmarker results. Note that one
--- or more x and\/or y coordinates may not be generated in the
--- \`BoundingPoly\` (the polygon will be unbounded) if only a partial face
--- appears in the image to be annotated.
+-- box are in the original image\'s scale. The bounding box is computed to
+-- \"frame\" the face in accordance with human expectations. It is based on
+-- the landmarker results. Note that one or more x and\/or y coordinates
+-- may not be generated in the \`BoundingPoly\` (the polygon will be
+-- unbounded) if only a partial face appears in the image to be annotated.
 gcvvfacBoundingPoly :: Lens' GoogleCloudVisionV1p3beta1FaceAnnotation (Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
 gcvvfacBoundingPoly
   = lens _gcvvfacBoundingPoly
@@ -11491,7 +11970,8 @@ gcvvfacLandmarks
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1FaceAnnotation where
+           GoogleCloudVisionV1p3beta1FaceAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1FaceAnnotation"
@@ -11513,7 +11993,8 @@ instance FromJSON
                      <*> (o .:? "landmarks" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1FaceAnnotation where
+           GoogleCloudVisionV1p3beta1FaceAnnotation
+         where
         toJSON GoogleCloudVisionV1p3beta1FaceAnnotation'{..}
           = object
               (catMaybes
@@ -11542,10 +12023,13 @@ instance ToJSON
 -- | Detected language for a structural component.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1TextAnnotationDetectedLanguage' smart constructor.
-data GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage = GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage'
+data GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage =
+  GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage'
     { _gcvvtadlcLanguageCode :: !(Maybe Text)
     , _gcvvtadlcConfidence   :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage' with the minimum fields required to make a request.
 --
@@ -11557,10 +12041,9 @@ data GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage = GoogleCloudVisio
 googleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
     :: GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
 googleCloudVisionV1p3beta1TextAnnotationDetectedLanguage =
-    GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage'
-    { _gcvvtadlcLanguageCode = Nothing
-    , _gcvvtadlcConfidence = Nothing
-    }
+  GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage'
+    {_gcvvtadlcLanguageCode = Nothing, _gcvvtadlcConfidence = Nothing}
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -11578,7 +12061,7 @@ gcvvtadlcConfidence
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
+           GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
          where
         parseJSON
           = withObject
@@ -11588,7 +12071,7 @@ instance FromJSON
                    <$> (o .:? "languageCode") <*> (o .:? "confidence"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
+           GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
          where
         toJSON
           GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage'{..}
@@ -11600,13 +12083,16 @@ instance ToJSON
 -- | Metadata for web pages.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1WebDetectionWebPage' smart constructor.
-data GoogleCloudVisionV1p1beta1WebDetectionWebPage = GoogleCloudVisionV1p1beta1WebDetectionWebPage'
+data GoogleCloudVisionV1p1beta1WebDetectionWebPage =
+  GoogleCloudVisionV1p1beta1WebDetectionWebPage'
     { _gcvvwdwpcScore                 :: !(Maybe (Textual Double))
     , _gcvvwdwpcURL                   :: !(Maybe Text)
     , _gcvvwdwpcPageTitle             :: !(Maybe Text)
     , _gcvvwdwpcPartialMatchingImages :: !(Maybe [GoogleCloudVisionV1p1beta1WebDetectionWebImage])
     , _gcvvwdwpcFullMatchingImages    :: !(Maybe [GoogleCloudVisionV1p1beta1WebDetectionWebImage])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetectionWebPage' with the minimum fields required to make a request.
 --
@@ -11624,13 +12110,14 @@ data GoogleCloudVisionV1p1beta1WebDetectionWebPage = GoogleCloudVisionV1p1beta1W
 googleCloudVisionV1p1beta1WebDetectionWebPage
     :: GoogleCloudVisionV1p1beta1WebDetectionWebPage
 googleCloudVisionV1p1beta1WebDetectionWebPage =
-    GoogleCloudVisionV1p1beta1WebDetectionWebPage'
+  GoogleCloudVisionV1p1beta1WebDetectionWebPage'
     { _gcvvwdwpcScore = Nothing
     , _gcvvwdwpcURL = Nothing
     , _gcvvwdwpcPageTitle = Nothing
     , _gcvvwdwpcPartialMatchingImages = Nothing
     , _gcvvwdwpcFullMatchingImages = Nothing
     }
+
 
 -- | (Deprecated) Overall relevancy score for the web page.
 gcvvwdwpcScore :: Lens' GoogleCloudVisionV1p1beta1WebDetectionWebPage (Maybe Double)
@@ -11670,7 +12157,8 @@ gcvvwdwpcFullMatchingImages
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1WebDetectionWebPage where
+           GoogleCloudVisionV1p1beta1WebDetectionWebPage
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1WebDetectionWebPage"
@@ -11682,7 +12170,8 @@ instance FromJSON
                      <*> (o .:? "fullMatchingImages" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1WebDetectionWebPage where
+           GoogleCloudVisionV1p1beta1WebDetectionWebPage
+         where
         toJSON
           GoogleCloudVisionV1p1beta1WebDetectionWebPage'{..}
           = object
@@ -11698,10 +12187,13 @@ instance ToJSON
 -- | The desired output location and metadata.
 --
 -- /See:/ 'outputConfig' smart constructor.
-data OutputConfig = OutputConfig'
+data OutputConfig =
+  OutputConfig'
     { _ocGcsDestination :: !(Maybe GcsDestination)
     , _ocBatchSize      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OutputConfig' with the minimum fields required to make a request.
 --
@@ -11713,10 +12205,8 @@ data OutputConfig = OutputConfig'
 outputConfig
     :: OutputConfig
 outputConfig =
-    OutputConfig'
-    { _ocGcsDestination = Nothing
-    , _ocBatchSize = Nothing
-    }
+  OutputConfig' {_ocGcsDestination = Nothing, _ocBatchSize = Nothing}
+
 
 -- | The Google Cloud Storage location to write the output(s) to.
 ocGcsDestination :: Lens' OutputConfig (Maybe GcsDestination)
@@ -11754,10 +12244,13 @@ instance ToJSON OutputConfig where
 -- | Detected start or end of a structural component.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1TextAnnotationDetectedBreak' smart constructor.
-data GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak = GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak'
+data GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak =
+  GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak'
     { _gooIsPrefix :: !(Maybe Bool)
     , _gooType     :: !(Maybe GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreakType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak' with the minimum fields required to make a request.
 --
@@ -11769,10 +12262,9 @@ data GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak = GoogleCloudVisionV1
 googleCloudVisionV1p3beta1TextAnnotationDetectedBreak
     :: GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak
 googleCloudVisionV1p3beta1TextAnnotationDetectedBreak =
-    GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak'
-    { _gooIsPrefix = Nothing
-    , _gooType = Nothing
-    }
+  GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak'
+    {_gooIsPrefix = Nothing, _gooType = Nothing}
+
 
 -- | True if break prepends the element.
 gooIsPrefix :: Lens' GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak (Maybe Bool)
@@ -11784,7 +12276,7 @@ gooType :: Lens' GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak (Maybe Go
 gooType = lens _gooType (\ s a -> s{_gooType = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak
+           GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak
          where
         parseJSON
           = withObject
@@ -11794,7 +12286,7 @@ instance FromJSON
                    <$> (o .:? "isPrefix") <*> (o .:? "type"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak
+           GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak
          where
         toJSON
           GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak'{..}
@@ -11812,10 +12304,13 @@ instance ToJSON
 -- more detail.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1TextAnnotation' smart constructor.
-data GoogleCloudVisionV1p2beta1TextAnnotation = GoogleCloudVisionV1p2beta1TextAnnotation'
+data GoogleCloudVisionV1p2beta1TextAnnotation =
+  GoogleCloudVisionV1p2beta1TextAnnotation'
     { _gText  :: !(Maybe Text)
     , _gPages :: !(Maybe [GoogleCloudVisionV1p2beta1Page])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1TextAnnotation' with the minimum fields required to make a request.
 --
@@ -11827,10 +12322,9 @@ data GoogleCloudVisionV1p2beta1TextAnnotation = GoogleCloudVisionV1p2beta1TextAn
 googleCloudVisionV1p2beta1TextAnnotation
     :: GoogleCloudVisionV1p2beta1TextAnnotation
 googleCloudVisionV1p2beta1TextAnnotation =
-    GoogleCloudVisionV1p2beta1TextAnnotation'
-    { _gText = Nothing
-    , _gPages = Nothing
-    }
+  GoogleCloudVisionV1p2beta1TextAnnotation'
+    {_gText = Nothing, _gPages = Nothing}
+
 
 -- | UTF-8 text detected on the pages.
 gText :: Lens' GoogleCloudVisionV1p2beta1TextAnnotation (Maybe Text)
@@ -11843,7 +12337,8 @@ gPages
       _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1TextAnnotation where
+           GoogleCloudVisionV1p2beta1TextAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1TextAnnotation"
@@ -11852,7 +12347,8 @@ instance FromJSON
                    (o .:? "text") <*> (o .:? "pages" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1TextAnnotation where
+           GoogleCloudVisionV1p2beta1TextAnnotation
+         where
         toJSON GoogleCloudVisionV1p2beta1TextAnnotation'{..}
           = object
               (catMaybes
@@ -11863,13 +12359,16 @@ instance ToJSON
 -- violence).
 --
 -- /See:/ 'safeSearchAnnotation' smart constructor.
-data SafeSearchAnnotation = SafeSearchAnnotation'
+data SafeSearchAnnotation =
+  SafeSearchAnnotation'
     { _ssaSpoof    :: !(Maybe SafeSearchAnnotationSpoof)
     , _ssaRacy     :: !(Maybe SafeSearchAnnotationRacy)
     , _ssaAdult    :: !(Maybe SafeSearchAnnotationAdult)
     , _ssaMedical  :: !(Maybe SafeSearchAnnotationMedical)
     , _ssaViolence :: !(Maybe SafeSearchAnnotationViolence)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SafeSearchAnnotation' with the minimum fields required to make a request.
 --
@@ -11887,13 +12386,14 @@ data SafeSearchAnnotation = SafeSearchAnnotation'
 safeSearchAnnotation
     :: SafeSearchAnnotation
 safeSearchAnnotation =
-    SafeSearchAnnotation'
+  SafeSearchAnnotation'
     { _ssaSpoof = Nothing
     , _ssaRacy = Nothing
     , _ssaAdult = Nothing
     , _ssaMedical = Nothing
     , _ssaViolence = Nothing
     }
+
 
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
@@ -11945,10 +12445,13 @@ instance ToJSON SafeSearchAnnotation where
 -- | Label to provide extra metadata for the web detection.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1WebDetectionWebLabel' smart constructor.
-data GoogleCloudVisionV1p1beta1WebDetectionWebLabel = GoogleCloudVisionV1p1beta1WebDetectionWebLabel'
+data GoogleCloudVisionV1p1beta1WebDetectionWebLabel =
+  GoogleCloudVisionV1p1beta1WebDetectionWebLabel'
     { _gcvvwdwlcLanguageCode :: !(Maybe Text)
     , _gcvvwdwlcLabel        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetectionWebLabel' with the minimum fields required to make a request.
 --
@@ -11960,10 +12463,9 @@ data GoogleCloudVisionV1p1beta1WebDetectionWebLabel = GoogleCloudVisionV1p1beta1
 googleCloudVisionV1p1beta1WebDetectionWebLabel
     :: GoogleCloudVisionV1p1beta1WebDetectionWebLabel
 googleCloudVisionV1p1beta1WebDetectionWebLabel =
-    GoogleCloudVisionV1p1beta1WebDetectionWebLabel'
-    { _gcvvwdwlcLanguageCode = Nothing
-    , _gcvvwdwlcLabel = Nothing
-    }
+  GoogleCloudVisionV1p1beta1WebDetectionWebLabel'
+    {_gcvvwdwlcLanguageCode = Nothing, _gcvvwdwlcLabel = Nothing}
+
 
 -- | The BCP-47 language code for \`label\`, such as \"en-US\" or
 -- \"sr-Latn\". For more information, see
@@ -11980,7 +12482,8 @@ gcvvwdwlcLabel
       (\ s a -> s{_gcvvwdwlcLabel = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1WebDetectionWebLabel where
+           GoogleCloudVisionV1p1beta1WebDetectionWebLabel
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1WebDetectionWebLabel"
@@ -11989,7 +12492,8 @@ instance FromJSON
                    (o .:? "languageCode") <*> (o .:? "label"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1WebDetectionWebLabel where
+           GoogleCloudVisionV1p1beta1WebDetectionWebLabel
+         where
         toJSON
           GoogleCloudVisionV1p1beta1WebDetectionWebLabel'{..}
           = object
@@ -12000,9 +12504,12 @@ instance ToJSON
 -- | Set of dominant colors and their corresponding scores.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1DominantColorsAnnotation' smart constructor.
-newtype GoogleCloudVisionV1p3beta1DominantColorsAnnotation = GoogleCloudVisionV1p3beta1DominantColorsAnnotation'
+newtype GoogleCloudVisionV1p3beta1DominantColorsAnnotation =
+  GoogleCloudVisionV1p3beta1DominantColorsAnnotation'
     { _gooColors :: Maybe [GoogleCloudVisionV1p3beta1ColorInfo]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1DominantColorsAnnotation' with the minimum fields required to make a request.
 --
@@ -12012,9 +12519,8 @@ newtype GoogleCloudVisionV1p3beta1DominantColorsAnnotation = GoogleCloudVisionV1
 googleCloudVisionV1p3beta1DominantColorsAnnotation
     :: GoogleCloudVisionV1p3beta1DominantColorsAnnotation
 googleCloudVisionV1p3beta1DominantColorsAnnotation =
-    GoogleCloudVisionV1p3beta1DominantColorsAnnotation'
-    { _gooColors = Nothing
-    }
+  GoogleCloudVisionV1p3beta1DominantColorsAnnotation' {_gooColors = Nothing}
+
 
 -- | RGB color values with their score and pixel fraction.
 gooColors :: Lens' GoogleCloudVisionV1p3beta1DominantColorsAnnotation [GoogleCloudVisionV1p3beta1ColorInfo]
@@ -12024,7 +12530,7 @@ gooColors
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1DominantColorsAnnotation
+           GoogleCloudVisionV1p3beta1DominantColorsAnnotation
          where
         parseJSON
           = withObject
@@ -12034,7 +12540,7 @@ instance FromJSON
                    <$> (o .:? "colors" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1DominantColorsAnnotation
+           GoogleCloudVisionV1p3beta1DominantColorsAnnotation
          where
         toJSON
           GoogleCloudVisionV1p3beta1DominantColorsAnnotation'{..}
@@ -12044,11 +12550,14 @@ instance ToJSON
 -- the image that the color occupies in the image.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1ColorInfo' smart constructor.
-data GoogleCloudVisionV1p3beta1ColorInfo = GoogleCloudVisionV1p3beta1ColorInfo'
+data GoogleCloudVisionV1p3beta1ColorInfo =
+  GoogleCloudVisionV1p3beta1ColorInfo'
     { _gcvvcicColor         :: !(Maybe Color)
     , _gcvvcicScore         :: !(Maybe (Textual Double))
     , _gcvvcicPixelFraction :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ColorInfo' with the minimum fields required to make a request.
 --
@@ -12062,11 +12571,12 @@ data GoogleCloudVisionV1p3beta1ColorInfo = GoogleCloudVisionV1p3beta1ColorInfo'
 googleCloudVisionV1p3beta1ColorInfo
     :: GoogleCloudVisionV1p3beta1ColorInfo
 googleCloudVisionV1p3beta1ColorInfo =
-    GoogleCloudVisionV1p3beta1ColorInfo'
+  GoogleCloudVisionV1p3beta1ColorInfo'
     { _gcvvcicColor = Nothing
     , _gcvvcicScore = Nothing
     , _gcvvcicPixelFraction = Nothing
     }
+
 
 -- | RGB components of the color.
 gcvvcicColor :: Lens' GoogleCloudVisionV1p3beta1ColorInfo (Maybe Color)
@@ -12108,9 +12618,12 @@ instance ToJSON GoogleCloudVisionV1p3beta1ColorInfo
 -- | Parameters for crop hints annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1CropHintsParams' smart constructor.
-newtype GoogleCloudVisionV1p2beta1CropHintsParams = GoogleCloudVisionV1p2beta1CropHintsParams'
+newtype GoogleCloudVisionV1p2beta1CropHintsParams =
+  GoogleCloudVisionV1p2beta1CropHintsParams'
     { _gcvvchpAspectRatios :: Maybe [Textual Double]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1CropHintsParams' with the minimum fields required to make a request.
 --
@@ -12120,9 +12633,8 @@ newtype GoogleCloudVisionV1p2beta1CropHintsParams = GoogleCloudVisionV1p2beta1Cr
 googleCloudVisionV1p2beta1CropHintsParams
     :: GoogleCloudVisionV1p2beta1CropHintsParams
 googleCloudVisionV1p2beta1CropHintsParams =
-    GoogleCloudVisionV1p2beta1CropHintsParams'
-    { _gcvvchpAspectRatios = Nothing
-    }
+  GoogleCloudVisionV1p2beta1CropHintsParams' {_gcvvchpAspectRatios = Nothing}
+
 
 -- | Aspect ratios in floats, representing the ratio of the width to the
 -- height of the image. For example, if the desired aspect ratio is 4\/3,
@@ -12138,7 +12650,8 @@ gcvvchpAspectRatios
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1CropHintsParams where
+           GoogleCloudVisionV1p2beta1CropHintsParams
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1CropHintsParams"
@@ -12147,7 +12660,8 @@ instance FromJSON
                    (o .:? "aspectRatios" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1CropHintsParams where
+           GoogleCloudVisionV1p2beta1CropHintsParams
+         where
         toJSON GoogleCloudVisionV1p2beta1CropHintsParams'{..}
           = object
               (catMaybes
@@ -12157,9 +12671,12 @@ instance ToJSON
 -- images.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1CropHintsAnnotation' smart constructor.
-newtype GoogleCloudVisionV1p1beta1CropHintsAnnotation = GoogleCloudVisionV1p1beta1CropHintsAnnotation'
+newtype GoogleCloudVisionV1p1beta1CropHintsAnnotation =
+  GoogleCloudVisionV1p1beta1CropHintsAnnotation'
     { _gooCropHints :: Maybe [GoogleCloudVisionV1p1beta1CropHint]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1CropHintsAnnotation' with the minimum fields required to make a request.
 --
@@ -12169,9 +12686,8 @@ newtype GoogleCloudVisionV1p1beta1CropHintsAnnotation = GoogleCloudVisionV1p1bet
 googleCloudVisionV1p1beta1CropHintsAnnotation
     :: GoogleCloudVisionV1p1beta1CropHintsAnnotation
 googleCloudVisionV1p1beta1CropHintsAnnotation =
-    GoogleCloudVisionV1p1beta1CropHintsAnnotation'
-    { _gooCropHints = Nothing
-    }
+  GoogleCloudVisionV1p1beta1CropHintsAnnotation' {_gooCropHints = Nothing}
+
 
 -- | Crop hint results.
 gooCropHints :: Lens' GoogleCloudVisionV1p1beta1CropHintsAnnotation [GoogleCloudVisionV1p1beta1CropHint]
@@ -12181,7 +12697,8 @@ gooCropHints
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1CropHintsAnnotation where
+           GoogleCloudVisionV1p1beta1CropHintsAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1CropHintsAnnotation"
@@ -12190,7 +12707,8 @@ instance FromJSON
                    (o .:? "cropHints" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1CropHintsAnnotation where
+           GoogleCloudVisionV1p1beta1CropHintsAnnotation
+         where
         toJSON
           GoogleCloudVisionV1p1beta1CropHintsAnnotation'{..}
           = object
@@ -12199,9 +12717,12 @@ instance ToJSON
 -- | The Google Cloud Storage location where the input will be read from.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1GcsSource' smart constructor.
-newtype GoogleCloudVisionV1p2beta1GcsSource = GoogleCloudVisionV1p2beta1GcsSource'
+newtype GoogleCloudVisionV1p2beta1GcsSource =
+  GoogleCloudVisionV1p2beta1GcsSource'
     { _gcvvgscURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1GcsSource' with the minimum fields required to make a request.
 --
@@ -12211,9 +12732,8 @@ newtype GoogleCloudVisionV1p2beta1GcsSource = GoogleCloudVisionV1p2beta1GcsSourc
 googleCloudVisionV1p2beta1GcsSource
     :: GoogleCloudVisionV1p2beta1GcsSource
 googleCloudVisionV1p2beta1GcsSource =
-    GoogleCloudVisionV1p2beta1GcsSource'
-    { _gcvvgscURI = Nothing
-    }
+  GoogleCloudVisionV1p2beta1GcsSource' {_gcvvgscURI = Nothing}
+
 
 -- | Google Cloud Storage URI for the input file. This must only be a Google
 -- Cloud Storage object. Wildcards are not currently supported.
@@ -12237,11 +12757,14 @@ instance ToJSON GoogleCloudVisionV1p2beta1GcsSource
 -- | Contains metadata for the BatchAnnotateImages operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata = OperationMetadata'
+data OperationMetadata =
+  OperationMetadata'
     { _omState      :: !(Maybe OperationMetadataState)
     , _omUpdateTime :: !(Maybe DateTime')
     , _omCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -12255,11 +12778,9 @@ data OperationMetadata = OperationMetadata'
 operationMetadata
     :: OperationMetadata
 operationMetadata =
-    OperationMetadata'
-    { _omState = Nothing
-    , _omUpdateTime = Nothing
-    , _omCreateTime = Nothing
-    }
+  OperationMetadata'
+    {_omState = Nothing, _omUpdateTime = Nothing, _omCreateTime = Nothing}
+
 
 -- | Current state of the batch operation.
 omState :: Lens' OperationMetadata (Maybe OperationMetadataState)
@@ -12296,13 +12817,16 @@ instance ToJSON OperationMetadata where
 -- | A Product contains ReferenceImages.
 --
 -- /See:/ 'product' smart constructor.
-data Product = Product'
+data Product =
+  Product'
     { _proName            :: !(Maybe Text)
     , _proDisplayName     :: !(Maybe Text)
     , _proProductCategory :: !(Maybe Text)
     , _proProductLabels   :: !(Maybe [KeyValue])
     , _proDescription     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
@@ -12320,13 +12844,14 @@ data Product = Product'
 product
     :: Product
 product =
-    Product'
+  Product'
     { _proName = Nothing
     , _proDisplayName = Nothing
     , _proProductCategory = Nothing
     , _proProductLabels = Nothing
     , _proDescription = Nothing
     }
+
 
 -- | The resource name of the product. Format is:
 -- \`projects\/PROJECT_ID\/locations\/LOC_ID\/products\/PRODUCT_ID\`. This
@@ -12392,13 +12917,16 @@ instance ToJSON Product where
 -- | Logical element on the page.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Block' smart constructor.
-data GoogleCloudVisionV1p2beta1Block = GoogleCloudVisionV1p2beta1Block'
+data GoogleCloudVisionV1p2beta1Block =
+  GoogleCloudVisionV1p2beta1Block'
     { _gcvvb1Property    :: !(Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
     , _gcvvb1BoundingBox :: !(Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
     , _gcvvb1Paragraphs  :: !(Maybe [GoogleCloudVisionV1p2beta1Paragraph])
     , _gcvvb1Confidence  :: !(Maybe (Textual Double))
     , _gcvvb1BlockType   :: !(Maybe GoogleCloudVisionV1p2beta1BlockBlockType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Block' with the minimum fields required to make a request.
 --
@@ -12416,13 +12944,14 @@ data GoogleCloudVisionV1p2beta1Block = GoogleCloudVisionV1p2beta1Block'
 googleCloudVisionV1p2beta1Block
     :: GoogleCloudVisionV1p2beta1Block
 googleCloudVisionV1p2beta1Block =
-    GoogleCloudVisionV1p2beta1Block'
+  GoogleCloudVisionV1p2beta1Block'
     { _gcvvb1Property = Nothing
     , _gcvvb1BoundingBox = Nothing
     , _gcvvb1Paragraphs = Nothing
     , _gcvvb1Confidence = Nothing
     , _gcvvb1BlockType = Nothing
     }
+
 
 -- | Additional information detected for the block.
 gcvvb1Property :: Lens' GoogleCloudVisionV1p2beta1Block (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -12490,13 +13019,16 @@ instance ToJSON GoogleCloudVisionV1p2beta1Block where
 -- violence).
 --
 -- /See:/ 'googleCloudVisionV1p3beta1SafeSearchAnnotation' smart constructor.
-data GoogleCloudVisionV1p3beta1SafeSearchAnnotation = GoogleCloudVisionV1p3beta1SafeSearchAnnotation'
+data GoogleCloudVisionV1p3beta1SafeSearchAnnotation =
+  GoogleCloudVisionV1p3beta1SafeSearchAnnotation'
     { _gooSpoof    :: !(Maybe GoogleCloudVisionV1p3beta1SafeSearchAnnotationSpoof)
     , _gooRacy     :: !(Maybe GoogleCloudVisionV1p3beta1SafeSearchAnnotationRacy)
     , _gooAdult    :: !(Maybe GoogleCloudVisionV1p3beta1SafeSearchAnnotationAdult)
     , _gooMedical  :: !(Maybe GoogleCloudVisionV1p3beta1SafeSearchAnnotationMedical)
     , _gooViolence :: !(Maybe GoogleCloudVisionV1p3beta1SafeSearchAnnotationViolence)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1SafeSearchAnnotation' with the minimum fields required to make a request.
 --
@@ -12514,13 +13046,14 @@ data GoogleCloudVisionV1p3beta1SafeSearchAnnotation = GoogleCloudVisionV1p3beta1
 googleCloudVisionV1p3beta1SafeSearchAnnotation
     :: GoogleCloudVisionV1p3beta1SafeSearchAnnotation
 googleCloudVisionV1p3beta1SafeSearchAnnotation =
-    GoogleCloudVisionV1p3beta1SafeSearchAnnotation'
+  GoogleCloudVisionV1p3beta1SafeSearchAnnotation'
     { _gooSpoof = Nothing
     , _gooRacy = Nothing
     , _gooAdult = Nothing
     , _gooMedical = Nothing
     , _gooViolence = Nothing
     }
+
 
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
@@ -12551,7 +13084,8 @@ gooViolence
   = lens _gooViolence (\ s a -> s{_gooViolence = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1SafeSearchAnnotation where
+           GoogleCloudVisionV1p3beta1SafeSearchAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p3beta1SafeSearchAnnotation"
@@ -12563,7 +13097,8 @@ instance FromJSON
                      <*> (o .:? "violence"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1SafeSearchAnnotation where
+           GoogleCloudVisionV1p3beta1SafeSearchAnnotation
+         where
         toJSON
           GoogleCloudVisionV1p3beta1SafeSearchAnnotation'{..}
           = object
@@ -12582,10 +13117,13 @@ instance ToJSON
 -- more detail.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1TextAnnotation' smart constructor.
-data GoogleCloudVisionV1p1beta1TextAnnotation = GoogleCloudVisionV1p1beta1TextAnnotation'
+data GoogleCloudVisionV1p1beta1TextAnnotation =
+  GoogleCloudVisionV1p1beta1TextAnnotation'
     { _gcvvtacText  :: !(Maybe Text)
     , _gcvvtacPages :: !(Maybe [GoogleCloudVisionV1p1beta1Page])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1TextAnnotation' with the minimum fields required to make a request.
 --
@@ -12597,10 +13135,9 @@ data GoogleCloudVisionV1p1beta1TextAnnotation = GoogleCloudVisionV1p1beta1TextAn
 googleCloudVisionV1p1beta1TextAnnotation
     :: GoogleCloudVisionV1p1beta1TextAnnotation
 googleCloudVisionV1p1beta1TextAnnotation =
-    GoogleCloudVisionV1p1beta1TextAnnotation'
-    { _gcvvtacText = Nothing
-    , _gcvvtacPages = Nothing
-    }
+  GoogleCloudVisionV1p1beta1TextAnnotation'
+    {_gcvvtacText = Nothing, _gcvvtacPages = Nothing}
+
 
 -- | UTF-8 text detected on the pages.
 gcvvtacText :: Lens' GoogleCloudVisionV1p1beta1TextAnnotation (Maybe Text)
@@ -12615,7 +13152,8 @@ gcvvtacPages
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1TextAnnotation where
+           GoogleCloudVisionV1p1beta1TextAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1TextAnnotation"
@@ -12624,7 +13162,8 @@ instance FromJSON
                    (o .:? "text") <*> (o .:? "pages" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1TextAnnotation where
+           GoogleCloudVisionV1p1beta1TextAnnotation
+         where
         toJSON GoogleCloudVisionV1p1beta1TextAnnotation'{..}
           = object
               (catMaybes
@@ -12634,12 +13173,15 @@ instance ToJSON
 -- | Parameters for a product search request.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ProductSearchParams' smart constructor.
-data GoogleCloudVisionV1p2beta1ProductSearchParams = GoogleCloudVisionV1p2beta1ProductSearchParams'
+data GoogleCloudVisionV1p2beta1ProductSearchParams =
+  GoogleCloudVisionV1p2beta1ProductSearchParams'
     { _gcvvpspProductCategories :: !(Maybe [Text])
     , _gcvvpspBoundingPoly      :: !(Maybe GoogleCloudVisionV1p2beta1BoundingPoly)
     , _gcvvpspProductSet        :: !(Maybe Text)
     , _gcvvpspFilter            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductSearchParams' with the minimum fields required to make a request.
 --
@@ -12655,12 +13197,13 @@ data GoogleCloudVisionV1p2beta1ProductSearchParams = GoogleCloudVisionV1p2beta1P
 googleCloudVisionV1p2beta1ProductSearchParams
     :: GoogleCloudVisionV1p2beta1ProductSearchParams
 googleCloudVisionV1p2beta1ProductSearchParams =
-    GoogleCloudVisionV1p2beta1ProductSearchParams'
+  GoogleCloudVisionV1p2beta1ProductSearchParams'
     { _gcvvpspProductCategories = Nothing
     , _gcvvpspBoundingPoly = Nothing
     , _gcvvpspProductSet = Nothing
     , _gcvvpspFilter = Nothing
     }
+
 
 -- | The list of product categories to search in. Currently, we only consider
 -- the first category, and either \"homegoods\", \"apparel\", or \"toys\"
@@ -12699,7 +13242,8 @@ gcvvpspFilter
       (\ s a -> s{_gcvvpspFilter = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1ProductSearchParams where
+           GoogleCloudVisionV1p2beta1ProductSearchParams
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1ProductSearchParams"
@@ -12711,7 +13255,8 @@ instance FromJSON
                      <*> (o .:? "filter"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1ProductSearchParams where
+           GoogleCloudVisionV1p2beta1ProductSearchParams
+         where
         toJSON
           GoogleCloudVisionV1p2beta1ProductSearchParams'{..}
           = object
@@ -12725,13 +13270,16 @@ instance ToJSON
 -- | Metadata for web pages.
 --
 -- /See:/ 'webPage' smart constructor.
-data WebPage = WebPage'
+data WebPage =
+  WebPage'
     { _wpScore                 :: !(Maybe (Textual Double))
     , _wpURL                   :: !(Maybe Text)
     , _wpPageTitle             :: !(Maybe Text)
     , _wpPartialMatchingImages :: !(Maybe [WebImage])
     , _wpFullMatchingImages    :: !(Maybe [WebImage])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebPage' with the minimum fields required to make a request.
 --
@@ -12749,13 +13297,14 @@ data WebPage = WebPage'
 webPage
     :: WebPage
 webPage =
-    WebPage'
+  WebPage'
     { _wpScore = Nothing
     , _wpURL = Nothing
     , _wpPageTitle = Nothing
     , _wpPartialMatchingImages = Nothing
     , _wpFullMatchingImages = Nothing
     }
+
 
 -- | (Deprecated) Overall relevancy score for the web page.
 wpScore :: Lens' WebPage (Maybe Double)
@@ -12814,9 +13363,12 @@ instance ToJSON WebPage where
 -- | Set of dominant colors and their corresponding scores.
 --
 -- /See:/ 'dominantColorsAnnotation' smart constructor.
-newtype DominantColorsAnnotation = DominantColorsAnnotation'
+newtype DominantColorsAnnotation =
+  DominantColorsAnnotation'
     { _dcaColors :: Maybe [ColorInfo]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DominantColorsAnnotation' with the minimum fields required to make a request.
 --
@@ -12825,10 +13377,8 @@ newtype DominantColorsAnnotation = DominantColorsAnnotation'
 -- * 'dcaColors'
 dominantColorsAnnotation
     :: DominantColorsAnnotation
-dominantColorsAnnotation =
-    DominantColorsAnnotation'
-    { _dcaColors = Nothing
-    }
+dominantColorsAnnotation = DominantColorsAnnotation' {_dcaColors = Nothing}
+
 
 -- | RGB color values with their score and pixel fraction.
 dcaColors :: Lens' DominantColorsAnnotation [ColorInfo]
@@ -12851,10 +13401,13 @@ instance ToJSON DominantColorsAnnotation where
 -- | Label to provide extra metadata for the web detection.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1WebDetectionWebLabel' smart constructor.
-data GoogleCloudVisionV1p2beta1WebDetectionWebLabel = GoogleCloudVisionV1p2beta1WebDetectionWebLabel'
+data GoogleCloudVisionV1p2beta1WebDetectionWebLabel =
+  GoogleCloudVisionV1p2beta1WebDetectionWebLabel'
     { _ggLanguageCode :: !(Maybe Text)
     , _ggLabel        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionWebLabel' with the minimum fields required to make a request.
 --
@@ -12866,10 +13419,9 @@ data GoogleCloudVisionV1p2beta1WebDetectionWebLabel = GoogleCloudVisionV1p2beta1
 googleCloudVisionV1p2beta1WebDetectionWebLabel
     :: GoogleCloudVisionV1p2beta1WebDetectionWebLabel
 googleCloudVisionV1p2beta1WebDetectionWebLabel =
-    GoogleCloudVisionV1p2beta1WebDetectionWebLabel'
-    { _ggLanguageCode = Nothing
-    , _ggLabel = Nothing
-    }
+  GoogleCloudVisionV1p2beta1WebDetectionWebLabel'
+    {_ggLanguageCode = Nothing, _ggLabel = Nothing}
+
 
 -- | The BCP-47 language code for \`label\`, such as \"en-US\" or
 -- \"sr-Latn\". For more information, see
@@ -12884,7 +13436,8 @@ ggLabel :: Lens' GoogleCloudVisionV1p2beta1WebDetectionWebLabel (Maybe Text)
 ggLabel = lens _ggLabel (\ s a -> s{_ggLabel = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1WebDetectionWebLabel where
+           GoogleCloudVisionV1p2beta1WebDetectionWebLabel
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1WebDetectionWebLabel"
@@ -12893,7 +13446,8 @@ instance FromJSON
                    (o .:? "languageCode") <*> (o .:? "label"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1WebDetectionWebLabel where
+           GoogleCloudVisionV1p2beta1WebDetectionWebLabel
+         where
         toJSON
           GoogleCloudVisionV1p2beta1WebDetectionWebLabel'{..}
           = object
@@ -12905,10 +13459,13 @@ instance ToJSON
 -- image.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1ProductSearchResultsGroupedResult' smart constructor.
-data GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult = GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult'
+data GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult =
+  GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult'
     { _ggResults      :: !(Maybe [GoogleCloudVisionV1p3beta1ProductSearchResultsResult])
     , _ggBoundingPoly :: !(Maybe GoogleCloudVisionV1p3beta1BoundingPoly)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult' with the minimum fields required to make a request.
 --
@@ -12920,10 +13477,9 @@ data GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult = GoogleCloudVi
 googleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
     :: GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
 googleCloudVisionV1p3beta1ProductSearchResultsGroupedResult =
-    GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult'
-    { _ggResults = Nothing
-    , _ggBoundingPoly = Nothing
-    }
+  GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult'
+    {_ggResults = Nothing, _ggBoundingPoly = Nothing}
+
 
 -- | List of results, one for each product match.
 ggResults :: Lens' GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult [GoogleCloudVisionV1p3beta1ProductSearchResultsResult]
@@ -12939,7 +13495,7 @@ ggBoundingPoly
       (\ s a -> s{_ggBoundingPoly = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
+           GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
          where
         parseJSON
           = withObject
@@ -12951,7 +13507,7 @@ instance FromJSON
                      (o .:? "boundingPoly"))
 
 instance ToJSON
-         GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
+           GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
          where
         toJSON
           GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult'{..}
@@ -12963,9 +13519,12 @@ instance ToJSON
 -- | The response for a single offline file annotation request.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1AsyncAnnotateFileResponse' smart constructor.
-newtype GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse = GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse'
+newtype GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse =
+  GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse'
     { _gcvvaafrcOutputConfig :: Maybe GoogleCloudVisionV1p2beta1OutputConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse' with the minimum fields required to make a request.
 --
@@ -12975,9 +13534,9 @@ newtype GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse = GoogleCloudVisionV
 googleCloudVisionV1p2beta1AsyncAnnotateFileResponse
     :: GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse
 googleCloudVisionV1p2beta1AsyncAnnotateFileResponse =
-    GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse'
-    { _gcvvaafrcOutputConfig = Nothing
-    }
+  GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse'
+    {_gcvvaafrcOutputConfig = Nothing}
+
 
 -- | The output location and metadata from AsyncAnnotateFileRequest.
 gcvvaafrcOutputConfig :: Lens' GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse (Maybe GoogleCloudVisionV1p2beta1OutputConfig)
@@ -12986,7 +13545,7 @@ gcvvaafrcOutputConfig
       (\ s a -> s{_gcvvaafrcOutputConfig = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse
+           GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse
          where
         parseJSON
           = withObject
@@ -12996,7 +13555,7 @@ instance FromJSON
                    <$> (o .:? "outputConfig"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse
+           GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse
          where
         toJSON
           GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse'{..}
@@ -13007,7 +13566,8 @@ instance ToJSON
 -- | Set of detected entity features.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1EntityAnnotation' smart constructor.
-data GoogleCloudVisionV1p2beta1EntityAnnotation = GoogleCloudVisionV1p2beta1EntityAnnotation'
+data GoogleCloudVisionV1p2beta1EntityAnnotation =
+  GoogleCloudVisionV1p2beta1EntityAnnotation'
     { _gcvvea1Score        :: !(Maybe (Textual Double))
     , _gcvvea1Topicality   :: !(Maybe (Textual Double))
     , _gcvvea1Locale       :: !(Maybe Text)
@@ -13017,7 +13577,9 @@ data GoogleCloudVisionV1p2beta1EntityAnnotation = GoogleCloudVisionV1p2beta1Enti
     , _gcvvea1Locations    :: !(Maybe [GoogleCloudVisionV1p2beta1LocationInfo])
     , _gcvvea1Description  :: !(Maybe Text)
     , _gcvvea1Properties   :: !(Maybe [GoogleCloudVisionV1p2beta1Property])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1EntityAnnotation' with the minimum fields required to make a request.
 --
@@ -13043,7 +13605,7 @@ data GoogleCloudVisionV1p2beta1EntityAnnotation = GoogleCloudVisionV1p2beta1Enti
 googleCloudVisionV1p2beta1EntityAnnotation
     :: GoogleCloudVisionV1p2beta1EntityAnnotation
 googleCloudVisionV1p2beta1EntityAnnotation =
-    GoogleCloudVisionV1p2beta1EntityAnnotation'
+  GoogleCloudVisionV1p2beta1EntityAnnotation'
     { _gcvvea1Score = Nothing
     , _gcvvea1Topicality = Nothing
     , _gcvvea1Locale = Nothing
@@ -13054,6 +13616,7 @@ googleCloudVisionV1p2beta1EntityAnnotation =
     , _gcvvea1Description = Nothing
     , _gcvvea1Properties = Nothing
     }
+
 
 -- | Overall score of the result. Range [0, 1].
 gcvvea1Score :: Lens' GoogleCloudVisionV1p2beta1EntityAnnotation (Maybe Double)
@@ -13130,7 +13693,8 @@ gcvvea1Properties
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1EntityAnnotation where
+           GoogleCloudVisionV1p2beta1EntityAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1EntityAnnotation"
@@ -13146,7 +13710,8 @@ instance FromJSON
                      <*> (o .:? "properties" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1EntityAnnotation where
+           GoogleCloudVisionV1p2beta1EntityAnnotation
+         where
         toJSON
           GoogleCloudVisionV1p2beta1EntityAnnotation'{..}
           = object
@@ -13165,9 +13730,12 @@ instance ToJSON
 -- service call.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest' smart constructor.
-newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest = GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest'
+newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest =
+  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest'
     { _gcvvabafrRequests :: Maybe [GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest' with the minimum fields required to make a request.
 --
@@ -13177,9 +13745,9 @@ newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest = GoogleCloudVi
 googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
     :: GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
 googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest =
-    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest'
-    { _gcvvabafrRequests = Nothing
-    }
+  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest'
+    {_gcvvabafrRequests = Nothing}
+
 
 -- | Individual async file annotation requests for this batch.
 gcvvabafrRequests :: Lens' GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest [GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest]
@@ -13190,7 +13758,7 @@ gcvvabafrRequests
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
+           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
          where
         parseJSON
           = withObject
@@ -13200,7 +13768,7 @@ instance FromJSON
                    <$> (o .:? "requests" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
+           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
          where
         toJSON
           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest'{..}
@@ -13210,13 +13778,16 @@ instance ToJSON
 -- | Metadata for web pages.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1WebDetectionWebPage' smart constructor.
-data GoogleCloudVisionV1p2beta1WebDetectionWebPage = GoogleCloudVisionV1p2beta1WebDetectionWebPage'
+data GoogleCloudVisionV1p2beta1WebDetectionWebPage =
+  GoogleCloudVisionV1p2beta1WebDetectionWebPage'
     { _ggScore                 :: !(Maybe (Textual Double))
     , _ggURL                   :: !(Maybe Text)
     , _ggPageTitle             :: !(Maybe Text)
     , _ggPartialMatchingImages :: !(Maybe [GoogleCloudVisionV1p2beta1WebDetectionWebImage])
     , _ggFullMatchingImages    :: !(Maybe [GoogleCloudVisionV1p2beta1WebDetectionWebImage])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionWebPage' with the minimum fields required to make a request.
 --
@@ -13234,13 +13805,14 @@ data GoogleCloudVisionV1p2beta1WebDetectionWebPage = GoogleCloudVisionV1p2beta1W
 googleCloudVisionV1p2beta1WebDetectionWebPage
     :: GoogleCloudVisionV1p2beta1WebDetectionWebPage
 googleCloudVisionV1p2beta1WebDetectionWebPage =
-    GoogleCloudVisionV1p2beta1WebDetectionWebPage'
+  GoogleCloudVisionV1p2beta1WebDetectionWebPage'
     { _ggScore = Nothing
     , _ggURL = Nothing
     , _ggPageTitle = Nothing
     , _ggPartialMatchingImages = Nothing
     , _ggFullMatchingImages = Nothing
     }
+
 
 -- | (Deprecated) Overall relevancy score for the web page.
 ggScore :: Lens' GoogleCloudVisionV1p2beta1WebDetectionWebPage (Maybe Double)
@@ -13277,7 +13849,8 @@ ggFullMatchingImages
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1WebDetectionWebPage where
+           GoogleCloudVisionV1p2beta1WebDetectionWebPage
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1WebDetectionWebPage"
@@ -13289,7 +13862,8 @@ instance FromJSON
                      <*> (o .:? "fullMatchingImages" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1WebDetectionWebPage where
+           GoogleCloudVisionV1p2beta1WebDetectionWebPage
+         where
         toJSON
           GoogleCloudVisionV1p2beta1WebDetectionWebPage'{..}
           = object
@@ -13310,9 +13884,12 @@ instance ToJSON
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -13323,9 +13900,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -13344,12 +13920,15 @@ instance ToJSON OperationResponse where
 -- | A word representation.
 --
 -- /See:/ 'word' smart constructor.
-data Word = Word'
+data Word =
+  Word'
     { _wProperty    :: !(Maybe TextProperty)
     , _wBoundingBox :: !(Maybe BoundingPoly)
     , _wSymbols     :: !(Maybe [Symbol])
     , _wConfidence  :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Word' with the minimum fields required to make a request.
 --
@@ -13365,12 +13944,13 @@ data Word = Word'
 word
     :: Word
 word =
-    Word'
+  Word'
     { _wProperty = Nothing
     , _wBoundingBox = Nothing
     , _wSymbols = Nothing
     , _wConfidence = Nothing
     }
+
 
 -- | Additional information detected for the word.
 wProperty :: Lens' Word (Maybe TextProperty)
@@ -13424,10 +14004,13 @@ instance ToJSON Word where
 -- | The desired input location and metadata.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1InputConfig' smart constructor.
-data GoogleCloudVisionV1p2beta1InputConfig = GoogleCloudVisionV1p2beta1InputConfig'
+data GoogleCloudVisionV1p2beta1InputConfig =
+  GoogleCloudVisionV1p2beta1InputConfig'
     { _gooGcsSource :: !(Maybe GoogleCloudVisionV1p2beta1GcsSource)
     , _gooMimeType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1InputConfig' with the minimum fields required to make a request.
 --
@@ -13439,10 +14022,9 @@ data GoogleCloudVisionV1p2beta1InputConfig = GoogleCloudVisionV1p2beta1InputConf
 googleCloudVisionV1p2beta1InputConfig
     :: GoogleCloudVisionV1p2beta1InputConfig
 googleCloudVisionV1p2beta1InputConfig =
-    GoogleCloudVisionV1p2beta1InputConfig'
-    { _gooGcsSource = Nothing
-    , _gooMimeType = Nothing
-    }
+  GoogleCloudVisionV1p2beta1InputConfig'
+    {_gooGcsSource = Nothing, _gooMimeType = Nothing}
+
 
 -- | The Google Cloud Storage location to read the input from.
 gooGcsSource :: Lens' GoogleCloudVisionV1p2beta1InputConfig (Maybe GoogleCloudVisionV1p2beta1GcsSource)
@@ -13456,7 +14038,8 @@ gooMimeType
   = lens _gooMimeType (\ s a -> s{_gooMimeType = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1InputConfig where
+           GoogleCloudVisionV1p2beta1InputConfig
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p2beta1InputConfig"
               (\ o ->
@@ -13474,14 +14057,17 @@ instance ToJSON GoogleCloudVisionV1p2beta1InputConfig
 -- | Relevant information for the image from the Internet.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1WebDetection' smart constructor.
-data GoogleCloudVisionV1p1beta1WebDetection = GoogleCloudVisionV1p1beta1WebDetection'
+data GoogleCloudVisionV1p1beta1WebDetection =
+  GoogleCloudVisionV1p1beta1WebDetection'
     { _gooVisuallySimilarImages   :: !(Maybe [GoogleCloudVisionV1p1beta1WebDetectionWebImage])
     , _gooBestGuessLabels         :: !(Maybe [GoogleCloudVisionV1p1beta1WebDetectionWebLabel])
     , _gooPagesWithMatchingImages :: !(Maybe [GoogleCloudVisionV1p1beta1WebDetectionWebPage])
     , _gooPartialMatchingImages   :: !(Maybe [GoogleCloudVisionV1p1beta1WebDetectionWebImage])
     , _gooFullMatchingImages      :: !(Maybe [GoogleCloudVisionV1p1beta1WebDetectionWebImage])
     , _gooWebEntities             :: !(Maybe [GoogleCloudVisionV1p1beta1WebDetectionWebEntity])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetection' with the minimum fields required to make a request.
 --
@@ -13501,7 +14087,7 @@ data GoogleCloudVisionV1p1beta1WebDetection = GoogleCloudVisionV1p1beta1WebDetec
 googleCloudVisionV1p1beta1WebDetection
     :: GoogleCloudVisionV1p1beta1WebDetection
 googleCloudVisionV1p1beta1WebDetection =
-    GoogleCloudVisionV1p1beta1WebDetection'
+  GoogleCloudVisionV1p1beta1WebDetection'
     { _gooVisuallySimilarImages = Nothing
     , _gooBestGuessLabels = Nothing
     , _gooPagesWithMatchingImages = Nothing
@@ -13509,6 +14095,7 @@ googleCloudVisionV1p1beta1WebDetection =
     , _gooFullMatchingImages = Nothing
     , _gooWebEntities = Nothing
     }
+
 
 -- | The visually similar image results.
 gooVisuallySimilarImages :: Lens' GoogleCloudVisionV1p1beta1WebDetection [GoogleCloudVisionV1p1beta1WebDetectionWebImage]
@@ -13563,7 +14150,8 @@ gooWebEntities
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1WebDetection where
+           GoogleCloudVisionV1p1beta1WebDetection
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p1beta1WebDetection"
               (\ o ->
@@ -13576,7 +14164,8 @@ instance FromJSON
                      <*> (o .:? "webEntities" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1WebDetection where
+           GoogleCloudVisionV1p1beta1WebDetection
+         where
         toJSON GoogleCloudVisionV1p1beta1WebDetection'{..}
           = object
               (catMaybes
@@ -13593,10 +14182,13 @@ instance ToJSON
 -- | A face-specific landmark (for example, a face feature).
 --
 -- /See:/ 'googleCloudVisionV1p2beta1FaceAnnotationLandmark' smart constructor.
-data GoogleCloudVisionV1p2beta1FaceAnnotationLandmark = GoogleCloudVisionV1p2beta1FaceAnnotationLandmark'
+data GoogleCloudVisionV1p2beta1FaceAnnotationLandmark =
+  GoogleCloudVisionV1p2beta1FaceAnnotationLandmark'
     { _gcvvfalcType     :: !(Maybe GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType)
     , _gcvvfalcPosition :: !(Maybe GoogleCloudVisionV1p2beta1Position)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1FaceAnnotationLandmark' with the minimum fields required to make a request.
 --
@@ -13608,10 +14200,9 @@ data GoogleCloudVisionV1p2beta1FaceAnnotationLandmark = GoogleCloudVisionV1p2bet
 googleCloudVisionV1p2beta1FaceAnnotationLandmark
     :: GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
 googleCloudVisionV1p2beta1FaceAnnotationLandmark =
-    GoogleCloudVisionV1p2beta1FaceAnnotationLandmark'
-    { _gcvvfalcType = Nothing
-    , _gcvvfalcPosition = Nothing
-    }
+  GoogleCloudVisionV1p2beta1FaceAnnotationLandmark'
+    {_gcvvfalcType = Nothing, _gcvvfalcPosition = Nothing}
+
 
 -- | Face landmark type.
 gcvvfalcType :: Lens' GoogleCloudVisionV1p2beta1FaceAnnotationLandmark (Maybe GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType)
@@ -13625,7 +14216,7 @@ gcvvfalcPosition
       (\ s a -> s{_gcvvfalcPosition = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
+           GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
          where
         parseJSON
           = withObject
@@ -13635,7 +14226,7 @@ instance FromJSON
                    (o .:? "type") <*> (o .:? "position"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
+           GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
          where
         toJSON
           GoogleCloudVisionV1p2beta1FaceAnnotationLandmark'{..}
@@ -13645,14 +14236,18 @@ instance ToJSON
                   ("position" .=) <$> _gcvvfalcPosition])
 
 -- | Request for performing Google Cloud Vision API tasks over a
--- user-provided image, with user-requested features.
+-- user-provided image, with user-requested features, and with context
+-- information.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1AnnotateImageRequest' smart constructor.
-data GoogleCloudVisionV1p2beta1AnnotateImageRequest = GoogleCloudVisionV1p2beta1AnnotateImageRequest'
+data GoogleCloudVisionV1p2beta1AnnotateImageRequest =
+  GoogleCloudVisionV1p2beta1AnnotateImageRequest'
     { _gcvvairImage        :: !(Maybe GoogleCloudVisionV1p2beta1Image)
     , _gcvvairFeatures     :: !(Maybe [GoogleCloudVisionV1p2beta1Feature])
     , _gcvvairImageContext :: !(Maybe GoogleCloudVisionV1p2beta1ImageContext)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AnnotateImageRequest' with the minimum fields required to make a request.
 --
@@ -13666,11 +14261,12 @@ data GoogleCloudVisionV1p2beta1AnnotateImageRequest = GoogleCloudVisionV1p2beta1
 googleCloudVisionV1p2beta1AnnotateImageRequest
     :: GoogleCloudVisionV1p2beta1AnnotateImageRequest
 googleCloudVisionV1p2beta1AnnotateImageRequest =
-    GoogleCloudVisionV1p2beta1AnnotateImageRequest'
+  GoogleCloudVisionV1p2beta1AnnotateImageRequest'
     { _gcvvairImage = Nothing
     , _gcvvairFeatures = Nothing
     , _gcvvairImageContext = Nothing
     }
+
 
 -- | The image to be processed.
 gcvvairImage :: Lens' GoogleCloudVisionV1p2beta1AnnotateImageRequest (Maybe GoogleCloudVisionV1p2beta1Image)
@@ -13692,7 +14288,8 @@ gcvvairImageContext
       (\ s a -> s{_gcvvairImageContext = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1AnnotateImageRequest where
+           GoogleCloudVisionV1p2beta1AnnotateImageRequest
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1AnnotateImageRequest"
@@ -13702,7 +14299,8 @@ instance FromJSON
                      (o .:? "imageContext"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1AnnotateImageRequest where
+           GoogleCloudVisionV1p2beta1AnnotateImageRequest
+         where
         toJSON
           GoogleCloudVisionV1p2beta1AnnotateImageRequest'{..}
           = object
@@ -13715,10 +14313,13 @@ instance ToJSON
 -- more images, which individually have their own responses.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1AnnotateFileResponse' smart constructor.
-data GoogleCloudVisionV1p1beta1AnnotateFileResponse = GoogleCloudVisionV1p1beta1AnnotateFileResponse'
+data GoogleCloudVisionV1p1beta1AnnotateFileResponse =
+  GoogleCloudVisionV1p1beta1AnnotateFileResponse'
     { _gcvvafrcResponses   :: !(Maybe [GoogleCloudVisionV1p1beta1AnnotateImageResponse])
     , _gcvvafrcInputConfig :: !(Maybe GoogleCloudVisionV1p1beta1InputConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1AnnotateFileResponse' with the minimum fields required to make a request.
 --
@@ -13730,10 +14331,9 @@ data GoogleCloudVisionV1p1beta1AnnotateFileResponse = GoogleCloudVisionV1p1beta1
 googleCloudVisionV1p1beta1AnnotateFileResponse
     :: GoogleCloudVisionV1p1beta1AnnotateFileResponse
 googleCloudVisionV1p1beta1AnnotateFileResponse =
-    GoogleCloudVisionV1p1beta1AnnotateFileResponse'
-    { _gcvvafrcResponses = Nothing
-    , _gcvvafrcInputConfig = Nothing
-    }
+  GoogleCloudVisionV1p1beta1AnnotateFileResponse'
+    {_gcvvafrcResponses = Nothing, _gcvvafrcInputConfig = Nothing}
+
 
 -- | Individual responses to images found within the file.
 gcvvafrcResponses :: Lens' GoogleCloudVisionV1p1beta1AnnotateFileResponse [GoogleCloudVisionV1p1beta1AnnotateImageResponse]
@@ -13750,7 +14350,8 @@ gcvvafrcInputConfig
       (\ s a -> s{_gcvvafrcInputConfig = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1AnnotateFileResponse where
+           GoogleCloudVisionV1p1beta1AnnotateFileResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1AnnotateFileResponse"
@@ -13760,7 +14361,8 @@ instance FromJSON
                      (o .:? "inputConfig"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1AnnotateFileResponse where
+           GoogleCloudVisionV1p1beta1AnnotateFileResponse
+         where
         toJSON
           GoogleCloudVisionV1p1beta1AnnotateFileResponse'{..}
           = object
@@ -13771,13 +14373,16 @@ instance ToJSON
 -- | Detected page from OCR.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1Page' smart constructor.
-data GoogleCloudVisionV1p2beta1Page = GoogleCloudVisionV1p2beta1Page'
+data GoogleCloudVisionV1p2beta1Page =
+  GoogleCloudVisionV1p2beta1Page'
     { _goo3Property   :: !(Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
     , _goo3Height     :: !(Maybe (Textual Int32))
     , _goo3Blocks     :: !(Maybe [GoogleCloudVisionV1p2beta1Block])
     , _goo3Width      :: !(Maybe (Textual Int32))
     , _goo3Confidence :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Page' with the minimum fields required to make a request.
 --
@@ -13795,13 +14400,14 @@ data GoogleCloudVisionV1p2beta1Page = GoogleCloudVisionV1p2beta1Page'
 googleCloudVisionV1p2beta1Page
     :: GoogleCloudVisionV1p2beta1Page
 googleCloudVisionV1p2beta1Page =
-    GoogleCloudVisionV1p2beta1Page'
+  GoogleCloudVisionV1p2beta1Page'
     { _goo3Property = Nothing
     , _goo3Height = Nothing
     , _goo3Blocks = Nothing
     , _goo3Width = Nothing
     , _goo3Confidence = Nothing
     }
+
 
 -- | Additional information detected on the page.
 goo3Property :: Lens' GoogleCloudVisionV1p2beta1Page (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -13860,10 +14466,13 @@ instance ToJSON GoogleCloudVisionV1p2beta1Page where
 -- | Detected start or end of a structural component.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1TextAnnotationDetectedBreak' smart constructor.
-data GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak = GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak'
+data GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak =
+  GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak'
     { _gcvvtadbcIsPrefix :: !(Maybe Bool)
     , _gcvvtadbcType     :: !(Maybe GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak' with the minimum fields required to make a request.
 --
@@ -13875,10 +14484,9 @@ data GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak = GoogleCloudVisionV1
 googleCloudVisionV1p2beta1TextAnnotationDetectedBreak
     :: GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak
 googleCloudVisionV1p2beta1TextAnnotationDetectedBreak =
-    GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak'
-    { _gcvvtadbcIsPrefix = Nothing
-    , _gcvvtadbcType = Nothing
-    }
+  GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak'
+    {_gcvvtadbcIsPrefix = Nothing, _gcvvtadbcType = Nothing}
+
 
 -- | True if break prepends the element.
 gcvvtadbcIsPrefix :: Lens' GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak (Maybe Bool)
@@ -13893,7 +14501,7 @@ gcvvtadbcType
       (\ s a -> s{_gcvvtadbcType = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak
+           GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak
          where
         parseJSON
           = withObject
@@ -13903,7 +14511,7 @@ instance FromJSON
                    <$> (o .:? "isPrefix") <*> (o .:? "type"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak
+           GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak
          where
         toJSON
           GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak'{..}
@@ -13915,9 +14523,12 @@ instance ToJSON
 -- | Parameters for web detection request.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1WebDetectionParams' smart constructor.
-newtype GoogleCloudVisionV1p2beta1WebDetectionParams = GoogleCloudVisionV1p2beta1WebDetectionParams'
+newtype GoogleCloudVisionV1p2beta1WebDetectionParams =
+  GoogleCloudVisionV1p2beta1WebDetectionParams'
     { _gcvvwdpIncludeGeoResults :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionParams' with the minimum fields required to make a request.
 --
@@ -13927,9 +14538,9 @@ newtype GoogleCloudVisionV1p2beta1WebDetectionParams = GoogleCloudVisionV1p2beta
 googleCloudVisionV1p2beta1WebDetectionParams
     :: GoogleCloudVisionV1p2beta1WebDetectionParams
 googleCloudVisionV1p2beta1WebDetectionParams =
-    GoogleCloudVisionV1p2beta1WebDetectionParams'
-    { _gcvvwdpIncludeGeoResults = Nothing
-    }
+  GoogleCloudVisionV1p2beta1WebDetectionParams'
+    {_gcvvwdpIncludeGeoResults = Nothing}
+
 
 -- | Whether to include results derived from the geo information in the
 -- image.
@@ -13939,7 +14550,8 @@ gcvvwdpIncludeGeoResults
       (\ s a -> s{_gcvvwdpIncludeGeoResults = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1WebDetectionParams where
+           GoogleCloudVisionV1p2beta1WebDetectionParams
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1WebDetectionParams"
@@ -13948,7 +14560,8 @@ instance FromJSON
                    (o .:? "includeGeoResults"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1WebDetectionParams where
+           GoogleCloudVisionV1p2beta1WebDetectionParams
+         where
         toJSON
           GoogleCloudVisionV1p2beta1WebDetectionParams'{..}
           = object
@@ -13959,10 +14572,13 @@ instance ToJSON
 -- | Additional information detected on the structural component.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1TextAnnotationTextProperty' smart constructor.
-data GoogleCloudVisionV1p1beta1TextAnnotationTextProperty = GoogleCloudVisionV1p1beta1TextAnnotationTextProperty'
+data GoogleCloudVisionV1p1beta1TextAnnotationTextProperty =
+  GoogleCloudVisionV1p1beta1TextAnnotationTextProperty'
     { _gooDetectedLanguages :: !(Maybe [GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage])
     , _gooDetectedBreak     :: !(Maybe GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1TextAnnotationTextProperty' with the minimum fields required to make a request.
 --
@@ -13974,10 +14590,9 @@ data GoogleCloudVisionV1p1beta1TextAnnotationTextProperty = GoogleCloudVisionV1p
 googleCloudVisionV1p1beta1TextAnnotationTextProperty
     :: GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
 googleCloudVisionV1p1beta1TextAnnotationTextProperty =
-    GoogleCloudVisionV1p1beta1TextAnnotationTextProperty'
-    { _gooDetectedLanguages = Nothing
-    , _gooDetectedBreak = Nothing
-    }
+  GoogleCloudVisionV1p1beta1TextAnnotationTextProperty'
+    {_gooDetectedLanguages = Nothing, _gooDetectedBreak = Nothing}
+
 
 -- | A list of detected languages together with confidence.
 gooDetectedLanguages :: Lens' GoogleCloudVisionV1p1beta1TextAnnotationTextProperty [GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage]
@@ -13994,7 +14609,7 @@ gooDetectedBreak
       (\ s a -> s{_gooDetectedBreak = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
+           GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
          where
         parseJSON
           = withObject
@@ -14006,7 +14621,7 @@ instance FromJSON
                      (o .:? "detectedBreak"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
+           GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
          where
         toJSON
           GoogleCloudVisionV1p1beta1TextAnnotationTextProperty'{..}
@@ -14019,10 +14634,13 @@ instance ToJSON
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1Vertex' smart constructor.
-data GoogleCloudVisionV1p1beta1Vertex = GoogleCloudVisionV1p1beta1Vertex'
+data GoogleCloudVisionV1p1beta1Vertex =
+  GoogleCloudVisionV1p1beta1Vertex'
     { _ggX :: !(Maybe (Textual Int32))
     , _ggY :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Vertex' with the minimum fields required to make a request.
 --
@@ -14034,10 +14652,8 @@ data GoogleCloudVisionV1p1beta1Vertex = GoogleCloudVisionV1p1beta1Vertex'
 googleCloudVisionV1p1beta1Vertex
     :: GoogleCloudVisionV1p1beta1Vertex
 googleCloudVisionV1p1beta1Vertex =
-    GoogleCloudVisionV1p1beta1Vertex'
-    { _ggX = Nothing
-    , _ggY = Nothing
-    }
+  GoogleCloudVisionV1p1beta1Vertex' {_ggX = Nothing, _ggY = Nothing}
+
 
 -- | X coordinate.
 ggX :: Lens' GoogleCloudVisionV1p1beta1Vertex (Maybe Int32)
@@ -14067,9 +14683,12 @@ instance ToJSON GoogleCloudVisionV1p1beta1Vertex
 -- images.
 --
 -- /See:/ 'cropHintsAnnotation' smart constructor.
-newtype CropHintsAnnotation = CropHintsAnnotation'
+newtype CropHintsAnnotation =
+  CropHintsAnnotation'
     { _chaCropHints :: Maybe [CropHint]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CropHintsAnnotation' with the minimum fields required to make a request.
 --
@@ -14078,10 +14697,8 @@ newtype CropHintsAnnotation = CropHintsAnnotation'
 -- * 'chaCropHints'
 cropHintsAnnotation
     :: CropHintsAnnotation
-cropHintsAnnotation =
-    CropHintsAnnotation'
-    { _chaCropHints = Nothing
-    }
+cropHintsAnnotation = CropHintsAnnotation' {_chaCropHints = Nothing}
+
 
 -- | Crop hint results.
 chaCropHints :: Lens' CropHintsAnnotation [CropHint]
@@ -14106,9 +14723,12 @@ instance ToJSON CropHintsAnnotation where
 -- call.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1BatchAnnotateImagesRequest' smart constructor.
-newtype GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest = GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest'
+newtype GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest =
+  GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest'
     { _gcvvbairRequests :: Maybe [GoogleCloudVisionV1p2beta1AnnotateImageRequest]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest' with the minimum fields required to make a request.
 --
@@ -14118,9 +14738,9 @@ newtype GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest = GoogleCloudVision
 googleCloudVisionV1p2beta1BatchAnnotateImagesRequest
     :: GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
 googleCloudVisionV1p2beta1BatchAnnotateImagesRequest =
-    GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest'
-    { _gcvvbairRequests = Nothing
-    }
+  GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest'
+    {_gcvvbairRequests = Nothing}
+
 
 -- | Individual image annotation requests for this batch.
 gcvvbairRequests :: Lens' GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest [GoogleCloudVisionV1p2beta1AnnotateImageRequest]
@@ -14131,7 +14751,7 @@ gcvvbairRequests
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
+           GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
          where
         parseJSON
           = withObject
@@ -14141,7 +14761,7 @@ instance FromJSON
                    <$> (o .:? "requests" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
+           GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
          where
         toJSON
           GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest'{..}
@@ -14152,11 +14772,14 @@ instance ToJSON
 -- the image that the color occupies in the image.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1ColorInfo' smart constructor.
-data GoogleCloudVisionV1p2beta1ColorInfo = GoogleCloudVisionV1p2beta1ColorInfo'
+data GoogleCloudVisionV1p2beta1ColorInfo =
+  GoogleCloudVisionV1p2beta1ColorInfo'
     { _gcvvci1Color         :: !(Maybe Color)
     , _gcvvci1Score         :: !(Maybe (Textual Double))
     , _gcvvci1PixelFraction :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ColorInfo' with the minimum fields required to make a request.
 --
@@ -14170,11 +14793,12 @@ data GoogleCloudVisionV1p2beta1ColorInfo = GoogleCloudVisionV1p2beta1ColorInfo'
 googleCloudVisionV1p2beta1ColorInfo
     :: GoogleCloudVisionV1p2beta1ColorInfo
 googleCloudVisionV1p2beta1ColorInfo =
-    GoogleCloudVisionV1p2beta1ColorInfo'
+  GoogleCloudVisionV1p2beta1ColorInfo'
     { _gcvvci1Color = Nothing
     , _gcvvci1Score = Nothing
     , _gcvvci1PixelFraction = Nothing
     }
+
 
 -- | RGB components of the color.
 gcvvci1Color :: Lens' GoogleCloudVisionV1p2beta1ColorInfo (Maybe Color)
@@ -14216,10 +14840,13 @@ instance ToJSON GoogleCloudVisionV1p2beta1ColorInfo
 -- | A bounding polygon for the detected image annotation.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1BoundingPoly' smart constructor.
-data GoogleCloudVisionV1p1beta1BoundingPoly = GoogleCloudVisionV1p1beta1BoundingPoly'
+data GoogleCloudVisionV1p1beta1BoundingPoly =
+  GoogleCloudVisionV1p1beta1BoundingPoly'
     { _gooNormalizedVertices :: !(Maybe [GoogleCloudVisionV1p1beta1NormalizedVertex])
     , _gooVertices           :: !(Maybe [GoogleCloudVisionV1p1beta1Vertex])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1BoundingPoly' with the minimum fields required to make a request.
 --
@@ -14231,10 +14858,9 @@ data GoogleCloudVisionV1p1beta1BoundingPoly = GoogleCloudVisionV1p1beta1Bounding
 googleCloudVisionV1p1beta1BoundingPoly
     :: GoogleCloudVisionV1p1beta1BoundingPoly
 googleCloudVisionV1p1beta1BoundingPoly =
-    GoogleCloudVisionV1p1beta1BoundingPoly'
-    { _gooNormalizedVertices = Nothing
-    , _gooVertices = Nothing
-    }
+  GoogleCloudVisionV1p1beta1BoundingPoly'
+    {_gooNormalizedVertices = Nothing, _gooVertices = Nothing}
+
 
 -- | The bounding polygon normalized vertices.
 gooNormalizedVertices :: Lens' GoogleCloudVisionV1p1beta1BoundingPoly [GoogleCloudVisionV1p1beta1NormalizedVertex]
@@ -14252,7 +14878,8 @@ gooVertices
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1BoundingPoly where
+           GoogleCloudVisionV1p1beta1BoundingPoly
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p1beta1BoundingPoly"
               (\ o ->
@@ -14261,7 +14888,8 @@ instance FromJSON
                      (o .:? "vertices" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1BoundingPoly where
+           GoogleCloudVisionV1p1beta1BoundingPoly
+         where
         toJSON GoogleCloudVisionV1p1beta1BoundingPoly'{..}
           = object
               (catMaybes
@@ -14272,10 +14900,13 @@ instance ToJSON
 -- | Metadata for online images.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1WebDetectionWebImage' smart constructor.
-data GoogleCloudVisionV1p1beta1WebDetectionWebImage = GoogleCloudVisionV1p1beta1WebDetectionWebImage'
+data GoogleCloudVisionV1p1beta1WebDetectionWebImage =
+  GoogleCloudVisionV1p1beta1WebDetectionWebImage'
     { _gcvvwdwi1Score :: !(Maybe (Textual Double))
     , _gcvvwdwi1URL   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetectionWebImage' with the minimum fields required to make a request.
 --
@@ -14287,10 +14918,9 @@ data GoogleCloudVisionV1p1beta1WebDetectionWebImage = GoogleCloudVisionV1p1beta1
 googleCloudVisionV1p1beta1WebDetectionWebImage
     :: GoogleCloudVisionV1p1beta1WebDetectionWebImage
 googleCloudVisionV1p1beta1WebDetectionWebImage =
-    GoogleCloudVisionV1p1beta1WebDetectionWebImage'
-    { _gcvvwdwi1Score = Nothing
-    , _gcvvwdwi1URL = Nothing
-    }
+  GoogleCloudVisionV1p1beta1WebDetectionWebImage'
+    {_gcvvwdwi1Score = Nothing, _gcvvwdwi1URL = Nothing}
+
 
 -- | (Deprecated) Overall relevancy score for the image.
 gcvvwdwi1Score :: Lens' GoogleCloudVisionV1p1beta1WebDetectionWebImage (Maybe Double)
@@ -14305,7 +14935,8 @@ gcvvwdwi1URL
   = lens _gcvvwdwi1URL (\ s a -> s{_gcvvwdwi1URL = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1WebDetectionWebImage where
+           GoogleCloudVisionV1p1beta1WebDetectionWebImage
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1WebDetectionWebImage"
@@ -14314,7 +14945,8 @@ instance FromJSON
                    (o .:? "score") <*> (o .:? "url"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1WebDetectionWebImage where
+           GoogleCloudVisionV1p1beta1WebDetectionWebImage
+         where
         toJSON
           GoogleCloudVisionV1p1beta1WebDetectionWebImage'{..}
           = object
@@ -14327,11 +14959,14 @@ instance ToJSON
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'position' smart constructor.
-data Position = Position'
+data Position =
+  Position'
     { _pZ :: !(Maybe (Textual Double))
     , _pX :: !(Maybe (Textual Double))
     , _pY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Position' with the minimum fields required to make a request.
 --
@@ -14344,12 +14979,8 @@ data Position = Position'
 -- * 'pY'
 position
     :: Position
-position =
-    Position'
-    { _pZ = Nothing
-    , _pX = Nothing
-    , _pY = Nothing
-    }
+position = Position' {_pZ = Nothing, _pX = Nothing, _pY = Nothing}
+
 
 -- | Z coordinate (or depth).
 pZ :: Lens' Position (Maybe Double)
@@ -14380,9 +15011,12 @@ instance ToJSON Position where
 -- | The Google Cloud Storage location where the input will be read from.
 --
 -- /See:/ 'googleCloudVisionV1p3beta1GcsSource' smart constructor.
-newtype GoogleCloudVisionV1p3beta1GcsSource = GoogleCloudVisionV1p3beta1GcsSource'
+newtype GoogleCloudVisionV1p3beta1GcsSource =
+  GoogleCloudVisionV1p3beta1GcsSource'
     { _ggURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1GcsSource' with the minimum fields required to make a request.
 --
@@ -14392,9 +15026,8 @@ newtype GoogleCloudVisionV1p3beta1GcsSource = GoogleCloudVisionV1p3beta1GcsSourc
 googleCloudVisionV1p3beta1GcsSource
     :: GoogleCloudVisionV1p3beta1GcsSource
 googleCloudVisionV1p3beta1GcsSource =
-    GoogleCloudVisionV1p3beta1GcsSource'
-    { _ggURI = Nothing
-    }
+  GoogleCloudVisionV1p3beta1GcsSource' {_ggURI = Nothing}
+
 
 -- | Google Cloud Storage URI for the input file. This must only be a Google
 -- Cloud Storage object. Wildcards are not currently supported.
@@ -14417,9 +15050,12 @@ instance ToJSON GoogleCloudVisionV1p3beta1GcsSource
 -- | Detected entity location information.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1LocationInfo' smart constructor.
-newtype GoogleCloudVisionV1p2beta1LocationInfo = GoogleCloudVisionV1p2beta1LocationInfo'
+newtype GoogleCloudVisionV1p2beta1LocationInfo =
+  GoogleCloudVisionV1p2beta1LocationInfo'
     { _gooLatLng :: Maybe LatLng
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1LocationInfo' with the minimum fields required to make a request.
 --
@@ -14429,9 +15065,8 @@ newtype GoogleCloudVisionV1p2beta1LocationInfo = GoogleCloudVisionV1p2beta1Locat
 googleCloudVisionV1p2beta1LocationInfo
     :: GoogleCloudVisionV1p2beta1LocationInfo
 googleCloudVisionV1p2beta1LocationInfo =
-    GoogleCloudVisionV1p2beta1LocationInfo'
-    { _gooLatLng = Nothing
-    }
+  GoogleCloudVisionV1p2beta1LocationInfo' {_gooLatLng = Nothing}
+
 
 -- | lat\/long location coordinates.
 gooLatLng :: Lens' GoogleCloudVisionV1p2beta1LocationInfo (Maybe LatLng)
@@ -14439,7 +15074,8 @@ gooLatLng
   = lens _gooLatLng (\ s a -> s{_gooLatLng = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1LocationInfo where
+           GoogleCloudVisionV1p2beta1LocationInfo
+         where
         parseJSON
           = withObject "GoogleCloudVisionV1p2beta1LocationInfo"
               (\ o ->
@@ -14447,7 +15083,8 @@ instance FromJSON
                    (o .:? "latLng"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1LocationInfo where
+           GoogleCloudVisionV1p2beta1LocationInfo
+         where
         toJSON GoogleCloudVisionV1p2beta1LocationInfo'{..}
           = object (catMaybes [("latLng" .=) <$> _gooLatLng])
 
@@ -14455,10 +15092,13 @@ instance ToJSON
 -- coordinates are relative to the original image and range from 0 to 1.
 --
 -- /See:/ 'normalizedVertex' smart constructor.
-data NormalizedVertex = NormalizedVertex'
+data NormalizedVertex =
+  NormalizedVertex'
     { _nvX :: !(Maybe (Textual Double))
     , _nvY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NormalizedVertex' with the minimum fields required to make a request.
 --
@@ -14469,11 +15109,8 @@ data NormalizedVertex = NormalizedVertex'
 -- * 'nvY'
 normalizedVertex
     :: NormalizedVertex
-normalizedVertex =
-    NormalizedVertex'
-    { _nvX = Nothing
-    , _nvY = Nothing
-    }
+normalizedVertex = NormalizedVertex' {_nvX = Nothing, _nvY = Nothing}
+
 
 -- | X coordinate.
 nvX :: Lens' NormalizedVertex (Maybe Double)
@@ -14499,11 +15136,14 @@ instance ToJSON NormalizedVertex where
 -- | Contains metadata for the BatchAnnotateImages operation.
 --
 -- /See:/ 'googleCloudVisionV1p1beta1OperationMetadata' smart constructor.
-data GoogleCloudVisionV1p1beta1OperationMetadata = GoogleCloudVisionV1p1beta1OperationMetadata'
+data GoogleCloudVisionV1p1beta1OperationMetadata =
+  GoogleCloudVisionV1p1beta1OperationMetadata'
     { _gooState      :: !(Maybe GoogleCloudVisionV1p1beta1OperationMetadataState)
     , _gooUpdateTime :: !(Maybe DateTime')
     , _gooCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1OperationMetadata' with the minimum fields required to make a request.
 --
@@ -14517,11 +15157,9 @@ data GoogleCloudVisionV1p1beta1OperationMetadata = GoogleCloudVisionV1p1beta1Ope
 googleCloudVisionV1p1beta1OperationMetadata
     :: GoogleCloudVisionV1p1beta1OperationMetadata
 googleCloudVisionV1p1beta1OperationMetadata =
-    GoogleCloudVisionV1p1beta1OperationMetadata'
-    { _gooState = Nothing
-    , _gooUpdateTime = Nothing
-    , _gooCreateTime = Nothing
-    }
+  GoogleCloudVisionV1p1beta1OperationMetadata'
+    {_gooState = Nothing, _gooUpdateTime = Nothing, _gooCreateTime = Nothing}
+
 
 -- | Current state of the batch operation.
 gooState :: Lens' GoogleCloudVisionV1p1beta1OperationMetadata (Maybe GoogleCloudVisionV1p1beta1OperationMetadataState)
@@ -14542,7 +15180,8 @@ gooCreateTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVisionV1p1beta1OperationMetadata where
+           GoogleCloudVisionV1p1beta1OperationMetadata
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p1beta1OperationMetadata"
@@ -14552,7 +15191,8 @@ instance FromJSON
                      (o .:? "createTime"))
 
 instance ToJSON
-         GoogleCloudVisionV1p1beta1OperationMetadata where
+           GoogleCloudVisionV1p1beta1OperationMetadata
+         where
         toJSON
           GoogleCloudVisionV1p1beta1OperationMetadata'{..}
           = object
@@ -14564,9 +15204,12 @@ instance ToJSON
 -- | The Google Cloud Storage location where the output will be written to.
 --
 -- /See:/ 'googleCloudVisionV1p2beta1GcsDestination' smart constructor.
-newtype GoogleCloudVisionV1p2beta1GcsDestination = GoogleCloudVisionV1p2beta1GcsDestination'
+newtype GoogleCloudVisionV1p2beta1GcsDestination =
+  GoogleCloudVisionV1p2beta1GcsDestination'
     { _gcvvgdcURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1GcsDestination' with the minimum fields required to make a request.
 --
@@ -14576,9 +15219,8 @@ newtype GoogleCloudVisionV1p2beta1GcsDestination = GoogleCloudVisionV1p2beta1Gcs
 googleCloudVisionV1p2beta1GcsDestination
     :: GoogleCloudVisionV1p2beta1GcsDestination
 googleCloudVisionV1p2beta1GcsDestination =
-    GoogleCloudVisionV1p2beta1GcsDestination'
-    { _gcvvgdcURI = Nothing
-    }
+  GoogleCloudVisionV1p2beta1GcsDestination' {_gcvvgdcURI = Nothing}
+
 
 -- | Google Cloud Storage URI where the results will be stored. Results will
 -- be in JSON format and preceded by its corresponding input URI. This
@@ -14596,7 +15238,8 @@ gcvvgdcURI
   = lens _gcvvgdcURI (\ s a -> s{_gcvvgdcURI = a})
 
 instance FromJSON
-         GoogleCloudVisionV1p2beta1GcsDestination where
+           GoogleCloudVisionV1p2beta1GcsDestination
+         where
         parseJSON
           = withObject
               "GoogleCloudVisionV1p2beta1GcsDestination"
@@ -14605,6 +15248,7 @@ instance FromJSON
                    (o .:? "uri"))
 
 instance ToJSON
-         GoogleCloudVisionV1p2beta1GcsDestination where
+           GoogleCloudVisionV1p2beta1GcsDestination
+         where
         toJSON GoogleCloudVisionV1p2beta1GcsDestination'{..}
           = object (catMaybes [("uri" .=) <$> _gcvvgdcURI])

@@ -64,10 +64,13 @@ type InstancesListServerCasResource =
 -- certificate that has previously rotated out.
 --
 -- /See:/ 'instancesListServerCas' smart constructor.
-data InstancesListServerCas = InstancesListServerCas'
+data InstancesListServerCas =
+  InstancesListServerCas'
     { _ilscProject  :: !Text
     , _ilscInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesListServerCas' with the minimum fields required to make a request.
 --
@@ -81,10 +84,9 @@ instancesListServerCas
     -> Text -- ^ 'ilscInstance'
     -> InstancesListServerCas
 instancesListServerCas pIlscProject_ pIlscInstance_ =
-    InstancesListServerCas'
-    { _ilscProject = pIlscProject_
-    , _ilscInstance = pIlscInstance_
-    }
+  InstancesListServerCas'
+    {_ilscProject = pIlscProject_, _ilscInstance = pIlscInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 ilscProject :: Lens' InstancesListServerCas Text

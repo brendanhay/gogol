@@ -57,10 +57,13 @@ type ResourcesCalendarsInsertResource =
 -- | Inserts a calendar resource.
 --
 -- /See:/ 'resourcesCalendarsInsert' smart constructor.
-data ResourcesCalendarsInsert = ResourcesCalendarsInsert'
+data ResourcesCalendarsInsert =
+  ResourcesCalendarsInsert'
     { _rciPayload  :: !CalendarResource
     , _rciCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesCalendarsInsert' with the minimum fields required to make a request.
 --
@@ -74,10 +77,9 @@ resourcesCalendarsInsert
     -> Text -- ^ 'rciCustomer'
     -> ResourcesCalendarsInsert
 resourcesCalendarsInsert pRciPayload_ pRciCustomer_ =
-    ResourcesCalendarsInsert'
-    { _rciPayload = pRciPayload_
-    , _rciCustomer = pRciCustomer_
-    }
+  ResourcesCalendarsInsert'
+    {_rciPayload = pRciPayload_, _rciCustomer = pRciCustomer_}
+
 
 -- | Multipart request metadata.
 rciPayload :: Lens' ResourcesCalendarsInsert CalendarResource

@@ -69,7 +69,8 @@ type ProjectsUpdatePolicyResource =
 -- is malformed.
 --
 -- /See:/ 'projectsUpdatePolicy' smart constructor.
-data ProjectsUpdatePolicy = ProjectsUpdatePolicy'
+data ProjectsUpdatePolicy =
+  ProjectsUpdatePolicy'
     { _pupXgafv          :: !(Maybe Xgafv)
     , _pupUploadProtocol :: !(Maybe Text)
     , _pupAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsUpdatePolicy = ProjectsUpdatePolicy'
     , _pupPayload        :: !Policy
     , _pupName           :: !Text
     , _pupCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsUpdatePolicy' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsUpdatePolicy
     -> Text -- ^ 'pupName'
     -> ProjectsUpdatePolicy
 projectsUpdatePolicy pPupPayload_ pPupName_ =
-    ProjectsUpdatePolicy'
+  ProjectsUpdatePolicy'
     { _pupXgafv = Nothing
     , _pupUploadProtocol = Nothing
     , _pupAccessToken = Nothing
@@ -110,6 +113,7 @@ projectsUpdatePolicy pPupPayload_ pPupName_ =
     , _pupName = pPupName_
     , _pupCallback = Nothing
     }
+
 
 -- | V1 error format.
 pupXgafv :: Lens' ProjectsUpdatePolicy (Maybe Xgafv)

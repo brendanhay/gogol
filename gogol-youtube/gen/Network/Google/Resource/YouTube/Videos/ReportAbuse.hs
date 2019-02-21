@@ -54,10 +54,13 @@ type VideosReportAbuseResource =
 -- | Report abuse for a video.
 --
 -- /See:/ 'videosReportAbuse' smart constructor.
-data VideosReportAbuse = VideosReportAbuse'
+data VideosReportAbuse =
+  VideosReportAbuse'
     { _vraPayload                :: !VideoAbuseReport
     , _vraOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VideosReportAbuse' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ videosReportAbuse
     :: VideoAbuseReport -- ^ 'vraPayload'
     -> VideosReportAbuse
 videosReportAbuse pVraPayload_ =
-    VideosReportAbuse'
-    { _vraPayload = pVraPayload_
-    , _vraOnBehalfOfContentOwner = Nothing
-    }
+  VideosReportAbuse'
+    {_vraPayload = pVraPayload_, _vraOnBehalfOfContentOwner = Nothing}
+
 
 -- | Multipart request metadata.
 vraPayload :: Lens' VideosReportAbuse VideoAbuseReport

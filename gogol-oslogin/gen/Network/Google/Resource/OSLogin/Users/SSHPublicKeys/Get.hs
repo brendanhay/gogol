@@ -22,7 +22,7 @@
 --
 -- Retrieves an SSH public key.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.get@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.get@.
 module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Get
     (
     -- * REST Resource
@@ -59,14 +59,17 @@ type UsersSSHPublicKeysGetResource =
 -- | Retrieves an SSH public key.
 --
 -- /See:/ 'usersSSHPublicKeysGet' smart constructor.
-data UsersSSHPublicKeysGet = UsersSSHPublicKeysGet'
+data UsersSSHPublicKeysGet =
+  UsersSSHPublicKeysGet'
     { _uspkgXgafv          :: !(Maybe Xgafv)
     , _uspkgUploadProtocol :: !(Maybe Text)
     , _uspkgAccessToken    :: !(Maybe Text)
     , _uspkgUploadType     :: !(Maybe Text)
     , _uspkgName           :: !Text
     , _uspkgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSSHPublicKeysGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ usersSSHPublicKeysGet
     :: Text -- ^ 'uspkgName'
     -> UsersSSHPublicKeysGet
 usersSSHPublicKeysGet pUspkgName_ =
-    UsersSSHPublicKeysGet'
+  UsersSSHPublicKeysGet'
     { _uspkgXgafv = Nothing
     , _uspkgUploadProtocol = Nothing
     , _uspkgAccessToken = Nothing
@@ -95,6 +98,7 @@ usersSSHPublicKeysGet pUspkgName_ =
     , _uspkgName = pUspkgName_
     , _uspkgCallback = Nothing
     }
+
 
 -- | V1 error format.
 uspkgXgafv :: Lens' UsersSSHPublicKeysGet (Maybe Xgafv)

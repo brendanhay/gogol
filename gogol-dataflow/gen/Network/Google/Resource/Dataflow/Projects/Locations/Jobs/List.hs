@@ -73,7 +73,8 @@ type ProjectsLocationsJobsListResource =
 -- | List the jobs of a project in a given region.
 --
 -- /See:/ 'projectsLocationsJobsList' smart constructor.
-data ProjectsLocationsJobsList = ProjectsLocationsJobsList'
+data ProjectsLocationsJobsList =
+  ProjectsLocationsJobsList'
     { _pljlXgafv          :: !(Maybe Xgafv)
     , _pljlUploadProtocol :: !(Maybe Text)
     , _pljlLocation       :: !Text
@@ -85,7 +86,9 @@ data ProjectsLocationsJobsList = ProjectsLocationsJobsList'
     , _pljlProjectId      :: !Text
     , _pljlPageSize       :: !(Maybe (Textual Int32))
     , _pljlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsList' with the minimum fields required to make a request.
 --
@@ -117,7 +120,7 @@ projectsLocationsJobsList
     -> Text -- ^ 'pljlProjectId'
     -> ProjectsLocationsJobsList
 projectsLocationsJobsList pPljlLocation_ pPljlProjectId_ =
-    ProjectsLocationsJobsList'
+  ProjectsLocationsJobsList'
     { _pljlXgafv = Nothing
     , _pljlUploadProtocol = Nothing
     , _pljlLocation = pPljlLocation_
@@ -130,6 +133,7 @@ projectsLocationsJobsList pPljlLocation_ pPljlProjectId_ =
     , _pljlPageSize = Nothing
     , _pljlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljlXgafv :: Lens' ProjectsLocationsJobsList (Maybe Xgafv)

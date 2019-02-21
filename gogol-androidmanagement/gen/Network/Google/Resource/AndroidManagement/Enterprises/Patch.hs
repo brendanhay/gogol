@@ -64,7 +64,8 @@ type EnterprisesPatchResource =
 -- | Updates an enterprise.
 --
 -- /See:/ 'enterprisesPatch' smart constructor.
-data EnterprisesPatch = EnterprisesPatch'
+data EnterprisesPatch =
+  EnterprisesPatch'
     { _epXgafv          :: !(Maybe Xgafv)
     , _epUploadProtocol :: !(Maybe Text)
     , _epUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data EnterprisesPatch = EnterprisesPatch'
     , _epPayload        :: !Enterprise
     , _epName           :: !Text
     , _epCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnterprisesPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ enterprisesPatch
     -> Text -- ^ 'epName'
     -> EnterprisesPatch
 enterprisesPatch pEpPayload_ pEpName_ =
-    EnterprisesPatch'
+  EnterprisesPatch'
     { _epXgafv = Nothing
     , _epUploadProtocol = Nothing
     , _epUpdateMask = Nothing
@@ -109,6 +112,7 @@ enterprisesPatch pEpPayload_ pEpName_ =
     , _epName = pEpName_
     , _epCallback = Nothing
     }
+
 
 -- | V1 error format.
 epXgafv :: Lens' EnterprisesPatch (Maybe Xgafv)

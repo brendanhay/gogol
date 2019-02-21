@@ -59,12 +59,15 @@ type SSLPoliciesPatchResource =
 -- | Patches the specified SSL policy with the data included in the request.
 --
 -- /See:/ 'sslPoliciesPatch' smart constructor.
-data SSLPoliciesPatch = SSLPoliciesPatch'
+data SSLPoliciesPatch =
+  SSLPoliciesPatch'
     { _sppSSLPolicy :: !Text
     , _sppRequestId :: !(Maybe Text)
     , _sppProject   :: !Text
     , _sppPayload   :: !SSLPolicy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLPoliciesPatch' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ sslPoliciesPatch
     -> SSLPolicy -- ^ 'sppPayload'
     -> SSLPoliciesPatch
 sslPoliciesPatch pSppSSLPolicy_ pSppProject_ pSppPayload_ =
-    SSLPoliciesPatch'
+  SSLPoliciesPatch'
     { _sppSSLPolicy = pSppSSLPolicy_
     , _sppRequestId = Nothing
     , _sppProject = pSppProject_
     , _sppPayload = pSppPayload_
     }
+
 
 -- | Name of the SSL policy to update. The name must be 1-63 characters long,
 -- and comply with RFC1035.

@@ -75,7 +75,8 @@ type ProjectsZonesClustersNodePoolsRollbackResource =
 -- be an no-op if the last upgrade successfully completed.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsRollback' smart constructor.
-data ProjectsZonesClustersNodePoolsRollback = ProjectsZonesClustersNodePoolsRollback'
+data ProjectsZonesClustersNodePoolsRollback =
+  ProjectsZonesClustersNodePoolsRollback'
     { _pzcnprXgafv          :: !(Maybe Xgafv)
     , _pzcnprUploadProtocol :: !(Maybe Text)
     , _pzcnprAccessToken    :: !(Maybe Text)
@@ -86,7 +87,9 @@ data ProjectsZonesClustersNodePoolsRollback = ProjectsZonesClustersNodePoolsRoll
     , _pzcnprClusterId      :: !Text
     , _pzcnprProjectId      :: !Text
     , _pzcnprCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsRollback' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ projectsZonesClustersNodePoolsRollback
     -> Text -- ^ 'pzcnprProjectId'
     -> ProjectsZonesClustersNodePoolsRollback
 projectsZonesClustersNodePoolsRollback pPzcnprZone_ pPzcnprPayload_ pPzcnprNodePoolId_ pPzcnprClusterId_ pPzcnprProjectId_ =
-    ProjectsZonesClustersNodePoolsRollback'
+  ProjectsZonesClustersNodePoolsRollback'
     { _pzcnprXgafv = Nothing
     , _pzcnprUploadProtocol = Nothing
     , _pzcnprAccessToken = Nothing
@@ -131,6 +134,7 @@ projectsZonesClustersNodePoolsRollback pPzcnprZone_ pPzcnprPayload_ pPzcnprNodeP
     , _pzcnprProjectId = pPzcnprProjectId_
     , _pzcnprCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnprXgafv :: Lens' ProjectsZonesClustersNodePoolsRollback (Maybe Xgafv)
@@ -197,7 +201,8 @@ pzcnprCallback
       (\ s a -> s{_pzcnprCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersNodePoolsRollback where
+           ProjectsZonesClustersNodePoolsRollback
+         where
         type Rs ProjectsZonesClustersNodePoolsRollback =
              Operation
         type Scopes ProjectsZonesClustersNodePoolsRollback =

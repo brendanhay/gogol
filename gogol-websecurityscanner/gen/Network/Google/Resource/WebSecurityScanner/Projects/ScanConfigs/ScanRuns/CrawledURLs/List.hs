@@ -66,7 +66,8 @@ type ProjectsScanConfigsScanRunsCrawledURLsListResource
 -- | List CrawledUrls under a given ScanRun.
 --
 -- /See:/ 'projectsScanConfigsScanRunsCrawledURLsList' smart constructor.
-data ProjectsScanConfigsScanRunsCrawledURLsList = ProjectsScanConfigsScanRunsCrawledURLsList'
+data ProjectsScanConfigsScanRunsCrawledURLsList =
+  ProjectsScanConfigsScanRunsCrawledURLsList'
     { _pscsrculParent         :: !Text
     , _pscsrculXgafv          :: !(Maybe Xgafv)
     , _pscsrculUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsScanConfigsScanRunsCrawledURLsList = ProjectsScanConfigsScanRunsCra
     , _pscsrculPageToken      :: !(Maybe Text)
     , _pscsrculPageSize       :: !(Maybe (Textual Int32))
     , _pscsrculCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsScanRunsCrawledURLsList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsScanConfigsScanRunsCrawledURLsList
     :: Text -- ^ 'pscsrculParent'
     -> ProjectsScanConfigsScanRunsCrawledURLsList
 projectsScanConfigsScanRunsCrawledURLsList pPscsrculParent_ =
-    ProjectsScanConfigsScanRunsCrawledURLsList'
+  ProjectsScanConfigsScanRunsCrawledURLsList'
     { _pscsrculParent = pPscsrculParent_
     , _pscsrculXgafv = Nothing
     , _pscsrculUploadProtocol = Nothing
@@ -110,6 +113,7 @@ projectsScanConfigsScanRunsCrawledURLsList pPscsrculParent_ =
     , _pscsrculPageSize = Nothing
     , _pscsrculCallback = Nothing
     }
+
 
 -- | Required. The parent resource name, which should be a scan run resource
 -- name in the format
@@ -167,7 +171,8 @@ pscsrculCallback
       (\ s a -> s{_pscsrculCallback = a})
 
 instance GoogleRequest
-         ProjectsScanConfigsScanRunsCrawledURLsList where
+           ProjectsScanConfigsScanRunsCrawledURLsList
+         where
         type Rs ProjectsScanConfigsScanRunsCrawledURLsList =
              ListCrawledURLsResponse
         type Scopes

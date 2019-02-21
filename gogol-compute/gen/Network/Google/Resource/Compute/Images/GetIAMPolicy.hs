@@ -58,10 +58,13 @@ type ImagesGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'imagesGetIAMPolicy' smart constructor.
-data ImagesGetIAMPolicy = ImagesGetIAMPolicy'
+data ImagesGetIAMPolicy =
+  ImagesGetIAMPolicy'
     { _igipProject  :: !Text
     , _igipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImagesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ imagesGetIAMPolicy
     -> Text -- ^ 'igipResource'
     -> ImagesGetIAMPolicy
 imagesGetIAMPolicy pIgipProject_ pIgipResource_ =
-    ImagesGetIAMPolicy'
-    { _igipProject = pIgipProject_
-    , _igipResource = pIgipResource_
-    }
+  ImagesGetIAMPolicy'
+    {_igipProject = pIgipProject_, _igipResource = pIgipResource_}
+
 
 -- | Project ID for this request.
 igipProject :: Lens' ImagesGetIAMPolicy Text

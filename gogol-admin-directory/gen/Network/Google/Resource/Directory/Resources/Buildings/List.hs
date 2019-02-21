@@ -58,11 +58,14 @@ type ResourcesBuildingsListResource =
 -- | Retrieves a list of buildings for an account.
 --
 -- /See:/ 'resourcesBuildingsList' smart constructor.
-data ResourcesBuildingsList = ResourcesBuildingsList'
+data ResourcesBuildingsList =
+  ResourcesBuildingsList'
     { _rblCustomer   :: !Text
     , _rblPageToken  :: !(Maybe Text)
     , _rblMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesBuildingsList' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ resourcesBuildingsList
     :: Text -- ^ 'rblCustomer'
     -> ResourcesBuildingsList
 resourcesBuildingsList pRblCustomer_ =
-    ResourcesBuildingsList'
+  ResourcesBuildingsList'
     { _rblCustomer = pRblCustomer_
     , _rblPageToken = Nothing
     , _rblMaxResults = Nothing
     }
+
 
 -- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your

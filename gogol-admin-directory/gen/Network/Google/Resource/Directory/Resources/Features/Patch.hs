@@ -58,11 +58,14 @@ type ResourcesFeaturesPatchResource =
 -- | Updates a feature. This method supports patch semantics.
 --
 -- /See:/ 'resourcesFeaturesPatch' smart constructor.
-data ResourcesFeaturesPatch = ResourcesFeaturesPatch'
+data ResourcesFeaturesPatch =
+  ResourcesFeaturesPatch'
     { _rfpPayload    :: !Feature
     , _rfpCustomer   :: !Text
     , _rfpFeatureKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesFeaturesPatch' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ resourcesFeaturesPatch
     -> Text -- ^ 'rfpFeatureKey'
     -> ResourcesFeaturesPatch
 resourcesFeaturesPatch pRfpPayload_ pRfpCustomer_ pRfpFeatureKey_ =
-    ResourcesFeaturesPatch'
+  ResourcesFeaturesPatch'
     { _rfpPayload = pRfpPayload_
     , _rfpCustomer = pRfpCustomer_
     , _rfpFeatureKey = pRfpFeatureKey_
     }
+
 
 -- | Multipart request metadata.
 rfpPayload :: Lens' ResourcesFeaturesPatch Feature

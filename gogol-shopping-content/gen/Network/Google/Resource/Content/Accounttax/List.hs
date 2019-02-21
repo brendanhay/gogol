@@ -58,11 +58,14 @@ type AccounttaxListResource =
 -- account.
 --
 -- /See:/ 'accounttaxList' smart constructor.
-data AccounttaxList = AccounttaxList'
+data AccounttaxList =
+  AccounttaxList'
     { _al1MerchantId :: !(Textual Word64)
     , _al1PageToken  :: !(Maybe Text)
     , _al1MaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccounttaxList' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ accounttaxList
     :: Word64 -- ^ 'al1MerchantId'
     -> AccounttaxList
 accounttaxList pAl1MerchantId_ =
-    AccounttaxList'
+  AccounttaxList'
     { _al1MerchantId = _Coerce # pAl1MerchantId_
     , _al1PageToken = Nothing
     , _al1MaxResults = Nothing
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 al1MerchantId :: Lens' AccounttaxList Word64

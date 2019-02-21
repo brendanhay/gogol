@@ -57,10 +57,13 @@ type ProductsUnApproveResource =
 -- any)
 --
 -- /See:/ 'productsUnApprove' smart constructor.
-data ProductsUnApprove = ProductsUnApprove'
+data ProductsUnApprove =
+  ProductsUnApprove'
     { _puaEnterpriseId :: !Text
     , _puaProductId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductsUnApprove' with the minimum fields required to make a request.
 --
@@ -74,10 +77,9 @@ productsUnApprove
     -> Text -- ^ 'puaProductId'
     -> ProductsUnApprove
 productsUnApprove pPuaEnterpriseId_ pPuaProductId_ =
-    ProductsUnApprove'
-    { _puaEnterpriseId = pPuaEnterpriseId_
-    , _puaProductId = pPuaProductId_
-    }
+  ProductsUnApprove'
+    {_puaEnterpriseId = pPuaEnterpriseId_, _puaProductId = pPuaProductId_}
+
 
 -- | The ID of the enterprise.
 puaEnterpriseId :: Lens' ProductsUnApprove Text

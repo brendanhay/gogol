@@ -65,14 +65,17 @@ type LiaSettingsSetinventoryverificationcontactResource
 -- | Sets the inventory verification contract for the specified country.
 --
 -- /See:/ 'liaSettingsSetinventoryverificationcontact' smart constructor.
-data LiaSettingsSetinventoryverificationcontact = LiaSettingsSetinventoryverificationcontact'
+data LiaSettingsSetinventoryverificationcontact =
+  LiaSettingsSetinventoryverificationcontact'
     { _lssContactEmail :: !Text
     , _lssMerchantId   :: !(Textual Word64)
     , _lssCountry      :: !Text
     , _lssAccountId    :: !(Textual Word64)
     , _lssContactName  :: !Text
     , _lssLanguage     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiaSettingsSetinventoryverificationcontact' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ liaSettingsSetinventoryverificationcontact
     -> Text -- ^ 'lssLanguage'
     -> LiaSettingsSetinventoryverificationcontact
 liaSettingsSetinventoryverificationcontact pLssContactEmail_ pLssMerchantId_ pLssCountry_ pLssAccountId_ pLssContactName_ pLssLanguage_ =
-    LiaSettingsSetinventoryverificationcontact'
+  LiaSettingsSetinventoryverificationcontact'
     { _lssContactEmail = pLssContactEmail_
     , _lssMerchantId = _Coerce # pLssMerchantId_
     , _lssCountry = pLssCountry_
@@ -106,6 +109,7 @@ liaSettingsSetinventoryverificationcontact pLssContactEmail_ pLssMerchantId_ pLs
     , _lssContactName = pLssContactName_
     , _lssLanguage = pLssLanguage_
     }
+
 
 -- | The email of the inventory verification contact.
 lssContactEmail :: Lens' LiaSettingsSetinventoryverificationcontact Text
@@ -146,7 +150,8 @@ lssLanguage
   = lens _lssLanguage (\ s a -> s{_lssLanguage = a})
 
 instance GoogleRequest
-         LiaSettingsSetinventoryverificationcontact where
+           LiaSettingsSetinventoryverificationcontact
+         where
         type Rs LiaSettingsSetinventoryverificationcontact =
              LiaSettingsSetInventoryVerificationContactResponse
         type Scopes

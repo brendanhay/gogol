@@ -238,16 +238,16 @@ dNSService
 
 -- | View your DNS records hosted by Google Cloud DNS
 ndevClouddnsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readonly"]
-ndevClouddnsReadOnlyScope = Proxy;
+ndevClouddnsReadOnlyScope = Proxy
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your DNS records hosted by Google Cloud DNS
 ndevClouddnsReadwriteScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-ndevClouddnsReadwriteScope = Proxy;
+ndevClouddnsReadwriteScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

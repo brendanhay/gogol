@@ -69,7 +69,8 @@ type OrganizationsStoredInfoTypesPatchResource =
 -- learn more.
 --
 -- /See:/ 'organizationsStoredInfoTypesPatch' smart constructor.
-data OrganizationsStoredInfoTypesPatch = OrganizationsStoredInfoTypesPatch'
+data OrganizationsStoredInfoTypesPatch =
+  OrganizationsStoredInfoTypesPatch'
     { _ositpXgafv          :: !(Maybe Xgafv)
     , _ositpUploadProtocol :: !(Maybe Text)
     , _ositpAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data OrganizationsStoredInfoTypesPatch = OrganizationsStoredInfoTypesPatch'
     , _ositpPayload        :: !GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
     , _ositpName           :: !Text
     , _ositpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsStoredInfoTypesPatch' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ organizationsStoredInfoTypesPatch
     -> Text -- ^ 'ositpName'
     -> OrganizationsStoredInfoTypesPatch
 organizationsStoredInfoTypesPatch pOsitpPayload_ pOsitpName_ =
-    OrganizationsStoredInfoTypesPatch'
+  OrganizationsStoredInfoTypesPatch'
     { _ositpXgafv = Nothing
     , _ositpUploadProtocol = Nothing
     , _ositpAccessToken = Nothing
@@ -110,6 +113,7 @@ organizationsStoredInfoTypesPatch pOsitpPayload_ pOsitpName_ =
     , _ositpName = pOsitpName_
     , _ositpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ositpXgafv :: Lens' OrganizationsStoredInfoTypesPatch (Maybe Xgafv)
@@ -153,7 +157,8 @@ ositpCallback
       (\ s a -> s{_ositpCallback = a})
 
 instance GoogleRequest
-         OrganizationsStoredInfoTypesPatch where
+           OrganizationsStoredInfoTypesPatch
+         where
         type Rs OrganizationsStoredInfoTypesPatch =
              GooglePrivacyDlpV2StoredInfoType
         type Scopes OrganizationsStoredInfoTypesPatch =

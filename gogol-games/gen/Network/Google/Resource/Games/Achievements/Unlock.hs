@@ -55,10 +55,13 @@ type AchievementsUnlockResource =
 -- | Unlocks this achievement for the currently authenticated player.
 --
 -- /See:/ 'achievementsUnlock' smart constructor.
-data AchievementsUnlock = AchievementsUnlock'
+data AchievementsUnlock =
+  AchievementsUnlock'
     { _auBuiltinGameId :: !(Maybe Text)
     , _auAchievementId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementsUnlock' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ achievementsUnlock
     :: Text -- ^ 'auAchievementId'
     -> AchievementsUnlock
 achievementsUnlock pAuAchievementId_ =
-    AchievementsUnlock'
-    { _auBuiltinGameId = Nothing
-    , _auAchievementId = pAuAchievementId_
-    }
+  AchievementsUnlock'
+    {_auBuiltinGameId = Nothing, _auAchievementId = pAuAchievementId_}
+
 
 -- | Override used only by built-in games in Play Games application.
 auBuiltinGameId :: Lens' AchievementsUnlock (Maybe Text)
@@ -92,7 +94,8 @@ instance GoogleRequest AchievementsUnlock where
         type Rs AchievementsUnlock =
              AchievementUnlockResponse
         type Scopes AchievementsUnlock =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient AchievementsUnlock'{..}
           = go _auAchievementId _auBuiltinGameId (Just AltJSON)
               gamesService

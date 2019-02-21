@@ -27,10 +27,13 @@ import           Network.Google.StreetViewPublish.Types.Sum
 -- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng'
+data LatLng =
+  LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -41,11 +44,8 @@ data LatLng = LatLng'
 -- * 'llLongitude'
 latLng
     :: LatLng
-latLng =
-    LatLng'
-    { _llLatitude = Nothing
-    , _llLongitude = Nothing
-    }
+latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -76,7 +76,8 @@ instance ToJSON LatLng where
 -- | Photo is used to store 360 photos along with photo metadata.
 --
 -- /See:/ 'photo' smart constructor.
-data Photo = Photo'
+data Photo =
+  Photo'
     { _pThumbnailURL      :: !(Maybe Text)
     , _pMapsPublishStatus :: !(Maybe PhotoMapsPublishStatus)
     , _pConnections       :: !(Maybe [Connection])
@@ -89,7 +90,9 @@ data Photo = Photo'
     , _pPlaces            :: !(Maybe [Place])
     , _pViewCount         :: !(Maybe (Textual Int64))
     , _pPhotoId           :: !(Maybe PhotoId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
@@ -121,7 +124,7 @@ data Photo = Photo'
 photo
     :: Photo
 photo =
-    Photo'
+  Photo'
     { _pThumbnailURL = Nothing
     , _pMapsPublishStatus = Nothing
     , _pConnections = Nothing
@@ -135,6 +138,7 @@ photo =
     , _pViewCount = Nothing
     , _pPhotoId = Nothing
     }
+
 
 -- | Output only. The thumbnail URL for showing a preview of the given photo.
 pThumbnailURL :: Lens' Photo (Maybe Text)
@@ -248,10 +252,13 @@ instance ToJSON Photo where
 -- photo is not supported.
 --
 -- /See:/ 'updatePhotoRequest' smart constructor.
-data UpdatePhotoRequest = UpdatePhotoRequest'
+data UpdatePhotoRequest =
+  UpdatePhotoRequest'
     { _uprPhoto      :: !(Maybe Photo)
     , _uprUpdateMask :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdatePhotoRequest' with the minimum fields required to make a request.
 --
@@ -263,10 +270,8 @@ data UpdatePhotoRequest = UpdatePhotoRequest'
 updatePhotoRequest
     :: UpdatePhotoRequest
 updatePhotoRequest =
-    UpdatePhotoRequest'
-    { _uprPhoto = Nothing
-    , _uprUpdateMask = Nothing
-    }
+  UpdatePhotoRequest' {_uprPhoto = Nothing, _uprUpdateMask = Nothing}
+
 
 -- | Required. Photo object containing the new metadata.
 uprPhoto :: Lens' UpdatePhotoRequest (Maybe Photo)
@@ -340,11 +345,14 @@ instance ToJSON UpdatePhotoRequest where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -357,12 +365,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -404,10 +408,13 @@ instance ToJSON Status where
 -- BatchGetPhotos and BatchUpdatePhotos.
 --
 -- /See:/ 'photoResponse' smart constructor.
-data PhotoResponse = PhotoResponse'
+data PhotoResponse =
+  PhotoResponse'
     { _prPhoto  :: !(Maybe Photo)
     , _prStatus :: !(Maybe Status)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotoResponse' with the minimum fields required to make a request.
 --
@@ -418,11 +425,8 @@ data PhotoResponse = PhotoResponse'
 -- * 'prStatus'
 photoResponse
     :: PhotoResponse
-photoResponse =
-    PhotoResponse'
-    { _prPhoto = Nothing
-    , _prStatus = Nothing
-    }
+photoResponse = PhotoResponse' {_prPhoto = Nothing, _prStatus = Nothing}
+
 
 -- | The Photo resource, if the request was successful.
 prPhoto :: Lens' PhotoResponse (Maybe Photo)
@@ -451,13 +455,16 @@ instance ToJSON PhotoResponse where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -475,13 +482,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -546,14 +554,16 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -563,9 +573,12 @@ instance ToJSON Empty where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -576,9 +589,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -597,10 +609,13 @@ instance ToJSON StatusDetailsItem where
 -- | Response to list all photos that belong to a user.
 --
 -- /See:/ 'listPhotosResponse' smart constructor.
-data ListPhotosResponse = ListPhotosResponse'
+data ListPhotosResponse =
+  ListPhotosResponse'
     { _lprNextPageToken :: !(Maybe Text)
     , _lprPhotos        :: !(Maybe [Photo])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListPhotosResponse' with the minimum fields required to make a request.
 --
@@ -612,10 +627,8 @@ data ListPhotosResponse = ListPhotosResponse'
 listPhotosResponse
     :: ListPhotosResponse
 listPhotosResponse =
-    ListPhotosResponse'
-    { _lprNextPageToken = Nothing
-    , _lprPhotos = Nothing
-    }
+  ListPhotosResponse' {_lprNextPageToken = Nothing, _lprPhotos = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -650,9 +663,12 @@ instance ToJSON ListPhotosResponse where
 -- | A connection is the link from a source photo to a destination photo.
 --
 -- /See:/ 'connection' smart constructor.
-newtype Connection = Connection'
+newtype Connection =
+  Connection'
     { _cTarget :: Maybe PhotoId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Connection' with the minimum fields required to make a request.
 --
@@ -661,10 +677,8 @@ newtype Connection = Connection'
 -- * 'cTarget'
 connection
     :: Connection
-connection =
-    Connection'
-    { _cTarget = Nothing
-    }
+connection = Connection' {_cTarget = Nothing}
+
 
 -- | Required. The destination of the connection from the containing photo to
 -- another photo.
@@ -683,9 +697,12 @@ instance ToJSON Connection where
 -- | Response to batch update of metadata of one or more Photos.
 --
 -- /See:/ 'batchUpdatePhotosResponse' smart constructor.
-newtype BatchUpdatePhotosResponse = BatchUpdatePhotosResponse'
+newtype BatchUpdatePhotosResponse =
+  BatchUpdatePhotosResponse'
     { _buprResults :: Maybe [PhotoResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchUpdatePhotosResponse' with the minimum fields required to make a request.
 --
@@ -694,10 +711,8 @@ newtype BatchUpdatePhotosResponse = BatchUpdatePhotosResponse'
 -- * 'buprResults'
 batchUpdatePhotosResponse
     :: BatchUpdatePhotosResponse
-batchUpdatePhotosResponse =
-    BatchUpdatePhotosResponse'
-    { _buprResults = Nothing
-    }
+batchUpdatePhotosResponse = BatchUpdatePhotosResponse' {_buprResults = Nothing}
+
 
 -- | List of results for each individual Photo updated, in the same order as
 -- the request.
@@ -722,9 +737,12 @@ instance ToJSON BatchUpdatePhotosResponse where
 -- | Response to batch delete of one or more Photos.
 --
 -- /See:/ 'batchDeletePhotosResponse' smart constructor.
-newtype BatchDeletePhotosResponse = BatchDeletePhotosResponse'
+newtype BatchDeletePhotosResponse =
+  BatchDeletePhotosResponse'
     { _bdprStatus :: Maybe [Status]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchDeletePhotosResponse' with the minimum fields required to make a request.
 --
@@ -733,10 +751,8 @@ newtype BatchDeletePhotosResponse = BatchDeletePhotosResponse'
 -- * 'bdprStatus'
 batchDeletePhotosResponse
     :: BatchDeletePhotosResponse
-batchDeletePhotosResponse =
-    BatchDeletePhotosResponse'
-    { _bdprStatus = Nothing
-    }
+batchDeletePhotosResponse = BatchDeletePhotosResponse' {_bdprStatus = Nothing}
+
 
 -- | The status for the operation to delete a single Photo in the batch
 -- request.
@@ -760,7 +776,8 @@ instance ToJSON BatchDeletePhotosResponse where
 -- | Raw pose measurement for an entity.
 --
 -- /See:/ 'pose' smart constructor.
-data Pose = Pose'
+data Pose =
+  Pose'
     { _pRoll           :: !(Maybe (Textual Double))
     , _pHeading        :: !(Maybe (Textual Double))
     , _pLatLngPair     :: !(Maybe LatLng)
@@ -768,7 +785,9 @@ data Pose = Pose'
     , _pAltitude       :: !(Maybe (Textual Double))
     , _pLevel          :: !(Maybe Level)
     , _pPitch          :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Pose' with the minimum fields required to make a request.
 --
@@ -790,7 +809,7 @@ data Pose = Pose'
 pose
     :: Pose
 pose =
-    Pose'
+  Pose'
     { _pRoll = Nothing
     , _pHeading = Nothing
     , _pLatLngPair = Nothing
@@ -799,6 +818,7 @@ pose =
     , _pLevel = Nothing
     , _pPitch = Nothing
     }
+
 
 -- | Roll, measured in degrees. Value must be >= 0 and \<360. A value of 0
 -- means level with the horizon. NaN indicates an unmeasured quantity.
@@ -883,9 +903,12 @@ instance ToJSON Pose where
 -- | Upload reference for media files.
 --
 -- /See:/ 'uploadRef' smart constructor.
-newtype UploadRef = UploadRef'
+newtype UploadRef =
+  UploadRef'
     { _urUploadURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UploadRef' with the minimum fields required to make a request.
 --
@@ -894,10 +917,8 @@ newtype UploadRef = UploadRef'
 -- * 'urUploadURL'
 uploadRef
     :: UploadRef
-uploadRef =
-    UploadRef'
-    { _urUploadURL = Nothing
-    }
+uploadRef = UploadRef' {_urUploadURL = Nothing}
+
 
 -- | Required. An upload reference should be unique for each user. It follows
 -- the form:
@@ -922,9 +943,12 @@ instance ToJSON UploadRef where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -935,9 +959,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -957,9 +980,12 @@ instance ToJSON OperationMetadata where
 -- is not supported.
 --
 -- /See:/ 'batchUpdatePhotosRequest' smart constructor.
-newtype BatchUpdatePhotosRequest = BatchUpdatePhotosRequest'
+newtype BatchUpdatePhotosRequest =
+  BatchUpdatePhotosRequest'
     { _buprUpdatePhotoRequests :: Maybe [UpdatePhotoRequest]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchUpdatePhotosRequest' with the minimum fields required to make a request.
 --
@@ -969,9 +995,8 @@ newtype BatchUpdatePhotosRequest = BatchUpdatePhotosRequest'
 batchUpdatePhotosRequest
     :: BatchUpdatePhotosRequest
 batchUpdatePhotosRequest =
-    BatchUpdatePhotosRequest'
-    { _buprUpdatePhotoRequests = Nothing
-    }
+  BatchUpdatePhotosRequest' {_buprUpdatePhotoRequests = Nothing}
+
 
 -- | Required. List of UpdatePhotoRequests.
 buprUpdatePhotoRequests :: Lens' BatchUpdatePhotosRequest [UpdatePhotoRequest]
@@ -998,9 +1023,12 @@ instance ToJSON BatchUpdatePhotosRequest where
 -- | Request to delete multiple Photos.
 --
 -- /See:/ 'batchDeletePhotosRequest' smart constructor.
-newtype BatchDeletePhotosRequest = BatchDeletePhotosRequest'
+newtype BatchDeletePhotosRequest =
+  BatchDeletePhotosRequest'
     { _bdprPhotoIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchDeletePhotosRequest' with the minimum fields required to make a request.
 --
@@ -1009,10 +1037,8 @@ newtype BatchDeletePhotosRequest = BatchDeletePhotosRequest'
 -- * 'bdprPhotoIds'
 batchDeletePhotosRequest
     :: BatchDeletePhotosRequest
-batchDeletePhotosRequest =
-    BatchDeletePhotosRequest'
-    { _bdprPhotoIds = Nothing
-    }
+batchDeletePhotosRequest = BatchDeletePhotosRequest' {_bdprPhotoIds = Nothing}
+
 
 -- | Required. IDs of the Photos. For HTTP GET requests, the URL query
 -- parameter should be \`photoIds=&photoIds=&...\`.
@@ -1037,11 +1063,14 @@ instance ToJSON BatchDeletePhotosRequest where
 -- | Place metadata for an entity.
 --
 -- /See:/ 'place' smart constructor.
-data Place = Place'
+data Place =
+  Place'
     { _pLanguageCode :: !(Maybe Text)
     , _pName         :: !(Maybe Text)
     , _pPlaceId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Place' with the minimum fields required to make a request.
 --
@@ -1054,12 +1083,8 @@ data Place = Place'
 -- * 'pPlaceId'
 place
     :: Place
-place =
-    Place'
-    { _pLanguageCode = Nothing
-    , _pName = Nothing
-    , _pPlaceId = Nothing
-    }
+place = Place' {_pLanguageCode = Nothing, _pName = Nothing, _pPlaceId = Nothing}
+
 
 -- | Output-only. The language_code that the name is localized with. This
 -- should be the language_code specified in the request, but may be a
@@ -1097,10 +1122,13 @@ instance ToJSON Place where
 -- | Level information containing level number and its corresponding name.
 --
 -- /See:/ 'level' smart constructor.
-data Level = Level'
+data Level =
+  Level'
     { _lName   :: !(Maybe Text)
     , _lNumber :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Level' with the minimum fields required to make a request.
 --
@@ -1111,11 +1139,8 @@ data Level = Level'
 -- * 'lNumber'
 level
     :: Level
-level =
-    Level'
-    { _lName = Nothing
-    , _lNumber = Nothing
-    }
+level = Level' {_lName = Nothing, _lNumber = Nothing}
+
 
 -- | Required. A name assigned to this Level, restricted to 3 characters.
 -- Consider how the elevator buttons would be labeled for this level if
@@ -1153,9 +1178,12 @@ instance ToJSON Level where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -1166,9 +1194,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1187,9 +1214,12 @@ instance ToJSON OperationResponse where
 -- | Response to batch get of Photos.
 --
 -- /See:/ 'batchGetPhotosResponse' smart constructor.
-newtype BatchGetPhotosResponse = BatchGetPhotosResponse'
+newtype BatchGetPhotosResponse =
+  BatchGetPhotosResponse'
     { _bgprResults :: Maybe [PhotoResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchGetPhotosResponse' with the minimum fields required to make a request.
 --
@@ -1198,10 +1228,8 @@ newtype BatchGetPhotosResponse = BatchGetPhotosResponse'
 -- * 'bgprResults'
 batchGetPhotosResponse
     :: BatchGetPhotosResponse
-batchGetPhotosResponse =
-    BatchGetPhotosResponse'
-    { _bgprResults = Nothing
-    }
+batchGetPhotosResponse = BatchGetPhotosResponse' {_bgprResults = Nothing}
+
 
 -- | List of results for each individual Photo requested, in the same order
 -- as the requests in BatchGetPhotos.
@@ -1226,9 +1254,12 @@ instance ToJSON BatchGetPhotosResponse where
 -- | Identifier for a Photo.
 --
 -- /See:/ 'photoId' smart constructor.
-newtype PhotoId = PhotoId'
+newtype PhotoId =
+  PhotoId'
     { _piId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotoId' with the minimum fields required to make a request.
 --
@@ -1237,10 +1268,8 @@ newtype PhotoId = PhotoId'
 -- * 'piId'
 photoId
     :: PhotoId
-photoId =
-    PhotoId'
-    { _piId = Nothing
-    }
+photoId = PhotoId' {_piId = Nothing}
+
 
 -- | Required. A unique identifier for a photo.
 piId :: Lens' PhotoId (Maybe Text)

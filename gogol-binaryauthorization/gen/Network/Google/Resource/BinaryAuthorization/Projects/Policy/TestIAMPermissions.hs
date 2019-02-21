@@ -72,7 +72,8 @@ type ProjectsPolicyTestIAMPermissionsResource =
 -- warning.
 --
 -- /See:/ 'projectsPolicyTestIAMPermissions' smart constructor.
-data ProjectsPolicyTestIAMPermissions = ProjectsPolicyTestIAMPermissions'
+data ProjectsPolicyTestIAMPermissions =
+  ProjectsPolicyTestIAMPermissions'
     { _pptipXgafv          :: !(Maybe Xgafv)
     , _pptipUploadProtocol :: !(Maybe Text)
     , _pptipAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsPolicyTestIAMPermissions = ProjectsPolicyTestIAMPermissions'
     , _pptipPayload        :: !TestIAMPermissionsRequest
     , _pptipResource       :: !Text
     , _pptipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsPolicyTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsPolicyTestIAMPermissions
     -> Text -- ^ 'pptipResource'
     -> ProjectsPolicyTestIAMPermissions
 projectsPolicyTestIAMPermissions pPptipPayload_ pPptipResource_ =
-    ProjectsPolicyTestIAMPermissions'
+  ProjectsPolicyTestIAMPermissions'
     { _pptipXgafv = Nothing
     , _pptipUploadProtocol = Nothing
     , _pptipAccessToken = Nothing
@@ -113,6 +116,7 @@ projectsPolicyTestIAMPermissions pPptipPayload_ pPptipResource_ =
     , _pptipResource = pPptipResource_
     , _pptipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pptipXgafv :: Lens' ProjectsPolicyTestIAMPermissions (Maybe Xgafv)
@@ -157,7 +161,8 @@ pptipCallback
       (\ s a -> s{_pptipCallback = a})
 
 instance GoogleRequest
-         ProjectsPolicyTestIAMPermissions where
+           ProjectsPolicyTestIAMPermissions
+         where
         type Rs ProjectsPolicyTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsPolicyTestIAMPermissions =

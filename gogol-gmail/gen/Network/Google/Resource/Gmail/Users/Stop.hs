@@ -51,9 +51,12 @@ type UsersStopResource =
 -- | Stop receiving push notifications for the given user mailbox.
 --
 -- /See:/ 'usersStop' smart constructor.
-newtype UsersStop = UsersStop'
+newtype UsersStop =
+  UsersStop'
     { _usUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersStop' with the minimum fields required to make a request.
 --
@@ -62,10 +65,8 @@ newtype UsersStop = UsersStop'
 -- * 'usUserId'
 usersStop
     :: UsersStop
-usersStop =
-    UsersStop'
-    { _usUserId = "me"
-    }
+usersStop = UsersStop' {_usUserId = "me"}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

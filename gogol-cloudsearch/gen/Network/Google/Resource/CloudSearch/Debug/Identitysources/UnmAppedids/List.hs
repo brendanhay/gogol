@@ -70,7 +70,8 @@ type DebugIdentitysourcesUnmAppedidsListResource =
 -- | Lists unmapped user identities for an identity source.
 --
 -- /See:/ 'debugIdentitysourcesUnmAppedidsList' smart constructor.
-data DebugIdentitysourcesUnmAppedidsList = DebugIdentitysourcesUnmAppedidsList'
+data DebugIdentitysourcesUnmAppedidsList =
+  DebugIdentitysourcesUnmAppedidsList'
     { _diualParent                      :: !Text
     , _diualXgafv                       :: !(Maybe Xgafv)
     , _diualResolutionStatusCode        :: !(Maybe Text)
@@ -81,7 +82,9 @@ data DebugIdentitysourcesUnmAppedidsList = DebugIdentitysourcesUnmAppedidsList'
     , _diualPageToken                   :: !(Maybe Text)
     , _diualPageSize                    :: !(Maybe (Textual Int32))
     , _diualCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DebugIdentitysourcesUnmAppedidsList' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ debugIdentitysourcesUnmAppedidsList
     :: Text -- ^ 'diualParent'
     -> DebugIdentitysourcesUnmAppedidsList
 debugIdentitysourcesUnmAppedidsList pDiualParent_ =
-    DebugIdentitysourcesUnmAppedidsList'
+  DebugIdentitysourcesUnmAppedidsList'
     { _diualParent = pDiualParent_
     , _diualXgafv = Nothing
     , _diualResolutionStatusCode = Nothing
@@ -122,6 +125,7 @@ debugIdentitysourcesUnmAppedidsList pDiualParent_ =
     , _diualPageSize = Nothing
     , _diualCallback = Nothing
     }
+
 
 -- | The name of the identity source, in the following format:
 -- identitysources\/{source_id}
@@ -185,7 +189,8 @@ diualCallback
       (\ s a -> s{_diualCallback = a})
 
 instance GoogleRequest
-         DebugIdentitysourcesUnmAppedidsList where
+           DebugIdentitysourcesUnmAppedidsList
+         where
         type Rs DebugIdentitysourcesUnmAppedidsList =
              ListUnmAppedIdentitiesResponse
         type Scopes DebugIdentitysourcesUnmAppedidsList =

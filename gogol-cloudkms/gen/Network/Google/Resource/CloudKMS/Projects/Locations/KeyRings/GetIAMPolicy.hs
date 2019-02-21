@@ -61,14 +61,17 @@ type ProjectsLocationsKeyRingsGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsLocationsKeyRingsGetIAMPolicy' smart constructor.
-data ProjectsLocationsKeyRingsGetIAMPolicy = ProjectsLocationsKeyRingsGetIAMPolicy'
+data ProjectsLocationsKeyRingsGetIAMPolicy =
+  ProjectsLocationsKeyRingsGetIAMPolicy'
     { _plkrgipXgafv          :: !(Maybe Xgafv)
     , _plkrgipUploadProtocol :: !(Maybe Text)
     , _plkrgipAccessToken    :: !(Maybe Text)
     , _plkrgipUploadType     :: !(Maybe Text)
     , _plkrgipResource       :: !Text
     , _plkrgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsLocationsKeyRingsGetIAMPolicy
     :: Text -- ^ 'plkrgipResource'
     -> ProjectsLocationsKeyRingsGetIAMPolicy
 projectsLocationsKeyRingsGetIAMPolicy pPlkrgipResource_ =
-    ProjectsLocationsKeyRingsGetIAMPolicy'
+  ProjectsLocationsKeyRingsGetIAMPolicy'
     { _plkrgipXgafv = Nothing
     , _plkrgipUploadProtocol = Nothing
     , _plkrgipAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsLocationsKeyRingsGetIAMPolicy pPlkrgipResource_ =
     , _plkrgipResource = pPlkrgipResource_
     , _plkrgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrgipXgafv :: Lens' ProjectsLocationsKeyRingsGetIAMPolicy (Maybe Xgafv)
@@ -135,11 +139,13 @@ plkrgipCallback
       (\ s a -> s{_plkrgipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsGetIAMPolicy where
+           ProjectsLocationsKeyRingsGetIAMPolicy
+         where
         type Rs ProjectsLocationsKeyRingsGetIAMPolicy =
              Policy
         type Scopes ProjectsLocationsKeyRingsGetIAMPolicy =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsGetIAMPolicy'{..}
           = go _plkrgipResource _plkrgipXgafv

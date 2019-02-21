@@ -55,10 +55,13 @@ type CommentsInsertResource =
 -- comment, use the commentThreads.insert method.
 --
 -- /See:/ 'commentsInsert' smart constructor.
-data CommentsInsert = CommentsInsert'
+data CommentsInsert =
+  CommentsInsert'
     { _comPart    :: !Text
     , _comPayload :: !Comment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ commentsInsert
     -> Comment -- ^ 'comPayload'
     -> CommentsInsert
 commentsInsert pComPart_ pComPayload_ =
-    CommentsInsert'
-    { _comPart = pComPart_
-    , _comPayload = pComPayload_
-    }
+  CommentsInsert' {_comPart = pComPart_, _comPayload = pComPayload_}
+
 
 -- | The part parameter identifies the properties that the API response will
 -- include. Set the parameter value to snippet. The snippet part has a

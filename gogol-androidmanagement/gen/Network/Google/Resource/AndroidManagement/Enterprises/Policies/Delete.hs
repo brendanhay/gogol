@@ -61,14 +61,17 @@ type EnterprisesPoliciesDeleteResource =
 -- currently referencing the policy.
 --
 -- /See:/ 'enterprisesPoliciesDelete' smart constructor.
-data EnterprisesPoliciesDelete = EnterprisesPoliciesDelete'
+data EnterprisesPoliciesDelete =
+  EnterprisesPoliciesDelete'
     { _epdXgafv          :: !(Maybe Xgafv)
     , _epdUploadProtocol :: !(Maybe Text)
     , _epdAccessToken    :: !(Maybe Text)
     , _epdUploadType     :: !(Maybe Text)
     , _epdName           :: !Text
     , _epdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnterprisesPoliciesDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ enterprisesPoliciesDelete
     :: Text -- ^ 'epdName'
     -> EnterprisesPoliciesDelete
 enterprisesPoliciesDelete pEpdName_ =
-    EnterprisesPoliciesDelete'
+  EnterprisesPoliciesDelete'
     { _epdXgafv = Nothing
     , _epdUploadProtocol = Nothing
     , _epdAccessToken = Nothing
@@ -97,6 +100,7 @@ enterprisesPoliciesDelete pEpdName_ =
     , _epdName = pEpdName_
     , _epdCallback = Nothing
     }
+
 
 -- | V1 error format.
 epdXgafv :: Lens' EnterprisesPoliciesDelete (Maybe Xgafv)

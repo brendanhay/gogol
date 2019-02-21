@@ -59,14 +59,17 @@ type ProjectsScanConfigsScanRunsFindingsGetResource =
 -- | Gets a Finding.
 --
 -- /See:/ 'projectsScanConfigsScanRunsFindingsGet' smart constructor.
-data ProjectsScanConfigsScanRunsFindingsGet = ProjectsScanConfigsScanRunsFindingsGet'
+data ProjectsScanConfigsScanRunsFindingsGet =
+  ProjectsScanConfigsScanRunsFindingsGet'
     { _pscsrfgXgafv          :: !(Maybe Xgafv)
     , _pscsrfgUploadProtocol :: !(Maybe Text)
     , _pscsrfgAccessToken    :: !(Maybe Text)
     , _pscsrfgUploadType     :: !(Maybe Text)
     , _pscsrfgName           :: !Text
     , _pscsrfgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsScanRunsFindingsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsScanConfigsScanRunsFindingsGet
     :: Text -- ^ 'pscsrfgName'
     -> ProjectsScanConfigsScanRunsFindingsGet
 projectsScanConfigsScanRunsFindingsGet pPscsrfgName_ =
-    ProjectsScanConfigsScanRunsFindingsGet'
+  ProjectsScanConfigsScanRunsFindingsGet'
     { _pscsrfgXgafv = Nothing
     , _pscsrfgUploadProtocol = Nothing
     , _pscsrfgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsScanConfigsScanRunsFindingsGet pPscsrfgName_ =
     , _pscsrfgName = pPscsrfgName_
     , _pscsrfgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscsrfgXgafv :: Lens' ProjectsScanConfigsScanRunsFindingsGet (Maybe Xgafv)
@@ -133,7 +137,8 @@ pscsrfgCallback
       (\ s a -> s{_pscsrfgCallback = a})
 
 instance GoogleRequest
-         ProjectsScanConfigsScanRunsFindingsGet where
+           ProjectsScanConfigsScanRunsFindingsGet
+         where
         type Rs ProjectsScanConfigsScanRunsFindingsGet =
              Finding
         type Scopes ProjectsScanConfigsScanRunsFindingsGet =

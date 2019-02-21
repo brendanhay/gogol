@@ -63,13 +63,16 @@ type AccountsReportsSavedGenerateResource =
 -- query parameters.
 --
 -- /See:/ 'accountsReportsSavedGenerate' smart constructor.
-data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate'
+data AccountsReportsSavedGenerate =
+  AccountsReportsSavedGenerate'
     { _arsgLocale        :: !(Maybe Text)
     , _arsgSavedReportId :: !Text
     , _arsgAccountId     :: !Text
     , _arsgStartIndex    :: !(Maybe (Textual Int32))
     , _arsgMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsReportsSavedGenerate' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ accountsReportsSavedGenerate
     -> Text -- ^ 'arsgAccountId'
     -> AccountsReportsSavedGenerate
 accountsReportsSavedGenerate pArsgSavedReportId_ pArsgAccountId_ =
-    AccountsReportsSavedGenerate'
+  AccountsReportsSavedGenerate'
     { _arsgLocale = Nothing
     , _arsgSavedReportId = pArsgSavedReportId_
     , _arsgAccountId = pArsgAccountId_
     , _arsgStartIndex = Nothing
     , _arsgMaxResults = Nothing
     }
+
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.

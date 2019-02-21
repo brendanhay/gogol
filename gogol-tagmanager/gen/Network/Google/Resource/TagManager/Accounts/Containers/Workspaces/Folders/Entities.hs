@@ -54,10 +54,13 @@ type AccountsContainersWorkspacesFoldersEntitiesResource
 -- | List all entities in a GTM Folder.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersEntities' smart constructor.
-data AccountsContainersWorkspacesFoldersEntities = AccountsContainersWorkspacesFoldersEntities'
+data AccountsContainersWorkspacesFoldersEntities =
+  AccountsContainersWorkspacesFoldersEntities'
     { _acwfePath      :: !Text
     , _acwfePageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersEntities' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ accountsContainersWorkspacesFoldersEntities
     :: Text -- ^ 'acwfePath'
     -> AccountsContainersWorkspacesFoldersEntities
 accountsContainersWorkspacesFoldersEntities pAcwfePath_ =
-    AccountsContainersWorkspacesFoldersEntities'
-    { _acwfePath = pAcwfePath_
-    , _acwfePageToken = Nothing
-    }
+  AccountsContainersWorkspacesFoldersEntities'
+    {_acwfePath = pAcwfePath_, _acwfePageToken = Nothing}
+
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}
@@ -88,7 +90,8 @@ acwfePageToken
       (\ s a -> s{_acwfePageToken = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesFoldersEntities where
+           AccountsContainersWorkspacesFoldersEntities
+         where
         type Rs AccountsContainersWorkspacesFoldersEntities =
              FolderEntities
         type Scopes

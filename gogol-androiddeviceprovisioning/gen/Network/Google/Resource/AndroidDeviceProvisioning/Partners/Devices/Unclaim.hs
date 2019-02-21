@@ -66,7 +66,8 @@ type PartnersDevicesUnclaimResource =
 -- enrollment.
 --
 -- /See:/ 'partnersDevicesUnclaim' smart constructor.
-data PartnersDevicesUnclaim = PartnersDevicesUnclaim'
+data PartnersDevicesUnclaim =
+  PartnersDevicesUnclaim'
     { _pduXgafv          :: !(Maybe Xgafv)
     , _pduUploadProtocol :: !(Maybe Text)
     , _pduAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data PartnersDevicesUnclaim = PartnersDevicesUnclaim'
     , _pduUploadType     :: !(Maybe Text)
     , _pduPayload        :: !UnclaimDeviceRequest
     , _pduCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartnersDevicesUnclaim' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ partnersDevicesUnclaim
     -> UnclaimDeviceRequest -- ^ 'pduPayload'
     -> PartnersDevicesUnclaim
 partnersDevicesUnclaim pPduPartnerId_ pPduPayload_ =
-    PartnersDevicesUnclaim'
+  PartnersDevicesUnclaim'
     { _pduXgafv = Nothing
     , _pduUploadProtocol = Nothing
     , _pduAccessToken = Nothing
@@ -107,6 +110,7 @@ partnersDevicesUnclaim pPduPartnerId_ pPduPayload_ =
     , _pduPayload = pPduPayload_
     , _pduCallback = Nothing
     }
+
 
 -- | V1 error format.
 pduXgafv :: Lens' PartnersDevicesUnclaim (Maybe Xgafv)

@@ -23,13 +23,16 @@ import           Network.Google.Prelude
 -- | JSON template for a user deletion request resource.
 --
 -- /See:/ 'userDeletionRequest' smart constructor.
-data UserDeletionRequest = UserDeletionRequest'
+data UserDeletionRequest =
+  UserDeletionRequest'
     { _udrWebPropertyId       :: !(Maybe Text)
     , _udrKind                :: !Text
     , _udrId                  :: !(Maybe UserDeletionRequestId)
     , _udrFirebaseProjectId   :: !(Maybe Text)
     , _udrDeletionRequestTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserDeletionRequest' with the minimum fields required to make a request.
 --
@@ -47,13 +50,14 @@ data UserDeletionRequest = UserDeletionRequest'
 userDeletionRequest
     :: UserDeletionRequest
 userDeletionRequest =
-    UserDeletionRequest'
+  UserDeletionRequest'
     { _udrWebPropertyId = Nothing
     , _udrKind = "analytics#userDeletionRequest"
     , _udrId = Nothing
     , _udrFirebaseProjectId = Nothing
     , _udrDeletionRequestTime = Nothing
     }
+
 
 -- | Web property ID of the form UA-XXXXX-YY.
 udrWebPropertyId :: Lens' UserDeletionRequest (Maybe Text)
@@ -110,7 +114,8 @@ instance ToJSON UserDeletionRequest where
 -- corresponds to a single Analytics unsampled report.
 --
 -- /See:/ 'unSampledReports' smart constructor.
-data UnSampledReports = UnSampledReports'
+data UnSampledReports =
+  UnSampledReports'
     { _usrNextLink     :: !(Maybe Text)
     , _usrItemsPerPage :: !(Maybe (Textual Int32))
     , _usrKind         :: !Text
@@ -119,7 +124,9 @@ data UnSampledReports = UnSampledReports'
     , _usrTotalResults :: !(Maybe (Textual Int32))
     , _usrStartIndex   :: !(Maybe (Textual Int32))
     , _usrPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnSampledReports' with the minimum fields required to make a request.
 --
@@ -143,7 +150,7 @@ data UnSampledReports = UnSampledReports'
 unSampledReports
     :: UnSampledReports
 unSampledReports =
-    UnSampledReports'
+  UnSampledReports'
     { _usrNextLink = Nothing
     , _usrItemsPerPage = Nothing
     , _usrKind = "analytics#unsampledReports"
@@ -153,6 +160,7 @@ unSampledReports =
     , _usrStartIndex = Nothing
     , _usrPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this unsampled report collection.
 usrNextLink :: Lens' UnSampledReports (Maybe Text)
@@ -235,11 +243,14 @@ instance ToJSON UnSampledReports where
 
 --
 -- /See:/ 'goalURLDestinationDetailsStepsItem' smart constructor.
-data GoalURLDestinationDetailsStepsItem = GoalURLDestinationDetailsStepsItem'
+data GoalURLDestinationDetailsStepsItem =
+  GoalURLDestinationDetailsStepsItem'
     { _guddsiURL    :: !(Maybe Text)
     , _guddsiName   :: !(Maybe Text)
     , _guddsiNumber :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoalURLDestinationDetailsStepsItem' with the minimum fields required to make a request.
 --
@@ -253,11 +264,9 @@ data GoalURLDestinationDetailsStepsItem = GoalURLDestinationDetailsStepsItem'
 goalURLDestinationDetailsStepsItem
     :: GoalURLDestinationDetailsStepsItem
 goalURLDestinationDetailsStepsItem =
-    GoalURLDestinationDetailsStepsItem'
-    { _guddsiURL = Nothing
-    , _guddsiName = Nothing
-    , _guddsiNumber = Nothing
-    }
+  GoalURLDestinationDetailsStepsItem'
+    {_guddsiURL = Nothing, _guddsiName = Nothing, _guddsiNumber = Nothing}
+
 
 -- | URL for this step.
 guddsiURL :: Lens' GoalURLDestinationDetailsStepsItem (Maybe Text)
@@ -296,7 +305,8 @@ instance ToJSON GoalURLDestinationDetailsStepsItem
 -- | Analytics data request query parameters.
 --
 -- /See:/ 'gaDataQuery' smart constructor.
-data GaDataQuery = GaDataQuery'
+data GaDataQuery =
+  GaDataQuery'
     { _gdqMetrics       :: !(Maybe [Text])
     , _gdqSamplingLevel :: !(Maybe Text)
     , _gdqFilters       :: !(Maybe Text)
@@ -308,7 +318,9 @@ data GaDataQuery = GaDataQuery'
     , _gdqMaxResults    :: !(Maybe (Textual Int32))
     , _gdqSegment       :: !(Maybe Text)
     , _gdqStartDate     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GaDataQuery' with the minimum fields required to make a request.
 --
@@ -338,7 +350,7 @@ data GaDataQuery = GaDataQuery'
 gaDataQuery
     :: GaDataQuery
 gaDataQuery =
-    GaDataQuery'
+  GaDataQuery'
     { _gdqMetrics = Nothing
     , _gdqSamplingLevel = Nothing
     , _gdqFilters = Nothing
@@ -351,6 +363,7 @@ gaDataQuery =
     , _gdqSegment = Nothing
     , _gdqStartDate = Nothing
     }
+
 
 -- | List of analytics metrics.
 gdqMetrics :: Lens' GaDataQuery [Text]
@@ -453,7 +466,8 @@ instance ToJSON GaDataQuery where
 -- corresponds to a single Analytics remarketing audience.
 --
 -- /See:/ 'remarketingAudiences' smart constructor.
-data RemarketingAudiences = RemarketingAudiences'
+data RemarketingAudiences =
+  RemarketingAudiences'
     { _raNextLink     :: !(Maybe Text)
     , _raItemsPerPage :: !(Maybe (Textual Int32))
     , _raKind         :: !Text
@@ -462,7 +476,9 @@ data RemarketingAudiences = RemarketingAudiences'
     , _raTotalResults :: !(Maybe (Textual Int32))
     , _raStartIndex   :: !(Maybe (Textual Int32))
     , _raPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingAudiences' with the minimum fields required to make a request.
 --
@@ -486,7 +502,7 @@ data RemarketingAudiences = RemarketingAudiences'
 remarketingAudiences
     :: RemarketingAudiences
 remarketingAudiences =
-    RemarketingAudiences'
+  RemarketingAudiences'
     { _raNextLink = Nothing
     , _raItemsPerPage = Nothing
     , _raKind = "analytics#remarketingAudiences"
@@ -496,6 +512,7 @@ remarketingAudiences =
     , _raStartIndex = Nothing
     , _raPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this remarketing audience collection.
 raNextLink :: Lens' RemarketingAudiences (Maybe Text)
@@ -576,9 +593,12 @@ instance ToJSON RemarketingAudiences where
 
 --
 -- /See:/ 'gaDataDataTableRowsItem' smart constructor.
-newtype GaDataDataTableRowsItem = GaDataDataTableRowsItem'
+newtype GaDataDataTableRowsItem =
+  GaDataDataTableRowsItem'
     { _gddtriC :: Maybe [GaDataDataTableRowsItemCItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GaDataDataTableRowsItem' with the minimum fields required to make a request.
 --
@@ -587,10 +607,8 @@ newtype GaDataDataTableRowsItem = GaDataDataTableRowsItem'
 -- * 'gddtriC'
 gaDataDataTableRowsItem
     :: GaDataDataTableRowsItem
-gaDataDataTableRowsItem =
-    GaDataDataTableRowsItem'
-    { _gddtriC = Nothing
-    }
+gaDataDataTableRowsItem = GaDataDataTableRowsItem' {_gddtriC = Nothing}
+
 
 gddtriC :: Lens' GaDataDataTableRowsItem [GaDataDataTableRowsItemCItem]
 gddtriC
@@ -610,7 +628,8 @@ instance ToJSON GaDataDataTableRowsItem where
 -- | JSON template for Analytics unsampled report resource.
 --
 -- /See:/ 'unSampledReport' smart constructor.
-data UnSampledReport = UnSampledReport'
+data UnSampledReport =
+  UnSampledReport'
     { _uDownloadType                :: !(Maybe Text)
     , _uStatus                      :: !(Maybe Text)
     , _uMetrics                     :: !(Maybe Text)
@@ -630,7 +649,9 @@ data UnSampledReport = UnSampledReport'
     , _uSegment                     :: !(Maybe Text)
     , _uCloudStorageDownloadDetails :: !(Maybe UnSampledReportCloudStorageDownloadDetails)
     , _uStartDate                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnSampledReport' with the minimum fields required to make a request.
 --
@@ -676,7 +697,7 @@ data UnSampledReport = UnSampledReport'
 unSampledReport
     :: UnSampledReport
 unSampledReport =
-    UnSampledReport'
+  UnSampledReport'
     { _uDownloadType = Nothing
     , _uStatus = Nothing
     , _uMetrics = Nothing
@@ -697,6 +718,7 @@ unSampledReport =
     , _uCloudStorageDownloadDetails = Nothing
     , _uStartDate = Nothing
     }
+
 
 -- | The type of download you need to use for the report data file. Possible
 -- values include \`GOOGLE_DRIVE\` and \`GOOGLE_CLOUD_STORAGE\`. If the
@@ -848,11 +870,14 @@ instance ToJSON UnSampledReport where
 
 --
 -- /See:/ 'mcfDataColumnHeadersItem' smart constructor.
-data McfDataColumnHeadersItem = McfDataColumnHeadersItem'
+data McfDataColumnHeadersItem =
+  McfDataColumnHeadersItem'
     { _mdchiColumnType :: !(Maybe Text)
     , _mdchiName       :: !(Maybe Text)
     , _mdchiDataType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'McfDataColumnHeadersItem' with the minimum fields required to make a request.
 --
@@ -866,11 +891,9 @@ data McfDataColumnHeadersItem = McfDataColumnHeadersItem'
 mcfDataColumnHeadersItem
     :: McfDataColumnHeadersItem
 mcfDataColumnHeadersItem =
-    McfDataColumnHeadersItem'
-    { _mdchiColumnType = Nothing
-    , _mdchiName = Nothing
-    , _mdchiDataType = Nothing
-    }
+  McfDataColumnHeadersItem'
+    {_mdchiColumnType = Nothing, _mdchiName = Nothing, _mdchiDataType = Nothing}
+
 
 -- | Column Type. Either DIMENSION or METRIC.
 mdchiColumnType :: Lens' McfDataColumnHeadersItem (Maybe Text)
@@ -911,9 +934,12 @@ instance ToJSON McfDataColumnHeadersItem where
 -- same as the metric order specified in the request.
 --
 -- /See:/ 'gaDataTotalsForAllResults' smart constructor.
-newtype GaDataTotalsForAllResults = GaDataTotalsForAllResults'
+newtype GaDataTotalsForAllResults =
+  GaDataTotalsForAllResults'
     { _gdtfarAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GaDataTotalsForAllResults' with the minimum fields required to make a request.
 --
@@ -924,9 +950,8 @@ gaDataTotalsForAllResults
     :: HashMap Text Text -- ^ 'gdtfarAddtional'
     -> GaDataTotalsForAllResults
 gaDataTotalsForAllResults pGdtfarAddtional_ =
-    GaDataTotalsForAllResults'
-    { _gdtfarAddtional = _Coerce # pGdtfarAddtional_
-    }
+  GaDataTotalsForAllResults' {_gdtfarAddtional = _Coerce # pGdtfarAddtional_}
+
 
 -- | Key-value pair for the total value of a metric. Key is the metric name
 -- and the value is the total value for that metric.
@@ -949,10 +974,13 @@ instance ToJSON GaDataTotalsForAllResults where
 -- this view (profile) belongs.
 --
 -- /See:/ 'proFileParentLink' smart constructor.
-data ProFileParentLink = ProFileParentLink'
+data ProFileParentLink =
+  ProFileParentLink'
     { _pfplHref :: !(Maybe Text)
     , _pfplType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFileParentLink' with the minimum fields required to make a request.
 --
@@ -964,10 +992,8 @@ data ProFileParentLink = ProFileParentLink'
 proFileParentLink
     :: ProFileParentLink
 proFileParentLink =
-    ProFileParentLink'
-    { _pfplHref = Nothing
-    , _pfplType = "analytics#webproperty"
-    }
+  ProFileParentLink' {_pfplHref = Nothing, _pfplType = "analytics#webproperty"}
+
 
 -- | Link to the web property to which this view (profile) belongs.
 pfplHref :: Lens' ProFileParentLink (Maybe Text)
@@ -995,7 +1021,8 @@ instance ToJSON ProFileParentLink where
 -- | JSON template for an Analytics remarketing audience.
 --
 -- /See:/ 'remarketingAudience' smart constructor.
-data RemarketingAudience = RemarketingAudience'
+data RemarketingAudience =
+  RemarketingAudience'
     { _rWebPropertyId                :: !(Maybe Text)
     , _rKind                         :: !Text
     , _rCreated                      :: !(Maybe DateTime')
@@ -1010,7 +1037,9 @@ data RemarketingAudience = RemarketingAudience'
     , _rId                           :: !(Maybe Text)
     , _rUpdated                      :: !(Maybe DateTime')
     , _rDescription                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingAudience' with the minimum fields required to make a request.
 --
@@ -1046,7 +1075,7 @@ data RemarketingAudience = RemarketingAudience'
 remarketingAudience
     :: RemarketingAudience
 remarketingAudience =
-    RemarketingAudience'
+  RemarketingAudience'
     { _rWebPropertyId = Nothing
     , _rKind = "analytics#remarketingAudience"
     , _rCreated = Nothing
@@ -1062,6 +1091,7 @@ remarketingAudience =
     , _rUpdated = Nothing
     , _rDescription = Nothing
     }
+
 
 -- | Web property ID of the form UA-XXXXX-YY to which this remarketing
 -- audience belongs.
@@ -1189,9 +1219,12 @@ instance ToJSON RemarketingAudience where
 
 --
 -- /See:/ 'gaDataDataTableRowsItemCItem' smart constructor.
-newtype GaDataDataTableRowsItemCItem = GaDataDataTableRowsItemCItem'
+newtype GaDataDataTableRowsItemCItem =
+  GaDataDataTableRowsItemCItem'
     { _gddtriciV :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GaDataDataTableRowsItemCItem' with the minimum fields required to make a request.
 --
@@ -1201,9 +1234,8 @@ newtype GaDataDataTableRowsItemCItem = GaDataDataTableRowsItemCItem'
 gaDataDataTableRowsItemCItem
     :: GaDataDataTableRowsItemCItem
 gaDataDataTableRowsItemCItem =
-    GaDataDataTableRowsItemCItem'
-    { _gddtriciV = Nothing
-    }
+  GaDataDataTableRowsItemCItem' {_gddtriciV = Nothing}
+
 
 gddtriciV :: Lens' GaDataDataTableRowsItemCItem (Maybe Text)
 gddtriciV
@@ -1222,10 +1254,13 @@ instance ToJSON GaDataDataTableRowsItemCItem where
 -- | Permissions the user has for this entity.
 --
 -- /See:/ 'entityUserLinkPermissions' smart constructor.
-data EntityUserLinkPermissions = EntityUserLinkPermissions'
+data EntityUserLinkPermissions =
+  EntityUserLinkPermissions'
     { _eulpLocal     :: !(Maybe [Text])
     , _eulpEffective :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntityUserLinkPermissions' with the minimum fields required to make a request.
 --
@@ -1237,10 +1272,8 @@ data EntityUserLinkPermissions = EntityUserLinkPermissions'
 entityUserLinkPermissions
     :: EntityUserLinkPermissions
 entityUserLinkPermissions =
-    EntityUserLinkPermissions'
-    { _eulpLocal = Nothing
-    , _eulpEffective = Nothing
-    }
+  EntityUserLinkPermissions' {_eulpLocal = Nothing, _eulpEffective = Nothing}
+
 
 -- | Permissions that a user has been assigned at this very level. Does not
 -- include any implied or inherited permissions. Local permissions are
@@ -1281,14 +1314,17 @@ instance ToJSON EntityUserLinkPermissions where
 -- requested.
 --
 -- /See:/ 'realtimeDataProFileInfo' smart constructor.
-data RealtimeDataProFileInfo = RealtimeDataProFileInfo'
+data RealtimeDataProFileInfo =
+  RealtimeDataProFileInfo'
     { _rdpfiWebPropertyId         :: !(Maybe Text)
     , _rdpfiProFileId             :: !(Maybe Text)
     , _rdpfiProFileName           :: !(Maybe Text)
     , _rdpfiAccountId             :: !(Maybe Text)
     , _rdpfiInternalWebPropertyId :: !(Maybe Text)
     , _rdpfiTableId               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RealtimeDataProFileInfo' with the minimum fields required to make a request.
 --
@@ -1308,7 +1344,7 @@ data RealtimeDataProFileInfo = RealtimeDataProFileInfo'
 realtimeDataProFileInfo
     :: RealtimeDataProFileInfo
 realtimeDataProFileInfo =
-    RealtimeDataProFileInfo'
+  RealtimeDataProFileInfo'
     { _rdpfiWebPropertyId = Nothing
     , _rdpfiProFileId = Nothing
     , _rdpfiProFileName = Nothing
@@ -1316,6 +1352,7 @@ realtimeDataProFileInfo =
     , _rdpfiInternalWebPropertyId = Nothing
     , _rdpfiTableId = Nothing
     }
+
 
 -- | Web Property ID to which this view (profile) belongs.
 rdpfiWebPropertyId :: Lens' RealtimeDataProFileInfo (Maybe Text)
@@ -1377,10 +1414,13 @@ instance ToJSON RealtimeDataProFileInfo where
 
 --
 -- /See:/ 'mcfDataRowsItemItemConversionPathValueItem' smart constructor.
-data McfDataRowsItemItemConversionPathValueItem = McfDataRowsItemItemConversionPathValueItem'
+data McfDataRowsItemItemConversionPathValueItem =
+  McfDataRowsItemItemConversionPathValueItem'
     { _mdriicpviInteractionType :: !(Maybe Text)
     , _mdriicpviNodeValue       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'McfDataRowsItemItemConversionPathValueItem' with the minimum fields required to make a request.
 --
@@ -1392,10 +1432,9 @@ data McfDataRowsItemItemConversionPathValueItem = McfDataRowsItemItemConversionP
 mcfDataRowsItemItemConversionPathValueItem
     :: McfDataRowsItemItemConversionPathValueItem
 mcfDataRowsItemItemConversionPathValueItem =
-    McfDataRowsItemItemConversionPathValueItem'
-    { _mdriicpviInteractionType = Nothing
-    , _mdriicpviNodeValue = Nothing
-    }
+  McfDataRowsItemItemConversionPathValueItem'
+    {_mdriicpviInteractionType = Nothing, _mdriicpviNodeValue = Nothing}
+
 
 -- | Type of an interaction on conversion path. Such as CLICK, IMPRESSION
 -- etc.
@@ -1412,7 +1451,8 @@ mdriicpviNodeValue
       (\ s a -> s{_mdriicpviNodeValue = a})
 
 instance FromJSON
-         McfDataRowsItemItemConversionPathValueItem where
+           McfDataRowsItemItemConversionPathValueItem
+         where
         parseJSON
           = withObject
               "McfDataRowsItemItemConversionPathValueItem"
@@ -1421,7 +1461,8 @@ instance FromJSON
                    (o .:? "interactionType") <*> (o .:? "nodeValue"))
 
 instance ToJSON
-         McfDataRowsItemItemConversionPathValueItem where
+           McfDataRowsItemItemConversionPathValueItem
+         where
         toJSON
           McfDataRowsItemItemConversionPathValueItem'{..}
           = object
@@ -1433,14 +1474,17 @@ instance ToJSON
 -- | JSON template for an Analytics filter expression.
 --
 -- /See:/ 'filterExpression' smart constructor.
-data FilterExpression = FilterExpression'
+data FilterExpression =
+  FilterExpression'
     { _feFieldIndex      :: !(Maybe (Textual Int32))
     , _feField           :: !(Maybe Text)
     , _feKind            :: !Text
     , _feMatchType       :: !(Maybe Text)
     , _feCaseSensitive   :: !(Maybe Bool)
     , _feExpressionValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilterExpression' with the minimum fields required to make a request.
 --
@@ -1460,7 +1504,7 @@ data FilterExpression = FilterExpression'
 filterExpression
     :: FilterExpression
 filterExpression =
-    FilterExpression'
+  FilterExpression'
     { _feFieldIndex = Nothing
     , _feField = Nothing
     , _feKind = "analytics#filterExpression"
@@ -1468,6 +1512,7 @@ filterExpression =
     , _feCaseSensitive = Nothing
     , _feExpressionValue = Nothing
     }
+
 
 -- | The Index of the custom dimension. Set only if the field is a is
 -- CUSTOM_DIMENSION.
@@ -1556,7 +1601,8 @@ instance ToJSON FilterExpression where
 -- | JSON template for a linked view (profile).
 --
 -- /See:/ 'proFileRef' smart constructor.
-data ProFileRef = ProFileRef'
+data ProFileRef =
+  ProFileRef'
     { _pfrWebPropertyId         :: !(Maybe Text)
     , _pfrKind                  :: !Text
     , _pfrHref                  :: !(Maybe Text)
@@ -1564,7 +1610,9 @@ data ProFileRef = ProFileRef'
     , _pfrName                  :: !(Maybe Text)
     , _pfrInternalWebPropertyId :: !(Maybe Text)
     , _pfrId                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFileRef' with the minimum fields required to make a request.
 --
@@ -1586,7 +1634,7 @@ data ProFileRef = ProFileRef'
 proFileRef
     :: ProFileRef
 proFileRef =
-    ProFileRef'
+  ProFileRef'
     { _pfrWebPropertyId = Nothing
     , _pfrKind = "analytics#profileRef"
     , _pfrHref = Nothing
@@ -1595,6 +1643,7 @@ proFileRef =
     , _pfrInternalWebPropertyId = Nothing
     , _pfrId = Nothing
     }
+
 
 -- | Web property ID of the form UA-XXXXX-YY to which this view (profile)
 -- belongs.
@@ -1661,7 +1710,8 @@ instance ToJSON ProFileRef where
 -- single Analytics account.
 --
 -- /See:/ 'accounts' smart constructor.
-data Accounts = Accounts'
+data Accounts =
+  Accounts'
     { _aNextLink     :: !(Maybe Text)
     , _aItemsPerPage :: !(Maybe (Textual Int32))
     , _aKind         :: !Text
@@ -1670,7 +1720,9 @@ data Accounts = Accounts'
     , _aTotalResults :: !(Maybe (Textual Int32))
     , _aStartIndex   :: !(Maybe (Textual Int32))
     , _aPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Accounts' with the minimum fields required to make a request.
 --
@@ -1694,7 +1746,7 @@ data Accounts = Accounts'
 accounts
     :: Accounts
 accounts =
-    Accounts'
+  Accounts'
     { _aNextLink = Nothing
     , _aItemsPerPage = Nothing
     , _aKind = "analytics#accounts"
@@ -1704,6 +1756,7 @@ accounts =
     , _aStartIndex = Nothing
     , _aPreviousLink = Nothing
     }
+
 
 -- | Next link for this account collection.
 aNextLink :: Lens' Accounts (Maybe Text)
@@ -1788,7 +1841,8 @@ instance ToJSON Accounts where
 -- experiment.
 --
 -- /See:/ 'experiments' smart constructor.
-data Experiments = Experiments'
+data Experiments =
+  Experiments'
     { _eNextLink     :: !(Maybe Text)
     , _eItemsPerPage :: !(Maybe (Textual Int32))
     , _eKind         :: !Text
@@ -1797,7 +1851,9 @@ data Experiments = Experiments'
     , _eTotalResults :: !(Maybe (Textual Int32))
     , _eStartIndex   :: !(Maybe (Textual Int32))
     , _ePreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Experiments' with the minimum fields required to make a request.
 --
@@ -1821,7 +1877,7 @@ data Experiments = Experiments'
 experiments
     :: Experiments
 experiments =
-    Experiments'
+  Experiments'
     { _eNextLink = Nothing
     , _eItemsPerPage = Nothing
     , _eKind = "analytics#experiments"
@@ -1831,6 +1887,7 @@ experiments =
     , _eStartIndex = Nothing
     , _ePreviousLink = Nothing
     }
+
 
 -- | Link to next page for this experiment collection.
 eNextLink :: Lens' Experiments (Maybe Text)
@@ -1913,10 +1970,13 @@ instance ToJSON Experiments where
 -- this experiment belongs.
 --
 -- /See:/ 'experimentParentLink' smart constructor.
-data ExperimentParentLink = ExperimentParentLink'
+data ExperimentParentLink =
+  ExperimentParentLink'
     { _eplHref :: !(Maybe Text)
     , _eplType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExperimentParentLink' with the minimum fields required to make a request.
 --
@@ -1928,10 +1988,8 @@ data ExperimentParentLink = ExperimentParentLink'
 experimentParentLink
     :: ExperimentParentLink
 experimentParentLink =
-    ExperimentParentLink'
-    { _eplHref = Nothing
-    , _eplType = "analytics#profile"
-    }
+  ExperimentParentLink' {_eplHref = Nothing, _eplType = "analytics#profile"}
+
 
 -- | Link to the view (profile) to which this experiment belongs. This field
 -- is read-only.
@@ -1960,9 +2018,12 @@ instance ToJSON ExperimentParentLink where
 -- | Download details for a file stored in Google Drive.
 --
 -- /See:/ 'unSampledReportDriveDownloadDetails' smart constructor.
-newtype UnSampledReportDriveDownloadDetails = UnSampledReportDriveDownloadDetails'
+newtype UnSampledReportDriveDownloadDetails =
+  UnSampledReportDriveDownloadDetails'
     { _usrdddDocumentId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnSampledReportDriveDownloadDetails' with the minimum fields required to make a request.
 --
@@ -1972,9 +2033,8 @@ newtype UnSampledReportDriveDownloadDetails = UnSampledReportDriveDownloadDetail
 unSampledReportDriveDownloadDetails
     :: UnSampledReportDriveDownloadDetails
 unSampledReportDriveDownloadDetails =
-    UnSampledReportDriveDownloadDetails'
-    { _usrdddDocumentId = Nothing
-    }
+  UnSampledReportDriveDownloadDetails' {_usrdddDocumentId = Nothing}
+
 
 -- | Id of the document\/file containing the report data.
 usrdddDocumentId :: Lens' UnSampledReportDriveDownloadDetails (Maybe Text)
@@ -2000,14 +2060,17 @@ instance ToJSON UnSampledReportDriveDownloadDetails
 -- requested.
 --
 -- /See:/ 'mcfDataProFileInfo' smart constructor.
-data McfDataProFileInfo = McfDataProFileInfo'
+data McfDataProFileInfo =
+  McfDataProFileInfo'
     { _mdpfiWebPropertyId         :: !(Maybe Text)
     , _mdpfiProFileId             :: !(Maybe Text)
     , _mdpfiProFileName           :: !(Maybe Text)
     , _mdpfiAccountId             :: !(Maybe Text)
     , _mdpfiInternalWebPropertyId :: !(Maybe Text)
     , _mdpfiTableId               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'McfDataProFileInfo' with the minimum fields required to make a request.
 --
@@ -2027,7 +2090,7 @@ data McfDataProFileInfo = McfDataProFileInfo'
 mcfDataProFileInfo
     :: McfDataProFileInfo
 mcfDataProFileInfo =
-    McfDataProFileInfo'
+  McfDataProFileInfo'
     { _mdpfiWebPropertyId = Nothing
     , _mdpfiProFileId = Nothing
     , _mdpfiProFileName = Nothing
@@ -2035,6 +2098,7 @@ mcfDataProFileInfo =
     , _mdpfiInternalWebPropertyId = Nothing
     , _mdpfiTableId = Nothing
     }
+
 
 -- | Web Property ID to which this view (profile) belongs.
 mdpfiWebPropertyId :: Lens' McfDataProFileInfo (Maybe Text)
@@ -2099,7 +2163,8 @@ instance ToJSON McfDataProFileInfo where
 -- source.
 --
 -- /See:/ 'customDataSources' smart constructor.
-data CustomDataSources = CustomDataSources'
+data CustomDataSources =
+  CustomDataSources'
     { _cdsNextLink     :: !(Maybe Text)
     , _cdsItemsPerPage :: !(Maybe (Textual Int32))
     , _cdsKind         :: !Text
@@ -2108,7 +2173,9 @@ data CustomDataSources = CustomDataSources'
     , _cdsTotalResults :: !(Maybe (Textual Int32))
     , _cdsStartIndex   :: !(Maybe (Textual Int32))
     , _cdsPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomDataSources' with the minimum fields required to make a request.
 --
@@ -2132,7 +2199,7 @@ data CustomDataSources = CustomDataSources'
 customDataSources
     :: CustomDataSources
 customDataSources =
-    CustomDataSources'
+  CustomDataSources'
     { _cdsNextLink = Nothing
     , _cdsItemsPerPage = Nothing
     , _cdsKind = "analytics#customDataSources"
@@ -2142,6 +2209,7 @@ customDataSources =
     , _cdsStartIndex = Nothing
     , _cdsPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this custom data source collection.
 cdsNextLink :: Lens' CustomDataSources (Maybe Text)
@@ -2226,10 +2294,13 @@ instance ToJSON CustomDataSources where
 -- for this web property.
 --
 -- /See:/ 'webPropertyChildLink' smart constructor.
-data WebPropertyChildLink = WebPropertyChildLink'
+data WebPropertyChildLink =
+  WebPropertyChildLink'
     { _wpclHref :: !(Maybe Text)
     , _wpclType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebPropertyChildLink' with the minimum fields required to make a request.
 --
@@ -2241,10 +2312,8 @@ data WebPropertyChildLink = WebPropertyChildLink'
 webPropertyChildLink
     :: WebPropertyChildLink
 webPropertyChildLink =
-    WebPropertyChildLink'
-    { _wpclHref = Nothing
-    , _wpclType = "analytics#profiles"
-    }
+  WebPropertyChildLink' {_wpclHref = Nothing, _wpclType = "analytics#profiles"}
+
 
 -- | Link to the list of views (profiles) for this web property.
 wpclHref :: Lens' WebPropertyChildLink (Maybe Text)
@@ -2272,12 +2341,15 @@ instance ToJSON WebPropertyChildLink where
 -- | JSON template for a hash Client Id response resource.
 --
 -- /See:/ 'hashClientIdResponse' smart constructor.
-data HashClientIdResponse = HashClientIdResponse'
+data HashClientIdResponse =
+  HashClientIdResponse'
     { _hcirClientId       :: !(Maybe Text)
     , _hcirWebPropertyId  :: !(Maybe Text)
     , _hcirKind           :: !Text
     , _hcirHashedClientId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HashClientIdResponse' with the minimum fields required to make a request.
 --
@@ -2293,12 +2365,13 @@ data HashClientIdResponse = HashClientIdResponse'
 hashClientIdResponse
     :: HashClientIdResponse
 hashClientIdResponse =
-    HashClientIdResponse'
+  HashClientIdResponse'
     { _hcirClientId = Nothing
     , _hcirWebPropertyId = Nothing
     , _hcirKind = "analytics#hashClientIdResponse"
     , _hcirHashedClientId = Nothing
     }
+
 
 hcirClientId :: Lens' HashClientIdResponse (Maybe Text)
 hcirClientId
@@ -2338,7 +2411,8 @@ instance ToJSON HashClientIdResponse where
 -- | Multi-Channel Funnels data for a given view (profile).
 --
 -- /See:/ 'mcfData' smart constructor.
-data McfData = McfData'
+data McfData =
+  McfData'
     { _mdNextLink            :: !(Maybe Text)
     , _mdSampleSpace         :: !(Maybe (Textual Int64))
     , _mdItemsPerPage        :: !(Maybe (Textual Int32))
@@ -2354,7 +2428,9 @@ data McfData = McfData'
     , _mdContainsSampledData :: !(Maybe Bool)
     , _mdTotalsForAllResults :: !(Maybe McfDataTotalsForAllResults)
     , _mdPreviousLink        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'McfData' with the minimum fields required to make a request.
 --
@@ -2392,7 +2468,7 @@ data McfData = McfData'
 mcfData
     :: McfData
 mcfData =
-    McfData'
+  McfData'
     { _mdNextLink = Nothing
     , _mdSampleSpace = Nothing
     , _mdItemsPerPage = Nothing
@@ -2409,6 +2485,7 @@ mcfData =
     , _mdTotalsForAllResults = Nothing
     , _mdPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this Analytics data query.
 mdNextLink :: Lens' McfData (Maybe Text)
@@ -2552,11 +2629,14 @@ instance ToJSON McfData where
 -- | JSON template for a user reference.
 --
 -- /See:/ 'userRef' smart constructor.
-data UserRef = UserRef'
+data UserRef =
+  UserRef'
     { _urEmail :: !(Maybe Text)
     , _urKind  :: !Text
     , _urId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserRef' with the minimum fields required to make a request.
 --
@@ -2570,11 +2650,8 @@ data UserRef = UserRef'
 userRef
     :: UserRef
 userRef =
-    UserRef'
-    { _urEmail = Nothing
-    , _urKind = "analytics#userRef"
-    , _urId = Nothing
-    }
+  UserRef' {_urEmail = Nothing, _urKind = "analytics#userRef", _urId = Nothing}
+
 
 -- | Email ID of this user.
 urEmail :: Lens' UserRef (Maybe Text)
@@ -2606,10 +2683,13 @@ instance ToJSON UserRef where
 -- | Details for the goal of the type VISIT_NUM_PAGES.
 --
 -- /See:/ 'goalVisitNumPagesDetails' smart constructor.
-data GoalVisitNumPagesDetails = GoalVisitNumPagesDetails'
+data GoalVisitNumPagesDetails =
+  GoalVisitNumPagesDetails'
     { _gvnpdComparisonValue :: !(Maybe (Textual Int64))
     , _gvnpdComparisonType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoalVisitNumPagesDetails' with the minimum fields required to make a request.
 --
@@ -2621,10 +2701,9 @@ data GoalVisitNumPagesDetails = GoalVisitNumPagesDetails'
 goalVisitNumPagesDetails
     :: GoalVisitNumPagesDetails
 goalVisitNumPagesDetails =
-    GoalVisitNumPagesDetails'
-    { _gvnpdComparisonValue = Nothing
-    , _gvnpdComparisonType = Nothing
-    }
+  GoalVisitNumPagesDetails'
+    {_gvnpdComparisonValue = Nothing, _gvnpdComparisonType = Nothing}
+
 
 -- | Value used for this comparison.
 gvnpdComparisonValue :: Lens' GoalVisitNumPagesDetails (Maybe Int64)
@@ -2657,11 +2736,14 @@ instance ToJSON GoalVisitNumPagesDetails where
 
 --
 -- /See:/ 'realtimeDataColumnHeadersItem' smart constructor.
-data RealtimeDataColumnHeadersItem = RealtimeDataColumnHeadersItem'
+data RealtimeDataColumnHeadersItem =
+  RealtimeDataColumnHeadersItem'
     { _rdchiColumnType :: !(Maybe Text)
     , _rdchiName       :: !(Maybe Text)
     , _rdchiDataType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RealtimeDataColumnHeadersItem' with the minimum fields required to make a request.
 --
@@ -2675,11 +2757,9 @@ data RealtimeDataColumnHeadersItem = RealtimeDataColumnHeadersItem'
 realtimeDataColumnHeadersItem
     :: RealtimeDataColumnHeadersItem
 realtimeDataColumnHeadersItem =
-    RealtimeDataColumnHeadersItem'
-    { _rdchiColumnType = Nothing
-    , _rdchiName = Nothing
-    , _rdchiDataType = Nothing
-    }
+  RealtimeDataColumnHeadersItem'
+    {_rdchiColumnType = Nothing, _rdchiName = Nothing, _rdchiDataType = Nothing}
+
 
 -- | Column Type. Either DIMENSION or METRIC.
 rdchiColumnType :: Lens' RealtimeDataColumnHeadersItem (Maybe Text)
@@ -2719,12 +2799,15 @@ instance ToJSON RealtimeDataColumnHeadersItem where
 -- | JSON template for a linked account.
 --
 -- /See:/ 'accountRef' smart constructor.
-data AccountRef = AccountRef'
+data AccountRef =
+  AccountRef'
     { _arKind :: !Text
     , _arHref :: !(Maybe Text)
     , _arName :: !(Maybe Text)
     , _arId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountRef' with the minimum fields required to make a request.
 --
@@ -2740,12 +2823,13 @@ data AccountRef = AccountRef'
 accountRef
     :: AccountRef
 accountRef =
-    AccountRef'
+  AccountRef'
     { _arKind = "analytics#accountRef"
     , _arHref = Nothing
     , _arName = Nothing
     , _arId = Nothing
     }
+
 
 -- | Analytics account reference.
 arKind :: Lens' AccountRef Text
@@ -2780,11 +2864,12 @@ instance ToJSON AccountRef where
                  [Just ("kind" .= _arKind), ("href" .=) <$> _arHref,
                   ("name" .=) <$> _arName, ("id" .=) <$> _arId])
 
--- | An entity AdWords link collection provides a list of GA-AdWords links
--- Each resource in this collection corresponds to a single link.
+-- | An entity Google Ads link collection provides a list of GA-Google Ads
+-- links Each resource in this collection corresponds to a single link.
 --
 -- /See:/ 'entityAdWordsLinks' smart constructor.
-data EntityAdWordsLinks = EntityAdWordsLinks'
+data EntityAdWordsLinks =
+  EntityAdWordsLinks'
     { _eawlNextLink     :: !(Maybe Text)
     , _eawlItemsPerPage :: !(Maybe (Textual Int32))
     , _eawlKind         :: !Text
@@ -2792,7 +2877,9 @@ data EntityAdWordsLinks = EntityAdWordsLinks'
     , _eawlTotalResults :: !(Maybe (Textual Int32))
     , _eawlStartIndex   :: !(Maybe (Textual Int32))
     , _eawlPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntityAdWordsLinks' with the minimum fields required to make a request.
 --
@@ -2814,7 +2901,7 @@ data EntityAdWordsLinks = EntityAdWordsLinks'
 entityAdWordsLinks
     :: EntityAdWordsLinks
 entityAdWordsLinks =
-    EntityAdWordsLinks'
+  EntityAdWordsLinks'
     { _eawlNextLink = Nothing
     , _eawlItemsPerPage = Nothing
     , _eawlKind = "analytics#entityAdWordsLinks"
@@ -2824,7 +2911,8 @@ entityAdWordsLinks =
     , _eawlPreviousLink = Nothing
     }
 
--- | Next link for this AdWords link collection.
+
+-- | Next link for this Google Ads link collection.
 eawlNextLink :: Lens' EntityAdWordsLinks (Maybe Text)
 eawlNextLink
   = lens _eawlNextLink (\ s a -> s{_eawlNextLink = a})
@@ -2843,7 +2931,7 @@ eawlItemsPerPage
 eawlKind :: Lens' EntityAdWordsLinks Text
 eawlKind = lens _eawlKind (\ s a -> s{_eawlKind = a})
 
--- | A list of entity AdWords links.
+-- | A list of entity Google Ads links.
 eawlItems :: Lens' EntityAdWordsLinks [EntityAdWordsLink]
 eawlItems
   = lens _eawlItems (\ s a -> s{_eawlItems = a}) .
@@ -2866,7 +2954,7 @@ eawlStartIndex
       (\ s a -> s{_eawlStartIndex = a})
       . mapping _Coerce
 
--- | Previous link for this AdWords link collection.
+-- | Previous link for this Google Ads link collection.
 eawlPreviousLink :: Lens' EntityAdWordsLinks (Maybe Text)
 eawlPreviousLink
   = lens _eawlPreviousLink
@@ -2901,7 +2989,8 @@ instance ToJSON EntityAdWordsLinks where
 -- single Analytics view (profile).
 --
 -- /See:/ 'proFiles' smart constructor.
-data ProFiles = ProFiles'
+data ProFiles =
+  ProFiles'
     { _pfNextLink     :: !(Maybe Text)
     , _pfItemsPerPage :: !(Maybe (Textual Int32))
     , _pfKind         :: !Text
@@ -2910,7 +2999,9 @@ data ProFiles = ProFiles'
     , _pfTotalResults :: !(Maybe (Textual Int32))
     , _pfStartIndex   :: !(Maybe (Textual Int32))
     , _pfPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFiles' with the minimum fields required to make a request.
 --
@@ -2934,7 +3025,7 @@ data ProFiles = ProFiles'
 proFiles
     :: ProFiles
 proFiles =
-    ProFiles'
+  ProFiles'
     { _pfNextLink = Nothing
     , _pfItemsPerPage = Nothing
     , _pfKind = "analytics#profiles"
@@ -2944,6 +3035,7 @@ proFiles =
     , _pfStartIndex = Nothing
     , _pfPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this view (profile) collection.
 pfNextLink :: Lens' ProFiles (Maybe Text)
@@ -3025,9 +3117,12 @@ instance ToJSON ProFiles where
 -- | Request template for the delete upload data request.
 --
 -- /See:/ 'analyticsDataimportDeleteUploadDataRequest' smart constructor.
-newtype AnalyticsDataimportDeleteUploadDataRequest = AnalyticsDataimportDeleteUploadDataRequest'
+newtype AnalyticsDataimportDeleteUploadDataRequest =
+  AnalyticsDataimportDeleteUploadDataRequest'
     { _addudrCustomDataImportUids :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnalyticsDataimportDeleteUploadDataRequest' with the minimum fields required to make a request.
 --
@@ -3037,9 +3132,9 @@ newtype AnalyticsDataimportDeleteUploadDataRequest = AnalyticsDataimportDeleteUp
 analyticsDataimportDeleteUploadDataRequest
     :: AnalyticsDataimportDeleteUploadDataRequest
 analyticsDataimportDeleteUploadDataRequest =
-    AnalyticsDataimportDeleteUploadDataRequest'
-    { _addudrCustomDataImportUids = Nothing
-    }
+  AnalyticsDataimportDeleteUploadDataRequest'
+    {_addudrCustomDataImportUids = Nothing}
+
 
 -- | A list of upload UIDs.
 addudrCustomDataImportUids :: Lens' AnalyticsDataimportDeleteUploadDataRequest [Text]
@@ -3050,7 +3145,8 @@ addudrCustomDataImportUids
       . _Coerce
 
 instance FromJSON
-         AnalyticsDataimportDeleteUploadDataRequest where
+           AnalyticsDataimportDeleteUploadDataRequest
+         where
         parseJSON
           = withObject
               "AnalyticsDataimportDeleteUploadDataRequest"
@@ -3059,7 +3155,8 @@ instance FromJSON
                    (o .:? "customDataImportUids" .!= mempty))
 
 instance ToJSON
-         AnalyticsDataimportDeleteUploadDataRequest where
+           AnalyticsDataimportDeleteUploadDataRequest
+         where
         toJSON
           AnalyticsDataimportDeleteUploadDataRequest'{..}
           = object
@@ -3067,10 +3164,11 @@ instance ToJSON
                  [("customDataImportUids" .=) <$>
                     _addudrCustomDataImportUids])
 
--- | JSON template for Analytics Entity AdWords Link.
+-- | JSON template for Analytics Entity Google Ads Link.
 --
 -- /See:/ 'entityAdWordsLink' smart constructor.
-data EntityAdWordsLink = EntityAdWordsLink'
+data EntityAdWordsLink =
+  EntityAdWordsLink'
     { _entAdWordsAccounts :: !(Maybe [AdWordsAccount])
     , _entProFileIds      :: !(Maybe [Text])
     , _entKind            :: !Text
@@ -3078,7 +3176,9 @@ data EntityAdWordsLink = EntityAdWordsLink'
     , _entName            :: !(Maybe Text)
     , _entId              :: !(Maybe Text)
     , _entEntity          :: !(Maybe EntityAdWordsLinkEntity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntityAdWordsLink' with the minimum fields required to make a request.
 --
@@ -3100,7 +3200,7 @@ data EntityAdWordsLink = EntityAdWordsLink'
 entityAdWordsLink
     :: EntityAdWordsLink
 entityAdWordsLink =
-    EntityAdWordsLink'
+  EntityAdWordsLink'
     { _entAdWordsAccounts = Nothing
     , _entProFileIds = Nothing
     , _entKind = "analytics#entityAdWordsLink"
@@ -3110,8 +3210,9 @@ entityAdWordsLink =
     , _entEntity = Nothing
     }
 
--- | A list of AdWords client accounts. These cannot be MCC accounts. This
--- field is required when creating an AdWords link. It cannot be empty.
+
+-- | A list of Google Ads client accounts. These cannot be MCC accounts. This
+-- field is required when creating a Google Ads link. It cannot be empty.
 entAdWordsAccounts :: Lens' EntityAdWordsLink [AdWordsAccount]
 entAdWordsAccounts
   = lens _entAdWordsAccounts
@@ -3127,20 +3228,21 @@ entProFileIds
       . _Default
       . _Coerce
 
--- | Resource type for entity AdWords link.
+-- | Resource type for entity Google Ads link.
 entKind :: Lens' EntityAdWordsLink Text
 entKind = lens _entKind (\ s a -> s{_entKind = a})
 
--- | URL link for this Google Analytics - Google AdWords link.
+-- | URL link for this Google Analytics - Google Ads link.
 entSelfLink :: Lens' EntityAdWordsLink (Maybe Text)
 entSelfLink
   = lens _entSelfLink (\ s a -> s{_entSelfLink = a})
 
--- | Name of the link. This field is required when creating an AdWords link.
+-- | Name of the link. This field is required when creating a Google Ads
+-- link.
 entName :: Lens' EntityAdWordsLink (Maybe Text)
 entName = lens _entName (\ s a -> s{_entName = a})
 
--- | Entity AdWords link ID
+-- | Entity Google Ads link ID
 entId :: Lens' EntityAdWordsLink (Maybe Text)
 entId = lens _entId (\ s a -> s{_entId = a})
 
@@ -3176,13 +3278,16 @@ instance ToJSON EntityAdWordsLink where
 -- | Details for the filter of the type SEARCH_AND_REPLACE.
 --
 -- /See:/ 'filterSearchAndReplaceDetails' smart constructor.
-data FilterSearchAndReplaceDetails = FilterSearchAndReplaceDetails'
+data FilterSearchAndReplaceDetails =
+  FilterSearchAndReplaceDetails'
     { _fsardFieldIndex    :: !(Maybe (Textual Int32))
     , _fsardField         :: !(Maybe Text)
     , _fsardSearchString  :: !(Maybe Text)
     , _fsardReplaceString :: !(Maybe Text)
     , _fsardCaseSensitive :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilterSearchAndReplaceDetails' with the minimum fields required to make a request.
 --
@@ -3200,13 +3305,14 @@ data FilterSearchAndReplaceDetails = FilterSearchAndReplaceDetails'
 filterSearchAndReplaceDetails
     :: FilterSearchAndReplaceDetails
 filterSearchAndReplaceDetails =
-    FilterSearchAndReplaceDetails'
+  FilterSearchAndReplaceDetails'
     { _fsardFieldIndex = Nothing
     , _fsardField = Nothing
     , _fsardSearchString = Nothing
     , _fsardReplaceString = Nothing
     , _fsardCaseSensitive = Nothing
     }
+
 
 -- | The Index of the custom dimension. Required if field is a
 -- CUSTOM_DIMENSION.
@@ -3262,9 +3368,12 @@ instance ToJSON FilterSearchAndReplaceDetails where
 -- | Permissions the user has for this view (profile).
 --
 -- /See:/ 'proFilePermissions' smart constructor.
-newtype ProFilePermissions = ProFilePermissions'
+newtype ProFilePermissions =
+  ProFilePermissions'
     { _pfpEffective :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFilePermissions' with the minimum fields required to make a request.
 --
@@ -3273,10 +3382,8 @@ newtype ProFilePermissions = ProFilePermissions'
 -- * 'pfpEffective'
 proFilePermissions
     :: ProFilePermissions
-proFilePermissions =
-    ProFilePermissions'
-    { _pfpEffective = Nothing
-    }
+proFilePermissions = ProFilePermissions' {_pfpEffective = Nothing}
+
 
 -- | All the permissions that the user has for this view (profile). These
 -- include any implied permissions (e.g., EDIT implies VIEW) or inherited
@@ -3302,7 +3409,8 @@ instance ToJSON ProFilePermissions where
 -- | JSON template for an Analytics view (profile).
 --
 -- /See:/ 'proFile' smart constructor.
-data ProFile = ProFile'
+data ProFile =
+  ProFile'
     { _pParentLink                        :: !(Maybe ProFileParentLink)
     , _pECommerceTracking                 :: !(Maybe Bool)
     , _pSiteSearchCategoryParameters      :: !(Maybe Text)
@@ -3329,7 +3437,9 @@ data ProFile = ProFile'
     , _pExcludeQueryParameters            :: !(Maybe Text)
     , _pEnhancedECommerceTracking         :: !(Maybe Bool)
     , _pStripSiteSearchQueryParameters    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFile' with the minimum fields required to make a request.
 --
@@ -3389,7 +3499,7 @@ data ProFile = ProFile'
 proFile
     :: ProFile
 proFile =
-    ProFile'
+  ProFile'
     { _pParentLink = Nothing
     , _pECommerceTracking = Nothing
     , _pSiteSearchCategoryParameters = Nothing
@@ -3417,6 +3527,7 @@ proFile =
     , _pEnhancedECommerceTracking = Nothing
     , _pStripSiteSearchQueryParameters = Nothing
     }
+
 
 -- | Parent link for this view (profile). Points to the web property to which
 -- this view (profile) belongs.
@@ -3640,7 +3751,8 @@ instance ToJSON ProFile where
 -- collection corresponds to a single AccountSummary.
 --
 -- /See:/ 'accountSummaries' smart constructor.
-data AccountSummaries = AccountSummaries'
+data AccountSummaries =
+  AccountSummaries'
     { _asNextLink     :: !(Maybe Text)
     , _asItemsPerPage :: !(Maybe (Textual Int32))
     , _asKind         :: !Text
@@ -3649,7 +3761,9 @@ data AccountSummaries = AccountSummaries'
     , _asTotalResults :: !(Maybe (Textual Int32))
     , _asStartIndex   :: !(Maybe (Textual Int32))
     , _asPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountSummaries' with the minimum fields required to make a request.
 --
@@ -3673,7 +3787,7 @@ data AccountSummaries = AccountSummaries'
 accountSummaries
     :: AccountSummaries
 accountSummaries =
-    AccountSummaries'
+  AccountSummaries'
     { _asNextLink = Nothing
     , _asItemsPerPage = Nothing
     , _asKind = "analytics#accountSummaries"
@@ -3683,6 +3797,7 @@ accountSummaries =
     , _asStartIndex = Nothing
     , _asPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this AccountSummary collection.
 asNextLink :: Lens' AccountSummaries (Maybe Text)
@@ -3764,10 +3879,13 @@ instance ToJSON AccountSummaries where
 -- | Details for the goal of the type EVENT.
 --
 -- /See:/ 'goalEventDetails' smart constructor.
-data GoalEventDetails = GoalEventDetails'
+data GoalEventDetails =
+  GoalEventDetails'
     { _gedUseEventValue   :: !(Maybe Bool)
     , _gedEventConditions :: !(Maybe [GoalEventDetailsEventConditionsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoalEventDetails' with the minimum fields required to make a request.
 --
@@ -3779,10 +3897,8 @@ data GoalEventDetails = GoalEventDetails'
 goalEventDetails
     :: GoalEventDetails
 goalEventDetails =
-    GoalEventDetails'
-    { _gedUseEventValue = Nothing
-    , _gedEventConditions = Nothing
-    }
+  GoalEventDetails' {_gedUseEventValue = Nothing, _gedEventConditions = Nothing}
+
 
 -- | Determines if the event value should be used as the value for this goal.
 gedUseEventValue :: Lens' GoalEventDetails (Maybe Bool)
@@ -3817,7 +3933,8 @@ instance ToJSON GoalEventDetails where
 -- returns basic information (i.e., summary) for a web property.
 --
 -- /See:/ 'webPropertySummary' smart constructor.
-data WebPropertySummary = WebPropertySummary'
+data WebPropertySummary =
+  WebPropertySummary'
     { _wpsKind                  :: !Text
     , _wpsProFiles              :: !(Maybe [ProFileSummary])
     , _wpsName                  :: !(Maybe Text)
@@ -3826,7 +3943,9 @@ data WebPropertySummary = WebPropertySummary'
     , _wpsId                    :: !(Maybe Text)
     , _wpsWebsiteURL            :: !(Maybe Text)
     , _wpsLevel                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebPropertySummary' with the minimum fields required to make a request.
 --
@@ -3850,7 +3969,7 @@ data WebPropertySummary = WebPropertySummary'
 webPropertySummary
     :: WebPropertySummary
 webPropertySummary =
-    WebPropertySummary'
+  WebPropertySummary'
     { _wpsKind = "analytics#webPropertySummary"
     , _wpsProFiles = Nothing
     , _wpsName = Nothing
@@ -3860,6 +3979,7 @@ webPropertySummary =
     , _wpsWebsiteURL = Nothing
     , _wpsLevel = Nothing
     }
+
 
 -- | Resource type for Analytics WebPropertySummary.
 wpsKind :: Lens' WebPropertySummary Text
@@ -3933,7 +4053,8 @@ instance ToJSON WebPropertySummary where
 -- account. Each resource in the collection corresponds to a filter.
 --
 -- /See:/ 'filters' smart constructor.
-data Filters = Filters'
+data Filters =
+  Filters'
     { _fNextLink     :: !(Maybe Text)
     , _fItemsPerPage :: !(Maybe (Textual Int32))
     , _fKind         :: !Text
@@ -3942,7 +4063,9 @@ data Filters = Filters'
     , _fTotalResults :: !(Maybe (Textual Int32))
     , _fStartIndex   :: !(Maybe (Textual Int32))
     , _fPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Filters' with the minimum fields required to make a request.
 --
@@ -3966,7 +4089,7 @@ data Filters = Filters'
 filters
     :: Filters
 filters =
-    Filters'
+  Filters'
     { _fNextLink = Nothing
     , _fItemsPerPage = Nothing
     , _fKind = "analytics#filters"
@@ -3976,6 +4099,7 @@ filters =
     , _fStartIndex = Nothing
     , _fPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this filter collection.
 fNextLink :: Lens' Filters (Maybe Text)
@@ -4057,7 +4181,8 @@ instance ToJSON Filters where
 -- | Analytics data for a given view (profile).
 --
 -- /See:/ 'gaData' smart constructor.
-data GaData = GaData'
+data GaData =
+  GaData'
     { _gdNextLink            :: !(Maybe Text)
     , _gdSampleSpace         :: !(Maybe (Textual Int64))
     , _gdItemsPerPage        :: !(Maybe (Textual Int32))
@@ -4075,7 +4200,9 @@ data GaData = GaData'
     , _gdContainsSampledData :: !(Maybe Bool)
     , _gdTotalsForAllResults :: !(Maybe GaDataTotalsForAllResults)
     , _gdPreviousLink        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GaData' with the minimum fields required to make a request.
 --
@@ -4117,7 +4244,7 @@ data GaData = GaData'
 gaData
     :: GaData
 gaData =
-    GaData'
+  GaData'
     { _gdNextLink = Nothing
     , _gdSampleSpace = Nothing
     , _gdItemsPerPage = Nothing
@@ -4136,6 +4263,7 @@ gaData =
     , _gdTotalsForAllResults = Nothing
     , _gdPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this Analytics data query.
 gdNextLink :: Lens' GaData (Maybe Text)
@@ -4296,9 +4424,12 @@ instance ToJSON GaData where
 -- same as the metric order specified in the request.
 --
 -- /See:/ 'realtimeDataTotalsForAllResults' smart constructor.
-newtype RealtimeDataTotalsForAllResults = RealtimeDataTotalsForAllResults'
+newtype RealtimeDataTotalsForAllResults =
+  RealtimeDataTotalsForAllResults'
     { _rdtfarAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RealtimeDataTotalsForAllResults' with the minimum fields required to make a request.
 --
@@ -4309,9 +4440,9 @@ realtimeDataTotalsForAllResults
     :: HashMap Text Text -- ^ 'rdtfarAddtional'
     -> RealtimeDataTotalsForAllResults
 realtimeDataTotalsForAllResults pRdtfarAddtional_ =
-    RealtimeDataTotalsForAllResults'
-    { _rdtfarAddtional = _Coerce # pRdtfarAddtional_
-    }
+  RealtimeDataTotalsForAllResults'
+    {_rdtfarAddtional = _Coerce # pRdtfarAddtional_}
+
 
 -- | Key-value pair for the total value of a metric. Key is the metric name
 -- and the value is the total value for that metric.
@@ -4335,7 +4466,8 @@ instance ToJSON RealtimeDataTotalsForAllResults where
 -- | JSON template for an Analytics custom data source.
 --
 -- /See:/ 'customDataSource' smart constructor.
-data CustomDataSource = CustomDataSource'
+data CustomDataSource =
+  CustomDataSource'
     { _cParentLink     :: !(Maybe CustomDataSourceParentLink)
     , _cWebPropertyId  :: !(Maybe Text)
     , _cChildLink      :: !(Maybe CustomDataSourceChildLink)
@@ -4352,7 +4484,9 @@ data CustomDataSource = CustomDataSource'
     , _cType           :: !(Maybe Text)
     , _cDescription    :: !(Maybe Text)
     , _cProFilesLinked :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomDataSource' with the minimum fields required to make a request.
 --
@@ -4392,7 +4526,7 @@ data CustomDataSource = CustomDataSource'
 customDataSource
     :: CustomDataSource
 customDataSource =
-    CustomDataSource'
+  CustomDataSource'
     { _cParentLink = Nothing
     , _cWebPropertyId = Nothing
     , _cChildLink = Nothing
@@ -4410,6 +4544,7 @@ customDataSource =
     , _cDescription = Nothing
     , _cProFilesLinked = Nothing
     }
+
 
 -- | Parent link for this custom data source. Points to the web property to
 -- which this custom data source belongs.
@@ -4541,21 +4676,21 @@ instance ToJSON CustomDataSource where
 -- these fields.
 --
 -- /See:/ 'accountTreeRequest' smart constructor.
-data AccountTreeRequest = AccountTreeRequest'
-    { _atrAccountSettings :: !(Maybe AccountTreeRequestAccountSettings)
-    , _atrWebPropertyName :: !(Maybe Text)
+data AccountTreeRequest =
+  AccountTreeRequest'
+    { _atrWebPropertyName :: !(Maybe Text)
     , _atrKind            :: !Text
     , _atrAccountName     :: !(Maybe Text)
     , _atrProFileName     :: !(Maybe Text)
     , _atrWebsiteURL      :: !(Maybe Text)
     , _atrTimezone        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountTreeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'atrAccountSettings'
 --
 -- * 'atrWebPropertyName'
 --
@@ -4571,9 +4706,8 @@ data AccountTreeRequest = AccountTreeRequest'
 accountTreeRequest
     :: AccountTreeRequest
 accountTreeRequest =
-    AccountTreeRequest'
-    { _atrAccountSettings = Nothing
-    , _atrWebPropertyName = Nothing
+  AccountTreeRequest'
+    { _atrWebPropertyName = Nothing
     , _atrKind = "analytics#accountTreeRequest"
     , _atrAccountName = Nothing
     , _atrProFileName = Nothing
@@ -4581,10 +4715,6 @@ accountTreeRequest =
     , _atrTimezone = Nothing
     }
 
-atrAccountSettings :: Lens' AccountTreeRequest (Maybe AccountTreeRequestAccountSettings)
-atrAccountSettings
-  = lens _atrAccountSettings
-      (\ s a -> s{_atrAccountSettings = a})
 
 atrWebPropertyName :: Lens' AccountTreeRequest (Maybe Text)
 atrWebPropertyName
@@ -4619,9 +4749,8 @@ instance FromJSON AccountTreeRequest where
           = withObject "AccountTreeRequest"
               (\ o ->
                  AccountTreeRequest' <$>
-                   (o .:? "accountSettings") <*>
-                     (o .:? "webpropertyName")
-                     <*> (o .:? "kind" .!= "analytics#accountTreeRequest")
+                   (o .:? "webpropertyName") <*>
+                     (o .:? "kind" .!= "analytics#accountTreeRequest")
                      <*> (o .:? "accountName")
                      <*> (o .:? "profileName")
                      <*> (o .:? "websiteUrl")
@@ -4631,8 +4760,7 @@ instance ToJSON AccountTreeRequest where
         toJSON AccountTreeRequest'{..}
           = object
               (catMaybes
-                 [("accountSettings" .=) <$> _atrAccountSettings,
-                  ("webpropertyName" .=) <$> _atrWebPropertyName,
+                 [("webpropertyName" .=) <$> _atrWebPropertyName,
                   Just ("kind" .= _atrKind),
                   ("accountName" .=) <$> _atrAccountName,
                   ("profileName" .=) <$> _atrProFileName,
@@ -4642,14 +4770,17 @@ instance ToJSON AccountTreeRequest where
 -- | JSON template for a web property reference.
 --
 -- /See:/ 'webPropertyRef' smart constructor.
-data WebPropertyRef = WebPropertyRef'
+data WebPropertyRef =
+  WebPropertyRef'
     { _wprKind                  :: !Text
     , _wprHref                  :: !(Maybe Text)
     , _wprAccountId             :: !(Maybe Text)
     , _wprName                  :: !(Maybe Text)
     , _wprInternalWebPropertyId :: !(Maybe Text)
     , _wprId                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebPropertyRef' with the minimum fields required to make a request.
 --
@@ -4669,7 +4800,7 @@ data WebPropertyRef = WebPropertyRef'
 webPropertyRef
     :: WebPropertyRef
 webPropertyRef =
-    WebPropertyRef'
+  WebPropertyRef'
     { _wprKind = "analytics#webPropertyRef"
     , _wprHref = Nothing
     , _wprAccountId = Nothing
@@ -4677,6 +4808,7 @@ webPropertyRef =
     , _wprInternalWebPropertyId = Nothing
     , _wprId = Nothing
     }
+
 
 -- | Analytics web property reference.
 wprKind :: Lens' WebPropertyRef Text
@@ -4731,7 +4863,8 @@ instance ToJSON WebPropertyRef where
 -- | JSON template for an Analytics Remarketing Audience Foreign Link.
 --
 -- /See:/ 'linkedForeignAccount' smart constructor.
-data LinkedForeignAccount = LinkedForeignAccount'
+data LinkedForeignAccount =
+  LinkedForeignAccount'
     { _lfaStatus                :: !(Maybe Text)
     , _lfaWebPropertyId         :: !(Maybe Text)
     , _lfaKind                  :: !Text
@@ -4742,7 +4875,9 @@ data LinkedForeignAccount = LinkedForeignAccount'
     , _lfaInternalWebPropertyId :: !(Maybe Text)
     , _lfaId                    :: !(Maybe Text)
     , _lfaType                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LinkedForeignAccount' with the minimum fields required to make a request.
 --
@@ -4770,7 +4905,7 @@ data LinkedForeignAccount = LinkedForeignAccount'
 linkedForeignAccount
     :: LinkedForeignAccount
 linkedForeignAccount =
-    LinkedForeignAccount'
+  LinkedForeignAccount'
     { _lfaStatus = Nothing
     , _lfaWebPropertyId = Nothing
     , _lfaKind = "analytics#linkedForeignAccount"
@@ -4782,6 +4917,7 @@ linkedForeignAccount =
     , _lfaId = Nothing
     , _lfaType = Nothing
     }
+
 
 -- | The status of this foreign account link.
 lfaStatus :: Lens' LinkedForeignAccount (Maybe Text)
@@ -4816,8 +4952,8 @@ lfaRemarketingAudienceId
   = lens _lfaRemarketingAudienceId
       (\ s a -> s{_lfaRemarketingAudienceId = a})
 
--- | The foreign account ID. For example the an AdWords \`linkedAccountId\`
--- has the following format XXX-XXX-XXXX.
+-- | The foreign account ID. For example the an Google Ads
+-- \`linkedAccountId\` has the following format XXX-XXX-XXXX.
 lfaLinkedAccountId :: Lens' LinkedForeignAccount (Maybe Text)
 lfaLinkedAccountId
   = lens _lfaLinkedAccountId
@@ -4875,7 +5011,8 @@ instance ToJSON LinkedForeignAccount where
 -- collection corresponds to a single Analytics goal.
 --
 -- /See:/ 'goals' smart constructor.
-data Goals = Goals'
+data Goals =
+  Goals'
     { _gNextLink     :: !(Maybe Text)
     , _gItemsPerPage :: !(Maybe (Textual Int32))
     , _gKind         :: !Text
@@ -4884,7 +5021,9 @@ data Goals = Goals'
     , _gTotalResults :: !(Maybe (Textual Int32))
     , _gStartIndex   :: !(Maybe (Textual Int32))
     , _gPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Goals' with the minimum fields required to make a request.
 --
@@ -4908,7 +5047,7 @@ data Goals = Goals'
 goals
     :: Goals
 goals =
-    Goals'
+  Goals'
     { _gNextLink = Nothing
     , _gItemsPerPage = Nothing
     , _gKind = "analytics#goals"
@@ -4918,6 +5057,7 @@ goals =
     , _gStartIndex = Nothing
     , _gPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this goal collection.
 gNextLink :: Lens' Goals (Maybe Text)
@@ -5001,10 +5141,13 @@ instance ToJSON Goals where
 -- populated.
 --
 -- /See:/ 'mcfDataRowsItemItem' smart constructor.
-data McfDataRowsItemItem = McfDataRowsItemItem'
+data McfDataRowsItemItem =
+  McfDataRowsItemItem'
     { _mdriiPrimitiveValue      :: !(Maybe Text)
     , _mdriiConversionPathValue :: !(Maybe [McfDataRowsItemItemConversionPathValueItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'McfDataRowsItemItem' with the minimum fields required to make a request.
 --
@@ -5016,10 +5159,9 @@ data McfDataRowsItemItem = McfDataRowsItemItem'
 mcfDataRowsItemItem
     :: McfDataRowsItemItem
 mcfDataRowsItemItem =
-    McfDataRowsItemItem'
-    { _mdriiPrimitiveValue = Nothing
-    , _mdriiConversionPathValue = Nothing
-    }
+  McfDataRowsItemItem'
+    {_mdriiPrimitiveValue = Nothing, _mdriiConversionPathValue = Nothing}
+
 
 -- | A primitive dimension value. A primitive metric value.
 mdriiPrimitiveValue :: Lens' McfDataRowsItemItem (Maybe Text)
@@ -5055,9 +5197,12 @@ instance ToJSON McfDataRowsItemItem where
 -- | Permissions the user has for this account.
 --
 -- /See:/ 'accountPermissions' smart constructor.
-newtype AccountPermissions = AccountPermissions'
+newtype AccountPermissions =
+  AccountPermissions'
     { _apEffective :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountPermissions' with the minimum fields required to make a request.
 --
@@ -5066,10 +5211,8 @@ newtype AccountPermissions = AccountPermissions'
 -- * 'apEffective'
 accountPermissions
     :: AccountPermissions
-accountPermissions =
-    AccountPermissions'
-    { _apEffective = Nothing
-    }
+accountPermissions = AccountPermissions' {_apEffective = Nothing}
+
 
 -- | All the permissions that the user has for this account. These include
 -- any implied permissions (e.g., EDIT implies VIEW).
@@ -5095,11 +5238,14 @@ instance ToJSON AccountPermissions where
 -- (profile).
 --
 -- /See:/ 'entityUserLinkEntity' smart constructor.
-data EntityUserLinkEntity = EntityUserLinkEntity'
+data EntityUserLinkEntity =
+  EntityUserLinkEntity'
     { _euleProFileRef     :: !(Maybe ProFileRef)
     , _euleAccountRef     :: !(Maybe AccountRef)
     , _euleWebPropertyRef :: !(Maybe WebPropertyRef)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntityUserLinkEntity' with the minimum fields required to make a request.
 --
@@ -5113,11 +5259,12 @@ data EntityUserLinkEntity = EntityUserLinkEntity'
 entityUserLinkEntity
     :: EntityUserLinkEntity
 entityUserLinkEntity =
-    EntityUserLinkEntity'
+  EntityUserLinkEntity'
     { _euleProFileRef = Nothing
     , _euleAccountRef = Nothing
     , _euleWebPropertyRef = Nothing
     }
+
 
 -- | View (Profile) for this link.
 euleProFileRef :: Lens' EntityUserLinkEntity (Maybe ProFileRef)
@@ -5156,7 +5303,8 @@ instance ToJSON EntityUserLinkEntity where
 -- | JSON template for Analytics account entry.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account'
+data Account =
+  Account'
     { _accChildLink   :: !(Maybe AccountChildLink)
     , _accKind        :: !Text
     , _accCreated     :: !(Maybe DateTime')
@@ -5166,7 +5314,9 @@ data Account = Account'
     , _accId          :: !(Maybe Text)
     , _accUpdated     :: !(Maybe DateTime')
     , _accPermissions :: !(Maybe AccountPermissions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -5192,7 +5342,7 @@ data Account = Account'
 account
     :: Account
 account =
-    Account'
+  Account'
     { _accChildLink = Nothing
     , _accKind = "analytics#account"
     , _accCreated = Nothing
@@ -5203,6 +5353,7 @@ account =
     , _accUpdated = Nothing
     , _accPermissions = Nothing
     }
+
 
 -- | Child link for an account entry. Points to the list of web properties
 -- for this account.
@@ -5281,7 +5432,8 @@ instance ToJSON Account where
 -- | JSON template for Analytics experiment resource.
 --
 -- /See:/ 'experiment' smart constructor.
-data Experiment = Experiment'
+data Experiment =
+  Experiment'
     { _expParentLink                     :: !(Maybe ExperimentParentLink)
     , _expEqualWeighting                 :: !(Maybe Bool)
     , _expStatus                         :: !(Maybe Text)
@@ -5310,7 +5462,9 @@ data Experiment = Experiment'
     , _expWinnerConfidenceLevel          :: !(Maybe (Textual Double))
     , _expServingFramework               :: !(Maybe Text)
     , _expDescription                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Experiment' with the minimum fields required to make a request.
 --
@@ -5374,7 +5528,7 @@ data Experiment = Experiment'
 experiment
     :: Experiment
 experiment =
-    Experiment'
+  Experiment'
     { _expParentLink = Nothing
     , _expEqualWeighting = Nothing
     , _expStatus = Nothing
@@ -5404,6 +5558,7 @@ experiment =
     , _expServingFramework = Nothing
     , _expDescription = Nothing
     }
+
 
 -- | Parent link for an experiment. Points to the view (profile) to which
 -- this experiment belongs.
@@ -5693,7 +5848,8 @@ instance ToJSON Experiment where
 -- Each resource in this collection corresponds to a single link.
 --
 -- /See:/ 'entityUserLinks' smart constructor.
-data EntityUserLinks = EntityUserLinks'
+data EntityUserLinks =
+  EntityUserLinks'
     { _eulNextLink     :: !(Maybe Text)
     , _eulItemsPerPage :: !(Maybe (Textual Int32))
     , _eulKind         :: !Text
@@ -5701,7 +5857,9 @@ data EntityUserLinks = EntityUserLinks'
     , _eulTotalResults :: !(Maybe (Textual Int32))
     , _eulStartIndex   :: !(Maybe (Textual Int32))
     , _eulPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntityUserLinks' with the minimum fields required to make a request.
 --
@@ -5723,7 +5881,7 @@ data EntityUserLinks = EntityUserLinks'
 entityUserLinks
     :: EntityUserLinks
 entityUserLinks =
-    EntityUserLinks'
+  EntityUserLinks'
     { _eulNextLink = Nothing
     , _eulItemsPerPage = Nothing
     , _eulKind = "analytics#entityUserLinks"
@@ -5732,6 +5890,7 @@ entityUserLinks =
     , _eulStartIndex = Nothing
     , _eulPreviousLink = Nothing
     }
+
 
 -- | Next link for this account collection.
 eulNextLink :: Lens' EntityUserLinks (Maybe Text)
@@ -5805,14 +5964,17 @@ instance ToJSON EntityUserLinks where
                   ("startIndex" .=) <$> _eulStartIndex,
                   ("previousLink" .=) <$> _eulPreviousLink])
 
--- | JSON template for an AdWords account.
+-- | JSON template for an Google Ads account.
 --
 -- /See:/ 'adWordsAccount' smart constructor.
-data AdWordsAccount = AdWordsAccount'
+data AdWordsAccount =
+  AdWordsAccount'
     { _awaAutoTaggingEnabled :: !(Maybe Bool)
     , _awaKind               :: !Text
     , _awaCustomerId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdWordsAccount' with the minimum fields required to make a request.
 --
@@ -5826,24 +5988,25 @@ data AdWordsAccount = AdWordsAccount'
 adWordsAccount
     :: AdWordsAccount
 adWordsAccount =
-    AdWordsAccount'
+  AdWordsAccount'
     { _awaAutoTaggingEnabled = Nothing
     , _awaKind = "analytics#adWordsAccount"
     , _awaCustomerId = Nothing
     }
 
--- | True if auto-tagging is enabled on the AdWords account. Read-only after
--- the insert operation.
+
+-- | True if auto-tagging is enabled on the Google Ads account. Read-only
+-- after the insert operation.
 awaAutoTaggingEnabled :: Lens' AdWordsAccount (Maybe Bool)
 awaAutoTaggingEnabled
   = lens _awaAutoTaggingEnabled
       (\ s a -> s{_awaAutoTaggingEnabled = a})
 
--- | Resource type for AdWords account.
+-- | Resource type for Google Ads account.
 awaKind :: Lens' AdWordsAccount Text
 awaKind = lens _awaKind (\ s a -> s{_awaKind = a})
 
--- | Customer ID. This field is required when creating an AdWords link.
+-- | Customer ID. This field is required when creating a Google Ads link.
 awaCustomerId :: Lens' AdWordsAccount (Maybe Text)
 awaCustomerId
   = lens _awaCustomerId
@@ -5870,13 +6033,16 @@ instance ToJSON AdWordsAccount where
 -- | JSON template for a profile filter link.
 --
 -- /See:/ 'filterRef' smart constructor.
-data FilterRef = FilterRef'
+data FilterRef =
+  FilterRef'
     { _frKind      :: !Text
     , _frHref      :: !(Maybe Text)
     , _frAccountId :: !(Maybe Text)
     , _frName      :: !(Maybe Text)
     , _frId        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilterRef' with the minimum fields required to make a request.
 --
@@ -5894,13 +6060,14 @@ data FilterRef = FilterRef'
 filterRef
     :: FilterRef
 filterRef =
-    FilterRef'
+  FilterRef'
     { _frKind = "analytics#filterRef"
     , _frHref = Nothing
     , _frAccountId = Nothing
     , _frName = Nothing
     , _frId = Nothing
     }
+
 
 -- | Kind value for filter reference.
 frKind :: Lens' FilterRef Text
@@ -5945,10 +6112,13 @@ instance ToJSON FilterRef where
 -- | Details for the goal of the type VISIT_TIME_ON_SITE.
 --
 -- /See:/ 'goalVisitTimeOnSiteDetails' smart constructor.
-data GoalVisitTimeOnSiteDetails = GoalVisitTimeOnSiteDetails'
+data GoalVisitTimeOnSiteDetails =
+  GoalVisitTimeOnSiteDetails'
     { _gvtosdComparisonValue :: !(Maybe (Textual Int64))
     , _gvtosdComparisonType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoalVisitTimeOnSiteDetails' with the minimum fields required to make a request.
 --
@@ -5960,10 +6130,9 @@ data GoalVisitTimeOnSiteDetails = GoalVisitTimeOnSiteDetails'
 goalVisitTimeOnSiteDetails
     :: GoalVisitTimeOnSiteDetails
 goalVisitTimeOnSiteDetails =
-    GoalVisitTimeOnSiteDetails'
-    { _gvtosdComparisonValue = Nothing
-    , _gvtosdComparisonType = Nothing
-    }
+  GoalVisitTimeOnSiteDetails'
+    {_gvtosdComparisonValue = Nothing, _gvtosdComparisonType = Nothing}
+
 
 -- | Value used for this comparison.
 gvtosdComparisonValue :: Lens' GoalVisitTimeOnSiteDetails (Maybe Int64)
@@ -5998,7 +6167,8 @@ instance ToJSON GoalVisitTimeOnSiteDetails where
 -- Analytics web property.
 --
 -- /See:/ 'webProperties' smart constructor.
-data WebProperties = WebProperties'
+data WebProperties =
+  WebProperties'
     { _wpNextLink     :: !(Maybe Text)
     , _wpItemsPerPage :: !(Maybe (Textual Int32))
     , _wpKind         :: !Text
@@ -6007,7 +6177,9 @@ data WebProperties = WebProperties'
     , _wpTotalResults :: !(Maybe (Textual Int32))
     , _wpStartIndex   :: !(Maybe (Textual Int32))
     , _wpPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebProperties' with the minimum fields required to make a request.
 --
@@ -6031,7 +6203,7 @@ data WebProperties = WebProperties'
 webProperties
     :: WebProperties
 webProperties =
-    WebProperties'
+  WebProperties'
     { _wpNextLink = Nothing
     , _wpItemsPerPage = Nothing
     , _wpKind = "analytics#webproperties"
@@ -6041,6 +6213,7 @@ webProperties =
     , _wpStartIndex = Nothing
     , _wpPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this web property collection.
 wpNextLink :: Lens' WebProperties (Maybe Text)
@@ -6124,7 +6297,8 @@ instance ToJSON WebProperties where
 -- Analytics custom metric.
 --
 -- /See:/ 'customMetrics' smart constructor.
-data CustomMetrics = CustomMetrics'
+data CustomMetrics =
+  CustomMetrics'
     { _cmNextLink     :: !(Maybe Text)
     , _cmItemsPerPage :: !(Maybe (Textual Int32))
     , _cmKind         :: !Text
@@ -6133,7 +6307,9 @@ data CustomMetrics = CustomMetrics'
     , _cmTotalResults :: !(Maybe (Textual Int32))
     , _cmStartIndex   :: !(Maybe (Textual Int32))
     , _cmPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomMetrics' with the minimum fields required to make a request.
 --
@@ -6157,7 +6333,7 @@ data CustomMetrics = CustomMetrics'
 customMetrics
     :: CustomMetrics
 customMetrics =
-    CustomMetrics'
+  CustomMetrics'
     { _cmNextLink = Nothing
     , _cmItemsPerPage = Nothing
     , _cmKind = "analytics#customMetrics"
@@ -6167,6 +6343,7 @@ customMetrics =
     , _cmStartIndex = Nothing
     , _cmPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this custom metric collection.
 cmNextLink :: Lens' CustomMetrics (Maybe Text)
@@ -6248,7 +6425,8 @@ instance ToJSON CustomMetrics where
 -- | Details for the filter of the type ADVANCED.
 --
 -- /See:/ 'filterAdvancedDetails' smart constructor.
-data FilterAdvancedDetails = FilterAdvancedDetails'
+data FilterAdvancedDetails =
+  FilterAdvancedDetails'
     { _fadExtractA            :: !(Maybe Text)
     , _fadFieldARequired      :: !(Maybe Bool)
     , _fadFieldA              :: !(Maybe Text)
@@ -6262,7 +6440,9 @@ data FilterAdvancedDetails = FilterAdvancedDetails'
     , _fadFieldB              :: !(Maybe Text)
     , _fadFieldBRequired      :: !(Maybe Bool)
     , _fadOverrideOutputField :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilterAdvancedDetails' with the minimum fields required to make a request.
 --
@@ -6296,7 +6476,7 @@ data FilterAdvancedDetails = FilterAdvancedDetails'
 filterAdvancedDetails
     :: FilterAdvancedDetails
 filterAdvancedDetails =
-    FilterAdvancedDetails'
+  FilterAdvancedDetails'
     { _fadExtractA = Nothing
     , _fadFieldARequired = Nothing
     , _fadFieldA = Nothing
@@ -6311,6 +6491,7 @@ filterAdvancedDetails =
     , _fadFieldBRequired = Nothing
     , _fadOverrideOutputField = Nothing
     }
+
 
 -- | Expression to extract from field A.
 fadExtractA :: Lens' FilterAdvancedDetails (Maybe Text)
@@ -6435,19 +6616,19 @@ instance ToJSON FilterAdvancedDetails where
 -- creating an account, property, and view (profile).
 --
 -- /See:/ 'accountTreeResponse' smart constructor.
-data AccountTreeResponse = AccountTreeResponse'
-    { _atrtAccountSettings :: !(Maybe AccountTreeResponseAccountSettings)
-    , _atrtKind            :: !Text
-    , _atrtProFile         :: !(Maybe ProFile)
-    , _atrtAccount         :: !(Maybe Account)
-    , _atrtWebProperty     :: !(Maybe WebProperty)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data AccountTreeResponse =
+  AccountTreeResponse'
+    { _atrtKind        :: !Text
+    , _atrtProFile     :: !(Maybe ProFile)
+    , _atrtAccount     :: !(Maybe Account)
+    , _atrtWebProperty :: !(Maybe WebProperty)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountTreeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'atrtAccountSettings'
 --
 -- * 'atrtKind'
 --
@@ -6459,18 +6640,13 @@ data AccountTreeResponse = AccountTreeResponse'
 accountTreeResponse
     :: AccountTreeResponse
 accountTreeResponse =
-    AccountTreeResponse'
-    { _atrtAccountSettings = Nothing
-    , _atrtKind = "analytics#accountTreeResponse"
+  AccountTreeResponse'
+    { _atrtKind = "analytics#accountTreeResponse"
     , _atrtProFile = Nothing
     , _atrtAccount = Nothing
     , _atrtWebProperty = Nothing
     }
 
-atrtAccountSettings :: Lens' AccountTreeResponse (Maybe AccountTreeResponseAccountSettings)
-atrtAccountSettings
-  = lens _atrtAccountSettings
-      (\ s a -> s{_atrtAccountSettings = a})
 
 -- | Resource type for account ticket.
 atrtKind :: Lens' AccountTreeResponse Text
@@ -6497,8 +6673,7 @@ instance FromJSON AccountTreeResponse where
           = withObject "AccountTreeResponse"
               (\ o ->
                  AccountTreeResponse' <$>
-                   (o .:? "accountSettings") <*>
-                     (o .:? "kind" .!= "analytics#accountTreeResponse")
+                   (o .:? "kind" .!= "analytics#accountTreeResponse")
                      <*> (o .:? "profile")
                      <*> (o .:? "account")
                      <*> (o .:? "webproperty"))
@@ -6507,8 +6682,7 @@ instance ToJSON AccountTreeResponse where
         toJSON AccountTreeResponse'{..}
           = object
               (catMaybes
-                 [("accountSettings" .=) <$> _atrtAccountSettings,
-                  Just ("kind" .= _atrtKind),
+                 [Just ("kind" .= _atrtKind),
                   ("profile" .=) <$> _atrtProFile,
                   ("account" .=) <$> _atrtAccount,
                   ("webproperty" .=) <$> _atrtWebProperty])
@@ -6516,10 +6690,13 @@ instance ToJSON AccountTreeResponse where
 -- | Details for the filter of the type UPPER.
 --
 -- /See:/ 'filterUppercaseDetails' smart constructor.
-data FilterUppercaseDetails = FilterUppercaseDetails'
+data FilterUppercaseDetails =
+  FilterUppercaseDetails'
     { _fudFieldIndex :: !(Maybe (Textual Int32))
     , _fudField      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilterUppercaseDetails' with the minimum fields required to make a request.
 --
@@ -6531,10 +6708,8 @@ data FilterUppercaseDetails = FilterUppercaseDetails'
 filterUppercaseDetails
     :: FilterUppercaseDetails
 filterUppercaseDetails =
-    FilterUppercaseDetails'
-    { _fudFieldIndex = Nothing
-    , _fudField = Nothing
-    }
+  FilterUppercaseDetails' {_fudFieldIndex = Nothing, _fudField = Nothing}
+
 
 -- | The Index of the custom dimension. Required if field is a
 -- CUSTOM_DIMENSION.
@@ -6564,10 +6739,13 @@ instance ToJSON FilterUppercaseDetails where
 
 --
 -- /See:/ 'customDataSourceChildLink' smart constructor.
-data CustomDataSourceChildLink = CustomDataSourceChildLink'
+data CustomDataSourceChildLink =
+  CustomDataSourceChildLink'
     { _cdsclHref :: !(Maybe Text)
     , _cdsclType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomDataSourceChildLink' with the minimum fields required to make a request.
 --
@@ -6579,10 +6757,8 @@ data CustomDataSourceChildLink = CustomDataSourceChildLink'
 customDataSourceChildLink
     :: CustomDataSourceChildLink
 customDataSourceChildLink =
-    CustomDataSourceChildLink'
-    { _cdsclHref = Nothing
-    , _cdsclType = Nothing
-    }
+  CustomDataSourceChildLink' {_cdsclHref = Nothing, _cdsclType = Nothing}
+
 
 -- | Link to the list of daily uploads for this custom data source. Link to
 -- the list of uploads for this custom data source.
@@ -6612,13 +6788,16 @@ instance ToJSON CustomDataSourceChildLink where
 -- | JSON template for an Analytics Remarketing Include Conditions.
 --
 -- /See:/ 'includeConditions' smart constructor.
-data IncludeConditions = IncludeConditions'
+data IncludeConditions =
+  IncludeConditions'
     { _icKind                   :: !Text
     , _icDaysToLookBack         :: !(Maybe (Textual Int32))
     , _icMembershipDurationDays :: !(Maybe (Textual Int32))
     , _icSegment                :: !(Maybe Text)
     , _icIsSmartList            :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IncludeConditions' with the minimum fields required to make a request.
 --
@@ -6636,13 +6815,14 @@ data IncludeConditions = IncludeConditions'
 includeConditions
     :: IncludeConditions
 includeConditions =
-    IncludeConditions'
+  IncludeConditions'
     { _icKind = "analytics#includeConditions"
     , _icDaysToLookBack = Nothing
     , _icMembershipDurationDays = Nothing
     , _icSegment = Nothing
     , _icIsSmartList = Nothing
     }
+
 
 -- | Resource type for include conditions.
 icKind :: Lens' IncludeConditions Text
@@ -6705,10 +6885,13 @@ instance ToJSON IncludeConditions where
 -- belongs.
 --
 -- /See:/ 'filterParentLink' smart constructor.
-data FilterParentLink = FilterParentLink'
+data FilterParentLink =
+  FilterParentLink'
     { _fplHref :: !(Maybe Text)
     , _fplType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilterParentLink' with the minimum fields required to make a request.
 --
@@ -6720,10 +6903,8 @@ data FilterParentLink = FilterParentLink'
 filterParentLink
     :: FilterParentLink
 filterParentLink =
-    FilterParentLink'
-    { _fplHref = Nothing
-    , _fplType = "analytics#account"
-    }
+  FilterParentLink' {_fplHref = Nothing, _fplType = "analytics#account"}
+
 
 -- | Link to the account to which this filter belongs.
 fplHref :: Lens' FilterParentLink (Maybe Text)
@@ -6751,11 +6932,14 @@ instance ToJSON FilterParentLink where
 -- | JSON template for a hash Client Id request resource.
 --
 -- /See:/ 'hashClientIdRequest' smart constructor.
-data HashClientIdRequest = HashClientIdRequest'
+data HashClientIdRequest =
+  HashClientIdRequest'
     { _hClientId      :: !(Maybe Text)
     , _hWebPropertyId :: !(Maybe Text)
     , _hKind          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HashClientIdRequest' with the minimum fields required to make a request.
 --
@@ -6769,11 +6953,12 @@ data HashClientIdRequest = HashClientIdRequest'
 hashClientIdRequest
     :: HashClientIdRequest
 hashClientIdRequest =
-    HashClientIdRequest'
+  HashClientIdRequest'
     { _hClientId = Nothing
     , _hWebPropertyId = Nothing
     , _hKind = "analytics#hashClientIdRequest"
     }
+
 
 hClientId :: Lens' HashClientIdRequest (Maybe Text)
 hClientId
@@ -6806,7 +6991,8 @@ instance ToJSON HashClientIdRequest where
 -- | Real time data for a given view (profile).
 --
 -- /See:/ 'realtimeData' smart constructor.
-data RealtimeData = RealtimeData'
+data RealtimeData =
+  RealtimeData'
     { _rdProFileInfo         :: !(Maybe RealtimeDataProFileInfo)
     , _rdKind                :: !Text
     , _rdRows                :: !(Maybe [[Text]])
@@ -6816,7 +7002,9 @@ data RealtimeData = RealtimeData'
     , _rdId                  :: !(Maybe Text)
     , _rdTotalResults        :: !(Maybe (Textual Int32))
     , _rdTotalsForAllResults :: !(Maybe RealtimeDataTotalsForAllResults)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RealtimeData' with the minimum fields required to make a request.
 --
@@ -6842,7 +7030,7 @@ data RealtimeData = RealtimeData'
 realtimeData
     :: RealtimeData
 realtimeData =
-    RealtimeData'
+  RealtimeData'
     { _rdProFileInfo = Nothing
     , _rdKind = "analytics#realtimeData"
     , _rdRows = Nothing
@@ -6853,6 +7041,7 @@ realtimeData =
     , _rdTotalResults = Nothing
     , _rdTotalsForAllResults = Nothing
     }
+
 
 -- | Information for the view (profile), for which the real time data was
 -- requested.
@@ -6943,7 +7132,8 @@ instance ToJSON RealtimeData where
 -- | JSON template for Analytics Custom Metric.
 --
 -- /See:/ 'customMetric' smart constructor.
-data CustomMetric = CustomMetric'
+data CustomMetric =
+  CustomMetric'
     { _cusParentLink    :: !(Maybe CustomMetricParentLink)
     , _cusWebPropertyId :: !(Maybe Text)
     , _cusKind          :: !Text
@@ -6959,7 +7149,9 @@ data CustomMetric = CustomMetric'
     , _cusUpdated       :: !(Maybe DateTime')
     , _cusType          :: !(Maybe Text)
     , _cusIndex         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomMetric' with the minimum fields required to make a request.
 --
@@ -6997,7 +7189,7 @@ data CustomMetric = CustomMetric'
 customMetric
     :: CustomMetric
 customMetric =
-    CustomMetric'
+  CustomMetric'
     { _cusParentLink = Nothing
     , _cusWebPropertyId = Nothing
     , _cusKind = "analytics#customMetric"
@@ -7014,6 +7206,7 @@ customMetric =
     , _cusType = Nothing
     , _cusIndex = Nothing
     }
+
 
 -- | Parent link for the custom metric. Points to the property to which the
 -- custom metric belongs.
@@ -7134,13 +7327,16 @@ instance ToJSON CustomMetric where
 -- basic information (i.e., summary) for a profile.
 --
 -- /See:/ 'proFileSummary' smart constructor.
-data ProFileSummary = ProFileSummary'
+data ProFileSummary =
+  ProFileSummary'
     { _pfsKind    :: !Text
     , _pfsName    :: !(Maybe Text)
     , _pfsStarred :: !(Maybe Bool)
     , _pfsId      :: !(Maybe Text)
     , _pfsType    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFileSummary' with the minimum fields required to make a request.
 --
@@ -7158,13 +7354,14 @@ data ProFileSummary = ProFileSummary'
 proFileSummary
     :: ProFileSummary
 proFileSummary =
-    ProFileSummary'
+  ProFileSummary'
     { _pfsKind = "analytics#profileSummary"
     , _pfsName = Nothing
     , _pfsStarred = Nothing
     , _pfsId = Nothing
     , _pfsType = Nothing
     }
+
 
 -- | Resource type for Analytics ProfileSummary.
 pfsKind :: Lens' ProFileSummary Text
@@ -7210,10 +7407,13 @@ instance ToJSON ProFileSummary where
 -- the custom dimension belongs.
 --
 -- /See:/ 'customDimensionParentLink' smart constructor.
-data CustomDimensionParentLink = CustomDimensionParentLink'
+data CustomDimensionParentLink =
+  CustomDimensionParentLink'
     { _cdplHref :: !(Maybe Text)
     , _cdplType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomDimensionParentLink' with the minimum fields required to make a request.
 --
@@ -7225,10 +7425,9 @@ data CustomDimensionParentLink = CustomDimensionParentLink'
 customDimensionParentLink
     :: CustomDimensionParentLink
 customDimensionParentLink =
-    CustomDimensionParentLink'
-    { _cdplHref = Nothing
-    , _cdplType = "analytics#webproperty"
-    }
+  CustomDimensionParentLink'
+    {_cdplHref = Nothing, _cdplType = "analytics#webproperty"}
+
 
 -- | Link to the property to which the custom dimension belongs.
 cdplHref :: Lens' CustomDimensionParentLink (Maybe Text)
@@ -7256,7 +7455,8 @@ instance ToJSON CustomDimensionParentLink where
 -- | JSON template for an Analytics web property.
 --
 -- /See:/ 'webProperty' smart constructor.
-data WebProperty = WebProperty'
+data WebProperty =
+  WebProperty'
     { _wParentLink                      :: !(Maybe WebPropertyParentLink)
     , _wChildLink                       :: !(Maybe WebPropertyChildLink)
     , _wDefaultProFileId                :: !(Maybe (Textual Int64))
@@ -7276,7 +7476,9 @@ data WebProperty = WebProperty'
     , _wWebsiteURL                      :: !(Maybe Text)
     , _wIndustryVertical                :: !(Maybe Text)
     , _wLevel                           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebProperty' with the minimum fields required to make a request.
 --
@@ -7322,7 +7524,7 @@ data WebProperty = WebProperty'
 webProperty
     :: WebProperty
 webProperty =
-    WebProperty'
+  WebProperty'
     { _wParentLink = Nothing
     , _wChildLink = Nothing
     , _wDefaultProFileId = Nothing
@@ -7343,6 +7545,7 @@ webProperty =
     , _wIndustryVertical = Nothing
     , _wLevel = Nothing
     }
+
 
 -- | Parent link for this web property. Points to the account to which this
 -- web property belongs.
@@ -7502,9 +7705,12 @@ instance ToJSON WebProperty where
 -- | Permissions the user has for this web property.
 --
 -- /See:/ 'webPropertyPermissions' smart constructor.
-newtype WebPropertyPermissions = WebPropertyPermissions'
+newtype WebPropertyPermissions =
+  WebPropertyPermissions'
     { _wppEffective :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebPropertyPermissions' with the minimum fields required to make a request.
 --
@@ -7513,10 +7719,8 @@ newtype WebPropertyPermissions = WebPropertyPermissions'
 -- * 'wppEffective'
 webPropertyPermissions
     :: WebPropertyPermissions
-webPropertyPermissions =
-    WebPropertyPermissions'
-    { _wppEffective = Nothing
-    }
+webPropertyPermissions = WebPropertyPermissions' {_wppEffective = Nothing}
+
 
 -- | All the permissions that the user has for this web property. These
 -- include any implied permissions (e.g., EDIT implies VIEW) or inherited
@@ -7543,14 +7747,17 @@ instance ToJSON WebPropertyPermissions where
 -- that a user has for an entity.
 --
 -- /See:/ 'entityUserLink' smart constructor.
-data EntityUserLink = EntityUserLink'
+data EntityUserLink =
+  EntityUserLink'
     { _euluKind        :: !Text
     , _euluUserRef     :: !(Maybe UserRef)
     , _euluSelfLink    :: !(Maybe Text)
     , _euluId          :: !(Maybe Text)
     , _euluPermissions :: !(Maybe EntityUserLinkPermissions)
     , _euluEntity      :: !(Maybe EntityUserLinkEntity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntityUserLink' with the minimum fields required to make a request.
 --
@@ -7570,7 +7777,7 @@ data EntityUserLink = EntityUserLink'
 entityUserLink
     :: EntityUserLink
 entityUserLink =
-    EntityUserLink'
+  EntityUserLink'
     { _euluKind = "analytics#entityUserLink"
     , _euluUserRef = Nothing
     , _euluSelfLink = Nothing
@@ -7578,6 +7785,7 @@ entityUserLink =
     , _euluPermissions = Nothing
     , _euluEntity = Nothing
     }
+
 
 -- | Resource type for entity user link.
 euluKind :: Lens' EntityUserLink Text
@@ -7636,10 +7844,13 @@ instance ToJSON EntityUserLink where
 -- which this custom data source belongs.
 --
 -- /See:/ 'customDataSourceParentLink' smart constructor.
-data CustomDataSourceParentLink = CustomDataSourceParentLink'
+data CustomDataSourceParentLink =
+  CustomDataSourceParentLink'
     { _cdsplHref :: !(Maybe Text)
     , _cdsplType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomDataSourceParentLink' with the minimum fields required to make a request.
 --
@@ -7651,10 +7862,9 @@ data CustomDataSourceParentLink = CustomDataSourceParentLink'
 customDataSourceParentLink
     :: CustomDataSourceParentLink
 customDataSourceParentLink =
-    CustomDataSourceParentLink'
-    { _cdsplHref = Nothing
-    , _cdsplType = "analytics#webproperty"
-    }
+  CustomDataSourceParentLink'
+    {_cdsplHref = Nothing, _cdsplType = "analytics#webproperty"}
+
 
 -- | Link to the web property to which this custom data source belongs.
 cdsplHref :: Lens' CustomDataSourceParentLink (Maybe Text)
@@ -7683,13 +7893,16 @@ instance ToJSON CustomDataSourceParentLink where
 
 --
 -- /See:/ 'goalEventDetailsEventConditionsItem' smart constructor.
-data GoalEventDetailsEventConditionsItem = GoalEventDetailsEventConditionsItem'
+data GoalEventDetailsEventConditionsItem =
+  GoalEventDetailsEventConditionsItem'
     { _gedeciMatchType       :: !(Maybe Text)
     , _gedeciExpression      :: !(Maybe Text)
     , _gedeciComparisonValue :: !(Maybe (Textual Int64))
     , _gedeciType            :: !(Maybe Text)
     , _gedeciComparisonType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoalEventDetailsEventConditionsItem' with the minimum fields required to make a request.
 --
@@ -7707,13 +7920,14 @@ data GoalEventDetailsEventConditionsItem = GoalEventDetailsEventConditionsItem'
 goalEventDetailsEventConditionsItem
     :: GoalEventDetailsEventConditionsItem
 goalEventDetailsEventConditionsItem =
-    GoalEventDetailsEventConditionsItem'
+  GoalEventDetailsEventConditionsItem'
     { _gedeciMatchType = Nothing
     , _gedeciExpression = Nothing
     , _gedeciComparisonValue = Nothing
     , _gedeciType = Nothing
     , _gedeciComparisonType = Nothing
     }
+
 
 -- | Type of the match to be performed. Possible values are REGEXP,
 -- BEGINS_WITH, or EXACT.
@@ -7770,84 +7984,11 @@ instance ToJSON GoalEventDetailsEventConditionsItem
                   ("type" .=) <$> _gedeciType,
                   ("comparisonType" .=) <$> _gedeciComparisonType])
 
---
--- /See:/ 'accountTreeRequestAccountSettings' smart constructor.
-data AccountTreeRequestAccountSettings = AccountTreeRequestAccountSettings'
-    { _atrasShareWithSpeciaLists       :: !(Maybe Bool)
-    , _atrasShareWithSupport           :: !(Maybe Bool)
-    , _atrasShareAnonymouslyWithOthers :: !(Maybe Bool)
-    , _atrasShareWithGoogleProducts    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccountTreeRequestAccountSettings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'atrasShareWithSpeciaLists'
---
--- * 'atrasShareWithSupport'
---
--- * 'atrasShareAnonymouslyWithOthers'
---
--- * 'atrasShareWithGoogleProducts'
-accountTreeRequestAccountSettings
-    :: AccountTreeRequestAccountSettings
-accountTreeRequestAccountSettings =
-    AccountTreeRequestAccountSettings'
-    { _atrasShareWithSpeciaLists = Nothing
-    , _atrasShareWithSupport = Nothing
-    , _atrasShareAnonymouslyWithOthers = Nothing
-    , _atrasShareWithGoogleProducts = Nothing
-    }
-
-atrasShareWithSpeciaLists :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
-atrasShareWithSpeciaLists
-  = lens _atrasShareWithSpeciaLists
-      (\ s a -> s{_atrasShareWithSpeciaLists = a})
-
-atrasShareWithSupport :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
-atrasShareWithSupport
-  = lens _atrasShareWithSupport
-      (\ s a -> s{_atrasShareWithSupport = a})
-
-atrasShareAnonymouslyWithOthers :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
-atrasShareAnonymouslyWithOthers
-  = lens _atrasShareAnonymouslyWithOthers
-      (\ s a -> s{_atrasShareAnonymouslyWithOthers = a})
-
-atrasShareWithGoogleProducts :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
-atrasShareWithGoogleProducts
-  = lens _atrasShareWithGoogleProducts
-      (\ s a -> s{_atrasShareWithGoogleProducts = a})
-
-instance FromJSON AccountTreeRequestAccountSettings
-         where
-        parseJSON
-          = withObject "AccountTreeRequestAccountSettings"
-              (\ o ->
-                 AccountTreeRequestAccountSettings' <$>
-                   (o .:? "shareWithSpecialists") <*>
-                     (o .:? "shareWithSupport")
-                     <*> (o .:? "shareAnonymouslyWithOthers")
-                     <*> (o .:? "shareWithGoogleProducts"))
-
-instance ToJSON AccountTreeRequestAccountSettings
-         where
-        toJSON AccountTreeRequestAccountSettings'{..}
-          = object
-              (catMaybes
-                 [("shareWithSpecialists" .=) <$>
-                    _atrasShareWithSpeciaLists,
-                  ("shareWithSupport" .=) <$> _atrasShareWithSupport,
-                  ("shareAnonymouslyWithOthers" .=) <$>
-                    _atrasShareAnonymouslyWithOthers,
-                  ("shareWithGoogleProducts" .=) <$>
-                    _atrasShareWithGoogleProducts])
-
 -- | Analytics data request query parameters.
 --
 -- /See:/ 'mcfDataQuery' smart constructor.
-data McfDataQuery = McfDataQuery'
+data McfDataQuery =
+  McfDataQuery'
     { _mdqMetrics       :: !(Maybe [Text])
     , _mdqSamplingLevel :: !(Maybe Text)
     , _mdqFilters       :: !(Maybe Text)
@@ -7859,7 +8000,9 @@ data McfDataQuery = McfDataQuery'
     , _mdqMaxResults    :: !(Maybe (Textual Int32))
     , _mdqSegment       :: !(Maybe Text)
     , _mdqStartDate     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'McfDataQuery' with the minimum fields required to make a request.
 --
@@ -7889,7 +8032,7 @@ data McfDataQuery = McfDataQuery'
 mcfDataQuery
     :: McfDataQuery
 mcfDataQuery =
-    McfDataQuery'
+  McfDataQuery'
     { _mdqMetrics = Nothing
     , _mdqSamplingLevel = Nothing
     , _mdqFilters = Nothing
@@ -7902,6 +8045,7 @@ mcfDataQuery =
     , _mdqSegment = Nothing
     , _mdqStartDate = Nothing
     }
+
 
 -- | List of analytics metrics.
 mdqMetrics :: Lens' McfDataQuery [Text]
@@ -8002,7 +8146,8 @@ instance ToJSON McfDataQuery where
 -- | JSON template for Analytics goal resource.
 --
 -- /See:/ 'goal' smart constructor.
-data Goal = Goal'
+data Goal =
+  Goal'
     { _goaParentLink             :: !(Maybe GoalParentLink)
     , _goaWebPropertyId          :: !(Maybe Text)
     , _goaKind                   :: !Text
@@ -8021,7 +8166,9 @@ data Goal = Goal'
     , _goaVisitNumPagesDetails   :: !(Maybe GoalVisitNumPagesDetails)
     , _goaUpdated                :: !(Maybe DateTime')
     , _goaType                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Goal' with the minimum fields required to make a request.
 --
@@ -8065,7 +8212,7 @@ data Goal = Goal'
 goal
     :: Goal
 goal =
-    Goal'
+  Goal'
     { _goaParentLink = Nothing
     , _goaWebPropertyId = Nothing
     , _goaKind = "analytics#goal"
@@ -8085,6 +8232,7 @@ goal =
     , _goaUpdated = Nothing
     , _goaType = Nothing
     }
+
 
 -- | Parent link for a goal. Points to the view (profile) to which this goal
 -- belongs.
@@ -8240,14 +8388,17 @@ instance ToJSON Goal where
 -- property and profile.
 --
 -- /See:/ 'accountTicket' smart constructor.
-data AccountTicket = AccountTicket'
+data AccountTicket =
+  AccountTicket'
     { _atRedirectURI :: !(Maybe Text)
     , _atKind        :: !Text
     , _atProFile     :: !(Maybe ProFile)
     , _atAccount     :: !(Maybe Account)
     , _atWebProperty :: !(Maybe WebProperty)
     , _atId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountTicket' with the minimum fields required to make a request.
 --
@@ -8267,7 +8418,7 @@ data AccountTicket = AccountTicket'
 accountTicket
     :: AccountTicket
 accountTicket =
-    AccountTicket'
+  AccountTicket'
     { _atRedirectURI = Nothing
     , _atKind = "analytics#accountTicket"
     , _atProFile = Nothing
@@ -8275,6 +8426,7 @@ accountTicket =
     , _atWebProperty = Nothing
     , _atId = Nothing
     }
+
 
 -- | Redirect URI where the user will be sent after accepting Terms of
 -- Service. Must be configured in APIs console as a callback URL.
@@ -8334,13 +8486,16 @@ instance ToJSON AccountTicket where
 -- lightweight tree comprised of properties\/profiles.
 --
 -- /See:/ 'accountSummary' smart constructor.
-data AccountSummary = AccountSummary'
+data AccountSummary =
+  AccountSummary'
     { _assKind          :: !Text
     , _assWebProperties :: !(Maybe [WebPropertySummary])
     , _assName          :: !(Maybe Text)
     , _assStarred       :: !(Maybe Bool)
     , _assId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountSummary' with the minimum fields required to make a request.
 --
@@ -8358,13 +8513,14 @@ data AccountSummary = AccountSummary'
 accountSummary
     :: AccountSummary
 accountSummary =
-    AccountSummary'
+  AccountSummary'
     { _assKind = "analytics#accountSummary"
     , _assWebProperties = Nothing
     , _assName = Nothing
     , _assStarred = Nothing
     , _assId = Nothing
     }
+
 
 -- | Resource type for Analytics AccountSummary.
 assKind :: Lens' AccountSummary Text
@@ -8415,14 +8571,17 @@ instance ToJSON AccountSummary where
 -- | Real time data request query parameters.
 --
 -- /See:/ 'realtimeDataQuery' smart constructor.
-data RealtimeDataQuery = RealtimeDataQuery'
+data RealtimeDataQuery =
+  RealtimeDataQuery'
     { _rdqMetrics    :: !(Maybe [Text])
     , _rdqFilters    :: !(Maybe Text)
     , _rdqIds        :: !(Maybe Text)
     , _rdqSort       :: !(Maybe [Text])
     , _rdqDimensions :: !(Maybe Text)
     , _rdqMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RealtimeDataQuery' with the minimum fields required to make a request.
 --
@@ -8442,7 +8601,7 @@ data RealtimeDataQuery = RealtimeDataQuery'
 realtimeDataQuery
     :: RealtimeDataQuery
 realtimeDataQuery =
-    RealtimeDataQuery'
+  RealtimeDataQuery'
     { _rdqMetrics = Nothing
     , _rdqFilters = Nothing
     , _rdqIds = Nothing
@@ -8450,6 +8609,7 @@ realtimeDataQuery =
     , _rdqDimensions = Nothing
     , _rdqMaxResults = Nothing
     }
+
 
 -- | List of real time metrics.
 rdqMetrics :: Lens' RealtimeDataQuery [Text]
@@ -8510,13 +8670,16 @@ instance ToJSON RealtimeDataQuery where
 -- | Lists columns (dimensions and metrics) for a particular report type.
 --
 -- /See:/ 'columns' smart constructor.
-data Columns = Columns'
+data Columns =
+  Columns'
     { _colEtag           :: !(Maybe Text)
     , _colKind           :: !Text
     , _colItems          :: !(Maybe [Column])
     , _colTotalResults   :: !(Maybe (Textual Int32))
     , _colAttributeNames :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Columns' with the minimum fields required to make a request.
 --
@@ -8534,13 +8697,14 @@ data Columns = Columns'
 columns
     :: Columns
 columns =
-    Columns'
+  Columns'
     { _colEtag = Nothing
     , _colKind = "analytics#columns"
     , _colItems = Nothing
     , _colTotalResults = Nothing
     , _colAttributeNames = Nothing
     }
+
 
 -- | Etag of collection. This etag can be compared with the last response
 -- etag to check if response has changed.
@@ -8596,10 +8760,13 @@ instance ToJSON Columns where
 -- | Details for the filter of the type LOWER.
 --
 -- /See:/ 'filterLowercaseDetails' smart constructor.
-data FilterLowercaseDetails = FilterLowercaseDetails'
+data FilterLowercaseDetails =
+  FilterLowercaseDetails'
     { _fldFieldIndex :: !(Maybe (Textual Int32))
     , _fldField      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilterLowercaseDetails' with the minimum fields required to make a request.
 --
@@ -8611,10 +8778,8 @@ data FilterLowercaseDetails = FilterLowercaseDetails'
 filterLowercaseDetails
     :: FilterLowercaseDetails
 filterLowercaseDetails =
-    FilterLowercaseDetails'
-    { _fldFieldIndex = Nothing
-    , _fldField = Nothing
-    }
+  FilterLowercaseDetails' {_fldFieldIndex = Nothing, _fldField = Nothing}
+
 
 -- | The Index of the custom dimension. Required if field is a
 -- CUSTOM_DIMENSION.
@@ -8645,7 +8810,8 @@ instance ToJSON FilterLowercaseDetails where
 -- | JSON template for an Analytics account filter.
 --
 -- /See:/ 'filter'' smart constructor.
-data Filter = Filter'
+data Filter =
+  Filter'
     { _filParentLink              :: !(Maybe FilterParentLink)
     , _filAdvancedDetails         :: !(Maybe FilterAdvancedDetails)
     , _filUppercaseDetails        :: !(Maybe FilterUppercaseDetails)
@@ -8661,7 +8827,9 @@ data Filter = Filter'
     , _filUpdated                 :: !(Maybe DateTime')
     , _filType                    :: !(Maybe Text)
     , _filSearchAndReplaceDetails :: !(Maybe FilterSearchAndReplaceDetails)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
@@ -8699,7 +8867,7 @@ data Filter = Filter'
 filter'
     :: Filter
 filter' =
-    Filter'
+  Filter'
     { _filParentLink = Nothing
     , _filAdvancedDetails = Nothing
     , _filUppercaseDetails = Nothing
@@ -8716,6 +8884,7 @@ filter' =
     , _filType = Nothing
     , _filSearchAndReplaceDetails = Nothing
     }
+
 
 -- | Parent link for this filter. Points to the account to which this filter
 -- belongs.
@@ -8844,7 +9013,8 @@ instance ToJSON Filter where
 -- upload collection corresponds to a single Analytics data upload.
 --
 -- /See:/ 'uploads' smart constructor.
-data Uploads = Uploads'
+data Uploads =
+  Uploads'
     { _uplNextLink     :: !(Maybe Text)
     , _uplItemsPerPage :: !(Maybe (Textual Int32))
     , _uplKind         :: !Text
@@ -8852,7 +9022,9 @@ data Uploads = Uploads'
     , _uplTotalResults :: !(Maybe (Textual Int32))
     , _uplStartIndex   :: !(Maybe (Textual Int32))
     , _uplPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Uploads' with the minimum fields required to make a request.
 --
@@ -8874,7 +9046,7 @@ data Uploads = Uploads'
 uploads
     :: Uploads
 uploads =
-    Uploads'
+  Uploads'
     { _uplNextLink = Nothing
     , _uplItemsPerPage = Nothing
     , _uplKind = "analytics#uploads"
@@ -8883,6 +9055,7 @@ uploads =
     , _uplStartIndex = Nothing
     , _uplPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this upload collection.
 uplNextLink :: Lens' Uploads (Maybe Text)
@@ -8961,7 +9134,8 @@ instance ToJSON Uploads where
 -- single Analytics custom dimension.
 --
 -- /See:/ 'customDimensions' smart constructor.
-data CustomDimensions = CustomDimensions'
+data CustomDimensions =
+  CustomDimensions'
     { _cdNextLink     :: !(Maybe Text)
     , _cdItemsPerPage :: !(Maybe (Textual Int32))
     , _cdKind         :: !Text
@@ -8970,7 +9144,9 @@ data CustomDimensions = CustomDimensions'
     , _cdTotalResults :: !(Maybe (Textual Int32))
     , _cdStartIndex   :: !(Maybe (Textual Int32))
     , _cdPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomDimensions' with the minimum fields required to make a request.
 --
@@ -8994,7 +9170,7 @@ data CustomDimensions = CustomDimensions'
 customDimensions
     :: CustomDimensions
 customDimensions =
-    CustomDimensions'
+  CustomDimensions'
     { _cdNextLink = Nothing
     , _cdItemsPerPage = Nothing
     , _cdKind = "analytics#customDimensions"
@@ -9004,6 +9180,7 @@ customDimensions =
     , _cdStartIndex = Nothing
     , _cdPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this custom dimension collection.
 cdNextLink :: Lens' CustomDimensions (Maybe Text)
@@ -9087,7 +9264,8 @@ instance ToJSON CustomDimensions where
 -- segment.
 --
 -- /See:/ 'segments' smart constructor.
-data Segments = Segments'
+data Segments =
+  Segments'
     { _sNextLink     :: !(Maybe Text)
     , _sItemsPerPage :: !(Maybe (Textual Int32))
     , _sKind         :: !Text
@@ -9096,7 +9274,9 @@ data Segments = Segments'
     , _sTotalResults :: !(Maybe (Textual Int32))
     , _sStartIndex   :: !(Maybe (Textual Int32))
     , _sPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Segments' with the minimum fields required to make a request.
 --
@@ -9120,7 +9300,7 @@ data Segments = Segments'
 segments
     :: Segments
 segments =
-    Segments'
+  Segments'
     { _sNextLink = Nothing
     , _sItemsPerPage = Nothing
     , _sKind = "analytics#segments"
@@ -9130,6 +9310,7 @@ segments =
     , _sStartIndex = Nothing
     , _sPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this segment collection.
 sNextLink :: Lens' Segments (Maybe Text)
@@ -9210,10 +9391,13 @@ instance ToJSON Segments where
 
 --
 -- /See:/ 'gaDataDataTable' smart constructor.
-data GaDataDataTable = GaDataDataTable'
+data GaDataDataTable =
+  GaDataDataTable'
     { _gddtCols :: !(Maybe [GaDataDataTableColsItem])
     , _gddtRows :: !(Maybe [GaDataDataTableRowsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GaDataDataTable' with the minimum fields required to make a request.
 --
@@ -9224,11 +9408,8 @@ data GaDataDataTable = GaDataDataTable'
 -- * 'gddtRows'
 gaDataDataTable
     :: GaDataDataTable
-gaDataDataTable =
-    GaDataDataTable'
-    { _gddtCols = Nothing
-    , _gddtRows = Nothing
-    }
+gaDataDataTable = GaDataDataTable' {_gddtCols = Nothing, _gddtRows = Nothing}
+
 
 gddtCols :: Lens' GaDataDataTable [GaDataDataTableColsItem]
 gddtCols
@@ -9260,9 +9441,12 @@ instance ToJSON GaDataDataTable where
 -- | Web property being linked.
 --
 -- /See:/ 'entityAdWordsLinkEntity' smart constructor.
-newtype EntityAdWordsLinkEntity = EntityAdWordsLinkEntity'
+newtype EntityAdWordsLinkEntity =
+  EntityAdWordsLinkEntity'
     { _eawleWebPropertyRef :: Maybe WebPropertyRef
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntityAdWordsLinkEntity' with the minimum fields required to make a request.
 --
@@ -9272,9 +9456,8 @@ newtype EntityAdWordsLinkEntity = EntityAdWordsLinkEntity'
 entityAdWordsLinkEntity
     :: EntityAdWordsLinkEntity
 entityAdWordsLinkEntity =
-    EntityAdWordsLinkEntity'
-    { _eawleWebPropertyRef = Nothing
-    }
+  EntityAdWordsLinkEntity' {_eawleWebPropertyRef = Nothing}
+
 
 eawleWebPropertyRef :: Lens' EntityAdWordsLinkEntity (Maybe WebPropertyRef)
 eawleWebPropertyRef
@@ -9298,10 +9481,13 @@ instance ToJSON EntityAdWordsLinkEntity where
 -- removed from an audience.
 --
 -- /See:/ 'remarketingAudienceStateBasedAudienceDefinition' smart constructor.
-data RemarketingAudienceStateBasedAudienceDefinition = RemarketingAudienceStateBasedAudienceDefinition'
+data RemarketingAudienceStateBasedAudienceDefinition =
+  RemarketingAudienceStateBasedAudienceDefinition'
     { _rasbadExcludeConditions :: !(Maybe RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions)
     , _rasbadIncludeConditions :: !(Maybe IncludeConditions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingAudienceStateBasedAudienceDefinition' with the minimum fields required to make a request.
 --
@@ -9313,10 +9499,9 @@ data RemarketingAudienceStateBasedAudienceDefinition = RemarketingAudienceStateB
 remarketingAudienceStateBasedAudienceDefinition
     :: RemarketingAudienceStateBasedAudienceDefinition
 remarketingAudienceStateBasedAudienceDefinition =
-    RemarketingAudienceStateBasedAudienceDefinition'
-    { _rasbadExcludeConditions = Nothing
-    , _rasbadIncludeConditions = Nothing
-    }
+  RemarketingAudienceStateBasedAudienceDefinition'
+    {_rasbadExcludeConditions = Nothing, _rasbadIncludeConditions = Nothing}
+
 
 -- | Defines the conditions to exclude users from the audience.
 rasbadExcludeConditions :: Lens' RemarketingAudienceStateBasedAudienceDefinition (Maybe RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions)
@@ -9331,7 +9516,8 @@ rasbadIncludeConditions
       (\ s a -> s{_rasbadIncludeConditions = a})
 
 instance FromJSON
-         RemarketingAudienceStateBasedAudienceDefinition where
+           RemarketingAudienceStateBasedAudienceDefinition
+         where
         parseJSON
           = withObject
               "RemarketingAudienceStateBasedAudienceDefinition"
@@ -9341,7 +9527,8 @@ instance FromJSON
                      (o .:? "includeConditions"))
 
 instance ToJSON
-         RemarketingAudienceStateBasedAudienceDefinition where
+           RemarketingAudienceStateBasedAudienceDefinition
+         where
         toJSON
           RemarketingAudienceStateBasedAudienceDefinition'{..}
           = object
@@ -9351,90 +9538,19 @@ instance ToJSON
                   ("includeConditions" .=) <$>
                     _rasbadIncludeConditions])
 
---
--- /See:/ 'accountTreeResponseAccountSettings' smart constructor.
-data AccountTreeResponseAccountSettings = AccountTreeResponseAccountSettings'
-    { _aShareWithSpeciaLists       :: !(Maybe Bool)
-    , _aShareWithSupport           :: !(Maybe Bool)
-    , _aShareAnonymouslyWithOthers :: !(Maybe Bool)
-    , _aShareWithGoogleProducts    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccountTreeResponseAccountSettings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aShareWithSpeciaLists'
---
--- * 'aShareWithSupport'
---
--- * 'aShareAnonymouslyWithOthers'
---
--- * 'aShareWithGoogleProducts'
-accountTreeResponseAccountSettings
-    :: AccountTreeResponseAccountSettings
-accountTreeResponseAccountSettings =
-    AccountTreeResponseAccountSettings'
-    { _aShareWithSpeciaLists = Nothing
-    , _aShareWithSupport = Nothing
-    , _aShareAnonymouslyWithOthers = Nothing
-    , _aShareWithGoogleProducts = Nothing
-    }
-
-aShareWithSpeciaLists :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
-aShareWithSpeciaLists
-  = lens _aShareWithSpeciaLists
-      (\ s a -> s{_aShareWithSpeciaLists = a})
-
-aShareWithSupport :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
-aShareWithSupport
-  = lens _aShareWithSupport
-      (\ s a -> s{_aShareWithSupport = a})
-
-aShareAnonymouslyWithOthers :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
-aShareAnonymouslyWithOthers
-  = lens _aShareAnonymouslyWithOthers
-      (\ s a -> s{_aShareAnonymouslyWithOthers = a})
-
-aShareWithGoogleProducts :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
-aShareWithGoogleProducts
-  = lens _aShareWithGoogleProducts
-      (\ s a -> s{_aShareWithGoogleProducts = a})
-
-instance FromJSON AccountTreeResponseAccountSettings
-         where
-        parseJSON
-          = withObject "AccountTreeResponseAccountSettings"
-              (\ o ->
-                 AccountTreeResponseAccountSettings' <$>
-                   (o .:? "shareWithSpecialists") <*>
-                     (o .:? "shareWithSupport")
-                     <*> (o .:? "shareAnonymouslyWithOthers")
-                     <*> (o .:? "shareWithGoogleProducts"))
-
-instance ToJSON AccountTreeResponseAccountSettings
-         where
-        toJSON AccountTreeResponseAccountSettings'{..}
-          = object
-              (catMaybes
-                 [("shareWithSpecialists" .=) <$>
-                    _aShareWithSpeciaLists,
-                  ("shareWithSupport" .=) <$> _aShareWithSupport,
-                  ("shareAnonymouslyWithOthers" .=) <$>
-                    _aShareAnonymouslyWithOthers,
-                  ("shareWithGoogleProducts" .=) <$>
-                    _aShareWithGoogleProducts])
-
 -- | Details for the goal of the type URL_DESTINATION.
 --
 -- /See:/ 'goalURLDestinationDetails' smart constructor.
-data GoalURLDestinationDetails = GoalURLDestinationDetails'
+data GoalURLDestinationDetails =
+  GoalURLDestinationDetails'
     { _guddURL               :: !(Maybe Text)
     , _guddMatchType         :: !(Maybe Text)
     , _guddSteps             :: !(Maybe [GoalURLDestinationDetailsStepsItem])
     , _guddCaseSensitive     :: !(Maybe Bool)
     , _guddFirstStepRequired :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoalURLDestinationDetails' with the minimum fields required to make a request.
 --
@@ -9452,13 +9568,14 @@ data GoalURLDestinationDetails = GoalURLDestinationDetails'
 goalURLDestinationDetails
     :: GoalURLDestinationDetails
 goalURLDestinationDetails =
-    GoalURLDestinationDetails'
+  GoalURLDestinationDetails'
     { _guddURL = Nothing
     , _guddMatchType = Nothing
     , _guddSteps = Nothing
     , _guddCaseSensitive = Nothing
     , _guddFirstStepRequired = Nothing
     }
+
 
 -- | URL for this goal.
 guddURL :: Lens' GoalURLDestinationDetails (Maybe Text)
@@ -9515,7 +9632,8 @@ instance ToJSON GoalURLDestinationDetails where
 -- profile filter link.
 --
 -- /See:/ 'proFileFilterLinks' smart constructor.
-data ProFileFilterLinks = ProFileFilterLinks'
+data ProFileFilterLinks =
+  ProFileFilterLinks'
     { _pfflNextLink     :: !(Maybe Text)
     , _pfflItemsPerPage :: !(Maybe (Textual Int32))
     , _pfflKind         :: !Text
@@ -9524,7 +9642,9 @@ data ProFileFilterLinks = ProFileFilterLinks'
     , _pfflTotalResults :: !(Maybe (Textual Int32))
     , _pfflStartIndex   :: !(Maybe (Textual Int32))
     , _pfflPreviousLink :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFileFilterLinks' with the minimum fields required to make a request.
 --
@@ -9548,7 +9668,7 @@ data ProFileFilterLinks = ProFileFilterLinks'
 proFileFilterLinks
     :: ProFileFilterLinks
 proFileFilterLinks =
-    ProFileFilterLinks'
+  ProFileFilterLinks'
     { _pfflNextLink = Nothing
     , _pfflItemsPerPage = Nothing
     , _pfflKind = "analytics#profileFilterLinks"
@@ -9558,6 +9678,7 @@ proFileFilterLinks =
     , _pfflStartIndex = Nothing
     , _pfflPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this profile filter link collection.
 pfflNextLink :: Lens' ProFileFilterLinks (Maybe Text)
@@ -9642,10 +9763,13 @@ instance ToJSON ProFileFilterLinks where
 -- web property belongs.
 --
 -- /See:/ 'webPropertyParentLink' smart constructor.
-data WebPropertyParentLink = WebPropertyParentLink'
+data WebPropertyParentLink =
+  WebPropertyParentLink'
     { _wpplHref :: !(Maybe Text)
     , _wpplType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebPropertyParentLink' with the minimum fields required to make a request.
 --
@@ -9657,10 +9781,8 @@ data WebPropertyParentLink = WebPropertyParentLink'
 webPropertyParentLink
     :: WebPropertyParentLink
 webPropertyParentLink =
-    WebPropertyParentLink'
-    { _wpplHref = Nothing
-    , _wpplType = "analytics#account"
-    }
+  WebPropertyParentLink' {_wpplHref = Nothing, _wpplType = "analytics#account"}
+
 
 -- | Link to the account for this web property.
 wpplHref :: Lens' WebPropertyParentLink (Maybe Text)
@@ -9689,14 +9811,17 @@ instance ToJSON WebPropertyParentLink where
 -- requested.
 --
 -- /See:/ 'gaDataProFileInfo' smart constructor.
-data GaDataProFileInfo = GaDataProFileInfo'
+data GaDataProFileInfo =
+  GaDataProFileInfo'
     { _gdpfiWebPropertyId         :: !(Maybe Text)
     , _gdpfiProFileId             :: !(Maybe Text)
     , _gdpfiProFileName           :: !(Maybe Text)
     , _gdpfiAccountId             :: !(Maybe Text)
     , _gdpfiInternalWebPropertyId :: !(Maybe Text)
     , _gdpfiTableId               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GaDataProFileInfo' with the minimum fields required to make a request.
 --
@@ -9716,7 +9841,7 @@ data GaDataProFileInfo = GaDataProFileInfo'
 gaDataProFileInfo
     :: GaDataProFileInfo
 gaDataProFileInfo =
-    GaDataProFileInfo'
+  GaDataProFileInfo'
     { _gdpfiWebPropertyId = Nothing
     , _gdpfiProFileId = Nothing
     , _gdpfiProFileName = Nothing
@@ -9724,6 +9849,7 @@ gaDataProFileInfo =
     , _gdpfiInternalWebPropertyId = Nothing
     , _gdpfiTableId = Nothing
     }
+
 
 -- | Web Property ID to which this view (profile) belongs.
 gdpfiWebPropertyId :: Lens' GaDataProFileInfo (Maybe Text)
@@ -9786,7 +9912,8 @@ instance ToJSON GaDataProFileInfo where
 -- | Metadata returned for an upload operation.
 --
 -- /See:/ 'upload' smart constructor.
-data Upload = Upload'
+data Upload =
+  Upload'
     { _uuStatus             :: !(Maybe Text)
     , _uuKind               :: !Text
     , _uuCustomDataSourceId :: !(Maybe Text)
@@ -9794,7 +9921,9 @@ data Upload = Upload'
     , _uuAccountId          :: !(Maybe (Textual Int64))
     , _uuId                 :: !(Maybe Text)
     , _uuErrors             :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Upload' with the minimum fields required to make a request.
 --
@@ -9816,7 +9945,7 @@ data Upload = Upload'
 upload
     :: Upload
 upload =
-    Upload'
+  Upload'
     { _uuStatus = Nothing
     , _uuKind = "analytics#upload"
     , _uuCustomDataSourceId = Nothing
@@ -9825,6 +9954,7 @@ upload =
     , _uuId = Nothing
     , _uuErrors = Nothing
     }
+
 
 -- | Upload status. Possible values: PENDING, COMPLETED, FAILED, DELETING,
 -- DELETED.
@@ -9891,7 +10021,8 @@ instance ToJSON Upload where
 -- | JSON template for Analytics Custom Dimension.
 --
 -- /See:/ 'customDimension' smart constructor.
-data CustomDimension = CustomDimension'
+data CustomDimension =
+  CustomDimension'
     { _cddParentLink    :: !(Maybe CustomDimensionParentLink)
     , _cddWebPropertyId :: !(Maybe Text)
     , _cddKind          :: !Text
@@ -9904,7 +10035,9 @@ data CustomDimension = CustomDimension'
     , _cddId            :: !(Maybe Text)
     , _cddUpdated       :: !(Maybe DateTime')
     , _cddIndex         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomDimension' with the minimum fields required to make a request.
 --
@@ -9936,7 +10069,7 @@ data CustomDimension = CustomDimension'
 customDimension
     :: CustomDimension
 customDimension =
-    CustomDimension'
+  CustomDimension'
     { _cddParentLink = Nothing
     , _cddWebPropertyId = Nothing
     , _cddKind = "analytics#customDimension"
@@ -9950,6 +10083,7 @@ customDimension =
     , _cddUpdated = Nothing
     , _cddIndex = Nothing
     }
+
 
 -- | Parent link for the custom dimension. Points to the property to which
 -- the custom dimension belongs.
@@ -10049,7 +10183,8 @@ instance ToJSON CustomDimension where
 -- | JSON template for an Analytics segment.
 --
 -- /See:/ 'segment' smart constructor.
-data Segment = Segment'
+data Segment =
+  Segment'
     { _segDefinition :: !(Maybe Text)
     , _segKind       :: !Text
     , _segCreated    :: !(Maybe DateTime')
@@ -10059,7 +10194,9 @@ data Segment = Segment'
     , _segUpdated    :: !(Maybe DateTime')
     , _segType       :: !(Maybe Text)
     , _segSegmentId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Segment' with the minimum fields required to make a request.
 --
@@ -10085,7 +10222,7 @@ data Segment = Segment'
 segment
     :: Segment
 segment =
-    Segment'
+  Segment'
     { _segDefinition = Nothing
     , _segKind = "analytics#segment"
     , _segCreated = Nothing
@@ -10096,6 +10233,7 @@ segment =
     , _segType = Nothing
     , _segSegmentId = Nothing
     }
+
 
 -- | Segment definition.
 segDefinition :: Lens' Segment (Maybe Text)
@@ -10174,10 +10312,13 @@ instance ToJSON Segment where
 -- for this account.
 --
 -- /See:/ 'accountChildLink' smart constructor.
-data AccountChildLink = AccountChildLink'
+data AccountChildLink =
+  AccountChildLink'
     { _aclHref :: !(Maybe Text)
     , _aclType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountChildLink' with the minimum fields required to make a request.
 --
@@ -10189,10 +10330,8 @@ data AccountChildLink = AccountChildLink'
 accountChildLink
     :: AccountChildLink
 accountChildLink =
-    AccountChildLink'
-    { _aclHref = Nothing
-    , _aclType = "analytics#webproperties"
-    }
+  AccountChildLink' {_aclHref = Nothing, _aclType = "analytics#webproperties"}
+
 
 -- | Link to the list of web properties for this account.
 aclHref :: Lens' AccountChildLink (Maybe Text)
@@ -10220,14 +10359,17 @@ instance ToJSON AccountChildLink where
 -- | JSON template for an Analytics profile filter link.
 --
 -- /See:/ 'proFileFilterLink' smart constructor.
-data ProFileFilterLink = ProFileFilterLink'
+data ProFileFilterLink =
+  ProFileFilterLink'
     { _proProFileRef :: !(Maybe ProFileRef)
     , _proKind       :: !Text
     , _proFilterRef  :: !(Maybe FilterRef)
     , _proSelfLink   :: !(Maybe Text)
     , _proId         :: !(Maybe Text)
     , _proRank       :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFileFilterLink' with the minimum fields required to make a request.
 --
@@ -10247,7 +10389,7 @@ data ProFileFilterLink = ProFileFilterLink'
 proFileFilterLink
     :: ProFileFilterLink
 proFileFilterLink =
-    ProFileFilterLink'
+  ProFileFilterLink'
     { _proProFileRef = Nothing
     , _proKind = "analytics#profileFilterLink"
     , _proFilterRef = Nothing
@@ -10255,6 +10397,7 @@ proFileFilterLink =
     , _proId = Nothing
     , _proRank = Nothing
     }
+
 
 -- | View (Profile) for this link.
 proProFileRef :: Lens' ProFileFilterLink (Maybe ProFileRef)
@@ -10322,10 +10465,13 @@ instance ToJSON ProFileFilterLink where
 -- custom metric belongs.
 --
 -- /See:/ 'customMetricParentLink' smart constructor.
-data CustomMetricParentLink = CustomMetricParentLink'
+data CustomMetricParentLink =
+  CustomMetricParentLink'
     { _cmplHref :: !(Maybe Text)
     , _cmplType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomMetricParentLink' with the minimum fields required to make a request.
 --
@@ -10337,10 +10483,9 @@ data CustomMetricParentLink = CustomMetricParentLink'
 customMetricParentLink
     :: CustomMetricParentLink
 customMetricParentLink =
-    CustomMetricParentLink'
-    { _cmplHref = Nothing
-    , _cmplType = "analytics#webproperty"
-    }
+  CustomMetricParentLink'
+    {_cmplHref = Nothing, _cmplType = "analytics#webproperty"}
+
 
 -- | Link to the property to which the custom metric belongs.
 cmplHref :: Lens' CustomMetricParentLink (Maybe Text)
@@ -10368,11 +10513,14 @@ instance ToJSON CustomMetricParentLink where
 -- | JSON template for a metadata column.
 --
 -- /See:/ 'column' smart constructor.
-data Column = Column'
+data Column =
+  Column'
     { _ccKind       :: !Text
     , _ccAttributes :: !(Maybe ColumnAttributes)
     , _ccId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Column' with the minimum fields required to make a request.
 --
@@ -10386,11 +10534,9 @@ data Column = Column'
 column
     :: Column
 column =
-    Column'
-    { _ccKind = "analytics#column"
-    , _ccAttributes = Nothing
-    , _ccId = Nothing
-    }
+  Column'
+    {_ccKind = "analytics#column", _ccAttributes = Nothing, _ccId = Nothing}
+
 
 -- | Resource type for Analytics column.
 ccKind :: Lens' Column Text
@@ -10426,9 +10572,12 @@ instance ToJSON Column where
 -- audience.
 --
 -- /See:/ 'remarketingAudienceAudienceDefinition' smart constructor.
-newtype RemarketingAudienceAudienceDefinition = RemarketingAudienceAudienceDefinition'
+newtype RemarketingAudienceAudienceDefinition =
+  RemarketingAudienceAudienceDefinition'
     { _raadIncludeConditions :: Maybe IncludeConditions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingAudienceAudienceDefinition' with the minimum fields required to make a request.
 --
@@ -10438,9 +10587,8 @@ newtype RemarketingAudienceAudienceDefinition = RemarketingAudienceAudienceDefin
 remarketingAudienceAudienceDefinition
     :: RemarketingAudienceAudienceDefinition
 remarketingAudienceAudienceDefinition =
-    RemarketingAudienceAudienceDefinition'
-    { _raadIncludeConditions = Nothing
-    }
+  RemarketingAudienceAudienceDefinition' {_raadIncludeConditions = Nothing}
+
 
 -- | Defines the conditions to include users to the audience.
 raadIncludeConditions :: Lens' RemarketingAudienceAudienceDefinition (Maybe IncludeConditions)
@@ -10449,7 +10597,8 @@ raadIncludeConditions
       (\ s a -> s{_raadIncludeConditions = a})
 
 instance FromJSON
-         RemarketingAudienceAudienceDefinition where
+           RemarketingAudienceAudienceDefinition
+         where
         parseJSON
           = withObject "RemarketingAudienceAudienceDefinition"
               (\ o ->
@@ -10466,11 +10615,14 @@ instance ToJSON RemarketingAudienceAudienceDefinition
 
 --
 -- /See:/ 'gaDataDataTableColsItem' smart constructor.
-data GaDataDataTableColsItem = GaDataDataTableColsItem'
+data GaDataDataTableColsItem =
+  GaDataDataTableColsItem'
     { _gddtciId    :: !(Maybe Text)
     , _gddtciType  :: !(Maybe Text)
     , _gddtciLabel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GaDataDataTableColsItem' with the minimum fields required to make a request.
 --
@@ -10484,11 +10636,9 @@ data GaDataDataTableColsItem = GaDataDataTableColsItem'
 gaDataDataTableColsItem
     :: GaDataDataTableColsItem
 gaDataDataTableColsItem =
-    GaDataDataTableColsItem'
-    { _gddtciId = Nothing
-    , _gddtciType = Nothing
-    , _gddtciLabel = Nothing
-    }
+  GaDataDataTableColsItem'
+    {_gddtciId = Nothing, _gddtciType = Nothing, _gddtciLabel = Nothing}
+
 
 gddtciId :: Lens' GaDataDataTableColsItem (Maybe Text)
 gddtciId = lens _gddtciId (\ s a -> s{_gddtciId = a})
@@ -10518,13 +10668,16 @@ instance ToJSON GaDataDataTableColsItem where
 
 --
 -- /See:/ 'experimentVariationsItem' smart constructor.
-data ExperimentVariationsItem = ExperimentVariationsItem'
+data ExperimentVariationsItem =
+  ExperimentVariationsItem'
     { _eviStatus :: !(Maybe Text)
     , _eviWeight :: !(Maybe (Textual Double))
     , _eviURL    :: !(Maybe Text)
     , _eviWon    :: !(Maybe Bool)
     , _eviName   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExperimentVariationsItem' with the minimum fields required to make a request.
 --
@@ -10542,13 +10695,14 @@ data ExperimentVariationsItem = ExperimentVariationsItem'
 experimentVariationsItem
     :: ExperimentVariationsItem
 experimentVariationsItem =
-    ExperimentVariationsItem'
+  ExperimentVariationsItem'
     { _eviStatus = Nothing
     , _eviWeight = Nothing
     , _eviURL = Nothing
     , _eviWon = Nothing
     , _eviName = Nothing
     }
+
 
 -- | Status of the variation. Possible values: \"ACTIVE\", \"INACTIVE\".
 -- INACTIVE variations are not served. This field may not be changed for an
@@ -10602,10 +10756,13 @@ instance ToJSON ExperimentVariationsItem where
 -- | Defines the conditions to exclude users from the audience.
 --
 -- /See:/ 'remarketingAudienceStateBasedAudienceDefinitionExcludeConditions' smart constructor.
-data RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions = RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'
+data RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions =
+  RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'
     { _rasbadecExclusionDuration :: !(Maybe Text)
     , _rasbadecSegment           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions' with the minimum fields required to make a request.
 --
@@ -10617,10 +10774,9 @@ data RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions = Remarket
 remarketingAudienceStateBasedAudienceDefinitionExcludeConditions
     :: RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
 remarketingAudienceStateBasedAudienceDefinitionExcludeConditions =
-    RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'
-    { _rasbadecExclusionDuration = Nothing
-    , _rasbadecSegment = Nothing
-    }
+  RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'
+    {_rasbadecExclusionDuration = Nothing, _rasbadecSegment = Nothing}
+
 
 -- | Whether to make the exclusion TEMPORARY or PERMANENT.
 rasbadecExclusionDuration :: Lens' RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions (Maybe Text)
@@ -10636,7 +10792,7 @@ rasbadecSegment
       (\ s a -> s{_rasbadecSegment = a})
 
 instance FromJSON
-         RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
+           RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
          where
         parseJSON
           = withObject
@@ -10647,7 +10803,7 @@ instance FromJSON
                    (o .:? "exclusionDuration") <*> (o .:? "segment"))
 
 instance ToJSON
-         RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
+           RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
          where
         toJSON
           RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'{..}
@@ -10662,9 +10818,12 @@ instance ToJSON
 -- same as the metric order specified in the request.
 --
 -- /See:/ 'mcfDataTotalsForAllResults' smart constructor.
-newtype McfDataTotalsForAllResults = McfDataTotalsForAllResults'
+newtype McfDataTotalsForAllResults =
+  McfDataTotalsForAllResults'
     { _mdtfarAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'McfDataTotalsForAllResults' with the minimum fields required to make a request.
 --
@@ -10675,9 +10834,8 @@ mcfDataTotalsForAllResults
     :: HashMap Text Text -- ^ 'mdtfarAddtional'
     -> McfDataTotalsForAllResults
 mcfDataTotalsForAllResults pMdtfarAddtional_ =
-    McfDataTotalsForAllResults'
-    { _mdtfarAddtional = _Coerce # pMdtfarAddtional_
-    }
+  McfDataTotalsForAllResults' {_mdtfarAddtional = _Coerce # pMdtfarAddtional_}
+
 
 -- | Key-value pair for the total value of a metric. Key is the metric name
 -- and the value is the total value for that metric.
@@ -10699,10 +10857,13 @@ instance ToJSON McfDataTotalsForAllResults where
 -- | User ID.
 --
 -- /See:/ 'userDeletionRequestId' smart constructor.
-data UserDeletionRequestId = UserDeletionRequestId'
+data UserDeletionRequestId =
+  UserDeletionRequestId'
     { _udriUserId :: !(Maybe Text)
     , _udriType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserDeletionRequestId' with the minimum fields required to make a request.
 --
@@ -10714,10 +10875,8 @@ data UserDeletionRequestId = UserDeletionRequestId'
 userDeletionRequestId
     :: UserDeletionRequestId
 userDeletionRequestId =
-    UserDeletionRequestId'
-    { _udriUserId = Nothing
-    , _udriType = Nothing
-    }
+  UserDeletionRequestId' {_udriUserId = Nothing, _udriType = Nothing}
+
 
 -- | The User\'s id
 udriUserId :: Lens' UserDeletionRequestId (Maybe Text)
@@ -10745,10 +10904,13 @@ instance ToJSON UserDeletionRequestId where
 -- | Download details for a file stored in Google Cloud Storage.
 --
 -- /See:/ 'unSampledReportCloudStorageDownloadDetails' smart constructor.
-data UnSampledReportCloudStorageDownloadDetails = UnSampledReportCloudStorageDownloadDetails'
+data UnSampledReportCloudStorageDownloadDetails =
+  UnSampledReportCloudStorageDownloadDetails'
     { _usrcsddObjectId :: !(Maybe Text)
     , _usrcsddBucketId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnSampledReportCloudStorageDownloadDetails' with the minimum fields required to make a request.
 --
@@ -10760,10 +10922,9 @@ data UnSampledReportCloudStorageDownloadDetails = UnSampledReportCloudStorageDow
 unSampledReportCloudStorageDownloadDetails
     :: UnSampledReportCloudStorageDownloadDetails
 unSampledReportCloudStorageDownloadDetails =
-    UnSampledReportCloudStorageDownloadDetails'
-    { _usrcsddObjectId = Nothing
-    , _usrcsddBucketId = Nothing
-    }
+  UnSampledReportCloudStorageDownloadDetails'
+    {_usrcsddObjectId = Nothing, _usrcsddBucketId = Nothing}
+
 
 -- | Id of the file object containing the report data.
 usrcsddObjectId :: Lens' UnSampledReportCloudStorageDownloadDetails (Maybe Text)
@@ -10778,7 +10939,8 @@ usrcsddBucketId
       (\ s a -> s{_usrcsddBucketId = a})
 
 instance FromJSON
-         UnSampledReportCloudStorageDownloadDetails where
+           UnSampledReportCloudStorageDownloadDetails
+         where
         parseJSON
           = withObject
               "UnSampledReportCloudStorageDownloadDetails"
@@ -10787,7 +10949,8 @@ instance FromJSON
                    (o .:? "objectId") <*> (o .:? "bucketId"))
 
 instance ToJSON
-         UnSampledReportCloudStorageDownloadDetails where
+           UnSampledReportCloudStorageDownloadDetails
+         where
         toJSON
           UnSampledReportCloudStorageDownloadDetails'{..}
           = object
@@ -10799,10 +10962,13 @@ instance ToJSON
 -- view (profile).
 --
 -- /See:/ 'proFileChildLink' smart constructor.
-data ProFileChildLink = ProFileChildLink'
+data ProFileChildLink =
+  ProFileChildLink'
     { _pfclHref :: !(Maybe Text)
     , _pfclType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFileChildLink' with the minimum fields required to make a request.
 --
@@ -10814,10 +10980,8 @@ data ProFileChildLink = ProFileChildLink'
 proFileChildLink
     :: ProFileChildLink
 proFileChildLink =
-    ProFileChildLink'
-    { _pfclHref = Nothing
-    , _pfclType = "analytics#goals"
-    }
+  ProFileChildLink' {_pfclHref = Nothing, _pfclType = "analytics#goals"}
+
 
 -- | Link to the list of goals for this view (profile).
 pfclHref :: Lens' ProFileChildLink (Maybe Text)
@@ -10844,11 +11008,14 @@ instance ToJSON ProFileChildLink where
 
 --
 -- /See:/ 'gaDataColumnHeadersItem' smart constructor.
-data GaDataColumnHeadersItem = GaDataColumnHeadersItem'
+data GaDataColumnHeadersItem =
+  GaDataColumnHeadersItem'
     { _gdchiColumnType :: !(Maybe Text)
     , _gdchiName       :: !(Maybe Text)
     , _gdchiDataType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GaDataColumnHeadersItem' with the minimum fields required to make a request.
 --
@@ -10862,11 +11029,9 @@ data GaDataColumnHeadersItem = GaDataColumnHeadersItem'
 gaDataColumnHeadersItem
     :: GaDataColumnHeadersItem
 gaDataColumnHeadersItem =
-    GaDataColumnHeadersItem'
-    { _gdchiColumnType = Nothing
-    , _gdchiName = Nothing
-    , _gdchiDataType = Nothing
-    }
+  GaDataColumnHeadersItem'
+    {_gdchiColumnType = Nothing, _gdchiName = Nothing, _gdchiDataType = Nothing}
+
 
 -- | Column Type. Either DIMENSION or METRIC.
 gdchiColumnType :: Lens' GaDataColumnHeadersItem (Maybe Text)
@@ -10907,10 +11072,13 @@ instance ToJSON GaDataColumnHeadersItem where
 -- belongs.
 --
 -- /See:/ 'goalParentLink' smart constructor.
-data GoalParentLink = GoalParentLink'
+data GoalParentLink =
+  GoalParentLink'
     { _gplHref :: !(Maybe Text)
     , _gplType :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoalParentLink' with the minimum fields required to make a request.
 --
@@ -10922,10 +11090,8 @@ data GoalParentLink = GoalParentLink'
 goalParentLink
     :: GoalParentLink
 goalParentLink =
-    GoalParentLink'
-    { _gplHref = Nothing
-    , _gplType = "analytics#profile"
-    }
+  GoalParentLink' {_gplHref = Nothing, _gplType = "analytics#profile"}
+
 
 -- | Link to the view (profile) to which this goal belongs.
 gplHref :: Lens' GoalParentLink (Maybe Text)
@@ -10953,9 +11119,12 @@ instance ToJSON GoalParentLink where
 -- | Map of attribute name and value for this column.
 --
 -- /See:/ 'columnAttributes' smart constructor.
-newtype ColumnAttributes = ColumnAttributes'
+newtype ColumnAttributes =
+  ColumnAttributes'
     { _caAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ColumnAttributes' with the minimum fields required to make a request.
 --
@@ -10966,9 +11135,8 @@ columnAttributes
     :: HashMap Text Text -- ^ 'caAddtional'
     -> ColumnAttributes
 columnAttributes pCaAddtional_ =
-    ColumnAttributes'
-    { _caAddtional = _Coerce # pCaAddtional_
-    }
+  ColumnAttributes' {_caAddtional = _Coerce # pCaAddtional_}
+
 
 -- | The name of the attribute.
 caAddtional :: Lens' ColumnAttributes (HashMap Text Text)

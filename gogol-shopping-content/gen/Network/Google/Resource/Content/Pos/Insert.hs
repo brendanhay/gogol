@@ -56,11 +56,14 @@ type PosInsertResource =
 -- | Creates a store for the given merchant.
 --
 -- /See:/ 'posInsert' smart constructor.
-data PosInsert = PosInsert'
+data PosInsert =
+  PosInsert'
     { _ppMerchantId       :: !(Textual Word64)
     , _ppTargetMerchantId :: !(Textual Word64)
     , _ppPayload          :: !PosStore
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PosInsert' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ posInsert
     -> PosStore -- ^ 'ppPayload'
     -> PosInsert
 posInsert pPpMerchantId_ pPpTargetMerchantId_ pPpPayload_ =
-    PosInsert'
+  PosInsert'
     { _ppMerchantId = _Coerce # pPpMerchantId_
     , _ppTargetMerchantId = _Coerce # pPpTargetMerchantId_
     , _ppPayload = pPpPayload_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 ppMerchantId :: Lens' PosInsert Word64

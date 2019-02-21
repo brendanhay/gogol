@@ -55,9 +55,12 @@ type GrouplicensesListResource =
 -- license.
 --
 -- /See:/ 'grouplicensesList' smart constructor.
-newtype GrouplicensesList = GrouplicensesList'
+newtype GrouplicensesList =
+  GrouplicensesList'
     { _glEnterpriseId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GrouplicensesList' with the minimum fields required to make a request.
 --
@@ -68,9 +71,8 @@ grouplicensesList
     :: Text -- ^ 'glEnterpriseId'
     -> GrouplicensesList
 grouplicensesList pGlEnterpriseId_ =
-    GrouplicensesList'
-    { _glEnterpriseId = pGlEnterpriseId_
-    }
+  GrouplicensesList' {_glEnterpriseId = pGlEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 glEnterpriseId :: Lens' GrouplicensesList Text

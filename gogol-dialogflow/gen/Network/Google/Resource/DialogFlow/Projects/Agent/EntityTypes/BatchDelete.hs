@@ -64,7 +64,8 @@ type ProjectsAgentEntityTypesBatchDeleteResource =
 -- | Deletes entity types in the specified agent. Operation
 --
 -- /See:/ 'projectsAgentEntityTypesBatchDelete' smart constructor.
-data ProjectsAgentEntityTypesBatchDelete = ProjectsAgentEntityTypesBatchDelete'
+data ProjectsAgentEntityTypesBatchDelete =
+  ProjectsAgentEntityTypesBatchDelete'
     { _paetbdParent         :: !Text
     , _paetbdXgafv          :: !(Maybe Xgafv)
     , _paetbdUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsAgentEntityTypesBatchDelete = ProjectsAgentEntityTypesBatchDelete'
     , _paetbdUploadType     :: !(Maybe Text)
     , _paetbdPayload        :: !GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest
     , _paetbdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentEntityTypesBatchDelete' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsAgentEntityTypesBatchDelete
     -> GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest -- ^ 'paetbdPayload'
     -> ProjectsAgentEntityTypesBatchDelete
 projectsAgentEntityTypesBatchDelete pPaetbdParent_ pPaetbdPayload_ =
-    ProjectsAgentEntityTypesBatchDelete'
+  ProjectsAgentEntityTypesBatchDelete'
     { _paetbdParent = pPaetbdParent_
     , _paetbdXgafv = Nothing
     , _paetbdUploadProtocol = Nothing
@@ -105,6 +108,7 @@ projectsAgentEntityTypesBatchDelete pPaetbdParent_ pPaetbdPayload_ =
     , _paetbdPayload = pPaetbdPayload_
     , _paetbdCallback = Nothing
     }
+
 
 -- | Required. The name of the agent to delete all entities types for.
 -- Format: \`projects\/\/agent\`.
@@ -148,7 +152,8 @@ paetbdCallback
       (\ s a -> s{_paetbdCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentEntityTypesBatchDelete where
+           ProjectsAgentEntityTypesBatchDelete
+         where
         type Rs ProjectsAgentEntityTypesBatchDelete =
              GoogleLongrunningOperation
         type Scopes ProjectsAgentEntityTypesBatchDelete =

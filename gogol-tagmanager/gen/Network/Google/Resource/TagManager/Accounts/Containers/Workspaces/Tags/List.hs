@@ -54,10 +54,13 @@ type AccountsContainersWorkspacesTagsListResource =
 -- | Lists all GTM Tags of a Container.
 --
 -- /See:/ 'accountsContainersWorkspacesTagsList' smart constructor.
-data AccountsContainersWorkspacesTagsList = AccountsContainersWorkspacesTagsList'
+data AccountsContainersWorkspacesTagsList =
+  AccountsContainersWorkspacesTagsList'
     { _acwtlParent    :: !Text
     , _acwtlPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesTagsList' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ accountsContainersWorkspacesTagsList
     :: Text -- ^ 'acwtlParent'
     -> AccountsContainersWorkspacesTagsList
 accountsContainersWorkspacesTagsList pAcwtlParent_ =
-    AccountsContainersWorkspacesTagsList'
-    { _acwtlParent = pAcwtlParent_
-    , _acwtlPageToken = Nothing
-    }
+  AccountsContainersWorkspacesTagsList'
+    {_acwtlParent = pAcwtlParent_, _acwtlPageToken = Nothing}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -88,7 +90,8 @@ acwtlPageToken
       (\ s a -> s{_acwtlPageToken = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTagsList where
+           AccountsContainersWorkspacesTagsList
+         where
         type Rs AccountsContainersWorkspacesTagsList =
              ListTagsResponse
         type Scopes AccountsContainersWorkspacesTagsList =

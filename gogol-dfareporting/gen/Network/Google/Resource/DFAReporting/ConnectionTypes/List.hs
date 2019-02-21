@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'ConnectionTypesList' request conforms to.
 type ConnectionTypesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "connectionTypes" :>
@@ -53,9 +53,12 @@ type ConnectionTypesListResource =
 -- | Retrieves a list of connection types.
 --
 -- /See:/ 'connectionTypesList' smart constructor.
-newtype ConnectionTypesList = ConnectionTypesList'
+newtype ConnectionTypesList =
+  ConnectionTypesList'
     { _ctlProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ConnectionTypesList' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ connectionTypesList
     :: Int64 -- ^ 'ctlProFileId'
     -> ConnectionTypesList
 connectionTypesList pCtlProFileId_ =
-    ConnectionTypesList'
-    { _ctlProFileId = _Coerce # pCtlProFileId_
-    }
+  ConnectionTypesList' {_ctlProFileId = _Coerce # pCtlProFileId_}
+
 
 -- | User profile ID associated with this request.
 ctlProFileId :: Lens' ConnectionTypesList Int64

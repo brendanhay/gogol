@@ -65,14 +65,17 @@ type ProjectsDatabasesOperationsDeleteResource =
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
 -- /See:/ 'projectsDatabasesOperationsDelete' smart constructor.
-data ProjectsDatabasesOperationsDelete = ProjectsDatabasesOperationsDelete'
+data ProjectsDatabasesOperationsDelete =
+  ProjectsDatabasesOperationsDelete'
     { _pdodXgafv          :: !(Maybe Xgafv)
     , _pdodUploadProtocol :: !(Maybe Text)
     , _pdodAccessToken    :: !(Maybe Text)
     , _pdodUploadType     :: !(Maybe Text)
     , _pdodName           :: !Text
     , _pdodCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesOperationsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ projectsDatabasesOperationsDelete
     :: Text -- ^ 'pdodName'
     -> ProjectsDatabasesOperationsDelete
 projectsDatabasesOperationsDelete pPdodName_ =
-    ProjectsDatabasesOperationsDelete'
+  ProjectsDatabasesOperationsDelete'
     { _pdodXgafv = Nothing
     , _pdodUploadProtocol = Nothing
     , _pdodAccessToken = Nothing
@@ -101,6 +104,7 @@ projectsDatabasesOperationsDelete pPdodName_ =
     , _pdodName = pPdodName_
     , _pdodCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdodXgafv :: Lens' ProjectsDatabasesOperationsDelete (Maybe Xgafv)
@@ -135,7 +139,8 @@ pdodCallback
   = lens _pdodCallback (\ s a -> s{_pdodCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesOperationsDelete where
+           ProjectsDatabasesOperationsDelete
+         where
         type Rs ProjectsDatabasesOperationsDelete = Empty
         type Scopes ProjectsDatabasesOperationsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

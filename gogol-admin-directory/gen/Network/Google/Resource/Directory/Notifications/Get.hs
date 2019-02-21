@@ -55,10 +55,13 @@ type NotificationsGetResource =
 -- | Retrieves a notification.
 --
 -- /See:/ 'notificationsGet' smart constructor.
-data NotificationsGet = NotificationsGet'
+data NotificationsGet =
+  NotificationsGet'
     { _ngCustomer       :: !Text
     , _ngNotificationId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NotificationsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ notificationsGet
     -> Text -- ^ 'ngNotificationId'
     -> NotificationsGet
 notificationsGet pNgCustomer_ pNgNotificationId_ =
-    NotificationsGet'
-    { _ngCustomer = pNgCustomer_
-    , _ngNotificationId = pNgNotificationId_
-    }
+  NotificationsGet'
+    {_ngCustomer = pNgCustomer_, _ngNotificationId = pNgNotificationId_}
+
 
 -- | The unique ID for the customer\'s G Suite account. The customerId is
 -- also returned as part of the Users resource.

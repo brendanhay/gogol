@@ -65,7 +65,8 @@ type AccountsProposalsGetResource =
 -- revision.
 --
 -- /See:/ 'accountsProposalsGet' smart constructor.
-data AccountsProposalsGet = AccountsProposalsGet'
+data AccountsProposalsGet =
+  AccountsProposalsGet'
     { _aXgafv          :: !(Maybe Xgafv)
     , _aUploadProtocol :: !(Maybe Text)
     , _aAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data AccountsProposalsGet = AccountsProposalsGet'
     , _aProposalId     :: !Text
     , _aAccountId      :: !Text
     , _aCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsProposalsGet' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ accountsProposalsGet
     -> Text -- ^ 'aAccountId'
     -> AccountsProposalsGet
 accountsProposalsGet pAProposalId_ pAAccountId_ =
-    AccountsProposalsGet'
+  AccountsProposalsGet'
     { _aXgafv = Nothing
     , _aUploadProtocol = Nothing
     , _aAccessToken = Nothing
@@ -106,6 +109,7 @@ accountsProposalsGet pAProposalId_ pAAccountId_ =
     , _aAccountId = pAAccountId_
     , _aCallback = Nothing
     }
+
 
 -- | V1 error format.
 aXgafv :: Lens' AccountsProposalsGet (Maybe Xgafv)

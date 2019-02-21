@@ -66,11 +66,14 @@ type InstanceTemplatesInsertResource =
 -- template.
 --
 -- /See:/ 'instanceTemplatesInsert' smart constructor.
-data InstanceTemplatesInsert = InstanceTemplatesInsert'
+data InstanceTemplatesInsert =
+  InstanceTemplatesInsert'
     { _itiRequestId :: !(Maybe Text)
     , _itiProject   :: !Text
     , _itiPayload   :: !InstanceTemplate
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceTemplatesInsert' with the minimum fields required to make a request.
 --
@@ -86,11 +89,12 @@ instanceTemplatesInsert
     -> InstanceTemplate -- ^ 'itiPayload'
     -> InstanceTemplatesInsert
 instanceTemplatesInsert pItiProject_ pItiPayload_ =
-    InstanceTemplatesInsert'
+  InstanceTemplatesInsert'
     { _itiRequestId = Nothing
     , _itiProject = pItiProject_
     , _itiPayload = pItiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

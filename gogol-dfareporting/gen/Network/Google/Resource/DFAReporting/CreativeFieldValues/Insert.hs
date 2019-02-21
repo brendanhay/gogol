@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesInsert' request conforms to.
 type CreativeFieldValuesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -58,11 +58,14 @@ type CreativeFieldValuesInsertResource =
 -- | Inserts a new creative field value.
 --
 -- /See:/ 'creativeFieldValuesInsert' smart constructor.
-data CreativeFieldValuesInsert = CreativeFieldValuesInsert'
+data CreativeFieldValuesInsert =
+  CreativeFieldValuesInsert'
     { _cfviCreativeFieldId :: !(Textual Int64)
     , _cfviProFileId       :: !(Textual Int64)
     , _cfviPayload         :: !CreativeFieldValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeFieldValuesInsert' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ creativeFieldValuesInsert
     -> CreativeFieldValue -- ^ 'cfviPayload'
     -> CreativeFieldValuesInsert
 creativeFieldValuesInsert pCfviCreativeFieldId_ pCfviProFileId_ pCfviPayload_ =
-    CreativeFieldValuesInsert'
+  CreativeFieldValuesInsert'
     { _cfviCreativeFieldId = _Coerce # pCfviCreativeFieldId_
     , _cfviProFileId = _Coerce # pCfviProFileId_
     , _cfviPayload = pCfviPayload_
     }
+
 
 -- | Creative field ID for this creative field value.
 cfviCreativeFieldId :: Lens' CreativeFieldValuesInsert Int64

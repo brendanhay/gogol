@@ -63,14 +63,17 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyResource
 -- CryptoKey.purpose must be ASYMMETRIC_SIGN or ASYMMETRIC_DECRYPT.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey'
+data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey =
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey'
     { _plkrckckvgpkXgafv          :: !(Maybe Xgafv)
     , _plkrckckvgpkUploadProtocol :: !(Maybe Text)
     , _plkrckckvgpkAccessToken    :: !(Maybe Text)
     , _plkrckckvgpkUploadType     :: !(Maybe Text)
     , _plkrckckvgpkName           :: !Text
     , _plkrckckvgpkCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey
     :: Text -- ^ 'plkrckckvgpkName'
     -> ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey
 projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey pPlkrckckvgpkName_ =
-    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey'
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey'
     { _plkrckckvgpkXgafv = Nothing
     , _plkrckckvgpkUploadProtocol = Nothing
     , _plkrckckvgpkAccessToken = Nothing
@@ -99,6 +102,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey pPlkrckckvgpkNa
     , _plkrckckvgpkName = pPlkrckckvgpkName_
     , _plkrckckvgpkCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckckvgpkXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey (Maybe Xgafv)
@@ -137,14 +141,16 @@ plkrckckvgpkCallback
       (\ s a -> s{_plkrckckvgpkCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey
+           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey
              = PublicKey
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey'{..}
           = go _plkrckckvgpkName _plkrckckvgpkXgafv

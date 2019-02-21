@@ -73,7 +73,8 @@ type ProjectsLocationsKeyRingsTestIAMPermissionsResource
 -- warning.
 --
 -- /See:/ 'projectsLocationsKeyRingsTestIAMPermissions' smart constructor.
-data ProjectsLocationsKeyRingsTestIAMPermissions = ProjectsLocationsKeyRingsTestIAMPermissions'
+data ProjectsLocationsKeyRingsTestIAMPermissions =
+  ProjectsLocationsKeyRingsTestIAMPermissions'
     { _plkrtipXgafv          :: !(Maybe Xgafv)
     , _plkrtipUploadProtocol :: !(Maybe Text)
     , _plkrtipAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsLocationsKeyRingsTestIAMPermissions = ProjectsLocationsKeyRingsTest
     , _plkrtipPayload        :: !TestIAMPermissionsRequest
     , _plkrtipResource       :: !Text
     , _plkrtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsLocationsKeyRingsTestIAMPermissions
     -> Text -- ^ 'plkrtipResource'
     -> ProjectsLocationsKeyRingsTestIAMPermissions
 projectsLocationsKeyRingsTestIAMPermissions pPlkrtipPayload_ pPlkrtipResource_ =
-    ProjectsLocationsKeyRingsTestIAMPermissions'
+  ProjectsLocationsKeyRingsTestIAMPermissions'
     { _plkrtipXgafv = Nothing
     , _plkrtipUploadProtocol = Nothing
     , _plkrtipAccessToken = Nothing
@@ -114,6 +117,7 @@ projectsLocationsKeyRingsTestIAMPermissions pPlkrtipPayload_ pPlkrtipResource_ =
     , _plkrtipResource = pPlkrtipResource_
     , _plkrtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrtipXgafv :: Lens' ProjectsLocationsKeyRingsTestIAMPermissions (Maybe Xgafv)
@@ -159,12 +163,15 @@ plkrtipCallback
       (\ s a -> s{_plkrtipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsTestIAMPermissions where
+           ProjectsLocationsKeyRingsTestIAMPermissions
+         where
         type Rs ProjectsLocationsKeyRingsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes
                ProjectsLocationsKeyRingsTestIAMPermissions
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsTestIAMPermissions'{..}
           = go _plkrtipResource _plkrtipXgafv

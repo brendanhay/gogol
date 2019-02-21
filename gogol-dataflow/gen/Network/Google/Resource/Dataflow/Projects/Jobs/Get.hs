@@ -67,7 +67,8 @@ type ProjectsJobsGetResource =
 -- | Gets the state of the specified Cloud Dataflow job.
 --
 -- /See:/ 'projectsJobsGet' smart constructor.
-data ProjectsJobsGet = ProjectsJobsGet'
+data ProjectsJobsGet =
+  ProjectsJobsGet'
     { _pjgXgafv          :: !(Maybe Xgafv)
     , _pjgJobId          :: !Text
     , _pjgUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsJobsGet = ProjectsJobsGet'
     , _pjgView           :: !(Maybe Text)
     , _pjgProjectId      :: !Text
     , _pjgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsGet' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsJobsGet
     -> Text -- ^ 'pjgProjectId'
     -> ProjectsJobsGet
 projectsJobsGet pPjgJobId_ pPjgProjectId_ =
-    ProjectsJobsGet'
+  ProjectsJobsGet'
     { _pjgXgafv = Nothing
     , _pjgJobId = pPjgJobId_
     , _pjgUploadProtocol = Nothing
@@ -116,6 +119,7 @@ projectsJobsGet pPjgJobId_ pPjgProjectId_ =
     , _pjgProjectId = pPjgProjectId_
     , _pjgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjgXgafv :: Lens' ProjectsJobsGet (Maybe Xgafv)

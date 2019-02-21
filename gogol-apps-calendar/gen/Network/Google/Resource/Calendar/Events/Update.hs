@@ -68,7 +68,8 @@ type EventsUpdateResource =
 -- | Updates an event.
 --
 -- /See:/ 'eventsUpdate' smart constructor.
-data EventsUpdate = EventsUpdate'
+data EventsUpdate =
+  EventsUpdate'
     { _euConferenceDataVersion :: !(Maybe (Textual Int32))
     , _euCalendarId            :: !Text
     , _euPayload               :: !Event
@@ -78,7 +79,9 @@ data EventsUpdate = EventsUpdate'
     , _euSendUpdates           :: !(Maybe EventsUpdateSendUpdates)
     , _euAlwaysIncludeEmail    :: !(Maybe Bool)
     , _euEventId               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventsUpdate' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ eventsUpdate
     -> Text -- ^ 'euEventId'
     -> EventsUpdate
 eventsUpdate pEuCalendarId_ pEuPayload_ pEuEventId_ =
-    EventsUpdate'
+  EventsUpdate'
     { _euConferenceDataVersion = Nothing
     , _euCalendarId = pEuCalendarId_
     , _euPayload = pEuPayload_
@@ -118,6 +121,7 @@ eventsUpdate pEuCalendarId_ pEuPayload_ pEuEventId_ =
     , _euAlwaysIncludeEmail = Nothing
     , _euEventId = pEuEventId_
     }
+
 
 -- | Version number of conference data supported by the API client. Version 0
 -- assumes no conference data support and ignores conference data in the

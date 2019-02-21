@@ -66,7 +66,8 @@ type AppsServicesListResource =
 -- | Lists all the services in the application.
 --
 -- /See:/ 'appsServicesList' smart constructor.
-data AppsServicesList = AppsServicesList'
+data AppsServicesList =
+  AppsServicesList'
     { _aslXgafv          :: !(Maybe Xgafv)
     , _aslUploadProtocol :: !(Maybe Text)
     , _aslAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data AppsServicesList = AppsServicesList'
     , _aslPageToken      :: !(Maybe Text)
     , _aslPageSize       :: !(Maybe (Textual Int32))
     , _aslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsServicesList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ appsServicesList
     :: Text -- ^ 'aslAppsId'
     -> AppsServicesList
 appsServicesList pAslAppsId_ =
-    AppsServicesList'
+  AppsServicesList'
     { _aslXgafv = Nothing
     , _aslUploadProtocol = Nothing
     , _aslAccessToken = Nothing
@@ -110,6 +113,7 @@ appsServicesList pAslAppsId_ =
     , _aslPageSize = Nothing
     , _aslCallback = Nothing
     }
+
 
 -- | V1 error format.
 aslXgafv :: Lens' AppsServicesList (Maybe Xgafv)

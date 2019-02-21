@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesInsert' request conforms to.
 type ContentCategoriesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -55,10 +55,13 @@ type ContentCategoriesInsertResource =
 -- | Inserts a new content category.
 --
 -- /See:/ 'contentCategoriesInsert' smart constructor.
-data ContentCategoriesInsert = ContentCategoriesInsert'
+data ContentCategoriesInsert =
+  ContentCategoriesInsert'
     { _cciProFileId :: !(Textual Int64)
     , _cciPayload   :: !ContentCategory
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContentCategoriesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ contentCategoriesInsert
     -> ContentCategory -- ^ 'cciPayload'
     -> ContentCategoriesInsert
 contentCategoriesInsert pCciProFileId_ pCciPayload_ =
-    ContentCategoriesInsert'
-    { _cciProFileId = _Coerce # pCciProFileId_
-    , _cciPayload = pCciPayload_
-    }
+  ContentCategoriesInsert'
+    {_cciProFileId = _Coerce # pCciProFileId_, _cciPayload = pCciPayload_}
+
 
 -- | User profile ID associated with this request.
 cciProFileId :: Lens' ContentCategoriesInsert Int64

@@ -60,14 +60,17 @@ type GetSettingsResource =
 -- | Returns customer-level settings.
 --
 -- /See:/ 'getSettings' smart constructor.
-data GetSettings = GetSettings'
+data GetSettings =
+  GetSettings'
     { _gsXgafv          :: !(Maybe Xgafv)
     , _gsUploadProtocol :: !(Maybe Text)
     , _gsAccessToken    :: !(Maybe Text)
     , _gsUploadType     :: !(Maybe Text)
     , _gsCustomerId     :: !(Maybe Text)
     , _gsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetSettings' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ data GetSettings = GetSettings'
 getSettings
     :: GetSettings
 getSettings =
-    GetSettings'
+  GetSettings'
     { _gsXgafv = Nothing
     , _gsUploadProtocol = Nothing
     , _gsAccessToken = Nothing
@@ -95,6 +98,7 @@ getSettings =
     , _gsCustomerId = Nothing
     , _gsCallback = Nothing
     }
+
 
 -- | V1 error format.
 gsXgafv :: Lens' GetSettings (Maybe Xgafv)

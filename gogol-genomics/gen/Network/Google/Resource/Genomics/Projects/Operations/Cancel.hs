@@ -74,7 +74,8 @@ type ProjectsOperationsCancelResource =
 -- \`genomics.operations.cancel\`
 --
 -- /See:/ 'projectsOperationsCancel' smart constructor.
-data ProjectsOperationsCancel = ProjectsOperationsCancel'
+data ProjectsOperationsCancel =
+  ProjectsOperationsCancel'
     { _pocXgafv          :: !(Maybe Xgafv)
     , _pocUploadProtocol :: !(Maybe Text)
     , _pocAccessToken    :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsOperationsCancel = ProjectsOperationsCancel'
     , _pocPayload        :: !CancelOperationRequest
     , _pocName           :: !Text
     , _pocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOperationsCancel' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ projectsOperationsCancel
     -> Text -- ^ 'pocName'
     -> ProjectsOperationsCancel
 projectsOperationsCancel pPocPayload_ pPocName_ =
-    ProjectsOperationsCancel'
+  ProjectsOperationsCancel'
     { _pocXgafv = Nothing
     , _pocUploadProtocol = Nothing
     , _pocAccessToken = Nothing
@@ -115,6 +118,7 @@ projectsOperationsCancel pPocPayload_ pPocName_ =
     , _pocName = pPocName_
     , _pocCallback = Nothing
     }
+
 
 -- | V1 error format.
 pocXgafv :: Lens' ProjectsOperationsCancel (Maybe Xgafv)

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists webProperty-AdWords links for a given web property.
+-- Lists webProperty-Google Ads links for a given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.list@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
@@ -58,15 +58,18 @@ type ManagementWebPropertyAdWordsLinksListResource =
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] EntityAdWordsLinks
 
--- | Lists webProperty-AdWords links for a given web property.
+-- | Lists webProperty-Google Ads links for a given web property.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksList' smart constructor.
-data ManagementWebPropertyAdWordsLinksList = ManagementWebPropertyAdWordsLinksList'
+data ManagementWebPropertyAdWordsLinksList =
+  ManagementWebPropertyAdWordsLinksList'
     { _mwpawllWebPropertyId :: !Text
     , _mwpawllAccountId     :: !Text
     , _mwpawllStartIndex    :: !(Maybe (Textual Int32))
     , _mwpawllMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksList' with the minimum fields required to make a request.
 --
@@ -84,14 +87,15 @@ managementWebPropertyAdWordsLinksList
     -> Text -- ^ 'mwpawllAccountId'
     -> ManagementWebPropertyAdWordsLinksList
 managementWebPropertyAdWordsLinksList pMwpawllWebPropertyId_ pMwpawllAccountId_ =
-    ManagementWebPropertyAdWordsLinksList'
+  ManagementWebPropertyAdWordsLinksList'
     { _mwpawllWebPropertyId = pMwpawllWebPropertyId_
     , _mwpawllAccountId = pMwpawllAccountId_
     , _mwpawllStartIndex = Nothing
     , _mwpawllMaxResults = Nothing
     }
 
--- | Web property ID to retrieve the AdWords links for.
+
+-- | Web property ID to retrieve the Google Ads links for.
 mwpawllWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksList Text
 mwpawllWebPropertyId
   = lens _mwpawllWebPropertyId
@@ -103,7 +107,7 @@ mwpawllAccountId
   = lens _mwpawllAccountId
       (\ s a -> s{_mwpawllAccountId = a})
 
--- | An index of the first webProperty-AdWords link to retrieve. Use this
+-- | An index of the first webProperty-Google Ads link to retrieve. Use this
 -- parameter as a pagination mechanism along with the max-results
 -- parameter.
 mwpawllStartIndex :: Lens' ManagementWebPropertyAdWordsLinksList (Maybe Int32)
@@ -112,7 +116,7 @@ mwpawllStartIndex
       (\ s a -> s{_mwpawllStartIndex = a})
       . mapping _Coerce
 
--- | The maximum number of webProperty-AdWords links to include in this
+-- | The maximum number of webProperty-Google Ads links to include in this
 -- response.
 mwpawllMaxResults :: Lens' ManagementWebPropertyAdWordsLinksList (Maybe Int32)
 mwpawllMaxResults
@@ -121,7 +125,8 @@ mwpawllMaxResults
       . mapping _Coerce
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksList where
+           ManagementWebPropertyAdWordsLinksList
+         where
         type Rs ManagementWebPropertyAdWordsLinksList =
              EntityAdWordsLinks
         type Scopes ManagementWebPropertyAdWordsLinksList =

@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'AccountPermissionsList' request conforms to.
 type AccountPermissionsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountPermissions" :>
@@ -53,9 +53,12 @@ type AccountPermissionsListResource =
 -- | Retrieves the list of account permissions.
 --
 -- /See:/ 'accountPermissionsList' smart constructor.
-newtype AccountPermissionsList = AccountPermissionsList'
+newtype AccountPermissionsList =
+  AccountPermissionsList'
     { _aplProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountPermissionsList' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ accountPermissionsList
     :: Int64 -- ^ 'aplProFileId'
     -> AccountPermissionsList
 accountPermissionsList pAplProFileId_ =
-    AccountPermissionsList'
-    { _aplProFileId = _Coerce # pAplProFileId_
-    }
+  AccountPermissionsList' {_aplProFileId = _Coerce # pAplProFileId_}
+
 
 -- | User profile ID associated with this request.
 aplProFileId :: Lens' AccountPermissionsList Int64

@@ -66,12 +66,15 @@ type BackendServicesUpdateResource =
 -- for more information.
 --
 -- /See:/ 'backendServicesUpdate' smart constructor.
-data BackendServicesUpdate = BackendServicesUpdate'
+data BackendServicesUpdate =
+  BackendServicesUpdate'
     { _bsuRequestId      :: !(Maybe Text)
     , _bsuProject        :: !Text
     , _bsuPayload        :: !BackendService
     , _bsuBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendServicesUpdate' with the minimum fields required to make a request.
 --
@@ -90,12 +93,13 @@ backendServicesUpdate
     -> Text -- ^ 'bsuBackendService'
     -> BackendServicesUpdate
 backendServicesUpdate pBsuProject_ pBsuPayload_ pBsuBackendService_ =
-    BackendServicesUpdate'
+  BackendServicesUpdate'
     { _bsuRequestId = Nothing
     , _bsuProject = pBsuProject_
     , _bsuPayload = pBsuPayload_
     , _bsuBackendService = pBsuBackendService_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -85,7 +85,8 @@ type FoldersPatchResource =
 -- Status.details field.
 --
 -- /See:/ 'foldersPatch' smart constructor.
-data FoldersPatch = FoldersPatch'
+data FoldersPatch =
+  FoldersPatch'
     { _fpXgafv          :: !(Maybe Xgafv)
     , _fpUploadProtocol :: !(Maybe Text)
     , _fpUpdateMask     :: !(Maybe GFieldMask)
@@ -94,7 +95,9 @@ data FoldersPatch = FoldersPatch'
     , _fpPayload        :: !Folder
     , _fpName           :: !Text
     , _fpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersPatch' with the minimum fields required to make a request.
 --
@@ -120,7 +123,7 @@ foldersPatch
     -> Text -- ^ 'fpName'
     -> FoldersPatch
 foldersPatch pFpPayload_ pFpName_ =
-    FoldersPatch'
+  FoldersPatch'
     { _fpXgafv = Nothing
     , _fpUploadProtocol = Nothing
     , _fpUpdateMask = Nothing
@@ -130,6 +133,7 @@ foldersPatch pFpPayload_ pFpName_ =
     , _fpName = pFpName_
     , _fpCallback = Nothing
     }
+
 
 -- | V1 error format.
 fpXgafv :: Lens' FoldersPatch (Maybe Xgafv)

@@ -64,14 +64,17 @@ type ProjectsStoredInfoTypesGetResource =
 -- learn more.
 --
 -- /See:/ 'projectsStoredInfoTypesGet' smart constructor.
-data ProjectsStoredInfoTypesGet = ProjectsStoredInfoTypesGet'
+data ProjectsStoredInfoTypesGet =
+  ProjectsStoredInfoTypesGet'
     { _psitgXgafv          :: !(Maybe Xgafv)
     , _psitgUploadProtocol :: !(Maybe Text)
     , _psitgAccessToken    :: !(Maybe Text)
     , _psitgUploadType     :: !(Maybe Text)
     , _psitgName           :: !Text
     , _psitgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsStoredInfoTypesGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsStoredInfoTypesGet
     :: Text -- ^ 'psitgName'
     -> ProjectsStoredInfoTypesGet
 projectsStoredInfoTypesGet pPsitgName_ =
-    ProjectsStoredInfoTypesGet'
+  ProjectsStoredInfoTypesGet'
     { _psitgXgafv = Nothing
     , _psitgUploadProtocol = Nothing
     , _psitgAccessToken = Nothing
@@ -100,6 +103,7 @@ projectsStoredInfoTypesGet pPsitgName_ =
     , _psitgName = pPsitgName_
     , _psitgCallback = Nothing
     }
+
 
 -- | V1 error format.
 psitgXgafv :: Lens' ProjectsStoredInfoTypesGet (Maybe Xgafv)

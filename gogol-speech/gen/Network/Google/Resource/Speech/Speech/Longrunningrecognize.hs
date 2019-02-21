@@ -25,7 +25,7 @@
 -- \`Operation.error\` or an \`Operation.response\` which contains a
 -- \`LongRunningRecognizeResponse\` message.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference> for @speech.speech.longrunningrecognize@.
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.speech.longrunningrecognize@.
 module Network.Google.Resource.Speech.Speech.Longrunningrecognize
     (
     -- * REST Resource
@@ -67,14 +67,17 @@ type SpeechLongrunningrecognizeResource =
 -- \`LongRunningRecognizeResponse\` message.
 --
 -- /See:/ 'speechLongrunningrecognize' smart constructor.
-data SpeechLongrunningrecognize = SpeechLongrunningrecognize'
+data SpeechLongrunningrecognize =
+  SpeechLongrunningrecognize'
     { _slXgafv          :: !(Maybe Xgafv)
     , _slUploadProtocol :: !(Maybe Text)
     , _slAccessToken    :: !(Maybe Text)
     , _slUploadType     :: !(Maybe Text)
     , _slPayload        :: !LongRunningRecognizeRequest
     , _slCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpeechLongrunningrecognize' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ speechLongrunningrecognize
     :: LongRunningRecognizeRequest -- ^ 'slPayload'
     -> SpeechLongrunningrecognize
 speechLongrunningrecognize pSlPayload_ =
-    SpeechLongrunningrecognize'
+  SpeechLongrunningrecognize'
     { _slXgafv = Nothing
     , _slUploadProtocol = Nothing
     , _slAccessToken = Nothing
@@ -103,6 +106,7 @@ speechLongrunningrecognize pSlPayload_ =
     , _slPayload = pSlPayload_
     , _slCallback = Nothing
     }
+
 
 -- | V1 error format.
 slXgafv :: Lens' SpeechLongrunningrecognize (Maybe Xgafv)

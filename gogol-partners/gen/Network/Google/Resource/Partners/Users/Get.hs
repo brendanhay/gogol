@@ -88,7 +88,8 @@ type UsersGetResource =
 -- | Gets a user.
 --
 -- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet'
+data UsersGet =
+  UsersGet'
     { _ugXgafv                                       :: !(Maybe Xgafv)
     , _ugUploadProtocol                              :: !(Maybe Text)
     , _ugAccessToken                                 :: !(Maybe Text)
@@ -103,7 +104,9 @@ data UsersGet = UsersGet'
     , _ugRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _ugRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _ugCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
@@ -140,7 +143,7 @@ usersGet
     :: Text -- ^ 'ugUserId'
     -> UsersGet
 usersGet pUgUserId_ =
-    UsersGet'
+  UsersGet'
     { _ugXgafv = Nothing
     , _ugUploadProtocol = Nothing
     , _ugAccessToken = Nothing
@@ -156,6 +159,7 @@ usersGet pUgUserId_ =
     , _ugRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _ugCallback = Nothing
     }
+
 
 -- | V1 error format.
 ugXgafv :: Lens' UsersGet (Maybe Xgafv)

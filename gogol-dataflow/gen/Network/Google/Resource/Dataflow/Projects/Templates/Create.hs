@@ -64,7 +64,8 @@ type ProjectsTemplatesCreateResource =
 -- | Creates a Cloud Dataflow job from a template.
 --
 -- /See:/ 'projectsTemplatesCreate' smart constructor.
-data ProjectsTemplatesCreate = ProjectsTemplatesCreate'
+data ProjectsTemplatesCreate =
+  ProjectsTemplatesCreate'
     { _ptcXgafv          :: !(Maybe Xgafv)
     , _ptcUploadProtocol :: !(Maybe Text)
     , _ptcAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsTemplatesCreate = ProjectsTemplatesCreate'
     , _ptcPayload        :: !CreateJobFromTemplateRequest
     , _ptcProjectId      :: !Text
     , _ptcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTemplatesCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsTemplatesCreate
     -> Text -- ^ 'ptcProjectId'
     -> ProjectsTemplatesCreate
 projectsTemplatesCreate pPtcPayload_ pPtcProjectId_ =
-    ProjectsTemplatesCreate'
+  ProjectsTemplatesCreate'
     { _ptcXgafv = Nothing
     , _ptcUploadProtocol = Nothing
     , _ptcAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsTemplatesCreate pPtcPayload_ pPtcProjectId_ =
     , _ptcProjectId = pPtcProjectId_
     , _ptcCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptcXgafv :: Lens' ProjectsTemplatesCreate (Maybe Xgafv)

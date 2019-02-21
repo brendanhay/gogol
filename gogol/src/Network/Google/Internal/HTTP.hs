@@ -128,11 +128,11 @@ perform Env{..} x = catches go handlers
         err e = return (Left e)
 
 getContent :: MonadIO m
-           => [Body]
+           => [GBody]
            -> m ([Header] -> [Header], RequestBody)
-getContent []         = pure (id, mempty)
-getContent [Body t s] = pure (((hContentType, renderHeader t) :), s)
-getContent bs         = do
+getContent []          = pure (id, mempty)
+getContent [GBody t s] = pure (((hContentType, renderHeader t) :), s)
+getContent bs          = do
     b <- genBoundary
     pure ( (multipartHeader b :)
          , renderParts b bs

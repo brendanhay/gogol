@@ -71,7 +71,8 @@ type CoursesTeachersGetResource =
 -- exist.
 --
 -- /See:/ 'coursesTeachersGet' smart constructor.
-data CoursesTeachersGet = CoursesTeachersGet'
+data CoursesTeachersGet =
+  CoursesTeachersGet'
     { _ctgXgafv          :: !(Maybe Xgafv)
     , _ctgUploadProtocol :: !(Maybe Text)
     , _ctgCourseId       :: !Text
@@ -79,7 +80,9 @@ data CoursesTeachersGet = CoursesTeachersGet'
     , _ctgUploadType     :: !(Maybe Text)
     , _ctgUserId         :: !Text
     , _ctgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesTeachersGet' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ coursesTeachersGet
     -> Text -- ^ 'ctgUserId'
     -> CoursesTeachersGet
 coursesTeachersGet pCtgCourseId_ pCtgUserId_ =
-    CoursesTeachersGet'
+  CoursesTeachersGet'
     { _ctgXgafv = Nothing
     , _ctgUploadProtocol = Nothing
     , _ctgCourseId = pCtgCourseId_
@@ -112,6 +115,7 @@ coursesTeachersGet pCtgCourseId_ pCtgUserId_ =
     , _ctgUserId = pCtgUserId_
     , _ctgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ctgXgafv :: Lens' CoursesTeachersGet (Maybe Xgafv)

@@ -62,14 +62,17 @@ type PostsGetResource =
 -- | Get a post by ID.
 --
 -- /See:/ 'postsGet' smart constructor.
-data PostsGet = PostsGet'
+data PostsGet =
+  PostsGet'
     { _pggFetchBody   :: !Bool
     , _pggFetchImages :: !(Maybe Bool)
     , _pggBlogId      :: !Text
     , _pggMaxComments :: !(Maybe (Textual Word32))
     , _pggView        :: !(Maybe PostsGetView)
     , _pggPostId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ postsGet
     -> Text -- ^ 'pggPostId'
     -> PostsGet
 postsGet pPggBlogId_ pPggPostId_ =
-    PostsGet'
+  PostsGet'
     { _pggFetchBody = True
     , _pggFetchImages = Nothing
     , _pggBlogId = pPggBlogId_
@@ -99,6 +102,7 @@ postsGet pPggBlogId_ pPggPostId_ =
     , _pggView = Nothing
     , _pggPostId = pPggPostId_
     }
+
 
 -- | Whether the body content of the post is included (default: true). This
 -- should be set to false when the post bodies are not required, to help

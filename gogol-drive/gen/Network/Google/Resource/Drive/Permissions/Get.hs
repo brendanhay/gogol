@@ -58,12 +58,15 @@ type PermissionsGetResource =
 -- | Gets a permission by ID.
 --
 -- /See:/ 'permissionsGet' smart constructor.
-data PermissionsGet = PermissionsGet'
+data PermissionsGet =
+  PermissionsGet'
     { _pgUseDomainAdminAccess :: !Bool
     , _pgFileId               :: !Text
     , _pgSupportsTeamDrives   :: !Bool
     , _pgPermissionId         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PermissionsGet' with the minimum fields required to make a request.
 --
@@ -81,12 +84,13 @@ permissionsGet
     -> Text -- ^ 'pgPermissionId'
     -> PermissionsGet
 permissionsGet pPgFileId_ pPgPermissionId_ =
-    PermissionsGet'
+  PermissionsGet'
     { _pgUseDomainAdminAccess = False
     , _pgFileId = pPgFileId_
     , _pgSupportsTeamDrives = False
     , _pgPermissionId = pPgPermissionId_
     }
+
 
 -- | Issue the request as a domain administrator; if set to true, then the
 -- requester will be granted access if they are an administrator of the

@@ -63,12 +63,15 @@ type TargetPoolsGetHealthResource =
 -- that is referenced by the given target pool.
 --
 -- /See:/ 'targetPoolsGetHealth' smart constructor.
-data TargetPoolsGetHealth = TargetPoolsGetHealth'
+data TargetPoolsGetHealth =
+  TargetPoolsGetHealth'
     { _tpghProject    :: !Text
     , _tpghTargetPool :: !Text
     , _tpghPayload    :: !InstanceReference
     , _tpghRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetPoolsGetHealth' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ targetPoolsGetHealth
     -> Text -- ^ 'tpghRegion'
     -> TargetPoolsGetHealth
 targetPoolsGetHealth pTpghProject_ pTpghTargetPool_ pTpghPayload_ pTpghRegion_ =
-    TargetPoolsGetHealth'
+  TargetPoolsGetHealth'
     { _tpghProject = pTpghProject_
     , _tpghTargetPool = pTpghTargetPool_
     , _tpghPayload = pTpghPayload_
     , _tpghRegion = pTpghRegion_
     }
+
 
 -- | Project ID for this request.
 tpghProject :: Lens' TargetPoolsGetHealth Text

@@ -69,7 +69,8 @@ type SpreadsheetsValuesBatchUpdateByDataFilterResource
 -- DataFilterValueRanges.
 --
 -- /See:/ 'spreadsheetsValuesBatchUpdateByDataFilter' smart constructor.
-data SpreadsheetsValuesBatchUpdateByDataFilter = SpreadsheetsValuesBatchUpdateByDataFilter'
+data SpreadsheetsValuesBatchUpdateByDataFilter =
+  SpreadsheetsValuesBatchUpdateByDataFilter'
     { _svbubdfXgafv          :: !(Maybe Xgafv)
     , _svbubdfUploadProtocol :: !(Maybe Text)
     , _svbubdfAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data SpreadsheetsValuesBatchUpdateByDataFilter = SpreadsheetsValuesBatchUpdateBy
     , _svbubdfUploadType     :: !(Maybe Text)
     , _svbubdfPayload        :: !BatchUpdateValuesByDataFilterRequest
     , _svbubdfCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpreadsheetsValuesBatchUpdateByDataFilter' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ spreadsheetsValuesBatchUpdateByDataFilter
     -> BatchUpdateValuesByDataFilterRequest -- ^ 'svbubdfPayload'
     -> SpreadsheetsValuesBatchUpdateByDataFilter
 spreadsheetsValuesBatchUpdateByDataFilter pSvbubdfSpreadsheetId_ pSvbubdfPayload_ =
-    SpreadsheetsValuesBatchUpdateByDataFilter'
+  SpreadsheetsValuesBatchUpdateByDataFilter'
     { _svbubdfXgafv = Nothing
     , _svbubdfUploadProtocol = Nothing
     , _svbubdfAccessToken = Nothing
@@ -110,6 +113,7 @@ spreadsheetsValuesBatchUpdateByDataFilter pSvbubdfSpreadsheetId_ pSvbubdfPayload
     , _svbubdfPayload = pSvbubdfPayload_
     , _svbubdfCallback = Nothing
     }
+
 
 -- | V1 error format.
 svbubdfXgafv :: Lens' SpreadsheetsValuesBatchUpdateByDataFilter (Maybe Xgafv)
@@ -153,7 +157,8 @@ svbubdfCallback
       (\ s a -> s{_svbubdfCallback = a})
 
 instance GoogleRequest
-         SpreadsheetsValuesBatchUpdateByDataFilter where
+           SpreadsheetsValuesBatchUpdateByDataFilter
+         where
         type Rs SpreadsheetsValuesBatchUpdateByDataFilter =
              BatchUpdateValuesByDataFilterResponse
         type Scopes SpreadsheetsValuesBatchUpdateByDataFilter

@@ -71,13 +71,16 @@ type InstanceGroupsRemoveInstancesResource =
 -- removed or deleted.
 --
 -- /See:/ 'instanceGroupsRemoveInstances' smart constructor.
-data InstanceGroupsRemoveInstances = InstanceGroupsRemoveInstances'
+data InstanceGroupsRemoveInstances =
+  InstanceGroupsRemoveInstances'
     { _igriRequestId     :: !(Maybe Text)
     , _igriProject       :: !Text
     , _igriZone          :: !Text
     , _igriPayload       :: !InstanceGroupsRemoveInstancesRequest
     , _igriInstanceGroup :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupsRemoveInstances' with the minimum fields required to make a request.
 --
@@ -99,13 +102,14 @@ instanceGroupsRemoveInstances
     -> Text -- ^ 'igriInstanceGroup'
     -> InstanceGroupsRemoveInstances
 instanceGroupsRemoveInstances pIgriProject_ pIgriZone_ pIgriPayload_ pIgriInstanceGroup_ =
-    InstanceGroupsRemoveInstances'
+  InstanceGroupsRemoveInstances'
     { _igriRequestId = Nothing
     , _igriProject = pIgriProject_
     , _igriZone = pIgriZone_
     , _igriPayload = pIgriPayload_
     , _igriInstanceGroup = pIgriInstanceGroup_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -67,7 +67,8 @@ type OrganizationsExclusionsCreateResource =
 -- exclusions in a resource.
 --
 -- /See:/ 'organizationsExclusionsCreate' smart constructor.
-data OrganizationsExclusionsCreate = OrganizationsExclusionsCreate'
+data OrganizationsExclusionsCreate =
+  OrganizationsExclusionsCreate'
     { _oecParent         :: !Text
     , _oecXgafv          :: !(Maybe Xgafv)
     , _oecUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data OrganizationsExclusionsCreate = OrganizationsExclusionsCreate'
     , _oecUploadType     :: !(Maybe Text)
     , _oecPayload        :: !LogExclusion
     , _oecCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsExclusionsCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ organizationsExclusionsCreate
     -> LogExclusion -- ^ 'oecPayload'
     -> OrganizationsExclusionsCreate
 organizationsExclusionsCreate pOecParent_ pOecPayload_ =
-    OrganizationsExclusionsCreate'
+  OrganizationsExclusionsCreate'
     { _oecParent = pOecParent_
     , _oecXgafv = Nothing
     , _oecUploadProtocol = Nothing
@@ -108,6 +111,7 @@ organizationsExclusionsCreate pOecParent_ pOecPayload_ =
     , _oecPayload = pOecPayload_
     , _oecCallback = Nothing
     }
+
 
 -- | Required. The parent resource in which to create the exclusion:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

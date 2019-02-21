@@ -276,6 +276,7 @@ module Network.Google.BigQuery
     , externalDataConfiguration
     , edcBigtableOptions
     , edcIgnoreUnknownValues
+    , edcHivePartitioningMode
     , edcCompression
     , edcSourceFormat
     , edcSchema
@@ -309,6 +310,7 @@ module Network.Google.BigQuery
     , TableFieldSchema
     , tableFieldSchema
     , tfsMode
+    , tfsCategories
     , tfsName
     , tfsType
     , tfsDescription
@@ -448,6 +450,7 @@ module Network.Google.BigQuery
     , jclSchemaInline
     , jclIgnoreUnknownValues
     , jclSchemaUpdateOptions
+    , jclHivePartitioningMode
     , jclCreateDisPosition
     , jclSchemaInlineFormat
     , jclAllowQuotedNewlines
@@ -727,6 +730,11 @@ module Network.Google.BigQuery
     , jTotalBytesBilled
     , jDdlOperationPerformed
     , jTotalPartitionsProcessed
+
+    -- ** TableFieldSchemaCategories
+    , TableFieldSchemaCategories
+    , tableFieldSchemaCategories
+    , tfscNames
 
     -- ** JobStatus
     , JobStatus

@@ -77,7 +77,8 @@ type ProjectsZonesClustersDeleteResource =
 -- they weren\'t present at the initial create time.
 --
 -- /See:/ 'projectsZonesClustersDelete' smart constructor.
-data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete'
+data ProjectsZonesClustersDelete =
+  ProjectsZonesClustersDelete'
     { _pzcdXgafv          :: !(Maybe Xgafv)
     , _pzcdUploadProtocol :: !(Maybe Text)
     , _pzcdAccessToken    :: !(Maybe Text)
@@ -87,7 +88,9 @@ data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete'
     , _pzcdClusterId      :: !Text
     , _pzcdProjectId      :: !Text
     , _pzcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersDelete' with the minimum fields required to make a request.
 --
@@ -116,7 +119,7 @@ projectsZonesClustersDelete
     -> Text -- ^ 'pzcdProjectId'
     -> ProjectsZonesClustersDelete
 projectsZonesClustersDelete pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
-    ProjectsZonesClustersDelete'
+  ProjectsZonesClustersDelete'
     { _pzcdXgafv = Nothing
     , _pzcdUploadProtocol = Nothing
     , _pzcdAccessToken = Nothing
@@ -127,6 +130,7 @@ projectsZonesClustersDelete pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
     , _pzcdProjectId = pPzcdProjectId_
     , _pzcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcdXgafv :: Lens' ProjectsZonesClustersDelete (Maybe Xgafv)

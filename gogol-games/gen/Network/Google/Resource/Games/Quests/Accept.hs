@@ -56,10 +56,13 @@ type QuestsAcceptResource =
 -- quest.
 --
 -- /See:/ 'questsAccept' smart constructor.
-data QuestsAccept = QuestsAccept'
+data QuestsAccept =
+  QuestsAccept'
     { _qaLanguage :: !(Maybe Text)
     , _qaQuestId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuestsAccept' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ questsAccept
     :: Text -- ^ 'qaQuestId'
     -> QuestsAccept
 questsAccept pQaQuestId_ =
-    QuestsAccept'
-    { _qaLanguage = Nothing
-    , _qaQuestId = pQaQuestId_
-    }
+  QuestsAccept' {_qaLanguage = Nothing, _qaQuestId = pQaQuestId_}
+
 
 -- | The preferred language to use for strings returned by this method.
 qaLanguage :: Lens' QuestsAccept (Maybe Text)
@@ -90,7 +91,8 @@ qaQuestId
 instance GoogleRequest QuestsAccept where
         type Rs QuestsAccept = Quest
         type Scopes QuestsAccept =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient QuestsAccept'{..}
           = go _qaQuestId _qaLanguage (Just AltJSON)
               gamesService

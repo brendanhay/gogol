@@ -63,13 +63,16 @@ type ManagementRemarketingAudienceListResource =
 -- | Lists remarketing audiences to which the user has access.
 --
 -- /See:/ 'managementRemarketingAudienceList' smart constructor.
-data ManagementRemarketingAudienceList = ManagementRemarketingAudienceList'
+data ManagementRemarketingAudienceList =
+  ManagementRemarketingAudienceList'
     { _mralWebPropertyId :: !Text
     , _mralAccountId     :: !Text
     , _mralType          :: !Text
     , _mralStartIndex    :: !(Maybe (Textual Int32))
     , _mralMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementRemarketingAudienceList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ managementRemarketingAudienceList
     -> Text -- ^ 'mralAccountId'
     -> ManagementRemarketingAudienceList
 managementRemarketingAudienceList pMralWebPropertyId_ pMralAccountId_ =
-    ManagementRemarketingAudienceList'
+  ManagementRemarketingAudienceList'
     { _mralWebPropertyId = pMralWebPropertyId_
     , _mralAccountId = pMralAccountId_
     , _mralType = "all"
     , _mralStartIndex = Nothing
     , _mralMaxResults = Nothing
     }
+
 
 -- | The web property ID of the remarketing audiences to retrieve.
 mralWebPropertyId :: Lens' ManagementRemarketingAudienceList Text
@@ -128,7 +132,8 @@ mralMaxResults
       . mapping _Coerce
 
 instance GoogleRequest
-         ManagementRemarketingAudienceList where
+           ManagementRemarketingAudienceList
+         where
         type Rs ManagementRemarketingAudienceList =
              RemarketingAudiences
         type Scopes ManagementRemarketingAudienceList =

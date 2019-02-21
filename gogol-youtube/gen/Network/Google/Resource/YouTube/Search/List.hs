@@ -164,7 +164,8 @@ type SearchListResource =
 -- configure queries to only retrieve a specific type of resource.
 --
 -- /See:/ 'searchList' smart constructor.
-data SearchList = SearchList'
+data SearchList =
+  SearchList'
     { _slPublishedAfter         :: !(Maybe DateTime')
     , _slVideoDefinition        :: !(Maybe SearchListVideoDefinition)
     , _slPart                   :: !Text
@@ -196,7 +197,9 @@ data SearchList = SearchList'
     , _slPublishedBefore        :: !(Maybe DateTime')
     , _slVideoType              :: !(Maybe SearchListVideoType)
     , _slVideoDimension         :: !(Maybe SearchListVideoDimension)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchList' with the minimum fields required to make a request.
 --
@@ -267,7 +270,7 @@ searchList
     :: Text -- ^ 'slPart'
     -> SearchList
 searchList pSlPart_ =
-    SearchList'
+  SearchList'
     { _slPublishedAfter = Nothing
     , _slVideoDefinition = Nothing
     , _slPart = pSlPart_
@@ -300,6 +303,7 @@ searchList pSlPart_ =
     , _slVideoType = Nothing
     , _slVideoDimension = Nothing
     }
+
 
 -- | The publishedAfter parameter indicates that the API response should only
 -- contain resources created after the specified time. The value is an RFC

@@ -70,7 +70,8 @@ type ProjectsContentReidentifyResource =
 -- to learn more.
 --
 -- /See:/ 'projectsContentReidentify' smart constructor.
-data ProjectsContentReidentify = ProjectsContentReidentify'
+data ProjectsContentReidentify =
+  ProjectsContentReidentify'
     { _pcrParent         :: !Text
     , _pcrXgafv          :: !(Maybe Xgafv)
     , _pcrUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsContentReidentify = ProjectsContentReidentify'
     , _pcrUploadType     :: !(Maybe Text)
     , _pcrPayload        :: !GooglePrivacyDlpV2ReidentifyContentRequest
     , _pcrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsContentReidentify' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsContentReidentify
     -> GooglePrivacyDlpV2ReidentifyContentRequest -- ^ 'pcrPayload'
     -> ProjectsContentReidentify
 projectsContentReidentify pPcrParent_ pPcrPayload_ =
-    ProjectsContentReidentify'
+  ProjectsContentReidentify'
     { _pcrParent = pPcrParent_
     , _pcrXgafv = Nothing
     , _pcrUploadProtocol = Nothing
@@ -111,6 +114,7 @@ projectsContentReidentify pPcrParent_ pPcrPayload_ =
     , _pcrPayload = pPcrPayload_
     , _pcrCallback = Nothing
     }
+
 
 -- | The parent resource name.
 pcrParent :: Lens' ProjectsContentReidentify Text

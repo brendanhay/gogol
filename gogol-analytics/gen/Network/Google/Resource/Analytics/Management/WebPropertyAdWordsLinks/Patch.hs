@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing webProperty-AdWords link. This method supports patch
--- semantics.
+-- Updates an existing webProperty-Google Ads link. This method supports
+-- patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.patch@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
@@ -59,16 +59,19 @@ type ManagementWebPropertyAdWordsLinksPatchResource =
                          ReqBody '[JSON] EntityAdWordsLink :>
                            Patch '[JSON] EntityAdWordsLink
 
--- | Updates an existing webProperty-AdWords link. This method supports patch
--- semantics.
+-- | Updates an existing webProperty-Google Ads link. This method supports
+-- patch semantics.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksPatch' smart constructor.
-data ManagementWebPropertyAdWordsLinksPatch = ManagementWebPropertyAdWordsLinksPatch'
+data ManagementWebPropertyAdWordsLinksPatch =
+  ManagementWebPropertyAdWordsLinksPatch'
     { _mwpawlpWebPropertyId            :: !Text
     , _mwpawlpPayload                  :: !EntityAdWordsLink
     , _mwpawlpAccountId                :: !Text
     , _mwpawlpWebPropertyAdWordsLinkId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksPatch' with the minimum fields required to make a request.
 --
@@ -88,14 +91,15 @@ managementWebPropertyAdWordsLinksPatch
     -> Text -- ^ 'mwpawlpWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksPatch
 managementWebPropertyAdWordsLinksPatch pMwpawlpWebPropertyId_ pMwpawlpPayload_ pMwpawlpAccountId_ pMwpawlpWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksPatch'
+  ManagementWebPropertyAdWordsLinksPatch'
     { _mwpawlpWebPropertyId = pMwpawlpWebPropertyId_
     , _mwpawlpPayload = pMwpawlpPayload_
     , _mwpawlpAccountId = pMwpawlpAccountId_
     , _mwpawlpWebPropertyAdWordsLinkId = pMwpawlpWebPropertyAdWordsLinkId_
     }
 
--- | Web property ID to retrieve the AdWords link for.
+
+-- | Web property ID to retrieve the Google Ads link for.
 mwpawlpWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksPatch Text
 mwpawlpWebPropertyId
   = lens _mwpawlpWebPropertyId
@@ -113,14 +117,15 @@ mwpawlpAccountId
   = lens _mwpawlpAccountId
       (\ s a -> s{_mwpawlpAccountId = a})
 
--- | Web property-AdWords link ID.
+-- | Web property-Google Ads link ID.
 mwpawlpWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksPatch Text
 mwpawlpWebPropertyAdWordsLinkId
   = lens _mwpawlpWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawlpWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksPatch where
+           ManagementWebPropertyAdWordsLinksPatch
+         where
         type Rs ManagementWebPropertyAdWordsLinksPatch =
              EntityAdWordsLink
         type Scopes ManagementWebPropertyAdWordsLinksPatch =

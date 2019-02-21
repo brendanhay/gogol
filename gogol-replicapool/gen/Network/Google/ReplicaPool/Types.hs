@@ -218,26 +218,26 @@ replicaPoolService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View and manage your Google Cloud Platform management resources and
 -- deployment status information
 ndevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
-ndevCloudmanScope = Proxy;
+ndevCloudmanScope = Proxy
 
 -- | View your Google Cloud Platform management resources and deployment
 -- status information
 ndevCloudmanReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-ndevCloudmanReadOnlyScope = Proxy;
+ndevCloudmanReadOnlyScope = Proxy
 
 -- | View and manage replica pools
 replicaPoolScope :: Proxy '["https://www.googleapis.com/auth/replicapool"]
-replicaPoolScope = Proxy;
+replicaPoolScope = Proxy
 
 -- | View replica pools
 replicaPoolReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
-replicaPoolReadOnlyScope = Proxy;
+replicaPoolReadOnlyScope = Proxy

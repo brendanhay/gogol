@@ -61,13 +61,16 @@ type GlobalAddressesListResource =
 -- | Retrieves a list of global addresses.
 --
 -- /See:/ 'globalAddressesList' smart constructor.
-data GlobalAddressesList = GlobalAddressesList'
+data GlobalAddressesList =
+  GlobalAddressesList'
     { _galOrderBy    :: !(Maybe Text)
     , _galProject    :: !Text
     , _galFilter     :: !(Maybe Text)
     , _galPageToken  :: !(Maybe Text)
     , _galMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalAddressesList' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ globalAddressesList
     :: Text -- ^ 'galProject'
     -> GlobalAddressesList
 globalAddressesList pGalProject_ =
-    GlobalAddressesList'
+  GlobalAddressesList'
     { _galOrderBy = Nothing
     , _galProject = pGalProject_
     , _galFilter = Nothing
     , _galPageToken = Nothing
     , _galMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

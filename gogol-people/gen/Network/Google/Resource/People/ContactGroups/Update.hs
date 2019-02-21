@@ -64,7 +64,8 @@ type ContactGroupsUpdateResource =
 -- user.
 --
 -- /See:/ 'contactGroupsUpdate' smart constructor.
-data ContactGroupsUpdate = ContactGroupsUpdate'
+data ContactGroupsUpdate =
+  ContactGroupsUpdate'
     { _cguXgafv          :: !(Maybe Xgafv)
     , _cguUploadProtocol :: !(Maybe Text)
     , _cguResourceName   :: !Text
@@ -72,7 +73,9 @@ data ContactGroupsUpdate = ContactGroupsUpdate'
     , _cguUploadType     :: !(Maybe Text)
     , _cguPayload        :: !UpdateContactGroupRequest
     , _cguCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactGroupsUpdate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ contactGroupsUpdate
     -> UpdateContactGroupRequest -- ^ 'cguPayload'
     -> ContactGroupsUpdate
 contactGroupsUpdate pCguResourceName_ pCguPayload_ =
-    ContactGroupsUpdate'
+  ContactGroupsUpdate'
     { _cguXgafv = Nothing
     , _cguUploadProtocol = Nothing
     , _cguResourceName = pCguResourceName_
@@ -105,6 +108,7 @@ contactGroupsUpdate pCguResourceName_ pCguPayload_ =
     , _cguPayload = pCguPayload_
     , _cguCallback = Nothing
     }
+
 
 -- | V1 error format.
 cguXgafv :: Lens' ContactGroupsUpdate (Maybe Xgafv)

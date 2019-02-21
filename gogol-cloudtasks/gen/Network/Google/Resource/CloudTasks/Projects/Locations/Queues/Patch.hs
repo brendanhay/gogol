@@ -79,7 +79,8 @@ type ProjectsLocationsQueuesPatchResource =
 -- using this method.
 --
 -- /See:/ 'projectsLocationsQueuesPatch' smart constructor.
-data ProjectsLocationsQueuesPatch = ProjectsLocationsQueuesPatch'
+data ProjectsLocationsQueuesPatch =
+  ProjectsLocationsQueuesPatch'
     { _plqpXgafv          :: !(Maybe Xgafv)
     , _plqpUploadProtocol :: !(Maybe Text)
     , _plqpUpdateMask     :: !(Maybe GFieldMask)
@@ -88,7 +89,9 @@ data ProjectsLocationsQueuesPatch = ProjectsLocationsQueuesPatch'
     , _plqpPayload        :: !Queue
     , _plqpName           :: !Text
     , _plqpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsQueuesPatch' with the minimum fields required to make a request.
 --
@@ -114,7 +117,7 @@ projectsLocationsQueuesPatch
     -> Text -- ^ 'plqpName'
     -> ProjectsLocationsQueuesPatch
 projectsLocationsQueuesPatch pPlqpPayload_ pPlqpName_ =
-    ProjectsLocationsQueuesPatch'
+  ProjectsLocationsQueuesPatch'
     { _plqpXgafv = Nothing
     , _plqpUploadProtocol = Nothing
     , _plqpUpdateMask = Nothing
@@ -124,6 +127,7 @@ projectsLocationsQueuesPatch pPlqpPayload_ pPlqpName_ =
     , _plqpName = pPlqpName_
     , _plqpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqpXgafv :: Lens' ProjectsLocationsQueuesPatch (Maybe Xgafv)

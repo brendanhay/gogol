@@ -65,7 +65,8 @@ type ProjectsAllocateIdsResource =
 -- entity before it is inserted.
 --
 -- /See:/ 'projectsAllocateIds' smart constructor.
-data ProjectsAllocateIds = ProjectsAllocateIds'
+data ProjectsAllocateIds =
+  ProjectsAllocateIds'
     { _paiXgafv          :: !(Maybe Xgafv)
     , _paiUploadProtocol :: !(Maybe Text)
     , _paiAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsAllocateIds = ProjectsAllocateIds'
     , _paiPayload        :: !AllocateIdsRequest
     , _paiProjectId      :: !Text
     , _paiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAllocateIds' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsAllocateIds
     -> Text -- ^ 'paiProjectId'
     -> ProjectsAllocateIds
 projectsAllocateIds pPaiPayload_ pPaiProjectId_ =
-    ProjectsAllocateIds'
+  ProjectsAllocateIds'
     { _paiXgafv = Nothing
     , _paiUploadProtocol = Nothing
     , _paiAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsAllocateIds pPaiPayload_ pPaiProjectId_ =
     , _paiProjectId = pPaiProjectId_
     , _paiCallback = Nothing
     }
+
 
 -- | V1 error format.
 paiXgafv :: Lens' ProjectsAllocateIds (Maybe Xgafv)

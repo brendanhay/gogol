@@ -65,7 +65,8 @@ type SpacesMembersListResource =
 -- | Lists human memberships in a space.
 --
 -- /See:/ 'spacesMembersList' smart constructor.
-data SpacesMembersList = SpacesMembersList'
+data SpacesMembersList =
+  SpacesMembersList'
     { _smlParent         :: !Text
     , _smlXgafv          :: !(Maybe Xgafv)
     , _smlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data SpacesMembersList = SpacesMembersList'
     , _smlPageToken      :: !(Maybe Text)
     , _smlPageSize       :: !(Maybe (Textual Int32))
     , _smlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpacesMembersList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ spacesMembersList
     :: Text -- ^ 'smlParent'
     -> SpacesMembersList
 spacesMembersList pSmlParent_ =
-    SpacesMembersList'
+  SpacesMembersList'
     { _smlParent = pSmlParent_
     , _smlXgafv = Nothing
     , _smlUploadProtocol = Nothing
@@ -109,6 +112,7 @@ spacesMembersList pSmlParent_ =
     , _smlPageSize = Nothing
     , _smlCallback = Nothing
     }
+
 
 -- | Required. The resource name of the space for which membership list is to
 -- be fetched, in the form \"spaces\/*\". Example: spaces\/AAAAMpdlehY

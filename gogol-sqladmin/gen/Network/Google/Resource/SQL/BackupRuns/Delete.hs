@@ -57,11 +57,14 @@ type BackupRunsDeleteResource =
 -- | Deletes the backup taken by a backup run.
 --
 -- /See:/ 'backupRunsDelete' smart constructor.
-data BackupRunsDelete = BackupRunsDelete'
+data BackupRunsDelete =
+  BackupRunsDelete'
     { _brdProject  :: !Text
     , _brdId       :: !(Textual Int64)
     , _brdInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackupRunsDelete' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ backupRunsDelete
     -> Text -- ^ 'brdInstance'
     -> BackupRunsDelete
 backupRunsDelete pBrdProject_ pBrdId_ pBrdInstance_ =
-    BackupRunsDelete'
+  BackupRunsDelete'
     { _brdProject = pBrdProject_
     , _brdId = _Coerce # pBrdId_
     , _brdInstance = pBrdInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 brdProject :: Lens' BackupRunsDelete Text

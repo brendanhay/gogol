@@ -54,9 +54,12 @@ type UsersPhotosDeleteResource =
 -- | Remove photos for the user
 --
 -- /See:/ 'usersPhotosDelete' smart constructor.
-newtype UsersPhotosDelete = UsersPhotosDelete'
+newtype UsersPhotosDelete =
+  UsersPhotosDelete'
     { _updUserKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersPhotosDelete' with the minimum fields required to make a request.
 --
@@ -66,10 +69,8 @@ newtype UsersPhotosDelete = UsersPhotosDelete'
 usersPhotosDelete
     :: Text -- ^ 'updUserKey'
     -> UsersPhotosDelete
-usersPhotosDelete pUpdUserKey_ =
-    UsersPhotosDelete'
-    { _updUserKey = pUpdUserKey_
-    }
+usersPhotosDelete pUpdUserKey_ = UsersPhotosDelete' {_updUserKey = pUpdUserKey_}
+
 
 -- | Email or immutable ID of the user
 updUserKey :: Lens' UsersPhotosDelete Text

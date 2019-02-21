@@ -54,9 +54,12 @@ type RelyingPartyDownloadAccountResource =
 -- | Batch download user accounts.
 --
 -- /See:/ 'relyingPartyDownloadAccount' smart constructor.
-newtype RelyingPartyDownloadAccount = RelyingPartyDownloadAccount'
+newtype RelyingPartyDownloadAccount =
+  RelyingPartyDownloadAccount'
     { _rpdaPayload :: IdentitytoolkitRelyingPartyDownloadAccountRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelyingPartyDownloadAccount' with the minimum fields required to make a request.
 --
@@ -67,9 +70,8 @@ relyingPartyDownloadAccount
     :: IdentitytoolkitRelyingPartyDownloadAccountRequest -- ^ 'rpdaPayload'
     -> RelyingPartyDownloadAccount
 relyingPartyDownloadAccount pRpdaPayload_ =
-    RelyingPartyDownloadAccount'
-    { _rpdaPayload = pRpdaPayload_
-    }
+  RelyingPartyDownloadAccount' {_rpdaPayload = pRpdaPayload_}
+
 
 -- | Multipart request metadata.
 rpdaPayload :: Lens' RelyingPartyDownloadAccount IdentitytoolkitRelyingPartyDownloadAccountRequest

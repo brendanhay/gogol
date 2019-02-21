@@ -89,7 +89,8 @@ type UsersCreateCompanyRelationResource =
 -- | Creates a user\'s company relation. Affiliates the user to a company.
 --
 -- /See:/ 'usersCreateCompanyRelation' smart constructor.
-data UsersCreateCompanyRelation = UsersCreateCompanyRelation'
+data UsersCreateCompanyRelation =
+  UsersCreateCompanyRelation'
     { _uccrXgafv                                       :: !(Maybe Xgafv)
     , _uccrUploadProtocol                              :: !(Maybe Text)
     , _uccrAccessToken                                 :: !(Maybe Text)
@@ -104,7 +105,9 @@ data UsersCreateCompanyRelation = UsersCreateCompanyRelation'
     , _uccrRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _uccrRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _uccrCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersCreateCompanyRelation' with the minimum fields required to make a request.
 --
@@ -142,7 +145,7 @@ usersCreateCompanyRelation
     -> Text -- ^ 'uccrUserId'
     -> UsersCreateCompanyRelation
 usersCreateCompanyRelation pUccrPayload_ pUccrUserId_ =
-    UsersCreateCompanyRelation'
+  UsersCreateCompanyRelation'
     { _uccrXgafv = Nothing
     , _uccrUploadProtocol = Nothing
     , _uccrAccessToken = Nothing
@@ -158,6 +161,7 @@ usersCreateCompanyRelation pUccrPayload_ pUccrUserId_ =
     , _uccrRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _uccrCallback = Nothing
     }
+
 
 -- | V1 error format.
 uccrXgafv :: Lens' UsersCreateCompanyRelation (Maybe Xgafv)

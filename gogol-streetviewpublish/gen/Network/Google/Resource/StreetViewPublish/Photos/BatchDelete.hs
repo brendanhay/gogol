@@ -73,14 +73,17 @@ type PhotosBatchDeleteResource =
 -- that can occur per photo.
 --
 -- /See:/ 'photosBatchDelete' smart constructor.
-data PhotosBatchDelete = PhotosBatchDelete'
+data PhotosBatchDelete =
+  PhotosBatchDelete'
     { _pbdXgafv          :: !(Maybe Xgafv)
     , _pbdUploadProtocol :: !(Maybe Text)
     , _pbdAccessToken    :: !(Maybe Text)
     , _pbdUploadType     :: !(Maybe Text)
     , _pbdPayload        :: !BatchDeletePhotosRequest
     , _pbdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotosBatchDelete' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ photosBatchDelete
     :: BatchDeletePhotosRequest -- ^ 'pbdPayload'
     -> PhotosBatchDelete
 photosBatchDelete pPbdPayload_ =
-    PhotosBatchDelete'
+  PhotosBatchDelete'
     { _pbdXgafv = Nothing
     , _pbdUploadProtocol = Nothing
     , _pbdAccessToken = Nothing
@@ -109,6 +112,7 @@ photosBatchDelete pPbdPayload_ =
     , _pbdPayload = pPbdPayload_
     , _pbdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbdXgafv :: Lens' PhotosBatchDelete (Maybe Xgafv)

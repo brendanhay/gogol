@@ -72,7 +72,8 @@ type CoursesAliasesListResource =
 -- if the course does not exist.
 --
 -- /See:/ 'coursesAliasesList' smart constructor.
-data CoursesAliasesList = CoursesAliasesList'
+data CoursesAliasesList =
+  CoursesAliasesList'
     { _calaXgafv          :: !(Maybe Xgafv)
     , _calaUploadProtocol :: !(Maybe Text)
     , _calaCourseId       :: !Text
@@ -81,7 +82,9 @@ data CoursesAliasesList = CoursesAliasesList'
     , _calaPageToken      :: !(Maybe Text)
     , _calaPageSize       :: !(Maybe (Textual Int32))
     , _calaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesAliasesList' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ coursesAliasesList
     :: Text -- ^ 'calaCourseId'
     -> CoursesAliasesList
 coursesAliasesList pCalaCourseId_ =
-    CoursesAliasesList'
+  CoursesAliasesList'
     { _calaXgafv = Nothing
     , _calaUploadProtocol = Nothing
     , _calaCourseId = pCalaCourseId_
@@ -116,6 +119,7 @@ coursesAliasesList pCalaCourseId_ =
     , _calaPageSize = Nothing
     , _calaCallback = Nothing
     }
+
 
 -- | V1 error format.
 calaXgafv :: Lens' CoursesAliasesList (Maybe Xgafv)

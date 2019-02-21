@@ -58,11 +58,14 @@ type SeriesMembershipGetResource =
 -- | Returns Series membership data given the series id.
 --
 -- /See:/ 'seriesMembershipGet' smart constructor.
-data SeriesMembershipGet = SeriesMembershipGet'
+data SeriesMembershipGet =
+  SeriesMembershipGet'
     { _smgPageToken :: !(Maybe Text)
     , _smgPageSize  :: !(Maybe (Textual Word32))
     , _smgSeriesId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SeriesMembershipGet' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ seriesMembershipGet
     :: Text -- ^ 'smgSeriesId'
     -> SeriesMembershipGet
 seriesMembershipGet pSmgSeriesId_ =
-    SeriesMembershipGet'
+  SeriesMembershipGet'
     { _smgPageToken = Nothing
     , _smgPageSize = Nothing
     , _smgSeriesId = pSmgSeriesId_
     }
+
 
 -- | The value of the nextToken from the previous page.
 smgPageToken :: Lens' SeriesMembershipGet (Maybe Text)

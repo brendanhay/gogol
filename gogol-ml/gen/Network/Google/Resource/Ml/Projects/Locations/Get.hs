@@ -62,14 +62,17 @@ type ProjectsLocationsGetResource =
 -- their location-specific properties.
 --
 -- /See:/ 'projectsLocationsGet' smart constructor.
-data ProjectsLocationsGet = ProjectsLocationsGet'
+data ProjectsLocationsGet =
+  ProjectsLocationsGet'
     { _plgXgafv          :: !(Maybe Xgafv)
     , _plgUploadProtocol :: !(Maybe Text)
     , _plgAccessToken    :: !(Maybe Text)
     , _plgUploadType     :: !(Maybe Text)
     , _plgName           :: !Text
     , _plgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsGet' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ projectsLocationsGet
     :: Text -- ^ 'plgName'
     -> ProjectsLocationsGet
 projectsLocationsGet pPlgName_ =
-    ProjectsLocationsGet'
+  ProjectsLocationsGet'
     { _plgXgafv = Nothing
     , _plgUploadProtocol = Nothing
     , _plgAccessToken = Nothing
@@ -98,6 +101,7 @@ projectsLocationsGet pPlgName_ =
     , _plgName = pPlgName_
     , _plgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plgXgafv :: Lens' ProjectsLocationsGet (Maybe Xgafv)

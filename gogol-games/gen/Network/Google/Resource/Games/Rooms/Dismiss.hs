@@ -54,9 +54,12 @@ type RoomsDismissResource =
 -- only. Calling this method directly is unsupported.
 --
 -- /See:/ 'roomsDismiss' smart constructor.
-newtype RoomsDismiss = RoomsDismiss'
+newtype RoomsDismiss =
+  RoomsDismiss'
     { _rdRoomId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomsDismiss' with the minimum fields required to make a request.
 --
@@ -66,10 +69,8 @@ newtype RoomsDismiss = RoomsDismiss'
 roomsDismiss
     :: Text -- ^ 'rdRoomId'
     -> RoomsDismiss
-roomsDismiss pRdRoomId_ =
-    RoomsDismiss'
-    { _rdRoomId = pRdRoomId_
-    }
+roomsDismiss pRdRoomId_ = RoomsDismiss' {_rdRoomId = pRdRoomId_}
+
 
 -- | The ID of the room.
 rdRoomId :: Lens' RoomsDismiss Text
@@ -78,7 +79,8 @@ rdRoomId = lens _rdRoomId (\ s a -> s{_rdRoomId = a})
 instance GoogleRequest RoomsDismiss where
         type Rs RoomsDismiss = ()
         type Scopes RoomsDismiss =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient RoomsDismiss'{..}
           = go _rdRoomId (Just AltJSON) gamesService
           where go

@@ -69,7 +69,8 @@ type AppsFirewallIngressRulesListResource =
 -- | Lists the firewall rules of an application.
 --
 -- /See:/ 'appsFirewallIngressRulesList' smart constructor.
-data AppsFirewallIngressRulesList = AppsFirewallIngressRulesList'
+data AppsFirewallIngressRulesList =
+  AppsFirewallIngressRulesList'
     { _afirlXgafv           :: !(Maybe Xgafv)
     , _afirlUploadProtocol  :: !(Maybe Text)
     , _afirlMatchingAddress :: !(Maybe Text)
@@ -79,7 +80,9 @@ data AppsFirewallIngressRulesList = AppsFirewallIngressRulesList'
     , _afirlPageToken       :: !(Maybe Text)
     , _afirlPageSize        :: !(Maybe (Textual Int32))
     , _afirlCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsFirewallIngressRulesList' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ appsFirewallIngressRulesList
     :: Text -- ^ 'afirlAppsId'
     -> AppsFirewallIngressRulesList
 appsFirewallIngressRulesList pAfirlAppsId_ =
-    AppsFirewallIngressRulesList'
+  AppsFirewallIngressRulesList'
     { _afirlXgafv = Nothing
     , _afirlUploadProtocol = Nothing
     , _afirlMatchingAddress = Nothing
@@ -117,6 +120,7 @@ appsFirewallIngressRulesList pAfirlAppsId_ =
     , _afirlPageSize = Nothing
     , _afirlCallback = Nothing
     }
+
 
 -- | V1 error format.
 afirlXgafv :: Lens' AppsFirewallIngressRulesList (Maybe Xgafv)

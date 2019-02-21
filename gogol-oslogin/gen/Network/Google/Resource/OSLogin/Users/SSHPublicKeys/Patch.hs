@@ -23,7 +23,7 @@
 -- Updates an SSH public key and returns the profile information. This
 -- method supports patch semantics.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.patch@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.patch@.
 module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Patch
     (
     -- * REST Resource
@@ -66,7 +66,8 @@ type UsersSSHPublicKeysPatchResource =
 -- method supports patch semantics.
 --
 -- /See:/ 'usersSSHPublicKeysPatch' smart constructor.
-data UsersSSHPublicKeysPatch = UsersSSHPublicKeysPatch'
+data UsersSSHPublicKeysPatch =
+  UsersSSHPublicKeysPatch'
     { _uspkpXgafv          :: !(Maybe Xgafv)
     , _uspkpUploadProtocol :: !(Maybe Text)
     , _uspkpUpdateMask     :: !(Maybe GFieldMask)
@@ -75,7 +76,9 @@ data UsersSSHPublicKeysPatch = UsersSSHPublicKeysPatch'
     , _uspkpPayload        :: !SSHPublicKey
     , _uspkpName           :: !Text
     , _uspkpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSSHPublicKeysPatch' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ usersSSHPublicKeysPatch
     -> Text -- ^ 'uspkpName'
     -> UsersSSHPublicKeysPatch
 usersSSHPublicKeysPatch pUspkpPayload_ pUspkpName_ =
-    UsersSSHPublicKeysPatch'
+  UsersSSHPublicKeysPatch'
     { _uspkpXgafv = Nothing
     , _uspkpUploadProtocol = Nothing
     , _uspkpUpdateMask = Nothing
@@ -111,6 +114,7 @@ usersSSHPublicKeysPatch pUspkpPayload_ pUspkpName_ =
     , _uspkpName = pUspkpName_
     , _uspkpCallback = Nothing
     }
+
 
 -- | V1 error format.
 uspkpXgafv :: Lens' UsersSSHPublicKeysPatch (Maybe Xgafv)

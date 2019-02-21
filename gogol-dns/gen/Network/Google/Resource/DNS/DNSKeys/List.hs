@@ -62,13 +62,16 @@ type DNSKeysListResource =
 -- | Enumerate DnsKeys to a ResourceRecordSet collection.
 --
 -- /See:/ 'dnsKeysList' smart constructor.
-data DNSKeysList = DNSKeysList'
+data DNSKeysList =
+  DNSKeysList'
     { _dklProject     :: !Text
     , _dklDigestType  :: !(Maybe Text)
     , _dklPageToken   :: !(Maybe Text)
     , _dklManagedZone :: !Text
     , _dklMaxResults  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DNSKeysList' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ dnsKeysList
     -> Text -- ^ 'dklManagedZone'
     -> DNSKeysList
 dnsKeysList pDklProject_ pDklManagedZone_ =
-    DNSKeysList'
+  DNSKeysList'
     { _dklProject = pDklProject_
     , _dklDigestType = Nothing
     , _dklPageToken = Nothing
     , _dklManagedZone = pDklManagedZone_
     , _dklMaxResults = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 dklProject :: Lens' DNSKeysList Text

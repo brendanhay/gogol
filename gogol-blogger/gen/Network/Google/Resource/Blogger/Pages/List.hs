@@ -62,14 +62,17 @@ type PagesListResource =
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --
 -- /See:/ 'pagesList' smart constructor.
-data PagesList = PagesList'
+data PagesList =
+  PagesList'
     { _plStatus      :: !(Maybe [PagesListStatus])
     , _plBlogId      :: !Text
     , _plFetchBodies :: !(Maybe Bool)
     , _plView        :: !(Maybe PagesListView)
     , _plPageToken   :: !(Maybe Text)
     , _plMaxResults  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagesList' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ pagesList
     :: Text -- ^ 'plBlogId'
     -> PagesList
 pagesList pPlBlogId_ =
-    PagesList'
+  PagesList'
     { _plStatus = Nothing
     , _plBlogId = pPlBlogId_
     , _plFetchBodies = Nothing
@@ -98,6 +101,7 @@ pagesList pPlBlogId_ =
     , _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
+
 
 plStatus :: Lens' PagesList [PagesListStatus]
 plStatus

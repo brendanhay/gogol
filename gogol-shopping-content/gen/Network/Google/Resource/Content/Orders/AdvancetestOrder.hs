@@ -57,10 +57,13 @@ type OrdersAdvancetestOrderResource =
 -- \"pendingShipment\".
 --
 -- /See:/ 'ordersAdvancetestOrder' smart constructor.
-data OrdersAdvancetestOrder = OrdersAdvancetestOrder'
+data OrdersAdvancetestOrder =
+  OrdersAdvancetestOrder'
     { _oaoMerchantId :: !(Textual Word64)
     , _oaoOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersAdvancetestOrder' with the minimum fields required to make a request.
 --
@@ -74,10 +77,9 @@ ordersAdvancetestOrder
     -> Text -- ^ 'oaoOrderId'
     -> OrdersAdvancetestOrder
 ordersAdvancetestOrder pOaoMerchantId_ pOaoOrderId_ =
-    OrdersAdvancetestOrder'
-    { _oaoMerchantId = _Coerce # pOaoMerchantId_
-    , _oaoOrderId = pOaoOrderId_
-    }
+  OrdersAdvancetestOrder'
+    {_oaoMerchantId = _Coerce # pOaoMerchantId_, _oaoOrderId = pOaoOrderId_}
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

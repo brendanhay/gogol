@@ -82,4 +82,4 @@ groupsSettingsService
 
 -- | View and manage the settings of a G Suite group
 appsGroupsSettingsScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.settings"]
-appsGroupsSettingsScope = Proxy;
+appsGroupsSettingsScope = Proxy

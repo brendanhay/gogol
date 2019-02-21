@@ -56,10 +56,13 @@ type UsersSettingsUpdateVacationResource =
 -- | Updates vacation responder settings.
 --
 -- /See:/ 'usersSettingsUpdateVacation' smart constructor.
-data UsersSettingsUpdateVacation = UsersSettingsUpdateVacation'
+data UsersSettingsUpdateVacation =
+  UsersSettingsUpdateVacation'
     { _usuvPayload :: !VacationSettings
     , _usuvUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsUpdateVacation' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ usersSettingsUpdateVacation
     :: VacationSettings -- ^ 'usuvPayload'
     -> UsersSettingsUpdateVacation
 usersSettingsUpdateVacation pUsuvPayload_ =
-    UsersSettingsUpdateVacation'
-    { _usuvPayload = pUsuvPayload_
-    , _usuvUserId = "me"
-    }
+  UsersSettingsUpdateVacation'
+    {_usuvPayload = pUsuvPayload_, _usuvUserId = "me"}
+
 
 -- | Multipart request metadata.
 usuvPayload :: Lens' UsersSettingsUpdateVacation VacationSettings

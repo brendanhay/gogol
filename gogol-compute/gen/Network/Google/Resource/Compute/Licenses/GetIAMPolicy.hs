@@ -58,10 +58,13 @@ type LicensesGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'licensesGetIAMPolicy' smart constructor.
-data LicensesGetIAMPolicy = LicensesGetIAMPolicy'
+data LicensesGetIAMPolicy =
+  LicensesGetIAMPolicy'
     { _lgipProject  :: !Text
     , _lgipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LicensesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ licensesGetIAMPolicy
     -> Text -- ^ 'lgipResource'
     -> LicensesGetIAMPolicy
 licensesGetIAMPolicy pLgipProject_ pLgipResource_ =
-    LicensesGetIAMPolicy'
-    { _lgipProject = pLgipProject_
-    , _lgipResource = pLgipResource_
-    }
+  LicensesGetIAMPolicy'
+    {_lgipProject = pLgipProject_, _lgipResource = pLgipResource_}
+
 
 -- | Project ID for this request.
 lgipProject :: Lens' LicensesGetIAMPolicy Text

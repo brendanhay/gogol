@@ -80,13 +80,16 @@ type RegionInstanceGroupManagersResizeResource =
 -- instance is removed or deleted.
 --
 -- /See:/ 'regionInstanceGroupManagersResize' smart constructor.
-data RegionInstanceGroupManagersResize = RegionInstanceGroupManagersResize'
+data RegionInstanceGroupManagersResize =
+  RegionInstanceGroupManagersResize'
     { _rigmrRequestId            :: !(Maybe Text)
     , _rigmrProject              :: !Text
     , _rigmrSize                 :: !(Textual Int32)
     , _rigmrInstanceGroupManager :: !Text
     , _rigmrRegion               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionInstanceGroupManagersResize' with the minimum fields required to make a request.
 --
@@ -108,13 +111,14 @@ regionInstanceGroupManagersResize
     -> Text -- ^ 'rigmrRegion'
     -> RegionInstanceGroupManagersResize
 regionInstanceGroupManagersResize pRigmrProject_ pRigmrSize_ pRigmrInstanceGroupManager_ pRigmrRegion_ =
-    RegionInstanceGroupManagersResize'
+  RegionInstanceGroupManagersResize'
     { _rigmrRequestId = Nothing
     , _rigmrProject = pRigmrProject_
     , _rigmrSize = _Coerce # pRigmrSize_
     , _rigmrInstanceGroupManager = pRigmrInstanceGroupManager_
     , _rigmrRegion = pRigmrRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -154,7 +158,8 @@ rigmrRegion
   = lens _rigmrRegion (\ s a -> s{_rigmrRegion = a})
 
 instance GoogleRequest
-         RegionInstanceGroupManagersResize where
+           RegionInstanceGroupManagersResize
+         where
         type Rs RegionInstanceGroupManagersResize = Operation
         type Scopes RegionInstanceGroupManagersResize =
              '["https://www.googleapis.com/auth/cloud-platform",

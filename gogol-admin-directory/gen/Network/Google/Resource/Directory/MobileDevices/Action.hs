@@ -59,11 +59,14 @@ type MobileDevicesActionResource =
 -- | Take action on Mobile Device
 --
 -- /See:/ 'mobileDevicesAction' smart constructor.
-data MobileDevicesAction = MobileDevicesAction'
+data MobileDevicesAction =
+  MobileDevicesAction'
     { _mdaResourceId :: !Text
     , _mdaPayload    :: !MobileDeviceAction
     , _mdaCustomerId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MobileDevicesAction' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ mobileDevicesAction
     -> Text -- ^ 'mdaCustomerId'
     -> MobileDevicesAction
 mobileDevicesAction pMdaResourceId_ pMdaPayload_ pMdaCustomerId_ =
-    MobileDevicesAction'
+  MobileDevicesAction'
     { _mdaResourceId = pMdaResourceId_
     , _mdaPayload = pMdaPayload_
     , _mdaCustomerId = pMdaCustomerId_
     }
+
 
 -- | Immutable ID of Mobile Device
 mdaResourceId :: Lens' MobileDevicesAction Text

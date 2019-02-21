@@ -69,13 +69,16 @@ type DisksInsertResource =
 -- the sizeGb property.
 --
 -- /See:/ 'disksInsert' smart constructor.
-data DisksInsert = DisksInsert'
+data DisksInsert =
+  DisksInsert'
     { _diRequestId   :: !(Maybe Text)
     , _diSourceImage :: !(Maybe Text)
     , _diProject     :: !Text
     , _diZone        :: !Text
     , _diPayload     :: !Disk
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisksInsert' with the minimum fields required to make a request.
 --
@@ -96,13 +99,14 @@ disksInsert
     -> Disk -- ^ 'diPayload'
     -> DisksInsert
 disksInsert pDiProject_ pDiZone_ pDiPayload_ =
-    DisksInsert'
+  DisksInsert'
     { _diRequestId = Nothing
     , _diSourceImage = Nothing
     , _diProject = pDiProject_
     , _diZone = pDiZone_
     , _diPayload = pDiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

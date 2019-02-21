@@ -55,10 +55,13 @@ type LiveChatMessagesInsertResource =
 -- | Adds a message to a live chat.
 --
 -- /See:/ 'liveChatMessagesInsert' smart constructor.
-data LiveChatMessagesInsert = LiveChatMessagesInsert'
+data LiveChatMessagesInsert =
+  LiveChatMessagesInsert'
     { _lcmiPart    :: !Text
     , _lcmiPayload :: !LiveChatMessage
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveChatMessagesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ liveChatMessagesInsert
     -> LiveChatMessage -- ^ 'lcmiPayload'
     -> LiveChatMessagesInsert
 liveChatMessagesInsert pLcmiPart_ pLcmiPayload_ =
-    LiveChatMessagesInsert'
-    { _lcmiPart = pLcmiPart_
-    , _lcmiPayload = pLcmiPayload_
-    }
+  LiveChatMessagesInsert' {_lcmiPart = pLcmiPart_, _lcmiPayload = pLcmiPayload_}
+
 
 -- | The part parameter serves two purposes. It identifies the properties
 -- that the write operation will set as well as the properties that the API

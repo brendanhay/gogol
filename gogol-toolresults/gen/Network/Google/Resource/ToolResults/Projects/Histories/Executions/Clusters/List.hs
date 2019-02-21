@@ -72,11 +72,14 @@ type ProjectsHistoriesExecutionsClustersListResource
 -- scores.
 --
 -- /See:/ 'projectsHistoriesExecutionsClustersList' smart constructor.
-data ProjectsHistoriesExecutionsClustersList = ProjectsHistoriesExecutionsClustersList'
+data ProjectsHistoriesExecutionsClustersList =
+  ProjectsHistoriesExecutionsClustersList'
     { _pheclExecutionId :: !Text
     , _pheclHistoryId   :: !Text
     , _pheclProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsClustersList' with the minimum fields required to make a request.
 --
@@ -93,11 +96,12 @@ projectsHistoriesExecutionsClustersList
     -> Text -- ^ 'pheclProjectId'
     -> ProjectsHistoriesExecutionsClustersList
 projectsHistoriesExecutionsClustersList pPheclExecutionId_ pPheclHistoryId_ pPheclProjectId_ =
-    ProjectsHistoriesExecutionsClustersList'
+  ProjectsHistoriesExecutionsClustersList'
     { _pheclExecutionId = pPheclExecutionId_
     , _pheclHistoryId = pPheclHistoryId_
     , _pheclProjectId = pPheclProjectId_
     }
+
 
 -- | An Execution id. Required.
 pheclExecutionId :: Lens' ProjectsHistoriesExecutionsClustersList Text
@@ -118,7 +122,8 @@ pheclProjectId
       (\ s a -> s{_pheclProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsClustersList where
+           ProjectsHistoriesExecutionsClustersList
+         where
         type Rs ProjectsHistoriesExecutionsClustersList =
              ListScreenshotClustersResponse
         type Scopes ProjectsHistoriesExecutionsClustersList =

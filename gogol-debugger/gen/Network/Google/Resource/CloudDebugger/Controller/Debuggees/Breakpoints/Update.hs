@@ -79,7 +79,8 @@ type ControllerDebuggeesBreakpointsUpdateResource =
 -- location to the correct line of code.
 --
 -- /See:/ 'controllerDebuggeesBreakpointsUpdate' smart constructor.
-data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate'
+data ControllerDebuggeesBreakpointsUpdate =
+  ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv          :: !(Maybe Xgafv)
     , _cdbuUploadProtocol :: !(Maybe Text)
     , _cdbuAccessToken    :: !(Maybe Text)
@@ -88,7 +89,9 @@ data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate
     , _cdbuId             :: !Text
     , _cdbuDebuggeeId     :: !Text
     , _cdbuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ControllerDebuggeesBreakpointsUpdate' with the minimum fields required to make a request.
 --
@@ -115,7 +118,7 @@ controllerDebuggeesBreakpointsUpdate
     -> Text -- ^ 'cdbuDebuggeeId'
     -> ControllerDebuggeesBreakpointsUpdate
 controllerDebuggeesBreakpointsUpdate pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
-    ControllerDebuggeesBreakpointsUpdate'
+  ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv = Nothing
     , _cdbuUploadProtocol = Nothing
     , _cdbuAccessToken = Nothing
@@ -125,6 +128,7 @@ controllerDebuggeesBreakpointsUpdate pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
     , _cdbuDebuggeeId = pCdbuDebuggeeId_
     , _cdbuCallback = Nothing
     }
+
 
 -- | V1 error format.
 cdbuXgafv :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Xgafv)
@@ -170,7 +174,8 @@ cdbuCallback
   = lens _cdbuCallback (\ s a -> s{_cdbuCallback = a})
 
 instance GoogleRequest
-         ControllerDebuggeesBreakpointsUpdate where
+           ControllerDebuggeesBreakpointsUpdate
+         where
         type Rs ControllerDebuggeesBreakpointsUpdate =
              UpdateActiveBreakpointResponse
         type Scopes ControllerDebuggeesBreakpointsUpdate =

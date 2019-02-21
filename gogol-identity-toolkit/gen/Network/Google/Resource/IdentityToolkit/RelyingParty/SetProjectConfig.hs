@@ -56,9 +56,12 @@ type RelyingPartySetProjectConfigResource =
 -- | Set project configuration.
 --
 -- /See:/ 'relyingPartySetProjectConfig' smart constructor.
-newtype RelyingPartySetProjectConfig = RelyingPartySetProjectConfig'
+newtype RelyingPartySetProjectConfig =
+  RelyingPartySetProjectConfig'
     { _rpspcPayload :: IdentitytoolkitRelyingPartySetProjectConfigRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelyingPartySetProjectConfig' with the minimum fields required to make a request.
 --
@@ -69,9 +72,8 @@ relyingPartySetProjectConfig
     :: IdentitytoolkitRelyingPartySetProjectConfigRequest -- ^ 'rpspcPayload'
     -> RelyingPartySetProjectConfig
 relyingPartySetProjectConfig pRpspcPayload_ =
-    RelyingPartySetProjectConfig'
-    { _rpspcPayload = pRpspcPayload_
-    }
+  RelyingPartySetProjectConfig' {_rpspcPayload = pRpspcPayload_}
+
 
 -- | Multipart request metadata.
 rpspcPayload :: Lens' RelyingPartySetProjectConfig IdentitytoolkitRelyingPartySetProjectConfigRequest

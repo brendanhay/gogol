@@ -53,10 +53,13 @@ type AccountsGetResource =
 -- | Get information about the selected AdSense account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet'
+data AccountsGet =
+  AccountsGet'
     { _agTree      :: !(Maybe Bool)
     , _agAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
@@ -69,10 +72,8 @@ accountsGet
     :: Text -- ^ 'agAccountId'
     -> AccountsGet
 accountsGet pAgAccountId_ =
-    AccountsGet'
-    { _agTree = Nothing
-    , _agAccountId = pAgAccountId_
-    }
+  AccountsGet' {_agTree = Nothing, _agAccountId = pAgAccountId_}
+
 
 -- | Whether the tree of sub accounts should be returned.
 agTree :: Lens' AccountsGet (Maybe Bool)

@@ -53,10 +53,13 @@ type CirclesUpdateResource =
 -- | Update a circle\'s description.
 --
 -- /See:/ 'circlesUpdate' smart constructor.
-data CirclesUpdate = CirclesUpdate'
+data CirclesUpdate =
+  CirclesUpdate'
     { _cuPayload  :: !Circle
     , _cuCircleId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CirclesUpdate' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ circlesUpdate
     -> Text -- ^ 'cuCircleId'
     -> CirclesUpdate
 circlesUpdate pCuPayload_ pCuCircleId_ =
-    CirclesUpdate'
-    { _cuPayload = pCuPayload_
-    , _cuCircleId = pCuCircleId_
-    }
+  CirclesUpdate' {_cuPayload = pCuPayload_, _cuCircleId = pCuCircleId_}
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' CirclesUpdate Circle

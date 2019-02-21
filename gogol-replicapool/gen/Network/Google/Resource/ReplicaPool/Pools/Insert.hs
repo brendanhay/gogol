@@ -57,11 +57,14 @@ type PoolsInsertResource =
 -- | Inserts a new replica pool.
 --
 -- /See:/ 'poolsInsert' smart constructor.
-data PoolsInsert = PoolsInsert'
+data PoolsInsert =
+  PoolsInsert'
     { _piZone        :: !Text
     , _piPayload     :: !Pool
     , _piProjectName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PoolsInsert' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ poolsInsert
     -> Text -- ^ 'piProjectName'
     -> PoolsInsert
 poolsInsert pPiZone_ pPiPayload_ pPiProjectName_ =
-    PoolsInsert'
+  PoolsInsert'
     { _piZone = pPiZone_
     , _piPayload = pPiPayload_
     , _piProjectName = pPiProjectName_
     }
+
 
 -- | The zone for this replica pool.
 piZone :: Lens' PoolsInsert Text

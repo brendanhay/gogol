@@ -85,7 +85,8 @@ type ProjectsInstancesDatabasesOperationsListResource
 -- id.
 --
 -- /See:/ 'projectsInstancesDatabasesOperationsList' smart constructor.
-data ProjectsInstancesDatabasesOperationsList = ProjectsInstancesDatabasesOperationsList'
+data ProjectsInstancesDatabasesOperationsList =
+  ProjectsInstancesDatabasesOperationsList'
     { _pidolXgafv          :: !(Maybe Xgafv)
     , _pidolUploadProtocol :: !(Maybe Text)
     , _pidolAccessToken    :: !(Maybe Text)
@@ -95,7 +96,9 @@ data ProjectsInstancesDatabasesOperationsList = ProjectsInstancesDatabasesOperat
     , _pidolPageToken      :: !(Maybe Text)
     , _pidolPageSize       :: !(Maybe (Textual Int32))
     , _pidolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesOperationsList' with the minimum fields required to make a request.
 --
@@ -122,7 +125,7 @@ projectsInstancesDatabasesOperationsList
     :: Text -- ^ 'pidolName'
     -> ProjectsInstancesDatabasesOperationsList
 projectsInstancesDatabasesOperationsList pPidolName_ =
-    ProjectsInstancesDatabasesOperationsList'
+  ProjectsInstancesDatabasesOperationsList'
     { _pidolXgafv = Nothing
     , _pidolUploadProtocol = Nothing
     , _pidolAccessToken = Nothing
@@ -133,6 +136,7 @@ projectsInstancesDatabasesOperationsList pPidolName_ =
     , _pidolPageSize = Nothing
     , _pidolCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidolXgafv :: Lens' ProjectsInstancesDatabasesOperationsList (Maybe Xgafv)
@@ -187,7 +191,8 @@ pidolCallback
       (\ s a -> s{_pidolCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesOperationsList where
+           ProjectsInstancesDatabasesOperationsList
+         where
         type Rs ProjectsInstancesDatabasesOperationsList =
              ListOperationsResponse
         type Scopes ProjectsInstancesDatabasesOperationsList

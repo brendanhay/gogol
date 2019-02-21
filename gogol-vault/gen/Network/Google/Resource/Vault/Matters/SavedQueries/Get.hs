@@ -63,7 +63,8 @@ type MattersSavedQueriesGetResource =
 -- | Retrieves a saved query by Id.
 --
 -- /See:/ 'mattersSavedQueriesGet' smart constructor.
-data MattersSavedQueriesGet = MattersSavedQueriesGet'
+data MattersSavedQueriesGet =
+  MattersSavedQueriesGet'
     { _msqgXgafv          :: !(Maybe Xgafv)
     , _msqgSavedQueryId   :: !Text
     , _msqgUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data MattersSavedQueriesGet = MattersSavedQueriesGet'
     , _msqgUploadType     :: !(Maybe Text)
     , _msqgMatterId       :: !Text
     , _msqgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersSavedQueriesGet' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ mattersSavedQueriesGet
     -> Text -- ^ 'msqgMatterId'
     -> MattersSavedQueriesGet
 mattersSavedQueriesGet pMsqgSavedQueryId_ pMsqgMatterId_ =
-    MattersSavedQueriesGet'
+  MattersSavedQueriesGet'
     { _msqgXgafv = Nothing
     , _msqgSavedQueryId = pMsqgSavedQueryId_
     , _msqgUploadProtocol = Nothing
@@ -104,6 +107,7 @@ mattersSavedQueriesGet pMsqgSavedQueryId_ pMsqgMatterId_ =
     , _msqgMatterId = pMsqgMatterId_
     , _msqgCallback = Nothing
     }
+
 
 -- | V1 error format.
 msqgXgafv :: Lens' MattersSavedQueriesGet (Maybe Xgafv)

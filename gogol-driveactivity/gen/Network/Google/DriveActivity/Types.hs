@@ -383,8 +383,8 @@ driveActivityService
 
 -- | View the activity record of files in your Google Drive
 driveActivityReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.activity.readonly"]
-driveActivityReadOnlyScope = Proxy;
+driveActivityReadOnlyScope = Proxy
 
 -- | View and add to the activity record of files in your Google Drive
 driveActivityScope :: Proxy '["https://www.googleapis.com/auth/drive.activity"]
-driveActivityScope = Proxy;
+driveActivityScope = Proxy

@@ -211,4 +211,4 @@ doubleClickSearchService
 
 -- | View and manage your advertising data in DoubleClick Search
 doubleClickSearchScope :: Proxy '["https://www.googleapis.com/auth/doubleclicksearch"]
-doubleClickSearchScope = Proxy;
+doubleClickSearchScope = Proxy

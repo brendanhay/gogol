@@ -55,11 +55,14 @@ type AccountsPatchResource =
 -- | Updates an existing account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
-data AccountsPatch = AccountsPatch'
+data AccountsPatch =
+  AccountsPatch'
     { _apPayload                    :: !Account
     , _apConfirmUnsafeAccountChange :: !(Maybe Bool)
     , _apId                         :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ accountsPatch
     -> Int32 -- ^ 'apId'
     -> AccountsPatch
 accountsPatch pApPayload_ pApId_ =
-    AccountsPatch'
+  AccountsPatch'
     { _apPayload = pApPayload_
     , _apConfirmUnsafeAccountChange = Nothing
     , _apId = _Coerce # pApId_
     }
+
 
 -- | Multipart request metadata.
 apPayload :: Lens' AccountsPatch Account

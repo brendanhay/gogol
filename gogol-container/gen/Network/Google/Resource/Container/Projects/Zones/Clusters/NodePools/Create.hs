@@ -70,7 +70,8 @@ type ProjectsZonesClustersNodePoolsCreateResource =
 -- | Creates a node pool for a cluster.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsCreate' smart constructor.
-data ProjectsZonesClustersNodePoolsCreate = ProjectsZonesClustersNodePoolsCreate'
+data ProjectsZonesClustersNodePoolsCreate =
+  ProjectsZonesClustersNodePoolsCreate'
     { _pzcnpcXgafv          :: !(Maybe Xgafv)
     , _pzcnpcUploadProtocol :: !(Maybe Text)
     , _pzcnpcAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsZonesClustersNodePoolsCreate = ProjectsZonesClustersNodePoolsCreate
     , _pzcnpcClusterId      :: !Text
     , _pzcnpcProjectId      :: !Text
     , _pzcnpcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsCreate' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsZonesClustersNodePoolsCreate
     -> Text -- ^ 'pzcnpcProjectId'
     -> ProjectsZonesClustersNodePoolsCreate
 projectsZonesClustersNodePoolsCreate pPzcnpcZone_ pPzcnpcPayload_ pPzcnpcClusterId_ pPzcnpcProjectId_ =
-    ProjectsZonesClustersNodePoolsCreate'
+  ProjectsZonesClustersNodePoolsCreate'
     { _pzcnpcXgafv = Nothing
     , _pzcnpcUploadProtocol = Nothing
     , _pzcnpcAccessToken = Nothing
@@ -121,6 +124,7 @@ projectsZonesClustersNodePoolsCreate pPzcnpcZone_ pPzcnpcPayload_ pPzcnpcCluster
     , _pzcnpcProjectId = pPzcnpcProjectId_
     , _pzcnpcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpcXgafv :: Lens' ProjectsZonesClustersNodePoolsCreate (Maybe Xgafv)
@@ -180,7 +184,8 @@ pzcnpcCallback
       (\ s a -> s{_pzcnpcCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersNodePoolsCreate where
+           ProjectsZonesClustersNodePoolsCreate
+         where
         type Rs ProjectsZonesClustersNodePoolsCreate =
              Operation
         type Scopes ProjectsZonesClustersNodePoolsCreate =

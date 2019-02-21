@@ -23,10 +23,13 @@ import           Network.Google.Prelude
 -- | Response message for an alert listing request.
 --
 -- /See:/ 'listAlertsResponse' smart constructor.
-data ListAlertsResponse = ListAlertsResponse'
+data ListAlertsResponse =
+  ListAlertsResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larAlerts        :: !(Maybe [Alert])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAlertsResponse' with the minimum fields required to make a request.
 --
@@ -38,10 +41,8 @@ data ListAlertsResponse = ListAlertsResponse'
 listAlertsResponse
     :: ListAlertsResponse
 listAlertsResponse =
-    ListAlertsResponse'
-    { _larNextPageToken = Nothing
-    , _larAlerts = Nothing
-    }
+  ListAlertsResponse' {_larNextPageToken = Nothing, _larAlerts = Nothing}
+
 
 -- | The token for the next page. If not empty, indicates that there may be
 -- more alerts that match the listing request; this value can be used in a
@@ -77,9 +78,12 @@ instance ToJSON ListAlertsResponse where
 -- | A representation of a single data row in a CSV file.
 --
 -- /See:/ 'csvRow' smart constructor.
-newtype CSVRow = CSVRow'
+newtype CSVRow =
+  CSVRow'
     { _crEntries :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CSVRow' with the minimum fields required to make a request.
 --
@@ -88,10 +92,8 @@ newtype CSVRow = CSVRow'
 -- * 'crEntries'
 csvRow
     :: CSVRow
-csvRow =
-    CSVRow'
-    { _crEntries = Nothing
-    }
+csvRow = CSVRow' {_crEntries = Nothing}
+
 
 -- | The data entries in a CSV file row, as a string array rather than a
 -- single comma-separated string.
@@ -113,14 +115,17 @@ instance ToJSON CSVRow where
 -- | A customer feedback about an alert.
 --
 -- /See:/ 'alertFeedback' smart constructor.
-data AlertFeedback = AlertFeedback'
+data AlertFeedback =
+  AlertFeedback'
     { _afFeedbackId :: !(Maybe Text)
     , _afEmail      :: !(Maybe Text)
     , _afAlertId    :: !(Maybe Text)
     , _afCustomerId :: !(Maybe Text)
     , _afType       :: !(Maybe AlertFeedbackType)
     , _afCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AlertFeedback' with the minimum fields required to make a request.
 --
@@ -140,7 +145,7 @@ data AlertFeedback = AlertFeedback'
 alertFeedback
     :: AlertFeedback
 alertFeedback =
-    AlertFeedback'
+  AlertFeedback'
     { _afFeedbackId = Nothing
     , _afEmail = Nothing
     , _afAlertId = Nothing
@@ -148,6 +153,7 @@ alertFeedback =
     , _afType = Nothing
     , _afCreateTime = Nothing
     }
+
 
 -- | Output only. The unique identifier for the feedback.
 afFeedbackId :: Lens' AlertFeedback (Maybe Text)
@@ -204,10 +210,13 @@ instance ToJSON AlertFeedback where
 -- | A mobile device compromised alert. Derived from audit logs.
 --
 -- /See:/ 'deviceCompromised' smart constructor.
-data DeviceCompromised = DeviceCompromised'
+data DeviceCompromised =
+  DeviceCompromised'
     { _dcEmail  :: !(Maybe Text)
     , _dcEvents :: !(Maybe [DeviceCompromisedSecurityDetail])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceCompromised' with the minimum fields required to make a request.
 --
@@ -218,11 +227,8 @@ data DeviceCompromised = DeviceCompromised'
 -- * 'dcEvents'
 deviceCompromised
     :: DeviceCompromised
-deviceCompromised =
-    DeviceCompromised'
-    { _dcEmail = Nothing
-    , _dcEvents = Nothing
-    }
+deviceCompromised = DeviceCompromised' {_dcEmail = Nothing, _dcEvents = Nothing}
+
 
 -- | The email of the user this alert was created for.
 dcEmail :: Lens' DeviceCompromised (Maybe Text)
@@ -252,9 +258,12 @@ instance ToJSON DeviceCompromised where
 -- | A state-sponsored attack alert. Derived from audit logs.
 --
 -- /See:/ 'stateSponsoredAttack' smart constructor.
-newtype StateSponsoredAttack = StateSponsoredAttack'
+newtype StateSponsoredAttack =
+  StateSponsoredAttack'
     { _ssaEmail :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StateSponsoredAttack' with the minimum fields required to make a request.
 --
@@ -263,10 +272,8 @@ newtype StateSponsoredAttack = StateSponsoredAttack'
 -- * 'ssaEmail'
 stateSponsoredAttack
     :: StateSponsoredAttack
-stateSponsoredAttack =
-    StateSponsoredAttack'
-    { _ssaEmail = Nothing
-    }
+stateSponsoredAttack = StateSponsoredAttack' {_ssaEmail = Nothing}
+
 
 -- | The email of the user this incident was created for.
 ssaEmail :: Lens' StateSponsoredAttack (Maybe Text)
@@ -285,12 +292,15 @@ instance ToJSON StateSponsoredAttack where
 -- whitelisted domain or IP in Gmail advanced settings.
 --
 -- /See:/ 'badWhiteList' smart constructor.
-data BadWhiteList = BadWhiteList'
+data BadWhiteList =
+  BadWhiteList'
     { _bwlSourceIP        :: !(Maybe Text)
     , _bwlDomainId        :: !(Maybe DomainId)
     , _bwlMessages        :: !(Maybe [GmailMessageInfo])
     , _bwlMaliciousEntity :: !(Maybe MaliciousEntity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BadWhiteList' with the minimum fields required to make a request.
 --
@@ -306,12 +316,13 @@ data BadWhiteList = BadWhiteList'
 badWhiteList
     :: BadWhiteList
 badWhiteList =
-    BadWhiteList'
+  BadWhiteList'
     { _bwlSourceIP = Nothing
     , _bwlDomainId = Nothing
     , _bwlMessages = Nothing
     , _bwlMaliciousEntity = Nothing
     }
+
 
 -- | The source IP address of the malicious email, for example,
 -- \`127.0.0.1\`.
@@ -358,7 +369,8 @@ instance ToJSON BadWhiteList where
 -- | Detailed information of a single MDM suspicious activity event.
 --
 -- /See:/ 'suspiciousActivitySecurityDetail' smart constructor.
-data SuspiciousActivitySecurityDetail = SuspiciousActivitySecurityDetail'
+data SuspiciousActivitySecurityDetail =
+  SuspiciousActivitySecurityDetail'
     { _sasdDeviceProperty :: !(Maybe Text)
     , _sasdResourceId     :: !(Maybe Text)
     , _sasdIosVendorId    :: !(Maybe Text)
@@ -368,7 +380,9 @@ data SuspiciousActivitySecurityDetail = SuspiciousActivitySecurityDetail'
     , _sasdDeviceId       :: !(Maybe Text)
     , _sasdDeviceType     :: !(Maybe Text)
     , _sasdSerialNumber   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SuspiciousActivitySecurityDetail' with the minimum fields required to make a request.
 --
@@ -394,7 +408,7 @@ data SuspiciousActivitySecurityDetail = SuspiciousActivitySecurityDetail'
 suspiciousActivitySecurityDetail
     :: SuspiciousActivitySecurityDetail
 suspiciousActivitySecurityDetail =
-    SuspiciousActivitySecurityDetail'
+  SuspiciousActivitySecurityDetail'
     { _sasdDeviceProperty = Nothing
     , _sasdResourceId = Nothing
     , _sasdIosVendorId = Nothing
@@ -405,6 +419,7 @@ suspiciousActivitySecurityDetail =
     , _sasdDeviceType = Nothing
     , _sasdSerialNumber = Nothing
     }
+
 
 -- | The device property which was changed.
 sasdDeviceProperty :: Lens' SuspiciousActivitySecurityDetail (Maybe Text)
@@ -495,14 +510,16 @@ instance ToJSON SuspiciousActivitySecurityDetail
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -513,9 +530,12 @@ instance ToJSON Empty where
 -- | A request to undelete a specific alert that was marked for deletion.
 --
 -- /See:/ 'undeleteAlertRequest' smart constructor.
-newtype UndeleteAlertRequest = UndeleteAlertRequest'
+newtype UndeleteAlertRequest =
+  UndeleteAlertRequest'
     { _uarCustomerId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UndeleteAlertRequest' with the minimum fields required to make a request.
 --
@@ -524,10 +544,8 @@ newtype UndeleteAlertRequest = UndeleteAlertRequest'
 -- * 'uarCustomerId'
 undeleteAlertRequest
     :: UndeleteAlertRequest
-undeleteAlertRequest =
-    UndeleteAlertRequest'
-    { _uarCustomerId = Nothing
-    }
+undeleteAlertRequest = UndeleteAlertRequest' {_uarCustomerId = Nothing}
+
 
 -- | Optional. The unique identifier of the G Suite organization account of
 -- the customer the alert is associated with. Inferred from the caller
@@ -551,9 +569,12 @@ instance ToJSON UndeleteAlertRequest where
 -- | Customer-level settings.
 --
 -- /See:/ 'settings' smart constructor.
-newtype Settings = Settings'
+newtype Settings =
+  Settings'
     { _sNotifications :: Maybe [Notification]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Settings' with the minimum fields required to make a request.
 --
@@ -562,10 +583,8 @@ newtype Settings = Settings'
 -- * 'sNotifications'
 settings
     :: Settings
-settings =
-    Settings'
-    { _sNotifications = Nothing
-    }
+settings = Settings' {_sNotifications = Nothing}
+
 
 -- | The list of notifications.
 sNotifications :: Lens' Settings [Notification]
@@ -591,9 +610,12 @@ instance ToJSON Settings where
 -- Notification](\/admin-sdk\/alertcenter\/guides\/notifications).
 --
 -- /See:/ 'notification' smart constructor.
-newtype Notification = Notification'
+newtype Notification =
+  Notification'
     { _nCloudPubsubTopic :: Maybe CloudPubsubTopic
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
@@ -602,10 +624,8 @@ newtype Notification = Notification'
 -- * 'nCloudPubsubTopic'
 notification
     :: Notification
-notification =
-    Notification'
-    { _nCloudPubsubTopic = Nothing
-    }
+notification = Notification' {_nCloudPubsubTopic = Nothing}
+
 
 -- | A Google Cloud Pub\/sub topic destination.
 nCloudPubsubTopic :: Lens' Notification (Maybe CloudPubsubTopic)
@@ -627,10 +647,13 @@ instance ToJSON Notification where
 -- | Alerts for user account warning events.
 --
 -- /See:/ 'accountWarning' smart constructor.
-data AccountWarning = AccountWarning'
+data AccountWarning =
+  AccountWarning'
     { _awEmail        :: !(Maybe Text)
     , _awLoginDetails :: !(Maybe LoginDetails)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountWarning' with the minimum fields required to make a request.
 --
@@ -641,11 +664,8 @@ data AccountWarning = AccountWarning'
 -- * 'awLoginDetails'
 accountWarning
     :: AccountWarning
-accountWarning =
-    AccountWarning'
-    { _awEmail = Nothing
-    , _awLoginDetails = Nothing
-    }
+accountWarning = AccountWarning' {_awEmail = Nothing, _awLoginDetails = Nothing}
+
 
 -- | Required. The email of the user that this event belongs to.
 awEmail :: Lens' AccountWarning (Maybe Text)
@@ -653,7 +673,8 @@ awEmail = lens _awEmail (\ s a -> s{_awEmail = a})
 
 -- | Optional. Details of the login action associated with the warning event.
 -- This is only available for: * Suspicious login * Suspicious login (less
--- secure app) * User suspended (suspicious activity)
+-- secure app) * Suspicious programmatic login * User suspended (suspicious
+-- activity)
 awLoginDetails :: Lens' AccountWarning (Maybe LoginDetails)
 awLoginDetails
   = lens _awLoginDetails
@@ -679,12 +700,15 @@ instance ToJSON AccountWarning where
 -- Malware reclassification
 --
 -- /See:/ 'mailPhishing' smart constructor.
-data MailPhishing = MailPhishing'
+data MailPhishing =
+  MailPhishing'
     { _mpIsInternal      :: !(Maybe Bool)
     , _mpDomainId        :: !(Maybe DomainId)
     , _mpMessages        :: !(Maybe [GmailMessageInfo])
     , _mpMaliciousEntity :: !(Maybe MaliciousEntity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MailPhishing' with the minimum fields required to make a request.
 --
@@ -700,12 +724,13 @@ data MailPhishing = MailPhishing'
 mailPhishing
     :: MailPhishing
 mailPhishing =
-    MailPhishing'
+  MailPhishing'
     { _mpIsInternal = Nothing
     , _mpDomainId = Nothing
     , _mpMessages = Nothing
     , _mpMaliciousEntity = Nothing
     }
+
 
 -- | If \`true\`, the email originated from within the organization.
 mpIsInternal :: Lens' MailPhishing (Maybe Bool)
@@ -751,7 +776,8 @@ instance ToJSON MailPhishing where
 -- | Details of a message in phishing spike alert.
 --
 -- /See:/ 'gmailMessageInfo' smart constructor.
-data GmailMessageInfo = GmailMessageInfo'
+data GmailMessageInfo =
+  GmailMessageInfo'
     { _gmiMD5HashSubject        :: !(Maybe Text)
     , _gmiSubjectText           :: !(Maybe Text)
     , _gmiDate                  :: !(Maybe DateTime')
@@ -760,7 +786,9 @@ data GmailMessageInfo = GmailMessageInfo'
     , _gmiRecipient             :: !(Maybe Text)
     , _gmiMessageBodySnippet    :: !(Maybe Text)
     , _gmiMessageId             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GmailMessageInfo' with the minimum fields required to make a request.
 --
@@ -784,7 +812,7 @@ data GmailMessageInfo = GmailMessageInfo'
 gmailMessageInfo
     :: GmailMessageInfo
 gmailMessageInfo =
-    GmailMessageInfo'
+  GmailMessageInfo'
     { _gmiMD5HashSubject = Nothing
     , _gmiSubjectText = Nothing
     , _gmiDate = Nothing
@@ -794,6 +822,7 @@ gmailMessageInfo =
     , _gmiMessageBodySnippet = Nothing
     , _gmiMessageId = Nothing
     }
+
 
 -- | The MD5 Hash of email\'s subject (only available for reported emails).
 gmiMD5HashSubject :: Lens' GmailMessageInfo (Maybe Text)
@@ -875,9 +904,12 @@ instance ToJSON GmailMessageInfo where
 -- google.apps.alertcenter.type.DeviceCompromised.
 --
 -- /See:/ 'alertData' smart constructor.
-newtype AlertData = AlertData'
+newtype AlertData =
+  AlertData'
     { _adAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AlertData' with the minimum fields required to make a request.
 --
@@ -887,10 +919,8 @@ newtype AlertData = AlertData'
 alertData
     :: HashMap Text JSONValue -- ^ 'adAddtional'
     -> AlertData
-alertData pAdAddtional_ =
-    AlertData'
-    { _adAddtional = _Coerce # pAdAddtional_
-    }
+alertData pAdAddtional_ = AlertData' {_adAddtional = _Coerce # pAdAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 adAddtional :: Lens' AlertData (HashMap Text JSONValue)
@@ -912,12 +942,15 @@ instance ToJSON AlertData where
 -- instead.
 --
 -- /See:/ 'phishingSpike' smart constructor.
-data PhishingSpike = PhishingSpike'
+data PhishingSpike =
+  PhishingSpike'
     { _psIsInternal      :: !(Maybe Bool)
     , _psDomainId        :: !(Maybe DomainId)
     , _psMessages        :: !(Maybe [GmailMessageInfo])
     , _psMaliciousEntity :: !(Maybe MaliciousEntity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhishingSpike' with the minimum fields required to make a request.
 --
@@ -933,12 +966,13 @@ data PhishingSpike = PhishingSpike'
 phishingSpike
     :: PhishingSpike
 phishingSpike =
-    PhishingSpike'
+  PhishingSpike'
     { _psIsInternal = Nothing
     , _psDomainId = Nothing
     , _psMessages = Nothing
     , _psMaliciousEntity = Nothing
     }
+
 
 -- | If \`true\`, the email originated from within the organization.
 psIsInternal :: Lens' PhishingSpike (Maybe Bool)
@@ -985,10 +1019,13 @@ instance ToJSON PhishingSpike where
 -- and a list of data rows.
 --
 -- /See:/ 'csv' smart constructor.
-data CSV = CSV'
+data CSV =
+  CSV'
     { _cDataRows :: !(Maybe [CSVRow])
     , _cHeaders  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CSV' with the minimum fields required to make a request.
 --
@@ -999,11 +1036,8 @@ data CSV = CSV'
 -- * 'cHeaders'
 csv
     :: CSV
-csv =
-    CSV'
-    { _cDataRows = Nothing
-    , _cHeaders = Nothing
-    }
+csv = CSV' {_cDataRows = Nothing, _cHeaders = Nothing}
+
 
 -- | The list of data rows in a CSV file, as string arrays rather than as a
 -- single comma-separated string.
@@ -1035,10 +1069,11 @@ instance ToJSON CSV where
                  [("dataRows" .=) <$> _cDataRows,
                   ("headers" .=) <$> _cHeaders])
 
--- | An alert affecting a customer. All fields are read-only once created.
+-- | An alert affecting a customer.
 --
 -- /See:/ 'alert' smart constructor.
-data Alert = Alert'
+data Alert =
+  Alert'
     { _aStartTime                     :: !(Maybe DateTime')
     , _aData                          :: !(Maybe AlertData)
     , _aAlertId                       :: !(Maybe Text)
@@ -1049,7 +1084,9 @@ data Alert = Alert'
     , _aDeleted                       :: !(Maybe Bool)
     , _aType                          :: !(Maybe Text)
     , _aCreateTime                    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Alert' with the minimum fields required to make a request.
 --
@@ -1077,7 +1114,7 @@ data Alert = Alert'
 alert
     :: Alert
 alert =
-    Alert'
+  Alert'
     { _aStartTime = Nothing
     , _aData = Nothing
     , _aAlertId = Nothing
@@ -1089,6 +1126,7 @@ alert =
     , _aType = Nothing
     , _aCreateTime = Nothing
     }
+
 
 -- | Required. The time the event that caused this alert was started or
 -- detected.
@@ -1129,9 +1167,10 @@ aEndTime
       mapping _DateTime
 
 -- | Required. A unique identifier for the system that reported the alert.
--- Supported sources are any of the following: * Google Operations * Mobile
--- device management * Gmail phishing * Domain wide takeout * Government
--- attack warning * Google identity
+-- This is output only after alert is created. Supported sources are any of
+-- the following: * Google Operations * Mobile device management * Gmail
+-- phishing * Domain wide takeout * Government attack warning * Google
+-- identity
 aSource :: Lens' Alert (Maybe Text)
 aSource = lens _aSource (\ s a -> s{_aSource = a})
 
@@ -1139,8 +1178,9 @@ aSource = lens _aSource (\ s a -> s{_aSource = a})
 aDeleted :: Lens' Alert (Maybe Bool)
 aDeleted = lens _aDeleted (\ s a -> s{_aDeleted = a})
 
--- | Required. The type of the alert. For a list of available alert types see
--- [G Suite Alert types](\/admin-sdk\/alertcenter\/reference\/alert-types).
+-- | Required. The type of the alert. This is output only after alert is
+-- created. For a list of available alert types see [G Suite Alert
+-- types](\/admin-sdk\/alertcenter\/reference\/alert-types).
 aType :: Lens' Alert (Maybe Text)
 aType = lens _aType (\ s a -> s{_aType = a})
 
@@ -1182,9 +1222,12 @@ instance ToJSON Alert where
 -- | Attachment with application-specific information about an alert.
 --
 -- /See:/ 'attachment' smart constructor.
-newtype Attachment = Attachment'
+newtype Attachment =
+  Attachment'
     { _aCSV :: Maybe CSV
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Attachment' with the minimum fields required to make a request.
 --
@@ -1193,10 +1236,8 @@ newtype Attachment = Attachment'
 -- * 'aCSV'
 attachment
     :: Attachment
-attachment =
-    Attachment'
-    { _aCSV = Nothing
-    }
+attachment = Attachment' {_aCSV = Nothing}
+
 
 -- | A CSV file attachment.
 aCSV :: Lens' Attachment (Maybe CSV)
@@ -1211,15 +1252,88 @@ instance ToJSON Attachment where
         toJSON Attachment'{..}
           = object (catMaybes [("csv" .=) <$> _aCSV])
 
+-- | Requests for one application that needs default SQL setup.
+--
+-- /See:/ 'requestInfo' smart constructor.
+data RequestInfo =
+  RequestInfo'
+    { _riNumberOfRequests  :: !(Maybe (Textual Int64))
+    , _riAppDeveloperEmail :: !(Maybe [Text])
+    , _riAppName           :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RequestInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riNumberOfRequests'
+--
+-- * 'riAppDeveloperEmail'
+--
+-- * 'riAppName'
+requestInfo
+    :: RequestInfo
+requestInfo =
+  RequestInfo'
+    { _riNumberOfRequests = Nothing
+    , _riAppDeveloperEmail = Nothing
+    , _riAppName = Nothing
+    }
+
+
+-- | Required. Number of requests sent for this application to set up default
+-- SQL instance.
+riNumberOfRequests :: Lens' RequestInfo (Maybe Int64)
+riNumberOfRequests
+  = lens _riNumberOfRequests
+      (\ s a -> s{_riNumberOfRequests = a})
+      . mapping _Coerce
+
+-- | List of app developers who triggered notifications for above
+-- application.
+riAppDeveloperEmail :: Lens' RequestInfo [Text]
+riAppDeveloperEmail
+  = lens _riAppDeveloperEmail
+      (\ s a -> s{_riAppDeveloperEmail = a})
+      . _Default
+      . _Coerce
+
+-- | Required. The application that requires the SQL setup.
+riAppName :: Lens' RequestInfo (Maybe Text)
+riAppName
+  = lens _riAppName (\ s a -> s{_riAppName = a})
+
+instance FromJSON RequestInfo where
+        parseJSON
+          = withObject "RequestInfo"
+              (\ o ->
+                 RequestInfo' <$>
+                   (o .:? "numberOfRequests") <*>
+                     (o .:? "appDeveloperEmail" .!= mempty)
+                     <*> (o .:? "appName"))
+
+instance ToJSON RequestInfo where
+        toJSON RequestInfo'{..}
+          = object
+              (catMaybes
+                 [("numberOfRequests" .=) <$> _riNumberOfRequests,
+                  ("appDeveloperEmail" .=) <$> _riAppDeveloperEmail,
+                  ("appName" .=) <$> _riAppName])
+
 -- | An incident reported by Google Operations for a G Suite application.
 --
 -- /See:/ 'googleOperations' smart constructor.
-data GoogleOperations = GoogleOperations'
+data GoogleOperations =
+  GoogleOperations'
     { _goAttachmentData     :: !(Maybe Attachment)
     , _goAffectedUserEmails :: !(Maybe [Text])
     , _goTitle              :: !(Maybe Text)
     , _goDescription        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleOperations' with the minimum fields required to make a request.
 --
@@ -1235,12 +1349,13 @@ data GoogleOperations = GoogleOperations'
 googleOperations
     :: GoogleOperations
 googleOperations =
-    GoogleOperations'
+  GoogleOperations'
     { _goAttachmentData = Nothing
     , _goAffectedUserEmails = Nothing
     , _goTitle = Nothing
     , _goDescription = Nothing
     }
+
 
 -- | Optional. Application-specific data for an incident, provided when the G
 -- Suite application which reported the incident cannot be completely
@@ -1291,10 +1406,13 @@ instance ToJSON GoogleOperations where
 -- | A mobile suspicious activity alert. Derived from audit logs.
 --
 -- /See:/ 'suspiciousActivity' smart constructor.
-data SuspiciousActivity = SuspiciousActivity'
+data SuspiciousActivity =
+  SuspiciousActivity'
     { _saEmail  :: !(Maybe Text)
     , _saEvents :: !(Maybe [SuspiciousActivitySecurityDetail])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SuspiciousActivity' with the minimum fields required to make a request.
 --
@@ -1306,10 +1424,8 @@ data SuspiciousActivity = SuspiciousActivity'
 suspiciousActivity
     :: SuspiciousActivity
 suspiciousActivity =
-    SuspiciousActivity'
-    { _saEmail = Nothing
-    , _saEvents = Nothing
-    }
+  SuspiciousActivity' {_saEmail = Nothing, _saEvents = Nothing}
+
 
 -- | The email of the user this alert was created for.
 saEmail :: Lens' SuspiciousActivity (Maybe Text)
@@ -1336,14 +1452,59 @@ instance ToJSON SuspiciousActivity where
                  [("email" .=) <$> _saEmail,
                   ("events" .=) <$> _saEvents])
 
+-- | Alerts from App Maker to notify admins to set up default SQL instance.
+--
+-- /See:/ 'appMakerSQLSetupNotification' smart constructor.
+newtype AppMakerSQLSetupNotification =
+  AppMakerSQLSetupNotification'
+    { _amsqlsnRequestInfo :: Maybe [RequestInfo]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AppMakerSQLSetupNotification' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'amsqlsnRequestInfo'
+appMakerSQLSetupNotification
+    :: AppMakerSQLSetupNotification
+appMakerSQLSetupNotification =
+  AppMakerSQLSetupNotification' {_amsqlsnRequestInfo = Nothing}
+
+
+-- | List of applications with requests for default SQL set up.
+amsqlsnRequestInfo :: Lens' AppMakerSQLSetupNotification [RequestInfo]
+amsqlsnRequestInfo
+  = lens _amsqlsnRequestInfo
+      (\ s a -> s{_amsqlsnRequestInfo = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AppMakerSQLSetupNotification where
+        parseJSON
+          = withObject "AppMakerSQLSetupNotification"
+              (\ o ->
+                 AppMakerSQLSetupNotification' <$>
+                   (o .:? "requestInfo" .!= mempty))
+
+instance ToJSON AppMakerSQLSetupNotification where
+        toJSON AppMakerSQLSetupNotification'{..}
+          = object
+              (catMaybes
+                 [("requestInfo" .=) <$> _amsqlsnRequestInfo])
+
 -- | A takeout operation for the entire domain was initiated by an admin.
 -- Derived from audit logs.
 --
 -- /See:/ 'domainWideTakeoutInitiated' smart constructor.
-data DomainWideTakeoutInitiated = DomainWideTakeoutInitiated'
+data DomainWideTakeoutInitiated =
+  DomainWideTakeoutInitiated'
     { _dwtiEmail            :: !(Maybe Text)
     , _dwtiTakeoutRequestId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DomainWideTakeoutInitiated' with the minimum fields required to make a request.
 --
@@ -1355,10 +1516,9 @@ data DomainWideTakeoutInitiated = DomainWideTakeoutInitiated'
 domainWideTakeoutInitiated
     :: DomainWideTakeoutInitiated
 domainWideTakeoutInitiated =
-    DomainWideTakeoutInitiated'
-    { _dwtiEmail = Nothing
-    , _dwtiTakeoutRequestId = Nothing
-    }
+  DomainWideTakeoutInitiated'
+    {_dwtiEmail = Nothing, _dwtiTakeoutRequestId = Nothing}
+
 
 -- | The email of the admin who initiated the takeout.
 dwtiEmail :: Lens' DomainWideTakeoutInitiated (Maybe Text)
@@ -1388,9 +1548,12 @@ instance ToJSON DomainWideTakeoutInitiated where
 -- | Domain ID of Gmail phishing alerts.
 --
 -- /See:/ 'domainId' smart constructor.
-newtype DomainId = DomainId'
+newtype DomainId =
+  DomainId'
     { _diCustomerPrimaryDomain :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DomainId' with the minimum fields required to make a request.
 --
@@ -1399,10 +1562,8 @@ newtype DomainId = DomainId'
 -- * 'diCustomerPrimaryDomain'
 domainId
     :: DomainId
-domainId =
-    DomainId'
-    { _diCustomerPrimaryDomain = Nothing
-    }
+domainId = DomainId' {_diCustomerPrimaryDomain = Nothing}
+
 
 -- | The primary domain for the customer.
 diCustomerPrimaryDomain :: Lens' DomainId (Maybe Text)
@@ -1426,7 +1587,8 @@ instance ToJSON DomainId where
 -- | Detailed information of a single MDM device compromised event.
 --
 -- /See:/ 'deviceCompromisedSecurityDetail' smart constructor.
-data DeviceCompromisedSecurityDetail = DeviceCompromisedSecurityDetail'
+data DeviceCompromisedSecurityDetail =
+  DeviceCompromisedSecurityDetail'
     { _dcsdResourceId             :: !(Maybe Text)
     , _dcsdDeviceCompromisedState :: !(Maybe Text)
     , _dcsdIosVendorId            :: !(Maybe Text)
@@ -1434,7 +1596,9 @@ data DeviceCompromisedSecurityDetail = DeviceCompromisedSecurityDetail'
     , _dcsdDeviceId               :: !(Maybe Text)
     , _dcsdDeviceType             :: !(Maybe Text)
     , _dcsdSerialNumber           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceCompromisedSecurityDetail' with the minimum fields required to make a request.
 --
@@ -1456,7 +1620,7 @@ data DeviceCompromisedSecurityDetail = DeviceCompromisedSecurityDetail'
 deviceCompromisedSecurityDetail
     :: DeviceCompromisedSecurityDetail
 deviceCompromisedSecurityDetail =
-    DeviceCompromisedSecurityDetail'
+  DeviceCompromisedSecurityDetail'
     { _dcsdResourceId = Nothing
     , _dcsdDeviceCompromisedState = Nothing
     , _dcsdIosVendorId = Nothing
@@ -1465,6 +1629,7 @@ deviceCompromisedSecurityDetail =
     , _dcsdDeviceType = Nothing
     , _dcsdSerialNumber = Nothing
     }
+
 
 -- | The device resource ID.
 dcsdResourceId :: Lens' DeviceCompromisedSecurityDetail (Maybe Text)
@@ -1541,10 +1706,13 @@ instance ToJSON DeviceCompromisedSecurityDetail where
 -- \`projects.topics.publish\` permission.
 --
 -- /See:/ 'cloudPubsubTopic' smart constructor.
-data CloudPubsubTopic = CloudPubsubTopic'
+data CloudPubsubTopic =
+  CloudPubsubTopic'
     { _cptTopicName     :: !(Maybe Text)
     , _cptPayloadFormat :: !(Maybe CloudPubsubTopicPayloadFormat)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudPubsubTopic' with the minimum fields required to make a request.
 --
@@ -1556,10 +1724,8 @@ data CloudPubsubTopic = CloudPubsubTopic'
 cloudPubsubTopic
     :: CloudPubsubTopic
 cloudPubsubTopic =
-    CloudPubsubTopic'
-    { _cptTopicName = Nothing
-    , _cptPayloadFormat = Nothing
-    }
+  CloudPubsubTopic' {_cptTopicName = Nothing, _cptPayloadFormat = Nothing}
+
 
 -- | The \`name\` field of a Cloud Pubsub [Topic]
 -- (https:\/\/cloud.google.com\/pubsub\/docs\/reference\/rest\/v1\/projects.topics#Topic).
@@ -1591,9 +1757,12 @@ instance ToJSON CloudPubsubTopic where
 -- | Response message for an alert feedback listing request.
 --
 -- /See:/ 'listAlertFeedbackResponse' smart constructor.
-newtype ListAlertFeedbackResponse = ListAlertFeedbackResponse'
+newtype ListAlertFeedbackResponse =
+  ListAlertFeedbackResponse'
     { _lafrFeedback :: Maybe [AlertFeedback]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAlertFeedbackResponse' with the minimum fields required to make a request.
 --
@@ -1602,10 +1771,8 @@ newtype ListAlertFeedbackResponse = ListAlertFeedbackResponse'
 -- * 'lafrFeedback'
 listAlertFeedbackResponse
     :: ListAlertFeedbackResponse
-listAlertFeedbackResponse =
-    ListAlertFeedbackResponse'
-    { _lafrFeedback = Nothing
-    }
+listAlertFeedbackResponse = ListAlertFeedbackResponse' {_lafrFeedback = Nothing}
+
 
 -- | The list of alert feedback. Feedback entries for each alert are ordered
 -- by creation time descending.
@@ -1630,10 +1797,13 @@ instance ToJSON ListAlertFeedbackResponse where
 -- | The details of the login action.
 --
 -- /See:/ 'loginDetails' smart constructor.
-data LoginDetails = LoginDetails'
+data LoginDetails =
+  LoginDetails'
     { _ldIPAddress :: !(Maybe Text)
     , _ldLoginTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LoginDetails' with the minimum fields required to make a request.
 --
@@ -1644,11 +1814,8 @@ data LoginDetails = LoginDetails'
 -- * 'ldLoginTime'
 loginDetails
     :: LoginDetails
-loginDetails =
-    LoginDetails'
-    { _ldIPAddress = Nothing
-    , _ldLoginTime = Nothing
-    }
+loginDetails = LoginDetails' {_ldIPAddress = Nothing, _ldLoginTime = Nothing}
+
 
 -- | Optional. The human-readable IP address (for example, \`11.22.33.44\`)
 -- that is associated with the warning event.
@@ -1680,9 +1847,12 @@ instance ToJSON LoginDetails where
 -- | Entity whose actions triggered a Gmail phishing alert.
 --
 -- /See:/ 'maliciousEntity' smart constructor.
-newtype MaliciousEntity = MaliciousEntity'
+newtype MaliciousEntity =
+  MaliciousEntity'
     { _meFromHeader :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MaliciousEntity' with the minimum fields required to make a request.
 --
@@ -1691,10 +1861,8 @@ newtype MaliciousEntity = MaliciousEntity'
 -- * 'meFromHeader'
 maliciousEntity
     :: MaliciousEntity
-maliciousEntity =
-    MaliciousEntity'
-    { _meFromHeader = Nothing
-    }
+maliciousEntity = MaliciousEntity' {_meFromHeader = Nothing}
+
 
 -- | The sender email address.
 meFromHeader :: Lens' MaliciousEntity (Maybe Text)

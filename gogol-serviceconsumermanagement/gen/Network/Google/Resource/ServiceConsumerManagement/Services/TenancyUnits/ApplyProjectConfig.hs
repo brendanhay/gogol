@@ -29,9 +29,10 @@
 -- activated. No service will be deactivated. New billing configuration
 -- will be applied if specified. Omit billing configuration to keep the
 -- existing one. Service account in the project will be created if
--- previously non existing. Operation fails if any of the steps fail, but
--- no rollback of already applied configuration changes is attempted.
--- Operation.
+-- previously non existing. Specified folder will be ignored, moving tenant
+-- project to a different folder is not supported. Operation fails if any
+-- of the steps fail, but no rollback of already applied configuration
+-- changes is attempted. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.applyProjectConfig@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
@@ -79,12 +80,14 @@ type ServicesTenancyUnitsApplyProjectConfigResource =
 -- activated. No service will be deactivated. New billing configuration
 -- will be applied if specified. Omit billing configuration to keep the
 -- existing one. Service account in the project will be created if
--- previously non existing. Operation fails if any of the steps fail, but
--- no rollback of already applied configuration changes is attempted.
--- Operation.
+-- previously non existing. Specified folder will be ignored, moving tenant
+-- project to a different folder is not supported. Operation fails if any
+-- of the steps fail, but no rollback of already applied configuration
+-- changes is attempted. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsApplyProjectConfig' smart constructor.
-data ServicesTenancyUnitsApplyProjectConfig = ServicesTenancyUnitsApplyProjectConfig'
+data ServicesTenancyUnitsApplyProjectConfig =
+  ServicesTenancyUnitsApplyProjectConfig'
     { _stuapcXgafv          :: !(Maybe Xgafv)
     , _stuapcUploadProtocol :: !(Maybe Text)
     , _stuapcAccessToken    :: !(Maybe Text)
@@ -92,7 +95,9 @@ data ServicesTenancyUnitsApplyProjectConfig = ServicesTenancyUnitsApplyProjectCo
     , _stuapcPayload        :: !ApplyTenantProjectConfigRequest
     , _stuapcName           :: !Text
     , _stuapcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesTenancyUnitsApplyProjectConfig' with the minimum fields required to make a request.
 --
@@ -116,7 +121,7 @@ servicesTenancyUnitsApplyProjectConfig
     -> Text -- ^ 'stuapcName'
     -> ServicesTenancyUnitsApplyProjectConfig
 servicesTenancyUnitsApplyProjectConfig pStuapcPayload_ pStuapcName_ =
-    ServicesTenancyUnitsApplyProjectConfig'
+  ServicesTenancyUnitsApplyProjectConfig'
     { _stuapcXgafv = Nothing
     , _stuapcUploadProtocol = Nothing
     , _stuapcAccessToken = Nothing
@@ -125,6 +130,7 @@ servicesTenancyUnitsApplyProjectConfig pStuapcPayload_ pStuapcName_ =
     , _stuapcName = pStuapcName_
     , _stuapcCallback = Nothing
     }
+
 
 -- | V1 error format.
 stuapcXgafv :: Lens' ServicesTenancyUnitsApplyProjectConfig (Maybe Xgafv)
@@ -167,7 +173,8 @@ stuapcCallback
       (\ s a -> s{_stuapcCallback = a})
 
 instance GoogleRequest
-         ServicesTenancyUnitsApplyProjectConfig where
+           ServicesTenancyUnitsApplyProjectConfig
+         where
         type Rs ServicesTenancyUnitsApplyProjectConfig =
              Operation
         type Scopes ServicesTenancyUnitsApplyProjectConfig =

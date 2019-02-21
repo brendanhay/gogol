@@ -58,10 +58,13 @@ type BackendServicesGetResource =
 -- backend services.
 --
 -- /See:/ 'backendServicesGet' smart constructor.
-data BackendServicesGet = BackendServicesGet'
+data BackendServicesGet =
+  BackendServicesGet'
     { _bsgProject        :: !Text
     , _bsgBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendServicesGet' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ backendServicesGet
     -> Text -- ^ 'bsgBackendService'
     -> BackendServicesGet
 backendServicesGet pBsgProject_ pBsgBackendService_ =
-    BackendServicesGet'
-    { _bsgProject = pBsgProject_
-    , _bsgBackendService = pBsgBackendService_
-    }
+  BackendServicesGet'
+    {_bsgProject = pBsgProject_, _bsgBackendService = pBsgBackendService_}
+
 
 -- | Project ID for this request.
 bsgProject :: Lens' BackendServicesGet Text

@@ -57,11 +57,14 @@ type AccountsAdUnitsUpdateResource =
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 --
 -- /See:/ 'accountsAdUnitsUpdate' smart constructor.
-data AccountsAdUnitsUpdate = AccountsAdUnitsUpdate'
+data AccountsAdUnitsUpdate =
+  AccountsAdUnitsUpdate'
     { _aauuPayload    :: !AdUnit
     , _aauuAdClientId :: !Text
     , _aauuAccountId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsAdUnitsUpdate' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ accountsAdUnitsUpdate
     -> Text -- ^ 'aauuAccountId'
     -> AccountsAdUnitsUpdate
 accountsAdUnitsUpdate pAauuPayload_ pAauuAdClientId_ pAauuAccountId_ =
-    AccountsAdUnitsUpdate'
+  AccountsAdUnitsUpdate'
     { _aauuPayload = pAauuPayload_
     , _aauuAdClientId = pAauuAdClientId_
     , _aauuAccountId = pAauuAccountId_
     }
+
 
 -- | Multipart request metadata.
 aauuPayload :: Lens' AccountsAdUnitsUpdate AdUnit

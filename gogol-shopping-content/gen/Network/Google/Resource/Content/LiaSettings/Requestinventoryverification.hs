@@ -59,11 +59,14 @@ type LiaSettingsRequestinventoryverificationResource
 -- | Requests inventory validation for the specified country.
 --
 -- /See:/ 'liaSettingsRequestinventoryverification' smart constructor.
-data LiaSettingsRequestinventoryverification = LiaSettingsRequestinventoryverification'
+data LiaSettingsRequestinventoryverification =
+  LiaSettingsRequestinventoryverification'
     { _lsrMerchantId :: !(Textual Word64)
     , _lsrCountry    :: !Text
     , _lsrAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiaSettingsRequestinventoryverification' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ liaSettingsRequestinventoryverification
     -> Word64 -- ^ 'lsrAccountId'
     -> LiaSettingsRequestinventoryverification
 liaSettingsRequestinventoryverification pLsrMerchantId_ pLsrCountry_ pLsrAccountId_ =
-    LiaSettingsRequestinventoryverification'
+  LiaSettingsRequestinventoryverification'
     { _lsrMerchantId = _Coerce # pLsrMerchantId_
     , _lsrCountry = pLsrCountry_
     , _lsrAccountId = _Coerce # pLsrAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and
@@ -108,7 +112,8 @@ lsrAccountId
       . _Coerce
 
 instance GoogleRequest
-         LiaSettingsRequestinventoryverification where
+           LiaSettingsRequestinventoryverification
+         where
         type Rs LiaSettingsRequestinventoryverification =
              LiaSettingsRequestInventoryVerificationResponse
         type Scopes LiaSettingsRequestinventoryverification =

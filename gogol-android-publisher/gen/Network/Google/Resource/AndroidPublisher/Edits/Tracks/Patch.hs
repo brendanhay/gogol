@@ -65,12 +65,15 @@ type EditsTracksPatchResource =
 -- semantics.
 --
 -- /See:/ 'editsTracksPatch' smart constructor.
-data EditsTracksPatch = EditsTracksPatch'
+data EditsTracksPatch =
+  EditsTracksPatch'
     { _etptTrack       :: !Text
     , _etptPackageName :: !Text
     , _etptPayload     :: !Track
     , _etptEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsTracksPatch' with the minimum fields required to make a request.
 --
@@ -90,12 +93,13 @@ editsTracksPatch
     -> Text -- ^ 'etptEditId'
     -> EditsTracksPatch
 editsTracksPatch pEtptTrack_ pEtptPackageName_ pEtptPayload_ pEtptEditId_ =
-    EditsTracksPatch'
+  EditsTracksPatch'
     { _etptTrack = pEtptTrack_
     , _etptPackageName = pEtptPackageName_
     , _etptPayload = pEtptPayload_
     , _etptEditId = pEtptEditId_
     }
+
 
 -- | The track to read or modify.
 etptTrack :: Lens' EditsTracksPatch Text

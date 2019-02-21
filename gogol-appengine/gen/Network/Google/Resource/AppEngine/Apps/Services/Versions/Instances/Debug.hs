@@ -84,7 +84,8 @@ type AppsServicesVersionsInstancesDebugResource =
 -- environment.
 --
 -- /See:/ 'appsServicesVersionsInstancesDebug' smart constructor.
-data AppsServicesVersionsInstancesDebug = AppsServicesVersionsInstancesDebug'
+data AppsServicesVersionsInstancesDebug =
+  AppsServicesVersionsInstancesDebug'
     { _asvidXgafv          :: !(Maybe Xgafv)
     , _asvidInstancesId    :: !Text
     , _asvidUploadProtocol :: !(Maybe Text)
@@ -95,7 +96,9 @@ data AppsServicesVersionsInstancesDebug = AppsServicesVersionsInstancesDebug'
     , _asvidAppsId         :: !Text
     , _asvidServicesId     :: !Text
     , _asvidCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsServicesVersionsInstancesDebug' with the minimum fields required to make a request.
 --
@@ -128,7 +131,7 @@ appsServicesVersionsInstancesDebug
     -> Text -- ^ 'asvidServicesId'
     -> AppsServicesVersionsInstancesDebug
 appsServicesVersionsInstancesDebug pAsvidInstancesId_ pAsvidPayload_ pAsvidVersionsId_ pAsvidAppsId_ pAsvidServicesId_ =
-    AppsServicesVersionsInstancesDebug'
+  AppsServicesVersionsInstancesDebug'
     { _asvidXgafv = Nothing
     , _asvidInstancesId = pAsvidInstancesId_
     , _asvidUploadProtocol = Nothing
@@ -140,6 +143,7 @@ appsServicesVersionsInstancesDebug pAsvidInstancesId_ pAsvidPayload_ pAsvidVersi
     , _asvidServicesId = pAsvidServicesId_
     , _asvidCallback = Nothing
     }
+
 
 -- | V1 error format.
 asvidXgafv :: Lens' AppsServicesVersionsInstancesDebug (Maybe Xgafv)
@@ -200,7 +204,8 @@ asvidCallback
       (\ s a -> s{_asvidCallback = a})
 
 instance GoogleRequest
-         AppsServicesVersionsInstancesDebug where
+           AppsServicesVersionsInstancesDebug
+         where
         type Rs AppsServicesVersionsInstancesDebug =
              Operation
         type Scopes AppsServicesVersionsInstancesDebug =

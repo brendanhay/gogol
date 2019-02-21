@@ -70,7 +70,8 @@ type EntityUsageReportsGetResource =
 -- a set of objects.
 --
 -- /See:/ 'entityUsageReportsGet' smart constructor.
-data EntityUsageReportsGet = EntityUsageReportsGet'
+data EntityUsageReportsGet =
+  EntityUsageReportsGet'
     { _eurgEntityType :: !Text
     , _eurgFilters    :: !(Maybe Text)
     , _eurgCustomerId :: !(Maybe Text)
@@ -79,7 +80,9 @@ data EntityUsageReportsGet = EntityUsageReportsGet'
     , _eurgParameters :: !(Maybe Text)
     , _eurgPageToken  :: !(Maybe Text)
     , _eurgMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntityUsageReportsGet' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ entityUsageReportsGet
     -> Text -- ^ 'eurgEntityKey'
     -> EntityUsageReportsGet
 entityUsageReportsGet pEurgEntityType_ pEurgDate_ pEurgEntityKey_ =
-    EntityUsageReportsGet'
+  EntityUsageReportsGet'
     { _eurgEntityType = pEurgEntityType_
     , _eurgFilters = Nothing
     , _eurgCustomerId = Nothing
@@ -116,6 +119,7 @@ entityUsageReportsGet pEurgEntityType_ pEurgDate_ pEurgEntityKey_ =
     , _eurgPageToken = Nothing
     , _eurgMaxResults = Nothing
     }
+
 
 -- | Type of object. Should be one of - gplus_communities.
 eurgEntityType :: Lens' EntityUsageReportsGet Text

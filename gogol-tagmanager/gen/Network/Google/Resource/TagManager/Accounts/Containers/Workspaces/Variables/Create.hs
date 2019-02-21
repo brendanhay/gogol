@@ -54,10 +54,13 @@ type AccountsContainersWorkspacesVariablesCreateResource
 -- | Creates a GTM Variable.
 --
 -- /See:/ 'accountsContainersWorkspacesVariablesCreate' smart constructor.
-data AccountsContainersWorkspacesVariablesCreate = AccountsContainersWorkspacesVariablesCreate'
+data AccountsContainersWorkspacesVariablesCreate =
+  AccountsContainersWorkspacesVariablesCreate'
     { _acwvcParent  :: !Text
     , _acwvcPayload :: !Variable
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesVariablesCreate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ accountsContainersWorkspacesVariablesCreate
     -> Variable -- ^ 'acwvcPayload'
     -> AccountsContainersWorkspacesVariablesCreate
 accountsContainersWorkspacesVariablesCreate pAcwvcParent_ pAcwvcPayload_ =
-    AccountsContainersWorkspacesVariablesCreate'
-    { _acwvcParent = pAcwvcParent_
-    , _acwvcPayload = pAcwvcPayload_
-    }
+  AccountsContainersWorkspacesVariablesCreate'
+    {_acwvcParent = pAcwvcParent_, _acwvcPayload = pAcwvcPayload_}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -88,7 +90,8 @@ acwvcPayload
   = lens _acwvcPayload (\ s a -> s{_acwvcPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesVariablesCreate where
+           AccountsContainersWorkspacesVariablesCreate
+         where
         type Rs AccountsContainersWorkspacesVariablesCreate =
              Variable
         type Scopes

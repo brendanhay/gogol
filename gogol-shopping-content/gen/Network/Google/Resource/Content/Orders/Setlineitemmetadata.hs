@@ -57,11 +57,14 @@ type OrdersSetlineitemmetadataResource =
 -- | Sets (overrides) merchant provided annotations on the line item.
 --
 -- /See:/ 'ordersSetlineitemmetadata' smart constructor.
-data OrdersSetlineitemmetadata = OrdersSetlineitemmetadata'
+data OrdersSetlineitemmetadata =
+  OrdersSetlineitemmetadata'
     { _ossMerchantId :: !(Textual Word64)
     , _ossPayload    :: !OrdersSetLineItemMetadataRequest
     , _ossOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersSetlineitemmetadata' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ ordersSetlineitemmetadata
     -> Text -- ^ 'ossOrderId'
     -> OrdersSetlineitemmetadata
 ordersSetlineitemmetadata pOssMerchantId_ pOssPayload_ pOssOrderId_ =
-    OrdersSetlineitemmetadata'
+  OrdersSetlineitemmetadata'
     { _ossMerchantId = _Coerce # pOssMerchantId_
     , _ossPayload = pOssPayload_
     , _ossOrderId = pOssOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

@@ -93,14 +93,17 @@ type IAMPoliciesLintPolicyResource =
 -- status code.
 --
 -- /See:/ 'iamPoliciesLintPolicy' smart constructor.
-data IAMPoliciesLintPolicy = IAMPoliciesLintPolicy'
+data IAMPoliciesLintPolicy =
+  IAMPoliciesLintPolicy'
     { _iplpXgafv          :: !(Maybe Xgafv)
     , _iplpUploadProtocol :: !(Maybe Text)
     , _iplpAccessToken    :: !(Maybe Text)
     , _iplpUploadType     :: !(Maybe Text)
     , _iplpPayload        :: !LintPolicyRequest
     , _iplpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IAMPoliciesLintPolicy' with the minimum fields required to make a request.
 --
@@ -121,7 +124,7 @@ iamPoliciesLintPolicy
     :: LintPolicyRequest -- ^ 'iplpPayload'
     -> IAMPoliciesLintPolicy
 iamPoliciesLintPolicy pIplpPayload_ =
-    IAMPoliciesLintPolicy'
+  IAMPoliciesLintPolicy'
     { _iplpXgafv = Nothing
     , _iplpUploadProtocol = Nothing
     , _iplpAccessToken = Nothing
@@ -129,6 +132,7 @@ iamPoliciesLintPolicy pIplpPayload_ =
     , _iplpPayload = pIplpPayload_
     , _iplpCallback = Nothing
     }
+
 
 -- | V1 error format.
 iplpXgafv :: Lens' IAMPoliciesLintPolicy (Maybe Xgafv)

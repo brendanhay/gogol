@@ -69,14 +69,17 @@ type BeaconInfoGetforObservedResource =
 -- for the application.
 --
 -- /See:/ 'beaconInfoGetforObserved' smart constructor.
-data BeaconInfoGetforObserved = BeaconInfoGetforObserved'
+data BeaconInfoGetforObserved =
+  BeaconInfoGetforObserved'
     { _bigoXgafv          :: !(Maybe Xgafv)
     , _bigoUploadProtocol :: !(Maybe Text)
     , _bigoAccessToken    :: !(Maybe Text)
     , _bigoUploadType     :: !(Maybe Text)
     , _bigoPayload        :: !GetInfoForObservedBeaconsRequest
     , _bigoCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeaconInfoGetforObserved' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ beaconInfoGetforObserved
     :: GetInfoForObservedBeaconsRequest -- ^ 'bigoPayload'
     -> BeaconInfoGetforObserved
 beaconInfoGetforObserved pBigoPayload_ =
-    BeaconInfoGetforObserved'
+  BeaconInfoGetforObserved'
     { _bigoXgafv = Nothing
     , _bigoUploadProtocol = Nothing
     , _bigoAccessToken = Nothing
@@ -105,6 +108,7 @@ beaconInfoGetforObserved pBigoPayload_ =
     , _bigoPayload = pBigoPayload_
     , _bigoCallback = Nothing
     }
+
 
 -- | V1 error format.
 bigoXgafv :: Lens' BeaconInfoGetforObserved (Maybe Xgafv)

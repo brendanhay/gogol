@@ -144,6 +144,9 @@ module Network.Google.ServiceManagement
     , mrdType
     , mrdDescription
 
+    -- ** BackendRulePathTranslation
+    , BackendRulePathTranslation (..)
+
     -- ** DocumentationRule
     , DocumentationRule
     , documentationRule
@@ -249,11 +252,13 @@ module Network.Google.ServiceManagement
     -- ** BackendRule
     , BackendRule
     , backendRule
+    , brJwtAudience
     , brSelector
     , brMinDeadline
     , brAddress
     , brOperationDeadline
     , brDeadline
+    , brPathTranslation
 
     -- ** SubmitConfigSourceRequest
     , SubmitConfigSourceRequest

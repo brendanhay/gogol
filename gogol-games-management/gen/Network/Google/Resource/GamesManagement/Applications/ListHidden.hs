@@ -60,11 +60,14 @@ type ApplicationsListHiddenResource =
 -- is only available to user accounts for your developer console.
 --
 -- /See:/ 'applicationsListHidden' smart constructor.
-data ApplicationsListHidden = ApplicationsListHidden'
+data ApplicationsListHidden =
+  ApplicationsListHidden'
     { _alhApplicationId :: !Text
     , _alhPageToken     :: !(Maybe Text)
     , _alhMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationsListHidden' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ applicationsListHidden
     :: Text -- ^ 'alhApplicationId'
     -> ApplicationsListHidden
 applicationsListHidden pAlhApplicationId_ =
-    ApplicationsListHidden'
+  ApplicationsListHidden'
     { _alhApplicationId = pAlhApplicationId_
     , _alhPageToken = Nothing
     , _alhMaxResults = Nothing
     }
+
 
 -- | The application ID from the Google Play developer console.
 alhApplicationId :: Lens' ApplicationsListHidden Text

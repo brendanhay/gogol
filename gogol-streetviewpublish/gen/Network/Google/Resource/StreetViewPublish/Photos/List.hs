@@ -73,7 +73,8 @@ type PhotosListResource =
 -- returned in the response.
 --
 -- /See:/ 'photosList' smart constructor.
-data PhotosList = PhotosList'
+data PhotosList =
+  PhotosList'
     { _plXgafv          :: !(Maybe Xgafv)
     , _plLanguageCode   :: !(Maybe Text)
     , _plUploadProtocol :: !(Maybe Text)
@@ -84,7 +85,9 @@ data PhotosList = PhotosList'
     , _plPageToken      :: !(Maybe Text)
     , _plPageSize       :: !(Maybe (Textual Int32))
     , _plCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotosList' with the minimum fields required to make a request.
 --
@@ -112,7 +115,7 @@ data PhotosList = PhotosList'
 photosList
     :: PhotosList
 photosList =
-    PhotosList'
+  PhotosList'
     { _plXgafv = Nothing
     , _plLanguageCode = Nothing
     , _plUploadProtocol = Nothing
@@ -124,6 +127,7 @@ photosList =
     , _plPageSize = Nothing
     , _plCallback = Nothing
     }
+
 
 -- | V1 error format.
 plXgafv :: Lens' PhotosList (Maybe Xgafv)

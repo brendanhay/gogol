@@ -73,7 +73,8 @@ type ProjectsLocationsClustersDeleteResource =
 -- they weren\'t present at the initial create time.
 --
 -- /See:/ 'projectsLocationsClustersDelete' smart constructor.
-data ProjectsLocationsClustersDelete = ProjectsLocationsClustersDelete'
+data ProjectsLocationsClustersDelete =
+  ProjectsLocationsClustersDelete'
     { _plcdXgafv          :: !(Maybe Xgafv)
     , _plcdUploadProtocol :: !(Maybe Text)
     , _plcdAccessToken    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsLocationsClustersDelete = ProjectsLocationsClustersDelete'
     , _plcdClusterId      :: !(Maybe Text)
     , _plcdProjectId      :: !(Maybe Text)
     , _plcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersDelete' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsLocationsClustersDelete
     :: Text -- ^ 'plcdName'
     -> ProjectsLocationsClustersDelete
 projectsLocationsClustersDelete pPlcdName_ =
-    ProjectsLocationsClustersDelete'
+  ProjectsLocationsClustersDelete'
     { _plcdXgafv = Nothing
     , _plcdUploadProtocol = Nothing
     , _plcdAccessToken = Nothing
@@ -121,6 +124,7 @@ projectsLocationsClustersDelete pPlcdName_ =
     , _plcdProjectId = Nothing
     , _plcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcdXgafv :: Lens' ProjectsLocationsClustersDelete (Maybe Xgafv)
@@ -177,7 +181,8 @@ plcdCallback
   = lens _plcdCallback (\ s a -> s{_plcdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersDelete where
+           ProjectsLocationsClustersDelete
+         where
         type Rs ProjectsLocationsClustersDelete = Operation
         type Scopes ProjectsLocationsClustersDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]

@@ -56,10 +56,13 @@ type EditsValidateResource =
 -- are not applied to the live app.
 --
 -- /See:/ 'editsValidate' smart constructor.
-data EditsValidate = EditsValidate'
+data EditsValidate =
+  EditsValidate'
     { _evPackageName :: !Text
     , _evEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsValidate' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ editsValidate
     -> Text -- ^ 'evEditId'
     -> EditsValidate
 editsValidate pEvPackageName_ pEvEditId_ =
-    EditsValidate'
-    { _evPackageName = pEvPackageName_
-    , _evEditId = pEvEditId_
-    }
+  EditsValidate' {_evPackageName = pEvPackageName_, _evEditId = pEvEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

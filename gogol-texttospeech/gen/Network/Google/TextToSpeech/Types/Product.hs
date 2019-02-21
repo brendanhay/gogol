@@ -23,13 +23,17 @@ import           Network.Google.TextToSpeech.Types.Sum
 -- | Description of audio data to be synthesized.
 --
 -- /See:/ 'audioConfig' smart constructor.
-data AudioConfig = AudioConfig'
-    { _acVolumeGainDB    :: !(Maybe (Textual Double))
-    , _acSampleRateHertz :: !(Maybe (Textual Int32))
-    , _acAudioEncoding   :: !(Maybe AudioConfigAudioEncoding)
-    , _acSpeakingRate    :: !(Maybe (Textual Double))
-    , _acPitch           :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data AudioConfig =
+  AudioConfig'
+    { _acVolumeGainDB     :: !(Maybe (Textual Double))
+    , _acSampleRateHertz  :: !(Maybe (Textual Int32))
+    , _acEffectsProFileId :: !(Maybe [Text])
+    , _acAudioEncoding    :: !(Maybe AudioConfigAudioEncoding)
+    , _acSpeakingRate     :: !(Maybe (Textual Double))
+    , _acPitch            :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AudioConfig' with the minimum fields required to make a request.
 --
@@ -39,6 +43,8 @@ data AudioConfig = AudioConfig'
 --
 -- * 'acSampleRateHertz'
 --
+-- * 'acEffectsProFileId'
+--
 -- * 'acAudioEncoding'
 --
 -- * 'acSpeakingRate'
@@ -47,13 +53,15 @@ data AudioConfig = AudioConfig'
 audioConfig
     :: AudioConfig
 audioConfig =
-    AudioConfig'
+  AudioConfig'
     { _acVolumeGainDB = Nothing
     , _acSampleRateHertz = Nothing
+    , _acEffectsProFileId = Nothing
     , _acAudioEncoding = Nothing
     , _acSpeakingRate = Nothing
     , _acPitch = Nothing
     }
+
 
 -- | Optional volume gain (in dB) of the normal native volume supported by
 -- the specific voice, in the range [-96.0, 16.0]. If unset, or set to a
@@ -80,6 +88,18 @@ acSampleRateHertz
   = lens _acSampleRateHertz
       (\ s a -> s{_acSampleRateHertz = a})
       . mapping _Coerce
+
+-- | An identifier which selects \'audio effects\' profiles that are applied
+-- on (post synthesized) text to speech. Effects are applied on top of each
+-- other in the order they are given. See [audio-profiles](https:
+-- \/\/cloud.google.com\/text-to-speech\/docs\/audio-profiles) for current
+-- supported profile ids.
+acEffectsProFileId :: Lens' AudioConfig [Text]
+acEffectsProFileId
+  = lens _acEffectsProFileId
+      (\ s a -> s{_acEffectsProFileId = a})
+      . _Default
+      . _Coerce
 
 -- | Required. The format of the requested audio byte stream.
 acAudioEncoding :: Lens' AudioConfig (Maybe AudioConfigAudioEncoding)
@@ -111,6 +131,7 @@ instance FromJSON AudioConfig where
               (\ o ->
                  AudioConfig' <$>
                    (o .:? "volumeGainDb") <*> (o .:? "sampleRateHertz")
+                     <*> (o .:? "effectsProfileId" .!= mempty)
                      <*> (o .:? "audioEncoding")
                      <*> (o .:? "speakingRate")
                      <*> (o .:? "pitch"))
@@ -121,6 +142,7 @@ instance ToJSON AudioConfig where
               (catMaybes
                  [("volumeGainDb" .=) <$> _acVolumeGainDB,
                   ("sampleRateHertz" .=) <$> _acSampleRateHertz,
+                  ("effectsProfileId" .=) <$> _acEffectsProFileId,
                   ("audioEncoding" .=) <$> _acAudioEncoding,
                   ("speakingRate" .=) <$> _acSpeakingRate,
                   ("pitch" .=) <$> _acPitch])
@@ -128,11 +150,14 @@ instance ToJSON AudioConfig where
 -- | Description of which voice to use for a synthesis request.
 --
 -- /See:/ 'voiceSelectionParams' smart constructor.
-data VoiceSelectionParams = VoiceSelectionParams'
+data VoiceSelectionParams =
+  VoiceSelectionParams'
     { _vspLanguageCode :: !(Maybe Text)
     , _vspSsmlGender   :: !(Maybe VoiceSelectionParamsSsmlGender)
     , _vspName         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VoiceSelectionParams' with the minimum fields required to make a request.
 --
@@ -146,11 +171,9 @@ data VoiceSelectionParams = VoiceSelectionParams'
 voiceSelectionParams
     :: VoiceSelectionParams
 voiceSelectionParams =
-    VoiceSelectionParams'
-    { _vspLanguageCode = Nothing
-    , _vspSsmlGender = Nothing
-    , _vspName = Nothing
-    }
+  VoiceSelectionParams'
+    {_vspLanguageCode = Nothing, _vspSsmlGender = Nothing, _vspName = Nothing}
+
 
 -- | The language (and optionally also the region) of the voice expressed as
 -- a [BCP-47](https:\/\/www.rfc-editor.org\/rfc\/bcp\/bcp47.txt) language
@@ -204,11 +227,14 @@ instance ToJSON VoiceSelectionParams where
 -- method.
 --
 -- /See:/ 'synthesizeSpeechRequest' smart constructor.
-data SynthesizeSpeechRequest = SynthesizeSpeechRequest'
+data SynthesizeSpeechRequest =
+  SynthesizeSpeechRequest'
     { _ssrAudioConfig :: !(Maybe AudioConfig)
     , _ssrInput       :: !(Maybe SynthesisInput)
     , _ssrVoice       :: !(Maybe VoiceSelectionParams)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SynthesizeSpeechRequest' with the minimum fields required to make a request.
 --
@@ -222,11 +248,9 @@ data SynthesizeSpeechRequest = SynthesizeSpeechRequest'
 synthesizeSpeechRequest
     :: SynthesizeSpeechRequest
 synthesizeSpeechRequest =
-    SynthesizeSpeechRequest'
-    { _ssrAudioConfig = Nothing
-    , _ssrInput = Nothing
-    , _ssrVoice = Nothing
-    }
+  SynthesizeSpeechRequest'
+    {_ssrAudioConfig = Nothing, _ssrInput = Nothing, _ssrVoice = Nothing}
+
 
 -- | Required. The configuration of the synthesized audio.
 ssrAudioConfig :: Lens' SynthesizeSpeechRequest (Maybe AudioConfig)
@@ -261,9 +285,12 @@ instance ToJSON SynthesizeSpeechRequest where
 -- | The message returned to the client by the \`ListVoices\` method.
 --
 -- /See:/ 'listVoicesResponse' smart constructor.
-newtype ListVoicesResponse = ListVoicesResponse'
+newtype ListVoicesResponse =
+  ListVoicesResponse'
     { _lvrVoices :: Maybe [Voice]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListVoicesResponse' with the minimum fields required to make a request.
 --
@@ -272,10 +299,8 @@ newtype ListVoicesResponse = ListVoicesResponse'
 -- * 'lvrVoices'
 listVoicesResponse
     :: ListVoicesResponse
-listVoicesResponse =
-    ListVoicesResponse'
-    { _lvrVoices = Nothing
-    }
+listVoicesResponse = ListVoicesResponse' {_lvrVoices = Nothing}
+
 
 -- | The list of voices.
 lvrVoices :: Lens' ListVoicesResponse [Voice]
@@ -300,10 +325,13 @@ instance ToJSON ListVoicesResponse where
 -- characters.
 --
 -- /See:/ 'synthesisInput' smart constructor.
-data SynthesisInput = SynthesisInput'
+data SynthesisInput =
+  SynthesisInput'
     { _siText :: !(Maybe Text)
     , _siSsml :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SynthesisInput' with the minimum fields required to make a request.
 --
@@ -314,11 +342,8 @@ data SynthesisInput = SynthesisInput'
 -- * 'siSsml'
 synthesisInput
     :: SynthesisInput
-synthesisInput =
-    SynthesisInput'
-    { _siText = Nothing
-    , _siSsml = Nothing
-    }
+synthesisInput = SynthesisInput' {_siText = Nothing, _siSsml = Nothing}
+
 
 -- | The raw text to be synthesized.
 siText :: Lens' SynthesisInput (Maybe Text)
@@ -347,9 +372,12 @@ instance ToJSON SynthesisInput where
 -- | The message returned to the client by the \`SynthesizeSpeech\` method.
 --
 -- /See:/ 'synthesizeSpeechResponse' smart constructor.
-newtype SynthesizeSpeechResponse = SynthesizeSpeechResponse'
+newtype SynthesizeSpeechResponse =
+  SynthesizeSpeechResponse'
     { _ssrAudioContent :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SynthesizeSpeechResponse' with the minimum fields required to make a request.
 --
@@ -359,9 +387,8 @@ newtype SynthesizeSpeechResponse = SynthesizeSpeechResponse'
 synthesizeSpeechResponse
     :: SynthesizeSpeechResponse
 synthesizeSpeechResponse =
-    SynthesizeSpeechResponse'
-    { _ssrAudioContent = Nothing
-    }
+  SynthesizeSpeechResponse' {_ssrAudioContent = Nothing}
+
 
 -- | The audio data bytes encoded as specified in the request, including the
 -- header (For LINEAR16 audio, we include the WAV header). Note: as with
@@ -388,12 +415,15 @@ instance ToJSON SynthesizeSpeechResponse where
 -- | Description of a voice supported by the TTS service.
 --
 -- /See:/ 'voice' smart constructor.
-data Voice = Voice'
+data Voice =
+  Voice'
     { _vLanguageCodes          :: !(Maybe [Text])
     , _vNATuralSampleRateHertz :: !(Maybe (Textual Int32))
     , _vSsmlGender             :: !(Maybe VoiceSsmlGender)
     , _vName                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Voice' with the minimum fields required to make a request.
 --
@@ -409,12 +439,13 @@ data Voice = Voice'
 voice
     :: Voice
 voice =
-    Voice'
+  Voice'
     { _vLanguageCodes = Nothing
     , _vNATuralSampleRateHertz = Nothing
     , _vSsmlGender = Nothing
     , _vName = Nothing
     }
+
 
 -- | The languages that this voice supports, expressed as
 -- [BCP-47](https:\/\/www.rfc-editor.org\/rfc\/bcp\/bcp47.txt) language

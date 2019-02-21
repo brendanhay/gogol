@@ -60,10 +60,13 @@ type UsersSettingsSendAsVerifyResource =
 -- service account clients that have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsSendAsVerify' smart constructor.
-data UsersSettingsSendAsVerify = UsersSettingsSendAsVerify'
+data UsersSettingsSendAsVerify =
+  UsersSettingsSendAsVerify'
     { _ussavUserId      :: !Text
     , _ussavSendAsEmail :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsSendAsVerify' with the minimum fields required to make a request.
 --
@@ -76,10 +79,9 @@ usersSettingsSendAsVerify
     :: Text -- ^ 'ussavSendAsEmail'
     -> UsersSettingsSendAsVerify
 usersSettingsSendAsVerify pUssavSendAsEmail_ =
-    UsersSettingsSendAsVerify'
-    { _ussavUserId = "me"
-    , _ussavSendAsEmail = pUssavSendAsEmail_
-    }
+  UsersSettingsSendAsVerify'
+    {_ussavUserId = "me", _ussavSendAsEmail = pUssavSendAsEmail_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

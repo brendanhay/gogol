@@ -57,11 +57,14 @@ type SSLCertificatesDeleteResource =
 -- | Deletes the specified SslCertificate resource.
 --
 -- /See:/ 'sslCertificatesDelete' smart constructor.
-data SSLCertificatesDelete = SSLCertificatesDelete'
+data SSLCertificatesDelete =
+  SSLCertificatesDelete'
     { _scdRequestId      :: !(Maybe Text)
     , _scdProject        :: !Text
     , _scdSSLCertificate :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertificatesDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ sslCertificatesDelete
     -> Text -- ^ 'scdSSLCertificate'
     -> SSLCertificatesDelete
 sslCertificatesDelete pScdProject_ pScdSSLCertificate_ =
-    SSLCertificatesDelete'
+  SSLCertificatesDelete'
     { _scdRequestId = Nothing
     , _scdProject = pScdProject_
     , _scdSSLCertificate = pScdSSLCertificate_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

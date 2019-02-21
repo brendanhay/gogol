@@ -67,7 +67,8 @@ type ProjectsLocationsJobsPauseResource =
 -- Job.State.ENABLED to be paused.
 --
 -- /See:/ 'projectsLocationsJobsPause' smart constructor.
-data ProjectsLocationsJobsPause = ProjectsLocationsJobsPause'
+data ProjectsLocationsJobsPause =
+  ProjectsLocationsJobsPause'
     { _proXgafv          :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
     , _proAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsLocationsJobsPause = ProjectsLocationsJobsPause'
     , _proPayload        :: !PauseJobRequest
     , _proName           :: !Text
     , _proCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsPause' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsJobsPause
     -> Text -- ^ 'proName'
     -> ProjectsLocationsJobsPause
 projectsLocationsJobsPause pProPayload_ pProName_ =
-    ProjectsLocationsJobsPause'
+  ProjectsLocationsJobsPause'
     { _proXgafv = Nothing
     , _proUploadProtocol = Nothing
     , _proAccessToken = Nothing
@@ -108,6 +111,7 @@ projectsLocationsJobsPause pProPayload_ pProName_ =
     , _proName = pProName_
     , _proCallback = Nothing
     }
+
 
 -- | V1 error format.
 proXgafv :: Lens' ProjectsLocationsJobsPause (Maybe Xgafv)

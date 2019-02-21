@@ -61,12 +61,15 @@ type AccountsAdUnitsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'accountsAdUnitsPatch' smart constructor.
-data AccountsAdUnitsPatch = AccountsAdUnitsPatch'
+data AccountsAdUnitsPatch =
+  AccountsAdUnitsPatch'
     { _aaupAdUnitId   :: !Text
     , _aaupPayload    :: !AdUnit
     , _aaupAdClientId :: !Text
     , _aaupAccountId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsAdUnitsPatch' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ accountsAdUnitsPatch
     -> Text -- ^ 'aaupAccountId'
     -> AccountsAdUnitsPatch
 accountsAdUnitsPatch pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccountId_ =
-    AccountsAdUnitsPatch'
+  AccountsAdUnitsPatch'
     { _aaupAdUnitId = pAaupAdUnitId_
     , _aaupPayload = pAaupPayload_
     , _aaupAdClientId = pAaupAdClientId_
     , _aaupAccountId = pAaupAccountId_
     }
+
 
 -- | Ad unit to get.
 aaupAdUnitId :: Lens' AccountsAdUnitsPatch Text

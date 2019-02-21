@@ -51,9 +51,12 @@ type SettingsGetResource =
 -- | Gets a single setting by ID.
 --
 -- /See:/ 'settingsGet' smart constructor.
-newtype SettingsGet = SettingsGet'
+newtype SettingsGet =
+  SettingsGet'
     { _sgId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype SettingsGet = SettingsGet'
 settingsGet
     :: Text -- ^ 'sgId'
     -> SettingsGet
-settingsGet pSgId_ =
-    SettingsGet'
-    { _sgId = pSgId_
-    }
+settingsGet pSgId_ = SettingsGet' {_sgId = pSgId_}
+
 
 -- | The ID of the setting. The following IDs are valid: - locale - The key
 -- to the user’s language\/locale (BCP 47 identifier) that Glassware should

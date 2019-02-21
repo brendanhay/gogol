@@ -50,9 +50,12 @@ type AccountsContainersWorkspacesDeleteResource =
 -- | Deletes a Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesDelete' smart constructor.
-newtype AccountsContainersWorkspacesDelete = AccountsContainersWorkspacesDelete'
+newtype AccountsContainersWorkspacesDelete =
+  AccountsContainersWorkspacesDelete'
     { _acwdPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesDelete' with the minimum fields required to make a request.
 --
@@ -63,9 +66,8 @@ accountsContainersWorkspacesDelete
     :: Text -- ^ 'acwdPath'
     -> AccountsContainersWorkspacesDelete
 accountsContainersWorkspacesDelete pAcwdPath_ =
-    AccountsContainersWorkspacesDelete'
-    { _acwdPath = pAcwdPath_
-    }
+  AccountsContainersWorkspacesDelete' {_acwdPath = pAcwdPath_}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -73,7 +75,8 @@ acwdPath :: Lens' AccountsContainersWorkspacesDelete Text
 acwdPath = lens _acwdPath (\ s a -> s{_acwdPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesDelete where
+           AccountsContainersWorkspacesDelete
+         where
         type Rs AccountsContainersWorkspacesDelete = ()
         type Scopes AccountsContainersWorkspacesDelete =
              '["https://www.googleapis.com/auth/tagmanager.delete.containers"]

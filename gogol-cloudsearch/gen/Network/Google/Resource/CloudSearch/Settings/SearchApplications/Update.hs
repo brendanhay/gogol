@@ -63,7 +63,8 @@ type SettingsSearchApplicationsUpdateResource =
 -- | Updates a search application.
 --
 -- /See:/ 'settingsSearchApplicationsUpdate' smart constructor.
-data SettingsSearchApplicationsUpdate = SettingsSearchApplicationsUpdate'
+data SettingsSearchApplicationsUpdate =
+  SettingsSearchApplicationsUpdate'
     { _ssauXgafv          :: !(Maybe Xgafv)
     , _ssauUploadProtocol :: !(Maybe Text)
     , _ssauAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data SettingsSearchApplicationsUpdate = SettingsSearchApplicationsUpdate'
     , _ssauPayload        :: !SearchApplication
     , _ssauName           :: !Text
     , _ssauCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsSearchApplicationsUpdate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ settingsSearchApplicationsUpdate
     -> Text -- ^ 'ssauName'
     -> SettingsSearchApplicationsUpdate
 settingsSearchApplicationsUpdate pSsauPayload_ pSsauName_ =
-    SettingsSearchApplicationsUpdate'
+  SettingsSearchApplicationsUpdate'
     { _ssauXgafv = Nothing
     , _ssauUploadProtocol = Nothing
     , _ssauAccessToken = Nothing
@@ -104,6 +107,7 @@ settingsSearchApplicationsUpdate pSsauPayload_ pSsauName_ =
     , _ssauName = pSsauName_
     , _ssauCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssauXgafv :: Lens' SettingsSearchApplicationsUpdate (Maybe Xgafv)
@@ -144,7 +148,8 @@ ssauCallback
   = lens _ssauCallback (\ s a -> s{_ssauCallback = a})
 
 instance GoogleRequest
-         SettingsSearchApplicationsUpdate where
+           SettingsSearchApplicationsUpdate
+         where
         type Rs SettingsSearchApplicationsUpdate = Operation
         type Scopes SettingsSearchApplicationsUpdate =
              '["https://www.googleapis.com/auth/cloud_search",

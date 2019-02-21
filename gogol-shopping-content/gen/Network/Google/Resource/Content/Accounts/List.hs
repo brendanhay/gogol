@@ -56,11 +56,14 @@ type AccountsListResource =
 -- | Lists the sub-accounts in your Merchant Center account.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList'
+data AccountsList =
+  AccountsList'
     { _allMerchantId :: !(Textual Word64)
     , _allPageToken  :: !(Maybe Text)
     , _allMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ accountsList
     :: Word64 -- ^ 'allMerchantId'
     -> AccountsList
 accountsList pAllMerchantId_ =
-    AccountsList'
+  AccountsList'
     { _allMerchantId = _Coerce # pAllMerchantId_
     , _allPageToken = Nothing
     , _allMaxResults = Nothing
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 allMerchantId :: Lens' AccountsList Word64

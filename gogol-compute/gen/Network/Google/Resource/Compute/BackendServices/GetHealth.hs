@@ -59,11 +59,14 @@ type BackendServicesGetHealthResource =
 -- | Gets the most recent health check results for this BackendService.
 --
 -- /See:/ 'backendServicesGetHealth' smart constructor.
-data BackendServicesGetHealth = BackendServicesGetHealth'
+data BackendServicesGetHealth =
+  BackendServicesGetHealth'
     { _bsghProject        :: !Text
     , _bsghPayload        :: !ResourceGroupReference
     , _bsghBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendServicesGetHealth' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ backendServicesGetHealth
     -> Text -- ^ 'bsghBackendService'
     -> BackendServicesGetHealth
 backendServicesGetHealth pBsghProject_ pBsghPayload_ pBsghBackendService_ =
-    BackendServicesGetHealth'
+  BackendServicesGetHealth'
     { _bsghProject = pBsghProject_
     , _bsghPayload = pBsghPayload_
     , _bsghBackendService = pBsghBackendService_
     }
+
 
 bsghProject :: Lens' BackendServicesGetHealth Text
 bsghProject

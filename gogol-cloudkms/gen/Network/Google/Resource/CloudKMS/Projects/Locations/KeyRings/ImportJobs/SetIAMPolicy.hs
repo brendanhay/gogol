@@ -65,7 +65,8 @@ type ProjectsLocationsKeyRingsImportJobsSetIAMPolicyResource
 -- existing policy.
 --
 -- /See:/ 'projectsLocationsKeyRingsImportJobsSetIAMPolicy' smart constructor.
-data ProjectsLocationsKeyRingsImportJobsSetIAMPolicy = ProjectsLocationsKeyRingsImportJobsSetIAMPolicy'
+data ProjectsLocationsKeyRingsImportJobsSetIAMPolicy =
+  ProjectsLocationsKeyRingsImportJobsSetIAMPolicy'
     { _plkrijsipXgafv          :: !(Maybe Xgafv)
     , _plkrijsipUploadProtocol :: !(Maybe Text)
     , _plkrijsipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsLocationsKeyRingsImportJobsSetIAMPolicy = ProjectsLocationsKeyRings
     , _plkrijsipPayload        :: !SetIAMPolicyRequest
     , _plkrijsipResource       :: !Text
     , _plkrijsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsImportJobsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsLocationsKeyRingsImportJobsSetIAMPolicy
     -> Text -- ^ 'plkrijsipResource'
     -> ProjectsLocationsKeyRingsImportJobsSetIAMPolicy
 projectsLocationsKeyRingsImportJobsSetIAMPolicy pPlkrijsipPayload_ pPlkrijsipResource_ =
-    ProjectsLocationsKeyRingsImportJobsSetIAMPolicy'
+  ProjectsLocationsKeyRingsImportJobsSetIAMPolicy'
     { _plkrijsipXgafv = Nothing
     , _plkrijsipUploadProtocol = Nothing
     , _plkrijsipAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsLocationsKeyRingsImportJobsSetIAMPolicy pPlkrijsipPayload_ pPlkrijsipRes
     , _plkrijsipResource = pPlkrijsipResource_
     , _plkrijsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrijsipXgafv :: Lens' ProjectsLocationsKeyRingsImportJobsSetIAMPolicy (Maybe Xgafv)
@@ -151,13 +155,16 @@ plkrijsipCallback
       (\ s a -> s{_plkrijsipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsImportJobsSetIAMPolicy where
+           ProjectsLocationsKeyRingsImportJobsSetIAMPolicy
+         where
         type Rs
                ProjectsLocationsKeyRingsImportJobsSetIAMPolicy
              = Policy
         type Scopes
                ProjectsLocationsKeyRingsImportJobsSetIAMPolicy
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsImportJobsSetIAMPolicy'{..}
           = go _plkrijsipResource _plkrijsipXgafv

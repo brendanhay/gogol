@@ -64,13 +64,16 @@ type InstancesSetTagsResource =
 -- request.
 --
 -- /See:/ 'instancesSetTags' smart constructor.
-data InstancesSetTags = InstancesSetTags'
+data InstancesSetTags =
+  InstancesSetTags'
     { _istRequestId :: !(Maybe Text)
     , _istProject   :: !Text
     , _istZone      :: !Text
     , _istPayload   :: !Tags
     , _istInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesSetTags' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ instancesSetTags
     -> Text -- ^ 'istInstance'
     -> InstancesSetTags
 instancesSetTags pIstProject_ pIstZone_ pIstPayload_ pIstInstance_ =
-    InstancesSetTags'
+  InstancesSetTags'
     { _istRequestId = Nothing
     , _istProject = pIstProject_
     , _istZone = pIstZone_
     , _istPayload = pIstPayload_
     , _istInstance = pIstInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

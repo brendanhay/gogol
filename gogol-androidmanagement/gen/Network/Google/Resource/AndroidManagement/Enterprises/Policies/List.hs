@@ -65,7 +65,8 @@ type EnterprisesPoliciesListResource =
 -- | Lists policies for a given enterprise.
 --
 -- /See:/ 'enterprisesPoliciesList' smart constructor.
-data EnterprisesPoliciesList = EnterprisesPoliciesList'
+data EnterprisesPoliciesList =
+  EnterprisesPoliciesList'
     { _eplParent         :: !Text
     , _eplXgafv          :: !(Maybe Xgafv)
     , _eplUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data EnterprisesPoliciesList = EnterprisesPoliciesList'
     , _eplPageToken      :: !(Maybe Text)
     , _eplPageSize       :: !(Maybe (Textual Int32))
     , _eplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnterprisesPoliciesList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ enterprisesPoliciesList
     :: Text -- ^ 'eplParent'
     -> EnterprisesPoliciesList
 enterprisesPoliciesList pEplParent_ =
-    EnterprisesPoliciesList'
+  EnterprisesPoliciesList'
     { _eplParent = pEplParent_
     , _eplXgafv = Nothing
     , _eplUploadProtocol = Nothing
@@ -109,6 +112,7 @@ enterprisesPoliciesList pEplParent_ =
     , _eplPageSize = Nothing
     , _eplCallback = Nothing
     }
+
 
 -- | The name of the enterprise in the form enterprises\/{enterpriseId}.
 eplParent :: Lens' EnterprisesPoliciesList Text

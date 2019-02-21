@@ -63,7 +63,8 @@ type ProjectsDatabasesDocumentsListenResource =
 -- | Listens to changes.
 --
 -- /See:/ 'projectsDatabasesDocumentsListen' smart constructor.
-data ProjectsDatabasesDocumentsListen = ProjectsDatabasesDocumentsListen'
+data ProjectsDatabasesDocumentsListen =
+  ProjectsDatabasesDocumentsListen'
     { _pddlXgafv          :: !(Maybe Xgafv)
     , _pddlUploadProtocol :: !(Maybe Text)
     , _pddlDatabase       :: !Text
@@ -71,7 +72,9 @@ data ProjectsDatabasesDocumentsListen = ProjectsDatabasesDocumentsListen'
     , _pddlUploadType     :: !(Maybe Text)
     , _pddlPayload        :: !ListenRequest
     , _pddlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsListen' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsDatabasesDocumentsListen
     -> ListenRequest -- ^ 'pddlPayload'
     -> ProjectsDatabasesDocumentsListen
 projectsDatabasesDocumentsListen pPddlDatabase_ pPddlPayload_ =
-    ProjectsDatabasesDocumentsListen'
+  ProjectsDatabasesDocumentsListen'
     { _pddlXgafv = Nothing
     , _pddlUploadProtocol = Nothing
     , _pddlDatabase = pPddlDatabase_
@@ -104,6 +107,7 @@ projectsDatabasesDocumentsListen pPddlDatabase_ pPddlPayload_ =
     , _pddlPayload = pPddlPayload_
     , _pddlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddlXgafv :: Lens' ProjectsDatabasesDocumentsListen (Maybe Xgafv)
@@ -145,7 +149,8 @@ pddlCallback
   = lens _pddlCallback (\ s a -> s{_pddlCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsListen where
+           ProjectsDatabasesDocumentsListen
+         where
         type Rs ProjectsDatabasesDocumentsListen =
              ListenResponse
         type Scopes ProjectsDatabasesDocumentsListen =

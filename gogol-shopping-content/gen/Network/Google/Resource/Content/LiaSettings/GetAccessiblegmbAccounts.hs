@@ -56,10 +56,13 @@ type LiaSettingsGetAccessiblegmbAccountsResource =
 -- | Retrieves the list of accessible Google My Business accounts.
 --
 -- /See:/ 'liaSettingsGetAccessiblegmbAccounts' smart constructor.
-data LiaSettingsGetAccessiblegmbAccounts = LiaSettingsGetAccessiblegmbAccounts'
+data LiaSettingsGetAccessiblegmbAccounts =
+  LiaSettingsGetAccessiblegmbAccounts'
     { _lsgaaMerchantId :: !(Textual Word64)
     , _lsgaaAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiaSettingsGetAccessiblegmbAccounts' with the minimum fields required to make a request.
 --
@@ -73,10 +76,11 @@ liaSettingsGetAccessiblegmbAccounts
     -> Word64 -- ^ 'lsgaaAccountId'
     -> LiaSettingsGetAccessiblegmbAccounts
 liaSettingsGetAccessiblegmbAccounts pLsgaaMerchantId_ pLsgaaAccountId_ =
-    LiaSettingsGetAccessiblegmbAccounts'
+  LiaSettingsGetAccessiblegmbAccounts'
     { _lsgaaMerchantId = _Coerce # pLsgaaMerchantId_
     , _lsgaaAccountId = _Coerce # pLsgaaAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and
@@ -96,7 +100,8 @@ lsgaaAccountId
       . _Coerce
 
 instance GoogleRequest
-         LiaSettingsGetAccessiblegmbAccounts where
+           LiaSettingsGetAccessiblegmbAccounts
+         where
         type Rs LiaSettingsGetAccessiblegmbAccounts =
              LiaSettingsGetAccessibleGmbAccountsResponse
         type Scopes LiaSettingsGetAccessiblegmbAccounts =

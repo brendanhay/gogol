@@ -71,7 +71,8 @@ type ProjectsAgentSessionsDetectIntentResource =
 -- affect results of future queries.
 --
 -- /See:/ 'projectsAgentSessionsDetectIntent' smart constructor.
-data ProjectsAgentSessionsDetectIntent = ProjectsAgentSessionsDetectIntent'
+data ProjectsAgentSessionsDetectIntent =
+  ProjectsAgentSessionsDetectIntent'
     { _pasdiXgafv          :: !(Maybe Xgafv)
     , _pasdiUploadProtocol :: !(Maybe Text)
     , _pasdiAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsAgentSessionsDetectIntent = ProjectsAgentSessionsDetectIntent'
     , _pasdiPayload        :: !GoogleCloudDialogflowV2DetectIntentRequest
     , _pasdiSession        :: !Text
     , _pasdiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentSessionsDetectIntent' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsAgentSessionsDetectIntent
     -> Text -- ^ 'pasdiSession'
     -> ProjectsAgentSessionsDetectIntent
 projectsAgentSessionsDetectIntent pPasdiPayload_ pPasdiSession_ =
-    ProjectsAgentSessionsDetectIntent'
+  ProjectsAgentSessionsDetectIntent'
     { _pasdiXgafv = Nothing
     , _pasdiUploadProtocol = Nothing
     , _pasdiAccessToken = Nothing
@@ -112,6 +115,7 @@ projectsAgentSessionsDetectIntent pPasdiPayload_ pPasdiSession_ =
     , _pasdiSession = pPasdiSession_
     , _pasdiCallback = Nothing
     }
+
 
 -- | V1 error format.
 pasdiXgafv :: Lens' ProjectsAgentSessionsDetectIntent (Maybe Xgafv)
@@ -157,7 +161,8 @@ pasdiCallback
       (\ s a -> s{_pasdiCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsDetectIntent where
+           ProjectsAgentSessionsDetectIntent
+         where
         type Rs ProjectsAgentSessionsDetectIntent =
              GoogleCloudDialogflowV2DetectIntentResponse
         type Scopes ProjectsAgentSessionsDetectIntent =

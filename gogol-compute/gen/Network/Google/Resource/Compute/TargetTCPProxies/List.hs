@@ -64,13 +64,16 @@ type TargetTCPProxiesListResource =
 -- specified project.
 --
 -- /See:/ 'targetTCPProxiesList' smart constructor.
-data TargetTCPProxiesList = TargetTCPProxiesList'
+data TargetTCPProxiesList =
+  TargetTCPProxiesList'
     { _ttplOrderBy    :: !(Maybe Text)
     , _ttplProject    :: !Text
     , _ttplFilter     :: !(Maybe Text)
     , _ttplPageToken  :: !(Maybe Text)
     , _ttplMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetTCPProxiesList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ targetTCPProxiesList
     :: Text -- ^ 'ttplProject'
     -> TargetTCPProxiesList
 targetTCPProxiesList pTtplProject_ =
-    TargetTCPProxiesList'
+  TargetTCPProxiesList'
     { _ttplOrderBy = Nothing
     , _ttplProject = pTtplProject_
     , _ttplFilter = Nothing
     , _ttplPageToken = Nothing
     , _ttplMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

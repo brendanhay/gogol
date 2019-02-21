@@ -61,13 +61,16 @@ type DevicesUpdateResource =
 -- | Updates the device policy
 --
 -- /See:/ 'devicesUpdate' smart constructor.
-data DevicesUpdate = DevicesUpdate'
+data DevicesUpdate =
+  DevicesUpdate'
     { _duUpdateMask   :: !(Maybe Text)
     , _duEnterpriseId :: !Text
     , _duPayload      :: !Device
     , _duUserId       :: !Text
     , _duDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DevicesUpdate' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ devicesUpdate
     -> Text -- ^ 'duDeviceId'
     -> DevicesUpdate
 devicesUpdate pDuEnterpriseId_ pDuPayload_ pDuUserId_ pDuDeviceId_ =
-    DevicesUpdate'
+  DevicesUpdate'
     { _duUpdateMask = Nothing
     , _duEnterpriseId = pDuEnterpriseId_
     , _duPayload = pDuPayload_
     , _duUserId = pDuUserId_
     , _duDeviceId = pDuDeviceId_
     }
+
 
 -- | Mask that identifies which fields to update. If not set, all modifiable
 -- fields will be modified. When set in a query parameter, this field

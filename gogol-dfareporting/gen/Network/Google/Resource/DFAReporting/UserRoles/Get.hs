@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolesGet' request conforms to.
 type UserRolesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -54,10 +54,13 @@ type UserRolesGetResource =
 -- | Gets one user role by ID.
 --
 -- /See:/ 'userRolesGet' smart constructor.
-data UserRolesGet = UserRolesGet'
+data UserRolesGet =
+  UserRolesGet'
     { _urgProFileId :: !(Textual Int64)
     , _urgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserRolesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ userRolesGet
     -> Int64 -- ^ 'urgId'
     -> UserRolesGet
 userRolesGet pUrgProFileId_ pUrgId_ =
-    UserRolesGet'
-    { _urgProFileId = _Coerce # pUrgProFileId_
-    , _urgId = _Coerce # pUrgId_
-    }
+  UserRolesGet'
+    {_urgProFileId = _Coerce # pUrgProFileId_, _urgId = _Coerce # pUrgId_}
+
 
 -- | User profile ID associated with this request.
 urgProFileId :: Lens' UserRolesGet Int64

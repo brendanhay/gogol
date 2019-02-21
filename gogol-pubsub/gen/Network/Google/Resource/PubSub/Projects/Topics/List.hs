@@ -65,7 +65,8 @@ type ProjectsTopicsListResource =
 -- | Lists matching topics.
 --
 -- /See:/ 'projectsTopicsList' smart constructor.
-data ProjectsTopicsList = ProjectsTopicsList'
+data ProjectsTopicsList =
+  ProjectsTopicsList'
     { _ptlXgafv          :: !(Maybe Xgafv)
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlProject        :: !Text
@@ -74,7 +75,9 @@ data ProjectsTopicsList = ProjectsTopicsList'
     , _ptlPageToken      :: !(Maybe Text)
     , _ptlPageSize       :: !(Maybe (Textual Int32))
     , _ptlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTopicsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsTopicsList
     :: Text -- ^ 'ptlProject'
     -> ProjectsTopicsList
 projectsTopicsList pPtlProject_ =
-    ProjectsTopicsList'
+  ProjectsTopicsList'
     { _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing
     , _ptlProject = pPtlProject_
@@ -109,6 +112,7 @@ projectsTopicsList pPtlProject_ =
     , _ptlPageSize = Nothing
     , _ptlCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptlXgafv :: Lens' ProjectsTopicsList (Maybe Xgafv)

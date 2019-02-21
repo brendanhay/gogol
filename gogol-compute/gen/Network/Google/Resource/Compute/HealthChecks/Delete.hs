@@ -57,11 +57,14 @@ type HealthChecksDeleteResource =
 -- | Deletes the specified HealthCheck resource.
 --
 -- /See:/ 'healthChecksDelete' smart constructor.
-data HealthChecksDelete = HealthChecksDelete'
+data HealthChecksDelete =
+  HealthChecksDelete'
     { _hcdRequestId   :: !(Maybe Text)
     , _hcdHealthCheck :: !Text
     , _hcdProject     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HealthChecksDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ healthChecksDelete
     -> Text -- ^ 'hcdProject'
     -> HealthChecksDelete
 healthChecksDelete pHcdHealthCheck_ pHcdProject_ =
-    HealthChecksDelete'
+  HealthChecksDelete'
     { _hcdRequestId = Nothing
     , _hcdHealthCheck = pHcdHealthCheck_
     , _hcdProject = pHcdProject_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -60,14 +60,17 @@ type ProjectsUptimeCheckConfigsGetResource =
 -- | Gets a single uptime check configuration.
 --
 -- /See:/ 'projectsUptimeCheckConfigsGet' smart constructor.
-data ProjectsUptimeCheckConfigsGet = ProjectsUptimeCheckConfigsGet'
+data ProjectsUptimeCheckConfigsGet =
+  ProjectsUptimeCheckConfigsGet'
     { _puccgXgafv          :: !(Maybe Xgafv)
     , _puccgUploadProtocol :: !(Maybe Text)
     , _puccgAccessToken    :: !(Maybe Text)
     , _puccgUploadType     :: !(Maybe Text)
     , _puccgName           :: !Text
     , _puccgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsUptimeCheckConfigsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ projectsUptimeCheckConfigsGet
     :: Text -- ^ 'puccgName'
     -> ProjectsUptimeCheckConfigsGet
 projectsUptimeCheckConfigsGet pPuccgName_ =
-    ProjectsUptimeCheckConfigsGet'
+  ProjectsUptimeCheckConfigsGet'
     { _puccgXgafv = Nothing
     , _puccgUploadProtocol = Nothing
     , _puccgAccessToken = Nothing
@@ -96,6 +99,7 @@ projectsUptimeCheckConfigsGet pPuccgName_ =
     , _puccgName = pPuccgName_
     , _puccgCallback = Nothing
     }
+
 
 -- | V1 error format.
 puccgXgafv :: Lens' ProjectsUptimeCheckConfigsGet (Maybe Xgafv)

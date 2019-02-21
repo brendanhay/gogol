@@ -56,10 +56,13 @@ type I18nLanguagesListResource =
 -- supports.
 --
 -- /See:/ 'i18nLanguagesList' smart constructor.
-data I18nLanguagesList = I18nLanguagesList'
+data I18nLanguagesList =
+  I18nLanguagesList'
     { _illPart :: !Text
     , _illHl   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'I18nLanguagesList' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ i18nLanguagesList
     :: Text -- ^ 'illPart'
     -> I18nLanguagesList
 i18nLanguagesList pIllPart_ =
-    I18nLanguagesList'
-    { _illPart = pIllPart_
-    , _illHl = "en_US"
-    }
+  I18nLanguagesList' {_illPart = pIllPart_, _illHl = "en_US"}
+
 
 -- | The part parameter specifies the i18nLanguage resource properties that
 -- the API response will include. Set the parameter value to snippet.

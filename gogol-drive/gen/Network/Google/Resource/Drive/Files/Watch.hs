@@ -68,12 +68,15 @@ type FilesWatchResource =
 -- | Subscribes to changes to a file
 --
 -- /See:/ 'filesWatch' smart constructor.
-data FilesWatch = FilesWatch'
+data FilesWatch =
+  FilesWatch'
     { _fwPayload            :: !Channel
     , _fwAcknowledgeAbuse   :: !Bool
     , _fwFileId             :: !Text
     , _fwSupportsTeamDrives :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilesWatch' with the minimum fields required to make a request.
 --
@@ -91,12 +94,13 @@ filesWatch
     -> Text -- ^ 'fwFileId'
     -> FilesWatch
 filesWatch pFwPayload_ pFwFileId_ =
-    FilesWatch'
+  FilesWatch'
     { _fwPayload = pFwPayload_
     , _fwAcknowledgeAbuse = False
     , _fwFileId = pFwFileId_
     , _fwSupportsTeamDrives = False
     }
+
 
 -- | Multipart request metadata.
 fwPayload :: Lens' FilesWatch Channel

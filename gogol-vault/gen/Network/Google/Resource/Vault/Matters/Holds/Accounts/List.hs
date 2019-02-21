@@ -71,7 +71,8 @@ type MattersHoldsAccountsListResource =
 -- members.
 --
 -- /See:/ 'mattersHoldsAccountsList' smart constructor.
-data MattersHoldsAccountsList = MattersHoldsAccountsList'
+data MattersHoldsAccountsList =
+  MattersHoldsAccountsList'
     { _mhalXgafv          :: !(Maybe Xgafv)
     , _mhalUploadProtocol :: !(Maybe Text)
     , _mhalHoldId         :: !Text
@@ -79,7 +80,9 @@ data MattersHoldsAccountsList = MattersHoldsAccountsList'
     , _mhalUploadType     :: !(Maybe Text)
     , _mhalMatterId       :: !Text
     , _mhalCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersHoldsAccountsList' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ mattersHoldsAccountsList
     -> Text -- ^ 'mhalMatterId'
     -> MattersHoldsAccountsList
 mattersHoldsAccountsList pMhalHoldId_ pMhalMatterId_ =
-    MattersHoldsAccountsList'
+  MattersHoldsAccountsList'
     { _mhalXgafv = Nothing
     , _mhalUploadProtocol = Nothing
     , _mhalHoldId = pMhalHoldId_
@@ -112,6 +115,7 @@ mattersHoldsAccountsList pMhalHoldId_ pMhalMatterId_ =
     , _mhalMatterId = pMhalMatterId_
     , _mhalCallback = Nothing
     }
+
 
 -- | V1 error format.
 mhalXgafv :: Lens' MattersHoldsAccountsList (Maybe Xgafv)

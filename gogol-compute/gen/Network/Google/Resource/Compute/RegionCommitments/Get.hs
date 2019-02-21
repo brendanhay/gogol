@@ -59,11 +59,14 @@ type RegionCommitmentsGetResource =
 -- commitments by making a list() request.
 --
 -- /See:/ 'regionCommitmentsGet' smart constructor.
-data RegionCommitmentsGet = RegionCommitmentsGet'
+data RegionCommitmentsGet =
+  RegionCommitmentsGet'
     { _rcgProject    :: !Text
     , _rcgRegion     :: !Text
     , _rcgCommitment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionCommitmentsGet' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ regionCommitmentsGet
     -> Text -- ^ 'rcgCommitment'
     -> RegionCommitmentsGet
 regionCommitmentsGet pRcgProject_ pRcgRegion_ pRcgCommitment_ =
-    RegionCommitmentsGet'
+  RegionCommitmentsGet'
     { _rcgProject = pRcgProject_
     , _rcgRegion = pRcgRegion_
     , _rcgCommitment = pRcgCommitment_
     }
+
 
 -- | Project ID for this request.
 rcgProject :: Lens' RegionCommitmentsGet Text

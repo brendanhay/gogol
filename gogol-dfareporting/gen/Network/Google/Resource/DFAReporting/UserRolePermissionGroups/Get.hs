@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolePermissionGroupsGet' request conforms to.
 type UserRolePermissionGroupsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRolePermissionGroups" :>
@@ -55,10 +55,13 @@ type UserRolePermissionGroupsGetResource =
 -- | Gets one user role permission group by ID.
 --
 -- /See:/ 'userRolePermissionGroupsGet' smart constructor.
-data UserRolePermissionGroupsGet = UserRolePermissionGroupsGet'
+data UserRolePermissionGroupsGet =
+  UserRolePermissionGroupsGet'
     { _urpggProFileId :: !(Textual Int64)
     , _urpggId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserRolePermissionGroupsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,11 @@ userRolePermissionGroupsGet
     -> Int64 -- ^ 'urpggId'
     -> UserRolePermissionGroupsGet
 userRolePermissionGroupsGet pUrpggProFileId_ pUrpggId_ =
-    UserRolePermissionGroupsGet'
+  UserRolePermissionGroupsGet'
     { _urpggProFileId = _Coerce # pUrpggProFileId_
     , _urpggId = _Coerce # pUrpggId_
     }
+
 
 -- | User profile ID associated with this request.
 urpggProFileId :: Lens' UserRolePermissionGroupsGet Int64

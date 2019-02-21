@@ -75,7 +75,8 @@ type ProjectsZonesClustersNodePoolsAutoscalingResource
 -- | Sets the autoscaling settings for a specific node pool.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsAutoscaling' smart constructor.
-data ProjectsZonesClustersNodePoolsAutoscaling = ProjectsZonesClustersNodePoolsAutoscaling'
+data ProjectsZonesClustersNodePoolsAutoscaling =
+  ProjectsZonesClustersNodePoolsAutoscaling'
     { _pzcnpaXgafv          :: !(Maybe Xgafv)
     , _pzcnpaUploadProtocol :: !(Maybe Text)
     , _pzcnpaAccessToken    :: !(Maybe Text)
@@ -86,7 +87,9 @@ data ProjectsZonesClustersNodePoolsAutoscaling = ProjectsZonesClustersNodePoolsA
     , _pzcnpaClusterId      :: !Text
     , _pzcnpaProjectId      :: !Text
     , _pzcnpaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsAutoscaling' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ projectsZonesClustersNodePoolsAutoscaling
     -> Text -- ^ 'pzcnpaProjectId'
     -> ProjectsZonesClustersNodePoolsAutoscaling
 projectsZonesClustersNodePoolsAutoscaling pPzcnpaZone_ pPzcnpaPayload_ pPzcnpaNodePoolId_ pPzcnpaClusterId_ pPzcnpaProjectId_ =
-    ProjectsZonesClustersNodePoolsAutoscaling'
+  ProjectsZonesClustersNodePoolsAutoscaling'
     { _pzcnpaXgafv = Nothing
     , _pzcnpaUploadProtocol = Nothing
     , _pzcnpaAccessToken = Nothing
@@ -131,6 +134,7 @@ projectsZonesClustersNodePoolsAutoscaling pPzcnpaZone_ pPzcnpaPayload_ pPzcnpaNo
     , _pzcnpaProjectId = pPzcnpaProjectId_
     , _pzcnpaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpaXgafv :: Lens' ProjectsZonesClustersNodePoolsAutoscaling (Maybe Xgafv)
@@ -197,7 +201,8 @@ pzcnpaCallback
       (\ s a -> s{_pzcnpaCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersNodePoolsAutoscaling where
+           ProjectsZonesClustersNodePoolsAutoscaling
+         where
         type Rs ProjectsZonesClustersNodePoolsAutoscaling =
              Operation
         type Scopes ProjectsZonesClustersNodePoolsAutoscaling

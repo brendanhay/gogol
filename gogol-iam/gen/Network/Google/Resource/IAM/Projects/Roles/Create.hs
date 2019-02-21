@@ -63,7 +63,8 @@ type ProjectsRolesCreateResource =
 -- | Creates a new Role.
 --
 -- /See:/ 'projectsRolesCreate' smart constructor.
-data ProjectsRolesCreate = ProjectsRolesCreate'
+data ProjectsRolesCreate =
+  ProjectsRolesCreate'
     { _prcParent         :: !Text
     , _prcXgafv          :: !(Maybe Xgafv)
     , _prcUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsRolesCreate = ProjectsRolesCreate'
     , _prcUploadType     :: !(Maybe Text)
     , _prcPayload        :: !CreateRoleRequest
     , _prcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRolesCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsRolesCreate
     -> CreateRoleRequest -- ^ 'prcPayload'
     -> ProjectsRolesCreate
 projectsRolesCreate pPrcParent_ pPrcPayload_ =
-    ProjectsRolesCreate'
+  ProjectsRolesCreate'
     { _prcParent = pPrcParent_
     , _prcXgafv = Nothing
     , _prcUploadProtocol = Nothing
@@ -104,6 +107,7 @@ projectsRolesCreate pPrcParent_ pPrcPayload_ =
     , _prcPayload = pPrcPayload_
     , _prcCallback = Nothing
     }
+
 
 -- | The resource name of the parent resource in one of the following
 -- formats: \`organizations\/{ORGANIZATION_ID}\` \`projects\/{PROJECT_ID}\`

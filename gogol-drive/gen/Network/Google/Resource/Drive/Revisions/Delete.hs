@@ -56,10 +56,13 @@ type RevisionsDeleteResource =
 -- with binary content in Drive.
 --
 -- /See:/ 'revisionsDelete' smart constructor.
-data RevisionsDelete = RevisionsDelete'
+data RevisionsDelete =
+  RevisionsDelete'
     { _rFileId     :: !Text
     , _rRevisionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RevisionsDelete' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ revisionsDelete
     -> Text -- ^ 'rRevisionId'
     -> RevisionsDelete
 revisionsDelete pRFileId_ pRRevisionId_ =
-    RevisionsDelete'
-    { _rFileId = pRFileId_
-    , _rRevisionId = pRRevisionId_
-    }
+  RevisionsDelete' {_rFileId = pRFileId_, _rRevisionId = pRRevisionId_}
+
 
 -- | The ID of the file.
 rFileId :: Lens' RevisionsDelete Text

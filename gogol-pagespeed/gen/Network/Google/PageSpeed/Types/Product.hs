@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | Map of category groups in the LHR.
 --
 -- /See:/ 'lighthouseResultV5CategoryGroups' smart constructor.
-newtype LighthouseResultV5CategoryGroups = LighthouseResultV5CategoryGroups'
+newtype LighthouseResultV5CategoryGroups =
+  LighthouseResultV5CategoryGroups'
     { _lrvcgAddtional :: HashMap Text LighthouseResultV5CategoryGroupsAdditional
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5CategoryGroups' with the minimum fields required to make a request.
 --
@@ -36,9 +39,9 @@ lighthouseResultV5CategoryGroups
     :: HashMap Text LighthouseResultV5CategoryGroupsAdditional -- ^ 'lrvcgAddtional'
     -> LighthouseResultV5CategoryGroups
 lighthouseResultV5CategoryGroups pLrvcgAddtional_ =
-    LighthouseResultV5CategoryGroups'
-    { _lrvcgAddtional = _Coerce # pLrvcgAddtional_
-    }
+  LighthouseResultV5CategoryGroups'
+    {_lrvcgAddtional = _Coerce # pLrvcgAddtional_}
+
 
 -- | A grouping contained in a category that groups similar audits together.
 lrvcgAddtional :: Lens' LighthouseResultV5CategoryGroups (HashMap Text LighthouseResultV5CategoryGroupsAdditional)
@@ -63,10 +66,13 @@ instance ToJSON LighthouseResultV5CategoryGroups
 -- problem that this Lighthouse result may need to be discarded.
 --
 -- /See:/ 'lighthouseResultV5RuntimeError' smart constructor.
-data LighthouseResultV5RuntimeError = LighthouseResultV5RuntimeError'
+data LighthouseResultV5RuntimeError =
+  LighthouseResultV5RuntimeError'
     { _lrvreCode    :: !(Maybe Text)
     , _lrvreMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5RuntimeError' with the minimum fields required to make a request.
 --
@@ -78,10 +84,9 @@ data LighthouseResultV5RuntimeError = LighthouseResultV5RuntimeError'
 lighthouseResultV5RuntimeError
     :: LighthouseResultV5RuntimeError
 lighthouseResultV5RuntimeError =
-    LighthouseResultV5RuntimeError'
-    { _lrvreCode = Nothing
-    , _lrvreMessage = Nothing
-    }
+  LighthouseResultV5RuntimeError'
+    {_lrvreCode = Nothing, _lrvreMessage = Nothing}
+
 
 -- | The enumerated Lighthouse Error code.
 lrvreCode :: Lens' LighthouseResultV5RuntimeError (Maybe Text)
@@ -111,9 +116,12 @@ instance ToJSON LighthouseResultV5RuntimeError where
 -- | Freeform details section of the audit.
 --
 -- /See:/ 'lighthouseAuditResultV5Details' smart constructor.
-newtype LighthouseAuditResultV5Details = LighthouseAuditResultV5Details'
+newtype LighthouseAuditResultV5Details =
+  LighthouseAuditResultV5Details'
     { _larvdAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseAuditResultV5Details' with the minimum fields required to make a request.
 --
@@ -124,9 +132,8 @@ lighthouseAuditResultV5Details
     :: HashMap Text JSONValue -- ^ 'larvdAddtional'
     -> LighthouseAuditResultV5Details
 lighthouseAuditResultV5Details pLarvdAddtional_ =
-    LighthouseAuditResultV5Details'
-    { _larvdAddtional = _Coerce # pLarvdAddtional_
-    }
+  LighthouseAuditResultV5Details' {_larvdAddtional = _Coerce # pLarvdAddtional_}
+
 
 larvdAddtional :: Lens' LighthouseAuditResultV5Details (HashMap Text JSONValue)
 larvdAddtional
@@ -148,11 +155,14 @@ instance ToJSON LighthouseAuditResultV5Details where
 -- | The configuration settings for this LHR.
 --
 -- /See:/ 'lighthouseResultV5ConfigSettings' smart constructor.
-data LighthouseResultV5ConfigSettings = LighthouseResultV5ConfigSettings'
+data LighthouseResultV5ConfigSettings =
+  LighthouseResultV5ConfigSettings'
     { _lrvcsLocale             :: !(Maybe Text)
     , _lrvcsEmulatedFormFactor :: !(Maybe Text)
     , _lrvcsOnlyCategories     :: !(Maybe JSONValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5ConfigSettings' with the minimum fields required to make a request.
 --
@@ -166,11 +176,12 @@ data LighthouseResultV5ConfigSettings = LighthouseResultV5ConfigSettings'
 lighthouseResultV5ConfigSettings
     :: LighthouseResultV5ConfigSettings
 lighthouseResultV5ConfigSettings =
-    LighthouseResultV5ConfigSettings'
+  LighthouseResultV5ConfigSettings'
     { _lrvcsLocale = Nothing
     , _lrvcsEmulatedFormFactor = Nothing
     , _lrvcsOnlyCategories = Nothing
     }
+
 
 -- | The locale setting.
 lrvcsLocale :: Lens' LighthouseResultV5ConfigSettings (Maybe Text)
@@ -210,11 +221,14 @@ instance ToJSON LighthouseResultV5ConfigSettings
 -- | Environment settings that were used when making this LHR.
 --
 -- /See:/ 'lighthouseResultV5Environment' smart constructor.
-data LighthouseResultV5Environment = LighthouseResultV5Environment'
+data LighthouseResultV5Environment =
+  LighthouseResultV5Environment'
     { _lrveHostUserAgent    :: !(Maybe Text)
     , _lrveBenchmarkIndex   :: !(Maybe (Textual Double))
     , _lrveNetworkUserAgent :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5Environment' with the minimum fields required to make a request.
 --
@@ -228,11 +242,12 @@ data LighthouseResultV5Environment = LighthouseResultV5Environment'
 lighthouseResultV5Environment
     :: LighthouseResultV5Environment
 lighthouseResultV5Environment =
-    LighthouseResultV5Environment'
+  LighthouseResultV5Environment'
     { _lrveHostUserAgent = Nothing
     , _lrveBenchmarkIndex = Nothing
     , _lrveNetworkUserAgent = Nothing
     }
+
 
 -- | The user agent string of the version of Chrome used.
 lrveHostUserAgent :: Lens' LighthouseResultV5Environment (Maybe Text)
@@ -272,10 +287,13 @@ instance ToJSON LighthouseResultV5Environment where
 -- | A grouping contained in a category that groups similar audits together.
 --
 -- /See:/ 'lighthouseResultV5CategoryGroupsAdditional' smart constructor.
-data LighthouseResultV5CategoryGroupsAdditional = LighthouseResultV5CategoryGroupsAdditional'
+data LighthouseResultV5CategoryGroupsAdditional =
+  LighthouseResultV5CategoryGroupsAdditional'
     { _lrvcgaTitle       :: !(Maybe Text)
     , _lrvcgaDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5CategoryGroupsAdditional' with the minimum fields required to make a request.
 --
@@ -287,10 +305,9 @@ data LighthouseResultV5CategoryGroupsAdditional = LighthouseResultV5CategoryGrou
 lighthouseResultV5CategoryGroupsAdditional
     :: LighthouseResultV5CategoryGroupsAdditional
 lighthouseResultV5CategoryGroupsAdditional =
-    LighthouseResultV5CategoryGroupsAdditional'
-    { _lrvcgaTitle = Nothing
-    , _lrvcgaDescription = Nothing
-    }
+  LighthouseResultV5CategoryGroupsAdditional'
+    {_lrvcgaTitle = Nothing, _lrvcgaDescription = Nothing}
+
 
 -- | The title of the category group.
 lrvcgaTitle :: Lens' LighthouseResultV5CategoryGroupsAdditional (Maybe Text)
@@ -304,7 +321,8 @@ lrvcgaDescription
       (\ s a -> s{_lrvcgaDescription = a})
 
 instance FromJSON
-         LighthouseResultV5CategoryGroupsAdditional where
+           LighthouseResultV5CategoryGroupsAdditional
+         where
         parseJSON
           = withObject
               "LighthouseResultV5CategoryGroupsAdditional"
@@ -313,7 +331,8 @@ instance FromJSON
                    (o .:? "title") <*> (o .:? "description"))
 
 instance ToJSON
-         LighthouseResultV5CategoryGroupsAdditional where
+           LighthouseResultV5CategoryGroupsAdditional
+         where
         toJSON
           LighthouseResultV5CategoryGroupsAdditional'{..}
           = object
@@ -323,7 +342,8 @@ instance ToJSON
 
 --
 -- /See:/ 'lighthouseAuditResultV5' smart constructor.
-data LighthouseAuditResultV5 = LighthouseAuditResultV5'
+data LighthouseAuditResultV5 =
+  LighthouseAuditResultV5'
     { _larvScore            :: !(Maybe JSONValue)
     , _larvExplanation      :: !(Maybe Text)
     , _larvWarnings         :: !(Maybe JSONValue)
@@ -334,7 +354,9 @@ data LighthouseAuditResultV5 = LighthouseAuditResultV5'
     , _larvTitle            :: !(Maybe Text)
     , _larvErrorMessage     :: !(Maybe Text)
     , _larvDescription      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseAuditResultV5' with the minimum fields required to make a request.
 --
@@ -362,7 +384,7 @@ data LighthouseAuditResultV5 = LighthouseAuditResultV5'
 lighthouseAuditResultV5
     :: LighthouseAuditResultV5
 lighthouseAuditResultV5 =
-    LighthouseAuditResultV5'
+  LighthouseAuditResultV5'
     { _larvScore = Nothing
     , _larvExplanation = Nothing
     , _larvWarnings = Nothing
@@ -374,6 +396,7 @@ lighthouseAuditResultV5 =
     , _larvErrorMessage = Nothing
     , _larvDescription = Nothing
     }
+
 
 larvScore :: Lens' LighthouseAuditResultV5 (Maybe JSONValue)
 larvScore
@@ -458,7 +481,8 @@ instance ToJSON LighthouseAuditResultV5 where
 
 --
 -- /See:/ 'pagespeedAPIPagespeedResponseV5' smart constructor.
-data PagespeedAPIPagespeedResponseV5 = PagespeedAPIPagespeedResponseV5'
+data PagespeedAPIPagespeedResponseV5 =
+  PagespeedAPIPagespeedResponseV5'
     { _paprvKind                    :: !Text
     , _paprvOriginLoadingExperience :: !(Maybe PagespeedAPILoadingExperienceV5)
     , _paprvVersion                 :: !(Maybe PagespeedAPIPagespeedResponseV5Version)
@@ -467,7 +491,9 @@ data PagespeedAPIPagespeedResponseV5 = PagespeedAPIPagespeedResponseV5'
     , _paprvLoadingExperience       :: !(Maybe PagespeedAPILoadingExperienceV5)
     , _paprvLighthouseResult        :: !(Maybe LighthouseResultV5)
     , _paprvAnalysisUTCTimestamp    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagespeedAPIPagespeedResponseV5' with the minimum fields required to make a request.
 --
@@ -491,7 +517,7 @@ data PagespeedAPIPagespeedResponseV5 = PagespeedAPIPagespeedResponseV5'
 pagespeedAPIPagespeedResponseV5
     :: PagespeedAPIPagespeedResponseV5
 pagespeedAPIPagespeedResponseV5 =
-    PagespeedAPIPagespeedResponseV5'
+  PagespeedAPIPagespeedResponseV5'
     { _paprvKind = "pagespeedonline#result"
     , _paprvOriginLoadingExperience = Nothing
     , _paprvVersion = Nothing
@@ -501,6 +527,7 @@ pagespeedAPIPagespeedResponseV5 =
     , _paprvLighthouseResult = Nothing
     , _paprvAnalysisUTCTimestamp = Nothing
     }
+
 
 -- | Kind of result.
 paprvKind :: Lens' PagespeedAPIPagespeedResponseV5 Text
@@ -579,9 +606,12 @@ instance ToJSON PagespeedAPIPagespeedResponseV5 where
 
 --
 -- /See:/ 'pagespeedAPILoadingExperienceV5Metrics' smart constructor.
-newtype PagespeedAPILoadingExperienceV5Metrics = PagespeedAPILoadingExperienceV5Metrics'
+newtype PagespeedAPILoadingExperienceV5Metrics =
+  PagespeedAPILoadingExperienceV5Metrics'
     { _palevmAddtional :: HashMap Text PagespeedAPILoadingExperienceV5MetricsAdditional
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagespeedAPILoadingExperienceV5Metrics' with the minimum fields required to make a request.
 --
@@ -592,9 +622,9 @@ pagespeedAPILoadingExperienceV5Metrics
     :: HashMap Text PagespeedAPILoadingExperienceV5MetricsAdditional -- ^ 'palevmAddtional'
     -> PagespeedAPILoadingExperienceV5Metrics
 pagespeedAPILoadingExperienceV5Metrics pPalevmAddtional_ =
-    PagespeedAPILoadingExperienceV5Metrics'
-    { _palevmAddtional = _Coerce # pPalevmAddtional_
-    }
+  PagespeedAPILoadingExperienceV5Metrics'
+    {_palevmAddtional = _Coerce # pPalevmAddtional_}
+
 
 -- | The type of the metric.
 palevmAddtional :: Lens' PagespeedAPILoadingExperienceV5Metrics (HashMap Text PagespeedAPILoadingExperienceV5MetricsAdditional)
@@ -604,7 +634,8 @@ palevmAddtional
       . _Coerce
 
 instance FromJSON
-         PagespeedAPILoadingExperienceV5Metrics where
+           PagespeedAPILoadingExperienceV5Metrics
+         where
         parseJSON
           = withObject "PagespeedAPILoadingExperienceV5Metrics"
               (\ o ->
@@ -612,12 +643,14 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         PagespeedAPILoadingExperienceV5Metrics where
+           PagespeedAPILoadingExperienceV5Metrics
+         where
         toJSON = toJSON . _palevmAddtional
 
 --
 -- /See:/ 'lighthouseResultV5' smart constructor.
-data LighthouseResultV5 = LighthouseResultV5'
+data LighthouseResultV5 =
+  LighthouseResultV5'
     { _lrvRuntimeError      :: !(Maybe LighthouseResultV5RuntimeError)
     , _lrvCategoryGroups    :: !(Maybe LighthouseResultV5CategoryGroups)
     , _lrvFinalURL          :: !(Maybe Text)
@@ -632,7 +665,9 @@ data LighthouseResultV5 = LighthouseResultV5'
     , _lrvTiming            :: !(Maybe LighthouseResultV5Timing)
     , _lrvAudits            :: !(Maybe LighthouseResultV5Audits)
     , _lrvI18n              :: !(Maybe LighthouseResultV5I18n)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5' with the minimum fields required to make a request.
 --
@@ -668,7 +703,7 @@ data LighthouseResultV5 = LighthouseResultV5'
 lighthouseResultV5
     :: LighthouseResultV5
 lighthouseResultV5 =
-    LighthouseResultV5'
+  LighthouseResultV5'
     { _lrvRuntimeError = Nothing
     , _lrvCategoryGroups = Nothing
     , _lrvFinalURL = Nothing
@@ -684,6 +719,7 @@ lighthouseResultV5 =
     , _lrvAudits = Nothing
     , _lrvI18n = Nothing
     }
+
 
 -- | A top-level error message that, if present, indicates a serious enough
 -- problem that this Lighthouse result may need to be discarded.
@@ -807,13 +843,16 @@ instance ToJSON LighthouseResultV5 where
 -- | Map of categories in the LHR.
 --
 -- /See:/ 'lighthouseResultV5Categories' smart constructor.
-data LighthouseResultV5Categories = LighthouseResultV5Categories'
+data LighthouseResultV5Categories =
+  LighthouseResultV5Categories'
     { _lrvcBestPractices :: !(Maybe LighthouseCategoryV5)
     , _lrvcPerformance   :: !(Maybe LighthouseCategoryV5)
     , _lrvcPwa           :: !(Maybe LighthouseCategoryV5)
     , _lrvcSeo           :: !(Maybe LighthouseCategoryV5)
     , _lrvcAccessibility :: !(Maybe LighthouseCategoryV5)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5Categories' with the minimum fields required to make a request.
 --
@@ -831,13 +870,14 @@ data LighthouseResultV5Categories = LighthouseResultV5Categories'
 lighthouseResultV5Categories
     :: LighthouseResultV5Categories
 lighthouseResultV5Categories =
-    LighthouseResultV5Categories'
+  LighthouseResultV5Categories'
     { _lrvcBestPractices = Nothing
     , _lrvcPerformance = Nothing
     , _lrvcPwa = Nothing
     , _lrvcSeo = Nothing
     , _lrvcAccessibility = Nothing
     }
+
 
 -- | The best practices category, containing all web best practice related
 -- audits.
@@ -889,14 +929,17 @@ instance ToJSON LighthouseResultV5Categories where
 
 --
 -- /See:/ 'lighthouseCategoryV5' smart constructor.
-data LighthouseCategoryV5 = LighthouseCategoryV5'
+data LighthouseCategoryV5 =
+  LighthouseCategoryV5'
     { _lcvManualDescription :: !(Maybe Text)
     , _lcvScore             :: !(Maybe JSONValue)
     , _lcvAuditRefs         :: !(Maybe [LighthouseCategoryV5AuditRefsItem])
     , _lcvId                :: !(Maybe Text)
     , _lcvTitle             :: !(Maybe Text)
     , _lcvDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseCategoryV5' with the minimum fields required to make a request.
 --
@@ -916,7 +959,7 @@ data LighthouseCategoryV5 = LighthouseCategoryV5'
 lighthouseCategoryV5
     :: LighthouseCategoryV5
 lighthouseCategoryV5 =
-    LighthouseCategoryV5'
+  LighthouseCategoryV5'
     { _lcvManualDescription = Nothing
     , _lcvScore = Nothing
     , _lcvAuditRefs = Nothing
@@ -924,6 +967,7 @@ lighthouseCategoryV5 =
     , _lcvTitle = Nothing
     , _lcvDescription = Nothing
     }
+
 
 -- | A description for the manual audits in the category.
 lcvManualDescription :: Lens' LighthouseCategoryV5 (Maybe Text)
@@ -979,11 +1023,14 @@ instance ToJSON LighthouseCategoryV5 where
 -- | The type of the metric.
 --
 -- /See:/ 'pagespeedAPILoadingExperienceV5MetricsAdditional' smart constructor.
-data PagespeedAPILoadingExperienceV5MetricsAdditional = PagespeedAPILoadingExperienceV5MetricsAdditional'
+data PagespeedAPILoadingExperienceV5MetricsAdditional =
+  PagespeedAPILoadingExperienceV5MetricsAdditional'
     { _palevmaCategory      :: !(Maybe Text)
     , _palevmaPercentile    :: !(Maybe (Textual Int32))
     , _palevmaDistributions :: !(Maybe [PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagespeedAPILoadingExperienceV5MetricsAdditional' with the minimum fields required to make a request.
 --
@@ -997,11 +1044,12 @@ data PagespeedAPILoadingExperienceV5MetricsAdditional = PagespeedAPILoadingExper
 pagespeedAPILoadingExperienceV5MetricsAdditional
     :: PagespeedAPILoadingExperienceV5MetricsAdditional
 pagespeedAPILoadingExperienceV5MetricsAdditional =
-    PagespeedAPILoadingExperienceV5MetricsAdditional'
+  PagespeedAPILoadingExperienceV5MetricsAdditional'
     { _palevmaCategory = Nothing
     , _palevmaPercentile = Nothing
     , _palevmaDistributions = Nothing
     }
+
 
 palevmaCategory :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditional (Maybe Text)
 palevmaCategory
@@ -1022,7 +1070,7 @@ palevmaDistributions
       . _Coerce
 
 instance FromJSON
-         PagespeedAPILoadingExperienceV5MetricsAdditional
+           PagespeedAPILoadingExperienceV5MetricsAdditional
          where
         parseJSON
           = withObject
@@ -1033,7 +1081,7 @@ instance FromJSON
                      (o .:? "distributions" .!= mempty))
 
 instance ToJSON
-         PagespeedAPILoadingExperienceV5MetricsAdditional
+           PagespeedAPILoadingExperienceV5MetricsAdditional
          where
         toJSON
           PagespeedAPILoadingExperienceV5MetricsAdditional'{..}
@@ -1045,12 +1093,15 @@ instance ToJSON
 
 --
 -- /See:/ 'pagespeedAPILoadingExperienceV5' smart constructor.
-data PagespeedAPILoadingExperienceV5 = PagespeedAPILoadingExperienceV5'
+data PagespeedAPILoadingExperienceV5 =
+  PagespeedAPILoadingExperienceV5'
     { _palevMetrics         :: !(Maybe PagespeedAPILoadingExperienceV5Metrics)
     , _palevInitialURL      :: !(Maybe Text)
     , _palevId              :: !(Maybe Text)
     , _palevOverallCategory :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagespeedAPILoadingExperienceV5' with the minimum fields required to make a request.
 --
@@ -1066,12 +1117,13 @@ data PagespeedAPILoadingExperienceV5 = PagespeedAPILoadingExperienceV5'
 pagespeedAPILoadingExperienceV5
     :: PagespeedAPILoadingExperienceV5
 pagespeedAPILoadingExperienceV5 =
-    PagespeedAPILoadingExperienceV5'
+  PagespeedAPILoadingExperienceV5'
     { _palevMetrics = Nothing
     , _palevInitialURL = Nothing
     , _palevId = Nothing
     , _palevOverallCategory = Nothing
     }
+
 
 palevMetrics :: Lens' PagespeedAPILoadingExperienceV5 (Maybe PagespeedAPILoadingExperienceV5Metrics)
 palevMetrics
@@ -1113,10 +1165,13 @@ instance ToJSON PagespeedAPILoadingExperienceV5 where
 -- | The version of PageSpeed used to generate these results.
 --
 -- /See:/ 'pagespeedAPIPagespeedResponseV5Version' smart constructor.
-data PagespeedAPIPagespeedResponseV5Version = PagespeedAPIPagespeedResponseV5Version'
+data PagespeedAPIPagespeedResponseV5Version =
+  PagespeedAPIPagespeedResponseV5Version'
     { _paprvvMinor :: !(Maybe (Textual Int32))
     , _paprvvMajor :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagespeedAPIPagespeedResponseV5Version' with the minimum fields required to make a request.
 --
@@ -1128,10 +1183,9 @@ data PagespeedAPIPagespeedResponseV5Version = PagespeedAPIPagespeedResponseV5Ver
 pagespeedAPIPagespeedResponseV5Version
     :: PagespeedAPIPagespeedResponseV5Version
 pagespeedAPIPagespeedResponseV5Version =
-    PagespeedAPIPagespeedResponseV5Version'
-    { _paprvvMinor = Nothing
-    , _paprvvMajor = Nothing
-    }
+  PagespeedAPIPagespeedResponseV5Version'
+    {_paprvvMinor = Nothing, _paprvvMajor = Nothing}
+
 
 -- | The minor version number of PageSpeed used to generate these results.
 paprvvMinor :: Lens' PagespeedAPIPagespeedResponseV5Version (Maybe Int32)
@@ -1146,7 +1200,8 @@ paprvvMajor
       mapping _Coerce
 
 instance FromJSON
-         PagespeedAPIPagespeedResponseV5Version where
+           PagespeedAPIPagespeedResponseV5Version
+         where
         parseJSON
           = withObject "PagespeedAPIPagespeedResponseV5Version"
               (\ o ->
@@ -1154,7 +1209,8 @@ instance FromJSON
                    (o .:? "minor") <*> (o .:? "major"))
 
 instance ToJSON
-         PagespeedAPIPagespeedResponseV5Version where
+           PagespeedAPIPagespeedResponseV5Version
+         where
         toJSON PagespeedAPIPagespeedResponseV5Version'{..}
           = object
               (catMaybes
@@ -1163,11 +1219,14 @@ instance ToJSON
 
 --
 -- /See:/ 'pagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem' smart constructor.
-data PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem = PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem'
+data PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem =
+  PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem'
     { _palevmadiMax        :: !(Maybe (Textual Int32))
     , _palevmadiProportion :: !(Maybe (Textual Double))
     , _palevmadiMin        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem' with the minimum fields required to make a request.
 --
@@ -1181,11 +1240,12 @@ data PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem = Pagespe
 pagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
     :: PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
 pagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem =
-    PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem'
+  PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem'
     { _palevmadiMax = Nothing
     , _palevmadiProportion = Nothing
     , _palevmadiMin = Nothing
     }
+
 
 palevmadiMax :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem (Maybe Int32)
 palevmadiMax
@@ -1204,7 +1264,7 @@ palevmadiMin
       . mapping _Coerce
 
 instance FromJSON
-         PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
+           PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
          where
         parseJSON
           = withObject
@@ -1216,7 +1276,7 @@ instance FromJSON
                      (o .:? "min"))
 
 instance ToJSON
-         PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
+           PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
          where
         toJSON
           PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem'{..}
@@ -1229,9 +1289,12 @@ instance ToJSON
 -- | Timing information for this LHR.
 --
 -- /See:/ 'lighthouseResultV5Timing' smart constructor.
-newtype LighthouseResultV5Timing = LighthouseResultV5Timing'
+newtype LighthouseResultV5Timing =
+  LighthouseResultV5Timing'
     { _lrvtTotal :: Maybe (Textual Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5Timing' with the minimum fields required to make a request.
 --
@@ -1240,10 +1303,8 @@ newtype LighthouseResultV5Timing = LighthouseResultV5Timing'
 -- * 'lrvtTotal'
 lighthouseResultV5Timing
     :: LighthouseResultV5Timing
-lighthouseResultV5Timing =
-    LighthouseResultV5Timing'
-    { _lrvtTotal = Nothing
-    }
+lighthouseResultV5Timing = LighthouseResultV5Timing' {_lrvtTotal = Nothing}
+
 
 -- | The total duration of Lighthouse\'s run.
 lrvtTotal :: Lens' LighthouseResultV5Timing (Maybe Double)
@@ -1265,7 +1326,8 @@ instance ToJSON LighthouseResultV5Timing where
 -- configSettings.
 --
 -- /See:/ 'lighthouseResultV5I18nRendererFormattedStrings' smart constructor.
-data LighthouseResultV5I18nRendererFormattedStrings = LighthouseResultV5I18nRendererFormattedStrings'
+data LighthouseResultV5I18nRendererFormattedStrings =
+  LighthouseResultV5I18nRendererFormattedStrings'
     { _lrvirfsLabDataTitle                     :: !(Maybe Text)
     , _lrvirfsWarningHeader                    :: !(Maybe Text)
     , _lrvirfsOpportUnityResourceColumnLabel   :: !(Maybe Text)
@@ -1282,7 +1344,9 @@ data LighthouseResultV5I18nRendererFormattedStrings = LighthouseResultV5I18nRend
     , _lrvirfsLsPerformanceCategoryDescription :: !(Maybe Text)
     , _lrvirfsAuditGroupExpandTooltip          :: !(Maybe Text)
     , _lrvirfsNotApplicableAuditsGroupTitle    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5I18nRendererFormattedStrings' with the minimum fields required to make a request.
 --
@@ -1322,7 +1386,7 @@ data LighthouseResultV5I18nRendererFormattedStrings = LighthouseResultV5I18nRend
 lighthouseResultV5I18nRendererFormattedStrings
     :: LighthouseResultV5I18nRendererFormattedStrings
 lighthouseResultV5I18nRendererFormattedStrings =
-    LighthouseResultV5I18nRendererFormattedStrings'
+  LighthouseResultV5I18nRendererFormattedStrings'
     { _lrvirfsLabDataTitle = Nothing
     , _lrvirfsWarningHeader = Nothing
     , _lrvirfsOpportUnityResourceColumnLabel = Nothing
@@ -1340,6 +1404,7 @@ lighthouseResultV5I18nRendererFormattedStrings =
     , _lrvirfsAuditGroupExpandTooltip = Nothing
     , _lrvirfsNotApplicableAuditsGroupTitle = Nothing
     }
+
 
 -- | The title of the lab data performance category.
 lrvirfsLabDataTitle :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
@@ -1445,7 +1510,8 @@ lrvirfsNotApplicableAuditsGroupTitle
          s{_lrvirfsNotApplicableAuditsGroupTitle = a})
 
 instance FromJSON
-         LighthouseResultV5I18nRendererFormattedStrings where
+           LighthouseResultV5I18nRendererFormattedStrings
+         where
         parseJSON
           = withObject
               "LighthouseResultV5I18nRendererFormattedStrings"
@@ -1468,7 +1534,8 @@ instance FromJSON
                      <*> (o .:? "notApplicableAuditsGroupTitle"))
 
 instance ToJSON
-         LighthouseResultV5I18nRendererFormattedStrings where
+           LighthouseResultV5I18nRendererFormattedStrings
+         where
         toJSON
           LighthouseResultV5I18nRendererFormattedStrings'{..}
           = object
@@ -1504,11 +1571,14 @@ instance ToJSON
 
 --
 -- /See:/ 'lighthouseCategoryV5AuditRefsItem' smart constructor.
-data LighthouseCategoryV5AuditRefsItem = LighthouseCategoryV5AuditRefsItem'
+data LighthouseCategoryV5AuditRefsItem =
+  LighthouseCategoryV5AuditRefsItem'
     { _lcvariGroup  :: !(Maybe Text)
     , _lcvariWeight :: !(Maybe (Textual Double))
     , _lcvariId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseCategoryV5AuditRefsItem' with the minimum fields required to make a request.
 --
@@ -1522,11 +1592,9 @@ data LighthouseCategoryV5AuditRefsItem = LighthouseCategoryV5AuditRefsItem'
 lighthouseCategoryV5AuditRefsItem
     :: LighthouseCategoryV5AuditRefsItem
 lighthouseCategoryV5AuditRefsItem =
-    LighthouseCategoryV5AuditRefsItem'
-    { _lcvariGroup = Nothing
-    , _lcvariWeight = Nothing
-    , _lcvariId = Nothing
-    }
+  LighthouseCategoryV5AuditRefsItem'
+    {_lcvariGroup = Nothing, _lcvariWeight = Nothing, _lcvariId = Nothing}
+
 
 -- | The category group that the audit belongs to (optional).
 lcvariGroup :: Lens' LighthouseCategoryV5AuditRefsItem (Maybe Text)
@@ -1564,9 +1632,12 @@ instance ToJSON LighthouseCategoryV5AuditRefsItem
 -- | The internationalization strings that are required to render the LHR.
 --
 -- /See:/ 'lighthouseResultV5I18n' smart constructor.
-newtype LighthouseResultV5I18n = LighthouseResultV5I18n'
+newtype LighthouseResultV5I18n =
+  LighthouseResultV5I18n'
     { _lrviRendererFormattedStrings :: Maybe LighthouseResultV5I18nRendererFormattedStrings
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5I18n' with the minimum fields required to make a request.
 --
@@ -1576,9 +1647,8 @@ newtype LighthouseResultV5I18n = LighthouseResultV5I18n'
 lighthouseResultV5I18n
     :: LighthouseResultV5I18n
 lighthouseResultV5I18n =
-    LighthouseResultV5I18n'
-    { _lrviRendererFormattedStrings = Nothing
-    }
+  LighthouseResultV5I18n' {_lrviRendererFormattedStrings = Nothing}
+
 
 -- | Internationalized strings that are formatted to the locale in
 -- configSettings.
@@ -1604,9 +1674,12 @@ instance ToJSON LighthouseResultV5I18n where
 -- | Map of audits in the LHR.
 --
 -- /See:/ 'lighthouseResultV5Audits' smart constructor.
-newtype LighthouseResultV5Audits = LighthouseResultV5Audits'
+newtype LighthouseResultV5Audits =
+  LighthouseResultV5Audits'
     { _lrvaAddtional :: HashMap Text LighthouseAuditResultV5
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5Audits' with the minimum fields required to make a request.
 --
@@ -1617,9 +1690,8 @@ lighthouseResultV5Audits
     :: HashMap Text LighthouseAuditResultV5 -- ^ 'lrvaAddtional'
     -> LighthouseResultV5Audits
 lighthouseResultV5Audits pLrvaAddtional_ =
-    LighthouseResultV5Audits'
-    { _lrvaAddtional = _Coerce # pLrvaAddtional_
-    }
+  LighthouseResultV5Audits' {_lrvaAddtional = _Coerce # pLrvaAddtional_}
+
 
 -- | An audit that was performed in this run. Keyed by audit id.
 lrvaAddtional :: Lens' LighthouseResultV5Audits (HashMap Text LighthouseAuditResultV5)

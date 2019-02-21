@@ -71,7 +71,8 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 -- subscription-level \`ackDeadlineSeconds\` used for subsequent messages.
 --
 -- /See:/ 'projectsSubscriptionsModifyAckDeadline' smart constructor.
-data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline'
+data ProjectsSubscriptionsModifyAckDeadline =
+  ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv          :: !(Maybe Xgafv)
     , _psmadUploadProtocol :: !(Maybe Text)
     , _psmadAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDead
     , _psmadPayload        :: !ModifyAckDeadlineRequest
     , _psmadSubscription   :: !Text
     , _psmadCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSubscriptionsModifyAckDeadline' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsSubscriptionsModifyAckDeadline
     -> Text -- ^ 'psmadSubscription'
     -> ProjectsSubscriptionsModifyAckDeadline
 projectsSubscriptionsModifyAckDeadline pPsmadPayload_ pPsmadSubscription_ =
-    ProjectsSubscriptionsModifyAckDeadline'
+  ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv = Nothing
     , _psmadUploadProtocol = Nothing
     , _psmadAccessToken = Nothing
@@ -112,6 +115,7 @@ projectsSubscriptionsModifyAckDeadline pPsmadPayload_ pPsmadSubscription_ =
     , _psmadSubscription = pPsmadSubscription_
     , _psmadCallback = Nothing
     }
+
 
 -- | V1 error format.
 psmadXgafv :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Xgafv)
@@ -155,7 +159,8 @@ psmadCallback
       (\ s a -> s{_psmadCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsModifyAckDeadline where
+           ProjectsSubscriptionsModifyAckDeadline
+         where
         type Rs ProjectsSubscriptionsModifyAckDeadline =
              Empty
         type Scopes ProjectsSubscriptionsModifyAckDeadline =

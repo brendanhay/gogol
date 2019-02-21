@@ -56,10 +56,13 @@ type RoomsDeclineResource =
 -- only. Calling this method directly is unsupported.
 --
 -- /See:/ 'roomsDecline' smart constructor.
-data RoomsDecline = RoomsDecline'
+data RoomsDecline =
+  RoomsDecline'
     { _rooRoomId   :: !Text
     , _rooLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomsDecline' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ roomsDecline
     :: Text -- ^ 'rooRoomId'
     -> RoomsDecline
 roomsDecline pRooRoomId_ =
-    RoomsDecline'
-    { _rooRoomId = pRooRoomId_
-    , _rooLanguage = Nothing
-    }
+  RoomsDecline' {_rooRoomId = pRooRoomId_, _rooLanguage = Nothing}
+
 
 -- | The ID of the room.
 rooRoomId :: Lens' RoomsDecline Text
@@ -90,7 +91,8 @@ rooLanguage
 instance GoogleRequest RoomsDecline where
         type Rs RoomsDecline = Room
         type Scopes RoomsDecline =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient RoomsDecline'{..}
           = go _rooRoomId _rooLanguage (Just AltJSON)
               gamesService

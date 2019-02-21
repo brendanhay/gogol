@@ -66,7 +66,8 @@ type ProjectsDeploymentsListResource =
 -- | Lists the deployments of an Apps Script project.
 --
 -- /See:/ 'projectsDeploymentsList' smart constructor.
-data ProjectsDeploymentsList = ProjectsDeploymentsList'
+data ProjectsDeploymentsList =
+  ProjectsDeploymentsList'
     { _pdlXgafv          :: !(Maybe Xgafv)
     , _pdlUploadProtocol :: !(Maybe Text)
     , _pdlAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsDeploymentsList = ProjectsDeploymentsList'
     , _pdlPageToken      :: !(Maybe Text)
     , _pdlPageSize       :: !(Maybe (Textual Int32))
     , _pdlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDeploymentsList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsDeploymentsList
     :: Text -- ^ 'pdlScriptId'
     -> ProjectsDeploymentsList
 projectsDeploymentsList pPdlScriptId_ =
-    ProjectsDeploymentsList'
+  ProjectsDeploymentsList'
     { _pdlXgafv = Nothing
     , _pdlUploadProtocol = Nothing
     , _pdlAccessToken = Nothing
@@ -110,6 +113,7 @@ projectsDeploymentsList pPdlScriptId_ =
     , _pdlPageSize = Nothing
     , _pdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdlXgafv :: Lens' ProjectsDeploymentsList (Maybe Xgafv)

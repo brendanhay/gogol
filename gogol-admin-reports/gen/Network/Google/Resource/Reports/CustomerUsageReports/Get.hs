@@ -61,12 +61,15 @@ type CustomerUsageReportsGetResource =
 -- a specific customer.
 --
 -- /See:/ 'customerUsageReportsGet' smart constructor.
-data CustomerUsageReportsGet = CustomerUsageReportsGet'
+data CustomerUsageReportsGet =
+  CustomerUsageReportsGet'
     { _curgCustomerId :: !(Maybe Text)
     , _curgDate       :: !Text
     , _curgParameters :: !(Maybe Text)
     , _curgPageToken  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomerUsageReportsGet' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ customerUsageReportsGet
     :: Text -- ^ 'curgDate'
     -> CustomerUsageReportsGet
 customerUsageReportsGet pCurgDate_ =
-    CustomerUsageReportsGet'
+  CustomerUsageReportsGet'
     { _curgCustomerId = Nothing
     , _curgDate = pCurgDate_
     , _curgParameters = Nothing
     , _curgPageToken = Nothing
     }
+
 
 -- | Represents the customer for which the data is to be fetched.
 curgCustomerId :: Lens' CustomerUsageReportsGet (Maybe Text)

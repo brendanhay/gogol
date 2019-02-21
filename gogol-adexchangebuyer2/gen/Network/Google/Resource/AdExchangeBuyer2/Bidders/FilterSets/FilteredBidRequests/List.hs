@@ -68,7 +68,8 @@ type BiddersFilterSetsFilteredBidRequestsListResource
 -- impression, with the number of bid requests not sent for each reason.
 --
 -- /See:/ 'biddersFilterSetsFilteredBidRequestsList' smart constructor.
-data BiddersFilterSetsFilteredBidRequestsList = BiddersFilterSetsFilteredBidRequestsList'
+data BiddersFilterSetsFilteredBidRequestsList =
+  BiddersFilterSetsFilteredBidRequestsList'
     { _bfsfbrlXgafv          :: !(Maybe Xgafv)
     , _bfsfbrlUploadProtocol :: !(Maybe Text)
     , _bfsfbrlFilterSetName  :: !Text
@@ -77,7 +78,9 @@ data BiddersFilterSetsFilteredBidRequestsList = BiddersFilterSetsFilteredBidRequ
     , _bfsfbrlPageToken      :: !(Maybe Text)
     , _bfsfbrlPageSize       :: !(Maybe (Textual Int32))
     , _bfsfbrlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersFilterSetsFilteredBidRequestsList' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ biddersFilterSetsFilteredBidRequestsList
     :: Text -- ^ 'bfsfbrlFilterSetName'
     -> BiddersFilterSetsFilteredBidRequestsList
 biddersFilterSetsFilteredBidRequestsList pBfsfbrlFilterSetName_ =
-    BiddersFilterSetsFilteredBidRequestsList'
+  BiddersFilterSetsFilteredBidRequestsList'
     { _bfsfbrlXgafv = Nothing
     , _bfsfbrlUploadProtocol = Nothing
     , _bfsfbrlFilterSetName = pBfsfbrlFilterSetName_
@@ -112,6 +115,7 @@ biddersFilterSetsFilteredBidRequestsList pBfsfbrlFilterSetName_ =
     , _bfsfbrlPageSize = Nothing
     , _bfsfbrlCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfsfbrlXgafv :: Lens' BiddersFilterSetsFilteredBidRequestsList (Maybe Xgafv)
@@ -172,7 +176,8 @@ bfsfbrlCallback
       (\ s a -> s{_bfsfbrlCallback = a})
 
 instance GoogleRequest
-         BiddersFilterSetsFilteredBidRequestsList where
+           BiddersFilterSetsFilteredBidRequestsList
+         where
         type Rs BiddersFilterSetsFilteredBidRequestsList =
              ListFilteredBidRequestsResponse
         type Scopes BiddersFilterSetsFilteredBidRequestsList

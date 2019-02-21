@@ -122,6 +122,7 @@ module Network.Google.ContainerAnalysis
     , vCvssScore
     , vSeverity
     , vDetails
+    , vWindowsDetails
 
     -- ** GrafeasV1beta1VulnerabilityDetailsSeverity
     , GrafeasV1beta1VulnerabilityDetailsSeverity (..)
@@ -218,6 +219,12 @@ module Network.Google.ContainerAnalysis
     , cWaitFor
     , cName
     , cId
+
+    -- ** KnowledgeBase
+    , KnowledgeBase
+    , knowledgeBase
+    , kbURL
+    , kbName
 
     -- ** GetIAMPolicyRequest
     , GetIAMPolicyRequest
@@ -621,6 +628,14 @@ module Network.Google.ContainerAnalysis
     , psaSignature
     , psaPgpKeyId
     , psaContentType
+
+    -- ** WindowsDetail
+    , WindowsDetail
+    , windowsDetail
+    , wdName
+    , wdFixingKbs
+    , wdCpeURI
+    , wdDescription
 
     -- ** BatchCreateNotesRequestNotes
     , BatchCreateNotesRequestNotes

@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesPatch' request conforms to.
 type FloodlightActivitiesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -59,11 +59,14 @@ type FloodlightActivitiesPatchResource =
 -- semantics.
 --
 -- /See:/ 'floodlightActivitiesPatch' smart constructor.
-data FloodlightActivitiesPatch = FloodlightActivitiesPatch'
+data FloodlightActivitiesPatch =
+  FloodlightActivitiesPatch'
     { _fapProFileId :: !(Textual Int64)
     , _fapPayload   :: !FloodlightActivity
     , _fapId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FloodlightActivitiesPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ floodlightActivitiesPatch
     -> Int64 -- ^ 'fapId'
     -> FloodlightActivitiesPatch
 floodlightActivitiesPatch pFapProFileId_ pFapPayload_ pFapId_ =
-    FloodlightActivitiesPatch'
+  FloodlightActivitiesPatch'
     { _fapProFileId = _Coerce # pFapProFileId_
     , _fapPayload = pFapPayload_
     , _fapId = _Coerce # pFapId_
     }
+
 
 -- | User profile ID associated with this request.
 fapProFileId :: Lens' FloodlightActivitiesPatch Int64

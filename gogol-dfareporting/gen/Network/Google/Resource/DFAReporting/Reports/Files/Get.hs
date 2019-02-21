@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsFilesGet' request conforms to.
 type ReportsFilesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -55,7 +55,7 @@ type ReportsFilesGetResource =
                      QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
-         "v3.2" :>
+         "v3.3" :>
            "userprofiles" :>
              Capture "profileId" (Textual Int64) :>
                "reports" :>
@@ -68,11 +68,14 @@ type ReportsFilesGetResource =
 -- | Retrieves a report file. This method supports media download.
 --
 -- /See:/ 'reportsFilesGet' smart constructor.
-data ReportsFilesGet = ReportsFilesGet'
+data ReportsFilesGet =
+  ReportsFilesGet'
     { _rfgReportId  :: !(Textual Int64)
     , _rfgProFileId :: !(Textual Int64)
     , _rfgFileId    :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsFilesGet' with the minimum fields required to make a request.
 --
@@ -89,11 +92,12 @@ reportsFilesGet
     -> Int64 -- ^ 'rfgFileId'
     -> ReportsFilesGet
 reportsFilesGet pRfgReportId_ pRfgProFileId_ pRfgFileId_ =
-    ReportsFilesGet'
+  ReportsFilesGet'
     { _rfgReportId = _Coerce # pRfgReportId_
     , _rfgProFileId = _Coerce # pRfgProFileId_
     , _rfgFileId = _Coerce # pRfgFileId_
     }
+
 
 -- | The ID of the report.
 rfgReportId :: Lens' ReportsFilesGet Int64
@@ -127,7 +131,8 @@ instance GoogleRequest ReportsFilesGet where
                       mempty
 
 instance GoogleRequest
-         (MediaDownload ReportsFilesGet) where
+           (MediaDownload ReportsFilesGet)
+         where
         type Rs (MediaDownload ReportsFilesGet) = Stream
         type Scopes (MediaDownload ReportsFilesGet) =
              Scopes ReportsFilesGet

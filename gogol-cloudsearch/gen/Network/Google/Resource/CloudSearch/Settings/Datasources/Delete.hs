@@ -62,7 +62,8 @@ type SettingsDatasourcesDeleteResource =
 -- | Deletes a data source.
 --
 -- /See:/ 'settingsDatasourcesDelete' smart constructor.
-data SettingsDatasourcesDelete = SettingsDatasourcesDelete'
+data SettingsDatasourcesDelete =
+  SettingsDatasourcesDelete'
     { _sddXgafv                       :: !(Maybe Xgafv)
     , _sddUploadProtocol              :: !(Maybe Text)
     , _sddAccessToken                 :: !(Maybe Text)
@@ -70,7 +71,9 @@ data SettingsDatasourcesDelete = SettingsDatasourcesDelete'
     , _sddName                        :: !Text
     , _sddDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _sddCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsDatasourcesDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ settingsDatasourcesDelete
     :: Text -- ^ 'sddName'
     -> SettingsDatasourcesDelete
 settingsDatasourcesDelete pSddName_ =
-    SettingsDatasourcesDelete'
+  SettingsDatasourcesDelete'
     { _sddXgafv = Nothing
     , _sddUploadProtocol = Nothing
     , _sddAccessToken = Nothing
@@ -102,6 +105,7 @@ settingsDatasourcesDelete pSddName_ =
     , _sddDebugOptionsEnableDebugging = Nothing
     , _sddCallback = Nothing
     }
+
 
 -- | V1 error format.
 sddXgafv :: Lens' SettingsDatasourcesDelete (Maybe Xgafv)

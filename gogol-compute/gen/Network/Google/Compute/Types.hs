@@ -89,6 +89,14 @@ module Network.Google.Compute.Types
     -- * SchedulingOnHostMaintenance
     , SchedulingOnHostMaintenance (..)
 
+    -- * InstanceGroupManagerUpdatePolicy
+    , InstanceGroupManagerUpdatePolicy
+    , instanceGroupManagerUpdatePolicy
+    , igmupMaxSurge
+    , igmupMaxUnavailable
+    , igmupMinimalAction
+    , igmupType
+
     -- * RegionInstanceGroupsListInstancesRequest
     , RegionInstanceGroupsListInstancesRequest
     , regionInstanceGroupsListInstancesRequest
@@ -488,6 +496,13 @@ module Network.Google.Compute.Types
     , igmlSelfLink
     , igmlWarning
     , igmlId
+
+    -- * InstanceGroupManagerVersion
+    , InstanceGroupManagerVersion
+    , instanceGroupManagerVersion
+    , igmvInstanceTemplate
+    , igmvTargetSize
+    , igmvName
 
     -- * SubnetworksScopedListWarning
     , SubnetworksScopedListWarning
@@ -932,6 +947,12 @@ module Network.Google.Compute.Types
     , interconnectAttachmentAggregatedListItems
     , iaaliAddtional
 
+    -- * InstanceGroupManagerAutoHealingPolicy
+    , InstanceGroupManagerAutoHealingPolicy
+    , instanceGroupManagerAutoHealingPolicy
+    , igmahpHealthCheck
+    , igmahpInitialDelaySec
+
     -- * LogConfigCounterOptions
     , LogConfigCounterOptions
     , logConfigCounterOptions
@@ -1092,10 +1113,12 @@ module Network.Google.Compute.Types
     , frName
     , frIPProtocol
     , frCreationTimestamp
+    , frServiceName
     , frSubnetwork
     , frPorts
     , frId
     , frRegion
+    , frServiceLabel
     , frDescription
     , frTarget
     , frBackendService
@@ -1328,11 +1351,15 @@ module Network.Google.Compute.Types
     -- * InstanceGroupManager
     , InstanceGroupManager
     , instanceGroupManager
+    , igmStatus
     , igmKind
     , igmFingerprint
     , igmBaseInstanceName
     , igmZone
+    , igmAutoHealingPolicies
+    , igmVersions
     , igmInstanceTemplate
+    , igmUpdatePolicy
     , igmTargetSize
     , igmSelfLink
     , igmCurrentActions
@@ -1603,6 +1630,13 @@ module Network.Google.Compute.Types
     , vpnTunnelAggregatedListWarningDataItem
     , vtalwdiValue
     , vtalwdiKey
+
+    -- * FixedOrPercent
+    , FixedOrPercent
+    , fixedOrPercent
+    , fopCalculated
+    , fopPercent
+    , fopFixed
 
     -- * FirewallLogConfig
     , FirewallLogConfig
@@ -2477,6 +2511,11 @@ module Network.Google.Compute.Types
     , tspProxyHeader
     , tspDescription
 
+    -- * InstanceGroupManagerStatus
+    , InstanceGroupManagerStatus
+    , instanceGroupManagerStatus
+    , igmsIsStable
+
     -- * SSLCertificateListWarning
     , SSLCertificateListWarning
     , sslCertificateListWarning
@@ -2599,6 +2638,9 @@ module Network.Google.Compute.Types
     , TargetPoolsAddHealthCheckRequest
     , targetPoolsAddHealthCheckRequest
     , tpahcrHealthChecks
+
+    -- * InstanceGroupManagerUpdatePolicyType
+    , InstanceGroupManagerUpdatePolicyType (..)
 
     -- * CommitmentsScopedList
     , CommitmentsScopedList
@@ -3001,6 +3043,7 @@ module Network.Google.Compute.Types
     , InterconnectLocation
     , interconnectLocation
     , intFacilityProviderFacilityId
+    , intStatus
     , intRegionInfos
     , intKind
     , intAddress
@@ -4604,6 +4647,9 @@ module Network.Google.Compute.Types
     , igslwCode
     , igslwMessage
 
+    -- * InterconnectLocationStatus
+    , InterconnectLocationStatus (..)
+
     -- * AutoscalingPolicyCPUUtilization
     , AutoscalingPolicyCPUUtilization
     , autoscalingPolicyCPUUtilization
@@ -4704,6 +4750,7 @@ module Network.Google.Compute.Types
     -- * Quota
     , Quota
     , quota
+    , qOwner
     , qMetric
     , qLimit
     , qUsage
@@ -5177,6 +5224,7 @@ module Network.Google.Compute.Types
     , i1Status
     , i1ServiceAccounts
     , i1DeletionProtection
+    , i1Hostname
     , i1NetworkInterfaces
     , i1Kind
     , i1Zone
@@ -5207,6 +5255,9 @@ module Network.Google.Compute.Types
     , pmPathRules
     , pmDescription
 
+    -- * InstanceGroupManagerUpdatePolicyMinimalAction
+    , InstanceGroupManagerUpdatePolicyMinimalAction (..)
+
     -- * BackendServiceListWarning
     , BackendServiceListWarning
     , backendServiceListWarning
@@ -5230,24 +5281,24 @@ computeService
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
-computeScope = Proxy;
+computeScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View your data in Google Cloud Storage
 storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-storageReadOnlyScope = Proxy;
+storageReadOnlyScope = Proxy
 
 -- | Manage your data in Google Cloud Storage
 storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-storageReadWriteScope = Proxy;
+storageReadWriteScope = Proxy
 
 -- | View your Google Compute Engine resources
 computeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-computeReadOnlyScope = Proxy;
+computeReadOnlyScope = Proxy
 
 -- | Manage your data and permissions in Google Cloud Storage
 storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-storageFullControlScope = Proxy;
+storageFullControlScope = Proxy

@@ -55,10 +55,13 @@ type UsersSettingsFiltersGetResource =
 -- | Gets a filter.
 --
 -- /See:/ 'usersSettingsFiltersGet' smart constructor.
-data UsersSettingsFiltersGet = UsersSettingsFiltersGet'
+data UsersSettingsFiltersGet =
+  UsersSettingsFiltersGet'
     { _usfgUserId :: !Text
     , _usfgId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsFiltersGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ usersSettingsFiltersGet
     :: Text -- ^ 'usfgId'
     -> UsersSettingsFiltersGet
 usersSettingsFiltersGet pUsfgId_ =
-    UsersSettingsFiltersGet'
-    { _usfgUserId = "me"
-    , _usfgId = pUsfgId_
-    }
+  UsersSettingsFiltersGet' {_usfgUserId = "me", _usfgId = pUsfgId_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

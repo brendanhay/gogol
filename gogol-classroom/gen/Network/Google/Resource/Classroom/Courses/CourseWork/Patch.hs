@@ -92,7 +92,8 @@ type CoursesCourseWorkPatchResource =
 -- work, or student submission does not exist.
 --
 -- /See:/ 'coursesCourseWorkPatch' smart constructor.
-data CoursesCourseWorkPatch = CoursesCourseWorkPatch'
+data CoursesCourseWorkPatch =
+  CoursesCourseWorkPatch'
     { _ccwpXgafv          :: !(Maybe Xgafv)
     , _ccwpUploadProtocol :: !(Maybe Text)
     , _ccwpUpdateMask     :: !(Maybe GFieldMask)
@@ -102,7 +103,9 @@ data CoursesCourseWorkPatch = CoursesCourseWorkPatch'
     , _ccwpPayload        :: !CourseWork
     , _ccwpId             :: !Text
     , _ccwpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesCourseWorkPatch' with the minimum fields required to make a request.
 --
@@ -131,7 +134,7 @@ coursesCourseWorkPatch
     -> Text -- ^ 'ccwpId'
     -> CoursesCourseWorkPatch
 coursesCourseWorkPatch pCcwpCourseId_ pCcwpPayload_ pCcwpId_ =
-    CoursesCourseWorkPatch'
+  CoursesCourseWorkPatch'
     { _ccwpXgafv = Nothing
     , _ccwpUploadProtocol = Nothing
     , _ccwpUpdateMask = Nothing
@@ -142,6 +145,7 @@ coursesCourseWorkPatch pCcwpCourseId_ pCcwpPayload_ pCcwpId_ =
     , _ccwpId = pCcwpId_
     , _ccwpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccwpXgafv :: Lens' CoursesCourseWorkPatch (Maybe Xgafv)

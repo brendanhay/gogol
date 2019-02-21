@@ -63,7 +63,8 @@ type ProjectsAlertPoliciesCreateResource =
 -- | Creates a new alerting policy.
 --
 -- /See:/ 'projectsAlertPoliciesCreate' smart constructor.
-data ProjectsAlertPoliciesCreate = ProjectsAlertPoliciesCreate'
+data ProjectsAlertPoliciesCreate =
+  ProjectsAlertPoliciesCreate'
     { _papcXgafv          :: !(Maybe Xgafv)
     , _papcUploadProtocol :: !(Maybe Text)
     , _papcAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsAlertPoliciesCreate = ProjectsAlertPoliciesCreate'
     , _papcPayload        :: !AlertPolicy
     , _papcName           :: !Text
     , _papcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAlertPoliciesCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsAlertPoliciesCreate
     -> Text -- ^ 'papcName'
     -> ProjectsAlertPoliciesCreate
 projectsAlertPoliciesCreate pPapcPayload_ pPapcName_ =
-    ProjectsAlertPoliciesCreate'
+  ProjectsAlertPoliciesCreate'
     { _papcXgafv = Nothing
     , _papcUploadProtocol = Nothing
     , _papcAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsAlertPoliciesCreate pPapcPayload_ pPapcName_ =
     , _papcName = pPapcName_
     , _papcCallback = Nothing
     }
+
 
 -- | V1 error format.
 papcXgafv :: Lens' ProjectsAlertPoliciesCreate (Maybe Xgafv)

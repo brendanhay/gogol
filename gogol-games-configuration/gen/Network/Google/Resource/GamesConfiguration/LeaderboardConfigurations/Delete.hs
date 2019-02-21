@@ -51,9 +51,12 @@ type LeaderboardConfigurationsDeleteResource =
 -- | Delete the leaderboard configuration with the given ID.
 --
 -- /See:/ 'leaderboardConfigurationsDelete' smart constructor.
-newtype LeaderboardConfigurationsDelete = LeaderboardConfigurationsDelete'
+newtype LeaderboardConfigurationsDelete =
+  LeaderboardConfigurationsDelete'
     { _lcdLeaderboardId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardConfigurationsDelete' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ leaderboardConfigurationsDelete
     :: Text -- ^ 'lcdLeaderboardId'
     -> LeaderboardConfigurationsDelete
 leaderboardConfigurationsDelete pLcdLeaderboardId_ =
-    LeaderboardConfigurationsDelete'
-    { _lcdLeaderboardId = pLcdLeaderboardId_
-    }
+  LeaderboardConfigurationsDelete' {_lcdLeaderboardId = pLcdLeaderboardId_}
+
 
 -- | The ID of the leaderboard.
 lcdLeaderboardId :: Lens' LeaderboardConfigurationsDelete Text
@@ -75,7 +77,8 @@ lcdLeaderboardId
       (\ s a -> s{_lcdLeaderboardId = a})
 
 instance GoogleRequest
-         LeaderboardConfigurationsDelete where
+           LeaderboardConfigurationsDelete
+         where
         type Rs LeaderboardConfigurationsDelete = ()
         type Scopes LeaderboardConfigurationsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]

@@ -57,10 +57,13 @@ type ResourcesCalendarsGetResource =
 -- | Retrieves a calendar resource.
 --
 -- /See:/ 'resourcesCalendarsGet' smart constructor.
-data ResourcesCalendarsGet = ResourcesCalendarsGet'
+data ResourcesCalendarsGet =
+  ResourcesCalendarsGet'
     { _rcgCustomer           :: !Text
     , _rcgCalendarResourceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesCalendarsGet' with the minimum fields required to make a request.
 --
@@ -74,10 +77,11 @@ resourcesCalendarsGet
     -> Text -- ^ 'rcgCalendarResourceId'
     -> ResourcesCalendarsGet
 resourcesCalendarsGet pRcgCustomer_ pRcgCalendarResourceId_ =
-    ResourcesCalendarsGet'
+  ResourcesCalendarsGet'
     { _rcgCustomer = pRcgCustomer_
     , _rcgCalendarResourceId = pRcgCalendarResourceId_
     }
+
 
 -- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your

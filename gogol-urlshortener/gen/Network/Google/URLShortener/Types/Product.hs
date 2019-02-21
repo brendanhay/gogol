@@ -22,14 +22,17 @@ import           Network.Google.URLShortener.Types.Sum
 
 --
 -- /See:/ 'url' smart constructor.
-data URL = URL'
+data URL =
+  URL'
     { _uStatus    :: !(Maybe Text)
     , _uKind      :: !Text
     , _uCreated   :: !(Maybe Text)
     , _uAnalytics :: !(Maybe AnalyticsSummary)
     , _uLongURL   :: !(Maybe Text)
     , _uId        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URL' with the minimum fields required to make a request.
 --
@@ -49,7 +52,7 @@ data URL = URL'
 url
     :: URL
 url =
-    URL'
+  URL'
     { _uStatus = Nothing
     , _uKind = "urlshortener#url"
     , _uCreated = Nothing
@@ -57,6 +60,7 @@ url =
     , _uLongURL = Nothing
     , _uId = Nothing
     }
+
 
 -- | Status of the target URL. Possible values: \"OK\", \"MALWARE\",
 -- \"PHISHING\", or \"REMOVED\". A URL might be marked \"REMOVED\" if it
@@ -112,10 +116,13 @@ instance ToJSON URL where
 
 --
 -- /See:/ 'stringCount' smart constructor.
-data StringCount = StringCount'
+data StringCount =
+  StringCount'
     { _scCount :: !(Maybe (Textual Int64))
     , _scId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StringCount' with the minimum fields required to make a request.
 --
@@ -126,11 +133,8 @@ data StringCount = StringCount'
 -- * 'scId'
 stringCount
     :: StringCount
-stringCount =
-    StringCount'
-    { _scCount = Nothing
-    , _scId = Nothing
-    }
+stringCount = StringCount' {_scCount = Nothing, _scId = Nothing}
+
 
 -- | Number of clicks for this top entry, e.g. for this particular country or
 -- browser.
@@ -157,14 +161,17 @@ instance ToJSON StringCount where
 
 --
 -- /See:/ 'analyticsSnapshot' smart constructor.
-data AnalyticsSnapshot = AnalyticsSnapshot'
+data AnalyticsSnapshot =
+  AnalyticsSnapshot'
     { _asPlatforms      :: !(Maybe [StringCount])
     , _asShortURLClicks :: !(Maybe (Textual Int64))
     , _asReferrers      :: !(Maybe [StringCount])
     , _asCountries      :: !(Maybe [StringCount])
     , _asLongURLClicks  :: !(Maybe (Textual Int64))
     , _asBrowsers       :: !(Maybe [StringCount])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnalyticsSnapshot' with the minimum fields required to make a request.
 --
@@ -184,7 +191,7 @@ data AnalyticsSnapshot = AnalyticsSnapshot'
 analyticsSnapshot
     :: AnalyticsSnapshot
 analyticsSnapshot =
-    AnalyticsSnapshot'
+  AnalyticsSnapshot'
     { _asPlatforms = Nothing
     , _asShortURLClicks = Nothing
     , _asReferrers = Nothing
@@ -192,6 +199,7 @@ analyticsSnapshot =
     , _asLongURLClicks = Nothing
     , _asBrowsers = Nothing
     }
+
 
 -- | Top platforms or OSes, e.g. \"Windows\"; sorted by (descending) click
 -- counts. Only present if this data is available.
@@ -265,13 +273,16 @@ instance ToJSON AnalyticsSnapshot where
 
 --
 -- /See:/ 'analyticsSummary' smart constructor.
-data AnalyticsSummary = AnalyticsSummary'
+data AnalyticsSummary =
+  AnalyticsSummary'
     { _asWeek     :: !(Maybe AnalyticsSnapshot)
     , _asAllTime  :: !(Maybe AnalyticsSnapshot)
     , _asDay      :: !(Maybe AnalyticsSnapshot)
     , _asTwoHours :: !(Maybe AnalyticsSnapshot)
     , _asMonth    :: !(Maybe AnalyticsSnapshot)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnalyticsSummary' with the minimum fields required to make a request.
 --
@@ -289,13 +300,14 @@ data AnalyticsSummary = AnalyticsSummary'
 analyticsSummary
     :: AnalyticsSummary
 analyticsSummary =
-    AnalyticsSummary'
+  AnalyticsSummary'
     { _asWeek = Nothing
     , _asAllTime = Nothing
     , _asDay = Nothing
     , _asTwoHours = Nothing
     , _asMonth = Nothing
     }
+
 
 -- | Click analytics over the last week.
 asWeek :: Lens' AnalyticsSummary (Maybe AnalyticsSnapshot)
@@ -340,13 +352,16 @@ instance ToJSON AnalyticsSummary where
 
 --
 -- /See:/ 'urlHistory' smart constructor.
-data URLHistory = URLHistory'
+data URLHistory =
+  URLHistory'
     { _uhTotalItems    :: !(Maybe (Textual Int32))
     , _uhNextPageToken :: !(Maybe Text)
     , _uhItemsPerPage  :: !(Maybe (Textual Int32))
     , _uhKind          :: !Text
     , _uhItems         :: !(Maybe [URL])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLHistory' with the minimum fields required to make a request.
 --
@@ -364,13 +379,14 @@ data URLHistory = URLHistory'
 urlHistory
     :: URLHistory
 urlHistory =
-    URLHistory'
+  URLHistory'
     { _uhTotalItems = Nothing
     , _uhNextPageToken = Nothing
     , _uhItemsPerPage = Nothing
     , _uhKind = "urlshortener#urlHistory"
     , _uhItems = Nothing
     }
+
 
 -- | Total number of short URLs associated with this user (may be
 -- approximate).

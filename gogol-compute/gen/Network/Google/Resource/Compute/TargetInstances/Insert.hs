@@ -62,12 +62,15 @@ type TargetInstancesInsertResource =
 -- using the data included in the request.
 --
 -- /See:/ 'targetInstancesInsert' smart constructor.
-data TargetInstancesInsert = TargetInstancesInsert'
+data TargetInstancesInsert =
+  TargetInstancesInsert'
     { _tiiRequestId :: !(Maybe Text)
     , _tiiProject   :: !Text
     , _tiiZone      :: !Text
     , _tiiPayload   :: !TargetInstance
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetInstancesInsert' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ targetInstancesInsert
     -> TargetInstance -- ^ 'tiiPayload'
     -> TargetInstancesInsert
 targetInstancesInsert pTiiProject_ pTiiZone_ pTiiPayload_ =
-    TargetInstancesInsert'
+  TargetInstancesInsert'
     { _tiiRequestId = Nothing
     , _tiiProject = pTiiProject_
     , _tiiZone = pTiiZone_
     , _tiiPayload = pTiiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -70,12 +70,15 @@ type ManagedConfigurationsforUserPatchResource =
 -- list of managed properties. This method supports patch semantics.
 --
 -- /See:/ 'managedConfigurationsforUserPatch' smart constructor.
-data ManagedConfigurationsforUserPatch = ManagedConfigurationsforUserPatch'
+data ManagedConfigurationsforUserPatch =
+  ManagedConfigurationsforUserPatch'
     { _mcupEnterpriseId                  :: !Text
     , _mcupPayload                       :: !ManagedConfiguration
     , _mcupUserId                        :: !Text
     , _mcupManagedConfigurationForUserId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagedConfigurationsforUserPatch' with the minimum fields required to make a request.
 --
@@ -95,12 +98,13 @@ managedConfigurationsforUserPatch
     -> Text -- ^ 'mcupManagedConfigurationForUserId'
     -> ManagedConfigurationsforUserPatch
 managedConfigurationsforUserPatch pMcupEnterpriseId_ pMcupPayload_ pMcupUserId_ pMcupManagedConfigurationForUserId_ =
-    ManagedConfigurationsforUserPatch'
+  ManagedConfigurationsforUserPatch'
     { _mcupEnterpriseId = pMcupEnterpriseId_
     , _mcupPayload = pMcupPayload_
     , _mcupUserId = pMcupUserId_
     , _mcupManagedConfigurationForUserId = pMcupManagedConfigurationForUserId_
     }
+
 
 -- | The ID of the enterprise.
 mcupEnterpriseId :: Lens' ManagedConfigurationsforUserPatch Text
@@ -126,7 +130,8 @@ mcupManagedConfigurationForUserId
       (\ s a -> s{_mcupManagedConfigurationForUserId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforUserPatch where
+           ManagedConfigurationsforUserPatch
+         where
         type Rs ManagedConfigurationsforUserPatch =
              ManagedConfiguration
         type Scopes ManagedConfigurationsforUserPatch =

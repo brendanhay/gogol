@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.sinks.update@.
@@ -66,12 +66,13 @@ type FoldersSinksUpdateResource =
                          ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
 
 -- | Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ 'foldersSinksUpdate' smart constructor.
-data FoldersSinksUpdate = FoldersSinksUpdate'
+data FoldersSinksUpdate =
+  FoldersSinksUpdate'
     { _fsuXgafv                :: !(Maybe Xgafv)
     , _fsuUniqueWriterIdentity :: !(Maybe Bool)
     , _fsuUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,9 @@ data FoldersSinksUpdate = FoldersSinksUpdate'
     , _fsuPayload              :: !LogSink
     , _fsuSinkName             :: !Text
     , _fsuCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersSinksUpdate' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ foldersSinksUpdate
     -> Text -- ^ 'fsuSinkName'
     -> FoldersSinksUpdate
 foldersSinksUpdate pFsuPayload_ pFsuSinkName_ =
-    FoldersSinksUpdate'
+  FoldersSinksUpdate'
     { _fsuXgafv = Nothing
     , _fsuUniqueWriterIdentity = Nothing
     , _fsuUploadProtocol = Nothing
@@ -120,6 +123,7 @@ foldersSinksUpdate pFsuPayload_ pFsuSinkName_ =
     , _fsuSinkName = pFsuSinkName_
     , _fsuCallback = Nothing
     }
+
 
 -- | V1 error format.
 fsuXgafv :: Lens' FoldersSinksUpdate (Maybe Xgafv)

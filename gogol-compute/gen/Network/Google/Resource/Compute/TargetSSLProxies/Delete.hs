@@ -57,11 +57,14 @@ type TargetSSLProxiesDeleteResource =
 -- | Deletes the specified TargetSslProxy resource.
 --
 -- /See:/ 'targetSSLProxiesDelete' smart constructor.
-data TargetSSLProxiesDelete = TargetSSLProxiesDelete'
+data TargetSSLProxiesDelete =
+  TargetSSLProxiesDelete'
     { _tspdRequestId      :: !(Maybe Text)
     , _tspdProject        :: !Text
     , _tspdTargetSSLProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetSSLProxiesDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ targetSSLProxiesDelete
     -> Text -- ^ 'tspdTargetSSLProxy'
     -> TargetSSLProxiesDelete
 targetSSLProxiesDelete pTspdProject_ pTspdTargetSSLProxy_ =
-    TargetSSLProxiesDelete'
+  TargetSSLProxiesDelete'
     { _tspdRequestId = Nothing
     , _tspdProject = pTspdProject_
     , _tspdTargetSSLProxy = pTspdTargetSSLProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

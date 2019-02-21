@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @file.projects.locations.instances.get@ method which the
 -- 'ProjectsLocationsInstancesGet' request conforms to.
 type ProjectsLocationsInstancesGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -59,14 +59,17 @@ type ProjectsLocationsInstancesGetResource =
 -- | Gets the details of a specific instance.
 --
 -- /See:/ 'projectsLocationsInstancesGet' smart constructor.
-data ProjectsLocationsInstancesGet = ProjectsLocationsInstancesGet'
+data ProjectsLocationsInstancesGet =
+  ProjectsLocationsInstancesGet'
     { _pligXgafv          :: !(Maybe Xgafv)
     , _pligUploadProtocol :: !(Maybe Text)
     , _pligAccessToken    :: !(Maybe Text)
     , _pligUploadType     :: !(Maybe Text)
     , _pligName           :: !Text
     , _pligCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsInstancesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsLocationsInstancesGet
     :: Text -- ^ 'pligName'
     -> ProjectsLocationsInstancesGet
 projectsLocationsInstancesGet pPligName_ =
-    ProjectsLocationsInstancesGet'
+  ProjectsLocationsInstancesGet'
     { _pligXgafv = Nothing
     , _pligUploadProtocol = Nothing
     , _pligAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsLocationsInstancesGet pPligName_ =
     , _pligName = pPligName_
     , _pligCallback = Nothing
     }
+
 
 -- | V1 error format.
 pligXgafv :: Lens' ProjectsLocationsInstancesGet (Maybe Xgafv)

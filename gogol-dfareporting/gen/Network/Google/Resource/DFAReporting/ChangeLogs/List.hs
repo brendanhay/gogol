@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'ChangeLogsList' request conforms to.
 type ChangeLogsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "changeLogs" :>
@@ -73,7 +73,8 @@ type ChangeLogsListResource =
 -- | Retrieves a list of change logs. This method supports paging.
 --
 -- /See:/ 'changeLogsList' smart constructor.
-data ChangeLogsList = ChangeLogsList'
+data ChangeLogsList =
+  ChangeLogsList'
     { _cllUserProFileIds :: !(Maybe [Textual Int64])
     , _cllObjectType     :: !(Maybe ChangeLogsListObjectType)
     , _cllSearchString   :: !(Maybe Text)
@@ -85,7 +86,9 @@ data ChangeLogsList = ChangeLogsList'
     , _cllPageToken      :: !(Maybe Text)
     , _cllObjectIds      :: !(Maybe [Textual Int64])
     , _cllMaxResults     :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChangeLogsList' with the minimum fields required to make a request.
 --
@@ -116,7 +119,7 @@ changeLogsList
     :: Int64 -- ^ 'cllProFileId'
     -> ChangeLogsList
 changeLogsList pCllProFileId_ =
-    ChangeLogsList'
+  ChangeLogsList'
     { _cllUserProFileIds = Nothing
     , _cllObjectType = Nothing
     , _cllSearchString = Nothing
@@ -129,6 +132,7 @@ changeLogsList pCllProFileId_ =
     , _cllObjectIds = Nothing
     , _cllMaxResults = 1000
     }
+
 
 -- | Select only change logs with these user profile IDs.
 cllUserProFileIds :: Lens' ChangeLogsList [Int64]

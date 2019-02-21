@@ -67,13 +67,16 @@ type TurnBasedMatchesSyncResource =
 -- of MATCH_DELETED.
 --
 -- /See:/ 'turnBasedMatchesSync' smart constructor.
-data TurnBasedMatchesSync = TurnBasedMatchesSync'
+data TurnBasedMatchesSync =
+  TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches :: !(Maybe (Textual Int32))
     , _tbmsIncludeMatchData    :: !(Maybe Bool)
     , _tbmsLanguage            :: !(Maybe Text)
     , _tbmsPageToken           :: !(Maybe Text)
     , _tbmsMaxResults          :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchesSync' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ data TurnBasedMatchesSync = TurnBasedMatchesSync'
 turnBasedMatchesSync
     :: TurnBasedMatchesSync
 turnBasedMatchesSync =
-    TurnBasedMatchesSync'
+  TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches = Nothing
     , _tbmsIncludeMatchData = Nothing
     , _tbmsLanguage = Nothing
     , _tbmsPageToken = Nothing
     , _tbmsMaxResults = Nothing
     }
+
 
 -- | The maximum number of completed or canceled matches to return in the
 -- response. If not set, all matches returned could be completed or
@@ -141,7 +145,8 @@ tbmsMaxResults
 instance GoogleRequest TurnBasedMatchesSync where
         type Rs TurnBasedMatchesSync = TurnBasedMatchSync
         type Scopes TurnBasedMatchesSync =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesSync'{..}
           = go _tbmsMaxCompletedMatches _tbmsIncludeMatchData
               _tbmsLanguage

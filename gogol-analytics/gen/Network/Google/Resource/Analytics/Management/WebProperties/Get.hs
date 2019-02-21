@@ -55,10 +55,13 @@ type ManagementWebPropertiesGetResource =
 -- | Gets a web property to which the user has access.
 --
 -- /See:/ 'managementWebPropertiesGet' smart constructor.
-data ManagementWebPropertiesGet = ManagementWebPropertiesGet'
+data ManagementWebPropertiesGet =
+  ManagementWebPropertiesGet'
     { _mwpgWebPropertyId :: !Text
     , _mwpgAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementWebPropertiesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ managementWebPropertiesGet
     -> Text -- ^ 'mwpgAccountId'
     -> ManagementWebPropertiesGet
 managementWebPropertiesGet pMwpgWebPropertyId_ pMwpgAccountId_ =
-    ManagementWebPropertiesGet'
-    { _mwpgWebPropertyId = pMwpgWebPropertyId_
-    , _mwpgAccountId = pMwpgAccountId_
-    }
+  ManagementWebPropertiesGet'
+    {_mwpgWebPropertyId = pMwpgWebPropertyId_, _mwpgAccountId = pMwpgAccountId_}
+
 
 -- | ID to retrieve the web property for.
 mwpgWebPropertyId :: Lens' ManagementWebPropertiesGet Text

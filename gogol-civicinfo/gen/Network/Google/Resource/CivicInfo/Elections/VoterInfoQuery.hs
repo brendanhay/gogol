@@ -62,13 +62,16 @@ type ElectionsVoterInfoQueryResource =
 -- registered address.
 --
 -- /See:/ 'electionsVoterInfoQuery' smart constructor.
-data ElectionsVoterInfoQuery = ElectionsVoterInfoQuery'
+data ElectionsVoterInfoQuery =
+  ElectionsVoterInfoQuery'
     { _eviqReturnAllAvailableData :: !Bool
     , _eviqElectionId             :: !(Textual Int64)
     , _eviqAddress                :: !Text
     , _eviqPayload                :: !VoterInfoRequest
     , _eviqOfficialOnly           :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ElectionsVoterInfoQuery' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ electionsVoterInfoQuery
     -> VoterInfoRequest -- ^ 'eviqPayload'
     -> ElectionsVoterInfoQuery
 electionsVoterInfoQuery pEviqAddress_ pEviqPayload_ =
-    ElectionsVoterInfoQuery'
+  ElectionsVoterInfoQuery'
     { _eviqReturnAllAvailableData = False
     , _eviqElectionId = 0
     , _eviqAddress = pEviqAddress_
     , _eviqPayload = pEviqPayload_
     , _eviqOfficialOnly = False
     }
+
 
 -- | If set to true, the query will return the success codeand include any
 -- partial information when it is unable to determine a matching address or

@@ -985,8 +985,8 @@ dialogFlowService
 
 -- | View, manage and query your Dialogflow agents
 dialogFlowScope :: Proxy '["https://www.googleapis.com/auth/dialogflow"]
-dialogFlowScope = Proxy;
+dialogFlowScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

@@ -60,11 +60,14 @@ type HTTPHealthChecksInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'hTTPHealthChecksInsert' smart constructor.
-data HTTPHealthChecksInsert = HTTPHealthChecksInsert'
+data HTTPHealthChecksInsert =
+  HTTPHealthChecksInsert'
     { _httphciRequestId :: !(Maybe Text)
     , _httphciProject   :: !Text
     , _httphciPayload   :: !HTTPHealthCheck
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPHealthChecksInsert' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ hTTPHealthChecksInsert
     -> HTTPHealthCheck -- ^ 'httphciPayload'
     -> HTTPHealthChecksInsert
 hTTPHealthChecksInsert pHttphciProject_ pHttphciPayload_ =
-    HTTPHealthChecksInsert'
+  HTTPHealthChecksInsert'
     { _httphciRequestId = Nothing
     , _httphciProject = pHttphciProject_
     , _httphciPayload = pHttphciPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

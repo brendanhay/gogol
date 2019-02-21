@@ -66,12 +66,15 @@ type ProjectsHistoriesExecutionsStepsGetResource =
 -- does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsGet' smart constructor.
-data ProjectsHistoriesExecutionsStepsGet = ProjectsHistoriesExecutionsStepsGet'
+data ProjectsHistoriesExecutionsStepsGet =
+  ProjectsHistoriesExecutionsStepsGet'
     { _phesgExecutionId :: !Text
     , _phesgStepId      :: !Text
     , _phesgHistoryId   :: !Text
     , _phesgProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsGet' with the minimum fields required to make a request.
 --
@@ -91,12 +94,13 @@ projectsHistoriesExecutionsStepsGet
     -> Text -- ^ 'phesgProjectId'
     -> ProjectsHistoriesExecutionsStepsGet
 projectsHistoriesExecutionsStepsGet pPhesgExecutionId_ pPhesgStepId_ pPhesgHistoryId_ pPhesgProjectId_ =
-    ProjectsHistoriesExecutionsStepsGet'
+  ProjectsHistoriesExecutionsStepsGet'
     { _phesgExecutionId = pPhesgExecutionId_
     , _phesgStepId = pPhesgStepId_
     , _phesgHistoryId = pPhesgHistoryId_
     , _phesgProjectId = pPhesgProjectId_
     }
+
 
 -- | A Execution id. Required.
 phesgExecutionId :: Lens' ProjectsHistoriesExecutionsStepsGet Text
@@ -122,7 +126,8 @@ phesgProjectId
       (\ s a -> s{_phesgProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsGet where
+           ProjectsHistoriesExecutionsStepsGet
+         where
         type Rs ProjectsHistoriesExecutionsStepsGet = Step
         type Scopes ProjectsHistoriesExecutionsStepsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]

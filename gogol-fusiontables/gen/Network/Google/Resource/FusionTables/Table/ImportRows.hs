@@ -77,14 +77,17 @@ type TableImportRowsResource =
 -- | Imports more rows into a table.
 --
 -- /See:/ 'tableImportRows' smart constructor.
-data TableImportRows = TableImportRows'
+data TableImportRows =
+  TableImportRows'
     { _tirStartLine :: !(Maybe (Textual Int32))
     , _tirEndLine   :: !(Maybe (Textual Int32))
     , _tirTableId   :: !Text
     , _tirDelimiter :: !(Maybe Text)
     , _tirEncoding  :: !(Maybe Text)
     , _tirIsStrict  :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TableImportRows' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ tableImportRows
     :: Text -- ^ 'tirTableId'
     -> TableImportRows
 tableImportRows pTirTableId_ =
-    TableImportRows'
+  TableImportRows'
     { _tirStartLine = Nothing
     , _tirEndLine = Nothing
     , _tirTableId = pTirTableId_
@@ -113,6 +116,7 @@ tableImportRows pTirTableId_ =
     , _tirEncoding = Nothing
     , _tirIsStrict = Nothing
     }
+
 
 -- | The index of the first line from which to start importing, inclusive.
 -- Default is 0.

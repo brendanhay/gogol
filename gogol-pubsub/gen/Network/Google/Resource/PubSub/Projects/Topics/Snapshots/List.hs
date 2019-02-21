@@ -79,7 +79,8 @@ type ProjectsTopicsSnapshotsListResource =
 -- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'projectsTopicsSnapshotsList' smart constructor.
-data ProjectsTopicsSnapshotsList = ProjectsTopicsSnapshotsList'
+data ProjectsTopicsSnapshotsList =
+  ProjectsTopicsSnapshotsList'
     { _ptsltXgafv          :: !(Maybe Xgafv)
     , _ptsltUploadProtocol :: !(Maybe Text)
     , _ptsltAccessToken    :: !(Maybe Text)
@@ -88,7 +89,9 @@ data ProjectsTopicsSnapshotsList = ProjectsTopicsSnapshotsList'
     , _ptsltPageToken      :: !(Maybe Text)
     , _ptsltPageSize       :: !(Maybe (Textual Int32))
     , _ptsltCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTopicsSnapshotsList' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ projectsTopicsSnapshotsList
     :: Text -- ^ 'ptsltTopic'
     -> ProjectsTopicsSnapshotsList
 projectsTopicsSnapshotsList pPtsltTopic_ =
-    ProjectsTopicsSnapshotsList'
+  ProjectsTopicsSnapshotsList'
     { _ptsltXgafv = Nothing
     , _ptsltUploadProtocol = Nothing
     , _ptsltAccessToken = Nothing
@@ -123,6 +126,7 @@ projectsTopicsSnapshotsList pPtsltTopic_ =
     , _ptsltPageSize = Nothing
     , _ptsltCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptsltXgafv :: Lens' ProjectsTopicsSnapshotsList (Maybe Xgafv)

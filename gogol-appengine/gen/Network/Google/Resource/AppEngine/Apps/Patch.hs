@@ -71,7 +71,8 @@ type AppsPatchResource =
 -- policy for the application.
 --
 -- /See:/ 'appsPatch' smart constructor.
-data AppsPatch = AppsPatch'
+data AppsPatch =
+  AppsPatch'
     { _apXgafv          :: !(Maybe Xgafv)
     , _apUploadProtocol :: !(Maybe Text)
     , _apUpdateMask     :: !(Maybe GFieldMask)
@@ -80,7 +81,9 @@ data AppsPatch = AppsPatch'
     , _apPayload        :: !Application
     , _apAppsId         :: !Text
     , _apCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsPatch' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ appsPatch
     -> Text -- ^ 'apAppsId'
     -> AppsPatch
 appsPatch pApPayload_ pApAppsId_ =
-    AppsPatch'
+  AppsPatch'
     { _apXgafv = Nothing
     , _apUploadProtocol = Nothing
     , _apUpdateMask = Nothing
@@ -116,6 +119,7 @@ appsPatch pApPayload_ pApAppsId_ =
     , _apAppsId = pApAppsId_
     , _apCallback = Nothing
     }
+
 
 -- | V1 error format.
 apXgafv :: Lens' AppsPatch (Maybe Xgafv)

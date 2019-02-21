@@ -63,12 +63,15 @@ type URLMapsPatchResource =
 -- patch format and processing rules.
 --
 -- /See:/ 'urlMapsPatch' smart constructor.
-data URLMapsPatch = URLMapsPatch'
+data URLMapsPatch =
+  URLMapsPatch'
     { _umpRequestId :: !(Maybe Text)
     , _umpURLMap    :: !Text
     , _umpProject   :: !Text
     , _umpPayload   :: !URLMap
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLMapsPatch' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ urlMapsPatch
     -> URLMap -- ^ 'umpPayload'
     -> URLMapsPatch
 urlMapsPatch pUmpURLMap_ pUmpProject_ pUmpPayload_ =
-    URLMapsPatch'
+  URLMapsPatch'
     { _umpRequestId = Nothing
     , _umpURLMap = pUmpURLMap_
     , _umpProject = pUmpProject_
     , _umpPayload = pUmpPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

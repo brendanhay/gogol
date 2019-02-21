@@ -57,12 +57,15 @@ type TeamdrivesListResource =
 -- | Lists the user\'s Team Drives.
 --
 -- /See:/ 'teamdrivesList' smart constructor.
-data TeamdrivesList = TeamdrivesList'
+data TeamdrivesList =
+  TeamdrivesList'
     { _tlQ                    :: !(Maybe Text)
     , _tlPageToken            :: !(Maybe Text)
     , _tlUseDomainAdminAccess :: !Bool
     , _tlPageSize             :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeamdrivesList' with the minimum fields required to make a request.
 --
@@ -78,12 +81,13 @@ data TeamdrivesList = TeamdrivesList'
 teamdrivesList
     :: TeamdrivesList
 teamdrivesList =
-    TeamdrivesList'
+  TeamdrivesList'
     { _tlQ = Nothing
     , _tlPageToken = Nothing
     , _tlUseDomainAdminAccess = False
     , _tlPageSize = 10
     }
+
 
 -- | Query string for searching Team Drives.
 tlQ :: Lens' TeamdrivesList (Maybe Text)

@@ -61,12 +61,15 @@ type AddressesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'addressesInsert' smart constructor.
-data AddressesInsert = AddressesInsert'
+data AddressesInsert =
+  AddressesInsert'
     { _aiRequestId :: !(Maybe Text)
     , _aiProject   :: !Text
     , _aiPayload   :: !Address
     , _aiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AddressesInsert' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ addressesInsert
     -> Text -- ^ 'aiRegion'
     -> AddressesInsert
 addressesInsert pAiProject_ pAiPayload_ pAiRegion_ =
-    AddressesInsert'
+  AddressesInsert'
     { _aiRequestId = Nothing
     , _aiProject = pAiProject_
     , _aiPayload = pAiPayload_
     , _aiRegion = pAiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

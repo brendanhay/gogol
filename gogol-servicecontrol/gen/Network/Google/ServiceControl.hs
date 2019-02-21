@@ -230,6 +230,7 @@ module Network.Google.ServiceControl
     , CheckError
     , checkError
     , ceSubject
+    , ceStatus
     , ceCode
     , ceDetail
 

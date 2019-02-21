@@ -79,7 +79,8 @@ type BeaconsGetResource =
 -- Eddystone-EID broadcast will receive an error.
 --
 -- /See:/ 'beaconsGet' smart constructor.
-data BeaconsGet = BeaconsGet'
+data BeaconsGet =
+  BeaconsGet'
     { _bgXgafv          :: !(Maybe Xgafv)
     , _bgUploadProtocol :: !(Maybe Text)
     , _bgAccessToken    :: !(Maybe Text)
@@ -87,7 +88,9 @@ data BeaconsGet = BeaconsGet'
     , _bgUploadType     :: !(Maybe Text)
     , _bgProjectId      :: !(Maybe Text)
     , _bgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeaconsGet' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ beaconsGet
     :: Text -- ^ 'bgBeaconName'
     -> BeaconsGet
 beaconsGet pBgBeaconName_ =
-    BeaconsGet'
+  BeaconsGet'
     { _bgXgafv = Nothing
     , _bgUploadProtocol = Nothing
     , _bgAccessToken = Nothing
@@ -119,6 +122,7 @@ beaconsGet pBgBeaconName_ =
     , _bgProjectId = Nothing
     , _bgCallback = Nothing
     }
+
 
 -- | V1 error format.
 bgXgafv :: Lens' BeaconsGet (Maybe Xgafv)

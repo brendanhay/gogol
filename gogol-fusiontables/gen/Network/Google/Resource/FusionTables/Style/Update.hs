@@ -57,11 +57,14 @@ type StyleUpdateResource =
 -- | Updates an existing style.
 --
 -- /See:/ 'styleUpdate' smart constructor.
-data StyleUpdate = StyleUpdate'
+data StyleUpdate =
+  StyleUpdate'
     { _suPayload :: !StyleSetting
     , _suStyleId :: !(Textual Int32)
     , _suTableId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StyleUpdate' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ styleUpdate
     -> Text -- ^ 'suTableId'
     -> StyleUpdate
 styleUpdate pSuPayload_ pSuStyleId_ pSuTableId_ =
-    StyleUpdate'
+  StyleUpdate'
     { _suPayload = pSuPayload_
     , _suStyleId = _Coerce # pSuStyleId_
     , _suTableId = pSuTableId_
     }
+
 
 -- | Multipart request metadata.
 suPayload :: Lens' StyleUpdate StyleSetting

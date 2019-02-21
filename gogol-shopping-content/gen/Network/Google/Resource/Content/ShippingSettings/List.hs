@@ -58,11 +58,14 @@ type ShippingSettingsListResource =
 -- account.
 --
 -- /See:/ 'shippingSettingsList' smart constructor.
-data ShippingSettingsList = ShippingSettingsList'
+data ShippingSettingsList =
+  ShippingSettingsList'
     { _sslMerchantId :: !(Textual Word64)
     , _sslPageToken  :: !(Maybe Text)
     , _sslMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShippingSettingsList' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ shippingSettingsList
     :: Word64 -- ^ 'sslMerchantId'
     -> ShippingSettingsList
 shippingSettingsList pSslMerchantId_ =
-    ShippingSettingsList'
+  ShippingSettingsList'
     { _sslMerchantId = _Coerce # pSslMerchantId_
     , _sslPageToken = Nothing
     , _sslMaxResults = Nothing
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 sslMerchantId :: Lens' ShippingSettingsList Word64

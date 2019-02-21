@@ -55,10 +55,13 @@ type MembersDeleteResource =
 -- | Remove membership.
 --
 -- /See:/ 'membersDelete' smart constructor.
-data MembersDelete = MembersDelete'
+data MembersDelete =
+  MembersDelete'
     { _mdMemberKey :: !Text
     , _mdGroupKey  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MembersDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ membersDelete
     -> Text -- ^ 'mdGroupKey'
     -> MembersDelete
 membersDelete pMdMemberKey_ pMdGroupKey_ =
-    MembersDelete'
-    { _mdMemberKey = pMdMemberKey_
-    , _mdGroupKey = pMdGroupKey_
-    }
+  MembersDelete' {_mdMemberKey = pMdMemberKey_, _mdGroupKey = pMdGroupKey_}
+
 
 -- | Email or immutable ID of the member
 mdMemberKey :: Lens' MembersDelete Text

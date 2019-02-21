@@ -70,7 +70,8 @@ type ServicesRolloutsListResource =
 -- service, from the newest to the oldest.
 --
 -- /See:/ 'servicesRolloutsList' smart constructor.
-data ServicesRolloutsList = ServicesRolloutsList'
+data ServicesRolloutsList =
+  ServicesRolloutsList'
     { _srlXgafv          :: !(Maybe Xgafv)
     , _srlUploadProtocol :: !(Maybe Text)
     , _srlAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ServicesRolloutsList = ServicesRolloutsList'
     , _srlPageToken      :: !(Maybe Text)
     , _srlPageSize       :: !(Maybe (Textual Int32))
     , _srlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesRolloutsList' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ servicesRolloutsList
     :: Text -- ^ 'srlServiceName'
     -> ServicesRolloutsList
 servicesRolloutsList pSrlServiceName_ =
-    ServicesRolloutsList'
+  ServicesRolloutsList'
     { _srlXgafv = Nothing
     , _srlUploadProtocol = Nothing
     , _srlAccessToken = Nothing
@@ -118,6 +121,7 @@ servicesRolloutsList pSrlServiceName_ =
     , _srlPageSize = Nothing
     , _srlCallback = Nothing
     }
+
 
 -- | V1 error format.
 srlXgafv :: Lens' ServicesRolloutsList (Maybe Xgafv)

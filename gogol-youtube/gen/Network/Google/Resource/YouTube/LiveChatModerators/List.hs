@@ -59,12 +59,15 @@ type LiveChatModeratorsListResource =
 -- | Lists moderators for a live chat.
 --
 -- /See:/ 'liveChatModeratorsList' smart constructor.
-data LiveChatModeratorsList = LiveChatModeratorsList'
+data LiveChatModeratorsList =
+  LiveChatModeratorsList'
     { _livPart       :: !Text
     , _livLiveChatId :: !Text
     , _livPageToken  :: !(Maybe Text)
     , _livMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveChatModeratorsList' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ liveChatModeratorsList
     -> Text -- ^ 'livLiveChatId'
     -> LiveChatModeratorsList
 liveChatModeratorsList pLivPart_ pLivLiveChatId_ =
-    LiveChatModeratorsList'
+  LiveChatModeratorsList'
     { _livPart = pLivPart_
     , _livLiveChatId = pLivLiveChatId_
     , _livPageToken = Nothing
     , _livMaxResults = 5
     }
+
 
 -- | The part parameter specifies the liveChatModerator resource parts that
 -- the API response will include. Supported values are id and snippet.

@@ -25,7 +25,7 @@
 -- security leaks. It is not valid to call the disable method on a service
 -- that is not currently enabled. Callers will receive a
 -- \`FAILED_PRECONDITION\` status if the target service is not currently
--- enabled. Operation
+-- enabled.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.disable@.
 module Network.Google.Resource.ServiceUsage.Services.Disable
@@ -69,10 +69,11 @@ type ServicesDisableResource =
 -- security leaks. It is not valid to call the disable method on a service
 -- that is not currently enabled. Callers will receive a
 -- \`FAILED_PRECONDITION\` status if the target service is not currently
--- enabled. Operation
+-- enabled.
 --
 -- /See:/ 'servicesDisable' smart constructor.
-data ServicesDisable = ServicesDisable'
+data ServicesDisable =
+  ServicesDisable'
     { _sdXgafv          :: !(Maybe Xgafv)
     , _sdUploadProtocol :: !(Maybe Text)
     , _sdAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ServicesDisable = ServicesDisable'
     , _sdPayload        :: !DisableServiceRequest
     , _sdName           :: !Text
     , _sdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesDisable' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ servicesDisable
     -> Text -- ^ 'sdName'
     -> ServicesDisable
 servicesDisable pSdPayload_ pSdName_ =
-    ServicesDisable'
+  ServicesDisable'
     { _sdXgafv = Nothing
     , _sdUploadProtocol = Nothing
     , _sdAccessToken = Nothing
@@ -113,6 +116,7 @@ servicesDisable pSdPayload_ pSdName_ =
     , _sdName = pSdName_
     , _sdCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdXgafv :: Lens' ServicesDisable (Maybe Xgafv)

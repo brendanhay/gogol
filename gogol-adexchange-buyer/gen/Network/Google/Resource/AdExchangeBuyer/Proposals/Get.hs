@@ -51,9 +51,12 @@ type ProposalsGetResource =
 -- | Get a proposal given its id
 --
 -- /See:/ 'proposalsGet' smart constructor.
-newtype ProposalsGet = ProposalsGet'
+newtype ProposalsGet =
+  ProposalsGet'
     { _pgProposalId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProposalsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype ProposalsGet = ProposalsGet'
 proposalsGet
     :: Text -- ^ 'pgProposalId'
     -> ProposalsGet
-proposalsGet pPgProposalId_ =
-    ProposalsGet'
-    { _pgProposalId = pPgProposalId_
-    }
+proposalsGet pPgProposalId_ = ProposalsGet' {_pgProposalId = pPgProposalId_}
+
 
 -- | Id of the proposal to retrieve.
 pgProposalId :: Lens' ProposalsGet Text

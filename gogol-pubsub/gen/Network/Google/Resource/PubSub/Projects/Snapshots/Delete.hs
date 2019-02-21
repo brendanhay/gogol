@@ -83,14 +83,17 @@ type ProjectsSnapshotsDeleteResource =
 -- specified.
 --
 -- /See:/ 'projectsSnapshotsDelete' smart constructor.
-data ProjectsSnapshotsDelete = ProjectsSnapshotsDelete'
+data ProjectsSnapshotsDelete =
+  ProjectsSnapshotsDelete'
     { _proXgafv          :: !(Maybe Xgafv)
     , _proSnapshot       :: !Text
     , _proUploadProtocol :: !(Maybe Text)
     , _proAccessToken    :: !(Maybe Text)
     , _proUploadType     :: !(Maybe Text)
     , _proCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSnapshotsDelete' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ projectsSnapshotsDelete
     :: Text -- ^ 'proSnapshot'
     -> ProjectsSnapshotsDelete
 projectsSnapshotsDelete pProSnapshot_ =
-    ProjectsSnapshotsDelete'
+  ProjectsSnapshotsDelete'
     { _proXgafv = Nothing
     , _proSnapshot = pProSnapshot_
     , _proUploadProtocol = Nothing
@@ -119,6 +122,7 @@ projectsSnapshotsDelete pProSnapshot_ =
     , _proUploadType = Nothing
     , _proCallback = Nothing
     }
+
 
 -- | V1 error format.
 proXgafv :: Lens' ProjectsSnapshotsDelete (Maybe Xgafv)

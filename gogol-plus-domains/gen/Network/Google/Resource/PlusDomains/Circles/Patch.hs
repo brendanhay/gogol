@@ -53,10 +53,13 @@ type CirclesPatchResource =
 -- | Update a circle\'s description. This method supports patch semantics.
 --
 -- /See:/ 'circlesPatch' smart constructor.
-data CirclesPatch = CirclesPatch'
+data CirclesPatch =
+  CirclesPatch'
     { _cpPayload  :: !Circle
     , _cpCircleId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CirclesPatch' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ circlesPatch
     -> Text -- ^ 'cpCircleId'
     -> CirclesPatch
 circlesPatch pCpPayload_ pCpCircleId_ =
-    CirclesPatch'
-    { _cpPayload = pCpPayload_
-    , _cpCircleId = pCpCircleId_
-    }
+  CirclesPatch' {_cpPayload = pCpPayload_, _cpCircleId = pCpCircleId_}
+
 
 -- | Multipart request metadata.
 cpPayload :: Lens' CirclesPatch Circle

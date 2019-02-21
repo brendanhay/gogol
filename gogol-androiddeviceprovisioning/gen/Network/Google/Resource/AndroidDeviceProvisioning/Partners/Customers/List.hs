@@ -70,7 +70,8 @@ type PartnersCustomersListResource =
 -- created and customers that enrolled themselves using the portal.
 --
 -- /See:/ 'partnersCustomersList' smart constructor.
-data PartnersCustomersList = PartnersCustomersList'
+data PartnersCustomersList =
+  PartnersCustomersList'
     { _pclXgafv          :: !(Maybe Xgafv)
     , _pclUploadProtocol :: !(Maybe Text)
     , _pclAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data PartnersCustomersList = PartnersCustomersList'
     , _pclPageToken      :: !(Maybe Text)
     , _pclPageSize       :: !(Maybe (Textual Int32))
     , _pclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartnersCustomersList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ partnersCustomersList
     :: Int64 -- ^ 'pclPartnerId'
     -> PartnersCustomersList
 partnersCustomersList pPclPartnerId_ =
-    PartnersCustomersList'
+  PartnersCustomersList'
     { _pclXgafv = Nothing
     , _pclUploadProtocol = Nothing
     , _pclAccessToken = Nothing
@@ -114,6 +117,7 @@ partnersCustomersList pPclPartnerId_ =
     , _pclPageSize = Nothing
     , _pclCallback = Nothing
     }
+
 
 -- | V1 error format.
 pclXgafv :: Lens' PartnersCustomersList (Maybe Xgafv)

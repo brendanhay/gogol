@@ -24,7 +24,8 @@
 -- RESOURCE content, this API outputs history with asset in both non-delete
 -- or deleted status. For IAM_POLICY content, this API outputs history when
 -- the asset and its attached IAM POLICY both exist. This can create gaps
--- in the output history.
+-- in the output history. If a specified asset does not exist, this API
+-- returns an INVALID_ARGUMENT error.
 --
 -- /See:/ <https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview Cloud Asset API Reference> for @cloudasset.projects.batchGetAssetsHistory@.
 module Network.Google.Resource.CloudAsset.Projects.BatchGetAssetsHistory
@@ -73,10 +74,12 @@ type ProjectsBatchGetAssetsHistoryResource =
 -- RESOURCE content, this API outputs history with asset in both non-delete
 -- or deleted status. For IAM_POLICY content, this API outputs history when
 -- the asset and its attached IAM POLICY both exist. This can create gaps
--- in the output history.
+-- in the output history. If a specified asset does not exist, this API
+-- returns an INVALID_ARGUMENT error.
 --
 -- /See:/ 'projectsBatchGetAssetsHistory' smart constructor.
-data ProjectsBatchGetAssetsHistory = ProjectsBatchGetAssetsHistory'
+data ProjectsBatchGetAssetsHistory =
+  ProjectsBatchGetAssetsHistory'
     { _pbgahParent                  :: !Text
     , _pbgahXgafv                   :: !(Maybe Xgafv)
     , _pbgahReadTimeWindowEndTime   :: !(Maybe DateTime')
@@ -87,7 +90,9 @@ data ProjectsBatchGetAssetsHistory = ProjectsBatchGetAssetsHistory'
     , _pbgahReadTimeWindowStartTime :: !(Maybe DateTime')
     , _pbgahContentType             :: !(Maybe Text)
     , _pbgahCallback                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsBatchGetAssetsHistory' with the minimum fields required to make a request.
 --
@@ -116,7 +121,7 @@ projectsBatchGetAssetsHistory
     :: Text -- ^ 'pbgahParent'
     -> ProjectsBatchGetAssetsHistory
 projectsBatchGetAssetsHistory pPbgahParent_ =
-    ProjectsBatchGetAssetsHistory'
+  ProjectsBatchGetAssetsHistory'
     { _pbgahParent = pPbgahParent_
     , _pbgahXgafv = Nothing
     , _pbgahReadTimeWindowEndTime = Nothing
@@ -128,6 +133,7 @@ projectsBatchGetAssetsHistory pPbgahParent_ =
     , _pbgahContentType = Nothing
     , _pbgahCallback = Nothing
     }
+
 
 -- | Required. The relative name of the root asset. It can only be an
 -- organization number (such as \"organizations\/123\"), a project ID (such

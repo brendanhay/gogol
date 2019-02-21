@@ -59,14 +59,17 @@ type ProjectsLocationsKeyRingsGetResource =
 -- | Returns metadata for a given KeyRing.
 --
 -- /See:/ 'projectsLocationsKeyRingsGet' smart constructor.
-data ProjectsLocationsKeyRingsGet = ProjectsLocationsKeyRingsGet'
+data ProjectsLocationsKeyRingsGet =
+  ProjectsLocationsKeyRingsGet'
     { _plkrgXgafv          :: !(Maybe Xgafv)
     , _plkrgUploadProtocol :: !(Maybe Text)
     , _plkrgAccessToken    :: !(Maybe Text)
     , _plkrgUploadType     :: !(Maybe Text)
     , _plkrgName           :: !Text
     , _plkrgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsLocationsKeyRingsGet
     :: Text -- ^ 'plkrgName'
     -> ProjectsLocationsKeyRingsGet
 projectsLocationsKeyRingsGet pPlkrgName_ =
-    ProjectsLocationsKeyRingsGet'
+  ProjectsLocationsKeyRingsGet'
     { _plkrgXgafv = Nothing
     , _plkrgUploadProtocol = Nothing
     , _plkrgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsLocationsKeyRingsGet pPlkrgName_ =
     , _plkrgName = pPlkrgName_
     , _plkrgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrgXgafv :: Lens' ProjectsLocationsKeyRingsGet (Maybe Xgafv)
@@ -134,7 +138,8 @@ instance GoogleRequest ProjectsLocationsKeyRingsGet
          where
         type Rs ProjectsLocationsKeyRingsGet = KeyRing
         type Scopes ProjectsLocationsKeyRingsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient ProjectsLocationsKeyRingsGet'{..}
           = go _plkrgName _plkrgXgafv _plkrgUploadProtocol
               _plkrgAccessToken

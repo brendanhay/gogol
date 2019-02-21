@@ -75,7 +75,8 @@ type ProjectsInstancesDatabasesSessionsReadResource =
 -- streaming fashion by calling StreamingRead instead.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsRead' smart constructor.
-data ProjectsInstancesDatabasesSessionsRead = ProjectsInstancesDatabasesSessionsRead'
+data ProjectsInstancesDatabasesSessionsRead =
+  ProjectsInstancesDatabasesSessionsRead'
     { _pidsrXgafv          :: !(Maybe Xgafv)
     , _pidsrUploadProtocol :: !(Maybe Text)
     , _pidsrAccessToken    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsInstancesDatabasesSessionsRead = ProjectsInstancesDatabasesSessions
     , _pidsrPayload        :: !ReadRequest
     , _pidsrSession        :: !Text
     , _pidsrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsRead' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsInstancesDatabasesSessionsRead
     -> Text -- ^ 'pidsrSession'
     -> ProjectsInstancesDatabasesSessionsRead
 projectsInstancesDatabasesSessionsRead pPidsrPayload_ pPidsrSession_ =
-    ProjectsInstancesDatabasesSessionsRead'
+  ProjectsInstancesDatabasesSessionsRead'
     { _pidsrXgafv = Nothing
     , _pidsrUploadProtocol = Nothing
     , _pidsrAccessToken = Nothing
@@ -116,6 +119,7 @@ projectsInstancesDatabasesSessionsRead pPidsrPayload_ pPidsrSession_ =
     , _pidsrSession = pPidsrSession_
     , _pidsrCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidsrXgafv :: Lens' ProjectsInstancesDatabasesSessionsRead (Maybe Xgafv)
@@ -157,7 +161,8 @@ pidsrCallback
       (\ s a -> s{_pidsrCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsRead where
+           ProjectsInstancesDatabasesSessionsRead
+         where
         type Rs ProjectsInstancesDatabasesSessionsRead =
              ResultSet
         type Scopes ProjectsInstancesDatabasesSessionsRead =

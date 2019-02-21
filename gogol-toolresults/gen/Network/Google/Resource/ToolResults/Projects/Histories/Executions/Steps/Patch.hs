@@ -76,14 +76,17 @@ type ProjectsHistoriesExecutionsStepsPatchResource =
 -- containing Execution does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsPatch' smart constructor.
-data ProjectsHistoriesExecutionsStepsPatch = ProjectsHistoriesExecutionsStepsPatch'
+data ProjectsHistoriesExecutionsStepsPatch =
+  ProjectsHistoriesExecutionsStepsPatch'
     { _phespRequestId   :: !(Maybe Text)
     , _phespExecutionId :: !Text
     , _phespStepId      :: !Text
     , _phespPayload     :: !Step
     , _phespHistoryId   :: !Text
     , _phespProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPatch' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ projectsHistoriesExecutionsStepsPatch
     -> Text -- ^ 'phespProjectId'
     -> ProjectsHistoriesExecutionsStepsPatch
 projectsHistoriesExecutionsStepsPatch pPhespExecutionId_ pPhespStepId_ pPhespPayload_ pPhespHistoryId_ pPhespProjectId_ =
-    ProjectsHistoriesExecutionsStepsPatch'
+  ProjectsHistoriesExecutionsStepsPatch'
     { _phespRequestId = Nothing
     , _phespExecutionId = pPhespExecutionId_
     , _phespStepId = pPhespStepId_
@@ -116,6 +119,7 @@ projectsHistoriesExecutionsStepsPatch pPhespExecutionId_ pPhespStepId_ pPhespPay
     , _phespHistoryId = pPhespHistoryId_
     , _phespProjectId = pPhespProjectId_
     }
+
 
 -- | A unique request ID for server to detect duplicated requests. For
 -- example, a UUID. Optional, but strongly recommended.
@@ -153,7 +157,8 @@ phespProjectId
       (\ s a -> s{_phespProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsPatch where
+           ProjectsHistoriesExecutionsStepsPatch
+         where
         type Rs ProjectsHistoriesExecutionsStepsPatch = Step
         type Scopes ProjectsHistoriesExecutionsStepsPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]

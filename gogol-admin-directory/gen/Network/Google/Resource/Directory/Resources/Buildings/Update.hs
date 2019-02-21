@@ -36,6 +36,7 @@ module Network.Google.Resource.Directory.Resources.Buildings.Update
     , rbuBuildingId
     , rbuPayload
     , rbuCustomer
+    , rbuCoordinatesSource
     ) where
 
 import           Network.Google.Directory.Types
@@ -52,17 +53,24 @@ type ResourcesBuildingsUpdateResource =
                "resources" :>
                  "buildings" :>
                    Capture "buildingId" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Building :> Put '[JSON] Building
+                     QueryParam "coordinatesSource"
+                       ResourcesBuildingsUpdateCoordinatesSource
+                       :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Building :> Put '[JSON] Building
 
 -- | Updates a building.
 --
 -- /See:/ 'resourcesBuildingsUpdate' smart constructor.
-data ResourcesBuildingsUpdate = ResourcesBuildingsUpdate'
-    { _rbuBuildingId :: !Text
-    , _rbuPayload    :: !Building
-    , _rbuCustomer   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data ResourcesBuildingsUpdate =
+  ResourcesBuildingsUpdate'
+    { _rbuBuildingId        :: !Text
+    , _rbuPayload           :: !Building
+    , _rbuCustomer          :: !Text
+    , _rbuCoordinatesSource :: !ResourcesBuildingsUpdateCoordinatesSource
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesBuildingsUpdate' with the minimum fields required to make a request.
 --
@@ -73,17 +81,21 @@ data ResourcesBuildingsUpdate = ResourcesBuildingsUpdate'
 -- * 'rbuPayload'
 --
 -- * 'rbuCustomer'
+--
+-- * 'rbuCoordinatesSource'
 resourcesBuildingsUpdate
     :: Text -- ^ 'rbuBuildingId'
     -> Building -- ^ 'rbuPayload'
     -> Text -- ^ 'rbuCustomer'
     -> ResourcesBuildingsUpdate
 resourcesBuildingsUpdate pRbuBuildingId_ pRbuPayload_ pRbuCustomer_ =
-    ResourcesBuildingsUpdate'
+  ResourcesBuildingsUpdate'
     { _rbuBuildingId = pRbuBuildingId_
     , _rbuPayload = pRbuPayload_
     , _rbuCustomer = pRbuCustomer_
+    , _rbuCoordinatesSource = RBUCSSourceUnspecified
     }
+
 
 -- | The ID of the building to update.
 rbuBuildingId :: Lens' ResourcesBuildingsUpdate Text
@@ -103,12 +115,20 @@ rbuCustomer :: Lens' ResourcesBuildingsUpdate Text
 rbuCustomer
   = lens _rbuCustomer (\ s a -> s{_rbuCustomer = a})
 
+-- | Source from which Building.coordinates are derived.
+rbuCoordinatesSource :: Lens' ResourcesBuildingsUpdate ResourcesBuildingsUpdateCoordinatesSource
+rbuCoordinatesSource
+  = lens _rbuCoordinatesSource
+      (\ s a -> s{_rbuCoordinatesSource = a})
+
 instance GoogleRequest ResourcesBuildingsUpdate where
         type Rs ResourcesBuildingsUpdate = Building
         type Scopes ResourcesBuildingsUpdate =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
         requestClient ResourcesBuildingsUpdate'{..}
-          = go _rbuCustomer _rbuBuildingId (Just AltJSON)
+          = go _rbuCustomer _rbuBuildingId
+              (Just _rbuCoordinatesSource)
+              (Just AltJSON)
               _rbuPayload
               directoryService
           where go

@@ -61,13 +61,16 @@ type CustomChannelsAdUnitsListResource =
 -- | List all ad units in the specified custom channel.
 --
 -- /See:/ 'customChannelsAdUnitsList' smart constructor.
-data CustomChannelsAdUnitsList = CustomChannelsAdUnitsList'
+data CustomChannelsAdUnitsList =
+  CustomChannelsAdUnitsList'
     { _ccaulIncludeInactive :: !(Maybe Bool)
     , _ccaulCustomChannelId :: !Text
     , _ccaulAdClientId      :: !Text
     , _ccaulPageToken       :: !(Maybe Text)
     , _ccaulMaxResults      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomChannelsAdUnitsList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ customChannelsAdUnitsList
     -> Text -- ^ 'ccaulAdClientId'
     -> CustomChannelsAdUnitsList
 customChannelsAdUnitsList pCcaulCustomChannelId_ pCcaulAdClientId_ =
-    CustomChannelsAdUnitsList'
+  CustomChannelsAdUnitsList'
     { _ccaulIncludeInactive = Nothing
     , _ccaulCustomChannelId = pCcaulCustomChannelId_
     , _ccaulAdClientId = pCcaulAdClientId_
     , _ccaulPageToken = Nothing
     , _ccaulMaxResults = Nothing
     }
+
 
 -- | Whether to include inactive ad units. Default: true.
 ccaulIncludeInactive :: Lens' CustomChannelsAdUnitsList (Maybe Bool)

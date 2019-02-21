@@ -58,10 +58,13 @@ type HTTPHealthChecksGetResource =
 -- HTTP health checks by making a list() request.
 --
 -- /See:/ 'hTTPHealthChecksGet' smart constructor.
-data HTTPHealthChecksGet = HTTPHealthChecksGet'
+data HTTPHealthChecksGet =
+  HTTPHealthChecksGet'
     { _httphcgProject         :: !Text
     , _httphcgHTTPHealthCheck :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPHealthChecksGet' with the minimum fields required to make a request.
 --
@@ -75,10 +78,11 @@ hTTPHealthChecksGet
     -> Text -- ^ 'httphcgHTTPHealthCheck'
     -> HTTPHealthChecksGet
 hTTPHealthChecksGet pHttphcgProject_ pHttphcgHTTPHealthCheck_ =
-    HTTPHealthChecksGet'
+  HTTPHealthChecksGet'
     { _httphcgProject = pHttphcgProject_
     , _httphcgHTTPHealthCheck = pHttphcgHTTPHealthCheck_
     }
+
 
 -- | Project ID for this request.
 httphcgProject :: Lens' HTTPHealthChecksGet Text

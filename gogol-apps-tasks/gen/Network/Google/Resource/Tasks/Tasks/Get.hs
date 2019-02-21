@@ -54,10 +54,13 @@ type TasksGetResource =
 -- | Returns the specified task.
 --
 -- /See:/ 'tasksGet' smart constructor.
-data TasksGet = TasksGet'
+data TasksGet =
+  TasksGet'
     { _tgTaskList :: !Text
     , _tgTask     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TasksGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ tasksGet
     -> Text -- ^ 'tgTask'
     -> TasksGet
 tasksGet pTgTaskList_ pTgTask_ =
-    TasksGet'
-    { _tgTaskList = pTgTaskList_
-    , _tgTask = pTgTask_
-    }
+  TasksGet' {_tgTaskList = pTgTaskList_, _tgTask = pTgTask_}
+
 
 -- | Task list identifier.
 tgTaskList :: Lens' TasksGet Text

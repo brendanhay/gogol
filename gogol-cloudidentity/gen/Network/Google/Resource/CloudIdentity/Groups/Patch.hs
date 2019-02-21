@@ -63,7 +63,8 @@ type GroupsPatchResource =
 -- | Updates a Group.
 --
 -- /See:/ 'groupsPatch' smart constructor.
-data GroupsPatch = GroupsPatch'
+data GroupsPatch =
+  GroupsPatch'
     { _gpXgafv          :: !(Maybe Xgafv)
     , _gpUploadProtocol :: !(Maybe Text)
     , _gpUpdateMask     :: !(Maybe GFieldMask)
@@ -72,7 +73,9 @@ data GroupsPatch = GroupsPatch'
     , _gpPayload        :: !Group
     , _gpName           :: !Text
     , _gpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ groupsPatch
     -> Text -- ^ 'gpName'
     -> GroupsPatch
 groupsPatch pGpPayload_ pGpName_ =
-    GroupsPatch'
+  GroupsPatch'
     { _gpXgafv = Nothing
     , _gpUploadProtocol = Nothing
     , _gpUpdateMask = Nothing
@@ -108,6 +111,7 @@ groupsPatch pGpPayload_ pGpName_ =
     , _gpName = pGpName_
     , _gpCallback = Nothing
     }
+
 
 -- | V1 error format.
 gpXgafv :: Lens' GroupsPatch (Maybe Xgafv)

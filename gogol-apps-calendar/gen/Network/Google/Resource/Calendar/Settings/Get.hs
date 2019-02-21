@@ -53,9 +53,12 @@ type SettingsGetResource =
 -- | Returns a single user setting.
 --
 -- /See:/ 'settingsGet' smart constructor.
-newtype SettingsGet = SettingsGet'
+newtype SettingsGet =
+  SettingsGet'
     { _sgSetting :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsGet' with the minimum fields required to make a request.
 --
@@ -65,10 +68,8 @@ newtype SettingsGet = SettingsGet'
 settingsGet
     :: Text -- ^ 'sgSetting'
     -> SettingsGet
-settingsGet pSgSetting_ =
-    SettingsGet'
-    { _sgSetting = pSgSetting_
-    }
+settingsGet pSgSetting_ = SettingsGet' {_sgSetting = pSgSetting_}
+
 
 -- | The id of the user setting.
 sgSetting :: Lens' SettingsGet Text

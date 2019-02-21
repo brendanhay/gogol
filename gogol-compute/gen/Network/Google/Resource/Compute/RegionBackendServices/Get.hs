@@ -58,11 +58,14 @@ type RegionBackendServicesGetResource =
 -- | Returns the specified regional BackendService resource.
 --
 -- /See:/ 'regionBackendServicesGet' smart constructor.
-data RegionBackendServicesGet = RegionBackendServicesGet'
+data RegionBackendServicesGet =
+  RegionBackendServicesGet'
     { _rbsgProject        :: !Text
     , _rbsgRegion         :: !Text
     , _rbsgBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionBackendServicesGet' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ regionBackendServicesGet
     -> Text -- ^ 'rbsgBackendService'
     -> RegionBackendServicesGet
 regionBackendServicesGet pRbsgProject_ pRbsgRegion_ pRbsgBackendService_ =
-    RegionBackendServicesGet'
+  RegionBackendServicesGet'
     { _rbsgProject = pRbsgProject_
     , _rbsgRegion = pRbsgRegion_
     , _rbsgBackendService = pRbsgBackendService_
     }
+
 
 -- | Project ID for this request.
 rbsgProject :: Lens' RegionBackendServicesGet Text

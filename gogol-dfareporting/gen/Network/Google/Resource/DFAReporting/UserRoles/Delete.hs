@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolesDelete' request conforms to.
 type UserRolesDeleteResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -54,10 +54,13 @@ type UserRolesDeleteResource =
 -- | Deletes an existing user role.
 --
 -- /See:/ 'userRolesDelete' smart constructor.
-data UserRolesDelete = UserRolesDelete'
+data UserRolesDelete =
+  UserRolesDelete'
     { _urdProFileId :: !(Textual Int64)
     , _urdId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserRolesDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ userRolesDelete
     -> Int64 -- ^ 'urdId'
     -> UserRolesDelete
 userRolesDelete pUrdProFileId_ pUrdId_ =
-    UserRolesDelete'
-    { _urdProFileId = _Coerce # pUrdProFileId_
-    , _urdId = _Coerce # pUrdId_
-    }
+  UserRolesDelete'
+    {_urdProFileId = _Coerce # pUrdProFileId_, _urdId = _Coerce # pUrdId_}
+
 
 -- | User profile ID associated with this request.
 urdProFileId :: Lens' UserRolesDelete Int64

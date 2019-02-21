@@ -61,10 +61,13 @@ type UsersDataSourcesListResource =
 -- using other scopes.
 --
 -- /See:/ 'usersDataSourcesList' smart constructor.
-data UsersDataSourcesList = UsersDataSourcesList'
+data UsersDataSourcesList =
+  UsersDataSourcesList'
     { _udslDataTypeName :: !(Maybe [Text])
     , _udslUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersDataSourcesList' with the minimum fields required to make a request.
 --
@@ -77,10 +80,9 @@ usersDataSourcesList
     :: Text -- ^ 'udslUserId'
     -> UsersDataSourcesList
 usersDataSourcesList pUdslUserId_ =
-    UsersDataSourcesList'
-    { _udslDataTypeName = Nothing
-    , _udslUserId = pUdslUserId_
-    }
+  UsersDataSourcesList'
+    {_udslDataTypeName = Nothing, _udslUserId = pUdslUserId_}
+
 
 -- | The names of data types to include in the list. If not specified, all
 -- data sources will be returned.

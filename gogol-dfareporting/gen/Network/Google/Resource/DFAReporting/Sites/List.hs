@@ -59,7 +59,7 @@ import           Network.Google.Prelude
 -- 'SitesList' request conforms to.
 type SitesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -89,7 +89,8 @@ type SitesListResource =
 -- paging.
 --
 -- /See:/ 'sitesList' smart constructor.
-data SitesList = SitesList'
+data SitesList =
+  SitesList'
     { _sitUnmAppedSite                   :: !(Maybe Bool)
     , _sitCampaignIds                    :: !(Maybe [Textual Int64])
     , _sitSearchString                   :: !(Maybe Text)
@@ -106,7 +107,9 @@ data SitesList = SitesList'
     , _sitApproved                       :: !(Maybe Bool)
     , _sitAdWordsSite                    :: !(Maybe Bool)
     , _sitMaxResults                     :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitesList' with the minimum fields required to make a request.
 --
@@ -147,7 +150,7 @@ sitesList
     :: Int64 -- ^ 'sitProFileId'
     -> SitesList
 sitesList pSitProFileId_ =
-    SitesList'
+  SitesList'
     { _sitUnmAppedSite = Nothing
     , _sitCampaignIds = Nothing
     , _sitSearchString = Nothing
@@ -165,6 +168,7 @@ sitesList pSitProFileId_ =
     , _sitAdWordsSite = Nothing
     , _sitMaxResults = 1000
     }
+
 
 -- | Select only sites that have not been mapped to a directory site.
 sitUnmAppedSite :: Lens' SitesList (Maybe Bool)

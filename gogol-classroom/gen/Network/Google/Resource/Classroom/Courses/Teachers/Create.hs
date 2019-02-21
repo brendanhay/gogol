@@ -79,7 +79,8 @@ type CoursesTeachersCreateResource =
 -- course.
 --
 -- /See:/ 'coursesTeachersCreate' smart constructor.
-data CoursesTeachersCreate = CoursesTeachersCreate'
+data CoursesTeachersCreate =
+  CoursesTeachersCreate'
     { _ctcXgafv          :: !(Maybe Xgafv)
     , _ctcUploadProtocol :: !(Maybe Text)
     , _ctcCourseId       :: !Text
@@ -87,7 +88,9 @@ data CoursesTeachersCreate = CoursesTeachersCreate'
     , _ctcUploadType     :: !(Maybe Text)
     , _ctcPayload        :: !Teacher
     , _ctcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesTeachersCreate' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ coursesTeachersCreate
     -> Teacher -- ^ 'ctcPayload'
     -> CoursesTeachersCreate
 coursesTeachersCreate pCtcCourseId_ pCtcPayload_ =
-    CoursesTeachersCreate'
+  CoursesTeachersCreate'
     { _ctcXgafv = Nothing
     , _ctcUploadProtocol = Nothing
     , _ctcCourseId = pCtcCourseId_
@@ -120,6 +123,7 @@ coursesTeachersCreate pCtcCourseId_ pCtcPayload_ =
     , _ctcPayload = pCtcPayload_
     , _ctcCallback = Nothing
     }
+
 
 -- | V1 error format.
 ctcXgafv :: Lens' CoursesTeachersCreate (Maybe Xgafv)

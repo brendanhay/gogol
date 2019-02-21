@@ -64,14 +64,17 @@ type MattersCreateResource =
 -- matter with default view.
 --
 -- /See:/ 'mattersCreate' smart constructor.
-data MattersCreate = MattersCreate'
+data MattersCreate =
+  MattersCreate'
     { _mXgafv          :: !(Maybe Xgafv)
     , _mUploadProtocol :: !(Maybe Text)
     , _mAccessToken    :: !(Maybe Text)
     , _mUploadType     :: !(Maybe Text)
     , _mPayload        :: !Matter
     , _mCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersCreate' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ mattersCreate
     :: Matter -- ^ 'mPayload'
     -> MattersCreate
 mattersCreate pMPayload_ =
-    MattersCreate'
+  MattersCreate'
     { _mXgafv = Nothing
     , _mUploadProtocol = Nothing
     , _mAccessToken = Nothing
@@ -100,6 +103,7 @@ mattersCreate pMPayload_ =
     , _mPayload = pMPayload_
     , _mCallback = Nothing
     }
+
 
 -- | V1 error format.
 mXgafv :: Lens' MattersCreate (Maybe Xgafv)

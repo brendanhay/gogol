@@ -55,9 +55,12 @@ type AccountsMetadataDimensionsListResource =
 -- account.
 --
 -- /See:/ 'accountsMetadataDimensionsList' smart constructor.
-newtype AccountsMetadataDimensionsList = AccountsMetadataDimensionsList'
+newtype AccountsMetadataDimensionsList =
+  AccountsMetadataDimensionsList'
     { _amdlAccountId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsMetadataDimensionsList' with the minimum fields required to make a request.
 --
@@ -68,9 +71,8 @@ accountsMetadataDimensionsList
     :: Text -- ^ 'amdlAccountId'
     -> AccountsMetadataDimensionsList
 accountsMetadataDimensionsList pAmdlAccountId_ =
-    AccountsMetadataDimensionsList'
-    { _amdlAccountId = pAmdlAccountId_
-    }
+  AccountsMetadataDimensionsList' {_amdlAccountId = pAmdlAccountId_}
+
 
 -- | Account with visibility to the dimensions.
 amdlAccountId :: Lens' AccountsMetadataDimensionsList Text

@@ -63,13 +63,16 @@ type ProjectsGetXpnResourcesResource =
 -- project.
 --
 -- /See:/ 'projectsGetXpnResources'' smart constructor.
-data ProjectsGetXpnResources' = ProjectsGetXpnResources''
+data ProjectsGetXpnResources' =
+  ProjectsGetXpnResources''
     { _pgxrProject    :: !Text
     , _pgxrOrderBy    :: !(Maybe Text)
     , _pgxrFilter     :: !(Maybe Text)
     , _pgxrPageToken  :: !(Maybe Text)
     , _pgxrMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGetXpnResources'' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ projectsGetXpnResources'
     :: Text -- ^ 'pgxrProject'
     -> ProjectsGetXpnResources'
 projectsGetXpnResources' pPgxrProject_ =
-    ProjectsGetXpnResources''
+  ProjectsGetXpnResources''
     { _pgxrProject = pPgxrProject_
     , _pgxrOrderBy = Nothing
     , _pgxrFilter = Nothing
     , _pgxrPageToken = Nothing
     , _pgxrMaxResults = 500
     }
+
 
 -- | Project ID for this request.
 pgxrProject :: Lens' ProjectsGetXpnResources' Text

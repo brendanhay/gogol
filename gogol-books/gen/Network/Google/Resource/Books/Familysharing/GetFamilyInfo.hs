@@ -52,9 +52,12 @@ type FamilysharingGetFamilyInfoResource =
 -- | Gets information regarding the family that the user is part of.
 --
 -- /See:/ 'familysharingGetFamilyInfo' smart constructor.
-newtype FamilysharingGetFamilyInfo = FamilysharingGetFamilyInfo'
+newtype FamilysharingGetFamilyInfo =
+  FamilysharingGetFamilyInfo'
     { _fgfiSource :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FamilysharingGetFamilyInfo' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype FamilysharingGetFamilyInfo = FamilysharingGetFamilyInfo'
 -- * 'fgfiSource'
 familysharingGetFamilyInfo
     :: FamilysharingGetFamilyInfo
-familysharingGetFamilyInfo =
-    FamilysharingGetFamilyInfo'
-    { _fgfiSource = Nothing
-    }
+familysharingGetFamilyInfo = FamilysharingGetFamilyInfo' {_fgfiSource = Nothing}
+
 
 -- | String to identify the originator of this request.
 fgfiSource :: Lens' FamilysharingGetFamilyInfo (Maybe Text)

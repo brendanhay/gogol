@@ -67,7 +67,8 @@ type RoutersGetNATMAppingInfoResource =
 -- | Retrieves runtime Nat mapping information of VM endpoints.
 --
 -- /See:/ 'routersGetNATMAppingInfo' smart constructor.
-data RoutersGetNATMAppingInfo = RoutersGetNATMAppingInfo'
+data RoutersGetNATMAppingInfo =
+  RoutersGetNATMAppingInfo'
     { _rgnatmaiOrderBy    :: !(Maybe Text)
     , _rgnatmaiProject    :: !Text
     , _rgnatmaiRouter     :: !Text
@@ -75,7 +76,9 @@ data RoutersGetNATMAppingInfo = RoutersGetNATMAppingInfo'
     , _rgnatmaiRegion     :: !Text
     , _rgnatmaiPageToken  :: !(Maybe Text)
     , _rgnatmaiMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoutersGetNATMAppingInfo' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ routersGetNATMAppingInfo
     -> Text -- ^ 'rgnatmaiRegion'
     -> RoutersGetNATMAppingInfo
 routersGetNATMAppingInfo pRgnatmaiProject_ pRgnatmaiRouter_ pRgnatmaiRegion_ =
-    RoutersGetNATMAppingInfo'
+  RoutersGetNATMAppingInfo'
     { _rgnatmaiOrderBy = Nothing
     , _rgnatmaiProject = pRgnatmaiProject_
     , _rgnatmaiRouter = pRgnatmaiRouter_
@@ -109,6 +112,7 @@ routersGetNATMAppingInfo pRgnatmaiProject_ pRgnatmaiRouter_ pRgnatmaiRegion_ =
     , _rgnatmaiPageToken = Nothing
     , _rgnatmaiMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

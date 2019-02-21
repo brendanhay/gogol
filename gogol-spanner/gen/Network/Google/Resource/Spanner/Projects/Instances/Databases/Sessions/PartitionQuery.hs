@@ -81,7 +81,8 @@ type ProjectsInstancesDatabasesSessionsPartitionQueryResource
 -- operation must be restarted from the beginning.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsPartitionQuery' smart constructor.
-data ProjectsInstancesDatabasesSessionsPartitionQuery = ProjectsInstancesDatabasesSessionsPartitionQuery'
+data ProjectsInstancesDatabasesSessionsPartitionQuery =
+  ProjectsInstancesDatabasesSessionsPartitionQuery'
     { _pidspqXgafv          :: !(Maybe Xgafv)
     , _pidspqUploadProtocol :: !(Maybe Text)
     , _pidspqAccessToken    :: !(Maybe Text)
@@ -89,7 +90,9 @@ data ProjectsInstancesDatabasesSessionsPartitionQuery = ProjectsInstancesDatabas
     , _pidspqPayload        :: !PartitionQueryRequest
     , _pidspqSession        :: !Text
     , _pidspqCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsPartitionQuery' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ projectsInstancesDatabasesSessionsPartitionQuery
     -> Text -- ^ 'pidspqSession'
     -> ProjectsInstancesDatabasesSessionsPartitionQuery
 projectsInstancesDatabasesSessionsPartitionQuery pPidspqPayload_ pPidspqSession_ =
-    ProjectsInstancesDatabasesSessionsPartitionQuery'
+  ProjectsInstancesDatabasesSessionsPartitionQuery'
     { _pidspqXgafv = Nothing
     , _pidspqUploadProtocol = Nothing
     , _pidspqAccessToken = Nothing
@@ -122,6 +125,7 @@ projectsInstancesDatabasesSessionsPartitionQuery pPidspqPayload_ pPidspqSession_
     , _pidspqSession = pPidspqSession_
     , _pidspqCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidspqXgafv :: Lens' ProjectsInstancesDatabasesSessionsPartitionQuery (Maybe Xgafv)
@@ -165,7 +169,7 @@ pidspqCallback
       (\ s a -> s{_pidspqCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsPartitionQuery
+           ProjectsInstancesDatabasesSessionsPartitionQuery
          where
         type Rs
                ProjectsInstancesDatabasesSessionsPartitionQuery

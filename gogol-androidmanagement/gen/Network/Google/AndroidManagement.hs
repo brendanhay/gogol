@@ -167,6 +167,11 @@ module Network.Google.AndroidManagement
     , policyOpenNetworkConfiguration
     , poncAddtional
 
+    -- ** LaunchAppAction
+    , LaunchAppAction
+    , launchAppAction
+    , laaPackageName
+
     -- ** CommandErrorCode
     , CommandErrorCode (..)
 
@@ -577,6 +582,7 @@ module Network.Google.AndroidManagement
     , pEnsureVerifyAppsEnabled
     , pSetWallpaperDisabled
     , pVPNConfigDisabled
+    , pSetupActions
     , pOpenNetworkConfiguration
     , pModifyAccountsDisabled
     , pBlockApplicationsEnabled
@@ -710,6 +716,13 @@ module Network.Google.AndroidManagement
     , apName
     , apDescription
     , apPermissionId
+
+    -- ** SetupAction
+    , SetupAction
+    , setupAction
+    , saLaunchApp
+    , saTitle
+    , saDescription
 
     -- ** PasswordRequirementsPasswordQuality
     , PasswordRequirementsPasswordQuality (..)

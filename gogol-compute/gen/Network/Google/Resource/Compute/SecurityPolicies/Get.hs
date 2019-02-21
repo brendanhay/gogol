@@ -56,10 +56,13 @@ type SecurityPoliciesGetResource =
 -- | List all of the ordered rules present in a single specified policy.
 --
 -- /See:/ 'securityPoliciesGet' smart constructor.
-data SecurityPoliciesGet = SecurityPoliciesGet'
+data SecurityPoliciesGet =
+  SecurityPoliciesGet'
     { _secProject        :: !Text
     , _secSecurityPolicy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SecurityPoliciesGet' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ securityPoliciesGet
     -> Text -- ^ 'secSecurityPolicy'
     -> SecurityPoliciesGet
 securityPoliciesGet pSecProject_ pSecSecurityPolicy_ =
-    SecurityPoliciesGet'
-    { _secProject = pSecProject_
-    , _secSecurityPolicy = pSecSecurityPolicy_
-    }
+  SecurityPoliciesGet'
+    {_secProject = pSecProject_, _secSecurityPolicy = pSecSecurityPolicy_}
+
 
 -- | Project ID for this request.
 secProject :: Lens' SecurityPoliciesGet Text

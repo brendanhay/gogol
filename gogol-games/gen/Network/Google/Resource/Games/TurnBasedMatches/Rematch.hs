@@ -63,11 +63,14 @@ type TurnBasedMatchesRematchResource =
 -- created match; it will be the caller\'s turn.
 --
 -- /See:/ 'turnBasedMatchesRematch' smart constructor.
-data TurnBasedMatchesRematch = TurnBasedMatchesRematch'
+data TurnBasedMatchesRematch =
+  TurnBasedMatchesRematch'
     { _tbmrRequestId :: !(Maybe (Textual Int64))
     , _tbmrLanguage  :: !(Maybe Text)
     , _tbmrMatchId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchesRematch' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ turnBasedMatchesRematch
     :: Text -- ^ 'tbmrMatchId'
     -> TurnBasedMatchesRematch
 turnBasedMatchesRematch pTbmrMatchId_ =
-    TurnBasedMatchesRematch'
+  TurnBasedMatchesRematch'
     { _tbmrRequestId = Nothing
     , _tbmrLanguage = Nothing
     , _tbmrMatchId = pTbmrMatchId_
     }
+
 
 -- | A randomly generated numeric ID for each request specified by the
 -- caller. This number is used at the server to ensure that the request is
@@ -111,7 +115,8 @@ instance GoogleRequest TurnBasedMatchesRematch where
         type Rs TurnBasedMatchesRematch =
              TurnBasedMatchRematch
         type Scopes TurnBasedMatchesRematch =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesRematch'{..}
           = go _tbmrMatchId _tbmrRequestId _tbmrLanguage
               (Just AltJSON)

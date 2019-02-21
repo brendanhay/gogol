@@ -64,7 +64,8 @@ type OrganizationsExclusionsPatchResource =
 -- | Changes one or more properties of an existing exclusion.
 --
 -- /See:/ 'organizationsExclusionsPatch' smart constructor.
-data OrganizationsExclusionsPatch = OrganizationsExclusionsPatch'
+data OrganizationsExclusionsPatch =
+  OrganizationsExclusionsPatch'
     { _oepXgafv          :: !(Maybe Xgafv)
     , _oepUploadProtocol :: !(Maybe Text)
     , _oepUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data OrganizationsExclusionsPatch = OrganizationsExclusionsPatch'
     , _oepPayload        :: !LogExclusion
     , _oepName           :: !Text
     , _oepCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsExclusionsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ organizationsExclusionsPatch
     -> Text -- ^ 'oepName'
     -> OrganizationsExclusionsPatch
 organizationsExclusionsPatch pOepPayload_ pOepName_ =
-    OrganizationsExclusionsPatch'
+  OrganizationsExclusionsPatch'
     { _oepXgafv = Nothing
     , _oepUploadProtocol = Nothing
     , _oepUpdateMask = Nothing
@@ -109,6 +112,7 @@ organizationsExclusionsPatch pOepPayload_ pOepName_ =
     , _oepName = pOepName_
     , _oepCallback = Nothing
     }
+
 
 -- | V1 error format.
 oepXgafv :: Lens' OrganizationsExclusionsPatch (Maybe Xgafv)

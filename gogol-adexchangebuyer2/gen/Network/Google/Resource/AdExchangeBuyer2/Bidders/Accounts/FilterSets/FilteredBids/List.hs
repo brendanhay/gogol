@@ -68,7 +68,8 @@ type BiddersAccountsFilterSetsFilteredBidsListResource
 -- filtered for each reason.
 --
 -- /See:/ 'biddersAccountsFilterSetsFilteredBidsList' smart constructor.
-data BiddersAccountsFilterSetsFilteredBidsList = BiddersAccountsFilterSetsFilteredBidsList'
+data BiddersAccountsFilterSetsFilteredBidsList =
+  BiddersAccountsFilterSetsFilteredBidsList'
     { _bafsfblXgafv          :: !(Maybe Xgafv)
     , _bafsfblUploadProtocol :: !(Maybe Text)
     , _bafsfblFilterSetName  :: !Text
@@ -77,7 +78,9 @@ data BiddersAccountsFilterSetsFilteredBidsList = BiddersAccountsFilterSetsFilter
     , _bafsfblPageToken      :: !(Maybe Text)
     , _bafsfblPageSize       :: !(Maybe (Textual Int32))
     , _bafsfblCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersAccountsFilterSetsFilteredBidsList' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ biddersAccountsFilterSetsFilteredBidsList
     :: Text -- ^ 'bafsfblFilterSetName'
     -> BiddersAccountsFilterSetsFilteredBidsList
 biddersAccountsFilterSetsFilteredBidsList pBafsfblFilterSetName_ =
-    BiddersAccountsFilterSetsFilteredBidsList'
+  BiddersAccountsFilterSetsFilteredBidsList'
     { _bafsfblXgafv = Nothing
     , _bafsfblUploadProtocol = Nothing
     , _bafsfblFilterSetName = pBafsfblFilterSetName_
@@ -112,6 +115,7 @@ biddersAccountsFilterSetsFilteredBidsList pBafsfblFilterSetName_ =
     , _bafsfblPageSize = Nothing
     , _bafsfblCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsfblXgafv :: Lens' BiddersAccountsFilterSetsFilteredBidsList (Maybe Xgafv)
@@ -171,7 +175,8 @@ bafsfblCallback
       (\ s a -> s{_bafsfblCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsFilteredBidsList where
+           BiddersAccountsFilterSetsFilteredBidsList
+         where
         type Rs BiddersAccountsFilterSetsFilteredBidsList =
              ListFilteredBidsResponse
         type Scopes BiddersAccountsFilterSetsFilteredBidsList

@@ -59,11 +59,14 @@ type MembersPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'membersPatch' smart constructor.
-data MembersPatch = MembersPatch'
+data MembersPatch =
+  MembersPatch'
     { _mpMemberKey :: !Text
     , _mpGroupKey  :: !Text
     , _mpPayload   :: !Member
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MembersPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ membersPatch
     -> Member -- ^ 'mpPayload'
     -> MembersPatch
 membersPatch pMpMemberKey_ pMpGroupKey_ pMpPayload_ =
-    MembersPatch'
+  MembersPatch'
     { _mpMemberKey = pMpMemberKey_
     , _mpGroupKey = pMpGroupKey_
     , _mpPayload = pMpPayload_
     }
+
 
 -- | Email or immutable ID of the user. If ID, it should match with id of
 -- member object

@@ -54,9 +54,12 @@ type UsersSettingsForwardingAddressesListResource =
 -- | Lists the forwarding addresses for the specified account.
 --
 -- /See:/ 'usersSettingsForwardingAddressesList' smart constructor.
-newtype UsersSettingsForwardingAddressesList = UsersSettingsForwardingAddressesList'
+newtype UsersSettingsForwardingAddressesList =
+  UsersSettingsForwardingAddressesList'
     { _usfalUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsForwardingAddressesList' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ newtype UsersSettingsForwardingAddressesList = UsersSettingsForwardingAddressesL
 usersSettingsForwardingAddressesList
     :: UsersSettingsForwardingAddressesList
 usersSettingsForwardingAddressesList =
-    UsersSettingsForwardingAddressesList'
-    { _usfalUserId = "me"
-    }
+  UsersSettingsForwardingAddressesList' {_usfalUserId = "me"}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.
@@ -77,7 +79,8 @@ usfalUserId
   = lens _usfalUserId (\ s a -> s{_usfalUserId = a})
 
 instance GoogleRequest
-         UsersSettingsForwardingAddressesList where
+           UsersSettingsForwardingAddressesList
+         where
         type Rs UsersSettingsForwardingAddressesList =
              ListForwardingAddressesResponse
         type Scopes UsersSettingsForwardingAddressesList =

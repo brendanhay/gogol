@@ -71,7 +71,8 @@ type AccountsCreativesDealAssociationsListResource =
 -- | List all creative-deal associations.
 --
 -- /See:/ 'accountsCreativesDealAssociationsList' smart constructor.
-data AccountsCreativesDealAssociationsList = AccountsCreativesDealAssociationsList'
+data AccountsCreativesDealAssociationsList =
+  AccountsCreativesDealAssociationsList'
     { _acdalXgafv          :: !(Maybe Xgafv)
     , _acdalUploadProtocol :: !(Maybe Text)
     , _acdalAccessToken    :: !(Maybe Text)
@@ -82,7 +83,9 @@ data AccountsCreativesDealAssociationsList = AccountsCreativesDealAssociationsLi
     , _acdalPageToken      :: !(Maybe Text)
     , _acdalPageSize       :: !(Maybe (Textual Int32))
     , _acdalCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsCreativesDealAssociationsList' with the minimum fields required to make a request.
 --
@@ -112,7 +115,7 @@ accountsCreativesDealAssociationsList
     -> Text -- ^ 'acdalAccountId'
     -> AccountsCreativesDealAssociationsList
 accountsCreativesDealAssociationsList pAcdalCreativeId_ pAcdalAccountId_ =
-    AccountsCreativesDealAssociationsList'
+  AccountsCreativesDealAssociationsList'
     { _acdalXgafv = Nothing
     , _acdalUploadProtocol = Nothing
     , _acdalAccessToken = Nothing
@@ -124,6 +127,7 @@ accountsCreativesDealAssociationsList pAcdalCreativeId_ pAcdalAccountId_ =
     , _acdalPageSize = Nothing
     , _acdalCallback = Nothing
     }
+
 
 -- | V1 error format.
 acdalXgafv :: Lens' AccountsCreativesDealAssociationsList (Maybe Xgafv)
@@ -202,7 +206,8 @@ acdalCallback
       (\ s a -> s{_acdalCallback = a})
 
 instance GoogleRequest
-         AccountsCreativesDealAssociationsList where
+           AccountsCreativesDealAssociationsList
+         where
         type Rs AccountsCreativesDealAssociationsList =
              ListDealAssociationsResponse
         type Scopes AccountsCreativesDealAssociationsList =

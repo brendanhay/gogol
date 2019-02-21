@@ -61,14 +61,17 @@ type FoldersSinksDeleteResource =
 -- service account is also deleted.
 --
 -- /See:/ 'foldersSinksDelete' smart constructor.
-data FoldersSinksDelete = FoldersSinksDelete'
+data FoldersSinksDelete =
+  FoldersSinksDelete'
     { _fsdXgafv          :: !(Maybe Xgafv)
     , _fsdUploadProtocol :: !(Maybe Text)
     , _fsdAccessToken    :: !(Maybe Text)
     , _fsdUploadType     :: !(Maybe Text)
     , _fsdSinkName       :: !Text
     , _fsdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersSinksDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ foldersSinksDelete
     :: Text -- ^ 'fsdSinkName'
     -> FoldersSinksDelete
 foldersSinksDelete pFsdSinkName_ =
-    FoldersSinksDelete'
+  FoldersSinksDelete'
     { _fsdXgafv = Nothing
     , _fsdUploadProtocol = Nothing
     , _fsdAccessToken = Nothing
@@ -97,6 +100,7 @@ foldersSinksDelete pFsdSinkName_ =
     , _fsdSinkName = pFsdSinkName_
     , _fsdCallback = Nothing
     }
+
 
 -- | V1 error format.
 fsdXgafv :: Lens' FoldersSinksDelete (Maybe Xgafv)

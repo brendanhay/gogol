@@ -285,8 +285,8 @@ languageService
 -- | Apply machine learning models to reveal the structure and meaning of
 -- text
 cloudLanguageScope :: Proxy '["https://www.googleapis.com/auth/cloud-language"]
-cloudLanguageScope = Proxy;
+cloudLanguageScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

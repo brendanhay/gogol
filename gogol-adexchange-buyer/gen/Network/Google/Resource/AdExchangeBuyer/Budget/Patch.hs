@@ -59,11 +59,14 @@ type BudgetPatchResource =
 -- method supports patch semantics.
 --
 -- /See:/ 'budgetPatch' smart constructor.
-data BudgetPatch = BudgetPatch'
+data BudgetPatch =
+  BudgetPatch'
     { _bpPayload   :: !Budget
     , _bpAccountId :: !(Textual Int64)
     , _bpBillingId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BudgetPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ budgetPatch
     -> Int64 -- ^ 'bpBillingId'
     -> BudgetPatch
 budgetPatch pBpPayload_ pBpAccountId_ pBpBillingId_ =
-    BudgetPatch'
+  BudgetPatch'
     { _bpPayload = pBpPayload_
     , _bpAccountId = _Coerce # pBpAccountId_
     , _bpBillingId = _Coerce # pBpBillingId_
     }
+
 
 -- | Multipart request metadata.
 bpPayload :: Lens' BudgetPatch Budget

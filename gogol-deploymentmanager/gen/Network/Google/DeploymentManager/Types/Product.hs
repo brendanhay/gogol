@@ -22,10 +22,13 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
+data OperationWarningsItemDataItem =
+  OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
 --
@@ -37,10 +40,8 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem'
-    { _owidiValue = Nothing
-    , _owidiKey = Nothing
-    }
+  OperationWarningsItemDataItem' {_owidiValue = Nothing, _owidiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
@@ -74,9 +75,12 @@ instance ToJSON OperationWarningsItemDataItem where
 -- |
 --
 -- /See:/ 'configFile' smart constructor.
-newtype ConfigFile = ConfigFile'
+newtype ConfigFile =
+  ConfigFile'
     { _cfContent :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ConfigFile' with the minimum fields required to make a request.
 --
@@ -85,10 +89,8 @@ newtype ConfigFile = ConfigFile'
 -- * 'cfContent'
 configFile
     :: ConfigFile
-configFile =
-    ConfigFile'
-    { _cfContent = Nothing
-    }
+configFile = ConfigFile' {_cfContent = Nothing}
+
 
 -- | The contents of the file.
 cfContent :: Lens' ConfigFile (Maybe Text)
@@ -123,11 +125,14 @@ instance ToJSON ConfigFile where
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     , _acExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -141,11 +146,12 @@ data AuditConfig = AuditConfig'
 auditConfig
     :: AuditConfig
 auditConfig =
-    AuditConfig'
+  AuditConfig'
     { _acService = Nothing
     , _acAuditLogConfigs = Nothing
     , _acExemptedMembers = Nothing
     }
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -192,12 +198,15 @@ instance ToJSON AuditConfig where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -213,12 +222,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -267,10 +277,13 @@ instance ToJSON Expr where
 -- to build the next request if the request has been truncated.
 --
 -- /See:/ 'operationsListResponse' smart constructor.
-data OperationsListResponse = OperationsListResponse'
+data OperationsListResponse =
+  OperationsListResponse'
     { _olrNextPageToken :: !(Maybe Text)
     , _olrOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
 --
@@ -282,10 +295,9 @@ data OperationsListResponse = OperationsListResponse'
 operationsListResponse
     :: OperationsListResponse
 operationsListResponse =
-    OperationsListResponse'
-    { _olrNextPageToken = Nothing
-    , _olrOperations = Nothing
-    }
+  OperationsListResponse'
+    {_olrNextPageToken = Nothing, _olrOperations = Nothing}
+
 
 -- | Output only. A token used to continue a truncated list request.
 olrNextPageToken :: Lens' OperationsListResponse (Maybe Text)
@@ -318,10 +330,13 @@ instance ToJSON OperationsListResponse where
 
 --
 -- /See:/ 'resourceUpdateWarningsItemDataItem' smart constructor.
-data ResourceUpdateWarningsItemDataItem = ResourceUpdateWarningsItemDataItem'
+data ResourceUpdateWarningsItemDataItem =
+  ResourceUpdateWarningsItemDataItem'
     { _ruwidiValue :: !(Maybe Text)
     , _ruwidiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceUpdateWarningsItemDataItem' with the minimum fields required to make a request.
 --
@@ -333,10 +348,9 @@ data ResourceUpdateWarningsItemDataItem = ResourceUpdateWarningsItemDataItem'
 resourceUpdateWarningsItemDataItem
     :: ResourceUpdateWarningsItemDataItem
 resourceUpdateWarningsItemDataItem =
-    ResourceUpdateWarningsItemDataItem'
-    { _ruwidiValue = Nothing
-    , _ruwidiKey = Nothing
-    }
+  ResourceUpdateWarningsItemDataItem'
+    {_ruwidiValue = Nothing, _ruwidiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ruwidiValue :: Lens' ResourceUpdateWarningsItemDataItem (Maybe Text)
@@ -373,10 +387,13 @@ instance ToJSON ResourceUpdateWarningsItemDataItem
 -- | A response that returns all Types supported by Deployment Manager
 --
 -- /See:/ 'typesListResponse' smart constructor.
-data TypesListResponse = TypesListResponse'
+data TypesListResponse =
+  TypesListResponse'
     { _tlrNextPageToken :: !(Maybe Text)
     , _tlrTypes         :: !(Maybe [Type])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TypesListResponse' with the minimum fields required to make a request.
 --
@@ -388,10 +405,8 @@ data TypesListResponse = TypesListResponse'
 typesListResponse
     :: TypesListResponse
 typesListResponse =
-    TypesListResponse'
-    { _tlrNextPageToken = Nothing
-    , _tlrTypes = Nothing
-    }
+  TypesListResponse' {_tlrNextPageToken = Nothing, _tlrTypes = Nothing}
+
 
 -- | A token used to continue a truncated list request.
 tlrNextPageToken :: Lens' TypesListResponse (Maybe Text)
@@ -439,10 +454,13 @@ instance ToJSON TypesListResponse where
 -- names (though this may be supported in the future).
 --
 -- /See:/ 'logConfigCounterOptions' smart constructor.
-data LogConfigCounterOptions = LogConfigCounterOptions'
+data LogConfigCounterOptions =
+  LogConfigCounterOptions'
     { _lccoField  :: !(Maybe Text)
     , _lccoMetric :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogConfigCounterOptions' with the minimum fields required to make a request.
 --
@@ -454,10 +472,8 @@ data LogConfigCounterOptions = LogConfigCounterOptions'
 logConfigCounterOptions
     :: LogConfigCounterOptions
 logConfigCounterOptions =
-    LogConfigCounterOptions'
-    { _lccoField = Nothing
-    , _lccoMetric = Nothing
-    }
+  LogConfigCounterOptions' {_lccoField = Nothing, _lccoMetric = Nothing}
+
 
 -- | The field value to attribute.
 lccoField :: Lens' LogConfigCounterOptions (Maybe Text)
@@ -490,7 +506,8 @@ instance ToJSON LogConfigCounterOptions where
 -- v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
@@ -514,7 +531,9 @@ data Operation = Operation'
     , _oDescription         :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -568,7 +587,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -593,6 +612,7 @@ operation =
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
+
 
 -- | [Output Only] The unique target ID, which identifies a specific
 -- incarnation of the target resource.
@@ -797,9 +817,12 @@ instance ToJSON Operation where
 
 --
 -- /See:/ 'testPermissionsResponse' smart constructor.
-newtype TestPermissionsResponse = TestPermissionsResponse'
+newtype TestPermissionsResponse =
+  TestPermissionsResponse'
     { _tprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -808,10 +831,8 @@ newtype TestPermissionsResponse = TestPermissionsResponse'
 -- * 'tprPermissions'
 testPermissionsResponse
     :: TestPermissionsResponse
-testPermissionsResponse =
-    TestPermissionsResponse'
-    { _tprPermissions = Nothing
-    }
+testPermissionsResponse = TestPermissionsResponse' {_tprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -838,10 +859,13 @@ instance ToJSON TestPermissionsResponse where
 -- to build the next request if the request has been truncated.
 --
 -- /See:/ 'resourcesListResponse' smart constructor.
-data ResourcesListResponse = ResourcesListResponse'
+data ResourcesListResponse =
+  ResourcesListResponse'
     { _rlrNextPageToken :: !(Maybe Text)
     , _rlrResources     :: !(Maybe [Resource])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesListResponse' with the minimum fields required to make a request.
 --
@@ -853,10 +877,8 @@ data ResourcesListResponse = ResourcesListResponse'
 resourcesListResponse
     :: ResourcesListResponse
 resourcesListResponse =
-    ResourcesListResponse'
-    { _rlrNextPageToken = Nothing
-    , _rlrResources = Nothing
-    }
+  ResourcesListResponse' {_rlrNextPageToken = Nothing, _rlrResources = Nothing}
+
 
 -- | A token used to continue a truncated list request.
 rlrNextPageToken :: Lens' ResourcesListResponse (Maybe Text)
@@ -889,11 +911,14 @@ instance ToJSON ResourcesListResponse where
 -- |
 --
 -- /See:/ 'deploymentUpdate' smart constructor.
-data DeploymentUpdate = DeploymentUpdate'
+data DeploymentUpdate =
+  DeploymentUpdate'
     { _duManifest    :: !(Maybe Text)
     , _duLabels      :: !(Maybe [DeploymentUpdateLabelEntry])
     , _duDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentUpdate' with the minimum fields required to make a request.
 --
@@ -907,11 +932,9 @@ data DeploymentUpdate = DeploymentUpdate'
 deploymentUpdate
     :: DeploymentUpdate
 deploymentUpdate =
-    DeploymentUpdate'
-    { _duManifest = Nothing
-    , _duLabels = Nothing
-    , _duDescription = Nothing
-    }
+  DeploymentUpdate'
+    {_duManifest = Nothing, _duLabels = Nothing, _duDescription = Nothing}
+
 
 -- | Output only. URL of the manifest representing the update configuration
 -- of this deployment.
@@ -957,7 +980,8 @@ instance ToJSON DeploymentUpdate where
 -- |
 --
 -- /See:/ 'resourceUpdate' smart constructor.
-data ResourceUpdate = ResourceUpdate'
+data ResourceUpdate =
+  ResourceUpdate'
     { _ruState           :: !(Maybe Text)
     , _ruError           :: !(Maybe ResourceUpdateError)
     , _ruAccessControl   :: !(Maybe ResourceAccessControl)
@@ -966,7 +990,9 @@ data ResourceUpdate = ResourceUpdate'
     , _ruManifest        :: !(Maybe Text)
     , _ruFinalProperties :: !(Maybe Text)
     , _ruProperties      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceUpdate' with the minimum fields required to make a request.
 --
@@ -990,7 +1016,7 @@ data ResourceUpdate = ResourceUpdate'
 resourceUpdate
     :: ResourceUpdate
 resourceUpdate =
-    ResourceUpdate'
+  ResourceUpdate'
     { _ruState = Nothing
     , _ruError = Nothing
     , _ruAccessControl = Nothing
@@ -1000,6 +1026,7 @@ resourceUpdate =
     , _ruFinalProperties = Nothing
     , _ruProperties = Nothing
     }
+
 
 -- | Output only. The state of the resource.
 ruState :: Lens' ResourceUpdate (Maybe Text)
@@ -1076,10 +1103,13 @@ instance ToJSON ResourceUpdate where
 
 --
 -- /See:/ 'deploymentLabelEntry' smart constructor.
-data DeploymentLabelEntry = DeploymentLabelEntry'
+data DeploymentLabelEntry =
+  DeploymentLabelEntry'
     { _dleValue :: !(Maybe Text)
     , _dleKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentLabelEntry' with the minimum fields required to make a request.
 --
@@ -1091,10 +1121,8 @@ data DeploymentLabelEntry = DeploymentLabelEntry'
 deploymentLabelEntry
     :: DeploymentLabelEntry
 deploymentLabelEntry =
-    DeploymentLabelEntry'
-    { _dleValue = Nothing
-    , _dleKey = Nothing
-    }
+  DeploymentLabelEntry' {_dleValue = Nothing, _dleKey = Nothing}
+
 
 dleValue :: Lens' DeploymentLabelEntry (Maybe Text)
 dleValue = lens _dleValue (\ s a -> s{_dleValue = a})
@@ -1118,7 +1146,8 @@ instance ToJSON DeploymentLabelEntry where
 -- | A rule to be applied in a Policy.
 --
 -- /See:/ 'rule' smart constructor.
-data Rule = Rule'
+data Rule =
+  Rule'
     { _rAction      :: !(Maybe Text)
     , _rNotIns      :: !(Maybe [Text])
     , _rIns         :: !(Maybe [Text])
@@ -1126,7 +1155,9 @@ data Rule = Rule'
     , _rConditions  :: !(Maybe [Condition])
     , _rPermissions :: !(Maybe [Text])
     , _rDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Rule' with the minimum fields required to make a request.
 --
@@ -1148,7 +1179,7 @@ data Rule = Rule'
 rule
     :: Rule
 rule =
-    Rule'
+  Rule'
     { _rAction = Nothing
     , _rNotIns = Nothing
     , _rIns = Nothing
@@ -1157,6 +1188,7 @@ rule =
     , _rPermissions = Nothing
     , _rDescription = Nothing
     }
+
 
 -- | Required
 rAction :: Lens' Rule (Maybe Text)
@@ -1231,9 +1263,12 @@ instance ToJSON Rule where
 
 --
 -- /See:/ 'testPermissionsRequest' smart constructor.
-newtype TestPermissionsRequest = TestPermissionsRequest'
+newtype TestPermissionsRequest =
+  TestPermissionsRequest'
     { _tPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1242,10 +1277,8 @@ newtype TestPermissionsRequest = TestPermissionsRequest'
 -- * 'tPermissions'
 testPermissionsRequest
     :: TestPermissionsRequest
-testPermissionsRequest =
-    TestPermissionsRequest'
-    { _tPermissions = Nothing
-    }
+testPermissionsRequest = TestPermissionsRequest' {_tPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \'resource\'. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed.
@@ -1270,7 +1303,8 @@ instance ToJSON TestPermissionsRequest where
 -- |
 --
 -- /See:/ 'manifest' smart constructor.
-data Manifest = Manifest'
+data Manifest =
+  Manifest'
     { _mInsertTime     :: !(Maybe Text)
     , _mLayout         :: !(Maybe Text)
     , _mConfig         :: !(Maybe ConfigFile)
@@ -1279,7 +1313,9 @@ data Manifest = Manifest'
     , _mSelfLink       :: !(Maybe Text)
     , _mName           :: !(Maybe Text)
     , _mId             :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Manifest' with the minimum fields required to make a request.
 --
@@ -1303,7 +1339,7 @@ data Manifest = Manifest'
 manifest
     :: Manifest
 manifest =
-    Manifest'
+  Manifest'
     { _mInsertTime = Nothing
     , _mLayout = Nothing
     , _mConfig = Nothing
@@ -1313,6 +1349,7 @@ manifest =
     , _mName = Nothing
     , _mId = Nothing
     }
+
 
 -- | Output only. Creation timestamp in RFC3339 text format.
 mInsertTime :: Lens' Manifest (Maybe Text)
@@ -1381,11 +1418,14 @@ instance ToJSON Manifest where
 
 --
 -- /See:/ 'resourceUpdateWarningsItem' smart constructor.
-data ResourceUpdateWarningsItem = ResourceUpdateWarningsItem'
+data ResourceUpdateWarningsItem =
+  ResourceUpdateWarningsItem'
     { _ruwiData    :: !(Maybe [ResourceUpdateWarningsItemDataItem])
     , _ruwiCode    :: !(Maybe Text)
     , _ruwiMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceUpdateWarningsItem' with the minimum fields required to make a request.
 --
@@ -1399,11 +1439,9 @@ data ResourceUpdateWarningsItem = ResourceUpdateWarningsItem'
 resourceUpdateWarningsItem
     :: ResourceUpdateWarningsItem
 resourceUpdateWarningsItem =
-    ResourceUpdateWarningsItem'
-    { _ruwiData = Nothing
-    , _ruwiCode = Nothing
-    , _ruwiMessage = Nothing
-    }
+  ResourceUpdateWarningsItem'
+    {_ruwiData = Nothing, _ruwiCode = Nothing, _ruwiMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -1443,9 +1481,12 @@ instance ToJSON ResourceUpdateWarningsItem where
 -- |
 --
 -- /See:/ 'deploymentsCancelPreviewRequest' smart constructor.
-newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest'
+newtype DeploymentsCancelPreviewRequest =
+  DeploymentsCancelPreviewRequest'
     { _dcprFingerprint :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentsCancelPreviewRequest' with the minimum fields required to make a request.
 --
@@ -1455,9 +1496,8 @@ newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest'
 deploymentsCancelPreviewRequest
     :: DeploymentsCancelPreviewRequest
 deploymentsCancelPreviewRequest =
-    DeploymentsCancelPreviewRequest'
-    { _dcprFingerprint = Nothing
-    }
+  DeploymentsCancelPreviewRequest' {_dcprFingerprint = Nothing}
+
 
 -- | Specifies a fingerprint for cancelPreview() requests. A fingerprint is a
 -- randomly generated value that must be provided in cancelPreview()
@@ -1490,10 +1530,13 @@ instance ToJSON DeploymentsCancelPreviewRequest where
 -- | Write a Cloud Audit log
 --
 -- /See:/ 'logConfigCloudAuditOptions' smart constructor.
-data LogConfigCloudAuditOptions = LogConfigCloudAuditOptions'
+data LogConfigCloudAuditOptions =
+  LogConfigCloudAuditOptions'
     { _lccaoAuthorizationLoggingOptions :: !(Maybe AuthorizationLoggingOptions)
     , _lccaoLogName                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogConfigCloudAuditOptions' with the minimum fields required to make a request.
 --
@@ -1505,10 +1548,9 @@ data LogConfigCloudAuditOptions = LogConfigCloudAuditOptions'
 logConfigCloudAuditOptions
     :: LogConfigCloudAuditOptions
 logConfigCloudAuditOptions =
-    LogConfigCloudAuditOptions'
-    { _lccaoAuthorizationLoggingOptions = Nothing
-    , _lccaoLogName = Nothing
-    }
+  LogConfigCloudAuditOptions'
+    {_lccaoAuthorizationLoggingOptions = Nothing, _lccaoLogName = Nothing}
+
 
 -- | Information used by the Cloud Audit Logging pipeline.
 lccaoAuthorizationLoggingOptions :: Lens' LogConfigCloudAuditOptions (Maybe AuthorizationLoggingOptions)
@@ -1540,7 +1582,8 @@ instance ToJSON LogConfigCloudAuditOptions where
 -- |
 --
 -- /See:/ 'resource' smart constructor.
-data Resource = Resource'
+data Resource =
+  Resource'
     { _rInsertTime      :: !(Maybe Text)
     , _rAccessControl   :: !(Maybe ResourceAccessControl)
     , _rURL             :: !(Maybe Text)
@@ -1553,7 +1596,9 @@ data Resource = Resource'
     , _rType            :: !(Maybe Text)
     , _rUpdate          :: !(Maybe ResourceUpdate)
     , _rProperties      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Resource' with the minimum fields required to make a request.
 --
@@ -1585,7 +1630,7 @@ data Resource = Resource'
 resource
     :: Resource
 resource =
-    Resource'
+  Resource'
     { _rInsertTime = Nothing
     , _rAccessControl = Nothing
     , _rURL = Nothing
@@ -1599,6 +1644,7 @@ resource =
     , _rUpdate = Nothing
     , _rProperties = Nothing
     }
+
 
 -- | Output only. Creation timestamp in RFC3339 text format.
 rInsertTime :: Lens' Resource (Maybe Text)
@@ -1700,9 +1746,12 @@ instance ToJSON Resource where
 -- | Write a Data Access (Gin) log
 --
 -- /See:/ 'logConfigDataAccessOptions' smart constructor.
-newtype LogConfigDataAccessOptions = LogConfigDataAccessOptions'
+newtype LogConfigDataAccessOptions =
+  LogConfigDataAccessOptions'
     { _lcdaoLogMode :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogConfigDataAccessOptions' with the minimum fields required to make a request.
 --
@@ -1712,9 +1761,8 @@ newtype LogConfigDataAccessOptions = LogConfigDataAccessOptions'
 logConfigDataAccessOptions
     :: LogConfigDataAccessOptions
 logConfigDataAccessOptions =
-    LogConfigDataAccessOptions'
-    { _lcdaoLogMode = Nothing
-    }
+  LogConfigDataAccessOptions' {_lcdaoLogMode = Nothing}
+
 
 -- | Whether Gin logging should happen in a fail-closed manner at the caller.
 -- This is relevant only in the LocalIAM implementation, for now. NOTE:
@@ -1739,10 +1787,13 @@ instance ToJSON LogConfigDataAccessOptions where
 
 --
 -- /See:/ 'deploymentUpdateLabelEntry' smart constructor.
-data DeploymentUpdateLabelEntry = DeploymentUpdateLabelEntry'
+data DeploymentUpdateLabelEntry =
+  DeploymentUpdateLabelEntry'
     { _duleValue :: !(Maybe Text)
     , _duleKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentUpdateLabelEntry' with the minimum fields required to make a request.
 --
@@ -1754,10 +1805,8 @@ data DeploymentUpdateLabelEntry = DeploymentUpdateLabelEntry'
 deploymentUpdateLabelEntry
     :: DeploymentUpdateLabelEntry
 deploymentUpdateLabelEntry =
-    DeploymentUpdateLabelEntry'
-    { _duleValue = Nothing
-    , _duleKey = Nothing
-    }
+  DeploymentUpdateLabelEntry' {_duleValue = Nothing, _duleKey = Nothing}
+
 
 duleValue :: Lens' DeploymentUpdateLabelEntry (Maybe Text)
 duleValue
@@ -1782,11 +1831,14 @@ instance ToJSON DeploymentUpdateLabelEntry where
 
 --
 -- /See:/ 'resourceUpdateErrorErrorsItem' smart constructor.
-data ResourceUpdateErrorErrorsItem = ResourceUpdateErrorErrorsItem'
+data ResourceUpdateErrorErrorsItem =
+  ResourceUpdateErrorErrorsItem'
     { _rueeiLocation :: !(Maybe Text)
     , _rueeiCode     :: !(Maybe Text)
     , _rueeiMessage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceUpdateErrorErrorsItem' with the minimum fields required to make a request.
 --
@@ -1800,11 +1852,9 @@ data ResourceUpdateErrorErrorsItem = ResourceUpdateErrorErrorsItem'
 resourceUpdateErrorErrorsItem
     :: ResourceUpdateErrorErrorsItem
 resourceUpdateErrorErrorsItem =
-    ResourceUpdateErrorErrorsItem'
-    { _rueeiLocation = Nothing
-    , _rueeiCode = Nothing
-    , _rueeiMessage = Nothing
-    }
+  ResourceUpdateErrorErrorsItem'
+    {_rueeiLocation = Nothing, _rueeiCode = Nothing, _rueeiMessage = Nothing}
+
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -1843,10 +1893,13 @@ instance ToJSON ResourceUpdateErrorErrorsItem where
 -- to build the next request if the request has been truncated.
 --
 -- /See:/ 'manifestsListResponse' smart constructor.
-data ManifestsListResponse = ManifestsListResponse'
+data ManifestsListResponse =
+  ManifestsListResponse'
     { _mlrNextPageToken :: !(Maybe Text)
     , _mlrManifests     :: !(Maybe [Manifest])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManifestsListResponse' with the minimum fields required to make a request.
 --
@@ -1858,10 +1911,8 @@ data ManifestsListResponse = ManifestsListResponse'
 manifestsListResponse
     :: ManifestsListResponse
 manifestsListResponse =
-    ManifestsListResponse'
-    { _mlrNextPageToken = Nothing
-    , _mlrManifests = Nothing
-    }
+  ManifestsListResponse' {_mlrNextPageToken = Nothing, _mlrManifests = Nothing}
+
 
 -- | Output only. A token used to continue a truncated list request.
 mlrNextPageToken :: Lens' ManifestsListResponse (Maybe Text)
@@ -1895,9 +1946,12 @@ instance ToJSON ManifestsListResponse where
 -- operation, this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError'
+newtype OperationError =
+  OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
@@ -1906,10 +1960,8 @@ newtype OperationError = OperationError'
 -- * 'oeErrors'
 operationError
     :: OperationError
-operationError =
-    OperationError'
-    { _oeErrors = Nothing
-    }
+operationError = OperationError' {_oeErrors = Nothing}
+
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -1931,11 +1983,14 @@ instance ToJSON OperationError where
 
 --
 -- /See:/ 'globalSetPolicyRequest' smart constructor.
-data GlobalSetPolicyRequest = GlobalSetPolicyRequest'
+data GlobalSetPolicyRequest =
+  GlobalSetPolicyRequest'
     { _gsprEtag     :: !(Maybe Bytes)
     , _gsprBindings :: !(Maybe [Binding])
     , _gsprPolicy   :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalSetPolicyRequest' with the minimum fields required to make a request.
 --
@@ -1949,11 +2004,9 @@ data GlobalSetPolicyRequest = GlobalSetPolicyRequest'
 globalSetPolicyRequest
     :: GlobalSetPolicyRequest
 globalSetPolicyRequest =
-    GlobalSetPolicyRequest'
-    { _gsprEtag = Nothing
-    , _gsprBindings = Nothing
-    , _gsprPolicy = Nothing
-    }
+  GlobalSetPolicyRequest'
+    {_gsprEtag = Nothing, _gsprBindings = Nothing, _gsprPolicy = Nothing}
+
 
 -- | Flatten Policy to create a backward compatible wire-format. Deprecated.
 -- Use \'policy\' to specify the etag.
@@ -1997,9 +2050,12 @@ instance ToJSON GlobalSetPolicyRequest where
 -- | Authorization-related information used by Cloud Audit Logging.
 --
 -- /See:/ 'authorizationLoggingOptions' smart constructor.
-newtype AuthorizationLoggingOptions = AuthorizationLoggingOptions'
+newtype AuthorizationLoggingOptions =
+  AuthorizationLoggingOptions'
     { _aloPermissionType :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuthorizationLoggingOptions' with the minimum fields required to make a request.
 --
@@ -2009,9 +2065,8 @@ newtype AuthorizationLoggingOptions = AuthorizationLoggingOptions'
 authorizationLoggingOptions
     :: AuthorizationLoggingOptions
 authorizationLoggingOptions =
-    AuthorizationLoggingOptions'
-    { _aloPermissionType = Nothing
-    }
+  AuthorizationLoggingOptions' {_aloPermissionType = Nothing}
+
 
 -- | The type of the permission that was checked.
 aloPermissionType :: Lens' AuthorizationLoggingOptions (Maybe Text)
@@ -2051,14 +2106,17 @@ instance ToJSON AuthorizationLoggingOptions where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pRules        :: !(Maybe [Rule])
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
     , _pIAMOwned     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -2078,7 +2136,7 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pRules = Nothing
@@ -2086,6 +2144,7 @@ policy =
     , _pBindings = Nothing
     , _pIAMOwned = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -2164,13 +2223,16 @@ instance ToJSON Policy where
 -- | A resource type supported by Deployment Manager.
 --
 -- /See:/ 'type'' smart constructor.
-data Type = Type'
+data Type =
+  Type'
     { _tInsertTime :: !(Maybe Text)
     , _tOperation  :: !(Maybe Operation)
     , _tSelfLink   :: !(Maybe Text)
     , _tName       :: !(Maybe Text)
     , _tId         :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
@@ -2188,13 +2250,14 @@ data Type = Type'
 type'
     :: Type
 type' =
-    Type'
+  Type'
     { _tInsertTime = Nothing
     , _tOperation = Nothing
     , _tSelfLink = Nothing
     , _tName = Nothing
     , _tId = Nothing
     }
+
 
 -- | Output only. Creation timestamp in RFC3339 text format.
 tInsertTime :: Lens' Type (Maybe Text)
@@ -2242,10 +2305,13 @@ instance ToJSON Type where
 -- |
 --
 -- /See:/ 'importFile' smart constructor.
-data ImportFile = ImportFile'
+data ImportFile =
+  ImportFile'
     { _ifContent :: !(Maybe Text)
     , _ifName    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImportFile' with the minimum fields required to make a request.
 --
@@ -2256,11 +2322,8 @@ data ImportFile = ImportFile'
 -- * 'ifName'
 importFile
     :: ImportFile
-importFile =
-    ImportFile'
-    { _ifContent = Nothing
-    , _ifName = Nothing
-    }
+importFile = ImportFile' {_ifContent = Nothing, _ifName = Nothing}
+
 
 -- | The contents of the file.
 ifContent :: Lens' ImportFile (Maybe Text)
@@ -2286,11 +2349,14 @@ instance ToJSON ImportFile where
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem'
+data OperationErrorErrorsItem =
+  OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
 --
@@ -2304,11 +2370,9 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem'
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem'
-    { _oeeiLocation = Nothing
-    , _oeeiCode = Nothing
-    , _oeeiMessage = Nothing
-    }
+  OperationErrorErrorsItem'
+    {_oeeiLocation = Nothing, _oeeiCode = Nothing, _oeeiMessage = Nothing}
+
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -2344,9 +2408,12 @@ instance ToJSON OperationErrorErrorsItem where
 -- |
 --
 -- /See:/ 'deploymentsStopRequest' smart constructor.
-newtype DeploymentsStopRequest = DeploymentsStopRequest'
+newtype DeploymentsStopRequest =
+  DeploymentsStopRequest'
     { _dsrFingerprint :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentsStopRequest' with the minimum fields required to make a request.
 --
@@ -2355,10 +2422,8 @@ newtype DeploymentsStopRequest = DeploymentsStopRequest'
 -- * 'dsrFingerprint'
 deploymentsStopRequest
     :: DeploymentsStopRequest
-deploymentsStopRequest =
-    DeploymentsStopRequest'
-    { _dsrFingerprint = Nothing
-    }
+deploymentsStopRequest = DeploymentsStopRequest' {_dsrFingerprint = Nothing}
+
 
 -- | Specifies a fingerprint for stop() requests. A fingerprint is a randomly
 -- generated value that must be provided in stop() requests to perform
@@ -2388,10 +2453,13 @@ instance ToJSON DeploymentsStopRequest where
 
 --
 -- /See:/ 'resourceWarningsItemDataItem' smart constructor.
-data ResourceWarningsItemDataItem = ResourceWarningsItemDataItem'
+data ResourceWarningsItemDataItem =
+  ResourceWarningsItemDataItem'
     { _rwidiValue :: !(Maybe Text)
     , _rwidiKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceWarningsItemDataItem' with the minimum fields required to make a request.
 --
@@ -2403,10 +2471,8 @@ data ResourceWarningsItemDataItem = ResourceWarningsItemDataItem'
 resourceWarningsItemDataItem
     :: ResourceWarningsItemDataItem
 resourceWarningsItemDataItem =
-    ResourceWarningsItemDataItem'
-    { _rwidiValue = Nothing
-    , _rwidiKey = Nothing
-    }
+  ResourceWarningsItemDataItem' {_rwidiValue = Nothing, _rwidiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 rwidiValue :: Lens' ResourceWarningsItemDataItem (Maybe Text)
@@ -2444,10 +2510,13 @@ instance ToJSON ResourceWarningsItemDataItem where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe Text)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -2459,10 +2528,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe Text)
@@ -2497,9 +2564,12 @@ instance ToJSON AuditLogConfig where
 -- field will be populated.
 --
 -- /See:/ 'resourceUpdateError' smart constructor.
-newtype ResourceUpdateError = ResourceUpdateError'
+newtype ResourceUpdateError =
+  ResourceUpdateError'
     { _rueErrors :: Maybe [ResourceUpdateErrorErrorsItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceUpdateError' with the minimum fields required to make a request.
 --
@@ -2508,10 +2578,8 @@ newtype ResourceUpdateError = ResourceUpdateError'
 -- * 'rueErrors'
 resourceUpdateError
     :: ResourceUpdateError
-resourceUpdateError =
-    ResourceUpdateError'
-    { _rueErrors = Nothing
-    }
+resourceUpdateError = ResourceUpdateError' {_rueErrors = Nothing}
+
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -2534,14 +2602,17 @@ instance ToJSON ResourceUpdateError where
 -- | A condition to be met.
 --
 -- /See:/ 'condition' smart constructor.
-data Condition = Condition'
+data Condition =
+  Condition'
     { _cOp     :: !(Maybe Text)
     , _cIAM    :: !(Maybe Text)
     , _cValues :: !(Maybe [Text])
     , _cValue  :: !(Maybe Text)
     , _cSys    :: !(Maybe Text)
     , _cSvc    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
@@ -2561,7 +2632,7 @@ data Condition = Condition'
 condition
     :: Condition
 condition =
-    Condition'
+  Condition'
     { _cOp = Nothing
     , _cIAM = Nothing
     , _cValues = Nothing
@@ -2569,6 +2640,7 @@ condition =
     , _cSys = Nothing
     , _cSvc = Nothing
     }
+
 
 -- | An operator to apply the subject with.
 cOp :: Lens' Condition (Maybe Text)
@@ -2620,10 +2692,13 @@ instance ToJSON Condition where
 -- used to build the next request if the request has been truncated.
 --
 -- /See:/ 'deploymentsListResponse' smart constructor.
-data DeploymentsListResponse = DeploymentsListResponse'
+data DeploymentsListResponse =
+  DeploymentsListResponse'
     { _dlrNextPageToken :: !(Maybe Text)
     , _dlrDeployments   :: !(Maybe [Deployment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentsListResponse' with the minimum fields required to make a request.
 --
@@ -2635,10 +2710,9 @@ data DeploymentsListResponse = DeploymentsListResponse'
 deploymentsListResponse
     :: DeploymentsListResponse
 deploymentsListResponse =
-    DeploymentsListResponse'
-    { _dlrNextPageToken = Nothing
-    , _dlrDeployments = Nothing
-    }
+  DeploymentsListResponse'
+    {_dlrNextPageToken = Nothing, _dlrDeployments = Nothing}
+
 
 -- | Output only. A token used to continue a truncated list request.
 dlrNextPageToken :: Lens' DeploymentsListResponse (Maybe Text)
@@ -2671,11 +2745,14 @@ instance ToJSON DeploymentsListResponse where
 
 --
 -- /See:/ 'resourceWarningsItem' smart constructor.
-data ResourceWarningsItem = ResourceWarningsItem'
+data ResourceWarningsItem =
+  ResourceWarningsItem'
     { _rwiData    :: !(Maybe [ResourceWarningsItemDataItem])
     , _rwiCode    :: !(Maybe Text)
     , _rwiMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceWarningsItem' with the minimum fields required to make a request.
 --
@@ -2689,11 +2766,9 @@ data ResourceWarningsItem = ResourceWarningsItem'
 resourceWarningsItem
     :: ResourceWarningsItem
 resourceWarningsItem =
-    ResourceWarningsItem'
-    { _rwiData = Nothing
-    , _rwiCode = Nothing
-    , _rwiMessage = Nothing
-    }
+  ResourceWarningsItem'
+    {_rwiData = Nothing, _rwiCode = Nothing, _rwiMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -2731,11 +2806,14 @@ instance ToJSON ResourceWarningsItem where
 -- | Specifies what kind of log the caller must write
 --
 -- /See:/ 'logConfig' smart constructor.
-data LogConfig = LogConfig'
+data LogConfig =
+  LogConfig'
     { _lcCloudAudit :: !(Maybe LogConfigCloudAuditOptions)
     , _lcDataAccess :: !(Maybe LogConfigDataAccessOptions)
     , _lcCounter    :: !(Maybe LogConfigCounterOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogConfig' with the minimum fields required to make a request.
 --
@@ -2749,11 +2827,9 @@ data LogConfig = LogConfig'
 logConfig
     :: LogConfig
 logConfig =
-    LogConfig'
-    { _lcCloudAudit = Nothing
-    , _lcDataAccess = Nothing
-    , _lcCounter = Nothing
-    }
+  LogConfig'
+    {_lcCloudAudit = Nothing, _lcDataAccess = Nothing, _lcCounter = Nothing}
+
 
 -- | Cloud audit options.
 lcCloudAudit :: Lens' LogConfig (Maybe LogConfigCloudAuditOptions)
@@ -2789,9 +2865,12 @@ instance ToJSON LogConfig where
 -- | The access controls set on the resource.
 --
 -- /See:/ 'resourceAccessControl' smart constructor.
-newtype ResourceAccessControl = ResourceAccessControl'
+newtype ResourceAccessControl =
+  ResourceAccessControl'
     { _racGcpIAMPolicy :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceAccessControl' with the minimum fields required to make a request.
 --
@@ -2800,10 +2879,8 @@ newtype ResourceAccessControl = ResourceAccessControl'
 -- * 'racGcpIAMPolicy'
 resourceAccessControl
     :: ResourceAccessControl
-resourceAccessControl =
-    ResourceAccessControl'
-    { _racGcpIAMPolicy = Nothing
-    }
+resourceAccessControl = ResourceAccessControl' {_racGcpIAMPolicy = Nothing}
+
 
 -- | The GCP IAM Policy to set on the resource.
 racGcpIAMPolicy :: Lens' ResourceAccessControl (Maybe Text)
@@ -2826,10 +2903,13 @@ instance ToJSON ResourceAccessControl where
 -- |
 --
 -- /See:/ 'targetConfiguration' smart constructor.
-data TargetConfiguration = TargetConfiguration'
+data TargetConfiguration =
+  TargetConfiguration'
     { _tcConfig  :: !(Maybe ConfigFile)
     , _tcImports :: !(Maybe [ImportFile])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetConfiguration' with the minimum fields required to make a request.
 --
@@ -2841,10 +2921,8 @@ data TargetConfiguration = TargetConfiguration'
 targetConfiguration
     :: TargetConfiguration
 targetConfiguration =
-    TargetConfiguration'
-    { _tcConfig = Nothing
-    , _tcImports = Nothing
-    }
+  TargetConfiguration' {_tcConfig = Nothing, _tcImports = Nothing}
+
 
 -- | The configuration to use for this deployment.
 tcConfig :: Lens' TargetConfiguration (Maybe ConfigFile)
@@ -2875,11 +2953,14 @@ instance ToJSON TargetConfiguration where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem'
+data OperationWarningsItem =
+  OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe Text)
     , _owiMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationWarningsItem' with the minimum fields required to make a request.
 --
@@ -2893,11 +2974,9 @@ data OperationWarningsItem = OperationWarningsItem'
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem'
-    { _owiData = Nothing
-    , _owiCode = Nothing
-    , _owiMessage = Nothing
-    }
+  OperationWarningsItem'
+    {_owiData = Nothing, _owiCode = Nothing, _owiMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -2935,11 +3014,14 @@ instance ToJSON OperationWarningsItem where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -2953,11 +3035,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -3011,7 +3090,8 @@ instance ToJSON Binding where
 -- |
 --
 -- /See:/ 'deployment' smart constructor.
-data Deployment = Deployment'
+data Deployment =
+  Deployment'
     { _dInsertTime  :: !(Maybe Text)
     , _dOperation   :: !(Maybe Operation)
     , _dFingerprint :: !(Maybe Bytes)
@@ -3024,7 +3104,9 @@ data Deployment = Deployment'
     , _dDescription :: !(Maybe Text)
     , _dUpdate      :: !(Maybe DeploymentUpdate)
     , _dTarget      :: !(Maybe TargetConfiguration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
@@ -3056,7 +3138,7 @@ data Deployment = Deployment'
 deployment
     :: Deployment
 deployment =
-    Deployment'
+  Deployment'
     { _dInsertTime = Nothing
     , _dOperation = Nothing
     , _dFingerprint = Nothing
@@ -3070,6 +3152,7 @@ deployment =
     , _dUpdate = Nothing
     , _dTarget = Nothing
     }
+
 
 -- | Output only. Creation timestamp in RFC3339 text format.
 dInsertTime :: Lens' Deployment (Maybe Text)

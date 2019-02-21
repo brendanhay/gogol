@@ -63,12 +63,15 @@ type URLCrawlErrorsSamplesGetResource =
 -- | Retrieves details about crawl errors for a site\'s sample URL.
 --
 -- /See:/ 'urlCrawlErrorsSamplesGet' smart constructor.
-data URLCrawlErrorsSamplesGet = URLCrawlErrorsSamplesGet'
+data URLCrawlErrorsSamplesGet =
+  URLCrawlErrorsSamplesGet'
     { _ucesgPlatform :: !URLCrawlErrorsSamplesGetPlatform
     , _ucesgCategory :: !URLCrawlErrorsSamplesGetCategory
     , _ucesgSiteURL  :: !Text
     , _ucesgURL      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLCrawlErrorsSamplesGet' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ urlCrawlErrorsSamplesGet
     -> Text -- ^ 'ucesgURL'
     -> URLCrawlErrorsSamplesGet
 urlCrawlErrorsSamplesGet pUcesgPlatform_ pUcesgCategory_ pUcesgSiteURL_ pUcesgURL_ =
-    URLCrawlErrorsSamplesGet'
+  URLCrawlErrorsSamplesGet'
     { _ucesgPlatform = pUcesgPlatform_
     , _ucesgCategory = pUcesgCategory_
     , _ucesgSiteURL = pUcesgSiteURL_
     , _ucesgURL = pUcesgURL_
     }
+
 
 -- | The user agent type (platform) that made the request. For example: web
 ucesgPlatform :: Lens' URLCrawlErrorsSamplesGet URLCrawlErrorsSamplesGetPlatform

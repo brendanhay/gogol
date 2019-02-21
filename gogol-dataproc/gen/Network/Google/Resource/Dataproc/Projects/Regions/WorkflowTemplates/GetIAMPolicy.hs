@@ -65,7 +65,8 @@ type ProjectsRegionsWorkflowTemplatesGetIAMPolicyResource
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesGetIAMPolicy' smart constructor.
-data ProjectsRegionsWorkflowTemplatesGetIAMPolicy = ProjectsRegionsWorkflowTemplatesGetIAMPolicy'
+data ProjectsRegionsWorkflowTemplatesGetIAMPolicy =
+  ProjectsRegionsWorkflowTemplatesGetIAMPolicy'
     { _prwtgipXgafv          :: !(Maybe Xgafv)
     , _prwtgipUploadProtocol :: !(Maybe Text)
     , _prwtgipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsRegionsWorkflowTemplatesGetIAMPolicy = ProjectsRegionsWorkflowTempl
     , _prwtgipPayload        :: !GetIAMPolicyRequest
     , _prwtgipResource       :: !Text
     , _prwtgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsRegionsWorkflowTemplatesGetIAMPolicy
     -> Text -- ^ 'prwtgipResource'
     -> ProjectsRegionsWorkflowTemplatesGetIAMPolicy
 projectsRegionsWorkflowTemplatesGetIAMPolicy pPrwtgipPayload_ pPrwtgipResource_ =
-    ProjectsRegionsWorkflowTemplatesGetIAMPolicy'
+  ProjectsRegionsWorkflowTemplatesGetIAMPolicy'
     { _prwtgipXgafv = Nothing
     , _prwtgipUploadProtocol = Nothing
     , _prwtgipAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsRegionsWorkflowTemplatesGetIAMPolicy pPrwtgipPayload_ pPrwtgipResource_ 
     , _prwtgipResource = pPrwtgipResource_
     , _prwtgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prwtgipXgafv :: Lens' ProjectsRegionsWorkflowTemplatesGetIAMPolicy (Maybe Xgafv)
@@ -150,7 +154,8 @@ prwtgipCallback
       (\ s a -> s{_prwtgipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsWorkflowTemplatesGetIAMPolicy where
+           ProjectsRegionsWorkflowTemplatesGetIAMPolicy
+         where
         type Rs ProjectsRegionsWorkflowTemplatesGetIAMPolicy
              = Policy
         type Scopes

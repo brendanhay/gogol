@@ -59,7 +59,10 @@ data GoogleCloudDialogflowV2beta1IntentTrainingPhraseType
     | Template
       -- ^ @TEMPLATE@
       -- Templates are not annotated with entity types, but they can contain
-      -- \@-prefixed entity type names as substrings.
+      -- \@-prefixed entity type names as substrings. Template mode has been
+      -- deprecated. Example mode is the only supported way to create new
+      -- training phrases. If you have existing training phrases that you\'ve
+      -- created in template mode, those will continue to work.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudDialogflowV2beta1IntentTrainingPhraseType
@@ -301,7 +304,10 @@ data GoogleCloudDialogflowV2IntentTrainingPhraseType
     | GCDVITPTTemplate
       -- ^ @TEMPLATE@
       -- Templates are not annotated with entity types, but they can contain
-      -- \@-prefixed entity type names as substrings.
+      -- \@-prefixed entity type names as substrings. Template mode has been
+      -- deprecated. Example mode is the only supported way to create new
+      -- training phrases. If you have existing training phrases that you\'ve
+      -- created in template mode, those will continue to work.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudDialogflowV2IntentTrainingPhraseType

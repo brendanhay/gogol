@@ -64,13 +64,16 @@ type NodeGroupsAggregatedListResource =
 -- nodeGroups.listNodes for more details about each group.
 --
 -- /See:/ 'nodeGroupsAggregatedList' smart constructor.
-data NodeGroupsAggregatedList = NodeGroupsAggregatedList'
+data NodeGroupsAggregatedList =
+  NodeGroupsAggregatedList'
     { _ngalOrderBy    :: !(Maybe Text)
     , _ngalProject    :: !Text
     , _ngalFilter     :: !(Maybe Text)
     , _ngalPageToken  :: !(Maybe Text)
     , _ngalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeGroupsAggregatedList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ nodeGroupsAggregatedList
     :: Text -- ^ 'ngalProject'
     -> NodeGroupsAggregatedList
 nodeGroupsAggregatedList pNgalProject_ =
-    NodeGroupsAggregatedList'
+  NodeGroupsAggregatedList'
     { _ngalOrderBy = Nothing
     , _ngalProject = pNgalProject_
     , _ngalFilter = Nothing
     , _ngalPageToken = Nothing
     , _ngalMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

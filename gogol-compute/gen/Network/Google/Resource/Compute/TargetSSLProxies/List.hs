@@ -64,13 +64,16 @@ type TargetSSLProxiesListResource =
 -- specified project.
 --
 -- /See:/ 'targetSSLProxiesList' smart constructor.
-data TargetSSLProxiesList = TargetSSLProxiesList'
+data TargetSSLProxiesList =
+  TargetSSLProxiesList'
     { _tsplOrderBy    :: !(Maybe Text)
     , _tsplProject    :: !Text
     , _tsplFilter     :: !(Maybe Text)
     , _tsplPageToken  :: !(Maybe Text)
     , _tsplMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetSSLProxiesList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ targetSSLProxiesList
     :: Text -- ^ 'tsplProject'
     -> TargetSSLProxiesList
 targetSSLProxiesList pTsplProject_ =
-    TargetSSLProxiesList'
+  TargetSSLProxiesList'
     { _tsplOrderBy = Nothing
     , _tsplProject = pTsplProject_
     , _tsplFilter = Nothing
     , _tsplPageToken = Nothing
     , _tsplMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

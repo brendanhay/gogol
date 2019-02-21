@@ -61,11 +61,14 @@ type ImagesSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'imagesSetIAMPolicy' smart constructor.
-data ImagesSetIAMPolicy = ImagesSetIAMPolicy'
+data ImagesSetIAMPolicy =
+  ImagesSetIAMPolicy'
     { _isiampProject  :: !Text
     , _isiampPayload  :: !GlobalSetPolicyRequest
     , _isiampResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImagesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ imagesSetIAMPolicy
     -> Text -- ^ 'isiampResource'
     -> ImagesSetIAMPolicy
 imagesSetIAMPolicy pIsiampProject_ pIsiampPayload_ pIsiampResource_ =
-    ImagesSetIAMPolicy'
+  ImagesSetIAMPolicy'
     { _isiampProject = pIsiampProject_
     , _isiampPayload = pIsiampPayload_
     , _isiampResource = pIsiampResource_
     }
+
 
 -- | Project ID for this request.
 isiampProject :: Lens' ImagesSetIAMPolicy Text

@@ -66,7 +66,8 @@ type ProjectsGetRemoteConfigResource =
 -- RemoteConfig as the payload, and also the eTag as a response header.
 --
 -- /See:/ 'projectsGetRemoteConfig' smart constructor.
-data ProjectsGetRemoteConfig = ProjectsGetRemoteConfig'
+data ProjectsGetRemoteConfig =
+  ProjectsGetRemoteConfig'
     { _pgrcXgafv          :: !(Maybe Xgafv)
     , _pgrcUploadProtocol :: !(Maybe Text)
     , _pgrcProject        :: !Text
@@ -75,7 +76,9 @@ data ProjectsGetRemoteConfig = ProjectsGetRemoteConfig'
     , _pgrcUploadType     :: !(Maybe Text)
     , _pgrcBearerToken    :: !(Maybe Text)
     , _pgrcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGetRemoteConfig' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsGetRemoteConfig
     :: Text -- ^ 'pgrcProject'
     -> ProjectsGetRemoteConfig
 projectsGetRemoteConfig pPgrcProject_ =
-    ProjectsGetRemoteConfig'
+  ProjectsGetRemoteConfig'
     { _pgrcXgafv = Nothing
     , _pgrcUploadProtocol = Nothing
     , _pgrcProject = pPgrcProject_
@@ -110,6 +113,7 @@ projectsGetRemoteConfig pPgrcProject_ =
     , _pgrcBearerToken = Nothing
     , _pgrcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgrcXgafv :: Lens' ProjectsGetRemoteConfig (Maybe Xgafv)

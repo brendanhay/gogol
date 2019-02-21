@@ -77,7 +77,8 @@ type UsersAssetsListResource =
 -- All Rights Reserved for the currently-authenticated user.
 --
 -- /See:/ 'usersAssetsList' smart constructor.
-data UsersAssetsList = UsersAssetsList'
+data UsersAssetsList =
+  UsersAssetsList'
     { _ualXgafv          :: !(Maybe Xgafv)
     , _ualUploadProtocol :: !(Maybe Text)
     , _ualOrderBy        :: !(Maybe Text)
@@ -89,7 +90,9 @@ data UsersAssetsList = UsersAssetsList'
     , _ualPageToken      :: !(Maybe Text)
     , _ualPageSize       :: !(Maybe (Textual Int32))
     , _ualCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersAssetsList' with the minimum fields required to make a request.
 --
@@ -120,7 +123,7 @@ usersAssetsList
     :: Text -- ^ 'ualName'
     -> UsersAssetsList
 usersAssetsList pUalName_ =
-    UsersAssetsList'
+  UsersAssetsList'
     { _ualXgafv = Nothing
     , _ualUploadProtocol = Nothing
     , _ualOrderBy = Nothing
@@ -133,6 +136,7 @@ usersAssetsList pUalName_ =
     , _ualPageSize = Nothing
     , _ualCallback = Nothing
     }
+
 
 -- | V1 error format.
 ualXgafv :: Lens' UsersAssetsList (Maybe Xgafv)

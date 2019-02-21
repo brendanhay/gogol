@@ -74,13 +74,16 @@ type InstanceGroupManagersSetTargetPoolsResource =
 -- all of the instances in the group depending on the size of the group.
 --
 -- /See:/ 'instanceGroupManagersSetTargetPools' smart constructor.
-data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools'
+data InstanceGroupManagersSetTargetPools =
+  InstanceGroupManagersSetTargetPools'
     { _igmstpRequestId            :: !(Maybe Text)
     , _igmstpProject              :: !Text
     , _igmstpInstanceGroupManager :: !Text
     , _igmstpZone                 :: !Text
     , _igmstpPayload              :: !InstanceGroupManagersSetTargetPoolsRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupManagersSetTargetPools' with the minimum fields required to make a request.
 --
@@ -102,13 +105,14 @@ instanceGroupManagersSetTargetPools
     -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'igmstpPayload'
     -> InstanceGroupManagersSetTargetPools
 instanceGroupManagersSetTargetPools pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpPayload_ =
-    InstanceGroupManagersSetTargetPools'
+  InstanceGroupManagersSetTargetPools'
     { _igmstpRequestId = Nothing
     , _igmstpProject = pIgmstpProject_
     , _igmstpInstanceGroupManager = pIgmstpInstanceGroupManager_
     , _igmstpZone = pIgmstpZone_
     , _igmstpPayload = pIgmstpPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -149,7 +153,8 @@ igmstpPayload
       (\ s a -> s{_igmstpPayload = a})
 
 instance GoogleRequest
-         InstanceGroupManagersSetTargetPools where
+           InstanceGroupManagersSetTargetPools
+         where
         type Rs InstanceGroupManagersSetTargetPools =
              Operation
         type Scopes InstanceGroupManagersSetTargetPools =

@@ -85,14 +85,17 @@ type PhotosBatchUpdateResource =
 -- well. Otherwise, the request will fail.
 --
 -- /See:/ 'photosBatchUpdate' smart constructor.
-data PhotosBatchUpdate = PhotosBatchUpdate'
+data PhotosBatchUpdate =
+  PhotosBatchUpdate'
     { _pbuXgafv          :: !(Maybe Xgafv)
     , _pbuUploadProtocol :: !(Maybe Text)
     , _pbuAccessToken    :: !(Maybe Text)
     , _pbuUploadType     :: !(Maybe Text)
     , _pbuPayload        :: !BatchUpdatePhotosRequest
     , _pbuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotosBatchUpdate' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ photosBatchUpdate
     :: BatchUpdatePhotosRequest -- ^ 'pbuPayload'
     -> PhotosBatchUpdate
 photosBatchUpdate pPbuPayload_ =
-    PhotosBatchUpdate'
+  PhotosBatchUpdate'
     { _pbuXgafv = Nothing
     , _pbuUploadProtocol = Nothing
     , _pbuAccessToken = Nothing
@@ -121,6 +124,7 @@ photosBatchUpdate pPbuPayload_ =
     , _pbuPayload = pPbuPayload_
     , _pbuCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbuXgafv :: Lens' PhotosBatchUpdate (Maybe Xgafv)

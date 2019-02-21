@@ -73,7 +73,8 @@ type ProjectsLocationsQueuesTasksListResource =
 -- The ordering may change at any time.
 --
 -- /See:/ 'projectsLocationsQueuesTasksList' smart constructor.
-data ProjectsLocationsQueuesTasksList = ProjectsLocationsQueuesTasksList'
+data ProjectsLocationsQueuesTasksList =
+  ProjectsLocationsQueuesTasksList'
     { _plqtlParent         :: !Text
     , _plqtlXgafv          :: !(Maybe Xgafv)
     , _plqtlUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsLocationsQueuesTasksList = ProjectsLocationsQueuesTasksList'
     , _plqtlPageToken      :: !(Maybe Text)
     , _plqtlPageSize       :: !(Maybe (Textual Int32))
     , _plqtlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsQueuesTasksList' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsLocationsQueuesTasksList
     :: Text -- ^ 'plqtlParent'
     -> ProjectsLocationsQueuesTasksList
 projectsLocationsQueuesTasksList pPlqtlParent_ =
-    ProjectsLocationsQueuesTasksList'
+  ProjectsLocationsQueuesTasksList'
     { _plqtlParent = pPlqtlParent_
     , _plqtlXgafv = Nothing
     , _plqtlUploadProtocol = Nothing
@@ -121,6 +124,7 @@ projectsLocationsQueuesTasksList pPlqtlParent_ =
     , _plqtlPageSize = Nothing
     , _plqtlCallback = Nothing
     }
+
 
 -- | Required. The queue name. For example:
 -- \`projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID\`
@@ -191,7 +195,8 @@ plqtlCallback
       (\ s a -> s{_plqtlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsQueuesTasksList where
+           ProjectsLocationsQueuesTasksList
+         where
         type Rs ProjectsLocationsQueuesTasksList =
              ListTasksResponse
         type Scopes ProjectsLocationsQueuesTasksList =

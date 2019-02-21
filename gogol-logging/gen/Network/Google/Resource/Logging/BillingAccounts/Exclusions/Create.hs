@@ -67,7 +67,8 @@ type BillingAccountsExclusionsCreateResource =
 -- exclusions in a resource.
 --
 -- /See:/ 'billingAccountsExclusionsCreate' smart constructor.
-data BillingAccountsExclusionsCreate = BillingAccountsExclusionsCreate'
+data BillingAccountsExclusionsCreate =
+  BillingAccountsExclusionsCreate'
     { _baecParent         :: !Text
     , _baecXgafv          :: !(Maybe Xgafv)
     , _baecUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data BillingAccountsExclusionsCreate = BillingAccountsExclusionsCreate'
     , _baecUploadType     :: !(Maybe Text)
     , _baecPayload        :: !LogExclusion
     , _baecCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsExclusionsCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ billingAccountsExclusionsCreate
     -> LogExclusion -- ^ 'baecPayload'
     -> BillingAccountsExclusionsCreate
 billingAccountsExclusionsCreate pBaecParent_ pBaecPayload_ =
-    BillingAccountsExclusionsCreate'
+  BillingAccountsExclusionsCreate'
     { _baecParent = pBaecParent_
     , _baecXgafv = Nothing
     , _baecUploadProtocol = Nothing
@@ -108,6 +111,7 @@ billingAccountsExclusionsCreate pBaecParent_ pBaecPayload_ =
     , _baecPayload = pBaecPayload_
     , _baecCallback = Nothing
     }
+
 
 -- | Required. The parent resource in which to create the exclusion:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
@@ -152,7 +156,8 @@ baecCallback
   = lens _baecCallback (\ s a -> s{_baecCallback = a})
 
 instance GoogleRequest
-         BillingAccountsExclusionsCreate where
+           BillingAccountsExclusionsCreate
+         where
         type Rs BillingAccountsExclusionsCreate =
              LogExclusion
         type Scopes BillingAccountsExclusionsCreate =

@@ -61,14 +61,17 @@ type ProjectsLocationsDataSourcesGetResource =
 -- used for UI rendering.
 --
 -- /See:/ 'projectsLocationsDataSourcesGet' smart constructor.
-data ProjectsLocationsDataSourcesGet = ProjectsLocationsDataSourcesGet'
+data ProjectsLocationsDataSourcesGet =
+  ProjectsLocationsDataSourcesGet'
     { _pldsgXgafv          :: !(Maybe Xgafv)
     , _pldsgUploadProtocol :: !(Maybe Text)
     , _pldsgAccessToken    :: !(Maybe Text)
     , _pldsgUploadType     :: !(Maybe Text)
     , _pldsgName           :: !Text
     , _pldsgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsDataSourcesGet' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsLocationsDataSourcesGet
     :: Text -- ^ 'pldsgName'
     -> ProjectsLocationsDataSourcesGet
 projectsLocationsDataSourcesGet pPldsgName_ =
-    ProjectsLocationsDataSourcesGet'
+  ProjectsLocationsDataSourcesGet'
     { _pldsgXgafv = Nothing
     , _pldsgUploadProtocol = Nothing
     , _pldsgAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsLocationsDataSourcesGet pPldsgName_ =
     , _pldsgName = pPldsgName_
     , _pldsgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldsgXgafv :: Lens' ProjectsLocationsDataSourcesGet (Maybe Xgafv)
@@ -134,7 +138,8 @@ pldsgCallback
       (\ s a -> s{_pldsgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsDataSourcesGet where
+           ProjectsLocationsDataSourcesGet
+         where
         type Rs ProjectsLocationsDataSourcesGet = DataSource
         type Scopes ProjectsLocationsDataSourcesGet =
              '["https://www.googleapis.com/auth/bigquery",

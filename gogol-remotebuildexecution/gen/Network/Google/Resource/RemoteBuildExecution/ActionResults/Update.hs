@@ -20,15 +20,15 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Upload a new execution result. This method is intended for servers which
--- implement the distributed cache independently of the Execution API. As a
--- result, it is OPTIONAL for servers to implement. In order to allow the
--- server to perform access control based on the type of action, and to
--- assist with client debugging, the client MUST first upload the Action
--- that produced the result, along with its Command, into the
--- \`ContentAddressableStorage\`. Errors: * \`UNIMPLEMENTED\`: This method
--- is not supported by the server. * \`RESOURCE_EXHAUSTED\`: There is
--- insufficient storage space to add the entry to the cache.
+-- Upload a new execution result. In order to allow the server to perform
+-- access control based on the type of action, and to assist with client
+-- debugging, the client MUST first upload the Action that produced the
+-- result, along with its Command, into the \`ContentAddressableStorage\`.
+-- Errors: * \`INVALID_ARGUMENT\`: One or more arguments are invalid. *
+-- \`FAILED_PRECONDITION\`: One or more errors occurred in updating the
+-- action result, such as a missing command or action. *
+-- \`RESOURCE_EXHAUSTED\`: There is insufficient storage space to add the
+-- entry to the cache.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actionResults.update@.
 module Network.Google.Resource.RemoteBuildExecution.ActionResults.Update
@@ -79,18 +79,19 @@ type ActionResultsUpdateResource =
                                Put '[JSON]
                                  BuildBazelRemoteExecutionV2ActionResult
 
--- | Upload a new execution result. This method is intended for servers which
--- implement the distributed cache independently of the Execution API. As a
--- result, it is OPTIONAL for servers to implement. In order to allow the
--- server to perform access control based on the type of action, and to
--- assist with client debugging, the client MUST first upload the Action
--- that produced the result, along with its Command, into the
--- \`ContentAddressableStorage\`. Errors: * \`UNIMPLEMENTED\`: This method
--- is not supported by the server. * \`RESOURCE_EXHAUSTED\`: There is
--- insufficient storage space to add the entry to the cache.
+-- | Upload a new execution result. In order to allow the server to perform
+-- access control based on the type of action, and to assist with client
+-- debugging, the client MUST first upload the Action that produced the
+-- result, along with its Command, into the \`ContentAddressableStorage\`.
+-- Errors: * \`INVALID_ARGUMENT\`: One or more arguments are invalid. *
+-- \`FAILED_PRECONDITION\`: One or more errors occurred in updating the
+-- action result, such as a missing command or action. *
+-- \`RESOURCE_EXHAUSTED\`: There is insufficient storage space to add the
+-- entry to the cache.
 --
 -- /See:/ 'actionResultsUpdate' smart constructor.
-data ActionResultsUpdate = ActionResultsUpdate'
+data ActionResultsUpdate =
+  ActionResultsUpdate'
     { _aruSizeBytes                  :: !(Textual Int64)
     , _aruXgafv                      :: !(Maybe Xgafv)
     , _aruHash                       :: !Text
@@ -101,7 +102,9 @@ data ActionResultsUpdate = ActionResultsUpdate'
     , _aruResultsCachePolicyPriority :: !(Maybe (Textual Int32))
     , _aruInstanceName               :: !Text
     , _aruCallback                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActionResultsUpdate' with the minimum fields required to make a request.
 --
@@ -133,7 +136,7 @@ actionResultsUpdate
     -> Text -- ^ 'aruInstanceName'
     -> ActionResultsUpdate
 actionResultsUpdate pAruSizeBytes_ pAruHash_ pAruPayload_ pAruInstanceName_ =
-    ActionResultsUpdate'
+  ActionResultsUpdate'
     { _aruSizeBytes = _Coerce # pAruSizeBytes_
     , _aruXgafv = Nothing
     , _aruHash = pAruHash_
@@ -145,6 +148,7 @@ actionResultsUpdate pAruSizeBytes_ pAruHash_ pAruPayload_ pAruInstanceName_ =
     , _aruInstanceName = pAruInstanceName_
     , _aruCallback = Nothing
     }
+
 
 -- | The size of the blob, in bytes.
 aruSizeBytes :: Lens' ActionResultsUpdate Int64

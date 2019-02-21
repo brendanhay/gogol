@@ -64,13 +64,16 @@ type SSLCertificatesListResource =
 -- specified project.
 --
 -- /See:/ 'sslCertificatesList' smart constructor.
-data SSLCertificatesList = SSLCertificatesList'
+data SSLCertificatesList =
+  SSLCertificatesList'
     { _sclOrderBy    :: !(Maybe Text)
     , _sclProject    :: !Text
     , _sclFilter     :: !(Maybe Text)
     , _sclPageToken  :: !(Maybe Text)
     , _sclMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertificatesList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ sslCertificatesList
     :: Text -- ^ 'sclProject'
     -> SSLCertificatesList
 sslCertificatesList pSclProject_ =
-    SSLCertificatesList'
+  SSLCertificatesList'
     { _sclOrderBy = Nothing
     , _sclProject = pSclProject_
     , _sclFilter = Nothing
     , _sclPageToken = Nothing
     , _sclMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

@@ -70,7 +70,8 @@ type InstanceGroupsListInstancesResource =
 -- | Lists the instances in the specified instance group.
 --
 -- /See:/ 'instanceGroupsListInstances'' smart constructor.
-data InstanceGroupsListInstances' = InstanceGroupsListInstances''
+data InstanceGroupsListInstances' =
+  InstanceGroupsListInstances''
     { _igliOrderBy       :: !(Maybe Text)
     , _igliProject       :: !Text
     , _igliZone          :: !Text
@@ -79,7 +80,9 @@ data InstanceGroupsListInstances' = InstanceGroupsListInstances''
     , _igliPageToken     :: !(Maybe Text)
     , _igliInstanceGroup :: !Text
     , _igliMaxResults    :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupsListInstances'' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ instanceGroupsListInstances'
     -> Text -- ^ 'igliInstanceGroup'
     -> InstanceGroupsListInstances'
 instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliPayload_ pIgliInstanceGroup_ =
-    InstanceGroupsListInstances''
+  InstanceGroupsListInstances''
     { _igliOrderBy = Nothing
     , _igliProject = pIgliProject_
     , _igliZone = pIgliZone_
@@ -117,6 +120,7 @@ instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliPayload_ pIgliInstanc
     , _igliInstanceGroup = pIgliInstanceGroup_
     , _igliMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

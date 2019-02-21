@@ -27,10 +27,13 @@ import           Network.Google.ProximityBeacon.Types.Sum
 -- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng'
+data LatLng =
+  LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -41,11 +44,8 @@ data LatLng = LatLng'
 -- * 'llLongitude'
 latLng
     :: LatLng
-latLng =
-    LatLng'
-    { _llLatitude = Nothing
-    , _llLongitude = Nothing
-    }
+latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -78,11 +78,14 @@ instance ToJSON LatLng where
 -- your beacons.
 --
 -- /See:/ 'attachmentInfo' smart constructor.
-data AttachmentInfo = AttachmentInfo'
+data AttachmentInfo =
+  AttachmentInfo'
     { _aiMaxDistanceMeters :: !(Maybe (Textual Double))
     , _aiData              :: !(Maybe Bytes)
     , _aiNamespacedType    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AttachmentInfo' with the minimum fields required to make a request.
 --
@@ -96,11 +99,12 @@ data AttachmentInfo = AttachmentInfo'
 attachmentInfo
     :: AttachmentInfo
 attachmentInfo =
-    AttachmentInfo'
+  AttachmentInfo'
     { _aiMaxDistanceMeters = Nothing
     , _aiData = Nothing
     , _aiNamespacedType = Nothing
     }
+
 
 -- | The distance away from the beacon at which this attachment should be
 -- delivered to a mobile app. Setting this to a value greater than zero
@@ -152,9 +156,12 @@ instance ToJSON AttachmentInfo where
 -- version. Optional.
 --
 -- /See:/ 'beaconProperties' smart constructor.
-newtype BeaconProperties = BeaconProperties'
+newtype BeaconProperties =
+  BeaconProperties'
     { _bpAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeaconProperties' with the minimum fields required to make a request.
 --
@@ -165,9 +172,8 @@ beaconProperties
     :: HashMap Text Text -- ^ 'bpAddtional'
     -> BeaconProperties
 beaconProperties pBpAddtional_ =
-    BeaconProperties'
-    { _bpAddtional = _Coerce # pBpAddtional_
-    }
+  BeaconProperties' {_bpAddtional = _Coerce # pBpAddtional_}
+
 
 bpAddtional :: Lens' BeaconProperties (HashMap Text Text)
 bpAddtional
@@ -190,14 +196,16 @@ instance ToJSON BeaconProperties where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -208,9 +216,12 @@ instance ToJSON Empty where
 -- | Response for a request to delete attachments.
 --
 -- /See:/ 'deleteAttachmentsResponse' smart constructor.
-newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse'
+newtype DeleteAttachmentsResponse =
+  DeleteAttachmentsResponse'
     { _darNumDeleted :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeleteAttachmentsResponse' with the minimum fields required to make a request.
 --
@@ -220,9 +231,8 @@ newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse'
 deleteAttachmentsResponse
     :: DeleteAttachmentsResponse
 deleteAttachmentsResponse =
-    DeleteAttachmentsResponse'
-    { _darNumDeleted = Nothing
-    }
+  DeleteAttachmentsResponse' {_darNumDeleted = Nothing}
+
 
 -- | The number of attachments that were deleted.
 darNumDeleted :: Lens' DeleteAttachmentsResponse (Maybe Int32)
@@ -246,10 +256,13 @@ instance ToJSON DeleteAttachmentsResponse where
 -- mobile client has encountered \"in the wild\".
 --
 -- /See:/ 'getInfoForObservedBeaconsRequest' smart constructor.
-data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest'
+data GetInfoForObservedBeaconsRequest =
+  GetInfoForObservedBeaconsRequest'
     { _gifobrObservations    :: !(Maybe [Observation])
     , _gifobrNamespacedTypes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetInfoForObservedBeaconsRequest' with the minimum fields required to make a request.
 --
@@ -261,10 +274,9 @@ data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest'
 getInfoForObservedBeaconsRequest
     :: GetInfoForObservedBeaconsRequest
 getInfoForObservedBeaconsRequest =
-    GetInfoForObservedBeaconsRequest'
-    { _gifobrObservations = Nothing
-    , _gifobrNamespacedTypes = Nothing
-    }
+  GetInfoForObservedBeaconsRequest'
+    {_gifobrObservations = Nothing, _gifobrNamespacedTypes = Nothing}
+
 
 -- | The beacons that the client has encountered. At least one must be given.
 gifobrObservations :: Lens' GetInfoForObservedBeaconsRequest [Observation]
@@ -309,10 +321,13 @@ instance ToJSON GetInfoForObservedBeaconsRequest
 -- attachments under it.
 --
 -- /See:/ 'namespace' smart constructor.
-data Namespace = Namespace'
+data Namespace =
+  Namespace'
     { _nServingVisibility :: !(Maybe NamespaceServingVisibility)
     , _nNamespaceName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Namespace' with the minimum fields required to make a request.
 --
@@ -324,10 +339,8 @@ data Namespace = Namespace'
 namespace
     :: Namespace
 namespace =
-    Namespace'
-    { _nServingVisibility = Nothing
-    , _nNamespaceName = Nothing
-    }
+  Namespace' {_nServingVisibility = Nothing, _nNamespaceName = Nothing}
+
 
 -- | Specifies what clients may receive attachments under this namespace via
 -- \`beaconinfo.getforobserved\`.
@@ -379,14 +392,17 @@ instance ToJSON Namespace where
 -- at GitHub.
 --
 -- /See:/ 'ephemeralIdRegistration' smart constructor.
-data EphemeralIdRegistration = EphemeralIdRegistration'
+data EphemeralIdRegistration =
+  EphemeralIdRegistration'
     { _eirRotationPeriodExponent :: !(Maybe (Textual Word32))
     , _eirInitialClockValue      :: !(Maybe (Textual Word64))
     , _eirBeaconIdentityKey      :: !(Maybe Bytes)
     , _eirBeaconEcdhPublicKey    :: !(Maybe Bytes)
     , _eirInitialEid             :: !(Maybe Bytes)
     , _eirServiceEcdhPublicKey   :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EphemeralIdRegistration' with the minimum fields required to make a request.
 --
@@ -406,7 +422,7 @@ data EphemeralIdRegistration = EphemeralIdRegistration'
 ephemeralIdRegistration
     :: EphemeralIdRegistration
 ephemeralIdRegistration =
-    EphemeralIdRegistration'
+  EphemeralIdRegistration'
     { _eirRotationPeriodExponent = Nothing
     , _eirInitialClockValue = Nothing
     , _eirBeaconIdentityKey = Nothing
@@ -414,6 +430,7 @@ ephemeralIdRegistration =
     , _eirInitialEid = Nothing
     , _eirServiceEcdhPublicKey = Nothing
     }
+
 
 -- | Indicates the nominal period between each rotation of the beacon\'s
 -- ephemeral ID. \"Nominal\" because the beacon should randomize the actual
@@ -507,9 +524,12 @@ instance ToJSON EphemeralIdRegistration where
 -- namespaces.
 --
 -- /See:/ 'listNamespacesResponse' smart constructor.
-newtype ListNamespacesResponse = ListNamespacesResponse'
+newtype ListNamespacesResponse =
+  ListNamespacesResponse'
     { _lnrNamespaces :: Maybe [Namespace]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListNamespacesResponse' with the minimum fields required to make a request.
 --
@@ -518,10 +538,8 @@ newtype ListNamespacesResponse = ListNamespacesResponse'
 -- * 'lnrNamespaces'
 listNamespacesResponse
     :: ListNamespacesResponse
-listNamespacesResponse =
-    ListNamespacesResponse'
-    { _lnrNamespaces = Nothing
-    }
+listNamespacesResponse = ListNamespacesResponse' {_lnrNamespaces = Nothing}
+
 
 -- | The attachments that corresponded to the request params.
 lnrNamespaces :: Lens' ListNamespacesResponse [Namespace]
@@ -553,11 +571,14 @@ instance ToJSON ListNamespacesResponse where
 -- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date'
+data Date =
+  Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -570,12 +591,8 @@ data Date = Date'
 -- * 'dMonth'
 date
     :: Date
-date =
-    Date'
-    { _dDay = Nothing
-    , _dYear = Nothing
-    , _dMonth = Nothing
-    }
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -616,7 +633,8 @@ instance ToJSON Date where
 -- | Details of a beacon device.
 --
 -- /See:/ 'beacon' smart constructor.
-data Beacon = Beacon'
+data Beacon =
+  Beacon'
     { _beaLatLng                  :: !(Maybe LatLng)
     , _beaStatus                  :: !(Maybe BeaconStatus)
     , _beaBeaconName              :: !(Maybe Text)
@@ -628,7 +646,9 @@ data Beacon = Beacon'
     , _beaPlaceId                 :: !(Maybe Text)
     , _beaAdvertisedId            :: !(Maybe AdvertisedId)
     , _beaProperties              :: !(Maybe BeaconProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Beacon' with the minimum fields required to make a request.
 --
@@ -658,7 +678,7 @@ data Beacon = Beacon'
 beacon
     :: Beacon
 beacon =
-    Beacon'
+  Beacon'
     { _beaLatLng = Nothing
     , _beaStatus = Nothing
     , _beaBeaconName = Nothing
@@ -671,6 +691,7 @@ beacon =
     , _beaAdvertisedId = Nothing
     , _beaProperties = Nothing
     }
+
 
 -- | The location of the beacon, expressed as a latitude and longitude pair.
 -- This location is given when the beacon is registered or updated. It does
@@ -804,11 +825,14 @@ instance ToJSON Beacon where
 -- | Diagnostics for a single beacon.
 --
 -- /See:/ 'diagnostics' smart constructor.
-data Diagnostics = Diagnostics'
+data Diagnostics =
+  Diagnostics'
     { _dAlerts                  :: !(Maybe [Text])
     , _dBeaconName              :: !(Maybe Text)
     , _dEstimatedLowBatteryDate :: !(Maybe Date)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Diagnostics' with the minimum fields required to make a request.
 --
@@ -822,11 +846,12 @@ data Diagnostics = Diagnostics'
 diagnostics
     :: Diagnostics
 diagnostics =
-    Diagnostics'
+  Diagnostics'
     { _dAlerts = Nothing
     , _dBeaconName = Nothing
     , _dEstimatedLowBatteryDate = Nothing
     }
+
 
 -- | An unordered list of Alerts that the beacon has.
 dAlerts :: Lens' Diagnostics [Text]
@@ -869,9 +894,12 @@ instance ToJSON Diagnostics where
 -- attachments.
 --
 -- /See:/ 'listBeaconAttachmentsResponse' smart constructor.
-newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse'
+newtype ListBeaconAttachmentsResponse =
+  ListBeaconAttachmentsResponse'
     { _lbarAttachments :: Maybe [BeaconAttachment]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListBeaconAttachmentsResponse' with the minimum fields required to make a request.
 --
@@ -881,9 +909,8 @@ newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse'
 listBeaconAttachmentsResponse
     :: ListBeaconAttachmentsResponse
 listBeaconAttachmentsResponse =
-    ListBeaconAttachmentsResponse'
-    { _lbarAttachments = Nothing
-    }
+  ListBeaconAttachmentsResponse' {_lbarAttachments = Nothing}
+
 
 -- | The attachments that corresponded to the request params.
 lbarAttachments :: Lens' ListBeaconAttachmentsResponse [BeaconAttachment]
@@ -909,9 +936,12 @@ instance ToJSON ListBeaconAttachmentsResponse where
 -- useful to indicate which floor of a building a beacon is located on.
 --
 -- /See:/ 'indoorLevel' smart constructor.
-newtype IndoorLevel = IndoorLevel'
+newtype IndoorLevel =
+  IndoorLevel'
     { _ilName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndoorLevel' with the minimum fields required to make a request.
 --
@@ -920,10 +950,8 @@ newtype IndoorLevel = IndoorLevel'
 -- * 'ilName'
 indoorLevel
     :: IndoorLevel
-indoorLevel =
-    IndoorLevel'
-    { _ilName = Nothing
-    }
+indoorLevel = IndoorLevel' {_ilName = Nothing}
+
 
 -- | The name of this level.
 ilName :: Lens' IndoorLevel (Maybe Text)
@@ -945,11 +973,14 @@ instance ToJSON IndoorLevel where
 -- at GitHub.
 --
 -- /See:/ 'ephemeralIdRegistrationParams' smart constructor.
-data EphemeralIdRegistrationParams = EphemeralIdRegistrationParams'
+data EphemeralIdRegistrationParams =
+  EphemeralIdRegistrationParams'
     { _eirpMinRotationPeriodExponent :: !(Maybe (Textual Word32))
     , _eirpMaxRotationPeriodExponent :: !(Maybe (Textual Word32))
     , _eirpServiceEcdhPublicKey      :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EphemeralIdRegistrationParams' with the minimum fields required to make a request.
 --
@@ -963,11 +994,12 @@ data EphemeralIdRegistrationParams = EphemeralIdRegistrationParams'
 ephemeralIdRegistrationParams
     :: EphemeralIdRegistrationParams
 ephemeralIdRegistrationParams =
-    EphemeralIdRegistrationParams'
+  EphemeralIdRegistrationParams'
     { _eirpMinRotationPeriodExponent = Nothing
     , _eirpMaxRotationPeriodExponent = Nothing
     , _eirpServiceEcdhPublicKey = Nothing
     }
+
 
 -- | Indicates the minimum rotation period supported by the service. See
 -- EddystoneEidRegistration.rotation_period_exponent
@@ -1018,11 +1050,14 @@ instance ToJSON EphemeralIdRegistrationParams where
 -- app encounter your beacons.
 --
 -- /See:/ 'beaconInfo' smart constructor.
-data BeaconInfo = BeaconInfo'
+data BeaconInfo =
+  BeaconInfo'
     { _biAttachments  :: !(Maybe [AttachmentInfo])
     , _biBeaconName   :: !(Maybe Text)
     , _biAdvertisedId :: !(Maybe AdvertisedId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeaconInfo' with the minimum fields required to make a request.
 --
@@ -1036,11 +1071,12 @@ data BeaconInfo = BeaconInfo'
 beaconInfo
     :: BeaconInfo
 beaconInfo =
-    BeaconInfo'
+  BeaconInfo'
     { _biAttachments = Nothing
     , _biBeaconName = Nothing
     , _biAdvertisedId = Nothing
     }
+
 
 -- | Attachments matching the type(s) requested. May be empty if no
 -- attachment types were requested.
@@ -1082,11 +1118,14 @@ instance ToJSON BeaconInfo where
 -- | Represents one beacon observed once.
 --
 -- /See:/ 'observation' smart constructor.
-data Observation = Observation'
+data Observation =
+  Observation'
     { _oTelemetry    :: !(Maybe Bytes)
     , _oTimestampMs  :: !(Maybe DateTime')
     , _oAdvertisedId :: !(Maybe AdvertisedId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Observation' with the minimum fields required to make a request.
 --
@@ -1100,11 +1139,9 @@ data Observation = Observation'
 observation
     :: Observation
 observation =
-    Observation'
-    { _oTelemetry = Nothing
-    , _oTimestampMs = Nothing
-    , _oAdvertisedId = Nothing
-    }
+  Observation'
+    {_oTelemetry = Nothing, _oTimestampMs = Nothing, _oAdvertisedId = Nothing}
+
 
 -- | The array of telemetry bytes received from the beacon. The server is
 -- responsible for parsing it. This field may frequently be empty, as with
@@ -1148,13 +1185,16 @@ instance ToJSON Observation where
 -- | Project-specific data associated with a beacon.
 --
 -- /See:/ 'beaconAttachment' smart constructor.
-data BeaconAttachment = BeaconAttachment'
+data BeaconAttachment =
+  BeaconAttachment'
     { _baMaxDistanceMeters :: !(Maybe (Textual Double))
     , _baCreationTimeMs    :: !(Maybe DateTime')
     , _baData              :: !(Maybe Bytes)
     , _baAttachmentName    :: !(Maybe Text)
     , _baNamespacedType    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeaconAttachment' with the minimum fields required to make a request.
 --
@@ -1172,13 +1212,14 @@ data BeaconAttachment = BeaconAttachment'
 beaconAttachment
     :: BeaconAttachment
 beaconAttachment =
-    BeaconAttachment'
+  BeaconAttachment'
     { _baMaxDistanceMeters = Nothing
     , _baCreationTimeMs = Nothing
     , _baData = Nothing
     , _baAttachmentName = Nothing
     , _baNamespacedType = Nothing
     }
+
 
 -- | The distance away from the beacon at which this attachment should be
 -- delivered to a mobile app. Setting this to a value greater than zero
@@ -1256,10 +1297,13 @@ instance ToJSON BeaconAttachment where
 -- | Response that contains the requested diagnostics.
 --
 -- /See:/ 'listDiagnosticsResponse' smart constructor.
-data ListDiagnosticsResponse = ListDiagnosticsResponse'
+data ListDiagnosticsResponse =
+  ListDiagnosticsResponse'
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDiagnostics   :: !(Maybe [Diagnostics])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDiagnosticsResponse' with the minimum fields required to make a request.
 --
@@ -1271,10 +1315,9 @@ data ListDiagnosticsResponse = ListDiagnosticsResponse'
 listDiagnosticsResponse
     :: ListDiagnosticsResponse
 listDiagnosticsResponse =
-    ListDiagnosticsResponse'
-    { _ldrNextPageToken = Nothing
-    , _ldrDiagnostics = Nothing
-    }
+  ListDiagnosticsResponse'
+    {_ldrNextPageToken = Nothing, _ldrDiagnostics = Nothing}
+
 
 -- | Token that can be used for pagination. Returned only if the request
 -- matches more beacons than can be returned in this response.
@@ -1309,10 +1352,13 @@ instance ToJSON ListDiagnosticsResponse where
 -- | Defines a unique identifier of a beacon as broadcast by the device.
 --
 -- /See:/ 'advertisedId' smart constructor.
-data AdvertisedId = AdvertisedId'
+data AdvertisedId =
+  AdvertisedId'
     { _aiId   :: !(Maybe Bytes)
     , _aiType :: !(Maybe AdvertisedIdType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdvertisedId' with the minimum fields required to make a request.
 --
@@ -1323,11 +1369,8 @@ data AdvertisedId = AdvertisedId'
 -- * 'aiType'
 advertisedId
     :: AdvertisedId
-advertisedId =
-    AdvertisedId'
-    { _aiId = Nothing
-    , _aiType = Nothing
-    }
+advertisedId = AdvertisedId' {_aiId = Nothing, _aiType = Nothing}
+
 
 -- | The actual beacon identifier, as broadcast by the beacon hardware. Must
 -- be [base64](http:\/\/tools.ietf.org\/html\/rfc4648#section-4) encoded in
@@ -1357,11 +1400,14 @@ instance ToJSON AdvertisedId where
 -- | Response that contains list beacon results and pagination help.
 --
 -- /See:/ 'listBeaconsResponse' smart constructor.
-data ListBeaconsResponse = ListBeaconsResponse'
+data ListBeaconsResponse =
+  ListBeaconsResponse'
     { _lbrNextPageToken :: !(Maybe Text)
     , _lbrBeacons       :: !(Maybe [Beacon])
     , _lbrTotalCount    :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListBeaconsResponse' with the minimum fields required to make a request.
 --
@@ -1375,11 +1421,12 @@ data ListBeaconsResponse = ListBeaconsResponse'
 listBeaconsResponse
     :: ListBeaconsResponse
 listBeaconsResponse =
-    ListBeaconsResponse'
+  ListBeaconsResponse'
     { _lbrNextPageToken = Nothing
     , _lbrBeacons = Nothing
     , _lbrTotalCount = Nothing
     }
+
 
 -- | An opaque pagination token that the client may provide in their next
 -- request to retrieve the next page of results.
@@ -1424,9 +1471,12 @@ instance ToJSON ListBeaconsResponse where
 -- data.
 --
 -- /See:/ 'getInfoForObservedBeaconsResponse' smart constructor.
-newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse'
+newtype GetInfoForObservedBeaconsResponse =
+  GetInfoForObservedBeaconsResponse'
     { _gifobrBeacons :: Maybe [BeaconInfo]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetInfoForObservedBeaconsResponse' with the minimum fields required to make a request.
 --
@@ -1436,9 +1486,8 @@ newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse'
 getInfoForObservedBeaconsResponse
     :: GetInfoForObservedBeaconsResponse
 getInfoForObservedBeaconsResponse =
-    GetInfoForObservedBeaconsResponse'
-    { _gifobrBeacons = Nothing
-    }
+  GetInfoForObservedBeaconsResponse' {_gifobrBeacons = Nothing}
+
 
 -- | Public information about beacons. May be empty if the request matched no
 -- beacons.

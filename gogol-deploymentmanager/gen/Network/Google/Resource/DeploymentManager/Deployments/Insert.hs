@@ -63,12 +63,15 @@ type DeploymentsInsertResource =
 -- deployment manifest.
 --
 -- /See:/ 'deploymentsInsert' smart constructor.
-data DeploymentsInsert = DeploymentsInsert'
+data DeploymentsInsert =
+  DeploymentsInsert'
     { _diCreatePolicy :: !DeploymentsInsertCreatePolicy
     , _diProject      :: !Text
     , _diPayload      :: !Deployment
     , _diPreview      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentsInsert' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ deploymentsInsert
     -> Deployment -- ^ 'diPayload'
     -> DeploymentsInsert
 deploymentsInsert pDiProject_ pDiPayload_ =
-    DeploymentsInsert'
+  DeploymentsInsert'
     { _diCreatePolicy = DICPCreateOrAcquire
     , _diProject = pDiProject_
     , _diPayload = pDiPayload_
     , _diPreview = Nothing
     }
+
 
 -- | Sets the policy to use for creating new resources.
 diCreatePolicy :: Lens' DeploymentsInsert DeploymentsInsertCreatePolicy

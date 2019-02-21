@@ -63,14 +63,17 @@ type OperationsGetResource =
 -- API service.
 --
 -- /See:/ 'operationsGet' smart constructor.
-data OperationsGet = OperationsGet'
+data OperationsGet =
+  OperationsGet'
     { _ogXgafv          :: !(Maybe Xgafv)
     , _ogUploadProtocol :: !(Maybe Text)
     , _ogAccessToken    :: !(Maybe Text)
     , _ogUploadType     :: !(Maybe Text)
     , _ogName           :: !Text
     , _ogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ operationsGet
     :: Text -- ^ 'ogName'
     -> OperationsGet
 operationsGet pOgName_ =
-    OperationsGet'
+  OperationsGet'
     { _ogXgafv = Nothing
     , _ogUploadProtocol = Nothing
     , _ogAccessToken = Nothing
@@ -99,6 +102,7 @@ operationsGet pOgName_ =
     , _ogName = pOgName_
     , _ogCallback = Nothing
     }
+
 
 -- | V1 error format.
 ogXgafv :: Lens' OperationsGet (Maybe Xgafv)

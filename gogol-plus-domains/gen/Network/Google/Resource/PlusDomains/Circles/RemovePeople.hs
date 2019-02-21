@@ -56,11 +56,14 @@ type CirclesRemovePeopleResource =
 -- | Remove a person from a circle.
 --
 -- /See:/ 'circlesRemovePeople' smart constructor.
-data CirclesRemovePeople = CirclesRemovePeople'
+data CirclesRemovePeople =
+  CirclesRemovePeople'
     { _crpEmail    :: !(Maybe [Text])
     , _crpUserId   :: !(Maybe [Text])
     , _crpCircleId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CirclesRemovePeople' with the minimum fields required to make a request.
 --
@@ -75,11 +78,9 @@ circlesRemovePeople
     :: Text -- ^ 'crpCircleId'
     -> CirclesRemovePeople
 circlesRemovePeople pCrpCircleId_ =
-    CirclesRemovePeople'
-    { _crpEmail = Nothing
-    , _crpUserId = Nothing
-    , _crpCircleId = pCrpCircleId_
-    }
+  CirclesRemovePeople'
+    {_crpEmail = Nothing, _crpUserId = Nothing, _crpCircleId = pCrpCircleId_}
+
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
 crpEmail :: Lens' CirclesRemovePeople [Text]

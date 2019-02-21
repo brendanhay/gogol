@@ -61,13 +61,16 @@ type FirewallsListResource =
 -- | Retrieves the list of firewall rules available to the specified project.
 --
 -- /See:/ 'firewallsList' smart constructor.
-data FirewallsList = FirewallsList'
+data FirewallsList =
+  FirewallsList'
     { _flOrderBy    :: !(Maybe Text)
     , _flProject    :: !Text
     , _flFilter     :: !(Maybe Text)
     , _flPageToken  :: !(Maybe Text)
     , _flMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FirewallsList' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ firewallsList
     :: Text -- ^ 'flProject'
     -> FirewallsList
 firewallsList pFlProject_ =
-    FirewallsList'
+  FirewallsList'
     { _flOrderBy = Nothing
     , _flProject = pFlProject_
     , _flFilter = Nothing
     , _flPageToken = Nothing
     , _flMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

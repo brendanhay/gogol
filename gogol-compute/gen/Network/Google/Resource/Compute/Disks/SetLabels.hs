@@ -65,13 +65,16 @@ type DisksSetLabelsResource =
 -- Resources documentation.
 --
 -- /See:/ 'disksSetLabels' smart constructor.
-data DisksSetLabels = DisksSetLabels'
+data DisksSetLabels =
+  DisksSetLabels'
     { _dslRequestId :: !(Maybe Text)
     , _dslProject   :: !Text
     , _dslZone      :: !Text
     , _dslPayload   :: !ZoneSetLabelsRequest
     , _dslResource  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisksSetLabels' with the minimum fields required to make a request.
 --
@@ -93,13 +96,14 @@ disksSetLabels
     -> Text -- ^ 'dslResource'
     -> DisksSetLabels
 disksSetLabels pDslProject_ pDslZone_ pDslPayload_ pDslResource_ =
-    DisksSetLabels'
+  DisksSetLabels'
     { _dslRequestId = Nothing
     , _dslProject = pDslProject_
     , _dslZone = pDslZone_
     , _dslPayload = pDslPayload_
     , _dslResource = pDslResource_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

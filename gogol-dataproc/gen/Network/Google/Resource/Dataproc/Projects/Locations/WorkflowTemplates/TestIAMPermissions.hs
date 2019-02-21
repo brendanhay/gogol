@@ -73,7 +73,8 @@ type ProjectsLocationsWorkflowTemplatesTestIAMPermissionsResource
 -- warning.
 --
 -- /See:/ 'projectsLocationsWorkflowTemplatesTestIAMPermissions' smart constructor.
-data ProjectsLocationsWorkflowTemplatesTestIAMPermissions = ProjectsLocationsWorkflowTemplatesTestIAMPermissions'
+data ProjectsLocationsWorkflowTemplatesTestIAMPermissions =
+  ProjectsLocationsWorkflowTemplatesTestIAMPermissions'
     { _plwttipXgafv          :: !(Maybe Xgafv)
     , _plwttipUploadProtocol :: !(Maybe Text)
     , _plwttipAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsLocationsWorkflowTemplatesTestIAMPermissions = ProjectsLocationsWor
     , _plwttipPayload        :: !TestIAMPermissionsRequest
     , _plwttipResource       :: !Text
     , _plwttipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsLocationsWorkflowTemplatesTestIAMPermissions
     -> Text -- ^ 'plwttipResource'
     -> ProjectsLocationsWorkflowTemplatesTestIAMPermissions
 projectsLocationsWorkflowTemplatesTestIAMPermissions pPlwttipPayload_ pPlwttipResource_ =
-    ProjectsLocationsWorkflowTemplatesTestIAMPermissions'
+  ProjectsLocationsWorkflowTemplatesTestIAMPermissions'
     { _plwttipXgafv = Nothing
     , _plwttipUploadProtocol = Nothing
     , _plwttipAccessToken = Nothing
@@ -114,6 +117,7 @@ projectsLocationsWorkflowTemplatesTestIAMPermissions pPlwttipPayload_ pPlwttipRe
     , _plwttipResource = pPlwttipResource_
     , _plwttipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plwttipXgafv :: Lens' ProjectsLocationsWorkflowTemplatesTestIAMPermissions (Maybe Xgafv)
@@ -159,7 +163,7 @@ plwttipCallback
       (\ s a -> s{_plwttipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkflowTemplatesTestIAMPermissions
+           ProjectsLocationsWorkflowTemplatesTestIAMPermissions
          where
         type Rs
                ProjectsLocationsWorkflowTemplatesTestIAMPermissions

@@ -70,7 +70,8 @@ type ProjectsZonesClustersLoggingResource =
 -- | Sets the logging service for a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersLogging' smart constructor.
-data ProjectsZonesClustersLogging = ProjectsZonesClustersLogging'
+data ProjectsZonesClustersLogging =
+  ProjectsZonesClustersLogging'
     { _pzclXgafv          :: !(Maybe Xgafv)
     , _pzclUploadProtocol :: !(Maybe Text)
     , _pzclAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsZonesClustersLogging = ProjectsZonesClustersLogging'
     , _pzclClusterId      :: !Text
     , _pzclProjectId      :: !Text
     , _pzclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersLogging' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsZonesClustersLogging
     -> Text -- ^ 'pzclProjectId'
     -> ProjectsZonesClustersLogging
 projectsZonesClustersLogging pPzclZone_ pPzclPayload_ pPzclClusterId_ pPzclProjectId_ =
-    ProjectsZonesClustersLogging'
+  ProjectsZonesClustersLogging'
     { _pzclXgafv = Nothing
     , _pzclUploadProtocol = Nothing
     , _pzclAccessToken = Nothing
@@ -121,6 +124,7 @@ projectsZonesClustersLogging pPzclZone_ pPzclPayload_ pPzclClusterId_ pPzclProje
     , _pzclProjectId = pPzclProjectId_
     , _pzclCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzclXgafv :: Lens' ProjectsZonesClustersLogging (Maybe Xgafv)

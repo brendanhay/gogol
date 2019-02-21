@@ -23,13 +23,16 @@ import           Network.Google.Prelude
 -- | The JSON template for an Application resource.
 --
 -- /See:/ 'application' smart constructor.
-data Application = Application'
+data Application =
+  Application'
     { _aTransferParams :: !(Maybe [ApplicationTransferParam])
     , _aEtag           :: !(Maybe Text)
     , _aKind           :: !Text
     , _aName           :: !(Maybe Text)
     , _aId             :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -47,13 +50,14 @@ data Application = Application'
 application
     :: Application
 application =
-    Application'
+  Application'
     { _aTransferParams = Nothing
     , _aEtag = Nothing
     , _aKind = "admin#datatransfer#ApplicationResource"
     , _aName = Nothing
     , _aId = Nothing
     }
+
 
 -- | The list of all possible transfer parameters for this application. These
 -- parameters can be used to select the data of the user in this
@@ -106,10 +110,13 @@ instance ToJSON Application where
 -- | Template for application transfer parameters.
 --
 -- /See:/ 'applicationTransferParam' smart constructor.
-data ApplicationTransferParam = ApplicationTransferParam'
+data ApplicationTransferParam =
+  ApplicationTransferParam'
     { _atpValue :: !(Maybe [Text])
     , _atpKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationTransferParam' with the minimum fields required to make a request.
 --
@@ -121,10 +128,8 @@ data ApplicationTransferParam = ApplicationTransferParam'
 applicationTransferParam
     :: ApplicationTransferParam
 applicationTransferParam =
-    ApplicationTransferParam'
-    { _atpValue = Nothing
-    , _atpKey = Nothing
-    }
+  ApplicationTransferParam' {_atpValue = Nothing, _atpKey = Nothing}
+
 
 -- | The value of the coressponding transfer parameter. eg: \'PRIVATE\' or
 -- \'SHARED\'
@@ -154,12 +159,15 @@ instance ToJSON ApplicationTransferParam where
 -- | Template for a collection of Applications.
 --
 -- /See:/ 'applicationsListResponse' smart constructor.
-data ApplicationsListResponse = ApplicationsListResponse'
+data ApplicationsListResponse =
+  ApplicationsListResponse'
     { _alrEtag          :: !(Maybe Text)
     , _alrNextPageToken :: !(Maybe Text)
     , _alrKind          :: !Text
     , _alrApplications  :: !(Maybe [Application])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationsListResponse' with the minimum fields required to make a request.
 --
@@ -175,12 +183,13 @@ data ApplicationsListResponse = ApplicationsListResponse'
 applicationsListResponse
     :: ApplicationsListResponse
 applicationsListResponse =
-    ApplicationsListResponse'
+  ApplicationsListResponse'
     { _alrEtag = Nothing
     , _alrNextPageToken = Nothing
     , _alrKind = "admin#datatransfer#applicationsList"
     , _alrApplications = Nothing
     }
+
 
 -- | ETag of the resource.
 alrEtag :: Lens' ApplicationsListResponse (Maybe Text)
@@ -227,7 +236,8 @@ instance ToJSON ApplicationsListResponse where
 -- | The JSON template for a DataTransfer resource.
 --
 -- /See:/ 'dataTransfer' smart constructor.
-data DataTransfer = DataTransfer'
+data DataTransfer =
+  DataTransfer'
     { _dtEtag                      :: !(Maybe Text)
     , _dtOldOwnerUserId            :: !(Maybe Text)
     , _dtKind                      :: !Text
@@ -236,7 +246,9 @@ data DataTransfer = DataTransfer'
     , _dtApplicationDataTransfers  :: !(Maybe [ApplicationDataTransfer])
     , _dtId                        :: !(Maybe Text)
     , _dtOverallTransferStatusCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataTransfer' with the minimum fields required to make a request.
 --
@@ -260,7 +272,7 @@ data DataTransfer = DataTransfer'
 dataTransfer
     :: DataTransfer
 dataTransfer =
-    DataTransfer'
+  DataTransfer'
     { _dtEtag = Nothing
     , _dtOldOwnerUserId = Nothing
     , _dtKind = "admin#datatransfer#DataTransfer"
@@ -270,6 +282,7 @@ dataTransfer =
     , _dtId = Nothing
     , _dtOverallTransferStatusCode = Nothing
     }
+
 
 -- | ETag of the resource.
 dtEtag :: Lens' DataTransfer (Maybe Text)
@@ -351,12 +364,15 @@ instance ToJSON DataTransfer where
 -- | Template for a collection of DataTransfer resources.
 --
 -- /See:/ 'dataTransfersListResponse' smart constructor.
-data DataTransfersListResponse = DataTransfersListResponse'
+data DataTransfersListResponse =
+  DataTransfersListResponse'
     { _dtlrEtag          :: !(Maybe Text)
     , _dtlrNextPageToken :: !(Maybe Text)
     , _dtlrKind          :: !Text
     , _dtlrDataTransfers :: !(Maybe [DataTransfer])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataTransfersListResponse' with the minimum fields required to make a request.
 --
@@ -372,12 +388,13 @@ data DataTransfersListResponse = DataTransfersListResponse'
 dataTransfersListResponse
     :: DataTransfersListResponse
 dataTransfersListResponse =
-    DataTransfersListResponse'
+  DataTransfersListResponse'
     { _dtlrEtag = Nothing
     , _dtlrNextPageToken = Nothing
     , _dtlrKind = "admin#datatransfer#dataTransfersList"
     , _dtlrDataTransfers = Nothing
     }
+
 
 -- | ETag of the resource.
 dtlrEtag :: Lens' DataTransfersListResponse (Maybe Text)
@@ -423,11 +440,14 @@ instance ToJSON DataTransfersListResponse where
 -- | Template to map fields of ApplicationDataTransfer resource.
 --
 -- /See:/ 'applicationDataTransfer' smart constructor.
-data ApplicationDataTransfer = ApplicationDataTransfer'
+data ApplicationDataTransfer =
+  ApplicationDataTransfer'
     { _adtApplicationTransferParams :: !(Maybe [ApplicationTransferParam])
     , _adtApplicationId             :: !(Maybe (Textual Int64))
     , _adtApplicationTransferStatus :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationDataTransfer' with the minimum fields required to make a request.
 --
@@ -441,11 +461,12 @@ data ApplicationDataTransfer = ApplicationDataTransfer'
 applicationDataTransfer
     :: ApplicationDataTransfer
 applicationDataTransfer =
-    ApplicationDataTransfer'
+  ApplicationDataTransfer'
     { _adtApplicationTransferParams = Nothing
     , _adtApplicationId = Nothing
     , _adtApplicationTransferStatus = Nothing
     }
+
 
 -- | The transfer parameters for the application. These parameters are used
 -- to select the data which will get transfered in context of this

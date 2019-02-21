@@ -56,10 +56,13 @@ type EditsTracksListResource =
 -- | Lists all the track configurations for this edit.
 --
 -- /See:/ 'editsTracksList' smart constructor.
-data EditsTracksList = EditsTracksList'
+data EditsTracksList =
+  EditsTracksList'
     { _etlPackageName :: !Text
     , _etlEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsTracksList' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ editsTracksList
     -> Text -- ^ 'etlEditId'
     -> EditsTracksList
 editsTracksList pEtlPackageName_ pEtlEditId_ =
-    EditsTracksList'
-    { _etlPackageName = pEtlPackageName_
-    , _etlEditId = pEtlEditId_
-    }
+  EditsTracksList'
+    {_etlPackageName = pEtlPackageName_, _etlEditId = pEtlEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

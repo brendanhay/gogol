@@ -59,10 +59,13 @@ type PlayersUnhideResource =
 -- developer console.
 --
 -- /See:/ 'playersUnhide' smart constructor.
-data PlayersUnhide = PlayersUnhide'
+data PlayersUnhide =
+  PlayersUnhide'
     { _puApplicationId :: !Text
     , _puPlayerId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayersUnhide' with the minimum fields required to make a request.
 --
@@ -76,10 +79,9 @@ playersUnhide
     -> Text -- ^ 'puPlayerId'
     -> PlayersUnhide
 playersUnhide pPuApplicationId_ pPuPlayerId_ =
-    PlayersUnhide'
-    { _puApplicationId = pPuApplicationId_
-    , _puPlayerId = pPuPlayerId_
-    }
+  PlayersUnhide'
+    {_puApplicationId = pPuApplicationId_, _puPlayerId = pPuPlayerId_}
+
 
 -- | The application ID from the Google Play developer console.
 puApplicationId :: Lens' PlayersUnhide Text

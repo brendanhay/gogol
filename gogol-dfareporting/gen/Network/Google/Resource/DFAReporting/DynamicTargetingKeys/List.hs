@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'DynamicTargetingKeysList' request conforms to.
 type DynamicTargetingKeysListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dynamicTargetingKeys" :>
@@ -63,13 +63,16 @@ type DynamicTargetingKeysListResource =
 -- | Retrieves a list of dynamic targeting keys.
 --
 -- /See:/ 'dynamicTargetingKeysList' smart constructor.
-data DynamicTargetingKeysList = DynamicTargetingKeysList'
+data DynamicTargetingKeysList =
+  DynamicTargetingKeysList'
     { _dtklObjectType   :: !(Maybe DynamicTargetingKeysListObjectType)
     , _dtklAdvertiserId :: !(Maybe (Textual Int64))
     , _dtklObjectId     :: !(Maybe (Textual Int64))
     , _dtklProFileId    :: !(Textual Int64)
     , _dtklNames        :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DynamicTargetingKeysList' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ dynamicTargetingKeysList
     :: Int64 -- ^ 'dtklProFileId'
     -> DynamicTargetingKeysList
 dynamicTargetingKeysList pDtklProFileId_ =
-    DynamicTargetingKeysList'
+  DynamicTargetingKeysList'
     { _dtklObjectType = Nothing
     , _dtklAdvertiserId = Nothing
     , _dtklObjectId = Nothing
     , _dtklProFileId = _Coerce # pDtklProFileId_
     , _dtklNames = Nothing
     }
+
 
 -- | Select only dynamic targeting keys with this object type.
 dtklObjectType :: Lens' DynamicTargetingKeysList (Maybe DynamicTargetingKeysListObjectType)

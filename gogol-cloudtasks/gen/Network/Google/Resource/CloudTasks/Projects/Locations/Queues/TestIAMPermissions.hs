@@ -71,7 +71,8 @@ type ProjectsLocationsQueuesTestIAMPermissionsResource
 -- checking. This operation may \"fail open\" without warning.
 --
 -- /See:/ 'projectsLocationsQueuesTestIAMPermissions' smart constructor.
-data ProjectsLocationsQueuesTestIAMPermissions = ProjectsLocationsQueuesTestIAMPermissions'
+data ProjectsLocationsQueuesTestIAMPermissions =
+  ProjectsLocationsQueuesTestIAMPermissions'
     { _plqtipXgafv          :: !(Maybe Xgafv)
     , _plqtipUploadProtocol :: !(Maybe Text)
     , _plqtipAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsLocationsQueuesTestIAMPermissions = ProjectsLocationsQueuesTestIAMP
     , _plqtipPayload        :: !TestIAMPermissionsRequest
     , _plqtipResource       :: !Text
     , _plqtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsQueuesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsLocationsQueuesTestIAMPermissions
     -> Text -- ^ 'plqtipResource'
     -> ProjectsLocationsQueuesTestIAMPermissions
 projectsLocationsQueuesTestIAMPermissions pPlqtipPayload_ pPlqtipResource_ =
-    ProjectsLocationsQueuesTestIAMPermissions'
+  ProjectsLocationsQueuesTestIAMPermissions'
     { _plqtipXgafv = Nothing
     , _plqtipUploadProtocol = Nothing
     , _plqtipAccessToken = Nothing
@@ -112,6 +115,7 @@ projectsLocationsQueuesTestIAMPermissions pPlqtipPayload_ pPlqtipResource_ =
     , _plqtipResource = pPlqtipResource_
     , _plqtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqtipXgafv :: Lens' ProjectsLocationsQueuesTestIAMPermissions (Maybe Xgafv)
@@ -157,7 +161,8 @@ plqtipCallback
       (\ s a -> s{_plqtipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsQueuesTestIAMPermissions where
+           ProjectsLocationsQueuesTestIAMPermissions
+         where
         type Rs ProjectsLocationsQueuesTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsLocationsQueuesTestIAMPermissions

@@ -51,9 +51,12 @@ type QueriesCreateQueryResource =
 -- | Creates a query.
 --
 -- /See:/ 'queriesCreateQuery' smart constructor.
-newtype QueriesCreateQuery = QueriesCreateQuery'
+newtype QueriesCreateQuery =
+  QueriesCreateQuery'
     { _qcqPayload :: Query
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueriesCreateQuery' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ queriesCreateQuery
     :: Query -- ^ 'qcqPayload'
     -> QueriesCreateQuery
 queriesCreateQuery pQcqPayload_ =
-    QueriesCreateQuery'
-    { _qcqPayload = pQcqPayload_
-    }
+  QueriesCreateQuery' {_qcqPayload = pQcqPayload_}
+
 
 -- | Multipart request metadata.
 qcqPayload :: Lens' QueriesCreateQuery Query

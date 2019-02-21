@@ -55,10 +55,13 @@ type TrainedModelsAnalyzeResource =
 -- | Get analysis of the model and the data the model was trained on.
 --
 -- /See:/ 'trainedModelsAnalyze' smart constructor.
-data TrainedModelsAnalyze = TrainedModelsAnalyze'
+data TrainedModelsAnalyze =
+  TrainedModelsAnalyze'
     { _tmaProject :: !Text
     , _tmaId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TrainedModelsAnalyze' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ trainedModelsAnalyze
     -> Text -- ^ 'tmaId'
     -> TrainedModelsAnalyze
 trainedModelsAnalyze pTmaProject_ pTmaId_ =
-    TrainedModelsAnalyze'
-    { _tmaProject = pTmaProject_
-    , _tmaId = pTmaId_
-    }
+  TrainedModelsAnalyze' {_tmaProject = pTmaProject_, _tmaId = pTmaId_}
+
 
 -- | The project associated with the model.
 tmaProject :: Lens' TrainedModelsAnalyze Text

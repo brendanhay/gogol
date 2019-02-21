@@ -63,12 +63,15 @@ type TasksMoveResource =
 -- a different position among its sibling tasks.
 --
 -- /See:/ 'tasksMove' smart constructor.
-data TasksMove = TasksMove'
+data TasksMove =
+  TasksMove'
     { _tmParent   :: !(Maybe Text)
     , _tmTaskList :: !Text
     , _tmTask     :: !Text
     , _tmPrevious :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TasksMove' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ tasksMove
     -> Text -- ^ 'tmTask'
     -> TasksMove
 tasksMove pTmTaskList_ pTmTask_ =
-    TasksMove'
+  TasksMove'
     { _tmParent = Nothing
     , _tmTaskList = pTmTaskList_
     , _tmTask = pTmTask_
     , _tmPrevious = Nothing
     }
+
 
 -- | New parent task identifier. If the task is moved to the top level, this
 -- parameter is omitted. Optional.

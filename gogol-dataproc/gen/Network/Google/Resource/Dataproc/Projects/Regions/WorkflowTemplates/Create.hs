@@ -63,7 +63,8 @@ type ProjectsRegionsWorkflowTemplatesCreateResource =
 -- | Creates new workflow template.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesCreate' smart constructor.
-data ProjectsRegionsWorkflowTemplatesCreate = ProjectsRegionsWorkflowTemplatesCreate'
+data ProjectsRegionsWorkflowTemplatesCreate =
+  ProjectsRegionsWorkflowTemplatesCreate'
     { _prwtcParent         :: !Text
     , _prwtcXgafv          :: !(Maybe Xgafv)
     , _prwtcUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsRegionsWorkflowTemplatesCreate = ProjectsRegionsWorkflowTemplatesCr
     , _prwtcUploadType     :: !(Maybe Text)
     , _prwtcPayload        :: !WorkflowTemplate
     , _prwtcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsRegionsWorkflowTemplatesCreate
     -> WorkflowTemplate -- ^ 'prwtcPayload'
     -> ProjectsRegionsWorkflowTemplatesCreate
 projectsRegionsWorkflowTemplatesCreate pPrwtcParent_ pPrwtcPayload_ =
-    ProjectsRegionsWorkflowTemplatesCreate'
+  ProjectsRegionsWorkflowTemplatesCreate'
     { _prwtcParent = pPrwtcParent_
     , _prwtcXgafv = Nothing
     , _prwtcUploadProtocol = Nothing
@@ -104,6 +107,7 @@ projectsRegionsWorkflowTemplatesCreate pPrwtcParent_ pPrwtcPayload_ =
     , _prwtcPayload = pPrwtcPayload_
     , _prwtcCallback = Nothing
     }
+
 
 -- | Required. The \"resource name\" of the region, as described in
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names of the form
@@ -147,7 +151,8 @@ prwtcCallback
       (\ s a -> s{_prwtcCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsWorkflowTemplatesCreate where
+           ProjectsRegionsWorkflowTemplatesCreate
+         where
         type Rs ProjectsRegionsWorkflowTemplatesCreate =
              WorkflowTemplate
         type Scopes ProjectsRegionsWorkflowTemplatesCreate =

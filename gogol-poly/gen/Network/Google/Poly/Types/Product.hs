@@ -23,14 +23,17 @@ import           Network.Google.Prelude
 -- | Details of an error resulting from parsing an OBJ file
 --
 -- /See:/ 'objParseError' smart constructor.
-data ObjParseError = ObjParseError'
+data ObjParseError =
+  ObjParseError'
     { _opeLineNumber :: !(Maybe (Textual Int32))
     , _opeFilePath   :: !(Maybe Text)
     , _opeLine       :: !(Maybe Text)
     , _opeEndIndex   :: !(Maybe (Textual Int32))
     , _opeCode       :: !(Maybe ObjParseErrorCode)
     , _opeStartIndex :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjParseError' with the minimum fields required to make a request.
 --
@@ -50,7 +53,7 @@ data ObjParseError = ObjParseError'
 objParseError
     :: ObjParseError
 objParseError =
-    ObjParseError'
+  ObjParseError'
     { _opeLineNumber = Nothing
     , _opeFilePath = Nothing
     , _opeLine = Nothing
@@ -58,6 +61,7 @@ objParseError =
     , _opeCode = Nothing
     , _opeStartIndex = Nothing
     }
+
 
 -- | Line number at which the problem was found.
 opeLineNumber :: Lens' ObjParseError (Maybe Int32)
@@ -120,11 +124,14 @@ instance ToJSON ObjParseError where
 -- asset was uploaded.
 --
 -- /See:/ 'presentationParams' smart constructor.
-data PresentationParams = PresentationParams'
+data PresentationParams =
+  PresentationParams'
     { _ppBackgRoundColor   :: !(Maybe Text)
     , _ppOrientingRotation :: !(Maybe Quaternion)
     , _ppColorSpace        :: !(Maybe PresentationParamsColorSpace)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PresentationParams' with the minimum fields required to make a request.
 --
@@ -138,11 +145,12 @@ data PresentationParams = PresentationParams'
 presentationParams
     :: PresentationParams
 presentationParams =
-    PresentationParams'
+  PresentationParams'
     { _ppBackgRoundColor = Nothing
     , _ppOrientingRotation = Nothing
     , _ppColorSpace = Nothing
     }
+
 
 -- | A background color which could be used for displaying the 3D asset in a
 -- \'thumbnail\' or \'palette\' style view. Authors have the option to set
@@ -198,11 +206,14 @@ instance ToJSON PresentationParams where
 -- | A response message from a request to list.
 --
 -- /See:/ 'listLikedAssetsResponse' smart constructor.
-data ListLikedAssetsResponse = ListLikedAssetsResponse'
+data ListLikedAssetsResponse =
+  ListLikedAssetsResponse'
     { _llarNextPageToken :: !(Maybe Text)
     , _llarTotalSize     :: !(Maybe (Textual Int32))
     , _llarAssets        :: !(Maybe [Asset])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLikedAssetsResponse' with the minimum fields required to make a request.
 --
@@ -216,11 +227,12 @@ data ListLikedAssetsResponse = ListLikedAssetsResponse'
 listLikedAssetsResponse
     :: ListLikedAssetsResponse
 listLikedAssetsResponse =
-    ListLikedAssetsResponse'
+  ListLikedAssetsResponse'
     { _llarNextPageToken = Nothing
     , _llarTotalSize = Nothing
     , _llarAssets = Nothing
     }
+
 
 -- | The continuation token for retrieving the next page. If empty, indicates
 -- that there are no more pages. To get the next page, submit the same
@@ -264,9 +276,12 @@ instance ToJSON ListLikedAssetsResponse where
 -- create this asset).
 --
 -- /See:/ 'remixInfo' smart constructor.
-newtype RemixInfo = RemixInfo'
+newtype RemixInfo =
+  RemixInfo'
     { _riSourceAsset :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemixInfo' with the minimum fields required to make a request.
 --
@@ -275,10 +290,8 @@ newtype RemixInfo = RemixInfo'
 -- * 'riSourceAsset'
 remixInfo
     :: RemixInfo
-remixInfo =
-    RemixInfo'
-    { _riSourceAsset = Nothing
-    }
+remixInfo = RemixInfo' {_riSourceAsset = Nothing}
+
 
 -- | Resource ids for the sources of this remix, of the form:
 -- \`assets\/{ASSET_ID}\`
@@ -305,12 +318,15 @@ instance ToJSON RemixInfo where
 -- value of [0, 0, 0, 1] where x,y, and z are 0.
 --
 -- /See:/ 'quaternion' smart constructor.
-data Quaternion = Quaternion'
+data Quaternion =
+  Quaternion'
     { _qW :: !(Maybe (Textual Double))
     , _qZ :: !(Maybe (Textual Double))
     , _qX :: !(Maybe (Textual Double))
     , _qY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Quaternion' with the minimum fields required to make a request.
 --
@@ -326,12 +342,8 @@ data Quaternion = Quaternion'
 quaternion
     :: Quaternion
 quaternion =
-    Quaternion'
-    { _qW = Nothing
-    , _qZ = Nothing
-    , _qX = Nothing
-    , _qY = Nothing
-    }
+  Quaternion' {_qW = Nothing, _qZ = Nothing, _qX = Nothing, _qY = Nothing}
+
 
 -- | The scalar component.
 qW :: Lens' Quaternion (Maybe Double)
@@ -370,7 +382,8 @@ instance ToJSON Quaternion where
 -- file that can be upload to Poly.
 --
 -- /See:/ 'asset' smart constructor.
-data Asset = Asset'
+data Asset =
+  Asset'
     { _aThumbnail          :: !(Maybe File)
     , _aPresentationParams :: !(Maybe PresentationParams)
     , _aIsCurated          :: !(Maybe Bool)
@@ -385,7 +398,9 @@ data Asset = Asset'
     , _aLicense            :: !(Maybe AssetLicense)
     , _aDescription        :: !(Maybe Text)
     , _aCreateTime         :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Asset' with the minimum fields required to make a request.
 --
@@ -421,7 +436,7 @@ data Asset = Asset'
 asset
     :: Asset
 asset =
-    Asset'
+  Asset'
     { _aThumbnail = Nothing
     , _aPresentationParams = Nothing
     , _aIsCurated = Nothing
@@ -437,6 +452,7 @@ asset =
     , _aDescription = Nothing
     , _aCreateTime = Nothing
     }
+
 
 -- | The thumbnail image for the asset.
 aThumbnail :: Lens' Asset (Maybe File)
@@ -570,12 +586,15 @@ instance ToJSON Asset where
 -- representation.
 --
 -- /See:/ 'format' smart constructor.
-data Format = Format'
+data Format =
+  Format'
     { _fRoot             :: !(Maybe File)
     , _fResources        :: !(Maybe [File])
     , _fFormatComplexity :: !(Maybe FormatComplexity)
     , _fFormatType       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Format' with the minimum fields required to make a request.
 --
@@ -591,12 +610,13 @@ data Format = Format'
 format
     :: Format
 format =
-    Format'
+  Format'
     { _fRoot = Nothing
     , _fResources = Nothing
     , _fFormatComplexity = Nothing
     , _fFormatType = Nothing
     }
+
 
 -- | The root of the file hierarchy. This will always be populated. For some
 -- format_types - such as \`TILT\`, which are self-contained - this is all
@@ -647,12 +667,15 @@ instance ToJSON Format where
 -- | A message generated by the asset import process.
 --
 -- /See:/ 'assetImportMessage' smart constructor.
-data AssetImportMessage = AssetImportMessage'
+data AssetImportMessage =
+  AssetImportMessage'
     { _aimObjParseError :: !(Maybe ObjParseError)
     , _aimFilePath      :: !(Maybe Text)
     , _aimImageError    :: !(Maybe ImageError)
     , _aimCode          :: !(Maybe AssetImportMessageCode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AssetImportMessage' with the minimum fields required to make a request.
 --
@@ -668,12 +691,13 @@ data AssetImportMessage = AssetImportMessage'
 assetImportMessage
     :: AssetImportMessage
 assetImportMessage =
-    AssetImportMessage'
+  AssetImportMessage'
     { _aimObjParseError = Nothing
     , _aimFilePath = Nothing
     , _aimImageError = Nothing
     , _aimCode = Nothing
     }
+
 
 -- | An optional OBJ parse error. Only present for OBJ_PARSE_ERROR.
 aimObjParseError :: Lens' AssetImportMessage (Maybe ObjParseError)
@@ -719,12 +743,15 @@ instance ToJSON AssetImportMessage where
 -- the response field of the Operation.
 --
 -- /See:/ 'startAssetImportResponse' smart constructor.
-data StartAssetImportResponse = StartAssetImportResponse'
+data StartAssetImportResponse =
+  StartAssetImportResponse'
     { _sairPublishURL          :: !(Maybe Text)
     , _sairAssetImportMessages :: !(Maybe [AssetImportMessage])
     , _sairAssetImportId       :: !(Maybe Text)
     , _sairAssetId             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StartAssetImportResponse' with the minimum fields required to make a request.
 --
@@ -740,12 +767,13 @@ data StartAssetImportResponse = StartAssetImportResponse'
 startAssetImportResponse
     :: StartAssetImportResponse
 startAssetImportResponse =
-    StartAssetImportResponse'
+  StartAssetImportResponse'
     { _sairPublishURL = Nothing
     , _sairAssetImportMessages = Nothing
     , _sairAssetImportId = Nothing
     , _sairAssetId = Nothing
     }
+
 
 -- | The publish URL for the asset.
 sairPublishURL :: Lens' StartAssetImportResponse (Maybe Text)
@@ -798,10 +826,13 @@ instance ToJSON StartAssetImportResponse where
 -- | A message resulting from reading an image file.
 --
 -- /See:/ 'imageError' smart constructor.
-data ImageError = ImageError'
+data ImageError =
+  ImageError'
     { _ieFilePath :: !(Maybe Text)
     , _ieCode     :: !(Maybe ImageErrorCode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImageError' with the minimum fields required to make a request.
 --
@@ -812,11 +843,8 @@ data ImageError = ImageError'
 -- * 'ieCode'
 imageError
     :: ImageError
-imageError =
-    ImageError'
-    { _ieFilePath = Nothing
-    , _ieCode = Nothing
-    }
+imageError = ImageError' {_ieFilePath = Nothing, _ieCode = Nothing}
+
 
 -- | The file path in the import of the image that was rejected.
 ieFilePath :: Lens' ImageError (Maybe Text)
@@ -844,10 +872,13 @@ instance ToJSON ImageError where
 -- | Information on the complexity of this Format.
 --
 -- /See:/ 'formatComplexity' smart constructor.
-data FormatComplexity = FormatComplexity'
+data FormatComplexity =
+  FormatComplexity'
     { _fcTriangleCount :: !(Maybe (Textual Int64))
     , _fcLodHint       :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FormatComplexity' with the minimum fields required to make a request.
 --
@@ -859,10 +890,8 @@ data FormatComplexity = FormatComplexity'
 formatComplexity
     :: FormatComplexity
 formatComplexity =
-    FormatComplexity'
-    { _fcTriangleCount = Nothing
-    , _fcLodHint = Nothing
-    }
+  FormatComplexity' {_fcTriangleCount = Nothing, _fcLodHint = Nothing}
+
 
 -- | The estimated number of triangles.
 fcTriangleCount :: Lens' FormatComplexity (Maybe Int64)
@@ -897,11 +926,14 @@ instance ToJSON FormatComplexity where
 -- | A response message from a request to list.
 --
 -- /See:/ 'listAssetsResponse' smart constructor.
-data ListAssetsResponse = ListAssetsResponse'
+data ListAssetsResponse =
+  ListAssetsResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larTotalSize     :: !(Maybe (Textual Int32))
     , _larAssets        :: !(Maybe [Asset])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAssetsResponse' with the minimum fields required to make a request.
 --
@@ -915,11 +947,9 @@ data ListAssetsResponse = ListAssetsResponse'
 listAssetsResponse
     :: ListAssetsResponse
 listAssetsResponse =
-    ListAssetsResponse'
-    { _larNextPageToken = Nothing
-    , _larTotalSize = Nothing
-    , _larAssets = Nothing
-    }
+  ListAssetsResponse'
+    {_larNextPageToken = Nothing, _larTotalSize = Nothing, _larAssets = Nothing}
+
 
 -- | The continuation token for retrieving the next page. If empty, indicates
 -- that there are no more pages. To get the next page, submit the same
@@ -961,11 +991,14 @@ instance ToJSON ListAssetsResponse where
 -- | A response message from a request to list.
 --
 -- /See:/ 'listUserAssetsResponse' smart constructor.
-data ListUserAssetsResponse = ListUserAssetsResponse'
+data ListUserAssetsResponse =
+  ListUserAssetsResponse'
     { _luarNextPageToken :: !(Maybe Text)
     , _luarTotalSize     :: !(Maybe (Textual Int32))
     , _luarUserAssets    :: !(Maybe [UserAsset])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListUserAssetsResponse' with the minimum fields required to make a request.
 --
@@ -979,11 +1012,12 @@ data ListUserAssetsResponse = ListUserAssetsResponse'
 listUserAssetsResponse
     :: ListUserAssetsResponse
 listUserAssetsResponse =
-    ListUserAssetsResponse'
+  ListUserAssetsResponse'
     { _luarNextPageToken = Nothing
     , _luarTotalSize = Nothing
     , _luarUserAssets = Nothing
     }
+
 
 -- | The continuation token for retrieving the next page. If empty, indicates
 -- that there are no more pages. To get the next page, submit the same
@@ -1028,11 +1062,14 @@ instance ToJSON ListUserAssetsResponse where
 -- file.
 --
 -- /See:/ 'file' smart constructor.
-data File = File'
+data File =
+  File'
     { _fURL          :: !(Maybe Text)
     , _fRelativePath :: !(Maybe Text)
     , _fContentType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
@@ -1046,11 +1083,8 @@ data File = File'
 file
     :: File
 file =
-    File'
-    { _fURL = Nothing
-    , _fRelativePath = Nothing
-    , _fContentType = Nothing
-    }
+  File' {_fURL = Nothing, _fRelativePath = Nothing, _fContentType = Nothing}
+
 
 -- | The URL where the file data can be retrieved.
 fURL :: Lens' File (Maybe Text)
@@ -1089,9 +1123,12 @@ instance ToJSON File where
 -- | Data about the user\'s asset.
 --
 -- /See:/ 'userAsset' smart constructor.
-newtype UserAsset = UserAsset'
+newtype UserAsset =
+  UserAsset'
     { _uaAsset :: Maybe Asset
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserAsset' with the minimum fields required to make a request.
 --
@@ -1100,10 +1137,8 @@ newtype UserAsset = UserAsset'
 -- * 'uaAsset'
 userAsset
     :: UserAsset
-userAsset =
-    UserAsset'
-    { _uaAsset = Nothing
-    }
+userAsset = UserAsset' {_uaAsset = Nothing}
+
 
 -- | An Asset.
 uaAsset :: Lens' UserAsset (Maybe Asset)

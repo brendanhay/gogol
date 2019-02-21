@@ -65,7 +65,8 @@ type ProjectsReserveIdsResource =
 -- Datastore.
 --
 -- /See:/ 'projectsReserveIds' smart constructor.
-data ProjectsReserveIds = ProjectsReserveIds'
+data ProjectsReserveIds =
+  ProjectsReserveIds'
     { _priXgafv          :: !(Maybe Xgafv)
     , _priUploadProtocol :: !(Maybe Text)
     , _priAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsReserveIds = ProjectsReserveIds'
     , _priPayload        :: !ReserveIdsRequest
     , _priProjectId      :: !Text
     , _priCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsReserveIds' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsReserveIds
     -> Text -- ^ 'priProjectId'
     -> ProjectsReserveIds
 projectsReserveIds pPriPayload_ pPriProjectId_ =
-    ProjectsReserveIds'
+  ProjectsReserveIds'
     { _priXgafv = Nothing
     , _priUploadProtocol = Nothing
     , _priAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsReserveIds pPriPayload_ pPriProjectId_ =
     , _priProjectId = pPriProjectId_
     , _priCallback = Nothing
     }
+
 
 -- | V1 error format.
 priXgafv :: Lens' ProjectsReserveIds (Maybe Xgafv)

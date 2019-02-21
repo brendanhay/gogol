@@ -59,12 +59,15 @@ type LiveStreamsInsertResource =
 -- YouTube, which can then broadcast the video to your audience.
 --
 -- /See:/ 'liveStreamsInsert' smart constructor.
-data LiveStreamsInsert = LiveStreamsInsert'
+data LiveStreamsInsert =
+  LiveStreamsInsert'
     { _lsiPart                          :: !Text
     , _lsiPayload                       :: !LiveStream
     , _lsiOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveStreamsInsert' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ liveStreamsInsert
     -> LiveStream -- ^ 'lsiPayload'
     -> LiveStreamsInsert
 liveStreamsInsert pLsiPart_ pLsiPayload_ =
-    LiveStreamsInsert'
+  LiveStreamsInsert'
     { _lsiPart = pLsiPart_
     , _lsiPayload = pLsiPayload_
     , _lsiOnBehalfOfContentOwner = Nothing
     , _lsiOnBehalfOfContentOwnerChannel = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

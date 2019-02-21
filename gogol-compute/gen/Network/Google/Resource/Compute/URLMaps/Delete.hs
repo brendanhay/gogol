@@ -57,11 +57,14 @@ type URLMapsDeleteResource =
 -- | Deletes the specified UrlMap resource.
 --
 -- /See:/ 'urlMapsDelete' smart constructor.
-data URLMapsDelete = URLMapsDelete'
+data URLMapsDelete =
+  URLMapsDelete'
     { _umdRequestId :: !(Maybe Text)
     , _umdURLMap    :: !Text
     , _umdProject   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLMapsDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ urlMapsDelete
     -> Text -- ^ 'umdProject'
     -> URLMapsDelete
 urlMapsDelete pUmdURLMap_ pUmdProject_ =
-    URLMapsDelete'
+  URLMapsDelete'
     { _umdRequestId = Nothing
     , _umdURLMap = pUmdURLMap_
     , _umdProject = pUmdProject_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

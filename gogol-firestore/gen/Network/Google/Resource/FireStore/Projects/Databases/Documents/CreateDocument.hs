@@ -68,7 +68,8 @@ type ProjectsDatabasesDocumentsCreateDocumentResource
 -- | Creates a new document.
 --
 -- /See:/ 'projectsDatabasesDocumentsCreateDocument' smart constructor.
-data ProjectsDatabasesDocumentsCreateDocument = ProjectsDatabasesDocumentsCreateDocument'
+data ProjectsDatabasesDocumentsCreateDocument =
+  ProjectsDatabasesDocumentsCreateDocument'
     { _pddcdParent         :: !Text
     , _pddcdXgafv          :: !(Maybe Xgafv)
     , _pddcdDocumentId     :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsDatabasesDocumentsCreateDocument = ProjectsDatabasesDocumentsCreate
     , _pddcdPayload        :: !Document
     , _pddcdMaskFieldPaths :: !(Maybe [Text])
     , _pddcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsCreateDocument' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsDatabasesDocumentsCreateDocument
     -> Document -- ^ 'pddcdPayload'
     -> ProjectsDatabasesDocumentsCreateDocument
 projectsDatabasesDocumentsCreateDocument pPddcdParent_ pPddcdCollectionId_ pPddcdPayload_ =
-    ProjectsDatabasesDocumentsCreateDocument'
+  ProjectsDatabasesDocumentsCreateDocument'
     { _pddcdParent = pPddcdParent_
     , _pddcdXgafv = Nothing
     , _pddcdDocumentId = Nothing
@@ -122,6 +125,7 @@ projectsDatabasesDocumentsCreateDocument pPddcdParent_ pPddcdCollectionId_ pPddc
     , _pddcdMaskFieldPaths = Nothing
     , _pddcdCallback = Nothing
     }
+
 
 -- | The parent resource. For example:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or
@@ -188,7 +192,8 @@ pddcdCallback
       (\ s a -> s{_pddcdCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsCreateDocument where
+           ProjectsDatabasesDocumentsCreateDocument
+         where
         type Rs ProjectsDatabasesDocumentsCreateDocument =
              Document
         type Scopes ProjectsDatabasesDocumentsCreateDocument

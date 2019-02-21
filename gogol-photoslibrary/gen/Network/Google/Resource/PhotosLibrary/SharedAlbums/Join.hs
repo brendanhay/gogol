@@ -65,7 +65,8 @@ type SharedAlbumsJoinResource =
 -- | Joins a shared album on behalf of the Google Photos user.
 --
 -- /See:/ 'sharedAlbumsJoin' smart constructor.
-data SharedAlbumsJoin = SharedAlbumsJoin'
+data SharedAlbumsJoin =
+  SharedAlbumsJoin'
     { _sajXgafv          :: !(Maybe Xgafv)
     , _sajUploadProtocol :: !(Maybe Text)
     , _sajPp             :: !Bool
@@ -74,7 +75,9 @@ data SharedAlbumsJoin = SharedAlbumsJoin'
     , _sajPayload        :: !JoinSharedAlbumRequest
     , _sajBearerToken    :: !(Maybe Text)
     , _sajCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SharedAlbumsJoin' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ sharedAlbumsJoin
     :: JoinSharedAlbumRequest -- ^ 'sajPayload'
     -> SharedAlbumsJoin
 sharedAlbumsJoin pSajPayload_ =
-    SharedAlbumsJoin'
+  SharedAlbumsJoin'
     { _sajXgafv = Nothing
     , _sajUploadProtocol = Nothing
     , _sajPp = True
@@ -109,6 +112,7 @@ sharedAlbumsJoin pSajPayload_ =
     , _sajBearerToken = Nothing
     , _sajCallback = Nothing
     }
+
 
 -- | V1 error format.
 sajXgafv :: Lens' SharedAlbumsJoin (Maybe Xgafv)

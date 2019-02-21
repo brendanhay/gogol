@@ -57,11 +57,14 @@ type LicensesDeleteResource =
 -- | Deletes the specified license.
 --
 -- /See:/ 'licensesDelete' smart constructor.
-data LicensesDelete = LicensesDelete'
+data LicensesDelete =
+  LicensesDelete'
     { _ldRequestId :: !(Maybe Text)
     , _ldProject   :: !Text
     , _ldLicense   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LicensesDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,9 @@ licensesDelete
     -> Text -- ^ 'ldLicense'
     -> LicensesDelete
 licensesDelete pLdProject_ pLdLicense_ =
-    LicensesDelete'
-    { _ldRequestId = Nothing
-    , _ldProject = pLdProject_
-    , _ldLicense = pLdLicense_
-    }
+  LicensesDelete'
+    {_ldRequestId = Nothing, _ldProject = pLdProject_, _ldLicense = pLdLicense_}
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

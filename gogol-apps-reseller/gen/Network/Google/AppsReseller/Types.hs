@@ -153,8 +153,8 @@ appsResellerService
 
 -- | Manage users on your domain
 appsOrderReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/apps.order.readonly"]
-appsOrderReadOnlyScope = Proxy;
+appsOrderReadOnlyScope = Proxy
 
 -- | Manage users on your domain
 appsOrderScope :: Proxy '["https://www.googleapis.com/auth/apps.order"]
-appsOrderScope = Proxy;
+appsOrderScope = Proxy

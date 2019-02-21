@@ -50,14 +50,16 @@ type MetadataMetricsListResource =
 --
 -- /See:/ 'metadataMetricsList' smart constructor.
 data MetadataMetricsList =
-    MetadataMetricsList'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  MetadataMetricsList'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetadataMetricsList' with the minimum fields required to make a request.
 --
 metadataMetricsList
     :: MetadataMetricsList
 metadataMetricsList = MetadataMetricsList'
+
 
 instance GoogleRequest MetadataMetricsList where
         type Rs MetadataMetricsList = Metadata

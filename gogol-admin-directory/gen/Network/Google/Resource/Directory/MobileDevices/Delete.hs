@@ -56,10 +56,13 @@ type MobileDevicesDeleteResource =
 -- | Delete Mobile Device
 --
 -- /See:/ 'mobileDevicesDelete' smart constructor.
-data MobileDevicesDelete = MobileDevicesDelete'
+data MobileDevicesDelete =
+  MobileDevicesDelete'
     { _mddResourceId :: !Text
     , _mddCustomerId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MobileDevicesDelete' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ mobileDevicesDelete
     -> Text -- ^ 'mddCustomerId'
     -> MobileDevicesDelete
 mobileDevicesDelete pMddResourceId_ pMddCustomerId_ =
-    MobileDevicesDelete'
-    { _mddResourceId = pMddResourceId_
-    , _mddCustomerId = pMddCustomerId_
-    }
+  MobileDevicesDelete'
+    {_mddResourceId = pMddResourceId_, _mddCustomerId = pMddCustomerId_}
+
 
 -- | Immutable ID of Mobile Device
 mddResourceId :: Lens' MobileDevicesDelete Text

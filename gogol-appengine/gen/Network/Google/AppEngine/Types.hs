@@ -344,6 +344,7 @@ module Network.Google.AppEngine.Types
     -- * Network
     , Network
     , network
+    , nSessionAffinity
     , nSubnetworkName
     , nForwardedPorts
     , nInstanceTag
@@ -710,12 +711,12 @@ appEngineService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your applications deployed on Google App Engine
 appEngineAdminScope :: Proxy '["https://www.googleapis.com/auth/appengine.admin"]
-appEngineAdminScope = Proxy;
+appEngineAdminScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

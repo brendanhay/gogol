@@ -76,7 +76,8 @@ type TranslationsListResource =
 -- | Translates input text, returning translated text.
 --
 -- /See:/ 'translationsList' smart constructor.
-data TranslationsList = TranslationsList'
+data TranslationsList =
+  TranslationsList'
     { _tlXgafv          :: !(Maybe Xgafv)
     , _tlUploadProtocol :: !(Maybe Text)
     , _tlPp             :: !Bool
@@ -90,7 +91,9 @@ data TranslationsList = TranslationsList'
     , _tlCid            :: !(Maybe [Text])
     , _tlTarget         :: !Text
     , _tlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TranslationsList' with the minimum fields required to make a request.
 --
@@ -126,7 +129,7 @@ translationsList
     -> Text -- ^ 'tlTarget'
     -> TranslationsList
 translationsList pTlQ_ pTlTarget_ =
-    TranslationsList'
+  TranslationsList'
     { _tlXgafv = Nothing
     , _tlUploadProtocol = Nothing
     , _tlPp = True
@@ -141,6 +144,7 @@ translationsList pTlQ_ pTlTarget_ =
     , _tlTarget = pTlTarget_
     , _tlCallback = Nothing
     }
+
 
 -- | V1 error format.
 tlXgafv :: Lens' TranslationsList (Maybe Xgafv)

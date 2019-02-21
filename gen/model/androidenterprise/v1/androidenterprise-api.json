@@ -15,7 +15,7 @@
   "description": "Manages the deployment of apps to Android for Work users.",
   "discoveryVersion": "v1",
   "documentationLink": "https://developers.google.com/android/work/play/emm-api",
-  "etag": "\"J3WqvAcMk4eQjJXvfSI4Yr8VouA/IZCjgGDDKedFiNKgpvDS2HRk648\"",
+  "etag": "\"J3WqvAcMk4eQjJXvfSI4Yr8VouA/psKDiISfxUEa5MGtkMDFTk4XUmg\"",
   "icons": {
     "x16": "https://www.google.com/images/icons/product/android-16.png",
     "x32": "https://www.google.com/images/icons/product/android-32.png"
@@ -441,29 +441,6 @@
           "path": "enterprises/{enterpriseId}",
           "response": {
             "$ref": "Enterprise"
-          },
-          "scopes": [
-            "https://www.googleapis.com/auth/androidenterprise"
-          ]
-        },
-        "getAndroidDevicePolicyConfig": {
-          "description": "Deprecated and unused.",
-          "httpMethod": "GET",
-          "id": "androidenterprise.enterprises.getAndroidDevicePolicyConfig",
-          "parameterOrder": [
-            "enterpriseId"
-          ],
-          "parameters": {
-            "enterpriseId": {
-              "description": "The ID of the enterprise.",
-              "location": "path",
-              "required": true,
-              "type": "string"
-            }
-          },
-          "path": "enterprises/{enterpriseId}/androidDevicePolicyConfig",
-          "response": {
-            "$ref": "AndroidDevicePolicyConfig"
           },
           "scopes": [
             "https://www.googleapis.com/auth/androidenterprise"
@@ -1881,7 +1858,7 @@
               "type": "string"
             },
             "token": {
-              "description": "A pagination token is contained in a request''s response when there are more products. The token can be used in a subsequent request to obtain more products, and so forth. This parameter cannot be used in the initial request.",
+              "description": "A pagination token is contained in a request's response when there are more products. The token can be used in a subsequent request to obtain more products, and so forth. This parameter cannot be used in the initial request.",
               "location": "query",
               "type": "string"
             }
@@ -2934,7 +2911,7 @@
       }
     }
   },
-  "revision": "20181205",
+  "revision": "20190130",
   "rootUrl": "https://www.googleapis.com/",
   "schemas": {
     "Administrator": {
@@ -2973,6 +2950,10 @@
           "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#administratorWebTokenSpec\".",
           "type": "string"
         },
+        "managedConfigurations": {
+          "$ref": "AdministratorWebTokenSpecManagedConfigurations",
+          "description": "Options for displaying the Managed Configuration page."
+        },
         "parent": {
           "description": "The URI of the parent frame hosting the iframe. To prevent XSS, the iframe may not be hosted at other URIs. This URI must be https.",
           "type": "string"
@@ -2999,6 +2980,16 @@
         "webApps": {
           "$ref": "AdministratorWebTokenSpecWebApps",
           "description": "Options for displaying the Web Apps page."
+        }
+      },
+      "type": "object"
+    },
+    "AdministratorWebTokenSpecManagedConfigurations": {
+      "id": "AdministratorWebTokenSpecManagedConfigurations",
+      "properties": {
+        "enabled": {
+          "description": "Whether the Managed Configuration page is displayed. Default is true.",
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -3247,19 +3238,19 @@
       "type": "object"
     },
     "AutoInstallConstraint": {
-      "description": "The Auto install constraint. Defines a set of restrictions for installation. At least one of the fields must be set.",
+      "description": "The auto-install constraint. Defines a set of restrictions for installation. At least one of the fields must be set.",
       "id": "AutoInstallConstraint",
       "properties": {
         "chargingStateConstraint": {
-          "description": "Charging state to constrain on.",
+          "description": "Charging state constraint.",
           "type": "string"
         },
         "deviceIdleStateConstraint": {
-          "description": "The idle state of the device to constrain on.",
+          "description": "Device idle state constraint.",
           "type": "string"
         },
         "networkTypeConstraint": {
-          "description": "Network type to constrain on.",
+          "description": "Network type constraint.",
           "type": "string"
         }
       },
@@ -3269,23 +3260,23 @@
       "id": "AutoInstallPolicy",
       "properties": {
         "autoInstallConstraint": {
-          "description": "The constraints for the install. Currently there can be at most one constraint.",
+          "description": "The constraints for auto-installing the app. You can specify a maximum of one constraint.",
           "items": {
             "$ref": "AutoInstallConstraint"
           },
           "type": "array"
         },
         "autoInstallMode": {
-          "description": "The auto install mode. If unset defaults to AVAILABLE.",
+          "description": "The auto-install mode. If unset defaults to \"doNotAutoInstall\".",
           "type": "string"
         },
         "autoInstallPriority": {
-          "description": "The priority of the install, as an unsigned integer. Lower number means higher priority.",
+          "description": "The priority of the install, as an unsigned integer. A lower number means higher priority.",
           "format": "int32",
           "type": "integer"
         },
         "minimumVersionCode": {
-          "description": "The minimum version of the app. If a lower version of the app is installed then the app will be auto-updated according to the auto-install constraints, instead of waiting for the regular auto-update.",
+          "description": "The minimum version of the app. If a lower version of the app is installed, then the app will be auto-updated according to the auto-install constraints, instead of waiting for the regular auto-update.",
           "format": "int32",
           "type": "integer"
         }
@@ -4229,7 +4220,7 @@
       "properties": {
         "autoInstallPolicy": {
           "$ref": "AutoInstallPolicy",
-          "description": "The auto install policy for the product."
+          "description": "The auto-install policy for the product."
         },
         "productId": {
           "description": "The ID of the product. For example, \"app:com.google.android.gm\".",
@@ -4721,7 +4712,7 @@
           "type": "string"
         },
         "icons": {
-          "description": "A list of icons representing this website. Must have at least one element.",
+          "description": "A list of icons representing this website. If absent, a default icon (for create) or the current icon (for update) will be used.",
           "items": {
             "$ref": "WebAppIcon"
           },

@@ -66,14 +66,17 @@ type ForwardingRulesListResource =
 -- project and region.
 --
 -- /See:/ 'forwardingRulesList' smart constructor.
-data ForwardingRulesList = ForwardingRulesList'
+data ForwardingRulesList =
+  ForwardingRulesList'
     { _frlOrderBy    :: !(Maybe Text)
     , _frlProject    :: !Text
     , _frlFilter     :: !(Maybe Text)
     , _frlRegion     :: !Text
     , _frlPageToken  :: !(Maybe Text)
     , _frlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ForwardingRulesList' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ forwardingRulesList
     -> Text -- ^ 'frlRegion'
     -> ForwardingRulesList
 forwardingRulesList pFrlProject_ pFrlRegion_ =
-    ForwardingRulesList'
+  ForwardingRulesList'
     { _frlOrderBy = Nothing
     , _frlProject = pFrlProject_
     , _frlFilter = Nothing
@@ -103,6 +106,7 @@ forwardingRulesList pFrlProject_ pFrlRegion_ =
     , _frlPageToken = Nothing
     , _frlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

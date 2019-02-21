@@ -64,7 +64,8 @@ type AppsFirewallIngressRulesDeleteResource =
 -- | Deletes the specified firewall rule.
 --
 -- /See:/ 'appsFirewallIngressRulesDelete' smart constructor.
-data AppsFirewallIngressRulesDelete = AppsFirewallIngressRulesDelete'
+data AppsFirewallIngressRulesDelete =
+  AppsFirewallIngressRulesDelete'
     { _afirdXgafv          :: !(Maybe Xgafv)
     , _afirdUploadProtocol :: !(Maybe Text)
     , _afirdAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data AppsFirewallIngressRulesDelete = AppsFirewallIngressRulesDelete'
     , _afirdIngressRulesId :: !Text
     , _afirdAppsId         :: !Text
     , _afirdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsFirewallIngressRulesDelete' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ appsFirewallIngressRulesDelete
     -> Text -- ^ 'afirdAppsId'
     -> AppsFirewallIngressRulesDelete
 appsFirewallIngressRulesDelete pAfirdIngressRulesId_ pAfirdAppsId_ =
-    AppsFirewallIngressRulesDelete'
+  AppsFirewallIngressRulesDelete'
     { _afirdXgafv = Nothing
     , _afirdUploadProtocol = Nothing
     , _afirdAccessToken = Nothing
@@ -105,6 +108,7 @@ appsFirewallIngressRulesDelete pAfirdIngressRulesId_ pAfirdAppsId_ =
     , _afirdAppsId = pAfirdAppsId_
     , _afirdCallback = Nothing
     }
+
 
 -- | V1 error format.
 afirdXgafv :: Lens' AppsFirewallIngressRulesDelete (Maybe Xgafv)

@@ -87,13 +87,16 @@ type RegionInstanceGroupManagersDeleteInstancesResource
 -- this method per request.
 --
 -- /See:/ 'regionInstanceGroupManagersDeleteInstances' smart constructor.
-data RegionInstanceGroupManagersDeleteInstances = RegionInstanceGroupManagersDeleteInstances'
+data RegionInstanceGroupManagersDeleteInstances =
+  RegionInstanceGroupManagersDeleteInstances'
     { _rigmdiRequestId            :: !(Maybe Text)
     , _rigmdiProject              :: !Text
     , _rigmdiInstanceGroupManager :: !Text
     , _rigmdiPayload              :: !RegionInstanceGroupManagersDeleteInstancesRequest
     , _rigmdiRegion               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionInstanceGroupManagersDeleteInstances' with the minimum fields required to make a request.
 --
@@ -115,13 +118,14 @@ regionInstanceGroupManagersDeleteInstances
     -> Text -- ^ 'rigmdiRegion'
     -> RegionInstanceGroupManagersDeleteInstances
 regionInstanceGroupManagersDeleteInstances pRigmdiProject_ pRigmdiInstanceGroupManager_ pRigmdiPayload_ pRigmdiRegion_ =
-    RegionInstanceGroupManagersDeleteInstances'
+  RegionInstanceGroupManagersDeleteInstances'
     { _rigmdiRequestId = Nothing
     , _rigmdiProject = pRigmdiProject_
     , _rigmdiInstanceGroupManager = pRigmdiInstanceGroupManager_
     , _rigmdiPayload = pRigmdiPayload_
     , _rigmdiRegion = pRigmdiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -162,7 +166,8 @@ rigmdiRegion
   = lens _rigmdiRegion (\ s a -> s{_rigmdiRegion = a})
 
 instance GoogleRequest
-         RegionInstanceGroupManagersDeleteInstances where
+           RegionInstanceGroupManagersDeleteInstances
+         where
         type Rs RegionInstanceGroupManagersDeleteInstances =
              Operation
         type Scopes

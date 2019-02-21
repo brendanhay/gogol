@@ -92,7 +92,8 @@ type CoursesCourseWorkStudentSubmissionsTurnInResource
 -- requested course, course work, or student submission does not exist.
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsTurnIn' smart constructor.
-data CoursesCourseWorkStudentSubmissionsTurnIn = CoursesCourseWorkStudentSubmissionsTurnIn'
+data CoursesCourseWorkStudentSubmissionsTurnIn =
+  CoursesCourseWorkStudentSubmissionsTurnIn'
     { _ccwsstiXgafv          :: !(Maybe Xgafv)
     , _ccwsstiUploadProtocol :: !(Maybe Text)
     , _ccwsstiCourseId       :: !Text
@@ -102,7 +103,9 @@ data CoursesCourseWorkStudentSubmissionsTurnIn = CoursesCourseWorkStudentSubmiss
     , _ccwsstiId             :: !Text
     , _ccwsstiCallback       :: !(Maybe Text)
     , _ccwsstiCourseWorkId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsTurnIn' with the minimum fields required to make a request.
 --
@@ -132,7 +135,7 @@ coursesCourseWorkStudentSubmissionsTurnIn
     -> Text -- ^ 'ccwsstiCourseWorkId'
     -> CoursesCourseWorkStudentSubmissionsTurnIn
 coursesCourseWorkStudentSubmissionsTurnIn pCcwsstiCourseId_ pCcwsstiPayload_ pCcwsstiId_ pCcwsstiCourseWorkId_ =
-    CoursesCourseWorkStudentSubmissionsTurnIn'
+  CoursesCourseWorkStudentSubmissionsTurnIn'
     { _ccwsstiXgafv = Nothing
     , _ccwsstiUploadProtocol = Nothing
     , _ccwsstiCourseId = pCcwsstiCourseId_
@@ -143,6 +146,7 @@ coursesCourseWorkStudentSubmissionsTurnIn pCcwsstiCourseId_ pCcwsstiPayload_ pCc
     , _ccwsstiCallback = Nothing
     , _ccwsstiCourseWorkId = pCcwsstiCourseWorkId_
     }
+
 
 -- | V1 error format.
 ccwsstiXgafv :: Lens' CoursesCourseWorkStudentSubmissionsTurnIn (Maybe Xgafv)
@@ -198,7 +202,8 @@ ccwsstiCourseWorkId
       (\ s a -> s{_ccwsstiCourseWorkId = a})
 
 instance GoogleRequest
-         CoursesCourseWorkStudentSubmissionsTurnIn where
+           CoursesCourseWorkStudentSubmissionsTurnIn
+         where
         type Rs CoursesCourseWorkStudentSubmissionsTurnIn =
              Empty
         type Scopes CoursesCourseWorkStudentSubmissionsTurnIn

@@ -61,14 +61,17 @@ type ProjectsPolicyGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsPolicyGetIAMPolicy' smart constructor.
-data ProjectsPolicyGetIAMPolicy = ProjectsPolicyGetIAMPolicy'
+data ProjectsPolicyGetIAMPolicy =
+  ProjectsPolicyGetIAMPolicy'
     { _ppgipXgafv          :: !(Maybe Xgafv)
     , _ppgipUploadProtocol :: !(Maybe Text)
     , _ppgipAccessToken    :: !(Maybe Text)
     , _ppgipUploadType     :: !(Maybe Text)
     , _ppgipResource       :: !Text
     , _ppgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsPolicyGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsPolicyGetIAMPolicy
     :: Text -- ^ 'ppgipResource'
     -> ProjectsPolicyGetIAMPolicy
 projectsPolicyGetIAMPolicy pPpgipResource_ =
-    ProjectsPolicyGetIAMPolicy'
+  ProjectsPolicyGetIAMPolicy'
     { _ppgipXgafv = Nothing
     , _ppgipUploadProtocol = Nothing
     , _ppgipAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsPolicyGetIAMPolicy pPpgipResource_ =
     , _ppgipResource = pPpgipResource_
     , _ppgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppgipXgafv :: Lens' ProjectsPolicyGetIAMPolicy (Maybe Xgafv)

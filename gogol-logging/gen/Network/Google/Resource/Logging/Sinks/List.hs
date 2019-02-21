@@ -65,7 +65,8 @@ type SinksListResource =
 -- | Lists sinks.
 --
 -- /See:/ 'sinksList' smart constructor.
-data SinksList = SinksList'
+data SinksList =
+  SinksList'
     { _slParent         :: !Text
     , _slXgafv          :: !(Maybe Xgafv)
     , _slUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data SinksList = SinksList'
     , _slPageToken      :: !(Maybe Text)
     , _slPageSize       :: !(Maybe (Textual Int32))
     , _slCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SinksList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ sinksList
     :: Text -- ^ 'slParent'
     -> SinksList
 sinksList pSlParent_ =
-    SinksList'
+  SinksList'
     { _slParent = pSlParent_
     , _slXgafv = Nothing
     , _slUploadProtocol = Nothing
@@ -109,6 +112,7 @@ sinksList pSlParent_ =
     , _slPageSize = Nothing
     , _slCallback = Nothing
     }
+
 
 -- | Required. The parent resource whose sinks are to be listed:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

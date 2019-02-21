@@ -67,7 +67,8 @@ type DebuggerDebuggeesBreakpointsGetResource =
 -- | Gets breakpoint information.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsGet' smart constructor.
-data DebuggerDebuggeesBreakpointsGet = DebuggerDebuggeesBreakpointsGet'
+data DebuggerDebuggeesBreakpointsGet =
+  DebuggerDebuggeesBreakpointsGet'
     { _ddbgXgafv          :: !(Maybe Xgafv)
     , _ddbgUploadProtocol :: !(Maybe Text)
     , _ddbgAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data DebuggerDebuggeesBreakpointsGet = DebuggerDebuggeesBreakpointsGet'
     , _ddbgDebuggeeId     :: !Text
     , _ddbgClientVersion  :: !(Maybe Text)
     , _ddbgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DebuggerDebuggeesBreakpointsGet' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ debuggerDebuggeesBreakpointsGet
     -> Text -- ^ 'ddbgDebuggeeId'
     -> DebuggerDebuggeesBreakpointsGet
 debuggerDebuggeesBreakpointsGet pDdbgBreakpointId_ pDdbgDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsGet'
+  DebuggerDebuggeesBreakpointsGet'
     { _ddbgXgafv = Nothing
     , _ddbgUploadProtocol = Nothing
     , _ddbgAccessToken = Nothing
@@ -112,6 +115,7 @@ debuggerDebuggeesBreakpointsGet pDdbgBreakpointId_ pDdbgDebuggeeId_ =
     , _ddbgClientVersion = Nothing
     , _ddbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ddbgXgafv :: Lens' DebuggerDebuggeesBreakpointsGet (Maybe Xgafv)
@@ -161,7 +165,8 @@ ddbgCallback
   = lens _ddbgCallback (\ s a -> s{_ddbgCallback = a})
 
 instance GoogleRequest
-         DebuggerDebuggeesBreakpointsGet where
+           DebuggerDebuggeesBreakpointsGet
+         where
         type Rs DebuggerDebuggeesBreakpointsGet =
              GetBreakpointResponse
         type Scopes DebuggerDebuggeesBreakpointsGet =

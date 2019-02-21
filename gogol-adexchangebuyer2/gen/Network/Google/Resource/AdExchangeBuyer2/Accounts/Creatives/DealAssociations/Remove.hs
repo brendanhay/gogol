@@ -68,7 +68,8 @@ type AccountsCreativesDealAssociationsRemoveResource
 -- | Remove the association between a deal and a creative.
 --
 -- /See:/ 'accountsCreativesDealAssociationsRemove' smart constructor.
-data AccountsCreativesDealAssociationsRemove = AccountsCreativesDealAssociationsRemove'
+data AccountsCreativesDealAssociationsRemove =
+  AccountsCreativesDealAssociationsRemove'
     { _acdarXgafv          :: !(Maybe Xgafv)
     , _acdarUploadProtocol :: !(Maybe Text)
     , _acdarAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data AccountsCreativesDealAssociationsRemove = AccountsCreativesDealAssociations
     , _acdarPayload        :: !RemoveDealAssociationRequest
     , _acdarAccountId      :: !Text
     , _acdarCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsCreativesDealAssociationsRemove' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ accountsCreativesDealAssociationsRemove
     -> Text -- ^ 'acdarAccountId'
     -> AccountsCreativesDealAssociationsRemove
 accountsCreativesDealAssociationsRemove pAcdarCreativeId_ pAcdarPayload_ pAcdarAccountId_ =
-    AccountsCreativesDealAssociationsRemove'
+  AccountsCreativesDealAssociationsRemove'
     { _acdarXgafv = Nothing
     , _acdarUploadProtocol = Nothing
     , _acdarAccessToken = Nothing
@@ -114,6 +117,7 @@ accountsCreativesDealAssociationsRemove pAcdarCreativeId_ pAcdarPayload_ pAcdarA
     , _acdarAccountId = pAcdarAccountId_
     , _acdarCallback = Nothing
     }
+
 
 -- | V1 error format.
 acdarXgafv :: Lens' AccountsCreativesDealAssociationsRemove (Maybe Xgafv)
@@ -162,7 +166,8 @@ acdarCallback
       (\ s a -> s{_acdarCallback = a})
 
 instance GoogleRequest
-         AccountsCreativesDealAssociationsRemove where
+           AccountsCreativesDealAssociationsRemove
+         where
         type Rs AccountsCreativesDealAssociationsRemove =
              Empty
         type Scopes AccountsCreativesDealAssociationsRemove =

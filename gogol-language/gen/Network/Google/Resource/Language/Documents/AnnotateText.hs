@@ -65,14 +65,17 @@ type DocumentsAnnotateTextResource =
 -- call.
 --
 -- /See:/ 'documentsAnnotateText' smart constructor.
-data DocumentsAnnotateText = DocumentsAnnotateText'
+data DocumentsAnnotateText =
+  DocumentsAnnotateText'
     { _datXgafv          :: !(Maybe Xgafv)
     , _datUploadProtocol :: !(Maybe Text)
     , _datAccessToken    :: !(Maybe Text)
     , _datUploadType     :: !(Maybe Text)
     , _datPayload        :: !AnnotateTextRequest
     , _datCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DocumentsAnnotateText' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ documentsAnnotateText
     :: AnnotateTextRequest -- ^ 'datPayload'
     -> DocumentsAnnotateText
 documentsAnnotateText pDatPayload_ =
-    DocumentsAnnotateText'
+  DocumentsAnnotateText'
     { _datXgafv = Nothing
     , _datUploadProtocol = Nothing
     , _datAccessToken = Nothing
@@ -101,6 +104,7 @@ documentsAnnotateText pDatPayload_ =
     , _datPayload = pDatPayload_
     , _datCallback = Nothing
     }
+
 
 -- | V1 error format.
 datXgafv :: Lens' DocumentsAnnotateText (Maybe Xgafv)

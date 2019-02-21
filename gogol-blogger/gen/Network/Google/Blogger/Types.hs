@@ -387,8 +387,8 @@ bloggerService
 
 -- | Manage your Blogger account
 bloggerScope :: Proxy '["https://www.googleapis.com/auth/blogger"]
-bloggerScope = Proxy;
+bloggerScope = Proxy
 
 -- | View your Blogger account
 bloggerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/blogger.readonly"]
-bloggerReadOnlyScope = Proxy;
+bloggerReadOnlyScope = Proxy

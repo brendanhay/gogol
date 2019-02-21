@@ -51,9 +51,12 @@ type CirclesRemoveResource =
 -- | Delete a circle.
 --
 -- /See:/ 'circlesRemove' smart constructor.
-newtype CirclesRemove = CirclesRemove'
+newtype CirclesRemove =
+  CirclesRemove'
     { _crCircleId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CirclesRemove' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype CirclesRemove = CirclesRemove'
 circlesRemove
     :: Text -- ^ 'crCircleId'
     -> CirclesRemove
-circlesRemove pCrCircleId_ =
-    CirclesRemove'
-    { _crCircleId = pCrCircleId_
-    }
+circlesRemove pCrCircleId_ = CirclesRemove' {_crCircleId = pCrCircleId_}
+
 
 -- | The ID of the circle to delete.
 crCircleId :: Lens' CirclesRemove Text

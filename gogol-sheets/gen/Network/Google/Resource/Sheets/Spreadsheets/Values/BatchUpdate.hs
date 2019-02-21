@@ -68,7 +68,8 @@ type SpreadsheetsValuesBatchUpdateResource =
 -- ValueRanges.
 --
 -- /See:/ 'spreadsheetsValuesBatchUpdate' smart constructor.
-data SpreadsheetsValuesBatchUpdate = SpreadsheetsValuesBatchUpdate'
+data SpreadsheetsValuesBatchUpdate =
+  SpreadsheetsValuesBatchUpdate'
     { _svbuXgafv          :: !(Maybe Xgafv)
     , _svbuUploadProtocol :: !(Maybe Text)
     , _svbuAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data SpreadsheetsValuesBatchUpdate = SpreadsheetsValuesBatchUpdate'
     , _svbuUploadType     :: !(Maybe Text)
     , _svbuPayload        :: !BatchUpdateValuesRequest
     , _svbuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpreadsheetsValuesBatchUpdate' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ spreadsheetsValuesBatchUpdate
     -> BatchUpdateValuesRequest -- ^ 'svbuPayload'
     -> SpreadsheetsValuesBatchUpdate
 spreadsheetsValuesBatchUpdate pSvbuSpreadsheetId_ pSvbuPayload_ =
-    SpreadsheetsValuesBatchUpdate'
+  SpreadsheetsValuesBatchUpdate'
     { _svbuXgafv = Nothing
     , _svbuUploadProtocol = Nothing
     , _svbuAccessToken = Nothing
@@ -109,6 +112,7 @@ spreadsheetsValuesBatchUpdate pSvbuSpreadsheetId_ pSvbuPayload_ =
     , _svbuPayload = pSvbuPayload_
     , _svbuCallback = Nothing
     }
+
 
 -- | V1 error format.
 svbuXgafv :: Lens' SpreadsheetsValuesBatchUpdate (Maybe Xgafv)

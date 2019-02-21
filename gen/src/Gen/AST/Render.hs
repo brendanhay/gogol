@@ -23,19 +23,19 @@ import           Control.Error
 import           Control.Lens                 hiding (enum, lens)
 import qualified Data.ByteString.Char8        as C8
 import qualified Data.ByteString.Lazy.Builder as LBB
-import qualified Data.ByteString.Lazy.Char8   as LBS
 import           Data.Char                    (isSpace)
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
 import           Data.String
 import qualified Data.Text.Lazy               as LText
+import qualified Data.Text.Lazy.Encoding      as LText
 import           Gen.AST.Solve                (getSolved)
 import           Gen.Formatting
 import           Gen.Syntax
 import           Gen.Types
-import           HIndent
-import           HIndent.Types
+import qualified HIndent
+import qualified HIndent.Types                as HIndent
 import           Language.Haskell.Exts.Build  (name)
 import           Language.Haskell.Exts.Pretty as PP
 import           Prelude                      hiding (sum)
@@ -172,21 +172,16 @@ data PP
 
 pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
 pp i x
-    | i == Indent = result (reformat hindentConfig Nothing Nothing p)
+    | i == Indent = result (HIndent.reformat HIndent.defaultConfig Nothing Nothing p)
     | otherwise   = pure (LText.pack (C8.unpack p))
   where
-    result = hoistEither . bimap (e . LText.pack) (LText.pack . LBS.unpack . LBB.toLazyByteString)
+    result = hoistEither . bimap (e . LText.pack) (LText.decodeUtf8 . LBB.toLazyByteString)
 
     e = flip mappend ("\nSyntax:\n" <> LText.pack (C8.unpack p) <> "\nAST:\n" <> LText.pack (show x))
 
     p = C8.dropWhile isSpace
       . C8.pack
       $ prettyPrintStyleMode s m x
-
-    hindentConfig = defaultConfig
-        { configTrailingNewline = False
-        , configSortImports = False
-        }
 
     s = style
         { mode           = PageMode

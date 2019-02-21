@@ -63,13 +63,16 @@ type InstancesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'instancesInsert' smart constructor.
-data InstancesInsert = InstancesInsert'
+data InstancesInsert =
+  InstancesInsert'
     { _iiiRequestId              :: !(Maybe Text)
     , _iiiProject                :: !Text
     , _iiiZone                   :: !Text
     , _iiiPayload                :: !Instance
     , _iiiSourceInstanceTemplate :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesInsert' with the minimum fields required to make a request.
 --
@@ -90,13 +93,14 @@ instancesInsert
     -> Instance -- ^ 'iiiPayload'
     -> InstancesInsert
 instancesInsert pIiiProject_ pIiiZone_ pIiiPayload_ =
-    InstancesInsert'
+  InstancesInsert'
     { _iiiRequestId = Nothing
     , _iiiProject = pIiiProject_
     , _iiiZone = pIiiZone_
     , _iiiPayload = pIiiPayload_
     , _iiiSourceInstanceTemplate = Nothing
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

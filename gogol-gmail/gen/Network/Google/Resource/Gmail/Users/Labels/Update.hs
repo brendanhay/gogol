@@ -56,11 +56,14 @@ type UsersLabelsUpdateResource =
 -- | Updates the specified label.
 --
 -- /See:/ 'usersLabelsUpdate' smart constructor.
-data UsersLabelsUpdate = UsersLabelsUpdate'
+data UsersLabelsUpdate =
+  UsersLabelsUpdate'
     { _uluPayload :: !Label
     , _uluUserId  :: !Text
     , _uluId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersLabelsUpdate' with the minimum fields required to make a request.
 --
@@ -76,11 +79,9 @@ usersLabelsUpdate
     -> Text -- ^ 'uluId'
     -> UsersLabelsUpdate
 usersLabelsUpdate pUluPayload_ pUluId_ =
-    UsersLabelsUpdate'
-    { _uluPayload = pUluPayload_
-    , _uluUserId = "me"
-    , _uluId = pUluId_
-    }
+  UsersLabelsUpdate'
+    {_uluPayload = pUluPayload_, _uluUserId = "me", _uluId = pUluId_}
+
 
 -- | Multipart request metadata.
 uluPayload :: Lens' UsersLabelsUpdate Label

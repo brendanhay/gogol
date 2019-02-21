@@ -78,7 +78,8 @@ type ServicesConfigsSubmitResource =
 -- be deleted eventually. Operation
 --
 -- /See:/ 'servicesConfigsSubmit' smart constructor.
-data ServicesConfigsSubmit = ServicesConfigsSubmit'
+data ServicesConfigsSubmit =
+  ServicesConfigsSubmit'
     { _scsXgafv          :: !(Maybe Xgafv)
     , _scsUploadProtocol :: !(Maybe Text)
     , _scsAccessToken    :: !(Maybe Text)
@@ -86,7 +87,9 @@ data ServicesConfigsSubmit = ServicesConfigsSubmit'
     , _scsPayload        :: !SubmitConfigSourceRequest
     , _scsServiceName    :: !Text
     , _scsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesConfigsSubmit' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ servicesConfigsSubmit
     -> Text -- ^ 'scsServiceName'
     -> ServicesConfigsSubmit
 servicesConfigsSubmit pScsPayload_ pScsServiceName_ =
-    ServicesConfigsSubmit'
+  ServicesConfigsSubmit'
     { _scsXgafv = Nothing
     , _scsUploadProtocol = Nothing
     , _scsAccessToken = Nothing
@@ -119,6 +122,7 @@ servicesConfigsSubmit pScsPayload_ pScsServiceName_ =
     , _scsServiceName = pScsServiceName_
     , _scsCallback = Nothing
     }
+
 
 -- | V1 error format.
 scsXgafv :: Lens' ServicesConfigsSubmit (Maybe Xgafv)

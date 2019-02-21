@@ -57,11 +57,14 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -74,12 +77,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -123,9 +122,12 @@ instance ToJSON Status where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema = OperationSchema'
+newtype OperationSchema =
+  OperationSchema'
     { _osAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
@@ -136,9 +138,8 @@ operationSchema
     :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
-    OperationSchema'
-    { _osAddtional = _Coerce # pOsAddtional_
-    }
+  OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -154,13 +155,70 @@ instance FromJSON OperationSchema where
 instance ToJSON OperationSchema where
         toJSON = toJSON . _osAddtional
 
+-- | The ImageVersions in a project and location.
+--
+-- /See:/ 'listImageVersionsResponse' smart constructor.
+data ListImageVersionsResponse =
+  ListImageVersionsResponse'
+    { _livrNextPageToken :: !(Maybe Text)
+    , _livrImageVersions :: !(Maybe [ImageVersion])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListImageVersionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'livrNextPageToken'
+--
+-- * 'livrImageVersions'
+listImageVersionsResponse
+    :: ListImageVersionsResponse
+listImageVersionsResponse =
+  ListImageVersionsResponse'
+    {_livrNextPageToken = Nothing, _livrImageVersions = Nothing}
+
+
+-- | The page token used to query for the next page if one exists.
+livrNextPageToken :: Lens' ListImageVersionsResponse (Maybe Text)
+livrNextPageToken
+  = lens _livrNextPageToken
+      (\ s a -> s{_livrNextPageToken = a})
+
+-- | The list of supported ImageVersions in a location.
+livrImageVersions :: Lens' ListImageVersionsResponse [ImageVersion]
+livrImageVersions
+  = lens _livrImageVersions
+      (\ s a -> s{_livrImageVersions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListImageVersionsResponse where
+        parseJSON
+          = withObject "ListImageVersionsResponse"
+              (\ o ->
+                 ListImageVersionsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "imageVersions" .!= mempty))
+
+instance ToJSON ListImageVersionsResponse where
+        toJSON ListImageVersionsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _livrNextPageToken,
+                  ("imageVersions" .=) <$> _livrImageVersions])
+
 -- | The environments in a project and location.
 --
 -- /See:/ 'listEnvironmentsResponse' smart constructor.
-data ListEnvironmentsResponse = ListEnvironmentsResponse'
+data ListEnvironmentsResponse =
+  ListEnvironmentsResponse'
     { _lerNextPageToken :: !(Maybe Text)
     , _lerEnvironments  :: !(Maybe [Environment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListEnvironmentsResponse' with the minimum fields required to make a request.
 --
@@ -172,10 +230,9 @@ data ListEnvironmentsResponse = ListEnvironmentsResponse'
 listEnvironmentsResponse
     :: ListEnvironmentsResponse
 listEnvironmentsResponse =
-    ListEnvironmentsResponse'
-    { _lerNextPageToken = Nothing
-    , _lerEnvironments = Nothing
-    }
+  ListEnvironmentsResponse'
+    {_lerNextPageToken = Nothing, _lerEnvironments = Nothing}
+
 
 -- | The page token used to query for the next page if one exists.
 lerNextPageToken :: Lens' ListEnvironmentsResponse (Maybe Text)
@@ -209,14 +266,17 @@ instance ToJSON ListEnvironmentsResponse where
 -- | Configuration information for an environment.
 --
 -- /See:/ 'environmentConfig' smart constructor.
-data EnvironmentConfig = EnvironmentConfig'
+data EnvironmentConfig =
+  EnvironmentConfig'
     { _ecNodeConfig     :: !(Maybe NodeConfig)
     , _ecNodeCount      :: !(Maybe (Textual Int32))
     , _ecSoftwareConfig :: !(Maybe SoftwareConfig)
     , _ecDagGcsPrefix   :: !(Maybe Text)
     , _ecGkeCluster     :: !(Maybe Text)
     , _ecAirflowURI     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnvironmentConfig' with the minimum fields required to make a request.
 --
@@ -236,7 +296,7 @@ data EnvironmentConfig = EnvironmentConfig'
 environmentConfig
     :: EnvironmentConfig
 environmentConfig =
-    EnvironmentConfig'
+  EnvironmentConfig'
     { _ecNodeConfig = Nothing
     , _ecNodeCount = Nothing
     , _ecSoftwareConfig = Nothing
@@ -244,6 +304,7 @@ environmentConfig =
     , _ecGkeCluster = Nothing
     , _ecAirflowURI = Nothing
     }
+
 
 -- | The configuration used for the Kubernetes Engine cluster.
 ecNodeConfig :: Lens' EnvironmentConfig (Maybe NodeConfig)
@@ -310,10 +371,13 @@ instance ToJSON EnvironmentConfig where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -325,10 +389,9 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -363,7 +426,8 @@ instance ToJSON ListOperationsResponse where
 -- the Apache Airflow software.
 --
 -- /See:/ 'nodeConfig' smart constructor.
-data NodeConfig = NodeConfig'
+data NodeConfig =
+  NodeConfig'
     { _ncDiskSizeGb     :: !(Maybe (Textual Int32))
     , _ncLocation       :: !(Maybe Text)
     , _ncNetwork        :: !(Maybe Text)
@@ -372,7 +436,9 @@ data NodeConfig = NodeConfig'
     , _ncSubnetwork     :: !(Maybe Text)
     , _ncMachineType    :: !(Maybe Text)
     , _ncTags           :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
 --
@@ -396,7 +462,7 @@ data NodeConfig = NodeConfig'
 nodeConfig
     :: NodeConfig
 nodeConfig =
-    NodeConfig'
+  NodeConfig'
     { _ncDiskSizeGb = Nothing
     , _ncLocation = Nothing
     , _ncNetwork = Nothing
@@ -406,6 +472,7 @@ nodeConfig =
     , _ncMachineType = Nothing
     , _ncTags = Nothing
     }
+
 
 -- | Optional. The disk size in GB used for node VMs. Minimum size is 20GB.
 -- If unspecified, defaults to 100GB. Cannot be updated.
@@ -535,13 +602,16 @@ instance ToJSON NodeConfig where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -559,13 +629,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -630,14 +701,16 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -657,9 +730,12 @@ instance ToJSON Empty where
 -- \`SQL_PASSWORD\` * \`SQL_PROJECT\` * \`SQL_REGION\` * \`SQL_USER\`
 --
 -- /See:/ 'softwareConfigEnvVariables' smart constructor.
-newtype SoftwareConfigEnvVariables = SoftwareConfigEnvVariables'
+newtype SoftwareConfigEnvVariables =
+  SoftwareConfigEnvVariables'
     { _scevAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SoftwareConfigEnvVariables' with the minimum fields required to make a request.
 --
@@ -670,9 +746,8 @@ softwareConfigEnvVariables
     :: HashMap Text Text -- ^ 'scevAddtional'
     -> SoftwareConfigEnvVariables
 softwareConfigEnvVariables pScevAddtional_ =
-    SoftwareConfigEnvVariables'
-    { _scevAddtional = _Coerce # pScevAddtional_
-    }
+  SoftwareConfigEnvVariables' {_scevAddtional = _Coerce # pScevAddtional_}
+
 
 scevAddtional :: Lens' SoftwareConfigEnvVariables (HashMap Text Text)
 scevAddtional
@@ -689,10 +764,81 @@ instance FromJSON SoftwareConfigEnvVariables where
 instance ToJSON SoftwareConfigEnvVariables where
         toJSON = toJSON . _scevAddtional
 
+-- | ImageVersion information
+--
+-- /See:/ 'imageVersion' smart constructor.
+data ImageVersion =
+  ImageVersion'
+    { _ivImageVersionId          :: !(Maybe Text)
+    , _ivSupportedPythonVersions :: !(Maybe [Text])
+    , _ivIsDefault               :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ImageVersion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ivImageVersionId'
+--
+-- * 'ivSupportedPythonVersions'
+--
+-- * 'ivIsDefault'
+imageVersion
+    :: ImageVersion
+imageVersion =
+  ImageVersion'
+    { _ivImageVersionId = Nothing
+    , _ivSupportedPythonVersions = Nothing
+    , _ivIsDefault = Nothing
+    }
+
+
+-- | The string identifier of the ImageVersion, in the form:
+-- \"composer-x.y.z-airflow-a.b(.c)\"
+ivImageVersionId :: Lens' ImageVersion (Maybe Text)
+ivImageVersionId
+  = lens _ivImageVersionId
+      (\ s a -> s{_ivImageVersionId = a})
+
+-- | supported python versions
+ivSupportedPythonVersions :: Lens' ImageVersion [Text]
+ivSupportedPythonVersions
+  = lens _ivSupportedPythonVersions
+      (\ s a -> s{_ivSupportedPythonVersions = a})
+      . _Default
+      . _Coerce
+
+-- | Whether this is the default ImageVersion used by Composer during
+-- environment creation if no input ImageVersion is specified.
+ivIsDefault :: Lens' ImageVersion (Maybe Bool)
+ivIsDefault
+  = lens _ivIsDefault (\ s a -> s{_ivIsDefault = a})
+
+instance FromJSON ImageVersion where
+        parseJSON
+          = withObject "ImageVersion"
+              (\ o ->
+                 ImageVersion' <$>
+                   (o .:? "imageVersionId") <*>
+                     (o .:? "supportedPythonVersions" .!= mempty)
+                     <*> (o .:? "isDefault"))
+
+instance ToJSON ImageVersion where
+        toJSON ImageVersion'{..}
+          = object
+              (catMaybes
+                 [("imageVersionId" .=) <$> _ivImageVersionId,
+                  ("supportedPythonVersions" .=) <$>
+                    _ivSupportedPythonVersions,
+                  ("isDefault" .=) <$> _ivIsDefault])
+
 -- | An environment for running orchestration tasks.
 --
 -- /See:/ 'environment' smart constructor.
-data Environment = Environment'
+data Environment =
+  Environment'
     { _eState      :: !(Maybe EnvironmentState)
     , _eConfig     :: !(Maybe EnvironmentConfig)
     , _eUuid       :: !(Maybe Text)
@@ -700,7 +846,9 @@ data Environment = Environment'
     , _eName       :: !(Maybe Text)
     , _eLabels     :: !(Maybe EnvironmentLabels)
     , _eCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Environment' with the minimum fields required to make a request.
 --
@@ -722,7 +870,7 @@ data Environment = Environment'
 environment
     :: Environment
 environment =
-    Environment'
+  Environment'
     { _eState = Nothing
     , _eConfig = Nothing
     , _eUuid = Nothing
@@ -731,6 +879,7 @@ environment =
     , _eLabels = Nothing
     , _eCreateTime = Nothing
     }
+
 
 -- | The current state of the environment.
 eState :: Lens' Environment (Maybe EnvironmentState)
@@ -809,9 +958,12 @@ instance ToJSON Environment where
 -- and cannot be overridden.
 --
 -- /See:/ 'softwareConfigAirflowConfigOverrides' smart constructor.
-newtype SoftwareConfigAirflowConfigOverrides = SoftwareConfigAirflowConfigOverrides'
+newtype SoftwareConfigAirflowConfigOverrides =
+  SoftwareConfigAirflowConfigOverrides'
     { _scacoAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SoftwareConfigAirflowConfigOverrides' with the minimum fields required to make a request.
 --
@@ -822,9 +974,9 @@ softwareConfigAirflowConfigOverrides
     :: HashMap Text Text -- ^ 'scacoAddtional'
     -> SoftwareConfigAirflowConfigOverrides
 softwareConfigAirflowConfigOverrides pScacoAddtional_ =
-    SoftwareConfigAirflowConfigOverrides'
-    { _scacoAddtional = _Coerce # pScacoAddtional_
-    }
+  SoftwareConfigAirflowConfigOverrides'
+    {_scacoAddtional = _Coerce # pScacoAddtional_}
+
 
 scacoAddtional :: Lens' SoftwareConfigAirflowConfigOverrides (HashMap Text Text)
 scacoAddtional
@@ -833,7 +985,8 @@ scacoAddtional
       . _Coerce
 
 instance FromJSON
-         SoftwareConfigAirflowConfigOverrides where
+           SoftwareConfigAirflowConfigOverrides
+         where
         parseJSON
           = withObject "SoftwareConfigAirflowConfigOverrides"
               (\ o ->
@@ -846,9 +999,12 @@ instance ToJSON SoftwareConfigAirflowConfigOverrides
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -859,9 +1015,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -885,9 +1040,12 @@ instance ToJSON StatusDetailsItem where
 -- empty string as the value.
 --
 -- /See:/ 'softwareConfigPypiPackages' smart constructor.
-newtype SoftwareConfigPypiPackages = SoftwareConfigPypiPackages'
+newtype SoftwareConfigPypiPackages =
+  SoftwareConfigPypiPackages'
     { _scppAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SoftwareConfigPypiPackages' with the minimum fields required to make a request.
 --
@@ -898,9 +1056,8 @@ softwareConfigPypiPackages
     :: HashMap Text Text -- ^ 'scppAddtional'
     -> SoftwareConfigPypiPackages
 softwareConfigPypiPackages pScppAddtional_ =
-    SoftwareConfigPypiPackages'
-    { _scppAddtional = _Coerce # pScppAddtional_
-    }
+  SoftwareConfigPypiPackages' {_scppAddtional = _Coerce # pScppAddtional_}
+
 
 scppAddtional :: Lens' SoftwareConfigPypiPackages (HashMap Text Text)
 scppAddtional
@@ -921,13 +1078,16 @@ instance ToJSON SoftwareConfigPypiPackages where
 -- environment.
 --
 -- /See:/ 'softwareConfig' smart constructor.
-data SoftwareConfig = SoftwareConfig'
+data SoftwareConfig =
+  SoftwareConfig'
     { _scImageVersion           :: !(Maybe Text)
     , _scPythonVersion          :: !(Maybe Text)
     , _scPypiPackages           :: !(Maybe SoftwareConfigPypiPackages)
     , _scAirflowConfigOverrides :: !(Maybe SoftwareConfigAirflowConfigOverrides)
     , _scEnvVariables           :: !(Maybe SoftwareConfigEnvVariables)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SoftwareConfig' with the minimum fields required to make a request.
 --
@@ -945,7 +1105,7 @@ data SoftwareConfig = SoftwareConfig'
 softwareConfig
     :: SoftwareConfig
 softwareConfig =
-    SoftwareConfig'
+  SoftwareConfig'
     { _scImageVersion = Nothing
     , _scPythonVersion = Nothing
     , _scPypiPackages = Nothing
@@ -953,15 +1113,24 @@ softwareConfig =
     , _scEnvVariables = Nothing
     }
 
--- | Output only. The version of the software running in the environment.
--- This encapsulates both the version of Cloud Composer functionality and
--- the version of Apache Airflow. It must match the regular expression
--- \`composer-[0-9]+\\.[0-9]+(\\.[0-9]+)?-airflow-[0-9]+\\.[0-9]+(\\.[0-9]+.*)?\`.
--- The Cloud Composer portion of the version is a [semantic
--- version](https:\/\/semver.org). The portion of the image version
--- following _airflow-_ is an official Apache Airflow repository [release
+
+-- | The version of the software running in the environment. This
+-- encapsulates both the version of Cloud Composer functionality and the
+-- version of Apache Airflow. It must match the regular expression
+-- \`composer-([0-9]+\\.[0-9]+\\.[0-9]+|latest)-airflow-[0-9]+\\.[0-9]+(\\.[0-9]+.*)?\`.
+-- When used as input, the server also checks if the provided version is
+-- supported and denies the request for an unsupported version. The Cloud
+-- Composer portion of the version is a [semantic
+-- version](https:\/\/semver.org) or \`latest\`. When the patch version is
+-- omitted, the current Cloud Composer patch version is selected. When
+-- \`latest\` is provided instead of an explicit version number, the server
+-- replaces \`latest\` with the current Cloud Composer version and stores
+-- that version number in the same field. The portion of the image version
+-- that follows /airflow-/ is an official Apache Airflow repository
+-- [release
 -- name](https:\/\/github.com\/apache\/incubator-airflow\/releases). See
--- also [Release Notes](\/composer\/docs\/release-notes).
+-- also [Version
+-- List](\/composer\/docs\/concepts\/versioning\/composer-versions).
 scImageVersion :: Lens' SoftwareConfig (Maybe Text)
 scImageVersion
   = lens _scImageVersion
@@ -1048,9 +1217,12 @@ instance ToJSON SoftwareConfig where
 -- constrained to be \<= 128 bytes in size.
 --
 -- /See:/ 'environmentLabels' smart constructor.
-newtype EnvironmentLabels = EnvironmentLabels'
+newtype EnvironmentLabels =
+  EnvironmentLabels'
     { _elAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnvironmentLabels' with the minimum fields required to make a request.
 --
@@ -1061,9 +1233,8 @@ environmentLabels
     :: HashMap Text Text -- ^ 'elAddtional'
     -> EnvironmentLabels
 environmentLabels pElAddtional_ =
-    EnvironmentLabels'
-    { _elAddtional = _Coerce # pElAddtional_
-    }
+  EnvironmentLabels' {_elAddtional = _Coerce # pElAddtional_}
+
 
 elAddtional :: Lens' EnvironmentLabels (HashMap Text Text)
 elAddtional
@@ -1081,14 +1252,17 @@ instance ToJSON EnvironmentLabels where
 -- | Metadata describing an operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata = OperationMetadata'
+data OperationMetadata =
+  OperationMetadata'
     { _omState         :: !(Maybe OperationMetadataState)
     , _omResourceUuid  :: !(Maybe Text)
     , _omResource      :: !(Maybe Text)
     , _omEndTime       :: !(Maybe DateTime')
     , _omOperationType :: !(Maybe OperationMetadataOperationType)
     , _omCreateTime    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -1108,7 +1282,7 @@ data OperationMetadata = OperationMetadata'
 operationMetadata
     :: OperationMetadata
 operationMetadata =
-    OperationMetadata'
+  OperationMetadata'
     { _omState = Nothing
     , _omResourceUuid = Nothing
     , _omResource = Nothing
@@ -1116,6 +1290,7 @@ operationMetadata =
     , _omOperationType = Nothing
     , _omCreateTime = Nothing
     }
+
 
 -- | Output only. The current operation state.
 omState :: Lens' OperationMetadata (Maybe OperationMetadataState)
@@ -1184,9 +1359,12 @@ instance ToJSON OperationMetadata where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -1197,9 +1375,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)

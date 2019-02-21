@@ -57,11 +57,14 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -74,12 +77,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -120,10 +119,13 @@ instance ToJSON Status where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -135,10 +137,9 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -173,14 +174,16 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'cancelOperationRequest' smart constructor.
 data CancelOperationRequest =
-    CancelOperationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 cancelOperationRequest
     :: CancelOperationRequest
 cancelOperationRequest = CancelOperationRequest'
+
 
 instance FromJSON CancelOperationRequest where
         parseJSON
@@ -194,13 +197,16 @@ instance ToJSON CancelOperationRequest where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -218,13 +224,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -289,14 +296,16 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -310,7 +319,8 @@ instance ToJSON Empty where
 -- Each user has a single environment with the ID \"default\".
 --
 -- /See:/ 'environment' smart constructor.
-data Environment = Environment'
+data Environment =
+  Environment'
     { _eState       :: !(Maybe EnvironmentState)
     , _ePublicKeys  :: !(Maybe [PublicKey])
     , _eSSHUsername :: !(Maybe Text)
@@ -319,7 +329,9 @@ data Environment = Environment'
     , _eSSHHost     :: !(Maybe Text)
     , _eDockerImage :: !(Maybe Text)
     , _eSSHPort     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Environment' with the minimum fields required to make a request.
 --
@@ -343,7 +355,7 @@ data Environment = Environment'
 environment
     :: Environment
 environment =
-    Environment'
+  Environment'
     { _eState = Nothing
     , _ePublicKeys = Nothing
     , _eSSHUsername = Nothing
@@ -353,6 +365,7 @@ environment =
     , _eDockerImage = Nothing
     , _eSSHPort = Nothing
     }
+
 
 -- | Output only. Current execution state of this environment.
 eState :: Lens' Environment (Maybe EnvironmentState)
@@ -433,9 +446,12 @@ instance ToJSON Environment where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -446,9 +462,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -467,11 +482,14 @@ instance ToJSON StatusDetailsItem where
 -- | A public SSH key, corresponding to a private SSH key held by the client.
 --
 -- /See:/ 'publicKey' smart constructor.
-data PublicKey = PublicKey'
+data PublicKey =
+  PublicKey'
     { _pkFormat :: !(Maybe PublicKeyFormat)
     , _pkKey    :: !(Maybe Bytes)
     , _pkName   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublicKey' with the minimum fields required to make a request.
 --
@@ -485,11 +503,8 @@ data PublicKey = PublicKey'
 publicKey
     :: PublicKey
 publicKey =
-    PublicKey'
-    { _pkFormat = Nothing
-    , _pkKey = Nothing
-    , _pkName = Nothing
-    }
+  PublicKey' {_pkFormat = Nothing, _pkKey = Nothing, _pkName = Nothing}
+
 
 -- | Required. Format of this key\'s content.
 pkFormat :: Lens' PublicKey (Maybe PublicKeyFormat)
@@ -530,9 +545,12 @@ instance ToJSON PublicKey where
 -- StartEnvironment.
 --
 -- /See:/ 'startEnvironmentMetadata' smart constructor.
-newtype StartEnvironmentMetadata = StartEnvironmentMetadata'
+newtype StartEnvironmentMetadata =
+  StartEnvironmentMetadata'
     { _semState :: Maybe StartEnvironmentMetadataState
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StartEnvironmentMetadata' with the minimum fields required to make a request.
 --
@@ -541,10 +559,8 @@ newtype StartEnvironmentMetadata = StartEnvironmentMetadata'
 -- * 'semState'
 startEnvironmentMetadata
     :: StartEnvironmentMetadata
-startEnvironmentMetadata =
-    StartEnvironmentMetadata'
-    { _semState = Nothing
-    }
+startEnvironmentMetadata = StartEnvironmentMetadata' {_semState = Nothing}
+
 
 -- | Current state of the environment being started.
 semState :: Lens' StartEnvironmentMetadata (Maybe StartEnvironmentMetadataState)
@@ -566,9 +582,12 @@ instance ToJSON StartEnvironmentMetadata where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -579,9 +598,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -601,9 +619,12 @@ instance ToJSON OperationMetadata where
 -- StartEnvironment once the operation is complete.
 --
 -- /See:/ 'startEnvironmentResponse' smart constructor.
-newtype StartEnvironmentResponse = StartEnvironmentResponse'
+newtype StartEnvironmentResponse =
+  StartEnvironmentResponse'
     { _serEnvironment :: Maybe Environment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StartEnvironmentResponse' with the minimum fields required to make a request.
 --
@@ -612,10 +633,8 @@ newtype StartEnvironmentResponse = StartEnvironmentResponse'
 -- * 'serEnvironment'
 startEnvironmentResponse
     :: StartEnvironmentResponse
-startEnvironmentResponse =
-    StartEnvironmentResponse'
-    { _serEnvironment = Nothing
-    }
+startEnvironmentResponse = StartEnvironmentResponse' {_serEnvironment = Nothing}
+
 
 -- | Environment that was started.
 serEnvironment :: Lens' StartEnvironmentResponse (Maybe Environment)
@@ -644,9 +663,12 @@ instance ToJSON StartEnvironmentResponse where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -657,9 +679,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)

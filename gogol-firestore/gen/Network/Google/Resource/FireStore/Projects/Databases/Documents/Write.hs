@@ -63,7 +63,8 @@ type ProjectsDatabasesDocumentsWriteResource =
 -- | Streams batches of document updates and deletes, in order.
 --
 -- /See:/ 'projectsDatabasesDocumentsWrite' smart constructor.
-data ProjectsDatabasesDocumentsWrite = ProjectsDatabasesDocumentsWrite'
+data ProjectsDatabasesDocumentsWrite =
+  ProjectsDatabasesDocumentsWrite'
     { _pddwXgafv          :: !(Maybe Xgafv)
     , _pddwUploadProtocol :: !(Maybe Text)
     , _pddwDatabase       :: !Text
@@ -71,7 +72,9 @@ data ProjectsDatabasesDocumentsWrite = ProjectsDatabasesDocumentsWrite'
     , _pddwUploadType     :: !(Maybe Text)
     , _pddwPayload        :: !WriteRequest
     , _pddwCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsWrite' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsDatabasesDocumentsWrite
     -> WriteRequest -- ^ 'pddwPayload'
     -> ProjectsDatabasesDocumentsWrite
 projectsDatabasesDocumentsWrite pPddwDatabase_ pPddwPayload_ =
-    ProjectsDatabasesDocumentsWrite'
+  ProjectsDatabasesDocumentsWrite'
     { _pddwXgafv = Nothing
     , _pddwUploadProtocol = Nothing
     , _pddwDatabase = pPddwDatabase_
@@ -104,6 +107,7 @@ projectsDatabasesDocumentsWrite pPddwDatabase_ pPddwPayload_ =
     , _pddwPayload = pPddwPayload_
     , _pddwCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddwXgafv :: Lens' ProjectsDatabasesDocumentsWrite (Maybe Xgafv)
@@ -146,7 +150,8 @@ pddwCallback
   = lens _pddwCallback (\ s a -> s{_pddwCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsWrite where
+           ProjectsDatabasesDocumentsWrite
+         where
         type Rs ProjectsDatabasesDocumentsWrite =
              WriteResponse
         type Scopes ProjectsDatabasesDocumentsWrite =

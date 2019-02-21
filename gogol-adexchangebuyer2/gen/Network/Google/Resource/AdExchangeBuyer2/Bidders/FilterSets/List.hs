@@ -65,7 +65,8 @@ type BiddersFilterSetsListResource =
 -- | Lists all filter sets for the account with the given account ID.
 --
 -- /See:/ 'biddersFilterSetsList' smart constructor.
-data BiddersFilterSetsList = BiddersFilterSetsList'
+data BiddersFilterSetsList =
+  BiddersFilterSetsList'
     { _bfslXgafv          :: !(Maybe Xgafv)
     , _bfslUploadProtocol :: !(Maybe Text)
     , _bfslAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data BiddersFilterSetsList = BiddersFilterSetsList'
     , _bfslPageToken      :: !(Maybe Text)
     , _bfslPageSize       :: !(Maybe (Textual Int32))
     , _bfslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersFilterSetsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ biddersFilterSetsList
     :: Text -- ^ 'bfslOwnerName'
     -> BiddersFilterSetsList
 biddersFilterSetsList pBfslOwnerName_ =
-    BiddersFilterSetsList'
+  BiddersFilterSetsList'
     { _bfslXgafv = Nothing
     , _bfslUploadProtocol = Nothing
     , _bfslAccessToken = Nothing
@@ -109,6 +112,7 @@ biddersFilterSetsList pBfslOwnerName_ =
     , _bfslPageSize = Nothing
     , _bfslCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfslXgafv :: Lens' BiddersFilterSetsList (Maybe Xgafv)

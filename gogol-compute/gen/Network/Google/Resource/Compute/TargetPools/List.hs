@@ -66,14 +66,17 @@ type TargetPoolsListResource =
 -- region.
 --
 -- /See:/ 'targetPoolsList' smart constructor.
-data TargetPoolsList = TargetPoolsList'
+data TargetPoolsList =
+  TargetPoolsList'
     { _tplOrderBy    :: !(Maybe Text)
     , _tplProject    :: !Text
     , _tplFilter     :: !(Maybe Text)
     , _tplRegion     :: !Text
     , _tplPageToken  :: !(Maybe Text)
     , _tplMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetPoolsList' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ targetPoolsList
     -> Text -- ^ 'tplRegion'
     -> TargetPoolsList
 targetPoolsList pTplProject_ pTplRegion_ =
-    TargetPoolsList'
+  TargetPoolsList'
     { _tplOrderBy = Nothing
     , _tplProject = pTplProject_
     , _tplFilter = Nothing
@@ -103,6 +106,7 @@ targetPoolsList pTplProject_ pTplRegion_ =
     , _tplPageToken = Nothing
     , _tplMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

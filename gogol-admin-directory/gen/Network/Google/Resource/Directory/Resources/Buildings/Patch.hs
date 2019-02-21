@@ -36,6 +36,7 @@ module Network.Google.Resource.Directory.Resources.Buildings.Patch
     , rbpBuildingId
     , rbpPayload
     , rbpCustomer
+    , rbpCoordinatesSource
     ) where
 
 import           Network.Google.Directory.Types
@@ -52,17 +53,24 @@ type ResourcesBuildingsPatchResource =
                "resources" :>
                  "buildings" :>
                    Capture "buildingId" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Building :> Patch '[JSON] Building
+                     QueryParam "coordinatesSource"
+                       ResourcesBuildingsPatchCoordinatesSource
+                       :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Building :> Patch '[JSON] Building
 
 -- | Updates a building. This method supports patch semantics.
 --
 -- /See:/ 'resourcesBuildingsPatch' smart constructor.
-data ResourcesBuildingsPatch = ResourcesBuildingsPatch'
-    { _rbpBuildingId :: !Text
-    , _rbpPayload    :: !Building
-    , _rbpCustomer   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data ResourcesBuildingsPatch =
+  ResourcesBuildingsPatch'
+    { _rbpBuildingId        :: !Text
+    , _rbpPayload           :: !Building
+    , _rbpCustomer          :: !Text
+    , _rbpCoordinatesSource :: !ResourcesBuildingsPatchCoordinatesSource
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesBuildingsPatch' with the minimum fields required to make a request.
 --
@@ -73,17 +81,21 @@ data ResourcesBuildingsPatch = ResourcesBuildingsPatch'
 -- * 'rbpPayload'
 --
 -- * 'rbpCustomer'
+--
+-- * 'rbpCoordinatesSource'
 resourcesBuildingsPatch
     :: Text -- ^ 'rbpBuildingId'
     -> Building -- ^ 'rbpPayload'
     -> Text -- ^ 'rbpCustomer'
     -> ResourcesBuildingsPatch
 resourcesBuildingsPatch pRbpBuildingId_ pRbpPayload_ pRbpCustomer_ =
-    ResourcesBuildingsPatch'
+  ResourcesBuildingsPatch'
     { _rbpBuildingId = pRbpBuildingId_
     , _rbpPayload = pRbpPayload_
     , _rbpCustomer = pRbpCustomer_
+    , _rbpCoordinatesSource = SourceUnspecified
     }
+
 
 -- | The ID of the building to update.
 rbpBuildingId :: Lens' ResourcesBuildingsPatch Text
@@ -103,12 +115,20 @@ rbpCustomer :: Lens' ResourcesBuildingsPatch Text
 rbpCustomer
   = lens _rbpCustomer (\ s a -> s{_rbpCustomer = a})
 
+-- | Source from which Building.coordinates are derived.
+rbpCoordinatesSource :: Lens' ResourcesBuildingsPatch ResourcesBuildingsPatchCoordinatesSource
+rbpCoordinatesSource
+  = lens _rbpCoordinatesSource
+      (\ s a -> s{_rbpCoordinatesSource = a})
+
 instance GoogleRequest ResourcesBuildingsPatch where
         type Rs ResourcesBuildingsPatch = Building
         type Scopes ResourcesBuildingsPatch =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
         requestClient ResourcesBuildingsPatch'{..}
-          = go _rbpCustomer _rbpBuildingId (Just AltJSON)
+          = go _rbpCustomer _rbpBuildingId
+              (Just _rbpCoordinatesSource)
+              (Just AltJSON)
               _rbpPayload
               directoryService
           where go

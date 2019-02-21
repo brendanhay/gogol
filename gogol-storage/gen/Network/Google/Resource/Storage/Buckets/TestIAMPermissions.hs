@@ -60,11 +60,14 @@ type BucketsTestIAMPermissionsResource =
 -- held by the caller.
 --
 -- /See:/ 'bucketsTestIAMPermissions' smart constructor.
-data BucketsTestIAMPermissions = BucketsTestIAMPermissions'
+data BucketsTestIAMPermissions =
+  BucketsTestIAMPermissions'
     { _btipBucket      :: !Text
     , _btipUserProject :: !(Maybe Text)
     , _btipPermissions :: ![Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ bucketsTestIAMPermissions
     -> [Text] -- ^ 'btipPermissions'
     -> BucketsTestIAMPermissions
 bucketsTestIAMPermissions pBtipBucket_ pBtipPermissions_ =
-    BucketsTestIAMPermissions'
+  BucketsTestIAMPermissions'
     { _btipBucket = pBtipBucket_
     , _btipUserProject = Nothing
     , _btipPermissions = _Coerce # pBtipPermissions_
     }
+
 
 -- | Name of a bucket.
 btipBucket :: Lens' BucketsTestIAMPermissions Text

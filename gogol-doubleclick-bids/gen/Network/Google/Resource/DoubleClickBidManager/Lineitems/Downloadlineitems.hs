@@ -55,9 +55,12 @@ type LineitemsDownloadlineitemsResource =
 -- supported.
 --
 -- /See:/ 'lineitemsDownloadlineitems' smart constructor.
-newtype LineitemsDownloadlineitems = LineitemsDownloadlineitems'
+newtype LineitemsDownloadlineitems =
+  LineitemsDownloadlineitems'
     { _ldPayload :: DownloadLineItemsRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LineitemsDownloadlineitems' with the minimum fields required to make a request.
 --
@@ -68,9 +71,8 @@ lineitemsDownloadlineitems
     :: DownloadLineItemsRequest -- ^ 'ldPayload'
     -> LineitemsDownloadlineitems
 lineitemsDownloadlineitems pLdPayload_ =
-    LineitemsDownloadlineitems'
-    { _ldPayload = pLdPayload_
-    }
+  LineitemsDownloadlineitems' {_ldPayload = pLdPayload_}
+
 
 -- | Multipart request metadata.
 ldPayload :: Lens' LineitemsDownloadlineitems DownloadLineItemsRequest

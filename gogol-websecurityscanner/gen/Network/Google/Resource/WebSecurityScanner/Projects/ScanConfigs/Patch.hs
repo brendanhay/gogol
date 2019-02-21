@@ -66,7 +66,8 @@ type ProjectsScanConfigsPatchResource =
 -- ScanConfig.
 --
 -- /See:/ 'projectsScanConfigsPatch' smart constructor.
-data ProjectsScanConfigsPatch = ProjectsScanConfigsPatch'
+data ProjectsScanConfigsPatch =
+  ProjectsScanConfigsPatch'
     { _pscpXgafv          :: !(Maybe Xgafv)
     , _pscpUploadProtocol :: !(Maybe Text)
     , _pscpUpdateMask     :: !(Maybe GFieldMask)
@@ -75,7 +76,9 @@ data ProjectsScanConfigsPatch = ProjectsScanConfigsPatch'
     , _pscpPayload        :: !ScanConfig
     , _pscpName           :: !Text
     , _pscpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsPatch' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsScanConfigsPatch
     -> Text -- ^ 'pscpName'
     -> ProjectsScanConfigsPatch
 projectsScanConfigsPatch pPscpPayload_ pPscpName_ =
-    ProjectsScanConfigsPatch'
+  ProjectsScanConfigsPatch'
     { _pscpXgafv = Nothing
     , _pscpUploadProtocol = Nothing
     , _pscpUpdateMask = Nothing
@@ -111,6 +114,7 @@ projectsScanConfigsPatch pPscpPayload_ pPscpName_ =
     , _pscpName = pPscpName_
     , _pscpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscpXgafv :: Lens' ProjectsScanConfigsPatch (Maybe Xgafv)

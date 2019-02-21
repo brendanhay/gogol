@@ -57,11 +57,14 @@ type RepliesDeleteResource =
 -- | Deletes a reply.
 --
 -- /See:/ 'repliesDelete' smart constructor.
-data RepliesDelete = RepliesDelete'
+data RepliesDelete =
+  RepliesDelete'
     { _rdReplyId   :: !Text
     , _rdFileId    :: !Text
     , _rdCommentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepliesDelete' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ repliesDelete
     -> Text -- ^ 'rdCommentId'
     -> RepliesDelete
 repliesDelete pRdReplyId_ pRdFileId_ pRdCommentId_ =
-    RepliesDelete'
+  RepliesDelete'
     { _rdReplyId = pRdReplyId_
     , _rdFileId = pRdFileId_
     , _rdCommentId = pRdCommentId_
     }
+
 
 -- | The ID of the reply.
 rdReplyId :: Lens' RepliesDelete Text

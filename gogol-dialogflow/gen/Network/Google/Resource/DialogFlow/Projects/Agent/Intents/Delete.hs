@@ -62,14 +62,17 @@ type ProjectsAgentIntentsDeleteResource =
 -- intents.
 --
 -- /See:/ 'projectsAgentIntentsDelete' smart constructor.
-data ProjectsAgentIntentsDelete = ProjectsAgentIntentsDelete'
+data ProjectsAgentIntentsDelete =
+  ProjectsAgentIntentsDelete'
     { _paidXgafv          :: !(Maybe Xgafv)
     , _paidUploadProtocol :: !(Maybe Text)
     , _paidAccessToken    :: !(Maybe Text)
     , _paidUploadType     :: !(Maybe Text)
     , _paidName           :: !Text
     , _paidCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentIntentsDelete' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ projectsAgentIntentsDelete
     :: Text -- ^ 'paidName'
     -> ProjectsAgentIntentsDelete
 projectsAgentIntentsDelete pPaidName_ =
-    ProjectsAgentIntentsDelete'
+  ProjectsAgentIntentsDelete'
     { _paidXgafv = Nothing
     , _paidUploadProtocol = Nothing
     , _paidAccessToken = Nothing
@@ -98,6 +101,7 @@ projectsAgentIntentsDelete pPaidName_ =
     , _paidName = pPaidName_
     , _paidCallback = Nothing
     }
+
 
 -- | V1 error format.
 paidXgafv :: Lens' ProjectsAgentIntentsDelete (Maybe Xgafv)

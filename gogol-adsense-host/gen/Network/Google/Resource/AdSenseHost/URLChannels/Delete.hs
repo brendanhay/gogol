@@ -54,10 +54,13 @@ type URLChannelsDeleteResource =
 -- | Delete a URL channel from the host AdSense account.
 --
 -- /See:/ 'urlChannelsDelete' smart constructor.
-data URLChannelsDelete = URLChannelsDelete'
+data URLChannelsDelete =
+  URLChannelsDelete'
     { _ucdURLChannelId :: !Text
     , _ucdAdClientId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLChannelsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ urlChannelsDelete
     -> Text -- ^ 'ucdAdClientId'
     -> URLChannelsDelete
 urlChannelsDelete pUcdURLChannelId_ pUcdAdClientId_ =
-    URLChannelsDelete'
-    { _ucdURLChannelId = pUcdURLChannelId_
-    , _ucdAdClientId = pUcdAdClientId_
-    }
+  URLChannelsDelete'
+    {_ucdURLChannelId = pUcdURLChannelId_, _ucdAdClientId = pUcdAdClientId_}
+
 
 -- | URL channel to delete.
 ucdURLChannelId :: Lens' URLChannelsDelete Text

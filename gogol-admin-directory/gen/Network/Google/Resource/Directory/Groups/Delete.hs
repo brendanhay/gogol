@@ -52,9 +52,12 @@ type GroupsDeleteResource =
 -- | Delete Group
 --
 -- /See:/ 'groupsDelete' smart constructor.
-newtype GroupsDelete = GroupsDelete'
+newtype GroupsDelete =
+  GroupsDelete'
     { _gdGroupKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsDelete' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype GroupsDelete = GroupsDelete'
 groupsDelete
     :: Text -- ^ 'gdGroupKey'
     -> GroupsDelete
-groupsDelete pGdGroupKey_ =
-    GroupsDelete'
-    { _gdGroupKey = pGdGroupKey_
-    }
+groupsDelete pGdGroupKey_ = GroupsDelete' {_gdGroupKey = pGdGroupKey_}
+
 
 -- | Email or immutable ID of the group
 gdGroupKey :: Lens' GroupsDelete Text

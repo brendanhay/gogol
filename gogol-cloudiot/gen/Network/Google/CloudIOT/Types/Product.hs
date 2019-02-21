@@ -57,11 +57,14 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -74,12 +77,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -121,14 +120,16 @@ instance ToJSON Status where
 --
 -- /See:/ 'unbindDeviceFromGatewayResponse' smart constructor.
 data UnbindDeviceFromGatewayResponse =
-    UnbindDeviceFromGatewayResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  UnbindDeviceFromGatewayResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnbindDeviceFromGatewayResponse' with the minimum fields required to make a request.
 --
 unbindDeviceFromGatewayResponse
     :: UnbindDeviceFromGatewayResponse
 unbindDeviceFromGatewayResponse = UnbindDeviceFromGatewayResponse'
+
 
 instance FromJSON UnbindDeviceFromGatewayResponse
          where
@@ -142,10 +143,13 @@ instance ToJSON UnbindDeviceFromGatewayResponse where
 -- | The device state, as reported by the device.
 --
 -- /See:/ 'deviceState' smart constructor.
-data DeviceState = DeviceState'
+data DeviceState =
+  DeviceState'
     { _dsUpdateTime :: !(Maybe DateTime')
     , _dsBinaryData :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceState' with the minimum fields required to make a request.
 --
@@ -156,11 +160,8 @@ data DeviceState = DeviceState'
 -- * 'dsBinaryData'
 deviceState
     :: DeviceState
-deviceState =
-    DeviceState'
-    { _dsUpdateTime = Nothing
-    , _dsBinaryData = Nothing
-    }
+deviceState = DeviceState' {_dsUpdateTime = Nothing, _dsBinaryData = Nothing}
+
 
 -- | [Output only] The time at which this state version was updated in Cloud
 -- IoT Core.
@@ -194,12 +195,15 @@ instance ToJSON DeviceState where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -215,12 +219,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -269,14 +274,16 @@ instance ToJSON Expr where
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
-    GetIAMPolicyRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GetIAMPolicyRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -289,10 +296,13 @@ instance ToJSON GetIAMPolicyRequest where
 -- | Response for \`ListDeviceRegistries\`.
 --
 -- /See:/ 'listDeviceRegistriesResponse' smart constructor.
-data ListDeviceRegistriesResponse = ListDeviceRegistriesResponse'
+data ListDeviceRegistriesResponse =
+  ListDeviceRegistriesResponse'
     { _ldrrNextPageToken    :: !(Maybe Text)
     , _ldrrDeviceRegistries :: !(Maybe [DeviceRegistry])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDeviceRegistriesResponse' with the minimum fields required to make a request.
 --
@@ -304,10 +314,9 @@ data ListDeviceRegistriesResponse = ListDeviceRegistriesResponse'
 listDeviceRegistriesResponse
     :: ListDeviceRegistriesResponse
 listDeviceRegistriesResponse =
-    ListDeviceRegistriesResponse'
-    { _ldrrNextPageToken = Nothing
-    , _ldrrDeviceRegistries = Nothing
-    }
+  ListDeviceRegistriesResponse'
+    {_ldrrNextPageToken = Nothing, _ldrrDeviceRegistries = Nothing}
+
 
 -- | If not empty, indicates that there may be more registries that match the
 -- request; this value should be passed in a new
@@ -343,12 +352,15 @@ instance ToJSON ListDeviceRegistriesResponse where
 -- | The device configuration. Eventually delivered to devices.
 --
 -- /See:/ 'deviceConfig' smart constructor.
-data DeviceConfig = DeviceConfig'
+data DeviceConfig =
+  DeviceConfig'
     { _dcDeviceAckTime   :: !(Maybe DateTime')
     , _dcCloudUpdateTime :: !(Maybe DateTime')
     , _dcBinaryData      :: !(Maybe Bytes)
     , _dcVersion         :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceConfig' with the minimum fields required to make a request.
 --
@@ -364,12 +376,13 @@ data DeviceConfig = DeviceConfig'
 deviceConfig
     :: DeviceConfig
 deviceConfig =
-    DeviceConfig'
+  DeviceConfig'
     { _dcDeviceAckTime = Nothing
     , _dcCloudUpdateTime = Nothing
     , _dcBinaryData = Nothing
     , _dcVersion = Nothing
     }
+
 
 -- | [Output only] The time at which Cloud IoT Core received the
 -- acknowledgment from the device, indicating that the device has received
@@ -431,9 +444,12 @@ instance ToJSON DeviceConfig where
 -- | Response for \`ListDeviceConfigVersions\`.
 --
 -- /See:/ 'listDeviceConfigVersionsResponse' smart constructor.
-newtype ListDeviceConfigVersionsResponse = ListDeviceConfigVersionsResponse'
+newtype ListDeviceConfigVersionsResponse =
+  ListDeviceConfigVersionsResponse'
     { _ldcvrDeviceConfigs :: Maybe [DeviceConfig]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDeviceConfigVersionsResponse' with the minimum fields required to make a request.
 --
@@ -443,9 +459,8 @@ newtype ListDeviceConfigVersionsResponse = ListDeviceConfigVersionsResponse'
 listDeviceConfigVersionsResponse
     :: ListDeviceConfigVersionsResponse
 listDeviceConfigVersionsResponse =
-    ListDeviceConfigVersionsResponse'
-    { _ldcvrDeviceConfigs = Nothing
-    }
+  ListDeviceConfigVersionsResponse' {_ldcvrDeviceConfigs = Nothing}
+
 
 -- | The device configuration for the last few versions. Versions are listed
 -- in decreasing order, starting from the most recent one.
@@ -474,12 +489,15 @@ instance ToJSON ListDeviceConfigVersionsResponse
 -- | Gateway-related configuration and state.
 --
 -- /See:/ 'gatewayConfig' smart constructor.
-data GatewayConfig = GatewayConfig'
+data GatewayConfig =
+  GatewayConfig'
     { _gcLastAccessedGatewayId   :: !(Maybe Text)
     , _gcGatewayAuthMethod       :: !(Maybe GatewayConfigGatewayAuthMethod)
     , _gcLastAccessedGatewayTime :: !(Maybe DateTime')
     , _gcGatewayType             :: !(Maybe GatewayConfigGatewayType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GatewayConfig' with the minimum fields required to make a request.
 --
@@ -495,12 +513,13 @@ data GatewayConfig = GatewayConfig'
 gatewayConfig
     :: GatewayConfig
 gatewayConfig =
-    GatewayConfig'
+  GatewayConfig'
     { _gcLastAccessedGatewayId = Nothing
     , _gcGatewayAuthMethod = Nothing
     , _gcLastAccessedGatewayTime = Nothing
     , _gcGatewayType = Nothing
     }
+
 
 -- | [Output only] The ID of the gateway the device accessed most recently.
 gcLastAccessedGatewayId :: Lens' GatewayConfig (Maybe Text)
@@ -553,9 +572,12 @@ instance ToJSON GatewayConfig where
 -- | Response for \`ListDeviceStates\`.
 --
 -- /See:/ 'listDeviceStatesResponse' smart constructor.
-newtype ListDeviceStatesResponse = ListDeviceStatesResponse'
+newtype ListDeviceStatesResponse =
+  ListDeviceStatesResponse'
     { _ldsrDeviceStates :: Maybe [DeviceState]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDeviceStatesResponse' with the minimum fields required to make a request.
 --
@@ -565,9 +587,8 @@ newtype ListDeviceStatesResponse = ListDeviceStatesResponse'
 listDeviceStatesResponse
     :: ListDeviceStatesResponse
 listDeviceStatesResponse =
-    ListDeviceStatesResponse'
-    { _ldsrDeviceStates = Nothing
-    }
+  ListDeviceStatesResponse' {_ldsrDeviceStates = Nothing}
+
 
 -- | The last few device states. States are listed in descending order of
 -- server update time, starting from the most recent one.
@@ -599,14 +620,16 @@ instance ToJSON ListDeviceStatesResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -618,9 +641,12 @@ instance ToJSON Empty where
 -- device.
 --
 -- /See:/ 'stateNotificationConfig' smart constructor.
-newtype StateNotificationConfig = StateNotificationConfig'
+newtype StateNotificationConfig =
+  StateNotificationConfig'
     { _sncPubsubTopicName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StateNotificationConfig' with the minimum fields required to make a request.
 --
@@ -630,9 +656,8 @@ newtype StateNotificationConfig = StateNotificationConfig'
 stateNotificationConfig
     :: StateNotificationConfig
 stateNotificationConfig =
-    StateNotificationConfig'
-    { _sncPubsubTopicName = Nothing
-    }
+  StateNotificationConfig' {_sncPubsubTopicName = Nothing}
+
 
 -- | A Cloud Pub\/Sub topic name. For example,
 -- \`projects\/myProject\/topics\/deviceEvents\`.
@@ -657,7 +682,8 @@ instance ToJSON StateNotificationConfig where
 -- | The device resource.
 --
 -- /See:/ 'device' smart constructor.
-data Device = Device'
+data Device =
+  Device'
     { _dState              :: !(Maybe DeviceState)
     , _dLastHeartbeatTime  :: !(Maybe DateTime')
     , _dGatewayConfig      :: !(Maybe GatewayConfig)
@@ -675,7 +701,9 @@ data Device = Device'
     , _dLastStateTime      :: !(Maybe DateTime')
     , _dBlocked            :: !(Maybe Bool)
     , _dLastEventTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
@@ -717,7 +745,7 @@ data Device = Device'
 device
     :: Device
 device =
-    Device'
+  Device'
     { _dState = Nothing
     , _dLastHeartbeatTime = Nothing
     , _dGatewayConfig = Nothing
@@ -736,6 +764,7 @@ device =
     , _dBlocked = Nothing
     , _dLastEventTime = Nothing
     }
+
 
 -- | [Output only] The state most recently received from the device. If no
 -- state has been reported, this field is not present.
@@ -923,10 +952,13 @@ instance ToJSON Device where
 -- | A server-stored device credential used for authentication.
 --
 -- /See:/ 'deviceCredential' smart constructor.
-data DeviceCredential = DeviceCredential'
+data DeviceCredential =
+  DeviceCredential'
     { _dcPublicKey      :: !(Maybe PublicKeyCredential)
     , _dcExpirationTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceCredential' with the minimum fields required to make a request.
 --
@@ -938,10 +970,8 @@ data DeviceCredential = DeviceCredential'
 deviceCredential
     :: DeviceCredential
 deviceCredential =
-    DeviceCredential'
-    { _dcPublicKey = Nothing
-    , _dcExpirationTime = Nothing
-    }
+  DeviceCredential' {_dcPublicKey = Nothing, _dcExpirationTime = Nothing}
+
 
 -- | A public key used to verify the signature of JSON Web Tokens (JWTs).
 -- When adding a new device credential, either via device creation or via
@@ -984,10 +1014,13 @@ instance ToJSON DeviceCredential where
 -- | The configuration for forwarding telemetry events.
 --
 -- /See:/ 'eventNotificationConfig' smart constructor.
-data EventNotificationConfig = EventNotificationConfig'
+data EventNotificationConfig =
+  EventNotificationConfig'
     { _encPubsubTopicName  :: !(Maybe Text)
     , _encSubfolderMatches :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventNotificationConfig' with the minimum fields required to make a request.
 --
@@ -999,10 +1032,9 @@ data EventNotificationConfig = EventNotificationConfig'
 eventNotificationConfig
     :: EventNotificationConfig
 eventNotificationConfig =
-    EventNotificationConfig'
-    { _encPubsubTopicName = Nothing
-    , _encSubfolderMatches = Nothing
-    }
+  EventNotificationConfig'
+    {_encPubsubTopicName = Nothing, _encSubfolderMatches = Nothing}
+
 
 -- | A Cloud Pub\/Sub topic name. For example,
 -- \`projects\/myProject\/topics\/deviceEvents\`.
@@ -1038,14 +1070,17 @@ instance ToJSON EventNotificationConfig where
 -- | Details of an X.509 certificate. For informational purposes only.
 --
 -- /See:/ 'x509CertificateDetails' smart constructor.
-data X509CertificateDetails = X509CertificateDetails'
+data X509CertificateDetails =
+  X509CertificateDetails'
     { _xcdSubject            :: !(Maybe Text)
     , _xcdExpiryTime         :: !(Maybe DateTime')
     , _xcdStartTime          :: !(Maybe DateTime')
     , _xcdSignatureAlgorithm :: !(Maybe Text)
     , _xcdIssuer             :: !(Maybe Text)
     , _xcdPublicKeyType      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'X509CertificateDetails' with the minimum fields required to make a request.
 --
@@ -1065,7 +1100,7 @@ data X509CertificateDetails = X509CertificateDetails'
 x509CertificateDetails
     :: X509CertificateDetails
 x509CertificateDetails =
-    X509CertificateDetails'
+  X509CertificateDetails'
     { _xcdSubject = Nothing
     , _xcdExpiryTime = Nothing
     , _xcdStartTime = Nothing
@@ -1073,6 +1108,7 @@ x509CertificateDetails =
     , _xcdIssuer = Nothing
     , _xcdPublicKeyType = Nothing
     }
+
 
 -- | The entity the certificate and public key belong to.
 xcdSubject :: Lens' X509CertificateDetails (Maybe Text)
@@ -1134,11 +1170,14 @@ instance ToJSON X509CertificateDetails where
 -- | A public key certificate format and data.
 --
 -- /See:/ 'publicKeyCertificate' smart constructor.
-data PublicKeyCertificate = PublicKeyCertificate'
+data PublicKeyCertificate =
+  PublicKeyCertificate'
     { _pkcFormat      :: !(Maybe PublicKeyCertificateFormat)
     , _pkcCertificate :: !(Maybe Text)
     , _pkcX509Details :: !(Maybe X509CertificateDetails)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublicKeyCertificate' with the minimum fields required to make a request.
 --
@@ -1152,11 +1191,9 @@ data PublicKeyCertificate = PublicKeyCertificate'
 publicKeyCertificate
     :: PublicKeyCertificate
 publicKeyCertificate =
-    PublicKeyCertificate'
-    { _pkcFormat = Nothing
-    , _pkcCertificate = Nothing
-    , _pkcX509Details = Nothing
-    }
+  PublicKeyCertificate'
+    {_pkcFormat = Nothing, _pkcCertificate = Nothing, _pkcX509Details = Nothing}
+
 
 -- | The certificate format.
 pkcFormat :: Lens' PublicKeyCertificate (Maybe PublicKeyCertificateFormat)
@@ -1193,9 +1230,12 @@ instance ToJSON PublicKeyCertificate where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1206,9 +1246,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1227,9 +1266,12 @@ instance ToJSON StatusDetailsItem where
 -- | The configuration of MQTT for a device registry.
 --
 -- /See:/ 'mqttConfig' smart constructor.
-newtype MqttConfig = MqttConfig'
+newtype MqttConfig =
+  MqttConfig'
     { _mcMqttEnabledState :: Maybe MqttConfigMqttEnabledState
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MqttConfig' with the minimum fields required to make a request.
 --
@@ -1238,10 +1280,8 @@ newtype MqttConfig = MqttConfig'
 -- * 'mcMqttEnabledState'
 mqttConfig
     :: MqttConfig
-mqttConfig =
-    MqttConfig'
-    { _mcMqttEnabledState = Nothing
-    }
+mqttConfig = MqttConfig' {_mcMqttEnabledState = Nothing}
+
 
 -- | If enabled, allows connections using the MQTT protocol. Otherwise, MQTT
 -- connections to this registry will fail.
@@ -1264,9 +1304,12 @@ instance ToJSON MqttConfig where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
+newtype SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprPolicy :: Maybe Policy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -1275,10 +1318,8 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
 -- * 'siprPolicy'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
-setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprPolicy = Nothing
-    }
+setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -1300,9 +1341,12 @@ instance ToJSON SetIAMPolicyRequest where
 -- | A server-stored registry credential used to validate device credentials.
 --
 -- /See:/ 'registryCredential' smart constructor.
-newtype RegistryCredential = RegistryCredential'
+newtype RegistryCredential =
+  RegistryCredential'
     { _rcPublicKeyCertificate :: Maybe PublicKeyCertificate
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegistryCredential' with the minimum fields required to make a request.
 --
@@ -1311,10 +1355,8 @@ newtype RegistryCredential = RegistryCredential'
 -- * 'rcPublicKeyCertificate'
 registryCredential
     :: RegistryCredential
-registryCredential =
-    RegistryCredential'
-    { _rcPublicKeyCertificate = Nothing
-    }
+registryCredential = RegistryCredential' {_rcPublicKeyCertificate = Nothing}
+
 
 -- | A public key certificate used to verify the device credentials.
 rcPublicKeyCertificate :: Lens' RegistryCredential (Maybe PublicKeyCertificate)
@@ -1339,10 +1381,13 @@ instance ToJSON RegistryCredential where
 -- | Request for \`SendCommandToDevice\`.
 --
 -- /See:/ 'sendCommandToDeviceRequest' smart constructor.
-data SendCommandToDeviceRequest = SendCommandToDeviceRequest'
+data SendCommandToDeviceRequest =
+  SendCommandToDeviceRequest'
     { _sctdrBinaryData :: !(Maybe Bytes)
     , _sctdrSubfolder  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SendCommandToDeviceRequest' with the minimum fields required to make a request.
 --
@@ -1354,10 +1399,9 @@ data SendCommandToDeviceRequest = SendCommandToDeviceRequest'
 sendCommandToDeviceRequest
     :: SendCommandToDeviceRequest
 sendCommandToDeviceRequest =
-    SendCommandToDeviceRequest'
-    { _sctdrBinaryData = Nothing
-    , _sctdrSubfolder = Nothing
-    }
+  SendCommandToDeviceRequest'
+    {_sctdrBinaryData = Nothing, _sctdrSubfolder = Nothing}
+
 
 -- | The command data to send to the device.
 sctdrBinaryData :: Lens' SendCommandToDeviceRequest (Maybe ByteString)
@@ -1395,14 +1439,16 @@ instance ToJSON SendCommandToDeviceRequest where
 --
 -- /See:/ 'bindDeviceToGatewayResponse' smart constructor.
 data BindDeviceToGatewayResponse =
-    BindDeviceToGatewayResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  BindDeviceToGatewayResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BindDeviceToGatewayResponse' with the minimum fields required to make a request.
 --
 bindDeviceToGatewayResponse
     :: BindDeviceToGatewayResponse
 bindDeviceToGatewayResponse = BindDeviceToGatewayResponse'
+
 
 instance FromJSON BindDeviceToGatewayResponse where
         parseJSON
@@ -1415,9 +1461,12 @@ instance ToJSON BindDeviceToGatewayResponse where
 -- | The configuration of the HTTP bridge for a device registry.
 --
 -- /See:/ 'hTTPConfig' smart constructor.
-newtype HTTPConfig = HTTPConfig'
+newtype HTTPConfig =
+  HTTPConfig'
     { _httpcHTTPEnabledState :: Maybe HTTPConfigHTTPEnabledState
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPConfig' with the minimum fields required to make a request.
 --
@@ -1426,10 +1475,8 @@ newtype HTTPConfig = HTTPConfig'
 -- * 'httpcHTTPEnabledState'
 hTTPConfig
     :: HTTPConfig
-hTTPConfig =
-    HTTPConfig'
-    { _httpcHTTPEnabledState = Nothing
-    }
+hTTPConfig = HTTPConfig' {_httpcHTTPEnabledState = Nothing}
+
 
 -- | If enabled, allows devices to use DeviceService via the HTTP protocol.
 -- Otherwise, any requests to DeviceService will fail for this registry.
@@ -1452,9 +1499,12 @@ instance ToJSON HTTPConfig where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1464,9 +1514,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1494,10 +1543,13 @@ instance ToJSON TestIAMPermissionsRequest where
 -- | Response for \`ListDevices\`.
 --
 -- /See:/ 'listDevicesResponse' smart constructor.
-data ListDevicesResponse = ListDevicesResponse'
+data ListDevicesResponse =
+  ListDevicesResponse'
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDevices       :: !(Maybe [Device])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDevicesResponse' with the minimum fields required to make a request.
 --
@@ -1509,10 +1561,8 @@ data ListDevicesResponse = ListDevicesResponse'
 listDevicesResponse
     :: ListDevicesResponse
 listDevicesResponse =
-    ListDevicesResponse'
-    { _ldrNextPageToken = Nothing
-    , _ldrDevices = Nothing
-    }
+  ListDevicesResponse' {_ldrNextPageToken = Nothing, _ldrDevices = Nothing}
+
 
 -- | If not empty, indicates that there may be more devices that match the
 -- request; this value should be passed in a new \`ListDevicesRequest\`.
@@ -1552,9 +1602,12 @@ instance ToJSON ListDevicesResponse where
 -- and the maximum number of key-value pairs is 500.
 --
 -- /See:/ 'deviceMetadata' smart constructor.
-newtype DeviceMetadata = DeviceMetadata'
+newtype DeviceMetadata =
+  DeviceMetadata'
     { _dmAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceMetadata' with the minimum fields required to make a request.
 --
@@ -1565,9 +1618,8 @@ deviceMetadata
     :: HashMap Text Text -- ^ 'dmAddtional'
     -> DeviceMetadata
 deviceMetadata pDmAddtional_ =
-    DeviceMetadata'
-    { _dmAddtional = _Coerce # pDmAddtional_
-    }
+  DeviceMetadata' {_dmAddtional = _Coerce # pDmAddtional_}
+
 
 dmAddtional :: Lens' DeviceMetadata (HashMap Text Text)
 dmAddtional
@@ -1585,7 +1637,8 @@ instance ToJSON DeviceMetadata where
 -- | A container for a group of devices.
 --
 -- /See:/ 'deviceRegistry' smart constructor.
-data DeviceRegistry = DeviceRegistry'
+data DeviceRegistry =
+  DeviceRegistry'
     { _drLogLevel                 :: !(Maybe DeviceRegistryLogLevel)
     , _drCredentials              :: !(Maybe [RegistryCredential])
     , _drStateNotificationConfig  :: !(Maybe StateNotificationConfig)
@@ -1594,7 +1647,9 @@ data DeviceRegistry = DeviceRegistry'
     , _drName                     :: !(Maybe Text)
     , _drHTTPConfig               :: !(Maybe HTTPConfig)
     , _drId                       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceRegistry' with the minimum fields required to make a request.
 --
@@ -1618,7 +1673,7 @@ data DeviceRegistry = DeviceRegistry'
 deviceRegistry
     :: DeviceRegistry
 deviceRegistry =
-    DeviceRegistry'
+  DeviceRegistry'
     { _drLogLevel = Nothing
     , _drCredentials = Nothing
     , _drStateNotificationConfig = Nothing
@@ -1628,6 +1683,7 @@ deviceRegistry =
     , _drHTTPConfig = Nothing
     , _drId = Nothing
     }
+
 
 -- | **Beta Feature** The default logging verbosity for activity from devices
 -- in this registry. The verbosity level can be overridden by
@@ -1731,10 +1787,13 @@ instance ToJSON DeviceRegistry where
 -- | A public key format and data.
 --
 -- /See:/ 'publicKeyCredential' smart constructor.
-data PublicKeyCredential = PublicKeyCredential'
+data PublicKeyCredential =
+  PublicKeyCredential'
     { _pFormat :: !(Maybe PublicKeyCredentialFormat)
     , _pKey    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublicKeyCredential' with the minimum fields required to make a request.
 --
@@ -1745,11 +1804,8 @@ data PublicKeyCredential = PublicKeyCredential'
 -- * 'pKey'
 publicKeyCredential
     :: PublicKeyCredential
-publicKeyCredential =
-    PublicKeyCredential'
-    { _pFormat = Nothing
-    , _pKey = Nothing
-    }
+publicKeyCredential = PublicKeyCredential' {_pFormat = Nothing, _pKey = Nothing}
+
 
 -- | The format of the key.
 pFormat :: Lens' PublicKeyCredential (Maybe PublicKeyCredentialFormat)
@@ -1775,10 +1831,13 @@ instance ToJSON PublicKeyCredential where
 -- | Request for \`UnbindDeviceFromGateway\`.
 --
 -- /See:/ 'unbindDeviceFromGatewayRequest' smart constructor.
-data UnbindDeviceFromGatewayRequest = UnbindDeviceFromGatewayRequest'
+data UnbindDeviceFromGatewayRequest =
+  UnbindDeviceFromGatewayRequest'
     { _udfgrDeviceId  :: !(Maybe Text)
     , _udfgrGatewayId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnbindDeviceFromGatewayRequest' with the minimum fields required to make a request.
 --
@@ -1790,10 +1849,9 @@ data UnbindDeviceFromGatewayRequest = UnbindDeviceFromGatewayRequest'
 unbindDeviceFromGatewayRequest
     :: UnbindDeviceFromGatewayRequest
 unbindDeviceFromGatewayRequest =
-    UnbindDeviceFromGatewayRequest'
-    { _udfgrDeviceId = Nothing
-    , _udfgrGatewayId = Nothing
-    }
+  UnbindDeviceFromGatewayRequest'
+    {_udfgrDeviceId = Nothing, _udfgrGatewayId = Nothing}
+
 
 -- | The device to disassociate from the specified gateway. The value of
 -- \`device_id\` can be either the device numeric ID or the user-defined
@@ -1828,9 +1886,12 @@ instance ToJSON UnbindDeviceFromGatewayRequest where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -1840,9 +1901,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1885,11 +1945,14 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pEtag     :: !(Maybe Bytes)
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -1902,12 +1965,8 @@ data Policy = Policy'
 -- * 'pBindings'
 policy
     :: Policy
-policy =
-    Policy'
-    { _pEtag = Nothing
-    , _pVersion = Nothing
-    , _pBindings = Nothing
-    }
+policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -1957,14 +2016,16 @@ instance ToJSON Policy where
 --
 -- /See:/ 'sendCommandToDeviceResponse' smart constructor.
 data SendCommandToDeviceResponse =
-    SendCommandToDeviceResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  SendCommandToDeviceResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SendCommandToDeviceResponse' with the minimum fields required to make a request.
 --
 sendCommandToDeviceResponse
     :: SendCommandToDeviceResponse
 sendCommandToDeviceResponse = SendCommandToDeviceResponse'
+
 
 instance FromJSON SendCommandToDeviceResponse where
         parseJSON
@@ -1977,10 +2038,13 @@ instance ToJSON SendCommandToDeviceResponse where
 -- | Request for \`BindDeviceToGateway\`.
 --
 -- /See:/ 'bindDeviceToGatewayRequest' smart constructor.
-data BindDeviceToGatewayRequest = BindDeviceToGatewayRequest'
+data BindDeviceToGatewayRequest =
+  BindDeviceToGatewayRequest'
     { _bdtgrDeviceId  :: !(Maybe Text)
     , _bdtgrGatewayId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BindDeviceToGatewayRequest' with the minimum fields required to make a request.
 --
@@ -1992,10 +2056,9 @@ data BindDeviceToGatewayRequest = BindDeviceToGatewayRequest'
 bindDeviceToGatewayRequest
     :: BindDeviceToGatewayRequest
 bindDeviceToGatewayRequest =
-    BindDeviceToGatewayRequest'
-    { _bdtgrDeviceId = Nothing
-    , _bdtgrGatewayId = Nothing
-    }
+  BindDeviceToGatewayRequest'
+    {_bdtgrDeviceId = Nothing, _bdtgrGatewayId = Nothing}
+
 
 -- | The device to associate with the specified gateway. The value of
 -- \`device_id\` can be either the device numeric ID or the user-defined
@@ -2029,10 +2092,13 @@ instance ToJSON BindDeviceToGatewayRequest where
 -- | Request for \`ModifyCloudToDeviceConfig\`.
 --
 -- /See:/ 'modifyCloudToDeviceConfigRequest' smart constructor.
-data ModifyCloudToDeviceConfigRequest = ModifyCloudToDeviceConfigRequest'
+data ModifyCloudToDeviceConfigRequest =
+  ModifyCloudToDeviceConfigRequest'
     { _mctdcrVersionToUpdate :: !(Maybe (Textual Int64))
     , _mctdcrBinaryData      :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ModifyCloudToDeviceConfigRequest' with the minimum fields required to make a request.
 --
@@ -2044,10 +2110,9 @@ data ModifyCloudToDeviceConfigRequest = ModifyCloudToDeviceConfigRequest'
 modifyCloudToDeviceConfigRequest
     :: ModifyCloudToDeviceConfigRequest
 modifyCloudToDeviceConfigRequest =
-    ModifyCloudToDeviceConfigRequest'
-    { _mctdcrVersionToUpdate = Nothing
-    , _mctdcrBinaryData = Nothing
-    }
+  ModifyCloudToDeviceConfigRequest'
+    {_mctdcrVersionToUpdate = Nothing, _mctdcrBinaryData = Nothing}
+
 
 -- | The version number to update. If this value is zero, it will not check
 -- the version number of the server and will always update the current
@@ -2086,11 +2151,14 @@ instance ToJSON ModifyCloudToDeviceConfigRequest
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -2104,11 +2172,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

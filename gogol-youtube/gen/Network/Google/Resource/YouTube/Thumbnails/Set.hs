@@ -66,10 +66,13 @@ type ThumbnailsSetResource =
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
 -- /See:/ 'thumbnailsSet' smart constructor.
-data ThumbnailsSet = ThumbnailsSet'
+data ThumbnailsSet =
+  ThumbnailsSet'
     { _tsOnBehalfOfContentOwner :: !(Maybe Text)
     , _tsVideoId                :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThumbnailsSet' with the minimum fields required to make a request.
 --
@@ -82,10 +85,8 @@ thumbnailsSet
     :: Text -- ^ 'tsVideoId'
     -> ThumbnailsSet
 thumbnailsSet pTsVideoId_ =
-    ThumbnailsSet'
-    { _tsOnBehalfOfContentOwner = Nothing
-    , _tsVideoId = pTsVideoId_
-    }
+  ThumbnailsSet' {_tsOnBehalfOfContentOwner = Nothing, _tsVideoId = pTsVideoId_}
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

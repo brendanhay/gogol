@@ -55,11 +55,14 @@ type BlogsGetResource =
 -- | Gets one blog by ID.
 --
 -- /See:/ 'blogsGet' smart constructor.
-data BlogsGet = BlogsGet'
+data BlogsGet =
+  BlogsGet'
     { _bgBlogId   :: !Text
     , _bgMaxPosts :: !(Maybe (Textual Word32))
     , _bgView     :: !(Maybe BlogsGetView)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BlogsGet' with the minimum fields required to make a request.
 --
@@ -74,11 +77,8 @@ blogsGet
     :: Text -- ^ 'bgBlogId'
     -> BlogsGet
 blogsGet pBgBlogId_ =
-    BlogsGet'
-    { _bgBlogId = pBgBlogId_
-    , _bgMaxPosts = Nothing
-    , _bgView = Nothing
-    }
+  BlogsGet' {_bgBlogId = pBgBlogId_, _bgMaxPosts = Nothing, _bgView = Nothing}
+
 
 -- | The ID of the blog to get.
 bgBlogId :: Lens' BlogsGet Text

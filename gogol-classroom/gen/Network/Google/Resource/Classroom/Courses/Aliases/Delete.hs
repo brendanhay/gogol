@@ -73,7 +73,8 @@ type CoursesAliasesDeleteResource =
 -- not in a domain attempts to delete a domain-scoped alias).
 --
 -- /See:/ 'coursesAliasesDelete' smart constructor.
-data CoursesAliasesDelete = CoursesAliasesDelete'
+data CoursesAliasesDelete =
+  CoursesAliasesDelete'
     { _cadXgafv          :: !(Maybe Xgafv)
     , _cadUploadProtocol :: !(Maybe Text)
     , _cadCourseId       :: !Text
@@ -81,7 +82,9 @@ data CoursesAliasesDelete = CoursesAliasesDelete'
     , _cadUploadType     :: !(Maybe Text)
     , _cadAlias          :: !Text
     , _cadCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesAliasesDelete' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ coursesAliasesDelete
     -> Text -- ^ 'cadAlias'
     -> CoursesAliasesDelete
 coursesAliasesDelete pCadCourseId_ pCadAlias_ =
-    CoursesAliasesDelete'
+  CoursesAliasesDelete'
     { _cadXgafv = Nothing
     , _cadUploadProtocol = Nothing
     , _cadCourseId = pCadCourseId_
@@ -114,6 +117,7 @@ coursesAliasesDelete pCadCourseId_ pCadAlias_ =
     , _cadAlias = pCadAlias_
     , _cadCallback = Nothing
     }
+
 
 -- | V1 error format.
 cadXgafv :: Lens' CoursesAliasesDelete (Maybe Xgafv)

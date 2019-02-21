@@ -66,13 +66,16 @@ type InstallsUpdateResource =
 -- necessary.
 --
 -- /See:/ 'installsUpdate' smart constructor.
-data InstallsUpdate = InstallsUpdate'
+data InstallsUpdate =
+  InstallsUpdate'
     { _iuEnterpriseId :: !Text
     , _iuPayload      :: !Install
     , _iuUserId       :: !Text
     , _iuInstallId    :: !Text
     , _iuDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstallsUpdate' with the minimum fields required to make a request.
 --
@@ -95,13 +98,14 @@ installsUpdate
     -> Text -- ^ 'iuDeviceId'
     -> InstallsUpdate
 installsUpdate pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
-    InstallsUpdate'
+  InstallsUpdate'
     { _iuEnterpriseId = pIuEnterpriseId_
     , _iuPayload = pIuPayload_
     , _iuUserId = pIuUserId_
     , _iuInstallId = pIuInstallId_
     , _iuDeviceId = pIuDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 iuEnterpriseId :: Lens' InstallsUpdate Text

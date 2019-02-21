@@ -13,9 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Firebase Hosting REST API enables programmatic custom deployment for
--- releasing versions of your Firebase hosted content and configuration
--- files.
+-- The Firebase Hosting REST API enables programmatic and customizable
+-- deployments to your Firebase-hosted sites. Use this REST API to deploy
+-- new or updated hosting configurations and content files.
 --
 -- /See:/ <https://firebase.google.com/docs/hosting/ Firebase Hosting API Reference>
 module Network.Google.FirebaseHosting
@@ -218,6 +218,12 @@ module Network.Google.FirebaseHosting
     , rGlob
     , rStatusCode
 
+    -- ** CloudRunRewrite
+    , CloudRunRewrite
+    , cloudRunRewrite
+    , crrServiceId
+    , crrRegion
+
     -- ** DomainRedirect
     , DomainRedirect
     , domainRedirect
@@ -229,6 +235,7 @@ module Network.Google.FirebaseHosting
     , rewrite
     , rewFunction
     , rewPath
+    , rewRun
     , rewGlob
     , rewDynamicLinks
 

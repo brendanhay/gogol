@@ -68,7 +68,8 @@ type ProjectsTransferConfigsPatchResource =
 -- they are not updated.
 --
 -- /See:/ 'projectsTransferConfigsPatch' smart constructor.
-data ProjectsTransferConfigsPatch = ProjectsTransferConfigsPatch'
+data ProjectsTransferConfigsPatch =
+  ProjectsTransferConfigsPatch'
     { _ptcpXgafv             :: !(Maybe Xgafv)
     , _ptcpUploadProtocol    :: !(Maybe Text)
     , _ptcpUpdateMask        :: !(Maybe GFieldMask)
@@ -78,7 +79,9 @@ data ProjectsTransferConfigsPatch = ProjectsTransferConfigsPatch'
     , _ptcpPayload           :: !TransferConfig
     , _ptcpName              :: !Text
     , _ptcpCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTransferConfigsPatch' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ projectsTransferConfigsPatch
     -> Text -- ^ 'ptcpName'
     -> ProjectsTransferConfigsPatch
 projectsTransferConfigsPatch pPtcpPayload_ pPtcpName_ =
-    ProjectsTransferConfigsPatch'
+  ProjectsTransferConfigsPatch'
     { _ptcpXgafv = Nothing
     , _ptcpUploadProtocol = Nothing
     , _ptcpUpdateMask = Nothing
@@ -117,6 +120,7 @@ projectsTransferConfigsPatch pPtcpPayload_ pPtcpName_ =
     , _ptcpName = pPtcpName_
     , _ptcpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptcpXgafv :: Lens' ProjectsTransferConfigsPatch (Maybe Xgafv)

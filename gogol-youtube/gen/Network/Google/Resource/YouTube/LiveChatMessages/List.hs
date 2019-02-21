@@ -63,14 +63,17 @@ type LiveChatMessagesListResource =
 -- | Lists live chat messages for a specific chat.
 --
 -- /See:/ 'liveChatMessagesList' smart constructor.
-data LiveChatMessagesList = LiveChatMessagesList'
+data LiveChatMessagesList =
+  LiveChatMessagesList'
     { _lcmlPart             :: !Text
     , _lcmlLiveChatId       :: !Text
     , _lcmlHl               :: !(Maybe Text)
     , _lcmlPageToken        :: !(Maybe Text)
     , _lcmlMaxResults       :: !(Textual Word32)
     , _lcmlProFileImageSize :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveChatMessagesList' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ liveChatMessagesList
     -> Text -- ^ 'lcmlLiveChatId'
     -> LiveChatMessagesList
 liveChatMessagesList pLcmlPart_ pLcmlLiveChatId_ =
-    LiveChatMessagesList'
+  LiveChatMessagesList'
     { _lcmlPart = pLcmlPart_
     , _lcmlLiveChatId = pLcmlLiveChatId_
     , _lcmlHl = Nothing
@@ -100,6 +103,7 @@ liveChatMessagesList pLcmlPart_ pLcmlLiveChatId_ =
     , _lcmlMaxResults = 500
     , _lcmlProFileImageSize = Nothing
     }
+
 
 -- | The part parameter specifies the liveChatComment resource parts that the
 -- API response will include. Supported values are id and snippet.

@@ -50,14 +50,16 @@ type LocationsListResource =
 --
 -- /See:/ 'locationsList' smart constructor.
 data LocationsList =
-    LocationsList'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  LocationsList'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationsList' with the minimum fields required to make a request.
 --
 locationsList
     :: LocationsList
 locationsList = LocationsList'
+
 
 instance GoogleRequest LocationsList where
         type Rs LocationsList = LocationsListResponse

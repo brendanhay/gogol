@@ -63,12 +63,15 @@ type URLMapsInvalidateCacheResource =
 -- path, scoped to the specified UrlMap.
 --
 -- /See:/ 'urlMapsInvalidateCache' smart constructor.
-data URLMapsInvalidateCache = URLMapsInvalidateCache'
+data URLMapsInvalidateCache =
+  URLMapsInvalidateCache'
     { _umicRequestId :: !(Maybe Text)
     , _umicURLMap    :: !Text
     , _umicProject   :: !Text
     , _umicPayload   :: !CacheInvalidationRule
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLMapsInvalidateCache' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ urlMapsInvalidateCache
     -> CacheInvalidationRule -- ^ 'umicPayload'
     -> URLMapsInvalidateCache
 urlMapsInvalidateCache pUmicURLMap_ pUmicProject_ pUmicPayload_ =
-    URLMapsInvalidateCache'
+  URLMapsInvalidateCache'
     { _umicRequestId = Nothing
     , _umicURLMap = pUmicURLMap_
     , _umicProject = pUmicProject_
     , _umicPayload = pUmicPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

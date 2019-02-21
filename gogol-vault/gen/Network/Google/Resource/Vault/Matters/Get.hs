@@ -62,7 +62,8 @@ type MattersGetResource =
 -- | Gets the specified matter.
 --
 -- /See:/ 'mattersGet' smart constructor.
-data MattersGet = MattersGet'
+data MattersGet =
+  MattersGet'
     { _mgXgafv          :: !(Maybe Xgafv)
     , _mgUploadProtocol :: !(Maybe Text)
     , _mgAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data MattersGet = MattersGet'
     , _mgMatterId       :: !Text
     , _mgView           :: !(Maybe Text)
     , _mgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersGet' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ mattersGet
     :: Text -- ^ 'mgMatterId'
     -> MattersGet
 mattersGet pMgMatterId_ =
-    MattersGet'
+  MattersGet'
     { _mgXgafv = Nothing
     , _mgUploadProtocol = Nothing
     , _mgAccessToken = Nothing
@@ -102,6 +105,7 @@ mattersGet pMgMatterId_ =
     , _mgView = Nothing
     , _mgCallback = Nothing
     }
+
 
 -- | V1 error format.
 mgXgafv :: Lens' MattersGet (Maybe Xgafv)

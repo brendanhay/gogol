@@ -55,10 +55,13 @@ type ManagementFiltersDeleteResource =
 -- | Delete a filter.
 --
 -- /See:/ 'managementFiltersDelete' smart constructor.
-data ManagementFiltersDelete = ManagementFiltersDelete'
+data ManagementFiltersDelete =
+  ManagementFiltersDelete'
     { _mfdFilterId  :: !Text
     , _mfdAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementFiltersDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ managementFiltersDelete
     -> Text -- ^ 'mfdAccountId'
     -> ManagementFiltersDelete
 managementFiltersDelete pMfdFilterId_ pMfdAccountId_ =
-    ManagementFiltersDelete'
-    { _mfdFilterId = pMfdFilterId_
-    , _mfdAccountId = pMfdAccountId_
-    }
+  ManagementFiltersDelete'
+    {_mfdFilterId = pMfdFilterId_, _mfdAccountId = pMfdAccountId_}
+
 
 -- | ID of the filter to be deleted.
 mfdFilterId :: Lens' ManagementFiltersDelete Text

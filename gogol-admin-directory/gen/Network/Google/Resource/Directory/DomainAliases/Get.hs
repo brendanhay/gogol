@@ -55,10 +55,13 @@ type DomainAliasesGetResource =
 -- | Retrieves a domain alias of the customer.
 --
 -- /See:/ 'domainAliasesGet' smart constructor.
-data DomainAliasesGet = DomainAliasesGet'
+data DomainAliasesGet =
+  DomainAliasesGet'
     { _dagDomainAliasName :: !Text
     , _dagCustomer        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DomainAliasesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ domainAliasesGet
     -> Text -- ^ 'dagCustomer'
     -> DomainAliasesGet
 domainAliasesGet pDagDomainAliasName_ pDagCustomer_ =
-    DomainAliasesGet'
-    { _dagDomainAliasName = pDagDomainAliasName_
-    , _dagCustomer = pDagCustomer_
-    }
+  DomainAliasesGet'
+    {_dagDomainAliasName = pDagDomainAliasName_, _dagCustomer = pDagCustomer_}
+
 
 -- | Name of domain alias to be retrieved.
 dagDomainAliasName :: Lens' DomainAliasesGet Text

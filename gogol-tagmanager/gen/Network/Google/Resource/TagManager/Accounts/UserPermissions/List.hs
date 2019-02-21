@@ -56,10 +56,13 @@ type AccountsUserPermissionsListResource =
 -- Container user access granted to each of them.
 --
 -- /See:/ 'accountsUserPermissionsList' smart constructor.
-data AccountsUserPermissionsList = AccountsUserPermissionsList'
+data AccountsUserPermissionsList =
+  AccountsUserPermissionsList'
     { _auplParent    :: !Text
     , _auplPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsUserPermissionsList' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ accountsUserPermissionsList
     :: Text -- ^ 'auplParent'
     -> AccountsUserPermissionsList
 accountsUserPermissionsList pAuplParent_ =
-    AccountsUserPermissionsList'
-    { _auplParent = pAuplParent_
-    , _auplPageToken = Nothing
-    }
+  AccountsUserPermissionsList'
+    {_auplParent = pAuplParent_, _auplPageToken = Nothing}
+
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
 auplParent :: Lens' AccountsUserPermissionsList Text

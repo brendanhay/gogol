@@ -52,9 +52,12 @@ type AccountsContainersWorkspacesGetProposalResource
 -- | Gets a GTM Workspace Proposal.
 --
 -- /See:/ 'accountsContainersWorkspacesGetProposal' smart constructor.
-newtype AccountsContainersWorkspacesGetProposal = AccountsContainersWorkspacesGetProposal'
+newtype AccountsContainersWorkspacesGetProposal =
+  AccountsContainersWorkspacesGetProposal'
     { _acwgpPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesGetProposal' with the minimum fields required to make a request.
 --
@@ -65,9 +68,8 @@ accountsContainersWorkspacesGetProposal
     :: Text -- ^ 'acwgpPath'
     -> AccountsContainersWorkspacesGetProposal
 accountsContainersWorkspacesGetProposal pAcwgpPath_ =
-    AccountsContainersWorkspacesGetProposal'
-    { _acwgpPath = pAcwgpPath_
-    }
+  AccountsContainersWorkspacesGetProposal' {_acwgpPath = pAcwgpPath_}
+
 
 -- | GTM workspace proposal\'s relative path: Example:
 -- accounts\/{aid}\/containers\/{cid}\/workspace\/{wid}\/workspace_proposal
@@ -76,7 +78,8 @@ acwgpPath
   = lens _acwgpPath (\ s a -> s{_acwgpPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesGetProposal where
+           AccountsContainersWorkspacesGetProposal
+         where
         type Rs AccountsContainersWorkspacesGetProposal =
              WorkspaceProposal
         type Scopes AccountsContainersWorkspacesGetProposal =

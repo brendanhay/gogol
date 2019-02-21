@@ -72,7 +72,8 @@ type ProjectsJobsAggregatedResource =
 -- | List the jobs of a project across all regions.
 --
 -- /See:/ 'projectsJobsAggregated' smart constructor.
-data ProjectsJobsAggregated = ProjectsJobsAggregated'
+data ProjectsJobsAggregated =
+  ProjectsJobsAggregated'
     { _pjaXgafv          :: !(Maybe Xgafv)
     , _pjaUploadProtocol :: !(Maybe Text)
     , _pjaLocation       :: !(Maybe Text)
@@ -84,7 +85,9 @@ data ProjectsJobsAggregated = ProjectsJobsAggregated'
     , _pjaProjectId      :: !Text
     , _pjaPageSize       :: !(Maybe (Textual Int32))
     , _pjaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsAggregated' with the minimum fields required to make a request.
 --
@@ -115,7 +118,7 @@ projectsJobsAggregated
     :: Text -- ^ 'pjaProjectId'
     -> ProjectsJobsAggregated
 projectsJobsAggregated pPjaProjectId_ =
-    ProjectsJobsAggregated'
+  ProjectsJobsAggregated'
     { _pjaXgafv = Nothing
     , _pjaUploadProtocol = Nothing
     , _pjaLocation = Nothing
@@ -128,6 +131,7 @@ projectsJobsAggregated pPjaProjectId_ =
     , _pjaPageSize = Nothing
     , _pjaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjaXgafv :: Lens' ProjectsJobsAggregated (Maybe Xgafv)

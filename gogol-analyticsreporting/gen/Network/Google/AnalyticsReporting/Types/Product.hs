@@ -23,12 +23,15 @@ import           Network.Google.Prelude
 -- | MetricFilter specifies the filter on a metric.
 --
 -- /See:/ 'metricFilter' smart constructor.
-data MetricFilter = MetricFilter'
+data MetricFilter =
+  MetricFilter'
     { _mfNot             :: !(Maybe Bool)
     , _mfOperator        :: !(Maybe MetricFilterOperator)
     , _mfMetricName      :: !(Maybe Text)
     , _mfComparisonValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricFilter' with the minimum fields required to make a request.
 --
@@ -44,12 +47,13 @@ data MetricFilter = MetricFilter'
 metricFilter
     :: MetricFilter
 metricFilter =
-    MetricFilter'
+  MetricFilter'
     { _mfNot = Nothing
     , _mfOperator = Nothing
     , _mfMetricName = Nothing
     , _mfComparisonValue = Nothing
     }
+
 
 -- | Logical \`NOT\` operator. If this boolean is set to true, then the
 -- matching metric values will be excluded in the report. The default is
@@ -99,10 +103,13 @@ instance ToJSON MetricFilter where
 -- | A row in the report.
 --
 -- /See:/ 'reportRow' smart constructor.
-data ReportRow = ReportRow'
+data ReportRow =
+  ReportRow'
     { _rrMetrics    :: !(Maybe [DateRangeValues])
     , _rrDimensions :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportRow' with the minimum fields required to make a request.
 --
@@ -113,11 +120,8 @@ data ReportRow = ReportRow'
 -- * 'rrDimensions'
 reportRow
     :: ReportRow
-reportRow =
-    ReportRow'
-    { _rrMetrics = Nothing
-    , _rrDimensions = Nothing
-    }
+reportRow = ReportRow' {_rrMetrics = Nothing, _rrDimensions = Nothing}
+
 
 -- | List of metrics for each requested DateRange.
 rrMetrics :: Lens' ReportRow [DateRangeValues]
@@ -152,11 +156,14 @@ instance ToJSON ReportRow where
 -- metrics requested in the pivots section of the response.
 --
 -- /See:/ 'pivotHeaderEntry' smart constructor.
-data PivotHeaderEntry = PivotHeaderEntry'
+data PivotHeaderEntry =
+  PivotHeaderEntry'
     { _pheDimensionValues :: !(Maybe [Text])
     , _pheDimensionNames  :: !(Maybe [Text])
     , _pheMetric          :: !(Maybe MetricHeaderEntry)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PivotHeaderEntry' with the minimum fields required to make a request.
 --
@@ -170,11 +177,12 @@ data PivotHeaderEntry = PivotHeaderEntry'
 pivotHeaderEntry
     :: PivotHeaderEntry
 pivotHeaderEntry =
-    PivotHeaderEntry'
+  PivotHeaderEntry'
     { _pheDimensionValues = Nothing
     , _pheDimensionNames = Nothing
     , _pheMetric = Nothing
     }
+
 
 -- | The values for the dimensions in the pivot.
 pheDimensionValues :: Lens' PivotHeaderEntry [Text]
@@ -217,9 +225,12 @@ instance ToJSON PivotHeaderEntry where
 -- | The metric values in the pivot region.
 --
 -- /See:/ 'pivotValueRegion' smart constructor.
-newtype PivotValueRegion = PivotValueRegion'
+newtype PivotValueRegion =
+  PivotValueRegion'
     { _pvrValues :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PivotValueRegion' with the minimum fields required to make a request.
 --
@@ -228,10 +239,8 @@ newtype PivotValueRegion = PivotValueRegion'
 -- * 'pvrValues'
 pivotValueRegion
     :: PivotValueRegion
-pivotValueRegion =
-    PivotValueRegion'
-    { _pvrValues = Nothing
-    }
+pivotValueRegion = PivotValueRegion' {_pvrValues = Nothing}
+
 
 -- | The values of the metrics in each of the pivot regions.
 pvrValues :: Lens' PivotValueRegion [Text]
@@ -253,7 +262,8 @@ instance ToJSON PivotValueRegion where
 -- | The main request class which specifies the Reporting API request.
 --
 -- /See:/ 'reportRequest' smart constructor.
-data ReportRequest = ReportRequest'
+data ReportRequest =
+  ReportRequest'
     { _rMetrics                :: !(Maybe [Metric])
     , _rPivots                 :: !(Maybe [Pivot])
     , _rCohortGroup            :: !(Maybe CohortGroup)
@@ -271,7 +281,9 @@ data ReportRequest = ReportRequest'
     , _rPageSize               :: !(Maybe (Textual Int32))
     , _rOrderBys               :: !(Maybe [OrderBy])
     , _rFiltersExpression      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
 --
@@ -313,7 +325,7 @@ data ReportRequest = ReportRequest'
 reportRequest
     :: ReportRequest
 reportRequest =
-    ReportRequest'
+  ReportRequest'
     { _rMetrics = Nothing
     , _rPivots = Nothing
     , _rCohortGroup = Nothing
@@ -332,6 +344,7 @@ reportRequest =
     , _rOrderBys = Nothing
     , _rFiltersExpression = Nothing
     }
+
 
 -- | The metrics requested. Requests must specify at least one metric.
 -- Requests can have a total of 10 metrics.
@@ -544,10 +557,13 @@ instance ToJSON ReportRequest where
 -- | Header for the metrics.
 --
 -- /See:/ 'metricHeaderEntry' smart constructor.
-data MetricHeaderEntry = MetricHeaderEntry'
+data MetricHeaderEntry =
+  MetricHeaderEntry'
     { _mheName :: !(Maybe Text)
     , _mheType :: !(Maybe MetricHeaderEntryType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricHeaderEntry' with the minimum fields required to make a request.
 --
@@ -558,11 +574,8 @@ data MetricHeaderEntry = MetricHeaderEntry'
 -- * 'mheType'
 metricHeaderEntry
     :: MetricHeaderEntry
-metricHeaderEntry =
-    MetricHeaderEntry'
-    { _mheName = Nothing
-    , _mheType = Nothing
-    }
+metricHeaderEntry = MetricHeaderEntry' {_mheName = Nothing, _mheType = Nothing}
+
 
 -- | The name of the header.
 mheName :: Lens' MetricHeaderEntry (Maybe Text)
@@ -592,10 +605,13 @@ instance ToJSON MetricHeaderEntry where
 -- \"startDate\": \"2015-07-01\", \"endDate\": \"2015-07-01\" } }] }
 --
 -- /See:/ 'cohortGroup' smart constructor.
-data CohortGroup = CohortGroup'
+data CohortGroup =
+  CohortGroup'
     { _cgCohorts       :: !(Maybe [Cohort])
     , _cgLifetimeValue :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CohortGroup' with the minimum fields required to make a request.
 --
@@ -606,11 +622,8 @@ data CohortGroup = CohortGroup'
 -- * 'cgLifetimeValue'
 cohortGroup
     :: CohortGroup
-cohortGroup =
-    CohortGroup'
-    { _cgCohorts = Nothing
-    , _cgLifetimeValue = Nothing
-    }
+cohortGroup = CohortGroup' {_cgCohorts = Nothing, _cgLifetimeValue = Nothing}
+
 
 -- | The definition for the cohort.
 cgCohorts :: Lens' CohortGroup [Cohort]
@@ -664,9 +677,12 @@ instance ToJSON CohortGroup where
 -- conditions that can be combined.
 --
 -- /See:/ 'simpleSegment' smart constructor.
-newtype SimpleSegment = SimpleSegment'
+newtype SimpleSegment =
+  SimpleSegment'
     { _ssOrFiltersForSegment :: Maybe [OrFiltersForSegment]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SimpleSegment' with the minimum fields required to make a request.
 --
@@ -675,10 +691,8 @@ newtype SimpleSegment = SimpleSegment'
 -- * 'ssOrFiltersForSegment'
 simpleSegment
     :: SimpleSegment
-simpleSegment =
-    SimpleSegment'
-    { _ssOrFiltersForSegment = Nothing
-    }
+simpleSegment = SimpleSegment' {_ssOrFiltersForSegment = Nothing}
+
 
 -- | A list of segment filters groups which are combined with logical \`AND\`
 -- operator.
@@ -707,10 +721,13 @@ instance ToJSON SimpleSegment where
 -- filters are logically combined.
 --
 -- /See:/ 'dimensionFilterClause' smart constructor.
-data DimensionFilterClause = DimensionFilterClause'
+data DimensionFilterClause =
+  DimensionFilterClause'
     { _dfcOperator :: !(Maybe DimensionFilterClauseOperator)
     , _dfcFilters  :: !(Maybe [DimensionFilter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DimensionFilterClause' with the minimum fields required to make a request.
 --
@@ -722,10 +739,8 @@ data DimensionFilterClause = DimensionFilterClause'
 dimensionFilterClause
     :: DimensionFilterClause
 dimensionFilterClause =
-    DimensionFilterClause'
-    { _dfcOperator = Nothing
-    , _dfcFilters = Nothing
-    }
+  DimensionFilterClause' {_dfcOperator = Nothing, _dfcFilters = Nothing}
+
 
 -- | The operator for combining multiple dimension filters. If unspecified,
 -- it is treated as an \`OR\`.
@@ -758,11 +773,14 @@ instance ToJSON DimensionFilterClause where
 -- | Specifies the sorting options.
 --
 -- /See:/ 'orderBy' smart constructor.
-data OrderBy = OrderBy'
+data OrderBy =
+  OrderBy'
     { _obOrderType :: !(Maybe OrderByOrderType)
     , _obSortOrder :: !(Maybe OrderBySortOrder)
     , _obFieldName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderBy' with the minimum fields required to make a request.
 --
@@ -776,11 +794,9 @@ data OrderBy = OrderBy'
 orderBy
     :: OrderBy
 orderBy =
-    OrderBy'
-    { _obOrderType = Nothing
-    , _obSortOrder = Nothing
-    , _obFieldName = Nothing
-    }
+  OrderBy'
+    {_obOrderType = Nothing, _obSortOrder = Nothing, _obFieldName = Nothing}
+
 
 -- | The order type. The default orderType is \`VALUE\`.
 obOrderType :: Lens' OrderBy (Maybe OrderByOrderType)
@@ -821,10 +837,13 @@ instance ToJSON OrderBy where
 -- session originates.
 --
 -- /See:/ 'dimension' smart constructor.
-data Dimension = Dimension'
+data Dimension =
+  Dimension'
     { _dName             :: !(Maybe Text)
     , _dHistogramBuckets :: !(Maybe [Textual Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 --
@@ -835,11 +854,8 @@ data Dimension = Dimension'
 -- * 'dHistogramBuckets'
 dimension
     :: Dimension
-dimension =
-    Dimension'
-    { _dName = Nothing
-    , _dHistogramBuckets = Nothing
-    }
+dimension = Dimension' {_dName = Nothing, _dHistogramBuckets = Nothing}
+
 
 -- | Name of the dimension to fetch, for example \`ga:browser\`.
 dName :: Lens' Dimension (Maybe Text)
@@ -893,10 +909,13 @@ instance ToJSON Dimension where
 -- combination
 --
 -- /See:/ 'dateRangeValues' smart constructor.
-data DateRangeValues = DateRangeValues'
+data DateRangeValues =
+  DateRangeValues'
     { _drvPivotValueRegions :: !(Maybe [PivotValueRegion])
     , _drvValues            :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DateRangeValues' with the minimum fields required to make a request.
 --
@@ -908,10 +927,8 @@ data DateRangeValues = DateRangeValues'
 dateRangeValues
     :: DateRangeValues
 dateRangeValues =
-    DateRangeValues'
-    { _drvPivotValueRegions = Nothing
-    , _drvValues = Nothing
-    }
+  DateRangeValues' {_drvPivotValueRegions = Nothing, _drvValues = Nothing}
+
 
 -- | The values of each pivot region.
 drvPivotValueRegions :: Lens' DateRangeValues [PivotValueRegion]
@@ -946,10 +963,13 @@ instance ToJSON DateRangeValues where
 -- | The headers for each of the pivot sections defined in the request.
 --
 -- /See:/ 'pivotHeader' smart constructor.
-data PivotHeader = PivotHeader'
+data PivotHeader =
+  PivotHeader'
     { _phTotalPivotGroupsCount :: !(Maybe (Textual Int32))
     , _phPivotHeaderEntries    :: !(Maybe [PivotHeaderEntry])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PivotHeader' with the minimum fields required to make a request.
 --
@@ -961,10 +981,9 @@ data PivotHeader = PivotHeader'
 pivotHeader
     :: PivotHeader
 pivotHeader =
-    PivotHeader'
-    { _phTotalPivotGroupsCount = Nothing
-    , _phPivotHeaderEntries = Nothing
-    }
+  PivotHeader'
+    {_phTotalPivotGroupsCount = Nothing, _phPivotHeaderEntries = Nothing}
+
 
 -- | The total number of groups for this pivot.
 phTotalPivotGroupsCount :: Lens' PivotHeader (Maybe Int32)
@@ -1000,10 +1019,13 @@ instance ToJSON PivotHeader where
 -- | The headers for the metrics.
 --
 -- /See:/ 'metricHeader' smart constructor.
-data MetricHeader = MetricHeader'
+data MetricHeader =
+  MetricHeader'
     { _mhPivotHeaders        :: !(Maybe [PivotHeader])
     , _mhMetricHeaderEntries :: !(Maybe [MetricHeaderEntry])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricHeader' with the minimum fields required to make a request.
 --
@@ -1015,10 +1037,8 @@ data MetricHeader = MetricHeader'
 metricHeader
     :: MetricHeader
 metricHeader =
-    MetricHeader'
-    { _mhPivotHeaders = Nothing
-    , _mhMetricHeaderEntries = Nothing
-    }
+  MetricHeader' {_mhPivotHeaders = Nothing, _mhMetricHeaderEntries = Nothing}
+
 
 -- | Headers for the pivots in the response.
 mhPivotHeaders :: Lens' MetricHeader [PivotHeader]
@@ -1058,11 +1078,14 @@ instance ToJSON MetricHeader where
 -- can be used to select users or sessions based on sequential conditions.
 --
 -- /See:/ 'segmentFilter' smart constructor.
-data SegmentFilter = SegmentFilter'
+data SegmentFilter =
+  SegmentFilter'
     { _sfNot             :: !(Maybe Bool)
     , _sfSimpleSegment   :: !(Maybe SimpleSegment)
     , _sfSequenceSegment :: !(Maybe SequenceSegment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentFilter' with the minimum fields required to make a request.
 --
@@ -1076,11 +1099,9 @@ data SegmentFilter = SegmentFilter'
 segmentFilter
     :: SegmentFilter
 segmentFilter =
-    SegmentFilter'
-    { _sfNot = Nothing
-    , _sfSimpleSegment = Nothing
-    , _sfSequenceSegment = Nothing
-    }
+  SegmentFilter'
+    {_sfNot = Nothing, _sfSimpleSegment = Nothing, _sfSequenceSegment = Nothing}
+
 
 -- | If true, match the complement of simple or sequence segment. For
 -- example, to match all visits not from \"New York\", we can define the
@@ -1129,10 +1150,13 @@ instance ToJSON SegmentFilter where
 -- \`YYYY-MM-DD\`.
 --
 -- /See:/ 'dateRange' smart constructor.
-data DateRange = DateRange'
+data DateRange =
+  DateRange'
     { _drEndDate   :: !(Maybe Text)
     , _drStartDate :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DateRange' with the minimum fields required to make a request.
 --
@@ -1143,11 +1167,8 @@ data DateRange = DateRange'
 -- * 'drStartDate'
 dateRange
     :: DateRange
-dateRange =
-    DateRange'
-    { _drEndDate = Nothing
-    , _drStartDate = Nothing
-    }
+dateRange = DateRange' {_drEndDate = Nothing, _drStartDate = Nothing}
+
 
 -- | The end date for the query in the format \`YYYY-MM-DD\`.
 drEndDate :: Lens' DateRange (Maybe Text)
@@ -1176,11 +1197,14 @@ instance ToJSON DateRange where
 -- | The data response corresponding to the request.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report'
+data Report =
+  Report'
     { _rNextPageToken :: !(Maybe Text)
     , _rData          :: !(Maybe ReportData)
     , _rColumnHeader  :: !(Maybe ColumnHeader)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
@@ -1194,11 +1218,9 @@ data Report = Report'
 report
     :: Report
 report =
-    Report'
-    { _rNextPageToken = Nothing
-    , _rData = Nothing
-    , _rColumnHeader = Nothing
-    }
+  Report'
+    {_rNextPageToken = Nothing, _rData = Nothing, _rColumnHeader = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list.
 rNextPageToken :: Lens' Report (Maybe Text)
@@ -1235,7 +1257,8 @@ instance ToJSON Report where
 -- | The data part of the report.
 --
 -- /See:/ 'reportData' smart constructor.
-data ReportData = ReportData'
+data ReportData =
+  ReportData'
     { _rdMinimums           :: !(Maybe [DateRangeValues])
     , _rdRows               :: !(Maybe [ReportRow])
     , _rdTotals             :: !(Maybe [DateRangeValues])
@@ -1245,7 +1268,9 @@ data ReportData = ReportData'
     , _rdRowCount           :: !(Maybe (Textual Int32))
     , _rdSamplingSpaceSizes :: !(Maybe [Textual Int64])
     , _rdIsDataGolden       :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportData' with the minimum fields required to make a request.
 --
@@ -1271,7 +1296,7 @@ data ReportData = ReportData'
 reportData
     :: ReportData
 reportData =
-    ReportData'
+  ReportData'
     { _rdMinimums = Nothing
     , _rdRows = Nothing
     , _rdTotals = Nothing
@@ -1282,6 +1307,7 @@ reportData =
     , _rdSamplingSpaceSizes = Nothing
     , _rdIsDataGolden = Nothing
     }
+
 
 -- | Minimum and maximum values seen over all matching rows. These are both
 -- empty when \`hideValueRanges\` in the request is false, or when rowCount
@@ -1403,11 +1429,14 @@ instance ToJSON ReportData where
 -- or a dimension filter.
 --
 -- /See:/ 'segmentFilterClause' smart constructor.
-data SegmentFilterClause = SegmentFilterClause'
+data SegmentFilterClause =
+  SegmentFilterClause'
     { _sfcMetricFilter    :: !(Maybe SegmentMetricFilter)
     , _sfcNot             :: !(Maybe Bool)
     , _sfcDimensionFilter :: !(Maybe SegmentDimensionFilter)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentFilterClause' with the minimum fields required to make a request.
 --
@@ -1421,11 +1450,12 @@ data SegmentFilterClause = SegmentFilterClause'
 segmentFilterClause
     :: SegmentFilterClause
 segmentFilterClause =
-    SegmentFilterClause'
+  SegmentFilterClause'
     { _sfcMetricFilter = Nothing
     , _sfcNot = Nothing
     , _sfcDimensionFilter = Nothing
     }
+
 
 -- | Metric Filter for the segment definition.
 sfcMetricFilter :: Lens' SegmentFilterClause (Maybe SegmentMetricFilter)
@@ -1462,10 +1492,13 @@ instance ToJSON SegmentFilterClause where
 -- | A segment sequence definition.
 --
 -- /See:/ 'segmentSequenceStep' smart constructor.
-data SegmentSequenceStep = SegmentSequenceStep'
+data SegmentSequenceStep =
+  SegmentSequenceStep'
     { _sssMatchType           :: !(Maybe SegmentSequenceStepMatchType)
     , _sssOrFiltersForSegment :: !(Maybe [OrFiltersForSegment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentSequenceStep' with the minimum fields required to make a request.
 --
@@ -1477,10 +1510,9 @@ data SegmentSequenceStep = SegmentSequenceStep'
 segmentSequenceStep
     :: SegmentSequenceStep
 segmentSequenceStep =
-    SegmentSequenceStep'
-    { _sssMatchType = Nothing
-    , _sssOrFiltersForSegment = Nothing
-    }
+  SegmentSequenceStep'
+    {_sssMatchType = Nothing, _sssOrFiltersForSegment = Nothing}
+
 
 -- | Specifies if the step immediately precedes or can be any time before the
 -- next step.
@@ -1517,9 +1549,12 @@ instance ToJSON SegmentSequenceStep where
 -- logical OR operator.
 --
 -- /See:/ 'orFiltersForSegment' smart constructor.
-newtype OrFiltersForSegment = OrFiltersForSegment'
+newtype OrFiltersForSegment =
+  OrFiltersForSegment'
     { _offsSegmentFilterClauses :: Maybe [SegmentFilterClause]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrFiltersForSegment' with the minimum fields required to make a request.
 --
@@ -1528,10 +1563,8 @@ newtype OrFiltersForSegment = OrFiltersForSegment'
 -- * 'offsSegmentFilterClauses'
 orFiltersForSegment
     :: OrFiltersForSegment
-orFiltersForSegment =
-    OrFiltersForSegment'
-    { _offsSegmentFilterClauses = Nothing
-    }
+orFiltersForSegment = OrFiltersForSegment' {_offsSegmentFilterClauses = Nothing}
+
 
 -- | List of segment filters to be combined with a \`OR\` operator.
 offsSegmentFilterClauses :: Lens' OrFiltersForSegment [SegmentFilterClause]
@@ -1559,9 +1592,12 @@ instance ToJSON OrFiltersForSegment where
 -- which are combined together with a logical \`AND\` operation.
 --
 -- /See:/ 'segmentDefinition' smart constructor.
-newtype SegmentDefinition = SegmentDefinition'
+newtype SegmentDefinition =
+  SegmentDefinition'
     { _sdSegmentFilters :: Maybe [SegmentFilter]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentDefinition' with the minimum fields required to make a request.
 --
@@ -1570,10 +1606,8 @@ newtype SegmentDefinition = SegmentDefinition'
 -- * 'sdSegmentFilters'
 segmentDefinition
     :: SegmentDefinition
-segmentDefinition =
-    SegmentDefinition'
-    { _sdSegmentFilters = Nothing
-    }
+segmentDefinition = SegmentDefinition' {_sdSegmentFilters = Nothing}
+
 
 -- | A segment is defined by a set of segment filters which are combined
 -- together with a logical \`AND\` operation.
@@ -1602,13 +1636,16 @@ instance ToJSON SegmentDefinition where
 -- your data on a second dimension.
 --
 -- /See:/ 'pivot' smart constructor.
-data Pivot = Pivot'
+data Pivot =
+  Pivot'
     { _pStartGroup             :: !(Maybe (Textual Int32))
     , _pMetrics                :: !(Maybe [Metric])
     , _pMaxGroupCount          :: !(Maybe (Textual Int32))
     , _pDimensions             :: !(Maybe [Dimension])
     , _pDimensionFilterClauses :: !(Maybe [DimensionFilterClause])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Pivot' with the minimum fields required to make a request.
 --
@@ -1626,13 +1663,14 @@ data Pivot = Pivot'
 pivot
     :: Pivot
 pivot =
-    Pivot'
+  Pivot'
     { _pStartGroup = Nothing
     , _pMetrics = Nothing
     , _pMaxGroupCount = Nothing
     , _pDimensions = Nothing
     , _pDimensionFilterClauses = Nothing
     }
+
 
 -- | If k metrics were requested, then the response will contain some
 -- data-dependent multiple of k columns in the report. E.g., if you pivoted
@@ -1716,10 +1754,13 @@ instance ToJSON Pivot where
 -- be combined with special sequence operators.
 --
 -- /See:/ 'sequenceSegment' smart constructor.
-data SequenceSegment = SequenceSegment'
+data SequenceSegment =
+  SequenceSegment'
     { _ssFirstStepShouldMatchFirstHit :: !(Maybe Bool)
     , _ssSegmentSequenceSteps         :: !(Maybe [SegmentSequenceStep])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SequenceSegment' with the minimum fields required to make a request.
 --
@@ -1731,10 +1772,11 @@ data SequenceSegment = SequenceSegment'
 sequenceSegment
     :: SequenceSegment
 sequenceSegment =
-    SequenceSegment'
+  SequenceSegment'
     { _ssFirstStepShouldMatchFirstHit = Nothing
     , _ssSegmentSequenceSteps = Nothing
     }
+
 
 -- | If set, first step condition must match the first hit of the visitor (in
 -- the date range).
@@ -1773,11 +1815,14 @@ instance ToJSON SequenceSegment where
 -- indicates the total number of users for the requested time period.
 --
 -- /See:/ 'metric' smart constructor.
-data Metric = Metric'
+data Metric =
+  Metric'
     { _mFormattingType :: !(Maybe MetricFormattingType)
     , _mAlias          :: !(Maybe Text)
     , _mExpression     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Metric' with the minimum fields required to make a request.
 --
@@ -1791,11 +1836,9 @@ data Metric = Metric'
 metric
     :: Metric
 metric =
-    Metric'
-    { _mFormattingType = Nothing
-    , _mAlias = Nothing
-    , _mExpression = Nothing
-    }
+  Metric'
+    {_mFormattingType = Nothing, _mAlias = Nothing, _mExpression = Nothing}
+
 
 -- | Specifies how the metric expression should be formatted, for example
 -- \`INTEGER\`.
@@ -1843,13 +1886,16 @@ instance ToJSON Metric where
 -- | Metric filter to be used in a segment filter clause.
 --
 -- /See:/ 'segmentMetricFilter' smart constructor.
-data SegmentMetricFilter = SegmentMetricFilter'
+data SegmentMetricFilter =
+  SegmentMetricFilter'
     { _smfOperator           :: !(Maybe SegmentMetricFilterOperator)
     , _smfMetricName         :: !(Maybe Text)
     , _smfMaxComparisonValue :: !(Maybe Text)
     , _smfScope              :: !(Maybe SegmentMetricFilterScope)
     , _smfComparisonValue    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentMetricFilter' with the minimum fields required to make a request.
 --
@@ -1867,13 +1913,14 @@ data SegmentMetricFilter = SegmentMetricFilter'
 segmentMetricFilter
     :: SegmentMetricFilter
 segmentMetricFilter =
-    SegmentMetricFilter'
+  SegmentMetricFilter'
     { _smfOperator = Nothing
     , _smfMetricName = Nothing
     , _smfMaxComparisonValue = Nothing
     , _smfScope = Nothing
     , _smfComparisonValue = Nothing
     }
+
 
 -- | Specifies is the operation to perform to compare the metric. The default
 -- is \`EQUAL\`.
@@ -1931,10 +1978,13 @@ instance ToJSON SegmentMetricFilter where
 -- | The batch request containing multiple report request.
 --
 -- /See:/ 'getReportsRequest' smart constructor.
-data GetReportsRequest = GetReportsRequest'
+data GetReportsRequest =
+  GetReportsRequest'
     { _grrUseResourceQuotas :: !(Maybe Bool)
     , _grrReportRequests    :: !(Maybe [ReportRequest])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetReportsRequest' with the minimum fields required to make a request.
 --
@@ -1946,10 +1996,9 @@ data GetReportsRequest = GetReportsRequest'
 getReportsRequest
     :: GetReportsRequest
 getReportsRequest =
-    GetReportsRequest'
-    { _grrUseResourceQuotas = Nothing
-    , _grrReportRequests = Nothing
-    }
+  GetReportsRequest'
+    {_grrUseResourceQuotas = Nothing, _grrReportRequests = Nothing}
+
 
 -- | Enables [resource based
 -- quotas](\/analytics\/devguides\/reporting\/core\/v4\/limits-quotas#analytics_reporting_api_v4),
@@ -1994,11 +2043,14 @@ instance ToJSON GetReportsRequest where
 -- belong to the same cohort.
 --
 -- /See:/ 'cohort' smart constructor.
-data Cohort = Cohort'
+data Cohort =
+  Cohort'
     { _cDateRange :: !(Maybe DateRange)
     , _cName      :: !(Maybe Text)
     , _cType      :: !(Maybe CohortType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Cohort' with the minimum fields required to make a request.
 --
@@ -2011,12 +2063,8 @@ data Cohort = Cohort'
 -- * 'cType'
 cohort
     :: Cohort
-cohort =
-    Cohort'
-    { _cDateRange = Nothing
-    , _cName = Nothing
-    , _cType = Nothing
-    }
+cohort = Cohort' {_cDateRange = Nothing, _cName = Nothing, _cType = Nothing}
+
 
 -- | This is used for \`FIRST_VISIT_DATE\` cohort, the cohort selects users
 -- whose first visit date is between start date and end date defined in the
@@ -2061,13 +2109,16 @@ instance ToJSON Cohort where
 -- | Dimension filter specifies the filtering options on a dimension.
 --
 -- /See:/ 'dimensionFilter' smart constructor.
-data DimensionFilter = DimensionFilter'
+data DimensionFilter =
+  DimensionFilter'
     { _dfNot           :: !(Maybe Bool)
     , _dfOperator      :: !(Maybe DimensionFilterOperator)
     , _dfExpressions   :: !(Maybe [Text])
     , _dfDimensionName :: !(Maybe Text)
     , _dfCaseSensitive :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DimensionFilter' with the minimum fields required to make a request.
 --
@@ -2085,13 +2136,14 @@ data DimensionFilter = DimensionFilter'
 dimensionFilter
     :: DimensionFilter
 dimensionFilter =
-    DimensionFilter'
+  DimensionFilter'
     { _dfNot = Nothing
     , _dfOperator = Nothing
     , _dfExpressions = Nothing
     , _dfDimensionName = Nothing
     , _dfCaseSensitive = Nothing
     }
+
 
 -- | Logical \`NOT\` operator. If this boolean is set to true, then the
 -- matching dimension values will be excluded in the report. The default is
@@ -2151,11 +2203,14 @@ instance ToJSON DimensionFilter where
 -- \`batchGet\` call.
 --
 -- /See:/ 'getReportsResponse' smart constructor.
-data GetReportsResponse = GetReportsResponse'
+data GetReportsResponse =
+  GetReportsResponse'
     { _grrReports                 :: !(Maybe [Report])
     , _grrResourceQuotasRemaining :: !(Maybe ResourceQuotasRemaining)
     , _grrQueryCost               :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetReportsResponse' with the minimum fields required to make a request.
 --
@@ -2169,11 +2224,12 @@ data GetReportsResponse = GetReportsResponse'
 getReportsResponse
     :: GetReportsResponse
 getReportsResponse =
-    GetReportsResponse'
+  GetReportsResponse'
     { _grrReports = Nothing
     , _grrResourceQuotasRemaining = Nothing
     , _grrQueryCost = Nothing
     }
+
 
 -- | Responses corresponding to each of the request.
 grrReports :: Lens' GetReportsResponse [Report]
@@ -2218,10 +2274,13 @@ instance ToJSON GetReportsResponse where
 -- users, one Segment might be users from a particular country or city.
 --
 -- /See:/ 'segment' smart constructor.
-data Segment = Segment'
+data Segment =
+  Segment'
     { _sDynamicSegment :: !(Maybe DynamicSegment)
     , _sSegmentId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Segment' with the minimum fields required to make a request.
 --
@@ -2232,11 +2291,8 @@ data Segment = Segment'
 -- * 'sSegmentId'
 segment
     :: Segment
-segment =
-    Segment'
-    { _sDynamicSegment = Nothing
-    , _sSegmentId = Nothing
-    }
+segment = Segment' {_sDynamicSegment = Nothing, _sSegmentId = Nothing}
+
 
 -- | A dynamic segment definition in the request.
 sDynamicSegment :: Lens' Segment (Maybe DynamicSegment)
@@ -2268,10 +2324,13 @@ instance ToJSON Segment where
 -- is completed.
 --
 -- /See:/ 'resourceQuotasRemaining' smart constructor.
-data ResourceQuotasRemaining = ResourceQuotasRemaining'
+data ResourceQuotasRemaining =
+  ResourceQuotasRemaining'
     { _rqrHourlyQuotaTokensRemaining :: !(Maybe (Textual Int32))
     , _rqrDailyQuotaTokensRemaining  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceQuotasRemaining' with the minimum fields required to make a request.
 --
@@ -2283,10 +2342,11 @@ data ResourceQuotasRemaining = ResourceQuotasRemaining'
 resourceQuotasRemaining
     :: ResourceQuotasRemaining
 resourceQuotasRemaining =
-    ResourceQuotasRemaining'
+  ResourceQuotasRemaining'
     { _rqrHourlyQuotaTokensRemaining = Nothing
     , _rqrDailyQuotaTokensRemaining = Nothing
     }
+
 
 -- | Hourly resource quota tokens remaining.
 rqrHourlyQuotaTokensRemaining :: Lens' ResourceQuotasRemaining (Maybe Int32)
@@ -2322,14 +2382,17 @@ instance ToJSON ResourceQuotasRemaining where
 -- | Dimension filter specifies the filtering options on a dimension.
 --
 -- /See:/ 'segmentDimensionFilter' smart constructor.
-data SegmentDimensionFilter = SegmentDimensionFilter'
+data SegmentDimensionFilter =
+  SegmentDimensionFilter'
     { _sdfOperator           :: !(Maybe SegmentDimensionFilterOperator)
     , _sdfMinComparisonValue :: !(Maybe Text)
     , _sdfMaxComparisonValue :: !(Maybe Text)
     , _sdfExpressions        :: !(Maybe [Text])
     , _sdfDimensionName      :: !(Maybe Text)
     , _sdfCaseSensitive      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentDimensionFilter' with the minimum fields required to make a request.
 --
@@ -2349,7 +2412,7 @@ data SegmentDimensionFilter = SegmentDimensionFilter'
 segmentDimensionFilter
     :: SegmentDimensionFilter
 segmentDimensionFilter =
-    SegmentDimensionFilter'
+  SegmentDimensionFilter'
     { _sdfOperator = Nothing
     , _sdfMinComparisonValue = Nothing
     , _sdfMaxComparisonValue = Nothing
@@ -2357,6 +2420,7 @@ segmentDimensionFilter =
     , _sdfDimensionName = Nothing
     , _sdfCaseSensitive = Nothing
     }
+
 
 -- | The operator to use to match the dimension with the expressions.
 sdfOperator :: Lens' SegmentDimensionFilter (Maybe SegmentDimensionFilterOperator)
@@ -2422,11 +2486,14 @@ instance ToJSON SegmentDimensionFilter where
 -- A segment can select users, sessions or both.
 --
 -- /See:/ 'dynamicSegment' smart constructor.
-data DynamicSegment = DynamicSegment'
+data DynamicSegment =
+  DynamicSegment'
     { _dsUserSegment    :: !(Maybe SegmentDefinition)
     , _dsName           :: !(Maybe Text)
     , _dsSessionSegment :: !(Maybe SegmentDefinition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DynamicSegment' with the minimum fields required to make a request.
 --
@@ -2440,11 +2507,9 @@ data DynamicSegment = DynamicSegment'
 dynamicSegment
     :: DynamicSegment
 dynamicSegment =
-    DynamicSegment'
-    { _dsUserSegment = Nothing
-    , _dsName = Nothing
-    , _dsSessionSegment = Nothing
-    }
+  DynamicSegment'
+    {_dsUserSegment = Nothing, _dsName = Nothing, _dsSessionSegment = Nothing}
+
 
 -- | User Segment to select users to include in the segment.
 dsUserSegment :: Lens' DynamicSegment (Maybe SegmentDefinition)
@@ -2482,10 +2547,13 @@ instance ToJSON DynamicSegment where
 -- how the filters are logically combined.
 --
 -- /See:/ 'metricFilterClause' smart constructor.
-data MetricFilterClause = MetricFilterClause'
+data MetricFilterClause =
+  MetricFilterClause'
     { _mfcOperator :: !(Maybe MetricFilterClauseOperator)
     , _mfcFilters  :: !(Maybe [MetricFilter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricFilterClause' with the minimum fields required to make a request.
 --
@@ -2497,10 +2565,8 @@ data MetricFilterClause = MetricFilterClause'
 metricFilterClause
     :: MetricFilterClause
 metricFilterClause =
-    MetricFilterClause'
-    { _mfcOperator = Nothing
-    , _mfcFilters = Nothing
-    }
+  MetricFilterClause' {_mfcOperator = Nothing, _mfcFilters = Nothing}
+
 
 -- | The operator for combining multiple metric filters. If unspecified, it
 -- is treated as an \`OR\`.
@@ -2533,10 +2599,13 @@ instance ToJSON MetricFilterClause where
 -- | Column headers.
 --
 -- /See:/ 'columnHeader' smart constructor.
-data ColumnHeader = ColumnHeader'
+data ColumnHeader =
+  ColumnHeader'
     { _chMetricHeader :: !(Maybe MetricHeader)
     , _chDimensions   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ColumnHeader' with the minimum fields required to make a request.
 --
@@ -2548,10 +2617,8 @@ data ColumnHeader = ColumnHeader'
 columnHeader
     :: ColumnHeader
 columnHeader =
-    ColumnHeader'
-    { _chMetricHeader = Nothing
-    , _chDimensions = Nothing
-    }
+  ColumnHeader' {_chMetricHeader = Nothing, _chDimensions = Nothing}
+
 
 -- | Metric headers for the metrics in the response.
 chMetricHeader :: Lens' ColumnHeader (Maybe MetricHeader)

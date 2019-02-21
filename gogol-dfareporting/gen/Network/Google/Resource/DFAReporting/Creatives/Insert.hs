@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativesInsert' request conforms to.
 type CreativesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
@@ -54,10 +54,13 @@ type CreativesInsertResource =
 -- | Inserts a new creative.
 --
 -- /See:/ 'creativesInsert' smart constructor.
-data CreativesInsert = CreativesInsert'
+data CreativesInsert =
+  CreativesInsert'
     { _ciProFileId :: !(Textual Int64)
     , _ciPayload   :: !Creative
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativesInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ creativesInsert
     -> Creative -- ^ 'ciPayload'
     -> CreativesInsert
 creativesInsert pCiProFileId_ pCiPayload_ =
-    CreativesInsert'
-    { _ciProFileId = _Coerce # pCiProFileId_
-    , _ciPayload = pCiPayload_
-    }
+  CreativesInsert'
+    {_ciProFileId = _Coerce # pCiProFileId_, _ciPayload = pCiPayload_}
+
 
 -- | User profile ID associated with this request.
 ciProFileId :: Lens' CreativesInsert Int64

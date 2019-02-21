@@ -55,10 +55,13 @@ type CustomChannelsDeleteResource =
 -- | Delete a specific custom channel from the host AdSense account.
 --
 -- /See:/ 'customChannelsDelete' smart constructor.
-data CustomChannelsDelete = CustomChannelsDelete'
+data CustomChannelsDelete =
+  CustomChannelsDelete'
     { _ccdCustomChannelId :: !Text
     , _ccdAdClientId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomChannelsDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +75,11 @@ customChannelsDelete
     -> Text -- ^ 'ccdAdClientId'
     -> CustomChannelsDelete
 customChannelsDelete pCcdCustomChannelId_ pCcdAdClientId_ =
-    CustomChannelsDelete'
+  CustomChannelsDelete'
     { _ccdCustomChannelId = pCcdCustomChannelId_
     , _ccdAdClientId = pCcdAdClientId_
     }
+
 
 -- | Custom channel to delete.
 ccdCustomChannelId :: Lens' CustomChannelsDelete Text

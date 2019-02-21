@@ -51,9 +51,12 @@ type TableDeleteResource =
 -- | Deletes a table.
 --
 -- /See:/ 'tableDelete' smart constructor.
-newtype TableDelete = TableDelete'
+newtype TableDelete =
+  TableDelete'
     { _tddTableId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TableDelete' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype TableDelete = TableDelete'
 tableDelete
     :: Text -- ^ 'tddTableId'
     -> TableDelete
-tableDelete pTddTableId_ =
-    TableDelete'
-    { _tddTableId = pTddTableId_
-    }
+tableDelete pTddTableId_ = TableDelete' {_tddTableId = pTddTableId_}
+
 
 -- | ID of the table to be deleted.
 tddTableId :: Lens' TableDelete Text

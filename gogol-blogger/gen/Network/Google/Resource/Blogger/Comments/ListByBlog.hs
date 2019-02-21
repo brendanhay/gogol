@@ -64,7 +64,8 @@ type CommentsListByBlogResource =
 -- | Retrieves the comments for a blog, across all posts, possibly filtered.
 --
 -- /See:/ 'commentsListByBlog' smart constructor.
-data CommentsListByBlog = CommentsListByBlog'
+data CommentsListByBlog =
+  CommentsListByBlog'
     { _clbbStatus      :: !(Maybe [CommentsListByBlogStatus])
     , _clbbEndDate     :: !(Maybe DateTime')
     , _clbbBlogId      :: !Text
@@ -72,7 +73,9 @@ data CommentsListByBlog = CommentsListByBlog'
     , _clbbFetchBodies :: !(Maybe Bool)
     , _clbbPageToken   :: !(Maybe Text)
     , _clbbMaxResults  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsListByBlog' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ commentsListByBlog
     :: Text -- ^ 'clbbBlogId'
     -> CommentsListByBlog
 commentsListByBlog pClbbBlogId_ =
-    CommentsListByBlog'
+  CommentsListByBlog'
     { _clbbStatus = Nothing
     , _clbbEndDate = Nothing
     , _clbbBlogId = pClbbBlogId_
@@ -104,6 +107,7 @@ commentsListByBlog pClbbBlogId_ =
     , _clbbPageToken = Nothing
     , _clbbMaxResults = Nothing
     }
+
 
 clbbStatus :: Lens' CommentsListByBlog [CommentsListByBlogStatus]
 clbbStatus

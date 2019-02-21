@@ -86,7 +86,8 @@ type FoldersMoveResource =
 -- permission on the folder\'s current and proposed new parent.
 --
 -- /See:/ 'foldersMove' smart constructor.
-data FoldersMove = FoldersMove'
+data FoldersMove =
+  FoldersMove'
     { _fmXgafv          :: !(Maybe Xgafv)
     , _fmUploadProtocol :: !(Maybe Text)
     , _fmAccessToken    :: !(Maybe Text)
@@ -94,7 +95,9 @@ data FoldersMove = FoldersMove'
     , _fmPayload        :: !MoveFolderRequest
     , _fmName           :: !Text
     , _fmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersMove' with the minimum fields required to make a request.
 --
@@ -118,7 +121,7 @@ foldersMove
     -> Text -- ^ 'fmName'
     -> FoldersMove
 foldersMove pFmPayload_ pFmName_ =
-    FoldersMove'
+  FoldersMove'
     { _fmXgafv = Nothing
     , _fmUploadProtocol = Nothing
     , _fmAccessToken = Nothing
@@ -127,6 +130,7 @@ foldersMove pFmPayload_ pFmName_ =
     , _fmName = pFmName_
     , _fmCallback = Nothing
     }
+
 
 -- | V1 error format.
 fmXgafv :: Lens' FoldersMove (Maybe Xgafv)

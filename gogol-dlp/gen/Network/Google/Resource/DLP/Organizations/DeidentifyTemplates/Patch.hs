@@ -67,7 +67,8 @@ type OrganizationsDeidentifyTemplatesPatchResource =
 -- more.
 --
 -- /See:/ 'organizationsDeidentifyTemplatesPatch' smart constructor.
-data OrganizationsDeidentifyTemplatesPatch = OrganizationsDeidentifyTemplatesPatch'
+data OrganizationsDeidentifyTemplatesPatch =
+  OrganizationsDeidentifyTemplatesPatch'
     { _odtpXgafv          :: !(Maybe Xgafv)
     , _odtpUploadProtocol :: !(Maybe Text)
     , _odtpAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data OrganizationsDeidentifyTemplatesPatch = OrganizationsDeidentifyTemplatesPat
     , _odtpPayload        :: !GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
     , _odtpName           :: !Text
     , _odtpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsDeidentifyTemplatesPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ organizationsDeidentifyTemplatesPatch
     -> Text -- ^ 'odtpName'
     -> OrganizationsDeidentifyTemplatesPatch
 organizationsDeidentifyTemplatesPatch pOdtpPayload_ pOdtpName_ =
-    OrganizationsDeidentifyTemplatesPatch'
+  OrganizationsDeidentifyTemplatesPatch'
     { _odtpXgafv = Nothing
     , _odtpUploadProtocol = Nothing
     , _odtpAccessToken = Nothing
@@ -108,6 +111,7 @@ organizationsDeidentifyTemplatesPatch pOdtpPayload_ pOdtpName_ =
     , _odtpName = pOdtpName_
     , _odtpCallback = Nothing
     }
+
 
 -- | V1 error format.
 odtpXgafv :: Lens' OrganizationsDeidentifyTemplatesPatch (Maybe Xgafv)
@@ -149,7 +153,8 @@ odtpCallback
   = lens _odtpCallback (\ s a -> s{_odtpCallback = a})
 
 instance GoogleRequest
-         OrganizationsDeidentifyTemplatesPatch where
+           OrganizationsDeidentifyTemplatesPatch
+         where
         type Rs OrganizationsDeidentifyTemplatesPatch =
              GooglePrivacyDlpV2DeidentifyTemplate
         type Scopes OrganizationsDeidentifyTemplatesPatch =

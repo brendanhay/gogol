@@ -55,10 +55,13 @@ type TaskListsListResource =
 -- | Returns all the authenticated user\'s task lists.
 --
 -- /See:/ 'taskListsList' smart constructor.
-data TaskListsList = TaskListsList'
+data TaskListsList =
+  TaskListsList'
     { _tllPageToken  :: !(Maybe Text)
     , _tllMaxResults :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TaskListsList' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ data TaskListsList = TaskListsList'
 taskListsList
     :: TaskListsList
 taskListsList =
-    TaskListsList'
-    { _tllPageToken = Nothing
-    , _tllMaxResults = Nothing
-    }
+  TaskListsList' {_tllPageToken = Nothing, _tllMaxResults = Nothing}
+
 
 -- | Token specifying the result page to return. Optional.
 tllPageToken :: Lens' TaskListsList (Maybe Text)

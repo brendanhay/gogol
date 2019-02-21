@@ -60,12 +60,15 @@ type ActivitiesListResource =
 -- user.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList'
+data ActivitiesList =
+  ActivitiesList'
     { _alCollection :: !ActivitiesListCollection
     , _alUserId     :: !Text
     , _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ activitiesList
     -> Text -- ^ 'alUserId'
     -> ActivitiesList
 activitiesList pAlCollection_ pAlUserId_ =
-    ActivitiesList'
+  ActivitiesList'
     { _alCollection = pAlCollection_
     , _alUserId = pAlUserId_
     , _alPageToken = Nothing
     , _alMaxResults = 20
     }
+
 
 -- | The collection of activities to list.
 alCollection :: Lens' ActivitiesList ActivitiesListCollection

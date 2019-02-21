@@ -63,7 +63,8 @@ type MattersReopenResource =
 -- | Reopens the specified matter. Returns matter with updated state.
 --
 -- /See:/ 'mattersReopen' smart constructor.
-data MattersReopen = MattersReopen'
+data MattersReopen =
+  MattersReopen'
     { _mrXgafv          :: !(Maybe Xgafv)
     , _mrUploadProtocol :: !(Maybe Text)
     , _mrAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data MattersReopen = MattersReopen'
     , _mrPayload        :: !ReopenMatterRequest
     , _mrMatterId       :: !Text
     , _mrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersReopen' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ mattersReopen
     -> Text -- ^ 'mrMatterId'
     -> MattersReopen
 mattersReopen pMrPayload_ pMrMatterId_ =
-    MattersReopen'
+  MattersReopen'
     { _mrXgafv = Nothing
     , _mrUploadProtocol = Nothing
     , _mrAccessToken = Nothing
@@ -104,6 +107,7 @@ mattersReopen pMrPayload_ pMrMatterId_ =
     , _mrMatterId = pMrMatterId_
     , _mrCallback = Nothing
     }
+
 
 -- | V1 error format.
 mrXgafv :: Lens' MattersReopen (Maybe Xgafv)

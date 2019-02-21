@@ -66,7 +66,8 @@ type ProjectsTracesListSpansResource =
 -- | Returns a list of spans within a trace.
 --
 -- /See:/ 'projectsTracesListSpans' smart constructor.
-data ProjectsTracesListSpans = ProjectsTracesListSpans'
+data ProjectsTracesListSpans =
+  ProjectsTracesListSpans'
     { _ptlsParent         :: !Text
     , _ptlsXgafv          :: !(Maybe Xgafv)
     , _ptlsUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsTracesListSpans = ProjectsTracesListSpans'
     , _ptlsBearerToken    :: !(Maybe Text)
     , _ptlsPageToken      :: !(Maybe Text)
     , _ptlsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTracesListSpans' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsTracesListSpans
     :: Text -- ^ 'ptlsParent'
     -> ProjectsTracesListSpans
 projectsTracesListSpans pPtlsParent_ =
-    ProjectsTracesListSpans'
+  ProjectsTracesListSpans'
     { _ptlsParent = pPtlsParent_
     , _ptlsXgafv = Nothing
     , _ptlsUploadProtocol = Nothing
@@ -114,6 +117,7 @@ projectsTracesListSpans pPtlsParent_ =
     , _ptlsPageToken = Nothing
     , _ptlsCallback = Nothing
     }
+
 
 -- | ID of the trace for which to list child spans. Format is
 -- \`projects\/PROJECT_ID\/traces\/TRACE_ID\`.

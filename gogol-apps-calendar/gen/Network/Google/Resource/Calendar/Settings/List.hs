@@ -57,11 +57,14 @@ type SettingsListResource =
 -- | Returns all user settings for the authenticated user.
 --
 -- /See:/ 'settingsList' smart constructor.
-data SettingsList = SettingsList'
+data SettingsList =
+  SettingsList'
     { _slSyncToken  :: !(Maybe Text)
     , _slPageToken  :: !(Maybe Text)
     , _slMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsList' with the minimum fields required to make a request.
 --
@@ -75,11 +78,9 @@ data SettingsList = SettingsList'
 settingsList
     :: SettingsList
 settingsList =
-    SettingsList'
-    { _slSyncToken = Nothing
-    , _slPageToken = Nothing
-    , _slMaxResults = Nothing
-    }
+  SettingsList'
+    {_slSyncToken = Nothing, _slPageToken = Nothing, _slMaxResults = Nothing}
+
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
 -- results from the previous list request. It makes the result of this list

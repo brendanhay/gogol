@@ -27,10 +27,13 @@ import           Network.Google.Prelude
 -- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng'
+data LatLng =
+  LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -41,11 +44,8 @@ data LatLng = LatLng'
 -- * 'llLongitude'
 latLng
     :: LatLng
-latLng =
-    LatLng'
-    { _llLatitude = Nothing
-    , _llLongitude = Nothing
-    }
+latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -76,10 +76,13 @@ instance ToJSON LatLng where
 -- | Response message for ListUserStates.
 --
 -- /See:/ 'listUserStatesResponse' smart constructor.
-data ListUserStatesResponse = ListUserStatesResponse'
+data ListUserStatesResponse =
+  ListUserStatesResponse'
     { _lusrUserStates       :: !(Maybe [Text])
     , _lusrResponseMetadata :: !(Maybe ResponseMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListUserStatesResponse' with the minimum fields required to make a request.
 --
@@ -91,10 +94,9 @@ data ListUserStatesResponse = ListUserStatesResponse'
 listUserStatesResponse
     :: ListUserStatesResponse
 listUserStatesResponse =
-    ListUserStatesResponse'
-    { _lusrUserStates = Nothing
-    , _lusrResponseMetadata = Nothing
-    }
+  ListUserStatesResponse'
+    {_lusrUserStates = Nothing, _lusrResponseMetadata = Nothing}
+
 
 -- | User\'s states.
 lusrUserStates :: Lens' ListUserStatesResponse [Text]
@@ -128,10 +130,13 @@ instance ToJSON ListUserStatesResponse where
 -- | Key value data pair for an event.
 --
 -- /See:/ 'eventData' smart constructor.
-data EventData = EventData'
+data EventData =
+  EventData'
     { _edValues :: !(Maybe [Text])
     , _edKey    :: !(Maybe EventDataKey)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventData' with the minimum fields required to make a request.
 --
@@ -142,11 +147,8 @@ data EventData = EventData'
 -- * 'edKey'
 eventData
     :: EventData
-eventData =
-    EventData'
-    { _edValues = Nothing
-    , _edKey = Nothing
-    }
+eventData = EventData' {_edValues = Nothing, _edKey = Nothing}
+
 
 -- | Data values.
 edValues :: Lens' EventData [Text]
@@ -175,7 +177,8 @@ instance ToJSON EventData where
 -- | Historical information about a Google Partners Offer.
 --
 -- /See:/ 'historicalOffer' smart constructor.
-data HistoricalOffer = HistoricalOffer'
+data HistoricalOffer =
+  HistoricalOffer'
     { _hoCreationTime     :: !(Maybe DateTime')
     , _hoClientId         :: !(Maybe (Textual Int64))
     , _hoStatus           :: !(Maybe HistoricalOfferStatus)
@@ -188,7 +191,9 @@ data HistoricalOffer = HistoricalOffer'
     , _hoOfferType        :: !(Maybe HistoricalOfferOfferType)
     , _hoClientName       :: !(Maybe Text)
     , _hoExpirationTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HistoricalOffer' with the minimum fields required to make a request.
 --
@@ -220,7 +225,7 @@ data HistoricalOffer = HistoricalOffer'
 historicalOffer
     :: HistoricalOffer
 historicalOffer =
-    HistoricalOffer'
+  HistoricalOffer'
     { _hoCreationTime = Nothing
     , _hoClientId = Nothing
     , _hoStatus = Nothing
@@ -234,6 +239,7 @@ historicalOffer =
     , _hoClientName = Nothing
     , _hoExpirationTime = Nothing
     }
+
 
 -- | Time offer was first created.
 hoCreationTime :: Lens' HistoricalOffer (Maybe UTCTime)
@@ -341,13 +347,16 @@ instance ToJSON HistoricalOffer where
 -- | Common data that is in each API request.
 --
 -- /See:/ 'requestMetadata' smart constructor.
-data RequestMetadata = RequestMetadata'
+data RequestMetadata =
+  RequestMetadata'
     { _rmExperimentIds     :: !(Maybe [Text])
     , _rmTrafficSource     :: !(Maybe TrafficSource)
     , _rmLocale            :: !(Maybe Text)
     , _rmUserOverrides     :: !(Maybe UserOverrides)
     , _rmPartnersSessionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RequestMetadata' with the minimum fields required to make a request.
 --
@@ -365,13 +374,14 @@ data RequestMetadata = RequestMetadata'
 requestMetadata
     :: RequestMetadata
 requestMetadata =
-    RequestMetadata'
+  RequestMetadata'
     { _rmExperimentIds = Nothing
     , _rmTrafficSource = Nothing
     , _rmLocale = Nothing
     , _rmUserOverrides = Nothing
     , _rmPartnersSessionId = Nothing
     }
+
 
 -- | Experiment IDs the current request belongs to.
 rmExperimentIds :: Lens' RequestMetadata [Text]
@@ -428,12 +438,15 @@ instance ToJSON RequestMetadata where
 -- | Google Partners certification status.
 --
 -- /See:/ 'certificationStatus' smart constructor.
-data CertificationStatus = CertificationStatus'
+data CertificationStatus =
+  CertificationStatus'
     { _csUserCount    :: !(Maybe (Textual Int32))
     , _csIsCertified  :: !(Maybe Bool)
     , _csType         :: !(Maybe CertificationStatusType)
     , _csExamStatuses :: !(Maybe [CertificationExamStatus])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CertificationStatus' with the minimum fields required to make a request.
 --
@@ -449,12 +462,13 @@ data CertificationStatus = CertificationStatus'
 certificationStatus
     :: CertificationStatus
 certificationStatus =
-    CertificationStatus'
+  CertificationStatus'
     { _csUserCount = Nothing
     , _csIsCertified = Nothing
     , _csType = Nothing
     , _csExamStatuses = Nothing
     }
+
 
 -- | Number of people who are certified,
 csUserCount :: Lens' CertificationStatus (Maybe Int32)
@@ -501,11 +515,14 @@ instance ToJSON CertificationStatus where
 -- | Debug information about this request.
 --
 -- /See:/ 'debugInfo' smart constructor.
-data DebugInfo = DebugInfo'
+data DebugInfo =
+  DebugInfo'
     { _diServiceURL      :: !(Maybe Text)
     , _diServerTraceInfo :: !(Maybe Text)
     , _diServerInfo      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DebugInfo' with the minimum fields required to make a request.
 --
@@ -519,11 +536,12 @@ data DebugInfo = DebugInfo'
 debugInfo
     :: DebugInfo
 debugInfo =
-    DebugInfo'
+  DebugInfo'
     { _diServiceURL = Nothing
     , _diServerTraceInfo = Nothing
     , _diServerInfo = Nothing
     }
+
 
 -- | URL of the service that handled this request.
 diServiceURL :: Lens' DebugInfo (Maybe Text)
@@ -560,13 +578,16 @@ instance ToJSON DebugInfo where
 -- | A set of opt-ins for a user.
 --
 -- /See:/ 'optIns' smart constructor.
-data OptIns = OptIns'
+data OptIns =
+  OptIns'
     { _oiPhoneContact           :: !(Maybe Bool)
     , _oiPhysicalMail           :: !(Maybe Bool)
     , _oiPerformanceSuggestions :: !(Maybe Bool)
     , _oiSpecialOffers          :: !(Maybe Bool)
     , _oiMarketComm             :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OptIns' with the minimum fields required to make a request.
 --
@@ -584,13 +605,14 @@ data OptIns = OptIns'
 optIns
     :: OptIns
 optIns =
-    OptIns'
+  OptIns'
     { _oiPhoneContact = Nothing
     , _oiPhysicalMail = Nothing
     , _oiPerformanceSuggestions = Nothing
     , _oiSpecialOffers = Nothing
     , _oiMarketComm = Nothing
     }
+
 
 -- | An opt-in to allow recieivng phone calls about their Partners account.
 oiPhoneContact :: Lens' OptIns (Maybe Bool)
@@ -647,10 +669,13 @@ instance ToJSON OptIns where
 -- | Details of the analytics events for a \`Company\` within a single day.
 --
 -- /See:/ 'analyticsDataPoint' smart constructor.
-data AnalyticsDataPoint = AnalyticsDataPoint'
+data AnalyticsDataPoint =
+  AnalyticsDataPoint'
     { _adpEventCount     :: !(Maybe (Textual Int32))
     , _adpEventLocations :: !(Maybe [LatLng])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnalyticsDataPoint' with the minimum fields required to make a request.
 --
@@ -662,10 +687,8 @@ data AnalyticsDataPoint = AnalyticsDataPoint'
 analyticsDataPoint
     :: AnalyticsDataPoint
 analyticsDataPoint =
-    AnalyticsDataPoint'
-    { _adpEventCount = Nothing
-    , _adpEventLocations = Nothing
-    }
+  AnalyticsDataPoint' {_adpEventCount = Nothing, _adpEventLocations = Nothing}
+
 
 -- | Number of times the type of event occurred. Meaning depends on context
 -- (e.g. profile views, contacts, etc.).
@@ -701,10 +724,13 @@ instance ToJSON AnalyticsDataPoint where
 -- | Response message for GetCompany.
 --
 -- /See:/ 'getCompanyResponse' smart constructor.
-data GetCompanyResponse = GetCompanyResponse'
+data GetCompanyResponse =
+  GetCompanyResponse'
     { _gcrResponseMetadata :: !(Maybe ResponseMetadata)
     , _gcrCompany          :: !(Maybe Company)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetCompanyResponse' with the minimum fields required to make a request.
 --
@@ -716,10 +742,8 @@ data GetCompanyResponse = GetCompanyResponse'
 getCompanyResponse
     :: GetCompanyResponse
 getCompanyResponse =
-    GetCompanyResponse'
-    { _gcrResponseMetadata = Nothing
-    , _gcrCompany = Nothing
-    }
+  GetCompanyResponse' {_gcrResponseMetadata = Nothing, _gcrCompany = Nothing}
+
 
 -- | Current response metadata.
 gcrResponseMetadata :: Lens' GetCompanyResponse (Maybe ResponseMetadata)
@@ -749,13 +773,16 @@ instance ToJSON GetCompanyResponse where
 -- | Basic information from a public profile.
 --
 -- /See:/ 'publicProFile' smart constructor.
-data PublicProFile = PublicProFile'
+data PublicProFile =
+  PublicProFile'
     { _ppfURL             :: !(Maybe Text)
     , _ppfDisplayImageURL :: !(Maybe Text)
     , _ppfProFileImage    :: !(Maybe Text)
     , _ppfDisplayName     :: !(Maybe Text)
     , _ppfId              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublicProFile' with the minimum fields required to make a request.
 --
@@ -773,13 +800,14 @@ data PublicProFile = PublicProFile'
 publicProFile
     :: PublicProFile
 publicProFile =
-    PublicProFile'
+  PublicProFile'
     { _ppfURL = Nothing
     , _ppfDisplayImageURL = Nothing
     , _ppfProFileImage = Nothing
     , _ppfDisplayName = Nothing
     , _ppfId = Nothing
     }
+
 
 -- | The URL of the public profile.
 ppfURL :: Lens' PublicProFile (Maybe Text)
@@ -832,14 +860,17 @@ instance ToJSON PublicProFile where
 -- | A user\'s information on a specific exam.
 --
 -- /See:/ 'examStatus' smart constructor.
-data ExamStatus = ExamStatus'
+data ExamStatus =
+  ExamStatus'
     { _esPassed     :: !(Maybe Bool)
     , _esExpiration :: !(Maybe DateTime')
     , _esWarning    :: !(Maybe Bool)
     , _esLastPassed :: !(Maybe DateTime')
     , _esTaken      :: !(Maybe DateTime')
     , _esExamType   :: !(Maybe ExamStatusExamType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExamStatus' with the minimum fields required to make a request.
 --
@@ -859,7 +890,7 @@ data ExamStatus = ExamStatus'
 examStatus
     :: ExamStatus
 examStatus =
-    ExamStatus'
+  ExamStatus'
     { _esPassed = Nothing
     , _esExpiration = Nothing
     , _esWarning = Nothing
@@ -867,6 +898,7 @@ examStatus =
     , _esTaken = Nothing
     , _esExamType = Nothing
     }
+
 
 -- | Whether this exam has been passed and not expired.
 esPassed :: Lens' ExamStatus (Maybe Bool)
@@ -925,10 +957,13 @@ instance ToJSON ExamStatus where
 -- | Status for a Google Partners certification exam.
 --
 -- /See:/ 'certificationExamStatus' smart constructor.
-data CertificationExamStatus = CertificationExamStatus'
+data CertificationExamStatus =
+  CertificationExamStatus'
     { _cesNumberUsersPass :: !(Maybe (Textual Int32))
     , _cesType            :: !(Maybe CertificationExamStatusType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CertificationExamStatus' with the minimum fields required to make a request.
 --
@@ -940,10 +975,8 @@ data CertificationExamStatus = CertificationExamStatus'
 certificationExamStatus
     :: CertificationExamStatus
 certificationExamStatus =
-    CertificationExamStatus'
-    { _cesNumberUsersPass = Nothing
-    , _cesType = Nothing
-    }
+  CertificationExamStatus' {_cesNumberUsersPass = Nothing, _cesType = Nothing}
+
 
 -- | The number of people who have passed the certification exam.
 cesNumberUsersPass :: Lens' CertificationExamStatus (Maybe Int32)
@@ -974,7 +1007,8 @@ instance ToJSON CertificationExamStatus where
 -- contain a detailed (multi-field) version of the address.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lLatLng             :: !(Maybe LatLng)
     , _lLanguageCode       :: !(Maybe Text)
     , _lSortingCode        :: !(Maybe Text)
@@ -985,7 +1019,9 @@ data Location = Location'
     , _lAddress            :: !(Maybe Text)
     , _lLocality           :: !(Maybe Text)
     , _lAdministrativeArea :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -1013,7 +1049,7 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lLatLng = Nothing
     , _lLanguageCode = Nothing
     , _lSortingCode = Nothing
@@ -1025,6 +1061,7 @@ location =
     , _lLocality = Nothing
     , _lAdministrativeArea = Nothing
     }
+
 
 -- | The latitude and longitude of the location, in degrees.
 lLatLng :: Lens' Location (Maybe LatLng)
@@ -1120,14 +1157,16 @@ instance ToJSON Location where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1138,10 +1177,13 @@ instance ToJSON Empty where
 -- | Source of traffic for the current request.
 --
 -- /See:/ 'trafficSource' smart constructor.
-data TrafficSource = TrafficSource'
+data TrafficSource =
+  TrafficSource'
     { _tsTrafficSubId    :: !(Maybe Text)
     , _tsTrafficSourceId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TrafficSource' with the minimum fields required to make a request.
 --
@@ -1153,10 +1195,8 @@ data TrafficSource = TrafficSource'
 trafficSource
     :: TrafficSource
 trafficSource =
-    TrafficSource'
-    { _tsTrafficSubId = Nothing
-    , _tsTrafficSourceId = Nothing
-    }
+  TrafficSource' {_tsTrafficSubId = Nothing, _tsTrafficSourceId = Nothing}
+
 
 -- | Second level identifier to indicate where the traffic comes from. An
 -- identifier has multiple letters created by a team which redirected the
@@ -1190,14 +1230,17 @@ instance ToJSON TrafficSource where
 -- | Response for ListOfferHistory.
 --
 -- /See:/ 'listOffersHistoryResponse' smart constructor.
-data ListOffersHistoryResponse = ListOffersHistoryResponse'
+data ListOffersHistoryResponse =
+  ListOffersHistoryResponse'
     { _lohrNextPageToken        :: !(Maybe Text)
     , _lohrShowingEntireCompany :: !(Maybe Bool)
     , _lohrResponseMetadata     :: !(Maybe ResponseMetadata)
     , _lohrCanShowEntireCompany :: !(Maybe Bool)
     , _lohrTotalResults         :: !(Maybe (Textual Int32))
     , _lohrOffers               :: !(Maybe [HistoricalOffer])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOffersHistoryResponse' with the minimum fields required to make a request.
 --
@@ -1217,7 +1260,7 @@ data ListOffersHistoryResponse = ListOffersHistoryResponse'
 listOffersHistoryResponse
     :: ListOffersHistoryResponse
 listOffersHistoryResponse =
-    ListOffersHistoryResponse'
+  ListOffersHistoryResponse'
     { _lohrNextPageToken = Nothing
     , _lohrShowingEntireCompany = Nothing
     , _lohrResponseMetadata = Nothing
@@ -1225,6 +1268,7 @@ listOffersHistoryResponse =
     , _lohrTotalResults = Nothing
     , _lohrOffers = Nothing
     }
+
 
 -- | Supply this token in a ListOffersHistoryRequest to retrieve the next
 -- page.
@@ -1293,11 +1337,14 @@ instance ToJSON ListOffersHistoryResponse where
 -- | Represents an amount of money with its currency type.
 --
 -- /See:/ 'money' smart constructor.
-data Money = Money'
+data Money =
+  Money'
     { _mCurrencyCode :: !(Maybe Text)
     , _mNanos        :: !(Maybe (Textual Int32))
     , _mUnits        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
@@ -1310,12 +1357,8 @@ data Money = Money'
 -- * 'mUnits'
 money
     :: Money
-money =
-    Money'
-    { _mCurrencyCode = Nothing
-    , _mNanos = Nothing
-    , _mUnits = Nothing
-    }
+money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
+
 
 -- | The 3-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -1359,11 +1402,14 @@ instance ToJSON Money where
 -- | Response message for ListCompanies.
 --
 -- /See:/ 'listCompaniesResponse' smart constructor.
-data ListCompaniesResponse = ListCompaniesResponse'
+data ListCompaniesResponse =
+  ListCompaniesResponse'
     { _lcrNextPageToken    :: !(Maybe Text)
     , _lcrResponseMetadata :: !(Maybe ResponseMetadata)
     , _lcrCompanies        :: !(Maybe [Company])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListCompaniesResponse' with the minimum fields required to make a request.
 --
@@ -1377,11 +1423,12 @@ data ListCompaniesResponse = ListCompaniesResponse'
 listCompaniesResponse
     :: ListCompaniesResponse
 listCompaniesResponse =
-    ListCompaniesResponse'
+  ListCompaniesResponse'
     { _lcrNextPageToken = Nothing
     , _lcrResponseMetadata = Nothing
     , _lcrCompanies = Nothing
     }
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- \`ListCompaniesRequest.page_token\` field in the subsequent call to
@@ -1424,13 +1471,16 @@ instance ToJSON ListCompaniesResponse where
 -- | A user\'s information on a specific certification.
 --
 -- /See:/ 'certification' smart constructor.
-data Certification = Certification'
+data Certification =
+  Certification'
     { _cLastAchieved      :: !(Maybe DateTime')
     , _cExpiration        :: !(Maybe DateTime')
     , _cWarning           :: !(Maybe Bool)
     , _cCertificationType :: !(Maybe CertificationCertificationType)
     , _cAchieved          :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Certification' with the minimum fields required to make a request.
 --
@@ -1448,13 +1498,14 @@ data Certification = Certification'
 certification
     :: Certification
 certification =
-    Certification'
+  Certification'
     { _cLastAchieved = Nothing
     , _cExpiration = Nothing
     , _cWarning = Nothing
     , _cCertificationType = Nothing
     , _cAchieved = Nothing
     }
+
 
 -- | The date the user last achieved certification.
 cLastAchieved :: Lens' Certification (Maybe UTCTime)
@@ -1507,10 +1558,13 @@ instance ToJSON Certification where
 -- | <https://www.google.com/recaptcha/ reCaptcha> challenge info.
 --
 -- /See:/ 'recaptchaChallenge' smart constructor.
-data RecaptchaChallenge = RecaptchaChallenge'
+data RecaptchaChallenge =
+  RecaptchaChallenge'
     { _rcResponse :: !(Maybe Text)
     , _rcId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RecaptchaChallenge' with the minimum fields required to make a request.
 --
@@ -1522,10 +1576,8 @@ data RecaptchaChallenge = RecaptchaChallenge'
 recaptchaChallenge
     :: RecaptchaChallenge
 recaptchaChallenge =
-    RecaptchaChallenge'
-    { _rcResponse = Nothing
-    , _rcId = Nothing
-    }
+  RecaptchaChallenge' {_rcResponse = Nothing, _rcId = Nothing}
+
 
 -- | The response to the reCaptcha challenge.
 rcResponse :: Lens' RecaptchaChallenge (Maybe Text)
@@ -1553,11 +1605,14 @@ instance ToJSON RecaptchaChallenge where
 -- | Response message for CreateLead.
 --
 -- /See:/ 'createLeadResponse' smart constructor.
-data CreateLeadResponse = CreateLeadResponse'
+data CreateLeadResponse =
+  CreateLeadResponse'
     { _clrRecaptchaStatus  :: !(Maybe CreateLeadResponseRecaptchaStatus)
     , _clrResponseMetadata :: !(Maybe ResponseMetadata)
     , _clrLead             :: !(Maybe Lead)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateLeadResponse' with the minimum fields required to make a request.
 --
@@ -1571,11 +1626,12 @@ data CreateLeadResponse = CreateLeadResponse'
 createLeadResponse
     :: CreateLeadResponse
 createLeadResponse =
-    CreateLeadResponse'
+  CreateLeadResponse'
     { _clrRecaptchaStatus = Nothing
     , _clrResponseMetadata = Nothing
     , _clrLead = Nothing
     }
+
 
 -- | The outcome of <https://www.google.com/recaptcha/ reCaptcha> validation.
 clrRecaptchaStatus :: Lens' CreateLeadResponse (Maybe CreateLeadResponseRecaptchaStatus)
@@ -1615,10 +1671,13 @@ instance ToJSON CreateLeadResponse where
 -- honored by whitelisted products.
 --
 -- /See:/ 'userOverrides' smart constructor.
-data UserOverrides = UserOverrides'
+data UserOverrides =
+  UserOverrides'
     { _uoIPAddress :: !(Maybe Text)
     , _uoUserId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserOverrides' with the minimum fields required to make a request.
 --
@@ -1629,11 +1688,8 @@ data UserOverrides = UserOverrides'
 -- * 'uoUserId'
 userOverrides
     :: UserOverrides
-userOverrides =
-    UserOverrides'
-    { _uoIPAddress = Nothing
-    , _uoUserId = Nothing
-    }
+userOverrides = UserOverrides' {_uoIPAddress = Nothing, _uoUserId = Nothing}
+
 
 -- | IP address to use instead of the user\'s geo-located IP address.
 uoIPAddress :: Lens' UserOverrides (Maybe Text)
@@ -1661,12 +1717,15 @@ instance ToJSON UserOverrides where
 -- | Analytics data for a \`Company\` within a single day.
 --
 -- /See:/ 'analytics' smart constructor.
-data Analytics = Analytics'
+data Analytics =
+  Analytics'
     { _aProFileViews :: !(Maybe AnalyticsDataPoint)
     , _aEventDate    :: !(Maybe Date)
     , _aSearchViews  :: !(Maybe AnalyticsDataPoint)
     , _aContacts     :: !(Maybe AnalyticsDataPoint)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Analytics' with the minimum fields required to make a request.
 --
@@ -1682,12 +1741,13 @@ data Analytics = Analytics'
 analytics
     :: Analytics
 analytics =
-    Analytics'
+  Analytics'
     { _aProFileViews = Nothing
     , _aEventDate = Nothing
     , _aSearchViews = Nothing
     , _aContacts = Nothing
     }
+
 
 -- | Instances of users viewing the \`Company\` profile on the specified
 -- date.
@@ -1733,9 +1793,12 @@ instance ToJSON Analytics where
 -- | Common data that is in each API response.
 --
 -- /See:/ 'responseMetadata' smart constructor.
-newtype ResponseMetadata = ResponseMetadata'
+newtype ResponseMetadata =
+  ResponseMetadata'
     { _rmDebugInfo :: Maybe DebugInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResponseMetadata' with the minimum fields required to make a request.
 --
@@ -1744,10 +1807,8 @@ newtype ResponseMetadata = ResponseMetadata'
 -- * 'rmDebugInfo'
 responseMetadata
     :: ResponseMetadata
-responseMetadata =
-    ResponseMetadata'
-    { _rmDebugInfo = Nothing
-    }
+responseMetadata = ResponseMetadata' {_rmDebugInfo = Nothing}
+
 
 -- | Debug information about this request.
 rmDebugInfo :: Lens' ResponseMetadata (Maybe DebugInfo)
@@ -1767,12 +1828,15 @@ instance ToJSON ResponseMetadata where
 -- | Request message for LogClientMessage.
 --
 -- /See:/ 'logMessageRequest' smart constructor.
-data LogMessageRequest = LogMessageRequest'
+data LogMessageRequest =
+  LogMessageRequest'
     { _lmrRequestMetadata :: !(Maybe RequestMetadata)
     , _lmrClientInfo      :: !(Maybe LogMessageRequestClientInfo)
     , _lmrDetails         :: !(Maybe Text)
     , _lmrLevel           :: !(Maybe LogMessageRequestLevel)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogMessageRequest' with the minimum fields required to make a request.
 --
@@ -1788,12 +1852,13 @@ data LogMessageRequest = LogMessageRequest'
 logMessageRequest
     :: LogMessageRequest
 logMessageRequest =
-    LogMessageRequest'
+  LogMessageRequest'
     { _lmrRequestMetadata = Nothing
     , _lmrClientInfo = Nothing
     , _lmrDetails = Nothing
     , _lmrLevel = Nothing
     }
+
 
 -- | Current request metadata.
 lmrRequestMetadata :: Lens' LogMessageRequest (Maybe RequestMetadata)
@@ -1838,12 +1903,15 @@ instance ToJSON LogMessageRequest where
 -- | The localized company information.
 --
 -- /See:/ 'localizedCompanyInfo' smart constructor.
-data LocalizedCompanyInfo = LocalizedCompanyInfo'
+data LocalizedCompanyInfo =
+  LocalizedCompanyInfo'
     { _lciLanguageCode :: !(Maybe Text)
     , _lciOverview     :: !(Maybe Text)
     , _lciCountryCodes :: !(Maybe [Text])
     , _lciDisplayName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocalizedCompanyInfo' with the minimum fields required to make a request.
 --
@@ -1859,12 +1927,13 @@ data LocalizedCompanyInfo = LocalizedCompanyInfo'
 localizedCompanyInfo
     :: LocalizedCompanyInfo
 localizedCompanyInfo =
-    LocalizedCompanyInfo'
+  LocalizedCompanyInfo'
     { _lciLanguageCode = Nothing
     , _lciOverview = Nothing
     , _lciCountryCodes = Nothing
     , _lciDisplayName = Nothing
     }
+
 
 -- | Language code of the localized company info, as defined by
 -- <https://tools.ietf.org/html/bcp47 BCP 47> (IETF BCP 47, \"Tags for
@@ -1915,7 +1984,8 @@ instance ToJSON LocalizedCompanyInfo where
 -- | Available Offers to be distributed.
 --
 -- /See:/ 'availableOffer' smart constructor.
-data AvailableOffer = AvailableOffer'
+data AvailableOffer =
+  AvailableOffer'
     { _aoShowSpecialOfferCopy       :: !(Maybe Bool)
     , _aoQualifiedCustomer          :: !(Maybe [OfferCustomer])
     , _aoTerms                      :: !(Maybe Text)
@@ -1928,7 +1998,9 @@ data AvailableOffer = AvailableOffer'
     , _aoOfferLevel                 :: !(Maybe AvailableOfferOfferLevel)
     , _aoDescription                :: !(Maybe Text)
     , _aoAvailable                  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AvailableOffer' with the minimum fields required to make a request.
 --
@@ -1960,7 +2032,7 @@ data AvailableOffer = AvailableOffer'
 availableOffer
     :: AvailableOffer
 availableOffer =
-    AvailableOffer'
+  AvailableOffer'
     { _aoShowSpecialOfferCopy = Nothing
     , _aoQualifiedCustomer = Nothing
     , _aoTerms = Nothing
@@ -1974,6 +2046,7 @@ availableOffer =
     , _aoDescription = Nothing
     , _aoAvailable = Nothing
     }
+
 
 -- | Should special text be shown on the offers page.
 aoShowSpecialOfferCopy :: Lens' AvailableOffer (Maybe Bool)
@@ -2087,9 +2160,12 @@ instance ToJSON AvailableOffer where
 -- etc.
 --
 -- /See:/ 'logMessageRequestClientInfo' smart constructor.
-newtype LogMessageRequestClientInfo = LogMessageRequestClientInfo'
+newtype LogMessageRequestClientInfo =
+  LogMessageRequestClientInfo'
     { _lmrciAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogMessageRequestClientInfo' with the minimum fields required to make a request.
 --
@@ -2100,9 +2176,8 @@ logMessageRequestClientInfo
     :: HashMap Text Text -- ^ 'lmrciAddtional'
     -> LogMessageRequestClientInfo
 logMessageRequestClientInfo pLmrciAddtional_ =
-    LogMessageRequestClientInfo'
-    { _lmrciAddtional = _Coerce # pLmrciAddtional_
-    }
+  LogMessageRequestClientInfo' {_lmrciAddtional = _Coerce # pLmrciAddtional_}
+
 
 lmrciAddtional :: Lens' LogMessageRequestClientInfo (HashMap Text Text)
 lmrciAddtional
@@ -2123,7 +2198,8 @@ instance ToJSON LogMessageRequestClientInfo where
 -- affiliation and standing with a company in Partners.
 --
 -- /See:/ 'companyRelation' smart constructor.
-data CompanyRelation = CompanyRelation'
+data CompanyRelation =
+  CompanyRelation'
     { _crCreationTime         :: !(Maybe DateTime')
     , _crState                :: !(Maybe CompanyRelationState)
     , _crBadgeTier            :: !(Maybe CompanyRelationBadgeTier)
@@ -2143,7 +2219,9 @@ data CompanyRelation = CompanyRelation'
     , _crSegment              :: !(Maybe [Text])
     , _crPrimaryLanguageCode  :: !(Maybe Text)
     , _crResolvedTimestamp    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CompanyRelation' with the minimum fields required to make a request.
 --
@@ -2189,7 +2267,7 @@ data CompanyRelation = CompanyRelation'
 companyRelation
     :: CompanyRelation
 companyRelation =
-    CompanyRelation'
+  CompanyRelation'
     { _crCreationTime = Nothing
     , _crState = Nothing
     , _crBadgeTier = Nothing
@@ -2210,6 +2288,7 @@ companyRelation =
     , _crPrimaryLanguageCode = Nothing
     , _crResolvedTimestamp = Nothing
     }
+
 
 -- | The timestamp of when affiliation was requested. \'OutputOnly
 crCreationTime :: Lens' CompanyRelation (Maybe UTCTime)
@@ -2375,7 +2454,8 @@ instance ToJSON CompanyRelation where
 -- | A resource representing a user of the Partners platform.
 --
 -- /See:/ 'user' smart constructor.
-data User = User'
+data User =
+  User'
     { _uCertificationStatus             :: !(Maybe [Certification])
     , _uPublicProFile                   :: !(Maybe PublicProFile)
     , _uCompanyVerificationEmail        :: !(Maybe Text)
@@ -2388,7 +2468,9 @@ data User = User'
     , _uId                              :: !(Maybe Text)
     , _uAvailableAdwordsManagerAccounts :: !(Maybe [AdWordsManagerAccountInfo])
     , _uLastAccessTime                  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -2420,7 +2502,7 @@ data User = User'
 user
     :: User
 user =
-    User'
+  User'
     { _uCertificationStatus = Nothing
     , _uPublicProFile = Nothing
     , _uCompanyVerificationEmail = Nothing
@@ -2434,6 +2516,7 @@ user =
     , _uAvailableAdwordsManagerAccounts = Nothing
     , _uLastAccessTime = Nothing
     }
+
 
 -- | The list of achieved certifications. These are calculated based on exam
 -- results and other requirements. \'OutputOnly
@@ -2571,11 +2654,14 @@ instance ToJSON User where
 -- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date'
+data Date =
+  Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -2588,12 +2674,8 @@ data Date = Date'
 -- * 'dMonth'
 date
     :: Date
-date =
-    Date'
-    { _dDay = Nothing
-    , _dYear = Nothing
-    , _dMonth = Nothing
-    }
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -2636,7 +2718,8 @@ instance ToJSON Date where
 -- portal).
 --
 -- /See:/ 'lead' smart constructor.
-data Lead = Lead'
+data Lead =
+  Lead'
     { _leaGivenName         :: !(Maybe Text)
     , _leaEmail             :: !(Maybe Text)
     , _leaLanguageCode      :: !(Maybe Text)
@@ -2652,7 +2735,9 @@ data Lead = Lead'
     , _leaType              :: !(Maybe LeadType)
     , _leaGpsMotivations    :: !(Maybe [Text])
     , _leaCreateTime        :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Lead' with the minimum fields required to make a request.
 --
@@ -2690,7 +2775,7 @@ data Lead = Lead'
 lead
     :: Lead
 lead =
-    Lead'
+  Lead'
     { _leaGivenName = Nothing
     , _leaEmail = Nothing
     , _leaLanguageCode = Nothing
@@ -2707,6 +2792,7 @@ lead =
     , _leaGpsMotivations = Nothing
     , _leaCreateTime = Nothing
     }
+
 
 -- | First name of lead source.
 leaGivenName :: Lens' Lead (Maybe Text)
@@ -2838,10 +2924,13 @@ instance ToJSON Lead where
 -- https:\/\/support.google.com\/adwords\/answer\/6139186
 --
 -- /See:/ 'adWordsManagerAccountInfo' smart constructor.
-data AdWordsManagerAccountInfo = AdWordsManagerAccountInfo'
+data AdWordsManagerAccountInfo =
+  AdWordsManagerAccountInfo'
     { _awmaiCustomerName :: !(Maybe Text)
     , _awmaiId           :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdWordsManagerAccountInfo' with the minimum fields required to make a request.
 --
@@ -2853,10 +2942,8 @@ data AdWordsManagerAccountInfo = AdWordsManagerAccountInfo'
 adWordsManagerAccountInfo
     :: AdWordsManagerAccountInfo
 adWordsManagerAccountInfo =
-    AdWordsManagerAccountInfo'
-    { _awmaiCustomerName = Nothing
-    , _awmaiId = Nothing
-    }
+  AdWordsManagerAccountInfo' {_awmaiCustomerName = Nothing, _awmaiId = Nothing}
+
 
 -- | Name of the customer this account represents.
 awmaiCustomerName :: Lens' AdWordsManagerAccountInfo (Maybe Text)
@@ -2887,9 +2974,12 @@ instance ToJSON AdWordsManagerAccountInfo where
 -- | Response message for LogClientMessage.
 --
 -- /See:/ 'logMessageResponse' smart constructor.
-newtype LogMessageResponse = LogMessageResponse'
+newtype LogMessageResponse =
+  LogMessageResponse'
     { _lmrResponseMetadata :: Maybe ResponseMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogMessageResponse' with the minimum fields required to make a request.
 --
@@ -2898,10 +2988,8 @@ newtype LogMessageResponse = LogMessageResponse'
 -- * 'lmrResponseMetadata'
 logMessageResponse
     :: LogMessageResponse
-logMessageResponse =
-    LogMessageResponse'
-    { _lmrResponseMetadata = Nothing
-    }
+logMessageResponse = LogMessageResponse' {_lmrResponseMetadata = Nothing}
+
 
 -- | Current response metadata.
 lmrResponseMetadata :: Lens' LogMessageResponse (Maybe ResponseMetadata)
@@ -2924,7 +3012,8 @@ instance ToJSON LogMessageResponse where
 -- | Customers qualified for an offer.
 --
 -- /See:/ 'offerCustomer' smart constructor.
-data OfferCustomer = OfferCustomer'
+data OfferCustomer =
+  OfferCustomer'
     { _ocCreationTime        :: !(Maybe DateTime')
     , _ocAdwordsURL          :: !(Maybe Text)
     , _ocGetYAmount          :: !(Maybe Text)
@@ -2934,7 +3023,9 @@ data OfferCustomer = OfferCustomer'
     , _ocSpendXAmount        :: !(Maybe Text)
     , _ocExternalCid         :: !(Maybe (Textual Int64))
     , _ocEligibilityDaysLeft :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OfferCustomer' with the minimum fields required to make a request.
 --
@@ -2960,7 +3051,7 @@ data OfferCustomer = OfferCustomer'
 offerCustomer
     :: OfferCustomer
 offerCustomer =
-    OfferCustomer'
+  OfferCustomer'
     { _ocCreationTime = Nothing
     , _ocAdwordsURL = Nothing
     , _ocGetYAmount = Nothing
@@ -2971,6 +3062,7 @@ offerCustomer =
     , _ocExternalCid = Nothing
     , _ocEligibilityDaysLeft = Nothing
     }
+
 
 -- | Time the customer was created.
 ocCreationTime :: Lens' OfferCustomer (Maybe UTCTime)
@@ -3056,9 +3148,12 @@ instance ToJSON OfferCustomer where
 -- | Response message for GetPartnersStatus.
 --
 -- /See:/ 'getPartnersStatusResponse' smart constructor.
-newtype GetPartnersStatusResponse = GetPartnersStatusResponse'
+newtype GetPartnersStatusResponse =
+  GetPartnersStatusResponse'
     { _gpsrResponseMetadata :: Maybe ResponseMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetPartnersStatusResponse' with the minimum fields required to make a request.
 --
@@ -3068,9 +3163,8 @@ newtype GetPartnersStatusResponse = GetPartnersStatusResponse'
 getPartnersStatusResponse
     :: GetPartnersStatusResponse
 getPartnersStatusResponse =
-    GetPartnersStatusResponse'
-    { _gpsrResponseMetadata = Nothing
-    }
+  GetPartnersStatusResponse' {_gpsrResponseMetadata = Nothing}
+
 
 -- | Current response metadata.
 gpsrResponseMetadata :: Lens' GetPartnersStatusResponse (Maybe ResponseMetadata)
@@ -3094,12 +3188,15 @@ instance ToJSON GetPartnersStatusResponse where
 -- | Response message for ListAnalytics.
 --
 -- /See:/ 'listAnalyticsResponse' smart constructor.
-data ListAnalyticsResponse = ListAnalyticsResponse'
+data ListAnalyticsResponse =
+  ListAnalyticsResponse'
     { _larNextPageToken    :: !(Maybe Text)
     , _larAnalytics        :: !(Maybe [Analytics])
     , _larResponseMetadata :: !(Maybe ResponseMetadata)
     , _larAnalyticsSummary :: !(Maybe AnalyticsSummary)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAnalyticsResponse' with the minimum fields required to make a request.
 --
@@ -3115,12 +3212,13 @@ data ListAnalyticsResponse = ListAnalyticsResponse'
 listAnalyticsResponse
     :: ListAnalyticsResponse
 listAnalyticsResponse =
-    ListAnalyticsResponse'
+  ListAnalyticsResponse'
     { _larNextPageToken = Nothing
     , _larAnalytics = Nothing
     , _larResponseMetadata = Nothing
     , _larAnalyticsSummary = Nothing
     }
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- \`ListAnalyticsRequest.page_token\` field in the subsequent call to
@@ -3173,7 +3271,8 @@ instance ToJSON ListAnalyticsResponse where
 -- qualifies for being searched by advertisers.
 --
 -- /See:/ 'company' smart constructor.
-data Company = Company'
+data Company =
+  Company'
     { _cCompanyTypes                   :: !(Maybe [Text])
     , _cAutoApprovalEmailDomains       :: !(Maybe [Text])
     , _cProFileStatus                  :: !(Maybe CompanyProFileStatus)
@@ -3196,7 +3295,9 @@ data Company = Company'
     , _cLocations                      :: !(Maybe [Location])
     , _cServices                       :: !(Maybe [Text])
     , _cPrimaryLocation                :: !(Maybe Location)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Company' with the minimum fields required to make a request.
 --
@@ -3248,7 +3349,7 @@ data Company = Company'
 company
     :: Company
 company =
-    Company'
+  Company'
     { _cCompanyTypes = Nothing
     , _cAutoApprovalEmailDomains = Nothing
     , _cProFileStatus = Nothing
@@ -3272,6 +3373,7 @@ company =
     , _cServices = Nothing
     , _cPrimaryLocation = Nothing
     }
+
 
 -- | Company type labels listed on the company\'s profile.
 cCompanyTypes :: Lens' Company [Text]
@@ -3487,9 +3589,12 @@ instance ToJSON Company where
 -- | Response message for LogUserEvent.
 --
 -- /See:/ 'logUserEventResponse' smart constructor.
-newtype LogUserEventResponse = LogUserEventResponse'
+newtype LogUserEventResponse =
+  LogUserEventResponse'
     { _luerResponseMetadata :: Maybe ResponseMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogUserEventResponse' with the minimum fields required to make a request.
 --
@@ -3498,10 +3603,8 @@ newtype LogUserEventResponse = LogUserEventResponse'
 -- * 'luerResponseMetadata'
 logUserEventResponse
     :: LogUserEventResponse
-logUserEventResponse =
-    LogUserEventResponse'
-    { _luerResponseMetadata = Nothing
-    }
+logUserEventResponse = LogUserEventResponse' {_luerResponseMetadata = Nothing}
+
 
 -- | Current response metadata.
 luerResponseMetadata :: Lens' LogUserEventResponse (Maybe ResponseMetadata)
@@ -3524,11 +3627,14 @@ instance ToJSON LogUserEventResponse where
 -- | Response for ListOffer.
 --
 -- /See:/ 'listOffersResponse' smart constructor.
-data ListOffersResponse = ListOffersResponse'
+data ListOffersResponse =
+  ListOffersResponse'
     { _lorAvailableOffers  :: !(Maybe [AvailableOffer])
     , _lorNoOfferReason    :: !(Maybe ListOffersResponseNoOfferReason)
     , _lorResponseMetadata :: !(Maybe ResponseMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOffersResponse' with the minimum fields required to make a request.
 --
@@ -3542,11 +3648,12 @@ data ListOffersResponse = ListOffersResponse'
 listOffersResponse
     :: ListOffersResponse
 listOffersResponse =
-    ListOffersResponse'
+  ListOffersResponse'
     { _lorAvailableOffers = Nothing
     , _lorNoOfferReason = Nothing
     , _lorResponseMetadata = Nothing
     }
+
 
 -- | Available Offers to be distributed.
 lorAvailableOffers :: Lens' ListOffersResponse [AvailableOffer]
@@ -3588,7 +3695,8 @@ instance ToJSON ListOffersResponse where
 -- | The profile information of a Partners user.
 --
 -- /See:/ 'userProFile' smart constructor.
-data UserProFile = UserProFile'
+data UserProFile =
+  UserProFile'
     { _upfGivenName             :: !(Maybe Text)
     , _upfMarkets               :: !(Maybe [Text])
     , _upfChannels              :: !(Maybe [Text])
@@ -3604,7 +3712,9 @@ data UserProFile = UserProFile'
     , _upfEmailAddress          :: !(Maybe Text)
     , _upfAdwordsManagerAccount :: !(Maybe (Textual Int64))
     , _upfProFilePublic         :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserProFile' with the minimum fields required to make a request.
 --
@@ -3642,7 +3752,7 @@ data UserProFile = UserProFile'
 userProFile
     :: UserProFile
 userProFile =
-    UserProFile'
+  UserProFile'
     { _upfGivenName = Nothing
     , _upfMarkets = Nothing
     , _upfChannels = Nothing
@@ -3659,6 +3769,7 @@ userProFile =
     , _upfAdwordsManagerAccount = Nothing
     , _upfProFilePublic = Nothing
     }
+
 
 -- | The user\'s given name.
 upfGivenName :: Lens' UserProFile (Maybe Text)
@@ -3803,11 +3914,14 @@ instance ToJSON UserProFile where
 -- | Analytics aggregated data for a \`Company\` for a given date range.
 --
 -- /See:/ 'analyticsSummary' smart constructor.
-data AnalyticsSummary = AnalyticsSummary'
+data AnalyticsSummary =
+  AnalyticsSummary'
     { _asContactsCount     :: !(Maybe (Textual Int32))
     , _asProFileViewsCount :: !(Maybe (Textual Int32))
     , _asSearchViewsCount  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnalyticsSummary' with the minimum fields required to make a request.
 --
@@ -3821,11 +3935,12 @@ data AnalyticsSummary = AnalyticsSummary'
 analyticsSummary
     :: AnalyticsSummary
 analyticsSummary =
-    AnalyticsSummary'
+  AnalyticsSummary'
     { _asContactsCount = Nothing
     , _asProFileViewsCount = Nothing
     , _asSearchViewsCount = Nothing
     }
+
 
 -- | Aggregated number of times users contacted the \`Company\` for given
 -- date range.
@@ -3871,7 +3986,8 @@ instance ToJSON AnalyticsSummary where
 -- | Request message for LogUserEvent.
 --
 -- /See:/ 'logUserEventRequest' smart constructor.
-data LogUserEventRequest = LogUserEventRequest'
+data LogUserEventRequest =
+  LogUserEventRequest'
     { _luerEventCategory   :: !(Maybe LogUserEventRequestEventCategory)
     , _luerRequestMetadata :: !(Maybe RequestMetadata)
     , _luerURL             :: !(Maybe Text)
@@ -3879,7 +3995,9 @@ data LogUserEventRequest = LogUserEventRequest'
     , _luerLead            :: !(Maybe Lead)
     , _luerEventDatas      :: !(Maybe [EventData])
     , _luerEventAction     :: !(Maybe LogUserEventRequestEventAction)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogUserEventRequest' with the minimum fields required to make a request.
 --
@@ -3901,7 +4019,7 @@ data LogUserEventRequest = LogUserEventRequest'
 logUserEventRequest
     :: LogUserEventRequest
 logUserEventRequest =
-    LogUserEventRequest'
+  LogUserEventRequest'
     { _luerEventCategory = Nothing
     , _luerRequestMetadata = Nothing
     , _luerURL = Nothing
@@ -3910,6 +4028,7 @@ logUserEventRequest =
     , _luerEventDatas = Nothing
     , _luerEventAction = Nothing
     }
+
 
 -- | The category the action belongs to.
 luerEventCategory :: Lens' LogUserEventRequest (Maybe LogUserEventRequestEventCategory)
@@ -3978,10 +4097,13 @@ instance ToJSON LogUserEventRequest where
 -- | Agency specialization status
 --
 -- /See:/ 'specializationStatus' smart constructor.
-data SpecializationStatus = SpecializationStatus'
+data SpecializationStatus =
+  SpecializationStatus'
     { _ssBadgeSpecialization      :: !(Maybe SpecializationStatusBadgeSpecialization)
     , _ssBadgeSpecializationState :: !(Maybe SpecializationStatusBadgeSpecializationState)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpecializationStatus' with the minimum fields required to make a request.
 --
@@ -3993,10 +4115,9 @@ data SpecializationStatus = SpecializationStatus'
 specializationStatus
     :: SpecializationStatus
 specializationStatus =
-    SpecializationStatus'
-    { _ssBadgeSpecialization = Nothing
-    , _ssBadgeSpecializationState = Nothing
-    }
+  SpecializationStatus'
+    {_ssBadgeSpecialization = Nothing, _ssBadgeSpecializationState = Nothing}
+
 
 -- | The specialization this status is for.
 ssBadgeSpecialization :: Lens' SpecializationStatus (Maybe SpecializationStatusBadgeSpecialization)
@@ -4030,10 +4151,13 @@ instance ToJSON SpecializationStatus where
 -- | Information related to ranking of results.
 --
 -- /See:/ 'rank' smart constructor.
-data Rank = Rank'
+data Rank =
+  Rank'
     { _rValue :: !(Maybe (Textual Double))
     , _rType  :: !(Maybe RankType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Rank' with the minimum fields required to make a request.
 --
@@ -4044,11 +4168,8 @@ data Rank = Rank'
 -- * 'rType'
 rank
     :: Rank
-rank =
-    Rank'
-    { _rValue = Nothing
-    , _rType = Nothing
-    }
+rank = Rank' {_rValue = Nothing, _rType = Nothing}
+
 
 -- | The numerical value of the rank.
 rValue :: Lens' Rank (Maybe Double)
@@ -4074,12 +4195,15 @@ instance ToJSON Rank where
 -- | Response message for ListLeads.
 --
 -- /See:/ 'listLeadsResponse' smart constructor.
-data ListLeadsResponse = ListLeadsResponse'
+data ListLeadsResponse =
+  ListLeadsResponse'
     { _llrLeads            :: !(Maybe [Lead])
     , _llrNextPageToken    :: !(Maybe Text)
     , _llrResponseMetadata :: !(Maybe ResponseMetadata)
     , _llrTotalSize        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLeadsResponse' with the minimum fields required to make a request.
 --
@@ -4095,12 +4219,13 @@ data ListLeadsResponse = ListLeadsResponse'
 listLeadsResponse
     :: ListLeadsResponse
 listLeadsResponse =
-    ListLeadsResponse'
+  ListLeadsResponse'
     { _llrLeads = Nothing
     , _llrNextPageToken = Nothing
     , _llrResponseMetadata = Nothing
     , _llrTotalSize = Nothing
     }
+
 
 -- | The list of leads.
 llrLeads :: Lens' ListLeadsResponse [Lead]
@@ -4151,12 +4276,15 @@ instance ToJSON ListLeadsResponse where
 -- | Offer info by country.
 --
 -- /See:/ 'countryOfferInfo' smart constructor.
-data CountryOfferInfo = CountryOfferInfo'
+data CountryOfferInfo =
+  CountryOfferInfo'
     { _coiGetYAmount       :: !(Maybe Text)
     , _coiOfferCountryCode :: !(Maybe Text)
     , _coiOfferType        :: !(Maybe CountryOfferInfoOfferType)
     , _coiSpendXAmount     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CountryOfferInfo' with the minimum fields required to make a request.
 --
@@ -4172,12 +4300,13 @@ data CountryOfferInfo = CountryOfferInfo'
 countryOfferInfo
     :: CountryOfferInfo
 countryOfferInfo =
-    CountryOfferInfo'
+  CountryOfferInfo'
     { _coiGetYAmount = Nothing
     , _coiOfferCountryCode = Nothing
     , _coiOfferType = Nothing
     , _coiSpendXAmount = Nothing
     }
+
 
 -- | (localized) Get Y amount for that country\'s offer.
 coiGetYAmount :: Lens' CountryOfferInfo (Maybe Text)
@@ -4223,11 +4352,14 @@ instance ToJSON CountryOfferInfo where
 -- | Request message for CreateLead.
 --
 -- /See:/ 'createLeadRequest' smart constructor.
-data CreateLeadRequest = CreateLeadRequest'
+data CreateLeadRequest =
+  CreateLeadRequest'
     { _cRequestMetadata    :: !(Maybe RequestMetadata)
     , _cRecaptchaChallenge :: !(Maybe RecaptchaChallenge)
     , _cLead               :: !(Maybe Lead)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateLeadRequest' with the minimum fields required to make a request.
 --
@@ -4241,11 +4373,12 @@ data CreateLeadRequest = CreateLeadRequest'
 createLeadRequest
     :: CreateLeadRequest
 createLeadRequest =
-    CreateLeadRequest'
+  CreateLeadRequest'
     { _cRequestMetadata = Nothing
     , _cRecaptchaChallenge = Nothing
     , _cLead = Nothing
     }
+
 
 -- | Current request metadata.
 cRequestMetadata :: Lens' CreateLeadRequest (Maybe RequestMetadata)

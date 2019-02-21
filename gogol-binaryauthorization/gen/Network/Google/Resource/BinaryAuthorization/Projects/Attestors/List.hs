@@ -65,7 +65,8 @@ type ProjectsAttestorsListResource =
 -- | Lists attestors. Returns INVALID_ARGUMENT if the project does not exist.
 --
 -- /See:/ 'projectsAttestorsList' smart constructor.
-data ProjectsAttestorsList = ProjectsAttestorsList'
+data ProjectsAttestorsList =
+  ProjectsAttestorsList'
     { _palParent         :: !Text
     , _palXgafv          :: !(Maybe Xgafv)
     , _palUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsAttestorsList = ProjectsAttestorsList'
     , _palPageToken      :: !(Maybe Text)
     , _palPageSize       :: !(Maybe (Textual Int32))
     , _palCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAttestorsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsAttestorsList
     :: Text -- ^ 'palParent'
     -> ProjectsAttestorsList
 projectsAttestorsList pPalParent_ =
-    ProjectsAttestorsList'
+  ProjectsAttestorsList'
     { _palParent = pPalParent_
     , _palXgafv = Nothing
     , _palUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsAttestorsList pPalParent_ =
     , _palPageSize = Nothing
     , _palCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project associated with the
 -- attestors, in the format \`projects\/*\`.

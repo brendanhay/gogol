@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'AccountsPatch' request conforms to.
 type AccountsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
@@ -56,11 +56,14 @@ type AccountsPatchResource =
 -- | Updates an existing account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
-data AccountsPatch = AccountsPatch'
+data AccountsPatch =
+  AccountsPatch'
     { _appProFileId :: !(Textual Int64)
     , _appPayload   :: !Account
     , _appId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ accountsPatch
     -> Int64 -- ^ 'appId'
     -> AccountsPatch
 accountsPatch pAppProFileId_ pAppPayload_ pAppId_ =
-    AccountsPatch'
+  AccountsPatch'
     { _appProFileId = _Coerce # pAppProFileId_
     , _appPayload = pAppPayload_
     , _appId = _Coerce # pAppId_
     }
+
 
 -- | User profile ID associated with this request.
 appProFileId :: Lens' AccountsPatch Int64

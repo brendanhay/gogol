@@ -64,7 +64,8 @@ type ProjectsLocationsRegistriesGroupsDevicesPatchResource
 -- | Updates a device.
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsDevicesPatch' smart constructor.
-data ProjectsLocationsRegistriesGroupsDevicesPatch = ProjectsLocationsRegistriesGroupsDevicesPatch'
+data ProjectsLocationsRegistriesGroupsDevicesPatch =
+  ProjectsLocationsRegistriesGroupsDevicesPatch'
     { _plrgdpXgafv          :: !(Maybe Xgafv)
     , _plrgdpUploadProtocol :: !(Maybe Text)
     , _plrgdpUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data ProjectsLocationsRegistriesGroupsDevicesPatch = ProjectsLocationsRegistries
     , _plrgdpPayload        :: !Device
     , _plrgdpName           :: !Text
     , _plrgdpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsDevicesPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsRegistriesGroupsDevicesPatch
     -> Text -- ^ 'plrgdpName'
     -> ProjectsLocationsRegistriesGroupsDevicesPatch
 projectsLocationsRegistriesGroupsDevicesPatch pPlrgdpPayload_ pPlrgdpName_ =
-    ProjectsLocationsRegistriesGroupsDevicesPatch'
+  ProjectsLocationsRegistriesGroupsDevicesPatch'
     { _plrgdpXgafv = Nothing
     , _plrgdpUploadProtocol = Nothing
     , _plrgdpUpdateMask = Nothing
@@ -109,6 +112,7 @@ projectsLocationsRegistriesGroupsDevicesPatch pPlrgdpPayload_ pPlrgdpName_ =
     , _plrgdpName = pPlrgdpName_
     , _plrgdpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrgdpXgafv :: Lens' ProjectsLocationsRegistriesGroupsDevicesPatch (Maybe Xgafv)
@@ -165,7 +169,8 @@ plrgdpCallback
       (\ s a -> s{_plrgdpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsDevicesPatch where
+           ProjectsLocationsRegistriesGroupsDevicesPatch
+         where
         type Rs ProjectsLocationsRegistriesGroupsDevicesPatch
              = Device
         type Scopes

@@ -29,59 +29,14 @@ module Network.Google.IAP
 
     -- * Resources
 
-    -- ** iap.projects.iap_tunnel.getIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapTunnel.GetIAMPolicy
+    -- ** iap.getIamPolicy
+    , module Network.Google.Resource.IAP.GetIAMPolicy
 
-    -- ** iap.projects.iap_tunnel.setIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapTunnel.SetIAMPolicy
+    -- ** iap.setIamPolicy
+    , module Network.Google.Resource.IAP.SetIAMPolicy
 
-    -- ** iap.projects.iap_tunnel.testIamPermissions
-    , module Network.Google.Resource.IAP.Projects.IapTunnel.TestIAMPermissions
-
-    -- ** iap.projects.iap_tunnel.zones.getIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapTunnel.Zones.GetIAMPolicy
-
-    -- ** iap.projects.iap_tunnel.zones.instances.getIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapTunnel.Zones.Instances.GetIAMPolicy
-
-    -- ** iap.projects.iap_tunnel.zones.instances.setIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapTunnel.Zones.Instances.SetIAMPolicy
-
-    -- ** iap.projects.iap_tunnel.zones.instances.testIamPermissions
-    , module Network.Google.Resource.IAP.Projects.IapTunnel.Zones.Instances.TestIAMPermissions
-
-    -- ** iap.projects.iap_tunnel.zones.setIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapTunnel.Zones.SetIAMPolicy
-
-    -- ** iap.projects.iap_tunnel.zones.testIamPermissions
-    , module Network.Google.Resource.IAP.Projects.IapTunnel.Zones.TestIAMPermissions
-
-    -- ** iap.projects.iap_web.getIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapWeb.GetIAMPolicy
-
-    -- ** iap.projects.iap_web.services.getIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapWeb.Services.GetIAMPolicy
-
-    -- ** iap.projects.iap_web.services.setIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapWeb.Services.SetIAMPolicy
-
-    -- ** iap.projects.iap_web.services.testIamPermissions
-    , module Network.Google.Resource.IAP.Projects.IapWeb.Services.TestIAMPermissions
-
-    -- ** iap.projects.iap_web.services.versions.getIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapWeb.Services.Versions.GetIAMPolicy
-
-    -- ** iap.projects.iap_web.services.versions.setIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapWeb.Services.Versions.SetIAMPolicy
-
-    -- ** iap.projects.iap_web.services.versions.testIamPermissions
-    , module Network.Google.Resource.IAP.Projects.IapWeb.Services.Versions.TestIAMPermissions
-
-    -- ** iap.projects.iap_web.setIamPolicy
-    , module Network.Google.Resource.IAP.Projects.IapWeb.SetIAMPolicy
-
-    -- ** iap.projects.iap_web.testIamPermissions
-    , module Network.Google.Resource.IAP.Projects.IapWeb.TestIAMPermissions
+    -- ** iap.testIamPermissions
+    , module Network.Google.Resource.IAP.TestIAMPermissions
 
     -- * Types
 
@@ -132,24 +87,9 @@ module Network.Google.IAP
 
 import           Network.Google.IAP.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.IAP.Projects.IapTunnel.GetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapTunnel.SetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapTunnel.TestIAMPermissions
-import           Network.Google.Resource.IAP.Projects.IapTunnel.Zones.GetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapTunnel.Zones.Instances.GetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapTunnel.Zones.Instances.SetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapTunnel.Zones.Instances.TestIAMPermissions
-import           Network.Google.Resource.IAP.Projects.IapTunnel.Zones.SetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapTunnel.Zones.TestIAMPermissions
-import           Network.Google.Resource.IAP.Projects.IapWeb.GetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapWeb.Services.GetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapWeb.Services.SetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapWeb.Services.TestIAMPermissions
-import           Network.Google.Resource.IAP.Projects.IapWeb.Services.Versions.GetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapWeb.Services.Versions.SetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapWeb.Services.Versions.TestIAMPermissions
-import           Network.Google.Resource.IAP.Projects.IapWeb.SetIAMPolicy
-import           Network.Google.Resource.IAP.Projects.IapWeb.TestIAMPermissions
+import           Network.Google.Resource.IAP.GetIAMPolicy
+import           Network.Google.Resource.IAP.SetIAMPolicy
+import           Network.Google.Resource.IAP.TestIAMPermissions
 
 {- $resources
 TODO
@@ -157,26 +97,5 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Cloud Identity-Aware Proxy API service.
 type IAPAPI =
-     ProjectsIapTunnelZonesInstancesGetIAMPolicyResource
-       :<|>
-       ProjectsIapTunnelZonesInstancesSetIAMPolicyResource
-       :<|>
-       ProjectsIapTunnelZonesInstancesTestIAMPermissionsResource
-       :<|> ProjectsIapTunnelZonesGetIAMPolicyResource
-       :<|> ProjectsIapTunnelZonesSetIAMPolicyResource
-       :<|> ProjectsIapTunnelZonesTestIAMPermissionsResource
-       :<|> ProjectsIapTunnelGetIAMPolicyResource
-       :<|> ProjectsIapTunnelSetIAMPolicyResource
-       :<|> ProjectsIapTunnelTestIAMPermissionsResource
-       :<|>
-       ProjectsIapWebServicesVersionsGetIAMPolicyResource
-       :<|>
-       ProjectsIapWebServicesVersionsSetIAMPolicyResource
-       :<|>
-       ProjectsIapWebServicesVersionsTestIAMPermissionsResource
-       :<|> ProjectsIapWebServicesGetIAMPolicyResource
-       :<|> ProjectsIapWebServicesSetIAMPolicyResource
-       :<|> ProjectsIapWebServicesTestIAMPermissionsResource
-       :<|> ProjectsIapWebGetIAMPolicyResource
-       :<|> ProjectsIapWebSetIAMPolicyResource
-       :<|> ProjectsIapWebTestIAMPermissionsResource
+     GetIAMPolicyResource :<|> SetIAMPolicyResource :<|>
+       TestIAMPermissionsResource

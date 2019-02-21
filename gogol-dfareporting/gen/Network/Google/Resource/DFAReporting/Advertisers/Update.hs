@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersUpdate' request conforms to.
 type AdvertisersUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -54,10 +54,13 @@ type AdvertisersUpdateResource =
 -- | Updates an existing advertiser.
 --
 -- /See:/ 'advertisersUpdate' smart constructor.
-data AdvertisersUpdate = AdvertisersUpdate'
+data AdvertisersUpdate =
+  AdvertisersUpdate'
     { _auProFileId :: !(Textual Int64)
     , _auPayload   :: !Advertiser
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdvertisersUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ advertisersUpdate
     -> Advertiser -- ^ 'auPayload'
     -> AdvertisersUpdate
 advertisersUpdate pAuProFileId_ pAuPayload_ =
-    AdvertisersUpdate'
-    { _auProFileId = _Coerce # pAuProFileId_
-    , _auPayload = pAuPayload_
-    }
+  AdvertisersUpdate'
+    {_auProFileId = _Coerce # pAuProFileId_, _auPayload = pAuPayload_}
+
 
 -- | User profile ID associated with this request.
 auProFileId :: Lens' AdvertisersUpdate Int64

@@ -63,7 +63,8 @@ type MattersUndeleteResource =
 -- | Undeletes the specified matter. Returns matter with updated state.
 --
 -- /See:/ 'mattersUndelete' smart constructor.
-data MattersUndelete = MattersUndelete'
+data MattersUndelete =
+  MattersUndelete'
     { _muXgafv          :: !(Maybe Xgafv)
     , _muUploadProtocol :: !(Maybe Text)
     , _muAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data MattersUndelete = MattersUndelete'
     , _muPayload        :: !UndeleteMatterRequest
     , _muMatterId       :: !Text
     , _muCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersUndelete' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ mattersUndelete
     -> Text -- ^ 'muMatterId'
     -> MattersUndelete
 mattersUndelete pMuPayload_ pMuMatterId_ =
-    MattersUndelete'
+  MattersUndelete'
     { _muXgafv = Nothing
     , _muUploadProtocol = Nothing
     , _muAccessToken = Nothing
@@ -104,6 +107,7 @@ mattersUndelete pMuPayload_ pMuMatterId_ =
     , _muMatterId = pMuMatterId_
     , _muCallback = Nothing
     }
+
 
 -- | V1 error format.
 muXgafv :: Lens' MattersUndelete (Maybe Xgafv)

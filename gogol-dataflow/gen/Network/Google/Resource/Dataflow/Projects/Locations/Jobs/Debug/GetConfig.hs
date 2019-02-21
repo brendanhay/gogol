@@ -71,7 +71,8 @@ type ProjectsLocationsJobsDebugGetConfigResource =
 -- | Get encoded debug configuration for component. Not cacheable.
 --
 -- /See:/ 'projectsLocationsJobsDebugGetConfig' smart constructor.
-data ProjectsLocationsJobsDebugGetConfig = ProjectsLocationsJobsDebugGetConfig'
+data ProjectsLocationsJobsDebugGetConfig =
+  ProjectsLocationsJobsDebugGetConfig'
     { _pljdgcXgafv          :: !(Maybe Xgafv)
     , _pljdgcJobId          :: !Text
     , _pljdgcUploadProtocol :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsLocationsJobsDebugGetConfig = ProjectsLocationsJobsDebugGetConfig'
     , _pljdgcPayload        :: !GetDebugConfigRequest
     , _pljdgcProjectId      :: !Text
     , _pljdgcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsDebugGetConfig' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ projectsLocationsJobsDebugGetConfig
     -> Text -- ^ 'pljdgcProjectId'
     -> ProjectsLocationsJobsDebugGetConfig
 projectsLocationsJobsDebugGetConfig pPljdgcJobId_ pPljdgcLocation_ pPljdgcPayload_ pPljdgcProjectId_ =
-    ProjectsLocationsJobsDebugGetConfig'
+  ProjectsLocationsJobsDebugGetConfig'
     { _pljdgcXgafv = Nothing
     , _pljdgcJobId = pPljdgcJobId_
     , _pljdgcUploadProtocol = Nothing
@@ -122,6 +125,7 @@ projectsLocationsJobsDebugGetConfig pPljdgcJobId_ pPljdgcLocation_ pPljdgcPayloa
     , _pljdgcProjectId = pPljdgcProjectId_
     , _pljdgcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljdgcXgafv :: Lens' ProjectsLocationsJobsDebugGetConfig (Maybe Xgafv)
@@ -176,7 +180,8 @@ pljdgcCallback
       (\ s a -> s{_pljdgcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsJobsDebugGetConfig where
+           ProjectsLocationsJobsDebugGetConfig
+         where
         type Rs ProjectsLocationsJobsDebugGetConfig =
              GetDebugConfigResponse
         type Scopes ProjectsLocationsJobsDebugGetConfig =

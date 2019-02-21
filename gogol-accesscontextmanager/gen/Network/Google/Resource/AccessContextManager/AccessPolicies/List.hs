@@ -65,7 +65,8 @@ type AccessPoliciesListResource =
 -- | List all AccessPolicies under a container.
 --
 -- /See:/ 'accessPoliciesList' smart constructor.
-data AccessPoliciesList = AccessPoliciesList'
+data AccessPoliciesList =
+  AccessPoliciesList'
     { _aplParent         :: !(Maybe Text)
     , _aplXgafv          :: !(Maybe Xgafv)
     , _aplUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data AccessPoliciesList = AccessPoliciesList'
     , _aplPageToken      :: !(Maybe Text)
     , _aplPageSize       :: !(Maybe (Textual Int32))
     , _aplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccessPoliciesList' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ data AccessPoliciesList = AccessPoliciesList'
 accessPoliciesList
     :: AccessPoliciesList
 accessPoliciesList =
-    AccessPoliciesList'
+  AccessPoliciesList'
     { _aplParent = Nothing
     , _aplXgafv = Nothing
     , _aplUploadProtocol = Nothing
@@ -108,6 +111,7 @@ accessPoliciesList =
     , _aplPageSize = Nothing
     , _aplCallback = Nothing
     }
+
 
 -- | Required. Resource name for the container to list AccessPolicy instances
 -- from. Format: \`organizations\/{org_id}\`

@@ -53,10 +53,13 @@ type PretargetingConfigDeleteResource =
 -- | Deletes an existing pretargeting config.
 --
 -- /See:/ 'pretargetingConfigDelete' smart constructor.
-data PretargetingConfigDelete = PretargetingConfigDelete'
+data PretargetingConfigDelete =
+  PretargetingConfigDelete'
     { _pcdAccountId :: !(Textual Int64)
     , _pcdConfigId  :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PretargetingConfigDelete' with the minimum fields required to make a request.
 --
@@ -70,10 +73,11 @@ pretargetingConfigDelete
     -> Int64 -- ^ 'pcdConfigId'
     -> PretargetingConfigDelete
 pretargetingConfigDelete pPcdAccountId_ pPcdConfigId_ =
-    PretargetingConfigDelete'
+  PretargetingConfigDelete'
     { _pcdAccountId = _Coerce # pPcdAccountId_
     , _pcdConfigId = _Coerce # pPcdConfigId_
     }
+
 
 -- | The account id to delete the pretargeting config for.
 pcdAccountId :: Lens' PretargetingConfigDelete Int64

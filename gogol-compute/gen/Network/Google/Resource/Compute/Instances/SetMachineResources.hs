@@ -65,13 +65,16 @@ type InstancesSetMachineResourcesResource =
 -- the values specified in the request.
 --
 -- /See:/ 'instancesSetMachineResources' smart constructor.
-data InstancesSetMachineResources = InstancesSetMachineResources'
+data InstancesSetMachineResources =
+  InstancesSetMachineResources'
     { _ismrRequestId :: !(Maybe Text)
     , _ismrProject   :: !Text
     , _ismrZone      :: !Text
     , _ismrPayload   :: !InstancesSetMachineResourcesRequest
     , _ismrInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesSetMachineResources' with the minimum fields required to make a request.
 --
@@ -93,13 +96,14 @@ instancesSetMachineResources
     -> Text -- ^ 'ismrInstance'
     -> InstancesSetMachineResources
 instancesSetMachineResources pIsmrProject_ pIsmrZone_ pIsmrPayload_ pIsmrInstance_ =
-    InstancesSetMachineResources'
+  InstancesSetMachineResources'
     { _ismrRequestId = Nothing
     , _ismrProject = pIsmrProject_
     , _ismrZone = pIsmrZone_
     , _ismrPayload = pIsmrPayload_
     , _ismrInstance = pIsmrInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

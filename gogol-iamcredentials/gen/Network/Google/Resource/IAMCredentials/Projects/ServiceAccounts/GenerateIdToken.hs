@@ -62,7 +62,8 @@ type ProjectsServiceAccountsGenerateIdTokenResource =
 -- | Generates an OpenID Connect ID token for a service account.
 --
 -- /See:/ 'projectsServiceAccountsGenerateIdToken' smart constructor.
-data ProjectsServiceAccountsGenerateIdToken = ProjectsServiceAccountsGenerateIdToken'
+data ProjectsServiceAccountsGenerateIdToken =
+  ProjectsServiceAccountsGenerateIdToken'
     { _psagitXgafv          :: !(Maybe Xgafv)
     , _psagitUploadProtocol :: !(Maybe Text)
     , _psagitAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsServiceAccountsGenerateIdToken = ProjectsServiceAccountsGenerateIdT
     , _psagitPayload        :: !GenerateIdTokenRequest
     , _psagitName           :: !Text
     , _psagitCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsGenerateIdToken' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsServiceAccountsGenerateIdToken
     -> Text -- ^ 'psagitName'
     -> ProjectsServiceAccountsGenerateIdToken
 projectsServiceAccountsGenerateIdToken pPsagitPayload_ pPsagitName_ =
-    ProjectsServiceAccountsGenerateIdToken'
+  ProjectsServiceAccountsGenerateIdToken'
     { _psagitXgafv = Nothing
     , _psagitUploadProtocol = Nothing
     , _psagitAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsServiceAccountsGenerateIdToken pPsagitPayload_ pPsagitName_ =
     , _psagitName = pPsagitName_
     , _psagitCallback = Nothing
     }
+
 
 -- | V1 error format.
 psagitXgafv :: Lens' ProjectsServiceAccountsGenerateIdToken (Maybe Xgafv)
@@ -147,7 +151,8 @@ psagitCallback
       (\ s a -> s{_psagitCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsGenerateIdToken where
+           ProjectsServiceAccountsGenerateIdToken
+         where
         type Rs ProjectsServiceAccountsGenerateIdToken =
              GenerateIdTokenResponse
         type Scopes ProjectsServiceAccountsGenerateIdToken =

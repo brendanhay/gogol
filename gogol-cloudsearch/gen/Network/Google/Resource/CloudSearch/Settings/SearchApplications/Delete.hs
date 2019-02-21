@@ -62,7 +62,8 @@ type SettingsSearchApplicationsDeleteResource =
 -- | Deletes a search application.
 --
 -- /See:/ 'settingsSearchApplicationsDelete' smart constructor.
-data SettingsSearchApplicationsDelete = SettingsSearchApplicationsDelete'
+data SettingsSearchApplicationsDelete =
+  SettingsSearchApplicationsDelete'
     { _ssadXgafv                       :: !(Maybe Xgafv)
     , _ssadUploadProtocol              :: !(Maybe Text)
     , _ssadAccessToken                 :: !(Maybe Text)
@@ -70,7 +71,9 @@ data SettingsSearchApplicationsDelete = SettingsSearchApplicationsDelete'
     , _ssadName                        :: !Text
     , _ssadDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _ssadCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsSearchApplicationsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ settingsSearchApplicationsDelete
     :: Text -- ^ 'ssadName'
     -> SettingsSearchApplicationsDelete
 settingsSearchApplicationsDelete pSsadName_ =
-    SettingsSearchApplicationsDelete'
+  SettingsSearchApplicationsDelete'
     { _ssadXgafv = Nothing
     , _ssadUploadProtocol = Nothing
     , _ssadAccessToken = Nothing
@@ -102,6 +105,7 @@ settingsSearchApplicationsDelete pSsadName_ =
     , _ssadDebugOptionsEnableDebugging = Nothing
     , _ssadCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssadXgafv :: Lens' SettingsSearchApplicationsDelete (Maybe Xgafv)
@@ -144,7 +148,8 @@ ssadCallback
   = lens _ssadCallback (\ s a -> s{_ssadCallback = a})
 
 instance GoogleRequest
-         SettingsSearchApplicationsDelete where
+           SettingsSearchApplicationsDelete
+         where
         type Rs SettingsSearchApplicationsDelete = Operation
         type Scopes SettingsSearchApplicationsDelete =
              '["https://www.googleapis.com/auth/cloud_search",

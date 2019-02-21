@@ -69,7 +69,8 @@ type OrganizationsRolesListResource =
 -- | Lists the Roles defined on a resource.
 --
 -- /See:/ 'organizationsRolesList' smart constructor.
-data OrganizationsRolesList = OrganizationsRolesList'
+data OrganizationsRolesList =
+  OrganizationsRolesList'
     { _orlParent         :: !Text
     , _orlXgafv          :: !(Maybe Xgafv)
     , _orlUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,9 @@ data OrganizationsRolesList = OrganizationsRolesList'
     , _orlPageToken      :: !(Maybe Text)
     , _orlPageSize       :: !(Maybe (Textual Int32))
     , _orlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsRolesList' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ organizationsRolesList
     :: Text -- ^ 'orlParent'
     -> OrganizationsRolesList
 organizationsRolesList pOrlParent_ =
-    OrganizationsRolesList'
+  OrganizationsRolesList'
     { _orlParent = pOrlParent_
     , _orlXgafv = Nothing
     , _orlUploadProtocol = Nothing
@@ -121,6 +124,7 @@ organizationsRolesList pOrlParent_ =
     , _orlPageSize = Nothing
     , _orlCallback = Nothing
     }
+
 
 -- | The resource name of the parent resource in one of the following
 -- formats: \`\` (empty string) -- this refers to curated roles.

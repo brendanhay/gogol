@@ -57,11 +57,14 @@ type EntitlementsDeleteResource =
 -- | Removes an entitlement to an app for a user.
 --
 -- /See:/ 'entitlementsDelete' smart constructor.
-data EntitlementsDelete = EntitlementsDelete'
+data EntitlementsDelete =
+  EntitlementsDelete'
     { _edEntitlementId :: !Text
     , _edEnterpriseId  :: !Text
     , _edUserId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntitlementsDelete' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ entitlementsDelete
     -> Text -- ^ 'edUserId'
     -> EntitlementsDelete
 entitlementsDelete pEdEntitlementId_ pEdEnterpriseId_ pEdUserId_ =
-    EntitlementsDelete'
+  EntitlementsDelete'
     { _edEntitlementId = pEdEntitlementId_
     , _edEnterpriseId = pEdEnterpriseId_
     , _edUserId = pEdUserId_
     }
+
 
 -- | The ID of the entitlement (a product ID), e.g.
 -- \"app:com.google.android.gm\".

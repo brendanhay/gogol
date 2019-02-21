@@ -89,7 +89,8 @@ type UsersUpdateProFileResource =
 -- should only be called within the context of a logged in user.
 --
 -- /See:/ 'usersUpdateProFile' smart constructor.
-data UsersUpdateProFile = UsersUpdateProFile'
+data UsersUpdateProFile =
+  UsersUpdateProFile'
     { _uupfXgafv                                       :: !(Maybe Xgafv)
     , _uupfUploadProtocol                              :: !(Maybe Text)
     , _uupfAccessToken                                 :: !(Maybe Text)
@@ -103,7 +104,9 @@ data UsersUpdateProFile = UsersUpdateProFile'
     , _uupfRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _uupfRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _uupfCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersUpdateProFile' with the minimum fields required to make a request.
 --
@@ -138,7 +141,7 @@ usersUpdateProFile
     :: UserProFile -- ^ 'uupfPayload'
     -> UsersUpdateProFile
 usersUpdateProFile pUupfPayload_ =
-    UsersUpdateProFile'
+  UsersUpdateProFile'
     { _uupfXgafv = Nothing
     , _uupfUploadProtocol = Nothing
     , _uupfAccessToken = Nothing
@@ -153,6 +156,7 @@ usersUpdateProFile pUupfPayload_ =
     , _uupfRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _uupfCallback = Nothing
     }
+
 
 -- | V1 error format.
 uupfXgafv :: Lens' UsersUpdateProFile (Maybe Xgafv)

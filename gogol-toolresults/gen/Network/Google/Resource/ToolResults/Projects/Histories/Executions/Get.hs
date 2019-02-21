@@ -63,11 +63,14 @@ type ProjectsHistoriesExecutionsGetResource =
 -- if the Execution does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsGet' smart constructor.
-data ProjectsHistoriesExecutionsGet = ProjectsHistoriesExecutionsGet'
+data ProjectsHistoriesExecutionsGet =
+  ProjectsHistoriesExecutionsGet'
     { _phegExecutionId :: !Text
     , _phegHistoryId   :: !Text
     , _phegProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsGet' with the minimum fields required to make a request.
 --
@@ -84,11 +87,12 @@ projectsHistoriesExecutionsGet
     -> Text -- ^ 'phegProjectId'
     -> ProjectsHistoriesExecutionsGet
 projectsHistoriesExecutionsGet pPhegExecutionId_ pPhegHistoryId_ pPhegProjectId_ =
-    ProjectsHistoriesExecutionsGet'
+  ProjectsHistoriesExecutionsGet'
     { _phegExecutionId = pPhegExecutionId_
     , _phegHistoryId = pPhegHistoryId_
     , _phegProjectId = pPhegProjectId_
     }
+
 
 -- | An Execution id. Required.
 phegExecutionId :: Lens' ProjectsHistoriesExecutionsGet Text

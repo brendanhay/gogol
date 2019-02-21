@@ -57,11 +57,14 @@ type ManagementFiltersUpdateResource =
 -- | Updates an existing filter.
 --
 -- /See:/ 'managementFiltersUpdate' smart constructor.
-data ManagementFiltersUpdate = ManagementFiltersUpdate'
+data ManagementFiltersUpdate =
+  ManagementFiltersUpdate'
     { _mfuFilterId  :: !Text
     , _mfuPayload   :: !Filter
     , _mfuAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementFiltersUpdate' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ managementFiltersUpdate
     -> Text -- ^ 'mfuAccountId'
     -> ManagementFiltersUpdate
 managementFiltersUpdate pMfuFilterId_ pMfuPayload_ pMfuAccountId_ =
-    ManagementFiltersUpdate'
+  ManagementFiltersUpdate'
     { _mfuFilterId = pMfuFilterId_
     , _mfuPayload = pMfuPayload_
     , _mfuAccountId = pMfuAccountId_
     }
+
 
 -- | ID of the filter to be updated.
 mfuFilterId :: Lens' ManagementFiltersUpdate Text

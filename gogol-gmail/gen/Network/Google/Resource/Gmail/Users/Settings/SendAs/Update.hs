@@ -63,11 +63,14 @@ type UsersSettingsSendAsUpdateResource =
 -- clients that have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsSendAsUpdate' smart constructor.
-data UsersSettingsSendAsUpdate = UsersSettingsSendAsUpdate'
+data UsersSettingsSendAsUpdate =
+  UsersSettingsSendAsUpdate'
     { _ussauPayload     :: !SendAs
     , _ussauUserId      :: !Text
     , _ussauSendAsEmail :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsSendAsUpdate' with the minimum fields required to make a request.
 --
@@ -83,11 +86,12 @@ usersSettingsSendAsUpdate
     -> Text -- ^ 'ussauSendAsEmail'
     -> UsersSettingsSendAsUpdate
 usersSettingsSendAsUpdate pUssauPayload_ pUssauSendAsEmail_ =
-    UsersSettingsSendAsUpdate'
+  UsersSettingsSendAsUpdate'
     { _ussauPayload = pUssauPayload_
     , _ussauUserId = "me"
     , _ussauSendAsEmail = pUssauSendAsEmail_
     }
+
 
 -- | Multipart request metadata.
 ussauPayload :: Lens' UsersSettingsSendAsUpdate SendAs

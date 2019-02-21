@@ -22,7 +22,7 @@
 --
 -- Retrieve the description of a particular version of an api.
 --
--- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @discovery.apis.getRest@.
+-- /See:/ <https://developers.google.com/discovery/ API Discovery Service Reference> for @discovery.apis.getRest@.
 module Network.Google.Resource.Discovery.APIs.GetRest
     (
     -- * REST Resource
@@ -55,10 +55,13 @@ type APIsGetRestResource =
 -- | Retrieve the description of a particular version of an api.
 --
 -- /See:/ 'apisGetRest' smart constructor.
-data APIsGetRest = APIsGetRest'
+data APIsGetRest =
+  APIsGetRest'
     { _agrVersion :: !Text
     , _agrAPI     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APIsGetRest' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ apisGetRest
     -> Text -- ^ 'agrAPI'
     -> APIsGetRest
 apisGetRest pAgrVersion_ pAgrAPI_ =
-    APIsGetRest'
-    { _agrVersion = pAgrVersion_
-    , _agrAPI = pAgrAPI_
-    }
+  APIsGetRest' {_agrVersion = pAgrVersion_, _agrAPI = pAgrAPI_}
+
 
 -- | The version of the API.
 agrVersion :: Lens' APIsGetRest Text

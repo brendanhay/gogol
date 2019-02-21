@@ -51,9 +51,12 @@ type SitesDeleteResource =
 -- | Removes a site from the set of the user\'s Search Console sites.
 --
 -- /See:/ 'sitesDelete' smart constructor.
-newtype SitesDelete = SitesDelete'
+newtype SitesDelete =
+  SitesDelete'
     { _sSiteURL :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitesDelete' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype SitesDelete = SitesDelete'
 sitesDelete
     :: Text -- ^ 'sSiteURL'
     -> SitesDelete
-sitesDelete pSSiteURL_ =
-    SitesDelete'
-    { _sSiteURL = pSSiteURL_
-    }
+sitesDelete pSSiteURL_ = SitesDelete' {_sSiteURL = pSSiteURL_}
+
 
 -- | The URI of the property as defined in Search Console. Examples:
 -- http:\/\/www.example.com\/ or android-app:\/\/com.example\/ Note: for

@@ -56,10 +56,13 @@ type RoleAssignmentsInsertResource =
 -- | Creates a role assignment.
 --
 -- /See:/ 'roleAssignmentsInsert' smart constructor.
-data RoleAssignmentsInsert = RoleAssignmentsInsert'
+data RoleAssignmentsInsert =
+  RoleAssignmentsInsert'
     { _raiPayload  :: !RoleAssignment
     , _raiCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoleAssignmentsInsert' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ roleAssignmentsInsert
     -> Text -- ^ 'raiCustomer'
     -> RoleAssignmentsInsert
 roleAssignmentsInsert pRaiPayload_ pRaiCustomer_ =
-    RoleAssignmentsInsert'
-    { _raiPayload = pRaiPayload_
-    , _raiCustomer = pRaiCustomer_
-    }
+  RoleAssignmentsInsert'
+    {_raiPayload = pRaiPayload_, _raiCustomer = pRaiCustomer_}
+
 
 -- | Multipart request metadata.
 raiPayload :: Lens' RoleAssignmentsInsert RoleAssignment

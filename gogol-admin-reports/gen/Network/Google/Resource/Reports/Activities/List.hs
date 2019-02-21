@@ -75,7 +75,8 @@ type ActivitiesListResource =
 -- | Retrieves a list of activities for a specific customer and application.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList'
+data ActivitiesList =
+  ActivitiesList'
     { _alStartTime       :: !(Maybe Text)
     , _alFilters         :: !(Maybe Text)
     , _alCustomerId      :: !(Maybe Text)
@@ -87,7 +88,9 @@ data ActivitiesList = ActivitiesList'
     , _alUserKey         :: !Text
     , _alMaxResults      :: !(Maybe (Textual Int32))
     , _alOrgUnitId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ activitiesList
     -> Text -- ^ 'alUserKey'
     -> ActivitiesList
 activitiesList pAlApplicationName_ pAlUserKey_ =
-    ActivitiesList'
+  ActivitiesList'
     { _alStartTime = Nothing
     , _alFilters = Nothing
     , _alCustomerId = Nothing
@@ -132,6 +135,7 @@ activitiesList pAlApplicationName_ pAlUserKey_ =
     , _alMaxResults = Nothing
     , _alOrgUnitId = ""
     }
+
 
 -- | Return events which occurred at or after this time.
 alStartTime :: Lens' ActivitiesList (Maybe Text)

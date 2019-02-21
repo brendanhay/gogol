@@ -60,12 +60,15 @@ type VolumesRecommendedRateResource =
 -- | Rate a recommended book for the current user.
 --
 -- /See:/ 'volumesRecommendedRate' smart constructor.
-data VolumesRecommendedRate = VolumesRecommendedRate'
+data VolumesRecommendedRate =
+  VolumesRecommendedRate'
     { _vrrRating   :: !VolumesRecommendedRateRating
     , _vrrLocale   :: !(Maybe Text)
     , _vrrVolumeId :: !Text
     , _vrrSource   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VolumesRecommendedRate' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ volumesRecommendedRate
     -> Text -- ^ 'vrrVolumeId'
     -> VolumesRecommendedRate
 volumesRecommendedRate pVrrRating_ pVrrVolumeId_ =
-    VolumesRecommendedRate'
+  VolumesRecommendedRate'
     { _vrrRating = pVrrRating_
     , _vrrLocale = Nothing
     , _vrrVolumeId = pVrrVolumeId_
     , _vrrSource = Nothing
     }
+
 
 -- | Rating to be given to the volume.
 vrrRating :: Lens' VolumesRecommendedRate VolumesRecommendedRateRating

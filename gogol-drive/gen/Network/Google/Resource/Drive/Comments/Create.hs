@@ -54,10 +54,13 @@ type CommentsCreateResource =
 -- | Creates a new comment on a file.
 --
 -- /See:/ 'commentsCreate' smart constructor.
-data CommentsCreate = CommentsCreate'
+data CommentsCreate =
+  CommentsCreate'
     { _ccPayload :: !Comment
     , _ccFileId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsCreate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ commentsCreate
     -> Text -- ^ 'ccFileId'
     -> CommentsCreate
 commentsCreate pCcPayload_ pCcFileId_ =
-    CommentsCreate'
-    { _ccPayload = pCcPayload_
-    , _ccFileId = pCcFileId_
-    }
+  CommentsCreate' {_ccPayload = pCcPayload_, _ccFileId = pCcFileId_}
+
 
 -- | Multipart request metadata.
 ccPayload :: Lens' CommentsCreate Comment

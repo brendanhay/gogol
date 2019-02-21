@@ -54,10 +54,13 @@ type AccountsUserPermissionsCreateResource =
 -- | Creates a user\'s Account & Container access.
 --
 -- /See:/ 'accountsUserPermissionsCreate' smart constructor.
-data AccountsUserPermissionsCreate = AccountsUserPermissionsCreate'
+data AccountsUserPermissionsCreate =
+  AccountsUserPermissionsCreate'
     { _aupcParent  :: !Text
     , _aupcPayload :: !UserPermission
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsUserPermissionsCreate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ accountsUserPermissionsCreate
     -> UserPermission -- ^ 'aupcPayload'
     -> AccountsUserPermissionsCreate
 accountsUserPermissionsCreate pAupcParent_ pAupcPayload_ =
-    AccountsUserPermissionsCreate'
-    { _aupcParent = pAupcParent_
-    , _aupcPayload = pAupcPayload_
-    }
+  AccountsUserPermissionsCreate'
+    {_aupcParent = pAupcParent_, _aupcPayload = pAupcPayload_}
+
 
 -- | GTM Account\'s API relative path. Example: accounts\/{account_id}
 aupcParent :: Lens' AccountsUserPermissionsCreate Text

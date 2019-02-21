@@ -57,11 +57,14 @@ type OrdersUpdateshipmentResource =
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
 -- /See:/ 'ordersUpdateshipment' smart constructor.
-data OrdersUpdateshipment = OrdersUpdateshipment'
+data OrdersUpdateshipment =
+  OrdersUpdateshipment'
     { _ouMerchantId :: !(Textual Word64)
     , _ouPayload    :: !OrdersUpdateShipmentRequest
     , _ouOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersUpdateshipment' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ ordersUpdateshipment
     -> Text -- ^ 'ouOrderId'
     -> OrdersUpdateshipment
 ordersUpdateshipment pOuMerchantId_ pOuPayload_ pOuOrderId_ =
-    OrdersUpdateshipment'
+  OrdersUpdateshipment'
     { _ouMerchantId = _Coerce # pOuMerchantId_
     , _ouPayload = pOuPayload_
     , _ouOrderId = pOuOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

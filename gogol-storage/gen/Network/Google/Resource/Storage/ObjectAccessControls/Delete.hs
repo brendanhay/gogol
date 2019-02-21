@@ -63,13 +63,16 @@ type ObjectAccessControlsDeleteResource =
 -- specified object.
 --
 -- /See:/ 'objectAccessControlsDelete' smart constructor.
-data ObjectAccessControlsDelete = ObjectAccessControlsDelete'
+data ObjectAccessControlsDelete =
+  ObjectAccessControlsDelete'
     { _oacdBucket      :: !Text
     , _oacdUserProject :: !(Maybe Text)
     , _oacdObject      :: !Text
     , _oacdEntity      :: !Text
     , _oacdGeneration  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectAccessControlsDelete' with the minimum fields required to make a request.
 --
@@ -90,13 +93,14 @@ objectAccessControlsDelete
     -> Text -- ^ 'oacdEntity'
     -> ObjectAccessControlsDelete
 objectAccessControlsDelete pOacdBucket_ pOacdObject_ pOacdEntity_ =
-    ObjectAccessControlsDelete'
+  ObjectAccessControlsDelete'
     { _oacdBucket = pOacdBucket_
     , _oacdUserProject = Nothing
     , _oacdObject = pOacdObject_
     , _oacdEntity = pOacdEntity_
     , _oacdGeneration = Nothing
     }
+
 
 -- | Name of a bucket.
 oacdBucket :: Lens' ObjectAccessControlsDelete Text

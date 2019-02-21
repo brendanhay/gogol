@@ -257,8 +257,8 @@ debuggerService
 
 -- | Use Stackdriver Debugger
 cloudDebuggerScope :: Proxy '["https://www.googleapis.com/auth/cloud_debugger"]
-cloudDebuggerScope = Proxy;
+cloudDebuggerScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

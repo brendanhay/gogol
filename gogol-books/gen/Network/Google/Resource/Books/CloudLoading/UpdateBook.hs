@@ -53,9 +53,12 @@ type CloudLoadingUpdateBookResource =
 -- |
 --
 -- /See:/ 'cloudLoadingUpdateBook' smart constructor.
-newtype CloudLoadingUpdateBook = CloudLoadingUpdateBook'
+newtype CloudLoadingUpdateBook =
+  CloudLoadingUpdateBook'
     { _clubPayload :: BooksCloudLoadingResource
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudLoadingUpdateBook' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ cloudLoadingUpdateBook
     :: BooksCloudLoadingResource -- ^ 'clubPayload'
     -> CloudLoadingUpdateBook
 cloudLoadingUpdateBook pClubPayload_ =
-    CloudLoadingUpdateBook'
-    { _clubPayload = pClubPayload_
-    }
+  CloudLoadingUpdateBook' {_clubPayload = pClubPayload_}
+
 
 -- | Multipart request metadata.
 clubPayload :: Lens' CloudLoadingUpdateBook BooksCloudLoadingResource

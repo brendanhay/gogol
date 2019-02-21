@@ -57,10 +57,13 @@ type InstancesResetSSLConfigResource =
 -- certificate for the instance.
 --
 -- /See:/ 'instancesResetSSLConfig' smart constructor.
-data InstancesResetSSLConfig = InstancesResetSSLConfig'
+data InstancesResetSSLConfig =
+  InstancesResetSSLConfig'
     { _irscProject  :: !Text
     , _irscInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesResetSSLConfig' with the minimum fields required to make a request.
 --
@@ -74,10 +77,9 @@ instancesResetSSLConfig
     -> Text -- ^ 'irscInstance'
     -> InstancesResetSSLConfig
 instancesResetSSLConfig pIrscProject_ pIrscInstance_ =
-    InstancesResetSSLConfig'
-    { _irscProject = pIrscProject_
-    , _irscInstance = pIrscInstance_
-    }
+  InstancesResetSSLConfig'
+    {_irscProject = pIrscProject_, _irscInstance = pIrscInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 irscProject :: Lens' InstancesResetSSLConfig Text

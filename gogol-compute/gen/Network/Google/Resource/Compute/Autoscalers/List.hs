@@ -64,14 +64,17 @@ type AutoscalersListResource =
 -- | Retrieves a list of autoscalers contained within the specified zone.
 --
 -- /See:/ 'autoscalersList' smart constructor.
-data AutoscalersList = AutoscalersList'
+data AutoscalersList =
+  AutoscalersList'
     { _aOrderBy    :: !(Maybe Text)
     , _aProject    :: !Text
     , _aZone       :: !Text
     , _aFilter     :: !(Maybe Text)
     , _aPageToken  :: !(Maybe Text)
     , _aMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AutoscalersList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ autoscalersList
     -> Text -- ^ 'aZone'
     -> AutoscalersList
 autoscalersList pAProject_ pAZone_ =
-    AutoscalersList'
+  AutoscalersList'
     { _aOrderBy = Nothing
     , _aProject = pAProject_
     , _aZone = pAZone_
@@ -101,6 +104,7 @@ autoscalersList pAProject_ pAZone_ =
     , _aPageToken = Nothing
     , _aMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

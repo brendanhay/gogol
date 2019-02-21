@@ -201,6 +201,7 @@ module Network.Google.BigQuery.Types
     , externalDataConfiguration
     , edcBigtableOptions
     , edcIgnoreUnknownValues
+    , edcHivePartitioningMode
     , edcCompression
     , edcSourceFormat
     , edcSchema
@@ -234,6 +235,7 @@ module Network.Google.BigQuery.Types
     , TableFieldSchema
     , tableFieldSchema
     , tfsMode
+    , tfsCategories
     , tfsName
     , tfsType
     , tfsDescription
@@ -373,6 +375,7 @@ module Network.Google.BigQuery.Types
     , jclSchemaInline
     , jclIgnoreUnknownValues
     , jclSchemaUpdateOptions
+    , jclHivePartitioningMode
     , jclCreateDisPosition
     , jclSchemaInlineFormat
     , jclAllowQuotedNewlines
@@ -653,6 +656,11 @@ module Network.Google.BigQuery.Types
     , jDdlOperationPerformed
     , jTotalPartitionsProcessed
 
+    -- * TableFieldSchemaCategories
+    , TableFieldSchemaCategories
+    , tableFieldSchemaCategories
+    , tfscNames
+
     -- * JobStatus
     , JobStatus
     , jobStatus
@@ -805,28 +813,28 @@ bigQueryService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View your data in Google Cloud Storage
 storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-storageReadOnlyScope = Proxy;
+storageReadOnlyScope = Proxy
 
 -- | Insert data into Google BigQuery
 bigQueryInsertDataScope :: Proxy '["https://www.googleapis.com/auth/bigquery.insertdata"]
-bigQueryInsertDataScope = Proxy;
+bigQueryInsertDataScope = Proxy
 
 -- | Manage your data in Google Cloud Storage
 storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-storageReadWriteScope = Proxy;
+storageReadWriteScope = Proxy
 
 -- | View and manage your data in Google BigQuery
 bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
-bigQueryScope = Proxy;
+bigQueryScope = Proxy
 
 -- | Manage your data and permissions in Google Cloud Storage
 storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-storageFullControlScope = Proxy;
+storageFullControlScope = Proxy

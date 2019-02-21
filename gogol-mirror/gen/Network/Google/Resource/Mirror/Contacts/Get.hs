@@ -51,9 +51,12 @@ type ContactsGetResource =
 -- | Gets a single contact by ID.
 --
 -- /See:/ 'contactsGet' smart constructor.
-newtype ContactsGet = ContactsGet'
+newtype ContactsGet =
+  ContactsGet'
     { _cgId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype ContactsGet = ContactsGet'
 contactsGet
     :: Text -- ^ 'cgId'
     -> ContactsGet
-contactsGet pCgId_ =
-    ContactsGet'
-    { _cgId = pCgId_
-    }
+contactsGet pCgId_ = ContactsGet' {_cgId = pCgId_}
+
 
 -- | The ID of the contact.
 cgId :: Lens' ContactsGet Text

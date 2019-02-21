@@ -68,7 +68,8 @@ type PartnersDevicesUnclaimAsyncResource =
 -- batch operations](\/zero-touch\/guides\/how-it-works#operations).
 --
 -- /See:/ 'partnersDevicesUnclaimAsync' smart constructor.
-data PartnersDevicesUnclaimAsync = PartnersDevicesUnclaimAsync'
+data PartnersDevicesUnclaimAsync =
+  PartnersDevicesUnclaimAsync'
     { _pduaXgafv          :: !(Maybe Xgafv)
     , _pduaUploadProtocol :: !(Maybe Text)
     , _pduaAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data PartnersDevicesUnclaimAsync = PartnersDevicesUnclaimAsync'
     , _pduaUploadType     :: !(Maybe Text)
     , _pduaPayload        :: !UnclaimDevicesRequest
     , _pduaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartnersDevicesUnclaimAsync' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ partnersDevicesUnclaimAsync
     -> UnclaimDevicesRequest -- ^ 'pduaPayload'
     -> PartnersDevicesUnclaimAsync
 partnersDevicesUnclaimAsync pPduaPartnerId_ pPduaPayload_ =
-    PartnersDevicesUnclaimAsync'
+  PartnersDevicesUnclaimAsync'
     { _pduaXgafv = Nothing
     , _pduaUploadProtocol = Nothing
     , _pduaAccessToken = Nothing
@@ -109,6 +112,7 @@ partnersDevicesUnclaimAsync pPduaPartnerId_ pPduaPayload_ =
     , _pduaPayload = pPduaPayload_
     , _pduaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pduaXgafv :: Lens' PartnersDevicesUnclaimAsync (Maybe Xgafv)

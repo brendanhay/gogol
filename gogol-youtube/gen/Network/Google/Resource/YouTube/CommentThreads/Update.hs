@@ -54,10 +54,13 @@ type CommentThreadsUpdateResource =
 -- | Modifies the top-level comment in a comment thread.
 --
 -- /See:/ 'commentThreadsUpdate' smart constructor.
-data CommentThreadsUpdate = CommentThreadsUpdate'
+data CommentThreadsUpdate =
+  CommentThreadsUpdate'
     { _ctuPart    :: !Text
     , _ctuPayload :: !CommentThread
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentThreadsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ commentThreadsUpdate
     -> CommentThread -- ^ 'ctuPayload'
     -> CommentThreadsUpdate
 commentThreadsUpdate pCtuPart_ pCtuPayload_ =
-    CommentThreadsUpdate'
-    { _ctuPart = pCtuPart_
-    , _ctuPayload = pCtuPayload_
-    }
+  CommentThreadsUpdate' {_ctuPart = pCtuPart_, _ctuPayload = pCtuPayload_}
+
 
 -- | The part parameter specifies a comma-separated list of commentThread
 -- resource properties that the API response will include. You must at

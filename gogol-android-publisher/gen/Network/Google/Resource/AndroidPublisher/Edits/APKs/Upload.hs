@@ -64,10 +64,13 @@ type EditsAPKsUploadResource =
 
 --
 -- /See:/ 'editsAPKsUpload' smart constructor.
-data EditsAPKsUpload = EditsAPKsUpload'
+data EditsAPKsUpload =
+  EditsAPKsUpload'
     { _eapkuPackageName :: !Text
     , _eapkuEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsAPKsUpload' with the minimum fields required to make a request.
 --
@@ -81,10 +84,9 @@ editsAPKsUpload
     -> Text -- ^ 'eapkuEditId'
     -> EditsAPKsUpload
 editsAPKsUpload pEapkuPackageName_ pEapkuEditId_ =
-    EditsAPKsUpload'
-    { _eapkuPackageName = pEapkuPackageName_
-    , _eapkuEditId = pEapkuEditId_
-    }
+  EditsAPKsUpload'
+    {_eapkuPackageName = pEapkuPackageName_, _eapkuEditId = pEapkuEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

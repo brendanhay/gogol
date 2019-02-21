@@ -62,7 +62,8 @@ type ProjectsLocationsJobsCreateResource =
 -- | Creates a job.
 --
 -- /See:/ 'projectsLocationsJobsCreate' smart constructor.
-data ProjectsLocationsJobsCreate = ProjectsLocationsJobsCreate'
+data ProjectsLocationsJobsCreate =
+  ProjectsLocationsJobsCreate'
     { _pljcParent         :: !Text
     , _pljcXgafv          :: !(Maybe Xgafv)
     , _pljcUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsLocationsJobsCreate = ProjectsLocationsJobsCreate'
     , _pljcUploadType     :: !(Maybe Text)
     , _pljcPayload        :: !Job
     , _pljcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsCreate' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsLocationsJobsCreate
     -> Job -- ^ 'pljcPayload'
     -> ProjectsLocationsJobsCreate
 projectsLocationsJobsCreate pPljcParent_ pPljcPayload_ =
-    ProjectsLocationsJobsCreate'
+  ProjectsLocationsJobsCreate'
     { _pljcParent = pPljcParent_
     , _pljcXgafv = Nothing
     , _pljcUploadProtocol = Nothing
@@ -103,6 +106,7 @@ projectsLocationsJobsCreate pPljcParent_ pPljcPayload_ =
     , _pljcPayload = pPljcPayload_
     , _pljcCallback = Nothing
     }
+
 
 -- | Required. The location name. For example:
 -- \`projects\/PROJECT_ID\/locations\/LOCATION_ID\`.

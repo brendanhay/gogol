@@ -70,7 +70,8 @@ type ProjectsZonesClustersLegacyAbacResource =
 -- | Enables or disables the ABAC authorization mechanism on a cluster.
 --
 -- /See:/ 'projectsZonesClustersLegacyAbac' smart constructor.
-data ProjectsZonesClustersLegacyAbac = ProjectsZonesClustersLegacyAbac'
+data ProjectsZonesClustersLegacyAbac =
+  ProjectsZonesClustersLegacyAbac'
     { _pzclaXgafv          :: !(Maybe Xgafv)
     , _pzclaUploadProtocol :: !(Maybe Text)
     , _pzclaAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsZonesClustersLegacyAbac = ProjectsZonesClustersLegacyAbac'
     , _pzclaClusterId      :: !Text
     , _pzclaProjectId      :: !Text
     , _pzclaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersLegacyAbac' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsZonesClustersLegacyAbac
     -> Text -- ^ 'pzclaProjectId'
     -> ProjectsZonesClustersLegacyAbac
 projectsZonesClustersLegacyAbac pPzclaZone_ pPzclaPayload_ pPzclaClusterId_ pPzclaProjectId_ =
-    ProjectsZonesClustersLegacyAbac'
+  ProjectsZonesClustersLegacyAbac'
     { _pzclaXgafv = Nothing
     , _pzclaUploadProtocol = Nothing
     , _pzclaAccessToken = Nothing
@@ -121,6 +124,7 @@ projectsZonesClustersLegacyAbac pPzclaZone_ pPzclaPayload_ pPzclaClusterId_ pPzc
     , _pzclaProjectId = pPzclaProjectId_
     , _pzclaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzclaXgafv :: Lens' ProjectsZonesClustersLegacyAbac (Maybe Xgafv)
@@ -179,7 +183,8 @@ pzclaCallback
       (\ s a -> s{_pzclaCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersLegacyAbac where
+           ProjectsZonesClustersLegacyAbac
+         where
         type Rs ProjectsZonesClustersLegacyAbac = Operation
         type Scopes ProjectsZonesClustersLegacyAbac =
              '["https://www.googleapis.com/auth/cloud-platform"]

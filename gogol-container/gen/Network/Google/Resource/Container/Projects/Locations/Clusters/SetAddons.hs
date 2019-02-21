@@ -62,7 +62,8 @@ type ProjectsLocationsClustersSetAddonsResource =
 -- | Sets the addons for a specific cluster.
 --
 -- /See:/ 'projectsLocationsClustersSetAddons' smart constructor.
-data ProjectsLocationsClustersSetAddons = ProjectsLocationsClustersSetAddons'
+data ProjectsLocationsClustersSetAddons =
+  ProjectsLocationsClustersSetAddons'
     { _plcsaXgafv          :: !(Maybe Xgafv)
     , _plcsaUploadProtocol :: !(Maybe Text)
     , _plcsaAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsLocationsClustersSetAddons = ProjectsLocationsClustersSetAddons'
     , _plcsaPayload        :: !SetAddonsConfigRequest
     , _plcsaName           :: !Text
     , _plcsaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersSetAddons' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsLocationsClustersSetAddons
     -> Text -- ^ 'plcsaName'
     -> ProjectsLocationsClustersSetAddons
 projectsLocationsClustersSetAddons pPlcsaPayload_ pPlcsaName_ =
-    ProjectsLocationsClustersSetAddons'
+  ProjectsLocationsClustersSetAddons'
     { _plcsaXgafv = Nothing
     , _plcsaUploadProtocol = Nothing
     , _plcsaAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsLocationsClustersSetAddons pPlcsaPayload_ pPlcsaName_ =
     , _plcsaName = pPlcsaName_
     , _plcsaCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsaXgafv :: Lens' ProjectsLocationsClustersSetAddons (Maybe Xgafv)
@@ -145,7 +149,8 @@ plcsaCallback
       (\ s a -> s{_plcsaCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersSetAddons where
+           ProjectsLocationsClustersSetAddons
+         where
         type Rs ProjectsLocationsClustersSetAddons =
              Operation
         type Scopes ProjectsLocationsClustersSetAddons =

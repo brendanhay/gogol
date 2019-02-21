@@ -57,11 +57,14 @@ type TargetTCPProxiesDeleteResource =
 -- | Deletes the specified TargetTcpProxy resource.
 --
 -- /See:/ 'targetTCPProxiesDelete' smart constructor.
-data TargetTCPProxiesDelete = TargetTCPProxiesDelete'
+data TargetTCPProxiesDelete =
+  TargetTCPProxiesDelete'
     { _ttpdRequestId      :: !(Maybe Text)
     , _ttpdProject        :: !Text
     , _ttpdTargetTCPProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetTCPProxiesDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ targetTCPProxiesDelete
     -> Text -- ^ 'ttpdTargetTCPProxy'
     -> TargetTCPProxiesDelete
 targetTCPProxiesDelete pTtpdProject_ pTtpdTargetTCPProxy_ =
-    TargetTCPProxiesDelete'
+  TargetTCPProxiesDelete'
     { _ttpdRequestId = Nothing
     , _ttpdProject = pTtpdProject_
     , _ttpdTargetTCPProxy = pTtpdTargetTCPProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -67,7 +67,8 @@ type ProjectsLocationsTemplatesCreateResource =
 -- | Creates a Cloud Dataflow job from a template.
 --
 -- /See:/ 'projectsLocationsTemplatesCreate' smart constructor.
-data ProjectsLocationsTemplatesCreate = ProjectsLocationsTemplatesCreate'
+data ProjectsLocationsTemplatesCreate =
+  ProjectsLocationsTemplatesCreate'
     { _pltcXgafv          :: !(Maybe Xgafv)
     , _pltcUploadProtocol :: !(Maybe Text)
     , _pltcLocation       :: !Text
@@ -76,7 +77,9 @@ data ProjectsLocationsTemplatesCreate = ProjectsLocationsTemplatesCreate'
     , _pltcPayload        :: !CreateJobFromTemplateRequest
     , _pltcProjectId      :: !Text
     , _pltcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsTemplatesCreate' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsLocationsTemplatesCreate
     -> Text -- ^ 'pltcProjectId'
     -> ProjectsLocationsTemplatesCreate
 projectsLocationsTemplatesCreate pPltcLocation_ pPltcPayload_ pPltcProjectId_ =
-    ProjectsLocationsTemplatesCreate'
+  ProjectsLocationsTemplatesCreate'
     { _pltcXgafv = Nothing
     , _pltcUploadProtocol = Nothing
     , _pltcLocation = pPltcLocation_
@@ -113,6 +116,7 @@ projectsLocationsTemplatesCreate pPltcLocation_ pPltcPayload_ pPltcProjectId_ =
     , _pltcProjectId = pPltcProjectId_
     , _pltcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltcXgafv :: Lens' ProjectsLocationsTemplatesCreate (Maybe Xgafv)
@@ -159,7 +163,8 @@ pltcCallback
   = lens _pltcCallback (\ s a -> s{_pltcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTemplatesCreate where
+           ProjectsLocationsTemplatesCreate
+         where
         type Rs ProjectsLocationsTemplatesCreate = Job
         type Scopes ProjectsLocationsTemplatesCreate =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -56,11 +56,14 @@ type ManagedZonesGetResource =
 -- | Fetch the representation of an existing ManagedZone.
 --
 -- /See:/ 'managedZonesGet' smart constructor.
-data ManagedZonesGet = ManagedZonesGet'
+data ManagedZonesGet =
+  ManagedZonesGet'
     { _mzgProject           :: !Text
     , _mzgManagedZone       :: !Text
     , _mzgClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagedZonesGet' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ managedZonesGet
     -> Text -- ^ 'mzgManagedZone'
     -> ManagedZonesGet
 managedZonesGet pMzgProject_ pMzgManagedZone_ =
-    ManagedZonesGet'
+  ManagedZonesGet'
     { _mzgProject = pMzgProject_
     , _mzgManagedZone = pMzgManagedZone_
     , _mzgClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 mzgProject :: Lens' ManagedZonesGet Text

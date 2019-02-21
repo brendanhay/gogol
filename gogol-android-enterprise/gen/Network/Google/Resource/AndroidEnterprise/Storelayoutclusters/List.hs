@@ -57,10 +57,13 @@ type StorelayoutclustersListResource =
 -- | Retrieves the details of all clusters on the specified page.
 --
 -- /See:/ 'storelayoutclustersList' smart constructor.
-data StorelayoutclustersList = StorelayoutclustersList'
+data StorelayoutclustersList =
+  StorelayoutclustersList'
     { _sllEnterpriseId :: !Text
     , _sllPageId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StorelayoutclustersList' with the minimum fields required to make a request.
 --
@@ -74,10 +77,9 @@ storelayoutclustersList
     -> Text -- ^ 'sllPageId'
     -> StorelayoutclustersList
 storelayoutclustersList pSllEnterpriseId_ pSllPageId_ =
-    StorelayoutclustersList'
-    { _sllEnterpriseId = pSllEnterpriseId_
-    , _sllPageId = pSllPageId_
-    }
+  StorelayoutclustersList'
+    {_sllEnterpriseId = pSllEnterpriseId_, _sllPageId = pSllPageId_}
+
 
 -- | The ID of the enterprise.
 sllEnterpriseId :: Lens' StorelayoutclustersList Text

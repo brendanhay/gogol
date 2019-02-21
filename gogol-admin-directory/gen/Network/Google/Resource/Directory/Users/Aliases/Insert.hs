@@ -55,10 +55,13 @@ type UsersAliasesInsertResource =
 -- | Add a alias for the user
 --
 -- /See:/ 'usersAliasesInsert' smart constructor.
-data UsersAliasesInsert = UsersAliasesInsert'
+data UsersAliasesInsert =
+  UsersAliasesInsert'
     { _uaiPayload :: !Alias
     , _uaiUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersAliasesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ usersAliasesInsert
     -> Text -- ^ 'uaiUserKey'
     -> UsersAliasesInsert
 usersAliasesInsert pUaiPayload_ pUaiUserKey_ =
-    UsersAliasesInsert'
-    { _uaiPayload = pUaiPayload_
-    , _uaiUserKey = pUaiUserKey_
-    }
+  UsersAliasesInsert' {_uaiPayload = pUaiPayload_, _uaiUserKey = pUaiUserKey_}
+
 
 -- | Multipart request metadata.
 uaiPayload :: Lens' UsersAliasesInsert Alias

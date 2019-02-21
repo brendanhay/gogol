@@ -86,7 +86,8 @@ type ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesListResource
 -- containing PerfSampleSeries does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList' smart constructor.
-data ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList = ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList'
+data ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList =
+  ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList'
     { _phespssslExecutionId    :: !Text
     , _phespssslStepId         :: !Text
     , _phespssslHistoryId      :: !Text
@@ -94,7 +95,9 @@ data ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList = ProjectsHisto
     , _phespssslProjectId      :: !Text
     , _phespssslSampleSeriesId :: !Text
     , _phespssslPageSize       :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList' with the minimum fields required to make a request.
 --
@@ -121,7 +124,7 @@ projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList
     -> Text -- ^ 'phespssslSampleSeriesId'
     -> ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList
 projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList pPhespssslExecutionId_ pPhespssslStepId_ pPhespssslHistoryId_ pPhespssslProjectId_ pPhespssslSampleSeriesId_ =
-    ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList'
+  ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList'
     { _phespssslExecutionId = pPhespssslExecutionId_
     , _phespssslStepId = pPhespssslStepId_
     , _phespssslHistoryId = pPhespssslHistoryId_
@@ -130,6 +133,7 @@ projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList pPhespssslExecutionI
     , _phespssslSampleSeriesId = pPhespssslSampleSeriesId_
     , _phespssslPageSize = Nothing
     }
+
 
 -- | A tool results execution ID.
 phespssslExecutionId :: Lens' ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList Text
@@ -176,7 +180,7 @@ phespssslPageSize
       . mapping _Coerce
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList
+           ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList
          where
         type Rs
                ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList

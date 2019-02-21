@@ -78,7 +78,8 @@ type ProjectsSnapshotsPatchResource =
 -- that certain properties of a snapshot are not modifiable.
 --
 -- /See:/ 'projectsSnapshotsPatch' smart constructor.
-data ProjectsSnapshotsPatch = ProjectsSnapshotsPatch'
+data ProjectsSnapshotsPatch =
+  ProjectsSnapshotsPatch'
     { _ppXgafv          :: !(Maybe Xgafv)
     , _ppUploadProtocol :: !(Maybe Text)
     , _ppAccessToken    :: !(Maybe Text)
@@ -86,7 +87,9 @@ data ProjectsSnapshotsPatch = ProjectsSnapshotsPatch'
     , _ppPayload        :: !UpdateSnapshotRequest
     , _ppName           :: !Text
     , _ppCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSnapshotsPatch' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsSnapshotsPatch
     -> Text -- ^ 'ppName'
     -> ProjectsSnapshotsPatch
 projectsSnapshotsPatch pPpPayload_ pPpName_ =
-    ProjectsSnapshotsPatch'
+  ProjectsSnapshotsPatch'
     { _ppXgafv = Nothing
     , _ppUploadProtocol = Nothing
     , _ppAccessToken = Nothing
@@ -119,6 +122,7 @@ projectsSnapshotsPatch pPpPayload_ pPpName_ =
     , _ppName = pPpName_
     , _ppCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppXgafv :: Lens' ProjectsSnapshotsPatch (Maybe Xgafv)

@@ -66,14 +66,17 @@ type CoursesDeleteResource =
 -- exists with the requested ID.
 --
 -- /See:/ 'coursesDelete' smart constructor.
-data CoursesDelete = CoursesDelete'
+data CoursesDelete =
+  CoursesDelete'
     { _cdXgafv          :: !(Maybe Xgafv)
     , _cdUploadProtocol :: !(Maybe Text)
     , _cdAccessToken    :: !(Maybe Text)
     , _cdUploadType     :: !(Maybe Text)
     , _cdId             :: !Text
     , _cdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesDelete' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ coursesDelete
     :: Text -- ^ 'cdId'
     -> CoursesDelete
 coursesDelete pCdId_ =
-    CoursesDelete'
+  CoursesDelete'
     { _cdXgafv = Nothing
     , _cdUploadProtocol = Nothing
     , _cdAccessToken = Nothing
@@ -102,6 +105,7 @@ coursesDelete pCdId_ =
     , _cdId = pCdId_
     , _cdCallback = Nothing
     }
+
 
 -- | V1 error format.
 cdXgafv :: Lens' CoursesDelete (Maybe Xgafv)

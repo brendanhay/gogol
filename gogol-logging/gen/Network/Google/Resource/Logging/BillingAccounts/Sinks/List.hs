@@ -65,7 +65,8 @@ type BillingAccountsSinksListResource =
 -- | Lists sinks.
 --
 -- /See:/ 'billingAccountsSinksList' smart constructor.
-data BillingAccountsSinksList = BillingAccountsSinksList'
+data BillingAccountsSinksList =
+  BillingAccountsSinksList'
     { _baslParent         :: !Text
     , _baslXgafv          :: !(Maybe Xgafv)
     , _baslUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data BillingAccountsSinksList = BillingAccountsSinksList'
     , _baslPageToken      :: !(Maybe Text)
     , _baslPageSize       :: !(Maybe (Textual Int32))
     , _baslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsSinksList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ billingAccountsSinksList
     :: Text -- ^ 'baslParent'
     -> BillingAccountsSinksList
 billingAccountsSinksList pBaslParent_ =
-    BillingAccountsSinksList'
+  BillingAccountsSinksList'
     { _baslParent = pBaslParent_
     , _baslXgafv = Nothing
     , _baslUploadProtocol = Nothing
@@ -109,6 +112,7 @@ billingAccountsSinksList pBaslParent_ =
     , _baslPageSize = Nothing
     , _baslCallback = Nothing
     }
+
 
 -- | Required. The parent resource whose sinks are to be listed:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

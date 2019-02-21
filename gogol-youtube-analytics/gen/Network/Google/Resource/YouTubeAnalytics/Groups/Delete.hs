@@ -63,7 +63,8 @@ type GroupsDeleteResource =
 -- | Deletes a group.
 --
 -- /See:/ 'groupsDelete' smart constructor.
-data GroupsDelete = GroupsDelete'
+data GroupsDelete =
+  GroupsDelete'
     { _gdXgafv                  :: !(Maybe Xgafv)
     , _gdUploadProtocol         :: !(Maybe Text)
     , _gdAccessToken            :: !(Maybe Text)
@@ -71,7 +72,9 @@ data GroupsDelete = GroupsDelete'
     , _gdOnBehalfOfContentOwner :: !(Maybe Text)
     , _gdId                     :: !(Maybe Text)
     , _gdCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ data GroupsDelete = GroupsDelete'
 groupsDelete
     :: GroupsDelete
 groupsDelete =
-    GroupsDelete'
+  GroupsDelete'
     { _gdXgafv = Nothing
     , _gdUploadProtocol = Nothing
     , _gdAccessToken = Nothing
@@ -102,6 +105,7 @@ groupsDelete =
     , _gdId = Nothing
     , _gdCallback = Nothing
     }
+
 
 -- | V1 error format.
 gdXgafv :: Lens' GroupsDelete (Maybe Xgafv)

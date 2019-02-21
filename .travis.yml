@@ -217,6 +217,8 @@ matrix:
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-dns
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-docs
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-doubleclick-bids
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-doubleclick-search
@@ -252,6 +254,8 @@ matrix:
     - env: GHCVER=8.2.2 LIBRARY=gogol-groups-migration
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-groups-settings
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-healthcare
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-iam
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }

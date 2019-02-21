@@ -97,7 +97,8 @@ type CompaniesGetResource =
 -- | Gets a company.
 --
 -- /See:/ 'companiesGet' smart constructor.
-data CompaniesGet = CompaniesGet'
+data CompaniesGet =
+  CompaniesGet'
     { _cgXgafv                                       :: !(Maybe Xgafv)
     , _cgCurrencyCode                                :: !(Maybe Text)
     , _cgUploadProtocol                              :: !(Maybe Text)
@@ -115,7 +116,9 @@ data CompaniesGet = CompaniesGet'
     , _cgRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _cgRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _cgCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CompaniesGet' with the minimum fields required to make a request.
 --
@@ -158,7 +161,7 @@ companiesGet
     :: Text -- ^ 'cgCompanyId'
     -> CompaniesGet
 companiesGet pCgCompanyId_ =
-    CompaniesGet'
+  CompaniesGet'
     { _cgXgafv = Nothing
     , _cgCurrencyCode = Nothing
     , _cgUploadProtocol = Nothing
@@ -177,6 +180,7 @@ companiesGet pCgCompanyId_ =
     , _cgRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _cgCallback = Nothing
     }
+
 
 -- | V1 error format.
 cgXgafv :: Lens' CompaniesGet (Maybe Xgafv)

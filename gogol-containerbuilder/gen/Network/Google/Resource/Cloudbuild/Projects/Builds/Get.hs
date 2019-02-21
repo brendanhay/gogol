@@ -67,7 +67,8 @@ type ProjectsBuildsGetResource =
 -- or \`WORKING\`), and timing information.
 --
 -- /See:/ 'projectsBuildsGet' smart constructor.
-data ProjectsBuildsGet = ProjectsBuildsGet'
+data ProjectsBuildsGet =
+  ProjectsBuildsGet'
     { _pbgXgafv          :: !(Maybe Xgafv)
     , _pbgUploadProtocol :: !(Maybe Text)
     , _pbgAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsBuildsGet = ProjectsBuildsGet'
     , _pbgId             :: !Text
     , _pbgProjectId      :: !Text
     , _pbgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsBuildsGet' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsBuildsGet
     -> Text -- ^ 'pbgProjectId'
     -> ProjectsBuildsGet
 projectsBuildsGet pPbgId_ pPbgProjectId_ =
-    ProjectsBuildsGet'
+  ProjectsBuildsGet'
     { _pbgXgafv = Nothing
     , _pbgUploadProtocol = Nothing
     , _pbgAccessToken = Nothing
@@ -108,6 +111,7 @@ projectsBuildsGet pPbgId_ pPbgProjectId_ =
     , _pbgProjectId = pPbgProjectId_
     , _pbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbgXgafv :: Lens' ProjectsBuildsGet (Maybe Xgafv)

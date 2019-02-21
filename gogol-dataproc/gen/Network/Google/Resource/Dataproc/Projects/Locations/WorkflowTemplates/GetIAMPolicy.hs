@@ -65,7 +65,8 @@ type ProjectsLocationsWorkflowTemplatesGetIAMPolicyResource
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsLocationsWorkflowTemplatesGetIAMPolicy' smart constructor.
-data ProjectsLocationsWorkflowTemplatesGetIAMPolicy = ProjectsLocationsWorkflowTemplatesGetIAMPolicy'
+data ProjectsLocationsWorkflowTemplatesGetIAMPolicy =
+  ProjectsLocationsWorkflowTemplatesGetIAMPolicy'
     { _plwtgipXgafv          :: !(Maybe Xgafv)
     , _plwtgipUploadProtocol :: !(Maybe Text)
     , _plwtgipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsLocationsWorkflowTemplatesGetIAMPolicy = ProjectsLocationsWorkflowT
     , _plwtgipPayload        :: !GetIAMPolicyRequest
     , _plwtgipResource       :: !Text
     , _plwtgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsLocationsWorkflowTemplatesGetIAMPolicy
     -> Text -- ^ 'plwtgipResource'
     -> ProjectsLocationsWorkflowTemplatesGetIAMPolicy
 projectsLocationsWorkflowTemplatesGetIAMPolicy pPlwtgipPayload_ pPlwtgipResource_ =
-    ProjectsLocationsWorkflowTemplatesGetIAMPolicy'
+  ProjectsLocationsWorkflowTemplatesGetIAMPolicy'
     { _plwtgipXgafv = Nothing
     , _plwtgipUploadProtocol = Nothing
     , _plwtgipAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsLocationsWorkflowTemplatesGetIAMPolicy pPlwtgipPayload_ pPlwtgipResource
     , _plwtgipResource = pPlwtgipResource_
     , _plwtgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plwtgipXgafv :: Lens' ProjectsLocationsWorkflowTemplatesGetIAMPolicy (Maybe Xgafv)
@@ -150,7 +154,8 @@ plwtgipCallback
       (\ s a -> s{_plwtgipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkflowTemplatesGetIAMPolicy where
+           ProjectsLocationsWorkflowTemplatesGetIAMPolicy
+         where
         type Rs
                ProjectsLocationsWorkflowTemplatesGetIAMPolicy
              = Policy

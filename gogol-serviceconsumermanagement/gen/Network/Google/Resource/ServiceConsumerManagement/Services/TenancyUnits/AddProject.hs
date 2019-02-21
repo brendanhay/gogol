@@ -70,7 +70,8 @@ type ServicesTenancyUnitsAddProjectResource =
 -- \`AddTenantProject\` with the same tag. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsAddProject' smart constructor.
-data ServicesTenancyUnitsAddProject = ServicesTenancyUnitsAddProject'
+data ServicesTenancyUnitsAddProject =
+  ServicesTenancyUnitsAddProject'
     { _sParent         :: !Text
     , _sXgafv          :: !(Maybe Xgafv)
     , _sUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ServicesTenancyUnitsAddProject = ServicesTenancyUnitsAddProject'
     , _sUploadType     :: !(Maybe Text)
     , _sPayload        :: !AddTenantProjectRequest
     , _sCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesTenancyUnitsAddProject' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ servicesTenancyUnitsAddProject
     -> AddTenantProjectRequest -- ^ 'sPayload'
     -> ServicesTenancyUnitsAddProject
 servicesTenancyUnitsAddProject pSParent_ pSPayload_ =
-    ServicesTenancyUnitsAddProject'
+  ServicesTenancyUnitsAddProject'
     { _sParent = pSParent_
     , _sXgafv = Nothing
     , _sUploadProtocol = Nothing
@@ -111,6 +114,7 @@ servicesTenancyUnitsAddProject pSParent_ pSPayload_ =
     , _sPayload = pSPayload_
     , _sCallback = Nothing
     }
+
 
 -- | Name of the tenancy unit.
 sParent :: Lens' ServicesTenancyUnitsAddProject Text

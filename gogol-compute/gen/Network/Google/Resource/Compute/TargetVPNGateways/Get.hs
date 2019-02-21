@@ -60,11 +60,14 @@ type TargetVPNGatewaysGetResource =
 -- target VPN gateways by making a list() request.
 --
 -- /See:/ 'targetVPNGatewaysGet' smart constructor.
-data TargetVPNGatewaysGet = TargetVPNGatewaysGet'
+data TargetVPNGatewaysGet =
+  TargetVPNGatewaysGet'
     { _tvggProject          :: !Text
     , _tvggTargetVPNGateway :: !Text
     , _tvggRegion           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetVPNGatewaysGet' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ targetVPNGatewaysGet
     -> Text -- ^ 'tvggRegion'
     -> TargetVPNGatewaysGet
 targetVPNGatewaysGet pTvggProject_ pTvggTargetVPNGateway_ pTvggRegion_ =
-    TargetVPNGatewaysGet'
+  TargetVPNGatewaysGet'
     { _tvggProject = pTvggProject_
     , _tvggTargetVPNGateway = pTvggTargetVPNGateway_
     , _tvggRegion = pTvggRegion_
     }
+
 
 -- | Project ID for this request.
 tvggProject :: Lens' TargetVPNGatewaysGet Text

@@ -1,5 +1,10 @@
 resolver: lts-13.7
 
+nix:
+  enable: false
+  packages: [zlib, icu]
+  add-gc-roots: true
+
 flags: {}
 
 extra-deps:

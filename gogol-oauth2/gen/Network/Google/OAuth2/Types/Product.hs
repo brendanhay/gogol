@@ -22,7 +22,8 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'tokenInfo' smart constructor.
-data TokenInfo = TokenInfo'
+data TokenInfo =
+  TokenInfo'
     { _tiAudience      :: !(Maybe Text)
     , _tiEmail         :: !(Maybe Text)
     , _tiExpiresIn     :: !(Maybe (Textual Int32))
@@ -32,7 +33,9 @@ data TokenInfo = TokenInfo'
     , _tiUserId        :: !(Maybe Text)
     , _tiTokenHandle   :: !(Maybe Text)
     , _tiIssuedTo      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TokenInfo' with the minimum fields required to make a request.
 --
@@ -58,7 +61,7 @@ data TokenInfo = TokenInfo'
 tokenInfo
     :: TokenInfo
 tokenInfo =
-    TokenInfo'
+  TokenInfo'
     { _tiAudience = Nothing
     , _tiEmail = Nothing
     , _tiExpiresIn = Nothing
@@ -69,6 +72,7 @@ tokenInfo =
     , _tiTokenHandle = Nothing
     , _tiIssuedTo = Nothing
     }
+
 
 -- | Who is the intended audience for this token. In general the same as
 -- issued_to.
@@ -148,9 +152,12 @@ instance ToJSON TokenInfo where
 
 --
 -- /See:/ 'jwk' smart constructor.
-newtype JWK = JWK'
+newtype JWK =
+  JWK'
     { _jKeys :: Maybe [JWKKeysItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JWK' with the minimum fields required to make a request.
 --
@@ -159,10 +166,8 @@ newtype JWK = JWK'
 -- * 'jKeys'
 jwk
     :: JWK
-jwk =
-    JWK'
-    { _jKeys = Nothing
-    }
+jwk = JWK' {_jKeys = Nothing}
+
 
 jKeys :: Lens' JWK [JWKKeysItem]
 jKeys
@@ -180,14 +185,17 @@ instance ToJSON JWK where
 
 --
 -- /See:/ 'jwkKeysItem' smart constructor.
-data JWKKeysItem = JWKKeysItem'
+data JWKKeysItem =
+  JWKKeysItem'
     { _jkiAlg :: !Text
     , _jkiUse :: !Text
     , _jkiKid :: !(Maybe Text)
     , _jkiN   :: !(Maybe Text)
     , _jkiE   :: !(Maybe Text)
     , _jkiKty :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JWKKeysItem' with the minimum fields required to make a request.
 --
@@ -207,7 +215,7 @@ data JWKKeysItem = JWKKeysItem'
 jwkKeysItem
     :: JWKKeysItem
 jwkKeysItem =
-    JWKKeysItem'
+  JWKKeysItem'
     { _jkiAlg = "RS256"
     , _jkiUse = "sig"
     , _jkiKid = Nothing
@@ -215,6 +223,7 @@ jwkKeysItem =
     , _jkiE = Nothing
     , _jkiKty = "RSA"
     }
+
 
 jkiAlg :: Lens' JWKKeysItem Text
 jkiAlg = lens _jkiAlg (\ s a -> s{_jkiAlg = a})
@@ -255,7 +264,8 @@ instance ToJSON JWKKeysItem where
 
 --
 -- /See:/ 'userInfoplus' smart constructor.
-data UserInfoplus = UserInfoplus'
+data UserInfoplus =
+  UserInfoplus'
     { _uiHd            :: !(Maybe Text)
     , _uiEmail         :: !(Maybe Text)
     , _uiLink          :: !(Maybe Text)
@@ -267,7 +277,9 @@ data UserInfoplus = UserInfoplus'
     , _uiName          :: !(Maybe Text)
     , _uiVerifiedEmail :: !Bool
     , _uiId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserInfoplus' with the minimum fields required to make a request.
 --
@@ -297,7 +309,7 @@ data UserInfoplus = UserInfoplus'
 userInfoplus
     :: UserInfoplus
 userInfoplus =
-    UserInfoplus'
+  UserInfoplus'
     { _uiHd = Nothing
     , _uiEmail = Nothing
     , _uiLink = Nothing
@@ -310,6 +322,7 @@ userInfoplus =
     , _uiVerifiedEmail = True
     , _uiId = Nothing
     }
+
 
 -- | The hosted domain e.g. example.com if the user is Google apps user.
 uiHd :: Lens' UserInfoplus (Maybe Text)

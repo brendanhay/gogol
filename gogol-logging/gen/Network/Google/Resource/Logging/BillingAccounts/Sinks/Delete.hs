@@ -61,14 +61,17 @@ type BillingAccountsSinksDeleteResource =
 -- service account is also deleted.
 --
 -- /See:/ 'billingAccountsSinksDelete' smart constructor.
-data BillingAccountsSinksDelete = BillingAccountsSinksDelete'
+data BillingAccountsSinksDelete =
+  BillingAccountsSinksDelete'
     { _basdXgafv          :: !(Maybe Xgafv)
     , _basdUploadProtocol :: !(Maybe Text)
     , _basdAccessToken    :: !(Maybe Text)
     , _basdUploadType     :: !(Maybe Text)
     , _basdSinkName       :: !Text
     , _basdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsSinksDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ billingAccountsSinksDelete
     :: Text -- ^ 'basdSinkName'
     -> BillingAccountsSinksDelete
 billingAccountsSinksDelete pBasdSinkName_ =
-    BillingAccountsSinksDelete'
+  BillingAccountsSinksDelete'
     { _basdXgafv = Nothing
     , _basdUploadProtocol = Nothing
     , _basdAccessToken = Nothing
@@ -97,6 +100,7 @@ billingAccountsSinksDelete pBasdSinkName_ =
     , _basdSinkName = pBasdSinkName_
     , _basdCallback = Nothing
     }
+
 
 -- | V1 error format.
 basdXgafv :: Lens' BillingAccountsSinksDelete (Maybe Xgafv)

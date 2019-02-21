@@ -64,7 +64,8 @@ type ProjectsTopicsPublishResource =
 -- topic does not exist.
 --
 -- /See:/ 'projectsTopicsPublish' smart constructor.
-data ProjectsTopicsPublish = ProjectsTopicsPublish'
+data ProjectsTopicsPublish =
+  ProjectsTopicsPublish'
     { _ptptXgafv          :: !(Maybe Xgafv)
     , _ptptUploadProtocol :: !(Maybe Text)
     , _ptptAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsTopicsPublish = ProjectsTopicsPublish'
     , _ptptPayload        :: !PublishRequest
     , _ptptTopic          :: !Text
     , _ptptCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTopicsPublish' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsTopicsPublish
     -> Text -- ^ 'ptptTopic'
     -> ProjectsTopicsPublish
 projectsTopicsPublish pPtptPayload_ pPtptTopic_ =
-    ProjectsTopicsPublish'
+  ProjectsTopicsPublish'
     { _ptptXgafv = Nothing
     , _ptptUploadProtocol = Nothing
     , _ptptAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsTopicsPublish pPtptPayload_ pPtptTopic_ =
     , _ptptTopic = pPtptTopic_
     , _ptptCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptptXgafv :: Lens' ProjectsTopicsPublish (Maybe Xgafv)

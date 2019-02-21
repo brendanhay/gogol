@@ -64,14 +64,17 @@ type BucketsInsertResource =
 -- | Creates a new bucket.
 --
 -- /See:/ 'bucketsInsert' smart constructor.
-data BucketsInsert = BucketsInsert'
+data BucketsInsert =
+  BucketsInsert'
     { _biProject                    :: !Text
     , _biPredefinedACL              :: !(Maybe BucketsInsertPredefinedACL)
     , _biPayload                    :: !Bucket
     , _biPredefinedDefaultObjectACL :: !(Maybe BucketsInsertPredefinedDefaultObjectACL)
     , _biUserProject                :: !(Maybe Text)
     , _biProjection                 :: !(Maybe BucketsInsertProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketsInsert' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ bucketsInsert
     -> Bucket -- ^ 'biPayload'
     -> BucketsInsert
 bucketsInsert pBiProject_ pBiPayload_ =
-    BucketsInsert'
+  BucketsInsert'
     { _biProject = pBiProject_
     , _biPredefinedACL = Nothing
     , _biPayload = pBiPayload_
@@ -101,6 +104,7 @@ bucketsInsert pBiProject_ pBiPayload_ =
     , _biUserProject = Nothing
     , _biProjection = Nothing
     }
+
 
 -- | A valid API project identifier.
 biProject :: Lens' BucketsInsert Text

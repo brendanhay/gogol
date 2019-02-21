@@ -24,9 +24,12 @@ import           Network.Google.Prelude
 -- operation was able to fully execute and no lint issue was found.
 --
 -- /See:/ 'lintPolicyResponse' smart constructor.
-newtype LintPolicyResponse = LintPolicyResponse'
+newtype LintPolicyResponse =
+  LintPolicyResponse'
     { _lprLintResults :: Maybe [LintResult]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LintPolicyResponse' with the minimum fields required to make a request.
 --
@@ -35,10 +38,8 @@ newtype LintPolicyResponse = LintPolicyResponse'
 -- * 'lprLintResults'
 lintPolicyResponse
     :: LintPolicyResponse
-lintPolicyResponse =
-    LintPolicyResponse'
-    { _lprLintResults = Nothing
-    }
+lintPolicyResponse = LintPolicyResponse' {_lprLintResults = Nothing}
+
 
 -- | List of lint results sorted by a composite key, descending order of
 -- severity and ascending order of binding_ordinal. There is no certain
@@ -69,9 +70,12 @@ instance ToJSON LintPolicyResponse where
 -- | The request to undelete an existing role.
 --
 -- /See:/ 'undeleteRoleRequest' smart constructor.
-newtype UndeleteRoleRequest = UndeleteRoleRequest'
+newtype UndeleteRoleRequest =
+  UndeleteRoleRequest'
     { _urrEtag :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UndeleteRoleRequest' with the minimum fields required to make a request.
 --
@@ -80,10 +84,8 @@ newtype UndeleteRoleRequest = UndeleteRoleRequest'
 -- * 'urrEtag'
 undeleteRoleRequest
     :: UndeleteRoleRequest
-undeleteRoleRequest =
-    UndeleteRoleRequest'
-    { _urrEtag = Nothing
-    }
+undeleteRoleRequest = UndeleteRoleRequest' {_urrEtag = Nothing}
+
 
 -- | Used to perform a consistent read-modify-write.
 urrEtag :: Lens' UndeleteRoleRequest (Maybe ByteString)
@@ -119,10 +121,13 @@ instance ToJSON UndeleteRoleRequest where
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -133,11 +138,8 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -174,12 +176,15 @@ instance ToJSON AuditConfig where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -195,12 +200,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -248,9 +254,12 @@ instance ToJSON Expr where
 -- | Contains information about an auditable service.
 --
 -- /See:/ 'auditableService' smart constructor.
-newtype AuditableService = AuditableService'
+newtype AuditableService =
+  AuditableService'
     { _asName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditableService' with the minimum fields required to make a request.
 --
@@ -259,10 +268,8 @@ newtype AuditableService = AuditableService'
 -- * 'asName'
 auditableService
     :: AuditableService
-auditableService =
-    AuditableService'
-    { _asName = Nothing
-    }
+auditableService = AuditableService' {_asName = Nothing}
+
 
 -- | Public name of the service. For example, the service name for Cloud IAM
 -- is \'iam.googleapis.com\'.
@@ -281,9 +288,12 @@ instance ToJSON AuditableService where
 -- | A request to get the list of auditable services for a resource.
 --
 -- /See:/ 'queryAuditableServicesRequest' smart constructor.
-newtype QueryAuditableServicesRequest = QueryAuditableServicesRequest'
+newtype QueryAuditableServicesRequest =
+  QueryAuditableServicesRequest'
     { _qasrFullResourceName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryAuditableServicesRequest' with the minimum fields required to make a request.
 --
@@ -293,9 +303,8 @@ newtype QueryAuditableServicesRequest = QueryAuditableServicesRequest'
 queryAuditableServicesRequest
     :: QueryAuditableServicesRequest
 queryAuditableServicesRequest =
-    QueryAuditableServicesRequest'
-    { _qasrFullResourceName = Nothing
-    }
+  QueryAuditableServicesRequest' {_qasrFullResourceName = Nothing}
+
 
 -- | Required. The full resource name to query from the list of auditable
 -- services. The name follows the Google Cloud Platform resource format.
@@ -327,14 +336,16 @@ instance ToJSON QueryAuditableServicesRequest where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -345,10 +356,13 @@ instance ToJSON Empty where
 -- | The response containing permissions which can be tested on a resource.
 --
 -- /See:/ 'queryTestablePermissionsResponse' smart constructor.
-data QueryTestablePermissionsResponse = QueryTestablePermissionsResponse'
+data QueryTestablePermissionsResponse =
+  QueryTestablePermissionsResponse'
     { _qtprNextPageToken :: !(Maybe Text)
     , _qtprPermissions   :: !(Maybe [Permission])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryTestablePermissionsResponse' with the minimum fields required to make a request.
 --
@@ -360,10 +374,9 @@ data QueryTestablePermissionsResponse = QueryTestablePermissionsResponse'
 queryTestablePermissionsResponse
     :: QueryTestablePermissionsResponse
 queryTestablePermissionsResponse =
-    QueryTestablePermissionsResponse'
-    { _qtprNextPageToken = Nothing
-    , _qtprPermissions = Nothing
-    }
+  QueryTestablePermissionsResponse'
+    {_qtprNextPageToken = Nothing, _qtprPermissions = Nothing}
+
 
 -- | To retrieve the next page of results, set
 -- \`QueryTestableRolesRequest.page_token\` to this value.
@@ -402,9 +415,12 @@ instance ToJSON QueryTestablePermissionsResponse
 -- message.
 --
 -- /See:/ 'auditData' smart constructor.
-newtype AuditData = AuditData'
+newtype AuditData =
+  AuditData'
     { _adPolicyDelta :: Maybe PolicyDelta
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditData' with the minimum fields required to make a request.
 --
@@ -413,10 +429,8 @@ newtype AuditData = AuditData'
 -- * 'adPolicyDelta'
 auditData
     :: AuditData
-auditData =
-    AuditData'
-    { _adPolicyDelta = Nothing
-    }
+auditData = AuditData' {_adPolicyDelta = Nothing}
+
 
 -- | Policy delta between the original policy and the newly set policy.
 adPolicyDelta :: Lens' AuditData (Maybe PolicyDelta)
@@ -437,9 +451,12 @@ instance ToJSON AuditData where
 -- | A response containing a list of auditable services for a resource.
 --
 -- /See:/ 'queryAuditableServicesResponse' smart constructor.
-newtype QueryAuditableServicesResponse = QueryAuditableServicesResponse'
+newtype QueryAuditableServicesResponse =
+  QueryAuditableServicesResponse'
     { _qasrServices :: Maybe [AuditableService]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryAuditableServicesResponse' with the minimum fields required to make a request.
 --
@@ -449,9 +466,8 @@ newtype QueryAuditableServicesResponse = QueryAuditableServicesResponse'
 queryAuditableServicesResponse
     :: QueryAuditableServicesResponse
 queryAuditableServicesResponse =
-    QueryAuditableServicesResponse'
-    { _qasrServices = Nothing
-    }
+  QueryAuditableServicesResponse' {_qasrServices = Nothing}
+
 
 -- | The auditable services for a resource.
 qasrServices :: Lens' QueryAuditableServicesResponse [AuditableService]
@@ -487,7 +503,8 @@ instance ToJSON QueryAuditableServicesResponse where
 -- also published at the OAuth2 Service Account API.
 --
 -- /See:/ 'serviceAccountKey' smart constructor.
-data ServiceAccountKey = ServiceAccountKey'
+data ServiceAccountKey =
+  ServiceAccountKey'
     { _sakValidAfterTime  :: !(Maybe DateTime')
     , _sakPrivateKeyData  :: !(Maybe Bytes)
     , _sakPublicKeyData   :: !(Maybe Bytes)
@@ -495,7 +512,9 @@ data ServiceAccountKey = ServiceAccountKey'
     , _sakPrivateKeyType  :: !(Maybe ServiceAccountKeyPrivateKeyType)
     , _sakValidBeforeTime :: !(Maybe DateTime')
     , _sakKeyAlgorithm    :: !(Maybe ServiceAccountKeyKeyAlgorithm)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServiceAccountKey' with the minimum fields required to make a request.
 --
@@ -517,7 +536,7 @@ data ServiceAccountKey = ServiceAccountKey'
 serviceAccountKey
     :: ServiceAccountKey
 serviceAccountKey =
-    ServiceAccountKey'
+  ServiceAccountKey'
     { _sakValidAfterTime = Nothing
     , _sakPrivateKeyData = Nothing
     , _sakPublicKeyData = Nothing
@@ -526,6 +545,7 @@ serviceAccountKey =
     , _sakValidBeforeTime = Nothing
     , _sakKeyAlgorithm = Nothing
     }
+
 
 -- | The key can be used after this timestamp.
 sakValidAfterTime :: Lens' ServiceAccountKey (Maybe UTCTime)
@@ -609,7 +629,8 @@ instance ToJSON ServiceAccountKey where
 -- | Structured response of a single validation unit.
 --
 -- /See:/ 'lintResult' smart constructor.
-data LintResult = LintResult'
+data LintResult =
+  LintResult'
     { _lrValidationUnitName :: !(Maybe Text)
     , _lrDebugMessage       :: !(Maybe Text)
     , _lrLocationOffSet     :: !(Maybe (Textual Int32))
@@ -617,7 +638,9 @@ data LintResult = LintResult'
     , _lrBindingOrdinal     :: !(Maybe (Textual Int32))
     , _lrFieldName          :: !(Maybe Text)
     , _lrLevel              :: !(Maybe LintResultLevel)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LintResult' with the minimum fields required to make a request.
 --
@@ -639,7 +662,7 @@ data LintResult = LintResult'
 lintResult
     :: LintResult
 lintResult =
-    LintResult'
+  LintResult'
     { _lrValidationUnitName = Nothing
     , _lrDebugMessage = Nothing
     , _lrLocationOffSet = Nothing
@@ -648,6 +671,7 @@ lintResult =
     , _lrFieldName = Nothing
     , _lrLevel = Nothing
     }
+
 
 -- | The validation unit name, for instance
 -- “lintValidationUnits\/ConditionComplexityCheck”.
@@ -733,10 +757,13 @@ instance ToJSON LintResult where
 -- | The service account key create request.
 --
 -- /See:/ 'createServiceAccountKeyRequest' smart constructor.
-data CreateServiceAccountKeyRequest = CreateServiceAccountKeyRequest'
+data CreateServiceAccountKeyRequest =
+  CreateServiceAccountKeyRequest'
     { _csakrPrivateKeyType :: !(Maybe CreateServiceAccountKeyRequestPrivateKeyType)
     , _csakrKeyAlgorithm   :: !(Maybe CreateServiceAccountKeyRequestKeyAlgorithm)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateServiceAccountKeyRequest' with the minimum fields required to make a request.
 --
@@ -748,10 +775,9 @@ data CreateServiceAccountKeyRequest = CreateServiceAccountKeyRequest'
 createServiceAccountKeyRequest
     :: CreateServiceAccountKeyRequest
 createServiceAccountKeyRequest =
-    CreateServiceAccountKeyRequest'
-    { _csakrPrivateKeyType = Nothing
-    , _csakrKeyAlgorithm = Nothing
-    }
+  CreateServiceAccountKeyRequest'
+    {_csakrPrivateKeyType = Nothing, _csakrKeyAlgorithm = Nothing}
+
 
 -- | The output format of the private key. The default value is
 -- \`TYPE_GOOGLE_CREDENTIALS_FILE\`, which is the Google Credentials File
@@ -786,10 +812,13 @@ instance ToJSON CreateServiceAccountKeyRequest where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-data SetIAMPolicyRequest = SetIAMPolicyRequest'
+data SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
     , _siprPolicy     :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -801,10 +830,8 @@ data SetIAMPolicyRequest = SetIAMPolicyRequest'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprUpdateMask = Nothing
-    , _siprPolicy = Nothing
-    }
+  SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -840,10 +867,13 @@ instance ToJSON SetIAMPolicyRequest where
 -- | The service account sign JWT response.
 --
 -- /See:/ 'signJwtResponse' smart constructor.
-data SignJwtResponse = SignJwtResponse'
+data SignJwtResponse =
+  SignJwtResponse'
     { _sjrKeyId     :: !(Maybe Text)
     , _sjrSignedJwt :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SignJwtResponse' with the minimum fields required to make a request.
 --
@@ -855,10 +885,8 @@ data SignJwtResponse = SignJwtResponse'
 signJwtResponse
     :: SignJwtResponse
 signJwtResponse =
-    SignJwtResponse'
-    { _sjrKeyId = Nothing
-    , _sjrSignedJwt = Nothing
-    }
+  SignJwtResponse' {_sjrKeyId = Nothing, _sjrSignedJwt = Nothing}
+
 
 -- | The id of the key used to sign the JWT.
 sjrKeyId :: Lens' SignJwtResponse (Maybe Text)
@@ -887,12 +915,15 @@ instance ToJSON SignJwtResponse where
 -- each entry) to a binding will be a separate entry.
 --
 -- /See:/ 'bindingDelta' smart constructor.
-data BindingDelta = BindingDelta'
+data BindingDelta =
+  BindingDelta'
     { _bdAction    :: !(Maybe BindingDeltaAction)
     , _bdRole      :: !(Maybe Text)
     , _bdMember    :: !(Maybe Text)
     , _bdCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BindingDelta' with the minimum fields required to make a request.
 --
@@ -908,12 +939,13 @@ data BindingDelta = BindingDelta'
 bindingDelta
     :: BindingDelta
 bindingDelta =
-    BindingDelta'
+  BindingDelta'
     { _bdAction = Nothing
     , _bdRole = Nothing
     , _bdMember = Nothing
     , _bdCondition = Nothing
     }
+
 
 -- | The action that was performed on a Binding. Required
 bdAction :: Lens' BindingDelta (Maybe BindingDeltaAction)
@@ -958,9 +990,12 @@ instance ToJSON BindingDelta where
 -- operation.
 --
 -- /See:/ 'lintPolicyRequestContext' smart constructor.
-newtype LintPolicyRequestContext = LintPolicyRequestContext'
+newtype LintPolicyRequestContext =
+  LintPolicyRequestContext'
     { _lprcAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LintPolicyRequestContext' with the minimum fields required to make a request.
 --
@@ -971,9 +1006,8 @@ lintPolicyRequestContext
     :: HashMap Text JSONValue -- ^ 'lprcAddtional'
     -> LintPolicyRequestContext
 lintPolicyRequestContext pLprcAddtional_ =
-    LintPolicyRequestContext'
-    { _lprcAddtional = _Coerce # pLprcAddtional_
-    }
+  LintPolicyRequestContext' {_lprcAddtional = _Coerce # pLprcAddtional_}
+
 
 -- | Properties of the object.
 lprcAddtional :: Lens' LintPolicyRequestContext (HashMap Text JSONValue)
@@ -994,9 +1028,12 @@ instance ToJSON LintPolicyRequestContext where
 -- | The service account sign blob request.
 --
 -- /See:/ 'signBlobRequest' smart constructor.
-newtype SignBlobRequest = SignBlobRequest'
+newtype SignBlobRequest =
+  SignBlobRequest'
     { _sbrBytesToSign :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SignBlobRequest' with the minimum fields required to make a request.
 --
@@ -1005,10 +1042,8 @@ newtype SignBlobRequest = SignBlobRequest'
 -- * 'sbrBytesToSign'
 signBlobRequest
     :: SignBlobRequest
-signBlobRequest =
-    SignBlobRequest'
-    { _sbrBytesToSign = Nothing
-    }
+signBlobRequest = SignBlobRequest' {_sbrBytesToSign = Nothing}
+
 
 -- | The bytes to sign.
 sbrBytesToSign :: Lens' SignBlobRequest (Maybe ByteString)
@@ -1030,9 +1065,12 @@ instance ToJSON SignBlobRequest where
 -- | The service account keys list response.
 --
 -- /See:/ 'listServiceAccountKeysResponse' smart constructor.
-newtype ListServiceAccountKeysResponse = ListServiceAccountKeysResponse'
+newtype ListServiceAccountKeysResponse =
+  ListServiceAccountKeysResponse'
     { _lsakrKeys :: Maybe [ServiceAccountKey]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListServiceAccountKeysResponse' with the minimum fields required to make a request.
 --
@@ -1042,9 +1080,8 @@ newtype ListServiceAccountKeysResponse = ListServiceAccountKeysResponse'
 listServiceAccountKeysResponse
     :: ListServiceAccountKeysResponse
 listServiceAccountKeysResponse =
-    ListServiceAccountKeysResponse'
-    { _lsakrKeys = Nothing
-    }
+  ListServiceAccountKeysResponse' {_lsakrKeys = Nothing}
+
 
 -- | The public keys for the service account.
 lsakrKeys :: Lens' ListServiceAccountKeysResponse [ServiceAccountKey]
@@ -1068,7 +1105,8 @@ instance ToJSON ListServiceAccountKeysResponse where
 -- | A role in the Identity and Access Management API.
 --
 -- /See:/ 'role'' smart constructor.
-data Role = Role'
+data Role =
+  Role'
     { _rStage               :: !(Maybe RoleStage)
     , _rEtag                :: !(Maybe Bytes)
     , _rIncludedPermissions :: !(Maybe [Text])
@@ -1076,7 +1114,9 @@ data Role = Role'
     , _rDeleted             :: !(Maybe Bool)
     , _rTitle               :: !(Maybe Text)
     , _rDescription         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Role' with the minimum fields required to make a request.
 --
@@ -1098,7 +1138,7 @@ data Role = Role'
 role'
     :: Role
 role' =
-    Role'
+  Role'
     { _rStage = Nothing
     , _rEtag = Nothing
     , _rIncludedPermissions = Nothing
@@ -1107,6 +1147,7 @@ role' =
     , _rTitle = Nothing
     , _rDescription = Nothing
     }
+
 
 -- | The current launch stage of the role. If the \`ALPHA\` launch stage has
 -- been selected for a role, the \`stage\` field will not be included in
@@ -1190,7 +1231,8 @@ instance ToJSON Role where
 -- of the service account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount'
+data ServiceAccount =
+  ServiceAccount'
     { _saEmail          :: !(Maybe Text)
     , _saEtag           :: !(Maybe Bytes)
     , _saUniqueId       :: !(Maybe Text)
@@ -1198,7 +1240,9 @@ data ServiceAccount = ServiceAccount'
     , _saDisplayName    :: !(Maybe Text)
     , _saProjectId      :: !(Maybe Text)
     , _saOAuth2ClientId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
@@ -1220,7 +1264,7 @@ data ServiceAccount = ServiceAccount'
 serviceAccount
     :: ServiceAccount
 serviceAccount =
-    ServiceAccount'
+  ServiceAccount'
     { _saEmail = Nothing
     , _saEtag = Nothing
     , _saUniqueId = Nothing
@@ -1229,6 +1273,7 @@ serviceAccount =
     , _saProjectId = Nothing
     , _saOAuth2ClientId = Nothing
     }
+
 
 -- | \'OutputOnly The email address of the service account.
 saEmail :: Lens' ServiceAccount (Maybe Text)
@@ -1302,11 +1347,14 @@ instance ToJSON ServiceAccount where
 -- | A request to get permissions which can be tested on a resource.
 --
 -- /See:/ 'queryTestablePermissionsRequest' smart constructor.
-data QueryTestablePermissionsRequest = QueryTestablePermissionsRequest'
+data QueryTestablePermissionsRequest =
+  QueryTestablePermissionsRequest'
     { _qtprFullResourceName :: !(Maybe Text)
     , _qtprPageToken        :: !(Maybe Text)
     , _qtprPageSize         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryTestablePermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1320,11 +1368,12 @@ data QueryTestablePermissionsRequest = QueryTestablePermissionsRequest'
 queryTestablePermissionsRequest
     :: QueryTestablePermissionsRequest
 queryTestablePermissionsRequest =
-    QueryTestablePermissionsRequest'
+  QueryTestablePermissionsRequest'
     { _qtprFullResourceName = Nothing
     , _qtprPageToken = Nothing
     , _qtprPageSize = Nothing
     }
+
 
 -- | Required. The full resource name to query from the list of testable
 -- permissions. The name follows the Google Cloud Platform resource format.
@@ -1368,10 +1417,13 @@ instance ToJSON QueryTestablePermissionsRequest where
 -- | The grantable role query response.
 --
 -- /See:/ 'queryGrantableRolesResponse' smart constructor.
-data QueryGrantableRolesResponse = QueryGrantableRolesResponse'
+data QueryGrantableRolesResponse =
+  QueryGrantableRolesResponse'
     { _qgrrRoles         :: !(Maybe [Role])
     , _qgrrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryGrantableRolesResponse' with the minimum fields required to make a request.
 --
@@ -1383,10 +1435,9 @@ data QueryGrantableRolesResponse = QueryGrantableRolesResponse'
 queryGrantableRolesResponse
     :: QueryGrantableRolesResponse
 queryGrantableRolesResponse =
-    QueryGrantableRolesResponse'
-    { _qgrrRoles = Nothing
-    , _qgrrNextPageToken = Nothing
-    }
+  QueryGrantableRolesResponse'
+    {_qgrrRoles = Nothing, _qgrrNextPageToken = Nothing}
+
 
 -- | The list of matching roles.
 qgrrRoles :: Lens' QueryGrantableRolesResponse [Role]
@@ -1420,9 +1471,12 @@ instance ToJSON QueryGrantableRolesResponse where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1432,9 +1486,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1462,9 +1515,12 @@ instance ToJSON TestIAMPermissionsRequest where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -1474,9 +1530,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1519,12 +1574,15 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -1540,12 +1598,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1603,9 +1662,12 @@ instance ToJSON Policy where
 -- | The difference delta between two policies.
 --
 -- /See:/ 'policyDelta' smart constructor.
-newtype PolicyDelta = PolicyDelta'
+newtype PolicyDelta =
+  PolicyDelta'
     { _pdBindingDeltas :: Maybe [BindingDelta]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PolicyDelta' with the minimum fields required to make a request.
 --
@@ -1614,10 +1676,8 @@ newtype PolicyDelta = PolicyDelta'
 -- * 'pdBindingDeltas'
 policyDelta
     :: PolicyDelta
-policyDelta =
-    PolicyDelta'
-    { _pdBindingDeltas = Nothing
-    }
+policyDelta = PolicyDelta' {_pdBindingDeltas = Nothing}
+
 
 -- | The delta for Bindings between two policies.
 pdBindingDeltas :: Lens' PolicyDelta [BindingDelta]
@@ -1642,12 +1702,15 @@ instance ToJSON PolicyDelta where
 -- | The grantable role query request.
 --
 -- /See:/ 'queryGrantableRolesRequest' smart constructor.
-data QueryGrantableRolesRequest = QueryGrantableRolesRequest'
+data QueryGrantableRolesRequest =
+  QueryGrantableRolesRequest'
     { _qgrrFullResourceName :: !(Maybe Text)
     , _qgrrView             :: !(Maybe QueryGrantableRolesRequestView)
     , _qgrrPageToken        :: !(Maybe Text)
     , _qgrrPageSize         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryGrantableRolesRequest' with the minimum fields required to make a request.
 --
@@ -1663,12 +1726,13 @@ data QueryGrantableRolesRequest = QueryGrantableRolesRequest'
 queryGrantableRolesRequest
     :: QueryGrantableRolesRequest
 queryGrantableRolesRequest =
-    QueryGrantableRolesRequest'
+  QueryGrantableRolesRequest'
     { _qgrrFullResourceName = Nothing
     , _qgrrView = Nothing
     , _qgrrPageToken = Nothing
     , _qgrrPageSize = Nothing
     }
+
 
 -- | Required. The full resource name to query from the list of grantable
 -- roles. The name follows the Google Cloud Platform resource format. For
@@ -1716,9 +1780,12 @@ instance ToJSON QueryGrantableRolesRequest where
 -- | The service account sign JWT request.
 --
 -- /See:/ 'signJwtRequest' smart constructor.
-newtype SignJwtRequest = SignJwtRequest'
+newtype SignJwtRequest =
+  SignJwtRequest'
     { _sjrPayload :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SignJwtRequest' with the minimum fields required to make a request.
 --
@@ -1727,10 +1794,8 @@ newtype SignJwtRequest = SignJwtRequest'
 -- * 'sjrPayload'
 signJwtRequest
     :: SignJwtRequest
-signJwtRequest =
-    SignJwtRequest'
-    { _sjrPayload = Nothing
-    }
+signJwtRequest = SignJwtRequest' {_sjrPayload = Nothing}
+
 
 -- | The JWT payload to sign, a JSON JWT Claim set.
 sjrPayload :: Lens' SignJwtRequest (Maybe Text)
@@ -1753,10 +1818,13 @@ instance ToJSON SignJwtRequest where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -1768,10 +1836,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1805,7 +1871,8 @@ instance ToJSON AuditLogConfig where
 -- | A permission which can be included by a role.
 --
 -- /See:/ 'permission' smart constructor.
-data Permission = Permission'
+data Permission =
+  Permission'
     { _pStage                   :: !(Maybe PermissionStage)
     , _pOnlyInPredefinedRoles   :: !(Maybe Bool)
     , _pCustomRolesSupportLevel :: !(Maybe PermissionCustomRolesSupportLevel)
@@ -1813,7 +1880,9 @@ data Permission = Permission'
     , _pTitle                   :: !(Maybe Text)
     , _pAPIdisabled             :: !(Maybe Bool)
     , _pDescription             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
@@ -1835,7 +1904,7 @@ data Permission = Permission'
 permission
     :: Permission
 permission =
-    Permission'
+  Permission'
     { _pStage = Nothing
     , _pOnlyInPredefinedRoles = Nothing
     , _pCustomRolesSupportLevel = Nothing
@@ -1844,6 +1913,7 @@ permission =
     , _pAPIdisabled = Nothing
     , _pDescription = Nothing
     }
+
 
 -- | The current launch stage of the permission.
 pStage :: Lens' Permission (Maybe PermissionStage)
@@ -1907,10 +1977,13 @@ instance ToJSON Permission where
 -- | The service account sign blob response.
 --
 -- /See:/ 'signBlobResponse' smart constructor.
-data SignBlobResponse = SignBlobResponse'
+data SignBlobResponse =
+  SignBlobResponse'
     { _sbrSignature :: !(Maybe Bytes)
     , _sbrKeyId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SignBlobResponse' with the minimum fields required to make a request.
 --
@@ -1922,10 +1995,8 @@ data SignBlobResponse = SignBlobResponse'
 signBlobResponse
     :: SignBlobResponse
 signBlobResponse =
-    SignBlobResponse'
-    { _sbrSignature = Nothing
-    , _sbrKeyId = Nothing
-    }
+  SignBlobResponse' {_sbrSignature = Nothing, _sbrKeyId = Nothing}
+
 
 -- | The signed blob.
 sbrSignature :: Lens' SignBlobResponse (Maybe ByteString)
@@ -1954,10 +2025,13 @@ instance ToJSON SignBlobResponse where
 -- | The service account list response.
 --
 -- /See:/ 'listServiceAccountsResponse' smart constructor.
-data ListServiceAccountsResponse = ListServiceAccountsResponse'
+data ListServiceAccountsResponse =
+  ListServiceAccountsResponse'
     { _lsarNextPageToken :: !(Maybe Text)
     , _lsarAccounts      :: !(Maybe [ServiceAccount])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListServiceAccountsResponse' with the minimum fields required to make a request.
 --
@@ -1969,10 +2043,9 @@ data ListServiceAccountsResponse = ListServiceAccountsResponse'
 listServiceAccountsResponse
     :: ListServiceAccountsResponse
 listServiceAccountsResponse =
-    ListServiceAccountsResponse'
-    { _lsarNextPageToken = Nothing
-    , _lsarAccounts = Nothing
-    }
+  ListServiceAccountsResponse'
+    {_lsarNextPageToken = Nothing, _lsarAccounts = Nothing}
+
 
 -- | To retrieve the next page of results, set
 -- ListServiceAccountsRequest.page_token to this value.
@@ -2007,13 +2080,16 @@ instance ToJSON ListServiceAccountsResponse where
 -- functional only for \`lint_object\` of type \`condition\`.
 --
 -- /See:/ 'lintPolicyRequest' smart constructor.
-data LintPolicyRequest = LintPolicyRequest'
+data LintPolicyRequest =
+  LintPolicyRequest'
     { _lprContext          :: !(Maybe LintPolicyRequestContext)
     , _lprFullResourceName :: !(Maybe Text)
     , _lprPolicy           :: !(Maybe Policy)
     , _lprCondition        :: !(Maybe Expr)
     , _lprBinding          :: !(Maybe Binding)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LintPolicyRequest' with the minimum fields required to make a request.
 --
@@ -2031,13 +2107,14 @@ data LintPolicyRequest = LintPolicyRequest'
 lintPolicyRequest
     :: LintPolicyRequest
 lintPolicyRequest =
-    LintPolicyRequest'
+  LintPolicyRequest'
     { _lprContext = Nothing
     , _lprFullResourceName = Nothing
     , _lprPolicy = Nothing
     , _lprCondition = Nothing
     , _lprBinding = Nothing
     }
+
 
 -- | \`context\` contains additional *permission-controlled* data that any
 -- lint unit may depend on, in form of \`{key: value}\` pairs. Currently,
@@ -2101,10 +2178,13 @@ instance ToJSON LintPolicyRequest where
 -- | The response containing the roles defined under a resource.
 --
 -- /See:/ 'listRolesResponse' smart constructor.
-data ListRolesResponse = ListRolesResponse'
+data ListRolesResponse =
+  ListRolesResponse'
     { _lrrRoles         :: !(Maybe [Role])
     , _lrrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListRolesResponse' with the minimum fields required to make a request.
 --
@@ -2116,10 +2196,8 @@ data ListRolesResponse = ListRolesResponse'
 listRolesResponse
     :: ListRolesResponse
 listRolesResponse =
-    ListRolesResponse'
-    { _lrrRoles = Nothing
-    , _lrrNextPageToken = Nothing
-    }
+  ListRolesResponse' {_lrrRoles = Nothing, _lrrNextPageToken = Nothing}
+
 
 -- | The Roles defined on this resource.
 lrrRoles :: Lens' ListRolesResponse [Role]
@@ -2153,10 +2231,13 @@ instance ToJSON ListRolesResponse where
 -- | The service account create request.
 --
 -- /See:/ 'createServiceAccountRequest' smart constructor.
-data CreateServiceAccountRequest = CreateServiceAccountRequest'
+data CreateServiceAccountRequest =
+  CreateServiceAccountRequest'
     { _csarServiceAccount :: !(Maybe ServiceAccount)
     , _csarAccountId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateServiceAccountRequest' with the minimum fields required to make a request.
 --
@@ -2168,10 +2249,9 @@ data CreateServiceAccountRequest = CreateServiceAccountRequest'
 createServiceAccountRequest
     :: CreateServiceAccountRequest
 createServiceAccountRequest =
-    CreateServiceAccountRequest'
-    { _csarServiceAccount = Nothing
-    , _csarAccountId = Nothing
-    }
+  CreateServiceAccountRequest'
+    {_csarServiceAccount = Nothing, _csarAccountId = Nothing}
+
 
 -- | The ServiceAccount resource to create. Currently, only the following
 -- values are user assignable: \`display_name\` .
@@ -2206,10 +2286,13 @@ instance ToJSON CreateServiceAccountRequest where
 -- | The request to create a new role.
 --
 -- /See:/ 'createRoleRequest' smart constructor.
-data CreateRoleRequest = CreateRoleRequest'
+data CreateRoleRequest =
+  CreateRoleRequest'
     { _crrRoleId :: !(Maybe Text)
     , _crrRole   :: !(Maybe Role)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateRoleRequest' with the minimum fields required to make a request.
 --
@@ -2221,10 +2304,8 @@ data CreateRoleRequest = CreateRoleRequest'
 createRoleRequest
     :: CreateRoleRequest
 createRoleRequest =
-    CreateRoleRequest'
-    { _crrRoleId = Nothing
-    , _crrRole = Nothing
-    }
+  CreateRoleRequest' {_crrRoleId = Nothing, _crrRole = Nothing}
+
 
 -- | The role id to use for this role.
 crrRoleId :: Lens' CreateRoleRequest (Maybe Text)
@@ -2252,11 +2333,14 @@ instance ToJSON CreateRoleRequest where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -2270,11 +2354,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

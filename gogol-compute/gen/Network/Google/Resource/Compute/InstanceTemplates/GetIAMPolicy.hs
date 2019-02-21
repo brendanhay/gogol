@@ -58,10 +58,13 @@ type InstanceTemplatesGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'instanceTemplatesGetIAMPolicy' smart constructor.
-data InstanceTemplatesGetIAMPolicy = InstanceTemplatesGetIAMPolicy'
+data InstanceTemplatesGetIAMPolicy =
+  InstanceTemplatesGetIAMPolicy'
     { _itgipProject  :: !Text
     , _itgipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceTemplatesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ instanceTemplatesGetIAMPolicy
     -> Text -- ^ 'itgipResource'
     -> InstanceTemplatesGetIAMPolicy
 instanceTemplatesGetIAMPolicy pItgipProject_ pItgipResource_ =
-    InstanceTemplatesGetIAMPolicy'
-    { _itgipProject = pItgipProject_
-    , _itgipResource = pItgipResource_
-    }
+  InstanceTemplatesGetIAMPolicy'
+    {_itgipProject = pItgipProject_, _itgipResource = pItgipResource_}
+
 
 -- | Project ID for this request.
 itgipProject :: Lens' InstanceTemplatesGetIAMPolicy Text

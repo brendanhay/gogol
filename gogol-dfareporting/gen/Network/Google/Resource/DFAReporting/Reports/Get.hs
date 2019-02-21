@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ReportsGet' request conforms to.
 type ReportsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -54,10 +54,13 @@ type ReportsGetResource =
 -- | Retrieves a report by its ID.
 --
 -- /See:/ 'reportsGet' smart constructor.
-data ReportsGet = ReportsGet'
+data ReportsGet =
+  ReportsGet'
     { _rgReportId  :: !(Textual Int64)
     , _rgProFileId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,11 @@ reportsGet
     -> Int64 -- ^ 'rgProFileId'
     -> ReportsGet
 reportsGet pRgReportId_ pRgProFileId_ =
-    ReportsGet'
+  ReportsGet'
     { _rgReportId = _Coerce # pRgReportId_
     , _rgProFileId = _Coerce # pRgProFileId_
     }
+
 
 -- | The ID of the report.
 rgReportId :: Lens' ReportsGet Int64

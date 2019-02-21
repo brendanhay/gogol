@@ -62,14 +62,17 @@ type ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicyResource
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysGetIAMPolicy' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy = ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy'
+data ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy =
+  ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy'
     { _plkrckgipXgafv          :: !(Maybe Xgafv)
     , _plkrckgipUploadProtocol :: !(Maybe Text)
     , _plkrckgipAccessToken    :: !(Maybe Text)
     , _plkrckgipUploadType     :: !(Maybe Text)
     , _plkrckgipResource       :: !Text
     , _plkrckgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ projectsLocationsKeyRingsCryptoKeysGetIAMPolicy
     :: Text -- ^ 'plkrckgipResource'
     -> ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy
 projectsLocationsKeyRingsCryptoKeysGetIAMPolicy pPlkrckgipResource_ =
-    ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy'
+  ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy'
     { _plkrckgipXgafv = Nothing
     , _plkrckgipUploadProtocol = Nothing
     , _plkrckgipAccessToken = Nothing
@@ -98,6 +101,7 @@ projectsLocationsKeyRingsCryptoKeysGetIAMPolicy pPlkrckgipResource_ =
     , _plkrckgipResource = pPlkrckgipResource_
     , _plkrckgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckgipXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy (Maybe Xgafv)
@@ -137,13 +141,16 @@ plkrckgipCallback
       (\ s a -> s{_plkrckgipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy where
+           ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy
+         where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy
              = Policy
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy'{..}
           = go _plkrckgipResource _plkrckgipXgafv

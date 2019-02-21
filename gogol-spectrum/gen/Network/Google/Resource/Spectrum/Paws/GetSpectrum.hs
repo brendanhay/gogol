@@ -57,9 +57,12 @@ type PawsGetSpectrumResource =
 -- information so the device can be registered with the database.
 --
 -- /See:/ 'pawsGetSpectrum' smart constructor.
-newtype PawsGetSpectrum = PawsGetSpectrum'
+newtype PawsGetSpectrum =
+  PawsGetSpectrum'
     { _pgsPayload :: PawsGetSpectrumRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PawsGetSpectrum' with the minimum fields required to make a request.
 --
@@ -69,10 +72,8 @@ newtype PawsGetSpectrum = PawsGetSpectrum'
 pawsGetSpectrum
     :: PawsGetSpectrumRequest -- ^ 'pgsPayload'
     -> PawsGetSpectrum
-pawsGetSpectrum pPgsPayload_ =
-    PawsGetSpectrum'
-    { _pgsPayload = pPgsPayload_
-    }
+pawsGetSpectrum pPgsPayload_ = PawsGetSpectrum' {_pgsPayload = pPgsPayload_}
+
 
 -- | Multipart request metadata.
 pgsPayload :: Lens' PawsGetSpectrum PawsGetSpectrumRequest

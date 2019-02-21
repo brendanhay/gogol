@@ -64,7 +64,8 @@ type ProjectsServiceAccountsUpdateResource =
 -- updatable: \`display_name\` . The \`etag\` is mandatory.
 --
 -- /See:/ 'projectsServiceAccountsUpdate' smart constructor.
-data ProjectsServiceAccountsUpdate = ProjectsServiceAccountsUpdate'
+data ProjectsServiceAccountsUpdate =
+  ProjectsServiceAccountsUpdate'
     { _psauXgafv          :: !(Maybe Xgafv)
     , _psauUploadProtocol :: !(Maybe Text)
     , _psauAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsServiceAccountsUpdate = ProjectsServiceAccountsUpdate'
     , _psauPayload        :: !ServiceAccount
     , _psauName           :: !Text
     , _psauCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsUpdate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsServiceAccountsUpdate
     -> Text -- ^ 'psauName'
     -> ProjectsServiceAccountsUpdate
 projectsServiceAccountsUpdate pPsauPayload_ pPsauName_ =
-    ProjectsServiceAccountsUpdate'
+  ProjectsServiceAccountsUpdate'
     { _psauXgafv = Nothing
     , _psauUploadProtocol = Nothing
     , _psauAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsServiceAccountsUpdate pPsauPayload_ pPsauName_ =
     , _psauName = pPsauName_
     , _psauCallback = Nothing
     }
+
 
 -- | V1 error format.
 psauXgafv :: Lens' ProjectsServiceAccountsUpdate (Maybe Xgafv)

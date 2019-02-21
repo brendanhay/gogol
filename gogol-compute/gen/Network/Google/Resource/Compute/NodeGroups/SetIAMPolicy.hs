@@ -63,12 +63,15 @@ type NodeGroupsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'nodeGroupsSetIAMPolicy' smart constructor.
-data NodeGroupsSetIAMPolicy = NodeGroupsSetIAMPolicy'
+data NodeGroupsSetIAMPolicy =
+  NodeGroupsSetIAMPolicy'
     { _ngsipProject  :: !Text
     , _ngsipZone     :: !Text
     , _ngsipPayload  :: !ZoneSetPolicyRequest
     , _ngsipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeGroupsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ nodeGroupsSetIAMPolicy
     -> Text -- ^ 'ngsipResource'
     -> NodeGroupsSetIAMPolicy
 nodeGroupsSetIAMPolicy pNgsipProject_ pNgsipZone_ pNgsipPayload_ pNgsipResource_ =
-    NodeGroupsSetIAMPolicy'
+  NodeGroupsSetIAMPolicy'
     { _ngsipProject = pNgsipProject_
     , _ngsipZone = pNgsipZone_
     , _ngsipPayload = pNgsipPayload_
     , _ngsipResource = pNgsipResource_
     }
+
 
 -- | Project ID for this request.
 ngsipProject :: Lens' NodeGroupsSetIAMPolicy Text

@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesDelete' request conforms to.
 type CreativeFieldValuesDeleteResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -57,11 +57,14 @@ type CreativeFieldValuesDeleteResource =
 -- | Deletes an existing creative field value.
 --
 -- /See:/ 'creativeFieldValuesDelete' smart constructor.
-data CreativeFieldValuesDelete = CreativeFieldValuesDelete'
+data CreativeFieldValuesDelete =
+  CreativeFieldValuesDelete'
     { _cfvdCreativeFieldId :: !(Textual Int64)
     , _cfvdProFileId       :: !(Textual Int64)
     , _cfvdId              :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeFieldValuesDelete' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ creativeFieldValuesDelete
     -> Int64 -- ^ 'cfvdId'
     -> CreativeFieldValuesDelete
 creativeFieldValuesDelete pCfvdCreativeFieldId_ pCfvdProFileId_ pCfvdId_ =
-    CreativeFieldValuesDelete'
+  CreativeFieldValuesDelete'
     { _cfvdCreativeFieldId = _Coerce # pCfvdCreativeFieldId_
     , _cfvdProFileId = _Coerce # pCfvdProFileId_
     , _cfvdId = _Coerce # pCfvdId_
     }
+
 
 -- | Creative field ID for this creative field value.
 cfvdCreativeFieldId :: Lens' CreativeFieldValuesDelete Int64

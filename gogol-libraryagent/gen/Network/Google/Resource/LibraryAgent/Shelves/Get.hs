@@ -60,14 +60,17 @@ type ShelvesGetResource =
 -- | Gets a shelf. Returns NOT_FOUND if the shelf does not exist.
 --
 -- /See:/ 'shelvesGet' smart constructor.
-data ShelvesGet = ShelvesGet'
+data ShelvesGet =
+  ShelvesGet'
     { _sgXgafv          :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
     , _sgAccessToken    :: !(Maybe Text)
     , _sgUploadType     :: !(Maybe Text)
     , _sgName           :: !Text
     , _sgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShelvesGet' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ shelvesGet
     :: Text -- ^ 'sgName'
     -> ShelvesGet
 shelvesGet pSgName_ =
-    ShelvesGet'
+  ShelvesGet'
     { _sgXgafv = Nothing
     , _sgUploadProtocol = Nothing
     , _sgAccessToken = Nothing
@@ -96,6 +99,7 @@ shelvesGet pSgName_ =
     , _sgName = pSgName_
     , _sgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sgXgafv :: Lens' ShelvesGet (Maybe Xgafv)

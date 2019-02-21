@@ -55,9 +55,12 @@ type LiaSettingsCustombatchResource =
 -- single request.
 --
 -- /See:/ 'liaSettingsCustombatch' smart constructor.
-newtype LiaSettingsCustombatch = LiaSettingsCustombatch'
+newtype LiaSettingsCustombatch =
+  LiaSettingsCustombatch'
     { _lscPayload :: LiaSettingsCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiaSettingsCustombatch' with the minimum fields required to make a request.
 --
@@ -68,9 +71,8 @@ liaSettingsCustombatch
     :: LiaSettingsCustomBatchRequest -- ^ 'lscPayload'
     -> LiaSettingsCustombatch
 liaSettingsCustombatch pLscPayload_ =
-    LiaSettingsCustombatch'
-    { _lscPayload = pLscPayload_
-    }
+  LiaSettingsCustombatch' {_lscPayload = pLscPayload_}
+
 
 -- | Multipart request metadata.
 lscPayload :: Lens' LiaSettingsCustombatch LiaSettingsCustomBatchRequest

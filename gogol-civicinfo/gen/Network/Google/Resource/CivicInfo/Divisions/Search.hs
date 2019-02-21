@@ -54,10 +54,13 @@ type DivisionsSearchResource =
 -- | Searches for political divisions by their natural name or OCD ID.
 --
 -- /See:/ 'divisionsSearch' smart constructor.
-data DivisionsSearch = DivisionsSearch'
+data DivisionsSearch =
+  DivisionsSearch'
     { _dsPayload :: !DivisionSearchRequest
     , _dsQuery   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DivisionsSearch' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ divisionsSearch
     :: DivisionSearchRequest -- ^ 'dsPayload'
     -> DivisionsSearch
 divisionsSearch pDsPayload_ =
-    DivisionsSearch'
-    { _dsPayload = pDsPayload_
-    , _dsQuery = Nothing
-    }
+  DivisionsSearch' {_dsPayload = pDsPayload_, _dsQuery = Nothing}
+
 
 -- | Multipart request metadata.
 dsPayload :: Lens' DivisionsSearch DivisionSearchRequest

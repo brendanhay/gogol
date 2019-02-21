@@ -59,11 +59,14 @@ type PostsPublishResource =
 -- publishDate parameter.
 --
 -- /See:/ 'postsPublish' smart constructor.
-data PostsPublish = PostsPublish'
+data PostsPublish =
+  PostsPublish'
     { _pppPublishDate :: !(Maybe DateTime')
     , _pppBlogId      :: !Text
     , _pppPostId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostsPublish' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ postsPublish
     -> Text -- ^ 'pppPostId'
     -> PostsPublish
 postsPublish pPppBlogId_ pPppPostId_ =
-    PostsPublish'
+  PostsPublish'
     { _pppPublishDate = Nothing
     , _pppBlogId = pPppBlogId_
     , _pppPostId = pPppPostId_
     }
+
 
 -- | Optional date and time to schedule the publishing of the Blog. If no
 -- publishDate parameter is given, the post is either published at the a

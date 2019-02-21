@@ -29,13 +29,16 @@ import           Network.Google.Prelude
 -- that returns the monitored resource descriptors used by the API.
 --
 -- /See:/ 'monitoredResourceDescriptor' smart constructor.
-data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
+data MonitoredResourceDescriptor =
+  MonitoredResourceDescriptor'
     { _mrdName        :: !(Maybe Text)
     , _mrdDisplayName :: !(Maybe Text)
     , _mrdLabels      :: !(Maybe [LabelDescriptor])
     , _mrdType        :: !(Maybe Text)
     , _mrdDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonitoredResourceDescriptor' with the minimum fields required to make a request.
 --
@@ -53,13 +56,14 @@ data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
 monitoredResourceDescriptor
     :: MonitoredResourceDescriptor
 monitoredResourceDescriptor =
-    MonitoredResourceDescriptor'
+  MonitoredResourceDescriptor'
     { _mrdName = Nothing
     , _mrdDisplayName = Nothing
     , _mrdLabels = Nothing
     , _mrdType = Nothing
     , _mrdDescription = Nothing
     }
+
 
 -- | Optional. The resource name of the monitored resource descriptor:
 -- \"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\" where
@@ -124,10 +128,13 @@ instance ToJSON MonitoredResourceDescriptor where
 -- | Result returned from ListLogEntries.
 --
 -- /See:/ 'listLogEntriesResponse' smart constructor.
-data ListLogEntriesResponse = ListLogEntriesResponse'
+data ListLogEntriesResponse =
+  ListLogEntriesResponse'
     { _llerNextPageToken :: !(Maybe Text)
     , _llerEntries       :: !(Maybe [LogEntry])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLogEntriesResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +146,8 @@ data ListLogEntriesResponse = ListLogEntriesResponse'
 listLogEntriesResponse
     :: ListLogEntriesResponse
 listLogEntriesResponse =
-    ListLogEntriesResponse'
-    { _llerNextPageToken = Nothing
-    , _llerEntries = Nothing
-    }
+  ListLogEntriesResponse' {_llerNextPageToken = Nothing, _llerEntries = Nothing}
+
 
 -- | If there might be more results than those appearing in this response,
 -- then nextPageToken is included. To get the next set of results, call
@@ -187,7 +192,8 @@ instance ToJSON ListLogEntriesResponse where
 -- metric type\'s existing data unusable.
 --
 -- /See:/ 'metricDescriptor' smart constructor.
-data MetricDescriptor = MetricDescriptor'
+data MetricDescriptor =
+  MetricDescriptor'
     { _mdMetricKind  :: !(Maybe MetricDescriptorMetricKind)
     , _mdName        :: !(Maybe Text)
     , _mdMetadata    :: !(Maybe MetricDescriptorMetadata)
@@ -197,7 +203,9 @@ data MetricDescriptor = MetricDescriptor'
     , _mdValueType   :: !(Maybe MetricDescriptorValueType)
     , _mdDescription :: !(Maybe Text)
     , _mdUnit        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
@@ -223,7 +231,7 @@ data MetricDescriptor = MetricDescriptor'
 metricDescriptor
     :: MetricDescriptor
 metricDescriptor =
-    MetricDescriptor'
+  MetricDescriptor'
     { _mdMetricKind = Nothing
     , _mdName = Nothing
     , _mdMetadata = Nothing
@@ -234,6 +242,7 @@ metricDescriptor =
     , _mdDescription = Nothing
     , _mdUnit = Nothing
     }
+
 
 -- | Whether the metric records instantaneous values, changes to a value,
 -- etc. Some combinations of metric_kind and value_type might not be
@@ -351,9 +360,12 @@ instance ToJSON MetricDescriptor where
 -- use the labels \"project_id\", \"instance_id\", and \"zone\".
 --
 -- /See:/ 'monitoredResourceLabels' smart constructor.
-newtype MonitoredResourceLabels = MonitoredResourceLabels'
+newtype MonitoredResourceLabels =
+  MonitoredResourceLabels'
     { _mrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonitoredResourceLabels' with the minimum fields required to make a request.
 --
@@ -364,9 +376,8 @@ monitoredResourceLabels
     :: HashMap Text Text -- ^ 'mrlAddtional'
     -> MonitoredResourceLabels
 monitoredResourceLabels pMrlAddtional_ =
-    MonitoredResourceLabels'
-    { _mrlAddtional = _Coerce # pMrlAddtional_
-    }
+  MonitoredResourceLabels' {_mrlAddtional = _Coerce # pMrlAddtional_}
+
 
 mrlAddtional :: Lens' MonitoredResourceLabels (HashMap Text Text)
 mrlAddtional
@@ -390,10 +401,13 @@ instance ToJSON MonitoredResourceLabels where
 -- this message.
 --
 -- /See:/ 'monitoredResourceMetadata' smart constructor.
-data MonitoredResourceMetadata = MonitoredResourceMetadata'
+data MonitoredResourceMetadata =
+  MonitoredResourceMetadata'
     { _mrmUserLabels   :: !(Maybe MonitoredResourceMetadataUserLabels)
     , _mrmSystemLabels :: !(Maybe MonitoredResourceMetadataSystemLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonitoredResourceMetadata' with the minimum fields required to make a request.
 --
@@ -405,10 +419,9 @@ data MonitoredResourceMetadata = MonitoredResourceMetadata'
 monitoredResourceMetadata
     :: MonitoredResourceMetadata
 monitoredResourceMetadata =
-    MonitoredResourceMetadata'
-    { _mrmUserLabels = Nothing
-    , _mrmSystemLabels = Nothing
-    }
+  MonitoredResourceMetadata'
+    {_mrmUserLabels = Nothing, _mrmSystemLabels = Nothing}
+
 
 -- | Output only. A map of user-defined metadata labels.
 mrmUserLabels :: Lens' MonitoredResourceMetadata (Maybe MonitoredResourceMetadataUserLabels)
@@ -444,10 +457,13 @@ instance ToJSON MonitoredResourceMetadata where
 -- | Result returned from ListLogMetrics.
 --
 -- /See:/ 'listLogMetricsResponse' smart constructor.
-data ListLogMetricsResponse = ListLogMetricsResponse'
+data ListLogMetricsResponse =
+  ListLogMetricsResponse'
     { _llmrMetrics       :: !(Maybe [LogMetric])
     , _llmrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLogMetricsResponse' with the minimum fields required to make a request.
 --
@@ -459,10 +475,8 @@ data ListLogMetricsResponse = ListLogMetricsResponse'
 listLogMetricsResponse
     :: ListLogMetricsResponse
 listLogMetricsResponse =
-    ListLogMetricsResponse'
-    { _llmrMetrics = Nothing
-    , _llmrNextPageToken = Nothing
-    }
+  ListLogMetricsResponse' {_llmrMetrics = Nothing, _llmrNextPageToken = Nothing}
+
 
 -- | A list of logs-based metrics.
 llmrMetrics :: Lens' ListLogMetricsResponse [LogMetric]
@@ -497,14 +511,17 @@ instance ToJSON ListLogMetricsResponse where
 -- | The parameters to WriteLogEntries.
 --
 -- /See:/ 'writeLogEntriesRequest' smart constructor.
-data WriteLogEntriesRequest = WriteLogEntriesRequest'
+data WriteLogEntriesRequest =
+  WriteLogEntriesRequest'
     { _wlerEntries        :: !(Maybe [LogEntry])
     , _wlerPartialSuccess :: !(Maybe Bool)
     , _wlerResource       :: !(Maybe MonitoredResource)
     , _wlerLabels         :: !(Maybe WriteLogEntriesRequestLabels)
     , _wlerLogName        :: !(Maybe Text)
     , _wlerDryRun         :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WriteLogEntriesRequest' with the minimum fields required to make a request.
 --
@@ -524,7 +541,7 @@ data WriteLogEntriesRequest = WriteLogEntriesRequest'
 writeLogEntriesRequest
     :: WriteLogEntriesRequest
 writeLogEntriesRequest =
-    WriteLogEntriesRequest'
+  WriteLogEntriesRequest'
     { _wlerEntries = Nothing
     , _wlerPartialSuccess = Nothing
     , _wlerResource = Nothing
@@ -532,6 +549,7 @@ writeLogEntriesRequest =
     , _wlerLogName = Nothing
     , _wlerDryRun = Nothing
     }
+
 
 -- | Required. The log entries to send to Logging. The order of log entries
 -- in this list does not matter. Values supplied in this method\'s
@@ -643,9 +661,12 @@ instance ToJSON WriteLogEntriesRequest where
 -- and the number of active time series that are allowed in a project.
 --
 -- /See:/ 'logMetricLabelExtractors' smart constructor.
-newtype LogMetricLabelExtractors = LogMetricLabelExtractors'
+newtype LogMetricLabelExtractors =
+  LogMetricLabelExtractors'
     { _lmleAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogMetricLabelExtractors' with the minimum fields required to make a request.
 --
@@ -656,9 +677,8 @@ logMetricLabelExtractors
     :: HashMap Text Text -- ^ 'lmleAddtional'
     -> LogMetricLabelExtractors
 logMetricLabelExtractors pLmleAddtional_ =
-    LogMetricLabelExtractors'
-    { _lmleAddtional = _Coerce # pLmleAddtional_
-    }
+  LogMetricLabelExtractors' {_lmleAddtional = _Coerce # pLmleAddtional_}
+
 
 lmleAddtional :: Lens' LogMetricLabelExtractors (HashMap Text Text)
 lmleAddtional
@@ -683,14 +703,16 @@ instance ToJSON LogMetricLabelExtractors where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -702,9 +724,12 @@ instance ToJSON Empty where
 -- additional information about the log entry.
 --
 -- /See:/ 'logEntryLabels' smart constructor.
-newtype LogEntryLabels = LogEntryLabels'
+newtype LogEntryLabels =
+  LogEntryLabels'
     { _lelAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntryLabels' with the minimum fields required to make a request.
 --
@@ -715,9 +740,8 @@ logEntryLabels
     :: HashMap Text Text -- ^ 'lelAddtional'
     -> LogEntryLabels
 logEntryLabels pLelAddtional_ =
-    LogEntryLabels'
-    { _lelAddtional = _Coerce # pLelAddtional_
-    }
+  LogEntryLabels' {_lelAddtional = _Coerce # pLelAddtional_}
+
 
 lelAddtional :: Lens' LogEntryLabels (HashMap Text Text)
 lelAddtional
@@ -735,10 +759,13 @@ instance ToJSON LogEntryLabels where
 -- | Result returned from ListSinks.
 --
 -- /See:/ 'listSinksResponse' smart constructor.
-data ListSinksResponse = ListSinksResponse'
+data ListSinksResponse =
+  ListSinksResponse'
     { _lsrSinks         :: !(Maybe [LogSink])
     , _lsrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListSinksResponse' with the minimum fields required to make a request.
 --
@@ -750,10 +777,8 @@ data ListSinksResponse = ListSinksResponse'
 listSinksResponse
     :: ListSinksResponse
 listSinksResponse =
-    ListSinksResponse'
-    { _lsrSinks = Nothing
-    , _lsrNextPageToken = Nothing
-    }
+  ListSinksResponse' {_lsrSinks = Nothing, _lsrNextPageToken = Nothing}
+
 
 -- | A list of sinks.
 lsrSinks :: Lens' ListSinksResponse [LogSink]
@@ -789,7 +814,8 @@ instance ToJSON ListSinksResponse where
 -- application.
 --
 -- /See:/ 'requestLog' smart constructor.
-data RequestLog = RequestLog'
+data RequestLog =
+  RequestLog'
     { _rlTraceId           :: !(Maybe Text)
     , _rlInstanceId        :: !(Maybe Text)
     , _rlStatus            :: !(Maybe (Textual Int32))
@@ -823,7 +849,9 @@ data RequestLog = RequestLog'
     , _rlResponseSize      :: !(Maybe (Textual Int64))
     , _rlSourceReference   :: !(Maybe [SourceReference])
     , _rlAppEngineRelease  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RequestLog' with the minimum fields required to make a request.
 --
@@ -897,7 +925,7 @@ data RequestLog = RequestLog'
 requestLog
     :: RequestLog
 requestLog =
-    RequestLog'
+  RequestLog'
     { _rlTraceId = Nothing
     , _rlInstanceId = Nothing
     , _rlStatus = Nothing
@@ -932,6 +960,7 @@ requestLog =
     , _rlSourceReference = Nothing
     , _rlAppEngineRelease = Nothing
     }
+
 
 -- | Stackdriver Trace identifier for this request.
 rlTraceId :: Lens' RequestLog (Maybe Text)
@@ -1213,9 +1242,12 @@ instance ToJSON RequestLog where
 -- Cloud Platform services use this field for their log entry payloads.
 --
 -- /See:/ 'logEntryProtoPayload' smart constructor.
-newtype LogEntryProtoPayload = LogEntryProtoPayload'
+newtype LogEntryProtoPayload =
+  LogEntryProtoPayload'
     { _leppAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntryProtoPayload' with the minimum fields required to make a request.
 --
@@ -1226,9 +1258,8 @@ logEntryProtoPayload
     :: HashMap Text JSONValue -- ^ 'leppAddtional'
     -> LogEntryProtoPayload
 logEntryProtoPayload pLeppAddtional_ =
-    LogEntryProtoPayload'
-    { _leppAddtional = _Coerce # pLeppAddtional_
-    }
+  LogEntryProtoPayload' {_leppAddtional = _Coerce # pLeppAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 leppAddtional :: Lens' LogEntryProtoPayload (HashMap Text JSONValue)
@@ -1250,11 +1281,14 @@ instance ToJSON LogEntryProtoPayload where
 -- log entry.
 --
 -- /See:/ 'logEntrySourceLocation' smart constructor.
-data LogEntrySourceLocation = LogEntrySourceLocation'
+data LogEntrySourceLocation =
+  LogEntrySourceLocation'
     { _leslFunction :: !(Maybe Text)
     , _leslLine     :: !(Maybe (Textual Int64))
     , _leslFile     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntrySourceLocation' with the minimum fields required to make a request.
 --
@@ -1268,11 +1302,9 @@ data LogEntrySourceLocation = LogEntrySourceLocation'
 logEntrySourceLocation
     :: LogEntrySourceLocation
 logEntrySourceLocation =
-    LogEntrySourceLocation'
-    { _leslFunction = Nothing
-    , _leslLine = Nothing
-    , _leslFile = Nothing
-    }
+  LogEntrySourceLocation'
+    {_leslFunction = Nothing, _leslLine = Nothing, _leslFile = Nothing}
+
 
 -- | Optional. Human-readable name of the function or method being invoked,
 -- with optional context such as the class or package name. This
@@ -1320,12 +1352,17 @@ instance ToJSON LogEntrySourceLocation where
 -- excluded.
 --
 -- /See:/ 'logExclusion' smart constructor.
-data LogExclusion = LogExclusion'
+data LogExclusion =
+  LogExclusion'
     { _leDisabled    :: !(Maybe Bool)
+    , _leUpdateTime  :: !(Maybe DateTime')
     , _leName        :: !(Maybe Text)
     , _leFilter      :: !(Maybe Text)
     , _leDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    , _leCreateTime  :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogExclusion' with the minimum fields required to make a request.
 --
@@ -1333,27 +1370,41 @@ data LogExclusion = LogExclusion'
 --
 -- * 'leDisabled'
 --
+-- * 'leUpdateTime'
+--
 -- * 'leName'
 --
 -- * 'leFilter'
 --
 -- * 'leDescription'
+--
+-- * 'leCreateTime'
 logExclusion
     :: LogExclusion
 logExclusion =
-    LogExclusion'
+  LogExclusion'
     { _leDisabled = Nothing
+    , _leUpdateTime = Nothing
     , _leName = Nothing
     , _leFilter = Nothing
     , _leDescription = Nothing
+    , _leCreateTime = Nothing
     }
 
+
 -- | Optional. If set to True, then this exclusion is disabled and it does
--- not exclude any log entries. You can use exclusions.patch to change the
+-- not exclude any log entries. You can update an exclusion to change the
 -- value of this field.
 leDisabled :: Lens' LogExclusion (Maybe Bool)
 leDisabled
   = lens _leDisabled (\ s a -> s{_leDisabled = a})
+
+-- | Output only. The last update timestamp of the exclusion.This field may
+-- not be present for older exclusions.
+leUpdateTime :: Lens' LogExclusion (Maybe UTCTime)
+leUpdateTime
+  = lens _leUpdateTime (\ s a -> s{_leUpdateTime = a})
+      . mapping _DateTime
 
 -- | Required. A client-assigned identifier, such as
 -- \"load-balancer-exclusion\". Identifiers are limited to 100 characters
@@ -1375,35 +1426,48 @@ leDescription
   = lens _leDescription
       (\ s a -> s{_leDescription = a})
 
+-- | Output only. The creation timestamp of the exclusion.This field may not
+-- be present for older exclusions.
+leCreateTime :: Lens' LogExclusion (Maybe UTCTime)
+leCreateTime
+  = lens _leCreateTime (\ s a -> s{_leCreateTime = a})
+      . mapping _DateTime
+
 instance FromJSON LogExclusion where
         parseJSON
           = withObject "LogExclusion"
               (\ o ->
                  LogExclusion' <$>
-                   (o .:? "disabled") <*> (o .:? "name") <*>
-                     (o .:? "filter")
-                     <*> (o .:? "description"))
+                   (o .:? "disabled") <*> (o .:? "updateTime") <*>
+                     (o .:? "name")
+                     <*> (o .:? "filter")
+                     <*> (o .:? "description")
+                     <*> (o .:? "createTime"))
 
 instance ToJSON LogExclusion where
         toJSON LogExclusion'{..}
           = object
               (catMaybes
                  [("disabled" .=) <$> _leDisabled,
+                  ("updateTime" .=) <$> _leUpdateTime,
                   ("name" .=) <$> _leName, ("filter" .=) <$> _leFilter,
-                  ("description" .=) <$> _leDescription])
+                  ("description" .=) <$> _leDescription,
+                  ("createTime" .=) <$> _leCreateTime])
 
 -- | Result returned from WriteLogEntries. empty
 --
 -- /See:/ 'writeLogEntriesResponse' smart constructor.
 data WriteLogEntriesResponse =
-    WriteLogEntriesResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  WriteLogEntriesResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WriteLogEntriesResponse' with the minimum fields required to make a request.
 --
 writeLogEntriesResponse
     :: WriteLogEntriesResponse
 writeLogEntriesResponse = WriteLogEntriesResponse'
+
 
 instance FromJSON WriteLogEntriesResponse where
         parseJSON
@@ -1420,14 +1484,19 @@ instance ToJSON WriteLogEntriesResponse where
 -- billing account, or folder.
 --
 -- /See:/ 'logSink' smart constructor.
-data LogSink = LogSink'
+data LogSink =
+  LogSink'
     { _lsDestination         :: !(Maybe Text)
     , _lsIncludeChildren     :: !(Maybe Bool)
     , _lsOutputVersionFormat :: !(Maybe LogSinkOutputVersionFormat)
     , _lsWriterIdentity      :: !(Maybe Text)
+    , _lsUpdateTime          :: !(Maybe DateTime')
     , _lsName                :: !(Maybe Text)
     , _lsFilter              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    , _lsCreateTime          :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogSink' with the minimum fields required to make a request.
 --
@@ -1441,20 +1510,27 @@ data LogSink = LogSink'
 --
 -- * 'lsWriterIdentity'
 --
+-- * 'lsUpdateTime'
+--
 -- * 'lsName'
 --
 -- * 'lsFilter'
+--
+-- * 'lsCreateTime'
 logSink
     :: LogSink
 logSink =
-    LogSink'
+  LogSink'
     { _lsDestination = Nothing
     , _lsIncludeChildren = Nothing
     , _lsOutputVersionFormat = Nothing
     , _lsWriterIdentity = Nothing
+    , _lsUpdateTime = Nothing
     , _lsName = Nothing
     , _lsFilter = Nothing
+    , _lsCreateTime = Nothing
     }
+
 
 -- | Required. The export destination:
 -- \"storage.googleapis.com\/[GCS_BUCKET]\"
@@ -1462,7 +1538,7 @@ logSink =
 -- \"pubsub.googleapis.com\/projects\/[PROJECT_ID]\/topics\/[TOPIC_ID]\"
 -- The sink\'s writer_identity, set when the sink is created, must have
 -- permission to write to the destination or else the log entries are not
--- exported. For more information, see Exporting Logs With Sinks.
+-- exported. For more information, see Exporting Logs with Sinks.
 lsDestination :: Lens' LogSink (Maybe Text)
 lsDestination
   = lens _lsDestination
@@ -1494,16 +1570,23 @@ lsOutputVersionFormat
 
 -- | Output only. An IAM identity—a service account or group—under which
 -- Logging writes the exported log entries to the sink\'s destination. This
--- field is set by sinks.create and sinks.update, based on the setting of
+-- field is set by sinks.create and sinks.update based on the value of
 -- unique_writer_identity in those methods.Until you grant this identity
 -- write-access to the destination, log entry exports from this sink will
--- fail. For more information, see Granting access for a resource. Consult
+-- fail. For more information, see Granting Access for a Resource. Consult
 -- the destination service\'s documentation to determine the appropriate
 -- IAM roles to assign to the identity.
 lsWriterIdentity :: Lens' LogSink (Maybe Text)
 lsWriterIdentity
   = lens _lsWriterIdentity
       (\ s a -> s{_lsWriterIdentity = a})
+
+-- | Output only. The last update timestamp of the sink.This field may not be
+-- present for older sinks.
+lsUpdateTime :: Lens' LogSink (Maybe UTCTime)
+lsUpdateTime
+  = lens _lsUpdateTime (\ s a -> s{_lsUpdateTime = a})
+      . mapping _DateTime
 
 -- | Required. The client-assigned sink identifier, unique within the
 -- project. Example: \"my-syslog-errors-to-pubsub\". Sink identifiers are
@@ -1520,6 +1603,13 @@ lsName = lens _lsName (\ s a -> s{_lsName = a})
 lsFilter :: Lens' LogSink (Maybe Text)
 lsFilter = lens _lsFilter (\ s a -> s{_lsFilter = a})
 
+-- | Output only. The creation timestamp of the sink.This field may not be
+-- present for older sinks.
+lsCreateTime :: Lens' LogSink (Maybe UTCTime)
+lsCreateTime
+  = lens _lsCreateTime (\ s a -> s{_lsCreateTime = a})
+      . mapping _DateTime
+
 instance FromJSON LogSink where
         parseJSON
           = withObject "LogSink"
@@ -1528,8 +1618,10 @@ instance FromJSON LogSink where
                    (o .:? "destination") <*> (o .:? "includeChildren")
                      <*> (o .:? "outputVersionFormat")
                      <*> (o .:? "writerIdentity")
+                     <*> (o .:? "updateTime")
                      <*> (o .:? "name")
-                     <*> (o .:? "filter"))
+                     <*> (o .:? "filter")
+                     <*> (o .:? "createTime"))
 
 instance ToJSON LogSink where
         toJSON LogSink'{..}
@@ -1540,15 +1632,19 @@ instance ToJSON LogSink where
                   ("outputVersionFormat" .=) <$>
                     _lsOutputVersionFormat,
                   ("writerIdentity" .=) <$> _lsWriterIdentity,
-                  ("name" .=) <$> _lsName,
-                  ("filter" .=) <$> _lsFilter])
+                  ("updateTime" .=) <$> _lsUpdateTime,
+                  ("name" .=) <$> _lsName, ("filter" .=) <$> _lsFilter,
+                  ("createTime" .=) <$> _lsCreateTime])
 
 -- | Output only. A map of user-defined metadata labels.
 --
 -- /See:/ 'monitoredResourceMetadataUserLabels' smart constructor.
-newtype MonitoredResourceMetadataUserLabels = MonitoredResourceMetadataUserLabels'
+newtype MonitoredResourceMetadataUserLabels =
+  MonitoredResourceMetadataUserLabels'
     { _mrmulAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonitoredResourceMetadataUserLabels' with the minimum fields required to make a request.
 --
@@ -1559,9 +1655,9 @@ monitoredResourceMetadataUserLabels
     :: HashMap Text Text -- ^ 'mrmulAddtional'
     -> MonitoredResourceMetadataUserLabels
 monitoredResourceMetadataUserLabels pMrmulAddtional_ =
-    MonitoredResourceMetadataUserLabels'
-    { _mrmulAddtional = _Coerce # pMrmulAddtional_
-    }
+  MonitoredResourceMetadataUserLabels'
+    {_mrmulAddtional = _Coerce # pMrmulAddtional_}
+
 
 mrmulAddtional :: Lens' MonitoredResourceMetadataUserLabels (HashMap Text Text)
 mrmulAddtional
@@ -1584,10 +1680,13 @@ instance ToJSON MonitoredResourceMetadataUserLabels
 -- | Result returned from ListExclusions.
 --
 -- /See:/ 'listExclusionsResponse' smart constructor.
-data ListExclusionsResponse = ListExclusionsResponse'
+data ListExclusionsResponse =
+  ListExclusionsResponse'
     { _lerNextPageToken :: !(Maybe Text)
     , _lerExclusions    :: !(Maybe [LogExclusion])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListExclusionsResponse' with the minimum fields required to make a request.
 --
@@ -1599,10 +1698,9 @@ data ListExclusionsResponse = ListExclusionsResponse'
 listExclusionsResponse
     :: ListExclusionsResponse
 listExclusionsResponse =
-    ListExclusionsResponse'
-    { _lerNextPageToken = Nothing
-    , _lerExclusions = Nothing
-    }
+  ListExclusionsResponse'
+    {_lerNextPageToken = Nothing, _lerExclusions = Nothing}
+
 
 -- | If there might be more results than appear in this response, then
 -- nextPageToken is included. To get the next set of results, call the same
@@ -1638,10 +1736,13 @@ instance ToJSON ListExclusionsResponse where
 -- | Result returned from ListLogs.
 --
 -- /See:/ 'listLogsResponse' smart constructor.
-data ListLogsResponse = ListLogsResponse'
+data ListLogsResponse =
+  ListLogsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLogNames      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLogsResponse' with the minimum fields required to make a request.
 --
@@ -1653,10 +1754,8 @@ data ListLogsResponse = ListLogsResponse'
 listLogsResponse
     :: ListLogsResponse
 listLogsResponse =
-    ListLogsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLogNames = Nothing
-    }
+  ListLogsResponse' {_llrNextPageToken = Nothing, _llrLogNames = Nothing}
+
 
 -- | If there might be more results than those appearing in this response,
 -- then nextPageToken is included. To get the next set of results, call
@@ -1692,10 +1791,13 @@ instance ToJSON ListLogsResponse where
 -- | Result returned from ListMonitoredResourceDescriptors.
 --
 -- /See:/ 'listMonitoredResourceDescriptorsResponse' smart constructor.
-data ListMonitoredResourceDescriptorsResponse = ListMonitoredResourceDescriptorsResponse'
+data ListMonitoredResourceDescriptorsResponse =
+  ListMonitoredResourceDescriptorsResponse'
     { _lmrdrNextPageToken       :: !(Maybe Text)
     , _lmrdrResourceDescriptors :: !(Maybe [MonitoredResourceDescriptor])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListMonitoredResourceDescriptorsResponse' with the minimum fields required to make a request.
 --
@@ -1707,10 +1809,9 @@ data ListMonitoredResourceDescriptorsResponse = ListMonitoredResourceDescriptors
 listMonitoredResourceDescriptorsResponse
     :: ListMonitoredResourceDescriptorsResponse
 listMonitoredResourceDescriptorsResponse =
-    ListMonitoredResourceDescriptorsResponse'
-    { _lmrdrNextPageToken = Nothing
-    , _lmrdrResourceDescriptors = Nothing
-    }
+  ListMonitoredResourceDescriptorsResponse'
+    {_lmrdrNextPageToken = Nothing, _lmrdrResourceDescriptors = Nothing}
+
 
 -- | If there might be more results than those appearing in this response,
 -- then nextPageToken is included. To get the next set of results, call
@@ -1729,7 +1830,8 @@ lmrdrResourceDescriptors
       . _Coerce
 
 instance FromJSON
-         ListMonitoredResourceDescriptorsResponse where
+           ListMonitoredResourceDescriptorsResponse
+         where
         parseJSON
           = withObject
               "ListMonitoredResourceDescriptorsResponse"
@@ -1739,7 +1841,8 @@ instance FromJSON
                      (o .:? "resourceDescriptors" .!= mempty))
 
 instance ToJSON
-         ListMonitoredResourceDescriptorsResponse where
+           ListMonitoredResourceDescriptorsResponse
+         where
         toJSON ListMonitoredResourceDescriptorsResponse'{..}
           = object
               (catMaybes
@@ -1755,9 +1858,12 @@ instance ToJSON
 -- boundary of the overflow and underflow buckets.
 --
 -- /See:/ 'explicit' smart constructor.
-newtype Explicit = Explicit'
+newtype Explicit =
+  Explicit'
     { _eBounds :: Maybe [Textual Double]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Explicit' with the minimum fields required to make a request.
 --
@@ -1766,10 +1872,8 @@ newtype Explicit = Explicit'
 -- * 'eBounds'
 explicit
     :: Explicit
-explicit =
-    Explicit'
-    { _eBounds = Nothing
-    }
+explicit = Explicit' {_eBounds = Nothing}
+
 
 -- | The values must be monotonically increasing.
 eBounds :: Lens' Explicit [Double]
@@ -1791,7 +1895,8 @@ instance ToJSON Explicit where
 -- MUST be defined in a separate message.
 --
 -- /See:/ 'hTTPRequest' smart constructor.
-data HTTPRequest = HTTPRequest'
+data HTTPRequest =
+  HTTPRequest'
     { _httprStatus                         :: !(Maybe (Textual Int32))
     , _httprRequestURL                     :: !(Maybe Text)
     , _httprCacheFillBytes                 :: !(Maybe (Textual Int64))
@@ -1807,7 +1912,9 @@ data HTTPRequest = HTTPRequest'
     , _httprRequestMethod                  :: !(Maybe Text)
     , _httprCacheHit                       :: !(Maybe Bool)
     , _httprReferer                        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPRequest' with the minimum fields required to make a request.
 --
@@ -1845,7 +1952,7 @@ data HTTPRequest = HTTPRequest'
 hTTPRequest
     :: HTTPRequest
 hTTPRequest =
-    HTTPRequest'
+  HTTPRequest'
     { _httprStatus = Nothing
     , _httprRequestURL = Nothing
     , _httprCacheFillBytes = Nothing
@@ -1862,6 +1969,7 @@ hTTPRequest =
     , _httprCacheHit = Nothing
     , _httprReferer = Nothing
     }
+
 
 -- | The response code indicating the status of response. Examples: 200, 404.
 httprStatus :: Lens' HTTPRequest (Maybe Int32)
@@ -2020,11 +2128,14 @@ instance ToJSON HTTPRequest where
 -- Lower bound (1 \<= i \< N): scale * (growth_factor ^ (i - 1)).
 --
 -- /See:/ 'exponential' smart constructor.
-data Exponential = Exponential'
+data Exponential =
+  Exponential'
     { _eGrowthFactor     :: !(Maybe (Textual Double))
     , _eScale            :: !(Maybe (Textual Double))
     , _eNumFiniteBuckets :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Exponential' with the minimum fields required to make a request.
 --
@@ -2038,11 +2149,9 @@ data Exponential = Exponential'
 exponential
     :: Exponential
 exponential =
-    Exponential'
-    { _eGrowthFactor = Nothing
-    , _eScale = Nothing
-    , _eNumFiniteBuckets = Nothing
-    }
+  Exponential'
+    {_eGrowthFactor = Nothing, _eScale = Nothing, _eNumFiniteBuckets = Nothing}
+
 
 -- | Must be greater than 1.
 eGrowthFactor :: Lens' Exponential (Maybe Double)
@@ -2086,9 +2195,12 @@ instance ToJSON Exponential where
 -- changed. See LogEntry.
 --
 -- /See:/ 'writeLogEntriesRequestLabels' smart constructor.
-newtype WriteLogEntriesRequestLabels = WriteLogEntriesRequestLabels'
+newtype WriteLogEntriesRequestLabels =
+  WriteLogEntriesRequestLabels'
     { _wlerlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WriteLogEntriesRequestLabels' with the minimum fields required to make a request.
 --
@@ -2099,9 +2211,8 @@ writeLogEntriesRequestLabels
     :: HashMap Text Text -- ^ 'wlerlAddtional'
     -> WriteLogEntriesRequestLabels
 writeLogEntriesRequestLabels pWlerlAddtional_ =
-    WriteLogEntriesRequestLabels'
-    { _wlerlAddtional = _Coerce # pWlerlAddtional_
-    }
+  WriteLogEntriesRequestLabels' {_wlerlAddtional = _Coerce # pWlerlAddtional_}
+
 
 wlerlAddtional :: Lens' WriteLogEntriesRequestLabels (HashMap Text Text)
 wlerlAddtional
@@ -2132,10 +2243,13 @@ instance ToJSON WriteLogEntriesRequestLabels where
 -- \"zone\": \"us-central1-a\" }}
 --
 -- /See:/ 'monitoredResource' smart constructor.
-data MonitoredResource = MonitoredResource'
+data MonitoredResource =
+  MonitoredResource'
     { _mrLabels :: !(Maybe MonitoredResourceLabels)
     , _mrType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonitoredResource' with the minimum fields required to make a request.
 --
@@ -2146,11 +2260,8 @@ data MonitoredResource = MonitoredResource'
 -- * 'mrType'
 monitoredResource
     :: MonitoredResource
-monitoredResource =
-    MonitoredResource'
-    { _mrLabels = Nothing
-    , _mrType = Nothing
-    }
+monitoredResource = MonitoredResource' {_mrLabels = Nothing, _mrType = Nothing}
+
 
 -- | Required. Values for all of the labels listed in the associated
 -- monitored resource descriptor. For example, Compute Engine VM instances
@@ -2181,12 +2292,15 @@ instance ToJSON MonitoredResource where
 -- | Application log line emitted while processing a request.
 --
 -- /See:/ 'logLine' smart constructor.
-data LogLine = LogLine'
+data LogLine =
+  LogLine'
     { _llTime           :: !(Maybe DateTime')
     , _llSeverity       :: !(Maybe LogLineSeverity)
     , _llLogMessage     :: !(Maybe Text)
     , _llSourceLocation :: !(Maybe SourceLocation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogLine' with the minimum fields required to make a request.
 --
@@ -2202,12 +2316,13 @@ data LogLine = LogLine'
 logLine
     :: LogLine
 logLine =
-    LogLine'
+  LogLine'
     { _llTime = Nothing
     , _llSeverity = Nothing
     , _llLogMessage = Nothing
     , _llSourceLocation = Nothing
     }
+
 
 -- | Approximate time when this log entry was made.
 llTime :: Lens' LogLine (Maybe UTCTime)
@@ -2252,11 +2367,14 @@ instance ToJSON LogLine where
 -- | Additional annotations that can be used to guide the usage of a metric.
 --
 -- /See:/ 'metricDescriptorMetadata' smart constructor.
-data MetricDescriptorMetadata = MetricDescriptorMetadata'
+data MetricDescriptorMetadata =
+  MetricDescriptorMetadata'
     { _mdmSamplePeriod :: !(Maybe GDuration)
     , _mdmIngestDelay  :: !(Maybe GDuration)
     , _mdmLaunchStage  :: !(Maybe MetricDescriptorMetadataLaunchStage)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricDescriptorMetadata' with the minimum fields required to make a request.
 --
@@ -2270,11 +2388,12 @@ data MetricDescriptorMetadata = MetricDescriptorMetadata'
 metricDescriptorMetadata
     :: MetricDescriptorMetadata
 metricDescriptorMetadata =
-    MetricDescriptorMetadata'
+  MetricDescriptorMetadata'
     { _mdmSamplePeriod = Nothing
     , _mdmIngestDelay = Nothing
     , _mdmLaunchStage = Nothing
     }
+
 
 -- | The sampling period of metric data points. For metrics which are written
 -- periodically, consecutive data points are stored at this time interval,
@@ -2325,9 +2444,12 @@ instance ToJSON MetricDescriptorMetadata where
 -- \"b\", \"c\"], \"spot_instance\": false }
 --
 -- /See:/ 'monitoredResourceMetadataSystemLabels' smart constructor.
-newtype MonitoredResourceMetadataSystemLabels = MonitoredResourceMetadataSystemLabels'
+newtype MonitoredResourceMetadataSystemLabels =
+  MonitoredResourceMetadataSystemLabels'
     { _mrmslAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonitoredResourceMetadataSystemLabels' with the minimum fields required to make a request.
 --
@@ -2338,9 +2460,9 @@ monitoredResourceMetadataSystemLabels
     :: HashMap Text JSONValue -- ^ 'mrmslAddtional'
     -> MonitoredResourceMetadataSystemLabels
 monitoredResourceMetadataSystemLabels pMrmslAddtional_ =
-    MonitoredResourceMetadataSystemLabels'
-    { _mrmslAddtional = _Coerce # pMrmslAddtional_
-    }
+  MonitoredResourceMetadataSystemLabels'
+    {_mrmslAddtional = _Coerce # pMrmslAddtional_}
+
 
 -- | Properties of the object.
 mrmslAddtional :: Lens' MonitoredResourceMetadataSystemLabels (HashMap Text JSONValue)
@@ -2350,7 +2472,8 @@ mrmslAddtional
       . _Coerce
 
 instance FromJSON
-         MonitoredResourceMetadataSystemLabels where
+           MonitoredResourceMetadataSystemLabels
+         where
         parseJSON
           = withObject "MonitoredResourceMetadataSystemLabels"
               (\ o ->
@@ -2364,11 +2487,14 @@ instance ToJSON MonitoredResourceMetadataSystemLabels
 -- | A description of a label.
 --
 -- /See:/ 'labelDescriptor' smart constructor.
-data LabelDescriptor = LabelDescriptor'
+data LabelDescriptor =
+  LabelDescriptor'
     { _ldKey         :: !(Maybe Text)
     , _ldValueType   :: !(Maybe LabelDescriptorValueType)
     , _ldDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LabelDescriptor' with the minimum fields required to make a request.
 --
@@ -2382,11 +2508,9 @@ data LabelDescriptor = LabelDescriptor'
 labelDescriptor
     :: LabelDescriptor
 labelDescriptor =
-    LabelDescriptor'
-    { _ldKey = Nothing
-    , _ldValueType = Nothing
-    , _ldDescription = Nothing
-    }
+  LabelDescriptor'
+    {_ldKey = Nothing, _ldValueType = Nothing, _ldDescription = Nothing}
+
 
 -- | The label key.
 ldKey :: Lens' LabelDescriptor (Maybe Text)
@@ -2427,11 +2551,14 @@ instance ToJSON LabelDescriptor where
 -- bound (1 \<= i \< N): offset + (width * (i - 1)).
 --
 -- /See:/ 'linear' smart constructor.
-data Linear = Linear'
+data Linear =
+  Linear'
     { _lOffSet           :: !(Maybe (Textual Double))
     , _lWidth            :: !(Maybe (Textual Double))
     , _lNumFiniteBuckets :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Linear' with the minimum fields required to make a request.
 --
@@ -2445,11 +2572,8 @@ data Linear = Linear'
 linear
     :: Linear
 linear =
-    Linear'
-    { _lOffSet = Nothing
-    , _lWidth = Nothing
-    , _lNumFiniteBuckets = Nothing
-    }
+  Linear' {_lOffSet = Nothing, _lWidth = Nothing, _lNumFiniteBuckets = Nothing}
+
 
 -- | Lower bound of the first bucket.
 lOffSet :: Lens' Linear (Maybe Double)
@@ -2489,14 +2613,17 @@ instance ToJSON Linear where
 -- | The parameters to ListLogEntries.
 --
 -- /See:/ 'listLogEntriesRequest' smart constructor.
-data ListLogEntriesRequest = ListLogEntriesRequest'
+data ListLogEntriesRequest =
+  ListLogEntriesRequest'
     { _llerOrderBy       :: !(Maybe Text)
     , _llerProjectIds    :: !(Maybe [Text])
     , _llerFilter        :: !(Maybe Text)
     , _llerPageToken     :: !(Maybe Text)
     , _llerPageSize      :: !(Maybe (Textual Int32))
     , _llerResourceNames :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLogEntriesRequest' with the minimum fields required to make a request.
 --
@@ -2516,7 +2643,7 @@ data ListLogEntriesRequest = ListLogEntriesRequest'
 listLogEntriesRequest
     :: ListLogEntriesRequest
 listLogEntriesRequest =
-    ListLogEntriesRequest'
+  ListLogEntriesRequest'
     { _llerOrderBy = Nothing
     , _llerProjectIds = Nothing
     , _llerFilter = Nothing
@@ -2524,6 +2651,7 @@ listLogEntriesRequest =
     , _llerPageSize = Nothing
     , _llerResourceNames = Nothing
     }
+
 
 -- | Optional. How the results should be sorted. Presently, the only
 -- permitted values are \"timestamp asc\" (default) and \"timestamp desc\".
@@ -2612,12 +2740,15 @@ instance ToJSON ListLogEntriesRequest where
 -- which a log entry is associated.
 --
 -- /See:/ 'logEntryOperation' smart constructor.
-data LogEntryOperation = LogEntryOperation'
+data LogEntryOperation =
+  LogEntryOperation'
     { _leoFirst    :: !(Maybe Bool)
     , _leoProducer :: !(Maybe Text)
     , _leoLast     :: !(Maybe Bool)
     , _leoId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntryOperation' with the minimum fields required to make a request.
 --
@@ -2633,12 +2764,13 @@ data LogEntryOperation = LogEntryOperation'
 logEntryOperation
     :: LogEntryOperation
 logEntryOperation =
-    LogEntryOperation'
+  LogEntryOperation'
     { _leoFirst = Nothing
     , _leoProducer = Nothing
     , _leoLast = Nothing
     , _leoId = Nothing
     }
+
 
 -- | Optional. Set this to True if this is the first log entry in the
 -- operation.
@@ -2688,8 +2820,10 @@ instance ToJSON LogEntryOperation where
 -- specified by the bucket options.
 --
 -- /See:/ 'logMetric' smart constructor.
-data LogMetric = LogMetric'
+data LogMetric =
+  LogMetric'
     { _lmMetricDescriptor :: !(Maybe MetricDescriptor)
+    , _lmUpdateTime       :: !(Maybe DateTime')
     , _lmName             :: !(Maybe Text)
     , _lmVersion          :: !(Maybe LogMetricVersion)
     , _lmLabelExtractors  :: !(Maybe LogMetricLabelExtractors)
@@ -2697,13 +2831,18 @@ data LogMetric = LogMetric'
     , _lmValueExtractor   :: !(Maybe Text)
     , _lmBucketOptions    :: !(Maybe BucketOptions)
     , _lmDescription      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    , _lmCreateTime       :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogMetric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lmMetricDescriptor'
+--
+-- * 'lmUpdateTime'
 --
 -- * 'lmName'
 --
@@ -2718,11 +2857,14 @@ data LogMetric = LogMetric'
 -- * 'lmBucketOptions'
 --
 -- * 'lmDescription'
+--
+-- * 'lmCreateTime'
 logMetric
     :: LogMetric
 logMetric =
-    LogMetric'
+  LogMetric'
     { _lmMetricDescriptor = Nothing
+    , _lmUpdateTime = Nothing
     , _lmName = Nothing
     , _lmVersion = Nothing
     , _lmLabelExtractors = Nothing
@@ -2730,7 +2872,9 @@ logMetric =
     , _lmValueExtractor = Nothing
     , _lmBucketOptions = Nothing
     , _lmDescription = Nothing
+    , _lmCreateTime = Nothing
     }
+
 
 -- | Optional. The metric descriptor associated with the logs-based metric.
 -- If unspecified, it uses a default metric descriptor with a DELTA metric
@@ -2751,6 +2895,13 @@ lmMetricDescriptor :: Lens' LogMetric (Maybe MetricDescriptor)
 lmMetricDescriptor
   = lens _lmMetricDescriptor
       (\ s a -> s{_lmMetricDescriptor = a})
+
+-- | Output only. The last update timestamp of the metric.This field may not
+-- be present for older metrics.
+lmUpdateTime :: Lens' LogMetric (Maybe UTCTime)
+lmUpdateTime
+  = lens _lmUpdateTime (\ s a -> s{_lmUpdateTime = a})
+      . mapping _DateTime
 
 -- | Required. The client-assigned metric identifier. Examples:
 -- \"error_count\", \"nginx\/requests\".Metric identifiers are limited to
@@ -2829,36 +2980,48 @@ lmDescription
   = lens _lmDescription
       (\ s a -> s{_lmDescription = a})
 
+-- | Output only. The creation timestamp of the metric.This field may not be
+-- present for older metrics.
+lmCreateTime :: Lens' LogMetric (Maybe UTCTime)
+lmCreateTime
+  = lens _lmCreateTime (\ s a -> s{_lmCreateTime = a})
+      . mapping _DateTime
+
 instance FromJSON LogMetric where
         parseJSON
           = withObject "LogMetric"
               (\ o ->
                  LogMetric' <$>
-                   (o .:? "metricDescriptor") <*> (o .:? "name") <*>
-                     (o .:? "version")
+                   (o .:? "metricDescriptor") <*> (o .:? "updateTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "version")
                      <*> (o .:? "labelExtractors")
                      <*> (o .:? "filter")
                      <*> (o .:? "valueExtractor")
                      <*> (o .:? "bucketOptions")
-                     <*> (o .:? "description"))
+                     <*> (o .:? "description")
+                     <*> (o .:? "createTime"))
 
 instance ToJSON LogMetric where
         toJSON LogMetric'{..}
           = object
               (catMaybes
                  [("metricDescriptor" .=) <$> _lmMetricDescriptor,
+                  ("updateTime" .=) <$> _lmUpdateTime,
                   ("name" .=) <$> _lmName,
                   ("version" .=) <$> _lmVersion,
                   ("labelExtractors" .=) <$> _lmLabelExtractors,
                   ("filter" .=) <$> _lmFilter,
                   ("valueExtractor" .=) <$> _lmValueExtractor,
                   ("bucketOptions" .=) <$> _lmBucketOptions,
-                  ("description" .=) <$> _lmDescription])
+                  ("description" .=) <$> _lmDescription,
+                  ("createTime" .=) <$> _lmCreateTime])
 
 -- | An individual entry in a log.
 --
 -- /See:/ 'logEntry' smart constructor.
-data LogEntry = LogEntry'
+data LogEntry =
+  LogEntry'
     { _leOperation        :: !(Maybe LogEntryOperation)
     , _leSeverity         :: !(Maybe LogEntrySeverity)
     , _leTextPayload      :: !(Maybe Text)
@@ -2876,7 +3039,9 @@ data LogEntry = LogEntry'
     , _leTimestamp        :: !(Maybe DateTime')
     , _leTrace            :: !(Maybe Text)
     , _leSpanId           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntry' with the minimum fields required to make a request.
 --
@@ -2918,7 +3083,7 @@ data LogEntry = LogEntry'
 logEntry
     :: LogEntry
 logEntry =
-    LogEntry'
+  LogEntry'
     { _leOperation = Nothing
     , _leSeverity = Nothing
     , _leTextPayload = Nothing
@@ -2937,6 +3102,7 @@ logEntry =
     , _leTrace = Nothing
     , _leSpanId = Nothing
     }
+
 
 -- | Optional. Information about an operation associated with the log entry,
 -- if applicable.
@@ -2970,10 +3136,10 @@ leHTTPRequest
   = lens _leHTTPRequest
       (\ s a -> s{_leHTTPRequest = a})
 
--- | Required. The primary monitored resource associated with this log entry.
--- Example: a log entry that reports a database error would be associated
--- with the monitored resource designating the particular database that
--- reported the error.
+-- | Required. The primary monitored resource associated with this log
+-- entry.Example: a log entry that reports a database error would be
+-- associated with the monitored resource designating the particular
+-- database that reported the error.
 leResource :: Lens' LogEntry (Maybe MonitoredResource)
 leResource
   = lens _leResource (\ s a -> s{_leResource = a})
@@ -2988,7 +3154,7 @@ leInsertId :: Lens' LogEntry (Maybe Text)
 leInsertId
   = lens _leInsertId (\ s a -> s{_leInsertId = a})
 
--- | Output only. Additional metadata about the monitored resource. Only
+-- | Output only. Additional metadata about the monitored resource.Only
 -- k8s_container, k8s_pod, and k8s_node MonitoredResources have this field
 -- populated.
 leMetadata :: Lens' LogEntry (Maybe MonitoredResourceMetadata)
@@ -3022,7 +3188,7 @@ leSourceLocation
       (\ s a -> s{_leSourceLocation = a})
 
 -- | Optional. The sampling decision of the trace associated with the log
--- entry. True means that the trace resource name in the trace field was
+-- entry.True means that the trace resource name in the trace field was
 -- sampled for storage in a trace backend. False means that the trace was
 -- not sampled for storage when this log entry was written, or the sampling
 -- decision was unknown at the time. A non-sampled trace value is still
@@ -3076,8 +3242,8 @@ leTimestamp
 leTrace :: Lens' LogEntry (Maybe Text)
 leTrace = lens _leTrace (\ s a -> s{_leTrace = a})
 
--- | Optional. The span ID within the trace associated with the log entry.
--- For Trace spans, this is the same format that the Trace API v2 uses: a
+-- | Optional. The span ID within the trace associated with the log entry.For
+-- Trace spans, this is the same format that the Trace API v2 uses: a
 -- 16-character hexadecimal encoding of an 8-byte array, such as
 -- '\"000000000000004a\"'.
 leSpanId :: Lens' LogEntry (Maybe Text)
@@ -3130,11 +3296,14 @@ instance ToJSON LogEntry where
 -- | Specifies a location in a source code file.
 --
 -- /See:/ 'sourceLocation' smart constructor.
-data SourceLocation = SourceLocation'
+data SourceLocation =
+  SourceLocation'
     { _slLine         :: !(Maybe (Textual Int64))
     , _slFunctionName :: !(Maybe Text)
     , _slFile         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
 --
@@ -3148,11 +3317,9 @@ data SourceLocation = SourceLocation'
 sourceLocation
     :: SourceLocation
 sourceLocation =
-    SourceLocation'
-    { _slLine = Nothing
-    , _slFunctionName = Nothing
-    , _slFile = Nothing
-    }
+  SourceLocation'
+    {_slLine = Nothing, _slFunctionName = Nothing, _slFile = Nothing}
+
 
 -- | Line within the source file.
 slLine :: Lens' SourceLocation (Maybe Int64)
@@ -3208,11 +3375,14 @@ instance ToJSON SourceLocation where
 -- finite buckets are so-called because both bounds are finite.
 --
 -- /See:/ 'bucketOptions' smart constructor.
-data BucketOptions = BucketOptions'
+data BucketOptions =
+  BucketOptions'
     { _boExponentialBuckets :: !(Maybe Exponential)
     , _boLinearBuckets      :: !(Maybe Linear)
     , _boExplicitBuckets    :: !(Maybe Explicit)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketOptions' with the minimum fields required to make a request.
 --
@@ -3226,11 +3396,12 @@ data BucketOptions = BucketOptions'
 bucketOptions
     :: BucketOptions
 bucketOptions =
-    BucketOptions'
+  BucketOptions'
     { _boExponentialBuckets = Nothing
     , _boLinearBuckets = Nothing
     , _boExplicitBuckets = Nothing
     }
+
 
 -- | The exponential buckets.
 boExponentialBuckets :: Lens' BucketOptions (Maybe Exponential)
@@ -3271,10 +3442,13 @@ instance ToJSON BucketOptions where
 -- and deploy an application.
 --
 -- /See:/ 'sourceReference' smart constructor.
-data SourceReference = SourceReference'
+data SourceReference =
+  SourceReference'
     { _srRepository :: !(Maybe Text)
     , _srRevisionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceReference' with the minimum fields required to make a request.
 --
@@ -3286,10 +3460,8 @@ data SourceReference = SourceReference'
 sourceReference
     :: SourceReference
 sourceReference =
-    SourceReference'
-    { _srRepository = Nothing
-    , _srRevisionId = Nothing
-    }
+  SourceReference' {_srRepository = Nothing, _srRevisionId = Nothing}
+
 
 -- | Optional. A URI string identifying the repository. Example:
 -- \"https:\/\/github.com\/GoogleCloudPlatform\/kubernetes.git\"
@@ -3321,9 +3493,12 @@ instance ToJSON SourceReference where
 -- JSON object.
 --
 -- /See:/ 'logEntryJSONPayload' smart constructor.
-newtype LogEntryJSONPayload = LogEntryJSONPayload'
+newtype LogEntryJSONPayload =
+  LogEntryJSONPayload'
     { _lejpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntryJSONPayload' with the minimum fields required to make a request.
 --
@@ -3334,9 +3509,8 @@ logEntryJSONPayload
     :: HashMap Text JSONValue -- ^ 'lejpAddtional'
     -> LogEntryJSONPayload
 logEntryJSONPayload pLejpAddtional_ =
-    LogEntryJSONPayload'
-    { _lejpAddtional = _Coerce # pLejpAddtional_
-    }
+  LogEntryJSONPayload' {_lejpAddtional = _Coerce # pLejpAddtional_}
+
 
 -- | Properties of the object.
 lejpAddtional :: Lens' LogEntryJSONPayload (HashMap Text JSONValue)

@@ -63,13 +63,16 @@ type SnapshotsListResource =
 -- project.
 --
 -- /See:/ 'snapshotsList' smart constructor.
-data SnapshotsList = SnapshotsList'
+data SnapshotsList =
+  SnapshotsList'
     { _snaOrderBy    :: !(Maybe Text)
     , _snaProject    :: !Text
     , _snaFilter     :: !(Maybe Text)
     , _snaPageToken  :: !(Maybe Text)
     , _snaMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SnapshotsList' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ snapshotsList
     :: Text -- ^ 'snaProject'
     -> SnapshotsList
 snapshotsList pSnaProject_ =
-    SnapshotsList'
+  SnapshotsList'
     { _snaOrderBy = Nothing
     , _snaProject = pSnaProject_
     , _snaFilter = Nothing
     , _snaPageToken = Nothing
     , _snaMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

@@ -25,10 +25,13 @@ import           Network.Google.Prelude
 -- availability.
 --
 -- /See:/ 'singleClusterRouting' smart constructor.
-data SingleClusterRouting = SingleClusterRouting'
+data SingleClusterRouting =
+  SingleClusterRouting'
     { _scrAllowTransactionalWrites :: !(Maybe Bool)
     , _scrClusterId                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SingleClusterRouting' with the minimum fields required to make a request.
 --
@@ -40,10 +43,9 @@ data SingleClusterRouting = SingleClusterRouting'
 singleClusterRouting
     :: SingleClusterRouting
 singleClusterRouting =
-    SingleClusterRouting'
-    { _scrAllowTransactionalWrites = Nothing
-    , _scrClusterId = Nothing
-    }
+  SingleClusterRouting'
+    {_scrAllowTransactionalWrites = Nothing, _scrClusterId = Nothing}
+
 
 -- | Whether or not \`CheckAndMutateRow\` and \`ReadModifyWriteRow\` requests
 -- are allowed by this app profile. It is unsafe to send these requests to
@@ -85,9 +87,12 @@ instance ToJSON SingleClusterRouting where
 -- values must both be under 128 bytes.
 --
 -- /See:/ 'instanceLabels' smart constructor.
-newtype InstanceLabels = InstanceLabels'
+newtype InstanceLabels =
+  InstanceLabels'
     { _ilAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceLabels' with the minimum fields required to make a request.
 --
@@ -98,9 +103,8 @@ instanceLabels
     :: HashMap Text Text -- ^ 'ilAddtional'
     -> InstanceLabels
 instanceLabels pIlAddtional_ =
-    InstanceLabels'
-    { _ilAddtional = _Coerce # pIlAddtional_
-    }
+  InstanceLabels' {_ilAddtional = _Coerce # pIlAddtional_}
+
 
 ilAddtional :: Lens' InstanceLabels (HashMap Text Text)
 ilAddtional
@@ -152,11 +156,14 @@ instance ToJSON InstanceLabels where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -169,12 +176,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -215,12 +218,15 @@ instance ToJSON Status where
 -- | Request message for BigtableInstanceAdmin.CreateInstance.
 --
 -- /See:/ 'createInstanceRequest' smart constructor.
-data CreateInstanceRequest = CreateInstanceRequest'
+data CreateInstanceRequest =
+  CreateInstanceRequest'
     { _cirParent     :: !(Maybe Text)
     , _cirInstanceId :: !(Maybe Text)
     , _cirClusters   :: !(Maybe CreateInstanceRequestClusters)
     , _cirInstance   :: !(Maybe Instance)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateInstanceRequest' with the minimum fields required to make a request.
 --
@@ -236,12 +242,13 @@ data CreateInstanceRequest = CreateInstanceRequest'
 createInstanceRequest
     :: CreateInstanceRequest
 createInstanceRequest =
-    CreateInstanceRequest'
+  CreateInstanceRequest'
     { _cirParent = Nothing
     , _cirInstanceId = Nothing
     , _cirClusters = Nothing
     , _cirInstance = Nothing
     }
+
 
 -- | The unique name of the project in which to create the new instance.
 -- Values are of the form \`projects\/\`.
@@ -308,10 +315,13 @@ instance ToJSON CreateInstanceRequest where
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -322,11 +332,8 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -363,14 +370,16 @@ instance ToJSON AuditConfig where
 --
 -- /See:/ 'generateConsistencyTokenRequest' smart constructor.
 data GenerateConsistencyTokenRequest =
-    GenerateConsistencyTokenRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GenerateConsistencyTokenRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateConsistencyTokenRequest' with the minimum fields required to make a request.
 --
 generateConsistencyTokenRequest
     :: GenerateConsistencyTokenRequest
 generateConsistencyTokenRequest = GenerateConsistencyTokenRequest'
+
 
 instance FromJSON GenerateConsistencyTokenRequest
          where
@@ -385,9 +394,12 @@ instance ToJSON GenerateConsistencyTokenRequest where
 -- google.bigtable.admin.v2.BigtableTableAdmin.ModifyColumnFamilies
 --
 -- /See:/ 'modifyColumnFamiliesRequest' smart constructor.
-newtype ModifyColumnFamiliesRequest = ModifyColumnFamiliesRequest'
+newtype ModifyColumnFamiliesRequest =
+  ModifyColumnFamiliesRequest'
     { _mcfrModifications :: Maybe [Modification]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ModifyColumnFamiliesRequest' with the minimum fields required to make a request.
 --
@@ -397,9 +409,8 @@ newtype ModifyColumnFamiliesRequest = ModifyColumnFamiliesRequest'
 modifyColumnFamiliesRequest
     :: ModifyColumnFamiliesRequest
 modifyColumnFamiliesRequest =
-    ModifyColumnFamiliesRequest'
-    { _mcfrModifications = Nothing
-    }
+  ModifyColumnFamiliesRequest' {_mcfrModifications = Nothing}
+
 
 -- | Modifications to be atomically applied to the specified table\'s
 -- families. Entries are applied in order, meaning that earlier
@@ -430,12 +441,15 @@ instance ToJSON ModifyColumnFamiliesRequest where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -451,12 +465,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -504,10 +519,13 @@ instance ToJSON Expr where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -519,10 +537,9 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -556,11 +573,14 @@ instance ToJSON ListOperationsResponse where
 -- | Request message for BigtableInstanceAdmin.CreateCluster.
 --
 -- /See:/ 'createClusterRequest' smart constructor.
-data CreateClusterRequest = CreateClusterRequest'
+data CreateClusterRequest =
+  CreateClusterRequest'
     { _ccrParent    :: !(Maybe Text)
     , _ccrCluster   :: !(Maybe Cluster)
     , _ccrClusterId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateClusterRequest' with the minimum fields required to make a request.
 --
@@ -574,11 +594,9 @@ data CreateClusterRequest = CreateClusterRequest'
 createClusterRequest
     :: CreateClusterRequest
 createClusterRequest =
-    CreateClusterRequest'
-    { _ccrParent = Nothing
-    , _ccrCluster = Nothing
-    , _ccrClusterId = Nothing
-    }
+  CreateClusterRequest'
+    {_ccrParent = Nothing, _ccrCluster = Nothing, _ccrClusterId = Nothing}
+
 
 -- | The unique name of the instance in which to create the new cluster.
 -- Values are of the form \`projects\/\/instances\/\`.
@@ -619,14 +637,16 @@ instance ToJSON CreateClusterRequest where
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
-    GetIAMPolicyRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GetIAMPolicyRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -640,13 +660,16 @@ instance ToJSON GetIAMPolicyRequest where
 -- serving all Tables in the parent Instance.
 --
 -- /See:/ 'cluster' smart constructor.
-data Cluster = Cluster'
+data Cluster =
+  Cluster'
     { _cState              :: !(Maybe ClusterType)
     , _cDefaultStorageType :: !(Maybe ClusterDefaultStorageType)
     , _cLocation           :: !(Maybe Text)
     , _cServeNodes         :: !(Maybe (Textual Int32))
     , _cName               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Cluster' with the minimum fields required to make a request.
 --
@@ -664,13 +687,14 @@ data Cluster = Cluster'
 cluster
     :: Cluster
 cluster =
-    Cluster'
+  Cluster'
     { _cState = Nothing
     , _cDefaultStorageType = Nothing
     , _cLocation = Nothing
     , _cServeNodes = Nothing
     , _cName = Nothing
     }
+
 
 -- | (\`OutputOnly\`) The current state of the cluster.
 cState :: Lens' Cluster (Maybe ClusterType)
@@ -726,9 +750,12 @@ instance ToJSON Cluster where
 -- | An initial split point for a newly created table.
 --
 -- /See:/ 'split' smart constructor.
-newtype Split = Split'
+newtype Split =
+  Split'
     { _sKey :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Split' with the minimum fields required to make a request.
 --
@@ -737,10 +764,8 @@ newtype Split = Split'
 -- * 'sKey'
 split
     :: Split
-split =
-    Split'
-    { _sKey = Nothing
-    }
+split = Split' {_sKey = Nothing}
+
 
 -- | Row key to use as an initial tablet boundary.
 sKey :: Lens' Split (Maybe ByteString)
@@ -763,14 +788,16 @@ instance ToJSON Split where
 --
 -- /See:/ 'multiClusterRoutingUseAny' smart constructor.
 data MultiClusterRoutingUseAny =
-    MultiClusterRoutingUseAny'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  MultiClusterRoutingUseAny'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MultiClusterRoutingUseAny' with the minimum fields required to make a request.
 --
 multiClusterRoutingUseAny
     :: MultiClusterRoutingUseAny
 multiClusterRoutingUseAny = MultiClusterRoutingUseAny'
+
 
 instance FromJSON MultiClusterRoutingUseAny where
         parseJSON
@@ -783,9 +810,12 @@ instance ToJSON MultiClusterRoutingUseAny where
 -- | The state of a table\'s data in a particular cluster.
 --
 -- /See:/ 'clusterState' smart constructor.
-newtype ClusterState = ClusterState'
+newtype ClusterState =
+  ClusterState'
     { _csReplicationState :: Maybe ClusterStateReplicationState
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClusterState' with the minimum fields required to make a request.
 --
@@ -794,10 +824,8 @@ newtype ClusterState = ClusterState'
 -- * 'csReplicationState'
 clusterState
     :: ClusterState
-clusterState =
-    ClusterState'
-    { _csReplicationState = Nothing
-    }
+clusterState = ClusterState' {_csReplicationState = Nothing}
+
 
 -- | (\`OutputOnly\`) The state of replication for the table in this cluster.
 csReplicationState :: Lens' ClusterState (Maybe ClusterStateReplicationState)
@@ -820,13 +848,16 @@ instance ToJSON ClusterState where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -844,13 +875,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -915,14 +947,16 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -933,11 +967,14 @@ instance ToJSON Empty where
 -- | Response message for BigtableInstanceAdmin.ListAppProfiles.
 --
 -- /See:/ 'listAppProFilesResponse' smart constructor.
-data ListAppProFilesResponse = ListAppProFilesResponse'
+data ListAppProFilesResponse =
+  ListAppProFilesResponse'
     { _lapfrNextPageToken   :: !(Maybe Text)
     , _lapfrFailedLocations :: !(Maybe [Text])
     , _lapfrAppProFiles     :: !(Maybe [AppProFile])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAppProFilesResponse' with the minimum fields required to make a request.
 --
@@ -951,11 +988,12 @@ data ListAppProFilesResponse = ListAppProFilesResponse'
 listAppProFilesResponse
     :: ListAppProFilesResponse
 listAppProFilesResponse =
-    ListAppProFilesResponse'
+  ListAppProFilesResponse'
     { _lapfrNextPageToken = Nothing
     , _lapfrFailedLocations = Nothing
     , _lapfrAppProFiles = Nothing
     }
+
 
 -- | Set if not all app profiles could be returned in a single response. Pass
 -- this value to \`page_token\` in another request to get the next page of
@@ -1008,9 +1046,12 @@ instance ToJSON ListAppProFilesResponse where
 -- Views: \`REPLICATION_VIEW\`, \`FULL\`
 --
 -- /See:/ 'tableClusterStates' smart constructor.
-newtype TableClusterStates = TableClusterStates'
+newtype TableClusterStates =
+  TableClusterStates'
     { _tcsAddtional :: HashMap Text ClusterState
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TableClusterStates' with the minimum fields required to make a request.
 --
@@ -1021,9 +1062,8 @@ tableClusterStates
     :: HashMap Text ClusterState -- ^ 'tcsAddtional'
     -> TableClusterStates
 tableClusterStates pTcsAddtional_ =
-    TableClusterStates'
-    { _tcsAddtional = _Coerce # pTcsAddtional_
-    }
+  TableClusterStates' {_tcsAddtional = _Coerce # pTcsAddtional_}
+
 
 tcsAddtional :: Lens' TableClusterStates (HashMap Text ClusterState)
 tcsAddtional
@@ -1042,9 +1082,12 @@ instance ToJSON TableClusterStates where
 -- by column family ID. Views: \`SCHEMA_VIEW\`, \`FULL\`
 --
 -- /See:/ 'tableColumnFamilies' smart constructor.
-newtype TableColumnFamilies = TableColumnFamilies'
+newtype TableColumnFamilies =
+  TableColumnFamilies'
     { _tcfAddtional :: HashMap Text ColumnFamily
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TableColumnFamilies' with the minimum fields required to make a request.
 --
@@ -1055,9 +1098,8 @@ tableColumnFamilies
     :: HashMap Text ColumnFamily -- ^ 'tcfAddtional'
     -> TableColumnFamilies
 tableColumnFamilies pTcfAddtional_ =
-    TableColumnFamilies'
-    { _tcfAddtional = _Coerce # pTcfAddtional_
-    }
+  TableColumnFamilies' {_tcfAddtional = _Coerce # pTcfAddtional_}
+
 
 tcfAddtional :: Lens' TableColumnFamilies (HashMap Text ColumnFamily)
 tcfAddtional
@@ -1076,11 +1118,14 @@ instance ToJSON TableColumnFamilies where
 -- google.bigtable.admin.v2.BigtableTableAdmin.CreateTable
 --
 -- /See:/ 'createTableRequest' smart constructor.
-data CreateTableRequest = CreateTableRequest'
+data CreateTableRequest =
+  CreateTableRequest'
     { _ctrInitialSplits :: !(Maybe [Split])
     , _ctrTableId       :: !(Maybe Text)
     , _ctrTable         :: !(Maybe Table)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateTableRequest' with the minimum fields required to make a request.
 --
@@ -1094,11 +1139,9 @@ data CreateTableRequest = CreateTableRequest'
 createTableRequest
     :: CreateTableRequest
 createTableRequest =
-    CreateTableRequest'
-    { _ctrInitialSplits = Nothing
-    , _ctrTableId = Nothing
-    , _ctrTable = Nothing
-    }
+  CreateTableRequest'
+    {_ctrInitialSplits = Nothing, _ctrTableId = Nothing, _ctrTable = Nothing}
+
 
 -- | The optional list of row keys that will be used to initially split the
 -- table into several tablets (tablets are similar to HBase regions). Given
@@ -1148,11 +1191,15 @@ instance ToJSON CreateTableRequest where
 -- | The metadata for the Operation returned by CreateCluster.
 --
 -- /See:/ 'createClusterMetadata' smart constructor.
-data CreateClusterMetadata = CreateClusterMetadata'
+data CreateClusterMetadata =
+  CreateClusterMetadata'
     { _ccmRequestTime     :: !(Maybe DateTime')
+    , _ccmTables          :: !(Maybe CreateClusterMetadataTables)
     , _ccmOriginalRequest :: !(Maybe CreateClusterRequest)
     , _ccmFinishTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateClusterMetadata' with the minimum fields required to make a request.
 --
@@ -1160,17 +1207,21 @@ data CreateClusterMetadata = CreateClusterMetadata'
 --
 -- * 'ccmRequestTime'
 --
+-- * 'ccmTables'
+--
 -- * 'ccmOriginalRequest'
 --
 -- * 'ccmFinishTime'
 createClusterMetadata
     :: CreateClusterMetadata
 createClusterMetadata =
-    CreateClusterMetadata'
+  CreateClusterMetadata'
     { _ccmRequestTime = Nothing
+    , _ccmTables = Nothing
     , _ccmOriginalRequest = Nothing
     , _ccmFinishTime = Nothing
     }
+
 
 -- | The time at which the original request was received.
 ccmRequestTime :: Lens' CreateClusterMetadata (Maybe UTCTime)
@@ -1178,6 +1229,16 @@ ccmRequestTime
   = lens _ccmRequestTime
       (\ s a -> s{_ccmRequestTime = a})
       . mapping _DateTime
+
+-- | Keys: the full \`name\` of each table that existed in the instance when
+-- CreateCluster was first called, i.e. \`projects\/\/instances\/\/tables\/
+-- \`. Any table added to the instance by a later API call will be created
+-- in the new cluster by that API call, not this one. Values: information
+-- on how much of a table\'s data has been copied to the newly-created
+-- cluster so far.
+ccmTables :: Lens' CreateClusterMetadata (Maybe CreateClusterMetadataTables)
+ccmTables
+  = lens _ccmTables (\ s a -> s{_ccmTables = a})
 
 -- | The request that prompted the initiation of this CreateCluster
 -- operation.
@@ -1198,7 +1259,8 @@ instance FromJSON CreateClusterMetadata where
           = withObject "CreateClusterMetadata"
               (\ o ->
                  CreateClusterMetadata' <$>
-                   (o .:? "requestTime") <*> (o .:? "originalRequest")
+                   (o .:? "requestTime") <*> (o .:? "tables") <*>
+                     (o .:? "originalRequest")
                      <*> (o .:? "finishTime"))
 
 instance ToJSON CreateClusterMetadata where
@@ -1206,15 +1268,86 @@ instance ToJSON CreateClusterMetadata where
           = object
               (catMaybes
                  [("requestTime" .=) <$> _ccmRequestTime,
+                  ("tables" .=) <$> _ccmTables,
                   ("originalRequest" .=) <$> _ccmOriginalRequest,
                   ("finishTime" .=) <$> _ccmFinishTime])
+
+-- | Progress info for copying a table\'s data to the new cluster.
+--
+-- /See:/ 'tableProgress' smart constructor.
+data TableProgress =
+  TableProgress'
+    { _tpState                :: !(Maybe TableProgressState)
+    , _tpEstimatedSizeBytes   :: !(Maybe (Textual Int64))
+    , _tpEstimatedCopiedBytes :: !(Maybe (Textual Int64))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TableProgress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpState'
+--
+-- * 'tpEstimatedSizeBytes'
+--
+-- * 'tpEstimatedCopiedBytes'
+tableProgress
+    :: TableProgress
+tableProgress =
+  TableProgress'
+    { _tpState = Nothing
+    , _tpEstimatedSizeBytes = Nothing
+    , _tpEstimatedCopiedBytes = Nothing
+    }
+
+
+tpState :: Lens' TableProgress (Maybe TableProgressState)
+tpState = lens _tpState (\ s a -> s{_tpState = a})
+
+-- | Estimate of the size of the table to be copied.
+tpEstimatedSizeBytes :: Lens' TableProgress (Maybe Int64)
+tpEstimatedSizeBytes
+  = lens _tpEstimatedSizeBytes
+      (\ s a -> s{_tpEstimatedSizeBytes = a})
+      . mapping _Coerce
+
+-- | Estimate of the number of bytes copied so far for this table. This will
+-- eventually reach \'estimated_size_bytes\' unless the table copy is
+-- CANCELLED.
+tpEstimatedCopiedBytes :: Lens' TableProgress (Maybe Int64)
+tpEstimatedCopiedBytes
+  = lens _tpEstimatedCopiedBytes
+      (\ s a -> s{_tpEstimatedCopiedBytes = a})
+      . mapping _Coerce
+
+instance FromJSON TableProgress where
+        parseJSON
+          = withObject "TableProgress"
+              (\ o ->
+                 TableProgress' <$>
+                   (o .:? "state") <*> (o .:? "estimatedSizeBytes") <*>
+                     (o .:? "estimatedCopiedBytes"))
+
+instance ToJSON TableProgress where
+        toJSON TableProgress'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _tpState,
+                  ("estimatedSizeBytes" .=) <$> _tpEstimatedSizeBytes,
+                  ("estimatedCopiedBytes" .=) <$>
+                    _tpEstimatedCopiedBytes])
 
 -- | A GcRule which deletes cells matching any of the given rules.
 --
 -- /See:/ 'union' smart constructor.
-newtype Union = Union'
+newtype Union =
+  Union'
     { _uRules :: Maybe [GcRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Union' with the minimum fields required to make a request.
 --
@@ -1223,10 +1356,8 @@ newtype Union = Union'
 -- * 'uRules'
 union
     :: Union
-union =
-    Union'
-    { _uRules = Nothing
-    }
+union = Union' {_uRules = Nothing}
+
 
 -- | Delete cells which would be deleted by any element of \`rules\`.
 uRules :: Lens' Union [GcRule]
@@ -1245,9 +1376,12 @@ instance ToJSON Union where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1258,9 +1392,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1276,18 +1409,62 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
+-- | Keys: the full \`name\` of each table that existed in the instance when
+-- CreateCluster was first called, i.e. \`projects\/\/instances\/\/tables\/
+-- \`. Any table added to the instance by a later API call will be created
+-- in the new cluster by that API call, not this one. Values: information
+-- on how much of a table\'s data has been copied to the newly-created
+-- cluster so far.
+--
+-- /See:/ 'createClusterMetadataTables' smart constructor.
+newtype CreateClusterMetadataTables =
+  CreateClusterMetadataTables'
+    { _ccmtAddtional :: HashMap Text TableProgress
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CreateClusterMetadataTables' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccmtAddtional'
+createClusterMetadataTables
+    :: HashMap Text TableProgress -- ^ 'ccmtAddtional'
+    -> CreateClusterMetadataTables
+createClusterMetadataTables pCcmtAddtional_ =
+  CreateClusterMetadataTables' {_ccmtAddtional = _Coerce # pCcmtAddtional_}
+
+
+ccmtAddtional :: Lens' CreateClusterMetadataTables (HashMap Text TableProgress)
+ccmtAddtional
+  = lens _ccmtAddtional
+      (\ s a -> s{_ccmtAddtional = a})
+      . _Coerce
+
+instance FromJSON CreateClusterMetadataTables where
+        parseJSON
+          = withObject "CreateClusterMetadataTables"
+              (\ o ->
+                 CreateClusterMetadataTables' <$> (parseJSONObject o))
+
+instance ToJSON CreateClusterMetadataTables where
+        toJSON = toJSON . _ccmtAddtional
+
 -- | The metadata for the Operation returned by UpdateAppProfile.
 --
 -- /See:/ 'updateAppProFileMetadata' smart constructor.
 data UpdateAppProFileMetadata =
-    UpdateAppProFileMetadata'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  UpdateAppProFileMetadata'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateAppProFileMetadata' with the minimum fields required to make a request.
 --
 updateAppProFileMetadata
     :: UpdateAppProFileMetadata
 updateAppProFileMetadata = UpdateAppProFileMetadata'
+
 
 instance FromJSON UpdateAppProFileMetadata where
         parseJSON
@@ -1300,11 +1477,14 @@ instance ToJSON UpdateAppProFileMetadata where
 -- | The metadata for the Operation returned by UpdateCluster.
 --
 -- /See:/ 'updateClusterMetadata' smart constructor.
-data UpdateClusterMetadata = UpdateClusterMetadata'
+data UpdateClusterMetadata =
+  UpdateClusterMetadata'
     { _ucmRequestTime     :: !(Maybe DateTime')
     , _ucmOriginalRequest :: !(Maybe Cluster)
     , _ucmFinishTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateClusterMetadata' with the minimum fields required to make a request.
 --
@@ -1318,11 +1498,12 @@ data UpdateClusterMetadata = UpdateClusterMetadata'
 updateClusterMetadata
     :: UpdateClusterMetadata
 updateClusterMetadata =
-    UpdateClusterMetadata'
+  UpdateClusterMetadata'
     { _ucmRequestTime = Nothing
     , _ucmOriginalRequest = Nothing
     , _ucmFinishTime = Nothing
     }
+
 
 -- | The time at which the original request was received.
 ucmRequestTime :: Lens' UpdateClusterMetadata (Maybe UTCTime)
@@ -1364,10 +1545,13 @@ instance ToJSON UpdateClusterMetadata where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-data SetIAMPolicyRequest = SetIAMPolicyRequest'
+data SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
     , _siprPolicy     :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -1379,10 +1563,8 @@ data SetIAMPolicyRequest = SetIAMPolicyRequest'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprUpdateMask = Nothing
-    , _siprPolicy = Nothing
-    }
+  SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -1419,9 +1601,12 @@ instance ToJSON SetIAMPolicyRequest where
 -- google.bigtable.admin.v2.BigtableTableAdmin.CheckConsistency
 --
 -- /See:/ 'checkConsistencyRequest' smart constructor.
-newtype CheckConsistencyRequest = CheckConsistencyRequest'
+newtype CheckConsistencyRequest =
+  CheckConsistencyRequest'
     { _ccrConsistencyToken :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckConsistencyRequest' with the minimum fields required to make a request.
 --
@@ -1431,9 +1616,8 @@ newtype CheckConsistencyRequest = CheckConsistencyRequest'
 checkConsistencyRequest
     :: CheckConsistencyRequest
 checkConsistencyRequest =
-    CheckConsistencyRequest'
-    { _ccrConsistencyToken = Nothing
-    }
+  CheckConsistencyRequest' {_ccrConsistencyToken = Nothing}
+
 
 -- | The token created using GenerateConsistencyToken for the Table.
 ccrConsistencyToken :: Lens' CheckConsistencyRequest (Maybe Text)
@@ -1458,10 +1642,13 @@ instance ToJSON CheckConsistencyRequest where
 -- google.bigtable.admin.v2.BigtableTableAdmin.ListTables
 --
 -- /See:/ 'listTablesResponse' smart constructor.
-data ListTablesResponse = ListTablesResponse'
+data ListTablesResponse =
+  ListTablesResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTables        :: !(Maybe [Table])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListTablesResponse' with the minimum fields required to make a request.
 --
@@ -1473,10 +1660,8 @@ data ListTablesResponse = ListTablesResponse'
 listTablesResponse
     :: ListTablesResponse
 listTablesResponse =
-    ListTablesResponse'
-    { _ltrNextPageToken = Nothing
-    , _ltrTables = Nothing
-    }
+  ListTablesResponse' {_ltrNextPageToken = Nothing, _ltrTables = Nothing}
+
 
 -- | Set if not all tables could be returned in a single response. Pass this
 -- value to \`page_token\` in another request to get the next page of
@@ -1511,10 +1696,13 @@ instance ToJSON ListTablesResponse where
 -- | Request message for BigtableInstanceAdmin.PartialUpdateInstance.
 --
 -- /See:/ 'partialUpdateInstanceRequest' smart constructor.
-data PartialUpdateInstanceRequest = PartialUpdateInstanceRequest'
+data PartialUpdateInstanceRequest =
+  PartialUpdateInstanceRequest'
     { _puirUpdateMask :: !(Maybe GFieldMask)
     , _puirInstance   :: !(Maybe Instance)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartialUpdateInstanceRequest' with the minimum fields required to make a request.
 --
@@ -1526,10 +1714,9 @@ data PartialUpdateInstanceRequest = PartialUpdateInstanceRequest'
 partialUpdateInstanceRequest
     :: PartialUpdateInstanceRequest
 partialUpdateInstanceRequest =
-    PartialUpdateInstanceRequest'
-    { _puirUpdateMask = Nothing
-    , _puirInstance = Nothing
-    }
+  PartialUpdateInstanceRequest'
+    {_puirUpdateMask = Nothing, _puirInstance = Nothing}
+
 
 -- | The subset of Instance fields which should be replaced. Must be
 -- explicitly set.
@@ -1560,12 +1747,15 @@ instance ToJSON PartialUpdateInstanceRequest where
 -- | Rule for determining which cells to delete during garbage collection.
 --
 -- /See:/ 'gcRule' smart constructor.
-data GcRule = GcRule'
+data GcRule =
+  GcRule'
     { _grMaxAge         :: !(Maybe GDuration)
     , _grUnion          :: !(Maybe Union)
     , _grIntersection   :: !(Maybe Intersection)
     , _grMaxNumVersions :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GcRule' with the minimum fields required to make a request.
 --
@@ -1581,12 +1771,13 @@ data GcRule = GcRule'
 gcRule
     :: GcRule
 gcRule =
-    GcRule'
+  GcRule'
     { _grMaxAge = Nothing
     , _grUnion = Nothing
     , _grIntersection = Nothing
     , _grMaxNumVersions = Nothing
     }
+
 
 -- | Delete cells in a column older than the given age. Values must be at
 -- least one millisecond, and will be truncated to microsecond granularity.
@@ -1633,9 +1824,12 @@ instance ToJSON GcRule where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1645,9 +1839,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1676,13 +1869,16 @@ instance ToJSON TestIAMPermissionsRequest where
 -- traffic from a particular end user application.
 --
 -- /See:/ 'appProFile' smart constructor.
-data AppProFile = AppProFile'
+data AppProFile =
+  AppProFile'
     { _apfSingleClusterRouting      :: !(Maybe SingleClusterRouting)
     , _apfEtag                      :: !(Maybe Text)
     , _apfMultiClusterRoutingUseAny :: !(Maybe MultiClusterRoutingUseAny)
     , _apfName                      :: !(Maybe Text)
     , _apfDescription               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppProFile' with the minimum fields required to make a request.
 --
@@ -1700,13 +1896,14 @@ data AppProFile = AppProFile'
 appProFile
     :: AppProFile
 appProFile =
-    AppProFile'
+  AppProFile'
     { _apfSingleClusterRouting = Nothing
     , _apfEtag = Nothing
     , _apfMultiClusterRoutingUseAny = Nothing
     , _apfName = Nothing
     , _apfDescription = Nothing
     }
+
 
 -- | Use a single-cluster routing policy.
 apfSingleClusterRouting :: Lens' AppProFile (Maybe SingleClusterRouting)
@@ -1771,9 +1968,12 @@ instance ToJSON AppProFile where
 -- clusters can be specified.
 --
 -- /See:/ 'createInstanceRequestClusters' smart constructor.
-newtype CreateInstanceRequestClusters = CreateInstanceRequestClusters'
+newtype CreateInstanceRequestClusters =
+  CreateInstanceRequestClusters'
     { _circAddtional :: HashMap Text Cluster
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateInstanceRequestClusters' with the minimum fields required to make a request.
 --
@@ -1784,9 +1984,8 @@ createInstanceRequestClusters
     :: HashMap Text Cluster -- ^ 'circAddtional'
     -> CreateInstanceRequestClusters
 createInstanceRequestClusters pCircAddtional_ =
-    CreateInstanceRequestClusters'
-    { _circAddtional = _Coerce # pCircAddtional_
-    }
+  CreateInstanceRequestClusters' {_circAddtional = _Coerce # pCircAddtional_}
+
 
 circAddtional :: Lens' CreateInstanceRequestClusters (HashMap Text Cluster)
 circAddtional
@@ -1808,9 +2007,12 @@ instance ToJSON CreateInstanceRequestClusters where
 -- google.bigtable.admin.v2.BigtableTableAdmin.GenerateConsistencyToken
 --
 -- /See:/ 'generateConsistencyTokenResponse' smart constructor.
-newtype GenerateConsistencyTokenResponse = GenerateConsistencyTokenResponse'
+newtype GenerateConsistencyTokenResponse =
+  GenerateConsistencyTokenResponse'
     { _gctrConsistencyToken :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateConsistencyTokenResponse' with the minimum fields required to make a request.
 --
@@ -1820,9 +2022,8 @@ newtype GenerateConsistencyTokenResponse = GenerateConsistencyTokenResponse'
 generateConsistencyTokenResponse
     :: GenerateConsistencyTokenResponse
 generateConsistencyTokenResponse =
-    GenerateConsistencyTokenResponse'
-    { _gctrConsistencyToken = Nothing
-    }
+  GenerateConsistencyTokenResponse' {_gctrConsistencyToken = Nothing}
+
 
 -- | The generated consistency token.
 gctrConsistencyToken :: Lens' GenerateConsistencyTokenResponse (Maybe Text)
@@ -1849,10 +2050,13 @@ instance ToJSON GenerateConsistencyTokenResponse
 -- google.bigtable.admin.v2.BigtableTableAdmin.DropRowRange
 --
 -- /See:/ 'dropRowRangeRequest' smart constructor.
-data DropRowRangeRequest = DropRowRangeRequest'
+data DropRowRangeRequest =
+  DropRowRangeRequest'
     { _drrrRowKeyPrefix           :: !(Maybe Bytes)
     , _drrrDeleteAllDataFromTable :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DropRowRangeRequest' with the minimum fields required to make a request.
 --
@@ -1864,10 +2068,9 @@ data DropRowRangeRequest = DropRowRangeRequest'
 dropRowRangeRequest
     :: DropRowRangeRequest
 dropRowRangeRequest =
-    DropRowRangeRequest'
-    { _drrrRowKeyPrefix = Nothing
-    , _drrrDeleteAllDataFromTable = Nothing
-    }
+  DropRowRangeRequest'
+    {_drrrRowKeyPrefix = Nothing, _drrrDeleteAllDataFromTable = Nothing}
+
 
 -- | Delete all rows that start with this row key prefix. Prefix cannot be
 -- zero length.
@@ -1902,11 +2105,14 @@ instance ToJSON DropRowRangeRequest where
 -- | The metadata for the Operation returned by UpdateInstance.
 --
 -- /See:/ 'updateInstanceMetadata' smart constructor.
-data UpdateInstanceMetadata = UpdateInstanceMetadata'
+data UpdateInstanceMetadata =
+  UpdateInstanceMetadata'
     { _uimRequestTime     :: !(Maybe DateTime')
     , _uimOriginalRequest :: !(Maybe PartialUpdateInstanceRequest)
     , _uimFinishTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateInstanceMetadata' with the minimum fields required to make a request.
 --
@@ -1920,11 +2126,12 @@ data UpdateInstanceMetadata = UpdateInstanceMetadata'
 updateInstanceMetadata
     :: UpdateInstanceMetadata
 updateInstanceMetadata =
-    UpdateInstanceMetadata'
+  UpdateInstanceMetadata'
     { _uimRequestTime = Nothing
     , _uimOriginalRequest = Nothing
     , _uimFinishTime = Nothing
     }
+
 
 -- | The time at which the original request was received.
 uimRequestTime :: Lens' UpdateInstanceMetadata (Maybe UTCTime)
@@ -1966,9 +2173,12 @@ instance ToJSON UpdateInstanceMetadata where
 -- | A GcRule which deletes cells matching all of the given rules.
 --
 -- /See:/ 'intersection' smart constructor.
-newtype Intersection = Intersection'
+newtype Intersection =
+  Intersection'
     { _iRules :: Maybe [GcRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Intersection' with the minimum fields required to make a request.
 --
@@ -1977,10 +2187,8 @@ newtype Intersection = Intersection'
 -- * 'iRules'
 intersection
     :: Intersection
-intersection =
-    Intersection'
-    { _iRules = Nothing
-    }
+intersection = Intersection' {_iRules = Nothing}
+
 
 -- | Only delete cells which would be deleted by every element of \`rules\`.
 iRules :: Lens' Intersection [GcRule]
@@ -2000,9 +2208,12 @@ instance ToJSON Intersection where
 -- | A set of columns within a table which share a common configuration.
 --
 -- /See:/ 'columnFamily' smart constructor.
-newtype ColumnFamily = ColumnFamily'
+newtype ColumnFamily =
+  ColumnFamily'
     { _cfGcRule :: Maybe GcRule
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ColumnFamily' with the minimum fields required to make a request.
 --
@@ -2011,10 +2222,8 @@ newtype ColumnFamily = ColumnFamily'
 -- * 'cfGcRule'
 columnFamily
     :: ColumnFamily
-columnFamily =
-    ColumnFamily'
-    { _cfGcRule = Nothing
-    }
+columnFamily = ColumnFamily' {_cfGcRule = Nothing}
+
 
 -- | Garbage collection rule specified as a protobuf. Must serialize to at
 -- most 500 bytes. NOTE: Garbage collection executes opportunistically in
@@ -2035,9 +2244,12 @@ instance ToJSON ColumnFamily where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -2047,9 +2259,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -2076,11 +2287,14 @@ instance ToJSON TestIAMPermissionsResponse where
 -- | Response message for BigtableInstanceAdmin.ListClusters.
 --
 -- /See:/ 'listClustersResponse' smart constructor.
-data ListClustersResponse = ListClustersResponse'
+data ListClustersResponse =
+  ListClustersResponse'
     { _lcrNextPageToken   :: !(Maybe Text)
     , _lcrFailedLocations :: !(Maybe [Text])
     , _lcrClusters        :: !(Maybe [Cluster])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListClustersResponse' with the minimum fields required to make a request.
 --
@@ -2094,11 +2308,12 @@ data ListClustersResponse = ListClustersResponse'
 listClustersResponse
     :: ListClustersResponse
 listClustersResponse =
-    ListClustersResponse'
+  ListClustersResponse'
     { _lcrNextPageToken = Nothing
     , _lcrFailedLocations = Nothing
     , _lcrClusters = Nothing
     }
+
 
 -- | DEPRECATED: This field is unused and ignored.
 lcrNextPageToken :: Lens' ListClustersResponse (Maybe Text)
@@ -2160,12 +2375,15 @@ instance ToJSON ListClustersResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -2181,12 +2399,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -2244,11 +2463,14 @@ instance ToJSON Policy where
 -- | The metadata for the Operation returned by CreateInstance.
 --
 -- /See:/ 'createInstanceMetadata' smart constructor.
-data CreateInstanceMetadata = CreateInstanceMetadata'
+data CreateInstanceMetadata =
+  CreateInstanceMetadata'
     { _cimRequestTime     :: !(Maybe DateTime')
     , _cimOriginalRequest :: !(Maybe CreateInstanceRequest)
     , _cimFinishTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateInstanceMetadata' with the minimum fields required to make a request.
 --
@@ -2262,11 +2484,12 @@ data CreateInstanceMetadata = CreateInstanceMetadata'
 createInstanceMetadata
     :: CreateInstanceMetadata
 createInstanceMetadata =
-    CreateInstanceMetadata'
+  CreateInstanceMetadata'
     { _cimRequestTime = Nothing
     , _cimOriginalRequest = Nothing
     , _cimFinishTime = Nothing
     }
+
 
 -- | The time at which the original request was received.
 cimRequestTime :: Lens' CreateInstanceMetadata (Maybe UTCTime)
@@ -2311,9 +2534,12 @@ instance ToJSON CreateInstanceMetadata where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -2324,9 +2550,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -2349,10 +2574,13 @@ instance ToJSON OperationMetadata where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -2364,10 +2592,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -2401,11 +2627,14 @@ instance ToJSON AuditLogConfig where
 -- | Response message for BigtableInstanceAdmin.ListInstances.
 --
 -- /See:/ 'listInstancesResponse' smart constructor.
-data ListInstancesResponse = ListInstancesResponse'
+data ListInstancesResponse =
+  ListInstancesResponse'
     { _lirNextPageToken   :: !(Maybe Text)
     , _lirFailedLocations :: !(Maybe [Text])
     , _lirInstances       :: !(Maybe [Instance])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
@@ -2419,11 +2648,12 @@ data ListInstancesResponse = ListInstancesResponse'
 listInstancesResponse
     :: ListInstancesResponse
 listInstancesResponse =
-    ListInstancesResponse'
+  ListInstancesResponse'
     { _lirNextPageToken = Nothing
     , _lirFailedLocations = Nothing
     , _lirInstances = Nothing
     }
+
 
 -- | DEPRECATED: This field is unused and ignored.
 lirNextPageToken :: Lens' ListInstancesResponse (Maybe Text)
@@ -2472,9 +2702,12 @@ instance ToJSON ListInstancesResponse where
 -- google.bigtable.admin.v2.BigtableTableAdmin.CheckConsistency
 --
 -- /See:/ 'checkConsistencyResponse' smart constructor.
-newtype CheckConsistencyResponse = CheckConsistencyResponse'
+newtype CheckConsistencyResponse =
+  CheckConsistencyResponse'
     { _ccrConsistent :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckConsistencyResponse' with the minimum fields required to make a request.
 --
@@ -2483,10 +2716,8 @@ newtype CheckConsistencyResponse = CheckConsistencyResponse'
 -- * 'ccrConsistent'
 checkConsistencyResponse
     :: CheckConsistencyResponse
-checkConsistencyResponse =
-    CheckConsistencyResponse'
-    { _ccrConsistent = Nothing
-    }
+checkConsistencyResponse = CheckConsistencyResponse' {_ccrConsistent = Nothing}
+
 
 -- | True only if the token is consistent. A token is consistent if
 -- replication has caught up with the restrictions specified in the
@@ -2510,12 +2741,15 @@ instance ToJSON CheckConsistencyResponse where
 -- | A create, update, or delete of a particular column family.
 --
 -- /See:/ 'modification' smart constructor.
-data Modification = Modification'
+data Modification =
+  Modification'
     { _mDrop   :: !(Maybe Bool)
     , _mCreate :: !(Maybe ColumnFamily)
     , _mId     :: !(Maybe Text)
     , _mUpdate :: !(Maybe ColumnFamily)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Modification' with the minimum fields required to make a request.
 --
@@ -2531,12 +2765,9 @@ data Modification = Modification'
 modification
     :: Modification
 modification =
-    Modification'
-    { _mDrop = Nothing
-    , _mCreate = Nothing
-    , _mId = Nothing
-    , _mUpdate = Nothing
-    }
+  Modification'
+    {_mDrop = Nothing, _mCreate = Nothing, _mId = Nothing, _mUpdate = Nothing}
+
 
 -- | Drop (delete) the column family with the given ID, or fail if no such
 -- family exists.
@@ -2576,12 +2807,15 @@ instance ToJSON Modification where
 -- table is served using the resources of its parent cluster.
 --
 -- /See:/ 'table' smart constructor.
-data Table = Table'
+data Table =
+  Table'
     { _tGranularity    :: !(Maybe TableGranularity)
     , _tName           :: !(Maybe Text)
     , _tClusterStates  :: !(Maybe TableClusterStates)
     , _tColumnFamilies :: !(Maybe TableColumnFamilies)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
@@ -2597,12 +2831,13 @@ data Table = Table'
 table
     :: Table
 table =
-    Table'
+  Table'
     { _tGranularity = Nothing
     , _tName = Nothing
     , _tClusterStates = Nothing
     , _tColumnFamilies = Nothing
     }
+
 
 -- | (\`CreationOnly\`) The granularity (i.e. \`MILLIS\`) at which timestamps
 -- are stored in this table. Timestamps not matching the granularity will
@@ -2663,9 +2898,12 @@ instance ToJSON Table where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -2676,9 +2914,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -2697,11 +2934,14 @@ instance ToJSON OperationResponse where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -2715,11 +2955,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -2774,13 +3011,16 @@ instance ToJSON Binding where
 -- tables in an instance are served from all Clusters in the instance.
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance'
+data Instance =
+  Instance'
     { _iState       :: !(Maybe InstanceState)
     , _iName        :: !(Maybe Text)
     , _iDisplayName :: !(Maybe Text)
     , _iLabels      :: !(Maybe InstanceLabels)
     , _iType        :: !(Maybe InstanceType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -2798,13 +3038,14 @@ data Instance = Instance'
 instance'
     :: Instance
 instance' =
-    Instance'
+  Instance'
     { _iState = Nothing
     , _iName = Nothing
     , _iDisplayName = Nothing
     , _iLabels = Nothing
     , _iType = Nothing
     }
+
 
 -- | (\`OutputOnly\`) The current state of the instance.
 iState :: Lens' Instance (Maybe InstanceState)

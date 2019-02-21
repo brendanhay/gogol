@@ -71,7 +71,8 @@ type ProjectsLocationsDataSourcesCheckValidCredsResource
 -- pre-requisite before user can create a transfer config.
 --
 -- /See:/ 'projectsLocationsDataSourcesCheckValidCreds' smart constructor.
-data ProjectsLocationsDataSourcesCheckValidCreds = ProjectsLocationsDataSourcesCheckValidCreds'
+data ProjectsLocationsDataSourcesCheckValidCreds =
+  ProjectsLocationsDataSourcesCheckValidCreds'
     { _pldscvcXgafv          :: !(Maybe Xgafv)
     , _pldscvcUploadProtocol :: !(Maybe Text)
     , _pldscvcAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsLocationsDataSourcesCheckValidCreds = ProjectsLocationsDataSourcesC
     , _pldscvcPayload        :: !CheckValidCredsRequest
     , _pldscvcName           :: !Text
     , _pldscvcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsDataSourcesCheckValidCreds' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsLocationsDataSourcesCheckValidCreds
     -> Text -- ^ 'pldscvcName'
     -> ProjectsLocationsDataSourcesCheckValidCreds
 projectsLocationsDataSourcesCheckValidCreds pPldscvcPayload_ pPldscvcName_ =
-    ProjectsLocationsDataSourcesCheckValidCreds'
+  ProjectsLocationsDataSourcesCheckValidCreds'
     { _pldscvcXgafv = Nothing
     , _pldscvcUploadProtocol = Nothing
     , _pldscvcAccessToken = Nothing
@@ -112,6 +115,7 @@ projectsLocationsDataSourcesCheckValidCreds pPldscvcPayload_ pPldscvcName_ =
     , _pldscvcName = pPldscvcName_
     , _pldscvcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldscvcXgafv :: Lens' ProjectsLocationsDataSourcesCheckValidCreds (Maybe Xgafv)
@@ -155,7 +159,8 @@ pldscvcCallback
       (\ s a -> s{_pldscvcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsDataSourcesCheckValidCreds where
+           ProjectsLocationsDataSourcesCheckValidCreds
+         where
         type Rs ProjectsLocationsDataSourcesCheckValidCreds =
              CheckValidCredsResponse
         type Scopes

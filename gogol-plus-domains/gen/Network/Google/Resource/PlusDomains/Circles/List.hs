@@ -56,11 +56,14 @@ type CirclesListResource =
 -- | List all of the circles for a user.
 --
 -- /See:/ 'circlesList' smart constructor.
-data CirclesList = CirclesList'
+data CirclesList =
+  CirclesList'
     { _cUserId     :: !Text
     , _cPageToken  :: !(Maybe Text)
     , _cMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CirclesList' with the minimum fields required to make a request.
 --
@@ -75,11 +78,8 @@ circlesList
     :: Text -- ^ 'cUserId'
     -> CirclesList
 circlesList pCUserId_ =
-    CirclesList'
-    { _cUserId = pCUserId_
-    , _cPageToken = Nothing
-    , _cMaxResults = 20
-    }
+  CirclesList' {_cUserId = pCUserId_, _cPageToken = Nothing, _cMaxResults = 20}
+
 
 -- | The ID of the user to get circles for. The special value \"me\" can be
 -- used to indicate the authenticated user.

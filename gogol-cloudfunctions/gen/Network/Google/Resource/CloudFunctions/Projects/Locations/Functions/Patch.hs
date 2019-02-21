@@ -64,7 +64,8 @@ type ProjectsLocationsFunctionsPatchResource =
 -- | Updates existing function.
 --
 -- /See:/ 'projectsLocationsFunctionsPatch' smart constructor.
-data ProjectsLocationsFunctionsPatch = ProjectsLocationsFunctionsPatch'
+data ProjectsLocationsFunctionsPatch =
+  ProjectsLocationsFunctionsPatch'
     { _plfpXgafv          :: !(Maybe Xgafv)
     , _plfpUploadProtocol :: !(Maybe Text)
     , _plfpUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data ProjectsLocationsFunctionsPatch = ProjectsLocationsFunctionsPatch'
     , _plfpPayload        :: !CloudFunction
     , _plfpName           :: !Text
     , _plfpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsFunctionsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsFunctionsPatch
     -> Text -- ^ 'plfpName'
     -> ProjectsLocationsFunctionsPatch
 projectsLocationsFunctionsPatch pPlfpPayload_ pPlfpName_ =
-    ProjectsLocationsFunctionsPatch'
+  ProjectsLocationsFunctionsPatch'
     { _plfpXgafv = Nothing
     , _plfpUploadProtocol = Nothing
     , _plfpUpdateMask = Nothing
@@ -109,6 +112,7 @@ projectsLocationsFunctionsPatch pPlfpPayload_ pPlfpName_ =
     , _plfpName = pPlfpName_
     , _plfpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plfpXgafv :: Lens' ProjectsLocationsFunctionsPatch (Maybe Xgafv)
@@ -155,7 +159,8 @@ plfpCallback
   = lens _plfpCallback (\ s a -> s{_plfpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsFunctionsPatch where
+           ProjectsLocationsFunctionsPatch
+         where
         type Rs ProjectsLocationsFunctionsPatch = Operation
         type Scopes ProjectsLocationsFunctionsPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]

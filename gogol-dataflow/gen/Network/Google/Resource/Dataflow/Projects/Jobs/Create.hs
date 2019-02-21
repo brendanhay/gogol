@@ -69,7 +69,8 @@ type ProjectsJobsCreateResource =
 -- | Creates a Cloud Dataflow job.
 --
 -- /See:/ 'projectsJobsCreate' smart constructor.
-data ProjectsJobsCreate = ProjectsJobsCreate'
+data ProjectsJobsCreate =
+  ProjectsJobsCreate'
     { _pjcXgafv          :: !(Maybe Xgafv)
     , _pjcUploadProtocol :: !(Maybe Text)
     , _pjcLocation       :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsJobsCreate = ProjectsJobsCreate'
     , _pjcProjectId      :: !Text
     , _pjcReplaceJobId   :: !(Maybe Text)
     , _pjcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsCreate' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsJobsCreate
     -> Text -- ^ 'pjcProjectId'
     -> ProjectsJobsCreate
 projectsJobsCreate pPjcPayload_ pPjcProjectId_ =
-    ProjectsJobsCreate'
+  ProjectsJobsCreate'
     { _pjcXgafv = Nothing
     , _pjcUploadProtocol = Nothing
     , _pjcLocation = Nothing
@@ -122,6 +125,7 @@ projectsJobsCreate pPjcPayload_ pPjcProjectId_ =
     , _pjcReplaceJobId = Nothing
     , _pjcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjcXgafv :: Lens' ProjectsJobsCreate (Maybe Xgafv)

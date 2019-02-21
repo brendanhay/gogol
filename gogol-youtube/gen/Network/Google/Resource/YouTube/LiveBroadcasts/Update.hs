@@ -60,12 +60,15 @@ type LiveBroadcastsUpdateResource =
 -- settings defined in the liveBroadcast resource\'s contentDetails object.
 --
 -- /See:/ 'liveBroadcastsUpdate' smart constructor.
-data LiveBroadcastsUpdate = LiveBroadcastsUpdate'
+data LiveBroadcastsUpdate =
+  LiveBroadcastsUpdate'
     { _lbuPart                          :: !Text
     , _lbuPayload                       :: !LiveBroadcast
     , _lbuOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveBroadcastsUpdate' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ liveBroadcastsUpdate
     -> LiveBroadcast -- ^ 'lbuPayload'
     -> LiveBroadcastsUpdate
 liveBroadcastsUpdate pLbuPart_ pLbuPayload_ =
-    LiveBroadcastsUpdate'
+  LiveBroadcastsUpdate'
     { _lbuPart = pLbuPart_
     , _lbuPayload = pLbuPayload_
     , _lbuOnBehalfOfContentOwner = Nothing
     , _lbuOnBehalfOfContentOwnerChannel = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

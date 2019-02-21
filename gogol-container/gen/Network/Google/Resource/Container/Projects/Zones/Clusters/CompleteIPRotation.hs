@@ -70,7 +70,8 @@ type ProjectsZonesClustersCompleteIPRotationResource
 -- | Completes master IP rotation.
 --
 -- /See:/ 'projectsZonesClustersCompleteIPRotation' smart constructor.
-data ProjectsZonesClustersCompleteIPRotation = ProjectsZonesClustersCompleteIPRotation'
+data ProjectsZonesClustersCompleteIPRotation =
+  ProjectsZonesClustersCompleteIPRotation'
     { _pzccirXgafv          :: !(Maybe Xgafv)
     , _pzccirUploadProtocol :: !(Maybe Text)
     , _pzccirAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsZonesClustersCompleteIPRotation = ProjectsZonesClustersCompleteIPRo
     , _pzccirClusterId      :: !Text
     , _pzccirProjectId      :: !Text
     , _pzccirCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersCompleteIPRotation' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsZonesClustersCompleteIPRotation
     -> Text -- ^ 'pzccirProjectId'
     -> ProjectsZonesClustersCompleteIPRotation
 projectsZonesClustersCompleteIPRotation pPzccirZone_ pPzccirPayload_ pPzccirClusterId_ pPzccirProjectId_ =
-    ProjectsZonesClustersCompleteIPRotation'
+  ProjectsZonesClustersCompleteIPRotation'
     { _pzccirXgafv = Nothing
     , _pzccirUploadProtocol = Nothing
     , _pzccirAccessToken = Nothing
@@ -121,6 +124,7 @@ projectsZonesClustersCompleteIPRotation pPzccirZone_ pPzccirPayload_ pPzccirClus
     , _pzccirProjectId = pPzccirProjectId_
     , _pzccirCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzccirXgafv :: Lens' ProjectsZonesClustersCompleteIPRotation (Maybe Xgafv)
@@ -180,7 +184,8 @@ pzccirCallback
       (\ s a -> s{_pzccirCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersCompleteIPRotation where
+           ProjectsZonesClustersCompleteIPRotation
+         where
         type Rs ProjectsZonesClustersCompleteIPRotation =
              Operation
         type Scopes ProjectsZonesClustersCompleteIPRotation =

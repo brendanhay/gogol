@@ -61,12 +61,15 @@ type URLMapsUpdateResource =
 -- request.
 --
 -- /See:/ 'urlMapsUpdate' smart constructor.
-data URLMapsUpdate = URLMapsUpdate'
+data URLMapsUpdate =
+  URLMapsUpdate'
     { _umuRequestId :: !(Maybe Text)
     , _umuURLMap    :: !Text
     , _umuProject   :: !Text
     , _umuPayload   :: !URLMap
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLMapsUpdate' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ urlMapsUpdate
     -> URLMap -- ^ 'umuPayload'
     -> URLMapsUpdate
 urlMapsUpdate pUmuURLMap_ pUmuProject_ pUmuPayload_ =
-    URLMapsUpdate'
+  URLMapsUpdate'
     { _umuRequestId = Nothing
     , _umuURLMap = pUmuURLMap_
     , _umuProject = pUmuProject_
     , _umuPayload = pUmuPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

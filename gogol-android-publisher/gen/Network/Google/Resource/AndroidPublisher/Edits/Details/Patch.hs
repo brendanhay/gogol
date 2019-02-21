@@ -58,11 +58,14 @@ type EditsDetailsPatchResource =
 -- | Updates app details for this edit. This method supports patch semantics.
 --
 -- /See:/ 'editsDetailsPatch' smart constructor.
-data EditsDetailsPatch = EditsDetailsPatch'
+data EditsDetailsPatch =
+  EditsDetailsPatch'
     { _edpPackageName :: !Text
     , _edpPayload     :: !AppDetails
     , _edpEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsDetailsPatch' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ editsDetailsPatch
     -> Text -- ^ 'edpEditId'
     -> EditsDetailsPatch
 editsDetailsPatch pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
-    EditsDetailsPatch'
+  EditsDetailsPatch'
     { _edpPackageName = pEdpPackageName_
     , _edpPayload = pEdpPayload_
     , _edpEditId = pEdpEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

@@ -70,7 +70,8 @@ type SpreadsheetsValuesBatchClearResource =
 -- validation, etc..) are kept.
 --
 -- /See:/ 'spreadsheetsValuesBatchClear' smart constructor.
-data SpreadsheetsValuesBatchClear = SpreadsheetsValuesBatchClear'
+data SpreadsheetsValuesBatchClear =
+  SpreadsheetsValuesBatchClear'
     { _svbcXgafv          :: !(Maybe Xgafv)
     , _svbcUploadProtocol :: !(Maybe Text)
     , _svbcAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data SpreadsheetsValuesBatchClear = SpreadsheetsValuesBatchClear'
     , _svbcUploadType     :: !(Maybe Text)
     , _svbcPayload        :: !BatchClearValuesRequest
     , _svbcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpreadsheetsValuesBatchClear' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ spreadsheetsValuesBatchClear
     -> BatchClearValuesRequest -- ^ 'svbcPayload'
     -> SpreadsheetsValuesBatchClear
 spreadsheetsValuesBatchClear pSvbcSpreadsheetId_ pSvbcPayload_ =
-    SpreadsheetsValuesBatchClear'
+  SpreadsheetsValuesBatchClear'
     { _svbcXgafv = Nothing
     , _svbcUploadProtocol = Nothing
     , _svbcAccessToken = Nothing
@@ -111,6 +114,7 @@ spreadsheetsValuesBatchClear pSvbcSpreadsheetId_ pSvbcPayload_ =
     , _svbcPayload = pSvbcPayload_
     , _svbcCallback = Nothing
     }
+
 
 -- | V1 error format.
 svbcXgafv :: Lens' SpreadsheetsValuesBatchClear (Maybe Xgafv)

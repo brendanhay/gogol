@@ -25,12 +25,15 @@ import           Network.Google.Prelude
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -46,12 +49,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -100,11 +104,14 @@ instance ToJSON Expr where
 -- Note created by the user.
 --
 -- /See:/ 'userOwnedDrydockNote' smart constructor.
-data UserOwnedDrydockNote = UserOwnedDrydockNote'
+data UserOwnedDrydockNote =
+  UserOwnedDrydockNote'
     { _uodnDelegationServiceAccountEmail :: !(Maybe Text)
     , _uodnPublicKeys                    :: !(Maybe [AttestorPublicKey])
     , _uodnNoteReference                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserOwnedDrydockNote' with the minimum fields required to make a request.
 --
@@ -118,11 +125,12 @@ data UserOwnedDrydockNote = UserOwnedDrydockNote'
 userOwnedDrydockNote
     :: UserOwnedDrydockNote
 userOwnedDrydockNote =
-    UserOwnedDrydockNote'
+  UserOwnedDrydockNote'
     { _uodnDelegationServiceAccountEmail = Nothing
     , _uodnPublicKeys = Nothing
     , _uodnNoteReference = Nothing
     }
+
 
 -- | Output only. This field will contain the service account email address
 -- that this Attestor will use as the principal when querying Container
@@ -187,14 +195,16 @@ instance ToJSON UserOwnedDrydockNote where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -205,9 +215,12 @@ instance ToJSON Empty where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
+newtype SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprPolicy :: Maybe IAMPolicy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -216,10 +229,8 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
 -- * 'siprPolicy'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
-setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprPolicy = Nothing
-    }
+setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -241,10 +252,13 @@ instance ToJSON SetIAMPolicyRequest where
 -- | Response message for BinauthzManagementService.ListAttestors.
 --
 -- /See:/ 'listAttestorsResponse' smart constructor.
-data ListAttestorsResponse = ListAttestorsResponse'
+data ListAttestorsResponse =
+  ListAttestorsResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larAttestors     :: !(Maybe [Attestor])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAttestorsResponse' with the minimum fields required to make a request.
 --
@@ -256,10 +270,8 @@ data ListAttestorsResponse = ListAttestorsResponse'
 listAttestorsResponse
     :: ListAttestorsResponse
 listAttestorsResponse =
-    ListAttestorsResponse'
-    { _larNextPageToken = Nothing
-    , _larAttestors = Nothing
-    }
+  ListAttestorsResponse' {_larNextPageToken = Nothing, _larAttestors = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListAttestorsRequest.page_token field in the subsequent call to the
@@ -295,9 +307,12 @@ instance ToJSON ListAttestorsResponse where
 -- rules.
 --
 -- /See:/ 'admissionWhiteListPattern' smart constructor.
-newtype AdmissionWhiteListPattern = AdmissionWhiteListPattern'
+newtype AdmissionWhiteListPattern =
+  AdmissionWhiteListPattern'
     { _awlpNamePattern :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdmissionWhiteListPattern' with the minimum fields required to make a request.
 --
@@ -307,9 +322,8 @@ newtype AdmissionWhiteListPattern = AdmissionWhiteListPattern'
 admissionWhiteListPattern
     :: AdmissionWhiteListPattern
 admissionWhiteListPattern =
-    AdmissionWhiteListPattern'
-    { _awlpNamePattern = Nothing
-    }
+  AdmissionWhiteListPattern' {_awlpNamePattern = Nothing}
+
 
 -- | An image name pattern to whitelist, in the form
 -- \`registry\/path\/to\/image\`. This supports a trailing \`*\` as a
@@ -338,11 +352,14 @@ instance ToJSON AdmissionWhiteListPattern where
 -- admission rules and will never block a pod creation.
 --
 -- /See:/ 'admissionRule' smart constructor.
-data AdmissionRule = AdmissionRule'
+data AdmissionRule =
+  AdmissionRule'
     { _arEnforcementMode       :: !(Maybe AdmissionRuleEnforcementMode)
     , _arEvaluationMode        :: !(Maybe AdmissionRuleEvaluationMode)
     , _arRequireAttestationsBy :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdmissionRule' with the minimum fields required to make a request.
 --
@@ -356,11 +373,12 @@ data AdmissionRule = AdmissionRule'
 admissionRule
     :: AdmissionRule
 admissionRule =
-    AdmissionRule'
+  AdmissionRule'
     { _arEnforcementMode = Nothing
     , _arEvaluationMode = Nothing
     , _arRequireAttestationsBy = Nothing
     }
+
 
 -- | Required. The action when a pod creation is denied by the admission
 -- rule.
@@ -410,9 +428,12 @@ instance ToJSON AdmissionRule where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -422,9 +443,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -468,11 +488,14 @@ instance ToJSON TestIAMPermissionsRequest where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'iamPolicy' smart constructor.
-data IAMPolicy = IAMPolicy'
+data IAMPolicy =
+  IAMPolicy'
     { _ipEtag     :: !(Maybe Bytes)
     , _ipVersion  :: !(Maybe (Textual Int32))
     , _ipBindings :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IAMPolicy' with the minimum fields required to make a request.
 --
@@ -486,11 +509,8 @@ data IAMPolicy = IAMPolicy'
 iamPolicy
     :: IAMPolicy
 iamPolicy =
-    IAMPolicy'
-    { _ipEtag = Nothing
-    , _ipVersion = Nothing
-    , _ipBindings = Nothing
-    }
+  IAMPolicy' {_ipEtag = Nothing, _ipVersion = Nothing, _ipBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -540,11 +560,14 @@ instance ToJSON IAMPolicy where
 -- by this attestor.
 --
 -- /See:/ 'attestorPublicKey' smart constructor.
-data AttestorPublicKey = AttestorPublicKey'
+data AttestorPublicKey =
+  AttestorPublicKey'
     { _apkAsciiArmoredPgpPublicKey :: !(Maybe Text)
     , _apkId                       :: !(Maybe Text)
     , _apkComment                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AttestorPublicKey' with the minimum fields required to make a request.
 --
@@ -558,11 +581,12 @@ data AttestorPublicKey = AttestorPublicKey'
 attestorPublicKey
     :: AttestorPublicKey
 attestorPublicKey =
-    AttestorPublicKey'
+  AttestorPublicKey'
     { _apkAsciiArmoredPgpPublicKey = Nothing
     , _apkId = Nothing
     , _apkComment = Nothing
     }
+
 
 -- | ASCII-armored representation of a PGP public key, as the entire output
 -- by the command \`gpg --export --armor foo\'example.com\` (either LF or
@@ -603,9 +627,12 @@ instance ToJSON AttestorPublicKey where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -615,9 +642,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -644,14 +670,17 @@ instance ToJSON TestIAMPermissionsResponse where
 -- | A policy for container image binary authorization.
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pDefaultAdmissionRule       :: !(Maybe AdmissionRule)
     , _pAdmissionWhiteListPatterns :: !(Maybe [AdmissionWhiteListPattern])
     , _pClusterAdmissionRules      :: !(Maybe PolicyClusterAdmissionRules)
     , _pUpdateTime                 :: !(Maybe DateTime')
     , _pName                       :: !(Maybe Text)
     , _pDescription                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -671,7 +700,7 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pDefaultAdmissionRule = Nothing
     , _pAdmissionWhiteListPatterns = Nothing
     , _pClusterAdmissionRules = Nothing
@@ -679,6 +708,7 @@ policy =
     , _pName = Nothing
     , _pDescription = Nothing
     }
+
 
 -- | Required. Default admission rule for a cluster without a per-cluster
 -- admission rule.
@@ -759,9 +789,12 @@ instance ToJSON Policy where
 -- https:\/\/cloud.google.com\/container-engine\/reference\/rest\/v1\/projects.zones.clusters.
 --
 -- /See:/ 'policyClusterAdmissionRules' smart constructor.
-newtype PolicyClusterAdmissionRules = PolicyClusterAdmissionRules'
+newtype PolicyClusterAdmissionRules =
+  PolicyClusterAdmissionRules'
     { _pcarAddtional :: HashMap Text AdmissionRule
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PolicyClusterAdmissionRules' with the minimum fields required to make a request.
 --
@@ -772,9 +805,8 @@ policyClusterAdmissionRules
     :: HashMap Text AdmissionRule -- ^ 'pcarAddtional'
     -> PolicyClusterAdmissionRules
 policyClusterAdmissionRules pPcarAddtional_ =
-    PolicyClusterAdmissionRules'
-    { _pcarAddtional = _Coerce # pPcarAddtional_
-    }
+  PolicyClusterAdmissionRules' {_pcarAddtional = _Coerce # pPcarAddtional_}
+
 
 pcarAddtional :: Lens' PolicyClusterAdmissionRules (HashMap Text AdmissionRule)
 pcarAddtional
@@ -795,12 +827,15 @@ instance ToJSON PolicyClusterAdmissionRules where
 -- attestor cannot be modified except where indicated.
 --
 -- /See:/ 'attestor' smart constructor.
-data Attestor = Attestor'
+data Attestor =
+  Attestor'
     { _aUserOwnedDrydockNote :: !(Maybe UserOwnedDrydockNote)
     , _aUpdateTime           :: !(Maybe DateTime')
     , _aName                 :: !(Maybe Text)
     , _aDescription          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Attestor' with the minimum fields required to make a request.
 --
@@ -816,12 +851,13 @@ data Attestor = Attestor'
 attestor
     :: Attestor
 attestor =
-    Attestor'
+  Attestor'
     { _aUserOwnedDrydockNote = Nothing
     , _aUpdateTime = Nothing
     , _aName = Nothing
     , _aDescription = Nothing
     }
+
 
 -- | A Drydock ATTESTATION_AUTHORITY Note, created by the user.
 aUserOwnedDrydockNote :: Lens' Attestor (Maybe UserOwnedDrydockNote)
@@ -869,11 +905,14 @@ instance ToJSON Attestor where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -887,11 +926,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

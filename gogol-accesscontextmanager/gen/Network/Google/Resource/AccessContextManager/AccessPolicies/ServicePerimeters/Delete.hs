@@ -63,14 +63,17 @@ type AccessPoliciesServicePerimetersDeleteResource =
 -- has been removed from long-lasting storage.
 --
 -- /See:/ 'accessPoliciesServicePerimetersDelete' smart constructor.
-data AccessPoliciesServicePerimetersDelete = AccessPoliciesServicePerimetersDelete'
+data AccessPoliciesServicePerimetersDelete =
+  AccessPoliciesServicePerimetersDelete'
     { _apspdXgafv          :: !(Maybe Xgafv)
     , _apspdUploadProtocol :: !(Maybe Text)
     , _apspdAccessToken    :: !(Maybe Text)
     , _apspdUploadType     :: !(Maybe Text)
     , _apspdName           :: !Text
     , _apspdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccessPoliciesServicePerimetersDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ accessPoliciesServicePerimetersDelete
     :: Text -- ^ 'apspdName'
     -> AccessPoliciesServicePerimetersDelete
 accessPoliciesServicePerimetersDelete pApspdName_ =
-    AccessPoliciesServicePerimetersDelete'
+  AccessPoliciesServicePerimetersDelete'
     { _apspdXgafv = Nothing
     , _apspdUploadProtocol = Nothing
     , _apspdAccessToken = Nothing
@@ -99,6 +102,7 @@ accessPoliciesServicePerimetersDelete pApspdName_ =
     , _apspdName = pApspdName_
     , _apspdCallback = Nothing
     }
+
 
 -- | V1 error format.
 apspdXgafv :: Lens' AccessPoliciesServicePerimetersDelete (Maybe Xgafv)
@@ -136,7 +140,8 @@ apspdCallback
       (\ s a -> s{_apspdCallback = a})
 
 instance GoogleRequest
-         AccessPoliciesServicePerimetersDelete where
+           AccessPoliciesServicePerimetersDelete
+         where
         type Rs AccessPoliciesServicePerimetersDelete =
              Operation
         type Scopes AccessPoliciesServicePerimetersDelete =

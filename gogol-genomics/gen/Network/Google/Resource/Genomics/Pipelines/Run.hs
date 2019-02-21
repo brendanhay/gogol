@@ -75,14 +75,17 @@ type PipelinesRunResource =
 -- permission: * \`genomics.operations.create\` [1]: \/genomics\/gsa
 --
 -- /See:/ 'pipelinesRun' smart constructor.
-data PipelinesRun = PipelinesRun'
+data PipelinesRun =
+  PipelinesRun'
     { _prXgafv          :: !(Maybe Xgafv)
     , _prUploadProtocol :: !(Maybe Text)
     , _prAccessToken    :: !(Maybe Text)
     , _prUploadType     :: !(Maybe Text)
     , _prPayload        :: !RunPipelineRequest
     , _prCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PipelinesRun' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ pipelinesRun
     :: RunPipelineRequest -- ^ 'prPayload'
     -> PipelinesRun
 pipelinesRun pPrPayload_ =
-    PipelinesRun'
+  PipelinesRun'
     { _prXgafv = Nothing
     , _prUploadProtocol = Nothing
     , _prAccessToken = Nothing
@@ -111,6 +114,7 @@ pipelinesRun pPrPayload_ =
     , _prPayload = pPrPayload_
     , _prCallback = Nothing
     }
+
 
 -- | V1 error format.
 prXgafv :: Lens' PipelinesRun (Maybe Xgafv)

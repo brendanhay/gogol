@@ -54,10 +54,13 @@ type AccountsSavedadstylesGetResource =
 -- | List a specific saved ad style for the specified account.
 --
 -- /See:/ 'accountsSavedadstylesGet' smart constructor.
-data AccountsSavedadstylesGet = AccountsSavedadstylesGet'
+data AccountsSavedadstylesGet =
+  AccountsSavedadstylesGet'
     { _asgSavedAdStyleId :: !Text
     , _asgAccountId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsSavedadstylesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ accountsSavedadstylesGet
     -> Text -- ^ 'asgAccountId'
     -> AccountsSavedadstylesGet
 accountsSavedadstylesGet pAsgSavedAdStyleId_ pAsgAccountId_ =
-    AccountsSavedadstylesGet'
-    { _asgSavedAdStyleId = pAsgSavedAdStyleId_
-    , _asgAccountId = pAsgAccountId_
-    }
+  AccountsSavedadstylesGet'
+    {_asgSavedAdStyleId = pAsgSavedAdStyleId_, _asgAccountId = pAsgAccountId_}
+
 
 -- | Saved ad style to retrieve.
 asgSavedAdStyleId :: Lens' AccountsSavedadstylesGet Text

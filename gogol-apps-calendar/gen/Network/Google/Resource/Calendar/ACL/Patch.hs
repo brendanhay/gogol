@@ -58,12 +58,15 @@ type ACLPatchResource =
 -- | Updates an access control rule. This method supports patch semantics.
 --
 -- /See:/ 'aclPatch' smart constructor.
-data ACLPatch = ACLPatch'
+data ACLPatch =
+  ACLPatch'
     { _apCalendarId        :: !Text
     , _apRuleId            :: !Text
     , _apPayload           :: !ACLRule
     , _apSendNotifications :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ACLPatch' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ aclPatch
     -> ACLRule -- ^ 'apPayload'
     -> ACLPatch
 aclPatch pApCalendarId_ pApRuleId_ pApPayload_ =
-    ACLPatch'
+  ACLPatch'
     { _apCalendarId = pApCalendarId_
     , _apRuleId = pApRuleId_
     , _apPayload = pApPayload_
     , _apSendNotifications = Nothing
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

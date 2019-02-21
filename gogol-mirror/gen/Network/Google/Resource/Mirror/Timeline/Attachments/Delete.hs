@@ -54,10 +54,13 @@ type TimelineAttachmentsDeleteResource =
 -- | Deletes an attachment from a timeline item.
 --
 -- /See:/ 'timelineAttachmentsDelete' smart constructor.
-data TimelineAttachmentsDelete = TimelineAttachmentsDelete'
+data TimelineAttachmentsDelete =
+  TimelineAttachmentsDelete'
     { _tadItemId       :: !Text
     , _tadAttachmentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimelineAttachmentsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ timelineAttachmentsDelete
     -> Text -- ^ 'tadAttachmentId'
     -> TimelineAttachmentsDelete
 timelineAttachmentsDelete pTadItemId_ pTadAttachmentId_ =
-    TimelineAttachmentsDelete'
-    { _tadItemId = pTadItemId_
-    , _tadAttachmentId = pTadAttachmentId_
-    }
+  TimelineAttachmentsDelete'
+    {_tadItemId = pTadItemId_, _tadAttachmentId = pTadAttachmentId_}
+
 
 -- | The ID of the timeline item the attachment belongs to.
 tadItemId :: Lens' TimelineAttachmentsDelete Text

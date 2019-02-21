@@ -64,12 +64,15 @@ type BackendBucketsPatchResource =
 -- merge patch format and processing rules.
 --
 -- /See:/ 'backendBucketsPatch' smart constructor.
-data BackendBucketsPatch = BackendBucketsPatch'
+data BackendBucketsPatch =
+  BackendBucketsPatch'
     { _bbpRequestId     :: !(Maybe Text)
     , _bbpBackendBucket :: !Text
     , _bbpProject       :: !Text
     , _bbpPayload       :: !BackendBucket
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendBucketsPatch' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ backendBucketsPatch
     -> BackendBucket -- ^ 'bbpPayload'
     -> BackendBucketsPatch
 backendBucketsPatch pBbpBackendBucket_ pBbpProject_ pBbpPayload_ =
-    BackendBucketsPatch'
+  BackendBucketsPatch'
     { _bbpRequestId = Nothing
     , _bbpBackendBucket = pBbpBackendBucket_
     , _bbpProject = pBbpProject_
     , _bbpPayload = pBbpPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

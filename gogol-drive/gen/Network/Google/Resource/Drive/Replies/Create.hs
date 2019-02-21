@@ -57,11 +57,14 @@ type RepliesCreateResource =
 -- | Creates a new reply to a comment.
 --
 -- /See:/ 'repliesCreate' smart constructor.
-data RepliesCreate = RepliesCreate'
+data RepliesCreate =
+  RepliesCreate'
     { _rcPayload   :: !Reply
     , _rcFileId    :: !Text
     , _rcCommentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepliesCreate' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ repliesCreate
     -> Text -- ^ 'rcCommentId'
     -> RepliesCreate
 repliesCreate pRcPayload_ pRcFileId_ pRcCommentId_ =
-    RepliesCreate'
+  RepliesCreate'
     { _rcPayload = pRcPayload_
     , _rcFileId = pRcFileId_
     , _rcCommentId = pRcCommentId_
     }
+
 
 -- | Multipart request metadata.
 rcPayload :: Lens' RepliesCreate Reply

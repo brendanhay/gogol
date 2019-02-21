@@ -57,11 +57,14 @@ type ZoneOperationsGetResource =
 -- | Retrieves the specified zone-specific operation resource.
 --
 -- /See:/ 'zoneOperationsGet' smart constructor.
-data ZoneOperationsGet = ZoneOperationsGet'
+data ZoneOperationsGet =
+  ZoneOperationsGet'
     { _zogProject   :: !Text
     , _zogOperation :: !Text
     , _zogZone      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ZoneOperationsGet' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ zoneOperationsGet
     -> Text -- ^ 'zogZone'
     -> ZoneOperationsGet
 zoneOperationsGet pZogProject_ pZogOperation_ pZogZone_ =
-    ZoneOperationsGet'
+  ZoneOperationsGet'
     { _zogProject = pZogProject_
     , _zogOperation = pZogOperation_
     , _zogZone = pZogZone_
     }
+
 
 -- | Name of the project scoping this request.
 zogProject :: Lens' ZoneOperationsGet Text

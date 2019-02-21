@@ -40,6 +40,7 @@ module Network.Google.ContainerAnalysis.Types
     , vCvssScore
     , vSeverity
     , vDetails
+    , vWindowsDetails
 
     -- * GrafeasV1beta1VulnerabilityDetailsSeverity
     , GrafeasV1beta1VulnerabilityDetailsSeverity (..)
@@ -136,6 +137,12 @@ module Network.Google.ContainerAnalysis.Types
     , cWaitFor
     , cName
     , cId
+
+    -- * KnowledgeBase
+    , KnowledgeBase
+    , knowledgeBase
+    , kbURL
+    , kbName
 
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
@@ -540,6 +547,14 @@ module Network.Google.ContainerAnalysis.Types
     , psaPgpKeyId
     , psaContentType
 
+    -- * WindowsDetail
+    , WindowsDetail
+    , windowsDetail
+    , wdName
+    , wdFixingKbs
+    , wdCpeURI
+    , wdDescription
+
     -- * BatchCreateNotesRequestNotes
     , BatchCreateNotesRequestNotes
     , batchCreateNotesRequestNotes
@@ -609,4 +624,4 @@ containerAnalysisService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

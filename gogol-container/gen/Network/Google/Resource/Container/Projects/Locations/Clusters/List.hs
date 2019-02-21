@@ -67,7 +67,8 @@ type ProjectsLocationsClustersListResource =
 -- all zones.
 --
 -- /See:/ 'projectsLocationsClustersList' smart constructor.
-data ProjectsLocationsClustersList = ProjectsLocationsClustersList'
+data ProjectsLocationsClustersList =
+  ProjectsLocationsClustersList'
     { _plclParent         :: !Text
     , _plclXgafv          :: !(Maybe Xgafv)
     , _plclUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsLocationsClustersList = ProjectsLocationsClustersList'
     , _plclZone           :: !(Maybe Text)
     , _plclProjectId      :: !(Maybe Text)
     , _plclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersList' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsLocationsClustersList
     :: Text -- ^ 'plclParent'
     -> ProjectsLocationsClustersList
 projectsLocationsClustersList pPlclParent_ =
-    ProjectsLocationsClustersList'
+  ProjectsLocationsClustersList'
     { _plclParent = pPlclParent_
     , _plclXgafv = Nothing
     , _plclUploadProtocol = Nothing
@@ -111,6 +114,7 @@ projectsLocationsClustersList pPlclParent_ =
     , _plclProjectId = Nothing
     , _plclCallback = Nothing
     }
+
 
 -- | The parent (project and location) where the clusters will be listed.
 -- Specified in the format \'projects\/*\/locations\/*\'. Location \"-\"

@@ -54,9 +54,12 @@ type LeaderboardConfigurationsGetResource =
 -- ID.
 --
 -- /See:/ 'leaderboardConfigurationsGet' smart constructor.
-newtype LeaderboardConfigurationsGet = LeaderboardConfigurationsGet'
+newtype LeaderboardConfigurationsGet =
+  LeaderboardConfigurationsGet'
     { _lcgLeaderboardId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardConfigurationsGet' with the minimum fields required to make a request.
 --
@@ -67,9 +70,8 @@ leaderboardConfigurationsGet
     :: Text -- ^ 'lcgLeaderboardId'
     -> LeaderboardConfigurationsGet
 leaderboardConfigurationsGet pLcgLeaderboardId_ =
-    LeaderboardConfigurationsGet'
-    { _lcgLeaderboardId = pLcgLeaderboardId_
-    }
+  LeaderboardConfigurationsGet' {_lcgLeaderboardId = pLcgLeaderboardId_}
+
 
 -- | The ID of the leaderboard.
 lcgLeaderboardId :: Lens' LeaderboardConfigurationsGet Text

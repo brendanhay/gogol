@@ -59,14 +59,17 @@ type ProjectsScanConfigsScanRunsGetResource =
 -- | Gets a ScanRun.
 --
 -- /See:/ 'projectsScanConfigsScanRunsGet' smart constructor.
-data ProjectsScanConfigsScanRunsGet = ProjectsScanConfigsScanRunsGet'
+data ProjectsScanConfigsScanRunsGet =
+  ProjectsScanConfigsScanRunsGet'
     { _pscsrgXgafv          :: !(Maybe Xgafv)
     , _pscsrgUploadProtocol :: !(Maybe Text)
     , _pscsrgAccessToken    :: !(Maybe Text)
     , _pscsrgUploadType     :: !(Maybe Text)
     , _pscsrgName           :: !Text
     , _pscsrgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsScanRunsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsScanConfigsScanRunsGet
     :: Text -- ^ 'pscsrgName'
     -> ProjectsScanConfigsScanRunsGet
 projectsScanConfigsScanRunsGet pPscsrgName_ =
-    ProjectsScanConfigsScanRunsGet'
+  ProjectsScanConfigsScanRunsGet'
     { _pscsrgXgafv = Nothing
     , _pscsrgUploadProtocol = Nothing
     , _pscsrgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsScanConfigsScanRunsGet pPscsrgName_ =
     , _pscsrgName = pPscsrgName_
     , _pscsrgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscsrgXgafv :: Lens' ProjectsScanConfigsScanRunsGet (Maybe Xgafv)

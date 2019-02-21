@@ -68,7 +68,8 @@ type ProjectsDatabasesCollectionGroupsIndexesCreateResource
 -- the operation will be the type IndexOperationMetadata.
 --
 -- /See:/ 'projectsDatabasesCollectionGroupsIndexesCreate' smart constructor.
-data ProjectsDatabasesCollectionGroupsIndexesCreate = ProjectsDatabasesCollectionGroupsIndexesCreate'
+data ProjectsDatabasesCollectionGroupsIndexesCreate =
+  ProjectsDatabasesCollectionGroupsIndexesCreate'
     { _pdcgicParent         :: !Text
     , _pdcgicXgafv          :: !(Maybe Xgafv)
     , _pdcgicUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsDatabasesCollectionGroupsIndexesCreate = ProjectsDatabasesCollectio
     , _pdcgicUploadType     :: !(Maybe Text)
     , _pdcgicPayload        :: !GoogleFirestoreAdminV1Index
     , _pdcgicCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsIndexesCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsDatabasesCollectionGroupsIndexesCreate
     -> GoogleFirestoreAdminV1Index -- ^ 'pdcgicPayload'
     -> ProjectsDatabasesCollectionGroupsIndexesCreate
 projectsDatabasesCollectionGroupsIndexesCreate pPdcgicParent_ pPdcgicPayload_ =
-    ProjectsDatabasesCollectionGroupsIndexesCreate'
+  ProjectsDatabasesCollectionGroupsIndexesCreate'
     { _pdcgicParent = pPdcgicParent_
     , _pdcgicXgafv = Nothing
     , _pdcgicUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsDatabasesCollectionGroupsIndexesCreate pPdcgicParent_ pPdcgicPayload_ =
     , _pdcgicPayload = pPdcgicPayload_
     , _pdcgicCallback = Nothing
     }
+
 
 -- | A parent name of the form
 -- \`projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\`
@@ -152,7 +156,8 @@ pdcgicCallback
       (\ s a -> s{_pdcgicCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesCollectionGroupsIndexesCreate where
+           ProjectsDatabasesCollectionGroupsIndexesCreate
+         where
         type Rs
                ProjectsDatabasesCollectionGroupsIndexesCreate
              = GoogleLongrunningOperation

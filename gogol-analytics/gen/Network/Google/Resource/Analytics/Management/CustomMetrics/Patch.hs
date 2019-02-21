@@ -63,13 +63,16 @@ type ManagementCustomMetricsPatchResource =
 -- | Updates an existing custom metric. This method supports patch semantics.
 --
 -- /See:/ 'managementCustomMetricsPatch' smart constructor.
-data ManagementCustomMetricsPatch = ManagementCustomMetricsPatch'
+data ManagementCustomMetricsPatch =
+  ManagementCustomMetricsPatch'
     { _mcmpCustomMetricId              :: !Text
     , _mcmpWebPropertyId               :: !Text
     , _mcmpIgnoreCustomDataSourceLinks :: !Bool
     , _mcmpPayload                     :: !CustomMetric
     , _mcmpAccountId                   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementCustomMetricsPatch' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ managementCustomMetricsPatch
     -> Text -- ^ 'mcmpAccountId'
     -> ManagementCustomMetricsPatch
 managementCustomMetricsPatch pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPayload_ pMcmpAccountId_ =
-    ManagementCustomMetricsPatch'
+  ManagementCustomMetricsPatch'
     { _mcmpCustomMetricId = pMcmpCustomMetricId_
     , _mcmpWebPropertyId = pMcmpWebPropertyId_
     , _mcmpIgnoreCustomDataSourceLinks = False
     , _mcmpPayload = pMcmpPayload_
     , _mcmpAccountId = pMcmpAccountId_
     }
+
 
 -- | Custom metric ID for the custom metric to update.
 mcmpCustomMetricId :: Lens' ManagementCustomMetricsPatch Text

@@ -72,7 +72,8 @@ type BlobsFindMissingResource =
 -- method-specific errors.
 --
 -- /See:/ 'blobsFindMissing' smart constructor.
-data BlobsFindMissing = BlobsFindMissing'
+data BlobsFindMissing =
+  BlobsFindMissing'
     { _bfmXgafv          :: !(Maybe Xgafv)
     , _bfmUploadProtocol :: !(Maybe Text)
     , _bfmAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data BlobsFindMissing = BlobsFindMissing'
     , _bfmPayload        :: !BuildBazelRemoteExecutionV2FindMissingBlobsRequest
     , _bfmInstanceName   :: !Text
     , _bfmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BlobsFindMissing' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ blobsFindMissing
     -> Text -- ^ 'bfmInstanceName'
     -> BlobsFindMissing
 blobsFindMissing pBfmPayload_ pBfmInstanceName_ =
-    BlobsFindMissing'
+  BlobsFindMissing'
     { _bfmXgafv = Nothing
     , _bfmUploadProtocol = Nothing
     , _bfmAccessToken = Nothing
@@ -113,6 +116,7 @@ blobsFindMissing pBfmPayload_ pBfmInstanceName_ =
     , _bfmInstanceName = pBfmInstanceName_
     , _bfmCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfmXgafv :: Lens' BlobsFindMissing (Maybe Xgafv)

@@ -59,14 +59,17 @@ type FoldersExclusionsDeleteResource =
 -- | Deletes an exclusion.
 --
 -- /See:/ 'foldersExclusionsDelete' smart constructor.
-data FoldersExclusionsDelete = FoldersExclusionsDelete'
+data FoldersExclusionsDelete =
+  FoldersExclusionsDelete'
     { _fedXgafv          :: !(Maybe Xgafv)
     , _fedUploadProtocol :: !(Maybe Text)
     , _fedAccessToken    :: !(Maybe Text)
     , _fedUploadType     :: !(Maybe Text)
     , _fedName           :: !Text
     , _fedCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersExclusionsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ foldersExclusionsDelete
     :: Text -- ^ 'fedName'
     -> FoldersExclusionsDelete
 foldersExclusionsDelete pFedName_ =
-    FoldersExclusionsDelete'
+  FoldersExclusionsDelete'
     { _fedXgafv = Nothing
     , _fedUploadProtocol = Nothing
     , _fedAccessToken = Nothing
@@ -95,6 +98,7 @@ foldersExclusionsDelete pFedName_ =
     , _fedName = pFedName_
     , _fedCallback = Nothing
     }
+
 
 -- | V1 error format.
 fedXgafv :: Lens' FoldersExclusionsDelete (Maybe Xgafv)

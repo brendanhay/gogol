@@ -69,7 +69,8 @@ type SharedAlbumsListResource =
 -- Google Photos app.
 --
 -- /See:/ 'sharedAlbumsList' smart constructor.
-data SharedAlbumsList = SharedAlbumsList'
+data SharedAlbumsList =
+  SharedAlbumsList'
     { _salXgafv          :: !(Maybe Xgafv)
     , _salUploadProtocol :: !(Maybe Text)
     , _salPp             :: !Bool
@@ -79,7 +80,9 @@ data SharedAlbumsList = SharedAlbumsList'
     , _salPageToken      :: !(Maybe Text)
     , _salPageSize       :: !(Maybe (Textual Int32))
     , _salCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SharedAlbumsList' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ data SharedAlbumsList = SharedAlbumsList'
 sharedAlbumsList
     :: SharedAlbumsList
 sharedAlbumsList =
-    SharedAlbumsList'
+  SharedAlbumsList'
     { _salXgafv = Nothing
     , _salUploadProtocol = Nothing
     , _salPp = True
@@ -116,6 +119,7 @@ sharedAlbumsList =
     , _salPageSize = Nothing
     , _salCallback = Nothing
     }
+
 
 -- | V1 error format.
 salXgafv :: Lens' SharedAlbumsList (Maybe Xgafv)

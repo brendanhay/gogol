@@ -64,12 +64,15 @@ type PoolsResizeResource =
 -- information from the last resize request.
 --
 -- /See:/ 'poolsResize' smart constructor.
-data PoolsResize = PoolsResize'
+data PoolsResize =
+  PoolsResize'
     { _prNumReplicas :: !(Maybe (Textual Int32))
     , _prPoolName    :: !Text
     , _prZone        :: !Text
     , _prProjectName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PoolsResize' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ poolsResize
     -> Text -- ^ 'prProjectName'
     -> PoolsResize
 poolsResize pPrPoolName_ pPrZone_ pPrProjectName_ =
-    PoolsResize'
+  PoolsResize'
     { _prNumReplicas = Nothing
     , _prPoolName = pPrPoolName_
     , _prZone = pPrZone_
     , _prProjectName = pPrProjectName_
     }
+
 
 -- | The desired number of replicas to resize to. If this number is larger
 -- than the existing number of replicas, new replicas will be added. If the

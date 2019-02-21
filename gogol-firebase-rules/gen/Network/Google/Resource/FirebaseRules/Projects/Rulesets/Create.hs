@@ -70,7 +70,8 @@ type ProjectsRulesetsCreateResource =
 -- \`Source\` issues, use TestRuleset.
 --
 -- /See:/ 'projectsRulesetsCreate' smart constructor.
-data ProjectsRulesetsCreate = ProjectsRulesetsCreate'
+data ProjectsRulesetsCreate =
+  ProjectsRulesetsCreate'
     { _prcXgafv          :: !(Maybe Xgafv)
     , _prcUploadProtocol :: !(Maybe Text)
     , _prcAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsRulesetsCreate = ProjectsRulesetsCreate'
     , _prcPayload        :: !Ruleset
     , _prcName           :: !Text
     , _prcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRulesetsCreate' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsRulesetsCreate
     -> Text -- ^ 'prcName'
     -> ProjectsRulesetsCreate
 projectsRulesetsCreate pPrcPayload_ pPrcName_ =
-    ProjectsRulesetsCreate'
+  ProjectsRulesetsCreate'
     { _prcXgafv = Nothing
     , _prcUploadProtocol = Nothing
     , _prcAccessToken = Nothing
@@ -111,6 +114,7 @@ projectsRulesetsCreate pPrcPayload_ pPrcName_ =
     , _prcName = pPrcName_
     , _prcCallback = Nothing
     }
+
 
 -- | V1 error format.
 prcXgafv :: Lens' ProjectsRulesetsCreate (Maybe Xgafv)

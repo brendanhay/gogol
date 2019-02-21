@@ -73,7 +73,8 @@ type ProjectsIndexesListResource =
 -- occasionally return stale results.
 --
 -- /See:/ 'projectsIndexesList' smart constructor.
-data ProjectsIndexesList = ProjectsIndexesList'
+data ProjectsIndexesList =
+  ProjectsIndexesList'
     { _pilXgafv          :: !(Maybe Xgafv)
     , _pilUploadProtocol :: !(Maybe Text)
     , _pilAccessToken    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsIndexesList = ProjectsIndexesList'
     , _pilProjectId      :: !Text
     , _pilPageSize       :: !(Maybe (Textual Int32))
     , _pilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsIndexesList' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsIndexesList
     :: Text -- ^ 'pilProjectId'
     -> ProjectsIndexesList
 projectsIndexesList pPilProjectId_ =
-    ProjectsIndexesList'
+  ProjectsIndexesList'
     { _pilXgafv = Nothing
     , _pilUploadProtocol = Nothing
     , _pilAccessToken = Nothing
@@ -121,6 +124,7 @@ projectsIndexesList pPilProjectId_ =
     , _pilPageSize = Nothing
     , _pilCallback = Nothing
     }
+
 
 -- | V1 error format.
 pilXgafv :: Lens' ProjectsIndexesList (Maybe Xgafv)

@@ -132,7 +132,8 @@ type ObjectsRewriteResource =
 -- metadata.
 --
 -- /See:/ 'objectsRewrite' smart constructor.
-data ObjectsRewrite = ObjectsRewrite'
+data ObjectsRewrite =
+  ObjectsRewrite'
     { _orDestinationPredefinedACL       :: !(Maybe ObjectsRewriteDestinationPredefinedACL)
     , _orIfSourceGenerationMatch        :: !(Maybe (Textual Int64))
     , _orIfMetagenerationMatch          :: !(Maybe (Textual Int64))
@@ -153,7 +154,9 @@ data ObjectsRewrite = ObjectsRewrite'
     , _orDestinationKmsKeyName          :: !(Maybe Text)
     , _orRewriteToken                   :: !(Maybe Text)
     , _orDestinationObject              :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectsRewrite' with the minimum fields required to make a request.
 --
@@ -206,7 +209,7 @@ objectsRewrite
     -> Text -- ^ 'orDestinationObject'
     -> ObjectsRewrite
 objectsRewrite pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBucket_ pOrDestinationObject_ =
-    ObjectsRewrite'
+  ObjectsRewrite'
     { _orDestinationPredefinedACL = Nothing
     , _orIfSourceGenerationMatch = Nothing
     , _orIfMetagenerationMatch = Nothing
@@ -228,6 +231,7 @@ objectsRewrite pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBucke
     , _orRewriteToken = Nothing
     , _orDestinationObject = pOrDestinationObject_
     }
+
 
 -- | Apply a predefined set of access controls to the destination object.
 orDestinationPredefinedACL :: Lens' ObjectsRewrite (Maybe ObjectsRewriteDestinationPredefinedACL)

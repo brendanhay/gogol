@@ -65,14 +65,17 @@ type RegionDisksListResource =
 -- region.
 --
 -- /See:/ 'regionDisksList' smart constructor.
-data RegionDisksList = RegionDisksList'
+data RegionDisksList =
+  RegionDisksList'
     { _rdlOrderBy    :: !(Maybe Text)
     , _rdlProject    :: !Text
     , _rdlFilter     :: !(Maybe Text)
     , _rdlRegion     :: !Text
     , _rdlPageToken  :: !(Maybe Text)
     , _rdlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionDisksList' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ regionDisksList
     -> Text -- ^ 'rdlRegion'
     -> RegionDisksList
 regionDisksList pRdlProject_ pRdlRegion_ =
-    RegionDisksList'
+  RegionDisksList'
     { _rdlOrderBy = Nothing
     , _rdlProject = pRdlProject_
     , _rdlFilter = Nothing
@@ -102,6 +105,7 @@ regionDisksList pRdlProject_ pRdlRegion_ =
     , _rdlPageToken = Nothing
     , _rdlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

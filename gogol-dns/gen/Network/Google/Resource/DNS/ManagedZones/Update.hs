@@ -58,12 +58,15 @@ type ManagedZonesUpdateResource =
 -- | Update an existing ManagedZone.
 --
 -- /See:/ 'managedZonesUpdate' smart constructor.
-data ManagedZonesUpdate = ManagedZonesUpdate'
+data ManagedZonesUpdate =
+  ManagedZonesUpdate'
     { _mzuProject           :: !Text
     , _mzuPayload           :: !ManagedZone
     , _mzuManagedZone       :: !Text
     , _mzuClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagedZonesUpdate' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ managedZonesUpdate
     -> Text -- ^ 'mzuManagedZone'
     -> ManagedZonesUpdate
 managedZonesUpdate pMzuProject_ pMzuPayload_ pMzuManagedZone_ =
-    ManagedZonesUpdate'
+  ManagedZonesUpdate'
     { _mzuProject = pMzuProject_
     , _mzuPayload = pMzuPayload_
     , _mzuManagedZone = pMzuManagedZone_
     , _mzuClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 mzuProject :: Lens' ManagedZonesUpdate Text

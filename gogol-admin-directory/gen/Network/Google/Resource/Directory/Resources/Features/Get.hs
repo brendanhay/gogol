@@ -56,10 +56,13 @@ type ResourcesFeaturesGetResource =
 -- | Retrieves a feature.
 --
 -- /See:/ 'resourcesFeaturesGet' smart constructor.
-data ResourcesFeaturesGet = ResourcesFeaturesGet'
+data ResourcesFeaturesGet =
+  ResourcesFeaturesGet'
     { _rfgCustomer   :: !Text
     , _rfgFeatureKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesFeaturesGet' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ resourcesFeaturesGet
     -> Text -- ^ 'rfgFeatureKey'
     -> ResourcesFeaturesGet
 resourcesFeaturesGet pRfgCustomer_ pRfgFeatureKey_ =
-    ResourcesFeaturesGet'
-    { _rfgCustomer = pRfgCustomer_
-    , _rfgFeatureKey = pRfgFeatureKey_
-    }
+  ResourcesFeaturesGet'
+    {_rfgCustomer = pRfgCustomer_, _rfgFeatureKey = pRfgFeatureKey_}
+
 
 -- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your

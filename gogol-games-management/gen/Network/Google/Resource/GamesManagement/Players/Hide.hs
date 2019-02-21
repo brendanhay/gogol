@@ -59,10 +59,13 @@ type PlayersHideResource =
 -- console.
 --
 -- /See:/ 'playersHide' smart constructor.
-data PlayersHide = PlayersHide'
+data PlayersHide =
+  PlayersHide'
     { _phApplicationId :: !Text
     , _phPlayerId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayersHide' with the minimum fields required to make a request.
 --
@@ -76,10 +79,9 @@ playersHide
     -> Text -- ^ 'phPlayerId'
     -> PlayersHide
 playersHide pPhApplicationId_ pPhPlayerId_ =
-    PlayersHide'
-    { _phApplicationId = pPhApplicationId_
-    , _phPlayerId = pPhPlayerId_
-    }
+  PlayersHide'
+    {_phApplicationId = pPhApplicationId_, _phPlayerId = pPhPlayerId_}
+
 
 -- | The application ID from the Google Play developer console.
 phApplicationId :: Lens' PlayersHide Text

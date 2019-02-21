@@ -63,7 +63,8 @@ type SettingsSearchApplicationsGetResource =
 -- | Gets the specified search application.
 --
 -- /See:/ 'settingsSearchApplicationsGet' smart constructor.
-data SettingsSearchApplicationsGet = SettingsSearchApplicationsGet'
+data SettingsSearchApplicationsGet =
+  SettingsSearchApplicationsGet'
     { _ssagXgafv                       :: !(Maybe Xgafv)
     , _ssagUploadProtocol              :: !(Maybe Text)
     , _ssagAccessToken                 :: !(Maybe Text)
@@ -71,7 +72,9 @@ data SettingsSearchApplicationsGet = SettingsSearchApplicationsGet'
     , _ssagName                        :: !Text
     , _ssagDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _ssagCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsSearchApplicationsGet' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ settingsSearchApplicationsGet
     :: Text -- ^ 'ssagName'
     -> SettingsSearchApplicationsGet
 settingsSearchApplicationsGet pSsagName_ =
-    SettingsSearchApplicationsGet'
+  SettingsSearchApplicationsGet'
     { _ssagXgafv = Nothing
     , _ssagUploadProtocol = Nothing
     , _ssagAccessToken = Nothing
@@ -103,6 +106,7 @@ settingsSearchApplicationsGet pSsagName_ =
     , _ssagDebugOptionsEnableDebugging = Nothing
     , _ssagCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssagXgafv :: Lens' SettingsSearchApplicationsGet (Maybe Xgafv)

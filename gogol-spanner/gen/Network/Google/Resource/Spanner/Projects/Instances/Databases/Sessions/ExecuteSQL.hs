@@ -77,7 +77,8 @@ type ProjectsInstancesDatabasesSessionsExecuteSQLResource
 -- ExecuteStreamingSql instead.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsExecuteSQL' smart constructor.
-data ProjectsInstancesDatabasesSessionsExecuteSQL = ProjectsInstancesDatabasesSessionsExecuteSQL'
+data ProjectsInstancesDatabasesSessionsExecuteSQL =
+  ProjectsInstancesDatabasesSessionsExecuteSQL'
     { _pidsesqlXgafv          :: !(Maybe Xgafv)
     , _pidsesqlUploadProtocol :: !(Maybe Text)
     , _pidsesqlAccessToken    :: !(Maybe Text)
@@ -85,7 +86,9 @@ data ProjectsInstancesDatabasesSessionsExecuteSQL = ProjectsInstancesDatabasesSe
     , _pidsesqlPayload        :: !ExecuteSQLRequest
     , _pidsesqlSession        :: !Text
     , _pidsesqlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsExecuteSQL' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsInstancesDatabasesSessionsExecuteSQL
     -> Text -- ^ 'pidsesqlSession'
     -> ProjectsInstancesDatabasesSessionsExecuteSQL
 projectsInstancesDatabasesSessionsExecuteSQL pPidsesqlPayload_ pPidsesqlSession_ =
-    ProjectsInstancesDatabasesSessionsExecuteSQL'
+  ProjectsInstancesDatabasesSessionsExecuteSQL'
     { _pidsesqlXgafv = Nothing
     , _pidsesqlUploadProtocol = Nothing
     , _pidsesqlAccessToken = Nothing
@@ -118,6 +121,7 @@ projectsInstancesDatabasesSessionsExecuteSQL pPidsesqlPayload_ pPidsesqlSession_
     , _pidsesqlSession = pPidsesqlSession_
     , _pidsesqlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidsesqlXgafv :: Lens' ProjectsInstancesDatabasesSessionsExecuteSQL (Maybe Xgafv)
@@ -162,7 +166,8 @@ pidsesqlCallback
       (\ s a -> s{_pidsesqlCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsExecuteSQL where
+           ProjectsInstancesDatabasesSessionsExecuteSQL
+         where
         type Rs ProjectsInstancesDatabasesSessionsExecuteSQL
              = ResultSet
         type Scopes

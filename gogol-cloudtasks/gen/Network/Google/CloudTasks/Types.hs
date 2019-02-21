@@ -169,6 +169,7 @@ module Network.Google.CloudTasks.Types
     , Task
     , task
     , tLastAttempt
+    , tDispatchDeadline
     , tScheduleTime
     , tName
     , tFirstAttempt
@@ -244,4 +245,4 @@ cloudTasksService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

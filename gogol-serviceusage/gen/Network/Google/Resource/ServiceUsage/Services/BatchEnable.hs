@@ -22,7 +22,7 @@
 --
 -- Enable multiple services on a project. The operation is atomic: if
 -- enabling any service fails, then the entire batch fails, and no state
--- changes occur. Operation
+-- changes occur.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.batchEnable@.
 module Network.Google.Resource.ServiceUsage.Services.BatchEnable
@@ -64,10 +64,11 @@ type ServicesBatchEnableResource =
 
 -- | Enable multiple services on a project. The operation is atomic: if
 -- enabling any service fails, then the entire batch fails, and no state
--- changes occur. Operation
+-- changes occur.
 --
 -- /See:/ 'servicesBatchEnable' smart constructor.
-data ServicesBatchEnable = ServicesBatchEnable'
+data ServicesBatchEnable =
+  ServicesBatchEnable'
     { _sbeParent         :: !Text
     , _sbeXgafv          :: !(Maybe Xgafv)
     , _sbeUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ServicesBatchEnable = ServicesBatchEnable'
     , _sbeUploadType     :: !(Maybe Text)
     , _sbePayload        :: !BatchEnableServicesRequest
     , _sbeCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesBatchEnable' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ servicesBatchEnable
     -> BatchEnableServicesRequest -- ^ 'sbePayload'
     -> ServicesBatchEnable
 servicesBatchEnable pSbeParent_ pSbePayload_ =
-    ServicesBatchEnable'
+  ServicesBatchEnable'
     { _sbeParent = pSbeParent_
     , _sbeXgafv = Nothing
     , _sbeUploadProtocol = Nothing
@@ -108,6 +111,7 @@ servicesBatchEnable pSbeParent_ pSbePayload_ =
     , _sbePayload = pSbePayload_
     , _sbeCallback = Nothing
     }
+
 
 -- | Parent to enable services on. An example name would be:
 -- \`projects\/123\` where \`123\` is the project number (not project ID).

@@ -54,10 +54,13 @@ type AccountsContainersWorkspacesFoldersRevertResource
 -- | Reverts changes to a GTM Folder in a GTM Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesFoldersRevert' smart constructor.
-data AccountsContainersWorkspacesFoldersRevert = AccountsContainersWorkspacesFoldersRevert'
+data AccountsContainersWorkspacesFoldersRevert =
+  AccountsContainersWorkspacesFoldersRevert'
     { _acwfrPath        :: !Text
     , _acwfrFingerprint :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersRevert' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ accountsContainersWorkspacesFoldersRevert
     :: Text -- ^ 'acwfrPath'
     -> AccountsContainersWorkspacesFoldersRevert
 accountsContainersWorkspacesFoldersRevert pAcwfrPath_ =
-    AccountsContainersWorkspacesFoldersRevert'
-    { _acwfrPath = pAcwfrPath_
-    , _acwfrFingerprint = Nothing
-    }
+  AccountsContainersWorkspacesFoldersRevert'
+    {_acwfrPath = pAcwfrPath_, _acwfrFingerprint = Nothing}
+
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}
@@ -89,7 +91,8 @@ acwfrFingerprint
       (\ s a -> s{_acwfrFingerprint = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesFoldersRevert where
+           AccountsContainersWorkspacesFoldersRevert
+         where
         type Rs AccountsContainersWorkspacesFoldersRevert =
              RevertFolderResponse
         type Scopes AccountsContainersWorkspacesFoldersRevert

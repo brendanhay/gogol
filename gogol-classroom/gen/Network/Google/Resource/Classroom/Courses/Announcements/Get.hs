@@ -71,7 +71,8 @@ type CoursesAnnouncementsGetResource =
 -- requested course or announcement does not exist.
 --
 -- /See:/ 'coursesAnnouncementsGet' smart constructor.
-data CoursesAnnouncementsGet = CoursesAnnouncementsGet'
+data CoursesAnnouncementsGet =
+  CoursesAnnouncementsGet'
     { _cagXgafv          :: !(Maybe Xgafv)
     , _cagUploadProtocol :: !(Maybe Text)
     , _cagCourseId       :: !Text
@@ -79,7 +80,9 @@ data CoursesAnnouncementsGet = CoursesAnnouncementsGet'
     , _cagUploadType     :: !(Maybe Text)
     , _cagId             :: !Text
     , _cagCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesAnnouncementsGet' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ coursesAnnouncementsGet
     -> Text -- ^ 'cagId'
     -> CoursesAnnouncementsGet
 coursesAnnouncementsGet pCagCourseId_ pCagId_ =
-    CoursesAnnouncementsGet'
+  CoursesAnnouncementsGet'
     { _cagXgafv = Nothing
     , _cagUploadProtocol = Nothing
     , _cagCourseId = pCagCourseId_
@@ -112,6 +115,7 @@ coursesAnnouncementsGet pCagCourseId_ pCagId_ =
     , _cagId = pCagId_
     , _cagCallback = Nothing
     }
+
 
 -- | V1 error format.
 cagXgafv :: Lens' CoursesAnnouncementsGet (Maybe Xgafv)

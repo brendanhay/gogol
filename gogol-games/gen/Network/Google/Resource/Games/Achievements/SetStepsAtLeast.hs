@@ -61,10 +61,13 @@ type AchievementsSetStepsAtLeastResource =
 -- achievement is not modified.
 --
 -- /See:/ 'achievementsSetStepsAtLeast' smart constructor.
-data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast'
+data AchievementsSetStepsAtLeast =
+  AchievementsSetStepsAtLeast'
     { _assalAchievementId :: !Text
     , _assalSteps         :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementsSetStepsAtLeast' with the minimum fields required to make a request.
 --
@@ -78,10 +81,11 @@ achievementsSetStepsAtLeast
     -> Int32 -- ^ 'assalSteps'
     -> AchievementsSetStepsAtLeast
 achievementsSetStepsAtLeast pAssalAchievementId_ pAssalSteps_ =
-    AchievementsSetStepsAtLeast'
+  AchievementsSetStepsAtLeast'
     { _assalAchievementId = pAssalAchievementId_
     , _assalSteps = _Coerce # pAssalSteps_
     }
+
 
 -- | The ID of the achievement used by this method.
 assalAchievementId :: Lens' AchievementsSetStepsAtLeast Text
@@ -100,7 +104,8 @@ instance GoogleRequest AchievementsSetStepsAtLeast
         type Rs AchievementsSetStepsAtLeast =
              AchievementSetStepsAtLeastResponse
         type Scopes AchievementsSetStepsAtLeast =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient AchievementsSetStepsAtLeast'{..}
           = go _assalAchievementId (Just _assalSteps)
               (Just AltJSON)

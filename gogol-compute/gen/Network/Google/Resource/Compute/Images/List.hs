@@ -71,13 +71,16 @@ type ImagesListResource =
 -- respective image project, such as debian-cloud or windows-cloud.
 --
 -- /See:/ 'imagesList' smart constructor.
-data ImagesList = ImagesList'
+data ImagesList =
+  ImagesList'
     { _imamOrderBy    :: !(Maybe Text)
     , _imamProject    :: !Text
     , _imamFilter     :: !(Maybe Text)
     , _imamPageToken  :: !(Maybe Text)
     , _imamMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImagesList' with the minimum fields required to make a request.
 --
@@ -96,13 +99,14 @@ imagesList
     :: Text -- ^ 'imamProject'
     -> ImagesList
 imagesList pImamProject_ =
-    ImagesList'
+  ImagesList'
     { _imamOrderBy = Nothing
     , _imamProject = pImamProject_
     , _imamFilter = Nothing
     , _imamPageToken = Nothing
     , _imamMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

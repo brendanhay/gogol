@@ -59,11 +59,14 @@ type InstancesGetResource =
 -- instances by making a list() request.
 --
 -- /See:/ 'instancesGet' smart constructor.
-data InstancesGet = InstancesGet'
+data InstancesGet =
+  InstancesGet'
     { _igProject  :: !Text
     , _igZone     :: !Text
     , _igInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesGet' with the minimum fields required to make a request.
 --
@@ -80,11 +83,9 @@ instancesGet
     -> Text -- ^ 'igInstance'
     -> InstancesGet
 instancesGet pIgProject_ pIgZone_ pIgInstance_ =
-    InstancesGet'
-    { _igProject = pIgProject_
-    , _igZone = pIgZone_
-    , _igInstance = pIgInstance_
-    }
+  InstancesGet'
+    {_igProject = pIgProject_, _igZone = pIgZone_, _igInstance = pIgInstance_}
+
 
 -- | Project ID for this request.
 igProject :: Lens' InstancesGet Text

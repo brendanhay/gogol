@@ -54,9 +54,12 @@ type CalendarsClearResource =
 -- with the primary calendar of an account.
 --
 -- /See:/ 'calendarsClear' smart constructor.
-newtype CalendarsClear = CalendarsClear'
+newtype CalendarsClear =
+  CalendarsClear'
     { _ccCalendarId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CalendarsClear' with the minimum fields required to make a request.
 --
@@ -66,10 +69,8 @@ newtype CalendarsClear = CalendarsClear'
 calendarsClear
     :: Text -- ^ 'ccCalendarId'
     -> CalendarsClear
-calendarsClear pCcCalendarId_ =
-    CalendarsClear'
-    { _ccCalendarId = pCcCalendarId_
-    }
+calendarsClear pCcCalendarId_ = CalendarsClear' {_ccCalendarId = pCcCalendarId_}
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

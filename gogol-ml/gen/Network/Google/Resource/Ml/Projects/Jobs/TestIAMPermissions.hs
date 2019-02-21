@@ -74,7 +74,8 @@ type ProjectsJobsTestIAMPermissionsResource =
 -- warning.
 --
 -- /See:/ 'projectsJobsTestIAMPermissions' smart constructor.
-data ProjectsJobsTestIAMPermissions = ProjectsJobsTestIAMPermissions'
+data ProjectsJobsTestIAMPermissions =
+  ProjectsJobsTestIAMPermissions'
     { _pjtipXgafv          :: !(Maybe Xgafv)
     , _pjtipUploadProtocol :: !(Maybe Text)
     , _pjtipAccessToken    :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsJobsTestIAMPermissions = ProjectsJobsTestIAMPermissions'
     , _pjtipPayload        :: !GoogleIAMV1__TestIAMPermissionsRequest
     , _pjtipResource       :: !Text
     , _pjtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ projectsJobsTestIAMPermissions
     -> Text -- ^ 'pjtipResource'
     -> ProjectsJobsTestIAMPermissions
 projectsJobsTestIAMPermissions pPjtipPayload_ pPjtipResource_ =
-    ProjectsJobsTestIAMPermissions'
+  ProjectsJobsTestIAMPermissions'
     { _pjtipXgafv = Nothing
     , _pjtipUploadProtocol = Nothing
     , _pjtipAccessToken = Nothing
@@ -115,6 +118,7 @@ projectsJobsTestIAMPermissions pPjtipPayload_ pPjtipResource_ =
     , _pjtipResource = pPjtipResource_
     , _pjtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjtipXgafv :: Lens' ProjectsJobsTestIAMPermissions (Maybe Xgafv)

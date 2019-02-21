@@ -69,14 +69,17 @@ type ProjectsSubscriptionsDeleteResource =
 -- specified.
 --
 -- /See:/ 'projectsSubscriptionsDelete' smart constructor.
-data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete'
+data ProjectsSubscriptionsDelete =
+  ProjectsSubscriptionsDelete'
     { _psdXgafv          :: !(Maybe Xgafv)
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdAccessToken    :: !(Maybe Text)
     , _psdUploadType     :: !(Maybe Text)
     , _psdSubscription   :: !Text
     , _psdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSubscriptionsDelete' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsSubscriptionsDelete
     :: Text -- ^ 'psdSubscription'
     -> ProjectsSubscriptionsDelete
 projectsSubscriptionsDelete pPsdSubscription_ =
-    ProjectsSubscriptionsDelete'
+  ProjectsSubscriptionsDelete'
     { _psdXgafv = Nothing
     , _psdUploadProtocol = Nothing
     , _psdAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsSubscriptionsDelete pPsdSubscription_ =
     , _psdSubscription = pPsdSubscription_
     , _psdCallback = Nothing
     }
+
 
 -- | V1 error format.
 psdXgafv :: Lens' ProjectsSubscriptionsDelete (Maybe Xgafv)

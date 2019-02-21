@@ -61,12 +61,15 @@ type MyLibraryBookshelvesRemoveVolumeResource =
 -- | Removes a volume from a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesRemoveVolume' smart constructor.
-data MyLibraryBookshelvesRemoveVolume = MyLibraryBookshelvesRemoveVolume'
+data MyLibraryBookshelvesRemoveVolume =
+  MyLibraryBookshelvesRemoveVolume'
     { _mlbrvReason   :: !(Maybe MyLibraryBookshelvesRemoveVolumeReason)
     , _mlbrvShelf    :: !Text
     , _mlbrvVolumeId :: !Text
     , _mlbrvSource   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MyLibraryBookshelvesRemoveVolume' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ myLibraryBookshelvesRemoveVolume
     -> Text -- ^ 'mlbrvVolumeId'
     -> MyLibraryBookshelvesRemoveVolume
 myLibraryBookshelvesRemoveVolume pMlbrvShelf_ pMlbrvVolumeId_ =
-    MyLibraryBookshelvesRemoveVolume'
+  MyLibraryBookshelvesRemoveVolume'
     { _mlbrvReason = Nothing
     , _mlbrvShelf = pMlbrvShelf_
     , _mlbrvVolumeId = pMlbrvVolumeId_
     , _mlbrvSource = Nothing
     }
+
 
 -- | The reason for which the book is removed from the library.
 mlbrvReason :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe MyLibraryBookshelvesRemoveVolumeReason)
@@ -113,7 +117,8 @@ mlbrvSource
   = lens _mlbrvSource (\ s a -> s{_mlbrvSource = a})
 
 instance GoogleRequest
-         MyLibraryBookshelvesRemoveVolume where
+           MyLibraryBookshelvesRemoveVolume
+         where
         type Rs MyLibraryBookshelvesRemoveVolume = ()
         type Scopes MyLibraryBookshelvesRemoveVolume =
              '["https://www.googleapis.com/auth/books"]

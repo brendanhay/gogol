@@ -63,14 +63,17 @@ type OrganizationsOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'organizationsOperationsGet' smart constructor.
-data OrganizationsOperationsGet = OrganizationsOperationsGet'
+data OrganizationsOperationsGet =
+  OrganizationsOperationsGet'
     { _oogXgafv          :: !(Maybe Xgafv)
     , _oogUploadProtocol :: !(Maybe Text)
     , _oogAccessToken    :: !(Maybe Text)
     , _oogUploadType     :: !(Maybe Text)
     , _oogName           :: !Text
     , _oogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsOperationsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ organizationsOperationsGet
     :: Text -- ^ 'oogName'
     -> OrganizationsOperationsGet
 organizationsOperationsGet pOogName_ =
-    OrganizationsOperationsGet'
+  OrganizationsOperationsGet'
     { _oogXgafv = Nothing
     , _oogUploadProtocol = Nothing
     , _oogAccessToken = Nothing
@@ -99,6 +102,7 @@ organizationsOperationsGet pOogName_ =
     , _oogName = pOogName_
     , _oogCallback = Nothing
     }
+
 
 -- | V1 error format.
 oogXgafv :: Lens' OrganizationsOperationsGet (Maybe Xgafv)

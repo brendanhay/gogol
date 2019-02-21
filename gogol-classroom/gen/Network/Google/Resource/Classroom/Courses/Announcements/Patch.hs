@@ -80,7 +80,8 @@ type CoursesAnnouncementsPatchResource =
 -- not exist
 --
 -- /See:/ 'coursesAnnouncementsPatch' smart constructor.
-data CoursesAnnouncementsPatch = CoursesAnnouncementsPatch'
+data CoursesAnnouncementsPatch =
+  CoursesAnnouncementsPatch'
     { _capXgafv          :: !(Maybe Xgafv)
     , _capUploadProtocol :: !(Maybe Text)
     , _capUpdateMask     :: !(Maybe GFieldMask)
@@ -90,7 +91,9 @@ data CoursesAnnouncementsPatch = CoursesAnnouncementsPatch'
     , _capPayload        :: !Announcement
     , _capId             :: !Text
     , _capCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesAnnouncementsPatch' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ coursesAnnouncementsPatch
     -> Text -- ^ 'capId'
     -> CoursesAnnouncementsPatch
 coursesAnnouncementsPatch pCapCourseId_ pCapPayload_ pCapId_ =
-    CoursesAnnouncementsPatch'
+  CoursesAnnouncementsPatch'
     { _capXgafv = Nothing
     , _capUploadProtocol = Nothing
     , _capUpdateMask = Nothing
@@ -130,6 +133,7 @@ coursesAnnouncementsPatch pCapCourseId_ pCapPayload_ pCapId_ =
     , _capId = pCapId_
     , _capCallback = Nothing
     }
+
 
 -- | V1 error format.
 capXgafv :: Lens' CoursesAnnouncementsPatch (Maybe Xgafv)

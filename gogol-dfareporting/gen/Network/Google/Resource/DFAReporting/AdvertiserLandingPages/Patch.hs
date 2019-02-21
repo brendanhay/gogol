@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserLandingPagesPatch' request conforms to.
 type AdvertiserLandingPagesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserLandingPages" :>
@@ -57,11 +57,14 @@ type AdvertiserLandingPagesPatchResource =
 -- | Updates an existing landing page. This method supports patch semantics.
 --
 -- /See:/ 'advertiserLandingPagesPatch' smart constructor.
-data AdvertiserLandingPagesPatch = AdvertiserLandingPagesPatch'
+data AdvertiserLandingPagesPatch =
+  AdvertiserLandingPagesPatch'
     { _alppProFileId :: !(Textual Int64)
     , _alppPayload   :: !LandingPage
     , _alppId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdvertiserLandingPagesPatch' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ advertiserLandingPagesPatch
     -> Int64 -- ^ 'alppId'
     -> AdvertiserLandingPagesPatch
 advertiserLandingPagesPatch pAlppProFileId_ pAlppPayload_ pAlppId_ =
-    AdvertiserLandingPagesPatch'
+  AdvertiserLandingPagesPatch'
     { _alppProFileId = _Coerce # pAlppProFileId_
     , _alppPayload = pAlppPayload_
     , _alppId = _Coerce # pAlppId_
     }
+
 
 -- | User profile ID associated with this request.
 alppProFileId :: Lens' AdvertiserLandingPagesPatch Int64

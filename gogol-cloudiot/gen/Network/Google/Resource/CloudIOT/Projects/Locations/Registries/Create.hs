@@ -63,7 +63,8 @@ type ProjectsLocationsRegistriesCreateResource =
 -- | Creates a device registry that contains devices.
 --
 -- /See:/ 'projectsLocationsRegistriesCreate' smart constructor.
-data ProjectsLocationsRegistriesCreate = ProjectsLocationsRegistriesCreate'
+data ProjectsLocationsRegistriesCreate =
+  ProjectsLocationsRegistriesCreate'
     { _plrcParent         :: !Text
     , _plrcXgafv          :: !(Maybe Xgafv)
     , _plrcUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsLocationsRegistriesCreate = ProjectsLocationsRegistriesCreate'
     , _plrcUploadType     :: !(Maybe Text)
     , _plrcPayload        :: !DeviceRegistry
     , _plrcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsRegistriesCreate
     -> DeviceRegistry -- ^ 'plrcPayload'
     -> ProjectsLocationsRegistriesCreate
 projectsLocationsRegistriesCreate pPlrcParent_ pPlrcPayload_ =
-    ProjectsLocationsRegistriesCreate'
+  ProjectsLocationsRegistriesCreate'
     { _plrcParent = pPlrcParent_
     , _plrcXgafv = Nothing
     , _plrcUploadProtocol = Nothing
@@ -104,6 +107,7 @@ projectsLocationsRegistriesCreate pPlrcParent_ pPlrcPayload_ =
     , _plrcPayload = pPlrcPayload_
     , _plrcCallback = Nothing
     }
+
 
 -- | The project and cloud region where this device registry must be created.
 -- For example, \`projects\/example-project\/locations\/us-central1\`.
@@ -145,7 +149,8 @@ plrcCallback
   = lens _plrcCallback (\ s a -> s{_plrcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesCreate where
+           ProjectsLocationsRegistriesCreate
+         where
         type Rs ProjectsLocationsRegistriesCreate =
              DeviceRegistry
         type Scopes ProjectsLocationsRegistriesCreate =

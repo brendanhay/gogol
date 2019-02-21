@@ -59,14 +59,17 @@ type ProjectsSubscriptionsGetResource =
 -- | Gets the configuration details of a subscription.
 --
 -- /See:/ 'projectsSubscriptionsGet' smart constructor.
-data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet'
+data ProjectsSubscriptionsGet =
+  ProjectsSubscriptionsGet'
     { _psgXgafv          :: !(Maybe Xgafv)
     , _psgUploadProtocol :: !(Maybe Text)
     , _psgAccessToken    :: !(Maybe Text)
     , _psgUploadType     :: !(Maybe Text)
     , _psgSubscription   :: !Text
     , _psgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSubscriptionsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsSubscriptionsGet
     :: Text -- ^ 'psgSubscription'
     -> ProjectsSubscriptionsGet
 projectsSubscriptionsGet pPsgSubscription_ =
-    ProjectsSubscriptionsGet'
+  ProjectsSubscriptionsGet'
     { _psgXgafv = Nothing
     , _psgUploadProtocol = Nothing
     , _psgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsSubscriptionsGet pPsgSubscription_ =
     , _psgSubscription = pPsgSubscription_
     , _psgCallback = Nothing
     }
+
 
 -- | V1 error format.
 psgXgafv :: Lens' ProjectsSubscriptionsGet (Maybe Xgafv)

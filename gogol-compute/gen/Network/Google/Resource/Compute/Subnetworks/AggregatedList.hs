@@ -62,13 +62,16 @@ type SubnetworksAggregatedListResource =
 -- | Retrieves an aggregated list of subnetworks.
 --
 -- /See:/ 'subnetworksAggregatedList' smart constructor.
-data SubnetworksAggregatedList = SubnetworksAggregatedList'
+data SubnetworksAggregatedList =
+  SubnetworksAggregatedList'
     { _salOrderBy    :: !(Maybe Text)
     , _salProject    :: !Text
     , _salFilter     :: !(Maybe Text)
     , _salPageToken  :: !(Maybe Text)
     , _salMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubnetworksAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ subnetworksAggregatedList
     :: Text -- ^ 'salProject'
     -> SubnetworksAggregatedList
 subnetworksAggregatedList pSalProject_ =
-    SubnetworksAggregatedList'
+  SubnetworksAggregatedList'
     { _salOrderBy = Nothing
     , _salProject = pSalProject_
     , _salFilter = Nothing
     , _salPageToken = Nothing
     , _salMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

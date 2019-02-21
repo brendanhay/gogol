@@ -196,7 +196,7 @@
       }
     }
   },
-  "revision": "20181229",
+  "revision": "20190204",
   "rootUrl": "https://servicecontrol.googleapis.com/",
   "schemas": {
     "AllocateInfo": {
@@ -522,6 +522,10 @@
           "description": "Free-form text providing details on the error cause of the error.",
           "type": "string"
         },
+        "status": {
+          "$ref": "Status",
+          "description": "Contains public information about the check error. If available,\n`status.code` will be non zero and client can propagate it out as public\nerror."
+        },
         "subject": {
           "description": "Subject to whom this error applies. See the specific code enum for more\ndetails on this field. For example:\n    - “project:\u003cproject-id or project-number\u003e”\n    - “folder:\u003cfolder-id\u003e”\n    - “organization:\u003corganization-id\u003e”",
           "type": "string"
@@ -564,7 +568,7 @@
           "type": "string"
         },
         "skipActivationCheck": {
-          "description": "Indicates if service activation check should be skipped for this request.\nDefault behavior is to perform the check and apply relevant quota.",
+          "description": "Indicates if service activation check should be skipped for this request.\nDefault behavior is to perform the check and apply relevant quota.\nWARNING: Setting this flag to \"true\" will disable quota enforcement.",
           "type": "boolean"
         }
       },
@@ -1017,7 +1021,7 @@
       "id": "Operation",
       "properties": {
         "consumerId": {
-          "description": "Identity of the consumer who is using the service.\nThis field should be filled in for the operations initiated by a\nconsumer, but not for service-initiated operations that are\nnot related to a specific consumer.\n\nThis can be in one of the following formats:\n  project:\u003cproject_id\u003e,\n  project_number:\u003cproject_number\u003e,\n  api_key:\u003capi_key\u003e.",
+          "description": "Identity of the consumer who is using the service.\nThis field should be filled in for the operations initiated by a\nconsumer, but not for service-initiated operations that are\nnot related to a specific consumer.\n\n- This can be in one of the following formats:\n    - project:PROJECT_ID,\n    - project`_`number:PROJECT_NUMBER,\n    - api`_`key:API_KEY.",
           "type": "string"
         },
         "endTime": {

@@ -66,7 +66,8 @@ type ProjectsLocationsRegistriesDevicesConfigVersionsListResource
 -- order (i.e.: newest first).
 --
 -- /See:/ 'projectsLocationsRegistriesDevicesConfigVersionsList' smart constructor.
-data ProjectsLocationsRegistriesDevicesConfigVersionsList = ProjectsLocationsRegistriesDevicesConfigVersionsList'
+data ProjectsLocationsRegistriesDevicesConfigVersionsList =
+  ProjectsLocationsRegistriesDevicesConfigVersionsList'
     { _plrdcvlXgafv          :: !(Maybe Xgafv)
     , _plrdcvlUploadProtocol :: !(Maybe Text)
     , _plrdcvlAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsLocationsRegistriesDevicesConfigVersionsList = ProjectsLocationsReg
     , _plrdcvlNumVersions    :: !(Maybe (Textual Int32))
     , _plrdcvlName           :: !Text
     , _plrdcvlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesConfigVersionsList' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsLocationsRegistriesDevicesConfigVersionsList
     :: Text -- ^ 'plrdcvlName'
     -> ProjectsLocationsRegistriesDevicesConfigVersionsList
 projectsLocationsRegistriesDevicesConfigVersionsList pPlrdcvlName_ =
-    ProjectsLocationsRegistriesDevicesConfigVersionsList'
+  ProjectsLocationsRegistriesDevicesConfigVersionsList'
     { _plrdcvlXgafv = Nothing
     , _plrdcvlUploadProtocol = Nothing
     , _plrdcvlAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsLocationsRegistriesDevicesConfigVersionsList pPlrdcvlName_ =
     , _plrdcvlName = pPlrdcvlName_
     , _plrdcvlCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrdcvlXgafv :: Lens' ProjectsLocationsRegistriesDevicesConfigVersionsList (Maybe Xgafv)
@@ -154,7 +158,7 @@ plrdcvlCallback
       (\ s a -> s{_plrdcvlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesDevicesConfigVersionsList
+           ProjectsLocationsRegistriesDevicesConfigVersionsList
          where
         type Rs
                ProjectsLocationsRegistriesDevicesConfigVersionsList

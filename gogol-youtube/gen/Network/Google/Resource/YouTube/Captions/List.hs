@@ -66,13 +66,16 @@ type CaptionsListResource =
 -- caption track.
 --
 -- /See:/ 'captionsList' smart constructor.
-data CaptionsList = CaptionsList'
+data CaptionsList =
+  CaptionsList'
     { _clOnBehalfOf             :: !(Maybe Text)
     , _clPart                   :: !Text
     , _clOnBehalfOfContentOwner :: !(Maybe Text)
     , _clVideoId                :: !Text
     , _clId                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CaptionsList' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ captionsList
     -> Text -- ^ 'clVideoId'
     -> CaptionsList
 captionsList pClPart_ pClVideoId_ =
-    CaptionsList'
+  CaptionsList'
     { _clOnBehalfOf = Nothing
     , _clPart = pClPart_
     , _clOnBehalfOfContentOwner = Nothing
     , _clVideoId = pClVideoId_
     , _clId = Nothing
     }
+
 
 -- | ID of the Google+ Page for the channel that the request is on behalf of.
 clOnBehalfOf :: Lens' CaptionsList (Maybe Text)

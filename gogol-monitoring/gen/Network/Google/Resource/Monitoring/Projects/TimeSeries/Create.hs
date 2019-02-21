@@ -69,7 +69,8 @@ type ProjectsTimeSeriesCreateResource =
 -- response.
 --
 -- /See:/ 'projectsTimeSeriesCreate' smart constructor.
-data ProjectsTimeSeriesCreate = ProjectsTimeSeriesCreate'
+data ProjectsTimeSeriesCreate =
+  ProjectsTimeSeriesCreate'
     { _ptscXgafv          :: !(Maybe Xgafv)
     , _ptscUploadProtocol :: !(Maybe Text)
     , _ptscAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsTimeSeriesCreate = ProjectsTimeSeriesCreate'
     , _ptscPayload        :: !CreateTimeSeriesRequest
     , _ptscName           :: !Text
     , _ptscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTimeSeriesCreate' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsTimeSeriesCreate
     -> Text -- ^ 'ptscName'
     -> ProjectsTimeSeriesCreate
 projectsTimeSeriesCreate pPtscPayload_ pPtscName_ =
-    ProjectsTimeSeriesCreate'
+  ProjectsTimeSeriesCreate'
     { _ptscXgafv = Nothing
     , _ptscUploadProtocol = Nothing
     , _ptscAccessToken = Nothing
@@ -110,6 +113,7 @@ projectsTimeSeriesCreate pPtscPayload_ pPtscName_ =
     , _ptscName = pPtscName_
     , _ptscCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptscXgafv :: Lens' ProjectsTimeSeriesCreate (Maybe Xgafv)

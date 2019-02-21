@@ -55,10 +55,13 @@ type StyleInsertResource =
 -- | Adds a new style for the table.
 --
 -- /See:/ 'styleInsert' smart constructor.
-data StyleInsert = StyleInsert'
+data StyleInsert =
+  StyleInsert'
     { _siPayload :: !StyleSetting
     , _siTableId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StyleInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ styleInsert
     -> Text -- ^ 'siTableId'
     -> StyleInsert
 styleInsert pSiPayload_ pSiTableId_ =
-    StyleInsert'
-    { _siPayload = pSiPayload_
-    , _siTableId = pSiTableId_
-    }
+  StyleInsert' {_siPayload = pSiPayload_, _siTableId = pSiTableId_}
+
 
 -- | Multipart request metadata.
 siPayload :: Lens' StyleInsert StyleSetting

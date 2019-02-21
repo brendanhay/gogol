@@ -86,7 +86,8 @@ type GetPartnersstatusResource =
 -- called if the logged in user is the admin of the agency.
 --
 -- /See:/ 'getPartnersstatus' smart constructor.
-data GetPartnersstatus = GetPartnersstatus'
+data GetPartnersstatus =
+  GetPartnersstatus'
     { _gpXgafv                                       :: !(Maybe Xgafv)
     , _gpUploadProtocol                              :: !(Maybe Text)
     , _gpAccessToken                                 :: !(Maybe Text)
@@ -99,7 +100,9 @@ data GetPartnersstatus = GetPartnersstatus'
     , _gpRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _gpRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _gpCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetPartnersstatus' with the minimum fields required to make a request.
 --
@@ -131,7 +134,7 @@ data GetPartnersstatus = GetPartnersstatus'
 getPartnersstatus
     :: GetPartnersstatus
 getPartnersstatus =
-    GetPartnersstatus'
+  GetPartnersstatus'
     { _gpXgafv = Nothing
     , _gpUploadProtocol = Nothing
     , _gpAccessToken = Nothing
@@ -145,6 +148,7 @@ getPartnersstatus =
     , _gpRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _gpCallback = Nothing
     }
+
 
 -- | V1 error format.
 gpXgafv :: Lens' GetPartnersstatus (Maybe Xgafv)

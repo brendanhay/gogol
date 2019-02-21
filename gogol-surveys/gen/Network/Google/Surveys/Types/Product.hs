@@ -22,12 +22,15 @@ import           Network.Google.Surveys.Types.Sum
 
 --
 -- /See:/ 'surveysListResponse' smart constructor.
-data SurveysListResponse = SurveysListResponse'
+data SurveysListResponse =
+  SurveysListResponse'
     { _slrRequestId       :: !(Maybe Text)
     , _slrTokenPagination :: !(Maybe TokenPagination)
     , _slrPageInfo        :: !(Maybe PageInfo)
     , _slrResources       :: !(Maybe [Survey])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveysListResponse' with the minimum fields required to make a request.
 --
@@ -43,12 +46,13 @@ data SurveysListResponse = SurveysListResponse'
 surveysListResponse
     :: SurveysListResponse
 surveysListResponse =
-    SurveysListResponse'
+  SurveysListResponse'
     { _slrRequestId = Nothing
     , _slrTokenPagination = Nothing
     , _slrPageInfo = Nothing
     , _slrResources = Nothing
     }
+
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -92,10 +96,13 @@ instance ToJSON SurveysListResponse where
 
 --
 -- /See:/ 'tokenPagination' smart constructor.
-data TokenPagination = TokenPagination'
+data TokenPagination =
+  TokenPagination'
     { _tpNextPageToken     :: !(Maybe Text)
     , _tpPreviousPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
@@ -107,10 +114,8 @@ data TokenPagination = TokenPagination'
 tokenPagination
     :: TokenPagination
 tokenPagination =
-    TokenPagination'
-    { _tpNextPageToken = Nothing
-    , _tpPreviousPageToken = Nothing
-    }
+  TokenPagination' {_tpNextPageToken = Nothing, _tpPreviousPageToken = Nothing}
+
 
 tpNextPageToken :: Lens' TokenPagination (Maybe Text)
 tpNextPageToken
@@ -139,9 +144,12 @@ instance ToJSON TokenPagination where
 
 --
 -- /See:/ 'resultsGetRequest' smart constructor.
-newtype ResultsGetRequest = ResultsGetRequest'
+newtype ResultsGetRequest =
+  ResultsGetRequest'
     { _rgrResultMask :: Maybe ResultsMask
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultsGetRequest' with the minimum fields required to make a request.
 --
@@ -150,10 +158,8 @@ newtype ResultsGetRequest = ResultsGetRequest'
 -- * 'rgrResultMask'
 resultsGetRequest
     :: ResultsGetRequest
-resultsGetRequest =
-    ResultsGetRequest'
-    { _rgrResultMask = Nothing
-    }
+resultsGetRequest = ResultsGetRequest' {_rgrResultMask = Nothing}
+
 
 rgrResultMask :: Lens' ResultsGetRequest (Maybe ResultsMask)
 rgrResultMask
@@ -172,11 +178,14 @@ instance ToJSON ResultsGetRequest where
 
 --
 -- /See:/ 'pageInfo' smart constructor.
-data PageInfo = PageInfo'
+data PageInfo =
+  PageInfo'
     { _piResultPerPage :: !(Maybe (Textual Int32))
     , _piTotalResults  :: !(Maybe (Textual Int32))
     , _piStartIndex    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
@@ -190,11 +199,12 @@ data PageInfo = PageInfo'
 pageInfo
     :: PageInfo
 pageInfo =
-    PageInfo'
+  PageInfo'
     { _piResultPerPage = Nothing
     , _piTotalResults = Nothing
     , _piStartIndex = Nothing
     }
+
 
 piResultPerPage :: Lens' PageInfo (Maybe Int32)
 piResultPerPage
@@ -231,10 +241,13 @@ instance ToJSON PageInfo where
 
 --
 -- /See:/ 'fieldMask' smart constructor.
-data FieldMask = FieldMask'
+data FieldMask =
+  FieldMask'
     { _fmId     :: !(Maybe (Textual Int32))
     , _fmFields :: !(Maybe [FieldMask])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FieldMask' with the minimum fields required to make a request.
 --
@@ -245,11 +258,8 @@ data FieldMask = FieldMask'
 -- * 'fmFields'
 fieldMask
     :: FieldMask
-fieldMask =
-    FieldMask'
-    { _fmId = Nothing
-    , _fmFields = Nothing
-    }
+fieldMask = FieldMask' {_fmId = Nothing, _fmFields = Nothing}
+
 
 fmId :: Lens' FieldMask (Maybe Int32)
 fmId
@@ -278,7 +288,8 @@ instance ToJSON FieldMask where
 -- | Representation of an individual survey object.
 --
 -- /See:/ 'survey' smart constructor.
-data Survey = Survey'
+data Survey =
+  Survey'
     { _sAudience            :: !(Maybe SurveyAudience)
     , _sState               :: !(Maybe Text)
     , _sOwners              :: !(Maybe [Text])
@@ -290,7 +301,9 @@ data Survey = Survey'
     , _sQuestions           :: !(Maybe [SurveyQuestion])
     , _sTitle               :: !(Maybe Text)
     , _sDescription         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Survey' with the minimum fields required to make a request.
 --
@@ -320,7 +333,7 @@ data Survey = Survey'
 survey
     :: Survey
 survey =
-    Survey'
+  Survey'
     { _sAudience = Nothing
     , _sState = Nothing
     , _sOwners = Nothing
@@ -333,6 +346,7 @@ survey =
     , _sTitle = Nothing
     , _sDescription = Nothing
     }
+
 
 -- | Targeting-criteria message containing demographic information
 sAudience :: Lens' Survey (Maybe SurveyAudience)
@@ -431,9 +445,12 @@ instance ToJSON Survey where
 
 --
 -- /See:/ 'surveysStartResponse' smart constructor.
-newtype SurveysStartResponse = SurveysStartResponse'
+newtype SurveysStartResponse =
+  SurveysStartResponse'
     { _ssrRequestId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveysStartResponse' with the minimum fields required to make a request.
 --
@@ -442,10 +459,8 @@ newtype SurveysStartResponse = SurveysStartResponse'
 -- * 'ssrRequestId'
 surveysStartResponse
     :: SurveysStartResponse
-surveysStartResponse =
-    SurveysStartResponse'
-    { _ssrRequestId = Nothing
-    }
+surveysStartResponse = SurveysStartResponse' {_ssrRequestId = Nothing}
+
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -466,9 +481,12 @@ instance ToJSON SurveysStartResponse where
 
 --
 -- /See:/ 'surveysStopResponse' smart constructor.
-newtype SurveysStopResponse = SurveysStopResponse'
+newtype SurveysStopResponse =
+  SurveysStopResponse'
     { _sRequestId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveysStopResponse' with the minimum fields required to make a request.
 --
@@ -477,10 +495,8 @@ newtype SurveysStopResponse = SurveysStopResponse'
 -- * 'sRequestId'
 surveysStopResponse
     :: SurveysStopResponse
-surveysStopResponse =
-    SurveysStopResponse'
-    { _sRequestId = Nothing
-    }
+surveysStopResponse = SurveysStopResponse' {_sRequestId = Nothing}
+
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -500,10 +516,13 @@ instance ToJSON SurveysStopResponse where
 
 --
 -- /See:/ 'resultsMask' smart constructor.
-data ResultsMask = ResultsMask'
+data ResultsMask =
+  ResultsMask'
     { _rmProjection :: !(Maybe Text)
     , _rmFields     :: !(Maybe [FieldMask])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultsMask' with the minimum fields required to make a request.
 --
@@ -514,11 +533,8 @@ data ResultsMask = ResultsMask'
 -- * 'rmFields'
 resultsMask
     :: ResultsMask
-resultsMask =
-    ResultsMask'
-    { _rmProjection = Nothing
-    , _rmFields = Nothing
-    }
+resultsMask = ResultsMask' {_rmProjection = Nothing, _rmFields = Nothing}
+
 
 rmProjection :: Lens' ResultsMask (Maybe Text)
 rmProjection
@@ -547,10 +563,13 @@ instance ToJSON ResultsMask where
 -- | Message representing why the survey was rejected from review, if it was.
 --
 -- /See:/ 'surveyRejection' smart constructor.
-data SurveyRejection = SurveyRejection'
+data SurveyRejection =
+  SurveyRejection'
     { _srExplanation :: !(Maybe Text)
     , _srType        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveyRejection' with the minimum fields required to make a request.
 --
@@ -561,11 +580,8 @@ data SurveyRejection = SurveyRejection'
 -- * 'srType'
 surveyRejection
     :: SurveyRejection
-surveyRejection =
-    SurveyRejection'
-    { _srExplanation = Nothing
-    , _srType = Nothing
-    }
+surveyRejection = SurveyRejection' {_srExplanation = Nothing, _srType = Nothing}
+
 
 -- | A human-readable explanation of what was wrong with the survey.
 srExplanation :: Lens' SurveyRejection (Maybe Text)
@@ -595,10 +611,13 @@ instance ToJSON SurveyRejection where
 -- | Reference to the current results for a given survey.
 --
 -- /See:/ 'surveyResults' smart constructor.
-data SurveyResults = SurveyResults'
+data SurveyResults =
+  SurveyResults'
     { _srStatus      :: !(Maybe Text)
     , _srSurveyURLId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveyResults' with the minimum fields required to make a request.
 --
@@ -609,11 +628,8 @@ data SurveyResults = SurveyResults'
 -- * 'srSurveyURLId'
 surveyResults
     :: SurveyResults
-surveyResults =
-    SurveyResults'
-    { _srStatus = Nothing
-    , _srSurveyURLId = Nothing
-    }
+surveyResults = SurveyResults' {_srStatus = Nothing, _srSurveyURLId = Nothing}
+
 
 -- | Human readable string describing the status of the request.
 srStatus :: Lens' SurveyResults (Maybe Text)
@@ -641,9 +657,12 @@ instance ToJSON SurveyResults where
 
 --
 -- /See:/ 'surveysStartRequest' smart constructor.
-newtype SurveysStartRequest = SurveysStartRequest'
+newtype SurveysStartRequest =
+  SurveysStartRequest'
     { _ssrMaxCostPerResponseNanos :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveysStartRequest' with the minimum fields required to make a request.
 --
@@ -653,9 +672,8 @@ newtype SurveysStartRequest = SurveysStartRequest'
 surveysStartRequest
     :: SurveysStartRequest
 surveysStartRequest =
-    SurveysStartRequest'
-    { _ssrMaxCostPerResponseNanos = Nothing
-    }
+  SurveysStartRequest' {_ssrMaxCostPerResponseNanos = Nothing}
+
 
 -- | *Deprecated* Threshold to start a survey automatically if the quoted
 -- prices is less than or equal to this value. See Survey.Cost for more
@@ -682,9 +700,12 @@ instance ToJSON SurveysStartRequest where
 
 --
 -- /See:/ 'surveysDeleteResponse' smart constructor.
-newtype SurveysDeleteResponse = SurveysDeleteResponse'
+newtype SurveysDeleteResponse =
+  SurveysDeleteResponse'
     { _sdrRequestId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveysDeleteResponse' with the minimum fields required to make a request.
 --
@@ -693,10 +714,8 @@ newtype SurveysDeleteResponse = SurveysDeleteResponse'
 -- * 'sdrRequestId'
 surveysDeleteResponse
     :: SurveysDeleteResponse
-surveysDeleteResponse =
-    SurveysDeleteResponse'
-    { _sdrRequestId = Nothing
-    }
+surveysDeleteResponse = SurveysDeleteResponse' {_sdrRequestId = Nothing}
+
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -718,11 +737,14 @@ instance ToJSON SurveysDeleteResponse where
 -- | Container object for image data and alt_text.
 --
 -- /See:/ 'surveyQuestionImage' smart constructor.
-data SurveyQuestionImage = SurveyQuestionImage'
+data SurveyQuestionImage =
+  SurveyQuestionImage'
     { _sqiData    :: !(Maybe Bytes)
     , _sqiURL     :: !(Maybe Text)
     , _sqiAltText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveyQuestionImage' with the minimum fields required to make a request.
 --
@@ -736,11 +758,9 @@ data SurveyQuestionImage = SurveyQuestionImage'
 surveyQuestionImage
     :: SurveyQuestionImage
 surveyQuestionImage =
-    SurveyQuestionImage'
-    { _sqiData = Nothing
-    , _sqiURL = Nothing
-    , _sqiAltText = Nothing
-    }
+  SurveyQuestionImage'
+    {_sqiData = Nothing, _sqiURL = Nothing, _sqiAltText = Nothing}
+
 
 -- | Inline jpeg, gif, tiff, bmp, or png image raw bytes for an image
 -- question types.
@@ -776,14 +796,17 @@ instance ToJSON SurveyQuestionImage where
 -- | Specifications for the target audience of a survey run through the API.
 --
 -- /See:/ 'surveyAudience' smart constructor.
-data SurveyAudience = SurveyAudience'
+data SurveyAudience =
+  SurveyAudience'
     { _saCountry            :: !(Maybe Text)
     , _saAges               :: !(Maybe [Text])
     , _saLanguages          :: !(Maybe [Text])
     , _saGender             :: !(Maybe Text)
     , _saCountrySubdivision :: !(Maybe Text)
     , _saPopulationSource   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveyAudience' with the minimum fields required to make a request.
 --
@@ -803,7 +826,7 @@ data SurveyAudience = SurveyAudience'
 surveyAudience
     :: SurveyAudience
 surveyAudience =
-    SurveyAudience'
+  SurveyAudience'
     { _saCountry = Nothing
     , _saAges = Nothing
     , _saLanguages = Nothing
@@ -811,6 +834,7 @@ surveyAudience =
     , _saCountrySubdivision = Nothing
     , _saPopulationSource = Nothing
     }
+
 
 -- | Required country code that surveys should be targeted to. Accepts
 -- standard ISO 3166-1 2 character language codes. For instance, \'US\' for
@@ -883,12 +907,15 @@ instance ToJSON SurveyAudience where
 -- | Message defining the cost to run a given survey through API.
 --
 -- /See:/ 'surveyCost' smart constructor.
-data SurveyCost = SurveyCost'
+data SurveyCost =
+  SurveyCost'
     { _scCurrencyCode            :: !(Maybe Text)
     , _scNanos                   :: !(Maybe (Textual Int64))
     , _scMaxCostPerResponseNanos :: !(Maybe (Textual Int64))
     , _scCostPerResponseNanos    :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveyCost' with the minimum fields required to make a request.
 --
@@ -904,12 +931,13 @@ data SurveyCost = SurveyCost'
 surveyCost
     :: SurveyCost
 surveyCost =
-    SurveyCost'
+  SurveyCost'
     { _scCurrencyCode = Nothing
     , _scNanos = Nothing
     , _scMaxCostPerResponseNanos = Nothing
     , _scCostPerResponseNanos = Nothing
     }
+
 
 -- | Currency code that the cost is given in.
 scCurrencyCode :: Lens' SurveyCost (Maybe Text)
@@ -978,7 +1006,8 @@ instance ToJSON SurveyCost where
 -- | Message defining the question specifications.
 --
 -- /See:/ 'surveyQuestion' smart constructor.
-data SurveyQuestion = SurveyQuestion'
+data SurveyQuestion =
+  SurveyQuestion'
     { _sqImages                   :: !(Maybe [SurveyQuestionImage])
     , _sqAnswers                  :: !(Maybe [Text])
     , _sqSingleLineResponse       :: !(Maybe Bool)
@@ -997,7 +1026,9 @@ data SurveyQuestion = SurveyQuestion'
     , _sqQuestion                 :: !(Maybe Text)
     , _sqNumStars                 :: !(Maybe Text)
     , _sqLowValueLabel            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveyQuestion' with the minimum fields required to make a request.
 --
@@ -1041,7 +1072,7 @@ data SurveyQuestion = SurveyQuestion'
 surveyQuestion
     :: SurveyQuestion
 surveyQuestion =
-    SurveyQuestion'
+  SurveyQuestion'
     { _sqImages = Nothing
     , _sqAnswers = Nothing
     , _sqSingleLineResponse = Nothing
@@ -1061,6 +1092,7 @@ surveyQuestion =
     , _sqNumStars = Nothing
     , _sqLowValueLabel = Nothing
     }
+
 
 sqImages :: Lens' SurveyQuestion [SurveyQuestionImage]
 sqImages

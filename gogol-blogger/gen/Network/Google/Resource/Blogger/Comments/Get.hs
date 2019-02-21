@@ -59,12 +59,15 @@ type CommentsGetResource =
 -- | Gets one comment by ID.
 --
 -- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet'
+data CommentsGet =
+  CommentsGet'
     { _cgBlogId    :: !Text
     , _cgView      :: !(Maybe CommentsGetView)
     , _cgPostId    :: !Text
     , _cgCommentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ commentsGet
     -> Text -- ^ 'cgCommentId'
     -> CommentsGet
 commentsGet pCgBlogId_ pCgPostId_ pCgCommentId_ =
-    CommentsGet'
+  CommentsGet'
     { _cgBlogId = pCgBlogId_
     , _cgView = Nothing
     , _cgPostId = pCgPostId_
     , _cgCommentId = pCgCommentId_
     }
+
 
 -- | ID of the blog to containing the comment.
 cgBlogId :: Lens' CommentsGet Text

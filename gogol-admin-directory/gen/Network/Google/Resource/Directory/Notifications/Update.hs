@@ -58,11 +58,14 @@ type NotificationsUpdateResource =
 -- | Updates a notification.
 --
 -- /See:/ 'notificationsUpdate' smart constructor.
-data NotificationsUpdate = NotificationsUpdate'
+data NotificationsUpdate =
+  NotificationsUpdate'
     { _nuPayload        :: !Notification
     , _nuCustomer       :: !Text
     , _nuNotificationId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NotificationsUpdate' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ notificationsUpdate
     -> Text -- ^ 'nuNotificationId'
     -> NotificationsUpdate
 notificationsUpdate pNuPayload_ pNuCustomer_ pNuNotificationId_ =
-    NotificationsUpdate'
+  NotificationsUpdate'
     { _nuPayload = pNuPayload_
     , _nuCustomer = pNuCustomer_
     , _nuNotificationId = pNuNotificationId_
     }
+
 
 -- | Multipart request metadata.
 nuPayload :: Lens' NotificationsUpdate Notification

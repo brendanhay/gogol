@@ -82,14 +82,17 @@ type PhotoCreateResource =
 -- the account has reached the storage limit.
 --
 -- /See:/ 'photoCreate' smart constructor.
-data PhotoCreate = PhotoCreate'
+data PhotoCreate =
+  PhotoCreate'
     { _pcXgafv          :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
     , _pcAccessToken    :: !(Maybe Text)
     , _pcUploadType     :: !(Maybe Text)
     , _pcPayload        :: !Photo
     , _pcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotoCreate' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ photoCreate
     :: Photo -- ^ 'pcPayload'
     -> PhotoCreate
 photoCreate pPcPayload_ =
-    PhotoCreate'
+  PhotoCreate'
     { _pcXgafv = Nothing
     , _pcUploadProtocol = Nothing
     , _pcAccessToken = Nothing
@@ -118,6 +121,7 @@ photoCreate pPcPayload_ =
     , _pcPayload = pPcPayload_
     , _pcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcXgafv :: Lens' PhotoCreate (Maybe Xgafv)

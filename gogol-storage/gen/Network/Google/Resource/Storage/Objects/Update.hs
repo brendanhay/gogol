@@ -74,7 +74,8 @@ type ObjectsUpdateResource =
 -- | Updates an object\'s metadata.
 --
 -- /See:/ 'objectsUpdate' smart constructor.
-data ObjectsUpdate = ObjectsUpdate'
+data ObjectsUpdate =
+  ObjectsUpdate'
     { _ouIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _ouIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _ouIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -86,7 +87,9 @@ data ObjectsUpdate = ObjectsUpdate'
     , _ouObject                   :: !Text
     , _ouProjection               :: !(Maybe ObjectsUpdateProjection)
     , _ouGeneration               :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectsUpdate' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ objectsUpdate
     -> Text -- ^ 'ouObject'
     -> ObjectsUpdate
 objectsUpdate pOuBucket_ pOuPayload_ pOuObject_ =
-    ObjectsUpdate'
+  ObjectsUpdate'
     { _ouIfMetagenerationMatch = Nothing
     , _ouIfGenerationNotMatch = Nothing
     , _ouIfGenerationMatch = Nothing
@@ -132,6 +135,7 @@ objectsUpdate pOuBucket_ pOuPayload_ pOuObject_ =
     , _ouProjection = Nothing
     , _ouGeneration = Nothing
     }
+
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.

@@ -62,7 +62,8 @@ type ProjectsScanConfigsCreateResource =
 -- | Creates a new ScanConfig.
 --
 -- /See:/ 'projectsScanConfigsCreate' smart constructor.
-data ProjectsScanConfigsCreate = ProjectsScanConfigsCreate'
+data ProjectsScanConfigsCreate =
+  ProjectsScanConfigsCreate'
     { _psccParent         :: !Text
     , _psccXgafv          :: !(Maybe Xgafv)
     , _psccUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsScanConfigsCreate = ProjectsScanConfigsCreate'
     , _psccUploadType     :: !(Maybe Text)
     , _psccPayload        :: !ScanConfig
     , _psccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsCreate' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsScanConfigsCreate
     -> ScanConfig -- ^ 'psccPayload'
     -> ProjectsScanConfigsCreate
 projectsScanConfigsCreate pPsccParent_ pPsccPayload_ =
-    ProjectsScanConfigsCreate'
+  ProjectsScanConfigsCreate'
     { _psccParent = pPsccParent_
     , _psccXgafv = Nothing
     , _psccUploadProtocol = Nothing
@@ -103,6 +106,7 @@ projectsScanConfigsCreate pPsccParent_ pPsccPayload_ =
     , _psccPayload = pPsccPayload_
     , _psccCallback = Nothing
     }
+
 
 -- | Required. The parent resource name where the scan is created, which
 -- should be a project resource name in the format

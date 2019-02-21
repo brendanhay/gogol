@@ -66,14 +66,17 @@ type InterconnectAttachmentsListResource =
 -- specified region.
 --
 -- /See:/ 'interconnectAttachmentsList' smart constructor.
-data InterconnectAttachmentsList = InterconnectAttachmentsList'
+data InterconnectAttachmentsList =
+  InterconnectAttachmentsList'
     { _ialOrderBy    :: !(Maybe Text)
     , _ialProject    :: !Text
     , _ialFilter     :: !(Maybe Text)
     , _ialRegion     :: !Text
     , _ialPageToken  :: !(Maybe Text)
     , _ialMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InterconnectAttachmentsList' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ interconnectAttachmentsList
     -> Text -- ^ 'ialRegion'
     -> InterconnectAttachmentsList
 interconnectAttachmentsList pIalProject_ pIalRegion_ =
-    InterconnectAttachmentsList'
+  InterconnectAttachmentsList'
     { _ialOrderBy = Nothing
     , _ialProject = pIalProject_
     , _ialFilter = Nothing
@@ -103,6 +106,7 @@ interconnectAttachmentsList pIalProject_ pIalRegion_ =
     , _ialPageToken = Nothing
     , _ialMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

@@ -59,6 +59,11 @@ module Network.Google.Dataflow.Types
     , pmRegexes
     , pmLabel
 
+    -- * ReportWorkItemStatusRequestUnifiedWorkerRequest
+    , ReportWorkItemStatusRequestUnifiedWorkerRequest
+    , reportWorkItemStatusRequestUnifiedWorkerRequest
+    , rwisruwrAddtional
+
     -- * CreateJobFromTemplateRequest
     , CreateJobFromTemplateRequest
     , createJobFromTemplateRequest
@@ -172,6 +177,7 @@ module Network.Google.Dataflow.Types
     , reportWorkItemStatusRequest
     , rwisrCurrentWorkerTime
     , rwisrLocation
+    , rwisrUnifiedWorkerRequest
     , rwisrWorkItemStatuses
     , rwisrWorkerId
 
@@ -388,6 +394,11 @@ module Network.Google.Dataflow.Types
     -- * AutoscalingSettingsAlgorithm
     , AutoscalingSettingsAlgorithm (..)
 
+    -- * LeaseWorkItemRequestUnifiedWorkerRequest
+    , LeaseWorkItemRequestUnifiedWorkerRequest
+    , leaseWorkItemRequestUnifiedWorkerRequest
+    , lwiruwrAddtional
+
     -- * DerivedSource
     , DerivedSource
     , derivedSource
@@ -506,6 +517,7 @@ module Network.Google.Dataflow.Types
     , sccInstructions
     , sccSystemName
     , sccComputationId
+    , sccTransformUserNameToStateFamily
     , sccStageName
 
     -- * EnvironmentSdkPipelineOptions
@@ -533,6 +545,7 @@ module Network.Google.Dataflow.Types
     , lwirCurrentWorkerTime
     , lwirLocation
     , lwirWorkerCapabilities
+    , lwirUnifiedWorkerRequest
     , lwirRequestedLeaseDuration
     , lwirWorkerId
 
@@ -849,6 +862,11 @@ module Network.Google.Dataflow.Types
     , wleContainerStartTime
     , wleMetadata
 
+    -- * ReportWorkItemStatusResponseUnifiedWorkerResponse
+    , ReportWorkItemStatusResponseUnifiedWorkerResponse
+    , reportWorkItemStatusResponseUnifiedWorkerResponse
+    , rAddtional
+
     -- * RuntimeEnvironmentAdditionalUserLabels
     , RuntimeEnvironmentAdditionalUserLabels
     , runtimeEnvironmentAdditionalUserLabels
@@ -1023,6 +1041,7 @@ module Network.Google.Dataflow.Types
     , ReportWorkItemStatusResponse
     , reportWorkItemStatusResponse
     , rwisrWorkItemServiceStates
+    , rwisrUnifiedWorkerResponse
 
     -- * SourceFork
     , SourceFork
@@ -1113,6 +1132,11 @@ module Network.Google.Dataflow.Types
     , pgbkiOriginalCombineValuesStepName
     , pgbkiInputElementCodec
     , pgbkiOriginalCombineValuesInputStoreName
+
+    -- * LeaseWorkItemResponseUnifiedWorkerResponse
+    , LeaseWorkItemResponseUnifiedWorkerResponse
+    , leaseWorkItemResponseUnifiedWorkerResponse
+    , lAddtional
 
     -- * WorkerLifecycleEventEvent
     , WorkerLifecycleEventEvent (..)
@@ -1206,6 +1230,11 @@ module Network.Google.Dataflow.Types
     , ctOriginalTransform
     , ctUserName
     , ctName
+
+    -- * StreamingComputationConfigTransformUserNameToStateFamily
+    , StreamingComputationConfigTransformUserNameToStateFamily
+    , streamingComputationConfigTransformUserNameToStateFamily
+    , scctuntsfAddtional
 
     -- * WorkerPoolIPConfiguration
     , WorkerPoolIPConfiguration (..)
@@ -1338,6 +1367,7 @@ module Network.Google.Dataflow.Types
     , LeaseWorkItemResponse
     , leaseWorkItemResponse
     , lwirWorkItems
+    , lwirUnifiedWorkerResponse
 
     -- * Position
     , Position
@@ -1368,16 +1398,16 @@ dataflowService
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
-computeScope = Proxy;
+computeScope = Proxy
 
 -- | View your email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy;
+userInfoEmailScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View your Google Compute Engine resources
 computeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-computeReadOnlyScope = Proxy;
+computeReadOnlyScope = Proxy

@@ -23,10 +23,13 @@ import           Network.Google.YouTubeAnalytics.Types.Sum
 -- | A group\'s content details.
 --
 -- /See:/ 'groupContentDetails' smart constructor.
-data GroupContentDetails = GroupContentDetails'
+data GroupContentDetails =
+  GroupContentDetails'
     { _gcdItemType  :: !(Maybe Text)
     , _gcdItemCount :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupContentDetails' with the minimum fields required to make a request.
 --
@@ -38,10 +41,8 @@ data GroupContentDetails = GroupContentDetails'
 groupContentDetails
     :: GroupContentDetails
 groupContentDetails =
-    GroupContentDetails'
-    { _gcdItemType = Nothing
-    , _gcdItemCount = Nothing
-    }
+  GroupContentDetails' {_gcdItemType = Nothing, _gcdItemCount = Nothing}
+
 
 -- | The type of resources that the group contains. Valid values for this
 -- property are: * \`youtube#channel\` * \`youtube#playlist\` *
@@ -73,14 +74,17 @@ instance ToJSON GroupContentDetails where
 -- | A group.
 --
 -- /See:/ 'group'' smart constructor.
-data Group = Group'
+data Group =
+  Group'
     { _gEtag           :: !(Maybe Text)
     , _gSnippet        :: !(Maybe GroupSnippet)
     , _gKind           :: !(Maybe Text)
     , _gContentDetails :: !(Maybe GroupContentDetails)
     , _gId             :: !(Maybe Text)
     , _gErrors         :: !(Maybe Errors)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
@@ -100,7 +104,7 @@ data Group = Group'
 group'
     :: Group
 group' =
-    Group'
+  Group'
     { _gEtag = Nothing
     , _gSnippet = Nothing
     , _gKind = Nothing
@@ -108,6 +112,7 @@ group' =
     , _gId = Nothing
     , _gErrors = Nothing
     }
+
 
 -- | The Etag of this resource.
 gEtag :: Lens' Group (Maybe Text)
@@ -161,13 +166,16 @@ instance ToJSON Group where
 -- | Response message for GroupsService.ListGroups.
 --
 -- /See:/ 'listGroupsResponse' smart constructor.
-data ListGroupsResponse = ListGroupsResponse'
+data ListGroupsResponse =
+  ListGroupsResponse'
     { _lgrEtag          :: !(Maybe Text)
     , _lgrNextPageToken :: !(Maybe Text)
     , _lgrKind          :: !(Maybe Text)
     , _lgrItems         :: !(Maybe [Group])
     , _lgrErrors        :: !(Maybe Errors)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListGroupsResponse' with the minimum fields required to make a request.
 --
@@ -185,13 +193,14 @@ data ListGroupsResponse = ListGroupsResponse'
 listGroupsResponse
     :: ListGroupsResponse
 listGroupsResponse =
-    ListGroupsResponse'
+  ListGroupsResponse'
     { _lgrEtag = Nothing
     , _lgrNextPageToken = Nothing
     , _lgrKind = Nothing
     , _lgrItems = Nothing
     , _lgrErrors = Nothing
     }
+
 
 -- | The Etag of this resource.
 lgrEtag :: Lens' ListGroupsResponse (Maybe Text)
@@ -244,12 +253,15 @@ instance ToJSON ListGroupsResponse where
 -- | Response message for GroupsService.ListGroupItems.
 --
 -- /See:/ 'listGroupItemsResponse' smart constructor.
-data ListGroupItemsResponse = ListGroupItemsResponse'
+data ListGroupItemsResponse =
+  ListGroupItemsResponse'
     { _lgirEtag   :: !(Maybe Text)
     , _lgirKind   :: !(Maybe Text)
     , _lgirItems  :: !(Maybe [GroupItem])
     , _lgirErrors :: !(Maybe Errors)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListGroupItemsResponse' with the minimum fields required to make a request.
 --
@@ -265,12 +277,13 @@ data ListGroupItemsResponse = ListGroupItemsResponse'
 listGroupItemsResponse
     :: ListGroupItemsResponse
 listGroupItemsResponse =
-    ListGroupItemsResponse'
+  ListGroupItemsResponse'
     { _lgirEtag = Nothing
     , _lgirKind = Nothing
     , _lgirItems = Nothing
     , _lgirErrors = Nothing
     }
+
 
 -- | The Etag of this resource.
 lgirEtag :: Lens' ListGroupItemsResponse (Maybe Text)
@@ -314,10 +327,13 @@ instance ToJSON ListGroupItemsResponse where
 
 --
 -- /See:/ 'groupItemResource' smart constructor.
-data GroupItemResource = GroupItemResource'
+data GroupItemResource =
+  GroupItemResource'
     { _girKind :: !(Maybe Text)
     , _girId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupItemResource' with the minimum fields required to make a request.
 --
@@ -328,11 +344,8 @@ data GroupItemResource = GroupItemResource'
 -- * 'girId'
 groupItemResource
     :: GroupItemResource
-groupItemResource =
-    GroupItemResource'
-    { _girKind = Nothing
-    , _girId = Nothing
-    }
+groupItemResource = GroupItemResource' {_girKind = Nothing, _girId = Nothing}
+
 
 -- | Identifies the type of resource being added to the group. Valid values
 -- for this property are: * \`youtube#channel\` * \`youtube#playlist\` *
@@ -361,10 +374,13 @@ instance ToJSON GroupItemResource where
 -- | A group snippet.
 --
 -- /See:/ 'groupSnippet' smart constructor.
-data GroupSnippet = GroupSnippet'
+data GroupSnippet =
+  GroupSnippet'
     { _gsPublishedAt :: !(Maybe DateTime')
     , _gsTitle       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupSnippet' with the minimum fields required to make a request.
 --
@@ -375,11 +391,8 @@ data GroupSnippet = GroupSnippet'
 -- * 'gsTitle'
 groupSnippet
     :: GroupSnippet
-groupSnippet =
-    GroupSnippet'
-    { _gsPublishedAt = Nothing
-    , _gsTitle = Nothing
-    }
+groupSnippet = GroupSnippet' {_gsPublishedAt = Nothing, _gsTitle = Nothing}
+
 
 -- | The date and time that the group was created. The value is specified in
 -- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -410,14 +423,17 @@ instance ToJSON GroupSnippet where
 -- | A group item.
 --
 -- /See:/ 'groupItem' smart constructor.
-data GroupItem = GroupItem'
+data GroupItem =
+  GroupItem'
     { _giEtag     :: !(Maybe Text)
     , _giKind     :: !(Maybe Text)
     , _giResource :: !(Maybe GroupItemResource)
     , _giGroupId  :: !(Maybe Text)
     , _giId       :: !(Maybe Text)
     , _giErrors   :: !(Maybe Errors)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupItem' with the minimum fields required to make a request.
 --
@@ -437,7 +453,7 @@ data GroupItem = GroupItem'
 groupItem
     :: GroupItem
 groupItem =
-    GroupItem'
+  GroupItem'
     { _giEtag = Nothing
     , _giKind = Nothing
     , _giResource = Nothing
@@ -445,6 +461,7 @@ groupItem =
     , _giId = Nothing
     , _giErrors = Nothing
     }
+
 
 -- | The Etag of this resource.
 giEtag :: Lens' GroupItem (Maybe Text)
@@ -505,11 +522,14 @@ instance ToJSON GroupItem where
 -- the operation has failed.
 --
 -- /See:/ 'errors' smart constructor.
-data Errors = Errors'
+data Errors =
+  Errors'
     { _eRequestId :: !(Maybe Text)
     , _eError     :: !(Maybe [ErrorProto])
     , _eCode      :: !(Maybe ErrorsCode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Errors' with the minimum fields required to make a request.
 --
@@ -522,12 +542,8 @@ data Errors = Errors'
 -- * 'eCode'
 errors
     :: Errors
-errors =
-    Errors'
-    { _eRequestId = Nothing
-    , _eError = Nothing
-    , _eCode = Nothing
-    }
+errors = Errors' {_eRequestId = Nothing, _eError = Nothing, _eCode = Nothing}
+
 
 -- | Request identifier generated by the service, which can be used to
 -- identify the error in the logs
@@ -564,11 +580,14 @@ instance ToJSON Errors where
 -- | The description of a column of the result table.
 --
 -- /See:/ 'resultTableColumnHeader' smart constructor.
-data ResultTableColumnHeader = ResultTableColumnHeader'
+data ResultTableColumnHeader =
+  ResultTableColumnHeader'
     { _rtchColumnType :: !(Maybe Text)
     , _rtchName       :: !(Maybe Text)
     , _rtchDataType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultTableColumnHeader' with the minimum fields required to make a request.
 --
@@ -582,11 +601,9 @@ data ResultTableColumnHeader = ResultTableColumnHeader'
 resultTableColumnHeader
     :: ResultTableColumnHeader
 resultTableColumnHeader =
-    ResultTableColumnHeader'
-    { _rtchColumnType = Nothing
-    , _rtchName = Nothing
-    , _rtchDataType = Nothing
-    }
+  ResultTableColumnHeader'
+    {_rtchColumnType = Nothing, _rtchName = Nothing, _rtchDataType = Nothing}
+
 
 -- | The type of the column (\`DIMENSION\` or \`METRIC\`).
 rtchColumnType :: Lens' ResultTableColumnHeader (Maybe Text)
@@ -623,7 +640,8 @@ instance ToJSON ResultTableColumnHeader where
 -- | Describes one specific error.
 --
 -- /See:/ 'errorProto' smart constructor.
-data ErrorProto = ErrorProto'
+data ErrorProto =
+  ErrorProto'
     { _epDebugInfo            :: !(Maybe Text)
     , _epLocation             :: !(Maybe Text)
     , _epDomain               :: !(Maybe Text)
@@ -631,7 +649,9 @@ data ErrorProto = ErrorProto'
     , _epExternalErrorMessage :: !(Maybe Text)
     , _epCode                 :: !(Maybe Text)
     , _epLocationType         :: !(Maybe ErrorProtoLocationType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ErrorProto' with the minimum fields required to make a request.
 --
@@ -653,7 +673,7 @@ data ErrorProto = ErrorProto'
 errorProto
     :: ErrorProto
 errorProto =
-    ErrorProto'
+  ErrorProto'
     { _epDebugInfo = Nothing
     , _epLocation = Nothing
     , _epDomain = Nothing
@@ -662,6 +682,7 @@ errorProto =
     , _epCode = Nothing
     , _epLocationType = Nothing
     }
+
 
 -- | Debugging information, which should not be shared externally.
 epDebugInfo :: Lens' ErrorProto (Maybe Text)
@@ -743,9 +764,12 @@ instance ToJSON ErrorProto where
 -- | Empty response.
 --
 -- /See:/ 'emptyResponse' smart constructor.
-newtype EmptyResponse = EmptyResponse'
+newtype EmptyResponse =
+  EmptyResponse'
     { _erErrors :: Maybe Errors
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EmptyResponse' with the minimum fields required to make a request.
 --
@@ -754,10 +778,8 @@ newtype EmptyResponse = EmptyResponse'
 -- * 'erErrors'
 emptyResponse
     :: EmptyResponse
-emptyResponse =
-    EmptyResponse'
-    { _erErrors = Nothing
-    }
+emptyResponse = EmptyResponse' {_erErrors = Nothing}
+
 
 -- | Apiary error details
 erErrors :: Lens' EmptyResponse (Maybe Errors)
@@ -775,12 +797,15 @@ instance ToJSON EmptyResponse where
 -- | Response message for TargetedQueriesService.Query.
 --
 -- /See:/ 'queryResponse' smart constructor.
-data QueryResponse = QueryResponse'
+data QueryResponse =
+  QueryResponse'
     { _qrKind          :: !(Maybe Text)
     , _qrRows          :: !(Maybe [[JSONValue]])
     , _qrColumnHeaders :: !(Maybe [ResultTableColumnHeader])
     , _qrErrors        :: !(Maybe Errors)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryResponse' with the minimum fields required to make a request.
 --
@@ -796,12 +821,13 @@ data QueryResponse = QueryResponse'
 queryResponse
     :: QueryResponse
 queryResponse =
-    QueryResponse'
+  QueryResponse'
     { _qrKind = Nothing
     , _qrRows = Nothing
     , _qrColumnHeaders = Nothing
     , _qrErrors = Nothing
     }
+
 
 -- | This value specifies the type of data included in the API response. For
 -- the query method, the kind property value will be

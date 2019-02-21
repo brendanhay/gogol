@@ -82,7 +82,8 @@ type ProjectsRegionsOperationsListResource =
 -- the parent resource, without the operations collection id.
 --
 -- /See:/ 'projectsRegionsOperationsList' smart constructor.
-data ProjectsRegionsOperationsList = ProjectsRegionsOperationsList'
+data ProjectsRegionsOperationsList =
+  ProjectsRegionsOperationsList'
     { _prolXgafv          :: !(Maybe Xgafv)
     , _prolUploadProtocol :: !(Maybe Text)
     , _prolAccessToken    :: !(Maybe Text)
@@ -92,7 +93,9 @@ data ProjectsRegionsOperationsList = ProjectsRegionsOperationsList'
     , _prolPageToken      :: !(Maybe Text)
     , _prolPageSize       :: !(Maybe (Textual Int32))
     , _prolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsOperationsList' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ projectsRegionsOperationsList
     :: Text -- ^ 'prolName'
     -> ProjectsRegionsOperationsList
 projectsRegionsOperationsList pProlName_ =
-    ProjectsRegionsOperationsList'
+  ProjectsRegionsOperationsList'
     { _prolXgafv = Nothing
     , _prolUploadProtocol = Nothing
     , _prolAccessToken = Nothing
@@ -130,6 +133,7 @@ projectsRegionsOperationsList pProlName_ =
     , _prolPageSize = Nothing
     , _prolCallback = Nothing
     }
+
 
 -- | V1 error format.
 prolXgafv :: Lens' ProjectsRegionsOperationsList (Maybe Xgafv)

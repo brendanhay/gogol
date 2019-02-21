@@ -59,14 +59,17 @@ type ProjectsInstancesTablesDeleteResource =
 -- | Permanently deletes a specified table and all of its data.
 --
 -- /See:/ 'projectsInstancesTablesDelete' smart constructor.
-data ProjectsInstancesTablesDelete = ProjectsInstancesTablesDelete'
+data ProjectsInstancesTablesDelete =
+  ProjectsInstancesTablesDelete'
     { _pitdXgafv          :: !(Maybe Xgafv)
     , _pitdUploadProtocol :: !(Maybe Text)
     , _pitdAccessToken    :: !(Maybe Text)
     , _pitdUploadType     :: !(Maybe Text)
     , _pitdName           :: !Text
     , _pitdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesTablesDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsInstancesTablesDelete
     :: Text -- ^ 'pitdName'
     -> ProjectsInstancesTablesDelete
 projectsInstancesTablesDelete pPitdName_ =
-    ProjectsInstancesTablesDelete'
+  ProjectsInstancesTablesDelete'
     { _pitdXgafv = Nothing
     , _pitdUploadProtocol = Nothing
     , _pitdAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsInstancesTablesDelete pPitdName_ =
     , _pitdName = pPitdName_
     , _pitdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitdXgafv :: Lens' ProjectsInstancesTablesDelete (Maybe Xgafv)

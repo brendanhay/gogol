@@ -72,13 +72,16 @@ type ProjectsHistoriesExecutionsStepsCreateResource =
 -- exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsCreate' smart constructor.
-data ProjectsHistoriesExecutionsStepsCreate = ProjectsHistoriesExecutionsStepsCreate'
+data ProjectsHistoriesExecutionsStepsCreate =
+  ProjectsHistoriesExecutionsStepsCreate'
     { _phescRequestId   :: !(Maybe Text)
     , _phescExecutionId :: !Text
     , _phescPayload     :: !Step
     , _phescHistoryId   :: !Text
     , _phescProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsCreate' with the minimum fields required to make a request.
 --
@@ -100,13 +103,14 @@ projectsHistoriesExecutionsStepsCreate
     -> Text -- ^ 'phescProjectId'
     -> ProjectsHistoriesExecutionsStepsCreate
 projectsHistoriesExecutionsStepsCreate pPhescExecutionId_ pPhescPayload_ pPhescHistoryId_ pPhescProjectId_ =
-    ProjectsHistoriesExecutionsStepsCreate'
+  ProjectsHistoriesExecutionsStepsCreate'
     { _phescRequestId = Nothing
     , _phescExecutionId = pPhescExecutionId_
     , _phescPayload = pPhescPayload_
     , _phescHistoryId = pPhescHistoryId_
     , _phescProjectId = pPhescProjectId_
     }
+
 
 -- | A unique request ID for server to detect duplicated requests. For
 -- example, a UUID. Optional, but strongly recommended.
@@ -139,7 +143,8 @@ phescProjectId
       (\ s a -> s{_phescProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsCreate where
+           ProjectsHistoriesExecutionsStepsCreate
+         where
         type Rs ProjectsHistoriesExecutionsStepsCreate = Step
         type Scopes ProjectsHistoriesExecutionsStepsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

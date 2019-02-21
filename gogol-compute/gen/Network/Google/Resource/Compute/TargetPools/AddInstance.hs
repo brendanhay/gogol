@@ -63,13 +63,16 @@ type TargetPoolsAddInstanceResource =
 -- | Adds an instance to a target pool.
 --
 -- /See:/ 'targetPoolsAddInstance' smart constructor.
-data TargetPoolsAddInstance = TargetPoolsAddInstance'
+data TargetPoolsAddInstance =
+  TargetPoolsAddInstance'
     { _tpaiRequestId  :: !(Maybe Text)
     , _tpaiProject    :: !Text
     , _tpaiTargetPool :: !Text
     , _tpaiPayload    :: !TargetPoolsAddInstanceRequest
     , _tpaiRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetPoolsAddInstance' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ targetPoolsAddInstance
     -> Text -- ^ 'tpaiRegion'
     -> TargetPoolsAddInstance
 targetPoolsAddInstance pTpaiProject_ pTpaiTargetPool_ pTpaiPayload_ pTpaiRegion_ =
-    TargetPoolsAddInstance'
+  TargetPoolsAddInstance'
     { _tpaiRequestId = Nothing
     , _tpaiProject = pTpaiProject_
     , _tpaiTargetPool = pTpaiTargetPool_
     , _tpaiPayload = pTpaiPayload_
     , _tpaiRegion = pTpaiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

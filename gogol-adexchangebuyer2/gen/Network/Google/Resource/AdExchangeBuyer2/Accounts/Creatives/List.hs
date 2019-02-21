@@ -68,7 +68,8 @@ type AccountsCreativesListResource =
 -- | Lists creatives.
 --
 -- /See:/ 'accountsCreativesList' smart constructor.
-data AccountsCreativesList = AccountsCreativesList'
+data AccountsCreativesList =
+  AccountsCreativesList'
     { _aclXgafv          :: !(Maybe Xgafv)
     , _aclUploadProtocol :: !(Maybe Text)
     , _aclAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data AccountsCreativesList = AccountsCreativesList'
     , _aclPageToken      :: !(Maybe Text)
     , _aclPageSize       :: !(Maybe (Textual Int32))
     , _aclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsCreativesList' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ accountsCreativesList
     :: Text -- ^ 'aclAccountId'
     -> AccountsCreativesList
 accountsCreativesList pAclAccountId_ =
-    AccountsCreativesList'
+  AccountsCreativesList'
     { _aclXgafv = Nothing
     , _aclUploadProtocol = Nothing
     , _aclAccessToken = Nothing
@@ -116,6 +119,7 @@ accountsCreativesList pAclAccountId_ =
     , _aclPageSize = Nothing
     , _aclCallback = Nothing
     }
+
 
 -- | V1 error format.
 aclXgafv :: Lens' AccountsCreativesList (Maybe Xgafv)

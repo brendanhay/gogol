@@ -59,10 +59,13 @@ type UsersRevokeDeviceAccessResource =
 -- their managed devices. This call only works with EMM-managed accounts.
 --
 -- /See:/ 'usersRevokeDeviceAccess' smart constructor.
-data UsersRevokeDeviceAccess = UsersRevokeDeviceAccess'
+data UsersRevokeDeviceAccess =
+  UsersRevokeDeviceAccess'
     { _urdaEnterpriseId :: !Text
     , _urdaUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersRevokeDeviceAccess' with the minimum fields required to make a request.
 --
@@ -76,10 +79,9 @@ usersRevokeDeviceAccess
     -> Text -- ^ 'urdaUserId'
     -> UsersRevokeDeviceAccess
 usersRevokeDeviceAccess pUrdaEnterpriseId_ pUrdaUserId_ =
-    UsersRevokeDeviceAccess'
-    { _urdaEnterpriseId = pUrdaEnterpriseId_
-    , _urdaUserId = pUrdaUserId_
-    }
+  UsersRevokeDeviceAccess'
+    {_urdaEnterpriseId = pUrdaEnterpriseId_, _urdaUserId = pUrdaUserId_}
+
 
 -- | The ID of the enterprise.
 urdaEnterpriseId :: Lens' UsersRevokeDeviceAccess Text

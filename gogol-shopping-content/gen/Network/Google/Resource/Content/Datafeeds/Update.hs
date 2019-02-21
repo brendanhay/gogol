@@ -55,11 +55,14 @@ type DatafeedsUpdateResource =
 -- | Updates a datafeed configuration of your Merchant Center account.
 --
 -- /See:/ 'datafeedsUpdate' smart constructor.
-data DatafeedsUpdate = DatafeedsUpdate'
+data DatafeedsUpdate =
+  DatafeedsUpdate'
     { _duMerchantId :: !(Textual Word64)
     , _duPayload    :: !Datafeed
     , _duDatafeedId :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatafeedsUpdate' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ datafeedsUpdate
     -> Word64 -- ^ 'duDatafeedId'
     -> DatafeedsUpdate
 datafeedsUpdate pDuMerchantId_ pDuPayload_ pDuDatafeedId_ =
-    DatafeedsUpdate'
+  DatafeedsUpdate'
     { _duMerchantId = _Coerce # pDuMerchantId_
     , _duPayload = pDuPayload_
     , _duDatafeedId = _Coerce # pDuDatafeedId_
     }
+
 
 -- | The ID of the account that manages the datafeed. This account cannot be
 -- a multi-client account.

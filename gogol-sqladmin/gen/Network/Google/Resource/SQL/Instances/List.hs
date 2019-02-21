@@ -61,12 +61,15 @@ type InstancesListResource =
 -- instance name.
 --
 -- /See:/ 'instancesList' smart constructor.
-data InstancesList = InstancesList'
+data InstancesList =
+  InstancesList'
     { _ilProject    :: !Text
     , _ilFilter     :: !(Maybe Text)
     , _ilPageToken  :: !(Maybe Text)
     , _ilMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesList' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ instancesList
     :: Text -- ^ 'ilProject'
     -> InstancesList
 instancesList pIlProject_ =
-    InstancesList'
+  InstancesList'
     { _ilProject = pIlProject_
     , _ilFilter = Nothing
     , _ilPageToken = Nothing
     , _ilMaxResults = Nothing
     }
+
 
 -- | Project ID of the project for which to list Cloud SQL instances.
 ilProject :: Lens' InstancesList Text

@@ -66,7 +66,8 @@ type ProjectsReposTestIAMPermissionsResource =
 -- not a NOT_FOUND error.
 --
 -- /See:/ 'projectsReposTestIAMPermissions' smart constructor.
-data ProjectsReposTestIAMPermissions = ProjectsReposTestIAMPermissions'
+data ProjectsReposTestIAMPermissions =
+  ProjectsReposTestIAMPermissions'
     { _prtipXgafv          :: !(Maybe Xgafv)
     , _prtipUploadProtocol :: !(Maybe Text)
     , _prtipAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsReposTestIAMPermissions = ProjectsReposTestIAMPermissions'
     , _prtipPayload        :: !TestIAMPermissionsRequest
     , _prtipResource       :: !Text
     , _prtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsReposTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsReposTestIAMPermissions
     -> Text -- ^ 'prtipResource'
     -> ProjectsReposTestIAMPermissions
 projectsReposTestIAMPermissions pPrtipPayload_ pPrtipResource_ =
-    ProjectsReposTestIAMPermissions'
+  ProjectsReposTestIAMPermissions'
     { _prtipXgafv = Nothing
     , _prtipUploadProtocol = Nothing
     , _prtipAccessToken = Nothing
@@ -107,6 +110,7 @@ projectsReposTestIAMPermissions pPrtipPayload_ pPrtipResource_ =
     , _prtipResource = pPrtipResource_
     , _prtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prtipXgafv :: Lens' ProjectsReposTestIAMPermissions (Maybe Xgafv)
@@ -151,7 +155,8 @@ prtipCallback
       (\ s a -> s{_prtipCallback = a})
 
 instance GoogleRequest
-         ProjectsReposTestIAMPermissions where
+           ProjectsReposTestIAMPermissions
+         where
         type Rs ProjectsReposTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsReposTestIAMPermissions =

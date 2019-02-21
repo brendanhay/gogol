@@ -66,14 +66,17 @@ type OrderreportsListtransactionsResource =
 -- Center account.
 --
 -- /See:/ 'orderreportsListtransactions' smart constructor.
-data OrderreportsListtransactions = OrderreportsListtransactions'
+data OrderreportsListtransactions =
+  OrderreportsListtransactions'
     { _olsMerchantId           :: !(Textual Word64)
     , _olsDisbursementId       :: !Text
     , _olsTransactionStartDate :: !Text
     , _olsTransactionEndDate   :: !(Maybe Text)
     , _olsPageToken            :: !(Maybe Text)
     , _olsMaxResults           :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderreportsListtransactions' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ orderreportsListtransactions
     -> Text -- ^ 'olsTransactionStartDate'
     -> OrderreportsListtransactions
 orderreportsListtransactions pOlsMerchantId_ pOlsDisbursementId_ pOlsTransactionStartDate_ =
-    OrderreportsListtransactions'
+  OrderreportsListtransactions'
     { _olsMerchantId = _Coerce # pOlsMerchantId_
     , _olsDisbursementId = pOlsDisbursementId_
     , _olsTransactionStartDate = pOlsTransactionStartDate_
@@ -104,6 +107,7 @@ orderreportsListtransactions pOlsMerchantId_ pOlsDisbursementId_ pOlsTransaction
     , _olsPageToken = Nothing
     , _olsMaxResults = Nothing
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

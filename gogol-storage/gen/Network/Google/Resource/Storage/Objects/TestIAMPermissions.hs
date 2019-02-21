@@ -65,13 +65,16 @@ type ObjectsTestIAMPermissionsResource =
 -- held by the caller.
 --
 -- /See:/ 'objectsTestIAMPermissions' smart constructor.
-data ObjectsTestIAMPermissions = ObjectsTestIAMPermissions'
+data ObjectsTestIAMPermissions =
+  ObjectsTestIAMPermissions'
     { _otipBucket      :: !Text
     , _otipUserProject :: !(Maybe Text)
     , _otipObject      :: !Text
     , _otipPermissions :: ![Text]
     , _otipGeneration  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ objectsTestIAMPermissions
     -> [Text] -- ^ 'otipPermissions'
     -> ObjectsTestIAMPermissions
 objectsTestIAMPermissions pOtipBucket_ pOtipObject_ pOtipPermissions_ =
-    ObjectsTestIAMPermissions'
+  ObjectsTestIAMPermissions'
     { _otipBucket = pOtipBucket_
     , _otipUserProject = Nothing
     , _otipObject = pOtipObject_
     , _otipPermissions = _Coerce # pOtipPermissions_
     , _otipGeneration = Nothing
     }
+
 
 -- | Name of the bucket in which the object resides.
 otipBucket :: Lens' ObjectsTestIAMPermissions Text

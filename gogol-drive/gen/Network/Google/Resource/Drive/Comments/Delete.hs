@@ -54,10 +54,13 @@ type CommentsDeleteResource =
 -- | Deletes a comment.
 --
 -- /See:/ 'commentsDelete' smart constructor.
-data CommentsDelete = CommentsDelete'
+data CommentsDelete =
+  CommentsDelete'
     { _cdFileId    :: !Text
     , _cdCommentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ commentsDelete
     -> Text -- ^ 'cdCommentId'
     -> CommentsDelete
 commentsDelete pCdFileId_ pCdCommentId_ =
-    CommentsDelete'
-    { _cdFileId = pCdFileId_
-    , _cdCommentId = pCdCommentId_
-    }
+  CommentsDelete' {_cdFileId = pCdFileId_, _cdCommentId = pCdCommentId_}
+
 
 -- | The ID of the file.
 cdFileId :: Lens' CommentsDelete Text

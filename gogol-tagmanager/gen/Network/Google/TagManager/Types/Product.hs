@@ -23,10 +23,13 @@ import           Network.Google.TagManager.Types.Sum
 -- | Creates a workspace proposal to start a review of a workspace.
 --
 -- /See:/ 'createWorkspaceProposalRequest' smart constructor.
-data CreateWorkspaceProposalRequest = CreateWorkspaceProposalRequest'
+data CreateWorkspaceProposalRequest =
+  CreateWorkspaceProposalRequest'
     { _cwprInitialComment :: !(Maybe WorkspaceProposalHistoryComment)
     , _cwprReviewers      :: !(Maybe [WorkspaceProposalUser])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateWorkspaceProposalRequest' with the minimum fields required to make a request.
 --
@@ -38,10 +41,9 @@ data CreateWorkspaceProposalRequest = CreateWorkspaceProposalRequest'
 createWorkspaceProposalRequest
     :: CreateWorkspaceProposalRequest
 createWorkspaceProposalRequest =
-    CreateWorkspaceProposalRequest'
-    { _cwprInitialComment = Nothing
-    , _cwprReviewers = Nothing
-    }
+  CreateWorkspaceProposalRequest'
+    {_cwprInitialComment = Nothing, _cwprReviewers = Nothing}
+
 
 -- | If present, an initial comment to associate with the workspace proposal.
 cwprInitialComment :: Lens' CreateWorkspaceProposalRequest (Maybe WorkspaceProposalHistoryComment)
@@ -76,10 +78,13 @@ instance ToJSON CreateWorkspaceProposalRequest where
 -- | List Variables Response.
 --
 -- /See:/ 'listVariablesResponse' smart constructor.
-data ListVariablesResponse = ListVariablesResponse'
+data ListVariablesResponse =
+  ListVariablesResponse'
     { _lvrNextPageToken :: !(Maybe Text)
     , _lvrVariable      :: !(Maybe [Variable])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListVariablesResponse' with the minimum fields required to make a request.
 --
@@ -91,10 +96,8 @@ data ListVariablesResponse = ListVariablesResponse'
 listVariablesResponse
     :: ListVariablesResponse
 listVariablesResponse =
-    ListVariablesResponse'
-    { _lvrNextPageToken = Nothing
-    , _lvrVariable = Nothing
-    }
+  ListVariablesResponse' {_lvrNextPageToken = Nothing, _lvrVariable = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lvrNextPageToken :: Lens' ListVariablesResponse (Maybe Text)
@@ -127,10 +130,13 @@ instance ToJSON ListVariablesResponse where
 -- | List Folders Response.
 --
 -- /See:/ 'listFoldersResponse' smart constructor.
-data ListFoldersResponse = ListFoldersResponse'
+data ListFoldersResponse =
+  ListFoldersResponse'
     { _lfrNextPageToken :: !(Maybe Text)
     , _lfrFolder        :: !(Maybe [Folder])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListFoldersResponse' with the minimum fields required to make a request.
 --
@@ -142,10 +148,8 @@ data ListFoldersResponse = ListFoldersResponse'
 listFoldersResponse
     :: ListFoldersResponse
 listFoldersResponse =
-    ListFoldersResponse'
-    { _lfrNextPageToken = Nothing
-    , _lfrFolder = Nothing
-    }
+  ListFoldersResponse' {_lfrNextPageToken = Nothing, _lfrFolder = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lfrNextPageToken :: Lens' ListFoldersResponse (Maybe Text)
@@ -178,10 +182,13 @@ instance ToJSON ListFoldersResponse where
 -- | List Environments Response.
 --
 -- /See:/ 'listEnvironmentsResponse' smart constructor.
-data ListEnvironmentsResponse = ListEnvironmentsResponse'
+data ListEnvironmentsResponse =
+  ListEnvironmentsResponse'
     { _lerNextPageToken :: !(Maybe Text)
     , _lerEnvironment   :: !(Maybe [Environment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListEnvironmentsResponse' with the minimum fields required to make a request.
 --
@@ -193,10 +200,9 @@ data ListEnvironmentsResponse = ListEnvironmentsResponse'
 listEnvironmentsResponse
     :: ListEnvironmentsResponse
 listEnvironmentsResponse =
-    ListEnvironmentsResponse'
-    { _lerNextPageToken = Nothing
-    , _lerEnvironment = Nothing
-    }
+  ListEnvironmentsResponse'
+    {_lerNextPageToken = Nothing, _lerEnvironment = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lerNextPageToken :: Lens' ListEnvironmentsResponse (Maybe Text)
@@ -230,9 +236,12 @@ instance ToJSON ListEnvironmentsResponse where
 -- | The result of reverting folder changes in a workspace.
 --
 -- /See:/ 'revertFolderResponse' smart constructor.
-newtype RevertFolderResponse = RevertFolderResponse'
+newtype RevertFolderResponse =
+  RevertFolderResponse'
     { _rfrFolder :: Maybe Folder
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RevertFolderResponse' with the minimum fields required to make a request.
 --
@@ -241,10 +250,8 @@ newtype RevertFolderResponse = RevertFolderResponse'
 -- * 'rfrFolder'
 revertFolderResponse
     :: RevertFolderResponse
-revertFolderResponse =
-    RevertFolderResponse'
-    { _rfrFolder = Nothing
-    }
+revertFolderResponse = RevertFolderResponse' {_rfrFolder = Nothing}
+
 
 -- | Folder as it appears in the latest container version since the last
 -- workspace synchronization operation. If no folder is present, that means
@@ -265,9 +272,12 @@ instance ToJSON RevertFolderResponse where
 -- | The result of reverting a variable in a workspace.
 --
 -- /See:/ 'revertVariableResponse' smart constructor.
-newtype RevertVariableResponse = RevertVariableResponse'
+newtype RevertVariableResponse =
+  RevertVariableResponse'
     { _rvrVariable :: Maybe Variable
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RevertVariableResponse' with the minimum fields required to make a request.
 --
@@ -276,10 +286,8 @@ newtype RevertVariableResponse = RevertVariableResponse'
 -- * 'rvrVariable'
 revertVariableResponse
     :: RevertVariableResponse
-revertVariableResponse =
-    RevertVariableResponse'
-    { _rvrVariable = Nothing
-    }
+revertVariableResponse = RevertVariableResponse' {_rvrVariable = Nothing}
+
 
 -- | Variable as it appears in the latest container version since the last
 -- workspace synchronization operation. If no variable is present, that
@@ -302,10 +310,13 @@ instance ToJSON RevertVariableResponse where
 -- | Publish container version response.
 --
 -- /See:/ 'publishContainerVersionResponse' smart constructor.
-data PublishContainerVersionResponse = PublishContainerVersionResponse'
+data PublishContainerVersionResponse =
+  PublishContainerVersionResponse'
     { _pcvrCompilerError    :: !(Maybe Bool)
     , _pcvrContainerVersion :: !(Maybe ContainerVersion)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublishContainerVersionResponse' with the minimum fields required to make a request.
 --
@@ -317,10 +328,9 @@ data PublishContainerVersionResponse = PublishContainerVersionResponse'
 publishContainerVersionResponse
     :: PublishContainerVersionResponse
 publishContainerVersionResponse =
-    PublishContainerVersionResponse'
-    { _pcvrCompilerError = Nothing
-    , _pcvrContainerVersion = Nothing
-    }
+  PublishContainerVersionResponse'
+    {_pcvrCompilerError = Nothing, _pcvrContainerVersion = Nothing}
+
 
 -- | Compiler errors or not.
 pcvrCompilerError :: Lens' PublishContainerVersionResponse (Maybe Bool)
@@ -353,10 +363,13 @@ instance ToJSON PublishContainerVersionResponse where
 -- | A list of workspaces in a container.
 --
 -- /See:/ 'listWorkspacesResponse' smart constructor.
-data ListWorkspacesResponse = ListWorkspacesResponse'
+data ListWorkspacesResponse =
+  ListWorkspacesResponse'
     { _lwrNextPageToken :: !(Maybe Text)
     , _lwrWorkspace     :: !(Maybe [Workspace])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListWorkspacesResponse' with the minimum fields required to make a request.
 --
@@ -368,10 +381,8 @@ data ListWorkspacesResponse = ListWorkspacesResponse'
 listWorkspacesResponse
     :: ListWorkspacesResponse
 listWorkspacesResponse =
-    ListWorkspacesResponse'
-    { _lwrNextPageToken = Nothing
-    , _lwrWorkspace = Nothing
-    }
+  ListWorkspacesResponse' {_lwrNextPageToken = Nothing, _lwrWorkspace = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lwrNextPageToken :: Lens' ListWorkspacesResponse (Maybe Text)
@@ -404,7 +415,8 @@ instance ToJSON ListWorkspacesResponse where
 -- | Represents a Google Tag Manager Container Version Header.
 --
 -- /See:/ 'containerVersionHeader' smart constructor.
-data ContainerVersionHeader = ContainerVersionHeader'
+data ContainerVersionHeader =
+  ContainerVersionHeader'
     { _cvhNumTags            :: !(Maybe Text)
     , _cvhNumMacros          :: !(Maybe Text)
     , _cvhContainerId        :: !(Maybe Text)
@@ -417,7 +429,9 @@ data ContainerVersionHeader = ContainerVersionHeader'
     , _cvhNumZones           :: !(Maybe Text)
     , _cvhNumRules           :: !(Maybe Text)
     , _cvhNumVariables       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContainerVersionHeader' with the minimum fields required to make a request.
 --
@@ -449,7 +463,7 @@ data ContainerVersionHeader = ContainerVersionHeader'
 containerVersionHeader
     :: ContainerVersionHeader
 containerVersionHeader =
-    ContainerVersionHeader'
+  ContainerVersionHeader'
     { _cvhNumTags = Nothing
     , _cvhNumMacros = Nothing
     , _cvhContainerId = Nothing
@@ -463,6 +477,7 @@ containerVersionHeader =
     , _cvhNumRules = Nothing
     , _cvhNumVariables = Nothing
     }
+
 
 -- | Number of tags in the container version.
 cvhNumTags :: Lens' ContainerVersionHeader (Maybe Text)
@@ -564,10 +579,13 @@ instance ToJSON ContainerVersionHeader where
 -- dependencies.
 --
 -- /See:/ 'teardownTag' smart constructor.
-data TeardownTag = TeardownTag'
+data TeardownTag =
+  TeardownTag'
     { _ttStopTeardownOnFailure :: !(Maybe Bool)
     , _ttTagName               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeardownTag' with the minimum fields required to make a request.
 --
@@ -579,10 +597,8 @@ data TeardownTag = TeardownTag'
 teardownTag
     :: TeardownTag
 teardownTag =
-    TeardownTag'
-    { _ttStopTeardownOnFailure = Nothing
-    , _ttTagName = Nothing
-    }
+  TeardownTag' {_ttStopTeardownOnFailure = Nothing, _ttTagName = Nothing}
+
 
 -- | If true, fire the teardown tag if and only if the main tag fires
 -- successfully. If false, fire the teardown tag regardless of main tag
@@ -616,10 +632,13 @@ instance ToJSON TeardownTag where
 -- | List triggers response.
 --
 -- /See:/ 'listTriggersResponse' smart constructor.
-data ListTriggersResponse = ListTriggersResponse'
+data ListTriggersResponse =
+  ListTriggersResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTrigger       :: !(Maybe [Trigger])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListTriggersResponse' with the minimum fields required to make a request.
 --
@@ -631,10 +650,8 @@ data ListTriggersResponse = ListTriggersResponse'
 listTriggersResponse
     :: ListTriggersResponse
 listTriggersResponse =
-    ListTriggersResponse'
-    { _ltrNextPageToken = Nothing
-    , _ltrTrigger = Nothing
-    }
+  ListTriggersResponse' {_ltrNextPageToken = Nothing, _ltrTrigger = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 ltrNextPageToken :: Lens' ListTriggersResponse (Maybe Text)
@@ -667,7 +684,8 @@ instance ToJSON ListTriggersResponse where
 -- | Represents a Google Tag Manager Tag.
 --
 -- /See:/ 'tag' smart constructor.
-data Tag = Tag'
+data Tag =
+  Tag'
     { _tBlockingTriggerId :: !(Maybe [Text])
     , _tScheduleEndMs     :: !(Maybe (Textual Int64))
     , _tParentFolderId    :: !(Maybe Text)
@@ -692,7 +710,9 @@ data Tag = Tag'
     , _tPaused            :: !(Maybe Bool)
     , _tFiringRuleId      :: !(Maybe [Text])
     , _tParameter         :: !(Maybe [Parameter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Tag' with the minimum fields required to make a request.
 --
@@ -748,7 +768,7 @@ data Tag = Tag'
 tag
     :: Tag
 tag =
-    Tag'
+  Tag'
     { _tBlockingTriggerId = Nothing
     , _tScheduleEndMs = Nothing
     , _tParentFolderId = Nothing
@@ -774,6 +794,7 @@ tag =
     , _tFiringRuleId = Nothing
     , _tParameter = Nothing
     }
+
 
 -- | Blocking trigger IDs. If any of the listed triggers evaluate to true,
 -- the tag will not fire.
@@ -983,10 +1004,13 @@ instance ToJSON Tag where
 -- | Represents a Zone\'s type restrictions.
 --
 -- /See:/ 'zoneTypeRestriction' smart constructor.
-data ZoneTypeRestriction = ZoneTypeRestriction'
+data ZoneTypeRestriction =
+  ZoneTypeRestriction'
     { _ztrEnable            :: !(Maybe Bool)
     , _ztrWhiteListedTypeId :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ZoneTypeRestriction' with the minimum fields required to make a request.
 --
@@ -998,10 +1022,8 @@ data ZoneTypeRestriction = ZoneTypeRestriction'
 zoneTypeRestriction
     :: ZoneTypeRestriction
 zoneTypeRestriction =
-    ZoneTypeRestriction'
-    { _ztrEnable = Nothing
-    , _ztrWhiteListedTypeId = Nothing
-    }
+  ZoneTypeRestriction' {_ztrEnable = Nothing, _ztrWhiteListedTypeId = Nothing}
+
 
 -- | True if type restrictions have been enabled for this Zone.
 ztrEnable :: Lens' ZoneTypeRestriction (Maybe Bool)
@@ -1034,12 +1056,15 @@ instance ToJSON ZoneTypeRestriction where
 -- | Create container versions response.
 --
 -- /See:/ 'createContainerVersionResponse' smart constructor.
-data CreateContainerVersionResponse = CreateContainerVersionResponse'
+data CreateContainerVersionResponse =
+  CreateContainerVersionResponse'
     { _ccvrCompilerError    :: !(Maybe Bool)
     , _ccvrNewWorkspacePath :: !(Maybe Text)
     , _ccvrContainerVersion :: !(Maybe ContainerVersion)
     , _ccvrSyncStatus       :: !(Maybe SyncStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateContainerVersionResponse' with the minimum fields required to make a request.
 --
@@ -1055,12 +1080,13 @@ data CreateContainerVersionResponse = CreateContainerVersionResponse'
 createContainerVersionResponse
     :: CreateContainerVersionResponse
 createContainerVersionResponse =
-    CreateContainerVersionResponse'
+  CreateContainerVersionResponse'
     { _ccvrCompilerError = Nothing
     , _ccvrNewWorkspacePath = Nothing
     , _ccvrContainerVersion = Nothing
     , _ccvrSyncStatus = Nothing
     }
+
 
 -- | Compiler errors or not.
 ccvrCompilerError :: Lens' CreateContainerVersionResponse (Maybe Bool)
@@ -1112,10 +1138,13 @@ instance ToJSON CreateContainerVersionResponse where
 -- | Options for new container versions.
 --
 -- /See:/ 'createContainerVersionRequestVersionOptions' smart constructor.
-data CreateContainerVersionRequestVersionOptions = CreateContainerVersionRequestVersionOptions'
+data CreateContainerVersionRequestVersionOptions =
+  CreateContainerVersionRequestVersionOptions'
     { _ccvrvoName  :: !(Maybe Text)
     , _ccvrvoNotes :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateContainerVersionRequestVersionOptions' with the minimum fields required to make a request.
 --
@@ -1127,10 +1156,9 @@ data CreateContainerVersionRequestVersionOptions = CreateContainerVersionRequest
 createContainerVersionRequestVersionOptions
     :: CreateContainerVersionRequestVersionOptions
 createContainerVersionRequestVersionOptions =
-    CreateContainerVersionRequestVersionOptions'
-    { _ccvrvoName = Nothing
-    , _ccvrvoNotes = Nothing
-    }
+  CreateContainerVersionRequestVersionOptions'
+    {_ccvrvoName = Nothing, _ccvrvoNotes = Nothing}
+
 
 -- | The name of the container version to be created.
 ccvrvoName :: Lens' CreateContainerVersionRequestVersionOptions (Maybe Text)
@@ -1143,7 +1171,8 @@ ccvrvoNotes
   = lens _ccvrvoNotes (\ s a -> s{_ccvrvoNotes = a})
 
 instance FromJSON
-         CreateContainerVersionRequestVersionOptions where
+           CreateContainerVersionRequestVersionOptions
+         where
         parseJSON
           = withObject
               "CreateContainerVersionRequestVersionOptions"
@@ -1152,7 +1181,8 @@ instance FromJSON
                    (o .:? "name") <*> (o .:? "notes"))
 
 instance ToJSON
-         CreateContainerVersionRequestVersionOptions where
+           CreateContainerVersionRequestVersionOptions
+         where
         toJSON
           CreateContainerVersionRequestVersionOptions'{..}
           = object
@@ -1163,7 +1193,8 @@ instance ToJSON
 -- | Represents a Google Tag Manager Container Workspace.
 --
 -- /See:/ 'workspace' smart constructor.
-data Workspace = Workspace'
+data Workspace =
+  Workspace'
     { _wContainerId   :: !(Maybe Text)
     , _wPath          :: !(Maybe Text)
     , _wFingerprint   :: !(Maybe Text)
@@ -1172,7 +1203,9 @@ data Workspace = Workspace'
     , _wTagManagerURL :: !(Maybe Text)
     , _wWorkspaceId   :: !(Maybe Text)
     , _wDescription   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Workspace' with the minimum fields required to make a request.
 --
@@ -1196,7 +1229,7 @@ data Workspace = Workspace'
 workspace
     :: Workspace
 workspace =
-    Workspace'
+  Workspace'
     { _wContainerId = Nothing
     , _wPath = Nothing
     , _wFingerprint = Nothing
@@ -1206,6 +1239,7 @@ workspace =
     , _wWorkspaceId = Nothing
     , _wDescription = Nothing
     }
+
 
 -- | GTM Container ID.
 wContainerId :: Lens' Workspace (Maybe Text)
@@ -1278,7 +1312,8 @@ instance ToJSON Workspace where
 -- the enable_debug and url fields of environments of other types.
 --
 -- /See:/ 'environment' smart constructor.
-data Environment = Environment'
+data Environment =
+  Environment'
     { _eContainerId            :: !(Maybe Text)
     , _ePath                   :: !(Maybe Text)
     , _eFingerprint            :: !(Maybe Text)
@@ -1294,7 +1329,9 @@ data Environment = Environment'
     , _eWorkspaceId            :: !(Maybe Text)
     , _eType                   :: !(Maybe EnvironmentType)
     , _eDescription            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Environment' with the minimum fields required to make a request.
 --
@@ -1332,7 +1369,7 @@ data Environment = Environment'
 environment
     :: Environment
 environment =
-    Environment'
+  Environment'
     { _eContainerId = Nothing
     , _ePath = Nothing
     , _eFingerprint = Nothing
@@ -1349,6 +1386,7 @@ environment =
     , _eType = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | GTM Container ID.
 eContainerId :: Lens' Environment (Maybe Text)
@@ -1473,9 +1511,12 @@ instance ToJSON Environment where
 -- | Defines the Google Tag Manager Account access permissions.
 --
 -- /See:/ 'accountAccess' smart constructor.
-newtype AccountAccess = AccountAccess'
+newtype AccountAccess =
+  AccountAccess'
     { _aaPermission :: Maybe AccountAccessPermission
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountAccess' with the minimum fields required to make a request.
 --
@@ -1484,10 +1525,8 @@ newtype AccountAccess = AccountAccess'
 -- * 'aaPermission'
 accountAccess
     :: AccountAccess
-accountAccess =
-    AccountAccess'
-    { _aaPermission = Nothing
-    }
+accountAccess = AccountAccess' {_aaPermission = Nothing}
+
 
 -- | Whether the user has no access, user access, or admin access to an
 -- account.
@@ -1508,10 +1547,13 @@ instance ToJSON AccountAccess where
 -- | List user permissions response.
 --
 -- /See:/ 'listUserPermissionsResponse' smart constructor.
-data ListUserPermissionsResponse = ListUserPermissionsResponse'
+data ListUserPermissionsResponse =
+  ListUserPermissionsResponse'
     { _luprNextPageToken  :: !(Maybe Text)
     , _luprUserPermission :: !(Maybe [UserPermission])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListUserPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -1523,10 +1565,9 @@ data ListUserPermissionsResponse = ListUserPermissionsResponse'
 listUserPermissionsResponse
     :: ListUserPermissionsResponse
 listUserPermissionsResponse =
-    ListUserPermissionsResponse'
-    { _luprNextPageToken = Nothing
-    , _luprUserPermission = Nothing
-    }
+  ListUserPermissionsResponse'
+    {_luprNextPageToken = Nothing, _luprUserPermission = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 luprNextPageToken :: Lens' ListUserPermissionsResponse (Maybe Text)
@@ -1560,9 +1601,12 @@ instance ToJSON ListUserPermissionsResponse where
 -- | A comment from the reviewer or author.
 --
 -- /See:/ 'workspaceProposalHistoryComment' smart constructor.
-newtype WorkspaceProposalHistoryComment = WorkspaceProposalHistoryComment'
+newtype WorkspaceProposalHistoryComment =
+  WorkspaceProposalHistoryComment'
     { _wphcContent :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkspaceProposalHistoryComment' with the minimum fields required to make a request.
 --
@@ -1572,9 +1616,8 @@ newtype WorkspaceProposalHistoryComment = WorkspaceProposalHistoryComment'
 workspaceProposalHistoryComment
     :: WorkspaceProposalHistoryComment
 workspaceProposalHistoryComment =
-    WorkspaceProposalHistoryComment'
-    { _wphcContent = Nothing
-    }
+  WorkspaceProposalHistoryComment' {_wphcContent = Nothing}
+
 
 -- | The contents of the reviewer or author comment.
 wphcContent :: Lens' WorkspaceProposalHistoryComment (Maybe Text)
@@ -1596,9 +1639,12 @@ instance ToJSON WorkspaceProposalHistoryComment where
 
 --
 -- /See:/ 'createBuiltInVariableResponse' smart constructor.
-newtype CreateBuiltInVariableResponse = CreateBuiltInVariableResponse'
+newtype CreateBuiltInVariableResponse =
+  CreateBuiltInVariableResponse'
     { _cbivrBuiltInVariable :: Maybe [BuiltInVariable]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateBuiltInVariableResponse' with the minimum fields required to make a request.
 --
@@ -1608,9 +1654,8 @@ newtype CreateBuiltInVariableResponse = CreateBuiltInVariableResponse'
 createBuiltInVariableResponse
     :: CreateBuiltInVariableResponse
 createBuiltInVariableResponse =
-    CreateBuiltInVariableResponse'
-    { _cbivrBuiltInVariable = Nothing
-    }
+  CreateBuiltInVariableResponse' {_cbivrBuiltInVariable = Nothing}
+
 
 -- | List of created built-in variables.
 cbivrBuiltInVariable :: Lens' CreateBuiltInVariableResponse [BuiltInVariable]
@@ -1637,13 +1682,16 @@ instance ToJSON CreateBuiltInVariableResponse where
 -- proposal.
 --
 -- /See:/ 'workspaceProposalHistory' smart constructor.
-data WorkspaceProposalHistory = WorkspaceProposalHistory'
+data WorkspaceProposalHistory =
+  WorkspaceProposalHistory'
     { _wphCreatedBy        :: !(Maybe WorkspaceProposalUser)
     , _wphStatusChange     :: !(Maybe WorkspaceProposalHistoryStatusChange)
     , _wphType             :: !(Maybe WorkspaceProposalHistoryType)
     , _wphComment          :: !(Maybe WorkspaceProposalHistoryComment)
     , _wphCreatedTimestamp :: !(Maybe Timestamp)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkspaceProposalHistory' with the minimum fields required to make a request.
 --
@@ -1661,13 +1709,14 @@ data WorkspaceProposalHistory = WorkspaceProposalHistory'
 workspaceProposalHistory
     :: WorkspaceProposalHistory
 workspaceProposalHistory =
-    WorkspaceProposalHistory'
+  WorkspaceProposalHistory'
     { _wphCreatedBy = Nothing
     , _wphStatusChange = Nothing
     , _wphType = Nothing
     , _wphComment = Nothing
     , _wphCreatedTimestamp = Nothing
     }
+
 
 -- | The party responsible for the change in history.
 wphCreatedBy :: Lens' WorkspaceProposalHistory (Maybe WorkspaceProposalUser)
@@ -1718,10 +1767,13 @@ instance ToJSON WorkspaceProposalHistory where
 -- | Represents a child container of a Zone.
 --
 -- /See:/ 'zoneChildContainer' smart constructor.
-data ZoneChildContainer = ZoneChildContainer'
+data ZoneChildContainer =
+  ZoneChildContainer'
     { _zccPublicId :: !(Maybe Text)
     , _zccNickname :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ZoneChildContainer' with the minimum fields required to make a request.
 --
@@ -1733,10 +1785,8 @@ data ZoneChildContainer = ZoneChildContainer'
 zoneChildContainer
     :: ZoneChildContainer
 zoneChildContainer =
-    ZoneChildContainer'
-    { _zccPublicId = Nothing
-    , _zccNickname = Nothing
-    }
+  ZoneChildContainer' {_zccPublicId = Nothing, _zccNickname = Nothing}
+
 
 -- | The child container\'s public id.
 zccPublicId :: Lens' ZoneChildContainer (Maybe Text)
@@ -1765,10 +1815,13 @@ instance ToJSON ZoneChildContainer where
 -- | List Accounts Response.
 --
 -- /See:/ 'listAccountsResponse' smart constructor.
-data ListAccountsResponse = ListAccountsResponse'
+data ListAccountsResponse =
+  ListAccountsResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larAccount       :: !(Maybe [Account])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAccountsResponse' with the minimum fields required to make a request.
 --
@@ -1780,10 +1833,8 @@ data ListAccountsResponse = ListAccountsResponse'
 listAccountsResponse
     :: ListAccountsResponse
 listAccountsResponse =
-    ListAccountsResponse'
-    { _larNextPageToken = Nothing
-    , _larAccount = Nothing
-    }
+  ListAccountsResponse' {_larNextPageToken = Nothing, _larAccount = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 larNextPageToken :: Lens' ListAccountsResponse (Maybe Text)
@@ -1816,10 +1867,13 @@ instance ToJSON ListAccountsResponse where
 -- | Represents a merge conflict.
 --
 -- /See:/ 'mergeConflict' smart constructor.
-data MergeConflict = MergeConflict'
+data MergeConflict =
+  MergeConflict'
     { _mcEntityInBaseVersion :: !(Maybe Entity)
     , _mcEntityInWorkspace   :: !(Maybe Entity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MergeConflict' with the minimum fields required to make a request.
 --
@@ -1831,10 +1885,9 @@ data MergeConflict = MergeConflict'
 mergeConflict
     :: MergeConflict
 mergeConflict =
-    MergeConflict'
-    { _mcEntityInBaseVersion = Nothing
-    , _mcEntityInWorkspace = Nothing
-    }
+  MergeConflict'
+    {_mcEntityInBaseVersion = Nothing, _mcEntityInWorkspace = Nothing}
+
 
 -- | The base version entity (since the latest sync operation) that has
 -- conflicting changes compared to the workspace. If this field is missing,
@@ -1871,7 +1924,8 @@ instance ToJSON MergeConflict where
 -- | Represents a Google Tag Manager Folder.
 --
 -- /See:/ 'folder' smart constructor.
-data Folder = Folder'
+data Folder =
+  Folder'
     { _fContainerId   :: !(Maybe Text)
     , _fPath          :: !(Maybe Text)
     , _fFingerprint   :: !(Maybe Text)
@@ -1881,7 +1935,9 @@ data Folder = Folder'
     , _fTagManagerURL :: !(Maybe Text)
     , _fWorkspaceId   :: !(Maybe Text)
     , _fNotes         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Folder' with the minimum fields required to make a request.
 --
@@ -1907,7 +1963,7 @@ data Folder = Folder'
 folder
     :: Folder
 folder =
-    Folder'
+  Folder'
     { _fContainerId = Nothing
     , _fPath = Nothing
     , _fFingerprint = Nothing
@@ -1918,6 +1974,7 @@ folder =
     , _fWorkspaceId = Nothing
     , _fNotes = Nothing
     }
+
 
 -- | GTM Container ID.
 fContainerId :: Lens' Folder (Maybe Text)
@@ -1994,10 +2051,13 @@ instance ToJSON Folder where
 -- | Represents a Zone\'s boundaries.
 --
 -- /See:/ 'zoneBoundary' smart constructor.
-data ZoneBoundary = ZoneBoundary'
+data ZoneBoundary =
+  ZoneBoundary'
     { _zbCustomEvaluationTriggerId :: !(Maybe [Text])
     , _zbCondition                 :: !(Maybe [Condition])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ZoneBoundary' with the minimum fields required to make a request.
 --
@@ -2009,10 +2069,8 @@ data ZoneBoundary = ZoneBoundary'
 zoneBoundary
     :: ZoneBoundary
 zoneBoundary =
-    ZoneBoundary'
-    { _zbCustomEvaluationTriggerId = Nothing
-    , _zbCondition = Nothing
-    }
+  ZoneBoundary' {_zbCustomEvaluationTriggerId = Nothing, _zbCondition = Nothing}
+
 
 -- | Custom evaluation trigger IDs. A zone will evaluate its boundary
 -- conditions when any of the listed triggers are true.
@@ -2049,7 +2107,8 @@ instance ToJSON ZoneBoundary where
 -- | Represents a Google Tag Manager Variable.
 --
 -- /See:/ 'variable' smart constructor.
-data Variable = Variable'
+data Variable =
+  Variable'
     { _vScheduleEndMs      :: !(Maybe (Textual Int64))
     , _vParentFolderId     :: !(Maybe Text)
     , _vContainerId        :: !(Maybe Text)
@@ -2066,7 +2125,9 @@ data Variable = Variable'
     , _vNotes              :: !(Maybe Text)
     , _vEnablingTriggerId  :: !(Maybe [Text])
     , _vParameter          :: !(Maybe [Parameter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Variable' with the minimum fields required to make a request.
 --
@@ -2106,7 +2167,7 @@ data Variable = Variable'
 variable
     :: Variable
 variable =
-    Variable'
+  Variable'
     { _vScheduleEndMs = Nothing
     , _vParentFolderId = Nothing
     , _vContainerId = Nothing
@@ -2124,6 +2185,7 @@ variable =
     , _vEnablingTriggerId = Nothing
     , _vParameter = Nothing
     }
+
 
 -- | The end timestamp in milliseconds to schedule a variable.
 vScheduleEndMs :: Lens' Variable (Maybe Int64)
@@ -2267,7 +2329,8 @@ instance ToJSON Variable where
 -- | Represents a Google Tag Manager Zone\'s contents.
 --
 -- /See:/ 'zone' smart constructor.
-data Zone = Zone'
+data Zone =
+  Zone'
     { _zContainerId     :: !(Maybe Text)
     , _zPath            :: !(Maybe Text)
     , _zBoundary        :: !(Maybe ZoneBoundary)
@@ -2280,7 +2343,9 @@ data Zone = Zone'
     , _zChildContainer  :: !(Maybe [ZoneChildContainer])
     , _zWorkspaceId     :: !(Maybe Text)
     , _zNotes           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
 --
@@ -2312,7 +2377,7 @@ data Zone = Zone'
 zone
     :: Zone
 zone =
-    Zone'
+  Zone'
     { _zContainerId = Nothing
     , _zPath = Nothing
     , _zBoundary = Nothing
@@ -2326,6 +2391,7 @@ zone =
     , _zWorkspaceId = Nothing
     , _zNotes = Nothing
     }
+
 
 -- | GTM Container ID.
 zContainerId :: Lens' Zone (Maybe Text)
@@ -2427,10 +2493,13 @@ instance ToJSON Zone where
 -- version.
 --
 -- /See:/ 'syncWorkspaceResponse' smart constructor.
-data SyncWorkspaceResponse = SyncWorkspaceResponse'
+data SyncWorkspaceResponse =
+  SyncWorkspaceResponse'
     { _swrMergeConflict :: !(Maybe [MergeConflict])
     , _swrSyncStatus    :: !(Maybe SyncStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SyncWorkspaceResponse' with the minimum fields required to make a request.
 --
@@ -2442,10 +2511,8 @@ data SyncWorkspaceResponse = SyncWorkspaceResponse'
 syncWorkspaceResponse
     :: SyncWorkspaceResponse
 syncWorkspaceResponse =
-    SyncWorkspaceResponse'
-    { _swrMergeConflict = Nothing
-    , _swrSyncStatus = Nothing
-    }
+  SyncWorkspaceResponse' {_swrMergeConflict = Nothing, _swrSyncStatus = Nothing}
+
 
 -- | The merge conflict after sync. If this field is not empty, the sync is
 -- still treated as successful. But a version cannot be created until all
@@ -2481,9 +2548,12 @@ instance ToJSON SyncWorkspaceResponse where
 -- | The result of reverting a trigger in a workspace.
 --
 -- /See:/ 'revertTriggerResponse' smart constructor.
-newtype RevertTriggerResponse = RevertTriggerResponse'
+newtype RevertTriggerResponse =
+  RevertTriggerResponse'
     { _rtrTrigger :: Maybe Trigger
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RevertTriggerResponse' with the minimum fields required to make a request.
 --
@@ -2492,10 +2562,8 @@ newtype RevertTriggerResponse = RevertTriggerResponse'
 -- * 'rtrTrigger'
 revertTriggerResponse
     :: RevertTriggerResponse
-revertTriggerResponse =
-    RevertTriggerResponse'
-    { _rtrTrigger = Nothing
-    }
+revertTriggerResponse = RevertTriggerResponse' {_rtrTrigger = Nothing}
+
 
 -- | Trigger as it appears in the latest container version since the last
 -- workspace synchronization operation. If no trigger is present, that
@@ -2516,14 +2584,17 @@ instance ToJSON RevertTriggerResponse where
 -- | Represents a Google Tag Manager Account.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account'
+data Account =
+  Account'
     { _aPath          :: !(Maybe Text)
     , _aShareData     :: !(Maybe Bool)
     , _aFingerprint   :: !(Maybe Text)
     , _aAccountId     :: !(Maybe Text)
     , _aName          :: !(Maybe Text)
     , _aTagManagerURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -2543,7 +2614,7 @@ data Account = Account'
 account
     :: Account
 account =
-    Account'
+  Account'
     { _aPath = Nothing
     , _aShareData = Nothing
     , _aFingerprint = Nothing
@@ -2551,6 +2622,7 @@ account =
     , _aName = Nothing
     , _aTagManagerURL = Nothing
     }
+
 
 -- | GTM Account\'s API relative path.
 aPath :: Lens' Account (Maybe Text)
@@ -2611,12 +2683,15 @@ instance ToJSON Account where
 -- | Updates a workspace proposal with patch-like semantics.
 --
 -- /See:/ 'updateWorkspaceProposalRequest' smart constructor.
-data UpdateWorkspaceProposalRequest = UpdateWorkspaceProposalRequest'
+data UpdateWorkspaceProposalRequest =
+  UpdateWorkspaceProposalRequest'
     { _uwprStatus      :: !(Maybe UpdateWorkspaceProposalRequestStatus)
     , _uwprNewComment  :: !(Maybe WorkspaceProposalHistoryComment)
     , _uwprFingerprint :: !(Maybe Text)
     , _uwprReviewers   :: !(Maybe [WorkspaceProposalUser])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateWorkspaceProposalRequest' with the minimum fields required to make a request.
 --
@@ -2632,12 +2707,13 @@ data UpdateWorkspaceProposalRequest = UpdateWorkspaceProposalRequest'
 updateWorkspaceProposalRequest
     :: UpdateWorkspaceProposalRequest
 updateWorkspaceProposalRequest =
-    UpdateWorkspaceProposalRequest'
+  UpdateWorkspaceProposalRequest'
     { _uwprStatus = Nothing
     , _uwprNewComment = Nothing
     , _uwprFingerprint = Nothing
     , _uwprReviewers = Nothing
     }
+
 
 -- | If present, the status of the workspace proposal is updated.
 uwprStatus :: Lens' UpdateWorkspaceProposalRequest (Maybe UpdateWorkspaceProposalRequestStatus)
@@ -2688,10 +2764,13 @@ instance ToJSON UpdateWorkspaceProposalRequest where
 -- version.
 --
 -- /See:/ 'getWorkspaceStatusResponse' smart constructor.
-data GetWorkspaceStatusResponse = GetWorkspaceStatusResponse'
+data GetWorkspaceStatusResponse =
+  GetWorkspaceStatusResponse'
     { _gwsrMergeConflict   :: !(Maybe [MergeConflict])
     , _gwsrWorkspaceChange :: !(Maybe [Entity])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetWorkspaceStatusResponse' with the minimum fields required to make a request.
 --
@@ -2703,10 +2782,9 @@ data GetWorkspaceStatusResponse = GetWorkspaceStatusResponse'
 getWorkspaceStatusResponse
     :: GetWorkspaceStatusResponse
 getWorkspaceStatusResponse =
-    GetWorkspaceStatusResponse'
-    { _gwsrMergeConflict = Nothing
-    , _gwsrWorkspaceChange = Nothing
-    }
+  GetWorkspaceStatusResponse'
+    {_gwsrMergeConflict = Nothing, _gwsrWorkspaceChange = Nothing}
+
 
 -- | The merge conflict after sync.
 gwsrMergeConflict :: Lens' GetWorkspaceStatusResponse [MergeConflict]
@@ -2742,11 +2820,14 @@ instance ToJSON GetWorkspaceStatusResponse where
 -- | Response to quick previewing a workspace.
 --
 -- /See:/ 'quickPreviewResponse' smart constructor.
-data QuickPreviewResponse = QuickPreviewResponse'
+data QuickPreviewResponse =
+  QuickPreviewResponse'
     { _qprCompilerError    :: !(Maybe Bool)
     , _qprContainerVersion :: !(Maybe ContainerVersion)
     , _qprSyncStatus       :: !(Maybe SyncStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuickPreviewResponse' with the minimum fields required to make a request.
 --
@@ -2760,11 +2841,12 @@ data QuickPreviewResponse = QuickPreviewResponse'
 quickPreviewResponse
     :: QuickPreviewResponse
 quickPreviewResponse =
-    QuickPreviewResponse'
+  QuickPreviewResponse'
     { _qprCompilerError = Nothing
     , _qprContainerVersion = Nothing
     , _qprSyncStatus = Nothing
     }
+
 
 -- | Were there compiler errors or not.
 qprCompilerError :: Lens' QuickPreviewResponse (Maybe Bool)
@@ -2805,10 +2887,13 @@ instance ToJSON QuickPreviewResponse where
 -- | List container versions response.
 --
 -- /See:/ 'listContainerVersionsResponse' smart constructor.
-data ListContainerVersionsResponse = ListContainerVersionsResponse'
+data ListContainerVersionsResponse =
+  ListContainerVersionsResponse'
     { _lcvrNextPageToken          :: !(Maybe Text)
     , _lcvrContainerVersionHeader :: !(Maybe [ContainerVersionHeader])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListContainerVersionsResponse' with the minimum fields required to make a request.
 --
@@ -2820,10 +2905,9 @@ data ListContainerVersionsResponse = ListContainerVersionsResponse'
 listContainerVersionsResponse
     :: ListContainerVersionsResponse
 listContainerVersionsResponse =
-    ListContainerVersionsResponse'
-    { _lcvrNextPageToken = Nothing
-    , _lcvrContainerVersionHeader = Nothing
-    }
+  ListContainerVersionsResponse'
+    {_lcvrNextPageToken = Nothing, _lcvrContainerVersionHeader = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lcvrNextPageToken :: Lens' ListContainerVersionsResponse (Maybe Text)
@@ -2859,7 +2943,8 @@ instance ToJSON ListContainerVersionsResponse where
 -- tags will run on, manages workspaces, and retains container versions.
 --
 -- /See:/ 'container' smart constructor.
-data Container = Container'
+data Container =
+  Container'
     { _cPublicId      :: !(Maybe Text)
     , _cUsageContext  :: !(Maybe [ContainerUsageContextItem])
     , _cContainerId   :: !(Maybe Text)
@@ -2870,7 +2955,9 @@ data Container = Container'
     , _cName          :: !(Maybe Text)
     , _cTagManagerURL :: !(Maybe Text)
     , _cNotes         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Container' with the minimum fields required to make a request.
 --
@@ -2898,7 +2985,7 @@ data Container = Container'
 container
     :: Container
 container =
-    Container'
+  Container'
     { _cPublicId = Nothing
     , _cUsageContext = Nothing
     , _cContainerId = Nothing
@@ -2910,6 +2997,7 @@ container =
     , _cTagManagerURL = Nothing
     , _cNotes = Nothing
     }
+
 
 -- | Container Public ID.
 cPublicId :: Lens' Container (Maybe Text)
@@ -3003,14 +3091,17 @@ instance ToJSON Container where
 -- accessing elements of a page URL.
 --
 -- /See:/ 'builtInVariable' smart constructor.
-data BuiltInVariable = BuiltInVariable'
+data BuiltInVariable =
+  BuiltInVariable'
     { _bivContainerId :: !(Maybe Text)
     , _bivPath        :: !(Maybe Text)
     , _bivAccountId   :: !(Maybe Text)
     , _bivName        :: !(Maybe Text)
     , _bivWorkspaceId :: !(Maybe Text)
     , _bivType        :: !(Maybe BuiltInVariableType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuiltInVariable' with the minimum fields required to make a request.
 --
@@ -3030,7 +3121,7 @@ data BuiltInVariable = BuiltInVariable'
 builtInVariable
     :: BuiltInVariable
 builtInVariable =
-    BuiltInVariable'
+  BuiltInVariable'
     { _bivContainerId = Nothing
     , _bivPath = Nothing
     , _bivAccountId = Nothing
@@ -3038,6 +3129,7 @@ builtInVariable =
     , _bivWorkspaceId = Nothing
     , _bivType = Nothing
     }
+
 
 -- | GTM Container ID.
 bivContainerId :: Lens' BuiltInVariable (Maybe Text)
@@ -3094,13 +3186,16 @@ instance ToJSON BuiltInVariable where
 -- | Represents a user\'s permissions to an account and its container.
 --
 -- /See:/ 'userPermission' smart constructor.
-data UserPermission = UserPermission'
+data UserPermission =
+  UserPermission'
     { _upPath            :: !(Maybe Text)
     , _upAccountAccess   :: !(Maybe AccountAccess)
     , _upAccountId       :: !(Maybe Text)
     , _upEmailAddress    :: !(Maybe Text)
     , _upContainerAccess :: !(Maybe [ContainerAccess])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserPermission' with the minimum fields required to make a request.
 --
@@ -3118,13 +3213,14 @@ data UserPermission = UserPermission'
 userPermission
     :: UserPermission
 userPermission =
-    UserPermission'
+  UserPermission'
     { _upPath = Nothing
     , _upAccountAccess = Nothing
     , _upAccountId = Nothing
     , _upEmailAddress = Nothing
     , _upContainerAccess = Nothing
     }
+
 
 -- | GTM UserPermission\'s API relative path.
 upPath :: Lens' UserPermission (Maybe Text)
@@ -3178,7 +3274,8 @@ instance ToJSON UserPermission where
 -- | Represents a Google Tag Manager Container Version.
 --
 -- /See:/ 'containerVersion' smart constructor.
-data ContainerVersion = ContainerVersion'
+data ContainerVersion =
+  ContainerVersion'
     { _cvTag                :: !(Maybe [Tag])
     , _cvContainerId        :: !(Maybe Text)
     , _cvPath               :: !(Maybe Text)
@@ -3195,7 +3292,9 @@ data ContainerVersion = ContainerVersion'
     , _cvDeleted            :: !(Maybe Bool)
     , _cvTrigger            :: !(Maybe [Trigger])
     , _cvDescription        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContainerVersion' with the minimum fields required to make a request.
 --
@@ -3235,7 +3334,7 @@ data ContainerVersion = ContainerVersion'
 containerVersion
     :: ContainerVersion
 containerVersion =
-    ContainerVersion'
+  ContainerVersion'
     { _cvTag = Nothing
     , _cvContainerId = Nothing
     , _cvPath = Nothing
@@ -3253,6 +3352,7 @@ containerVersion =
     , _cvTrigger = Nothing
     , _cvDescription = Nothing
     }
+
 
 -- | The tags in the container that this version was taken from.
 cvTag :: Lens' ContainerVersion [Tag]
@@ -3397,10 +3497,13 @@ instance ToJSON ContainerVersion where
 -- set up dependencies.
 --
 -- /See:/ 'setupTag' smart constructor.
-data SetupTag = SetupTag'
+data SetupTag =
+  SetupTag'
     { _stTagName            :: !(Maybe Text)
     , _stStopOnSetupFailure :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetupTag' with the minimum fields required to make a request.
 --
@@ -3411,11 +3514,8 @@ data SetupTag = SetupTag'
 -- * 'stStopOnSetupFailure'
 setupTag
     :: SetupTag
-setupTag =
-    SetupTag'
-    { _stTagName = Nothing
-    , _stStopOnSetupFailure = Nothing
-    }
+setupTag = SetupTag' {_stTagName = Nothing, _stStopOnSetupFailure = Nothing}
+
 
 -- | The name of the setup tag.
 stTagName :: Lens' SetupTag (Maybe Text)
@@ -3447,10 +3547,13 @@ instance ToJSON SetupTag where
 -- | List Containers Response.
 --
 -- /See:/ 'listContainersResponse' smart constructor.
-data ListContainersResponse = ListContainersResponse'
+data ListContainersResponse =
+  ListContainersResponse'
     { _lcrNextPageToken :: !(Maybe Text)
     , _lcrContainer     :: !(Maybe [Container])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListContainersResponse' with the minimum fields required to make a request.
 --
@@ -3462,10 +3565,8 @@ data ListContainersResponse = ListContainersResponse'
 listContainersResponse
     :: ListContainersResponse
 listContainersResponse =
-    ListContainersResponse'
-    { _lcrNextPageToken = Nothing
-    , _lcrContainer = Nothing
-    }
+  ListContainersResponse' {_lcrNextPageToken = Nothing, _lcrContainer = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lcrNextPageToken :: Lens' ListContainersResponse (Maybe Text)
@@ -3498,7 +3599,8 @@ instance ToJSON ListContainersResponse where
 -- | Represents a Google Tag Manager Trigger
 --
 -- /See:/ 'trigger' smart constructor.
-data Trigger = Trigger'
+data Trigger =
+  Trigger'
     { _triContinuousTimeMinMilliseconds  :: !(Maybe Parameter)
     , _triMaxTimerLengthSeconds          :: !(Maybe Parameter)
     , _triCustomEventFilter              :: !(Maybe [Condition])
@@ -3531,7 +3633,9 @@ data Trigger = Trigger'
     , _triEventName                      :: !(Maybe Parameter)
     , _triWaitForTags                    :: !(Maybe Parameter)
     , _triParameter                      :: !(Maybe [Parameter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Trigger' with the minimum fields required to make a request.
 --
@@ -3603,7 +3707,7 @@ data Trigger = Trigger'
 trigger
     :: Trigger
 trigger =
-    Trigger'
+  Trigger'
     { _triContinuousTimeMinMilliseconds = Nothing
     , _triMaxTimerLengthSeconds = Nothing
     , _triCustomEventFilter = Nothing
@@ -3637,6 +3741,7 @@ trigger =
     , _triWaitForTags = Nothing
     , _triParameter = Nothing
     }
+
 
 -- | A visibility trigger minimum continuous visible time (in milliseconds).
 -- Only valid for AMP Visibility trigger.
@@ -3934,10 +4039,13 @@ instance ToJSON Trigger where
 -- | List Tags Response.
 --
 -- /See:/ 'listTagsResponse' smart constructor.
-data ListTagsResponse = ListTagsResponse'
+data ListTagsResponse =
+  ListTagsResponse'
     { _lNextPageToken :: !(Maybe Text)
     , _lTag           :: !(Maybe [Tag])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
 --
@@ -3949,10 +4057,8 @@ data ListTagsResponse = ListTagsResponse'
 listTagsResponse
     :: ListTagsResponse
 listTagsResponse =
-    ListTagsResponse'
-    { _lNextPageToken = Nothing
-    , _lTag = Nothing
-    }
+  ListTagsResponse' {_lNextPageToken = Nothing, _lTag = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lNextPageToken :: Lens' ListTagsResponse (Maybe Text)
@@ -3983,10 +4089,13 @@ instance ToJSON ListTagsResponse where
 -- | A list of enabled built-in variables.
 --
 -- /See:/ 'listEnabledBuiltInVariablesResponse' smart constructor.
-data ListEnabledBuiltInVariablesResponse = ListEnabledBuiltInVariablesResponse'
+data ListEnabledBuiltInVariablesResponse =
+  ListEnabledBuiltInVariablesResponse'
     { _lebivrNextPageToken   :: !(Maybe Text)
     , _lebivrBuiltInVariable :: !(Maybe [BuiltInVariable])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListEnabledBuiltInVariablesResponse' with the minimum fields required to make a request.
 --
@@ -3998,10 +4107,9 @@ data ListEnabledBuiltInVariablesResponse = ListEnabledBuiltInVariablesResponse'
 listEnabledBuiltInVariablesResponse
     :: ListEnabledBuiltInVariablesResponse
 listEnabledBuiltInVariablesResponse =
-    ListEnabledBuiltInVariablesResponse'
-    { _lebivrNextPageToken = Nothing
-    , _lebivrBuiltInVariable = Nothing
-    }
+  ListEnabledBuiltInVariablesResponse'
+    {_lebivrNextPageToken = Nothing, _lebivrBuiltInVariable = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lebivrNextPageToken :: Lens' ListEnabledBuiltInVariablesResponse (Maybe Text)
@@ -4037,10 +4145,13 @@ instance ToJSON ListEnabledBuiltInVariablesResponse
 -- | Represents an external user or internal Google Tag Manager system.
 --
 -- /See:/ 'workspaceProposalUser' smart constructor.
-data WorkspaceProposalUser = WorkspaceProposalUser'
+data WorkspaceProposalUser =
+  WorkspaceProposalUser'
     { _wpuGaiaId :: !(Maybe (Textual Int64))
     , _wpuType   :: !(Maybe WorkspaceProposalUserType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkspaceProposalUser' with the minimum fields required to make a request.
 --
@@ -4052,10 +4163,8 @@ data WorkspaceProposalUser = WorkspaceProposalUser'
 workspaceProposalUser
     :: WorkspaceProposalUser
 workspaceProposalUser =
-    WorkspaceProposalUser'
-    { _wpuGaiaId = Nothing
-    , _wpuType = Nothing
-    }
+  WorkspaceProposalUser' {_wpuGaiaId = Nothing, _wpuType = Nothing}
+
 
 -- | Gaia id associated with a user, absent for the Google Tag Manager
 -- system.
@@ -4086,12 +4195,15 @@ instance ToJSON WorkspaceProposalUser where
 -- | Represents a Google Tag Manager Folder\'s contents.
 --
 -- /See:/ 'folderEntities' smart constructor.
-data FolderEntities = FolderEntities'
+data FolderEntities =
+  FolderEntities'
     { _feNextPageToken :: !(Maybe Text)
     , _feTag           :: !(Maybe [Tag])
     , _feVariable      :: !(Maybe [Variable])
     , _feTrigger       :: !(Maybe [Trigger])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FolderEntities' with the minimum fields required to make a request.
 --
@@ -4107,12 +4219,13 @@ data FolderEntities = FolderEntities'
 folderEntities
     :: FolderEntities
 folderEntities =
-    FolderEntities'
+  FolderEntities'
     { _feNextPageToken = Nothing
     , _feTag = Nothing
     , _feVariable = Nothing
     , _feTrigger = Nothing
     }
+
 
 -- | Continuation token for fetching the next page of results.
 feNextPageToken :: Lens' FolderEntities (Maybe Text)
@@ -4161,10 +4274,13 @@ instance ToJSON FolderEntities where
 -- | The status of a workspace after synchronization.
 --
 -- /See:/ 'syncStatus' smart constructor.
-data SyncStatus = SyncStatus'
+data SyncStatus =
+  SyncStatus'
     { _ssSyncError     :: !(Maybe Bool)
     , _ssMergeConflict :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SyncStatus' with the minimum fields required to make a request.
 --
@@ -4175,11 +4291,8 @@ data SyncStatus = SyncStatus'
 -- * 'ssMergeConflict'
 syncStatus
     :: SyncStatus
-syncStatus =
-    SyncStatus'
-    { _ssSyncError = Nothing
-    , _ssMergeConflict = Nothing
-    }
+syncStatus = SyncStatus' {_ssSyncError = Nothing, _ssMergeConflict = Nothing}
+
 
 -- | An error occurred during the synchronization operation.
 ssSyncError :: Lens' SyncStatus (Maybe Bool)
@@ -4209,9 +4322,12 @@ instance ToJSON SyncStatus where
 -- | The result of reverting a tag in a workspace.
 --
 -- /See:/ 'revertTagResponse' smart constructor.
-newtype RevertTagResponse = RevertTagResponse'
+newtype RevertTagResponse =
+  RevertTagResponse'
     { _rtrTag :: Maybe Tag
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RevertTagResponse' with the minimum fields required to make a request.
 --
@@ -4220,10 +4336,8 @@ newtype RevertTagResponse = RevertTagResponse'
 -- * 'rtrTag'
 revertTagResponse
     :: RevertTagResponse
-revertTagResponse =
-    RevertTagResponse'
-    { _rtrTag = Nothing
-    }
+revertTagResponse = RevertTagResponse' {_rtrTag = Nothing}
+
 
 -- | Tag as it appears in the latest container version since the last
 -- workspace synchronization operation. If no tag is present, that means
@@ -4243,10 +4357,13 @@ instance ToJSON RevertTagResponse where
 -- | Represents a predicate.
 --
 -- /See:/ 'condition' smart constructor.
-data Condition = Condition'
+data Condition =
+  Condition'
     { _cType      :: !(Maybe ConditionType)
     , _cParameter :: !(Maybe [Parameter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
@@ -4257,11 +4374,8 @@ data Condition = Condition'
 -- * 'cParameter'
 condition
     :: Condition
-condition =
-    Condition'
-    { _cType = Nothing
-    , _cParameter = Nothing
-    }
+condition = Condition' {_cType = Nothing, _cParameter = Nothing}
+
 
 -- | The type of operator for this condition.
 cType :: Lens' Condition (Maybe ConditionType)
@@ -4300,13 +4414,16 @@ instance ToJSON Condition where
 -- folder in addition to its status in the workspace.
 --
 -- /See:/ 'entity' smart constructor.
-data Entity = Entity'
+data Entity =
+  Entity'
     { _eTag          :: !(Maybe Tag)
     , _eFolder       :: !(Maybe Folder)
     , _eVariable     :: !(Maybe Variable)
     , _eChangeStatus :: !(Maybe EntityChangeStatus)
     , _eTrigger      :: !(Maybe Trigger)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Entity' with the minimum fields required to make a request.
 --
@@ -4324,13 +4441,14 @@ data Entity = Entity'
 entity
     :: Entity
 entity =
-    Entity'
+  Entity'
     { _eTag = Nothing
     , _eFolder = Nothing
     , _eVariable = Nothing
     , _eChangeStatus = Nothing
     , _eTrigger = Nothing
     }
+
 
 -- | The tag being represented by the entity.
 eTag :: Lens' Entity (Maybe Tag)
@@ -4377,10 +4495,13 @@ instance ToJSON Entity where
 -- | Defines the Google Tag Manager Container access permissions.
 --
 -- /See:/ 'containerAccess' smart constructor.
-data ContainerAccess = ContainerAccess'
+data ContainerAccess =
+  ContainerAccess'
     { _caContainerId :: !(Maybe Text)
     , _caPermission  :: !(Maybe ContainerAccessPermission)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContainerAccess' with the minimum fields required to make a request.
 --
@@ -4392,10 +4513,8 @@ data ContainerAccess = ContainerAccess'
 containerAccess
     :: ContainerAccess
 containerAccess =
-    ContainerAccess'
-    { _caContainerId = Nothing
-    , _caPermission = Nothing
-    }
+  ContainerAccess' {_caContainerId = Nothing, _caPermission = Nothing}
+
 
 -- | GTM Container ID.
 caContainerId :: Lens' ContainerAccess (Maybe Text)
@@ -4473,10 +4592,13 @@ instance ToJSON ContainerAccess where
 -- to obtain a formatter capable of generating timestamps in this format.
 --
 -- /See:/ 'timestamp' smart constructor.
-data Timestamp = Timestamp'
+data Timestamp =
+  Timestamp'
     { _tNanos   :: !(Maybe (Textual Int32))
     , _tSeconds :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Timestamp' with the minimum fields required to make a request.
 --
@@ -4487,11 +4609,8 @@ data Timestamp = Timestamp'
 -- * 'tSeconds'
 timestamp
     :: Timestamp
-timestamp =
-    Timestamp'
-    { _tNanos = Nothing
-    , _tSeconds = Nothing
-    }
+timestamp = Timestamp' {_tNanos = Nothing, _tSeconds = Nothing}
+
 
 -- | Non-negative fractions of a second at nanosecond resolution. Negative
 -- second values with fractions must still have non-negative nanos values
@@ -4524,9 +4643,12 @@ instance ToJSON Timestamp where
 -- | The result of reverting a built-in variable in a workspace.
 --
 -- /See:/ 'revertBuiltInVariableResponse' smart constructor.
-newtype RevertBuiltInVariableResponse = RevertBuiltInVariableResponse'
+newtype RevertBuiltInVariableResponse =
+  RevertBuiltInVariableResponse'
     { _rbivrEnabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RevertBuiltInVariableResponse' with the minimum fields required to make a request.
 --
@@ -4536,9 +4658,8 @@ newtype RevertBuiltInVariableResponse = RevertBuiltInVariableResponse'
 revertBuiltInVariableResponse
     :: RevertBuiltInVariableResponse
 revertBuiltInVariableResponse =
-    RevertBuiltInVariableResponse'
-    { _rbivrEnabled = Nothing
-    }
+  RevertBuiltInVariableResponse' {_rbivrEnabled = Nothing}
+
 
 -- | Whether the built-in variable is enabled after reversion.
 rbivrEnabled :: Lens' RevertBuiltInVariableResponse (Maybe Bool)
@@ -4559,10 +4680,13 @@ instance ToJSON RevertBuiltInVariableResponse where
 -- | A change in the proposal\'s status.
 --
 -- /See:/ 'workspaceProposalHistoryStatusChange' smart constructor.
-data WorkspaceProposalHistoryStatusChange = WorkspaceProposalHistoryStatusChange'
+data WorkspaceProposalHistoryStatusChange =
+  WorkspaceProposalHistoryStatusChange'
     { _wphscOldStatus :: !(Maybe WorkspaceProposalHistoryStatusChangeOldStatus)
     , _wphscNewStatus :: !(Maybe WorkspaceProposalHistoryStatusChangeNewStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkspaceProposalHistoryStatusChange' with the minimum fields required to make a request.
 --
@@ -4574,10 +4698,9 @@ data WorkspaceProposalHistoryStatusChange = WorkspaceProposalHistoryStatusChange
 workspaceProposalHistoryStatusChange
     :: WorkspaceProposalHistoryStatusChange
 workspaceProposalHistoryStatusChange =
-    WorkspaceProposalHistoryStatusChange'
-    { _wphscOldStatus = Nothing
-    , _wphscNewStatus = Nothing
-    }
+  WorkspaceProposalHistoryStatusChange'
+    {_wphscOldStatus = Nothing, _wphscNewStatus = Nothing}
+
 
 -- | The old proposal status before the status change.
 wphscOldStatus :: Lens' WorkspaceProposalHistoryStatusChange (Maybe WorkspaceProposalHistoryStatusChangeOldStatus)
@@ -4592,7 +4715,8 @@ wphscNewStatus
       (\ s a -> s{_wphscNewStatus = a})
 
 instance FromJSON
-         WorkspaceProposalHistoryStatusChange where
+           WorkspaceProposalHistoryStatusChange
+         where
         parseJSON
           = withObject "WorkspaceProposalHistoryStatusChange"
               (\ o ->
@@ -4611,14 +4735,17 @@ instance ToJSON WorkspaceProposalHistoryStatusChange
 -- in an effort to gain approval for container version creation.
 --
 -- /See:/ 'workspaceProposal' smart constructor.
-data WorkspaceProposal = WorkspaceProposal'
+data WorkspaceProposal =
+  WorkspaceProposal'
     { _wpStatus      :: !(Maybe WorkspaceProposalStatus)
     , _wpHistory     :: !(Maybe [WorkspaceProposalHistory])
     , _wpPath        :: !(Maybe Text)
     , _wpFingerprint :: !(Maybe Text)
     , _wpAuthors     :: !(Maybe [WorkspaceProposalUser])
     , _wpReviewers   :: !(Maybe [WorkspaceProposalUser])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkspaceProposal' with the minimum fields required to make a request.
 --
@@ -4638,7 +4765,7 @@ data WorkspaceProposal = WorkspaceProposal'
 workspaceProposal
     :: WorkspaceProposal
 workspaceProposal =
-    WorkspaceProposal'
+  WorkspaceProposal'
     { _wpStatus = Nothing
     , _wpHistory = Nothing
     , _wpPath = Nothing
@@ -4646,6 +4773,7 @@ workspaceProposal =
     , _wpAuthors = Nothing
     , _wpReviewers = Nothing
     }
+
 
 -- | The status of the workspace proposal as it goes through review.
 wpStatus :: Lens' WorkspaceProposal (Maybe WorkspaceProposalStatus)
@@ -4708,13 +4836,16 @@ instance ToJSON WorkspaceProposal where
 -- | Represents a Google Tag Manager Parameter.
 --
 -- /See:/ 'parameter' smart constructor.
-data Parameter = Parameter'
+data Parameter =
+  Parameter'
     { _pList  :: !(Maybe [Parameter])
     , _pValue :: !(Maybe Text)
     , _pMap   :: !(Maybe [Parameter])
     , _pKey   :: !(Maybe Text)
     , _pType  :: !(Maybe ParameterType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Parameter' with the minimum fields required to make a request.
 --
@@ -4732,13 +4863,14 @@ data Parameter = Parameter'
 parameter
     :: Parameter
 parameter =
-    Parameter'
+  Parameter'
     { _pList = Nothing
     , _pValue = Nothing
     , _pMap = Nothing
     , _pKey = Nothing
     , _pType = Nothing
     }
+
 
 -- | This list parameter\'s parameters (keys will be ignored).
 pList :: Lens' Parameter [Parameter]

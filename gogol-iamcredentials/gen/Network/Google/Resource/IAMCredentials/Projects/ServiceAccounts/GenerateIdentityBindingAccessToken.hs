@@ -69,7 +69,8 @@ type ProjectsServiceAccountsGenerateIdentityBindingAccessTokenResource
 -- |
 --
 -- /See:/ 'projectsServiceAccountsGenerateIdentityBindingAccessToken' smart constructor.
-data ProjectsServiceAccountsGenerateIdentityBindingAccessToken = ProjectsServiceAccountsGenerateIdentityBindingAccessToken'
+data ProjectsServiceAccountsGenerateIdentityBindingAccessToken =
+  ProjectsServiceAccountsGenerateIdentityBindingAccessToken'
     { _psagibatXgafv          :: !(Maybe Xgafv)
     , _psagibatUploadProtocol :: !(Maybe Text)
     , _psagibatAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsServiceAccountsGenerateIdentityBindingAccessToken = ProjectsService
     , _psagibatPayload        :: !GenerateIdentityBindingAccessTokenRequest
     , _psagibatName           :: !Text
     , _psagibatCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsGenerateIdentityBindingAccessToken' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsServiceAccountsGenerateIdentityBindingAccessToken
     -> Text -- ^ 'psagibatName'
     -> ProjectsServiceAccountsGenerateIdentityBindingAccessToken
 projectsServiceAccountsGenerateIdentityBindingAccessToken pPsagibatPayload_ pPsagibatName_ =
-    ProjectsServiceAccountsGenerateIdentityBindingAccessToken'
+  ProjectsServiceAccountsGenerateIdentityBindingAccessToken'
     { _psagibatXgafv = Nothing
     , _psagibatUploadProtocol = Nothing
     , _psagibatAccessToken = Nothing
@@ -110,6 +113,7 @@ projectsServiceAccountsGenerateIdentityBindingAccessToken pPsagibatPayload_ pPsa
     , _psagibatName = pPsagibatName_
     , _psagibatCallback = Nothing
     }
+
 
 -- | V1 error format.
 psagibatXgafv :: Lens' ProjectsServiceAccountsGenerateIdentityBindingAccessToken (Maybe Xgafv)
@@ -155,7 +159,7 @@ psagibatCallback
       (\ s a -> s{_psagibatCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsGenerateIdentityBindingAccessToken
+           ProjectsServiceAccountsGenerateIdentityBindingAccessToken
          where
         type Rs
                ProjectsServiceAccountsGenerateIdentityBindingAccessToken

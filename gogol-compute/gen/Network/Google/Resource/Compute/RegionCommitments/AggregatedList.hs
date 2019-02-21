@@ -62,13 +62,16 @@ type RegionCommitmentsAggregatedListResource =
 -- | Retrieves an aggregated list of commitments.
 --
 -- /See:/ 'regionCommitmentsAggregatedList' smart constructor.
-data RegionCommitmentsAggregatedList = RegionCommitmentsAggregatedList'
+data RegionCommitmentsAggregatedList =
+  RegionCommitmentsAggregatedList'
     { _rcalOrderBy    :: !(Maybe Text)
     , _rcalProject    :: !Text
     , _rcalFilter     :: !(Maybe Text)
     , _rcalPageToken  :: !(Maybe Text)
     , _rcalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionCommitmentsAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ regionCommitmentsAggregatedList
     :: Text -- ^ 'rcalProject'
     -> RegionCommitmentsAggregatedList
 regionCommitmentsAggregatedList pRcalProject_ =
-    RegionCommitmentsAggregatedList'
+  RegionCommitmentsAggregatedList'
     { _rcalOrderBy = Nothing
     , _rcalProject = pRcalProject_
     , _rcalFilter = Nothing
     , _rcalPageToken = Nothing
     , _rcalMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
@@ -151,7 +155,8 @@ rcalMaxResults
       . _Coerce
 
 instance GoogleRequest
-         RegionCommitmentsAggregatedList where
+           RegionCommitmentsAggregatedList
+         where
         type Rs RegionCommitmentsAggregatedList =
              CommitmentAggregatedList
         type Scopes RegionCommitmentsAggregatedList =

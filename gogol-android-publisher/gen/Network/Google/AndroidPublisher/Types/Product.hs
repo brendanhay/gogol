@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | List of localized title and description data.
 --
 -- /See:/ 'inAppProductListings' smart constructor.
-newtype InAppProductListings = InAppProductListings'
+newtype InAppProductListings =
+  InAppProductListings'
     { _iaplAddtional :: HashMap Text InAppProductListing
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InAppProductListings' with the minimum fields required to make a request.
 --
@@ -36,9 +39,8 @@ inAppProductListings
     :: HashMap Text InAppProductListing -- ^ 'iaplAddtional'
     -> InAppProductListings
 inAppProductListings pIaplAddtional_ =
-    InAppProductListings'
-    { _iaplAddtional = _Coerce # pIaplAddtional_
-    }
+  InAppProductListings' {_iaplAddtional = _Coerce # pIaplAddtional_}
+
 
 -- | The language of the localized data, as defined by BCP 47. i.e.:
 -- \"en-US\", \"en-GB\".
@@ -59,10 +61,13 @@ instance ToJSON InAppProductListings where
 
 --
 -- /See:/ 'monthDay' smart constructor.
-data MonthDay = MonthDay'
+data MonthDay =
+  MonthDay'
     { _mdDay   :: !(Maybe (Textual Word32))
     , _mdMonth :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonthDay' with the minimum fields required to make a request.
 --
@@ -73,11 +78,8 @@ data MonthDay = MonthDay'
 -- * 'mdMonth'
 monthDay
     :: MonthDay
-monthDay =
-    MonthDay'
-    { _mdDay = Nothing
-    , _mdMonth = Nothing
-    }
+monthDay = MonthDay' {_mdDay = Nothing, _mdMonth = Nothing}
+
 
 -- | Day of a month, value in [1, 31] range. Valid range depends on the
 -- specified month.
@@ -106,10 +108,13 @@ instance ToJSON MonthDay where
 
 --
 -- /See:/ 'track' smart constructor.
-data Track = Track'
+data Track =
+  Track'
     { _tTrack    :: !(Maybe Text)
     , _tReleases :: !(Maybe [TrackRelease])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Track' with the minimum fields required to make a request.
 --
@@ -120,11 +125,8 @@ data Track = Track'
 -- * 'tReleases'
 track
     :: Track
-track =
-    Track'
-    { _tTrack = Nothing
-    , _tReleases = Nothing
-    }
+track = Track' {_tTrack = Nothing, _tReleases = Nothing}
+
 
 -- | Identifier for this track.
 tTrack :: Lens' Track (Maybe Text)
@@ -154,11 +156,14 @@ instance ToJSON Track where
 
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image'
+data Image =
+  Image'
     { _iURL  :: !(Maybe Text)
     , _iSha1 :: !(Maybe Text)
     , _iId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -171,12 +176,8 @@ data Image = Image'
 -- * 'iId'
 image
     :: Image
-image =
-    Image'
-    { _iURL = Nothing
-    , _iSha1 = Nothing
-    , _iId = Nothing
-    }
+image = Image' {_iURL = Nothing, _iSha1 = Nothing, _iId = Nothing}
+
 
 -- | A URL that will serve a preview of the image.
 iURL :: Lens' Image (Maybe Text)
@@ -206,10 +207,13 @@ instance ToJSON Image where
 
 --
 -- /See:/ 'inAppProductListing' smart constructor.
-data InAppProductListing = InAppProductListing'
+data InAppProductListing =
+  InAppProductListing'
     { _iaplTitle       :: !(Maybe Text)
     , _iaplDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InAppProductListing' with the minimum fields required to make a request.
 --
@@ -221,10 +225,8 @@ data InAppProductListing = InAppProductListing'
 inAppProductListing
     :: InAppProductListing
 inAppProductListing =
-    InAppProductListing'
-    { _iaplTitle = Nothing
-    , _iaplDescription = Nothing
-    }
+  InAppProductListing' {_iaplTitle = Nothing, _iaplDescription = Nothing}
+
 
 iaplTitle :: Lens' InAppProductListing (Maybe Text)
 iaplTitle
@@ -251,9 +253,12 @@ instance ToJSON InAppProductListing where
 
 --
 -- /See:/ 'imagesDeleteAllResponse' smart constructor.
-newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse'
+newtype ImagesDeleteAllResponse =
+  ImagesDeleteAllResponse'
     { _idarDeleted :: Maybe [Image]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImagesDeleteAllResponse' with the minimum fields required to make a request.
 --
@@ -262,10 +267,8 @@ newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse'
 -- * 'idarDeleted'
 imagesDeleteAllResponse
     :: ImagesDeleteAllResponse
-imagesDeleteAllResponse =
-    ImagesDeleteAllResponse'
-    { _idarDeleted = Nothing
-    }
+imagesDeleteAllResponse = ImagesDeleteAllResponse' {_idarDeleted = Nothing}
+
 
 idarDeleted :: Lens' ImagesDeleteAllResponse [Image]
 idarDeleted
@@ -287,10 +290,13 @@ instance ToJSON ImagesDeleteAllResponse where
 
 --
 -- /See:/ 'tokenPagination' smart constructor.
-data TokenPagination = TokenPagination'
+data TokenPagination =
+  TokenPagination'
     { _tpNextPageToken     :: !(Maybe Text)
     , _tpPreviousPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
@@ -302,10 +308,8 @@ data TokenPagination = TokenPagination'
 tokenPagination
     :: TokenPagination
 tokenPagination =
-    TokenPagination'
-    { _tpNextPageToken = Nothing
-    , _tpPreviousPageToken = Nothing
-    }
+  TokenPagination' {_tpNextPageToken = Nothing, _tpPreviousPageToken = Nothing}
+
 
 tpNextPageToken :: Lens' TokenPagination (Maybe Text)
 tpNextPageToken
@@ -334,10 +338,13 @@ instance ToJSON TokenPagination where
 
 --
 -- /See:/ 'expansionFile' smart constructor.
-data ExpansionFile = ExpansionFile'
+data ExpansionFile =
+  ExpansionFile'
     { _efFileSize          :: !(Maybe (Textual Int64))
     , _efReferencesVersion :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExpansionFile' with the minimum fields required to make a request.
 --
@@ -349,10 +356,8 @@ data ExpansionFile = ExpansionFile'
 expansionFile
     :: ExpansionFile
 expansionFile =
-    ExpansionFile'
-    { _efFileSize = Nothing
-    , _efReferencesVersion = Nothing
-    }
+  ExpansionFile' {_efFileSize = Nothing, _efReferencesVersion = Nothing}
+
 
 -- | If set this field indicates that this APK has an Expansion File uploaded
 -- to it: this APK does not reference another APK\'s Expansion File. The
@@ -386,7 +391,8 @@ instance ToJSON ExpansionFile where
 
 --
 -- /See:/ 'userComment' smart constructor.
-data UserComment = UserComment'
+data UserComment =
+  UserComment'
     { _ucAndroidOSVersion :: !(Maybe (Textual Int32))
     , _ucText             :: !(Maybe Text)
     , _ucDevice           :: !(Maybe Text)
@@ -399,7 +405,9 @@ data UserComment = UserComment'
     , _ucDeviceMetadata   :: !(Maybe DeviceMetadata)
     , _ucStarRating       :: !(Maybe (Textual Int32))
     , _ucLastModified     :: !(Maybe Timestamp)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserComment' with the minimum fields required to make a request.
 --
@@ -431,7 +439,7 @@ data UserComment = UserComment'
 userComment
     :: UserComment
 userComment =
-    UserComment'
+  UserComment'
     { _ucAndroidOSVersion = Nothing
     , _ucText = Nothing
     , _ucDevice = Nothing
@@ -445,6 +453,7 @@ userComment =
     , _ucStarRating = Nothing
     , _ucLastModified = Nothing
     }
+
 
 -- | Integer Android SDK version of the user\'s device at the time the review
 -- was written, e.g. 23 is Marshmallow. May be absent.
@@ -561,10 +570,13 @@ instance ToJSON UserComment where
 
 --
 -- /See:/ 'testers' smart constructor.
-data Testers = Testers'
+data Testers =
+  Testers'
     { _tGooglePlusCommUnities :: !(Maybe [Text])
     , _tGoogleGroups          :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Testers' with the minimum fields required to make a request.
 --
@@ -575,11 +587,8 @@ data Testers = Testers'
 -- * 'tGoogleGroups'
 testers
     :: Testers
-testers =
-    Testers'
-    { _tGooglePlusCommUnities = Nothing
-    , _tGoogleGroups = Nothing
-    }
+testers = Testers' {_tGooglePlusCommUnities = Nothing, _tGoogleGroups = Nothing}
+
 
 tGooglePlusCommUnities :: Lens' Testers [Text]
 tGooglePlusCommUnities
@@ -615,10 +624,13 @@ instance ToJSON Testers where
 -- cancellation flow (cancellation reason survey).
 --
 -- /See:/ 'subscriptionCancelSurveyResult' smart constructor.
-data SubscriptionCancelSurveyResult = SubscriptionCancelSurveyResult'
+data SubscriptionCancelSurveyResult =
+  SubscriptionCancelSurveyResult'
     { _scsrCancelSurveyReason    :: !(Maybe (Textual Int32))
     , _scsrUserInputCancelReason :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionCancelSurveyResult' with the minimum fields required to make a request.
 --
@@ -630,10 +642,9 @@ data SubscriptionCancelSurveyResult = SubscriptionCancelSurveyResult'
 subscriptionCancelSurveyResult
     :: SubscriptionCancelSurveyResult
 subscriptionCancelSurveyResult =
-    SubscriptionCancelSurveyResult'
-    { _scsrCancelSurveyReason = Nothing
-    , _scsrUserInputCancelReason = Nothing
-    }
+  SubscriptionCancelSurveyResult'
+    {_scsrCancelSurveyReason = Nothing, _scsrUserInputCancelReason = Nothing}
+
 
 -- | The cancellation reason the user chose in the survey. Possible values
 -- are: - Other - I don\'t use this service enough - Technical issues -
@@ -671,13 +682,16 @@ instance ToJSON SubscriptionCancelSurveyResult where
 
 --
 -- /See:/ 'listing' smart constructor.
-data Listing = Listing'
+data Listing =
+  Listing'
     { _lFullDescription  :: !(Maybe Text)
     , _lVideo            :: !(Maybe Text)
     , _lShortDescription :: !(Maybe Text)
     , _lLanguage         :: !(Maybe Text)
     , _lTitle            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Listing' with the minimum fields required to make a request.
 --
@@ -695,13 +709,14 @@ data Listing = Listing'
 listing
     :: Listing
 listing =
-    Listing'
+  Listing'
     { _lFullDescription = Nothing
     , _lVideo = Nothing
     , _lShortDescription = Nothing
     , _lLanguage = Nothing
     , _lTitle = Nothing
     }
+
 
 -- | Full description of the app; this may be up to 4000 characters in
 -- length.
@@ -752,10 +767,13 @@ instance ToJSON Listing where
 
 --
 -- /See:/ 'aPK' smart constructor.
-data APK = APK'
+data APK =
+  APK'
     { _aVersionCode :: !(Maybe (Textual Int32))
     , _aBinary      :: !(Maybe APKBinary)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APK' with the minimum fields required to make a request.
 --
@@ -766,11 +784,8 @@ data APK = APK'
 -- * 'aBinary'
 aPK
     :: APK
-aPK =
-    APK'
-    { _aVersionCode = Nothing
-    , _aBinary = Nothing
-    }
+aPK = APK' {_aVersionCode = Nothing, _aBinary = Nothing}
+
 
 -- | The version code of the APK, as specified in the APK\'s manifest file.
 aVersionCode :: Lens' APK (Maybe Int32)
@@ -797,9 +812,12 @@ instance ToJSON APK where
 
 --
 -- /See:/ 'subscriptionPurchasesDeferRequest' smart constructor.
-newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest'
+newtype SubscriptionPurchasesDeferRequest =
+  SubscriptionPurchasesDeferRequest'
     { _spdrDeferralInfo :: Maybe SubscriptionDeferralInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionPurchasesDeferRequest' with the minimum fields required to make a request.
 --
@@ -809,9 +827,8 @@ newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest'
 subscriptionPurchasesDeferRequest
     :: SubscriptionPurchasesDeferRequest
 subscriptionPurchasesDeferRequest =
-    SubscriptionPurchasesDeferRequest'
-    { _spdrDeferralInfo = Nothing
-    }
+  SubscriptionPurchasesDeferRequest' {_spdrDeferralInfo = Nothing}
+
 
 -- | The information about the new desired expiry time for the subscription.
 spdrDeferralInfo :: Lens' SubscriptionPurchasesDeferRequest (Maybe SubscriptionDeferralInfo)
@@ -836,10 +853,13 @@ instance ToJSON SubscriptionPurchasesDeferRequest
 
 --
 -- /See:/ 'tracksListResponse' smart constructor.
-data TracksListResponse = TracksListResponse'
+data TracksListResponse =
+  TracksListResponse'
     { _tlrTracks :: !(Maybe [Track])
     , _tlrKind   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TracksListResponse' with the minimum fields required to make a request.
 --
@@ -851,10 +871,9 @@ data TracksListResponse = TracksListResponse'
 tracksListResponse
     :: TracksListResponse
 tracksListResponse =
-    TracksListResponse'
-    { _tlrTracks = Nothing
-    , _tlrKind = "androidpublisher#tracksListResponse"
-    }
+  TracksListResponse'
+    {_tlrTracks = Nothing, _tlrKind = "androidpublisher#tracksListResponse"}
+
 
 tlrTracks :: Lens' TracksListResponse [Track]
 tlrTracks
@@ -885,11 +904,14 @@ instance ToJSON TracksListResponse where
 
 --
 -- /See:/ 'season' smart constructor.
-data Season = Season'
+data Season =
+  Season'
     { _sStart      :: !(Maybe MonthDay)
     , _sEnd        :: !(Maybe MonthDay)
     , _sProrations :: !(Maybe [Prorate])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Season' with the minimum fields required to make a request.
 --
@@ -902,12 +924,8 @@ data Season = Season'
 -- * 'sProrations'
 season
     :: Season
-season =
-    Season'
-    { _sStart = Nothing
-    , _sEnd = Nothing
-    , _sProrations = Nothing
-    }
+season = Season' {_sStart = Nothing, _sEnd = Nothing, _sProrations = Nothing}
+
 
 -- | Inclusive start date of the recurrence period.
 sStart :: Lens' Season (Maybe MonthDay)
@@ -944,11 +962,14 @@ instance ToJSON Season where
 
 --
 -- /See:/ 'pageInfo' smart constructor.
-data PageInfo = PageInfo'
+data PageInfo =
+  PageInfo'
     { _piResultPerPage :: !(Maybe (Textual Int32))
     , _piTotalResults  :: !(Maybe (Textual Int32))
     , _piStartIndex    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
@@ -962,11 +983,12 @@ data PageInfo = PageInfo'
 pageInfo
     :: PageInfo
 pageInfo =
-    PageInfo'
+  PageInfo'
     { _piResultPerPage = Nothing
     , _piTotalResults = Nothing
     , _piStartIndex = Nothing
     }
+
 
 piResultPerPage :: Lens' PageInfo (Maybe Int32)
 piResultPerPage
@@ -1003,9 +1025,12 @@ instance ToJSON PageInfo where
 
 --
 -- /See:/ 'imagesListResponse' smart constructor.
-newtype ImagesListResponse = ImagesListResponse'
+newtype ImagesListResponse =
+  ImagesListResponse'
     { _ilrImages :: Maybe [Image]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImagesListResponse' with the minimum fields required to make a request.
 --
@@ -1014,10 +1039,8 @@ newtype ImagesListResponse = ImagesListResponse'
 -- * 'ilrImages'
 imagesListResponse
     :: ImagesListResponse
-imagesListResponse =
-    ImagesListResponse'
-    { _ilrImages = Nothing
-    }
+imagesListResponse = ImagesListResponse' {_ilrImages = Nothing}
+
 
 ilrImages :: Lens' ImagesListResponse [Image]
 ilrImages
@@ -1039,10 +1062,13 @@ instance ToJSON ImagesListResponse where
 -- changes before committing them in one operation.
 --
 -- /See:/ 'appEdit' smart constructor.
-data AppEdit = AppEdit'
+data AppEdit =
+  AppEdit'
     { _aeId                :: !(Maybe Text)
     , _aeExpiryTimeSeconds :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppEdit' with the minimum fields required to make a request.
 --
@@ -1053,11 +1079,8 @@ data AppEdit = AppEdit'
 -- * 'aeExpiryTimeSeconds'
 appEdit
     :: AppEdit
-appEdit =
-    AppEdit'
-    { _aeId = Nothing
-    , _aeExpiryTimeSeconds = Nothing
-    }
+appEdit = AppEdit' {_aeId = Nothing, _aeExpiryTimeSeconds = Nothing}
+
 
 -- | The ID of the edit that can be used in subsequent API calls.
 aeId :: Lens' AppEdit (Maybe Text)
@@ -1088,7 +1111,8 @@ instance ToJSON AppEdit where
 -- product purchase.
 --
 -- /See:/ 'productPurchase' smart constructor.
-data ProductPurchase = ProductPurchase'
+data ProductPurchase =
+  ProductPurchase'
     { _ppPurchaseState      :: !(Maybe (Textual Int32))
     , _ppConsumptionState   :: !(Maybe (Textual Int32))
     , _ppKind               :: !Text
@@ -1096,7 +1120,9 @@ data ProductPurchase = ProductPurchase'
     , _ppPurchaseType       :: !(Maybe (Textual Int32))
     , _ppDeveloperPayload   :: !(Maybe Text)
     , _ppOrderId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductPurchase' with the minimum fields required to make a request.
 --
@@ -1118,7 +1144,7 @@ data ProductPurchase = ProductPurchase'
 productPurchase
     :: ProductPurchase
 productPurchase =
-    ProductPurchase'
+  ProductPurchase'
     { _ppPurchaseState = Nothing
     , _ppConsumptionState = Nothing
     , _ppKind = "androidpublisher#productPurchase"
@@ -1127,6 +1153,7 @@ productPurchase =
     , _ppDeveloperPayload = Nothing
     , _ppOrderId = Nothing
     }
+
 
 -- | The purchase state of the order. Possible values are: - Purchased -
 -- Canceled
@@ -1160,7 +1187,8 @@ ppPurchaseTimeMillis
 -- | The type of purchase of the inapp product. This field is only set if
 -- this purchase was not made using the standard in-app billing flow.
 -- Possible values are: - Test (i.e. purchased from a license testing
--- account) - Promo (i.e. purchased using a promo code)
+-- account) - Promo (i.e. purchased using a promo code) - Rewarded (i.e.
+-- from watching a video ad instead of paying)
 ppPurchaseType :: Lens' ProductPurchase (Maybe Int32)
 ppPurchaseType
   = lens _ppPurchaseType
@@ -1207,11 +1235,14 @@ instance ToJSON ProductPurchase where
 
 --
 -- /See:/ 'reviewsListResponse' smart constructor.
-data ReviewsListResponse = ReviewsListResponse'
+data ReviewsListResponse =
+  ReviewsListResponse'
     { _rlrTokenPagination :: !(Maybe TokenPagination)
     , _rlrPageInfo        :: !(Maybe PageInfo)
     , _rlrReviews         :: !(Maybe [Review])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReviewsListResponse' with the minimum fields required to make a request.
 --
@@ -1225,11 +1256,12 @@ data ReviewsListResponse = ReviewsListResponse'
 reviewsListResponse
     :: ReviewsListResponse
 reviewsListResponse =
-    ReviewsListResponse'
+  ReviewsListResponse'
     { _rlrTokenPagination = Nothing
     , _rlrPageInfo = Nothing
     , _rlrReviews = Nothing
     }
+
 
 rlrTokenPagination :: Lens' ReviewsListResponse (Maybe TokenPagination)
 rlrTokenPagination
@@ -1264,9 +1296,12 @@ instance ToJSON ReviewsListResponse where
 
 --
 -- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
-newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse'
+newtype SubscriptionPurchasesDeferResponse =
+  SubscriptionPurchasesDeferResponse'
     { _spdrNewExpiryTimeMillis :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionPurchasesDeferResponse' with the minimum fields required to make a request.
 --
@@ -1276,9 +1311,8 @@ newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse'
 subscriptionPurchasesDeferResponse
     :: SubscriptionPurchasesDeferResponse
 subscriptionPurchasesDeferResponse =
-    SubscriptionPurchasesDeferResponse'
-    { _spdrNewExpiryTimeMillis = Nothing
-    }
+  SubscriptionPurchasesDeferResponse' {_spdrNewExpiryTimeMillis = Nothing}
+
 
 -- | The new expiry time for the subscription in milliseconds since the
 -- Epoch.
@@ -1308,7 +1342,8 @@ instance ToJSON SubscriptionPurchasesDeferResponse
 -- subscription purchase.
 --
 -- /See:/ 'subscriptionPurchase' smart constructor.
-data SubscriptionPurchase = SubscriptionPurchase'
+data SubscriptionPurchase =
+  SubscriptionPurchase'
     { _spGivenName                  :: !(Maybe Text)
     , _spAutoResumeTimeMillis       :: !(Maybe (Textual Int64))
     , _spUserCancellationTimeMillis :: !(Maybe (Textual Int64))
@@ -1331,7 +1366,9 @@ data SubscriptionPurchase = SubscriptionPurchase'
     , _spStartTimeMillis            :: !(Maybe (Textual Int64))
     , _spOrderId                    :: !(Maybe Text)
     , _spCancelSurveyResult         :: !(Maybe SubscriptionCancelSurveyResult)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionPurchase' with the minimum fields required to make a request.
 --
@@ -1383,7 +1420,7 @@ data SubscriptionPurchase = SubscriptionPurchase'
 subscriptionPurchase
     :: SubscriptionPurchase
 subscriptionPurchase =
-    SubscriptionPurchase'
+  SubscriptionPurchase'
     { _spGivenName = Nothing
     , _spAutoResumeTimeMillis = Nothing
     , _spUserCancellationTimeMillis = Nothing
@@ -1407,6 +1444,7 @@ subscriptionPurchase =
     , _spOrderId = Nothing
     , _spCancelSurveyResult = Nothing
     }
+
 
 -- | The given name of the user when the subscription was purchased. Only
 -- present for purchases made with \'Subscribe with Google\'.
@@ -1650,10 +1688,13 @@ instance ToJSON SubscriptionPurchase where
 -- the experience for a successful conversion.
 --
 -- /See:/ 'subscriptionPriceChange' smart constructor.
-data SubscriptionPriceChange = SubscriptionPriceChange'
+data SubscriptionPriceChange =
+  SubscriptionPriceChange'
     { _spcState    :: !(Maybe (Textual Int32))
     , _spcNewPrice :: !(Maybe Price)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionPriceChange' with the minimum fields required to make a request.
 --
@@ -1665,10 +1706,8 @@ data SubscriptionPriceChange = SubscriptionPriceChange'
 subscriptionPriceChange
     :: SubscriptionPriceChange
 subscriptionPriceChange =
-    SubscriptionPriceChange'
-    { _spcState = Nothing
-    , _spcNewPrice = Nothing
-    }
+  SubscriptionPriceChange' {_spcState = Nothing, _spcNewPrice = Nothing}
+
 
 -- | The current state of the price change. Possible values are: -
 -- Outstanding: State for a pending price change waiting for the user to
@@ -1704,12 +1743,15 @@ instance ToJSON SubscriptionPriceChange where
 
 --
 -- /See:/ 'appDetails' smart constructor.
-data AppDetails = AppDetails'
+data AppDetails =
+  AppDetails'
     { _adContactPhone    :: !(Maybe Text)
     , _adContactEmail    :: !(Maybe Text)
     , _adContactWebsite  :: !(Maybe Text)
     , _adDefaultLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppDetails' with the minimum fields required to make a request.
 --
@@ -1725,12 +1767,13 @@ data AppDetails = AppDetails'
 appDetails
     :: AppDetails
 appDetails =
-    AppDetails'
+  AppDetails'
     { _adContactPhone = Nothing
     , _adContactEmail = Nothing
     , _adContactWebsite = Nothing
     , _adDefaultLanguage = Nothing
     }
+
 
 -- | The user-visible support telephone number for this app.
 adContactPhone :: Lens' AppDetails (Maybe Text)
@@ -1778,9 +1821,12 @@ instance ToJSON AppDetails where
 -- products can never be free.
 --
 -- /See:/ 'inAppProductPrices' smart constructor.
-newtype InAppProductPrices = InAppProductPrices'
+newtype InAppProductPrices =
+  InAppProductPrices'
     { _iAppAddtional :: HashMap Text Price
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InAppProductPrices' with the minimum fields required to make a request.
 --
@@ -1791,9 +1837,8 @@ inAppProductPrices
     :: HashMap Text Price -- ^ 'iAppAddtional'
     -> InAppProductPrices
 inAppProductPrices pIAppAddtional_ =
-    InAppProductPrices'
-    { _iAppAddtional = _Coerce # pIAppAddtional_
-    }
+  InAppProductPrices' {_iAppAddtional = _Coerce # pIAppAddtional_}
+
 
 -- | Region code, as defined by ISO 3166-2.
 iAppAddtional :: Lens' InAppProductPrices (HashMap Text Price)
@@ -1816,7 +1861,8 @@ instance ToJSON InAppProductPrices where
 -- restricted to the enterprise private channel
 --
 -- /See:/ 'externallyHostedAPK' smart constructor.
-data ExternallyHostedAPK = ExternallyHostedAPK'
+data ExternallyHostedAPK =
+  ExternallyHostedAPK'
     { _ehapkApplicationLabel    :: !(Maybe Text)
     , _ehapkMaximumSdk          :: !(Maybe (Textual Int32))
     , _ehapkNATiveCodes         :: !(Maybe [Text])
@@ -1832,7 +1878,9 @@ data ExternallyHostedAPK = ExternallyHostedAPK'
     , _ehapkFileSha1Base64      :: !(Maybe Text)
     , _ehapkUsesPermissions     :: !(Maybe [ExternallyHostedAPKUsesPermission])
     , _ehapkCertificateBase64s  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExternallyHostedAPK' with the minimum fields required to make a request.
 --
@@ -1870,7 +1918,7 @@ data ExternallyHostedAPK = ExternallyHostedAPK'
 externallyHostedAPK
     :: ExternallyHostedAPK
 externallyHostedAPK =
-    ExternallyHostedAPK'
+  ExternallyHostedAPK'
     { _ehapkApplicationLabel = Nothing
     , _ehapkMaximumSdk = Nothing
     , _ehapkNATiveCodes = Nothing
@@ -1887,6 +1935,7 @@ externallyHostedAPK =
     , _ehapkUsesPermissions = Nothing
     , _ehapkCertificateBase64s = Nothing
     }
+
 
 -- | The application label.
 ehapkApplicationLabel :: Lens' ExternallyHostedAPK (Maybe Text)
@@ -2037,13 +2086,16 @@ instance ToJSON ExternallyHostedAPK where
 
 --
 -- /See:/ 'trackRelease' smart constructor.
-data TrackRelease = TrackRelease'
+data TrackRelease =
+  TrackRelease'
     { _trVersionCodes :: !(Maybe [Textual Int64])
     , _trStatus       :: !(Maybe Text)
     , _trReleaseNotes :: !(Maybe [LocalizedText])
     , _trUserFraction :: !(Maybe (Textual Double))
     , _trName         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TrackRelease' with the minimum fields required to make a request.
 --
@@ -2061,13 +2113,14 @@ data TrackRelease = TrackRelease'
 trackRelease
     :: TrackRelease
 trackRelease =
-    TrackRelease'
+  TrackRelease'
     { _trVersionCodes = Nothing
     , _trStatus = Nothing
     , _trReleaseNotes = Nothing
     , _trUserFraction = Nothing
     , _trName = Nothing
     }
+
 
 -- | A list of all version codes of APKs that will be exposed to the users of
 -- this track when this release is rolled out. Note that this list should
@@ -2129,11 +2182,14 @@ instance ToJSON TrackRelease where
 
 --
 -- /See:/ 'bundle' smart constructor.
-data Bundle = Bundle'
+data Bundle =
+  Bundle'
     { _bVersionCode :: !(Maybe (Textual Int32))
     , _bSha1        :: !(Maybe Text)
     , _bSha256      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Bundle' with the minimum fields required to make a request.
 --
@@ -2146,12 +2202,8 @@ data Bundle = Bundle'
 -- * 'bSha256'
 bundle
     :: Bundle
-bundle =
-    Bundle'
-    { _bVersionCode = Nothing
-    , _bSha1 = Nothing
-    , _bSha256 = Nothing
-    }
+bundle = Bundle' {_bVersionCode = Nothing, _bSha1 = Nothing, _bSha256 = Nothing}
+
 
 -- | The version code of the Android App Bundle. As specified in the Android
 -- App Bundle\'s base module APK manifest file.
@@ -2188,9 +2240,12 @@ instance ToJSON Bundle where
 -- | Represents a deobfuscation file.
 --
 -- /See:/ 'deobfuscationFile' smart constructor.
-newtype DeobfuscationFile = DeobfuscationFile'
+newtype DeobfuscationFile =
+  DeobfuscationFile'
     { _dfSymbolType :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeobfuscationFile' with the minimum fields required to make a request.
 --
@@ -2199,10 +2254,8 @@ newtype DeobfuscationFile = DeobfuscationFile'
 -- * 'dfSymbolType'
 deobfuscationFile
     :: DeobfuscationFile
-deobfuscationFile =
-    DeobfuscationFile'
-    { _dfSymbolType = Nothing
-    }
+deobfuscationFile = DeobfuscationFile' {_dfSymbolType = Nothing}
+
 
 -- | The type of the deobfuscation file.
 dfSymbolType :: Lens' DeobfuscationFile (Maybe Text)
@@ -2221,11 +2274,14 @@ instance ToJSON DeobfuscationFile where
 
 --
 -- /See:/ 'voidedPurchasesListResponse' smart constructor.
-data VoidedPurchasesListResponse = VoidedPurchasesListResponse'
+data VoidedPurchasesListResponse =
+  VoidedPurchasesListResponse'
     { _vplrTokenPagination :: !(Maybe TokenPagination)
     , _vplrPageInfo        :: !(Maybe PageInfo)
     , _vplrVoidedPurchases :: !(Maybe [VoidedPurchase])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VoidedPurchasesListResponse' with the minimum fields required to make a request.
 --
@@ -2239,11 +2295,12 @@ data VoidedPurchasesListResponse = VoidedPurchasesListResponse'
 voidedPurchasesListResponse
     :: VoidedPurchasesListResponse
 voidedPurchasesListResponse =
-    VoidedPurchasesListResponse'
+  VoidedPurchasesListResponse'
     { _vplrTokenPagination = Nothing
     , _vplrPageInfo = Nothing
     , _vplrVoidedPurchases = Nothing
     }
+
 
 vplrTokenPagination :: Lens' VoidedPurchasesListResponse (Maybe TokenPagination)
 vplrTokenPagination
@@ -2279,9 +2336,12 @@ instance ToJSON VoidedPurchasesListResponse where
 
 --
 -- /See:/ 'expansionFilesUploadResponse' smart constructor.
-newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse'
+newtype ExpansionFilesUploadResponse =
+  ExpansionFilesUploadResponse'
     { _efurExpansionFile :: Maybe ExpansionFile
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExpansionFilesUploadResponse' with the minimum fields required to make a request.
 --
@@ -2291,9 +2351,8 @@ newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse'
 expansionFilesUploadResponse
     :: ExpansionFilesUploadResponse
 expansionFilesUploadResponse =
-    ExpansionFilesUploadResponse'
-    { _efurExpansionFile = Nothing
-    }
+  ExpansionFilesUploadResponse' {_efurExpansionFile = Nothing}
+
 
 efurExpansionFile :: Lens' ExpansionFilesUploadResponse (Maybe ExpansionFile)
 efurExpansionFile
@@ -2315,9 +2374,12 @@ instance ToJSON ExpansionFilesUploadResponse where
 
 --
 -- /See:/ 'imagesUploadResponse' smart constructor.
-newtype ImagesUploadResponse = ImagesUploadResponse'
+newtype ImagesUploadResponse =
+  ImagesUploadResponse'
     { _iurImage :: Maybe Image
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImagesUploadResponse' with the minimum fields required to make a request.
 --
@@ -2326,10 +2388,8 @@ newtype ImagesUploadResponse = ImagesUploadResponse'
 -- * 'iurImage'
 imagesUploadResponse
     :: ImagesUploadResponse
-imagesUploadResponse =
-    ImagesUploadResponse'
-    { _iurImage = Nothing
-    }
+imagesUploadResponse = ImagesUploadResponse' {_iurImage = Nothing}
+
 
 iurImage :: Lens' ImagesUploadResponse (Maybe Image)
 iurImage = lens _iurImage (\ s a -> s{_iurImage = a})
@@ -2345,10 +2405,13 @@ instance ToJSON ImagesUploadResponse where
 
 --
 -- /See:/ 'prorate' smart constructor.
-data Prorate = Prorate'
+data Prorate =
+  Prorate'
     { _pStart        :: !(Maybe MonthDay)
     , _pDefaultPrice :: !(Maybe Price)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Prorate' with the minimum fields required to make a request.
 --
@@ -2359,11 +2422,8 @@ data Prorate = Prorate'
 -- * 'pDefaultPrice'
 prorate
     :: Prorate
-prorate =
-    Prorate'
-    { _pStart = Nothing
-    , _pDefaultPrice = Nothing
-    }
+prorate = Prorate' {_pStart = Nothing, _pDefaultPrice = Nothing}
+
 
 -- | Defines the first day on which the price takes effect.
 pStart :: Lens' Prorate (Maybe MonthDay)
@@ -2394,9 +2454,12 @@ instance ToJSON Prorate where
 
 --
 -- /See:/ 'deobfuscationFilesUploadResponse' smart constructor.
-newtype DeobfuscationFilesUploadResponse = DeobfuscationFilesUploadResponse'
+newtype DeobfuscationFilesUploadResponse =
+  DeobfuscationFilesUploadResponse'
     { _dfurDeobfuscationFile :: Maybe DeobfuscationFile
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeobfuscationFilesUploadResponse' with the minimum fields required to make a request.
 --
@@ -2406,9 +2469,8 @@ newtype DeobfuscationFilesUploadResponse = DeobfuscationFilesUploadResponse'
 deobfuscationFilesUploadResponse
     :: DeobfuscationFilesUploadResponse
 deobfuscationFilesUploadResponse =
-    DeobfuscationFilesUploadResponse'
-    { _dfurDeobfuscationFile = Nothing
-    }
+  DeobfuscationFilesUploadResponse' {_dfurDeobfuscationFile = Nothing}
+
 
 dfurDeobfuscationFile :: Lens' DeobfuscationFilesUploadResponse (Maybe DeobfuscationFile)
 dfurDeobfuscationFile
@@ -2433,12 +2495,15 @@ instance ToJSON DeobfuscationFilesUploadResponse
 
 --
 -- /See:/ 'inAppProductsListResponse' smart constructor.
-data InAppProductsListResponse = InAppProductsListResponse'
+data InAppProductsListResponse =
+  InAppProductsListResponse'
     { _iaplrTokenPagination :: !(Maybe TokenPagination)
     , _iaplrPageInfo        :: !(Maybe PageInfo)
     , _iaplrKind            :: !Text
     , _iaplrInAppProduct    :: !(Maybe [InAppProduct])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InAppProductsListResponse' with the minimum fields required to make a request.
 --
@@ -2454,12 +2519,13 @@ data InAppProductsListResponse = InAppProductsListResponse'
 inAppProductsListResponse
     :: InAppProductsListResponse
 inAppProductsListResponse =
-    InAppProductsListResponse'
+  InAppProductsListResponse'
     { _iaplrTokenPagination = Nothing
     , _iaplrPageInfo = Nothing
     , _iaplrKind = "androidpublisher#inappproductsListResponse"
     , _iaplrInAppProduct = Nothing
     }
+
 
 iaplrTokenPagination :: Lens' InAppProductsListResponse (Maybe TokenPagination)
 iaplrTokenPagination
@@ -2505,10 +2571,13 @@ instance ToJSON InAppProductsListResponse where
 
 --
 -- /See:/ 'localizedText' smart constructor.
-data LocalizedText = LocalizedText'
+data LocalizedText =
+  LocalizedText'
     { _ltText     :: !(Maybe Text)
     , _ltLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocalizedText' with the minimum fields required to make a request.
 --
@@ -2519,11 +2588,8 @@ data LocalizedText = LocalizedText'
 -- * 'ltLanguage'
 localizedText
     :: LocalizedText
-localizedText =
-    LocalizedText'
-    { _ltText = Nothing
-    , _ltLanguage = Nothing
-    }
+localizedText = LocalizedText' {_ltText = Nothing, _ltLanguage = Nothing}
+
 
 -- | The text in the given \`language\`.
 ltText :: Lens' LocalizedText (Maybe Text)
@@ -2550,11 +2616,14 @@ instance ToJSON LocalizedText where
 
 --
 -- /See:/ 'review' smart constructor.
-data Review = Review'
+data Review =
+  Review'
     { _rReviewId   :: !(Maybe Text)
     , _rAuthorName :: !(Maybe Text)
     , _rComments   :: !(Maybe [Comment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Review' with the minimum fields required to make a request.
 --
@@ -2568,11 +2637,8 @@ data Review = Review'
 review
     :: Review
 review =
-    Review'
-    { _rReviewId = Nothing
-    , _rAuthorName = Nothing
-    , _rComments = Nothing
-    }
+  Review' {_rReviewId = Nothing, _rAuthorName = Nothing, _rComments = Nothing}
+
 
 -- | Unique identifier for this review.
 rReviewId :: Lens' Review (Maybe Text)
@@ -2609,9 +2675,12 @@ instance ToJSON Review where
 
 --
 -- /See:/ 'aPKsAddExternallyHostedResponse' smart constructor.
-newtype APKsAddExternallyHostedResponse = APKsAddExternallyHostedResponse'
+newtype APKsAddExternallyHostedResponse =
+  APKsAddExternallyHostedResponse'
     { _apkaehrExternallyHostedAPK :: Maybe ExternallyHostedAPK
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APKsAddExternallyHostedResponse' with the minimum fields required to make a request.
 --
@@ -2621,9 +2690,8 @@ newtype APKsAddExternallyHostedResponse = APKsAddExternallyHostedResponse'
 aPKsAddExternallyHostedResponse
     :: APKsAddExternallyHostedResponse
 aPKsAddExternallyHostedResponse =
-    APKsAddExternallyHostedResponse'
-    { _apkaehrExternallyHostedAPK = Nothing
-    }
+  APKsAddExternallyHostedResponse' {_apkaehrExternallyHostedAPK = Nothing}
+
 
 -- | The definition of the externally-hosted APK and where it is located.
 apkaehrExternallyHostedAPK :: Lens' APKsAddExternallyHostedResponse (Maybe ExternallyHostedAPK)
@@ -2650,10 +2718,13 @@ instance ToJSON APKsAddExternallyHostedResponse where
 -- subscription purchase to a future expiry time.
 --
 -- /See:/ 'subscriptionDeferralInfo' smart constructor.
-data SubscriptionDeferralInfo = SubscriptionDeferralInfo'
+data SubscriptionDeferralInfo =
+  SubscriptionDeferralInfo'
     { _sdiDesiredExpiryTimeMillis  :: !(Maybe (Textual Int64))
     , _sdiExpectedExpiryTimeMillis :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionDeferralInfo' with the minimum fields required to make a request.
 --
@@ -2665,10 +2736,11 @@ data SubscriptionDeferralInfo = SubscriptionDeferralInfo'
 subscriptionDeferralInfo
     :: SubscriptionDeferralInfo
 subscriptionDeferralInfo =
-    SubscriptionDeferralInfo'
+  SubscriptionDeferralInfo'
     { _sdiDesiredExpiryTimeMillis = Nothing
     , _sdiExpectedExpiryTimeMillis = Nothing
     }
+
 
 -- | The desired next expiry time to assign to the subscription, in
 -- milliseconds since the Epoch. The given time must be later\/greater than
@@ -2707,9 +2779,12 @@ instance ToJSON SubscriptionDeferralInfo where
 
 --
 -- /See:/ 'reviewsReplyRequest' smart constructor.
-newtype ReviewsReplyRequest = ReviewsReplyRequest'
+newtype ReviewsReplyRequest =
+  ReviewsReplyRequest'
     { _rrrReplyText :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReviewsReplyRequest' with the minimum fields required to make a request.
 --
@@ -2718,10 +2793,8 @@ newtype ReviewsReplyRequest = ReviewsReplyRequest'
 -- * 'rrrReplyText'
 reviewsReplyRequest
     :: ReviewsReplyRequest
-reviewsReplyRequest =
-    ReviewsReplyRequest'
-    { _rrrReplyText = Nothing
-    }
+reviewsReplyRequest = ReviewsReplyRequest' {_rrrReplyText = Nothing}
+
 
 -- | The text to set as the reply. Replies of more than approximately 350
 -- characters will be rejected. HTML tags will be stripped.
@@ -2741,7 +2814,8 @@ instance ToJSON ReviewsReplyRequest where
 
 --
 -- /See:/ 'deviceMetadata' smart constructor.
-data DeviceMetadata = DeviceMetadata'
+data DeviceMetadata =
+  DeviceMetadata'
     { _dmProductName      :: !(Maybe Text)
     , _dmGlEsVersion      :: !(Maybe (Textual Int32))
     , _dmManufacturer     :: !(Maybe Text)
@@ -2753,7 +2827,9 @@ data DeviceMetadata = DeviceMetadata'
     , _dmDeviceClass      :: !(Maybe Text)
     , _dmCPUModel         :: !(Maybe Text)
     , _dmScreenDensityDpi :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceMetadata' with the minimum fields required to make a request.
 --
@@ -2783,7 +2859,7 @@ data DeviceMetadata = DeviceMetadata'
 deviceMetadata
     :: DeviceMetadata
 deviceMetadata =
-    DeviceMetadata'
+  DeviceMetadata'
     { _dmProductName = Nothing
     , _dmGlEsVersion = Nothing
     , _dmManufacturer = Nothing
@@ -2796,6 +2872,7 @@ deviceMetadata =
     , _dmCPUModel = Nothing
     , _dmScreenDensityDpi = Nothing
     }
+
 
 -- | Device model name (e.g. Droid)
 dmProductName :: Lens' DeviceMetadata (Maybe Text)
@@ -2899,10 +2976,13 @@ instance ToJSON DeviceMetadata where
 
 --
 -- /See:/ 'developerComment' smart constructor.
-data DeveloperComment = DeveloperComment'
+data DeveloperComment =
+  DeveloperComment'
     { _dcText         :: !(Maybe Text)
     , _dcLastModified :: !(Maybe Timestamp)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeveloperComment' with the minimum fields required to make a request.
 --
@@ -2914,10 +2994,8 @@ data DeveloperComment = DeveloperComment'
 developerComment
     :: DeveloperComment
 developerComment =
-    DeveloperComment'
-    { _dcText = Nothing
-    , _dcLastModified = Nothing
-    }
+  DeveloperComment' {_dcText = Nothing, _dcLastModified = Nothing}
+
 
 -- | The content of the comment, i.e. reply body.
 dcText :: Lens' DeveloperComment (Maybe Text)
@@ -2945,7 +3023,8 @@ instance ToJSON DeveloperComment where
 
 --
 -- /See:/ 'inAppProduct' smart constructor.
-data InAppProduct = InAppProduct'
+data InAppProduct =
+  InAppProduct'
     { _iapStatus             :: !(Maybe Text)
     , _iapGracePeriod        :: !(Maybe Text)
     , _iapTrialPeriod        :: !(Maybe Text)
@@ -2958,7 +3037,9 @@ data InAppProduct = InAppProduct'
     , _iapDefaultPrice       :: !(Maybe Price)
     , _iapListings           :: !(Maybe InAppProductListings)
     , _iapDefaultLanguage    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InAppProduct' with the minimum fields required to make a request.
 --
@@ -2990,7 +3071,7 @@ data InAppProduct = InAppProduct'
 inAppProduct
     :: InAppProduct
 inAppProduct =
-    InAppProduct'
+  InAppProduct'
     { _iapStatus = Nothing
     , _iapGracePeriod = Nothing
     , _iapTrialPeriod = Nothing
@@ -3004,6 +3085,7 @@ inAppProduct =
     , _iapListings = Nothing
     , _iapDefaultLanguage = Nothing
     }
+
 
 iapStatus :: Lens' InAppProduct (Maybe Text)
 iapStatus
@@ -3116,10 +3198,13 @@ instance ToJSON InAppProduct where
 
 --
 -- /See:/ 'price' smart constructor.
-data Price = Price'
+data Price =
+  Price'
     { _pPriceMicros :: !(Maybe Text)
     , _pCurrency    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
@@ -3130,11 +3215,8 @@ data Price = Price'
 -- * 'pCurrency'
 price
     :: Price
-price =
-    Price'
-    { _pPriceMicros = Nothing
-    , _pCurrency = Nothing
-    }
+price = Price' {_pPriceMicros = Nothing, _pCurrency = Nothing}
+
 
 -- | The price in millionths of the currency base unit represented as a
 -- string.
@@ -3164,10 +3246,13 @@ instance ToJSON Price where
 -- | Represents the binary payload of an APK.
 --
 -- /See:/ 'aPKBinary' smart constructor.
-data APKBinary = APKBinary'
+data APKBinary =
+  APKBinary'
     { _apkbSha1   :: !(Maybe Text)
     , _apkbSha256 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APKBinary' with the minimum fields required to make a request.
 --
@@ -3178,11 +3263,8 @@ data APKBinary = APKBinary'
 -- * 'apkbSha256'
 aPKBinary
     :: APKBinary
-aPKBinary =
-    APKBinary'
-    { _apkbSha1 = Nothing
-    , _apkbSha256 = Nothing
-    }
+aPKBinary = APKBinary' {_apkbSha1 = Nothing, _apkbSha256 = Nothing}
+
 
 -- | A sha1 hash of the APK payload, encoded as a hex string and matching the
 -- output of the sha1sum command.
@@ -3210,10 +3292,13 @@ instance ToJSON APKBinary where
 
 --
 -- /See:/ 'aPKsListResponse' smart constructor.
-data APKsListResponse = APKsListResponse'
+data APKsListResponse =
+  APKsListResponse'
     { _apklrKind :: !Text
     , _apklrAPKs :: !(Maybe [APK])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APKsListResponse' with the minimum fields required to make a request.
 --
@@ -3225,10 +3310,9 @@ data APKsListResponse = APKsListResponse'
 aPKsListResponse
     :: APKsListResponse
 aPKsListResponse =
-    APKsListResponse'
-    { _apklrKind = "androidpublisher#apksListResponse"
-    , _apklrAPKs = Nothing
-    }
+  APKsListResponse'
+    {_apklrKind = "androidpublisher#apksListResponse", _apklrAPKs = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidpublisher#apksListResponse\".
@@ -3260,9 +3344,12 @@ instance ToJSON APKsListResponse where
 
 --
 -- /See:/ 'reviewsReplyResponse' smart constructor.
-newtype ReviewsReplyResponse = ReviewsReplyResponse'
+newtype ReviewsReplyResponse =
+  ReviewsReplyResponse'
     { _rrrResult :: Maybe ReviewReplyResult
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReviewsReplyResponse' with the minimum fields required to make a request.
 --
@@ -3271,10 +3358,8 @@ newtype ReviewsReplyResponse = ReviewsReplyResponse'
 -- * 'rrrResult'
 reviewsReplyResponse
     :: ReviewsReplyResponse
-reviewsReplyResponse =
-    ReviewsReplyResponse'
-    { _rrrResult = Nothing
-    }
+reviewsReplyResponse = ReviewsReplyResponse' {_rrrResult = Nothing}
+
 
 rrrResult :: Lens' ReviewsReplyResponse (Maybe ReviewReplyResult)
 rrrResult
@@ -3292,10 +3377,13 @@ instance ToJSON ReviewsReplyResponse where
 -- | A permission used by this APK.
 --
 -- /See:/ 'externallyHostedAPKUsesPermission' smart constructor.
-data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission'
+data ExternallyHostedAPKUsesPermission =
+  ExternallyHostedAPKUsesPermission'
     { _ehapkupName          :: !(Maybe Text)
     , _ehapkupMaxSdkVersion :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExternallyHostedAPKUsesPermission' with the minimum fields required to make a request.
 --
@@ -3307,10 +3395,9 @@ data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission'
 externallyHostedAPKUsesPermission
     :: ExternallyHostedAPKUsesPermission
 externallyHostedAPKUsesPermission =
-    ExternallyHostedAPKUsesPermission'
-    { _ehapkupName = Nothing
-    , _ehapkupMaxSdkVersion = Nothing
-    }
+  ExternallyHostedAPKUsesPermission'
+    {_ehapkupName = Nothing, _ehapkupMaxSdkVersion = Nothing}
+
 
 -- | The name of the permission requested.
 ehapkupName :: Lens' ExternallyHostedAPKUsesPermission (Maybe Text)
@@ -3343,10 +3430,13 @@ instance ToJSON ExternallyHostedAPKUsesPermission
 
 --
 -- /See:/ 'listingsListResponse' smart constructor.
-data ListingsListResponse = ListingsListResponse'
+data ListingsListResponse =
+  ListingsListResponse'
     { _llrKind     :: !Text
     , _llrListings :: !(Maybe [Listing])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListingsListResponse' with the minimum fields required to make a request.
 --
@@ -3358,10 +3448,9 @@ data ListingsListResponse = ListingsListResponse'
 listingsListResponse
     :: ListingsListResponse
 listingsListResponse =
-    ListingsListResponse'
-    { _llrKind = "androidpublisher#listingsListResponse"
-    , _llrListings = Nothing
-    }
+  ListingsListResponse'
+    {_llrKind = "androidpublisher#listingsListResponse", _llrListings = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidpublisher#listingsListResponse\".
@@ -3392,9 +3481,12 @@ instance ToJSON ListingsListResponse where
 
 --
 -- /See:/ 'aPKsAddExternallyHostedRequest' smart constructor.
-newtype APKsAddExternallyHostedRequest = APKsAddExternallyHostedRequest'
+newtype APKsAddExternallyHostedRequest =
+  APKsAddExternallyHostedRequest'
     { _aExternallyHostedAPK :: Maybe ExternallyHostedAPK
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APKsAddExternallyHostedRequest' with the minimum fields required to make a request.
 --
@@ -3404,9 +3496,8 @@ newtype APKsAddExternallyHostedRequest = APKsAddExternallyHostedRequest'
 aPKsAddExternallyHostedRequest
     :: APKsAddExternallyHostedRequest
 aPKsAddExternallyHostedRequest =
-    APKsAddExternallyHostedRequest'
-    { _aExternallyHostedAPK = Nothing
-    }
+  APKsAddExternallyHostedRequest' {_aExternallyHostedAPK = Nothing}
+
 
 -- | The definition of the externally-hosted APK and where it is located.
 aExternallyHostedAPK :: Lens' APKsAddExternallyHostedRequest (Maybe ExternallyHostedAPK)
@@ -3431,10 +3522,13 @@ instance ToJSON APKsAddExternallyHostedRequest where
 
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment'
+data Comment =
+  Comment'
     { _cUserComment      :: !(Maybe UserComment)
     , _cDeveloperComment :: !(Maybe DeveloperComment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
@@ -3445,11 +3539,8 @@ data Comment = Comment'
 -- * 'cDeveloperComment'
 comment
     :: Comment
-comment =
-    Comment'
-    { _cUserComment = Nothing
-    , _cDeveloperComment = Nothing
-    }
+comment = Comment' {_cUserComment = Nothing, _cDeveloperComment = Nothing}
+
 
 -- | A comment from a user.
 cUserComment :: Lens' Comment (Maybe UserComment)
@@ -3478,10 +3569,13 @@ instance ToJSON Comment where
 
 --
 -- /See:/ 'timestamp' smart constructor.
-data Timestamp = Timestamp'
+data Timestamp =
+  Timestamp'
     { _tNanos   :: !(Maybe (Textual Int32))
     , _tSeconds :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Timestamp' with the minimum fields required to make a request.
 --
@@ -3492,11 +3586,8 @@ data Timestamp = Timestamp'
 -- * 'tSeconds'
 timestamp
     :: Timestamp
-timestamp =
-    Timestamp'
-    { _tNanos = Nothing
-    , _tSeconds = Nothing
-    }
+timestamp = Timestamp' {_tNanos = Nothing, _tSeconds = Nothing}
+
 
 tNanos :: Lens' Timestamp (Maybe Int32)
 tNanos
@@ -3525,12 +3616,15 @@ instance ToJSON Timestamp where
 -- canceled\/refunded\/charged-back.
 --
 -- /See:/ 'voidedPurchase' smart constructor.
-data VoidedPurchase = VoidedPurchase'
+data VoidedPurchase =
+  VoidedPurchase'
     { _vpKind               :: !Text
     , _vpPurchaseTimeMillis :: !(Maybe (Textual Int64))
     , _vpPurchaseToken      :: !(Maybe Text)
     , _vpVoidedTimeMillis   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VoidedPurchase' with the minimum fields required to make a request.
 --
@@ -3546,12 +3640,13 @@ data VoidedPurchase = VoidedPurchase'
 voidedPurchase
     :: VoidedPurchase
 voidedPurchase =
-    VoidedPurchase'
+  VoidedPurchase'
     { _vpKind = "androidpublisher#voidedPurchase"
     , _vpPurchaseTimeMillis = Nothing
     , _vpPurchaseToken = Nothing
     , _vpVoidedTimeMillis = Nothing
     }
+
 
 -- | This kind represents a voided purchase object in the androidpublisher
 -- service.
@@ -3602,10 +3697,13 @@ instance ToJSON VoidedPurchase where
 
 --
 -- /See:/ 'bundlesListResponse' smart constructor.
-data BundlesListResponse = BundlesListResponse'
+data BundlesListResponse =
+  BundlesListResponse'
     { _blrBundles :: !(Maybe [Bundle])
     , _blrKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BundlesListResponse' with the minimum fields required to make a request.
 --
@@ -3617,10 +3715,9 @@ data BundlesListResponse = BundlesListResponse'
 bundlesListResponse
     :: BundlesListResponse
 bundlesListResponse =
-    BundlesListResponse'
-    { _blrBundles = Nothing
-    , _blrKind = "androidpublisher#bundlesListResponse"
-    }
+  BundlesListResponse'
+    {_blrBundles = Nothing, _blrKind = "androidpublisher#bundlesListResponse"}
+
 
 blrBundles :: Lens' BundlesListResponse [Bundle]
 blrBundles
@@ -3651,10 +3748,13 @@ instance ToJSON BundlesListResponse where
 
 --
 -- /See:/ 'reviewReplyResult' smart constructor.
-data ReviewReplyResult = ReviewReplyResult'
+data ReviewReplyResult =
+  ReviewReplyResult'
     { _rReplyText  :: !(Maybe Text)
     , _rLastEdited :: !(Maybe Timestamp)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReviewReplyResult' with the minimum fields required to make a request.
 --
@@ -3666,10 +3766,8 @@ data ReviewReplyResult = ReviewReplyResult'
 reviewReplyResult
     :: ReviewReplyResult
 reviewReplyResult =
-    ReviewReplyResult'
-    { _rReplyText = Nothing
-    , _rLastEdited = Nothing
-    }
+  ReviewReplyResult' {_rReplyText = Nothing, _rLastEdited = Nothing}
+
 
 -- | The reply text that was applied.
 rReplyText :: Lens' ReviewReplyResult (Maybe Text)

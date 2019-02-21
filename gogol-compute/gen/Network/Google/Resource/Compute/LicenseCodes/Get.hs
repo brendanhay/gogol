@@ -57,10 +57,13 @@ type LicenseCodesGetResource =
 -- projects that have permissions to read the License Code.
 --
 -- /See:/ 'licenseCodesGet' smart constructor.
-data LicenseCodesGet = LicenseCodesGet'
+data LicenseCodesGet =
+  LicenseCodesGet'
     { _lcgProject     :: !Text
     , _lcgLicenseCode :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LicenseCodesGet' with the minimum fields required to make a request.
 --
@@ -74,10 +77,9 @@ licenseCodesGet
     -> Text -- ^ 'lcgLicenseCode'
     -> LicenseCodesGet
 licenseCodesGet pLcgProject_ pLcgLicenseCode_ =
-    LicenseCodesGet'
-    { _lcgProject = pLcgProject_
-    , _lcgLicenseCode = pLcgLicenseCode_
-    }
+  LicenseCodesGet'
+    {_lcgProject = pLcgProject_, _lcgLicenseCode = pLcgLicenseCode_}
+
 
 -- | Project ID for this request.
 lcgProject :: Lens' LicenseCodesGet Text

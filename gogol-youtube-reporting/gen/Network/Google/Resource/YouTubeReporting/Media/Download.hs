@@ -73,14 +73,17 @@ type MediaDownloadResource =
 -- \`\/v1\/media\/{+name}?alt=media\`.
 --
 -- /See:/ 'mediaDownload' smart constructor.
-data MediaDownload' = MediaDownload''
+data MediaDownload' =
+  MediaDownload''
     { _mdXgafv          :: !(Maybe Xgafv)
     , _mdUploadProtocol :: !(Maybe Text)
     , _mdResourceName   :: !Text
     , _mdAccessToken    :: !(Maybe Text)
     , _mdUploadType     :: !(Maybe Text)
     , _mdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MediaDownload' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ mediaDownload
     :: Text -- ^ 'mdResourceName'
     -> MediaDownload'
 mediaDownload pMdResourceName_ =
-    MediaDownload''
+  MediaDownload''
     { _mdXgafv = Nothing
     , _mdUploadProtocol = Nothing
     , _mdResourceName = pMdResourceName_
@@ -109,6 +112,7 @@ mediaDownload pMdResourceName_ =
     , _mdUploadType = Nothing
     , _mdCallback = Nothing
     }
+
 
 -- | V1 error format.
 mdXgafv :: Lens' MediaDownload' (Maybe Xgafv)

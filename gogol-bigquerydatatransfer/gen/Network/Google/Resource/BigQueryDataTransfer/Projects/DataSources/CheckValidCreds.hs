@@ -70,7 +70,8 @@ type ProjectsDataSourcesCheckValidCredsResource =
 -- pre-requisite before user can create a transfer config.
 --
 -- /See:/ 'projectsDataSourcesCheckValidCreds' smart constructor.
-data ProjectsDataSourcesCheckValidCreds = ProjectsDataSourcesCheckValidCreds'
+data ProjectsDataSourcesCheckValidCreds =
+  ProjectsDataSourcesCheckValidCreds'
     { _pdscvcXgafv          :: !(Maybe Xgafv)
     , _pdscvcUploadProtocol :: !(Maybe Text)
     , _pdscvcAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsDataSourcesCheckValidCreds = ProjectsDataSourcesCheckValidCreds'
     , _pdscvcPayload        :: !CheckValidCredsRequest
     , _pdscvcName           :: !Text
     , _pdscvcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDataSourcesCheckValidCreds' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsDataSourcesCheckValidCreds
     -> Text -- ^ 'pdscvcName'
     -> ProjectsDataSourcesCheckValidCreds
 projectsDataSourcesCheckValidCreds pPdscvcPayload_ pPdscvcName_ =
-    ProjectsDataSourcesCheckValidCreds'
+  ProjectsDataSourcesCheckValidCreds'
     { _pdscvcXgafv = Nothing
     , _pdscvcUploadProtocol = Nothing
     , _pdscvcAccessToken = Nothing
@@ -111,6 +114,7 @@ projectsDataSourcesCheckValidCreds pPdscvcPayload_ pPdscvcName_ =
     , _pdscvcName = pPdscvcName_
     , _pdscvcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdscvcXgafv :: Lens' ProjectsDataSourcesCheckValidCreds (Maybe Xgafv)
@@ -154,7 +158,8 @@ pdscvcCallback
       (\ s a -> s{_pdscvcCallback = a})
 
 instance GoogleRequest
-         ProjectsDataSourcesCheckValidCreds where
+           ProjectsDataSourcesCheckValidCreds
+         where
         type Rs ProjectsDataSourcesCheckValidCreds =
              CheckValidCredsResponse
         type Scopes ProjectsDataSourcesCheckValidCreds =

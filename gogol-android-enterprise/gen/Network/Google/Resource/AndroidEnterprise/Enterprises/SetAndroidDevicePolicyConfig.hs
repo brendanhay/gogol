@@ -56,10 +56,13 @@ type EnterprisesSetAndroidDevicePolicyConfigResource
 -- | Deprecated and unused.
 --
 -- /See:/ 'enterprisesSetAndroidDevicePolicyConfig' smart constructor.
-data EnterprisesSetAndroidDevicePolicyConfig = EnterprisesSetAndroidDevicePolicyConfig'
+data EnterprisesSetAndroidDevicePolicyConfig =
+  EnterprisesSetAndroidDevicePolicyConfig'
     { _esadpcEnterpriseId :: !Text
     , _esadpcPayload      :: !AndroidDevicePolicyConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnterprisesSetAndroidDevicePolicyConfig' with the minimum fields required to make a request.
 --
@@ -73,10 +76,11 @@ enterprisesSetAndroidDevicePolicyConfig
     -> AndroidDevicePolicyConfig -- ^ 'esadpcPayload'
     -> EnterprisesSetAndroidDevicePolicyConfig
 enterprisesSetAndroidDevicePolicyConfig pEsadpcEnterpriseId_ pEsadpcPayload_ =
-    EnterprisesSetAndroidDevicePolicyConfig'
+  EnterprisesSetAndroidDevicePolicyConfig'
     { _esadpcEnterpriseId = pEsadpcEnterpriseId_
     , _esadpcPayload = pEsadpcPayload_
     }
+
 
 -- | The ID of the enterprise.
 esadpcEnterpriseId :: Lens' EnterprisesSetAndroidDevicePolicyConfig Text
@@ -91,7 +95,8 @@ esadpcPayload
       (\ s a -> s{_esadpcPayload = a})
 
 instance GoogleRequest
-         EnterprisesSetAndroidDevicePolicyConfig where
+           EnterprisesSetAndroidDevicePolicyConfig
+         where
         type Rs EnterprisesSetAndroidDevicePolicyConfig =
              AndroidDevicePolicyConfig
         type Scopes EnterprisesSetAndroidDevicePolicyConfig =

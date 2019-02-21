@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersInsert' request conforms to.
 type AdvertisersInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -54,10 +54,13 @@ type AdvertisersInsertResource =
 -- | Inserts a new advertiser.
 --
 -- /See:/ 'advertisersInsert' smart constructor.
-data AdvertisersInsert = AdvertisersInsert'
+data AdvertisersInsert =
+  AdvertisersInsert'
     { _aiiProFileId :: !(Textual Int64)
     , _aiiPayload   :: !Advertiser
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdvertisersInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ advertisersInsert
     -> Advertiser -- ^ 'aiiPayload'
     -> AdvertisersInsert
 advertisersInsert pAiiProFileId_ pAiiPayload_ =
-    AdvertisersInsert'
-    { _aiiProFileId = _Coerce # pAiiProFileId_
-    , _aiiPayload = pAiiPayload_
-    }
+  AdvertisersInsert'
+    {_aiiProFileId = _Coerce # pAiiProFileId_, _aiiPayload = pAiiPayload_}
+
 
 -- | User profile ID associated with this request.
 aiiProFileId :: Lens' AdvertisersInsert Int64

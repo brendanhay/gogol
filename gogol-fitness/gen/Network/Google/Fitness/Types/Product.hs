@@ -26,13 +26,16 @@ import           Network.Google.Prelude
 -- one dataset.
 --
 -- /See:/ 'dataSet' smart constructor.
-data DataSet = DataSet'
+data DataSet =
+  DataSet'
     { _dsNextPageToken  :: !(Maybe Text)
     , _dsDataSourceId   :: !(Maybe Text)
     , _dsPoint          :: !(Maybe [DataPoint])
     , _dsMinStartTimeNs :: !(Maybe (Textual Int64))
     , _dsMaxEndTimeNs   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSet' with the minimum fields required to make a request.
 --
@@ -50,13 +53,14 @@ data DataSet = DataSet'
 dataSet
     :: DataSet
 dataSet =
-    DataSet'
+  DataSet'
     { _dsNextPageToken = Nothing
     , _dsDataSourceId = Nothing
     , _dsPoint = Nothing
     , _dsMinStartTimeNs = Nothing
     , _dsMaxEndTimeNs = Nothing
     }
+
 
 -- | This token will be set when a dataset is received in response to a GET
 -- request and the dataset is too large to be included in a single
@@ -94,7 +98,7 @@ dsMinStartTimeNs
 
 -- | The largest end time of all data points in this possibly partial
 -- representation of the dataset. Time is in nanoseconds from epoch. This
--- should also match the first part of the dataset identifier.
+-- should also match the second part of the dataset identifier.
 dsMaxEndTimeNs :: Lens' DataSet (Maybe Int64)
 dsMaxEndTimeNs
   = lens _dsMaxEndTimeNs
@@ -124,12 +128,15 @@ instance ToJSON DataSet where
 -- |
 --
 -- /See:/ 'application' smart constructor.
-data Application = Application'
+data Application =
+  Application'
     { _aPackageName :: !(Maybe Text)
     , _aName        :: !(Maybe Text)
     , _aVersion     :: !(Maybe Text)
     , _aDetailsURL  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -145,12 +152,13 @@ data Application = Application'
 application
     :: Application
 application =
-    Application'
+  Application'
     { _aPackageName = Nothing
     , _aName = Nothing
     , _aVersion = Nothing
     , _aDetailsURL = Nothing
     }
+
 
 -- | Package name for this application. This is used as a unique identifier
 -- when created by Android applications, but cannot be specified by REST
@@ -196,9 +204,12 @@ instance ToJSON Application where
 
 --
 -- /See:/ 'aggregateResponse' smart constructor.
-newtype AggregateResponse = AggregateResponse'
+newtype AggregateResponse =
+  AggregateResponse'
     { _arBucket :: Maybe [AggregateBucket]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AggregateResponse' with the minimum fields required to make a request.
 --
@@ -207,10 +218,8 @@ newtype AggregateResponse = AggregateResponse'
 -- * 'arBucket'
 aggregateResponse
     :: AggregateResponse
-aggregateResponse =
-    AggregateResponse'
-    { _arBucket = Nothing
-    }
+aggregateResponse = AggregateResponse' {_arBucket = Nothing}
+
 
 -- | A list of buckets containing the aggregated data.
 arBucket :: Lens' AggregateResponse [AggregateBucket]
@@ -232,10 +241,13 @@ instance ToJSON AggregateResponse where
 -- | The specification of which data to aggregate.
 --
 -- /See:/ 'aggregateBy' smart constructor.
-data AggregateBy = AggregateBy'
+data AggregateBy =
+  AggregateBy'
     { _abDataTypeName :: !(Maybe Text)
     , _abDataSourceId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AggregateBy' with the minimum fields required to make a request.
 --
@@ -247,10 +259,8 @@ data AggregateBy = AggregateBy'
 aggregateBy
     :: AggregateBy
 aggregateBy =
-    AggregateBy'
-    { _abDataTypeName = Nothing
-    , _abDataSourceId = Nothing
-    }
+  AggregateBy' {_abDataTypeName = Nothing, _abDataSourceId = Nothing}
+
 
 -- | The data type to aggregate. All data sources providing this data type
 -- will contribute data to the aggregation. The response will contain a
@@ -286,10 +296,13 @@ instance ToJSON AggregateBy where
 
 --
 -- /See:/ 'bucketByActivity' smart constructor.
-data BucketByActivity = BucketByActivity'
+data BucketByActivity =
+  BucketByActivity'
     { _bbaMinDurationMillis    :: !(Maybe (Textual Int64))
     , _bbaActivityDataSourceId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketByActivity' with the minimum fields required to make a request.
 --
@@ -301,10 +314,9 @@ data BucketByActivity = BucketByActivity'
 bucketByActivity
     :: BucketByActivity
 bucketByActivity =
-    BucketByActivity'
-    { _bbaMinDurationMillis = Nothing
-    , _bbaActivityDataSourceId = Nothing
-    }
+  BucketByActivity'
+    {_bbaMinDurationMillis = Nothing, _bbaActivityDataSourceId = Nothing}
+
 
 -- | Specifies that only activity segments of duration longer than
 -- minDurationMillis are considered and used as a container for aggregated
@@ -341,7 +353,8 @@ instance ToJSON BucketByActivity where
 -- | Next id: 10
 --
 -- /See:/ 'aggregateRequest' smart constructor.
-data AggregateRequest = AggregateRequest'
+data AggregateRequest =
+  AggregateRequest'
     { _arEndTimeMillis               :: !(Maybe (Textual Int64))
     , _arFilteredDataQualityStandard :: !(Maybe [AggregateRequestFilteredDataQualityStandardItem])
     , _arAggregateBy                 :: !(Maybe [AggregateBy])
@@ -350,7 +363,9 @@ data AggregateRequest = AggregateRequest'
     , _arBucketByTime                :: !(Maybe BucketByTime)
     , _arStartTimeMillis             :: !(Maybe (Textual Int64))
     , _arBucketByActivitySegment     :: !(Maybe BucketByActivity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AggregateRequest' with the minimum fields required to make a request.
 --
@@ -374,7 +389,7 @@ data AggregateRequest = AggregateRequest'
 aggregateRequest
     :: AggregateRequest
 aggregateRequest =
-    AggregateRequest'
+  AggregateRequest'
     { _arEndTimeMillis = Nothing
     , _arFilteredDataQualityStandard = Nothing
     , _arAggregateBy = Nothing
@@ -385,6 +400,7 @@ aggregateRequest =
     , _arBucketByActivitySegment = Nothing
     }
 
+
 -- | The end of a window of time. Data that intersects with this time window
 -- will be aggregated. The time is in milliseconds since epoch, inclusive.
 arEndTimeMillis :: Lens' AggregateRequest (Maybe Int64)
@@ -393,9 +409,9 @@ arEndTimeMillis
       (\ s a -> s{_arEndTimeMillis = a})
       . mapping _Coerce
 
--- | A list of acceptable data quality standards. Only data points which
--- conform to at least one of the specified data quality standards will be
--- returned. If the list is empty, all data points are returned.
+-- | DO NOT POPULATE THIS FIELD. As data quality standards are deprecated,
+-- filling it in will result in no data sources being returned. It will be
+-- removed in a future version entirely.
 arFilteredDataQualityStandard :: Lens' AggregateRequest [AggregateRequestFilteredDataQualityStandardItem]
 arFilteredDataQualityStandard
   = lens _arFilteredDataQualityStandard
@@ -500,13 +516,16 @@ instance ToJSON AggregateRequest where
 -- different analysis models for each device\/version.
 --
 -- /See:/ 'device' smart constructor.
-data Device = Device'
+data Device =
+  Device'
     { _dManufacturer :: !(Maybe Text)
     , _dUid          :: !(Maybe Text)
     , _dModel        :: !(Maybe Text)
     , _dVersion      :: !(Maybe Text)
     , _dType         :: !(Maybe DeviceType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
@@ -524,13 +543,14 @@ data Device = Device'
 device
     :: Device
 device =
-    Device'
+  Device'
     { _dManufacturer = Nothing
     , _dUid = Nothing
     , _dModel = Nothing
     , _dVersion = Nothing
     , _dType = Nothing
     }
+
 
 -- | Manufacturer of the product\/hardware.
 dManufacturer :: Lens' Device (Maybe Text)
@@ -581,12 +601,15 @@ instance ToJSON Device where
 -- or a floating point value. LINT.IfChange
 --
 -- /See:/ 'value' smart constructor.
-data Value = Value'
+data Value =
+  Value'
     { _vMapVal    :: !(Maybe [ValueMapValEntry])
     , _vFpVal     :: !(Maybe (Textual Double))
     , _vIntVal    :: !(Maybe (Textual Int32))
     , _vStringVal :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
@@ -602,12 +625,13 @@ data Value = Value'
 value
     :: Value
 value =
-    Value'
+  Value'
     { _vMapVal = Nothing
     , _vFpVal = Nothing
     , _vIntVal = Nothing
     , _vStringVal = Nothing
     }
+
 
 -- | Map value. The valid key space and units for the corresponding value of
 -- each entry should be documented as part of the data type definition.
@@ -656,9 +680,12 @@ instance ToJSON Value where
 
 --
 -- /See:/ 'bucketBySession' smart constructor.
-newtype BucketBySession = BucketBySession'
+newtype BucketBySession =
+  BucketBySession'
     { _bbsMinDurationMillis :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketBySession' with the minimum fields required to make a request.
 --
@@ -667,10 +694,8 @@ newtype BucketBySession = BucketBySession'
 -- * 'bbsMinDurationMillis'
 bucketBySession
     :: BucketBySession
-bucketBySession =
-    BucketBySession'
-    { _bbsMinDurationMillis = Nothing
-    }
+bucketBySession = BucketBySession' {_bbsMinDurationMillis = Nothing}
+
 
 -- | Specifies that only sessions of duration longer than minDurationMillis
 -- are considered and used as a container for aggregated data.
@@ -703,7 +728,8 @@ instance ToJSON BucketBySession where
 -- field of the data type.
 --
 -- /See:/ 'dataPoint' smart constructor.
-data DataPoint = DataPoint'
+data DataPoint =
+  DataPoint'
     { _dpOriginDataSourceId    :: !(Maybe Text)
     , _dpRawTimestampNanos     :: !(Maybe (Textual Int64))
     , _dpDataTypeName          :: !(Maybe Text)
@@ -712,7 +738,9 @@ data DataPoint = DataPoint'
     , _dpEndTimeNanos          :: !(Maybe (Textual Int64))
     , _dpModifiedTimeMillis    :: !(Maybe (Textual Int64))
     , _dpStartTimeNanos        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataPoint' with the minimum fields required to make a request.
 --
@@ -736,7 +764,7 @@ data DataPoint = DataPoint'
 dataPoint
     :: DataPoint
 dataPoint =
-    DataPoint'
+  DataPoint'
     { _dpOriginDataSourceId = Nothing
     , _dpRawTimestampNanos = Nothing
     , _dpDataTypeName = Nothing
@@ -746,6 +774,7 @@ dataPoint =
     , _dpModifiedTimeMillis = Nothing
     , _dpStartTimeNanos = Nothing
     }
+
 
 -- | If the data point is contained in a dataset for a derived data source,
 -- this field will be populated with the data source stream ID that created
@@ -840,12 +869,15 @@ instance ToJSON DataPoint where
 
 --
 -- /See:/ 'listSessionsResponse' smart constructor.
-data ListSessionsResponse = ListSessionsResponse'
+data ListSessionsResponse =
+  ListSessionsResponse'
     { _lsrNextPageToken  :: !(Maybe Text)
     , _lsrDeletedSession :: !(Maybe [Session])
     , _lsrHasMoreData    :: !(Maybe Bool)
     , _lsrSession        :: !(Maybe [Session])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListSessionsResponse' with the minimum fields required to make a request.
 --
@@ -861,12 +893,13 @@ data ListSessionsResponse = ListSessionsResponse'
 listSessionsResponse
     :: ListSessionsResponse
 listSessionsResponse =
-    ListSessionsResponse'
+  ListSessionsResponse'
     { _lsrNextPageToken = Nothing
     , _lsrDeletedSession = Nothing
     , _lsrHasMoreData = Nothing
     , _lsrSession = Nothing
     }
+
 
 -- | The continuation token, which is used to page through large result sets.
 -- Provide this value in a subsequent request to return the next page of
@@ -921,14 +954,17 @@ instance ToJSON ListSessionsResponse where
 
 --
 -- /See:/ 'aggregateBucket' smart constructor.
-data AggregateBucket = AggregateBucket'
+data AggregateBucket =
+  AggregateBucket'
     { _abEndTimeMillis   :: !(Maybe (Textual Int64))
     , _abDataSet         :: !(Maybe [DataSet])
     , _abActivity        :: !(Maybe (Textual Int32))
     , _abType            :: !(Maybe AggregateBucketType)
     , _abStartTimeMillis :: !(Maybe (Textual Int64))
     , _abSession         :: !(Maybe Session)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AggregateBucket' with the minimum fields required to make a request.
 --
@@ -948,7 +984,7 @@ data AggregateBucket = AggregateBucket'
 aggregateBucket
     :: AggregateBucket
 aggregateBucket =
-    AggregateBucket'
+  AggregateBucket'
     { _abEndTimeMillis = Nothing
     , _abDataSet = Nothing
     , _abActivity = Nothing
@@ -956,6 +992,7 @@ aggregateBucket =
     , _abStartTimeMillis = Nothing
     , _abSession = Nothing
     }
+
 
 -- | The end time for the aggregated data, in milliseconds since epoch,
 -- inclusive.
@@ -1024,9 +1061,12 @@ instance ToJSON AggregateBucket where
 -- supports.
 --
 -- /See:/ 'mapValue' smart constructor.
-newtype MapValue = MapValue'
+newtype MapValue =
+  MapValue'
     { _mvFpVal :: Maybe (Textual Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MapValue' with the minimum fields required to make a request.
 --
@@ -1035,10 +1075,8 @@ newtype MapValue = MapValue'
 -- * 'mvFpVal'
 mapValue
     :: MapValue
-mapValue =
-    MapValue'
-    { _mvFpVal = Nothing
-    }
+mapValue = MapValue' {_mvFpVal = Nothing}
+
 
 -- | Floating point value.
 mvFpVal :: Lens' MapValue (Maybe Double)
@@ -1057,9 +1095,12 @@ instance ToJSON MapValue where
 
 --
 -- /See:/ 'listDataSourcesResponse' smart constructor.
-newtype ListDataSourcesResponse = ListDataSourcesResponse'
+newtype ListDataSourcesResponse =
+  ListDataSourcesResponse'
     { _ldsrDataSource :: Maybe [DataSource]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
 --
@@ -1068,10 +1109,8 @@ newtype ListDataSourcesResponse = ListDataSourcesResponse'
 -- * 'ldsrDataSource'
 listDataSourcesResponse
     :: ListDataSourcesResponse
-listDataSourcesResponse =
-    ListDataSourcesResponse'
-    { _ldsrDataSource = Nothing
-    }
+listDataSourcesResponse = ListDataSourcesResponse' {_ldsrDataSource = Nothing}
+
 
 -- | A previously created data source.
 ldsrDataSource :: Lens' ListDataSourcesResponse [DataSource]
@@ -1100,11 +1139,14 @@ instance ToJSON ListDataSourcesResponse where
 -- code and not used for wire comms or stored in any way.
 --
 -- /See:/ 'dataTypeField' smart constructor.
-data DataTypeField = DataTypeField'
+data DataTypeField =
+  DataTypeField'
     { _dtfFormat   :: !(Maybe DataTypeFieldFormat)
     , _dtfName     :: !(Maybe Text)
     , _dtfOptional :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataTypeField' with the minimum fields required to make a request.
 --
@@ -1118,11 +1160,9 @@ data DataTypeField = DataTypeField'
 dataTypeField
     :: DataTypeField
 dataTypeField =
-    DataTypeField'
-    { _dtfFormat = Nothing
-    , _dtfName = Nothing
-    , _dtfOptional = Nothing
-    }
+  DataTypeField'
+    {_dtfFormat = Nothing, _dtfName = Nothing, _dtfOptional = Nothing}
+
 
 -- | The different supported formats for each field in a data type.
 dtfFormat :: Lens' DataTypeField (Maybe DataTypeFieldFormat)
@@ -1170,7 +1210,8 @@ instance ToJSON DataTypeField where
 -- stream.
 --
 -- /See:/ 'dataSource' smart constructor.
-data DataSource = DataSource'
+data DataSource =
+  DataSource'
     { _dsApplication         :: !(Maybe Application)
     , _dsDevice              :: !(Maybe Device)
     , _dsDataQualityStandard :: !(Maybe [DataSourceDataQualityStandardItem])
@@ -1179,7 +1220,9 @@ data DataSource = DataSource'
     , _dsType                :: !(Maybe DataSourceType)
     , _dsDataStreamName      :: !(Maybe Text)
     , _dsDataStreamId        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSource' with the minimum fields required to make a request.
 --
@@ -1203,7 +1246,7 @@ data DataSource = DataSource'
 dataSource
     :: DataSource
 dataSource =
-    DataSource'
+  DataSource'
     { _dsApplication = Nothing
     , _dsDevice = Nothing
     , _dsDataQualityStandard = Nothing
@@ -1213,6 +1256,7 @@ dataSource =
     , _dsDataStreamName = Nothing
     , _dsDataStreamId = Nothing
     }
+
 
 -- | Information about an application which feeds sensor data into the
 -- platform.
@@ -1226,7 +1270,9 @@ dsApplication
 dsDevice :: Lens' DataSource (Maybe Device)
 dsDevice = lens _dsDevice (\ s a -> s{_dsDevice = a})
 
--- |
+-- | DO NOT POPULATE THIS FIELD. It is never populated in responses from the
+-- platform, and is ignored in queries. It will be removed in a future
+-- version entirely.
 dsDataQualityStandard :: Lens' DataSource [DataSourceDataQualityStandardItem]
 dsDataQualityStandard
   = lens _dsDataQualityStandard
@@ -1317,11 +1363,14 @@ instance ToJSON DataSource where
 
 --
 -- /See:/ 'bucketByTimePeriod' smart constructor.
-data BucketByTimePeriod = BucketByTimePeriod'
+data BucketByTimePeriod =
+  BucketByTimePeriod'
     { _bbtpValue      :: !(Maybe (Textual Int32))
     , _bbtpType       :: !(Maybe BucketByTimePeriodType)
     , _bbtpTimeZoneId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketByTimePeriod' with the minimum fields required to make a request.
 --
@@ -1335,11 +1384,9 @@ data BucketByTimePeriod = BucketByTimePeriod'
 bucketByTimePeriod
     :: BucketByTimePeriod
 bucketByTimePeriod =
-    BucketByTimePeriod'
-    { _bbtpValue = Nothing
-    , _bbtpType = Nothing
-    , _bbtpTimeZoneId = Nothing
-    }
+  BucketByTimePeriod'
+    {_bbtpValue = Nothing, _bbtpType = Nothing, _bbtpTimeZoneId = Nothing}
+
 
 bbtpValue :: Lens' BucketByTimePeriod (Maybe Int32)
 bbtpValue
@@ -1373,10 +1420,13 @@ instance ToJSON BucketByTimePeriod where
 
 --
 -- /See:/ 'valueMapValEntry' smart constructor.
-data ValueMapValEntry = ValueMapValEntry'
+data ValueMapValEntry =
+  ValueMapValEntry'
     { _vmveValue :: !(Maybe MapValue)
     , _vmveKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ValueMapValEntry' with the minimum fields required to make a request.
 --
@@ -1387,11 +1437,8 @@ data ValueMapValEntry = ValueMapValEntry'
 -- * 'vmveKey'
 valueMapValEntry
     :: ValueMapValEntry
-valueMapValEntry =
-    ValueMapValEntry'
-    { _vmveValue = Nothing
-    , _vmveKey = Nothing
-    }
+valueMapValEntry = ValueMapValEntry' {_vmveValue = Nothing, _vmveKey = Nothing}
+
 
 vmveValue :: Lens' ValueMapValEntry (Maybe MapValue)
 vmveValue
@@ -1416,10 +1463,13 @@ instance ToJSON ValueMapValEntry where
 
 --
 -- /See:/ 'bucketByTime' smart constructor.
-data BucketByTime = BucketByTime'
+data BucketByTime =
+  BucketByTime'
     { _bbtPeriod         :: !(Maybe BucketByTimePeriod)
     , _bbtDurationMillis :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketByTime' with the minimum fields required to make a request.
 --
@@ -1431,10 +1481,8 @@ data BucketByTime = BucketByTime'
 bucketByTime
     :: BucketByTime
 bucketByTime =
-    BucketByTime'
-    { _bbtPeriod = Nothing
-    , _bbtDurationMillis = Nothing
-    }
+  BucketByTime' {_bbtPeriod = Nothing, _bbtDurationMillis = Nothing}
+
 
 bbtPeriod :: Lens' BucketByTime (Maybe BucketByTimePeriod)
 bbtPeriod
@@ -1466,10 +1514,13 @@ instance ToJSON BucketByTime where
 -- |
 --
 -- /See:/ 'dataType' smart constructor.
-data DataType = DataType'
+data DataType =
+  DataType'
     { _dtField :: !(Maybe [DataTypeField])
     , _dtName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataType' with the minimum fields required to make a request.
 --
@@ -1480,11 +1531,8 @@ data DataType = DataType'
 -- * 'dtName'
 dataType
     :: DataType
-dataType =
-    DataType'
-    { _dtField = Nothing
-    , _dtName = Nothing
-    }
+dataType = DataType' {_dtField = Nothing, _dtName = Nothing}
+
 
 -- | A field represents one dimension of a data type.
 dtField :: Lens' DataType [DataTypeField]
@@ -1512,12 +1560,15 @@ instance ToJSON DataType where
 
 --
 -- /See:/ 'listDataPointChangesResponse' smart constructor.
-data ListDataPointChangesResponse = ListDataPointChangesResponse'
+data ListDataPointChangesResponse =
+  ListDataPointChangesResponse'
     { _ldpcrNextPageToken     :: !(Maybe Text)
     , _ldpcrInsertedDataPoint :: !(Maybe [DataPoint])
     , _ldpcrDataSourceId      :: !(Maybe Text)
     , _ldpcrDeletedDataPoint  :: !(Maybe [DataPoint])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDataPointChangesResponse' with the minimum fields required to make a request.
 --
@@ -1533,12 +1584,13 @@ data ListDataPointChangesResponse = ListDataPointChangesResponse'
 listDataPointChangesResponse
     :: ListDataPointChangesResponse
 listDataPointChangesResponse =
-    ListDataPointChangesResponse'
+  ListDataPointChangesResponse'
     { _ldpcrNextPageToken = Nothing
     , _ldpcrInsertedDataPoint = Nothing
     , _ldpcrDataSourceId = Nothing
     , _ldpcrDeletedDataPoint = Nothing
     }
+
 
 -- | The continuation token, which is used to page through large result sets.
 -- Provide this value in a subsequent request to return the next page of
@@ -1594,7 +1646,8 @@ instance ToJSON ListDataPointChangesResponse where
 -- interval information.
 --
 -- /See:/ 'session' smart constructor.
-data Session = Session'
+data Session =
+  Session'
     { _sEndTimeMillis      :: !(Maybe (Textual Int64))
     , _sActiveTimeMillis   :: !(Maybe (Textual Int64))
     , _sApplication        :: !(Maybe Application)
@@ -1604,7 +1657,9 @@ data Session = Session'
     , _sId                 :: !(Maybe Text)
     , _sStartTimeMillis    :: !(Maybe (Textual Int64))
     , _sDescription        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Session' with the minimum fields required to make a request.
 --
@@ -1630,7 +1685,7 @@ data Session = Session'
 session
     :: Session
 session =
-    Session'
+  Session'
     { _sEndTimeMillis = Nothing
     , _sActiveTimeMillis = Nothing
     , _sApplication = Nothing
@@ -1641,6 +1696,7 @@ session =
     , _sStartTimeMillis = Nothing
     , _sDescription = Nothing
     }
+
 
 -- | An end time, in milliseconds since epoch, inclusive.
 sEndTimeMillis :: Lens' Session (Maybe Int64)

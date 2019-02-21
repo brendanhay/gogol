@@ -58,9 +58,12 @@ type RelyingPartyVerifyPhoneNumberResource =
 -- account accordingly.
 --
 -- /See:/ 'relyingPartyVerifyPhoneNumber' smart constructor.
-newtype RelyingPartyVerifyPhoneNumber = RelyingPartyVerifyPhoneNumber'
+newtype RelyingPartyVerifyPhoneNumber =
+  RelyingPartyVerifyPhoneNumber'
     { _rpvpnPayload :: IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelyingPartyVerifyPhoneNumber' with the minimum fields required to make a request.
 --
@@ -71,9 +74,8 @@ relyingPartyVerifyPhoneNumber
     :: IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest -- ^ 'rpvpnPayload'
     -> RelyingPartyVerifyPhoneNumber
 relyingPartyVerifyPhoneNumber pRpvpnPayload_ =
-    RelyingPartyVerifyPhoneNumber'
-    { _rpvpnPayload = pRpvpnPayload_
-    }
+  RelyingPartyVerifyPhoneNumber' {_rpvpnPayload = pRpvpnPayload_}
+
 
 -- | Multipart request metadata.
 rpvpnPayload :: Lens' RelyingPartyVerifyPhoneNumber IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest

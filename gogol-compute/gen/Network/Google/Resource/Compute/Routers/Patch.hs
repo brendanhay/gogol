@@ -65,13 +65,16 @@ type RoutersPatchResource =
 -- format and processing rules.
 --
 -- /See:/ 'routersPatch' smart constructor.
-data RoutersPatch = RoutersPatch'
+data RoutersPatch =
+  RoutersPatch'
     { _rpRequestId :: !(Maybe Text)
     , _rpProject   :: !Text
     , _rpRouter    :: !Text
     , _rpPayload   :: !Router
     , _rpRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoutersPatch' with the minimum fields required to make a request.
 --
@@ -93,13 +96,14 @@ routersPatch
     -> Text -- ^ 'rpRegion'
     -> RoutersPatch
 routersPatch pRpProject_ pRpRouter_ pRpPayload_ pRpRegion_ =
-    RoutersPatch'
+  RoutersPatch'
     { _rpRequestId = Nothing
     , _rpProject = pRpProject_
     , _rpRouter = pRpRouter_
     , _rpPayload = pRpPayload_
     , _rpRegion = pRpRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

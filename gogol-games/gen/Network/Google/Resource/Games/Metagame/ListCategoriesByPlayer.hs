@@ -65,13 +65,16 @@ type MetagameListCategoriesByPlayerResource =
 -- playerId.
 --
 -- /See:/ 'metagameListCategoriesByPlayer' smart constructor.
-data MetagameListCategoriesByPlayer = MetagameListCategoriesByPlayer'
+data MetagameListCategoriesByPlayer =
+  MetagameListCategoriesByPlayer'
     { _mlcbpCollection :: !MetagameListCategoriesByPlayerCollection
     , _mlcbpLanguage   :: !(Maybe Text)
     , _mlcbpPageToken  :: !(Maybe Text)
     , _mlcbpPlayerId   :: !Text
     , _mlcbpMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetagameListCategoriesByPlayer' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ metagameListCategoriesByPlayer
     -> Text -- ^ 'mlcbpPlayerId'
     -> MetagameListCategoriesByPlayer
 metagameListCategoriesByPlayer pMlcbpCollection_ pMlcbpPlayerId_ =
-    MetagameListCategoriesByPlayer'
+  MetagameListCategoriesByPlayer'
     { _mlcbpCollection = pMlcbpCollection_
     , _mlcbpLanguage = Nothing
     , _mlcbpPageToken = Nothing
     , _mlcbpPlayerId = pMlcbpPlayerId_
     , _mlcbpMaxResults = Nothing
     }
+
 
 -- | The collection of categories for which data will be returned.
 mlcbpCollection :: Lens' MetagameListCategoriesByPlayer MetagameListCategoriesByPlayerCollection
@@ -138,7 +142,8 @@ instance GoogleRequest MetagameListCategoriesByPlayer
         type Rs MetagameListCategoriesByPlayer =
              CategoryListResponse
         type Scopes MetagameListCategoriesByPlayer =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient MetagameListCategoriesByPlayer'{..}
           = go _mlcbpPlayerId _mlcbpCollection _mlcbpLanguage
               _mlcbpPageToken

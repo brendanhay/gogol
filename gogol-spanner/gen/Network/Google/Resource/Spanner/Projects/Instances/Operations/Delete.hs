@@ -65,14 +65,17 @@ type ProjectsInstancesOperationsDeleteResource =
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
 -- /See:/ 'projectsInstancesOperationsDelete' smart constructor.
-data ProjectsInstancesOperationsDelete = ProjectsInstancesOperationsDelete'
+data ProjectsInstancesOperationsDelete =
+  ProjectsInstancesOperationsDelete'
     { _piodXgafv          :: !(Maybe Xgafv)
     , _piodUploadProtocol :: !(Maybe Text)
     , _piodAccessToken    :: !(Maybe Text)
     , _piodUploadType     :: !(Maybe Text)
     , _piodName           :: !Text
     , _piodCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesOperationsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ projectsInstancesOperationsDelete
     :: Text -- ^ 'piodName'
     -> ProjectsInstancesOperationsDelete
 projectsInstancesOperationsDelete pPiodName_ =
-    ProjectsInstancesOperationsDelete'
+  ProjectsInstancesOperationsDelete'
     { _piodXgafv = Nothing
     , _piodUploadProtocol = Nothing
     , _piodAccessToken = Nothing
@@ -101,6 +104,7 @@ projectsInstancesOperationsDelete pPiodName_ =
     , _piodName = pPiodName_
     , _piodCallback = Nothing
     }
+
 
 -- | V1 error format.
 piodXgafv :: Lens' ProjectsInstancesOperationsDelete (Maybe Xgafv)
@@ -135,7 +139,8 @@ piodCallback
   = lens _piodCallback (\ s a -> s{_piodCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesOperationsDelete where
+           ProjectsInstancesOperationsDelete
+         where
         type Rs ProjectsInstancesOperationsDelete = Empty
         type Scopes ProjectsInstancesOperationsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

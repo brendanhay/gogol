@@ -64,7 +64,8 @@ type ProjectsLocationsKeyRingsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsLocationsKeyRingsSetIAMPolicy' smart constructor.
-data ProjectsLocationsKeyRingsSetIAMPolicy = ProjectsLocationsKeyRingsSetIAMPolicy'
+data ProjectsLocationsKeyRingsSetIAMPolicy =
+  ProjectsLocationsKeyRingsSetIAMPolicy'
     { _plkrsipXgafv          :: !(Maybe Xgafv)
     , _plkrsipUploadProtocol :: !(Maybe Text)
     , _plkrsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsLocationsKeyRingsSetIAMPolicy = ProjectsLocationsKeyRingsSetIAMPoli
     , _plkrsipPayload        :: !SetIAMPolicyRequest
     , _plkrsipResource       :: !Text
     , _plkrsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsLocationsKeyRingsSetIAMPolicy
     -> Text -- ^ 'plkrsipResource'
     -> ProjectsLocationsKeyRingsSetIAMPolicy
 projectsLocationsKeyRingsSetIAMPolicy pPlkrsipPayload_ pPlkrsipResource_ =
-    ProjectsLocationsKeyRingsSetIAMPolicy'
+  ProjectsLocationsKeyRingsSetIAMPolicy'
     { _plkrsipXgafv = Nothing
     , _plkrsipUploadProtocol = Nothing
     , _plkrsipAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsLocationsKeyRingsSetIAMPolicy pPlkrsipPayload_ pPlkrsipResource_ =
     , _plkrsipResource = pPlkrsipResource_
     , _plkrsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrsipXgafv :: Lens' ProjectsLocationsKeyRingsSetIAMPolicy (Maybe Xgafv)
@@ -149,11 +153,13 @@ plkrsipCallback
       (\ s a -> s{_plkrsipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsSetIAMPolicy where
+           ProjectsLocationsKeyRingsSetIAMPolicy
+         where
         type Rs ProjectsLocationsKeyRingsSetIAMPolicy =
              Policy
         type Scopes ProjectsLocationsKeyRingsSetIAMPolicy =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsSetIAMPolicy'{..}
           = go _plkrsipResource _plkrsipXgafv

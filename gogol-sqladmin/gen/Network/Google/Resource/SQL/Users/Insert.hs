@@ -57,11 +57,14 @@ type UsersInsertResource =
 -- | Creates a new user in a Cloud SQL instance.
 --
 -- /See:/ 'usersInsert' smart constructor.
-data UsersInsert = UsersInsert'
+data UsersInsert =
+  UsersInsert'
     { _uiProject  :: !Text
     , _uiPayload  :: !User
     , _uiInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersInsert' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ usersInsert
     -> Text -- ^ 'uiInstance'
     -> UsersInsert
 usersInsert pUiProject_ pUiPayload_ pUiInstance_ =
-    UsersInsert'
+  UsersInsert'
     { _uiProject = pUiProject_
     , _uiPayload = pUiPayload_
     , _uiInstance = pUiInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 uiProject :: Lens' UsersInsert Text

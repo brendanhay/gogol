@@ -56,9 +56,12 @@ type AchievementsResetForAllPlayersResource =
 -- achievements can be reset.
 --
 -- /See:/ 'achievementsResetForAllPlayers' smart constructor.
-newtype AchievementsResetForAllPlayers = AchievementsResetForAllPlayers'
+newtype AchievementsResetForAllPlayers =
+  AchievementsResetForAllPlayers'
     { _arfapAchievementId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementsResetForAllPlayers' with the minimum fields required to make a request.
 --
@@ -69,9 +72,8 @@ achievementsResetForAllPlayers
     :: Text -- ^ 'arfapAchievementId'
     -> AchievementsResetForAllPlayers
 achievementsResetForAllPlayers pArfapAchievementId_ =
-    AchievementsResetForAllPlayers'
-    { _arfapAchievementId = pArfapAchievementId_
-    }
+  AchievementsResetForAllPlayers' {_arfapAchievementId = pArfapAchievementId_}
+
 
 -- | The ID of the achievement used by this method.
 arfapAchievementId :: Lens' AchievementsResetForAllPlayers Text

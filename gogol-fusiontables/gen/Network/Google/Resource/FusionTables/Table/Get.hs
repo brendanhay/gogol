@@ -51,9 +51,12 @@ type TableGetResource =
 -- | Retrieves a specific table by its ID.
 --
 -- /See:/ 'tableGet' smart constructor.
-newtype TableGet = TableGet'
+newtype TableGet =
+  TableGet'
     { _tgTableId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TableGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype TableGet = TableGet'
 tableGet
     :: Text -- ^ 'tgTableId'
     -> TableGet
-tableGet pTgTableId_ =
-    TableGet'
-    { _tgTableId = pTgTableId_
-    }
+tableGet pTgTableId_ = TableGet' {_tgTableId = pTgTableId_}
+
 
 -- | Identifier for the table being requested.
 tgTableId :: Lens' TableGet Text

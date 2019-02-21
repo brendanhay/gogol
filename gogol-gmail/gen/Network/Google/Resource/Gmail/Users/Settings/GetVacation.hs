@@ -54,9 +54,12 @@ type UsersSettingsGetVacationResource =
 -- | Gets vacation responder settings.
 --
 -- /See:/ 'usersSettingsGetVacation' smart constructor.
-newtype UsersSettingsGetVacation = UsersSettingsGetVacation'
+newtype UsersSettingsGetVacation =
+  UsersSettingsGetVacation'
     { _usgvUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsGetVacation' with the minimum fields required to make a request.
 --
@@ -65,10 +68,8 @@ newtype UsersSettingsGetVacation = UsersSettingsGetVacation'
 -- * 'usgvUserId'
 usersSettingsGetVacation
     :: UsersSettingsGetVacation
-usersSettingsGetVacation =
-    UsersSettingsGetVacation'
-    { _usgvUserId = "me"
-    }
+usersSettingsGetVacation = UsersSettingsGetVacation' {_usgvUserId = "me"}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

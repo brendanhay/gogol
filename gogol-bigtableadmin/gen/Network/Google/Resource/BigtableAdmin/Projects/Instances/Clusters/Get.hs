@@ -59,14 +59,17 @@ type ProjectsInstancesClustersGetResource =
 -- | Gets information about a cluster.
 --
 -- /See:/ 'projectsInstancesClustersGet' smart constructor.
-data ProjectsInstancesClustersGet = ProjectsInstancesClustersGet'
+data ProjectsInstancesClustersGet =
+  ProjectsInstancesClustersGet'
     { _picgXgafv          :: !(Maybe Xgafv)
     , _picgUploadProtocol :: !(Maybe Text)
     , _picgAccessToken    :: !(Maybe Text)
     , _picgUploadType     :: !(Maybe Text)
     , _picgName           :: !Text
     , _picgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesClustersGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsInstancesClustersGet
     :: Text -- ^ 'picgName'
     -> ProjectsInstancesClustersGet
 projectsInstancesClustersGet pPicgName_ =
-    ProjectsInstancesClustersGet'
+  ProjectsInstancesClustersGet'
     { _picgXgafv = Nothing
     , _picgUploadProtocol = Nothing
     , _picgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsInstancesClustersGet pPicgName_ =
     , _picgName = pPicgName_
     , _picgCallback = Nothing
     }
+
 
 -- | V1 error format.
 picgXgafv :: Lens' ProjectsInstancesClustersGet (Maybe Xgafv)

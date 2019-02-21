@@ -57,11 +57,14 @@ type AchievementConfigurationsListResource =
 -- | Returns a list of the achievement configurations in this application.
 --
 -- /See:/ 'achievementConfigurationsList' smart constructor.
-data AchievementConfigurationsList = AchievementConfigurationsList'
+data AchievementConfigurationsList =
+  AchievementConfigurationsList'
     { _aclApplicationId :: !Text
     , _aclPageToken     :: !(Maybe Text)
     , _aclMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementConfigurationsList' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ achievementConfigurationsList
     :: Text -- ^ 'aclApplicationId'
     -> AchievementConfigurationsList
 achievementConfigurationsList pAclApplicationId_ =
-    AchievementConfigurationsList'
+  AchievementConfigurationsList'
     { _aclApplicationId = pAclApplicationId_
     , _aclPageToken = Nothing
     , _aclMaxResults = Nothing
     }
+
 
 -- | The application ID from the Google Play developer console.
 aclApplicationId :: Lens' AchievementConfigurationsList Text

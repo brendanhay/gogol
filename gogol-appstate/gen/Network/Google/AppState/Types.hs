@@ -63,4 +63,4 @@ appStateService
 
 -- | View and manage your data for this application
 appStateScope :: Proxy '["https://www.googleapis.com/auth/appstate"]
-appStateScope = Proxy;
+appStateScope = Proxy

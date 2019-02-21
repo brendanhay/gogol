@@ -54,10 +54,13 @@ type AdUnitsGetResource =
 -- | Gets the specified ad unit in the specified ad client.
 --
 -- /See:/ 'adUnitsGet' smart constructor.
-data AdUnitsGet = AdUnitsGet'
+data AdUnitsGet =
+  AdUnitsGet'
     { _augAdUnitId   :: !Text
     , _augAdClientId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdUnitsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ adUnitsGet
     -> Text -- ^ 'augAdClientId'
     -> AdUnitsGet
 adUnitsGet pAugAdUnitId_ pAugAdClientId_ =
-    AdUnitsGet'
-    { _augAdUnitId = pAugAdUnitId_
-    , _augAdClientId = pAugAdClientId_
-    }
+  AdUnitsGet' {_augAdUnitId = pAugAdUnitId_, _augAdClientId = pAugAdClientId_}
+
 
 -- | Ad unit to retrieve.
 augAdUnitId :: Lens' AdUnitsGet Text

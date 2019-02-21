@@ -54,10 +54,13 @@ type CommentsInsertResource =
 -- | Create a new comment in reply to an activity.
 --
 -- /See:/ 'commentsInsert' smart constructor.
-data CommentsInsert = CommentsInsert'
+data CommentsInsert =
+  CommentsInsert'
     { _cActivityId :: !Text
     , _cPayload    :: !Comment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ commentsInsert
     -> Comment -- ^ 'cPayload'
     -> CommentsInsert
 commentsInsert pCActivityId_ pCPayload_ =
-    CommentsInsert'
-    { _cActivityId = pCActivityId_
-    , _cPayload = pCPayload_
-    }
+  CommentsInsert' {_cActivityId = pCActivityId_, _cPayload = pCPayload_}
+
 
 -- | The ID of the activity to reply to.
 cActivityId :: Lens' CommentsInsert Text

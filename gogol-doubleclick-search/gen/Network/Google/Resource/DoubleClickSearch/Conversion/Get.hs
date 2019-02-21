@@ -77,7 +77,8 @@ type ConversionGetResource =
 -- account.
 --
 -- /See:/ 'conversionGet' smart constructor.
-data ConversionGet = ConversionGet'
+data ConversionGet =
+  ConversionGet'
     { _cgAdGroupId       :: !(Maybe (Textual Int64))
     , _cgEngineAccountId :: !(Textual Int64)
     , _cgAgencyId        :: !(Textual Int64)
@@ -89,7 +90,9 @@ data ConversionGet = ConversionGet'
     , _cgStartRow        :: !(Textual Word32)
     , _cgAdId            :: !(Maybe (Textual Int64))
     , _cgRowCount        :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ConversionGet' with the minimum fields required to make a request.
 --
@@ -126,7 +129,7 @@ conversionGet
     -> Int32 -- ^ 'cgRowCount'
     -> ConversionGet
 conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
-    ConversionGet'
+  ConversionGet'
     { _cgAdGroupId = Nothing
     , _cgEngineAccountId = _Coerce # pCgEngineAccountId_
     , _cgAgencyId = _Coerce # pCgAgencyId_
@@ -139,6 +142,7 @@ conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgS
     , _cgAdId = Nothing
     , _cgRowCount = _Coerce # pCgRowCount_
     }
+
 
 -- | Numeric ID of the ad group.
 cgAdGroupId :: Lens' ConversionGet (Maybe Int64)

@@ -74,7 +74,8 @@ type BillingAccountsPatchResource =
 -- of the billing account.
 --
 -- /See:/ 'billingAccountsPatch' smart constructor.
-data BillingAccountsPatch = BillingAccountsPatch'
+data BillingAccountsPatch =
+  BillingAccountsPatch'
     { _bapXgafv          :: !(Maybe Xgafv)
     , _bapUploadProtocol :: !(Maybe Text)
     , _bapUpdateMask     :: !(Maybe GFieldMask)
@@ -83,7 +84,9 @@ data BillingAccountsPatch = BillingAccountsPatch'
     , _bapPayload        :: !BillingAccount
     , _bapName           :: !Text
     , _bapCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ billingAccountsPatch
     -> Text -- ^ 'bapName'
     -> BillingAccountsPatch
 billingAccountsPatch pBapPayload_ pBapName_ =
-    BillingAccountsPatch'
+  BillingAccountsPatch'
     { _bapXgafv = Nothing
     , _bapUploadProtocol = Nothing
     , _bapUpdateMask = Nothing
@@ -119,6 +122,7 @@ billingAccountsPatch pBapPayload_ pBapName_ =
     , _bapName = pBapName_
     , _bapCallback = Nothing
     }
+
 
 -- | V1 error format.
 bapXgafv :: Lens' BillingAccountsPatch (Maybe Xgafv)

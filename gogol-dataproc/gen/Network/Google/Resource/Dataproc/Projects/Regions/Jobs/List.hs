@@ -75,7 +75,8 @@ type ProjectsRegionsJobsListResource =
 -- | Lists regions\/{region}\/jobs in a project.
 --
 -- /See:/ 'projectsRegionsJobsList' smart constructor.
-data ProjectsRegionsJobsList = ProjectsRegionsJobsList'
+data ProjectsRegionsJobsList =
+  ProjectsRegionsJobsList'
     { _prjlJobStateMatcher :: !(Maybe Text)
     , _prjlXgafv           :: !(Maybe Xgafv)
     , _prjlUploadProtocol  :: !(Maybe Text)
@@ -88,7 +89,9 @@ data ProjectsRegionsJobsList = ProjectsRegionsJobsList'
     , _prjlProjectId       :: !Text
     , _prjlPageSize        :: !(Maybe (Textual Int32))
     , _prjlCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsJobsList' with the minimum fields required to make a request.
 --
@@ -122,7 +125,7 @@ projectsRegionsJobsList
     -> Text -- ^ 'prjlProjectId'
     -> ProjectsRegionsJobsList
 projectsRegionsJobsList pPrjlRegion_ pPrjlProjectId_ =
-    ProjectsRegionsJobsList'
+  ProjectsRegionsJobsList'
     { _prjlJobStateMatcher = Nothing
     , _prjlXgafv = Nothing
     , _prjlUploadProtocol = Nothing
@@ -136,6 +139,7 @@ projectsRegionsJobsList pPrjlRegion_ pPrjlProjectId_ =
     , _prjlPageSize = Nothing
     , _prjlCallback = Nothing
     }
+
 
 -- | Optional. Specifies enumerated categories of jobs to list. (default =
 -- match ALL jobs).If filter is provided, jobStateMatcher will be ignored.

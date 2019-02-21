@@ -66,7 +66,8 @@ type PostsUpdateResource =
 -- | Update a post.
 --
 -- /See:/ 'postsUpdate' smart constructor.
-data PostsUpdate = PostsUpdate'
+data PostsUpdate =
+  PostsUpdate'
     { _puFetchBody   :: !Bool
     , _puFetchImages :: !(Maybe Bool)
     , _puBlogId      :: !Text
@@ -75,7 +76,9 @@ data PostsUpdate = PostsUpdate'
     , _puRevert      :: !(Maybe Bool)
     , _puPostId      :: !Text
     , _puPublish     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostsUpdate' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ postsUpdate
     -> Text -- ^ 'puPostId'
     -> PostsUpdate
 postsUpdate pPuBlogId_ pPuPayload_ pPuPostId_ =
-    PostsUpdate'
+  PostsUpdate'
     { _puFetchBody = True
     , _puFetchImages = Nothing
     , _puBlogId = pPuBlogId_
@@ -112,6 +115,7 @@ postsUpdate pPuBlogId_ pPuPayload_ pPuPostId_ =
     , _puPostId = pPuPostId_
     , _puPublish = Nothing
     }
+
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).

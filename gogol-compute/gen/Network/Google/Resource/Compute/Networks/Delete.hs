@@ -57,11 +57,14 @@ type NetworksDeleteResource =
 -- | Deletes the specified network.
 --
 -- /See:/ 'networksDelete' smart constructor.
-data NetworksDelete = NetworksDelete'
+data NetworksDelete =
+  NetworksDelete'
     { _ndRequestId :: !(Maybe Text)
     , _ndProject   :: !Text
     , _ndNetwork   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworksDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,9 @@ networksDelete
     -> Text -- ^ 'ndNetwork'
     -> NetworksDelete
 networksDelete pNdProject_ pNdNetwork_ =
-    NetworksDelete'
-    { _ndRequestId = Nothing
-    , _ndProject = pNdProject_
-    , _ndNetwork = pNdNetwork_
-    }
+  NetworksDelete'
+    {_ndRequestId = Nothing, _ndProject = pNdProject_, _ndNetwork = pNdNetwork_}
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

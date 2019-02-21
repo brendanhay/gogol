@@ -52,9 +52,12 @@ type AccountsContainersVersionHeadersLatestResource =
 -- | Gets the latest container version header
 --
 -- /See:/ 'accountsContainersVersionHeadersLatest' smart constructor.
-newtype AccountsContainersVersionHeadersLatest = AccountsContainersVersionHeadersLatest'
+newtype AccountsContainersVersionHeadersLatest =
+  AccountsContainersVersionHeadersLatest'
     { _acvhlParent :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersVersionHeadersLatest' with the minimum fields required to make a request.
 --
@@ -65,9 +68,8 @@ accountsContainersVersionHeadersLatest
     :: Text -- ^ 'acvhlParent'
     -> AccountsContainersVersionHeadersLatest
 accountsContainersVersionHeadersLatest pAcvhlParent_ =
-    AccountsContainersVersionHeadersLatest'
-    { _acvhlParent = pAcvhlParent_
-    }
+  AccountsContainersVersionHeadersLatest' {_acvhlParent = pAcvhlParent_}
+
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}
@@ -76,7 +78,8 @@ acvhlParent
   = lens _acvhlParent (\ s a -> s{_acvhlParent = a})
 
 instance GoogleRequest
-         AccountsContainersVersionHeadersLatest where
+           AccountsContainersVersionHeadersLatest
+         where
         type Rs AccountsContainersVersionHeadersLatest =
              ContainerVersionHeader
         type Scopes AccountsContainersVersionHeadersLatest =

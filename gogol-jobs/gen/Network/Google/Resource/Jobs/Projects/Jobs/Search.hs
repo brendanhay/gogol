@@ -67,7 +67,8 @@ type ProjectsJobsSearchResource =
 -- returns jobs that the caller has permission to search against.
 --
 -- /See:/ 'projectsJobsSearch' smart constructor.
-data ProjectsJobsSearch = ProjectsJobsSearch'
+data ProjectsJobsSearch =
+  ProjectsJobsSearch'
     { _pjsParent         :: !Text
     , _pjsXgafv          :: !(Maybe Xgafv)
     , _pjsUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsJobsSearch = ProjectsJobsSearch'
     , _pjsUploadType     :: !(Maybe Text)
     , _pjsPayload        :: !SearchJobsRequest
     , _pjsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsSearch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsJobsSearch
     -> SearchJobsRequest -- ^ 'pjsPayload'
     -> ProjectsJobsSearch
 projectsJobsSearch pPjsParent_ pPjsPayload_ =
-    ProjectsJobsSearch'
+  ProjectsJobsSearch'
     { _pjsParent = pPjsParent_
     , _pjsXgafv = Nothing
     , _pjsUploadProtocol = Nothing
@@ -108,6 +111,7 @@ projectsJobsSearch pPjsParent_ pPjsPayload_ =
     , _pjsPayload = pPjsPayload_
     , _pjsCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project to search within. The format
 -- is \"projects\/{project_id}\", for example,

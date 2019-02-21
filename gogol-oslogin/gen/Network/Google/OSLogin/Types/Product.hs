@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | A map from SSH public key fingerprint to the associated key object.
 --
 -- /See:/ 'loginProFileSSHPublicKeys' smart constructor.
-newtype LoginProFileSSHPublicKeys = LoginProFileSSHPublicKeys'
+newtype LoginProFileSSHPublicKeys =
+  LoginProFileSSHPublicKeys'
     { _lpfspkAddtional :: HashMap Text SSHPublicKey
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LoginProFileSSHPublicKeys' with the minimum fields required to make a request.
 --
@@ -36,9 +39,8 @@ loginProFileSSHPublicKeys
     :: HashMap Text SSHPublicKey -- ^ 'lpfspkAddtional'
     -> LoginProFileSSHPublicKeys
 loginProFileSSHPublicKeys pLpfspkAddtional_ =
-    LoginProFileSSHPublicKeys'
-    { _lpfspkAddtional = _Coerce # pLpfspkAddtional_
-    }
+  LoginProFileSSHPublicKeys' {_lpfspkAddtional = _Coerce # pLpfspkAddtional_}
+
 
 lpfspkAddtional :: Lens' LoginProFileSSHPublicKeys (HashMap Text SSHPublicKey)
 lpfspkAddtional
@@ -63,14 +65,16 @@ instance ToJSON LoginProFileSSHPublicKeys where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -82,11 +86,14 @@ instance ToJSON Empty where
 -- Google Compute Engine.
 --
 -- /See:/ 'loginProFile' smart constructor.
-data LoginProFile = LoginProFile'
+data LoginProFile =
+  LoginProFile'
     { _lpfPosixAccounts :: !(Maybe [PosixAccount])
     , _lpfSSHPublicKeys :: !(Maybe LoginProFileSSHPublicKeys)
     , _lpfName          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LoginProFile' with the minimum fields required to make a request.
 --
@@ -100,11 +107,12 @@ data LoginProFile = LoginProFile'
 loginProFile
     :: LoginProFile
 loginProFile =
-    LoginProFile'
+  LoginProFile'
     { _lpfPosixAccounts = Nothing
     , _lpfSSHPublicKeys = Nothing
     , _lpfName = Nothing
     }
+
 
 -- | The list of POSIX accounts associated with the user.
 lpfPosixAccounts :: Lens' LoginProFile [PosixAccount]
@@ -144,9 +152,12 @@ instance ToJSON LoginProFile where
 -- | A response message for importing an SSH public key.
 --
 -- /See:/ 'importSSHPublicKeyResponse' smart constructor.
-newtype ImportSSHPublicKeyResponse = ImportSSHPublicKeyResponse'
+newtype ImportSSHPublicKeyResponse =
+  ImportSSHPublicKeyResponse'
     { _ispkrLoginProFile :: Maybe LoginProFile
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImportSSHPublicKeyResponse' with the minimum fields required to make a request.
 --
@@ -156,9 +167,8 @@ newtype ImportSSHPublicKeyResponse = ImportSSHPublicKeyResponse'
 importSSHPublicKeyResponse
     :: ImportSSHPublicKeyResponse
 importSSHPublicKeyResponse =
-    ImportSSHPublicKeyResponse'
-    { _ispkrLoginProFile = Nothing
-    }
+  ImportSSHPublicKeyResponse' {_ispkrLoginProFile = Nothing}
+
 
 -- | The login profile information for the user.
 ispkrLoginProFile :: Lens' ImportSSHPublicKeyResponse (Maybe LoginProFile)
@@ -182,11 +192,14 @@ instance ToJSON ImportSSHPublicKeyResponse where
 -- | The SSH public key information associated with a Google account.
 --
 -- /See:/ 'sshPublicKey' smart constructor.
-data SSHPublicKey = SSHPublicKey'
+data SSHPublicKey =
+  SSHPublicKey'
     { _spkFingerprint        :: !(Maybe Text)
     , _spkKey                :: !(Maybe Text)
     , _spkExpirationTimeUsec :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSHPublicKey' with the minimum fields required to make a request.
 --
@@ -200,11 +213,12 @@ data SSHPublicKey = SSHPublicKey'
 sshPublicKey
     :: SSHPublicKey
 sshPublicKey =
-    SSHPublicKey'
+  SSHPublicKey'
     { _spkFingerprint = Nothing
     , _spkKey = Nothing
     , _spkExpirationTimeUsec = Nothing
     }
+
 
 -- | Output only. The SHA-256 fingerprint of the SSH public key.
 spkFingerprint :: Lens' SSHPublicKey (Maybe Text)
@@ -244,7 +258,8 @@ instance ToJSON SSHPublicKey where
 -- | The POSIX account information associated with a Google account.
 --
 -- /See:/ 'posixAccount' smart constructor.
-data PosixAccount = PosixAccount'
+data PosixAccount =
+  PosixAccount'
     { _paGecos               :: !(Maybe Text)
     , _paUid                 :: !(Maybe (Textual Int64))
     , _paUsername            :: !(Maybe Text)
@@ -255,7 +270,9 @@ data PosixAccount = PosixAccount'
     , _paOperatingSystemType :: !(Maybe PosixAccountOperatingSystemType)
     , _paSystemId            :: !(Maybe Text)
     , _paHomeDirectory       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PosixAccount' with the minimum fields required to make a request.
 --
@@ -283,7 +300,7 @@ data PosixAccount = PosixAccount'
 posixAccount
     :: PosixAccount
 posixAccount =
-    PosixAccount'
+  PosixAccount'
     { _paGecos = Nothing
     , _paUid = Nothing
     , _paUsername = Nothing
@@ -295,6 +312,7 @@ posixAccount =
     , _paSystemId = Nothing
     , _paHomeDirectory = Nothing
     }
+
 
 -- | The GECOS (user information) entry for this account.
 paGecos :: Lens' PosixAccount (Maybe Text)

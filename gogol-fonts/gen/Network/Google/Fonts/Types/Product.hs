@@ -22,7 +22,8 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'webfont' smart constructor.
-data Webfont = Webfont'
+data Webfont =
+  Webfont'
     { _wVariants     :: !(Maybe [Text])
     , _wKind         :: !Text
     , _wCategory     :: !(Maybe Text)
@@ -31,7 +32,9 @@ data Webfont = Webfont'
     , _wFiles        :: !(Maybe WebfontFiles)
     , _wSubSets      :: !(Maybe [Text])
     , _wLastModified :: !(Maybe Date')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Webfont' with the minimum fields required to make a request.
 --
@@ -55,7 +58,7 @@ data Webfont = Webfont'
 webfont
     :: Webfont
 webfont =
-    Webfont'
+  Webfont'
     { _wVariants = Nothing
     , _wKind = "webfonts#webfont"
     , _wCategory = Nothing
@@ -65,6 +68,7 @@ webfont =
     , _wSubSets = Nothing
     , _wLastModified = Nothing
     }
+
 
 -- | The available variants for the font.
 wVariants :: Lens' Webfont [Text]
@@ -139,10 +143,13 @@ instance ToJSON Webfont where
 
 --
 -- /See:/ 'webfontList' smart constructor.
-data WebfontList = WebfontList'
+data WebfontList =
+  WebfontList'
     { _wlKind  :: !Text
     , _wlItems :: !(Maybe [Webfont])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebfontList' with the minimum fields required to make a request.
 --
@@ -154,10 +161,8 @@ data WebfontList = WebfontList'
 webfontList
     :: WebfontList
 webfontList =
-    WebfontList'
-    { _wlKind = "webfonts#webfontList"
-    , _wlItems = Nothing
-    }
+  WebfontList' {_wlKind = "webfonts#webfontList", _wlItems = Nothing}
+
 
 -- | This kind represents a list of webfont objects in the webfonts service.
 wlKind :: Lens' WebfontList Text
@@ -188,9 +193,12 @@ instance ToJSON WebfontList where
 -- available variants, as a key : value map.
 --
 -- /See:/ 'webfontFiles' smart constructor.
-newtype WebfontFiles = WebfontFiles'
+newtype WebfontFiles =
+  WebfontFiles'
     { _wfAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebfontFiles' with the minimum fields required to make a request.
 --
@@ -201,9 +209,8 @@ webfontFiles
     :: HashMap Text Text -- ^ 'wfAddtional'
     -> WebfontFiles
 webfontFiles pWfAddtional_ =
-    WebfontFiles'
-    { _wfAddtional = _Coerce # pWfAddtional_
-    }
+  WebfontFiles' {_wfAddtional = _Coerce # pWfAddtional_}
+
 
 -- | The font file URL (value) for an specific variant (key).
 wfAddtional :: Lens' WebfontFiles (HashMap Text Text)

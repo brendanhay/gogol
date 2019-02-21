@@ -68,7 +68,8 @@ type MattersSavedQueriesListResource =
 -- ListSavedQueriesResponse denotes no more saved queries to list.
 --
 -- /See:/ 'mattersSavedQueriesList' smart constructor.
-data MattersSavedQueriesList = MattersSavedQueriesList'
+data MattersSavedQueriesList =
+  MattersSavedQueriesList'
     { _msqlXgafv          :: !(Maybe Xgafv)
     , _msqlUploadProtocol :: !(Maybe Text)
     , _msqlAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data MattersSavedQueriesList = MattersSavedQueriesList'
     , _msqlPageToken      :: !(Maybe Text)
     , _msqlPageSize       :: !(Maybe (Textual Int32))
     , _msqlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersSavedQueriesList' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ mattersSavedQueriesList
     :: Text -- ^ 'msqlMatterId'
     -> MattersSavedQueriesList
 mattersSavedQueriesList pMsqlMatterId_ =
-    MattersSavedQueriesList'
+  MattersSavedQueriesList'
     { _msqlXgafv = Nothing
     , _msqlUploadProtocol = Nothing
     , _msqlAccessToken = Nothing
@@ -112,6 +115,7 @@ mattersSavedQueriesList pMsqlMatterId_ =
     , _msqlPageSize = Nothing
     , _msqlCallback = Nothing
     }
+
 
 -- | V1 error format.
 msqlXgafv :: Lens' MattersSavedQueriesList (Maybe Xgafv)

@@ -63,7 +63,8 @@ type ProjectsServiceAccountsKeysCreateResource =
 -- | Creates a ServiceAccountKey and returns it.
 --
 -- /See:/ 'projectsServiceAccountsKeysCreate' smart constructor.
-data ProjectsServiceAccountsKeysCreate = ProjectsServiceAccountsKeysCreate'
+data ProjectsServiceAccountsKeysCreate =
+  ProjectsServiceAccountsKeysCreate'
     { _psakcXgafv          :: !(Maybe Xgafv)
     , _psakcUploadProtocol :: !(Maybe Text)
     , _psakcAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsServiceAccountsKeysCreate = ProjectsServiceAccountsKeysCreate'
     , _psakcPayload        :: !CreateServiceAccountKeyRequest
     , _psakcName           :: !Text
     , _psakcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsKeysCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsServiceAccountsKeysCreate
     -> Text -- ^ 'psakcName'
     -> ProjectsServiceAccountsKeysCreate
 projectsServiceAccountsKeysCreate pPsakcPayload_ pPsakcName_ =
-    ProjectsServiceAccountsKeysCreate'
+  ProjectsServiceAccountsKeysCreate'
     { _psakcXgafv = Nothing
     , _psakcUploadProtocol = Nothing
     , _psakcAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsServiceAccountsKeysCreate pPsakcPayload_ pPsakcName_ =
     , _psakcName = pPsakcName_
     , _psakcCallback = Nothing
     }
+
 
 -- | V1 error format.
 psakcXgafv :: Lens' ProjectsServiceAccountsKeysCreate (Maybe Xgafv)
@@ -149,7 +153,8 @@ psakcCallback
       (\ s a -> s{_psakcCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsKeysCreate where
+           ProjectsServiceAccountsKeysCreate
+         where
         type Rs ProjectsServiceAccountsKeysCreate =
              ServiceAccountKey
         type Scopes ProjectsServiceAccountsKeysCreate =

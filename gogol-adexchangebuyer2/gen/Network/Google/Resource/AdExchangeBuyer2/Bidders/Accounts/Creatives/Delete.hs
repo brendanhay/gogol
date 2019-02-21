@@ -66,7 +66,8 @@ type BiddersAccountsCreativesDeleteResource =
 -- not be used in bidding (all bids with that creative will be rejected).
 --
 -- /See:/ 'biddersAccountsCreativesDelete' smart constructor.
-data BiddersAccountsCreativesDelete = BiddersAccountsCreativesDelete'
+data BiddersAccountsCreativesDelete =
+  BiddersAccountsCreativesDelete'
     { _bacdXgafv          :: !(Maybe Xgafv)
     , _bacdUploadProtocol :: !(Maybe Text)
     , _bacdAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data BiddersAccountsCreativesDelete = BiddersAccountsCreativesDelete'
     , _bacdCreativeId     :: !Text
     , _bacdOwnerName      :: !Text
     , _bacdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersAccountsCreativesDelete' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ biddersAccountsCreativesDelete
     -> Text -- ^ 'bacdOwnerName'
     -> BiddersAccountsCreativesDelete
 biddersAccountsCreativesDelete pBacdCreativeId_ pBacdOwnerName_ =
-    BiddersAccountsCreativesDelete'
+  BiddersAccountsCreativesDelete'
     { _bacdXgafv = Nothing
     , _bacdUploadProtocol = Nothing
     , _bacdAccessToken = Nothing
@@ -107,6 +110,7 @@ biddersAccountsCreativesDelete pBacdCreativeId_ pBacdOwnerName_ =
     , _bacdOwnerName = pBacdOwnerName_
     , _bacdCallback = Nothing
     }
+
 
 -- | V1 error format.
 bacdXgafv :: Lens' BiddersAccountsCreativesDelete (Maybe Xgafv)

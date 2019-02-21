@@ -178,8 +178,8 @@ cloudTraceService
 
 -- | Write Trace data for a project or application
 traceAppendScope :: Proxy '["https://www.googleapis.com/auth/trace.append"]
-traceAppendScope = Proxy;
+traceAppendScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

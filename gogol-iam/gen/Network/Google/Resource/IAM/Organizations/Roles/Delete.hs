@@ -73,7 +73,8 @@ type OrganizationsRolesDeleteResource =
 -- associated with the role are removed.
 --
 -- /See:/ 'organizationsRolesDelete' smart constructor.
-data OrganizationsRolesDelete = OrganizationsRolesDelete'
+data OrganizationsRolesDelete =
+  OrganizationsRolesDelete'
     { _ordXgafv          :: !(Maybe Xgafv)
     , _ordEtag           :: !(Maybe Bytes)
     , _ordUploadProtocol :: !(Maybe Text)
@@ -81,7 +82,9 @@ data OrganizationsRolesDelete = OrganizationsRolesDelete'
     , _ordUploadType     :: !(Maybe Text)
     , _ordName           :: !Text
     , _ordCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsRolesDelete' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ organizationsRolesDelete
     :: Text -- ^ 'ordName'
     -> OrganizationsRolesDelete
 organizationsRolesDelete pOrdName_ =
-    OrganizationsRolesDelete'
+  OrganizationsRolesDelete'
     { _ordXgafv = Nothing
     , _ordEtag = Nothing
     , _ordUploadProtocol = Nothing
@@ -113,6 +116,7 @@ organizationsRolesDelete pOrdName_ =
     , _ordName = pOrdName_
     , _ordCallback = Nothing
     }
+
 
 -- | V1 error format.
 ordXgafv :: Lens' OrganizationsRolesDelete (Maybe Xgafv)

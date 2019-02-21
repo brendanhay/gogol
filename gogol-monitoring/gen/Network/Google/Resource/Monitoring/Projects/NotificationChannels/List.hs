@@ -69,7 +69,8 @@ type ProjectsNotificationChannelsListResource =
 -- | Lists the notification channels that have been created for the project.
 --
 -- /See:/ 'projectsNotificationChannelsList' smart constructor.
-data ProjectsNotificationChannelsList = ProjectsNotificationChannelsList'
+data ProjectsNotificationChannelsList =
+  ProjectsNotificationChannelsList'
     { _pnclXgafv          :: !(Maybe Xgafv)
     , _pnclUploadProtocol :: !(Maybe Text)
     , _pnclOrderBy        :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsNotificationChannelsList = ProjectsNotificationChannelsList'
     , _pnclPageToken      :: !(Maybe Text)
     , _pnclPageSize       :: !(Maybe (Textual Int32))
     , _pnclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotificationChannelsList' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsNotificationChannelsList
     :: Text -- ^ 'pnclName'
     -> ProjectsNotificationChannelsList
 projectsNotificationChannelsList pPnclName_ =
-    ProjectsNotificationChannelsList'
+  ProjectsNotificationChannelsList'
     { _pnclXgafv = Nothing
     , _pnclUploadProtocol = Nothing
     , _pnclOrderBy = Nothing
@@ -121,6 +124,7 @@ projectsNotificationChannelsList pPnclName_ =
     , _pnclPageSize = Nothing
     , _pnclCallback = Nothing
     }
+
 
 -- | V1 error format.
 pnclXgafv :: Lens' ProjectsNotificationChannelsList (Maybe Xgafv)
@@ -189,7 +193,8 @@ pnclCallback
   = lens _pnclCallback (\ s a -> s{_pnclCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelsList where
+           ProjectsNotificationChannelsList
+         where
         type Rs ProjectsNotificationChannelsList =
              ListNotificationChannelsResponse
         type Scopes ProjectsNotificationChannelsList =

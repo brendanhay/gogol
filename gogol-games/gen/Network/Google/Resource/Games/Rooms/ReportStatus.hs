@@ -61,11 +61,14 @@ type RoomsReportStatusResource =
 -- unsupported.
 --
 -- /See:/ 'roomsReportStatus' smart constructor.
-data RoomsReportStatus = RoomsReportStatus'
+data RoomsReportStatus =
+  RoomsReportStatus'
     { _rrsPayload  :: !RoomP2PStatuses
     , _rrsRoomId   :: !Text
     , _rrsLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomsReportStatus' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ roomsReportStatus
     -> Text -- ^ 'rrsRoomId'
     -> RoomsReportStatus
 roomsReportStatus pRrsPayload_ pRrsRoomId_ =
-    RoomsReportStatus'
+  RoomsReportStatus'
     { _rrsPayload = pRrsPayload_
     , _rrsRoomId = pRrsRoomId_
     , _rrsLanguage = Nothing
     }
+
 
 -- | Multipart request metadata.
 rrsPayload :: Lens' RoomsReportStatus RoomP2PStatuses
@@ -105,7 +109,8 @@ rrsLanguage
 instance GoogleRequest RoomsReportStatus where
         type Rs RoomsReportStatus = RoomStatus
         type Scopes RoomsReportStatus =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient RoomsReportStatus'{..}
           = go _rrsRoomId _rrsLanguage (Just AltJSON)
               _rrsPayload

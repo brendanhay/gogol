@@ -74,7 +74,8 @@ type ProjectsOccurrencesSetIAMPolicyResource =
 -- occurrences.
 --
 -- /See:/ 'projectsOccurrencesSetIAMPolicy' smart constructor.
-data ProjectsOccurrencesSetIAMPolicy = ProjectsOccurrencesSetIAMPolicy'
+data ProjectsOccurrencesSetIAMPolicy =
+  ProjectsOccurrencesSetIAMPolicy'
     { _posipXgafv          :: !(Maybe Xgafv)
     , _posipUploadProtocol :: !(Maybe Text)
     , _posipAccessToken    :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsOccurrencesSetIAMPolicy = ProjectsOccurrencesSetIAMPolicy'
     , _posipPayload        :: !SetIAMPolicyRequest
     , _posipResource       :: !Text
     , _posipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOccurrencesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ projectsOccurrencesSetIAMPolicy
     -> Text -- ^ 'posipResource'
     -> ProjectsOccurrencesSetIAMPolicy
 projectsOccurrencesSetIAMPolicy pPosipPayload_ pPosipResource_ =
-    ProjectsOccurrencesSetIAMPolicy'
+  ProjectsOccurrencesSetIAMPolicy'
     { _posipXgafv = Nothing
     , _posipUploadProtocol = Nothing
     , _posipAccessToken = Nothing
@@ -115,6 +118,7 @@ projectsOccurrencesSetIAMPolicy pPosipPayload_ pPosipResource_ =
     , _posipResource = pPosipResource_
     , _posipCallback = Nothing
     }
+
 
 -- | V1 error format.
 posipXgafv :: Lens' ProjectsOccurrencesSetIAMPolicy (Maybe Xgafv)
@@ -158,7 +162,8 @@ posipCallback
       (\ s a -> s{_posipCallback = a})
 
 instance GoogleRequest
-         ProjectsOccurrencesSetIAMPolicy where
+           ProjectsOccurrencesSetIAMPolicy
+         where
         type Rs ProjectsOccurrencesSetIAMPolicy = Policy
         type Scopes ProjectsOccurrencesSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

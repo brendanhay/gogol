@@ -71,7 +71,8 @@ type BucketsPatchResource =
 -- after writing, but configuration changes may take time to propagate.
 --
 -- /See:/ 'bucketsPatch' smart constructor.
-data BucketsPatch = BucketsPatch'
+data BucketsPatch =
+  BucketsPatch'
     { _bpIfMetagenerationMatch      :: !(Maybe (Textual Int64))
     , _bpPredefinedACL              :: !(Maybe BucketsPatchPredefinedACL)
     , _bpBucket                     :: !Text
@@ -80,7 +81,9 @@ data BucketsPatch = BucketsPatch'
     , _bpUserProject                :: !(Maybe Text)
     , _bpIfMetagenerationNotMatch   :: !(Maybe (Textual Int64))
     , _bpProjection                 :: !(Maybe BucketsPatchProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketsPatch' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ bucketsPatch
     -> Bucket -- ^ 'bpPayload'
     -> BucketsPatch
 bucketsPatch pBpBucket_ pBpPayload_ =
-    BucketsPatch'
+  BucketsPatch'
     { _bpIfMetagenerationMatch = Nothing
     , _bpPredefinedACL = Nothing
     , _bpBucket = pBpBucket_
@@ -116,6 +119,7 @@ bucketsPatch pBpBucket_ pBpPayload_ =
     , _bpIfMetagenerationNotMatch = Nothing
     , _bpProjection = Nothing
     }
+
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration matches the given value.

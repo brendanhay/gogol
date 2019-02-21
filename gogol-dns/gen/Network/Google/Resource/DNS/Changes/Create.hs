@@ -59,12 +59,15 @@ type ChangesCreateResource =
 -- | Atomically update the ResourceRecordSet collection.
 --
 -- /See:/ 'changesCreate' smart constructor.
-data ChangesCreate = ChangesCreate'
+data ChangesCreate =
+  ChangesCreate'
     { _ccProject           :: !Text
     , _ccPayload           :: !Change
     , _ccManagedZone       :: !Text
     , _ccClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChangesCreate' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ changesCreate
     -> Text -- ^ 'ccManagedZone'
     -> ChangesCreate
 changesCreate pCcProject_ pCcPayload_ pCcManagedZone_ =
-    ChangesCreate'
+  ChangesCreate'
     { _ccProject = pCcProject_
     , _ccPayload = pCcPayload_
     , _ccManagedZone = pCcManagedZone_
     , _ccClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 ccProject :: Lens' ChangesCreate Text

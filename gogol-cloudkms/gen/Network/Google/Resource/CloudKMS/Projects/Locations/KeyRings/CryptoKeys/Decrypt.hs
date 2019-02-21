@@ -65,7 +65,8 @@ type ProjectsLocationsKeyRingsCryptoKeysDecryptResource
 -- be ENCRYPT_DECRYPT.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysDecrypt' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysDecrypt = ProjectsLocationsKeyRingsCryptoKeysDecrypt'
+data ProjectsLocationsKeyRingsCryptoKeysDecrypt =
+  ProjectsLocationsKeyRingsCryptoKeysDecrypt'
     { _plkrckdXgafv          :: !(Maybe Xgafv)
     , _plkrckdUploadProtocol :: !(Maybe Text)
     , _plkrckdAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsLocationsKeyRingsCryptoKeysDecrypt = ProjectsLocationsKeyRingsCrypt
     , _plkrckdPayload        :: !DecryptRequest
     , _plkrckdName           :: !Text
     , _plkrckdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysDecrypt' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsLocationsKeyRingsCryptoKeysDecrypt
     -> Text -- ^ 'plkrckdName'
     -> ProjectsLocationsKeyRingsCryptoKeysDecrypt
 projectsLocationsKeyRingsCryptoKeysDecrypt pPlkrckdPayload_ pPlkrckdName_ =
-    ProjectsLocationsKeyRingsCryptoKeysDecrypt'
+  ProjectsLocationsKeyRingsCryptoKeysDecrypt'
     { _plkrckdXgafv = Nothing
     , _plkrckdUploadProtocol = Nothing
     , _plkrckdAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsLocationsKeyRingsCryptoKeysDecrypt pPlkrckdPayload_ pPlkrckdName_ =
     , _plkrckdName = pPlkrckdName_
     , _plkrckdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckdXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysDecrypt (Maybe Xgafv)
@@ -149,12 +153,15 @@ plkrckdCallback
       (\ s a -> s{_plkrckdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysDecrypt where
+           ProjectsLocationsKeyRingsCryptoKeysDecrypt
+         where
         type Rs ProjectsLocationsKeyRingsCryptoKeysDecrypt =
              DecryptResponse
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysDecrypt
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysDecrypt'{..}
           = go _plkrckdName _plkrckdXgafv

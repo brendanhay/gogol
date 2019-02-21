@@ -63,14 +63,17 @@ type ProjectsCreateResource =
 -- manifest file.
 --
 -- /See:/ 'projectsCreate' smart constructor.
-data ProjectsCreate = ProjectsCreate'
+data ProjectsCreate =
+  ProjectsCreate'
     { _pcXgafv          :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
     , _pcAccessToken    :: !(Maybe Text)
     , _pcUploadType     :: !(Maybe Text)
     , _pcPayload        :: !CreateProjectRequest
     , _pcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsCreate' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ projectsCreate
     :: CreateProjectRequest -- ^ 'pcPayload'
     -> ProjectsCreate
 projectsCreate pPcPayload_ =
-    ProjectsCreate'
+  ProjectsCreate'
     { _pcXgafv = Nothing
     , _pcUploadProtocol = Nothing
     , _pcAccessToken = Nothing
@@ -99,6 +102,7 @@ projectsCreate pPcPayload_ =
     , _pcPayload = pPcPayload_
     , _pcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcXgafv :: Lens' ProjectsCreate (Maybe Xgafv)

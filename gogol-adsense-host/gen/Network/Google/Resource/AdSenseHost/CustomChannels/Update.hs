@@ -55,10 +55,13 @@ type CustomChannelsUpdateResource =
 -- | Update a custom channel in the host AdSense account.
 --
 -- /See:/ 'customChannelsUpdate' smart constructor.
-data CustomChannelsUpdate = CustomChannelsUpdate'
+data CustomChannelsUpdate =
+  CustomChannelsUpdate'
     { _ccuPayload    :: !CustomChannel
     , _ccuAdClientId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomChannelsUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ customChannelsUpdate
     -> Text -- ^ 'ccuAdClientId'
     -> CustomChannelsUpdate
 customChannelsUpdate pCcuPayload_ pCcuAdClientId_ =
-    CustomChannelsUpdate'
-    { _ccuPayload = pCcuPayload_
-    , _ccuAdClientId = pCcuAdClientId_
-    }
+  CustomChannelsUpdate'
+    {_ccuPayload = pCcuPayload_, _ccuAdClientId = pCcuAdClientId_}
+
 
 -- | Multipart request metadata.
 ccuPayload :: Lens' CustomChannelsUpdate CustomChannel

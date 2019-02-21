@@ -61,12 +61,15 @@ type TurnBasedMatchesLeaveTurnResource =
 -- canceling the match.
 --
 -- /See:/ 'turnBasedMatchesLeaveTurn' smart constructor.
-data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn'
+data TurnBasedMatchesLeaveTurn =
+  TurnBasedMatchesLeaveTurn'
     { _tbmltLanguage             :: !(Maybe Text)
     , _tbmltPendingParticipantId :: !(Maybe Text)
     , _tbmltMatchId              :: !Text
     , _tbmltMatchVersion         :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchesLeaveTurn' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ turnBasedMatchesLeaveTurn
     -> Int32 -- ^ 'tbmltMatchVersion'
     -> TurnBasedMatchesLeaveTurn
 turnBasedMatchesLeaveTurn pTbmltMatchId_ pTbmltMatchVersion_ =
-    TurnBasedMatchesLeaveTurn'
+  TurnBasedMatchesLeaveTurn'
     { _tbmltLanguage = Nothing
     , _tbmltPendingParticipantId = Nothing
     , _tbmltMatchId = pTbmltMatchId_
     , _tbmltMatchVersion = _Coerce # pTbmltMatchVersion_
     }
+
 
 -- | The preferred language to use for strings returned by this method.
 tbmltLanguage :: Lens' TurnBasedMatchesLeaveTurn (Maybe Text)
@@ -122,7 +126,8 @@ instance GoogleRequest TurnBasedMatchesLeaveTurn
          where
         type Rs TurnBasedMatchesLeaveTurn = TurnBasedMatch
         type Scopes TurnBasedMatchesLeaveTurn =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesLeaveTurn'{..}
           = go _tbmltMatchId (Just _tbmltMatchVersion)
               _tbmltLanguage

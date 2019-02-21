@@ -61,7 +61,8 @@ type ProjectsTracesSpansCreateSpanResource =
 -- | Creates a new span.
 --
 -- /See:/ 'projectsTracesSpansCreateSpan' smart constructor.
-data ProjectsTracesSpansCreateSpan = ProjectsTracesSpansCreateSpan'
+data ProjectsTracesSpansCreateSpan =
+  ProjectsTracesSpansCreateSpan'
     { _ptscsXgafv          :: !(Maybe Xgafv)
     , _ptscsUploadProtocol :: !(Maybe Text)
     , _ptscsAccessToken    :: !(Maybe Text)
@@ -69,7 +70,9 @@ data ProjectsTracesSpansCreateSpan = ProjectsTracesSpansCreateSpan'
     , _ptscsPayload        :: !Span
     , _ptscsName           :: !Text
     , _ptscsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTracesSpansCreateSpan' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ projectsTracesSpansCreateSpan
     -> Text -- ^ 'ptscsName'
     -> ProjectsTracesSpansCreateSpan
 projectsTracesSpansCreateSpan pPtscsPayload_ pPtscsName_ =
-    ProjectsTracesSpansCreateSpan'
+  ProjectsTracesSpansCreateSpan'
     { _ptscsXgafv = Nothing
     , _ptscsUploadProtocol = Nothing
     , _ptscsAccessToken = Nothing
@@ -102,6 +105,7 @@ projectsTracesSpansCreateSpan pPtscsPayload_ pPtscsName_ =
     , _ptscsName = pPtscsName_
     , _ptscsCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptscsXgafv :: Lens' ProjectsTracesSpansCreateSpan (Maybe Xgafv)

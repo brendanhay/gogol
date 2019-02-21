@@ -70,7 +70,8 @@ type ProjectsInspectTemplatesListResource =
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'projectsInspectTemplatesList' smart constructor.
-data ProjectsInspectTemplatesList = ProjectsInspectTemplatesList'
+data ProjectsInspectTemplatesList =
+  ProjectsInspectTemplatesList'
     { _pitlParent         :: !Text
     , _pitlXgafv          :: !(Maybe Xgafv)
     , _pitlUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsInspectTemplatesList = ProjectsInspectTemplatesList'
     , _pitlPageToken      :: !(Maybe Text)
     , _pitlPageSize       :: !(Maybe (Textual Int32))
     , _pitlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInspectTemplatesList' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsInspectTemplatesList
     :: Text -- ^ 'pitlParent'
     -> ProjectsInspectTemplatesList
 projectsInspectTemplatesList pPitlParent_ =
-    ProjectsInspectTemplatesList'
+  ProjectsInspectTemplatesList'
     { _pitlParent = pPitlParent_
     , _pitlXgafv = Nothing
     , _pitlUploadProtocol = Nothing
@@ -118,6 +121,7 @@ projectsInspectTemplatesList pPitlParent_ =
     , _pitlPageSize = Nothing
     , _pitlCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id or
 -- organizations\/my-org-id.

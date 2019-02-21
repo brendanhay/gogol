@@ -91,7 +91,8 @@ type AccountsReportsGenerateResource =
 -- format specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ 'accountsReportsGenerate' smart constructor.
-data AccountsReportsGenerate = AccountsReportsGenerate'
+data AccountsReportsGenerate =
+  AccountsReportsGenerate'
     { _argDimension  :: !(Maybe [Text])
     , _argLocale     :: !(Maybe Text)
     , _argEndDate    :: !Text
@@ -102,7 +103,9 @@ data AccountsReportsGenerate = AccountsReportsGenerate'
     , _argFilter     :: !(Maybe [Text])
     , _argStartIndex :: !(Maybe (Textual Word32))
     , _argMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsReportsGenerate' with the minimum fields required to make a request.
 --
@@ -133,7 +136,7 @@ accountsReportsGenerate
     -> Text -- ^ 'argAccountId'
     -> AccountsReportsGenerate
 accountsReportsGenerate pArgEndDate_ pArgStartDate_ pArgAccountId_ =
-    AccountsReportsGenerate'
+  AccountsReportsGenerate'
     { _argDimension = Nothing
     , _argLocale = Nothing
     , _argEndDate = pArgEndDate_
@@ -145,6 +148,7 @@ accountsReportsGenerate pArgEndDate_ pArgStartDate_ pArgAccountId_ =
     , _argStartIndex = Nothing
     , _argMaxResults = Nothing
     }
+
 
 -- | Dimensions to base the report on.
 argDimension :: Lens' AccountsReportsGenerate [Text]
@@ -234,7 +238,8 @@ instance GoogleRequest AccountsReportsGenerate where
                       mempty
 
 instance GoogleRequest
-         (MediaDownload AccountsReportsGenerate) where
+           (MediaDownload AccountsReportsGenerate)
+         where
         type Rs (MediaDownload AccountsReportsGenerate) =
              Stream
         type Scopes (MediaDownload AccountsReportsGenerate) =

@@ -171,4 +171,4 @@ manufacturersService
 
 -- | Manage your product listings for Google Manufacturer Center
 manufacturercenterScope :: Proxy '["https://www.googleapis.com/auth/manufacturercenter"]
-manufacturercenterScope = Proxy;
+manufacturercenterScope = Proxy

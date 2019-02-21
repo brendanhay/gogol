@@ -110,7 +110,8 @@ type UserProFilesGuardianInvitationsCreateResource =
 -- existing \`Guardian\` for this user.
 --
 -- /See:/ 'userProFilesGuardianInvitationsCreate' smart constructor.
-data UserProFilesGuardianInvitationsCreate = UserProFilesGuardianInvitationsCreate'
+data UserProFilesGuardianInvitationsCreate =
+  UserProFilesGuardianInvitationsCreate'
     { _upfgicStudentId      :: !Text
     , _upfgicXgafv          :: !(Maybe Xgafv)
     , _upfgicUploadProtocol :: !(Maybe Text)
@@ -118,7 +119,9 @@ data UserProFilesGuardianInvitationsCreate = UserProFilesGuardianInvitationsCrea
     , _upfgicUploadType     :: !(Maybe Text)
     , _upfgicPayload        :: !GuardianInvitation
     , _upfgicCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserProFilesGuardianInvitationsCreate' with the minimum fields required to make a request.
 --
@@ -142,7 +145,7 @@ userProFilesGuardianInvitationsCreate
     -> GuardianInvitation -- ^ 'upfgicPayload'
     -> UserProFilesGuardianInvitationsCreate
 userProFilesGuardianInvitationsCreate pUpfgicStudentId_ pUpfgicPayload_ =
-    UserProFilesGuardianInvitationsCreate'
+  UserProFilesGuardianInvitationsCreate'
     { _upfgicStudentId = pUpfgicStudentId_
     , _upfgicXgafv = Nothing
     , _upfgicUploadProtocol = Nothing
@@ -151,6 +154,7 @@ userProFilesGuardianInvitationsCreate pUpfgicStudentId_ pUpfgicPayload_ =
     , _upfgicPayload = pUpfgicPayload_
     , _upfgicCallback = Nothing
     }
+
 
 -- | ID of the student (in standard format)
 upfgicStudentId :: Lens' UserProFilesGuardianInvitationsCreate Text
@@ -194,7 +198,8 @@ upfgicCallback
       (\ s a -> s{_upfgicCallback = a})
 
 instance GoogleRequest
-         UserProFilesGuardianInvitationsCreate where
+           UserProFilesGuardianInvitationsCreate
+         where
         type Rs UserProFilesGuardianInvitationsCreate =
              GuardianInvitation
         type Scopes UserProFilesGuardianInvitationsCreate =

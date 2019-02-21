@@ -71,14 +71,17 @@ type ShortLinksCreateResource =
 -- by requester\'s Firebase project.
 --
 -- /See:/ 'shortLinksCreate' smart constructor.
-data ShortLinksCreate = ShortLinksCreate'
+data ShortLinksCreate =
+  ShortLinksCreate'
     { _slcXgafv          :: !(Maybe Xgafv)
     , _slcUploadProtocol :: !(Maybe Text)
     , _slcAccessToken    :: !(Maybe Text)
     , _slcUploadType     :: !(Maybe Text)
     , _slcPayload        :: !CreateShortDynamicLinkRequest
     , _slcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShortLinksCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ shortLinksCreate
     :: CreateShortDynamicLinkRequest -- ^ 'slcPayload'
     -> ShortLinksCreate
 shortLinksCreate pSlcPayload_ =
-    ShortLinksCreate'
+  ShortLinksCreate'
     { _slcXgafv = Nothing
     , _slcUploadProtocol = Nothing
     , _slcAccessToken = Nothing
@@ -107,6 +110,7 @@ shortLinksCreate pSlcPayload_ =
     , _slcPayload = pSlcPayload_
     , _slcCallback = Nothing
     }
+
 
 -- | V1 error format.
 slcXgafv :: Lens' ShortLinksCreate (Maybe Xgafv)

@@ -24,7 +24,7 @@
 -- POSIX account information is set when no username and UID exist as part
 -- of the login profile.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.importSshPublicKey@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.importSshPublicKey@.
 module Network.Google.Resource.OSLogin.Users.ImportSSHPublicKey
     (
     -- * REST Resource
@@ -68,7 +68,8 @@ type UsersImportSSHPublicKeyResource =
 -- of the login profile.
 --
 -- /See:/ 'usersImportSSHPublicKey' smart constructor.
-data UsersImportSSHPublicKey = UsersImportSSHPublicKey'
+data UsersImportSSHPublicKey =
+  UsersImportSSHPublicKey'
     { _uispkParent         :: !Text
     , _uispkXgafv          :: !(Maybe Xgafv)
     , _uispkUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data UsersImportSSHPublicKey = UsersImportSSHPublicKey'
     , _uispkPayload        :: !SSHPublicKey
     , _uispkProjectId      :: !(Maybe Text)
     , _uispkCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersImportSSHPublicKey' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ usersImportSSHPublicKey
     -> SSHPublicKey -- ^ 'uispkPayload'
     -> UsersImportSSHPublicKey
 usersImportSSHPublicKey pUispkParent_ pUispkPayload_ =
-    UsersImportSSHPublicKey'
+  UsersImportSSHPublicKey'
     { _uispkParent = pUispkParent_
     , _uispkXgafv = Nothing
     , _uispkUploadProtocol = Nothing
@@ -113,6 +116,7 @@ usersImportSSHPublicKey pUispkParent_ pUispkPayload_ =
     , _uispkProjectId = Nothing
     , _uispkCallback = Nothing
     }
+
 
 -- | The unique ID for the user in format \`users\/{user}\`.
 uispkParent :: Lens' UsersImportSSHPublicKey Text

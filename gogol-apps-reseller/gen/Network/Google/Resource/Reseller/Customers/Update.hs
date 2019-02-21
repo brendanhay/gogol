@@ -54,10 +54,13 @@ type CustomersUpdateResource =
 -- | Update a customer account\'s settings.
 --
 -- /See:/ 'customersUpdate' smart constructor.
-data CustomersUpdate = CustomersUpdate'
+data CustomersUpdate =
+  CustomersUpdate'
     { _cuPayload    :: !Customer
     , _cuCustomerId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomersUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ customersUpdate
     -> Text -- ^ 'cuCustomerId'
     -> CustomersUpdate
 customersUpdate pCuPayload_ pCuCustomerId_ =
-    CustomersUpdate'
-    { _cuPayload = pCuPayload_
-    , _cuCustomerId = pCuCustomerId_
-    }
+  CustomersUpdate' {_cuPayload = pCuPayload_, _cuCustomerId = pCuCustomerId_}
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' CustomersUpdate Customer

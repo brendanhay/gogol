@@ -57,12 +57,15 @@ type ProposalsUpdateResource =
 -- | Update the given proposal
 --
 -- /See:/ 'proposalsUpdate' smart constructor.
-data ProposalsUpdate = ProposalsUpdate'
+data ProposalsUpdate =
+  ProposalsUpdate'
     { _puUpdateAction   :: !ProposalsUpdateUpdateAction
     , _puRevisionNumber :: !(Textual Int64)
     , _puPayload        :: !Proposal
     , _puProposalId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProposalsUpdate' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ proposalsUpdate
     -> Text -- ^ 'puProposalId'
     -> ProposalsUpdate
 proposalsUpdate pPuUpdateAction_ pPuRevisionNumber_ pPuPayload_ pPuProposalId_ =
-    ProposalsUpdate'
+  ProposalsUpdate'
     { _puUpdateAction = pPuUpdateAction_
     , _puRevisionNumber = _Coerce # pPuRevisionNumber_
     , _puPayload = pPuPayload_
     , _puProposalId = pPuProposalId_
     }
+
 
 -- | The proposed action to take on the proposal. This field is required and
 -- it must be set when updating a proposal.

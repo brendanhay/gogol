@@ -67,7 +67,8 @@ type GroupsMembershipsListResource =
 -- | List Memberships within a Group.
 --
 -- /See:/ 'groupsMembershipsList' smart constructor.
-data GroupsMembershipsList = GroupsMembershipsList'
+data GroupsMembershipsList =
+  GroupsMembershipsList'
     { _groParent         :: !Text
     , _groXgafv          :: !(Maybe Xgafv)
     , _groUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data GroupsMembershipsList = GroupsMembershipsList'
     , _groPageToken      :: !(Maybe Text)
     , _groPageSize       :: !(Maybe (Textual Int32))
     , _groCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsMembershipsList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ groupsMembershipsList
     :: Text -- ^ 'groParent'
     -> GroupsMembershipsList
 groupsMembershipsList pGroParent_ =
-    GroupsMembershipsList'
+  GroupsMembershipsList'
     { _groParent = pGroParent_
     , _groXgafv = Nothing
     , _groUploadProtocol = Nothing
@@ -115,6 +118,7 @@ groupsMembershipsList pGroParent_ =
     , _groPageSize = Nothing
     , _groCallback = Nothing
     }
+
 
 -- | [Resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
@@ -156,7 +160,7 @@ groPageToken
   = lens _groPageToken (\ s a -> s{_groPageToken = a})
 
 -- | Maximum number of Memberships to return. View | Default | Maximum
--- -----|---------|-------- BASIC | 200 | 1000 FULL | 50 | 500
+-- -----|---------|-------- BASIC| 200 | 1000 FULL | 50 | 500
 groPageSize :: Lens' GroupsMembershipsList (Maybe Int32)
 groPageSize
   = lens _groPageSize (\ s a -> s{_groPageSize = a}) .

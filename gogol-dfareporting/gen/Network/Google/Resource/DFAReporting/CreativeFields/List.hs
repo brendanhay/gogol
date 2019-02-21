@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsList' request conforms to.
 type CreativeFieldsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -69,7 +69,8 @@ type CreativeFieldsListResource =
 -- supports paging.
 --
 -- /See:/ 'creativeFieldsList' smart constructor.
-data CreativeFieldsList = CreativeFieldsList'
+data CreativeFieldsList =
+  CreativeFieldsList'
     { _cflSearchString  :: !(Maybe Text)
     , _cflIds           :: !(Maybe [Textual Int64])
     , _cflProFileId     :: !(Textual Int64)
@@ -78,7 +79,9 @@ data CreativeFieldsList = CreativeFieldsList'
     , _cflSortField     :: !CreativeFieldsListSortField
     , _cflAdvertiserIds :: !(Maybe [Textual Int64])
     , _cflMaxResults    :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeFieldsList' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ creativeFieldsList
     :: Int64 -- ^ 'cflProFileId'
     -> CreativeFieldsList
 creativeFieldsList pCflProFileId_ =
-    CreativeFieldsList'
+  CreativeFieldsList'
     { _cflSearchString = Nothing
     , _cflIds = Nothing
     , _cflProFileId = _Coerce # pCflProFileId_
@@ -113,6 +116,7 @@ creativeFieldsList pCflProFileId_ =
     , _cflAdvertiserIds = Nothing
     , _cflMaxResults = 1000
     }
+
 
 -- | Allows searching for creative fields by name or ID. Wildcards (*) are
 -- allowed. For example, \"creativefield*2015\" will return creative fields

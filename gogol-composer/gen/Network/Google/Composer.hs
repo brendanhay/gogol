@@ -44,6 +44,9 @@ module Network.Google.Composer
     -- ** composer.projects.locations.environments.patch
     , module Network.Google.Resource.Composer.Projects.Locations.Environments.Patch
 
+    -- ** composer.projects.locations.imageVersions.list
+    , module Network.Google.Resource.Composer.Projects.Locations.ImageVersions.List
+
     -- ** composer.projects.locations.operations.delete
     , module Network.Google.Resource.Composer.Projects.Locations.Operations.Delete
 
@@ -66,6 +69,12 @@ module Network.Google.Composer
     , OperationSchema
     , operationSchema
     , osAddtional
+
+    -- ** ListImageVersionsResponse
+    , ListImageVersionsResponse
+    , listImageVersionsResponse
+    , livrNextPageToken
+    , livrImageVersions
 
     -- ** ListEnvironmentsResponse
     , ListEnvironmentsResponse
@@ -121,6 +130,13 @@ module Network.Google.Composer
     , SoftwareConfigEnvVariables
     , softwareConfigEnvVariables
     , scevAddtional
+
+    -- ** ImageVersion
+    , ImageVersion
+    , imageVersion
+    , ivImageVersionId
+    , ivSupportedPythonVersions
+    , ivIsDefault
 
     -- ** Environment
     , Environment
@@ -194,6 +210,7 @@ import           Network.Google.Resource.Composer.Projects.Locations.Environment
 import           Network.Google.Resource.Composer.Projects.Locations.Environments.Get
 import           Network.Google.Resource.Composer.Projects.Locations.Environments.List
 import           Network.Google.Resource.Composer.Projects.Locations.Environments.Patch
+import           Network.Google.Resource.Composer.Projects.Locations.ImageVersions.List
 import           Network.Google.Resource.Composer.Projects.Locations.Operations.Delete
 import           Network.Google.Resource.Composer.Projects.Locations.Operations.Get
 import           Network.Google.Resource.Composer.Projects.Locations.Operations.List
@@ -207,6 +224,7 @@ type ComposerAPI =
      ProjectsLocationsOperationsListResource :<|>
        ProjectsLocationsOperationsGetResource
        :<|> ProjectsLocationsOperationsDeleteResource
+       :<|> ProjectsLocationsImageVersionsListResource
        :<|> ProjectsLocationsEnvironmentsListResource
        :<|> ProjectsLocationsEnvironmentsPatchResource
        :<|> ProjectsLocationsEnvironmentsGetResource

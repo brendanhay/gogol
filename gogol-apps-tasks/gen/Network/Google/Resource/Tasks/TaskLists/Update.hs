@@ -55,10 +55,13 @@ type TaskListsUpdateResource =
 -- | Updates the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsUpdate' smart constructor.
-data TaskListsUpdate = TaskListsUpdate'
+data TaskListsUpdate =
+  TaskListsUpdate'
     { _tluPayload  :: !TaskList
     , _tluTaskList :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TaskListsUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ taskListsUpdate
     -> Text -- ^ 'tluTaskList'
     -> TaskListsUpdate
 taskListsUpdate pTluPayload_ pTluTaskList_ =
-    TaskListsUpdate'
-    { _tluPayload = pTluPayload_
-    , _tluTaskList = pTluTaskList_
-    }
+  TaskListsUpdate' {_tluPayload = pTluPayload_, _tluTaskList = pTluTaskList_}
+
 
 -- | Multipart request metadata.
 tluPayload :: Lens' TaskListsUpdate TaskList

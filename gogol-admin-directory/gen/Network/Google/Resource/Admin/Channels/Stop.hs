@@ -55,9 +55,12 @@ type ChannelsStopResource =
 -- | Stop watching resources through this channel
 --
 -- /See:/ 'channelsStop' smart constructor.
-newtype ChannelsStop = ChannelsStop'
+newtype ChannelsStop =
+  ChannelsStop'
     { _csPayload :: Channel
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChannelsStop' with the minimum fields required to make a request.
 --
@@ -67,10 +70,8 @@ newtype ChannelsStop = ChannelsStop'
 channelsStop
     :: Channel -- ^ 'csPayload'
     -> ChannelsStop
-channelsStop pCsPayload_ =
-    ChannelsStop'
-    { _csPayload = pCsPayload_
-    }
+channelsStop pCsPayload_ = ChannelsStop' {_csPayload = pCsPayload_}
+
 
 -- | Multipart request metadata.
 csPayload :: Lens' ChannelsStop Channel

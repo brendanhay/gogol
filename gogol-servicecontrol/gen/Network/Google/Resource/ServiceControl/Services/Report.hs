@@ -83,7 +83,8 @@ type ServicesReportResource =
 -- IAM](https:\/\/cloud.google.com\/iam).
 --
 -- /See:/ 'servicesReport' smart constructor.
-data ServicesReport = ServicesReport'
+data ServicesReport =
+  ServicesReport'
     { _srXgafv          :: !(Maybe Xgafv)
     , _srUploadProtocol :: !(Maybe Text)
     , _srAccessToken    :: !(Maybe Text)
@@ -91,7 +92,9 @@ data ServicesReport = ServicesReport'
     , _srPayload        :: !ReportRequest
     , _srServiceName    :: !Text
     , _srCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesReport' with the minimum fields required to make a request.
 --
@@ -115,7 +118,7 @@ servicesReport
     -> Text -- ^ 'srServiceName'
     -> ServicesReport
 servicesReport pSrPayload_ pSrServiceName_ =
-    ServicesReport'
+  ServicesReport'
     { _srXgafv = Nothing
     , _srUploadProtocol = Nothing
     , _srAccessToken = Nothing
@@ -124,6 +127,7 @@ servicesReport pSrPayload_ pSrServiceName_ =
     , _srServiceName = pSrServiceName_
     , _srCallback = Nothing
     }
+
 
 -- | V1 error format.
 srXgafv :: Lens' ServicesReport (Maybe Xgafv)

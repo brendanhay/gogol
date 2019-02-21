@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'CampaignCreativeAssociationsList' request conforms to.
 type CampaignCreativeAssociationsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -66,13 +66,16 @@ type CampaignCreativeAssociationsListResource =
 -- campaign. This method supports paging.
 --
 -- /See:/ 'campaignCreativeAssociationsList' smart constructor.
-data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList'
+data CampaignCreativeAssociationsList =
+  CampaignCreativeAssociationsList'
     { _ccalCampaignId :: !(Textual Int64)
     , _ccalProFileId  :: !(Textual Int64)
     , _ccalSortOrder  :: !CampaignCreativeAssociationsListSortOrder
     , _ccalPageToken  :: !(Maybe Text)
     , _ccalMaxResults :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CampaignCreativeAssociationsList' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ campaignCreativeAssociationsList
     -> Int64 -- ^ 'ccalProFileId'
     -> CampaignCreativeAssociationsList
 campaignCreativeAssociationsList pCcalCampaignId_ pCcalProFileId_ =
-    CampaignCreativeAssociationsList'
+  CampaignCreativeAssociationsList'
     { _ccalCampaignId = _Coerce # pCcalCampaignId_
     , _ccalProFileId = _Coerce # pCcalProFileId_
     , _ccalSortOrder = CCALSOAscending
     , _ccalPageToken = Nothing
     , _ccalMaxResults = 1000
     }
+
 
 -- | Campaign ID in this association.
 ccalCampaignId :: Lens' CampaignCreativeAssociationsList Int64
@@ -134,7 +138,8 @@ ccalMaxResults
       . _Coerce
 
 instance GoogleRequest
-         CampaignCreativeAssociationsList where
+           CampaignCreativeAssociationsList
+         where
         type Rs CampaignCreativeAssociationsList =
              CampaignCreativeAssociationsListResponse
         type Scopes CampaignCreativeAssociationsList =

@@ -56,10 +56,13 @@ type UsersLabelsDeleteResource =
 -- from any messages and threads that it is applied to.
 --
 -- /See:/ 'usersLabelsDelete' smart constructor.
-data UsersLabelsDelete = UsersLabelsDelete'
+data UsersLabelsDelete =
+  UsersLabelsDelete'
     { _uldUserId :: !Text
     , _uldId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersLabelsDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ usersLabelsDelete
     :: Text -- ^ 'uldId'
     -> UsersLabelsDelete
 usersLabelsDelete pUldId_ =
-    UsersLabelsDelete'
-    { _uldUserId = "me"
-    , _uldId = pUldId_
-    }
+  UsersLabelsDelete' {_uldUserId = "me", _uldId = pUldId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

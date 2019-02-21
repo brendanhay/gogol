@@ -58,11 +58,14 @@ type ManagementProFilesGetResource =
 -- | Gets a view (profile) to which the user has access.
 --
 -- /See:/ 'managementProFilesGet' smart constructor.
-data ManagementProFilesGet = ManagementProFilesGet'
+data ManagementProFilesGet =
+  ManagementProFilesGet'
     { _mpfgWebPropertyId :: !Text
     , _mpfgProFileId     :: !Text
     , _mpfgAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementProFilesGet' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ managementProFilesGet
     -> Text -- ^ 'mpfgAccountId'
     -> ManagementProFilesGet
 managementProFilesGet pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ =
-    ManagementProFilesGet'
+  ManagementProFilesGet'
     { _mpfgWebPropertyId = pMpfgWebPropertyId_
     , _mpfgProFileId = pMpfgProFileId_
     , _mpfgAccountId = pMpfgAccountId_
     }
+
 
 -- | Web property ID to retrieve the view (profile) for.
 mpfgWebPropertyId :: Lens' ManagementProFilesGet Text

@@ -78,7 +78,8 @@ type ProjectsExportResource =
 -- data behind in Google Cloud Storage.
 --
 -- /See:/ 'projectsExport' smart constructor.
-data ProjectsExport = ProjectsExport'
+data ProjectsExport =
+  ProjectsExport'
     { _peXgafv          :: !(Maybe Xgafv)
     , _peUploadProtocol :: !(Maybe Text)
     , _peAccessToken    :: !(Maybe Text)
@@ -86,7 +87,9 @@ data ProjectsExport = ProjectsExport'
     , _pePayload        :: !GoogleDatastoreAdminV1ExportEntitiesRequest
     , _peProjectId      :: !Text
     , _peCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsExport' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsExport
     -> Text -- ^ 'peProjectId'
     -> ProjectsExport
 projectsExport pPePayload_ pPeProjectId_ =
-    ProjectsExport'
+  ProjectsExport'
     { _peXgafv = Nothing
     , _peUploadProtocol = Nothing
     , _peAccessToken = Nothing
@@ -119,6 +122,7 @@ projectsExport pPePayload_ pPeProjectId_ =
     , _peProjectId = pPeProjectId_
     , _peCallback = Nothing
     }
+
 
 -- | V1 error format.
 peXgafv :: Lens' ProjectsExport (Maybe Xgafv)

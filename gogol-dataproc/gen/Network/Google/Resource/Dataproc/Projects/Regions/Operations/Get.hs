@@ -63,14 +63,17 @@ type ProjectsRegionsOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'projectsRegionsOperationsGet' smart constructor.
-data ProjectsRegionsOperationsGet = ProjectsRegionsOperationsGet'
+data ProjectsRegionsOperationsGet =
+  ProjectsRegionsOperationsGet'
     { _progXgafv          :: !(Maybe Xgafv)
     , _progUploadProtocol :: !(Maybe Text)
     , _progAccessToken    :: !(Maybe Text)
     , _progUploadType     :: !(Maybe Text)
     , _progName           :: !Text
     , _progCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsOperationsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ projectsRegionsOperationsGet
     :: Text -- ^ 'progName'
     -> ProjectsRegionsOperationsGet
 projectsRegionsOperationsGet pProgName_ =
-    ProjectsRegionsOperationsGet'
+  ProjectsRegionsOperationsGet'
     { _progXgafv = Nothing
     , _progUploadProtocol = Nothing
     , _progAccessToken = Nothing
@@ -99,6 +102,7 @@ projectsRegionsOperationsGet pProgName_ =
     , _progName = pProgName_
     , _progCallback = Nothing
     }
+
 
 -- | V1 error format.
 progXgafv :: Lens' ProjectsRegionsOperationsGet (Maybe Xgafv)

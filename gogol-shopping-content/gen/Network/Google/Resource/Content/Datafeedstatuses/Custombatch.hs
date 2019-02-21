@@ -50,9 +50,12 @@ type DatafeedstatusesCustombatchResource =
 
 --
 -- /See:/ 'datafeedstatusesCustombatch' smart constructor.
-newtype DatafeedstatusesCustombatch = DatafeedstatusesCustombatch'
+newtype DatafeedstatusesCustombatch =
+  DatafeedstatusesCustombatch'
     { _dcPayload :: DatafeedstatusesCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatafeedstatusesCustombatch' with the minimum fields required to make a request.
 --
@@ -63,9 +66,8 @@ datafeedstatusesCustombatch
     :: DatafeedstatusesCustomBatchRequest -- ^ 'dcPayload'
     -> DatafeedstatusesCustombatch
 datafeedstatusesCustombatch pDcPayload_ =
-    DatafeedstatusesCustombatch'
-    { _dcPayload = pDcPayload_
-    }
+  DatafeedstatusesCustombatch' {_dcPayload = pDcPayload_}
+
 
 -- | Multipart request metadata.
 dcPayload :: Lens' DatafeedstatusesCustombatch DatafeedstatusesCustomBatchRequest

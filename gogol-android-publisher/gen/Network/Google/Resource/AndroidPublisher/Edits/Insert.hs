@@ -54,10 +54,13 @@ type EditsInsertResource =
 -- | Creates a new edit for an app, populated with the app\'s current state.
 --
 -- /See:/ 'editsInsert' smart constructor.
-data EditsInsert = EditsInsert'
+data EditsInsert =
+  EditsInsert'
     { _eiPackageName :: !Text
     , _eiPayload     :: !AppEdit
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ editsInsert
     -> AppEdit -- ^ 'eiPayload'
     -> EditsInsert
 editsInsert pEiPackageName_ pEiPayload_ =
-    EditsInsert'
-    { _eiPackageName = pEiPackageName_
-    , _eiPayload = pEiPayload_
-    }
+  EditsInsert' {_eiPackageName = pEiPackageName_, _eiPayload = pEiPayload_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

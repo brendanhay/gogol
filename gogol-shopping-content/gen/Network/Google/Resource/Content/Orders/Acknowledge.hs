@@ -57,11 +57,14 @@ type OrdersAcknowledgeResource =
 -- | Marks an order as acknowledged.
 --
 -- /See:/ 'ordersAcknowledge' smart constructor.
-data OrdersAcknowledge = OrdersAcknowledge'
+data OrdersAcknowledge =
+  OrdersAcknowledge'
     { _oaMerchantId :: !(Textual Word64)
     , _oaPayload    :: !OrdersAcknowledgeRequest
     , _oaOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersAcknowledge' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ ordersAcknowledge
     -> Text -- ^ 'oaOrderId'
     -> OrdersAcknowledge
 ordersAcknowledge pOaMerchantId_ pOaPayload_ pOaOrderId_ =
-    OrdersAcknowledge'
+  OrdersAcknowledge'
     { _oaMerchantId = _Coerce # pOaMerchantId_
     , _oaPayload = pOaPayload_
     , _oaOrderId = pOaOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

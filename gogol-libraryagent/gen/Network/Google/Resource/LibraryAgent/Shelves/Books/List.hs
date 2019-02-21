@@ -70,7 +70,8 @@ type ShelvesBooksListResource =
 -- list. Returns NOT_FOUND if the shelf does not exist.
 --
 -- /See:/ 'shelvesBooksList' smart constructor.
-data ShelvesBooksList = ShelvesBooksList'
+data ShelvesBooksList =
+  ShelvesBooksList'
     { _sblParent         :: !Text
     , _sblXgafv          :: !(Maybe Xgafv)
     , _sblUploadProtocol :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ShelvesBooksList = ShelvesBooksList'
     , _sblPageToken      :: !(Maybe Text)
     , _sblPageSize       :: !(Maybe (Textual Int32))
     , _sblCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShelvesBooksList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ shelvesBooksList
     :: Text -- ^ 'sblParent'
     -> ShelvesBooksList
 shelvesBooksList pSblParent_ =
-    ShelvesBooksList'
+  ShelvesBooksList'
     { _sblParent = pSblParent_
     , _sblXgafv = Nothing
     , _sblUploadProtocol = Nothing
@@ -114,6 +117,7 @@ shelvesBooksList pSblParent_ =
     , _sblPageSize = Nothing
     , _sblCallback = Nothing
     }
+
 
 -- | The name of the shelf whose books we\'d like to list.
 sblParent :: Lens' ShelvesBooksList Text

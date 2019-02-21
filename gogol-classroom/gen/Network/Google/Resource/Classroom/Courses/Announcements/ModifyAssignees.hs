@@ -78,7 +78,8 @@ type CoursesAnnouncementsModifyAssigneesResource =
 -- does not exist.
 --
 -- /See:/ 'coursesAnnouncementsModifyAssignees' smart constructor.
-data CoursesAnnouncementsModifyAssignees = CoursesAnnouncementsModifyAssignees'
+data CoursesAnnouncementsModifyAssignees =
+  CoursesAnnouncementsModifyAssignees'
     { _camaXgafv          :: !(Maybe Xgafv)
     , _camaUploadProtocol :: !(Maybe Text)
     , _camaCourseId       :: !Text
@@ -87,7 +88,9 @@ data CoursesAnnouncementsModifyAssignees = CoursesAnnouncementsModifyAssignees'
     , _camaPayload        :: !ModifyAnnouncementAssigneesRequest
     , _camaId             :: !Text
     , _camaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesAnnouncementsModifyAssignees' with the minimum fields required to make a request.
 --
@@ -114,7 +117,7 @@ coursesAnnouncementsModifyAssignees
     -> Text -- ^ 'camaId'
     -> CoursesAnnouncementsModifyAssignees
 coursesAnnouncementsModifyAssignees pCamaCourseId_ pCamaPayload_ pCamaId_ =
-    CoursesAnnouncementsModifyAssignees'
+  CoursesAnnouncementsModifyAssignees'
     { _camaXgafv = Nothing
     , _camaUploadProtocol = Nothing
     , _camaCourseId = pCamaCourseId_
@@ -124,6 +127,7 @@ coursesAnnouncementsModifyAssignees pCamaCourseId_ pCamaPayload_ pCamaId_ =
     , _camaId = pCamaId_
     , _camaCallback = Nothing
     }
+
 
 -- | V1 error format.
 camaXgafv :: Lens' CoursesAnnouncementsModifyAssignees (Maybe Xgafv)
@@ -169,7 +173,8 @@ camaCallback
   = lens _camaCallback (\ s a -> s{_camaCallback = a})
 
 instance GoogleRequest
-         CoursesAnnouncementsModifyAssignees where
+           CoursesAnnouncementsModifyAssignees
+         where
         type Rs CoursesAnnouncementsModifyAssignees =
              Announcement
         type Scopes CoursesAnnouncementsModifyAssignees =

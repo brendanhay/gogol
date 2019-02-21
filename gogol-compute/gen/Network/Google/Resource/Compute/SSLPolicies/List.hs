@@ -64,13 +64,16 @@ type SSLPoliciesListResource =
 -- project.
 --
 -- /See:/ 'sslPoliciesList'' smart constructor.
-data SSLPoliciesList' = SSLPoliciesList''
+data SSLPoliciesList' =
+  SSLPoliciesList''
     { _sslplOrderBy    :: !(Maybe Text)
     , _sslplProject    :: !Text
     , _sslplFilter     :: !(Maybe Text)
     , _sslplPageToken  :: !(Maybe Text)
     , _sslplMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLPoliciesList'' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ sslPoliciesList'
     :: Text -- ^ 'sslplProject'
     -> SSLPoliciesList'
 sslPoliciesList' pSslplProject_ =
-    SSLPoliciesList''
+  SSLPoliciesList''
     { _sslplOrderBy = Nothing
     , _sslplProject = pSslplProject_
     , _sslplFilter = Nothing
     , _sslplPageToken = Nothing
     , _sslplMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

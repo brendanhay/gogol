@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'CampaignCreativeAssociationsInsert' request conforms to.
 type CampaignCreativeAssociationsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -62,11 +62,14 @@ type CampaignCreativeAssociationsInsertResource =
 -- a default ad does not exist already.
 --
 -- /See:/ 'campaignCreativeAssociationsInsert' smart constructor.
-data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert'
+data CampaignCreativeAssociationsInsert =
+  CampaignCreativeAssociationsInsert'
     { _ccaiCampaignId :: !(Textual Int64)
     , _ccaiProFileId  :: !(Textual Int64)
     , _ccaiPayload    :: !CampaignCreativeAssociation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CampaignCreativeAssociationsInsert' with the minimum fields required to make a request.
 --
@@ -83,11 +86,12 @@ campaignCreativeAssociationsInsert
     -> CampaignCreativeAssociation -- ^ 'ccaiPayload'
     -> CampaignCreativeAssociationsInsert
 campaignCreativeAssociationsInsert pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload_ =
-    CampaignCreativeAssociationsInsert'
+  CampaignCreativeAssociationsInsert'
     { _ccaiCampaignId = _Coerce # pCcaiCampaignId_
     , _ccaiProFileId = _Coerce # pCcaiProFileId_
     , _ccaiPayload = pCcaiPayload_
     }
+
 
 -- | Campaign ID in this association.
 ccaiCampaignId :: Lens' CampaignCreativeAssociationsInsert Int64
@@ -109,7 +113,8 @@ ccaiPayload
   = lens _ccaiPayload (\ s a -> s{_ccaiPayload = a})
 
 instance GoogleRequest
-         CampaignCreativeAssociationsInsert where
+           CampaignCreativeAssociationsInsert
+         where
         type Rs CampaignCreativeAssociationsInsert =
              CampaignCreativeAssociation
         type Scopes CampaignCreativeAssociationsInsert =

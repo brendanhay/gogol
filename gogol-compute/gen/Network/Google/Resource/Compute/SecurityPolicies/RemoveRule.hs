@@ -58,11 +58,14 @@ type SecurityPoliciesRemoveRuleResource =
 -- | Deletes a rule at the specified priority.
 --
 -- /See:/ 'securityPoliciesRemoveRule' smart constructor.
-data SecurityPoliciesRemoveRule = SecurityPoliciesRemoveRule'
+data SecurityPoliciesRemoveRule =
+  SecurityPoliciesRemoveRule'
     { _sprrPriority       :: !(Maybe (Textual Int32))
     , _sprrProject        :: !Text
     , _sprrSecurityPolicy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SecurityPoliciesRemoveRule' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ securityPoliciesRemoveRule
     -> Text -- ^ 'sprrSecurityPolicy'
     -> SecurityPoliciesRemoveRule
 securityPoliciesRemoveRule pSprrProject_ pSprrSecurityPolicy_ =
-    SecurityPoliciesRemoveRule'
+  SecurityPoliciesRemoveRule'
     { _sprrPriority = Nothing
     , _sprrProject = pSprrProject_
     , _sprrSecurityPolicy = pSprrSecurityPolicy_
     }
+
 
 -- | The priority of the rule to remove from the security policy.
 sprrPriority :: Lens' SecurityPoliciesRemoveRule (Maybe Int32)

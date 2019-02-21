@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 -- 'UserProFilesList' request conforms to.
 type UserProFilesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            QueryParam "alt" AltJSON :>
              Get '[JSON] UserProFileList
@@ -50,14 +50,16 @@ type UserProFilesListResource =
 --
 -- /See:/ 'userProFilesList' smart constructor.
 data UserProFilesList =
-    UserProFilesList'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  UserProFilesList'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserProFilesList' with the minimum fields required to make a request.
 --
 userProFilesList
     :: UserProFilesList
 userProFilesList = UserProFilesList'
+
 
 instance GoogleRequest UserProFilesList where
         type Rs UserProFilesList = UserProFileList

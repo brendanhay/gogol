@@ -53,9 +53,12 @@ type StatesGetResource =
 -- exist on the server, an HTTP 404 will be returned.
 --
 -- /See:/ 'statesGet' smart constructor.
-newtype StatesGet = StatesGet'
+newtype StatesGet =
+  StatesGet'
     { _sgStateKey :: Textual Int32
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatesGet' with the minimum fields required to make a request.
 --
@@ -65,10 +68,8 @@ newtype StatesGet = StatesGet'
 statesGet
     :: Int32 -- ^ 'sgStateKey'
     -> StatesGet
-statesGet pSgStateKey_ =
-    StatesGet'
-    { _sgStateKey = _Coerce # pSgStateKey_
-    }
+statesGet pSgStateKey_ = StatesGet' {_sgStateKey = _Coerce # pSgStateKey_}
+
 
 -- | The key for the data to be retrieved.
 sgStateKey :: Lens' StatesGet Int32

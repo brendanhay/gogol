@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | The labels used for extra metadata and\/or filtering.
 --
 -- /See:/ 'versionLabels' smart constructor.
-newtype VersionLabels = VersionLabels'
+newtype VersionLabels =
+  VersionLabels'
     { _vlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VersionLabels' with the minimum fields required to make a request.
 --
@@ -36,9 +39,8 @@ versionLabels
     :: HashMap Text Text -- ^ 'vlAddtional'
     -> VersionLabels
 versionLabels pVlAddtional_ =
-    VersionLabels'
-    { _vlAddtional = _Coerce # pVlAddtional_
-    }
+  VersionLabels' {_vlAddtional = _Coerce # pVlAddtional_}
+
 
 vlAddtional :: Lens' VersionLabels (HashMap Text Text)
 vlAddtional
@@ -55,10 +57,13 @@ instance ToJSON VersionLabels where
 
 --
 -- /See:/ 'populateVersionFilesResponse' smart constructor.
-data PopulateVersionFilesResponse = PopulateVersionFilesResponse'
+data PopulateVersionFilesResponse =
+  PopulateVersionFilesResponse'
     { _pvfrUploadURL            :: !(Maybe Text)
     , _pvfrUploadRequiredHashes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PopulateVersionFilesResponse' with the minimum fields required to make a request.
 --
@@ -70,10 +75,9 @@ data PopulateVersionFilesResponse = PopulateVersionFilesResponse'
 populateVersionFilesResponse
     :: PopulateVersionFilesResponse
 populateVersionFilesResponse =
-    PopulateVersionFilesResponse'
-    { _pvfrUploadURL = Nothing
-    , _pvfrUploadRequiredHashes = Nothing
-    }
+  PopulateVersionFilesResponse'
+    {_pvfrUploadURL = Nothing, _pvfrUploadRequiredHashes = Nothing}
+
 
 -- | The URL to which the files should be uploaded, in the format:
 -- \"https:\/\/upload-firebasehosting.googleapis.com\/upload\/sites\/site-name\/versions\/versionID\/files\".
@@ -112,10 +116,13 @@ instance ToJSON PopulateVersionFilesResponse where
 -- | Represents a DNS certificate challenge.
 --
 -- /See:/ 'certDNSChallenge' smart constructor.
-data CertDNSChallenge = CertDNSChallenge'
+data CertDNSChallenge =
+  CertDNSChallenge'
     { _cdcToken      :: !(Maybe Text)
     , _cdcDomainName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CertDNSChallenge' with the minimum fields required to make a request.
 --
@@ -127,10 +134,8 @@ data CertDNSChallenge = CertDNSChallenge'
 certDNSChallenge
     :: CertDNSChallenge
 certDNSChallenge =
-    CertDNSChallenge'
-    { _cdcToken = Nothing
-    , _cdcDomainName = Nothing
-    }
+  CertDNSChallenge' {_cdcToken = Nothing, _cdcDomainName = Nothing}
+
 
 -- | The value that must be present as a TXT record on the domain name to
 -- satisfy the challenge.
@@ -165,14 +170,16 @@ instance ToJSON CertDNSChallenge where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -182,9 +189,12 @@ instance ToJSON Empty where
 
 --
 -- /See:/ 'populateVersionFilesRequest' smart constructor.
-newtype PopulateVersionFilesRequest = PopulateVersionFilesRequest'
+newtype PopulateVersionFilesRequest =
+  PopulateVersionFilesRequest'
     { _pvfrFiles :: Maybe PopulateVersionFilesRequestFiles
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PopulateVersionFilesRequest' with the minimum fields required to make a request.
 --
@@ -194,9 +204,8 @@ newtype PopulateVersionFilesRequest = PopulateVersionFilesRequest'
 populateVersionFilesRequest
     :: PopulateVersionFilesRequest
 populateVersionFilesRequest =
-    PopulateVersionFilesRequest'
-    { _pvfrFiles = Nothing
-    }
+  PopulateVersionFilesRequest' {_pvfrFiles = Nothing}
+
 
 -- | A set of file paths to the hashes corresponding to assets that should be
 -- added to the version. Note that a file path to an empty hash will remove
@@ -222,14 +231,17 @@ instance ToJSON PopulateVersionFilesRequest where
 -- order](\/docs\/hosting\/full-config#hosting_priority_order).
 --
 -- /See:/ 'servingConfig' smart constructor.
-data ServingConfig = ServingConfig'
+data ServingConfig =
+  ServingConfig'
     { _scCleanURLs             :: !(Maybe Bool)
     , _scAppAssociation        :: !(Maybe ServingConfigAppAssociation)
     , _scRewrites              :: !(Maybe [Rewrite])
     , _scRedirects             :: !(Maybe [Redirect])
     , _scHeaders               :: !(Maybe [Header])
     , _scTrailingSlashBehavior :: !(Maybe ServingConfigTrailingSlashBehavior)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServingConfig' with the minimum fields required to make a request.
 --
@@ -249,7 +261,7 @@ data ServingConfig = ServingConfig'
 servingConfig
     :: ServingConfig
 servingConfig =
-    ServingConfig'
+  ServingConfig'
     { _scCleanURLs = Nothing
     , _scAppAssociation = Nothing
     , _scRewrites = Nothing
@@ -257,6 +269,7 @@ servingConfig =
     , _scHeaders = Nothing
     , _scTrailingSlashBehavior = Nothing
     }
+
 
 -- | Defines whether to drop the file extension from uploaded files.
 scCleanURLs :: Lens' ServingConfig (Maybe Bool)
@@ -325,14 +338,17 @@ instance ToJSON ServingConfig where
 -- | The intended behavior and status information of a domain.
 --
 -- /See:/ 'domain' smart constructor.
-data Domain = Domain'
+data Domain =
+  Domain'
     { _dStatus         :: !(Maybe DomainStatus)
     , _dProvisioning   :: !(Maybe DomainProvisioning)
     , _dUpdateTime     :: !(Maybe DateTime')
     , _dDomainName     :: !(Maybe Text)
     , _dDomainRedirect :: !(Maybe DomainRedirect)
     , _dSite           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Domain' with the minimum fields required to make a request.
 --
@@ -352,7 +368,7 @@ data Domain = Domain'
 domain
     :: Domain
 domain =
-    Domain'
+  Domain'
     { _dStatus = Nothing
     , _dProvisioning = Nothing
     , _dUpdateTime = Nothing
@@ -360,6 +376,7 @@ domain =
     , _dDomainRedirect = Nothing
     , _dSite = Nothing
     }
+
 
 -- | Output only. Additional status of the domain association.
 dStatus :: Lens' Domain (Maybe DomainStatus)
@@ -417,10 +434,13 @@ instance ToJSON Domain where
 
 --
 -- /See:/ 'listReleasesResponse' smart constructor.
-data ListReleasesResponse = ListReleasesResponse'
+data ListReleasesResponse =
+  ListReleasesResponse'
     { _lrrNextPageToken :: !(Maybe Text)
     , _lrrReleases      :: !(Maybe [Release])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListReleasesResponse' with the minimum fields required to make a request.
 --
@@ -432,10 +452,8 @@ data ListReleasesResponse = ListReleasesResponse'
 listReleasesResponse
     :: ListReleasesResponse
 listReleasesResponse =
-    ListReleasesResponse'
-    { _lrrNextPageToken = Nothing
-    , _lrrReleases = Nothing
-    }
+  ListReleasesResponse' {_lrrNextPageToken = Nothing, _lrrReleases = Nothing}
+
 
 -- | If there are additional releases remaining beyond the ones in this
 -- response, then supply this token in the next
@@ -472,7 +490,8 @@ instance ToJSON ListReleasesResponse where
 -- | The current certificate provisioning status information for a domain.
 --
 -- /See:/ 'domainProvisioning' smart constructor.
-data DomainProvisioning = DomainProvisioning'
+data DomainProvisioning =
+  DomainProvisioning'
     { _dpExpectedIPs                :: !(Maybe [Text])
     , _dpCertChallengeDNS           :: !(Maybe CertDNSChallenge)
     , _dpDNSFetchTime               :: !(Maybe DateTime')
@@ -481,7 +500,9 @@ data DomainProvisioning = DomainProvisioning'
     , _dpDiscoveredIPs              :: !(Maybe [Text])
     , _dpCertChallengeHTTP          :: !(Maybe CertHTTPChallenge)
     , _dpCertChallengeDiscoveredTxt :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DomainProvisioning' with the minimum fields required to make a request.
 --
@@ -505,7 +526,7 @@ data DomainProvisioning = DomainProvisioning'
 domainProvisioning
     :: DomainProvisioning
 domainProvisioning =
-    DomainProvisioning'
+  DomainProvisioning'
     { _dpExpectedIPs = Nothing
     , _dpCertChallengeDNS = Nothing
     , _dpDNSFetchTime = Nothing
@@ -515,6 +536,7 @@ domainProvisioning =
     , _dpCertChallengeHTTP = Nothing
     , _dpCertChallengeDiscoveredTxt = Nothing
     }
+
 
 -- | The list of IPs to which the domain is expected to resolve.
 dpExpectedIPs :: Lens' DomainProvisioning [Text]
@@ -603,14 +625,17 @@ instance ToJSON DomainProvisioning where
 -- files](sites.versions) that is set to be public at a particular time.
 --
 -- /See:/ 'release' smart constructor.
-data Release = Release'
+data Release =
+  Release'
     { _rReleaseTime :: !(Maybe DateTime')
     , _rReleaseUser :: !(Maybe ActingUser)
     , _rName        :: !(Maybe Text)
     , _rVersion     :: !(Maybe Version)
     , _rType        :: !(Maybe ReleaseType)
     , _rMessage     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Release' with the minimum fields required to make a request.
 --
@@ -630,7 +655,7 @@ data Release = Release'
 release
     :: Release
 release =
-    Release'
+  Release'
     { _rReleaseTime = Nothing
     , _rReleaseUser = Nothing
     , _rName = Nothing
@@ -638,6 +663,7 @@ release =
     , _rType = Nothing
     , _rMessage = Nothing
     }
+
 
 -- | Output only. The time at which the version is set to be public.
 rReleaseTime :: Lens' Release (Maybe UTCTime)
@@ -696,11 +722,14 @@ instance ToJSON Release where
 -- | A static content file that is part of a version.
 --
 -- /See:/ 'versionFile' smart constructor.
-data VersionFile = VersionFile'
+data VersionFile =
+  VersionFile'
     { _vfStatus :: !(Maybe VersionFileStatus)
     , _vfHash   :: !(Maybe Text)
     , _vfPath   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VersionFile' with the minimum fields required to make a request.
 --
@@ -714,11 +743,8 @@ data VersionFile = VersionFile'
 versionFile
     :: VersionFile
 versionFile =
-    VersionFile'
-    { _vfStatus = Nothing
-    , _vfHash = Nothing
-    , _vfPath = Nothing
-    }
+  VersionFile' {_vfStatus = Nothing, _vfHash = Nothing, _vfPath = Nothing}
+
 
 -- | Output only. The current status of a particular file in the specified
 -- version.
@@ -754,10 +780,13 @@ instance ToJSON VersionFile where
 -- pattern.
 --
 -- /See:/ 'header' smart constructor.
-data Header = Header'
+data Header =
+  Header'
     { _hHeaders :: !(Maybe HeaderHeaders)
     , _hGlob    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Header' with the minimum fields required to make a request.
 --
@@ -768,11 +797,8 @@ data Header = Header'
 -- * 'hGlob'
 header
     :: Header
-header =
-    Header'
-    { _hHeaders = Nothing
-    , _hGlob = Nothing
-    }
+header = Header' {_hHeaders = Nothing, _hGlob = Nothing}
+
 
 -- | Required. The additional headers to add to the response.
 hHeaders :: Lens' Header (Maybe HeaderHeaders)
@@ -801,10 +827,13 @@ instance ToJSON Header where
 -- creating a release or finalizing a version.
 --
 -- /See:/ 'actingUser' smart constructor.
-data ActingUser = ActingUser'
+data ActingUser =
+  ActingUser'
     { _auEmail    :: !(Maybe Text)
     , _auImageURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActingUser' with the minimum fields required to make a request.
 --
@@ -815,11 +844,8 @@ data ActingUser = ActingUser'
 -- * 'auImageURL'
 actingUser
     :: ActingUser
-actingUser =
-    ActingUser'
-    { _auEmail = Nothing
-    , _auImageURL = Nothing
-    }
+actingUser = ActingUser' {_auEmail = Nothing, _auImageURL = Nothing}
+
 
 -- | The email address of the user when the user performed the action.
 auEmail :: Lens' ActingUser (Maybe Text)
@@ -849,7 +875,8 @@ instance ToJSON ActingUser where
 -- files](sites.versions.files) that determine how a site is displayed.
 --
 -- /See:/ 'version' smart constructor.
-data Version = Version'
+data Version =
+  Version'
     { _vStatus       :: !(Maybe VersionStatus)
     , _vFinalizeTime :: !(Maybe DateTime')
     , _vConfig       :: !(Maybe ServingConfig)
@@ -862,7 +889,9 @@ data Version = Version'
     , _vCreateUser   :: !(Maybe ActingUser)
     , _vDeleteUser   :: !(Maybe ActingUser)
     , _vCreateTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
@@ -894,7 +923,7 @@ data Version = Version'
 version
     :: Version
 version =
-    Version'
+  Version'
     { _vStatus = Nothing
     , _vFinalizeTime = Nothing
     , _vConfig = Nothing
@@ -908,6 +937,7 @@ version =
     , _vDeleteUser = Nothing
     , _vCreateTime = Nothing
     }
+
 
 -- | The deploy status of a version.
 -- For a successful deploy, call the
@@ -1025,10 +1055,13 @@ instance ToJSON Version where
 
 --
 -- /See:/ 'listDomainsResponse' smart constructor.
-data ListDomainsResponse = ListDomainsResponse'
+data ListDomainsResponse =
+  ListDomainsResponse'
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDomains       :: !(Maybe [Domain])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDomainsResponse' with the minimum fields required to make a request.
 --
@@ -1040,10 +1073,8 @@ data ListDomainsResponse = ListDomainsResponse'
 listDomainsResponse
     :: ListDomainsResponse
 listDomainsResponse =
-    ListDomainsResponse'
-    { _ldrNextPageToken = Nothing
-    , _ldrDomains = Nothing
-    }
+  ListDomainsResponse' {_ldrNextPageToken = Nothing, _ldrDomains = Nothing}
+
 
 -- | The pagination token, if more results exist.
 ldrNextPageToken :: Lens' ListDomainsResponse (Maybe Text)
@@ -1078,11 +1109,14 @@ instance ToJSON ListDomainsResponse where
 -- request URL path.
 --
 -- /See:/ 'redirect' smart constructor.
-data Redirect = Redirect'
+data Redirect =
+  Redirect'
     { _rLocation   :: !(Maybe Text)
     , _rGlob       :: !(Maybe Text)
     , _rStatusCode :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Redirect' with the minimum fields required to make a request.
 --
@@ -1096,11 +1130,8 @@ data Redirect = Redirect'
 redirect
     :: Redirect
 redirect =
-    Redirect'
-    { _rLocation = Nothing
-    , _rGlob = Nothing
-    , _rStatusCode = Nothing
-    }
+  Redirect' {_rLocation = Nothing, _rGlob = Nothing, _rStatusCode = Nothing}
+
 
 -- | Required. The value to put in the HTTP location header of the response.
 -- The location can contain capture group values from the pattern using a
@@ -1140,15 +1171,71 @@ instance ToJSON Redirect where
                   ("glob" .=) <$> _rGlob,
                   ("statusCode" .=) <$> _rStatusCode])
 
+-- | A configured rewrite that will direct any requests to a Cloud Run
+-- service. If the Cloud Run service does not exist when setting or
+-- updating your Firebase Hosting configuration then the request will fail.
+-- Any errors from the Cloud Run service (including when the service has
+-- been deleted) will be passed back down to the end user.
+--
+-- /See:/ 'cloudRunRewrite' smart constructor.
+data CloudRunRewrite =
+  CloudRunRewrite'
+    { _crrServiceId :: !(Maybe Text)
+    , _crrRegion    :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CloudRunRewrite' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crrServiceId'
+--
+-- * 'crrRegion'
+cloudRunRewrite
+    :: CloudRunRewrite
+cloudRunRewrite =
+  CloudRunRewrite' {_crrServiceId = Nothing, _crrRegion = Nothing}
+
+
+-- | Required. User supplied ID of the Cloud Run service.
+crrServiceId :: Lens' CloudRunRewrite (Maybe Text)
+crrServiceId
+  = lens _crrServiceId (\ s a -> s{_crrServiceId = a})
+
+-- | Optional. The region where the Cloud Run service is hosted. Defaults to
+-- \`us-central1\` if not supplied.
+crrRegion :: Lens' CloudRunRewrite (Maybe Text)
+crrRegion
+  = lens _crrRegion (\ s a -> s{_crrRegion = a})
+
+instance FromJSON CloudRunRewrite where
+        parseJSON
+          = withObject "CloudRunRewrite"
+              (\ o ->
+                 CloudRunRewrite' <$>
+                   (o .:? "serviceId") <*> (o .:? "region"))
+
+instance ToJSON CloudRunRewrite where
+        toJSON CloudRunRewrite'{..}
+          = object
+              (catMaybes
+                 [("serviceId" .=) <$> _crrServiceId,
+                  ("region" .=) <$> _crrRegion])
+
 -- | Defines the behavior of a domain-level redirect. Domain redirects
 -- preserve the path of the redirect but replace the requested domain with
 -- the one specified in the redirect configuration.
 --
 -- /See:/ 'domainRedirect' smart constructor.
-data DomainRedirect = DomainRedirect'
+data DomainRedirect =
+  DomainRedirect'
     { _drDomainName :: !(Maybe Text)
     , _drType       :: !(Maybe DomainRedirectType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DomainRedirect' with the minimum fields required to make a request.
 --
@@ -1159,11 +1246,8 @@ data DomainRedirect = DomainRedirect'
 -- * 'drType'
 domainRedirect
     :: DomainRedirect
-domainRedirect =
-    DomainRedirect'
-    { _drDomainName = Nothing
-    , _drType = Nothing
-    }
+domainRedirect = DomainRedirect' {_drDomainName = Nothing, _drType = Nothing}
+
 
 -- | Required. The domain name to redirect to.
 drDomainName :: Lens' DomainRedirect (Maybe Text)
@@ -1194,12 +1278,16 @@ instance ToJSON DomainRedirect where
 -- in the configuration.
 --
 -- /See:/ 'rewrite' smart constructor.
-data Rewrite = Rewrite'
+data Rewrite =
+  Rewrite'
     { _rewFunction     :: !(Maybe Text)
     , _rewPath         :: !(Maybe Text)
+    , _rewRun          :: !(Maybe CloudRunRewrite)
     , _rewGlob         :: !(Maybe Text)
     , _rewDynamicLinks :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Rewrite' with the minimum fields required to make a request.
 --
@@ -1209,18 +1297,22 @@ data Rewrite = Rewrite'
 --
 -- * 'rewPath'
 --
+-- * 'rewRun'
+--
 -- * 'rewGlob'
 --
 -- * 'rewDynamicLinks'
 rewrite
     :: Rewrite
 rewrite =
-    Rewrite'
+  Rewrite'
     { _rewFunction = Nothing
     , _rewPath = Nothing
+    , _rewRun = Nothing
     , _rewGlob = Nothing
     , _rewDynamicLinks = Nothing
     }
+
 
 -- | The function to proxy requests to. Must match the exported function name
 -- exactly.
@@ -1231,6 +1323,10 @@ rewFunction
 -- | The URL path to rewrite the request to.
 rewPath :: Lens' Rewrite (Maybe Text)
 rewPath = lens _rewPath (\ s a -> s{_rewPath = a})
+
+-- | The request will be forwarded to Cloud Run.
+rewRun :: Lens' Rewrite (Maybe CloudRunRewrite)
+rewRun = lens _rewRun (\ s a -> s{_rewRun = a})
 
 -- | Required. The user-supplied [glob
 -- pattern](\/docs\/hosting\/full-config#glob_pattern_matching) to match
@@ -1250,7 +1346,8 @@ instance FromJSON Rewrite where
               (\ o ->
                  Rewrite' <$>
                    (o .:? "function") <*> (o .:? "path") <*>
-                     (o .:? "glob")
+                     (o .:? "run")
+                     <*> (o .:? "glob")
                      <*> (o .:? "dynamicLinks"))
 
 instance ToJSON Rewrite where
@@ -1258,7 +1355,8 @@ instance ToJSON Rewrite where
           = object
               (catMaybes
                  [("function" .=) <$> _rewFunction,
-                  ("path" .=) <$> _rewPath, ("glob" .=) <$> _rewGlob,
+                  ("path" .=) <$> _rewPath, ("run" .=) <$> _rewRun,
+                  ("glob" .=) <$> _rewGlob,
                   ("dynamicLinks" .=) <$> _rewDynamicLinks])
 
 -- | A set of file paths to the hashes corresponding to assets that should be
@@ -1267,9 +1365,12 @@ instance ToJSON Rewrite where
 -- taking the SHA256 hash of the newly compressed file.
 --
 -- /See:/ 'populateVersionFilesRequestFiles' smart constructor.
-newtype PopulateVersionFilesRequestFiles = PopulateVersionFilesRequestFiles'
+newtype PopulateVersionFilesRequestFiles =
+  PopulateVersionFilesRequestFiles'
     { _pvfrfAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PopulateVersionFilesRequestFiles' with the minimum fields required to make a request.
 --
@@ -1280,9 +1381,9 @@ populateVersionFilesRequestFiles
     :: HashMap Text Text -- ^ 'pvfrfAddtional'
     -> PopulateVersionFilesRequestFiles
 populateVersionFilesRequestFiles pPvfrfAddtional_ =
-    PopulateVersionFilesRequestFiles'
-    { _pvfrfAddtional = _Coerce # pPvfrfAddtional_
-    }
+  PopulateVersionFilesRequestFiles'
+    {_pvfrfAddtional = _Coerce # pPvfrfAddtional_}
+
 
 pvfrfAddtional :: Lens' PopulateVersionFilesRequestFiles (HashMap Text Text)
 pvfrfAddtional
@@ -1305,9 +1406,12 @@ instance ToJSON PopulateVersionFilesRequestFiles
 -- | Required. The additional headers to add to the response.
 --
 -- /See:/ 'headerHeaders' smart constructor.
-newtype HeaderHeaders = HeaderHeaders'
+newtype HeaderHeaders =
+  HeaderHeaders'
     { _hhAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HeaderHeaders' with the minimum fields required to make a request.
 --
@@ -1318,9 +1422,8 @@ headerHeaders
     :: HashMap Text Text -- ^ 'hhAddtional'
     -> HeaderHeaders
 headerHeaders pHhAddtional_ =
-    HeaderHeaders'
-    { _hhAddtional = _Coerce # pHhAddtional_
-    }
+  HeaderHeaders' {_hhAddtional = _Coerce # pHhAddtional_}
+
 
 hhAddtional :: Lens' HeaderHeaders (HashMap Text Text)
 hhAddtional
@@ -1338,10 +1441,13 @@ instance ToJSON HeaderHeaders where
 -- | Represents an HTTP certificate challenge.
 --
 -- /See:/ 'certHTTPChallenge' smart constructor.
-data CertHTTPChallenge = CertHTTPChallenge'
+data CertHTTPChallenge =
+  CertHTTPChallenge'
     { _chttpcPath  :: !(Maybe Text)
     , _chttpcToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CertHTTPChallenge' with the minimum fields required to make a request.
 --
@@ -1353,10 +1459,8 @@ data CertHTTPChallenge = CertHTTPChallenge'
 certHTTPChallenge
     :: CertHTTPChallenge
 certHTTPChallenge =
-    CertHTTPChallenge'
-    { _chttpcPath = Nothing
-    , _chttpcToken = Nothing
-    }
+  CertHTTPChallenge' {_chttpcPath = Nothing, _chttpcToken = Nothing}
+
 
 -- | The URL path on which to serve the specified token to satisfy the
 -- certificate challenge.
@@ -1386,10 +1490,13 @@ instance ToJSON CertHTTPChallenge where
 
 --
 -- /See:/ 'listVersionFilesResponse' smart constructor.
-data ListVersionFilesResponse = ListVersionFilesResponse'
+data ListVersionFilesResponse =
+  ListVersionFilesResponse'
     { _lvfrNextPageToken :: !(Maybe Text)
     , _lvfrFiles         :: !(Maybe [VersionFile])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListVersionFilesResponse' with the minimum fields required to make a request.
 --
@@ -1401,10 +1508,8 @@ data ListVersionFilesResponse = ListVersionFilesResponse'
 listVersionFilesResponse
     :: ListVersionFilesResponse
 listVersionFilesResponse =
-    ListVersionFilesResponse'
-    { _lvfrNextPageToken = Nothing
-    , _lvfrFiles = Nothing
-    }
+  ListVersionFilesResponse' {_lvfrNextPageToken = Nothing, _lvfrFiles = Nothing}
+
 
 -- | The pagination token, if more results exist.
 lvfrNextPageToken :: Lens' ListVersionFilesResponse (Maybe Text)
@@ -1438,9 +1543,12 @@ instance ToJSON ListVersionFilesResponse where
 -- controls Firebase Hosting serving behavior
 --
 -- /See:/ 'siteConfig' smart constructor.
-newtype SiteConfig = SiteConfig'
+newtype SiteConfig =
+  SiteConfig'
     { _scMaxVersions :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SiteConfig' with the minimum fields required to make a request.
 --
@@ -1449,10 +1557,8 @@ newtype SiteConfig = SiteConfig'
 -- * 'scMaxVersions'
 siteConfig
     :: SiteConfig
-siteConfig =
-    SiteConfig'
-    { _scMaxVersions = Nothing
-    }
+siteConfig = SiteConfig' {_scMaxVersions = Nothing}
+
 
 -- | The number of FINALIZED versions that will be held for a site before
 -- automatic deletion. When a new version is deployed, content for versions

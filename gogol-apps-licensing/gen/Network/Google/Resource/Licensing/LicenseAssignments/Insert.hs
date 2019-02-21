@@ -59,11 +59,14 @@ type LicenseAssignmentsInsertResource =
 -- | Assign License.
 --
 -- /See:/ 'licenseAssignmentsInsert' smart constructor.
-data LicenseAssignmentsInsert = LicenseAssignmentsInsert'
+data LicenseAssignmentsInsert =
+  LicenseAssignmentsInsert'
     { _laiSKUId     :: !Text
     , _laiPayload   :: !LicenseAssignmentInsert
     , _laiProductId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LicenseAssignmentsInsert' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ licenseAssignmentsInsert
     -> Text -- ^ 'laiProductId'
     -> LicenseAssignmentsInsert
 licenseAssignmentsInsert pLaiSKUId_ pLaiPayload_ pLaiProductId_ =
-    LicenseAssignmentsInsert'
+  LicenseAssignmentsInsert'
     { _laiSKUId = pLaiSKUId_
     , _laiPayload = pLaiPayload_
     , _laiProductId = pLaiProductId_
     }
+
 
 -- | Name for sku
 laiSKUId :: Lens' LicenseAssignmentsInsert Text

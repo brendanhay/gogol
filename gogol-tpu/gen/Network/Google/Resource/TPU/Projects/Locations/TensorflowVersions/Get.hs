@@ -60,14 +60,17 @@ type ProjectsLocationsTensorflowVersionsGetResource =
 -- | Gets TensorFlow Version.
 --
 -- /See:/ 'projectsLocationsTensorflowVersionsGet' smart constructor.
-data ProjectsLocationsTensorflowVersionsGet = ProjectsLocationsTensorflowVersionsGet'
+data ProjectsLocationsTensorflowVersionsGet =
+  ProjectsLocationsTensorflowVersionsGet'
     { _pltvgXgafv          :: !(Maybe Xgafv)
     , _pltvgUploadProtocol :: !(Maybe Text)
     , _pltvgAccessToken    :: !(Maybe Text)
     , _pltvgUploadType     :: !(Maybe Text)
     , _pltvgName           :: !Text
     , _pltvgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsTensorflowVersionsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ projectsLocationsTensorflowVersionsGet
     :: Text -- ^ 'pltvgName'
     -> ProjectsLocationsTensorflowVersionsGet
 projectsLocationsTensorflowVersionsGet pPltvgName_ =
-    ProjectsLocationsTensorflowVersionsGet'
+  ProjectsLocationsTensorflowVersionsGet'
     { _pltvgXgafv = Nothing
     , _pltvgUploadProtocol = Nothing
     , _pltvgAccessToken = Nothing
@@ -96,6 +99,7 @@ projectsLocationsTensorflowVersionsGet pPltvgName_ =
     , _pltvgName = pPltvgName_
     , _pltvgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltvgXgafv :: Lens' ProjectsLocationsTensorflowVersionsGet (Maybe Xgafv)
@@ -132,7 +136,8 @@ pltvgCallback
       (\ s a -> s{_pltvgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTensorflowVersionsGet where
+           ProjectsLocationsTensorflowVersionsGet
+         where
         type Rs ProjectsLocationsTensorflowVersionsGet =
              TensorFlowVersion
         type Scopes ProjectsLocationsTensorflowVersionsGet =

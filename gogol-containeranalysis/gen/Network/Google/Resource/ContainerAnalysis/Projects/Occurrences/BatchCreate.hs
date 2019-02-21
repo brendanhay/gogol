@@ -63,7 +63,8 @@ type ProjectsOccurrencesBatchCreateResource =
 -- | Creates new occurrences in batch.
 --
 -- /See:/ 'projectsOccurrencesBatchCreate' smart constructor.
-data ProjectsOccurrencesBatchCreate = ProjectsOccurrencesBatchCreate'
+data ProjectsOccurrencesBatchCreate =
+  ProjectsOccurrencesBatchCreate'
     { _pobcParent         :: !Text
     , _pobcXgafv          :: !(Maybe Xgafv)
     , _pobcUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsOccurrencesBatchCreate = ProjectsOccurrencesBatchCreate'
     , _pobcUploadType     :: !(Maybe Text)
     , _pobcPayload        :: !BatchCreateOccurrencesRequest
     , _pobcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOccurrencesBatchCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsOccurrencesBatchCreate
     -> BatchCreateOccurrencesRequest -- ^ 'pobcPayload'
     -> ProjectsOccurrencesBatchCreate
 projectsOccurrencesBatchCreate pPobcParent_ pPobcPayload_ =
-    ProjectsOccurrencesBatchCreate'
+  ProjectsOccurrencesBatchCreate'
     { _pobcParent = pPobcParent_
     , _pobcXgafv = Nothing
     , _pobcUploadProtocol = Nothing
@@ -104,6 +107,7 @@ projectsOccurrencesBatchCreate pPobcParent_ pPobcPayload_ =
     , _pobcPayload = pPobcPayload_
     , _pobcCallback = Nothing
     }
+
 
 -- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
 -- which the occurrences are to be created.

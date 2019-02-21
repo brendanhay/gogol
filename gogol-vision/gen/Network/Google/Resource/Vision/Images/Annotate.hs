@@ -64,14 +64,17 @@ type ImagesAnnotateResource =
 -- | Run image detection and annotation for a batch of images.
 --
 -- /See:/ 'imagesAnnotate' smart constructor.
-data ImagesAnnotate = ImagesAnnotate'
+data ImagesAnnotate =
+  ImagesAnnotate'
     { _iaXgafv          :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
     , _iaAccessToken    :: !(Maybe Text)
     , _iaUploadType     :: !(Maybe Text)
     , _iaPayload        :: !GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
     , _iaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImagesAnnotate' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ imagesAnnotate
     :: GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest -- ^ 'iaPayload'
     -> ImagesAnnotate
 imagesAnnotate pIaPayload_ =
-    ImagesAnnotate'
+  ImagesAnnotate'
     { _iaXgafv = Nothing
     , _iaUploadProtocol = Nothing
     , _iaAccessToken = Nothing
@@ -100,6 +103,7 @@ imagesAnnotate pIaPayload_ =
     , _iaPayload = pIaPayload_
     , _iaCallback = Nothing
     }
+
 
 -- | V1 error format.
 iaXgafv :: Lens' ImagesAnnotate (Maybe Xgafv)

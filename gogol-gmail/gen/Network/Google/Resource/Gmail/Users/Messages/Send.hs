@@ -69,10 +69,13 @@ type UsersMessagesSendResource =
 -- headers.
 --
 -- /See:/ 'usersMessagesSend' smart constructor.
-data UsersMessagesSend = UsersMessagesSend'
+data UsersMessagesSend =
+  UsersMessagesSend'
     { _umsPayload :: !Message
     , _umsUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersMessagesSend' with the minimum fields required to make a request.
 --
@@ -85,10 +88,8 @@ usersMessagesSend
     :: Message -- ^ 'umsPayload'
     -> UsersMessagesSend
 usersMessagesSend pUmsPayload_ =
-    UsersMessagesSend'
-    { _umsPayload = pUmsPayload_
-    , _umsUserId = "me"
-    }
+  UsersMessagesSend' {_umsPayload = pUmsPayload_, _umsUserId = "me"}
+
 
 -- | Multipart request metadata.
 umsPayload :: Lens' UsersMessagesSend Message
@@ -117,7 +118,8 @@ instance GoogleRequest UsersMessagesSend where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload UsersMessagesSend) where
+           (MediaUpload UsersMessagesSend)
+         where
         type Rs (MediaUpload UsersMessagesSend) = Message
         type Scopes (MediaUpload UsersMessagesSend) =
              Scopes UsersMessagesSend

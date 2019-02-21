@@ -51,9 +51,12 @@ type BillingInfoGetResource =
 -- | Returns the billing information for one account specified by account ID.
 --
 -- /See:/ 'billingInfoGet' smart constructor.
-newtype BillingInfoGet = BillingInfoGet'
+newtype BillingInfoGet =
+  BillingInfoGet'
     { _bigAccountId :: Textual Int32
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingInfoGet' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ billingInfoGet
     :: Int32 -- ^ 'bigAccountId'
     -> BillingInfoGet
 billingInfoGet pBigAccountId_ =
-    BillingInfoGet'
-    { _bigAccountId = _Coerce # pBigAccountId_
-    }
+  BillingInfoGet' {_bigAccountId = _Coerce # pBigAccountId_}
+
 
 -- | The account id.
 bigAccountId :: Lens' BillingInfoGet Int32

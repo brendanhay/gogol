@@ -54,10 +54,13 @@ type CustomersInsertResource =
 -- | Order a new customer\'s account.
 --
 -- /See:/ 'customersInsert' smart constructor.
-data CustomersInsert = CustomersInsert'
+data CustomersInsert =
+  CustomersInsert'
     { _ciPayload           :: !Customer
     , _ciCustomerAuthToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomersInsert' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ customersInsert
     :: Customer -- ^ 'ciPayload'
     -> CustomersInsert
 customersInsert pCiPayload_ =
-    CustomersInsert'
-    { _ciPayload = pCiPayload_
-    , _ciCustomerAuthToken = Nothing
-    }
+  CustomersInsert' {_ciPayload = pCiPayload_, _ciCustomerAuthToken = Nothing}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CustomersInsert Customer

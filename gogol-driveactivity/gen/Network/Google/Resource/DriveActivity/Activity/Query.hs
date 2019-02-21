@@ -61,14 +61,17 @@ type ActivityQueryResource =
 -- | Query past activity in Google Drive.
 --
 -- /See:/ 'activityQuery' smart constructor.
-data ActivityQuery = ActivityQuery'
+data ActivityQuery =
+  ActivityQuery'
     { _aqXgafv          :: !(Maybe Xgafv)
     , _aqUploadProtocol :: !(Maybe Text)
     , _aqAccessToken    :: !(Maybe Text)
     , _aqUploadType     :: !(Maybe Text)
     , _aqPayload        :: !QueryDriveActivityRequest
     , _aqCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityQuery' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ activityQuery
     :: QueryDriveActivityRequest -- ^ 'aqPayload'
     -> ActivityQuery
 activityQuery pAqPayload_ =
-    ActivityQuery'
+  ActivityQuery'
     { _aqXgafv = Nothing
     , _aqUploadProtocol = Nothing
     , _aqAccessToken = Nothing
@@ -97,6 +100,7 @@ activityQuery pAqPayload_ =
     , _aqPayload = pAqPayload_
     , _aqCallback = Nothing
     }
+
 
 -- | V1 error format.
 aqXgafv :: Lens' ActivityQuery (Maybe Xgafv)

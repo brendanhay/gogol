@@ -57,10 +57,13 @@ type BackendBucketsGetResource =
 -- backend buckets by making a list() request.
 --
 -- /See:/ 'backendBucketsGet' smart constructor.
-data BackendBucketsGet = BackendBucketsGet'
+data BackendBucketsGet =
+  BackendBucketsGet'
     { _bbgBackendBucket :: !Text
     , _bbgProject       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendBucketsGet' with the minimum fields required to make a request.
 --
@@ -74,10 +77,9 @@ backendBucketsGet
     -> Text -- ^ 'bbgProject'
     -> BackendBucketsGet
 backendBucketsGet pBbgBackendBucket_ pBbgProject_ =
-    BackendBucketsGet'
-    { _bbgBackendBucket = pBbgBackendBucket_
-    , _bbgProject = pBbgProject_
-    }
+  BackendBucketsGet'
+    {_bbgBackendBucket = pBbgBackendBucket_, _bbgProject = pBbgProject_}
+
 
 -- | Name of the BackendBucket resource to return.
 bbgBackendBucket :: Lens' BackendBucketsGet Text

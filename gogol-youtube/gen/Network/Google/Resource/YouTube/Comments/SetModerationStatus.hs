@@ -62,11 +62,14 @@ type CommentsSetModerationStatusResource =
 -- comments.
 --
 -- /See:/ 'commentsSetModerationStatus' smart constructor.
-data CommentsSetModerationStatus = CommentsSetModerationStatus'
+data CommentsSetModerationStatus =
+  CommentsSetModerationStatus'
     { _csmsBanAuthor        :: !Bool
     , _csmsModerationStatus :: !CommentsSetModerationStatusModerationStatus
     , _csmsId               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsSetModerationStatus' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ commentsSetModerationStatus
     -> Text -- ^ 'csmsId'
     -> CommentsSetModerationStatus
 commentsSetModerationStatus pCsmsModerationStatus_ pCsmsId_ =
-    CommentsSetModerationStatus'
+  CommentsSetModerationStatus'
     { _csmsBanAuthor = False
     , _csmsModerationStatus = pCsmsModerationStatus_
     , _csmsId = pCsmsId_
     }
+
 
 -- | The banAuthor parameter lets you indicate that you want to automatically
 -- reject any additional comments written by the comment\'s author. Set the

@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'SizesList' request conforms to.
 type SizesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>
@@ -67,13 +67,16 @@ type SizesListResource =
 -- differ from the list seen in the Trafficking UI.
 --
 -- /See:/ 'sizesList' smart constructor.
-data SizesList = SizesList'
+data SizesList =
+  SizesList'
     { _slHeight      :: !(Maybe (Textual Int32))
     , _slIds         :: !(Maybe [Textual Int64])
     , _slWidth       :: !(Maybe (Textual Int32))
     , _slProFileId   :: !(Textual Int64)
     , _slIabStandard :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SizesList' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ sizesList
     :: Int64 -- ^ 'slProFileId'
     -> SizesList
 sizesList pSlProFileId_ =
-    SizesList'
+  SizesList'
     { _slHeight = Nothing
     , _slIds = Nothing
     , _slWidth = Nothing
     , _slProFileId = _Coerce # pSlProFileId_
     , _slIabStandard = Nothing
     }
+
 
 -- | Select only sizes with this height.
 slHeight :: Lens' SizesList (Maybe Int32)

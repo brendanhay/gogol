@@ -24,11 +24,14 @@ import           Network.Google.Prelude
 -- which contain the detail of associated entities.
 --
 -- /See:/ 'searchResponse' smart constructor.
-data SearchResponse = SearchResponse'
+data SearchResponse =
+  SearchResponse'
     { _srContext         :: !(Maybe JSONValue)
     , _srItemListElement :: !(Maybe [JSONValue])
     , _srType            :: !(Maybe JSONValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchResponse' with the minimum fields required to make a request.
 --
@@ -42,11 +45,9 @@ data SearchResponse = SearchResponse'
 searchResponse
     :: SearchResponse
 searchResponse =
-    SearchResponse'
-    { _srContext = Nothing
-    , _srItemListElement = Nothing
-    , _srType = Nothing
-    }
+  SearchResponse'
+    {_srContext = Nothing, _srItemListElement = Nothing, _srType = Nothing}
+
 
 -- | The local context applicable for the response. See more details at
 -- http:\/\/www.w3.org\/TR\/json-ld\/#context-definitions.

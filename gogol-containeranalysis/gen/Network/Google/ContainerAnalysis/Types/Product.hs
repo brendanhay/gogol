@@ -24,10 +24,13 @@ import           Network.Google.Prelude
 -- system.
 --
 -- /See:/ 'installation' smart constructor.
-data Installation = Installation'
+data Installation =
+  Installation'
     { _iLocation :: !(Maybe [Location])
     , _iName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Installation' with the minimum fields required to make a request.
 --
@@ -38,11 +41,8 @@ data Installation = Installation'
 -- * 'iName'
 installation
     :: Installation
-installation =
-    Installation'
-    { _iLocation = Nothing
-    , _iName = Nothing
-    }
+installation = Installation' {_iLocation = Nothing, _iName = Nothing}
+
 
 -- | Required. All of the places within the filesystem versions of this
 -- package have been found.
@@ -74,11 +74,15 @@ instance ToJSON Installation where
 -- Note.
 --
 -- /See:/ 'vulnerability' smart constructor.
-data Vulnerability = Vulnerability'
-    { _vCvssScore :: !(Maybe (Textual Double))
-    , _vSeverity  :: !(Maybe VulnerabilitySeverity)
-    , _vDetails   :: !(Maybe [Detail])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data Vulnerability =
+  Vulnerability'
+    { _vCvssScore      :: !(Maybe (Textual Double))
+    , _vSeverity       :: !(Maybe VulnerabilitySeverity)
+    , _vDetails        :: !(Maybe [Detail])
+    , _vWindowsDetails :: !(Maybe [WindowsDetail])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Vulnerability' with the minimum fields required to make a request.
 --
@@ -89,14 +93,18 @@ data Vulnerability = Vulnerability'
 -- * 'vSeverity'
 --
 -- * 'vDetails'
+--
+-- * 'vWindowsDetails'
 vulnerability
     :: Vulnerability
 vulnerability =
-    Vulnerability'
+  Vulnerability'
     { _vCvssScore = Nothing
     , _vSeverity = Nothing
     , _vDetails = Nothing
+    , _vWindowsDetails = Nothing
     }
+
 
 -- | The CVSS score for this vulnerability.
 vCvssScore :: Lens' Vulnerability (Maybe Double)
@@ -118,13 +126,25 @@ vDetails
       _Default
       . _Coerce
 
+-- | Windows details get their own format because the information format and
+-- model don\'t match a normal detail. Specifically Windows updates are
+-- done as patches, thus Windows vulnerabilities really are a missing
+-- package, rather than a package being at an incorrect version.
+vWindowsDetails :: Lens' Vulnerability [WindowsDetail]
+vWindowsDetails
+  = lens _vWindowsDetails
+      (\ s a -> s{_vWindowsDetails = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON Vulnerability where
         parseJSON
           = withObject "Vulnerability"
               (\ o ->
                  Vulnerability' <$>
                    (o .:? "cvssScore") <*> (o .:? "severity") <*>
-                     (o .:? "details" .!= mempty))
+                     (o .:? "details" .!= mempty)
+                     <*> (o .:? "windowsDetails" .!= mempty))
 
 instance ToJSON Vulnerability where
         toJSON Vulnerability'{..}
@@ -132,7 +152,8 @@ instance ToJSON Vulnerability where
               (catMaybes
                  [("cvssScore" .=) <$> _vCvssScore,
                   ("severity" .=) <$> _vSeverity,
-                  ("details" .=) <$> _vDetails])
+                  ("details" .=) <$> _vDetails,
+                  ("windowsDetails" .=) <$> _vWindowsDetails])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
@@ -171,11 +192,14 @@ instance ToJSON Vulnerability where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -188,12 +212,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -235,9 +255,12 @@ instance ToJSON Status where
 -- and severity type.
 --
 -- /See:/ 'vulnerabilityOccurrencesSummary' smart constructor.
-newtype VulnerabilityOccurrencesSummary = VulnerabilityOccurrencesSummary'
+newtype VulnerabilityOccurrencesSummary =
+  VulnerabilityOccurrencesSummary'
     { _vosCounts :: Maybe [FixableTotalByDigest]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VulnerabilityOccurrencesSummary' with the minimum fields required to make a request.
 --
@@ -247,9 +270,8 @@ newtype VulnerabilityOccurrencesSummary = VulnerabilityOccurrencesSummary'
 vulnerabilityOccurrencesSummary
     :: VulnerabilityOccurrencesSummary
 vulnerabilityOccurrencesSummary =
-    VulnerabilityOccurrencesSummary'
-    { _vosCounts = Nothing
-    }
+  VulnerabilityOccurrencesSummary' {_vosCounts = Nothing}
+
 
 -- | A listing by resource of the number of fixable and total
 -- vulnerabilities.
@@ -275,7 +297,8 @@ instance ToJSON VulnerabilityOccurrencesSummary where
 -- full details about the build from source to completion.
 --
 -- /See:/ 'buildProvenance' smart constructor.
-data BuildProvenance = BuildProvenance'
+data BuildProvenance =
+  BuildProvenance'
     { _bpCreator          :: !(Maybe Text)
     , _bpSourceProvenance :: !(Maybe Source)
     , _bpCommands         :: !(Maybe [Command])
@@ -289,7 +312,9 @@ data BuildProvenance = BuildProvenance'
     , _bpBuildOptions     :: !(Maybe BuildProvenanceBuildOptions)
     , _bpCreateTime       :: !(Maybe DateTime')
     , _bpLogsURI          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildProvenance' with the minimum fields required to make a request.
 --
@@ -323,7 +348,7 @@ data BuildProvenance = BuildProvenance'
 buildProvenance
     :: BuildProvenance
 buildProvenance =
-    BuildProvenance'
+  BuildProvenance'
     { _bpCreator = Nothing
     , _bpSourceProvenance = Nothing
     , _bpCommands = Nothing
@@ -338,6 +363,7 @@ buildProvenance =
     , _bpCreateTime = Nothing
     , _bpLogsURI = Nothing
     }
+
 
 -- | E-mail address of the user who initiated this build. Note that this was
 -- the user\'s e-mail address at the time the build was initiated; this
@@ -472,10 +498,13 @@ instance ToJSON BuildProvenance where
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -486,11 +515,8 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -525,7 +551,8 @@ instance ToJSON AuditConfig where
 -- | An instance of an analysis type that has been found on a resource.
 --
 -- /See:/ 'occurrence' smart constructor.
-data Occurrence = Occurrence'
+data Occurrence =
+  Occurrence'
     { _oInstallation  :: !(Maybe GrafeasV1beta1PackageDetails)
     , _oVulnerability :: !(Maybe GrafeasV1beta1VulnerabilityDetails)
     , _oDerivedImage  :: !(Maybe GrafeasV1beta1ImageDetails)
@@ -540,7 +567,9 @@ data Occurrence = Occurrence'
     , _oDiscovered    :: !(Maybe GrafeasV1beta1DiscoveryDetails)
     , _oCreateTime    :: !(Maybe DateTime')
     , _oDeployment    :: !(Maybe GrafeasV1beta1DeploymentDetails)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Occurrence' with the minimum fields required to make a request.
 --
@@ -576,7 +605,7 @@ data Occurrence = Occurrence'
 occurrence
     :: Occurrence
 occurrence =
-    Occurrence'
+  Occurrence'
     { _oInstallation = Nothing
     , _oVulnerability = Nothing
     , _oDerivedImage = Nothing
@@ -592,6 +621,7 @@ occurrence =
     , _oCreateTime = Nothing
     , _oDeployment = Nothing
     }
+
 
 -- | Describes the installation of a package on the linked resource.
 oInstallation :: Lens' Occurrence (Maybe GrafeasV1beta1PackageDetails)
@@ -710,7 +740,8 @@ instance ToJSON Occurrence where
 -- | Details of a vulnerability Occurrence.
 --
 -- /See:/ 'grafeasV1beta1VulnerabilityDetails' smart constructor.
-data GrafeasV1beta1VulnerabilityDetails = GrafeasV1beta1VulnerabilityDetails'
+data GrafeasV1beta1VulnerabilityDetails =
+  GrafeasV1beta1VulnerabilityDetails'
     { _gvvdLongDescription  :: !(Maybe Text)
     , _gvvdRelatedURLs      :: !(Maybe [RelatedURL])
     , _gvvdCvssScore        :: !(Maybe (Textual Double))
@@ -718,7 +749,9 @@ data GrafeasV1beta1VulnerabilityDetails = GrafeasV1beta1VulnerabilityDetails'
     , _gvvdSeverity         :: !(Maybe GrafeasV1beta1VulnerabilityDetailsSeverity)
     , _gvvdShortDescription :: !(Maybe Text)
     , _gvvdType             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GrafeasV1beta1VulnerabilityDetails' with the minimum fields required to make a request.
 --
@@ -740,7 +773,7 @@ data GrafeasV1beta1VulnerabilityDetails = GrafeasV1beta1VulnerabilityDetails'
 grafeasV1beta1VulnerabilityDetails
     :: GrafeasV1beta1VulnerabilityDetails
 grafeasV1beta1VulnerabilityDetails =
-    GrafeasV1beta1VulnerabilityDetails'
+  GrafeasV1beta1VulnerabilityDetails'
     { _gvvdLongDescription = Nothing
     , _gvvdRelatedURLs = Nothing
     , _gvvdCvssScore = Nothing
@@ -749,6 +782,7 @@ grafeasV1beta1VulnerabilityDetails =
     , _gvvdShortDescription = Nothing
     , _gvvdType = Nothing
     }
+
 
 -- | Output only. A detailed description of this vulnerability.
 gvvdLongDescription :: Lens' GrafeasV1beta1VulnerabilityDetails (Maybe Text)
@@ -833,9 +867,12 @@ instance ToJSON GrafeasV1beta1VulnerabilityDetails
 -- path to that file.
 --
 -- /See:/ 'sourceFileHashes' smart constructor.
-newtype SourceFileHashes = SourceFileHashes'
+newtype SourceFileHashes =
+  SourceFileHashes'
     { _sfhAddtional :: HashMap Text FileHashes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceFileHashes' with the minimum fields required to make a request.
 --
@@ -846,9 +883,8 @@ sourceFileHashes
     :: HashMap Text FileHashes -- ^ 'sfhAddtional'
     -> SourceFileHashes
 sourceFileHashes pSfhAddtional_ =
-    SourceFileHashes'
-    { _sfhAddtional = _Coerce # pSfhAddtional_
-    }
+  SourceFileHashes' {_sfhAddtional = _Coerce # pSfhAddtional_}
+
 
 sfhAddtional :: Lens' SourceFileHashes (HashMap Text FileHashes)
 sfhAddtional
@@ -868,12 +904,15 @@ instance ToJSON SourceFileHashes where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -889,12 +928,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -942,14 +982,17 @@ instance ToJSON Expr where
 -- | Command describes a step performed as part of the build pipeline.
 --
 -- /See:/ 'command' smart constructor.
-data Command = Command'
+data Command =
+  Command'
     { _cDir     :: !(Maybe Text)
     , _cArgs    :: !(Maybe [Text])
     , _cEnv     :: !(Maybe [Text])
     , _cWaitFor :: !(Maybe [Text])
     , _cName    :: !(Maybe Text)
     , _cId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Command' with the minimum fields required to make a request.
 --
@@ -969,7 +1012,7 @@ data Command = Command'
 command
     :: Command
 command =
-    Command'
+  Command'
     { _cDir = Nothing
     , _cArgs = Nothing
     , _cEnv = Nothing
@@ -977,6 +1020,7 @@ command =
     , _cName = Nothing
     , _cId = Nothing
     }
+
 
 -- | Working directory (relative to project source root) used when running
 -- this command.
@@ -1032,18 +1076,63 @@ instance ToJSON Command where
                   ("env" .=) <$> _cEnv, ("waitFor" .=) <$> _cWaitFor,
                   ("name" .=) <$> _cName, ("id" .=) <$> _cId])
 
+--
+-- /See:/ 'knowledgeBase' smart constructor.
+data KnowledgeBase =
+  KnowledgeBase'
+    { _kbURL  :: !(Maybe Text)
+    , _kbName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'KnowledgeBase' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'kbURL'
+--
+-- * 'kbName'
+knowledgeBase
+    :: KnowledgeBase
+knowledgeBase = KnowledgeBase' {_kbURL = Nothing, _kbName = Nothing}
+
+
+-- | A link to the KB in the Windows update catalog -
+-- https:\/\/www.catalog.update.microsoft.com\/
+kbURL :: Lens' KnowledgeBase (Maybe Text)
+kbURL = lens _kbURL (\ s a -> s{_kbURL = a})
+
+-- | The KB name (generally of the form KB[0-9]+ i.e. KB123456).
+kbName :: Lens' KnowledgeBase (Maybe Text)
+kbName = lens _kbName (\ s a -> s{_kbName = a})
+
+instance FromJSON KnowledgeBase where
+        parseJSON
+          = withObject "KnowledgeBase"
+              (\ o ->
+                 KnowledgeBase' <$> (o .:? "url") <*> (o .:? "name"))
+
+instance ToJSON KnowledgeBase where
+        toJSON KnowledgeBase'{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _kbURL, ("name" .=) <$> _kbName])
+
 -- | Request message for \`GetIamPolicy\` method.
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
-    GetIAMPolicyRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GetIAMPolicyRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -1058,9 +1147,12 @@ instance ToJSON GetIAMPolicyRequest where
 -- created in a consumer\'s project at the start of analysis.
 --
 -- /See:/ 'discovery' smart constructor.
-newtype Discovery = Discovery'
+newtype Discovery =
+  Discovery'
     { _dAnalysisKind :: Maybe DiscoveryAnalysisKind
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Discovery' with the minimum fields required to make a request.
 --
@@ -1069,10 +1161,8 @@ newtype Discovery = Discovery'
 -- * 'dAnalysisKind'
 discovery
     :: Discovery
-discovery =
-    Discovery'
-    { _dAnalysisKind = Nothing
-    }
+discovery = Discovery' {_dAnalysisKind = Nothing}
+
 
 -- | Required. Immutable. The kind of analysis that is handled by this
 -- discovery.
@@ -1094,10 +1184,13 @@ instance ToJSON Discovery where
 -- | Container message for hash values.
 --
 -- /See:/ 'hash' smart constructor.
-data Hash = Hash'
+data Hash =
+  Hash'
     { _hValue :: !(Maybe Bytes)
     , _hType  :: !(Maybe HashType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Hash' with the minimum fields required to make a request.
 --
@@ -1108,11 +1201,8 @@ data Hash = Hash'
 -- * 'hType'
 hash
     :: Hash
-hash =
-    Hash'
-    { _hValue = Nothing
-    , _hType = Nothing
-    }
+hash = Hash' {_hValue = Nothing, _hType = Nothing}
+
 
 -- | Required. The hash value.
 hValue :: Lens' Hash (Maybe ByteString)
@@ -1141,10 +1231,13 @@ instance ToJSON Hash where
 -- resource_url.
 --
 -- /See:/ 'basis' smart constructor.
-data Basis = Basis'
+data Basis =
+  Basis'
     { _bFingerprint :: !(Maybe Fingerprint)
     , _bResourceURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Basis' with the minimum fields required to make a request.
 --
@@ -1155,11 +1248,8 @@ data Basis = Basis'
 -- * 'bResourceURL'
 basis
     :: Basis
-basis =
-    Basis'
-    { _bFingerprint = Nothing
-    , _bResourceURL = Nothing
-    }
+basis = Basis' {_bFingerprint = Nothing, _bResourceURL = Nothing}
+
 
 -- | Required. Immutable. The fingerprint of the base image.
 bFingerprint :: Lens' Basis (Maybe Fingerprint)
@@ -1189,9 +1279,12 @@ instance ToJSON Basis where
 -- | Request to create notes in batch.
 --
 -- /See:/ 'batchCreateNotesRequest' smart constructor.
-newtype BatchCreateNotesRequest = BatchCreateNotesRequest'
+newtype BatchCreateNotesRequest =
+  BatchCreateNotesRequest'
     { _bcnrNotes :: Maybe BatchCreateNotesRequestNotes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchCreateNotesRequest' with the minimum fields required to make a request.
 --
@@ -1200,10 +1293,8 @@ newtype BatchCreateNotesRequest = BatchCreateNotesRequest'
 -- * 'bcnrNotes'
 batchCreateNotesRequest
     :: BatchCreateNotesRequest
-batchCreateNotesRequest =
-    BatchCreateNotesRequest'
-    { _bcnrNotes = Nothing
-    }
+batchCreateNotesRequest = BatchCreateNotesRequest' {_bcnrNotes = Nothing}
+
 
 -- | The notes to create. Max allowed length is 1000.
 bcnrNotes :: Lens' BatchCreateNotesRequest (Maybe BatchCreateNotesRequestNotes)
@@ -1224,12 +1315,15 @@ instance ToJSON BatchCreateNotesRequest where
 -- directory.
 --
 -- /See:/ 'sourceContext' smart constructor.
-data SourceContext = SourceContext'
+data SourceContext =
+  SourceContext'
     { _scCloudRepo :: !(Maybe CloudRepoSourceContext)
     , _scGerrit    :: !(Maybe GerritSourceContext)
     , _scGit       :: !(Maybe GitSourceContext)
     , _scLabels    :: !(Maybe SourceContextLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
@@ -1245,12 +1339,13 @@ data SourceContext = SourceContext'
 sourceContext
     :: SourceContext
 sourceContext =
-    SourceContext'
+  SourceContext'
     { _scCloudRepo = Nothing
     , _scGerrit = Nothing
     , _scGit = Nothing
     , _scLabels = Nothing
     }
+
 
 -- | A SourceContext referring to a revision in a Google Cloud Source Repo.
 scCloudRepo :: Lens' SourceContext (Maybe CloudRepoSourceContext)
@@ -1290,14 +1385,17 @@ instance ToJSON SourceContext where
 -- package. E.g., Debian\'s jessie-backports dpkg mirror.
 --
 -- /See:/ 'distribution' smart constructor.
-data Distribution = Distribution'
+data Distribution =
+  Distribution'
     { _dURL           :: !(Maybe Text)
     , _dMaintainer    :: !(Maybe Text)
     , _dArchitecture  :: !(Maybe DistributionArchitecture)
     , _dCpeURI        :: !(Maybe Text)
     , _dDescription   :: !(Maybe Text)
     , _dLatestVersion :: !(Maybe Version)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Distribution' with the minimum fields required to make a request.
 --
@@ -1317,7 +1415,7 @@ data Distribution = Distribution'
 distribution
     :: Distribution
 distribution =
-    Distribution'
+  Distribution'
     { _dURL = Nothing
     , _dMaintainer = Nothing
     , _dArchitecture = Nothing
@@ -1325,6 +1423,7 @@ distribution =
     , _dDescription = Nothing
     , _dLatestVersion = Nothing
     }
+
 
 -- | The distribution channel-specific homepage for this package.
 dURL :: Lens' Distribution (Maybe Text)
@@ -1385,9 +1484,12 @@ instance ToJSON Distribution where
 -- | Request to create occurrences in batch.
 --
 -- /See:/ 'batchCreateOccurrencesRequest' smart constructor.
-newtype BatchCreateOccurrencesRequest = BatchCreateOccurrencesRequest'
+newtype BatchCreateOccurrencesRequest =
+  BatchCreateOccurrencesRequest'
     { _bcorOccurrences :: Maybe [Occurrence]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchCreateOccurrencesRequest' with the minimum fields required to make a request.
 --
@@ -1397,9 +1499,8 @@ newtype BatchCreateOccurrencesRequest = BatchCreateOccurrencesRequest'
 batchCreateOccurrencesRequest
     :: BatchCreateOccurrencesRequest
 batchCreateOccurrencesRequest =
-    BatchCreateOccurrencesRequest'
-    { _bcorOccurrences = Nothing
-    }
+  BatchCreateOccurrencesRequest' {_bcorOccurrences = Nothing}
+
 
 -- | The occurrences to create. Max allowed length is 1000.
 bcorOccurrences :: Lens' BatchCreateOccurrencesRequest [Occurrence]
@@ -1424,10 +1525,13 @@ instance ToJSON BatchCreateOccurrencesRequest where
 -- | Response for listing occurrences.
 --
 -- /See:/ 'listOccurrencesResponse' smart constructor.
-data ListOccurrencesResponse = ListOccurrencesResponse'
+data ListOccurrencesResponse =
+  ListOccurrencesResponse'
     { _lorOccurrences   :: !(Maybe [Occurrence])
     , _lorNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOccurrencesResponse' with the minimum fields required to make a request.
 --
@@ -1439,10 +1543,9 @@ data ListOccurrencesResponse = ListOccurrencesResponse'
 listOccurrencesResponse
     :: ListOccurrencesResponse
 listOccurrencesResponse =
-    ListOccurrencesResponse'
-    { _lorOccurrences = Nothing
-    , _lorNextPageToken = Nothing
-    }
+  ListOccurrencesResponse'
+    {_lorOccurrences = Nothing, _lorNextPageToken = Nothing}
+
 
 -- | The occurrences requested.
 lorOccurrences :: Lens' ListOccurrencesResponse [Occurrence]
@@ -1480,11 +1583,14 @@ instance ToJSON ListOccurrencesResponse where
 -- \`\/var\/lib\/dpkg\/status\`.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lPath    :: !(Maybe Text)
     , _lVersion :: !(Maybe Version)
     , _lCpeURI  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -1497,12 +1603,8 @@ data Location = Location'
 -- * 'lCpeURI'
 location
     :: Location
-location =
-    Location'
-    { _lPath = Nothing
-    , _lVersion = Nothing
-    , _lCpeURI = Nothing
-    }
+location = Location' {_lPath = Nothing, _lVersion = Nothing, _lCpeURI = Nothing}
+
 
 -- | The path from which we gathered that this package\/version is installed.
 lPath :: Lens' Location (Maybe Text)
@@ -1542,14 +1644,16 @@ instance ToJSON Location where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1560,12 +1664,15 @@ instance ToJSON Empty where
 -- | A SourceContext referring to a Gerrit project.
 --
 -- /See:/ 'gerritSourceContext' smart constructor.
-data GerritSourceContext = GerritSourceContext'
+data GerritSourceContext =
+  GerritSourceContext'
     { _gscGerritProject :: !(Maybe Text)
     , _gscRevisionId    :: !(Maybe Text)
     , _gscHostURI       :: !(Maybe Text)
     , _gscAliasContext  :: !(Maybe AliasContext)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GerritSourceContext' with the minimum fields required to make a request.
 --
@@ -1581,12 +1688,13 @@ data GerritSourceContext = GerritSourceContext'
 gerritSourceContext
     :: GerritSourceContext
 gerritSourceContext =
-    GerritSourceContext'
+  GerritSourceContext'
     { _gscGerritProject = Nothing
     , _gscRevisionId = Nothing
     , _gscHostURI = Nothing
     , _gscAliasContext = Nothing
     }
+
 
 -- | The full project name within the host. Projects may be nested, so
 -- \"project\/subproject\" is a valid project name. The \"repo name\" is
@@ -1634,10 +1742,13 @@ instance ToJSON GerritSourceContext where
 -- | A unique identifier for a Cloud Repo.
 --
 -- /See:/ 'repoId' smart constructor.
-data RepoId = RepoId'
+data RepoId =
+  RepoId'
     { _riUid           :: !(Maybe Text)
     , _riProjectRepoId :: !(Maybe ProjectRepoId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepoId' with the minimum fields required to make a request.
 --
@@ -1648,11 +1759,8 @@ data RepoId = RepoId'
 -- * 'riProjectRepoId'
 repoId
     :: RepoId
-repoId =
-    RepoId'
-    { _riUid = Nothing
-    , _riProjectRepoId = Nothing
-    }
+repoId = RepoId' {_riUid = Nothing, _riProjectRepoId = Nothing}
+
 
 -- | A server-assigned, globally unique identifier.
 riUid :: Lens' RepoId (Maybe Text)
@@ -1681,10 +1789,13 @@ instance ToJSON RepoId where
 -- | Response for listing occurrences for a note.
 --
 -- /See:/ 'listNoteOccurrencesResponse' smart constructor.
-data ListNoteOccurrencesResponse = ListNoteOccurrencesResponse'
+data ListNoteOccurrencesResponse =
+  ListNoteOccurrencesResponse'
     { _lnorOccurrences   :: !(Maybe [Occurrence])
     , _lnorNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListNoteOccurrencesResponse' with the minimum fields required to make a request.
 --
@@ -1696,10 +1807,9 @@ data ListNoteOccurrencesResponse = ListNoteOccurrencesResponse'
 listNoteOccurrencesResponse
     :: ListNoteOccurrencesResponse
 listNoteOccurrencesResponse =
-    ListNoteOccurrencesResponse'
-    { _lnorOccurrences = Nothing
-    , _lnorNextPageToken = Nothing
-    }
+  ListNoteOccurrencesResponse'
+    {_lnorOccurrences = Nothing, _lnorNextPageToken = Nothing}
+
 
 -- | The occurrences attached to the specified note.
 lnorOccurrences :: Lens' ListNoteOccurrencesResponse [Occurrence]
@@ -1733,7 +1843,8 @@ instance ToJSON ListNoteOccurrencesResponse where
 -- | A type of analysis that can be done for a resource.
 --
 -- /See:/ 'note' smart constructor.
-data Note = Note'
+data Note =
+  Note'
     { _nVulnerability        :: !(Maybe Vulnerability)
     , _nLongDescription      :: !(Maybe Text)
     , _nAttestationAuthority :: !(Maybe Authority)
@@ -1750,7 +1861,9 @@ data Note = Note'
     , _nPackage              :: !(Maybe Package)
     , _nExpirationTime       :: !(Maybe DateTime')
     , _nCreateTime           :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Note' with the minimum fields required to make a request.
 --
@@ -1790,7 +1903,7 @@ data Note = Note'
 note
     :: Note
 note =
-    Note'
+  Note'
     { _nVulnerability = Nothing
     , _nLongDescription = Nothing
     , _nAttestationAuthority = Nothing
@@ -1808,6 +1921,7 @@ note =
     , _nExpirationTime = Nothing
     , _nCreateTime = Nothing
     }
+
 
 -- | A note describing a package vulnerability.
 nVulnerability :: Lens' Note (Maybe Vulnerability)
@@ -1948,9 +2062,12 @@ instance ToJSON Note where
 -- | Response for creating notes in batch.
 --
 -- /See:/ 'batchCreateNotesResponse' smart constructor.
-newtype BatchCreateNotesResponse = BatchCreateNotesResponse'
+newtype BatchCreateNotesResponse =
+  BatchCreateNotesResponse'
     { _bNotes :: Maybe [Note]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchCreateNotesResponse' with the minimum fields required to make a request.
 --
@@ -1959,10 +2076,8 @@ newtype BatchCreateNotesResponse = BatchCreateNotesResponse'
 -- * 'bNotes'
 batchCreateNotesResponse
     :: BatchCreateNotesResponse
-batchCreateNotesResponse =
-    BatchCreateNotesResponse'
-    { _bNotes = Nothing
-    }
+batchCreateNotesResponse = BatchCreateNotesResponse' {_bNotes = Nothing}
+
 
 -- | The notes that were created.
 bNotes :: Lens' BatchCreateNotesResponse [Note]
@@ -1985,10 +2100,13 @@ instance ToJSON BatchCreateNotesResponse where
 -- winged-cargo-31) and a repo name within that project.
 --
 -- /See:/ 'projectRepoId' smart constructor.
-data ProjectRepoId = ProjectRepoId'
+data ProjectRepoId =
+  ProjectRepoId'
     { _priRepoName  :: !(Maybe Text)
     , _priProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectRepoId' with the minimum fields required to make a request.
 --
@@ -1999,11 +2117,8 @@ data ProjectRepoId = ProjectRepoId'
 -- * 'priProjectId'
 projectRepoId
     :: ProjectRepoId
-projectRepoId =
-    ProjectRepoId'
-    { _priRepoName = Nothing
-    , _priProjectId = Nothing
-    }
+projectRepoId = ProjectRepoId' {_priRepoName = Nothing, _priProjectId = Nothing}
+
 
 -- | The name of the repo. Leave empty for the default repo.
 priRepoName :: Lens' ProjectRepoId (Maybe Text)
@@ -2032,11 +2147,14 @@ instance ToJSON ProjectRepoId where
 -- | A set of properties that uniquely identify a given Docker image.
 --
 -- /See:/ 'fingerprint' smart constructor.
-data Fingerprint = Fingerprint'
+data Fingerprint =
+  Fingerprint'
     { _fV2Name :: !(Maybe Text)
     , _fV2Blob :: !(Maybe [Text])
     , _fV1Name :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Fingerprint' with the minimum fields required to make a request.
 --
@@ -2050,11 +2168,8 @@ data Fingerprint = Fingerprint'
 fingerprint
     :: Fingerprint
 fingerprint =
-    Fingerprint'
-    { _fV2Name = Nothing
-    , _fV2Blob = Nothing
-    , _fV1Name = Nothing
-    }
+  Fingerprint' {_fV2Name = Nothing, _fV2Blob = Nothing, _fV1Name = Nothing}
+
 
 -- | Output only. The name of the image\'s v2 blobs computed via: [bottom] :=
 -- v2_blobbottom := sha256(v2_blob[N] + \" \" + v2_name[N+1]) Only the name
@@ -2098,9 +2213,12 @@ instance ToJSON Fingerprint where
 -- attestations to verify.
 --
 -- /See:/ 'hint' smart constructor.
-newtype Hint = Hint'
+newtype Hint =
+  Hint'
     { _hHumanReadableName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Hint' with the minimum fields required to make a request.
 --
@@ -2109,10 +2227,8 @@ newtype Hint = Hint'
 -- * 'hHumanReadableName'
 hint
     :: Hint
-hint =
-    Hint'
-    { _hHumanReadableName = Nothing
-    }
+hint = Hint' {_hHumanReadableName = Nothing}
+
 
 -- | Required. The human readable name of this attestation authority, for
 -- example \"qa\".
@@ -2136,11 +2252,14 @@ instance ToJSON Hint where
 -- associated fix (if one is available).
 --
 -- /See:/ 'packageIssue' smart constructor.
-data PackageIssue = PackageIssue'
+data PackageIssue =
+  PackageIssue'
     { _piAffectedLocation :: !(Maybe VulnerabilityLocation)
     , _piFixedLocation    :: !(Maybe VulnerabilityLocation)
     , _piSeverityName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PackageIssue' with the minimum fields required to make a request.
 --
@@ -2154,11 +2273,12 @@ data PackageIssue = PackageIssue'
 packageIssue
     :: PackageIssue
 packageIssue =
-    PackageIssue'
+  PackageIssue'
     { _piAffectedLocation = Nothing
     , _piFixedLocation = Nothing
     , _piSeverityName = Nothing
     }
+
 
 -- | Required. The location of the vulnerability.
 piAffectedLocation :: Lens' PackageIssue (Maybe VulnerabilityLocation)
@@ -2197,9 +2317,12 @@ instance ToJSON PackageIssue where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -2210,9 +2333,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2232,10 +2354,13 @@ instance ToJSON StatusDetailsItem where
 -- the provenance message in the build details occurrence.
 --
 -- /See:/ 'build' smart constructor.
-data Build = Build'
+data Build =
+  Build'
     { _bSignature      :: !(Maybe BuildSignature)
     , _bBuilderVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Build' with the minimum fields required to make a request.
 --
@@ -2246,11 +2371,8 @@ data Build = Build'
 -- * 'bBuilderVersion'
 build
     :: Build
-build =
-    Build'
-    { _bSignature = Nothing
-    , _bBuilderVersion = Nothing
-    }
+build = Build' {_bSignature = Nothing, _bBuilderVersion = Nothing}
+
 
 -- | Signature of the build in occurrences pointing to this build note
 -- containing build details.
@@ -2288,9 +2410,12 @@ instance ToJSON Build where
 -- attestation intended to sign for).
 --
 -- /See:/ 'attestation' smart constructor.
-newtype Attestation = Attestation'
+newtype Attestation =
+  Attestation'
     { _aPgpSignedAttestation :: Maybe PgpSignedAttestation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Attestation' with the minimum fields required to make a request.
 --
@@ -2299,10 +2424,8 @@ newtype Attestation = Attestation'
 -- * 'aPgpSignedAttestation'
 attestation
     :: Attestation
-attestation =
-    Attestation'
-    { _aPgpSignedAttestation = Nothing
-    }
+attestation = Attestation' {_aPgpSignedAttestation = Nothing}
+
 
 -- | A PGP signed attestation.
 aPgpSignedAttestation :: Lens' Attestation (Maybe PgpSignedAttestation)
@@ -2326,11 +2449,14 @@ instance ToJSON Attestation where
 -- | Artifact describes a build product.
 --
 -- /See:/ 'artifact' smart constructor.
-data Artifact = Artifact'
+data Artifact =
+  Artifact'
     { _aChecksum :: !(Maybe Text)
     , _aNames    :: !(Maybe [Text])
     , _aId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Artifact' with the minimum fields required to make a request.
 --
@@ -2343,12 +2469,8 @@ data Artifact = Artifact'
 -- * 'aId'
 artifact
     :: Artifact
-artifact =
-    Artifact'
-    { _aChecksum = Nothing
-    , _aNames = Nothing
-    , _aId = Nothing
-    }
+artifact = Artifact' {_aChecksum = Nothing, _aNames = Nothing, _aId = Nothing}
+
 
 -- | Hash or checksum value of a binary, or Docker Registry 2.0 digest of a
 -- container.
@@ -2389,10 +2511,13 @@ instance ToJSON Artifact where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-data SetIAMPolicyRequest = SetIAMPolicyRequest'
+data SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
     , _siprPolicy     :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -2404,10 +2529,8 @@ data SetIAMPolicyRequest = SetIAMPolicyRequest'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprUpdateMask = Nothing
-    , _siprPolicy = Nothing
-    }
+  SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -2444,9 +2567,12 @@ instance ToJSON SetIAMPolicyRequest where
 -- build providers can enter any desired additional details.
 --
 -- /See:/ 'buildProvenanceBuildOptions' smart constructor.
-newtype BuildProvenanceBuildOptions = BuildProvenanceBuildOptions'
+newtype BuildProvenanceBuildOptions =
+  BuildProvenanceBuildOptions'
     { _bpboAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildProvenanceBuildOptions' with the minimum fields required to make a request.
 --
@@ -2457,9 +2583,8 @@ buildProvenanceBuildOptions
     :: HashMap Text Text -- ^ 'bpboAddtional'
     -> BuildProvenanceBuildOptions
 buildProvenanceBuildOptions pBpboAddtional_ =
-    BuildProvenanceBuildOptions'
-    { _bpboAddtional = _Coerce # pBpboAddtional_
-    }
+  BuildProvenanceBuildOptions' {_bpboAddtional = _Coerce # pBpboAddtional_}
+
 
 bpboAddtional :: Lens' BuildProvenanceBuildOptions (HashMap Text Text)
 bpboAddtional
@@ -2479,9 +2604,12 @@ instance ToJSON BuildProvenanceBuildOptions where
 -- | An artifact that can be deployed in some runtime.
 --
 -- /See:/ 'deployable' smart constructor.
-newtype Deployable = Deployable'
+newtype Deployable =
+  Deployable'
     { _dResourceURI :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Deployable' with the minimum fields required to make a request.
 --
@@ -2490,10 +2618,8 @@ newtype Deployable = Deployable'
 -- * 'dResourceURI'
 deployable
     :: Deployable
-deployable =
-    Deployable'
-    { _dResourceURI = Nothing
-    }
+deployable = Deployable' {_dResourceURI = Nothing}
+
 
 -- | Required. Resource URI for the artifact being deployed.
 dResourceURI :: Lens' Deployable [Text]
@@ -2516,9 +2642,12 @@ instance ToJSON Deployable where
 -- | Details of a discovery occurrence.
 --
 -- /See:/ 'grafeasV1beta1DiscoveryDetails' smart constructor.
-newtype GrafeasV1beta1DiscoveryDetails = GrafeasV1beta1DiscoveryDetails'
+newtype GrafeasV1beta1DiscoveryDetails =
+  GrafeasV1beta1DiscoveryDetails'
     { _gvddDiscovered :: Maybe Discovered
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GrafeasV1beta1DiscoveryDetails' with the minimum fields required to make a request.
 --
@@ -2528,9 +2657,8 @@ newtype GrafeasV1beta1DiscoveryDetails = GrafeasV1beta1DiscoveryDetails'
 grafeasV1beta1DiscoveryDetails
     :: GrafeasV1beta1DiscoveryDetails
 grafeasV1beta1DiscoveryDetails =
-    GrafeasV1beta1DiscoveryDetails'
-    { _gvddDiscovered = Nothing
-    }
+  GrafeasV1beta1DiscoveryDetails' {_gvddDiscovered = Nothing}
+
 
 -- | Required. Analysis status for the discovered resource.
 gvddDiscovered :: Lens' GrafeasV1beta1DiscoveryDetails (Maybe Discovered)
@@ -2554,11 +2682,14 @@ instance ToJSON GrafeasV1beta1DiscoveryDetails where
 -- | The location of the vulnerability.
 --
 -- /See:/ 'vulnerabilityLocation' smart constructor.
-data VulnerabilityLocation = VulnerabilityLocation'
+data VulnerabilityLocation =
+  VulnerabilityLocation'
     { _vlVersion :: !(Maybe Version)
     , _vlPackage :: !(Maybe Text)
     , _vlCpeURI  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VulnerabilityLocation' with the minimum fields required to make a request.
 --
@@ -2572,11 +2703,9 @@ data VulnerabilityLocation = VulnerabilityLocation'
 vulnerabilityLocation
     :: VulnerabilityLocation
 vulnerabilityLocation =
-    VulnerabilityLocation'
-    { _vlVersion = Nothing
-    , _vlPackage = Nothing
-    , _vlCpeURI = Nothing
-    }
+  VulnerabilityLocation'
+    {_vlVersion = Nothing, _vlPackage = Nothing, _vlCpeURI = Nothing}
+
 
 -- | Required. The version of the package being described.
 vlVersion :: Lens' VulnerabilityLocation (Maybe Version)
@@ -2613,12 +2742,15 @@ instance ToJSON VulnerabilityLocation where
 -- | Per resource and severity counts of fixable and total vulnerabilites.
 --
 -- /See:/ 'fixableTotalByDigest' smart constructor.
-data FixableTotalByDigest = FixableTotalByDigest'
+data FixableTotalByDigest =
+  FixableTotalByDigest'
     { _ftbdSeverity     :: !(Maybe FixableTotalByDigestSeverity)
     , _ftbdFixableCount :: !(Maybe (Textual Int64))
     , _ftbdResource     :: !(Maybe Resource)
     , _ftbdTotalCount   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FixableTotalByDigest' with the minimum fields required to make a request.
 --
@@ -2634,12 +2766,13 @@ data FixableTotalByDigest = FixableTotalByDigest'
 fixableTotalByDigest
     :: FixableTotalByDigest
 fixableTotalByDigest =
-    FixableTotalByDigest'
+  FixableTotalByDigest'
     { _ftbdSeverity = Nothing
     , _ftbdFixableCount = Nothing
     , _ftbdResource = Nothing
     , _ftbdTotalCount = Nothing
     }
+
 
 -- | The severity for this count. SEVERITY_UNSPECIFIED indicates total across
 -- all severities.
@@ -2687,10 +2820,13 @@ instance ToJSON FixableTotalByDigest where
 -- | Metadata for any related URL information.
 --
 -- /See:/ 'relatedURL' smart constructor.
-data RelatedURL = RelatedURL'
+data RelatedURL =
+  RelatedURL'
     { _ruURL   :: !(Maybe Text)
     , _ruLabel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelatedURL' with the minimum fields required to make a request.
 --
@@ -2701,11 +2837,8 @@ data RelatedURL = RelatedURL'
 -- * 'ruLabel'
 relatedURL
     :: RelatedURL
-relatedURL =
-    RelatedURL'
-    { _ruURL = Nothing
-    , _ruLabel = Nothing
-    }
+relatedURL = RelatedURL' {_ruURL = Nothing, _ruLabel = Nothing}
+
 
 -- | Specific URL associated with the resource.
 ruURL :: Lens' RelatedURL (Maybe Text)
@@ -2730,9 +2863,12 @@ instance ToJSON RelatedURL where
 -- | Details of an image occurrence.
 --
 -- /See:/ 'grafeasV1beta1ImageDetails' smart constructor.
-newtype GrafeasV1beta1ImageDetails = GrafeasV1beta1ImageDetails'
+newtype GrafeasV1beta1ImageDetails =
+  GrafeasV1beta1ImageDetails'
     { _gvidDerivedImage :: Maybe Derived
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GrafeasV1beta1ImageDetails' with the minimum fields required to make a request.
 --
@@ -2742,9 +2878,8 @@ newtype GrafeasV1beta1ImageDetails = GrafeasV1beta1ImageDetails'
 grafeasV1beta1ImageDetails
     :: GrafeasV1beta1ImageDetails
 grafeasV1beta1ImageDetails =
-    GrafeasV1beta1ImageDetails'
-    { _gvidDerivedImage = Nothing
-    }
+  GrafeasV1beta1ImageDetails' {_gvidDerivedImage = Nothing}
+
 
 -- | Required. Immutable. The child image derived from the base image.
 gvidDerivedImage :: Lens' GrafeasV1beta1ImageDetails (Maybe Derived)
@@ -2768,9 +2903,12 @@ instance ToJSON GrafeasV1beta1ImageDetails where
 -- | Response for creating occurrences in batch.
 --
 -- /See:/ 'batchCreateOccurrencesResponse' smart constructor.
-newtype BatchCreateOccurrencesResponse = BatchCreateOccurrencesResponse'
+newtype BatchCreateOccurrencesResponse =
+  BatchCreateOccurrencesResponse'
     { _bOccurrences :: Maybe [Occurrence]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchCreateOccurrencesResponse' with the minimum fields required to make a request.
 --
@@ -2780,9 +2918,8 @@ newtype BatchCreateOccurrencesResponse = BatchCreateOccurrencesResponse'
 batchCreateOccurrencesResponse
     :: BatchCreateOccurrencesResponse
 batchCreateOccurrencesResponse =
-    BatchCreateOccurrencesResponse'
-    { _bOccurrences = Nothing
-    }
+  BatchCreateOccurrencesResponse' {_bOccurrences = Nothing}
+
 
 -- | The occurrences that were created.
 bOccurrences :: Lens' BatchCreateOccurrencesResponse [Occurrence]
@@ -2807,9 +2944,12 @@ instance ToJSON BatchCreateOccurrencesResponse where
 -- | Labels with user defined metadata.
 --
 -- /See:/ 'sourceContextLabels' smart constructor.
-newtype SourceContextLabels = SourceContextLabels'
+newtype SourceContextLabels =
+  SourceContextLabels'
     { _sclAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceContextLabels' with the minimum fields required to make a request.
 --
@@ -2820,9 +2960,8 @@ sourceContextLabels
     :: HashMap Text Text -- ^ 'sclAddtional'
     -> SourceContextLabels
 sourceContextLabels pSclAddtional_ =
-    SourceContextLabels'
-    { _sclAddtional = _Coerce # pSclAddtional_
-    }
+  SourceContextLabels' {_sclAddtional = _Coerce # pSclAddtional_}
+
 
 sclAddtional :: Lens' SourceContextLabels (HashMap Text Text)
 sclAddtional
@@ -2840,10 +2979,13 @@ instance ToJSON SourceContextLabels where
 -- | Response for listing scan configurations.
 --
 -- /See:/ 'listScanConfigsResponse' smart constructor.
-data ListScanConfigsResponse = ListScanConfigsResponse'
+data ListScanConfigsResponse =
+  ListScanConfigsResponse'
     { _lscrNextPageToken :: !(Maybe Text)
     , _lscrScanConfigs   :: !(Maybe [ScanConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListScanConfigsResponse' with the minimum fields required to make a request.
 --
@@ -2855,10 +2997,9 @@ data ListScanConfigsResponse = ListScanConfigsResponse'
 listScanConfigsResponse
     :: ListScanConfigsResponse
 listScanConfigsResponse =
-    ListScanConfigsResponse'
-    { _lscrNextPageToken = Nothing
-    , _lscrScanConfigs = Nothing
-    }
+  ListScanConfigsResponse'
+    {_lscrNextPageToken = Nothing, _lscrScanConfigs = Nothing}
+
 
 -- | The next pagination token in the list response. It should be used as
 -- \`page_token\` for the following request. An empty value means no more
@@ -2894,12 +3035,15 @@ instance ToJSON ListScanConfigsResponse where
 -- | Version contains structured information about the version of a package.
 --
 -- /See:/ 'version' smart constructor.
-data Version = Version'
+data Version =
+  Version'
     { _vKind     :: !(Maybe VersionKind)
     , _vName     :: !(Maybe Text)
     , _vRevision :: !(Maybe Text)
     , _vEpoch    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
@@ -2915,12 +3059,13 @@ data Version = Version'
 version
     :: Version
 version =
-    Version'
+  Version'
     { _vKind = Nothing
     , _vName = Nothing
     , _vRevision = Nothing
     , _vEpoch = Nothing
     }
+
 
 -- | Required. Distinguishes between sentinel MIN\/MAX versions and normal
 -- versions.
@@ -2964,9 +3109,12 @@ instance ToJSON Version where
 -- messages to verify integrity of source input to the build.
 --
 -- /See:/ 'fileHashes' smart constructor.
-newtype FileHashes = FileHashes'
+newtype FileHashes =
+  FileHashes'
     { _fhFileHash :: Maybe [Hash]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FileHashes' with the minimum fields required to make a request.
 --
@@ -2975,10 +3123,8 @@ newtype FileHashes = FileHashes'
 -- * 'fhFileHash'
 fileHashes
     :: FileHashes
-fileHashes =
-    FileHashes'
-    { _fhFileHash = Nothing
-    }
+fileHashes = FileHashes' {_fhFileHash = Nothing}
+
 
 -- | Required. Collection of file hashes.
 fhFileHash :: Lens' FileHashes [Hash]
@@ -3001,11 +3147,14 @@ instance ToJSON FileHashes where
 -- | An entity that can have metadata. For example, a Docker image.
 --
 -- /See:/ 'resource' smart constructor.
-data Resource = Resource'
+data Resource =
+  Resource'
     { _rContentHash :: !(Maybe Hash)
     , _rURI         :: !(Maybe Text)
     , _rName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Resource' with the minimum fields required to make a request.
 --
@@ -3019,11 +3168,8 @@ data Resource = Resource'
 resource
     :: Resource
 resource =
-    Resource'
-    { _rContentHash = Nothing
-    , _rURI = Nothing
-    , _rName = Nothing
-    }
+  Resource' {_rContentHash = Nothing, _rURI = Nothing, _rName = Nothing}
+
 
 -- | The hash of the resource content. For example, the Docker digest.
 rContentHash :: Lens' Resource (Maybe Hash)
@@ -3058,9 +3204,12 @@ instance ToJSON Resource where
 -- | Details of a deployment occurrence.
 --
 -- /See:/ 'grafeasV1beta1DeploymentDetails' smart constructor.
-newtype GrafeasV1beta1DeploymentDetails = GrafeasV1beta1DeploymentDetails'
+newtype GrafeasV1beta1DeploymentDetails =
+  GrafeasV1beta1DeploymentDetails'
     { _gvddDeployment :: Maybe Deployment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GrafeasV1beta1DeploymentDetails' with the minimum fields required to make a request.
 --
@@ -3070,9 +3219,8 @@ newtype GrafeasV1beta1DeploymentDetails = GrafeasV1beta1DeploymentDetails'
 grafeasV1beta1DeploymentDetails
     :: GrafeasV1beta1DeploymentDetails
 grafeasV1beta1DeploymentDetails =
-    GrafeasV1beta1DeploymentDetails'
-    { _gvddDeployment = Nothing
-    }
+  GrafeasV1beta1DeploymentDetails' {_gvddDeployment = Nothing}
+
 
 -- | Required. Deployment history for the resource.
 gvddDeployment :: Lens' GrafeasV1beta1DeploymentDetails (Maybe Deployment)
@@ -3097,10 +3245,13 @@ instance ToJSON GrafeasV1beta1DeploymentDetails where
 -- created by Container Analysis Providers
 --
 -- /See:/ 'googleDevtoolsContaineranalysisV1alpha1OperationMetadata' smart constructor.
-data GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata = GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata'
+data GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata =
+  GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata'
     { _gdcvomEndTime    :: !(Maybe DateTime')
     , _gdcvomCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata' with the minimum fields required to make a request.
 --
@@ -3112,10 +3263,9 @@ data GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata = GoogleDevtoolsCo
 googleDevtoolsContaineranalysisV1alpha1OperationMetadata
     :: GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
 googleDevtoolsContaineranalysisV1alpha1OperationMetadata =
-    GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata'
-    { _gdcvomEndTime = Nothing
-    , _gdcvomCreateTime = Nothing
-    }
+  GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata'
+    {_gdcvomEndTime = Nothing, _gdcvomCreateTime = Nothing}
+
 
 -- | Output only. The time that this operation was marked completed or
 -- failed.
@@ -3133,7 +3283,7 @@ gdcvomCreateTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
+           GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
          where
         parseJSON
           = withObject
@@ -3143,7 +3293,7 @@ instance FromJSON
                    <$> (o .:? "endTime") <*> (o .:? "createTime"))
 
 instance ToJSON
-         GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
+           GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
          where
         toJSON
           GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata'{..}
@@ -3155,9 +3305,12 @@ instance ToJSON
 -- | Details of an attestation occurrence.
 --
 -- /See:/ 'details' smart constructor.
-newtype Details = Details'
+newtype Details =
+  Details'
     { _dAttestation :: Maybe Attestation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Details' with the minimum fields required to make a request.
 --
@@ -3166,10 +3319,8 @@ newtype Details = Details'
 -- * 'dAttestation'
 details
     :: Details
-details =
-    Details'
-    { _dAttestation = Nothing
-    }
+details = Details' {_dAttestation = Nothing}
+
 
 -- | Required. Attestation for the resource.
 dAttestation :: Lens' Details (Maybe Attestation)
@@ -3191,10 +3342,13 @@ instance ToJSON Details where
 -- versions.
 --
 -- /See:/ 'package' smart constructor.
-data Package = Package'
+data Package =
+  Package'
     { _pDistribution :: !(Maybe [Distribution])
     , _pName         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Package' with the minimum fields required to make a request.
 --
@@ -3205,11 +3359,8 @@ data Package = Package'
 -- * 'pName'
 package
     :: Package
-package =
-    Package'
-    { _pDistribution = Nothing
-    , _pName = Nothing
-    }
+package = Package' {_pDistribution = Nothing, _pName = Nothing}
+
 
 -- | The various channels by which a package is distributed.
 pDistribution :: Lens' Package [Distribution]
@@ -3240,10 +3391,13 @@ instance ToJSON Package where
 -- | Response for listing notes.
 --
 -- /See:/ 'listNotesResponse' smart constructor.
-data ListNotesResponse = ListNotesResponse'
+data ListNotesResponse =
+  ListNotesResponse'
     { _lnrNextPageToken :: !(Maybe Text)
     , _lnrNotes         :: !(Maybe [Note])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListNotesResponse' with the minimum fields required to make a request.
 --
@@ -3255,10 +3409,8 @@ data ListNotesResponse = ListNotesResponse'
 listNotesResponse
     :: ListNotesResponse
 listNotesResponse =
-    ListNotesResponse'
-    { _lnrNextPageToken = Nothing
-    , _lnrNotes = Nothing
-    }
+  ListNotesResponse' {_lnrNextPageToken = Nothing, _lnrNotes = Nothing}
+
 
 -- | The next pagination token in the list response. It should be used as
 -- \`page_token\` for the following request. An empty value means no more
@@ -3293,12 +3445,15 @@ instance ToJSON ListNotesResponse where
 -- | Message encapsulating the signature of the verified build.
 --
 -- /See:/ 'buildSignature' smart constructor.
-data BuildSignature = BuildSignature'
+data BuildSignature =
+  BuildSignature'
     { _bsSignature :: !(Maybe Bytes)
     , _bsKeyType   :: !(Maybe BuildSignatureKeyType)
     , _bsKeyId     :: !(Maybe Text)
     , _bsPublicKey :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildSignature' with the minimum fields required to make a request.
 --
@@ -3314,12 +3469,13 @@ data BuildSignature = BuildSignature'
 buildSignature
     :: BuildSignature
 buildSignature =
-    BuildSignature'
+  BuildSignature'
     { _bsSignature = Nothing
     , _bsKeyType = Nothing
     , _bsKeyId = Nothing
     , _bsPublicKey = Nothing
     }
+
 
 -- | Required. Signature of the related \`BuildProvenance\`. In JSON, this is
 -- base-64 encoded.
@@ -3377,9 +3533,12 @@ instance ToJSON BuildSignature where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -3389,9 +3548,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -3419,12 +3577,15 @@ instance ToJSON TestIAMPermissionsRequest where
 -- | Provides information about the analysis status of a discovered resource.
 --
 -- /See:/ 'discovered' smart constructor.
-data Discovered = Discovered'
+data Discovered =
+  Discovered'
     { _dLastAnalysisTime    :: !(Maybe DateTime')
     , _dAnalysisStatusError :: !(Maybe Status)
     , _dAnalysisStatus      :: !(Maybe DiscoveredAnalysisStatus)
     , _dContinuousAnalysis  :: !(Maybe DiscoveredContinuousAnalysis)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Discovered' with the minimum fields required to make a request.
 --
@@ -3440,12 +3601,13 @@ data Discovered = Discovered'
 discovered
     :: Discovered
 discovered =
-    Discovered'
+  Discovered'
     { _dLastAnalysisTime = Nothing
     , _dAnalysisStatusError = Nothing
     , _dAnalysisStatus = Nothing
     , _dContinuousAnalysis = Nothing
     }
+
 
 -- | The last time continuous analysis was done for this resource.
 -- Deprecated, do not use.
@@ -3499,12 +3661,15 @@ instance ToJSON Discovered where
 -- with FROM .
 --
 -- /See:/ 'derived' smart constructor.
-data Derived = Derived'
+data Derived =
+  Derived'
     { _dBaseResourceURL :: !(Maybe Text)
     , _dFingerprint     :: !(Maybe Fingerprint)
     , _dDistance        :: !(Maybe (Textual Int32))
     , _dLayerInfo       :: !(Maybe [Layer])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Derived' with the minimum fields required to make a request.
 --
@@ -3520,12 +3685,13 @@ data Derived = Derived'
 derived
     :: Derived
 derived =
-    Derived'
+  Derived'
     { _dBaseResourceURL = Nothing
     , _dFingerprint = Nothing
     , _dDistance = Nothing
     , _dLayerInfo = Nothing
     }
+
 
 -- | Output only. This contains the base image URL for the derived image
 -- occurrence.
@@ -3576,10 +3742,13 @@ instance ToJSON Derived where
 -- | Details of a build occurrence.
 --
 -- /See:/ 'grafeasV1beta1BuildDetails' smart constructor.
-data GrafeasV1beta1BuildDetails = GrafeasV1beta1BuildDetails'
+data GrafeasV1beta1BuildDetails =
+  GrafeasV1beta1BuildDetails'
     { _gvbdProvenanceBytes :: !(Maybe Text)
     , _gvbdProvenance      :: !(Maybe BuildProvenance)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GrafeasV1beta1BuildDetails' with the minimum fields required to make a request.
 --
@@ -3591,10 +3760,9 @@ data GrafeasV1beta1BuildDetails = GrafeasV1beta1BuildDetails'
 grafeasV1beta1BuildDetails
     :: GrafeasV1beta1BuildDetails
 grafeasV1beta1BuildDetails =
-    GrafeasV1beta1BuildDetails'
-    { _gvbdProvenanceBytes = Nothing
-    , _gvbdProvenance = Nothing
-    }
+  GrafeasV1beta1BuildDetails'
+    {_gvbdProvenanceBytes = Nothing, _gvbdProvenance = Nothing}
+
 
 -- | Serialized JSON representation of the provenance, used in generating the
 -- build signature in the corresponding build note. After verifying the
@@ -3633,12 +3801,15 @@ instance ToJSON GrafeasV1beta1BuildDetails where
 -- | Source describes the location of the source used for the build.
 --
 -- /See:/ 'source' smart constructor.
-data Source = Source'
+data Source =
+  Source'
     { _sContext                  :: !(Maybe SourceContext)
     , _sAdditionalContexts       :: !(Maybe [SourceContext])
     , _sArtifactStorageSourceURI :: !(Maybe Text)
     , _sFileHashes               :: !(Maybe SourceFileHashes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
@@ -3654,12 +3825,13 @@ data Source = Source'
 source
     :: Source
 source =
-    Source'
+  Source'
     { _sContext = Nothing
     , _sAdditionalContexts = Nothing
     , _sArtifactStorageSourceURI = Nothing
     , _sFileHashes = Nothing
     }
+
 
 -- | If provided, the source code used for the build came from this location.
 sContext :: Lens' Source (Maybe SourceContext)
@@ -3719,13 +3891,16 @@ instance ToJSON Source where
 -- or not.
 --
 -- /See:/ 'scanConfig' smart constructor.
-data ScanConfig = ScanConfig'
+data ScanConfig =
+  ScanConfig'
     { _scEnabled     :: !(Maybe Bool)
     , _scUpdateTime  :: !(Maybe DateTime')
     , _scName        :: !(Maybe Text)
     , _scDescription :: !(Maybe Text)
     , _scCreateTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScanConfig' with the minimum fields required to make a request.
 --
@@ -3743,13 +3918,14 @@ data ScanConfig = ScanConfig'
 scanConfig
     :: ScanConfig
 scanConfig =
-    ScanConfig'
+  ScanConfig'
     { _scEnabled = Nothing
     , _scUpdateTime = Nothing
     , _scName = Nothing
     , _scDescription = Nothing
     , _scCreateTime = Nothing
     }
+
 
 -- | Whether the scan is enabled.
 scEnabled :: Lens' ScanConfig (Maybe Bool)
@@ -3804,10 +3980,13 @@ instance ToJSON ScanConfig where
 -- repository (e.g., GitHub).
 --
 -- /See:/ 'gitSourceContext' smart constructor.
-data GitSourceContext = GitSourceContext'
+data GitSourceContext =
+  GitSourceContext'
     { _gURL        :: !(Maybe Text)
     , _gRevisionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GitSourceContext' with the minimum fields required to make a request.
 --
@@ -3818,11 +3997,8 @@ data GitSourceContext = GitSourceContext'
 -- * 'gRevisionId'
 gitSourceContext
     :: GitSourceContext
-gitSourceContext =
-    GitSourceContext'
-    { _gURL = Nothing
-    , _gRevisionId = Nothing
-    }
+gitSourceContext = GitSourceContext' {_gURL = Nothing, _gRevisionId = Nothing}
+
 
 -- | Git repository URL.
 gURL :: Lens' GitSourceContext (Maybe Text)
@@ -3850,9 +4026,12 @@ instance ToJSON GitSourceContext where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -3862,9 +4041,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -3907,12 +4085,15 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -3928,12 +4109,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -3991,10 +4173,13 @@ instance ToJSON Policy where
 -- | Layer holds metadata specific to a layer of a Docker image.
 --
 -- /See:/ 'layer' smart constructor.
-data Layer = Layer'
+data Layer =
+  Layer'
     { _lDirective :: !(Maybe LayerDirective)
     , _lArguments :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Layer' with the minimum fields required to make a request.
 --
@@ -4005,11 +4190,8 @@ data Layer = Layer'
 -- * 'lArguments'
 layer
     :: Layer
-layer =
-    Layer'
-    { _lDirective = Nothing
-    , _lArguments = Nothing
-    }
+layer = Layer' {_lDirective = Nothing, _lArguments = Nothing}
+
 
 -- | Required. The recovered Dockerfile directive used to construct this
 -- layer.
@@ -4040,11 +4222,14 @@ instance ToJSON Layer where
 -- Source Repo.
 --
 -- /See:/ 'cloudRepoSourceContext' smart constructor.
-data CloudRepoSourceContext = CloudRepoSourceContext'
+data CloudRepoSourceContext =
+  CloudRepoSourceContext'
     { _crscRepoId       :: !(Maybe RepoId)
     , _crscRevisionId   :: !(Maybe Text)
     , _crscAliasContext :: !(Maybe AliasContext)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudRepoSourceContext' with the minimum fields required to make a request.
 --
@@ -4058,11 +4243,12 @@ data CloudRepoSourceContext = CloudRepoSourceContext'
 cloudRepoSourceContext
     :: CloudRepoSourceContext
 cloudRepoSourceContext =
-    CloudRepoSourceContext'
+  CloudRepoSourceContext'
     { _crscRepoId = Nothing
     , _crscRevisionId = Nothing
     , _crscAliasContext = Nothing
     }
+
 
 -- | The ID of the repo.
 crscRepoId :: Lens' CloudRepoSourceContext (Maybe RepoId)
@@ -4104,10 +4290,13 @@ instance ToJSON CloudRepoSourceContext where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -4119,10 +4308,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -4158,11 +4345,14 @@ instance ToJSON AuditLogConfig where
 -- is included alongside the signature itself in the same file.
 --
 -- /See:/ 'pgpSignedAttestation' smart constructor.
-data PgpSignedAttestation = PgpSignedAttestation'
+data PgpSignedAttestation =
+  PgpSignedAttestation'
     { _psaSignature   :: !(Maybe Text)
     , _psaPgpKeyId    :: !(Maybe Text)
     , _psaContentType :: !(Maybe PgpSignedAttestationContentType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PgpSignedAttestation' with the minimum fields required to make a request.
 --
@@ -4176,11 +4366,9 @@ data PgpSignedAttestation = PgpSignedAttestation'
 pgpSignedAttestation
     :: PgpSignedAttestation
 pgpSignedAttestation =
-    PgpSignedAttestation'
-    { _psaSignature = Nothing
-    , _psaPgpKeyId = Nothing
-    , _psaContentType = Nothing
-    }
+  PgpSignedAttestation'
+    {_psaSignature = Nothing, _psaPgpKeyId = Nothing, _psaContentType = Nothing}
+
 
 -- | Required. The raw content of the signature, as output by GNU Privacy
 -- Guard (GPG) or equivalent. Since this message only supports attached
@@ -4237,12 +4425,94 @@ instance ToJSON PgpSignedAttestation where
                   ("pgpKeyId" .=) <$> _psaPgpKeyId,
                   ("contentType" .=) <$> _psaContentType])
 
+--
+-- /See:/ 'windowsDetail' smart constructor.
+data WindowsDetail =
+  WindowsDetail'
+    { _wdName        :: !(Maybe Text)
+    , _wdFixingKbs   :: !(Maybe [KnowledgeBase])
+    , _wdCpeURI      :: !(Maybe Text)
+    , _wdDescription :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'WindowsDetail' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wdName'
+--
+-- * 'wdFixingKbs'
+--
+-- * 'wdCpeURI'
+--
+-- * 'wdDescription'
+windowsDetail
+    :: WindowsDetail
+windowsDetail =
+  WindowsDetail'
+    { _wdName = Nothing
+    , _wdFixingKbs = Nothing
+    , _wdCpeURI = Nothing
+    , _wdDescription = Nothing
+    }
+
+
+-- | Required. The name of the vulnerability.
+wdName :: Lens' WindowsDetail (Maybe Text)
+wdName = lens _wdName (\ s a -> s{_wdName = a})
+
+-- | Required. The names of the KBs which have hotfixes to mitigate this
+-- vulnerability. Note that there may be multiple hotfixes (and thus
+-- multiple KBs) that mitigate a given vulnerability. Currently any listed
+-- kb\'s presence is considered a fix.
+wdFixingKbs :: Lens' WindowsDetail [KnowledgeBase]
+wdFixingKbs
+  = lens _wdFixingKbs (\ s a -> s{_wdFixingKbs = a}) .
+      _Default
+      . _Coerce
+
+-- | Required. The CPE URI in [cpe
+-- format](https:\/\/cpe.mitre.org\/specification\/) in which the
+-- vulnerability manifests. Examples include distro or storage location for
+-- vulnerable jar.
+wdCpeURI :: Lens' WindowsDetail (Maybe Text)
+wdCpeURI = lens _wdCpeURI (\ s a -> s{_wdCpeURI = a})
+
+-- | The description of the vulnerability.
+wdDescription :: Lens' WindowsDetail (Maybe Text)
+wdDescription
+  = lens _wdDescription
+      (\ s a -> s{_wdDescription = a})
+
+instance FromJSON WindowsDetail where
+        parseJSON
+          = withObject "WindowsDetail"
+              (\ o ->
+                 WindowsDetail' <$>
+                   (o .:? "name") <*> (o .:? "fixingKbs" .!= mempty) <*>
+                     (o .:? "cpeUri")
+                     <*> (o .:? "description"))
+
+instance ToJSON WindowsDetail where
+        toJSON WindowsDetail'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _wdName,
+                  ("fixingKbs" .=) <$> _wdFixingKbs,
+                  ("cpeUri" .=) <$> _wdCpeURI,
+                  ("description" .=) <$> _wdDescription])
+
 -- | The notes to create. Max allowed length is 1000.
 --
 -- /See:/ 'batchCreateNotesRequestNotes' smart constructor.
-newtype BatchCreateNotesRequestNotes = BatchCreateNotesRequestNotes'
+newtype BatchCreateNotesRequestNotes =
+  BatchCreateNotesRequestNotes'
     { _bcnrnAddtional :: HashMap Text Note
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchCreateNotesRequestNotes' with the minimum fields required to make a request.
 --
@@ -4253,9 +4523,8 @@ batchCreateNotesRequestNotes
     :: HashMap Text Note -- ^ 'bcnrnAddtional'
     -> BatchCreateNotesRequestNotes
 batchCreateNotesRequestNotes pBcnrnAddtional_ =
-    BatchCreateNotesRequestNotes'
-    { _bcnrnAddtional = _Coerce # pBcnrnAddtional_
-    }
+  BatchCreateNotesRequestNotes' {_bcnrnAddtional = _Coerce # pBcnrnAddtional_}
+
 
 bcnrnAddtional :: Lens' BatchCreateNotesRequestNotes (HashMap Text Note)
 bcnrnAddtional
@@ -4276,10 +4545,13 @@ instance ToJSON BatchCreateNotesRequestNotes where
 -- | An alias to a repo revision.
 --
 -- /See:/ 'aliasContext' smart constructor.
-data AliasContext = AliasContext'
+data AliasContext =
+  AliasContext'
     { _acKind :: !(Maybe AliasContextKind)
     , _acName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AliasContext' with the minimum fields required to make a request.
 --
@@ -4290,11 +4562,8 @@ data AliasContext = AliasContext'
 -- * 'acName'
 aliasContext
     :: AliasContext
-aliasContext =
-    AliasContext'
-    { _acKind = Nothing
-    , _acName = Nothing
-    }
+aliasContext = AliasContext' {_acKind = Nothing, _acName = Nothing}
+
 
 -- | The alias kind.
 acKind :: Lens' AliasContext (Maybe AliasContextKind)
@@ -4319,11 +4588,14 @@ instance ToJSON AliasContext where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -4337,11 +4609,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -4397,7 +4666,8 @@ instance ToJSON Binding where
 -- cpe:\/o:debian:debian_linux:8 for versions 2.1 - 2.2
 --
 -- /See:/ 'detail' smart constructor.
-data Detail = Detail'
+data Detail =
+  Detail'
     { _detMinAffectedVersion :: !(Maybe Version)
     , _detPackageType        :: !(Maybe Text)
     , _detIsObsolete         :: !(Maybe Bool)
@@ -4407,7 +4677,9 @@ data Detail = Detail'
     , _detPackage            :: !(Maybe Text)
     , _detCpeURI             :: !(Maybe Text)
     , _detDescription        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Detail' with the minimum fields required to make a request.
 --
@@ -4433,7 +4705,7 @@ data Detail = Detail'
 detail
     :: Detail
 detail =
-    Detail'
+  Detail'
     { _detMinAffectedVersion = Nothing
     , _detPackageType = Nothing
     , _detIsObsolete = Nothing
@@ -4444,6 +4716,7 @@ detail =
     , _detCpeURI = Nothing
     , _detDescription = Nothing
     }
+
 
 -- | The min version of the package in which the vulnerability exists.
 detMinAffectedVersion :: Lens' Detail (Maybe Version)
@@ -4543,9 +4816,12 @@ instance ToJSON Detail where
 -- project.
 --
 -- /See:/ 'authority' smart constructor.
-newtype Authority = Authority'
+newtype Authority =
+  Authority'
     { _aHint :: Maybe Hint
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Authority' with the minimum fields required to make a request.
 --
@@ -4554,10 +4830,8 @@ newtype Authority = Authority'
 -- * 'aHint'
 authority
     :: Authority
-authority =
-    Authority'
-    { _aHint = Nothing
-    }
+authority = Authority' {_aHint = Nothing}
+
 
 -- | Hint hints at the purpose of the attestation authority.
 aHint :: Lens' Authority (Maybe Hint)
@@ -4575,9 +4849,12 @@ instance ToJSON Authority where
 -- | Details of a package occurrence.
 --
 -- /See:/ 'grafeasV1beta1PackageDetails' smart constructor.
-newtype GrafeasV1beta1PackageDetails = GrafeasV1beta1PackageDetails'
+newtype GrafeasV1beta1PackageDetails =
+  GrafeasV1beta1PackageDetails'
     { _gvpdInstallation :: Maybe Installation
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GrafeasV1beta1PackageDetails' with the minimum fields required to make a request.
 --
@@ -4587,9 +4864,8 @@ newtype GrafeasV1beta1PackageDetails = GrafeasV1beta1PackageDetails'
 grafeasV1beta1PackageDetails
     :: GrafeasV1beta1PackageDetails
 grafeasV1beta1PackageDetails =
-    GrafeasV1beta1PackageDetails'
-    { _gvpdInstallation = Nothing
-    }
+  GrafeasV1beta1PackageDetails' {_gvpdInstallation = Nothing}
+
 
 -- | Required. Where the package was installed.
 gvpdInstallation :: Lens' GrafeasV1beta1PackageDetails (Maybe Installation)
@@ -4613,7 +4889,8 @@ instance ToJSON GrafeasV1beta1PackageDetails where
 -- | The period during which some deployable was active in a runtime.
 --
 -- /See:/ 'deployment' smart constructor.
-data Deployment = Deployment'
+data Deployment =
+  Deployment'
     { _depResourceURI  :: !(Maybe [Text])
     , _depPlatform     :: !(Maybe DeploymentPlatform)
     , _depConfig       :: !(Maybe Text)
@@ -4621,7 +4898,9 @@ data Deployment = Deployment'
     , _depDeployTime   :: !(Maybe DateTime')
     , _depAddress      :: !(Maybe Text)
     , _depUserEmail    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
@@ -4643,7 +4922,7 @@ data Deployment = Deployment'
 deployment
     :: Deployment
 deployment =
-    Deployment'
+  Deployment'
     { _depResourceURI = Nothing
     , _depPlatform = Nothing
     , _depConfig = Nothing
@@ -4652,6 +4931,7 @@ deployment =
     , _depAddress = Nothing
     , _depUserEmail = Nothing
     }
+
 
 -- | Output only. Resource URI for the artifact being deployed taken from the
 -- deployable field with the same name.

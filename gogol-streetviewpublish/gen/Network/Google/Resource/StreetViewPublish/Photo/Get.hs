@@ -74,7 +74,8 @@ type PhotoGetResource =
 -- indexed.
 --
 -- /See:/ 'photoGet' smart constructor.
-data PhotoGet = PhotoGet'
+data PhotoGet =
+  PhotoGet'
     { _pgXgafv          :: !(Maybe Xgafv)
     , _pgLanguageCode   :: !(Maybe Text)
     , _pgUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,9 @@ data PhotoGet = PhotoGet'
     , _pgView           :: !(Maybe Text)
     , _pgPhotoId        :: !Text
     , _pgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotoGet' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ photoGet
     :: Text -- ^ 'pgPhotoId'
     -> PhotoGet
 photoGet pPgPhotoId_ =
-    PhotoGet'
+  PhotoGet'
     { _pgXgafv = Nothing
     , _pgLanguageCode = Nothing
     , _pgUploadProtocol = Nothing
@@ -118,6 +121,7 @@ photoGet pPgPhotoId_ =
     , _pgPhotoId = pPgPhotoId_
     , _pgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgXgafv :: Lens' PhotoGet (Maybe Xgafv)

@@ -72,13 +72,16 @@ type CaptionsInsertResource =
 -- | Uploads a caption track.
 --
 -- /See:/ 'captionsInsert' smart constructor.
-data CaptionsInsert = CaptionsInsert'
+data CaptionsInsert =
+  CaptionsInsert'
     { _ciOnBehalfOf             :: !(Maybe Text)
     , _ciPart                   :: !Text
     , _ciPayload                :: !Caption
     , _ciOnBehalfOfContentOwner :: !(Maybe Text)
     , _ciSync                   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CaptionsInsert' with the minimum fields required to make a request.
 --
@@ -98,13 +101,14 @@ captionsInsert
     -> Caption -- ^ 'ciPayload'
     -> CaptionsInsert
 captionsInsert pCiPart_ pCiPayload_ =
-    CaptionsInsert'
+  CaptionsInsert'
     { _ciOnBehalfOf = Nothing
     , _ciPart = pCiPart_
     , _ciPayload = pCiPayload_
     , _ciOnBehalfOfContentOwner = Nothing
     , _ciSync = Nothing
     }
+
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
 -- of

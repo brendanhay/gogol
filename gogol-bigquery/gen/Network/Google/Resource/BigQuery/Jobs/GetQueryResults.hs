@@ -65,7 +65,8 @@ type JobsGetQueryResultsResource =
 -- | Retrieves the results of a query job.
 --
 -- /See:/ 'jobsGetQueryResults' smart constructor.
-data JobsGetQueryResults = JobsGetQueryResults'
+data JobsGetQueryResults =
+  JobsGetQueryResults'
     { _jgqrJobId      :: !Text
     , _jgqrLocation   :: !(Maybe Text)
     , _jgqrTimeoutMs  :: !(Maybe (Textual Word32))
@@ -73,7 +74,9 @@ data JobsGetQueryResults = JobsGetQueryResults'
     , _jgqrProjectId  :: !Text
     , _jgqrStartIndex :: !(Maybe (Textual Word64))
     , _jgqrMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobsGetQueryResults' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ jobsGetQueryResults
     -> Text -- ^ 'jgqrProjectId'
     -> JobsGetQueryResults
 jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
-    JobsGetQueryResults'
+  JobsGetQueryResults'
     { _jgqrJobId = pJgqrJobId_
     , _jgqrLocation = Nothing
     , _jgqrTimeoutMs = Nothing
@@ -106,6 +109,7 @@ jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
     , _jgqrStartIndex = Nothing
     , _jgqrMaxResults = Nothing
     }
+
 
 -- | [Required] Job ID of the query job
 jgqrJobId :: Lens' JobsGetQueryResults Text

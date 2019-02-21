@@ -63,12 +63,15 @@ type AssociationSessionsStartResource =
 -- AdSense user.
 --
 -- /See:/ 'associationSessionsStart' smart constructor.
-data AssociationSessionsStart = AssociationSessionsStart'
+data AssociationSessionsStart =
+  AssociationSessionsStart'
     { _assWebsiteLocale :: !(Maybe Text)
     , _assUserLocale    :: !(Maybe Text)
     , _assWebsiteURL    :: !Text
     , _assProductCode   :: ![AssociationSessionsStartProductCode]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AssociationSessionsStart' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ associationSessionsStart
     -> [AssociationSessionsStartProductCode] -- ^ 'assProductCode'
     -> AssociationSessionsStart
 associationSessionsStart pAssWebsiteURL_ pAssProductCode_ =
-    AssociationSessionsStart'
+  AssociationSessionsStart'
     { _assWebsiteLocale = Nothing
     , _assUserLocale = Nothing
     , _assWebsiteURL = pAssWebsiteURL_
     , _assProductCode = _Coerce # pAssProductCode_
     }
+
 
 -- | The locale of the user\'s hosted website.
 assWebsiteLocale :: Lens' AssociationSessionsStart (Maybe Text)

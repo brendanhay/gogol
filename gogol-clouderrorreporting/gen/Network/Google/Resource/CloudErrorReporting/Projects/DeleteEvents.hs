@@ -61,14 +61,17 @@ type ProjectsDeleteEventsResource =
 -- | Deletes all error events of a given project.
 --
 -- /See:/ 'projectsDeleteEvents' smart constructor.
-data ProjectsDeleteEvents = ProjectsDeleteEvents'
+data ProjectsDeleteEvents =
+  ProjectsDeleteEvents'
     { _pdeXgafv          :: !(Maybe Xgafv)
     , _pdeUploadProtocol :: !(Maybe Text)
     , _pdeAccessToken    :: !(Maybe Text)
     , _pdeUploadType     :: !(Maybe Text)
     , _pdeProjectName    :: !Text
     , _pdeCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDeleteEvents' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsDeleteEvents
     :: Text -- ^ 'pdeProjectName'
     -> ProjectsDeleteEvents
 projectsDeleteEvents pPdeProjectName_ =
-    ProjectsDeleteEvents'
+  ProjectsDeleteEvents'
     { _pdeXgafv = Nothing
     , _pdeUploadProtocol = Nothing
     , _pdeAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsDeleteEvents pPdeProjectName_ =
     , _pdeProjectName = pPdeProjectName_
     , _pdeCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdeXgafv :: Lens' ProjectsDeleteEvents (Maybe Xgafv)

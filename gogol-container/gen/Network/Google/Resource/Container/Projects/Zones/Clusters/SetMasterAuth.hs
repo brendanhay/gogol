@@ -73,7 +73,8 @@ type ProjectsZonesClustersSetMasterAuthResource =
 -- generation or explicitly set the password.
 --
 -- /See:/ 'projectsZonesClustersSetMasterAuth' smart constructor.
-data ProjectsZonesClustersSetMasterAuth = ProjectsZonesClustersSetMasterAuth'
+data ProjectsZonesClustersSetMasterAuth =
+  ProjectsZonesClustersSetMasterAuth'
     { _pzcsmaXgafv          :: !(Maybe Xgafv)
     , _pzcsmaUploadProtocol :: !(Maybe Text)
     , _pzcsmaAccessToken    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsZonesClustersSetMasterAuth = ProjectsZonesClustersSetMasterAuth'
     , _pzcsmaClusterId      :: !Text
     , _pzcsmaProjectId      :: !Text
     , _pzcsmaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersSetMasterAuth' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ projectsZonesClustersSetMasterAuth
     -> Text -- ^ 'pzcsmaProjectId'
     -> ProjectsZonesClustersSetMasterAuth
 projectsZonesClustersSetMasterAuth pPzcsmaZone_ pPzcsmaPayload_ pPzcsmaClusterId_ pPzcsmaProjectId_ =
-    ProjectsZonesClustersSetMasterAuth'
+  ProjectsZonesClustersSetMasterAuth'
     { _pzcsmaXgafv = Nothing
     , _pzcsmaUploadProtocol = Nothing
     , _pzcsmaAccessToken = Nothing
@@ -124,6 +127,7 @@ projectsZonesClustersSetMasterAuth pPzcsmaZone_ pPzcsmaPayload_ pPzcsmaClusterId
     , _pzcsmaProjectId = pPzcsmaProjectId_
     , _pzcsmaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcsmaXgafv :: Lens' ProjectsZonesClustersSetMasterAuth (Maybe Xgafv)
@@ -183,7 +187,8 @@ pzcsmaCallback
       (\ s a -> s{_pzcsmaCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersSetMasterAuth where
+           ProjectsZonesClustersSetMasterAuth
+         where
         type Rs ProjectsZonesClustersSetMasterAuth =
              Operation
         type Scopes ProjectsZonesClustersSetMasterAuth =

@@ -305,24 +305,24 @@ photosLibraryService
 
 -- | View your Google Photos library
 photosLibraryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/photoslibrary.readonly"]
-photosLibraryReadOnlyScope = Proxy;
+photosLibraryReadOnlyScope = Proxy
 
 -- | View and manage your Google Photos library
 photosLibraryScope :: Proxy '["https://www.googleapis.com/auth/photoslibrary"]
-photosLibraryScope = Proxy;
+photosLibraryScope = Proxy
 
 -- | View the photos, videos and albums in your Google Photos
 drivePhotosReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.photos.readonly"]
-drivePhotosReadOnlyScope = Proxy;
+drivePhotosReadOnlyScope = Proxy
 
 -- | Manage and add to shared albums on your behalf
 photosLibrarySharingScope :: Proxy '["https://www.googleapis.com/auth/photoslibrary.sharing"]
-photosLibrarySharingScope = Proxy;
+photosLibrarySharingScope = Proxy
 
 -- | Add to your Google Photos library
 photosLibraryAppendOnlyScope :: Proxy '["https://www.googleapis.com/auth/photoslibrary.appendonly"]
-photosLibraryAppendOnlyScope = Proxy;
+photosLibraryAppendOnlyScope = Proxy
 
 -- | Manage photos added by this app
 photosLibraryReadOnlyAppcreatedDataScope :: Proxy '["https://www.googleapis.com/auth/photoslibrary.readonly.appcreateddata"]
-photosLibraryReadOnlyAppcreatedDataScope = Proxy;
+photosLibraryReadOnlyAppcreatedDataScope = Proxy

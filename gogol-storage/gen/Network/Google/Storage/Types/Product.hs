@@ -23,10 +23,13 @@ import           Network.Google.Storage.Types.Sum
 -- | The owner of the object. This will always be the uploader of the object.
 --
 -- /See:/ 'objectOwner' smart constructor.
-data ObjectOwner = ObjectOwner'
+data ObjectOwner =
+  ObjectOwner'
     { _ooEntity   :: !(Maybe Text)
     , _ooEntityId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectOwner' with the minimum fields required to make a request.
 --
@@ -37,11 +40,8 @@ data ObjectOwner = ObjectOwner'
 -- * 'ooEntityId'
 objectOwner
     :: ObjectOwner
-objectOwner =
-    ObjectOwner'
-    { _ooEntity = Nothing
-    , _ooEntityId = Nothing
-    }
+objectOwner = ObjectOwner' {_ooEntity = Nothing, _ooEntityId = Nothing}
+
 
 -- | The entity, in the form user-userId.
 ooEntity :: Lens' ObjectOwner (Maybe Text)
@@ -69,9 +69,12 @@ instance ToJSON ObjectOwner where
 -- | The bucket\'s versioning configuration.
 --
 -- /See:/ 'bucketVersioning' smart constructor.
-newtype BucketVersioning = BucketVersioning'
+newtype BucketVersioning =
+  BucketVersioning'
     { _bvEnabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketVersioning' with the minimum fields required to make a request.
 --
@@ -80,10 +83,8 @@ newtype BucketVersioning = BucketVersioning'
 -- * 'bvEnabled'
 bucketVersioning
     :: BucketVersioning
-bucketVersioning =
-    BucketVersioning'
-    { _bvEnabled = Nothing
-    }
+bucketVersioning = BucketVersioning' {_bvEnabled = Nothing}
+
 
 -- | While set to true, versioning is fully enabled for this bucket.
 bvEnabled :: Lens' BucketVersioning (Maybe Bool)
@@ -99,6 +100,98 @@ instance ToJSON BucketVersioning where
         toJSON BucketVersioning'{..}
           = object (catMaybes [("enabled" .=) <$> _bvEnabled])
 
+-- | Represents an expression text. Example: title: \"User account presence\"
+-- description: \"Determines whether the request has a user account\"
+-- expression: \"size(request.user) > 0\"
+--
+-- /See:/ 'expr' smart constructor.
+data Expr =
+  Expr'
+    { _eLocation    :: !(Maybe Text)
+    , _eKind        :: !Text
+    , _eExpression  :: !(Maybe Text)
+    , _eTitle       :: !(Maybe Text)
+    , _eDescription :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Expr' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eLocation'
+--
+-- * 'eKind'
+--
+-- * 'eExpression'
+--
+-- * 'eTitle'
+--
+-- * 'eDescription'
+expr
+    :: Expr
+expr =
+  Expr'
+    { _eLocation = Nothing
+    , _eKind = "storage#expr"
+    , _eExpression = Nothing
+    , _eTitle = Nothing
+    , _eDescription = Nothing
+    }
+
+
+-- | An optional string indicating the location of the expression for error
+-- reporting, e.g. a file name and a position in the file.
+eLocation :: Lens' Expr (Maybe Text)
+eLocation
+  = lens _eLocation (\ s a -> s{_eLocation = a})
+
+-- | The kind of item this is. For storage, this is always storage#expr. This
+-- field is ignored on input.
+eKind :: Lens' Expr Text
+eKind = lens _eKind (\ s a -> s{_eKind = a})
+
+-- | Textual representation of an expression in Common Expression Language
+-- syntax. The application context of the containing message determines
+-- which well-known feature set of CEL is supported.
+eExpression :: Lens' Expr (Maybe Text)
+eExpression
+  = lens _eExpression (\ s a -> s{_eExpression = a})
+
+-- | An optional title for the expression, i.e. a short string describing its
+-- purpose. This can be used e.g. in UIs which allow to enter the
+-- expression.
+eTitle :: Lens' Expr (Maybe Text)
+eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
+
+-- | An optional description of the expression. This is a longer text which
+-- describes the expression, e.g. when hovered over it in a UI.
+eDescription :: Lens' Expr (Maybe Text)
+eDescription
+  = lens _eDescription (\ s a -> s{_eDescription = a})
+
+instance FromJSON Expr where
+        parseJSON
+          = withObject "Expr"
+              (\ o ->
+                 Expr' <$>
+                   (o .:? "location") <*>
+                     (o .:? "kind" .!= "storage#expr")
+                     <*> (o .:? "expression")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON Expr where
+        toJSON Expr'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _eLocation,
+                  Just ("kind" .= _eKind),
+                  ("expression" .=) <$> _eExpression,
+                  ("title" .=) <$> _eTitle,
+                  ("description" .=) <$> _eDescription])
+
 -- | The bucket\'s retention policy. The retention policy enforces a minimum
 -- retention time for all objects contained in the bucket, based on their
 -- creation time. Any attempt to overwrite or delete objects younger than
@@ -110,11 +203,14 @@ instance ToJSON BucketVersioning where
 -- will result in a PERMISSION_DENIED error.
 --
 -- /See:/ 'bucketRetentionPolicy' smart constructor.
-data BucketRetentionPolicy = BucketRetentionPolicy'
+data BucketRetentionPolicy =
+  BucketRetentionPolicy'
     { _brpRetentionPeriod :: !(Maybe (Textual Int64))
     , _brpEffectiveTime   :: !(Maybe DateTime')
     , _brpIsLocked        :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketRetentionPolicy' with the minimum fields required to make a request.
 --
@@ -128,11 +224,12 @@ data BucketRetentionPolicy = BucketRetentionPolicy'
 bucketRetentionPolicy
     :: BucketRetentionPolicy
 bucketRetentionPolicy =
-    BucketRetentionPolicy'
+  BucketRetentionPolicy'
     { _brpRetentionPeriod = Nothing
     , _brpEffectiveTime = Nothing
     , _brpIsLocked = Nothing
     }
+
 
 -- | The duration in seconds that objects need to be retained. Retention
 -- duration must be greater than zero and less than 100 years. Note that
@@ -176,11 +273,14 @@ instance ToJSON BucketRetentionPolicy where
 -- | A list of buckets.
 --
 -- /See:/ 'buckets' smart constructor.
-data Buckets = Buckets'
+data Buckets =
+  Buckets'
     { _bNextPageToken :: !(Maybe Text)
     , _bKind          :: !Text
     , _bItems         :: !(Maybe [Bucket])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Buckets' with the minimum fields required to make a request.
 --
@@ -194,11 +294,9 @@ data Buckets = Buckets'
 buckets
     :: Buckets
 buckets =
-    Buckets'
-    { _bNextPageToken = Nothing
-    , _bKind = "storage#buckets"
-    , _bItems = Nothing
-    }
+  Buckets'
+    {_bNextPageToken = Nothing, _bKind = "storage#buckets", _bItems = Nothing}
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -237,9 +335,12 @@ instance ToJSON Buckets where
 -- | The bucket\'s billing configuration.
 --
 -- /See:/ 'bucketBilling' smart constructor.
-newtype BucketBilling = BucketBilling'
+newtype BucketBilling =
+  BucketBilling'
     { _bbRequesterPays :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketBilling' with the minimum fields required to make a request.
 --
@@ -248,10 +349,8 @@ newtype BucketBilling = BucketBilling'
 -- * 'bbRequesterPays'
 bucketBilling
     :: BucketBilling
-bucketBilling =
-    BucketBilling'
-    { _bbRequesterPays = Nothing
-    }
+bucketBilling = BucketBilling' {_bbRequesterPays = Nothing}
+
 
 -- | When set to true, Requester Pays is enabled for this bucket.
 bbRequesterPays :: Lens' BucketBilling (Maybe Bool)
@@ -273,7 +372,8 @@ instance ToJSON BucketBilling where
 -- | A subscription to receive Google PubSub notifications.
 --
 -- /See:/ 'notification' smart constructor.
-data Notification = Notification'
+data Notification =
+  Notification'
     { _nEtag             :: !(Maybe Text)
     , _nObjectNamePrefix :: !(Maybe Text)
     , _nPayloadFormat    :: !Text
@@ -283,7 +383,9 @@ data Notification = Notification'
     , _nSelfLink         :: !(Maybe Text)
     , _nId               :: !(Maybe Text)
     , _nCustomAttributes :: !(Maybe NotificationCustom_attributes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
@@ -309,7 +411,7 @@ data Notification = Notification'
 notification
     :: Notification
 notification =
-    Notification'
+  Notification'
     { _nEtag = Nothing
     , _nObjectNamePrefix = Nothing
     , _nPayloadFormat = "JSON_API_V1"
@@ -320,6 +422,7 @@ notification =
     , _nId = Nothing
     , _nCustomAttributes = Nothing
     }
+
 
 -- | HTTP 1.1 Entity tag for this subscription notification.
 nEtag :: Lens' Notification (Maybe Text)
@@ -403,10 +506,13 @@ instance ToJSON Notification where
 -- bucket and optional name prefix for the current bucket\'s logs.
 --
 -- /See:/ 'bucketLogging' smart constructor.
-data BucketLogging = BucketLogging'
+data BucketLogging =
+  BucketLogging'
     { _blLogBucket       :: !(Maybe Text)
     , _blLogObjectPrefix :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketLogging' with the minimum fields required to make a request.
 --
@@ -418,10 +524,8 @@ data BucketLogging = BucketLogging'
 bucketLogging
     :: BucketLogging
 bucketLogging =
-    BucketLogging'
-    { _blLogBucket = Nothing
-    , _blLogObjectPrefix = Nothing
-    }
+  BucketLogging' {_blLogBucket = Nothing, _blLogObjectPrefix = Nothing}
+
 
 -- | The destination bucket where the current bucket\'s logs should be
 -- placed.
@@ -452,9 +556,12 @@ instance ToJSON BucketLogging where
 -- | User-provided metadata, in key\/value pairs.
 --
 -- /See:/ 'objectMetadata' smart constructor.
-newtype ObjectMetadata = ObjectMetadata'
+newtype ObjectMetadata =
+  ObjectMetadata'
     { _omAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectMetadata' with the minimum fields required to make a request.
 --
@@ -465,9 +572,8 @@ objectMetadata
     :: HashMap Text Text -- ^ 'omAddtional'
     -> ObjectMetadata
 objectMetadata pOmAddtional_ =
-    ObjectMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  ObjectMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | An individual metadata entry.
 omAddtional :: Lens' ObjectMetadata (HashMap Text Text)
@@ -486,14 +592,17 @@ instance ToJSON ObjectMetadata where
 -- | The condition(s) under which the action will be taken.
 --
 -- /See:/ 'bucketLifecycleRuleItemCondition' smart constructor.
-data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition'
+data BucketLifecycleRuleItemCondition =
+  BucketLifecycleRuleItemCondition'
     { _blricAge                 :: !(Maybe (Textual Int32))
     , _blricIsLive              :: !(Maybe Bool)
     , _blricNumNewerVersions    :: !(Maybe (Textual Int32))
     , _blricMatchesStorageClass :: !(Maybe [Text])
     , _blricMatchesPattern      :: !(Maybe Text)
     , _blricCreatedBefore       :: !(Maybe Date')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketLifecycleRuleItemCondition' with the minimum fields required to make a request.
 --
@@ -513,7 +622,7 @@ data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition'
 bucketLifecycleRuleItemCondition
     :: BucketLifecycleRuleItemCondition
 bucketLifecycleRuleItemCondition =
-    BucketLifecycleRuleItemCondition'
+  BucketLifecycleRuleItemCondition'
     { _blricAge = Nothing
     , _blricIsLive = Nothing
     , _blricNumNewerVersions = Nothing
@@ -521,6 +630,7 @@ bucketLifecycleRuleItemCondition =
     , _blricMatchesPattern = Nothing
     , _blricCreatedBefore = Nothing
     }
+
 
 -- | Age of an object (in days). This condition is satisfied when an object
 -- reaches the specified age.
@@ -604,9 +714,12 @@ instance ToJSON BucketLifecycleRuleItemCondition
 -- information.
 --
 -- /See:/ 'bucketLifecycle' smart constructor.
-newtype BucketLifecycle = BucketLifecycle'
+newtype BucketLifecycle =
+  BucketLifecycle'
     { _blRule :: Maybe [BucketLifecycleRuleItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketLifecycle' with the minimum fields required to make a request.
 --
@@ -615,10 +728,8 @@ newtype BucketLifecycle = BucketLifecycle'
 -- * 'blRule'
 bucketLifecycle
     :: BucketLifecycle
-bucketLifecycle =
-    BucketLifecycle'
-    { _blRule = Nothing
-    }
+bucketLifecycle = BucketLifecycle' {_blRule = Nothing}
+
 
 -- | A lifecycle management rule, which is made of an action to take and the
 -- condition(s) under which the action will be taken.
@@ -640,9 +751,12 @@ instance ToJSON BucketLifecycle where
 -- | User-provided labels, in key\/value pairs.
 --
 -- /See:/ 'bucketLabels' smart constructor.
-newtype BucketLabels = BucketLabels'
+newtype BucketLabels =
+  BucketLabels'
     { _blAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketLabels' with the minimum fields required to make a request.
 --
@@ -653,9 +767,8 @@ bucketLabels
     :: HashMap Text Text -- ^ 'blAddtional'
     -> BucketLabels
 bucketLabels pBlAddtional_ =
-    BucketLabels'
-    { _blAddtional = _Coerce # pBlAddtional_
-    }
+  BucketLabels' {_blAddtional = _Coerce # pBlAddtional_}
+
 
 -- | An individual label entry.
 blAddtional :: Lens' BucketLabels (HashMap Text Text)
@@ -674,7 +787,8 @@ instance ToJSON BucketLabels where
 -- | An notification channel used to watch for resource changes.
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel'
+data Channel =
+  Channel'
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
@@ -685,7 +799,9 @@ data Channel = Channel'
     , _cParams      :: !(Maybe ChannelParams)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
@@ -713,7 +829,7 @@ data Channel = Channel'
 channel
     :: Channel
 channel =
-    Channel'
+  Channel'
     { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
@@ -725,6 +841,7 @@ channel =
     , _cId = Nothing
     , _cType = Nothing
     }
+
 
 -- | A version-specific identifier for the watched resource.
 cResourceURI :: Lens' Channel (Maybe Text)
@@ -805,10 +922,13 @@ instance ToJSON Channel where
 
 --
 -- /See:/ 'bucketLifecycleRuleItem' smart constructor.
-data BucketLifecycleRuleItem = BucketLifecycleRuleItem'
+data BucketLifecycleRuleItem =
+  BucketLifecycleRuleItem'
     { _blriAction    :: !(Maybe BucketLifecycleRuleItemAction)
     , _blriCondition :: !(Maybe BucketLifecycleRuleItemCondition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketLifecycleRuleItem' with the minimum fields required to make a request.
 --
@@ -820,10 +940,8 @@ data BucketLifecycleRuleItem = BucketLifecycleRuleItem'
 bucketLifecycleRuleItem
     :: BucketLifecycleRuleItem
 bucketLifecycleRuleItem =
-    BucketLifecycleRuleItem'
-    { _blriAction = Nothing
-    , _blriCondition = Nothing
-    }
+  BucketLifecycleRuleItem' {_blriAction = Nothing, _blriCondition = Nothing}
+
 
 -- | The action to take.
 blriAction :: Lens' BucketLifecycleRuleItem (Maybe BucketLifecycleRuleItemAction)
@@ -852,12 +970,15 @@ instance ToJSON BucketLifecycleRuleItem where
 
 --
 -- /See:/ 'bucketCORSItem' smart constructor.
-data BucketCORSItem = BucketCORSItem'
+data BucketCORSItem =
+  BucketCORSItem'
     { _bciMaxAgeSeconds  :: !(Maybe (Textual Int32))
     , _bciOrigin         :: !(Maybe [Text])
     , _bciResponseHeader :: !(Maybe [Text])
     , _bciMethod         :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketCORSItem' with the minimum fields required to make a request.
 --
@@ -873,12 +994,13 @@ data BucketCORSItem = BucketCORSItem'
 bucketCORSItem
     :: BucketCORSItem
 bucketCORSItem =
-    BucketCORSItem'
+  BucketCORSItem'
     { _bciMaxAgeSeconds = Nothing
     , _bciOrigin = Nothing
     , _bciResponseHeader = Nothing
     , _bciMethod = Nothing
     }
+
 
 -- | The value, in seconds, to return in the Access-Control-Max-Age header
 -- used in preflight responses.
@@ -936,10 +1058,13 @@ instance ToJSON BucketCORSItem where
 -- | The project team associated with the entity, if any.
 --
 -- /See:/ 'objectAccessControlProjectTeam' smart constructor.
-data ObjectAccessControlProjectTeam = ObjectAccessControlProjectTeam'
+data ObjectAccessControlProjectTeam =
+  ObjectAccessControlProjectTeam'
     { _oacptProjectNumber :: !(Maybe Text)
     , _oacptTeam          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectAccessControlProjectTeam' with the minimum fields required to make a request.
 --
@@ -951,10 +1076,9 @@ data ObjectAccessControlProjectTeam = ObjectAccessControlProjectTeam'
 objectAccessControlProjectTeam
     :: ObjectAccessControlProjectTeam
 objectAccessControlProjectTeam =
-    ObjectAccessControlProjectTeam'
-    { _oacptProjectNumber = Nothing
-    , _oacptTeam = Nothing
-    }
+  ObjectAccessControlProjectTeam'
+    {_oacptProjectNumber = Nothing, _oacptTeam = Nothing}
+
 
 -- | The project number.
 oacptProjectNumber :: Lens' ObjectAccessControlProjectTeam (Maybe Text)
@@ -986,10 +1110,13 @@ instance ToJSON ObjectAccessControlProjectTeam where
 -- by such a key.
 --
 -- /See:/ 'objectCustomerEncryption' smart constructor.
-data ObjectCustomerEncryption = ObjectCustomerEncryption'
+data ObjectCustomerEncryption =
+  ObjectCustomerEncryption'
     { _oceKeySha256           :: !(Maybe Text)
     , _oceEncryptionAlgorithm :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectCustomerEncryption' with the minimum fields required to make a request.
 --
@@ -1001,10 +1128,9 @@ data ObjectCustomerEncryption = ObjectCustomerEncryption'
 objectCustomerEncryption
     :: ObjectCustomerEncryption
 objectCustomerEncryption =
-    ObjectCustomerEncryption'
-    { _oceKeySha256 = Nothing
-    , _oceEncryptionAlgorithm = Nothing
-    }
+  ObjectCustomerEncryption'
+    {_oceKeySha256 = Nothing, _oceEncryptionAlgorithm = Nothing}
+
 
 -- | SHA256 hash value of the encryption key.
 oceKeySha256 :: Lens' ObjectCustomerEncryption (Maybe Text)
@@ -1036,7 +1162,8 @@ instance ToJSON ObjectCustomerEncryption where
 -- | A bucket.
 --
 -- /See:/ 'bucket' smart constructor.
-data Bucket = Bucket'
+data Bucket =
+  Bucket'
     { _bucEtag                  :: !(Maybe Text)
     , _bucLocation              :: !(Maybe Text)
     , _bucIAMConfiguration      :: !(Maybe BucketIAMConfiguration)
@@ -1062,7 +1189,9 @@ data Bucket = Bucket'
     , _bucLogging               :: !(Maybe BucketLogging)
     , _bucACL                   :: !(Maybe [BucketAccessControl])
     , _bucDefaultEventBasedHold :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Bucket' with the minimum fields required to make a request.
 --
@@ -1120,7 +1249,7 @@ data Bucket = Bucket'
 bucket
     :: Bucket
 bucket =
-    Bucket'
+  Bucket'
     { _bucEtag = Nothing
     , _bucLocation = Nothing
     , _bucIAMConfiguration = Nothing
@@ -1147,6 +1276,7 @@ bucket =
     , _bucACL = Nothing
     , _bucDefaultEventBasedHold = Nothing
     }
+
 
 -- | HTTP 1.1 Entity tag for the bucket.
 bucEtag :: Lens' Bucket (Maybe Text)
@@ -1382,12 +1512,15 @@ instance ToJSON Bucket where
 -- | A list of objects.
 --
 -- /See:/ 'objects' smart constructor.
-data Objects = Objects'
+data Objects =
+  Objects'
     { _oNextPageToken :: !(Maybe Text)
     , _oKind          :: !Text
     , _oItems         :: !(Maybe [Object])
     , _oPrefixes      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Objects' with the minimum fields required to make a request.
 --
@@ -1403,12 +1536,13 @@ data Objects = Objects'
 objects
     :: Objects
 objects =
-    Objects'
+  Objects'
     { _oNextPageToken = Nothing
     , _oKind = "storage#objects"
     , _oItems = Nothing
     , _oPrefixes = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -1457,10 +1591,13 @@ instance ToJSON Objects where
 -- | An access-control list.
 --
 -- /See:/ 'bucketAccessControls' smart constructor.
-data BucketAccessControls = BucketAccessControls'
+data BucketAccessControls =
+  BucketAccessControls'
     { _bacKind  :: !Text
     , _bacItems :: !(Maybe [BucketAccessControl])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketAccessControls' with the minimum fields required to make a request.
 --
@@ -1472,10 +1609,9 @@ data BucketAccessControls = BucketAccessControls'
 bucketAccessControls
     :: BucketAccessControls
 bucketAccessControls =
-    BucketAccessControls'
-    { _bacKind = "storage#bucketAccessControls"
-    , _bacItems = Nothing
-    }
+  BucketAccessControls'
+    {_bacKind = "storage#bucketAccessControls", _bacItems = Nothing}
+
 
 -- | The kind of item this is. For lists of bucket access control entries,
 -- this is always storage#bucketAccessControls.
@@ -1507,9 +1643,12 @@ instance ToJSON BucketAccessControls where
 -- | Encryption configuration for a bucket.
 --
 -- /See:/ 'bucketEncryption' smart constructor.
-newtype BucketEncryption = BucketEncryption'
+newtype BucketEncryption =
+  BucketEncryption'
     { _beDefaultKmsKeyName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketEncryption' with the minimum fields required to make a request.
 --
@@ -1518,10 +1657,8 @@ newtype BucketEncryption = BucketEncryption'
 -- * 'beDefaultKmsKeyName'
 bucketEncryption
     :: BucketEncryption
-bucketEncryption =
-    BucketEncryption'
-    { _beDefaultKmsKeyName = Nothing
-    }
+bucketEncryption = BucketEncryption' {_beDefaultKmsKeyName = Nothing}
+
 
 -- | A Cloud KMS key that will be used to encrypt objects inserted into this
 -- bucket, if no encryption method is specified.
@@ -1545,11 +1682,14 @@ instance ToJSON BucketEncryption where
 -- | A Compose request.
 --
 -- /See:/ 'composeRequest' smart constructor.
-data ComposeRequest = ComposeRequest'
+data ComposeRequest =
+  ComposeRequest'
     { _crDestination   :: !(Maybe Object)
     , _crKind          :: !Text
     , _crSourceObjects :: !(Maybe [ComposeRequestSourceObjectsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ComposeRequest' with the minimum fields required to make a request.
 --
@@ -1563,11 +1703,12 @@ data ComposeRequest = ComposeRequest'
 composeRequest
     :: ComposeRequest
 composeRequest =
-    ComposeRequest'
+  ComposeRequest'
     { _crDestination = Nothing
     , _crKind = "storage#composeRequest"
     , _crSourceObjects = Nothing
     }
+
 
 -- | Properties of the resulting object.
 crDestination :: Lens' ComposeRequest (Maybe Object)
@@ -1608,10 +1749,13 @@ instance ToJSON ComposeRequest where
 -- | A subscription to receive Google PubSub notifications.
 --
 -- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount'
+data ServiceAccount =
+  ServiceAccount'
     { _saKind         :: !Text
     , _saEmailAddress :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
@@ -1623,10 +1767,9 @@ data ServiceAccount = ServiceAccount'
 serviceAccount
     :: ServiceAccount
 serviceAccount =
-    ServiceAccount'
-    { _saKind = "storage#serviceAccount"
-    , _saEmailAddress = Nothing
-    }
+  ServiceAccount'
+    {_saKind = "storage#serviceAccount", _saEmailAddress = Nothing}
+
 
 -- | The kind of item this is. For notifications, this is always
 -- storage#notification.
@@ -1657,10 +1800,13 @@ instance ToJSON ServiceAccount where
 -- | The owner of the bucket. This is always the project team\'s owner group.
 --
 -- /See:/ 'bucketOwner' smart constructor.
-data BucketOwner = BucketOwner'
+data BucketOwner =
+  BucketOwner'
     { _boEntity   :: !(Maybe Text)
     , _boEntityId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketOwner' with the minimum fields required to make a request.
 --
@@ -1671,11 +1817,8 @@ data BucketOwner = BucketOwner'
 -- * 'boEntityId'
 bucketOwner
     :: BucketOwner
-bucketOwner =
-    BucketOwner'
-    { _boEntity = Nothing
-    , _boEntityId = Nothing
-    }
+bucketOwner = BucketOwner' {_boEntity = Nothing, _boEntityId = Nothing}
+
 
 -- | The entity, in the form project-owner-projectId.
 boEntity :: Lens' BucketOwner (Maybe Text)
@@ -1702,11 +1845,14 @@ instance ToJSON BucketOwner where
 
 --
 -- /See:/ 'composeRequestSourceObjectsItem' smart constructor.
-data ComposeRequestSourceObjectsItem = ComposeRequestSourceObjectsItem'
+data ComposeRequestSourceObjectsItem =
+  ComposeRequestSourceObjectsItem'
     { _crsoiName                :: !(Maybe Text)
     , _crsoiObjectPreconditions :: !(Maybe ComposeRequestSourceObjectsItemObjectPreconditions)
     , _crsoiGeneration          :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ComposeRequestSourceObjectsItem' with the minimum fields required to make a request.
 --
@@ -1720,11 +1866,12 @@ data ComposeRequestSourceObjectsItem = ComposeRequestSourceObjectsItem'
 composeRequestSourceObjectsItem
     :: ComposeRequestSourceObjectsItem
 composeRequestSourceObjectsItem =
-    ComposeRequestSourceObjectsItem'
+  ComposeRequestSourceObjectsItem'
     { _crsoiName = Nothing
     , _crsoiObjectPreconditions = Nothing
     , _crsoiGeneration = Nothing
     }
+
 
 -- | The source object\'s name. All source objects must reside in the same
 -- bucket.
@@ -1766,9 +1913,12 @@ instance ToJSON ComposeRequestSourceObjectsItem where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-newtype ChannelParams = ChannelParams'
+newtype ChannelParams =
+  ChannelParams'
     { _cpAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
@@ -1779,9 +1929,8 @@ channelParams
     :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
-    ChannelParams'
-    { _cpAddtional = _Coerce # pCpAddtional_
-    }
+  ChannelParams' {_cpAddtional = _Coerce # pCpAddtional_}
+
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
@@ -1799,11 +1948,14 @@ instance ToJSON ChannelParams where
 
 --
 -- /See:/ 'policyBindingsItem' smart constructor.
-data PolicyBindingsItem = PolicyBindingsItem'
+data PolicyBindingsItem =
+  PolicyBindingsItem'
     { _pbiMembers   :: !(Maybe [Text])
     , _pbiRole      :: !(Maybe Text)
-    , _pbiCondition :: !(Maybe JSONValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    , _pbiCondition :: !(Maybe Expr)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PolicyBindingsItem' with the minimum fields required to make a request.
 --
@@ -1817,11 +1969,9 @@ data PolicyBindingsItem = PolicyBindingsItem'
 policyBindingsItem
     :: PolicyBindingsItem
 policyBindingsItem =
-    PolicyBindingsItem'
-    { _pbiMembers = Nothing
-    , _pbiRole = Nothing
-    , _pbiCondition = Nothing
-    }
+  PolicyBindingsItem'
+    {_pbiMembers = Nothing, _pbiRole = Nothing, _pbiCondition = Nothing}
+
 
 -- | A collection of identifiers for members who may assume the provided
 -- role. Recognized identifiers are as follows: - allUsers — A special
@@ -1872,7 +2022,10 @@ pbiMembers
 pbiRole :: Lens' PolicyBindingsItem (Maybe Text)
 pbiRole = lens _pbiRole (\ s a -> s{_pbiRole = a})
 
-pbiCondition :: Lens' PolicyBindingsItem (Maybe JSONValue)
+-- | The condition that is associated with this binding. NOTE: an unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
+pbiCondition :: Lens' PolicyBindingsItem (Maybe Expr)
 pbiCondition
   = lens _pbiCondition (\ s a -> s{_pbiCondition = a})
 
@@ -1895,7 +2048,8 @@ instance ToJSON PolicyBindingsItem where
 -- | An object.
 --
 -- /See:/ 'object'' smart constructor.
-data Object = Object'
+data Object =
+  Object'
     { _objTemporaryHold           :: !(Maybe Bool)
     , _objEtag                    :: !(Maybe Text)
     , _objTimeStorageClassUpdated :: !(Maybe DateTime')
@@ -1927,7 +2081,9 @@ data Object = Object'
     , _objContentDisPosition      :: !(Maybe Text)
     , _objMD5Hash                 :: !(Maybe Text)
     , _objContentType             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Object' with the minimum fields required to make a request.
 --
@@ -1997,7 +2153,7 @@ data Object = Object'
 object'
     :: Object
 object' =
-    Object'
+  Object'
     { _objTemporaryHold = Nothing
     , _objEtag = Nothing
     , _objTimeStorageClassUpdated = Nothing
@@ -2030,6 +2186,7 @@ object' =
     , _objMD5Hash = Nothing
     , _objContentType = Nothing
     }
+
 
 -- | Whether an object is under temporary hold. While this flag is set to
 -- true, the object is protected against deletion and overwrites. A common
@@ -2321,9 +2478,12 @@ instance ToJSON Object where
 -- | Conditions that must be met for this operation to execute.
 --
 -- /See:/ 'composeRequestSourceObjectsItemObjectPreconditions' smart constructor.
-newtype ComposeRequestSourceObjectsItemObjectPreconditions = ComposeRequestSourceObjectsItemObjectPreconditions'
+newtype ComposeRequestSourceObjectsItemObjectPreconditions =
+  ComposeRequestSourceObjectsItemObjectPreconditions'
     { _crsoiopIfGenerationMatch :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ComposeRequestSourceObjectsItemObjectPreconditions' with the minimum fields required to make a request.
 --
@@ -2333,9 +2493,9 @@ newtype ComposeRequestSourceObjectsItemObjectPreconditions = ComposeRequestSourc
 composeRequestSourceObjectsItemObjectPreconditions
     :: ComposeRequestSourceObjectsItemObjectPreconditions
 composeRequestSourceObjectsItemObjectPreconditions =
-    ComposeRequestSourceObjectsItemObjectPreconditions'
-    { _crsoiopIfGenerationMatch = Nothing
-    }
+  ComposeRequestSourceObjectsItemObjectPreconditions'
+    {_crsoiopIfGenerationMatch = Nothing}
+
 
 -- | Only perform the composition if the generation of the source object that
 -- would be used matches this value. If this value and a generation are
@@ -2347,7 +2507,7 @@ crsoiopIfGenerationMatch
       . mapping _Coerce
 
 instance FromJSON
-         ComposeRequestSourceObjectsItemObjectPreconditions
+           ComposeRequestSourceObjectsItemObjectPreconditions
          where
         parseJSON
           = withObject
@@ -2357,7 +2517,7 @@ instance FromJSON
                    <$> (o .:? "ifGenerationMatch"))
 
 instance ToJSON
-         ComposeRequestSourceObjectsItemObjectPreconditions
+           ComposeRequestSourceObjectsItemObjectPreconditions
          where
         toJSON
           ComposeRequestSourceObjectsItemObjectPreconditions'{..}
@@ -2369,10 +2529,13 @@ instance ToJSON
 -- | The project team associated with the entity, if any.
 --
 -- /See:/ 'bucketAccessControlProjectTeam' smart constructor.
-data BucketAccessControlProjectTeam = BucketAccessControlProjectTeam'
+data BucketAccessControlProjectTeam =
+  BucketAccessControlProjectTeam'
     { _bacptProjectNumber :: !(Maybe Text)
     , _bacptTeam          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketAccessControlProjectTeam' with the minimum fields required to make a request.
 --
@@ -2384,10 +2547,9 @@ data BucketAccessControlProjectTeam = BucketAccessControlProjectTeam'
 bucketAccessControlProjectTeam
     :: BucketAccessControlProjectTeam
 bucketAccessControlProjectTeam =
-    BucketAccessControlProjectTeam'
-    { _bacptProjectNumber = Nothing
-    , _bacptTeam = Nothing
-    }
+  BucketAccessControlProjectTeam'
+    {_bacptProjectNumber = Nothing, _bacptTeam = Nothing}
+
 
 -- | The project number.
 bacptProjectNumber :: Lens' BucketAccessControlProjectTeam (Maybe Text)
@@ -2418,10 +2580,13 @@ instance ToJSON BucketAccessControlProjectTeam where
 -- | An access-control list.
 --
 -- /See:/ 'objectAccessControls' smart constructor.
-data ObjectAccessControls = ObjectAccessControls'
+data ObjectAccessControls =
+  ObjectAccessControls'
     { _oacKind  :: !Text
     , _oacItems :: !(Maybe [ObjectAccessControl])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectAccessControls' with the minimum fields required to make a request.
 --
@@ -2433,10 +2598,9 @@ data ObjectAccessControls = ObjectAccessControls'
 objectAccessControls
     :: ObjectAccessControls
 objectAccessControls =
-    ObjectAccessControls'
-    { _oacKind = "storage#objectAccessControls"
-    , _oacItems = Nothing
-    }
+  ObjectAccessControls'
+    {_oacKind = "storage#objectAccessControls", _oacItems = Nothing}
+
 
 -- | The kind of item this is. For lists of object access control entries,
 -- this is always storage#objectAccessControls.
@@ -2470,10 +2634,13 @@ instance ToJSON ObjectAccessControls where
 -- Examples for more information.
 --
 -- /See:/ 'bucketWebsite' smart constructor.
-data BucketWebsite = BucketWebsite'
+data BucketWebsite =
+  BucketWebsite'
     { _bwMainPageSuffix :: !(Maybe Text)
     , _bwNotFoundPage   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketWebsite' with the minimum fields required to make a request.
 --
@@ -2485,10 +2652,8 @@ data BucketWebsite = BucketWebsite'
 bucketWebsite
     :: BucketWebsite
 bucketWebsite =
-    BucketWebsite'
-    { _bwMainPageSuffix = Nothing
-    , _bwNotFoundPage = Nothing
-    }
+  BucketWebsite' {_bwMainPageSuffix = Nothing, _bwNotFoundPage = Nothing}
+
 
 -- | If the requested object path is missing, the service will ensure the
 -- path has a trailing \'\/\', append this suffix, and attempt to retrieve
@@ -2524,7 +2689,8 @@ instance ToJSON BucketWebsite where
 -- | An access-control entry.
 --
 -- /See:/ 'bucketAccessControl' smart constructor.
-data BucketAccessControl = BucketAccessControl'
+data BucketAccessControl =
+  BucketAccessControl'
     { _bacaEmail       :: !(Maybe Text)
     , _bacaEtag        :: !(Maybe Text)
     , _bacaKind        :: !Text
@@ -2536,7 +2702,9 @@ data BucketAccessControl = BucketAccessControl'
     , _bacaProjectTeam :: !(Maybe BucketAccessControlProjectTeam)
     , _bacaEntity      :: !(Maybe Text)
     , _bacaEntityId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketAccessControl' with the minimum fields required to make a request.
 --
@@ -2566,7 +2734,7 @@ data BucketAccessControl = BucketAccessControl'
 bucketAccessControl
     :: BucketAccessControl
 bucketAccessControl =
-    BucketAccessControl'
+  BucketAccessControl'
     { _bacaEmail = Nothing
     , _bacaEtag = Nothing
     , _bacaKind = "storage#bucketAccessControl"
@@ -2579,6 +2747,7 @@ bucketAccessControl =
     , _bacaEntity = Nothing
     , _bacaEntityId = Nothing
     }
+
 
 -- | The email address associated with the entity, if any.
 bacaEmail :: Lens' BucketAccessControl (Maybe Text)
@@ -2674,10 +2843,13 @@ instance ToJSON BucketAccessControl where
 -- | The action to take.
 --
 -- /See:/ 'bucketLifecycleRuleItemAction' smart constructor.
-data BucketLifecycleRuleItemAction = BucketLifecycleRuleItemAction'
+data BucketLifecycleRuleItemAction =
+  BucketLifecycleRuleItemAction'
     { _blriaStorageClass :: !(Maybe Text)
     , _blriaType         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketLifecycleRuleItemAction' with the minimum fields required to make a request.
 --
@@ -2689,10 +2861,9 @@ data BucketLifecycleRuleItemAction = BucketLifecycleRuleItemAction'
 bucketLifecycleRuleItemAction
     :: BucketLifecycleRuleItemAction
 bucketLifecycleRuleItemAction =
-    BucketLifecycleRuleItemAction'
-    { _blriaStorageClass = Nothing
-    , _blriaType = Nothing
-    }
+  BucketLifecycleRuleItemAction'
+    {_blriaStorageClass = Nothing, _blriaType = Nothing}
+
 
 -- | Target storage class. Required iff the type of the action is
 -- SetStorageClass.
@@ -2724,10 +2895,13 @@ instance ToJSON BucketLifecycleRuleItemAction where
 -- | A storage.(buckets|objects).testIamPermissions response.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-data TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+data TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiprKind        :: !Text
     , _tiprPermissions :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -2739,10 +2913,11 @@ data TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
+  TestIAMPermissionsResponse'
     { _tiprKind = "storage#testIamPermissionsResponse"
     , _tiprPermissions = Nothing
     }
+
 
 -- | The kind of item this is.
 tiprKind :: Lens' TestIAMPermissionsResponse Text
@@ -2788,12 +2963,15 @@ instance ToJSON TestIAMPermissionsResponse where
 -- | A bucket\/object IAM policy.
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pEtag       :: !(Maybe Bytes)
     , _pResourceId :: !(Maybe Text)
     , _pKind       :: !Text
     , _pBindings   :: !(Maybe [PolicyBindingsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -2809,12 +2987,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pEtag = Nothing
     , _pResourceId = Nothing
     , _pKind = "storage#policy"
     , _pBindings = Nothing
     }
+
 
 -- | HTTP 1.1 Entity tag for the policy.
 pEtag :: Lens' Policy (Maybe ByteString)
@@ -2867,9 +3046,12 @@ instance ToJSON Policy where
 -- | The bucket\'s IAM configuration.
 --
 -- /See:/ 'bucketIAMConfiguration' smart constructor.
-newtype BucketIAMConfiguration = BucketIAMConfiguration'
+newtype BucketIAMConfiguration =
+  BucketIAMConfiguration'
     { _bicBucketPolicyOnly :: Maybe BucketIAMConfigurationBucketPolicyOnly
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketIAMConfiguration' with the minimum fields required to make a request.
 --
@@ -2879,10 +3061,10 @@ newtype BucketIAMConfiguration = BucketIAMConfiguration'
 bucketIAMConfiguration
     :: BucketIAMConfiguration
 bucketIAMConfiguration =
-    BucketIAMConfiguration'
-    { _bicBucketPolicyOnly = Nothing
-    }
+  BucketIAMConfiguration' {_bicBucketPolicyOnly = Nothing}
 
+
+-- | The bucket\'s Bucket Policy Only configuration.
 bicBucketPolicyOnly :: Lens' BucketIAMConfiguration (Maybe BucketIAMConfigurationBucketPolicyOnly)
 bicBucketPolicyOnly
   = lens _bicBucketPolicyOnly
@@ -2904,7 +3086,8 @@ instance ToJSON BucketIAMConfiguration where
 -- | An access-control entry.
 --
 -- /See:/ 'objectAccessControl' smart constructor.
-data ObjectAccessControl = ObjectAccessControl'
+data ObjectAccessControl =
+  ObjectAccessControl'
     { _oacaEmail       :: !(Maybe Text)
     , _oacaEtag        :: !(Maybe Text)
     , _oacaKind        :: !Text
@@ -2918,7 +3101,9 @@ data ObjectAccessControl = ObjectAccessControl'
     , _oacaEntity      :: !(Maybe Text)
     , _oacaGeneration  :: !(Maybe (Textual Int64))
     , _oacaEntityId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectAccessControl' with the minimum fields required to make a request.
 --
@@ -2952,7 +3137,7 @@ data ObjectAccessControl = ObjectAccessControl'
 objectAccessControl
     :: ObjectAccessControl
 objectAccessControl =
-    ObjectAccessControl'
+  ObjectAccessControl'
     { _oacaEmail = Nothing
     , _oacaEtag = Nothing
     , _oacaKind = "storage#objectAccessControl"
@@ -2967,6 +3152,7 @@ objectAccessControl =
     , _oacaGeneration = Nothing
     , _oacaEntityId = Nothing
     }
+
 
 -- | The email address associated with the entity, if any.
 oacaEmail :: Lens' ObjectAccessControl (Maybe Text)
@@ -3077,10 +3263,13 @@ instance ToJSON ObjectAccessControl where
 -- | A list of notification subscriptions.
 --
 -- /See:/ 'notifications' smart constructor.
-data Notifications = Notifications'
+data Notifications =
+  Notifications'
     { _notKind  :: !Text
     , _notItems :: !(Maybe [Notification])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Notifications' with the minimum fields required to make a request.
 --
@@ -3092,10 +3281,8 @@ data Notifications = Notifications'
 notifications
     :: Notifications
 notifications =
-    Notifications'
-    { _notKind = "storage#notifications"
-    , _notItems = Nothing
-    }
+  Notifications' {_notKind = "storage#notifications", _notItems = Nothing}
+
 
 -- | The kind of item this is. For lists of notifications, this is always
 -- storage#notifications.
@@ -3128,9 +3315,12 @@ instance ToJSON Notifications where
 -- message published for this notification subscription.
 --
 -- /See:/ 'notificationCustom_attributes' smart constructor.
-newtype NotificationCustom_attributes = NotificationCustom_attributes'
+newtype NotificationCustom_attributes =
+  NotificationCustom_attributes'
     { _ncAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NotificationCustom_attributes' with the minimum fields required to make a request.
 --
@@ -3141,9 +3331,8 @@ notificationCustom_attributes
     :: HashMap Text Text -- ^ 'ncAddtional'
     -> NotificationCustom_attributes
 notificationCustom_attributes pNcAddtional_ =
-    NotificationCustom_attributes'
-    { _ncAddtional = _Coerce # pNcAddtional_
-    }
+  NotificationCustom_attributes' {_ncAddtional = _Coerce # pNcAddtional_}
+
 
 ncAddtional :: Lens' NotificationCustom_attributes (HashMap Text Text)
 ncAddtional
@@ -3160,12 +3349,16 @@ instance FromJSON NotificationCustom_attributes where
 instance ToJSON NotificationCustom_attributes where
         toJSON = toJSON . _ncAddtional
 
+-- | The bucket\'s Bucket Policy Only configuration.
 --
 -- /See:/ 'bucketIAMConfigurationBucketPolicyOnly' smart constructor.
-data BucketIAMConfigurationBucketPolicyOnly = BucketIAMConfigurationBucketPolicyOnly'
+data BucketIAMConfigurationBucketPolicyOnly =
+  BucketIAMConfigurationBucketPolicyOnly'
     { _bicbpoLockedTime :: !(Maybe DateTime')
     , _bicbpoEnabled    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketIAMConfigurationBucketPolicyOnly' with the minimum fields required to make a request.
 --
@@ -3177,10 +3370,9 @@ data BucketIAMConfigurationBucketPolicyOnly = BucketIAMConfigurationBucketPolicy
 bucketIAMConfigurationBucketPolicyOnly
     :: BucketIAMConfigurationBucketPolicyOnly
 bucketIAMConfigurationBucketPolicyOnly =
-    BucketIAMConfigurationBucketPolicyOnly'
-    { _bicbpoLockedTime = Nothing
-    , _bicbpoEnabled = Nothing
-    }
+  BucketIAMConfigurationBucketPolicyOnly'
+    {_bicbpoLockedTime = Nothing, _bicbpoEnabled = Nothing}
+
 
 -- | The deadline time for changing iamConfiguration.bucketPolicyOnly.enabled
 -- from true to false in RFC 3339 format.
@@ -3199,7 +3391,8 @@ bicbpoEnabled
       (\ s a -> s{_bicbpoEnabled = a})
 
 instance FromJSON
-         BucketIAMConfigurationBucketPolicyOnly where
+           BucketIAMConfigurationBucketPolicyOnly
+         where
         parseJSON
           = withObject "BucketIAMConfigurationBucketPolicyOnly"
               (\ o ->
@@ -3207,7 +3400,8 @@ instance FromJSON
                    (o .:? "lockedTime") <*> (o .:? "enabled"))
 
 instance ToJSON
-         BucketIAMConfigurationBucketPolicyOnly where
+           BucketIAMConfigurationBucketPolicyOnly
+         where
         toJSON BucketIAMConfigurationBucketPolicyOnly'{..}
           = object
               (catMaybes
@@ -3217,14 +3411,17 @@ instance ToJSON
 -- | A rewrite response.
 --
 -- /See:/ 'rewriteResponse' smart constructor.
-data RewriteResponse = RewriteResponse'
+data RewriteResponse =
+  RewriteResponse'
     { _rrKind                :: !Text
     , _rrDone                :: !(Maybe Bool)
     , _rrResource            :: !(Maybe Object)
     , _rrObjectSize          :: !(Maybe (Textual Int64))
     , _rrTotalBytesRewritten :: !(Maybe (Textual Int64))
     , _rrRewriteToken        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RewriteResponse' with the minimum fields required to make a request.
 --
@@ -3244,7 +3441,7 @@ data RewriteResponse = RewriteResponse'
 rewriteResponse
     :: RewriteResponse
 rewriteResponse =
-    RewriteResponse'
+  RewriteResponse'
     { _rrKind = "storage#rewriteResponse"
     , _rrDone = Nothing
     , _rrResource = Nothing
@@ -3252,6 +3449,7 @@ rewriteResponse =
     , _rrTotalBytesRewritten = Nothing
     , _rrRewriteToken = Nothing
     }
+
 
 -- | The kind of item this is.
 rrKind :: Lens' RewriteResponse Text

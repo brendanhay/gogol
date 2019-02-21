@@ -1054,38 +1054,38 @@ cloudSearchService
 -- | New Service:
 -- https:\/\/www.googleapis.com\/auth\/cloud_search.settings.query
 cloudSearchSettingsQueryScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.settings.query"]
-cloudSearchSettingsQueryScope = Proxy;
+cloudSearchSettingsQueryScope = Proxy
 
 -- | New Service:
 -- https:\/\/www.googleapis.com\/auth\/cloud_search.stats.indexing
 cloudSearchStatsIndexingScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.stats.indexing"]
-cloudSearchStatsIndexingScope = Proxy;
+cloudSearchStatsIndexingScope = Proxy
 
 -- | New Service: https:\/\/www.googleapis.com\/auth\/cloud_search.indexing
 cloudSearchIndexingScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.indexing"]
-cloudSearchIndexingScope = Proxy;
+cloudSearchIndexingScope = Proxy
 
 -- | Index and serve your organization\'s data with Cloud Search
 cloudSearchScope :: Proxy '["https://www.googleapis.com/auth/cloud_search"]
-cloudSearchScope = Proxy;
+cloudSearchScope = Proxy
 
 -- | New Service:
 -- https:\/\/www.googleapis.com\/auth\/cloud_search.settings.indexing
 cloudSearchSettingsIndexingScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.settings.indexing"]
-cloudSearchSettingsIndexingScope = Proxy;
+cloudSearchSettingsIndexingScope = Proxy
 
 -- | Search your organization\'s data in the Cloud Search index
 cloudSearchQueryScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.query"]
-cloudSearchQueryScope = Proxy;
+cloudSearchQueryScope = Proxy
 
 -- | New Service: https:\/\/www.googleapis.com\/auth\/cloud_search.debug
 cloudSearchDebugScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.debug"]
-cloudSearchDebugScope = Proxy;
+cloudSearchDebugScope = Proxy
 
 -- | New Service: https:\/\/www.googleapis.com\/auth\/cloud_search.stats
 cloudSearchStatsScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.stats"]
-cloudSearchStatsScope = Proxy;
+cloudSearchStatsScope = Proxy
 
 -- | New Service: https:\/\/www.googleapis.com\/auth\/cloud_search.settings
 cloudSearchSettingsScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.settings"]
-cloudSearchSettingsScope = Proxy;
+cloudSearchSettingsScope = Proxy

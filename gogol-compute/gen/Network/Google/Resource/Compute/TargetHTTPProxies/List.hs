@@ -64,13 +64,16 @@ type TargetHTTPProxiesListResource =
 -- specified project.
 --
 -- /See:/ 'targetHTTPProxiesList' smart constructor.
-data TargetHTTPProxiesList = TargetHTTPProxiesList'
+data TargetHTTPProxiesList =
+  TargetHTTPProxiesList'
     { _thttpplOrderBy    :: !(Maybe Text)
     , _thttpplProject    :: !Text
     , _thttpplFilter     :: !(Maybe Text)
     , _thttpplPageToken  :: !(Maybe Text)
     , _thttpplMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetHTTPProxiesList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ targetHTTPProxiesList
     :: Text -- ^ 'thttpplProject'
     -> TargetHTTPProxiesList
 targetHTTPProxiesList pThttpplProject_ =
-    TargetHTTPProxiesList'
+  TargetHTTPProxiesList'
     { _thttpplOrderBy = Nothing
     , _thttpplProject = pThttpplProject_
     , _thttpplFilter = Nothing
     , _thttpplPageToken = Nothing
     , _thttpplMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

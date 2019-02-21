@@ -74,7 +74,8 @@ type ProjectsNotesSetIAMPolicyResource =
 -- occurrences.
 --
 -- /See:/ 'projectsNotesSetIAMPolicy' smart constructor.
-data ProjectsNotesSetIAMPolicy = ProjectsNotesSetIAMPolicy'
+data ProjectsNotesSetIAMPolicy =
+  ProjectsNotesSetIAMPolicy'
     { _pnsipXgafv          :: !(Maybe Xgafv)
     , _pnsipUploadProtocol :: !(Maybe Text)
     , _pnsipAccessToken    :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsNotesSetIAMPolicy = ProjectsNotesSetIAMPolicy'
     , _pnsipPayload        :: !SetIAMPolicyRequest
     , _pnsipResource       :: !Text
     , _pnsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ projectsNotesSetIAMPolicy
     -> Text -- ^ 'pnsipResource'
     -> ProjectsNotesSetIAMPolicy
 projectsNotesSetIAMPolicy pPnsipPayload_ pPnsipResource_ =
-    ProjectsNotesSetIAMPolicy'
+  ProjectsNotesSetIAMPolicy'
     { _pnsipXgafv = Nothing
     , _pnsipUploadProtocol = Nothing
     , _pnsipAccessToken = Nothing
@@ -115,6 +118,7 @@ projectsNotesSetIAMPolicy pPnsipPayload_ pPnsipResource_ =
     , _pnsipResource = pPnsipResource_
     , _pnsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pnsipXgafv :: Lens' ProjectsNotesSetIAMPolicy (Maybe Xgafv)

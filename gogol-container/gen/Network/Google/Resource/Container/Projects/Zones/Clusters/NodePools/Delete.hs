@@ -72,7 +72,8 @@ type ProjectsZonesClustersNodePoolsDeleteResource =
 -- | Deletes a node pool from a cluster.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsDelete' smart constructor.
-data ProjectsZonesClustersNodePoolsDelete = ProjectsZonesClustersNodePoolsDelete'
+data ProjectsZonesClustersNodePoolsDelete =
+  ProjectsZonesClustersNodePoolsDelete'
     { _pzcnpdXgafv          :: !(Maybe Xgafv)
     , _pzcnpdUploadProtocol :: !(Maybe Text)
     , _pzcnpdAccessToken    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsZonesClustersNodePoolsDelete = ProjectsZonesClustersNodePoolsDelete
     , _pzcnpdClusterId      :: !Text
     , _pzcnpdProjectId      :: !Text
     , _pzcnpdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsDelete' with the minimum fields required to make a request.
 --
@@ -115,7 +118,7 @@ projectsZonesClustersNodePoolsDelete
     -> Text -- ^ 'pzcnpdProjectId'
     -> ProjectsZonesClustersNodePoolsDelete
 projectsZonesClustersNodePoolsDelete pPzcnpdZone_ pPzcnpdNodePoolId_ pPzcnpdClusterId_ pPzcnpdProjectId_ =
-    ProjectsZonesClustersNodePoolsDelete'
+  ProjectsZonesClustersNodePoolsDelete'
     { _pzcnpdXgafv = Nothing
     , _pzcnpdUploadProtocol = Nothing
     , _pzcnpdAccessToken = Nothing
@@ -127,6 +130,7 @@ projectsZonesClustersNodePoolsDelete pPzcnpdZone_ pPzcnpdNodePoolId_ pPzcnpdClus
     , _pzcnpdProjectId = pPzcnpdProjectId_
     , _pzcnpdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpdXgafv :: Lens' ProjectsZonesClustersNodePoolsDelete (Maybe Xgafv)
@@ -194,7 +198,8 @@ pzcnpdCallback
       (\ s a -> s{_pzcnpdCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersNodePoolsDelete where
+           ProjectsZonesClustersNodePoolsDelete
+         where
         type Rs ProjectsZonesClustersNodePoolsDelete =
              Operation
         type Scopes ProjectsZonesClustersNodePoolsDelete =

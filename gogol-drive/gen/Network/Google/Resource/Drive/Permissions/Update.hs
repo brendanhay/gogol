@@ -65,7 +65,8 @@ type PermissionsUpdateResource =
 -- | Updates a permission with patch semantics.
 --
 -- /See:/ 'permissionsUpdate' smart constructor.
-data PermissionsUpdate = PermissionsUpdate'
+data PermissionsUpdate =
+  PermissionsUpdate'
     { _puPayload              :: !Permission
     , _puRemoveExpiration     :: !Bool
     , _puUseDomainAdminAccess :: !Bool
@@ -73,7 +74,9 @@ data PermissionsUpdate = PermissionsUpdate'
     , _puFileId               :: !Text
     , _puSupportsTeamDrives   :: !Bool
     , _puPermissionId         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PermissionsUpdate' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ permissionsUpdate
     -> Text -- ^ 'puPermissionId'
     -> PermissionsUpdate
 permissionsUpdate pPuPayload_ pPuFileId_ pPuPermissionId_ =
-    PermissionsUpdate'
+  PermissionsUpdate'
     { _puPayload = pPuPayload_
     , _puRemoveExpiration = False
     , _puUseDomainAdminAccess = False
@@ -107,6 +110,7 @@ permissionsUpdate pPuPayload_ pPuFileId_ pPuPermissionId_ =
     , _puSupportsTeamDrives = False
     , _puPermissionId = pPuPermissionId_
     }
+
 
 -- | Multipart request metadata.
 puPayload :: Lens' PermissionsUpdate Permission

@@ -64,14 +64,17 @@ type RegionCommitmentsListResource =
 -- | Retrieves a list of commitments contained within the specified region.
 --
 -- /See:/ 'regionCommitmentsList' smart constructor.
-data RegionCommitmentsList = RegionCommitmentsList'
+data RegionCommitmentsList =
+  RegionCommitmentsList'
     { _rclOrderBy    :: !(Maybe Text)
     , _rclProject    :: !Text
     , _rclFilter     :: !(Maybe Text)
     , _rclRegion     :: !Text
     , _rclPageToken  :: !(Maybe Text)
     , _rclMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionCommitmentsList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ regionCommitmentsList
     -> Text -- ^ 'rclRegion'
     -> RegionCommitmentsList
 regionCommitmentsList pRclProject_ pRclRegion_ =
-    RegionCommitmentsList'
+  RegionCommitmentsList'
     { _rclOrderBy = Nothing
     , _rclProject = pRclProject_
     , _rclFilter = Nothing
@@ -101,6 +104,7 @@ regionCommitmentsList pRclProject_ pRclRegion_ =
     , _rclPageToken = Nothing
     , _rclMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

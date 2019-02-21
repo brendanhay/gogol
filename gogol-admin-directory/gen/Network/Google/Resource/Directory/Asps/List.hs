@@ -53,9 +53,12 @@ type AspsListResource =
 -- | List the ASPs issued by a user.
 --
 -- /See:/ 'aspsList' smart constructor.
-newtype AspsList = AspsList'
+newtype AspsList =
+  AspsList'
     { _alUserKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AspsList' with the minimum fields required to make a request.
 --
@@ -65,10 +68,8 @@ newtype AspsList = AspsList'
 aspsList
     :: Text -- ^ 'alUserKey'
     -> AspsList
-aspsList pAlUserKey_ =
-    AspsList'
-    { _alUserKey = pAlUserKey_
-    }
+aspsList pAlUserKey_ = AspsList' {_alUserKey = pAlUserKey_}
+
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.

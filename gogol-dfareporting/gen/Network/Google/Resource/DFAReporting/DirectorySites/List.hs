@@ -41,12 +41,10 @@ module Network.Google.Resource.DFAReporting.DirectorySites.List
     , dslProFileId
     , dslSortOrder
     , dslActive
-    , dslCountryId
     , dslPageToken
     , dslSortField
     , dslAcceptsInStreamVideoPlacements
     , dslMaxResults
-    , dslParentId
     , dslDfpNetworkCode
     ) where
 
@@ -57,7 +55,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesList' request conforms to.
 type DirectorySitesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>
@@ -67,26 +65,22 @@ type DirectorySitesListResource =
                      QueryParams "ids" (Textual Int64) :>
                        QueryParam "sortOrder" DirectorySitesListSortOrder :>
                          QueryParam "active" Bool :>
-                           QueryParam "countryId" (Textual Int64) :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField"
-                                 DirectorySitesListSortField
+                           QueryParam "pageToken" Text :>
+                             QueryParam "sortField" DirectorySitesListSortField
+                               :>
+                               QueryParam "acceptsInStreamVideoPlacements" Bool
                                  :>
-                                 QueryParam "acceptsInStreamVideoPlacements"
-                                   Bool
-                                   :>
-                                   QueryParam "maxResults" (Textual Int32) :>
-                                     QueryParam "parentId" (Textual Int64) :>
-                                       QueryParam "dfpNetworkCode" Text :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON]
-                                             DirectorySitesListResponse
+                                 QueryParam "maxResults" (Textual Int32) :>
+                                   QueryParam "dfpNetworkCode" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] DirectorySitesListResponse
 
 -- | Retrieves a list of directory sites, possibly filtered. This method
 -- supports paging.
 --
 -- /See:/ 'directorySitesList' smart constructor.
-data DirectorySitesList = DirectorySitesList'
+data DirectorySitesList =
+  DirectorySitesList'
     { _dslSearchString                   :: !(Maybe Text)
     , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
@@ -94,14 +88,14 @@ data DirectorySitesList = DirectorySitesList'
     , _dslProFileId                      :: !(Textual Int64)
     , _dslSortOrder                      :: !DirectorySitesListSortOrder
     , _dslActive                         :: !(Maybe Bool)
-    , _dslCountryId                      :: !(Maybe (Textual Int64))
     , _dslPageToken                      :: !(Maybe Text)
     , _dslSortField                      :: !DirectorySitesListSortField
     , _dslAcceptsInStreamVideoPlacements :: !(Maybe Bool)
     , _dslMaxResults                     :: !(Textual Int32)
-    , _dslParentId                       :: !(Maybe (Textual Int64))
     , _dslDfpNetworkCode                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DirectorySitesList' with the minimum fields required to make a request.
 --
@@ -121,8 +115,6 @@ data DirectorySitesList = DirectorySitesList'
 --
 -- * 'dslActive'
 --
--- * 'dslCountryId'
---
 -- * 'dslPageToken'
 --
 -- * 'dslSortField'
@@ -131,14 +123,12 @@ data DirectorySitesList = DirectorySitesList'
 --
 -- * 'dslMaxResults'
 --
--- * 'dslParentId'
---
 -- * 'dslDfpNetworkCode'
 directorySitesList
     :: Int64 -- ^ 'dslProFileId'
     -> DirectorySitesList
 directorySitesList pDslProFileId_ =
-    DirectorySitesList'
+  DirectorySitesList'
     { _dslSearchString = Nothing
     , _dslAcceptsInterstitialPlacements = Nothing
     , _dslAcceptsPublisherPaidPlacements = Nothing
@@ -146,14 +136,13 @@ directorySitesList pDslProFileId_ =
     , _dslProFileId = _Coerce # pDslProFileId_
     , _dslSortOrder = DSLSOAscending
     , _dslActive = Nothing
-    , _dslCountryId = Nothing
     , _dslPageToken = Nothing
     , _dslSortField = DSLSFID
     , _dslAcceptsInStreamVideoPlacements = Nothing
     , _dslMaxResults = 1000
-    , _dslParentId = Nothing
     , _dslDfpNetworkCode = Nothing
     }
+
 
 -- | Allows searching for objects by name, ID or URL. Wildcards (*) are
 -- allowed. For example, \"directory site*2015\" will return objects with
@@ -205,12 +194,6 @@ dslActive :: Lens' DirectorySitesList (Maybe Bool)
 dslActive
   = lens _dslActive (\ s a -> s{_dslActive = a})
 
--- | Select only directory sites with this country ID.
-dslCountryId :: Lens' DirectorySitesList (Maybe Int64)
-dslCountryId
-  = lens _dslCountryId (\ s a -> s{_dslCountryId = a})
-      . mapping _Coerce
-
 -- | Value of the nextPageToken from the previous result page.
 dslPageToken :: Lens' DirectorySitesList (Maybe Text)
 dslPageToken
@@ -235,12 +218,6 @@ dslMaxResults
       (\ s a -> s{_dslMaxResults = a})
       . _Coerce
 
--- | Select only directory sites with this parent ID.
-dslParentId :: Lens' DirectorySitesList (Maybe Int64)
-dslParentId
-  = lens _dslParentId (\ s a -> s{_dslParentId = a}) .
-      mapping _Coerce
-
 -- | Select only directory sites with this Ad Manager network code.
 dslDfpNetworkCode :: Lens' DirectorySitesList (Maybe Text)
 dslDfpNetworkCode
@@ -259,12 +236,10 @@ instance GoogleRequest DirectorySitesList where
               (_dslIds ^. _Default)
               (Just _dslSortOrder)
               _dslActive
-              _dslCountryId
               _dslPageToken
               (Just _dslSortField)
               _dslAcceptsInStreamVideoPlacements
               (Just _dslMaxResults)
-              _dslParentId
               _dslDfpNetworkCode
               (Just AltJSON)
               dFAReportingService

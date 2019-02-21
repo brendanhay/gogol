@@ -67,13 +67,16 @@ type InstancesSetMinCPUPlatformResource =
 -- read Specifying a Minimum CPU Platform.
 --
 -- /See:/ 'instancesSetMinCPUPlatform' smart constructor.
-data InstancesSetMinCPUPlatform = InstancesSetMinCPUPlatform'
+data InstancesSetMinCPUPlatform =
+  InstancesSetMinCPUPlatform'
     { _ismcpRequestId :: !(Maybe Text)
     , _ismcpProject   :: !Text
     , _ismcpZone      :: !Text
     , _ismcpPayload   :: !InstancesSetMinCPUPlatformRequest
     , _ismcpInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesSetMinCPUPlatform' with the minimum fields required to make a request.
 --
@@ -95,13 +98,14 @@ instancesSetMinCPUPlatform
     -> Text -- ^ 'ismcpInstance'
     -> InstancesSetMinCPUPlatform
 instancesSetMinCPUPlatform pIsmcpProject_ pIsmcpZone_ pIsmcpPayload_ pIsmcpInstance_ =
-    InstancesSetMinCPUPlatform'
+  InstancesSetMinCPUPlatform'
     { _ismcpRequestId = Nothing
     , _ismcpProject = pIsmcpProject_
     , _ismcpZone = pIsmcpZone_
     , _ismcpPayload = pIsmcpPayload_
     , _ismcpInstance = pIsmcpInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

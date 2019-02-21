@@ -61,14 +61,17 @@ type UserEventsLogResource =
 -- | Logs a user event.
 --
 -- /See:/ 'userEventsLog' smart constructor.
-data UserEventsLog = UserEventsLog'
+data UserEventsLog =
+  UserEventsLog'
     { _uelXgafv          :: !(Maybe Xgafv)
     , _uelUploadProtocol :: !(Maybe Text)
     , _uelAccessToken    :: !(Maybe Text)
     , _uelUploadType     :: !(Maybe Text)
     , _uelPayload        :: !LogUserEventRequest
     , _uelCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserEventsLog' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ userEventsLog
     :: LogUserEventRequest -- ^ 'uelPayload'
     -> UserEventsLog
 userEventsLog pUelPayload_ =
-    UserEventsLog'
+  UserEventsLog'
     { _uelXgafv = Nothing
     , _uelUploadProtocol = Nothing
     , _uelAccessToken = Nothing
@@ -97,6 +100,7 @@ userEventsLog pUelPayload_ =
     , _uelPayload = pUelPayload_
     , _uelCallback = Nothing
     }
+
 
 -- | V1 error format.
 uelXgafv :: Lens' UserEventsLog (Maybe Xgafv)

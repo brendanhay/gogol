@@ -65,7 +65,8 @@ type ProjectsDatabasesDocumentsBatchGetResource =
 -- guaranteed to be returned in the same order that they were requested.
 --
 -- /See:/ 'projectsDatabasesDocumentsBatchGet' smart constructor.
-data ProjectsDatabasesDocumentsBatchGet = ProjectsDatabasesDocumentsBatchGet'
+data ProjectsDatabasesDocumentsBatchGet =
+  ProjectsDatabasesDocumentsBatchGet'
     { _pddbgXgafv          :: !(Maybe Xgafv)
     , _pddbgUploadProtocol :: !(Maybe Text)
     , _pddbgDatabase       :: !Text
@@ -73,7 +74,9 @@ data ProjectsDatabasesDocumentsBatchGet = ProjectsDatabasesDocumentsBatchGet'
     , _pddbgUploadType     :: !(Maybe Text)
     , _pddbgPayload        :: !BatchGetDocumentsRequest
     , _pddbgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsBatchGet' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsDatabasesDocumentsBatchGet
     -> BatchGetDocumentsRequest -- ^ 'pddbgPayload'
     -> ProjectsDatabasesDocumentsBatchGet
 projectsDatabasesDocumentsBatchGet pPddbgDatabase_ pPddbgPayload_ =
-    ProjectsDatabasesDocumentsBatchGet'
+  ProjectsDatabasesDocumentsBatchGet'
     { _pddbgXgafv = Nothing
     , _pddbgUploadProtocol = Nothing
     , _pddbgDatabase = pPddbgDatabase_
@@ -106,6 +109,7 @@ projectsDatabasesDocumentsBatchGet pPddbgDatabase_ pPddbgPayload_ =
     , _pddbgPayload = pPddbgPayload_
     , _pddbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddbgXgafv :: Lens' ProjectsDatabasesDocumentsBatchGet (Maybe Xgafv)
@@ -149,7 +153,8 @@ pddbgCallback
       (\ s a -> s{_pddbgCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsBatchGet where
+           ProjectsDatabasesDocumentsBatchGet
+         where
         type Rs ProjectsDatabasesDocumentsBatchGet =
              BatchGetDocumentsResponse
         type Scopes ProjectsDatabasesDocumentsBatchGet =

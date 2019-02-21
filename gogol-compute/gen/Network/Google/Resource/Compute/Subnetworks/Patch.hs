@@ -67,13 +67,16 @@ type SubnetworksPatchResource =
 -- subnetwork resource being patched.
 --
 -- /See:/ 'subnetworksPatch' smart constructor.
-data SubnetworksPatch = SubnetworksPatch'
+data SubnetworksPatch =
+  SubnetworksPatch'
     { _spRequestId  :: !(Maybe Text)
     , _spProject    :: !Text
     , _spPayload    :: !Subnetwork
     , _spSubnetwork :: !Text
     , _spRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubnetworksPatch' with the minimum fields required to make a request.
 --
@@ -95,13 +98,14 @@ subnetworksPatch
     -> Text -- ^ 'spRegion'
     -> SubnetworksPatch
 subnetworksPatch pSpProject_ pSpPayload_ pSpSubnetwork_ pSpRegion_ =
-    SubnetworksPatch'
+  SubnetworksPatch'
     { _spRequestId = Nothing
     , _spProject = pSpProject_
     , _spPayload = pSpPayload_
     , _spSubnetwork = pSpSubnetwork_
     , _spRegion = pSpRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

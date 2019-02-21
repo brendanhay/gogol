@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
@@ -69,7 +69,8 @@ type AccountsListResource =
 -- paging.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList'
+data AccountsList =
+  AccountsList'
     { _accSearchString :: !(Maybe Text)
     , _accIds          :: !(Maybe [Textual Int64])
     , _accProFileId    :: !(Textual Int64)
@@ -78,7 +79,9 @@ data AccountsList = AccountsList'
     , _accPageToken    :: !(Maybe Text)
     , _accSortField    :: !AccountsListSortField
     , _accMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ accountsList
     :: Int64 -- ^ 'accProFileId'
     -> AccountsList
 accountsList pAccProFileId_ =
-    AccountsList'
+  AccountsList'
     { _accSearchString = Nothing
     , _accIds = Nothing
     , _accProFileId = _Coerce # pAccProFileId_
@@ -113,6 +116,7 @@ accountsList pAccProFileId_ =
     , _accSortField = AID
     , _accMaxResults = 1000
     }
+
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"account*2015\" will return objects with names like

@@ -59,14 +59,17 @@ type ProjectsLocationsNodesDeleteResource =
 -- | Deletes a node.
 --
 -- /See:/ 'projectsLocationsNodesDelete' smart constructor.
-data ProjectsLocationsNodesDelete = ProjectsLocationsNodesDelete'
+data ProjectsLocationsNodesDelete =
+  ProjectsLocationsNodesDelete'
     { _plndXgafv          :: !(Maybe Xgafv)
     , _plndUploadProtocol :: !(Maybe Text)
     , _plndAccessToken    :: !(Maybe Text)
     , _plndUploadType     :: !(Maybe Text)
     , _plndName           :: !Text
     , _plndCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsNodesDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsLocationsNodesDelete
     :: Text -- ^ 'plndName'
     -> ProjectsLocationsNodesDelete
 projectsLocationsNodesDelete pPlndName_ =
-    ProjectsLocationsNodesDelete'
+  ProjectsLocationsNodesDelete'
     { _plndXgafv = Nothing
     , _plndUploadProtocol = Nothing
     , _plndAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsLocationsNodesDelete pPlndName_ =
     , _plndName = pPlndName_
     , _plndCallback = Nothing
     }
+
 
 -- | V1 error format.
 plndXgafv :: Lens' ProjectsLocationsNodesDelete (Maybe Xgafv)

@@ -58,12 +58,15 @@ type AccountstatusesListResource =
 -- | Lists the statuses of the sub-accounts in your Merchant Center account.
 --
 -- /See:/ 'accountstatusesList' smart constructor.
-data AccountstatusesList = AccountstatusesList'
+data AccountstatusesList =
+  AccountstatusesList'
     { _a2MerchantId   :: !(Textual Word64)
     , _a2Destinations :: !(Maybe [Text])
     , _a2PageToken    :: !(Maybe Text)
     , _a2MaxResults   :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountstatusesList' with the minimum fields required to make a request.
 --
@@ -80,12 +83,13 @@ accountstatusesList
     :: Word64 -- ^ 'a2MerchantId'
     -> AccountstatusesList
 accountstatusesList pA2MerchantId_ =
-    AccountstatusesList'
+  AccountstatusesList'
     { _a2MerchantId = _Coerce # pA2MerchantId_
     , _a2Destinations = Nothing
     , _a2PageToken = Nothing
     , _a2MaxResults = Nothing
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 a2MerchantId :: Lens' AccountstatusesList Word64

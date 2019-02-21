@@ -53,10 +53,13 @@ type TeamdrivesGetResource =
 -- | Gets a Team Drive\'s metadata by ID.
 --
 -- /See:/ 'teamdrivesGet' smart constructor.
-data TeamdrivesGet = TeamdrivesGet'
+data TeamdrivesGet =
+  TeamdrivesGet'
     { _tgTeamDriveId          :: !Text
     , _tgUseDomainAdminAccess :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeamdrivesGet' with the minimum fields required to make a request.
 --
@@ -69,10 +72,9 @@ teamdrivesGet
     :: Text -- ^ 'tgTeamDriveId'
     -> TeamdrivesGet
 teamdrivesGet pTgTeamDriveId_ =
-    TeamdrivesGet'
-    { _tgTeamDriveId = pTgTeamDriveId_
-    , _tgUseDomainAdminAccess = False
-    }
+  TeamdrivesGet'
+    {_tgTeamDriveId = pTgTeamDriveId_, _tgUseDomainAdminAccess = False}
+
 
 -- | The ID of the Team Drive
 tgTeamDriveId :: Lens' TeamdrivesGet Text

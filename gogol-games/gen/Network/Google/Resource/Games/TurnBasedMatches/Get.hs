@@ -56,11 +56,14 @@ type TurnBasedMatchesGetResource =
 -- | Get the data for a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesGet' smart constructor.
-data TurnBasedMatchesGet = TurnBasedMatchesGet'
+data TurnBasedMatchesGet =
+  TurnBasedMatchesGet'
     { _tbmgIncludeMatchData :: !(Maybe Bool)
     , _tbmgLanguage         :: !(Maybe Text)
     , _tbmgMatchId          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchesGet' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ turnBasedMatchesGet
     :: Text -- ^ 'tbmgMatchId'
     -> TurnBasedMatchesGet
 turnBasedMatchesGet pTbmgMatchId_ =
-    TurnBasedMatchesGet'
+  TurnBasedMatchesGet'
     { _tbmgIncludeMatchData = Nothing
     , _tbmgLanguage = Nothing
     , _tbmgMatchId = pTbmgMatchId_
     }
+
 
 -- | Get match data along with metadata.
 tbmgIncludeMatchData :: Lens' TurnBasedMatchesGet (Maybe Bool)
@@ -100,7 +104,8 @@ tbmgMatchId
 instance GoogleRequest TurnBasedMatchesGet where
         type Rs TurnBasedMatchesGet = TurnBasedMatch
         type Scopes TurnBasedMatchesGet =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesGet'{..}
           = go _tbmgMatchId _tbmgIncludeMatchData _tbmgLanguage
               (Just AltJSON)

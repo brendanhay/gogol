@@ -60,12 +60,15 @@ type SecurityPoliciesPatchResource =
 -- | Patches the specified policy with the data included in the request.
 --
 -- /See:/ 'securityPoliciesPatch' smart constructor.
-data SecurityPoliciesPatch = SecurityPoliciesPatch'
+data SecurityPoliciesPatch =
+  SecurityPoliciesPatch'
     { _sRequestId      :: !(Maybe Text)
     , _sProject        :: !Text
     , _sPayload        :: !SecurityPolicy
     , _sSecurityPolicy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SecurityPoliciesPatch' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ securityPoliciesPatch
     -> Text -- ^ 'sSecurityPolicy'
     -> SecurityPoliciesPatch
 securityPoliciesPatch pSProject_ pSPayload_ pSSecurityPolicy_ =
-    SecurityPoliciesPatch'
+  SecurityPoliciesPatch'
     { _sRequestId = Nothing
     , _sProject = pSProject_
     , _sPayload = pSPayload_
     , _sSecurityPolicy = pSSecurityPolicy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

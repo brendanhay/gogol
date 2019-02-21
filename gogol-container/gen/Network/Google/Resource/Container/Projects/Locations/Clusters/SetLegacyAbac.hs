@@ -62,7 +62,8 @@ type ProjectsLocationsClustersSetLegacyAbacResource =
 -- | Enables or disables the ABAC authorization mechanism on a cluster.
 --
 -- /See:/ 'projectsLocationsClustersSetLegacyAbac' smart constructor.
-data ProjectsLocationsClustersSetLegacyAbac = ProjectsLocationsClustersSetLegacyAbac'
+data ProjectsLocationsClustersSetLegacyAbac =
+  ProjectsLocationsClustersSetLegacyAbac'
     { _plcslaXgafv          :: !(Maybe Xgafv)
     , _plcslaUploadProtocol :: !(Maybe Text)
     , _plcslaAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsLocationsClustersSetLegacyAbac = ProjectsLocationsClustersSetLegacy
     , _plcslaPayload        :: !SetLegacyAbacRequest
     , _plcslaName           :: !Text
     , _plcslaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersSetLegacyAbac' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsLocationsClustersSetLegacyAbac
     -> Text -- ^ 'plcslaName'
     -> ProjectsLocationsClustersSetLegacyAbac
 projectsLocationsClustersSetLegacyAbac pPlcslaPayload_ pPlcslaName_ =
-    ProjectsLocationsClustersSetLegacyAbac'
+  ProjectsLocationsClustersSetLegacyAbac'
     { _plcslaXgafv = Nothing
     , _plcslaUploadProtocol = Nothing
     , _plcslaAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsLocationsClustersSetLegacyAbac pPlcslaPayload_ pPlcslaName_ =
     , _plcslaName = pPlcslaName_
     , _plcslaCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcslaXgafv :: Lens' ProjectsLocationsClustersSetLegacyAbac (Maybe Xgafv)
@@ -147,7 +151,8 @@ plcslaCallback
       (\ s a -> s{_plcslaCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersSetLegacyAbac where
+           ProjectsLocationsClustersSetLegacyAbac
+         where
         type Rs ProjectsLocationsClustersSetLegacyAbac =
              Operation
         type Scopes ProjectsLocationsClustersSetLegacyAbac =

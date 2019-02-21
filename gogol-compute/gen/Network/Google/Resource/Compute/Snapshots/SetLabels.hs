@@ -61,11 +61,14 @@ type SnapshotsSetLabelsResource =
 -- Labeling Resources documentation.
 --
 -- /See:/ 'snapshotsSetLabels' smart constructor.
-data SnapshotsSetLabels = SnapshotsSetLabels'
+data SnapshotsSetLabels =
+  SnapshotsSetLabels'
     { _sslProject  :: !Text
     , _sslPayload  :: !GlobalSetLabelsRequest
     , _sslResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SnapshotsSetLabels' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ snapshotsSetLabels
     -> Text -- ^ 'sslResource'
     -> SnapshotsSetLabels
 snapshotsSetLabels pSslProject_ pSslPayload_ pSslResource_ =
-    SnapshotsSetLabels'
+  SnapshotsSetLabels'
     { _sslProject = pSslProject_
     , _sslPayload = pSslPayload_
     , _sslResource = pSslResource_
     }
+
 
 -- | Project ID for this request.
 sslProject :: Lens' SnapshotsSetLabels Text

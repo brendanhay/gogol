@@ -65,14 +65,17 @@ type BillingAccountsGetIAMPolicyResource =
 -- [viewers](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
 -- /See:/ 'billingAccountsGetIAMPolicy' smart constructor.
-data BillingAccountsGetIAMPolicy = BillingAccountsGetIAMPolicy'
+data BillingAccountsGetIAMPolicy =
+  BillingAccountsGetIAMPolicy'
     { _bagipXgafv          :: !(Maybe Xgafv)
     , _bagipUploadProtocol :: !(Maybe Text)
     , _bagipAccessToken    :: !(Maybe Text)
     , _bagipUploadType     :: !(Maybe Text)
     , _bagipResource       :: !Text
     , _bagipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ billingAccountsGetIAMPolicy
     :: Text -- ^ 'bagipResource'
     -> BillingAccountsGetIAMPolicy
 billingAccountsGetIAMPolicy pBagipResource_ =
-    BillingAccountsGetIAMPolicy'
+  BillingAccountsGetIAMPolicy'
     { _bagipXgafv = Nothing
     , _bagipUploadProtocol = Nothing
     , _bagipAccessToken = Nothing
@@ -101,6 +104,7 @@ billingAccountsGetIAMPolicy pBagipResource_ =
     , _bagipResource = pBagipResource_
     , _bagipCallback = Nothing
     }
+
 
 -- | V1 error format.
 bagipXgafv :: Lens' BillingAccountsGetIAMPolicy (Maybe Xgafv)

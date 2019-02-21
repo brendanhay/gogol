@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.update@.
@@ -66,12 +66,13 @@ type OrganizationsSinksUpdateResource =
                          ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
 
 -- | Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ 'organizationsSinksUpdate' smart constructor.
-data OrganizationsSinksUpdate = OrganizationsSinksUpdate'
+data OrganizationsSinksUpdate =
+  OrganizationsSinksUpdate'
     { _osuXgafv                :: !(Maybe Xgafv)
     , _osuUniqueWriterIdentity :: !(Maybe Bool)
     , _osuUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,9 @@ data OrganizationsSinksUpdate = OrganizationsSinksUpdate'
     , _osuPayload              :: !LogSink
     , _osuSinkName             :: !Text
     , _osuCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsSinksUpdate' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ organizationsSinksUpdate
     -> Text -- ^ 'osuSinkName'
     -> OrganizationsSinksUpdate
 organizationsSinksUpdate pOsuPayload_ pOsuSinkName_ =
-    OrganizationsSinksUpdate'
+  OrganizationsSinksUpdate'
     { _osuXgafv = Nothing
     , _osuUniqueWriterIdentity = Nothing
     , _osuUploadProtocol = Nothing
@@ -120,6 +123,7 @@ organizationsSinksUpdate pOsuPayload_ pOsuSinkName_ =
     , _osuSinkName = pOsuSinkName_
     , _osuCallback = Nothing
     }
+
 
 -- | V1 error format.
 osuXgafv :: Lens' OrganizationsSinksUpdate (Maybe Xgafv)

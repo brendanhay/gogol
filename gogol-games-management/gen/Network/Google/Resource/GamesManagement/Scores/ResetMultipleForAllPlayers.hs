@@ -57,9 +57,12 @@ type ScoresResetMultipleForAllPlayersResource =
 -- console. Only draft leaderboards may be reset.
 --
 -- /See:/ 'scoresResetMultipleForAllPlayers' smart constructor.
-newtype ScoresResetMultipleForAllPlayers = ScoresResetMultipleForAllPlayers'
+newtype ScoresResetMultipleForAllPlayers =
+  ScoresResetMultipleForAllPlayers'
     { _srmfapPayload :: ScoresResetMultipleForAllRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScoresResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
@@ -70,9 +73,8 @@ scoresResetMultipleForAllPlayers
     :: ScoresResetMultipleForAllRequest -- ^ 'srmfapPayload'
     -> ScoresResetMultipleForAllPlayers
 scoresResetMultipleForAllPlayers pSrmfapPayload_ =
-    ScoresResetMultipleForAllPlayers'
-    { _srmfapPayload = pSrmfapPayload_
-    }
+  ScoresResetMultipleForAllPlayers' {_srmfapPayload = pSrmfapPayload_}
+
 
 -- | Multipart request metadata.
 srmfapPayload :: Lens' ScoresResetMultipleForAllPlayers ScoresResetMultipleForAllRequest
@@ -81,7 +83,8 @@ srmfapPayload
       (\ s a -> s{_srmfapPayload = a})
 
 instance GoogleRequest
-         ScoresResetMultipleForAllPlayers where
+           ScoresResetMultipleForAllPlayers
+         where
         type Rs ScoresResetMultipleForAllPlayers = ()
         type Scopes ScoresResetMultipleForAllPlayers =
              '["https://www.googleapis.com/auth/games"]

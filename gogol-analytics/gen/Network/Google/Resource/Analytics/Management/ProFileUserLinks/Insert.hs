@@ -62,12 +62,15 @@ type ManagementProFileUserLinksInsertResource =
 -- | Adds a new user to the given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksInsert' smart constructor.
-data ManagementProFileUserLinksInsert = ManagementProFileUserLinksInsert'
+data ManagementProFileUserLinksInsert =
+  ManagementProFileUserLinksInsert'
     { _mpfuliWebPropertyId :: !Text
     , _mpfuliProFileId     :: !Text
     , _mpfuliPayload       :: !EntityUserLink
     , _mpfuliAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementProFileUserLinksInsert' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ managementProFileUserLinksInsert
     -> Text -- ^ 'mpfuliAccountId'
     -> ManagementProFileUserLinksInsert
 managementProFileUserLinksInsert pMpfuliWebPropertyId_ pMpfuliProFileId_ pMpfuliPayload_ pMpfuliAccountId_ =
-    ManagementProFileUserLinksInsert'
+  ManagementProFileUserLinksInsert'
     { _mpfuliWebPropertyId = pMpfuliWebPropertyId_
     , _mpfuliProFileId = pMpfuliProFileId_
     , _mpfuliPayload = pMpfuliPayload_
     , _mpfuliAccountId = pMpfuliAccountId_
     }
+
 
 -- | Web Property ID to create the user link for.
 mpfuliWebPropertyId :: Lens' ManagementProFileUserLinksInsert Text
@@ -119,7 +123,8 @@ mpfuliAccountId
       (\ s a -> s{_mpfuliAccountId = a})
 
 instance GoogleRequest
-         ManagementProFileUserLinksInsert where
+           ManagementProFileUserLinksInsert
+         where
         type Rs ManagementProFileUserLinksInsert =
              EntityUserLink
         type Scopes ManagementProFileUserLinksInsert =

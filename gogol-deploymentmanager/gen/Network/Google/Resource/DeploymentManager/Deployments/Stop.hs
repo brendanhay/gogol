@@ -61,11 +61,14 @@ type DeploymentsStopResource =
 -- already been completed, but prevents any new work from being started.
 --
 -- /See:/ 'deploymentsStop' smart constructor.
-data DeploymentsStop = DeploymentsStop'
+data DeploymentsStop =
+  DeploymentsStop'
     { _dsProject    :: !Text
     , _dsPayload    :: !DeploymentsStopRequest
     , _dsDeployment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentsStop' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ deploymentsStop
     -> Text -- ^ 'dsDeployment'
     -> DeploymentsStop
 deploymentsStop pDsProject_ pDsPayload_ pDsDeployment_ =
-    DeploymentsStop'
+  DeploymentsStop'
     { _dsProject = pDsProject_
     , _dsPayload = pDsPayload_
     , _dsDeployment = pDsDeployment_
     }
+
 
 -- | The project ID for this request.
 dsProject :: Lens' DeploymentsStop Text

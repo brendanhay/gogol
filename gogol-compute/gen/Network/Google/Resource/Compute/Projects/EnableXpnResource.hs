@@ -61,11 +61,14 @@ type ProjectsEnableXpnResourceResource =
 -- project.
 --
 -- /See:/ 'projectsEnableXpnResource' smart constructor.
-data ProjectsEnableXpnResource = ProjectsEnableXpnResource'
+data ProjectsEnableXpnResource =
+  ProjectsEnableXpnResource'
     { _pexrRequestId :: !(Maybe Text)
     , _pexrProject   :: !Text
     , _pexrPayload   :: !ProjectsEnableXpnResourceRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsEnableXpnResource' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ projectsEnableXpnResource
     -> ProjectsEnableXpnResourceRequest -- ^ 'pexrPayload'
     -> ProjectsEnableXpnResource
 projectsEnableXpnResource pPexrProject_ pPexrPayload_ =
-    ProjectsEnableXpnResource'
+  ProjectsEnableXpnResource'
     { _pexrRequestId = Nothing
     , _pexrProject = pPexrProject_
     , _pexrPayload = pPexrPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

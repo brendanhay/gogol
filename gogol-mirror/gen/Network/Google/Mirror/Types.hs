@@ -220,8 +220,8 @@ mirrorService
 
 -- | View and manage your Glass timeline
 glassTimelineScope :: Proxy '["https://www.googleapis.com/auth/glass.timeline"]
-glassTimelineScope = Proxy;
+glassTimelineScope = Proxy
 
 -- | View your location
 glassLocationScope :: Proxy '["https://www.googleapis.com/auth/glass.location"]
-glassLocationScope = Proxy;
+glassLocationScope = Proxy

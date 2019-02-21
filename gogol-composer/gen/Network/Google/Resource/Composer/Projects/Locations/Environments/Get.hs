@@ -59,14 +59,17 @@ type ProjectsLocationsEnvironmentsGetResource =
 -- | Get an existing environment.
 --
 -- /See:/ 'projectsLocationsEnvironmentsGet' smart constructor.
-data ProjectsLocationsEnvironmentsGet = ProjectsLocationsEnvironmentsGet'
+data ProjectsLocationsEnvironmentsGet =
+  ProjectsLocationsEnvironmentsGet'
     { _plegXgafv          :: !(Maybe Xgafv)
     , _plegUploadProtocol :: !(Maybe Text)
     , _plegAccessToken    :: !(Maybe Text)
     , _plegUploadType     :: !(Maybe Text)
     , _plegName           :: !Text
     , _plegCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsEnvironmentsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsLocationsEnvironmentsGet
     :: Text -- ^ 'plegName'
     -> ProjectsLocationsEnvironmentsGet
 projectsLocationsEnvironmentsGet pPlegName_ =
-    ProjectsLocationsEnvironmentsGet'
+  ProjectsLocationsEnvironmentsGet'
     { _plegXgafv = Nothing
     , _plegUploadProtocol = Nothing
     , _plegAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsLocationsEnvironmentsGet pPlegName_ =
     , _plegName = pPlegName_
     , _plegCallback = Nothing
     }
+
 
 -- | V1 error format.
 plegXgafv :: Lens' ProjectsLocationsEnvironmentsGet (Maybe Xgafv)
@@ -130,7 +134,8 @@ plegCallback
   = lens _plegCallback (\ s a -> s{_plegCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsEnvironmentsGet where
+           ProjectsLocationsEnvironmentsGet
+         where
         type Rs ProjectsLocationsEnvironmentsGet =
              Environment
         type Scopes ProjectsLocationsEnvironmentsGet =

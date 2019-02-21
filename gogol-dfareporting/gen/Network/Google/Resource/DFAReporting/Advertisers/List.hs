@@ -56,7 +56,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -83,7 +83,8 @@ type AdvertisersListResource =
 -- paging.
 --
 -- /See:/ 'advertisersList' smart constructor.
-data AdvertisersList = AdvertisersList'
+data AdvertisersList =
+  AdvertisersList'
     { _allStatus                              :: !(Maybe AdvertisersListStatus)
     , _allOnlyParent                          :: !(Maybe Bool)
     , _allSearchString                        :: !(Maybe Text)
@@ -97,7 +98,9 @@ data AdvertisersList = AdvertisersList'
     , _allSubAccountId                        :: !(Maybe (Textual Int64))
     , _allFloodlightConfigurationIds          :: !(Maybe [Textual Int64])
     , _allMaxResults                          :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdvertisersList' with the minimum fields required to make a request.
 --
@@ -132,7 +135,7 @@ advertisersList
     :: Int64 -- ^ 'allProFileId'
     -> AdvertisersList
 advertisersList pAllProFileId_ =
-    AdvertisersList'
+  AdvertisersList'
     { _allStatus = Nothing
     , _allOnlyParent = Nothing
     , _allSearchString = Nothing
@@ -147,6 +150,7 @@ advertisersList pAllProFileId_ =
     , _allFloodlightConfigurationIds = Nothing
     , _allMaxResults = 1000
     }
+
 
 -- | Select only advertisers with the specified status.
 allStatus :: Lens' AdvertisersList (Maybe AdvertisersListStatus)

@@ -65,7 +65,8 @@ type ProjectsLocationsFunctionsListResource =
 -- | Returns a list of functions that belong to the requested project.
 --
 -- /See:/ 'projectsLocationsFunctionsList' smart constructor.
-data ProjectsLocationsFunctionsList = ProjectsLocationsFunctionsList'
+data ProjectsLocationsFunctionsList =
+  ProjectsLocationsFunctionsList'
     { _plflParent         :: !Text
     , _plflXgafv          :: !(Maybe Xgafv)
     , _plflUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsLocationsFunctionsList = ProjectsLocationsFunctionsList'
     , _plflPageToken      :: !(Maybe Text)
     , _plflPageSize       :: !(Maybe (Textual Int32))
     , _plflCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsFunctionsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsFunctionsList
     :: Text -- ^ 'plflParent'
     -> ProjectsLocationsFunctionsList
 projectsLocationsFunctionsList pPlflParent_ =
-    ProjectsLocationsFunctionsList'
+  ProjectsLocationsFunctionsList'
     { _plflParent = pPlflParent_
     , _plflXgafv = Nothing
     , _plflUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsLocationsFunctionsList pPlflParent_ =
     , _plflPageSize = Nothing
     , _plflCallback = Nothing
     }
+
 
 -- | The project and location from which the function should be listed,
 -- specified in the format \`projects\/*\/locations\/*\` If you want to

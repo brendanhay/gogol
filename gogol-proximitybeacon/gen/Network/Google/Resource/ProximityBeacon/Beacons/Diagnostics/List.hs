@@ -81,7 +81,8 @@ type BeaconsDiagnosticsListResource =
 -- permissions in the Google Developers Console project.
 --
 -- /See:/ 'beaconsDiagnosticsList' smart constructor.
-data BeaconsDiagnosticsList = BeaconsDiagnosticsList'
+data BeaconsDiagnosticsList =
+  BeaconsDiagnosticsList'
     { _bdlXgafv          :: !(Maybe Xgafv)
     , _bdlUploadProtocol :: !(Maybe Text)
     , _bdlAccessToken    :: !(Maybe Text)
@@ -92,7 +93,9 @@ data BeaconsDiagnosticsList = BeaconsDiagnosticsList'
     , _bdlPageSize       :: !(Maybe (Textual Int32))
     , _bdlAlertFilter    :: !(Maybe Text)
     , _bdlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeaconsDiagnosticsList' with the minimum fields required to make a request.
 --
@@ -121,7 +124,7 @@ beaconsDiagnosticsList
     :: Text -- ^ 'bdlBeaconName'
     -> BeaconsDiagnosticsList
 beaconsDiagnosticsList pBdlBeaconName_ =
-    BeaconsDiagnosticsList'
+  BeaconsDiagnosticsList'
     { _bdlXgafv = Nothing
     , _bdlUploadProtocol = Nothing
     , _bdlAccessToken = Nothing
@@ -133,6 +136,7 @@ beaconsDiagnosticsList pBdlBeaconName_ =
     , _bdlAlertFilter = Nothing
     , _bdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 bdlXgafv :: Lens' BeaconsDiagnosticsList (Maybe Xgafv)

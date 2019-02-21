@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'PostalCodesList' request conforms to.
 type PostalCodesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "postalCodes" :>
@@ -53,9 +53,12 @@ type PostalCodesListResource =
 -- | Retrieves a list of postal codes.
 --
 -- /See:/ 'postalCodesList' smart constructor.
-newtype PostalCodesList = PostalCodesList'
+newtype PostalCodesList =
+  PostalCodesList'
     { _pclProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostalCodesList' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ postalCodesList
     :: Int64 -- ^ 'pclProFileId'
     -> PostalCodesList
 postalCodesList pPclProFileId_ =
-    PostalCodesList'
-    { _pclProFileId = _Coerce # pPclProFileId_
-    }
+  PostalCodesList' {_pclProFileId = _Coerce # pPclProFileId_}
+
 
 -- | User profile ID associated with this request.
 pclProFileId :: Lens' PostalCodesList Int64

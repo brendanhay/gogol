@@ -23,12 +23,15 @@ import           Network.Google.Prelude
 -- | This is a JSON template for a join room request.
 --
 -- /See:/ 'roomJoinRequest' smart constructor.
-data RoomJoinRequest = RoomJoinRequest'
+data RoomJoinRequest =
+  RoomJoinRequest'
     { _rjrNetworkDiagnostics :: !(Maybe NetworkDiagnostics)
     , _rjrKind               :: !Text
     , _rjrClientAddress      :: !(Maybe RoomClientAddress)
     , _rjrCapabilities       :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomJoinRequest' with the minimum fields required to make a request.
 --
@@ -44,12 +47,13 @@ data RoomJoinRequest = RoomJoinRequest'
 roomJoinRequest
     :: RoomJoinRequest
 roomJoinRequest =
-    RoomJoinRequest'
+  RoomJoinRequest'
     { _rjrNetworkDiagnostics = Nothing
     , _rjrKind = "games#roomJoinRequest"
     , _rjrClientAddress = Nothing
     , _rjrCapabilities = Nothing
     }
+
 
 -- | Network diagnostics for the client joining the room.
 rjrNetworkDiagnostics :: Lens' RoomJoinRequest (Maybe NetworkDiagnostics)
@@ -100,10 +104,13 @@ instance ToJSON RoomJoinRequest where
 -- name. For some players, these fields may not be present.
 --
 -- /See:/ 'playerName' smart constructor.
-data PlayerName = PlayerName'
+data PlayerName =
+  PlayerName'
     { _pnGivenName  :: !(Maybe Text)
     , _pnFamilyName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerName' with the minimum fields required to make a request.
 --
@@ -114,11 +121,8 @@ data PlayerName = PlayerName'
 -- * 'pnFamilyName'
 playerName
     :: PlayerName
-playerName =
-    PlayerName'
-    { _pnGivenName = Nothing
-    , _pnFamilyName = Nothing
-    }
+playerName = PlayerName' {_pnGivenName = Nothing, _pnFamilyName = Nothing}
+
 
 -- | The given name of this player. In some places, this is known as the
 -- first name.
@@ -149,7 +153,8 @@ instance ToJSON PlayerName where
 -- | This is a JSON template for an snapshot object.
 --
 -- /See:/ 'snapshot' smart constructor.
-data Snapshot = Snapshot'
+data Snapshot =
+  Snapshot'
     { _sLastModifiedMillis :: !(Maybe (Textual Int64))
     , _sKind               :: !Text
     , _sProgressValue      :: !(Maybe (Textual Int64))
@@ -161,7 +166,9 @@ data Snapshot = Snapshot'
     , _sType               :: !(Maybe Text)
     , _sDescription        :: !(Maybe Text)
     , _sDriveId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
 --
@@ -191,7 +198,7 @@ data Snapshot = Snapshot'
 snapshot
     :: Snapshot
 snapshot =
-    Snapshot'
+  Snapshot'
     { _sLastModifiedMillis = Nothing
     , _sKind = "games#snapshot"
     , _sProgressValue = Nothing
@@ -204,6 +211,7 @@ snapshot =
     , _sDescription = Nothing
     , _sDriveId = Nothing
     }
+
 
 -- | The timestamp (in millis since Unix epoch) of the last modification to
 -- this snapshot.
@@ -302,7 +310,8 @@ instance ToJSON Snapshot where
 -- | This is a JSON template for a room resource object.
 --
 -- /See:/ 'room' smart constructor.
-data Room = Room'
+data Room =
+  Room'
     { _rStatus               :: !(Maybe Text)
     , _rVariant              :: !(Maybe (Textual Int32))
     , _rKind                 :: !Text
@@ -316,7 +325,9 @@ data Room = Room'
     , _rAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
     , _rRoomId               :: !(Maybe Text)
     , _rDescription          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Room' with the minimum fields required to make a request.
 --
@@ -350,7 +361,7 @@ data Room = Room'
 room
     :: Room
 room =
-    Room'
+  Room'
     { _rStatus = Nothing
     , _rVariant = Nothing
     , _rKind = "games#room"
@@ -365,6 +376,7 @@ room =
     , _rRoomId = Nothing
     , _rDescription = Nothing
     }
+
 
 -- | The status of the room. Possible values are: - \"ROOM_INVITING\" - One
 -- or more players have been invited and not responded. -
@@ -495,11 +507,14 @@ instance ToJSON Room where
 -- | This is a JSON template for a list of quest objects.
 --
 -- /See:/ 'questListResponse' smart constructor.
-data QuestListResponse = QuestListResponse'
+data QuestListResponse =
+  QuestListResponse'
     { _qlrNextPageToken :: !(Maybe Text)
     , _qlrKind          :: !Text
     , _qlrItems         :: !(Maybe [Quest])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuestListResponse' with the minimum fields required to make a request.
 --
@@ -513,11 +528,12 @@ data QuestListResponse = QuestListResponse'
 questListResponse
     :: QuestListResponse
 questListResponse =
-    QuestListResponse'
+  QuestListResponse'
     { _qlrNextPageToken = Nothing
     , _qlrKind = "games#questListResponse"
     , _qlrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 qlrNextPageToken :: Lens' QuestListResponse (Maybe Text)
@@ -557,7 +573,8 @@ instance ToJSON QuestListResponse where
 -- | This is a JSON template for a turn-based match resource object.
 --
 -- /See:/ 'turnBasedMatch' smart constructor.
-data TurnBasedMatch = TurnBasedMatch'
+data TurnBasedMatch =
+  TurnBasedMatch'
     { _tbmStatus               :: !(Maybe Text)
     , _tbmVariant              :: !(Maybe (Textual Int32))
     , _tbmResults              :: !(Maybe [ParticipantResult])
@@ -578,7 +595,9 @@ data TurnBasedMatch = TurnBasedMatch'
     , _tbmDescription          :: !(Maybe Text)
     , _tbmRematchId            :: !(Maybe Text)
     , _tbmMatchVersion         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatch' with the minimum fields required to make a request.
 --
@@ -626,7 +645,7 @@ data TurnBasedMatch = TurnBasedMatch'
 turnBasedMatch
     :: TurnBasedMatch
 turnBasedMatch =
-    TurnBasedMatch'
+  TurnBasedMatch'
     { _tbmStatus = Nothing
     , _tbmVariant = Nothing
     , _tbmResults = Nothing
@@ -648,6 +667,7 @@ turnBasedMatch =
     , _tbmRematchId = Nothing
     , _tbmMatchVersion = Nothing
     }
+
 
 -- | The status of the match. Possible values are: - \"MATCH_AUTO_MATCHING\"
 -- - One or more slots need to be filled by auto-matching; the match cannot
@@ -845,11 +865,14 @@ instance ToJSON TurnBasedMatch where
 -- | This is a JSON template for a turn-based match data object.
 --
 -- /See:/ 'turnBasedMatchData' smart constructor.
-data TurnBasedMatchData = TurnBasedMatchData'
+data TurnBasedMatchData =
+  TurnBasedMatchData'
     { _tbmdKind          :: !Text
     , _tbmdData          :: !(Maybe Bytes)
     , _tbmdDataAvailable :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchData' with the minimum fields required to make a request.
 --
@@ -863,11 +886,12 @@ data TurnBasedMatchData = TurnBasedMatchData'
 turnBasedMatchData
     :: TurnBasedMatchData
 turnBasedMatchData =
-    TurnBasedMatchData'
+  TurnBasedMatchData'
     { _tbmdKind = "games#turnBasedMatchData"
     , _tbmdData = Nothing
     , _tbmdDataAvailable = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#turnBasedMatchData.
@@ -908,13 +932,16 @@ instance ToJSON TurnBasedMatchData where
 -- | This is a JSON template for an event status resource.
 --
 -- /See:/ 'playerEvent' smart constructor.
-data PlayerEvent = PlayerEvent'
+data PlayerEvent =
+  PlayerEvent'
     { _peKind               :: !Text
     , _peNumEvents          :: !(Maybe (Textual Int64))
     , _peFormattedNumEvents :: !(Maybe Text)
     , _peDefinitionId       :: !(Maybe Text)
     , _pePlayerId           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerEvent' with the minimum fields required to make a request.
 --
@@ -932,13 +959,14 @@ data PlayerEvent = PlayerEvent'
 playerEvent
     :: PlayerEvent
 playerEvent =
-    PlayerEvent'
+  PlayerEvent'
     { _peKind = "games#playerEvent"
     , _peNumEvents = Nothing
     , _peFormattedNumEvents = Nothing
     , _peDefinitionId = Nothing
     , _pePlayerId = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerEvent.
@@ -994,7 +1022,8 @@ instance ToJSON PlayerEvent where
 -- | This is a JSON template for a player leaderboard score object.
 --
 -- /See:/ 'playerLeaderboardScore' smart constructor.
-data PlayerLeaderboardScore = PlayerLeaderboardScore'
+data PlayerLeaderboardScore =
+  PlayerLeaderboardScore'
     { _plsScoreTag       :: !(Maybe Text)
     , _plsScoreString    :: !(Maybe Text)
     , _plsKind           :: !Text
@@ -1004,7 +1033,9 @@ data PlayerLeaderboardScore = PlayerLeaderboardScore'
     , _plsSocialRank     :: !(Maybe LeaderboardScoreRank)
     , _plsLeaderboardId  :: !(Maybe Text)
     , _plsWriteTimestamp :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerLeaderboardScore' with the minimum fields required to make a request.
 --
@@ -1030,7 +1061,7 @@ data PlayerLeaderboardScore = PlayerLeaderboardScore'
 playerLeaderboardScore
     :: PlayerLeaderboardScore
 playerLeaderboardScore =
-    PlayerLeaderboardScore'
+  PlayerLeaderboardScore'
     { _plsScoreTag = Nothing
     , _plsScoreString = Nothing
     , _plsKind = "games#playerLeaderboardScore"
@@ -1041,6 +1072,7 @@ playerLeaderboardScore =
     , _plsLeaderboardId = Nothing
     , _plsWriteTimestamp = Nothing
     }
+
 
 -- | Additional information about the score. Values must contain no more than
 -- 64 URI-safe characters as defined by section 2.3 of RFC 3986.
@@ -1131,7 +1163,8 @@ instance ToJSON PlayerLeaderboardScore where
 -- | This is a JSON template for the Application resource.
 --
 -- /See:/ 'application' smart constructor.
-data Application = Application'
+data Application =
+  Application'
     { _aThemeColor           :: !(Maybe Text)
     , _aLeaderboardCount     :: !(Maybe (Textual Int32))
     , _aKind                 :: !Text
@@ -1145,7 +1178,9 @@ data Application = Application'
     , _aAssets               :: !(Maybe [ImageAsset])
     , _aDescription          :: !(Maybe Text)
     , _aLastUpdatedTimestamp :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -1179,7 +1214,7 @@ data Application = Application'
 application
     :: Application
 application =
-    Application'
+  Application'
     { _aThemeColor = Nothing
     , _aLeaderboardCount = Nothing
     , _aKind = "games#application"
@@ -1194,6 +1229,7 @@ application =
     , _aDescription = Nothing
     , _aLastUpdatedTimestamp = Nothing
     }
+
 
 -- | A hint to the client UI for what color to use as an app-themed color.
 -- The color is given as an RGB triplet (e.g. \"E0E0E0\").
@@ -1312,11 +1348,14 @@ instance ToJSON Application where
 -- | This is a JSON template for an application category object.
 --
 -- /See:/ 'applicationCategory' smart constructor.
-data ApplicationCategory = ApplicationCategory'
+data ApplicationCategory =
+  ApplicationCategory'
     { _acSecondary :: !(Maybe Text)
     , _acKind      :: !Text
     , _acPrimary   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationCategory' with the minimum fields required to make a request.
 --
@@ -1330,11 +1369,12 @@ data ApplicationCategory = ApplicationCategory'
 applicationCategory
     :: ApplicationCategory
 applicationCategory =
-    ApplicationCategory'
+  ApplicationCategory'
     { _acSecondary = Nothing
     , _acKind = "games#applicationCategory"
     , _acPrimary = Nothing
     }
+
 
 -- | The secondary category.
 acSecondary :: Lens' ApplicationCategory (Maybe Text)
@@ -1371,10 +1411,13 @@ instance ToJSON ApplicationCategory where
 -- | This is a JSON template for a list of score submission statuses.
 --
 -- /See:/ 'playerScoreListResponse' smart constructor.
-data PlayerScoreListResponse = PlayerScoreListResponse'
+data PlayerScoreListResponse =
+  PlayerScoreListResponse'
     { _pslrSubmittedScores :: !(Maybe [PlayerScoreResponse])
     , _pslrKind            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerScoreListResponse' with the minimum fields required to make a request.
 --
@@ -1386,10 +1429,11 @@ data PlayerScoreListResponse = PlayerScoreListResponse'
 playerScoreListResponse
     :: PlayerScoreListResponse
 playerScoreListResponse =
-    PlayerScoreListResponse'
+  PlayerScoreListResponse'
     { _pslrSubmittedScores = Nothing
     , _pslrKind = "games#playerScoreListResponse"
     }
+
 
 -- | The score submissions statuses.
 pslrSubmittedScores :: Lens' PlayerScoreListResponse [PlayerScoreResponse]
@@ -1422,7 +1466,8 @@ instance ToJSON PlayerScoreListResponse where
 -- | This is a JSON template for network diagnostics reported for a client.
 --
 -- /See:/ 'networkDiagnostics' smart constructor.
-data NetworkDiagnostics = NetworkDiagnostics'
+data NetworkDiagnostics =
+  NetworkDiagnostics'
     { _ndAndroidNetworkType        :: !(Maybe (Textual Int32))
     , _ndKind                      :: !Text
     , _ndNetworkOperatorCode       :: !(Maybe Text)
@@ -1430,7 +1475,9 @@ data NetworkDiagnostics = NetworkDiagnostics'
     , _ndRegistrationLatencyMillis :: !(Maybe (Textual Int32))
     , _ndIosNetworkType            :: !(Maybe (Textual Int32))
     , _ndAndroidNetworkSubtype     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworkDiagnostics' with the minimum fields required to make a request.
 --
@@ -1452,7 +1499,7 @@ data NetworkDiagnostics = NetworkDiagnostics'
 networkDiagnostics
     :: NetworkDiagnostics
 networkDiagnostics =
-    NetworkDiagnostics'
+  NetworkDiagnostics'
     { _ndAndroidNetworkType = Nothing
     , _ndKind = "games#networkDiagnostics"
     , _ndNetworkOperatorCode = Nothing
@@ -1461,6 +1508,7 @@ networkDiagnostics =
     , _ndIosNetworkType = Nothing
     , _ndAndroidNetworkSubtype = Nothing
     }
+
 
 -- | The Android network type.
 ndAndroidNetworkType :: Lens' NetworkDiagnostics (Maybe Int32)
@@ -1546,13 +1594,16 @@ instance ToJSON NetworkDiagnostics where
 -- | This is a JSON template for the object representing a turn.
 --
 -- /See:/ 'turnBasedMatchTurn' smart constructor.
-data TurnBasedMatchTurn = TurnBasedMatchTurn'
+data TurnBasedMatchTurn =
+  TurnBasedMatchTurn'
     { _tbmtResults              :: !(Maybe [ParticipantResult])
     , _tbmtKind                 :: !Text
     , _tbmtData                 :: !(Maybe TurnBasedMatchDataRequest)
     , _tbmtPendingParticipantId :: !(Maybe Text)
     , _tbmtMatchVersion         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchTurn' with the minimum fields required to make a request.
 --
@@ -1570,13 +1621,14 @@ data TurnBasedMatchTurn = TurnBasedMatchTurn'
 turnBasedMatchTurn
     :: TurnBasedMatchTurn
 turnBasedMatchTurn =
-    TurnBasedMatchTurn'
+  TurnBasedMatchTurn'
     { _tbmtResults = Nothing
     , _tbmtKind = "games#turnBasedMatchTurn"
     , _tbmtData = Nothing
     , _tbmtPendingParticipantId = Nothing
     , _tbmtMatchVersion = Nothing
     }
+
 
 -- | The match results for the participants in the match.
 tbmtResults :: Lens' TurnBasedMatchTurn [ParticipantResult]
@@ -1637,13 +1689,16 @@ instance ToJSON TurnBasedMatchTurn where
 -- | This is a JSON template for a Quest Criterion resource.
 --
 -- /See:/ 'questCriterion' smart constructor.
-data QuestCriterion = QuestCriterion'
+data QuestCriterion =
+  QuestCriterion'
     { _qcCurrentContribution    :: !(Maybe QuestContribution)
     , _qcCompletionContribution :: !(Maybe QuestContribution)
     , _qcKind                   :: !Text
     , _qcInitialPlayerProgress  :: !(Maybe QuestContribution)
     , _qcEventId                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuestCriterion' with the minimum fields required to make a request.
 --
@@ -1661,13 +1716,14 @@ data QuestCriterion = QuestCriterion'
 questCriterion
     :: QuestCriterion
 questCriterion =
-    QuestCriterion'
+  QuestCriterion'
     { _qcCurrentContribution = Nothing
     , _qcCompletionContribution = Nothing
     , _qcKind = "games#questCriterion"
     , _qcInitialPlayerProgress = Nothing
     , _qcEventId = Nothing
     }
+
 
 -- | The number of increments the player has made toward the completion count
 -- event increments required to complete the quest. This value will not
@@ -1732,11 +1788,14 @@ instance ToJSON QuestCriterion where
 -- | This is a JSON template for a list of turn-based matches.
 --
 -- /See:/ 'turnBasedMatchList' smart constructor.
-data TurnBasedMatchList = TurnBasedMatchList'
+data TurnBasedMatchList =
+  TurnBasedMatchList'
     { _tbmlNextPageToken :: !(Maybe Text)
     , _tbmlKind          :: !Text
     , _tbmlItems         :: !(Maybe [TurnBasedMatch])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchList' with the minimum fields required to make a request.
 --
@@ -1750,11 +1809,12 @@ data TurnBasedMatchList = TurnBasedMatchList'
 turnBasedMatchList
     :: TurnBasedMatchList
 turnBasedMatchList =
-    TurnBasedMatchList'
+  TurnBasedMatchList'
     { _tbmlNextPageToken = Nothing
     , _tbmlKind = "games#turnBasedMatchList"
     , _tbmlItems = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 tbmlNextPageToken :: Lens' TurnBasedMatchList (Maybe Text)
@@ -1794,7 +1854,8 @@ instance ToJSON TurnBasedMatchList where
 -- | This is a JSON template for peer channel diagnostics.
 --
 -- /See:/ 'peerChannelDiagnostics' smart constructor.
-data PeerChannelDiagnostics = PeerChannelDiagnostics'
+data PeerChannelDiagnostics =
+  PeerChannelDiagnostics'
     { _pcdNumMessagesLost        :: !(Maybe (Textual Int32))
     , _pcdBytesSent              :: !(Maybe AggregateStats)
     , _pcdKind                   :: !Text
@@ -1803,7 +1864,9 @@ data PeerChannelDiagnostics = PeerChannelDiagnostics'
     , _pcdNumMessagesReceived    :: !(Maybe (Textual Int32))
     , _pcdNumSendFailures        :: !(Maybe (Textual Int32))
     , _pcdNumMessagesSent        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeerChannelDiagnostics' with the minimum fields required to make a request.
 --
@@ -1827,7 +1890,7 @@ data PeerChannelDiagnostics = PeerChannelDiagnostics'
 peerChannelDiagnostics
     :: PeerChannelDiagnostics
 peerChannelDiagnostics =
-    PeerChannelDiagnostics'
+  PeerChannelDiagnostics'
     { _pcdNumMessagesLost = Nothing
     , _pcdBytesSent = Nothing
     , _pcdKind = "games#peerChannelDiagnostics"
@@ -1837,6 +1900,7 @@ peerChannelDiagnostics =
     , _pcdNumSendFailures = Nothing
     , _pcdNumMessagesSent = Nothing
     }
+
 
 -- | Number of messages lost.
 pcdNumMessagesLost :: Lens' PeerChannelDiagnostics (Maybe Int32)
@@ -1919,11 +1983,14 @@ instance ToJSON PeerChannelDiagnostics where
 -- | This is a JSON template for a list of rooms.
 --
 -- /See:/ 'roomList' smart constructor.
-data RoomList = RoomList'
+data RoomList =
+  RoomList'
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
     , _rlItems         :: !(Maybe [Room])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomList' with the minimum fields required to make a request.
 --
@@ -1937,11 +2004,9 @@ data RoomList = RoomList'
 roomList
     :: RoomList
 roomList =
-    RoomList'
-    { _rlNextPageToken = Nothing
-    , _rlKind = "games#roomList"
-    , _rlItems = Nothing
-    }
+  RoomList'
+    {_rlNextPageToken = Nothing, _rlKind = "games#roomList", _rlItems = Nothing}
+
 
 -- | The pagination token for the next page of results.
 rlNextPageToken :: Lens' RoomList (Maybe Text)
@@ -1979,12 +2044,15 @@ instance ToJSON RoomList where
 -- | This is a JSON template for a push token resource.
 --
 -- /See:/ 'pushToken' smart constructor.
-data PushToken = PushToken'
+data PushToken =
+  PushToken'
     { _ptClientRevision :: !(Maybe Text)
     , _ptKind           :: !Text
     , _ptLanguage       :: !(Maybe Text)
     , _ptId             :: !(Maybe PushTokenId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PushToken' with the minimum fields required to make a request.
 --
@@ -2000,12 +2068,13 @@ data PushToken = PushToken'
 pushToken
     :: PushToken
 pushToken =
-    PushToken'
+  PushToken'
     { _ptClientRevision = Nothing
     , _ptKind = "games#pushToken"
     , _ptLanguage = Nothing
     , _ptId = Nothing
     }
+
 
 -- | The revision of the client SDK used by your application, in the same
 -- format that\'s used by revisions.check. Used to send backward compatible
@@ -2052,14 +2121,17 @@ instance ToJSON PushToken where
 -- | This is a JSON template for an achievement update response.
 --
 -- /See:/ 'achievementUpdateResponse' smart constructor.
-data AchievementUpdateResponse = AchievementUpdateResponse'
+data AchievementUpdateResponse =
+  AchievementUpdateResponse'
     { _aurUpdateOccurred :: !(Maybe Bool)
     , _aurAchievementId  :: !(Maybe Text)
     , _aurKind           :: !Text
     , _aurCurrentState   :: !(Maybe Text)
     , _aurNewlyUnlocked  :: !(Maybe Bool)
     , _aurCurrentSteps   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementUpdateResponse' with the minimum fields required to make a request.
 --
@@ -2079,7 +2151,7 @@ data AchievementUpdateResponse = AchievementUpdateResponse'
 achievementUpdateResponse
     :: AchievementUpdateResponse
 achievementUpdateResponse =
-    AchievementUpdateResponse'
+  AchievementUpdateResponse'
     { _aurUpdateOccurred = Nothing
     , _aurAchievementId = Nothing
     , _aurKind = "games#achievementUpdateResponse"
@@ -2087,6 +2159,7 @@ achievementUpdateResponse =
     , _aurNewlyUnlocked = Nothing
     , _aurCurrentSteps = Nothing
     }
+
 
 -- | Whether the requested updates actually affected the achievement.
 aurUpdateOccurred :: Lens' AchievementUpdateResponse (Maybe Bool)
@@ -2153,7 +2226,8 @@ instance ToJSON AchievementUpdateResponse where
 -- | This is a JSON template for the Leaderboard Entry resource.
 --
 -- /See:/ 'leaderboardEntry' smart constructor.
-data LeaderboardEntry = LeaderboardEntry'
+data LeaderboardEntry =
+  LeaderboardEntry'
     { _leScoreTag             :: !(Maybe Text)
     , _leWriteTimestampMillis :: !(Maybe (Textual Int64))
     , _leKind                 :: !Text
@@ -2163,7 +2237,9 @@ data LeaderboardEntry = LeaderboardEntry'
     , _leFormattedScoreRank   :: !(Maybe Text)
     , _lePlayer               :: !(Maybe Player)
     , _leScoreRank            :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardEntry' with the minimum fields required to make a request.
 --
@@ -2189,7 +2265,7 @@ data LeaderboardEntry = LeaderboardEntry'
 leaderboardEntry
     :: LeaderboardEntry
 leaderboardEntry =
-    LeaderboardEntry'
+  LeaderboardEntry'
     { _leScoreTag = Nothing
     , _leWriteTimestampMillis = Nothing
     , _leKind = "games#leaderboardEntry"
@@ -2200,6 +2276,7 @@ leaderboardEntry =
     , _lePlayer = Nothing
     , _leScoreRank = Nothing
     }
+
 
 -- | Additional information about the score. Values must contain no more than
 -- 64 URI-safe characters as defined by section 2.3 of RFC 3986.
@@ -2287,11 +2364,14 @@ instance ToJSON LeaderboardEntry where
 -- | This is a JSON template for a list of snapshot objects.
 --
 -- /See:/ 'snapshotListResponse' smart constructor.
-data SnapshotListResponse = SnapshotListResponse'
+data SnapshotListResponse =
+  SnapshotListResponse'
     { _slrNextPageToken :: !(Maybe Text)
     , _slrKind          :: !Text
     , _slrItems         :: !(Maybe [Snapshot])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SnapshotListResponse' with the minimum fields required to make a request.
 --
@@ -2305,11 +2385,12 @@ data SnapshotListResponse = SnapshotListResponse'
 snapshotListResponse
     :: SnapshotListResponse
 snapshotListResponse =
-    SnapshotListResponse'
+  SnapshotListResponse'
     { _slrNextPageToken = Nothing
     , _slrKind = "games#snapshotListResponse"
     , _slrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results. If there are no more
 -- results, the token is omitted.
@@ -2350,12 +2431,15 @@ instance ToJSON SnapshotListResponse where
 -- | This is a JSON template for 1P\/3P metadata about a user\'s level.
 --
 -- /See:/ 'playerLevel' smart constructor.
-data PlayerLevel = PlayerLevel'
+data PlayerLevel =
+  PlayerLevel'
     { _plMaxExperiencePoints :: !(Maybe (Textual Int64))
     , _plKind                :: !Text
     , _plMinExperiencePoints :: !(Maybe (Textual Int64))
     , _plLevel               :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerLevel' with the minimum fields required to make a request.
 --
@@ -2371,12 +2455,13 @@ data PlayerLevel = PlayerLevel'
 playerLevel
     :: PlayerLevel
 playerLevel =
-    PlayerLevel'
+  PlayerLevel'
     { _plMaxExperiencePoints = Nothing
     , _plKind = "games#playerLevel"
     , _plMinExperiencePoints = Nothing
     , _plLevel = Nothing
     }
+
 
 -- | The maximum experience points for this level.
 plMaxExperiencePoints :: Lens' PlayerLevel (Maybe Int64)
@@ -2427,10 +2512,13 @@ instance ToJSON PlayerLevel where
 -- | This is a JSON template for an achievement unlock response.
 --
 -- /See:/ 'achievementUpdateMultipleResponse' smart constructor.
-data AchievementUpdateMultipleResponse = AchievementUpdateMultipleResponse'
+data AchievementUpdateMultipleResponse =
+  AchievementUpdateMultipleResponse'
     { _aumrKind                :: !Text
     , _aumrUpdatedAchievements :: !(Maybe [AchievementUpdateResponse])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementUpdateMultipleResponse' with the minimum fields required to make a request.
 --
@@ -2442,10 +2530,11 @@ data AchievementUpdateMultipleResponse = AchievementUpdateMultipleResponse'
 achievementUpdateMultipleResponse
     :: AchievementUpdateMultipleResponse
 achievementUpdateMultipleResponse =
-    AchievementUpdateMultipleResponse'
+  AchievementUpdateMultipleResponse'
     { _aumrKind = "games#achievementUpdateMultipleResponse"
     , _aumrUpdatedAchievements = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementUpdateListResponse.
@@ -2482,7 +2571,8 @@ instance ToJSON AchievementUpdateMultipleResponse
 -- | This is a JSON template for a participant in a room.
 --
 -- /See:/ 'roomParticipant' smart constructor.
-data RoomParticipant = RoomParticipant'
+data RoomParticipant =
+  RoomParticipant'
     { _rpStatus            :: !(Maybe Text)
     , _rpConnected         :: !(Maybe Bool)
     , _rpLeaveReason       :: !(Maybe Text)
@@ -2493,7 +2583,9 @@ data RoomParticipant = RoomParticipant'
     , _rpPlayer            :: !(Maybe Player)
     , _rpCapabilities      :: !(Maybe [Text])
     , _rpAutoMatchedPlayer :: !(Maybe AnonymousPlayer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomParticipant' with the minimum fields required to make a request.
 --
@@ -2521,7 +2613,7 @@ data RoomParticipant = RoomParticipant'
 roomParticipant
     :: RoomParticipant
 roomParticipant =
-    RoomParticipant'
+  RoomParticipant'
     { _rpStatus = Nothing
     , _rpConnected = Nothing
     , _rpLeaveReason = Nothing
@@ -2533,6 +2625,7 @@ roomParticipant =
     , _rpCapabilities = Nothing
     , _rpAutoMatchedPlayer = Nothing
     }
+
 
 -- | The status of the participant with respect to the room. Possible values
 -- are: - \"PARTICIPANT_INVITED\" - The participant has been invited to
@@ -2644,11 +2737,14 @@ instance ToJSON RoomParticipant where
 -- | This is a JSON template for a ListDefinitions response.
 --
 -- /See:/ 'eventDefinitionListResponse' smart constructor.
-data EventDefinitionListResponse = EventDefinitionListResponse'
+data EventDefinitionListResponse =
+  EventDefinitionListResponse'
     { _edlrNextPageToken :: !(Maybe Text)
     , _edlrKind          :: !Text
     , _edlrItems         :: !(Maybe [EventDefinition])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventDefinitionListResponse' with the minimum fields required to make a request.
 --
@@ -2662,11 +2758,12 @@ data EventDefinitionListResponse = EventDefinitionListResponse'
 eventDefinitionListResponse
     :: EventDefinitionListResponse
 eventDefinitionListResponse =
-    EventDefinitionListResponse'
+  EventDefinitionListResponse'
     { _edlrNextPageToken = Nothing
     , _edlrKind = "games#eventDefinitionListResponse"
     , _edlrItems = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 edlrNextPageToken :: Lens' EventDefinitionListResponse (Maybe Text)
@@ -2707,11 +2804,14 @@ instance ToJSON EventDefinitionListResponse where
 -- | This is a JSON template for data related to individual game categories.
 --
 -- /See:/ 'category' smart constructor.
-data Category = Category'
+data Category =
+  Category'
     { _cKind             :: !Text
     , _cCategory         :: !(Maybe Text)
     , _cExperiencePoints :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Category' with the minimum fields required to make a request.
 --
@@ -2725,11 +2825,12 @@ data Category = Category'
 category
     :: Category
 category =
-    Category'
+  Category'
     { _cKind = "games#category"
     , _cCategory = Nothing
     , _cExperiencePoints = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#category.
@@ -2768,12 +2869,15 @@ instance ToJSON Category where
 -- | This is a JSON template for the Android instance details resource.
 --
 -- /See:/ 'instanceAndroidDetails' smart constructor.
-data InstanceAndroidDetails = InstanceAndroidDetails'
+data InstanceAndroidDetails =
+  InstanceAndroidDetails'
     { _iadPackageName       :: !(Maybe Text)
     , _iadPreferred         :: !(Maybe Bool)
     , _iadKind              :: !Text
     , _iadEnablePiracyCheck :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceAndroidDetails' with the minimum fields required to make a request.
 --
@@ -2789,12 +2893,13 @@ data InstanceAndroidDetails = InstanceAndroidDetails'
 instanceAndroidDetails
     :: InstanceAndroidDetails
 instanceAndroidDetails =
-    InstanceAndroidDetails'
+  InstanceAndroidDetails'
     { _iadPackageName = Nothing
     , _iadPreferred = Nothing
     , _iadKind = "games#instanceAndroidDetails"
     , _iadEnablePiracyCheck = Nothing
     }
+
 
 -- | Android package name which maps to Google Play URL.
 iadPackageName :: Lens' InstanceAndroidDetails (Maybe Text)
@@ -2839,14 +2944,17 @@ instance ToJSON InstanceAndroidDetails where
 -- | This is a JSON template for a participant in a turn-based match.
 --
 -- /See:/ 'turnBasedMatchParticipant' smart constructor.
-data TurnBasedMatchParticipant = TurnBasedMatchParticipant'
+data TurnBasedMatchParticipant =
+  TurnBasedMatchParticipant'
     { _tbmpStatus            :: !(Maybe Text)
     , _tbmpKind              :: !Text
     , _tbmpId                :: !(Maybe Text)
     , _tbmpAutoMatched       :: !(Maybe Bool)
     , _tbmpPlayer            :: !(Maybe Player)
     , _tbmpAutoMatchedPlayer :: !(Maybe AnonymousPlayer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchParticipant' with the minimum fields required to make a request.
 --
@@ -2866,7 +2974,7 @@ data TurnBasedMatchParticipant = TurnBasedMatchParticipant'
 turnBasedMatchParticipant
     :: TurnBasedMatchParticipant
 turnBasedMatchParticipant =
-    TurnBasedMatchParticipant'
+  TurnBasedMatchParticipant'
     { _tbmpStatus = Nothing
     , _tbmpKind = "games#turnBasedMatchParticipant"
     , _tbmpId = Nothing
@@ -2874,6 +2982,7 @@ turnBasedMatchParticipant =
     , _tbmpPlayer = Nothing
     , _tbmpAutoMatchedPlayer = Nothing
     }
+
 
 -- | The status of the participant with respect to the match. Possible values
 -- are: - \"PARTICIPANT_NOT_INVITED_YET\" - The participant is slated to be
@@ -2947,11 +3056,14 @@ instance ToJSON TurnBasedMatchParticipant where
 -- | This is a JSON template for a list of achievement definition objects.
 --
 -- /See:/ 'achievementDefinitionsListResponse' smart constructor.
-data AchievementDefinitionsListResponse = AchievementDefinitionsListResponse'
+data AchievementDefinitionsListResponse =
+  AchievementDefinitionsListResponse'
     { _adlrNextPageToken :: !(Maybe Text)
     , _adlrKind          :: !Text
     , _adlrItems         :: !(Maybe [AchievementDefinition])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementDefinitionsListResponse' with the minimum fields required to make a request.
 --
@@ -2965,11 +3077,12 @@ data AchievementDefinitionsListResponse = AchievementDefinitionsListResponse'
 achievementDefinitionsListResponse
     :: AchievementDefinitionsListResponse
 achievementDefinitionsListResponse =
-    AchievementDefinitionsListResponse'
+  AchievementDefinitionsListResponse'
     { _adlrNextPageToken = Nothing
     , _adlrKind = "games#achievementDefinitionsListResponse"
     , _adlrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 adlrNextPageToken :: Lens' AchievementDefinitionsListResponse (Maybe Text)
@@ -3012,14 +3125,17 @@ instance ToJSON AchievementDefinitionsListResponse
 -- | This is a JSON template for a list of leaderboard entry resources.
 --
 -- /See:/ 'playerScoreResponse' smart constructor.
-data PlayerScoreResponse = PlayerScoreResponse'
+data PlayerScoreResponse =
+  PlayerScoreResponse'
     { _psrScoreTag             :: !(Maybe Text)
     , _psrKind                 :: !Text
     , _psrFormattedScore       :: !(Maybe Text)
     , _psrLeaderboardId        :: !(Maybe Text)
     , _psrBeatenScoreTimeSpans :: !(Maybe [Text])
     , _psrUnbeatenScores       :: !(Maybe [PlayerScore])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerScoreResponse' with the minimum fields required to make a request.
 --
@@ -3039,7 +3155,7 @@ data PlayerScoreResponse = PlayerScoreResponse'
 playerScoreResponse
     :: PlayerScoreResponse
 playerScoreResponse =
-    PlayerScoreResponse'
+  PlayerScoreResponse'
     { _psrScoreTag = Nothing
     , _psrKind = "games#playerScoreResponse"
     , _psrFormattedScore = Nothing
@@ -3047,6 +3163,7 @@ playerScoreResponse =
     , _psrBeatenScoreTimeSpans = Nothing
     , _psrUnbeatenScores = Nothing
     }
+
 
 -- | Additional information about this score. Values will contain no more
 -- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
@@ -3119,11 +3236,14 @@ instance ToJSON PlayerScoreResponse where
 -- | This is a JSON template for an anonymous player
 --
 -- /See:/ 'anonymousPlayer' smart constructor.
-data AnonymousPlayer = AnonymousPlayer'
+data AnonymousPlayer =
+  AnonymousPlayer'
     { _apAvatarImageURL :: !(Maybe Text)
     , _apKind           :: !Text
     , _apDisplayName    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnonymousPlayer' with the minimum fields required to make a request.
 --
@@ -3137,11 +3257,12 @@ data AnonymousPlayer = AnonymousPlayer'
 anonymousPlayer
     :: AnonymousPlayer
 anonymousPlayer =
-    AnonymousPlayer'
+  AnonymousPlayer'
     { _apAvatarImageURL = Nothing
     , _apKind = "games#anonymousPlayer"
     , _apDisplayName = Nothing
     }
+
 
 -- | The base URL for the image to display for the anonymous player.
 apAvatarImageURL :: Lens' AnonymousPlayer (Maybe Text)
@@ -3180,11 +3301,14 @@ instance ToJSON AnonymousPlayer where
 -- | This is a JSON template for a Quest Criterion Contribution resource.
 --
 -- /See:/ 'questContribution' smart constructor.
-data QuestContribution = QuestContribution'
+data QuestContribution =
+  QuestContribution'
     { _qKind           :: !Text
     , _qValue          :: !(Maybe (Textual Int64))
     , _qFormattedValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuestContribution' with the minimum fields required to make a request.
 --
@@ -3198,11 +3322,12 @@ data QuestContribution = QuestContribution'
 questContribution
     :: QuestContribution
 questContribution =
-    QuestContribution'
+  QuestContribution'
     { _qKind = "games#questContribution"
     , _qValue = Nothing
     , _qFormattedValue = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#questContribution.
@@ -3242,10 +3367,13 @@ instance ToJSON QuestContribution where
 -- | This is a JSON template for the client address when setting up a room.
 --
 -- /See:/ 'roomClientAddress' smart constructor.
-data RoomClientAddress = RoomClientAddress'
+data RoomClientAddress =
+  RoomClientAddress'
     { _rcaKind        :: !Text
     , _rcaXmppAddress :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomClientAddress' with the minimum fields required to make a request.
 --
@@ -3257,10 +3385,9 @@ data RoomClientAddress = RoomClientAddress'
 roomClientAddress
     :: RoomClientAddress
 roomClientAddress =
-    RoomClientAddress'
-    { _rcaKind = "games#roomClientAddress"
-    , _rcaXmppAddress = Nothing
-    }
+  RoomClientAddress'
+    {_rcaKind = "games#roomClientAddress", _rcaXmppAddress = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomClientAddress.
@@ -3291,11 +3418,14 @@ instance ToJSON RoomClientAddress where
 -- | This is a JSON template for a list of leaderboard objects.
 --
 -- /See:/ 'leaderboardListResponse' smart constructor.
-data LeaderboardListResponse = LeaderboardListResponse'
+data LeaderboardListResponse =
+  LeaderboardListResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrKind          :: !Text
     , _llrItems         :: !(Maybe [Leaderboard])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardListResponse' with the minimum fields required to make a request.
 --
@@ -3309,11 +3439,12 @@ data LeaderboardListResponse = LeaderboardListResponse'
 leaderboardListResponse
     :: LeaderboardListResponse
 leaderboardListResponse =
-    LeaderboardListResponse'
+  LeaderboardListResponse'
     { _llrNextPageToken = Nothing
     , _llrKind = "games#leaderboardListResponse"
     , _llrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 llrNextPageToken :: Lens' LeaderboardListResponse (Maybe Text)
@@ -3353,13 +3484,16 @@ instance ToJSON LeaderboardListResponse where
 -- | This is a JSON template for a player score.
 --
 -- /See:/ 'playerScore' smart constructor.
-data PlayerScore = PlayerScore'
+data PlayerScore =
+  PlayerScore'
     { _psScoreTag       :: !(Maybe Text)
     , _psScore          :: !(Maybe (Textual Int64))
     , _psKind           :: !Text
     , _psFormattedScore :: !(Maybe Text)
     , _psTimeSpan       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerScore' with the minimum fields required to make a request.
 --
@@ -3377,13 +3511,14 @@ data PlayerScore = PlayerScore'
 playerScore
     :: PlayerScore
 playerScore =
-    PlayerScore'
+  PlayerScore'
     { _psScoreTag = Nothing
     , _psScore = Nothing
     , _psKind = "games#playerScore"
     , _psFormattedScore = Nothing
     , _psTimeSpan = Nothing
     }
+
 
 -- | Additional information about this score. Values will contain no more
 -- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
@@ -3437,12 +3572,15 @@ instance ToJSON PlayerScore where
 -- | This is a JSON template for an turn-based auto-match criteria object.
 --
 -- /See:/ 'turnBasedAutoMatchingCriteria' smart constructor.
-data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria'
+data TurnBasedAutoMatchingCriteria =
+  TurnBasedAutoMatchingCriteria'
     { _tbamcKind                   :: !Text
     , _tbamcExclusiveBitmask       :: !(Maybe (Textual Int64))
     , _tbamcMaxAutoMatchingPlayers :: !(Maybe (Textual Int32))
     , _tbamcMinAutoMatchingPlayers :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedAutoMatchingCriteria' with the minimum fields required to make a request.
 --
@@ -3458,12 +3596,13 @@ data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria'
 turnBasedAutoMatchingCriteria
     :: TurnBasedAutoMatchingCriteria
 turnBasedAutoMatchingCriteria =
-    TurnBasedAutoMatchingCriteria'
+  TurnBasedAutoMatchingCriteria'
     { _tbamcKind = "games#turnBasedAutoMatchingCriteria"
     , _tbamcExclusiveBitmask = Nothing
     , _tbamcMaxAutoMatchingPlayers = Nothing
     , _tbamcMinAutoMatchingPlayers = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#turnBasedAutoMatchingCriteria.
@@ -3521,13 +3660,16 @@ instance ToJSON TurnBasedAutoMatchingCriteria where
 -- | This is a JSON template for an image of a snapshot.
 --
 -- /See:/ 'snapshotImage' smart constructor.
-data SnapshotImage = SnapshotImage'
+data SnapshotImage =
+  SnapshotImage'
     { _siHeight   :: !(Maybe (Textual Int32))
     , _siKind     :: !Text
     , _siURL      :: !(Maybe Text)
     , _siMimeType :: !(Maybe Text)
     , _siWidth    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SnapshotImage' with the minimum fields required to make a request.
 --
@@ -3545,13 +3687,14 @@ data SnapshotImage = SnapshotImage'
 snapshotImage
     :: SnapshotImage
 snapshotImage =
-    SnapshotImage'
+  SnapshotImage'
     { _siHeight = Nothing
     , _siKind = "games#snapshotImage"
     , _siURL = Nothing
     , _siMimeType = Nothing
     , _siWidth = Nothing
     }
+
 
 -- | The height of the image.
 siHeight :: Lens' SnapshotImage (Maybe Int32)
@@ -3604,14 +3747,17 @@ instance ToJSON SnapshotImage where
 -- joined.
 --
 -- /See:/ 'roomStatus' smart constructor.
-data RoomStatus = RoomStatus'
+data RoomStatus =
+  RoomStatus'
     { _rsStatus             :: !(Maybe Text)
     , _rsKind               :: !Text
     , _rsAutoMatchingStatus :: !(Maybe RoomAutoMatchStatus)
     , _rsStatusVersion      :: !(Maybe (Textual Int32))
     , _rsParticipants       :: !(Maybe [RoomParticipant])
     , _rsRoomId             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomStatus' with the minimum fields required to make a request.
 --
@@ -3631,7 +3777,7 @@ data RoomStatus = RoomStatus'
 roomStatus
     :: RoomStatus
 roomStatus =
-    RoomStatus'
+  RoomStatus'
     { _rsStatus = Nothing
     , _rsKind = "games#roomStatus"
     , _rsAutoMatchingStatus = Nothing
@@ -3639,6 +3785,7 @@ roomStatus =
     , _rsParticipants = Nothing
     , _rsRoomId = Nothing
     }
+
 
 -- | The status of the room. Possible values are: - \"ROOM_INVITING\" - One
 -- or more players have been invited and not responded. -
@@ -3709,12 +3856,15 @@ instance ToJSON RoomStatus where
 -- | This is a JSON template for a list of player leaderboard scores.
 --
 -- /See:/ 'playerLeaderboardScoreListResponse' smart constructor.
-data PlayerLeaderboardScoreListResponse = PlayerLeaderboardScoreListResponse'
+data PlayerLeaderboardScoreListResponse =
+  PlayerLeaderboardScoreListResponse'
     { _plslrNextPageToken :: !(Maybe Text)
     , _plslrKind          :: !Text
     , _plslrItems         :: !(Maybe [PlayerLeaderboardScore])
     , _plslrPlayer        :: !(Maybe Player)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerLeaderboardScoreListResponse' with the minimum fields required to make a request.
 --
@@ -3730,12 +3880,13 @@ data PlayerLeaderboardScoreListResponse = PlayerLeaderboardScoreListResponse'
 playerLeaderboardScoreListResponse
     :: PlayerLeaderboardScoreListResponse
 playerLeaderboardScoreListResponse =
-    PlayerLeaderboardScoreListResponse'
+  PlayerLeaderboardScoreListResponse'
     { _plslrNextPageToken = Nothing
     , _plslrKind = "games#playerLeaderboardScoreListResponse"
     , _plslrItems = Nothing
     , _plslrPlayer = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 plslrNextPageToken :: Lens' PlayerLeaderboardScoreListResponse (Maybe Text)
@@ -3786,7 +3937,8 @@ instance ToJSON PlayerLeaderboardScoreListResponse
 -- | This is a JSON template for the iOS details resource.
 --
 -- /See:/ 'instanceIosDetails' smart constructor.
-data InstanceIosDetails = InstanceIosDetails'
+data InstanceIosDetails =
+  InstanceIosDetails'
     { _iidItunesAppId        :: !(Maybe Text)
     , _iidPreferredForIPad   :: !(Maybe Bool)
     , _iidSupportIPhone      :: !(Maybe Bool)
@@ -3794,7 +3946,9 @@ data InstanceIosDetails = InstanceIosDetails'
     , _iidSupportIPad        :: !(Maybe Bool)
     , _iidPreferredForIPhone :: !(Maybe Bool)
     , _iidBundleIdentifier   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceIosDetails' with the minimum fields required to make a request.
 --
@@ -3816,7 +3970,7 @@ data InstanceIosDetails = InstanceIosDetails'
 instanceIosDetails
     :: InstanceIosDetails
 instanceIosDetails =
-    InstanceIosDetails'
+  InstanceIosDetails'
     { _iidItunesAppId = Nothing
     , _iidPreferredForIPad = Nothing
     , _iidSupportIPhone = Nothing
@@ -3825,6 +3979,7 @@ instanceIosDetails =
     , _iidPreferredForIPhone = Nothing
     , _iidBundleIdentifier = Nothing
     }
+
 
 -- | iTunes App ID.
 iidItunesAppId :: Lens' InstanceIosDetails (Maybe Text)
@@ -3896,12 +4051,15 @@ instance ToJSON InstanceIosDetails where
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventUpdateResponse' smart constructor.
-data EventUpdateResponse = EventUpdateResponse'
+data EventUpdateResponse =
+  EventUpdateResponse'
     { _eurPlayerEvents  :: !(Maybe [PlayerEvent])
     , _eurBatchFailures :: !(Maybe [EventBatchRecordFailure])
     , _eurEventFailures :: !(Maybe [EventRecordFailure])
     , _eurKind          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventUpdateResponse' with the minimum fields required to make a request.
 --
@@ -3917,12 +4075,13 @@ data EventUpdateResponse = EventUpdateResponse'
 eventUpdateResponse
     :: EventUpdateResponse
 eventUpdateResponse =
-    EventUpdateResponse'
+  EventUpdateResponse'
     { _eurPlayerEvents = Nothing
     , _eurBatchFailures = Nothing
     , _eurEventFailures = Nothing
     , _eurKind = "games#eventUpdateResponse"
     }
+
 
 -- | The current status of any updated events
 eurPlayerEvents :: Lens' EventUpdateResponse [PlayerEvent]
@@ -3975,11 +4134,14 @@ instance ToJSON EventUpdateResponse where
 -- | This is a JSON template for the result of checking a revision.
 --
 -- /See:/ 'revisionCheckResponse' smart constructor.
-data RevisionCheckResponse = RevisionCheckResponse'
+data RevisionCheckResponse =
+  RevisionCheckResponse'
     { _rcrAPIVersion     :: !(Maybe Text)
     , _rcrKind           :: !Text
     , _rcrRevisionStatus :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RevisionCheckResponse' with the minimum fields required to make a request.
 --
@@ -3993,11 +4155,12 @@ data RevisionCheckResponse = RevisionCheckResponse'
 revisionCheckResponse
     :: RevisionCheckResponse
 revisionCheckResponse =
-    RevisionCheckResponse'
+  RevisionCheckResponse'
     { _rcrAPIVersion = Nothing
     , _rcrKind = "games#revisionCheckResponse"
     , _rcrRevisionStatus = Nothing
     }
+
 
 -- | The version of the API this client revision should use when calling API
 -- methods.
@@ -4041,12 +4204,15 @@ instance ToJSON RevisionCheckResponse where
 -- | This is a JSON template for a result for a match participant.
 --
 -- /See:/ 'participantResult' smart constructor.
-data ParticipantResult = ParticipantResult'
+data ParticipantResult =
+  ParticipantResult'
     { _prParticipantId :: !(Maybe Text)
     , _prKind          :: !Text
     , _prResult        :: !(Maybe Text)
     , _prPlacing       :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ParticipantResult' with the minimum fields required to make a request.
 --
@@ -4062,12 +4228,13 @@ data ParticipantResult = ParticipantResult'
 participantResult
     :: ParticipantResult
 participantResult =
-    ParticipantResult'
+  ParticipantResult'
     { _prParticipantId = Nothing
     , _prKind = "games#participantResult"
     , _prResult = Nothing
     , _prPlacing = Nothing
     }
+
 
 -- | The ID of the participant.
 prParticipantId :: Lens' ParticipantResult (Maybe Text)
@@ -4122,14 +4289,17 @@ instance ToJSON ParticipantResult where
 -- | This is a JSON template for the Leaderboard resource.
 --
 -- /See:/ 'leaderboard' smart constructor.
-data Leaderboard = Leaderboard'
+data Leaderboard =
+  Leaderboard'
     { _lKind             :: !Text
     , _lIsIconURLDefault :: !(Maybe Bool)
     , _lName             :: !(Maybe Text)
     , _lId               :: !(Maybe Text)
     , _lIconURL          :: !(Maybe Text)
     , _lOrder            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Leaderboard' with the minimum fields required to make a request.
 --
@@ -4149,7 +4319,7 @@ data Leaderboard = Leaderboard'
 leaderboard
     :: Leaderboard
 leaderboard =
-    Leaderboard'
+  Leaderboard'
     { _lKind = "games#leaderboard"
     , _lIsIconURLDefault = Nothing
     , _lName = Nothing
@@ -4157,6 +4327,7 @@ leaderboard =
     , _lIconURL = Nothing
     , _lOrder = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#leaderboard.
@@ -4214,11 +4385,14 @@ instance ToJSON Leaderboard where
 -- | This is a JSON template for the metagame config resource
 --
 -- /See:/ 'metagameConfig' smart constructor.
-data MetagameConfig = MetagameConfig'
+data MetagameConfig =
+  MetagameConfig'
     { _mcKind           :: !Text
     , _mcCurrentVersion :: !(Maybe (Textual Int32))
     , _mcPlayerLevels   :: !(Maybe [PlayerLevel])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetagameConfig' with the minimum fields required to make a request.
 --
@@ -4232,11 +4406,12 @@ data MetagameConfig = MetagameConfig'
 metagameConfig
     :: MetagameConfig
 metagameConfig =
-    MetagameConfig'
+  MetagameConfig'
     { _mcKind = "games#metagameConfig"
     , _mcCurrentVersion = Nothing
     , _mcPlayerLevels = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#metagameConfig.
@@ -4279,11 +4454,14 @@ instance ToJSON MetagameConfig where
 -- | This is a JSON template for a list of category data objects.
 --
 -- /See:/ 'categoryListResponse' smart constructor.
-data CategoryListResponse = CategoryListResponse'
+data CategoryListResponse =
+  CategoryListResponse'
     { _clrNextPageToken :: !(Maybe Text)
     , _clrKind          :: !Text
     , _clrItems         :: !(Maybe [Category])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CategoryListResponse' with the minimum fields required to make a request.
 --
@@ -4297,11 +4475,12 @@ data CategoryListResponse = CategoryListResponse'
 categoryListResponse
     :: CategoryListResponse
 categoryListResponse =
-    CategoryListResponse'
+  CategoryListResponse'
     { _clrNextPageToken = Nothing
     , _clrKind = "games#categoryListResponse"
     , _clrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 clrNextPageToken :: Lens' CategoryListResponse (Maybe Text)
@@ -4341,7 +4520,8 @@ instance ToJSON CategoryListResponse where
 -- | This is a JSON template for an update on the status of a peer in a room.
 --
 -- /See:/ 'roomP2PStatus' smart constructor.
-data RoomP2PStatus = RoomP2PStatus'
+data RoomP2PStatus =
+  RoomP2PStatus'
     { _rppsStatus                           :: !(Maybe Text)
     , _rppsParticipantId                    :: !(Maybe Text)
     , _rppsKind                             :: !Text
@@ -4349,7 +4529,9 @@ data RoomP2PStatus = RoomP2PStatus'
     , _rppsErrorReason                      :: !(Maybe Text)
     , _rppsConnectionSetupLatencyMillis     :: !(Maybe (Textual Int32))
     , _rppsUnreliableRoundtripLatencyMillis :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomP2PStatus' with the minimum fields required to make a request.
 --
@@ -4371,7 +4553,7 @@ data RoomP2PStatus = RoomP2PStatus'
 roomP2PStatus
     :: RoomP2PStatus
 roomP2PStatus =
-    RoomP2PStatus'
+  RoomP2PStatus'
     { _rppsStatus = Nothing
     , _rppsParticipantId = Nothing
     , _rppsKind = "games#roomP2PStatus"
@@ -4380,6 +4562,7 @@ roomP2PStatus =
     , _rppsConnectionSetupLatencyMillis = Nothing
     , _rppsUnreliableRoundtripLatencyMillis = Nothing
     }
+
 
 -- | The status of the peer in the room. Possible values are: -
 -- \"CONNECTION_ESTABLISHED\" - The client established a P2P connection
@@ -4462,11 +4645,14 @@ instance ToJSON RoomP2PStatus where
 -- | This is a JSON template for turn-based match modification metadata.
 --
 -- /See:/ 'turnBasedMatchModification' smart constructor.
-data TurnBasedMatchModification = TurnBasedMatchModification'
+data TurnBasedMatchModification =
+  TurnBasedMatchModification'
     { _tbmmParticipantId           :: !(Maybe Text)
     , _tbmmKind                    :: !Text
     , _tbmmModifiedTimestampMillis :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchModification' with the minimum fields required to make a request.
 --
@@ -4480,11 +4666,12 @@ data TurnBasedMatchModification = TurnBasedMatchModification'
 turnBasedMatchModification
     :: TurnBasedMatchModification
 turnBasedMatchModification =
-    TurnBasedMatchModification'
+  TurnBasedMatchModification'
     { _tbmmParticipantId = Nothing
     , _tbmmKind = "games#turnBasedMatchModification"
     , _tbmmModifiedTimestampMillis = Nothing
     }
+
 
 -- | The ID of the participant that modified the match.
 tbmmParticipantId :: Lens' TurnBasedMatchModification (Maybe Text)
@@ -4526,7 +4713,8 @@ instance ToJSON TurnBasedMatchModification where
 -- | This is a JSON template for an event definition resource.
 --
 -- /See:/ 'eventDefinition' smart constructor.
-data EventDefinition = EventDefinition'
+data EventDefinition =
+  EventDefinition'
     { _edIsDefaultImageURL :: !(Maybe Bool)
     , _edKind              :: !Text
     , _edVisibility        :: !(Maybe Text)
@@ -4535,7 +4723,9 @@ data EventDefinition = EventDefinition'
     , _edId                :: !(Maybe Text)
     , _edChildEvents       :: !(Maybe [EventChild])
     , _edDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventDefinition' with the minimum fields required to make a request.
 --
@@ -4559,7 +4749,7 @@ data EventDefinition = EventDefinition'
 eventDefinition
     :: EventDefinition
 eventDefinition =
-    EventDefinition'
+  EventDefinition'
     { _edIsDefaultImageURL = Nothing
     , _edKind = "games#eventDefinition"
     , _edVisibility = Nothing
@@ -4569,6 +4759,7 @@ eventDefinition =
     , _edChildEvents = Nothing
     , _edDescription = Nothing
     }
+
 
 -- | Indicates whether the icon image being returned is a default image, or
 -- is game-provided.
@@ -4649,11 +4840,14 @@ instance ToJSON EventDefinition where
 -- | This is a JSON template for room modification metadata.
 --
 -- /See:/ 'roomModification' smart constructor.
-data RoomModification = RoomModification'
+data RoomModification =
+  RoomModification'
     { _rmParticipantId           :: !(Maybe Text)
     , _rmKind                    :: !Text
     , _rmModifiedTimestampMillis :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomModification' with the minimum fields required to make a request.
 --
@@ -4667,11 +4861,12 @@ data RoomModification = RoomModification'
 roomModification
     :: RoomModification
 roomModification =
-    RoomModification'
+  RoomModification'
     { _rmParticipantId = Nothing
     , _rmKind = "games#roomModification"
     , _rmModifiedTimestampMillis = Nothing
     }
+
 
 -- | The ID of the participant that modified the room.
 rmParticipantId :: Lens' RoomModification (Maybe Text)
@@ -4713,11 +4908,14 @@ instance ToJSON RoomModification where
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventUpdateRequest' smart constructor.
-data EventUpdateRequest = EventUpdateRequest'
+data EventUpdateRequest =
+  EventUpdateRequest'
     { _eUpdateCount  :: !(Maybe (Textual Int64))
     , _eKind         :: !Text
     , _eDefinitionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventUpdateRequest' with the minimum fields required to make a request.
 --
@@ -4731,11 +4929,12 @@ data EventUpdateRequest = EventUpdateRequest'
 eventUpdateRequest
     :: EventUpdateRequest
 eventUpdateRequest =
-    EventUpdateRequest'
+  EventUpdateRequest'
     { _eUpdateCount = Nothing
     , _eKind = "games#eventUpdateRequest"
     , _eDefinitionId = Nothing
     }
+
 
 -- | The number of times this event occurred in this time period.
 eUpdateCount :: Lens' EventUpdateRequest (Maybe Int64)
@@ -4774,10 +4973,13 @@ instance ToJSON EventUpdateRequest where
 -- | This is a JSON template for an achievement unlock response
 --
 -- /See:/ 'achievementUnlockResponse' smart constructor.
-data AchievementUnlockResponse = AchievementUnlockResponse'
+data AchievementUnlockResponse =
+  AchievementUnlockResponse'
     { _achKind          :: !Text
     , _achNewlyUnlocked :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementUnlockResponse' with the minimum fields required to make a request.
 --
@@ -4789,10 +4991,9 @@ data AchievementUnlockResponse = AchievementUnlockResponse'
 achievementUnlockResponse
     :: AchievementUnlockResponse
 achievementUnlockResponse =
-    AchievementUnlockResponse'
-    { _achKind = "games#achievementUnlockResponse"
-    , _achNewlyUnlocked = Nothing
-    }
+  AchievementUnlockResponse'
+    {_achKind = "games#achievementUnlockResponse", _achNewlyUnlocked = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementUnlockResponse.
@@ -4824,7 +5025,8 @@ instance ToJSON AchievementUnlockResponse where
 -- | This is a JSON template for an achievement object.
 --
 -- /See:/ 'playerAchievement' smart constructor.
-data PlayerAchievement = PlayerAchievement'
+data PlayerAchievement =
+  PlayerAchievement'
     { _paKind                        :: !Text
     , _paAchievementState            :: !(Maybe Text)
     , _paFormattedCurrentStepsString :: !(Maybe Text)
@@ -4832,7 +5034,9 @@ data PlayerAchievement = PlayerAchievement'
     , _paId                          :: !(Maybe Text)
     , _paCurrentSteps                :: !(Maybe (Textual Int32))
     , _paLastUpdatedTimestamp        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerAchievement' with the minimum fields required to make a request.
 --
@@ -4854,7 +5058,7 @@ data PlayerAchievement = PlayerAchievement'
 playerAchievement
     :: PlayerAchievement
 playerAchievement =
-    PlayerAchievement'
+  PlayerAchievement'
     { _paKind = "games#playerAchievement"
     , _paAchievementState = Nothing
     , _paFormattedCurrentStepsString = Nothing
@@ -4863,6 +5067,7 @@ playerAchievement =
     , _paCurrentSteps = Nothing
     , _paLastUpdatedTimestamp = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerAchievement.
@@ -4940,10 +5145,13 @@ instance ToJSON PlayerAchievement where
 -- | This is a JSON template for an update on the status of peers in a room.
 --
 -- /See:/ 'roomP2PStatuses' smart constructor.
-data RoomP2PStatuses = RoomP2PStatuses'
+data RoomP2PStatuses =
+  RoomP2PStatuses'
     { _rppssKind    :: !Text
     , _rppssUpdates :: !(Maybe [RoomP2PStatus])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomP2PStatuses' with the minimum fields required to make a request.
 --
@@ -4955,10 +5163,9 @@ data RoomP2PStatuses = RoomP2PStatuses'
 roomP2PStatuses
     :: RoomP2PStatuses
 roomP2PStatuses =
-    RoomP2PStatuses'
-    { _rppssKind = "games#roomP2PStatuses"
-    , _rppssUpdates = Nothing
-    }
+  RoomP2PStatuses'
+    {_rppssKind = "games#roomP2PStatuses", _rppssUpdates = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomP2PStatuses.
@@ -4991,13 +5198,16 @@ instance ToJSON RoomP2PStatuses where
 -- | This is a JSON template for an image asset object.
 --
 -- /See:/ 'imageAsset' smart constructor.
-data ImageAsset = ImageAsset'
+data ImageAsset =
+  ImageAsset'
     { _iaHeight :: !(Maybe (Textual Int32))
     , _iaKind   :: !Text
     , _iaURL    :: !(Maybe Text)
     , _iaWidth  :: !(Maybe (Textual Int32))
     , _iaName   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImageAsset' with the minimum fields required to make a request.
 --
@@ -5015,13 +5225,14 @@ data ImageAsset = ImageAsset'
 imageAsset
     :: ImageAsset
 imageAsset =
-    ImageAsset'
+  ImageAsset'
     { _iaHeight = Nothing
     , _iaKind = "games#imageAsset"
     , _iaURL = Nothing
     , _iaWidth = Nothing
     , _iaName = Nothing
     }
+
 
 -- | The height of the asset.
 iaHeight :: Lens' ImageAsset (Maybe Int32)
@@ -5070,10 +5281,13 @@ instance ToJSON ImageAsset where
 -- | This is a JSON template for a list of achievement update requests.
 --
 -- /See:/ 'achievementUpdateMultipleRequest' smart constructor.
-data AchievementUpdateMultipleRequest = AchievementUpdateMultipleRequest'
+data AchievementUpdateMultipleRequest =
+  AchievementUpdateMultipleRequest'
     { _aumruKind    :: !Text
     , _aumruUpdates :: !(Maybe [AchievementUpdateRequest])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementUpdateMultipleRequest' with the minimum fields required to make a request.
 --
@@ -5085,10 +5299,11 @@ data AchievementUpdateMultipleRequest = AchievementUpdateMultipleRequest'
 achievementUpdateMultipleRequest
     :: AchievementUpdateMultipleRequest
 achievementUpdateMultipleRequest =
-    AchievementUpdateMultipleRequest'
+  AchievementUpdateMultipleRequest'
     { _aumruKind = "games#achievementUpdateMultipleRequest"
     , _aumruUpdates = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementUpdateMultipleRequest.
@@ -5125,10 +5340,13 @@ instance ToJSON AchievementUpdateMultipleRequest
 -- progress.
 --
 -- /See:/ 'roomAutoMatchStatus' smart constructor.
-data RoomAutoMatchStatus = RoomAutoMatchStatus'
+data RoomAutoMatchStatus =
+  RoomAutoMatchStatus'
     { _ramsKind                :: !Text
     , _ramsWaitEstimateSeconds :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomAutoMatchStatus' with the minimum fields required to make a request.
 --
@@ -5140,10 +5358,11 @@ data RoomAutoMatchStatus = RoomAutoMatchStatus'
 roomAutoMatchStatus
     :: RoomAutoMatchStatus
 roomAutoMatchStatus =
-    RoomAutoMatchStatus'
+  RoomAutoMatchStatus'
     { _ramsKind = "games#roomAutoMatchStatus"
     , _ramsWaitEstimateSeconds = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomAutoMatchStatus.
@@ -5177,13 +5396,16 @@ instance ToJSON RoomAutoMatchStatus where
 -- | This is a JSON template for a request to update an achievement.
 --
 -- /See:/ 'achievementUpdateRequest' smart constructor.
-data AchievementUpdateRequest = AchievementUpdateRequest'
+data AchievementUpdateRequest =
+  AchievementUpdateRequest'
     { _auruAchievementId          :: !(Maybe Text)
     , _auruKind                   :: !Text
     , _auruUpdateType             :: !(Maybe Text)
     , _auruSetStepsAtLeastPayload :: !(Maybe GamesAchievementSetStepsAtLeast)
     , _auruIncrementPayload       :: !(Maybe GamesAchievementIncrement)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementUpdateRequest' with the minimum fields required to make a request.
 --
@@ -5201,13 +5423,14 @@ data AchievementUpdateRequest = AchievementUpdateRequest'
 achievementUpdateRequest
     :: AchievementUpdateRequest
 achievementUpdateRequest =
-    AchievementUpdateRequest'
+  AchievementUpdateRequest'
     { _auruAchievementId = Nothing
     , _auruKind = "games#achievementUpdateRequest"
     , _auruUpdateType = Nothing
     , _auruSetStepsAtLeastPayload = Nothing
     , _auruIncrementPayload = Nothing
     }
+
 
 -- | The achievement this update is being applied to.
 auruAchievementId :: Lens' AchievementUpdateRequest (Maybe Text)
@@ -5268,13 +5491,16 @@ instance ToJSON AchievementUpdateRequest where
 -- | This is a JSON template for a score rank in a leaderboard.
 --
 -- /See:/ 'leaderboardScoreRank' smart constructor.
-data LeaderboardScoreRank = LeaderboardScoreRank'
+data LeaderboardScoreRank =
+  LeaderboardScoreRank'
     { _lsrNumScores          :: !(Maybe (Textual Int64))
     , _lsrKind               :: !Text
     , _lsrFormattedRank      :: !(Maybe Text)
     , _lsrFormattedNumScores :: !(Maybe Text)
     , _lsrRank               :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardScoreRank' with the minimum fields required to make a request.
 --
@@ -5292,13 +5518,14 @@ data LeaderboardScoreRank = LeaderboardScoreRank'
 leaderboardScoreRank
     :: LeaderboardScoreRank
 leaderboardScoreRank =
-    LeaderboardScoreRank'
+  LeaderboardScoreRank'
     { _lsrNumScores = Nothing
     , _lsrKind = "games#leaderboardScoreRank"
     , _lsrFormattedRank = Nothing
     , _lsrFormattedNumScores = Nothing
     , _lsrRank = Nothing
     }
+
 
 -- | The number of scores in the leaderboard.
 lsrNumScores :: Lens' LeaderboardScoreRank (Maybe Int64)
@@ -5353,7 +5580,8 @@ instance ToJSON LeaderboardScoreRank where
 -- | This is a JSON template for a room creation request.
 --
 -- /See:/ 'roomCreateRequest' smart constructor.
-data RoomCreateRequest = RoomCreateRequest'
+data RoomCreateRequest =
+  RoomCreateRequest'
     { _rooRequestId            :: !(Maybe (Textual Int64))
     , _rooVariant              :: !(Maybe (Textual Int32))
     , _rooNetworkDiagnostics   :: !(Maybe NetworkDiagnostics)
@@ -5362,7 +5590,9 @@ data RoomCreateRequest = RoomCreateRequest'
     , _rooClientAddress        :: !(Maybe RoomClientAddress)
     , _rooAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
     , _rooCapabilities         :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomCreateRequest' with the minimum fields required to make a request.
 --
@@ -5386,7 +5616,7 @@ data RoomCreateRequest = RoomCreateRequest'
 roomCreateRequest
     :: RoomCreateRequest
 roomCreateRequest =
-    RoomCreateRequest'
+  RoomCreateRequest'
     { _rooRequestId = Nothing
     , _rooVariant = Nothing
     , _rooNetworkDiagnostics = Nothing
@@ -5396,6 +5626,7 @@ roomCreateRequest =
     , _rooAutoMatchingCriteria = Nothing
     , _rooCapabilities = Nothing
     }
+
 
 -- | A randomly generated numeric ID. This number is used at the server to
 -- ensure that the request is handled correctly across retries.
@@ -5481,11 +5712,14 @@ instance ToJSON RoomCreateRequest where
 -- | This is a JSON template for a third party player list response.
 --
 -- /See:/ 'playerListResponse' smart constructor.
-data PlayerListResponse = PlayerListResponse'
+data PlayerListResponse =
+  PlayerListResponse'
     { _plrNextPageToken :: !(Maybe Text)
     , _plrKind          :: !Text
     , _plrItems         :: !(Maybe [Player])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerListResponse' with the minimum fields required to make a request.
 --
@@ -5499,11 +5733,12 @@ data PlayerListResponse = PlayerListResponse'
 playerListResponse
     :: PlayerListResponse
 playerListResponse =
-    PlayerListResponse'
+  PlayerListResponse'
     { _plrNextPageToken = Nothing
     , _plrKind = "games#playerListResponse"
     , _plrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 plrNextPageToken :: Lens' PlayerListResponse (Maybe Text)
@@ -5543,14 +5778,17 @@ instance ToJSON PlayerListResponse where
 -- | This is a JSON template for a ListScores response.
 --
 -- /See:/ 'leaderboardScores' smart constructor.
-data LeaderboardScores = LeaderboardScores'
+data LeaderboardScores =
+  LeaderboardScores'
     { _lsNextPageToken :: !(Maybe Text)
     , _lsNumScores     :: !(Maybe (Textual Int64))
     , _lsKind          :: !Text
     , _lsPlayerScore   :: !(Maybe LeaderboardEntry)
     , _lsItems         :: !(Maybe [LeaderboardEntry])
     , _lsPrevPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardScores' with the minimum fields required to make a request.
 --
@@ -5570,7 +5808,7 @@ data LeaderboardScores = LeaderboardScores'
 leaderboardScores
     :: LeaderboardScores
 leaderboardScores =
-    LeaderboardScores'
+  LeaderboardScores'
     { _lsNextPageToken = Nothing
     , _lsNumScores = Nothing
     , _lsKind = "games#leaderboardScores"
@@ -5578,6 +5816,7 @@ leaderboardScores =
     , _lsItems = Nothing
     , _lsPrevPageToken = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 lsNextPageToken :: Lens' LeaderboardScores (Maybe Text)
@@ -5643,7 +5882,8 @@ instance ToJSON LeaderboardScores where
 -- | This is a JSON template for an achievement definition object.
 --
 -- /See:/ 'achievementDefinition' smart constructor.
-data AchievementDefinition = AchievementDefinition'
+data AchievementDefinition =
+  AchievementDefinition'
     { _adAchievementType          :: !(Maybe Text)
     , _adFormattedTotalSteps      :: !(Maybe Text)
     , _adRevealedIconURL          :: !(Maybe Text)
@@ -5657,7 +5897,9 @@ data AchievementDefinition = AchievementDefinition'
     , _adDescription              :: !(Maybe Text)
     , _adIsRevealedIconURLDefault :: !(Maybe Bool)
     , _adUnlockedIconURL          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementDefinition' with the minimum fields required to make a request.
 --
@@ -5691,7 +5933,7 @@ data AchievementDefinition = AchievementDefinition'
 achievementDefinition
     :: AchievementDefinition
 achievementDefinition =
-    AchievementDefinition'
+  AchievementDefinition'
     { _adAchievementType = Nothing
     , _adFormattedTotalSteps = Nothing
     , _adRevealedIconURL = Nothing
@@ -5706,6 +5948,7 @@ achievementDefinition =
     , _adIsRevealedIconURLDefault = Nothing
     , _adUnlockedIconURL = Nothing
     }
+
 
 -- | The type of the achievement. Possible values are: - \"STANDARD\" -
 -- Achievement is either locked or unlocked. - \"INCREMENTAL\" -
@@ -5829,13 +6072,16 @@ instance ToJSON AchievementDefinition where
 -- | This is a JSON template for a turn-based match creation request.
 --
 -- /See:/ 'turnBasedMatchCreateRequest' smart constructor.
-data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest'
+data TurnBasedMatchCreateRequest =
+  TurnBasedMatchCreateRequest'
     { _tbmcrRequestId            :: !(Maybe (Textual Int64))
     , _tbmcrVariant              :: !(Maybe (Textual Int32))
     , _tbmcrKind                 :: !Text
     , _tbmcrInvitedPlayerIds     :: !(Maybe [Text])
     , _tbmcrAutoMatchingCriteria :: !(Maybe TurnBasedAutoMatchingCriteria)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchCreateRequest' with the minimum fields required to make a request.
 --
@@ -5853,13 +6099,14 @@ data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest'
 turnBasedMatchCreateRequest
     :: TurnBasedMatchCreateRequest
 turnBasedMatchCreateRequest =
-    TurnBasedMatchCreateRequest'
+  TurnBasedMatchCreateRequest'
     { _tbmcrRequestId = Nothing
     , _tbmcrVariant = Nothing
     , _tbmcrKind = "games#turnBasedMatchCreateRequest"
     , _tbmcrInvitedPlayerIds = Nothing
     , _tbmcrAutoMatchingCriteria = Nothing
     }
+
 
 -- | A randomly generated numeric ID. This number is used at the server to
 -- ensure that the request is handled correctly across retries.
@@ -5922,11 +6169,14 @@ instance ToJSON TurnBasedMatchCreateRequest where
 -- | This is a JSON template for a batch update failure resource.
 --
 -- /See:/ 'eventBatchRecordFailure' smart constructor.
-data EventBatchRecordFailure = EventBatchRecordFailure'
+data EventBatchRecordFailure =
+  EventBatchRecordFailure'
     { _ebrfKind         :: !Text
     , _ebrfRange        :: !(Maybe EventPeriodRange)
     , _ebrfFailureCause :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventBatchRecordFailure' with the minimum fields required to make a request.
 --
@@ -5940,11 +6190,12 @@ data EventBatchRecordFailure = EventBatchRecordFailure'
 eventBatchRecordFailure
     :: EventBatchRecordFailure
 eventBatchRecordFailure =
-    EventBatchRecordFailure'
+  EventBatchRecordFailure'
     { _ebrfKind = "games#eventBatchRecordFailure"
     , _ebrfRange = Nothing
     , _ebrfFailureCause = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventBatchRecordFailure.
@@ -5990,12 +6241,15 @@ instance ToJSON EventBatchRecordFailure where
 -- | This is a JSON template for a turn-based match results object.
 --
 -- /See:/ 'turnBasedMatchResults' smart constructor.
-data TurnBasedMatchResults = TurnBasedMatchResults'
+data TurnBasedMatchResults =
+  TurnBasedMatchResults'
     { _tbmrResults      :: !(Maybe [ParticipantResult])
     , _tbmrKind         :: !Text
     , _tbmrData         :: !(Maybe TurnBasedMatchDataRequest)
     , _tbmrMatchVersion :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchResults' with the minimum fields required to make a request.
 --
@@ -6011,12 +6265,13 @@ data TurnBasedMatchResults = TurnBasedMatchResults'
 turnBasedMatchResults
     :: TurnBasedMatchResults
 turnBasedMatchResults =
-    TurnBasedMatchResults'
+  TurnBasedMatchResults'
     { _tbmrResults = Nothing
     , _tbmrKind = "games#turnBasedMatchResults"
     , _tbmrData = Nothing
     , _tbmrMatchVersion = Nothing
     }
+
 
 -- | The match results for the participants in the match.
 tbmrResults :: Lens' TurnBasedMatchResults [ParticipantResult]
@@ -6063,10 +6318,13 @@ instance ToJSON TurnBasedMatchResults where
 -- | A push token ID for iOS devices.
 --
 -- /See:/ 'pushTokenIdIos' smart constructor.
-data PushTokenIdIos = PushTokenIdIos'
+data PushTokenIdIos =
+  PushTokenIdIos'
     { _ptiiAPNSDeviceToken :: !(Maybe Bytes)
     , _ptiiAPNSEnvironment :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PushTokenIdIos' with the minimum fields required to make a request.
 --
@@ -6078,10 +6336,9 @@ data PushTokenIdIos = PushTokenIdIos'
 pushTokenIdIos
     :: PushTokenIdIos
 pushTokenIdIos =
-    PushTokenIdIos'
-    { _ptiiAPNSDeviceToken = Nothing
-    , _ptiiAPNSEnvironment = Nothing
-    }
+  PushTokenIdIos'
+    {_ptiiAPNSDeviceToken = Nothing, _ptiiAPNSEnvironment = Nothing}
+
 
 -- | Device token supplied by an iOS system call to register for remote
 -- notifications. Encode this field as web-safe base64.
@@ -6116,11 +6373,14 @@ instance ToJSON PushTokenIdIos where
 -- | This is a JSON template for a leave room request.
 --
 -- /See:/ 'roomLeaveRequest' smart constructor.
-data RoomLeaveRequest = RoomLeaveRequest'
+data RoomLeaveRequest =
+  RoomLeaveRequest'
     { _rlrKind             :: !Text
     , _rlrReason           :: !(Maybe Text)
     , _rlrLeaveDiagnostics :: !(Maybe RoomLeaveDiagnostics)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomLeaveRequest' with the minimum fields required to make a request.
 --
@@ -6134,11 +6394,12 @@ data RoomLeaveRequest = RoomLeaveRequest'
 roomLeaveRequest
     :: RoomLeaveRequest
 roomLeaveRequest =
-    RoomLeaveRequest'
+  RoomLeaveRequest'
     { _rlrKind = "games#roomLeaveRequest"
     , _rlrReason = Nothing
     , _rlrLeaveDiagnostics = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomLeaveRequest.
@@ -6193,11 +6454,14 @@ instance ToJSON RoomLeaveRequest where
 -- the currently authenticated user.
 --
 -- /See:/ 'played' smart constructor.
-data Played = Played'
+data Played =
+  Played'
     { _pKind        :: !Text
     , _pAutoMatched :: !(Maybe Bool)
     , _pTimeMillis  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Played' with the minimum fields required to make a request.
 --
@@ -6211,11 +6475,9 @@ data Played = Played'
 played
     :: Played
 played =
-    Played'
-    { _pKind = "games#played"
-    , _pAutoMatched = Nothing
-    , _pTimeMillis = Nothing
-    }
+  Played'
+    {_pKind = "games#played", _pAutoMatched = Nothing, _pTimeMillis = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#played.
@@ -6255,11 +6517,14 @@ instance ToJSON Played where
 -- | This is a JSON template for an achievement increment response
 --
 -- /See:/ 'achievementIncrementResponse' smart constructor.
-data AchievementIncrementResponse = AchievementIncrementResponse'
+data AchievementIncrementResponse =
+  AchievementIncrementResponse'
     { _airKind          :: !Text
     , _airNewlyUnlocked :: !(Maybe Bool)
     , _airCurrentSteps  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementIncrementResponse' with the minimum fields required to make a request.
 --
@@ -6273,11 +6538,12 @@ data AchievementIncrementResponse = AchievementIncrementResponse'
 achievementIncrementResponse
     :: AchievementIncrementResponse
 achievementIncrementResponse =
-    AchievementIncrementResponse'
+  AchievementIncrementResponse'
     { _airKind = "games#achievementIncrementResponse"
     , _airNewlyUnlocked = Nothing
     , _airCurrentSteps = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementIncrementResponse.
@@ -6319,10 +6585,13 @@ instance ToJSON AchievementIncrementResponse where
 -- | This is a JSON template for an achievement reveal response
 --
 -- /See:/ 'achievementRevealResponse' smart constructor.
-data AchievementRevealResponse = AchievementRevealResponse'
+data AchievementRevealResponse =
+  AchievementRevealResponse'
     { _arrKind         :: !Text
     , _arrCurrentState :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementRevealResponse' with the minimum fields required to make a request.
 --
@@ -6334,10 +6603,9 @@ data AchievementRevealResponse = AchievementRevealResponse'
 achievementRevealResponse
     :: AchievementRevealResponse
 achievementRevealResponse =
-    AchievementRevealResponse'
-    { _arrKind = "games#achievementRevealResponse"
-    , _arrCurrentState = Nothing
-    }
+  AchievementRevealResponse'
+    {_arrKind = "games#achievementRevealResponse", _arrCurrentState = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementRevealResponse.
@@ -6371,11 +6639,14 @@ instance ToJSON AchievementRevealResponse where
 -- | This is a JSON template for an achievement set steps at least response.
 --
 -- /See:/ 'achievementSetStepsAtLeastResponse' smart constructor.
-data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse'
+data AchievementSetStepsAtLeastResponse =
+  AchievementSetStepsAtLeastResponse'
     { _assalrKind          :: !Text
     , _assalrNewlyUnlocked :: !(Maybe Bool)
     , _assalrCurrentSteps  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementSetStepsAtLeastResponse' with the minimum fields required to make a request.
 --
@@ -6389,11 +6660,12 @@ data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse'
 achievementSetStepsAtLeastResponse
     :: AchievementSetStepsAtLeastResponse
 achievementSetStepsAtLeastResponse =
-    AchievementSetStepsAtLeastResponse'
+  AchievementSetStepsAtLeastResponse'
     { _assalrKind = "games#achievementSetStepsAtLeastResponse"
     , _assalrNewlyUnlocked = Nothing
     , _assalrCurrentSteps = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementSetStepsAtLeastResponse.
@@ -6438,11 +6710,14 @@ instance ToJSON AchievementSetStepsAtLeastResponse
 -- | This is a JSON template for a list of achievement objects.
 --
 -- /See:/ 'playerAchievementListResponse' smart constructor.
-data PlayerAchievementListResponse = PlayerAchievementListResponse'
+data PlayerAchievementListResponse =
+  PlayerAchievementListResponse'
     { _palrNextPageToken :: !(Maybe Text)
     , _palrKind          :: !Text
     , _palrItems         :: !(Maybe [PlayerAchievement])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerAchievementListResponse' with the minimum fields required to make a request.
 --
@@ -6456,11 +6731,12 @@ data PlayerAchievementListResponse = PlayerAchievementListResponse'
 playerAchievementListResponse
     :: PlayerAchievementListResponse
 playerAchievementListResponse =
-    PlayerAchievementListResponse'
+  PlayerAchievementListResponse'
     { _palrNextPageToken = Nothing
     , _palrKind = "games#playerAchievementListResponse"
     , _palrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 palrNextPageToken :: Lens' PlayerAchievementListResponse (Maybe Text)
@@ -6501,12 +6777,15 @@ instance ToJSON PlayerAchievementListResponse where
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventRecordRequest' smart constructor.
-data EventRecordRequest = EventRecordRequest'
+data EventRecordRequest =
+  EventRecordRequest'
     { _errRequestId         :: !(Maybe (Textual Int64))
     , _errKind              :: !Text
     , _errCurrentTimeMillis :: !(Maybe (Textual Int64))
     , _errTimePeriods       :: !(Maybe [EventPeriodUpdate])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventRecordRequest' with the minimum fields required to make a request.
 --
@@ -6522,12 +6801,13 @@ data EventRecordRequest = EventRecordRequest'
 eventRecordRequest
     :: EventRecordRequest
 eventRecordRequest =
-    EventRecordRequest'
+  EventRecordRequest'
     { _errRequestId = Nothing
     , _errKind = "games#eventRecordRequest"
     , _errCurrentTimeMillis = Nothing
     , _errTimePeriods = Nothing
     }
+
 
 -- | The request ID used to identify this attempt to record events.
 errRequestId :: Lens' EventRecordRequest (Maybe Int64)
@@ -6578,12 +6858,15 @@ instance ToJSON EventRecordRequest where
 -- | This is a JSON template for a room auto-match criteria object.
 --
 -- /See:/ 'roomAutoMatchingCriteria' smart constructor.
-data RoomAutoMatchingCriteria = RoomAutoMatchingCriteria'
+data RoomAutoMatchingCriteria =
+  RoomAutoMatchingCriteria'
     { _ramcKind                   :: !Text
     , _ramcExclusiveBitmask       :: !(Maybe (Textual Int64))
     , _ramcMaxAutoMatchingPlayers :: !(Maybe (Textual Int32))
     , _ramcMinAutoMatchingPlayers :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomAutoMatchingCriteria' with the minimum fields required to make a request.
 --
@@ -6599,12 +6882,13 @@ data RoomAutoMatchingCriteria = RoomAutoMatchingCriteria'
 roomAutoMatchingCriteria
     :: RoomAutoMatchingCriteria
 roomAutoMatchingCriteria =
-    RoomAutoMatchingCriteria'
+  RoomAutoMatchingCriteria'
     { _ramcKind = "games#roomAutoMatchingCriteria"
     , _ramcExclusiveBitmask = Nothing
     , _ramcMaxAutoMatchingPlayers = Nothing
     , _ramcMinAutoMatchingPlayers = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomAutoMatchingCriteria.
@@ -6660,13 +6944,16 @@ instance ToJSON RoomAutoMatchingCriteria where
 -- | This is a JSON template for a Quest Milestone resource.
 --
 -- /See:/ 'questMilestone' smart constructor.
-data QuestMilestone = QuestMilestone'
+data QuestMilestone =
+  QuestMilestone'
     { _qmState                :: !(Maybe Text)
     , _qmKind                 :: !Text
     , _qmId                   :: !(Maybe Text)
     , _qmCompletionRewardData :: !(Maybe Bytes)
     , _qmCriteria             :: !(Maybe [QuestCriterion])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuestMilestone' with the minimum fields required to make a request.
 --
@@ -6684,13 +6971,14 @@ data QuestMilestone = QuestMilestone'
 questMilestone
     :: QuestMilestone
 questMilestone =
-    QuestMilestone'
+  QuestMilestone'
     { _qmState = Nothing
     , _qmKind = "games#questMilestone"
     , _qmId = Nothing
     , _qmCompletionRewardData = Nothing
     , _qmCriteria = Nothing
     }
+
 
 -- | The current state of the milestone. Possible values are: -
 -- \"COMPLETED_NOT_CLAIMED\" - The milestone is complete, but has not yet
@@ -6750,13 +7038,16 @@ instance ToJSON QuestMilestone where
 -- | This is a JSON template for peer session diagnostics.
 --
 -- /See:/ 'peerSessionDiagnostics' smart constructor.
-data PeerSessionDiagnostics = PeerSessionDiagnostics'
+data PeerSessionDiagnostics =
+  PeerSessionDiagnostics'
     { _psdConnectedTimestampMillis :: !(Maybe (Textual Int64))
     , _psdParticipantId            :: !(Maybe Text)
     , _psdKind                     :: !Text
     , _psdUnreliableChannel        :: !(Maybe PeerChannelDiagnostics)
     , _psdReliableChannel          :: !(Maybe PeerChannelDiagnostics)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeerSessionDiagnostics' with the minimum fields required to make a request.
 --
@@ -6774,13 +7065,14 @@ data PeerSessionDiagnostics = PeerSessionDiagnostics'
 peerSessionDiagnostics
     :: PeerSessionDiagnostics
 peerSessionDiagnostics =
-    PeerSessionDiagnostics'
+  PeerSessionDiagnostics'
     { _psdConnectedTimestampMillis = Nothing
     , _psdParticipantId = Nothing
     , _psdKind = "games#peerSessionDiagnostics"
     , _psdUnreliableChannel = Nothing
     , _psdReliableChannel = Nothing
     }
+
 
 -- | Connected time in milliseconds.
 psdConnectedTimestampMillis :: Lens' PeerSessionDiagnostics (Maybe Int64)
@@ -6837,10 +7129,13 @@ instance ToJSON PeerSessionDiagnostics where
 -- | This is a JSON template for a push token ID resource.
 --
 -- /See:/ 'pushTokenId' smart constructor.
-data PushTokenId = PushTokenId'
+data PushTokenId =
+  PushTokenId'
     { _ptiIos  :: !(Maybe PushTokenIdIos)
     , _ptiKind :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PushTokenId' with the minimum fields required to make a request.
 --
@@ -6851,11 +7146,8 @@ data PushTokenId = PushTokenId'
 -- * 'ptiKind'
 pushTokenId
     :: PushTokenId
-pushTokenId =
-    PushTokenId'
-    { _ptiIos = Nothing
-    , _ptiKind = "games#pushTokenId"
-    }
+pushTokenId = PushTokenId' {_ptiIos = Nothing, _ptiKind = "games#pushTokenId"}
+
 
 -- | A push token ID for iOS devices.
 ptiIos :: Lens' PushTokenId (Maybe PushTokenIdIos)
@@ -6883,11 +7175,14 @@ instance ToJSON PushTokenId where
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventPeriodUpdate' smart constructor.
-data EventPeriodUpdate = EventPeriodUpdate'
+data EventPeriodUpdate =
+  EventPeriodUpdate'
     { _epuKind       :: !Text
     , _epuTimePeriod :: !(Maybe EventPeriodRange)
     , _epuUpdates    :: !(Maybe [EventUpdateRequest])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventPeriodUpdate' with the minimum fields required to make a request.
 --
@@ -6901,11 +7196,12 @@ data EventPeriodUpdate = EventPeriodUpdate'
 eventPeriodUpdate
     :: EventPeriodUpdate
 eventPeriodUpdate =
-    EventPeriodUpdate'
+  EventPeriodUpdate'
     { _epuKind = "games#eventPeriodUpdate"
     , _epuTimePeriod = Nothing
     , _epuUpdates = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventPeriodUpdate.
@@ -6946,12 +7242,15 @@ instance ToJSON EventPeriodUpdate where
 -- sync.
 --
 -- /See:/ 'turnBasedMatchSync' smart constructor.
-data TurnBasedMatchSync = TurnBasedMatchSync'
+data TurnBasedMatchSync =
+  TurnBasedMatchSync'
     { _tbmsMoreAvailable :: !(Maybe Bool)
     , _tbmsNextPageToken :: !(Maybe Text)
     , _tbmsKind          :: !Text
     , _tbmsItems         :: !(Maybe [TurnBasedMatch])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchSync' with the minimum fields required to make a request.
 --
@@ -6967,12 +7266,13 @@ data TurnBasedMatchSync = TurnBasedMatchSync'
 turnBasedMatchSync
     :: TurnBasedMatchSync
 turnBasedMatchSync =
-    TurnBasedMatchSync'
+  TurnBasedMatchSync'
     { _tbmsMoreAvailable = Nothing
     , _tbmsNextPageToken = Nothing
     , _tbmsKind = "games#turnBasedMatchSync"
     , _tbmsItems = Nothing
     }
+
 
 -- | True if there were more matches available to fetch at the time the
 -- response was generated (which were not returned due to page size
@@ -7021,13 +7321,16 @@ instance ToJSON TurnBasedMatchSync where
 -- | This is a JSON template for a request to submit a score to leaderboards.
 --
 -- /See:/ 'scoreSubmission' smart constructor.
-data ScoreSubmission = ScoreSubmission'
+data ScoreSubmission =
+  ScoreSubmission'
     { _scoSignature     :: !(Maybe Text)
     , _scoScoreTag      :: !(Maybe Text)
     , _scoScore         :: !(Maybe (Textual Int64))
     , _scoKind          :: !Text
     , _scoLeaderboardId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScoreSubmission' with the minimum fields required to make a request.
 --
@@ -7045,13 +7348,14 @@ data ScoreSubmission = ScoreSubmission'
 scoreSubmission
     :: ScoreSubmission
 scoreSubmission =
-    ScoreSubmission'
+  ScoreSubmission'
     { _scoSignature = Nothing
     , _scoScoreTag = Nothing
     , _scoScore = Nothing
     , _scoKind = "games#scoreSubmission"
     , _scoLeaderboardId = Nothing
     }
+
 
 -- | Signature Values will contain URI-safe characters as defined by section
 -- 2.3 of RFC 3986.
@@ -7105,7 +7409,8 @@ instance ToJSON ScoreSubmission where
 -- | This is a JSON template for room leave diagnostics.
 --
 -- /See:/ 'roomLeaveDiagnostics' smart constructor.
-data RoomLeaveDiagnostics = RoomLeaveDiagnostics'
+data RoomLeaveDiagnostics =
+  RoomLeaveDiagnostics'
     { _rldPeerSession           :: !(Maybe [PeerSessionDiagnostics])
     , _rldAndroidNetworkType    :: !(Maybe (Textual Int32))
     , _rldKind                  :: !Text
@@ -7114,7 +7419,9 @@ data RoomLeaveDiagnostics = RoomLeaveDiagnostics'
     , _rldSocketsUsed           :: !(Maybe Bool)
     , _rldIosNetworkType        :: !(Maybe (Textual Int32))
     , _rldAndroidNetworkSubtype :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomLeaveDiagnostics' with the minimum fields required to make a request.
 --
@@ -7138,7 +7445,7 @@ data RoomLeaveDiagnostics = RoomLeaveDiagnostics'
 roomLeaveDiagnostics
     :: RoomLeaveDiagnostics
 roomLeaveDiagnostics =
-    RoomLeaveDiagnostics'
+  RoomLeaveDiagnostics'
     { _rldPeerSession = Nothing
     , _rldAndroidNetworkType = Nothing
     , _rldKind = "games#roomLeaveDiagnostics"
@@ -7148,6 +7455,7 @@ roomLeaveDiagnostics =
     , _rldIosNetworkType = Nothing
     , _rldAndroidNetworkSubtype = Nothing
     }
+
 
 -- | Diagnostics about all peer sessions.
 rldPeerSession :: Lens' RoomLeaveDiagnostics [PeerSessionDiagnostics]
@@ -7242,13 +7550,16 @@ instance ToJSON RoomLeaveDiagnostics where
 -- | This is a JSON template for aggregate stats.
 --
 -- /See:/ 'aggregateStats' smart constructor.
-data AggregateStats = AggregateStats'
+data AggregateStats =
+  AggregateStats'
     { _asMax   :: !(Maybe (Textual Int64))
     , _asKind  :: !Text
     , _asCount :: !(Maybe (Textual Int64))
     , _asMin   :: !(Maybe (Textual Int64))
     , _asSum   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AggregateStats' with the minimum fields required to make a request.
 --
@@ -7266,13 +7577,14 @@ data AggregateStats = AggregateStats'
 aggregateStats
     :: AggregateStats
 aggregateStats =
-    AggregateStats'
+  AggregateStats'
     { _asMax = Nothing
     , _asKind = "games#aggregateStats"
     , _asCount = Nothing
     , _asMin = Nothing
     , _asSum = Nothing
     }
+
 
 -- | The maximum amount.
 asMax :: Lens' AggregateStats (Maybe Int64)
@@ -7325,11 +7637,14 @@ instance ToJSON AggregateStats where
 -- | This is a JSON template for the Web details resource.
 --
 -- /See:/ 'instanceWebDetails' smart constructor.
-data InstanceWebDetails = InstanceWebDetails'
+data InstanceWebDetails =
+  InstanceWebDetails'
     { _iwdPreferred :: !(Maybe Bool)
     , _iwdKind      :: !Text
     , _iwdLaunchURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceWebDetails' with the minimum fields required to make a request.
 --
@@ -7343,11 +7658,12 @@ data InstanceWebDetails = InstanceWebDetails'
 instanceWebDetails
     :: InstanceWebDetails
 instanceWebDetails =
-    InstanceWebDetails'
+  InstanceWebDetails'
     { _iwdPreferred = Nothing
     , _iwdKind = "games#instanceWebDetails"
     , _iwdLaunchURL = Nothing
     }
+
 
 -- | Indicates that this instance is the default for new installations.
 iwdPreferred :: Lens' InstanceWebDetails (Maybe Bool)
@@ -7384,11 +7700,14 @@ instance ToJSON InstanceWebDetails where
 -- | This is a JSON template for a rematch response.
 --
 -- /See:/ 'turnBasedMatchRematch' smart constructor.
-data TurnBasedMatchRematch = TurnBasedMatchRematch'
+data TurnBasedMatchRematch =
+  TurnBasedMatchRematch'
     { _tRematch       :: !(Maybe TurnBasedMatch)
     , _tKind          :: !Text
     , _tPreviousMatch :: !(Maybe TurnBasedMatch)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchRematch' with the minimum fields required to make a request.
 --
@@ -7402,11 +7721,12 @@ data TurnBasedMatchRematch = TurnBasedMatchRematch'
 turnBasedMatchRematch
     :: TurnBasedMatchRematch
 turnBasedMatchRematch =
-    TurnBasedMatchRematch'
+  TurnBasedMatchRematch'
     { _tRematch = Nothing
     , _tKind = "games#turnBasedMatchRematch"
     , _tPreviousMatch = Nothing
     }
+
 
 -- | The newly created match; a rematch of the old match with the same
 -- participants.
@@ -7446,13 +7766,16 @@ instance ToJSON TurnBasedMatchRematch where
 -- experience.
 --
 -- /See:/ 'playerExperienceInfo' smart constructor.
-data PlayerExperienceInfo = PlayerExperienceInfo'
+data PlayerExperienceInfo =
+  PlayerExperienceInfo'
     { _peiKind                       :: !Text
     , _peiCurrentExperiencePoints    :: !(Maybe (Textual Int64))
     , _peiCurrentLevel               :: !(Maybe PlayerLevel)
     , _peiNextLevel                  :: !(Maybe PlayerLevel)
     , _peiLastLevelUpTimestampMillis :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerExperienceInfo' with the minimum fields required to make a request.
 --
@@ -7470,13 +7793,14 @@ data PlayerExperienceInfo = PlayerExperienceInfo'
 playerExperienceInfo
     :: PlayerExperienceInfo
 playerExperienceInfo =
-    PlayerExperienceInfo'
+  PlayerExperienceInfo'
     { _peiKind = "games#playerExperienceInfo"
     , _peiCurrentExperiencePoints = Nothing
     , _peiCurrentLevel = Nothing
     , _peiNextLevel = Nothing
     , _peiLastLevelUpTimestampMillis = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerExperienceInfo.
@@ -7537,10 +7861,13 @@ instance ToJSON PlayerExperienceInfo where
 -- achievement.
 --
 -- /See:/ 'gamesAchievementSetStepsAtLeast' smart constructor.
-data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast'
+data GamesAchievementSetStepsAtLeast =
+  GamesAchievementSetStepsAtLeast'
     { _gassalKind  :: !Text
     , _gassalSteps :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GamesAchievementSetStepsAtLeast' with the minimum fields required to make a request.
 --
@@ -7552,10 +7879,11 @@ data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast'
 gamesAchievementSetStepsAtLeast
     :: GamesAchievementSetStepsAtLeast
 gamesAchievementSetStepsAtLeast =
-    GamesAchievementSetStepsAtLeast'
+  GamesAchievementSetStepsAtLeast'
     { _gassalKind = "games#GamesAchievementSetStepsAtLeast"
     , _gassalSteps = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#GamesAchievementSetStepsAtLeast.
@@ -7589,7 +7917,8 @@ instance ToJSON GamesAchievementSetStepsAtLeast where
 -- | This is a JSON template for a Player resource.
 --
 -- /See:/ 'player' smart constructor.
-data Player = Player'
+data Player =
+  Player'
     { _plaBannerURLLandscape :: !(Maybe Text)
     , _plaLastPlayedWith     :: !(Maybe Played)
     , _plaAvatarImageURL     :: !(Maybe Text)
@@ -7602,7 +7931,9 @@ data Player = Player'
     , _plaBannerURLPortrait  :: !(Maybe Text)
     , _plaPlayerId           :: !(Maybe Text)
     , _plaProFileSettings    :: !(Maybe ProFileSettings)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Player' with the minimum fields required to make a request.
 --
@@ -7634,7 +7965,7 @@ data Player = Player'
 player
     :: Player
 player =
-    Player'
+  Player'
     { _plaBannerURLLandscape = Nothing
     , _plaLastPlayedWith = Nothing
     , _plaAvatarImageURL = Nothing
@@ -7648,6 +7979,7 @@ player =
     , _plaPlayerId = Nothing
     , _plaProFileSettings = Nothing
     }
+
 
 -- | The url to the landscape mode player banner image.
 plaBannerURLLandscape :: Lens' Player (Maybe Text)
@@ -7763,11 +8095,14 @@ instance ToJSON Player where
 -- achievement.
 --
 -- /See:/ 'gamesAchievementIncrement' smart constructor.
-data GamesAchievementIncrement = GamesAchievementIncrement'
+data GamesAchievementIncrement =
+  GamesAchievementIncrement'
     { _gaiRequestId :: !(Maybe (Textual Int64))
     , _gaiKind      :: !Text
     , _gaiSteps     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GamesAchievementIncrement' with the minimum fields required to make a request.
 --
@@ -7781,11 +8116,12 @@ data GamesAchievementIncrement = GamesAchievementIncrement'
 gamesAchievementIncrement
     :: GamesAchievementIncrement
 gamesAchievementIncrement =
-    GamesAchievementIncrement'
+  GamesAchievementIncrement'
     { _gaiRequestId = Nothing
     , _gaiKind = "games#GamesAchievementIncrement"
     , _gaiSteps = Nothing
     }
+
 
 -- | The requestId associated with an increment to an achievement.
 gaiRequestId :: Lens' GamesAchievementIncrement (Maybe Int64)
@@ -7824,7 +8160,8 @@ instance ToJSON GamesAchievementIncrement where
 -- | This is a JSON template for a Quest resource.
 --
 -- /See:/ 'quest' smart constructor.
-data Quest = Quest'
+data Quest =
+  Quest'
     { _queLastUpdatedTimestampMillis :: !(Maybe (Textual Int64))
     , _queBannerURL                  :: !(Maybe Text)
     , _queState                      :: !(Maybe Text)
@@ -7841,7 +8178,9 @@ data Quest = Quest'
     , _queIsDefaultBannerURL         :: !(Maybe Bool)
     , _queIsDefaultIconURL           :: !(Maybe Bool)
     , _queAcceptedTimestampMillis    :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Quest' with the minimum fields required to make a request.
 --
@@ -7881,7 +8220,7 @@ data Quest = Quest'
 quest
     :: Quest
 quest =
-    Quest'
+  Quest'
     { _queLastUpdatedTimestampMillis = Nothing
     , _queBannerURL = Nothing
     , _queState = Nothing
@@ -7899,6 +8238,7 @@ quest =
     , _queIsDefaultIconURL = Nothing
     , _queAcceptedTimestampMillis = Nothing
     }
+
 
 -- | The timestamp at which the quest was last updated by the user in
 -- milliseconds since the epoch in UTC. Only present if the player has
@@ -8058,10 +8398,13 @@ instance ToJSON Quest where
 -- | This is a JSON template for an event child relationship resource.
 --
 -- /See:/ 'eventChild' smart constructor.
-data EventChild = EventChild'
+data EventChild =
+  EventChild'
     { _ecKind    :: !Text
     , _ecChildId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventChild' with the minimum fields required to make a request.
 --
@@ -8072,11 +8415,8 @@ data EventChild = EventChild'
 -- * 'ecChildId'
 eventChild
     :: EventChild
-eventChild =
-    EventChild'
-    { _ecKind = "games#eventChild"
-    , _ecChildId = Nothing
-    }
+eventChild = EventChild' {_ecKind = "games#eventChild", _ecChildId = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventChild.
@@ -8107,11 +8447,14 @@ instance ToJSON EventChild where
 -- response resource.
 --
 -- /See:/ 'applicationVerifyResponse' smart constructor.
-data ApplicationVerifyResponse = ApplicationVerifyResponse'
+data ApplicationVerifyResponse =
+  ApplicationVerifyResponse'
     { _avrKind              :: !Text
     , _avrAlternatePlayerId :: !(Maybe Text)
     , _avrPlayerId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationVerifyResponse' with the minimum fields required to make a request.
 --
@@ -8125,11 +8468,12 @@ data ApplicationVerifyResponse = ApplicationVerifyResponse'
 applicationVerifyResponse
     :: ApplicationVerifyResponse
 applicationVerifyResponse =
-    ApplicationVerifyResponse'
+  ApplicationVerifyResponse'
     { _avrKind = "games#applicationVerifyResponse"
     , _avrAlternatePlayerId = Nothing
     , _avrPlayerId = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#applicationVerifyResponse.
@@ -8169,11 +8513,14 @@ instance ToJSON ApplicationVerifyResponse where
 -- | This is a JSON template for a ListByPlayer response.
 --
 -- /See:/ 'playerEventListResponse' smart constructor.
-data PlayerEventListResponse = PlayerEventListResponse'
+data PlayerEventListResponse =
+  PlayerEventListResponse'
     { _pelrNextPageToken :: !(Maybe Text)
     , _pelrKind          :: !Text
     , _pelrItems         :: !(Maybe [PlayerEvent])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerEventListResponse' with the minimum fields required to make a request.
 --
@@ -8187,11 +8534,12 @@ data PlayerEventListResponse = PlayerEventListResponse'
 playerEventListResponse
     :: PlayerEventListResponse
 playerEventListResponse =
-    PlayerEventListResponse'
+  PlayerEventListResponse'
     { _pelrNextPageToken = Nothing
     , _pelrKind = "games#playerEventListResponse"
     , _pelrItems = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 pelrNextPageToken :: Lens' PlayerEventListResponse (Maybe Text)
@@ -8231,10 +8579,13 @@ instance ToJSON PlayerEventListResponse where
 -- | This is a JSON template for sending a turn-based match data object.
 --
 -- /See:/ 'turnBasedMatchDataRequest' smart constructor.
-data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest'
+data TurnBasedMatchDataRequest =
+  TurnBasedMatchDataRequest'
     { _tbmdrKind :: !Text
     , _tbmdrData :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
 --
@@ -8246,10 +8597,9 @@ data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest'
 turnBasedMatchDataRequest
     :: TurnBasedMatchDataRequest
 turnBasedMatchDataRequest =
-    TurnBasedMatchDataRequest'
-    { _tbmdrKind = "games#turnBasedMatchDataRequest"
-    , _tbmdrData = Nothing
-    }
+  TurnBasedMatchDataRequest'
+    {_tbmdrKind = "games#turnBasedMatchDataRequest", _tbmdrData = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#turnBasedMatchDataRequest.
@@ -8282,10 +8632,13 @@ instance ToJSON TurnBasedMatchDataRequest where
 -- | This is a JSON template for profile settings
 --
 -- /See:/ 'proFileSettings' smart constructor.
-data ProFileSettings = ProFileSettings'
+data ProFileSettings =
+  ProFileSettings'
     { _pfsProFileVisible :: !(Maybe Bool)
     , _pfsKind           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFileSettings' with the minimum fields required to make a request.
 --
@@ -8297,10 +8650,9 @@ data ProFileSettings = ProFileSettings'
 proFileSettings
     :: ProFileSettings
 proFileSettings =
-    ProFileSettings'
-    { _pfsProFileVisible = Nothing
-    , _pfsKind = "games#profileSettings"
-    }
+  ProFileSettings'
+    {_pfsProFileVisible = Nothing, _pfsKind = "games#profileSettings"}
+
 
 -- | The player\'s current profile visibility. This field is visible to both
 -- 1P and 3P APIs.
@@ -8332,11 +8684,14 @@ instance ToJSON ProFileSettings where
 -- | This is a JSON template for an event period time range.
 --
 -- /See:/ 'eventPeriodRange' smart constructor.
-data EventPeriodRange = EventPeriodRange'
+data EventPeriodRange =
+  EventPeriodRange'
     { _eprKind              :: !Text
     , _eprPeriodStartMillis :: !(Maybe (Textual Int64))
     , _eprPeriodEndMillis   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventPeriodRange' with the minimum fields required to make a request.
 --
@@ -8350,11 +8705,12 @@ data EventPeriodRange = EventPeriodRange'
 eventPeriodRange
     :: EventPeriodRange
 eventPeriodRange =
-    EventPeriodRange'
+  EventPeriodRange'
     { _eprKind = "games#eventPeriodRange"
     , _eprPeriodStartMillis = Nothing
     , _eprPeriodEndMillis = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventPeriodRange.
@@ -8397,11 +8753,14 @@ instance ToJSON EventPeriodRange where
 -- | This is a JSON template for an event update failure resource.
 --
 -- /See:/ 'eventRecordFailure' smart constructor.
-data EventRecordFailure = EventRecordFailure'
+data EventRecordFailure =
+  EventRecordFailure'
     { _erfKind         :: !Text
     , _erfFailureCause :: !(Maybe Text)
     , _erfEventId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventRecordFailure' with the minimum fields required to make a request.
 --
@@ -8415,11 +8774,12 @@ data EventRecordFailure = EventRecordFailure'
 eventRecordFailure
     :: EventRecordFailure
 eventRecordFailure =
-    EventRecordFailure'
+  EventRecordFailure'
     { _erfKind = "games#eventRecordFailure"
     , _erfFailureCause = Nothing
     , _erfEventId = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventRecordFailure.
@@ -8460,10 +8820,13 @@ instance ToJSON EventRecordFailure where
 -- | This is a JSON template for a list of score submission requests
 --
 -- /See:/ 'playerScoreSubmissionList' smart constructor.
-data PlayerScoreSubmissionList = PlayerScoreSubmissionList'
+data PlayerScoreSubmissionList =
+  PlayerScoreSubmissionList'
     { _psslKind   :: !Text
     , _psslScores :: !(Maybe [ScoreSubmission])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayerScoreSubmissionList' with the minimum fields required to make a request.
 --
@@ -8475,10 +8838,9 @@ data PlayerScoreSubmissionList = PlayerScoreSubmissionList'
 playerScoreSubmissionList
     :: PlayerScoreSubmissionList
 playerScoreSubmissionList =
-    PlayerScoreSubmissionList'
-    { _psslKind = "games#playerScoreSubmissionList"
-    , _psslScores = Nothing
-    }
+  PlayerScoreSubmissionList'
+    {_psslKind = "games#playerScoreSubmissionList", _psslScores = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerScoreSubmissionList.
@@ -8510,7 +8872,8 @@ instance ToJSON PlayerScoreSubmissionList where
 -- | This is a JSON template for the Instance resource.
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance'
+data Instance =
+  Instance'
     { _iAndroidInstance :: !(Maybe InstanceAndroidDetails)
     , _iKind            :: !Text
     , _iWebInstance     :: !(Maybe InstanceWebDetails)
@@ -8520,7 +8883,9 @@ data Instance = Instance'
     , _iPlatformType    :: !(Maybe Text)
     , _iTurnBasedPlay   :: !(Maybe Bool)
     , _iRealtimePlay    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -8546,7 +8911,7 @@ data Instance = Instance'
 instance'
     :: Instance
 instance' =
-    Instance'
+  Instance'
     { _iAndroidInstance = Nothing
     , _iKind = "games#instance"
     , _iWebInstance = Nothing
@@ -8557,6 +8922,7 @@ instance' =
     , _iTurnBasedPlay = Nothing
     , _iRealtimePlay = Nothing
     }
+
 
 -- | Platform dependent details for Android.
 iAndroidInstance :: Lens' Instance (Maybe InstanceAndroidDetails)

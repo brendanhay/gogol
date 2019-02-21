@@ -65,12 +65,15 @@ type RegionDisksDeleteResource =
 -- from the disk. You must separately delete snapshots.
 --
 -- /See:/ 'regionDisksDelete' smart constructor.
-data RegionDisksDelete = RegionDisksDelete'
+data RegionDisksDelete =
+  RegionDisksDelete'
     { _rddRequestId :: !(Maybe Text)
     , _rddProject   :: !Text
     , _rddDisk      :: !Text
     , _rddRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionDisksDelete' with the minimum fields required to make a request.
 --
@@ -89,12 +92,13 @@ regionDisksDelete
     -> Text -- ^ 'rddRegion'
     -> RegionDisksDelete
 regionDisksDelete pRddProject_ pRddDisk_ pRddRegion_ =
-    RegionDisksDelete'
+  RegionDisksDelete'
     { _rddRequestId = Nothing
     , _rddProject = pRddProject_
     , _rddDisk = pRddDisk_
     , _rddRegion = pRddRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

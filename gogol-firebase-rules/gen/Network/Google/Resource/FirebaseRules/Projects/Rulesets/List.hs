@@ -71,7 +71,8 @@ type ProjectsRulesetsListResource =
 -- retrieved with GetRuleset.
 --
 -- /See:/ 'projectsRulesetsList' smart constructor.
-data ProjectsRulesetsList = ProjectsRulesetsList'
+data ProjectsRulesetsList =
+  ProjectsRulesetsList'
     { _prlXgafv          :: !(Maybe Xgafv)
     , _prlUploadProtocol :: !(Maybe Text)
     , _prlAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsRulesetsList = ProjectsRulesetsList'
     , _prlPageToken      :: !(Maybe Text)
     , _prlPageSize       :: !(Maybe (Textual Int32))
     , _prlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRulesetsList' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ projectsRulesetsList
     :: Text -- ^ 'prlName'
     -> ProjectsRulesetsList
 projectsRulesetsList pPrlName_ =
-    ProjectsRulesetsList'
+  ProjectsRulesetsList'
     { _prlXgafv = Nothing
     , _prlUploadProtocol = Nothing
     , _prlAccessToken = Nothing
@@ -119,6 +122,7 @@ projectsRulesetsList pPrlName_ =
     , _prlPageSize = Nothing
     , _prlCallback = Nothing
     }
+
 
 -- | V1 error format.
 prlXgafv :: Lens' ProjectsRulesetsList (Maybe Xgafv)

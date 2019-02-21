@@ -65,7 +65,8 @@ type ProjectsLocationsRegistriesListResource =
 -- | Lists device registries.
 --
 -- /See:/ 'projectsLocationsRegistriesList' smart constructor.
-data ProjectsLocationsRegistriesList = ProjectsLocationsRegistriesList'
+data ProjectsLocationsRegistriesList =
+  ProjectsLocationsRegistriesList'
     { _plrlParent         :: !Text
     , _plrlXgafv          :: !(Maybe Xgafv)
     , _plrlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsLocationsRegistriesList = ProjectsLocationsRegistriesList'
     , _plrlPageToken      :: !(Maybe Text)
     , _plrlPageSize       :: !(Maybe (Textual Int32))
     , _plrlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsRegistriesList
     :: Text -- ^ 'plrlParent'
     -> ProjectsLocationsRegistriesList
 projectsLocationsRegistriesList pPlrlParent_ =
-    ProjectsLocationsRegistriesList'
+  ProjectsLocationsRegistriesList'
     { _plrlParent = pPlrlParent_
     , _plrlXgafv = Nothing
     , _plrlUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsLocationsRegistriesList pPlrlParent_ =
     , _plrlPageSize = Nothing
     , _plrlCallback = Nothing
     }
+
 
 -- | The project and cloud region path. For example,
 -- \`projects\/example-project\/locations\/us-central1\`.
@@ -163,7 +167,8 @@ plrlCallback
   = lens _plrlCallback (\ s a -> s{_plrlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesList where
+           ProjectsLocationsRegistriesList
+         where
         type Rs ProjectsLocationsRegistriesList =
              ListDeviceRegistriesResponse
         type Scopes ProjectsLocationsRegistriesList =

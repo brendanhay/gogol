@@ -57,11 +57,14 @@ type HTTPHealthChecksDeleteResource =
 -- | Deletes the specified HttpHealthCheck resource.
 --
 -- /See:/ 'hTTPHealthChecksDelete' smart constructor.
-data HTTPHealthChecksDelete = HTTPHealthChecksDelete'
+data HTTPHealthChecksDelete =
+  HTTPHealthChecksDelete'
     { _httphcdRequestId       :: !(Maybe Text)
     , _httphcdProject         :: !Text
     , _httphcdHTTPHealthCheck :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPHealthChecksDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ hTTPHealthChecksDelete
     -> Text -- ^ 'httphcdHTTPHealthCheck'
     -> HTTPHealthChecksDelete
 hTTPHealthChecksDelete pHttphcdProject_ pHttphcdHTTPHealthCheck_ =
-    HTTPHealthChecksDelete'
+  HTTPHealthChecksDelete'
     { _httphcdRequestId = Nothing
     , _httphcdProject = pHttphcdProject_
     , _httphcdHTTPHealthCheck = pHttphcdHTTPHealthCheck_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

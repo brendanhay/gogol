@@ -59,11 +59,14 @@ type InstallsListResource =
 -- | Retrieves the details of all apps installed on the specified device.
 --
 -- /See:/ 'installsList' smart constructor.
-data InstallsList = InstallsList'
+data InstallsList =
+  InstallsList'
     { _ilEnterpriseId :: !Text
     , _ilUserId       :: !Text
     , _ilDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstallsList' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ installsList
     -> Text -- ^ 'ilDeviceId'
     -> InstallsList
 installsList pIlEnterpriseId_ pIlUserId_ pIlDeviceId_ =
-    InstallsList'
+  InstallsList'
     { _ilEnterpriseId = pIlEnterpriseId_
     , _ilUserId = pIlUserId_
     , _ilDeviceId = pIlDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 ilEnterpriseId :: Lens' InstallsList Text

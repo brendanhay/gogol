@@ -62,7 +62,8 @@ type OrganizationsRolesUndeleteResource =
 -- | Undelete a Role, bringing it back in its previous state.
 --
 -- /See:/ 'organizationsRolesUndelete' smart constructor.
-data OrganizationsRolesUndelete = OrganizationsRolesUndelete'
+data OrganizationsRolesUndelete =
+  OrganizationsRolesUndelete'
     { _oruXgafv          :: !(Maybe Xgafv)
     , _oruUploadProtocol :: !(Maybe Text)
     , _oruAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data OrganizationsRolesUndelete = OrganizationsRolesUndelete'
     , _oruPayload        :: !UndeleteRoleRequest
     , _oruName           :: !Text
     , _oruCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsRolesUndelete' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ organizationsRolesUndelete
     -> Text -- ^ 'oruName'
     -> OrganizationsRolesUndelete
 organizationsRolesUndelete pOruPayload_ pOruName_ =
-    OrganizationsRolesUndelete'
+  OrganizationsRolesUndelete'
     { _oruXgafv = Nothing
     , _oruUploadProtocol = Nothing
     , _oruAccessToken = Nothing
@@ -103,6 +106,7 @@ organizationsRolesUndelete pOruPayload_ pOruName_ =
     , _oruName = pOruName_
     , _oruCallback = Nothing
     }
+
 
 -- | V1 error format.
 oruXgafv :: Lens' OrganizationsRolesUndelete (Maybe Xgafv)

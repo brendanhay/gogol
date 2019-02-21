@@ -66,14 +66,17 @@ type ShelvesBooksBorrowResource =
 -- exceeds allocation quota in any dimensions.
 --
 -- /See:/ 'shelvesBooksBorrow' smart constructor.
-data ShelvesBooksBorrow = ShelvesBooksBorrow'
+data ShelvesBooksBorrow =
+  ShelvesBooksBorrow'
     { _sbbXgafv          :: !(Maybe Xgafv)
     , _sbbUploadProtocol :: !(Maybe Text)
     , _sbbAccessToken    :: !(Maybe Text)
     , _sbbUploadType     :: !(Maybe Text)
     , _sbbName           :: !Text
     , _sbbCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShelvesBooksBorrow' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ shelvesBooksBorrow
     :: Text -- ^ 'sbbName'
     -> ShelvesBooksBorrow
 shelvesBooksBorrow pSbbName_ =
-    ShelvesBooksBorrow'
+  ShelvesBooksBorrow'
     { _sbbXgafv = Nothing
     , _sbbUploadProtocol = Nothing
     , _sbbAccessToken = Nothing
@@ -102,6 +105,7 @@ shelvesBooksBorrow pSbbName_ =
     , _sbbName = pSbbName_
     , _sbbCallback = Nothing
     }
+
 
 -- | V1 error format.
 sbbXgafv :: Lens' ShelvesBooksBorrow (Maybe Xgafv)

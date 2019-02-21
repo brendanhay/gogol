@@ -61,12 +61,15 @@ type ReplicasRestartResource =
 -- | Restarts a replica in a pool.
 --
 -- /See:/ 'replicasRestart' smart constructor.
-data ReplicasRestart = ReplicasRestart'
+data ReplicasRestart =
+  ReplicasRestart'
     { _rrPoolName    :: !Text
     , _rrZone        :: !Text
     , _rrReplicaName :: !Text
     , _rrProjectName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReplicasRestart' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ replicasRestart
     -> Text -- ^ 'rrProjectName'
     -> ReplicasRestart
 replicasRestart pRrPoolName_ pRrZone_ pRrReplicaName_ pRrProjectName_ =
-    ReplicasRestart'
+  ReplicasRestart'
     { _rrPoolName = pRrPoolName_
     , _rrZone = pRrZone_
     , _rrReplicaName = pRrReplicaName_
     , _rrProjectName = pRrProjectName_
     }
+
 
 -- | The replica pool name for this request.
 rrPoolName :: Lens' ReplicasRestart Text

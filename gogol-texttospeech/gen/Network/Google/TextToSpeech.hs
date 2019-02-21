@@ -43,6 +43,7 @@ module Network.Google.TextToSpeech
     , audioConfig
     , acVolumeGainDB
     , acSampleRateHertz
+    , acEffectsProFileId
     , acAudioEncoding
     , acSpeakingRate
     , acPitch

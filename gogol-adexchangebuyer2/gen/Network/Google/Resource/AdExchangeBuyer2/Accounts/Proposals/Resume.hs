@@ -78,7 +78,8 @@ type AccountsProposalsResumeResource =
 -- renegotiating.
 --
 -- /See:/ 'accountsProposalsResume' smart constructor.
-data AccountsProposalsResume = AccountsProposalsResume'
+data AccountsProposalsResume =
+  AccountsProposalsResume'
     { _aprXgafv          :: !(Maybe Xgafv)
     , _aprUploadProtocol :: !(Maybe Text)
     , _aprAccessToken    :: !(Maybe Text)
@@ -87,7 +88,9 @@ data AccountsProposalsResume = AccountsProposalsResume'
     , _aprProposalId     :: !Text
     , _aprAccountId      :: !Text
     , _aprCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsProposalsResume' with the minimum fields required to make a request.
 --
@@ -114,7 +117,7 @@ accountsProposalsResume
     -> Text -- ^ 'aprAccountId'
     -> AccountsProposalsResume
 accountsProposalsResume pAprPayload_ pAprProposalId_ pAprAccountId_ =
-    AccountsProposalsResume'
+  AccountsProposalsResume'
     { _aprXgafv = Nothing
     , _aprUploadProtocol = Nothing
     , _aprAccessToken = Nothing
@@ -124,6 +127,7 @@ accountsProposalsResume pAprPayload_ pAprProposalId_ pAprAccountId_ =
     , _aprAccountId = pAprAccountId_
     , _aprCallback = Nothing
     }
+
 
 -- | V1 error format.
 aprXgafv :: Lens' AccountsProposalsResume (Maybe Xgafv)

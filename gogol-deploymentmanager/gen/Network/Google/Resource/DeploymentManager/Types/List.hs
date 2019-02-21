@@ -62,13 +62,16 @@ type TypesListResource =
 -- | Lists all resource types for Deployment Manager.
 --
 -- /See:/ 'typesList' smart constructor.
-data TypesList = TypesList'
+data TypesList =
+  TypesList'
     { _tlOrderBy    :: !(Maybe Text)
     , _tlProject    :: !Text
     , _tlFilter     :: !(Maybe Text)
     , _tlPageToken  :: !(Maybe Text)
     , _tlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TypesList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ typesList
     :: Text -- ^ 'tlProject'
     -> TypesList
 typesList pTlProject_ =
-    TypesList'
+  TypesList'
     { _tlOrderBy = Nothing
     , _tlProject = pTlProject_
     , _tlFilter = Nothing
     , _tlPageToken = Nothing
     , _tlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

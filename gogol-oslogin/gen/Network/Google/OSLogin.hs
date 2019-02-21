@@ -15,7 +15,7 @@
 --
 -- Manages OS login configuration for Google account users.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference>
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference>
 module Network.Google.OSLogin
     (
     -- * Service Configuration

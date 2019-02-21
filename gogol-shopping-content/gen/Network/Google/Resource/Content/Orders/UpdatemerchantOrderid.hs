@@ -57,11 +57,14 @@ type OrdersUpdatemerchantOrderidResource =
 -- | Updates the merchant order ID for a given order.
 --
 -- /See:/ 'ordersUpdatemerchantOrderid' smart constructor.
-data OrdersUpdatemerchantOrderid = OrdersUpdatemerchantOrderid'
+data OrdersUpdatemerchantOrderid =
+  OrdersUpdatemerchantOrderid'
     { _ouoMerchantId :: !(Textual Word64)
     , _ouoPayload    :: !OrdersUpdateMerchantOrderIdRequest
     , _ouoOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersUpdatemerchantOrderid' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ ordersUpdatemerchantOrderid
     -> Text -- ^ 'ouoOrderId'
     -> OrdersUpdatemerchantOrderid
 ordersUpdatemerchantOrderid pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
-    OrdersUpdatemerchantOrderid'
+  OrdersUpdatemerchantOrderid'
     { _ouoMerchantId = _Coerce # pOuoMerchantId_
     , _ouoPayload = pOuoPayload_
     , _ouoOrderId = pOuoOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

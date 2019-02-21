@@ -61,11 +61,14 @@ type OrderinvoicesCreatechargeinvoiceResource =
 -- capture for non-facilitated payment orders.
 --
 -- /See:/ 'orderinvoicesCreatechargeinvoice' smart constructor.
-data OrderinvoicesCreatechargeinvoice = OrderinvoicesCreatechargeinvoice'
+data OrderinvoicesCreatechargeinvoice =
+  OrderinvoicesCreatechargeinvoice'
     { _oMerchantId :: !(Textual Word64)
     , _oPayload    :: !OrderinvoicesCreateChargeInvoiceRequest
     , _oOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderinvoicesCreatechargeinvoice' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ orderinvoicesCreatechargeinvoice
     -> Text -- ^ 'oOrderId'
     -> OrderinvoicesCreatechargeinvoice
 orderinvoicesCreatechargeinvoice pOMerchantId_ pOPayload_ pOOrderId_ =
-    OrderinvoicesCreatechargeinvoice'
+  OrderinvoicesCreatechargeinvoice'
     { _oMerchantId = _Coerce # pOMerchantId_
     , _oPayload = pOPayload_
     , _oOrderId = pOOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -104,7 +108,8 @@ oOrderId :: Lens' OrderinvoicesCreatechargeinvoice Text
 oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
 
 instance GoogleRequest
-         OrderinvoicesCreatechargeinvoice where
+           OrderinvoicesCreatechargeinvoice
+         where
         type Rs OrderinvoicesCreatechargeinvoice =
              OrderinvoicesCreateChargeInvoiceResponse
         type Scopes OrderinvoicesCreatechargeinvoice =

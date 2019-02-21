@@ -61,12 +61,15 @@ type ManagementCustomDimensionsListResource =
 -- | Lists custom dimensions to which the user has access.
 --
 -- /See:/ 'managementCustomDimensionsList' smart constructor.
-data ManagementCustomDimensionsList = ManagementCustomDimensionsList'
+data ManagementCustomDimensionsList =
+  ManagementCustomDimensionsList'
     { _mcdlWebPropertyId :: !Text
     , _mcdlAccountId     :: !Text
     , _mcdlStartIndex    :: !(Maybe (Textual Int32))
     , _mcdlMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementCustomDimensionsList' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ managementCustomDimensionsList
     -> Text -- ^ 'mcdlAccountId'
     -> ManagementCustomDimensionsList
 managementCustomDimensionsList pMcdlWebPropertyId_ pMcdlAccountId_ =
-    ManagementCustomDimensionsList'
+  ManagementCustomDimensionsList'
     { _mcdlWebPropertyId = pMcdlWebPropertyId_
     , _mcdlAccountId = pMcdlAccountId_
     , _mcdlStartIndex = Nothing
     , _mcdlMaxResults = Nothing
     }
+
 
 -- | Web property ID for the custom dimensions to retrieve.
 mcdlWebPropertyId :: Lens' ManagementCustomDimensionsList Text

@@ -62,7 +62,8 @@ type JobsCreateResource =
 -- | Creates a job and returns it.
 --
 -- /See:/ 'jobsCreate' smart constructor.
-data JobsCreate = JobsCreate'
+data JobsCreate =
+  JobsCreate'
     { _jcXgafv                  :: !(Maybe Xgafv)
     , _jcUploadProtocol         :: !(Maybe Text)
     , _jcAccessToken            :: !(Maybe Text)
@@ -70,7 +71,9 @@ data JobsCreate = JobsCreate'
     , _jcPayload                :: !Job
     , _jcOnBehalfOfContentOwner :: !(Maybe Text)
     , _jcCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobsCreate' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ jobsCreate
     :: Job -- ^ 'jcPayload'
     -> JobsCreate
 jobsCreate pJcPayload_ =
-    JobsCreate'
+  JobsCreate'
     { _jcXgafv = Nothing
     , _jcUploadProtocol = Nothing
     , _jcAccessToken = Nothing
@@ -102,6 +105,7 @@ jobsCreate pJcPayload_ =
     , _jcOnBehalfOfContentOwner = Nothing
     , _jcCallback = Nothing
     }
+
 
 -- | V1 error format.
 jcXgafv :: Lens' JobsCreate (Maybe Xgafv)

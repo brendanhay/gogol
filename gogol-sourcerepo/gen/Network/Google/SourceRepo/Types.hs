@@ -160,16 +160,16 @@ sourceRepoService
 
 -- | View the contents of your source code repositories
 sourceReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/source.read_only"]
-sourceReadOnlyScope = Proxy;
+sourceReadOnlyScope = Proxy
 
 -- | Manage your source code repositories
 sourceFullControlScope :: Proxy '["https://www.googleapis.com/auth/source.full_control"]
-sourceFullControlScope = Proxy;
+sourceFullControlScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | Manage the contents of your source code repositories
 sourceReadWriteScope :: Proxy '["https://www.googleapis.com/auth/source.read_write"]
-sourceReadWriteScope = Proxy;
+sourceReadWriteScope = Proxy

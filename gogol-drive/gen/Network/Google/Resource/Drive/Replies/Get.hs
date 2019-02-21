@@ -59,12 +59,15 @@ type RepliesGetResource =
 -- | Gets a reply by ID.
 --
 -- /See:/ 'repliesGet' smart constructor.
-data RepliesGet = RepliesGet'
+data RepliesGet =
+  RepliesGet'
     { _rgReplyId        :: !Text
     , _rgFileId         :: !Text
     , _rgCommentId      :: !Text
     , _rgIncludeDeleted :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepliesGet' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ repliesGet
     -> Text -- ^ 'rgCommentId'
     -> RepliesGet
 repliesGet pRgReplyId_ pRgFileId_ pRgCommentId_ =
-    RepliesGet'
+  RepliesGet'
     { _rgReplyId = pRgReplyId_
     , _rgFileId = pRgFileId_
     , _rgCommentId = pRgCommentId_
     , _rgIncludeDeleted = False
     }
+
 
 -- | The ID of the reply.
 rgReplyId :: Lens' RepliesGet Text

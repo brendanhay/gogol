@@ -63,7 +63,8 @@ type ProjectsCompaniesCreateResource =
 -- | Creates a new company entity.
 --
 -- /See:/ 'projectsCompaniesCreate' smart constructor.
-data ProjectsCompaniesCreate = ProjectsCompaniesCreate'
+data ProjectsCompaniesCreate =
+  ProjectsCompaniesCreate'
     { _pccParent         :: !Text
     , _pccXgafv          :: !(Maybe Xgafv)
     , _pccUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsCompaniesCreate = ProjectsCompaniesCreate'
     , _pccUploadType     :: !(Maybe Text)
     , _pccPayload        :: !CreateCompanyRequest
     , _pccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsCompaniesCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsCompaniesCreate
     -> CreateCompanyRequest -- ^ 'pccPayload'
     -> ProjectsCompaniesCreate
 projectsCompaniesCreate pPccParent_ pPccPayload_ =
-    ProjectsCompaniesCreate'
+  ProjectsCompaniesCreate'
     { _pccParent = pPccParent_
     , _pccXgafv = Nothing
     , _pccUploadProtocol = Nothing
@@ -104,6 +107,7 @@ projectsCompaniesCreate pPccParent_ pPccPayload_ =
     , _pccPayload = pPccPayload_
     , _pccCallback = Nothing
     }
+
 
 -- | Required. Resource name of the project under which the company is
 -- created. The format is \"projects\/{project_id}\", for example,

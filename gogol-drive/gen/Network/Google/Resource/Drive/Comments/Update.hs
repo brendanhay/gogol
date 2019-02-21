@@ -56,11 +56,14 @@ type CommentsUpdateResource =
 -- | Updates a comment with patch semantics.
 --
 -- /See:/ 'commentsUpdate' smart constructor.
-data CommentsUpdate = CommentsUpdate'
+data CommentsUpdate =
+  CommentsUpdate'
     { _cuPayload   :: !Comment
     , _cuFileId    :: !Text
     , _cuCommentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsUpdate' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ commentsUpdate
     -> Text -- ^ 'cuCommentId'
     -> CommentsUpdate
 commentsUpdate pCuPayload_ pCuFileId_ pCuCommentId_ =
-    CommentsUpdate'
+  CommentsUpdate'
     { _cuPayload = pCuPayload_
     , _cuFileId = pCuFileId_
     , _cuCommentId = pCuCommentId_
     }
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' CommentsUpdate Comment

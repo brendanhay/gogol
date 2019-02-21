@@ -61,7 +61,8 @@ type EnterprisesDevicesDeleteResource =
 -- | Deletes a device. This operation wipes the device.
 --
 -- /See:/ 'enterprisesDevicesDelete' smart constructor.
-data EnterprisesDevicesDelete = EnterprisesDevicesDelete'
+data EnterprisesDevicesDelete =
+  EnterprisesDevicesDelete'
     { _eddXgafv          :: !(Maybe Xgafv)
     , _eddWipeDataFlags  :: !(Maybe [Text])
     , _eddUploadProtocol :: !(Maybe Text)
@@ -69,7 +70,9 @@ data EnterprisesDevicesDelete = EnterprisesDevicesDelete'
     , _eddUploadType     :: !(Maybe Text)
     , _eddName           :: !Text
     , _eddCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnterprisesDevicesDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ enterprisesDevicesDelete
     :: Text -- ^ 'eddName'
     -> EnterprisesDevicesDelete
 enterprisesDevicesDelete pEddName_ =
-    EnterprisesDevicesDelete'
+  EnterprisesDevicesDelete'
     { _eddXgafv = Nothing
     , _eddWipeDataFlags = Nothing
     , _eddUploadProtocol = Nothing
@@ -101,6 +104,7 @@ enterprisesDevicesDelete pEddName_ =
     , _eddName = pEddName_
     , _eddCallback = Nothing
     }
+
 
 -- | V1 error format.
 eddXgafv :: Lens' EnterprisesDevicesDelete (Maybe Xgafv)

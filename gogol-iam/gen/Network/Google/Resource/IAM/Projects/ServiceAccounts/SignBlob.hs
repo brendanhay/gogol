@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Signs a blob using a service account\'s system-managed private key.
+-- **Note**: This method is in the process of being deprecated. Call the
+-- [\`signBlob()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signBlob)
+-- method of the Cloud IAM Service Account Credentials API instead. Signs a
+-- blob using a service account\'s system-managed private key.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.signBlob@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
@@ -59,10 +62,14 @@ type ProjectsServiceAccountsSignBlobResource =
                      ReqBody '[JSON] SignBlobRequest :>
                        Post '[JSON] SignBlobResponse
 
--- | Signs a blob using a service account\'s system-managed private key.
+-- | **Note**: This method is in the process of being deprecated. Call the
+-- [\`signBlob()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signBlob)
+-- method of the Cloud IAM Service Account Credentials API instead. Signs a
+-- blob using a service account\'s system-managed private key.
 --
 -- /See:/ 'projectsServiceAccountsSignBlob' smart constructor.
-data ProjectsServiceAccountsSignBlob = ProjectsServiceAccountsSignBlob'
+data ProjectsServiceAccountsSignBlob =
+  ProjectsServiceAccountsSignBlob'
     { _psasbXgafv          :: !(Maybe Xgafv)
     , _psasbUploadProtocol :: !(Maybe Text)
     , _psasbAccessToken    :: !(Maybe Text)
@@ -70,7 +77,9 @@ data ProjectsServiceAccountsSignBlob = ProjectsServiceAccountsSignBlob'
     , _psasbPayload        :: !SignBlobRequest
     , _psasbName           :: !Text
     , _psasbCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsSignBlob' with the minimum fields required to make a request.
 --
@@ -94,7 +103,7 @@ projectsServiceAccountsSignBlob
     -> Text -- ^ 'psasbName'
     -> ProjectsServiceAccountsSignBlob
 projectsServiceAccountsSignBlob pPsasbPayload_ pPsasbName_ =
-    ProjectsServiceAccountsSignBlob'
+  ProjectsServiceAccountsSignBlob'
     { _psasbXgafv = Nothing
     , _psasbUploadProtocol = Nothing
     , _psasbAccessToken = Nothing
@@ -103,6 +112,7 @@ projectsServiceAccountsSignBlob pPsasbPayload_ pPsasbName_ =
     , _psasbName = pPsasbName_
     , _psasbCallback = Nothing
     }
+
 
 -- | V1 error format.
 psasbXgafv :: Lens' ProjectsServiceAccountsSignBlob (Maybe Xgafv)
@@ -148,7 +158,8 @@ psasbCallback
       (\ s a -> s{_psasbCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsSignBlob where
+           ProjectsServiceAccountsSignBlob
+         where
         type Rs ProjectsServiceAccountsSignBlob =
              SignBlobResponse
         type Scopes ProjectsServiceAccountsSignBlob =

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountPermissionsGet' request conforms to.
 type AccountPermissionsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountPermissions" :>
@@ -55,10 +55,13 @@ type AccountPermissionsGetResource =
 -- | Gets one account permission by ID.
 --
 -- /See:/ 'accountPermissionsGet' smart constructor.
-data AccountPermissionsGet = AccountPermissionsGet'
+data AccountPermissionsGet =
+  AccountPermissionsGet'
     { _apgProFileId :: !(Textual Int64)
     , _apgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountPermissionsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ accountPermissionsGet
     -> Int64 -- ^ 'apgId'
     -> AccountPermissionsGet
 accountPermissionsGet pApgProFileId_ pApgId_ =
-    AccountPermissionsGet'
-    { _apgProFileId = _Coerce # pApgProFileId_
-    , _apgId = _Coerce # pApgId_
-    }
+  AccountPermissionsGet'
+    {_apgProFileId = _Coerce # pApgProFileId_, _apgId = _Coerce # pApgId_}
+
 
 -- | User profile ID associated with this request.
 apgProFileId :: Lens' AccountPermissionsGet Int64

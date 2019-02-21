@@ -60,10 +60,13 @@ type ManagementWebPropertiesInsertResource =
 -- have at least one profile.
 --
 -- /See:/ 'managementWebPropertiesInsert' smart constructor.
-data ManagementWebPropertiesInsert = ManagementWebPropertiesInsert'
+data ManagementWebPropertiesInsert =
+  ManagementWebPropertiesInsert'
     { _mwpiPayload   :: !WebProperty
     , _mwpiAccountId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementWebPropertiesInsert' with the minimum fields required to make a request.
 --
@@ -77,10 +80,9 @@ managementWebPropertiesInsert
     -> Text -- ^ 'mwpiAccountId'
     -> ManagementWebPropertiesInsert
 managementWebPropertiesInsert pMwpiPayload_ pMwpiAccountId_ =
-    ManagementWebPropertiesInsert'
-    { _mwpiPayload = pMwpiPayload_
-    , _mwpiAccountId = pMwpiAccountId_
-    }
+  ManagementWebPropertiesInsert'
+    {_mwpiPayload = pMwpiPayload_, _mwpiAccountId = pMwpiAccountId_}
+
 
 -- | Multipart request metadata.
 mwpiPayload :: Lens' ManagementWebPropertiesInsert WebProperty

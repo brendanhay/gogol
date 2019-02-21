@@ -65,14 +65,17 @@ type ProjectsInstancesDatabasesGetDdlResource =
 -- may be queried using the Operations API.
 --
 -- /See:/ 'projectsInstancesDatabasesGetDdl' smart constructor.
-data ProjectsInstancesDatabasesGetDdl = ProjectsInstancesDatabasesGetDdl'
+data ProjectsInstancesDatabasesGetDdl =
+  ProjectsInstancesDatabasesGetDdl'
     { _pidgdXgafv          :: !(Maybe Xgafv)
     , _pidgdUploadProtocol :: !(Maybe Text)
     , _pidgdDatabase       :: !Text
     , _pidgdAccessToken    :: !(Maybe Text)
     , _pidgdUploadType     :: !(Maybe Text)
     , _pidgdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesGetDdl' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ projectsInstancesDatabasesGetDdl
     :: Text -- ^ 'pidgdDatabase'
     -> ProjectsInstancesDatabasesGetDdl
 projectsInstancesDatabasesGetDdl pPidgdDatabase_ =
-    ProjectsInstancesDatabasesGetDdl'
+  ProjectsInstancesDatabasesGetDdl'
     { _pidgdXgafv = Nothing
     , _pidgdUploadProtocol = Nothing
     , _pidgdDatabase = pPidgdDatabase_
@@ -101,6 +104,7 @@ projectsInstancesDatabasesGetDdl pPidgdDatabase_ =
     , _pidgdUploadType = Nothing
     , _pidgdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidgdXgafv :: Lens' ProjectsInstancesDatabasesGetDdl (Maybe Xgafv)
@@ -138,7 +142,8 @@ pidgdCallback
       (\ s a -> s{_pidgdCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesGetDdl where
+           ProjectsInstancesDatabasesGetDdl
+         where
         type Rs ProjectsInstancesDatabasesGetDdl =
              GetDatabaseDdlResponse
         type Scopes ProjectsInstancesDatabasesGetDdl =

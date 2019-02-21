@@ -52,9 +52,12 @@ type ConversionUpdateResource =
 -- | Updates a batch of conversions in DoubleClick Search.
 --
 -- /See:/ 'conversionUpdate' smart constructor.
-newtype ConversionUpdate = ConversionUpdate'
+newtype ConversionUpdate =
+  ConversionUpdate'
     { _cuPayload :: ConversionList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ConversionUpdate' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype ConversionUpdate = ConversionUpdate'
 conversionUpdate
     :: ConversionList -- ^ 'cuPayload'
     -> ConversionUpdate
-conversionUpdate pCuPayload_ =
-    ConversionUpdate'
-    { _cuPayload = pCuPayload_
-    }
+conversionUpdate pCuPayload_ = ConversionUpdate' {_cuPayload = pCuPayload_}
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' ConversionUpdate ConversionList

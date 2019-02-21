@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a web property-AdWords link.
+-- Deletes a web property-Google Ads link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.delete@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
@@ -56,14 +56,17 @@ type ManagementWebPropertyAdWordsLinksDeleteResource
                      Capture "webPropertyAdWordsLinkId" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes a web property-AdWords link.
+-- | Deletes a web property-Google Ads link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksDelete' smart constructor.
-data ManagementWebPropertyAdWordsLinksDelete = ManagementWebPropertyAdWordsLinksDelete'
+data ManagementWebPropertyAdWordsLinksDelete =
+  ManagementWebPropertyAdWordsLinksDelete'
     { _mwpawldWebPropertyId            :: !Text
     , _mwpawldAccountId                :: !Text
     , _mwpawldWebPropertyAdWordsLinkId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksDelete' with the minimum fields required to make a request.
 --
@@ -80,13 +83,14 @@ managementWebPropertyAdWordsLinksDelete
     -> Text -- ^ 'mwpawldWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksDelete
 managementWebPropertyAdWordsLinksDelete pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksDelete'
+  ManagementWebPropertyAdWordsLinksDelete'
     { _mwpawldWebPropertyId = pMwpawldWebPropertyId_
     , _mwpawldAccountId = pMwpawldAccountId_
     , _mwpawldWebPropertyAdWordsLinkId = pMwpawldWebPropertyAdWordsLinkId_
     }
 
--- | Web property ID to delete the AdWords link for.
+
+-- | Web property ID to delete the Google Ads link for.
 mwpawldWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksDelete Text
 mwpawldWebPropertyId
   = lens _mwpawldWebPropertyId
@@ -98,14 +102,15 @@ mwpawldAccountId
   = lens _mwpawldAccountId
       (\ s a -> s{_mwpawldAccountId = a})
 
--- | Web property AdWords link ID.
+-- | Web property Google Ads link ID.
 mwpawldWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksDelete Text
 mwpawldWebPropertyAdWordsLinkId
   = lens _mwpawldWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawldWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksDelete where
+           ManagementWebPropertyAdWordsLinksDelete
+         where
         type Rs ManagementWebPropertyAdWordsLinksDelete = ()
         type Scopes ManagementWebPropertyAdWordsLinksDelete =
              '["https://www.googleapis.com/auth/analytics.edit"]

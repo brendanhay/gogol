@@ -55,10 +55,13 @@ type AccountsAdClientsGetAdCodeResource =
 -- | Get Auto ad code for a given ad client.
 --
 -- /See:/ 'accountsAdClientsGetAdCode' smart constructor.
-data AccountsAdClientsGetAdCode = AccountsAdClientsGetAdCode'
+data AccountsAdClientsGetAdCode =
+  AccountsAdClientsGetAdCode'
     { _aacgacAdClientId :: !Text
     , _aacgacAccountId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsAdClientsGetAdCode' with the minimum fields required to make a request.
 --
@@ -72,10 +75,11 @@ accountsAdClientsGetAdCode
     -> Text -- ^ 'aacgacAccountId'
     -> AccountsAdClientsGetAdCode
 accountsAdClientsGetAdCode pAacgacAdClientId_ pAacgacAccountId_ =
-    AccountsAdClientsGetAdCode'
+  AccountsAdClientsGetAdCode'
     { _aacgacAdClientId = pAacgacAdClientId_
     , _aacgacAccountId = pAacgacAccountId_
     }
+
 
 -- | Ad client to get the code for.
 aacgacAdClientId :: Lens' AccountsAdClientsGetAdCode Text

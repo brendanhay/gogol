@@ -64,7 +64,8 @@ type ProjectsLocationsRegistriesPatchResource =
 -- | Updates a device registry configuration.
 --
 -- /See:/ 'projectsLocationsRegistriesPatch' smart constructor.
-data ProjectsLocationsRegistriesPatch = ProjectsLocationsRegistriesPatch'
+data ProjectsLocationsRegistriesPatch =
+  ProjectsLocationsRegistriesPatch'
     { _plrpXgafv          :: !(Maybe Xgafv)
     , _plrpUploadProtocol :: !(Maybe Text)
     , _plrpUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data ProjectsLocationsRegistriesPatch = ProjectsLocationsRegistriesPatch'
     , _plrpPayload        :: !DeviceRegistry
     , _plrpName           :: !Text
     , _plrpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsRegistriesPatch
     -> Text -- ^ 'plrpName'
     -> ProjectsLocationsRegistriesPatch
 projectsLocationsRegistriesPatch pPlrpPayload_ pPlrpName_ =
-    ProjectsLocationsRegistriesPatch'
+  ProjectsLocationsRegistriesPatch'
     { _plrpXgafv = Nothing
     , _plrpUploadProtocol = Nothing
     , _plrpUpdateMask = Nothing
@@ -109,6 +112,7 @@ projectsLocationsRegistriesPatch pPlrpPayload_ pPlrpName_ =
     , _plrpName = pPlrpName_
     , _plrpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrpXgafv :: Lens' ProjectsLocationsRegistriesPatch (Maybe Xgafv)
@@ -159,7 +163,8 @@ plrpCallback
   = lens _plrpCallback (\ s a -> s{_plrpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesPatch where
+           ProjectsLocationsRegistriesPatch
+         where
         type Rs ProjectsLocationsRegistriesPatch =
              DeviceRegistry
         type Scopes ProjectsLocationsRegistriesPatch =

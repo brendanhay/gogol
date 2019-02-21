@@ -56,11 +56,14 @@ type ChannelSectionsUpdateResource =
 -- | Update a channelSection.
 --
 -- /See:/ 'channelSectionsUpdate' smart constructor.
-data ChannelSectionsUpdate = ChannelSectionsUpdate'
+data ChannelSectionsUpdate =
+  ChannelSectionsUpdate'
     { _csuPart                   :: !Text
     , _csuPayload                :: !ChannelSection
     , _csuOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChannelSectionsUpdate' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ channelSectionsUpdate
     -> ChannelSection -- ^ 'csuPayload'
     -> ChannelSectionsUpdate
 channelSectionsUpdate pCsuPart_ pCsuPayload_ =
-    ChannelSectionsUpdate'
+  ChannelSectionsUpdate'
     { _csuPart = pCsuPart_
     , _csuPayload = pCsuPayload_
     , _csuOnBehalfOfContentOwner = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

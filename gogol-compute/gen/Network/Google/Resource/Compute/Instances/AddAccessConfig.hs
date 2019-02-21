@@ -65,14 +65,17 @@ type InstancesAddAccessConfigResource =
 -- | Adds an access config to an instance\'s network interface.
 --
 -- /See:/ 'instancesAddAccessConfig' smart constructor.
-data InstancesAddAccessConfig = InstancesAddAccessConfig'
+data InstancesAddAccessConfig =
+  InstancesAddAccessConfig'
     { _iaacRequestId        :: !(Maybe Text)
     , _iaacProject          :: !Text
     , _iaacNetworkInterface :: !Text
     , _iaacZone             :: !Text
     , _iaacPayload          :: !AccessConfig
     , _iaacInstance         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesAddAccessConfig' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ instancesAddAccessConfig
     -> Text -- ^ 'iaacInstance'
     -> InstancesAddAccessConfig
 instancesAddAccessConfig pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacPayload_ pIaacInstance_ =
-    InstancesAddAccessConfig'
+  InstancesAddAccessConfig'
     { _iaacRequestId = Nothing
     , _iaacProject = pIaacProject_
     , _iaacNetworkInterface = pIaacNetworkInterface_
@@ -105,6 +108,7 @@ instancesAddAccessConfig pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacPa
     , _iaacPayload = pIaacPayload_
     , _iaacInstance = pIaacInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

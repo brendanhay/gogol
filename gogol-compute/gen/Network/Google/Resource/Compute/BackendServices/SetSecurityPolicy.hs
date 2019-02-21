@@ -61,12 +61,15 @@ type BackendServicesSetSecurityPolicyResource =
 -- | Sets the security policy for the specified backend service.
 --
 -- /See:/ 'backendServicesSetSecurityPolicy' smart constructor.
-data BackendServicesSetSecurityPolicy = BackendServicesSetSecurityPolicy'
+data BackendServicesSetSecurityPolicy =
+  BackendServicesSetSecurityPolicy'
     { _bssspRequestId      :: !(Maybe Text)
     , _bssspProject        :: !Text
     , _bssspPayload        :: !SecurityPolicyReference
     , _bssspBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendServicesSetSecurityPolicy' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ backendServicesSetSecurityPolicy
     -> Text -- ^ 'bssspBackendService'
     -> BackendServicesSetSecurityPolicy
 backendServicesSetSecurityPolicy pBssspProject_ pBssspPayload_ pBssspBackendService_ =
-    BackendServicesSetSecurityPolicy'
+  BackendServicesSetSecurityPolicy'
     { _bssspRequestId = Nothing
     , _bssspProject = pBssspProject_
     , _bssspPayload = pBssspPayload_
     , _bssspBackendService = pBssspBackendService_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -125,7 +129,8 @@ bssspBackendService
       (\ s a -> s{_bssspBackendService = a})
 
 instance GoogleRequest
-         BackendServicesSetSecurityPolicy where
+           BackendServicesSetSecurityPolicy
+         where
         type Rs BackendServicesSetSecurityPolicy = Operation
         type Scopes BackendServicesSetSecurityPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",

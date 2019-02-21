@@ -71,10 +71,13 @@ type UsersSettingsSendAsCreateResource =
 -- clients that have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsSendAsCreate' smart constructor.
-data UsersSettingsSendAsCreate = UsersSettingsSendAsCreate'
+data UsersSettingsSendAsCreate =
+  UsersSettingsSendAsCreate'
     { _ussacPayload :: !SendAs
     , _ussacUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsSendAsCreate' with the minimum fields required to make a request.
 --
@@ -87,10 +90,9 @@ usersSettingsSendAsCreate
     :: SendAs -- ^ 'ussacPayload'
     -> UsersSettingsSendAsCreate
 usersSettingsSendAsCreate pUssacPayload_ =
-    UsersSettingsSendAsCreate'
-    { _ussacPayload = pUssacPayload_
-    , _ussacUserId = "me"
-    }
+  UsersSettingsSendAsCreate'
+    {_ussacPayload = pUssacPayload_, _ussacUserId = "me"}
+
 
 -- | Multipart request metadata.
 ussacPayload :: Lens' UsersSettingsSendAsCreate SendAs

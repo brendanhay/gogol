@@ -61,12 +61,15 @@ type RoutersInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'routersInsert' smart constructor.
-data RoutersInsert = RoutersInsert'
+data RoutersInsert =
+  RoutersInsert'
     { _riRequestId :: !(Maybe Text)
     , _riProject   :: !Text
     , _riPayload   :: !Router
     , _riRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoutersInsert' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ routersInsert
     -> Text -- ^ 'riRegion'
     -> RoutersInsert
 routersInsert pRiProject_ pRiPayload_ pRiRegion_ =
-    RoutersInsert'
+  RoutersInsert'
     { _riRequestId = Nothing
     , _riProject = pRiProject_
     , _riPayload = pRiPayload_
     , _riRegion = pRiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

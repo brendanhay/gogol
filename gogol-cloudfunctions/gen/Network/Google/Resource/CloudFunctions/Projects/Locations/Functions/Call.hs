@@ -68,7 +68,8 @@ type ProjectsLocationsFunctionsCallResource =
 -- https:\/\/cloud.google.com\/functions\/quotas#rate_limits).
 --
 -- /See:/ 'projectsLocationsFunctionsCall' smart constructor.
-data ProjectsLocationsFunctionsCall = ProjectsLocationsFunctionsCall'
+data ProjectsLocationsFunctionsCall =
+  ProjectsLocationsFunctionsCall'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsLocationsFunctionsCall = ProjectsLocationsFunctionsCall'
     , _pPayload        :: !CallFunctionRequest
     , _pName           :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsFunctionsCall' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsLocationsFunctionsCall
     -> Text -- ^ 'pName'
     -> ProjectsLocationsFunctionsCall
 projectsLocationsFunctionsCall pPPayload_ pPName_ =
-    ProjectsLocationsFunctionsCall'
+  ProjectsLocationsFunctionsCall'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing
@@ -109,6 +112,7 @@ projectsLocationsFunctionsCall pPPayload_ pPName_ =
     , _pName = pPName_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsLocationsFunctionsCall (Maybe Xgafv)

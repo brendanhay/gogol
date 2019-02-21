@@ -58,10 +58,13 @@ type GrouplicenseUsersListResource =
 -- the license.
 --
 -- /See:/ 'grouplicenseUsersList' smart constructor.
-data GrouplicenseUsersList = GrouplicenseUsersList'
+data GrouplicenseUsersList =
+  GrouplicenseUsersList'
     { _gulEnterpriseId   :: !Text
     , _gulGroupLicenseId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GrouplicenseUsersList' with the minimum fields required to make a request.
 --
@@ -75,10 +78,11 @@ grouplicenseUsersList
     -> Text -- ^ 'gulGroupLicenseId'
     -> GrouplicenseUsersList
 grouplicenseUsersList pGulEnterpriseId_ pGulGroupLicenseId_ =
-    GrouplicenseUsersList'
+  GrouplicenseUsersList'
     { _gulEnterpriseId = pGulEnterpriseId_
     , _gulGroupLicenseId = pGulGroupLicenseId_
     }
+
 
 -- | The ID of the enterprise.
 gulEnterpriseId :: Lens' GrouplicenseUsersList Text

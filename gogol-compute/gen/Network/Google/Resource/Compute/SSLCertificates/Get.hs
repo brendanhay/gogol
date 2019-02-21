@@ -58,10 +58,13 @@ type SSLCertificatesGetResource =
 -- SSL certificates by making a list() request.
 --
 -- /See:/ 'sslCertificatesGet' smart constructor.
-data SSLCertificatesGet = SSLCertificatesGet'
+data SSLCertificatesGet =
+  SSLCertificatesGet'
     { _scgProject        :: !Text
     , _scgSSLCertificate :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertificatesGet' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ sslCertificatesGet
     -> Text -- ^ 'scgSSLCertificate'
     -> SSLCertificatesGet
 sslCertificatesGet pScgProject_ pScgSSLCertificate_ =
-    SSLCertificatesGet'
-    { _scgProject = pScgProject_
-    , _scgSSLCertificate = pScgSSLCertificate_
-    }
+  SSLCertificatesGet'
+    {_scgProject = pScgProject_, _scgSSLCertificate = pScgSSLCertificate_}
+
 
 -- | Project ID for this request.
 scgProject :: Lens' SSLCertificatesGet Text

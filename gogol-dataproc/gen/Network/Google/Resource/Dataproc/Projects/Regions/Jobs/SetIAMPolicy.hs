@@ -64,7 +64,8 @@ type ProjectsRegionsJobsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsRegionsJobsSetIAMPolicy' smart constructor.
-data ProjectsRegionsJobsSetIAMPolicy = ProjectsRegionsJobsSetIAMPolicy'
+data ProjectsRegionsJobsSetIAMPolicy =
+  ProjectsRegionsJobsSetIAMPolicy'
     { _prjsipXgafv          :: !(Maybe Xgafv)
     , _prjsipUploadProtocol :: !(Maybe Text)
     , _prjsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsRegionsJobsSetIAMPolicy = ProjectsRegionsJobsSetIAMPolicy'
     , _prjsipPayload        :: !SetIAMPolicyRequest
     , _prjsipResource       :: !Text
     , _prjsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsJobsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsRegionsJobsSetIAMPolicy
     -> Text -- ^ 'prjsipResource'
     -> ProjectsRegionsJobsSetIAMPolicy
 projectsRegionsJobsSetIAMPolicy pPrjsipPayload_ pPrjsipResource_ =
-    ProjectsRegionsJobsSetIAMPolicy'
+  ProjectsRegionsJobsSetIAMPolicy'
     { _prjsipXgafv = Nothing
     , _prjsipUploadProtocol = Nothing
     , _prjsipAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsRegionsJobsSetIAMPolicy pPrjsipPayload_ pPrjsipResource_ =
     , _prjsipResource = pPrjsipResource_
     , _prjsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prjsipXgafv :: Lens' ProjectsRegionsJobsSetIAMPolicy (Maybe Xgafv)
@@ -149,7 +153,8 @@ prjsipCallback
       (\ s a -> s{_prjsipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsJobsSetIAMPolicy where
+           ProjectsRegionsJobsSetIAMPolicy
+         where
         type Rs ProjectsRegionsJobsSetIAMPolicy = Policy
         type Scopes ProjectsRegionsJobsSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

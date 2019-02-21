@@ -57,10 +57,13 @@ type GlobalAddressesGetResource =
 -- addresses by making a list() request.
 --
 -- /See:/ 'globalAddressesGet' smart constructor.
-data GlobalAddressesGet = GlobalAddressesGet'
+data GlobalAddressesGet =
+  GlobalAddressesGet'
     { _gagProject :: !Text
     , _gagAddress :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalAddressesGet' with the minimum fields required to make a request.
 --
@@ -74,10 +77,8 @@ globalAddressesGet
     -> Text -- ^ 'gagAddress'
     -> GlobalAddressesGet
 globalAddressesGet pGagProject_ pGagAddress_ =
-    GlobalAddressesGet'
-    { _gagProject = pGagProject_
-    , _gagAddress = pGagAddress_
-    }
+  GlobalAddressesGet' {_gagProject = pGagProject_, _gagAddress = pGagAddress_}
+
 
 -- | Project ID for this request.
 gagProject :: Lens' GlobalAddressesGet Text

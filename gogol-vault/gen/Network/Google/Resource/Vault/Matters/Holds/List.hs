@@ -70,7 +70,8 @@ type MattersHoldsListResource =
 -- denotes no more holds to list.
 --
 -- /See:/ 'mattersHoldsList' smart constructor.
-data MattersHoldsList = MattersHoldsList'
+data MattersHoldsList =
+  MattersHoldsList'
     { _mhlXgafv          :: !(Maybe Xgafv)
     , _mhlUploadProtocol :: !(Maybe Text)
     , _mhlAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data MattersHoldsList = MattersHoldsList'
     , _mhlPageToken      :: !(Maybe Text)
     , _mhlPageSize       :: !(Maybe (Textual Int32))
     , _mhlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersHoldsList' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ mattersHoldsList
     :: Text -- ^ 'mhlMatterId'
     -> MattersHoldsList
 mattersHoldsList pMhlMatterId_ =
-    MattersHoldsList'
+  MattersHoldsList'
     { _mhlXgafv = Nothing
     , _mhlUploadProtocol = Nothing
     , _mhlAccessToken = Nothing
@@ -118,6 +121,7 @@ mattersHoldsList pMhlMatterId_ =
     , _mhlPageSize = Nothing
     , _mhlCallback = Nothing
     }
+
 
 -- | V1 error format.
 mhlXgafv :: Lens' MattersHoldsList (Maybe Xgafv)

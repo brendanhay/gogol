@@ -307,73 +307,73 @@ scriptService
 
 -- | Read, compose, send, and permanently delete all your email from Gmail
 mailGoogleComScope :: Proxy '["https://mail.google.com/"]
-mailGoogleComScope = Proxy;
+mailGoogleComScope = Proxy
 
 -- | See, edit, download, and permanently delete your contacts
 m8FeedsScope :: Proxy '["https://www.google.com/m8/feeds"]
-m8FeedsScope = Proxy;
+m8FeedsScope = Proxy
 
 -- | View and manage the provisioning of users on your domain
 adminDirectoryUserScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user"]
-adminDirectoryUserScope = Proxy;
+adminDirectoryUserScope = Proxy
 
 -- | Create and update Google Apps Script projects
 scriptProjectsScope :: Proxy '["https://www.googleapis.com/auth/script.projects"]
-scriptProjectsScope = Proxy;
+scriptProjectsScope = Proxy
 
 -- | View your email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy;
+userInfoEmailScope = Proxy
 
 -- | View Google Apps Script project\'s metrics
 scriptMetricsScope :: Proxy '["https://www.googleapis.com/auth/script.metrics"]
-scriptMetricsScope = Proxy;
+scriptMetricsScope = Proxy
 
 -- | View and manage forms that this application has been installed in
 formsCurrentOnlyScope :: Proxy '["https://www.googleapis.com/auth/forms.currentonly"]
-formsCurrentOnlyScope = Proxy;
+formsCurrentOnlyScope = Proxy
 
 -- | Create and update Google Apps Script deployments
 scriptDeploymentsScope :: Proxy '["https://www.googleapis.com/auth/script.deployments"]
-scriptDeploymentsScope = Proxy;
+scriptDeploymentsScope = Proxy
 
 -- | See, edit, create, and delete all of your Google Drive files
 driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Proxy;
+driveScope = Proxy
 
 -- | View and manage the provisioning of groups on your domain
 adminDirectoryGroupScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.group"]
-adminDirectoryGroupScope = Proxy;
+adminDirectoryGroupScope = Proxy
 
 -- | View Google Apps Script projects
 scriptProjectsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/script.projects.readonly"]
-scriptProjectsReadOnlyScope = Proxy;
+scriptProjectsReadOnlyScope = Proxy
 
 -- | See, edit, share, and permanently delete all the calendars you can
 -- access using Google Calendar
 calendarFeedsScope :: Proxy '["https://www.google.com/calendar/feeds"]
-calendarFeedsScope = Proxy;
+calendarFeedsScope = Proxy
 
 -- | View and manage your forms in Google Drive
 formsScope :: Proxy '["https://www.googleapis.com/auth/forms"]
-formsScope = Proxy;
+formsScope = Proxy
 
 -- | See, edit, create, and delete your spreadsheets in Google Drive
 spreadsheetsScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets"]
-spreadsheetsScope = Proxy;
+spreadsheetsScope = Proxy
 
 -- | View Google Apps Script deployments
 scriptDeploymentsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/script.deployments.readonly"]
-scriptDeploymentsReadOnlyScope = Proxy;
+scriptDeploymentsReadOnlyScope = Proxy
 
 -- | View and manage your Google Groups
 groupsScope :: Proxy '["https://www.googleapis.com/auth/groups"]
-groupsScope = Proxy;
+groupsScope = Proxy
 
 -- | View Google Apps Script processes
 scriptProcessesScope :: Proxy '["https://www.googleapis.com/auth/script.processes"]
-scriptProcessesScope = Proxy;
+scriptProcessesScope = Proxy
 
 -- | View and manage your Google Docs documents
 documentsScope :: Proxy '["https://www.googleapis.com/auth/documents"]
-documentsScope = Proxy;
+documentsScope = Proxy

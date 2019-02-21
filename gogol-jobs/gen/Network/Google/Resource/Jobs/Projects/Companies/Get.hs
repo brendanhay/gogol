@@ -59,14 +59,17 @@ type ProjectsCompaniesGetResource =
 -- | Retrieves specified company.
 --
 -- /See:/ 'projectsCompaniesGet' smart constructor.
-data ProjectsCompaniesGet = ProjectsCompaniesGet'
+data ProjectsCompaniesGet =
+  ProjectsCompaniesGet'
     { _pcgXgafv          :: !(Maybe Xgafv)
     , _pcgUploadProtocol :: !(Maybe Text)
     , _pcgAccessToken    :: !(Maybe Text)
     , _pcgUploadType     :: !(Maybe Text)
     , _pcgName           :: !Text
     , _pcgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsCompaniesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsCompaniesGet
     :: Text -- ^ 'pcgName'
     -> ProjectsCompaniesGet
 projectsCompaniesGet pPcgName_ =
-    ProjectsCompaniesGet'
+  ProjectsCompaniesGet'
     { _pcgXgafv = Nothing
     , _pcgUploadProtocol = Nothing
     , _pcgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsCompaniesGet pPcgName_ =
     , _pcgName = pPcgName_
     , _pcgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcgXgafv :: Lens' ProjectsCompaniesGet (Maybe Xgafv)

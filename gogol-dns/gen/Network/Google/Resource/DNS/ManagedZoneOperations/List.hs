@@ -63,13 +63,16 @@ type ManagedZoneOperationsListResource =
 -- | Enumerate Operations for the given ManagedZone.
 --
 -- /See:/ 'managedZoneOperationsList' smart constructor.
-data ManagedZoneOperationsList = ManagedZoneOperationsList'
+data ManagedZoneOperationsList =
+  ManagedZoneOperationsList'
     { _mzolProject     :: !Text
     , _mzolPageToken   :: !(Maybe Text)
     , _mzolManagedZone :: !Text
     , _mzolMaxResults  :: !(Maybe (Textual Int32))
     , _mzolSortBy      :: !ManagedZoneOperationsListSortBy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagedZoneOperationsList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ managedZoneOperationsList
     -> Text -- ^ 'mzolManagedZone'
     -> ManagedZoneOperationsList
 managedZoneOperationsList pMzolProject_ pMzolManagedZone_ =
-    ManagedZoneOperationsList'
+  ManagedZoneOperationsList'
     { _mzolProject = pMzolProject_
     , _mzolPageToken = Nothing
     , _mzolManagedZone = pMzolManagedZone_
     , _mzolMaxResults = Nothing
     , _mzolSortBy = StartTime
     }
+
 
 -- | Identifies the project addressed by this request.
 mzolProject :: Lens' ManagedZoneOperationsList Text

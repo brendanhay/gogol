@@ -85,11 +85,14 @@ type ChannelBannersInsertResource =
 -- obtained in step 2.
 --
 -- /See:/ 'channelBannersInsert' smart constructor.
-data ChannelBannersInsert = ChannelBannersInsert'
+data ChannelBannersInsert =
+  ChannelBannersInsert'
     { _cbiChannelId              :: !(Maybe Text)
     , _cbiPayload                :: !ChannelBannerResource
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChannelBannersInsert' with the minimum fields required to make a request.
 --
@@ -104,11 +107,12 @@ channelBannersInsert
     :: ChannelBannerResource -- ^ 'cbiPayload'
     -> ChannelBannersInsert
 channelBannersInsert pCbiPayload_ =
-    ChannelBannersInsert'
+  ChannelBannersInsert'
     { _cbiChannelId = Nothing
     , _cbiPayload = pCbiPayload_
     , _cbiOnBehalfOfContentOwner = Nothing
     }
+
 
 -- | The channelId parameter identifies the YouTube channel to which the
 -- banner is uploaded. The channelId parameter was introduced as a required
@@ -159,7 +163,8 @@ instance GoogleRequest ChannelBannersInsert where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload ChannelBannersInsert) where
+           (MediaUpload ChannelBannersInsert)
+         where
         type Rs (MediaUpload ChannelBannersInsert) =
              ChannelBannerResource
         type Scopes (MediaUpload ChannelBannersInsert) =

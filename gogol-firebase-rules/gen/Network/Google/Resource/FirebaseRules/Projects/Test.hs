@@ -30,9 +30,9 @@
 -- the correct metadata: _*Example*_ \/\/ Users are allowed to subscribe
 -- and unsubscribe to the blog. service firebase.storage { match
 -- \/users\/{userId}\/images\/{imageName} { allow write: if userId ==
--- request.auth.uid &&
--- (imageName.matches(\'*.png′)||/i//m//a//g//e//N//a//m//e/./m//a//t//c//h//e//s/(′ * ./j//p//g/\'))
--- && resource.mimeType.matches(\'^image\/\') } }
+-- request.auth.uid && (imageName.matches(\'*.png$\') ||
+-- imageName.matches(\'*.jpg$\')) &&
+-- resource.mimeType.matches(\'^image\/\') } }
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.test@.
 module Network.Google.Resource.FirebaseRules.Projects.Test
@@ -81,12 +81,13 @@ type ProjectsTestResource =
 -- the correct metadata: _*Example*_ \/\/ Users are allowed to subscribe
 -- and unsubscribe to the blog. service firebase.storage { match
 -- \/users\/{userId}\/images\/{imageName} { allow write: if userId ==
--- request.auth.uid &&
--- (imageName.matches(\'*.png′)||/i//m//a//g//e//N//a//m//e/./m//a//t//c//h//e//s/(′ * ./j//p//g/\'))
--- && resource.mimeType.matches(\'^image\/\') } }
+-- request.auth.uid && (imageName.matches(\'*.png$\') ||
+-- imageName.matches(\'*.jpg$\')) &&
+-- resource.mimeType.matches(\'^image\/\') } }
 --
 -- /See:/ 'projectsTest' smart constructor.
-data ProjectsTest = ProjectsTest'
+data ProjectsTest =
+  ProjectsTest'
     { _ptXgafv          :: !(Maybe Xgafv)
     , _ptUploadProtocol :: !(Maybe Text)
     , _ptAccessToken    :: !(Maybe Text)
@@ -94,7 +95,9 @@ data ProjectsTest = ProjectsTest'
     , _ptPayload        :: !TestRulesetRequest
     , _ptName           :: !Text
     , _ptCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTest' with the minimum fields required to make a request.
 --
@@ -118,7 +121,7 @@ projectsTest
     -> Text -- ^ 'ptName'
     -> ProjectsTest
 projectsTest pPtPayload_ pPtName_ =
-    ProjectsTest'
+  ProjectsTest'
     { _ptXgafv = Nothing
     , _ptUploadProtocol = Nothing
     , _ptAccessToken = Nothing
@@ -127,6 +130,7 @@ projectsTest pPtPayload_ pPtName_ =
     , _ptName = pPtName_
     , _ptCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptXgafv :: Lens' ProjectsTest (Maybe Xgafv)

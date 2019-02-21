@@ -67,7 +67,8 @@ type ProjectsLocationsClustersNodePoolsListResource =
 -- | Lists the node pools for a cluster.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsList' smart constructor.
-data ProjectsLocationsClustersNodePoolsList = ProjectsLocationsClustersNodePoolsList'
+data ProjectsLocationsClustersNodePoolsList =
+  ProjectsLocationsClustersNodePoolsList'
     { _plcnplParent         :: !Text
     , _plcnplXgafv          :: !(Maybe Xgafv)
     , _plcnplUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsLocationsClustersNodePoolsList = ProjectsLocationsClustersNodePools
     , _plcnplClusterId      :: !(Maybe Text)
     , _plcnplProjectId      :: !(Maybe Text)
     , _plcnplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsLocationsClustersNodePoolsList
     :: Text -- ^ 'plcnplParent'
     -> ProjectsLocationsClustersNodePoolsList
 projectsLocationsClustersNodePoolsList pPlcnplParent_ =
-    ProjectsLocationsClustersNodePoolsList'
+  ProjectsLocationsClustersNodePoolsList'
     { _plcnplParent = pPlcnplParent_
     , _plcnplXgafv = Nothing
     , _plcnplUploadProtocol = Nothing
@@ -115,6 +118,7 @@ projectsLocationsClustersNodePoolsList pPlcnplParent_ =
     , _plcnplProjectId = Nothing
     , _plcnplCallback = Nothing
     }
+
 
 -- | The parent (project, location, cluster id) where the node pools will be
 -- listed. Specified in the format
@@ -175,7 +179,8 @@ plcnplCallback
       (\ s a -> s{_plcnplCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersNodePoolsList where
+           ProjectsLocationsClustersNodePoolsList
+         where
         type Rs ProjectsLocationsClustersNodePoolsList =
              ListNodePoolsResponse
         type Scopes ProjectsLocationsClustersNodePoolsList =

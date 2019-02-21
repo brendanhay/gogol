@@ -63,7 +63,8 @@ type ProjectsJobsBatchDeleteResource =
 -- | Deletes a list of Jobs by filter.
 --
 -- /See:/ 'projectsJobsBatchDelete' smart constructor.
-data ProjectsJobsBatchDelete = ProjectsJobsBatchDelete'
+data ProjectsJobsBatchDelete =
+  ProjectsJobsBatchDelete'
     { _pjbdParent         :: !Text
     , _pjbdXgafv          :: !(Maybe Xgafv)
     , _pjbdUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsJobsBatchDelete = ProjectsJobsBatchDelete'
     , _pjbdUploadType     :: !(Maybe Text)
     , _pjbdPayload        :: !BatchDeleteJobsRequest
     , _pjbdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsBatchDelete' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsJobsBatchDelete
     -> BatchDeleteJobsRequest -- ^ 'pjbdPayload'
     -> ProjectsJobsBatchDelete
 projectsJobsBatchDelete pPjbdParent_ pPjbdPayload_ =
-    ProjectsJobsBatchDelete'
+  ProjectsJobsBatchDelete'
     { _pjbdParent = pPjbdParent_
     , _pjbdXgafv = Nothing
     , _pjbdUploadProtocol = Nothing
@@ -104,6 +107,7 @@ projectsJobsBatchDelete pPjbdParent_ pPjbdPayload_ =
     , _pjbdPayload = pPjbdPayload_
     , _pjbdCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project under which the job is
 -- created. The format is \"projects\/{project_id}\", for example,

@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.sinks.patch@.
@@ -66,12 +66,13 @@ type FoldersSinksPatchResource =
                          ReqBody '[JSON] LogSink :> Patch '[JSON] LogSink
 
 -- | Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ 'foldersSinksPatch' smart constructor.
-data FoldersSinksPatch = FoldersSinksPatch'
+data FoldersSinksPatch =
+  FoldersSinksPatch'
     { _fspXgafv                :: !(Maybe Xgafv)
     , _fspUniqueWriterIdentity :: !(Maybe Bool)
     , _fspUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,9 @@ data FoldersSinksPatch = FoldersSinksPatch'
     , _fspPayload              :: !LogSink
     , _fspSinkName             :: !Text
     , _fspCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersSinksPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ foldersSinksPatch
     -> Text -- ^ 'fspSinkName'
     -> FoldersSinksPatch
 foldersSinksPatch pFspPayload_ pFspSinkName_ =
-    FoldersSinksPatch'
+  FoldersSinksPatch'
     { _fspXgafv = Nothing
     , _fspUniqueWriterIdentity = Nothing
     , _fspUploadProtocol = Nothing
@@ -120,6 +123,7 @@ foldersSinksPatch pFspPayload_ pFspSinkName_ =
     , _fspSinkName = pFspSinkName_
     , _fspCallback = Nothing
     }
+
 
 -- | V1 error format.
 fspXgafv :: Lens' FoldersSinksPatch (Maybe Xgafv)

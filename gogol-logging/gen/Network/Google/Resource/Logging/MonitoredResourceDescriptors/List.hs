@@ -63,7 +63,8 @@ type MonitoredResourceDescriptorsListResource =
 -- | Lists the descriptors for monitored resource types used by Logging.
 --
 -- /See:/ 'monitoredResourceDescriptorsList' smart constructor.
-data MonitoredResourceDescriptorsList = MonitoredResourceDescriptorsList'
+data MonitoredResourceDescriptorsList =
+  MonitoredResourceDescriptorsList'
     { _mrdlXgafv          :: !(Maybe Xgafv)
     , _mrdlUploadProtocol :: !(Maybe Text)
     , _mrdlAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data MonitoredResourceDescriptorsList = MonitoredResourceDescriptorsList'
     , _mrdlPageToken      :: !(Maybe Text)
     , _mrdlPageSize       :: !(Maybe (Textual Int32))
     , _mrdlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonitoredResourceDescriptorsList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ data MonitoredResourceDescriptorsList = MonitoredResourceDescriptorsList'
 monitoredResourceDescriptorsList
     :: MonitoredResourceDescriptorsList
 monitoredResourceDescriptorsList =
-    MonitoredResourceDescriptorsList'
+  MonitoredResourceDescriptorsList'
     { _mrdlXgafv = Nothing
     , _mrdlUploadProtocol = Nothing
     , _mrdlAccessToken = Nothing
@@ -102,6 +105,7 @@ monitoredResourceDescriptorsList =
     , _mrdlPageSize = Nothing
     , _mrdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 mrdlXgafv :: Lens' MonitoredResourceDescriptorsList (Maybe Xgafv)
@@ -149,7 +153,8 @@ mrdlCallback
   = lens _mrdlCallback (\ s a -> s{_mrdlCallback = a})
 
 instance GoogleRequest
-         MonitoredResourceDescriptorsList where
+           MonitoredResourceDescriptorsList
+         where
         type Rs MonitoredResourceDescriptorsList =
              ListMonitoredResourceDescriptorsResponse
         type Scopes MonitoredResourceDescriptorsList =

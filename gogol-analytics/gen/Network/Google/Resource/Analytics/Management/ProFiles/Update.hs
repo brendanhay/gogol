@@ -60,12 +60,15 @@ type ManagementProFilesUpdateResource =
 -- | Updates an existing view (profile).
 --
 -- /See:/ 'managementProFilesUpdate' smart constructor.
-data ManagementProFilesUpdate = ManagementProFilesUpdate'
+data ManagementProFilesUpdate =
+  ManagementProFilesUpdate'
     { _mpfuWebPropertyId :: !Text
     , _mpfuProFileId     :: !Text
     , _mpfuPayload       :: !ProFile
     , _mpfuAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementProFilesUpdate' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ managementProFilesUpdate
     -> Text -- ^ 'mpfuAccountId'
     -> ManagementProFilesUpdate
 managementProFilesUpdate pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpfuAccountId_ =
-    ManagementProFilesUpdate'
+  ManagementProFilesUpdate'
     { _mpfuWebPropertyId = pMpfuWebPropertyId_
     , _mpfuProFileId = pMpfuProFileId_
     , _mpfuPayload = pMpfuPayload_
     , _mpfuAccountId = pMpfuAccountId_
     }
+
 
 -- | Web property ID to which the view (profile) belongs
 mpfuWebPropertyId :: Lens' ManagementProFilesUpdate Text

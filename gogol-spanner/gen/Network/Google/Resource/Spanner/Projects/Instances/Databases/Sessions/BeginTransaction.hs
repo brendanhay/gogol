@@ -65,7 +65,8 @@ type ProjectsInstancesDatabasesSessionsBeginTransactionResource
 -- ExecuteSql and Commit can begin a new transaction as a side-effect.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsBeginTransaction' smart constructor.
-data ProjectsInstancesDatabasesSessionsBeginTransaction = ProjectsInstancesDatabasesSessionsBeginTransaction'
+data ProjectsInstancesDatabasesSessionsBeginTransaction =
+  ProjectsInstancesDatabasesSessionsBeginTransaction'
     { _pidsbtXgafv          :: !(Maybe Xgafv)
     , _pidsbtUploadProtocol :: !(Maybe Text)
     , _pidsbtAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsInstancesDatabasesSessionsBeginTransaction = ProjectsInstancesDatab
     , _pidsbtPayload        :: !BeginTransactionRequest
     , _pidsbtSession        :: !Text
     , _pidsbtCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsBeginTransaction' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsInstancesDatabasesSessionsBeginTransaction
     -> Text -- ^ 'pidsbtSession'
     -> ProjectsInstancesDatabasesSessionsBeginTransaction
 projectsInstancesDatabasesSessionsBeginTransaction pPidsbtPayload_ pPidsbtSession_ =
-    ProjectsInstancesDatabasesSessionsBeginTransaction'
+  ProjectsInstancesDatabasesSessionsBeginTransaction'
     { _pidsbtXgafv = Nothing
     , _pidsbtUploadProtocol = Nothing
     , _pidsbtAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsInstancesDatabasesSessionsBeginTransaction pPidsbtPayload_ pPidsbtSessio
     , _pidsbtSession = pPidsbtSession_
     , _pidsbtCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidsbtXgafv :: Lens' ProjectsInstancesDatabasesSessionsBeginTransaction (Maybe Xgafv)
@@ -149,7 +153,7 @@ pidsbtCallback
       (\ s a -> s{_pidsbtCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsBeginTransaction
+           ProjectsInstancesDatabasesSessionsBeginTransaction
          where
         type Rs
                ProjectsInstancesDatabasesSessionsBeginTransaction

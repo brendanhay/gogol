@@ -59,12 +59,15 @@ type EventsQuickAddResource =
 -- | Creates an event based on a simple text string.
 --
 -- /See:/ 'eventsQuickAdd' smart constructor.
-data EventsQuickAdd = EventsQuickAdd'
+data EventsQuickAdd =
+  EventsQuickAdd'
     { _eqaCalendarId        :: !Text
     , _eqaText              :: !Text
     , _eqaSendNotifications :: !(Maybe Bool)
     , _eqaSendUpdates       :: !(Maybe EventsQuickAddSendUpdates)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventsQuickAdd' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ eventsQuickAdd
     -> Text -- ^ 'eqaText'
     -> EventsQuickAdd
 eventsQuickAdd pEqaCalendarId_ pEqaText_ =
-    EventsQuickAdd'
+  EventsQuickAdd'
     { _eqaCalendarId = pEqaCalendarId_
     , _eqaText = pEqaText_
     , _eqaSendNotifications = Nothing
     , _eqaSendUpdates = Nothing
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

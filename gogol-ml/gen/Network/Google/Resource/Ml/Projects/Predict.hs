@@ -70,7 +70,8 @@ type ProjectsPredictResource =
 -- [predict request format](\/ml-engine\/docs\/v1\/predict-request)**.
 --
 -- /See:/ 'projectsPredict' smart constructor.
-data ProjectsPredict = ProjectsPredict'
+data ProjectsPredict =
+  ProjectsPredict'
     { _ppXgafv          :: !(Maybe Xgafv)
     , _ppUploadProtocol :: !(Maybe Text)
     , _ppAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsPredict = ProjectsPredict'
     , _ppPayload        :: !GoogleCloudMlV1__PredictRequest
     , _ppName           :: !Text
     , _ppCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsPredict' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsPredict
     -> Text -- ^ 'ppName'
     -> ProjectsPredict
 projectsPredict pPpPayload_ pPpName_ =
-    ProjectsPredict'
+  ProjectsPredict'
     { _ppXgafv = Nothing
     , _ppUploadProtocol = Nothing
     , _ppAccessToken = Nothing
@@ -111,6 +114,7 @@ projectsPredict pPpPayload_ pPpName_ =
     , _ppName = pPpName_
     , _ppCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppXgafv :: Lens' ProjectsPredict (Maybe Xgafv)

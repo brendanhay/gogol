@@ -62,12 +62,15 @@ type AccountsCustomChannelsListResource =
 -- account.
 --
 -- /See:/ 'accountsCustomChannelsList' smart constructor.
-data AccountsCustomChannelsList = AccountsCustomChannelsList'
+data AccountsCustomChannelsList =
+  AccountsCustomChannelsList'
     { _acclAdClientId :: !Text
     , _acclAccountId  :: !Text
     , _acclPageToken  :: !(Maybe Text)
     , _acclMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsCustomChannelsList' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ accountsCustomChannelsList
     -> Text -- ^ 'acclAccountId'
     -> AccountsCustomChannelsList
 accountsCustomChannelsList pAcclAdClientId_ pAcclAccountId_ =
-    AccountsCustomChannelsList'
+  AccountsCustomChannelsList'
     { _acclAdClientId = pAcclAdClientId_
     , _acclAccountId = pAcclAccountId_
     , _acclPageToken = Nothing
     , _acclMaxResults = Nothing
     }
+
 
 -- | Ad client for which to list custom channels.
 acclAdClientId :: Lens' AccountsCustomChannelsList Text

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ReportsDelete' request conforms to.
 type ReportsDeleteResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -54,10 +54,13 @@ type ReportsDeleteResource =
 -- | Deletes a report by its ID.
 --
 -- /See:/ 'reportsDelete' smart constructor.
-data ReportsDelete = ReportsDelete'
+data ReportsDelete =
+  ReportsDelete'
     { _rdReportId  :: !(Textual Int64)
     , _rdProFileId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,11 @@ reportsDelete
     -> Int64 -- ^ 'rdProFileId'
     -> ReportsDelete
 reportsDelete pRdReportId_ pRdProFileId_ =
-    ReportsDelete'
+  ReportsDelete'
     { _rdReportId = _Coerce # pRdReportId_
     , _rdProFileId = _Coerce # pRdProFileId_
     }
+
 
 -- | The ID of the report.
 rdReportId :: Lens' ReportsDelete Int64

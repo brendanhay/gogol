@@ -54,10 +54,13 @@ type ColumnGetResource =
 -- | Retrieves a specific column by its ID.
 --
 -- /See:/ 'columnGet' smart constructor.
-data ColumnGet = ColumnGet'
+data ColumnGet =
+  ColumnGet'
     { _cgTableId  :: !Text
     , _cgColumnId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ColumnGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ columnGet
     -> Text -- ^ 'cgColumnId'
     -> ColumnGet
 columnGet pCgTableId_ pCgColumnId_ =
-    ColumnGet'
-    { _cgTableId = pCgTableId_
-    , _cgColumnId = pCgColumnId_
-    }
+  ColumnGet' {_cgTableId = pCgTableId_, _cgColumnId = pCgColumnId_}
+
 
 -- | Table to which the column belongs.
 cgTableId :: Lens' ColumnGet Text

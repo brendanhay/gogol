@@ -65,14 +65,17 @@ type ProductsListResource =
 -- there is no query.
 --
 -- /See:/ 'productsList' smart constructor.
-data ProductsList = ProductsList'
+data ProductsList =
+  ProductsList'
     { _plEnterpriseId :: !Text
     , _plToken        :: !(Maybe Text)
     , _plQuery        :: !(Maybe Text)
     , _plLanguage     :: !(Maybe Text)
     , _plApproved     :: !(Maybe Bool)
     , _plMaxResults   :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductsList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ productsList
     :: Text -- ^ 'plEnterpriseId'
     -> ProductsList
 productsList pPlEnterpriseId_ =
-    ProductsList'
+  ProductsList'
     { _plEnterpriseId = pPlEnterpriseId_
     , _plToken = Nothing
     , _plQuery = Nothing
@@ -102,15 +105,16 @@ productsList pPlEnterpriseId_ =
     , _plMaxResults = Nothing
     }
 
+
 -- | The ID of the enterprise.
 plEnterpriseId :: Lens' ProductsList Text
 plEnterpriseId
   = lens _plEnterpriseId
       (\ s a -> s{_plEnterpriseId = a})
 
--- | A pagination token is contained in a request\'\'s response when there
--- are more products. The token can be used in a subsequent request to
--- obtain more products, and so forth. This parameter cannot be used in the
+-- | A pagination token is contained in a request\'s response when there are
+-- more products. The token can be used in a subsequent request to obtain
+-- more products, and so forth. This parameter cannot be used in the
 -- initial request.
 plToken :: Lens' ProductsList (Maybe Text)
 plToken = lens _plToken (\ s a -> s{_plToken = a})

@@ -24,6 +24,7 @@ module Network.Google.Games
     -- * OAuth Scopes
     , gamesScope
     , driveAppDataScope
+    , plusMeScope
 
     -- * API Declaration
     , GamesAPI

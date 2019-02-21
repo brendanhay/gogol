@@ -23,11 +23,14 @@ import           Network.Google.Prelude
 -- | Response message for GetSiteSummary.
 --
 -- /See:/ 'siteSummaryResponse' smart constructor.
-data SiteSummaryResponse = SiteSummaryResponse'
+data SiteSummaryResponse =
+  SiteSummaryResponse'
     { _ssrMobileSummary  :: !(Maybe PlatformSummary)
     , _ssrReviewedSite   :: !(Maybe Text)
     , _ssrDesktopSummary :: !(Maybe PlatformSummary)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SiteSummaryResponse' with the minimum fields required to make a request.
 --
@@ -41,11 +44,12 @@ data SiteSummaryResponse = SiteSummaryResponse'
 siteSummaryResponse
     :: SiteSummaryResponse
 siteSummaryResponse =
-    SiteSummaryResponse'
+  SiteSummaryResponse'
     { _ssrMobileSummary = Nothing
     , _ssrReviewedSite = Nothing
     , _ssrDesktopSummary = Nothing
     }
+
 
 -- | Summary for the mobile review of the site.
 ssrMobileSummary :: Lens' SiteSummaryResponse (Maybe PlatformSummary)
@@ -84,9 +88,12 @@ instance ToJSON SiteSummaryResponse where
 -- | Response message for ListViolatingSites.
 --
 -- /See:/ 'violatingSitesResponse' smart constructor.
-newtype ViolatingSitesResponse = ViolatingSitesResponse'
+newtype ViolatingSitesResponse =
+  ViolatingSitesResponse'
     { _vsrViolatingSites :: Maybe [SiteSummaryResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ViolatingSitesResponse' with the minimum fields required to make a request.
 --
@@ -95,10 +102,8 @@ newtype ViolatingSitesResponse = ViolatingSitesResponse'
 -- * 'vsrViolatingSites'
 violatingSitesResponse
     :: ViolatingSitesResponse
-violatingSitesResponse =
-    ViolatingSitesResponse'
-    { _vsrViolatingSites = Nothing
-    }
+violatingSitesResponse = ViolatingSitesResponse' {_vsrViolatingSites = Nothing}
+
 
 -- | A list of summaries of violating sites.
 vsrViolatingSites :: Lens' ViolatingSitesResponse [SiteSummaryResponse]
@@ -124,7 +129,8 @@ instance ToJSON ViolatingSitesResponse where
 -- | Summary of the ad experience rating of a site for a specific platform.
 --
 -- /See:/ 'platformSummary' smart constructor.
-data PlatformSummary = PlatformSummary'
+data PlatformSummary =
+  PlatformSummary'
     { _psEnforcementTime :: !(Maybe DateTime')
     , _psLastChangeTime  :: !(Maybe DateTime')
     , _psFilterStatus    :: !(Maybe PlatformSummaryFilterStatus)
@@ -132,7 +138,9 @@ data PlatformSummary = PlatformSummary'
     , _psBetterAdsStatus :: !(Maybe PlatformSummaryBetterAdsStatus)
     , _psReportURL       :: !(Maybe Text)
     , _psRegion          :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlatformSummary' with the minimum fields required to make a request.
 --
@@ -154,7 +162,7 @@ data PlatformSummary = PlatformSummary'
 platformSummary
     :: PlatformSummary
 platformSummary =
-    PlatformSummary'
+  PlatformSummary'
     { _psEnforcementTime = Nothing
     , _psLastChangeTime = Nothing
     , _psFilterStatus = Nothing
@@ -163,6 +171,7 @@ platformSummary =
     , _psReportURL = Nothing
     , _psRegion = Nothing
     }
+
 
 -- | The date on which ad filtering begins.
 psEnforcementTime :: Lens' PlatformSummary (Maybe UTCTime)

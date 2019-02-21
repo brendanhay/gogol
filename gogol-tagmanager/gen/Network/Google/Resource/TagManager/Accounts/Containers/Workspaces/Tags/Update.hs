@@ -54,11 +54,14 @@ type AccountsContainersWorkspacesTagsUpdateResource =
 -- | Updates a GTM Tag.
 --
 -- /See:/ 'accountsContainersWorkspacesTagsUpdate' smart constructor.
-data AccountsContainersWorkspacesTagsUpdate = AccountsContainersWorkspacesTagsUpdate'
+data AccountsContainersWorkspacesTagsUpdate =
+  AccountsContainersWorkspacesTagsUpdate'
     { _acwtucPath        :: !Text
     , _acwtucFingerprint :: !(Maybe Text)
     , _acwtucPayload     :: !Tag
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesTagsUpdate' with the minimum fields required to make a request.
 --
@@ -74,11 +77,12 @@ accountsContainersWorkspacesTagsUpdate
     -> Tag -- ^ 'acwtucPayload'
     -> AccountsContainersWorkspacesTagsUpdate
 accountsContainersWorkspacesTagsUpdate pAcwtucPath_ pAcwtucPayload_ =
-    AccountsContainersWorkspacesTagsUpdate'
+  AccountsContainersWorkspacesTagsUpdate'
     { _acwtucPath = pAcwtucPath_
     , _acwtucFingerprint = Nothing
     , _acwtucPayload = pAcwtucPayload_
     }
+
 
 -- | GTM Tag\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/tags\/{tag_id}
@@ -100,7 +104,8 @@ acwtucPayload
       (\ s a -> s{_acwtucPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTagsUpdate where
+           AccountsContainersWorkspacesTagsUpdate
+         where
         type Rs AccountsContainersWorkspacesTagsUpdate = Tag
         type Scopes AccountsContainersWorkspacesTagsUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]

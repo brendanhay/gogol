@@ -70,7 +70,8 @@ type ProjectsZonesClustersMonitoringResource =
 -- | Sets the monitoring service for a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersMonitoring' smart constructor.
-data ProjectsZonesClustersMonitoring = ProjectsZonesClustersMonitoring'
+data ProjectsZonesClustersMonitoring =
+  ProjectsZonesClustersMonitoring'
     { _pzcmzXgafv          :: !(Maybe Xgafv)
     , _pzcmzUploadProtocol :: !(Maybe Text)
     , _pzcmzAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsZonesClustersMonitoring = ProjectsZonesClustersMonitoring'
     , _pzcmzClusterId      :: !Text
     , _pzcmzProjectId      :: !Text
     , _pzcmzCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersMonitoring' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsZonesClustersMonitoring
     -> Text -- ^ 'pzcmzProjectId'
     -> ProjectsZonesClustersMonitoring
 projectsZonesClustersMonitoring pPzcmzZone_ pPzcmzPayload_ pPzcmzClusterId_ pPzcmzProjectId_ =
-    ProjectsZonesClustersMonitoring'
+  ProjectsZonesClustersMonitoring'
     { _pzcmzXgafv = Nothing
     , _pzcmzUploadProtocol = Nothing
     , _pzcmzAccessToken = Nothing
@@ -121,6 +124,7 @@ projectsZonesClustersMonitoring pPzcmzZone_ pPzcmzPayload_ pPzcmzClusterId_ pPzc
     , _pzcmzProjectId = pPzcmzProjectId_
     , _pzcmzCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcmzXgafv :: Lens' ProjectsZonesClustersMonitoring (Maybe Xgafv)
@@ -179,7 +183,8 @@ pzcmzCallback
       (\ s a -> s{_pzcmzCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersMonitoring where
+           ProjectsZonesClustersMonitoring
+         where
         type Rs ProjectsZonesClustersMonitoring = Operation
         type Scopes ProjectsZonesClustersMonitoring =
              '["https://www.googleapis.com/auth/cloud-platform"]

@@ -55,10 +55,13 @@ type PostsRevertResource =
 -- | Revert a published or scheduled post to draft state.
 --
 -- /See:/ 'postsRevert' smart constructor.
-data PostsRevert = PostsRevert'
+data PostsRevert =
+  PostsRevert'
     { _prBlogId :: !Text
     , _prPostId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostsRevert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ postsRevert
     -> Text -- ^ 'prPostId'
     -> PostsRevert
 postsRevert pPrBlogId_ pPrPostId_ =
-    PostsRevert'
-    { _prBlogId = pPrBlogId_
-    , _prPostId = pPrPostId_
-    }
+  PostsRevert' {_prBlogId = pPrBlogId_, _prPostId = pPrPostId_}
+
 
 -- | The ID of the Blog.
 prBlogId :: Lens' PostsRevert Text

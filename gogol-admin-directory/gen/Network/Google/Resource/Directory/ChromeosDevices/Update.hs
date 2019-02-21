@@ -63,12 +63,15 @@ type ChromeosDevicesUpdateResource =
 -- | Update Chrome OS Device
 --
 -- /See:/ 'chromeosDevicesUpdate' smart constructor.
-data ChromeosDevicesUpdate = ChromeosDevicesUpdate'
+data ChromeosDevicesUpdate =
+  ChromeosDevicesUpdate'
     { _cduPayload    :: !ChromeOSDevice
     , _cduCustomerId :: !Text
     , _cduDeviceId   :: !Text
     , _cduProjection :: !(Maybe ChromeosDevicesUpdateProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChromeosDevicesUpdate' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ chromeosDevicesUpdate
     -> Text -- ^ 'cduDeviceId'
     -> ChromeosDevicesUpdate
 chromeosDevicesUpdate pCduPayload_ pCduCustomerId_ pCduDeviceId_ =
-    ChromeosDevicesUpdate'
+  ChromeosDevicesUpdate'
     { _cduPayload = pCduPayload_
     , _cduCustomerId = pCduCustomerId_
     , _cduDeviceId = pCduDeviceId_
     , _cduProjection = Nothing
     }
+
 
 -- | Multipart request metadata.
 cduPayload :: Lens' ChromeosDevicesUpdate ChromeOSDevice

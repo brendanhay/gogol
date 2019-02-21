@@ -55,10 +55,13 @@ type InstancesStartReplicaResource =
 -- | Starts the replication in the read replica instance.
 --
 -- /See:/ 'instancesStartReplica' smart constructor.
-data InstancesStartReplica = InstancesStartReplica'
+data InstancesStartReplica =
+  InstancesStartReplica'
     { _insProject  :: !Text
     , _insInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesStartReplica' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ instancesStartReplica
     -> Text -- ^ 'insInstance'
     -> InstancesStartReplica
 instancesStartReplica pInsProject_ pInsInstance_ =
-    InstancesStartReplica'
-    { _insProject = pInsProject_
-    , _insInstance = pInsInstance_
-    }
+  InstancesStartReplica'
+    {_insProject = pInsProject_, _insInstance = pInsInstance_}
+
 
 -- | ID of the project that contains the read replica.
 insProject :: Lens' InstancesStartReplica Text

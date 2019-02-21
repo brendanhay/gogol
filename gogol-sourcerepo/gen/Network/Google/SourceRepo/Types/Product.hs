@@ -39,10 +39,13 @@ import           Network.Google.SourceRepo.Types.Sum
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -53,11 +56,8 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -92,11 +92,14 @@ instance ToJSON AuditConfig where
 -- | Cloud Source Repositories configuration of a project.
 --
 -- /See:/ 'projectConfig' smart constructor.
-data ProjectConfig = ProjectConfig'
+data ProjectConfig =
+  ProjectConfig'
     { _pcPubsubConfigs         :: !(Maybe ProjectConfigPubsubConfigs)
     , _pcEnablePrivateKeyCheck :: !(Maybe Bool)
     , _pcName                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectConfig' with the minimum fields required to make a request.
 --
@@ -110,11 +113,12 @@ data ProjectConfig = ProjectConfig'
 projectConfig
     :: ProjectConfig
 projectConfig =
-    ProjectConfig'
+  ProjectConfig'
     { _pcPubsubConfigs = Nothing
     , _pcEnablePrivateKeyCheck = Nothing
     , _pcName = Nothing
     }
+
 
 -- | How this project publishes a change in the repositories through Cloud
 -- Pub\/Sub. Keyed by the topic names.
@@ -156,12 +160,15 @@ instance ToJSON ProjectConfig where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -177,12 +184,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -231,10 +239,13 @@ instance ToJSON Expr where
 -- repositories.
 --
 -- /See:/ 'listReposResponse' smart constructor.
-data ListReposResponse = ListReposResponse'
+data ListReposResponse =
+  ListReposResponse'
     { _lrrNextPageToken :: !(Maybe Text)
     , _lrrRepos         :: !(Maybe [Repo])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListReposResponse' with the minimum fields required to make a request.
 --
@@ -246,10 +257,8 @@ data ListReposResponse = ListReposResponse'
 listReposResponse
     :: ListReposResponse
 listReposResponse =
-    ListReposResponse'
-    { _lrrNextPageToken = Nothing
-    , _lrrRepos = Nothing
-    }
+  ListReposResponse' {_lrrNextPageToken = Nothing, _lrrRepos = Nothing}
+
 
 -- | If non-empty, additional repositories exist within the project. These
 -- can be retrieved by including this value in the next ListReposRequest\'s
@@ -289,14 +298,16 @@ instance ToJSON ListReposResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -307,10 +318,13 @@ instance ToJSON Empty where
 -- | Request for UpdateRepo.
 --
 -- /See:/ 'updateRepoRequest' smart constructor.
-data UpdateRepoRequest = UpdateRepoRequest'
+data UpdateRepoRequest =
+  UpdateRepoRequest'
     { _urrUpdateMask :: !(Maybe GFieldMask)
     , _urrRepo       :: !(Maybe Repo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateRepoRequest' with the minimum fields required to make a request.
 --
@@ -322,10 +336,8 @@ data UpdateRepoRequest = UpdateRepoRequest'
 updateRepoRequest
     :: UpdateRepoRequest
 updateRepoRequest =
-    UpdateRepoRequest'
-    { _urrUpdateMask = Nothing
-    , _urrRepo = Nothing
-    }
+  UpdateRepoRequest' {_urrUpdateMask = Nothing, _urrRepo = Nothing}
+
 
 -- | A FieldMask specifying which fields of the repo to modify. Only the
 -- fields in the mask will be modified. If no mask is provided, this
@@ -356,10 +368,13 @@ instance ToJSON UpdateRepoRequest where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-data SetIAMPolicyRequest = SetIAMPolicyRequest'
+data SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
     , _siprPolicy     :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -371,10 +386,8 @@ data SetIAMPolicyRequest = SetIAMPolicyRequest'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprUpdateMask = Nothing
-    , _siprPolicy = Nothing
-    }
+  SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -410,11 +423,14 @@ instance ToJSON SetIAMPolicyRequest where
 -- | Configuration to publish a Cloud Pub\/Sub message.
 --
 -- /See:/ 'pubsubConfig' smart constructor.
-data PubsubConfig = PubsubConfig'
+data PubsubConfig =
+  PubsubConfig'
     { _pcTopic               :: !(Maybe Text)
     , _pcServiceAccountEmail :: !(Maybe Text)
     , _pcMessageFormat       :: !(Maybe PubsubConfigMessageFormat)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PubsubConfig' with the minimum fields required to make a request.
 --
@@ -428,11 +444,12 @@ data PubsubConfig = PubsubConfig'
 pubsubConfig
     :: PubsubConfig
 pubsubConfig =
-    PubsubConfig'
+  PubsubConfig'
     { _pcTopic = Nothing
     , _pcServiceAccountEmail = Nothing
     , _pcMessageFormat = Nothing
     }
+
 
 -- | A topic of Cloud Pub\/Sub. Values are of the form
 -- \`projects\/\/topics\/\`. The project needs to be the same project as
@@ -476,10 +493,13 @@ instance ToJSON PubsubConfig where
 -- | Request for UpdateProjectConfig.
 --
 -- /See:/ 'updateProjectConfigRequest' smart constructor.
-data UpdateProjectConfigRequest = UpdateProjectConfigRequest'
+data UpdateProjectConfigRequest =
+  UpdateProjectConfigRequest'
     { _upcrProjectConfig :: !(Maybe ProjectConfig)
     , _upcrUpdateMask    :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateProjectConfigRequest' with the minimum fields required to make a request.
 --
@@ -491,10 +511,9 @@ data UpdateProjectConfigRequest = UpdateProjectConfigRequest'
 updateProjectConfigRequest
     :: UpdateProjectConfigRequest
 updateProjectConfigRequest =
-    UpdateProjectConfigRequest'
-    { _upcrProjectConfig = Nothing
-    , _upcrUpdateMask = Nothing
-    }
+  UpdateProjectConfigRequest'
+    {_upcrProjectConfig = Nothing, _upcrUpdateMask = Nothing}
+
 
 -- | The new configuration for the project.
 upcrProjectConfig :: Lens' UpdateProjectConfigRequest (Maybe ProjectConfig)
@@ -527,9 +546,12 @@ instance ToJSON UpdateProjectConfigRequest where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -539,9 +561,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -570,9 +591,12 @@ instance ToJSON TestIAMPermissionsRequest where
 -- Pub\/Sub. Keyed by the topic names.
 --
 -- /See:/ 'repoPubsubConfigs' smart constructor.
-newtype RepoPubsubConfigs = RepoPubsubConfigs'
+newtype RepoPubsubConfigs =
+  RepoPubsubConfigs'
     { _rpcAddtional :: HashMap Text PubsubConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepoPubsubConfigs' with the minimum fields required to make a request.
 --
@@ -583,9 +607,8 @@ repoPubsubConfigs
     :: HashMap Text PubsubConfig -- ^ 'rpcAddtional'
     -> RepoPubsubConfigs
 repoPubsubConfigs pRpcAddtional_ =
-    RepoPubsubConfigs'
-    { _rpcAddtional = _Coerce # pRpcAddtional_
-    }
+  RepoPubsubConfigs' {_rpcAddtional = _Coerce # pRpcAddtional_}
+
 
 rpcAddtional :: Lens' RepoPubsubConfigs (HashMap Text PubsubConfig)
 rpcAddtional
@@ -604,9 +627,12 @@ instance ToJSON RepoPubsubConfigs where
 -- Pub\/Sub. Keyed by the topic names.
 --
 -- /See:/ 'projectConfigPubsubConfigs' smart constructor.
-newtype ProjectConfigPubsubConfigs = ProjectConfigPubsubConfigs'
+newtype ProjectConfigPubsubConfigs =
+  ProjectConfigPubsubConfigs'
     { _pcpcAddtional :: HashMap Text PubsubConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectConfigPubsubConfigs' with the minimum fields required to make a request.
 --
@@ -617,9 +643,8 @@ projectConfigPubsubConfigs
     :: HashMap Text PubsubConfig -- ^ 'pcpcAddtional'
     -> ProjectConfigPubsubConfigs
 projectConfigPubsubConfigs pPcpcAddtional_ =
-    ProjectConfigPubsubConfigs'
-    { _pcpcAddtional = _Coerce # pPcpcAddtional_
-    }
+  ProjectConfigPubsubConfigs' {_pcpcAddtional = _Coerce # pPcpcAddtional_}
+
 
 pcpcAddtional :: Lens' ProjectConfigPubsubConfigs (HashMap Text PubsubConfig)
 pcpcAddtional
@@ -640,13 +665,16 @@ instance ToJSON ProjectConfigPubsubConfigs where
 -- content.
 --
 -- /See:/ 'repo' smart constructor.
-data Repo = Repo'
+data Repo =
+  Repo'
     { _rPubsubConfigs :: !(Maybe RepoPubsubConfigs)
     , _rSize          :: !(Maybe (Textual Int64))
     , _rURL           :: !(Maybe Text)
     , _rName          :: !(Maybe Text)
     , _rMirrorConfig  :: !(Maybe MirrorConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Repo' with the minimum fields required to make a request.
 --
@@ -664,13 +692,14 @@ data Repo = Repo'
 repo
     :: Repo
 repo =
-    Repo'
+  Repo'
     { _rPubsubConfigs = Nothing
     , _rSize = Nothing
     , _rURL = Nothing
     , _rName = Nothing
     , _rMirrorConfig = Nothing
     }
+
 
 -- | How this repository publishes a change in the repository through Cloud
 -- Pub\/Sub. Keyed by the topic names.
@@ -726,9 +755,12 @@ instance ToJSON Repo where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -738,9 +770,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -783,12 +814,15 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -804,12 +838,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -871,10 +906,13 @@ instance ToJSON Policy where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -886,10 +924,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -924,11 +960,14 @@ instance ToJSON AuditLogConfig where
 -- service, for example GitHub or Bitbucket.
 --
 -- /See:/ 'mirrorConfig' smart constructor.
-data MirrorConfig = MirrorConfig'
+data MirrorConfig =
+  MirrorConfig'
     { _mcURL         :: !(Maybe Text)
     , _mcDeployKeyId :: !(Maybe Text)
     , _mcWebhookId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MirrorConfig' with the minimum fields required to make a request.
 --
@@ -942,11 +981,9 @@ data MirrorConfig = MirrorConfig'
 mirrorConfig
     :: MirrorConfig
 mirrorConfig =
-    MirrorConfig'
-    { _mcURL = Nothing
-    , _mcDeployKeyId = Nothing
-    , _mcWebhookId = Nothing
-    }
+  MirrorConfig'
+    {_mcURL = Nothing, _mcDeployKeyId = Nothing, _mcWebhookId = Nothing}
+
 
 -- | URL of the main repository at the other hosting service.
 mcURL :: Lens' MirrorConfig (Maybe Text)
@@ -987,11 +1024,14 @@ instance ToJSON MirrorConfig where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -1005,11 +1045,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

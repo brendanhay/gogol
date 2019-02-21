@@ -54,10 +54,13 @@ type WebAppsGetResource =
 -- | Gets an existing web app.
 --
 -- /See:/ 'webAppsGet' smart constructor.
-data WebAppsGet = WebAppsGet'
+data WebAppsGet =
+  WebAppsGet'
     { _wagWebAppId     :: !Text
     , _wagEnterpriseId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebAppsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ webAppsGet
     -> Text -- ^ 'wagEnterpriseId'
     -> WebAppsGet
 webAppsGet pWagWebAppId_ pWagEnterpriseId_ =
-    WebAppsGet'
-    { _wagWebAppId = pWagWebAppId_
-    , _wagEnterpriseId = pWagEnterpriseId_
-    }
+  WebAppsGet'
+    {_wagWebAppId = pWagWebAppId_, _wagEnterpriseId = pWagEnterpriseId_}
+
 
 -- | The ID of the web app.
 wagWebAppId :: Lens' WebAppsGet Text

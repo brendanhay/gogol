@@ -67,7 +67,8 @@ type ActionResultsGetResource =
 -- requested \`ActionResult\` is not in the cache.
 --
 -- /See:/ 'actionResultsGet' smart constructor.
-data ActionResultsGet = ActionResultsGet'
+data ActionResultsGet =
+  ActionResultsGet'
     { _argSizeBytes      :: !(Textual Int64)
     , _argXgafv          :: !(Maybe Xgafv)
     , _argHash           :: !Text
@@ -76,7 +77,9 @@ data ActionResultsGet = ActionResultsGet'
     , _argUploadType     :: !(Maybe Text)
     , _argInstanceName   :: !Text
     , _argCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActionResultsGet' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ actionResultsGet
     -> Text -- ^ 'argInstanceName'
     -> ActionResultsGet
 actionResultsGet pArgSizeBytes_ pArgHash_ pArgInstanceName_ =
-    ActionResultsGet'
+  ActionResultsGet'
     { _argSizeBytes = _Coerce # pArgSizeBytes_
     , _argXgafv = Nothing
     , _argHash = pArgHash_
@@ -113,6 +116,7 @@ actionResultsGet pArgSizeBytes_ pArgHash_ pArgInstanceName_ =
     , _argInstanceName = pArgInstanceName_
     , _argCallback = Nothing
     }
+
 
 -- | The size of the blob, in bytes.
 argSizeBytes :: Lens' ActionResultsGet Int64

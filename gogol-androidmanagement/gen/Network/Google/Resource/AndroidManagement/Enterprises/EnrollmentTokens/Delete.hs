@@ -61,14 +61,17 @@ type EnterprisesEnrollmentTokensDeleteResource =
 -- preventing its future use.
 --
 -- /See:/ 'enterprisesEnrollmentTokensDelete' smart constructor.
-data EnterprisesEnrollmentTokensDelete = EnterprisesEnrollmentTokensDelete'
+data EnterprisesEnrollmentTokensDelete =
+  EnterprisesEnrollmentTokensDelete'
     { _eetdXgafv          :: !(Maybe Xgafv)
     , _eetdUploadProtocol :: !(Maybe Text)
     , _eetdAccessToken    :: !(Maybe Text)
     , _eetdUploadType     :: !(Maybe Text)
     , _eetdName           :: !Text
     , _eetdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnterprisesEnrollmentTokensDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ enterprisesEnrollmentTokensDelete
     :: Text -- ^ 'eetdName'
     -> EnterprisesEnrollmentTokensDelete
 enterprisesEnrollmentTokensDelete pEetdName_ =
-    EnterprisesEnrollmentTokensDelete'
+  EnterprisesEnrollmentTokensDelete'
     { _eetdXgafv = Nothing
     , _eetdUploadProtocol = Nothing
     , _eetdAccessToken = Nothing
@@ -97,6 +100,7 @@ enterprisesEnrollmentTokensDelete pEetdName_ =
     , _eetdName = pEetdName_
     , _eetdCallback = Nothing
     }
+
 
 -- | V1 error format.
 eetdXgafv :: Lens' EnterprisesEnrollmentTokensDelete (Maybe Xgafv)
@@ -132,7 +136,8 @@ eetdCallback
   = lens _eetdCallback (\ s a -> s{_eetdCallback = a})
 
 instance GoogleRequest
-         EnterprisesEnrollmentTokensDelete where
+           EnterprisesEnrollmentTokensDelete
+         where
         type Rs EnterprisesEnrollmentTokensDelete = Empty
         type Scopes EnterprisesEnrollmentTokensDelete =
              '["https://www.googleapis.com/auth/androidmanagement"]

@@ -58,11 +58,14 @@ type ManagementWebPropertiesUpdateResource =
 -- | Updates an existing web property.
 --
 -- /See:/ 'managementWebPropertiesUpdate' smart constructor.
-data ManagementWebPropertiesUpdate = ManagementWebPropertiesUpdate'
+data ManagementWebPropertiesUpdate =
+  ManagementWebPropertiesUpdate'
     { _mwpuWebPropertyId :: !Text
     , _mwpuPayload       :: !WebProperty
     , _mwpuAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementWebPropertiesUpdate' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ managementWebPropertiesUpdate
     -> Text -- ^ 'mwpuAccountId'
     -> ManagementWebPropertiesUpdate
 managementWebPropertiesUpdate pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ =
-    ManagementWebPropertiesUpdate'
+  ManagementWebPropertiesUpdate'
     { _mwpuWebPropertyId = pMwpuWebPropertyId_
     , _mwpuPayload = pMwpuPayload_
     , _mwpuAccountId = pMwpuAccountId_
     }
+
 
 -- | Web property ID
 mwpuWebPropertyId :: Lens' ManagementWebPropertiesUpdate Text

@@ -57,11 +57,14 @@ type TablesInsertResource =
 -- | Creates a new, empty table in the dataset.
 --
 -- /See:/ 'tablesInsert' smart constructor.
-data TablesInsert = TablesInsert'
+data TablesInsert =
+  TablesInsert'
     { _tiPayload   :: !Table
     , _tiDataSetId :: !Text
     , _tiProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TablesInsert' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ tablesInsert
     -> Text -- ^ 'tiProjectId'
     -> TablesInsert
 tablesInsert pTiPayload_ pTiDataSetId_ pTiProjectId_ =
-    TablesInsert'
+  TablesInsert'
     { _tiPayload = pTiPayload_
     , _tiDataSetId = pTiDataSetId_
     , _tiProjectId = pTiProjectId_
     }
+
 
 -- | Multipart request metadata.
 tiPayload :: Lens' TablesInsert Table

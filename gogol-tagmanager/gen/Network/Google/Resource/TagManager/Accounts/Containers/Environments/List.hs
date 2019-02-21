@@ -54,10 +54,13 @@ type AccountsContainersEnvironmentsListResource =
 -- | Lists all GTM Environments of a GTM Container.
 --
 -- /See:/ 'accountsContainersEnvironmentsList' smart constructor.
-data AccountsContainersEnvironmentsList = AccountsContainersEnvironmentsList'
+data AccountsContainersEnvironmentsList =
+  AccountsContainersEnvironmentsList'
     { _acelParent    :: !Text
     , _acelPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersEnvironmentsList' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ accountsContainersEnvironmentsList
     :: Text -- ^ 'acelParent'
     -> AccountsContainersEnvironmentsList
 accountsContainersEnvironmentsList pAcelParent_ =
-    AccountsContainersEnvironmentsList'
-    { _acelParent = pAcelParent_
-    , _acelPageToken = Nothing
-    }
+  AccountsContainersEnvironmentsList'
+    {_acelParent = pAcelParent_, _acelPageToken = Nothing}
+
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}
@@ -88,7 +90,8 @@ acelPageToken
       (\ s a -> s{_acelPageToken = a})
 
 instance GoogleRequest
-         AccountsContainersEnvironmentsList where
+           AccountsContainersEnvironmentsList
+         where
         type Rs AccountsContainersEnvironmentsList =
              ListEnvironmentsResponse
         type Scopes AccountsContainersEnvironmentsList =

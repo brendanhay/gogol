@@ -78,7 +78,8 @@ type ServicesTenancyUnitsAttachProjectResource =
 -- project is reserved through AddTenantProject. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsAttachProject' smart constructor.
-data ServicesTenancyUnitsAttachProject = ServicesTenancyUnitsAttachProject'
+data ServicesTenancyUnitsAttachProject =
+  ServicesTenancyUnitsAttachProject'
     { _stuapXgafv          :: !(Maybe Xgafv)
     , _stuapUploadProtocol :: !(Maybe Text)
     , _stuapAccessToken    :: !(Maybe Text)
@@ -86,7 +87,9 @@ data ServicesTenancyUnitsAttachProject = ServicesTenancyUnitsAttachProject'
     , _stuapPayload        :: !AttachTenantProjectRequest
     , _stuapName           :: !Text
     , _stuapCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesTenancyUnitsAttachProject' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ servicesTenancyUnitsAttachProject
     -> Text -- ^ 'stuapName'
     -> ServicesTenancyUnitsAttachProject
 servicesTenancyUnitsAttachProject pStuapPayload_ pStuapName_ =
-    ServicesTenancyUnitsAttachProject'
+  ServicesTenancyUnitsAttachProject'
     { _stuapXgafv = Nothing
     , _stuapUploadProtocol = Nothing
     , _stuapAccessToken = Nothing
@@ -119,6 +122,7 @@ servicesTenancyUnitsAttachProject pStuapPayload_ pStuapName_ =
     , _stuapName = pStuapName_
     , _stuapCallback = Nothing
     }
+
 
 -- | V1 error format.
 stuapXgafv :: Lens' ServicesTenancyUnitsAttachProject (Maybe Xgafv)
@@ -160,7 +164,8 @@ stuapCallback
       (\ s a -> s{_stuapCallback = a})
 
 instance GoogleRequest
-         ServicesTenancyUnitsAttachProject where
+           ServicesTenancyUnitsAttachProject
+         where
         type Rs ServicesTenancyUnitsAttachProject = Operation
         type Scopes ServicesTenancyUnitsAttachProject =
              '["https://www.googleapis.com/auth/cloud-platform"]

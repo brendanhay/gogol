@@ -65,14 +65,17 @@ type ZoneOperationsListResource =
 -- zone.
 --
 -- /See:/ 'zoneOperationsList' smart constructor.
-data ZoneOperationsList = ZoneOperationsList'
+data ZoneOperationsList =
+  ZoneOperationsList'
     { _zolOrderBy    :: !(Maybe Text)
     , _zolProject    :: !Text
     , _zolZone       :: !Text
     , _zolFilter     :: !(Maybe Text)
     , _zolPageToken  :: !(Maybe Text)
     , _zolMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ZoneOperationsList' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ zoneOperationsList
     -> Text -- ^ 'zolZone'
     -> ZoneOperationsList
 zoneOperationsList pZolProject_ pZolZone_ =
-    ZoneOperationsList'
+  ZoneOperationsList'
     { _zolOrderBy = Nothing
     , _zolProject = pZolProject_
     , _zolZone = pZolZone_
@@ -102,6 +105,7 @@ zoneOperationsList pZolProject_ pZolZone_ =
     , _zolPageToken = Nothing
     , _zolMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

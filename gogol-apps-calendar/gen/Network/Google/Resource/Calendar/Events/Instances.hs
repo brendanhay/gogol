@@ -74,7 +74,8 @@ type EventsInstancesResource =
 -- | Returns instances of the specified recurring event.
 --
 -- /See:/ 'eventsInstances' smart constructor.
-data EventsInstances = EventsInstances'
+data EventsInstances =
+  EventsInstances'
     { _eCalendarId         :: !Text
     , _eTimeMin            :: !(Maybe DateTime')
     , _eShowDeleted        :: !(Maybe Bool)
@@ -86,7 +87,9 @@ data EventsInstances = EventsInstances'
     , _eAlwaysIncludeEmail :: !(Maybe Bool)
     , _eTimeMax            :: !(Maybe DateTime')
     , _eEventId            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventsInstances' with the minimum fields required to make a request.
 --
@@ -118,7 +121,7 @@ eventsInstances
     -> Text -- ^ 'eEventId'
     -> EventsInstances
 eventsInstances pECalendarId_ pEEventId_ =
-    EventsInstances'
+  EventsInstances'
     { _eCalendarId = pECalendarId_
     , _eTimeMin = Nothing
     , _eShowDeleted = Nothing
@@ -131,6 +134,7 @@ eventsInstances pECalendarId_ pEEventId_ =
     , _eTimeMax = Nothing
     , _eEventId = pEEventId_
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

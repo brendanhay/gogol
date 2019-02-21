@@ -66,14 +66,17 @@ type InvitationsGetResource =
 -- invitation exists with the requested ID.
 --
 -- /See:/ 'invitationsGet' smart constructor.
-data InvitationsGet = InvitationsGet'
+data InvitationsGet =
+  InvitationsGet'
     { _igXgafv          :: !(Maybe Xgafv)
     , _igUploadProtocol :: !(Maybe Text)
     , _igAccessToken    :: !(Maybe Text)
     , _igUploadType     :: !(Maybe Text)
     , _igId             :: !Text
     , _igCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InvitationsGet' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ invitationsGet
     :: Text -- ^ 'igId'
     -> InvitationsGet
 invitationsGet pIgId_ =
-    InvitationsGet'
+  InvitationsGet'
     { _igXgafv = Nothing
     , _igUploadProtocol = Nothing
     , _igAccessToken = Nothing
@@ -102,6 +105,7 @@ invitationsGet pIgId_ =
     , _igId = pIgId_
     , _igCallback = Nothing
     }
+
 
 -- | V1 error format.
 igXgafv :: Lens' InvitationsGet (Maybe Xgafv)

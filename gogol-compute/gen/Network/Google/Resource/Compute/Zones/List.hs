@@ -60,13 +60,16 @@ type ZonesListResource =
 -- | Retrieves the list of Zone resources available to the specified project.
 --
 -- /See:/ 'zonesList' smart constructor.
-data ZonesList = ZonesList'
+data ZonesList =
+  ZonesList'
     { _zlOrderBy    :: !(Maybe Text)
     , _zlProject    :: !Text
     , _zlFilter     :: !(Maybe Text)
     , _zlPageToken  :: !(Maybe Text)
     , _zlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ZonesList' with the minimum fields required to make a request.
 --
@@ -85,13 +88,14 @@ zonesList
     :: Text -- ^ 'zlProject'
     -> ZonesList
 zonesList pZlProject_ =
-    ZonesList'
+  ZonesList'
     { _zlOrderBy = Nothing
     , _zlProject = pZlProject_
     , _zlFilter = Nothing
     , _zlPageToken = Nothing
     , _zlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

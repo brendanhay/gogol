@@ -56,10 +56,13 @@ type DevicesListResource =
 -- | Retrieves the IDs of all of a user\'s devices.
 --
 -- /See:/ 'devicesList' smart constructor.
-data DevicesList = DevicesList'
+data DevicesList =
+  DevicesList'
     { _dlEnterpriseId :: !Text
     , _dlUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DevicesList' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ devicesList
     -> Text -- ^ 'dlUserId'
     -> DevicesList
 devicesList pDlEnterpriseId_ pDlUserId_ =
-    DevicesList'
-    { _dlEnterpriseId = pDlEnterpriseId_
-    , _dlUserId = pDlUserId_
-    }
+  DevicesList' {_dlEnterpriseId = pDlEnterpriseId_, _dlUserId = pDlUserId_}
+
 
 -- | The ID of the enterprise.
 dlEnterpriseId :: Lens' DevicesList Text

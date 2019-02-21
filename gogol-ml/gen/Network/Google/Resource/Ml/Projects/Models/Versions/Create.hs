@@ -75,7 +75,8 @@ type ProjectsModelsVersionsCreateResource =
 -- [projects.models.versions.setDefault](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/setDefault).
 --
 -- /See:/ 'projectsModelsVersionsCreate' smart constructor.
-data ProjectsModelsVersionsCreate = ProjectsModelsVersionsCreate'
+data ProjectsModelsVersionsCreate =
+  ProjectsModelsVersionsCreate'
     { _pmvcParent         :: !Text
     , _pmvcXgafv          :: !(Maybe Xgafv)
     , _pmvcUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsModelsVersionsCreate = ProjectsModelsVersionsCreate'
     , _pmvcUploadType     :: !(Maybe Text)
     , _pmvcPayload        :: !GoogleCloudMlV1__Version
     , _pmvcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsModelsVersionsCreate' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsModelsVersionsCreate
     -> GoogleCloudMlV1__Version -- ^ 'pmvcPayload'
     -> ProjectsModelsVersionsCreate
 projectsModelsVersionsCreate pPmvcParent_ pPmvcPayload_ =
-    ProjectsModelsVersionsCreate'
+  ProjectsModelsVersionsCreate'
     { _pmvcParent = pPmvcParent_
     , _pmvcXgafv = Nothing
     , _pmvcUploadProtocol = Nothing
@@ -116,6 +119,7 @@ projectsModelsVersionsCreate pPmvcParent_ pPmvcPayload_ =
     , _pmvcPayload = pPmvcPayload_
     , _pmvcCallback = Nothing
     }
+
 
 -- | Required. The name of the model.
 pmvcParent :: Lens' ProjectsModelsVersionsCreate Text

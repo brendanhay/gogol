@@ -56,11 +56,14 @@ type PosDeleteResource =
 -- | Deletes a store for the given merchant.
 --
 -- /See:/ 'posDelete' smart constructor.
-data PosDelete = PosDelete'
+data PosDelete =
+  PosDelete'
     { _pdMerchantId       :: !(Textual Word64)
     , _pdStoreCode        :: !Text
     , _pdTargetMerchantId :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PosDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ posDelete
     -> Word64 -- ^ 'pdTargetMerchantId'
     -> PosDelete
 posDelete pPdMerchantId_ pPdStoreCode_ pPdTargetMerchantId_ =
-    PosDelete'
+  PosDelete'
     { _pdMerchantId = _Coerce # pPdMerchantId_
     , _pdStoreCode = pPdStoreCode_
     , _pdTargetMerchantId = _Coerce # pPdTargetMerchantId_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 pdMerchantId :: Lens' PosDelete Word64

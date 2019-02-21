@@ -64,7 +64,8 @@ type ProjectsLocationsEnvironmentsPatchResource =
 -- | Update an environment.
 --
 -- /See:/ 'projectsLocationsEnvironmentsPatch' smart constructor.
-data ProjectsLocationsEnvironmentsPatch = ProjectsLocationsEnvironmentsPatch'
+data ProjectsLocationsEnvironmentsPatch =
+  ProjectsLocationsEnvironmentsPatch'
     { _plepXgafv          :: !(Maybe Xgafv)
     , _plepUploadProtocol :: !(Maybe Text)
     , _plepUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data ProjectsLocationsEnvironmentsPatch = ProjectsLocationsEnvironmentsPatch'
     , _plepPayload        :: !Environment
     , _plepName           :: !Text
     , _plepCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsEnvironmentsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsEnvironmentsPatch
     -> Text -- ^ 'plepName'
     -> ProjectsLocationsEnvironmentsPatch
 projectsLocationsEnvironmentsPatch pPlepPayload_ pPlepName_ =
-    ProjectsLocationsEnvironmentsPatch'
+  ProjectsLocationsEnvironmentsPatch'
     { _plepXgafv = Nothing
     , _plepUploadProtocol = Nothing
     , _plepUpdateMask = Nothing
@@ -109,6 +112,7 @@ projectsLocationsEnvironmentsPatch pPlepPayload_ pPlepName_ =
     , _plepName = pPlepName_
     , _plepCallback = Nothing
     }
+
 
 -- | V1 error format.
 plepXgafv :: Lens' ProjectsLocationsEnvironmentsPatch (Maybe Xgafv)
@@ -152,17 +156,89 @@ plepUploadProtocol
 -- be the following: { \"config\":{ \"softwareConfig\":{ \"pypiPackages\":{
 -- \"botocore\":\"==1.7.14\" } } } } **Note:** Only the following fields
 -- can be updated:
--- >   ----------------------------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- >   __Mask__                                                    __Purpose__
--- >   config.softwareConfig.pypiPackages                          Replace all custom custom PyPI packages. If a replacement package map is not included in \`environment\`, all custom PyPI packages are cleared. It is an error to provide both this mask and a mask specifying an individual package.
--- >   config.softwareConfig.pypiPackages.packagename              Update the custom PyPI package packagename, preserving other packages. To delete the package, include it in \`updateMask\`, and omit the mapping for it in \`environment.config.softwareConfig.pypiPackages\`. It is an error to provide both a mask of this form and the \"config.softwareConfig.pypiPackages\" mask.
--- >   labels                                                      Replace all environment labels. If a replacement labels map is not included in \`environment\`, all labels are cleared. It is an error to provide both this mask and a mask specifying one or more individual labels.
--- >   labels.labelName                                            Set the label named labelName, while preserving other labels. To delete the label, include it in \`updateMask\` and omit its mapping in \`environment.labels\`. It is an error to provide both a mask of this form and the \"labels\" mask.
--- >   config.nodeCount                                            Horizontally scale the number of nodes in the environment. An integer greater than or equal to 3 must be provided in the \`config.nodeCount\` field.
--- >   config.softwareConfig.airflowConfigOverrides                Replace all Apache Airflow config overrides. If a replacement config overrides map is not included in \`environment\`, all config overrides are cleared. It is an error to provide both this mask and a mask specifying one or more individual config overrides.
--- >   config.softwareConfig.airflowConfigOverrides.section-name   Override the Apache Airflow config property name in the section named section, preserving other properties. To delete the property override, include it in \`updateMask\` and omit its mapping in \`environment.config.softwareConfig.airflowConfigOverrides\`. It is an error to provide both a mask of this form and the \"config.softwareConfig.airflowConfigOverrides\" mask.
--- >   config.softwareConfig.envVariables                          Replace all environment variables. If a replacement environment variable map is not included in \`environment\`, all custom environment variables are cleared. It is an error to provide both this mask and a mask specifying one or more individual environment variables.
--- >   ----------------------------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- > +-----------------------------------+-----------------------------------+
+-- > | __Mask__                          | __Purpose__                       |
+-- > +-----------------------------------+-----------------------------------+
+-- > | config.softwareConfig.pypiPackage | Replace all custom custom PyPI    |
+-- > | s                                 | packages. If a replacement        |
+-- > |                                   | package map is not included in    |
+-- > |                                   | \`environment\`, all custom PyPI  |
+-- > |                                   | packages are cleared. It is an    |
+-- > |                                   | error to provide both this mask   |
+-- > |                                   | and a mask specifying an          |
+-- > |                                   | individual package.               |
+-- > +-----------------------------------+-----------------------------------+
+-- > | config.softwareConfig.pypiPackage | Update the custom PyPI package    |
+-- > | s.packagename                     | packagename, preserving other     |
+-- > |                                   | packages. To delete the package,  |
+-- > |                                   | include it in \`updateMask\`, and |
+-- > |                                   | omit the mapping for it in        |
+-- > |                                   | \`environment.config.softwareConf |
+-- > |                                   | ig.pypiPackages\`.                |
+-- > |                                   | It is an error to provide both a  |
+-- > |                                   | mask of this form and the         |
+-- > |                                   | \"config.softwareConfig.pypiPacka |
+-- > |                                   | ges\"                             |
+-- > |                                   | mask.                             |
+-- > +-----------------------------------+-----------------------------------+
+-- > | labels                            | Replace all environment labels.   |
+-- > |                                   | If a replacement labels map is    |
+-- > |                                   | not included in \`environment\`,  |
+-- > |                                   | all labels are cleared. It is an  |
+-- > |                                   | error to provide both this mask   |
+-- > |                                   | and a mask specifying one or more |
+-- > |                                   | individual labels.                |
+-- > +-----------------------------------+-----------------------------------+
+-- > | labels.labelName                  | Set the label named labelName,    |
+-- > |                                   | while preserving other labels. To |
+-- > |                                   | delete the label, include it in   |
+-- > |                                   | \`updateMask\` and omit its       |
+-- > |                                   | mapping in                        |
+-- > |                                   | \`environment.labels\`. It is an  |
+-- > |                                   | error to provide both a mask of   |
+-- > |                                   | this form and the \"labels\"      |
+-- > |                                   | mask.                             |
+-- > +-----------------------------------+-----------------------------------+
+-- > | config.nodeCount                  | Horizontally scale the number of  |
+-- > |                                   | nodes in the environment. An      |
+-- > |                                   | integer greater than or equal to  |
+-- > |                                   | 3 must be provided in the         |
+-- > |                                   | \`config.nodeCount\` field.       |
+-- > +-----------------------------------+-----------------------------------+
+-- > | config.softwareConfig.airflowConf | Replace all Apache Airflow config |
+-- > | igOverrides                       | overrides. If a replacement       |
+-- > |                                   | config overrides map is not       |
+-- > |                                   | included in \`environment\`, all  |
+-- > |                                   | config overrides are cleared. It  |
+-- > |                                   | is an error to provide both this  |
+-- > |                                   | mask and a mask specifying one or |
+-- > |                                   | more individual config overrides. |
+-- > +-----------------------------------+-----------------------------------+
+-- > | config.softwareConfig.airflowConf | Override the Apache Airflow       |
+-- > | igOverrides.section-name          | config property name in the       |
+-- > |                                   | section named section, preserving |
+-- > |                                   | other properties. To delete the   |
+-- > |                                   | property override, include it in  |
+-- > |                                   | \`updateMask\` and omit its       |
+-- > |                                   | mapping in                        |
+-- > |                                   | \`environment.config.softwareConf |
+-- > |                                   | ig.airflowConfigOverrides\`.      |
+-- > |                                   | It is an error to provide both a  |
+-- > |                                   | mask of this form and the         |
+-- > |                                   | \"config.softwareConfig.airflowCo |
+-- > |                                   | nfigOverrides\"                   |
+-- > |                                   | mask.                             |
+-- > +-----------------------------------+-----------------------------------+
+-- > | config.softwareConfig.envVariable | Replace all environment           |
+-- > | s                                 | variables. If a replacement       |
+-- > |                                   | environment variable map is not   |
+-- > |                                   | included in \`environment\`, all  |
+-- > |                                   | custom environment variables are  |
+-- > |                                   | cleared. It is an error to        |
+-- > |                                   | provide both this mask and a mask |
+-- > |                                   | specifying one or more individual |
+-- > |                                   | environment variables.            |
+-- > +-----------------------------------+-----------------------------------+
 plepUpdateMask :: Lens' ProjectsLocationsEnvironmentsPatch (Maybe GFieldMask)
 plepUpdateMask
   = lens _plepUpdateMask
@@ -196,7 +272,8 @@ plepCallback
   = lens _plepCallback (\ s a -> s{_plepCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsEnvironmentsPatch where
+           ProjectsLocationsEnvironmentsPatch
+         where
         type Rs ProjectsLocationsEnvironmentsPatch =
              Operation
         type Scopes ProjectsLocationsEnvironmentsPatch =

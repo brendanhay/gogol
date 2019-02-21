@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Performs a reset on the instance. For more information, see Resetting an
--- instance.
+-- Performs a reset on the instance. This is a hard reset; the VM does not
+-- do a graceful shutdown. For more information, see Resetting an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.reset@.
 module Network.Google.Resource.Compute.Instances.Reset
@@ -58,16 +58,19 @@ type InstancesResetResource =
                        QueryParam "requestId" Text :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
--- | Performs a reset on the instance. For more information, see Resetting an
--- instance.
+-- | Performs a reset on the instance. This is a hard reset; the VM does not
+-- do a graceful shutdown. For more information, see Resetting an instance.
 --
 -- /See:/ 'instancesReset' smart constructor.
-data InstancesReset = InstancesReset'
+data InstancesReset =
+  InstancesReset'
     { _irRequestId :: !(Maybe Text)
     , _irProject   :: !Text
     , _irZone      :: !Text
     , _irInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesReset' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ instancesReset
     -> Text -- ^ 'irInstance'
     -> InstancesReset
 instancesReset pIrProject_ pIrZone_ pIrInstance_ =
-    InstancesReset'
+  InstancesReset'
     { _irRequestId = Nothing
     , _irProject = pIrProject_
     , _irZone = pIrZone_
     , _irInstance = pIrInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

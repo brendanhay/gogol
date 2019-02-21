@@ -169,6 +169,9 @@ module Network.Google.ToolResults.Types
     , fileReference
     , frFileURI
 
+    -- * IndividualOutcomeOutcomeSummary
+    , IndividualOutcomeOutcomeSummary (..)
+
     -- * CPUInfo
     , CPUInfo
     , cpuInfo
@@ -322,6 +325,7 @@ module Network.Google.ToolResults.Types
     , sName
     , sOutcome
     , sLabels
+    , sMultiStep
     , sDeviceUsageDuration
     , sDescription
 
@@ -394,6 +398,12 @@ module Network.Google.ToolResults.Types
     -- * BasicPerfSampleSeriesSampleSeriesLabel
     , BasicPerfSampleSeriesSampleSeriesLabel (..)
 
+    -- * IndividualOutcome
+    , IndividualOutcome
+    , individualOutcome
+    , ioStepId
+    , ioOutcomeSummary
+
     -- * TestSuiteOverview
     , TestSuiteOverview
     , testSuiteOverview
@@ -403,6 +413,13 @@ module Network.Google.ToolResults.Types
     , tsoName
     , tsoFailureCount
     , tsoTotalCount
+
+    -- * MultiStep
+    , MultiStep
+    , multiStep
+    , msMultistepNumber
+    , msPrimaryStepId
+    , msPrimaryStep
 
     -- * Duration
     , Duration
@@ -442,6 +459,15 @@ module Network.Google.ToolResults.Types
     , bpssPerfMetricType
     , bpssSampleSeriesLabel
 
+    -- * PrimaryStepRollUp
+    , PrimaryStepRollUp (..)
+
+    -- * PrimaryStep
+    , PrimaryStep
+    , primaryStep
+    , psRollUp
+    , psIndividualOutcome
+
     -- * PerfMetricsSummaryPerfMetricsItem
     , PerfMetricsSummaryPerfMetricsItem (..)
 
@@ -465,4 +491,4 @@ toolResultsService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

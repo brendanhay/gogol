@@ -101,14 +101,17 @@ type RegistrationsCreateResource =
 -- it.
 --
 -- /See:/ 'registrationsCreate' smart constructor.
-data RegistrationsCreate = RegistrationsCreate'
+data RegistrationsCreate =
+  RegistrationsCreate'
     { _rcXgafv          :: !(Maybe Xgafv)
     , _rcUploadProtocol :: !(Maybe Text)
     , _rcAccessToken    :: !(Maybe Text)
     , _rcUploadType     :: !(Maybe Text)
     , _rcPayload        :: !Registration
     , _rcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegistrationsCreate' with the minimum fields required to make a request.
 --
@@ -129,7 +132,7 @@ registrationsCreate
     :: Registration -- ^ 'rcPayload'
     -> RegistrationsCreate
 registrationsCreate pRcPayload_ =
-    RegistrationsCreate'
+  RegistrationsCreate'
     { _rcXgafv = Nothing
     , _rcUploadProtocol = Nothing
     , _rcAccessToken = Nothing
@@ -137,6 +140,7 @@ registrationsCreate pRcPayload_ =
     , _rcPayload = pRcPayload_
     , _rcCallback = Nothing
     }
+
 
 -- | V1 error format.
 rcXgafv :: Lens' RegistrationsCreate (Maybe Xgafv)

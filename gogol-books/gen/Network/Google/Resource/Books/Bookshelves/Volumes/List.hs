@@ -63,14 +63,17 @@ type BookshelvesVolumesListResource =
 -- | Retrieves volumes in a specific bookshelf for the specified user.
 --
 -- /See:/ 'bookshelvesVolumesList' smart constructor.
-data BookshelvesVolumesList = BookshelvesVolumesList'
+data BookshelvesVolumesList =
+  BookshelvesVolumesList'
     { _bvlUserId        :: !Text
     , _bvlShelf         :: !Text
     , _bvlSource        :: !(Maybe Text)
     , _bvlStartIndex    :: !(Maybe (Textual Word32))
     , _bvlMaxResults    :: !(Maybe (Textual Word32))
     , _bvlShowPreOrders :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BookshelvesVolumesList' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ bookshelvesVolumesList
     -> Text -- ^ 'bvlShelf'
     -> BookshelvesVolumesList
 bookshelvesVolumesList pBvlUserId_ pBvlShelf_ =
-    BookshelvesVolumesList'
+  BookshelvesVolumesList'
     { _bvlUserId = pBvlUserId_
     , _bvlShelf = pBvlShelf_
     , _bvlSource = Nothing
@@ -100,6 +103,7 @@ bookshelvesVolumesList pBvlUserId_ pBvlShelf_ =
     , _bvlMaxResults = Nothing
     , _bvlShowPreOrders = Nothing
     }
+
 
 -- | ID of user for whom to retrieve bookshelf volumes.
 bvlUserId :: Lens' BookshelvesVolumesList Text

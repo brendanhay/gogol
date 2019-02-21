@@ -52,14 +52,16 @@ type QuestsResetAllForAllPlayersResource =
 --
 -- /See:/ 'questsResetAllForAllPlayers' smart constructor.
 data QuestsResetAllForAllPlayers =
-    QuestsResetAllForAllPlayers'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  QuestsResetAllForAllPlayers'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuestsResetAllForAllPlayers' with the minimum fields required to make a request.
 --
 questsResetAllForAllPlayers
     :: QuestsResetAllForAllPlayers
 questsResetAllForAllPlayers = QuestsResetAllForAllPlayers'
+
 
 instance GoogleRequest QuestsResetAllForAllPlayers
          where

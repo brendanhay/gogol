@@ -61,12 +61,15 @@ type ProjectsHistoriesExecutionsClustersGetResource =
 -- | Retrieves a single screenshot cluster by its ID
 --
 -- /See:/ 'projectsHistoriesExecutionsClustersGet' smart constructor.
-data ProjectsHistoriesExecutionsClustersGet = ProjectsHistoriesExecutionsClustersGet'
+data ProjectsHistoriesExecutionsClustersGet =
+  ProjectsHistoriesExecutionsClustersGet'
     { _phecgExecutionId :: !Text
     , _phecgClusterId   :: !Text
     , _phecgHistoryId   :: !Text
     , _phecgProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsClustersGet' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ projectsHistoriesExecutionsClustersGet
     -> Text -- ^ 'phecgProjectId'
     -> ProjectsHistoriesExecutionsClustersGet
 projectsHistoriesExecutionsClustersGet pPhecgExecutionId_ pPhecgClusterId_ pPhecgHistoryId_ pPhecgProjectId_ =
-    ProjectsHistoriesExecutionsClustersGet'
+  ProjectsHistoriesExecutionsClustersGet'
     { _phecgExecutionId = pPhecgExecutionId_
     , _phecgClusterId = pPhecgClusterId_
     , _phecgHistoryId = pPhecgHistoryId_
     , _phecgProjectId = pPhecgProjectId_
     }
+
 
 -- | An Execution id. Required.
 phecgExecutionId :: Lens' ProjectsHistoriesExecutionsClustersGet Text
@@ -118,7 +122,8 @@ phecgProjectId
       (\ s a -> s{_phecgProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsClustersGet where
+           ProjectsHistoriesExecutionsClustersGet
+         where
         type Rs ProjectsHistoriesExecutionsClustersGet =
              ScreenshotCluster
         type Scopes ProjectsHistoriesExecutionsClustersGet =

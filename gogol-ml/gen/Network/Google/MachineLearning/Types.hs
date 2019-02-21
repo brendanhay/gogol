@@ -242,6 +242,12 @@ module Network.Google.MachineLearning.Types
     , grsCode
     , grsMessage
 
+    -- * GoogleCloudMlV1__ReplicaConfig
+    , GoogleCloudMlV1__ReplicaConfig
+    , googleCloudMlV1__ReplicaConfig
+    , gcmvrcImageURI
+    , gcmvrcAcceleratorConfig
+
     -- * GoogleCloudMlV1__Config
     , GoogleCloudMlV1__Config
     , googleCloudMlV1__Config
@@ -323,6 +329,7 @@ module Network.Google.MachineLearning.Types
     , GoogleCloudMlV1__TrainingInput
     , googleCloudMlV1__TrainingInput
     , gcmvtiMasterType
+    , gcmvtiWorkerConfig
     , gcmvtiParameterServerCount
     , gcmvtiArgs
     , gcmvtiWorkerCount
@@ -330,12 +337,14 @@ module Network.Google.MachineLearning.Types
     , gcmvtiPythonVersion
     , gcmvtiRuntimeVersion
     , gcmvtiWorkerType
+    , gcmvtiMasterConfig
     , gcmvtiPythonModule
     , gcmvtiParameterServerType
     , gcmvtiHyperparameters
     , gcmvtiPackageURIs
     , gcmvtiScaleTier
     , gcmvtiRegion
+    , gcmvtiParameterServerConfig
 
     -- * GoogleRpc__StatusDetailsItem
     , GoogleRpc__StatusDetailsItem
@@ -435,4 +444,4 @@ machineLearningService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

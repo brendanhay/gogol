@@ -71,7 +71,8 @@ type ProjectsInstancesDatabasesTestIAMPermissionsResource
 -- instance. Otherwise returns an empty set of permissions.
 --
 -- /See:/ 'projectsInstancesDatabasesTestIAMPermissions' smart constructor.
-data ProjectsInstancesDatabasesTestIAMPermissions = ProjectsInstancesDatabasesTestIAMPermissions'
+data ProjectsInstancesDatabasesTestIAMPermissions =
+  ProjectsInstancesDatabasesTestIAMPermissions'
     { _pidtipXgafv          :: !(Maybe Xgafv)
     , _pidtipUploadProtocol :: !(Maybe Text)
     , _pidtipAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsInstancesDatabasesTestIAMPermissions = ProjectsInstancesDatabasesTe
     , _pidtipPayload        :: !TestIAMPermissionsRequest
     , _pidtipResource       :: !Text
     , _pidtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsInstancesDatabasesTestIAMPermissions
     -> Text -- ^ 'pidtipResource'
     -> ProjectsInstancesDatabasesTestIAMPermissions
 projectsInstancesDatabasesTestIAMPermissions pPidtipPayload_ pPidtipResource_ =
-    ProjectsInstancesDatabasesTestIAMPermissions'
+  ProjectsInstancesDatabasesTestIAMPermissions'
     { _pidtipXgafv = Nothing
     , _pidtipUploadProtocol = Nothing
     , _pidtipAccessToken = Nothing
@@ -112,6 +115,7 @@ projectsInstancesDatabasesTestIAMPermissions pPidtipPayload_ pPidtipResource_ =
     , _pidtipResource = pPidtipResource_
     , _pidtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidtipXgafv :: Lens' ProjectsInstancesDatabasesTestIAMPermissions (Maybe Xgafv)
@@ -157,7 +161,8 @@ pidtipCallback
       (\ s a -> s{_pidtipCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesTestIAMPermissions where
+           ProjectsInstancesDatabasesTestIAMPermissions
+         where
         type Rs ProjectsInstancesDatabasesTestIAMPermissions
              = TestIAMPermissionsResponse
         type Scopes

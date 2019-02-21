@@ -56,11 +56,14 @@ type AccountsAdClientsListResource =
 -- | List all hosted ad clients in the specified hosted account.
 --
 -- /See:/ 'accountsAdClientsList' smart constructor.
-data AccountsAdClientsList = AccountsAdClientsList'
+data AccountsAdClientsList =
+  AccountsAdClientsList'
     { _aaclAccountId  :: !Text
     , _aaclPageToken  :: !(Maybe Text)
     , _aaclMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsAdClientsList' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ accountsAdClientsList
     :: Text -- ^ 'aaclAccountId'
     -> AccountsAdClientsList
 accountsAdClientsList pAaclAccountId_ =
-    AccountsAdClientsList'
+  AccountsAdClientsList'
     { _aaclAccountId = pAaclAccountId_
     , _aaclPageToken = Nothing
     , _aaclMaxResults = Nothing
     }
+
 
 -- | Account for which to list ad clients.
 aaclAccountId :: Lens' AccountsAdClientsList Text

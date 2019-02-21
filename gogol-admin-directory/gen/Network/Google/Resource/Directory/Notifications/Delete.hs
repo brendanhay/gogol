@@ -55,10 +55,13 @@ type NotificationsDeleteResource =
 -- | Deletes a notification
 --
 -- /See:/ 'notificationsDelete' smart constructor.
-data NotificationsDelete = NotificationsDelete'
+data NotificationsDelete =
+  NotificationsDelete'
     { _ndCustomer       :: !Text
     , _ndNotificationId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NotificationsDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ notificationsDelete
     -> Text -- ^ 'ndNotificationId'
     -> NotificationsDelete
 notificationsDelete pNdCustomer_ pNdNotificationId_ =
-    NotificationsDelete'
-    { _ndCustomer = pNdCustomer_
-    , _ndNotificationId = pNdNotificationId_
-    }
+  NotificationsDelete'
+    {_ndCustomer = pNdCustomer_, _ndNotificationId = pNdNotificationId_}
+
 
 -- | The unique ID for the customer\'s G Suite account. The customerId is
 -- also returned as part of the Users resource.

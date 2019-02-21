@@ -59,12 +59,15 @@ type RepliesUpdateResource =
 -- | Updates a reply with patch semantics.
 --
 -- /See:/ 'repliesUpdate' smart constructor.
-data RepliesUpdate = RepliesUpdate'
+data RepliesUpdate =
+  RepliesUpdate'
     { _ruPayload   :: !Reply
     , _ruReplyId   :: !Text
     , _ruFileId    :: !Text
     , _ruCommentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepliesUpdate' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ repliesUpdate
     -> Text -- ^ 'ruCommentId'
     -> RepliesUpdate
 repliesUpdate pRuPayload_ pRuReplyId_ pRuFileId_ pRuCommentId_ =
-    RepliesUpdate'
+  RepliesUpdate'
     { _ruPayload = pRuPayload_
     , _ruReplyId = pRuReplyId_
     , _ruFileId = pRuFileId_
     , _ruCommentId = pRuCommentId_
     }
+
 
 -- | Multipart request metadata.
 ruPayload :: Lens' RepliesUpdate Reply

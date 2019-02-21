@@ -293,8 +293,8 @@ cloudIOTService
 
 -- | Register and manage devices in the Google Cloud IoT service
 cloudIOTScope :: Proxy '["https://www.googleapis.com/auth/cloudiot"]
-cloudIOTScope = Proxy;
+cloudIOTScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

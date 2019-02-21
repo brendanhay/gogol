@@ -56,11 +56,14 @@ type LiaSettingsUpdateResource =
 -- | Updates the LIA settings of the account.
 --
 -- /See:/ 'liaSettingsUpdate' smart constructor.
-data LiaSettingsUpdate = LiaSettingsUpdate'
+data LiaSettingsUpdate =
+  LiaSettingsUpdate'
     { _lsuMerchantId :: !(Textual Word64)
     , _lsuPayload    :: !LiaSettings
     , _lsuAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiaSettingsUpdate' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ liaSettingsUpdate
     -> Word64 -- ^ 'lsuAccountId'
     -> LiaSettingsUpdate
 liaSettingsUpdate pLsuMerchantId_ pLsuPayload_ pLsuAccountId_ =
-    LiaSettingsUpdate'
+  LiaSettingsUpdate'
     { _lsuMerchantId = _Coerce # pLsuMerchantId_
     , _lsuPayload = pLsuPayload_
     , _lsuAccountId = _Coerce # pLsuAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

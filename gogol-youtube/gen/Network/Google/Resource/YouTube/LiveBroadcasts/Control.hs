@@ -67,7 +67,8 @@ type LiveBroadcastsControlResource =
 -- stream.
 --
 -- /See:/ 'liveBroadcastsControl' smart constructor.
-data LiveBroadcastsControl = LiveBroadcastsControl'
+data LiveBroadcastsControl =
+  LiveBroadcastsControl'
     { _lbcPart                          :: !Text
     , _lbcOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbcOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -75,7 +76,9 @@ data LiveBroadcastsControl = LiveBroadcastsControl'
     , _lbcDisplaySlate                  :: !(Maybe Bool)
     , _lbcWalltime                      :: !(Maybe DateTime')
     , _lbcOffSetTimeMs                  :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveBroadcastsControl' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ liveBroadcastsControl
     -> Text -- ^ 'lbcId'
     -> LiveBroadcastsControl
 liveBroadcastsControl pLbcPart_ pLbcId_ =
-    LiveBroadcastsControl'
+  LiveBroadcastsControl'
     { _lbcPart = pLbcPart_
     , _lbcOnBehalfOfContentOwner = Nothing
     , _lbcOnBehalfOfContentOwnerChannel = Nothing
@@ -108,6 +111,7 @@ liveBroadcastsControl pLbcPart_ pLbcId_ =
     , _lbcWalltime = Nothing
     , _lbcOffSetTimeMs = Nothing
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- liveBroadcast resource properties that the API response will include.

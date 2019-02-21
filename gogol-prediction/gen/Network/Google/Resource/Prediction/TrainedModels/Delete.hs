@@ -54,10 +54,13 @@ type TrainedModelsDeleteResource =
 -- | Delete a trained model.
 --
 -- /See:/ 'trainedModelsDelete' smart constructor.
-data TrainedModelsDelete = TrainedModelsDelete'
+data TrainedModelsDelete =
+  TrainedModelsDelete'
     { _tmdProject :: !Text
     , _tmdId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TrainedModelsDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ trainedModelsDelete
     -> Text -- ^ 'tmdId'
     -> TrainedModelsDelete
 trainedModelsDelete pTmdProject_ pTmdId_ =
-    TrainedModelsDelete'
-    { _tmdProject = pTmdProject_
-    , _tmdId = pTmdId_
-    }
+  TrainedModelsDelete' {_tmdProject = pTmdProject_, _tmdId = pTmdId_}
+
 
 -- | The project associated with the model.
 tmdProject :: Lens' TrainedModelsDelete Text

@@ -380,8 +380,8 @@ vaultService
 
 -- | View your eDiscovery data
 ediscoveryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ediscovery.readonly"]
-ediscoveryReadOnlyScope = Proxy;
+ediscoveryReadOnlyScope = Proxy
 
 -- | Manage your eDiscovery data
 ediscoveryScope :: Proxy '["https://www.googleapis.com/auth/ediscovery"]
-ediscoveryScope = Proxy;
+ediscoveryScope = Proxy

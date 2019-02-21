@@ -72,7 +72,8 @@ type ProjectsOccurrencesTestIAMPermissionsResource =
 -- occurrences.
 --
 -- /See:/ 'projectsOccurrencesTestIAMPermissions' smart constructor.
-data ProjectsOccurrencesTestIAMPermissions = ProjectsOccurrencesTestIAMPermissions'
+data ProjectsOccurrencesTestIAMPermissions =
+  ProjectsOccurrencesTestIAMPermissions'
     { _potipXgafv          :: !(Maybe Xgafv)
     , _potipUploadProtocol :: !(Maybe Text)
     , _potipAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsOccurrencesTestIAMPermissions = ProjectsOccurrencesTestIAMPermissio
     , _potipPayload        :: !TestIAMPermissionsRequest
     , _potipResource       :: !Text
     , _potipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOccurrencesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsOccurrencesTestIAMPermissions
     -> Text -- ^ 'potipResource'
     -> ProjectsOccurrencesTestIAMPermissions
 projectsOccurrencesTestIAMPermissions pPotipPayload_ pPotipResource_ =
-    ProjectsOccurrencesTestIAMPermissions'
+  ProjectsOccurrencesTestIAMPermissions'
     { _potipXgafv = Nothing
     , _potipUploadProtocol = Nothing
     , _potipAccessToken = Nothing
@@ -113,6 +116,7 @@ projectsOccurrencesTestIAMPermissions pPotipPayload_ pPotipResource_ =
     , _potipResource = pPotipResource_
     , _potipCallback = Nothing
     }
+
 
 -- | V1 error format.
 potipXgafv :: Lens' ProjectsOccurrencesTestIAMPermissions (Maybe Xgafv)
@@ -157,7 +161,8 @@ potipCallback
       (\ s a -> s{_potipCallback = a})
 
 instance GoogleRequest
-         ProjectsOccurrencesTestIAMPermissions where
+           ProjectsOccurrencesTestIAMPermissions
+         where
         type Rs ProjectsOccurrencesTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsOccurrencesTestIAMPermissions =

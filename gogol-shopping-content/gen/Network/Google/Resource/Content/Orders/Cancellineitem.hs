@@ -33,9 +33,9 @@ module Network.Google.Resource.Content.Orders.Cancellineitem
     , OrdersCancellineitem
 
     -- * Request Lenses
-    , oc1MerchantId
-    , oc1Payload
-    , oc1OrderId
+    , ordrMerchantId
+    , ordrPayload
+    , ordrOrderId
     ) where
 
 import           Network.Google.Prelude
@@ -57,50 +57,54 @@ type OrdersCancellineitemResource =
 -- | Cancels a line item, making a full refund.
 --
 -- /See:/ 'ordersCancellineitem' smart constructor.
-data OrdersCancellineitem = OrdersCancellineitem'
-    { _oc1MerchantId :: !(Textual Word64)
-    , _oc1Payload    :: !OrdersCancelLineItemRequest
-    , _oc1OrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data OrdersCancellineitem =
+  OrdersCancellineitem'
+    { _ordrMerchantId :: !(Textual Word64)
+    , _ordrPayload    :: !OrdersCancelLineItemRequest
+    , _ordrOrderId    :: !Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersCancellineitem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oc1MerchantId'
+-- * 'ordrMerchantId'
 --
--- * 'oc1Payload'
+-- * 'ordrPayload'
 --
--- * 'oc1OrderId'
+-- * 'ordrOrderId'
 ordersCancellineitem
-    :: Word64 -- ^ 'oc1MerchantId'
-    -> OrdersCancelLineItemRequest -- ^ 'oc1Payload'
-    -> Text -- ^ 'oc1OrderId'
+    :: Word64 -- ^ 'ordrMerchantId'
+    -> OrdersCancelLineItemRequest -- ^ 'ordrPayload'
+    -> Text -- ^ 'ordrOrderId'
     -> OrdersCancellineitem
-ordersCancellineitem pOc1MerchantId_ pOc1Payload_ pOc1OrderId_ =
-    OrdersCancellineitem'
-    { _oc1MerchantId = _Coerce # pOc1MerchantId_
-    , _oc1Payload = pOc1Payload_
-    , _oc1OrderId = pOc1OrderId_
+ordersCancellineitem pOrdrMerchantId_ pOrdrPayload_ pOrdrOrderId_ =
+  OrdersCancellineitem'
+    { _ordrMerchantId = _Coerce # pOrdrMerchantId_
+    , _ordrPayload = pOrdrPayload_
+    , _ordrOrderId = pOrdrOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
-oc1MerchantId :: Lens' OrdersCancellineitem Word64
-oc1MerchantId
-  = lens _oc1MerchantId
-      (\ s a -> s{_oc1MerchantId = a})
+ordrMerchantId :: Lens' OrdersCancellineitem Word64
+ordrMerchantId
+  = lens _ordrMerchantId
+      (\ s a -> s{_ordrMerchantId = a})
       . _Coerce
 
 -- | Multipart request metadata.
-oc1Payload :: Lens' OrdersCancellineitem OrdersCancelLineItemRequest
-oc1Payload
-  = lens _oc1Payload (\ s a -> s{_oc1Payload = a})
+ordrPayload :: Lens' OrdersCancellineitem OrdersCancelLineItemRequest
+ordrPayload
+  = lens _ordrPayload (\ s a -> s{_ordrPayload = a})
 
 -- | The ID of the order.
-oc1OrderId :: Lens' OrdersCancellineitem Text
-oc1OrderId
-  = lens _oc1OrderId (\ s a -> s{_oc1OrderId = a})
+ordrOrderId :: Lens' OrdersCancellineitem Text
+ordrOrderId
+  = lens _ordrOrderId (\ s a -> s{_ordrOrderId = a})
 
 instance GoogleRequest OrdersCancellineitem where
         type Rs OrdersCancellineitem =
@@ -108,8 +112,8 @@ instance GoogleRequest OrdersCancellineitem where
         type Scopes OrdersCancellineitem =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCancellineitem'{..}
-          = go _oc1MerchantId _oc1OrderId (Just AltJSON)
-              _oc1Payload
+          = go _ordrMerchantId _ordrOrderId (Just AltJSON)
+              _ordrPayload
               shoppingContentService
           where go
                   = buildClient

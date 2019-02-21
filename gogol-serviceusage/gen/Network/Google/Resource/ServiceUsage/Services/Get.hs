@@ -60,14 +60,17 @@ type ServicesGetResource =
 -- | Returns the service configuration and enabled state for a given service.
 --
 -- /See:/ 'servicesGet' smart constructor.
-data ServicesGet = ServicesGet'
+data ServicesGet =
+  ServicesGet'
     { _sgXgafv          :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
     , _sgAccessToken    :: !(Maybe Text)
     , _sgUploadType     :: !(Maybe Text)
     , _sgName           :: !Text
     , _sgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesGet' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ servicesGet
     :: Text -- ^ 'sgName'
     -> ServicesGet
 servicesGet pSgName_ =
-    ServicesGet'
+  ServicesGet'
     { _sgXgafv = Nothing
     , _sgUploadProtocol = Nothing
     , _sgAccessToken = Nothing
@@ -96,6 +99,7 @@ servicesGet pSgName_ =
     , _sgName = pSgName_
     , _sgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sgXgafv :: Lens' ServicesGet (Maybe Xgafv)

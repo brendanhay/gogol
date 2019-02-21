@@ -71,7 +71,8 @@ type AlbumsShareResource =
 -- the API.
 --
 -- /See:/ 'albumsShare' smart constructor.
-data AlbumsShare = AlbumsShare'
+data AlbumsShare =
+  AlbumsShare'
     { _asXgafv          :: !(Maybe Xgafv)
     , _asAlbumId        :: !Text
     , _asUploadProtocol :: !(Maybe Text)
@@ -81,7 +82,9 @@ data AlbumsShare = AlbumsShare'
     , _asPayload        :: !ShareAlbumRequest
     , _asBearerToken    :: !(Maybe Text)
     , _asCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AlbumsShare' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ albumsShare
     -> ShareAlbumRequest -- ^ 'asPayload'
     -> AlbumsShare
 albumsShare pAsAlbumId_ pAsPayload_ =
-    AlbumsShare'
+  AlbumsShare'
     { _asXgafv = Nothing
     , _asAlbumId = pAsAlbumId_
     , _asUploadProtocol = Nothing
@@ -120,6 +123,7 @@ albumsShare pAsAlbumId_ pAsPayload_ =
     , _asBearerToken = Nothing
     , _asCallback = Nothing
     }
+
 
 -- | V1 error format.
 asXgafv :: Lens' AlbumsShare (Maybe Xgafv)

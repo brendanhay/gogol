@@ -51,9 +51,12 @@ type SitesAddResource =
 -- | Adds a site to the set of the user\'s sites in Search Console.
 --
 -- /See:/ 'sitesAdd' smart constructor.
-newtype SitesAdd = SitesAdd'
+newtype SitesAdd =
+  SitesAdd'
     { _saSiteURL :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitesAdd' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype SitesAdd = SitesAdd'
 sitesAdd
     :: Text -- ^ 'saSiteURL'
     -> SitesAdd
-sitesAdd pSaSiteURL_ =
-    SitesAdd'
-    { _saSiteURL = pSaSiteURL_
-    }
+sitesAdd pSaSiteURL_ = SitesAdd' {_saSiteURL = pSaSiteURL_}
+
 
 -- | The URL of the site to add.
 saSiteURL :: Lens' SitesAdd Text

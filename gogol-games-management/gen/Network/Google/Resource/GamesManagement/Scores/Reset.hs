@@ -58,9 +58,12 @@ type ScoresResetResource =
 -- tester accounts for your application.
 --
 -- /See:/ 'scoresReset' smart constructor.
-newtype ScoresReset = ScoresReset'
+newtype ScoresReset =
+  ScoresReset'
     { _srLeaderboardId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScoresReset' with the minimum fields required to make a request.
 --
@@ -71,9 +74,8 @@ scoresReset
     :: Text -- ^ 'srLeaderboardId'
     -> ScoresReset
 scoresReset pSrLeaderboardId_ =
-    ScoresReset'
-    { _srLeaderboardId = pSrLeaderboardId_
-    }
+  ScoresReset' {_srLeaderboardId = pSrLeaderboardId_}
+
 
 -- | The ID of the leaderboard.
 srLeaderboardId :: Lens' ScoresReset Text

@@ -59,10 +59,13 @@ type FilesDeleteResource =
 -- user are also deleted.
 --
 -- /See:/ 'filesDelete' smart constructor.
-data FilesDelete = FilesDelete'
+data FilesDelete =
+  FilesDelete'
     { _fdFileId             :: !Text
     , _fdSupportsTeamDrives :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilesDelete' with the minimum fields required to make a request.
 --
@@ -75,10 +78,8 @@ filesDelete
     :: Text -- ^ 'fdFileId'
     -> FilesDelete
 filesDelete pFdFileId_ =
-    FilesDelete'
-    { _fdFileId = pFdFileId_
-    , _fdSupportsTeamDrives = False
-    }
+  FilesDelete' {_fdFileId = pFdFileId_, _fdSupportsTeamDrives = False}
+
 
 -- | The ID of the file.
 fdFileId :: Lens' FilesDelete Text

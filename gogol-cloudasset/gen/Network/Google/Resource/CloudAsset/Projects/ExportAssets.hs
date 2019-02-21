@@ -68,7 +68,8 @@ type ProjectsExportAssetsResource =
 -- track of the export.
 --
 -- /See:/ 'projectsExportAssets' smart constructor.
-data ProjectsExportAssets = ProjectsExportAssets'
+data ProjectsExportAssets =
+  ProjectsExportAssets'
     { _peaParent         :: !Text
     , _peaXgafv          :: !(Maybe Xgafv)
     , _peaUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsExportAssets = ProjectsExportAssets'
     , _peaUploadType     :: !(Maybe Text)
     , _peaPayload        :: !ExportAssetsRequest
     , _peaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsExportAssets' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsExportAssets
     -> ExportAssetsRequest -- ^ 'peaPayload'
     -> ProjectsExportAssets
 projectsExportAssets pPeaParent_ pPeaPayload_ =
-    ProjectsExportAssets'
+  ProjectsExportAssets'
     { _peaParent = pPeaParent_
     , _peaXgafv = Nothing
     , _peaUploadProtocol = Nothing
@@ -110,10 +113,11 @@ projectsExportAssets pPeaParent_ pPeaPayload_ =
     , _peaCallback = Nothing
     }
 
+
 -- | Required. The relative name of the root asset. This can only be an
 -- organization number (such as \"organizations\/123\"), a project ID (such
--- as \"projects\/my-project-id\"), or a project number (such as
--- \"projects\/12345\").
+-- as \"projects\/my-project-id\"), a project number (such as
+-- \"projects\/12345\"), or a folder number (such as \"folders\/123\").
 peaParent :: Lens' ProjectsExportAssets Text
 peaParent
   = lens _peaParent (\ s a -> s{_peaParent = a})

@@ -55,10 +55,13 @@ type PermissionsGetResource =
 -- enterprise admin.
 --
 -- /See:/ 'permissionsGet' smart constructor.
-data PermissionsGet = PermissionsGet'
+data PermissionsGet =
+  PermissionsGet'
     { _pgLanguage     :: !(Maybe Text)
     , _pgPermissionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PermissionsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ permissionsGet
     :: Text -- ^ 'pgPermissionId'
     -> PermissionsGet
 permissionsGet pPgPermissionId_ =
-    PermissionsGet'
-    { _pgLanguage = Nothing
-    , _pgPermissionId = pPgPermissionId_
-    }
+  PermissionsGet' {_pgLanguage = Nothing, _pgPermissionId = pPgPermissionId_}
+
 
 -- | The BCP47 tag for the user\'s preferred language (e.g. \"en-US\",
 -- \"de\")

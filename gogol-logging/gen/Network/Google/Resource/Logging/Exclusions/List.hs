@@ -65,7 +65,8 @@ type ExclusionsListResource =
 -- | Lists all the exclusions in a parent resource.
 --
 -- /See:/ 'exclusionsList' smart constructor.
-data ExclusionsList = ExclusionsList'
+data ExclusionsList =
+  ExclusionsList'
     { _eParent         :: !Text
     , _eXgafv          :: !(Maybe Xgafv)
     , _eUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ExclusionsList = ExclusionsList'
     , _ePageToken      :: !(Maybe Text)
     , _ePageSize       :: !(Maybe (Textual Int32))
     , _eCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExclusionsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ exclusionsList
     :: Text -- ^ 'eParent'
     -> ExclusionsList
 exclusionsList pEParent_ =
-    ExclusionsList'
+  ExclusionsList'
     { _eParent = pEParent_
     , _eXgafv = Nothing
     , _eUploadProtocol = Nothing
@@ -109,6 +112,7 @@ exclusionsList pEParent_ =
     , _ePageSize = Nothing
     , _eCallback = Nothing
     }
+
 
 -- | Required. The parent resource whose exclusions are to be listed.
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

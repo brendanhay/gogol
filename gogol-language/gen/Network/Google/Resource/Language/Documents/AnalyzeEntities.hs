@@ -65,14 +65,17 @@ type DocumentsAnalyzeEntitiesResource =
 -- other properties.
 --
 -- /See:/ 'documentsAnalyzeEntities' smart constructor.
-data DocumentsAnalyzeEntities = DocumentsAnalyzeEntities'
+data DocumentsAnalyzeEntities =
+  DocumentsAnalyzeEntities'
     { _daeXgafv          :: !(Maybe Xgafv)
     , _daeUploadProtocol :: !(Maybe Text)
     , _daeAccessToken    :: !(Maybe Text)
     , _daeUploadType     :: !(Maybe Text)
     , _daePayload        :: !AnalyzeEntitiesRequest
     , _daeCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DocumentsAnalyzeEntities' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ documentsAnalyzeEntities
     :: AnalyzeEntitiesRequest -- ^ 'daePayload'
     -> DocumentsAnalyzeEntities
 documentsAnalyzeEntities pDaePayload_ =
-    DocumentsAnalyzeEntities'
+  DocumentsAnalyzeEntities'
     { _daeXgafv = Nothing
     , _daeUploadProtocol = Nothing
     , _daeAccessToken = Nothing
@@ -101,6 +104,7 @@ documentsAnalyzeEntities pDaePayload_ =
     , _daePayload = pDaePayload_
     , _daeCallback = Nothing
     }
+
 
 -- | V1 error format.
 daeXgafv :: Lens' DocumentsAnalyzeEntities (Maybe Xgafv)

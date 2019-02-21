@@ -250,6 +250,9 @@ module Network.Google.ToolResults
     , fileReference
     , frFileURI
 
+    -- ** IndividualOutcomeOutcomeSummary
+    , IndividualOutcomeOutcomeSummary (..)
+
     -- ** CPUInfo
     , CPUInfo
     , cpuInfo
@@ -403,6 +406,7 @@ module Network.Google.ToolResults
     , sName
     , sOutcome
     , sLabels
+    , sMultiStep
     , sDeviceUsageDuration
     , sDescription
 
@@ -475,6 +479,12 @@ module Network.Google.ToolResults
     -- ** BasicPerfSampleSeriesSampleSeriesLabel
     , BasicPerfSampleSeriesSampleSeriesLabel (..)
 
+    -- ** IndividualOutcome
+    , IndividualOutcome
+    , individualOutcome
+    , ioStepId
+    , ioOutcomeSummary
+
     -- ** TestSuiteOverview
     , TestSuiteOverview
     , testSuiteOverview
@@ -484,6 +494,13 @@ module Network.Google.ToolResults
     , tsoName
     , tsoFailureCount
     , tsoTotalCount
+
+    -- ** MultiStep
+    , MultiStep
+    , multiStep
+    , msMultistepNumber
+    , msPrimaryStepId
+    , msPrimaryStep
 
     -- ** Duration
     , Duration
@@ -522,6 +539,15 @@ module Network.Google.ToolResults
     , bpssPerfUnit
     , bpssPerfMetricType
     , bpssSampleSeriesLabel
+
+    -- ** PrimaryStepRollUp
+    , PrimaryStepRollUp (..)
+
+    -- ** PrimaryStep
+    , PrimaryStep
+    , primaryStep
+    , psRollUp
+    , psIndividualOutcome
 
     -- ** PerfMetricsSummaryPerfMetricsItem
     , PerfMetricsSummaryPerfMetricsItem (..)

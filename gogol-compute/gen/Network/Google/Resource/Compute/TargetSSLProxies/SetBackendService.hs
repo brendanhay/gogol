@@ -62,12 +62,15 @@ type TargetSSLProxiesSetBackendServiceResource =
 -- | Changes the BackendService for TargetSslProxy.
 --
 -- /See:/ 'targetSSLProxiesSetBackendService' smart constructor.
-data TargetSSLProxiesSetBackendService = TargetSSLProxiesSetBackendService'
+data TargetSSLProxiesSetBackendService =
+  TargetSSLProxiesSetBackendService'
     { _tspsbsRequestId      :: !(Maybe Text)
     , _tspsbsProject        :: !Text
     , _tspsbsPayload        :: !TargetSSLProxiesSetBackendServiceRequest
     , _tspsbsTargetSSLProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetSSLProxiesSetBackendService' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ targetSSLProxiesSetBackendService
     -> Text -- ^ 'tspsbsTargetSSLProxy'
     -> TargetSSLProxiesSetBackendService
 targetSSLProxiesSetBackendService pTspsbsProject_ pTspsbsPayload_ pTspsbsTargetSSLProxy_ =
-    TargetSSLProxiesSetBackendService'
+  TargetSSLProxiesSetBackendService'
     { _tspsbsRequestId = Nothing
     , _tspsbsProject = pTspsbsProject_
     , _tspsbsPayload = pTspsbsPayload_
     , _tspsbsTargetSSLProxy = pTspsbsTargetSSLProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -128,7 +132,8 @@ tspsbsTargetSSLProxy
       (\ s a -> s{_tspsbsTargetSSLProxy = a})
 
 instance GoogleRequest
-         TargetSSLProxiesSetBackendService where
+           TargetSSLProxiesSetBackendService
+         where
         type Rs TargetSSLProxiesSetBackendService = Operation
         type Scopes TargetSSLProxiesSetBackendService =
              '["https://www.googleapis.com/auth/cloud-platform",

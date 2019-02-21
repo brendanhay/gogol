@@ -70,7 +70,8 @@ type FoldersSinksCreateResource =
 -- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ 'foldersSinksCreate' smart constructor.
-data FoldersSinksCreate = FoldersSinksCreate'
+data FoldersSinksCreate =
+  FoldersSinksCreate'
     { _fscParent               :: !Text
     , _fscXgafv                :: !(Maybe Xgafv)
     , _fscUniqueWriterIdentity :: !(Maybe Bool)
@@ -79,7 +80,9 @@ data FoldersSinksCreate = FoldersSinksCreate'
     , _fscUploadType           :: !(Maybe Text)
     , _fscPayload              :: !LogSink
     , _fscCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersSinksCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ foldersSinksCreate
     -> LogSink -- ^ 'fscPayload'
     -> FoldersSinksCreate
 foldersSinksCreate pFscParent_ pFscPayload_ =
-    FoldersSinksCreate'
+  FoldersSinksCreate'
     { _fscParent = pFscParent_
     , _fscXgafv = Nothing
     , _fscUniqueWriterIdentity = Nothing
@@ -115,6 +118,7 @@ foldersSinksCreate pFscParent_ pFscPayload_ =
     , _fscPayload = pFscPayload_
     , _fscCallback = Nothing
     }
+
 
 -- | Required. The resource in which to create the sink:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

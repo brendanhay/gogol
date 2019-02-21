@@ -55,10 +55,13 @@ type PagesRevertResource =
 -- | Revert a published or scheduled page to draft state.
 --
 -- /See:/ 'pagesRevert' smart constructor.
-data PagesRevert = PagesRevert'
+data PagesRevert =
+  PagesRevert'
     { _pagBlogId :: !Text
     , _pagPageId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagesRevert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ pagesRevert
     -> Text -- ^ 'pagPageId'
     -> PagesRevert
 pagesRevert pPagBlogId_ pPagPageId_ =
-    PagesRevert'
-    { _pagBlogId = pPagBlogId_
-    , _pagPageId = pPagPageId_
-    }
+  PagesRevert' {_pagBlogId = pPagBlogId_, _pagPageId = pPagPageId_}
+
 
 -- | The ID of the blog.
 pagBlogId :: Lens' PagesRevert Text

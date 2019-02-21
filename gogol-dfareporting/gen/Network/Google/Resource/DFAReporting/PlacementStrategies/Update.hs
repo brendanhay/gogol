@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesUpdate' request conforms to.
 type PlacementStrategiesUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -55,10 +55,13 @@ type PlacementStrategiesUpdateResource =
 -- | Updates an existing placement strategy.
 --
 -- /See:/ 'placementStrategiesUpdate' smart constructor.
-data PlacementStrategiesUpdate = PlacementStrategiesUpdate'
+data PlacementStrategiesUpdate =
+  PlacementStrategiesUpdate'
     { _psuProFileId :: !(Textual Int64)
     , _psuPayload   :: !PlacementStrategy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacementStrategiesUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ placementStrategiesUpdate
     -> PlacementStrategy -- ^ 'psuPayload'
     -> PlacementStrategiesUpdate
 placementStrategiesUpdate pPsuProFileId_ pPsuPayload_ =
-    PlacementStrategiesUpdate'
-    { _psuProFileId = _Coerce # pPsuProFileId_
-    , _psuPayload = pPsuPayload_
-    }
+  PlacementStrategiesUpdate'
+    {_psuProFileId = _Coerce # pPsuProFileId_, _psuPayload = pPsuPayload_}
+
 
 -- | User profile ID associated with this request.
 psuProFileId :: Lens' PlacementStrategiesUpdate Int64

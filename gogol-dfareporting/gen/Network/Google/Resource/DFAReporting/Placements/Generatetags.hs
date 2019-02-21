@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PlacementsGeneratetags' request conforms to.
 type PlacementsGeneratetagsResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -62,12 +62,15 @@ type PlacementsGeneratetagsResource =
 -- | Generates tags for a placement.
 --
 -- /See:/ 'placementsGeneratetags' smart constructor.
-data PlacementsGeneratetags = PlacementsGeneratetags'
+data PlacementsGeneratetags =
+  PlacementsGeneratetags'
     { _pgsTagFormats   :: !(Maybe [PlacementsGeneratetagsTagFormats])
     , _pgsCampaignId   :: !(Maybe (Textual Int64))
     , _pgsProFileId    :: !(Textual Int64)
     , _pgsPlacementIds :: !(Maybe [Textual Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacementsGeneratetags' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ placementsGeneratetags
     :: Int64 -- ^ 'pgsProFileId'
     -> PlacementsGeneratetags
 placementsGeneratetags pPgsProFileId_ =
-    PlacementsGeneratetags'
+  PlacementsGeneratetags'
     { _pgsTagFormats = Nothing
     , _pgsCampaignId = Nothing
     , _pgsProFileId = _Coerce # pPgsProFileId_
     , _pgsPlacementIds = Nothing
     }
+
 
 -- | Tag formats to generate for these placements. Note:
 -- PLACEMENT_TAG_STANDARD can only be generated for 1x1 placements.

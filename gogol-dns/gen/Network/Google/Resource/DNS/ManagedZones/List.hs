@@ -59,12 +59,15 @@ type ManagedZonesListResource =
 -- | Enumerate ManagedZones that have been created but not yet deleted.
 --
 -- /See:/ 'managedZonesList' smart constructor.
-data ManagedZonesList = ManagedZonesList'
+data ManagedZonesList =
+  ManagedZonesList'
     { _mzlProject    :: !Text
     , _mzlPageToken  :: !(Maybe Text)
     , _mzlDNSName    :: !(Maybe Text)
     , _mzlMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagedZonesList' with the minimum fields required to make a request.
 --
@@ -81,12 +84,13 @@ managedZonesList
     :: Text -- ^ 'mzlProject'
     -> ManagedZonesList
 managedZonesList pMzlProject_ =
-    ManagedZonesList'
+  ManagedZonesList'
     { _mzlProject = pMzlProject_
     , _mzlPageToken = Nothing
     , _mzlDNSName = Nothing
     , _mzlMaxResults = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 mzlProject :: Lens' ManagedZonesList Text

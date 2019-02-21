@@ -23,9 +23,10 @@
 -- Removes specified project resource identified by tenant resource tag. It
 -- will remove project lien with \'TenantManager\' origin if that was
 -- added. It will then attempt to delete the project. If that operation
--- fails, this method fails. After the project has been deleted, or if was
--- already in DELETED state, resource metadata is permanently removed from
--- the tenancy unit. Operation.
+-- fails, this method fails. Calls to remove already removed or
+-- non-existent tenant project will succeed. After the project has been
+-- deleted, or if was already in DELETED state, resource metadata is
+-- permanently removed from the tenancy unit. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.removeProject@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
@@ -67,12 +68,14 @@ type ServicesTenancyUnitsRemoveProjectResource =
 -- | Removes specified project resource identified by tenant resource tag. It
 -- will remove project lien with \'TenantManager\' origin if that was
 -- added. It will then attempt to delete the project. If that operation
--- fails, this method fails. After the project has been deleted, or if was
--- already in DELETED state, resource metadata is permanently removed from
--- the tenancy unit. Operation.
+-- fails, this method fails. Calls to remove already removed or
+-- non-existent tenant project will succeed. After the project has been
+-- deleted, or if was already in DELETED state, resource metadata is
+-- permanently removed from the tenancy unit. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsRemoveProject' smart constructor.
-data ServicesTenancyUnitsRemoveProject = ServicesTenancyUnitsRemoveProject'
+data ServicesTenancyUnitsRemoveProject =
+  ServicesTenancyUnitsRemoveProject'
     { _sturpXgafv          :: !(Maybe Xgafv)
     , _sturpUploadProtocol :: !(Maybe Text)
     , _sturpAccessToken    :: !(Maybe Text)
@@ -80,7 +83,9 @@ data ServicesTenancyUnitsRemoveProject = ServicesTenancyUnitsRemoveProject'
     , _sturpPayload        :: !RemoveTenantProjectRequest
     , _sturpName           :: !Text
     , _sturpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesTenancyUnitsRemoveProject' with the minimum fields required to make a request.
 --
@@ -104,7 +109,7 @@ servicesTenancyUnitsRemoveProject
     -> Text -- ^ 'sturpName'
     -> ServicesTenancyUnitsRemoveProject
 servicesTenancyUnitsRemoveProject pSturpPayload_ pSturpName_ =
-    ServicesTenancyUnitsRemoveProject'
+  ServicesTenancyUnitsRemoveProject'
     { _sturpXgafv = Nothing
     , _sturpUploadProtocol = Nothing
     , _sturpAccessToken = Nothing
@@ -113,6 +118,7 @@ servicesTenancyUnitsRemoveProject pSturpPayload_ pSturpName_ =
     , _sturpName = pSturpName_
     , _sturpCallback = Nothing
     }
+
 
 -- | V1 error format.
 sturpXgafv :: Lens' ServicesTenancyUnitsRemoveProject (Maybe Xgafv)
@@ -155,7 +161,8 @@ sturpCallback
       (\ s a -> s{_sturpCallback = a})
 
 instance GoogleRequest
-         ServicesTenancyUnitsRemoveProject where
+           ServicesTenancyUnitsRemoveProject
+         where
         type Rs ServicesTenancyUnitsRemoveProject = Operation
         type Scopes ServicesTenancyUnitsRemoveProject =
              '["https://www.googleapis.com/auth/cloud-platform"]

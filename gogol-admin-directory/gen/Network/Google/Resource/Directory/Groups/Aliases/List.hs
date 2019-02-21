@@ -53,9 +53,12 @@ type GroupsAliasesListResource =
 -- | List all aliases for a group
 --
 -- /See:/ 'groupsAliasesList' smart constructor.
-newtype GroupsAliasesList = GroupsAliasesList'
+newtype GroupsAliasesList =
+  GroupsAliasesList'
     { _galGroupKey :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsAliasesList' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ groupsAliasesList
     :: Text -- ^ 'galGroupKey'
     -> GroupsAliasesList
 groupsAliasesList pGalGroupKey_ =
-    GroupsAliasesList'
-    { _galGroupKey = pGalGroupKey_
-    }
+  GroupsAliasesList' {_galGroupKey = pGalGroupKey_}
+
 
 -- | Email or immutable ID of the group
 galGroupKey :: Lens' GroupsAliasesList Text

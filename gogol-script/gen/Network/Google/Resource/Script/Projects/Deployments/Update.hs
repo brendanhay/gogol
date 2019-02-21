@@ -66,7 +66,8 @@ type ProjectsDeploymentsUpdateResource =
 -- | Updates a deployment of an Apps Script project.
 --
 -- /See:/ 'projectsDeploymentsUpdate' smart constructor.
-data ProjectsDeploymentsUpdate = ProjectsDeploymentsUpdate'
+data ProjectsDeploymentsUpdate =
+  ProjectsDeploymentsUpdate'
     { _pduDeploymentId   :: !Text
     , _pduXgafv          :: !(Maybe Xgafv)
     , _pduUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsDeploymentsUpdate = ProjectsDeploymentsUpdate'
     , _pduPayload        :: !UpdateDeploymentRequest
     , _pduScriptId       :: !Text
     , _pduCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDeploymentsUpdate' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsDeploymentsUpdate
     -> Text -- ^ 'pduScriptId'
     -> ProjectsDeploymentsUpdate
 projectsDeploymentsUpdate pPduDeploymentId_ pPduPayload_ pPduScriptId_ =
-    ProjectsDeploymentsUpdate'
+  ProjectsDeploymentsUpdate'
     { _pduDeploymentId = pPduDeploymentId_
     , _pduXgafv = Nothing
     , _pduUploadProtocol = Nothing
@@ -112,6 +115,7 @@ projectsDeploymentsUpdate pPduDeploymentId_ pPduPayload_ pPduScriptId_ =
     , _pduScriptId = pPduScriptId_
     , _pduCallback = Nothing
     }
+
 
 -- | The deployment ID for this deployment.
 pduDeploymentId :: Lens' ProjectsDeploymentsUpdate Text

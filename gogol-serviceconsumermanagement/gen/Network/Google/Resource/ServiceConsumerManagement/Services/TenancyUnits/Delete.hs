@@ -61,14 +61,17 @@ type ServicesTenancyUnitsDeleteResource =
 -- be no tenant resources in it not in DELETED state. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsDelete' smart constructor.
-data ServicesTenancyUnitsDelete = ServicesTenancyUnitsDelete'
+data ServicesTenancyUnitsDelete =
+  ServicesTenancyUnitsDelete'
     { _studXgafv          :: !(Maybe Xgafv)
     , _studUploadProtocol :: !(Maybe Text)
     , _studAccessToken    :: !(Maybe Text)
     , _studUploadType     :: !(Maybe Text)
     , _studName           :: !Text
     , _studCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesTenancyUnitsDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ servicesTenancyUnitsDelete
     :: Text -- ^ 'studName'
     -> ServicesTenancyUnitsDelete
 servicesTenancyUnitsDelete pStudName_ =
-    ServicesTenancyUnitsDelete'
+  ServicesTenancyUnitsDelete'
     { _studXgafv = Nothing
     , _studUploadProtocol = Nothing
     , _studAccessToken = Nothing
@@ -97,6 +100,7 @@ servicesTenancyUnitsDelete pStudName_ =
     , _studName = pStudName_
     , _studCallback = Nothing
     }
+
 
 -- | V1 error format.
 studXgafv :: Lens' ServicesTenancyUnitsDelete (Maybe Xgafv)

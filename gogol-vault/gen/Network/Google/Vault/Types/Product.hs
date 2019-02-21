@@ -25,10 +25,13 @@ import           Network.Google.Vault.Types.Sum
 -- corpus.
 --
 -- /See:/ 'heldAccount' smart constructor.
-data HeldAccount = HeldAccount'
+data HeldAccount =
+  HeldAccount'
     { _haAccountId :: !(Maybe Text)
     , _haHoldTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HeldAccount' with the minimum fields required to make a request.
 --
@@ -39,11 +42,8 @@ data HeldAccount = HeldAccount'
 -- * 'haHoldTime'
 heldAccount
     :: HeldAccount
-heldAccount =
-    HeldAccount'
-    { _haAccountId = Nothing
-    , _haHoldTime = Nothing
-    }
+heldAccount = HeldAccount' {_haAccountId = Nothing, _haHoldTime = Nothing}
+
 
 -- | The account\'s ID as provided by the
 -- <https://developers.google.com/admin-sdk/ Admin SDK>.
@@ -74,9 +74,12 @@ instance ToJSON HeldAccount where
 -- | Query options for hangouts chat holds.
 --
 -- /See:/ 'heldHangoutsChatQuery' smart constructor.
-newtype HeldHangoutsChatQuery = HeldHangoutsChatQuery'
+newtype HeldHangoutsChatQuery =
+  HeldHangoutsChatQuery'
     { _hhcqIncludeRooms :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HeldHangoutsChatQuery' with the minimum fields required to make a request.
 --
@@ -85,10 +88,8 @@ newtype HeldHangoutsChatQuery = HeldHangoutsChatQuery'
 -- * 'hhcqIncludeRooms'
 heldHangoutsChatQuery
     :: HeldHangoutsChatQuery
-heldHangoutsChatQuery =
-    HeldHangoutsChatQuery'
-    { _hhcqIncludeRooms = Nothing
-    }
+heldHangoutsChatQuery = HeldHangoutsChatQuery' {_hhcqIncludeRooms = Nothing}
+
 
 -- | If true, include rooms the user has participated in.
 hhcqIncludeRooms :: Lens' HeldHangoutsChatQuery (Maybe Bool)
@@ -111,7 +112,8 @@ instance ToJSON HeldHangoutsChatQuery where
 -- | An export
 --
 -- /See:/ 'export'' smart constructor.
-data Export = Export'
+data Export =
+  Export'
     { _eStatus           :: !(Maybe ExportStatus)
     , _eCloudStorageSink :: !(Maybe CloudStorageSink)
     , _eMatterId         :: !(Maybe Text)
@@ -122,7 +124,9 @@ data Export = Export'
     , _eId               :: !(Maybe Text)
     , _eRequester        :: !(Maybe UserInfo)
     , _eCreateTime       :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Export' with the minimum fields required to make a request.
 --
@@ -150,7 +154,7 @@ data Export = Export'
 export'
     :: Export
 export' =
-    Export'
+  Export'
     { _eStatus = Nothing
     , _eCloudStorageSink = Nothing
     , _eMatterId = Nothing
@@ -162,6 +166,7 @@ export' =
     , _eRequester = Nothing
     , _eCreateTime = Nothing
     }
+
 
 -- | Output only. The export status.
 eStatus :: Lens' Export (Maybe ExportStatus)
@@ -276,11 +281,14 @@ instance ToJSON Export where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -293,12 +301,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -339,9 +343,12 @@ instance ToJSON Status where
 -- | Accounts to search
 --
 -- /See:/ 'accountInfo' smart constructor.
-newtype AccountInfo = AccountInfo'
+newtype AccountInfo =
+  AccountInfo'
     { _aiEmails :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountInfo' with the minimum fields required to make a request.
 --
@@ -350,10 +357,8 @@ newtype AccountInfo = AccountInfo'
 -- * 'aiEmails'
 accountInfo
     :: AccountInfo
-accountInfo =
-    AccountInfo'
-    { _aiEmails = Nothing
-    }
+accountInfo = AccountInfo' {_aiEmails = Nothing}
+
 
 -- | A set of accounts to search.
 aiEmails :: Lens' AccountInfo [Text]
@@ -374,9 +379,12 @@ instance ToJSON AccountInfo where
 -- | Export sink for cloud storage files.
 --
 -- /See:/ 'cloudStorageSink' smart constructor.
-newtype CloudStorageSink = CloudStorageSink'
+newtype CloudStorageSink =
+  CloudStorageSink'
     { _cssFiles :: Maybe [CloudStorageFile]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudStorageSink' with the minimum fields required to make a request.
 --
@@ -385,10 +393,8 @@ newtype CloudStorageSink = CloudStorageSink'
 -- * 'cssFiles'
 cloudStorageSink
     :: CloudStorageSink
-cloudStorageSink =
-    CloudStorageSink'
-    { _cssFiles = Nothing
-    }
+cloudStorageSink = CloudStorageSink' {_cssFiles = Nothing}
+
 
 -- | Output only. The exported files on cloud storage.
 cssFiles :: Lens' CloudStorageSink [CloudStorageFile]
@@ -410,9 +416,12 @@ instance ToJSON CloudStorageSink where
 -- | The options for hangouts chat export.
 --
 -- /See:/ 'hangoutsChatExportOptions' smart constructor.
-newtype HangoutsChatExportOptions = HangoutsChatExportOptions'
+newtype HangoutsChatExportOptions =
+  HangoutsChatExportOptions'
     { _hceoExportFormat :: Maybe HangoutsChatExportOptionsExportFormat
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HangoutsChatExportOptions' with the minimum fields required to make a request.
 --
@@ -422,9 +431,8 @@ newtype HangoutsChatExportOptions = HangoutsChatExportOptions'
 hangoutsChatExportOptions
     :: HangoutsChatExportOptions
 hangoutsChatExportOptions =
-    HangoutsChatExportOptions'
-    { _hceoExportFormat = Nothing
-    }
+  HangoutsChatExportOptions' {_hceoExportFormat = Nothing}
+
 
 -- | The export format for hangouts chat export.
 hceoExportFormat :: Lens' HangoutsChatExportOptions (Maybe HangoutsChatExportOptionsExportFormat)
@@ -448,10 +456,13 @@ instance ToJSON HangoutsChatExportOptions where
 -- | User\'s information.
 --
 -- /See:/ 'userInfo' smart constructor.
-data UserInfo = UserInfo'
+data UserInfo =
+  UserInfo'
     { _uiEmail       :: !(Maybe Text)
     , _uiDisplayName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserInfo' with the minimum fields required to make a request.
 --
@@ -462,11 +473,8 @@ data UserInfo = UserInfo'
 -- * 'uiDisplayName'
 userInfo
     :: UserInfo
-userInfo =
-    UserInfo'
-    { _uiEmail = Nothing
-    , _uiDisplayName = Nothing
-    }
+userInfo = UserInfo' {_uiEmail = Nothing, _uiDisplayName = Nothing}
+
 
 -- | The email address of the user.
 uiEmail :: Lens' UserInfo (Maybe Text)
@@ -495,9 +503,12 @@ instance ToJSON UserInfo where
 -- | Team Drives to search
 --
 -- /See:/ 'teamDriveInfo' smart constructor.
-newtype TeamDriveInfo = TeamDriveInfo'
+newtype TeamDriveInfo =
+  TeamDriveInfo'
     { _tdiTeamDriveIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeamDriveInfo' with the minimum fields required to make a request.
 --
@@ -506,10 +517,8 @@ newtype TeamDriveInfo = TeamDriveInfo'
 -- * 'tdiTeamDriveIds'
 teamDriveInfo
     :: TeamDriveInfo
-teamDriveInfo =
-    TeamDriveInfo'
-    { _tdiTeamDriveIds = Nothing
-    }
+teamDriveInfo = TeamDriveInfo' {_tdiTeamDriveIds = Nothing}
+
 
 -- | List of Team Drive ids, as provided by
 -- <https://developers.google.com/drive Drive API>.
@@ -535,10 +544,13 @@ instance ToJSON TeamDriveInfo where
 -- | Add a list of accounts to a hold.
 --
 -- /See:/ 'addHeldAccountsRequest' smart constructor.
-data AddHeldAccountsRequest = AddHeldAccountsRequest'
+data AddHeldAccountsRequest =
+  AddHeldAccountsRequest'
     { _aharAccountIds :: !(Maybe [Text])
     , _aharEmails     :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AddHeldAccountsRequest' with the minimum fields required to make a request.
 --
@@ -550,10 +562,8 @@ data AddHeldAccountsRequest = AddHeldAccountsRequest'
 addHeldAccountsRequest
     :: AddHeldAccountsRequest
 addHeldAccountsRequest =
-    AddHeldAccountsRequest'
-    { _aharAccountIds = Nothing
-    , _aharEmails = Nothing
-    }
+  AddHeldAccountsRequest' {_aharAccountIds = Nothing, _aharEmails = Nothing}
+
 
 -- | Account ids to identify which accounts to add. Only account_ids or only
 -- emails should be specified, but not both.
@@ -590,12 +600,15 @@ instance ToJSON AddHeldAccountsRequest where
 -- | Corpus specific queries.
 --
 -- /See:/ 'corpusQuery' smart constructor.
-data CorpusQuery = CorpusQuery'
+data CorpusQuery =
+  CorpusQuery'
     { _cqGroupsQuery       :: !(Maybe HeldGroupsQuery)
     , _cqDriveQuery        :: !(Maybe HeldDriveQuery)
     , _cqHangoutsChatQuery :: !(Maybe HeldHangoutsChatQuery)
     , _cqMailQuery         :: !(Maybe HeldMailQuery)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CorpusQuery' with the minimum fields required to make a request.
 --
@@ -611,12 +624,13 @@ data CorpusQuery = CorpusQuery'
 corpusQuery
     :: CorpusQuery
 corpusQuery =
-    CorpusQuery'
+  CorpusQuery'
     { _cqGroupsQuery = Nothing
     , _cqDriveQuery = Nothing
     , _cqHangoutsChatQuery = Nothing
     , _cqMailQuery = Nothing
     }
+
 
 -- | Details pertaining to Groups holds. If set, corpus must be Groups.
 cqGroupsQuery :: Lens' CorpusQuery (Maybe HeldGroupsQuery)
@@ -662,9 +676,12 @@ instance ToJSON CorpusQuery where
 -- | Org Unit to search
 --
 -- /See:/ 'orgUnitInfo' smart constructor.
-newtype OrgUnitInfo = OrgUnitInfo'
+newtype OrgUnitInfo =
+  OrgUnitInfo'
     { _ouiOrgUnitId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrgUnitInfo' with the minimum fields required to make a request.
 --
@@ -673,10 +690,8 @@ newtype OrgUnitInfo = OrgUnitInfo'
 -- * 'ouiOrgUnitId'
 orgUnitInfo
     :: OrgUnitInfo
-orgUnitInfo =
-    OrgUnitInfo'
-    { _ouiOrgUnitId = Nothing
-    }
+orgUnitInfo = OrgUnitInfo' {_ouiOrgUnitId = Nothing}
+
 
 -- | Org unit to search, as provided by the
 -- <https://developers.google.com/admin-sdk/directory/ Admin SDK Directory API>.
@@ -697,9 +712,12 @@ instance ToJSON OrgUnitInfo where
 -- | Response for batch delete held accounts.
 --
 -- /See:/ 'removeHeldAccountsResponse' smart constructor.
-newtype RemoveHeldAccountsResponse = RemoveHeldAccountsResponse'
+newtype RemoveHeldAccountsResponse =
+  RemoveHeldAccountsResponse'
     { _rharStatuses :: Maybe [Status]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoveHeldAccountsResponse' with the minimum fields required to make a request.
 --
@@ -709,9 +727,8 @@ newtype RemoveHeldAccountsResponse = RemoveHeldAccountsResponse'
 removeHeldAccountsResponse
     :: RemoveHeldAccountsResponse
 removeHeldAccountsResponse =
-    RemoveHeldAccountsResponse'
-    { _rharStatuses = Nothing
-    }
+  RemoveHeldAccountsResponse' {_rharStatuses = Nothing}
+
 
 -- | A list of statuses for deleted accounts. Results have the same order as
 -- the request.
@@ -741,14 +758,16 @@ instance ToJSON RemoveHeldAccountsResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -759,11 +778,14 @@ instance ToJSON Empty where
 -- | Stats of an export.
 --
 -- /See:/ 'exportStats' smart constructor.
-data ExportStats = ExportStats'
+data ExportStats =
+  ExportStats'
     { _esTotalArtifactCount    :: !(Maybe (Textual Int64))
     , _esSizeInBytes           :: !(Maybe (Textual Int64))
     , _esExportedArtifactCount :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExportStats' with the minimum fields required to make a request.
 --
@@ -777,11 +799,12 @@ data ExportStats = ExportStats'
 exportStats
     :: ExportStats
 exportStats =
-    ExportStats'
+  ExportStats'
     { _esTotalArtifactCount = Nothing
     , _esSizeInBytes = Nothing
     , _esExportedArtifactCount = Nothing
     }
+
 
 -- | The number of documents to be exported.
 esTotalArtifactCount :: Lens' ExportStats (Maybe Int64)
@@ -825,9 +848,12 @@ instance ToJSON ExportStats where
 -- | Accounts to search
 --
 -- /See:/ 'hangoutsChatInfo' smart constructor.
-newtype HangoutsChatInfo = HangoutsChatInfo'
+newtype HangoutsChatInfo =
+  HangoutsChatInfo'
     { _hciRoomId :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HangoutsChatInfo' with the minimum fields required to make a request.
 --
@@ -836,10 +862,8 @@ newtype HangoutsChatInfo = HangoutsChatInfo'
 -- * 'hciRoomId'
 hangoutsChatInfo
     :: HangoutsChatInfo
-hangoutsChatInfo =
-    HangoutsChatInfo'
-    { _hciRoomId = Nothing
-    }
+hangoutsChatInfo = HangoutsChatInfo' {_hciRoomId = Nothing}
+
 
 -- | A set of rooms to search.
 hciRoomId :: Lens' HangoutsChatInfo [Text]
@@ -861,9 +885,12 @@ instance ToJSON HangoutsChatInfo where
 -- | Remove a list of accounts from a hold.
 --
 -- /See:/ 'removeHeldAccountsRequest' smart constructor.
-newtype RemoveHeldAccountsRequest = RemoveHeldAccountsRequest'
+newtype RemoveHeldAccountsRequest =
+  RemoveHeldAccountsRequest'
     { _rharAccountIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoveHeldAccountsRequest' with the minimum fields required to make a request.
 --
@@ -873,9 +900,8 @@ newtype RemoveHeldAccountsRequest = RemoveHeldAccountsRequest'
 removeHeldAccountsRequest
     :: RemoveHeldAccountsRequest
 removeHeldAccountsRequest =
-    RemoveHeldAccountsRequest'
-    { _rharAccountIds = Nothing
-    }
+  RemoveHeldAccountsRequest' {_rharAccountIds = Nothing}
+
 
 -- | Account ids to identify HeldAccounts to remove.
 rharAccountIds :: Lens' RemoveHeldAccountsRequest [Text]
@@ -900,10 +926,13 @@ instance ToJSON RemoveHeldAccountsRequest where
 -- | Definition of the response for method ListSaveQuery.
 --
 -- /See:/ 'listSavedQueriesResponse' smart constructor.
-data ListSavedQueriesResponse = ListSavedQueriesResponse'
+data ListSavedQueriesResponse =
+  ListSavedQueriesResponse'
     { _lsqrNextPageToken :: !(Maybe Text)
     , _lsqrSavedQueries  :: !(Maybe [SavedQuery])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListSavedQueriesResponse' with the minimum fields required to make a request.
 --
@@ -915,10 +944,9 @@ data ListSavedQueriesResponse = ListSavedQueriesResponse'
 listSavedQueriesResponse
     :: ListSavedQueriesResponse
 listSavedQueriesResponse =
-    ListSavedQueriesResponse'
-    { _lsqrNextPageToken = Nothing
-    , _lsqrSavedQueries = Nothing
-    }
+  ListSavedQueriesResponse'
+    {_lsqrNextPageToken = Nothing, _lsqrSavedQueries = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list. If this is
 -- empty, then there are no more saved queries to list.
@@ -954,14 +982,16 @@ instance ToJSON ListSavedQueriesResponse where
 --
 -- /See:/ 'undeleteMatterRequest' smart constructor.
 data UndeleteMatterRequest =
-    UndeleteMatterRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  UndeleteMatterRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UndeleteMatterRequest' with the minimum fields required to make a request.
 --
 undeleteMatterRequest
     :: UndeleteMatterRequest
 undeleteMatterRequest = UndeleteMatterRequest'
+
 
 instance FromJSON UndeleteMatterRequest where
         parseJSON
@@ -974,9 +1004,12 @@ instance ToJSON UndeleteMatterRequest where
 -- | Query options for Drive holds.
 --
 -- /See:/ 'heldDriveQuery' smart constructor.
-newtype HeldDriveQuery = HeldDriveQuery'
+newtype HeldDriveQuery =
+  HeldDriveQuery'
     { _hdqIncludeTeamDriveFiles :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HeldDriveQuery' with the minimum fields required to make a request.
 --
@@ -985,10 +1018,8 @@ newtype HeldDriveQuery = HeldDriveQuery'
 -- * 'hdqIncludeTeamDriveFiles'
 heldDriveQuery
     :: HeldDriveQuery
-heldDriveQuery =
-    HeldDriveQuery'
-    { _hdqIncludeTeamDriveFiles = Nothing
-    }
+heldDriveQuery = HeldDriveQuery' {_hdqIncludeTeamDriveFiles = Nothing}
+
 
 -- | If true, include files in Team Drives in the hold.
 hdqIncludeTeamDriveFiles :: Lens' HeldDriveQuery (Maybe Bool)
@@ -1012,9 +1043,12 @@ instance ToJSON HeldDriveQuery where
 -- | Hangouts chat search advanced options
 --
 -- /See:/ 'hangoutsChatOptions' smart constructor.
-newtype HangoutsChatOptions = HangoutsChatOptions'
+newtype HangoutsChatOptions =
+  HangoutsChatOptions'
     { _hcoIncludeRooms :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HangoutsChatOptions' with the minimum fields required to make a request.
 --
@@ -1023,10 +1057,8 @@ newtype HangoutsChatOptions = HangoutsChatOptions'
 -- * 'hcoIncludeRooms'
 hangoutsChatOptions
     :: HangoutsChatOptions
-hangoutsChatOptions =
-    HangoutsChatOptions'
-    { _hcoIncludeRooms = Nothing
-    }
+hangoutsChatOptions = HangoutsChatOptions' {_hcoIncludeRooms = Nothing}
+
 
 -- | Set to true to include rooms.
 hcoIncludeRooms :: Lens' HangoutsChatOptions (Maybe Bool)
@@ -1050,11 +1082,14 @@ instance ToJSON HangoutsChatOptions where
 -- If an account already has a role in the matter, it will be overwritten.
 --
 -- /See:/ 'addMatterPermissionsRequest' smart constructor.
-data AddMatterPermissionsRequest = AddMatterPermissionsRequest'
+data AddMatterPermissionsRequest =
+  AddMatterPermissionsRequest'
     { _amprSendEmails       :: !(Maybe Bool)
     , _amprCcMe             :: !(Maybe Bool)
     , _amprMatterPermission :: !(Maybe MatterPermission)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AddMatterPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1068,11 +1103,12 @@ data AddMatterPermissionsRequest = AddMatterPermissionsRequest'
 addMatterPermissionsRequest
     :: AddMatterPermissionsRequest
 addMatterPermissionsRequest =
-    AddMatterPermissionsRequest'
+  AddMatterPermissionsRequest'
     { _amprSendEmails = Nothing
     , _amprCcMe = Nothing
     , _amprMatterPermission = Nothing
     }
+
 
 -- | True to send notification email to the added account. False to not send
 -- notification email.
@@ -1110,9 +1146,12 @@ instance ToJSON AddMatterPermissionsRequest where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1123,9 +1162,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1144,13 +1182,16 @@ instance ToJSON StatusDetailsItem where
 -- | Represents a matter.
 --
 -- /See:/ 'matter' smart constructor.
-data Matter = Matter'
+data Matter =
+  Matter'
     { _mState             :: !(Maybe MatterState)
     , _mMatterPermissions :: !(Maybe [MatterPermission])
     , _mMatterId          :: !(Maybe Text)
     , _mName              :: !(Maybe Text)
     , _mDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Matter' with the minimum fields required to make a request.
 --
@@ -1168,13 +1209,14 @@ data Matter = Matter'
 matter
     :: Matter
 matter =
-    Matter'
+  Matter'
     { _mState = Nothing
     , _mMatterPermissions = Nothing
     , _mMatterId = Nothing
     , _mName = Nothing
     , _mDescription = Nothing
     }
+
 
 -- | The state of the matter.
 mState :: Lens' Matter (Maybe MatterState)
@@ -1228,9 +1270,12 @@ instance ToJSON Matter where
 -- | Response to a CloseMatterRequest.
 --
 -- /See:/ 'closeMatterResponse' smart constructor.
-newtype CloseMatterResponse = CloseMatterResponse'
+newtype CloseMatterResponse =
+  CloseMatterResponse'
     { _cmrMatter :: Maybe Matter
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloseMatterResponse' with the minimum fields required to make a request.
 --
@@ -1239,10 +1284,8 @@ newtype CloseMatterResponse = CloseMatterResponse'
 -- * 'cmrMatter'
 closeMatterResponse
     :: CloseMatterResponse
-closeMatterResponse =
-    CloseMatterResponse'
-    { _cmrMatter = Nothing
-    }
+closeMatterResponse = CloseMatterResponse' {_cmrMatter = Nothing}
+
 
 -- | The updated matter, with state CLOSED.
 cmrMatter :: Lens' CloseMatterResponse (Maybe Matter)
@@ -1261,11 +1304,14 @@ instance ToJSON CloseMatterResponse where
 -- | Query options for mail holds.
 --
 -- /See:/ 'heldMailQuery' smart constructor.
-data HeldMailQuery = HeldMailQuery'
+data HeldMailQuery =
+  HeldMailQuery'
     { _hmqStartTime :: !(Maybe DateTime')
     , _hmqTerms     :: !(Maybe Text)
     , _hmqEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HeldMailQuery' with the minimum fields required to make a request.
 --
@@ -1279,11 +1325,9 @@ data HeldMailQuery = HeldMailQuery'
 heldMailQuery
     :: HeldMailQuery
 heldMailQuery =
-    HeldMailQuery'
-    { _hmqStartTime = Nothing
-    , _hmqTerms = Nothing
-    , _hmqEndTime = Nothing
-    }
+  HeldMailQuery'
+    {_hmqStartTime = Nothing, _hmqTerms = Nothing, _hmqEndTime = Nothing}
+
 
 -- | The start time range for the search query. These timestamps are in GMT
 -- and rounded down to the start of the given date.
@@ -1322,9 +1366,12 @@ instance ToJSON HeldMailQuery where
 -- | Returns a list of held accounts for a hold.
 --
 -- /See:/ 'listHeldAccountsResponse' smart constructor.
-newtype ListHeldAccountsResponse = ListHeldAccountsResponse'
+newtype ListHeldAccountsResponse =
+  ListHeldAccountsResponse'
     { _lharAccounts :: Maybe [HeldAccount]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListHeldAccountsResponse' with the minimum fields required to make a request.
 --
@@ -1333,10 +1380,8 @@ newtype ListHeldAccountsResponse = ListHeldAccountsResponse'
 -- * 'lharAccounts'
 listHeldAccountsResponse
     :: ListHeldAccountsResponse
-listHeldAccountsResponse =
-    ListHeldAccountsResponse'
-    { _lharAccounts = Nothing
-    }
+listHeldAccountsResponse = ListHeldAccountsResponse' {_lharAccounts = Nothing}
+
 
 -- | The held accounts on a hold.
 lharAccounts :: Lens' ListHeldAccountsResponse [HeldAccount]
@@ -1360,10 +1405,13 @@ instance ToJSON ListHeldAccountsResponse where
 -- | The holds for a matter.
 --
 -- /See:/ 'listExportsResponse' smart constructor.
-data ListExportsResponse = ListExportsResponse'
+data ListExportsResponse =
+  ListExportsResponse'
     { _lerNextPageToken :: !(Maybe Text)
     , _lerExports       :: !(Maybe [Export])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListExportsResponse' with the minimum fields required to make a request.
 --
@@ -1375,10 +1423,8 @@ data ListExportsResponse = ListExportsResponse'
 listExportsResponse
     :: ListExportsResponse
 listExportsResponse =
-    ListExportsResponse'
-    { _lerNextPageToken = Nothing
-    , _lerExports = Nothing
-    }
+  ListExportsResponse' {_lerNextPageToken = Nothing, _lerExports = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list.
 lerNextPageToken :: Lens' ListExportsResponse (Maybe Text)
@@ -1412,10 +1458,13 @@ instance ToJSON ListExportsResponse where
 -- immutable.
 --
 -- /See:/ 'heldOrgUnit' smart constructor.
-data HeldOrgUnit = HeldOrgUnit'
+data HeldOrgUnit =
+  HeldOrgUnit'
     { _houHoldTime  :: !(Maybe DateTime')
     , _houOrgUnitId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HeldOrgUnit' with the minimum fields required to make a request.
 --
@@ -1426,11 +1475,8 @@ data HeldOrgUnit = HeldOrgUnit'
 -- * 'houOrgUnitId'
 heldOrgUnit
     :: HeldOrgUnit
-heldOrgUnit =
-    HeldOrgUnit'
-    { _houHoldTime = Nothing
-    , _houOrgUnitId = Nothing
-    }
+heldOrgUnit = HeldOrgUnit' {_houHoldTime = Nothing, _houOrgUnitId = Nothing}
+
 
 -- | When the org unit was put on hold. This property is immutable.
 houHoldTime :: Lens' HeldOrgUnit (Maybe UTCTime)
@@ -1460,10 +1506,13 @@ instance ToJSON HeldOrgUnit where
 -- | Provides the list of matters.
 --
 -- /See:/ 'listMattersResponse' smart constructor.
-data ListMattersResponse = ListMattersResponse'
+data ListMattersResponse =
+  ListMattersResponse'
     { _lmrNextPageToken :: !(Maybe Text)
     , _lmrMatters       :: !(Maybe [Matter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListMattersResponse' with the minimum fields required to make a request.
 --
@@ -1475,10 +1524,8 @@ data ListMattersResponse = ListMattersResponse'
 listMattersResponse
     :: ListMattersResponse
 listMattersResponse =
-    ListMattersResponse'
-    { _lmrNextPageToken = Nothing
-    , _lmrMatters = Nothing
-    }
+  ListMattersResponse' {_lmrNextPageToken = Nothing, _lmrMatters = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list.
 lmrNextPageToken :: Lens' ListMattersResponse (Maybe Text)
@@ -1512,14 +1559,16 @@ instance ToJSON ListMattersResponse where
 --
 -- /See:/ 'reopenMatterRequest' smart constructor.
 data ReopenMatterRequest =
-    ReopenMatterRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ReopenMatterRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReopenMatterRequest' with the minimum fields required to make a request.
 --
 reopenMatterRequest
     :: ReopenMatterRequest
 reopenMatterRequest = ReopenMatterRequest'
+
 
 instance FromJSON ReopenMatterRequest where
         parseJSON
@@ -1532,9 +1581,12 @@ instance ToJSON ReopenMatterRequest where
 -- | Remove an account as a matter collaborator.
 --
 -- /See:/ 'removeMatterPermissionsRequest' smart constructor.
-newtype RemoveMatterPermissionsRequest = RemoveMatterPermissionsRequest'
+newtype RemoveMatterPermissionsRequest =
+  RemoveMatterPermissionsRequest'
     { _rmprAccountId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoveMatterPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1544,9 +1596,8 @@ newtype RemoveMatterPermissionsRequest = RemoveMatterPermissionsRequest'
 removeMatterPermissionsRequest
     :: RemoveMatterPermissionsRequest
 removeMatterPermissionsRequest =
-    RemoveMatterPermissionsRequest'
-    { _rmprAccountId = Nothing
-    }
+  RemoveMatterPermissionsRequest' {_rmprAccountId = Nothing}
+
 
 -- | The account ID.
 rmprAccountId :: Lens' RemoveMatterPermissionsRequest (Maybe Text)
@@ -1570,13 +1621,16 @@ instance ToJSON RemoveMatterPermissionsRequest where
 -- | Export advanced options
 --
 -- /See:/ 'exportOptions' smart constructor.
-data ExportOptions = ExportOptions'
+data ExportOptions =
+  ExportOptions'
     { _eoHangoutsChatOptions :: !(Maybe HangoutsChatExportOptions)
     , _eoDriveOptions        :: !(Maybe DriveExportOptions)
     , _eoGroupsOptions       :: !(Maybe GroupsExportOptions)
     , _eoRegion              :: !(Maybe ExportOptionsRegion)
     , _eoMailOptions         :: !(Maybe MailExportOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExportOptions' with the minimum fields required to make a request.
 --
@@ -1594,13 +1648,14 @@ data ExportOptions = ExportOptions'
 exportOptions
     :: ExportOptions
 exportOptions =
-    ExportOptions'
+  ExportOptions'
     { _eoHangoutsChatOptions = Nothing
     , _eoDriveOptions = Nothing
     , _eoGroupsOptions = Nothing
     , _eoRegion = Nothing
     , _eoMailOptions = Nothing
     }
+
 
 -- | Option available for hangouts chat export.
 eoHangoutsChatOptions :: Lens' ExportOptions (Maybe HangoutsChatExportOptions)
@@ -1656,14 +1711,16 @@ instance ToJSON ExportOptions where
 --
 -- /See:/ 'closeMatterRequest' smart constructor.
 data CloseMatterRequest =
-    CloseMatterRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CloseMatterRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloseMatterRequest' with the minimum fields required to make a request.
 --
 closeMatterRequest
     :: CloseMatterRequest
 closeMatterRequest = CloseMatterRequest'
+
 
 instance FromJSON CloseMatterRequest where
         parseJSON
@@ -1676,10 +1733,13 @@ instance ToJSON CloseMatterRequest where
 -- | Drive search advanced options
 --
 -- /See:/ 'driveOptions' smart constructor.
-data DriveOptions = DriveOptions'
+data DriveOptions =
+  DriveOptions'
     { _doIncludeTeamDrives :: !(Maybe Bool)
     , _doVersionDate       :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DriveOptions' with the minimum fields required to make a request.
 --
@@ -1691,10 +1751,8 @@ data DriveOptions = DriveOptions'
 driveOptions
     :: DriveOptions
 driveOptions =
-    DriveOptions'
-    { _doIncludeTeamDrives = Nothing
-    , _doVersionDate = Nothing
-    }
+  DriveOptions' {_doIncludeTeamDrives = Nothing, _doVersionDate = Nothing}
+
 
 -- | Set to true to include Team Drive.
 doIncludeTeamDrives :: Lens' DriveOptions (Maybe Bool)
@@ -1729,10 +1787,13 @@ instance ToJSON DriveOptions where
 -- HeldAccount, if successful.
 --
 -- /See:/ 'addHeldAccountResult' smart constructor.
-data AddHeldAccountResult = AddHeldAccountResult'
+data AddHeldAccountResult =
+  AddHeldAccountResult'
     { _aharStatus  :: !(Maybe Status)
     , _aharAccount :: !(Maybe HeldAccount)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AddHeldAccountResult' with the minimum fields required to make a request.
 --
@@ -1744,10 +1805,8 @@ data AddHeldAccountResult = AddHeldAccountResult'
 addHeldAccountResult
     :: AddHeldAccountResult
 addHeldAccountResult =
-    AddHeldAccountResult'
-    { _aharStatus = Nothing
-    , _aharAccount = Nothing
-    }
+  AddHeldAccountResult' {_aharStatus = Nothing, _aharAccount = Nothing}
+
 
 -- | This represents the success status. If failed, check message.
 aharStatus :: Lens' AddHeldAccountResult (Maybe Status)
@@ -1776,13 +1835,16 @@ instance ToJSON AddHeldAccountResult where
 -- | Definition of the saved query.
 --
 -- /See:/ 'savedQuery' smart constructor.
-data SavedQuery = SavedQuery'
+data SavedQuery =
+  SavedQuery'
     { _sqSavedQueryId :: !(Maybe Text)
     , _sqMatterId     :: !(Maybe Text)
     , _sqQuery        :: !(Maybe Query)
     , _sqDisplayName  :: !(Maybe Text)
     , _sqCreateTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SavedQuery' with the minimum fields required to make a request.
 --
@@ -1800,13 +1862,14 @@ data SavedQuery = SavedQuery'
 savedQuery
     :: SavedQuery
 savedQuery =
-    SavedQuery'
+  SavedQuery'
     { _sqSavedQueryId = Nothing
     , _sqMatterId = Nothing
     , _sqQuery = Nothing
     , _sqDisplayName = Nothing
     , _sqCreateTime = Nothing
     }
+
 
 -- | A unique identifier for the saved query.
 sqSavedQueryId :: Lens' SavedQuery (Maybe Text)
@@ -1864,7 +1927,8 @@ instance ToJSON SavedQuery where
 -- accounts, or can be applied to all members of an organizational unit.
 --
 -- /See:/ 'hold' smart constructor.
-data Hold = Hold'
+data Hold =
+  Hold'
     { _hOrgUnit    :: !(Maybe HeldOrgUnit)
     , _hHoldId     :: !(Maybe Text)
     , _hAccounts   :: !(Maybe [HeldAccount])
@@ -1872,7 +1936,9 @@ data Hold = Hold'
     , _hName       :: !(Maybe Text)
     , _hQuery      :: !(Maybe CorpusQuery)
     , _hCorpus     :: !(Maybe HoldCorpus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Hold' with the minimum fields required to make a request.
 --
@@ -1894,7 +1960,7 @@ data Hold = Hold'
 hold
     :: Hold
 hold =
-    Hold'
+  Hold'
     { _hOrgUnit = Nothing
     , _hHoldId = Nothing
     , _hAccounts = Nothing
@@ -1903,6 +1969,7 @@ hold =
     , _hQuery = Nothing
     , _hCorpus = Nothing
     }
+
 
 -- | If set, the hold applies to all members of the organizational unit and
 -- accounts must be empty. This property is mutable. For groups holds, set
@@ -1967,7 +2034,8 @@ instance ToJSON Hold where
 -- | A query definition relevant for search & export.
 --
 -- /See:/ 'query' smart constructor.
-data Query = Query'
+data Query =
+  Query'
     { _qAccountInfo         :: !(Maybe AccountInfo)
     , _qTeamDriveInfo       :: !(Maybe TeamDriveInfo)
     , _qOrgUnitInfo         :: !(Maybe OrgUnitInfo)
@@ -1982,7 +2050,9 @@ data Query = Query'
     , _qTimeZone            :: !(Maybe Text)
     , _qMailOptions         :: !(Maybe MailOptions)
     , _qSearchMethod        :: !(Maybe QuerySearchMethod)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Query' with the minimum fields required to make a request.
 --
@@ -2018,7 +2088,7 @@ data Query = Query'
 query
     :: Query
 query =
-    Query'
+  Query'
     { _qAccountInfo = Nothing
     , _qTeamDriveInfo = Nothing
     , _qOrgUnitInfo = Nothing
@@ -2034,6 +2104,7 @@ query =
     , _qMailOptions = Nothing
     , _qSearchMethod = Nothing
     }
+
 
 -- | When \'ACCOUNT\' is chosen as search method, account_info needs to be
 -- specified.
@@ -2162,9 +2233,12 @@ instance ToJSON Query where
 -- | Response for batch create held accounts.
 --
 -- /See:/ 'addHeldAccountsResponse' smart constructor.
-newtype AddHeldAccountsResponse = AddHeldAccountsResponse'
+newtype AddHeldAccountsResponse =
+  AddHeldAccountsResponse'
     { _aharResponses :: Maybe [AddHeldAccountResult]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AddHeldAccountsResponse' with the minimum fields required to make a request.
 --
@@ -2173,10 +2247,8 @@ newtype AddHeldAccountsResponse = AddHeldAccountsResponse'
 -- * 'aharResponses'
 addHeldAccountsResponse
     :: AddHeldAccountsResponse
-addHeldAccountsResponse =
-    AddHeldAccountsResponse'
-    { _aharResponses = Nothing
-    }
+addHeldAccountsResponse = AddHeldAccountsResponse' {_aharResponses = Nothing}
+
 
 -- | The list of responses, in the same order as the batch request.
 aharResponses :: Lens' AddHeldAccountsResponse [AddHeldAccountResult]
@@ -2201,9 +2273,12 @@ instance ToJSON AddHeldAccountsResponse where
 -- | The options for mail export.
 --
 -- /See:/ 'mailExportOptions' smart constructor.
-newtype MailExportOptions = MailExportOptions'
+newtype MailExportOptions =
+  MailExportOptions'
     { _meoExportFormat :: Maybe MailExportOptionsExportFormat
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MailExportOptions' with the minimum fields required to make a request.
 --
@@ -2212,10 +2287,8 @@ newtype MailExportOptions = MailExportOptions'
 -- * 'meoExportFormat'
 mailExportOptions
     :: MailExportOptions
-mailExportOptions =
-    MailExportOptions'
-    { _meoExportFormat = Nothing
-    }
+mailExportOptions = MailExportOptions' {_meoExportFormat = Nothing}
+
 
 -- | The export file format.
 meoExportFormat :: Lens' MailExportOptions (Maybe MailExportOptionsExportFormat)
@@ -2238,10 +2311,13 @@ instance ToJSON MailExportOptions where
 -- | The holds for a matter.
 --
 -- /See:/ 'listHoldsResponse' smart constructor.
-data ListHoldsResponse = ListHoldsResponse'
+data ListHoldsResponse =
+  ListHoldsResponse'
     { _lhrNextPageToken :: !(Maybe Text)
     , _lhrHolds         :: !(Maybe [Hold])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListHoldsResponse' with the minimum fields required to make a request.
 --
@@ -2253,10 +2329,8 @@ data ListHoldsResponse = ListHoldsResponse'
 listHoldsResponse
     :: ListHoldsResponse
 listHoldsResponse =
-    ListHoldsResponse'
-    { _lhrNextPageToken = Nothing
-    , _lhrHolds = Nothing
-    }
+  ListHoldsResponse' {_lhrNextPageToken = Nothing, _lhrHolds = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list. If this is
 -- empty, then there are no more holds to list.
@@ -2290,9 +2364,12 @@ instance ToJSON ListHoldsResponse where
 -- | The options for groups export.
 --
 -- /See:/ 'groupsExportOptions' smart constructor.
-newtype GroupsExportOptions = GroupsExportOptions'
+newtype GroupsExportOptions =
+  GroupsExportOptions'
     { _geoExportFormat :: Maybe GroupsExportOptionsExportFormat
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsExportOptions' with the minimum fields required to make a request.
 --
@@ -2301,10 +2378,8 @@ newtype GroupsExportOptions = GroupsExportOptions'
 -- * 'geoExportFormat'
 groupsExportOptions
     :: GroupsExportOptions
-groupsExportOptions =
-    GroupsExportOptions'
-    { _geoExportFormat = Nothing
-    }
+groupsExportOptions = GroupsExportOptions' {_geoExportFormat = Nothing}
+
 
 -- | The export format for groups export.
 geoExportFormat :: Lens' GroupsExportOptions (Maybe GroupsExportOptionsExportFormat)
@@ -2329,10 +2404,13 @@ instance ToJSON GroupsExportOptions where
 -- MatterPermission resources cease to exist.
 --
 -- /See:/ 'matterPermission' smart constructor.
-data MatterPermission = MatterPermission'
+data MatterPermission =
+  MatterPermission'
     { _mpRole      :: !(Maybe MatterPermissionRole)
     , _mpAccountId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MatterPermission' with the minimum fields required to make a request.
 --
@@ -2343,11 +2421,8 @@ data MatterPermission = MatterPermission'
 -- * 'mpAccountId'
 matterPermission
     :: MatterPermission
-matterPermission =
-    MatterPermission'
-    { _mpRole = Nothing
-    , _mpAccountId = Nothing
-    }
+matterPermission = MatterPermission' {_mpRole = Nothing, _mpAccountId = Nothing}
+
 
 -- | The user\'s role in this matter.
 mpRole :: Lens' MatterPermission (Maybe MatterPermissionRole)
@@ -2376,9 +2451,12 @@ instance ToJSON MatterPermission where
 -- | The options for Drive export.
 --
 -- /See:/ 'driveExportOptions' smart constructor.
-newtype DriveExportOptions = DriveExportOptions'
+newtype DriveExportOptions =
+  DriveExportOptions'
     { _deoIncludeAccessInfo :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DriveExportOptions' with the minimum fields required to make a request.
 --
@@ -2387,10 +2465,8 @@ newtype DriveExportOptions = DriveExportOptions'
 -- * 'deoIncludeAccessInfo'
 driveExportOptions
     :: DriveExportOptions
-driveExportOptions =
-    DriveExportOptions'
-    { _deoIncludeAccessInfo = Nothing
-    }
+driveExportOptions = DriveExportOptions' {_deoIncludeAccessInfo = Nothing}
+
 
 -- | Set to true to include access level information for users with
 -- <https://support.google.com/vault/answer/6099459#metadata indirect access>
@@ -2415,11 +2491,14 @@ instance ToJSON DriveExportOptions where
 -- | Query options for group holds.
 --
 -- /See:/ 'heldGroupsQuery' smart constructor.
-data HeldGroupsQuery = HeldGroupsQuery'
+data HeldGroupsQuery =
+  HeldGroupsQuery'
     { _hgqStartTime :: !(Maybe DateTime')
     , _hgqTerms     :: !(Maybe Text)
     , _hgqEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HeldGroupsQuery' with the minimum fields required to make a request.
 --
@@ -2433,11 +2512,9 @@ data HeldGroupsQuery = HeldGroupsQuery'
 heldGroupsQuery
     :: HeldGroupsQuery
 heldGroupsQuery =
-    HeldGroupsQuery'
-    { _hgqStartTime = Nothing
-    , _hgqTerms = Nothing
-    , _hgqEndTime = Nothing
-    }
+  HeldGroupsQuery'
+    {_hgqStartTime = Nothing, _hgqTerms = Nothing, _hgqEndTime = Nothing}
+
 
 -- | The start time range for the search query. These timestamps are in GMT
 -- and rounded down to the start of the given date.
@@ -2476,9 +2553,12 @@ instance ToJSON HeldGroupsQuery where
 -- | Response to a ReopenMatterRequest.
 --
 -- /See:/ 'reopenMatterResponse' smart constructor.
-newtype ReopenMatterResponse = ReopenMatterResponse'
+newtype ReopenMatterResponse =
+  ReopenMatterResponse'
     { _rmrMatter :: Maybe Matter
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReopenMatterResponse' with the minimum fields required to make a request.
 --
@@ -2487,10 +2567,8 @@ newtype ReopenMatterResponse = ReopenMatterResponse'
 -- * 'rmrMatter'
 reopenMatterResponse
     :: ReopenMatterResponse
-reopenMatterResponse =
-    ReopenMatterResponse'
-    { _rmrMatter = Nothing
-    }
+reopenMatterResponse = ReopenMatterResponse' {_rmrMatter = Nothing}
+
 
 -- | The updated matter, with state OPEN.
 rmrMatter :: Lens' ReopenMatterResponse (Maybe Matter)
@@ -2509,12 +2587,15 @@ instance ToJSON ReopenMatterResponse where
 -- | An export file on cloud storage
 --
 -- /See:/ 'cloudStorageFile' smart constructor.
-data CloudStorageFile = CloudStorageFile'
+data CloudStorageFile =
+  CloudStorageFile'
     { _csfObjectName :: !(Maybe Text)
     , _csfSize       :: !(Maybe (Textual Int64))
     , _csfBucketName :: !(Maybe Text)
     , _csfMD5Hash    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudStorageFile' with the minimum fields required to make a request.
 --
@@ -2530,12 +2611,13 @@ data CloudStorageFile = CloudStorageFile'
 cloudStorageFile
     :: CloudStorageFile
 cloudStorageFile =
-    CloudStorageFile'
+  CloudStorageFile'
     { _csfObjectName = Nothing
     , _csfSize = Nothing
     , _csfBucketName = Nothing
     , _csfMD5Hash = Nothing
     }
+
 
 -- | The cloud storage object name of this export file. Can be used in cloud
 -- storage JSON\/XML API.
@@ -2583,9 +2665,12 @@ instance ToJSON CloudStorageFile where
 -- | Mail search advanced options
 --
 -- /See:/ 'mailOptions' smart constructor.
-newtype MailOptions = MailOptions'
+newtype MailOptions =
+  MailOptions'
     { _moExcludeDrafts :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MailOptions' with the minimum fields required to make a request.
 --
@@ -2594,10 +2679,8 @@ newtype MailOptions = MailOptions'
 -- * 'moExcludeDrafts'
 mailOptions
     :: MailOptions
-mailOptions =
-    MailOptions'
-    { _moExcludeDrafts = Nothing
-    }
+mailOptions = MailOptions' {_moExcludeDrafts = Nothing}
+
 
 -- | Set to true to exclude drafts.
 moExcludeDrafts :: Lens' MailOptions (Maybe Bool)

@@ -63,7 +63,8 @@ type OrganizationsRolesPatchResource =
 -- | Updates a Role definition.
 --
 -- /See:/ 'organizationsRolesPatch' smart constructor.
-data OrganizationsRolesPatch = OrganizationsRolesPatch'
+data OrganizationsRolesPatch =
+  OrganizationsRolesPatch'
     { _orpXgafv          :: !(Maybe Xgafv)
     , _orpUploadProtocol :: !(Maybe Text)
     , _orpUpdateMask     :: !(Maybe GFieldMask)
@@ -72,7 +73,9 @@ data OrganizationsRolesPatch = OrganizationsRolesPatch'
     , _orpPayload        :: !Role
     , _orpName           :: !Text
     , _orpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsRolesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ organizationsRolesPatch
     -> Text -- ^ 'orpName'
     -> OrganizationsRolesPatch
 organizationsRolesPatch pOrpPayload_ pOrpName_ =
-    OrganizationsRolesPatch'
+  OrganizationsRolesPatch'
     { _orpXgafv = Nothing
     , _orpUploadProtocol = Nothing
     , _orpUpdateMask = Nothing
@@ -108,6 +111,7 @@ organizationsRolesPatch pOrpPayload_ pOrpName_ =
     , _orpName = pOrpName_
     , _orpCallback = Nothing
     }
+
 
 -- | V1 error format.
 orpXgafv :: Lens' OrganizationsRolesPatch (Maybe Xgafv)

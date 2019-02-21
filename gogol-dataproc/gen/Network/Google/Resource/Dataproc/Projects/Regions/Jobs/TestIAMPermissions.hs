@@ -72,7 +72,8 @@ type ProjectsRegionsJobsTestIAMPermissionsResource =
 -- warning.
 --
 -- /See:/ 'projectsRegionsJobsTestIAMPermissions' smart constructor.
-data ProjectsRegionsJobsTestIAMPermissions = ProjectsRegionsJobsTestIAMPermissions'
+data ProjectsRegionsJobsTestIAMPermissions =
+  ProjectsRegionsJobsTestIAMPermissions'
     { _prjtipXgafv          :: !(Maybe Xgafv)
     , _prjtipUploadProtocol :: !(Maybe Text)
     , _prjtipAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsRegionsJobsTestIAMPermissions = ProjectsRegionsJobsTestIAMPermissio
     , _prjtipPayload        :: !TestIAMPermissionsRequest
     , _prjtipResource       :: !Text
     , _prjtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsJobsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsRegionsJobsTestIAMPermissions
     -> Text -- ^ 'prjtipResource'
     -> ProjectsRegionsJobsTestIAMPermissions
 projectsRegionsJobsTestIAMPermissions pPrjtipPayload_ pPrjtipResource_ =
-    ProjectsRegionsJobsTestIAMPermissions'
+  ProjectsRegionsJobsTestIAMPermissions'
     { _prjtipXgafv = Nothing
     , _prjtipUploadProtocol = Nothing
     , _prjtipAccessToken = Nothing
@@ -113,6 +116,7 @@ projectsRegionsJobsTestIAMPermissions pPrjtipPayload_ pPrjtipResource_ =
     , _prjtipResource = pPrjtipResource_
     , _prjtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prjtipXgafv :: Lens' ProjectsRegionsJobsTestIAMPermissions (Maybe Xgafv)
@@ -158,7 +162,8 @@ prjtipCallback
       (\ s a -> s{_prjtipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsJobsTestIAMPermissions where
+           ProjectsRegionsJobsTestIAMPermissions
+         where
         type Rs ProjectsRegionsJobsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsRegionsJobsTestIAMPermissions =

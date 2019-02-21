@@ -59,11 +59,14 @@ type StorelayoutpagesPatchResource =
 -- semantics.
 --
 -- /See:/ 'storelayoutpagesPatch' smart constructor.
-data StorelayoutpagesPatch = StorelayoutpagesPatch'
+data StorelayoutpagesPatch =
+  StorelayoutpagesPatch'
     { _spEnterpriseId :: !Text
     , _spPageId       :: !Text
     , _spPayload      :: !StorePage
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StorelayoutpagesPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ storelayoutpagesPatch
     -> StorePage -- ^ 'spPayload'
     -> StorelayoutpagesPatch
 storelayoutpagesPatch pSpEnterpriseId_ pSpPageId_ pSpPayload_ =
-    StorelayoutpagesPatch'
+  StorelayoutpagesPatch'
     { _spEnterpriseId = pSpEnterpriseId_
     , _spPageId = pSpPageId_
     , _spPayload = pSpPayload_
     }
+
 
 -- | The ID of the enterprise.
 spEnterpriseId :: Lens' StorelayoutpagesPatch Text

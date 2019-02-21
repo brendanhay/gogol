@@ -51,9 +51,12 @@ type CommentsGetResource =
 -- | Get a comment.
 --
 -- /See:/ 'commentsGet' smart constructor.
-newtype CommentsGet = CommentsGet'
+newtype CommentsGet =
+  CommentsGet'
     { _cgCommentId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype CommentsGet = CommentsGet'
 commentsGet
     :: Text -- ^ 'cgCommentId'
     -> CommentsGet
-commentsGet pCgCommentId_ =
-    CommentsGet'
-    { _cgCommentId = pCgCommentId_
-    }
+commentsGet pCgCommentId_ = CommentsGet' {_cgCommentId = pCgCommentId_}
+
 
 -- | The ID of the comment to get.
 cgCommentId :: Lens' CommentsGet Text

@@ -84,14 +84,17 @@ type PhotoStartUploadResource =
 -- object entry.
 --
 -- /See:/ 'photoStartUpload' smart constructor.
-data PhotoStartUpload = PhotoStartUpload'
+data PhotoStartUpload =
+  PhotoStartUpload'
     { _psuXgafv          :: !(Maybe Xgafv)
     , _psuUploadProtocol :: !(Maybe Text)
     , _psuAccessToken    :: !(Maybe Text)
     , _psuUploadType     :: !(Maybe Text)
     , _psuPayload        :: !Empty
     , _psuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotoStartUpload' with the minimum fields required to make a request.
 --
@@ -112,7 +115,7 @@ photoStartUpload
     :: Empty -- ^ 'psuPayload'
     -> PhotoStartUpload
 photoStartUpload pPsuPayload_ =
-    PhotoStartUpload'
+  PhotoStartUpload'
     { _psuXgafv = Nothing
     , _psuUploadProtocol = Nothing
     , _psuAccessToken = Nothing
@@ -120,6 +123,7 @@ photoStartUpload pPsuPayload_ =
     , _psuPayload = pPsuPayload_
     , _psuCallback = Nothing
     }
+
 
 -- | V1 error format.
 psuXgafv :: Lens' PhotoStartUpload (Maybe Xgafv)

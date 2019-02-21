@@ -59,12 +59,15 @@ type ScoresSubmitResource =
 -- | Submits a score to the specified leaderboard.
 --
 -- /See:/ 'scoresSubmit' smart constructor.
-data ScoresSubmit = ScoresSubmit'
+data ScoresSubmit =
+  ScoresSubmit'
     { _ssScoreTag      :: !(Maybe Text)
     , _ssScore         :: !(Textual Int64)
     , _ssLeaderboardId :: !Text
     , _ssLanguage      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScoresSubmit' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ scoresSubmit
     -> Text -- ^ 'ssLeaderboardId'
     -> ScoresSubmit
 scoresSubmit pSsScore_ pSsLeaderboardId_ =
-    ScoresSubmit'
+  ScoresSubmit'
     { _ssScoreTag = Nothing
     , _ssScore = _Coerce # pSsScore_
     , _ssLeaderboardId = pSsLeaderboardId_
     , _ssLanguage = Nothing
     }
+
 
 -- | Additional information about the score you\'re submitting. Values must
 -- contain no more than 64 URI-safe characters as defined by section 2.3 of
@@ -120,7 +124,8 @@ ssLanguage
 instance GoogleRequest ScoresSubmit where
         type Rs ScoresSubmit = PlayerScoreResponse
         type Scopes ScoresSubmit =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ScoresSubmit'{..}
           = go _ssLeaderboardId (Just _ssScore) _ssScoreTag
               _ssLanguage

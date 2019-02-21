@@ -53,10 +53,13 @@ type QueriesRunQueryResource =
 -- | Runs a stored query to generate a report.
 --
 -- /See:/ 'queriesRunQuery' smart constructor.
-data QueriesRunQuery = QueriesRunQuery'
+data QueriesRunQuery =
+  QueriesRunQuery'
     { _qrqQueryId :: !(Textual Int64)
     , _qrqPayload :: !RunQueryRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueriesRunQuery' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ queriesRunQuery
     -> RunQueryRequest -- ^ 'qrqPayload'
     -> QueriesRunQuery
 queriesRunQuery pQrqQueryId_ pQrqPayload_ =
-    QueriesRunQuery'
-    { _qrqQueryId = _Coerce # pQrqQueryId_
-    , _qrqPayload = pQrqPayload_
-    }
+  QueriesRunQuery'
+    {_qrqQueryId = _Coerce # pQrqQueryId_, _qrqPayload = pQrqPayload_}
+
 
 -- | Query ID to run.
 qrqQueryId :: Lens' QueriesRunQuery Int64

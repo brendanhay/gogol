@@ -66,13 +66,16 @@ type InstallsPatchResource =
 -- necessary. This method supports patch semantics.
 --
 -- /See:/ 'installsPatch' smart constructor.
-data InstallsPatch = InstallsPatch'
+data InstallsPatch =
+  InstallsPatch'
     { _ipEnterpriseId :: !Text
     , _ipPayload      :: !Install
     , _ipUserId       :: !Text
     , _ipInstallId    :: !Text
     , _ipDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstallsPatch' with the minimum fields required to make a request.
 --
@@ -95,13 +98,14 @@ installsPatch
     -> Text -- ^ 'ipDeviceId'
     -> InstallsPatch
 installsPatch pIpEnterpriseId_ pIpPayload_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
-    InstallsPatch'
+  InstallsPatch'
     { _ipEnterpriseId = pIpEnterpriseId_
     , _ipPayload = pIpPayload_
     , _ipUserId = pIpUserId_
     , _ipInstallId = pIpInstallId_
     , _ipDeviceId = pIpDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 ipEnterpriseId :: Lens' InstallsPatch Text

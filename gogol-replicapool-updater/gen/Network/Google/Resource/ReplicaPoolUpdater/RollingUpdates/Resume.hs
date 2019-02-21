@@ -60,11 +60,14 @@ type RollingUpdatesResumeResource =
 -- state of the update is ROLLED_OUT.
 --
 -- /See:/ 'rollingUpdatesResume' smart constructor.
-data RollingUpdatesResume = RollingUpdatesResume'
+data RollingUpdatesResume =
+  RollingUpdatesResume'
     { _rRollingUpdate :: !Text
     , _rProject       :: !Text
     , _rZone          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RollingUpdatesResume' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ rollingUpdatesResume
     -> Text -- ^ 'rZone'
     -> RollingUpdatesResume
 rollingUpdatesResume pRRollingUpdate_ pRProject_ pRZone_ =
-    RollingUpdatesResume'
+  RollingUpdatesResume'
     { _rRollingUpdate = pRRollingUpdate_
     , _rProject = pRProject_
     , _rZone = pRZone_
     }
+
 
 -- | The name of the update.
 rRollingUpdate :: Lens' RollingUpdatesResume Text

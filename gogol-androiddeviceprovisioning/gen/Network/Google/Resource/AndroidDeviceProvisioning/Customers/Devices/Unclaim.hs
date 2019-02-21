@@ -67,7 +67,8 @@ type CustomersDevicesUnclaimResource =
 -- reseller to register the device into zero-touch enrollment again.
 --
 -- /See:/ 'customersDevicesUnclaim' smart constructor.
-data CustomersDevicesUnclaim = CustomersDevicesUnclaim'
+data CustomersDevicesUnclaim =
+  CustomersDevicesUnclaim'
     { _cduParent         :: !Text
     , _cduXgafv          :: !(Maybe Xgafv)
     , _cduUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data CustomersDevicesUnclaim = CustomersDevicesUnclaim'
     , _cduUploadType     :: !(Maybe Text)
     , _cduPayload        :: !CustomerUnclaimDeviceRequest
     , _cduCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomersDevicesUnclaim' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ customersDevicesUnclaim
     -> CustomerUnclaimDeviceRequest -- ^ 'cduPayload'
     -> CustomersDevicesUnclaim
 customersDevicesUnclaim pCduParent_ pCduPayload_ =
-    CustomersDevicesUnclaim'
+  CustomersDevicesUnclaim'
     { _cduParent = pCduParent_
     , _cduXgafv = Nothing
     , _cduUploadProtocol = Nothing
@@ -108,6 +111,7 @@ customersDevicesUnclaim pCduParent_ pCduPayload_ =
     , _cduPayload = pCduPayload_
     , _cduCallback = Nothing
     }
+
 
 -- | Required. The customer managing the device. An API resource name in the
 -- format \`customers\/[CUSTOMER_ID]\`.

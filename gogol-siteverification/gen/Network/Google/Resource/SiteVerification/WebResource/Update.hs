@@ -54,10 +54,13 @@ type WebResourceUpdateResource =
 -- | Modify the list of owners for your website or domain.
 --
 -- /See:/ 'webResourceUpdate' smart constructor.
-data WebResourceUpdate = WebResourceUpdate'
+data WebResourceUpdate =
+  WebResourceUpdate'
     { _wruPayload :: !SiteVerificationWebResourceResource
     , _wruId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebResourceUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ webResourceUpdate
     -> Text -- ^ 'wruId'
     -> WebResourceUpdate
 webResourceUpdate pWruPayload_ pWruId_ =
-    WebResourceUpdate'
-    { _wruPayload = pWruPayload_
-    , _wruId = pWruId_
-    }
+  WebResourceUpdate' {_wruPayload = pWruPayload_, _wruId = pWruId_}
+
 
 -- | Multipart request metadata.
 wruPayload :: Lens' WebResourceUpdate SiteVerificationWebResourceResource

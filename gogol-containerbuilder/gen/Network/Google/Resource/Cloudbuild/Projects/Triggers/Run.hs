@@ -65,7 +65,8 @@ type ProjectsTriggersRunResource =
 -- | Runs a \`BuildTrigger\` at a particular source revision.
 --
 -- /See:/ 'projectsTriggersRun' smart constructor.
-data ProjectsTriggersRun = ProjectsTriggersRun'
+data ProjectsTriggersRun =
+  ProjectsTriggersRun'
     { _ptrXgafv          :: !(Maybe Xgafv)
     , _ptrUploadProtocol :: !(Maybe Text)
     , _ptrTriggerId      :: !Text
@@ -74,7 +75,9 @@ data ProjectsTriggersRun = ProjectsTriggersRun'
     , _ptrPayload        :: !RepoSource
     , _ptrProjectId      :: !Text
     , _ptrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTriggersRun' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsTriggersRun
     -> Text -- ^ 'ptrProjectId'
     -> ProjectsTriggersRun
 projectsTriggersRun pPtrTriggerId_ pPtrPayload_ pPtrProjectId_ =
-    ProjectsTriggersRun'
+  ProjectsTriggersRun'
     { _ptrXgafv = Nothing
     , _ptrUploadProtocol = Nothing
     , _ptrTriggerId = pPtrTriggerId_
@@ -111,6 +114,7 @@ projectsTriggersRun pPtrTriggerId_ pPtrPayload_ pPtrProjectId_ =
     , _ptrProjectId = pPtrProjectId_
     , _ptrCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptrXgafv :: Lens' ProjectsTriggersRun (Maybe Xgafv)

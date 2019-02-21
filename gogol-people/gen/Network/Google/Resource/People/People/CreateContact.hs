@@ -62,7 +62,8 @@ type PeopleCreateContactResource =
 -- | Create a new contact and return the person resource for that contact.
 --
 -- /See:/ 'peopleCreateContact' smart constructor.
-data PeopleCreateContact = PeopleCreateContact'
+data PeopleCreateContact =
+  PeopleCreateContact'
     { _pccParent         :: !(Maybe Text)
     , _pccXgafv          :: !(Maybe Xgafv)
     , _pccUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,9 @@ data PeopleCreateContact = PeopleCreateContact'
     , _pccUploadType     :: !(Maybe Text)
     , _pccPayload        :: !Person
     , _pccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeopleCreateContact' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ peopleCreateContact
     :: Person -- ^ 'pccPayload'
     -> PeopleCreateContact
 peopleCreateContact pPccPayload_ =
-    PeopleCreateContact'
+  PeopleCreateContact'
     { _pccParent = Nothing
     , _pccXgafv = Nothing
     , _pccUploadProtocol = Nothing
@@ -102,6 +105,7 @@ peopleCreateContact pPccPayload_ =
     , _pccPayload = pPccPayload_
     , _pccCallback = Nothing
     }
+
 
 -- | The resource name of the owning person resource.
 pccParent :: Lens' PeopleCreateContact (Maybe Text)

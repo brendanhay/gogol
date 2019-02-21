@@ -64,7 +64,8 @@ type AccountsPublisherProFilesGetResource =
 -- | Gets the requested publisher profile by id.
 --
 -- /See:/ 'accountsPublisherProFilesGet' smart constructor.
-data AccountsPublisherProFilesGet = AccountsPublisherProFilesGet'
+data AccountsPublisherProFilesGet =
+  AccountsPublisherProFilesGet'
     { _appfgXgafv              :: !(Maybe Xgafv)
     , _appfgUploadProtocol     :: !(Maybe Text)
     , _appfgAccessToken        :: !(Maybe Text)
@@ -72,7 +73,9 @@ data AccountsPublisherProFilesGet = AccountsPublisherProFilesGet'
     , _appfgAccountId          :: !Text
     , _appfgPublisherProFileId :: !Text
     , _appfgCallback           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsPublisherProFilesGet' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ accountsPublisherProFilesGet
     -> Text -- ^ 'appfgPublisherProFileId'
     -> AccountsPublisherProFilesGet
 accountsPublisherProFilesGet pAppfgAccountId_ pAppfgPublisherProFileId_ =
-    AccountsPublisherProFilesGet'
+  AccountsPublisherProFilesGet'
     { _appfgXgafv = Nothing
     , _appfgUploadProtocol = Nothing
     , _appfgAccessToken = Nothing
@@ -105,6 +108,7 @@ accountsPublisherProFilesGet pAppfgAccountId_ pAppfgPublisherProFileId_ =
     , _appfgPublisherProFileId = pAppfgPublisherProFileId_
     , _appfgCallback = Nothing
     }
+
 
 -- | V1 error format.
 appfgXgafv :: Lens' AccountsPublisherProFilesGet (Maybe Xgafv)

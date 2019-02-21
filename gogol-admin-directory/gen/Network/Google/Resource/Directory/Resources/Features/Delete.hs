@@ -56,10 +56,13 @@ type ResourcesFeaturesDeleteResource =
 -- | Deletes a feature.
 --
 -- /See:/ 'resourcesFeaturesDelete' smart constructor.
-data ResourcesFeaturesDelete = ResourcesFeaturesDelete'
+data ResourcesFeaturesDelete =
+  ResourcesFeaturesDelete'
     { _rfdCustomer   :: !Text
     , _rfdFeatureKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesFeaturesDelete' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ resourcesFeaturesDelete
     -> Text -- ^ 'rfdFeatureKey'
     -> ResourcesFeaturesDelete
 resourcesFeaturesDelete pRfdCustomer_ pRfdFeatureKey_ =
-    ResourcesFeaturesDelete'
-    { _rfdCustomer = pRfdCustomer_
-    , _rfdFeatureKey = pRfdFeatureKey_
-    }
+  ResourcesFeaturesDelete'
+    {_rfdCustomer = pRfdCustomer_, _rfdFeatureKey = pRfdFeatureKey_}
+
 
 -- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your

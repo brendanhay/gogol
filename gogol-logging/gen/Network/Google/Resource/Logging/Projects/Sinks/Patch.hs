@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.patch@.
@@ -66,12 +66,13 @@ type ProjectsSinksPatchResource =
                          ReqBody '[JSON] LogSink :> Patch '[JSON] LogSink
 
 -- | Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ 'projectsSinksPatch' smart constructor.
-data ProjectsSinksPatch = ProjectsSinksPatch'
+data ProjectsSinksPatch =
+  ProjectsSinksPatch'
     { _pspXgafv                :: !(Maybe Xgafv)
     , _pspUniqueWriterIdentity :: !(Maybe Bool)
     , _pspUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsSinksPatch = ProjectsSinksPatch'
     , _pspPayload              :: !LogSink
     , _pspSinkName             :: !Text
     , _pspCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSinksPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsSinksPatch
     -> Text -- ^ 'pspSinkName'
     -> ProjectsSinksPatch
 projectsSinksPatch pPspPayload_ pPspSinkName_ =
-    ProjectsSinksPatch'
+  ProjectsSinksPatch'
     { _pspXgafv = Nothing
     , _pspUniqueWriterIdentity = Nothing
     , _pspUploadProtocol = Nothing
@@ -120,6 +123,7 @@ projectsSinksPatch pPspPayload_ pPspSinkName_ =
     , _pspSinkName = pPspSinkName_
     , _pspCallback = Nothing
     }
+
 
 -- | V1 error format.
 pspXgafv :: Lens' ProjectsSinksPatch (Maybe Xgafv)

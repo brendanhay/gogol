@@ -68,7 +68,8 @@ type AccountsClientsListResource =
 -- | Lists all the clients for the current sponsor buyer.
 --
 -- /See:/ 'accountsClientsList' smart constructor.
-data AccountsClientsList = AccountsClientsList'
+data AccountsClientsList =
+  AccountsClientsList'
     { _aclcXgafv           :: !(Maybe Xgafv)
     , _aclcUploadProtocol  :: !(Maybe Text)
     , _aclcAccessToken     :: !(Maybe Text)
@@ -78,7 +79,9 @@ data AccountsClientsList = AccountsClientsList'
     , _aclcPageToken       :: !(Maybe Text)
     , _aclcPageSize        :: !(Maybe (Textual Int32))
     , _aclcCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsClientsList' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ accountsClientsList
     :: Int64 -- ^ 'aclcAccountId'
     -> AccountsClientsList
 accountsClientsList pAclcAccountId_ =
-    AccountsClientsList'
+  AccountsClientsList'
     { _aclcXgafv = Nothing
     , _aclcUploadProtocol = Nothing
     , _aclcAccessToken = Nothing
@@ -116,6 +119,7 @@ accountsClientsList pAclcAccountId_ =
     , _aclcPageSize = Nothing
     , _aclcCallback = Nothing
     }
+
 
 -- | V1 error format.
 aclcXgafv :: Lens' AccountsClientsList (Maybe Xgafv)

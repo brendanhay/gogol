@@ -59,11 +59,14 @@ type SecurityPoliciesGetRuleResource =
 -- | Gets a rule at the specified priority.
 --
 -- /See:/ 'securityPoliciesGetRule' smart constructor.
-data SecurityPoliciesGetRule = SecurityPoliciesGetRule'
+data SecurityPoliciesGetRule =
+  SecurityPoliciesGetRule'
     { _spgrPriority       :: !(Maybe (Textual Int32))
     , _spgrProject        :: !Text
     , _spgrSecurityPolicy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SecurityPoliciesGetRule' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ securityPoliciesGetRule
     -> Text -- ^ 'spgrSecurityPolicy'
     -> SecurityPoliciesGetRule
 securityPoliciesGetRule pSpgrProject_ pSpgrSecurityPolicy_ =
-    SecurityPoliciesGetRule'
+  SecurityPoliciesGetRule'
     { _spgrPriority = Nothing
     , _spgrProject = pSpgrProject_
     , _spgrSecurityPolicy = pSpgrSecurityPolicy_
     }
+
 
 -- | The priority of the rule to get from the security policy.
 spgrPriority :: Lens' SecurityPoliciesGetRule (Maybe Int32)

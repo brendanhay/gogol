@@ -63,7 +63,8 @@ type UptimeCheckIPsListResource =
 -- | Returns the list of IPs that checkers run from
 --
 -- /See:/ 'uptimeCheckIPsList' smart constructor.
-data UptimeCheckIPsList = UptimeCheckIPsList'
+data UptimeCheckIPsList =
+  UptimeCheckIPsList'
     { _ucilXgafv          :: !(Maybe Xgafv)
     , _ucilUploadProtocol :: !(Maybe Text)
     , _ucilAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data UptimeCheckIPsList = UptimeCheckIPsList'
     , _ucilPageToken      :: !(Maybe Text)
     , _ucilPageSize       :: !(Maybe (Textual Int32))
     , _ucilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UptimeCheckIPsList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ data UptimeCheckIPsList = UptimeCheckIPsList'
 uptimeCheckIPsList
     :: UptimeCheckIPsList
 uptimeCheckIPsList =
-    UptimeCheckIPsList'
+  UptimeCheckIPsList'
     { _ucilXgafv = Nothing
     , _ucilUploadProtocol = Nothing
     , _ucilAccessToken = Nothing
@@ -102,6 +105,7 @@ uptimeCheckIPsList =
     , _ucilPageSize = Nothing
     , _ucilCallback = Nothing
     }
+
 
 -- | V1 error format.
 ucilXgafv :: Lens' UptimeCheckIPsList (Maybe Xgafv)

@@ -53,10 +53,13 @@ type DatafeedsInsertResource =
 -- | Registers a datafeed configuration with your Merchant Center account.
 --
 -- /See:/ 'datafeedsInsert' smart constructor.
-data DatafeedsInsert = DatafeedsInsert'
+data DatafeedsInsert =
+  DatafeedsInsert'
     { _diMerchantId :: !(Textual Word64)
     , _diPayload    :: !Datafeed
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatafeedsInsert' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ datafeedsInsert
     -> Datafeed -- ^ 'diPayload'
     -> DatafeedsInsert
 datafeedsInsert pDiMerchantId_ pDiPayload_ =
-    DatafeedsInsert'
-    { _diMerchantId = _Coerce # pDiMerchantId_
-    , _diPayload = pDiPayload_
-    }
+  DatafeedsInsert'
+    {_diMerchantId = _Coerce # pDiMerchantId_, _diPayload = pDiPayload_}
+
 
 -- | The ID of the account that manages the datafeed. This account cannot be
 -- a multi-client account.

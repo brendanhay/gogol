@@ -54,10 +54,13 @@ type OrdersGetbymerchantOrderidResource =
 -- | Retrieves an order using merchant order id.
 --
 -- /See:/ 'ordersGetbymerchantOrderid' smart constructor.
-data OrdersGetbymerchantOrderid = OrdersGetbymerchantOrderid'
+data OrdersGetbymerchantOrderid =
+  OrdersGetbymerchantOrderid'
     { _ogogMerchantId      :: !(Textual Word64)
     , _ogogMerchantOrderId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersGetbymerchantOrderid' with the minimum fields required to make a request.
 --
@@ -71,10 +74,11 @@ ordersGetbymerchantOrderid
     -> Text -- ^ 'ogogMerchantOrderId'
     -> OrdersGetbymerchantOrderid
 ordersGetbymerchantOrderid pOgogMerchantId_ pOgogMerchantOrderId_ =
-    OrdersGetbymerchantOrderid'
+  OrdersGetbymerchantOrderid'
     { _ogogMerchantId = _Coerce # pOgogMerchantId_
     , _ogogMerchantOrderId = pOgogMerchantOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

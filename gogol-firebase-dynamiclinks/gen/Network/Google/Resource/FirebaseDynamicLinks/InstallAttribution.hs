@@ -61,14 +61,17 @@ type InstallAttributionResource =
 -- | Get iOS strong\/weak-match info for post-install attribution.
 --
 -- /See:/ 'installAttribution' smart constructor.
-data InstallAttribution = InstallAttribution'
+data InstallAttribution =
+  InstallAttribution'
     { _iaXgafv          :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
     , _iaAccessToken    :: !(Maybe Text)
     , _iaUploadType     :: !(Maybe Text)
     , _iaPayload        :: !GetIosPostInstallAttributionRequest
     , _iaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstallAttribution' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ installAttribution
     :: GetIosPostInstallAttributionRequest -- ^ 'iaPayload'
     -> InstallAttribution
 installAttribution pIaPayload_ =
-    InstallAttribution'
+  InstallAttribution'
     { _iaXgafv = Nothing
     , _iaUploadProtocol = Nothing
     , _iaAccessToken = Nothing
@@ -97,6 +100,7 @@ installAttribution pIaPayload_ =
     , _iaPayload = pIaPayload_
     , _iaCallback = Nothing
     }
+
 
 -- | V1 error format.
 iaXgafv :: Lens' InstallAttribution (Maybe Xgafv)

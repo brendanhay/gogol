@@ -59,14 +59,17 @@ type ExclusionsGetResource =
 -- | Gets the description of an exclusion.
 --
 -- /See:/ 'exclusionsGet' smart constructor.
-data ExclusionsGet = ExclusionsGet'
+data ExclusionsGet =
+  ExclusionsGet'
     { _egXgafv          :: !(Maybe Xgafv)
     , _egUploadProtocol :: !(Maybe Text)
     , _egAccessToken    :: !(Maybe Text)
     , _egUploadType     :: !(Maybe Text)
     , _egName           :: !Text
     , _egCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExclusionsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ exclusionsGet
     :: Text -- ^ 'egName'
     -> ExclusionsGet
 exclusionsGet pEgName_ =
-    ExclusionsGet'
+  ExclusionsGet'
     { _egXgafv = Nothing
     , _egUploadProtocol = Nothing
     , _egAccessToken = Nothing
@@ -95,6 +98,7 @@ exclusionsGet pEgName_ =
     , _egName = pEgName_
     , _egCallback = Nothing
     }
+
 
 -- | V1 error format.
 egXgafv :: Lens' ExclusionsGet (Maybe Xgafv)

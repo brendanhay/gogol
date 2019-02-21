@@ -62,13 +62,16 @@ type ObjectAccessControlsInsertResource =
 -- | Creates a new ACL entry on the specified object.
 --
 -- /See:/ 'objectAccessControlsInsert' smart constructor.
-data ObjectAccessControlsInsert = ObjectAccessControlsInsert'
+data ObjectAccessControlsInsert =
+  ObjectAccessControlsInsert'
     { _oaciBucket      :: !Text
     , _oaciPayload     :: !ObjectAccessControl
     , _oaciUserProject :: !(Maybe Text)
     , _oaciObject      :: !Text
     , _oaciGeneration  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectAccessControlsInsert' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ objectAccessControlsInsert
     -> Text -- ^ 'oaciObject'
     -> ObjectAccessControlsInsert
 objectAccessControlsInsert pOaciBucket_ pOaciPayload_ pOaciObject_ =
-    ObjectAccessControlsInsert'
+  ObjectAccessControlsInsert'
     { _oaciBucket = pOaciBucket_
     , _oaciPayload = pOaciPayload_
     , _oaciUserProject = Nothing
     , _oaciObject = pOaciObject_
     , _oaciGeneration = Nothing
     }
+
 
 -- | Name of a bucket.
 oaciBucket :: Lens' ObjectAccessControlsInsert Text

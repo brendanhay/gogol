@@ -51,9 +51,12 @@ type URLInsertResource =
 -- | Creates a new short URL.
 --
 -- /See:/ 'urlInsert' smart constructor.
-newtype URLInsert = URLInsert'
+newtype URLInsert =
+  URLInsert'
     { _uiPayload :: URL
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLInsert' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype URLInsert = URLInsert'
 urlInsert
     :: URL -- ^ 'uiPayload'
     -> URLInsert
-urlInsert pUiPayload_ =
-    URLInsert'
-    { _uiPayload = pUiPayload_
-    }
+urlInsert pUiPayload_ = URLInsert' {_uiPayload = pUiPayload_}
+
 
 -- | Multipart request metadata.
 uiPayload :: Lens' URLInsert URL

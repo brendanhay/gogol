@@ -15,7 +15,7 @@
   "description": "Manages product items, inventory, and Merchant Center accounts for Google Shopping.",
   "discoveryVersion": "v1",
   "documentationLink": "https://developers.google.com/shopping-content",
-  "etag": "\"J3WqvAcMk4eQjJXvfSI4Yr8VouA/kuwOM51recFq-FqqNhR-udbuq1s\"",
+  "etag": "\"J3WqvAcMk4eQjJXvfSI4Yr8VouA/aoLJVRoELXoGluLLA5j3eAQmbRA\"",
   "icons": {
     "x16": "https://www.gstatic.com/images/branding/product/1x/googleg_16dp.png",
     "x32": "https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
@@ -404,6 +404,7 @@
     "accountstatuses": {
       "methods": {
         "custombatch": {
+          "description": "Retrieves multiple Merchant Center account statuses in a single request.",
           "httpMethod": "POST",
           "id": "content.accountstatuses.custombatch",
           "path": "accountstatuses/batch",
@@ -3481,7 +3482,7 @@
       }
     }
   },
-  "revision": "20181212",
+  "revision": "20190122",
   "rootUrl": "https://www.googleapis.com/",
   "schemas": {
     "Account": {
@@ -3990,6 +3991,18 @@
         "emailAddress": {
           "description": "User's email address.",
           "type": "string"
+        },
+        "orderManager": {
+          "description": "Whether user is an order manager.",
+          "type": "boolean"
+        },
+        "paymentsAnalyst": {
+          "description": "Whether user can access payment statements.",
+          "type": "boolean"
+        },
+        "paymentsManager": {
+          "description": "Whether user can manage payment settings.",
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -6088,7 +6101,7 @@
           "type": "string"
         },
         "promotions": {
-          "description": "Deprecated. The details of the merchant provided promotions applied to the order. More details about the program are here.",
+          "description": "Deprecated. Ignored if provided for createTestOrder. The details of the merchant provided promotions applied to the order. More details about the program are here.",
           "items": {
             "$ref": "OrderLegacyPromotion"
           },
@@ -6122,6 +6135,10 @@
         },
         "status": {
           "description": "The status of the order.",
+          "type": "string"
+        },
+        "taxCollector": {
+          "description": "The party responsible for collecting and remitting taxes.",
           "type": "string"
         }
       },
@@ -6744,6 +6761,10 @@
           "$ref": "Amount",
           "description": "Total amount for the items."
         },
+        "productAmountWithRemittedTax": {
+          "$ref": "ProductAmount",
+          "description": "Total amount with remitted tax for the items."
+        },
         "transactionDate": {
           "description": "The date of the transaction, in ISO 8601 format.",
           "type": "string"
@@ -6954,10 +6975,12 @@
       "id": "OrderpaymentsNotifyAuthApprovedRequest",
       "properties": {
         "authAmountPretax": {
-          "$ref": "Price"
+          "$ref": "Price",
+          "description": "Authorized amount for pre-tax charge on user's credit card."
         },
         "authAmountTax": {
-          "$ref": "Price"
+          "$ref": "Price",
+          "description": "Authorized amount for tax charge on user's credit card."
         }
       },
       "type": "object"
@@ -7188,7 +7211,7 @@
         },
         "amountTax": {
           "$ref": "Price",
-          "description": "Tax amount that correspond to cancellation amount in amountPretax."
+          "description": "Tax amount that corresponds to cancellation amount in amountPretax. Optional, but if filled, then amountPretax must be set. Calculated automatically if not provided."
         },
         "lineItemId": {
           "description": "The ID of the line item to cancel. Either lineItemId or productId is required.",
@@ -7464,7 +7487,7 @@
         },
         "amountTax": {
           "$ref": "Price",
-          "description": "Tax amount that correspond to cancellation amount in amountPretax."
+          "description": "Tax amount that corresponds to cancellation amount in amountPretax. Optional, but if filled, then amountPretax must be set. Calculated automatically if not provided."
         },
         "lineItemId": {
           "description": "The ID of the line item to cancel. Either lineItemId or productId is required.",
@@ -7549,11 +7572,11 @@
         },
         "amountPretax": {
           "$ref": "Price",
-          "description": "The amount that is refunded. Either amount or amountPretax and amountTax should be filled."
+          "description": "The amount that is refunded. Either amount or amountPretax should be filled."
         },
         "amountTax": {
           "$ref": "Price",
-          "description": "Tax amount that correspond to refund amount in amountPretax."
+          "description": "Tax amount that corresponds to refund amount in amountPretax. Optional, but if filled, amountPretax must be set. Calculated automatically if not provided."
         },
         "reason": {
           "description": "The reason for the refund.",
@@ -7625,11 +7648,11 @@
       "properties": {
         "amountPretax": {
           "$ref": "Price",
-          "description": "The amount that is refunded. If omitted, refundless return is assumed (same as calling returnLineItem method). Optional, but if filled then both amountPretax and amountTax must be set."
+          "description": "The amount that is refunded. If omitted, refundless return is assumed (same as calling returnLineItem method)."
         },
         "amountTax": {
           "$ref": "Price",
-          "description": "Tax amount that correspond to refund amount in amountPretax."
+          "description": "Tax amount that corresponds to refund amount in amountPretax. Optional, but if filled, then amountPretax must be set. Calculated automatically if not provided."
         },
         "lineItemId": {
           "description": "The ID of the line item to return. Either lineItemId or productId is required.",
@@ -7942,11 +7965,11 @@
         },
         "amountPretax": {
           "$ref": "Price",
-          "description": "The amount that is refunded. Either amount or amountPretax and amountTax should be filled."
+          "description": "The amount that is refunded. Either amount or amountPretax should be filled."
         },
         "amountTax": {
           "$ref": "Price",
-          "description": "Tax amount that correspond to refund amount in amountPretax."
+          "description": "Tax amount that corresponds to refund amount in amountPretax. Optional, but if filled, amountPretax must be set. Calculated automatically if not provided."
         },
         "operationId": {
           "description": "The ID of the operation. Unique across all operations for a given order.",
@@ -8075,11 +8098,11 @@
       "properties": {
         "amountPretax": {
           "$ref": "Price",
-          "description": "The amount that is refunded. If omitted, refundless return is assumed (same as calling returnLineItem method). Optional, but if filled then both amountPretax and amountTax must be set."
+          "description": "The amount that is refunded. If omitted, refundless return is assumed (same as calling returnLineItem method)."
         },
         "amountTax": {
           "$ref": "Price",
-          "description": "Tax amount that correspond to refund amount in amountPretax."
+          "description": "Tax amount that corresponds to refund amount in amountPretax. Optional, but if filled, then amountPretax must be set. Calculated automatically if not provided."
         },
         "lineItemId": {
           "description": "The ID of the line item to return. Either lineItemId or productId is required.",
@@ -9433,6 +9456,24 @@
       },
       "type": "object"
     },
+    "ProductAmount": {
+      "id": "ProductAmount",
+      "properties": {
+        "priceAmount": {
+          "$ref": "Price",
+          "description": "The pre-tax or post-tax price depending on the location of the order."
+        },
+        "remittedTaxAmount": {
+          "$ref": "Price",
+          "description": "Remitted tax value."
+        },
+        "taxAmount": {
+          "$ref": "Price",
+          "description": "Tax value."
+        }
+      },
+      "type": "object"
+    },
     "ProductAspect": {
       "id": "ProductAspect",
       "properties": {
@@ -10522,12 +10563,7 @@
         },
         "unitTax": {
           "$ref": "Price",
-          "annotations": {
-            "required": [
-              "content.orders.createtestorder"
-            ]
-          },
-          "description": "Unit tax for the line item."
+          "description": "Deprecated. Ignored if provided. Tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied."
         }
       },
       "type": "object"
@@ -10608,7 +10644,7 @@
               "content.orders.createtestorder"
             ]
           },
-          "description": "The price for the product."
+          "description": "The price for the product. Tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied."
         },
         "targetCountry": {
           "annotations": {

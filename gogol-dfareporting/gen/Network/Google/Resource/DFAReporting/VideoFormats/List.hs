@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'VideoFormatsList' request conforms to.
 type VideoFormatsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "videoFormats" :>
@@ -53,9 +53,12 @@ type VideoFormatsListResource =
 -- | Lists available video formats.
 --
 -- /See:/ 'videoFormatsList' smart constructor.
-newtype VideoFormatsList = VideoFormatsList'
+newtype VideoFormatsList =
+  VideoFormatsList'
     { _vflProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VideoFormatsList' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ videoFormatsList
     :: Int64 -- ^ 'vflProFileId'
     -> VideoFormatsList
 videoFormatsList pVflProFileId_ =
-    VideoFormatsList'
-    { _vflProFileId = _Coerce # pVflProFileId_
-    }
+  VideoFormatsList' {_vflProFileId = _Coerce # pVflProFileId_}
+
 
 -- | User profile ID associated with this request.
 vflProFileId :: Lens' VideoFormatsList Int64

@@ -59,11 +59,14 @@ type DefaultObjectAccessControlsGetResource =
 -- specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsGet' smart constructor.
-data DefaultObjectAccessControlsGet = DefaultObjectAccessControlsGet'
+data DefaultObjectAccessControlsGet =
+  DefaultObjectAccessControlsGet'
     { _doacgBucket      :: !Text
     , _doacgUserProject :: !(Maybe Text)
     , _doacgEntity      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DefaultObjectAccessControlsGet' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ defaultObjectAccessControlsGet
     -> Text -- ^ 'doacgEntity'
     -> DefaultObjectAccessControlsGet
 defaultObjectAccessControlsGet pDoacgBucket_ pDoacgEntity_ =
-    DefaultObjectAccessControlsGet'
+  DefaultObjectAccessControlsGet'
     { _doacgBucket = pDoacgBucket_
     , _doacgUserProject = Nothing
     , _doacgEntity = pDoacgEntity_
     }
+
 
 -- | Name of a bucket.
 doacgBucket :: Lens' DefaultObjectAccessControlsGet Text

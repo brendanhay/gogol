@@ -52,9 +52,12 @@ type CloudLoadingDeleteBookResource =
 -- | Remove the book and its contents
 --
 -- /See:/ 'cloudLoadingDeleteBook' smart constructor.
-newtype CloudLoadingDeleteBook = CloudLoadingDeleteBook'
+newtype CloudLoadingDeleteBook =
+  CloudLoadingDeleteBook'
     { _cldbVolumeId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudLoadingDeleteBook' with the minimum fields required to make a request.
 --
@@ -65,9 +68,8 @@ cloudLoadingDeleteBook
     :: Text -- ^ 'cldbVolumeId'
     -> CloudLoadingDeleteBook
 cloudLoadingDeleteBook pCldbVolumeId_ =
-    CloudLoadingDeleteBook'
-    { _cldbVolumeId = pCldbVolumeId_
-    }
+  CloudLoadingDeleteBook' {_cldbVolumeId = pCldbVolumeId_}
+
 
 -- | The id of the book to be removed.
 cldbVolumeId :: Lens' CloudLoadingDeleteBook Text

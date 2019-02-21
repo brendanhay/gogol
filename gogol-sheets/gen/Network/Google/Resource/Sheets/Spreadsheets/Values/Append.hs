@@ -96,7 +96,8 @@ type SpreadsheetsValuesAppendResource =
 -- data starts being written to.
 --
 -- /See:/ 'spreadsheetsValuesAppend' smart constructor.
-data SpreadsheetsValuesAppend = SpreadsheetsValuesAppend'
+data SpreadsheetsValuesAppend =
+  SpreadsheetsValuesAppend'
     { _svaXgafv                        :: !(Maybe Xgafv)
     , _svaUploadProtocol               :: !(Maybe Text)
     , _svaAccessToken                  :: !(Maybe Text)
@@ -110,7 +111,9 @@ data SpreadsheetsValuesAppend = SpreadsheetsValuesAppend'
     , _svaResponseDateTimeRenderOption :: !(Maybe Text)
     , _svaCallback                     :: !(Maybe Text)
     , _svaResponseValueRenderOption    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpreadsheetsValuesAppend' with the minimum fields required to make a request.
 --
@@ -147,7 +150,7 @@ spreadsheetsValuesAppend
     -> Text -- ^ 'svaRange'
     -> SpreadsheetsValuesAppend
 spreadsheetsValuesAppend pSvaSpreadsheetId_ pSvaPayload_ pSvaRange_ =
-    SpreadsheetsValuesAppend'
+  SpreadsheetsValuesAppend'
     { _svaXgafv = Nothing
     , _svaUploadProtocol = Nothing
     , _svaAccessToken = Nothing
@@ -162,6 +165,7 @@ spreadsheetsValuesAppend pSvaSpreadsheetId_ pSvaPayload_ pSvaRange_ =
     , _svaCallback = Nothing
     , _svaResponseValueRenderOption = Nothing
     }
+
 
 -- | V1 error format.
 svaXgafv :: Lens' SpreadsheetsValuesAppend (Maybe Xgafv)

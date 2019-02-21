@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | Output for PublishUrlNotification
 --
 -- /See:/ 'publishURLNotificationResponse' smart constructor.
-newtype PublishURLNotificationResponse = PublishURLNotificationResponse'
+newtype PublishURLNotificationResponse =
+  PublishURLNotificationResponse'
     { _punrURLNotificationMetadata :: Maybe URLNotificationMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublishURLNotificationResponse' with the minimum fields required to make a request.
 --
@@ -35,9 +38,8 @@ newtype PublishURLNotificationResponse = PublishURLNotificationResponse'
 publishURLNotificationResponse
     :: PublishURLNotificationResponse
 publishURLNotificationResponse =
-    PublishURLNotificationResponse'
-    { _punrURLNotificationMetadata = Nothing
-    }
+  PublishURLNotificationResponse' {_punrURLNotificationMetadata = Nothing}
+
 
 -- | Description of the notification events received for this URL.
 punrURLNotificationMetadata :: Lens' PublishURLNotificationResponse (Maybe URLNotificationMetadata)
@@ -64,11 +66,14 @@ instance ToJSON PublishURLNotificationResponse where
 -- received, for a given URL.
 --
 -- /See:/ 'urlNotificationMetadata' smart constructor.
-data URLNotificationMetadata = URLNotificationMetadata'
+data URLNotificationMetadata =
+  URLNotificationMetadata'
     { _unmLatestUpdate :: !(Maybe URLNotification)
     , _unmLatestRemove :: !(Maybe URLNotification)
     , _unmURL          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLNotificationMetadata' with the minimum fields required to make a request.
 --
@@ -82,11 +87,9 @@ data URLNotificationMetadata = URLNotificationMetadata'
 urlNotificationMetadata
     :: URLNotificationMetadata
 urlNotificationMetadata =
-    URLNotificationMetadata'
-    { _unmLatestUpdate = Nothing
-    , _unmLatestRemove = Nothing
-    , _unmURL = Nothing
-    }
+  URLNotificationMetadata'
+    {_unmLatestUpdate = Nothing, _unmLatestRemove = Nothing, _unmURL = Nothing}
+
 
 -- | Latest notification received with type \`URL_UPDATED\`.
 unmLatestUpdate :: Lens' URLNotificationMetadata (Maybe URLNotification)
@@ -124,11 +127,14 @@ instance ToJSON URLNotificationMetadata where
 -- describes one event in the life cycle of a Web Document.
 --
 -- /See:/ 'urlNotification' smart constructor.
-data URLNotification = URLNotification'
+data URLNotification =
+  URLNotification'
     { _unURL        :: !(Maybe Text)
     , _unNotifyTime :: !(Maybe DateTime')
     , _unType       :: !(Maybe URLNotificationType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLNotification' with the minimum fields required to make a request.
 --
@@ -142,11 +148,9 @@ data URLNotification = URLNotification'
 urlNotification
     :: URLNotification
 urlNotification =
-    URLNotification'
-    { _unURL = Nothing
-    , _unNotifyTime = Nothing
-    , _unType = Nothing
-    }
+  URLNotification'
+    {_unURL = Nothing, _unNotifyTime = Nothing, _unType = Nothing}
+
 
 -- | The object of this notification. The URL must be owned by the publisher
 -- of this notification and, in case of \`URL_UPDATED\` notifications, it

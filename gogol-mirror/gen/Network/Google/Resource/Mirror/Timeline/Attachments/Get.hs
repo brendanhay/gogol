@@ -63,10 +63,13 @@ type TimelineAttachmentsGetResource =
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
 -- /See:/ 'timelineAttachmentsGet' smart constructor.
-data TimelineAttachmentsGet = TimelineAttachmentsGet'
+data TimelineAttachmentsGet =
+  TimelineAttachmentsGet'
     { _tagItemId       :: !Text
     , _tagAttachmentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimelineAttachmentsGet' with the minimum fields required to make a request.
 --
@@ -80,10 +83,9 @@ timelineAttachmentsGet
     -> Text -- ^ 'tagAttachmentId'
     -> TimelineAttachmentsGet
 timelineAttachmentsGet pTagItemId_ pTagAttachmentId_ =
-    TimelineAttachmentsGet'
-    { _tagItemId = pTagItemId_
-    , _tagAttachmentId = pTagAttachmentId_
-    }
+  TimelineAttachmentsGet'
+    {_tagItemId = pTagItemId_, _tagAttachmentId = pTagAttachmentId_}
+
 
 -- | The ID of the timeline item the attachment belongs to.
 tagItemId :: Lens' TimelineAttachmentsGet Text
@@ -109,7 +111,8 @@ instance GoogleRequest TimelineAttachmentsGet where
                       mempty
 
 instance GoogleRequest
-         (MediaDownload TimelineAttachmentsGet) where
+           (MediaDownload TimelineAttachmentsGet)
+         where
         type Rs (MediaDownload TimelineAttachmentsGet) =
              Stream
         type Scopes (MediaDownload TimelineAttachmentsGet) =

@@ -55,10 +55,13 @@ type GlobalOperationsDeleteResource =
 -- | Deletes the specified Operations resource.
 --
 -- /See:/ 'globalOperationsDelete' smart constructor.
-data GlobalOperationsDelete = GlobalOperationsDelete'
+data GlobalOperationsDelete =
+  GlobalOperationsDelete'
     { _godProject   :: !Text
     , _godOperation :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalOperationsDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ globalOperationsDelete
     -> Text -- ^ 'godOperation'
     -> GlobalOperationsDelete
 globalOperationsDelete pGodProject_ pGodOperation_ =
-    GlobalOperationsDelete'
-    { _godProject = pGodProject_
-    , _godOperation = pGodOperation_
-    }
+  GlobalOperationsDelete'
+    {_godProject = pGodProject_, _godOperation = pGodOperation_}
+
 
 -- | Project ID for this request.
 godProject :: Lens' GlobalOperationsDelete Text

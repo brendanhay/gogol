@@ -75,7 +75,8 @@ type ObjectsPatchResource =
 -- | Patches an object\'s metadata.
 --
 -- /See:/ 'objectsPatch' smart constructor.
-data ObjectsPatch = ObjectsPatch'
+data ObjectsPatch =
+  ObjectsPatch'
     { _opIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _opIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _opIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -87,7 +88,9 @@ data ObjectsPatch = ObjectsPatch'
     , _opObject                   :: !Text
     , _opProjection               :: !(Maybe ObjectsPatchProjection)
     , _opGeneration               :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectsPatch' with the minimum fields required to make a request.
 --
@@ -120,7 +123,7 @@ objectsPatch
     -> Text -- ^ 'opObject'
     -> ObjectsPatch
 objectsPatch pOpBucket_ pOpPayload_ pOpObject_ =
-    ObjectsPatch'
+  ObjectsPatch'
     { _opIfMetagenerationMatch = Nothing
     , _opIfGenerationNotMatch = Nothing
     , _opIfGenerationMatch = Nothing
@@ -133,6 +136,7 @@ objectsPatch pOpBucket_ pOpPayload_ pOpObject_ =
     , _opProjection = Nothing
     , _opGeneration = Nothing
     }
+
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.

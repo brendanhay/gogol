@@ -63,12 +63,15 @@ type URLCrawlErrorsSamplesMarkAsFixedResource =
 -- samples list.
 --
 -- /See:/ 'urlCrawlErrorsSamplesMarkAsFixed' smart constructor.
-data URLCrawlErrorsSamplesMarkAsFixed = URLCrawlErrorsSamplesMarkAsFixed'
+data URLCrawlErrorsSamplesMarkAsFixed =
+  URLCrawlErrorsSamplesMarkAsFixed'
     { _ucesmafPlatform :: !URLCrawlErrorsSamplesMarkAsFixedPlatform
     , _ucesmafCategory :: !URLCrawlErrorsSamplesMarkAsFixedCategory
     , _ucesmafSiteURL  :: !Text
     , _ucesmafURL      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLCrawlErrorsSamplesMarkAsFixed' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ urlCrawlErrorsSamplesMarkAsFixed
     -> Text -- ^ 'ucesmafURL'
     -> URLCrawlErrorsSamplesMarkAsFixed
 urlCrawlErrorsSamplesMarkAsFixed pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSiteURL_ pUcesmafURL_ =
-    URLCrawlErrorsSamplesMarkAsFixed'
+  URLCrawlErrorsSamplesMarkAsFixed'
     { _ucesmafPlatform = pUcesmafPlatform_
     , _ucesmafCategory = pUcesmafCategory_
     , _ucesmafSiteURL = pUcesmafSiteURL_
     , _ucesmafURL = pUcesmafURL_
     }
+
 
 -- | The user agent type (platform) that made the request. For example: web
 ucesmafPlatform :: Lens' URLCrawlErrorsSamplesMarkAsFixed URLCrawlErrorsSamplesMarkAsFixedPlatform
@@ -123,7 +127,8 @@ ucesmafURL
   = lens _ucesmafURL (\ s a -> s{_ucesmafURL = a})
 
 instance GoogleRequest
-         URLCrawlErrorsSamplesMarkAsFixed where
+           URLCrawlErrorsSamplesMarkAsFixed
+         where
         type Rs URLCrawlErrorsSamplesMarkAsFixed = ()
         type Scopes URLCrawlErrorsSamplesMarkAsFixed =
              '["https://www.googleapis.com/auth/webmasters"]

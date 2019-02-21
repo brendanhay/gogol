@@ -66,7 +66,8 @@ type ProjectsServicesEnableResource =
 -- information. Operation
 --
 -- /See:/ 'projectsServicesEnable' smart constructor.
-data ProjectsServicesEnable = ProjectsServicesEnable'
+data ProjectsServicesEnable =
+  ProjectsServicesEnable'
     { _pseXgafv          :: !(Maybe Xgafv)
     , _pseUploadProtocol :: !(Maybe Text)
     , _pseAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsServicesEnable = ProjectsServicesEnable'
     , _psePayload        :: !EnableServiceRequest
     , _pseName           :: !Text
     , _pseCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServicesEnable' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsServicesEnable
     -> Text -- ^ 'pseName'
     -> ProjectsServicesEnable
 projectsServicesEnable pPsePayload_ pPseName_ =
-    ProjectsServicesEnable'
+  ProjectsServicesEnable'
     { _pseXgafv = Nothing
     , _pseUploadProtocol = Nothing
     , _pseAccessToken = Nothing
@@ -107,6 +110,7 @@ projectsServicesEnable pPsePayload_ pPseName_ =
     , _pseName = pPseName_
     , _pseCallback = Nothing
     }
+
 
 -- | V1 error format.
 pseXgafv :: Lens' ProjectsServicesEnable (Maybe Xgafv)

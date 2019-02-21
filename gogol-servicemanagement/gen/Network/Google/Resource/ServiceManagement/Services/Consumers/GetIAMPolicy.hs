@@ -64,7 +64,8 @@ type ServicesConsumersGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'servicesConsumersGetIAMPolicy' smart constructor.
-data ServicesConsumersGetIAMPolicy = ServicesConsumersGetIAMPolicy'
+data ServicesConsumersGetIAMPolicy =
+  ServicesConsumersGetIAMPolicy'
     { _scgipXgafv          :: !(Maybe Xgafv)
     , _scgipUploadProtocol :: !(Maybe Text)
     , _scgipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ServicesConsumersGetIAMPolicy = ServicesConsumersGetIAMPolicy'
     , _scgipPayload        :: !GetIAMPolicyRequest
     , _scgipResource       :: !Text
     , _scgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesConsumersGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ servicesConsumersGetIAMPolicy
     -> Text -- ^ 'scgipResource'
     -> ServicesConsumersGetIAMPolicy
 servicesConsumersGetIAMPolicy pScgipPayload_ pScgipResource_ =
-    ServicesConsumersGetIAMPolicy'
+  ServicesConsumersGetIAMPolicy'
     { _scgipXgafv = Nothing
     , _scgipUploadProtocol = Nothing
     , _scgipAccessToken = Nothing
@@ -105,6 +108,7 @@ servicesConsumersGetIAMPolicy pScgipPayload_ pScgipResource_ =
     , _scgipResource = pScgipResource_
     , _scgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 scgipXgafv :: Lens' ServicesConsumersGetIAMPolicy (Maybe Xgafv)

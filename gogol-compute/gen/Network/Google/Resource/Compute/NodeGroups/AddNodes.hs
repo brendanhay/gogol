@@ -63,13 +63,16 @@ type NodeGroupsAddNodesResource =
 -- | Adds specified number of nodes to the node group.
 --
 -- /See:/ 'nodeGroupsAddNodes' smart constructor.
-data NodeGroupsAddNodes = NodeGroupsAddNodes'
+data NodeGroupsAddNodes =
+  NodeGroupsAddNodes'
     { _nganRequestId :: !(Maybe Text)
     , _nganNodeGroup :: !Text
     , _nganProject   :: !Text
     , _nganZone      :: !Text
     , _nganPayload   :: !NodeGroupsAddNodesRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeGroupsAddNodes' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ nodeGroupsAddNodes
     -> NodeGroupsAddNodesRequest -- ^ 'nganPayload'
     -> NodeGroupsAddNodes
 nodeGroupsAddNodes pNganNodeGroup_ pNganProject_ pNganZone_ pNganPayload_ =
-    NodeGroupsAddNodes'
+  NodeGroupsAddNodes'
     { _nganRequestId = Nothing
     , _nganNodeGroup = pNganNodeGroup_
     , _nganProject = pNganProject_
     , _nganZone = pNganZone_
     , _nganPayload = pNganPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

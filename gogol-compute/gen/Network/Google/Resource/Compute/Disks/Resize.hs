@@ -65,13 +65,16 @@ type DisksResizeResource =
 -- the disk.
 --
 -- /See:/ 'disksResize' smart constructor.
-data DisksResize = DisksResize'
+data DisksResize =
+  DisksResize'
     { _drRequestId :: !(Maybe Text)
     , _drProject   :: !Text
     , _drDisk      :: !Text
     , _drZone      :: !Text
     , _drPayload   :: !DisksResizeRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisksResize' with the minimum fields required to make a request.
 --
@@ -93,13 +96,14 @@ disksResize
     -> DisksResizeRequest -- ^ 'drPayload'
     -> DisksResize
 disksResize pDrProject_ pDrDisk_ pDrZone_ pDrPayload_ =
-    DisksResize'
+  DisksResize'
     { _drRequestId = Nothing
     , _drProject = pDrProject_
     , _drDisk = pDrDisk_
     , _drZone = pDrZone_
     , _drPayload = pDrPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

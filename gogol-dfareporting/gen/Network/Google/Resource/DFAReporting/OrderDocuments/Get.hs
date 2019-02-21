@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'OrderDocumentsGet' request conforms to.
 type OrderDocumentsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -57,11 +57,14 @@ type OrderDocumentsGetResource =
 -- | Gets one order document by ID.
 --
 -- /See:/ 'orderDocumentsGet' smart constructor.
-data OrderDocumentsGet = OrderDocumentsGet'
+data OrderDocumentsGet =
+  OrderDocumentsGet'
     { _odgProFileId :: !(Textual Int64)
     , _odgId        :: !(Textual Int64)
     , _odgProjectId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderDocumentsGet' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ orderDocumentsGet
     -> Int64 -- ^ 'odgProjectId'
     -> OrderDocumentsGet
 orderDocumentsGet pOdgProFileId_ pOdgId_ pOdgProjectId_ =
-    OrderDocumentsGet'
+  OrderDocumentsGet'
     { _odgProFileId = _Coerce # pOdgProFileId_
     , _odgId = _Coerce # pOdgId_
     , _odgProjectId = _Coerce # pOdgProjectId_
     }
+
 
 -- | User profile ID associated with this request.
 odgProFileId :: Lens' OrderDocumentsGet Int64

@@ -69,13 +69,16 @@ type ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreateResource
 -- - NOT_FOUND - The containing Step does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsPerfMetricsSummaryCreate' smart constructor.
-data ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate = ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate'
+data ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate =
+  ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate'
     { _phespmscExecutionId :: !Text
     , _phespmscStepId      :: !Text
     , _phespmscPayload     :: !PerfMetricsSummary
     , _phespmscHistoryId   :: !Text
     , _phespmscProjectId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate' with the minimum fields required to make a request.
 --
@@ -98,13 +101,14 @@ projectsHistoriesExecutionsStepsPerfMetricsSummaryCreate
     -> Text -- ^ 'phespmscProjectId'
     -> ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate
 projectsHistoriesExecutionsStepsPerfMetricsSummaryCreate pPhespmscExecutionId_ pPhespmscStepId_ pPhespmscPayload_ pPhespmscHistoryId_ pPhespmscProjectId_ =
-    ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate'
+  ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate'
     { _phespmscExecutionId = pPhespmscExecutionId_
     , _phespmscStepId = pPhespmscStepId_
     , _phespmscPayload = pPhespmscPayload_
     , _phespmscHistoryId = pPhespmscHistoryId_
     , _phespmscProjectId = pPhespmscProjectId_
     }
+
 
 -- | A tool results execution ID.
 phespmscExecutionId :: Lens' ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate Text
@@ -137,7 +141,7 @@ phespmscProjectId
       (\ s a -> s{_phespmscProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate
+           ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate
          where
         type Rs
                ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreate

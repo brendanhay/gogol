@@ -187,7 +187,7 @@ import           Network.Google.Prelude
 import           Network.Google.Speech.Types.Product
 import           Network.Google.Speech.Types.Sum
 
--- | Default request referring to version 'v1p1beta1' of the Cloud Speech API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1p1beta1' of the Cloud Speech-to-Text API. This contains the host and root path used as a starting point for constructing service requests.
 speechService :: ServiceConfig
 speechService
   = defaultService (ServiceId "speech:v1p1beta1")
@@ -195,4 +195,4 @@ speechService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

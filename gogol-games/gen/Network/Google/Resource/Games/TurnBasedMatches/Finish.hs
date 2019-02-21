@@ -61,11 +61,14 @@ type TurnBasedMatchesFinishResource =
 -- call to Finish, and can pass in the final match state.
 --
 -- /See:/ 'turnBasedMatchesFinish' smart constructor.
-data TurnBasedMatchesFinish = TurnBasedMatchesFinish'
+data TurnBasedMatchesFinish =
+  TurnBasedMatchesFinish'
     { _tbmfPayload  :: !TurnBasedMatchResults
     , _tbmfLanguage :: !(Maybe Text)
     , _tbmfMatchId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchesFinish' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ turnBasedMatchesFinish
     -> Text -- ^ 'tbmfMatchId'
     -> TurnBasedMatchesFinish
 turnBasedMatchesFinish pTbmfPayload_ pTbmfMatchId_ =
-    TurnBasedMatchesFinish'
+  TurnBasedMatchesFinish'
     { _tbmfPayload = pTbmfPayload_
     , _tbmfLanguage = Nothing
     , _tbmfMatchId = pTbmfMatchId_
     }
+
 
 -- | Multipart request metadata.
 tbmfPayload :: Lens' TurnBasedMatchesFinish TurnBasedMatchResults
@@ -105,7 +109,8 @@ tbmfMatchId
 instance GoogleRequest TurnBasedMatchesFinish where
         type Rs TurnBasedMatchesFinish = TurnBasedMatch
         type Scopes TurnBasedMatchesFinish =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesFinish'{..}
           = go _tbmfMatchId _tbmfLanguage (Just AltJSON)
               _tbmfPayload

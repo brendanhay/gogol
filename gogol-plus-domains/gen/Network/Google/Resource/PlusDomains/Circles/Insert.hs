@@ -54,10 +54,13 @@ type CirclesInsertResource =
 -- | Create a new circle for the authenticated user.
 --
 -- /See:/ 'circlesInsert' smart constructor.
-data CirclesInsert = CirclesInsert'
+data CirclesInsert =
+  CirclesInsert'
     { _ciPayload :: !Circle
     , _ciUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CirclesInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ circlesInsert
     -> Text -- ^ 'ciUserId'
     -> CirclesInsert
 circlesInsert pCiPayload_ pCiUserId_ =
-    CirclesInsert'
-    { _ciPayload = pCiPayload_
-    , _ciUserId = pCiUserId_
-    }
+  CirclesInsert' {_ciPayload = pCiPayload_, _ciUserId = pCiUserId_}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CirclesInsert Circle

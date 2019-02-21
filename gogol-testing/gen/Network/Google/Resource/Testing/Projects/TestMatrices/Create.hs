@@ -77,7 +77,8 @@ type ProjectsTestMatricesCreateResource =
 -- to more than 200 supported executions
 --
 -- /See:/ 'projectsTestMatricesCreate' smart constructor.
-data ProjectsTestMatricesCreate = ProjectsTestMatricesCreate'
+data ProjectsTestMatricesCreate =
+  ProjectsTestMatricesCreate'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pRequestId      :: !(Maybe Text)
     , _pUploadProtocol :: !(Maybe Text)
@@ -86,7 +87,9 @@ data ProjectsTestMatricesCreate = ProjectsTestMatricesCreate'
     , _pPayload        :: !TestMatrix
     , _pProjectId      :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTestMatricesCreate' with the minimum fields required to make a request.
 --
@@ -112,7 +115,7 @@ projectsTestMatricesCreate
     -> Text -- ^ 'pProjectId'
     -> ProjectsTestMatricesCreate
 projectsTestMatricesCreate pPPayload_ pPProjectId_ =
-    ProjectsTestMatricesCreate'
+  ProjectsTestMatricesCreate'
     { _pXgafv = Nothing
     , _pRequestId = Nothing
     , _pUploadProtocol = Nothing
@@ -122,6 +125,7 @@ projectsTestMatricesCreate pPPayload_ pPProjectId_ =
     , _pProjectId = pPProjectId_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsTestMatricesCreate (Maybe Xgafv)

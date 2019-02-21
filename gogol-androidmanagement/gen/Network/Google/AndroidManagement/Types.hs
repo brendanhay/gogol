@@ -94,6 +94,11 @@ module Network.Google.AndroidManagement.Types
     , policyOpenNetworkConfiguration
     , poncAddtional
 
+    -- * LaunchAppAction
+    , LaunchAppAction
+    , launchAppAction
+    , laaPackageName
+
     -- * CommandErrorCode
     , CommandErrorCode (..)
 
@@ -504,6 +509,7 @@ module Network.Google.AndroidManagement.Types
     , pEnsureVerifyAppsEnabled
     , pSetWallpaperDisabled
     , pVPNConfigDisabled
+    , pSetupActions
     , pOpenNetworkConfiguration
     , pModifyAccountsDisabled
     , pBlockApplicationsEnabled
@@ -638,6 +644,13 @@ module Network.Google.AndroidManagement.Types
     , apDescription
     , apPermissionId
 
+    -- * SetupAction
+    , SetupAction
+    , setupAction
+    , saLaunchApp
+    , saTitle
+    , saDescription
+
     -- * PasswordRequirementsPasswordQuality
     , PasswordRequirementsPasswordQuality (..)
     ) where
@@ -654,4 +667,4 @@ androidManagementService
 
 -- | Manage Android devices and apps for your customers
 androidManagementScope :: Proxy '["https://www.googleapis.com/auth/androidmanagement"]
-androidManagementScope = Proxy;
+androidManagementScope = Proxy

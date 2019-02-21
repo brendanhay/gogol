@@ -63,14 +63,17 @@ type ProjectsLogsDeleteResource =
 -- might not be deleted.
 --
 -- /See:/ 'projectsLogsDelete' smart constructor.
-data ProjectsLogsDelete = ProjectsLogsDelete'
+data ProjectsLogsDelete =
+  ProjectsLogsDelete'
     { _pldXgafv          :: !(Maybe Xgafv)
     , _pldUploadProtocol :: !(Maybe Text)
     , _pldAccessToken    :: !(Maybe Text)
     , _pldUploadType     :: !(Maybe Text)
     , _pldLogName        :: !Text
     , _pldCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLogsDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ projectsLogsDelete
     :: Text -- ^ 'pldLogName'
     -> ProjectsLogsDelete
 projectsLogsDelete pPldLogName_ =
-    ProjectsLogsDelete'
+  ProjectsLogsDelete'
     { _pldXgafv = Nothing
     , _pldUploadProtocol = Nothing
     , _pldAccessToken = Nothing
@@ -99,6 +102,7 @@ projectsLogsDelete pPldLogName_ =
     , _pldLogName = pPldLogName_
     , _pldCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldXgafv :: Lens' ProjectsLogsDelete (Maybe Xgafv)

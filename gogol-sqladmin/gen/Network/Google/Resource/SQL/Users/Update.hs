@@ -61,13 +61,16 @@ type UsersUpdateResource =
 -- | Updates an existing user in a Cloud SQL instance.
 --
 -- /See:/ 'usersUpdate' smart constructor.
-data UsersUpdate = UsersUpdate'
+data UsersUpdate =
+  UsersUpdate'
     { _uuProject  :: !Text
     , _uuPayload  :: !User
     , _uuName     :: !Text
     , _uuHost     :: !(Maybe Text)
     , _uuInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersUpdate' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ usersUpdate
     -> Text -- ^ 'uuInstance'
     -> UsersUpdate
 usersUpdate pUuProject_ pUuPayload_ pUuName_ pUuInstance_ =
-    UsersUpdate'
+  UsersUpdate'
     { _uuProject = pUuProject_
     , _uuPayload = pUuPayload_
     , _uuName = pUuName_
     , _uuHost = Nothing
     , _uuInstance = pUuInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 uuProject :: Lens' UsersUpdate Text

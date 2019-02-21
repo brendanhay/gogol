@@ -54,10 +54,13 @@ type OperationsGetResource =
 -- | Retrieves an instance operation that has been performed on an instance.
 --
 -- /See:/ 'operationsGet' smart constructor.
-data OperationsGet = OperationsGet'
+data OperationsGet =
+  OperationsGet'
     { _ogProject   :: !Text
     , _ogOperation :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ operationsGet
     -> Text -- ^ 'ogOperation'
     -> OperationsGet
 operationsGet pOgProject_ pOgOperation_ =
-    OperationsGet'
-    { _ogProject = pOgProject_
-    , _ogOperation = pOgOperation_
-    }
+  OperationsGet' {_ogProject = pOgProject_, _ogOperation = pOgOperation_}
+
 
 -- | Project ID of the project that contains the instance.
 ogProject :: Lens' OperationsGet Text

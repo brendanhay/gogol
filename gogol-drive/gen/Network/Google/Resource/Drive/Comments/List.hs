@@ -60,13 +60,16 @@ type CommentsListResource =
 -- | Lists a file\'s comments.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList'
+data CommentsList =
+  CommentsList'
     { _cStartModifiedTime :: !(Maybe Text)
     , _cPageToken         :: !(Maybe Text)
     , _cFileId            :: !Text
     , _cPageSize          :: !(Textual Int32)
     , _cIncludeDeleted    :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
@@ -85,13 +88,14 @@ commentsList
     :: Text -- ^ 'cFileId'
     -> CommentsList
 commentsList pCFileId_ =
-    CommentsList'
+  CommentsList'
     { _cStartModifiedTime = Nothing
     , _cPageToken = Nothing
     , _cFileId = pCFileId_
     , _cPageSize = 20
     , _cIncludeDeleted = False
     }
+
 
 -- | The minimum value of \'modifiedTime\' for the result comments (RFC 3339
 -- date-time).

@@ -90,7 +90,8 @@ type UpdateCompaniesResource =
 -- authorized logged in user.
 --
 -- /See:/ 'updateCompanies' smart constructor.
-data UpdateCompanies = UpdateCompanies'
+data UpdateCompanies =
+  UpdateCompanies'
     { _ucXgafv                                       :: !(Maybe Xgafv)
     , _ucUploadProtocol                              :: !(Maybe Text)
     , _ucUpdateMask                                  :: !(Maybe GFieldMask)
@@ -105,7 +106,9 @@ data UpdateCompanies = UpdateCompanies'
     , _ucRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _ucRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _ucCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateCompanies' with the minimum fields required to make a request.
 --
@@ -142,7 +145,7 @@ updateCompanies
     :: Company -- ^ 'ucPayload'
     -> UpdateCompanies
 updateCompanies pUcPayload_ =
-    UpdateCompanies'
+  UpdateCompanies'
     { _ucXgafv = Nothing
     , _ucUploadProtocol = Nothing
     , _ucUpdateMask = Nothing
@@ -158,6 +161,7 @@ updateCompanies pUcPayload_ =
     , _ucRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _ucCallback = Nothing
     }
+
 
 -- | V1 error format.
 ucXgafv :: Lens' UpdateCompanies (Maybe Xgafv)

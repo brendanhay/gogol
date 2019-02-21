@@ -61,7 +61,8 @@ type ProjectsInstancesTablesGetResource =
 -- | Gets metadata information about the specified table.
 --
 -- /See:/ 'projectsInstancesTablesGet' smart constructor.
-data ProjectsInstancesTablesGet = ProjectsInstancesTablesGet'
+data ProjectsInstancesTablesGet =
+  ProjectsInstancesTablesGet'
     { _pitgXgafv          :: !(Maybe Xgafv)
     , _pitgUploadProtocol :: !(Maybe Text)
     , _pitgAccessToken    :: !(Maybe Text)
@@ -69,7 +70,9 @@ data ProjectsInstancesTablesGet = ProjectsInstancesTablesGet'
     , _pitgName           :: !Text
     , _pitgView           :: !(Maybe Text)
     , _pitgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesTablesGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsInstancesTablesGet
     :: Text -- ^ 'pitgName'
     -> ProjectsInstancesTablesGet
 projectsInstancesTablesGet pPitgName_ =
-    ProjectsInstancesTablesGet'
+  ProjectsInstancesTablesGet'
     { _pitgXgafv = Nothing
     , _pitgUploadProtocol = Nothing
     , _pitgAccessToken = Nothing
@@ -101,6 +104,7 @@ projectsInstancesTablesGet pPitgName_ =
     , _pitgView = Nothing
     , _pitgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitgXgafv :: Lens' ProjectsInstancesTablesGet (Maybe Xgafv)

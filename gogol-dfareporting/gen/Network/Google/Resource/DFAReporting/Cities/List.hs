@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'CitiesList' request conforms to.
 type CitiesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "cities" :>
@@ -61,13 +61,16 @@ type CitiesListResource =
 -- | Retrieves a list of cities, possibly filtered.
 --
 -- /See:/ 'citiesList' smart constructor.
-data CitiesList = CitiesList'
+data CitiesList =
+  CitiesList'
     { _citRegionDartIds  :: !(Maybe [Textual Int64])
     , _citProFileId      :: !(Textual Int64)
     , _citNamePrefix     :: !(Maybe Text)
     , _citCountryDartIds :: !(Maybe [Textual Int64])
     , _citDartIds        :: !(Maybe [Textual Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CitiesList' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ citiesList
     :: Int64 -- ^ 'citProFileId'
     -> CitiesList
 citiesList pCitProFileId_ =
-    CitiesList'
+  CitiesList'
     { _citRegionDartIds = Nothing
     , _citProFileId = _Coerce # pCitProFileId_
     , _citNamePrefix = Nothing
     , _citCountryDartIds = Nothing
     , _citDartIds = Nothing
     }
+
 
 -- | Select only cities from these regions.
 citRegionDartIds :: Lens' CitiesList [Int64]

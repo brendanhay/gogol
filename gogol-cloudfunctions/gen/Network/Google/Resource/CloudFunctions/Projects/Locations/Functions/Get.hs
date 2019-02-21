@@ -59,14 +59,17 @@ type ProjectsLocationsFunctionsGetResource =
 -- | Returns a function with the given name from the requested project.
 --
 -- /See:/ 'projectsLocationsFunctionsGet' smart constructor.
-data ProjectsLocationsFunctionsGet = ProjectsLocationsFunctionsGet'
+data ProjectsLocationsFunctionsGet =
+  ProjectsLocationsFunctionsGet'
     { _plfgXgafv          :: !(Maybe Xgafv)
     , _plfgUploadProtocol :: !(Maybe Text)
     , _plfgAccessToken    :: !(Maybe Text)
     , _plfgUploadType     :: !(Maybe Text)
     , _plfgName           :: !Text
     , _plfgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsFunctionsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsLocationsFunctionsGet
     :: Text -- ^ 'plfgName'
     -> ProjectsLocationsFunctionsGet
 projectsLocationsFunctionsGet pPlfgName_ =
-    ProjectsLocationsFunctionsGet'
+  ProjectsLocationsFunctionsGet'
     { _plfgXgafv = Nothing
     , _plfgUploadProtocol = Nothing
     , _plfgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsLocationsFunctionsGet pPlfgName_ =
     , _plfgName = pPlfgName_
     , _plfgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plfgXgafv :: Lens' ProjectsLocationsFunctionsGet (Maybe Xgafv)

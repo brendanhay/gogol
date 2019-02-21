@@ -63,7 +63,8 @@ type AppsLocationsGetResource =
 -- | Gets information about a location.
 --
 -- /See:/ 'appsLocationsGet' smart constructor.
-data AppsLocationsGet = AppsLocationsGet'
+data AppsLocationsGet =
+  AppsLocationsGet'
     { _algXgafv          :: !(Maybe Xgafv)
     , _algUploadProtocol :: !(Maybe Text)
     , _algAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data AppsLocationsGet = AppsLocationsGet'
     , _algAppsId         :: !Text
     , _algLocationsId    :: !Text
     , _algCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsLocationsGet' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ appsLocationsGet
     -> Text -- ^ 'algLocationsId'
     -> AppsLocationsGet
 appsLocationsGet pAlgAppsId_ pAlgLocationsId_ =
-    AppsLocationsGet'
+  AppsLocationsGet'
     { _algXgafv = Nothing
     , _algUploadProtocol = Nothing
     , _algAccessToken = Nothing
@@ -104,6 +107,7 @@ appsLocationsGet pAlgAppsId_ pAlgLocationsId_ =
     , _algLocationsId = pAlgLocationsId_
     , _algCallback = Nothing
     }
+
 
 -- | V1 error format.
 algXgafv :: Lens' AppsLocationsGet (Maybe Xgafv)

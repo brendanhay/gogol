@@ -73,14 +73,17 @@ type GoogleServiceAccountsGetResource =
 -- Service and can only be used by Storage Transfer Service.
 --
 -- /See:/ 'googleServiceAccountsGet' smart constructor.
-data GoogleServiceAccountsGet = GoogleServiceAccountsGet'
+data GoogleServiceAccountsGet =
+  GoogleServiceAccountsGet'
     { _gsagXgafv          :: !(Maybe Xgafv)
     , _gsagUploadProtocol :: !(Maybe Text)
     , _gsagAccessToken    :: !(Maybe Text)
     , _gsagUploadType     :: !(Maybe Text)
     , _gsagProjectId      :: !Text
     , _gsagCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleServiceAccountsGet' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ googleServiceAccountsGet
     :: Text -- ^ 'gsagProjectId'
     -> GoogleServiceAccountsGet
 googleServiceAccountsGet pGsagProjectId_ =
-    GoogleServiceAccountsGet'
+  GoogleServiceAccountsGet'
     { _gsagXgafv = Nothing
     , _gsagUploadProtocol = Nothing
     , _gsagAccessToken = Nothing
@@ -109,6 +112,7 @@ googleServiceAccountsGet pGsagProjectId_ =
     , _gsagProjectId = pGsagProjectId_
     , _gsagCallback = Nothing
     }
+
 
 -- | V1 error format.
 gsagXgafv :: Lens' GoogleServiceAccountsGet (Maybe Xgafv)

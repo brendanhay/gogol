@@ -51,9 +51,12 @@ type QueriesGetQueryResource =
 -- | Retrieves a stored query.
 --
 -- /See:/ 'queriesGetQuery' smart constructor.
-newtype QueriesGetQuery = QueriesGetQuery'
+newtype QueriesGetQuery =
+  QueriesGetQuery'
     { _qgqQueryId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueriesGetQuery' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ queriesGetQuery
     :: Int64 -- ^ 'qgqQueryId'
     -> QueriesGetQuery
 queriesGetQuery pQgqQueryId_ =
-    QueriesGetQuery'
-    { _qgqQueryId = _Coerce # pQgqQueryId_
-    }
+  QueriesGetQuery' {_qgqQueryId = _Coerce # pQgqQueryId_}
+
 
 -- | Query ID to retrieve.
 qgqQueryId :: Lens' QueriesGetQuery Int64

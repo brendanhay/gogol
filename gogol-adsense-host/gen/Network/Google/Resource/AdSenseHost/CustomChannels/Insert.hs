@@ -55,10 +55,13 @@ type CustomChannelsInsertResource =
 -- | Add a new custom channel to the host AdSense account.
 --
 -- /See:/ 'customChannelsInsert' smart constructor.
-data CustomChannelsInsert = CustomChannelsInsert'
+data CustomChannelsInsert =
+  CustomChannelsInsert'
     { _cciPayload    :: !CustomChannel
     , _cciAdClientId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomChannelsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ customChannelsInsert
     -> Text -- ^ 'cciAdClientId'
     -> CustomChannelsInsert
 customChannelsInsert pCciPayload_ pCciAdClientId_ =
-    CustomChannelsInsert'
-    { _cciPayload = pCciPayload_
-    , _cciAdClientId = pCciAdClientId_
-    }
+  CustomChannelsInsert'
+    {_cciPayload = pCciPayload_, _cciAdClientId = pCciAdClientId_}
+
 
 -- | Multipart request metadata.
 cciPayload :: Lens' CustomChannelsInsert CustomChannel

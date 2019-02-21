@@ -65,9 +65,6 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.enterprises.get
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
 
-    -- ** androidenterprise.enterprises.getAndroidDevicePolicyConfig
-    , module Network.Google.Resource.AndroidEnterprise.Enterprises.GetAndroidDevicePolicyConfig
-
     -- ** androidenterprise.enterprises.getServiceAccount
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.GetServiceAccount
 
@@ -409,6 +406,7 @@ module Network.Google.AndroidEnterprise
     , awtsWebApps
     , awtsPermission
     , awtsStoreBuilder
+    , awtsManagedConfigurations
 
     -- ** ProductVisibility
     , ProductVisibility
@@ -831,6 +829,11 @@ module Network.Google.AndroidEnterprise
     , ppsPermission
     , ppsProductId
 
+    -- ** AdministratorWebTokenSpecManagedConfigurations
+    , AdministratorWebTokenSpecManagedConfigurations
+    , administratorWebTokenSpecManagedConfigurations
+    , awtsmcEnabled
+
     -- ** Permission
     , Permission
     , permission
@@ -900,7 +903,6 @@ import           Network.Google.Resource.AndroidEnterprise.Enterprises.CreateWeb
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.GenerateSignupURL
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Get
-import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetAndroidDevicePolicyConfig
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetServiceAccount
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.List
@@ -1028,7 +1030,6 @@ type AndroidEnterpriseAPI =
        :<|> EnterprisesGenerateSignupURLResource
        :<|> EnterprisesSendTestPushNotificationResource
        :<|> EnterprisesSetStoreLayoutResource
-       :<|> EnterprisesGetAndroidDevicePolicyConfigResource
        :<|> EnterprisesAcknowledgeNotificationSetResource
        :<|> EnterprisesPullNotificationSetResource
        :<|> ManagedConfigurationsforUserListResource

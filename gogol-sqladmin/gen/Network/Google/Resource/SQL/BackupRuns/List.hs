@@ -62,12 +62,15 @@ type BackupRunsListResource =
 -- in the reverse chronological order of the backup initiation time.
 --
 -- /See:/ 'backupRunsList' smart constructor.
-data BackupRunsList = BackupRunsList'
+data BackupRunsList =
+  BackupRunsList'
     { _brlProject    :: !Text
     , _brlPageToken  :: !(Maybe Text)
     , _brlMaxResults :: !(Maybe (Textual Int32))
     , _brlInstance   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackupRunsList' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ backupRunsList
     -> Text -- ^ 'brlInstance'
     -> BackupRunsList
 backupRunsList pBrlProject_ pBrlInstance_ =
-    BackupRunsList'
+  BackupRunsList'
     { _brlProject = pBrlProject_
     , _brlPageToken = Nothing
     , _brlMaxResults = Nothing
     , _brlInstance = pBrlInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 brlProject :: Lens' BackupRunsList Text

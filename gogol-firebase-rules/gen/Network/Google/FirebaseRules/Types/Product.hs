@@ -25,11 +25,14 @@ import           Network.Google.Prelude
 -- purposes.
 --
 -- /See:/ 'sourcePosition' smart constructor.
-data SourcePosition = SourcePosition'
+data SourcePosition =
+  SourcePosition'
     { _spLine     :: !(Maybe (Textual Int32))
     , _spColumn   :: !(Maybe (Textual Int32))
     , _spFileName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourcePosition' with the minimum fields required to make a request.
 --
@@ -43,11 +46,9 @@ data SourcePosition = SourcePosition'
 sourcePosition
     :: SourcePosition
 sourcePosition =
-    SourcePosition'
-    { _spLine = Nothing
-    , _spColumn = Nothing
-    , _spFileName = Nothing
-    }
+  SourcePosition'
+    {_spLine = Nothing, _spColumn = Nothing, _spFileName = Nothing}
+
 
 -- | Line number of the source fragment. 1-based.
 spLine :: Lens' SourcePosition (Maybe Int32)
@@ -91,12 +92,15 @@ instance ToJSON SourcePosition where
 -- the request is executed.
 --
 -- /See:/ 'testCase' smart constructor.
-data TestCase = TestCase'
+data TestCase =
+  TestCase'
     { _tcResource      :: !(Maybe JSONValue)
     , _tcExpectation   :: !(Maybe TestCaseExpectation)
     , _tcFunctionMocks :: !(Maybe [FunctionMock])
     , _tcRequest       :: !(Maybe JSONValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestCase' with the minimum fields required to make a request.
 --
@@ -112,12 +116,13 @@ data TestCase = TestCase'
 testCase
     :: TestCase
 testCase =
-    TestCase'
+  TestCase'
     { _tcResource = Nothing
     , _tcExpectation = Nothing
     , _tcFunctionMocks = Nothing
     , _tcRequest = Nothing
     }
+
 
 -- | Optional resource value as it appears in persistent storage before the
 -- request is fulfilled. The resource type depends on the \`request.path\`
@@ -177,10 +182,13 @@ instance ToJSON TestCase where
 -- rules.
 --
 -- /See:/ 'visitedExpression' smart constructor.
-data VisitedExpression = VisitedExpression'
+data VisitedExpression =
+  VisitedExpression'
     { _veSourcePosition :: !(Maybe SourcePosition)
     , _veValue          :: !(Maybe JSONValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VisitedExpression' with the minimum fields required to make a request.
 --
@@ -192,10 +200,8 @@ data VisitedExpression = VisitedExpression'
 visitedExpression
     :: VisitedExpression
 visitedExpression =
-    VisitedExpression'
-    { _veSourcePosition = Nothing
-    , _veValue = Nothing
-    }
+  VisitedExpression' {_veSourcePosition = Nothing, _veValue = Nothing}
+
 
 -- | Position in the \`Source\` or \`Ruleset\` where an expression was
 -- visited.
@@ -230,14 +236,16 @@ instance ToJSON VisitedExpression where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -255,11 +263,14 @@ instance ToJSON Empty where
 -- are \`Arg.any_value\`.
 --
 -- /See:/ 'functionMock' smart constructor.
-data FunctionMock = FunctionMock'
+data FunctionMock =
+  FunctionMock'
     { _fmArgs     :: !(Maybe [Arg])
     , _fmFunction :: !(Maybe Text)
     , _fmResult   :: !(Maybe Result)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FunctionMock' with the minimum fields required to make a request.
 --
@@ -273,11 +284,8 @@ data FunctionMock = FunctionMock'
 functionMock
     :: FunctionMock
 functionMock =
-    FunctionMock'
-    { _fmArgs = Nothing
-    , _fmFunction = Nothing
-    , _fmResult = Nothing
-    }
+  FunctionMock' {_fmArgs = Nothing, _fmFunction = Nothing, _fmResult = Nothing}
+
 
 -- | The list of \`Arg\` values to match. The order in which the arguments
 -- are provided is the order in which they must appear in the function
@@ -317,10 +325,13 @@ instance ToJSON FunctionMock where
 -- execution.
 --
 -- /See:/ 'functionCall' smart constructor.
-data FunctionCall = FunctionCall'
+data FunctionCall =
+  FunctionCall'
     { _fcArgs     :: !(Maybe [JSONValue])
     , _fcFunction :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FunctionCall' with the minimum fields required to make a request.
 --
@@ -331,11 +342,8 @@ data FunctionCall = FunctionCall'
 -- * 'fcFunction'
 functionCall
     :: FunctionCall
-functionCall =
-    FunctionCall'
-    { _fcArgs = Nothing
-    , _fcFunction = Nothing
-    }
+functionCall = FunctionCall' {_fcArgs = Nothing, _fcFunction = Nothing}
+
 
 -- | The arguments that were provided to the function.
 fcArgs :: Lens' FunctionCall [JSONValue]
@@ -365,10 +373,13 @@ instance ToJSON FunctionCall where
 -- | The response for FirebaseRulesService.ListReleases.
 --
 -- /See:/ 'listReleasesResponse' smart constructor.
-data ListReleasesResponse = ListReleasesResponse'
+data ListReleasesResponse =
+  ListReleasesResponse'
     { _lrrNextPageToken :: !(Maybe Text)
     , _lrrReleases      :: !(Maybe [Release])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListReleasesResponse' with the minimum fields required to make a request.
 --
@@ -380,10 +391,8 @@ data ListReleasesResponse = ListReleasesResponse'
 listReleasesResponse
     :: ListReleasesResponse
 listReleasesResponse =
-    ListReleasesResponse'
-    { _lrrNextPageToken = Nothing
-    , _lrrReleases = Nothing
-    }
+  ListReleasesResponse' {_lrrNextPageToken = Nothing, _lrrReleases = Nothing}
+
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -417,10 +426,13 @@ instance ToJSON ListReleasesResponse where
 -- | Possible result values from the function mock invocation.
 --
 -- /See:/ 'result' smart constructor.
-data Result = Result'
+data Result =
+  Result'
     { _rValue     :: !(Maybe JSONValue)
     , _rUndefined :: !(Maybe Empty)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Result' with the minimum fields required to make a request.
 --
@@ -431,11 +443,8 @@ data Result = Result'
 -- * 'rUndefined'
 result
     :: Result
-result =
-    Result'
-    { _rValue = Nothing
-    , _rUndefined = Nothing
-    }
+result = Result' {_rValue = Nothing, _rUndefined = Nothing}
+
 
 -- | The result is an actual value. The type of the value must match that of
 -- the type declared by the service.
@@ -463,10 +472,13 @@ instance ToJSON Result where
 -- | The response for FirebaseRulesService.TestRuleset.
 --
 -- /See:/ 'testRulesetResponse' smart constructor.
-data TestRulesetResponse = TestRulesetResponse'
+data TestRulesetResponse =
+  TestRulesetResponse'
     { _trrTestResults :: !(Maybe [TestResult])
     , _trrIssues      :: !(Maybe [Issue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestRulesetResponse' with the minimum fields required to make a request.
 --
@@ -478,10 +490,8 @@ data TestRulesetResponse = TestRulesetResponse'
 testRulesetResponse
     :: TestRulesetResponse
 testRulesetResponse =
-    TestRulesetResponse'
-    { _trrTestResults = Nothing
-    , _trrIssues = Nothing
-    }
+  TestRulesetResponse' {_trrTestResults = Nothing, _trrIssues = Nothing}
+
 
 -- | The set of test results given the test cases in the \`TestSuite\`. The
 -- results will appear in the same order as the test cases appear in the
@@ -521,12 +531,15 @@ instance ToJSON TestRulesetResponse where
 -- the \`Ruleset\`.
 --
 -- /See:/ 'release' smart constructor.
-data Release = Release'
+data Release =
+  Release'
     { _rRulesetName :: !(Maybe Text)
     , _rUpdateTime  :: !(Maybe DateTime')
     , _rName        :: !(Maybe Text)
     , _rCreateTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Release' with the minimum fields required to make a request.
 --
@@ -542,12 +555,13 @@ data Release = Release'
 release
     :: Release
 release =
-    Release'
+  Release'
     { _rRulesetName = Nothing
     , _rUpdateTime = Nothing
     , _rName = Nothing
     , _rCreateTime = Nothing
     }
+
 
 -- | Name of the \`Ruleset\` referred to by this \`Release\`. The \`Ruleset\`
 -- must exist the \`Release\` to be created.
@@ -608,10 +622,13 @@ instance ToJSON Release where
 -- | Arg matchers for the mock function.
 --
 -- /See:/ 'arg' smart constructor.
-data Arg = Arg'
+data Arg =
+  Arg'
     { _aAnyValue   :: !(Maybe Empty)
     , _aExactValue :: !(Maybe JSONValue)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Arg' with the minimum fields required to make a request.
 --
@@ -622,11 +639,8 @@ data Arg = Arg'
 -- * 'aExactValue'
 arg
     :: Arg
-arg =
-    Arg'
-    { _aAnyValue = Nothing
-    , _aExactValue = Nothing
-    }
+arg = Arg' {_aAnyValue = Nothing, _aExactValue = Nothing}
+
 
 -- | Argument matches any value provided.
 aAnyValue :: Lens' Arg (Maybe Empty)
@@ -655,11 +669,14 @@ instance ToJSON Arg where
 -- identifier and a creation time.
 --
 -- /See:/ 'ruleset' smart constructor.
-data Ruleset = Ruleset'
+data Ruleset =
+  Ruleset'
     { _rulName       :: !(Maybe Text)
     , _rulSource     :: !(Maybe Source)
     , _rulCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Ruleset' with the minimum fields required to make a request.
 --
@@ -673,11 +690,8 @@ data Ruleset = Ruleset'
 ruleset
     :: Ruleset
 ruleset =
-    Ruleset'
-    { _rulName = Nothing
-    , _rulSource = Nothing
-    , _rulCreateTime = Nothing
-    }
+  Ruleset' {_rulName = Nothing, _rulSource = Nothing, _rulCreateTime = Nothing}
+
 
 -- | Name of the \`Ruleset\`. The ruleset_id is auto generated by the
 -- service. Format: \`projects\/{project_id}\/rulesets\/{ruleset_id}\`
@@ -716,14 +730,17 @@ instance ToJSON Ruleset where
 -- | The response for FirebaseRulesService.GetReleaseExecutable
 --
 -- /See:/ 'getReleaseExecutableResponse' smart constructor.
-data GetReleaseExecutableResponse = GetReleaseExecutableResponse'
+data GetReleaseExecutableResponse =
+  GetReleaseExecutableResponse'
     { _grerExecutable        :: !(Maybe Bytes)
     , _grerRulesetName       :: !(Maybe Text)
     , _grerUpdateTime        :: !(Maybe DateTime')
     , _grerSyncTime          :: !(Maybe DateTime')
     , _grerExecutableVersion :: !(Maybe GetReleaseExecutableResponseExecutableVersion)
     , _grerLanguage          :: !(Maybe GetReleaseExecutableResponseLanguage)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetReleaseExecutableResponse' with the minimum fields required to make a request.
 --
@@ -743,7 +760,7 @@ data GetReleaseExecutableResponse = GetReleaseExecutableResponse'
 getReleaseExecutableResponse
     :: GetReleaseExecutableResponse
 getReleaseExecutableResponse =
-    GetReleaseExecutableResponse'
+  GetReleaseExecutableResponse'
     { _grerExecutable = Nothing
     , _grerRulesetName = Nothing
     , _grerUpdateTime = Nothing
@@ -751,6 +768,7 @@ getReleaseExecutableResponse =
     , _grerExecutableVersion = Nothing
     , _grerLanguage = Nothing
     }
+
 
 -- | Executable view of the \`Ruleset\` referenced by the \`Release\`.
 grerExecutable :: Lens' GetReleaseExecutableResponse (Maybe ByteString)
@@ -817,13 +835,16 @@ instance ToJSON GetReleaseExecutableResponse where
 -- description and source position for test failures.
 --
 -- /See:/ 'testResult' smart constructor.
-data TestResult = TestResult'
+data TestResult =
+  TestResult'
     { _trState              :: !(Maybe TestResultState)
     , _trFunctionCalls      :: !(Maybe [FunctionCall])
     , _trVisitedExpressions :: !(Maybe [VisitedExpression])
     , _trErrorPosition      :: !(Maybe SourcePosition)
     , _trDebugMessages      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestResult' with the minimum fields required to make a request.
 --
@@ -841,13 +862,14 @@ data TestResult = TestResult'
 testResult
     :: TestResult
 testResult =
-    TestResult'
+  TestResult'
     { _trState = Nothing
     , _trFunctionCalls = Nothing
     , _trVisitedExpressions = Nothing
     , _trErrorPosition = Nothing
     , _trDebugMessages = Nothing
     }
+
 
 -- | State of the test.
 trState :: Lens' TestResult (Maybe TestResultState)
@@ -921,9 +943,12 @@ instance ToJSON TestResult where
 -- rules.
 --
 -- /See:/ 'source' smart constructor.
-newtype Source = Source'
+newtype Source =
+  Source'
     { _sFiles :: Maybe [File]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
@@ -932,10 +957,8 @@ newtype Source = Source'
 -- * 'sFiles'
 source
     :: Source
-source =
-    Source'
-    { _sFiles = Nothing
-    }
+source = Source' {_sFiles = Nothing}
+
 
 -- | \`File\` set constituting the \`Source\` bundle.
 sFiles :: Lens' Source [File]
@@ -958,9 +981,12 @@ instance ToJSON Source where
 -- \`Release\` object as a pre-release check.
 --
 -- /See:/ 'testSuite' smart constructor.
-newtype TestSuite = TestSuite'
+newtype TestSuite =
+  TestSuite'
     { _tsTestCases :: Maybe [TestCase]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestSuite' with the minimum fields required to make a request.
 --
@@ -969,10 +995,8 @@ newtype TestSuite = TestSuite'
 -- * 'tsTestCases'
 testSuite
     :: TestSuite
-testSuite =
-    TestSuite'
-    { _tsTestCases = Nothing
-    }
+testSuite = TestSuite' {_tsTestCases = Nothing}
+
 
 -- | Collection of test cases associated with the \`TestSuite\`.
 tsTestCases :: Lens' TestSuite [TestCase]
@@ -995,10 +1019,13 @@ instance ToJSON TestSuite where
 -- | The request for FirebaseRulesService.TestRuleset.
 --
 -- /See:/ 'testRulesetRequest' smart constructor.
-data TestRulesetRequest = TestRulesetRequest'
+data TestRulesetRequest =
+  TestRulesetRequest'
     { _trrSource    :: !(Maybe Source)
     , _trrTestSuite :: !(Maybe TestSuite)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestRulesetRequest' with the minimum fields required to make a request.
 --
@@ -1010,10 +1037,8 @@ data TestRulesetRequest = TestRulesetRequest'
 testRulesetRequest
     :: TestRulesetRequest
 testRulesetRequest =
-    TestRulesetRequest'
-    { _trrSource = Nothing
-    , _trrTestSuite = Nothing
-    }
+  TestRulesetRequest' {_trrSource = Nothing, _trrTestSuite = Nothing}
+
 
 -- | Optional \`Source\` to be checked for correctness. This field must not
 -- be set when the resource name refers to a \`Ruleset\`.
@@ -1043,11 +1068,14 @@ instance ToJSON TestRulesetRequest where
 -- | \`File\` containing source content.
 --
 -- /See:/ 'file' smart constructor.
-data File = File'
+data File =
+  File'
     { _fFingerprint :: !(Maybe Bytes)
     , _fContent     :: !(Maybe Text)
     , _fName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
@@ -1060,12 +1088,8 @@ data File = File'
 -- * 'fName'
 file
     :: File
-file =
-    File'
-    { _fFingerprint = Nothing
-    , _fContent = Nothing
-    , _fName = Nothing
-    }
+file = File' {_fFingerprint = Nothing, _fContent = Nothing, _fName = Nothing}
+
 
 -- | Fingerprint (e.g. github sha) associated with the \`File\`.
 fFingerprint :: Lens' File (Maybe ByteString)
@@ -1100,10 +1124,13 @@ instance ToJSON File where
 -- | The response for FirebaseRulesService.ListRulesets.
 --
 -- /See:/ 'listRulesetsResponse' smart constructor.
-data ListRulesetsResponse = ListRulesetsResponse'
+data ListRulesetsResponse =
+  ListRulesetsResponse'
     { _lRulesets      :: !(Maybe [Ruleset])
     , _lNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListRulesetsResponse' with the minimum fields required to make a request.
 --
@@ -1115,10 +1142,8 @@ data ListRulesetsResponse = ListRulesetsResponse'
 listRulesetsResponse
     :: ListRulesetsResponse
 listRulesetsResponse =
-    ListRulesetsResponse'
-    { _lRulesets = Nothing
-    , _lNextPageToken = Nothing
-    }
+  ListRulesetsResponse' {_lRulesets = Nothing, _lNextPageToken = Nothing}
+
 
 -- | List of \`Ruleset\` instances.
 lRulesets :: Lens' ListRulesetsResponse [Ruleset]
@@ -1152,11 +1177,14 @@ instance ToJSON ListRulesetsResponse where
 -- | Issues include warnings, errors, and deprecation notices.
 --
 -- /See:/ 'issue' smart constructor.
-data Issue = Issue'
+data Issue =
+  Issue'
     { _iSourcePosition :: !(Maybe SourcePosition)
     , _iSeverity       :: !(Maybe IssueSeverity)
     , _iDescription    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Issue' with the minimum fields required to make a request.
 --
@@ -1170,11 +1198,9 @@ data Issue = Issue'
 issue
     :: Issue
 issue =
-    Issue'
-    { _iSourcePosition = Nothing
-    , _iSeverity = Nothing
-    , _iDescription = Nothing
-    }
+  Issue'
+    {_iSourcePosition = Nothing, _iSeverity = Nothing, _iDescription = Nothing}
+
 
 -- | Position of the issue in the \`Source\`.
 iSourcePosition :: Lens' Issue (Maybe SourcePosition)
@@ -1211,10 +1237,13 @@ instance ToJSON Issue where
 -- | The request for FirebaseRulesService.UpdateReleasePatch.
 --
 -- /See:/ 'updateReleaseRequest' smart constructor.
-data UpdateReleaseRequest = UpdateReleaseRequest'
+data UpdateReleaseRequest =
+  UpdateReleaseRequest'
     { _urrUpdateMask :: !(Maybe GFieldMask)
     , _urrRelease    :: !(Maybe Release)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateReleaseRequest' with the minimum fields required to make a request.
 --
@@ -1226,10 +1255,8 @@ data UpdateReleaseRequest = UpdateReleaseRequest'
 updateReleaseRequest
     :: UpdateReleaseRequest
 updateReleaseRequest =
-    UpdateReleaseRequest'
-    { _urrUpdateMask = Nothing
-    , _urrRelease = Nothing
-    }
+  UpdateReleaseRequest' {_urrUpdateMask = Nothing, _urrRelease = Nothing}
+
 
 -- | Specifies which fields to update.
 urrUpdateMask :: Lens' UpdateReleaseRequest (Maybe GFieldMask)

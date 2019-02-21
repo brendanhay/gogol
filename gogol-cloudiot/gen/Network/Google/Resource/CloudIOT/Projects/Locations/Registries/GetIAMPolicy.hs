@@ -65,7 +65,8 @@ type ProjectsLocationsRegistriesGetIAMPolicyResource
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsLocationsRegistriesGetIAMPolicy' smart constructor.
-data ProjectsLocationsRegistriesGetIAMPolicy = ProjectsLocationsRegistriesGetIAMPolicy'
+data ProjectsLocationsRegistriesGetIAMPolicy =
+  ProjectsLocationsRegistriesGetIAMPolicy'
     { _plrgipXgafv          :: !(Maybe Xgafv)
     , _plrgipUploadProtocol :: !(Maybe Text)
     , _plrgipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsLocationsRegistriesGetIAMPolicy = ProjectsLocationsRegistriesGetIAM
     , _plrgipPayload        :: !GetIAMPolicyRequest
     , _plrgipResource       :: !Text
     , _plrgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsLocationsRegistriesGetIAMPolicy
     -> Text -- ^ 'plrgipResource'
     -> ProjectsLocationsRegistriesGetIAMPolicy
 projectsLocationsRegistriesGetIAMPolicy pPlrgipPayload_ pPlrgipResource_ =
-    ProjectsLocationsRegistriesGetIAMPolicy'
+  ProjectsLocationsRegistriesGetIAMPolicy'
     { _plrgipXgafv = Nothing
     , _plrgipUploadProtocol = Nothing
     , _plrgipAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsLocationsRegistriesGetIAMPolicy pPlrgipPayload_ pPlrgipResource_ =
     , _plrgipResource = pPlrgipResource_
     , _plrgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrgipXgafv :: Lens' ProjectsLocationsRegistriesGetIAMPolicy (Maybe Xgafv)
@@ -150,7 +154,8 @@ plrgipCallback
       (\ s a -> s{_plrgipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGetIAMPolicy where
+           ProjectsLocationsRegistriesGetIAMPolicy
+         where
         type Rs ProjectsLocationsRegistriesGetIAMPolicy =
              Policy
         type Scopes ProjectsLocationsRegistriesGetIAMPolicy =

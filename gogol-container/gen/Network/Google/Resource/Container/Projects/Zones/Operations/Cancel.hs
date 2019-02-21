@@ -69,7 +69,8 @@ type ProjectsZonesOperationsCancelResource =
 -- | Cancels the specified operation.
 --
 -- /See:/ 'projectsZonesOperationsCancel' smart constructor.
-data ProjectsZonesOperationsCancel = ProjectsZonesOperationsCancel'
+data ProjectsZonesOperationsCancel =
+  ProjectsZonesOperationsCancel'
     { _pzocXgafv          :: !(Maybe Xgafv)
     , _pzocUploadProtocol :: !(Maybe Text)
     , _pzocAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsZonesOperationsCancel = ProjectsZonesOperationsCancel'
     , _pzocProjectId      :: !Text
     , _pzocOperationId    :: !Text
     , _pzocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesOperationsCancel' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsZonesOperationsCancel
     -> Text -- ^ 'pzocOperationId'
     -> ProjectsZonesOperationsCancel
 projectsZonesOperationsCancel pPzocZone_ pPzocPayload_ pPzocProjectId_ pPzocOperationId_ =
-    ProjectsZonesOperationsCancel'
+  ProjectsZonesOperationsCancel'
     { _pzocXgafv = Nothing
     , _pzocUploadProtocol = Nothing
     , _pzocAccessToken = Nothing
@@ -120,6 +123,7 @@ projectsZonesOperationsCancel pPzocZone_ pPzocPayload_ pPzocProjectId_ pPzocOper
     , _pzocOperationId = pPzocOperationId_
     , _pzocCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzocXgafv :: Lens' ProjectsZonesOperationsCancel (Maybe Xgafv)

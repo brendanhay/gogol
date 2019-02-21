@@ -57,11 +57,14 @@ type InterconnectsDeleteResource =
 -- | Deletes the specified interconnect.
 --
 -- /See:/ 'interconnectsDelete' smart constructor.
-data InterconnectsDelete = InterconnectsDelete'
+data InterconnectsDelete =
+  InterconnectsDelete'
     { _intRequestId    :: !(Maybe Text)
     , _intProject      :: !Text
     , _intInterconnect :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InterconnectsDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ interconnectsDelete
     -> Text -- ^ 'intInterconnect'
     -> InterconnectsDelete
 interconnectsDelete pIntProject_ pIntInterconnect_ =
-    InterconnectsDelete'
+  InterconnectsDelete'
     { _intRequestId = Nothing
     , _intProject = pIntProject_
     , _intInterconnect = pIntInterconnect_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

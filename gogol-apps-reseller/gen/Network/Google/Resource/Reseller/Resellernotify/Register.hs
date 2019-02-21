@@ -54,9 +54,12 @@ type ResellernotifyRegisterResource =
 -- | Registers a Reseller for receiving notifications.
 --
 -- /See:/ 'resellernotifyRegister' smart constructor.
-newtype ResellernotifyRegister = ResellernotifyRegister'
+newtype ResellernotifyRegister =
+  ResellernotifyRegister'
     { _rrServiceAccountEmailAddress :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResellernotifyRegister' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ newtype ResellernotifyRegister = ResellernotifyRegister'
 resellernotifyRegister
     :: ResellernotifyRegister
 resellernotifyRegister =
-    ResellernotifyRegister'
-    { _rrServiceAccountEmailAddress = Nothing
-    }
+  ResellernotifyRegister' {_rrServiceAccountEmailAddress = Nothing}
+
 
 -- | The service account which will own the created Cloud-PubSub topic.
 rrServiceAccountEmailAddress :: Lens' ResellernotifyRegister (Maybe Text)

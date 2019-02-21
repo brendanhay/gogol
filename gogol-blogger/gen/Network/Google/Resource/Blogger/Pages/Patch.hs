@@ -60,13 +60,16 @@ type PagesPatchResource =
 -- | Update a page. This method supports patch semantics.
 --
 -- /See:/ 'pagesPatch' smart constructor.
-data PagesPatch = PagesPatch'
+data PagesPatch =
+  PagesPatch'
     { _ppBlogId  :: !Text
     , _ppPageId  :: !Text
     , _ppPayload :: !Page
     , _ppRevert  :: !(Maybe Bool)
     , _ppPublish :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagesPatch' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ pagesPatch
     -> Page -- ^ 'ppPayload'
     -> PagesPatch
 pagesPatch pPpBlogId_ pPpPageId_ pPpPayload_ =
-    PagesPatch'
+  PagesPatch'
     { _ppBlogId = pPpBlogId_
     , _ppPageId = pPpPageId_
     , _ppPayload = pPpPayload_
     , _ppRevert = Nothing
     , _ppPublish = Nothing
     }
+
 
 -- | The ID of the Blog.
 ppBlogId :: Lens' PagesPatch Text

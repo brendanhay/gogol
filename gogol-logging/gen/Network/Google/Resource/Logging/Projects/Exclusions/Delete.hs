@@ -59,14 +59,17 @@ type ProjectsExclusionsDeleteResource =
 -- | Deletes an exclusion.
 --
 -- /See:/ 'projectsExclusionsDelete' smart constructor.
-data ProjectsExclusionsDelete = ProjectsExclusionsDelete'
+data ProjectsExclusionsDelete =
+  ProjectsExclusionsDelete'
     { _pedXgafv          :: !(Maybe Xgafv)
     , _pedUploadProtocol :: !(Maybe Text)
     , _pedAccessToken    :: !(Maybe Text)
     , _pedUploadType     :: !(Maybe Text)
     , _pedName           :: !Text
     , _pedCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsExclusionsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsExclusionsDelete
     :: Text -- ^ 'pedName'
     -> ProjectsExclusionsDelete
 projectsExclusionsDelete pPedName_ =
-    ProjectsExclusionsDelete'
+  ProjectsExclusionsDelete'
     { _pedXgafv = Nothing
     , _pedUploadProtocol = Nothing
     , _pedAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsExclusionsDelete pPedName_ =
     , _pedName = pPedName_
     , _pedCallback = Nothing
     }
+
 
 -- | V1 error format.
 pedXgafv :: Lens' ProjectsExclusionsDelete (Maybe Xgafv)

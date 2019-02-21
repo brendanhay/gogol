@@ -70,7 +70,8 @@ type ProjectsJobTriggersCreateResource =
 -- more.
 --
 -- /See:/ 'projectsJobTriggersCreate' smart constructor.
-data ProjectsJobTriggersCreate = ProjectsJobTriggersCreate'
+data ProjectsJobTriggersCreate =
+  ProjectsJobTriggersCreate'
     { _pjtcParent         :: !Text
     , _pjtcXgafv          :: !(Maybe Xgafv)
     , _pjtcUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsJobTriggersCreate = ProjectsJobTriggersCreate'
     , _pjtcUploadType     :: !(Maybe Text)
     , _pjtcPayload        :: !GooglePrivacyDlpV2CreateJobTriggerRequest
     , _pjtcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobTriggersCreate' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsJobTriggersCreate
     -> GooglePrivacyDlpV2CreateJobTriggerRequest -- ^ 'pjtcPayload'
     -> ProjectsJobTriggersCreate
 projectsJobTriggersCreate pPjtcParent_ pPjtcPayload_ =
-    ProjectsJobTriggersCreate'
+  ProjectsJobTriggersCreate'
     { _pjtcParent = pPjtcParent_
     , _pjtcXgafv = Nothing
     , _pjtcUploadProtocol = Nothing
@@ -111,6 +114,7 @@ projectsJobTriggersCreate pPjtcParent_ pPjtcPayload_ =
     , _pjtcPayload = pPjtcPayload_
     , _pjtcCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id.
 pjtcParent :: Lens' ProjectsJobTriggersCreate Text

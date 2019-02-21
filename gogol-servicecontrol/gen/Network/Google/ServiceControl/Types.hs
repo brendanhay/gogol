@@ -211,6 +211,7 @@ module Network.Google.ServiceControl.Types
     , CheckError
     , checkError
     , ceSubject
+    , ceStatus
     , ceCode
     , ceDetail
 
@@ -490,8 +491,8 @@ serviceControlService
 
 -- | Manage your Google Service Control data
 serviceControlScope :: Proxy '["https://www.googleapis.com/auth/servicecontrol"]
-serviceControlScope = Proxy;
+serviceControlScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

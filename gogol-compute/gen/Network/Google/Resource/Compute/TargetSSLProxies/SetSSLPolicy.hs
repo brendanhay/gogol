@@ -67,12 +67,15 @@ type TargetSSLProxiesSetSSLPolicyResource =
 -- connection between the load balancer and the backends.
 --
 -- /See:/ 'targetSSLProxiesSetSSLPolicy' smart constructor.
-data TargetSSLProxiesSetSSLPolicy = TargetSSLProxiesSetSSLPolicy'
+data TargetSSLProxiesSetSSLPolicy =
+  TargetSSLProxiesSetSSLPolicy'
     { _tspsspRequestId      :: !(Maybe Text)
     , _tspsspProject        :: !Text
     , _tspsspPayload        :: !SSLPolicyReference
     , _tspsspTargetSSLProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetSSLProxiesSetSSLPolicy' with the minimum fields required to make a request.
 --
@@ -91,12 +94,13 @@ targetSSLProxiesSetSSLPolicy
     -> Text -- ^ 'tspsspTargetSSLProxy'
     -> TargetSSLProxiesSetSSLPolicy
 targetSSLProxiesSetSSLPolicy pTspsspProject_ pTspsspPayload_ pTspsspTargetSSLProxy_ =
-    TargetSSLProxiesSetSSLPolicy'
+  TargetSSLProxiesSetSSLPolicy'
     { _tspsspRequestId = Nothing
     , _tspsspProject = pTspsspProject_
     , _tspsspPayload = pTspsspPayload_
     , _tspsspTargetSSLProxy = pTspsspTargetSSLProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

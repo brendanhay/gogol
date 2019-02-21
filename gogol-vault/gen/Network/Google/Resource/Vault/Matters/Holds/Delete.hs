@@ -63,7 +63,8 @@ type MattersHoldsDeleteResource =
 -- | Removes a hold by ID. This will release any HeldAccounts on this Hold.
 --
 -- /See:/ 'mattersHoldsDelete' smart constructor.
-data MattersHoldsDelete = MattersHoldsDelete'
+data MattersHoldsDelete =
+  MattersHoldsDelete'
     { _mhdXgafv          :: !(Maybe Xgafv)
     , _mhdUploadProtocol :: !(Maybe Text)
     , _mhdHoldId         :: !Text
@@ -71,7 +72,9 @@ data MattersHoldsDelete = MattersHoldsDelete'
     , _mhdUploadType     :: !(Maybe Text)
     , _mhdMatterId       :: !Text
     , _mhdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersHoldsDelete' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ mattersHoldsDelete
     -> Text -- ^ 'mhdMatterId'
     -> MattersHoldsDelete
 mattersHoldsDelete pMhdHoldId_ pMhdMatterId_ =
-    MattersHoldsDelete'
+  MattersHoldsDelete'
     { _mhdXgafv = Nothing
     , _mhdUploadProtocol = Nothing
     , _mhdHoldId = pMhdHoldId_
@@ -104,6 +107,7 @@ mattersHoldsDelete pMhdHoldId_ pMhdMatterId_ =
     , _mhdMatterId = pMhdMatterId_
     , _mhdCallback = Nothing
     }
+
 
 -- | V1 error format.
 mhdXgafv :: Lens' MattersHoldsDelete (Maybe Xgafv)

@@ -63,7 +63,8 @@ type ServicesRolloutsGetResource =
 -- | Gets a service configuration rollout.
 --
 -- /See:/ 'servicesRolloutsGet' smart constructor.
-data ServicesRolloutsGet = ServicesRolloutsGet'
+data ServicesRolloutsGet =
+  ServicesRolloutsGet'
     { _srgXgafv          :: !(Maybe Xgafv)
     , _srgUploadProtocol :: !(Maybe Text)
     , _srgAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ServicesRolloutsGet = ServicesRolloutsGet'
     , _srgServiceName    :: !Text
     , _srgRolloutId      :: !Text
     , _srgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesRolloutsGet' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ servicesRolloutsGet
     -> Text -- ^ 'srgRolloutId'
     -> ServicesRolloutsGet
 servicesRolloutsGet pSrgServiceName_ pSrgRolloutId_ =
-    ServicesRolloutsGet'
+  ServicesRolloutsGet'
     { _srgXgafv = Nothing
     , _srgUploadProtocol = Nothing
     , _srgAccessToken = Nothing
@@ -104,6 +107,7 @@ servicesRolloutsGet pSrgServiceName_ pSrgRolloutId_ =
     , _srgRolloutId = pSrgRolloutId_
     , _srgCallback = Nothing
     }
+
 
 -- | V1 error format.
 srgXgafv :: Lens' ServicesRolloutsGet (Maybe Xgafv)

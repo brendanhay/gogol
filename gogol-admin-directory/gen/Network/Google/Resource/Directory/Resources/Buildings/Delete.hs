@@ -56,10 +56,13 @@ type ResourcesBuildingsDeleteResource =
 -- | Deletes a building.
 --
 -- /See:/ 'resourcesBuildingsDelete' smart constructor.
-data ResourcesBuildingsDelete = ResourcesBuildingsDelete'
+data ResourcesBuildingsDelete =
+  ResourcesBuildingsDelete'
     { _rbdBuildingId :: !Text
     , _rbdCustomer   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesBuildingsDelete' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ resourcesBuildingsDelete
     -> Text -- ^ 'rbdCustomer'
     -> ResourcesBuildingsDelete
 resourcesBuildingsDelete pRbdBuildingId_ pRbdCustomer_ =
-    ResourcesBuildingsDelete'
-    { _rbdBuildingId = pRbdBuildingId_
-    , _rbdCustomer = pRbdCustomer_
-    }
+  ResourcesBuildingsDelete'
+    {_rbdBuildingId = pRbdBuildingId_, _rbdCustomer = pRbdCustomer_}
+
 
 -- | The ID of the building to delete.
 rbdBuildingId :: Lens' ResourcesBuildingsDelete Text

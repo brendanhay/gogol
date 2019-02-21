@@ -63,13 +63,16 @@ type URLMapsListResource =
 -- project.
 --
 -- /See:/ 'urlMapsList' smart constructor.
-data URLMapsList = URLMapsList'
+data URLMapsList =
+  URLMapsList'
     { _umlOrderBy    :: !(Maybe Text)
     , _umlProject    :: !Text
     , _umlFilter     :: !(Maybe Text)
     , _umlPageToken  :: !(Maybe Text)
     , _umlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLMapsList' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ urlMapsList
     :: Text -- ^ 'umlProject'
     -> URLMapsList
 urlMapsList pUmlProject_ =
-    URLMapsList'
+  URLMapsList'
     { _umlOrderBy = Nothing
     , _umlProject = pUmlProject_
     , _umlFilter = Nothing
     , _umlPageToken = Nothing
     , _umlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

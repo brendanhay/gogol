@@ -67,13 +67,16 @@ type RepresentativesRepresentativeInfoByAddressResource
 -- address.
 --
 -- /See:/ 'representativesRepresentativeInfoByAddress' smart constructor.
-data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeInfoByAddress'
+data RepresentativesRepresentativeInfoByAddress =
+  RepresentativesRepresentativeInfoByAddress'
     { _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
     , _rribaAddress        :: !(Maybe Text)
     , _rribaPayload        :: !RepresentativeInfoRequest
     , _rribaIncludeOffices :: !Bool
     , _rribaLevels         :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepresentativesRepresentativeInfoByAddress' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ representativesRepresentativeInfoByAddress
     :: RepresentativeInfoRequest -- ^ 'rribaPayload'
     -> RepresentativesRepresentativeInfoByAddress
 representativesRepresentativeInfoByAddress pRribaPayload_ =
-    RepresentativesRepresentativeInfoByAddress'
+  RepresentativesRepresentativeInfoByAddress'
     { _rribaRoles = Nothing
     , _rribaAddress = Nothing
     , _rribaPayload = pRribaPayload_
     , _rribaIncludeOffices = True
     , _rribaLevels = Nothing
     }
+
 
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
@@ -137,7 +141,8 @@ rribaLevels
       . _Coerce
 
 instance GoogleRequest
-         RepresentativesRepresentativeInfoByAddress where
+           RepresentativesRepresentativeInfoByAddress
+         where
         type Rs RepresentativesRepresentativeInfoByAddress =
              RepresentativeInfoResponse
         type Scopes

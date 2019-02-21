@@ -77,14 +77,17 @@ type ControllerDebuggeesRegisterResource =
 -- changing upon re-registration.
 --
 -- /See:/ 'controllerDebuggeesRegister' smart constructor.
-data ControllerDebuggeesRegister = ControllerDebuggeesRegister'
+data ControllerDebuggeesRegister =
+  ControllerDebuggeesRegister'
     { _cdrXgafv          :: !(Maybe Xgafv)
     , _cdrUploadProtocol :: !(Maybe Text)
     , _cdrAccessToken    :: !(Maybe Text)
     , _cdrUploadType     :: !(Maybe Text)
     , _cdrPayload        :: !RegisterDebuggeeRequest
     , _cdrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ControllerDebuggeesRegister' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ controllerDebuggeesRegister
     :: RegisterDebuggeeRequest -- ^ 'cdrPayload'
     -> ControllerDebuggeesRegister
 controllerDebuggeesRegister pCdrPayload_ =
-    ControllerDebuggeesRegister'
+  ControllerDebuggeesRegister'
     { _cdrXgafv = Nothing
     , _cdrUploadProtocol = Nothing
     , _cdrAccessToken = Nothing
@@ -113,6 +116,7 @@ controllerDebuggeesRegister pCdrPayload_ =
     , _cdrPayload = pCdrPayload_
     , _cdrCallback = Nothing
     }
+
 
 -- | V1 error format.
 cdrXgafv :: Lens' ControllerDebuggeesRegister (Maybe Xgafv)

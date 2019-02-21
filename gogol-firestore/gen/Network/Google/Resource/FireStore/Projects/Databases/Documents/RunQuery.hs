@@ -62,7 +62,8 @@ type ProjectsDatabasesDocumentsRunQueryResource =
 -- | Runs a query.
 --
 -- /See:/ 'projectsDatabasesDocumentsRunQuery' smart constructor.
-data ProjectsDatabasesDocumentsRunQuery = ProjectsDatabasesDocumentsRunQuery'
+data ProjectsDatabasesDocumentsRunQuery =
+  ProjectsDatabasesDocumentsRunQuery'
     { _pddrqParent         :: !Text
     , _pddrqXgafv          :: !(Maybe Xgafv)
     , _pddrqUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsDatabasesDocumentsRunQuery = ProjectsDatabasesDocumentsRunQuery'
     , _pddrqUploadType     :: !(Maybe Text)
     , _pddrqPayload        :: !RunQueryRequest
     , _pddrqCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsRunQuery' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsDatabasesDocumentsRunQuery
     -> RunQueryRequest -- ^ 'pddrqPayload'
     -> ProjectsDatabasesDocumentsRunQuery
 projectsDatabasesDocumentsRunQuery pPddrqParent_ pPddrqPayload_ =
-    ProjectsDatabasesDocumentsRunQuery'
+  ProjectsDatabasesDocumentsRunQuery'
     { _pddrqParent = pPddrqParent_
     , _pddrqXgafv = Nothing
     , _pddrqUploadProtocol = Nothing
@@ -103,6 +106,7 @@ projectsDatabasesDocumentsRunQuery pPddrqParent_ pPddrqPayload_ =
     , _pddrqPayload = pPddrqPayload_
     , _pddrqCallback = Nothing
     }
+
 
 -- | The parent resource name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or
@@ -149,7 +153,8 @@ pddrqCallback
       (\ s a -> s{_pddrqCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsRunQuery where
+           ProjectsDatabasesDocumentsRunQuery
+         where
         type Rs ProjectsDatabasesDocumentsRunQuery =
              RunQueryResponse
         type Scopes ProjectsDatabasesDocumentsRunQuery =

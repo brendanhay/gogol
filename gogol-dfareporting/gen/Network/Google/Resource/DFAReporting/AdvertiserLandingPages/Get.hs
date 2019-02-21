@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserLandingPagesGet' request conforms to.
 type AdvertiserLandingPagesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserLandingPages" :>
@@ -54,10 +54,13 @@ type AdvertiserLandingPagesGetResource =
 -- | Gets one landing page by ID.
 --
 -- /See:/ 'advertiserLandingPagesGet' smart constructor.
-data AdvertiserLandingPagesGet = AdvertiserLandingPagesGet'
+data AdvertiserLandingPagesGet =
+  AdvertiserLandingPagesGet'
     { _alpgProFileId :: !(Textual Int64)
     , _alpgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdvertiserLandingPagesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ advertiserLandingPagesGet
     -> Int64 -- ^ 'alpgId'
     -> AdvertiserLandingPagesGet
 advertiserLandingPagesGet pAlpgProFileId_ pAlpgId_ =
-    AdvertiserLandingPagesGet'
-    { _alpgProFileId = _Coerce # pAlpgProFileId_
-    , _alpgId = _Coerce # pAlpgId_
-    }
+  AdvertiserLandingPagesGet'
+    {_alpgProFileId = _Coerce # pAlpgProFileId_, _alpgId = _Coerce # pAlpgId_}
+
 
 -- | User profile ID associated with this request.
 alpgProFileId :: Lens' AdvertiserLandingPagesGet Int64

@@ -57,11 +57,14 @@ type TrainedModelsListResource =
 -- | List available models.
 --
 -- /See:/ 'trainedModelsList' smart constructor.
-data TrainedModelsList = TrainedModelsList'
+data TrainedModelsList =
+  TrainedModelsList'
     { _tmlProject    :: !Text
     , _tmlPageToken  :: !(Maybe Text)
     , _tmlMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TrainedModelsList' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ trainedModelsList
     :: Text -- ^ 'tmlProject'
     -> TrainedModelsList
 trainedModelsList pTmlProject_ =
-    TrainedModelsList'
+  TrainedModelsList'
     { _tmlProject = pTmlProject_
     , _tmlPageToken = Nothing
     , _tmlMaxResults = Nothing
     }
+
 
 -- | The project associated with the model.
 tmlProject :: Lens' TrainedModelsList Text

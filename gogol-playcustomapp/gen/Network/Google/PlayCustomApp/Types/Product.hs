@@ -23,10 +23,13 @@ import           Network.Google.Prelude
 -- | This resource represents a custom app.
 --
 -- /See:/ 'customApp' smart constructor.
-data CustomApp = CustomApp'
+data CustomApp =
+  CustomApp'
     { _caLanguageCode :: !(Maybe Text)
     , _caTitle        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomApp' with the minimum fields required to make a request.
 --
@@ -37,11 +40,8 @@ data CustomApp = CustomApp'
 -- * 'caTitle'
 customApp
     :: CustomApp
-customApp =
-    CustomApp'
-    { _caLanguageCode = Nothing
-    , _caTitle = Nothing
-    }
+customApp = CustomApp' {_caLanguageCode = Nothing, _caTitle = Nothing}
+
 
 -- | Default listing language in BCP 47 format.
 caLanguageCode :: Lens' CustomApp (Maybe Text)

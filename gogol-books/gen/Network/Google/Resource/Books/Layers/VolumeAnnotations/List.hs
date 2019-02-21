@@ -82,7 +82,8 @@ type LayersVolumeAnnotationsListResource =
 -- | Gets the volume annotations for a volume and layer.
 --
 -- /See:/ 'layersVolumeAnnotationsList' smart constructor.
-data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList'
+data LayersVolumeAnnotationsList =
+  LayersVolumeAnnotationsList'
     { _lvalStartOffSet              :: !(Maybe Text)
     , _lvalLocale                   :: !(Maybe Text)
     , _lvalContentVersion           :: !Text
@@ -98,7 +99,9 @@ data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList'
     , _lvalLayerId                  :: !Text
     , _lvalMaxResults               :: !(Maybe (Textual Word32))
     , _lvalStartPosition            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LayersVolumeAnnotationsList' with the minimum fields required to make a request.
 --
@@ -139,7 +142,7 @@ layersVolumeAnnotationsList
     -> Text -- ^ 'lvalLayerId'
     -> LayersVolumeAnnotationsList
 layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
-    LayersVolumeAnnotationsList'
+  LayersVolumeAnnotationsList'
     { _lvalStartOffSet = Nothing
     , _lvalLocale = Nothing
     , _lvalContentVersion = pLvalContentVersion_
@@ -156,6 +159,7 @@ layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     , _lvalMaxResults = Nothing
     , _lvalStartPosition = Nothing
     }
+
 
 -- | The start offset to start retrieving data from.
 lvalStartOffSet :: Lens' LayersVolumeAnnotationsList (Maybe Text)

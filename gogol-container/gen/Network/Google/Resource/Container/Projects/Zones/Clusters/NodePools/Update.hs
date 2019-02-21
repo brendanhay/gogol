@@ -73,7 +73,8 @@ type ProjectsZonesClustersNodePoolsUpdateResource =
 -- | Updates the version and\/or image type for a specific node pool.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsUpdate' smart constructor.
-data ProjectsZonesClustersNodePoolsUpdate = ProjectsZonesClustersNodePoolsUpdate'
+data ProjectsZonesClustersNodePoolsUpdate =
+  ProjectsZonesClustersNodePoolsUpdate'
     { _pzcnpuXgafv          :: !(Maybe Xgafv)
     , _pzcnpuUploadProtocol :: !(Maybe Text)
     , _pzcnpuAccessToken    :: !(Maybe Text)
@@ -84,7 +85,9 @@ data ProjectsZonesClustersNodePoolsUpdate = ProjectsZonesClustersNodePoolsUpdate
     , _pzcnpuClusterId      :: !Text
     , _pzcnpuProjectId      :: !Text
     , _pzcnpuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsUpdate' with the minimum fields required to make a request.
 --
@@ -117,7 +120,7 @@ projectsZonesClustersNodePoolsUpdate
     -> Text -- ^ 'pzcnpuProjectId'
     -> ProjectsZonesClustersNodePoolsUpdate
 projectsZonesClustersNodePoolsUpdate pPzcnpuZone_ pPzcnpuPayload_ pPzcnpuNodePoolId_ pPzcnpuClusterId_ pPzcnpuProjectId_ =
-    ProjectsZonesClustersNodePoolsUpdate'
+  ProjectsZonesClustersNodePoolsUpdate'
     { _pzcnpuXgafv = Nothing
     , _pzcnpuUploadProtocol = Nothing
     , _pzcnpuAccessToken = Nothing
@@ -129,6 +132,7 @@ projectsZonesClustersNodePoolsUpdate pPzcnpuZone_ pPzcnpuPayload_ pPzcnpuNodePoo
     , _pzcnpuProjectId = pPzcnpuProjectId_
     , _pzcnpuCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpuXgafv :: Lens' ProjectsZonesClustersNodePoolsUpdate (Maybe Xgafv)
@@ -195,7 +199,8 @@ pzcnpuCallback
       (\ s a -> s{_pzcnpuCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersNodePoolsUpdate where
+           ProjectsZonesClustersNodePoolsUpdate
+         where
         type Rs ProjectsZonesClustersNodePoolsUpdate =
              Operation
         type Scopes ProjectsZonesClustersNodePoolsUpdate =

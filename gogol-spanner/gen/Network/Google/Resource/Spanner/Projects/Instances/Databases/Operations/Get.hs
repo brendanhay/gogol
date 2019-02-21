@@ -64,14 +64,17 @@ type ProjectsInstancesDatabasesOperationsGetResource
 -- API service.
 --
 -- /See:/ 'projectsInstancesDatabasesOperationsGet' smart constructor.
-data ProjectsInstancesDatabasesOperationsGet = ProjectsInstancesDatabasesOperationsGet'
+data ProjectsInstancesDatabasesOperationsGet =
+  ProjectsInstancesDatabasesOperationsGet'
     { _pidogXgafv          :: !(Maybe Xgafv)
     , _pidogUploadProtocol :: !(Maybe Text)
     , _pidogAccessToken    :: !(Maybe Text)
     , _pidogUploadType     :: !(Maybe Text)
     , _pidogName           :: !Text
     , _pidogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesOperationsGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsInstancesDatabasesOperationsGet
     :: Text -- ^ 'pidogName'
     -> ProjectsInstancesDatabasesOperationsGet
 projectsInstancesDatabasesOperationsGet pPidogName_ =
-    ProjectsInstancesDatabasesOperationsGet'
+  ProjectsInstancesDatabasesOperationsGet'
     { _pidogXgafv = Nothing
     , _pidogUploadProtocol = Nothing
     , _pidogAccessToken = Nothing
@@ -100,6 +103,7 @@ projectsInstancesDatabasesOperationsGet pPidogName_ =
     , _pidogName = pPidogName_
     , _pidogCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidogXgafv :: Lens' ProjectsInstancesDatabasesOperationsGet (Maybe Xgafv)
@@ -136,7 +140,8 @@ pidogCallback
       (\ s a -> s{_pidogCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesOperationsGet where
+           ProjectsInstancesDatabasesOperationsGet
+         where
         type Rs ProjectsInstancesDatabasesOperationsGet =
              Operation
         type Scopes ProjectsInstancesDatabasesOperationsGet =

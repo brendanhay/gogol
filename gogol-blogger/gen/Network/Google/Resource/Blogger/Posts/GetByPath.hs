@@ -59,12 +59,15 @@ type PostsGetByPathResource =
 -- | Retrieve a Post by Path.
 --
 -- /See:/ 'postsGetByPath' smart constructor.
-data PostsGetByPath = PostsGetByPath'
+data PostsGetByPath =
+  PostsGetByPath'
     { _pgbpPath        :: !Text
     , _pgbpBlogId      :: !Text
     , _pgbpMaxComments :: !(Maybe (Textual Word32))
     , _pgbpView        :: !(Maybe PostsGetByPathView)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostsGetByPath' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ postsGetByPath
     -> Text -- ^ 'pgbpBlogId'
     -> PostsGetByPath
 postsGetByPath pPgbpPath_ pPgbpBlogId_ =
-    PostsGetByPath'
+  PostsGetByPath'
     { _pgbpPath = pPgbpPath_
     , _pgbpBlogId = pPgbpBlogId_
     , _pgbpMaxComments = Nothing
     , _pgbpView = Nothing
     }
+
 
 -- | Path of the Post to retrieve.
 pgbpPath :: Lens' PostsGetByPath Text

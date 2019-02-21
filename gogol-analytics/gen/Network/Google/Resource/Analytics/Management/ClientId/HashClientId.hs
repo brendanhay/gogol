@@ -53,9 +53,12 @@ type ManagementClientIdHashClientIdResource =
 -- | Hashes the given Client ID.
 --
 -- /See:/ 'managementClientIdHashClientId' smart constructor.
-newtype ManagementClientIdHashClientId = ManagementClientIdHashClientId'
+newtype ManagementClientIdHashClientId =
+  ManagementClientIdHashClientId'
     { _mcihciPayload :: HashClientIdRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementClientIdHashClientId' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ managementClientIdHashClientId
     :: HashClientIdRequest -- ^ 'mcihciPayload'
     -> ManagementClientIdHashClientId
 managementClientIdHashClientId pMcihciPayload_ =
-    ManagementClientIdHashClientId'
-    { _mcihciPayload = pMcihciPayload_
-    }
+  ManagementClientIdHashClientId' {_mcihciPayload = pMcihciPayload_}
+
 
 -- | Multipart request metadata.
 mcihciPayload :: Lens' ManagementClientIdHashClientId HashClientIdRequest

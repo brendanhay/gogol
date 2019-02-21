@@ -57,10 +57,13 @@ type InstancesPromoteReplicaResource =
 -- instance.
 --
 -- /See:/ 'instancesPromoteReplica' smart constructor.
-data InstancesPromoteReplica = InstancesPromoteReplica'
+data InstancesPromoteReplica =
+  InstancesPromoteReplica'
     { _iprProject  :: !Text
     , _iprInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesPromoteReplica' with the minimum fields required to make a request.
 --
@@ -74,10 +77,9 @@ instancesPromoteReplica
     -> Text -- ^ 'iprInstance'
     -> InstancesPromoteReplica
 instancesPromoteReplica pIprProject_ pIprInstance_ =
-    InstancesPromoteReplica'
-    { _iprProject = pIprProject_
-    , _iprInstance = pIprInstance_
-    }
+  InstancesPromoteReplica'
+    {_iprProject = pIprProject_, _iprInstance = pIprInstance_}
+
 
 -- | ID of the project that contains the read replica.
 iprProject :: Lens' InstancesPromoteReplica Text

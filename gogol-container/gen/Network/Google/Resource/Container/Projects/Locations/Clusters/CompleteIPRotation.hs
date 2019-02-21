@@ -63,7 +63,8 @@ type ProjectsLocationsClustersCompleteIPRotationResource
 -- | Completes master IP rotation.
 --
 -- /See:/ 'projectsLocationsClustersCompleteIPRotation' smart constructor.
-data ProjectsLocationsClustersCompleteIPRotation = ProjectsLocationsClustersCompleteIPRotation'
+data ProjectsLocationsClustersCompleteIPRotation =
+  ProjectsLocationsClustersCompleteIPRotation'
     { _plccirXgafv          :: !(Maybe Xgafv)
     , _plccirUploadProtocol :: !(Maybe Text)
     , _plccirAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsLocationsClustersCompleteIPRotation = ProjectsLocationsClustersComp
     , _plccirPayload        :: !CompleteIPRotationRequest
     , _plccirName           :: !Text
     , _plccirCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersCompleteIPRotation' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsClustersCompleteIPRotation
     -> Text -- ^ 'plccirName'
     -> ProjectsLocationsClustersCompleteIPRotation
 projectsLocationsClustersCompleteIPRotation pPlccirPayload_ pPlccirName_ =
-    ProjectsLocationsClustersCompleteIPRotation'
+  ProjectsLocationsClustersCompleteIPRotation'
     { _plccirXgafv = Nothing
     , _plccirUploadProtocol = Nothing
     , _plccirAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsLocationsClustersCompleteIPRotation pPlccirPayload_ pPlccirName_ =
     , _plccirName = pPlccirName_
     , _plccirCallback = Nothing
     }
+
 
 -- | V1 error format.
 plccirXgafv :: Lens' ProjectsLocationsClustersCompleteIPRotation (Maybe Xgafv)
@@ -148,7 +152,8 @@ plccirCallback
       (\ s a -> s{_plccirCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersCompleteIPRotation where
+           ProjectsLocationsClustersCompleteIPRotation
+         where
         type Rs ProjectsLocationsClustersCompleteIPRotation =
              Operation
         type Scopes

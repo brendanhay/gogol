@@ -62,14 +62,17 @@ type ProjectsTriggersListResource =
 -- | Lists existing \`BuildTrigger\`s. This API is experimental.
 --
 -- /See:/ 'projectsTriggersList' smart constructor.
-data ProjectsTriggersList = ProjectsTriggersList'
+data ProjectsTriggersList =
+  ProjectsTriggersList'
     { _ptlXgafv          :: !(Maybe Xgafv)
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlAccessToken    :: !(Maybe Text)
     , _ptlUploadType     :: !(Maybe Text)
     , _ptlProjectId      :: !Text
     , _ptlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTriggersList' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ projectsTriggersList
     :: Text -- ^ 'ptlProjectId'
     -> ProjectsTriggersList
 projectsTriggersList pPtlProjectId_ =
-    ProjectsTriggersList'
+  ProjectsTriggersList'
     { _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing
     , _ptlAccessToken = Nothing
@@ -98,6 +101,7 @@ projectsTriggersList pPtlProjectId_ =
     , _ptlProjectId = pPtlProjectId_
     , _ptlCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptlXgafv :: Lens' ProjectsTriggersList (Maybe Xgafv)

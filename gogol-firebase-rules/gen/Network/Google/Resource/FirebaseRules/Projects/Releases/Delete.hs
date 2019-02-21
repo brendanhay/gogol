@@ -59,14 +59,17 @@ type ProjectsReleasesDeleteResource =
 -- | Delete a \`Release\` by resource name.
 --
 -- /See:/ 'projectsReleasesDelete' smart constructor.
-data ProjectsReleasesDelete = ProjectsReleasesDelete'
+data ProjectsReleasesDelete =
+  ProjectsReleasesDelete'
     { _prdXgafv          :: !(Maybe Xgafv)
     , _prdUploadProtocol :: !(Maybe Text)
     , _prdAccessToken    :: !(Maybe Text)
     , _prdUploadType     :: !(Maybe Text)
     , _prdName           :: !Text
     , _prdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsReleasesDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsReleasesDelete
     :: Text -- ^ 'prdName'
     -> ProjectsReleasesDelete
 projectsReleasesDelete pPrdName_ =
-    ProjectsReleasesDelete'
+  ProjectsReleasesDelete'
     { _prdXgafv = Nothing
     , _prdUploadProtocol = Nothing
     , _prdAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsReleasesDelete pPrdName_ =
     , _prdName = pPrdName_
     , _prdCallback = Nothing
     }
+
 
 -- | V1 error format.
 prdXgafv :: Lens' ProjectsReleasesDelete (Maybe Xgafv)

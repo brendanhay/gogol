@@ -70,7 +70,8 @@ type FoldersGetIAMPolicyResource =
 -- the identified folder.
 --
 -- /See:/ 'foldersGetIAMPolicy' smart constructor.
-data FoldersGetIAMPolicy = FoldersGetIAMPolicy'
+data FoldersGetIAMPolicy =
+  FoldersGetIAMPolicy'
     { _fgipXgafv          :: !(Maybe Xgafv)
     , _fgipUploadProtocol :: !(Maybe Text)
     , _fgipAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data FoldersGetIAMPolicy = FoldersGetIAMPolicy'
     , _fgipPayload        :: !GetIAMPolicyRequest
     , _fgipResource       :: !Text
     , _fgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ foldersGetIAMPolicy
     -> Text -- ^ 'fgipResource'
     -> FoldersGetIAMPolicy
 foldersGetIAMPolicy pFgipPayload_ pFgipResource_ =
-    FoldersGetIAMPolicy'
+  FoldersGetIAMPolicy'
     { _fgipXgafv = Nothing
     , _fgipUploadProtocol = Nothing
     , _fgipAccessToken = Nothing
@@ -111,6 +114,7 @@ foldersGetIAMPolicy pFgipPayload_ pFgipResource_ =
     , _fgipResource = pFgipResource_
     , _fgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 fgipXgafv :: Lens' FoldersGetIAMPolicy (Maybe Xgafv)

@@ -54,10 +54,13 @@ type FilesGenerateIdsResource =
 -- | Generates a set of file IDs which can be provided in create requests.
 --
 -- /See:/ 'filesGenerateIds' smart constructor.
-data FilesGenerateIds = FilesGenerateIds'
+data FilesGenerateIds =
+  FilesGenerateIds'
     { _fgiSpace :: !Text
     , _fgiCount :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilesGenerateIds' with the minimum fields required to make a request.
 --
@@ -68,11 +71,8 @@ data FilesGenerateIds = FilesGenerateIds'
 -- * 'fgiCount'
 filesGenerateIds
     :: FilesGenerateIds
-filesGenerateIds =
-    FilesGenerateIds'
-    { _fgiSpace = "drive"
-    , _fgiCount = 10
-    }
+filesGenerateIds = FilesGenerateIds' {_fgiSpace = "drive", _fgiCount = 10}
+
 
 -- | The space in which the IDs can be used to create new files. Supported
 -- values are \'drive\' and \'appDataFolder\'.

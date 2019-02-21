@@ -54,10 +54,13 @@ type WatermarksUnSetResource =
 -- | Deletes a channel\'s watermark image.
 --
 -- /See:/ 'watermarksUnSet' smart constructor.
-data WatermarksUnSet = WatermarksUnSet'
+data WatermarksUnSet =
+  WatermarksUnSet'
     { _wusChannelId              :: !Text
     , _wusOnBehalfOfContentOwner :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WatermarksUnSet' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ watermarksUnSet
     :: Text -- ^ 'wusChannelId'
     -> WatermarksUnSet
 watermarksUnSet pWusChannelId_ =
-    WatermarksUnSet'
-    { _wusChannelId = pWusChannelId_
-    , _wusOnBehalfOfContentOwner = Nothing
-    }
+  WatermarksUnSet'
+    {_wusChannelId = pWusChannelId_, _wusOnBehalfOfContentOwner = Nothing}
+
 
 -- | The channelId parameter specifies the YouTube channel ID for which the
 -- watermark is being unset.

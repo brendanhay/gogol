@@ -64,7 +64,8 @@ type PermissionsCreateResource =
 -- | Creates a permission for a file or Team Drive.
 --
 -- /See:/ 'permissionsCreate' smart constructor.
-data PermissionsCreate = PermissionsCreate'
+data PermissionsCreate =
+  PermissionsCreate'
     { _pcSendNotificationEmail :: !(Maybe Bool)
     , _pcPayload               :: !Permission
     , _pcEmailMessage          :: !(Maybe Text)
@@ -72,7 +73,9 @@ data PermissionsCreate = PermissionsCreate'
     , _pcTransferOwnership     :: !Bool
     , _pcFileId                :: !Text
     , _pcSupportsTeamDrives    :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PermissionsCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ permissionsCreate
     -> Text -- ^ 'pcFileId'
     -> PermissionsCreate
 permissionsCreate pPcPayload_ pPcFileId_ =
-    PermissionsCreate'
+  PermissionsCreate'
     { _pcSendNotificationEmail = Nothing
     , _pcPayload = pPcPayload_
     , _pcEmailMessage = Nothing
@@ -105,6 +108,7 @@ permissionsCreate pPcPayload_ pPcFileId_ =
     , _pcFileId = pPcFileId_
     , _pcSupportsTeamDrives = False
     }
+
 
 -- | Whether to send a notification email when sharing to users or groups.
 -- This defaults to true for users and groups, and is not allowed for other

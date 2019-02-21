@@ -55,11 +55,14 @@ type AccountsUpdateResource =
 -- | Updates an existing account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate'
+data AccountsUpdate =
+  AccountsUpdate'
     { _auPayload                    :: !Account
     , _auConfirmUnsafeAccountChange :: !(Maybe Bool)
     , _auId                         :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ accountsUpdate
     -> Int32 -- ^ 'auId'
     -> AccountsUpdate
 accountsUpdate pAuPayload_ pAuId_ =
-    AccountsUpdate'
+  AccountsUpdate'
     { _auPayload = pAuPayload_
     , _auConfirmUnsafeAccountChange = Nothing
     , _auId = _Coerce # pAuId_
     }
+
 
 -- | Multipart request metadata.
 auPayload :: Lens' AccountsUpdate Account

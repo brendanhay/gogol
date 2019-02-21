@@ -62,13 +62,16 @@ type TargetPoolsAggregatedListResource =
 -- | Retrieves an aggregated list of target pools.
 --
 -- /See:/ 'targetPoolsAggregatedList' smart constructor.
-data TargetPoolsAggregatedList = TargetPoolsAggregatedList'
+data TargetPoolsAggregatedList =
+  TargetPoolsAggregatedList'
     { _tpalOrderBy    :: !(Maybe Text)
     , _tpalProject    :: !Text
     , _tpalFilter     :: !(Maybe Text)
     , _tpalPageToken  :: !(Maybe Text)
     , _tpalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetPoolsAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ targetPoolsAggregatedList
     :: Text -- ^ 'tpalProject'
     -> TargetPoolsAggregatedList
 targetPoolsAggregatedList pTpalProject_ =
-    TargetPoolsAggregatedList'
+  TargetPoolsAggregatedList'
     { _tpalOrderBy = Nothing
     , _tpalProject = pTpalProject_
     , _tpalFilter = Nothing
     , _tpalPageToken = Nothing
     , _tpalMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

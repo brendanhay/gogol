@@ -102,8 +102,7 @@ data InstanceState
       -- Redis instance is being deleted.
     | Repairing
       -- ^ @REPAIRING@
-      -- Redis instance is being repaired and may be unusable. Details can be
-      -- found in the \`status_message\` field.
+      -- Redis instance is being repaired and may be unusable.
     | Maintenance
       -- ^ @MAINTENANCE@
       -- Maintenance is being performed on this Redis instance.

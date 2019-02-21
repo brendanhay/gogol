@@ -21,6 +21,7 @@ module Network.Google.CloudKMS.Types
 
     -- * OAuth Scopes
     , cloudPlatformScope
+    , cloudKMSScope
 
     -- * AsymmetricDecryptResponse
     , AsymmetricDecryptResponse
@@ -284,4 +285,9 @@ cloudKMSService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
+
+-- | View and manage your keys and secrets stored in Cloud Key Management
+-- Service
+cloudKMSScope :: Proxy '["https://www.googleapis.com/auth/cloudkms"]
+cloudKMSScope = Proxy

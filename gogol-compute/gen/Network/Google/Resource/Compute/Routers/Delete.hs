@@ -59,12 +59,15 @@ type RoutersDeleteResource =
 -- | Deletes the specified Router resource.
 --
 -- /See:/ 'routersDelete' smart constructor.
-data RoutersDelete = RoutersDelete'
+data RoutersDelete =
+  RoutersDelete'
     { _rouoRequestId :: !(Maybe Text)
     , _rouoProject   :: !Text
     , _rouoRouter    :: !Text
     , _rouoRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoutersDelete' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ routersDelete
     -> Text -- ^ 'rouoRegion'
     -> RoutersDelete
 routersDelete pRouoProject_ pRouoRouter_ pRouoRegion_ =
-    RoutersDelete'
+  RoutersDelete'
     { _rouoRequestId = Nothing
     , _rouoProject = pRouoProject_
     , _rouoRouter = pRouoRouter_
     , _rouoRegion = pRouoRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

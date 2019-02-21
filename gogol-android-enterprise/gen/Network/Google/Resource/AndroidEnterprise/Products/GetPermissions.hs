@@ -56,10 +56,13 @@ type ProductsGetPermissionsResource =
 -- | Retrieves the Android app permissions required by this app.
 --
 -- /See:/ 'productsGetPermissions' smart constructor.
-data ProductsGetPermissions = ProductsGetPermissions'
+data ProductsGetPermissions =
+  ProductsGetPermissions'
     { _pgpEnterpriseId :: !Text
     , _pgpProductId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductsGetPermissions' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ productsGetPermissions
     -> Text -- ^ 'pgpProductId'
     -> ProductsGetPermissions
 productsGetPermissions pPgpEnterpriseId_ pPgpProductId_ =
-    ProductsGetPermissions'
-    { _pgpEnterpriseId = pPgpEnterpriseId_
-    , _pgpProductId = pPgpProductId_
-    }
+  ProductsGetPermissions'
+    {_pgpEnterpriseId = pPgpEnterpriseId_, _pgpProductId = pPgpProductId_}
+
 
 -- | The ID of the enterprise.
 pgpEnterpriseId :: Lens' ProductsGetPermissions Text

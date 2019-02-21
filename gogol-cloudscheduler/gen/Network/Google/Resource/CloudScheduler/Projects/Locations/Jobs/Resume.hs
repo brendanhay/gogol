@@ -67,7 +67,8 @@ type ProjectsLocationsJobsResumeResource =
 -- in Job.State.PAUSED to be resumed.
 --
 -- /See:/ 'projectsLocationsJobsResume' smart constructor.
-data ProjectsLocationsJobsResume = ProjectsLocationsJobsResume'
+data ProjectsLocationsJobsResume =
+  ProjectsLocationsJobsResume'
     { _pljrXgafv          :: !(Maybe Xgafv)
     , _pljrUploadProtocol :: !(Maybe Text)
     , _pljrAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsLocationsJobsResume = ProjectsLocationsJobsResume'
     , _pljrPayload        :: !ResumeJobRequest
     , _pljrName           :: !Text
     , _pljrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsResume' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsJobsResume
     -> Text -- ^ 'pljrName'
     -> ProjectsLocationsJobsResume
 projectsLocationsJobsResume pPljrPayload_ pPljrName_ =
-    ProjectsLocationsJobsResume'
+  ProjectsLocationsJobsResume'
     { _pljrXgafv = Nothing
     , _pljrUploadProtocol = Nothing
     , _pljrAccessToken = Nothing
@@ -108,6 +111,7 @@ projectsLocationsJobsResume pPljrPayload_ pPljrName_ =
     , _pljrName = pPljrName_
     , _pljrCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljrXgafv :: Lens' ProjectsLocationsJobsResume (Maybe Xgafv)

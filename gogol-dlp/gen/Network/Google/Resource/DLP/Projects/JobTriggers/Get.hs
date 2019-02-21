@@ -64,14 +64,17 @@ type ProjectsJobTriggersGetResource =
 -- more.
 --
 -- /See:/ 'projectsJobTriggersGet' smart constructor.
-data ProjectsJobTriggersGet = ProjectsJobTriggersGet'
+data ProjectsJobTriggersGet =
+  ProjectsJobTriggersGet'
     { _pjtgXgafv          :: !(Maybe Xgafv)
     , _pjtgUploadProtocol :: !(Maybe Text)
     , _pjtgAccessToken    :: !(Maybe Text)
     , _pjtgUploadType     :: !(Maybe Text)
     , _pjtgName           :: !Text
     , _pjtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobTriggersGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsJobTriggersGet
     :: Text -- ^ 'pjtgName'
     -> ProjectsJobTriggersGet
 projectsJobTriggersGet pPjtgName_ =
-    ProjectsJobTriggersGet'
+  ProjectsJobTriggersGet'
     { _pjtgXgafv = Nothing
     , _pjtgUploadProtocol = Nothing
     , _pjtgAccessToken = Nothing
@@ -100,6 +103,7 @@ projectsJobTriggersGet pPjtgName_ =
     , _pjtgName = pPjtgName_
     , _pjtgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjtgXgafv :: Lens' ProjectsJobTriggersGet (Maybe Xgafv)

@@ -537,12 +537,12 @@ spannerService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View and manage the contents of your Spanner databases
 spannerDataScope :: Proxy '["https://www.googleapis.com/auth/spanner.data"]
-spannerDataScope = Proxy;
+spannerDataScope = Proxy
 
 -- | Administer your Spanner databases
 spannerAdminScope :: Proxy '["https://www.googleapis.com/auth/spanner.admin"]
-spannerAdminScope = Proxy;
+spannerAdminScope = Proxy

@@ -74,7 +74,8 @@ type ProjectsNotesGetIAMPolicyResource =
 -- occurrences.
 --
 -- /See:/ 'projectsNotesGetIAMPolicy' smart constructor.
-data ProjectsNotesGetIAMPolicy = ProjectsNotesGetIAMPolicy'
+data ProjectsNotesGetIAMPolicy =
+  ProjectsNotesGetIAMPolicy'
     { _pngipXgafv          :: !(Maybe Xgafv)
     , _pngipUploadProtocol :: !(Maybe Text)
     , _pngipAccessToken    :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsNotesGetIAMPolicy = ProjectsNotesGetIAMPolicy'
     , _pngipPayload        :: !GetIAMPolicyRequest
     , _pngipResource       :: !Text
     , _pngipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ projectsNotesGetIAMPolicy
     -> Text -- ^ 'pngipResource'
     -> ProjectsNotesGetIAMPolicy
 projectsNotesGetIAMPolicy pPngipPayload_ pPngipResource_ =
-    ProjectsNotesGetIAMPolicy'
+  ProjectsNotesGetIAMPolicy'
     { _pngipXgafv = Nothing
     , _pngipUploadProtocol = Nothing
     , _pngipAccessToken = Nothing
@@ -115,6 +118,7 @@ projectsNotesGetIAMPolicy pPngipPayload_ pPngipResource_ =
     , _pngipResource = pPngipResource_
     , _pngipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pngipXgafv :: Lens' ProjectsNotesGetIAMPolicy (Maybe Xgafv)

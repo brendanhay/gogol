@@ -246,72 +246,72 @@ fitnessService
 
 -- | View body temperature data in Google Fit
 fitnessBodyTemperatureReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.read"]
-fitnessBodyTemperatureReadScope = Proxy;
+fitnessBodyTemperatureReadScope = Proxy
 
 -- | View body sensor information in Google Fit
 fitnessBodyReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.read"]
-fitnessBodyReadScope = Proxy;
+fitnessBodyReadScope = Proxy
 
 -- | View nutrition information in Google Fit
 fitnessNutritionReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.nutrition.read"]
-fitnessNutritionReadScope = Proxy;
+fitnessNutritionReadScope = Proxy
 
 -- | View reproductive health data in Google Fit
 fitnessReProductiveHealthReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.read"]
-fitnessReProductiveHealthReadScope = Proxy;
+fitnessReProductiveHealthReadScope = Proxy
 
 -- | View your activity information in Google Fit
 fitnessActivityReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.read"]
-fitnessActivityReadScope = Proxy;
+fitnessActivityReadScope = Proxy
 
 -- | View and store reproductive health data in Google Fit
 fitnessReProductiveHealthWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.write"]
-fitnessReProductiveHealthWriteScope = Proxy;
+fitnessReProductiveHealthWriteScope = Proxy
 
 -- | View and store your activity information in Google Fit
 fitnessActivityWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.write"]
-fitnessActivityWriteScope = Proxy;
+fitnessActivityWriteScope = Proxy
 
 -- | View and store blood pressure data in Google Fit
 fitnessBloodPressureWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.write"]
-fitnessBloodPressureWriteScope = Proxy;
+fitnessBloodPressureWriteScope = Proxy
 
 -- | View and store body temperature data in Google Fit
 fitnessBodyTemperatureWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.write"]
-fitnessBodyTemperatureWriteScope = Proxy;
+fitnessBodyTemperatureWriteScope = Proxy
 
 -- | View oxygen saturation data in Google Fit
 fitnessOxygenSaturationReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.read"]
-fitnessOxygenSaturationReadScope = Proxy;
+fitnessOxygenSaturationReadScope = Proxy
 
 -- | View and store blood glucose data in Google Fit
 fitnessBloodGlucoseWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.write"]
-fitnessBloodGlucoseWriteScope = Proxy;
+fitnessBloodGlucoseWriteScope = Proxy
 
 -- | View blood pressure data in Google Fit
 fitnessBloodPressureReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.read"]
-fitnessBloodPressureReadScope = Proxy;
+fitnessBloodPressureReadScope = Proxy
 
 -- | View your stored location data in Google Fit
 fitnessLocationReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.read"]
-fitnessLocationReadScope = Proxy;
+fitnessLocationReadScope = Proxy
 
 -- | View and store your location data in Google Fit
 fitnessLocationWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.write"]
-fitnessLocationWriteScope = Proxy;
+fitnessLocationWriteScope = Proxy
 
 -- | View and store nutrition information in Google Fit
 fitnessNutritionWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.nutrition.write"]
-fitnessNutritionWriteScope = Proxy;
+fitnessNutritionWriteScope = Proxy
 
 -- | View and store body sensor data in Google Fit
 fitnessBodyWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.write"]
-fitnessBodyWriteScope = Proxy;
+fitnessBodyWriteScope = Proxy
 
 -- | View blood glucose data in Google Fit
 fitnessBloodGlucoseReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.read"]
-fitnessBloodGlucoseReadScope = Proxy;
+fitnessBloodGlucoseReadScope = Proxy
 
 -- | View and store oxygen saturation data in Google Fit
 fitnessOxygenSaturationWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.write"]
-fitnessOxygenSaturationWriteScope = Proxy;
+fitnessOxygenSaturationWriteScope = Proxy

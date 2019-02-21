@@ -65,7 +65,8 @@ type ProjectsSubscriptionsListResource =
 -- | Lists matching subscriptions.
 --
 -- /See:/ 'projectsSubscriptionsList' smart constructor.
-data ProjectsSubscriptionsList = ProjectsSubscriptionsList'
+data ProjectsSubscriptionsList =
+  ProjectsSubscriptionsList'
     { _pslXgafv          :: !(Maybe Xgafv)
     , _pslUploadProtocol :: !(Maybe Text)
     , _pslProject        :: !Text
@@ -74,7 +75,9 @@ data ProjectsSubscriptionsList = ProjectsSubscriptionsList'
     , _pslPageToken      :: !(Maybe Text)
     , _pslPageSize       :: !(Maybe (Textual Int32))
     , _pslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSubscriptionsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsSubscriptionsList
     :: Text -- ^ 'pslProject'
     -> ProjectsSubscriptionsList
 projectsSubscriptionsList pPslProject_ =
-    ProjectsSubscriptionsList'
+  ProjectsSubscriptionsList'
     { _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
     , _pslProject = pPslProject_
@@ -109,6 +112,7 @@ projectsSubscriptionsList pPslProject_ =
     , _pslPageSize = Nothing
     , _pslCallback = Nothing
     }
+
 
 -- | V1 error format.
 pslXgafv :: Lens' ProjectsSubscriptionsList (Maybe Xgafv)

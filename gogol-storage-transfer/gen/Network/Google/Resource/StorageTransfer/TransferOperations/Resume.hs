@@ -62,7 +62,8 @@ type TransferOperationsResumeResource =
 -- | Resumes a transfer operation that is paused.
 --
 -- /See:/ 'transferOperationsResume' smart constructor.
-data TransferOperationsResume = TransferOperationsResume'
+data TransferOperationsResume =
+  TransferOperationsResume'
     { _torXgafv          :: !(Maybe Xgafv)
     , _torUploadProtocol :: !(Maybe Text)
     , _torAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data TransferOperationsResume = TransferOperationsResume'
     , _torPayload        :: !ResumeTransferOperationRequest
     , _torName           :: !Text
     , _torCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferOperationsResume' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ transferOperationsResume
     -> Text -- ^ 'torName'
     -> TransferOperationsResume
 transferOperationsResume pTorPayload_ pTorName_ =
-    TransferOperationsResume'
+  TransferOperationsResume'
     { _torXgafv = Nothing
     , _torUploadProtocol = Nothing
     , _torAccessToken = Nothing
@@ -103,6 +106,7 @@ transferOperationsResume pTorPayload_ pTorName_ =
     , _torName = pTorName_
     , _torCallback = Nothing
     }
+
 
 -- | V1 error format.
 torXgafv :: Lens' TransferOperationsResume (Maybe Xgafv)

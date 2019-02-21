@@ -75,14 +75,17 @@ type ProjectsRegionsOperationsCancelResource =
 -- 1, corresponding to Code.CANCELLED.
 --
 -- /See:/ 'projectsRegionsOperationsCancel' smart constructor.
-data ProjectsRegionsOperationsCancel = ProjectsRegionsOperationsCancel'
+data ProjectsRegionsOperationsCancel =
+  ProjectsRegionsOperationsCancel'
     { _procXgafv          :: !(Maybe Xgafv)
     , _procUploadProtocol :: !(Maybe Text)
     , _procAccessToken    :: !(Maybe Text)
     , _procUploadType     :: !(Maybe Text)
     , _procName           :: !Text
     , _procCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsOperationsCancel' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsRegionsOperationsCancel
     :: Text -- ^ 'procName'
     -> ProjectsRegionsOperationsCancel
 projectsRegionsOperationsCancel pProcName_ =
-    ProjectsRegionsOperationsCancel'
+  ProjectsRegionsOperationsCancel'
     { _procXgafv = Nothing
     , _procUploadProtocol = Nothing
     , _procAccessToken = Nothing
@@ -111,6 +114,7 @@ projectsRegionsOperationsCancel pProcName_ =
     , _procName = pProcName_
     , _procCallback = Nothing
     }
+
 
 -- | V1 error format.
 procXgafv :: Lens' ProjectsRegionsOperationsCancel (Maybe Xgafv)
@@ -145,7 +149,8 @@ procCallback
   = lens _procCallback (\ s a -> s{_procCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsOperationsCancel where
+           ProjectsRegionsOperationsCancel
+         where
         type Rs ProjectsRegionsOperationsCancel = Empty
         type Scopes ProjectsRegionsOperationsCancel =
              '["https://www.googleapis.com/auth/cloud-platform"]

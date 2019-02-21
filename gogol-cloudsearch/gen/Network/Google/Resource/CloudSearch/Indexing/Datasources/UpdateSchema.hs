@@ -64,7 +64,8 @@ type IndexingDatasourcesUpdateSchemaResource =
 -- | Updates the schema of a data source.
 --
 -- /See:/ 'indexingDatasourcesUpdateSchema' smart constructor.
-data IndexingDatasourcesUpdateSchema = IndexingDatasourcesUpdateSchema'
+data IndexingDatasourcesUpdateSchema =
+  IndexingDatasourcesUpdateSchema'
     { _idusXgafv          :: !(Maybe Xgafv)
     , _idusUploadProtocol :: !(Maybe Text)
     , _idusAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data IndexingDatasourcesUpdateSchema = IndexingDatasourcesUpdateSchema'
     , _idusPayload        :: !UpdateSchemaRequest
     , _idusName           :: !Text
     , _idusCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndexingDatasourcesUpdateSchema' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ indexingDatasourcesUpdateSchema
     -> Text -- ^ 'idusName'
     -> IndexingDatasourcesUpdateSchema
 indexingDatasourcesUpdateSchema pIdusPayload_ pIdusName_ =
-    IndexingDatasourcesUpdateSchema'
+  IndexingDatasourcesUpdateSchema'
     { _idusXgafv = Nothing
     , _idusUploadProtocol = Nothing
     , _idusAccessToken = Nothing
@@ -105,6 +108,7 @@ indexingDatasourcesUpdateSchema pIdusPayload_ pIdusName_ =
     , _idusName = pIdusName_
     , _idusCallback = Nothing
     }
+
 
 -- | V1 error format.
 idusXgafv :: Lens' IndexingDatasourcesUpdateSchema (Maybe Xgafv)
@@ -145,7 +149,8 @@ idusCallback
   = lens _idusCallback (\ s a -> s{_idusCallback = a})
 
 instance GoogleRequest
-         IndexingDatasourcesUpdateSchema where
+           IndexingDatasourcesUpdateSchema
+         where
         type Rs IndexingDatasourcesUpdateSchema = Operation
         type Scopes IndexingDatasourcesUpdateSchema =
              '["https://www.googleapis.com/auth/cloud_search",

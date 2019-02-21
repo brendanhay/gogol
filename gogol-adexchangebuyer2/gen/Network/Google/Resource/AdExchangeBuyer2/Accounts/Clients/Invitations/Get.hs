@@ -67,7 +67,8 @@ type AccountsClientsInvitationsGetResource =
 -- | Retrieves an existing client user invitation.
 --
 -- /See:/ 'accountsClientsInvitationsGet' smart constructor.
-data AccountsClientsInvitationsGet = AccountsClientsInvitationsGet'
+data AccountsClientsInvitationsGet =
+  AccountsClientsInvitationsGet'
     { _acigXgafv           :: !(Maybe Xgafv)
     , _acigUploadProtocol  :: !(Maybe Text)
     , _acigAccessToken     :: !(Maybe Text)
@@ -76,7 +77,9 @@ data AccountsClientsInvitationsGet = AccountsClientsInvitationsGet'
     , _acigAccountId       :: !(Textual Int64)
     , _acigClientAccountId :: !(Textual Int64)
     , _acigCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsClientsInvitationsGet' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ accountsClientsInvitationsGet
     -> Int64 -- ^ 'acigClientAccountId'
     -> AccountsClientsInvitationsGet
 accountsClientsInvitationsGet pAcigInvitationId_ pAcigAccountId_ pAcigClientAccountId_ =
-    AccountsClientsInvitationsGet'
+  AccountsClientsInvitationsGet'
     { _acigXgafv = Nothing
     , _acigUploadProtocol = Nothing
     , _acigAccessToken = Nothing
@@ -113,6 +116,7 @@ accountsClientsInvitationsGet pAcigInvitationId_ pAcigAccountId_ pAcigClientAcco
     , _acigClientAccountId = _Coerce # pAcigClientAccountId_
     , _acigCallback = Nothing
     }
+
 
 -- | V1 error format.
 acigXgafv :: Lens' AccountsClientsInvitationsGet (Maybe Xgafv)

@@ -60,11 +60,14 @@ type UsersThreadsModifyResource =
 -- in the thread.
 --
 -- /See:/ 'usersThreadsModify' smart constructor.
-data UsersThreadsModify = UsersThreadsModify'
+data UsersThreadsModify =
+  UsersThreadsModify'
     { _utmPayload :: !ModifyThreadRequest
     , _utmUserId  :: !Text
     , _utmId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersThreadsModify' with the minimum fields required to make a request.
 --
@@ -80,11 +83,9 @@ usersThreadsModify
     -> Text -- ^ 'utmId'
     -> UsersThreadsModify
 usersThreadsModify pUtmPayload_ pUtmId_ =
-    UsersThreadsModify'
-    { _utmPayload = pUtmPayload_
-    , _utmUserId = "me"
-    , _utmId = pUtmId_
-    }
+  UsersThreadsModify'
+    {_utmPayload = pUtmPayload_, _utmUserId = "me", _utmId = pUtmId_}
+
 
 -- | Multipart request metadata.
 utmPayload :: Lens' UsersThreadsModify ModifyThreadRequest

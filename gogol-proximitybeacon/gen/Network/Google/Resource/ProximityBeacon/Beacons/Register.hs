@@ -72,7 +72,8 @@ type BeaconsRegisterResource =
 -- the Google Developers Console project.
 --
 -- /See:/ 'beaconsRegister' smart constructor.
-data BeaconsRegister = BeaconsRegister'
+data BeaconsRegister =
+  BeaconsRegister'
     { _brXgafv          :: !(Maybe Xgafv)
     , _brUploadProtocol :: !(Maybe Text)
     , _brAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data BeaconsRegister = BeaconsRegister'
     , _brPayload        :: !Beacon
     , _brProjectId      :: !(Maybe Text)
     , _brCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeaconsRegister' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ beaconsRegister
     :: Beacon -- ^ 'brPayload'
     -> BeaconsRegister
 beaconsRegister pBrPayload_ =
-    BeaconsRegister'
+  BeaconsRegister'
     { _brXgafv = Nothing
     , _brUploadProtocol = Nothing
     , _brAccessToken = Nothing
@@ -112,6 +115,7 @@ beaconsRegister pBrPayload_ =
     , _brProjectId = Nothing
     , _brCallback = Nothing
     }
+
 
 -- | V1 error format.
 brXgafv :: Lens' BeaconsRegister (Maybe Xgafv)

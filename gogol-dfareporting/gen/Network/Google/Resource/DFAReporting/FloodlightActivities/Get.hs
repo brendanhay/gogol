@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesGet' request conforms to.
 type FloodlightActivitiesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -55,10 +55,13 @@ type FloodlightActivitiesGetResource =
 -- | Gets one floodlight activity by ID.
 --
 -- /See:/ 'floodlightActivitiesGet' smart constructor.
-data FloodlightActivitiesGet = FloodlightActivitiesGet'
+data FloodlightActivitiesGet =
+  FloodlightActivitiesGet'
     { _fProFileId :: !(Textual Int64)
     , _fId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FloodlightActivitiesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ floodlightActivitiesGet
     -> Int64 -- ^ 'fId'
     -> FloodlightActivitiesGet
 floodlightActivitiesGet pFProFileId_ pFId_ =
-    FloodlightActivitiesGet'
-    { _fProFileId = _Coerce # pFProFileId_
-    , _fId = _Coerce # pFId_
-    }
+  FloodlightActivitiesGet'
+    {_fProFileId = _Coerce # pFProFileId_, _fId = _Coerce # pFId_}
+
 
 -- | User profile ID associated with this request.
 fProFileId :: Lens' FloodlightActivitiesGet Int64

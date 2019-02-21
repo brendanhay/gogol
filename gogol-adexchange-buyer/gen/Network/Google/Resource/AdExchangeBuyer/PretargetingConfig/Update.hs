@@ -56,11 +56,14 @@ type PretargetingConfigUpdateResource =
 -- | Updates an existing pretargeting config.
 --
 -- /See:/ 'pretargetingConfigUpdate' smart constructor.
-data PretargetingConfigUpdate = PretargetingConfigUpdate'
+data PretargetingConfigUpdate =
+  PretargetingConfigUpdate'
     { _pcuPayload   :: !PretargetingConfig
     , _pcuAccountId :: !(Textual Int64)
     , _pcuConfigId  :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PretargetingConfigUpdate' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ pretargetingConfigUpdate
     -> Int64 -- ^ 'pcuConfigId'
     -> PretargetingConfigUpdate
 pretargetingConfigUpdate pPcuPayload_ pPcuAccountId_ pPcuConfigId_ =
-    PretargetingConfigUpdate'
+  PretargetingConfigUpdate'
     { _pcuPayload = pPcuPayload_
     , _pcuAccountId = _Coerce # pPcuAccountId_
     , _pcuConfigId = _Coerce # pPcuConfigId_
     }
+
 
 -- | Multipart request metadata.
 pcuPayload :: Lens' PretargetingConfigUpdate PretargetingConfig

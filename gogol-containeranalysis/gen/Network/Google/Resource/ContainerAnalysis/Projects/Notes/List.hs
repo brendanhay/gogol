@@ -67,7 +67,8 @@ type ProjectsNotesListResource =
 -- | Lists notes for the specified project.
 --
 -- /See:/ 'projectsNotesList' smart constructor.
-data ProjectsNotesList = ProjectsNotesList'
+data ProjectsNotesList =
+  ProjectsNotesList'
     { _pnlParent         :: !Text
     , _pnlXgafv          :: !(Maybe Xgafv)
     , _pnlUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsNotesList = ProjectsNotesList'
     , _pnlPageToken      :: !(Maybe Text)
     , _pnlPageSize       :: !(Maybe (Textual Int32))
     , _pnlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotesList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsNotesList
     :: Text -- ^ 'pnlParent'
     -> ProjectsNotesList
 projectsNotesList pPnlParent_ =
-    ProjectsNotesList'
+  ProjectsNotesList'
     { _pnlParent = pPnlParent_
     , _pnlXgafv = Nothing
     , _pnlUploadProtocol = Nothing
@@ -115,6 +118,7 @@ projectsNotesList pPnlParent_ =
     , _pnlPageSize = Nothing
     , _pnlCallback = Nothing
     }
+
 
 -- | The name of the project to list notes for in the form of
 -- \`projects\/[PROJECT_ID]\`.

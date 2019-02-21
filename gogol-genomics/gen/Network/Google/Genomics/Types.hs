@@ -407,8 +407,8 @@ genomicsService
 
 -- | View and manage Genomics data
 genomicsScope :: Proxy '["https://www.googleapis.com/auth/genomics"]
-genomicsScope = Proxy;
+genomicsScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

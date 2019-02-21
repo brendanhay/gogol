@@ -74,12 +74,15 @@ type InstanceGroupManagersInsertResource =
 -- contact Cloud Support if you need an increase in this limit.
 --
 -- /See:/ 'instanceGroupManagersInsert' smart constructor.
-data InstanceGroupManagersInsert = InstanceGroupManagersInsert'
+data InstanceGroupManagersInsert =
+  InstanceGroupManagersInsert'
     { _igmiRequestId :: !(Maybe Text)
     , _igmiProject   :: !Text
     , _igmiZone      :: !Text
     , _igmiPayload   :: !InstanceGroupManager
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupManagersInsert' with the minimum fields required to make a request.
 --
@@ -98,12 +101,13 @@ instanceGroupManagersInsert
     -> InstanceGroupManager -- ^ 'igmiPayload'
     -> InstanceGroupManagersInsert
 instanceGroupManagersInsert pIgmiProject_ pIgmiZone_ pIgmiPayload_ =
-    InstanceGroupManagersInsert'
+  InstanceGroupManagersInsert'
     { _igmiRequestId = Nothing
     , _igmiProject = pIgmiProject_
     , _igmiZone = pIgmiZone_
     , _igmiPayload = pIgmiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

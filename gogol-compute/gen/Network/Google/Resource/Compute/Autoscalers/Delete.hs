@@ -59,12 +59,15 @@ type AutoscalersDeleteResource =
 -- | Deletes the specified autoscaler.
 --
 -- /See:/ 'autoscalersDelete' smart constructor.
-data AutoscalersDelete = AutoscalersDelete'
+data AutoscalersDelete =
+  AutoscalersDelete'
     { _adRequestId  :: !(Maybe Text)
     , _adProject    :: !Text
     , _adZone       :: !Text
     , _adAutoscaler :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AutoscalersDelete' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ autoscalersDelete
     -> Text -- ^ 'adAutoscaler'
     -> AutoscalersDelete
 autoscalersDelete pAdProject_ pAdZone_ pAdAutoscaler_ =
-    AutoscalersDelete'
+  AutoscalersDelete'
     { _adRequestId = Nothing
     , _adProject = pAdProject_
     , _adZone = pAdZone_
     , _adAutoscaler = pAdAutoscaler_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

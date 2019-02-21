@@ -68,7 +68,8 @@ type CalendarListWatchResource =
 -- | Watch for changes to CalendarList resources.
 --
 -- /See:/ 'calendarListWatch' smart constructor.
-data CalendarListWatch = CalendarListWatch'
+data CalendarListWatch =
+  CalendarListWatch'
     { _clwSyncToken     :: !(Maybe Text)
     , _clwMinAccessRole :: !(Maybe CalendarListWatchMinAccessRole)
     , _clwShowDeleted   :: !(Maybe Bool)
@@ -76,7 +77,9 @@ data CalendarListWatch = CalendarListWatch'
     , _clwShowHidden    :: !(Maybe Bool)
     , _clwPageToken     :: !(Maybe Text)
     , _clwMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CalendarListWatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ calendarListWatch
     :: Channel -- ^ 'clwPayload'
     -> CalendarListWatch
 calendarListWatch pClwPayload_ =
-    CalendarListWatch'
+  CalendarListWatch'
     { _clwSyncToken = Nothing
     , _clwMinAccessRole = Nothing
     , _clwShowDeleted = Nothing
@@ -108,6 +111,7 @@ calendarListWatch pClwPayload_ =
     , _clwPageToken = Nothing
     , _clwMaxResults = Nothing
     }
+
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
 -- results from the previous list request. It makes the result of this list

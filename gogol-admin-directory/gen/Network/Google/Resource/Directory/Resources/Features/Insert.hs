@@ -56,10 +56,13 @@ type ResourcesFeaturesInsertResource =
 -- | Inserts a feature.
 --
 -- /See:/ 'resourcesFeaturesInsert' smart constructor.
-data ResourcesFeaturesInsert = ResourcesFeaturesInsert'
+data ResourcesFeaturesInsert =
+  ResourcesFeaturesInsert'
     { _rfiPayload  :: !Feature
     , _rfiCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesFeaturesInsert' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ resourcesFeaturesInsert
     -> Text -- ^ 'rfiCustomer'
     -> ResourcesFeaturesInsert
 resourcesFeaturesInsert pRfiPayload_ pRfiCustomer_ =
-    ResourcesFeaturesInsert'
-    { _rfiPayload = pRfiPayload_
-    , _rfiCustomer = pRfiCustomer_
-    }
+  ResourcesFeaturesInsert'
+    {_rfiPayload = pRfiPayload_, _rfiCustomer = pRfiCustomer_}
+
 
 -- | Multipart request metadata.
 rfiPayload :: Lens' ResourcesFeaturesInsert Feature

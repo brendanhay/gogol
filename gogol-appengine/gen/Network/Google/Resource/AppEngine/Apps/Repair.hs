@@ -69,7 +69,8 @@ type AppsRepairResource =
 -- feature, for example, Error retrieving the App Engine service account.
 --
 -- /See:/ 'appsRepair' smart constructor.
-data AppsRepair = AppsRepair'
+data AppsRepair =
+  AppsRepair'
     { _arXgafv          :: !(Maybe Xgafv)
     , _arUploadProtocol :: !(Maybe Text)
     , _arAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data AppsRepair = AppsRepair'
     , _arPayload        :: !RepairApplicationRequest
     , _arAppsId         :: !Text
     , _arCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsRepair' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ appsRepair
     -> Text -- ^ 'arAppsId'
     -> AppsRepair
 appsRepair pArPayload_ pArAppsId_ =
-    AppsRepair'
+  AppsRepair'
     { _arXgafv = Nothing
     , _arUploadProtocol = Nothing
     , _arAccessToken = Nothing
@@ -110,6 +113,7 @@ appsRepair pArPayload_ pArAppsId_ =
     , _arAppsId = pArAppsId_
     , _arCallback = Nothing
     }
+
 
 -- | V1 error format.
 arXgafv :: Lens' AppsRepair (Maybe Xgafv)

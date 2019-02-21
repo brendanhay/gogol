@@ -59,11 +59,14 @@ type AutoscalersGetResource =
 -- autoscalers by making a list() request.
 --
 -- /See:/ 'autoscalersGet' smart constructor.
-data AutoscalersGet = AutoscalersGet'
+data AutoscalersGet =
+  AutoscalersGet'
     { _agProject    :: !Text
     , _agZone       :: !Text
     , _agAutoscaler :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AutoscalersGet' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ autoscalersGet
     -> Text -- ^ 'agAutoscaler'
     -> AutoscalersGet
 autoscalersGet pAgProject_ pAgZone_ pAgAutoscaler_ =
-    AutoscalersGet'
+  AutoscalersGet'
     { _agProject = pAgProject_
     , _agZone = pAgZone_
     , _agAutoscaler = pAgAutoscaler_
     }
+
 
 -- | Project ID for this request.
 agProject :: Lens' AutoscalersGet Text

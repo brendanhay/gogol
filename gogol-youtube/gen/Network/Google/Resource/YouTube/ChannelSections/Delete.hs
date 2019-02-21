@@ -53,10 +53,13 @@ type ChannelSectionsDeleteResource =
 -- | Deletes a channelSection.
 --
 -- /See:/ 'channelSectionsDelete' smart constructor.
-data ChannelSectionsDelete = ChannelSectionsDelete'
+data ChannelSectionsDelete =
+  ChannelSectionsDelete'
     { _csdOnBehalfOfContentOwner :: !(Maybe Text)
     , _csdId                     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChannelSectionsDelete' with the minimum fields required to make a request.
 --
@@ -69,10 +72,9 @@ channelSectionsDelete
     :: Text -- ^ 'csdId'
     -> ChannelSectionsDelete
 channelSectionsDelete pCsdId_ =
-    ChannelSectionsDelete'
-    { _csdOnBehalfOfContentOwner = Nothing
-    , _csdId = pCsdId_
-    }
+  ChannelSectionsDelete'
+    {_csdOnBehalfOfContentOwner = Nothing, _csdId = pCsdId_}
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

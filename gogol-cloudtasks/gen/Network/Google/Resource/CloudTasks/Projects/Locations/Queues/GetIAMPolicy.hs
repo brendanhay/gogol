@@ -70,7 +70,8 @@ type ProjectsLocationsQueuesGetIAMPolicyResource =
 -- \`cloudtasks.queues.getIamPolicy\`
 --
 -- /See:/ 'projectsLocationsQueuesGetIAMPolicy' smart constructor.
-data ProjectsLocationsQueuesGetIAMPolicy = ProjectsLocationsQueuesGetIAMPolicy'
+data ProjectsLocationsQueuesGetIAMPolicy =
+  ProjectsLocationsQueuesGetIAMPolicy'
     { _plqgipXgafv          :: !(Maybe Xgafv)
     , _plqgipUploadProtocol :: !(Maybe Text)
     , _plqgipAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsLocationsQueuesGetIAMPolicy = ProjectsLocationsQueuesGetIAMPolicy'
     , _plqgipPayload        :: !GetIAMPolicyRequest
     , _plqgipResource       :: !Text
     , _plqgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsQueuesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsLocationsQueuesGetIAMPolicy
     -> Text -- ^ 'plqgipResource'
     -> ProjectsLocationsQueuesGetIAMPolicy
 projectsLocationsQueuesGetIAMPolicy pPlqgipPayload_ pPlqgipResource_ =
-    ProjectsLocationsQueuesGetIAMPolicy'
+  ProjectsLocationsQueuesGetIAMPolicy'
     { _plqgipXgafv = Nothing
     , _plqgipUploadProtocol = Nothing
     , _plqgipAccessToken = Nothing
@@ -111,6 +114,7 @@ projectsLocationsQueuesGetIAMPolicy pPlqgipPayload_ pPlqgipResource_ =
     , _plqgipResource = pPlqgipResource_
     , _plqgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqgipXgafv :: Lens' ProjectsLocationsQueuesGetIAMPolicy (Maybe Xgafv)
@@ -155,7 +159,8 @@ plqgipCallback
       (\ s a -> s{_plqgipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsQueuesGetIAMPolicy where
+           ProjectsLocationsQueuesGetIAMPolicy
+         where
         type Rs ProjectsLocationsQueuesGetIAMPolicy = Policy
         type Scopes ProjectsLocationsQueuesGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

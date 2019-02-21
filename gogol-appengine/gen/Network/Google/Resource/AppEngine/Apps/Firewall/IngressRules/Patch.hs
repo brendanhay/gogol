@@ -69,7 +69,8 @@ type AppsFirewallIngressRulesPatchResource =
 -- | Updates the specified firewall rule.
 --
 -- /See:/ 'appsFirewallIngressRulesPatch' smart constructor.
-data AppsFirewallIngressRulesPatch = AppsFirewallIngressRulesPatch'
+data AppsFirewallIngressRulesPatch =
+  AppsFirewallIngressRulesPatch'
     { _afirpXgafv          :: !(Maybe Xgafv)
     , _afirpUploadProtocol :: !(Maybe Text)
     , _afirpUpdateMask     :: !(Maybe GFieldMask)
@@ -79,7 +80,9 @@ data AppsFirewallIngressRulesPatch = AppsFirewallIngressRulesPatch'
     , _afirpIngressRulesId :: !Text
     , _afirpAppsId         :: !Text
     , _afirpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsFirewallIngressRulesPatch' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ appsFirewallIngressRulesPatch
     -> Text -- ^ 'afirpAppsId'
     -> AppsFirewallIngressRulesPatch
 appsFirewallIngressRulesPatch pAfirpPayload_ pAfirpIngressRulesId_ pAfirpAppsId_ =
-    AppsFirewallIngressRulesPatch'
+  AppsFirewallIngressRulesPatch'
     { _afirpXgafv = Nothing
     , _afirpUploadProtocol = Nothing
     , _afirpUpdateMask = Nothing
@@ -119,6 +122,7 @@ appsFirewallIngressRulesPatch pAfirpPayload_ pAfirpIngressRulesId_ pAfirpAppsId_
     , _afirpAppsId = pAfirpAppsId_
     , _afirpCallback = Nothing
     }
+
 
 -- | V1 error format.
 afirpXgafv :: Lens' AppsFirewallIngressRulesPatch (Maybe Xgafv)

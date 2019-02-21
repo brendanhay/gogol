@@ -58,11 +58,14 @@ type NotificationsPatchResource =
 -- | Updates a notification. This method supports patch semantics.
 --
 -- /See:/ 'notificationsPatch' smart constructor.
-data NotificationsPatch = NotificationsPatch'
+data NotificationsPatch =
+  NotificationsPatch'
     { _npPayload        :: !Notification
     , _npCustomer       :: !Text
     , _npNotificationId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NotificationsPatch' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ notificationsPatch
     -> Text -- ^ 'npNotificationId'
     -> NotificationsPatch
 notificationsPatch pNpPayload_ pNpCustomer_ pNpNotificationId_ =
-    NotificationsPatch'
+  NotificationsPatch'
     { _npPayload = pNpPayload_
     , _npCustomer = pNpCustomer_
     , _npNotificationId = pNpNotificationId_
     }
+
 
 -- | Multipart request metadata.
 npPayload :: Lens' NotificationsPatch Notification

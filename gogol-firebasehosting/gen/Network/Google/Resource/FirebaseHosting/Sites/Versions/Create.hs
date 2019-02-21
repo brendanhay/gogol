@@ -66,7 +66,8 @@ type SitesVersionsCreateResource =
 -- | Creates a new version for a site.
 --
 -- /See:/ 'sitesVersionsCreate' smart constructor.
-data SitesVersionsCreate = SitesVersionsCreate'
+data SitesVersionsCreate =
+  SitesVersionsCreate'
     { _svcSizeBytes      :: !(Maybe (Textual Int64))
     , _svcParent         :: !Text
     , _svcXgafv          :: !(Maybe Xgafv)
@@ -76,7 +77,9 @@ data SitesVersionsCreate = SitesVersionsCreate'
     , _svcUploadType     :: !(Maybe Text)
     , _svcPayload        :: !Version
     , _svcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitesVersionsCreate' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ sitesVersionsCreate
     -> Version -- ^ 'svcPayload'
     -> SitesVersionsCreate
 sitesVersionsCreate pSvcParent_ pSvcPayload_ =
-    SitesVersionsCreate'
+  SitesVersionsCreate'
     { _svcSizeBytes = Nothing
     , _svcParent = pSvcParent_
     , _svcXgafv = Nothing
@@ -115,6 +118,7 @@ sitesVersionsCreate pSvcParent_ pSvcPayload_ =
     , _svcPayload = pSvcPayload_
     , _svcCallback = Nothing
     }
+
 
 -- | The self-reported size of the version. This value is used for a
 -- pre-emptive quota check for legacy version uploads.

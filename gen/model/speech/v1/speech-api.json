@@ -322,7 +322,7 @@
       }
     }
   },
-  "revision": "20190104",
+  "revision": "20190201",
   "rootUrl": "https://speech.googleapis.com/",
   "schemas": {
     "ListOperationsResponse": {
@@ -454,7 +454,7 @@
           "type": "boolean"
         },
         "enableSeparateRecognitionPerChannel": {
-          "description": "This needs to be set to ‘true’ explicitly and `audio_channel_count` \u003e 1\nto get each channel recognized separately. The recognition result will\ncontain a `channel_tag` field to state which channel that result belongs\nto. If this is not true, we will only recognize the first channel. The\nrequest is billed cumulatively for all channels recognized:\n`audio_channel_count` multiplied by the length of the audio.",
+          "description": "This needs to be set to `true` explicitly and `audio_channel_count` \u003e 1\nto get each channel recognized separately. The recognition result will\ncontain a `channel_tag` field to state which channel that result belongs\nto. If this is not true, we will only recognize the first channel. The\nrequest is billed cumulatively for all channels recognized:\n`audio_channel_count` multiplied by the length of the audio.",
           "type": "boolean"
         },
         "enableWordTimeOffsets": {
@@ -503,7 +503,7 @@
           "type": "boolean"
         },
         "sampleRateHertz": {
-          "description": "Sample rate in Hertz of the audio data sent in all\n`RecognitionAudio` messages. Valid values are: 8000-48000.\n16000 is optimal. For best results, set the sampling rate of the audio\nsource to 16000 Hz. If that's not possible, use the native sample rate of\nthe audio source (instead of re-sampling).\nThis field is optional for `FLAC` and `WAV` audio files and required\nfor all other audio formats. For details, see AudioEncoding.",
+          "description": "Sample rate in Hertz of the audio data sent in all\n`RecognitionAudio` messages. Valid values are: 8000-48000.\n16000 is optimal. For best results, set the sampling rate of the audio\nsource to 16000 Hz. If that's not possible, use the native sample rate of\nthe audio source (instead of re-sampling).\nThis field is optional for `FLAC`,  `WAV`. and 'MP3' audio files, and is\nrequired for all other audio formats. For details, see AudioEncoding.",
           "format": "int32",
           "type": "integer"
         },
@@ -656,7 +656,7 @@
     }
   },
   "servicePath": "",
-  "title": "Cloud Speech API",
+  "title": "Cloud Speech-to-Text API",
   "version": "v1",
   "version_module": true
 }

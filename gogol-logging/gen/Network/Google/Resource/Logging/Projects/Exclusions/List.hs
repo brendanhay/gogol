@@ -65,7 +65,8 @@ type ProjectsExclusionsListResource =
 -- | Lists all the exclusions in a parent resource.
 --
 -- /See:/ 'projectsExclusionsList' smart constructor.
-data ProjectsExclusionsList = ProjectsExclusionsList'
+data ProjectsExclusionsList =
+  ProjectsExclusionsList'
     { _pelParent         :: !Text
     , _pelXgafv          :: !(Maybe Xgafv)
     , _pelUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsExclusionsList = ProjectsExclusionsList'
     , _pelPageToken      :: !(Maybe Text)
     , _pelPageSize       :: !(Maybe (Textual Int32))
     , _pelCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsExclusionsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsExclusionsList
     :: Text -- ^ 'pelParent'
     -> ProjectsExclusionsList
 projectsExclusionsList pPelParent_ =
-    ProjectsExclusionsList'
+  ProjectsExclusionsList'
     { _pelParent = pPelParent_
     , _pelXgafv = Nothing
     , _pelUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsExclusionsList pPelParent_ =
     , _pelPageSize = Nothing
     , _pelCallback = Nothing
     }
+
 
 -- | Required. The parent resource whose exclusions are to be listed.
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

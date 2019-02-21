@@ -61,14 +61,17 @@ type ReportsBatchGetResource =
 -- | Returns the Analytics data.
 --
 -- /See:/ 'reportsBatchGet' smart constructor.
-data ReportsBatchGet = ReportsBatchGet'
+data ReportsBatchGet =
+  ReportsBatchGet'
     { _rbgXgafv          :: !(Maybe Xgafv)
     , _rbgUploadProtocol :: !(Maybe Text)
     , _rbgAccessToken    :: !(Maybe Text)
     , _rbgUploadType     :: !(Maybe Text)
     , _rbgPayload        :: !GetReportsRequest
     , _rbgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsBatchGet' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ reportsBatchGet
     :: GetReportsRequest -- ^ 'rbgPayload'
     -> ReportsBatchGet
 reportsBatchGet pRbgPayload_ =
-    ReportsBatchGet'
+  ReportsBatchGet'
     { _rbgXgafv = Nothing
     , _rbgUploadProtocol = Nothing
     , _rbgAccessToken = Nothing
@@ -97,6 +100,7 @@ reportsBatchGet pRbgPayload_ =
     , _rbgPayload = pRbgPayload_
     , _rbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 rbgXgafv :: Lens' ReportsBatchGet (Maybe Xgafv)

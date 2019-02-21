@@ -54,10 +54,13 @@ type WebAppsInsertResource =
 -- | Creates a new web app for the enterprise.
 --
 -- /See:/ 'webAppsInsert' smart constructor.
-data WebAppsInsert = WebAppsInsert'
+data WebAppsInsert =
+  WebAppsInsert'
     { _waiEnterpriseId :: !Text
     , _waiPayload      :: !WebApp
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebAppsInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ webAppsInsert
     -> WebApp -- ^ 'waiPayload'
     -> WebAppsInsert
 webAppsInsert pWaiEnterpriseId_ pWaiPayload_ =
-    WebAppsInsert'
-    { _waiEnterpriseId = pWaiEnterpriseId_
-    , _waiPayload = pWaiPayload_
-    }
+  WebAppsInsert'
+    {_waiEnterpriseId = pWaiEnterpriseId_, _waiPayload = pWaiPayload_}
+
 
 -- | The ID of the enterprise.
 waiEnterpriseId :: Lens' WebAppsInsert Text

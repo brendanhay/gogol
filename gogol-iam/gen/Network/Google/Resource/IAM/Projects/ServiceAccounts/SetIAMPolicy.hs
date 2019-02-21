@@ -62,7 +62,8 @@ type ProjectsServiceAccountsSetIAMPolicyResource =
 -- | Sets the IAM access control policy for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsSetIAMPolicy' smart constructor.
-data ProjectsServiceAccountsSetIAMPolicy = ProjectsServiceAccountsSetIAMPolicy'
+data ProjectsServiceAccountsSetIAMPolicy =
+  ProjectsServiceAccountsSetIAMPolicy'
     { _psasipXgafv          :: !(Maybe Xgafv)
     , _psasipUploadProtocol :: !(Maybe Text)
     , _psasipAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsServiceAccountsSetIAMPolicy = ProjectsServiceAccountsSetIAMPolicy'
     , _psasipPayload        :: !SetIAMPolicyRequest
     , _psasipResource       :: !Text
     , _psasipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsServiceAccountsSetIAMPolicy
     -> Text -- ^ 'psasipResource'
     -> ProjectsServiceAccountsSetIAMPolicy
 projectsServiceAccountsSetIAMPolicy pPsasipPayload_ pPsasipResource_ =
-    ProjectsServiceAccountsSetIAMPolicy'
+  ProjectsServiceAccountsSetIAMPolicy'
     { _psasipXgafv = Nothing
     , _psasipUploadProtocol = Nothing
     , _psasipAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsServiceAccountsSetIAMPolicy pPsasipPayload_ pPsasipResource_ =
     , _psasipResource = pPsasipResource_
     , _psasipCallback = Nothing
     }
+
 
 -- | V1 error format.
 psasipXgafv :: Lens' ProjectsServiceAccountsSetIAMPolicy (Maybe Xgafv)
@@ -147,7 +151,8 @@ psasipCallback
       (\ s a -> s{_psasipCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsSetIAMPolicy where
+           ProjectsServiceAccountsSetIAMPolicy
+         where
         type Rs ProjectsServiceAccountsSetIAMPolicy = Policy
         type Scopes ProjectsServiceAccountsSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

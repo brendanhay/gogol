@@ -54,10 +54,13 @@ type ColumnDeleteResource =
 -- | Deletes the specified column.
 --
 -- /See:/ 'columnDelete' smart constructor.
-data ColumnDelete = ColumnDelete'
+data ColumnDelete =
+  ColumnDelete'
     { _cdTableId  :: !Text
     , _cdColumnId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ColumnDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ columnDelete
     -> Text -- ^ 'cdColumnId'
     -> ColumnDelete
 columnDelete pCdTableId_ pCdColumnId_ =
-    ColumnDelete'
-    { _cdTableId = pCdTableId_
-    , _cdColumnId = pCdColumnId_
-    }
+  ColumnDelete' {_cdTableId = pCdTableId_, _cdColumnId = pCdColumnId_}
+
 
 -- | Table from which the column is being deleted.
 cdTableId :: Lens' ColumnDelete Text

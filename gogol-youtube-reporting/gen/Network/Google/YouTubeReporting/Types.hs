@@ -209,9 +209,9 @@ youTubeReportingService
 
 -- | View YouTube Analytics reports for your YouTube content
 youTubeAnalyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
-youTubeAnalyticsReadOnlyScope = Proxy;
+youTubeAnalyticsReadOnlyScope = Proxy
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
 youTubeAnalyticsMonetaryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
-youTubeAnalyticsMonetaryReadOnlyScope = Proxy;
+youTubeAnalyticsMonetaryReadOnlyScope = Proxy

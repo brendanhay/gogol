@@ -76,7 +76,8 @@ type ProjectsLocationsQueuesCreateResource =
 -- using this method.
 --
 -- /See:/ 'projectsLocationsQueuesCreate' smart constructor.
-data ProjectsLocationsQueuesCreate = ProjectsLocationsQueuesCreate'
+data ProjectsLocationsQueuesCreate =
+  ProjectsLocationsQueuesCreate'
     { _plqcParent         :: !Text
     , _plqcXgafv          :: !(Maybe Xgafv)
     , _plqcUploadProtocol :: !(Maybe Text)
@@ -84,7 +85,9 @@ data ProjectsLocationsQueuesCreate = ProjectsLocationsQueuesCreate'
     , _plqcUploadType     :: !(Maybe Text)
     , _plqcPayload        :: !Queue
     , _plqcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsQueuesCreate' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ projectsLocationsQueuesCreate
     -> Queue -- ^ 'plqcPayload'
     -> ProjectsLocationsQueuesCreate
 projectsLocationsQueuesCreate pPlqcParent_ pPlqcPayload_ =
-    ProjectsLocationsQueuesCreate'
+  ProjectsLocationsQueuesCreate'
     { _plqcParent = pPlqcParent_
     , _plqcXgafv = Nothing
     , _plqcUploadProtocol = Nothing
@@ -117,6 +120,7 @@ projectsLocationsQueuesCreate pPlqcParent_ pPlqcPayload_ =
     , _plqcPayload = pPlqcPayload_
     , _plqcCallback = Nothing
     }
+
 
 -- | Required. The location name in which the queue will be created. For
 -- example: \`projects\/PROJECT_ID\/locations\/LOCATION_ID\` The list of

@@ -75,7 +75,8 @@ type ProjectsDlpJobsCreateResource =
 -- updated.
 --
 -- /See:/ 'projectsDlpJobsCreate' smart constructor.
-data ProjectsDlpJobsCreate = ProjectsDlpJobsCreate'
+data ProjectsDlpJobsCreate =
+  ProjectsDlpJobsCreate'
     { _pParent         :: !Text
     , _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsDlpJobsCreate = ProjectsDlpJobsCreate'
     , _pUploadType     :: !(Maybe Text)
     , _pPayload        :: !GooglePrivacyDlpV2CreateDlpJobRequest
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDlpJobsCreate' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsDlpJobsCreate
     -> GooglePrivacyDlpV2CreateDlpJobRequest -- ^ 'pPayload'
     -> ProjectsDlpJobsCreate
 projectsDlpJobsCreate pPParent_ pPPayload_ =
-    ProjectsDlpJobsCreate'
+  ProjectsDlpJobsCreate'
     { _pParent = pPParent_
     , _pXgafv = Nothing
     , _pUploadProtocol = Nothing
@@ -116,6 +119,7 @@ projectsDlpJobsCreate pPParent_ pPPayload_ =
     , _pPayload = pPPayload_
     , _pCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id.
 pParent :: Lens' ProjectsDlpJobsCreate Text

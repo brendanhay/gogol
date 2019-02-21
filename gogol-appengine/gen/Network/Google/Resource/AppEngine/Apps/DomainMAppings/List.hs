@@ -66,7 +66,8 @@ type AppsDomainMAppingsListResource =
 -- | Lists the domain mappings on an application.
 --
 -- /See:/ 'appsDomainMAppingsList' smart constructor.
-data AppsDomainMAppingsList = AppsDomainMAppingsList'
+data AppsDomainMAppingsList =
+  AppsDomainMAppingsList'
     { _admalXgafv          :: !(Maybe Xgafv)
     , _admalUploadProtocol :: !(Maybe Text)
     , _admalAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data AppsDomainMAppingsList = AppsDomainMAppingsList'
     , _admalPageToken      :: !(Maybe Text)
     , _admalPageSize       :: !(Maybe (Textual Int32))
     , _admalCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsDomainMAppingsList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ appsDomainMAppingsList
     :: Text -- ^ 'admalAppsId'
     -> AppsDomainMAppingsList
 appsDomainMAppingsList pAdmalAppsId_ =
-    AppsDomainMAppingsList'
+  AppsDomainMAppingsList'
     { _admalXgafv = Nothing
     , _admalUploadProtocol = Nothing
     , _admalAccessToken = Nothing
@@ -110,6 +113,7 @@ appsDomainMAppingsList pAdmalAppsId_ =
     , _admalPageSize = Nothing
     , _admalCallback = Nothing
     }
+
 
 -- | V1 error format.
 admalXgafv :: Lens' AppsDomainMAppingsList (Maybe Xgafv)

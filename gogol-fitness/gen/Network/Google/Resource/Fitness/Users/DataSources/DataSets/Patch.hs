@@ -67,13 +67,16 @@ type UsersDataSourcesDataSetsPatchResource =
 -- than one dataset. This method does not use patch semantics.
 --
 -- /See:/ 'usersDataSourcesDataSetsPatch' smart constructor.
-data UsersDataSourcesDataSetsPatch = UsersDataSourcesDataSetsPatch'
+data UsersDataSourcesDataSetsPatch =
+  UsersDataSourcesDataSetsPatch'
     { _udsdspDataSourceId      :: !Text
     , _udsdspPayload           :: !DataSet
     , _udsdspUserId            :: !Text
     , _udsdspDataSetId         :: !Text
     , _udsdspCurrentTimeMillis :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersDataSourcesDataSetsPatch' with the minimum fields required to make a request.
 --
@@ -95,13 +98,14 @@ usersDataSourcesDataSetsPatch
     -> Text -- ^ 'udsdspDataSetId'
     -> UsersDataSourcesDataSetsPatch
 usersDataSourcesDataSetsPatch pUdsdspDataSourceId_ pUdsdspPayload_ pUdsdspUserId_ pUdsdspDataSetId_ =
-    UsersDataSourcesDataSetsPatch'
+  UsersDataSourcesDataSetsPatch'
     { _udsdspDataSourceId = pUdsdspDataSourceId_
     , _udsdspPayload = pUdsdspPayload_
     , _udsdspUserId = pUdsdspUserId_
     , _udsdspDataSetId = pUdsdspDataSetId_
     , _udsdspCurrentTimeMillis = Nothing
     }
+
 
 -- | The data stream ID of the data source that created the dataset.
 udsdspDataSourceId :: Lens' UsersDataSourcesDataSetsPatch Text

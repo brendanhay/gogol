@@ -57,11 +57,14 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -74,12 +77,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -136,10 +135,13 @@ instance ToJSON Status where
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -150,11 +152,8 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -189,13 +188,16 @@ instance ToJSON AuditConfig where
 -- | Metadata describing an Operation
 --
 -- /See:/ 'operationMetadataV1Beta2' smart constructor.
-data OperationMetadataV1Beta2 = OperationMetadataV1Beta2'
+data OperationMetadataV1Beta2 =
+  OperationMetadataV1Beta2'
     { _omvbVersionId  :: !(Maybe (Textual Int64))
     , _omvbUpdateTime :: !(Maybe DateTime')
     , _omvbType       :: !(Maybe OperationMetadataV1Beta2Type)
     , _omvbTarget     :: !(Maybe Text)
     , _omvbRequest    :: !(Maybe OperationMetadataV1Beta2Request)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadataV1Beta2' with the minimum fields required to make a request.
 --
@@ -213,13 +215,14 @@ data OperationMetadataV1Beta2 = OperationMetadataV1Beta2'
 operationMetadataV1Beta2
     :: OperationMetadataV1Beta2
 operationMetadataV1Beta2 =
-    OperationMetadataV1Beta2'
+  OperationMetadataV1Beta2'
     { _omvbVersionId = Nothing
     , _omvbUpdateTime = Nothing
     , _omvbType = Nothing
     , _omvbTarget = Nothing
     , _omvbRequest = Nothing
     }
+
 
 -- | Version id of the function created or updated by an API call. This field
 -- is only populated for Create and Update operations.
@@ -276,12 +279,15 @@ instance ToJSON OperationMetadataV1Beta2 where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -297,12 +303,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -350,10 +357,13 @@ instance ToJSON Expr where
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
-data ListLocationsResponse = ListLocationsResponse'
+data ListLocationsResponse =
+  ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -365,10 +375,8 @@ data ListLocationsResponse = ListLocationsResponse'
 listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
-    ListLocationsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLocations = Nothing
-    }
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -401,10 +409,13 @@ instance ToJSON ListLocationsResponse where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -416,10 +427,9 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -454,14 +464,16 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'generateUploadURLRequest' smart constructor.
 data GenerateUploadURLRequest =
-    GenerateUploadURLRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GenerateUploadURLRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateUploadURLRequest' with the minimum fields required to make a request.
 --
 generateUploadURLRequest
     :: GenerateUploadURLRequest
 generateUploadURLRequest = GenerateUploadURLRequest'
+
 
 instance FromJSON GenerateUploadURLRequest where
         parseJSON
@@ -474,13 +486,16 @@ instance ToJSON GenerateUploadURLRequest where
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lName        :: !(Maybe Text)
     , _lMetadata    :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
     , _lLabels      :: !(Maybe LocationLabels)
     , _lLocationId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -498,13 +513,14 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lName = Nothing
     , _lMetadata = Nothing
     , _lDisplayName = Nothing
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -557,13 +573,16 @@ instance ToJSON Location where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -581,13 +600,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -647,9 +667,12 @@ instance ToJSON Operation where
 -- | Request of \`GenerateDownloadUrl\` method.
 --
 -- /See:/ 'generateDownloadURLRequest' smart constructor.
-newtype GenerateDownloadURLRequest = GenerateDownloadURLRequest'
+newtype GenerateDownloadURLRequest =
+  GenerateDownloadURLRequest'
     { _gdurVersionId :: Maybe (Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateDownloadURLRequest' with the minimum fields required to make a request.
 --
@@ -659,9 +682,8 @@ newtype GenerateDownloadURLRequest = GenerateDownloadURLRequest'
 generateDownloadURLRequest
     :: GenerateDownloadURLRequest
 generateDownloadURLRequest =
-    GenerateDownloadURLRequest'
-    { _gdurVersionId = Nothing
-    }
+  GenerateDownloadURLRequest' {_gdurVersionId = Nothing}
+
 
 -- | The optional version of function. If not set, default, current version
 -- is used.
@@ -689,14 +711,16 @@ instance ToJSON GenerateDownloadURLRequest where
 --
 -- /See:/ 'retry' smart constructor.
 data Retry =
-    Retry'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Retry'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Retry' with the minimum fields required to make a request.
 --
 retry
     :: Retry
 retry = Retry'
+
 
 instance FromJSON Retry where
         parseJSON = withObject "Retry" (\ o -> pure Retry')
@@ -707,9 +731,12 @@ instance ToJSON Retry where
 -- | Response of \`GenerateSourceUploadUrl\` method.
 --
 -- /See:/ 'generateUploadURLResponse' smart constructor.
-newtype GenerateUploadURLResponse = GenerateUploadURLResponse'
+newtype GenerateUploadURLResponse =
+  GenerateUploadURLResponse'
     { _guurUploadURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateUploadURLResponse' with the minimum fields required to make a request.
 --
@@ -719,9 +746,8 @@ newtype GenerateUploadURLResponse = GenerateUploadURLResponse'
 generateUploadURLResponse
     :: GenerateUploadURLResponse
 generateUploadURLResponse =
-    GenerateUploadURLResponse'
-    { _guurUploadURL = Nothing
-    }
+  GenerateUploadURLResponse' {_guurUploadURL = Nothing}
+
 
 -- | The generated Google Cloud Storage signed URL that should be used for a
 -- function source code upload. The uploaded file should be a zip archive
@@ -746,9 +772,12 @@ instance ToJSON GenerateUploadURLResponse where
 -- then defaults to ignoring failures (i.e. not retrying them).
 --
 -- /See:/ 'failurePolicy' smart constructor.
-newtype FailurePolicy = FailurePolicy'
+newtype FailurePolicy =
+  FailurePolicy'
     { _fpRetry :: Maybe Retry
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FailurePolicy' with the minimum fields required to make a request.
 --
@@ -757,10 +786,8 @@ newtype FailurePolicy = FailurePolicy'
 -- * 'fpRetry'
 failurePolicy
     :: FailurePolicy
-failurePolicy =
-    FailurePolicy'
-    { _fpRetry = Nothing
-    }
+failurePolicy = FailurePolicy' {_fpRetry = Nothing}
+
 
 -- | If specified, then the function will be retried in case of a failure.
 fpRetry :: Lens' FailurePolicy (Maybe Retry)
@@ -778,11 +805,14 @@ instance ToJSON FailurePolicy where
 -- | Response of \`CallFunction\` method.
 --
 -- /See:/ 'callFunctionResponse' smart constructor.
-data CallFunctionResponse = CallFunctionResponse'
+data CallFunctionResponse =
+  CallFunctionResponse'
     { _cfrExecutionId :: !(Maybe Text)
     , _cfrError       :: !(Maybe Text)
     , _cfrResult      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CallFunctionResponse' with the minimum fields required to make a request.
 --
@@ -796,11 +826,9 @@ data CallFunctionResponse = CallFunctionResponse'
 callFunctionResponse
     :: CallFunctionResponse
 callFunctionResponse =
-    CallFunctionResponse'
-    { _cfrExecutionId = Nothing
-    , _cfrError = Nothing
-    , _cfrResult = Nothing
-    }
+  CallFunctionResponse'
+    {_cfrExecutionId = Nothing, _cfrError = Nothing, _cfrResult = Nothing}
+
 
 -- | Execution id of function invocation.
 cfrExecutionId :: Lens' CallFunctionResponse (Maybe Text)
@@ -838,9 +866,12 @@ instance ToJSON CallFunctionResponse where
 -- | Describes HttpsTrigger, could be used to connect web hooks to function.
 --
 -- /See:/ 'httpsTrigger' smart constructor.
-newtype HTTPSTrigger = HTTPSTrigger'
+newtype HTTPSTrigger =
+  HTTPSTrigger'
     { _htURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPSTrigger' with the minimum fields required to make a request.
 --
@@ -849,10 +880,8 @@ newtype HTTPSTrigger = HTTPSTrigger'
 -- * 'htURL'
 httpsTrigger
     :: HTTPSTrigger
-httpsTrigger =
-    HTTPSTrigger'
-    { _htURL = Nothing
-    }
+httpsTrigger = HTTPSTrigger' {_htURL = Nothing}
+
 
 -- | Output only. The deployed url for the function.
 htURL :: Lens' HTTPSTrigger (Maybe Text)
@@ -869,9 +898,12 @@ instance ToJSON HTTPSTrigger where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -882,9 +914,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -903,9 +934,12 @@ instance ToJSON StatusDetailsItem where
 -- | Environment variables that shall be available during function execution.
 --
 -- /See:/ 'cloudFunctionEnvironmentVariables' smart constructor.
-newtype CloudFunctionEnvironmentVariables = CloudFunctionEnvironmentVariables'
+newtype CloudFunctionEnvironmentVariables =
+  CloudFunctionEnvironmentVariables'
     { _cfevAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudFunctionEnvironmentVariables' with the minimum fields required to make a request.
 --
@@ -916,9 +950,9 @@ cloudFunctionEnvironmentVariables
     :: HashMap Text Text -- ^ 'cfevAddtional'
     -> CloudFunctionEnvironmentVariables
 cloudFunctionEnvironmentVariables pCfevAddtional_ =
-    CloudFunctionEnvironmentVariables'
-    { _cfevAddtional = _Coerce # pCfevAddtional_
-    }
+  CloudFunctionEnvironmentVariables'
+    {_cfevAddtional = _Coerce # pCfevAddtional_}
+
 
 cfevAddtional :: Lens' CloudFunctionEnvironmentVariables (HashMap Text Text)
 cfevAddtional
@@ -941,9 +975,12 @@ instance ToJSON CloudFunctionEnvironmentVariables
 -- | The original request that started the operation.
 --
 -- /See:/ 'operationMetadataV1Request' smart constructor.
-newtype OperationMetadataV1Request = OperationMetadataV1Request'
+newtype OperationMetadataV1Request =
+  OperationMetadataV1Request'
     { _omvrAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadataV1Request' with the minimum fields required to make a request.
 --
@@ -954,9 +991,8 @@ operationMetadataV1Request
     :: HashMap Text JSONValue -- ^ 'omvrAddtional'
     -> OperationMetadataV1Request
 operationMetadataV1Request pOmvrAddtional_ =
-    OperationMetadataV1Request'
-    { _omvrAddtional = _Coerce # pOmvrAddtional_
-    }
+  OperationMetadataV1Request' {_omvrAddtional = _Coerce # pOmvrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omvrAddtional :: Lens' OperationMetadataV1Request (HashMap Text JSONValue)
@@ -977,10 +1013,13 @@ instance ToJSON OperationMetadataV1Request where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-data SetIAMPolicyRequest = SetIAMPolicyRequest'
+data SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
     , _siprPolicy     :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -992,10 +1031,8 @@ data SetIAMPolicyRequest = SetIAMPolicyRequest'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprUpdateMask = Nothing
-    , _siprPolicy = Nothing
-    }
+  SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -1032,12 +1069,15 @@ instance ToJSON SetIAMPolicyRequest where
 -- service.
 --
 -- /See:/ 'eventTrigger' smart constructor.
-data EventTrigger = EventTrigger'
+data EventTrigger =
+  EventTrigger'
     { _etService       :: !(Maybe Text)
     , _etFailurePolicy :: !(Maybe FailurePolicy)
     , _etEventType     :: !(Maybe Text)
     , _etResource      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventTrigger' with the minimum fields required to make a request.
 --
@@ -1053,12 +1093,13 @@ data EventTrigger = EventTrigger'
 eventTrigger
     :: EventTrigger
 eventTrigger =
-    EventTrigger'
+  EventTrigger'
     { _etService = Nothing
     , _etFailurePolicy = Nothing
     , _etEventType = Nothing
     , _etResource = Nothing
     }
+
 
 -- | The hostname of the service that should be observed. If no string is
 -- provided, the default service implementing the API will be used. For
@@ -1126,10 +1167,13 @@ instance ToJSON EventTrigger where
 -- source repository where a function is hosted.
 --
 -- /See:/ 'sourceRepository' smart constructor.
-data SourceRepository = SourceRepository'
+data SourceRepository =
+  SourceRepository'
     { _srURL         :: !(Maybe Text)
     , _srDeployedURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceRepository' with the minimum fields required to make a request.
 --
@@ -1141,10 +1185,8 @@ data SourceRepository = SourceRepository'
 sourceRepository
     :: SourceRepository
 sourceRepository =
-    SourceRepository'
-    { _srURL = Nothing
-    , _srDeployedURL = Nothing
-    }
+  SourceRepository' {_srURL = Nothing, _srDeployedURL = Nothing}
+
 
 -- | The URL pointing to the hosted repository where the function is defined.
 -- There are supported Cloud Source Repository URLs in the following
@@ -1184,13 +1226,16 @@ instance ToJSON SourceRepository where
 -- | Metadata describing an Operation
 --
 -- /See:/ 'operationMetadataV1' smart constructor.
-data OperationMetadataV1 = OperationMetadataV1'
+data OperationMetadataV1 =
+  OperationMetadataV1'
     { _omvVersionId  :: !(Maybe (Textual Int64))
     , _omvUpdateTime :: !(Maybe DateTime')
     , _omvType       :: !(Maybe OperationMetadataV1Type)
     , _omvTarget     :: !(Maybe Text)
     , _omvRequest    :: !(Maybe OperationMetadataV1Request)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadataV1' with the minimum fields required to make a request.
 --
@@ -1208,13 +1253,14 @@ data OperationMetadataV1 = OperationMetadataV1'
 operationMetadataV1
     :: OperationMetadataV1
 operationMetadataV1 =
-    OperationMetadataV1'
+  OperationMetadataV1'
     { _omvVersionId = Nothing
     , _omvUpdateTime = Nothing
     , _omvType = Nothing
     , _omvTarget = Nothing
     , _omvRequest = Nothing
     }
+
 
 -- | Version id of the function created or updated by an API call. This field
 -- is only populated for Create and Update operations.
@@ -1268,9 +1314,12 @@ instance ToJSON OperationMetadataV1 where
 -- | Response of \`GenerateDownloadUrl\` method.
 --
 -- /See:/ 'generateDownloadURLResponse' smart constructor.
-newtype GenerateDownloadURLResponse = GenerateDownloadURLResponse'
+newtype GenerateDownloadURLResponse =
+  GenerateDownloadURLResponse'
     { _gdurDownloadURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateDownloadURLResponse' with the minimum fields required to make a request.
 --
@@ -1280,9 +1329,8 @@ newtype GenerateDownloadURLResponse = GenerateDownloadURLResponse'
 generateDownloadURLResponse
     :: GenerateDownloadURLResponse
 generateDownloadURLResponse =
-    GenerateDownloadURLResponse'
-    { _gdurDownloadURL = Nothing
-    }
+  GenerateDownloadURLResponse' {_gdurDownloadURL = Nothing}
+
 
 -- | The generated Google Cloud Storage signed URL that should be used for
 -- function source code download.
@@ -1306,9 +1354,12 @@ instance ToJSON GenerateDownloadURLResponse where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1318,9 +1369,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1348,9 +1398,12 @@ instance ToJSON TestIAMPermissionsRequest where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -1360,9 +1413,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1405,12 +1457,15 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -1426,12 +1481,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1490,9 +1546,12 @@ instance ToJSON Policy where
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
 -- /See:/ 'locationLabels' smart constructor.
-newtype LocationLabels = LocationLabels'
+newtype LocationLabels =
+  LocationLabels'
     { _llAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
@@ -1503,9 +1562,8 @@ locationLabels
     :: HashMap Text Text -- ^ 'llAddtional'
     -> LocationLabels
 locationLabels pLlAddtional_ =
-    LocationLabels'
-    { _llAddtional = _Coerce # pLlAddtional_
-    }
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1523,10 +1581,13 @@ instance ToJSON LocationLabels where
 -- | Response for the \`ListFunctions\` method.
 --
 -- /See:/ 'listFunctionsResponse' smart constructor.
-data ListFunctionsResponse = ListFunctionsResponse'
+data ListFunctionsResponse =
+  ListFunctionsResponse'
     { _lfrNextPageToken :: !(Maybe Text)
     , _lfrFunctions     :: !(Maybe [CloudFunction])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListFunctionsResponse' with the minimum fields required to make a request.
 --
@@ -1538,10 +1599,8 @@ data ListFunctionsResponse = ListFunctionsResponse'
 listFunctionsResponse
     :: ListFunctionsResponse
 listFunctionsResponse =
-    ListFunctionsResponse'
-    { _lfrNextPageToken = Nothing
-    , _lfrFunctions = Nothing
-    }
+  ListFunctionsResponse' {_lfrNextPageToken = Nothing, _lfrFunctions = Nothing}
+
 
 -- | If not empty, indicates that there may be more functions that match the
 -- request; this value should be passed in a new
@@ -1577,9 +1636,12 @@ instance ToJSON ListFunctionsResponse where
 -- given location.
 --
 -- /See:/ 'locationMetadata' smart constructor.
-newtype LocationMetadata = LocationMetadata'
+newtype LocationMetadata =
+  LocationMetadata'
     { _lmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
@@ -1590,9 +1652,8 @@ locationMetadata
     :: HashMap Text JSONValue -- ^ 'lmAddtional'
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
-    LocationMetadata'
-    { _lmAddtional = _Coerce # pLmAddtional_
-    }
+  LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -1614,9 +1675,12 @@ instance ToJSON LocationMetadata where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -1627,9 +1691,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1652,10 +1715,13 @@ instance ToJSON OperationMetadata where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -1667,10 +1733,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1706,7 +1770,8 @@ instance ToJSON AuditLogConfig where
 -- configurations. LINT.IfChange
 --
 -- /See:/ 'cloudFunction' smart constructor.
-data CloudFunction = CloudFunction'
+data CloudFunction =
+  CloudFunction'
     { _cfRuntime              :: !(Maybe Text)
     , _cfStatus               :: !(Maybe CloudFunctionStatus)
     , _cfSourceArchiveURL     :: !(Maybe Text)
@@ -1727,7 +1792,9 @@ data CloudFunction = CloudFunction'
     , _cfTimeout              :: !(Maybe GDuration)
     , _cfVPCConnector         :: !(Maybe Text)
     , _cfDescription          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudFunction' with the minimum fields required to make a request.
 --
@@ -1775,7 +1842,7 @@ data CloudFunction = CloudFunction'
 cloudFunction
     :: CloudFunction
 cloudFunction =
-    CloudFunction'
+  CloudFunction'
     { _cfRuntime = Nothing
     , _cfStatus = Nothing
     , _cfSourceArchiveURL = Nothing
@@ -1797,6 +1864,7 @@ cloudFunction =
     , _cfVPCConnector = Nothing
     , _cfDescription = Nothing
     }
+
 
 -- | The runtime in which the function is going to run. If empty, defaults to
 -- Node.js 6.
@@ -1999,9 +2067,12 @@ instance ToJSON CloudFunction where
 -- | The original request that started the operation.
 --
 -- /See:/ 'operationMetadataV1Beta2Request' smart constructor.
-newtype OperationMetadataV1Beta2Request = OperationMetadataV1Beta2Request'
+newtype OperationMetadataV1Beta2Request =
+  OperationMetadataV1Beta2Request'
     { _omvbrAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadataV1Beta2Request' with the minimum fields required to make a request.
 --
@@ -2012,9 +2083,9 @@ operationMetadataV1Beta2Request
     :: HashMap Text JSONValue -- ^ 'omvbrAddtional'
     -> OperationMetadataV1Beta2Request
 operationMetadataV1Beta2Request pOmvbrAddtional_ =
-    OperationMetadataV1Beta2Request'
-    { _omvbrAddtional = _Coerce # pOmvbrAddtional_
-    }
+  OperationMetadataV1Beta2Request'
+    {_omvbrAddtional = _Coerce # pOmvbrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omvbrAddtional :: Lens' OperationMetadataV1Beta2Request (HashMap Text JSONValue)
@@ -2037,9 +2108,12 @@ instance ToJSON OperationMetadataV1Beta2Request where
 -- | Labels associated with this Cloud Function.
 --
 -- /See:/ 'cloudFunctionLabels' smart constructor.
-newtype CloudFunctionLabels = CloudFunctionLabels'
+newtype CloudFunctionLabels =
+  CloudFunctionLabels'
     { _cflAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudFunctionLabels' with the minimum fields required to make a request.
 --
@@ -2050,9 +2124,8 @@ cloudFunctionLabels
     :: HashMap Text Text -- ^ 'cflAddtional'
     -> CloudFunctionLabels
 cloudFunctionLabels pCflAddtional_ =
-    CloudFunctionLabels'
-    { _cflAddtional = _Coerce # pCflAddtional_
-    }
+  CloudFunctionLabels' {_cflAddtional = _Coerce # pCflAddtional_}
+
 
 cflAddtional :: Lens' CloudFunctionLabels (HashMap Text Text)
 cflAddtional
@@ -2077,9 +2150,12 @@ instance ToJSON CloudFunctionLabels where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -2090,9 +2166,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -2111,9 +2186,12 @@ instance ToJSON OperationResponse where
 -- | Request for the \`CallFunction\` method.
 --
 -- /See:/ 'callFunctionRequest' smart constructor.
-newtype CallFunctionRequest = CallFunctionRequest'
+newtype CallFunctionRequest =
+  CallFunctionRequest'
     { _cfrData :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CallFunctionRequest' with the minimum fields required to make a request.
 --
@@ -2122,10 +2200,8 @@ newtype CallFunctionRequest = CallFunctionRequest'
 -- * 'cfrData'
 callFunctionRequest
     :: CallFunctionRequest
-callFunctionRequest =
-    CallFunctionRequest'
-    { _cfrData = Nothing
-    }
+callFunctionRequest = CallFunctionRequest' {_cfrData = Nothing}
+
 
 -- | Input to be passed to the function.
 cfrData :: Lens' CallFunctionRequest (Maybe Text)
@@ -2143,11 +2219,14 @@ instance ToJSON CallFunctionRequest where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -2161,11 +2240,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

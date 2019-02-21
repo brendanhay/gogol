@@ -75,7 +75,8 @@ type AccountsStoreInfosCountryGetResource =
 -- this method.
 --
 -- /See:/ 'accountsStoreInfosCountryGet' smart constructor.
-data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet'
+data AccountsStoreInfosCountryGet =
+  AccountsStoreInfosCountryGet'
     { _asicgXgafv          :: !(Maybe Xgafv)
     , _asicgUploadProtocol :: !(Maybe Text)
     , _asicgCountry        :: !Text
@@ -86,7 +87,9 @@ data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet'
     , _asicgAccountId      :: !Text
     , _asicgBearerToken    :: !(Maybe Text)
     , _asicgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsStoreInfosCountryGet' with the minimum fields required to make a request.
 --
@@ -117,7 +120,7 @@ accountsStoreInfosCountryGet
     -> Text -- ^ 'asicgAccountId'
     -> AccountsStoreInfosCountryGet
 accountsStoreInfosCountryGet pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
-    AccountsStoreInfosCountryGet'
+  AccountsStoreInfosCountryGet'
     { _asicgXgafv = Nothing
     , _asicgUploadProtocol = Nothing
     , _asicgCountry = pAsicgCountry_
@@ -129,6 +132,7 @@ accountsStoreInfosCountryGet pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
     , _asicgBearerToken = Nothing
     , _asicgCallback = Nothing
     }
+
 
 -- | V1 error format.
 asicgXgafv :: Lens' AccountsStoreInfosCountryGet (Maybe Xgafv)

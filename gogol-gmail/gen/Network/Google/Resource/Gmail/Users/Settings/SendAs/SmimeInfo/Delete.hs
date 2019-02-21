@@ -58,11 +58,14 @@ type UsersSettingsSendAsSmimeInfoDeleteResource =
 -- | Deletes the specified S\/MIME config for the specified send-as alias.
 --
 -- /See:/ 'usersSettingsSendAsSmimeInfoDelete' smart constructor.
-data UsersSettingsSendAsSmimeInfoDelete = UsersSettingsSendAsSmimeInfoDelete'
+data UsersSettingsSendAsSmimeInfoDelete =
+  UsersSettingsSendAsSmimeInfoDelete'
     { _ussasidUserId      :: !Text
     , _ussasidSendAsEmail :: !Text
     , _ussasidId          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsSendAsSmimeInfoDelete' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ usersSettingsSendAsSmimeInfoDelete
     -> Text -- ^ 'ussasidId'
     -> UsersSettingsSendAsSmimeInfoDelete
 usersSettingsSendAsSmimeInfoDelete pUssasidSendAsEmail_ pUssasidId_ =
-    UsersSettingsSendAsSmimeInfoDelete'
+  UsersSettingsSendAsSmimeInfoDelete'
     { _ussasidUserId = "me"
     , _ussasidSendAsEmail = pUssasidSendAsEmail_
     , _ussasidId = pUssasidId_
     }
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -104,7 +108,8 @@ ussasidId
   = lens _ussasidId (\ s a -> s{_ussasidId = a})
 
 instance GoogleRequest
-         UsersSettingsSendAsSmimeInfoDelete where
+           UsersSettingsSendAsSmimeInfoDelete
+         where
         type Rs UsersSettingsSendAsSmimeInfoDelete = ()
         type Scopes UsersSettingsSendAsSmimeInfoDelete =
              '["https://www.googleapis.com/auth/gmail.settings.basic",

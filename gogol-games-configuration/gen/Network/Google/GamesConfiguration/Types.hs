@@ -135,4 +135,4 @@ gamesConfigurationService
 
 -- | View and manage your Google Play Developer account
 androidPublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-androidPublisherScope = Proxy;
+androidPublisherScope = Proxy

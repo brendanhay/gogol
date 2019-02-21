@@ -66,14 +66,17 @@ type TargetInstancesListResource =
 -- project and zone.
 --
 -- /See:/ 'targetInstancesList' smart constructor.
-data TargetInstancesList = TargetInstancesList'
+data TargetInstancesList =
+  TargetInstancesList'
     { _tilOrderBy    :: !(Maybe Text)
     , _tilProject    :: !Text
     , _tilZone       :: !Text
     , _tilFilter     :: !(Maybe Text)
     , _tilPageToken  :: !(Maybe Text)
     , _tilMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetInstancesList' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ targetInstancesList
     -> Text -- ^ 'tilZone'
     -> TargetInstancesList
 targetInstancesList pTilProject_ pTilZone_ =
-    TargetInstancesList'
+  TargetInstancesList'
     { _tilOrderBy = Nothing
     , _tilProject = pTilProject_
     , _tilZone = pTilZone_
@@ -103,6 +106,7 @@ targetInstancesList pTilProject_ pTilZone_ =
     , _tilPageToken = Nothing
     , _tilMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

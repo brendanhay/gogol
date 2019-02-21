@@ -64,14 +64,17 @@ type MachineTypesListResource =
 -- | Retrieves a list of machine types available to the specified project.
 --
 -- /See:/ 'machineTypesList' smart constructor.
-data MachineTypesList = MachineTypesList'
+data MachineTypesList =
+  MachineTypesList'
     { _mtlOrderBy    :: !(Maybe Text)
     , _mtlProject    :: !Text
     , _mtlZone       :: !Text
     , _mtlFilter     :: !(Maybe Text)
     , _mtlPageToken  :: !(Maybe Text)
     , _mtlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MachineTypesList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ machineTypesList
     -> Text -- ^ 'mtlZone'
     -> MachineTypesList
 machineTypesList pMtlProject_ pMtlZone_ =
-    MachineTypesList'
+  MachineTypesList'
     { _mtlOrderBy = Nothing
     , _mtlProject = pMtlProject_
     , _mtlZone = pMtlZone_
@@ -101,6 +104,7 @@ machineTypesList pMtlProject_ pMtlZone_ =
     , _mtlPageToken = Nothing
     , _mtlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

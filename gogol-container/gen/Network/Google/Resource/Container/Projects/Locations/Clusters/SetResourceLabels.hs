@@ -63,7 +63,8 @@ type ProjectsLocationsClustersSetResourceLabelsResource
 -- | Sets labels on a cluster.
 --
 -- /See:/ 'projectsLocationsClustersSetResourceLabels' smart constructor.
-data ProjectsLocationsClustersSetResourceLabels = ProjectsLocationsClustersSetResourceLabels'
+data ProjectsLocationsClustersSetResourceLabels =
+  ProjectsLocationsClustersSetResourceLabels'
     { _plcsrlXgafv          :: !(Maybe Xgafv)
     , _plcsrlUploadProtocol :: !(Maybe Text)
     , _plcsrlAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsLocationsClustersSetResourceLabels = ProjectsLocationsClustersSetRe
     , _plcsrlPayload        :: !SetLabelsRequest
     , _plcsrlName           :: !Text
     , _plcsrlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersSetResourceLabels' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsClustersSetResourceLabels
     -> Text -- ^ 'plcsrlName'
     -> ProjectsLocationsClustersSetResourceLabels
 projectsLocationsClustersSetResourceLabels pPlcsrlPayload_ pPlcsrlName_ =
-    ProjectsLocationsClustersSetResourceLabels'
+  ProjectsLocationsClustersSetResourceLabels'
     { _plcsrlXgafv = Nothing
     , _plcsrlUploadProtocol = Nothing
     , _plcsrlAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsLocationsClustersSetResourceLabels pPlcsrlPayload_ pPlcsrlName_ =
     , _plcsrlName = pPlcsrlName_
     , _plcsrlCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsrlXgafv :: Lens' ProjectsLocationsClustersSetResourceLabels (Maybe Xgafv)
@@ -147,7 +151,8 @@ plcsrlCallback
       (\ s a -> s{_plcsrlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersSetResourceLabels where
+           ProjectsLocationsClustersSetResourceLabels
+         where
         type Rs ProjectsLocationsClustersSetResourceLabels =
              Operation
         type Scopes

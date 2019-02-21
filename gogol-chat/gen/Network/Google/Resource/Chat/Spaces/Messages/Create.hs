@@ -64,7 +64,8 @@ type SpacesMessagesCreateResource =
 -- | Creates a message.
 --
 -- /See:/ 'spacesMessagesCreate' smart constructor.
-data SpacesMessagesCreate = SpacesMessagesCreate'
+data SpacesMessagesCreate =
+  SpacesMessagesCreate'
     { _smcParent         :: !Text
     , _smcXgafv          :: !(Maybe Xgafv)
     , _smcUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,9 @@ data SpacesMessagesCreate = SpacesMessagesCreate'
     , _smcPayload        :: !Message
     , _smcCallback       :: !(Maybe Text)
     , _smcThreadKey      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpacesMessagesCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ spacesMessagesCreate
     -> Message -- ^ 'smcPayload'
     -> SpacesMessagesCreate
 spacesMessagesCreate pSmcParent_ pSmcPayload_ =
-    SpacesMessagesCreate'
+  SpacesMessagesCreate'
     { _smcParent = pSmcParent_
     , _smcXgafv = Nothing
     , _smcUploadProtocol = Nothing
@@ -109,6 +112,7 @@ spacesMessagesCreate pSmcParent_ pSmcPayload_ =
     , _smcCallback = Nothing
     , _smcThreadKey = Nothing
     }
+
 
 -- | Required. Space resource name, in the form \"spaces\/*\". Example:
 -- spaces\/AAAAMpdlehY

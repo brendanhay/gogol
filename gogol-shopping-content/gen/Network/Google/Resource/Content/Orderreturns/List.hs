@@ -33,12 +33,12 @@ module Network.Google.Resource.Content.Orderreturns.List
     , OrderreturnsList
 
     -- * Request Lenses
-    , ordrMerchantId
-    , ordrOrderBy
-    , ordrCreatedEndDate
-    , ordrCreatedStartDate
-    , ordrPageToken
-    , ordrMaxResults
+    , ooMerchantId
+    , ooOrderBy
+    , ooCreatedEndDate
+    , ooCreatedStartDate
+    , ooPageToken
+    , ooMaxResults
     ) where
 
 import           Network.Google.Prelude
@@ -62,83 +62,84 @@ type OrderreturnsListResource =
 -- | Lists order returns in your Merchant Center account.
 --
 -- /See:/ 'orderreturnsList' smart constructor.
-data OrderreturnsList = OrderreturnsList'
-    { _ordrMerchantId       :: !(Textual Word64)
-    , _ordrOrderBy          :: !(Maybe OrderreturnsListOrderBy)
-    , _ordrCreatedEndDate   :: !(Maybe Text)
-    , _ordrCreatedStartDate :: !(Maybe Text)
-    , _ordrPageToken        :: !(Maybe Text)
-    , _ordrMaxResults       :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data OrderreturnsList =
+  OrderreturnsList'
+    { _ooMerchantId       :: !(Textual Word64)
+    , _ooOrderBy          :: !(Maybe OrderreturnsListOrderBy)
+    , _ooCreatedEndDate   :: !(Maybe Text)
+    , _ooCreatedStartDate :: !(Maybe Text)
+    , _ooPageToken        :: !(Maybe Text)
+    , _ooMaxResults       :: !(Maybe (Textual Word32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderreturnsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ordrMerchantId'
+-- * 'ooMerchantId'
 --
--- * 'ordrOrderBy'
+-- * 'ooOrderBy'
 --
--- * 'ordrCreatedEndDate'
+-- * 'ooCreatedEndDate'
 --
--- * 'ordrCreatedStartDate'
+-- * 'ooCreatedStartDate'
 --
--- * 'ordrPageToken'
+-- * 'ooPageToken'
 --
--- * 'ordrMaxResults'
+-- * 'ooMaxResults'
 orderreturnsList
-    :: Word64 -- ^ 'ordrMerchantId'
+    :: Word64 -- ^ 'ooMerchantId'
     -> OrderreturnsList
-orderreturnsList pOrdrMerchantId_ =
-    OrderreturnsList'
-    { _ordrMerchantId = _Coerce # pOrdrMerchantId_
-    , _ordrOrderBy = Nothing
-    , _ordrCreatedEndDate = Nothing
-    , _ordrCreatedStartDate = Nothing
-    , _ordrPageToken = Nothing
-    , _ordrMaxResults = Nothing
+orderreturnsList pOoMerchantId_ =
+  OrderreturnsList'
+    { _ooMerchantId = _Coerce # pOoMerchantId_
+    , _ooOrderBy = Nothing
+    , _ooCreatedEndDate = Nothing
+    , _ooCreatedStartDate = Nothing
+    , _ooPageToken = Nothing
+    , _ooMaxResults = Nothing
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
-ordrMerchantId :: Lens' OrderreturnsList Word64
-ordrMerchantId
-  = lens _ordrMerchantId
-      (\ s a -> s{_ordrMerchantId = a})
+ooMerchantId :: Lens' OrderreturnsList Word64
+ooMerchantId
+  = lens _ooMerchantId (\ s a -> s{_ooMerchantId = a})
       . _Coerce
 
 -- | Return the results in the specified order.
-ordrOrderBy :: Lens' OrderreturnsList (Maybe OrderreturnsListOrderBy)
-ordrOrderBy
-  = lens _ordrOrderBy (\ s a -> s{_ordrOrderBy = a})
+ooOrderBy :: Lens' OrderreturnsList (Maybe OrderreturnsListOrderBy)
+ooOrderBy
+  = lens _ooOrderBy (\ s a -> s{_ooOrderBy = a})
 
 -- | Obtains order returns created before this date (inclusively), in ISO
 -- 8601 format.
-ordrCreatedEndDate :: Lens' OrderreturnsList (Maybe Text)
-ordrCreatedEndDate
-  = lens _ordrCreatedEndDate
-      (\ s a -> s{_ordrCreatedEndDate = a})
+ooCreatedEndDate :: Lens' OrderreturnsList (Maybe Text)
+ooCreatedEndDate
+  = lens _ooCreatedEndDate
+      (\ s a -> s{_ooCreatedEndDate = a})
 
 -- | Obtains order returns created after this date (inclusively), in ISO 8601
 -- format.
-ordrCreatedStartDate :: Lens' OrderreturnsList (Maybe Text)
-ordrCreatedStartDate
-  = lens _ordrCreatedStartDate
-      (\ s a -> s{_ordrCreatedStartDate = a})
+ooCreatedStartDate :: Lens' OrderreturnsList (Maybe Text)
+ooCreatedStartDate
+  = lens _ooCreatedStartDate
+      (\ s a -> s{_ooCreatedStartDate = a})
 
 -- | The token returned by the previous request.
-ordrPageToken :: Lens' OrderreturnsList (Maybe Text)
-ordrPageToken
-  = lens _ordrPageToken
-      (\ s a -> s{_ordrPageToken = a})
+ooPageToken :: Lens' OrderreturnsList (Maybe Text)
+ooPageToken
+  = lens _ooPageToken (\ s a -> s{_ooPageToken = a})
 
 -- | The maximum number of order returns to return in the response, used for
 -- paging. The default value is 25 returns per page, and the maximum
 -- allowed value is 250 returns per page.
-ordrMaxResults :: Lens' OrderreturnsList (Maybe Word32)
-ordrMaxResults
-  = lens _ordrMaxResults
-      (\ s a -> s{_ordrMaxResults = a})
+ooMaxResults :: Lens' OrderreturnsList (Maybe Word32)
+ooMaxResults
+  = lens _ooMaxResults (\ s a -> s{_ooMaxResults = a})
       . mapping _Coerce
 
 instance GoogleRequest OrderreturnsList where
@@ -146,10 +147,10 @@ instance GoogleRequest OrderreturnsList where
         type Scopes OrderreturnsList =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrderreturnsList'{..}
-          = go _ordrMerchantId _ordrOrderBy _ordrCreatedEndDate
-              _ordrCreatedStartDate
-              _ordrPageToken
-              _ordrMaxResults
+          = go _ooMerchantId _ooOrderBy _ooCreatedEndDate
+              _ooCreatedStartDate
+              _ooPageToken
+              _ooMaxResults
               (Just AltJSON)
               shoppingContentService
           where go

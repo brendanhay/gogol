@@ -46,14 +46,16 @@ type UserInfoV2MeGetResource =
 --
 -- /See:/ 'userInfoV2MeGet' smart constructor.
 data UserInfoV2MeGet =
-    UserInfoV2MeGet'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  UserInfoV2MeGet'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserInfoV2MeGet' with the minimum fields required to make a request.
 --
 userInfoV2MeGet
     :: UserInfoV2MeGet
 userInfoV2MeGet = UserInfoV2MeGet'
+
 
 instance GoogleRequest UserInfoV2MeGet where
         type Rs UserInfoV2MeGet = UserInfoplus

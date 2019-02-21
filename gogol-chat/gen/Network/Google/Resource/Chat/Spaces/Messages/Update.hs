@@ -63,7 +63,8 @@ type SpacesMessagesUpdateResource =
 -- | Updates a message.
 --
 -- /See:/ 'spacesMessagesUpdate' smart constructor.
-data SpacesMessagesUpdate = SpacesMessagesUpdate'
+data SpacesMessagesUpdate =
+  SpacesMessagesUpdate'
     { _smuXgafv          :: !(Maybe Xgafv)
     , _smuUploadProtocol :: !(Maybe Text)
     , _smuUpdateMask     :: !(Maybe GFieldMask)
@@ -72,7 +73,9 @@ data SpacesMessagesUpdate = SpacesMessagesUpdate'
     , _smuPayload        :: !Message
     , _smuName           :: !Text
     , _smuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpacesMessagesUpdate' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ spacesMessagesUpdate
     -> Text -- ^ 'smuName'
     -> SpacesMessagesUpdate
 spacesMessagesUpdate pSmuPayload_ pSmuName_ =
-    SpacesMessagesUpdate'
+  SpacesMessagesUpdate'
     { _smuXgafv = Nothing
     , _smuUploadProtocol = Nothing
     , _smuUpdateMask = Nothing
@@ -108,6 +111,7 @@ spacesMessagesUpdate pSmuPayload_ pSmuName_ =
     , _smuName = pSmuName_
     , _smuCallback = Nothing
     }
+
 
 -- | V1 error format.
 smuXgafv :: Lens' SpacesMessagesUpdate (Maybe Xgafv)

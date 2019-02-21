@@ -67,7 +67,8 @@ type ExclusionsCreateResource =
 -- exclusions in a resource.
 --
 -- /See:/ 'exclusionsCreate' smart constructor.
-data ExclusionsCreate = ExclusionsCreate'
+data ExclusionsCreate =
+  ExclusionsCreate'
     { _ecParent         :: !Text
     , _ecXgafv          :: !(Maybe Xgafv)
     , _ecUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ExclusionsCreate = ExclusionsCreate'
     , _ecUploadType     :: !(Maybe Text)
     , _ecPayload        :: !LogExclusion
     , _ecCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExclusionsCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ exclusionsCreate
     -> LogExclusion -- ^ 'ecPayload'
     -> ExclusionsCreate
 exclusionsCreate pEcParent_ pEcPayload_ =
-    ExclusionsCreate'
+  ExclusionsCreate'
     { _ecParent = pEcParent_
     , _ecXgafv = Nothing
     , _ecUploadProtocol = Nothing
@@ -108,6 +111,7 @@ exclusionsCreate pEcParent_ pEcPayload_ =
     , _ecPayload = pEcPayload_
     , _ecCallback = Nothing
     }
+
 
 -- | Required. The parent resource in which to create the exclusion:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

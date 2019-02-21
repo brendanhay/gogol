@@ -64,14 +64,17 @@ type ProjectsStoredInfoTypesDeleteResource =
 -- learn more.
 --
 -- /See:/ 'projectsStoredInfoTypesDelete' smart constructor.
-data ProjectsStoredInfoTypesDelete = ProjectsStoredInfoTypesDelete'
+data ProjectsStoredInfoTypesDelete =
+  ProjectsStoredInfoTypesDelete'
     { _psitdXgafv          :: !(Maybe Xgafv)
     , _psitdUploadProtocol :: !(Maybe Text)
     , _psitdAccessToken    :: !(Maybe Text)
     , _psitdUploadType     :: !(Maybe Text)
     , _psitdName           :: !Text
     , _psitdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsStoredInfoTypesDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsStoredInfoTypesDelete
     :: Text -- ^ 'psitdName'
     -> ProjectsStoredInfoTypesDelete
 projectsStoredInfoTypesDelete pPsitdName_ =
-    ProjectsStoredInfoTypesDelete'
+  ProjectsStoredInfoTypesDelete'
     { _psitdXgafv = Nothing
     , _psitdUploadProtocol = Nothing
     , _psitdAccessToken = Nothing
@@ -100,6 +103,7 @@ projectsStoredInfoTypesDelete pPsitdName_ =
     , _psitdName = pPsitdName_
     , _psitdCallback = Nothing
     }
+
 
 -- | V1 error format.
 psitdXgafv :: Lens' ProjectsStoredInfoTypesDelete (Maybe Xgafv)

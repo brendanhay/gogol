@@ -73,7 +73,8 @@ type ProjectsLocationsInstancesListResource =
 -- available to the project are queried, and the results are aggregated.
 --
 -- /See:/ 'projectsLocationsInstancesList' smart constructor.
-data ProjectsLocationsInstancesList = ProjectsLocationsInstancesList'
+data ProjectsLocationsInstancesList =
+  ProjectsLocationsInstancesList'
     { _plilParent         :: !Text
     , _plilXgafv          :: !(Maybe Xgafv)
     , _plilUploadProtocol :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsLocationsInstancesList = ProjectsLocationsInstancesList'
     , _plilPageToken      :: !(Maybe Text)
     , _plilPageSize       :: !(Maybe (Textual Int32))
     , _plilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsInstancesList' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsLocationsInstancesList
     :: Text -- ^ 'plilParent'
     -> ProjectsLocationsInstancesList
 projectsLocationsInstancesList pPlilParent_ =
-    ProjectsLocationsInstancesList'
+  ProjectsLocationsInstancesList'
     { _plilParent = pPlilParent_
     , _plilXgafv = Nothing
     , _plilUploadProtocol = Nothing
@@ -117,6 +120,7 @@ projectsLocationsInstancesList pPlilParent_ =
     , _plilPageSize = Nothing
     , _plilCallback = Nothing
     }
+
 
 -- | Required. The resource name of the instance location using the form:
 -- \`projects\/{project_id}\/locations\/{location_id}\` where

@@ -70,12 +70,15 @@ type ManagedConfigurationsforUserUpdateResource =
 -- list of managed properties.
 --
 -- /See:/ 'managedConfigurationsforUserUpdate' smart constructor.
-data ManagedConfigurationsforUserUpdate = ManagedConfigurationsforUserUpdate'
+data ManagedConfigurationsforUserUpdate =
+  ManagedConfigurationsforUserUpdate'
     { _mcuuEnterpriseId                  :: !Text
     , _mcuuPayload                       :: !ManagedConfiguration
     , _mcuuUserId                        :: !Text
     , _mcuuManagedConfigurationForUserId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagedConfigurationsforUserUpdate' with the minimum fields required to make a request.
 --
@@ -95,12 +98,13 @@ managedConfigurationsforUserUpdate
     -> Text -- ^ 'mcuuManagedConfigurationForUserId'
     -> ManagedConfigurationsforUserUpdate
 managedConfigurationsforUserUpdate pMcuuEnterpriseId_ pMcuuPayload_ pMcuuUserId_ pMcuuManagedConfigurationForUserId_ =
-    ManagedConfigurationsforUserUpdate'
+  ManagedConfigurationsforUserUpdate'
     { _mcuuEnterpriseId = pMcuuEnterpriseId_
     , _mcuuPayload = pMcuuPayload_
     , _mcuuUserId = pMcuuUserId_
     , _mcuuManagedConfigurationForUserId = pMcuuManagedConfigurationForUserId_
     }
+
 
 -- | The ID of the enterprise.
 mcuuEnterpriseId :: Lens' ManagedConfigurationsforUserUpdate Text
@@ -126,7 +130,8 @@ mcuuManagedConfigurationForUserId
       (\ s a -> s{_mcuuManagedConfigurationForUserId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforUserUpdate where
+           ManagedConfigurationsforUserUpdate
+         where
         type Rs ManagedConfigurationsforUserUpdate =
              ManagedConfiguration
         type Scopes ManagedConfigurationsforUserUpdate =

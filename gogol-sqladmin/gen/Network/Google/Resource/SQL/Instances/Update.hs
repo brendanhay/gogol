@@ -61,11 +61,14 @@ type InstancesUpdateResource =
 -- retain. For partial updates, use patch.
 --
 -- /See:/ 'instancesUpdate' smart constructor.
-data InstancesUpdate = InstancesUpdate'
+data InstancesUpdate =
+  InstancesUpdate'
     { _iuProject  :: !Text
     , _iuPayload  :: !DatabaseInstance
     , _iuInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesUpdate' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ instancesUpdate
     -> Text -- ^ 'iuInstance'
     -> InstancesUpdate
 instancesUpdate pIuProject_ pIuPayload_ pIuInstance_ =
-    InstancesUpdate'
+  InstancesUpdate'
     { _iuProject = pIuProject_
     , _iuPayload = pIuPayload_
     , _iuInstance = pIuInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 iuProject :: Lens' InstancesUpdate Text

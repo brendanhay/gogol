@@ -56,11 +56,14 @@ type TasksPatchResource =
 -- | Updates the specified task. This method supports patch semantics.
 --
 -- /See:/ 'tasksPatch' smart constructor.
-data TasksPatch = TasksPatch'
+data TasksPatch =
+  TasksPatch'
     { _tpPayload  :: !Task
     , _tpTaskList :: !Text
     , _tpTask     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TasksPatch' with the minimum fields required to make a request.
 --
@@ -77,11 +80,9 @@ tasksPatch
     -> Text -- ^ 'tpTask'
     -> TasksPatch
 tasksPatch pTpPayload_ pTpTaskList_ pTpTask_ =
-    TasksPatch'
-    { _tpPayload = pTpPayload_
-    , _tpTaskList = pTpTaskList_
-    , _tpTask = pTpTask_
-    }
+  TasksPatch'
+    {_tpPayload = pTpPayload_, _tpTaskList = pTpTaskList_, _tpTask = pTpTask_}
+
 
 -- | Multipart request metadata.
 tpPayload :: Lens' TasksPatch Task

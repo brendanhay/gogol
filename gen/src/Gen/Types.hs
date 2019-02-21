@@ -346,7 +346,7 @@ initial s = Memo s mempty mempty res core mempty mempty mempty
         $ Map.elems (s ^. dSchemas)
     -- Types available in Network.Google.Prelude.
     core = Map.fromList
-        [ ("Body",      SLit requiredInfo RqBody)
+        [ ("GBody",      SLit requiredInfo RqBody)
         , ("Stream",    SLit requiredInfo RsBody)
         , ("JSONValue", SLit requiredInfo JSONValue)
         ]

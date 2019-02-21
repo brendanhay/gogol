@@ -61,14 +61,17 @@ type ContactGroupsCreateResource =
 -- | Create a new contact group owned by the authenticated user.
 --
 -- /See:/ 'contactGroupsCreate' smart constructor.
-data ContactGroupsCreate = ContactGroupsCreate'
+data ContactGroupsCreate =
+  ContactGroupsCreate'
     { _cgcXgafv          :: !(Maybe Xgafv)
     , _cgcUploadProtocol :: !(Maybe Text)
     , _cgcAccessToken    :: !(Maybe Text)
     , _cgcUploadType     :: !(Maybe Text)
     , _cgcPayload        :: !CreateContactGroupRequest
     , _cgcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactGroupsCreate' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ contactGroupsCreate
     :: CreateContactGroupRequest -- ^ 'cgcPayload'
     -> ContactGroupsCreate
 contactGroupsCreate pCgcPayload_ =
-    ContactGroupsCreate'
+  ContactGroupsCreate'
     { _cgcXgafv = Nothing
     , _cgcUploadProtocol = Nothing
     , _cgcAccessToken = Nothing
@@ -97,6 +100,7 @@ contactGroupsCreate pCgcPayload_ =
     , _cgcPayload = pCgcPayload_
     , _cgcCallback = Nothing
     }
+
 
 -- | V1 error format.
 cgcXgafv :: Lens' ContactGroupsCreate (Maybe Xgafv)

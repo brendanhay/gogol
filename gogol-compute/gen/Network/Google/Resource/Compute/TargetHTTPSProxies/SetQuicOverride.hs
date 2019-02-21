@@ -62,12 +62,15 @@ type TargetHTTPSProxiesSetQuicOverrideResource =
 -- | Sets the QUIC override policy for TargetHttpsProxy.
 --
 -- /See:/ 'targetHTTPSProxiesSetQuicOverride' smart constructor.
-data TargetHTTPSProxiesSetQuicOverride = TargetHTTPSProxiesSetQuicOverride'
+data TargetHTTPSProxiesSetQuicOverride =
+  TargetHTTPSProxiesSetQuicOverride'
     { _thpsqoRequestId        :: !(Maybe Text)
     , _thpsqoProject          :: !Text
     , _thpsqoPayload          :: !TargetHTTPSProxiesSetQuicOverrideRequest
     , _thpsqoTargetHTTPSProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetHTTPSProxiesSetQuicOverride' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ targetHTTPSProxiesSetQuicOverride
     -> Text -- ^ 'thpsqoTargetHTTPSProxy'
     -> TargetHTTPSProxiesSetQuicOverride
 targetHTTPSProxiesSetQuicOverride pThpsqoProject_ pThpsqoPayload_ pThpsqoTargetHTTPSProxy_ =
-    TargetHTTPSProxiesSetQuicOverride'
+  TargetHTTPSProxiesSetQuicOverride'
     { _thpsqoRequestId = Nothing
     , _thpsqoProject = pThpsqoProject_
     , _thpsqoPayload = pThpsqoPayload_
     , _thpsqoTargetHTTPSProxy = pThpsqoTargetHTTPSProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -128,7 +132,8 @@ thpsqoTargetHTTPSProxy
       (\ s a -> s{_thpsqoTargetHTTPSProxy = a})
 
 instance GoogleRequest
-         TargetHTTPSProxiesSetQuicOverride where
+           TargetHTTPSProxiesSetQuicOverride
+         where
         type Rs TargetHTTPSProxiesSetQuicOverride = Operation
         type Scopes TargetHTTPSProxiesSetQuicOverride =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -63,13 +63,16 @@ type RegionDisksInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'regionDisksInsert' smart constructor.
-data RegionDisksInsert = RegionDisksInsert'
+data RegionDisksInsert =
+  RegionDisksInsert'
     { _rdiRequestId   :: !(Maybe Text)
     , _rdiSourceImage :: !(Maybe Text)
     , _rdiProject     :: !Text
     , _rdiPayload     :: !Disk
     , _rdiRegion      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionDisksInsert' with the minimum fields required to make a request.
 --
@@ -90,13 +93,14 @@ regionDisksInsert
     -> Text -- ^ 'rdiRegion'
     -> RegionDisksInsert
 regionDisksInsert pRdiProject_ pRdiPayload_ pRdiRegion_ =
-    RegionDisksInsert'
+  RegionDisksInsert'
     { _rdiRequestId = Nothing
     , _rdiSourceImage = Nothing
     , _rdiProject = pRdiProject_
     , _rdiPayload = pRdiPayload_
     , _rdiRegion = pRdiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

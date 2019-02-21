@@ -63,7 +63,8 @@ type ProjectsDatabasesDocumentsDeleteResource =
 -- | Deletes a document.
 --
 -- /See:/ 'projectsDatabasesDocumentsDelete' smart constructor.
-data ProjectsDatabasesDocumentsDelete = ProjectsDatabasesDocumentsDelete'
+data ProjectsDatabasesDocumentsDelete =
+  ProjectsDatabasesDocumentsDelete'
     { _pdddXgafv                     :: !(Maybe Xgafv)
     , _pdddUploadProtocol            :: !(Maybe Text)
     , _pdddCurrentDocumentExists     :: !(Maybe Bool)
@@ -72,7 +73,9 @@ data ProjectsDatabasesDocumentsDelete = ProjectsDatabasesDocumentsDelete'
     , _pdddCurrentDocumentUpdateTime :: !(Maybe DateTime')
     , _pdddName                      :: !Text
     , _pdddCallback                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsDelete' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsDatabasesDocumentsDelete
     :: Text -- ^ 'pdddName'
     -> ProjectsDatabasesDocumentsDelete
 projectsDatabasesDocumentsDelete pPdddName_ =
-    ProjectsDatabasesDocumentsDelete'
+  ProjectsDatabasesDocumentsDelete'
     { _pdddXgafv = Nothing
     , _pdddUploadProtocol = Nothing
     , _pdddCurrentDocumentExists = Nothing
@@ -107,6 +110,7 @@ projectsDatabasesDocumentsDelete pPdddName_ =
     , _pdddName = pPdddName_
     , _pdddCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdddXgafv :: Lens' ProjectsDatabasesDocumentsDelete (Maybe Xgafv)
@@ -157,7 +161,8 @@ pdddCallback
   = lens _pdddCallback (\ s a -> s{_pdddCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsDelete where
+           ProjectsDatabasesDocumentsDelete
+         where
         type Rs ProjectsDatabasesDocumentsDelete = Empty
         type Scopes ProjectsDatabasesDocumentsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

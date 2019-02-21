@@ -1,5 +1,5 @@
 name:                  gogol-android-enterprise
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Play EMM SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -47,7 +47,6 @@ library
         , Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
         , Network.Google.Resource.AndroidEnterprise.Enterprises.GenerateSignupURL
         , Network.Google.Resource.AndroidEnterprise.Enterprises.Get
-        , Network.Google.Resource.AndroidEnterprise.Enterprises.GetAndroidDevicePolicyConfig
         , Network.Google.Resource.AndroidEnterprise.Enterprises.GetServiceAccount
         , Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
         , Network.Google.Resource.AndroidEnterprise.Enterprises.List
@@ -128,5 +127,5 @@ library
         , Network.Google.AndroidEnterprise.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

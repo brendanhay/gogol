@@ -60,13 +60,16 @@ type TurnBasedMatchesListResource =
 -- | Returns turn-based matches the player is or was involved in.
 --
 -- /See:/ 'turnBasedMatchesList' smart constructor.
-data TurnBasedMatchesList = TurnBasedMatchesList'
+data TurnBasedMatchesList =
+  TurnBasedMatchesList'
     { _tMaxCompletedMatches :: !(Maybe (Textual Int32))
     , _tIncludeMatchData    :: !(Maybe Bool)
     , _tLanguage            :: !(Maybe Text)
     , _tPageToken           :: !(Maybe Text)
     , _tMaxResults          :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchesList' with the minimum fields required to make a request.
 --
@@ -84,13 +87,14 @@ data TurnBasedMatchesList = TurnBasedMatchesList'
 turnBasedMatchesList
     :: TurnBasedMatchesList
 turnBasedMatchesList =
-    TurnBasedMatchesList'
+  TurnBasedMatchesList'
     { _tMaxCompletedMatches = Nothing
     , _tIncludeMatchData = Nothing
     , _tLanguage = Nothing
     , _tPageToken = Nothing
     , _tMaxResults = Nothing
     }
+
 
 -- | The maximum number of completed or canceled matches to return in the
 -- response. If not set, all matches returned could be completed or
@@ -132,7 +136,8 @@ tMaxResults
 instance GoogleRequest TurnBasedMatchesList where
         type Rs TurnBasedMatchesList = TurnBasedMatchList
         type Scopes TurnBasedMatchesList =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesList'{..}
           = go _tMaxCompletedMatches _tIncludeMatchData
               _tLanguage

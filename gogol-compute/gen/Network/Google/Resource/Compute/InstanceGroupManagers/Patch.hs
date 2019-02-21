@@ -74,13 +74,16 @@ type InstanceGroupManagersPatchResource =
 -- rules.
 --
 -- /See:/ 'instanceGroupManagersPatch' smart constructor.
-data InstanceGroupManagersPatch = InstanceGroupManagersPatch'
+data InstanceGroupManagersPatch =
+  InstanceGroupManagersPatch'
     { _igmpRequestId            :: !(Maybe Text)
     , _igmpProject              :: !Text
     , _igmpInstanceGroupManager :: !Text
     , _igmpZone                 :: !Text
     , _igmpPayload              :: !InstanceGroupManager
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupManagersPatch' with the minimum fields required to make a request.
 --
@@ -102,13 +105,14 @@ instanceGroupManagersPatch
     -> InstanceGroupManager -- ^ 'igmpPayload'
     -> InstanceGroupManagersPatch
 instanceGroupManagersPatch pIgmpProject_ pIgmpInstanceGroupManager_ pIgmpZone_ pIgmpPayload_ =
-    InstanceGroupManagersPatch'
+  InstanceGroupManagersPatch'
     { _igmpRequestId = Nothing
     , _igmpProject = pIgmpProject_
     , _igmpInstanceGroupManager = pIgmpInstanceGroupManager_
     , _igmpZone = pIgmpZone_
     , _igmpPayload = pIgmpPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

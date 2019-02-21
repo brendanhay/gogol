@@ -66,7 +66,8 @@ type ProjectsInstancesAppProFilesCreateResource =
 -- | Creates an app profile within an instance.
 --
 -- /See:/ 'projectsInstancesAppProFilesCreate' smart constructor.
-data ProjectsInstancesAppProFilesCreate = ProjectsInstancesAppProFilesCreate'
+data ProjectsInstancesAppProFilesCreate =
+  ProjectsInstancesAppProFilesCreate'
     { _piapfcParent         :: !Text
     , _piapfcXgafv          :: !(Maybe Xgafv)
     , _piapfcAppProFileId   :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsInstancesAppProFilesCreate = ProjectsInstancesAppProFilesCreate'
     , _piapfcPayload        :: !AppProFile
     , _piapfcIgnoreWarnings :: !(Maybe Bool)
     , _piapfcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesAppProFilesCreate' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsInstancesAppProFilesCreate
     -> AppProFile -- ^ 'piapfcPayload'
     -> ProjectsInstancesAppProFilesCreate
 projectsInstancesAppProFilesCreate pPiapfcParent_ pPiapfcPayload_ =
-    ProjectsInstancesAppProFilesCreate'
+  ProjectsInstancesAppProFilesCreate'
     { _piapfcParent = pPiapfcParent_
     , _piapfcXgafv = Nothing
     , _piapfcAppProFileId = Nothing
@@ -115,6 +118,7 @@ projectsInstancesAppProFilesCreate pPiapfcParent_ pPiapfcPayload_ =
     , _piapfcIgnoreWarnings = Nothing
     , _piapfcCallback = Nothing
     }
+
 
 -- | The unique name of the instance in which to create the new app profile.
 -- Values are of the form \`projects\/\/instances\/\`.
@@ -172,7 +176,8 @@ piapfcCallback
       (\ s a -> s{_piapfcCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesAppProFilesCreate where
+           ProjectsInstancesAppProFilesCreate
+         where
         type Rs ProjectsInstancesAppProFilesCreate =
              AppProFile
         type Scopes ProjectsInstancesAppProFilesCreate =

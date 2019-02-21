@@ -156,6 +156,7 @@ module Network.Google.WebSecurityScanner.Types
     -- * ScanConfig
     , ScanConfig
     , scanConfig
+    , scLatestRun
     , scSchedule
     , scTargetPlatforms
     , scStartingURLs
@@ -214,4 +215,4 @@ webSecurityScannerService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

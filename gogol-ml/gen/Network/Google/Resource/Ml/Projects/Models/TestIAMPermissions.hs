@@ -74,7 +74,8 @@ type ProjectsModelsTestIAMPermissionsResource =
 -- warning.
 --
 -- /See:/ 'projectsModelsTestIAMPermissions' smart constructor.
-data ProjectsModelsTestIAMPermissions = ProjectsModelsTestIAMPermissions'
+data ProjectsModelsTestIAMPermissions =
+  ProjectsModelsTestIAMPermissions'
     { _pmtipXgafv          :: !(Maybe Xgafv)
     , _pmtipUploadProtocol :: !(Maybe Text)
     , _pmtipAccessToken    :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsModelsTestIAMPermissions = ProjectsModelsTestIAMPermissions'
     , _pmtipPayload        :: !GoogleIAMV1__TestIAMPermissionsRequest
     , _pmtipResource       :: !Text
     , _pmtipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsModelsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ projectsModelsTestIAMPermissions
     -> Text -- ^ 'pmtipResource'
     -> ProjectsModelsTestIAMPermissions
 projectsModelsTestIAMPermissions pPmtipPayload_ pPmtipResource_ =
-    ProjectsModelsTestIAMPermissions'
+  ProjectsModelsTestIAMPermissions'
     { _pmtipXgafv = Nothing
     , _pmtipUploadProtocol = Nothing
     , _pmtipAccessToken = Nothing
@@ -115,6 +118,7 @@ projectsModelsTestIAMPermissions pPmtipPayload_ pPmtipResource_ =
     , _pmtipResource = pPmtipResource_
     , _pmtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmtipXgafv :: Lens' ProjectsModelsTestIAMPermissions (Maybe Xgafv)
@@ -159,7 +163,8 @@ pmtipCallback
       (\ s a -> s{_pmtipCallback = a})
 
 instance GoogleRequest
-         ProjectsModelsTestIAMPermissions where
+           ProjectsModelsTestIAMPermissions
+         where
         type Rs ProjectsModelsTestIAMPermissions =
              GoogleIAMV1__TestIAMPermissionsResponse
         type Scopes ProjectsModelsTestIAMPermissions =

@@ -56,10 +56,13 @@ type MarketplaceDealsUpdateResource =
 -- | Replaces all the deals in the proposal with the passed in deals
 --
 -- /See:/ 'marketplaceDealsUpdate' smart constructor.
-data MarketplaceDealsUpdate = MarketplaceDealsUpdate'
+data MarketplaceDealsUpdate =
+  MarketplaceDealsUpdate'
     { _mduPayload    :: !EditAllOrderDealsRequest
     , _mduProposalId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MarketplaceDealsUpdate' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ marketplaceDealsUpdate
     -> Text -- ^ 'mduProposalId'
     -> MarketplaceDealsUpdate
 marketplaceDealsUpdate pMduPayload_ pMduProposalId_ =
-    MarketplaceDealsUpdate'
-    { _mduPayload = pMduPayload_
-    , _mduProposalId = pMduProposalId_
-    }
+  MarketplaceDealsUpdate'
+    {_mduPayload = pMduPayload_, _mduProposalId = pMduProposalId_}
+
 
 -- | Multipart request metadata.
 mduPayload :: Lens' MarketplaceDealsUpdate EditAllOrderDealsRequest

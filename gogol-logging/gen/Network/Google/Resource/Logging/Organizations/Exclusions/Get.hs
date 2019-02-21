@@ -59,14 +59,17 @@ type OrganizationsExclusionsGetResource =
 -- | Gets the description of an exclusion.
 --
 -- /See:/ 'organizationsExclusionsGet' smart constructor.
-data OrganizationsExclusionsGet = OrganizationsExclusionsGet'
+data OrganizationsExclusionsGet =
+  OrganizationsExclusionsGet'
     { _oegXgafv          :: !(Maybe Xgafv)
     , _oegUploadProtocol :: !(Maybe Text)
     , _oegAccessToken    :: !(Maybe Text)
     , _oegUploadType     :: !(Maybe Text)
     , _oegName           :: !Text
     , _oegCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsExclusionsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ organizationsExclusionsGet
     :: Text -- ^ 'oegName'
     -> OrganizationsExclusionsGet
 organizationsExclusionsGet pOegName_ =
-    OrganizationsExclusionsGet'
+  OrganizationsExclusionsGet'
     { _oegXgafv = Nothing
     , _oegUploadProtocol = Nothing
     , _oegAccessToken = Nothing
@@ -95,6 +98,7 @@ organizationsExclusionsGet pOegName_ =
     , _oegName = pOegName_
     , _oegCallback = Nothing
     }
+
 
 -- | V1 error format.
 oegXgafv :: Lens' OrganizationsExclusionsGet (Maybe Xgafv)

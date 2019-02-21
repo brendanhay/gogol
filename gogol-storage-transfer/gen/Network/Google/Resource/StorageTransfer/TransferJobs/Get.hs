@@ -61,7 +61,8 @@ type TransferJobsGetResource =
 -- | Gets a transfer job.
 --
 -- /See:/ 'transferJobsGet' smart constructor.
-data TransferJobsGet = TransferJobsGet'
+data TransferJobsGet =
+  TransferJobsGet'
     { _tjgXgafv          :: !(Maybe Xgafv)
     , _tjgUploadProtocol :: !(Maybe Text)
     , _tjgAccessToken    :: !(Maybe Text)
@@ -69,7 +70,9 @@ data TransferJobsGet = TransferJobsGet'
     , _tjgUploadType     :: !(Maybe Text)
     , _tjgProjectId      :: !(Maybe Text)
     , _tjgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferJobsGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ transferJobsGet
     :: Text -- ^ 'tjgJobName'
     -> TransferJobsGet
 transferJobsGet pTjgJobName_ =
-    TransferJobsGet'
+  TransferJobsGet'
     { _tjgXgafv = Nothing
     , _tjgUploadProtocol = Nothing
     , _tjgAccessToken = Nothing
@@ -101,6 +104,7 @@ transferJobsGet pTjgJobName_ =
     , _tjgProjectId = Nothing
     , _tjgCallback = Nothing
     }
+
 
 -- | V1 error format.
 tjgXgafv :: Lens' TransferJobsGet (Maybe Xgafv)

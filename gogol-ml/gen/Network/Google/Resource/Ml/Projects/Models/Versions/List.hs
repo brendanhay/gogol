@@ -75,7 +75,8 @@ type ProjectsModelsVersionsListResource =
 -- request parameters, the list request returns an empty response body: {}.
 --
 -- /See:/ 'projectsModelsVersionsList' smart constructor.
-data ProjectsModelsVersionsList = ProjectsModelsVersionsList'
+data ProjectsModelsVersionsList =
+  ProjectsModelsVersionsList'
     { _pmvlParent         :: !Text
     , _pmvlXgafv          :: !(Maybe Xgafv)
     , _pmvlUploadProtocol :: !(Maybe Text)
@@ -85,7 +86,9 @@ data ProjectsModelsVersionsList = ProjectsModelsVersionsList'
     , _pmvlPageToken      :: !(Maybe Text)
     , _pmvlPageSize       :: !(Maybe (Textual Int32))
     , _pmvlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsModelsVersionsList' with the minimum fields required to make a request.
 --
@@ -112,7 +115,7 @@ projectsModelsVersionsList
     :: Text -- ^ 'pmvlParent'
     -> ProjectsModelsVersionsList
 projectsModelsVersionsList pPmvlParent_ =
-    ProjectsModelsVersionsList'
+  ProjectsModelsVersionsList'
     { _pmvlParent = pPmvlParent_
     , _pmvlXgafv = Nothing
     , _pmvlUploadProtocol = Nothing
@@ -123,6 +126,7 @@ projectsModelsVersionsList pPmvlParent_ =
     , _pmvlPageSize = Nothing
     , _pmvlCallback = Nothing
     }
+
 
 -- | Required. The name of the model for which to list the version.
 pmvlParent :: Lens' ProjectsModelsVersionsList Text

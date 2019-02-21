@@ -58,11 +58,14 @@ type URLChannelsListResource =
 -- account.
 --
 -- /See:/ 'urlChannelsList' smart constructor.
-data URLChannelsList = URLChannelsList'
+data URLChannelsList =
+  URLChannelsList'
     { _uclAdClientId :: !Text
     , _uclPageToken  :: !(Maybe Text)
     , _uclMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLChannelsList' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ urlChannelsList
     :: Text -- ^ 'uclAdClientId'
     -> URLChannelsList
 urlChannelsList pUclAdClientId_ =
-    URLChannelsList'
+  URLChannelsList'
     { _uclAdClientId = pUclAdClientId_
     , _uclPageToken = Nothing
     , _uclMaxResults = Nothing
     }
+
 
 -- | Ad client for which to list URL channels.
 uclAdClientId :: Lens' URLChannelsList Text

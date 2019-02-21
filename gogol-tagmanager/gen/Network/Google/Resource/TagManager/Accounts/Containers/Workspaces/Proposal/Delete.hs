@@ -51,9 +51,12 @@ type AccountsContainersWorkspacesProposalDeleteResource
 -- | Deletes a GTM Workspace Proposal.
 --
 -- /See:/ 'accountsContainersWorkspacesProposalDelete' smart constructor.
-newtype AccountsContainersWorkspacesProposalDelete = AccountsContainersWorkspacesProposalDelete'
+newtype AccountsContainersWorkspacesProposalDelete =
+  AccountsContainersWorkspacesProposalDelete'
     { _acwpdPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesProposalDelete' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ accountsContainersWorkspacesProposalDelete
     :: Text -- ^ 'acwpdPath'
     -> AccountsContainersWorkspacesProposalDelete
 accountsContainersWorkspacesProposalDelete pAcwpdPath_ =
-    AccountsContainersWorkspacesProposalDelete'
-    { _acwpdPath = pAcwpdPath_
-    }
+  AccountsContainersWorkspacesProposalDelete' {_acwpdPath = pAcwpdPath_}
+
 
 -- | GTM workspace proposal\'s relative path: Example:
 -- accounts\/{aid}\/containers\/{cid}\/workspace\/{wid}\/workspace_proposal
@@ -75,7 +77,8 @@ acwpdPath
   = lens _acwpdPath (\ s a -> s{_acwpdPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesProposalDelete where
+           AccountsContainersWorkspacesProposalDelete
+         where
         type Rs AccountsContainersWorkspacesProposalDelete =
              ()
         type Scopes

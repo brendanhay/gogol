@@ -72,7 +72,8 @@ type SpreadsheetsValuesGetResource =
 -- the spreadsheet ID and a range.
 --
 -- /See:/ 'spreadsheetsValuesGet' smart constructor.
-data SpreadsheetsValuesGet = SpreadsheetsValuesGet'
+data SpreadsheetsValuesGet =
+  SpreadsheetsValuesGet'
     { _svgXgafv                :: !(Maybe Xgafv)
     , _svgValueRenderOption    :: !(Maybe Text)
     , _svgUploadProtocol       :: !(Maybe Text)
@@ -83,7 +84,9 @@ data SpreadsheetsValuesGet = SpreadsheetsValuesGet'
     , _svgDateTimeRenderOption :: !(Maybe Text)
     , _svgMajorDimension       :: !(Maybe Text)
     , _svgCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpreadsheetsValuesGet' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ spreadsheetsValuesGet
     -> Text -- ^ 'svgRange'
     -> SpreadsheetsValuesGet
 spreadsheetsValuesGet pSvgSpreadsheetId_ pSvgRange_ =
-    SpreadsheetsValuesGet'
+  SpreadsheetsValuesGet'
     { _svgXgafv = Nothing
     , _svgValueRenderOption = Nothing
     , _svgUploadProtocol = Nothing
@@ -125,6 +128,7 @@ spreadsheetsValuesGet pSvgSpreadsheetId_ pSvgRange_ =
     , _svgMajorDimension = Nothing
     , _svgCallback = Nothing
     }
+
 
 -- | V1 error format.
 svgXgafv :: Lens' SpreadsheetsValuesGet (Maybe Xgafv)

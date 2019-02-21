@@ -30,6 +30,12 @@ module Network.Google.CloudAsset
 
     -- * Resources
 
+    -- ** cloudasset.folders.exportAssets
+    , module Network.Google.Resource.CloudAsset.Folders.ExportAssets
+
+    -- ** cloudasset.folders.operations.get
+    , module Network.Google.Resource.CloudAsset.Folders.Operations.Get
+
     -- ** cloudasset.organizations.batchGetAssetsHistory
     , module Network.Google.Resource.CloudAsset.Organizations.BatchGetAssetsHistory
 
@@ -187,6 +193,8 @@ module Network.Google.CloudAsset
 
 import           Network.Google.CloudAsset.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.CloudAsset.Folders.ExportAssets
+import           Network.Google.Resource.CloudAsset.Folders.Operations.Get
 import           Network.Google.Resource.CloudAsset.Organizations.BatchGetAssetsHistory
 import           Network.Google.Resource.CloudAsset.Organizations.ExportAssets
 import           Network.Google.Resource.CloudAsset.Organizations.Operations.Get
@@ -200,8 +208,10 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Cloud Asset API service.
 type CloudAssetAPI =
-     OrganizationsOperationsGetResource :<|>
-       OrganizationsExportAssetsResource
+     FoldersOperationsGetResource :<|>
+       FoldersExportAssetsResource
+       :<|> OrganizationsOperationsGetResource
+       :<|> OrganizationsExportAssetsResource
        :<|> OrganizationsBatchGetAssetsHistoryResource
        :<|> ProjectsOperationsGetResource
        :<|> ProjectsExportAssetsResource

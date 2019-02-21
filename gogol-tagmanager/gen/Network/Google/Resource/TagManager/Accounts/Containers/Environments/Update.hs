@@ -55,11 +55,14 @@ type AccountsContainersEnvironmentsUpdateResource =
 -- | Updates a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsUpdate' smart constructor.
-data AccountsContainersEnvironmentsUpdate = AccountsContainersEnvironmentsUpdate'
+data AccountsContainersEnvironmentsUpdate =
+  AccountsContainersEnvironmentsUpdate'
     { _aceuPath        :: !Text
     , _aceuFingerprint :: !(Maybe Text)
     , _aceuPayload     :: !Environment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersEnvironmentsUpdate' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ accountsContainersEnvironmentsUpdate
     -> Environment -- ^ 'aceuPayload'
     -> AccountsContainersEnvironmentsUpdate
 accountsContainersEnvironmentsUpdate pAceuPath_ pAceuPayload_ =
-    AccountsContainersEnvironmentsUpdate'
+  AccountsContainersEnvironmentsUpdate'
     { _aceuPath = pAceuPath_
     , _aceuFingerprint = Nothing
     , _aceuPayload = pAceuPayload_
     }
+
 
 -- | GTM Environment\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/environments\/{environment_id}
@@ -99,7 +103,8 @@ aceuPayload
   = lens _aceuPayload (\ s a -> s{_aceuPayload = a})
 
 instance GoogleRequest
-         AccountsContainersEnvironmentsUpdate where
+           AccountsContainersEnvironmentsUpdate
+         where
         type Rs AccountsContainersEnvironmentsUpdate =
              Environment
         type Scopes AccountsContainersEnvironmentsUpdate =

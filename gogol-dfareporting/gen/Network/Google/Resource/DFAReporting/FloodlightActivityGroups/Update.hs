@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsUpdate' request conforms to.
 type FloodlightActivityGroupsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>
@@ -55,10 +55,13 @@ type FloodlightActivityGroupsUpdateResource =
 -- | Updates an existing floodlight activity group.
 --
 -- /See:/ 'floodlightActivityGroupsUpdate' smart constructor.
-data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate'
+data FloodlightActivityGroupsUpdate =
+  FloodlightActivityGroupsUpdate'
     { _faguProFileId :: !(Textual Int64)
     , _faguPayload   :: !FloodlightActivityGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FloodlightActivityGroupsUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ floodlightActivityGroupsUpdate
     -> FloodlightActivityGroup -- ^ 'faguPayload'
     -> FloodlightActivityGroupsUpdate
 floodlightActivityGroupsUpdate pFaguProFileId_ pFaguPayload_ =
-    FloodlightActivityGroupsUpdate'
-    { _faguProFileId = _Coerce # pFaguProFileId_
-    , _faguPayload = pFaguPayload_
-    }
+  FloodlightActivityGroupsUpdate'
+    {_faguProFileId = _Coerce # pFaguProFileId_, _faguPayload = pFaguPayload_}
+
 
 -- | User profile ID associated with this request.
 faguProFileId :: Lens' FloodlightActivityGroupsUpdate Int64

@@ -52,9 +52,12 @@ type SurveysDeleteResource =
 -- | Removes a survey from view in all user GET requests.
 --
 -- /See:/ 'surveysDelete' smart constructor.
-newtype SurveysDelete = SurveysDelete'
+newtype SurveysDelete =
+  SurveysDelete'
     { _sdSurveyURLId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveysDelete' with the minimum fields required to make a request.
 --
@@ -65,9 +68,8 @@ surveysDelete
     :: Text -- ^ 'sdSurveyURLId'
     -> SurveysDelete
 surveysDelete pSdSurveyURLId_ =
-    SurveysDelete'
-    { _sdSurveyURLId = pSdSurveyURLId_
-    }
+  SurveysDelete' {_sdSurveyURLId = pSdSurveyURLId_}
+
 
 -- | External URL ID for the survey.
 sdSurveyURLId :: Lens' SurveysDelete Text

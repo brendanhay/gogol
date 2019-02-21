@@ -84,7 +84,8 @@ type BlobsBatchReadResource =
 -- corresponding digest status.
 --
 -- /See:/ 'blobsBatchRead' smart constructor.
-data BlobsBatchRead = BlobsBatchRead'
+data BlobsBatchRead =
+  BlobsBatchRead'
     { _bbrXgafv          :: !(Maybe Xgafv)
     , _bbrUploadProtocol :: !(Maybe Text)
     , _bbrAccessToken    :: !(Maybe Text)
@@ -92,7 +93,9 @@ data BlobsBatchRead = BlobsBatchRead'
     , _bbrPayload        :: !BuildBazelRemoteExecutionV2BatchReadBlobsRequest
     , _bbrInstanceName   :: !Text
     , _bbrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BlobsBatchRead' with the minimum fields required to make a request.
 --
@@ -116,7 +119,7 @@ blobsBatchRead
     -> Text -- ^ 'bbrInstanceName'
     -> BlobsBatchRead
 blobsBatchRead pBbrPayload_ pBbrInstanceName_ =
-    BlobsBatchRead'
+  BlobsBatchRead'
     { _bbrXgafv = Nothing
     , _bbrUploadProtocol = Nothing
     , _bbrAccessToken = Nothing
@@ -125,6 +128,7 @@ blobsBatchRead pBbrPayload_ pBbrInstanceName_ =
     , _bbrInstanceName = pBbrInstanceName_
     , _bbrCallback = Nothing
     }
+
 
 -- | V1 error format.
 bbrXgafv :: Lens' BlobsBatchRead (Maybe Xgafv)
