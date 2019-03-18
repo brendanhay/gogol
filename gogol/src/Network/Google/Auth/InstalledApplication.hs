@@ -140,7 +140,7 @@ exchangeCode c n = refreshRequest $
 
 -- | Perform a refresh to obtain a valid 'OAuthToken' with a new expiry time.
 --
--- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#refresh Refreshing tokens>.
+-- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#offline Refreshing tokens>.
 refreshToken :: (MonadIO m, MonadCatch m)
              => OAuthClient
              -> (OAuthToken s)
@@ -148,7 +148,7 @@ refreshToken :: (MonadIO m, MonadCatch m)
              -> Manager
              -> m (OAuthToken s)
 refreshToken c t = refreshRequest $
-    accountsRequest
+    tokenRequest
         { Client.requestBody = textBody $
                "grant_type=refresh_token"
             <> "&client_id="     <> toQueryParam (_clientId     c)
