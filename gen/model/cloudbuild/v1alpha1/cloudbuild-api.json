@@ -137,7 +137,7 @@
               ]
             },
             "delete": {
-              "description": "Deletes a `WorkerPool` by its project ID and WorkerPool ID.\n\nThis API is experimental.",
+              "description": "Deletes a `WorkerPool` by its project ID and WorkerPool name.\n\nThis API is experimental.",
               "flatPath": "v1alpha1/projects/{projectsId}/workerPools/{workerPoolsId}",
               "httpMethod": "DELETE",
               "id": "cloudbuild.projects.workerPools.delete",
@@ -244,7 +244,7 @@
       }
     }
   },
-  "revision": "20190127",
+  "revision": "20190422",
   "rootUrl": "https://cloudbuild.googleapis.com/",
   "schemas": {
     "ArtifactObjects": {
@@ -805,6 +805,10 @@
           "description": "Path to the artifact manifest. Only populated when artifacts are uploaded.",
           "type": "string"
         },
+        "artifactTiming": {
+          "$ref": "TimeSpan",
+          "description": "Time to push all non-container artifacts."
+        },
         "buildStepImages": {
           "description": "List of build step digests, in the order corresponding to build step\nindices.",
           "items": {
@@ -986,7 +990,7 @@
           "type": "string"
         },
         "projectId": {
-          "description": "The project ID of the GCP project in which the `WorkerPool` is created.",
+          "description": "The project ID of the GCP project for which the `WorkerPool` is created.",
           "type": "string"
         },
         "regions": {
