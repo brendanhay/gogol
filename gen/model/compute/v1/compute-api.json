@@ -29,7 +29,7 @@
   "description": "Creates and runs virtual machines on Google Cloud Platform.",
   "discoveryVersion": "v1",
   "documentationLink": "https://developers.google.com/compute/docs/reference/latest/",
-  "etag": "\"J3WqvAcMk4eQjJXvfSI4Yr8VouA/Zbpqm1yQu7CIodqWDmXQxf8zt_k\"",
+  "etag": "\"VPK3KBfpaEgZ16pozGOoMYfKc0U/L7OHwc6Gh2BR8n3__eQkZu5iQsE\"",
   "icons": {
     "x16": "https://www.google.com/images/icons/product/compute_engine-16.png",
     "x32": "https://www.google.com/images/icons/product/compute_engine-32.png"
@@ -5868,7 +5868,7 @@
           ],
           "parameters": {
             "forceAttach": {
-              "description": "Whether to force attach the disk even if it's currently attached to another instance. This is only available for regional disks.",
+              "description": "Whether to force attach the disk even if it's currently attached to another instance.",
               "location": "query",
               "type": "boolean"
             },
@@ -6211,6 +6211,48 @@
             "https://www.googleapis.com/auth/compute.readonly"
           ]
         },
+        "getShieldedInstanceIdentity": {
+          "description": "Returns the Shielded Instance Identity of an instance",
+          "httpMethod": "GET",
+          "id": "compute.instances.getShieldedInstanceIdentity",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instance"
+          ],
+          "parameters": {
+            "instance": {
+              "description": "Name or id of the instance scoping this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/instances/{instance}/getShieldedInstanceIdentity",
+          "response": {
+            "$ref": "ShieldedInstanceIdentity"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
         "insert": {
           "description": "Creates an instance resource in the specified project using the data included in the request.",
           "httpMethod": "POST",
@@ -6380,7 +6422,7 @@
           ]
         },
         "reset": {
-          "description": "Performs a reset on the instance. This is a hard reset; the VM does not do a graceful shutdown. For more information, see Resetting an instance.",
+          "description": "Performs a reset on the instance. This is a hard reset the VM does not do a graceful shutdown. For more information, see Resetting an instance.",
           "httpMethod": "POST",
           "id": "compute.instances.reset",
           "parameterOrder": [
@@ -6925,6 +6967,55 @@
             "https://www.googleapis.com/auth/compute"
           ]
         },
+        "setShieldedInstanceIntegrityPolicy": {
+          "description": "Sets the Shielded Instance integrity policy for an instance. You can only use this method on a running instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.",
+          "httpMethod": "PATCH",
+          "id": "compute.instances.setShieldedInstanceIntegrityPolicy",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instance"
+          ],
+          "parameters": {
+            "instance": {
+              "description": "Name or id of the instance scoping this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.\n\nFor example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/instances/{instance}/setShieldedInstanceIntegrityPolicy",
+          "request": {
+            "$ref": "ShieldedInstanceIntegrityPolicy"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "setTags": {
           "description": "Sets network tags for the specified instance to the data included in the request.",
           "httpMethod": "POST",
@@ -7304,6 +7395,55 @@
           "path": "{project}/zones/{zone}/instances/{instance}/updateNetworkInterface",
           "request": {
             "$ref": "NetworkInterface"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "updateShieldedInstanceConfig": {
+          "description": "Updates the Shielded Instance config for an instance. You can only use this method on a stopped instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.",
+          "httpMethod": "PATCH",
+          "id": "compute.instances.updateShieldedInstanceConfig",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instance"
+          ],
+          "parameters": {
+            "instance": {
+              "description": "Name or id of the instance scoping this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.\n\nFor example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/instances/{instance}/updateShieldedInstanceConfig",
+          "request": {
+            "$ref": "ShieldedInstanceConfig"
           },
           "response": {
             "$ref": "Operation"
@@ -8409,6 +8549,444 @@
           "path": "{project}/zones/{zone}/machineTypes",
           "response": {
             "$ref": "MachineTypeList"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        }
+      }
+    },
+    "networkEndpointGroups": {
+      "methods": {
+        "aggregatedList": {
+          "description": "Retrieves the list of network endpoint groups and sorts them by zone.",
+          "httpMethod": "GET",
+          "id": "compute.networkEndpointGroups.aggregatedList",
+          "parameterOrder": [
+            "project"
+          ],
+          "parameters": {
+            "filter": {
+              "description": "A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, \u003e, or \u003c.\n\nFor example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.\n\nYou can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.\n\nTo filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true).",
+              "location": "query",
+              "type": "string"
+            },
+            "maxResults": {
+              "default": "500",
+              "description": "The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)",
+              "format": "uint32",
+              "location": "query",
+              "minimum": "0",
+              "type": "integer"
+            },
+            "orderBy": {
+              "description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation timestamp using orderBy=\"creationTimestamp desc\". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by name or creationTimestamp desc is supported.",
+              "location": "query",
+              "type": "string"
+            },
+            "pageToken": {
+              "description": "Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.",
+              "location": "query",
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/aggregated/networkEndpointGroups",
+          "response": {
+            "$ref": "NetworkEndpointGroupAggregatedList"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
+        "attachNetworkEndpoints": {
+          "description": "Attach a list of network endpoints to the specified network endpoint group.",
+          "httpMethod": "POST",
+          "id": "compute.networkEndpointGroups.attachNetworkEndpoints",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "networkEndpointGroup"
+          ],
+          "parameters": {
+            "networkEndpointGroup": {
+              "description": "The name of the network endpoint group where you are attaching network endpoints to. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.\n\nFor example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the network endpoint group is located. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}/attachNetworkEndpoints",
+          "request": {
+            "$ref": "NetworkEndpointGroupsAttachEndpointsRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "delete": {
+          "description": "Deletes the specified network endpoint group. The network endpoints in the NEG and the VM instances they belong to are not terminated when the NEG is deleted. Note that the NEG cannot be deleted if there are backend services referencing it.",
+          "httpMethod": "DELETE",
+          "id": "compute.networkEndpointGroups.delete",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "networkEndpointGroup"
+          ],
+          "parameters": {
+            "networkEndpointGroup": {
+              "description": "The name of the network endpoint group to delete. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.\n\nFor example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the network endpoint group is located. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}",
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "detachNetworkEndpoints": {
+          "description": "Detach a list of network endpoints from the specified network endpoint group.",
+          "httpMethod": "POST",
+          "id": "compute.networkEndpointGroups.detachNetworkEndpoints",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "networkEndpointGroup"
+          ],
+          "parameters": {
+            "networkEndpointGroup": {
+              "description": "The name of the network endpoint group where you are removing network endpoints. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.\n\nFor example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the network endpoint group is located. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}/detachNetworkEndpoints",
+          "request": {
+            "$ref": "NetworkEndpointGroupsDetachEndpointsRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "get": {
+          "description": "Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.",
+          "httpMethod": "GET",
+          "id": "compute.networkEndpointGroups.get",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "networkEndpointGroup"
+          ],
+          "parameters": {
+            "networkEndpointGroup": {
+              "description": "The name of the network endpoint group. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the network endpoint group is located. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}",
+          "response": {
+            "$ref": "NetworkEndpointGroup"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
+        "insert": {
+          "description": "Creates a network endpoint group in the specified project using the parameters that are included in the request.",
+          "httpMethod": "POST",
+          "id": "compute.networkEndpointGroups.insert",
+          "parameterOrder": [
+            "project",
+            "zone"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.\n\nFor example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where you want to create the network endpoint group. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/networkEndpointGroups",
+          "request": {
+            "$ref": "NetworkEndpointGroup"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "list": {
+          "description": "Retrieves the list of network endpoint groups that are located in the specified project and zone.",
+          "httpMethod": "GET",
+          "id": "compute.networkEndpointGroups.list",
+          "parameterOrder": [
+            "project",
+            "zone"
+          ],
+          "parameters": {
+            "filter": {
+              "description": "A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, \u003e, or \u003c.\n\nFor example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.\n\nYou can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.\n\nTo filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true).",
+              "location": "query",
+              "type": "string"
+            },
+            "maxResults": {
+              "default": "500",
+              "description": "The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)",
+              "format": "uint32",
+              "location": "query",
+              "minimum": "0",
+              "type": "integer"
+            },
+            "orderBy": {
+              "description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation timestamp using orderBy=\"creationTimestamp desc\". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by name or creationTimestamp desc is supported.",
+              "location": "query",
+              "type": "string"
+            },
+            "pageToken": {
+              "description": "Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.",
+              "location": "query",
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the network endpoint group is located. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/networkEndpointGroups",
+          "response": {
+            "$ref": "NetworkEndpointGroupList"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
+        "listNetworkEndpoints": {
+          "description": "Lists the network endpoints in the specified network endpoint group.",
+          "httpMethod": "POST",
+          "id": "compute.networkEndpointGroups.listNetworkEndpoints",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "networkEndpointGroup"
+          ],
+          "parameters": {
+            "filter": {
+              "description": "A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, \u003e, or \u003c.\n\nFor example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.\n\nYou can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.\n\nTo filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true).",
+              "location": "query",
+              "type": "string"
+            },
+            "maxResults": {
+              "default": "500",
+              "description": "The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)",
+              "format": "uint32",
+              "location": "query",
+              "minimum": "0",
+              "type": "integer"
+            },
+            "networkEndpointGroup": {
+              "description": "The name of the network endpoint group from which you want to generate a list of included network endpoints. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "orderBy": {
+              "description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation timestamp using orderBy=\"creationTimestamp desc\". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by name or creationTimestamp desc is supported.",
+              "location": "query",
+              "type": "string"
+            },
+            "pageToken": {
+              "description": "Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.",
+              "location": "query",
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the network endpoint group is located. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}/listNetworkEndpoints",
+          "request": {
+            "$ref": "NetworkEndpointGroupsListEndpointsRequest"
+          },
+          "response": {
+            "$ref": "NetworkEndpointGroupsListNetworkEndpoints"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
+        "testIamPermissions": {
+          "description": "Returns permissions that a caller has on the specified resource.",
+          "httpMethod": "POST",
+          "id": "compute.networkEndpointGroups.testIamPermissions",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "resource"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "resource": {
+              "description": "Name or id of the resource for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+              "required": true,
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "{project}/zones/{zone}/networkEndpointGroups/{resource}/testIamPermissions",
+          "request": {
+            "$ref": "TestPermissionsRequest"
+          },
+          "response": {
+            "$ref": "TestPermissionsResponse"
           },
           "scopes": [
             "https://www.googleapis.com/auth/cloud-platform",
@@ -17736,7 +18314,7 @@
       }
     }
   },
-  "revision": "20190107",
+  "revision": "20190403",
   "rootUrl": "https://www.googleapis.com/",
   "schemas": {
     "AcceleratorConfig": {
@@ -18261,9 +18839,11 @@
           "enum": [
             "DNS_RESOLVER",
             "GCE_ENDPOINT",
+            "NAT_AUTO",
             "VPC_PEERING"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             ""
@@ -19420,6 +20000,11 @@
           "format": "int32",
           "type": "integer"
         },
+        "maxConnectionsPerEndpoint": {
+          "description": "The max number of simultaneous connections that a single backend network endpoint can handle. This is used to calculate the capacity of the group. Can be used in either CONNECTION or UTILIZATION balancing modes. For CONNECTION mode, either maxConnections or maxConnectionsPerEndpoint must be set.\n\nThis cannot be used for internal load balancing.",
+          "format": "int32",
+          "type": "integer"
+        },
         "maxConnectionsPerInstance": {
           "description": "The max number of simultaneous connections that a single backend instance can handle. This is used to calculate the capacity of the group. Can be used in either CONNECTION or UTILIZATION balancing modes. For CONNECTION mode, either maxConnections or maxConnectionsPerInstance must be set.\n\nThis cannot be used for internal load balancing.",
           "format": "int32",
@@ -19429,6 +20014,11 @@
           "description": "The max requests per second (RPS) of the group. Can be used with either RATE or UTILIZATION balancing modes, but required if RATE mode. For RATE mode, either maxRate or maxRatePerInstance must be set.\n\nThis cannot be used for internal load balancing.",
           "format": "int32",
           "type": "integer"
+        },
+        "maxRatePerEndpoint": {
+          "description": "The max requests per second (RPS) that a single backend network endpoint can handle. This is used to calculate the capacity of the group. Can be used in either balancing mode. For RATE mode, either maxRate or maxRatePerEndpoint must be set.\n\nThis cannot be used for internal load balancing.",
+          "format": "float",
+          "type": "number"
         },
         "maxRatePerInstance": {
           "description": "The max requests per second (RPS) that a single backend instance can handle. This is used to calculate the capacity of the group. Can be used in either balancing mode. For RATE mode, either maxRate or maxRatePerInstance must be set.\n\nThis cannot be used for internal load balancing.",
@@ -19647,6 +20237,13 @@
           "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
         },
+        "customRequestHeaders": {
+          "description": "Headers that the HTTP/S load balancer should add to proxied requests.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "description": {
           "description": "An optional description of this resource. Provide this property when you create the resource.",
           "type": "string"
@@ -19712,12 +20309,14 @@
           "description": "The protocol this BackendService uses to communicate with backends.\n\nPossible values are HTTP, HTTPS, TCP, and SSL. The default is HTTP.\n\nFor internal load balancing, the possible values are TCP and UDP, and the default is TCP.",
           "enum": [
             "HTTP",
+            "HTTP2",
             "HTTPS",
             "SSL",
             "TCP",
             "UDP"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -20050,6 +20649,15 @@
       },
       "type": "object"
     },
+    "BackendServiceReference": {
+      "id": "BackendServiceReference",
+      "properties": {
+        "backendService": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "BackendServicesScopedList": {
       "id": "BackendServicesScopedList",
       "properties": {
@@ -20150,10 +20758,10 @@
       "properties": {
         "condition": {
           "$ref": "Expr",
-          "description": "Unimplemented. The condition that is associated with this binding. NOTE: an unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently."
+          "description": "The condition that is associated with this binding. NOTE: An unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently."
         },
         "members": {
-          "description": "Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:\n\n* `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account.\n\n* `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.\n\n* `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` .\n\n\n\n* `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.\n\n* `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.\n\n\n\n* `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.",
+          "description": "Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:\n\n* `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account.\n\n* `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.\n\n* `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` .\n\n\n\n* `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.\n\n* `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.\n\n\n\n* `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`.",
           "items": {
             "type": "string"
           },
@@ -20685,12 +21293,8 @@
           ],
           "type": "string"
         },
-        "value": {
-          "description": "DEPRECATED. Use 'values' instead.",
-          "type": "string"
-        },
         "values": {
-          "description": "The objects of the condition. This is mutually exclusive with 'value'.",
+          "description": "The objects of the condition.",
           "items": {
             "type": "string"
           },
@@ -20765,13 +21369,15 @@
           "type": "string"
         },
         "state": {
-          "description": "The deprecation state of this resource. This can be DEPRECATED, OBSOLETE, or DELETED. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.",
+          "description": "The deprecation state of this resource. This can be ACTIVE, DEPRECATED, OBSOLETE, or DELETED. Operations which communicate the end of life date for an image, can use ACTIVE. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.",
           "enum": [
+            "ACTIVE",
             "DELETED",
             "DEPRECATED",
             "OBSOLETE"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             ""
@@ -22035,7 +22641,7 @@
       "id": "FixedOrPercent",
       "properties": {
         "calculated": {
-          "description": "[Output Only] Absolute value of VM instances calculated based on the specific mode.\n\n \n- If the value is fixed, then the caculated value is equal to the fixed value. \n- If the value is a percent, then the calculated value is percent/100 * targetSize. For example, the calculated value of a 80% of a managed instance group with 150 instances would be (80/100 * 150) = 120 VM instances. If there is a remainder, the number is rounded up.",
+          "description": "[Output Only] Absolute value of VM instances calculated based on the specific mode.\n\n \n- If the value is fixed, then the calculated value is equal to the fixed value. \n- If the value is a percent, then the calculated value is percent/100 * targetSize. For example, the calculated value of a 80% of a managed instance group with 150 instances would be (80/100 * 150) = 120 VM instances. If there is a remainder, the number is rounded up.",
           "format": "int32",
           "type": "integer"
         },
@@ -22079,6 +22685,10 @@
             ""
           ],
           "type": "string"
+        },
+        "allPorts": {
+          "description": "This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. This field cannot be used with port or portRange fields.\n\nWhen the load balancing scheme is INTERNAL and protocol is TCP/UDP, specify this field to allow packets addressed to any ports will be forwarded to the backends configured with this forwarding rule.",
+          "type": "boolean"
         },
         "backendService": {
           "description": "This field is only used for INTERNAL load balancing.\n\nFor internal load balancing, this field identifies the BackendService resource to receive the matched traffic.",
@@ -22184,7 +22794,7 @@
           "type": "string"
         },
         "target": {
-          "description": "The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For INTERNAL_SELF_MANAGED\" load balancing, only HTTP and HTTPS targets are valid.",
+          "description": "The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For INTERNAL_SELF_MANAGED load balancing, only HTTP and HTTPS targets are valid.",
           "type": "string"
         }
       },
@@ -22414,6 +23024,15 @@
       },
       "type": "object"
     },
+    "ForwardingRuleReference": {
+      "id": "ForwardingRuleReference",
+      "properties": {
+        "forwardingRule": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ForwardingRulesScopedList": {
       "id": "ForwardingRulesScopedList",
       "properties": {
@@ -22575,6 +23194,59 @@
       },
       "type": "object"
     },
+    "HTTP2HealthCheck": {
+      "id": "HTTP2HealthCheck",
+      "properties": {
+        "host": {
+          "description": "The value of the host header in the HTTP/2 health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.",
+          "type": "string"
+        },
+        "port": {
+          "description": "The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "portName": {
+          "description": "Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.",
+          "type": "string"
+        },
+        "portSpecification": {
+          "description": "Specifies how port is selected for health checking, can be one of following values:\nUSE_FIXED_PORT: The port number in\nport\nis used for health checking.\nUSE_NAMED_PORT: The\nportName\nis used for health checking.\nUSE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.\n\n\nIf not specified, HTTP2 health check follows behavior specified in\nport\nand\nportName\nfields.",
+          "enum": [
+            "USE_FIXED_PORT",
+            "USE_NAMED_PORT",
+            "USE_SERVING_PORT"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "proxyHeader": {
+          "description": "Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.",
+          "enum": [
+            "NONE",
+            "PROXY_V1"
+          ],
+          "enumDescriptions": [
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "requestPath": {
+          "description": "The request path of the HTTP/2 health check request. The default value is /.",
+          "type": "string"
+        },
+        "response": {
+          "description": "The string to match anywhere in the first 1024 bytes of the response body. If left empty (the default value), the status code determines health. The response data can only be ASCII.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "HTTPHealthCheck": {
       "id": "HTTPHealthCheck",
       "properties": {
@@ -22589,6 +23261,20 @@
         },
         "portName": {
           "description": "Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.",
+          "type": "string"
+        },
+        "portSpecification": {
+          "description": "Specifies how port is selected for health checking, can be one of following values:\nUSE_FIXED_PORT: The port number in\nport\nis used for health checking.\nUSE_NAMED_PORT: The\nportName\nis used for health checking.\nUSE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.\n\n\nIf not specified, HTTP health check follows behavior specified in\nport\nand\nportName\nfields.",
+          "enum": [
+            "USE_FIXED_PORT",
+            "USE_NAMED_PORT",
+            "USE_SERVING_PORT"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
           "type": "string"
         },
         "proxyHeader": {
@@ -22628,6 +23314,20 @@
         },
         "portName": {
           "description": "Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.",
+          "type": "string"
+        },
+        "portSpecification": {
+          "description": "Specifies how port is selected for health checking, can be one of following values:\nUSE_FIXED_PORT: The port number in\nport\nis used for health checking.\nUSE_NAMED_PORT: The\nportName\nis used for health checking.\nUSE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.\n\n\nIf not specified, HTTPS health check follows behavior specified in\nport\nand\nportName\nfields.",
+          "enum": [
+            "USE_FIXED_PORT",
+            "USE_NAMED_PORT",
+            "USE_SERVING_PORT"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
           "type": "string"
         },
         "proxyHeader": {
@@ -22675,6 +23375,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "http2HealthCheck": {
+          "$ref": "HTTP2HealthCheck"
+        },
         "httpHealthCheck": {
           "$ref": "HTTPHealthCheck"
         },
@@ -22712,15 +23415,17 @@
           "type": "integer"
         },
         "type": {
-          "description": "Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.",
+          "description": "Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS or HTTP2. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.",
           "enum": [
             "HTTP",
+            "HTTP2",
             "HTTPS",
             "INVALID",
             "SSL",
             "TCP"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -22886,6 +23591,40 @@
           "description": "The port on the instance.",
           "format": "int32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "HealthStatusForNetworkEndpoint": {
+      "id": "HealthStatusForNetworkEndpoint",
+      "properties": {
+        "backendService": {
+          "$ref": "BackendServiceReference",
+          "description": "URL of the backend service associated with the health state of the network endpoint."
+        },
+        "forwardingRule": {
+          "$ref": "ForwardingRuleReference",
+          "description": "URL of the forwarding rule associated with the health state of the network endpoint."
+        },
+        "healthCheck": {
+          "$ref": "HealthCheckReference",
+          "description": "URL of the health check associated with the health state of the network endpoint."
+        },
+        "healthState": {
+          "description": "Health state of the network endpoint determined based on the health checks configured.",
+          "enum": [
+            "DRAINING",
+            "HEALTHY",
+            "UNHEALTHY",
+            "UNKNOWN"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -23372,7 +24111,7 @@
               "type": "string"
             },
             "sha1Checksum": {
-              "description": "An optional SHA1 checksum of the disk image before unpackaging; provided by the client when the disk image is created.",
+              "description": "An optional SHA1 checksum of the disk image before unpackaging provided by the client when the disk image is created.",
               "pattern": "[a-f0-9]{40}",
               "type": "string"
             },
@@ -23682,6 +24421,12 @@
           },
           "type": "array"
         },
+        "shieldedInstanceConfig": {
+          "$ref": "ShieldedInstanceConfig"
+        },
+        "shieldedInstanceIntegrityPolicy": {
+          "$ref": "ShieldedInstanceIntegrityPolicy"
+        },
         "startRestricted": {
           "description": "[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity.",
           "type": "boolean"
@@ -23690,6 +24435,7 @@
           "description": "[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, STOPPED, SUSPENDING, SUSPENDED, and TERMINATED.",
           "enum": [
             "PROVISIONING",
+            "REPAIRING",
             "RUNNING",
             "STAGING",
             "STOPPED",
@@ -23699,6 +24445,7 @@
             "TERMINATED"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -24246,7 +24993,7 @@
           "description": "The update policy for this managed instance group."
         },
         "versions": {
-          "description": "Specifies the instance templates used by this managed instance group to create instances.\n\nEach version is defined by an instanceTemplate. Every template can appear at most once per instance group. This field overrides the top-level instanceTemplate field. Read more about the relationships between these fields. Exactly one version must leave the targetSize field unset. That version will be applied to all remaining instances. For more information, read about canary updates.",
+          "description": "Specifies the instance templates used by this managed instance group to create instances.\n\nEach version is defined by an instanceTemplate and a name. Every version can appear at most once per instance group. This field overrides the top-level instanceTemplate field. Read more about the relationships between these fields. Exactly one version must leave the targetSize field unset. That version will be applied to all remaining instances. For more information, read about canary updates.",
           "items": {
             "$ref": "InstanceGroupManagerVersion"
           },
@@ -24601,6 +25348,7 @@
       "id": "InstanceGroupManagerVersion",
       "properties": {
         "instanceTemplate": {
+          "description": "The URL of the instance template that is specified for this managed instance group. The group uses this template to create new instances in the managed instance group until the `targetSize` for this version is reached.",
           "type": "string"
         },
         "name": {
@@ -25361,6 +26109,9 @@
           },
           "type": "array"
         },
+        "shieldedInstanceConfig": {
+          "$ref": "ShieldedInstanceConfig"
+        },
         "tags": {
           "$ref": "Tags",
           "description": "A list of tags to apply to the instances that are created from this template. The tags identify valid sources or targets for network firewalls. The setTags method can modify this list of tags. Each tag within the list must comply with RFC1035."
@@ -25559,6 +26310,7 @@
           "description": "[Output Only] The status of the instance.",
           "enum": [
             "PROVISIONING",
+            "REPAIRING",
             "RUNNING",
             "STAGING",
             "STOPPED",
@@ -25568,6 +26320,7 @@
             "TERMINATED"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -25795,7 +26548,7 @@
           "type": "string"
         },
         "googleReferenceId": {
-          "description": "[Output Only] Google reference ID; to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.",
+          "description": "[Output Only] Google reference ID to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.",
           "type": "string"
         },
         "id": {
@@ -26519,6 +27272,7 @@
       "id": "InterconnectDiagnosticsLinkOpticalPower",
       "properties": {
         "state": {
+          "description": "The status of the current value when compared to the warning and alarm levels for the receiving or transmitting transceiver. Possible states include:  \n- OK: The value has not crossed a warning threshold. \n- LOW_WARNING: The value has crossed below the low warning threshold. \n- HIGH_WARNING: The value has crossed above the high warning threshold. \n- LOW_ALARM: The value has crossed below the low alarm threshold. \n- HIGH_ALARM: The value has crossed above the high alarm threshold.",
           "enum": [
             "HIGH_ALARM",
             "HIGH_WARNING",
@@ -26536,7 +27290,7 @@
           "type": "string"
         },
         "value": {
-          "description": "Value of the current optical power, read in dBm. Take a known good optical value, give it a 10% margin and trigger warnings relative to that value. In general, a -7dBm warning and a -11dBm alarm are good optical value estimates for most links.",
+          "description": "Value of the current receiving or transmitting optical power, read in dBm. Take a known good optical value, give it a 10% margin and trigger warnings relative to that value. In general, a -7dBm warning and a -11dBm alarm are good optical value estimates for most links.",
           "format": "float",
           "type": "number"
         }
@@ -26565,10 +27319,12 @@
           "$ref": "InterconnectDiagnosticsLinkLACPStatus"
         },
         "receivingOpticalPower": {
-          "$ref": "InterconnectDiagnosticsLinkOpticalPower"
+          "$ref": "InterconnectDiagnosticsLinkOpticalPower",
+          "description": "An InterconnectDiagnostics.LinkOpticalPower object, describing the current value and status of the received light level."
         },
         "transmittingOpticalPower": {
-          "$ref": "InterconnectDiagnosticsLinkOpticalPower"
+          "$ref": "InterconnectDiagnosticsLinkOpticalPower",
+          "description": "An InterconnectDiagnostics.LinkOpticalPower object, describing the current value and status of the transmitted light level."
         }
       },
       "type": "object"
@@ -27801,6 +28557,7 @@
           "description": "[Output Only] The status of the instance. This field is empty when the instance does not exist.",
           "enum": [
             "PROVISIONING",
+            "REPAIRING",
             "RUNNING",
             "STAGING",
             "STOPPED",
@@ -27817,6 +28574,7 @@
             "",
             "",
             "",
+            "",
             ""
           ],
           "type": "string"
@@ -27824,6 +28582,10 @@
         "lastAttempt": {
           "$ref": "ManagedInstanceLastAttempt",
           "description": "[Output Only] Information about the last attempt to create or delete the instance."
+        },
+        "version": {
+          "$ref": "ManagedInstanceVersion",
+          "description": "[Output Only] Intended version of this instance."
         }
       },
       "type": "object"
@@ -27857,6 +28619,20 @@
             }
           },
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ManagedInstanceVersion": {
+      "id": "ManagedInstanceVersion",
+      "properties": {
+        "instanceTemplate": {
+          "description": "[Output Only] The intended template of the instance. This field is empty when current_action is one of { DELETING, ABANDONING }.",
+          "type": "string"
+        },
+        "name": {
+          "description": "[Output Only] Name of the version.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -27929,7 +28705,7 @@
       "id": "Network",
       "properties": {
         "IPv4Range": {
-          "description": "The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.",
+          "description": "Deprecated in favor of subnet mode networks. The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.",
           "pattern": "[0-9]{1,3}(?:\\.[0-9]{1,3}){3}/[0-9]{1,2}",
           "type": "string"
         },
@@ -27991,6 +28767,576 @@
             "type": "string"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpoint": {
+      "description": "The network endpoint.",
+      "id": "NetworkEndpoint",
+      "properties": {
+        "instance": {
+          "description": "The name for a specific VM instance that the IP address belongs to. This is required for network endpoints of type GCE_VM_IP_PORT. The instance must be in the same zone of network endpoint group.\n\nThe name must be 1-63 characters long, and comply with RFC1035.",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "Optional IPv4 address of network endpoint. The IP address must belong to a VM in GCE (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Optional port number of network endpoint. If not specified and the NetworkEndpointGroup.network_endpoint_type is GCE_IP_PORT, the defaultPort for the network endpoint group will be used.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpointGroup": {
+      "description": "Represents a collection of network endpoints.",
+      "id": "NetworkEndpointGroup",
+      "properties": {
+        "creationTimestamp": {
+          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
+          "type": "string"
+        },
+        "defaultPort": {
+          "description": "The default port used if the port number is not specified in the network endpoint.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": {
+          "description": "An optional description of this resource. Provide this property when you create the resource.",
+          "type": "string"
+        },
+        "id": {
+          "description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "kind": {
+          "default": "compute#networkEndpointGroup",
+          "description": "[Output Only] Type of the resource. Always compute#networkEndpointGroup for network endpoint group.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+          "type": "string"
+        },
+        "network": {
+          "description": "The URL of the network to which all network endpoints in the NEG belong. Uses \"default\" project network if unspecified.",
+          "type": "string"
+        },
+        "networkEndpointType": {
+          "description": "Type of network endpoints in this network endpoint group. Currently the only supported value is GCE_VM_IP_PORT.",
+          "enum": [
+            "GCE_VM_IP_PORT"
+          ],
+          "enumDescriptions": [
+            ""
+          ],
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for the resource.",
+          "type": "string"
+        },
+        "size": {
+          "description": "[Output only] Number of network endpoints in the network endpoint group.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "subnetwork": {
+          "description": "Optional URL of the subnetwork to which all network endpoints in the NEG belong.",
+          "type": "string"
+        },
+        "zone": {
+          "description": "[Output Only] The URL of the zone where the network endpoint group is located.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpointGroupAggregatedList": {
+      "id": "NetworkEndpointGroupAggregatedList",
+      "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "type": "string"
+        },
+        "items": {
+          "additionalProperties": {
+            "$ref": "NetworkEndpointGroupsScopedList",
+            "description": "The name of the scope that contains this set of network endpoint groups."
+          },
+          "description": "A list of NetworkEndpointGroupsScopedList resources.",
+          "type": "object"
+        },
+        "kind": {
+          "default": "compute#networkEndpointGroupAggregatedList",
+          "description": "[Output Only] The resource type, which is always compute#networkEndpointGroupAggregatedList for aggregated lists of network endpoint groups.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for this resource.",
+          "type": "string"
+        },
+        "warning": {
+          "description": "[Output Only] Informational warning message.",
+          "properties": {
+            "code": {
+              "description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+              "enum": [
+                "CLEANUP_FAILED",
+                "DEPRECATED_RESOURCE_USED",
+                "DEPRECATED_TYPE_USED",
+                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                "EXPERIMENTAL_TYPE_USED",
+                "EXTERNAL_API_WARNING",
+                "FIELD_VALUE_OVERRIDEN",
+                "INJECTED_KERNELS_DEPRECATED",
+                "MISSING_TYPE_DEPENDENCY",
+                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                "NEXT_HOP_CANNOT_IP_FORWARD",
+                "NEXT_HOP_INSTANCE_NOT_FOUND",
+                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                "NEXT_HOP_NOT_RUNNING",
+                "NOT_CRITICAL_ERROR",
+                "NO_RESULTS_ON_PAGE",
+                "REQUIRED_TOS_AGREEMENT",
+                "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+                "RESOURCE_NOT_DELETED",
+                "SCHEMA_VALIDATION_IGNORED",
+                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                "UNDECLARED_PROPERTIES",
+                "UNREACHABLE"
+              ],
+              "enumDescriptions": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              "type": "string"
+            },
+            "data": {
+              "description": "[Output Only] Metadata about this warning in key: value format. For example:\n\"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" }",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "[Output Only] A warning data value corresponding to the key.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "message": {
+              "description": "[Output Only] A human-readable description of the warning code.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpointGroupList": {
+      "id": "NetworkEndpointGroupList",
+      "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "type": "string"
+        },
+        "items": {
+          "description": "A list of NetworkEndpointGroup resources.",
+          "items": {
+            "$ref": "NetworkEndpointGroup"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "compute#networkEndpointGroupList",
+          "description": "[Output Only] The resource type, which is always compute#networkEndpointGroupList for network endpoint group lists.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for this resource.",
+          "type": "string"
+        },
+        "warning": {
+          "description": "[Output Only] Informational warning message.",
+          "properties": {
+            "code": {
+              "description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+              "enum": [
+                "CLEANUP_FAILED",
+                "DEPRECATED_RESOURCE_USED",
+                "DEPRECATED_TYPE_USED",
+                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                "EXPERIMENTAL_TYPE_USED",
+                "EXTERNAL_API_WARNING",
+                "FIELD_VALUE_OVERRIDEN",
+                "INJECTED_KERNELS_DEPRECATED",
+                "MISSING_TYPE_DEPENDENCY",
+                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                "NEXT_HOP_CANNOT_IP_FORWARD",
+                "NEXT_HOP_INSTANCE_NOT_FOUND",
+                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                "NEXT_HOP_NOT_RUNNING",
+                "NOT_CRITICAL_ERROR",
+                "NO_RESULTS_ON_PAGE",
+                "REQUIRED_TOS_AGREEMENT",
+                "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+                "RESOURCE_NOT_DELETED",
+                "SCHEMA_VALIDATION_IGNORED",
+                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                "UNDECLARED_PROPERTIES",
+                "UNREACHABLE"
+              ],
+              "enumDescriptions": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              "type": "string"
+            },
+            "data": {
+              "description": "[Output Only] Metadata about this warning in key: value format. For example:\n\"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" }",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "[Output Only] A warning data value corresponding to the key.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "message": {
+              "description": "[Output Only] A human-readable description of the warning code.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpointGroupsAttachEndpointsRequest": {
+      "id": "NetworkEndpointGroupsAttachEndpointsRequest",
+      "properties": {
+        "networkEndpoints": {
+          "description": "The list of network endpoints to be attached.",
+          "items": {
+            "$ref": "NetworkEndpoint"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpointGroupsDetachEndpointsRequest": {
+      "id": "NetworkEndpointGroupsDetachEndpointsRequest",
+      "properties": {
+        "networkEndpoints": {
+          "description": "The list of network endpoints to be detached.",
+          "items": {
+            "$ref": "NetworkEndpoint"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpointGroupsListEndpointsRequest": {
+      "id": "NetworkEndpointGroupsListEndpointsRequest",
+      "properties": {
+        "healthStatus": {
+          "description": "Optional query parameter for showing the health status of each network endpoint. Valid options are SKIP or SHOW. If you don't specifiy this parameter, the health status of network endpoints will not be provided.",
+          "enum": [
+            "SHOW",
+            "SKIP"
+          ],
+          "enumDescriptions": [
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpointGroupsListNetworkEndpoints": {
+      "id": "NetworkEndpointGroupsListNetworkEndpoints",
+      "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "type": "string"
+        },
+        "items": {
+          "description": "A list of NetworkEndpointWithHealthStatus resources.",
+          "items": {
+            "$ref": "NetworkEndpointWithHealthStatus"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "compute#networkEndpointGroupsListNetworkEndpoints",
+          "description": "[Output Only] The resource type, which is always compute#networkEndpointGroupsListNetworkEndpoints for the list of network endpoints in the specified network endpoint group.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+          "type": "string"
+        },
+        "warning": {
+          "description": "[Output Only] Informational warning message.",
+          "properties": {
+            "code": {
+              "description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+              "enum": [
+                "CLEANUP_FAILED",
+                "DEPRECATED_RESOURCE_USED",
+                "DEPRECATED_TYPE_USED",
+                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                "EXPERIMENTAL_TYPE_USED",
+                "EXTERNAL_API_WARNING",
+                "FIELD_VALUE_OVERRIDEN",
+                "INJECTED_KERNELS_DEPRECATED",
+                "MISSING_TYPE_DEPENDENCY",
+                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                "NEXT_HOP_CANNOT_IP_FORWARD",
+                "NEXT_HOP_INSTANCE_NOT_FOUND",
+                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                "NEXT_HOP_NOT_RUNNING",
+                "NOT_CRITICAL_ERROR",
+                "NO_RESULTS_ON_PAGE",
+                "REQUIRED_TOS_AGREEMENT",
+                "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+                "RESOURCE_NOT_DELETED",
+                "SCHEMA_VALIDATION_IGNORED",
+                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                "UNDECLARED_PROPERTIES",
+                "UNREACHABLE"
+              ],
+              "enumDescriptions": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              "type": "string"
+            },
+            "data": {
+              "description": "[Output Only] Metadata about this warning in key: value format. For example:\n\"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" }",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "[Output Only] A warning data value corresponding to the key.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "message": {
+              "description": "[Output Only] A human-readable description of the warning code.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpointGroupsScopedList": {
+      "id": "NetworkEndpointGroupsScopedList",
+      "properties": {
+        "networkEndpointGroups": {
+          "description": "[Output Only] The list of network endpoint groups that are contained in this scope.",
+          "items": {
+            "$ref": "NetworkEndpointGroup"
+          },
+          "type": "array"
+        },
+        "warning": {
+          "description": "[Output Only] An informational warning that replaces the list of network endpoint groups when the list is empty.",
+          "properties": {
+            "code": {
+              "description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+              "enum": [
+                "CLEANUP_FAILED",
+                "DEPRECATED_RESOURCE_USED",
+                "DEPRECATED_TYPE_USED",
+                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                "EXPERIMENTAL_TYPE_USED",
+                "EXTERNAL_API_WARNING",
+                "FIELD_VALUE_OVERRIDEN",
+                "INJECTED_KERNELS_DEPRECATED",
+                "MISSING_TYPE_DEPENDENCY",
+                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                "NEXT_HOP_CANNOT_IP_FORWARD",
+                "NEXT_HOP_INSTANCE_NOT_FOUND",
+                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                "NEXT_HOP_NOT_RUNNING",
+                "NOT_CRITICAL_ERROR",
+                "NO_RESULTS_ON_PAGE",
+                "REQUIRED_TOS_AGREEMENT",
+                "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+                "RESOURCE_NOT_DELETED",
+                "SCHEMA_VALIDATION_IGNORED",
+                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                "UNDECLARED_PROPERTIES",
+                "UNREACHABLE"
+              ],
+              "enumDescriptions": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              "type": "string"
+            },
+            "data": {
+              "description": "[Output Only] Metadata about this warning in key: value format. For example:\n\"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" }",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "[Output Only] A warning data value corresponding to the key.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "message": {
+              "description": "[Output Only] A human-readable description of the warning code.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkEndpointWithHealthStatus": {
+      "id": "NetworkEndpointWithHealthStatus",
+      "properties": {
+        "healths": {
+          "description": "[Output only] The health status of network endpoint;",
+          "items": {
+            "$ref": "HealthStatusForNetworkEndpoint"
+          },
+          "type": "array"
+        },
+        "networkEndpoint": {
+          "$ref": "NetworkEndpoint",
+          "description": "[Output only] The network endpoint;"
         }
       },
       "type": "object"
@@ -28159,7 +29505,11 @@
       "id": "NetworkPeering",
       "properties": {
         "autoCreateRoutes": {
-          "description": "Indicates whether full mesh connectivity is created and managed automatically. When it is set to true, Google Compute Engine will automatically create and manage the routes between two networks when the state is ACTIVE. Otherwise, user needs to create routes manually to route packets to peer network.",
+          "description": "This field will be deprecated soon. Prefer using exchange_subnet_routes instead. Indicates whether full mesh connectivity is created and managed automatically. When it is set to true, Google Compute Engine will automatically create and manage the routes between two networks when the state is ACTIVE. Otherwise, user needs to create routes manually to route packets to peer network.",
+          "type": "boolean"
+        },
+        "exchangeSubnetRoutes": {
+          "description": "Whether full mesh connectivity is created and managed automatically. When it is set to true, Google Compute Engine will automatically create and manage the routes between two networks when the peering state is ACTIVE. Otherwise, user needs to create routes manually to route packets to peer network.",
           "type": "boolean"
         },
         "name": {
@@ -28212,7 +29562,7 @@
       "id": "NetworksAddPeeringRequest",
       "properties": {
         "autoCreateRoutes": {
-          "description": "Whether Google Compute Engine manages the routes automatically.",
+          "description": "This field will be deprecated soon. Prefer using exchange_subnet_routes in network_peering instead. Whether Google Compute Engine manages the routes automatically.",
           "type": "boolean"
         },
         "name": {
@@ -28223,6 +29573,10 @@
           },
           "description": "Name of the peering, which should conform to RFC1035.",
           "type": "string"
+        },
+        "networkPeering": {
+          "$ref": "NetworkPeering",
+          "description": "Network peering parameters. In order to specify route policies for peering using import/export custom routes, you will have to fill all peering related parameters (name, peer network, exchange_subnet_routes) in network_peeringfield. Corresponding fields in NetworksAddPeeringRequest will be deprecated soon."
         },
         "peerNetwork": {
           "description": "URL of the peer network. It can be either full URL or partial URL. The peer network may belong to a different project. If the partial URL does not contain project, it is assumed that the peer network is in the same project as the current network.",
@@ -28242,7 +29596,7 @@
       "type": "object"
     },
     "NodeGroup": {
-      "description": "A NodeGroup resource.",
+      "description": "A NodeGroup resource. To create a node group, you must first create a node templates. To learn more about node groups and sole-tenant nodes, read the Sole-tenant nodes documentation. (== resource_for beta.nodeGroups ==) (== resource_for v1.nodeGroups ==)",
       "id": "NodeGroup",
       "properties": {
         "creationTimestamp": {
@@ -28803,7 +30157,7 @@
       "type": "object"
     },
     "NodeTemplate": {
-      "description": "A Node Template resource.",
+      "description": "A Node Template resource. To learn more about node templates and sole-tenant nodes, read the Sole-tenant nodes documentation. (== resource_for beta.nodeTemplates ==) (== resource_for v1.nodeTemplates ==)",
       "id": "NodeTemplate",
       "properties": {
         "creationTimestamp": {
@@ -30379,6 +31733,7 @@
             "CPUS",
             "CPUS_ALL_REGIONS",
             "DISKS_TOTAL_GB",
+            "EXTERNAL_VPN_GATEWAYS",
             "FIREWALLS",
             "FORWARDING_RULES",
             "GLOBAL_INTERNAL_ADDRESSES",
@@ -30398,6 +31753,7 @@
             "IN_USE_SNAPSHOT_SCHEDULES",
             "LOCAL_SSD_TOTAL_GB",
             "NETWORKS",
+            "NETWORK_ENDPOINT_GROUPS",
             "NVIDIA_K80_GPUS",
             "NVIDIA_P100_GPUS",
             "NVIDIA_P100_VWS_GPUS",
@@ -30440,6 +31796,8 @@
             "VPN_TUNNELS"
           ],
           "enumDescriptions": [
+            "",
+            "",
             "",
             "",
             "",
@@ -32466,7 +33824,7 @@
       "type": "object"
     },
     "RouterStatusNatStatus": {
-      "description": "Status of a NAT contained in this router.",
+      "description": "Status of a NAT contained in this router. Next tag: 9",
       "id": "RouterStatusNatStatus",
       "properties": {
         "autoAllocatedNatIps": {
@@ -32701,6 +34059,20 @@
         },
         "portName": {
           "description": "Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.",
+          "type": "string"
+        },
+        "portSpecification": {
+          "description": "Specifies how port is selected for health checking, can be one of following values:\nUSE_FIXED_PORT: The port number in\nport\nis used for health checking.\nUSE_NAMED_PORT: The\nportName\nis used for health checking.\nUSE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.\n\n\nIf not specified, SSL health check follows behavior specified in\nport\nand\nportName\nfields.",
+          "enum": [
+            "USE_FIXED_PORT",
+            "USE_NAMED_PORT",
+            "USE_SERVING_PORT"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
           "type": "string"
         },
         "proxyHeader": {
@@ -33069,6 +34441,71 @@
       },
       "type": "object"
     },
+    "ShieldedInstanceConfig": {
+      "description": "A set of Shielded Instance options.",
+      "id": "ShieldedInstanceConfig",
+      "properties": {
+        "enableIntegrityMonitoring": {
+          "description": "Defines whether the instance has integrity monitoring enabled.",
+          "type": "boolean"
+        },
+        "enableSecureBoot": {
+          "description": "Defines whether the instance has Secure Boot enabled.",
+          "type": "boolean"
+        },
+        "enableVtpm": {
+          "description": "Defines whether the instance has the vTPM enabled.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ShieldedInstanceIdentity": {
+      "description": "A shielded Instance identity entry.",
+      "id": "ShieldedInstanceIdentity",
+      "properties": {
+        "encryptionKey": {
+          "$ref": "ShieldedInstanceIdentityEntry",
+          "description": "An Endorsement Key (EK) issued to the Shielded Instance's vTPM."
+        },
+        "kind": {
+          "default": "compute#shieldedInstanceIdentity",
+          "description": "[Output Only] Type of the resource. Always compute#shieldedInstanceIdentity for shielded Instance identity entry.",
+          "type": "string"
+        },
+        "signingKey": {
+          "$ref": "ShieldedInstanceIdentityEntry",
+          "description": "An Attestation Key (AK) issued to the Shielded Instance's vTPM."
+        }
+      },
+      "type": "object"
+    },
+    "ShieldedInstanceIdentityEntry": {
+      "description": "A Shielded Instance Identity Entry.",
+      "id": "ShieldedInstanceIdentityEntry",
+      "properties": {
+        "ekCert": {
+          "description": "A PEM-encoded X.509 certificate. This field can be empty.",
+          "type": "string"
+        },
+        "ekPub": {
+          "description": "A PEM-encoded public key.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ShieldedInstanceIntegrityPolicy": {
+      "description": "The policy describes the baseline against which Instance boot integrity is measured.",
+      "id": "ShieldedInstanceIntegrityPolicy",
+      "properties": {
+        "updateAutoLearnPolicy": {
+          "description": "Updates the integrity policy baseline using the measurements from the VM instance's most recent boot.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "SignedUrlKey": {
       "description": "Represents a customer-supplied Signing Key used by Cloud CDN Signed URLs",
       "id": "SignedUrlKey",
@@ -33198,6 +34635,13 @@
             ""
           ],
           "type": "string"
+        },
+        "storageLocations": {
+          "description": "GCS bucket storage location of the snapshot (regional or multi-regional).",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -34214,6 +35658,20 @@
         },
         "portName": {
           "description": "Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.",
+          "type": "string"
+        },
+        "portSpecification": {
+          "description": "Specifies how port is selected for health checking, can be one of following values:\nUSE_FIXED_PORT: The port number in\nport\nis used for health checking.\nUSE_NAMED_PORT: The\nportName\nis used for health checking.\nUSE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.\n\n\nIf not specified, TCP health check follows behavior specified in\nport\nand\nportName\nfields.",
+          "enum": [
+            "USE_FIXED_PORT",
+            "USE_NAMED_PORT",
+            "USE_SERVING_PORT"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
           "type": "string"
         },
         "proxyHeader": {
@@ -35878,7 +37336,7 @@
           "type": "string"
         },
         "forwardingRules": {
-          "description": "[Output Only] A list of URLs to the ForwardingRule resources. ForwardingRules are created using compute.forwardingRules.insert and associated to a VPN gateway.",
+          "description": "[Output Only] A list of URLs to the ForwardingRule resources. ForwardingRules are created using compute.forwardingRules.insert and associated with a VPN gateway.",
           "items": {
             "type": "string"
           },
@@ -35922,7 +37380,7 @@
           "type": "string"
         },
         "status": {
-          "description": "[Output Only] The status of the VPN gateway.",
+          "description": "[Output Only] The status of the VPN gateway, which can be one of the following: CREATING, READY, FAILED, or DELETING.",
           "enum": [
             "CREATING",
             "DELETING",
@@ -35938,7 +37396,7 @@
           "type": "string"
         },
         "tunnels": {
-          "description": "[Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are created using compute.vpntunnels.insert method and associated to a VPN gateway.",
+          "description": "[Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are created using the compute.vpntunnels.insert method and associated with a VPN gateway.",
           "items": {
             "type": "string"
           },
@@ -36175,7 +37633,7 @@
       "id": "TargetVpnGatewaysScopedList",
       "properties": {
         "targetVpnGateways": {
-          "description": "[Output Only] A list of target vpn gateways contained in this scope.",
+          "description": "[Output Only] A list of target VPN gateways contained in this scope.",
           "items": {
             "$ref": "TargetVpnGateway"
           },
@@ -36908,7 +38366,7 @@
           "type": "string"
         },
         "ikeVersion": {
-          "description": "IKE protocol version to use when establishing the VPN tunnel with peer VPN gateway. Acceptable IKE versions are 1 or 2. Default version is 2.",
+          "description": "IKE protocol version to use when establishing the VPN tunnel with the peer VPN gateway. Acceptable IKE versions are 1 or 2. The default version is 2.",
           "format": "int32",
           "type": "integer"
         },
@@ -36918,7 +38376,7 @@
           "type": "string"
         },
         "localTrafficSelector": {
-          "description": "Local traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.",
+          "description": "Local traffic selector to use when establishing the VPN tunnel with the peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges must be disjoint. Only IPv4 is supported.",
           "items": {
             "type": "string"
           },
@@ -36943,14 +38401,14 @@
           "type": "string"
         },
         "remoteTrafficSelector": {
-          "description": "Remote traffic selectors to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.",
+          "description": "Remote traffic selectors to use when establishing the VPN tunnel with the peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "router": {
-          "description": "URL of router resource to be used for dynamic routing.",
+          "description": "URL of the router resource to be used for dynamic routing.",
           "type": "string"
         },
         "selfLink": {
@@ -36966,7 +38424,7 @@
           "type": "string"
         },
         "status": {
-          "description": "[Output Only] The status of the VPN tunnel.",
+          "description": "[Output Only] The status of the VPN tunnel, which can be one of the following: \n- PROVISIONING: Resource is being allocated for the VPN tunnel. \n- WAITING_FOR_FULL_CONFIG: Waiting to receive all VPN-related configs from the user. Network, TargetVpnGateway, VpnTunnel, ForwardingRule, and Route resources are needed to setup the VPN tunnel. \n- FIRST_HANDSHAKE: Successful first handshake with the peer VPN. \n- ESTABLISHED: Secure session is successfully established with the peer VPN. \n- NETWORK_ERROR: Deprecated, replaced by NO_INCOMING_PACKETS \n- AUTHORIZATION_ERROR: Auth error (for example, bad shared secret). \n- NEGOTIATION_FAILURE: Handshake failed. \n- DEPROVISIONING: Resources are being deallocated for the VPN tunnel. \n- FAILED: Tunnel creation has failed and the tunnel is not ready to be used.",
           "enum": [
             "ALLOCATING_RESOURCES",
             "AUTHORIZATION_ERROR",
@@ -37014,7 +38472,7 @@
         "items": {
           "additionalProperties": {
             "$ref": "VpnTunnelsScopedList",
-            "description": "Name of the scope containing this set of vpn tunnels."
+            "description": "Name of the scope containing this set of VPN tunnels."
           },
           "description": "A list of VpnTunnelsScopedList resources.",
           "type": "object"
@@ -37232,7 +38690,7 @@
       "id": "VpnTunnelsScopedList",
       "properties": {
         "vpnTunnels": {
-          "description": "A list of vpn tunnels contained in this scope.",
+          "description": "A list of VPN tunnels contained in this scope.",
           "items": {
             "$ref": "VpnTunnel"
           },
@@ -37457,7 +38915,7 @@
       "type": "object"
     },
     "Zone": {
-      "description": "A Zone resource. (== resource_for beta.zones ==) (== resource_for v1.zones ==)",
+      "description": "A Zone resource. (== resource_for beta.zones ==) (== resource_for v1.zones ==) Next ID: 17",
       "id": "Zone",
       "properties": {
         "availableCpuPlatforms": {

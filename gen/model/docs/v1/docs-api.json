@@ -209,7 +209,7 @@
       }
     }
   },
-  "revision": "20190129",
+  "revision": "20190408",
   "rootUrl": "https://docs.googleapis.com/",
   "schemas": {
     "AutoText": {
@@ -558,7 +558,7 @@
       "properties": {
         "range": {
           "$ref": "Range",
-          "description": "The range of content to delete.\n\nDeleting text that crosses a paragraph boundary may result in changes\nto paragraph styles, lists, positioned objects and bookmarks as the two\nparagraphs are merged.\n\nAttempting to delete certain ranges can result in an invalid document\nstructure in which case a 400 bad request error is returned.\n\nSome examples of invalid delete requests include:\n\n* Deleting one code unit of a surrogate pair.\n* Deleting the last newline character of a Body, Header,\n  Footer, Footnote, TableCell or TableOfContents.\n* Deleting the start or end of a Table,\n  TableOfContents or Equation without deleting the entire element.\n* Deleting the newline character before a\n  Table,\n  TableOfContents or\n  SectionBreak without deleting the\n  the element.\n* Deleting individual rows or cells of a table. Deleting the content within\n  a table cell is allowed."
+          "description": "The range of content to delete.\n\nDeleting text that crosses a paragraph boundary may result in changes\nto paragraph styles, lists, positioned objects and bookmarks as the two\nparagraphs are merged.\n\nAttempting to delete certain ranges can result in an invalid document\nstructure in which case a 400 bad request error is returned.\n\nSome examples of invalid delete requests include:\n\n* Deleting one code unit of a surrogate pair.\n* Deleting the last newline character of a Body, Header,\n  Footer, Footnote, TableCell or TableOfContents.\n* Deleting the start or end of a Table,\n  TableOfContents or Equation without deleting the entire element.\n* Deleting the newline character before a\n  Table,\n  TableOfContents or\n  SectionBreak without deleting the\n  element.\n* Deleting individual rows or cells of a table. Deleting the content within\n  a table cell is allowed."
         }
       },
       "type": "object"
@@ -1439,6 +1439,46 @@
       },
       "type": "object"
     },
+    "InsertPageBreakRequest": {
+      "description": "Inserts a page break followed by a newline at the specified location.",
+      "id": "InsertPageBreakRequest",
+      "properties": {
+        "endOfSegmentLocation": {
+          "$ref": "EndOfSegmentLocation",
+          "description": "Inserts the page break at the end of the document body.\n\nPage breaks cannot be inserted inside a footnote, header or footer.\nSince page breaks can only be inserted inside the body, the segment ID field must be\nempty."
+        },
+        "location": {
+          "$ref": "Location",
+          "description": "Inserts the page break at a specific index in the document.\n\nThe page break must be inserted inside the bounds of an existing\nParagraph. For instance, it cannot be\ninserted at a table's start index (i.e. between the table and its\npreceding paragraph).\n\nPage breaks cannot be inserted inside a table, equation, footnote, header\nor footer. Since page breaks can only be inserted inside the body, the\nsegment ID field must be\nempty."
+        }
+      },
+      "type": "object"
+    },
+    "InsertTableRequest": {
+      "description": "Inserts a table at the specified location.\n\nA newline character will be inserted before the inserted table.",
+      "id": "InsertTableRequest",
+      "properties": {
+        "columns": {
+          "description": "The number of columns in the table.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "endOfSegmentLocation": {
+          "$ref": "EndOfSegmentLocation",
+          "description": "Inserts the table at the end of the given header, footer or document\nbody. A newline character will be inserted before the inserted table.\n\nTables cannot be inserted inside a footnote."
+        },
+        "location": {
+          "$ref": "Location",
+          "description": "Inserts the table at a specific model index.\n\nA newline character will be inserted before the inserted table, therefore\nthe table start index will be at the specified location index + 1.\n\nThe table must be inserted inside the bounds of an existing\nParagraph. For instance, it cannot be\ninserted at a table's start index (i.e. between an existing table and its\npreceding paragraph).\n\nTables cannot be inserted inside a footnote or equation."
+        },
+        "rows": {
+          "description": "The number of rows in the table.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "InsertTableRowRequest": {
       "description": "Inserts an empty row into a table.",
       "id": "InsertTableRowRequest",
@@ -1588,7 +1628,7 @@
       "type": "object"
     },
     "NamedRange": {
-      "description": "A collection of Ranges with the same named range\nID.\n\nNamed ranges allow developers to associate parts of a document with an\narbitrary user-defined label so their contents can be programmatically read\nor edited at a later time. A document can contain multiple named ranges with\nthe same name, but every named range has a unique ID.\n\nA named range is created with a single Range,\nand content inserted inside a named range generally expands that range.\nHowever, certain document changes can cause the range to be split into\nmultiple ranges.",
+      "description": "A collection of Ranges with the same named range\nID.\n\nNamed ranges allow developers to associate parts of a document with an\narbitrary user-defined label so their contents can be programmatically read\nor edited at a later time. A document can contain multiple named ranges with\nthe same name, but every named range has a unique ID.\n\nA named range is created with a single Range,\nand content inserted inside a named range generally expands that range.\nHowever, certain document changes can cause the range to be split into\nmultiple ranges.\n\nNamed ranges are not private. All applications and collaborators that have\naccess to the document can see its named ranges.",
       "id": "NamedRange",
       "properties": {
         "name": {
@@ -2007,7 +2047,7 @@
           "description": "A column break paragraph element."
         },
         "endIndex": {
-          "description": "The zero-base end index of this paragraph element, exclusive, in Unicode\ncode units of the UTF-16 encoding.\n\nUnicode code units of the UTF-16 encoding means that surrogate pairs\nconsume two indexes. For example, the \"GRINNING FACE\" emoji would be\nrepresented as \"\\uD83D\\uDE00\" and would consume two indexes.",
+          "description": "The zero-base end index of this paragraph element, exclusive, in UTF-16\ncode units.",
           "format": "int32",
           "type": "integer"
         },
@@ -2032,7 +2072,7 @@
           "description": "A page break paragraph element."
         },
         "startIndex": {
-          "description": "The zero-based start index of this paragraph element, in Unicode code\nunits of the UTF-16 encoding.\n\nUnicode code units of the UTF-16 encoding means that surrogate pairs\nconsume two indexes. For example, the \"GRINNING FACE\" emoji would be\nrepresented as \"\\uD83D\\uDE00\" and would consume two indexes.",
+          "description": "The zero-based start index of this paragraph element, in UTF-16 code units.",
           "format": "int32",
           "type": "integer"
         },
@@ -2405,7 +2445,7 @@
       "id": "Range",
       "properties": {
         "endIndex": {
-          "description": "The zero-based end index of this range, exclusive, in Unicode code units of\nthe UTF-16 encoding.\n\nIn all current uses, an end index must be provided. This field is an\nInt32Value in order to accommodate future use cases with open-ended ranges.",
+          "description": "The zero-based end index of this range, exclusive, in UTF-16 code units.\n\nIn all current uses, an end index must be provided. This field is an\nInt32Value in order to accommodate future use cases with open-ended ranges.",
           "format": "int32",
           "type": "integer"
         },
@@ -2414,7 +2454,7 @@
           "type": "string"
         },
         "startIndex": {
-          "description": "The zero-based start index of this range, in Unicode code units of the\nUTF-16 encoding.\n\nIn all current uses, a start index must be provided. This field is an\nInt32Value in order to accommodate future use cases with open-ended ranges.",
+          "description": "The zero-based start index of this range, in UTF-16 code units.\n\nIn all current uses, a start index must be provided. This field is an\nInt32Value in order to accommodate future use cases with open-ended ranges.",
           "format": "int32",
           "type": "integer"
         }
@@ -2487,6 +2527,14 @@
         "insertInlineImage": {
           "$ref": "InsertInlineImageRequest",
           "description": "Inserts an inline image at the specified location."
+        },
+        "insertPageBreak": {
+          "$ref": "InsertPageBreakRequest",
+          "description": "Inserts a page break at the specified location."
+        },
+        "insertTable": {
+          "$ref": "InsertTableRequest",
+          "description": "Inserts a table at the specified location."
         },
         "insertTableRow": {
           "$ref": "InsertTableRowRequest",
@@ -2726,7 +2774,7 @@
       "id": "StructuralElement",
       "properties": {
         "endIndex": {
-          "description": "The zero-based end index of this structural element, exclusive, in Unicode\ncode units of the UTF-16 encoding.\n\nUnicode code units of the UTF-16 encoding means that surrogate pairs\nconsume two indexes. For example, the \"GRINNING FACE\" emoji would be\nrepresented as \"\\uD83D\\uDE00\" and would consume two indexes.",
+          "description": "The zero-based end index of this structural element, exclusive, in UTF-16\ncode units.",
           "format": "int32",
           "type": "integer"
         },
@@ -2739,7 +2787,7 @@
           "description": "A section break type of structural element."
         },
         "startIndex": {
-          "description": "The zero-based start index of this structural element, in Unicode code\nunits of the UTF-16 encoding.\n\nUnicode code units of the UTF-16 encoding means that surrogate pairs\nconsume two indexes. For example, the \"GRINNING FACE\" emoji would be\nrepresented as \"\\uD83D\\uDE00\" and would consume two indexes.",
+          "description": "The zero-based start index of this structural element, in UTF-16 code\nunits.",
           "format": "int32",
           "type": "integer"
         },
@@ -3000,12 +3048,12 @@
           "type": "array"
         },
         "endIndex": {
-          "description": "The zero-based end index of this cell, exclusive, in Unicode code units of\nthe UTF-16 encoding.\n\nUnicode code units of the UTF-16 encoding means that surrogate pairs\nconsume two indexes. For example, the \"GRINNING FACE\" emoji would be\nrepresented as \"\\uD83D\\uDE00\" and would consume two indexes.",
+          "description": "The zero-based end index of this cell, exclusive, in UTF-16 code units.",
           "format": "int32",
           "type": "integer"
         },
         "startIndex": {
-          "description": "The zero-based start index of this cell, in Unicode code units of the\nUTF-16 encoding.\n\nUnicode code units of the UTF-16 encoding means that surrogate pairs\nconsume two indexes. For example, the \"GRINNING FACE\" emoji would be\nrepresented as \"\\uD83D\\uDE00\" and would consume two indexes.",
+          "description": "The zero-based start index of this cell, in UTF-16 code units.",
           "format": "int32",
           "type": "integer"
         },
@@ -3038,12 +3086,12 @@
       "type": "object"
     },
     "TableCellBorder": {
-      "description": "A border around a table cell.",
+      "description": "A border around a table cell.\n\nTable cell borders cannot be transparent. To hide a table cell border, make\nits width 0.",
       "id": "TableCellBorder",
       "properties": {
         "color": {
           "$ref": "OptionalColor",
-          "description": "The color of the border."
+          "description": "The color of the border. This color cannot be transparent."
         },
         "dashStyle": {
           "description": "The dash style of the border.",
@@ -3273,12 +3321,12 @@
       "id": "TableRow",
       "properties": {
         "endIndex": {
-          "description": "The zero-based end index of this row, exclusive, in Unicode code units of\nthe UTF-16 encoding.\n\nUnicode code units of the UTF-16 encoding means that surrogate pairs\nconsume two indexes. For example, the \"GRINNING FACE\" emoji would be\nrepresented as \"\\uD83D\\uDE00\" and would consume two indexes.",
+          "description": "The zero-based end index of this row, exclusive, in UTF-16 code units.",
           "format": "int32",
           "type": "integer"
         },
         "startIndex": {
-          "description": "The zero-based start index of this row, in Unicode code units of the UTF-16\nencoding.\n\nUnicode code units of the UTF-16 encoding means that surrogate pairs\nconsume two indexes. For example, the \"GRINNING FACE\" emoji would be\nrepresented as \"\\uD83D\\uDE00\" and would consume two indexes.",
+          "description": "The zero-based start index of this row, in UTF-16 code units.",
           "format": "int32",
           "type": "integer"
         },
@@ -3564,7 +3612,11 @@
       "id": "WriteControl",
       "properties": {
         "requiredRevisionId": {
-          "description": "The ID of the revision of the document that the write request will be\napplied to. If this is not the latest revision of the document, the\nrequest will not be processed and will return a 400 bad request error.\n\nWhen a required revision ID is returned in a response, it indicates the\nrevision ID of the document after the request was applied.",
+          "description": "The revision ID of the\ndocument that the write request will be applied to. If this is not the\nlatest revision of the document, the request will not be processed and\nwill return a 400 bad request error.\n\nWhen a required revision ID is returned in a response, it indicates the\nrevision ID of the document after the request was applied.",
+          "type": "string"
+        },
+        "targetRevisionId": {
+          "description": "The target revision ID of the\ndocument that the write request will be applied to.\n\nIf collaborator changes have occurred after the document was read using\nthe API, the changes produced by this write request will be transformed\nagainst the collaborator changes. This results in a new revision of the\ndocument which incorporates both the changes in the request and the\ncollaborator changes, and the Docs server will resolve conflicting\nchanges. When using `target_revision_id`, the API client can be thought\nof as another collaborator of the document.\n\nThe target revision ID may only be used to write to recent versions of a\ndocument. If the target revision is too far behind the latest revision,\nthe request will not be processed and will return a 400 bad request error\nand the request should be retried after reading the latest version of the\ndocument. In most cases a `revision_id` will remain valid for use as a\ntarget revision for several minutes after it is read, but for\nfrequently-edited documents this window may be shorter.",
           "type": "string"
         }
       },

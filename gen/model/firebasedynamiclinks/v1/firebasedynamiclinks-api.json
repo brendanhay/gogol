@@ -223,7 +223,7 @@
       }
     }
   },
-  "revision": "20190206",
+  "revision": "20190425",
   "rootUrl": "https://firebasedynamiclinks.googleapis.com/",
   "schemas": {
     "AnalyticsInfo": {
@@ -264,31 +264,16 @@
       },
       "type": "object"
     },
-    "AppPreview": {
-      "description": "Customizable parameters on the app preview page.\nThe text fields no longer need translation.",
-      "id": "AppPreview",
-      "properties": {
-        "openButtonText": {
-          "description": "Text that appears on the button to open up the app. Optional\nDefaults to \"Open\"",
-          "type": "string"
-        },
-        "savePositionText": {
-          "description": "Text that asks if user wants to save place in app. Optional.\nDefaults to \"Save my place in the app. A link will be copied to continue\nto this page\"",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "CreateManagedShortLinkRequest": {
       "description": "Request to create a managed Short Dynamic Link.",
       "id": "CreateManagedShortLinkRequest",
       "properties": {
         "dynamicLinkInfo": {
           "$ref": "DynamicLinkInfo",
-          "description": "Information about the Dynamic Link to be shortened.\n[Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener)."
+          "description": "Information about the Dynamic Link to be shortened.\n[Learn\nmore](https://firebase.google.com/docs/reference/dynamic-links/link-shortener)."
         },
         "longDynamicLink": {
-          "description": "Full long Dynamic Link URL with desired query parameters specified.\nFor example,\n\"https://sample.app.goo.gl/?link=http://www.google.com\u0026apn=com.sample\",\n[Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).",
+          "description": "Full long Dynamic Link URL with desired query parameters specified.\nFor example,\n\"https://sample.app.goo.gl/?link=http://www.google.com\u0026apn=com.sample\",\n[Learn\nmore](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).",
           "type": "string"
         },
         "name": {
@@ -334,10 +319,10 @@
       "properties": {
         "dynamicLinkInfo": {
           "$ref": "DynamicLinkInfo",
-          "description": "Information about the Dynamic Link to be shortened.\n[Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener)."
+          "description": "Information about the Dynamic Link to be shortened.\n[Learn\nmore](https://firebase.google.com/docs/reference/dynamic-links/link-shortener)."
         },
         "longDynamicLink": {
-          "description": "Full long Dynamic Link URL with desired query parameters specified.\nFor example,\n\"https://sample.app.goo.gl/?link=http://www.google.com\u0026apn=com.sample\",\n[Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).",
+          "description": "Full long Dynamic Link URL with desired query parameters specified.\nFor example,\n\"https://sample.app.goo.gl/?link=http://www.google.com\u0026apn=com.sample\",\n[Learn\nmore](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).",
           "type": "string"
         },
         "sdkVersion": {
@@ -483,10 +468,6 @@
           "$ref": "AndroidInfo",
           "description": "Android related information. See Android related parameters in the\n[documentation](https://firebase.google.com/docs/dynamic-links/create-manually)."
         },
-        "appPreview": {
-          "$ref": "AppPreview",
-          "description": "Optional customizable parameters on the app preview page"
-        },
         "desktopInfo": {
           "$ref": "DesktopInfo",
           "description": "Desktop related information. See desktop related parameters in the\n[documentation](https://firebase.google.com/docs/dynamic-links/create-manually)."
@@ -496,7 +477,7 @@
           "type": "string"
         },
         "dynamicLinkDomain": {
-          "description": "Dynamic Links domain that the project owns, e.g. abcd.app.goo.gl\n[Learn more](https://firebase.google.com/docs/dynamic-links/android/receive)\non how to set up Dynamic Link domain associated with your Firebase project.\n\nRequired if missing domain_uri_prefix.",
+          "description": "Dynamic Links domain that the project owns, e.g. abcd.app.goo.gl\n[Learn\nmore](https://firebase.google.com/docs/dynamic-links/android/receive) on\nhow to set up Dynamic Link domain associated with your Firebase project.\n\nRequired if missing domain_uri_prefix.",
           "type": "string"
         },
         "iosInfo": {
@@ -749,12 +730,20 @@
           "description": "Scion campaign value to be propagated by iSDK to Scion at post-install.",
           "type": "string"
         },
+        "utmContent": {
+          "description": "Scion content value to be propagated by iSDK to Scion at app-reopen.",
+          "type": "string"
+        },
         "utmMedium": {
           "description": "Scion medium value to be propagated by iSDK to Scion at post-install.",
           "type": "string"
         },
         "utmSource": {
           "description": "Scion source value to be propagated by iSDK to Scion at post-install.",
+          "type": "string"
+        },
+        "utmTerm": {
+          "description": "Scion term value to be propagated by iSDK to Scion at app-reopen.",
           "type": "string"
         }
       },
@@ -803,6 +792,10 @@
           "description": "Scion campaign value to be propagated by iSDK to Scion at app-reopen.",
           "type": "string"
         },
+        "utmContent": {
+          "description": "Scion content value to be propagated by iSDK to Scion at app-reopen.",
+          "type": "string"
+        },
         "utmMedium": {
           "description": "Scion medium value to be propagated by iSDK to Scion at app-reopen.",
           "type": "string"
@@ -810,16 +803,20 @@
         "utmSource": {
           "description": "Scion source value to be propagated by iSDK to Scion at app-reopen.",
           "type": "string"
+        },
+        "utmTerm": {
+          "description": "Scion term value to be propagated by iSDK to Scion at app-reopen.",
+          "type": "string"
         }
       },
       "type": "object"
     },
     "GooglePlayAnalytics": {
-      "description": "Parameters for Google Play Campaign Measurements.\n[Learn more](https://developers.google.com/analytics/devguides/collection/android/v4/campaigns#campaign-params)",
+      "description": "Parameters for Google Play Campaign Measurements.\n[Learn\nmore](https://developers.google.com/analytics/devguides/collection/android/v4/campaigns#campaign-params)",
       "id": "GooglePlayAnalytics",
       "properties": {
         "gclid": {
-          "description": "[AdWords autotagging parameter](https://support.google.com/analytics/answer/1033981?hl=en);\nused to measure Google AdWords ads. This value is generated dynamically\nand should never be modified.",
+          "description": "[AdWords autotagging\nparameter](https://support.google.com/analytics/answer/1033981?hl=en); used\nto measure Google AdWords ads. This value is generated dynamically and\nshould never be modified.",
           "type": "string"
         },
         "utmCampaign": {

@@ -852,7 +852,7 @@
       }
     }
   },
-  "revision": "20190122",
+  "revision": "20190419",
   "rootUrl": "https://containeranalysis.googleapis.com/",
   "schemas": {
     "AliasContext": {
@@ -908,6 +908,9 @@
       "description": "Occurrence that represents a single \"attestation\". The authenticity of an\nattestation can be verified using the attached signature. If the verifier\ntrusts the public key of the signer, then verifying the signature is\nsufficient to establish trust. In this circumstance, the authority to which\nthis attestation is attached is primarily useful for look-up (how to find\nthis attestation if you already know the authority and artifact to be\nverified) and intent (which authority was this attestation intended to sign\nfor).",
       "id": "Attestation",
       "properties": {
+        "genericSignedAttestation": {
+          "$ref": "GenericSignedAttestation"
+        },
         "pgpSignedAttestation": {
           "$ref": "PgpSignedAttestation",
           "description": "A PGP signed attestation."
@@ -1051,10 +1054,10 @@
       "properties": {
         "condition": {
           "$ref": "Expr",
-          "description": "Unimplemented. The condition that is associated with this binding.\nNOTE: an unsatisfied condition will not allow user access via current\nbinding. Different bindings, including their conditions, are examined\nindependently."
+          "description": "The condition that is associated with this binding.\nNOTE: An unsatisfied condition will not allow user access via current\nbinding. Different bindings, including their conditions, are examined\nindependently."
         },
         "members": {
-          "description": "Specifies the identities requesting access for a Cloud Platform resource.\n`members` can have the following values:\n\n* `allUsers`: A special identifier that represents anyone who is\n   on the internet; with or without a Google account.\n\n* `allAuthenticatedUsers`: A special identifier that represents anyone\n   who is authenticated with a Google account or a service account.\n\n* `user:{emailid}`: An email address that represents a specific Google\n   account. For example, `alice@gmail.com` .\n\n\n* `serviceAccount:{emailid}`: An email address that represents a service\n   account. For example, `my-other-app@appspot.gserviceaccount.com`.\n\n* `group:{emailid}`: An email address that represents a Google group.\n   For example, `admins@example.com`.\n\n\n* `domain:{domain}`: A Google Apps domain name that represents all the\n   users of that domain. For example, `google.com` or `example.com`.\n\n",
+          "description": "Specifies the identities requesting access for a Cloud Platform resource.\n`members` can have the following values:\n\n* `allUsers`: A special identifier that represents anyone who is\n   on the internet; with or without a Google account.\n\n* `allAuthenticatedUsers`: A special identifier that represents anyone\n   who is authenticated with a Google account or a service account.\n\n* `user:{emailid}`: An email address that represents a specific Google\n   account. For example, `alice@gmail.com` .\n\n\n* `serviceAccount:{emailid}`: An email address that represents a service\n   account. For example, `my-other-app@appspot.gserviceaccount.com`.\n\n* `group:{emailid}`: An email address that represents a Google group.\n   For example, `admins@example.com`.\n\n\n* `domain:{domain}`: The G Suite domain (primary) that represents all the\n   users of that domain. For example, `google.com` or `example.com`.\n\n",
           "items": {
             "type": "string"
           },
@@ -1182,6 +1185,143 @@
         "signature": {
           "description": "Required. Signature of the related `BuildProvenance`. In JSON, this is\nbase-64 encoded.",
           "format": "byte",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CVSSv3": {
+      "description": "Common Vulnerability Scoring System version 3.\nFor details, see https://www.first.org/cvss/specification-document",
+      "id": "CVSSv3",
+      "properties": {
+        "attackComplexity": {
+          "enum": [
+            "ATTACK_COMPLEXITY_UNSPECIFIED",
+            "ATTACK_COMPLEXITY_LOW",
+            "ATTACK_COMPLEXITY_HIGH"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "attackVector": {
+          "description": "Base Metrics\nRepresents the intrinsic characteristics of a vulnerability that are\nconstant over time and across user environments.",
+          "enum": [
+            "ATTACK_VECTOR_UNSPECIFIED",
+            "ATTACK_VECTOR_NETWORK",
+            "ATTACK_VECTOR_ADJACENT",
+            "ATTACK_VECTOR_LOCAL",
+            "ATTACK_VECTOR_PHYSICAL"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "availabilityImpact": {
+          "enum": [
+            "IMPACT_UNSPECIFIED",
+            "IMPACT_HIGH",
+            "IMPACT_LOW",
+            "IMPACT_NONE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "baseScore": {
+          "description": "The base score is a function of the base metric scores.",
+          "format": "float",
+          "type": "number"
+        },
+        "confidentialityImpact": {
+          "enum": [
+            "IMPACT_UNSPECIFIED",
+            "IMPACT_HIGH",
+            "IMPACT_LOW",
+            "IMPACT_NONE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "exploitabilityScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "impactScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "integrityImpact": {
+          "enum": [
+            "IMPACT_UNSPECIFIED",
+            "IMPACT_HIGH",
+            "IMPACT_LOW",
+            "IMPACT_NONE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "privilegesRequired": {
+          "enum": [
+            "PRIVILEGES_REQUIRED_UNSPECIFIED",
+            "PRIVILEGES_REQUIRED_NONE",
+            "PRIVILEGES_REQUIRED_LOW",
+            "PRIVILEGES_REQUIRED_HIGH"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "SCOPE_UNSPECIFIED",
+            "SCOPE_UNCHANGED",
+            "SCOPE_CHANGED"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "userInteraction": {
+          "enum": [
+            "USER_INTERACTION_UNSPECIFIED",
+            "USER_INTERACTION_NONE",
+            "USER_INTERACTION_REQUIRED"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
           "type": "string"
         }
       },
@@ -1581,7 +1721,7 @@
       "type": "object"
     },
     "FixableTotalByDigest": {
-      "description": "Per resource and severity counts of fixable and total vulnerabilites.",
+      "description": "Per resource and severity counts of fixable and total vulnerabilities.",
       "id": "FixableTotalByDigest",
       "properties": {
         "fixableCount": {
@@ -1617,6 +1757,37 @@
           "description": "The total number of vulnerabilities associated with this resource.",
           "format": "int64",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GenericSignedAttestation": {
+      "description": "An attestation wrapper that uses the Grafeas `Signature` message.\nThis attestation must define the `serialized_payload` that the `signatures`\nverify and any metadata necessary to interpret that plaintext.  The\nsignatures should always be over the `serialized_payload` bytestring.",
+      "id": "GenericSignedAttestation",
+      "properties": {
+        "contentType": {
+          "description": "Type (for example schema) of the attestation payload that was signed.\nThe verifier must ensure that the provided type is one that the verifier\nsupports, and that the attestation payload is a valid instantiation of that\ntype (for example by validating a JSON schema).",
+          "enum": [
+            "CONTENT_TYPE_UNSPECIFIED",
+            "SIMPLE_SIGNING_JSON"
+          ],
+          "enumDescriptions": [
+            "`ContentType` is not set.",
+            "Atomic format attestation signature. See\nhttps://github.com/containers/image/blob/8a5d2f82a6e3263290c8e0276c3e0f64e77723e7/docs/atomic-signature.md\nThe payload extracted in `plaintext` is a JSON blob conforming to the\nlinked schema."
+          ],
+          "type": "string"
+        },
+        "serializedPayload": {
+          "description": "The serialized payload that is verified by one or more `signatures`.\nThe encoding and semantic meaning of this payload must match what is set in\n`content_type`.",
+          "format": "byte",
+          "type": "string"
+        },
+        "signatures": {
+          "description": "One or more signatures over `serialized_payload`.  Verifier implementations\nshould consider this attestation message verified if at least one\n`signature` verifies `serialized_payload`.  See `Signature` in common.proto\nfor more details on signature structure and verification.",
+          "items": {
+            "$ref": "Signature"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -1749,6 +1920,26 @@
           "description": "Output only. The CVSS score of this vulnerability. CVSS score is on a\nscale of 0-10 where 0 indicates low severity and 10 indicates high\nseverity.",
           "format": "float",
           "type": "number"
+        },
+        "effectiveSeverity": {
+          "description": "The distro assigned severity for this vulnerability when it is\navailable, and note provider assigned severity when distro has not yet\nassigned a severity for this vulnerability.",
+          "enum": [
+            "SEVERITY_UNSPECIFIED",
+            "MINIMAL",
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "CRITICAL"
+          ],
+          "enumDescriptions": [
+            "Unknown.",
+            "Minimal severity.",
+            "Low severity.",
+            "Medium severity.",
+            "High severity.",
+            "Critical severity."
+          ],
+          "type": "string"
         },
         "longDescription": {
           "description": "Output only. A detailed description of this vulnerability.",
@@ -1898,23 +2089,23 @@
           ],
           "enumDescriptions": [
             "Default value for unsupported/missing directive.",
-            "https://docs.docker.com/reference/builder/#maintainer",
-            "https://docs.docker.com/reference/builder/#run",
-            "https://docs.docker.com/reference/builder/#cmd",
-            "https://docs.docker.com/reference/builder/#label",
-            "https://docs.docker.com/reference/builder/#expose",
-            "https://docs.docker.com/reference/builder/#env",
-            "https://docs.docker.com/reference/builder/#add",
-            "https://docs.docker.com/reference/builder/#copy",
-            "https://docs.docker.com/reference/builder/#entrypoint",
-            "https://docs.docker.com/reference/builder/#volume",
-            "https://docs.docker.com/reference/builder/#user",
-            "https://docs.docker.com/reference/builder/#workdir",
-            "https://docs.docker.com/reference/builder/#arg",
-            "https://docs.docker.com/reference/builder/#onbuild",
-            "https://docs.docker.com/reference/builder/#stopsignal",
-            "https://docs.docker.com/reference/builder/#healthcheck",
-            "https://docs.docker.com/reference/builder/#shell"
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/",
+            "https://docs.docker.com/engine/reference/builder/"
           ],
           "type": "string"
         }
@@ -2228,7 +2419,7 @@
           "description": "The location of the available fix for vulnerability."
         },
         "severityName": {
-          "description": "The severity (e.g., distro assigned severity) for this vulnerability.",
+          "description": "Deprecated, use Details.effective_severity instead\nThe severity (e.g., distro assigned severity) for this vulnerability.",
           "type": "string"
         }
       },
@@ -2401,6 +2592,22 @@
       },
       "type": "object"
     },
+    "Signature": {
+      "description": "Verifiers (e.g. Kritis implementations) MUST verify signatures\nwith respect to the trust anchors defined in policy (e.g. a Kritis policy).\nTypically this means that the verifier has been configured with a map from\n`public_key_id` to public key material (and any required parameters, e.g.\nsigning algorithm).\n\nIn particular, verification implementations MUST NOT treat the signature\n`public_key_id` as anything more than a key lookup hint. The `public_key_id`\nDOES NOT validate or authenticate a public key; it only provides a mechanism\nfor quickly selecting a public key ALREADY CONFIGURED on the verifier through\na trusted channel. Verification implementations MUST reject signatures in any\nof the following circumstances:\n  * The `public_key_id` is not recognized by the verifier.\n  * The public key that `public_key_id` refers to does not verify the\n    signature with respect to the payload.\n\nThe `signature` contents SHOULD NOT be \"attached\" (where the payload is\nincluded with the serialized `signature` bytes). Verifiers MUST ignore any\n\"attached\" payload and only verify signatures with respect to explicitly\nprovided payload (e.g. a `payload` field on the proto message that holds\nthis Signature, or the canonical serialization of the proto message that\nholds this signature).",
+      "id": "Signature",
+      "properties": {
+        "publicKeyId": {
+          "description": "The identifier for the public key that verifies this signature.\n  * The `public_key_id` is required.\n  * The `public_key_id` MUST be an RFC3986 conformant URI.\n  * When possible, the `public_key_id` SHOULD be an immutable reference,\n    such as a cryptographic digest.\n\nExamples of valid `public_key_id`s:\n\nOpenPGP V4 public key fingerprint:\n  * \"openpgp4fpr:74FAF3B861BDA0870C7B6DEF607E48D2A663AEEA\"\nSee https://www.iana.org/assignments/uri-schemes/prov/openpgp4fpr for more\ndetails on this scheme.\n\nRFC6920 digest-named SubjectPublicKeyInfo (digest of the DER\nserialization):\n  * \"ni:///sha-256;cD9o9Cq6LG3jD0iKXqEi_vdjJGecm_iXkbqVoScViaU\"\n  * \"nih:///sha-256;703f68f42aba2c6de30f488a5ea122fef76324679c9bf89791ba95a1271589a5\"",
+          "type": "string"
+        },
+        "signature": {
+          "description": "The content of the signature, an opaque bytestring.\nThe payload that this signature verifies MUST be unambiguously provided\nwith the Signature during verification. A wrapper message might provide\nthe payload explicitly. Alternatively, a message might have a canonical\nserialization that can always be unambiguously computed to derive the\npayload.",
+          "format": "byte",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Source": {
       "description": "Source describes the location of the source used for the build.",
       "id": "Source",
@@ -2457,7 +2664,7 @@
       "type": "object"
     },
     "Status": {
-      "description": "The `Status` type defines a logical error model that is suitable for different\nprogramming environments, including REST APIs and RPC APIs. It is used by\n[gRPC](https://github.com/grpc). The error model is designed to be:\n\n- Simple to use and understand for most users\n- Flexible enough to meet unexpected needs\n\n# Overview\n\nThe `Status` message contains three pieces of data: error code, error message,\nand error details. The error code should be an enum value of\ngoogle.rpc.Code, but it may accept additional error codes if needed.  The\nerror message should be a developer-facing English message that helps\ndevelopers *understand* and *resolve* the error. If a localized user-facing\nerror message is needed, put the localized message in the error details or\nlocalize it in the client. The optional error details may contain arbitrary\ninformation about the error. There is a predefined set of error detail types\nin the package `google.rpc` that can be used for common error conditions.\n\n# Language mapping\n\nThe `Status` message is the logical representation of the error model, but it\nis not necessarily the actual wire format. When the `Status` message is\nexposed in different client libraries and different wire protocols, it can be\nmapped differently. For example, it will likely be mapped to some exceptions\nin Java, but more likely mapped to some error codes in C.\n\n# Other uses\n\nThe error model and the `Status` message can be used in a variety of\nenvironments, either with or without APIs, to provide a\nconsistent developer experience across different environments.\n\nExample uses of this error model include:\n\n- Partial errors. If a service needs to return partial errors to the client,\n    it may embed the `Status` in the normal response to indicate the partial\n    errors.\n\n- Workflow errors. A typical workflow has multiple steps. Each step may\n    have a `Status` message for error reporting.\n\n- Batch operations. If a client uses batch request and batch response, the\n    `Status` message should be used directly inside batch response, one for\n    each error sub-response.\n\n- Asynchronous operations. If an API call embeds asynchronous operation\n    results in its response, the status of those operations should be\n    represented directly using the `Status` message.\n\n- Logging. If some API errors are stored in logs, the message `Status` could\n    be used directly after any stripping needed for security/privacy reasons.",
+      "description": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). The error model is designed to be:\n\n- Simple to use and understand for most users\n- Flexible enough to meet unexpected needs\n\n# Overview\n\nThe `Status` message contains three pieces of data: error code, error\nmessage, and error details. The error code should be an enum value of\ngoogle.rpc.Code, but it may accept additional error codes if needed.  The\nerror message should be a developer-facing English message that helps\ndevelopers *understand* and *resolve* the error. If a localized user-facing\nerror message is needed, put the localized message in the error details or\nlocalize it in the client. The optional error details may contain arbitrary\ninformation about the error. There is a predefined set of error detail types\nin the package `google.rpc` that can be used for common error conditions.\n\n# Language mapping\n\nThe `Status` message is the logical representation of the error model, but it\nis not necessarily the actual wire format. When the `Status` message is\nexposed in different client libraries and different wire protocols, it can be\nmapped differently. For example, it will likely be mapped to some exceptions\nin Java, but more likely mapped to some error codes in C.\n\n# Other uses\n\nThe error model and the `Status` message can be used in a variety of\nenvironments, either with or without APIs, to provide a\nconsistent developer experience across different environments.\n\nExample uses of this error model include:\n\n- Partial errors. If a service needs to return partial errors to the client,\n    it may embed the `Status` in the normal response to indicate the partial\n    errors.\n\n- Workflow errors. A typical workflow has multiple steps. Each step may\n    have a `Status` message for error reporting.\n\n- Batch operations. If a client uses batch request and batch response, the\n    `Status` message should be used directly inside batch response, one for\n    each error sub-response.\n\n- Asynchronous operations. If an API call embeds asynchronous operation\n    results in its response, the status of those operations should be\n    represented directly using the `Status` message.\n\n- Logging. If some API errors are stored in logs, the message `Status` could\n    be used directly after any stripping needed for security/privacy reasons.",
       "id": "Status",
       "properties": {
         "code": {
@@ -2555,6 +2762,10 @@
           "description": "The CVSS score for this vulnerability.",
           "format": "float",
           "type": "number"
+        },
+        "cvssV3": {
+          "$ref": "CVSSv3",
+          "description": "The full description of the CVSSv3."
         },
         "details": {
           "description": "All information about the package to specifically identify this\nvulnerability. One entry per (version range and cpe_uri) the package\nvulnerability has manifested in.",

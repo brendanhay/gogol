@@ -1183,6 +1183,34 @@
         },
         "jobTriggers": {
           "methods": {
+            "activate": {
+              "description": "Activate a job trigger. Causes the immediate execute of a trigger\ninstead of waiting on the trigger event to occur.",
+              "flatPath": "v2/projects/{projectsId}/jobTriggers/{jobTriggersId}:activate",
+              "httpMethod": "POST",
+              "id": "dlp.projects.jobTriggers.activate",
+              "parameterOrder": [
+                "name"
+              ],
+              "parameters": {
+                "name": {
+                  "description": "Resource name of the trigger to activate, for example\n`projects/dlp-test-project/jobTriggers/53234423`.",
+                  "location": "path",
+                  "pattern": "^projects/[^/]+/jobTriggers/[^/]+$",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "path": "v2/{+name}:activate",
+              "request": {
+                "$ref": "GooglePrivacyDlpV2ActivateJobTriggerRequest"
+              },
+              "response": {
+                "$ref": "GooglePrivacyDlpV2DlpJob"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/cloud-platform"
+              ]
+            },
             "create": {
               "description": "Creates a job trigger to run DLP actions such as scanning storage for\nsensitive information on a set schedule.\nSee https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.",
               "flatPath": "v2/projects/{projectsId}/jobTriggers",
@@ -1491,7 +1519,7 @@
       }
     }
   },
-  "revision": "20190205",
+  "revision": "20190422",
   "rootUrl": "https://dlp.googleapis.com/",
   "schemas": {
     "GooglePrivacyDlpV2Action": {
@@ -1500,7 +1528,7 @@
       "properties": {
         "jobNotificationEmails": {
           "$ref": "GooglePrivacyDlpV2JobNotificationEmails",
-          "description": "Enable email notification to project owners and editors on job‘s\ncompletion/failure."
+          "description": "Enable email notification to project owners and editors on job's\ncompletion/failure."
         },
         "pubSub": {
           "$ref": "GooglePrivacyDlpV2PublishToPubSub",
@@ -1515,6 +1543,12 @@
           "description": "Save resulting findings in a provided location."
         }
       },
+      "type": "object"
+    },
+    "GooglePrivacyDlpV2ActivateJobTriggerRequest": {
+      "description": "Request message for ActivateJobTrigger.",
+      "id": "GooglePrivacyDlpV2ActivateJobTriggerRequest",
+      "properties": {},
       "type": "object"
     },
     "GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails": {
@@ -1918,13 +1952,15 @@
           "enumDescriptions": [
             "Includes all files.",
             "Includes all file extensions not covered by text file types.",
-            "Included file extensions:\n  asc, brf, c, cc, cpp, csv, cxx, c++, cs, css, dart, eml, go, h, hh, hpp,\n  hxx, h++, hs, html, htm, shtml, shtm, xhtml, lhs, ini, java, js, json,\n  ocaml, md, mkd, markdown, m, ml, mli, pl, pm, php, phtml, pht, py, pyw,\n  rb, rbw, rs, rc, scala, sh, sql, tex, txt, text, tsv, vcard, vcs, wml,\n  xml, xsl, xsd, yml, yaml."
+            "Included file extensions:\n  asc, brf, c, cc, cpp, csv, cxx, c++, cs, css, dart, eml, go, h, hh, hpp,\n  hxx, h++, hs, html, htm, shtml, shtm, xhtml, lhs, ini, java, js, json,\n  ocaml, md, mkd, markdown, m, ml, mli, pl, pm, php, phtml, pht, py, pyw,\n  rb, rbw, rs, rc, scala, sh, sql, tex, txt, text, tsv, vcard, vcs, wml,\n  xml, xsl, xsd, yml, yaml.",
+            "Included file extensions:\n  bmp, gif, jpg, jpeg, jpe, png.\nbytes_limit_per_file has no effect on image files."
           ],
           "items": {
             "enum": [
               "FILE_TYPE_UNSPECIFIED",
               "BINARY_FILE",
-              "TEXT_FILE"
+              "TEXT_FILE",
+              "IMAGE"
             ],
             "type": "string"
           },
@@ -2010,7 +2046,7 @@
       "type": "object"
     },
     "GooglePrivacyDlpV2Condition": {
-      "description": "The field type of `value` and `field` do not need to match to be\nconsidered equal, but not all comparisons are possible.\n\nA `value` of type:\n\n- `string` can be compared against all other types\n- `boolean` can only be compared against other booleans\n- `integer` can be compared against doubles or a string if the string value\ncan be parsed as an integer.\n- `double` can be compared against integers or a string if the string can\nbe parsed as a double.\n- `Timestamp` can be compared against strings in RFC 3339 date string\nformat.\n- `TimeOfDay` can be compared against timestamps and strings in the format\nof 'HH:mm:ss'.\n\nIf we fail to compare do to type mismatch, a warning will be given and\nthe condition will evaluate to false.",
+      "description": "The field type of `value` and `field` do not need to match to be\nconsidered equal, but not all comparisons are possible.\nEQUAL_TO and NOT_EQUAL_TO attempt to compare even with incompatible types,\nbut all other comparisons are invalid with incompatible types.\nA `value` of type:\n\n- `string` can be compared against all other types\n- `boolean` can only be compared against other booleans\n- `integer` can be compared against doubles or a string if the string value\ncan be parsed as an integer.\n- `double` can be compared against integers or a string if the string can\nbe parsed as a double.\n- `Timestamp` can be compared against strings in RFC 3339 date string\nformat.\n- `TimeOfDay` can be compared against timestamps and strings in the format\nof 'HH:mm:ss'.\n\nIf we fail to compare do to type mismatch, a warning will be given and\nthe condition will evaluate to false.",
       "id": "GooglePrivacyDlpV2Condition",
       "properties": {
         "field": {
@@ -2031,8 +2067,8 @@
           ],
           "enumDescriptions": [
             "",
-            "Equal.",
-            "Not equal to.",
+            "Equal. Attempts to match even with incompatible types.",
+            "Not equal to. Attempts to match even with incompatible types.",
             "Greater than.",
             "Less than.",
             "Greater than or equals.",
@@ -2121,7 +2157,7 @@
           "description": "The DeidentifyTemplate to create."
         },
         "templateId": {
-          "description": "The template id can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
+          "description": "The template id can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-_]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
           "type": "string"
         }
       },
@@ -2135,7 +2171,7 @@
           "$ref": "GooglePrivacyDlpV2InspectJobConfig"
         },
         "jobId": {
-          "description": "The job id can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
+          "description": "The job id can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-_]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
           "type": "string"
         },
         "riskJob": {
@@ -2153,7 +2189,7 @@
           "description": "The InspectTemplate to create."
         },
         "templateId": {
-          "description": "The template id can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
+          "description": "The template id can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-_]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
           "type": "string"
         }
       },
@@ -2168,7 +2204,7 @@
           "description": "The JobTrigger to create."
         },
         "triggerId": {
-          "description": "The trigger id can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
+          "description": "The trigger id can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-_]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
           "type": "string"
         }
       },
@@ -2183,8 +2219,27 @@
           "description": "Configuration of the storedInfoType to create."
         },
         "storedInfoTypeId": {
-          "description": "The storedInfoType ID can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
+          "description": "The storedInfoType ID can contain uppercase and lowercase letters,\nnumbers, and hyphens; that is, it must match the regular\nexpression: `[a-zA-Z\\\\d-_]+`. The maximum length is 100\ncharacters. Can be empty to allow the system to generate one.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GooglePrivacyDlpV2CryptoDeterministicConfig": {
+      "description": "Pseudonymization method that generates deterministic encryption for the given\ninput. Outputs a base64 encoded representation of the encrypted output.\nUses AES-SIV based on the RFC https://tools.ietf.org/html/rfc5297.",
+      "id": "GooglePrivacyDlpV2CryptoDeterministicConfig",
+      "properties": {
+        "context": {
+          "$ref": "GooglePrivacyDlpV2FieldId",
+          "description": "Optional. A context may be used for higher security and maintaining\nreferential integrity such that the same identifier in two different\ncontexts will be given a distinct surrogate. The context is appended to\nplaintext value being encrypted. On decryption the provided context is\nvalidated against the value used during encryption. If a context was\nprovided during encryption, same context must be provided during decryption\nas well.\n\nIf the context is not set, plaintext would be used as is for encryption.\nIf the context is set but:\n\n1. there is no record present when transforming a given value or\n2. the field is not present when transforming a given value,\n\nplaintext would be used as is for encryption.\n\nNote that case (1) is expected when an `InfoTypeTransformation` is\napplied to both structured and non-structured `ContentItem`s."
+        },
+        "cryptoKey": {
+          "$ref": "GooglePrivacyDlpV2CryptoKey",
+          "description": "The key used by the encryption function."
+        },
+        "surrogateInfoType": {
+          "$ref": "GooglePrivacyDlpV2InfoType",
+          "description": "The custom info type to annotate the surrogate with.\nThis annotation will be applied to the surrogate by prefixing it with\nthe name of the custom info type followed by the number of\ncharacters comprising the surrogate. The following scheme defines the\nformat: \u003cinfo type name\u003e(\u003csurrogate character count\u003e):\u003csurrogate\u003e\n\nFor example, if the name of custom info type is 'MY_TOKEN_INFO_TYPE' and\nthe surrogate is 'abc', the full replacement value\nwill be: 'MY_TOKEN_INFO_TYPE(3):abc'\n\nThis annotation identifies the surrogate when inspecting content using the\ncustom info type 'Surrogate'. This facilitates reversal of the\nsurrogate when it occurs in free text.\n\nIn order for inspection to work properly, the name of this info type must\nnot occur naturally anywhere in your data; otherwise, inspection may either\n\n- reverse a surrogate that does not correspond to an actual identifier\n- be unable to parse the surrogate and result in an error\n\nTherefore, choose your custom info type name carefully after considering\nwhat your data looks like. One way to select a name that has a high chance\nof yielding reliable detection is to include one or more unicode characters\nthat are highly improbable to exist in your data.\nFor example, assuming your data is entered from a regular ASCII keyboard,\nthe symbol with the hex code point 29DD might be used like so:\n⧝MY_TOKEN_TYPE"
         }
       },
       "type": "object"
@@ -2217,7 +2272,7 @@
       "type": "object"
     },
     "GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig": {
-      "description": "Replaces an identifier with a surrogate using FPE with the FFX\nmode of operation; however when used in the `ReidentifyContent` API method,\nit serves the opposite function by reversing the surrogate back into\nthe original identifier.\nThe identifier must be encoded as ASCII.\nFor a given crypto key and context, the same identifier will be\nreplaced with the same surrogate.\nIdentifiers must be at least two characters long.\nIn the case that the identifier is the empty string, it will be skipped.\nSee https://cloud.google.com/dlp/docs/pseudonymization to learn more.",
+      "description": "Replaces an identifier with a surrogate using Format Preserving Encryption\n(FPE) with the FFX mode of operation; however when used in the\n`ReidentifyContent` API method, it serves the opposite function by reversing\nthe surrogate back into the original identifier. The identifier must be\nencoded as ASCII. For a given crypto key and context, the same identifier\nwill be replaced with the same surrogate. Identifiers must be at least two\ncharacters long. In the case that the identifier is the empty string, it will\nbe skipped. See https://cloud.google.com/dlp/docs/pseudonymization to learn\nmore.\n\nNote: We recommend using  CryptoDeterministicConfig for all use cases which\ndo not require preserving the input alphabet space and size, plus warrant\nreferential integrity.",
       "id": "GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig",
       "properties": {
         "commonAlphabet": {
@@ -2928,12 +2983,12 @@
           "type": "array"
         },
         "maxFindingsPerItem": {
-          "description": "Max number of findings that will be returned for each item scanned.\nWhen set within `InspectDataSourceRequest`,\nthe maximum returned is 1000 regardless if this is set higher.\nWhen set within `InspectContentRequest`, this field is ignored.",
+          "description": "Max number of findings that will be returned for each item scanned.\nWhen set within `InspectDataSourceRequest`,\nthe maximum returned is 2000 regardless if this is set higher.\nWhen set within `InspectContentRequest`, this field is ignored.",
           "format": "int32",
           "type": "integer"
         },
         "maxFindingsPerRequest": {
-          "description": "Max number of findings that will be returned per request/job.\nWhen set within `InspectContentRequest`, the maximum returned is 1000\nregardless if this is set higher.",
+          "description": "Max number of findings that will be returned per request/job.\nWhen set within `InspectContentRequest`, the maximum returned is 2000\nregardless if this is set higher.",
           "format": "int32",
           "type": "integer"
         }
@@ -3248,7 +3303,7 @@
       "id": "GooglePrivacyDlpV2InspectJobConfig",
       "properties": {
         "actions": {
-          "description": "Actions to execute at the completion of the job. Are executed in the order\nprovided.",
+          "description": "Actions to execute at the completion of the job.",
           "items": {
             "$ref": "GooglePrivacyDlpV2Action"
           },
@@ -3635,7 +3690,7 @@
       "type": "object"
     },
     "GooglePrivacyDlpV2KmsWrappedCryptoKey": {
-      "description": "Include to use an existing data crypto key wrapped by KMS.\nAuthorization requires the following IAM permissions when sending a request\nto perform a crypto transformation using a kms-wrapped crypto key:\ndlp.kms.encrypt",
+      "description": "Include to use an existing data crypto key wrapped by KMS.\nThe wrapped key must be a 128/192/256 bit key.\nAuthorization requires the following IAM permissions when sending a request\nto perform a crypto transformation using a kms-wrapped crypto key:\ndlp.kms.encrypt",
       "id": "GooglePrivacyDlpV2KmsWrappedCryptoKey",
       "properties": {
         "cryptoKeyName": {
@@ -4032,6 +4087,9 @@
         "characterMaskConfig": {
           "$ref": "GooglePrivacyDlpV2CharacterMaskConfig"
         },
+        "cryptoDeterministicConfig": {
+          "$ref": "GooglePrivacyDlpV2CryptoDeterministicConfig"
+        },
         "cryptoHashConfig": {
           "$ref": "GooglePrivacyDlpV2CryptoHashConfig"
         },
@@ -4421,6 +4479,7 @@
       "type": "object"
     },
     "GooglePrivacyDlpV2Result": {
+      "description": "All result fields mentioned below are updated while the job is processing.",
       "id": "GooglePrivacyDlpV2Result",
       "properties": {
         "infoTypeStats": {
@@ -4812,7 +4871,7 @@
       "type": "object"
     },
     "GooglePrivacyDlpV2TransformationSummary": {
-      "description": "Summary of a single tranformation.\nOnly one of 'transformation', 'field_transformation', or 'record_suppress'\nwill be set.",
+      "description": "Summary of a single transformation.\nOnly one of 'transformation', 'field_transformation', or 'record_suppress'\nwill be set.",
       "id": "GooglePrivacyDlpV2TransformationSummary",
       "properties": {
         "field": {
@@ -4879,7 +4938,7 @@
       "id": "GooglePrivacyDlpV2UnwrappedCryptoKey",
       "properties": {
         "key": {
-          "description": "The AES 128/192/256 bit key. [required]",
+          "description": "A 128/192/256 bit key. [required]",
           "format": "byte",
           "type": "string"
         }
@@ -5041,7 +5100,7 @@
       "type": "object"
     },
     "GoogleRpcStatus": {
-      "description": "The `Status` type defines a logical error model that is suitable for different\nprogramming environments, including REST APIs and RPC APIs. It is used by\n[gRPC](https://github.com/grpc). The error model is designed to be:\n\n- Simple to use and understand for most users\n- Flexible enough to meet unexpected needs\n\n# Overview\n\nThe `Status` message contains three pieces of data: error code, error message,\nand error details. The error code should be an enum value of\ngoogle.rpc.Code, but it may accept additional error codes if needed.  The\nerror message should be a developer-facing English message that helps\ndevelopers *understand* and *resolve* the error. If a localized user-facing\nerror message is needed, put the localized message in the error details or\nlocalize it in the client. The optional error details may contain arbitrary\ninformation about the error. There is a predefined set of error detail types\nin the package `google.rpc` that can be used for common error conditions.\n\n# Language mapping\n\nThe `Status` message is the logical representation of the error model, but it\nis not necessarily the actual wire format. When the `Status` message is\nexposed in different client libraries and different wire protocols, it can be\nmapped differently. For example, it will likely be mapped to some exceptions\nin Java, but more likely mapped to some error codes in C.\n\n# Other uses\n\nThe error model and the `Status` message can be used in a variety of\nenvironments, either with or without APIs, to provide a\nconsistent developer experience across different environments.\n\nExample uses of this error model include:\n\n- Partial errors. If a service needs to return partial errors to the client,\n    it may embed the `Status` in the normal response to indicate the partial\n    errors.\n\n- Workflow errors. A typical workflow has multiple steps. Each step may\n    have a `Status` message for error reporting.\n\n- Batch operations. If a client uses batch request and batch response, the\n    `Status` message should be used directly inside batch response, one for\n    each error sub-response.\n\n- Asynchronous operations. If an API call embeds asynchronous operation\n    results in its response, the status of those operations should be\n    represented directly using the `Status` message.\n\n- Logging. If some API errors are stored in logs, the message `Status` could\n    be used directly after any stripping needed for security/privacy reasons.",
+      "description": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). The error model is designed to be:\n\n- Simple to use and understand for most users\n- Flexible enough to meet unexpected needs\n\n# Overview\n\nThe `Status` message contains three pieces of data: error code, error\nmessage, and error details. The error code should be an enum value of\ngoogle.rpc.Code, but it may accept additional error codes if needed.  The\nerror message should be a developer-facing English message that helps\ndevelopers *understand* and *resolve* the error. If a localized user-facing\nerror message is needed, put the localized message in the error details or\nlocalize it in the client. The optional error details may contain arbitrary\ninformation about the error. There is a predefined set of error detail types\nin the package `google.rpc` that can be used for common error conditions.\n\n# Language mapping\n\nThe `Status` message is the logical representation of the error model, but it\nis not necessarily the actual wire format. When the `Status` message is\nexposed in different client libraries and different wire protocols, it can be\nmapped differently. For example, it will likely be mapped to some exceptions\nin Java, but more likely mapped to some error codes in C.\n\n# Other uses\n\nThe error model and the `Status` message can be used in a variety of\nenvironments, either with or without APIs, to provide a\nconsistent developer experience across different environments.\n\nExample uses of this error model include:\n\n- Partial errors. If a service needs to return partial errors to the client,\n    it may embed the `Status` in the normal response to indicate the partial\n    errors.\n\n- Workflow errors. A typical workflow has multiple steps. Each step may\n    have a `Status` message for error reporting.\n\n- Batch operations. If a client uses batch request and batch response, the\n    `Status` message should be used directly inside batch response, one for\n    each error sub-response.\n\n- Asynchronous operations. If an API call embeds asynchronous operation\n    results in its response, the status of those operations should be\n    represented directly using the `Status` message.\n\n- Logging. If some API errors are stored in logs, the message `Status` could\n    be used directly after any stripping needed for security/privacy reasons.",
       "id": "GoogleRpcStatus",
       "properties": {
         "code": {
