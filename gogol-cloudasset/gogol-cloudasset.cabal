@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta1@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -36,14 +36,9 @@ library
     exposed-modules:
           Network.Google.CloudAsset
         , Network.Google.CloudAsset.Types
-        , Network.Google.Resource.CloudAsset.Folders.ExportAssets
-        , Network.Google.Resource.CloudAsset.Folders.Operations.Get
-        , Network.Google.Resource.CloudAsset.Organizations.BatchGetAssetsHistory
-        , Network.Google.Resource.CloudAsset.Organizations.ExportAssets
-        , Network.Google.Resource.CloudAsset.Organizations.Operations.Get
-        , Network.Google.Resource.CloudAsset.Projects.BatchGetAssetsHistory
-        , Network.Google.Resource.CloudAsset.Projects.ExportAssets
-        , Network.Google.Resource.CloudAsset.Projects.Operations.Get
+        , Network.Google.Resource.CloudAsset.BatchGetAssetsHistory
+        , Network.Google.Resource.CloudAsset.ExportAssets
+        , Network.Google.Resource.CloudAsset.Operations.Get
 
     other-modules:
           Network.Google.CloudAsset.Types.Product

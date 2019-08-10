@@ -63,7 +63,9 @@ gitrAudience
 -- \`roles\/iam.serviceAccountTokenCreator\` role on the service account
 -- that is specified in the \`name\` field of the request. The delegates
 -- must have the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 gitrDelegates :: Lens' GenerateIdTokenRequest [Text]
 gitrDelegates
   = lens _gitrDelegates
@@ -221,7 +223,9 @@ signBlobRequest =
 -- \`roles\/iam.serviceAccountTokenCreator\` role on the service account
 -- that is specified in the \`name\` field of the request. The delegates
 -- must have the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 sbrDelegates :: Lens' SignBlobRequest [Text]
 sbrDelegates
   = lens _sbrDelegates (\ s a -> s{_sbrDelegates = a})
@@ -367,7 +371,9 @@ generateAccessTokenRequest =
 -- \`roles\/iam.serviceAccountTokenCreator\` role on the service account
 -- that is specified in the \`name\` field of the request. The delegates
 -- must have the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 gatrDelegates :: Lens' GenerateAccessTokenRequest [Text]
 gatrDelegates
   = lens _gatrDelegates
@@ -497,7 +503,9 @@ signJwtRequest =
 -- \`roles\/iam.serviceAccountTokenCreator\` role on the service account
 -- that is specified in the \`name\` field of the request. The delegates
 -- must have the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 sjrDelegates :: Lens' SignJwtRequest [Text]
 sjrDelegates
   = lens _sjrDelegates (\ s a -> s{_sjrDelegates = a})

@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsDicomStoresGet' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresGetResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

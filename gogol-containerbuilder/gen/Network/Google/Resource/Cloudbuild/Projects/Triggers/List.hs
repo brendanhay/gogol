@@ -37,7 +37,9 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.List
     , ptlUploadProtocol
     , ptlAccessToken
     , ptlUploadType
+    , ptlPageToken
     , ptlProjectId
+    , ptlPageSize
     , ptlCallback
     ) where
 
@@ -55,9 +57,11 @@ type ProjectsTriggersListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ListBuildTriggersResponse
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListBuildTriggersResponse
 
 -- | Lists existing \`BuildTrigger\`s. This API is experimental.
 --
@@ -68,7 +72,9 @@ data ProjectsTriggersList =
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlAccessToken    :: !(Maybe Text)
     , _ptlUploadType     :: !(Maybe Text)
+    , _ptlPageToken      :: !(Maybe Text)
     , _ptlProjectId      :: !Text
+    , _ptlPageSize       :: !(Maybe (Textual Int32))
     , _ptlCallback       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -86,7 +92,11 @@ data ProjectsTriggersList =
 --
 -- * 'ptlUploadType'
 --
+-- * 'ptlPageToken'
+--
 -- * 'ptlProjectId'
+--
+-- * 'ptlPageSize'
 --
 -- * 'ptlCallback'
 projectsTriggersList
@@ -98,7 +108,9 @@ projectsTriggersList pPtlProjectId_ =
     , _ptlUploadProtocol = Nothing
     , _ptlAccessToken = Nothing
     , _ptlUploadType = Nothing
+    , _ptlPageToken = Nothing
     , _ptlProjectId = pPtlProjectId_
+    , _ptlPageSize = Nothing
     , _ptlCallback = Nothing
     }
 
@@ -125,10 +137,21 @@ ptlUploadType
   = lens _ptlUploadType
       (\ s a -> s{_ptlUploadType = a})
 
+-- | Token to provide to skip to a particular spot in the list.
+ptlPageToken :: Lens' ProjectsTriggersList (Maybe Text)
+ptlPageToken
+  = lens _ptlPageToken (\ s a -> s{_ptlPageToken = a})
+
 -- | ID of the project for which to list BuildTriggers.
 ptlProjectId :: Lens' ProjectsTriggersList Text
 ptlProjectId
   = lens _ptlProjectId (\ s a -> s{_ptlProjectId = a})
+
+-- | Number of results to return in the list.
+ptlPageSize :: Lens' ProjectsTriggersList (Maybe Int32)
+ptlPageSize
+  = lens _ptlPageSize (\ s a -> s{_ptlPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 ptlCallback :: Lens' ProjectsTriggersList (Maybe Text)
@@ -144,6 +167,8 @@ instance GoogleRequest ProjectsTriggersList where
           = go _ptlProjectId _ptlXgafv _ptlUploadProtocol
               _ptlAccessToken
               _ptlUploadType
+              _ptlPageToken
+              _ptlPageSize
               _ptlCallback
               (Just AltJSON)
               containerBuilderService

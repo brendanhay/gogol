@@ -38,6 +38,7 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores
     , pldsfslUploadProtocol
     , pldsfslAccessToken
     , pldsfslUploadType
+    , pldsfslFilter
     , pldsfslPageToken
     , pldsfslPageSize
     , pldsfslCallback
@@ -50,18 +51,19 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsFhirStoresList' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresListResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "parent" Text :>
          "fhirStores" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListFhirStoresResponse
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListFhirStoresResponse
 
 -- | Lists the FHIR stores in the given dataset.
 --
@@ -73,6 +75,7 @@ data ProjectsLocationsDataSetsFhirStoresList =
     , _pldsfslUploadProtocol :: !(Maybe Text)
     , _pldsfslAccessToken    :: !(Maybe Text)
     , _pldsfslUploadType     :: !(Maybe Text)
+    , _pldsfslFilter         :: !(Maybe Text)
     , _pldsfslPageToken      :: !(Maybe Text)
     , _pldsfslPageSize       :: !(Maybe (Textual Int32))
     , _pldsfslCallback       :: !(Maybe Text)
@@ -94,6 +97,8 @@ data ProjectsLocationsDataSetsFhirStoresList =
 --
 -- * 'pldsfslUploadType'
 --
+-- * 'pldsfslFilter'
+--
 -- * 'pldsfslPageToken'
 --
 -- * 'pldsfslPageSize'
@@ -109,6 +114,7 @@ projectsLocationsDataSetsFhirStoresList pPldsfslParent_ =
     , _pldsfslUploadProtocol = Nothing
     , _pldsfslAccessToken = Nothing
     , _pldsfslUploadType = Nothing
+    , _pldsfslFilter = Nothing
     , _pldsfslPageToken = Nothing
     , _pldsfslPageSize = Nothing
     , _pldsfslCallback = Nothing
@@ -144,6 +150,14 @@ pldsfslUploadType
   = lens _pldsfslUploadType
       (\ s a -> s{_pldsfslUploadType = a})
 
+-- | Restricts stores returned to those matching a filter. Syntax:
+-- https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/search\/query_strings
+-- Only filtering on labels is supported, for example \`labels.key=value\`.
+pldsfslFilter :: Lens' ProjectsLocationsDataSetsFhirStoresList (Maybe Text)
+pldsfslFilter
+  = lens _pldsfslFilter
+      (\ s a -> s{_pldsfslFilter = a})
+
 -- | The next_page_token value returned from the previous List request, if
 -- any.
 pldsfslPageToken :: Lens' ProjectsLocationsDataSetsFhirStoresList (Maybe Text)
@@ -178,6 +192,7 @@ instance GoogleRequest
               _pldsfslUploadProtocol
               _pldsfslAccessToken
               _pldsfslUploadType
+              _pldsfslFilter
               _pldsfslPageToken
               _pldsfslPageSize
               _pldsfslCallback

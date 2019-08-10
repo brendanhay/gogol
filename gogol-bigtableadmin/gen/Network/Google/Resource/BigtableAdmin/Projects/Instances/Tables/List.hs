@@ -160,7 +160,13 @@ pitlPageToken
   = lens _pitlPageToken
       (\ s a -> s{_pitlPageToken = a})
 
--- | Maximum number of results per page. CURRENTLY UNIMPLEMENTED AND IGNORED.
+-- | Maximum number of results per page. A page_size of zero lets the server
+-- choose the number of items to return. A page_size which is strictly
+-- positive will return at most that many items. A negative page_size will
+-- cause an error. Following the first request, subsequent paginated calls
+-- are not required to pass a page_size. If a page_size is set in
+-- subsequent calls, it must match the page_size given in the first
+-- request.
 pitlPageSize :: Lens' ProjectsInstancesTablesList (Maybe Int32)
 pitlPageSize
   = lens _pitlPageSize (\ s a -> s{_pitlPageSize = a})

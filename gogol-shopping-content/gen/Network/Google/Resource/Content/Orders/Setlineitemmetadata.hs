@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets (overrides) merchant provided annotations on the line item.
+-- Sets (or overrides if it already exists) merchant provided annotations
+-- in the form of key-value pairs. A common use case would be to supply us
+-- with additional structured information about a line item that cannot be
+-- provided via other methods. Submitted key-value pairs can be retrieved
+-- as part of the orders resource.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.setlineitemmetadata@.
 module Network.Google.Resource.Content.Orders.Setlineitemmetadata
@@ -54,7 +58,11 @@ type OrdersSetlineitemmetadataResource =
                    ReqBody '[JSON] OrdersSetLineItemMetadataRequest :>
                      Post '[JSON] OrdersSetLineItemMetadataResponse
 
--- | Sets (overrides) merchant provided annotations on the line item.
+-- | Sets (or overrides if it already exists) merchant provided annotations
+-- in the form of key-value pairs. A common use case would be to supply us
+-- with additional structured information about a line item that cannot be
+-- provided via other methods. Submitted key-value pairs can be retrieved
+-- as part of the orders resource.
 --
 -- /See:/ 'ordersSetlineitemmetadata' smart constructor.
 data OrdersSetlineitemmetadata =

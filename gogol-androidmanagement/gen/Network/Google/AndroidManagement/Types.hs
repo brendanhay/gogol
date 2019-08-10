@@ -251,6 +251,9 @@ module Network.Google.AndroidManagement.Types
     , devEnrollmentTime
     , devDisplays
 
+    -- * WebAppDisplayMode
+    , WebAppDisplayMode (..)
+
     -- * ApplicationReportApplicationSource
     , ApplicationReportApplicationSource (..)
 
@@ -313,6 +316,7 @@ module Network.Google.AndroidManagement.Types
     , arVersionName
     , arPackageName
     , arPackageSha256Hash
+    , arKeyedAppStates
     , arApplicationSource
     , arEvents
     , arDisplayName
@@ -353,12 +357,18 @@ module Network.Google.AndroidManagement.Types
     , srsMemoryInfoEnabled
     , srsNetworkInfoEnabled
     , srsDeviceSettingsEnabled
+    , srsApplicationReportingSettings
 
     -- * CommandType
     , CommandType (..)
 
     -- * ApplicationPolicyDefaultPermissionPolicy
     , ApplicationPolicyDefaultPermissionPolicy (..)
+
+    -- * WebAppIcon
+    , WebAppIcon
+    , webAppIcon
+    , waiImageData
 
     -- * Xgafv
     , Xgafv (..)
@@ -544,6 +554,16 @@ module Network.Google.AndroidManagement.Types
     , ncdcNonComplianceReason
     , ncdcSettingName
 
+    -- * KeyedAppState
+    , KeyedAppState
+    , keyedAppState
+    , kasData
+    , kasSeverity
+    , kasKey
+    , kasMessage
+    , kasLastUpdateTime
+    , kasCreateTime
+
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
@@ -557,6 +577,9 @@ module Network.Google.AndroidManagement.Types
     , wtName
     , wtPermissions
 
+    -- * KeyedAppStateSeverity
+    , KeyedAppStateSeverity (..)
+
     -- * ComplianceRule
     , ComplianceRule
     , complianceRule
@@ -564,6 +587,12 @@ module Network.Google.AndroidManagement.Types
     , crDisableApps
     , crPackageNamesToDisable
     , crNonComplianceDetailCondition
+
+    -- * ListWebAppsResponse
+    , ListWebAppsResponse
+    , listWebAppsResponse
+    , lwarNextPageToken
+    , lwarWebApps
 
     -- * PasswordRequirements
     , PasswordRequirements
@@ -634,6 +663,11 @@ module Network.Google.AndroidManagement.Types
     , siAndroidBuildNumber
     , siAndroidVersion
 
+    -- * ApplicationReportingSettings
+    , ApplicationReportingSettings
+    , applicationReportingSettings
+    , arsIncludeRemovedApps
+
     -- * MemoryEventEventType
     , MemoryEventEventType (..)
 
@@ -650,6 +684,16 @@ module Network.Google.AndroidManagement.Types
     , saLaunchApp
     , saTitle
     , saDescription
+
+    -- * WebApp
+    , WebApp
+    , webApp
+    , waVersionCode
+    , waIcons
+    , waStartURL
+    , waDisplayMode
+    , waName
+    , waTitle
 
     -- * PasswordRequirementsPasswordQuality
     , PasswordRequirementsPasswordQuality (..)

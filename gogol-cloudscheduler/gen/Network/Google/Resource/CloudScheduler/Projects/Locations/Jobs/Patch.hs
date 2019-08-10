@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.patch@ method which the
 -- 'ProjectsLocationsJobsPatch' request conforms to.
 type ProjectsLocationsJobsPatchResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -157,7 +157,8 @@ pljpPayload :: Lens' ProjectsLocationsJobsPatch Job
 pljpPayload
   = lens _pljpPayload (\ s a -> s{_pljpPayload = a})
 
--- | The job name. For example:
+-- | Optionally caller-specified in CreateJob, after which it becomes output
+-- only. The job name. For example:
 -- \`projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID\`. *
 -- \`PROJECT_ID\` can contain letters ([A-Za-z]), numbers ([0-9]), hyphens
 -- (-), colons (:), or periods (.). For more information, see [Identifying

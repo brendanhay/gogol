@@ -97,6 +97,7 @@ module Network.Google.Speech
     , RecognizeRequest
     , recognizeRequest
     , rrConfig
+    , rrName
     , rrAudio
 
     -- ** Operation

@@ -13,10 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Service Networking API provides automatic management of network
--- configurations necessary for certain services.
+-- Provides automatic management of network configurations necessary for
+-- certain services.
 --
--- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/reference/rest/ Service Networking API Reference>
+-- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started Service Networking API Reference>
 module Network.Google.ServiceNetworking
     (
     -- * Service Configuration
@@ -43,7 +43,30 @@ module Network.Google.ServiceNetworking
     -- ** servicenetworking.operations.list
     , module Network.Google.Resource.ServiceNetworking.Operations.List
 
+    -- ** servicenetworking.services.addSubnetwork
+    , module Network.Google.Resource.ServiceNetworking.Services.AddSubnetwork
+
+    -- ** servicenetworking.services.connections.create
+    , module Network.Google.Resource.ServiceNetworking.Services.Connections.Create
+
+    -- ** servicenetworking.services.connections.list
+    , module Network.Google.Resource.ServiceNetworking.Services.Connections.List
+
+    -- ** servicenetworking.services.connections.patch
+    , module Network.Google.Resource.ServiceNetworking.Services.Connections.Patch
+
+    -- ** servicenetworking.services.searchRange
+    , module Network.Google.Resource.ServiceNetworking.Services.SearchRange
+
     -- * Types
+
+    -- ** GoogleCloudServicenetworkingV1betaSubnetwork
+    , GoogleCloudServicenetworkingV1betaSubnetwork
+    , googleCloudServicenetworkingV1betaSubnetwork
+    , gcsvsOutsideAllocation
+    , gcsvsNetwork
+    , gcsvsName
+    , gcsvsIPCIdRRange
 
     -- ** MetricDescriptorValueType
     , MetricDescriptorValueType (..)
@@ -63,6 +86,14 @@ module Network.Google.ServiceNetworking
     , mrdLabels
     , mrdType
     , mrdDescription
+
+    -- ** BackendRulePathTranslation
+    , BackendRulePathTranslation (..)
+
+    -- ** ListConnectionsResponse
+    , ListConnectionsResponse
+    , listConnectionsResponse
+    , lcrConnections
 
     -- ** DocumentationRule
     , DocumentationRule
@@ -132,10 +163,13 @@ module Network.Google.ServiceNetworking
     -- ** BackendRule
     , BackendRule
     , backendRule
+    , brJwtAudience
     , brSelector
     , brMinDeadline
     , brAddress
+    , brOperationDeadline
     , brDeadline
+    , brPathTranslation
 
     -- ** SourceContext
     , SourceContext
@@ -279,6 +313,14 @@ module Network.Google.ServiceNetworking
     , arAllowWithoutCredential
     , arOAuth
 
+    -- ** Connection
+    , Connection
+    , connection
+    , cPeering
+    , cReservedPeeringRanges
+    , cService
+    , cNetwork
+
     -- ** LabelDescriptorValueType
     , LabelDescriptorValueType (..)
 
@@ -333,6 +375,12 @@ module Network.Google.ServiceNetworking
     , metOptions
     , metSyntax
 
+    -- ** Range
+    , Range
+    , range
+    , rNetwork
+    , rIPCIdRRange
+
     -- ** SystemParameters
     , SystemParameters
     , systemParameters
@@ -360,8 +408,22 @@ module Network.Google.ServiceNetworking
     -- ** Subnetwork
     , Subnetwork
     , subnetwork
+    , subOutsideAllocation
+    , subNetwork
     , subName
     , subIPCIdRRange
+
+    -- ** AddSubnetworkRequest
+    , AddSubnetworkRequest
+    , addSubnetworkRequest
+    , asrIPPrefixLength
+    , asrRequestedAddress
+    , asrSubnetwork
+    , asrRegion
+    , asrSubnetworkUsers
+    , asrConsumerNetwork
+    , asrConsumer
+    , asrDescription
 
     -- ** SystemParameterRule
     , SystemParameterRule
@@ -386,17 +448,17 @@ module Network.Google.ServiceNetworking
     -- ** FieldCardinality
     , FieldCardinality (..)
 
+    -- ** SearchRangeRequest
+    , SearchRangeRequest
+    , searchRangeRequest
+    , srrIPPrefixLength
+    , srrNetwork
+
     -- ** HTTP
     , HTTP
     , hTTP
     , hRules
     , hFullyDecodeReservedExpansion
-
-    -- ** AddSubnetworkResponse
-    , AddSubnetworkResponse
-    , addSubnetworkResponse
-    , asrName
-    , asrIPCIdRRange
 
     -- ** Type
     , Type
@@ -560,6 +622,11 @@ import           Network.Google.Resource.ServiceNetworking.Operations.Cancel
 import           Network.Google.Resource.ServiceNetworking.Operations.Delete
 import           Network.Google.Resource.ServiceNetworking.Operations.Get
 import           Network.Google.Resource.ServiceNetworking.Operations.List
+import           Network.Google.Resource.ServiceNetworking.Services.AddSubnetwork
+import           Network.Google.Resource.ServiceNetworking.Services.Connections.Create
+import           Network.Google.Resource.ServiceNetworking.Services.Connections.List
+import           Network.Google.Resource.ServiceNetworking.Services.Connections.Patch
+import           Network.Google.Resource.ServiceNetworking.Services.SearchRange
 import           Network.Google.ServiceNetworking.Types
 
 {- $resources
@@ -571,3 +638,8 @@ type ServiceNetworkingAPI =
      OperationsListResource :<|> OperationsGetResource
        :<|> OperationsCancelResource
        :<|> OperationsDeleteResource
+       :<|> ServicesConnectionsListResource
+       :<|> ServicesConnectionsPatchResource
+       :<|> ServicesConnectionsCreateResource
+       :<|> ServicesAddSubnetworkResource
+       :<|> ServicesSearchRangeResource

@@ -25,7 +25,7 @@
 -- operation. If the server doesn\'t support this method, it returns
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
--- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/reference/rest/ Service Networking API Reference> for @servicenetworking.operations.delete@.
+-- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started Service Networking API Reference> for @servicenetworking.operations.delete@.
 module Network.Google.Resource.ServiceNetworking.Operations.Delete
     (
     -- * REST Resource

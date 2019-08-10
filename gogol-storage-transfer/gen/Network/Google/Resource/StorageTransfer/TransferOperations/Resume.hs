@@ -22,7 +22,7 @@
 --
 -- Resumes a transfer operation that is paused.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.resume@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.resume@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
     (
     -- * REST Resource

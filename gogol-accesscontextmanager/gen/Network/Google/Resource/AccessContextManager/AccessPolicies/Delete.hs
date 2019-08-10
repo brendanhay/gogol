@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.delete@ method which the
 -- 'AccessPoliciesDelete' request conforms to.
 type AccessPoliciesDeleteResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

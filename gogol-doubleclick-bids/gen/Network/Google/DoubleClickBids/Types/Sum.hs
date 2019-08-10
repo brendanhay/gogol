@@ -227,7 +227,8 @@ instance FromJSON DownloadLineItemsRequestFilterType where
 instance ToJSON DownloadLineItemsRequestFilterType where
     toJSON = toJSONText
 
--- | Filter type used to filter entities to fetch.
+-- | Filter type used to filter entities to fetch. PARTNER_ID and
+-- INVENTORY_SOURCE_ID may only be used when downloading inventory sources.
 data DownloadRequestFilterType
     = DRFTAdvertiserId
       -- ^ @ADVERTISER_ID@

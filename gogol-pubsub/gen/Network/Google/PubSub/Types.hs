@@ -26,6 +26,7 @@ module Network.Google.PubSub.Types
     -- * PushConfig
     , PushConfig
     , pushConfig
+    , pcOidcToken
     , pcAttributes
     , pcPushEndpoint
 
@@ -56,6 +57,12 @@ module Network.Google.PubSub.Types
     , eExpression
     , eTitle
     , eDescription
+
+    -- * OidcToken
+    , OidcToken
+    , oidcToken
+    , otAudience
+    , otServiceAccountEmail
 
     -- * ModifyAckDeadlineRequest
     , ModifyAckDeadlineRequest

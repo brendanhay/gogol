@@ -407,9 +407,11 @@ cCustomerDomain
   = lens _cCustomerDomain
       (\ s a -> s{_cCustomerDomain = a})
 
--- | Customer contact phone number. This can be continuous numbers, with
--- spaces, etc. But it must be a real phone number and not, for example,
--- \"123\". See phone local format conventions.
+-- | Customer contact phone number. Must start with \"+\" followed by the
+-- country code. The rest of the number can be contiguous numbers or
+-- respect the phone local format conventions, but it must be a real phone
+-- number and not, for example, \"123\". This field is silently ignored if
+-- invalid.
 cPhoneNumber :: Lens' Customer (Maybe Text)
 cPhoneNumber
   = lens _cPhoneNumber (\ s a -> s{_cPhoneNumber = a})
@@ -508,8 +510,9 @@ cprDealCode
 -- | The planName property is required. This is the name of the
 -- subscription\'s payment plan. For more information about the Google
 -- payment plans, see API concepts. Possible values are: -
--- ANNUAL_MONTHLY_PAY - The annual commitment plan with monthly payments -
--- ANNUAL_YEARLY_PAY - The annual commitment plan with yearly payments -
+-- ANNUAL_MONTHLY_PAY - The annual commitment plan with monthly payments
+-- Caution: ANNUAL_MONTHLY_PAY is returned as ANNUAL in all API responses.
+-- - ANNUAL_YEARLY_PAY - The annual commitment plan with yearly payments -
 -- FLEXIBLE - The flexible plan - TRIAL - The 30-day free trial plan
 cprPlanName :: Lens' ChangePlanRequest (Maybe Text)
 cprPlanName
@@ -551,7 +554,8 @@ instance ToJSON ChangePlanRequest where
                   ("seats" .=) <$> _cprSeats])
 
 -- | In this version of the API, annual commitment plan\'s interval is one
--- year.
+-- year. Note: When billingMethod value is OFFLINE, the subscription
+-- property object plan.commitmentInterval is omitted in all API responses.
 --
 -- /See:/ 'subscriptionPlanCommitmentInterval' smart constructor.
 data SubscriptionPlanCommitmentInterval =
@@ -642,7 +646,8 @@ subscriptionPlan =
 
 
 -- | In this version of the API, annual commitment plan\'s interval is one
--- year.
+-- year. Note: When billingMethod value is OFFLINE, the subscription
+-- property object plan.commitmentInterval is omitted in all API responses.
 spCommitmentInterval :: Lens' SubscriptionPlan (Maybe SubscriptionPlanCommitmentInterval)
 spCommitmentInterval
   = lens _spCommitmentInterval
@@ -659,14 +664,16 @@ spIsCommitmentPlan
 -- | The planName property is required. This is the name of the
 -- subscription\'s plan. For more information about the Google payment
 -- plans, see the API concepts. Possible values are: - ANNUAL_MONTHLY_PAY —
--- The annual commitment plan with monthly payments - ANNUAL_YEARLY_PAY —
--- The annual commitment plan with yearly payments - FLEXIBLE — The
--- flexible plan - TRIAL — The 30-day free trial plan. A subscription in
--- trial will be suspended after the 30th free day if no payment plan is
--- assigned. Calling changePlan will assign a payment plan to a trial but
--- will not activate the plan. A trial will automatically begin its
--- assigned payment plan after its 30th free day or immediately after
--- calling startPaidService.
+-- The annual commitment plan with monthly payments. Caution:
+-- ANNUAL_MONTHLY_PAY is returned as ANNUAL in all API responses. -
+-- ANNUAL_YEARLY_PAY — The annual commitment plan with yearly payments -
+-- FLEXIBLE — The flexible plan - TRIAL — The 30-day free trial plan. A
+-- subscription in trial will be suspended after the 30th free day if no
+-- payment plan is assigned. Calling changePlan will assign a payment plan
+-- to a trial but will not activate the plan. A trial will automatically
+-- begin its assigned payment plan after its 30th free day or immediately
+-- after calling startPaidService. - FREE — The free plan is exclusive to
+-- the Cloud Identity SKU and does not incur any billing.
 spPlanName :: Lens' SubscriptionPlan (Maybe Text)
 spPlanName
   = lens _spPlanName (\ s a -> s{_spPlanName = a})
@@ -791,58 +798,43 @@ seats =
     }
 
 
--- | The numberOfSeats property holds the customer\'s number of user
--- licenses. How a user\'s licenses are managed depends on the
--- subscription\'s plan: - annual commitment plan (with monthly or yearly
--- pay) — For this plan, a reseller is invoiced on the number of user
--- licenses in the numberOfSeats property. This is the maximum number of
--- user licenses that a reseller\'s customer can create. The reseller can
--- add more licenses, but once set, the numberOfSeats can not be reduced
--- until renewal. The reseller is invoiced based on the numberOfSeats value
--- regardless of how many of these user licenses are provisioned users. -
--- flexible plan — For this plan, a reseller is invoiced on the actual
--- number of users which is capped by the maximumNumberOfSeats. The
--- numberOfSeats property is not used in the request or response for
--- flexible plan customers. - 30-day free trial plan — The numberOfSeats
--- property is not used in the request or response for an account in a
--- 30-day trial.
+-- | This is a required property and is exclusive to subscriptions with
+-- ANNUAL_MONTHLY_PAY and ANNUAL_YEARLY_PAY plans. This property sets the
+-- maximum number of licenses assignable to users on a subscription. The
+-- reseller can add more licenses, but once set, the numberOfSeats cannot
+-- be reduced until renewal. The reseller is invoiced based on the
+-- numberOfSeats value regardless of how many of these user licenses are
+-- assigned. Note: G Suite subscriptions automatically assign a license to
+-- every user.
 seaNumberOfSeats :: Lens' Seats (Maybe Int32)
 seaNumberOfSeats
   = lens _seaNumberOfSeats
       (\ s a -> s{_seaNumberOfSeats = a})
       . mapping _Coerce
 
--- | The maximumNumberOfSeats property is the maximum number of licenses that
--- the customer can purchase. This property applies to plans other than the
--- annual commitment plan. How a user\'s licenses are managed depends on
--- the subscription\'s payment plan: - annual commitment plan (with monthly
--- or yearly payments) — For this plan, a reseller is invoiced on the
--- number of user licenses in the numberOfSeats property. The
--- maximumNumberOfSeats property is a read-only property in the API\'s
--- response. - flexible plan — For this plan, a reseller is invoiced on the
--- actual number of users which is capped by the maximumNumberOfSeats. This
--- is the maximum number of user licenses a customer has for user license
--- provisioning. This quantity can be increased up to the maximum limit
--- defined in the reseller\'s contract. And the minimum quantity is the
--- current number of users in the customer account. - 30-day free trial
--- plan — A subscription in a 30-day free trial is restricted to maximum 10
--- seats.
+-- | This is a required property and is exclusive to subscriptions with
+-- FLEXIBLE or TRIAL plans. This property sets the maximum number of
+-- licensed users allowed on a subscription. This quantity can be increased
+-- up to the maximum limit defined in the reseller\'s contract. The minimum
+-- quantity is the current number of users in the customer account. Note: G
+-- Suite subscriptions automatically assign a license to every user.
 seaMaximumNumberOfSeats :: Lens' Seats (Maybe Int32)
 seaMaximumNumberOfSeats
   = lens _seaMaximumNumberOfSeats
       (\ s a -> s{_seaMaximumNumberOfSeats = a})
       . mapping _Coerce
 
--- | Read-only field containing the current number of licensed seats for
--- FLEXIBLE Google-Apps subscriptions and secondary subscriptions such as
--- Google-Vault and Drive-storage.
+-- | Read-only field containing the current number of users that are assigned
+-- a license for the product defined in skuId. This field\'s value is
+-- equivalent to the numerical count of users returned by the Enterprise
+-- License Manager API method: listForProductAndSku
 seaLicensedNumberOfSeats :: Lens' Seats (Maybe Int32)
 seaLicensedNumberOfSeats
   = lens _seaLicensedNumberOfSeats
       (\ s a -> s{_seaLicensedNumberOfSeats = a})
       . mapping _Coerce
 
--- | Identifies the resource as a subscription change plan request. Value:
+-- | Identifies the resource as a subscription seat setting. Value:
 -- subscriptions#seats
 seaKind :: Lens' Seats Text
 seaKind = lens _seaKind (\ s a -> s{_seaKind = a})

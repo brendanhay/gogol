@@ -291,7 +291,8 @@ instance ToJSON EmbeddedObjectBOrderSuggestionState
                   ("colorSuggested" .=) <$> _eobossColorSuggested,
                   ("widthSuggested" .=) <$> _eobossWidthSuggested])
 
--- | A border around a table cell.
+-- | A border around a table cell. Table cell borders cannot be transparent.
+-- To hide a table cell border, make its width 0.
 --
 -- /See:/ 'tableCellBOrder' smart constructor.
 data TableCellBOrder =
@@ -319,7 +320,7 @@ tableCellBOrder =
     {_tcboColor = Nothing, _tcboWidth = Nothing, _tcboDashStyle = Nothing}
 
 
--- | The color of the border.
+-- | The color of the border. This color cannot be transparent.
 tcboColor :: Lens' TableCellBOrder (Maybe OptionalColor)
 tcboColor
   = lens _tcboColor (\ s a -> s{_tcboColor = a})
@@ -1974,6 +1975,67 @@ instance ToJSON RgbColor where
               (catMaybes
                  [("red" .=) <$> _rcRed, ("green" .=) <$> _rcGreen,
                   ("blue" .=) <$> _rcBlue])
+
+-- | Inserts a page break followed by a newline at the specified location.
+--
+-- /See:/ 'insertPageBreakRequest' smart constructor.
+data InsertPageBreakRequest =
+  InsertPageBreakRequest'
+    { _ipbrLocation             :: !(Maybe Location)
+    , _ipbrEndOfSegmentLocation :: !(Maybe EndOfSegmentLocation)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'InsertPageBreakRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ipbrLocation'
+--
+-- * 'ipbrEndOfSegmentLocation'
+insertPageBreakRequest
+    :: InsertPageBreakRequest
+insertPageBreakRequest =
+  InsertPageBreakRequest'
+    {_ipbrLocation = Nothing, _ipbrEndOfSegmentLocation = Nothing}
+
+
+-- | Inserts the page break at a specific index in the document. The page
+-- break must be inserted inside the bounds of an existing Paragraph. For
+-- instance, it cannot be inserted at a table\'s start index (i.e. between
+-- the table and its preceding paragraph). Page breaks cannot be inserted
+-- inside a table, equation, footnote, header or footer. Since page breaks
+-- can only be inserted inside the body, the segment ID field must be
+-- empty.
+ipbrLocation :: Lens' InsertPageBreakRequest (Maybe Location)
+ipbrLocation
+  = lens _ipbrLocation (\ s a -> s{_ipbrLocation = a})
+
+-- | Inserts the page break at the end of the document body. Page breaks
+-- cannot be inserted inside a footnote, header or footer. Since page
+-- breaks can only be inserted inside the body, the segment ID field must
+-- be empty.
+ipbrEndOfSegmentLocation :: Lens' InsertPageBreakRequest (Maybe EndOfSegmentLocation)
+ipbrEndOfSegmentLocation
+  = lens _ipbrEndOfSegmentLocation
+      (\ s a -> s{_ipbrEndOfSegmentLocation = a})
+
+instance FromJSON InsertPageBreakRequest where
+        parseJSON
+          = withObject "InsertPageBreakRequest"
+              (\ o ->
+                 InsertPageBreakRequest' <$>
+                   (o .:? "location") <*>
+                     (o .:? "endOfSegmentLocation"))
+
+instance ToJSON InsertPageBreakRequest where
+        toJSON InsertPageBreakRequest'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _ipbrLocation,
+                  ("endOfSegmentLocation" .=) <$>
+                    _ipbrEndOfSegmentLocation])
 
 -- | A mask that indicates which of the fields on the base Background have
 -- been changed in this suggestion. For any field set to true, the
@@ -4110,9 +4172,8 @@ deleteContentRangeRequest = DeleteContentRangeRequest' {_dcrrRange = Nothing}
 -- TableCell or TableOfContents. * Deleting the start or end of a Table,
 -- TableOfContents or Equation without deleting the entire element. *
 -- Deleting the newline character before a Table, TableOfContents or
--- SectionBreak without deleting the the element. * Deleting individual
--- rows or cells of a table. Deleting the content within a table cell is
--- allowed.
+-- SectionBreak without deleting the element. * Deleting individual rows or
+-- cells of a table. Deleting the content within a table cell is allowed.
 dcrrRange :: Lens' DeleteContentRangeRequest (Maybe Range)
 dcrrRange
   = lens _dcrrRange (\ s a -> s{_dcrrRange = a})
@@ -5086,7 +5147,9 @@ instance ToJSON Equation where
 -- with the same name, but every named range has a unique ID. A named range
 -- is created with a single Range, and content inserted inside a named
 -- range generally expands that range. However, certain document changes
--- can cause the range to be split into multiple ranges.
+-- can cause the range to be split into multiple ranges. Named ranges are
+-- not private. All applications and collaborators that have access to the
+-- document can see its named ranges.
 --
 -- /See:/ 'namedRange' smart constructor.
 data NamedRange =
@@ -5407,11 +5470,7 @@ tTableCells
       _Default
       . _Coerce
 
--- | The zero-based end index of this row, exclusive, in Unicode code units
--- of the UTF-16 encoding. Unicode code units of the UTF-16 encoding means
--- that surrogate pairs consume two indexes. For example, the \"GRINNING
--- FACE\" emoji would be represented as \"\\uD83D\\uDE00\" and would
--- consume two indexes.
+-- | The zero-based end index of this row, exclusive, in UTF-16 code units.
 tEndIndex :: Lens' TableRow (Maybe Int32)
 tEndIndex
   = lens _tEndIndex (\ s a -> s{_tEndIndex = a}) .
@@ -5438,11 +5497,7 @@ tTableRowStyle
   = lens _tTableRowStyle
       (\ s a -> s{_tTableRowStyle = a})
 
--- | The zero-based start index of this row, in Unicode code units of the
--- UTF-16 encoding. Unicode code units of the UTF-16 encoding means that
--- surrogate pairs consume two indexes. For example, the \"GRINNING FACE\"
--- emoji would be represented as \"\\uD83D\\uDE00\" and would consume two
--- indexes.
+-- | The zero-based start index of this row, in UTF-16 code units.
 tStartIndex :: Lens' TableRow (Maybe Int32)
 tStartIndex
   = lens _tStartIndex (\ s a -> s{_tStartIndex = a}) .
@@ -6105,19 +6160,19 @@ range =
   Range' {_rEndIndex = Nothing, _rStartIndex = Nothing, _rSegmentId = Nothing}
 
 
--- | The zero-based end index of this range, exclusive, in Unicode code units
--- of the UTF-16 encoding. In all current uses, an end index must be
--- provided. This field is an Int32Value in order to accommodate future use
--- cases with open-ended ranges.
+-- | The zero-based end index of this range, exclusive, in UTF-16 code units.
+-- In all current uses, an end index must be provided. This field is an
+-- Int32Value in order to accommodate future use cases with open-ended
+-- ranges.
 rEndIndex :: Lens' Range (Maybe Int32)
 rEndIndex
   = lens _rEndIndex (\ s a -> s{_rEndIndex = a}) .
       mapping _Coerce
 
--- | The zero-based start index of this range, in Unicode code units of the
--- UTF-16 encoding. In all current uses, a start index must be provided.
--- This field is an Int32Value in order to accommodate future use cases
--- with open-ended ranges.
+-- | The zero-based start index of this range, in UTF-16 code units. In all
+-- current uses, a start index must be provided. This field is an
+-- Int32Value in order to accommodate future use cases with open-ended
+-- ranges.
 rStartIndex :: Lens' Range (Maybe Int32)
 rStartIndex
   = lens _rStartIndex (\ s a -> s{_rStartIndex = a}) .
@@ -6685,9 +6740,10 @@ instance ToJSON SuggestedNamedStyles where
 -- | Provides control over how write requests are executed.
 --
 -- /See:/ 'writeControl' smart constructor.
-newtype WriteControl =
+data WriteControl =
   WriteControl'
-    { _wcRequiredRevisionId :: Maybe Text
+    { _wcRequiredRevisionId :: !(Maybe Text)
+    , _wcTargetRevisionId   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6697,33 +6753,58 @@ newtype WriteControl =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wcRequiredRevisionId'
+--
+-- * 'wcTargetRevisionId'
 writeControl
     :: WriteControl
-writeControl = WriteControl' {_wcRequiredRevisionId = Nothing}
+writeControl =
+  WriteControl' {_wcRequiredRevisionId = Nothing, _wcTargetRevisionId = Nothing}
 
 
--- | The ID of the revision of the document that the write request will be
--- applied to. If this is not the latest revision of the document, the
--- request will not be processed and will return a 400 bad request error.
--- When a required revision ID is returned in a response, it indicates the
+-- | The revision ID of the document that the write request will be applied
+-- to. If this is not the latest revision of the document, the request will
+-- not be processed and will return a 400 bad request error. When a
+-- required revision ID is returned in a response, it indicates the
 -- revision ID of the document after the request was applied.
 wcRequiredRevisionId :: Lens' WriteControl (Maybe Text)
 wcRequiredRevisionId
   = lens _wcRequiredRevisionId
       (\ s a -> s{_wcRequiredRevisionId = a})
 
+-- | The target revision ID of the document that the write request will be
+-- applied to. If collaborator changes have occurred after the document was
+-- read using the API, the changes produced by this write request will be
+-- transformed against the collaborator changes. This results in a new
+-- revision of the document which incorporates both the changes in the
+-- request and the collaborator changes, and the Docs server will resolve
+-- conflicting changes. When using \`target_revision_id\`, the API client
+-- can be thought of as another collaborator of the document. The target
+-- revision ID may only be used to write to recent versions of a document.
+-- If the target revision is too far behind the latest revision, the
+-- request will not be processed and will return a 400 bad request error
+-- and the request should be retried after reading the latest version of
+-- the document. In most cases a \`revision_id\` will remain valid for use
+-- as a target revision for several minutes after it is read, but for
+-- frequently-edited documents this window may be shorter.
+wcTargetRevisionId :: Lens' WriteControl (Maybe Text)
+wcTargetRevisionId
+  = lens _wcTargetRevisionId
+      (\ s a -> s{_wcTargetRevisionId = a})
+
 instance FromJSON WriteControl where
         parseJSON
           = withObject "WriteControl"
               (\ o ->
-                 WriteControl' <$> (o .:? "requiredRevisionId"))
+                 WriteControl' <$>
+                   (o .:? "requiredRevisionId") <*>
+                     (o .:? "targetRevisionId"))
 
 instance ToJSON WriteControl where
         toJSON WriteControl'{..}
           = object
               (catMaybes
-                 [("requiredRevisionId" .=) <$>
-                    _wcRequiredRevisionId])
+                 [("requiredRevisionId" .=) <$> _wcRequiredRevisionId,
+                  ("targetRevisionId" .=) <$> _wcTargetRevisionId])
 
 -- | Represents the styling that can be applied to text. Inherited text
 -- styles are represented as unset fields in this message. A text style\'s
@@ -7948,11 +8029,7 @@ tcSuggestedTableCellStyleChanges
   = lens _tcSuggestedTableCellStyleChanges
       (\ s a -> s{_tcSuggestedTableCellStyleChanges = a})
 
--- | The zero-based end index of this cell, exclusive, in Unicode code units
--- of the UTF-16 encoding. Unicode code units of the UTF-16 encoding means
--- that surrogate pairs consume two indexes. For example, the \"GRINNING
--- FACE\" emoji would be represented as \"\\uD83D\\uDE00\" and would
--- consume two indexes.
+-- | The zero-based end index of this cell, exclusive, in UTF-16 code units.
 tcEndIndex :: Lens' TableCell (Maybe Int32)
 tcEndIndex
   = lens _tcEndIndex (\ s a -> s{_tcEndIndex = a}) .
@@ -7980,11 +8057,7 @@ tcSuggestedDeletionIds
       . _Default
       . _Coerce
 
--- | The zero-based start index of this cell, in Unicode code units of the
--- UTF-16 encoding. Unicode code units of the UTF-16 encoding means that
--- surrogate pairs consume two indexes. For example, the \"GRINNING FACE\"
--- emoji would be represented as \"\\uD83D\\uDE00\" and would consume two
--- indexes.
+-- | The zero-based start index of this cell, in UTF-16 code units.
 tcStartIndex :: Lens' TableCell (Maybe Int32)
 tcStartIndex
   = lens _tcStartIndex (\ s a -> s{_tcStartIndex = a})
@@ -8139,11 +8212,8 @@ peAutoText :: Lens' ParagraphElement (Maybe AutoText)
 peAutoText
   = lens _peAutoText (\ s a -> s{_peAutoText = a})
 
--- | The zero-base end index of this paragraph element, exclusive, in Unicode
--- code units of the UTF-16 encoding. Unicode code units of the UTF-16
--- encoding means that surrogate pairs consume two indexes. For example,
--- the \"GRINNING FACE\" emoji would be represented as \"\\uD83D\\uDE00\"
--- and would consume two indexes.
+-- | The zero-base end index of this paragraph element, exclusive, in UTF-16
+-- code units.
 peEndIndex :: Lens' ParagraphElement (Maybe Int32)
 peEndIndex
   = lens _peEndIndex (\ s a -> s{_peEndIndex = a}) .
@@ -8188,11 +8258,8 @@ peHorizontalRule
   = lens _peHorizontalRule
       (\ s a -> s{_peHorizontalRule = a})
 
--- | The zero-based start index of this paragraph element, in Unicode code
--- units of the UTF-16 encoding. Unicode code units of the UTF-16 encoding
--- means that surrogate pairs consume two indexes. For example, the
--- \"GRINNING FACE\" emoji would be represented as \"\\uD83D\\uDE00\" and
--- would consume two indexes.
+-- | The zero-based start index of this paragraph element, in UTF-16 code
+-- units.
 peStartIndex :: Lens' ParagraphElement (Maybe Int32)
 peStartIndex
   = lens _peStartIndex (\ s a -> s{_peStartIndex = a})
@@ -8502,6 +8569,92 @@ instance ToJSON EmbeddedObjectSuggestionState where
                   ("marginRightSuggested" .=) <$>
                     _eossMarginRightSuggested])
 
+-- | Inserts a table at the specified location. A newline character will be
+-- inserted before the inserted table.
+--
+-- /See:/ 'insertTableRequest' smart constructor.
+data InsertTableRequest =
+  InsertTableRequest'
+    { _itrLocation             :: !(Maybe Location)
+    , _itrEndOfSegmentLocation :: !(Maybe EndOfSegmentLocation)
+    , _itrRows                 :: !(Maybe (Textual Int32))
+    , _itrColumns              :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'InsertTableRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itrLocation'
+--
+-- * 'itrEndOfSegmentLocation'
+--
+-- * 'itrRows'
+--
+-- * 'itrColumns'
+insertTableRequest
+    :: InsertTableRequest
+insertTableRequest =
+  InsertTableRequest'
+    { _itrLocation = Nothing
+    , _itrEndOfSegmentLocation = Nothing
+    , _itrRows = Nothing
+    , _itrColumns = Nothing
+    }
+
+
+-- | Inserts the table at a specific model index. A newline character will be
+-- inserted before the inserted table, therefore the table start index will
+-- be at the specified location index + 1. The table must be inserted
+-- inside the bounds of an existing Paragraph. For instance, it cannot be
+-- inserted at a table\'s start index (i.e. between an existing table and
+-- its preceding paragraph). Tables cannot be inserted inside a footnote or
+-- equation.
+itrLocation :: Lens' InsertTableRequest (Maybe Location)
+itrLocation
+  = lens _itrLocation (\ s a -> s{_itrLocation = a})
+
+-- | Inserts the table at the end of the given header, footer or document
+-- body. A newline character will be inserted before the inserted table.
+-- Tables cannot be inserted inside a footnote.
+itrEndOfSegmentLocation :: Lens' InsertTableRequest (Maybe EndOfSegmentLocation)
+itrEndOfSegmentLocation
+  = lens _itrEndOfSegmentLocation
+      (\ s a -> s{_itrEndOfSegmentLocation = a})
+
+-- | The number of rows in the table.
+itrRows :: Lens' InsertTableRequest (Maybe Int32)
+itrRows
+  = lens _itrRows (\ s a -> s{_itrRows = a}) .
+      mapping _Coerce
+
+-- | The number of columns in the table.
+itrColumns :: Lens' InsertTableRequest (Maybe Int32)
+itrColumns
+  = lens _itrColumns (\ s a -> s{_itrColumns = a}) .
+      mapping _Coerce
+
+instance FromJSON InsertTableRequest where
+        parseJSON
+          = withObject "InsertTableRequest"
+              (\ o ->
+                 InsertTableRequest' <$>
+                   (o .:? "location") <*> (o .:? "endOfSegmentLocation")
+                     <*> (o .:? "rows")
+                     <*> (o .:? "columns"))
+
+instance ToJSON InsertTableRequest where
+        toJSON InsertTableRequest'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _itrLocation,
+                  ("endOfSegmentLocation" .=) <$>
+                    _itrEndOfSegmentLocation,
+                  ("rows" .=) <$> _itrRows,
+                  ("columns" .=) <$> _itrColumns])
+
 -- | A suggested change to InlineObjectProperties.
 --
 -- /See:/ 'suggestedInlineObjectProperties' smart constructor.
@@ -8714,10 +8867,7 @@ seParagraph
   = lens _seParagraph (\ s a -> s{_seParagraph = a})
 
 -- | The zero-based end index of this structural element, exclusive, in
--- Unicode code units of the UTF-16 encoding. Unicode code units of the
--- UTF-16 encoding means that surrogate pairs consume two indexes. For
--- example, the \"GRINNING FACE\" emoji would be represented as
--- \"\\uD83D\\uDE00\" and would consume two indexes.
+-- UTF-16 code units.
 seEndIndex :: Lens' StructuralElement (Maybe Int32)
 seEndIndex
   = lens _seEndIndex (\ s a -> s{_seEndIndex = a}) .
@@ -8727,11 +8877,8 @@ seEndIndex
 seTable :: Lens' StructuralElement (Maybe Table)
 seTable = lens _seTable (\ s a -> s{_seTable = a})
 
--- | The zero-based start index of this structural element, in Unicode code
--- units of the UTF-16 encoding. Unicode code units of the UTF-16 encoding
--- means that surrogate pairs consume two indexes. For example, the
--- \"GRINNING FACE\" emoji would be represented as \"\\uD83D\\uDE00\" and
--- would consume two indexes.
+-- | The zero-based start index of this structural element, in UTF-16 code
+-- units.
 seStartIndex :: Lens' StructuralElement (Maybe Int32)
 seStartIndex
   = lens _seStartIndex (\ s a -> s{_seStartIndex = a})
@@ -8906,9 +9053,9 @@ instance ToJSON ListProperties where
 -- /See:/ 'insertTextRequest' smart constructor.
 data InsertTextRequest =
   InsertTextRequest'
-    { _itrLocation             :: !(Maybe Location)
-    , _itrText                 :: !(Maybe Text)
-    , _itrEndOfSegmentLocation :: !(Maybe EndOfSegmentLocation)
+    { _iLocation             :: !(Maybe Location)
+    , _iText                 :: !(Maybe Text)
+    , _iEndOfSegmentLocation :: !(Maybe EndOfSegmentLocation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8917,19 +9064,16 @@ data InsertTextRequest =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'itrLocation'
+-- * 'iLocation'
 --
--- * 'itrText'
+-- * 'iText'
 --
--- * 'itrEndOfSegmentLocation'
+-- * 'iEndOfSegmentLocation'
 insertTextRequest
     :: InsertTextRequest
 insertTextRequest =
   InsertTextRequest'
-    { _itrLocation = Nothing
-    , _itrText = Nothing
-    , _itrEndOfSegmentLocation = Nothing
-    }
+    {_iLocation = Nothing, _iText = Nothing, _iEndOfSegmentLocation = Nothing}
 
 
 -- | Inserts the text at a specific index in the document. Text must be
@@ -8937,9 +9081,9 @@ insertTextRequest =
 -- cannot be inserted at a table\'s start index (i.e. between the table and
 -- its preceding paragraph). The text must be inserted in the preceding
 -- paragraph.
-itrLocation :: Lens' InsertTextRequest (Maybe Location)
-itrLocation
-  = lens _itrLocation (\ s a -> s{_itrLocation = a})
+iLocation :: Lens' InsertTextRequest (Maybe Location)
+iLocation
+  = lens _iLocation (\ s a -> s{_iLocation = a})
 
 -- | The text to be inserted. Inserting a newline character will implicitly
 -- create a new Paragraph at that index. The paragraph style of the new
@@ -8951,15 +9095,15 @@ itrLocation
 -- characters (U+0000-U+0008, U+000C-U+001F) and characters from the
 -- Unicode Basic Multilingual Plane Private Use Area (U+E000-U+F8FF) will
 -- be stripped out of the inserted text.
-itrText :: Lens' InsertTextRequest (Maybe Text)
-itrText = lens _itrText (\ s a -> s{_itrText = a})
+iText :: Lens' InsertTextRequest (Maybe Text)
+iText = lens _iText (\ s a -> s{_iText = a})
 
 -- | Inserts the text at the end of a header, footer, footnote or the
 -- document body.
-itrEndOfSegmentLocation :: Lens' InsertTextRequest (Maybe EndOfSegmentLocation)
-itrEndOfSegmentLocation
-  = lens _itrEndOfSegmentLocation
-      (\ s a -> s{_itrEndOfSegmentLocation = a})
+iEndOfSegmentLocation :: Lens' InsertTextRequest (Maybe EndOfSegmentLocation)
+iEndOfSegmentLocation
+  = lens _iEndOfSegmentLocation
+      (\ s a -> s{_iEndOfSegmentLocation = a})
 
 instance FromJSON InsertTextRequest where
         parseJSON
@@ -8973,10 +9117,10 @@ instance ToJSON InsertTextRequest where
         toJSON InsertTextRequest'{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _itrLocation,
-                  ("text" .=) <$> _itrText,
+                 [("location" .=) <$> _iLocation,
+                  ("text" .=) <$> _iText,
                   ("endOfSegmentLocation" .=) <$>
-                    _itrEndOfSegmentLocation])
+                    _iEndOfSegmentLocation])
 
 -- | The suggested text style changes to this ColumnBreak, keyed by
 -- suggestion ID.
@@ -10593,11 +10737,13 @@ data Request' =
     , _reqReplaceAllText         :: !(Maybe ReplaceAllTextRequest)
     , _reqUpdateParagraphStyle   :: !(Maybe UpdateParagraphStyleRequest)
     , _reqCreateNamedRange       :: !(Maybe CreateNamedRangeRequest)
+    , _reqInsertPageBreak        :: !(Maybe InsertPageBreakRequest)
     , _reqDeleteTableColumn      :: !(Maybe DeleteTableColumnRequest)
     , _reqInsertInlineImage      :: !(Maybe InsertInlineImageRequest)
     , _reqDeleteContentRange     :: !(Maybe DeleteContentRangeRequest)
     , _reqInsertTableRow         :: !(Maybe InsertTableRowRequest)
     , _reqUpdateTextStyle        :: !(Maybe UpdateTextStyleRequest)
+    , _reqInsertTable            :: !(Maybe InsertTableRequest)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10624,6 +10770,8 @@ data Request' =
 --
 -- * 'reqCreateNamedRange'
 --
+-- * 'reqInsertPageBreak'
+--
 -- * 'reqDeleteTableColumn'
 --
 -- * 'reqInsertInlineImage'
@@ -10633,6 +10781,8 @@ data Request' =
 -- * 'reqInsertTableRow'
 --
 -- * 'reqUpdateTextStyle'
+--
+-- * 'reqInsertTable'
 request'
     :: Request'
 request' =
@@ -10646,11 +10796,13 @@ request' =
     , _reqReplaceAllText = Nothing
     , _reqUpdateParagraphStyle = Nothing
     , _reqCreateNamedRange = Nothing
+    , _reqInsertPageBreak = Nothing
     , _reqDeleteTableColumn = Nothing
     , _reqInsertInlineImage = Nothing
     , _reqDeleteContentRange = Nothing
     , _reqInsertTableRow = Nothing
     , _reqUpdateTextStyle = Nothing
+    , _reqInsertTable = Nothing
     }
 
 
@@ -10708,6 +10860,12 @@ reqCreateNamedRange
   = lens _reqCreateNamedRange
       (\ s a -> s{_reqCreateNamedRange = a})
 
+-- | Inserts a page break at the specified location.
+reqInsertPageBreak :: Lens' Request' (Maybe InsertPageBreakRequest)
+reqInsertPageBreak
+  = lens _reqInsertPageBreak
+      (\ s a -> s{_reqInsertPageBreak = a})
+
 -- | Deletes a column from a table.
 reqDeleteTableColumn :: Lens' Request' (Maybe DeleteTableColumnRequest)
 reqDeleteTableColumn
@@ -10738,6 +10896,12 @@ reqUpdateTextStyle
   = lens _reqUpdateTextStyle
       (\ s a -> s{_reqUpdateTextStyle = a})
 
+-- | Inserts a table at the specified location.
+reqInsertTable :: Lens' Request' (Maybe InsertTableRequest)
+reqInsertTable
+  = lens _reqInsertTable
+      (\ s a -> s{_reqInsertTable = a})
+
 instance FromJSON Request' where
         parseJSON
           = withObject "Request"
@@ -10752,11 +10916,13 @@ instance FromJSON Request' where
                      <*> (o .:? "replaceAllText")
                      <*> (o .:? "updateParagraphStyle")
                      <*> (o .:? "createNamedRange")
+                     <*> (o .:? "insertPageBreak")
                      <*> (o .:? "deleteTableColumn")
                      <*> (o .:? "insertInlineImage")
                      <*> (o .:? "deleteContentRange")
                      <*> (o .:? "insertTableRow")
-                     <*> (o .:? "updateTextStyle"))
+                     <*> (o .:? "updateTextStyle")
+                     <*> (o .:? "insertTable"))
 
 instance ToJSON Request' where
         toJSON Request''{..}
@@ -10775,11 +10941,13 @@ instance ToJSON Request' where
                   ("updateParagraphStyle" .=) <$>
                     _reqUpdateParagraphStyle,
                   ("createNamedRange" .=) <$> _reqCreateNamedRange,
+                  ("insertPageBreak" .=) <$> _reqInsertPageBreak,
                   ("deleteTableColumn" .=) <$> _reqDeleteTableColumn,
                   ("insertInlineImage" .=) <$> _reqInsertInlineImage,
                   ("deleteContentRange" .=) <$> _reqDeleteContentRange,
                   ("insertTableRow" .=) <$> _reqInsertTableRow,
-                  ("updateTextStyle" .=) <$> _reqUpdateTextStyle])
+                  ("updateTextStyle" .=) <$> _reqUpdateTextStyle,
+                  ("insertTable" .=) <$> _reqInsertTable])
 
 -- | The suggested changes to the positioned object properties, keyed by
 -- suggestion ID.

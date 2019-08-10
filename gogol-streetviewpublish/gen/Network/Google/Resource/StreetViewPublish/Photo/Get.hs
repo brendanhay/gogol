@@ -131,7 +131,7 @@ pgXgafv = lens _pgXgafv (\ s a -> s{_pgXgafv = a})
 -- information, see
 -- http:\/\/www.unicode.org\/reports\/tr35\/#Unicode_locale_identifier. If
 -- language_code is unspecified, the user\'s language preference for Google
--- services will be used.
+-- services is used.
 pgLanguageCode :: Lens' PhotoGet (Maybe Text)
 pgLanguageCode
   = lens _pgLanguageCode

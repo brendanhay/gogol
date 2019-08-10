@@ -60,7 +60,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.run@ method which the
 -- 'ProjectsLocationsQueuesTasksRun' request conforms to.
 type ProjectsLocationsQueuesTasksRunResource =
-     "v2beta3" :>
+     "v2" :>
        CaptureMode "name" "run" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

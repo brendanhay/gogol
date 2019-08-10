@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.run@ method which the
 -- 'ProjectsLocationsJobsRun' request conforms to.
 type ProjectsLocationsJobsRunResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "run" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

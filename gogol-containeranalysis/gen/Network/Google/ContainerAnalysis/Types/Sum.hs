@@ -26,55 +26,55 @@ data LayerDirective
       -- Default value for unsupported\/missing directive.
     | Maintainer
       -- ^ @MAINTAINER@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#maintainer
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Run
       -- ^ @RUN@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#run
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Cmd
       -- ^ @CMD@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#cmd
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Label
       -- ^ @LABEL@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#label
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Expose
       -- ^ @EXPOSE@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#expose
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Env
       -- ^ @ENV@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#env
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Add
       -- ^ @ADD@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#add
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Copy
       -- ^ @COPY@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#copy
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Entrypoint
       -- ^ @ENTRYPOINT@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#entrypoint
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Volume
       -- ^ @VOLUME@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#volume
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | User
       -- ^ @USER@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#user
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Workdir
       -- ^ @WORKDIR@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#workdir
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Arg
       -- ^ @ARG@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#arg
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Onbuild
       -- ^ @ONBUILD@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#onbuild
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Stopsignal
       -- ^ @STOPSIGNAL@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#stopsignal
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Healthcheck
       -- ^ @HEALTHCHECK@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#healthcheck
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
     | Shell
       -- ^ @SHELL@
-      -- https:\/\/docs.docker.com\/reference\/builder\/#shell
+      -- https:\/\/docs.docker.com\/engine\/reference\/builder\/
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayerDirective
@@ -126,6 +126,36 @@ instance FromJSON LayerDirective where
     parseJSON = parseJSONText "LayerDirective"
 
 instance ToJSON LayerDirective where
+    toJSON = toJSONText
+
+data CVSSv3AttackComplexity
+    = AttackComplexityUnspecified
+      -- ^ @ATTACK_COMPLEXITY_UNSPECIFIED@
+    | AttackComplexityLow
+      -- ^ @ATTACK_COMPLEXITY_LOW@
+    | AttackComplexityHigh
+      -- ^ @ATTACK_COMPLEXITY_HIGH@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CVSSv3AttackComplexity
+
+instance FromHttpApiData CVSSv3AttackComplexity where
+    parseQueryParam = \case
+        "ATTACK_COMPLEXITY_UNSPECIFIED" -> Right AttackComplexityUnspecified
+        "ATTACK_COMPLEXITY_LOW" -> Right AttackComplexityLow
+        "ATTACK_COMPLEXITY_HIGH" -> Right AttackComplexityHigh
+        x -> Left ("Unable to parse CVSSv3AttackComplexity from: " <> x)
+
+instance ToHttpApiData CVSSv3AttackComplexity where
+    toQueryParam = \case
+        AttackComplexityUnspecified -> "ATTACK_COMPLEXITY_UNSPECIFIED"
+        AttackComplexityLow -> "ATTACK_COMPLEXITY_LOW"
+        AttackComplexityHigh -> "ATTACK_COMPLEXITY_HIGH"
+
+instance FromJSON CVSSv3AttackComplexity where
+    parseJSON = parseJSONText "CVSSv3AttackComplexity"
+
+instance ToJSON CVSSv3AttackComplexity where
     toJSON = toJSONText
 
 -- | The status of discovery for the resource.
@@ -337,6 +367,40 @@ instance FromJSON VulnerabilitySeverity where
 instance ToJSON VulnerabilitySeverity where
     toJSON = toJSONText
 
+data CVSSv3IntegrityImpact
+    = ImpactUnspecified
+      -- ^ @IMPACT_UNSPECIFIED@
+    | ImpactHigh
+      -- ^ @IMPACT_HIGH@
+    | ImpactLow
+      -- ^ @IMPACT_LOW@
+    | ImpactNone
+      -- ^ @IMPACT_NONE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CVSSv3IntegrityImpact
+
+instance FromHttpApiData CVSSv3IntegrityImpact where
+    parseQueryParam = \case
+        "IMPACT_UNSPECIFIED" -> Right ImpactUnspecified
+        "IMPACT_HIGH" -> Right ImpactHigh
+        "IMPACT_LOW" -> Right ImpactLow
+        "IMPACT_NONE" -> Right ImpactNone
+        x -> Left ("Unable to parse CVSSv3IntegrityImpact from: " <> x)
+
+instance ToHttpApiData CVSSv3IntegrityImpact where
+    toQueryParam = \case
+        ImpactUnspecified -> "IMPACT_UNSPECIFIED"
+        ImpactHigh -> "IMPACT_HIGH"
+        ImpactLow -> "IMPACT_LOW"
+        ImpactNone -> "IMPACT_NONE"
+
+instance FromJSON CVSSv3IntegrityImpact where
+    parseJSON = parseJSONText "CVSSv3IntegrityImpact"
+
+instance ToJSON CVSSv3IntegrityImpact where
+    toJSON = toJSONText
+
 -- | Whether the resource is continuously analyzed.
 data DiscoveredContinuousAnalysis
     = ContinuousAnalysisUnspecified
@@ -369,6 +433,40 @@ instance FromJSON DiscoveredContinuousAnalysis where
     parseJSON = parseJSONText "DiscoveredContinuousAnalysis"
 
 instance ToJSON DiscoveredContinuousAnalysis where
+    toJSON = toJSONText
+
+data CVSSv3PrivilegesRequired
+    = PrivilegesRequiredUnspecified
+      -- ^ @PRIVILEGES_REQUIRED_UNSPECIFIED@
+    | PrivilegesRequiredNone
+      -- ^ @PRIVILEGES_REQUIRED_NONE@
+    | PrivilegesRequiredLow
+      -- ^ @PRIVILEGES_REQUIRED_LOW@
+    | PrivilegesRequiredHigh
+      -- ^ @PRIVILEGES_REQUIRED_HIGH@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CVSSv3PrivilegesRequired
+
+instance FromHttpApiData CVSSv3PrivilegesRequired where
+    parseQueryParam = \case
+        "PRIVILEGES_REQUIRED_UNSPECIFIED" -> Right PrivilegesRequiredUnspecified
+        "PRIVILEGES_REQUIRED_NONE" -> Right PrivilegesRequiredNone
+        "PRIVILEGES_REQUIRED_LOW" -> Right PrivilegesRequiredLow
+        "PRIVILEGES_REQUIRED_HIGH" -> Right PrivilegesRequiredHigh
+        x -> Left ("Unable to parse CVSSv3PrivilegesRequired from: " <> x)
+
+instance ToHttpApiData CVSSv3PrivilegesRequired where
+    toQueryParam = \case
+        PrivilegesRequiredUnspecified -> "PRIVILEGES_REQUIRED_UNSPECIFIED"
+        PrivilegesRequiredNone -> "PRIVILEGES_REQUIRED_NONE"
+        PrivilegesRequiredLow -> "PRIVILEGES_REQUIRED_LOW"
+        PrivilegesRequiredHigh -> "PRIVILEGES_REQUIRED_HIGH"
+
+instance FromJSON CVSSv3PrivilegesRequired where
+    parseJSON = parseJSONText "CVSSv3PrivilegesRequired"
+
+instance ToJSON CVSSv3PrivilegesRequired where
     toJSON = toJSONText
 
 -- | Output only. The type of analysis. This field can be used as a filter in
@@ -432,6 +530,36 @@ instance FromJSON NoteKind where
 instance ToJSON NoteKind where
     toJSON = toJSONText
 
+data CVSSv3UserInteraction
+    = UserInteractionUnspecified
+      -- ^ @USER_INTERACTION_UNSPECIFIED@
+    | UserInteractionNone
+      -- ^ @USER_INTERACTION_NONE@
+    | UserInteractionRequired
+      -- ^ @USER_INTERACTION_REQUIRED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CVSSv3UserInteraction
+
+instance FromHttpApiData CVSSv3UserInteraction where
+    parseQueryParam = \case
+        "USER_INTERACTION_UNSPECIFIED" -> Right UserInteractionUnspecified
+        "USER_INTERACTION_NONE" -> Right UserInteractionNone
+        "USER_INTERACTION_REQUIRED" -> Right UserInteractionRequired
+        x -> Left ("Unable to parse CVSSv3UserInteraction from: " <> x)
+
+instance ToHttpApiData CVSSv3UserInteraction where
+    toQueryParam = \case
+        UserInteractionUnspecified -> "USER_INTERACTION_UNSPECIFIED"
+        UserInteractionNone -> "USER_INTERACTION_NONE"
+        UserInteractionRequired -> "USER_INTERACTION_REQUIRED"
+
+instance FromJSON CVSSv3UserInteraction where
+    parseJSON = parseJSONText "CVSSv3UserInteraction"
+
+instance ToJSON CVSSv3UserInteraction where
+    toJSON = toJSONText
+
 -- | Platform hosting this deployment.
 data DeploymentPlatform
     = PlatformUnspecified
@@ -469,6 +597,166 @@ instance FromJSON DeploymentPlatform where
     parseJSON = parseJSONText "DeploymentPlatform"
 
 instance ToJSON DeploymentPlatform where
+    toJSON = toJSONText
+
+-- | The distro assigned severity for this vulnerability when it is
+-- available, and note provider assigned severity when distro has not yet
+-- assigned a severity for this vulnerability.
+data GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity
+    = GVVDESSeverityUnspecified
+      -- ^ @SEVERITY_UNSPECIFIED@
+      -- Unknown.
+    | GVVDESMinimal
+      -- ^ @MINIMAL@
+      -- Minimal severity.
+    | GVVDESLow
+      -- ^ @LOW@
+      -- Low severity.
+    | GVVDESMedium
+      -- ^ @MEDIUM@
+      -- Medium severity.
+    | GVVDESHigh
+      -- ^ @HIGH@
+      -- High severity.
+    | GVVDESCritical
+      -- ^ @CRITICAL@
+      -- Critical severity.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity
+
+instance FromHttpApiData GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity where
+    parseQueryParam = \case
+        "SEVERITY_UNSPECIFIED" -> Right GVVDESSeverityUnspecified
+        "MINIMAL" -> Right GVVDESMinimal
+        "LOW" -> Right GVVDESLow
+        "MEDIUM" -> Right GVVDESMedium
+        "HIGH" -> Right GVVDESHigh
+        "CRITICAL" -> Right GVVDESCritical
+        x -> Left ("Unable to parse GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity from: " <> x)
+
+instance ToHttpApiData GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity where
+    toQueryParam = \case
+        GVVDESSeverityUnspecified -> "SEVERITY_UNSPECIFIED"
+        GVVDESMinimal -> "MINIMAL"
+        GVVDESLow -> "LOW"
+        GVVDESMedium -> "MEDIUM"
+        GVVDESHigh -> "HIGH"
+        GVVDESCritical -> "CRITICAL"
+
+instance FromJSON GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity where
+    parseJSON = parseJSONText "GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity"
+
+instance ToJSON GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity where
+    toJSON = toJSONText
+
+-- | Base Metrics Represents the intrinsic characteristics of a vulnerability
+-- that are constant over time and across user environments.
+data CVSSv3AttackVector
+    = AttackVectorUnspecified
+      -- ^ @ATTACK_VECTOR_UNSPECIFIED@
+    | AttackVectorNetwork
+      -- ^ @ATTACK_VECTOR_NETWORK@
+    | AttackVectorAdjacent
+      -- ^ @ATTACK_VECTOR_ADJACENT@
+    | AttackVectorLocal
+      -- ^ @ATTACK_VECTOR_LOCAL@
+    | AttackVectorPhysical
+      -- ^ @ATTACK_VECTOR_PHYSICAL@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CVSSv3AttackVector
+
+instance FromHttpApiData CVSSv3AttackVector where
+    parseQueryParam = \case
+        "ATTACK_VECTOR_UNSPECIFIED" -> Right AttackVectorUnspecified
+        "ATTACK_VECTOR_NETWORK" -> Right AttackVectorNetwork
+        "ATTACK_VECTOR_ADJACENT" -> Right AttackVectorAdjacent
+        "ATTACK_VECTOR_LOCAL" -> Right AttackVectorLocal
+        "ATTACK_VECTOR_PHYSICAL" -> Right AttackVectorPhysical
+        x -> Left ("Unable to parse CVSSv3AttackVector from: " <> x)
+
+instance ToHttpApiData CVSSv3AttackVector where
+    toQueryParam = \case
+        AttackVectorUnspecified -> "ATTACK_VECTOR_UNSPECIFIED"
+        AttackVectorNetwork -> "ATTACK_VECTOR_NETWORK"
+        AttackVectorAdjacent -> "ATTACK_VECTOR_ADJACENT"
+        AttackVectorLocal -> "ATTACK_VECTOR_LOCAL"
+        AttackVectorPhysical -> "ATTACK_VECTOR_PHYSICAL"
+
+instance FromJSON CVSSv3AttackVector where
+    parseJSON = parseJSONText "CVSSv3AttackVector"
+
+instance ToJSON CVSSv3AttackVector where
+    toJSON = toJSONText
+
+-- | Type (for example schema) of the attestation payload that was signed.
+-- The verifier must ensure that the provided type is one that the verifier
+-- supports, and that the attestation payload is a valid instantiation of
+-- that type (for example by validating a JSON schema).
+data GenericSignedAttestationContentType
+    = ContentTypeUnspecified
+      -- ^ @CONTENT_TYPE_UNSPECIFIED@
+      -- \`ContentType\` is not set.
+    | SimpleSigningJSON
+      -- ^ @SIMPLE_SIGNING_JSON@
+      -- Atomic format attestation signature. See
+      -- https:\/\/github.com\/containers\/image\/blob\/8a5d2f82a6e3263290c8e0276c3e0f64e77723e7\/docs\/atomic-signature.md
+      -- The payload extracted in \`plaintext\` is a JSON blob conforming to the
+      -- linked schema.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GenericSignedAttestationContentType
+
+instance FromHttpApiData GenericSignedAttestationContentType where
+    parseQueryParam = \case
+        "CONTENT_TYPE_UNSPECIFIED" -> Right ContentTypeUnspecified
+        "SIMPLE_SIGNING_JSON" -> Right SimpleSigningJSON
+        x -> Left ("Unable to parse GenericSignedAttestationContentType from: " <> x)
+
+instance ToHttpApiData GenericSignedAttestationContentType where
+    toQueryParam = \case
+        ContentTypeUnspecified -> "CONTENT_TYPE_UNSPECIFIED"
+        SimpleSigningJSON -> "SIMPLE_SIGNING_JSON"
+
+instance FromJSON GenericSignedAttestationContentType where
+    parseJSON = parseJSONText "GenericSignedAttestationContentType"
+
+instance ToJSON GenericSignedAttestationContentType where
+    toJSON = toJSONText
+
+data CVSSv3ConfidentialityImpact
+    = CVSSCIImpactUnspecified
+      -- ^ @IMPACT_UNSPECIFIED@
+    | CVSSCIImpactHigh
+      -- ^ @IMPACT_HIGH@
+    | CVSSCIImpactLow
+      -- ^ @IMPACT_LOW@
+    | CVSSCIImpactNone
+      -- ^ @IMPACT_NONE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CVSSv3ConfidentialityImpact
+
+instance FromHttpApiData CVSSv3ConfidentialityImpact where
+    parseQueryParam = \case
+        "IMPACT_UNSPECIFIED" -> Right CVSSCIImpactUnspecified
+        "IMPACT_HIGH" -> Right CVSSCIImpactHigh
+        "IMPACT_LOW" -> Right CVSSCIImpactLow
+        "IMPACT_NONE" -> Right CVSSCIImpactNone
+        x -> Left ("Unable to parse CVSSv3ConfidentialityImpact from: " <> x)
+
+instance ToHttpApiData CVSSv3ConfidentialityImpact where
+    toQueryParam = \case
+        CVSSCIImpactUnspecified -> "IMPACT_UNSPECIFIED"
+        CVSSCIImpactHigh -> "IMPACT_HIGH"
+        CVSSCIImpactLow -> "IMPACT_LOW"
+        CVSSCIImpactNone -> "IMPACT_NONE"
+
+instance FromJSON CVSSv3ConfidentialityImpact where
+    parseJSON = parseJSONText "CVSSv3ConfidentialityImpact"
+
+instance ToJSON CVSSv3ConfidentialityImpact where
     toJSON = toJSONText
 
 -- | The CPU architecture for which packages in this distribution channel
@@ -595,15 +883,45 @@ instance FromJSON AuditLogConfigLogType where
 instance ToJSON AuditLogConfigLogType where
     toJSON = toJSONText
 
+data CVSSv3Scope
+    = ScopeUnspecified
+      -- ^ @SCOPE_UNSPECIFIED@
+    | ScopeUnchanged
+      -- ^ @SCOPE_UNCHANGED@
+    | ScopeChanged
+      -- ^ @SCOPE_CHANGED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CVSSv3Scope
+
+instance FromHttpApiData CVSSv3Scope where
+    parseQueryParam = \case
+        "SCOPE_UNSPECIFIED" -> Right ScopeUnspecified
+        "SCOPE_UNCHANGED" -> Right ScopeUnchanged
+        "SCOPE_CHANGED" -> Right ScopeChanged
+        x -> Left ("Unable to parse CVSSv3Scope from: " <> x)
+
+instance ToHttpApiData CVSSv3Scope where
+    toQueryParam = \case
+        ScopeUnspecified -> "SCOPE_UNSPECIFIED"
+        ScopeUnchanged -> "SCOPE_UNCHANGED"
+        ScopeChanged -> "SCOPE_CHANGED"
+
+instance FromJSON CVSSv3Scope where
+    parseJSON = parseJSONText "CVSSv3Scope"
+
+instance ToJSON CVSSv3Scope where
+    toJSON = toJSONText
+
 -- | Type (for example schema) of the attestation payload that was signed.
 -- The verifier must ensure that the provided type is one that the verifier
 -- supports, and that the attestation payload is a valid instantiation of
 -- that type (for example by validating a JSON schema).
 data PgpSignedAttestationContentType
-    = ContentTypeUnspecified
+    = PSACTContentTypeUnspecified
       -- ^ @CONTENT_TYPE_UNSPECIFIED@
       -- \`ContentType\` is not set.
-    | SimpleSigningJSON
+    | PSACTSimpleSigningJSON
       -- ^ @SIMPLE_SIGNING_JSON@
       -- Atomic format attestation signature. See
       -- https:\/\/github.com\/containers\/image\/blob\/8a5d2f82a6e3263290c8e0276c3e0f64e77723e7\/docs\/atomic-signature.md
@@ -615,14 +933,14 @@ instance Hashable PgpSignedAttestationContentType
 
 instance FromHttpApiData PgpSignedAttestationContentType where
     parseQueryParam = \case
-        "CONTENT_TYPE_UNSPECIFIED" -> Right ContentTypeUnspecified
-        "SIMPLE_SIGNING_JSON" -> Right SimpleSigningJSON
+        "CONTENT_TYPE_UNSPECIFIED" -> Right PSACTContentTypeUnspecified
+        "SIMPLE_SIGNING_JSON" -> Right PSACTSimpleSigningJSON
         x -> Left ("Unable to parse PgpSignedAttestationContentType from: " <> x)
 
 instance ToHttpApiData PgpSignedAttestationContentType where
     toQueryParam = \case
-        ContentTypeUnspecified -> "CONTENT_TYPE_UNSPECIFIED"
-        SimpleSigningJSON -> "SIMPLE_SIGNING_JSON"
+        PSACTContentTypeUnspecified -> "CONTENT_TYPE_UNSPECIFIED"
+        PSACTSimpleSigningJSON -> "SIMPLE_SIGNING_JSON"
 
 instance FromJSON PgpSignedAttestationContentType where
     parseJSON = parseJSONText "PgpSignedAttestationContentType"
@@ -822,6 +1140,40 @@ instance FromJSON DiscoveryAnalysisKind where
     parseJSON = parseJSONText "DiscoveryAnalysisKind"
 
 instance ToJSON DiscoveryAnalysisKind where
+    toJSON = toJSONText
+
+data CVSSv3AvailabilityImpact
+    = CVSSAIImpactUnspecified
+      -- ^ @IMPACT_UNSPECIFIED@
+    | CVSSAIImpactHigh
+      -- ^ @IMPACT_HIGH@
+    | CVSSAIImpactLow
+      -- ^ @IMPACT_LOW@
+    | CVSSAIImpactNone
+      -- ^ @IMPACT_NONE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CVSSv3AvailabilityImpact
+
+instance FromHttpApiData CVSSv3AvailabilityImpact where
+    parseQueryParam = \case
+        "IMPACT_UNSPECIFIED" -> Right CVSSAIImpactUnspecified
+        "IMPACT_HIGH" -> Right CVSSAIImpactHigh
+        "IMPACT_LOW" -> Right CVSSAIImpactLow
+        "IMPACT_NONE" -> Right CVSSAIImpactNone
+        x -> Left ("Unable to parse CVSSv3AvailabilityImpact from: " <> x)
+
+instance ToHttpApiData CVSSv3AvailabilityImpact where
+    toQueryParam = \case
+        CVSSAIImpactUnspecified -> "IMPACT_UNSPECIFIED"
+        CVSSAIImpactHigh -> "IMPACT_HIGH"
+        CVSSAIImpactLow -> "IMPACT_LOW"
+        CVSSAIImpactNone -> "IMPACT_NONE"
+
+instance FromJSON CVSSv3AvailabilityImpact where
+    parseJSON = parseJSONText "CVSSv3AvailabilityImpact"
+
+instance ToJSON CVSSv3AvailabilityImpact where
     toJSON = toJSONText
 
 -- | The alias kind.

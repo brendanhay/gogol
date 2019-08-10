@@ -94,6 +94,22 @@ module Network.Google.AlertCenter.Types
     , notification
     , nCloudPubsubTopic
 
+    -- * ActivityRule
+    , ActivityRule
+    , activityRule
+    , arSupersededAlerts
+    , arActionNames
+    , arSupersedingAlert
+    , arTriggerSource
+    , arWindowSize
+    , arUpdateTime
+    , arName
+    , arThreshold
+    , arQuery
+    , arDisplayName
+    , arDescription
+    , arCreateTime
+
     -- * AccountWarning
     , AccountWarning
     , accountWarning
@@ -150,6 +166,7 @@ module Network.Google.AlertCenter.Types
     , aAlertId
     , aSecurityInvestigationToolLink
     , aCustomerId
+    , aUpdateTime
     , aEndTime
     , aSource
     , aDeleted
@@ -160,13 +177,6 @@ module Network.Google.AlertCenter.Types
     , Attachment
     , attachment
     , aCSV
-
-    -- * RequestInfo
-    , RequestInfo
-    , requestInfo
-    , riNumberOfRequests
-    , riAppDeveloperEmail
-    , riAppName
 
     -- * GoogleOperations
     , GoogleOperations
@@ -187,11 +197,6 @@ module Network.Google.AlertCenter.Types
 
     -- * Xgafv
     , Xgafv (..)
-
-    -- * AppMakerSQLSetupNotification
-    , AppMakerSQLSetupNotification
-    , appMakerSQLSetupNotification
-    , amsqlsnRequestInfo
 
     -- * DomainWideTakeoutInitiated
     , DomainWideTakeoutInitiated

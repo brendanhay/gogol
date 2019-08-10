@@ -25,7 +25,7 @@
 -- events in [self service
 -- tools](https:\/\/console.cloud.google.com\/talent-solution\/overview).
 -- [Learn
--- more](https:\/\/cloud.google.com\/talent-solution\/job-search\/docs\/management-tools)
+-- more](https:\/\/cloud.google.com\/talent-solution\/docs\/management-tools)
 -- about self service tools.
 --
 -- /See:/ <https://cloud.google.com/talent-solution/job-search/docs/ Cloud Talent Solution API Reference> for @jobs.projects.clientEvents.create@.
@@ -71,7 +71,7 @@ type ProjectsClientEventsCreateResource =
 -- events in [self service
 -- tools](https:\/\/console.cloud.google.com\/talent-solution\/overview).
 -- [Learn
--- more](https:\/\/cloud.google.com\/talent-solution\/job-search\/docs\/management-tools)
+-- more](https:\/\/cloud.google.com\/talent-solution\/docs\/management-tools)
 -- about self service tools.
 --
 -- /See:/ 'projectsClientEventsCreate' smart constructor.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the autoscaling settings for a specific node pool.
+-- Sets the autoscaling settings for the specified node pool.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.autoscaling@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Autoscaling
@@ -72,7 +72,7 @@ type ProjectsZonesClustersNodePoolsAutoscalingResource
                                        SetNodePoolAutoscalingRequest
                                        :> Post '[JSON] Operation
 
--- | Sets the autoscaling settings for a specific node pool.
+-- | Sets the autoscaling settings for the specified node pool.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsAutoscaling' smart constructor.
 data ProjectsZonesClustersNodePoolsAutoscaling =

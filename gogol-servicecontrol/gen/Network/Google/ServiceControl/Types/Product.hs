@@ -308,6 +308,44 @@ instance ToJSON RequestMetadata where
                   ("callerNetwork" .=) <$> _rmCallerNetwork,
                   ("requestAttributes" .=) <$> _rmRequestAttributes])
 
+-- | Third party identity principal.
+--
+-- /See:/ 'thirdPartyPrincipal' smart constructor.
+newtype ThirdPartyPrincipal =
+  ThirdPartyPrincipal'
+    { _tppThirdPartyClaims :: Maybe ThirdPartyPrincipalThirdPartyClaims
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ThirdPartyPrincipal' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tppThirdPartyClaims'
+thirdPartyPrincipal
+    :: ThirdPartyPrincipal
+thirdPartyPrincipal = ThirdPartyPrincipal' {_tppThirdPartyClaims = Nothing}
+
+
+-- | Metadata about third party identity.
+tppThirdPartyClaims :: Lens' ThirdPartyPrincipal (Maybe ThirdPartyPrincipalThirdPartyClaims)
+tppThirdPartyClaims
+  = lens _tppThirdPartyClaims
+      (\ s a -> s{_tppThirdPartyClaims = a})
+
+instance FromJSON ThirdPartyPrincipal where
+        parseJSON
+          = withObject "ThirdPartyPrincipal"
+              (\ o ->
+                 ThirdPartyPrincipal' <$> (o .:? "thirdPartyClaims"))
+
+instance ToJSON ThirdPartyPrincipal where
+        toJSON ThirdPartyPrincipal'{..}
+          = object
+              (catMaybes
+                 [("thirdPartyClaims" .=) <$> _tppThirdPartyClaims])
+
 -- | The labels or tags on the resource, such as AWS resource tags and
 -- Kubernetes resource labels.
 --
@@ -1094,7 +1132,8 @@ oOperationId
 -- service-initiated operations that are not related to a specific
 -- consumer. - This can be in one of the following formats: -
 -- project:PROJECT_ID, - project\`_\`number:PROJECT_NUMBER, -
--- api\`_\`key:API_KEY.
+-- projects\/PROJECT_ID or PROJECT_NUMBER, - folders\/FOLDER_NUMBER, -
+-- organizations\/ORGANIZATION_NUMBER, - api\`_\`key:API_KEY.
 oConsumerId :: Lens' Operation (Maybe Text)
 oConsumerId
   = lens _oConsumerId (\ s a -> s{_oConsumerId = a})
@@ -1356,6 +1395,60 @@ instance ToJSON LinearBuckets where
                  [("offset" .=) <$> _lbOffSet,
                   ("width" .=) <$> _lbWidth,
                   ("numFiniteBuckets" .=) <$> _lbNumFiniteBuckets])
+
+-- | Identity delegation history of an authenticated service account.
+--
+-- /See:/ 'serviceAccountDelegationInfo' smart constructor.
+data ServiceAccountDelegationInfo =
+  ServiceAccountDelegationInfo'
+    { _sadiThirdPartyPrincipal :: !(Maybe ThirdPartyPrincipal)
+    , _sadiFirstPartyPrincipal :: !(Maybe FirstPartyPrincipal)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ServiceAccountDelegationInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sadiThirdPartyPrincipal'
+--
+-- * 'sadiFirstPartyPrincipal'
+serviceAccountDelegationInfo
+    :: ServiceAccountDelegationInfo
+serviceAccountDelegationInfo =
+  ServiceAccountDelegationInfo'
+    {_sadiThirdPartyPrincipal = Nothing, _sadiFirstPartyPrincipal = Nothing}
+
+
+-- | Third party identity as the real authority.
+sadiThirdPartyPrincipal :: Lens' ServiceAccountDelegationInfo (Maybe ThirdPartyPrincipal)
+sadiThirdPartyPrincipal
+  = lens _sadiThirdPartyPrincipal
+      (\ s a -> s{_sadiThirdPartyPrincipal = a})
+
+-- | First party (Google) identity as the real authority.
+sadiFirstPartyPrincipal :: Lens' ServiceAccountDelegationInfo (Maybe FirstPartyPrincipal)
+sadiFirstPartyPrincipal
+  = lens _sadiFirstPartyPrincipal
+      (\ s a -> s{_sadiFirstPartyPrincipal = a})
+
+instance FromJSON ServiceAccountDelegationInfo where
+        parseJSON
+          = withObject "ServiceAccountDelegationInfo"
+              (\ o ->
+                 ServiceAccountDelegationInfo' <$>
+                   (o .:? "thirdPartyPrincipal") <*>
+                     (o .:? "firstPartyPrincipal"))
+
+instance ToJSON ServiceAccountDelegationInfo where
+        toJSON ServiceAccountDelegationInfo'{..}
+          = object
+              (catMaybes
+                 [("thirdPartyPrincipal" .=) <$>
+                    _sadiThirdPartyPrincipal,
+                  ("firstPartyPrincipal" .=) <$>
+                    _sadiFirstPartyPrincipal])
 
 -- | This message defines request authentication attributes. Terminology is
 -- based on the JSON Web Token (JWT) standard, but the terms also correlate
@@ -1678,6 +1771,8 @@ ciConsumerNumber
       (\ s a -> s{_ciConsumerNumber = a})
       . mapping _Coerce
 
+-- | The type of the consumer which should have been defined in [Google
+-- Resource Manager](https:\/\/cloud.google.com\/resource-manager\/).
 ciType :: Lens' ConsumerInfo (Maybe ConsumerInfoType)
 ciType = lens _ciType (\ s a -> s{_ciType = a})
 
@@ -1696,6 +1791,48 @@ instance ToJSON ConsumerInfo where
                  [("projectNumber" .=) <$> _ciProjectNumber,
                   ("consumerNumber" .=) <$> _ciConsumerNumber,
                   ("type" .=) <$> _ciType])
+
+-- | Metadata about third party identity.
+--
+-- /See:/ 'thirdPartyPrincipalThirdPartyClaims' smart constructor.
+newtype ThirdPartyPrincipalThirdPartyClaims =
+  ThirdPartyPrincipalThirdPartyClaims'
+    { _tpptpcAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ThirdPartyPrincipalThirdPartyClaims' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpptpcAddtional'
+thirdPartyPrincipalThirdPartyClaims
+    :: HashMap Text JSONValue -- ^ 'tpptpcAddtional'
+    -> ThirdPartyPrincipalThirdPartyClaims
+thirdPartyPrincipalThirdPartyClaims pTpptpcAddtional_ =
+  ThirdPartyPrincipalThirdPartyClaims'
+    {_tpptpcAddtional = _Coerce # pTpptpcAddtional_}
+
+
+-- | Properties of the object.
+tpptpcAddtional :: Lens' ThirdPartyPrincipalThirdPartyClaims (HashMap Text JSONValue)
+tpptpcAddtional
+  = lens _tpptpcAddtional
+      (\ s a -> s{_tpptpcAddtional = a})
+      . _Coerce
+
+instance FromJSON ThirdPartyPrincipalThirdPartyClaims
+         where
+        parseJSON
+          = withObject "ThirdPartyPrincipalThirdPartyClaims"
+              (\ o ->
+                 ThirdPartyPrincipalThirdPartyClaims' <$>
+                   (parseJSONObject o))
+
+instance ToJSON ThirdPartyPrincipalThirdPartyClaims
+         where
+        toJSON = toJSON . _tpptpcAddtional
 
 --
 -- /See:/ 'allocateInfo' smart constructor.
@@ -1967,6 +2104,58 @@ instance ToJSON CheckError where
                  [("subject" .=) <$> _ceSubject,
                   ("status" .=) <$> _ceStatus, ("code" .=) <$> _ceCode,
                   ("detail" .=) <$> _ceDetail])
+
+-- | First party identity principal.
+--
+-- /See:/ 'firstPartyPrincipal' smart constructor.
+data FirstPartyPrincipal =
+  FirstPartyPrincipal'
+    { _fppPrincipalEmail  :: !(Maybe Text)
+    , _fppServiceMetadata :: !(Maybe FirstPartyPrincipalServiceMetadata)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'FirstPartyPrincipal' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fppPrincipalEmail'
+--
+-- * 'fppServiceMetadata'
+firstPartyPrincipal
+    :: FirstPartyPrincipal
+firstPartyPrincipal =
+  FirstPartyPrincipal'
+    {_fppPrincipalEmail = Nothing, _fppServiceMetadata = Nothing}
+
+
+-- | The email address of a Google account. .
+fppPrincipalEmail :: Lens' FirstPartyPrincipal (Maybe Text)
+fppPrincipalEmail
+  = lens _fppPrincipalEmail
+      (\ s a -> s{_fppPrincipalEmail = a})
+
+-- | Metadata about the service that uses the service account. .
+fppServiceMetadata :: Lens' FirstPartyPrincipal (Maybe FirstPartyPrincipalServiceMetadata)
+fppServiceMetadata
+  = lens _fppServiceMetadata
+      (\ s a -> s{_fppServiceMetadata = a})
+
+instance FromJSON FirstPartyPrincipal where
+        parseJSON
+          = withObject "FirstPartyPrincipal"
+              (\ o ->
+                 FirstPartyPrincipal' <$>
+                   (o .:? "principalEmail") <*>
+                     (o .:? "serviceMetadata"))
+
+instance ToJSON FirstPartyPrincipal where
+        toJSON FirstPartyPrincipal'{..}
+          = object
+              (catMaybes
+                 [("principalEmail" .=) <$> _fppPrincipalEmail,
+                  ("serviceMetadata" .=) <$> _fppServiceMetadata])
 
 -- | Labels describing the operation.
 --
@@ -3726,6 +3915,48 @@ instance ToJSON ExplicitBuckets where
         toJSON ExplicitBuckets'{..}
           = object (catMaybes [("bounds" .=) <$> _ebBounds])
 
+-- | Metadata about the service that uses the service account. .
+--
+-- /See:/ 'firstPartyPrincipalServiceMetadata' smart constructor.
+newtype FirstPartyPrincipalServiceMetadata =
+  FirstPartyPrincipalServiceMetadata'
+    { _fppsmAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'FirstPartyPrincipalServiceMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fppsmAddtional'
+firstPartyPrincipalServiceMetadata
+    :: HashMap Text JSONValue -- ^ 'fppsmAddtional'
+    -> FirstPartyPrincipalServiceMetadata
+firstPartyPrincipalServiceMetadata pFppsmAddtional_ =
+  FirstPartyPrincipalServiceMetadata'
+    {_fppsmAddtional = _Coerce # pFppsmAddtional_}
+
+
+-- | Properties of the object.
+fppsmAddtional :: Lens' FirstPartyPrincipalServiceMetadata (HashMap Text JSONValue)
+fppsmAddtional
+  = lens _fppsmAddtional
+      (\ s a -> s{_fppsmAddtional = a})
+      . _Coerce
+
+instance FromJSON FirstPartyPrincipalServiceMetadata
+         where
+        parseJSON
+          = withObject "FirstPartyPrincipalServiceMetadata"
+              (\ o ->
+                 FirstPartyPrincipalServiceMetadata' <$>
+                   (parseJSONObject o))
+
+instance ToJSON FirstPartyPrincipalServiceMetadata
+         where
+        toJSON = toJSON . _fppsmAddtional
+
 -- | Represents error information for QuotaOperation.
 --
 -- /See:/ 'quotaError' smart constructor.
@@ -3791,10 +4022,11 @@ instance ToJSON QuotaError where
 -- /See:/ 'authenticationInfo' smart constructor.
 data AuthenticationInfo =
   AuthenticationInfo'
-    { _aiThirdPartyPrincipal   :: !(Maybe AuthenticationInfoThirdPartyPrincipal)
-    , _aiPrincipalEmail        :: !(Maybe Text)
-    , _aiAuthoritySelector     :: !(Maybe Text)
-    , _aiServiceAccountKeyName :: !(Maybe Text)
+    { _aiThirdPartyPrincipal          :: !(Maybe AuthenticationInfoThirdPartyPrincipal)
+    , _aiServiceAccountDelegationInfo :: !(Maybe [ServiceAccountDelegationInfo])
+    , _aiPrincipalEmail               :: !(Maybe Text)
+    , _aiAuthoritySelector            :: !(Maybe Text)
+    , _aiServiceAccountKeyName        :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3804,6 +4036,8 @@ data AuthenticationInfo =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aiThirdPartyPrincipal'
+--
+-- * 'aiServiceAccountDelegationInfo'
 --
 -- * 'aiPrincipalEmail'
 --
@@ -3815,6 +4049,7 @@ authenticationInfo
 authenticationInfo =
   AuthenticationInfo'
     { _aiThirdPartyPrincipal = Nothing
+    , _aiServiceAccountDelegationInfo = Nothing
     , _aiPrincipalEmail = Nothing
     , _aiAuthoritySelector = Nothing
     , _aiServiceAccountKeyName = Nothing
@@ -3828,6 +4063,18 @@ aiThirdPartyPrincipal :: Lens' AuthenticationInfo (Maybe AuthenticationInfoThird
 aiThirdPartyPrincipal
   = lens _aiThirdPartyPrincipal
       (\ s a -> s{_aiThirdPartyPrincipal = a})
+
+-- | Identity delegation history of an authenticated service account that
+-- makes the request. It contains information on the real authorities that
+-- try to access GCP resources by delegating on a service account. When
+-- multiple authorities present, they are guaranteed to be sorted based on
+-- the original ordering of the identity delegation events.
+aiServiceAccountDelegationInfo :: Lens' AuthenticationInfo [ServiceAccountDelegationInfo]
+aiServiceAccountDelegationInfo
+  = lens _aiServiceAccountDelegationInfo
+      (\ s a -> s{_aiServiceAccountDelegationInfo = a})
+      . _Default
+      . _Coerce
 
 -- | The email address of the authenticated user (or service account on
 -- behalf of third party principal) making the request. For privacy
@@ -3860,7 +4107,8 @@ instance FromJSON AuthenticationInfo where
               (\ o ->
                  AuthenticationInfo' <$>
                    (o .:? "thirdPartyPrincipal") <*>
-                     (o .:? "principalEmail")
+                     (o .:? "serviceAccountDelegationInfo" .!= mempty)
+                     <*> (o .:? "principalEmail")
                      <*> (o .:? "authoritySelector")
                      <*> (o .:? "serviceAccountKeyName"))
 
@@ -3870,6 +4118,8 @@ instance ToJSON AuthenticationInfo where
               (catMaybes
                  [("thirdPartyPrincipal" .=) <$>
                     _aiThirdPartyPrincipal,
+                  ("serviceAccountDelegationInfo" .=) <$>
+                    _aiServiceAccountDelegationInfo,
                   ("principalEmail" .=) <$> _aiPrincipalEmail,
                   ("authoritySelector" .=) <$> _aiAuthoritySelector,
                   ("serviceAccountKeyName" .=) <$>

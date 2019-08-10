@@ -118,6 +118,18 @@ module Network.Google.ToolResults.Types
     -- * TestIssueCategory
     , TestIssueCategory (..)
 
+    -- * TestCase
+    , TestCase
+    , testCase
+    , tcStatus
+    , tcStartTime
+    , tcTestCaseReference
+    , tcToolOutputs
+    , tcStackTraces
+    , tcTestCaseId
+    , tcEndTime
+    , tcSkippedMessage
+
     -- * GraphicsStatsBucket
     , GraphicsStatsBucket
     , graphicsStatsBucket
@@ -398,10 +410,18 @@ module Network.Google.ToolResults.Types
     -- * BasicPerfSampleSeriesSampleSeriesLabel
     , BasicPerfSampleSeriesSampleSeriesLabel (..)
 
+    -- * ListTestCasesResponse
+    , ListTestCasesResponse
+    , listTestCasesResponse
+    , ltcrNextPageToken
+    , ltcrTestCases
+
     -- * IndividualOutcome
     , IndividualOutcome
     , individualOutcome
+    , ioRunDuration
     , ioStepId
+    , ioMultistepNumber
     , ioOutcomeSummary
 
     -- * TestSuiteOverview
@@ -458,6 +478,9 @@ module Network.Google.ToolResults.Types
     , bpssPerfUnit
     , bpssPerfMetricType
     , bpssSampleSeriesLabel
+
+    -- * TestCaseStatus
+    , TestCaseStatus (..)
 
     -- * PrimaryStepRollUp
     , PrimaryStepRollUp (..)

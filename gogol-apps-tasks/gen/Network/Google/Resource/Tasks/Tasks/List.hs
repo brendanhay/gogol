@@ -195,7 +195,7 @@ tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
 -- | Maximum number of task lists returned on one page. Optional. The default
--- is 100.
+-- is 20 (max allowed: 100).
 tlMaxResults :: Lens' TasksList (Maybe Int64)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})

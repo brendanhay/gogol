@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a Team Drive\'s metadata
+-- Deprecated use drives.update instead
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.teamdrives.update@.
 module Network.Google.Resource.Drive.Teamdrives.Update
@@ -52,7 +52,7 @@ type TeamdrivesUpdateResource =
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] TeamDrive :> Patch '[JSON] TeamDrive
 
--- | Updates a Team Drive\'s metadata
+-- | Deprecated use drives.update instead
 --
 -- /See:/ 'teamdrivesUpdate' smart constructor.
 data TeamdrivesUpdate =

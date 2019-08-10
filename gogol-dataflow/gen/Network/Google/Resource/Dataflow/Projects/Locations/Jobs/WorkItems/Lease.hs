@@ -142,7 +142,9 @@ pljwilUploadProtocol
   = lens _pljwilUploadProtocol
       (\ s a -> s{_pljwilUploadProtocol = a})
 
--- | The location which contains the WorkItem\'s job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the WorkItem\'s job.
 pljwilLocation :: Lens' ProjectsLocationsJobsWorkItemsLease Text
 pljwilLocation
   = lens _pljwilLocation

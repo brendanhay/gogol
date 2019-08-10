@@ -20,10 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the access control policy for a FHIR store or security label within
--- a FHIR store. Replaces any existing policy. Authorization requires the
--- Google IAM permission \'healthcare.fhirStores.setIamPolicy\' for a FHIR
--- store or \'healthcare.securityLabels.setIamPolicy\' for a security label
+-- Sets the access control policy on the specified resource. Replaces any
+-- existing policy.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.setIamPolicy@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.SetIAMPolicy
@@ -52,7 +50,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsFhirStoresSetIAMPolicy' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresSetIAMPolicyResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -63,10 +61,8 @@ type ProjectsLocationsDataSetsFhirStoresSetIAMPolicyResource
                      ReqBody '[JSON] SetIAMPolicyRequest :>
                        Post '[JSON] Policy
 
--- | Sets the access control policy for a FHIR store or security label within
--- a FHIR store. Replaces any existing policy. Authorization requires the
--- Google IAM permission \'healthcare.fhirStores.setIamPolicy\' for a FHIR
--- store or \'healthcare.securityLabels.setIamPolicy\' for a security label
+-- | Sets the access control policy on the specified resource. Replaces any
+-- existing policy.
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresSetIAMPolicy' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresSetIAMPolicy =

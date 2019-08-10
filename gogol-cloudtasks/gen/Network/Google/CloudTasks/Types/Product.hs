@@ -824,56 +824,6 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | App Engine HTTP queue. The task will be delivered to the App Engine
--- application hostname specified by its AppEngineHttpQueue and
--- AppEngineHttpRequest. The documentation for AppEngineHttpRequest
--- explains how the task\'s host URL is constructed. Using
--- AppEngineHttpQueue requires
--- [\`appengine.applications.get\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/access-control)
--- Google IAM permission for the project and the following scope:
--- \`https:\/\/www.googleapis.com\/auth\/cloud-platform\`
---
--- /See:/ 'appEngineHTTPQueue' smart constructor.
-newtype AppEngineHTTPQueue =
-  AppEngineHTTPQueue'
-    { _aehttpqAppEngineRoutingOverride :: Maybe AppEngineRouting
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AppEngineHTTPQueue' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aehttpqAppEngineRoutingOverride'
-appEngineHTTPQueue
-    :: AppEngineHTTPQueue
-appEngineHTTPQueue =
-  AppEngineHTTPQueue' {_aehttpqAppEngineRoutingOverride = Nothing}
-
-
--- | Overrides for the task-level app_engine_routing. If set,
--- \`app_engine_routing_override\` is used for all tasks in the queue, no
--- matter what the setting is for the task-level app_engine_routing.
-aehttpqAppEngineRoutingOverride :: Lens' AppEngineHTTPQueue (Maybe AppEngineRouting)
-aehttpqAppEngineRoutingOverride
-  = lens _aehttpqAppEngineRoutingOverride
-      (\ s a -> s{_aehttpqAppEngineRoutingOverride = a})
-
-instance FromJSON AppEngineHTTPQueue where
-        parseJSON
-          = withObject "AppEngineHTTPQueue"
-              (\ o ->
-                 AppEngineHTTPQueue' <$>
-                   (o .:? "appEngineRoutingOverride"))
-
-instance ToJSON AppEngineHTTPQueue where
-        toJSON AppEngineHTTPQueue'{..}
-          = object
-              (catMaybes
-                 [("appEngineRoutingOverride" .=) <$>
-                    _aehttpqAppEngineRoutingOverride])
-
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
@@ -918,12 +868,12 @@ instance ToJSON SetIAMPolicyRequest where
 -- /See:/ 'queue' smart constructor.
 data Queue =
   Queue'
-    { _qRateLimits         :: !(Maybe RateLimits)
-    , _qState              :: !(Maybe QueueState)
-    , _qRetryConfig        :: !(Maybe RetryConfig)
-    , _qAppEngineHTTPQueue :: !(Maybe AppEngineHTTPQueue)
-    , _qName               :: !(Maybe Text)
-    , _qPurgeTime          :: !(Maybe DateTime')
+    { _qRateLimits               :: !(Maybe RateLimits)
+    , _qAppEngineRoutingOverride :: !(Maybe AppEngineRouting)
+    , _qState                    :: !(Maybe QueueState)
+    , _qRetryConfig              :: !(Maybe RetryConfig)
+    , _qName                     :: !(Maybe Text)
+    , _qPurgeTime                :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -934,11 +884,11 @@ data Queue =
 --
 -- * 'qRateLimits'
 --
+-- * 'qAppEngineRoutingOverride'
+--
 -- * 'qState'
 --
 -- * 'qRetryConfig'
---
--- * 'qAppEngineHTTPQueue'
 --
 -- * 'qName'
 --
@@ -948,9 +898,9 @@ queue
 queue =
   Queue'
     { _qRateLimits = Nothing
+    , _qAppEngineRoutingOverride = Nothing
     , _qState = Nothing
     , _qRetryConfig = Nothing
-    , _qAppEngineHTTPQueue = Nothing
     , _qName = Nothing
     , _qPurgeTime = Nothing
     }
@@ -965,13 +915,23 @@ queue =
 -- first attempt fails. That is, retry_config controls task retries (the
 -- second attempt, third attempt, etc). The queue\'s actual dispatch rate
 -- is the result of: * Number of tasks in the queue * User-specified
--- throttling: rate limits retry configuration, and the queue\'s state. *
--- System throttling due to \`429\` (Too Many Requests) or \`503\` (Service
+-- throttling: rate_limits, retry_config, and the queue\'s state. * System
+-- throttling due to \`429\` (Too Many Requests) or \`503\` (Service
 -- Unavailable) responses from the worker, high error rates, or to smooth
 -- sudden large traffic spikes.
 qRateLimits :: Lens' Queue (Maybe RateLimits)
 qRateLimits
   = lens _qRateLimits (\ s a -> s{_qRateLimits = a})
+
+-- | Overrides for task-level app_engine_routing. These settings apply only
+-- to App Engine tasks in this queue. If set,
+-- \`app_engine_routing_override\` is used for all App Engine tasks in the
+-- queue, no matter what the setting is for the task-level
+-- app_engine_routing.
+qAppEngineRoutingOverride :: Lens' Queue (Maybe AppEngineRouting)
+qAppEngineRoutingOverride
+  = lens _qAppEngineRoutingOverride
+      (\ s a -> s{_qAppEngineRoutingOverride = a})
 
 -- | Output only. The state of the queue. \`state\` can only be changed by
 -- called PauseQueue, ResumeQueue, or uploading
@@ -991,13 +951,6 @@ qState = lens _qState (\ s a -> s{_qState = a})
 qRetryConfig :: Lens' Queue (Maybe RetryConfig)
 qRetryConfig
   = lens _qRetryConfig (\ s a -> s{_qRetryConfig = a})
-
--- | AppEngineHttpQueue settings apply only to App Engine tasks in this
--- queue.
-qAppEngineHTTPQueue :: Lens' Queue (Maybe AppEngineHTTPQueue)
-qAppEngineHTTPQueue
-  = lens _qAppEngineHTTPQueue
-      (\ s a -> s{_qAppEngineHTTPQueue = a})
 
 -- | Caller-specified and required in CreateQueue, after which it becomes
 -- output only. The queue name. The queue name must have the following
@@ -1031,9 +984,10 @@ instance FromJSON Queue where
           = withObject "Queue"
               (\ o ->
                  Queue' <$>
-                   (o .:? "rateLimits") <*> (o .:? "state") <*>
-                     (o .:? "retryConfig")
-                     <*> (o .:? "appEngineHttpQueue")
+                   (o .:? "rateLimits") <*>
+                     (o .:? "appEngineRoutingOverride")
+                     <*> (o .:? "state")
+                     <*> (o .:? "retryConfig")
                      <*> (o .:? "name")
                      <*> (o .:? "purgeTime"))
 
@@ -1042,9 +996,10 @@ instance ToJSON Queue where
           = object
               (catMaybes
                  [("rateLimits" .=) <$> _qRateLimits,
+                  ("appEngineRoutingOverride" .=) <$>
+                    _qAppEngineRoutingOverride,
                   ("state" .=) <$> _qState,
                   ("retryConfig" .=) <$> _qRetryConfig,
-                  ("appEngineHttpQueue" .=) <$> _qAppEngineHTTPQueue,
                   ("name" .=) <$> _qName,
                   ("purgeTime" .=) <$> _qPurgeTime])
 
@@ -1478,7 +1433,7 @@ tResponseCount
       . mapping _Coerce
 
 -- | Output only. The number of attempts dispatched. This count includes
--- tasks which have been dispatched but haven\'t received a response.
+-- attempts which have been dispatched but haven\'t received a response.
 tDispatchCount :: Lens' Task (Maybe Int32)
 tDispatchCount
   = lens _tDispatchCount
@@ -2063,8 +2018,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -2077,10 +2032,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

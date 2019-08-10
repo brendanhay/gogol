@@ -1004,9 +1004,10 @@ instance ToJSON ListNodesResponse where
 
 --
 -- /See:/ 'schedulingConfig' smart constructor.
-newtype SchedulingConfig =
+data SchedulingConfig =
   SchedulingConfig'
-    { _scPreemptible :: Maybe Bool
+    { _scReserved    :: !(Maybe Bool)
+    , _scPreemptible :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1015,11 +1016,19 @@ newtype SchedulingConfig =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'scReserved'
+--
 -- * 'scPreemptible'
 schedulingConfig
     :: SchedulingConfig
-schedulingConfig = SchedulingConfig' {_scPreemptible = Nothing}
+schedulingConfig =
+  SchedulingConfig' {_scReserved = Nothing, _scPreemptible = Nothing}
 
+
+-- | Whether the node is created under a reservation.
+scReserved :: Lens' SchedulingConfig (Maybe Bool)
+scReserved
+  = lens _scReserved (\ s a -> s{_scReserved = a})
 
 scPreemptible :: Lens' SchedulingConfig (Maybe Bool)
 scPreemptible
@@ -1029,12 +1038,16 @@ scPreemptible
 instance FromJSON SchedulingConfig where
         parseJSON
           = withObject "SchedulingConfig"
-              (\ o -> SchedulingConfig' <$> (o .:? "preemptible"))
+              (\ o ->
+                 SchedulingConfig' <$>
+                   (o .:? "reserved") <*> (o .:? "preemptible"))
 
 instance ToJSON SchedulingConfig where
         toJSON SchedulingConfig'{..}
           = object
-              (catMaybes [("preemptible" .=) <$> _scPreemptible])
+              (catMaybes
+                 [("reserved" .=) <$> _scReserved,
+                  ("preemptible" .=) <$> _scPreemptible])
 
 -- | Resource labels to represent user-provided metadata.
 --

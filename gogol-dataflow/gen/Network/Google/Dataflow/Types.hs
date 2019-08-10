@@ -291,6 +291,11 @@ module Network.Google.Dataflow.Types
     , jmBigQueryDetails
     , jmDatastoreDetails
 
+    -- * ValidateResponse
+    , ValidateResponse
+    , validateResponse
+    , vrErrorMessage
+
     -- * GetTemplateResponse
     , GetTemplateResponse
     , getTemplateResponse
@@ -314,6 +319,9 @@ module Network.Google.Dataflow.Types
     , dSizeGb
     , dDiskType
     , dMountPoint
+
+    -- * EnvironmentFlexResourceSchedulingGoal
+    , EnvironmentFlexResourceSchedulingGoal (..)
 
     -- * MetricUpdate
     , MetricUpdate
@@ -347,6 +355,7 @@ module Network.Google.Dataflow.Types
     , environment
     , eDataSet
     , eExperiments
+    , eFlexResourceSchedulingGoal
     , eWorkerPools
     , eClusterManagerAPIService
     , eVersion
@@ -354,6 +363,7 @@ module Network.Google.Dataflow.Types
     , eTempStoragePrefix
     , eServiceAccountEmail
     , eUserAgent
+    , eServiceKmsKeyName
     , eSdkPipelineOptions
 
     -- * ConcatPosition
@@ -643,6 +653,10 @@ module Network.Google.Dataflow.Types
     , workItemServiceStateHarnessData
     , wisshdAddtional
 
+    -- * DeleteSnapshotResponse
+    , DeleteSnapshotResponse
+    , deleteSnapshotResponse
+
     -- * DataDiskAssignment
     , DataDiskAssignment
     , dataDiskAssignment
@@ -661,6 +675,11 @@ module Network.Google.Dataflow.Types
 
     -- * SourceSplitResponseOutcome
     , SourceSplitResponseOutcome (..)
+
+    -- * ListSnapshotsResponse
+    , ListSnapshotsResponse
+    , listSnapshotsResponse
+    , lsrSnapshots
 
     -- * WorkerMessageResponse
     , WorkerMessageResponse
@@ -1198,6 +1217,7 @@ module Network.Google.Dataflow.Types
     , sctStreamingComputationConfigs
     , sctWindmillServiceEndpoint
     , sctWindmillServicePort
+    , sctMaxWorkItemCommitBytes
 
     -- * MetricShortId
     , MetricShortId

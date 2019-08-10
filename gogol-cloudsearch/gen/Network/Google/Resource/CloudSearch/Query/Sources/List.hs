@@ -144,8 +144,8 @@ qslRequestOptionsTimeZone
   = lens _qslRequestOptionsTimeZone
       (\ s a -> s{_qslRequestOptionsTimeZone = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 qslRequestOptionsDebugOptionsEnableDebugging :: Lens' QuerySourcesList (Maybe Bool)
 qslRequestOptionsDebugOptionsEnableDebugging
   = lens _qslRequestOptionsDebugOptionsEnableDebugging
@@ -180,7 +180,9 @@ qslRequestOptionsSearchApplicationId
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
 -- http:\/\/www.unicode.org\/reports\/tr35\/#Unicode_locale_identifier. For
--- translations.
+-- translations. When specified, the documents in search results are biased
+-- towards the specified language. Suggest API does not use this parameter.
+-- It autocompletes only based on characters in the query.
 qslRequestOptionsLanguageCode :: Lens' QuerySourcesList (Maybe Text)
 qslRequestOptionsLanguageCode
   = lens _qslRequestOptionsLanguageCode

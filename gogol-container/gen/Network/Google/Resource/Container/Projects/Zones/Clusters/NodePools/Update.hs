@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the version and\/or image type for a specific node pool.
+-- Updates the version and\/or image type for the specified node pool.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.update@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Update
@@ -70,7 +70,7 @@ type ProjectsZonesClustersNodePoolsUpdateResource =
                                      ReqBody '[JSON] UpdateNodePoolRequest :>
                                        Post '[JSON] Operation
 
--- | Updates the version and\/or image type for a specific node pool.
+-- | Updates the version and\/or image type for the specified node pool.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsUpdate' smart constructor.
 data ProjectsZonesClustersNodePoolsUpdate =

@@ -85,7 +85,7 @@ proMerchantId
       (\ s a -> s{_proMerchantId = a})
       . _Coerce
 
--- | The REST id of the product.
+-- | The REST ID of the product.
 proProductId :: Lens' ProductsDelete Text
 proProductId
   = lens _proProductId (\ s a -> s{_proProductId = a})

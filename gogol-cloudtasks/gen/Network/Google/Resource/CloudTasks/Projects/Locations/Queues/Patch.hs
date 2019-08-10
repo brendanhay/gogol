@@ -57,7 +57,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.patch@ method which the
 -- 'ProjectsLocationsQueuesPatch' request conforms to.
 type ProjectsLocationsQueuesPatchResource =
-     "v2beta3" :>
+     "v2" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

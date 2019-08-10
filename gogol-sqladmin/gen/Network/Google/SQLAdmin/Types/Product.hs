@@ -628,6 +628,56 @@ instance ToJSON APIWarning where
                  [("code" .=) <$> _awCode,
                   ("message" .=) <$> _awMessage])
 
+-- | Disk encryption configuration.
+--
+-- /See:/ 'diskEncryptionConfiguration' smart constructor.
+data DiskEncryptionConfiguration =
+  DiskEncryptionConfiguration'
+    { _decKind       :: !Text
+    , _decKmsKeyName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DiskEncryptionConfiguration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'decKind'
+--
+-- * 'decKmsKeyName'
+diskEncryptionConfiguration
+    :: DiskEncryptionConfiguration
+diskEncryptionConfiguration =
+  DiskEncryptionConfiguration'
+    {_decKind = "sql#diskEncryptionConfiguration", _decKmsKeyName = Nothing}
+
+
+-- | This is always sql#diskEncryptionConfiguration.
+decKind :: Lens' DiskEncryptionConfiguration Text
+decKind = lens _decKind (\ s a -> s{_decKind = a})
+
+-- | KMS key resource name
+decKmsKeyName :: Lens' DiskEncryptionConfiguration (Maybe Text)
+decKmsKeyName
+  = lens _decKmsKeyName
+      (\ s a -> s{_decKmsKeyName = a})
+
+instance FromJSON DiskEncryptionConfiguration where
+        parseJSON
+          = withObject "DiskEncryptionConfiguration"
+              (\ o ->
+                 DiskEncryptionConfiguration' <$>
+                   (o .:? "kind" .!= "sql#diskEncryptionConfiguration")
+                     <*> (o .:? "kmsKeyName"))
+
+instance ToJSON DiskEncryptionConfiguration where
+        toJSON DiskEncryptionConfiguration'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _decKind),
+                  ("kmsKeyName" .=) <$> _decKmsKeyName])
+
 -- | Database instance import context.
 --
 -- /See:/ 'importContext' smart constructor.
@@ -683,8 +733,7 @@ icDatabase
 icKind :: Lens' ImportContext Text
 icKind = lens _icKind (\ s a -> s{_icKind = a})
 
--- | Options for importing data as CSV. Importing CSV data using the Cloud
--- SQL Admin API is not supported for PostgreSQL instances.
+-- | Options for importing data as CSV.
 icCSVImportOptions :: Lens' ImportContext (Maybe ImportContextCSVImportOptions)
 icCSVImportOptions
   = lens _icCSVImportOptions
@@ -698,14 +747,13 @@ icURI :: Lens' ImportContext (Maybe Text)
 icURI = lens _icURI (\ s a -> s{_icURI = a})
 
 -- | The file type for the specified uri. SQL: The file contains SQL
--- statements. CSV: The file contains CSV data. Importing CSV data using
--- the Cloud SQL Admin API is not supported for PostgreSQL instances.
+-- statements. CSV: The file contains CSV data.
 icFileType :: Lens' ImportContext (Maybe Text)
 icFileType
   = lens _icFileType (\ s a -> s{_icFileType = a})
 
--- | The PostgreSQL user for this import operation. Defaults to
--- cloudsqlsuperuser. PostgreSQL instances only.
+-- | The PostgreSQL user for this import operation. PostgreSQL instances
+-- only.
 icImportUser :: Lens' ImportContext (Maybe Text)
 icImportUser
   = lens _icImportUser (\ s a -> s{_icImportUser = a})
@@ -1794,8 +1842,7 @@ exportContext =
     }
 
 
--- | Options for exporting data as CSV. Exporting in CSV format using the
--- Cloud SQL Admin API is not supported for PostgreSQL instances.
+-- | Options for exporting data as CSV.
 ecCSVExportOptions :: Lens' ExportContext (Maybe ExportContextCSVExportOptions)
 ecCSVExportOptions
   = lens _ecCSVExportOptions
@@ -1814,8 +1861,7 @@ ecURI :: Lens' ExportContext (Maybe Text)
 ecURI = lens _ecURI (\ s a -> s{_ecURI = a})
 
 -- | The file type for the specified uri. SQL: The file contains SQL
--- statements. CSV: The file contains CSV data. CSV is not supported for
--- PostgreSQL instances.
+-- statements. CSV: The file contains CSV data.
 ecFileType :: Lens' ExportContext (Maybe Text)
 ecFileType
   = lens _ecFileType (\ s a -> s{_ecFileType = a})
@@ -1831,9 +1877,9 @@ ecSQLExportOptions
 -- system database. If fileType is CSV, you can specify one database,
 -- either by using this property or by using the
 -- csvExportOptions.selectQuery property, which takes precedence over this
--- property. PostgreSQL instances: If fileType is SQL, you must specify one
--- database to be exported. A fileType of CSV is not supported for
--- PostgreSQL instances.
+-- property. PostgreSQL instances: Specify exactly one database to be
+-- exported. If fileType is CSV, this database must match the database used
+-- in the csvExportOptions.selectQuery property.
 ecDatabases :: Lens' ExportContext [Text]
 ecDatabases
   = lens _ecDatabases (\ s a -> s{_ecDatabases = a}) .
@@ -1961,6 +2007,56 @@ instance ToJSON SSLCertsListResponse where
               (catMaybes
                  [Just ("kind" .= _sclrKind),
                   ("items" .=) <$> _sclrItems])
+
+-- | Disk encryption status.
+--
+-- /See:/ 'diskEncryptionStatus' smart constructor.
+data DiskEncryptionStatus =
+  DiskEncryptionStatus'
+    { _desKmsKeyVersionName :: !(Maybe Text)
+    , _desKind              :: !Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DiskEncryptionStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'desKmsKeyVersionName'
+--
+-- * 'desKind'
+diskEncryptionStatus
+    :: DiskEncryptionStatus
+diskEncryptionStatus =
+  DiskEncryptionStatus'
+    {_desKmsKeyVersionName = Nothing, _desKind = "sql#diskEncryptionStatus"}
+
+
+-- | KMS key version used to encrypt the Cloud SQL instance disk
+desKmsKeyVersionName :: Lens' DiskEncryptionStatus (Maybe Text)
+desKmsKeyVersionName
+  = lens _desKmsKeyVersionName
+      (\ s a -> s{_desKmsKeyVersionName = a})
+
+-- | This is always sql#diskEncryptionStatus.
+desKind :: Lens' DiskEncryptionStatus Text
+desKind = lens _desKind (\ s a -> s{_desKind = a})
+
+instance FromJSON DiskEncryptionStatus where
+        parseJSON
+          = withObject "DiskEncryptionStatus"
+              (\ o ->
+                 DiskEncryptionStatus' <$>
+                   (o .:? "kmsKeyVersionName") <*>
+                     (o .:? "kind" .!= "sql#diskEncryptionStatus"))
+
+instance ToJSON DiskEncryptionStatus where
+        toJSON DiskEncryptionStatus'{..}
+          = object
+              (catMaybes
+                 [("kmsKeyVersionName" .=) <$> _desKmsKeyVersionName,
+                  Just ("kind" .= _desKind)])
 
 -- | SslCerts insert request.
 --
@@ -2161,8 +2257,7 @@ instance ToJSON MaintenanceWindow where
                   ("hour" .=) <$> _mwHour,
                   ("updateTrack" .=) <$> _mwUpdateTrack])
 
--- | Options for importing data as CSV. Importing CSV data using the Cloud
--- SQL Admin API is not supported for PostgreSQL instances.
+-- | Options for importing data as CSV.
 --
 -- /See:/ 'importContextCSVImportOptions' smart constructor.
 data ImportContextCSVImportOptions =
@@ -2266,8 +2361,7 @@ instance ToJSON RotateServerCaContext where
                  [("nextVersion" .=) <$> _rsccNextVersion,
                   Just ("kind" .= _rsccKind)])
 
--- | Options for exporting data as CSV. Exporting in CSV format using the
--- Cloud SQL Admin API is not supported for PostgreSQL instances.
+-- | Options for exporting data as CSV.
 --
 -- /See:/ 'exportContextCSVExportOptions' smart constructor.
 newtype ExportContextCSVExportOptions =
@@ -2420,31 +2514,34 @@ instance ToJSON User where
 -- /See:/ 'databaseInstance' smart constructor.
 data DatabaseInstance =
   DatabaseInstance'
-    { _datBackendType                :: !(Maybe Text)
-    , _datMaxDiskSize                :: !(Maybe (Textual Int64))
-    , _datOnPremisesConfiguration    :: !(Maybe OnPremisesConfiguration)
-    , _datGceZone                    :: !(Maybe Text)
-    , _datEtag                       :: !(Maybe Text)
-    , _datState                      :: !(Maybe Text)
-    , _datIPv6Address                :: !(Maybe Text)
-    , _datServerCaCert               :: !(Maybe SSLCert)
-    , _datDatabaseVersion            :: !(Maybe Text)
-    , _datProject                    :: !(Maybe Text)
-    , _datSettings                   :: !(Maybe Settings)
-    , _datKind                       :: !Text
-    , _datConnectionName             :: !(Maybe Text)
-    , _datCurrentDiskSize            :: !(Maybe (Textual Int64))
-    , _datInstanceType               :: !(Maybe Text)
-    , _datReplicaNames               :: !(Maybe [Text])
-    , _datSelfLink                   :: !(Maybe Text)
-    , _datFailoverReplica            :: !(Maybe DatabaseInstanceFailoverReplica)
-    , _datName                       :: !(Maybe Text)
-    , _datMasterInstanceName         :: !(Maybe Text)
-    , _datReplicaConfiguration       :: !(Maybe ReplicaConfiguration)
-    , _datRegion                     :: !(Maybe Text)
-    , _datServiceAccountEmailAddress :: !(Maybe Text)
-    , _datIPAddresses                :: !(Maybe [IPMApping])
-    , _datSuspensionReason           :: !(Maybe [Text])
+    { _datBackendType                 :: !(Maybe Text)
+    , _datMaxDiskSize                 :: !(Maybe (Textual Int64))
+    , _datOnPremisesConfiguration     :: !(Maybe OnPremisesConfiguration)
+    , _datGceZone                     :: !(Maybe Text)
+    , _datEtag                        :: !(Maybe Text)
+    , _datState                       :: !(Maybe Text)
+    , _datIPv6Address                 :: !(Maybe Text)
+    , _datServerCaCert                :: !(Maybe SSLCert)
+    , _datDatabaseVersion             :: !(Maybe Text)
+    , _datDiskEncryptionConfiguration :: !(Maybe DiskEncryptionConfiguration)
+    , _datProject                     :: !(Maybe Text)
+    , _datSettings                    :: !(Maybe Settings)
+    , _datKind                        :: !Text
+    , _datDiskEncryptionStatus        :: !(Maybe DiskEncryptionStatus)
+    , _datConnectionName              :: !(Maybe Text)
+    , _datCurrentDiskSize             :: !(Maybe (Textual Int64))
+    , _datInstanceType                :: !(Maybe Text)
+    , _datRootPassword                :: !(Maybe Text)
+    , _datReplicaNames                :: !(Maybe [Text])
+    , _datSelfLink                    :: !(Maybe Text)
+    , _datFailoverReplica             :: !(Maybe DatabaseInstanceFailoverReplica)
+    , _datName                        :: !(Maybe Text)
+    , _datMasterInstanceName          :: !(Maybe Text)
+    , _datReplicaConfiguration        :: !(Maybe ReplicaConfiguration)
+    , _datRegion                      :: !(Maybe Text)
+    , _datServiceAccountEmailAddress  :: !(Maybe Text)
+    , _datIPAddresses                 :: !(Maybe [IPMApping])
+    , _datSuspensionReason            :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2471,17 +2568,23 @@ data DatabaseInstance =
 --
 -- * 'datDatabaseVersion'
 --
+-- * 'datDiskEncryptionConfiguration'
+--
 -- * 'datProject'
 --
 -- * 'datSettings'
 --
 -- * 'datKind'
 --
+-- * 'datDiskEncryptionStatus'
+--
 -- * 'datConnectionName'
 --
 -- * 'datCurrentDiskSize'
 --
 -- * 'datInstanceType'
+--
+-- * 'datRootPassword'
 --
 -- * 'datReplicaNames'
 --
@@ -2515,12 +2618,15 @@ databaseInstance =
     , _datIPv6Address = Nothing
     , _datServerCaCert = Nothing
     , _datDatabaseVersion = Nothing
+    , _datDiskEncryptionConfiguration = Nothing
     , _datProject = Nothing
     , _datSettings = Nothing
     , _datKind = "sql#instance"
+    , _datDiskEncryptionStatus = Nothing
     , _datConnectionName = Nothing
     , _datCurrentDiskSize = Nothing
     , _datInstanceType = Nothing
+    , _datRootPassword = Nothing
     , _datReplicaNames = Nothing
     , _datSelfLink = Nothing
     , _datFailoverReplica = Nothing
@@ -2595,11 +2701,19 @@ datServerCaCert
 -- | The database engine type and version. The databaseVersion field can not
 -- be changed after instance creation. MySQL Second Generation instances:
 -- MYSQL_5_7 (default) or MYSQL_5_6. PostgreSQL instances: POSTGRES_9_6
--- MySQL First Generation instances: MYSQL_5_6 (default) or MYSQL_5_5
+-- (default) or POSTGRES_11 Beta. MySQL First Generation instances:
+-- MYSQL_5_6 (default) or MYSQL_5_5
 datDatabaseVersion :: Lens' DatabaseInstance (Maybe Text)
 datDatabaseVersion
   = lens _datDatabaseVersion
       (\ s a -> s{_datDatabaseVersion = a})
+
+-- | Disk encryption configuration specific to an instance. Applies only to
+-- Second Generation instances.
+datDiskEncryptionConfiguration :: Lens' DatabaseInstance (Maybe DiskEncryptionConfiguration)
+datDiskEncryptionConfiguration
+  = lens _datDiskEncryptionConfiguration
+      (\ s a -> s{_datDiskEncryptionConfiguration = a})
 
 -- | The project ID of the project containing the Cloud SQL instance. The
 -- Google apps domain is prefixed if applicable.
@@ -2615,6 +2729,13 @@ datSettings
 -- | This is always sql#instance.
 datKind :: Lens' DatabaseInstance Text
 datKind = lens _datKind (\ s a -> s{_datKind = a})
+
+-- | Disk encryption status specific to an instance. Applies only to Second
+-- Generation instances.
+datDiskEncryptionStatus :: Lens' DatabaseInstance (Maybe DiskEncryptionStatus)
+datDiskEncryptionStatus
+  = lens _datDiskEncryptionStatus
+      (\ s a -> s{_datDiskEncryptionStatus = a})
 
 -- | Connection name of the Cloud SQL instance used in connection strings.
 datConnectionName :: Lens' DatabaseInstance (Maybe Text)
@@ -2641,6 +2762,12 @@ datInstanceType :: Lens' DatabaseInstance (Maybe Text)
 datInstanceType
   = lens _datInstanceType
       (\ s a -> s{_datInstanceType = a})
+
+-- | Initial root password. Use only on creation.
+datRootPassword :: Lens' DatabaseInstance (Maybe Text)
+datRootPassword
+  = lens _datRootPassword
+      (\ s a -> s{_datRootPassword = a})
 
 -- | The replicas of the instance.
 datReplicaNames :: Lens' DatabaseInstance [Text]
@@ -2724,12 +2851,15 @@ instance FromJSON DatabaseInstance where
                      <*> (o .:? "ipv6Address")
                      <*> (o .:? "serverCaCert")
                      <*> (o .:? "databaseVersion")
+                     <*> (o .:? "diskEncryptionConfiguration")
                      <*> (o .:? "project")
                      <*> (o .:? "settings")
                      <*> (o .:? "kind" .!= "sql#instance")
+                     <*> (o .:? "diskEncryptionStatus")
                      <*> (o .:? "connectionName")
                      <*> (o .:? "currentDiskSize")
                      <*> (o .:? "instanceType")
+                     <*> (o .:? "rootPassword")
                      <*> (o .:? "replicaNames" .!= mempty)
                      <*> (o .:? "selfLink")
                      <*> (o .:? "failoverReplica")
@@ -2754,12 +2884,17 @@ instance ToJSON DatabaseInstance where
                   ("ipv6Address" .=) <$> _datIPv6Address,
                   ("serverCaCert" .=) <$> _datServerCaCert,
                   ("databaseVersion" .=) <$> _datDatabaseVersion,
+                  ("diskEncryptionConfiguration" .=) <$>
+                    _datDiskEncryptionConfiguration,
                   ("project" .=) <$> _datProject,
                   ("settings" .=) <$> _datSettings,
                   Just ("kind" .= _datKind),
+                  ("diskEncryptionStatus" .=) <$>
+                    _datDiskEncryptionStatus,
                   ("connectionName" .=) <$> _datConnectionName,
                   ("currentDiskSize" .=) <$> _datCurrentDiskSize,
                   ("instanceType" .=) <$> _datInstanceType,
+                  ("rootPassword" .=) <$> _datRootPassword,
                   ("replicaNames" .=) <$> _datReplicaNames,
                   ("selfLink" .=) <$> _datSelfLink,
                   ("failoverReplica" .=) <$> _datFailoverReplica,
@@ -2859,6 +2994,7 @@ instance ToJSON CloneContext where
 data Flag =
   Flag'
     { _fMaxValue            :: !(Maybe (Textual Int64))
+    , _fInBeta              :: !(Maybe Bool)
     , _fKind                :: !Text
     , _fAppliesTo           :: !(Maybe [Text])
     , _fName                :: !(Maybe Text)
@@ -2875,6 +3011,8 @@ data Flag =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fMaxValue'
+--
+-- * 'fInBeta'
 --
 -- * 'fKind'
 --
@@ -2894,6 +3032,7 @@ flag
 flag =
   Flag'
     { _fMaxValue = Nothing
+    , _fInBeta = Nothing
     , _fKind = "sql#flag"
     , _fAppliesTo = Nothing
     , _fName = Nothing
@@ -2909,6 +3048,10 @@ fMaxValue :: Lens' Flag (Maybe Int64)
 fMaxValue
   = lens _fMaxValue (\ s a -> s{_fMaxValue = a}) .
       mapping _Coerce
+
+-- | True if the flag is only released in Beta.
+fInBeta :: Lens' Flag (Maybe Bool)
+fInBeta = lens _fInBeta (\ s a -> s{_fInBeta = a})
 
 -- | This is always sql#flag.
 fKind :: Lens' Flag Text
@@ -2960,7 +3103,8 @@ instance FromJSON Flag where
           = withObject "Flag"
               (\ o ->
                  Flag' <$>
-                   (o .:? "maxValue") <*> (o .:? "kind" .!= "sql#flag")
+                   (o .:? "maxValue") <*> (o .:? "inBeta") <*>
+                     (o .:? "kind" .!= "sql#flag")
                      <*> (o .:? "appliesTo" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "allowedStringValues" .!= mempty)
@@ -2973,7 +3117,7 @@ instance ToJSON Flag where
           = object
               (catMaybes
                  [("maxValue" .=) <$> _fMaxValue,
-                  Just ("kind" .= _fKind),
+                  ("inBeta" .=) <$> _fInBeta, Just ("kind" .= _fKind),
                   ("appliesTo" .=) <$> _fAppliesTo,
                   ("name" .=) <$> _fName,
                   ("allowedStringValues" .=) <$> _fAllowedStringValues,

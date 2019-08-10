@@ -892,6 +892,132 @@ instance ToJSON InconclusiveDetail where
                   ("abortedByUser" .=) <$> _idAbortedByUser])
 
 --
+-- /See:/ 'testCase' smart constructor.
+data TestCase =
+  TestCase'
+    { _tcStatus            :: !(Maybe TestCaseStatus)
+    , _tcStartTime         :: !(Maybe Timestamp)
+    , _tcTestCaseReference :: !(Maybe TestCaseReference)
+    , _tcToolOutputs       :: !(Maybe [ToolOutputReference])
+    , _tcStackTraces       :: !(Maybe [StackTrace])
+    , _tcTestCaseId        :: !(Maybe Text)
+    , _tcEndTime           :: !(Maybe Timestamp)
+    , _tcSkippedMessage    :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TestCase' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tcStatus'
+--
+-- * 'tcStartTime'
+--
+-- * 'tcTestCaseReference'
+--
+-- * 'tcToolOutputs'
+--
+-- * 'tcStackTraces'
+--
+-- * 'tcTestCaseId'
+--
+-- * 'tcEndTime'
+--
+-- * 'tcSkippedMessage'
+testCase
+    :: TestCase
+testCase =
+  TestCase'
+    { _tcStatus = Nothing
+    , _tcStartTime = Nothing
+    , _tcTestCaseReference = Nothing
+    , _tcToolOutputs = Nothing
+    , _tcStackTraces = Nothing
+    , _tcTestCaseId = Nothing
+    , _tcEndTime = Nothing
+    , _tcSkippedMessage = Nothing
+    }
+
+
+-- | The status of the test case. Required.
+tcStatus :: Lens' TestCase (Maybe TestCaseStatus)
+tcStatus = lens _tcStatus (\ s a -> s{_tcStatus = a})
+
+-- | The start time of the test case. Optional.
+tcStartTime :: Lens' TestCase (Maybe Timestamp)
+tcStartTime
+  = lens _tcStartTime (\ s a -> s{_tcStartTime = a})
+
+-- | Test case reference, e.g. name, class name and test suite name.
+-- Required.
+tcTestCaseReference :: Lens' TestCase (Maybe TestCaseReference)
+tcTestCaseReference
+  = lens _tcTestCaseReference
+      (\ s a -> s{_tcTestCaseReference = a})
+
+-- | References to opaque files of any format output by the tool execution.
+tcToolOutputs :: Lens' TestCase [ToolOutputReference]
+tcToolOutputs
+  = lens _tcToolOutputs
+      (\ s a -> s{_tcToolOutputs = a})
+      . _Default
+      . _Coerce
+
+-- | The stack trace details if the test case failed or encountered an error.
+-- The maximum size of the stack traces is 100KiB, beyond which the stack
+-- track will be truncated. Zero if the test case passed.
+tcStackTraces :: Lens' TestCase [StackTrace]
+tcStackTraces
+  = lens _tcStackTraces
+      (\ s a -> s{_tcStackTraces = a})
+      . _Default
+      . _Coerce
+
+-- | A unique identifier within a Step for this Test Case.
+tcTestCaseId :: Lens' TestCase (Maybe Text)
+tcTestCaseId
+  = lens _tcTestCaseId (\ s a -> s{_tcTestCaseId = a})
+
+-- | The end time of the test case. Optional.
+tcEndTime :: Lens' TestCase (Maybe Timestamp)
+tcEndTime
+  = lens _tcEndTime (\ s a -> s{_tcEndTime = a})
+
+-- | Why the test case was skipped. Present only for skipped test case
+tcSkippedMessage :: Lens' TestCase (Maybe Text)
+tcSkippedMessage
+  = lens _tcSkippedMessage
+      (\ s a -> s{_tcSkippedMessage = a})
+
+instance FromJSON TestCase where
+        parseJSON
+          = withObject "TestCase"
+              (\ o ->
+                 TestCase' <$>
+                   (o .:? "status") <*> (o .:? "startTime") <*>
+                     (o .:? "testCaseReference")
+                     <*> (o .:? "toolOutputs" .!= mempty)
+                     <*> (o .:? "stackTraces" .!= mempty)
+                     <*> (o .:? "testCaseId")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "skippedMessage"))
+
+instance ToJSON TestCase where
+        toJSON TestCase'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _tcStatus,
+                  ("startTime" .=) <$> _tcStartTime,
+                  ("testCaseReference" .=) <$> _tcTestCaseReference,
+                  ("toolOutputs" .=) <$> _tcToolOutputs,
+                  ("stackTraces" .=) <$> _tcStackTraces,
+                  ("testCaseId" .=) <$> _tcTestCaseId,
+                  ("endTime" .=) <$> _tcEndTime,
+                  ("skippedMessage" .=) <$> _tcSkippedMessage])
+
+--
 -- /See:/ 'graphicsStatsBucket' smart constructor.
 data GraphicsStatsBucket =
   GraphicsStatsBucket'
@@ -3387,14 +3513,69 @@ instance ToJSON Specification where
           = object
               (catMaybes [("androidTest" .=) <$> _sAndroidTest])
 
+-- | Response message for StepService.ListTestCases.
+--
+-- /See:/ 'listTestCasesResponse' smart constructor.
+data ListTestCasesResponse =
+  ListTestCasesResponse'
+    { _ltcrNextPageToken :: !(Maybe Text)
+    , _ltcrTestCases     :: !(Maybe [TestCase])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListTestCasesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltcrNextPageToken'
+--
+-- * 'ltcrTestCases'
+listTestCasesResponse
+    :: ListTestCasesResponse
+listTestCasesResponse =
+  ListTestCasesResponse'
+    {_ltcrNextPageToken = Nothing, _ltcrTestCases = Nothing}
+
+
+ltcrNextPageToken :: Lens' ListTestCasesResponse (Maybe Text)
+ltcrNextPageToken
+  = lens _ltcrNextPageToken
+      (\ s a -> s{_ltcrNextPageToken = a})
+
+-- | List of test cases.
+ltcrTestCases :: Lens' ListTestCasesResponse [TestCase]
+ltcrTestCases
+  = lens _ltcrTestCases
+      (\ s a -> s{_ltcrTestCases = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListTestCasesResponse where
+        parseJSON
+          = withObject "ListTestCasesResponse"
+              (\ o ->
+                 ListTestCasesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "testCases" .!= mempty))
+
+instance ToJSON ListTestCasesResponse where
+        toJSON ListTestCasesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltcrNextPageToken,
+                  ("testCases" .=) <$> _ltcrTestCases])
+
 -- | Step Id and outcome of each individual step that was run as a group with
 -- other steps with the same configuration.
 --
 -- /See:/ 'individualOutcome' smart constructor.
 data IndividualOutcome =
   IndividualOutcome'
-    { _ioStepId         :: !(Maybe Text)
-    , _ioOutcomeSummary :: !(Maybe IndividualOutcomeOutcomeSummary)
+    { _ioRunDuration     :: !(Maybe Duration)
+    , _ioStepId          :: !(Maybe Text)
+    , _ioMultistepNumber :: !(Maybe (Textual Int32))
+    , _ioOutcomeSummary  :: !(Maybe IndividualOutcomeOutcomeSummary)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3403,17 +3584,40 @@ data IndividualOutcome =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ioRunDuration'
+--
 -- * 'ioStepId'
+--
+-- * 'ioMultistepNumber'
 --
 -- * 'ioOutcomeSummary'
 individualOutcome
     :: IndividualOutcome
 individualOutcome =
-  IndividualOutcome' {_ioStepId = Nothing, _ioOutcomeSummary = Nothing}
+  IndividualOutcome'
+    { _ioRunDuration = Nothing
+    , _ioStepId = Nothing
+    , _ioMultistepNumber = Nothing
+    , _ioOutcomeSummary = Nothing
+    }
 
+
+-- | How long it took for this step to run.
+ioRunDuration :: Lens' IndividualOutcome (Maybe Duration)
+ioRunDuration
+  = lens _ioRunDuration
+      (\ s a -> s{_ioRunDuration = a})
 
 ioStepId :: Lens' IndividualOutcome (Maybe Text)
 ioStepId = lens _ioStepId (\ s a -> s{_ioStepId = a})
+
+-- | Unique int given to each step. Ranges from 0(inclusive) to total number
+-- of steps(exclusive). The primary step is 0.
+ioMultistepNumber :: Lens' IndividualOutcome (Maybe Int32)
+ioMultistepNumber
+  = lens _ioMultistepNumber
+      (\ s a -> s{_ioMultistepNumber = a})
+      . mapping _Coerce
 
 ioOutcomeSummary :: Lens' IndividualOutcome (Maybe IndividualOutcomeOutcomeSummary)
 ioOutcomeSummary
@@ -3425,13 +3629,17 @@ instance FromJSON IndividualOutcome where
           = withObject "IndividualOutcome"
               (\ o ->
                  IndividualOutcome' <$>
-                   (o .:? "stepId") <*> (o .:? "outcomeSummary"))
+                   (o .:? "runDuration") <*> (o .:? "stepId") <*>
+                     (o .:? "multistepNumber")
+                     <*> (o .:? "outcomeSummary"))
 
 instance ToJSON IndividualOutcome where
         toJSON IndividualOutcome'{..}
           = object
               (catMaybes
-                 [("stepId" .=) <$> _ioStepId,
+                 [("runDuration" .=) <$> _ioRunDuration,
+                  ("stepId" .=) <$> _ioStepId,
+                  ("multistepNumber" .=) <$> _ioMultistepNumber,
                   ("outcomeSummary" .=) <$> _ioOutcomeSummary])
 
 -- | A summary of a test suite result either parsed from XML or uploaded

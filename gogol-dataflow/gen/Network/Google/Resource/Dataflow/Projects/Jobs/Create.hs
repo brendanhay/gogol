@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Cloud Dataflow job.
+-- Creates a Cloud Dataflow job. To create a job, we recommend using
+-- \`projects.locations.jobs.create\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.create\` is not recommended, as your job will
+-- always start in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.create@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Create
@@ -66,7 +70,11 @@ type ProjectsJobsCreateResource =
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Job :> Post '[JSON] Job
 
--- | Creates a Cloud Dataflow job.
+-- | Creates a Cloud Dataflow job. To create a job, we recommend using
+-- \`projects.locations.jobs.create\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.create\` is not recommended, as your job will
+-- always start in \`us-central1\`.
 --
 -- /See:/ 'projectsJobsCreate' smart constructor.
 data ProjectsJobsCreate =
@@ -137,7 +145,9 @@ pjcUploadProtocol
   = lens _pjcUploadProtocol
       (\ s a -> s{_pjcUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pjcLocation :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcLocation
   = lens _pjcLocation (\ s a -> s{_pjcLocation = a})

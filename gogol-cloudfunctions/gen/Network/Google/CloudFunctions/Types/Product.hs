@@ -1866,8 +1866,9 @@ cloudFunction =
     }
 
 
--- | The runtime in which the function is going to run. If empty, defaults to
--- Node.js 6.
+-- | Required. The runtime in which the function is going to run. Choices: *
+-- \`nodejs6\`: Node.js 6 * \`nodejs8\`: Node.js 8 * \`nodejs10\`: Node.js
+-- 10 * \`python37\`: Python 3.7 * \`go111\`: Go 1.11
 cfRuntime :: Lens' CloudFunction (Maybe Text)
 cfRuntime
   = lens _cfRuntime (\ s a -> s{_cfRuntime = a})
@@ -1930,8 +1931,7 @@ cfNetwork
   = lens _cfNetwork (\ s a -> s{_cfNetwork = a})
 
 -- | The limit on the maximum number of function instances that may coexist
--- at a given time. This feature is currently in alpha, available only for
--- whitelisted users.
+-- at a given time.
 cfMaxInstances :: Lens' CloudFunction (Maybe Int32)
 cfMaxInstances
   = lens _cfMaxInstances
@@ -1973,7 +1973,8 @@ cfAvailableMemoryMb
 cfLabels :: Lens' CloudFunction (Maybe CloudFunctionLabels)
 cfLabels = lens _cfLabels (\ s a -> s{_cfLabels = a})
 
--- | Output only. The email of the function\'s service account.
+-- | The email of the function\'s service account. If empty, defaults to
+-- {project_id}\'appspot.gserviceaccount.com.
 cfServiceAccountEmail :: Lens' CloudFunction (Maybe Text)
 cfServiceAccountEmail
   = lens _cfServiceAccountEmail
@@ -2254,8 +2255,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -2268,10 +2269,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

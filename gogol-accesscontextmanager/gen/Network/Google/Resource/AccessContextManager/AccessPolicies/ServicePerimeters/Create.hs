@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.create@ method which the
 -- 'AccessPoliciesServicePerimetersCreate' request conforms to.
 type AccessPoliciesServicePerimetersCreateResource =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "servicePerimeters" :>
            QueryParam "$.xgafv" Xgafv :>

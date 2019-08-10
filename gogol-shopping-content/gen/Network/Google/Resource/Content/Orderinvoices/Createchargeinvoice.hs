@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a charge invoice for a shipment group, and triggers a charge
--- capture for non-facilitated payment orders.
+-- capture for orderinvoice enabled orders.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orderinvoices.createchargeinvoice@.
 module Network.Google.Resource.Content.Orderinvoices.Createchargeinvoice
@@ -58,7 +58,7 @@ type OrderinvoicesCreatechargeinvoiceResource =
                      Post '[JSON] OrderinvoicesCreateChargeInvoiceResponse
 
 -- | Creates a charge invoice for a shipment group, and triggers a charge
--- capture for non-facilitated payment orders.
+-- capture for orderinvoice enabled orders.
 --
 -- /See:/ 'orderinvoicesCreatechargeinvoice' smart constructor.
 data OrderinvoicesCreatechargeinvoice =

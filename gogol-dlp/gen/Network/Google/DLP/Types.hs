@@ -695,6 +695,10 @@ module Network.Google.DLP.Types
     , gpdvldecNumDistinctSensitiveValues
     , gpdvldecQuasiIdsValues
 
+    -- * GooglePrivacyDlpV2ActivateJobTriggerRequest
+    , GooglePrivacyDlpV2ActivateJobTriggerRequest
+    , googlePrivacyDlpV2ActivateJobTriggerRequest
+
     -- * GooglePrivacyDlpV2DeidentifyConfig
     , GooglePrivacyDlpV2DeidentifyConfig
     , googlePrivacyDlpV2DeidentifyConfig
@@ -1089,6 +1093,7 @@ module Network.Google.DLP.Types
     , gpdvptDateShiftConfig
     , gpdvptBucketingConfig
     , gpdvptReplaceWithInfoTypeConfig
+    , gpdvptCryptoDeterministicConfig
     , gpdvptCryptoHashConfig
     , gpdvptReplaceConfig
     , gpdvptCryptoReplaceFfxFpeConfig
@@ -1119,6 +1124,13 @@ module Network.Google.DLP.Types
     , gpdvsitCurrentVersion
     , gpdvsitName
     , gpdvsitPendingVersions
+
+    -- * GooglePrivacyDlpV2CryptoDeterministicConfig
+    , GooglePrivacyDlpV2CryptoDeterministicConfig
+    , googlePrivacyDlpV2CryptoDeterministicConfig
+    , gpdvcdcContext
+    , gpdvcdcSurrogateInfoType
+    , gpdvcdcCryptoKey
 
     -- * GooglePrivacyDlpV2StatisticalTable
     , GooglePrivacyDlpV2StatisticalTable

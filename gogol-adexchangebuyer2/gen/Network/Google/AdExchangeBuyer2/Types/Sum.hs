@@ -1631,6 +1631,10 @@ data ClientEntityType
     | CETAgency
       -- ^ @AGENCY@
       -- An advertising agency.
+    | CETEntityTypeUnclassified
+      -- ^ @ENTITY_TYPE_UNCLASSIFIED@
+      -- An explicit value for a client that was not yet classified as any
+      -- particular entity.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ClientEntityType
@@ -1641,6 +1645,7 @@ instance FromHttpApiData ClientEntityType where
         "ADVERTISER" -> Right CETAdvertiser
         "BRAND" -> Right CETBrand
         "AGENCY" -> Right CETAgency
+        "ENTITY_TYPE_UNCLASSIFIED" -> Right CETEntityTypeUnclassified
         x -> Left ("Unable to parse ClientEntityType from: " <> x)
 
 instance ToHttpApiData ClientEntityType where
@@ -1649,6 +1654,7 @@ instance ToHttpApiData ClientEntityType where
         CETAdvertiser -> "ADVERTISER"
         CETBrand -> "BRAND"
         CETAgency -> "AGENCY"
+        CETEntityTypeUnclassified -> "ENTITY_TYPE_UNCLASSIFIED"
 
 instance FromJSON ClientEntityType where
     parseJSON = parseJSONText "ClientEntityType"

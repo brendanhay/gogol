@@ -27,9 +27,6 @@
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot. Note that both the subscription and
 -- the snapshot must be on the same topic.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.seek@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Seek
@@ -75,9 +72,6 @@ type ProjectsSubscriptionsSeekResource =
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot. Note that both the subscription and
 -- the snapshot must be on the same topic.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'projectsSubscriptionsSeek' smart constructor.
 data ProjectsSubscriptionsSeek =

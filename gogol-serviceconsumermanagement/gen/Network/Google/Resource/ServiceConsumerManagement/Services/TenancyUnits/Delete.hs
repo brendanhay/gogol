@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete a tenancy unit. Before the tenancy unit is deleted, there should
--- be no tenant resources in it not in DELETED state. Operation.
+-- Delete a tenancy unit. Before you delete the tenancy unit, there should
+-- be no tenant resources in it that aren\'t in a DELETED state. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.delete@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.Delete
@@ -57,8 +57,8 @@ type ServicesTenancyUnitsDeleteResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Delete a tenancy unit. Before the tenancy unit is deleted, there should
--- be no tenant resources in it not in DELETED state. Operation.
+-- | Delete a tenancy unit. Before you delete the tenancy unit, there should
+-- be no tenant resources in it that aren\'t in a DELETED state. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsDelete' smart constructor.
 data ServicesTenancyUnitsDelete =

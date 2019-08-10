@@ -20,6 +20,39 @@ module Network.Google.CloudSearch.Types.Product where
 import           Network.Google.CloudSearch.Types.Sum
 import           Network.Google.Prelude
 
+-- | Gmail Folder restricts (i.e. in Drafts\/Sent\/Chats\/User Generated
+-- Labels).
+--
+-- /See:/ 'gmailFolderRestrict' smart constructor.
+newtype GmailFolderRestrict =
+  GmailFolderRestrict'
+    { _gfrType :: Maybe GmailFolderRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailFolderRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gfrType'
+gmailFolderRestrict
+    :: GmailFolderRestrict
+gmailFolderRestrict = GmailFolderRestrict' {_gfrType = Nothing}
+
+
+gfrType :: Lens' GmailFolderRestrict (Maybe GmailFolderRestrictType)
+gfrType = lens _gfrType (\ s a -> s{_gfrType = a})
+
+instance FromJSON GmailFolderRestrict where
+        parseJSON
+          = withObject "GmailFolderRestrict"
+              (\ o -> GmailFolderRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailFolderRestrict where
+        toJSON GmailFolderRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _gfrType])
+
 -- | Content of an item to be indexed and surfaced by Cloud Search.
 --
 -- /See:/ 'itemContent' smart constructor.
@@ -567,6 +600,38 @@ instance ToJSON EnumPropertyOptions where
                   ("orderedRanking" .=) <$> _epoOrderedRanking,
                   ("operatorOptions" .=) <$> _epoOperatorOptions])
 
+-- | Gmail Action restricts (i.e. read\/replied\/snoozed).
+--
+-- /See:/ 'gmailActionRestrict' smart constructor.
+newtype GmailActionRestrict =
+  GmailActionRestrict'
+    { _garType :: Maybe GmailActionRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailActionRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'garType'
+gmailActionRestrict
+    :: GmailActionRestrict
+gmailActionRestrict = GmailActionRestrict' {_garType = Nothing}
+
+
+garType :: Lens' GmailActionRestrict (Maybe GmailActionRestrictType)
+garType = lens _garType (\ s a -> s{_garType = a})
+
+instance FromJSON GmailActionRestrict where
+        parseJSON
+          = withObject "GmailActionRestrict"
+              (\ o -> GmailActionRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailActionRestrict where
+        toJSON GmailActionRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _garType])
+
 --
 -- /See:/ 'unreserveItemsRequest' smart constructor.
 data UnreserveItemsRequest =
@@ -791,7 +856,7 @@ objectDisplayOptions =
 -- diplayed before the next properties. For this reason, it is a good
 -- practice to specify singular properties before repeated properties in
 -- this list. All of the properties must set is_returnable to true. The
--- maximum number of elements is 3.
+-- maximum number of metalines is 3.
 odoMetalines :: Lens' ObjectDisplayOptions [Metaline]
 odoMetalines
   = lens _odoMetalines (\ s a -> s{_odoMetalines = a})
@@ -1032,7 +1097,8 @@ srSnippet :: Lens' SearchResult (Maybe Snippet)
 srSnippet
   = lens _srSnippet (\ s a -> s{_srSnippet = a})
 
--- | The URL of the result.
+-- | The URL of the search result. The URL contains a Google redirect to the
+-- actual item. This URL is signed and shouldn\'t be changed.
 srURL :: Lens' SearchResult (Maybe Text)
 srURL = lens _srURL (\ s a -> s{_srURL = a})
 
@@ -1112,7 +1178,7 @@ instance ToJSON SpellResult where
               (catMaybes
                  [("suggestedQuery" .=) <$> _srSuggestedQuery])
 
--- | A people suggestion.
+-- | This field contains information about the person being suggested.
 --
 -- /See:/ 'peopleSuggestion' smart constructor.
 newtype PeopleSuggestion =
@@ -1242,7 +1308,7 @@ suggestResponse
 suggestResponse = SuggestResponse' {_srSuggestResults = Nothing}
 
 
--- | List of suggestion results.
+-- | List of suggestions.
 srSuggestResults :: Lens' SuggestResponse [SuggestResult]
 srSuggestResults
   = lens _srSuggestResults
@@ -1912,11 +1978,15 @@ suggestResult =
     }
 
 
+-- | This is present when the suggestion indicates a person. It contains more
+-- information about the person - like their email ID, name etc.
 sPeopleSuggestion :: Lens' SuggestResult (Maybe PeopleSuggestion)
 sPeopleSuggestion
   = lens _sPeopleSuggestion
       (\ s a -> s{_sPeopleSuggestion = a})
 
+-- | This field will be present if the suggested query is a word\/phrase
+-- completion.
 sQuerySuggestion :: Lens' SuggestResult (Maybe QuerySuggestion)
 sQuerySuggestion
   = lens _sQuerySuggestion
@@ -2887,6 +2957,7 @@ structuredResult
 structuredResult = StructuredResult' {_srPerson = Nothing}
 
 
+-- | Representation of a person
 srPerson :: Lens' StructuredResult (Maybe Person)
 srPerson = lens _srPerson (\ s a -> s{_srPerson = a})
 
@@ -3298,7 +3369,8 @@ metaline
 metaline = Metaline' {_mProperties = Nothing}
 
 
--- | The list of displayed properties for the metaline.
+-- | The list of displayed properties for the metaline. The maxiumum number
+-- of properties is 5.
 mProperties :: Lens' Metaline [DisplayedProperty]
 mProperties
   = lens _mProperties (\ s a -> s{_mProperties = a}) .
@@ -3349,14 +3421,17 @@ facetBucket =
 fbValue :: Lens' FacetBucket (Maybe Value)
 fbValue = lens _fbValue (\ s a -> s{_fbValue = a})
 
--- | Number of results that match the bucket value.
+-- | Number of results that match the bucket value. Counts are only returned
+-- for searches when count accuracy is ensured. Can be empty.
 fbCount :: Lens' FacetBucket (Maybe Int32)
 fbCount
   = lens _fbCount (\ s a -> s{_fbCount = a}) .
       mapping _Coerce
 
 -- | Percent of results that match the bucket value. This value is between
--- (0-100]. This may not be accurate and is a best effort estimate.
+-- (0-100]. Percentages are returned for all searches, but are an estimate.
+-- Because percentages are always returned, you should render percentages
+-- instead of counts.
 fbPercentage :: Lens' FacetBucket (Maybe Int32)
 fbPercentage
   = lens _fbPercentage (\ s a -> s{_fbPercentage = a})
@@ -3593,7 +3668,8 @@ instance ToJSON IntegerOperatorOptions where
                   ("greaterThanOperatorName" .=) <$>
                     _iooGreaterThanOperatorName])
 
--- | A completed query suggestion.
+-- | This field does not contain anything as of now and is just used as an
+-- indicator that the suggest result was a phrase completion.
 --
 -- /See:/ 'querySuggestion' smart constructor.
 data QuerySuggestion =
@@ -3872,8 +3948,8 @@ freshnessOptions =
     {_foFreshnessDuration = Nothing, _foFreshnessProperty = Nothing}
 
 
--- | The duration (in seconds) after which an object should be considered
--- stale.
+-- | The duration after which an object should be considered stale. The
+-- default value is 180 days (in seconds).
 foFreshnessDuration :: Lens' FreshnessOptions (Maybe Scientific)
 foFreshnessDuration
   = lens _foFreshnessDuration
@@ -3884,7 +3960,8 @@ foFreshnessDuration
 -- If set, this property must be a top-level property within the property
 -- definitions and it must be a timestamp type or date type. Otherwise, the
 -- Indexing API uses updateTime as the freshness indicator. The maximum
--- length is 256 characters.
+-- length is 256 characters. When a property is used to calculate
+-- fresheness, the value defaults to 2 years from the current time.
 foFreshnessProperty :: Lens' FreshnessOptions (Maybe Text)
 foFreshnessProperty
   = lens _foFreshnessProperty
@@ -3925,8 +4002,8 @@ debugOptions
 debugOptions = DebugOptions' {_doEnableDebugging = Nothing}
 
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 doEnableDebugging :: Lens' DebugOptions (Maybe Bool)
 doEnableDebugging
   = lens _doEnableDebugging
@@ -4056,7 +4133,10 @@ dataSourceRestriction =
 -- | Filter options restricting the results. If multiple filters are present,
 -- they are grouped by object type before joining. Filters with the same
 -- object type are joined conjunctively, then the resulting expressions are
--- joined disjunctively. The maximum number of elements is 20.
+-- joined disjunctively. The maximum number of elements is 20. NOTE:
+-- Suggest API supports only few filters at the moment: \"objecttype\",
+-- \"type\" and \"mimetype\". For now, schema specific filters cannot be
+-- used to filter suggestions.
 dsrFilterOptions :: Lens' DataSourceRestriction [FilterOptions]
 dsrFilterOptions
   = lens _dsrFilterOptions
@@ -4117,7 +4197,7 @@ sObjectDefinitions
       . _Coerce
 
 -- | IDs of the Long Running Operations (LROs) currently running for this
--- schema. After modifying the schema, wait for opeations to complete
+-- schema. After modifying the schema, wait for operations to complete
 -- before indexing additional content.
 sOperationIds :: Lens' Schema [Text]
 sOperationIds
@@ -4441,7 +4521,7 @@ frSourceName :: Lens' FacetResult (Maybe Text)
 frSourceName
   = lens _frSourceName (\ s a -> s{_frSourceName = a})
 
--- | FacetBuckets for values in response containing atleast a single result.
+-- | FacetBuckets for values in response containing at least a single result.
 frBuckets :: Lens' FacetResult [FacetBucket]
 frBuckets
   = lens _frBuckets (\ s a -> s{_frBuckets = a}) .
@@ -5373,7 +5453,8 @@ scDisablePersonalization
       (\ s a -> s{_scDisablePersonalization = a})
 
 -- | Whether to use freshness as a ranking signal. By default, freshness is
--- used as a ranking signal.
+-- used as a ranking signal. Note that this setting is not available in the
+-- Admin UI.
 scDisableFreshness :: Lens' ScoringConfig (Maybe Bool)
 scDisableFreshness
   = lens _scDisableFreshness
@@ -5481,6 +5562,38 @@ instance FromJSON UploadItemRef where
 instance ToJSON UploadItemRef where
         toJSON UploadItemRef'{..}
           = object (catMaybes [("name" .=) <$> _uirName])
+
+-- | Gmail Time restricts (i.e. received today, this week).
+--
+-- /See:/ 'gmailTimeRestrict' smart constructor.
+newtype GmailTimeRestrict =
+  GmailTimeRestrict'
+    { _gtrType :: Maybe GmailTimeRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailTimeRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gtrType'
+gmailTimeRestrict
+    :: GmailTimeRestrict
+gmailTimeRestrict = GmailTimeRestrict' {_gtrType = Nothing}
+
+
+gtrType :: Lens' GmailTimeRestrict (Maybe GmailTimeRestrictType)
+gtrType = lens _gtrType (\ s a -> s{_gtrType = a})
+
+instance FromJSON GmailTimeRestrict where
+        parseJSON
+          = withObject "GmailTimeRestrict"
+              (\ o -> GmailTimeRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailTimeRestrict where
+        toJSON GmailTimeRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _gtrType])
 
 --
 -- /See:/ 'pushItemRequest' smart constructor.
@@ -6182,10 +6295,11 @@ instance ToJSON Principal where
 -- /See:/ 'indexItemRequest' smart constructor.
 data IndexItemRequest =
   IndexItemRequest'
-    { _iirMode          :: !(Maybe IndexItemRequestMode)
-    , _iirDebugOptions  :: !(Maybe DebugOptions)
-    , _iirConnectorName :: !(Maybe Text)
-    , _iirItem          :: !(Maybe Item)
+    { _iirMode             :: !(Maybe IndexItemRequestMode)
+    , _iirDebugOptions     :: !(Maybe DebugOptions)
+    , _iirConnectorName    :: !(Maybe Text)
+    , _iirItem             :: !(Maybe Item)
+    , _iirIndexItemOptions :: !(Maybe IndexItemOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6201,6 +6315,8 @@ data IndexItemRequest =
 -- * 'iirConnectorName'
 --
 -- * 'iirItem'
+--
+-- * 'iirIndexItemOptions'
 indexItemRequest
     :: IndexItemRequest
 indexItemRequest =
@@ -6209,6 +6325,7 @@ indexItemRequest =
     , _iirDebugOptions = Nothing
     , _iirConnectorName = Nothing
     , _iirItem = Nothing
+    , _iirIndexItemOptions = Nothing
     }
 
 
@@ -6233,6 +6350,11 @@ iirConnectorName
 iirItem :: Lens' IndexItemRequest (Maybe Item)
 iirItem = lens _iirItem (\ s a -> s{_iirItem = a})
 
+iirIndexItemOptions :: Lens' IndexItemRequest (Maybe IndexItemOptions)
+iirIndexItemOptions
+  = lens _iirIndexItemOptions
+      (\ s a -> s{_iirIndexItemOptions = a})
+
 instance FromJSON IndexItemRequest where
         parseJSON
           = withObject "IndexItemRequest"
@@ -6240,7 +6362,8 @@ instance FromJSON IndexItemRequest where
                  IndexItemRequest' <$>
                    (o .:? "mode") <*> (o .:? "debugOptions") <*>
                      (o .:? "connectorName")
-                     <*> (o .:? "item"))
+                     <*> (o .:? "item")
+                     <*> (o .:? "indexItemOptions"))
 
 instance ToJSON IndexItemRequest where
         toJSON IndexItemRequest'{..}
@@ -6249,7 +6372,8 @@ instance ToJSON IndexItemRequest where
                  [("mode" .=) <$> _iirMode,
                   ("debugOptions" .=) <$> _iirDebugOptions,
                   ("connectorName" .=) <$> _iirConnectorName,
-                  ("item" .=) <$> _iirItem])
+                  ("item" .=) <$> _iirItem,
+                  ("indexItemOptions" .=) <$> _iirIndexItemOptions])
 
 -- | Options for text properties.
 --
@@ -6435,7 +6559,10 @@ mMimeType :: Lens' Metadata (Maybe Text)
 mMimeType
   = lens _mMimeType (\ s a -> s{_mMimeType = a})
 
--- | The last modified date for the object in the search result.
+-- | The last modified date for the object in the search result. If not set
+-- in the item, the value returned here is empty. When \`updateTime\` is
+-- used for calculating freshness and is not set, this value defaults to 2
+-- years from the current time.
 mUpdateTime :: Lens' Metadata (Maybe UTCTime)
 mUpdateTime
   = lens _mUpdateTime (\ s a -> s{_mUpdateTime = a}) .
@@ -6536,8 +6663,8 @@ instance ToJSON UpdateDataSourceRequest where
                  [("debugOptions" .=) <$> _udsrDebugOptions,
                   ("source" .=) <$> _udsrSource])
 
--- | Data source is a logical namespace for items to be indexed. All items
--- must belong to a data source. This is the prerequisite before items can
+-- | Datasource is a logical namespace for items to be indexed. All items
+-- must belong to a datasource. This is the prerequisite before items can
 -- be indexed into Cloud Search.
 --
 -- /See:/ 'dataSource' smart constructor.
@@ -6592,7 +6719,7 @@ dataSource =
 -- | A short name or alias for the source. This value will be used to match
 -- the \'source\' operator. For example, if the short name is *\<value>*
 -- then queries like *source:\<value>* will only return results for this
--- source. The value must be unique across all data sources. The value must
+-- source. The value must be unique across all datasources. The value must
 -- only contain alphanumeric characters (a-zA-Z0-9). The value cannot start
 -- with \'google\' and cannot be one of the following: mail, gmail, docs,
 -- drive, groups, sites, calendar, hangouts, gplus, keep, people, teams.
@@ -6601,12 +6728,12 @@ dsShortName :: Lens' DataSource (Maybe Text)
 dsShortName
   = lens _dsShortName (\ s a -> s{_dsShortName = a})
 
--- | This restricts visibility to items at a data source level to the
--- disjunction of users\/groups mentioned with the field. Note that, this
--- does not ensure access to a specific item, as users need to have ACL
--- permissions on the contained items. This ensures a high level access on
--- the entire data source, and that the individual items are not shared
--- outside this visibility.
+-- | This field restricts visibility to items at the datasource level. Items
+-- within the datasource are restricted to the union of users and groups
+-- included in this field. Note that, this does not ensure access to a
+-- specific item, as users need to have ACL permissions on the contained
+-- items. This ensures a high level access on the entire datasource, and
+-- that the individual items are not shared outside this visibility.
 dsItemsVisibility :: Lens' DataSource [GSuitePrincipal]
 dsItemsVisibility
   = lens _dsItemsVisibility
@@ -6637,7 +6764,7 @@ dsIndexingServiceAccounts
       . _Default
       . _Coerce
 
--- | If true, Indexing API rejects any modification calls to this data source
+-- | If true, Indexing API rejects any modification calls to this datasource
 -- such as create, update, and delete. Disabling this does not imply
 -- halting process of previously accepted data.
 dsDisableModifications :: Lens' DataSource (Maybe Bool)
@@ -6645,12 +6772,12 @@ dsDisableModifications
   = lens _dsDisableModifications
       (\ s a -> s{_dsDisableModifications = a})
 
--- | Name of the data source resource. Format: datasources\/{source_id}.
--- The name is ignored when creating a data source.
+-- | Name of the datasource resource. Format: datasources\/{source_id}.
+-- The name is ignored when creating a datasource.
 dsName :: Lens' DataSource (Maybe Text)
 dsName = lens _dsName (\ s a -> s{_dsName = a})
 
--- | Required. Display name of the data source The maximum length is 300
+-- | Required. Display name of the datasource The maximum length is 300
 -- characters.
 dsDisplayName :: Lens' DataSource (Maybe Text)
 dsDisplayName
@@ -6721,6 +6848,38 @@ instance FromJSON HTMLValues where
 instance ToJSON HTMLValues where
         toJSON HTMLValues'{..}
           = object (catMaybes [("values" .=) <$> _hvValues])
+
+-- | Gmail Intelligent restricts (i.e. smartlabels, important).
+--
+-- /See:/ 'gmailIntelligentRestrict' smart constructor.
+newtype GmailIntelligentRestrict =
+  GmailIntelligentRestrict'
+    { _girType :: Maybe GmailIntelligentRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailIntelligentRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'girType'
+gmailIntelligentRestrict
+    :: GmailIntelligentRestrict
+gmailIntelligentRestrict = GmailIntelligentRestrict' {_girType = Nothing}
+
+
+girType :: Lens' GmailIntelligentRestrict (Maybe GmailIntelligentRestrictType)
+girType = lens _girType (\ s a -> s{_girType = a})
+
+instance FromJSON GmailIntelligentRestrict where
+        parseJSON
+          = withObject "GmailIntelligentRestrict"
+              (\ o -> GmailIntelligentRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailIntelligentRestrict where
+        toJSON GmailIntelligentRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _girType])
 
 -- | Used to provide a search operator for html properties. This is optional.
 -- Search operators let users restrict the query to specific fields
@@ -7103,9 +7262,10 @@ instance ToJSON ObjectOptions where
 -- /See:/ 'facetOptions' smart constructor.
 data FacetOptions =
   FacetOptions'
-    { _fSourceName   :: !(Maybe Text)
-    , _fObjectType   :: !(Maybe Text)
-    , _fOperatorName :: !(Maybe Text)
+    { _fSourceName      :: !(Maybe Text)
+    , _fObjectType      :: !(Maybe Text)
+    , _fNumFacetBuckets :: !(Maybe (Textual Int32))
+    , _fOperatorName    :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7118,12 +7278,18 @@ data FacetOptions =
 --
 -- * 'fObjectType'
 --
+-- * 'fNumFacetBuckets'
+--
 -- * 'fOperatorName'
 facetOptions
     :: FacetOptions
 facetOptions =
   FacetOptions'
-    {_fSourceName = Nothing, _fObjectType = Nothing, _fOperatorName = Nothing}
+    { _fSourceName = Nothing
+    , _fObjectType = Nothing
+    , _fNumFacetBuckets = Nothing
+    , _fOperatorName = Nothing
+    }
 
 
 -- | Source name to facet on. Format: datasources\/{source_id} If empty, all
@@ -7139,6 +7305,14 @@ fObjectType :: Lens' FacetOptions (Maybe Text)
 fObjectType
   = lens _fObjectType (\ s a -> s{_fObjectType = a})
 
+-- | Maximum number of facet buckets that should be returned for this facet.
+-- Defaults to 10. Maximum value is 100.
+fNumFacetBuckets :: Lens' FacetOptions (Maybe Int32)
+fNumFacetBuckets
+  = lens _fNumFacetBuckets
+      (\ s a -> s{_fNumFacetBuckets = a})
+      . mapping _Coerce
+
 -- | Name of the operator chosen for faceting. \'see
 -- cloudsearch.SchemaPropertyOptions
 fOperatorName :: Lens' FacetOptions (Maybe Text)
@@ -7152,7 +7326,8 @@ instance FromJSON FacetOptions where
               (\ o ->
                  FacetOptions' <$>
                    (o .:? "sourceName") <*> (o .:? "objectType") <*>
-                     (o .:? "operatorName"))
+                     (o .:? "numFacetBuckets")
+                     <*> (o .:? "operatorName"))
 
 instance ToJSON FacetOptions where
         toJSON FacetOptions'{..}
@@ -7160,6 +7335,7 @@ instance ToJSON FacetOptions where
               (catMaybes
                  [("sourceName" .=) <$> _fSourceName,
                   ("objectType" .=) <$> _fObjectType,
+                  ("numFacetBuckets" .=) <$> _fNumFacetBuckets,
                   ("operatorName" .=) <$> _fOperatorName])
 
 -- | Request of suggest API.
@@ -7194,7 +7370,8 @@ suggestRequest =
 
 
 -- | The sources to use for suggestions. If not specified, all data sources
--- from the current search application are used.
+-- from the current search application are used. Suggestions are based on
+-- Gmail titles. Suggestions from third party sources are not available.
 sDataSourceRestrictions :: Lens' SuggestRequest [DataSourceRestriction]
 sDataSourceRestrictions
   = lens _sDataSourceRestrictions
@@ -7202,7 +7379,9 @@ sDataSourceRestrictions
       . _Default
       . _Coerce
 
--- | Partial query for the completion suggestion.
+-- | Partial query for which autocomplete suggestions will be shown. For
+-- example, if the query is \"sea\", then the server might return
+-- \"season\", \"search\", \"seagull\" and so on.
 sQuery :: Lens' SuggestRequest (Maybe Text)
 sQuery = lens _sQuery (\ s a -> s{_sQuery = a})
 
@@ -7950,6 +8129,39 @@ instance ToJSON EnumOperatorOptions where
               (catMaybes
                  [("operatorName" .=) <$> _eooOperatorName])
 
+-- | Gmail Attachment restricts (i.e. has:attachment, has:drive,
+-- filename:pdf).
+--
+-- /See:/ 'gmailAttachmentRestrict' smart constructor.
+newtype GmailAttachmentRestrict =
+  GmailAttachmentRestrict'
+    { _gType :: Maybe GmailAttachmentRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailAttachmentRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gType'
+gmailAttachmentRestrict
+    :: GmailAttachmentRestrict
+gmailAttachmentRestrict = GmailAttachmentRestrict' {_gType = Nothing}
+
+
+gType :: Lens' GmailAttachmentRestrict (Maybe GmailAttachmentRestrictType)
+gType = lens _gType (\ s a -> s{_gType = a})
+
+instance FromJSON GmailAttachmentRestrict where
+        parseJSON
+          = withObject "GmailAttachmentRestrict"
+              (\ o -> GmailAttachmentRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailAttachmentRestrict where
+        toJSON GmailAttachmentRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _gType])
+
 -- | Options for date properties.
 --
 -- /See:/ 'datePropertyOptions' smart constructor.
@@ -8090,6 +8302,47 @@ instance ToJSON GSuitePrincipal where
                   ("gsuiteUserEmail" .=) <$> _gspGsuiteUserEmail,
                   ("gsuiteDomain" .=) <$> _gspGsuiteDomain])
 
+--
+-- /See:/ 'indexItemOptions' smart constructor.
+newtype IndexItemOptions =
+  IndexItemOptions'
+    { _iioAllowUnknownGsuitePrincipals :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IndexItemOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iioAllowUnknownGsuitePrincipals'
+indexItemOptions
+    :: IndexItemOptions
+indexItemOptions =
+  IndexItemOptions' {_iioAllowUnknownGsuitePrincipals = Nothing}
+
+
+-- | Specifies if the index request should allow gsuite principals that do
+-- not exist or are deleted in the index request.
+iioAllowUnknownGsuitePrincipals :: Lens' IndexItemOptions (Maybe Bool)
+iioAllowUnknownGsuitePrincipals
+  = lens _iioAllowUnknownGsuitePrincipals
+      (\ s a -> s{_iioAllowUnknownGsuitePrincipals = a})
+
+instance FromJSON IndexItemOptions where
+        parseJSON
+          = withObject "IndexItemOptions"
+              (\ o ->
+                 IndexItemOptions' <$>
+                   (o .:? "allowUnknownGsuitePrincipals"))
+
+instance ToJSON IndexItemOptions where
+        toJSON IndexItemOptions'{..}
+          = object
+              (catMaybes
+                 [("allowUnknownGsuitePrincipals" .=) <$>
+                    _iioAllowUnknownGsuitePrincipals])
+
 -- | Additional search quality metadata of the item.
 --
 -- /See:/ 'searchQualityMetadata' smart constructor.
@@ -8112,7 +8365,7 @@ searchQualityMetadata = SearchQualityMetadata' {_sqmQuality = Nothing}
 
 -- | An indication of the quality of the item, used to influence search
 -- quality. Value should be between 0.0 (lowest quality) and 1.0 (highest
--- quality).
+-- quality). The default value is 0.0.
 sqmQuality :: Lens' SearchQualityMetadata (Maybe Double)
 sqmQuality
   = lens _sqmQuality (\ s a -> s{_sqmQuality = a}) .
@@ -8422,16 +8675,21 @@ instance ToJSON GetCustomerIndexStatsResponse where
         toJSON GetCustomerIndexStatsResponse'{..}
           = object (catMaybes [("stats" .=) <$> _gcisrStats])
 
--- | Information relevant only to a restrict entry. NextId: 7
+-- | Information relevant only to a restrict entry. NextId: 12
 --
 -- /See:/ 'restrictItem' smart constructor.
 data RestrictItem =
   RestrictItem'
-    { _riDriveLocationRestrict :: !(Maybe DriveLocationRestrict)
-    , _riDriveTimeSpanRestrict :: !(Maybe DriveTimeSpanRestrict)
-    , _riDriveMimeTypeRestrict :: !(Maybe DriveMimeTypeRestrict)
-    , _riDriveFollowUpRestrict :: !(Maybe DriveFollowUpRestrict)
-    , _riSearchOperator        :: !(Maybe Text)
+    { _riGmailFolderRestrict      :: !(Maybe GmailFolderRestrict)
+    , _riGmailActionRestrict      :: !(Maybe GmailActionRestrict)
+    , _riDriveLocationRestrict    :: !(Maybe DriveLocationRestrict)
+    , _riDriveTimeSpanRestrict    :: !(Maybe DriveTimeSpanRestrict)
+    , _riDriveMimeTypeRestrict    :: !(Maybe DriveMimeTypeRestrict)
+    , _riDriveFollowUpRestrict    :: !(Maybe DriveFollowUpRestrict)
+    , _riGmailTimeRestrict        :: !(Maybe GmailTimeRestrict)
+    , _riGmailIntelligentRestrict :: !(Maybe GmailIntelligentRestrict)
+    , _riGmailAttachmentRestrict  :: !(Maybe GmailAttachmentRestrict)
+    , _riSearchOperator           :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8439,6 +8697,10 @@ data RestrictItem =
 -- | Creates a value of 'RestrictItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riGmailFolderRestrict'
+--
+-- * 'riGmailActionRestrict'
 --
 -- * 'riDriveLocationRestrict'
 --
@@ -8448,18 +8710,40 @@ data RestrictItem =
 --
 -- * 'riDriveFollowUpRestrict'
 --
+-- * 'riGmailTimeRestrict'
+--
+-- * 'riGmailIntelligentRestrict'
+--
+-- * 'riGmailAttachmentRestrict'
+--
 -- * 'riSearchOperator'
 restrictItem
     :: RestrictItem
 restrictItem =
   RestrictItem'
-    { _riDriveLocationRestrict = Nothing
+    { _riGmailFolderRestrict = Nothing
+    , _riGmailActionRestrict = Nothing
+    , _riDriveLocationRestrict = Nothing
     , _riDriveTimeSpanRestrict = Nothing
     , _riDriveMimeTypeRestrict = Nothing
     , _riDriveFollowUpRestrict = Nothing
+    , _riGmailTimeRestrict = Nothing
+    , _riGmailIntelligentRestrict = Nothing
+    , _riGmailAttachmentRestrict = Nothing
     , _riSearchOperator = Nothing
     }
 
+
+-- | Gmail Types.
+riGmailFolderRestrict :: Lens' RestrictItem (Maybe GmailFolderRestrict)
+riGmailFolderRestrict
+  = lens _riGmailFolderRestrict
+      (\ s a -> s{_riGmailFolderRestrict = a})
+
+riGmailActionRestrict :: Lens' RestrictItem (Maybe GmailActionRestrict)
+riGmailActionRestrict
+  = lens _riGmailActionRestrict
+      (\ s a -> s{_riGmailActionRestrict = a})
 
 riDriveLocationRestrict :: Lens' RestrictItem (Maybe DriveLocationRestrict)
 riDriveLocationRestrict
@@ -8471,15 +8755,32 @@ riDriveTimeSpanRestrict
   = lens _riDriveTimeSpanRestrict
       (\ s a -> s{_riDriveTimeSpanRestrict = a})
 
+-- | LINT.IfChange Drive Types.
 riDriveMimeTypeRestrict :: Lens' RestrictItem (Maybe DriveMimeTypeRestrict)
 riDriveMimeTypeRestrict
   = lens _riDriveMimeTypeRestrict
       (\ s a -> s{_riDriveMimeTypeRestrict = a})
 
+-- | LINT.ThenChange(\/\/depot\/google3\/java\/com\/google\/apps\/search\/quality\/itemsuggest\/utils\/SubtypeRerankingUtils.java)
 riDriveFollowUpRestrict :: Lens' RestrictItem (Maybe DriveFollowUpRestrict)
 riDriveFollowUpRestrict
   = lens _riDriveFollowUpRestrict
       (\ s a -> s{_riDriveFollowUpRestrict = a})
+
+riGmailTimeRestrict :: Lens' RestrictItem (Maybe GmailTimeRestrict)
+riGmailTimeRestrict
+  = lens _riGmailTimeRestrict
+      (\ s a -> s{_riGmailTimeRestrict = a})
+
+riGmailIntelligentRestrict :: Lens' RestrictItem (Maybe GmailIntelligentRestrict)
+riGmailIntelligentRestrict
+  = lens _riGmailIntelligentRestrict
+      (\ s a -> s{_riGmailIntelligentRestrict = a})
+
+riGmailAttachmentRestrict :: Lens' RestrictItem (Maybe GmailAttachmentRestrict)
+riGmailAttachmentRestrict
+  = lens _riGmailAttachmentRestrict
+      (\ s a -> s{_riGmailAttachmentRestrict = a})
 
 -- | The search restrict (e.g. \"after:2017-09-11 before:2017-09-12\").
 riSearchOperator :: Lens' RestrictItem (Maybe Text)
@@ -8492,17 +8793,26 @@ instance FromJSON RestrictItem where
           = withObject "RestrictItem"
               (\ o ->
                  RestrictItem' <$>
-                   (o .:? "driveLocationRestrict") <*>
-                     (o .:? "driveTimeSpanRestrict")
+                   (o .:? "gmailFolderRestrict") <*>
+                     (o .:? "gmailActionRestrict")
+                     <*> (o .:? "driveLocationRestrict")
+                     <*> (o .:? "driveTimeSpanRestrict")
                      <*> (o .:? "driveMimeTypeRestrict")
                      <*> (o .:? "driveFollowUpRestrict")
+                     <*> (o .:? "gmailTimeRestrict")
+                     <*> (o .:? "gmailIntelligentRestrict")
+                     <*> (o .:? "gmailAttachmentRestrict")
                      <*> (o .:? "searchOperator"))
 
 instance ToJSON RestrictItem where
         toJSON RestrictItem'{..}
           = object
               (catMaybes
-                 [("driveLocationRestrict" .=) <$>
+                 [("gmailFolderRestrict" .=) <$>
+                    _riGmailFolderRestrict,
+                  ("gmailActionRestrict" .=) <$>
+                    _riGmailActionRestrict,
+                  ("driveLocationRestrict" .=) <$>
                     _riDriveLocationRestrict,
                   ("driveTimeSpanRestrict" .=) <$>
                     _riDriveTimeSpanRestrict,
@@ -8510,6 +8820,11 @@ instance ToJSON RestrictItem where
                     _riDriveMimeTypeRestrict,
                   ("driveFollowUpRestrict" .=) <$>
                     _riDriveFollowUpRestrict,
+                  ("gmailTimeRestrict" .=) <$> _riGmailTimeRestrict,
+                  ("gmailIntelligentRestrict" .=) <$>
+                    _riGmailIntelligentRestrict,
+                  ("gmailAttachmentRestrict" .=) <$>
+                    _riGmailAttachmentRestrict,
                   ("searchOperator" .=) <$> _riSearchOperator])
 
 --
@@ -8584,7 +8899,9 @@ requestOptions =
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
 -- http:\/\/www.unicode.org\/reports\/tr35\/#Unicode_locale_identifier. For
--- translations.
+-- translations. When specified, the documents in search results are biased
+-- towards the specified language. Suggest API does not use this parameter.
+-- It autocompletes only based on characters in the query.
 roLanguageCode :: Lens' RequestOptions (Maybe Text)
 roLanguageCode
   = lens _roLanguageCode

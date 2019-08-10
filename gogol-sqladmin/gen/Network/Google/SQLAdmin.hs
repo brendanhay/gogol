@@ -230,6 +230,12 @@ module Network.Google.SQLAdmin
     , awCode
     , awMessage
 
+    -- ** DiskEncryptionConfiguration
+    , DiskEncryptionConfiguration
+    , diskEncryptionConfiguration
+    , decKind
+    , decKmsKeyName
+
     -- ** ImportContext
     , ImportContext
     , importContext
@@ -360,6 +366,12 @@ module Network.Google.SQLAdmin
     , sclrKind
     , sclrItems
 
+    -- ** DiskEncryptionStatus
+    , DiskEncryptionStatus
+    , diskEncryptionStatus
+    , desKmsKeyVersionName
+    , desKind
+
     -- ** SSLCertsInsertRequest
     , SSLCertsInsertRequest
     , sslCertsInsertRequest
@@ -421,12 +433,15 @@ module Network.Google.SQLAdmin
     , datIPv6Address
     , datServerCaCert
     , datDatabaseVersion
+    , datDiskEncryptionConfiguration
     , datProject
     , datSettings
     , datKind
+    , datDiskEncryptionStatus
     , datConnectionName
     , datCurrentDiskSize
     , datInstanceType
+    , datRootPassword
     , datReplicaNames
     , datSelfLink
     , datFailoverReplica
@@ -450,6 +465,7 @@ module Network.Google.SQLAdmin
     , Flag
     , flag
     , fMaxValue
+    , fInBeta
     , fKind
     , fAppliesTo
     , fName

@@ -107,6 +107,9 @@ module Network.Google.ContainerAnalysis
     -- ** LayerDirective
     , LayerDirective (..)
 
+    -- ** CVSSv3AttackComplexity
+    , CVSSv3AttackComplexity (..)
+
     -- ** DiscoveredAnalysisStatus
     , DiscoveredAnalysisStatus (..)
 
@@ -116,10 +119,17 @@ module Network.Google.ContainerAnalysis
     , iLocation
     , iName
 
+    -- ** Signature
+    , Signature
+    , signature
+    , sSignature
+    , sPublicKeyId
+
     -- ** Vulnerability
     , Vulnerability
     , vulnerability
     , vCvssScore
+    , vCvssV3
     , vSeverity
     , vDetails
     , vWindowsDetails
@@ -191,6 +201,7 @@ module Network.Google.ContainerAnalysis
     , gvvdCvssScore
     , gvvdPackageIssue
     , gvvdSeverity
+    , gvvdEffectiveSeverity
     , gvvdShortDescription
     , gvvdType
 
@@ -281,6 +292,9 @@ module Network.Google.ContainerAnalysis
     , lorOccurrences
     , lorNextPageToken
 
+    -- ** CVSSv3IntegrityImpact
+    , CVSSv3IntegrityImpact (..)
+
     -- ** Location
     , Location
     , location
@@ -308,6 +322,9 @@ module Network.Google.ContainerAnalysis
 
     -- ** DiscoveredContinuousAnalysis
     , DiscoveredContinuousAnalysis (..)
+
+    -- ** CVSSv3PrivilegesRequired
+    , CVSSv3PrivilegesRequired (..)
 
     -- ** ListNoteOccurrencesResponse
     , ListNoteOccurrencesResponse
@@ -338,6 +355,21 @@ module Network.Google.ContainerAnalysis
     , nExpirationTime
     , nCreateTime
 
+    -- ** CVSSv3
+    , CVSSv3
+    , cVSSv3
+    , cvssAttackComplexity
+    , cvssIntegrityImpact
+    , cvssPrivilegesRequired
+    , cvssUserInteraction
+    , cvssAttackVector
+    , cvssConfidentialityImpact
+    , cvssScope
+    , cvssImpactScore
+    , cvssBaseScore
+    , cvssAvailabilityImpact
+    , cvssExploitabilityScore
+
     -- ** BatchCreateNotesResponse
     , BatchCreateNotesResponse
     , batchCreateNotesResponse
@@ -355,6 +387,9 @@ module Network.Google.ContainerAnalysis
     , fV2Name
     , fV2Blob
     , fV1Name
+
+    -- ** CVSSv3UserInteraction
+    , CVSSv3UserInteraction (..)
 
     -- ** Hint
     , Hint
@@ -382,6 +417,7 @@ module Network.Google.ContainerAnalysis
     -- ** Attestation
     , Attestation
     , attestation
+    , aGenericSignedAttestation
     , aPgpSignedAttestation
 
     -- ** DeploymentPlatform
@@ -399,6 +435,9 @@ module Network.Google.ContainerAnalysis
     , setIAMPolicyRequest
     , siprUpdateMask
     , siprPolicy
+
+    -- ** GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity
+    , GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity (..)
 
     -- ** BuildProvenanceBuildOptions
     , BuildProvenanceBuildOptions
@@ -421,6 +460,15 @@ module Network.Google.ContainerAnalysis
     , vlVersion
     , vlPackage
     , vlCpeURI
+
+    -- ** CVSSv3AttackVector
+    , CVSSv3AttackVector (..)
+
+    -- ** GenericSignedAttestationContentType
+    , GenericSignedAttestationContentType (..)
+
+    -- ** CVSSv3ConfidentialityImpact
+    , CVSSv3ConfidentialityImpact (..)
 
     -- ** FixableTotalByDigest
     , FixableTotalByDigest
@@ -496,6 +544,9 @@ module Network.Google.ContainerAnalysis
     , googleDevtoolsContaineranalysisV1alpha1OperationMetadata
     , gdcvomEndTime
     , gdcvomCreateTime
+
+    -- ** CVSSv3Scope
+    , CVSSv3Scope (..)
 
     -- ** PgpSignedAttestationContentType
     , PgpSignedAttestationContentType (..)
@@ -581,6 +632,13 @@ module Network.Google.ContainerAnalysis
     , scDescription
     , scCreateTime
 
+    -- ** GenericSignedAttestation
+    , GenericSignedAttestation
+    , genericSignedAttestation
+    , gsaSerializedPayload
+    , gsaSignatures
+    , gsaContentType
+
     -- ** GitSourceContext
     , GitSourceContext
     , gitSourceContext
@@ -628,6 +686,9 @@ module Network.Google.ContainerAnalysis
     , psaSignature
     , psaPgpKeyId
     , psaContentType
+
+    -- ** CVSSv3AvailabilityImpact
+    , CVSSv3AvailabilityImpact (..)
 
     -- ** WindowsDetail
     , WindowsDetail

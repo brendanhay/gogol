@@ -557,7 +557,7 @@ createInstanceRequest =
 
 
 -- | Required. The ID of the instance to create. Valid identifiers are of the
--- form \`a-z*[a-z0-9]\` and must be between 6 and 30 characters in length.
+-- form \`a-z*[a-z0-9]\` and must be between 2 and 64 characters in length.
 cirInstanceId :: Lens' CreateInstanceRequest (Maybe Text)
 cirInstanceId
   = lens _cirInstanceId
@@ -1287,6 +1287,75 @@ instance ToJSON KeySet where
                  [("all" .=) <$> _ksAll, ("ranges" .=) <$> _ksRanges,
                   ("keys" .=) <$> _ksKeys])
 
+-- | A single DML statement.
+--
+-- /See:/ 'statement' smart constructor.
+data Statement =
+  Statement'
+    { _sParamTypes :: !(Maybe StatementParamTypes)
+    , _sParams     :: !(Maybe StatementParams)
+    , _sSQL        :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Statement' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sParamTypes'
+--
+-- * 'sParams'
+--
+-- * 'sSQL'
+statement
+    :: Statement
+statement =
+  Statement' {_sParamTypes = Nothing, _sParams = Nothing, _sSQL = Nothing}
+
+
+-- | It is not always possible for Cloud Spanner to infer the right SQL type
+-- from a JSON value. For example, values of type \`BYTES\` and values of
+-- type \`STRING\` both appear in params as JSON strings. In these cases,
+-- \`param_types\` can be used to specify the exact SQL type for some or
+-- all of the SQL statement parameters. See the definition of Type for more
+-- information about SQL types.
+sParamTypes :: Lens' Statement (Maybe StatementParamTypes)
+sParamTypes
+  = lens _sParamTypes (\ s a -> s{_sParamTypes = a})
+
+-- | The DML string can contain parameter placeholders. A parameter
+-- placeholder consists of \`\'\'\'\` followed by the parameter name.
+-- Parameter names consist of any combination of letters, numbers, and
+-- underscores. Parameters can appear anywhere that a literal value is
+-- expected. The same parameter name can be used more than once, for
+-- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
+-- error to execute an SQL statement with unbound parameters. Parameter
+-- values are specified using \`params\`, which is a JSON object whose keys
+-- are parameter names, and whose values are the corresponding parameter
+-- values.
+sParams :: Lens' Statement (Maybe StatementParams)
+sParams = lens _sParams (\ s a -> s{_sParams = a})
+
+-- | Required. The DML string.
+sSQL :: Lens' Statement (Maybe Text)
+sSQL = lens _sSQL (\ s a -> s{_sSQL = a})
+
+instance FromJSON Statement where
+        parseJSON
+          = withObject "Statement"
+              (\ o ->
+                 Statement' <$>
+                   (o .:? "paramTypes") <*> (o .:? "params") <*>
+                     (o .:? "sql"))
+
+instance ToJSON Statement where
+        toJSON Statement'{..}
+          = object
+              (catMaybes
+                 [("paramTypes" .=) <$> _sParamTypes,
+                  ("params" .=) <$> _sParams, ("sql" .=) <$> _sSQL])
+
 -- | The SQL query string can contain parameter placeholders. A parameter
 -- placeholder consists of \`\'\'\'\` followed by the parameter name.
 -- Parameter names consist of any combination of letters, numbers, and
@@ -1333,6 +1402,75 @@ instance FromJSON PartitionQueryRequestParams where
 
 instance ToJSON PartitionQueryRequestParams where
         toJSON = toJSON . _pqrpAddtional
+
+-- | The response for ExecuteBatchDml. Contains a list of ResultSet, one for
+-- each DML statement that has successfully executed. If a statement fails,
+-- the error is returned as part of the response payload. Clients can
+-- determine whether all DML statements have run successfully, or if a
+-- statement failed, using one of the following approaches: 1. Check if
+-- \'status\' field is OkStatus. 2. Check if result_sets_size() equals the
+-- number of statements in ExecuteBatchDmlRequest. Example 1: A request
+-- with 5 DML statements, all executed successfully. Result: A response
+-- with 5 ResultSets, one for each statement in the same order, and an OK
+-- status. Example 2: A request with 5 DML statements. The 3rd statement
+-- has a syntax error. Result: A response with 2 ResultSets, for the first
+-- 2 statements that run successfully, and a syntax error
+-- (INVALID_ARGUMENT) status. From result_set_size() client can determine
+-- that the 3rd statement has failed.
+--
+-- /See:/ 'executeBatchDmlResponse' smart constructor.
+data ExecuteBatchDmlResponse =
+  ExecuteBatchDmlResponse'
+    { _ebdrStatus     :: !(Maybe Status)
+    , _ebdrResultSets :: !(Maybe [ResultSet])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ExecuteBatchDmlResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ebdrStatus'
+--
+-- * 'ebdrResultSets'
+executeBatchDmlResponse
+    :: ExecuteBatchDmlResponse
+executeBatchDmlResponse =
+  ExecuteBatchDmlResponse' {_ebdrStatus = Nothing, _ebdrResultSets = Nothing}
+
+
+-- | If all DML statements are executed successfully, status will be OK.
+-- Otherwise, the error status of the first failed statement.
+ebdrStatus :: Lens' ExecuteBatchDmlResponse (Maybe Status)
+ebdrStatus
+  = lens _ebdrStatus (\ s a -> s{_ebdrStatus = a})
+
+-- | ResultSets, one for each statement in the request that ran successfully,
+-- in the same order as the statements in the request. Each ResultSet will
+-- not contain any rows. The ResultSetStats in each ResultSet will contain
+-- the number of rows modified by the statement. Only the first ResultSet
+-- in the response contains a valid ResultSetMetadata.
+ebdrResultSets :: Lens' ExecuteBatchDmlResponse [ResultSet]
+ebdrResultSets
+  = lens _ebdrResultSets
+      (\ s a -> s{_ebdrResultSets = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ExecuteBatchDmlResponse where
+        parseJSON
+          = withObject "ExecuteBatchDmlResponse"
+              (\ o ->
+                 ExecuteBatchDmlResponse' <$>
+                   (o .:? "status") <*> (o .:? "resultSets" .!= mempty))
+
+instance ToJSON ExecuteBatchDmlResponse where
+        toJSON ExecuteBatchDmlResponse'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _ebdrStatus,
+                  ("resultSets" .=) <$> _ebdrResultSets])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -1956,6 +2094,46 @@ instance ToJSON SetIAMPolicyRequest where
         toJSON SetIAMPolicyRequest'{..}
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
+-- | It is not always possible for Cloud Spanner to infer the right SQL type
+-- from a JSON value. For example, values of type \`BYTES\` and values of
+-- type \`STRING\` both appear in params as JSON strings. In these cases,
+-- \`param_types\` can be used to specify the exact SQL type for some or
+-- all of the SQL statement parameters. See the definition of Type for more
+-- information about SQL types.
+--
+-- /See:/ 'statementParamTypes' smart constructor.
+newtype StatementParamTypes =
+  StatementParamTypes'
+    { _sptAddtional :: HashMap Text Type
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StatementParamTypes' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sptAddtional'
+statementParamTypes
+    :: HashMap Text Type -- ^ 'sptAddtional'
+    -> StatementParamTypes
+statementParamTypes pSptAddtional_ =
+  StatementParamTypes' {_sptAddtional = _Coerce # pSptAddtional_}
+
+
+sptAddtional :: Lens' StatementParamTypes (HashMap Text Type)
+sptAddtional
+  = lens _sptAddtional (\ s a -> s{_sptAddtional = a})
+      . _Coerce
+
+instance FromJSON StatementParamTypes where
+        parseJSON
+          = withObject "StatementParamTypes"
+              (\ o -> StatementParamTypes' <$> (parseJSONObject o))
+
+instance ToJSON StatementParamTypes where
+        toJSON = toJSON . _sptAddtional
+
 -- | Enqueues the given DDL statements to be applied, in order but not
 -- necessarily all at once, to the database schema at some point (or
 -- points) in the future. The server checks that the statements are
@@ -2377,6 +2555,81 @@ instance ToJSON ListSessionsResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
                   ("sessions" .=) <$> _lsrSessions])
+
+-- | The request for ExecuteBatchDml
+--
+-- /See:/ 'executeBatchDmlRequest' smart constructor.
+data ExecuteBatchDmlRequest =
+  ExecuteBatchDmlRequest'
+    { _ebdrSeqno       :: !(Maybe (Textual Int64))
+    , _ebdrTransaction :: !(Maybe TransactionSelector)
+    , _ebdrStatements  :: !(Maybe [Statement])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ExecuteBatchDmlRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ebdrSeqno'
+--
+-- * 'ebdrTransaction'
+--
+-- * 'ebdrStatements'
+executeBatchDmlRequest
+    :: ExecuteBatchDmlRequest
+executeBatchDmlRequest =
+  ExecuteBatchDmlRequest'
+    { _ebdrSeqno = Nothing
+    , _ebdrTransaction = Nothing
+    , _ebdrStatements = Nothing
+    }
+
+
+-- | A per-transaction sequence number used to identify this request. This is
+-- used in the same space as the seqno in ExecuteSqlRequest. See more
+-- details in ExecuteSqlRequest.
+ebdrSeqno :: Lens' ExecuteBatchDmlRequest (Maybe Int64)
+ebdrSeqno
+  = lens _ebdrSeqno (\ s a -> s{_ebdrSeqno = a}) .
+      mapping _Coerce
+
+-- | The transaction to use. A ReadWrite transaction is required. Single-use
+-- transactions are not supported (to avoid replay). The caller must either
+-- supply an existing transaction ID or begin a new transaction.
+ebdrTransaction :: Lens' ExecuteBatchDmlRequest (Maybe TransactionSelector)
+ebdrTransaction
+  = lens _ebdrTransaction
+      (\ s a -> s{_ebdrTransaction = a})
+
+-- | The list of statements to execute in this batch. Statements are executed
+-- serially, such that the effects of statement i are visible to statement
+-- i+1. Each statement must be a DML statement. Execution will stop at the
+-- first failed statement; the remaining statements will not run. REQUIRES:
+-- statements_size() > 0.
+ebdrStatements :: Lens' ExecuteBatchDmlRequest [Statement]
+ebdrStatements
+  = lens _ebdrStatements
+      (\ s a -> s{_ebdrStatements = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ExecuteBatchDmlRequest where
+        parseJSON
+          = withObject "ExecuteBatchDmlRequest"
+              (\ o ->
+                 ExecuteBatchDmlRequest' <$>
+                   (o .:? "seqno") <*> (o .:? "transaction") <*>
+                     (o .:? "statements" .!= mempty))
+
+instance ToJSON ExecuteBatchDmlRequest where
+        toJSON ExecuteBatchDmlRequest'{..}
+          = object
+              (catMaybes
+                 [("seqno" .=) <$> _ebdrSeqno,
+                  ("transaction" .=) <$> _ebdrTransaction,
+                  ("statements" .=) <$> _ebdrStatements])
 
 -- | \`StructType\` defines the fields of a STRUCT type.
 --
@@ -4377,6 +4630,51 @@ instance FromJSON ResultSetStatsQueryStats where
 instance ToJSON ResultSetStatsQueryStats where
         toJSON = toJSON . _rssqsAddtional
 
+-- | The DML string can contain parameter placeholders. A parameter
+-- placeholder consists of \`\'\'\'\` followed by the parameter name.
+-- Parameter names consist of any combination of letters, numbers, and
+-- underscores. Parameters can appear anywhere that a literal value is
+-- expected. The same parameter name can be used more than once, for
+-- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
+-- error to execute an SQL statement with unbound parameters. Parameter
+-- values are specified using \`params\`, which is a JSON object whose keys
+-- are parameter names, and whose values are the corresponding parameter
+-- values.
+--
+-- /See:/ 'statementParams' smart constructor.
+newtype StatementParams =
+  StatementParams'
+    { _spAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StatementParams' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spAddtional'
+statementParams
+    :: HashMap Text JSONValue -- ^ 'spAddtional'
+    -> StatementParams
+statementParams pSpAddtional_ =
+  StatementParams' {_spAddtional = _Coerce # pSpAddtional_}
+
+
+-- | Properties of the object.
+spAddtional :: Lens' StatementParams (HashMap Text JSONValue)
+spAddtional
+  = lens _spAddtional (\ s a -> s{_spAddtional = a}) .
+      _Coerce
+
+instance FromJSON StatementParams where
+        parseJSON
+          = withObject "StatementParams"
+              (\ o -> StatementParams' <$> (parseJSONObject o))
+
+instance ToJSON StatementParams where
+        toJSON = toJSON . _spAddtional
+
 -- | This message is used to select the transaction in which a Read or
 -- ExecuteSql call runs. See TransactionOptions for more information about
 -- transactions.
@@ -4533,8 +4831,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -4840,7 +5138,7 @@ iNodeCount
 -- | Required. A unique identifier for the instance, which cannot be changed
 -- after the instance is created. Values are of the form
 -- \`projects\/\/instances\/a-z*[a-z0-9]\`. The final segment of the name
--- must be between 6 and 30 characters in length.
+-- must be between 2 and 64 characters in length.
 iName :: Lens' Instance (Maybe Text)
 iName = lens _iName (\ s a -> s{_iName = a})
 

@@ -2088,11 +2088,12 @@ instance ToJSON ExternallyHostedAPK where
 -- /See:/ 'trackRelease' smart constructor.
 data TrackRelease =
   TrackRelease'
-    { _trVersionCodes :: !(Maybe [Textual Int64])
-    , _trStatus       :: !(Maybe Text)
-    , _trReleaseNotes :: !(Maybe [LocalizedText])
-    , _trUserFraction :: !(Maybe (Textual Double))
-    , _trName         :: !(Maybe Text)
+    { _trVersionCodes     :: !(Maybe [Textual Int64])
+    , _trStatus           :: !(Maybe Text)
+    , _trReleaseNotes     :: !(Maybe [LocalizedText])
+    , _trUserFraction     :: !(Maybe (Textual Double))
+    , _trCountryTargeting :: !(Maybe CountryTargeting)
+    , _trName             :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2109,6 +2110,8 @@ data TrackRelease =
 --
 -- * 'trUserFraction'
 --
+-- * 'trCountryTargeting'
+--
 -- * 'trName'
 trackRelease
     :: TrackRelease
@@ -2118,6 +2121,7 @@ trackRelease =
     , _trStatus = Nothing
     , _trReleaseNotes = Nothing
     , _trUserFraction = Nothing
+    , _trCountryTargeting = Nothing
     , _trName = Nothing
     }
 
@@ -2153,6 +2157,11 @@ trUserFraction
       (\ s a -> s{_trUserFraction = a})
       . mapping _Coerce
 
+trCountryTargeting :: Lens' TrackRelease (Maybe CountryTargeting)
+trCountryTargeting
+  = lens _trCountryTargeting
+      (\ s a -> s{_trCountryTargeting = a})
+
 -- | The release name, used to identify this release in the Play Console UI.
 -- Not required to be unique. This is optional, if not set it will be
 -- generated from the version_name in the APKs.
@@ -2168,6 +2177,7 @@ instance FromJSON TrackRelease where
                      (o .:? "status")
                      <*> (o .:? "releaseNotes" .!= mempty)
                      <*> (o .:? "userFraction")
+                     <*> (o .:? "countryTargeting")
                      <*> (o .:? "name"))
 
 instance ToJSON TrackRelease where
@@ -2178,7 +2188,57 @@ instance ToJSON TrackRelease where
                   ("status" .=) <$> _trStatus,
                   ("releaseNotes" .=) <$> _trReleaseNotes,
                   ("userFraction" .=) <$> _trUserFraction,
+                  ("countryTargeting" .=) <$> _trCountryTargeting,
                   ("name" .=) <$> _trName])
+
+--
+-- /See:/ 'countryTargeting' smart constructor.
+data CountryTargeting =
+  CountryTargeting'
+    { _ctIncludeRestOfWorld :: !(Maybe Bool)
+    , _ctCountries          :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CountryTargeting' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ctIncludeRestOfWorld'
+--
+-- * 'ctCountries'
+countryTargeting
+    :: CountryTargeting
+countryTargeting =
+  CountryTargeting' {_ctIncludeRestOfWorld = Nothing, _ctCountries = Nothing}
+
+
+ctIncludeRestOfWorld :: Lens' CountryTargeting (Maybe Bool)
+ctIncludeRestOfWorld
+  = lens _ctIncludeRestOfWorld
+      (\ s a -> s{_ctIncludeRestOfWorld = a})
+
+ctCountries :: Lens' CountryTargeting [Text]
+ctCountries
+  = lens _ctCountries (\ s a -> s{_ctCountries = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON CountryTargeting where
+        parseJSON
+          = withObject "CountryTargeting"
+              (\ o ->
+                 CountryTargeting' <$>
+                   (o .:? "includeRestOfWorld") <*>
+                     (o .:? "countries" .!= mempty))
+
+instance ToJSON CountryTargeting where
+        toJSON CountryTargeting'{..}
+          = object
+              (catMaybes
+                 [("includeRestOfWorld" .=) <$> _ctIncludeRestOfWorld,
+                  ("countries" .=) <$> _ctCountries])
 
 --
 -- /See:/ 'bundle' smart constructor.

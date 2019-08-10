@@ -23,6 +23,14 @@ module Network.Google.ServiceNetworking.Types
     , cloudPlatformScope
     , serviceManagementScope
 
+    -- * GoogleCloudServicenetworkingV1betaSubnetwork
+    , GoogleCloudServicenetworkingV1betaSubnetwork
+    , googleCloudServicenetworkingV1betaSubnetwork
+    , gcsvsOutsideAllocation
+    , gcsvsNetwork
+    , gcsvsName
+    , gcsvsIPCIdRRange
+
     -- * MetricDescriptorValueType
     , MetricDescriptorValueType (..)
 
@@ -41,6 +49,14 @@ module Network.Google.ServiceNetworking.Types
     , mrdLabels
     , mrdType
     , mrdDescription
+
+    -- * BackendRulePathTranslation
+    , BackendRulePathTranslation (..)
+
+    -- * ListConnectionsResponse
+    , ListConnectionsResponse
+    , listConnectionsResponse
+    , lcrConnections
 
     -- * DocumentationRule
     , DocumentationRule
@@ -110,10 +126,13 @@ module Network.Google.ServiceNetworking.Types
     -- * BackendRule
     , BackendRule
     , backendRule
+    , brJwtAudience
     , brSelector
     , brMinDeadline
     , brAddress
+    , brOperationDeadline
     , brDeadline
+    , brPathTranslation
 
     -- * SourceContext
     , SourceContext
@@ -257,6 +276,14 @@ module Network.Google.ServiceNetworking.Types
     , arAllowWithoutCredential
     , arOAuth
 
+    -- * Connection
+    , Connection
+    , connection
+    , cPeering
+    , cReservedPeeringRanges
+    , cService
+    , cNetwork
+
     -- * LabelDescriptorValueType
     , LabelDescriptorValueType (..)
 
@@ -311,6 +338,12 @@ module Network.Google.ServiceNetworking.Types
     , metOptions
     , metSyntax
 
+    -- * Range
+    , Range
+    , range
+    , rNetwork
+    , rIPCIdRRange
+
     -- * SystemParameters
     , SystemParameters
     , systemParameters
@@ -338,8 +371,22 @@ module Network.Google.ServiceNetworking.Types
     -- * Subnetwork
     , Subnetwork
     , subnetwork
+    , subOutsideAllocation
+    , subNetwork
     , subName
     , subIPCIdRRange
+
+    -- * AddSubnetworkRequest
+    , AddSubnetworkRequest
+    , addSubnetworkRequest
+    , asrIPPrefixLength
+    , asrRequestedAddress
+    , asrSubnetwork
+    , asrRegion
+    , asrSubnetworkUsers
+    , asrConsumerNetwork
+    , asrConsumer
+    , asrDescription
 
     -- * SystemParameterRule
     , SystemParameterRule
@@ -364,17 +411,17 @@ module Network.Google.ServiceNetworking.Types
     -- * FieldCardinality
     , FieldCardinality (..)
 
+    -- * SearchRangeRequest
+    , SearchRangeRequest
+    , searchRangeRequest
+    , srrIPPrefixLength
+    , srrNetwork
+
     -- * HTTP
     , HTTP
     , hTTP
     , hRules
     , hFullyDecodeReservedExpansion
-
-    -- * AddSubnetworkResponse
-    , AddSubnetworkResponse
-    , addSubnetworkResponse
-    , asrName
-    , asrIPCIdRRange
 
     -- * Type
     , Type

@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @healthcare.projects.locations.datasets.setIamPolicy@ method which the
 -- 'ProjectsLocationsDataSetsSetIAMPolicy' request conforms to.
 type ProjectsLocationsDataSetsSetIAMPolicyResource =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

@@ -70,6 +70,88 @@ instance ToJSON Installation where
                  [("location" .=) <$> _iLocation,
                   ("name" .=) <$> _iName])
 
+-- | Verifiers (e.g. Kritis implementations) MUST verify signatures with
+-- respect to the trust anchors defined in policy (e.g. a Kritis policy).
+-- Typically this means that the verifier has been configured with a map
+-- from \`public_key_id\` to public key material (and any required
+-- parameters, e.g. signing algorithm). In particular, verification
+-- implementations MUST NOT treat the signature \`public_key_id\` as
+-- anything more than a key lookup hint. The \`public_key_id\` DOES NOT
+-- validate or authenticate a public key; it only provides a mechanism for
+-- quickly selecting a public key ALREADY CONFIGURED on the verifier
+-- through a trusted channel. Verification implementations MUST reject
+-- signatures in any of the following circumstances: * The
+-- \`public_key_id\` is not recognized by the verifier. * The public key
+-- that \`public_key_id\` refers to does not verify the signature with
+-- respect to the payload. The \`signature\` contents SHOULD NOT be
+-- \"attached\" (where the payload is included with the serialized
+-- \`signature\` bytes). Verifiers MUST ignore any \"attached\" payload and
+-- only verify signatures with respect to explicitly provided payload (e.g.
+-- a \`payload\` field on the proto message that holds this Signature, or
+-- the canonical serialization of the proto message that holds this
+-- signature).
+--
+-- /See:/ 'signature' smart constructor.
+data Signature =
+  Signature'
+    { _sSignature   :: !(Maybe Bytes)
+    , _sPublicKeyId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Signature' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sSignature'
+--
+-- * 'sPublicKeyId'
+signature
+    :: Signature
+signature = Signature' {_sSignature = Nothing, _sPublicKeyId = Nothing}
+
+
+-- | The content of the signature, an opaque bytestring. The payload that
+-- this signature verifies MUST be unambiguously provided with the
+-- Signature during verification. A wrapper message might provide the
+-- payload explicitly. Alternatively, a message might have a canonical
+-- serialization that can always be unambiguously computed to derive the
+-- payload.
+sSignature :: Lens' Signature (Maybe ByteString)
+sSignature
+  = lens _sSignature (\ s a -> s{_sSignature = a}) .
+      mapping _Bytes
+
+-- | The identifier for the public key that verifies this signature. * The
+-- \`public_key_id\` is required. * The \`public_key_id\` MUST be an
+-- RFC3986 conformant URI. * When possible, the \`public_key_id\` SHOULD be
+-- an immutable reference, such as a cryptographic digest. Examples of
+-- valid \`public_key_id\`s: OpenPGP V4 public key fingerprint: *
+-- \"openpgp4fpr:74FAF3B861BDA0870C7B6DEF607E48D2A663AEEA\" See
+-- https:\/\/www.iana.org\/assignments\/uri-schemes\/prov\/openpgp4fpr for
+-- more details on this scheme. RFC6920 digest-named SubjectPublicKeyInfo
+-- (digest of the DER serialization): *
+-- \"ni:\/\/\/sha-256;cD9o9Cq6LG3jD0iKXqEi_vdjJGecm_iXkbqVoScViaU\" *
+-- \"nih:\/\/\/sha-256;703f68f42aba2c6de30f488a5ea122fef76324679c9bf89791ba95a1271589a5\"
+sPublicKeyId :: Lens' Signature (Maybe Text)
+sPublicKeyId
+  = lens _sPublicKeyId (\ s a -> s{_sPublicKeyId = a})
+
+instance FromJSON Signature where
+        parseJSON
+          = withObject "Signature"
+              (\ o ->
+                 Signature' <$>
+                   (o .:? "signature") <*> (o .:? "publicKeyId"))
+
+instance ToJSON Signature where
+        toJSON Signature'{..}
+          = object
+              (catMaybes
+                 [("signature" .=) <$> _sSignature,
+                  ("publicKeyId" .=) <$> _sPublicKeyId])
+
 -- | Vulnerability provides metadata about a security vulnerability in a
 -- Note.
 --
@@ -77,6 +159,7 @@ instance ToJSON Installation where
 data Vulnerability =
   Vulnerability'
     { _vCvssScore      :: !(Maybe (Textual Double))
+    , _vCvssV3         :: !(Maybe CVSSv3)
     , _vSeverity       :: !(Maybe VulnerabilitySeverity)
     , _vDetails        :: !(Maybe [Detail])
     , _vWindowsDetails :: !(Maybe [WindowsDetail])
@@ -90,6 +173,8 @@ data Vulnerability =
 --
 -- * 'vCvssScore'
 --
+-- * 'vCvssV3'
+--
 -- * 'vSeverity'
 --
 -- * 'vDetails'
@@ -100,6 +185,7 @@ vulnerability
 vulnerability =
   Vulnerability'
     { _vCvssScore = Nothing
+    , _vCvssV3 = Nothing
     , _vSeverity = Nothing
     , _vDetails = Nothing
     , _vWindowsDetails = Nothing
@@ -111,6 +197,10 @@ vCvssScore :: Lens' Vulnerability (Maybe Double)
 vCvssScore
   = lens _vCvssScore (\ s a -> s{_vCvssScore = a}) .
       mapping _Coerce
+
+-- | The full description of the CVSSv3.
+vCvssV3 :: Lens' Vulnerability (Maybe CVSSv3)
+vCvssV3 = lens _vCvssV3 (\ s a -> s{_vCvssV3 = a})
 
 -- | Note provider assigned impact of the vulnerability.
 vSeverity :: Lens' Vulnerability (Maybe VulnerabilitySeverity)
@@ -142,8 +232,9 @@ instance FromJSON Vulnerability where
           = withObject "Vulnerability"
               (\ o ->
                  Vulnerability' <$>
-                   (o .:? "cvssScore") <*> (o .:? "severity") <*>
-                     (o .:? "details" .!= mempty)
+                   (o .:? "cvssScore") <*> (o .:? "cvssV3") <*>
+                     (o .:? "severity")
+                     <*> (o .:? "details" .!= mempty)
                      <*> (o .:? "windowsDetails" .!= mempty))
 
 instance ToJSON Vulnerability where
@@ -151,6 +242,7 @@ instance ToJSON Vulnerability where
           = object
               (catMaybes
                  [("cvssScore" .=) <$> _vCvssScore,
+                  ("cvssV3" .=) <$> _vCvssV3,
                   ("severity" .=) <$> _vSeverity,
                   ("details" .=) <$> _vDetails,
                   ("windowsDetails" .=) <$> _vWindowsDetails])
@@ -742,13 +834,14 @@ instance ToJSON Occurrence where
 -- /See:/ 'grafeasV1beta1VulnerabilityDetails' smart constructor.
 data GrafeasV1beta1VulnerabilityDetails =
   GrafeasV1beta1VulnerabilityDetails'
-    { _gvvdLongDescription  :: !(Maybe Text)
-    , _gvvdRelatedURLs      :: !(Maybe [RelatedURL])
-    , _gvvdCvssScore        :: !(Maybe (Textual Double))
-    , _gvvdPackageIssue     :: !(Maybe [PackageIssue])
-    , _gvvdSeverity         :: !(Maybe GrafeasV1beta1VulnerabilityDetailsSeverity)
-    , _gvvdShortDescription :: !(Maybe Text)
-    , _gvvdType             :: !(Maybe Text)
+    { _gvvdLongDescription   :: !(Maybe Text)
+    , _gvvdRelatedURLs       :: !(Maybe [RelatedURL])
+    , _gvvdCvssScore         :: !(Maybe (Textual Double))
+    , _gvvdPackageIssue      :: !(Maybe [PackageIssue])
+    , _gvvdSeverity          :: !(Maybe GrafeasV1beta1VulnerabilityDetailsSeverity)
+    , _gvvdEffectiveSeverity :: !(Maybe GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity)
+    , _gvvdShortDescription  :: !(Maybe Text)
+    , _gvvdType              :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -767,6 +860,8 @@ data GrafeasV1beta1VulnerabilityDetails =
 --
 -- * 'gvvdSeverity'
 --
+-- * 'gvvdEffectiveSeverity'
+--
 -- * 'gvvdShortDescription'
 --
 -- * 'gvvdType'
@@ -779,6 +874,7 @@ grafeasV1beta1VulnerabilityDetails =
     , _gvvdCvssScore = Nothing
     , _gvvdPackageIssue = Nothing
     , _gvvdSeverity = Nothing
+    , _gvvdEffectiveSeverity = Nothing
     , _gvvdShortDescription = Nothing
     , _gvvdType = Nothing
     }
@@ -821,6 +917,14 @@ gvvdSeverity :: Lens' GrafeasV1beta1VulnerabilityDetails (Maybe GrafeasV1beta1Vu
 gvvdSeverity
   = lens _gvvdSeverity (\ s a -> s{_gvvdSeverity = a})
 
+-- | The distro assigned severity for this vulnerability when it is
+-- available, and note provider assigned severity when distro has not yet
+-- assigned a severity for this vulnerability.
+gvvdEffectiveSeverity :: Lens' GrafeasV1beta1VulnerabilityDetails (Maybe GrafeasV1beta1VulnerabilityDetailsEffectiveSeverity)
+gvvdEffectiveSeverity
+  = lens _gvvdEffectiveSeverity
+      (\ s a -> s{_gvvdEffectiveSeverity = a})
+
 -- | Output only. A one sentence description of this vulnerability.
 gvvdShortDescription :: Lens' GrafeasV1beta1VulnerabilityDetails (Maybe Text)
 gvvdShortDescription
@@ -843,6 +947,7 @@ instance FromJSON GrafeasV1beta1VulnerabilityDetails
                      <*> (o .:? "cvssScore")
                      <*> (o .:? "packageIssue" .!= mempty)
                      <*> (o .:? "severity")
+                     <*> (o .:? "effectiveSeverity")
                      <*> (o .:? "shortDescription")
                      <*> (o .:? "type"))
 
@@ -856,6 +961,7 @@ instance ToJSON GrafeasV1beta1VulnerabilityDetails
                   ("cvssScore" .=) <$> _gvvdCvssScore,
                   ("packageIssue" .=) <$> _gvvdPackageIssue,
                   ("severity" .=) <$> _gvvdSeverity,
+                  ("effectiveSeverity" .=) <$> _gvvdEffectiveSeverity,
                   ("shortDescription" .=) <$> _gvvdShortDescription,
                   ("type" .=) <$> _gvvdType])
 
@@ -2059,6 +2165,167 @@ instance ToJSON Note where
                   ("expirationTime" .=) <$> _nExpirationTime,
                   ("createTime" .=) <$> _nCreateTime])
 
+-- | Common Vulnerability Scoring System version 3. For details, see
+-- https:\/\/www.first.org\/cvss\/specification-document
+--
+-- /See:/ 'cVSSv3' smart constructor.
+data CVSSv3 =
+  CVSSv3'
+    { _cvssAttackComplexity      :: !(Maybe CVSSv3AttackComplexity)
+    , _cvssIntegrityImpact       :: !(Maybe CVSSv3IntegrityImpact)
+    , _cvssPrivilegesRequired    :: !(Maybe CVSSv3PrivilegesRequired)
+    , _cvssUserInteraction       :: !(Maybe CVSSv3UserInteraction)
+    , _cvssAttackVector          :: !(Maybe CVSSv3AttackVector)
+    , _cvssConfidentialityImpact :: !(Maybe CVSSv3ConfidentialityImpact)
+    , _cvssScope                 :: !(Maybe CVSSv3Scope)
+    , _cvssImpactScore           :: !(Maybe (Textual Double))
+    , _cvssBaseScore             :: !(Maybe (Textual Double))
+    , _cvssAvailabilityImpact    :: !(Maybe CVSSv3AvailabilityImpact)
+    , _cvssExploitabilityScore   :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CVSSv3' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvssAttackComplexity'
+--
+-- * 'cvssIntegrityImpact'
+--
+-- * 'cvssPrivilegesRequired'
+--
+-- * 'cvssUserInteraction'
+--
+-- * 'cvssAttackVector'
+--
+-- * 'cvssConfidentialityImpact'
+--
+-- * 'cvssScope'
+--
+-- * 'cvssImpactScore'
+--
+-- * 'cvssBaseScore'
+--
+-- * 'cvssAvailabilityImpact'
+--
+-- * 'cvssExploitabilityScore'
+cVSSv3
+    :: CVSSv3
+cVSSv3 =
+  CVSSv3'
+    { _cvssAttackComplexity = Nothing
+    , _cvssIntegrityImpact = Nothing
+    , _cvssPrivilegesRequired = Nothing
+    , _cvssUserInteraction = Nothing
+    , _cvssAttackVector = Nothing
+    , _cvssConfidentialityImpact = Nothing
+    , _cvssScope = Nothing
+    , _cvssImpactScore = Nothing
+    , _cvssBaseScore = Nothing
+    , _cvssAvailabilityImpact = Nothing
+    , _cvssExploitabilityScore = Nothing
+    }
+
+
+cvssAttackComplexity :: Lens' CVSSv3 (Maybe CVSSv3AttackComplexity)
+cvssAttackComplexity
+  = lens _cvssAttackComplexity
+      (\ s a -> s{_cvssAttackComplexity = a})
+
+cvssIntegrityImpact :: Lens' CVSSv3 (Maybe CVSSv3IntegrityImpact)
+cvssIntegrityImpact
+  = lens _cvssIntegrityImpact
+      (\ s a -> s{_cvssIntegrityImpact = a})
+
+cvssPrivilegesRequired :: Lens' CVSSv3 (Maybe CVSSv3PrivilegesRequired)
+cvssPrivilegesRequired
+  = lens _cvssPrivilegesRequired
+      (\ s a -> s{_cvssPrivilegesRequired = a})
+
+cvssUserInteraction :: Lens' CVSSv3 (Maybe CVSSv3UserInteraction)
+cvssUserInteraction
+  = lens _cvssUserInteraction
+      (\ s a -> s{_cvssUserInteraction = a})
+
+-- | Base Metrics Represents the intrinsic characteristics of a vulnerability
+-- that are constant over time and across user environments.
+cvssAttackVector :: Lens' CVSSv3 (Maybe CVSSv3AttackVector)
+cvssAttackVector
+  = lens _cvssAttackVector
+      (\ s a -> s{_cvssAttackVector = a})
+
+cvssConfidentialityImpact :: Lens' CVSSv3 (Maybe CVSSv3ConfidentialityImpact)
+cvssConfidentialityImpact
+  = lens _cvssConfidentialityImpact
+      (\ s a -> s{_cvssConfidentialityImpact = a})
+
+cvssScope :: Lens' CVSSv3 (Maybe CVSSv3Scope)
+cvssScope
+  = lens _cvssScope (\ s a -> s{_cvssScope = a})
+
+cvssImpactScore :: Lens' CVSSv3 (Maybe Double)
+cvssImpactScore
+  = lens _cvssImpactScore
+      (\ s a -> s{_cvssImpactScore = a})
+      . mapping _Coerce
+
+-- | The base score is a function of the base metric scores.
+cvssBaseScore :: Lens' CVSSv3 (Maybe Double)
+cvssBaseScore
+  = lens _cvssBaseScore
+      (\ s a -> s{_cvssBaseScore = a})
+      . mapping _Coerce
+
+cvssAvailabilityImpact :: Lens' CVSSv3 (Maybe CVSSv3AvailabilityImpact)
+cvssAvailabilityImpact
+  = lens _cvssAvailabilityImpact
+      (\ s a -> s{_cvssAvailabilityImpact = a})
+
+cvssExploitabilityScore :: Lens' CVSSv3 (Maybe Double)
+cvssExploitabilityScore
+  = lens _cvssExploitabilityScore
+      (\ s a -> s{_cvssExploitabilityScore = a})
+      . mapping _Coerce
+
+instance FromJSON CVSSv3 where
+        parseJSON
+          = withObject "CVSSv3"
+              (\ o ->
+                 CVSSv3' <$>
+                   (o .:? "attackComplexity") <*>
+                     (o .:? "integrityImpact")
+                     <*> (o .:? "privilegesRequired")
+                     <*> (o .:? "userInteraction")
+                     <*> (o .:? "attackVector")
+                     <*> (o .:? "confidentialityImpact")
+                     <*> (o .:? "scope")
+                     <*> (o .:? "impactScore")
+                     <*> (o .:? "baseScore")
+                     <*> (o .:? "availabilityImpact")
+                     <*> (o .:? "exploitabilityScore"))
+
+instance ToJSON CVSSv3 where
+        toJSON CVSSv3'{..}
+          = object
+              (catMaybes
+                 [("attackComplexity" .=) <$> _cvssAttackComplexity,
+                  ("integrityImpact" .=) <$> _cvssIntegrityImpact,
+                  ("privilegesRequired" .=) <$>
+                    _cvssPrivilegesRequired,
+                  ("userInteraction" .=) <$> _cvssUserInteraction,
+                  ("attackVector" .=) <$> _cvssAttackVector,
+                  ("confidentialityImpact" .=) <$>
+                    _cvssConfidentialityImpact,
+                  ("scope" .=) <$> _cvssScope,
+                  ("impactScore" .=) <$> _cvssImpactScore,
+                  ("baseScore" .=) <$> _cvssBaseScore,
+                  ("availabilityImpact" .=) <$>
+                    _cvssAvailabilityImpact,
+                  ("exploitabilityScore" .=) <$>
+                    _cvssExploitabilityScore])
+
 -- | Response for creating notes in batch.
 --
 -- /See:/ 'batchCreateNotesResponse' smart constructor.
@@ -2292,7 +2559,8 @@ piFixedLocation
   = lens _piFixedLocation
       (\ s a -> s{_piFixedLocation = a})
 
--- | The severity (e.g., distro assigned severity) for this vulnerability.
+-- | Deprecated, use Details.effective_severity instead The severity (e.g.,
+-- distro assigned severity) for this vulnerability.
 piSeverityName :: Lens' PackageIssue (Maybe Text)
 piSeverityName
   = lens _piSeverityName
@@ -2410,9 +2678,10 @@ instance ToJSON Build where
 -- attestation intended to sign for).
 --
 -- /See:/ 'attestation' smart constructor.
-newtype Attestation =
+data Attestation =
   Attestation'
-    { _aPgpSignedAttestation :: Maybe PgpSignedAttestation
+    { _aGenericSignedAttestation :: !(Maybe GenericSignedAttestation)
+    , _aPgpSignedAttestation     :: !(Maybe PgpSignedAttestation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2421,11 +2690,20 @@ newtype Attestation =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aGenericSignedAttestation'
+--
 -- * 'aPgpSignedAttestation'
 attestation
     :: Attestation
-attestation = Attestation' {_aPgpSignedAttestation = Nothing}
+attestation =
+  Attestation'
+    {_aGenericSignedAttestation = Nothing, _aPgpSignedAttestation = Nothing}
 
+
+aGenericSignedAttestation :: Lens' Attestation (Maybe GenericSignedAttestation)
+aGenericSignedAttestation
+  = lens _aGenericSignedAttestation
+      (\ s a -> s{_aGenericSignedAttestation = a})
 
 -- | A PGP signed attestation.
 aPgpSignedAttestation :: Lens' Attestation (Maybe PgpSignedAttestation)
@@ -2437,13 +2715,17 @@ instance FromJSON Attestation where
         parseJSON
           = withObject "Attestation"
               (\ o ->
-                 Attestation' <$> (o .:? "pgpSignedAttestation"))
+                 Attestation' <$>
+                   (o .:? "genericSignedAttestation") <*>
+                     (o .:? "pgpSignedAttestation"))
 
 instance ToJSON Attestation where
         toJSON Attestation'{..}
           = object
               (catMaybes
-                 [("pgpSignedAttestation" .=) <$>
+                 [("genericSignedAttestation" .=) <$>
+                    _aGenericSignedAttestation,
+                  ("pgpSignedAttestation" .=) <$>
                     _aPgpSignedAttestation])
 
 -- | Artifact describes a build product.
@@ -2739,7 +3021,7 @@ instance ToJSON VulnerabilityLocation where
                   ("package" .=) <$> _vlPackage,
                   ("cpeUri" .=) <$> _vlCpeURI])
 
--- | Per resource and severity counts of fixable and total vulnerabilites.
+-- | Per resource and severity counts of fixable and total vulnerabilities.
 --
 -- /See:/ 'fixableTotalByDigest' smart constructor.
 data FixableTotalByDigest =
@@ -3976,6 +4258,88 @@ instance ToJSON ScanConfig where
                   ("description" .=) <$> _scDescription,
                   ("createTime" .=) <$> _scCreateTime])
 
+-- | An attestation wrapper that uses the Grafeas \`Signature\` message. This
+-- attestation must define the \`serialized_payload\` that the
+-- \`signatures\` verify and any metadata necessary to interpret that
+-- plaintext. The signatures should always be over the
+-- \`serialized_payload\` bytestring.
+--
+-- /See:/ 'genericSignedAttestation' smart constructor.
+data GenericSignedAttestation =
+  GenericSignedAttestation'
+    { _gsaSerializedPayload :: !(Maybe Bytes)
+    , _gsaSignatures        :: !(Maybe [Signature])
+    , _gsaContentType       :: !(Maybe GenericSignedAttestationContentType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GenericSignedAttestation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gsaSerializedPayload'
+--
+-- * 'gsaSignatures'
+--
+-- * 'gsaContentType'
+genericSignedAttestation
+    :: GenericSignedAttestation
+genericSignedAttestation =
+  GenericSignedAttestation'
+    { _gsaSerializedPayload = Nothing
+    , _gsaSignatures = Nothing
+    , _gsaContentType = Nothing
+    }
+
+
+-- | The serialized payload that is verified by one or more \`signatures\`.
+-- The encoding and semantic meaning of this payload must match what is set
+-- in \`content_type\`.
+gsaSerializedPayload :: Lens' GenericSignedAttestation (Maybe ByteString)
+gsaSerializedPayload
+  = lens _gsaSerializedPayload
+      (\ s a -> s{_gsaSerializedPayload = a})
+      . mapping _Bytes
+
+-- | One or more signatures over \`serialized_payload\`. Verifier
+-- implementations should consider this attestation message verified if at
+-- least one \`signature\` verifies \`serialized_payload\`. See
+-- \`Signature\` in common.proto for more details on signature structure
+-- and verification.
+gsaSignatures :: Lens' GenericSignedAttestation [Signature]
+gsaSignatures
+  = lens _gsaSignatures
+      (\ s a -> s{_gsaSignatures = a})
+      . _Default
+      . _Coerce
+
+-- | Type (for example schema) of the attestation payload that was signed.
+-- The verifier must ensure that the provided type is one that the verifier
+-- supports, and that the attestation payload is a valid instantiation of
+-- that type (for example by validating a JSON schema).
+gsaContentType :: Lens' GenericSignedAttestation (Maybe GenericSignedAttestationContentType)
+gsaContentType
+  = lens _gsaContentType
+      (\ s a -> s{_gsaContentType = a})
+
+instance FromJSON GenericSignedAttestation where
+        parseJSON
+          = withObject "GenericSignedAttestation"
+              (\ o ->
+                 GenericSignedAttestation' <$>
+                   (o .:? "serializedPayload") <*>
+                     (o .:? "signatures" .!= mempty)
+                     <*> (o .:? "contentType"))
+
+instance ToJSON GenericSignedAttestation where
+        toJSON GenericSignedAttestation'{..}
+          = object
+              (catMaybes
+                 [("serializedPayload" .=) <$> _gsaSerializedPayload,
+                  ("signatures" .=) <$> _gsaSignatures,
+                  ("contentType" .=) <$> _gsaContentType])
+
 -- | A GitSourceContext denotes a particular revision in a third party Git
 -- repository (e.g., GitHub).
 --
@@ -4623,8 +4987,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -4637,10 +5001,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

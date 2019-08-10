@@ -34,6 +34,7 @@ module Network.Google.Resource.Drive.Files.Watch
 
     -- * Request Lenses
     , fwPayload
+    , fwSupportsAllDrives
     , fwAcknowledgeAbuse
     , fwFileId
     , fwSupportsTeamDrives
@@ -50,20 +51,22 @@ type FilesWatchResource =
          "files" :>
            Capture "fileId" Text :>
              "watch" :>
-               QueryParam "acknowledgeAbuse" Bool :>
-                 QueryParam "supportsTeamDrives" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Channel :> Post '[JSON] Channel
+               QueryParam "supportsAllDrives" Bool :>
+                 QueryParam "acknowledgeAbuse" Bool :>
+                   QueryParam "supportsTeamDrives" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Channel :> Post '[JSON] Channel
        :<|>
        "drive" :>
          "v3" :>
            "files" :>
              Capture "fileId" Text :>
                "watch" :>
-                 QueryParam "acknowledgeAbuse" Bool :>
-                   QueryParam "supportsTeamDrives" Bool :>
-                     QueryParam "alt" AltMedia :>
-                       Post '[OctetStream] Stream
+                 QueryParam "supportsAllDrives" Bool :>
+                   QueryParam "acknowledgeAbuse" Bool :>
+                     QueryParam "supportsTeamDrives" Bool :>
+                       QueryParam "alt" AltMedia :>
+                         Post '[OctetStream] Stream
 
 -- | Subscribes to changes to a file
 --
@@ -71,6 +74,7 @@ type FilesWatchResource =
 data FilesWatch =
   FilesWatch'
     { _fwPayload            :: !Channel
+    , _fwSupportsAllDrives  :: !Bool
     , _fwAcknowledgeAbuse   :: !Bool
     , _fwFileId             :: !Text
     , _fwSupportsTeamDrives :: !Bool
@@ -84,6 +88,8 @@ data FilesWatch =
 --
 -- * 'fwPayload'
 --
+-- * 'fwSupportsAllDrives'
+--
 -- * 'fwAcknowledgeAbuse'
 --
 -- * 'fwFileId'
@@ -96,6 +102,7 @@ filesWatch
 filesWatch pFwPayload_ pFwFileId_ =
   FilesWatch'
     { _fwPayload = pFwPayload_
+    , _fwSupportsAllDrives = False
     , _fwAcknowledgeAbuse = False
     , _fwFileId = pFwFileId_
     , _fwSupportsTeamDrives = False
@@ -106,6 +113,13 @@ filesWatch pFwPayload_ pFwFileId_ =
 fwPayload :: Lens' FilesWatch Channel
 fwPayload
   = lens _fwPayload (\ s a -> s{_fwPayload = a})
+
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+fwSupportsAllDrives :: Lens' FilesWatch Bool
+fwSupportsAllDrives
+  = lens _fwSupportsAllDrives
+      (\ s a -> s{_fwSupportsAllDrives = a})
 
 -- | Whether the user is acknowledging the risk of downloading known malware
 -- or other abusive files. This is only applicable when alt=media.
@@ -118,7 +132,7 @@ fwAcknowledgeAbuse
 fwFileId :: Lens' FilesWatch Text
 fwFileId = lens _fwFileId (\ s a -> s{_fwFileId = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 fwSupportsTeamDrives :: Lens' FilesWatch Bool
 fwSupportsTeamDrives
   = lens _fwSupportsTeamDrives
@@ -135,7 +149,8 @@ instance GoogleRequest FilesWatch where
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
         requestClient FilesWatch'{..}
-          = go _fwFileId (Just _fwAcknowledgeAbuse)
+          = go _fwFileId (Just _fwSupportsAllDrives)
+              (Just _fwAcknowledgeAbuse)
               (Just _fwSupportsTeamDrives)
               (Just AltJSON)
               _fwPayload
@@ -150,7 +165,8 @@ instance GoogleRequest (MediaDownload FilesWatch)
         type Scopes (MediaDownload FilesWatch) =
              Scopes FilesWatch
         requestClient (MediaDownload FilesWatch'{..})
-          = go _fwFileId (Just _fwAcknowledgeAbuse)
+          = go _fwFileId (Just _fwSupportsAllDrives)
+              (Just _fwAcknowledgeAbuse)
               (Just _fwSupportsTeamDrives)
               (Just AltMedia)
               driveService

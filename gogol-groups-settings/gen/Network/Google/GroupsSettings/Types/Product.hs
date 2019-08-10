@@ -25,49 +25,67 @@ import           Network.Google.Prelude
 -- /See:/ 'groups' smart constructor.
 data Groups =
   Groups'
-    { _gEmail                               :: !(Maybe Text)
-    , _gSendMessageDenyNotification         :: !(Maybe Text)
-    , _gWhoCanEnterFreeFormTags             :: !(Maybe Text)
-    , _gWhoCanAssignTopics                  :: !(Maybe Text)
-    , _gWhoCanPostMessage                   :: !(Maybe Text)
-    , _gAllowExternalMembers                :: !(Maybe Text)
-    , _gShowInGroupDirectory                :: !(Maybe Text)
-    , _gWhoCanUnmarkFavoriteReplyOnAnyTopic :: !(Maybe Text)
-    , _gWhoCanTakeTopics                    :: !(Maybe Text)
-    , _gSpamModerationLevel                 :: !(Maybe Text)
-    , _gKind                                :: !Text
-    , _gWhoCanViewMembership                :: !(Maybe Text)
-    , _gMembersCanPostAsTheGroup            :: !(Maybe Text)
-    , _gWhoCanViewGroup                     :: !(Maybe Text)
-    , _gWhoCanJoin                          :: !(Maybe Text)
-    , _gArchiveOnly                         :: !(Maybe Text)
-    , _gMaxMessageBytes                     :: !(Maybe (Textual Int32))
-    , _gReplyTo                             :: !(Maybe Text)
-    , _gMessageModerationLevel              :: !(Maybe Text)
-    , _gWhoCanMarkFavoriteReplyOnAnyTopic   :: !(Maybe Text)
-    , _gIncludeInGlobalAddressList          :: !(Maybe Text)
-    , _gIsArchived                          :: !(Maybe Text)
-    , _gName                                :: !(Maybe Text)
-    , _gWhoCanUnassignTopic                 :: !(Maybe Text)
-    , _gMessageDisplayFont                  :: !(Maybe Text)
-    , _gIncludeCustomFooter                 :: !(Maybe Text)
-    , _gFavoriteRepliesOnTop                :: !(Maybe Text)
-    , _gCustomReplyTo                       :: !(Maybe Text)
-    , _gWhoCanAddReferences                 :: !(Maybe Text)
-    , _gWhoCanContactOwner                  :: !(Maybe Text)
-    , _gWhoCanAdd                           :: !(Maybe Text)
-    , _gWhoCanInvite                        :: !(Maybe Text)
-    , _gWhoCanLeaveGroup                    :: !(Maybe Text)
-    , _gWhoCanModifyTagsAndCategories       :: !(Maybe Text)
-    , _gAllowGoogleCommunication            :: !(Maybe Text)
-    , _gWhoCanMarkNoResponseNeeded          :: !(Maybe Text)
-    , _gCustomFooterText                    :: !(Maybe Text)
-    , _gWhoCanMarkDuplicate                 :: !(Maybe Text)
-    , _gPrimaryLanguage                     :: !(Maybe Text)
-    , _gDescription                         :: !(Maybe Text)
-    , _gDefaultMessageDenyNotificationText  :: !(Maybe Text)
-    , _gWhoCanMarkFavoriteReplyOnOwnTopic   :: !(Maybe Text)
-    , _gAllowWebPosting                     :: !(Maybe Text)
+    { _gWhoCanHideAbuse                         :: !(Maybe Text)
+    , _gEmail                                   :: !(Maybe Text)
+    , _gSendMessageDenyNotification             :: !(Maybe Text)
+    , _gWhoCanEnterFreeFormTags                 :: !(Maybe Text)
+    , _gWhoCanAssignTopics                      :: !(Maybe Text)
+    , _gWhoCanPostMessage                       :: !(Maybe Text)
+    , _gWhoCanDeleteTopics                      :: !(Maybe Text)
+    , _gAllowExternalMembers                    :: !(Maybe Text)
+    , _gWhoCanModifyMembers                     :: !(Maybe Text)
+    , _gWhoCanAssistContent                     :: !(Maybe Text)
+    , _gShowInGroupDirectory                    :: !(Maybe Text)
+    , _gWhoCanUnmarkFavoriteReplyOnAnyTopic     :: !(Maybe Text)
+    , _gWhoCanTakeTopics                        :: !(Maybe Text)
+    , _gWhoCanLockTopics                        :: !(Maybe Text)
+    , _gSpamModerationLevel                     :: !(Maybe Text)
+    , _gKind                                    :: !Text
+    , _gWhoCanDiscoverGroup                     :: !(Maybe Text)
+    , _gWhoCanViewMembership                    :: !(Maybe Text)
+    , _gMembersCanPostAsTheGroup                :: !(Maybe Text)
+    , _gWhoCanMakeTopicsSticky                  :: !(Maybe Text)
+    , _gWhoCanPostAnnouncements                 :: !(Maybe Text)
+    , _gWhoCanViewGroup                         :: !(Maybe Text)
+    , _gWhoCanJoin                              :: !(Maybe Text)
+    , _gWhoCanModerateMembers                   :: !(Maybe Text)
+    , _gArchiveOnly                             :: !(Maybe Text)
+    , _gMaxMessageBytes                         :: !(Maybe (Textual Int32))
+    , _gReplyTo                                 :: !(Maybe Text)
+    , _gMessageModerationLevel                  :: !(Maybe Text)
+    , _gWhoCanMarkFavoriteReplyOnAnyTopic       :: !(Maybe Text)
+    , _gIncludeInGlobalAddressList              :: !(Maybe Text)
+    , _gIsArchived                              :: !(Maybe Text)
+    , _gWhoCanModerateContent                   :: !(Maybe Text)
+    , _gCustomRolesEnabledForSettingsToBeMerged :: !(Maybe Text)
+    , _gName                                    :: !(Maybe Text)
+    , _gWhoCanUnassignTopic                     :: !(Maybe Text)
+    , _gMessageDisplayFont                      :: !(Maybe Text)
+    , _gIncludeCustomFooter                     :: !(Maybe Text)
+    , _gFavoriteRepliesOnTop                    :: !(Maybe Text)
+    , _gCustomReplyTo                           :: !(Maybe Text)
+    , _gWhoCanAddReferences                     :: !(Maybe Text)
+    , _gWhoCanContactOwner                      :: !(Maybe Text)
+    , _gWhoCanAdd                               :: !(Maybe Text)
+    , _gWhoCanInvite                            :: !(Maybe Text)
+    , _gWhoCanLeaveGroup                        :: !(Maybe Text)
+    , _gWhoCanApproveMembers                    :: !(Maybe Text)
+    , _gWhoCanModifyTagsAndCategories           :: !(Maybe Text)
+    , _gAllowGoogleCommunication                :: !(Maybe Text)
+    , _gWhoCanMoveTopicsIn                      :: !(Maybe Text)
+    , _gWhoCanMarkNoResponseNeeded              :: !(Maybe Text)
+    , _gCustomFooterText                        :: !(Maybe Text)
+    , _gWhoCanDeleteAnyPost                     :: !(Maybe Text)
+    , _gWhoCanBanUsers                          :: !(Maybe Text)
+    , _gWhoCanApproveMessages                   :: !(Maybe Text)
+    , _gWhoCanMarkDuplicate                     :: !(Maybe Text)
+    , _gEnableCollaborativeInbox                :: !(Maybe Text)
+    , _gPrimaryLanguage                         :: !(Maybe Text)
+    , _gDescription                             :: !(Maybe Text)
+    , _gDefaultMessageDenyNotificationText      :: !(Maybe Text)
+    , _gWhoCanMarkFavoriteReplyOnOwnTopic       :: !(Maybe Text)
+    , _gAllowWebPosting                         :: !(Maybe Text)
+    , _gWhoCanMoveTopicsOut                     :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,6 +93,8 @@ data Groups =
 -- | Creates a value of 'Groups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gWhoCanHideAbuse'
 --
 -- * 'gEmail'
 --
@@ -86,7 +106,13 @@ data Groups =
 --
 -- * 'gWhoCanPostMessage'
 --
+-- * 'gWhoCanDeleteTopics'
+--
 -- * 'gAllowExternalMembers'
+--
+-- * 'gWhoCanModifyMembers'
+--
+-- * 'gWhoCanAssistContent'
 --
 -- * 'gShowInGroupDirectory'
 --
@@ -94,17 +120,27 @@ data Groups =
 --
 -- * 'gWhoCanTakeTopics'
 --
+-- * 'gWhoCanLockTopics'
+--
 -- * 'gSpamModerationLevel'
 --
 -- * 'gKind'
+--
+-- * 'gWhoCanDiscoverGroup'
 --
 -- * 'gWhoCanViewMembership'
 --
 -- * 'gMembersCanPostAsTheGroup'
 --
+-- * 'gWhoCanMakeTopicsSticky'
+--
+-- * 'gWhoCanPostAnnouncements'
+--
 -- * 'gWhoCanViewGroup'
 --
 -- * 'gWhoCanJoin'
+--
+-- * 'gWhoCanModerateMembers'
 --
 -- * 'gArchiveOnly'
 --
@@ -119,6 +155,10 @@ data Groups =
 -- * 'gIncludeInGlobalAddressList'
 --
 -- * 'gIsArchived'
+--
+-- * 'gWhoCanModerateContent'
+--
+-- * 'gCustomRolesEnabledForSettingsToBeMerged'
 --
 -- * 'gName'
 --
@@ -142,15 +182,27 @@ data Groups =
 --
 -- * 'gWhoCanLeaveGroup'
 --
+-- * 'gWhoCanApproveMembers'
+--
 -- * 'gWhoCanModifyTagsAndCategories'
 --
 -- * 'gAllowGoogleCommunication'
+--
+-- * 'gWhoCanMoveTopicsIn'
 --
 -- * 'gWhoCanMarkNoResponseNeeded'
 --
 -- * 'gCustomFooterText'
 --
+-- * 'gWhoCanDeleteAnyPost'
+--
+-- * 'gWhoCanBanUsers'
+--
+-- * 'gWhoCanApproveMessages'
+--
 -- * 'gWhoCanMarkDuplicate'
+--
+-- * 'gEnableCollaborativeInbox'
 --
 -- * 'gPrimaryLanguage'
 --
@@ -161,25 +213,36 @@ data Groups =
 -- * 'gWhoCanMarkFavoriteReplyOnOwnTopic'
 --
 -- * 'gAllowWebPosting'
+--
+-- * 'gWhoCanMoveTopicsOut'
 groups
     :: Groups
 groups =
   Groups'
-    { _gEmail = Nothing
+    { _gWhoCanHideAbuse = Nothing
+    , _gEmail = Nothing
     , _gSendMessageDenyNotification = Nothing
     , _gWhoCanEnterFreeFormTags = Nothing
     , _gWhoCanAssignTopics = Nothing
     , _gWhoCanPostMessage = Nothing
+    , _gWhoCanDeleteTopics = Nothing
     , _gAllowExternalMembers = Nothing
+    , _gWhoCanModifyMembers = Nothing
+    , _gWhoCanAssistContent = Nothing
     , _gShowInGroupDirectory = Nothing
     , _gWhoCanUnmarkFavoriteReplyOnAnyTopic = Nothing
     , _gWhoCanTakeTopics = Nothing
+    , _gWhoCanLockTopics = Nothing
     , _gSpamModerationLevel = Nothing
     , _gKind = "groupsSettings#groups"
+    , _gWhoCanDiscoverGroup = Nothing
     , _gWhoCanViewMembership = Nothing
     , _gMembersCanPostAsTheGroup = Nothing
+    , _gWhoCanMakeTopicsSticky = Nothing
+    , _gWhoCanPostAnnouncements = Nothing
     , _gWhoCanViewGroup = Nothing
     , _gWhoCanJoin = Nothing
+    , _gWhoCanModerateMembers = Nothing
     , _gArchiveOnly = Nothing
     , _gMaxMessageBytes = Nothing
     , _gReplyTo = Nothing
@@ -187,6 +250,8 @@ groups =
     , _gWhoCanMarkFavoriteReplyOnAnyTopic = Nothing
     , _gIncludeInGlobalAddressList = Nothing
     , _gIsArchived = Nothing
+    , _gWhoCanModerateContent = Nothing
+    , _gCustomRolesEnabledForSettingsToBeMerged = Nothing
     , _gName = Nothing
     , _gWhoCanUnassignTopic = Nothing
     , _gMessageDisplayFont = Nothing
@@ -198,18 +263,32 @@ groups =
     , _gWhoCanAdd = Nothing
     , _gWhoCanInvite = Nothing
     , _gWhoCanLeaveGroup = Nothing
+    , _gWhoCanApproveMembers = Nothing
     , _gWhoCanModifyTagsAndCategories = Nothing
     , _gAllowGoogleCommunication = Nothing
+    , _gWhoCanMoveTopicsIn = Nothing
     , _gWhoCanMarkNoResponseNeeded = Nothing
     , _gCustomFooterText = Nothing
+    , _gWhoCanDeleteAnyPost = Nothing
+    , _gWhoCanBanUsers = Nothing
+    , _gWhoCanApproveMessages = Nothing
     , _gWhoCanMarkDuplicate = Nothing
+    , _gEnableCollaborativeInbox = Nothing
     , _gPrimaryLanguage = Nothing
     , _gDescription = Nothing
     , _gDefaultMessageDenyNotificationText = Nothing
     , _gWhoCanMarkFavoriteReplyOnOwnTopic = Nothing
     , _gAllowWebPosting = Nothing
+    , _gWhoCanMoveTopicsOut = Nothing
     }
 
+
+-- | Permission to hide posts by reporting them as abuse. Possible values
+-- are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanHideAbuse :: Lens' Groups (Maybe Text)
+gWhoCanHideAbuse
+  = lens _gWhoCanHideAbuse
+      (\ s a -> s{_gWhoCanHideAbuse = a})
 
 -- | Email id of the group
 gEmail :: Lens' Groups (Maybe Text)
@@ -244,11 +323,32 @@ gWhoCanPostMessage
   = lens _gWhoCanPostMessage
       (\ s a -> s{_gWhoCanPostMessage = a})
 
+-- | Permission to delete topics. Possible values are: NONE OWNERS_ONLY
+-- OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanDeleteTopics :: Lens' Groups (Maybe Text)
+gWhoCanDeleteTopics
+  = lens _gWhoCanDeleteTopics
+      (\ s a -> s{_gWhoCanDeleteTopics = a})
+
 -- | Are external members allowed to join the group.
 gAllowExternalMembers :: Lens' Groups (Maybe Text)
 gAllowExternalMembers
   = lens _gAllowExternalMembers
       (\ s a -> s{_gAllowExternalMembers = a})
+
+-- | Permission to modify members (change member roles). Possible values are:
+-- NONE OWNERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanModifyMembers :: Lens' Groups (Maybe Text)
+gWhoCanModifyMembers
+  = lens _gWhoCanModifyMembers
+      (\ s a -> s{_gWhoCanModifyMembers = a})
+
+-- | Permission for content assistants. Possible values are: Possible values
+-- are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanAssistContent :: Lens' Groups (Maybe Text)
+gWhoCanAssistContent
+  = lens _gWhoCanAssistContent
+      (\ s a -> s{_gWhoCanAssistContent = a})
 
 -- | Is the group listed in groups directory
 gShowInGroupDirectory :: Lens' Groups (Maybe Text)
@@ -271,6 +371,13 @@ gWhoCanTakeTopics
   = lens _gWhoCanTakeTopics
       (\ s a -> s{_gWhoCanTakeTopics = a})
 
+-- | Permission to lock topics. Possible values are: NONE OWNERS_ONLY
+-- OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanLockTopics :: Lens' Groups (Maybe Text)
+gWhoCanLockTopics
+  = lens _gWhoCanLockTopics
+      (\ s a -> s{_gWhoCanLockTopics = a})
+
 -- | Moderation level for messages detected as spam. Possible values are:
 -- ALLOW MODERATE SILENTLY_MODERATE REJECT
 gSpamModerationLevel :: Lens' Groups (Maybe Text)
@@ -282,8 +389,16 @@ gSpamModerationLevel
 gKind :: Lens' Groups Text
 gKind = lens _gKind (\ s a -> s{_gKind = a})
 
+-- | Permission for who can discover the group. Possible values are:
+-- ALL_MEMBERS_CAN_DISCOVER ALL_IN_DOMAIN_CAN_DISCOVER ANYONE_CAN_DISCOVER
+gWhoCanDiscoverGroup :: Lens' Groups (Maybe Text)
+gWhoCanDiscoverGroup
+  = lens _gWhoCanDiscoverGroup
+      (\ s a -> s{_gWhoCanDiscoverGroup = a})
+
 -- | Permissions to view membership. Possible values are:
 -- ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW
+-- ALL_OWNERS_CAN_VIEW
 gWhoCanViewMembership :: Lens' Groups (Maybe Text)
 gWhoCanViewMembership
   = lens _gWhoCanViewMembership
@@ -294,6 +409,21 @@ gMembersCanPostAsTheGroup :: Lens' Groups (Maybe Text)
 gMembersCanPostAsTheGroup
   = lens _gMembersCanPostAsTheGroup
       (\ s a -> s{_gMembersCanPostAsTheGroup = a})
+
+-- | Permission to make topics appear at the top of the topic list. Possible
+-- values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS
+-- ALL_MEMBERS
+gWhoCanMakeTopicsSticky :: Lens' Groups (Maybe Text)
+gWhoCanMakeTopicsSticky
+  = lens _gWhoCanMakeTopicsSticky
+      (\ s a -> s{_gWhoCanMakeTopicsSticky = a})
+
+-- | Permission to post announcements, a special topic type. Possible values
+-- are: NONE OWNERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanPostAnnouncements :: Lens' Groups (Maybe Text)
+gWhoCanPostAnnouncements
+  = lens _gWhoCanPostAnnouncements
+      (\ s a -> s{_gWhoCanPostAnnouncements = a})
 
 -- | Permissions to view group. Possible values are: ANYONE_CAN_VIEW
 -- ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW
@@ -308,6 +438,13 @@ gWhoCanViewGroup
 gWhoCanJoin :: Lens' Groups (Maybe Text)
 gWhoCanJoin
   = lens _gWhoCanJoin (\ s a -> s{_gWhoCanJoin = a})
+
+-- | Permission for membership moderation. Possible values are: NONE
+-- OWNERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanModerateMembers :: Lens' Groups (Maybe Text)
+gWhoCanModerateMembers
+  = lens _gWhoCanModerateMembers
+      (\ s a -> s{_gWhoCanModerateMembers = a})
 
 -- | If the group is archive only
 gArchiveOnly :: Lens' Groups (Maybe Text)
@@ -353,6 +490,21 @@ gIncludeInGlobalAddressList
 gIsArchived :: Lens' Groups (Maybe Text)
 gIsArchived
   = lens _gIsArchived (\ s a -> s{_gIsArchived = a})
+
+-- | Permission for content moderation. Possible values are: NONE OWNERS_ONLY
+-- OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanModerateContent :: Lens' Groups (Maybe Text)
+gWhoCanModerateContent
+  = lens _gWhoCanModerateContent
+      (\ s a -> s{_gWhoCanModerateContent = a})
+
+-- | If any of the settings that will be merged have custom roles which is
+-- anything other than owners, managers, or group scopes.
+gCustomRolesEnabledForSettingsToBeMerged :: Lens' Groups (Maybe Text)
+gCustomRolesEnabledForSettingsToBeMerged
+  = lens _gCustomRolesEnabledForSettingsToBeMerged
+      (\ s a ->
+         s{_gCustomRolesEnabledForSettingsToBeMerged = a})
 
 -- | Name of the Group
 gName :: Lens' Groups (Maybe Text)
@@ -427,6 +579,14 @@ gWhoCanLeaveGroup
   = lens _gWhoCanLeaveGroup
       (\ s a -> s{_gWhoCanLeaveGroup = a})
 
+-- | Permission to approve members. Possible values are:
+-- ALL_OWNERS_CAN_APPROVE ALL_MANAGERS_CAN_APPROVE ALL_MEMBERS_CAN_APPROVE
+-- NONE_CAN_APPROVE
+gWhoCanApproveMembers :: Lens' Groups (Maybe Text)
+gWhoCanApproveMembers
+  = lens _gWhoCanApproveMembers
+      (\ s a -> s{_gWhoCanApproveMembers = a})
+
 -- | Permission to change tags and categories. Possible values are: NONE
 -- OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
 gWhoCanModifyTagsAndCategories :: Lens' Groups (Maybe Text)
@@ -439,6 +599,13 @@ gAllowGoogleCommunication :: Lens' Groups (Maybe Text)
 gAllowGoogleCommunication
   = lens _gAllowGoogleCommunication
       (\ s a -> s{_gAllowGoogleCommunication = a})
+
+-- | Permission to move topics into the group or forum. Possible values are:
+-- NONE OWNERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanMoveTopicsIn :: Lens' Groups (Maybe Text)
+gWhoCanMoveTopicsIn
+  = lens _gWhoCanMoveTopicsIn
+      (\ s a -> s{_gWhoCanMoveTopicsIn = a})
 
 -- | Permission to mark a topic as not needing a response. Possible values
 -- are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
@@ -453,6 +620,27 @@ gCustomFooterText
   = lens _gCustomFooterText
       (\ s a -> s{_gCustomFooterText = a})
 
+-- | Permission to delete replies to topics. Possible values are: NONE
+-- OWNERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanDeleteAnyPost :: Lens' Groups (Maybe Text)
+gWhoCanDeleteAnyPost
+  = lens _gWhoCanDeleteAnyPost
+      (\ s a -> s{_gWhoCanDeleteAnyPost = a})
+
+-- | Permission to ban users. Possible values are: NONE OWNERS_ONLY
+-- OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanBanUsers :: Lens' Groups (Maybe Text)
+gWhoCanBanUsers
+  = lens _gWhoCanBanUsers
+      (\ s a -> s{_gWhoCanBanUsers = a})
+
+-- | Permission to approve pending messages in the moderation queue. Possible
+-- values are: NONE OWNERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanApproveMessages :: Lens' Groups (Maybe Text)
+gWhoCanApproveMessages
+  = lens _gWhoCanApproveMessages
+      (\ s a -> s{_gWhoCanApproveMessages = a})
+
 -- | Permission to mark a topic as a duplicate of another topic. Possible
 -- values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS
 -- ALL_MEMBERS
@@ -460,6 +648,12 @@ gWhoCanMarkDuplicate :: Lens' Groups (Maybe Text)
 gWhoCanMarkDuplicate
   = lens _gWhoCanMarkDuplicate
       (\ s a -> s{_gWhoCanMarkDuplicate = a})
+
+-- | If a primary Collab Inbox feature is enabled.
+gEnableCollaborativeInbox :: Lens' Groups (Maybe Text)
+gEnableCollaborativeInbox
+  = lens _gEnableCollaborativeInbox
+      (\ s a -> s{_gEnableCollaborativeInbox = a})
 
 -- | Primary language for the group.
 gPrimaryLanguage :: Lens' Groups (Maybe Text)
@@ -493,26 +687,41 @@ gAllowWebPosting
   = lens _gAllowWebPosting
       (\ s a -> s{_gAllowWebPosting = a})
 
+-- | Permission to move topics out of the group or forum. Possible values
+-- are: NONE OWNERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS
+gWhoCanMoveTopicsOut :: Lens' Groups (Maybe Text)
+gWhoCanMoveTopicsOut
+  = lens _gWhoCanMoveTopicsOut
+      (\ s a -> s{_gWhoCanMoveTopicsOut = a})
+
 instance FromJSON Groups where
         parseJSON
           = withObject "Groups"
               (\ o ->
                  Groups' <$>
-                   (o .:? "email") <*>
+                   (o .:? "whoCanHideAbuse") <*> (o .:? "email") <*>
                      (o .:? "sendMessageDenyNotification")
                      <*> (o .:? "whoCanEnterFreeFormTags")
                      <*> (o .:? "whoCanAssignTopics")
                      <*> (o .:? "whoCanPostMessage")
+                     <*> (o .:? "whoCanDeleteTopics")
                      <*> (o .:? "allowExternalMembers")
+                     <*> (o .:? "whoCanModifyMembers")
+                     <*> (o .:? "whoCanAssistContent")
                      <*> (o .:? "showInGroupDirectory")
                      <*> (o .:? "whoCanUnmarkFavoriteReplyOnAnyTopic")
                      <*> (o .:? "whoCanTakeTopics")
+                     <*> (o .:? "whoCanLockTopics")
                      <*> (o .:? "spamModerationLevel")
                      <*> (o .:? "kind" .!= "groupsSettings#groups")
+                     <*> (o .:? "whoCanDiscoverGroup")
                      <*> (o .:? "whoCanViewMembership")
                      <*> (o .:? "membersCanPostAsTheGroup")
+                     <*> (o .:? "whoCanMakeTopicsSticky")
+                     <*> (o .:? "whoCanPostAnnouncements")
                      <*> (o .:? "whoCanViewGroup")
                      <*> (o .:? "whoCanJoin")
+                     <*> (o .:? "whoCanModerateMembers")
                      <*> (o .:? "archiveOnly")
                      <*> (o .:? "maxMessageBytes")
                      <*> (o .:? "replyTo")
@@ -520,6 +729,8 @@ instance FromJSON Groups where
                      <*> (o .:? "whoCanMarkFavoriteReplyOnAnyTopic")
                      <*> (o .:? "includeInGlobalAddressList")
                      <*> (o .:? "isArchived")
+                     <*> (o .:? "whoCanModerateContent")
+                     <*> (o .:? "customRolesEnabledForSettingsToBeMerged")
                      <*> (o .:? "name")
                      <*> (o .:? "whoCanUnassignTopic")
                      <*> (o .:? "messageDisplayFont")
@@ -531,43 +742,62 @@ instance FromJSON Groups where
                      <*> (o .:? "whoCanAdd")
                      <*> (o .:? "whoCanInvite")
                      <*> (o .:? "whoCanLeaveGroup")
+                     <*> (o .:? "whoCanApproveMembers")
                      <*> (o .:? "whoCanModifyTagsAndCategories")
                      <*> (o .:? "allowGoogleCommunication")
+                     <*> (o .:? "whoCanMoveTopicsIn")
                      <*> (o .:? "whoCanMarkNoResponseNeeded")
                      <*> (o .:? "customFooterText")
+                     <*> (o .:? "whoCanDeleteAnyPost")
+                     <*> (o .:? "whoCanBanUsers")
+                     <*> (o .:? "whoCanApproveMessages")
                      <*> (o .:? "whoCanMarkDuplicate")
+                     <*> (o .:? "enableCollaborativeInbox")
                      <*> (o .:? "primaryLanguage")
                      <*> (o .:? "description")
                      <*> (o .:? "defaultMessageDenyNotificationText")
                      <*> (o .:? "whoCanMarkFavoriteReplyOnOwnTopic")
-                     <*> (o .:? "allowWebPosting"))
+                     <*> (o .:? "allowWebPosting")
+                     <*> (o .:? "whoCanMoveTopicsOut"))
 
 instance ToJSON Groups where
         toJSON Groups'{..}
           = object
               (catMaybes
-                 [("email" .=) <$> _gEmail,
+                 [("whoCanHideAbuse" .=) <$> _gWhoCanHideAbuse,
+                  ("email" .=) <$> _gEmail,
                   ("sendMessageDenyNotification" .=) <$>
                     _gSendMessageDenyNotification,
                   ("whoCanEnterFreeFormTags" .=) <$>
                     _gWhoCanEnterFreeFormTags,
                   ("whoCanAssignTopics" .=) <$> _gWhoCanAssignTopics,
                   ("whoCanPostMessage" .=) <$> _gWhoCanPostMessage,
+                  ("whoCanDeleteTopics" .=) <$> _gWhoCanDeleteTopics,
                   ("allowExternalMembers" .=) <$>
                     _gAllowExternalMembers,
+                  ("whoCanModifyMembers" .=) <$> _gWhoCanModifyMembers,
+                  ("whoCanAssistContent" .=) <$> _gWhoCanAssistContent,
                   ("showInGroupDirectory" .=) <$>
                     _gShowInGroupDirectory,
                   ("whoCanUnmarkFavoriteReplyOnAnyTopic" .=) <$>
                     _gWhoCanUnmarkFavoriteReplyOnAnyTopic,
                   ("whoCanTakeTopics" .=) <$> _gWhoCanTakeTopics,
+                  ("whoCanLockTopics" .=) <$> _gWhoCanLockTopics,
                   ("spamModerationLevel" .=) <$> _gSpamModerationLevel,
                   Just ("kind" .= _gKind),
+                  ("whoCanDiscoverGroup" .=) <$> _gWhoCanDiscoverGroup,
                   ("whoCanViewMembership" .=) <$>
                     _gWhoCanViewMembership,
                   ("membersCanPostAsTheGroup" .=) <$>
                     _gMembersCanPostAsTheGroup,
+                  ("whoCanMakeTopicsSticky" .=) <$>
+                    _gWhoCanMakeTopicsSticky,
+                  ("whoCanPostAnnouncements" .=) <$>
+                    _gWhoCanPostAnnouncements,
                   ("whoCanViewGroup" .=) <$> _gWhoCanViewGroup,
                   ("whoCanJoin" .=) <$> _gWhoCanJoin,
+                  ("whoCanModerateMembers" .=) <$>
+                    _gWhoCanModerateMembers,
                   ("archiveOnly" .=) <$> _gArchiveOnly,
                   ("maxMessageBytes" .=) <$> _gMaxMessageBytes,
                   ("replyTo" .=) <$> _gReplyTo,
@@ -578,6 +808,10 @@ instance ToJSON Groups where
                   ("includeInGlobalAddressList" .=) <$>
                     _gIncludeInGlobalAddressList,
                   ("isArchived" .=) <$> _gIsArchived,
+                  ("whoCanModerateContent" .=) <$>
+                    _gWhoCanModerateContent,
+                  ("customRolesEnabledForSettingsToBeMerged" .=) <$>
+                    _gCustomRolesEnabledForSettingsToBeMerged,
                   ("name" .=) <$> _gName,
                   ("whoCanUnassignTopic" .=) <$> _gWhoCanUnassignTopic,
                   ("messageDisplayFont" .=) <$> _gMessageDisplayFont,
@@ -590,18 +824,29 @@ instance ToJSON Groups where
                   ("whoCanAdd" .=) <$> _gWhoCanAdd,
                   ("whoCanInvite" .=) <$> _gWhoCanInvite,
                   ("whoCanLeaveGroup" .=) <$> _gWhoCanLeaveGroup,
+                  ("whoCanApproveMembers" .=) <$>
+                    _gWhoCanApproveMembers,
                   ("whoCanModifyTagsAndCategories" .=) <$>
                     _gWhoCanModifyTagsAndCategories,
                   ("allowGoogleCommunication" .=) <$>
                     _gAllowGoogleCommunication,
+                  ("whoCanMoveTopicsIn" .=) <$> _gWhoCanMoveTopicsIn,
                   ("whoCanMarkNoResponseNeeded" .=) <$>
                     _gWhoCanMarkNoResponseNeeded,
                   ("customFooterText" .=) <$> _gCustomFooterText,
+                  ("whoCanDeleteAnyPost" .=) <$> _gWhoCanDeleteAnyPost,
+                  ("whoCanBanUsers" .=) <$> _gWhoCanBanUsers,
+                  ("whoCanApproveMessages" .=) <$>
+                    _gWhoCanApproveMessages,
                   ("whoCanMarkDuplicate" .=) <$> _gWhoCanMarkDuplicate,
+                  ("enableCollaborativeInbox" .=) <$>
+                    _gEnableCollaborativeInbox,
                   ("primaryLanguage" .=) <$> _gPrimaryLanguage,
                   ("description" .=) <$> _gDescription,
                   ("defaultMessageDenyNotificationText" .=) <$>
                     _gDefaultMessageDenyNotificationText,
                   ("whoCanMarkFavoriteReplyOnOwnTopic" .=) <$>
                     _gWhoCanMarkFavoriteReplyOnOwnTopic,
-                  ("allowWebPosting" .=) <$> _gAllowWebPosting])
+                  ("allowWebPosting" .=) <$> _gAllowWebPosting,
+                  ("whoCanMoveTopicsOut" .=) <$>
+                    _gWhoCanMoveTopicsOut])

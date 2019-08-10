@@ -150,7 +150,8 @@ gmcCallback
 
 instance GoogleRequest GroupsMembershipsCreate where
         type Rs GroupsMembershipsCreate = Operation
-        type Scopes GroupsMembershipsCreate = '[]
+        type Scopes GroupsMembershipsCreate =
+             '["https://www.googleapis.com/auth/cloud-identity.groups"]
         requestClient GroupsMembershipsCreate'{..}
           = go _gmcParent _gmcXgafv _gmcUploadProtocol
               _gmcAccessToken

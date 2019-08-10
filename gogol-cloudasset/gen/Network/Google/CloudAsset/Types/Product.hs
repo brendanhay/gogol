@@ -415,7 +415,7 @@ aIAMPolicy :: Lens' Asset (Maybe Policy)
 aIAMPolicy
   = lens _aIAMPolicy (\ s a -> s{_aIAMPolicy = a})
 
--- | Type of the asset. Example: \"google.compute.Disk\".
+-- | Type of the asset. Example: \"compute.googleapis.com\/Disk\".
 aAssetType :: Lens' Asset (Maybe Text)
 aAssetType
   = lens _aAssetType (\ s a -> s{_aAssetType = a})
@@ -441,9 +441,10 @@ instance ToJSON Asset where
 -- | A Cloud Storage location.
 --
 -- /See:/ 'gcsDestination' smart constructor.
-newtype GcsDestination =
+data GcsDestination =
   GcsDestination'
-    { _gdURI :: Maybe Text
+    { _gdURIPrefix :: !(Maybe Text)
+    , _gdURI       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -452,11 +453,26 @@ newtype GcsDestination =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gdURIPrefix'
+--
 -- * 'gdURI'
 gcsDestination
     :: GcsDestination
-gcsDestination = GcsDestination' {_gdURI = Nothing}
+gcsDestination = GcsDestination' {_gdURIPrefix = Nothing, _gdURI = Nothing}
 
+
+-- | The uri prefix of all generated Cloud Storage objects. For example:
+-- \"gs:\/\/bucket_name\/object_name_prefix\". Each object uri is in
+-- format: \"gs:\/\/bucket_name\/object_name_prefix\/\/ and only contains
+-- assets for that type. starts from 0. For example:
+-- \"gs:\/\/bucket_name\/object_name_prefix\/compute.googleapis.com\/Disk\/0\"
+-- is the first shard of output objects containing all
+-- compute.googleapis.com\/Disk assets. An INVALID_ARGUMENT error will be
+-- returned if file with the same name
+-- \"gs:\/\/bucket_name\/object_name_prefix\" already exists.
+gdURIPrefix :: Lens' GcsDestination (Maybe Text)
+gdURIPrefix
+  = lens _gdURIPrefix (\ s a -> s{_gdURIPrefix = a})
 
 -- | The uri of the Cloud Storage object. It\'s the same uri that is used by
 -- gsutil. For example: \"gs:\/\/bucket_name\/object_name\". See [Viewing
@@ -469,11 +485,16 @@ gdURI = lens _gdURI (\ s a -> s{_gdURI = a})
 instance FromJSON GcsDestination where
         parseJSON
           = withObject "GcsDestination"
-              (\ o -> GcsDestination' <$> (o .:? "uri"))
+              (\ o ->
+                 GcsDestination' <$>
+                   (o .:? "uriPrefix") <*> (o .:? "uri"))
 
 instance ToJSON GcsDestination where
         toJSON GcsDestination'{..}
-          = object (catMaybes [("uri" .=) <$> _gdURI])
+          = object
+              (catMaybes
+                 [("uriPrefix" .=) <$> _gdURIPrefix,
+                  ("uri" .=) <$> _gdURI])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
@@ -556,8 +577,8 @@ earReadTime
       mapping _DateTime
 
 -- | A list of asset types of which to take a snapshot for. For example:
--- \"google.compute.Disk\". If specified, only matching assets will be
--- returned. See [Introduction to Cloud Asset
+-- \"compute.googleapis.com\/Disk\". If specified, only matching assets
+-- will be returned. See [Introduction to Cloud Asset
 -- Inventory](https:\/\/cloud.google.com\/resource-manager\/docs\/cloud-asset-inventory\/overview)
 -- for all supported asset types.
 earAssetTypes :: Lens' ExportAssetsRequest [Text]
@@ -1212,8 +1233,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -1226,10 +1247,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

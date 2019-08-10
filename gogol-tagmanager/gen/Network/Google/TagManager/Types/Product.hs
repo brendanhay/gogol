@@ -20,61 +20,6 @@ module Network.Google.TagManager.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types.Sum
 
--- | Creates a workspace proposal to start a review of a workspace.
---
--- /See:/ 'createWorkspaceProposalRequest' smart constructor.
-data CreateWorkspaceProposalRequest =
-  CreateWorkspaceProposalRequest'
-    { _cwprInitialComment :: !(Maybe WorkspaceProposalHistoryComment)
-    , _cwprReviewers      :: !(Maybe [WorkspaceProposalUser])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'CreateWorkspaceProposalRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cwprInitialComment'
---
--- * 'cwprReviewers'
-createWorkspaceProposalRequest
-    :: CreateWorkspaceProposalRequest
-createWorkspaceProposalRequest =
-  CreateWorkspaceProposalRequest'
-    {_cwprInitialComment = Nothing, _cwprReviewers = Nothing}
-
-
--- | If present, an initial comment to associate with the workspace proposal.
-cwprInitialComment :: Lens' CreateWorkspaceProposalRequest (Maybe WorkspaceProposalHistoryComment)
-cwprInitialComment
-  = lens _cwprInitialComment
-      (\ s a -> s{_cwprInitialComment = a})
-
--- | List of users to review the workspace proposal.
-cwprReviewers :: Lens' CreateWorkspaceProposalRequest [WorkspaceProposalUser]
-cwprReviewers
-  = lens _cwprReviewers
-      (\ s a -> s{_cwprReviewers = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON CreateWorkspaceProposalRequest
-         where
-        parseJSON
-          = withObject "CreateWorkspaceProposalRequest"
-              (\ o ->
-                 CreateWorkspaceProposalRequest' <$>
-                   (o .:? "initialComment") <*>
-                     (o .:? "reviewers" .!= mempty))
-
-instance ToJSON CreateWorkspaceProposalRequest where
-        toJSON CreateWorkspaceProposalRequest'{..}
-          = object
-              (catMaybes
-                 [("initialComment" .=) <$> _cwprInitialComment,
-                  ("reviewers" .=) <$> _cwprReviewers])
-
 -- | List Variables Response.
 --
 -- /See:/ 'listVariablesResponse' smart constructor.
@@ -178,6 +123,91 @@ instance ToJSON ListFoldersResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _lfrNextPageToken,
                   ("folder" .=) <$> _lfrFolder])
+
+--
+-- /See:/ 'listZonesResponse' smart constructor.
+data ListZonesResponse =
+  ListZonesResponse'
+    { _lzrNextPageToken :: !(Maybe Text)
+    , _lzrZone          :: !(Maybe [Zone])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListZonesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lzrNextPageToken'
+--
+-- * 'lzrZone'
+listZonesResponse
+    :: ListZonesResponse
+listZonesResponse =
+  ListZonesResponse' {_lzrNextPageToken = Nothing, _lzrZone = Nothing}
+
+
+-- | Continuation token for fetching the next page of results.
+lzrNextPageToken :: Lens' ListZonesResponse (Maybe Text)
+lzrNextPageToken
+  = lens _lzrNextPageToken
+      (\ s a -> s{_lzrNextPageToken = a})
+
+-- | All GTM Zones of a GTM Container.
+lzrZone :: Lens' ListZonesResponse [Zone]
+lzrZone
+  = lens _lzrZone (\ s a -> s{_lzrZone = a}) . _Default
+      . _Coerce
+
+instance FromJSON ListZonesResponse where
+        parseJSON
+          = withObject "ListZonesResponse"
+              (\ o ->
+                 ListZonesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "zone" .!= mempty))
+
+instance ToJSON ListZonesResponse where
+        toJSON ListZonesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lzrNextPageToken,
+                  ("zone" .=) <$> _lzrZone])
+
+-- | The result of reverting a zone in a workspace.
+--
+-- /See:/ 'revertZoneResponse' smart constructor.
+newtype RevertZoneResponse =
+  RevertZoneResponse'
+    { _rzrZone :: Maybe Zone
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RevertZoneResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rzrZone'
+revertZoneResponse
+    :: RevertZoneResponse
+revertZoneResponse = RevertZoneResponse' {_rzrZone = Nothing}
+
+
+-- | Zone as it appears in the latest container version since the last
+-- workspace synchronization operation. If no zone is present, that means
+-- the zone was deleted in the latest container version.
+rzrZone :: Lens' RevertZoneResponse (Maybe Zone)
+rzrZone = lens _rzrZone (\ s a -> s{_rzrZone = a})
+
+instance FromJSON RevertZoneResponse where
+        parseJSON
+          = withObject "RevertZoneResponse"
+              (\ o -> RevertZoneResponse' <$> (o .:? "zone"))
+
+instance ToJSON RevertZoneResponse where
+        toJSON RevertZoneResponse'{..}
+          = object (catMaybes [("zone" .=) <$> _rzrZone])
 
 -- | List Environments Response.
 --
@@ -429,6 +459,7 @@ data ContainerVersionHeader =
     , _cvhNumZones           :: !(Maybe Text)
     , _cvhNumRules           :: !(Maybe Text)
     , _cvhNumVariables       :: !(Maybe Text)
+    , _cvhNumCustomTemplates :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -460,6 +491,8 @@ data ContainerVersionHeader =
 -- * 'cvhNumRules'
 --
 -- * 'cvhNumVariables'
+--
+-- * 'cvhNumCustomTemplates'
 containerVersionHeader
     :: ContainerVersionHeader
 containerVersionHeader =
@@ -476,6 +509,7 @@ containerVersionHeader =
     , _cvhNumZones = Nothing
     , _cvhNumRules = Nothing
     , _cvhNumVariables = Nothing
+    , _cvhNumCustomTemplates = Nothing
     }
 
 
@@ -541,6 +575,12 @@ cvhNumVariables
   = lens _cvhNumVariables
       (\ s a -> s{_cvhNumVariables = a})
 
+-- | Number of custom templates in the container version.
+cvhNumCustomTemplates :: Lens' ContainerVersionHeader (Maybe Text)
+cvhNumCustomTemplates
+  = lens _cvhNumCustomTemplates
+      (\ s a -> s{_cvhNumCustomTemplates = a})
+
 instance FromJSON ContainerVersionHeader where
         parseJSON
           = withObject "ContainerVersionHeader"
@@ -556,7 +596,8 @@ instance FromJSON ContainerVersionHeader where
                      <*> (o .:? "deleted")
                      <*> (o .:? "numZones")
                      <*> (o .:? "numRules")
-                     <*> (o .:? "numVariables"))
+                     <*> (o .:? "numVariables")
+                     <*> (o .:? "numCustomTemplates"))
 
 instance ToJSON ContainerVersionHeader where
         toJSON ContainerVersionHeader'{..}
@@ -573,7 +614,9 @@ instance ToJSON ContainerVersionHeader where
                   ("deleted" .=) <$> _cvhDeleted,
                   ("numZones" .=) <$> _cvhNumZones,
                   ("numRules" .=) <$> _cvhNumRules,
-                  ("numVariables" .=) <$> _cvhNumVariables])
+                  ("numVariables" .=) <$> _cvhNumVariables,
+                  ("numCustomTemplates" .=) <$>
+                    _cvhNumCustomTemplates])
 
 -- | Represents a tag that fires after another tag in order to tear down
 -- dependencies.
@@ -1598,45 +1641,6 @@ instance ToJSON ListUserPermissionsResponse where
                  [("nextPageToken" .=) <$> _luprNextPageToken,
                   ("userPermission" .=) <$> _luprUserPermission])
 
--- | A comment from the reviewer or author.
---
--- /See:/ 'workspaceProposalHistoryComment' smart constructor.
-newtype WorkspaceProposalHistoryComment =
-  WorkspaceProposalHistoryComment'
-    { _wphcContent :: Maybe Text
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'WorkspaceProposalHistoryComment' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wphcContent'
-workspaceProposalHistoryComment
-    :: WorkspaceProposalHistoryComment
-workspaceProposalHistoryComment =
-  WorkspaceProposalHistoryComment' {_wphcContent = Nothing}
-
-
--- | The contents of the reviewer or author comment.
-wphcContent :: Lens' WorkspaceProposalHistoryComment (Maybe Text)
-wphcContent
-  = lens _wphcContent (\ s a -> s{_wphcContent = a})
-
-instance FromJSON WorkspaceProposalHistoryComment
-         where
-        parseJSON
-          = withObject "WorkspaceProposalHistoryComment"
-              (\ o ->
-                 WorkspaceProposalHistoryComment' <$>
-                   (o .:? "content"))
-
-instance ToJSON WorkspaceProposalHistoryComment where
-        toJSON WorkspaceProposalHistoryComment'{..}
-          = object
-              (catMaybes [("content" .=) <$> _wphcContent])
-
 --
 -- /See:/ 'createBuiltInVariableResponse' smart constructor.
 newtype CreateBuiltInVariableResponse =
@@ -1677,92 +1681,6 @@ instance ToJSON CreateBuiltInVariableResponse where
           = object
               (catMaybes
                  [("builtInVariable" .=) <$> _cbivrBuiltInVariable])
-
--- | A history event that represents a comment or status change in the
--- proposal.
---
--- /See:/ 'workspaceProposalHistory' smart constructor.
-data WorkspaceProposalHistory =
-  WorkspaceProposalHistory'
-    { _wphCreatedBy        :: !(Maybe WorkspaceProposalUser)
-    , _wphStatusChange     :: !(Maybe WorkspaceProposalHistoryStatusChange)
-    , _wphType             :: !(Maybe WorkspaceProposalHistoryType)
-    , _wphComment          :: !(Maybe WorkspaceProposalHistoryComment)
-    , _wphCreatedTimestamp :: !(Maybe Timestamp)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'WorkspaceProposalHistory' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wphCreatedBy'
---
--- * 'wphStatusChange'
---
--- * 'wphType'
---
--- * 'wphComment'
---
--- * 'wphCreatedTimestamp'
-workspaceProposalHistory
-    :: WorkspaceProposalHistory
-workspaceProposalHistory =
-  WorkspaceProposalHistory'
-    { _wphCreatedBy = Nothing
-    , _wphStatusChange = Nothing
-    , _wphType = Nothing
-    , _wphComment = Nothing
-    , _wphCreatedTimestamp = Nothing
-    }
-
-
--- | The party responsible for the change in history.
-wphCreatedBy :: Lens' WorkspaceProposalHistory (Maybe WorkspaceProposalUser)
-wphCreatedBy
-  = lens _wphCreatedBy (\ s a -> s{_wphCreatedBy = a})
-
--- | A change in the proposal\'s status.
-wphStatusChange :: Lens' WorkspaceProposalHistory (Maybe WorkspaceProposalHistoryStatusChange)
-wphStatusChange
-  = lens _wphStatusChange
-      (\ s a -> s{_wphStatusChange = a})
-
--- | The history type distinguishing between comments and status changes.
-wphType :: Lens' WorkspaceProposalHistory (Maybe WorkspaceProposalHistoryType)
-wphType = lens _wphType (\ s a -> s{_wphType = a})
-
--- | A user or reviewer comment.
-wphComment :: Lens' WorkspaceProposalHistory (Maybe WorkspaceProposalHistoryComment)
-wphComment
-  = lens _wphComment (\ s a -> s{_wphComment = a})
-
--- | When this history event was added to the workspace proposal.
-wphCreatedTimestamp :: Lens' WorkspaceProposalHistory (Maybe Timestamp)
-wphCreatedTimestamp
-  = lens _wphCreatedTimestamp
-      (\ s a -> s{_wphCreatedTimestamp = a})
-
-instance FromJSON WorkspaceProposalHistory where
-        parseJSON
-          = withObject "WorkspaceProposalHistory"
-              (\ o ->
-                 WorkspaceProposalHistory' <$>
-                   (o .:? "createdBy") <*> (o .:? "statusChange") <*>
-                     (o .:? "type")
-                     <*> (o .:? "comment")
-                     <*> (o .:? "createdTimestamp"))
-
-instance ToJSON WorkspaceProposalHistory where
-        toJSON WorkspaceProposalHistory'{..}
-          = object
-              (catMaybes
-                 [("createdBy" .=) <$> _wphCreatedBy,
-                  ("statusChange" .=) <$> _wphStatusChange,
-                  ("type" .=) <$> _wphType,
-                  ("comment" .=) <$> _wphComment,
-                  ("createdTimestamp" .=) <$> _wphCreatedTimestamp])
 
 -- | Represents a child container of a Zone.
 --
@@ -2119,6 +2037,7 @@ data Variable =
     , _vDisablingTriggerId :: !(Maybe [Text])
     , _vName               :: !(Maybe Text)
     , _vTagManagerURL      :: !(Maybe Text)
+    , _vFormatValue        :: !(Maybe VariableFormatValue)
     , _vWorkspaceId        :: !(Maybe Text)
     , _vType               :: !(Maybe Text)
     , _vScheduleStartMs    :: !(Maybe (Textual Int64))
@@ -2153,6 +2072,8 @@ data Variable =
 --
 -- * 'vTagManagerURL'
 --
+-- * 'vFormatValue'
+--
 -- * 'vWorkspaceId'
 --
 -- * 'vType'
@@ -2178,6 +2099,7 @@ variable =
     , _vDisablingTriggerId = Nothing
     , _vName = Nothing
     , _vTagManagerURL = Nothing
+    , _vFormatValue = Nothing
     , _vWorkspaceId = Nothing
     , _vType = Nothing
     , _vScheduleStartMs = Nothing
@@ -2246,6 +2168,11 @@ vTagManagerURL
   = lens _vTagManagerURL
       (\ s a -> s{_vTagManagerURL = a})
 
+-- | Option to convert a variable value to other value.
+vFormatValue :: Lens' Variable (Maybe VariableFormatValue)
+vFormatValue
+  = lens _vFormatValue (\ s a -> s{_vFormatValue = a})
+
 -- | GTM Workspace ID.
 vWorkspaceId :: Lens' Variable (Maybe Text)
 vWorkspaceId
@@ -2298,6 +2225,7 @@ instance FromJSON Variable where
                      <*> (o .:? "disablingTriggerId" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "tagManagerUrl")
+                     <*> (o .:? "formatValue")
                      <*> (o .:? "workspaceId")
                      <*> (o .:? "type")
                      <*> (o .:? "scheduleStartMs")
@@ -2319,6 +2247,7 @@ instance ToJSON Variable where
                   ("disablingTriggerId" .=) <$> _vDisablingTriggerId,
                   ("name" .=) <$> _vName,
                   ("tagManagerUrl" .=) <$> _vTagManagerURL,
+                  ("formatValue" .=) <$> _vFormatValue,
                   ("workspaceId" .=) <$> _vWorkspaceId,
                   ("type" .=) <$> _vType,
                   ("scheduleStartMs" .=) <$> _vScheduleStartMs,
@@ -2679,86 +2608,6 @@ instance ToJSON Account where
                   ("accountId" .=) <$> _aAccountId,
                   ("name" .=) <$> _aName,
                   ("tagManagerUrl" .=) <$> _aTagManagerURL])
-
--- | Updates a workspace proposal with patch-like semantics.
---
--- /See:/ 'updateWorkspaceProposalRequest' smart constructor.
-data UpdateWorkspaceProposalRequest =
-  UpdateWorkspaceProposalRequest'
-    { _uwprStatus      :: !(Maybe UpdateWorkspaceProposalRequestStatus)
-    , _uwprNewComment  :: !(Maybe WorkspaceProposalHistoryComment)
-    , _uwprFingerprint :: !(Maybe Text)
-    , _uwprReviewers   :: !(Maybe [WorkspaceProposalUser])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'UpdateWorkspaceProposalRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uwprStatus'
---
--- * 'uwprNewComment'
---
--- * 'uwprFingerprint'
---
--- * 'uwprReviewers'
-updateWorkspaceProposalRequest
-    :: UpdateWorkspaceProposalRequest
-updateWorkspaceProposalRequest =
-  UpdateWorkspaceProposalRequest'
-    { _uwprStatus = Nothing
-    , _uwprNewComment = Nothing
-    , _uwprFingerprint = Nothing
-    , _uwprReviewers = Nothing
-    }
-
-
--- | If present, the status of the workspace proposal is updated.
-uwprStatus :: Lens' UpdateWorkspaceProposalRequest (Maybe UpdateWorkspaceProposalRequestStatus)
-uwprStatus
-  = lens _uwprStatus (\ s a -> s{_uwprStatus = a})
-
--- | If present, a new comment is added to the workspace proposal history.
-uwprNewComment :: Lens' UpdateWorkspaceProposalRequest (Maybe WorkspaceProposalHistoryComment)
-uwprNewComment
-  = lens _uwprNewComment
-      (\ s a -> s{_uwprNewComment = a})
-
--- | When provided, this fingerprint must match the fingerprint of the
--- proposal in storage.
-uwprFingerprint :: Lens' UpdateWorkspaceProposalRequest (Maybe Text)
-uwprFingerprint
-  = lens _uwprFingerprint
-      (\ s a -> s{_uwprFingerprint = a})
-
--- | If present, the list of reviewers of the workspace proposal is updated.
-uwprReviewers :: Lens' UpdateWorkspaceProposalRequest [WorkspaceProposalUser]
-uwprReviewers
-  = lens _uwprReviewers
-      (\ s a -> s{_uwprReviewers = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON UpdateWorkspaceProposalRequest
-         where
-        parseJSON
-          = withObject "UpdateWorkspaceProposalRequest"
-              (\ o ->
-                 UpdateWorkspaceProposalRequest' <$>
-                   (o .:? "status") <*> (o .:? "newComment") <*>
-                     (o .:? "fingerprint")
-                     <*> (o .:? "reviewers" .!= mempty))
-
-instance ToJSON UpdateWorkspaceProposalRequest where
-        toJSON UpdateWorkspaceProposalRequest'{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _uwprStatus,
-                  ("newComment" .=) <$> _uwprNewComment,
-                  ("fingerprint" .=) <$> _uwprFingerprint,
-                  ("reviewers" .=) <$> _uwprReviewers])
 
 -- | The changes that have occurred in the workspace since the base container
 -- version.
@@ -3291,6 +3140,7 @@ data ContainerVersion =
     , _cvTagManagerURL      :: !(Maybe Text)
     , _cvDeleted            :: !(Maybe Bool)
     , _cvTrigger            :: !(Maybe [Trigger])
+    , _cvCustomTemplate     :: !(Maybe [CustomTemplate])
     , _cvDescription        :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3330,6 +3180,8 @@ data ContainerVersion =
 --
 -- * 'cvTrigger'
 --
+-- * 'cvCustomTemplate'
+--
 -- * 'cvDescription'
 containerVersion
     :: ContainerVersion
@@ -3350,6 +3202,7 @@ containerVersion =
     , _cvTagManagerURL = Nothing
     , _cvDeleted = Nothing
     , _cvTrigger = Nothing
+    , _cvCustomTemplate = Nothing
     , _cvDescription = Nothing
     }
 
@@ -3445,6 +3298,14 @@ cvTrigger
       _Default
       . _Coerce
 
+-- | The custom templates in the container that this version was taken from.
+cvCustomTemplate :: Lens' ContainerVersion [CustomTemplate]
+cvCustomTemplate
+  = lens _cvCustomTemplate
+      (\ s a -> s{_cvCustomTemplate = a})
+      . _Default
+      . _Coerce
+
 -- | Container version description.
 cvDescription :: Lens' ContainerVersion (Maybe Text)
 cvDescription
@@ -3470,6 +3331,7 @@ instance FromJSON ContainerVersion where
                      <*> (o .:? "tagManagerUrl")
                      <*> (o .:? "deleted")
                      <*> (o .:? "trigger" .!= mempty)
+                     <*> (o .:? "customTemplate" .!= mempty)
                      <*> (o .:? "description"))
 
 instance ToJSON ContainerVersion where
@@ -3491,6 +3353,7 @@ instance ToJSON ContainerVersion where
                   ("tagManagerUrl" .=) <$> _cvTagManagerURL,
                   ("deleted" .=) <$> _cvDeleted,
                   ("trigger" .=) <$> _cvTrigger,
+                  ("customTemplate" .=) <$> _cvCustomTemplate,
                   ("description" .=) <$> _cvDescription])
 
 -- | Represents a reference to atag that fires before another tag in order to
@@ -4142,55 +4005,137 @@ instance ToJSON ListEnabledBuiltInVariablesResponse
                  [("nextPageToken" .=) <$> _lebivrNextPageToken,
                   ("builtInVariable" .=) <$> _lebivrBuiltInVariable])
 
--- | Represents an external user or internal Google Tag Manager system.
+-- | Represents a Google Tag Manager Custom Template\'s contents.
 --
--- /See:/ 'workspaceProposalUser' smart constructor.
-data WorkspaceProposalUser =
-  WorkspaceProposalUser'
-    { _wpuGaiaId :: !(Maybe (Textual Int64))
-    , _wpuType   :: !(Maybe WorkspaceProposalUserType)
+-- /See:/ 'customTemplate' smart constructor.
+data CustomTemplate =
+  CustomTemplate'
+    { _ctContainerId   :: !(Maybe Text)
+    , _ctPath          :: !(Maybe Text)
+    , _ctTemplateId    :: !(Maybe Text)
+    , _ctFingerprint   :: !(Maybe Text)
+    , _ctAccountId     :: !(Maybe Text)
+    , _ctName          :: !(Maybe Text)
+    , _ctTagManagerURL :: !(Maybe Text)
+    , _ctTemplateData  :: !(Maybe Text)
+    , _ctWorkspaceId   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'WorkspaceProposalUser' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wpuGaiaId'
+-- * 'ctContainerId'
 --
--- * 'wpuType'
-workspaceProposalUser
-    :: WorkspaceProposalUser
-workspaceProposalUser =
-  WorkspaceProposalUser' {_wpuGaiaId = Nothing, _wpuType = Nothing}
+-- * 'ctPath'
+--
+-- * 'ctTemplateId'
+--
+-- * 'ctFingerprint'
+--
+-- * 'ctAccountId'
+--
+-- * 'ctName'
+--
+-- * 'ctTagManagerURL'
+--
+-- * 'ctTemplateData'
+--
+-- * 'ctWorkspaceId'
+customTemplate
+    :: CustomTemplate
+customTemplate =
+  CustomTemplate'
+    { _ctContainerId = Nothing
+    , _ctPath = Nothing
+    , _ctTemplateId = Nothing
+    , _ctFingerprint = Nothing
+    , _ctAccountId = Nothing
+    , _ctName = Nothing
+    , _ctTagManagerURL = Nothing
+    , _ctTemplateData = Nothing
+    , _ctWorkspaceId = Nothing
+    }
 
 
--- | Gaia id associated with a user, absent for the Google Tag Manager
--- system.
-wpuGaiaId :: Lens' WorkspaceProposalUser (Maybe Int64)
-wpuGaiaId
-  = lens _wpuGaiaId (\ s a -> s{_wpuGaiaId = a}) .
-      mapping _Coerce
+-- | GTM Container ID.
+ctContainerId :: Lens' CustomTemplate (Maybe Text)
+ctContainerId
+  = lens _ctContainerId
+      (\ s a -> s{_ctContainerId = a})
 
--- | User type distinguishes between a user and the Google Tag Manager
--- system.
-wpuType :: Lens' WorkspaceProposalUser (Maybe WorkspaceProposalUserType)
-wpuType = lens _wpuType (\ s a -> s{_wpuType = a})
+-- | GTM Custom Template\'s API relative path.
+ctPath :: Lens' CustomTemplate (Maybe Text)
+ctPath = lens _ctPath (\ s a -> s{_ctPath = a})
 
-instance FromJSON WorkspaceProposalUser where
+-- | The Custom Template ID uniquely identifies the GTM custom template.
+ctTemplateId :: Lens' CustomTemplate (Maybe Text)
+ctTemplateId
+  = lens _ctTemplateId (\ s a -> s{_ctTemplateId = a})
+
+-- | The fingerprint of the GTM Custom Template as computed at storage time.
+-- This value is recomputed whenever the template is modified.
+ctFingerprint :: Lens' CustomTemplate (Maybe Text)
+ctFingerprint
+  = lens _ctFingerprint
+      (\ s a -> s{_ctFingerprint = a})
+
+-- | GTM Account ID.
+ctAccountId :: Lens' CustomTemplate (Maybe Text)
+ctAccountId
+  = lens _ctAccountId (\ s a -> s{_ctAccountId = a})
+
+-- | Custom Template display name.
+ctName :: Lens' CustomTemplate (Maybe Text)
+ctName = lens _ctName (\ s a -> s{_ctName = a})
+
+-- | Auto generated link to the tag manager UI
+ctTagManagerURL :: Lens' CustomTemplate (Maybe Text)
+ctTagManagerURL
+  = lens _ctTagManagerURL
+      (\ s a -> s{_ctTagManagerURL = a})
+
+-- | The custom template in text format.
+ctTemplateData :: Lens' CustomTemplate (Maybe Text)
+ctTemplateData
+  = lens _ctTemplateData
+      (\ s a -> s{_ctTemplateData = a})
+
+-- | GTM Workspace ID.
+ctWorkspaceId :: Lens' CustomTemplate (Maybe Text)
+ctWorkspaceId
+  = lens _ctWorkspaceId
+      (\ s a -> s{_ctWorkspaceId = a})
+
+instance FromJSON CustomTemplate where
         parseJSON
-          = withObject "WorkspaceProposalUser"
+          = withObject "CustomTemplate"
               (\ o ->
-                 WorkspaceProposalUser' <$>
-                   (o .:? "gaiaId") <*> (o .:? "type"))
+                 CustomTemplate' <$>
+                   (o .:? "containerId") <*> (o .:? "path") <*>
+                     (o .:? "templateId")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "tagManagerUrl")
+                     <*> (o .:? "templateData")
+                     <*> (o .:? "workspaceId"))
 
-instance ToJSON WorkspaceProposalUser where
-        toJSON WorkspaceProposalUser'{..}
+instance ToJSON CustomTemplate where
+        toJSON CustomTemplate'{..}
           = object
               (catMaybes
-                 [("gaiaId" .=) <$> _wpuGaiaId,
-                  ("type" .=) <$> _wpuType])
+                 [("containerId" .=) <$> _ctContainerId,
+                  ("path" .=) <$> _ctPath,
+                  ("templateId" .=) <$> _ctTemplateId,
+                  ("fingerprint" .=) <$> _ctFingerprint,
+                  ("accountId" .=) <$> _ctAccountId,
+                  ("name" .=) <$> _ctName,
+                  ("tagManagerUrl" .=) <$> _ctTagManagerURL,
+                  ("templateData" .=) <$> _ctTemplateData,
+                  ("workspaceId" .=) <$> _ctWorkspaceId])
 
 -- | Represents a Google Tag Manager Folder\'s contents.
 --
@@ -4542,19 +4487,20 @@ instance ToJSON ContainerAccess where
                   ("permission" .=) <$> _caPermission])
 
 -- | A Timestamp represents a point in time independent of any time zone or
--- calendar, represented as seconds and fractions of seconds at nanosecond
--- resolution in UTC Epoch time. It is encoded using the Proleptic
--- Gregorian Calendar which extends the Gregorian calendar backwards to
--- year one. It is encoded assuming all minutes are 60 seconds long, i.e.
--- leap seconds are \"smeared\" so that no leap second table is needed for
--- interpretation. Range is from 0001-01-01T00:00:00Z to
--- 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure
--- that we can convert to and from RFC 3339 date strings. See
--- [https:\/\/www.ietf.org\/rfc\/rfc3339.txt](https:\/\/www.ietf.org\/rfc\/rfc3339.txt).
--- # Examples Example 1: Compute Timestamp from POSIX \`time()\`. Timestamp
--- timestamp; timestamp.set_seconds(time(NULL)); timestamp.set_nanos(0);
--- Example 2: Compute Timestamp from POSIX \`gettimeofday()\`. struct
--- timeval tv; gettimeofday(&tv, NULL); Timestamp timestamp;
+-- local calendar, encoded as a count of seconds and fractions of seconds
+-- at nanosecond resolution. The count is relative to an epoch at UTC
+-- midnight on January 1, 1970, in the proleptic Gregorian calendar which
+-- extends the Gregorian calendar backwards to year one. All minutes are 60
+-- seconds long. Leap seconds are \"smeared\" so that no leap second table
+-- is needed for interpretation, using a [24-hour linear
+-- smear](https:\/\/developers.google.com\/time\/smear). The range is from
+-- 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting
+-- to that range, we ensure that we can convert to and from [RFC
+-- 3339](https:\/\/www.ietf.org\/rfc\/rfc3339.txt) date strings. # Examples
+-- Example 1: Compute Timestamp from POSIX \`time()\`. Timestamp timestamp;
+-- timestamp.set_seconds(time(NULL)); timestamp.set_nanos(0); Example 2:
+-- Compute Timestamp from POSIX \`gettimeofday()\`. struct timeval tv;
+-- gettimeofday(&tv, NULL); Timestamp timestamp;
 -- timestamp.set_seconds(tv.tv_sec); timestamp.set_nanos(tv.tv_usec *
 -- 1000); Example 3: Compute Timestamp from Win32
 -- \`GetSystemTimeAsFileTime()\`. FILETIME ft;
@@ -4578,18 +4524,21 @@ instance ToJSON ContainerAccess where
 -- {hour}, {min}, and {sec} are zero-padded to two digits each. The
 -- fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond
 -- resolution), are optional. The \"Z\" suffix indicates the timezone
--- (\"UTC\"); the timezone is required, though only UTC (as indicated by
--- \"Z\") is presently supported. For example, \"2017-01-15T01:30:15.01Z\"
--- encodes 15.01 seconds past 01:30 UTC on January 15, 2017. In JavaScript,
--- one can convert a Date object to this format using the standard
--- [toISOString()](https:\/\/developer.mozilla.org\/en-US\/docs\/Web\/JavaScript\/Reference\/Global_Objects\/Date\/toISOString]
+-- (\"UTC\"); the timezone is required. A proto3 JSON serializer should
+-- always use UTC (as indicated by \"Z\") when printing the Timestamp type
+-- and a proto3 JSON parser should be able to accept both UTC and other
+-- timezones (as indicated by an offset). For example,
+-- \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past 01:30 UTC on
+-- January 15, 2017. In JavaScript, one can convert a Date object to this
+-- format using the standard
+-- [toISOString()](https:\/\/developer.mozilla.org\/en-US\/docs\/Web\/JavaScript\/Reference\/Global_Objects\/Date\/toISOString)
 -- method. In Python, a standard \`datetime.datetime\` object can be
 -- converted to this format using
 -- [\`strftime\`](https:\/\/docs.python.org\/2\/library\/time.html#time.strftime)
 -- with the time format spec \'%Y-%m-%dT%H:%M:%S.%fZ\'. Likewise, in Java,
 -- one can use the Joda Time\'s [\`ISODateTimeFormat.dateTime()\`](
--- http:\/\/joda-time.sourceforge.net\/apidocs\/org\/joda\/time\/format\/ISODateTimeFormat.html#dateTime())
--- to obtain a formatter capable of generating timestamps in this format.
+-- http:\/\/www.joda.org\/joda-time\/apidocs\/org\/joda\/time\/format\/ISODateTimeFormat.html#dateTime%2D%2D
+-- ) to obtain a formatter capable of generating timestamps in this format.
 --
 -- /See:/ 'timestamp' smart constructor.
 data Timestamp =
@@ -4640,6 +4589,99 @@ instance ToJSON Timestamp where
                  [("nanos" .=) <$> _tNanos,
                   ("seconds" .=) <$> _tSeconds])
 
+--
+-- /See:/ 'variableFormatValue' smart constructor.
+data VariableFormatValue =
+  VariableFormatValue'
+    { _vfvConvertNullToValue      :: !(Maybe Parameter)
+    , _vfvConvertTrueToValue      :: !(Maybe Parameter)
+    , _vfvCaseConversionType      :: !(Maybe VariableFormatValueCaseConversionType)
+    , _vfvConvertFalseToValue     :: !(Maybe Parameter)
+    , _vfvConvertUndefinedToValue :: !(Maybe Parameter)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'VariableFormatValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vfvConvertNullToValue'
+--
+-- * 'vfvConvertTrueToValue'
+--
+-- * 'vfvCaseConversionType'
+--
+-- * 'vfvConvertFalseToValue'
+--
+-- * 'vfvConvertUndefinedToValue'
+variableFormatValue
+    :: VariableFormatValue
+variableFormatValue =
+  VariableFormatValue'
+    { _vfvConvertNullToValue = Nothing
+    , _vfvConvertTrueToValue = Nothing
+    , _vfvCaseConversionType = Nothing
+    , _vfvConvertFalseToValue = Nothing
+    , _vfvConvertUndefinedToValue = Nothing
+    }
+
+
+-- | The value to convert if a variable value is null.
+vfvConvertNullToValue :: Lens' VariableFormatValue (Maybe Parameter)
+vfvConvertNullToValue
+  = lens _vfvConvertNullToValue
+      (\ s a -> s{_vfvConvertNullToValue = a})
+
+-- | The value to convert if a variable value is true.
+vfvConvertTrueToValue :: Lens' VariableFormatValue (Maybe Parameter)
+vfvConvertTrueToValue
+  = lens _vfvConvertTrueToValue
+      (\ s a -> s{_vfvConvertTrueToValue = a})
+
+-- | The option to convert a string-type variable value to either lowercase
+-- or uppercase.
+vfvCaseConversionType :: Lens' VariableFormatValue (Maybe VariableFormatValueCaseConversionType)
+vfvCaseConversionType
+  = lens _vfvCaseConversionType
+      (\ s a -> s{_vfvCaseConversionType = a})
+
+-- | The value to convert if a variable value is false.
+vfvConvertFalseToValue :: Lens' VariableFormatValue (Maybe Parameter)
+vfvConvertFalseToValue
+  = lens _vfvConvertFalseToValue
+      (\ s a -> s{_vfvConvertFalseToValue = a})
+
+-- | The value to convert if a variable value is undefined.
+vfvConvertUndefinedToValue :: Lens' VariableFormatValue (Maybe Parameter)
+vfvConvertUndefinedToValue
+  = lens _vfvConvertUndefinedToValue
+      (\ s a -> s{_vfvConvertUndefinedToValue = a})
+
+instance FromJSON VariableFormatValue where
+        parseJSON
+          = withObject "VariableFormatValue"
+              (\ o ->
+                 VariableFormatValue' <$>
+                   (o .:? "convertNullToValue") <*>
+                     (o .:? "convertTrueToValue")
+                     <*> (o .:? "caseConversionType")
+                     <*> (o .:? "convertFalseToValue")
+                     <*> (o .:? "convertUndefinedToValue"))
+
+instance ToJSON VariableFormatValue where
+        toJSON VariableFormatValue'{..}
+          = object
+              (catMaybes
+                 [("convertNullToValue" .=) <$>
+                    _vfvConvertNullToValue,
+                  ("convertTrueToValue" .=) <$> _vfvConvertTrueToValue,
+                  ("caseConversionType" .=) <$> _vfvCaseConversionType,
+                  ("convertFalseToValue" .=) <$>
+                    _vfvConvertFalseToValue,
+                  ("convertUndefinedToValue" .=) <$>
+                    _vfvConvertUndefinedToValue])
+
 -- | The result of reverting a built-in variable in a workspace.
 --
 -- /See:/ 'revertBuiltInVariableResponse' smart constructor.
@@ -4676,162 +4718,6 @@ instance ToJSON RevertBuiltInVariableResponse where
         toJSON RevertBuiltInVariableResponse'{..}
           = object
               (catMaybes [("enabled" .=) <$> _rbivrEnabled])
-
--- | A change in the proposal\'s status.
---
--- /See:/ 'workspaceProposalHistoryStatusChange' smart constructor.
-data WorkspaceProposalHistoryStatusChange =
-  WorkspaceProposalHistoryStatusChange'
-    { _wphscOldStatus :: !(Maybe WorkspaceProposalHistoryStatusChangeOldStatus)
-    , _wphscNewStatus :: !(Maybe WorkspaceProposalHistoryStatusChangeNewStatus)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'WorkspaceProposalHistoryStatusChange' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wphscOldStatus'
---
--- * 'wphscNewStatus'
-workspaceProposalHistoryStatusChange
-    :: WorkspaceProposalHistoryStatusChange
-workspaceProposalHistoryStatusChange =
-  WorkspaceProposalHistoryStatusChange'
-    {_wphscOldStatus = Nothing, _wphscNewStatus = Nothing}
-
-
--- | The old proposal status before the status change.
-wphscOldStatus :: Lens' WorkspaceProposalHistoryStatusChange (Maybe WorkspaceProposalHistoryStatusChangeOldStatus)
-wphscOldStatus
-  = lens _wphscOldStatus
-      (\ s a -> s{_wphscOldStatus = a})
-
--- | The new proposal status after that status change.
-wphscNewStatus :: Lens' WorkspaceProposalHistoryStatusChange (Maybe WorkspaceProposalHistoryStatusChangeNewStatus)
-wphscNewStatus
-  = lens _wphscNewStatus
-      (\ s a -> s{_wphscNewStatus = a})
-
-instance FromJSON
-           WorkspaceProposalHistoryStatusChange
-         where
-        parseJSON
-          = withObject "WorkspaceProposalHistoryStatusChange"
-              (\ o ->
-                 WorkspaceProposalHistoryStatusChange' <$>
-                   (o .:? "oldStatus") <*> (o .:? "newStatus"))
-
-instance ToJSON WorkspaceProposalHistoryStatusChange
-         where
-        toJSON WorkspaceProposalHistoryStatusChange'{..}
-          = object
-              (catMaybes
-                 [("oldStatus" .=) <$> _wphscOldStatus,
-                  ("newStatus" .=) <$> _wphscNewStatus])
-
--- | A workspace proposal represents an ongoing review of workspace changes
--- in an effort to gain approval for container version creation.
---
--- /See:/ 'workspaceProposal' smart constructor.
-data WorkspaceProposal =
-  WorkspaceProposal'
-    { _wpStatus      :: !(Maybe WorkspaceProposalStatus)
-    , _wpHistory     :: !(Maybe [WorkspaceProposalHistory])
-    , _wpPath        :: !(Maybe Text)
-    , _wpFingerprint :: !(Maybe Text)
-    , _wpAuthors     :: !(Maybe [WorkspaceProposalUser])
-    , _wpReviewers   :: !(Maybe [WorkspaceProposalUser])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'WorkspaceProposal' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wpStatus'
---
--- * 'wpHistory'
---
--- * 'wpPath'
---
--- * 'wpFingerprint'
---
--- * 'wpAuthors'
---
--- * 'wpReviewers'
-workspaceProposal
-    :: WorkspaceProposal
-workspaceProposal =
-  WorkspaceProposal'
-    { _wpStatus = Nothing
-    , _wpHistory = Nothing
-    , _wpPath = Nothing
-    , _wpFingerprint = Nothing
-    , _wpAuthors = Nothing
-    , _wpReviewers = Nothing
-    }
-
-
--- | The status of the workspace proposal as it goes through review.
-wpStatus :: Lens' WorkspaceProposal (Maybe WorkspaceProposalStatus)
-wpStatus = lens _wpStatus (\ s a -> s{_wpStatus = a})
-
--- | Records the history of comments and status changes.
-wpHistory :: Lens' WorkspaceProposal [WorkspaceProposalHistory]
-wpHistory
-  = lens _wpHistory (\ s a -> s{_wpHistory = a}) .
-      _Default
-      . _Coerce
-
--- | GTM workspace proposal\'s relative path.
-wpPath :: Lens' WorkspaceProposal (Maybe Text)
-wpPath = lens _wpPath (\ s a -> s{_wpPath = a})
-
--- | The fingerprint of the GTM workspace proposal as computed at storage
--- time. This value is recomputed whenever the proposal is modified.
-wpFingerprint :: Lens' WorkspaceProposal (Maybe Text)
-wpFingerprint
-  = lens _wpFingerprint
-      (\ s a -> s{_wpFingerprint = a})
-
--- | List of authors for the workspace proposal.
-wpAuthors :: Lens' WorkspaceProposal [WorkspaceProposalUser]
-wpAuthors
-  = lens _wpAuthors (\ s a -> s{_wpAuthors = a}) .
-      _Default
-      . _Coerce
-
--- | Lists of reviewers for the workspace proposal.
-wpReviewers :: Lens' WorkspaceProposal [WorkspaceProposalUser]
-wpReviewers
-  = lens _wpReviewers (\ s a -> s{_wpReviewers = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON WorkspaceProposal where
-        parseJSON
-          = withObject "WorkspaceProposal"
-              (\ o ->
-                 WorkspaceProposal' <$>
-                   (o .:? "status") <*> (o .:? "history" .!= mempty) <*>
-                     (o .:? "path")
-                     <*> (o .:? "fingerprint")
-                     <*> (o .:? "authors" .!= mempty)
-                     <*> (o .:? "reviewers" .!= mempty))
-
-instance ToJSON WorkspaceProposal where
-        toJSON WorkspaceProposal'{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _wpStatus,
-                  ("history" .=) <$> _wpHistory,
-                  ("path" .=) <$> _wpPath,
-                  ("fingerprint" .=) <$> _wpFingerprint,
-                  ("authors" .=) <$> _wpAuthors,
-                  ("reviewers" .=) <$> _wpReviewers])
 
 -- | Represents a Google Tag Manager Parameter.
 --

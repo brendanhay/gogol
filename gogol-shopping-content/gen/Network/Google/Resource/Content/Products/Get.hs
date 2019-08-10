@@ -85,7 +85,7 @@ pggMerchantId
       (\ s a -> s{_pggMerchantId = a})
       . _Coerce
 
--- | The REST id of the product.
+-- | The REST ID of the product.
 pggProductId :: Lens' ProductsGet Text
 pggProductId
   = lens _pggProductId (\ s a -> s{_pggProductId = a})

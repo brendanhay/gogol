@@ -2224,7 +2224,7 @@ instance ToJSON PricePerBuyer where
                   ("advertiserIds" .=) <$> _ppbAdvertiserIds,
                   ("buyer" .=) <$> _ppbBuyer])
 
--- | A creative and its classification data. Next ID: 40
+-- | A creative and its classification data.
 --
 -- /See:/ 'creative' smart constructor.
 data Creative =
@@ -2531,7 +2531,9 @@ cOpenAuctionStatus
   = lens _cOpenAuctionStatus
       (\ s a -> s{_cOpenAuctionStatus = a})
 
--- | \'OutputOnly The filtering stats for this creative.
+-- | \'OutputOnly The filtering stats for this creative. Deprecated; please
+-- use bidders.accounts.filterSets.filteredBids.creatives.list method
+-- instead.
 cFilteringStats :: Lens' Creative (Maybe FilteringStats)
 cFilteringStats
   = lens _cFilteringStats

@@ -138,7 +138,8 @@ gmdCallback
 
 instance GoogleRequest GroupsMembershipsDelete where
         type Rs GroupsMembershipsDelete = Operation
-        type Scopes GroupsMembershipsDelete = '[]
+        type Scopes GroupsMembershipsDelete =
+             '["https://www.googleapis.com/auth/cloud-identity.groups"]
         requestClient GroupsMembershipsDelete'{..}
           = go _gmdName _gmdXgafv _gmdUploadProtocol
               _gmdAccessToken

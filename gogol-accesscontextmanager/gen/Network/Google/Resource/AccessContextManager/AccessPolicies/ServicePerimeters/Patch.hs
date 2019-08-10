@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.patch@ method which the
 -- 'AccessPoliciesServicePerimetersPatch' request conforms to.
 type AccessPoliciesServicePerimetersPatchResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

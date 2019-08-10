@@ -151,9 +151,9 @@ pucResourceName
 -- updated. Multiple fields can be specified by separating them with
 -- commas. All updated fields will be replaced. Valid values are: *
 -- addresses * biographies * birthdays * emailAddresses * events * genders
--- * imClients * interests * locales * names * nicknames * occupations *
--- organizations * phoneNumbers * relations * residences * sipAddresses *
--- urls * userDefined
+-- * imClients * interests * locales * memberships * names * nicknames *
+-- occupations * organizations * phoneNumbers * relations * residences *
+-- sipAddresses * urls * userDefined
 pucUpdatePersonFields :: Lens' PeopleUpdateContact (Maybe GFieldMask)
 pucUpdatePersonFields
   = lens _pucUpdatePersonFields

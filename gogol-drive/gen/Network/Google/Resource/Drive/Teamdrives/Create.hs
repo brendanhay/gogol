@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new Team Drive.
+-- Deprecated use drives.create instead.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.teamdrives.create@.
 module Network.Google.Resource.Drive.Teamdrives.Create
@@ -50,7 +50,7 @@ type TeamdrivesCreateResource =
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] TeamDrive :> Post '[JSON] TeamDrive
 
--- | Creates a new Team Drive.
+-- | Deprecated use drives.create instead.
 --
 -- /See:/ 'teamdrivesCreate' smart constructor.
 data TeamdrivesCreate =

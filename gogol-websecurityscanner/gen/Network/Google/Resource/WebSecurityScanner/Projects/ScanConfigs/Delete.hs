@@ -47,7 +47,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.delete@ method which the
 -- 'ProjectsScanConfigsDelete' request conforms to.
 type ProjectsScanConfigsDeleteResource =
-     "v1alpha" :>
+     "v1beta" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

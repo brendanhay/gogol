@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Roll back the previously Aborted or Failed NodePool upgrade. This will
--- be an no-op if the last upgrade successfully completed.
+-- Rolls back a previously Aborted or Failed NodePool upgrade. This makes
+-- no changes if the last upgrade successfully completed.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.rollback@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Rollback
@@ -61,8 +61,8 @@ type ProjectsLocationsClustersNodePoolsRollbackResource
                      ReqBody '[JSON] RollbackNodePoolUpgradeRequest :>
                        Post '[JSON] Operation
 
--- | Roll back the previously Aborted or Failed NodePool upgrade. This will
--- be an no-op if the last upgrade successfully completed.
+-- | Rolls back a previously Aborted or Failed NodePool upgrade. This makes
+-- no changes if the last upgrade successfully completed.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsRollback' smart constructor.
 data ProjectsLocationsClustersNodePoolsRollback =

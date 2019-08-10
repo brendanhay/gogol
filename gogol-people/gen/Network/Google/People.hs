@@ -24,7 +24,6 @@ module Network.Google.People
     -- * OAuth Scopes
     , userBirthdayReadScope
     , userInfoProFileScope
-    , plusLoginScope
     , userPhoneNumbersReadScope
     , userInfoEmailScope
     , contactsReadOnlyScope
@@ -225,6 +224,7 @@ module Network.Google.People
     -- ** ContactGroupMembership
     , ContactGroupMembership
     , contactGroupMembership
+    , cgmContactGroupResourceName
     , cgmContactGroupId
 
     -- ** ContactGroupGroupType

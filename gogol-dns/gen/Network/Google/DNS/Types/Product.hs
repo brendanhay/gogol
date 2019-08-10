@@ -67,6 +67,67 @@ instance ToJSON OperationDNSKeyContext where
                  [("oldValue" .=) <$> _odkcOldValue,
                   ("newValue" .=) <$> _odkcNewValue])
 
+--
+-- /See:/ 'managedZonePrivateVisibilityConfigNetwork' smart constructor.
+data ManagedZonePrivateVisibilityConfigNetwork =
+  ManagedZonePrivateVisibilityConfigNetwork'
+    { _mzpvcnKind       :: !Text
+    , _mzpvcnNetworkURL :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ManagedZonePrivateVisibilityConfigNetwork' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mzpvcnKind'
+--
+-- * 'mzpvcnNetworkURL'
+managedZonePrivateVisibilityConfigNetwork
+    :: ManagedZonePrivateVisibilityConfigNetwork
+managedZonePrivateVisibilityConfigNetwork =
+  ManagedZonePrivateVisibilityConfigNetwork'
+    { _mzpvcnKind = "dns#managedZonePrivateVisibilityConfigNetwork"
+    , _mzpvcnNetworkURL = Nothing
+    }
+
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dns#managedZonePrivateVisibilityConfigNetwork\".
+mzpvcnKind :: Lens' ManagedZonePrivateVisibilityConfigNetwork Text
+mzpvcnKind
+  = lens _mzpvcnKind (\ s a -> s{_mzpvcnKind = a})
+
+-- | The fully qualified URL of the VPC network to bind to. This should be
+-- formatted like
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/{project}\/global\/networks\/{network}
+mzpvcnNetworkURL :: Lens' ManagedZonePrivateVisibilityConfigNetwork (Maybe Text)
+mzpvcnNetworkURL
+  = lens _mzpvcnNetworkURL
+      (\ s a -> s{_mzpvcnNetworkURL = a})
+
+instance FromJSON
+           ManagedZonePrivateVisibilityConfigNetwork
+         where
+        parseJSON
+          = withObject
+              "ManagedZonePrivateVisibilityConfigNetwork"
+              (\ o ->
+                 ManagedZonePrivateVisibilityConfigNetwork' <$>
+                   (o .:? "kind" .!=
+                      "dns#managedZonePrivateVisibilityConfigNetwork")
+                     <*> (o .:? "networkUrl"))
+
+instance ToJSON
+           ManagedZonePrivateVisibilityConfigNetwork
+         where
+        toJSON ManagedZonePrivateVisibilityConfigNetwork'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _mzpvcnKind),
+                  ("networkUrl" .=) <$> _mzpvcnNetworkURL])
+
 -- | The response to a request to enumerate DnsKeys in a ManagedZone.
 --
 -- /See:/ 'dnsKeysListResponse' smart constructor.
@@ -1060,6 +1121,64 @@ instance ToJSON ResourceRecordSetsListResponse where
                   ("rrsets" .=) <$> _rrslrRrSets])
 
 --
+-- /See:/ 'managedZonePrivateVisibilityConfig' smart constructor.
+data ManagedZonePrivateVisibilityConfig =
+  ManagedZonePrivateVisibilityConfig'
+    { _mzpvcNetworks :: !(Maybe [ManagedZonePrivateVisibilityConfigNetwork])
+    , _mzpvcKind     :: !Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ManagedZonePrivateVisibilityConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mzpvcNetworks'
+--
+-- * 'mzpvcKind'
+managedZonePrivateVisibilityConfig
+    :: ManagedZonePrivateVisibilityConfig
+managedZonePrivateVisibilityConfig =
+  ManagedZonePrivateVisibilityConfig'
+    { _mzpvcNetworks = Nothing
+    , _mzpvcKind = "dns#managedZonePrivateVisibilityConfig"
+    }
+
+
+-- | The list of VPC networks that can see this zone.
+mzpvcNetworks :: Lens' ManagedZonePrivateVisibilityConfig [ManagedZonePrivateVisibilityConfigNetwork]
+mzpvcNetworks
+  = lens _mzpvcNetworks
+      (\ s a -> s{_mzpvcNetworks = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dns#managedZonePrivateVisibilityConfig\".
+mzpvcKind :: Lens' ManagedZonePrivateVisibilityConfig Text
+mzpvcKind
+  = lens _mzpvcKind (\ s a -> s{_mzpvcKind = a})
+
+instance FromJSON ManagedZonePrivateVisibilityConfig
+         where
+        parseJSON
+          = withObject "ManagedZonePrivateVisibilityConfig"
+              (\ o ->
+                 ManagedZonePrivateVisibilityConfig' <$>
+                   (o .:? "networks" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "dns#managedZonePrivateVisibilityConfig"))
+
+instance ToJSON ManagedZonePrivateVisibilityConfig
+         where
+        toJSON ManagedZonePrivateVisibilityConfig'{..}
+          = object
+              (catMaybes
+                 [("networks" .=) <$> _mzpvcNetworks,
+                  Just ("kind" .= _mzpvcKind)])
+
+--
 -- /See:/ 'managedZoneDNSSecConfig' smart constructor.
 data ManagedZoneDNSSecConfig =
   ManagedZoneDNSSecConfig'
@@ -1211,7 +1330,8 @@ rrsName = lens _rrsName (\ s a -> s{_rrsName = a})
 rrsType :: Lens' ResourceRecordSet (Maybe Text)
 rrsType = lens _rrsType (\ s a -> s{_rrsType = a})
 
--- | As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1).
+-- | As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1) -- see
+-- examples.
 rrsRrDatas :: Lens' ResourceRecordSet [Text]
 rrsRrDatas
   = lens _rrsRrDatas (\ s a -> s{_rrsRrDatas = a}) .
@@ -1246,16 +1366,18 @@ instance ToJSON ResourceRecordSet where
 -- /See:/ 'managedZone' smart constructor.
 data ManagedZone =
   ManagedZone'
-    { _mzCreationTime  :: !(Maybe Text)
-    , _mzKind          :: !Text
-    , _mzNameServerSet :: !(Maybe Text)
-    , _mzName          :: !(Maybe Text)
-    , _mzId            :: !(Maybe (Textual Word64))
-    , _mzLabels        :: !(Maybe ManagedZoneLabels)
-    , _mzDNSName       :: !(Maybe Text)
-    , _mzDescription   :: !(Maybe Text)
-    , _mzDNSsecConfig  :: !(Maybe ManagedZoneDNSSecConfig)
-    , _mzNameServers   :: !(Maybe [Text])
+    { _mzCreationTime            :: !(Maybe Text)
+    , _mzKind                    :: !Text
+    , _mzNameServerSet           :: !(Maybe Text)
+    , _mzVisibility              :: !(Maybe ManagedZoneVisibility)
+    , _mzName                    :: !(Maybe Text)
+    , _mzId                      :: !(Maybe (Textual Word64))
+    , _mzLabels                  :: !(Maybe ManagedZoneLabels)
+    , _mzDNSName                 :: !(Maybe Text)
+    , _mzDescription             :: !(Maybe Text)
+    , _mzDNSsecConfig            :: !(Maybe ManagedZoneDNSSecConfig)
+    , _mzNameServers             :: !(Maybe [Text])
+    , _mzPrivateVisibilityConfig :: !(Maybe ManagedZonePrivateVisibilityConfig)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1270,6 +1392,8 @@ data ManagedZone =
 --
 -- * 'mzNameServerSet'
 --
+-- * 'mzVisibility'
+--
 -- * 'mzName'
 --
 -- * 'mzId'
@@ -1283,6 +1407,8 @@ data ManagedZone =
 -- * 'mzDNSsecConfig'
 --
 -- * 'mzNameServers'
+--
+-- * 'mzPrivateVisibilityConfig'
 managedZone
     :: ManagedZone
 managedZone =
@@ -1290,6 +1416,7 @@ managedZone =
     { _mzCreationTime = Nothing
     , _mzKind = "dns#managedZone"
     , _mzNameServerSet = Nothing
+    , _mzVisibility = Nothing
     , _mzName = Nothing
     , _mzId = Nothing
     , _mzLabels = Nothing
@@ -1297,6 +1424,7 @@ managedZone =
     , _mzDescription = Nothing
     , _mzDNSsecConfig = Nothing
     , _mzNameServers = Nothing
+    , _mzPrivateVisibilityConfig = Nothing
     }
 
 
@@ -1319,6 +1447,12 @@ mzNameServerSet :: Lens' ManagedZone (Maybe Text)
 mzNameServerSet
   = lens _mzNameServerSet
       (\ s a -> s{_mzNameServerSet = a})
+
+-- | The zone\'s visibility: public zones are exposed to the Internet, while
+-- private zones are visible only to Virtual Private Cloud resources.
+mzVisibility :: Lens' ManagedZone (Maybe ManagedZoneVisibility)
+mzVisibility
+  = lens _mzVisibility (\ s a -> s{_mzVisibility = a})
 
 -- | User assigned name for this resource. Must be unique within the project.
 -- The name must be 1-63 characters long, must begin with a letter, end
@@ -1365,6 +1499,13 @@ mzNameServers
       . _Default
       . _Coerce
 
+-- | For privately visible zones, the set of Virtual Private Cloud resources
+-- that the zone is visible from.
+mzPrivateVisibilityConfig :: Lens' ManagedZone (Maybe ManagedZonePrivateVisibilityConfig)
+mzPrivateVisibilityConfig
+  = lens _mzPrivateVisibilityConfig
+      (\ s a -> s{_mzPrivateVisibilityConfig = a})
+
 instance FromJSON ManagedZone where
         parseJSON
           = withObject "ManagedZone"
@@ -1373,13 +1514,15 @@ instance FromJSON ManagedZone where
                    (o .:? "creationTime") <*>
                      (o .:? "kind" .!= "dns#managedZone")
                      <*> (o .:? "nameServerSet")
+                     <*> (o .:? "visibility")
                      <*> (o .:? "name")
                      <*> (o .:? "id")
                      <*> (o .:? "labels")
                      <*> (o .:? "dnsName")
                      <*> (o .:? "description")
                      <*> (o .:? "dnssecConfig")
-                     <*> (o .:? "nameServers" .!= mempty))
+                     <*> (o .:? "nameServers" .!= mempty)
+                     <*> (o .:? "privateVisibilityConfig"))
 
 instance ToJSON ManagedZone where
         toJSON ManagedZone'{..}
@@ -1388,12 +1531,15 @@ instance ToJSON ManagedZone where
                  [("creationTime" .=) <$> _mzCreationTime,
                   Just ("kind" .= _mzKind),
                   ("nameServerSet" .=) <$> _mzNameServerSet,
+                  ("visibility" .=) <$> _mzVisibility,
                   ("name" .=) <$> _mzName, ("id" .=) <$> _mzId,
                   ("labels" .=) <$> _mzLabels,
                   ("dnsName" .=) <$> _mzDNSName,
                   ("description" .=) <$> _mzDescription,
                   ("dnssecConfig" .=) <$> _mzDNSsecConfig,
-                  ("nameServers" .=) <$> _mzNameServers])
+                  ("nameServers" .=) <$> _mzNameServers,
+                  ("privateVisibilityConfig" .=) <$>
+                    _mzPrivateVisibilityConfig])
 
 -- | User labels.
 --
@@ -1440,10 +1586,12 @@ data Quota =
     , _qRrSetsPerManagedZone     :: !(Maybe (Textual Int32))
     , _qKind                     :: !Text
     , _qResourceRecordsPerRrSet  :: !(Maybe (Textual Int32))
+    , _qManagedZonesPerNetwork   :: !(Maybe (Textual Int32))
     , _qRrSetAdditionsPerChange  :: !(Maybe (Textual Int32))
     , _qManagedZones             :: !(Maybe (Textual Int32))
     , _qTotalRrDataSizePerChange :: !(Maybe (Textual Int32))
     , _qDNSKeysPerManagedZone    :: !(Maybe (Textual Int32))
+    , _qNetworksPerManagedZone   :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1462,6 +1610,8 @@ data Quota =
 --
 -- * 'qResourceRecordsPerRrSet'
 --
+-- * 'qManagedZonesPerNetwork'
+--
 -- * 'qRrSetAdditionsPerChange'
 --
 -- * 'qManagedZones'
@@ -1469,6 +1619,8 @@ data Quota =
 -- * 'qTotalRrDataSizePerChange'
 --
 -- * 'qDNSKeysPerManagedZone'
+--
+-- * 'qNetworksPerManagedZone'
 quota
     :: Quota
 quota =
@@ -1478,10 +1630,12 @@ quota =
     , _qRrSetsPerManagedZone = Nothing
     , _qKind = "dns#quota"
     , _qResourceRecordsPerRrSet = Nothing
+    , _qManagedZonesPerNetwork = Nothing
     , _qRrSetAdditionsPerChange = Nothing
     , _qManagedZones = Nothing
     , _qTotalRrDataSizePerChange = Nothing
     , _qDNSKeysPerManagedZone = Nothing
+    , _qNetworksPerManagedZone = Nothing
     }
 
 
@@ -1520,6 +1674,14 @@ qResourceRecordsPerRrSet
       (\ s a -> s{_qResourceRecordsPerRrSet = a})
       . mapping _Coerce
 
+-- | Maximum allowed number of managed zones which can be attached to a
+-- network.
+qManagedZonesPerNetwork :: Lens' Quota (Maybe Int32)
+qManagedZonesPerNetwork
+  = lens _qManagedZonesPerNetwork
+      (\ s a -> s{_qManagedZonesPerNetwork = a})
+      . mapping _Coerce
+
 -- | Maximum allowed number of ResourceRecordSets to add per
 -- ChangesCreateRequest.
 qRrSetAdditionsPerChange :: Lens' Quota (Maybe Int32)
@@ -1550,6 +1712,14 @@ qDNSKeysPerManagedZone
       (\ s a -> s{_qDNSKeysPerManagedZone = a})
       . mapping _Coerce
 
+-- | Maximum allowed number of networks to which a privately scoped zone can
+-- be attached.
+qNetworksPerManagedZone :: Lens' Quota (Maybe Int32)
+qNetworksPerManagedZone
+  = lens _qNetworksPerManagedZone
+      (\ s a -> s{_qNetworksPerManagedZone = a})
+      . mapping _Coerce
+
 instance FromJSON Quota where
         parseJSON
           = withObject "Quota"
@@ -1560,10 +1730,12 @@ instance FromJSON Quota where
                      <*> (o .:? "rrsetsPerManagedZone")
                      <*> (o .:? "kind" .!= "dns#quota")
                      <*> (o .:? "resourceRecordsPerRrset")
+                     <*> (o .:? "managedZonesPerNetwork")
                      <*> (o .:? "rrsetAdditionsPerChange")
                      <*> (o .:? "managedZones")
                      <*> (o .:? "totalRrdataSizePerChange")
-                     <*> (o .:? "dnsKeysPerManagedZone"))
+                     <*> (o .:? "dnsKeysPerManagedZone")
+                     <*> (o .:? "networksPerManagedZone"))
 
 instance ToJSON Quota where
         toJSON Quota'{..}
@@ -1577,13 +1749,17 @@ instance ToJSON Quota where
                   Just ("kind" .= _qKind),
                   ("resourceRecordsPerRrset" .=) <$>
                     _qResourceRecordsPerRrSet,
+                  ("managedZonesPerNetwork" .=) <$>
+                    _qManagedZonesPerNetwork,
                   ("rrsetAdditionsPerChange" .=) <$>
                     _qRrSetAdditionsPerChange,
                   ("managedZones" .=) <$> _qManagedZones,
                   ("totalRrdataSizePerChange" .=) <$>
                     _qTotalRrDataSizePerChange,
                   ("dnsKeysPerManagedZone" .=) <$>
-                    _qDNSKeysPerManagedZone])
+                    _qDNSKeysPerManagedZone,
+                  ("networksPerManagedZone" .=) <$>
+                    _qNetworksPerManagedZone])
 
 --
 -- /See:/ 'dnsKeyDigest' smart constructor.

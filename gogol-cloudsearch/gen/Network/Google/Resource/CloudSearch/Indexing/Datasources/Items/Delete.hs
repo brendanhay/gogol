@@ -177,8 +177,8 @@ ididVersion
   = lens _ididVersion (\ s a -> s{_ididVersion = a}) .
       mapping _Bytes
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 ididDebugOptionsEnableDebugging :: Lens' IndexingDatasourcesItemsDelete (Maybe Bool)
 ididDebugOptionsEnableDebugging
   = lens _ididDebugOptionsEnableDebugging

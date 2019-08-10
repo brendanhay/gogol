@@ -19,6 +19,10 @@ module Network.Google.CloudIdentity.Types
     -- * Service Configuration
       cloudIdentityService
 
+    -- * OAuth Scopes
+    , cloudIdentityGroupsReadOnlyScope
+    , cloudIdentityGroupsScope
+
     -- * LookupMembershipNameResponse
     , LookupMembershipNameResponse
     , lookupMembershipNameResponse
@@ -128,3 +132,13 @@ cloudIdentityService :: ServiceConfig
 cloudIdentityService
   = defaultService (ServiceId "cloudidentity:v1")
       "cloudidentity.googleapis.com"
+
+-- | See any Cloud Identity Groups that you can access, including group
+-- members and their emails
+cloudIdentityGroupsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
+cloudIdentityGroupsReadOnlyScope = Proxy
+
+-- | See, change, create, and delete any of the Cloud Identity Groups that
+-- you can access, including the members of each group
+cloudIdentityGroupsScope :: Proxy '["https://www.googleapis.com/auth/cloud-identity.groups"]
+cloudIdentityGroupsScope = Proxy

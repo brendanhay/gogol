@@ -37,6 +37,7 @@ module Network.Google.Resource.Drive.Files.Copy
     , fPayload
     , fOCRLanguage
     , fKeepRevisionForever
+    , fSupportsAllDrives
     , fIgnoreDefaultVisibility
     , fFileId
     , fSupportsTeamDrives
@@ -55,10 +56,11 @@ type FilesCopyResource =
              "copy" :>
                QueryParam "ocrLanguage" Text :>
                  QueryParam "keepRevisionForever" Bool :>
-                   QueryParam "ignoreDefaultVisibility" Bool :>
-                     QueryParam "supportsTeamDrives" Bool :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] File :> Post '[JSON] File
+                   QueryParam "supportsAllDrives" Bool :>
+                     QueryParam "ignoreDefaultVisibility" Bool :>
+                       QueryParam "supportsTeamDrives" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] File :> Post '[JSON] File
 
 -- | Creates a copy of a file and applies any requested updates with patch
 -- semantics.
@@ -69,6 +71,7 @@ data FilesCopy =
     { _fPayload                 :: !File
     , _fOCRLanguage             :: !(Maybe Text)
     , _fKeepRevisionForever     :: !Bool
+    , _fSupportsAllDrives       :: !Bool
     , _fIgnoreDefaultVisibility :: !Bool
     , _fFileId                  :: !Text
     , _fSupportsTeamDrives      :: !Bool
@@ -86,6 +89,8 @@ data FilesCopy =
 --
 -- * 'fKeepRevisionForever'
 --
+-- * 'fSupportsAllDrives'
+--
 -- * 'fIgnoreDefaultVisibility'
 --
 -- * 'fFileId'
@@ -100,6 +105,7 @@ filesCopy pFPayload_ pFFileId_ =
     { _fPayload = pFPayload_
     , _fOCRLanguage = Nothing
     , _fKeepRevisionForever = False
+    , _fSupportsAllDrives = False
     , _fIgnoreDefaultVisibility = False
     , _fFileId = pFFileId_
     , _fSupportsTeamDrives = False
@@ -116,11 +122,18 @@ fOCRLanguage
   = lens _fOCRLanguage (\ s a -> s{_fOCRLanguage = a})
 
 -- | Whether to set the \'keepForever\' field in the new head revision. This
--- is only applicable to files with binary content in Drive.
+-- is only applicable to files with binary content in Google Drive.
 fKeepRevisionForever :: Lens' FilesCopy Bool
 fKeepRevisionForever
   = lens _fKeepRevisionForever
       (\ s a -> s{_fKeepRevisionForever = a})
+
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+fSupportsAllDrives :: Lens' FilesCopy Bool
+fSupportsAllDrives
+  = lens _fSupportsAllDrives
+      (\ s a -> s{_fSupportsAllDrives = a})
 
 -- | Whether to ignore the domain\'s default visibility settings for the
 -- created file. Domain administrators can choose to make all uploaded
@@ -136,7 +149,7 @@ fIgnoreDefaultVisibility
 fFileId :: Lens' FilesCopy Text
 fFileId = lens _fFileId (\ s a -> s{_fFileId = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 fSupportsTeamDrives :: Lens' FilesCopy Bool
 fSupportsTeamDrives
   = lens _fSupportsTeamDrives
@@ -152,6 +165,7 @@ instance GoogleRequest FilesCopy where
         requestClient FilesCopy'{..}
           = go _fFileId _fOCRLanguage
               (Just _fKeepRevisionForever)
+              (Just _fSupportsAllDrives)
               (Just _fIgnoreDefaultVisibility)
               (Just _fSupportsTeamDrives)
               (Just AltJSON)

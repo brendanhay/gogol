@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @healthcare.projects.locations.list@ method which the
 -- 'ProjectsLocationsList' request conforms to.
 type ProjectsLocationsListResource =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "name" Text :>
          "locations" :>
            QueryParam "$.xgafv" Xgafv :>

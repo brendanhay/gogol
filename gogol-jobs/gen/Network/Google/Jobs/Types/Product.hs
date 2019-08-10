@@ -1159,11 +1159,11 @@ ceJobEvent :: Lens' ClientEvent (Maybe JobEvent)
 ceJobEvent
   = lens _ceJobEvent (\ s a -> s{_ceJobEvent = a})
 
--- | Required except the first event. The event_id of an event that resulted
--- in the current event. For example, a Job view event usually follows a
--- parent impression event: A job seeker first does a search where a list
--- of jobs appears (impression). The job seeker then selects a result and
--- views the description of a particular job (Job view).
+-- | Optional. The event_id of an event that resulted in the current event.
+-- For example, a Job view event usually follows a parent impression event:
+-- A job seeker first does a search where a list of jobs appears
+-- (impression). The job seeker then selects a result and views the
+-- description of a particular job (Job view).
 ceParentEventId :: Lens' ClientEvent (Maybe Text)
 ceParentEventId
   = lens _ceParentEventId
@@ -1438,11 +1438,15 @@ cfCommuteMethod
   = lens _cfCommuteMethod
       (\ s a -> s{_cfCommuteMethod = a})
 
--- | Optional. If \`true\`, jobs without street level addresses may also be
--- returned. For city level addresses, the city center is used. For state
--- and coarser level addresses, text matching is used. If this field is set
--- to \`false\` or is not specified, only jobs that include street level
--- addresses will be returned by commute search.
+-- | Optional. If true, jobs without \"precise\" addresses (street level
+-- addresses or GPS coordinates) might also be returned. For city and
+-- coarser level addresses, text matching is used. If this field is set to
+-- false or is not specified, only jobs that include precise addresses are
+-- returned by Commute Search. Note: If \`allow_imprecise_addresses\` is
+-- set to true, Commute Search is not able to calculate accurate commute
+-- times to jobs with city level and coarser address information. Jobs with
+-- imprecise addresses will return a \`travel_duration\` time of 0
+-- regardless of distance from the job seeker.
 cfAllowImpreciseAddresses :: Lens' CommuteFilter (Maybe Bool)
 cfAllowImpreciseAddresses
   = lens _cfAllowImpreciseAddresses

@@ -449,92 +449,6 @@ instance FromJSON BuiltInVariableType where
 instance ToJSON BuiltInVariableType where
     toJSON = toJSONText
 
--- | The old proposal status before the status change.
-data WorkspaceProposalHistoryStatusChangeOldStatus
-    = Approved
-      -- ^ @approved@
-    | Cancelled
-      -- ^ @cancelled@
-    | Completed
-      -- ^ @completed@
-    | Requested
-      -- ^ @requested@
-    | Reviewed
-      -- ^ @reviewed@
-    | StatusUnspecified
-      -- ^ @statusUnspecified@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable WorkspaceProposalHistoryStatusChangeOldStatus
-
-instance FromHttpApiData WorkspaceProposalHistoryStatusChangeOldStatus where
-    parseQueryParam = \case
-        "approved" -> Right Approved
-        "cancelled" -> Right Cancelled
-        "completed" -> Right Completed
-        "requested" -> Right Requested
-        "reviewed" -> Right Reviewed
-        "statusUnspecified" -> Right StatusUnspecified
-        x -> Left ("Unable to parse WorkspaceProposalHistoryStatusChangeOldStatus from: " <> x)
-
-instance ToHttpApiData WorkspaceProposalHistoryStatusChangeOldStatus where
-    toQueryParam = \case
-        Approved -> "approved"
-        Cancelled -> "cancelled"
-        Completed -> "completed"
-        Requested -> "requested"
-        Reviewed -> "reviewed"
-        StatusUnspecified -> "statusUnspecified"
-
-instance FromJSON WorkspaceProposalHistoryStatusChangeOldStatus where
-    parseJSON = parseJSONText "WorkspaceProposalHistoryStatusChangeOldStatus"
-
-instance ToJSON WorkspaceProposalHistoryStatusChangeOldStatus where
-    toJSON = toJSONText
-
--- | If present, the status of the workspace proposal is updated.
-data UpdateWorkspaceProposalRequestStatus
-    = UWPRSApproved
-      -- ^ @approved@
-    | UWPRSCancelled
-      -- ^ @cancelled@
-    | UWPRSCompleted
-      -- ^ @completed@
-    | UWPRSRequested
-      -- ^ @requested@
-    | UWPRSReviewed
-      -- ^ @reviewed@
-    | UWPRSStatusUnspecified
-      -- ^ @statusUnspecified@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable UpdateWorkspaceProposalRequestStatus
-
-instance FromHttpApiData UpdateWorkspaceProposalRequestStatus where
-    parseQueryParam = \case
-        "approved" -> Right UWPRSApproved
-        "cancelled" -> Right UWPRSCancelled
-        "completed" -> Right UWPRSCompleted
-        "requested" -> Right UWPRSRequested
-        "reviewed" -> Right UWPRSReviewed
-        "statusUnspecified" -> Right UWPRSStatusUnspecified
-        x -> Left ("Unable to parse UpdateWorkspaceProposalRequestStatus from: " <> x)
-
-instance ToHttpApiData UpdateWorkspaceProposalRequestStatus where
-    toQueryParam = \case
-        UWPRSApproved -> "approved"
-        UWPRSCancelled -> "cancelled"
-        UWPRSCompleted -> "completed"
-        UWPRSRequested -> "requested"
-        UWPRSReviewed -> "reviewed"
-        UWPRSStatusUnspecified -> "statusUnspecified"
-
-instance FromJSON UpdateWorkspaceProposalRequestStatus where
-    parseJSON = parseJSONText "UpdateWorkspaceProposalRequestStatus"
-
-instance ToJSON UpdateWorkspaceProposalRequestStatus where
-    toJSON = toJSONText
-
 -- | The types of built-in variables to delete.
 data AccountsContainersWorkspacesBuilt_in_variablesDeleteType
     = ACWBDTAdvertiserId
@@ -1629,34 +1543,6 @@ instance FromJSON AccountsContainersWorkspacesBuilt_in_variablesCreateType where
 instance ToJSON AccountsContainersWorkspacesBuilt_in_variablesCreateType where
     toJSON = toJSONText
 
--- | User type distinguishes between a user and the Google Tag Manager
--- system.
-data WorkspaceProposalUserType
-    = GaiaId
-      -- ^ @gaiaId@
-    | System
-      -- ^ @system@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable WorkspaceProposalUserType
-
-instance FromHttpApiData WorkspaceProposalUserType where
-    parseQueryParam = \case
-        "gaiaId" -> Right GaiaId
-        "system" -> Right System
-        x -> Left ("Unable to parse WorkspaceProposalUserType from: " <> x)
-
-instance ToHttpApiData WorkspaceProposalUserType where
-    toQueryParam = \case
-        GaiaId -> "gaiaId"
-        System -> "system"
-
-instance FromJSON WorkspaceProposalUserType where
-    parseJSON = parseJSONText "WorkspaceProposalUserType"
-
-instance ToJSON WorkspaceProposalUserType where
-    toJSON = toJSONText
-
 -- | The type of operator for this condition.
 data ConditionType
     = ConditionTypeUnspecified
@@ -1883,6 +1769,38 @@ instance FromJSON EntityChangeStatus where
 instance ToJSON EntityChangeStatus where
     toJSON = toJSONText
 
+-- | The option to convert a string-type variable value to either lowercase
+-- or uppercase.
+data VariableFormatValueCaseConversionType
+    = VFVCCTLowercase
+      -- ^ @lowercase@
+    | VFVCCTNone
+      -- ^ @none@
+    | VFVCCTUppercase
+      -- ^ @uppercase@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VariableFormatValueCaseConversionType
+
+instance FromHttpApiData VariableFormatValueCaseConversionType where
+    parseQueryParam = \case
+        "lowercase" -> Right VFVCCTLowercase
+        "none" -> Right VFVCCTNone
+        "uppercase" -> Right VFVCCTUppercase
+        x -> Left ("Unable to parse VariableFormatValueCaseConversionType from: " <> x)
+
+instance ToHttpApiData VariableFormatValueCaseConversionType where
+    toQueryParam = \case
+        VFVCCTLowercase -> "lowercase"
+        VFVCCTNone -> "none"
+        VFVCCTUppercase -> "uppercase"
+
+instance FromJSON VariableFormatValueCaseConversionType where
+    parseJSON = parseJSONText "VariableFormatValueCaseConversionType"
+
+instance ToJSON VariableFormatValueCaseConversionType where
+    toJSON = toJSONText
+
 -- | The type of this environment.
 data EnvironmentType
     = ETLatest
@@ -1916,80 +1834,6 @@ instance FromJSON EnvironmentType where
     parseJSON = parseJSONText "EnvironmentType"
 
 instance ToJSON EnvironmentType where
-    toJSON = toJSONText
-
--- | The status of the workspace proposal as it goes through review.
-data WorkspaceProposalStatus
-    = WPSApproved
-      -- ^ @approved@
-    | WPSCancelled
-      -- ^ @cancelled@
-    | WPSCompleted
-      -- ^ @completed@
-    | WPSRequested
-      -- ^ @requested@
-    | WPSReviewed
-      -- ^ @reviewed@
-    | WPSStatusUnspecified
-      -- ^ @statusUnspecified@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable WorkspaceProposalStatus
-
-instance FromHttpApiData WorkspaceProposalStatus where
-    parseQueryParam = \case
-        "approved" -> Right WPSApproved
-        "cancelled" -> Right WPSCancelled
-        "completed" -> Right WPSCompleted
-        "requested" -> Right WPSRequested
-        "reviewed" -> Right WPSReviewed
-        "statusUnspecified" -> Right WPSStatusUnspecified
-        x -> Left ("Unable to parse WorkspaceProposalStatus from: " <> x)
-
-instance ToHttpApiData WorkspaceProposalStatus where
-    toQueryParam = \case
-        WPSApproved -> "approved"
-        WPSCancelled -> "cancelled"
-        WPSCompleted -> "completed"
-        WPSRequested -> "requested"
-        WPSReviewed -> "reviewed"
-        WPSStatusUnspecified -> "statusUnspecified"
-
-instance FromJSON WorkspaceProposalStatus where
-    parseJSON = parseJSONText "WorkspaceProposalStatus"
-
-instance ToJSON WorkspaceProposalStatus where
-    toJSON = toJSONText
-
--- | The history type distinguishing between comments and status changes.
-data WorkspaceProposalHistoryType
-    = Comment
-      -- ^ @comment@
-    | StatusChange
-      -- ^ @statusChange@
-    | Unspecified
-      -- ^ @unspecified@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable WorkspaceProposalHistoryType
-
-instance FromHttpApiData WorkspaceProposalHistoryType where
-    parseQueryParam = \case
-        "comment" -> Right Comment
-        "statusChange" -> Right StatusChange
-        "unspecified" -> Right Unspecified
-        x -> Left ("Unable to parse WorkspaceProposalHistoryType from: " <> x)
-
-instance ToHttpApiData WorkspaceProposalHistoryType where
-    toQueryParam = \case
-        Comment -> "comment"
-        StatusChange -> "statusChange"
-        Unspecified -> "unspecified"
-
-instance FromJSON WorkspaceProposalHistoryType where
-    parseJSON = parseJSONText "WorkspaceProposalHistoryType"
-
-instance ToJSON WorkspaceProposalHistoryType where
     toJSON = toJSONText
 
 -- | The type of built-in variable to revert.
@@ -2421,47 +2265,4 @@ instance FromJSON AccountsContainersWorkspacesBuilt_in_variablesRevertType where
     parseJSON = parseJSONText "AccountsContainersWorkspacesBuilt_in_variablesRevertType"
 
 instance ToJSON AccountsContainersWorkspacesBuilt_in_variablesRevertType where
-    toJSON = toJSONText
-
--- | The new proposal status after that status change.
-data WorkspaceProposalHistoryStatusChangeNewStatus
-    = WPHSCNSApproved
-      -- ^ @approved@
-    | WPHSCNSCancelled
-      -- ^ @cancelled@
-    | WPHSCNSCompleted
-      -- ^ @completed@
-    | WPHSCNSRequested
-      -- ^ @requested@
-    | WPHSCNSReviewed
-      -- ^ @reviewed@
-    | WPHSCNSStatusUnspecified
-      -- ^ @statusUnspecified@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable WorkspaceProposalHistoryStatusChangeNewStatus
-
-instance FromHttpApiData WorkspaceProposalHistoryStatusChangeNewStatus where
-    parseQueryParam = \case
-        "approved" -> Right WPHSCNSApproved
-        "cancelled" -> Right WPHSCNSCancelled
-        "completed" -> Right WPHSCNSCompleted
-        "requested" -> Right WPHSCNSRequested
-        "reviewed" -> Right WPHSCNSReviewed
-        "statusUnspecified" -> Right WPHSCNSStatusUnspecified
-        x -> Left ("Unable to parse WorkspaceProposalHistoryStatusChangeNewStatus from: " <> x)
-
-instance ToHttpApiData WorkspaceProposalHistoryStatusChangeNewStatus where
-    toQueryParam = \case
-        WPHSCNSApproved -> "approved"
-        WPHSCNSCancelled -> "cancelled"
-        WPHSCNSCompleted -> "completed"
-        WPHSCNSRequested -> "requested"
-        WPHSCNSReviewed -> "reviewed"
-        WPHSCNSStatusUnspecified -> "statusUnspecified"
-
-instance FromJSON WorkspaceProposalHistoryStatusChangeNewStatus where
-    parseJSON = parseJSONText "WorkspaceProposalHistoryStatusChangeNewStatus"
-
-instance ToJSON WorkspaceProposalHistoryStatusChangeNewStatus where
     toJSON = toJSONText

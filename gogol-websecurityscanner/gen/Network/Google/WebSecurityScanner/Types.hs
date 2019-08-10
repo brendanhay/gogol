@@ -38,6 +38,15 @@ module Network.Google.WebSecurityScanner.Types
     , StopScanRunRequest
     , stopScanRunRequest
 
+    -- * ScanRunErrorTraceCode
+    , ScanRunErrorTraceCode (..)
+
+    -- * ScanConfigError
+    , ScanConfigError
+    , scanConfigError
+    , sceFieldName
+    , sceCode
+
     -- * Schedule
     , Schedule
     , schedule
@@ -60,12 +69,18 @@ module Network.Google.WebSecurityScanner.Types
     , fFindingType
     , fVulnerableHeaders
     , fViolatingResource
+    , fForm
     , fFrameURL
     , fDescription
 
     -- * Empty
     , Empty
     , empty
+
+    -- * ScanRunWarningTrace
+    , ScanRunWarningTrace
+    , scanRunWarningTrace
+    , srwtCode
 
     -- * ListFindingTypeStatsResponse
     , ListFindingTypeStatsResponse
@@ -89,9 +104,6 @@ module Network.Google.WebSecurityScanner.Types
     , authentication
     , aGoogleAccount
     , aCustomAccount
-
-    -- * FindingFindingType
-    , FindingFindingType (..)
 
     -- * ListCrawledURLsResponse
     , ListCrawledURLsResponse
@@ -130,6 +142,13 @@ module Network.Google.WebSecurityScanner.Types
     , hValue
     , hName
 
+    -- * ScanRunErrorTrace
+    , ScanRunErrorTrace
+    , scanRunErrorTrace
+    , sretMostCommonHTTPErrorCode
+    , sretScanConfigError
+    , sretCode
+
     -- * ListScanConfigsResponse
     , ListScanConfigsResponse
     , listScanConfigsResponse
@@ -163,9 +182,19 @@ module Network.Google.WebSecurityScanner.Types
     , scAuthentication
     , scMaxQps
     , scName
+    , scExportToSecurityCommandCenter
     , scDisplayName
     , scUserAgent
     , scBlackListPatterns
+
+    -- * ScanRunWarningTraceCode
+    , ScanRunWarningTraceCode (..)
+
+    -- * ScanConfigExportToSecurityCommandCenter
+    , ScanConfigExportToSecurityCommandCenter (..)
+
+    -- * ScanConfigErrorCode
+    , ScanConfigErrorCode (..)
 
     -- * ScanRunResultState
     , ScanRunResultState (..)
@@ -185,11 +214,18 @@ module Network.Google.WebSecurityScanner.Types
     -- * ScanRunExecutionState
     , ScanRunExecutionState (..)
 
+    -- * Form
+    , Form
+    , form
+    , fActionURI
+    , fFields
+
     -- * ScanRun
     , ScanRun
     , scanRun
     , srStartTime
     , srHasVulnerabilities
+    , srWarningTraces
     , srResultState
     , srProgressPercent
     , srURLsCrawledCount
@@ -197,20 +233,18 @@ module Network.Google.WebSecurityScanner.Types
     , srName
     , srEndTime
     , srExecutionState
-
-    -- * FindingTypeStatsFindingType
-    , FindingTypeStatsFindingType (..)
+    , srErrorTrace
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.WebSecurityScanner.Types.Product
 import           Network.Google.WebSecurityScanner.Types.Sum
 
--- | Default request referring to version 'v1alpha' of the Web Security Scanner API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1beta' of the Web Security Scanner API. This contains the host and root path used as a starting point for constructing service requests.
 webSecurityScannerService :: ServiceConfig
 webSecurityScannerService
   = defaultService
-      (ServiceId "websecurityscanner:v1alpha")
+      (ServiceId "websecurityscanner:v1beta")
       "websecurityscanner.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services

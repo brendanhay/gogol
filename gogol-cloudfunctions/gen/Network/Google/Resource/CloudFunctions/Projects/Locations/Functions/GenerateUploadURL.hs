@@ -28,9 +28,14 @@
 -- reference to the function source code. When uploading source code to the
 -- generated signed URL, please follow these restrictions: * Source file
 -- type should be a zip file. * Source file size should not exceed 100MB
--- limit. When making a HTTP PUT request, these two headers need to be
+-- limit. * No credentials should be attached - the signed URLs provide
+-- access to the target bucket using internal service identity; if
+-- credentials were attached, the identity from the credentials would be
+-- used, but that identity does not have permissions to upload files to the
+-- URL. When making a HTTP PUT request, these two headers need to be
 -- specified: * \`content-type: application\/zip\` *
--- \`x-goog-content-length-range: 0,104857600\`
+-- \`x-goog-content-length-range: 0,104857600\` And this header SHOULD NOT
+-- be specified: * \`Authorization: Bearer YOUR_TOKEN\`
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.generateUploadUrl@.
 module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GenerateUploadURL
@@ -79,9 +84,14 @@ type ProjectsLocationsFunctionsGenerateUploadURLResource
 -- reference to the function source code. When uploading source code to the
 -- generated signed URL, please follow these restrictions: * Source file
 -- type should be a zip file. * Source file size should not exceed 100MB
--- limit. When making a HTTP PUT request, these two headers need to be
+-- limit. * No credentials should be attached - the signed URLs provide
+-- access to the target bucket using internal service identity; if
+-- credentials were attached, the identity from the credentials would be
+-- used, but that identity does not have permissions to upload files to the
+-- URL. When making a HTTP PUT request, these two headers need to be
 -- specified: * \`content-type: application\/zip\` *
--- \`x-goog-content-length-range: 0,104857600\`
+-- \`x-goog-content-length-range: 0,104857600\` And this header SHOULD NOT
+-- be specified: * \`Authorization: Bearer YOUR_TOKEN\`
 --
 -- /See:/ 'projectsLocationsFunctionsGenerateUploadURL' smart constructor.
 data ProjectsLocationsFunctionsGenerateUploadURL =

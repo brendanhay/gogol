@@ -251,6 +251,29 @@ instance ToJSON Expr where
                   ("title" .=) <$> _eTitle,
                   ("description" .=) <$> _eDescription])
 
+-- | The service account undelete request.
+--
+-- /See:/ 'undeleteServiceAccountRequest' smart constructor.
+data UndeleteServiceAccountRequest =
+  UndeleteServiceAccountRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UndeleteServiceAccountRequest' with the minimum fields required to make a request.
+--
+undeleteServiceAccountRequest
+    :: UndeleteServiceAccountRequest
+undeleteServiceAccountRequest = UndeleteServiceAccountRequest'
+
+
+instance FromJSON UndeleteServiceAccountRequest where
+        parseJSON
+          = withObject "UndeleteServiceAccountRequest"
+              (\ o -> pure UndeleteServiceAccountRequest')
+
+instance ToJSON UndeleteServiceAccountRequest where
+        toJSON = const emptyObject
+
 -- | Contains information about an auditable service.
 --
 -- /See:/ 'auditableService' smart constructor.
@@ -1102,6 +1125,29 @@ instance ToJSON ListServiceAccountKeysResponse where
         toJSON ListServiceAccountKeysResponse'{..}
           = object (catMaybes [("keys" .=) <$> _lsakrKeys])
 
+-- | The service account enable request.
+--
+-- /See:/ 'enableServiceAccountRequest' smart constructor.
+data EnableServiceAccountRequest =
+  EnableServiceAccountRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EnableServiceAccountRequest' with the minimum fields required to make a request.
+--
+enableServiceAccountRequest
+    :: EnableServiceAccountRequest
+enableServiceAccountRequest = EnableServiceAccountRequest'
+
+
+instance FromJSON EnableServiceAccountRequest where
+        parseJSON
+          = withObject "EnableServiceAccountRequest"
+              (\ o -> pure EnableServiceAccountRequest')
+
+instance ToJSON EnableServiceAccountRequest where
+        toJSON = const emptyObject
+
 -- | A role in the Identity and Access Management API.
 --
 -- /See:/ 'role'' smart constructor.
@@ -1235,10 +1281,12 @@ data ServiceAccount =
   ServiceAccount'
     { _saEmail          :: !(Maybe Text)
     , _saEtag           :: !(Maybe Bytes)
+    , _saDisabled       :: !(Maybe Bool)
     , _saUniqueId       :: !(Maybe Text)
     , _saName           :: !(Maybe Text)
     , _saDisplayName    :: !(Maybe Text)
     , _saProjectId      :: !(Maybe Text)
+    , _saDescription    :: !(Maybe Text)
     , _saOAuth2ClientId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1252,6 +1300,8 @@ data ServiceAccount =
 --
 -- * 'saEtag'
 --
+-- * 'saDisabled'
+--
 -- * 'saUniqueId'
 --
 -- * 'saName'
@@ -1260,6 +1310,8 @@ data ServiceAccount =
 --
 -- * 'saProjectId'
 --
+-- * 'saDescription'
+--
 -- * 'saOAuth2ClientId'
 serviceAccount
     :: ServiceAccount
@@ -1267,10 +1319,12 @@ serviceAccount =
   ServiceAccount'
     { _saEmail = Nothing
     , _saEtag = Nothing
+    , _saDisabled = Nothing
     , _saUniqueId = Nothing
     , _saName = Nothing
     , _saDisplayName = Nothing
     , _saProjectId = Nothing
+    , _saDescription = Nothing
     , _saOAuth2ClientId = Nothing
     }
 
@@ -1285,6 +1339,12 @@ saEtag :: Lens' ServiceAccount (Maybe ByteString)
 saEtag
   = lens _saEtag (\ s a -> s{_saEtag = a}) .
       mapping _Bytes
+
+-- | \'OutputOnly A bool indicate if the service account is disabled. The
+-- field is currently in alpha phase.
+saDisabled :: Lens' ServiceAccount (Maybe Bool)
+saDisabled
+  = lens _saDisabled (\ s a -> s{_saDisabled = a})
 
 -- | \'OutputOnly The unique and stable id of the service account.
 saUniqueId :: Lens' ServiceAccount (Maybe Text)
@@ -1313,6 +1373,13 @@ saProjectId :: Lens' ServiceAccount (Maybe Text)
 saProjectId
   = lens _saProjectId (\ s a -> s{_saProjectId = a})
 
+-- | Optional. A user-specified opaque description of the service account.
+-- Must be less than or equal to 256 UTF-8 bytes.
+saDescription :: Lens' ServiceAccount (Maybe Text)
+saDescription
+  = lens _saDescription
+      (\ s a -> s{_saDescription = a})
+
 -- | \'OutputOnly The OAuth2 client id for the service account. This is used
 -- in conjunction with the OAuth2 clientconfig API to make three legged
 -- OAuth2 (3LO) flows to access the data of Google users.
@@ -1327,10 +1394,12 @@ instance FromJSON ServiceAccount where
               (\ o ->
                  ServiceAccount' <$>
                    (o .:? "email") <*> (o .:? "etag") <*>
-                     (o .:? "uniqueId")
+                     (o .:? "disabled")
+                     <*> (o .:? "uniqueId")
                      <*> (o .:? "name")
                      <*> (o .:? "displayName")
                      <*> (o .:? "projectId")
+                     <*> (o .:? "description")
                      <*> (o .:? "oauth2ClientId"))
 
 instance ToJSON ServiceAccount where
@@ -1338,10 +1407,12 @@ instance ToJSON ServiceAccount where
           = object
               (catMaybes
                  [("email" .=) <$> _saEmail, ("etag" .=) <$> _saEtag,
+                  ("disabled" .=) <$> _saDisabled,
                   ("uniqueId" .=) <$> _saUniqueId,
                   ("name" .=) <$> _saName,
                   ("displayName" .=) <$> _saDisplayName,
                   ("projectId" .=) <$> _saProjectId,
+                  ("description" .=) <$> _saDescription,
                   ("oauth2ClientId" .=) <$> _saOAuth2ClientId])
 
 -- | A request to get permissions which can be tested on a resource.
@@ -1511,6 +1582,46 @@ instance ToJSON TestIAMPermissionsRequest where
         toJSON TestIAMPermissionsRequest'{..}
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
+
+--
+-- /See:/ 'undeleteServiceAccountResponse' smart constructor.
+newtype UndeleteServiceAccountResponse =
+  UndeleteServiceAccountResponse'
+    { _usarRestoredAccount :: Maybe ServiceAccount
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UndeleteServiceAccountResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usarRestoredAccount'
+undeleteServiceAccountResponse
+    :: UndeleteServiceAccountResponse
+undeleteServiceAccountResponse =
+  UndeleteServiceAccountResponse' {_usarRestoredAccount = Nothing}
+
+
+-- | Metadata for the restored service account.
+usarRestoredAccount :: Lens' UndeleteServiceAccountResponse (Maybe ServiceAccount)
+usarRestoredAccount
+  = lens _usarRestoredAccount
+      (\ s a -> s{_usarRestoredAccount = a})
+
+instance FromJSON UndeleteServiceAccountResponse
+         where
+        parseJSON
+          = withObject "UndeleteServiceAccountResponse"
+              (\ o ->
+                 UndeleteServiceAccountResponse' <$>
+                   (o .:? "restoredAccount"))
+
+instance ToJSON UndeleteServiceAccountResponse where
+        toJSON UndeleteServiceAccountResponse'{..}
+          = object
+              (catMaybes
+                 [("restoredAccount" .=) <$> _usarRestoredAccount])
 
 -- | Response message for \`TestIamPermissions\` method.
 --
@@ -1811,6 +1922,55 @@ instance ToJSON SignJwtRequest where
         toJSON SignJwtRequest'{..}
           = object (catMaybes [("payload" .=) <$> _sjrPayload])
 
+-- | The patch service account request.
+--
+-- /See:/ 'patchServiceAccountRequest' smart constructor.
+data PatchServiceAccountRequest =
+  PatchServiceAccountRequest'
+    { _psarUpdateMask     :: !(Maybe GFieldMask)
+    , _psarServiceAccount :: !(Maybe ServiceAccount)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PatchServiceAccountRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psarUpdateMask'
+--
+-- * 'psarServiceAccount'
+patchServiceAccountRequest
+    :: PatchServiceAccountRequest
+patchServiceAccountRequest =
+  PatchServiceAccountRequest'
+    {_psarUpdateMask = Nothing, _psarServiceAccount = Nothing}
+
+
+psarUpdateMask :: Lens' PatchServiceAccountRequest (Maybe GFieldMask)
+psarUpdateMask
+  = lens _psarUpdateMask
+      (\ s a -> s{_psarUpdateMask = a})
+
+psarServiceAccount :: Lens' PatchServiceAccountRequest (Maybe ServiceAccount)
+psarServiceAccount
+  = lens _psarServiceAccount
+      (\ s a -> s{_psarServiceAccount = a})
+
+instance FromJSON PatchServiceAccountRequest where
+        parseJSON
+          = withObject "PatchServiceAccountRequest"
+              (\ o ->
+                 PatchServiceAccountRequest' <$>
+                   (o .:? "updateMask") <*> (o .:? "serviceAccount"))
+
+instance ToJSON PatchServiceAccountRequest where
+        toJSON PatchServiceAccountRequest'{..}
+          = object
+              (catMaybes
+                 [("updateMask" .=) <$> _psarUpdateMask,
+                  ("serviceAccount" .=) <$> _psarServiceAccount])
+
 -- | Provides the configuration for logging a type of permissions. Example: {
 -- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
 -- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
@@ -1873,13 +2033,13 @@ instance ToJSON AuditLogConfig where
 -- /See:/ 'permission' smart constructor.
 data Permission =
   Permission'
-    { _pStage                   :: !(Maybe PermissionStage)
-    , _pOnlyInPredefinedRoles   :: !(Maybe Bool)
-    , _pCustomRolesSupportLevel :: !(Maybe PermissionCustomRolesSupportLevel)
-    , _pName                    :: !(Maybe Text)
-    , _pTitle                   :: !(Maybe Text)
-    , _pAPIdisabled             :: !(Maybe Bool)
-    , _pDescription             :: !(Maybe Text)
+    { _perStage                   :: !(Maybe PermissionStage)
+    , _perOnlyInPredefinedRoles   :: !(Maybe Bool)
+    , _perCustomRolesSupportLevel :: !(Maybe PermissionCustomRolesSupportLevel)
+    , _perName                    :: !(Maybe Text)
+    , _perTitle                   :: !(Maybe Text)
+    , _perAPIdisabled             :: !(Maybe Bool)
+    , _perDescription             :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1888,66 +2048,68 @@ data Permission =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pStage'
+-- * 'perStage'
 --
--- * 'pOnlyInPredefinedRoles'
+-- * 'perOnlyInPredefinedRoles'
 --
--- * 'pCustomRolesSupportLevel'
+-- * 'perCustomRolesSupportLevel'
 --
--- * 'pName'
+-- * 'perName'
 --
--- * 'pTitle'
+-- * 'perTitle'
 --
--- * 'pAPIdisabled'
+-- * 'perAPIdisabled'
 --
--- * 'pDescription'
+-- * 'perDescription'
 permission
     :: Permission
 permission =
   Permission'
-    { _pStage = Nothing
-    , _pOnlyInPredefinedRoles = Nothing
-    , _pCustomRolesSupportLevel = Nothing
-    , _pName = Nothing
-    , _pTitle = Nothing
-    , _pAPIdisabled = Nothing
-    , _pDescription = Nothing
+    { _perStage = Nothing
+    , _perOnlyInPredefinedRoles = Nothing
+    , _perCustomRolesSupportLevel = Nothing
+    , _perName = Nothing
+    , _perTitle = Nothing
+    , _perAPIdisabled = Nothing
+    , _perDescription = Nothing
     }
 
 
 -- | The current launch stage of the permission.
-pStage :: Lens' Permission (Maybe PermissionStage)
-pStage = lens _pStage (\ s a -> s{_pStage = a})
+perStage :: Lens' Permission (Maybe PermissionStage)
+perStage = lens _perStage (\ s a -> s{_perStage = a})
 
 -- | This permission can ONLY be used in predefined roles.
-pOnlyInPredefinedRoles :: Lens' Permission (Maybe Bool)
-pOnlyInPredefinedRoles
-  = lens _pOnlyInPredefinedRoles
-      (\ s a -> s{_pOnlyInPredefinedRoles = a})
+perOnlyInPredefinedRoles :: Lens' Permission (Maybe Bool)
+perOnlyInPredefinedRoles
+  = lens _perOnlyInPredefinedRoles
+      (\ s a -> s{_perOnlyInPredefinedRoles = a})
 
 -- | The current custom role support level.
-pCustomRolesSupportLevel :: Lens' Permission (Maybe PermissionCustomRolesSupportLevel)
-pCustomRolesSupportLevel
-  = lens _pCustomRolesSupportLevel
-      (\ s a -> s{_pCustomRolesSupportLevel = a})
+perCustomRolesSupportLevel :: Lens' Permission (Maybe PermissionCustomRolesSupportLevel)
+perCustomRolesSupportLevel
+  = lens _perCustomRolesSupportLevel
+      (\ s a -> s{_perCustomRolesSupportLevel = a})
 
 -- | The name of this Permission.
-pName :: Lens' Permission (Maybe Text)
-pName = lens _pName (\ s a -> s{_pName = a})
+perName :: Lens' Permission (Maybe Text)
+perName = lens _perName (\ s a -> s{_perName = a})
 
 -- | The title of this Permission.
-pTitle :: Lens' Permission (Maybe Text)
-pTitle = lens _pTitle (\ s a -> s{_pTitle = a})
+perTitle :: Lens' Permission (Maybe Text)
+perTitle = lens _perTitle (\ s a -> s{_perTitle = a})
 
 -- | The service API associated with the permission is not enabled.
-pAPIdisabled :: Lens' Permission (Maybe Bool)
-pAPIdisabled
-  = lens _pAPIdisabled (\ s a -> s{_pAPIdisabled = a})
+perAPIdisabled :: Lens' Permission (Maybe Bool)
+perAPIdisabled
+  = lens _perAPIdisabled
+      (\ s a -> s{_perAPIdisabled = a})
 
 -- | A brief description of what this Permission is used for.
-pDescription :: Lens' Permission (Maybe Text)
-pDescription
-  = lens _pDescription (\ s a -> s{_pDescription = a})
+perDescription :: Lens' Permission (Maybe Text)
+perDescription
+  = lens _perDescription
+      (\ s a -> s{_perDescription = a})
 
 instance FromJSON Permission where
         parseJSON
@@ -1965,14 +2127,14 @@ instance ToJSON Permission where
         toJSON Permission'{..}
           = object
               (catMaybes
-                 [("stage" .=) <$> _pStage,
+                 [("stage" .=) <$> _perStage,
                   ("onlyInPredefinedRoles" .=) <$>
-                    _pOnlyInPredefinedRoles,
+                    _perOnlyInPredefinedRoles,
                   ("customRolesSupportLevel" .=) <$>
-                    _pCustomRolesSupportLevel,
-                  ("name" .=) <$> _pName, ("title" .=) <$> _pTitle,
-                  ("apiDisabled" .=) <$> _pAPIdisabled,
-                  ("description" .=) <$> _pDescription])
+                    _perCustomRolesSupportLevel,
+                  ("name" .=) <$> _perName, ("title" .=) <$> _perTitle,
+                  ("apiDisabled" .=) <$> _perAPIdisabled,
+                  ("description" .=) <$> _perDescription])
 
 -- | The service account sign blob response.
 --
@@ -2368,8 +2530,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -2382,10 +2544,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: an unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
@@ -2405,3 +2566,26 @@ instance ToJSON Binding where
                  [("members" .=) <$> _bMembers,
                   ("role" .=) <$> _bRole,
                   ("condition" .=) <$> _bCondition])
+
+-- | The service account disable request.
+--
+-- /See:/ 'disableServiceAccountRequest' smart constructor.
+data DisableServiceAccountRequest =
+  DisableServiceAccountRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DisableServiceAccountRequest' with the minimum fields required to make a request.
+--
+disableServiceAccountRequest
+    :: DisableServiceAccountRequest
+disableServiceAccountRequest = DisableServiceAccountRequest'
+
+
+instance FromJSON DisableServiceAccountRequest where
+        parseJSON
+          = withObject "DisableServiceAccountRequest"
+              (\ o -> pure DisableServiceAccountRequest')
+
+instance ToJSON DisableServiceAccountRequest where
+        toJSON = const emptyObject

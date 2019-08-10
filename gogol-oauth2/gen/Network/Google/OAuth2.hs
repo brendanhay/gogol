@@ -23,7 +23,6 @@ module Network.Google.OAuth2
 
     -- * OAuth Scopes
     , userInfoProFileScope
-    , plusLoginScope
     , userInfoEmailScope
     , plusMeScope
 

@@ -456,6 +456,7 @@ module Network.Google.Dataproc.Types
     -- * SoftwareConfig
     , SoftwareConfig
     , softwareConfig
+    , scOptionalComponents
     , scImageVersion
     , scProperties
 

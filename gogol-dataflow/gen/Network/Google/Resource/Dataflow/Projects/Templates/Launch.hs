@@ -157,7 +157,9 @@ ptlUploadProtocol
   = lens _ptlUploadProtocol
       (\ s a -> s{_ptlUploadProtocol = a})
 
--- | The location to which to direct the request.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- to which to direct the request.
 ptlLocation :: Lens' ProjectsTemplatesLaunch (Maybe Text)
 ptlLocation
   = lens _ptlLocation (\ s a -> s{_ptlLocation = a})

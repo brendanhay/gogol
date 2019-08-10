@@ -23,7 +23,7 @@
 -- Cancels a transfer. Use the get method to check whether the cancellation
 -- succeeded or whether the operation completed despite cancellation.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.cancel@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.cancel@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
     (
     -- * REST Resource

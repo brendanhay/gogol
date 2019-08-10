@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.getIamPolicy@ method which the
 -- 'ProjectsLocationsQueuesGetIAMPolicy' request conforms to.
 type ProjectsLocationsQueuesGetIAMPolicyResource =
-     "v2beta3" :>
+     "v2" :>
        CaptureMode "resource" "getIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

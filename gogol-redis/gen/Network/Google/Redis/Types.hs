@@ -22,10 +22,18 @@ module Network.Google.Redis.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * FailoverInstanceRequest
+    , FailoverInstanceRequest
+    , failoverInstanceRequest
+    , firDataProtectionMode
+
     -- * InstanceLabels
     , InstanceLabels
     , instanceLabels
     , ilAddtional
+
+    -- * FailoverInstanceRequestDataProtectionMode
+    , FailoverInstanceRequestDataProtectionMode (..)
 
     -- * Status
     , Status

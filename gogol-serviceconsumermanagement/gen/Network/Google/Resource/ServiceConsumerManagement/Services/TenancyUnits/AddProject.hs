@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Add a new tenant project to the tenancy unit. There can be at most 512
--- tenant projects in a tenancy unit. If there are previously failed
+-- Add a new tenant project to the tenancy unit. There can be a maximum of
+-- 512 tenant projects in a tenancy unit. If there are previously failed
 -- \`AddTenantProject\` calls, you might need to call
--- \`RemoveTenantProject\` first to clean them before you can make another
--- \`AddTenantProject\` with the same tag. Operation.
+-- \`RemoveTenantProject\` first to resolve them before you can make
+-- another call to \`AddTenantProject\` with the same tag. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.addProject@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.AddProject
@@ -63,11 +63,11 @@ type ServicesTenancyUnitsAddProjectResource =
                      ReqBody '[JSON] AddTenantProjectRequest :>
                        Post '[JSON] Operation
 
--- | Add a new tenant project to the tenancy unit. There can be at most 512
--- tenant projects in a tenancy unit. If there are previously failed
+-- | Add a new tenant project to the tenancy unit. There can be a maximum of
+-- 512 tenant projects in a tenancy unit. If there are previously failed
 -- \`AddTenantProject\` calls, you might need to call
--- \`RemoveTenantProject\` first to clean them before you can make another
--- \`AddTenantProject\` with the same tag. Operation.
+-- \`RemoveTenantProject\` first to resolve them before you can make
+-- another call to \`AddTenantProject\` with the same tag. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsAddProject' smart constructor.
 data ServicesTenancyUnitsAddProject =
@@ -116,7 +116,8 @@ servicesTenancyUnitsAddProject pSParent_ pSPayload_ =
     }
 
 
--- | Name of the tenancy unit.
+-- | Name of the tenancy unit. Such as
+-- \'services\/service.googleapis.com\/projects\/12345\/tenancyUnits\/abcd\'.
 sParent :: Lens' ServicesTenancyUnitsAddProject Text
 sParent = lens _sParent (\ s a -> s{_sParent = a})
 

@@ -558,6 +558,7 @@ module Network.Google.RemoteBuildExecution.Types
     -- * GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
     , GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
     , googleDevtoolsRemoteworkersV1test2CommandTaskInputs
+    , gdrvctiWorkingDirectory
     , gdrvctiArguments
     , gdrvctiFiles
     , gdrvctiEnvironmentVariables
@@ -649,6 +650,7 @@ module Network.Google.RemoteBuildExecution.Types
     , googleDevtoolsRemotebuildbotCommandEvents
     , gdrceDockerCacheHit
     , gdrceNumErrors
+    , gdrceInputCacheMiss
     , gdrceNumWarnings
 
     -- * GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs

@@ -158,6 +158,9 @@ module Network.Google.Gmail
     -- ** gmail.users.settings.getImap
     , module Network.Google.Resource.Gmail.Users.Settings.GetImap
 
+    -- ** gmail.users.settings.getLanguage
+    , module Network.Google.Resource.Gmail.Users.Settings.GetLanguage
+
     -- ** gmail.users.settings.getPop
     , module Network.Google.Resource.Gmail.Users.Settings.GetPop
 
@@ -205,6 +208,9 @@ module Network.Google.Gmail
 
     -- ** gmail.users.settings.updateImap
     , module Network.Google.Resource.Gmail.Users.Settings.UpdateImap
+
+    -- ** gmail.users.settings.updateLanguage
+    , module Network.Google.Resource.Gmail.Users.Settings.UpdateLanguage
 
     -- ** gmail.users.settings.updatePop
     , module Network.Google.Resource.Gmail.Users.Settings.UpdatePop
@@ -452,6 +458,11 @@ module Network.Google.Gmail
     , listSendAsResponse
     , lsarSendAs
 
+    -- ** LanguageSettings
+    , LanguageSettings
+    , languageSettings
+    , lsDisplayLanguage
+
     -- ** WatchResponse
     , WatchResponse
     , watchResponse
@@ -648,6 +659,7 @@ import           Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresse
 import           Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.List
 import           Network.Google.Resource.Gmail.Users.Settings.GetAutoForwarding
 import           Network.Google.Resource.Gmail.Users.Settings.GetImap
+import           Network.Google.Resource.Gmail.Users.Settings.GetLanguage
 import           Network.Google.Resource.Gmail.Users.Settings.GetPop
 import           Network.Google.Resource.Gmail.Users.Settings.GetVacation
 import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Create
@@ -664,6 +676,7 @@ import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
 import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Verify
 import           Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
 import           Network.Google.Resource.Gmail.Users.Settings.UpdateImap
+import           Network.Google.Resource.Gmail.Users.Settings.UpdateLanguage
 import           Network.Google.Resource.Gmail.Users.Settings.UpdatePop
 import           Network.Google.Resource.Gmail.Users.Settings.UpdateVacation
 import           Network.Google.Resource.Gmail.Users.Stop
@@ -707,10 +720,12 @@ type GmailAPI =
        :<|> UsersSettingsSendAsDeleteResource
        :<|> UsersSettingsSendAsUpdateResource
        :<|> UsersSettingsUpdateImapResource
+       :<|> UsersSettingsGetLanguageResource
        :<|> UsersSettingsGetVacationResource
        :<|> UsersSettingsGetAutoForwardingResource
        :<|> UsersSettingsUpdateAutoForwardingResource
        :<|> UsersSettingsUpdateVacationResource
+       :<|> UsersSettingsUpdateLanguageResource
        :<|> UsersSettingsGetImapResource
        :<|> UsersSettingsUpdatePopResource
        :<|> UsersSettingsGetPopResource

@@ -143,7 +143,9 @@ pljdscUploadProtocol
   = lens _pljdscUploadProtocol
       (\ s a -> s{_pljdscUploadProtocol = a})
 
--- | The location which contains the job specified by job_id.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job specified by job_id.
 pljdscLocation :: Lens' ProjectsLocationsJobsDebugSendCapture Text
 pljdscLocation
   = lens _pljdscLocation

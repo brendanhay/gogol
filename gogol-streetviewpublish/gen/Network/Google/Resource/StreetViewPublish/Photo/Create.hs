@@ -25,9 +25,9 @@
 -- Google Maps. Currently, the only way to set heading, pitch, and roll in
 -- CreatePhoto is through the [Photo Sphere XMP
 -- metadata](https:\/\/developers.google.com\/streetview\/spherical-metadata)
--- in the photo bytes. The \`pose.heading\`, \`pose.pitch\`, \`pose.roll\`,
--- \`pose.altitude\`, and \`pose.level\` fields in Pose are ignored for
--- CreatePhoto. This method returns the following error codes: *
+-- in the photo bytes. CreatePhoto ignores the \`pose.heading\`,
+-- \`pose.pitch\`, \`pose.roll\`, \`pose.altitude\`, and \`pose.level\`
+-- fields in Pose. This method returns the following error codes: *
 -- google.rpc.Code.INVALID_ARGUMENT if the request is malformed or if the
 -- uploaded photo is not a 360 photo. * google.rpc.Code.NOT_FOUND if the
 -- upload reference does not exist. * google.rpc.Code.RESOURCE_EXHAUSTED if
@@ -73,9 +73,9 @@ type PhotoCreateResource =
 -- Google Maps. Currently, the only way to set heading, pitch, and roll in
 -- CreatePhoto is through the [Photo Sphere XMP
 -- metadata](https:\/\/developers.google.com\/streetview\/spherical-metadata)
--- in the photo bytes. The \`pose.heading\`, \`pose.pitch\`, \`pose.roll\`,
--- \`pose.altitude\`, and \`pose.level\` fields in Pose are ignored for
--- CreatePhoto. This method returns the following error codes: *
+-- in the photo bytes. CreatePhoto ignores the \`pose.heading\`,
+-- \`pose.pitch\`, \`pose.roll\`, \`pose.altitude\`, and \`pose.level\`
+-- fields in Pose. This method returns the following error codes: *
 -- google.rpc.Code.INVALID_ARGUMENT if the request is malformed or if the
 -- uploaded photo is not a 360 photo. * google.rpc.Code.NOT_FOUND if the
 -- upload reference does not exist. * google.rpc.Code.RESOURCE_EXHAUSTED if

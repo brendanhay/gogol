@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the user\'s Team Drives.
+-- Deprecated use drives.list instead.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.teamdrives.list@.
 module Network.Google.Resource.Drive.Teamdrives.List
@@ -54,7 +54,7 @@ type TeamdrivesListResource =
                  QueryParam "pageSize" (Textual Int32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] TeamDriveList
 
--- | Lists the user\'s Team Drives.
+-- | Deprecated use drives.list instead.
 --
 -- /See:/ 'teamdrivesList' smart constructor.
 data TeamdrivesList =

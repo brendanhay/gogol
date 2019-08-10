@@ -22,8 +22,8 @@
 --
 -- Synchronously invokes a deployed Cloud Function. To be used for testing
 -- purposes as very limited traffic is allowed. For more information on the
--- actual limits refer to [API Calls](
--- https:\/\/cloud.google.com\/functions\/quotas#rate_limits).
+-- actual limits, refer to [Rate
+-- Limits](https:\/\/cloud.google.com\/functions\/quotas#rate_limits).
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.call@.
 module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Call
@@ -64,8 +64,8 @@ type ProjectsLocationsFunctionsCallResource =
 
 -- | Synchronously invokes a deployed Cloud Function. To be used for testing
 -- purposes as very limited traffic is allowed. For more information on the
--- actual limits refer to [API Calls](
--- https:\/\/cloud.google.com\/functions\/quotas#rate_limits).
+-- actual limits, refer to [Rate
+-- Limits](https:\/\/cloud.google.com\/functions\/quotas#rate_limits).
 --
 -- /See:/ 'projectsLocationsFunctionsCall' smart constructor.
 data ProjectsLocationsFunctionsCall =

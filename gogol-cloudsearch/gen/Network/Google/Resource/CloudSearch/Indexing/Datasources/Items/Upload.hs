@@ -138,8 +138,8 @@ indPayload :: Lens' IndexingDatasourcesItemsUpload StartUploadItemRequest
 indPayload
   = lens _indPayload (\ s a -> s{_indPayload = a})
 
--- | Name of the Data Source to start a resumable upload. Format:
--- datasources\/{source_id}
+-- | Name of the Item to start a resumable upload. Format:
+-- datasources\/{source_id}\/items\/{item_id}.
 indName :: Lens' IndexingDatasourcesItemsUpload Text
 indName = lens _indName (\ s a -> s{_indName = a})
 

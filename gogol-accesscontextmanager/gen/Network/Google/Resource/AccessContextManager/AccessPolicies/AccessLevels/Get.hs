@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.get@ method which the
 -- 'AccessPoliciesAccessLevelsGet' request conforms to.
 type AccessPoliciesAccessLevelsGetResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

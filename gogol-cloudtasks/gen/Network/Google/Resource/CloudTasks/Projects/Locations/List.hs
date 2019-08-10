@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.list@ method which the
 -- 'ProjectsLocationsList' request conforms to.
 type ProjectsLocationsListResource =
-     "v2beta3" :>
+     "v2" :>
        Capture "name" Text :>
          "locations" :>
            QueryParam "$.xgafv" Xgafv :>

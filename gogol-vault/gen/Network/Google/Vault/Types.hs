@@ -26,8 +26,11 @@ module Network.Google.Vault.Types
     -- * HeldAccount
     , HeldAccount
     , heldAccount
+    , haEmail
+    , haLastName
     , haAccountId
     , haHoldTime
+    , haFirstName
 
     -- * HeldHangoutsChatQuery
     , HeldHangoutsChatQuery
@@ -319,6 +322,7 @@ module Network.Google.Vault.Types
     , MailExportOptions
     , mailExportOptions
     , meoExportFormat
+    , meoShowConfidentialModeContent
 
     -- * ListHoldsResponse
     , ListHoldsResponse

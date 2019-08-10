@@ -27,6 +27,12 @@ module Network.Google.Container.Types
     , networkPolicyConfig
     , npcDisabled
 
+    -- * ListUsableSubnetworksResponse
+    , ListUsableSubnetworksResponse
+    , listUsableSubnetworksResponse
+    , lusrNextPageToken
+    , lusrSubnetworks
+
     -- * UpdateNodePoolRequest
     , UpdateNodePoolRequest
     , updateNodePoolRequest
@@ -65,6 +71,9 @@ module Network.Google.Container.Types
     , slarClusterId
     , slarProjectId
 
+    -- * UsableSubnetworkSecondaryRangeStatus
+    , UsableSubnetworkSecondaryRangeStatus (..)
+
     -- * HorizontalPodAutoscaling
     , HorizontalPodAutoscaling
     , horizontalPodAutoscaling
@@ -101,6 +110,7 @@ module Network.Google.Container.Types
     , cNodePools
     , cEnableKubernetesAlpha
     , cResourceLabels
+    , cTpuIPv4CIdRBlock
     , cNodeConfig
     , cNodeIPv4CIdRSize
     , cClusterIPv4CIdR
@@ -121,11 +131,13 @@ module Network.Google.Container.Types
     , cName
     , cCurrentMasterVersion
     , cStatusMessage
+    , cDefaultMaxPodsConstraint
     , cSubnetwork
     , cCurrentNodeCount
     , cPrivateClusterConfig
     , cMaintenancePolicy
     , cConditions
+    , cEnableTpu
     , cEndpoint
     , cExpireTime
     , cNetworkPolicy
@@ -236,6 +248,13 @@ module Network.Google.Container.Types
     -- * OperationOperationType
     , OperationOperationType (..)
 
+    -- * UsableSubnetworkSecondaryRange
+    , UsableSubnetworkSecondaryRange
+    , usableSubnetworkSecondaryRange
+    , ussrStatus
+    , ussrRangeName
+    , ussrIPCIdRRange
+
     -- * NodeManagement
     , NodeManagement
     , nodeManagement
@@ -265,6 +284,15 @@ module Network.Google.Container.Types
     , smprClusterId
     , smprMaintenancePolicy
     , smprProjectId
+
+    -- * UsableSubnetwork
+    , UsableSubnetwork
+    , usableSubnetwork
+    , usNetwork
+    , usStatusMessage
+    , usSecondaryIPRanges
+    , usIPCIdRRange
+    , usSubnetwork
 
     -- * KubernetesDashboard
     , KubernetesDashboard
@@ -318,10 +346,16 @@ module Network.Google.Container.Types
     , maintenanceWindow
     , mwDailyMaintenanceWindow
 
+    -- * MaxPodsConstraint
+    , MaxPodsConstraint
+    , maxPodsConstraint
+    , mpcMaxPodsPerNode
+
     -- * IPAllocationPolicy
     , IPAllocationPolicy
     , ipAllocationPolicy
     , iapServicesSecondaryRangeName
+    , iapTpuIPv4CIdRBlock
     , iapNodeIPv4CIdR
     , iapUseIPAliases
     , iapClusterIPv4CIdR
@@ -355,6 +389,7 @@ module Network.Google.Container.Types
     , npConfig
     , npInitialNodeCount
     , npManagement
+    , npMaxPodsConstraint
     , npSelfLink
     , npName
     , npStatusMessage

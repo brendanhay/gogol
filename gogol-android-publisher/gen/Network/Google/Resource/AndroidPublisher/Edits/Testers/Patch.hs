@@ -92,8 +92,7 @@ editsTestersPatch pEtpTrack_ pEtpPackageName_ pEtpPayload_ pEtpEditId_ =
     }
 
 
--- | The track to read or modify. Acceptable values are: \"alpha\", \"beta\",
--- \"production\", \"rollout\" or \"internal\".
+-- | The track to read or modify.
 etpTrack :: Lens' EditsTestersPatch Text
 etpTrack = lens _etpTrack (\ s a -> s{_etpTrack = a})
 

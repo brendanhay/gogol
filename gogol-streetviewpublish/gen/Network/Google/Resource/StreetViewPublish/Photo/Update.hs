@@ -23,15 +23,13 @@
 -- Updates the metadata of a Photo, such as pose, place association,
 -- connections, etc. Changing the pixels of a photo is not supported. Only
 -- the fields specified in the updateMask field are used. If \`updateMask\`
--- is not present, the update applies to all fields.
--- __Note:__ To update Pose.altitude, Pose.latLngPair has to be filled as
--- well. Otherwise, the request will fail.
--- This method returns the following error codes: *
--- google.rpc.Code.PERMISSION_DENIED if the requesting user did not create
--- the requested photo. * google.rpc.Code.INVALID_ARGUMENT if the request
--- is malformed. * google.rpc.Code.NOT_FOUND if the requested photo does
--- not exist. * google.rpc.Code.UNAVAILABLE if the requested Photo is still
--- being indexed.
+-- is not present, the update applies to all fields. This method returns
+-- the following error codes: * google.rpc.Code.PERMISSION_DENIED if the
+-- requesting user did not create the requested photo. *
+-- google.rpc.Code.INVALID_ARGUMENT if the request is malformed. *
+-- google.rpc.Code.NOT_FOUND if the requested photo does not exist. *
+-- google.rpc.Code.UNAVAILABLE if the requested Photo is still being
+-- indexed.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photo.update@.
 module Network.Google.Resource.StreetViewPublish.Photo.Update
@@ -75,15 +73,13 @@ type PhotoUpdateResource =
 -- | Updates the metadata of a Photo, such as pose, place association,
 -- connections, etc. Changing the pixels of a photo is not supported. Only
 -- the fields specified in the updateMask field are used. If \`updateMask\`
--- is not present, the update applies to all fields.
--- __Note:__ To update Pose.altitude, Pose.latLngPair has to be filled as
--- well. Otherwise, the request will fail.
--- This method returns the following error codes: *
--- google.rpc.Code.PERMISSION_DENIED if the requesting user did not create
--- the requested photo. * google.rpc.Code.INVALID_ARGUMENT if the request
--- is malformed. * google.rpc.Code.NOT_FOUND if the requested photo does
--- not exist. * google.rpc.Code.UNAVAILABLE if the requested Photo is still
--- being indexed.
+-- is not present, the update applies to all fields. This method returns
+-- the following error codes: * google.rpc.Code.PERMISSION_DENIED if the
+-- requesting user did not create the requested photo. *
+-- google.rpc.Code.INVALID_ARGUMENT if the request is malformed. *
+-- google.rpc.Code.NOT_FOUND if the requested photo does not exist. *
+-- google.rpc.Code.UNAVAILABLE if the requested Photo is still being
+-- indexed.
 --
 -- /See:/ 'photoUpdate' smart constructor.
 data PhotoUpdate =
@@ -147,17 +143,17 @@ puUploadProtocol
       (\ s a -> s{_puUploadProtocol = a})
 
 -- | Mask that identifies fields on the photo metadata to update. If not
--- present, the old Photo metadata will be entirely replaced with the new
--- Photo metadata in this request. The update fails if invalid fields are
+-- present, the old Photo metadata is entirely replaced with the new Photo
+-- metadata in this request. The update fails if invalid fields are
 -- specified. Multiple fields can be specified in a comma-delimited list.
 -- The following fields are valid: * \`pose.heading\` * \`pose.latLngPair\`
 -- * \`pose.pitch\` * \`pose.roll\` * \`pose.level\` * \`pose.altitude\` *
 -- \`connections\` * \`places\`
--- __Note:__ Repeated fields in updateMask mean the entire set of repeated
--- values will be replaced with the new contents. For example, if
+-- __Note:__ When updateMask contains repeated fields, the entire set of
+-- repeated values get replaced with the new contents. For example, if
 -- updateMask contains \`connections\` and
--- \`UpdatePhotoRequest.photo.connections\` is empty, all connections will
--- be removed.
+-- \`UpdatePhotoRequest.photo.connections\` is empty, all connections are
+-- removed.
 puUpdateMask :: Lens' PhotoUpdate (Maybe GFieldMask)
 puUpdateMask
   = lens _puUpdateMask (\ s a -> s{_puUpdateMask = a})

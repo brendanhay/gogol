@@ -2375,7 +2375,7 @@ ncType = lens _ncType (\ s a -> s{_ncType = a})
 
 -- | An optional human-readable description of this notification channel.
 -- This description may provide additional details, beyond the display
--- name, for the channel. This may not exceeed 1024 Unicode characters.
+-- name, for the channel. This may not exceed 1024 Unicode characters.
 ncDescription :: Lens' NotificationChannel (Maybe Text)
 ncDescription
   = lens _ncDescription
@@ -2847,7 +2847,6 @@ data UptimeCheckConfig =
     , _uccName              :: !(Maybe Text)
     , _uccMonitoredResource :: !(Maybe MonitoredResource)
     , _uccSelectedRegions   :: !(Maybe [Text])
-    , _uccIsInternal        :: !(Maybe Bool)
     , _uccDisplayName       :: !(Maybe Text)
     , _uccResourceGroup     :: !(Maybe ResourceGroup)
     , _uccTimeout           :: !(Maybe GDuration)
@@ -2873,8 +2872,6 @@ data UptimeCheckConfig =
 --
 -- * 'uccSelectedRegions'
 --
--- * 'uccIsInternal'
---
 -- * 'uccDisplayName'
 --
 -- * 'uccResourceGroup'
@@ -2894,7 +2891,6 @@ uptimeCheckConfig =
     , _uccName = Nothing
     , _uccMonitoredResource = Nothing
     , _uccSelectedRegions = Nothing
-    , _uccIsInternal = Nothing
     , _uccDisplayName = Nothing
     , _uccResourceGroup = Nothing
     , _uccTimeout = Nothing
@@ -2963,16 +2959,6 @@ uccSelectedRegions
       . _Default
       . _Coerce
 
--- | If this is true, then checks are made only from the
--- \'internal_checkers\'. If it is false, then checks are made only from
--- the \'selected_regions\'. It is an error to provide \'selected_regions\'
--- when is_internal is true, or to provide \'internal_checkers\' when
--- is_internal is false.
-uccIsInternal :: Lens' UptimeCheckConfig (Maybe Bool)
-uccIsInternal
-  = lens _uccIsInternal
-      (\ s a -> s{_uccIsInternal = a})
-
 -- | A human-friendly name for the uptime check configuration. The display
 -- name should be unique within a Stackdriver Workspace in order to make it
 -- easier to identify; however, uniqueness is not enforced. Required.
@@ -3015,7 +3001,6 @@ instance FromJSON UptimeCheckConfig where
                      <*> (o .:? "name")
                      <*> (o .:? "monitoredResource")
                      <*> (o .:? "selectedRegions" .!= mempty)
-                     <*> (o .:? "isInternal")
                      <*> (o .:? "displayName")
                      <*> (o .:? "resourceGroup")
                      <*> (o .:? "timeout")
@@ -3032,7 +3017,6 @@ instance ToJSON UptimeCheckConfig where
                   ("name" .=) <$> _uccName,
                   ("monitoredResource" .=) <$> _uccMonitoredResource,
                   ("selectedRegions" .=) <$> _uccSelectedRegions,
-                  ("isInternal" .=) <$> _uccIsInternal,
                   ("displayName" .=) <$> _uccDisplayName,
                   ("resourceGroup" .=) <$> _uccResourceGroup,
                   ("timeout" .=) <$> _uccTimeout,
@@ -3769,8 +3753,8 @@ exemplar =
   Exemplar' {_eAttachments = Nothing, _eValue = Nothing, _eTimestamp = Nothing}
 
 
--- | Contextual information about the example value. Examples are:Trace ID:
--- type.googleapis.com\/google.devtools.cloudtrace.v1.TraceLiteral string:
+-- | Contextual information about the example value. Examples are:Trace:
+-- type.googleapis.com\/google.monitoring.v3.SpanContextLiteral string:
 -- type.googleapis.com\/google.protobuf.StringValueLabels dropped during
 -- aggregation:
 -- type.googleapis.com\/google.monitoring.v3.DroppedLabelsThere may be only
@@ -5014,7 +4998,8 @@ httpcUseSSL
 
 -- | The path to the page to run the check against. Will be combined with the
 -- host (specified within the MonitoredResource) and port to construct the
--- full URL. Optional (defaults to \"\/\").
+-- full URL. Optional (defaults to \"\/\"). If the provided path does not
+-- begin with \"\/\", it will be prepended automatically.
 httpcPath :: Lens' HTTPCheck (Maybe Text)
 httpcPath
   = lens _httpcPath (\ s a -> s{_httpcPath = a})

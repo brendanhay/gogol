@@ -644,6 +644,184 @@ instance ToJSON Notification where
               (catMaybes
                  [("cloudPubsubTopic" .=) <$> _nCloudPubsubTopic])
 
+-- | Alerts from G Suite Security Center rules service configured by admin.
+--
+-- /See:/ 'activityRule' smart constructor.
+data ActivityRule =
+  ActivityRule'
+    { _arSupersededAlerts :: !(Maybe [Text])
+    , _arActionNames      :: !(Maybe [Text])
+    , _arSupersedingAlert :: !(Maybe Text)
+    , _arTriggerSource    :: !(Maybe Text)
+    , _arWindowSize       :: !(Maybe GDuration)
+    , _arUpdateTime       :: !(Maybe DateTime')
+    , _arName             :: !(Maybe Text)
+    , _arThreshold        :: !(Maybe Text)
+    , _arQuery            :: !(Maybe Text)
+    , _arDisplayName      :: !(Maybe Text)
+    , _arDescription      :: !(Maybe Text)
+    , _arCreateTime       :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ActivityRule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'arSupersededAlerts'
+--
+-- * 'arActionNames'
+--
+-- * 'arSupersedingAlert'
+--
+-- * 'arTriggerSource'
+--
+-- * 'arWindowSize'
+--
+-- * 'arUpdateTime'
+--
+-- * 'arName'
+--
+-- * 'arThreshold'
+--
+-- * 'arQuery'
+--
+-- * 'arDisplayName'
+--
+-- * 'arDescription'
+--
+-- * 'arCreateTime'
+activityRule
+    :: ActivityRule
+activityRule =
+  ActivityRule'
+    { _arSupersededAlerts = Nothing
+    , _arActionNames = Nothing
+    , _arSupersedingAlert = Nothing
+    , _arTriggerSource = Nothing
+    , _arWindowSize = Nothing
+    , _arUpdateTime = Nothing
+    , _arName = Nothing
+    , _arThreshold = Nothing
+    , _arQuery = Nothing
+    , _arDisplayName = Nothing
+    , _arDescription = Nothing
+    , _arCreateTime = Nothing
+    }
+
+
+-- | List of alert ids superseded by this alert. It is used to indicate that
+-- this alert is essentially extension of superseded alerts and we found
+-- the relationship after creating these alerts.
+arSupersededAlerts :: Lens' ActivityRule [Text]
+arSupersededAlerts
+  = lens _arSupersededAlerts
+      (\ s a -> s{_arSupersededAlerts = a})
+      . _Default
+      . _Coerce
+
+-- | List of action names associated with the rule threshold.
+arActionNames :: Lens' ActivityRule [Text]
+arActionNames
+  = lens _arActionNames
+      (\ s a -> s{_arActionNames = a})
+      . _Default
+      . _Coerce
+
+-- | Alert id superseding this alert. It is used to indicate that superseding
+-- alert is essentially extension of this alert and we found the
+-- relationship after creating both alerts.
+arSupersedingAlert :: Lens' ActivityRule (Maybe Text)
+arSupersedingAlert
+  = lens _arSupersedingAlert
+      (\ s a -> s{_arSupersedingAlert = a})
+
+-- | The trigger sources for this rule. * GMAIL_EVENTS * DEVICE_EVENTS *
+-- USER_EVENTS
+arTriggerSource :: Lens' ActivityRule (Maybe Text)
+arTriggerSource
+  = lens _arTriggerSource
+      (\ s a -> s{_arTriggerSource = a})
+
+-- | Rule window size. Possible values are 1 hour or 24 hours.
+arWindowSize :: Lens' ActivityRule (Maybe Scientific)
+arWindowSize
+  = lens _arWindowSize (\ s a -> s{_arWindowSize = a})
+      . mapping _GDuration
+
+-- | The timestamp of the last update to the rule.
+arUpdateTime :: Lens' ActivityRule (Maybe UTCTime)
+arUpdateTime
+  = lens _arUpdateTime (\ s a -> s{_arUpdateTime = a})
+      . mapping _DateTime
+
+-- | Rule name.
+arName :: Lens' ActivityRule (Maybe Text)
+arName = lens _arName (\ s a -> s{_arName = a})
+
+-- | Alert threshold is for example “COUNT > 5”.
+arThreshold :: Lens' ActivityRule (Maybe Text)
+arThreshold
+  = lens _arThreshold (\ s a -> s{_arThreshold = a})
+
+-- | Query that is used to get the data from the associated source.
+arQuery :: Lens' ActivityRule (Maybe Text)
+arQuery = lens _arQuery (\ s a -> s{_arQuery = a})
+
+-- | Alert display name.
+arDisplayName :: Lens' ActivityRule (Maybe Text)
+arDisplayName
+  = lens _arDisplayName
+      (\ s a -> s{_arDisplayName = a})
+
+-- | Description of the rule.
+arDescription :: Lens' ActivityRule (Maybe Text)
+arDescription
+  = lens _arDescription
+      (\ s a -> s{_arDescription = a})
+
+-- | Rule create timestamp.
+arCreateTime :: Lens' ActivityRule (Maybe UTCTime)
+arCreateTime
+  = lens _arCreateTime (\ s a -> s{_arCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON ActivityRule where
+        parseJSON
+          = withObject "ActivityRule"
+              (\ o ->
+                 ActivityRule' <$>
+                   (o .:? "supersededAlerts" .!= mempty) <*>
+                     (o .:? "actionNames" .!= mempty)
+                     <*> (o .:? "supersedingAlert")
+                     <*> (o .:? "triggerSource")
+                     <*> (o .:? "windowSize")
+                     <*> (o .:? "updateTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "threshold")
+                     <*> (o .:? "query")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "description")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON ActivityRule where
+        toJSON ActivityRule'{..}
+          = object
+              (catMaybes
+                 [("supersededAlerts" .=) <$> _arSupersededAlerts,
+                  ("actionNames" .=) <$> _arActionNames,
+                  ("supersedingAlert" .=) <$> _arSupersedingAlert,
+                  ("triggerSource" .=) <$> _arTriggerSource,
+                  ("windowSize" .=) <$> _arWindowSize,
+                  ("updateTime" .=) <$> _arUpdateTime,
+                  ("name" .=) <$> _arName,
+                  ("threshold" .=) <$> _arThreshold,
+                  ("query" .=) <$> _arQuery,
+                  ("displayName" .=) <$> _arDisplayName,
+                  ("description" .=) <$> _arDescription,
+                  ("createTime" .=) <$> _arCreateTime])
+
 -- | Alerts for user account warning events.
 --
 -- /See:/ 'accountWarning' smart constructor.
@@ -1079,6 +1257,7 @@ data Alert =
     , _aAlertId                       :: !(Maybe Text)
     , _aSecurityInvestigationToolLink :: !(Maybe Text)
     , _aCustomerId                    :: !(Maybe Text)
+    , _aUpdateTime                    :: !(Maybe DateTime')
     , _aEndTime                       :: !(Maybe DateTime')
     , _aSource                        :: !(Maybe Text)
     , _aDeleted                       :: !(Maybe Bool)
@@ -1102,6 +1281,8 @@ data Alert =
 --
 -- * 'aCustomerId'
 --
+-- * 'aUpdateTime'
+--
 -- * 'aEndTime'
 --
 -- * 'aSource'
@@ -1120,6 +1301,7 @@ alert =
     , _aAlertId = Nothing
     , _aSecurityInvestigationToolLink = Nothing
     , _aCustomerId = Nothing
+    , _aUpdateTime = Nothing
     , _aEndTime = Nothing
     , _aSource = Nothing
     , _aDeleted = Nothing
@@ -1158,9 +1340,15 @@ aCustomerId :: Lens' Alert (Maybe Text)
 aCustomerId
   = lens _aCustomerId (\ s a -> s{_aCustomerId = a})
 
+-- | Output only. The time this alert was last updated.
+aUpdateTime :: Lens' Alert (Maybe UTCTime)
+aUpdateTime
+  = lens _aUpdateTime (\ s a -> s{_aUpdateTime = a}) .
+      mapping _DateTime
+
 -- | Optional. The time the event that caused this alert ceased being active.
 -- If provided, the end time must not be earlier than the start time. If
--- not provided, the end time defaults to the start time.
+-- not provided, it indicates an ongoing alert.
 aEndTime :: Lens' Alert (Maybe UTCTime)
 aEndTime
   = lens _aEndTime (\ s a -> s{_aEndTime = a}) .
@@ -1199,6 +1387,7 @@ instance FromJSON Alert where
                      (o .:? "alertId")
                      <*> (o .:? "securityInvestigationToolLink")
                      <*> (o .:? "customerId")
+                     <*> (o .:? "updateTime")
                      <*> (o .:? "endTime")
                      <*> (o .:? "source")
                      <*> (o .:? "deleted")
@@ -1214,6 +1403,7 @@ instance ToJSON Alert where
                   ("securityInvestigationToolLink" .=) <$>
                     _aSecurityInvestigationToolLink,
                   ("customerId" .=) <$> _aCustomerId,
+                  ("updateTime" .=) <$> _aUpdateTime,
                   ("endTime" .=) <$> _aEndTime,
                   ("source" .=) <$> _aSource,
                   ("deleted" .=) <$> _aDeleted, ("type" .=) <$> _aType,
@@ -1251,76 +1441,6 @@ instance FromJSON Attachment where
 instance ToJSON Attachment where
         toJSON Attachment'{..}
           = object (catMaybes [("csv" .=) <$> _aCSV])
-
--- | Requests for one application that needs default SQL setup.
---
--- /See:/ 'requestInfo' smart constructor.
-data RequestInfo =
-  RequestInfo'
-    { _riNumberOfRequests  :: !(Maybe (Textual Int64))
-    , _riAppDeveloperEmail :: !(Maybe [Text])
-    , _riAppName           :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'RequestInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'riNumberOfRequests'
---
--- * 'riAppDeveloperEmail'
---
--- * 'riAppName'
-requestInfo
-    :: RequestInfo
-requestInfo =
-  RequestInfo'
-    { _riNumberOfRequests = Nothing
-    , _riAppDeveloperEmail = Nothing
-    , _riAppName = Nothing
-    }
-
-
--- | Required. Number of requests sent for this application to set up default
--- SQL instance.
-riNumberOfRequests :: Lens' RequestInfo (Maybe Int64)
-riNumberOfRequests
-  = lens _riNumberOfRequests
-      (\ s a -> s{_riNumberOfRequests = a})
-      . mapping _Coerce
-
--- | List of app developers who triggered notifications for above
--- application.
-riAppDeveloperEmail :: Lens' RequestInfo [Text]
-riAppDeveloperEmail
-  = lens _riAppDeveloperEmail
-      (\ s a -> s{_riAppDeveloperEmail = a})
-      . _Default
-      . _Coerce
-
--- | Required. The application that requires the SQL setup.
-riAppName :: Lens' RequestInfo (Maybe Text)
-riAppName
-  = lens _riAppName (\ s a -> s{_riAppName = a})
-
-instance FromJSON RequestInfo where
-        parseJSON
-          = withObject "RequestInfo"
-              (\ o ->
-                 RequestInfo' <$>
-                   (o .:? "numberOfRequests") <*>
-                     (o .:? "appDeveloperEmail" .!= mempty)
-                     <*> (o .:? "appName"))
-
-instance ToJSON RequestInfo where
-        toJSON RequestInfo'{..}
-          = object
-              (catMaybes
-                 [("numberOfRequests" .=) <$> _riNumberOfRequests,
-                  ("appDeveloperEmail" .=) <$> _riAppDeveloperEmail,
-                  ("appName" .=) <$> _riAppName])
 
 -- | An incident reported by Google Operations for a G Suite application.
 --
@@ -1451,48 +1571,6 @@ instance ToJSON SuspiciousActivity where
               (catMaybes
                  [("email" .=) <$> _saEmail,
                   ("events" .=) <$> _saEvents])
-
--- | Alerts from App Maker to notify admins to set up default SQL instance.
---
--- /See:/ 'appMakerSQLSetupNotification' smart constructor.
-newtype AppMakerSQLSetupNotification =
-  AppMakerSQLSetupNotification'
-    { _amsqlsnRequestInfo :: Maybe [RequestInfo]
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AppMakerSQLSetupNotification' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'amsqlsnRequestInfo'
-appMakerSQLSetupNotification
-    :: AppMakerSQLSetupNotification
-appMakerSQLSetupNotification =
-  AppMakerSQLSetupNotification' {_amsqlsnRequestInfo = Nothing}
-
-
--- | List of applications with requests for default SQL set up.
-amsqlsnRequestInfo :: Lens' AppMakerSQLSetupNotification [RequestInfo]
-amsqlsnRequestInfo
-  = lens _amsqlsnRequestInfo
-      (\ s a -> s{_amsqlsnRequestInfo = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON AppMakerSQLSetupNotification where
-        parseJSON
-          = withObject "AppMakerSQLSetupNotification"
-              (\ o ->
-                 AppMakerSQLSetupNotification' <$>
-                   (o .:? "requestInfo" .!= mempty))
-
-instance ToJSON AppMakerSQLSetupNotification where
-        toJSON AppMakerSQLSetupNotification'{..}
-          = object
-              (catMaybes
-                 [("requestInfo" .=) <$> _amsqlsnRequestInfo])
 
 -- | A takeout operation for the entire domain was initiated by an admin.
 -- Derived from audit logs.

@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsHl7V2StoresPatch' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresPatchResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

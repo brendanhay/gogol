@@ -28,7 +28,7 @@
 -- Service. This service account is created and owned by Storage Transfer
 -- Service and can only be used by Storage Transfer Service.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.googleServiceAccounts.get@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.googleServiceAccounts.get@.
 module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
     (
     -- * REST Resource

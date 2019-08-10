@@ -325,6 +325,8 @@ data TestIssueType
       -- ^ @launcherActivityNotFound@
     | NATiveCrash
       -- ^ @nativeCrash@
+    | NonSdkAPIUsageReport
+      -- ^ @nonSdkApiUsageReport@
     | NonSdkAPIUsageViolation
       -- ^ @nonSdkApiUsageViolation@
     | PerformedGoogleLogin
@@ -339,6 +341,8 @@ data TestIssueType
       -- ^ @unusedRoboDirective@
     | UsedRoboDirective
       -- ^ @usedRoboDirective@
+    | UsedRoboIgnoreDirective
+      -- ^ @usedRoboIgnoreDirective@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TestIssueType
@@ -360,6 +364,7 @@ instance FromHttpApiData TestIssueType where
         "iosException" -> Right IosException
         "launcherActivityNotFound" -> Right LauncherActivityNotFound
         "nativeCrash" -> Right NATiveCrash
+        "nonSdkApiUsageReport" -> Right NonSdkAPIUsageReport
         "nonSdkApiUsageViolation" -> Right NonSdkAPIUsageViolation
         "performedGoogleLogin" -> Right PerformedGoogleLogin
         "performedMonkeyActions" -> Right PerformedMonkeyActions
@@ -367,6 +372,7 @@ instance FromHttpApiData TestIssueType where
         "unspecifiedType" -> Right UnspecifiedType
         "unusedRoboDirective" -> Right UnusedRoboDirective
         "usedRoboDirective" -> Right UsedRoboDirective
+        "usedRoboIgnoreDirective" -> Right UsedRoboIgnoreDirective
         x -> Left ("Unable to parse TestIssueType from: " <> x)
 
 instance ToHttpApiData TestIssueType where
@@ -386,6 +392,7 @@ instance ToHttpApiData TestIssueType where
         IosException -> "iosException"
         LauncherActivityNotFound -> "launcherActivityNotFound"
         NATiveCrash -> "nativeCrash"
+        NonSdkAPIUsageReport -> "nonSdkApiUsageReport"
         NonSdkAPIUsageViolation -> "nonSdkApiUsageViolation"
         PerformedGoogleLogin -> "performedGoogleLogin"
         PerformedMonkeyActions -> "performedMonkeyActions"
@@ -393,6 +400,7 @@ instance ToHttpApiData TestIssueType where
         UnspecifiedType -> "unspecifiedType"
         UnusedRoboDirective -> "unusedRoboDirective"
         UsedRoboDirective -> "usedRoboDirective"
+        UsedRoboIgnoreDirective -> "usedRoboIgnoreDirective"
 
 instance FromJSON TestIssueType where
     parseJSON = parseJSONText "TestIssueType"
@@ -551,6 +559,41 @@ instance FromJSON BasicPerfSampleSeriesSampleSeriesLabel where
     parseJSON = parseJSONText "BasicPerfSampleSeriesSampleSeriesLabel"
 
 instance ToJSON BasicPerfSampleSeriesSampleSeriesLabel where
+    toJSON = toJSONText
+
+-- | The status of the test case. Required.
+data TestCaseStatus
+    = TCSError'
+      -- ^ @error@
+    | TCSFailed
+      -- ^ @failed@
+    | TCSPassed
+      -- ^ @passed@
+    | TCSSkipped
+      -- ^ @skipped@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TestCaseStatus
+
+instance FromHttpApiData TestCaseStatus where
+    parseQueryParam = \case
+        "error" -> Right TCSError'
+        "failed" -> Right TCSFailed
+        "passed" -> Right TCSPassed
+        "skipped" -> Right TCSSkipped
+        x -> Left ("Unable to parse TestCaseStatus from: " <> x)
+
+instance ToHttpApiData TestCaseStatus where
+    toQueryParam = \case
+        TCSError' -> "error"
+        TCSFailed -> "failed"
+        TCSPassed -> "passed"
+        TCSSkipped -> "skipped"
+
+instance FromJSON TestCaseStatus where
+    parseJSON = parseJSONText "TestCaseStatus"
+
+instance ToJSON TestCaseStatus where
     toJSON = toJSONText
 
 -- | Rollup test status of multiple steps that were run with the same

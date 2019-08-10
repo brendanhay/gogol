@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.pause@ method which the
 -- 'ProjectsLocationsJobsPause' request conforms to.
 type ProjectsLocationsJobsPauseResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "pause" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

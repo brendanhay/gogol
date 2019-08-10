@@ -137,7 +137,7 @@ plXgafv = lens _plXgafv (\ s a -> s{_plXgafv = a})
 -- information, see
 -- http:\/\/www.unicode.org\/reports\/tr35\/#Unicode_locale_identifier. If
 -- language_code is unspecified, the user\'s language preference for Google
--- services will be used.
+-- services is used.
 plLanguageCode :: Lens' PhotosList (Maybe Text)
 plLanguageCode
   = lens _plLanguageCode
@@ -179,9 +179,9 @@ plPageToken
 
 -- | The maximum number of photos to return. \`pageSize\` must be
 -- non-negative. If \`pageSize\` is zero or is not provided, the default
--- page size of 100 will be used. The number of photos returned in the
--- response may be less than \`pageSize\` if the number of photos that
--- belong to the user is less than \`pageSize\`.
+-- page size of 100 is used. The number of photos returned in the response
+-- may be less than \`pageSize\` if the number of photos that belong to the
+-- user is less than \`pageSize\`.
 plPageSize :: Lens' PhotosList (Maybe Int32)
 plPageSize
   = lens _plPageSize (\ s a -> s{_plPageSize = a}) .

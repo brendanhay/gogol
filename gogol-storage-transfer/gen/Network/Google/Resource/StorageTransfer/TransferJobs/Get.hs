@@ -22,7 +22,7 @@
 --
 -- Gets a transfer job.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferJobs.get@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.get@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Get
     (
     -- * REST Resource

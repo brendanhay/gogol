@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsFhirStoresCreate' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresCreateResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "parent" Text :>
          "fhirStores" :>
            QueryParam "$.xgafv" Xgafv :>

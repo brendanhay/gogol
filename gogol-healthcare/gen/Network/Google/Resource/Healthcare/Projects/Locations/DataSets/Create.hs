@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new health dataset.
+-- Creates a new health dataset. Results are returned through the Operation
+-- interface which returns either an \`Operation.response\` which contains
+-- a Dataset or \`Operation.error\`. The metadata field type is
+-- OperationMetadata.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.create@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Create
@@ -49,7 +52,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @healthcare.projects.locations.datasets.create@ method which the
 -- 'ProjectsLocationsDataSetsCreate' request conforms to.
 type ProjectsLocationsDataSetsCreateResource =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "parent" Text :>
          "datasets" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -59,9 +62,12 @@ type ProjectsLocationsDataSetsCreateResource =
                    QueryParam "datasetId" Text :>
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] DataSet :> Post '[JSON] DataSet
+                         ReqBody '[JSON] DataSet :> Post '[JSON] Operation
 
--- | Creates a new health dataset.
+-- | Creates a new health dataset. Results are returned through the Operation
+-- interface which returns either an \`Operation.response\` which contains
+-- a Dataset or \`Operation.error\`. The metadata field type is
+-- OperationMetadata.
 --
 -- /See:/ 'projectsLocationsDataSetsCreate' smart constructor.
 data ProjectsLocationsDataSetsCreate =
@@ -164,7 +170,7 @@ pldscCallback
 instance GoogleRequest
            ProjectsLocationsDataSetsCreate
          where
-        type Rs ProjectsLocationsDataSetsCreate = DataSet
+        type Rs ProjectsLocationsDataSetsCreate = Operation
         type Scopes ProjectsLocationsDataSetsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsLocationsDataSetsCreate'{..}

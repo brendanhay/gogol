@@ -254,6 +254,11 @@ module Network.Google.ServiceUsage.Types
     -- * MetricDescriptorMetadataLaunchStage
     , MetricDescriptorMetadataLaunchStage (..)
 
+    -- * BatchCreateAdminOverridesResponse
+    , BatchCreateAdminOverridesResponse
+    , batchCreateAdminOverridesResponse
+    , bcaorOverrides
+
     -- * Mixin
     , Mixin
     , mixin
@@ -312,6 +317,11 @@ module Network.Google.ServiceUsage.Types
     -- * TypeSyntax
     , TypeSyntax (..)
 
+    -- * QuotaOverrideDimensions
+    , QuotaOverrideDimensions
+    , quotaOverrideDimensions
+    , qodAddtional
+
     -- * EnableFailure
     , EnableFailure
     , enableFailure
@@ -362,6 +372,18 @@ module Network.Google.ServiceUsage.Types
     , EnableServiceResponse
     , enableServiceResponse
     , esrService
+
+    -- * QuotaOverride
+    , QuotaOverride
+    , quotaOverride
+    , qoOverrideValue
+    , qoName
+    , qoDimensions
+
+    -- * BatchCreateConsumerOverridesResponse
+    , BatchCreateConsumerOverridesResponse
+    , batchCreateConsumerOverridesResponse
+    , bccorOverrides
 
     -- * Documentation
     , Documentation

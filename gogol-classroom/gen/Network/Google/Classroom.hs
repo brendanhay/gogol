@@ -26,6 +26,7 @@ module Network.Google.Classroom
     , classroomCoursesScope
     , classroomPushNotificationsScope
     , classroomCourseworkStudentsReadOnlyScope
+    , classroomTopicsReadOnlyScope
     , classroomProFileEmailsScope
     , classroomProFilePhotosScope
     , classroomCourseworkMeScope
@@ -36,6 +37,7 @@ module Network.Google.Classroom
     , classroomRostersScope
     , classroomCoursesReadOnlyScope
     , classroomCourseworkStudentsScope
+    , classroomTopicsScope
     , classroomAnnouncementsScope
     , classroomCourseworkMeReadOnlyScope
     , classroomStudentSubmissionsMeReadOnlyScope
@@ -151,6 +153,21 @@ module Network.Google.Classroom
     -- ** classroom.courses.teachers.list
     , module Network.Google.Resource.Classroom.Courses.Teachers.List
 
+    -- ** classroom.courses.topics.create
+    , module Network.Google.Resource.Classroom.Courses.Topics.Create
+
+    -- ** classroom.courses.topics.delete
+    , module Network.Google.Resource.Classroom.Courses.Topics.Delete
+
+    -- ** classroom.courses.topics.get
+    , module Network.Google.Resource.Classroom.Courses.Topics.Get
+
+    -- ** classroom.courses.topics.list
+    , module Network.Google.Resource.Classroom.Courses.Topics.List
+
+    -- ** classroom.courses.topics.patch
+    , module Network.Google.Resource.Classroom.Courses.Topics.Patch
+
     -- ** classroom.courses.update
     , module Network.Google.Resource.Classroom.Courses.Update
 
@@ -222,6 +239,7 @@ module Network.Google.Classroom
     , cwDueTime
     , cwAssociatedWithDeveloper
     , cwUpdateTime
+    , cwTopicId
     , cwMultipleChoiceQuestion
     , cwId
     , cwSubmissionModificationMode
@@ -325,6 +343,12 @@ module Network.Google.Classroom
     , GlobalPermission
     , globalPermission
     , gpPermission
+
+    -- ** ListTopicResponse
+    , ListTopicResponse
+    , listTopicResponse
+    , ltrNextPageToken
+    , ltrTopic
 
     -- ** Link
     , Link
@@ -431,6 +455,14 @@ module Network.Google.Classroom
     , aYouTubeVideo
     , aForm
 
+    -- ** Topic
+    , Topic
+    , topic
+    , tCourseId
+    , tUpdateTime
+    , tTopicId
+    , tName
+
     -- ** Announcement
     , Announcement
     , announcement
@@ -492,9 +524,9 @@ module Network.Google.Classroom
     -- ** Teacher
     , Teacher
     , teacher
-    , tCourseId
-    , tProFile
-    , tUserId
+    , teaCourseId
+    , teaProFile
+    , teaUserId
 
     -- ** CourseMaterialSet
     , CourseMaterialSet
@@ -657,8 +689,8 @@ module Network.Google.Classroom
     -- ** ListTeachersResponse
     , ListTeachersResponse
     , listTeachersResponse
-    , ltrNextPageToken
-    , ltrTeachers
+    , lNextPageToken
+    , lTeachers
 
     -- ** Student
     , Student
@@ -717,6 +749,11 @@ import           Network.Google.Resource.Classroom.Courses.Teachers.Create
 import           Network.Google.Resource.Classroom.Courses.Teachers.Delete
 import           Network.Google.Resource.Classroom.Courses.Teachers.Get
 import           Network.Google.Resource.Classroom.Courses.Teachers.List
+import           Network.Google.Resource.Classroom.Courses.Topics.Create
+import           Network.Google.Resource.Classroom.Courses.Topics.Delete
+import           Network.Google.Resource.Classroom.Courses.Topics.Get
+import           Network.Google.Resource.Classroom.Courses.Topics.List
+import           Network.Google.Resource.Classroom.Courses.Topics.Patch
 import           Network.Google.Resource.Classroom.Courses.Update
 import           Network.Google.Resource.Classroom.Invitations.Accept
 import           Network.Google.Resource.Classroom.Invitations.Create
@@ -772,6 +809,11 @@ type ClassroomAPI =
        :<|> CoursesAnnouncementsCreateResource
        :<|> CoursesAnnouncementsModifyAssigneesResource
        :<|> CoursesAnnouncementsDeleteResource
+       :<|> CoursesTopicsListResource
+       :<|> CoursesTopicsPatchResource
+       :<|> CoursesTopicsGetResource
+       :<|> CoursesTopicsCreateResource
+       :<|> CoursesTopicsDeleteResource
        :<|> CoursesAliasesListResource
        :<|> CoursesAliasesCreateResource
        :<|> CoursesAliasesDeleteResource

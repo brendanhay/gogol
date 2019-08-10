@@ -332,6 +332,144 @@ instance ToJSON Buckets where
                  [("nextPageToken" .=) <$> _bNextPageToken,
                   Just ("kind" .= _bKind), ("items" .=) <$> _bItems])
 
+-- | JSON template to produce a JSON-style HMAC Key metadata resource.
+--
+-- /See:/ 'hmacKeyMetadata' smart constructor.
+data HmacKeyMetadata =
+  HmacKeyMetadata'
+    { _hkmEtag                :: !(Maybe Text)
+    , _hkmState               :: !(Maybe Text)
+    , _hkmKind                :: !Text
+    , _hkmSelfLink            :: !(Maybe Text)
+    , _hkmTimeCreated         :: !(Maybe Text)
+    , _hkmId                  :: !(Maybe Text)
+    , _hkmUpdated             :: !(Maybe Text)
+    , _hkmServiceAccountEmail :: !(Maybe Text)
+    , _hkmProjectId           :: !(Maybe Text)
+    , _hkmAccessId            :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'HmacKeyMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hkmEtag'
+--
+-- * 'hkmState'
+--
+-- * 'hkmKind'
+--
+-- * 'hkmSelfLink'
+--
+-- * 'hkmTimeCreated'
+--
+-- * 'hkmId'
+--
+-- * 'hkmUpdated'
+--
+-- * 'hkmServiceAccountEmail'
+--
+-- * 'hkmProjectId'
+--
+-- * 'hkmAccessId'
+hmacKeyMetadata
+    :: HmacKeyMetadata
+hmacKeyMetadata =
+  HmacKeyMetadata'
+    { _hkmEtag = Nothing
+    , _hkmState = Nothing
+    , _hkmKind = "storage#hmacKeyMetadata"
+    , _hkmSelfLink = Nothing
+    , _hkmTimeCreated = Nothing
+    , _hkmId = Nothing
+    , _hkmUpdated = Nothing
+    , _hkmServiceAccountEmail = Nothing
+    , _hkmProjectId = Nothing
+    , _hkmAccessId = Nothing
+    }
+
+
+-- | HTTP 1.1 Entity tag for the access-control entry.
+hkmEtag :: Lens' HmacKeyMetadata (Maybe Text)
+hkmEtag = lens _hkmEtag (\ s a -> s{_hkmEtag = a})
+
+-- | The state of the key. Can be one of ACTIVE, INACTIVE, or DELETED.
+hkmState :: Lens' HmacKeyMetadata (Maybe Text)
+hkmState = lens _hkmState (\ s a -> s{_hkmState = a})
+
+-- | The kind of item this is. For HMAC Key metadata, this is always
+-- storage#hmacKeyMetadata.
+hkmKind :: Lens' HmacKeyMetadata Text
+hkmKind = lens _hkmKind (\ s a -> s{_hkmKind = a})
+
+-- | The link to this resource.
+hkmSelfLink :: Lens' HmacKeyMetadata (Maybe Text)
+hkmSelfLink
+  = lens _hkmSelfLink (\ s a -> s{_hkmSelfLink = a})
+
+-- | The creation time of the HMAC key in RFC 3339 format.
+hkmTimeCreated :: Lens' HmacKeyMetadata (Maybe Text)
+hkmTimeCreated
+  = lens _hkmTimeCreated
+      (\ s a -> s{_hkmTimeCreated = a})
+
+-- | The ID of the HMAC key, including the Project ID and the Access ID.
+hkmId :: Lens' HmacKeyMetadata (Maybe Text)
+hkmId = lens _hkmId (\ s a -> s{_hkmId = a})
+
+-- | The last modification time of the HMAC key metadata in RFC 3339 format.
+hkmUpdated :: Lens' HmacKeyMetadata (Maybe Text)
+hkmUpdated
+  = lens _hkmUpdated (\ s a -> s{_hkmUpdated = a})
+
+-- | The email address of the key\'s associated service account.
+hkmServiceAccountEmail :: Lens' HmacKeyMetadata (Maybe Text)
+hkmServiceAccountEmail
+  = lens _hkmServiceAccountEmail
+      (\ s a -> s{_hkmServiceAccountEmail = a})
+
+-- | Project ID owning the service account to which the key authenticates.
+hkmProjectId :: Lens' HmacKeyMetadata (Maybe Text)
+hkmProjectId
+  = lens _hkmProjectId (\ s a -> s{_hkmProjectId = a})
+
+-- | The ID of the HMAC Key.
+hkmAccessId :: Lens' HmacKeyMetadata (Maybe Text)
+hkmAccessId
+  = lens _hkmAccessId (\ s a -> s{_hkmAccessId = a})
+
+instance FromJSON HmacKeyMetadata where
+        parseJSON
+          = withObject "HmacKeyMetadata"
+              (\ o ->
+                 HmacKeyMetadata' <$>
+                   (o .:? "etag") <*> (o .:? "state") <*>
+                     (o .:? "kind" .!= "storage#hmacKeyMetadata")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "timeCreated")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "serviceAccountEmail")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "accessId"))
+
+instance ToJSON HmacKeyMetadata where
+        toJSON HmacKeyMetadata'{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _hkmEtag,
+                  ("state" .=) <$> _hkmState,
+                  Just ("kind" .= _hkmKind),
+                  ("selfLink" .=) <$> _hkmSelfLink,
+                  ("timeCreated" .=) <$> _hkmTimeCreated,
+                  ("id" .=) <$> _hkmId, ("updated" .=) <$> _hkmUpdated,
+                  ("serviceAccountEmail" .=) <$>
+                    _hkmServiceAccountEmail,
+                  ("projectId" .=) <$> _hkmProjectId,
+                  ("accessId" .=) <$> _hkmAccessId])
+
 -- | The bucket\'s billing configuration.
 --
 -- /See:/ 'bucketBilling' smart constructor.
@@ -1587,6 +1725,71 @@ instance ToJSON Objects where
                  [("nextPageToken" .=) <$> _oNextPageToken,
                   Just ("kind" .= _oKind), ("items" .=) <$> _oItems,
                   ("prefixes" .=) <$> _oPrefixes])
+
+-- | A list of hmacKeys.
+--
+-- /See:/ 'hmacKeysMetadata' smart constructor.
+data HmacKeysMetadata =
+  HmacKeysMetadata'
+    { _hNextPageToken :: !(Maybe Text)
+    , _hKind          :: !Text
+    , _hItems         :: !(Maybe [HmacKeyMetadata])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'HmacKeysMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hNextPageToken'
+--
+-- * 'hKind'
+--
+-- * 'hItems'
+hmacKeysMetadata
+    :: HmacKeysMetadata
+hmacKeysMetadata =
+  HmacKeysMetadata'
+    { _hNextPageToken = Nothing
+    , _hKind = "storage#hmacKeysMetadata"
+    , _hItems = Nothing
+    }
+
+
+-- | The continuation token, used to page through large result sets. Provide
+-- this value in a subsequent request to return the next page of results.
+hNextPageToken :: Lens' HmacKeysMetadata (Maybe Text)
+hNextPageToken
+  = lens _hNextPageToken
+      (\ s a -> s{_hNextPageToken = a})
+
+-- | The kind of item this is. For lists of hmacKeys, this is always
+-- storage#hmacKeysMetadata.
+hKind :: Lens' HmacKeysMetadata Text
+hKind = lens _hKind (\ s a -> s{_hKind = a})
+
+-- | The list of items.
+hItems :: Lens' HmacKeysMetadata [HmacKeyMetadata]
+hItems
+  = lens _hItems (\ s a -> s{_hItems = a}) . _Default .
+      _Coerce
+
+instance FromJSON HmacKeysMetadata where
+        parseJSON
+          = withObject "HmacKeysMetadata"
+              (\ o ->
+                 HmacKeysMetadata' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "storage#hmacKeysMetadata")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON HmacKeysMetadata where
+        toJSON HmacKeysMetadata'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _hNextPageToken,
+                  Just ("kind" .= _hKind), ("items" .=) <$> _hItems])
 
 -- | An access-control list.
 --
@@ -2959,6 +3162,65 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [Just ("kind" .= _tiprKind),
                   ("permissions" .=) <$> _tiprPermissions])
+
+-- | JSON template to produce a JSON-style HMAC Key resource for Create
+-- responses.
+--
+-- /See:/ 'hmacKey' smart constructor.
+data HmacKey =
+  HmacKey'
+    { _hkKind     :: !Text
+    , _hkSecret   :: !(Maybe Text)
+    , _hkMetadata :: !(Maybe JSONValue)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'HmacKey' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hkKind'
+--
+-- * 'hkSecret'
+--
+-- * 'hkMetadata'
+hmacKey
+    :: HmacKey
+hmacKey =
+  HmacKey'
+    {_hkKind = "storage#hmacKey", _hkSecret = Nothing, _hkMetadata = Nothing}
+
+
+-- | The kind of item this is. For HMAC keys, this is always storage#hmacKey.
+hkKind :: Lens' HmacKey Text
+hkKind = lens _hkKind (\ s a -> s{_hkKind = a})
+
+-- | HMAC secret key material.
+hkSecret :: Lens' HmacKey (Maybe Text)
+hkSecret = lens _hkSecret (\ s a -> s{_hkSecret = a})
+
+-- | Key metadata.
+hkMetadata :: Lens' HmacKey (Maybe JSONValue)
+hkMetadata
+  = lens _hkMetadata (\ s a -> s{_hkMetadata = a})
+
+instance FromJSON HmacKey where
+        parseJSON
+          = withObject "HmacKey"
+              (\ o ->
+                 HmacKey' <$>
+                   (o .:? "kind" .!= "storage#hmacKey") <*>
+                     (o .:? "secret")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON HmacKey where
+        toJSON HmacKey'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _hkKind),
+                  ("secret" .=) <$> _hkSecret,
+                  ("metadata" .=) <$> _hkMetadata])
 
 -- | A bucket\/object IAM policy.
 --

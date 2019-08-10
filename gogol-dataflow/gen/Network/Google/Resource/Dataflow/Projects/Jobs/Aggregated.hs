@@ -143,7 +143,9 @@ pjaUploadProtocol
   = lens _pjaUploadProtocol
       (\ s a -> s{_pjaUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pjaLocation :: Lens' ProjectsJobsAggregated (Maybe Text)
 pjaLocation
   = lens _pjaLocation (\ s a -> s{_pjaLocation = a})

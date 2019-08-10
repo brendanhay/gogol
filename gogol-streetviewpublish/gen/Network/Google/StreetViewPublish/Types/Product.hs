@@ -146,8 +146,8 @@ pThumbnailURL
   = lens _pThumbnailURL
       (\ s a -> s{_pThumbnailURL = a})
 
--- | Output only. Status in Google Maps, whether this photo was published, or
--- rejected for a possibly specified reason.
+-- | Output only. Status in Google Maps, whether this photo was published or
+-- rejected.
 pMapsPublishStatus :: Lens' Photo (Maybe PhotoMapsPublishStatus)
 pMapsPublishStatus
   = lens _pMapsPublishStatus
@@ -278,17 +278,17 @@ uprPhoto :: Lens' UpdatePhotoRequest (Maybe Photo)
 uprPhoto = lens _uprPhoto (\ s a -> s{_uprPhoto = a})
 
 -- | Mask that identifies fields on the photo metadata to update. If not
--- present, the old Photo metadata will be entirely replaced with the new
--- Photo metadata in this request. The update fails if invalid fields are
+-- present, the old Photo metadata is entirely replaced with the new Photo
+-- metadata in this request. The update fails if invalid fields are
 -- specified. Multiple fields can be specified in a comma-delimited list.
 -- The following fields are valid: * \`pose.heading\` * \`pose.latLngPair\`
 -- * \`pose.pitch\` * \`pose.roll\` * \`pose.level\` * \`pose.altitude\` *
 -- \`connections\` * \`places\`
--- __Note:__ Repeated fields in updateMask mean the entire set of repeated
--- values will be replaced with the new contents. For example, if
+-- __Note:__ When updateMask contains repeated fields, the entire set of
+-- repeated values get replaced with the new contents. For example, if
 -- updateMask contains \`connections\` and
--- \`UpdatePhotoRequest.photo.connections\` is empty, all connections will
--- be removed.
+-- \`UpdatePhotoRequest.photo.connections\` is empty, all connections are
+-- removed.
 uprUpdateMask :: Lens' UpdatePhotoRequest (Maybe GFieldMask)
 uprUpdateMask
   = lens _uprUpdateMask
@@ -637,8 +637,8 @@ lprNextPageToken
   = lens _lprNextPageToken
       (\ s a -> s{_lprNextPageToken = a})
 
--- | List of photos. The maximum number of items returned is based on the
--- pageSize field in the request.
+-- | List of photos. The pageSize field in the request determines the number
+-- of items returned.
 lprPhotos :: Lens' ListPhotosResponse [Photo]
 lprPhotos
   = lens _lprPhotos (\ s a -> s{_lprPhotos = a}) .
@@ -838,9 +838,9 @@ pHeading
 -- | Latitude and longitude pair of the pose, as explained here:
 -- https:\/\/cloud.google.com\/datastore\/docs\/reference\/rest\/Shared.Types\/LatLng
 -- When creating a Photo, if the latitude and longitude pair are not
--- provided here, the geolocation from the exif header will be used. If the
--- latitude and longitude pair is not provided and cannot be found in the
--- exif header, the create photo process will fail.
+-- provided, the geolocation from the exif header is used. A latitude and
+-- longitude pair not provided in the photo or exif header causes the photo
+-- process to fail.
 pLatLngPair :: Lens' Pose (Maybe LatLng)
 pLatLngPair
   = lens _pLatLngPair (\ s a -> s{_pLatLngPair = a})
@@ -1040,8 +1040,8 @@ batchDeletePhotosRequest
 batchDeletePhotosRequest = BatchDeletePhotosRequest' {_bdprPhotoIds = Nothing}
 
 
--- | Required. IDs of the Photos. For HTTP GET requests, the URL query
--- parameter should be \`photoIds=&photoIds=&...\`.
+-- | Required. IDs of the Photos. HTTP GET requests require the following
+-- syntax for the URL query parameter: \`photoIds=&photoIds=&...\`.
 bdprPhotoIds :: Lens' BatchDeletePhotosRequest [Text]
 bdprPhotoIds
   = lens _bdprPhotoIds (\ s a -> s{_bdprPhotoIds = a})

@@ -96,26 +96,29 @@ instance ToJSON GoogleIAMV1__AuditConfig where
 -- have multiple versions. You can get information about all of the
 -- versions of a given model by calling
 -- [projects.models.versions.list](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/list).
+-- Next ID: 30
 --
 -- /See:/ 'googleCloudMlV1__Version' smart constructor.
 data GoogleCloudMlV1__Version =
   GoogleCloudMlV1__Version'
-    { _gcmvvFramework      :: !(Maybe GoogleCloudMlV1__VersionFramework)
-    , _gcmvvEtag           :: !(Maybe Bytes)
-    , _gcmvvState          :: !(Maybe GoogleCloudMlV1__VersionState)
-    , _gcmvvAutoScaling    :: !(Maybe GoogleCloudMlV1__AutoScaling)
-    , _gcmvvPythonVersion  :: !(Maybe Text)
-    , _gcmvvRuntimeVersion :: !(Maybe Text)
-    , _gcmvvLastUseTime    :: !(Maybe DateTime')
-    , _gcmvvName           :: !(Maybe Text)
-    , _gcmvvDeploymentURI  :: !(Maybe Text)
-    , _gcmvvManualScaling  :: !(Maybe GoogleCloudMlV1__ManualScaling)
-    , _gcmvvMachineType    :: !(Maybe Text)
-    , _gcmvvLabels         :: !(Maybe GoogleCloudMlV1__VersionLabels)
-    , _gcmvvErrorMessage   :: !(Maybe Text)
-    , _gcmvvDescription    :: !(Maybe Text)
-    , _gcmvvCreateTime     :: !(Maybe DateTime')
-    , _gcmvvIsDefault      :: !(Maybe Bool)
+    { _gcmvvFramework       :: !(Maybe GoogleCloudMlV1__VersionFramework)
+    , _gcmvvEtag            :: !(Maybe Bytes)
+    , _gcmvvState           :: !(Maybe GoogleCloudMlV1__VersionState)
+    , _gcmvvAutoScaling     :: !(Maybe GoogleCloudMlV1__AutoScaling)
+    , _gcmvvPythonVersion   :: !(Maybe Text)
+    , _gcmvvRuntimeVersion  :: !(Maybe Text)
+    , _gcmvvLastUseTime     :: !(Maybe DateTime')
+    , _gcmvvName            :: !(Maybe Text)
+    , _gcmvvPackageURIs     :: !(Maybe [Text])
+    , _gcmvvDeploymentURI   :: !(Maybe Text)
+    , _gcmvvManualScaling   :: !(Maybe GoogleCloudMlV1__ManualScaling)
+    , _gcmvvMachineType     :: !(Maybe Text)
+    , _gcmvvLabels          :: !(Maybe GoogleCloudMlV1__VersionLabels)
+    , _gcmvvPredictionClass :: !(Maybe Text)
+    , _gcmvvErrorMessage    :: !(Maybe Text)
+    , _gcmvvDescription     :: !(Maybe Text)
+    , _gcmvvCreateTime      :: !(Maybe DateTime')
+    , _gcmvvIsDefault       :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,6 +143,8 @@ data GoogleCloudMlV1__Version =
 --
 -- * 'gcmvvName'
 --
+-- * 'gcmvvPackageURIs'
+--
 -- * 'gcmvvDeploymentURI'
 --
 -- * 'gcmvvManualScaling'
@@ -147,6 +152,8 @@ data GoogleCloudMlV1__Version =
 -- * 'gcmvvMachineType'
 --
 -- * 'gcmvvLabels'
+--
+-- * 'gcmvvPredictionClass'
 --
 -- * 'gcmvvErrorMessage'
 --
@@ -167,10 +174,12 @@ googleCloudMlV1__Version =
     , _gcmvvRuntimeVersion = Nothing
     , _gcmvvLastUseTime = Nothing
     , _gcmvvName = Nothing
+    , _gcmvvPackageURIs = Nothing
     , _gcmvvDeploymentURI = Nothing
     , _gcmvvManualScaling = Nothing
     , _gcmvvMachineType = Nothing
     , _gcmvvLabels = Nothing
+    , _gcmvvPredictionClass = Nothing
     , _gcmvvErrorMessage = Nothing
     , _gcmvvDescription = Nothing
     , _gcmvvCreateTime = Nothing
@@ -248,6 +257,15 @@ gcmvvName :: Lens' GoogleCloudMlV1__Version (Maybe Text)
 gcmvvName
   = lens _gcmvvName (\ s a -> s{_gcmvvName = a})
 
+-- | Optional. The Google Cloud Storage location of the packages for custom
+-- prediction and any additional dependencies.
+gcmvvPackageURIs :: Lens' GoogleCloudMlV1__Version [Text]
+gcmvvPackageURIs
+  = lens _gcmvvPackageURIs
+      (\ s a -> s{_gcmvvPackageURIs = a})
+      . _Default
+      . _Coerce
+
 -- | Required. The Google Cloud Storage location of the trained model used to
 -- create the version. See the [guide to model
 -- deployment](\/ml-engine\/docs\/tensorflow\/deploying-models) for more
@@ -274,10 +292,14 @@ gcmvvManualScaling
       (\ s a -> s{_gcmvvManualScaling = a})
 
 -- | Optional. The type of machine on which to serve the model. Currently
--- only applies to online prediction service. The following are currently
--- supported and will be deprecated in Beta release. mls1-highmem-1 1 core
--- 2 Gb RAM mls1-highcpu-4 4 core 2 Gb RAM The following are available in
--- Beta: mls1-c1-m2 1 core 2 Gb RAM Default mls1-c4-m2 4 core 2 Gb RAM
+-- only applies to online prediction service.
+--
+-- [mls1-c1-m2]
+--     The __default__ machine type, with 1 core and 2 GB RAM. The
+--     deprecated name for this machine type is \"mls1-highmem-1\".
+-- [mls1-c4-m2]
+--     In __Beta__. This machine type has 4 cores and 2 GB RAM. The
+--     deprecated name for this machine type is \"mls1-highcpu-4\".
 gcmvvMachineType :: Lens' GoogleCloudMlV1__Version (Maybe Text)
 gcmvvMachineType
   = lens _gcmvvMachineType
@@ -291,6 +313,30 @@ gcmvvMachineType
 gcmvvLabels :: Lens' GoogleCloudMlV1__Version (Maybe GoogleCloudMlV1__VersionLabels)
 gcmvvLabels
   = lens _gcmvvLabels (\ s a -> s{_gcmvvLabels = a})
+
+-- | class PredictionClass(object): \"\"\"A Model performs predictions on a
+-- given list of instances. The input instances are the raw values sent by
+-- the user. It is the responsibility of a Model to translate these
+-- instances into actual predictions. The input instances and the output
+-- use python data types. The input instances have been decoded prior to
+-- being passed to the predict method. The output, which should use python
+-- data types is encoded after being returned from the predict method.
+-- \"\"\" def predict(self, instances, **kwargs): \"\"\"Returns predictions
+-- for the provided instances. Instances are the decoded values from the
+-- request. Clients need not worry about decoding json nor base64 decoding.
+-- Args: instances: A list of instances, as described in the API. **kwargs:
+-- Additional keyword arguments, will be passed into the client\'s predict
+-- method. Returns: A list of outputs containing the prediction results.
+-- \"\"\" \'classmethod def from_path(cls, model_path): \"\"\"Creates a
+-- model using the given model path. Path is useful, e.g., to load files
+-- from the exported directory containing the model. Args: model_path: The
+-- local directory that contains the exported model file along with any
+-- additional files uploaded when creating the version resource. Returns:
+-- An instance implementing this Model class. \"\"\"
+gcmvvPredictionClass :: Lens' GoogleCloudMlV1__Version (Maybe Text)
+gcmvvPredictionClass
+  = lens _gcmvvPredictionClass
+      (\ s a -> s{_gcmvvPredictionClass = a})
 
 -- | Output only. The details of a failure or a cancellation.
 gcmvvErrorMessage :: Lens' GoogleCloudMlV1__Version (Maybe Text)
@@ -332,10 +378,12 @@ instance FromJSON GoogleCloudMlV1__Version where
                      <*> (o .:? "runtimeVersion")
                      <*> (o .:? "lastUseTime")
                      <*> (o .:? "name")
+                     <*> (o .:? "packageUris" .!= mempty)
                      <*> (o .:? "deploymentUri")
                      <*> (o .:? "manualScaling")
                      <*> (o .:? "machineType")
                      <*> (o .:? "labels")
+                     <*> (o .:? "predictionClass")
                      <*> (o .:? "errorMessage")
                      <*> (o .:? "description")
                      <*> (o .:? "createTime")
@@ -353,10 +401,12 @@ instance ToJSON GoogleCloudMlV1__Version where
                   ("runtimeVersion" .=) <$> _gcmvvRuntimeVersion,
                   ("lastUseTime" .=) <$> _gcmvvLastUseTime,
                   ("name" .=) <$> _gcmvvName,
+                  ("packageUris" .=) <$> _gcmvvPackageURIs,
                   ("deploymentUri" .=) <$> _gcmvvDeploymentURI,
                   ("manualScaling" .=) <$> _gcmvvManualScaling,
                   ("machineType" .=) <$> _gcmvvMachineType,
                   ("labels" .=) <$> _gcmvvLabels,
+                  ("predictionClass" .=) <$> _gcmvvPredictionClass,
                   ("errorMessage" .=) <$> _gcmvvErrorMessage,
                   ("description" .=) <$> _gcmvvDescription,
                   ("createTime" .=) <$> _gcmvvCreateTime,
@@ -444,6 +494,90 @@ instance ToJSON GoogleCloudMlV1__PredictionOutput
                   ("errorCount" .=) <$> _gcmvpoErrorCount,
                   ("predictionCount" .=) <$> _gcmvpoPredictionCount,
                   ("outputPath" .=) <$> _gcmvpoOutputPath])
+
+-- | Represents output related to a built-in algorithm Job.
+--
+-- /See:/ 'googleCloudMlV1__BuiltInAlgorithmOutput' smart constructor.
+data GoogleCloudMlV1__BuiltInAlgorithmOutput =
+  GoogleCloudMlV1__BuiltInAlgorithmOutput'
+    { _gcmvbiaoFramework      :: !(Maybe Text)
+    , _gcmvbiaoPythonVersion  :: !(Maybe Text)
+    , _gcmvbiaoRuntimeVersion :: !(Maybe Text)
+    , _gcmvbiaoModelPath      :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudMlV1__BuiltInAlgorithmOutput' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcmvbiaoFramework'
+--
+-- * 'gcmvbiaoPythonVersion'
+--
+-- * 'gcmvbiaoRuntimeVersion'
+--
+-- * 'gcmvbiaoModelPath'
+googleCloudMlV1__BuiltInAlgorithmOutput
+    :: GoogleCloudMlV1__BuiltInAlgorithmOutput
+googleCloudMlV1__BuiltInAlgorithmOutput =
+  GoogleCloudMlV1__BuiltInAlgorithmOutput'
+    { _gcmvbiaoFramework = Nothing
+    , _gcmvbiaoPythonVersion = Nothing
+    , _gcmvbiaoRuntimeVersion = Nothing
+    , _gcmvbiaoModelPath = Nothing
+    }
+
+
+-- | Framework on which the built-in algorithm was trained.
+gcmvbiaoFramework :: Lens' GoogleCloudMlV1__BuiltInAlgorithmOutput (Maybe Text)
+gcmvbiaoFramework
+  = lens _gcmvbiaoFramework
+      (\ s a -> s{_gcmvbiaoFramework = a})
+
+-- | Python version on which the built-in algorithm was trained.
+gcmvbiaoPythonVersion :: Lens' GoogleCloudMlV1__BuiltInAlgorithmOutput (Maybe Text)
+gcmvbiaoPythonVersion
+  = lens _gcmvbiaoPythonVersion
+      (\ s a -> s{_gcmvbiaoPythonVersion = a})
+
+-- | Cloud ML Engine runtime version on which the built-in algorithm was
+-- trained.
+gcmvbiaoRuntimeVersion :: Lens' GoogleCloudMlV1__BuiltInAlgorithmOutput (Maybe Text)
+gcmvbiaoRuntimeVersion
+  = lens _gcmvbiaoRuntimeVersion
+      (\ s a -> s{_gcmvbiaoRuntimeVersion = a})
+
+-- | The Cloud Storage path to the \`model\/\` directory where the training
+-- job saves the trained model. Only set for successful jobs that don\'t
+-- use hyperparameter tuning.
+gcmvbiaoModelPath :: Lens' GoogleCloudMlV1__BuiltInAlgorithmOutput (Maybe Text)
+gcmvbiaoModelPath
+  = lens _gcmvbiaoModelPath
+      (\ s a -> s{_gcmvbiaoModelPath = a})
+
+instance FromJSON
+           GoogleCloudMlV1__BuiltInAlgorithmOutput
+         where
+        parseJSON
+          = withObject "GoogleCloudMlV1BuiltInAlgorithmOutput"
+              (\ o ->
+                 GoogleCloudMlV1__BuiltInAlgorithmOutput' <$>
+                   (o .:? "framework") <*> (o .:? "pythonVersion") <*>
+                     (o .:? "runtimeVersion")
+                     <*> (o .:? "modelPath"))
+
+instance ToJSON
+           GoogleCloudMlV1__BuiltInAlgorithmOutput
+         where
+        toJSON GoogleCloudMlV1__BuiltInAlgorithmOutput'{..}
+          = object
+              (catMaybes
+                 [("framework" .=) <$> _gcmvbiaoFramework,
+                  ("pythonVersion" .=) <$> _gcmvbiaoPythonVersion,
+                  ("runtimeVersion" .=) <$> _gcmvbiaoRuntimeVersion,
+                  ("modelPath" .=) <$> _gcmvbiaoModelPath])
 
 -- | The hyperparameters given to this trial.
 --
@@ -785,7 +919,7 @@ gcmvacCount
   = lens _gcmvacCount (\ s a -> s{_gcmvacCount = a}) .
       mapping _Coerce
 
--- | The available types of accelerators.
+-- | The type of accelerator to use.
 gcmvacType :: Lens' GoogleCloudMlV1__AcceleratorConfig (Maybe GoogleCloudMlV1__AcceleratorConfigType)
 gcmvacType
   = lens _gcmvacType (\ s a -> s{_gcmvacType = a})
@@ -1162,11 +1296,12 @@ instance ToJSON GoogleType__Expr where
 -- /See:/ 'googleCloudMlV1__HyperparameterOutput' smart constructor.
 data GoogleCloudMlV1__HyperparameterOutput =
   GoogleCloudMlV1__HyperparameterOutput'
-    { _gcmvhoIsTrialStoppedEarly :: !(Maybe Bool)
-    , _gcmvhoAllMetrics          :: !(Maybe [GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric])
-    , _gcmvhoHyperparameters     :: !(Maybe GoogleCloudMlV1__HyperparameterOutputHyperparameters)
-    , _gcmvhoTrialId             :: !(Maybe Text)
-    , _gcmvhoFinalMetric         :: !(Maybe GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric)
+    { _gcmvhoIsTrialStoppedEarly    :: !(Maybe Bool)
+    , _gcmvhoAllMetrics             :: !(Maybe [GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric])
+    , _gcmvhoHyperparameters        :: !(Maybe GoogleCloudMlV1__HyperparameterOutputHyperparameters)
+    , _gcmvhoTrialId                :: !(Maybe Text)
+    , _gcmvhoFinalMetric            :: !(Maybe GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric)
+    , _gcmvhoBuiltInAlgorithmOutput :: !(Maybe GoogleCloudMlV1__BuiltInAlgorithmOutput)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1184,6 +1319,8 @@ data GoogleCloudMlV1__HyperparameterOutput =
 -- * 'gcmvhoTrialId'
 --
 -- * 'gcmvhoFinalMetric'
+--
+-- * 'gcmvhoBuiltInAlgorithmOutput'
 googleCloudMlV1__HyperparameterOutput
     :: GoogleCloudMlV1__HyperparameterOutput
 googleCloudMlV1__HyperparameterOutput =
@@ -1193,6 +1330,7 @@ googleCloudMlV1__HyperparameterOutput =
     , _gcmvhoHyperparameters = Nothing
     , _gcmvhoTrialId = Nothing
     , _gcmvhoFinalMetric = Nothing
+    , _gcmvhoBuiltInAlgorithmOutput = Nothing
     }
 
 
@@ -1229,6 +1367,13 @@ gcmvhoFinalMetric
   = lens _gcmvhoFinalMetric
       (\ s a -> s{_gcmvhoFinalMetric = a})
 
+-- | Details related to built-in algorithms jobs. Only set for trials of
+-- built-in algorithms jobs that have succeeded.
+gcmvhoBuiltInAlgorithmOutput :: Lens' GoogleCloudMlV1__HyperparameterOutput (Maybe GoogleCloudMlV1__BuiltInAlgorithmOutput)
+gcmvhoBuiltInAlgorithmOutput
+  = lens _gcmvhoBuiltInAlgorithmOutput
+      (\ s a -> s{_gcmvhoBuiltInAlgorithmOutput = a})
+
 instance FromJSON
            GoogleCloudMlV1__HyperparameterOutput
          where
@@ -1240,7 +1385,8 @@ instance FromJSON
                      (o .:? "allMetrics" .!= mempty)
                      <*> (o .:? "hyperparameters")
                      <*> (o .:? "trialId")
-                     <*> (o .:? "finalMetric"))
+                     <*> (o .:? "finalMetric")
+                     <*> (o .:? "builtInAlgorithmOutput"))
 
 instance ToJSON GoogleCloudMlV1__HyperparameterOutput
          where
@@ -1252,7 +1398,9 @@ instance ToJSON GoogleCloudMlV1__HyperparameterOutput
                   ("allMetrics" .=) <$> _gcmvhoAllMetrics,
                   ("hyperparameters" .=) <$> _gcmvhoHyperparameters,
                   ("trialId" .=) <$> _gcmvhoTrialId,
-                  ("finalMetric" .=) <$> _gcmvhoFinalMetric])
+                  ("finalMetric" .=) <$> _gcmvhoFinalMetric,
+                  ("builtInAlgorithmOutput" .=) <$>
+                    _gcmvhoBuiltInAlgorithmOutput])
 
 -- | Returns service account information associated with a project.
 --
@@ -1466,13 +1614,14 @@ instance ToJSON GoogleLongrunning__Operation where
 -- /See:/ 'googleCloudMlV1__Model' smart constructor.
 data GoogleCloudMlV1__Model =
   GoogleCloudMlV1__Model'
-    { _gcmvmEtag                    :: !(Maybe Bytes)
-    , _gcmvmRegions                 :: !(Maybe [Text])
-    , _gcmvmDefaultVersion          :: !(Maybe GoogleCloudMlV1__Version)
-    , _gcmvmName                    :: !(Maybe Text)
-    , _gcmvmLabels                  :: !(Maybe GoogleCloudMlV1__ModelLabels)
-    , _gcmvmDescription             :: !(Maybe Text)
-    , _gcmvmOnlinePredictionLogging :: !(Maybe Bool)
+    { _gcmvmEtag                           :: !(Maybe Bytes)
+    , _gcmvmRegions                        :: !(Maybe [Text])
+    , _gcmvmDefaultVersion                 :: !(Maybe GoogleCloudMlV1__Version)
+    , _gcmvmName                           :: !(Maybe Text)
+    , _gcmvmLabels                         :: !(Maybe GoogleCloudMlV1__ModelLabels)
+    , _gcmvmOnlinePredictionConsoleLogging :: !(Maybe Bool)
+    , _gcmvmDescription                    :: !(Maybe Text)
+    , _gcmvmOnlinePredictionLogging        :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1491,6 +1640,8 @@ data GoogleCloudMlV1__Model =
 --
 -- * 'gcmvmLabels'
 --
+-- * 'gcmvmOnlinePredictionConsoleLogging'
+--
 -- * 'gcmvmDescription'
 --
 -- * 'gcmvmOnlinePredictionLogging'
@@ -1503,6 +1654,7 @@ googleCloudMlV1__Model =
     , _gcmvmDefaultVersion = Nothing
     , _gcmvmName = Nothing
     , _gcmvmLabels = Nothing
+    , _gcmvmOnlinePredictionConsoleLogging = Nothing
     , _gcmvmDescription = Nothing
     , _gcmvmOnlinePredictionLogging = Nothing
     }
@@ -1559,14 +1711,30 @@ gcmvmLabels :: Lens' GoogleCloudMlV1__Model (Maybe GoogleCloudMlV1__ModelLabels)
 gcmvmLabels
   = lens _gcmvmLabels (\ s a -> s{_gcmvmLabels = a})
 
+-- | Optional. If true, enables logging of stderr and stdout streams for
+-- online prediction in Stackdriver Logging. These can be more verbose than
+-- the standard access logs (see \`online_prediction_logging\`) and thus
+-- can incur higher cost. However, they are helpful for debugging. Note
+-- that since Stackdriver logs may incur a cost, particularly if the total
+-- QPS in your project is high, be sure to estimate your costs before
+-- enabling this flag. Default is false.
+gcmvmOnlinePredictionConsoleLogging :: Lens' GoogleCloudMlV1__Model (Maybe Bool)
+gcmvmOnlinePredictionConsoleLogging
+  = lens _gcmvmOnlinePredictionConsoleLogging
+      (\ s a ->
+         s{_gcmvmOnlinePredictionConsoleLogging = a})
+
 -- | Optional. The description specified for the model when it was created.
 gcmvmDescription :: Lens' GoogleCloudMlV1__Model (Maybe Text)
 gcmvmDescription
   = lens _gcmvmDescription
       (\ s a -> s{_gcmvmDescription = a})
 
--- | Optional. If true, enables StackDriver Logging for online prediction.
--- Default is false.
+-- | Optional. If true, online prediction access logs are sent to StackDriver
+-- Logging. These logs are like standard server access logs, containing
+-- information like timestamp and latency for each request. Note that
+-- Stackdriver logs may incur a cost, particular if the total QPS in your
+-- project is high. Default is false.
 gcmvmOnlinePredictionLogging :: Lens' GoogleCloudMlV1__Model (Maybe Bool)
 gcmvmOnlinePredictionLogging
   = lens _gcmvmOnlinePredictionLogging
@@ -1581,6 +1749,7 @@ instance FromJSON GoogleCloudMlV1__Model where
                      (o .:? "defaultVersion")
                      <*> (o .:? "name")
                      <*> (o .:? "labels")
+                     <*> (o .:? "onlinePredictionConsoleLogging")
                      <*> (o .:? "description")
                      <*> (o .:? "onlinePredictionLogging"))
 
@@ -1593,6 +1762,8 @@ instance ToJSON GoogleCloudMlV1__Model where
                   ("defaultVersion" .=) <$> _gcmvmDefaultVersion,
                   ("name" .=) <$> _gcmvmName,
                   ("labels" .=) <$> _gcmvmLabels,
+                  ("onlinePredictionConsoleLogging" .=) <$>
+                    _gcmvmOnlinePredictionConsoleLogging,
                   ("description" .=) <$> _gcmvmDescription,
                   ("onlinePredictionLogging" .=) <$>
                     _gcmvmOnlinePredictionLogging])
@@ -1991,7 +2162,7 @@ instance ToJSON GoogleRpc__Status where
                   ("code" .=) <$> _grsCode,
                   ("message" .=) <$> _grsMessage])
 
--- | Represents the configration for a replica in a cluster.
+-- | Represents the configuration for a replica in a cluster.
 --
 -- /See:/ 'googleCloudMlV1__ReplicaConfig' smart constructor.
 data GoogleCloudMlV1__ReplicaConfig =
@@ -2016,13 +2187,17 @@ googleCloudMlV1__ReplicaConfig =
     {_gcmvrcImageURI = Nothing, _gcmvrcAcceleratorConfig = Nothing}
 
 
--- | The docker image to run on worker. This image must be in Google
--- Container Registry.
+-- | The Docker image to run on the replica. This image must be in Container
+-- Registry. Learn more about [configuring custom
+-- containers](\/ml-engine\/docs\/distributed-training-containers).
 gcmvrcImageURI :: Lens' GoogleCloudMlV1__ReplicaConfig (Maybe Text)
 gcmvrcImageURI
   = lens _gcmvrcImageURI
       (\ s a -> s{_gcmvrcImageURI = a})
 
+-- | Represents the type and number of accelerators used by the replica.
+-- [Learn about restrictions on accelerator configurations for
+-- training.](\/ml-engine\/docs\/tensorflow\/using-gpus#compute-engine-machine-types-with-gpu)
 gcmvrcAcceleratorConfig :: Lens' GoogleCloudMlV1__ReplicaConfig (Maybe GoogleCloudMlV1__AcceleratorConfig)
 gcmvrcAcceleratorConfig
   = lens _gcmvrcAcceleratorConfig
@@ -2096,6 +2271,7 @@ data GoogleCloudMlV1__HyperparameterSpec =
     , _gcmvhsMaxTrials                :: !(Maybe (Textual Int32))
     , _gcmvhsEnableTrialEarlyStopping :: !(Maybe Bool)
     , _gcmvhsMaxParallelTrials        :: !(Maybe (Textual Int32))
+    , _gcmvhsMaxFailedTrials          :: !(Maybe (Textual Int32))
     , _gcmvhsHyperparameterMetricTag  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2119,6 +2295,8 @@ data GoogleCloudMlV1__HyperparameterSpec =
 --
 -- * 'gcmvhsMaxParallelTrials'
 --
+-- * 'gcmvhsMaxFailedTrials'
+--
 -- * 'gcmvhsHyperparameterMetricTag'
 googleCloudMlV1__HyperparameterSpec
     :: GoogleCloudMlV1__HyperparameterSpec
@@ -2131,6 +2309,7 @@ googleCloudMlV1__HyperparameterSpec =
     , _gcmvhsMaxTrials = Nothing
     , _gcmvhsEnableTrialEarlyStopping = Nothing
     , _gcmvhsMaxParallelTrials = Nothing
+    , _gcmvhsMaxFailedTrials = Nothing
     , _gcmvhsHyperparameterMetricTag = Nothing
     }
 
@@ -2192,6 +2371,17 @@ gcmvhsMaxParallelTrials
       (\ s a -> s{_gcmvhsMaxParallelTrials = a})
       . mapping _Coerce
 
+-- | Optional. The number of failed trials that need to be seen before
+-- failing the hyperparameter tuning job. You can specify this field to
+-- override the default failing criteria for Cloud ML Engine hyperparameter
+-- tuning jobs. Defaults to zero, which means the service decides when a
+-- hyperparameter job should fail.
+gcmvhsMaxFailedTrials :: Lens' GoogleCloudMlV1__HyperparameterSpec (Maybe Int32)
+gcmvhsMaxFailedTrials
+  = lens _gcmvhsMaxFailedTrials
+      (\ s a -> s{_gcmvhsMaxFailedTrials = a})
+      . mapping _Coerce
+
 -- | Optional. The Tensorflow summary tag name to use for optimizing trials.
 -- For current versions of Tensorflow, this tag name should exactly match
 -- what is shown in Tensorboard, including all scopes. For versions of
@@ -2215,6 +2405,7 @@ instance FromJSON GoogleCloudMlV1__HyperparameterSpec
                      <*> (o .:? "maxTrials")
                      <*> (o .:? "enableTrialEarlyStopping")
                      <*> (o .:? "maxParallelTrials")
+                     <*> (o .:? "maxFailedTrials")
                      <*> (o .:? "hyperparameterMetricTag"))
 
 instance ToJSON GoogleCloudMlV1__HyperparameterSpec
@@ -2232,6 +2423,7 @@ instance ToJSON GoogleCloudMlV1__HyperparameterSpec
                     _gcmvhsEnableTrialEarlyStopping,
                   ("maxParallelTrials" .=) <$>
                     _gcmvhsMaxParallelTrials,
+                  ("maxFailedTrials" .=) <$> _gcmvhsMaxFailedTrials,
                   ("hyperparameterMetricTag" .=) <$>
                     _gcmvhsHyperparameterMetricTag])
 
@@ -2282,7 +2474,9 @@ googleCloudMlV1__AutoScaling =
 --
 -- HTTP request:
 --
--- > PATCH https://ml.googleapis.com/v1/{name=projects/*/models/*/versions/*}?update_mask=autoScaling.minNodes -d './update_body.json
+-- > PATCH
+-- > https://ml.googleapis.com/v1/{name=projects/*/models/*/versions/*}?update_mask=autoScaling.minNodes
+-- > -d './update_body.json
 gcmvasMinNodes :: Lens' GoogleCloudMlV1__AutoScaling (Maybe Int32)
 gcmvasMinNodes
   = lens _gcmvasMinNodes
@@ -2516,8 +2710,8 @@ googleIAMV1__Binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 givbMembers :: Lens' GoogleIAMV1__Binding [Text]
 givbMembers
@@ -2530,10 +2724,9 @@ givbMembers
 givbRole :: Lens' GoogleIAMV1__Binding (Maybe Text)
 givbRole = lens _givbRole (\ s a -> s{_givbRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 givbCondition :: Lens' GoogleIAMV1__Binding (Maybe GoogleType__Expr)
 givbCondition
   = lens _givbCondition
@@ -2687,7 +2880,6 @@ data GoogleCloudMlV1__PredictionInput =
     , _gcmvpiBatchSize        :: !(Maybe (Textual Int64))
     , _gcmvpiMaxWorkerCount   :: !(Maybe (Textual Int64))
     , _gcmvpiOutputDataFormat :: !(Maybe GoogleCloudMlV1__PredictionInputOutputDataFormat)
-    , _gcmvpiAccelerator      :: !(Maybe GoogleCloudMlV1__AcceleratorConfig)
     , _gcmvpiOutputPath       :: !(Maybe Text)
     , _gcmvpiRegion           :: !(Maybe Text)
     , _gcmvpiInputPaths       :: !(Maybe [Text])
@@ -2716,8 +2908,6 @@ data GoogleCloudMlV1__PredictionInput =
 --
 -- * 'gcmvpiOutputDataFormat'
 --
--- * 'gcmvpiAccelerator'
---
 -- * 'gcmvpiOutputPath'
 --
 -- * 'gcmvpiRegion'
@@ -2737,7 +2927,6 @@ googleCloudMlV1__PredictionInput =
     , _gcmvpiBatchSize = Nothing
     , _gcmvpiMaxWorkerCount = Nothing
     , _gcmvpiOutputDataFormat = Nothing
-    , _gcmvpiAccelerator = Nothing
     , _gcmvpiOutputPath = Nothing
     , _gcmvpiRegion = Nothing
     , _gcmvpiInputPaths = Nothing
@@ -2808,13 +2997,6 @@ gcmvpiOutputDataFormat
   = lens _gcmvpiOutputDataFormat
       (\ s a -> s{_gcmvpiOutputDataFormat = a})
 
--- | Optional. The type and number of accelerators to be attached to each
--- machine running the job.
-gcmvpiAccelerator :: Lens' GoogleCloudMlV1__PredictionInput (Maybe GoogleCloudMlV1__AcceleratorConfig)
-gcmvpiAccelerator
-  = lens _gcmvpiAccelerator
-      (\ s a -> s{_gcmvpiAccelerator = a})
-
 -- | Required. The output Google Cloud Storage location.
 gcmvpiOutputPath :: Lens' GoogleCloudMlV1__PredictionInput (Maybe Text)
 gcmvpiOutputPath
@@ -2828,8 +3010,8 @@ gcmvpiRegion :: Lens' GoogleCloudMlV1__PredictionInput (Maybe Text)
 gcmvpiRegion
   = lens _gcmvpiRegion (\ s a -> s{_gcmvpiRegion = a})
 
--- | Required. The Google Cloud Storage location of the input data files. May
--- contain wildcards.
+-- | Required. The Cloud Storage location of the input data files. May
+-- contain </storage/docs/gsutil/addlhelp/WildcardNames wildcards>.
 gcmvpiInputPaths :: Lens' GoogleCloudMlV1__PredictionInput [Text]
 gcmvpiInputPaths
   = lens _gcmvpiInputPaths
@@ -2861,7 +3043,6 @@ instance FromJSON GoogleCloudMlV1__PredictionInput
                      <*> (o .:? "batchSize")
                      <*> (o .:? "maxWorkerCount")
                      <*> (o .:? "outputDataFormat")
-                     <*> (o .:? "accelerator")
                      <*> (o .:? "outputPath")
                      <*> (o .:? "region")
                      <*> (o .:? "inputPaths" .!= mempty)
@@ -2880,7 +3061,6 @@ instance ToJSON GoogleCloudMlV1__PredictionInput
                   ("batchSize" .=) <$> _gcmvpiBatchSize,
                   ("maxWorkerCount" .=) <$> _gcmvpiMaxWorkerCount,
                   ("outputDataFormat" .=) <$> _gcmvpiOutputDataFormat,
-                  ("accelerator" .=) <$> _gcmvpiAccelerator,
                   ("outputPath" .=) <$> _gcmvpiOutputPath,
                   ("region" .=) <$> _gcmvpiRegion,
                   ("inputPaths" .=) <$> _gcmvpiInputPaths,
@@ -3030,14 +3210,31 @@ googleCloudMlV1__TrainingInput =
 --     A TPU VM including one Cloud TPU. See more about
 --     </ml-engine/docs/tensorflow/using-tpus using TPUs to train your model>.
 --
+-- You may also use certain Compute Engine machine types directly in this
+-- field. The following types are supported: - \`n1-standard-4\` -
+-- \`n1-standard-8\` - \`n1-standard-16\` - \`n1-standard-32\` -
+-- \`n1-standard-64\` - \`n1-standard-96\` - \`n1-highmem-2\` -
+-- \`n1-highmem-4\` - \`n1-highmem-8\` - \`n1-highmem-16\` -
+-- \`n1-highmem-32\` - \`n1-highmem-64\` - \`n1-highmem-96\` -
+-- \`n1-highcpu-16\` - \`n1-highcpu-32\` - \`n1-highcpu-64\` -
+-- \`n1-highcpu-96\` See more about [using Compute Engine machine
+-- types](\/ml-engine\/docs\/tensorflow\/machine-types#compute-engine-machine-types).
 -- You must set this value when \`scaleTier\` is set to \`CUSTOM\`.
 gcmvtiMasterType :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiMasterType
   = lens _gcmvtiMasterType
       (\ s a -> s{_gcmvtiMasterType = a})
 
--- | Optional. The configrations for workers. If \`workerConfig.imageUri\`
--- has not been set, the value of \`masterConfig.imageUri\` will be used.
+-- | Optional. The configuration for workers. You should only set
+-- \`workerConfig.acceleratorConfig\` if \`workerType\` is set to a Compute
+-- Engine machine type. [Learn about restrictions on accelerator
+-- configurations for
+-- training.](\/ml-engine\/docs\/tensorflow\/using-gpus#compute-engine-machine-types-with-gpu)
+-- Set \`workerConfig.imageUri\` only if you build a custom image for your
+-- worker. If \`workerConfig.imageUri\` has not been set, Cloud ML Engine
+-- uses the value of \`masterConfig.imageUri\`. Learn more about
+-- [configuring custom
+-- containers](\/ml-engine\/docs\/distributed-training-containers).
 gcmvtiWorkerConfig :: Lens' GoogleCloudMlV1__TrainingInput (Maybe GoogleCloudMlV1__ReplicaConfig)
 gcmvtiWorkerConfig
   = lens _gcmvtiWorkerConfig
@@ -3103,16 +3300,28 @@ gcmvtiRuntimeVersion
 
 -- | Optional. Specifies the type of virtual machine to use for your training
 -- job\'s worker nodes. The supported values are the same as those
--- described in the entry for \`masterType\`. This value must be present
--- when \`scaleTier\` is set to \`CUSTOM\` and \`workerCount\` is greater
--- than zero.
+-- described in the entry for \`masterType\`. This value must be consistent
+-- with the category of machine type that \`masterType\` uses. In other
+-- words, both must be Cloud ML Engine machine types or both must be
+-- Compute Engine machine types. If you use \`cloud_tpu\` for this value,
+-- see special instructions for [configuring a custom TPU
+-- machine](\/ml-engine\/docs\/tensorflow\/using-tpus#configuring_a_custom_tpu_machine).
+-- This value must be present when \`scaleTier\` is set to \`CUSTOM\` and
+-- \`workerCount\` is greater than zero.
 gcmvtiWorkerType :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiWorkerType
   = lens _gcmvtiWorkerType
       (\ s a -> s{_gcmvtiWorkerType = a})
 
--- | Optional. The configuration for master. Only one of
--- \`masterConfig.imageUri\` and \`runtimeVersion\` should be set.
+-- | Optional. The configuration for your master worker. You should only set
+-- \`masterConfig.acceleratorConfig\` if \`masterType\` is set to a Compute
+-- Engine machine type. Learn about [restrictions on accelerator
+-- configurations for
+-- training.](\/ml-engine\/docs\/tensorflow\/using-gpus#compute-engine-machine-types-with-gpu)
+-- Set \`masterConfig.imageUri\` only if you build a custom image. Only one
+-- of \`masterConfig.imageUri\` and \`runtimeVersion\` should be set. Learn
+-- more about [configuring custom
+-- containers](\/ml-engine\/docs\/distributed-training-containers).
 gcmvtiMasterConfig :: Lens' GoogleCloudMlV1__TrainingInput (Maybe GoogleCloudMlV1__ReplicaConfig)
 gcmvtiMasterConfig
   = lens _gcmvtiMasterConfig
@@ -3126,9 +3335,12 @@ gcmvtiPythonModule
 
 -- | Optional. Specifies the type of virtual machine to use for your training
 -- job\'s parameter server. The supported values are the same as those
--- described in the entry for \`master_type\`. This value must be present
--- when \`scaleTier\` is set to \`CUSTOM\` and \`parameter_server_count\`
--- is greater than zero.
+-- described in the entry for \`master_type\`. This value must be
+-- consistent with the category of machine type that \`masterType\` uses.
+-- In other words, both must be Cloud ML Engine machine types or both must
+-- be Compute Engine machine types. This value must be present when
+-- \`scaleTier\` is set to \`CUSTOM\` and \`parameter_server_count\` is
+-- greater than zero.
 gcmvtiParameterServerType :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiParameterServerType
   = lens _gcmvtiParameterServerType
@@ -3164,9 +3376,16 @@ gcmvtiRegion :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiRegion
   = lens _gcmvtiRegion (\ s a -> s{_gcmvtiRegion = a})
 
--- | Optional. The config of parameter servers. If
--- \`parameterServerConfig.imageUri\` has not been set, the value of
--- \`masterConfig.imageUri\` will be used.
+-- | Optional. The configuration for parameter servers. You should only set
+-- \`parameterServerConfig.acceleratorConfig\` if
+-- \`parameterServerConfigType\` is set to a Compute Engine machine type.
+-- [Learn about restrictions on accelerator configurations for
+-- training.](\/ml-engine\/docs\/tensorflow\/using-gpus#compute-engine-machine-types-with-gpu)
+-- Set \`parameterServerConfig.imageUri\` only if you build a custom image
+-- for your parameter server. If \`parameterServerConfig.imageUri\` has not
+-- been set, Cloud ML Engine uses the value of \`masterConfig.imageUri\`.
+-- Learn more about [configuring custom
+-- containers](\/ml-engine\/docs\/distributed-training-containers).
 gcmvtiParameterServerConfig :: Lens' GoogleCloudMlV1__TrainingInput (Maybe GoogleCloudMlV1__ReplicaConfig)
 gcmvtiParameterServerConfig
   = lens _gcmvtiParameterServerConfig
@@ -3647,8 +3866,10 @@ instance ToJSON GoogleCloudMlV1__CancelJobRequest
 data GoogleCloudMlV1__TrainingOutput =
   GoogleCloudMlV1__TrainingOutput'
     { _gcmvtoIsHyperparameterTuningJob :: !(Maybe Bool)
+    , _gcmvtoIsBuiltInAlgorithmJob     :: !(Maybe Bool)
     , _gcmvtoCompletedTrialCount       :: !(Maybe (Textual Int64))
     , _gcmvtoConsumedMLUnits           :: !(Maybe (Textual Double))
+    , _gcmvtoBuiltInAlgorithmOutput    :: !(Maybe GoogleCloudMlV1__BuiltInAlgorithmOutput)
     , _gcmvtoTrials                    :: !(Maybe [GoogleCloudMlV1__HyperparameterOutput])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3660,9 +3881,13 @@ data GoogleCloudMlV1__TrainingOutput =
 --
 -- * 'gcmvtoIsHyperparameterTuningJob'
 --
+-- * 'gcmvtoIsBuiltInAlgorithmJob'
+--
 -- * 'gcmvtoCompletedTrialCount'
 --
 -- * 'gcmvtoConsumedMLUnits'
+--
+-- * 'gcmvtoBuiltInAlgorithmOutput'
 --
 -- * 'gcmvtoTrials'
 googleCloudMlV1__TrainingOutput
@@ -3670,8 +3895,10 @@ googleCloudMlV1__TrainingOutput
 googleCloudMlV1__TrainingOutput =
   GoogleCloudMlV1__TrainingOutput'
     { _gcmvtoIsHyperparameterTuningJob = Nothing
+    , _gcmvtoIsBuiltInAlgorithmJob = Nothing
     , _gcmvtoCompletedTrialCount = Nothing
     , _gcmvtoConsumedMLUnits = Nothing
+    , _gcmvtoBuiltInAlgorithmOutput = Nothing
     , _gcmvtoTrials = Nothing
     }
 
@@ -3681,6 +3908,12 @@ gcmvtoIsHyperparameterTuningJob :: Lens' GoogleCloudMlV1__TrainingOutput (Maybe 
 gcmvtoIsHyperparameterTuningJob
   = lens _gcmvtoIsHyperparameterTuningJob
       (\ s a -> s{_gcmvtoIsHyperparameterTuningJob = a})
+
+-- | Whether this job is a built-in Algorithm job.
+gcmvtoIsBuiltInAlgorithmJob :: Lens' GoogleCloudMlV1__TrainingOutput (Maybe Bool)
+gcmvtoIsBuiltInAlgorithmJob
+  = lens _gcmvtoIsBuiltInAlgorithmJob
+      (\ s a -> s{_gcmvtoIsBuiltInAlgorithmJob = a})
 
 -- | The number of hyperparameter tuning trials that completed successfully.
 -- Only set for hyperparameter tuning jobs.
@@ -3697,6 +3930,13 @@ gcmvtoConsumedMLUnits
       (\ s a -> s{_gcmvtoConsumedMLUnits = a})
       . mapping _Coerce
 
+-- | Details related to built-in algorithms jobs. Only set for built-in
+-- algorithms jobs.
+gcmvtoBuiltInAlgorithmOutput :: Lens' GoogleCloudMlV1__TrainingOutput (Maybe GoogleCloudMlV1__BuiltInAlgorithmOutput)
+gcmvtoBuiltInAlgorithmOutput
+  = lens _gcmvtoBuiltInAlgorithmOutput
+      (\ s a -> s{_gcmvtoBuiltInAlgorithmOutput = a})
+
 -- | Results for individual Hyperparameter trials. Only set for
 -- hyperparameter tuning jobs.
 gcmvtoTrials :: Lens' GoogleCloudMlV1__TrainingOutput [GoogleCloudMlV1__HyperparameterOutput]
@@ -3712,8 +3952,10 @@ instance FromJSON GoogleCloudMlV1__TrainingOutput
               (\ o ->
                  GoogleCloudMlV1__TrainingOutput' <$>
                    (o .:? "isHyperparameterTuningJob") <*>
-                     (o .:? "completedTrialCount")
+                     (o .:? "isBuiltInAlgorithmJob")
+                     <*> (o .:? "completedTrialCount")
                      <*> (o .:? "consumedMLUnits")
+                     <*> (o .:? "builtInAlgorithmOutput")
                      <*> (o .:? "trials" .!= mempty))
 
 instance ToJSON GoogleCloudMlV1__TrainingOutput where
@@ -3722,9 +3964,13 @@ instance ToJSON GoogleCloudMlV1__TrainingOutput where
               (catMaybes
                  [("isHyperparameterTuningJob" .=) <$>
                     _gcmvtoIsHyperparameterTuningJob,
+                  ("isBuiltInAlgorithmJob" .=) <$>
+                    _gcmvtoIsBuiltInAlgorithmJob,
                   ("completedTrialCount" .=) <$>
                     _gcmvtoCompletedTrialCount,
                   ("consumedMLUnits" .=) <$> _gcmvtoConsumedMLUnits,
+                  ("builtInAlgorithmOutput" .=) <$>
+                    _gcmvtoBuiltInAlgorithmOutput,
                   ("trials" .=) <$> _gcmvtoTrials])
 
 -- | Message that represents an arbitrary HTTP body. It should only be used

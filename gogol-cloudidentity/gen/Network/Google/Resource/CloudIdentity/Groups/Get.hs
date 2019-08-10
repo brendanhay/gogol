@@ -135,7 +135,9 @@ ggCallback
 
 instance GoogleRequest GroupsGet where
         type Rs GroupsGet = Group
-        type Scopes GroupsGet = '[]
+        type Scopes GroupsGet =
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
         requestClient GroupsGet'{..}
           = go _ggName _ggXgafv _ggUploadProtocol
               _ggAccessToken

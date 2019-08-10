@@ -191,6 +191,32 @@ instance ToJSON MonitoredResourceDescriptor where
                   ("type" .=) <$> _mrdType,
                   ("description" .=) <$> _mrdDescription])
 
+-- | Response message for the \`RefreshConsumer\` method. This response
+-- message is assigned to the \`response\` field of the returned Operation
+-- when that operation is done.
+--
+-- /See:/ 'v1Beta1RefreshConsumerResponse' smart constructor.
+data V1Beta1RefreshConsumerResponse =
+  V1Beta1RefreshConsumerResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1RefreshConsumerResponse' with the minimum fields required to make a request.
+--
+v1Beta1RefreshConsumerResponse
+    :: V1Beta1RefreshConsumerResponse
+v1Beta1RefreshConsumerResponse = V1Beta1RefreshConsumerResponse'
+
+
+instance FromJSON V1Beta1RefreshConsumerResponse
+         where
+        parseJSON
+          = withObject "V1Beta1RefreshConsumerResponse"
+              (\ o -> pure V1Beta1RefreshConsumerResponse')
+
+instance ToJSON V1Beta1RefreshConsumerResponse where
+        toJSON = const emptyObject
+
 -- | A documentation rule provides information about individual API elements.
 --
 -- /See:/ 'documentationRule' smart constructor.
@@ -226,8 +252,9 @@ documentationRule =
 -- qualified name of the element which may end in \"*\", indicating a
 -- wildcard. Wildcards are only allowed at the end and for a whole
 -- component of the qualified name, i.e. \"foo.*\" is ok, but not
--- \"foo.b*\" or \"foo.*.bar\". To specify a default for all applicable
--- elements, the whole pattern \"*\" is used.
+-- \"foo.b*\" or \"foo.*.bar\". A wildcard will match one or more
+-- components. To specify a default for all applicable elements, the whole
+-- pattern \"*\" is used.
 drSelector :: Lens' DocumentationRule (Maybe Text)
 drSelector
   = lens _drSelector (\ s a -> s{_drSelector = a})
@@ -1274,6 +1301,59 @@ instance ToJSON MetricRule where
                  [("selector" .=) <$> _mrSelector,
                   ("metricCosts" .=) <$> _mrMetricCosts])
 
+-- | If this map is nonempty, then this override applies only to specific
+-- values for dimensions defined in the limit unit. For example, an
+-- override on a limit with the unit 1\/{project}\/{region} could contain
+-- an entry with the key \"region\" and the value \"us-east-1\"; the
+-- override is only applied to quota consumed in that region. This map has
+-- the following restrictions: - Keys that are not defined in the limit\'s
+-- unit are not valid keys. Any string appearing in {brackets} in the unit
+-- (besides {project} or {user}) is a defined key. - \"project\" is not a
+-- valid key; the project is already specified in the parent resource name.
+-- - \"user\" is not a valid key; the API does not support quota overrides
+-- that apply only to a specific user. - If \"region\" appears as a key,
+-- its value must be a valid Cloud region. - If \"zone\" appears as a key,
+-- its value must be a valid Cloud zone. - If any valid key other than
+-- \"region\" or \"zone\" appears in the map, then all valid keys other
+-- than \"region\" or \"zone\" must also appear in the map.
+--
+-- /See:/ 'v1Beta1QuotaOverrideDimensions' smart constructor.
+newtype V1Beta1QuotaOverrideDimensions =
+  V1Beta1QuotaOverrideDimensions'
+    { _vbqodAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1QuotaOverrideDimensions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbqodAddtional'
+v1Beta1QuotaOverrideDimensions
+    :: HashMap Text Text -- ^ 'vbqodAddtional'
+    -> V1Beta1QuotaOverrideDimensions
+v1Beta1QuotaOverrideDimensions pVbqodAddtional_ =
+  V1Beta1QuotaOverrideDimensions' {_vbqodAddtional = _Coerce # pVbqodAddtional_}
+
+
+vbqodAddtional :: Lens' V1Beta1QuotaOverrideDimensions (HashMap Text Text)
+vbqodAddtional
+  = lens _vbqodAddtional
+      (\ s a -> s{_vbqodAddtional = a})
+      . _Coerce
+
+instance FromJSON V1Beta1QuotaOverrideDimensions
+         where
+        parseJSON
+          = withObject "V1Beta1QuotaOverrideDimensions"
+              (\ o ->
+                 V1Beta1QuotaOverrideDimensions' <$>
+                   (parseJSONObject o))
+
+instance ToJSON V1Beta1QuotaOverrideDimensions where
+        toJSON = toJSON . _vbqodAddtional
+
 -- | \`Service\` is the root object of Google service configuration schema.
 -- It describes basic information about a service, such as the name and the
 -- title, and delegates other aspects to sub-sections. Each sub-section is
@@ -1775,6 +1855,51 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
+-- | Response message for ImportProducerOverrides
+--
+-- /See:/ 'v1Beta1ImportProducerOverridesResponse' smart constructor.
+newtype V1Beta1ImportProducerOverridesResponse =
+  V1Beta1ImportProducerOverridesResponse'
+    { _vbiporOverrides :: Maybe [V1Beta1QuotaOverride]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1ImportProducerOverridesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbiporOverrides'
+v1Beta1ImportProducerOverridesResponse
+    :: V1Beta1ImportProducerOverridesResponse
+v1Beta1ImportProducerOverridesResponse =
+  V1Beta1ImportProducerOverridesResponse' {_vbiporOverrides = Nothing}
+
+
+-- | The overrides that were created from the imported data.
+vbiporOverrides :: Lens' V1Beta1ImportProducerOverridesResponse [V1Beta1QuotaOverride]
+vbiporOverrides
+  = lens _vbiporOverrides
+      (\ s a -> s{_vbiporOverrides = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           V1Beta1ImportProducerOverridesResponse
+         where
+        parseJSON
+          = withObject "V1Beta1ImportProducerOverridesResponse"
+              (\ o ->
+                 V1Beta1ImportProducerOverridesResponse' <$>
+                   (o .:? "overrides" .!= mempty))
+
+instance ToJSON
+           V1Beta1ImportProducerOverridesResponse
+         where
+        toJSON V1Beta1ImportProducerOverridesResponse'{..}
+          = object
+              (catMaybes [("overrides" .=) <$> _vbiporOverrides])
+
 -- | A custom error rule.
 --
 -- /See:/ 'customErrorRule' smart constructor.
@@ -1825,6 +1950,31 @@ instance ToJSON CustomErrorRule where
               (catMaybes
                  [("isErrorType" .=) <$> _cerIsErrorType,
                   ("selector" .=) <$> _cerSelector])
+
+-- | Response message for the \`EnableConsumer\` method. This response
+-- message is assigned to the \`response\` field of the returned Operation
+-- when that operation is done.
+--
+-- /See:/ 'v1Beta1EnableConsumerResponse' smart constructor.
+data V1Beta1EnableConsumerResponse =
+  V1Beta1EnableConsumerResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1EnableConsumerResponse' with the minimum fields required to make a request.
+--
+v1Beta1EnableConsumerResponse
+    :: V1Beta1EnableConsumerResponse
+v1Beta1EnableConsumerResponse = V1Beta1EnableConsumerResponse'
+
+
+instance FromJSON V1Beta1EnableConsumerResponse where
+        parseJSON
+          = withObject "V1Beta1EnableConsumerResponse"
+              (\ o -> pure V1Beta1EnableConsumerResponse')
+
+instance ToJSON V1Beta1EnableConsumerResponse where
+        toJSON = const emptyObject
 
 -- | The option\'s value packed in an Any message. If the value is a
 -- primitive, the corresponding wrapper type defined in
@@ -1984,6 +2134,31 @@ instance ToJSON Authentication where
               (catMaybes
                  [("rules" .=) <$> _aRules,
                   ("providers" .=) <$> _aProviders])
+
+-- | Response message for the \`EnableConsumer\` method. This response
+-- message is assigned to the \`response\` field of the returned Operation
+-- when that operation is done.
+--
+-- /See:/ 'v1EnableConsumerResponse' smart constructor.
+data V1EnableConsumerResponse =
+  V1EnableConsumerResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1EnableConsumerResponse' with the minimum fields required to make a request.
+--
+v1EnableConsumerResponse
+    :: V1EnableConsumerResponse
+v1EnableConsumerResponse = V1EnableConsumerResponse'
+
+
+instance FromJSON V1EnableConsumerResponse where
+        parseJSON
+          = withObject "V1EnableConsumerResponse"
+              (\ o -> pure V1EnableConsumerResponse')
+
+instance ToJSON V1EnableConsumerResponse where
+        toJSON = const emptyObject
 
 -- | Declares an API Interface to be included in this interface. The
 -- including interface must redeclare all the methods from the included
@@ -2298,6 +2473,48 @@ instance ToJSON Page where
                   ("content" .=) <$> _pContent,
                   ("name" .=) <$> _pName])
 
+-- | Response message for the \`GenerateServiceAccount\` method. This
+-- response message is assigned to the \`response\` field of the returned
+-- Operation when that operation is done.
+--
+-- /See:/ 'v1GenerateServiceAccountResponse' smart constructor.
+newtype V1GenerateServiceAccountResponse =
+  V1GenerateServiceAccountResponse'
+    { _vgsarAccount :: Maybe V1ServiceAccount
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1GenerateServiceAccountResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vgsarAccount'
+v1GenerateServiceAccountResponse
+    :: V1GenerateServiceAccountResponse
+v1GenerateServiceAccountResponse =
+  V1GenerateServiceAccountResponse' {_vgsarAccount = Nothing}
+
+
+-- | ServiceAccount that was created or retrieved.
+vgsarAccount :: Lens' V1GenerateServiceAccountResponse (Maybe V1ServiceAccount)
+vgsarAccount
+  = lens _vgsarAccount (\ s a -> s{_vgsarAccount = a})
+
+instance FromJSON V1GenerateServiceAccountResponse
+         where
+        parseJSON
+          = withObject "V1GenerateServiceAccountResponse"
+              (\ o ->
+                 V1GenerateServiceAccountResponse' <$>
+                   (o .:? "account"))
+
+instance ToJSON V1GenerateServiceAccountResponse
+         where
+        toJSON V1GenerateServiceAccountResponse'{..}
+          = object
+              (catMaybes [("account" .=) <$> _vgsarAccount])
+
 -- | Authentication rules for the service. By default, if a method has any
 -- authentication requirements, every request must include a valid
 -- credential matching one of the requirements. It\'s an error to include
@@ -2382,7 +2599,48 @@ instance ToJSON AuthenticationRule where
                     _arAllowWithoutCredential,
                   ("oauth" .=) <$> _arOAuth])
 
--- | Describes service account configuration for the tenant project.
+-- | Response message for the \`AddVisibilityLabels\` method. This response
+-- message is assigned to the \`response\` field of the returned Operation
+-- when that operation is done.
+--
+-- /See:/ 'v1AddVisibilityLabelsResponse' smart constructor.
+newtype V1AddVisibilityLabelsResponse =
+  V1AddVisibilityLabelsResponse'
+    { _vavlrLabels :: Maybe [Text]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1AddVisibilityLabelsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vavlrLabels'
+v1AddVisibilityLabelsResponse
+    :: V1AddVisibilityLabelsResponse
+v1AddVisibilityLabelsResponse =
+  V1AddVisibilityLabelsResponse' {_vavlrLabels = Nothing}
+
+
+-- | The updated set of visibility labels for this consumer on this service.
+vavlrLabels :: Lens' V1AddVisibilityLabelsResponse [Text]
+vavlrLabels
+  = lens _vavlrLabels (\ s a -> s{_vavlrLabels = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON V1AddVisibilityLabelsResponse where
+        parseJSON
+          = withObject "V1AddVisibilityLabelsResponse"
+              (\ o ->
+                 V1AddVisibilityLabelsResponse' <$>
+                   (o .:? "labels" .!= mempty))
+
+instance ToJSON V1AddVisibilityLabelsResponse where
+        toJSON V1AddVisibilityLabelsResponse'{..}
+          = object (catMaybes [("labels" .=) <$> _vavlrLabels])
+
+-- | Describes the service account configuration for the tenant project.
 --
 -- /See:/ 'serviceAccountConfig' smart constructor.
 data ServiceAccountConfig =
@@ -2408,10 +2666,10 @@ serviceAccountConfig =
 
 
 -- | ID of the IAM service account to be created in tenant project. The email
--- format of the service account will be \"\'.iam.gserviceaccount.com\".
--- This account id has to be unique within tenant project and producers
--- have to guarantee it. And it must be 6-30 characters long, and matches
--- the regular expression \`[a-z]([-a-z0-9]*[a-z0-9])\`.
+-- format of the service account is \"\'.iam.gserviceaccount.com\". This
+-- account ID must be unique within tenant project and service producers
+-- have to guarantee it. The ID must be 6-30 characters long, and match the
+-- following regular expression: \`[a-z]([-a-z0-9]*[a-z0-9])\`.
 sacAccountId :: Lens' ServiceAccountConfig (Maybe Text)
 sacAccountId
   = lens _sacAccountId (\ s a -> s{_sacAccountId = a})
@@ -2439,6 +2697,111 @@ instance ToJSON ServiceAccountConfig where
                  [("accountId" .=) <$> _sacAccountId,
                   ("tenantProjectRoles" .=) <$>
                     _sacTenantProjectRoles])
+
+-- | A quota override
+--
+-- /See:/ 'v1Beta1QuotaOverride' smart constructor.
+data V1Beta1QuotaOverride =
+  V1Beta1QuotaOverride'
+    { _vbqoMetric        :: !(Maybe Text)
+    , _vbqoOverrideValue :: !(Maybe (Textual Int64))
+    , _vbqoName          :: !(Maybe Text)
+    , _vbqoDimensions    :: !(Maybe V1Beta1QuotaOverrideDimensions)
+    , _vbqoUnit          :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1QuotaOverride' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbqoMetric'
+--
+-- * 'vbqoOverrideValue'
+--
+-- * 'vbqoName'
+--
+-- * 'vbqoDimensions'
+--
+-- * 'vbqoUnit'
+v1Beta1QuotaOverride
+    :: V1Beta1QuotaOverride
+v1Beta1QuotaOverride =
+  V1Beta1QuotaOverride'
+    { _vbqoMetric = Nothing
+    , _vbqoOverrideValue = Nothing
+    , _vbqoName = Nothing
+    , _vbqoDimensions = Nothing
+    , _vbqoUnit = Nothing
+    }
+
+
+-- | The name of the metric to which this override applies. An example name
+-- would be: \`compute.googleapis.com\/cpus\`
+vbqoMetric :: Lens' V1Beta1QuotaOverride (Maybe Text)
+vbqoMetric
+  = lens _vbqoMetric (\ s a -> s{_vbqoMetric = a})
+
+-- | The overriding quota limit value. Can be any nonnegative integer, or -1
+-- (unlimited quota).
+vbqoOverrideValue :: Lens' V1Beta1QuotaOverride (Maybe Int64)
+vbqoOverrideValue
+  = lens _vbqoOverrideValue
+      (\ s a -> s{_vbqoOverrideValue = a})
+      . mapping _Coerce
+
+-- | The resource name of the producer override. An example name would be:
+-- \`services\/compute.googleapis.com\/projects\/123\/consumerQuotaMetrics\/compute.googleapis.com%2Fcpus\/limits\/%2Fproject%2Fregion\/producerOverrides\/4a3f2c1d\`
+vbqoName :: Lens' V1Beta1QuotaOverride (Maybe Text)
+vbqoName = lens _vbqoName (\ s a -> s{_vbqoName = a})
+
+-- | If this map is nonempty, then this override applies only to specific
+-- values for dimensions defined in the limit unit. For example, an
+-- override on a limit with the unit 1\/{project}\/{region} could contain
+-- an entry with the key \"region\" and the value \"us-east-1\"; the
+-- override is only applied to quota consumed in that region. This map has
+-- the following restrictions: - Keys that are not defined in the limit\'s
+-- unit are not valid keys. Any string appearing in {brackets} in the unit
+-- (besides {project} or {user}) is a defined key. - \"project\" is not a
+-- valid key; the project is already specified in the parent resource name.
+-- - \"user\" is not a valid key; the API does not support quota overrides
+-- that apply only to a specific user. - If \"region\" appears as a key,
+-- its value must be a valid Cloud region. - If \"zone\" appears as a key,
+-- its value must be a valid Cloud zone. - If any valid key other than
+-- \"region\" or \"zone\" appears in the map, then all valid keys other
+-- than \"region\" or \"zone\" must also appear in the map.
+vbqoDimensions :: Lens' V1Beta1QuotaOverride (Maybe V1Beta1QuotaOverrideDimensions)
+vbqoDimensions
+  = lens _vbqoDimensions
+      (\ s a -> s{_vbqoDimensions = a})
+
+-- | The limit unit of the limit to which this override applies. An example
+-- unit would be: \`1\/{project}\/{region}\` Note that \`{project}\` and
+-- \`{region}\` are not placeholders in this example; the literal
+-- characters \`{\` and \`}\` occur in the string.
+vbqoUnit :: Lens' V1Beta1QuotaOverride (Maybe Text)
+vbqoUnit = lens _vbqoUnit (\ s a -> s{_vbqoUnit = a})
+
+instance FromJSON V1Beta1QuotaOverride where
+        parseJSON
+          = withObject "V1Beta1QuotaOverride"
+              (\ o ->
+                 V1Beta1QuotaOverride' <$>
+                   (o .:? "metric") <*> (o .:? "overrideValue") <*>
+                     (o .:? "name")
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "unit"))
+
+instance ToJSON V1Beta1QuotaOverride where
+        toJSON V1Beta1QuotaOverride'{..}
+          = object
+              (catMaybes
+                 [("metric" .=) <$> _vbqoMetric,
+                  ("overrideValue" .=) <$> _vbqoOverrideValue,
+                  ("name" .=) <$> _vbqoName,
+                  ("dimensions" .=) <$> _vbqoDimensions,
+                  ("unit" .=) <$> _vbqoUnit])
 
 -- | Metrics to update when the selected methods are called, and the
 -- associated cost applied to each metric. The key of the map is the metric
@@ -2519,6 +2882,40 @@ instance ToJSON AuthorizationConfig where
           = object
               (catMaybes [("provider" .=) <$> _acProvider])
 
+-- | Request message to delete tenant project resource from the tenancy unit.
+--
+-- /See:/ 'deleteTenantProjectRequest' smart constructor.
+newtype DeleteTenantProjectRequest =
+  DeleteTenantProjectRequest'
+    { _dtprTag :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeleteTenantProjectRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtprTag'
+deleteTenantProjectRequest
+    :: DeleteTenantProjectRequest
+deleteTenantProjectRequest = DeleteTenantProjectRequest' {_dtprTag = Nothing}
+
+
+-- | Tag of the resource within the tenancy unit.
+dtprTag :: Lens' DeleteTenantProjectRequest (Maybe Text)
+dtprTag = lens _dtprTag (\ s a -> s{_dtprTag = a})
+
+instance FromJSON DeleteTenantProjectRequest where
+        parseJSON
+          = withObject "DeleteTenantProjectRequest"
+              (\ o ->
+                 DeleteTenantProjectRequest' <$> (o .:? "tag"))
+
+instance ToJSON DeleteTenantProjectRequest where
+        toJSON DeleteTenantProjectRequest'{..}
+          = object (catMaybes [("tag" .=) <$> _dtprTag])
+
 -- | Describes policy settings that need to be applied to a newly created
 -- tenant project.
 --
@@ -2544,7 +2941,7 @@ tenantProjectPolicy = TenantProjectPolicy' {_tppPolicyBindings = Nothing}
 -- \'roles\/owner\' role granted to the Service Consumer Management service
 -- account. At least one binding must have the role \`roles\/owner\`. Among
 -- the list of members for \`roles\/owner\`, at least one of them must be
--- either \`user\` or \`group\` type.
+-- either the \`user\` or \`group\` type.
 tppPolicyBindings :: Lens' TenantProjectPolicy [PolicyBinding]
 tppPolicyBindings
   = lens _tppPolicyBindings
@@ -2588,7 +2985,7 @@ policyBinding
 policyBinding = PolicyBinding' {_pbMembers = Nothing, _pbRole = Nothing}
 
 
--- | Uses the same format as in IAM policy. \`member\` must include both
+-- | Uses the same format as in IAM policy. \`member\` must include both a
 -- prefix and ID. For example, \`user:{emailId}\`,
 -- \`serviceAccount:{emailId}\`, \`group:{emailId}\`.
 pbMembers :: Lens' PolicyBinding [Text]
@@ -2730,8 +3127,8 @@ tenancyUnit =
     }
 
 
--- | \'OutputOnly Google Cloud API name of the service owning this tenancy
--- unit. For example \'serviceconsumermanagement.googleapis.com\'.
+-- | Output only. Google Cloud API name of the managed service owning this
+-- tenancy unit. For example \'serviceconsumermanagement.googleapis.com\'.
 tuService :: Lens' TenancyUnit (Maybe Text)
 tuService
   = lens _tuService (\ s a -> s{_tuService = a})
@@ -3068,6 +3465,31 @@ instance ToJSON Method where
                   ("options" .=) <$> _metOptions,
                   ("syntax" .=) <$> _metSyntax])
 
+-- | Response message for the \`RefreshConsumer\` method. This response
+-- message is assigned to the \`response\` field of the returned Operation
+-- when that operation is done.
+--
+-- /See:/ 'v1RefreshConsumerResponse' smart constructor.
+data V1RefreshConsumerResponse =
+  V1RefreshConsumerResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1RefreshConsumerResponse' with the minimum fields required to make a request.
+--
+v1RefreshConsumerResponse
+    :: V1RefreshConsumerResponse
+v1RefreshConsumerResponse = V1RefreshConsumerResponse'
+
+
+instance FromJSON V1RefreshConsumerResponse where
+        parseJSON
+          = withObject "V1RefreshConsumerResponse"
+              (\ o -> pure V1RefreshConsumerResponse')
+
+instance ToJSON V1RefreshConsumerResponse where
+        toJSON = const emptyObject
+
 -- | ### System parameter configuration A system parameter is a special kind
 -- of parameter defined by the API system, not by an individual API. It is
 -- typically mapped to an HTTP header and\/or a URL query parameter. This
@@ -3348,6 +3770,42 @@ instance ToJSON MetricDescriptorMetadata where
                   ("ingestDelay" .=) <$> _mdmIngestDelay,
                   ("launchStage" .=) <$> _mdmLaunchStage])
 
+-- | Request message to undelete tenant project resource previously deleted
+-- from the tenancy unit.
+--
+-- /See:/ 'undeleteTenantProjectRequest' smart constructor.
+newtype UndeleteTenantProjectRequest =
+  UndeleteTenantProjectRequest'
+    { _utprTag :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UndeleteTenantProjectRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'utprTag'
+undeleteTenantProjectRequest
+    :: UndeleteTenantProjectRequest
+undeleteTenantProjectRequest =
+  UndeleteTenantProjectRequest' {_utprTag = Nothing}
+
+
+-- | Tag of the resource within the tenancy unit.
+utprTag :: Lens' UndeleteTenantProjectRequest (Maybe Text)
+utprTag = lens _utprTag (\ s a -> s{_utprTag = a})
+
+instance FromJSON UndeleteTenantProjectRequest where
+        parseJSON
+          = withObject "UndeleteTenantProjectRequest"
+              (\ o ->
+                 UndeleteTenantProjectRequest' <$> (o .:? "tag"))
+
+instance ToJSON UndeleteTenantProjectRequest where
+        toJSON UndeleteTenantProjectRequest'{..}
+          = object (catMaybes [("tag" .=) <$> _utprTag])
+
 -- | Define a system parameter rule mapping system parameter definitions to
 -- methods.
 --
@@ -3463,6 +3921,32 @@ instance ToJSON LabelDescriptor where
                   ("valueType" .=) <$> _lValueType,
                   ("description" .=) <$> _lDescription])
 
+-- | Response message for the \`DisableConsumer\` method. This response
+-- message is assigned to the \`response\` field of the returned Operation
+-- when that operation is done.
+--
+-- /See:/ 'v1Beta1DisableConsumerResponse' smart constructor.
+data V1Beta1DisableConsumerResponse =
+  V1Beta1DisableConsumerResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1DisableConsumerResponse' with the minimum fields required to make a request.
+--
+v1Beta1DisableConsumerResponse
+    :: V1Beta1DisableConsumerResponse
+v1Beta1DisableConsumerResponse = V1Beta1DisableConsumerResponse'
+
+
+instance FromJSON V1Beta1DisableConsumerResponse
+         where
+        parseJSON
+          = withObject "V1Beta1DisableConsumerResponse"
+              (\ o -> pure V1Beta1DisableConsumerResponse')
+
+instance ToJSON V1Beta1DisableConsumerResponse where
+        toJSON = const emptyObject
+
 -- | Configuration controlling usage of a service.
 --
 -- /See:/ 'usage' smart constructor.
@@ -3541,6 +4025,53 @@ instance ToJSON Usage where
                   ("producerNotificationChannel" .=) <$>
                     _uProducerNotificationChannel])
 
+-- | Response message for BatchCreateProducerOverrides
+--
+-- /See:/ 'v1Beta1BatchCreateProducerOverridesResponse' smart constructor.
+newtype V1Beta1BatchCreateProducerOverridesResponse =
+  V1Beta1BatchCreateProducerOverridesResponse'
+    { _vbbcporOverrides :: Maybe [V1Beta1QuotaOverride]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1BatchCreateProducerOverridesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbbcporOverrides'
+v1Beta1BatchCreateProducerOverridesResponse
+    :: V1Beta1BatchCreateProducerOverridesResponse
+v1Beta1BatchCreateProducerOverridesResponse =
+  V1Beta1BatchCreateProducerOverridesResponse' {_vbbcporOverrides = Nothing}
+
+
+-- | The overrides that were created.
+vbbcporOverrides :: Lens' V1Beta1BatchCreateProducerOverridesResponse [V1Beta1QuotaOverride]
+vbbcporOverrides
+  = lens _vbbcporOverrides
+      (\ s a -> s{_vbbcporOverrides = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           V1Beta1BatchCreateProducerOverridesResponse
+         where
+        parseJSON
+          = withObject
+              "V1Beta1BatchCreateProducerOverridesResponse"
+              (\ o ->
+                 V1Beta1BatchCreateProducerOverridesResponse' <$>
+                   (o .:? "overrides" .!= mempty))
+
+instance ToJSON
+           V1Beta1BatchCreateProducerOverridesResponse
+         where
+        toJSON
+          V1Beta1BatchCreateProducerOverridesResponse'{..}
+          = object
+              (catMaybes [("overrides" .=) <$> _vbbcporOverrides])
+
 -- | Defines the HTTP configuration for an API service. It contains a list of
 -- HttpRule, each specifying the mapping of an RPC method to one or more
 -- HTTP REST API methods.
@@ -3574,8 +4105,8 @@ hRules
   = lens _hRules (\ s a -> s{_hRules = a}) . _Default .
       _Coerce
 
--- | When set to true, URL path parmeters will be fully URI-decoded except in
--- cases of single segment matches in reserved expansion, where \"%2F\"
+-- | When set to true, URL path parameters will be fully URI-decoded except
+-- in cases of single segment matches in reserved expansion, where \"%2F\"
 -- will be left encoded. The default behavior is to not decode RFC 6570
 -- reserved characters in multi segment matches.
 hFullyDecodeReservedExpansion :: Lens' HTTP (Maybe Bool)
@@ -4086,9 +4617,9 @@ instance ToJSON OAuthRequirements where
 
 -- | This structure defines a tenant project to be added to the specified
 -- tenancy unit and its initial configuration and properties. A project
--- lien will be created for the tenant project to prevent the tenant
--- project from being deleted accidentally. The lien will be deleted as
--- part of tenant project removal.
+-- lien is created for the tenant project to prevent the tenant project
+-- from being deleted accidentally. The lien is deleted as part of tenant
+-- project removal.
 --
 -- /See:/ 'tenantProjectConfig' smart constructor.
 data TenantProjectConfig =
@@ -4132,15 +4663,15 @@ tenantProjectConfig =
 
 
 -- | Folder where project in this tenancy unit must be located This folder
--- must have been previously created with proper permissions for the caller
--- to create and configure a project in it. Valid folder resource names
--- have the format \`folders\/{folder_number}\` (for example,
+-- must have been previously created with the required permissions for the
+-- caller to create and configure a project in it. Valid folder resource
+-- names have the format \`folders\/{folder_number}\` (for example,
 -- \`folders\/123456\`).
 tpcFolder :: Lens' TenantProjectConfig (Maybe Text)
 tpcFolder
   = lens _tpcFolder (\ s a -> s{_tpcFolder = a})
 
--- | Configuration for IAM service account on tenant project.
+-- | Configuration for the IAM service account on the tenant project.
 tpcServiceAccountConfig :: Lens' TenantProjectConfig (Maybe ServiceAccountConfig)
 tpcServiceAccountConfig
   = lens _tpcServiceAccountConfig
@@ -4152,14 +4683,14 @@ tpcTenantProjectPolicy
   = lens _tpcTenantProjectPolicy
       (\ s a -> s{_tpcTenantProjectPolicy = a})
 
--- | Labels that will be applied to this project.
+-- | Labels that are applied to this project.
 tpcLabels :: Lens' TenantProjectConfig (Maybe TenantProjectConfigLabels)
 tpcLabels
   = lens _tpcLabels (\ s a -> s{_tpcLabels = a})
 
--- | Google Cloud API names of services that will be activated on this
--- project during provisioning. If any of these services can not be
--- activated, request will fail. For example:
+-- | Google Cloud API names of services that are activated on this project
+-- during provisioning. If any of these services can\'t be activated, the
+-- request fails. For example:
 -- \'compute.googleapis.com\',\'cloudfunctions.googleapis.com\'
 tpcServices :: Lens' TenantProjectConfig [Text]
 tpcServices
@@ -4167,7 +4698,7 @@ tpcServices
       _Default
       . _Coerce
 
--- | Billing account properties. Billing account must be specified.
+-- | Billing account properties. The billing account must be specified.
 tpcBillingConfig :: Lens' TenantProjectConfig (Maybe BillingConfig)
 tpcBillingConfig
   = lens _tpcBillingConfig
@@ -4614,6 +5145,91 @@ instance FromJSON QuotaLimitValues where
 instance ToJSON QuotaLimitValues where
         toJSON = toJSON . _qlvAddtional
 
+-- | A service account in the Identity and Access Management API.
+--
+-- /See:/ 'v1ServiceAccount' smart constructor.
+data V1ServiceAccount =
+  V1ServiceAccount'
+    { _vsaEmail          :: !(Maybe Text)
+    , _vsaTag            :: !(Maybe Text)
+    , _vsaIAMAccountName :: !(Maybe Text)
+    , _vsaUniqueId       :: !(Maybe Text)
+    , _vsaName           :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1ServiceAccount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsaEmail'
+--
+-- * 'vsaTag'
+--
+-- * 'vsaIAMAccountName'
+--
+-- * 'vsaUniqueId'
+--
+-- * 'vsaName'
+v1ServiceAccount
+    :: V1ServiceAccount
+v1ServiceAccount =
+  V1ServiceAccount'
+    { _vsaEmail = Nothing
+    , _vsaTag = Nothing
+    , _vsaIAMAccountName = Nothing
+    , _vsaUniqueId = Nothing
+    , _vsaName = Nothing
+    }
+
+
+-- | The email address of the service account.
+vsaEmail :: Lens' V1ServiceAccount (Maybe Text)
+vsaEmail = lens _vsaEmail (\ s a -> s{_vsaEmail = a})
+
+-- | The P4 SA configuration tag. This must be defined in activation_grants.
+-- If not specified when creating the account, the tag is set to
+-- \"default\".
+vsaTag :: Lens' V1ServiceAccount (Maybe Text)
+vsaTag = lens _vsaTag (\ s a -> s{_vsaTag = a})
+
+-- | The IAM resource name of the service account in the following format:
+-- projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}.
+vsaIAMAccountName :: Lens' V1ServiceAccount (Maybe Text)
+vsaIAMAccountName
+  = lens _vsaIAMAccountName
+      (\ s a -> s{_vsaIAMAccountName = a})
+
+-- | The unique and stable id of the service account.
+vsaUniqueId :: Lens' V1ServiceAccount (Maybe Text)
+vsaUniqueId
+  = lens _vsaUniqueId (\ s a -> s{_vsaUniqueId = a})
+
+-- | P4 SA resource name. An example name would be:
+-- \`services\/serviceconsumermanagement.googleapis.com\/projects\/123\/serviceAccounts\/default\`
+vsaName :: Lens' V1ServiceAccount (Maybe Text)
+vsaName = lens _vsaName (\ s a -> s{_vsaName = a})
+
+instance FromJSON V1ServiceAccount where
+        parseJSON
+          = withObject "V1ServiceAccount"
+              (\ o ->
+                 V1ServiceAccount' <$>
+                   (o .:? "email") <*> (o .:? "tag") <*>
+                     (o .:? "iamAccountName")
+                     <*> (o .:? "uniqueId")
+                     <*> (o .:? "name"))
+
+instance ToJSON V1ServiceAccount where
+        toJSON V1ServiceAccount'{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _vsaEmail, ("tag" .=) <$> _vsaTag,
+                  ("iamAccountName" .=) <$> _vsaIAMAccountName,
+                  ("uniqueId" .=) <$> _vsaUniqueId,
+                  ("name" .=) <$> _vsaName])
+
 -- | Request to attach an existing project to the tenancy unit as a new
 -- tenant resource.
 --
@@ -4652,15 +5268,16 @@ atprTag :: Lens' AttachTenantProjectRequest (Maybe Text)
 atprTag = lens _atprTag (\ s a -> s{_atprTag = a})
 
 -- | When attaching an external project, this is in the format of
--- \`projects\/{project_number}’.
+-- \`projects\/{project_number}\`.
 atprExternalResource :: Lens' AttachTenantProjectRequest (Maybe Text)
 atprExternalResource
   = lens _atprExternalResource
       (\ s a -> s{_atprExternalResource = a})
 
--- | When attaching a reserved project already in Tenancy Units, this is the
--- tag of tenant resource under the tenancy unit for the service\'s
--- producer project. The reserved tenant resource must be in active state.
+-- | When attaching a reserved project already in tenancy units, this is the
+-- tag of a tenant resource under the tenancy unit for the managed
+-- service\'s service producer project. The reserved tenant resource must
+-- be in an active state.
 atprReservedResource :: Lens' AttachTenantProjectRequest (Maybe Text)
 atprReservedResource
   = lens _atprReservedResource
@@ -4846,7 +5463,8 @@ instance ToJSON Logging where
                   ("consumerDestinations" .=) <$>
                     _lConsumerDestinations])
 
--- | Request message to remove tenant project resource from the tenancy unit.
+-- | Request message to remove a tenant project resource from the tenancy
+-- unit.
 --
 -- /See:/ 'removeTenantProjectRequest' smart constructor.
 newtype RemoveTenantProjectRequest =
@@ -4918,8 +5536,8 @@ instance ToJSON SourceInfoSourceFilesItem where
         toJSON = toJSON . _sisfiAddtional
 
 -- | Quota configuration helps to achieve fairness and budgeting in service
--- usage. The quota configuration works this way: - The service
--- configuration defines a set of metrics. - For API calls, the
+-- usage. The metric based quota configuration works this way: - The
+-- service configuration defines a set of metrics. - For API calls, the
 -- quota.metric_rules maps methods to metrics with corresponding costs. -
 -- The quota.limits defines limits on the metrics, which will be used for
 -- quota checks at runtime. An example quota configuration in yaml format:
@@ -4989,6 +5607,31 @@ instance ToJSON Quota where
               (catMaybes
                  [("limits" .=) <$> _qLimits,
                   ("metricRules" .=) <$> _qMetricRules])
+
+-- | Response message for the \`DisableConsumer\` method. This response
+-- message is assigned to the \`response\` field of the returned Operation
+-- when that operation is done.
+--
+-- /See:/ 'v1DisableConsumerResponse' smart constructor.
+data V1DisableConsumerResponse =
+  V1DisableConsumerResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1DisableConsumerResponse' with the minimum fields required to make a request.
+--
+v1DisableConsumerResponse
+    :: V1DisableConsumerResponse
+v1DisableConsumerResponse = V1DisableConsumerResponse'
+
+
+instance FromJSON V1DisableConsumerResponse where
+        parseJSON
+          = withObject "V1DisableConsumerResponse"
+              (\ o -> pure V1DisableConsumerResponse')
+
+instance ToJSON V1DisableConsumerResponse where
+        toJSON = const emptyObject
 
 -- | # gRPC Transcoding gRPC Transcoding is a feature for mapping between a
 -- gRPC method and one or more HTTP REST endpoints. It allows developers to
@@ -5499,7 +6142,7 @@ instance ToJSON TenantResource where
                  [("status" .=) <$> _trStatus, ("tag" .=) <$> _trTag,
                   ("resource" .=) <$> _trResource])
 
--- | Labels that will be applied to this project.
+-- | Labels that are applied to this project.
 --
 -- /See:/ 'tenantProjectConfigLabels' smart constructor.
 newtype TenantProjectConfigLabels =
@@ -5536,7 +6179,50 @@ instance FromJSON TenantProjectConfigLabels where
 instance ToJSON TenantProjectConfigLabels where
         toJSON = toJSON . _tpclAddtional
 
--- | Configuration for an anthentication provider, including support for
+-- | Response message for the \`RemoveVisibilityLabels\` method. This
+-- response message is assigned to the \`response\` field of the returned
+-- Operation when that operation is done.
+--
+-- /See:/ 'v1RemoveVisibilityLabelsResponse' smart constructor.
+newtype V1RemoveVisibilityLabelsResponse =
+  V1RemoveVisibilityLabelsResponse'
+    { _vrvlrLabels :: Maybe [Text]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1RemoveVisibilityLabelsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vrvlrLabels'
+v1RemoveVisibilityLabelsResponse
+    :: V1RemoveVisibilityLabelsResponse
+v1RemoveVisibilityLabelsResponse =
+  V1RemoveVisibilityLabelsResponse' {_vrvlrLabels = Nothing}
+
+
+-- | The updated set of visibility labels for this consumer on this service.
+vrvlrLabels :: Lens' V1RemoveVisibilityLabelsResponse [Text]
+vrvlrLabels
+  = lens _vrvlrLabels (\ s a -> s{_vrvlrLabels = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON V1RemoveVisibilityLabelsResponse
+         where
+        parseJSON
+          = withObject "V1RemoveVisibilityLabelsResponse"
+              (\ o ->
+                 V1RemoveVisibilityLabelsResponse' <$>
+                   (o .:? "labels" .!= mempty))
+
+instance ToJSON V1RemoveVisibilityLabelsResponse
+         where
+        toJSON V1RemoveVisibilityLabelsResponse'{..}
+          = object (catMaybes [("labels" .=) <$> _vrvlrLabels])
+
+-- | Configuration for an authentication provider, including support for
 -- [JSON Web Token
 -- (JWT)](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32).
 --
@@ -5643,7 +6329,7 @@ instance ToJSON AuthProvider where
                   ("authorizationUrl" .=) <$> _apAuthorizationURL,
                   ("issuer" .=) <$> _apIssuer])
 
--- | Describes billing configuration for a new tenant project.
+-- | Describes the billing configuration for a new tenant project.
 --
 -- /See:/ 'billingConfig' smart constructor.
 newtype BillingConfig =
@@ -5681,7 +6367,8 @@ instance ToJSON BillingConfig where
               (catMaybes
                  [("billingAccount" .=) <$> _bcBillingAccount])
 
--- | Request to create a tenancy unit for a consumer of a service.
+-- | Request to create a tenancy unit for a service consumer of a managed
+-- service.
 --
 -- /See:/ 'createTenancyUnitRequest' smart constructor.
 newtype CreateTenancyUnitRequest =
@@ -5702,13 +6389,13 @@ createTenancyUnitRequest =
   CreateTenancyUnitRequest' {_cturTenancyUnitId = Nothing}
 
 
--- | Optional producer provided identifier of the tenancy unit. Must be no
--- longer than 40 characters and preferably URI friendly. If it is not
--- provided, a UID for the tenancy unit will be auto generated. It must be
--- unique across a service. If the tenancy unit already exists for the
--- service and consumer pair, \`CreateTenancyUnit\` will return the
--- existing tenancy unit if the provided identifier is identical or empty,
--- otherwise the call will fail.
+-- | Optional service producer-provided identifier of the tenancy unit. Must
+-- be no longer than 40 characters and preferably URI friendly. If it
+-- isn\'t provided, a UID for the tenancy unit is automatically generated.
+-- The identifier must be unique across a managed service. If the tenancy
+-- unit already exists for the managed service and service consumer pair,
+-- calling \`CreateTenancyUnit\` returns the existing tenancy unit if the
+-- provided identifier is identical or empty, otherwise the call fails.
 cturTenancyUnitId :: Lens' CreateTenancyUnitRequest (Maybe Text)
 cturTenancyUnitId
   = lens _cturTenancyUnitId
@@ -5852,8 +6539,8 @@ addTenantProjectRequest =
   AddTenantProjectRequest' {_aProjectConfig = Nothing, _aTag = Nothing}
 
 
--- | Configuration of the new tenant project that will be added to tenancy
--- unit resources.
+-- | Configuration of the new tenant project to be added to tenancy unit
+-- resources.
 aProjectConfig :: Lens' AddTenantProjectRequest (Maybe TenantProjectConfig)
 aProjectConfig
   = lens _aProjectConfig

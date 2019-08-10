@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsHl7V2StoresMessagesDelete' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresMessagesDeleteResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

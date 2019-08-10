@@ -20,6 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
+-- Deletes, fetches, gets, inserts and updates multiple datafeeds in a
+-- single request.
+--
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.custombatch@.
 module Network.Google.Resource.Content.Datafeeds.Custombatch
     (
@@ -48,6 +51,8 @@ type DatafeedsCustombatchResource =
                ReqBody '[JSON] DatafeedsCustomBatchRequest :>
                  Post '[JSON] DatafeedsCustomBatchResponse
 
+-- | Deletes, fetches, gets, inserts and updates multiple datafeeds in a
+-- single request.
 --
 -- /See:/ 'datafeedsCustombatch' smart constructor.
 newtype DatafeedsCustombatch =

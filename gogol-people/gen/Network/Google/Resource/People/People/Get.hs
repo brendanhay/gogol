@@ -179,7 +179,6 @@ instance GoogleRequest PeopleGet where
         type Scopes PeopleGet =
              '["https://www.googleapis.com/auth/contacts",
                "https://www.googleapis.com/auth/contacts.readonly",
-               "https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/user.addresses.read",
                "https://www.googleapis.com/auth/user.birthday.read",
                "https://www.googleapis.com/auth/user.emails.read",

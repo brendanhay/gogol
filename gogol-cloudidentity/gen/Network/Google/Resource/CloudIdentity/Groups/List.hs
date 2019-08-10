@@ -156,8 +156,8 @@ gllPageToken :: Lens' GroupsList (Maybe Text)
 gllPageToken
   = lens _gllPageToken (\ s a -> s{_gllPageToken = a})
 
--- | Maximum number of groups to return. View | Default | Maximum ----- |
--- ------- | ------- BASIC | 200 | 1000 FULL | 50 | 500
+-- | The default page size is 200 (max 1000) for the BASIC view, and 50 (max
+-- 500) for the FULL view.
 gllPageSize :: Lens' GroupsList (Maybe Int32)
 gllPageSize
   = lens _gllPageSize (\ s a -> s{_gllPageSize = a}) .
@@ -170,7 +170,9 @@ gllCallback
 
 instance GoogleRequest GroupsList where
         type Rs GroupsList = ListGroupsResponse
-        type Scopes GroupsList = '[]
+        type Scopes GroupsList =
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
         requestClient GroupsList'{..}
           = go _gllParent _gllXgafv _gllUploadProtocol
               _gllAccessToken

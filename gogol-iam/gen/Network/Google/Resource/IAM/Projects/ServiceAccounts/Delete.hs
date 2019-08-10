@@ -33,12 +33,12 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
     , ProjectsServiceAccountsDelete
 
     -- * Request Lenses
-    , psadXgafv
-    , psadUploadProtocol
-    , psadAccessToken
-    , psadUploadType
-    , psadName
-    , psadCallback
+    , pXgafv
+    , pUploadProtocol
+    , pAccessToken
+    , pUploadType
+    , pName
+    , pCallback
     ) where
 
 import           Network.Google.IAM.Types
@@ -61,12 +61,12 @@ type ProjectsServiceAccountsDeleteResource =
 -- /See:/ 'projectsServiceAccountsDelete' smart constructor.
 data ProjectsServiceAccountsDelete =
   ProjectsServiceAccountsDelete'
-    { _psadXgafv          :: !(Maybe Xgafv)
-    , _psadUploadProtocol :: !(Maybe Text)
-    , _psadAccessToken    :: !(Maybe Text)
-    , _psadUploadType     :: !(Maybe Text)
-    , _psadName           :: !Text
-    , _psadCallback       :: !(Maybe Text)
+    { _pXgafv          :: !(Maybe Xgafv)
+    , _pUploadProtocol :: !(Maybe Text)
+    , _pAccessToken    :: !(Maybe Text)
+    , _pUploadType     :: !(Maybe Text)
+    , _pName           :: !Text
+    , _pCallback       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,66 +75,63 @@ data ProjectsServiceAccountsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psadXgafv'
+-- * 'pXgafv'
 --
--- * 'psadUploadProtocol'
+-- * 'pUploadProtocol'
 --
--- * 'psadAccessToken'
+-- * 'pAccessToken'
 --
--- * 'psadUploadType'
+-- * 'pUploadType'
 --
--- * 'psadName'
+-- * 'pName'
 --
--- * 'psadCallback'
+-- * 'pCallback'
 projectsServiceAccountsDelete
-    :: Text -- ^ 'psadName'
+    :: Text -- ^ 'pName'
     -> ProjectsServiceAccountsDelete
-projectsServiceAccountsDelete pPsadName_ =
+projectsServiceAccountsDelete pPName_ =
   ProjectsServiceAccountsDelete'
-    { _psadXgafv = Nothing
-    , _psadUploadProtocol = Nothing
-    , _psadAccessToken = Nothing
-    , _psadUploadType = Nothing
-    , _psadName = pPsadName_
-    , _psadCallback = Nothing
+    { _pXgafv = Nothing
+    , _pUploadProtocol = Nothing
+    , _pAccessToken = Nothing
+    , _pUploadType = Nothing
+    , _pName = pPName_
+    , _pCallback = Nothing
     }
 
 
 -- | V1 error format.
-psadXgafv :: Lens' ProjectsServiceAccountsDelete (Maybe Xgafv)
-psadXgafv
-  = lens _psadXgafv (\ s a -> s{_psadXgafv = a})
+pXgafv :: Lens' ProjectsServiceAccountsDelete (Maybe Xgafv)
+pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psadUploadProtocol :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
-psadUploadProtocol
-  = lens _psadUploadProtocol
-      (\ s a -> s{_psadUploadProtocol = a})
+pUploadProtocol :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
+pUploadProtocol
+  = lens _pUploadProtocol
+      (\ s a -> s{_pUploadProtocol = a})
 
 -- | OAuth access token.
-psadAccessToken :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
-psadAccessToken
-  = lens _psadAccessToken
-      (\ s a -> s{_psadAccessToken = a})
+pAccessToken :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
+pAccessToken
+  = lens _pAccessToken (\ s a -> s{_pAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psadUploadType :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
-psadUploadType
-  = lens _psadUploadType
-      (\ s a -> s{_psadUploadType = a})
+pUploadType :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
+pUploadType
+  = lens _pUploadType (\ s a -> s{_pUploadType = a})
 
 -- | The resource name of the service account in the following format:
 -- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
 -- wildcard for the \`PROJECT_ID\` will infer the project from the account.
 -- The \`ACCOUNT\` value can be the \`email\` address or the \`unique_id\`
 -- of the service account.
-psadName :: Lens' ProjectsServiceAccountsDelete Text
-psadName = lens _psadName (\ s a -> s{_psadName = a})
+pName :: Lens' ProjectsServiceAccountsDelete Text
+pName = lens _pName (\ s a -> s{_pName = a})
 
 -- | JSONP
-psadCallback :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
-psadCallback
-  = lens _psadCallback (\ s a -> s{_psadCallback = a})
+pCallback :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
+pCallback
+  = lens _pCallback (\ s a -> s{_pCallback = a})
 
 instance GoogleRequest ProjectsServiceAccountsDelete
          where
@@ -142,10 +139,9 @@ instance GoogleRequest ProjectsServiceAccountsDelete
         type Scopes ProjectsServiceAccountsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsDelete'{..}
-          = go _psadName _psadXgafv _psadUploadProtocol
-              _psadAccessToken
-              _psadUploadType
-              _psadCallback
+          = go _pName _pXgafv _pUploadProtocol _pAccessToken
+              _pUploadType
+              _pCallback
               (Just AltJSON)
               iAMService
           where go

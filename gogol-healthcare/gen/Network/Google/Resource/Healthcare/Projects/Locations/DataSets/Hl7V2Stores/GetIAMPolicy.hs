@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsHl7V2StoresGetIAMPolicy' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresGetIAMPolicyResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

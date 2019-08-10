@@ -89,6 +89,12 @@ module Network.Google.ToolResults
     -- ** toolresults.projects.histories.executions.steps.publishXunitXmlFiles
     , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
 
+    -- ** toolresults.projects.histories.executions.steps.testCases.get
+    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.Get
+
+    -- ** toolresults.projects.histories.executions.steps.testCases.list
+    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.List
+
     -- ** toolresults.projects.histories.executions.steps.thumbnails.list
     , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
 
@@ -198,6 +204,18 @@ module Network.Google.ToolResults
 
     -- ** TestIssueCategory
     , TestIssueCategory (..)
+
+    -- ** TestCase
+    , TestCase
+    , testCase
+    , tcStatus
+    , tcStartTime
+    , tcTestCaseReference
+    , tcToolOutputs
+    , tcStackTraces
+    , tcTestCaseId
+    , tcEndTime
+    , tcSkippedMessage
 
     -- ** GraphicsStatsBucket
     , GraphicsStatsBucket
@@ -479,10 +497,18 @@ module Network.Google.ToolResults
     -- ** BasicPerfSampleSeriesSampleSeriesLabel
     , BasicPerfSampleSeriesSampleSeriesLabel (..)
 
+    -- ** ListTestCasesResponse
+    , ListTestCasesResponse
+    , listTestCasesResponse
+    , ltcrNextPageToken
+    , ltcrTestCases
+
     -- ** IndividualOutcome
     , IndividualOutcome
     , individualOutcome
+    , ioRunDuration
     , ioStepId
+    , ioMultistepNumber
     , ioOutcomeSummary
 
     -- ** TestSuiteOverview
@@ -540,6 +566,9 @@ module Network.Google.ToolResults
     , bpssPerfMetricType
     , bpssSampleSeriesLabel
 
+    -- ** TestCaseStatus
+    , TestCaseStatus (..)
+
     -- ** PrimaryStepRollUp
     , PrimaryStepRollUp (..)
 
@@ -581,6 +610,8 @@ import           Network.Google.Resource.ToolResults.Projects.Histories.Executio
 import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.BatchCreate
 import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.List
 import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
+import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.Get
+import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.List
 import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
 import           Network.Google.Resource.ToolResults.Projects.Histories.Get
 import           Network.Google.Resource.ToolResults.Projects.Histories.List
@@ -606,6 +637,10 @@ type ToolResultsAPI =
        ProjectsHistoriesExecutionsStepsThumbnailsListResource
        :<|>
        ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreateResource
+       :<|>
+       ProjectsHistoriesExecutionsStepsTestCasesListResource
+       :<|>
+       ProjectsHistoriesExecutionsStepsTestCasesGetResource
        :<|>
        ProjectsHistoriesExecutionsStepsGetPerfMetricsSummaryResource
        :<|> ProjectsHistoriesExecutionsStepsListResource

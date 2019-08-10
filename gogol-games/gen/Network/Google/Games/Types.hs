@@ -945,8 +945,7 @@ gamesService
   = defaultService (ServiceId "games:v1")
       "www.googleapis.com"
 
--- | Share your Google+ profile information and view and manage your game
--- activity
+-- | Create, edit, and delete your Google Play Games activity
 gamesScope :: Proxy '["https://www.googleapis.com/auth/games"]
 gamesScope = Proxy
 
@@ -954,6 +953,6 @@ gamesScope = Proxy
 driveAppDataScope :: Proxy '["https://www.googleapis.com/auth/drive.appdata"]
 driveAppDataScope = Proxy
 
--- | Know who you are on Google
+-- | Associate you with your personal info on Google
 plusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
 plusMeScope = Proxy

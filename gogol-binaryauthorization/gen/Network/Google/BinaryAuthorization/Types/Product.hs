@@ -20,6 +20,65 @@ module Network.Google.BinaryAuthorization.Types.Product where
 import           Network.Google.BinaryAuthorization.Types.Sum
 import           Network.Google.Prelude
 
+-- | A public key in the PkixPublicKey format (see
+-- https:\/\/tools.ietf.org\/html\/rfc5280#section-4.1.2.7 for details).
+-- Public keys of this type are typically textually encoded using the PEM
+-- format.
+--
+-- /See:/ 'pkixPublicKey' smart constructor.
+data PkixPublicKey =
+  PkixPublicKey'
+    { _ppkPublicKeyPem       :: !(Maybe Text)
+    , _ppkSignatureAlgorithm :: !(Maybe PkixPublicKeySignatureAlgorithm)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PkixPublicKey' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppkPublicKeyPem'
+--
+-- * 'ppkSignatureAlgorithm'
+pkixPublicKey
+    :: PkixPublicKey
+pkixPublicKey =
+  PkixPublicKey' {_ppkPublicKeyPem = Nothing, _ppkSignatureAlgorithm = Nothing}
+
+
+-- | A PEM-encoded public key, as described in
+-- https:\/\/tools.ietf.org\/html\/rfc7468#section-13
+ppkPublicKeyPem :: Lens' PkixPublicKey (Maybe Text)
+ppkPublicKeyPem
+  = lens _ppkPublicKeyPem
+      (\ s a -> s{_ppkPublicKeyPem = a})
+
+-- | The signature algorithm used to verify a message against a signature
+-- using this key. These signature algorithm must match the structure and
+-- any object identifiers encoded in \`public_key_pem\` (i.e. this
+-- algorithm must match that of the public key).
+ppkSignatureAlgorithm :: Lens' PkixPublicKey (Maybe PkixPublicKeySignatureAlgorithm)
+ppkSignatureAlgorithm
+  = lens _ppkSignatureAlgorithm
+      (\ s a -> s{_ppkSignatureAlgorithm = a})
+
+instance FromJSON PkixPublicKey where
+        parseJSON
+          = withObject "PkixPublicKey"
+              (\ o ->
+                 PkixPublicKey' <$>
+                   (o .:? "publicKeyPem") <*>
+                     (o .:? "signatureAlgorithm"))
+
+instance ToJSON PkixPublicKey where
+        toJSON PkixPublicKey'{..}
+          = object
+              (catMaybes
+                 [("publicKeyPem" .=) <$> _ppkPublicKeyPem,
+                  ("signatureAlgorithm" .=) <$>
+                    _ppkSignatureAlgorithm])
+
 -- | Represents an expression text. Example: title: \"User account presence\"
 -- description: \"Determines whether the request has a user account\"
 -- expression: \"size(request.user) > 0\"
@@ -556,13 +615,14 @@ instance ToJSON IAMPolicy where
                   ("version" .=) <$> _ipVersion,
                   ("bindings" .=) <$> _ipBindings])
 
--- | An attestator public key that will be used to verify attestations signed
+-- | An attestor public key that will be used to verify attestations signed
 -- by this attestor.
 --
 -- /See:/ 'attestorPublicKey' smart constructor.
 data AttestorPublicKey =
   AttestorPublicKey'
-    { _apkAsciiArmoredPgpPublicKey :: !(Maybe Text)
+    { _apkPkixPublicKey            :: !(Maybe PkixPublicKey)
+    , _apkAsciiArmoredPgpPublicKey :: !(Maybe Text)
     , _apkId                       :: !(Maybe Text)
     , _apkComment                  :: !(Maybe Text)
     }
@@ -573,6 +633,8 @@ data AttestorPublicKey =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'apkPkixPublicKey'
+--
 -- * 'apkAsciiArmoredPgpPublicKey'
 --
 -- * 'apkId'
@@ -582,23 +644,41 @@ attestorPublicKey
     :: AttestorPublicKey
 attestorPublicKey =
   AttestorPublicKey'
-    { _apkAsciiArmoredPgpPublicKey = Nothing
+    { _apkPkixPublicKey = Nothing
+    , _apkAsciiArmoredPgpPublicKey = Nothing
     , _apkId = Nothing
     , _apkComment = Nothing
     }
 
 
+-- | A raw PKIX SubjectPublicKeyInfo format public key. NOTE: \`id\` may be
+-- explicitly provided by the caller when using this type of public key,
+-- but it MUST be a valid RFC3986 URI. If \`id\` is left blank, a default
+-- one will be computed based on the digest of the DER encoding of the
+-- public key.
+apkPkixPublicKey :: Lens' AttestorPublicKey (Maybe PkixPublicKey)
+apkPkixPublicKey
+  = lens _apkPkixPublicKey
+      (\ s a -> s{_apkPkixPublicKey = a})
+
 -- | ASCII-armored representation of a PGP public key, as the entire output
 -- by the command \`gpg --export --armor foo\'example.com\` (either LF or
--- CRLF line endings).
+-- CRLF line endings). When using this field, \`id\` should be left blank.
+-- The BinAuthz API handlers will calculate the ID and fill it in
+-- automatically. BinAuthz computes this ID as the OpenPGP RFC4880 V4
+-- fingerprint, represented as upper-case hex. If \`id\` is provided by the
+-- caller, it will be overwritten by the API-calculated ID.
 apkAsciiArmoredPgpPublicKey :: Lens' AttestorPublicKey (Maybe Text)
 apkAsciiArmoredPgpPublicKey
   = lens _apkAsciiArmoredPgpPublicKey
       (\ s a -> s{_apkAsciiArmoredPgpPublicKey = a})
 
--- | Output only. This field will be overwritten with key ID information, for
--- example, an identifier extracted from a PGP public key. This field may
--- not be updated.
+-- | The ID of this public key. Signatures verified by BinAuthz must include
+-- the ID of the public key that can be used to verify them, and that ID
+-- must match the contents of this field exactly. Additional restrictions
+-- on this field can be imposed based on which public key type is
+-- encapsulated. See the documentation on \`public_key\` cases below for
+-- details.
 apkId :: Lens' AttestorPublicKey (Maybe Text)
 apkId = lens _apkId (\ s a -> s{_apkId = a})
 
@@ -612,14 +692,17 @@ instance FromJSON AttestorPublicKey where
           = withObject "AttestorPublicKey"
               (\ o ->
                  AttestorPublicKey' <$>
-                   (o .:? "asciiArmoredPgpPublicKey") <*> (o .:? "id")
+                   (o .:? "pkixPublicKey") <*>
+                     (o .:? "asciiArmoredPgpPublicKey")
+                     <*> (o .:? "id")
                      <*> (o .:? "comment"))
 
 instance ToJSON AttestorPublicKey where
         toJSON AttestorPublicKey'{..}
           = object
               (catMaybes
-                 [("asciiArmoredPgpPublicKey" .=) <$>
+                 [("pkixPublicKey" .=) <$> _apkPkixPublicKey,
+                  ("asciiArmoredPgpPublicKey" .=) <$>
                     _apkAsciiArmoredPgpPublicKey,
                   ("id" .=) <$> _apkId,
                   ("comment" .=) <$> _apkComment])
@@ -677,6 +760,7 @@ data Policy =
     , _pClusterAdmissionRules      :: !(Maybe PolicyClusterAdmissionRules)
     , _pUpdateTime                 :: !(Maybe DateTime')
     , _pName                       :: !(Maybe Text)
+    , _pGlobalPolicyEvaluationMode :: !(Maybe PolicyGlobalPolicyEvaluationMode)
     , _pDescription                :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -696,6 +780,8 @@ data Policy =
 --
 -- * 'pName'
 --
+-- * 'pGlobalPolicyEvaluationMode'
+--
 -- * 'pDescription'
 policy
     :: Policy
@@ -706,12 +792,14 @@ policy =
     , _pClusterAdmissionRules = Nothing
     , _pUpdateTime = Nothing
     , _pName = Nothing
+    , _pGlobalPolicyEvaluationMode = Nothing
     , _pDescription = Nothing
     }
 
 
--- | Required. Default admission rule for a cluster without a per-cluster
--- admission rule.
+-- | Required. Default admission rule for a cluster without a per-cluster,
+-- per- kubernetes-service-account, or per-istio-service-identity admission
+-- rule.
 pDefaultAdmissionRule :: Lens' Policy (Maybe AdmissionRule)
 pDefaultAdmissionRule
   = lens _pDefaultAdmissionRule
@@ -750,6 +838,15 @@ pUpdateTime
 pName :: Lens' Policy (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
+-- | Optional. Controls the evaluation of a Google-maintained global
+-- admission policy for common system-level images. Images not covered by
+-- the global policy will be subject to the project admission policy. This
+-- setting has no effect when specified inside a global admission policy.
+pGlobalPolicyEvaluationMode :: Lens' Policy (Maybe PolicyGlobalPolicyEvaluationMode)
+pGlobalPolicyEvaluationMode
+  = lens _pGlobalPolicyEvaluationMode
+      (\ s a -> s{_pGlobalPolicyEvaluationMode = a})
+
 -- | Optional. A descriptive comment.
 pDescription :: Lens' Policy (Maybe Text)
 pDescription
@@ -765,6 +862,7 @@ instance FromJSON Policy where
                      <*> (o .:? "clusterAdmissionRules")
                      <*> (o .:? "updateTime")
                      <*> (o .:? "name")
+                     <*> (o .:? "globalPolicyEvaluationMode")
                      <*> (o .:? "description"))
 
 instance ToJSON Policy where
@@ -779,6 +877,8 @@ instance ToJSON Policy where
                     _pClusterAdmissionRules,
                   ("updateTime" .=) <$> _pUpdateTime,
                   ("name" .=) <$> _pName,
+                  ("globalPolicyEvaluationMode" .=) <$>
+                    _pGlobalPolicyEvaluationMode,
                   ("description" .=) <$> _pDescription])
 
 -- | Optional. Per-cluster admission rules. Cluster spec format:
@@ -940,8 +1040,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -954,10 +1054,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

@@ -43,8 +43,10 @@ library
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.Create
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.Delete
+        , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.DeleteProject
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.List
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
+        , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
         , Network.Google.ServiceConsumerManagement
         , Network.Google.ServiceConsumerManagement.Types
 

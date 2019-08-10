@@ -135,8 +135,8 @@ ssadUploadType
 ssadName :: Lens' SettingsSearchApplicationsDelete Text
 ssadName = lens _ssadName (\ s a -> s{_ssadName = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 ssadDebugOptionsEnableDebugging :: Lens' SettingsSearchApplicationsDelete (Maybe Bool)
 ssadDebugOptionsEnableDebugging
   = lens _ssadDebugOptionsEnableDebugging

@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.resume@ method which the
 -- 'ProjectsLocationsQueuesResume' request conforms to.
 type ProjectsLocationsQueuesResumeResource =
-     "v2beta3" :>
+     "v2" :>
        CaptureMode "name" "resume" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

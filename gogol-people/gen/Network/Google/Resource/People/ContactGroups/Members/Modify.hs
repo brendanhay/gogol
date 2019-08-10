@@ -21,6 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Modify the members of a contact group owned by the authenticated user.
+-- The only system contact groups that can have members added are
+-- \`contactGroups\/myContacts\` and \`contactGroups\/starred\`. Other
+-- system contact groups are deprecated and can only have contacts removed.
 --
 -- /See:/ <https://developers.google.com/people/ People API Reference> for @people.contactGroups.members.modify@.
 module Network.Google.Resource.People.ContactGroups.Members.Modify
@@ -61,6 +64,9 @@ type ContactGroupsMembersModifyResource =
                          Post '[JSON] ModifyContactGroupMembersResponse
 
 -- | Modify the members of a contact group owned by the authenticated user.
+-- The only system contact groups that can have members added are
+-- \`contactGroups\/myContacts\` and \`contactGroups\/starred\`. Other
+-- system contact groups are deprecated and can only have contacts removed.
 --
 -- /See:/ 'contactGroupsMembersModify' smart constructor.
 data ContactGroupsMembersModify =

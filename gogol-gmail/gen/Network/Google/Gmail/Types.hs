@@ -245,6 +245,11 @@ module Network.Google.Gmail.Types
     , listSendAsResponse
     , lsarSendAs
 
+    -- * LanguageSettings
+    , LanguageSettings
+    , languageSettings
+    , lsDisplayLanguage
+
     -- * WatchResponse
     , WatchResponse
     , watchResponse

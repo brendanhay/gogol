@@ -35,6 +35,7 @@ library
     exposed-modules:
           Network.Google.Dataflow
         , Network.Google.Dataflow.Types
+        , Network.Google.Resource.Dataflow.Projects.DeleteSnapshots
         , Network.Google.Resource.Dataflow.Projects.Jobs.Aggregated
         , Network.Google.Resource.Dataflow.Projects.Jobs.Create
         , Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
@@ -58,10 +59,16 @@ library
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
+        , Network.Google.Resource.Dataflow.Projects.Locations.SQL.Validate
+        , Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Delete
+        , Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Get
+        , Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.List
         , Network.Google.Resource.Dataflow.Projects.Locations.Templates.Create
         , Network.Google.Resource.Dataflow.Projects.Locations.Templates.Get
         , Network.Google.Resource.Dataflow.Projects.Locations.Templates.Launch
         , Network.Google.Resource.Dataflow.Projects.Locations.WorkerMessages
+        , Network.Google.Resource.Dataflow.Projects.Snapshots.Get
+        , Network.Google.Resource.Dataflow.Projects.Snapshots.List
         , Network.Google.Resource.Dataflow.Projects.Templates.Create
         , Network.Google.Resource.Dataflow.Projects.Templates.Get
         , Network.Google.Resource.Dataflow.Projects.Templates.Launch

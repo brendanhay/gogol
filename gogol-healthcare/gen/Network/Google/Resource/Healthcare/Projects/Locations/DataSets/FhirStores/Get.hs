@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the specified FHIR store.
+-- Gets the configuration of the specified FHIR store.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.get@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Get
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.get@ method which the
 -- 'ProjectsLocationsDataSetsFhirStoresGet' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresGetResource =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -56,7 +56,7 @@ type ProjectsLocationsDataSetsFhirStoresGetResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] FhirStore
 
--- | Gets the specified FHIR store.
+-- | Gets the configuration of the specified FHIR store.
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresGet' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresGet =

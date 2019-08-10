@@ -20,11 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Export resources from the FHIR store to the specified destination. Fatal
--- errors will be populated in the error field. Otherwise a detailed
--- response will be returned as of type ExportResourcesResponse contained
--- in the response field when the operation finishes. The metadata field
--- type is OperationMetadata.
+-- Export resources from the FHIR store to the specified destination. This
+-- method returns an Operation that can be used to track the status of the
+-- export by calling GetOperation. Immediate fatal errors appear in the
+-- error field. Otherwise, when the operation finishes, a detailed response
+-- of type ExportResourcesResponse is returned in the response field. The
+-- metadata field type for this operation is OperationMetadata.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.export@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Export
@@ -53,7 +54,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsFhirStoresExport' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresExportResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "name" "export" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -64,11 +65,12 @@ type ProjectsLocationsDataSetsFhirStoresExportResource
                      ReqBody '[JSON] ExportResourcesRequest :>
                        Post '[JSON] Operation
 
--- | Export resources from the FHIR store to the specified destination. Fatal
--- errors will be populated in the error field. Otherwise a detailed
--- response will be returned as of type ExportResourcesResponse contained
--- in the response field when the operation finishes. The metadata field
--- type is OperationMetadata.
+-- | Export resources from the FHIR store to the specified destination. This
+-- method returns an Operation that can be used to track the status of the
+-- export by calling GetOperation. Immediate fatal errors appear in the
+-- error field. Otherwise, when the operation finishes, a detailed response
+-- of type ExportResourcesResponse is returned in the response field. The
+-- metadata field type for this operation is OperationMetadata.
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresExport' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresExport =
@@ -146,7 +148,8 @@ pldsfsePayload
   = lens _pldsfsePayload
       (\ s a -> s{_pldsfsePayload = a})
 
--- | The FHIR store name to export from. The name should be in the format
+-- | The name of the FHIR store to export resource from. The name should be
+-- in the format of
 -- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\`.
 pldsfseName :: Lens' ProjectsLocationsDataSetsFhirStoresExport Text
 pldsfseName

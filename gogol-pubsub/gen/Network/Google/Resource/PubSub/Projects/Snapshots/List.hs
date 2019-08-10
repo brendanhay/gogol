@@ -25,9 +25,6 @@
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.list@.
 module Network.Google.Resource.PubSub.Projects.Snapshots.List
@@ -74,9 +71,6 @@ type ProjectsSnapshotsListResource =
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'projectsSnapshotsList' smart constructor.
 data ProjectsSnapshotsList =

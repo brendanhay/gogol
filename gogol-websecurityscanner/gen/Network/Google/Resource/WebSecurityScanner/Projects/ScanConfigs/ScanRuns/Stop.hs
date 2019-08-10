@@ -48,7 +48,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.stop@ method which the
 -- 'ProjectsScanConfigsScanRunsStop' request conforms to.
 type ProjectsScanConfigsScanRunsStopResource =
-     "v1alpha" :>
+     "v1beta" :>
        CaptureMode "name" "stop" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

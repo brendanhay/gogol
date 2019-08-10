@@ -149,7 +149,7 @@ data AudioConfigAudioEncoding
       -- content returned as LINEAR16 also contains a WAV header.
     | MP3
       -- ^ @MP3@
-      -- MP3 audio.
+      -- MP3 audio at 32kbps.
     | OggOpus
       -- ^ @OGG_OPUS@
       -- Opus encoded audio wrapped in an ogg container. The result will be a

@@ -358,6 +358,10 @@ data KeyOperationAttestationFormat
       -- ^ @CAVIUM_V1_COMPRESSED@
       -- Cavium HSM attestation compressed with gzip. Note that this format is
       -- defined by Cavium and subject to change at any time.
+    | CaviumV2Compressed
+      -- ^ @CAVIUM_V2_COMPRESSED@
+      -- Cavium HSM attestation V2 compressed with gzip. This is a new format
+      -- introduced in Cavium\'s version 3.2-08.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable KeyOperationAttestationFormat
@@ -366,12 +370,14 @@ instance FromHttpApiData KeyOperationAttestationFormat where
     parseQueryParam = \case
         "ATTESTATION_FORMAT_UNSPECIFIED" -> Right AttestationFormatUnspecified
         "CAVIUM_V1_COMPRESSED" -> Right CaviumV1Compressed
+        "CAVIUM_V2_COMPRESSED" -> Right CaviumV2Compressed
         x -> Left ("Unable to parse KeyOperationAttestationFormat from: " <> x)
 
 instance ToHttpApiData KeyOperationAttestationFormat where
     toQueryParam = \case
         AttestationFormatUnspecified -> "ATTESTATION_FORMAT_UNSPECIFIED"
         CaviumV1Compressed -> "CAVIUM_V1_COMPRESSED"
+        CaviumV2Compressed -> "CAVIUM_V2_COMPRESSED"
 
 instance FromJSON KeyOperationAttestationFormat where
     parseJSON = parseJSONText "KeyOperationAttestationFormat"

@@ -2196,10 +2196,11 @@ instance ToJSON AppRestrictionsSchemaRestriction
 -- /See:/ 'productPolicy' smart constructor.
 data ProductPolicy =
   ProductPolicy'
-    { _ppTracks            :: !(Maybe [Text])
-    , _ppTrackIds          :: !(Maybe [Text])
-    , _ppAutoInstallPolicy :: !(Maybe AutoInstallPolicy)
-    , _ppProductId         :: !(Maybe Text)
+    { _ppTracks               :: !(Maybe [Text])
+    , _ppManagedConfiguration :: !(Maybe ManagedConfiguration)
+    , _ppTrackIds             :: !(Maybe [Text])
+    , _ppAutoInstallPolicy    :: !(Maybe AutoInstallPolicy)
+    , _ppProductId            :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2209,6 +2210,8 @@ data ProductPolicy =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ppTracks'
+--
+-- * 'ppManagedConfiguration'
 --
 -- * 'ppTrackIds'
 --
@@ -2220,6 +2223,7 @@ productPolicy
 productPolicy =
   ProductPolicy'
     { _ppTracks = Nothing
+    , _ppManagedConfiguration = Nothing
     , _ppTrackIds = Nothing
     , _ppAutoInstallPolicy = Nothing
     , _ppProductId = Nothing
@@ -2232,6 +2236,12 @@ ppTracks
   = lens _ppTracks (\ s a -> s{_ppTracks = a}) .
       _Default
       . _Coerce
+
+-- | The managed configuration for the product.
+ppManagedConfiguration :: Lens' ProductPolicy (Maybe ManagedConfiguration)
+ppManagedConfiguration
+  = lens _ppManagedConfiguration
+      (\ s a -> s{_ppManagedConfiguration = a})
 
 -- | Grants the device visibility to the specified product release track(s),
 -- identified by trackIds. The list of release tracks of a product can be
@@ -2259,7 +2269,8 @@ instance FromJSON ProductPolicy where
               (\ o ->
                  ProductPolicy' <$>
                    (o .:? "tracks" .!= mempty) <*>
-                     (o .:? "trackIds" .!= mempty)
+                     (o .:? "managedConfiguration")
+                     <*> (o .:? "trackIds" .!= mempty)
                      <*> (o .:? "autoInstallPolicy")
                      <*> (o .:? "productId"))
 
@@ -2268,6 +2279,8 @@ instance ToJSON ProductPolicy where
           = object
               (catMaybes
                  [("tracks" .=) <$> _ppTracks,
+                  ("managedConfiguration" .=) <$>
+                    _ppManagedConfiguration,
                   ("trackIds" .=) <$> _ppTrackIds,
                   ("autoInstallPolicy" .=) <$> _ppAutoInstallPolicy,
                   ("productId" .=) <$> _ppProductId])
@@ -2736,59 +2749,6 @@ instance ToJSON GroupLicensesListResponse where
               (catMaybes
                  [("groupLicense" .=) <$> _gllrGroupLicense,
                   Just ("kind" .= _gllrKind)])
-
--- | Deprecated and unused.
---
--- /See:/ 'androidDevicePolicyConfig' smart constructor.
-data AndroidDevicePolicyConfig =
-  AndroidDevicePolicyConfig'
-    { _adpcState :: !(Maybe Text)
-    , _adpcKind  :: !Text
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AndroidDevicePolicyConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'adpcState'
---
--- * 'adpcKind'
-androidDevicePolicyConfig
-    :: AndroidDevicePolicyConfig
-androidDevicePolicyConfig =
-  AndroidDevicePolicyConfig'
-    { _adpcState = Nothing
-    , _adpcKind = "androidenterprise#androidDevicePolicyConfig"
-    }
-
-
--- | Deprecated and unused.
-adpcState :: Lens' AndroidDevicePolicyConfig (Maybe Text)
-adpcState
-  = lens _adpcState (\ s a -> s{_adpcState = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#androidDevicePolicyConfig\".
-adpcKind :: Lens' AndroidDevicePolicyConfig Text
-adpcKind = lens _adpcKind (\ s a -> s{_adpcKind = a})
-
-instance FromJSON AndroidDevicePolicyConfig where
-        parseJSON
-          = withObject "AndroidDevicePolicyConfig"
-              (\ o ->
-                 AndroidDevicePolicyConfig' <$>
-                   (o .:? "state") <*>
-                     (o .:? "kind" .!=
-                        "androidenterprise#androidDevicePolicyConfig"))
-
-instance ToJSON AndroidDevicePolicyConfig where
-        toJSON AndroidDevicePolicyConfig'{..}
-          = object
-              (catMaybes
-                 [("state" .=) <$> _adpcState,
-                  Just ("kind" .= _adpcKind)])
 
 -- | A set of products.
 --
@@ -5845,7 +5805,10 @@ instance ToJSON ProductsListResponse where
                   Just ("kind" .= _plrKind),
                   ("product" .=) <$> _plrProduct])
 
--- | WebApp resource info.
+-- | A WebApps resource represents a web app created for an enterprise. Web
+-- apps are published to managed Google Play and can be distributed like
+-- other Android apps. On a user\'s device, a web app opens its specified
+-- URL.
 --
 -- /See:/ 'webApp' smart constructor.
 data WebApp =
@@ -5892,7 +5855,9 @@ webApp =
     }
 
 
--- | The ID of the application.
+-- | The ID of the application. A string of the form \"app:\" where the
+-- package name always starts with the prefix
+-- \"com.google.enterprise.webapp.\" followed by a random id.
 waWebAppId :: Lens' WebApp (Maybe Text)
 waWebAppId
   = lens _waWebAppId (\ s a -> s{_waWebAppId = a})
@@ -5919,7 +5884,15 @@ waStartURL :: Lens' WebApp (Maybe Text)
 waStartURL
   = lens _waStartURL (\ s a -> s{_waStartURL = a})
 
--- | The display mode of the web app.
+-- | The display mode of the web app. Possible values include: -
+-- \"minimalUi\", the device\'s status bar, navigation bar, the app\'s URL,
+-- and a refresh button are visible when the app is open. For HTTP URLs,
+-- you can only select this option. - \"standalone\", the device\'s status
+-- bar and navigation bar are visible when the app is open. -
+-- \"fullScreen\", the app opens in full screen mode, hiding the device\'s
+-- status and navigation bars. All browser UI elements, page URL, system
+-- status bar and back button are not visible, and the web app takes up the
+-- entirety of the available display area.
 waDisplayMode :: Lens' WebApp (Maybe Text)
 waDisplayMode
   = lens _waDisplayMode
@@ -5931,8 +5904,8 @@ waIsPublished
   = lens _waIsPublished
       (\ s a -> s{_waIsPublished = a})
 
--- | The title of the web application as displayed to the user (e.g., amongst
--- a list of other applications, or as a label for an icon).
+-- | The title of the web app as displayed to the user (e.g., amongst a list
+-- of other applications, or as a label for an icon).
 waTitle :: Lens' WebApp (Maybe Text)
 waTitle = lens _waTitle (\ s a -> s{_waTitle = a})
 

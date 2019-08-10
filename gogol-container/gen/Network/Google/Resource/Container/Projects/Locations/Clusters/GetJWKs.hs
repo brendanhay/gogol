@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- GetJSONWebKeys gets the public component of the cluster signing keys in
--- JSON Web Key format. This API is not yet intended for general use, and
--- is not available for all clusters.
+-- Gets the public component of the cluster signing keys in JSON Web Key
+-- format. This API is not yet intended for general use, and is not
+-- available for all clusters.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.getJwks@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.GetJWKs
@@ -60,9 +60,9 @@ type ProjectsLocationsClustersGetJWKsResource =
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] GetJSONWebKeysResponse
 
--- | GetJSONWebKeys gets the public component of the cluster signing keys in
--- JSON Web Key format. This API is not yet intended for general use, and
--- is not available for all clusters.
+-- | Gets the public component of the cluster signing keys in JSON Web Key
+-- format. This API is not yet intended for general use, and is not
+-- available for all clusters.
 --
 -- /See:/ 'projectsLocationsClustersGetJWKs' smart constructor.
 data ProjectsLocationsClustersGetJWKs =

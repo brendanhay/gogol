@@ -37,13 +37,13 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Get
     , CoursesTeachersGet
 
     -- * Request Lenses
-    , ctgXgafv
-    , ctgUploadProtocol
-    , ctgCourseId
-    , ctgAccessToken
-    , ctgUploadType
-    , ctgUserId
-    , ctgCallback
+    , ctgtXgafv
+    , ctgtUploadProtocol
+    , ctgtCourseId
+    , ctgtAccessToken
+    , ctgtUploadType
+    , ctgtUserId
+    , ctgtCallback
     ) where
 
 import           Network.Google.Classroom.Types
@@ -73,13 +73,13 @@ type CoursesTeachersGetResource =
 -- /See:/ 'coursesTeachersGet' smart constructor.
 data CoursesTeachersGet =
   CoursesTeachersGet'
-    { _ctgXgafv          :: !(Maybe Xgafv)
-    , _ctgUploadProtocol :: !(Maybe Text)
-    , _ctgCourseId       :: !Text
-    , _ctgAccessToken    :: !(Maybe Text)
-    , _ctgUploadType     :: !(Maybe Text)
-    , _ctgUserId         :: !Text
-    , _ctgCallback       :: !(Maybe Text)
+    { _ctgtXgafv          :: !(Maybe Xgafv)
+    , _ctgtUploadProtocol :: !(Maybe Text)
+    , _ctgtCourseId       :: !Text
+    , _ctgtAccessToken    :: !(Maybe Text)
+    , _ctgtUploadType     :: !(Maybe Text)
+    , _ctgtUserId         :: !Text
+    , _ctgtCallback       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -88,74 +88,75 @@ data CoursesTeachersGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ctgXgafv'
+-- * 'ctgtXgafv'
 --
--- * 'ctgUploadProtocol'
+-- * 'ctgtUploadProtocol'
 --
--- * 'ctgCourseId'
+-- * 'ctgtCourseId'
 --
--- * 'ctgAccessToken'
+-- * 'ctgtAccessToken'
 --
--- * 'ctgUploadType'
+-- * 'ctgtUploadType'
 --
--- * 'ctgUserId'
+-- * 'ctgtUserId'
 --
--- * 'ctgCallback'
+-- * 'ctgtCallback'
 coursesTeachersGet
-    :: Text -- ^ 'ctgCourseId'
-    -> Text -- ^ 'ctgUserId'
+    :: Text -- ^ 'ctgtCourseId'
+    -> Text -- ^ 'ctgtUserId'
     -> CoursesTeachersGet
-coursesTeachersGet pCtgCourseId_ pCtgUserId_ =
+coursesTeachersGet pCtgtCourseId_ pCtgtUserId_ =
   CoursesTeachersGet'
-    { _ctgXgafv = Nothing
-    , _ctgUploadProtocol = Nothing
-    , _ctgCourseId = pCtgCourseId_
-    , _ctgAccessToken = Nothing
-    , _ctgUploadType = Nothing
-    , _ctgUserId = pCtgUserId_
-    , _ctgCallback = Nothing
+    { _ctgtXgafv = Nothing
+    , _ctgtUploadProtocol = Nothing
+    , _ctgtCourseId = pCtgtCourseId_
+    , _ctgtAccessToken = Nothing
+    , _ctgtUploadType = Nothing
+    , _ctgtUserId = pCtgtUserId_
+    , _ctgtCallback = Nothing
     }
 
 
 -- | V1 error format.
-ctgXgafv :: Lens' CoursesTeachersGet (Maybe Xgafv)
-ctgXgafv = lens _ctgXgafv (\ s a -> s{_ctgXgafv = a})
+ctgtXgafv :: Lens' CoursesTeachersGet (Maybe Xgafv)
+ctgtXgafv
+  = lens _ctgtXgafv (\ s a -> s{_ctgtXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ctgUploadProtocol :: Lens' CoursesTeachersGet (Maybe Text)
-ctgUploadProtocol
-  = lens _ctgUploadProtocol
-      (\ s a -> s{_ctgUploadProtocol = a})
+ctgtUploadProtocol :: Lens' CoursesTeachersGet (Maybe Text)
+ctgtUploadProtocol
+  = lens _ctgtUploadProtocol
+      (\ s a -> s{_ctgtUploadProtocol = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-ctgCourseId :: Lens' CoursesTeachersGet Text
-ctgCourseId
-  = lens _ctgCourseId (\ s a -> s{_ctgCourseId = a})
+ctgtCourseId :: Lens' CoursesTeachersGet Text
+ctgtCourseId
+  = lens _ctgtCourseId (\ s a -> s{_ctgtCourseId = a})
 
 -- | OAuth access token.
-ctgAccessToken :: Lens' CoursesTeachersGet (Maybe Text)
-ctgAccessToken
-  = lens _ctgAccessToken
-      (\ s a -> s{_ctgAccessToken = a})
+ctgtAccessToken :: Lens' CoursesTeachersGet (Maybe Text)
+ctgtAccessToken
+  = lens _ctgtAccessToken
+      (\ s a -> s{_ctgtAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ctgUploadType :: Lens' CoursesTeachersGet (Maybe Text)
-ctgUploadType
-  = lens _ctgUploadType
-      (\ s a -> s{_ctgUploadType = a})
+ctgtUploadType :: Lens' CoursesTeachersGet (Maybe Text)
+ctgtUploadType
+  = lens _ctgtUploadType
+      (\ s a -> s{_ctgtUploadType = a})
 
 -- | Identifier of the teacher to return. The identifier can be one of the
 -- following: * the numeric identifier for the user * the email address of
 -- the user * the string literal \`\"me\"\`, indicating the requesting user
-ctgUserId :: Lens' CoursesTeachersGet Text
-ctgUserId
-  = lens _ctgUserId (\ s a -> s{_ctgUserId = a})
+ctgtUserId :: Lens' CoursesTeachersGet Text
+ctgtUserId
+  = lens _ctgtUserId (\ s a -> s{_ctgtUserId = a})
 
 -- | JSONP
-ctgCallback :: Lens' CoursesTeachersGet (Maybe Text)
-ctgCallback
-  = lens _ctgCallback (\ s a -> s{_ctgCallback = a})
+ctgtCallback :: Lens' CoursesTeachersGet (Maybe Text)
+ctgtCallback
+  = lens _ctgtCallback (\ s a -> s{_ctgtCallback = a})
 
 instance GoogleRequest CoursesTeachersGet where
         type Rs CoursesTeachersGet = Teacher
@@ -165,11 +166,11 @@ instance GoogleRequest CoursesTeachersGet where
                "https://www.googleapis.com/auth/classroom.rosters",
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient CoursesTeachersGet'{..}
-          = go _ctgCourseId _ctgUserId _ctgXgafv
-              _ctgUploadProtocol
-              _ctgAccessToken
-              _ctgUploadType
-              _ctgCallback
+          = go _ctgtCourseId _ctgtUserId _ctgtXgafv
+              _ctgtUploadProtocol
+              _ctgtAccessToken
+              _ctgtUploadType
+              _ctgtCallback
               (Just AltJSON)
               classroomService
           where go

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Start master IP rotation.
+-- Starts master IP rotation.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.startIpRotation@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.StartIPRotation
@@ -66,7 +66,7 @@ type ProjectsZonesClustersStartIPRotationResource =
                                ReqBody '[JSON] StartIPRotationRequest :>
                                  Post '[JSON] Operation
 
--- | Start master IP rotation.
+-- | Starts master IP rotation.
 --
 -- /See:/ 'projectsZonesClustersStartIPRotation' smart constructor.
 data ProjectsZonesClustersStartIPRotation =

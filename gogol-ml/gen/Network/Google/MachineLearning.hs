@@ -138,10 +138,12 @@ module Network.Google.MachineLearning
     , gcmvvRuntimeVersion
     , gcmvvLastUseTime
     , gcmvvName
+    , gcmvvPackageURIs
     , gcmvvDeploymentURI
     , gcmvvManualScaling
     , gcmvvMachineType
     , gcmvvLabels
+    , gcmvvPredictionClass
     , gcmvvErrorMessage
     , gcmvvDescription
     , gcmvvCreateTime
@@ -154,6 +156,14 @@ module Network.Google.MachineLearning
     , gcmvpoErrorCount
     , gcmvpoPredictionCount
     , gcmvpoOutputPath
+
+    -- ** GoogleCloudMlV1__BuiltInAlgorithmOutput
+    , GoogleCloudMlV1__BuiltInAlgorithmOutput
+    , googleCloudMlV1__BuiltInAlgorithmOutput
+    , gcmvbiaoFramework
+    , gcmvbiaoPythonVersion
+    , gcmvbiaoRuntimeVersion
+    , gcmvbiaoModelPath
 
     -- ** GoogleCloudMlV1__HyperparameterOutputHyperparameters
     , GoogleCloudMlV1__HyperparameterOutputHyperparameters
@@ -262,6 +272,7 @@ module Network.Google.MachineLearning
     , gcmvhoHyperparameters
     , gcmvhoTrialId
     , gcmvhoFinalMetric
+    , gcmvhoBuiltInAlgorithmOutput
 
     -- ** GoogleCloudMlV1__GetConfigResponse
     , GoogleCloudMlV1__GetConfigResponse
@@ -295,6 +306,7 @@ module Network.Google.MachineLearning
     , gcmvmDefaultVersion
     , gcmvmName
     , gcmvmLabels
+    , gcmvmOnlinePredictionConsoleLogging
     , gcmvmDescription
     , gcmvmOnlinePredictionLogging
 
@@ -362,6 +374,7 @@ module Network.Google.MachineLearning
     , gcmvhsMaxTrials
     , gcmvhsEnableTrialEarlyStopping
     , gcmvhsMaxParallelTrials
+    , gcmvhsMaxFailedTrials
     , gcmvhsHyperparameterMetricTag
 
     -- ** GoogleCloudMlV1__AutoScaling
@@ -418,7 +431,6 @@ module Network.Google.MachineLearning
     , gcmvpiBatchSize
     , gcmvpiMaxWorkerCount
     , gcmvpiOutputDataFormat
-    , gcmvpiAccelerator
     , gcmvpiOutputPath
     , gcmvpiRegion
     , gcmvpiInputPaths
@@ -503,8 +515,10 @@ module Network.Google.MachineLearning
     , GoogleCloudMlV1__TrainingOutput
     , googleCloudMlV1__TrainingOutput
     , gcmvtoIsHyperparameterTuningJob
+    , gcmvtoIsBuiltInAlgorithmJob
     , gcmvtoCompletedTrialCount
     , gcmvtoConsumedMLUnits
+    , gcmvtoBuiltInAlgorithmOutput
     , gcmvtoTrials
 
     -- ** GoogleAPI__HTTPBody

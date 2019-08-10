@@ -716,7 +716,6 @@ data DynamicLinkInfo =
     , _dliDynamicLinkDomain :: !(Maybe Text)
     , _dliLink              :: !(Maybe Text)
     , _dliIosInfo           :: !(Maybe IosInfo)
-    , _dliAppPreview        :: !(Maybe AppPreview)
     , _dliDomainURIPrefix   :: !(Maybe Text)
     , _dliAndroidInfo       :: !(Maybe AndroidInfo)
     , _dliAnalyticsInfo     :: !(Maybe AnalyticsInfo)
@@ -740,8 +739,6 @@ data DynamicLinkInfo =
 --
 -- * 'dliIosInfo'
 --
--- * 'dliAppPreview'
---
 -- * 'dliDomainURIPrefix'
 --
 -- * 'dliAndroidInfo'
@@ -757,7 +754,6 @@ dynamicLinkInfo =
     , _dliDynamicLinkDomain = Nothing
     , _dliLink = Nothing
     , _dliIosInfo = Nothing
-    , _dliAppPreview = Nothing
     , _dliDomainURIPrefix = Nothing
     , _dliAndroidInfo = Nothing
     , _dliAnalyticsInfo = Nothing
@@ -807,12 +803,6 @@ dliIosInfo :: Lens' DynamicLinkInfo (Maybe IosInfo)
 dliIosInfo
   = lens _dliIosInfo (\ s a -> s{_dliIosInfo = a})
 
--- | Optional customizable parameters on the app preview page
-dliAppPreview :: Lens' DynamicLinkInfo (Maybe AppPreview)
-dliAppPreview
-  = lens _dliAppPreview
-      (\ s a -> s{_dliAppPreview = a})
-
 -- | E.g. https:\/\/maps.app.goo.gl, https:\/\/maps.page.link,
 -- https:\/\/g.co\/maps More examples can be found in description of
 -- getNormalizedUriPrefix in
@@ -847,7 +837,6 @@ instance FromJSON DynamicLinkInfo where
                      <*> (o .:? "dynamicLinkDomain")
                      <*> (o .:? "link")
                      <*> (o .:? "iosInfo")
-                     <*> (o .:? "appPreview")
                      <*> (o .:? "domainUriPrefix")
                      <*> (o .:? "androidInfo")
                      <*> (o .:? "analyticsInfo"))
@@ -862,65 +851,9 @@ instance ToJSON DynamicLinkInfo where
                   ("dynamicLinkDomain" .=) <$> _dliDynamicLinkDomain,
                   ("link" .=) <$> _dliLink,
                   ("iosInfo" .=) <$> _dliIosInfo,
-                  ("appPreview" .=) <$> _dliAppPreview,
                   ("domainUriPrefix" .=) <$> _dliDomainURIPrefix,
                   ("androidInfo" .=) <$> _dliAndroidInfo,
                   ("analyticsInfo" .=) <$> _dliAnalyticsInfo])
-
--- | Customizable parameters on the app preview page. The text fields no
--- longer need translation.
---
--- /See:/ 'appPreview' smart constructor.
-data AppPreview =
-  AppPreview'
-    { _apOpenButtonText   :: !(Maybe Text)
-    , _apSavePositionText :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AppPreview' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'apOpenButtonText'
---
--- * 'apSavePositionText'
-appPreview
-    :: AppPreview
-appPreview =
-  AppPreview' {_apOpenButtonText = Nothing, _apSavePositionText = Nothing}
-
-
--- | Text that appears on the button to open up the app. Optional Defaults to
--- \"Open\"
-apOpenButtonText :: Lens' AppPreview (Maybe Text)
-apOpenButtonText
-  = lens _apOpenButtonText
-      (\ s a -> s{_apOpenButtonText = a})
-
--- | Text that asks if user wants to save place in app. Optional. Defaults to
--- \"Save my place in the app. A link will be copied to continue to this
--- page\"
-apSavePositionText :: Lens' AppPreview (Maybe Text)
-apSavePositionText
-  = lens _apSavePositionText
-      (\ s a -> s{_apSavePositionText = a})
-
-instance FromJSON AppPreview where
-        parseJSON
-          = withObject "AppPreview"
-              (\ o ->
-                 AppPreview' <$>
-                   (o .:? "openButtonText") <*>
-                     (o .:? "savePositionText"))
-
-instance ToJSON AppPreview where
-        toJSON AppPreview'{..}
-          = object
-              (catMaybes
-                 [("openButtonText" .=) <$> _apOpenButtonText,
-                  ("savePositionText" .=) <$> _apSavePositionText])
 
 -- | Analytics stats of a Dynamic Link for a given timeframe.
 --
@@ -1066,9 +999,11 @@ data GetIosReopenAttributionResponse =
   GetIosReopenAttributionResponse'
     { _girarIosMinAppVersion :: !(Maybe Text)
     , _girarDeepLink         :: !(Maybe Text)
+    , _girarUtmContent       :: !(Maybe Text)
     , _girarResolvedLink     :: !(Maybe Text)
     , _girarUtmMedium        :: !(Maybe Text)
     , _girarInvitationId     :: !(Maybe Text)
+    , _girarUtmTerm          :: !(Maybe Text)
     , _girarUtmCampaign      :: !(Maybe Text)
     , _girarUtmSource        :: !(Maybe Text)
     }
@@ -1083,11 +1018,15 @@ data GetIosReopenAttributionResponse =
 --
 -- * 'girarDeepLink'
 --
+-- * 'girarUtmContent'
+--
 -- * 'girarResolvedLink'
 --
 -- * 'girarUtmMedium'
 --
 -- * 'girarInvitationId'
+--
+-- * 'girarUtmTerm'
 --
 -- * 'girarUtmCampaign'
 --
@@ -1098,9 +1037,11 @@ getIosReopenAttributionResponse =
   GetIosReopenAttributionResponse'
     { _girarIosMinAppVersion = Nothing
     , _girarDeepLink = Nothing
+    , _girarUtmContent = Nothing
     , _girarResolvedLink = Nothing
     , _girarUtmMedium = Nothing
     , _girarInvitationId = Nothing
+    , _girarUtmTerm = Nothing
     , _girarUtmCampaign = Nothing
     , _girarUtmSource = Nothing
     }
@@ -1119,6 +1060,12 @@ girarDeepLink :: Lens' GetIosReopenAttributionResponse (Maybe Text)
 girarDeepLink
   = lens _girarDeepLink
       (\ s a -> s{_girarDeepLink = a})
+
+-- | Scion content value to be propagated by iSDK to Scion at app-reopen.
+girarUtmContent :: Lens' GetIosReopenAttributionResponse (Maybe Text)
+girarUtmContent
+  = lens _girarUtmContent
+      (\ s a -> s{_girarUtmContent = a})
 
 -- | The entire FDL, expanded from a short link. It is the same as the
 -- requested_link, if it is long.
@@ -1139,6 +1086,11 @@ girarInvitationId
   = lens _girarInvitationId
       (\ s a -> s{_girarInvitationId = a})
 
+-- | Scion term value to be propagated by iSDK to Scion at app-reopen.
+girarUtmTerm :: Lens' GetIosReopenAttributionResponse (Maybe Text)
+girarUtmTerm
+  = lens _girarUtmTerm (\ s a -> s{_girarUtmTerm = a})
+
 -- | Scion campaign value to be propagated by iSDK to Scion at app-reopen.
 girarUtmCampaign :: Lens' GetIosReopenAttributionResponse (Maybe Text)
 girarUtmCampaign
@@ -1158,9 +1110,11 @@ instance FromJSON GetIosReopenAttributionResponse
               (\ o ->
                  GetIosReopenAttributionResponse' <$>
                    (o .:? "iosMinAppVersion") <*> (o .:? "deepLink") <*>
-                     (o .:? "resolvedLink")
+                     (o .:? "utmContent")
+                     <*> (o .:? "resolvedLink")
                      <*> (o .:? "utmMedium")
                      <*> (o .:? "invitationId")
+                     <*> (o .:? "utmTerm")
                      <*> (o .:? "utmCampaign")
                      <*> (o .:? "utmSource"))
 
@@ -1170,9 +1124,11 @@ instance ToJSON GetIosReopenAttributionResponse where
               (catMaybes
                  [("iosMinAppVersion" .=) <$> _girarIosMinAppVersion,
                   ("deepLink" .=) <$> _girarDeepLink,
+                  ("utmContent" .=) <$> _girarUtmContent,
                   ("resolvedLink" .=) <$> _girarResolvedLink,
                   ("utmMedium" .=) <$> _girarUtmMedium,
                   ("invitationId" .=) <$> _girarInvitationId,
+                  ("utmTerm" .=) <$> _girarUtmTerm,
                   ("utmCampaign" .=) <$> _girarUtmCampaign,
                   ("utmSource" .=) <$> _girarUtmSource])
 
@@ -1525,12 +1481,14 @@ data GetIosPostInstallAttributionResponse =
     , _gipiarAppMinimumVersion              :: !(Maybe Text)
     , _gipiarAttributionConfidence          :: !(Maybe GetIosPostInstallAttributionResponseAttributionConfidence)
     , _gipiarExternalBrowserDestinationLink :: !(Maybe Text)
+    , _gipiarUtmContent                     :: !(Maybe Text)
     , _gipiarResolvedLink                   :: !(Maybe Text)
     , _gipiarRequestedLink                  :: !(Maybe Text)
     , _gipiarUtmMedium                      :: !(Maybe Text)
     , _gipiarFallbackLink                   :: !(Maybe Text)
     , _gipiarInvitationId                   :: !(Maybe Text)
     , _gipiarIsStrongMatchExecutable        :: !(Maybe Bool)
+    , _gipiarUtmTerm                        :: !(Maybe Text)
     , _gipiarUtmCampaign                    :: !(Maybe Text)
     , _gipiarMatchMessage                   :: !(Maybe Text)
     , _gipiarUtmSource                      :: !(Maybe Text)
@@ -1552,6 +1510,8 @@ data GetIosPostInstallAttributionResponse =
 --
 -- * 'gipiarExternalBrowserDestinationLink'
 --
+-- * 'gipiarUtmContent'
+--
 -- * 'gipiarResolvedLink'
 --
 -- * 'gipiarRequestedLink'
@@ -1563,6 +1523,8 @@ data GetIosPostInstallAttributionResponse =
 -- * 'gipiarInvitationId'
 --
 -- * 'gipiarIsStrongMatchExecutable'
+--
+-- * 'gipiarUtmTerm'
 --
 -- * 'gipiarUtmCampaign'
 --
@@ -1578,12 +1540,14 @@ getIosPostInstallAttributionResponse =
     , _gipiarAppMinimumVersion = Nothing
     , _gipiarAttributionConfidence = Nothing
     , _gipiarExternalBrowserDestinationLink = Nothing
+    , _gipiarUtmContent = Nothing
     , _gipiarResolvedLink = Nothing
     , _gipiarRequestedLink = Nothing
     , _gipiarUtmMedium = Nothing
     , _gipiarFallbackLink = Nothing
     , _gipiarInvitationId = Nothing
     , _gipiarIsStrongMatchExecutable = Nothing
+    , _gipiarUtmTerm = Nothing
     , _gipiarUtmCampaign = Nothing
     , _gipiarMatchMessage = Nothing
     , _gipiarUtmSource = Nothing
@@ -1627,6 +1591,12 @@ gipiarExternalBrowserDestinationLink
   = lens _gipiarExternalBrowserDestinationLink
       (\ s a ->
          s{_gipiarExternalBrowserDestinationLink = a})
+
+-- | Scion content value to be propagated by iSDK to Scion at app-reopen.
+gipiarUtmContent :: Lens' GetIosPostInstallAttributionResponse (Maybe Text)
+gipiarUtmContent
+  = lens _gipiarUtmContent
+      (\ s a -> s{_gipiarUtmContent = a})
 
 -- | The entire FDL, expanded from a short link. It is the same as the
 -- requested_link, if it is long. Parameters from this should not be used
@@ -1675,6 +1645,12 @@ gipiarIsStrongMatchExecutable
   = lens _gipiarIsStrongMatchExecutable
       (\ s a -> s{_gipiarIsStrongMatchExecutable = a})
 
+-- | Scion term value to be propagated by iSDK to Scion at app-reopen.
+gipiarUtmTerm :: Lens' GetIosPostInstallAttributionResponse (Maybe Text)
+gipiarUtmTerm
+  = lens _gipiarUtmTerm
+      (\ s a -> s{_gipiarUtmTerm = a})
+
 -- | Scion campaign value to be propagated by iSDK to Scion at post-install.
 gipiarUtmCampaign :: Lens' GetIosPostInstallAttributionResponse (Maybe Text)
 gipiarUtmCampaign
@@ -1705,12 +1681,14 @@ instance FromJSON
                      (o .:? "appMinimumVersion")
                      <*> (o .:? "attributionConfidence")
                      <*> (o .:? "externalBrowserDestinationLink")
+                     <*> (o .:? "utmContent")
                      <*> (o .:? "resolvedLink")
                      <*> (o .:? "requestedLink")
                      <*> (o .:? "utmMedium")
                      <*> (o .:? "fallbackLink")
                      <*> (o .:? "invitationId")
                      <*> (o .:? "isStrongMatchExecutable")
+                     <*> (o .:? "utmTerm")
                      <*> (o .:? "utmCampaign")
                      <*> (o .:? "matchMessage")
                      <*> (o .:? "utmSource"))
@@ -1728,6 +1706,7 @@ instance ToJSON GetIosPostInstallAttributionResponse
                     _gipiarAttributionConfidence,
                   ("externalBrowserDestinationLink" .=) <$>
                     _gipiarExternalBrowserDestinationLink,
+                  ("utmContent" .=) <$> _gipiarUtmContent,
                   ("resolvedLink" .=) <$> _gipiarResolvedLink,
                   ("requestedLink" .=) <$> _gipiarRequestedLink,
                   ("utmMedium" .=) <$> _gipiarUtmMedium,
@@ -1735,6 +1714,7 @@ instance ToJSON GetIosPostInstallAttributionResponse
                   ("invitationId" .=) <$> _gipiarInvitationId,
                   ("isStrongMatchExecutable" .=) <$>
                     _gipiarIsStrongMatchExecutable,
+                  ("utmTerm" .=) <$> _gipiarUtmTerm,
                   ("utmCampaign" .=) <$> _gipiarUtmCampaign,
                   ("matchMessage" .=) <$> _gipiarMatchMessage,
                   ("utmSource" .=) <$> _gipiarUtmSource])

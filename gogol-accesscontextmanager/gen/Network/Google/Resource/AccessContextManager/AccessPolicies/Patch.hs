@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.patch@ method which the
 -- 'AccessPoliciesPatch' request conforms to.
 type AccessPoliciesPatchResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

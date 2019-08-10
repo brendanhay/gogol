@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns configuration info about the Kubernetes Engine service.
+-- Returns configuration info about the Google Kubernetes Engine service.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.getServerconfig@.
 module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
@@ -64,7 +64,7 @@ type ProjectsZonesGetServerConfigResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ServerConfig
 
--- | Returns configuration info about the Kubernetes Engine service.
+-- | Returns configuration info about the Google Kubernetes Engine service.
 --
 -- /See:/ 'projectsZonesGetServerConfig' smart constructor.
 data ProjectsZonesGetServerConfig =
@@ -147,8 +147,8 @@ pzgscZone :: Lens' ProjectsZonesGetServerConfig Text
 pzgscZone
   = lens _pzgscZone (\ s a -> s{_pzgscZone = a})
 
--- | The name (project and location) of the server config to get Specified in
--- the format \'projects\/*\/locations\/*\'.
+-- | The name (project and location) of the server config to get, specified
+-- in the format \'projects\/*\/locations\/*\'.
 pzgscName :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscName
   = lens _pzgscName (\ s a -> s{_pzgscName = a})

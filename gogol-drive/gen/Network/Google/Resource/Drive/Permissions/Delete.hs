@@ -33,6 +33,7 @@ module Network.Google.Resource.Drive.Permissions.Delete
     , PermissionsDelete
 
     -- * Request Lenses
+    , pdSupportsAllDrives
     , pdUseDomainAdminAccess
     , pdFileId
     , pdSupportsTeamDrives
@@ -51,16 +52,18 @@ type PermissionsDeleteResource =
            Capture "fileId" Text :>
              "permissions" :>
                Capture "permissionId" Text :>
-                 QueryParam "useDomainAdminAccess" Bool :>
-                   QueryParam "supportsTeamDrives" Bool :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "supportsAllDrives" Bool :>
+                   QueryParam "useDomainAdminAccess" Bool :>
+                     QueryParam "supportsTeamDrives" Bool :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a permission.
 --
 -- /See:/ 'permissionsDelete' smart constructor.
 data PermissionsDelete =
   PermissionsDelete'
-    { _pdUseDomainAdminAccess :: !Bool
+    { _pdSupportsAllDrives    :: !Bool
+    , _pdUseDomainAdminAccess :: !Bool
     , _pdFileId               :: !Text
     , _pdSupportsTeamDrives   :: !Bool
     , _pdPermissionId         :: !Text
@@ -71,6 +74,8 @@ data PermissionsDelete =
 -- | Creates a value of 'PermissionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pdSupportsAllDrives'
 --
 -- * 'pdUseDomainAdminAccess'
 --
@@ -85,26 +90,35 @@ permissionsDelete
     -> PermissionsDelete
 permissionsDelete pPdFileId_ pPdPermissionId_ =
   PermissionsDelete'
-    { _pdUseDomainAdminAccess = False
+    { _pdSupportsAllDrives = False
+    , _pdUseDomainAdminAccess = False
     , _pdFileId = pPdFileId_
     , _pdSupportsTeamDrives = False
     , _pdPermissionId = pPdPermissionId_
     }
 
 
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+pdSupportsAllDrives :: Lens' PermissionsDelete Bool
+pdSupportsAllDrives
+  = lens _pdSupportsAllDrives
+      (\ s a -> s{_pdSupportsAllDrives = a})
+
 -- | Issue the request as a domain administrator; if set to true, then the
--- requester will be granted access if they are an administrator of the
--- domain to which the item belongs.
+-- requester will be granted access if the file ID parameter refers to a
+-- shared drive and the requester is an administrator of the domain to
+-- which the shared drive belongs.
 pdUseDomainAdminAccess :: Lens' PermissionsDelete Bool
 pdUseDomainAdminAccess
   = lens _pdUseDomainAdminAccess
       (\ s a -> s{_pdUseDomainAdminAccess = a})
 
--- | The ID of the file or Team Drive.
+-- | The ID of the file or shared drive.
 pdFileId :: Lens' PermissionsDelete Text
 pdFileId = lens _pdFileId (\ s a -> s{_pdFileId = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 pdSupportsTeamDrives :: Lens' PermissionsDelete Bool
 pdSupportsTeamDrives
   = lens _pdSupportsTeamDrives
@@ -123,6 +137,7 @@ instance GoogleRequest PermissionsDelete where
                "https://www.googleapis.com/auth/drive.file"]
         requestClient PermissionsDelete'{..}
           = go _pdFileId _pdPermissionId
+              (Just _pdSupportsAllDrives)
               (Just _pdUseDomainAdminAccess)
               (Just _pdSupportsTeamDrives)
               (Just AltJSON)

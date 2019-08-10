@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a Team Drive\'s metadata by ID.
+-- Deprecated use drives.get instead.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.teamdrives.get@.
 module Network.Google.Resource.Drive.Teamdrives.Get
@@ -50,7 +50,7 @@ type TeamdrivesGetResource =
              QueryParam "useDomainAdminAccess" Bool :>
                QueryParam "alt" AltJSON :> Get '[JSON] TeamDrive
 
--- | Gets a Team Drive\'s metadata by ID.
+-- | Deprecated use drives.get instead.
 --
 -- /See:/ 'teamdrivesGet' smart constructor.
 data TeamdrivesGet =

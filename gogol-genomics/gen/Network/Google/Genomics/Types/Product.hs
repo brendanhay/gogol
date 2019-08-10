@@ -801,9 +801,7 @@ oDone = lens _oDone (\ s a -> s{_oDone = a})
 oError :: Lens' Operation (Maybe Status)
 oError = lens _oError (\ s a -> s{_oError = a})
 
--- | If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned.
--- If importing Variants, an ImportVariantsResponse is returned. For
--- pipelines and exports, an Empty response is returned.
+-- | An Empty object.
 oResponse :: Lens' Operation (Maybe OperationResponse)
 oResponse
   = lens _oResponse (\ s a -> s{_oResponse = a})
@@ -1632,8 +1630,9 @@ aTimeout
   = lens _aTimeout (\ s a -> s{_aTimeout = a}) .
       mapping _GDuration
 
--- | The PID namespace to run the action inside. If unspecified, a separate
--- isolated namespace is used.
+-- | An optional identifier for a PID namespace to run the action inside.
+-- Multiple actions should use the same string to share a namespace. If
+-- unspecified, a separate isolated namespace is used.
 aPidNamespace :: Lens' Action (Maybe Text)
 aPidNamespace
   = lens _aPidNamespace
@@ -2637,88 +2636,6 @@ instance ToJSON Pipeline where
                   ("resources" .=) <$> _pResources,
                   ("timeout" .=) <$> _pTimeout])
 
--- | The variant data import response.
---
--- /See:/ 'importVariantsResponse' smart constructor.
-newtype ImportVariantsResponse =
-  ImportVariantsResponse'
-    { _ivrCallSetIds :: Maybe [Text]
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'ImportVariantsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ivrCallSetIds'
-importVariantsResponse
-    :: ImportVariantsResponse
-importVariantsResponse = ImportVariantsResponse' {_ivrCallSetIds = Nothing}
-
-
--- | IDs of the call sets created during the import.
-ivrCallSetIds :: Lens' ImportVariantsResponse [Text]
-ivrCallSetIds
-  = lens _ivrCallSetIds
-      (\ s a -> s{_ivrCallSetIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ImportVariantsResponse where
-        parseJSON
-          = withObject "ImportVariantsResponse"
-              (\ o ->
-                 ImportVariantsResponse' <$>
-                   (o .:? "callSetIds" .!= mempty))
-
-instance ToJSON ImportVariantsResponse where
-        toJSON ImportVariantsResponse'{..}
-          = object
-              (catMaybes [("callSetIds" .=) <$> _ivrCallSetIds])
-
--- | The read group set import response.
---
--- /See:/ 'importReadGroupSetsResponse' smart constructor.
-newtype ImportReadGroupSetsResponse =
-  ImportReadGroupSetsResponse'
-    { _irgsrReadGroupSetIds :: Maybe [Text]
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'ImportReadGroupSetsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'irgsrReadGroupSetIds'
-importReadGroupSetsResponse
-    :: ImportReadGroupSetsResponse
-importReadGroupSetsResponse =
-  ImportReadGroupSetsResponse' {_irgsrReadGroupSetIds = Nothing}
-
-
--- | IDs of the read group sets that were created.
-irgsrReadGroupSetIds :: Lens' ImportReadGroupSetsResponse [Text]
-irgsrReadGroupSetIds
-  = lens _irgsrReadGroupSetIds
-      (\ s a -> s{_irgsrReadGroupSetIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ImportReadGroupSetsResponse where
-        parseJSON
-          = withObject "ImportReadGroupSetsResponse"
-              (\ o ->
-                 ImportReadGroupSetsResponse' <$>
-                   (o .:? "readGroupSetIds" .!= mempty))
-
-instance ToJSON ImportReadGroupSetsResponse where
-        toJSON ImportReadGroupSetsResponse'{..}
-          = object
-              (catMaybes
-                 [("readGroupSetIds" .=) <$> _irgsrReadGroupSetIds])
-
 -- | Carries information about the pipeline execution that is returned in the
 -- long running operation\'s metadata field.
 --
@@ -3196,9 +3113,7 @@ instance ToJSON ComputeEngine where
                   ("machineType" .=) <$> _ceMachineType,
                   ("instanceName" .=) <$> _ceInstanceName])
 
--- | If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned.
--- If importing Variants, an ImportVariantsResponse is returned. For
--- pipelines and exports, an Empty response is returned.
+-- | An Empty object.
 --
 -- /See:/ 'operationResponse' smart constructor.
 newtype OperationResponse =

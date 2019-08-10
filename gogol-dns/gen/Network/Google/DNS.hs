@@ -91,6 +91,12 @@ module Network.Google.DNS
     , odkcOldValue
     , odkcNewValue
 
+    -- ** ManagedZonePrivateVisibilityConfigNetwork
+    , ManagedZonePrivateVisibilityConfigNetwork
+    , managedZonePrivateVisibilityConfigNetwork
+    , mzpvcnKind
+    , mzpvcnNetworkURL
+
     -- ** DNSKeysListResponse
     , DNSKeysListResponse
     , dnsKeysListResponse
@@ -109,6 +115,9 @@ module Network.Google.DNS
 
     -- ** ManagedZoneDNSSecConfigState
     , ManagedZoneDNSSecConfigState (..)
+
+    -- ** ManagedZoneVisibility
+    , ManagedZoneVisibility (..)
 
     -- ** Project
     , Project
@@ -209,6 +218,12 @@ module Network.Google.DNS
     -- ** ChangeStatus
     , ChangeStatus (..)
 
+    -- ** ManagedZonePrivateVisibilityConfig
+    , ManagedZonePrivateVisibilityConfig
+    , managedZonePrivateVisibilityConfig
+    , mzpvcNetworks
+    , mzpvcKind
+
     -- ** ManagedZoneDNSSecConfig
     , ManagedZoneDNSSecConfig
     , managedZoneDNSSecConfig
@@ -233,6 +248,7 @@ module Network.Google.DNS
     , mzCreationTime
     , mzKind
     , mzNameServerSet
+    , mzVisibility
     , mzName
     , mzId
     , mzLabels
@@ -240,6 +256,7 @@ module Network.Google.DNS
     , mzDescription
     , mzDNSsecConfig
     , mzNameServers
+    , mzPrivateVisibilityConfig
 
     -- ** ManagedZoneLabels
     , ManagedZoneLabels
@@ -254,10 +271,12 @@ module Network.Google.DNS
     , qRrSetsPerManagedZone
     , qKind
     , qResourceRecordsPerRrSet
+    , qManagedZonesPerNetwork
     , qRrSetAdditionsPerChange
     , qManagedZones
     , qTotalRrDataSizePerChange
     , qDNSKeysPerManagedZone
+    , qNetworksPerManagedZone
 
     -- ** DNSKeyType
     , DNSKeyType (..)

@@ -250,10 +250,10 @@ data GooglePrivacyDlpV2ConditionOperator
       -- ^ @RELATIONAL_OPERATOR_UNSPECIFIED@
     | EqualTo
       -- ^ @EQUAL_TO@
-      -- Equal.
+      -- Equal. Attempts to match even with incompatible types.
     | NotEqualTo
       -- ^ @NOT_EQUAL_TO@
-      -- Not equal to.
+      -- Not equal to. Attempts to match even with incompatible types.
     | GreaterThan
       -- ^ @GREATER_THAN@
       -- Greater than.

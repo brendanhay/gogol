@@ -359,8 +359,9 @@ documentationRule =
 -- qualified name of the element which may end in \"*\", indicating a
 -- wildcard. Wildcards are only allowed at the end and for a whole
 -- component of the qualified name, i.e. \"foo.*\" is ok, but not
--- \"foo.b*\" or \"foo.*.bar\". To specify a default for all applicable
--- elements, the whole pattern \"*\" is used.
+-- \"foo.b*\" or \"foo.*.bar\". A wildcard will match one or more
+-- components. To specify a default for all applicable elements, the whole
+-- pattern \"*\" is used.
 drSelector :: Lens' DocumentationRule (Maybe Text)
 drSelector
   = lens _drSelector (\ s a -> s{_drSelector = a})
@@ -3453,7 +3454,7 @@ ccChangeType
 -- used for the index (usually selector, name, or id). For maps, the term
 -- \'key\' is used. If the field has no unique identifier, the numeric
 -- index is used. Examples: -
--- visibility.rules[selector==\"google.LibraryService.CreateBook\"].restriction
+-- visibility.rules[selector==\"google.LibraryService.ListBooks\"].restriction
 -- -
 -- quota.metric_rules[selector==\"google\"].metric_costs[key==\"reads\"].value
 -- - logging.producer_destinations[0]
@@ -4593,8 +4594,8 @@ hRules
   = lens _hRules (\ s a -> s{_hRules = a}) . _Default .
       _Coerce
 
--- | When set to true, URL path parmeters will be fully URI-decoded except in
--- cases of single segment matches in reserved expansion, where \"%2F\"
+-- | When set to true, URL path parameters will be fully URI-decoded except
+-- in cases of single segment matches in reserved expansion, where \"%2F\"
 -- will be left encoded. The default behavior is to not decode RFC 6570
 -- reserved characters in multi segment matches.
 hFullyDecodeReservedExpansion :: Lens' HTTP (Maybe Bool)
@@ -6231,8 +6232,8 @@ instance ToJSON SourceInfoSourceFilesItem where
         toJSON = toJSON . _sisfiAddtional
 
 -- | Quota configuration helps to achieve fairness and budgeting in service
--- usage. The quota configuration works this way: - The service
--- configuration defines a set of metrics. - For API calls, the
+-- usage. The metric based quota configuration works this way: - The
+-- service configuration defines a set of metrics. - For API calls, the
 -- quota.metric_rules maps methods to metrics with corresponding costs. -
 -- The quota.limits defines limits on the metrics, which will be used for
 -- quota checks at runtime. An example quota configuration in yaml format:
@@ -6652,7 +6653,7 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
--- | Configuration for an anthentication provider, including support for
+-- | Configuration for an authentication provider, including support for
 -- [JSON Web Token
 -- (JWT)](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32).
 --
@@ -6797,8 +6798,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -6811,10 +6812,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

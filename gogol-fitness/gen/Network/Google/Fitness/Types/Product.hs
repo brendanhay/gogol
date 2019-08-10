@@ -778,7 +778,10 @@ dataPoint =
 
 -- | If the data point is contained in a dataset for a derived data source,
 -- this field will be populated with the data source stream ID that created
--- the data point originally.
+-- the data point originally. WARNING: do not rely on this field for
+-- anything other than debugging. The value of this field, if it is set at
+-- all, is an implementation detail and is not guaranteed to remain
+-- consistent.
 dpOriginDataSourceId :: Lens' DataPoint (Maybe Text)
 dpOriginDataSourceId
   = lens _dpOriginDataSourceId
@@ -1322,13 +1325,12 @@ dsDataStreamName
 -- The exact format of the data stream ID created by a REST client is:
 -- type:dataType.name:developer project
 -- number:device.manufacturer:device.model:device.uid:dataStreamName When
--- any of the optional fields that comprise of the data stream ID are
--- blank, they will be omitted from the data stream ID. The minimum viable
--- data stream ID would be: type:dataType.name:developer project number
--- Finally, the developer project number is obfuscated when read by any
--- REST or Android client that did not create the data source. Only the
--- data source creator will see the developer project number in clear and
--- normal form.
+-- any of the optional fields that make up the data stream ID are absent,
+-- they will be omitted from the data stream ID. The minimum viable data
+-- stream ID would be: type:dataType.name:developer project number Finally,
+-- the developer project number is obfuscated when read by any REST or
+-- Android client that did not create the data source. Only the data source
+-- creator will see the developer project number in clear and normal form.
 dsDataStreamId :: Lens' DataSource (Maybe Text)
 dsDataStreamId
   = lens _dsDataStreamId

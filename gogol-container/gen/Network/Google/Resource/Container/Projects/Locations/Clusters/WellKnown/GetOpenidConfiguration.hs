@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- GetOpenIDConfig gets the OIDC discovery document for the cluster. See
--- the OpenID Connect Discovery 1.0 specification for details.
--- https:\/\/openid.net\/specs\/openid-connect-discovery-1_0.html This API
--- is not yet intended for general use, and is not available for all
--- clusters.
+-- Gets the OIDC discovery document for the cluster. See the [OpenID
+-- Connect Discovery 1.0
+-- specification](https:\/\/openid.net\/specs\/openid-connect-discovery-1_0.html)
+-- for details. This API is not yet intended for general use, and is not
+-- available for all clusters.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.well-known.getOpenid-configuration@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.WellKnown.GetOpenidConfiguration
@@ -64,11 +64,11 @@ type ProjectsLocationsClustersWellKnownGetOpenidConfigurationResource
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GetOpenIdConfigResponse
 
--- | GetOpenIDConfig gets the OIDC discovery document for the cluster. See
--- the OpenID Connect Discovery 1.0 specification for details.
--- https:\/\/openid.net\/specs\/openid-connect-discovery-1_0.html This API
--- is not yet intended for general use, and is not available for all
--- clusters.
+-- | Gets the OIDC discovery document for the cluster. See the [OpenID
+-- Connect Discovery 1.0
+-- specification](https:\/\/openid.net\/specs\/openid-connect-discovery-1_0.html)
+-- for details. This API is not yet intended for general use, and is not
+-- available for all clusters.
 --
 -- /See:/ 'projectsLocationsClustersWellKnownGetOpenidConfiguration' smart constructor.
 data ProjectsLocationsClustersWellKnownGetOpenidConfiguration =

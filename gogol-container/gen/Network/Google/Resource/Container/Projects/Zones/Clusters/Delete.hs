@@ -23,8 +23,8 @@
 -- Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
 -- are also deleted. Other Google Compute Engine resources that might be in
--- use by the cluster (e.g. load balancer resources) will not be deleted if
--- they weren\'t present at the initial create time.
+-- use by the cluster, such as load balancer resources, are not deleted if
+-- they weren\'t present when the cluster was initially created.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.delete@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
@@ -73,8 +73,8 @@ type ProjectsZonesClustersDeleteResource =
 -- | Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
 -- are also deleted. Other Google Compute Engine resources that might be in
--- use by the cluster (e.g. load balancer resources) will not be deleted if
--- they weren\'t present at the initial create time.
+-- use by the cluster, such as load balancer resources, are not deleted if
+-- they weren\'t present when the cluster was initially created.
 --
 -- /See:/ 'projectsZonesClustersDelete' smart constructor.
 data ProjectsZonesClustersDelete =

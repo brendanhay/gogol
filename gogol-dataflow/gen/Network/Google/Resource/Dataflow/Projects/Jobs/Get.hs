@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the state of the specified Cloud Dataflow job.
+-- Gets the state of the specified Cloud Dataflow job. To get the state of
+-- a job, we recommend using \`projects.locations.jobs.get\` with a
+-- [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.get\` is not recommended, as you can only get the
+-- state of jobs that are running in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.get@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Get
@@ -64,7 +69,12 @@ type ProjectsJobsGetResource =
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Job
 
--- | Gets the state of the specified Cloud Dataflow job.
+-- | Gets the state of the specified Cloud Dataflow job. To get the state of
+-- a job, we recommend using \`projects.locations.jobs.get\` with a
+-- [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.get\` is not recommended, as you can only get the
+-- state of jobs that are running in \`us-central1\`.
 --
 -- /See:/ 'projectsJobsGet' smart constructor.
 data ProjectsJobsGet =
@@ -135,7 +145,9 @@ pjgUploadProtocol
   = lens _pjgUploadProtocol
       (\ s a -> s{_pjgUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pjgLocation :: Lens' ProjectsJobsGet (Maybe Text)
 pjgLocation
   = lens _pjgLocation (\ s a -> s{_pjgLocation = a})

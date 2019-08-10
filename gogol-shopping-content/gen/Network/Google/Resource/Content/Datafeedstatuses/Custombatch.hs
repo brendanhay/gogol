@@ -20,6 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
+-- Gets multiple Merchant Center datafeed statuses in a single request.
+--
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeedstatuses.custombatch@.
 module Network.Google.Resource.Content.Datafeedstatuses.Custombatch
     (
@@ -48,6 +50,7 @@ type DatafeedstatusesCustombatchResource =
                ReqBody '[JSON] DatafeedstatusesCustomBatchRequest :>
                  Post '[JSON] DatafeedstatusesCustomBatchResponse
 
+-- | Gets multiple Merchant Center datafeed statuses in a single request.
 --
 -- /See:/ 'datafeedstatusesCustombatch' smart constructor.
 newtype DatafeedstatusesCustombatch =

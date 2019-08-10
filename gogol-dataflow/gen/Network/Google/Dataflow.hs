@@ -32,6 +32,9 @@ module Network.Google.Dataflow
 
     -- * Resources
 
+    -- ** dataflow.projects.deleteSnapshots
+    , module Network.Google.Resource.Dataflow.Projects.DeleteSnapshots
+
     -- ** dataflow.projects.jobs.aggregated
     , module Network.Google.Resource.Dataflow.Projects.Jobs.Aggregated
 
@@ -101,6 +104,18 @@ module Network.Google.Dataflow
     -- ** dataflow.projects.locations.jobs.workItems.reportStatus
     , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
 
+    -- ** dataflow.projects.locations.snapshots.delete
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Delete
+
+    -- ** dataflow.projects.locations.snapshots.get
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Get
+
+    -- ** dataflow.projects.locations.snapshots.list
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.List
+
+    -- ** dataflow.projects.locations.sql.validate
+    , module Network.Google.Resource.Dataflow.Projects.Locations.SQL.Validate
+
     -- ** dataflow.projects.locations.templates.create
     , module Network.Google.Resource.Dataflow.Projects.Locations.Templates.Create
 
@@ -112,6 +127,12 @@ module Network.Google.Dataflow
 
     -- ** dataflow.projects.locations.workerMessages
     , module Network.Google.Resource.Dataflow.Projects.Locations.WorkerMessages
+
+    -- ** dataflow.projects.snapshots.get
+    , module Network.Google.Resource.Dataflow.Projects.Snapshots.Get
+
+    -- ** dataflow.projects.snapshots.list
+    , module Network.Google.Resource.Dataflow.Projects.Snapshots.List
 
     -- ** dataflow.projects.templates.create
     , module Network.Google.Resource.Dataflow.Projects.Templates.Create
@@ -393,6 +414,11 @@ module Network.Google.Dataflow
     , jmBigQueryDetails
     , jmDatastoreDetails
 
+    -- ** ValidateResponse
+    , ValidateResponse
+    , validateResponse
+    , vrErrorMessage
+
     -- ** GetTemplateResponse
     , GetTemplateResponse
     , getTemplateResponse
@@ -416,6 +442,9 @@ module Network.Google.Dataflow
     , dSizeGb
     , dDiskType
     , dMountPoint
+
+    -- ** EnvironmentFlexResourceSchedulingGoal
+    , EnvironmentFlexResourceSchedulingGoal (..)
 
     -- ** MetricUpdate
     , MetricUpdate
@@ -449,6 +478,7 @@ module Network.Google.Dataflow
     , environment
     , eDataSet
     , eExperiments
+    , eFlexResourceSchedulingGoal
     , eWorkerPools
     , eClusterManagerAPIService
     , eVersion
@@ -456,6 +486,7 @@ module Network.Google.Dataflow
     , eTempStoragePrefix
     , eServiceAccountEmail
     , eUserAgent
+    , eServiceKmsKeyName
     , eSdkPipelineOptions
 
     -- ** ConcatPosition
@@ -745,6 +776,10 @@ module Network.Google.Dataflow
     , workItemServiceStateHarnessData
     , wisshdAddtional
 
+    -- ** DeleteSnapshotResponse
+    , DeleteSnapshotResponse
+    , deleteSnapshotResponse
+
     -- ** DataDiskAssignment
     , DataDiskAssignment
     , dataDiskAssignment
@@ -763,6 +798,11 @@ module Network.Google.Dataflow
 
     -- ** SourceSplitResponseOutcome
     , SourceSplitResponseOutcome (..)
+
+    -- ** ListSnapshotsResponse
+    , ListSnapshotsResponse
+    , listSnapshotsResponse
+    , lsrSnapshots
 
     -- ** WorkerMessageResponse
     , WorkerMessageResponse
@@ -1300,6 +1340,7 @@ module Network.Google.Dataflow
     , sctStreamingComputationConfigs
     , sctWindmillServiceEndpoint
     , sctWindmillServicePort
+    , sctMaxWorkItemCommitBytes
 
     -- ** MetricShortId
     , MetricShortId
@@ -1490,6 +1531,7 @@ module Network.Google.Dataflow
 
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.Dataflow.Projects.DeleteSnapshots
 import           Network.Google.Resource.Dataflow.Projects.Jobs.Aggregated
 import           Network.Google.Resource.Dataflow.Projects.Jobs.Create
 import           Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
@@ -1513,10 +1555,16 @@ import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapsh
 import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
 import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
 import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
+import           Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Delete
+import           Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.Get
+import           Network.Google.Resource.Dataflow.Projects.Locations.Snapshots.List
+import           Network.Google.Resource.Dataflow.Projects.Locations.SQL.Validate
 import           Network.Google.Resource.Dataflow.Projects.Locations.Templates.Create
 import           Network.Google.Resource.Dataflow.Projects.Locations.Templates.Get
 import           Network.Google.Resource.Dataflow.Projects.Locations.Templates.Launch
 import           Network.Google.Resource.Dataflow.Projects.Locations.WorkerMessages
+import           Network.Google.Resource.Dataflow.Projects.Snapshots.Get
+import           Network.Google.Resource.Dataflow.Projects.Snapshots.List
 import           Network.Google.Resource.Dataflow.Projects.Templates.Create
 import           Network.Google.Resource.Dataflow.Projects.Templates.Get
 import           Network.Google.Resource.Dataflow.Projects.Templates.Launch
@@ -1543,6 +1591,8 @@ type DataflowAPI =
        :<|> ProjectsJobsCreateResource
        :<|> ProjectsJobsUpdateResource
        :<|> ProjectsJobsGetMetricsResource
+       :<|> ProjectsSnapshotsListResource
+       :<|> ProjectsSnapshotsGetResource
        :<|> ProjectsLocationsTemplatesLaunchResource
        :<|> ProjectsLocationsTemplatesGetResource
        :<|> ProjectsLocationsTemplatesCreateResource
@@ -1558,5 +1608,10 @@ type DataflowAPI =
        :<|> ProjectsLocationsJobsCreateResource
        :<|> ProjectsLocationsJobsUpdateResource
        :<|> ProjectsLocationsJobsGetMetricsResource
+       :<|> ProjectsLocationsSnapshotsListResource
+       :<|> ProjectsLocationsSnapshotsGetResource
+       :<|> ProjectsLocationsSnapshotsDeleteResource
+       :<|> ProjectsLocationsSQLValidateResource
        :<|> ProjectsLocationsWorkerMessagesResource
+       :<|> ProjectsDeleteSnapshotsResource
        :<|> ProjectsWorkerMessagesResource

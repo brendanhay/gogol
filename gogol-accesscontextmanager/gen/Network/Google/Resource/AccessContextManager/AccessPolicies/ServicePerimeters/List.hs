@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.list@ method which the
 -- 'AccessPoliciesServicePerimetersList' request conforms to.
 type AccessPoliciesServicePerimetersListResource =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "servicePerimeters" :>
            QueryParam "$.xgafv" Xgafv :>

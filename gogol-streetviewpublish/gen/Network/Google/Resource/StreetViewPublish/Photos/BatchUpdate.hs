@@ -23,9 +23,9 @@
 -- Updates the metadata of Photos, such as pose, place association,
 -- connections, etc. Changing the pixels of photos is not supported. Note
 -- that if BatchUpdatePhotos fails, either critical fields are missing or
--- there was an authentication error. Even if BatchUpdatePhotos succeeds,
--- there may have been failures for single photos in the batch. These
--- failures will be specified in each PhotoResponse.status in
+-- there is an authentication error. Even if BatchUpdatePhotos succeeds,
+-- individual photos in the batch may have failures. These failures are
+-- specified in each PhotoResponse.status in
 -- BatchUpdatePhotosResponse.results. See UpdatePhoto for specific failures
 -- that can occur per photo. Only the fields specified in updateMask field
 -- are used. If \`updateMask\` is not present, the update applies to all
@@ -73,9 +73,9 @@ type PhotosBatchUpdateResource =
 -- | Updates the metadata of Photos, such as pose, place association,
 -- connections, etc. Changing the pixels of photos is not supported. Note
 -- that if BatchUpdatePhotos fails, either critical fields are missing or
--- there was an authentication error. Even if BatchUpdatePhotos succeeds,
--- there may have been failures for single photos in the batch. These
--- failures will be specified in each PhotoResponse.status in
+-- there is an authentication error. Even if BatchUpdatePhotos succeeds,
+-- individual photos in the batch may have failures. These failures are
+-- specified in each PhotoResponse.status in
 -- BatchUpdatePhotosResponse.results. See UpdatePhoto for specific failures
 -- that can occur per photo. Only the fields specified in updateMask field
 -- are used. If \`updateMask\` is not present, the update applies to all

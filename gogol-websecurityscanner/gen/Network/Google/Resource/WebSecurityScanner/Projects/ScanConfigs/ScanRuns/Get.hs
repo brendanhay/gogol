@@ -47,7 +47,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.get@ method which the
 -- 'ProjectsScanConfigsScanRunsGet' request conforms to.
 type ProjectsScanConfigsScanRunsGetResource =
-     "v1alpha" :>
+     "v1beta" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

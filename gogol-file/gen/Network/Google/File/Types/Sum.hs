@@ -18,6 +18,56 @@ module Network.Google.File.Types.Sum where
 
 import           Network.Google.Prelude hiding (Bytes)
 
+-- | Output only. Current lifecycle state of the resource (e.g. if it\'s
+-- being created or ready to use).
+data GoogleCloudSaasacceleratorManagementProvidersV1InstanceState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Unspecified state.
+    | Creating
+      -- ^ @CREATING@
+      -- Instance is being created.
+    | Ready
+      -- ^ @READY@
+      -- Instance has been created and is ready to use.
+    | Updating
+      -- ^ @UPDATING@
+      -- Instance is being updated.
+    | Repairing
+      -- ^ @REPAIRING@
+      -- Instance is unheathy and under repair.
+    | Deleting
+      -- ^ @DELETING@
+      -- Instance is being deleted.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudSaasacceleratorManagementProvidersV1InstanceState
+
+instance FromHttpApiData GoogleCloudSaasacceleratorManagementProvidersV1InstanceState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "CREATING" -> Right Creating
+        "READY" -> Right Ready
+        "UPDATING" -> Right Updating
+        "REPAIRING" -> Right Repairing
+        "DELETING" -> Right Deleting
+        x -> Left ("Unable to parse GoogleCloudSaasacceleratorManagementProvidersV1InstanceState from: " <> x)
+
+instance ToHttpApiData GoogleCloudSaasacceleratorManagementProvidersV1InstanceState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Creating -> "CREATING"
+        Ready -> "READY"
+        Updating -> "UPDATING"
+        Repairing -> "REPAIRING"
+        Deleting -> "DELETING"
+
+instance FromJSON GoogleCloudSaasacceleratorManagementProvidersV1InstanceState where
+    parseJSON = parseJSONText "GoogleCloudSaasacceleratorManagementProvidersV1InstanceState"
+
+instance ToJSON GoogleCloudSaasacceleratorManagementProvidersV1InstanceState where
+    toJSON = toJSONText
+
 -- | The service tier of the instance.
 data InstanceTier
     = TierUnspecified
@@ -83,23 +133,23 @@ instance ToJSON Xgafv where
 
 -- | Output only. The instance state.
 data InstanceState
-    = StateUnspecified
+    = ISStateUnspecified
       -- ^ @STATE_UNSPECIFIED@
       -- State not set.
-    | Creating
+    | ISCreating
       -- ^ @CREATING@
       -- The instance is being created.
-    | Ready
+    | ISReady
       -- ^ @READY@
       -- The instance is available for use.
-    | Repairing
+    | ISRepairing
       -- ^ @REPAIRING@
       -- Work is being done on the instance. You can get further details from the
       -- \`statusMessage\` field of the \`Instance\` resource.
-    | Deleting
+    | ISDeleting
       -- ^ @DELETING@
       -- The instance is shutting down.
-    | Error'
+    | ISError'
       -- ^ @ERROR@
       -- The instance is experiencing an issue and might be unusable. You can get
       -- further details from the \`statusMessage\` field of the \`Instance\`
@@ -110,22 +160,22 @@ instance Hashable InstanceState
 
 instance FromHttpApiData InstanceState where
     parseQueryParam = \case
-        "STATE_UNSPECIFIED" -> Right StateUnspecified
-        "CREATING" -> Right Creating
-        "READY" -> Right Ready
-        "REPAIRING" -> Right Repairing
-        "DELETING" -> Right Deleting
-        "ERROR" -> Right Error'
+        "STATE_UNSPECIFIED" -> Right ISStateUnspecified
+        "CREATING" -> Right ISCreating
+        "READY" -> Right ISReady
+        "REPAIRING" -> Right ISRepairing
+        "DELETING" -> Right ISDeleting
+        "ERROR" -> Right ISError'
         x -> Left ("Unable to parse InstanceState from: " <> x)
 
 instance ToHttpApiData InstanceState where
     toQueryParam = \case
-        StateUnspecified -> "STATE_UNSPECIFIED"
-        Creating -> "CREATING"
-        Ready -> "READY"
-        Repairing -> "REPAIRING"
-        Deleting -> "DELETING"
-        Error' -> "ERROR"
+        ISStateUnspecified -> "STATE_UNSPECIFIED"
+        ISCreating -> "CREATING"
+        ISReady -> "READY"
+        ISRepairing -> "REPAIRING"
+        ISDeleting -> "DELETING"
+        ISError' -> "ERROR"
 
 instance FromJSON InstanceState where
     parseJSON = parseJSONText "InstanceState"

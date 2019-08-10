@@ -161,7 +161,10 @@ prlShowDeleted
   = lens _prlShowDeleted
       (\ s a -> s{_prlShowDeleted = a})
 
--- | Optional view for the returned Role objects.
+-- | Optional view for the returned Role objects. When \`FULL\` is specified,
+-- the \`includedPermissions\` field is returned, which includes a list of
+-- all permissions in the role. The default value is \`BASIC\`, which does
+-- not return the \`includedPermissions\` field.
 prlView :: Lens' ProjectsRolesList (Maybe Text)
 prlView = lens _prlView (\ s a -> s{_prlView = a})
 

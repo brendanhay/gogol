@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all of the circles for a user.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.circles.list@.
 module Network.Google.Resource.PlusDomains.Circles.List
@@ -53,7 +54,8 @@ type CirclesListResource =
                  QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] CircleFeed
 
--- | List all of the circles for a user.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'circlesList' smart constructor.
 data CirclesList =

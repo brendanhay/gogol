@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsHl7V2StoresMessagesIngest' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresMessagesIngestResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "parent" Text :>
          "messages:ingest" :>
            QueryParam "$.xgafv" Xgafv :>

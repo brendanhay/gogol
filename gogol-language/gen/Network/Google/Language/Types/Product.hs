@@ -1265,9 +1265,10 @@ eSalience
   = lens _eSalience (\ s a -> s{_eSalience = a}) .
       mapping _Coerce
 
--- | Metadata associated with the entity. Currently, Wikipedia URLs and
--- Knowledge Graph MIDs are provided, if available. The associated keys are
--- \"wikipedia_url\" and \"mid\", respectively.
+-- | Metadata associated with the entity. For most entity types, the metadata
+-- is a Wikipedia URL (\`wikipedia_url\`) and Knowledge Graph MID
+-- (\`mid\`), if they are available. For the metadata associated with other
+-- entity types, see the Type table below.
 eMetadata :: Lens' Entity (Maybe EntityMetadata)
 eMetadata
   = lens _eMetadata (\ s a -> s{_eMetadata = a})
@@ -1428,9 +1429,10 @@ instance ToJSON AnalyzeSyntaxResponse where
                   ("sentences" .=) <$> _aSentences,
                   ("language" .=) <$> _aLanguage])
 
--- | Metadata associated with the entity. Currently, Wikipedia URLs and
--- Knowledge Graph MIDs are provided, if available. The associated keys are
--- \"wikipedia_url\" and \"mid\", respectively.
+-- | Metadata associated with the entity. For most entity types, the metadata
+-- is a Wikipedia URL (\`wikipedia_url\`) and Knowledge Graph MID
+-- (\`mid\`), if they are available. For the metadata associated with other
+-- entity types, see the Type table below.
 --
 -- /See:/ 'entityMetadata' smart constructor.
 newtype EntityMetadata =

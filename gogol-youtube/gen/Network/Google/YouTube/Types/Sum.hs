@@ -5999,8 +5999,8 @@ instance ToJSON ContentRatingDjctqRatingReasonsItem where
 data CdnSettingsIngestionType
     = Dash
       -- ^ @dash@
-    | HTTP
-      -- ^ @http@
+    | Hls
+      -- ^ @hls@
     | Rtmp
       -- ^ @rtmp@
     | Webrtc
@@ -6012,7 +6012,7 @@ instance Hashable CdnSettingsIngestionType
 instance FromHttpApiData CdnSettingsIngestionType where
     parseQueryParam = \case
         "dash" -> Right Dash
-        "http" -> Right HTTP
+        "hls" -> Right Hls
         "rtmp" -> Right Rtmp
         "webrtc" -> Right Webrtc
         x -> Left ("Unable to parse CdnSettingsIngestionType from: " <> x)
@@ -6020,7 +6020,7 @@ instance FromHttpApiData CdnSettingsIngestionType where
 instance ToHttpApiData CdnSettingsIngestionType where
     toQueryParam = \case
         Dash -> "dash"
-        HTTP -> "http"
+        Hls -> "hls"
         Rtmp -> "rtmp"
         Webrtc -> "webrtc"
 

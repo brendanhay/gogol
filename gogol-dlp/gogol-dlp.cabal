@@ -72,6 +72,7 @@ library
         , Network.Google.Resource.DLP.Projects.InspectTemplates.Get
         , Network.Google.Resource.DLP.Projects.InspectTemplates.List
         , Network.Google.Resource.DLP.Projects.InspectTemplates.Patch
+        , Network.Google.Resource.DLP.Projects.JobTriggers.Activate
         , Network.Google.Resource.DLP.Projects.JobTriggers.Create
         , Network.Google.Resource.DLP.Projects.JobTriggers.Delete
         , Network.Google.Resource.DLP.Projects.JobTriggers.Get

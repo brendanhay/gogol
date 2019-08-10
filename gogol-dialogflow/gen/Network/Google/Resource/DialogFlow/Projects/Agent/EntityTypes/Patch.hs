@@ -126,10 +126,10 @@ paetpXgafv
   = lens _paetpXgafv (\ s a -> s{_paetpXgafv = a})
 
 -- | Optional. The language of entity synonyms defined in \`entity_type\`. If
--- not specified, the agent\'s default language is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 paetpLanguageCode :: Lens' ProjectsAgentEntityTypesPatch (Maybe Text)
 paetpLanguageCode
   = lens _paetpLanguageCode

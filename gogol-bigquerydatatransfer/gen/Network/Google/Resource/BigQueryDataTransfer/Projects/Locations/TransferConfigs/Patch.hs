@@ -41,6 +41,7 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferC
     , pltcpUploadType
     , pltcpAuthorizationCode
     , pltcpPayload
+    , pltcpVersionInfo
     , pltcpName
     , pltcpCallback
     ) where
@@ -59,10 +60,11 @@ type ProjectsLocationsTransferConfigsPatchResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "authorizationCode" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] TransferConfig :>
-                           Patch '[JSON] TransferConfig
+                     QueryParam "versionInfo" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TransferConfig :>
+                             Patch '[JSON] TransferConfig
 
 -- | Updates a data transfer configuration. All fields must be set, even if
 -- they are not updated.
@@ -77,6 +79,7 @@ data ProjectsLocationsTransferConfigsPatch =
     , _pltcpUploadType        :: !(Maybe Text)
     , _pltcpAuthorizationCode :: !(Maybe Text)
     , _pltcpPayload           :: !TransferConfig
+    , _pltcpVersionInfo       :: !(Maybe Text)
     , _pltcpName              :: !Text
     , _pltcpCallback          :: !(Maybe Text)
     }
@@ -101,6 +104,8 @@ data ProjectsLocationsTransferConfigsPatch =
 --
 -- * 'pltcpPayload'
 --
+-- * 'pltcpVersionInfo'
+--
 -- * 'pltcpName'
 --
 -- * 'pltcpCallback'
@@ -117,6 +122,7 @@ projectsLocationsTransferConfigsPatch pPltcpPayload_ pPltcpName_ =
     , _pltcpUploadType = Nothing
     , _pltcpAuthorizationCode = Nothing
     , _pltcpPayload = pPltcpPayload_
+    , _pltcpVersionInfo = Nothing
     , _pltcpName = pPltcpName_
     , _pltcpCallback = Nothing
     }
@@ -175,6 +181,17 @@ pltcpPayload :: Lens' ProjectsLocationsTransferConfigsPatch TransferConfig
 pltcpPayload
   = lens _pltcpPayload (\ s a -> s{_pltcpPayload = a})
 
+-- | Optional version info. If users want to find a very recent access token,
+-- that is, immediately after approving access, users have to set the
+-- version_info claim in the token request. To obtain the version_info,
+-- users must use the “none+gsession” response type. which be return a
+-- version_info back in the authorization response which be be put in a JWT
+-- claim in the token request.
+pltcpVersionInfo :: Lens' ProjectsLocationsTransferConfigsPatch (Maybe Text)
+pltcpVersionInfo
+  = lens _pltcpVersionInfo
+      (\ s a -> s{_pltcpVersionInfo = a})
+
 -- | The resource name of the transfer config. Transfer config names have the
 -- form of
 -- \`projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}\`.
@@ -206,6 +223,7 @@ instance GoogleRequest
               _pltcpAccessToken
               _pltcpUploadType
               _pltcpAuthorizationCode
+              _pltcpVersionInfo
               _pltcpCallback
               (Just AltJSON)
               _pltcpPayload

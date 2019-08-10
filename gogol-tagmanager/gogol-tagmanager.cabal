@@ -39,7 +39,6 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
         , Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Patch
         , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Reauthorize
         , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Get
@@ -70,11 +69,8 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Revert
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Get
-        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.GetProposal
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.GetStatus
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Proposal.Create
-        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Proposal.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.QuickPreview
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.ResolveConflict
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Sync
@@ -91,13 +87,18 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Update
-        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.UpdateProposal
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Get
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.List
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Revert
         , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Revert
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Update
         , Network.Google.Resource.TagManager.Accounts.Get
         , Network.Google.Resource.TagManager.Accounts.List
         , Network.Google.Resource.TagManager.Accounts.Update

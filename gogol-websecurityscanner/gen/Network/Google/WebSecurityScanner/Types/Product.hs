@@ -27,7 +27,7 @@ import           Network.Google.WebSecurityScanner.Types.Sum
 data FindingTypeStats =
   FindingTypeStats'
     { _ftsFindingCount :: !(Maybe (Textual Int32))
-    , _ftsFindingType  :: !(Maybe FindingTypeStatsFindingType)
+    , _ftsFindingType  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -53,7 +53,7 @@ ftsFindingCount
       . mapping _Coerce
 
 -- | Output only. The finding type associated with the stats.
-ftsFindingType :: Lens' FindingTypeStats (Maybe FindingTypeStatsFindingType)
+ftsFindingType :: Lens' FindingTypeStats (Maybe Text)
 ftsFindingType
   = lens _ftsFindingType
       (\ s a -> s{_ftsFindingType = a})
@@ -148,6 +148,58 @@ instance FromJSON StopScanRunRequest where
 instance ToJSON StopScanRunRequest where
         toJSON = const emptyObject
 
+-- | Defines a custom error message used by CreateScanConfig and
+-- UpdateScanConfig APIs when scan configuration validation fails. It is
+-- also reported as part of a ScanRunErrorTrace message if scan validation
+-- fails due to a scan configuration error.
+--
+-- /See:/ 'scanConfigError' smart constructor.
+data ScanConfigError =
+  ScanConfigError'
+    { _sceFieldName :: !(Maybe Text)
+    , _sceCode      :: !(Maybe ScanConfigErrorCode)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ScanConfigError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sceFieldName'
+--
+-- * 'sceCode'
+scanConfigError
+    :: ScanConfigError
+scanConfigError = ScanConfigError' {_sceFieldName = Nothing, _sceCode = Nothing}
+
+
+-- | Output only. Indicates the full name of the ScanConfig field that
+-- triggers this error, for example \"scan_config.max_qps\". This field is
+-- provided for troubleshooting purposes only and its actual value can
+-- change in the future.
+sceFieldName :: Lens' ScanConfigError (Maybe Text)
+sceFieldName
+  = lens _sceFieldName (\ s a -> s{_sceFieldName = a})
+
+-- | Output only. Indicates the reason code for a configuration failure.
+sceCode :: Lens' ScanConfigError (Maybe ScanConfigErrorCode)
+sceCode = lens _sceCode (\ s a -> s{_sceCode = a})
+
+instance FromJSON ScanConfigError where
+        parseJSON
+          = withObject "ScanConfigError"
+              (\ o ->
+                 ScanConfigError' <$>
+                   (o .:? "fieldName") <*> (o .:? "code"))
+
+instance ToJSON ScanConfigError where
+        toJSON ScanConfigError'{..}
+          = object
+              (catMaybes
+                 [("fieldName" .=) <$> _sceFieldName,
+                  ("code" .=) <$> _sceCode])
+
 -- | Scan schedule configuration.
 --
 -- /See:/ 'schedule' smart constructor.
@@ -221,9 +273,10 @@ data Finding =
     , _fOutdatedLibrary      :: !(Maybe OutdatedLibrary)
     , _fFuzzedURL            :: !(Maybe Text)
     , _fName                 :: !(Maybe Text)
-    , _fFindingType          :: !(Maybe FindingFindingType)
+    , _fFindingType          :: !(Maybe Text)
     , _fVulnerableHeaders    :: !(Maybe VulnerableHeaders)
     , _fViolatingResource    :: !(Maybe ViolatingResource)
+    , _fForm                 :: !(Maybe Form)
     , _fFrameURL             :: !(Maybe Text)
     , _fDescription          :: !(Maybe Text)
     }
@@ -260,6 +313,8 @@ data Finding =
 --
 -- * 'fViolatingResource'
 --
+-- * 'fForm'
+--
 -- * 'fFrameURL'
 --
 -- * 'fDescription'
@@ -280,6 +335,7 @@ finding =
     , _fFindingType = Nothing
     , _fVulnerableHeaders = Nothing
     , _fViolatingResource = Nothing
+    , _fForm = Nothing
     , _fFrameURL = Nothing
     , _fDescription = Nothing
     }
@@ -345,8 +401,10 @@ fFuzzedURL
 fName :: Lens' Finding (Maybe Text)
 fName = lens _fName (\ s a -> s{_fName = a})
 
--- | Output only. The type of the Finding.
-fFindingType :: Lens' Finding (Maybe FindingFindingType)
+-- | Output only. The type of the Finding. Detailed and up-to-date
+-- information on findings can be found here:
+-- https:\/\/cloud.google.com\/security-scanner\/docs\/scan-result-details
+fFindingType :: Lens' Finding (Maybe Text)
 fFindingType
   = lens _fFindingType (\ s a -> s{_fFindingType = a})
 
@@ -364,6 +422,11 @@ fViolatingResource :: Lens' Finding (Maybe ViolatingResource)
 fViolatingResource
   = lens _fViolatingResource
       (\ s a -> s{_fViolatingResource = a})
+
+-- | Output only. An addon containing information reported for a
+-- vulnerability with an HTML form, if any.
+fForm :: Lens' Finding (Maybe Form)
+fForm = lens _fForm (\ s a -> s{_fForm = a})
 
 -- | Output only. If the vulnerability was originated from nested IFrame, the
 -- immediate parent IFrame is reported.
@@ -393,6 +456,7 @@ instance FromJSON Finding where
                      <*> (o .:? "findingType")
                      <*> (o .:? "vulnerableHeaders")
                      <*> (o .:? "violatingResource")
+                     <*> (o .:? "form")
                      <*> (o .:? "frameUrl")
                      <*> (o .:? "description"))
 
@@ -413,6 +477,7 @@ instance ToJSON Finding where
                   ("findingType" .=) <$> _fFindingType,
                   ("vulnerableHeaders" .=) <$> _fVulnerableHeaders,
                   ("violatingResource" .=) <$> _fViolatingResource,
+                  ("form" .=) <$> _fForm,
                   ("frameUrl" .=) <$> _fFrameURL,
                   ("description" .=) <$> _fDescription])
 
@@ -440,6 +505,41 @@ instance FromJSON Empty where
 
 instance ToJSON Empty where
         toJSON = const emptyObject
+
+-- | Output only. Defines a warning trace message for ScanRun. Warning traces
+-- provide customers with useful information that helps make the scanning
+-- process more effective.
+--
+-- /See:/ 'scanRunWarningTrace' smart constructor.
+newtype ScanRunWarningTrace =
+  ScanRunWarningTrace'
+    { _srwtCode :: Maybe ScanRunWarningTraceCode
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ScanRunWarningTrace' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'srwtCode'
+scanRunWarningTrace
+    :: ScanRunWarningTrace
+scanRunWarningTrace = ScanRunWarningTrace' {_srwtCode = Nothing}
+
+
+-- | Output only. Indicates the warning code.
+srwtCode :: Lens' ScanRunWarningTrace (Maybe ScanRunWarningTraceCode)
+srwtCode = lens _srwtCode (\ s a -> s{_srwtCode = a})
+
+instance FromJSON ScanRunWarningTrace where
+        parseJSON
+          = withObject "ScanRunWarningTrace"
+              (\ o -> ScanRunWarningTrace' <$> (o .:? "code"))
+
+instance ToJSON ScanRunWarningTrace where
+        toJSON ScanRunWarningTrace'{..}
+          = object (catMaybes [("code" .=) <$> _srwtCode])
 
 -- | Response for the \`ListFindingTypeStats\` method.
 --
@@ -948,6 +1048,77 @@ instance ToJSON Header where
               (catMaybes
                  [("value" .=) <$> _hValue, ("name" .=) <$> _hName])
 
+-- | Output only. Defines an error trace message for a ScanRun.
+--
+-- /See:/ 'scanRunErrorTrace' smart constructor.
+data ScanRunErrorTrace =
+  ScanRunErrorTrace'
+    { _sretMostCommonHTTPErrorCode :: !(Maybe (Textual Int32))
+    , _sretScanConfigError         :: !(Maybe ScanConfigError)
+    , _sretCode                    :: !(Maybe ScanRunErrorTraceCode)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ScanRunErrorTrace' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sretMostCommonHTTPErrorCode'
+--
+-- * 'sretScanConfigError'
+--
+-- * 'sretCode'
+scanRunErrorTrace
+    :: ScanRunErrorTrace
+scanRunErrorTrace =
+  ScanRunErrorTrace'
+    { _sretMostCommonHTTPErrorCode = Nothing
+    , _sretScanConfigError = Nothing
+    , _sretCode = Nothing
+    }
+
+
+-- | Output only. If the scan encounters TOO_MANY_HTTP_ERRORS, this field
+-- indicates the most common HTTP error code, if such is available. For
+-- example, if this code is 404, the scan has encountered too many
+-- NOT_FOUND responses.
+sretMostCommonHTTPErrorCode :: Lens' ScanRunErrorTrace (Maybe Int32)
+sretMostCommonHTTPErrorCode
+  = lens _sretMostCommonHTTPErrorCode
+      (\ s a -> s{_sretMostCommonHTTPErrorCode = a})
+      . mapping _Coerce
+
+-- | Output only. If the scan encounters SCAN_CONFIG_ISSUE error, this field
+-- has the error message encountered during scan configuration validation
+-- that is performed before each scan run.
+sretScanConfigError :: Lens' ScanRunErrorTrace (Maybe ScanConfigError)
+sretScanConfigError
+  = lens _sretScanConfigError
+      (\ s a -> s{_sretScanConfigError = a})
+
+-- | Output only. Indicates the error reason code.
+sretCode :: Lens' ScanRunErrorTrace (Maybe ScanRunErrorTraceCode)
+sretCode = lens _sretCode (\ s a -> s{_sretCode = a})
+
+instance FromJSON ScanRunErrorTrace where
+        parseJSON
+          = withObject "ScanRunErrorTrace"
+              (\ o ->
+                 ScanRunErrorTrace' <$>
+                   (o .:? "mostCommonHttpErrorCode") <*>
+                     (o .:? "scanConfigError")
+                     <*> (o .:? "code"))
+
+instance ToJSON ScanRunErrorTrace where
+        toJSON ScanRunErrorTrace'{..}
+          = object
+              (catMaybes
+                 [("mostCommonHttpErrorCode" .=) <$>
+                    _sretMostCommonHTTPErrorCode,
+                  ("scanConfigError" .=) <$> _sretScanConfigError,
+                  ("code" .=) <$> _sretCode])
+
 -- | Response for the \`ListScanConfigs\` method.
 --
 -- /See:/ 'listScanConfigsResponse' smart constructor.
@@ -1093,16 +1264,17 @@ instance ToJSON CustomAccount where
 -- /See:/ 'scanConfig' smart constructor.
 data ScanConfig =
   ScanConfig'
-    { _scLatestRun         :: !(Maybe ScanRun)
-    , _scSchedule          :: !(Maybe Schedule)
-    , _scTargetPlatforms   :: !(Maybe [Text])
-    , _scStartingURLs      :: !(Maybe [Text])
-    , _scAuthentication    :: !(Maybe Authentication)
-    , _scMaxQps            :: !(Maybe (Textual Int32))
-    , _scName              :: !(Maybe Text)
-    , _scDisplayName       :: !(Maybe Text)
-    , _scUserAgent         :: !(Maybe ScanConfigUserAgent)
-    , _scBlackListPatterns :: !(Maybe [Text])
+    { _scLatestRun                     :: !(Maybe ScanRun)
+    , _scSchedule                      :: !(Maybe Schedule)
+    , _scTargetPlatforms               :: !(Maybe [Text])
+    , _scStartingURLs                  :: !(Maybe [Text])
+    , _scAuthentication                :: !(Maybe Authentication)
+    , _scMaxQps                        :: !(Maybe (Textual Int32))
+    , _scName                          :: !(Maybe Text)
+    , _scExportToSecurityCommandCenter :: !(Maybe ScanConfigExportToSecurityCommandCenter)
+    , _scDisplayName                   :: !(Maybe Text)
+    , _scUserAgent                     :: !(Maybe ScanConfigUserAgent)
+    , _scBlackListPatterns             :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1125,6 +1297,8 @@ data ScanConfig =
 --
 -- * 'scName'
 --
+-- * 'scExportToSecurityCommandCenter'
+--
 -- * 'scDisplayName'
 --
 -- * 'scUserAgent'
@@ -1141,6 +1315,7 @@ scanConfig =
     , _scAuthentication = Nothing
     , _scMaxQps = Nothing
     , _scName = Nothing
+    , _scExportToSecurityCommandCenter = Nothing
     , _scDisplayName = Nothing
     , _scUserAgent = Nothing
     , _scBlackListPatterns = Nothing
@@ -1196,6 +1371,13 @@ scMaxQps
 scName :: Lens' ScanConfig (Maybe Text)
 scName = lens _scName (\ s a -> s{_scName = a})
 
+-- | Controls export of scan configurations and results to Cloud Security
+-- Command Center.
+scExportToSecurityCommandCenter :: Lens' ScanConfig (Maybe ScanConfigExportToSecurityCommandCenter)
+scExportToSecurityCommandCenter
+  = lens _scExportToSecurityCommandCenter
+      (\ s a -> s{_scExportToSecurityCommandCenter = a})
+
 -- | Required. The user provided display name of the ScanConfig.
 scDisplayName :: Lens' ScanConfig (Maybe Text)
 scDisplayName
@@ -1227,6 +1409,7 @@ instance FromJSON ScanConfig where
                      <*> (o .:? "authentication")
                      <*> (o .:? "maxQps")
                      <*> (o .:? "name")
+                     <*> (o .:? "exportToSecurityCommandCenter")
                      <*> (o .:? "displayName")
                      <*> (o .:? "userAgent")
                      <*> (o .:? "blacklistPatterns" .!= mempty))
@@ -1241,6 +1424,8 @@ instance ToJSON ScanConfig where
                   ("startingUrls" .=) <$> _scStartingURLs,
                   ("authentication" .=) <$> _scAuthentication,
                   ("maxQps" .=) <$> _scMaxQps, ("name" .=) <$> _scName,
+                  ("exportToSecurityCommandCenter" .=) <$>
+                    _scExportToSecurityCommandCenter,
                   ("displayName" .=) <$> _scDisplayName,
                   ("userAgent" .=) <$> _scUserAgent,
                   ("blacklistPatterns" .=) <$> _scBlackListPatterns])
@@ -1350,14 +1535,63 @@ instance ToJSON ViolatingResource where
                  [("contentType" .=) <$> _vrContentType,
                   ("resourceUrl" .=) <$> _vrResourceURL])
 
+-- | ! Information about a vulnerability with an HTML.
+--
+-- /See:/ 'form' smart constructor.
+data Form =
+  Form'
+    { _fActionURI :: !(Maybe Text)
+    , _fFields    :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Form' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fActionURI'
+--
+-- * 'fFields'
+form
+    :: Form
+form = Form' {_fActionURI = Nothing, _fFields = Nothing}
+
+
+-- | ! The URI where to send the form when it\'s submitted.
+fActionURI :: Lens' Form (Maybe Text)
+fActionURI
+  = lens _fActionURI (\ s a -> s{_fActionURI = a})
+
+-- | ! The names of form fields related to the vulnerability.
+fFields :: Lens' Form [Text]
+fFields
+  = lens _fFields (\ s a -> s{_fFields = a}) . _Default
+      . _Coerce
+
+instance FromJSON Form where
+        parseJSON
+          = withObject "Form"
+              (\ o ->
+                 Form' <$>
+                   (o .:? "actionUri") <*> (o .:? "fields" .!= mempty))
+
+instance ToJSON Form where
+        toJSON Form'{..}
+          = object
+              (catMaybes
+                 [("actionUri" .=) <$> _fActionURI,
+                  ("fields" .=) <$> _fFields])
+
 -- | A ScanRun is a output-only resource representing an actual run of the
--- scan.
+-- scan. Next id: 12
 --
 -- /See:/ 'scanRun' smart constructor.
 data ScanRun =
   ScanRun'
     { _srStartTime          :: !(Maybe DateTime')
     , _srHasVulnerabilities :: !(Maybe Bool)
+    , _srWarningTraces      :: !(Maybe [ScanRunWarningTrace])
     , _srResultState        :: !(Maybe ScanRunResultState)
     , _srProgressPercent    :: !(Maybe (Textual Int32))
     , _srURLsCrawledCount   :: !(Maybe (Textual Int64))
@@ -1365,6 +1599,7 @@ data ScanRun =
     , _srName               :: !(Maybe Text)
     , _srEndTime            :: !(Maybe DateTime')
     , _srExecutionState     :: !(Maybe ScanRunExecutionState)
+    , _srErrorTrace         :: !(Maybe ScanRunErrorTrace)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1376,6 +1611,8 @@ data ScanRun =
 -- * 'srStartTime'
 --
 -- * 'srHasVulnerabilities'
+--
+-- * 'srWarningTraces'
 --
 -- * 'srResultState'
 --
@@ -1390,12 +1627,15 @@ data ScanRun =
 -- * 'srEndTime'
 --
 -- * 'srExecutionState'
+--
+-- * 'srErrorTrace'
 scanRun
     :: ScanRun
 scanRun =
   ScanRun'
     { _srStartTime = Nothing
     , _srHasVulnerabilities = Nothing
+    , _srWarningTraces = Nothing
     , _srResultState = Nothing
     , _srProgressPercent = Nothing
     , _srURLsCrawledCount = Nothing
@@ -1403,6 +1643,7 @@ scanRun =
     , _srName = Nothing
     , _srEndTime = Nothing
     , _srExecutionState = Nothing
+    , _srErrorTrace = Nothing
     }
 
 
@@ -1417,6 +1658,15 @@ srHasVulnerabilities :: Lens' ScanRun (Maybe Bool)
 srHasVulnerabilities
   = lens _srHasVulnerabilities
       (\ s a -> s{_srHasVulnerabilities = a})
+
+-- | Output only. A list of warnings, if such are encountered during this
+-- scan run.
+srWarningTraces :: Lens' ScanRun [ScanRunWarningTrace]
+srWarningTraces
+  = lens _srWarningTraces
+      (\ s a -> s{_srWarningTraces = a})
+      . _Default
+      . _Coerce
 
 -- | Output only. The result state of the ScanRun. This field is only
 -- available after the execution state reaches \"FINISHED\".
@@ -1474,19 +1724,28 @@ srExecutionState
   = lens _srExecutionState
       (\ s a -> s{_srExecutionState = a})
 
+-- | Output only. If result_state is an ERROR, this field provides the
+-- primary reason for scan\'s termination and more details, if such are
+-- available.
+srErrorTrace :: Lens' ScanRun (Maybe ScanRunErrorTrace)
+srErrorTrace
+  = lens _srErrorTrace (\ s a -> s{_srErrorTrace = a})
+
 instance FromJSON ScanRun where
         parseJSON
           = withObject "ScanRun"
               (\ o ->
                  ScanRun' <$>
                    (o .:? "startTime") <*> (o .:? "hasVulnerabilities")
+                     <*> (o .:? "warningTraces" .!= mempty)
                      <*> (o .:? "resultState")
                      <*> (o .:? "progressPercent")
                      <*> (o .:? "urlsCrawledCount")
                      <*> (o .:? "urlsTestedCount")
                      <*> (o .:? "name")
                      <*> (o .:? "endTime")
-                     <*> (o .:? "executionState"))
+                     <*> (o .:? "executionState")
+                     <*> (o .:? "errorTrace"))
 
 instance ToJSON ScanRun where
         toJSON ScanRun'{..}
@@ -1494,10 +1753,12 @@ instance ToJSON ScanRun where
               (catMaybes
                  [("startTime" .=) <$> _srStartTime,
                   ("hasVulnerabilities" .=) <$> _srHasVulnerabilities,
+                  ("warningTraces" .=) <$> _srWarningTraces,
                   ("resultState" .=) <$> _srResultState,
                   ("progressPercent" .=) <$> _srProgressPercent,
                   ("urlsCrawledCount" .=) <$> _srURLsCrawledCount,
                   ("urlsTestedCount" .=) <$> _srURLsTestedCount,
                   ("name" .=) <$> _srName,
                   ("endTime" .=) <$> _srEndTime,
-                  ("executionState" .=) <$> _srExecutionState])
+                  ("executionState" .=) <$> _srExecutionState,
+                  ("errorTrace" .=) <$> _srErrorTrace])

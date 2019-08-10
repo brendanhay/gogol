@@ -133,10 +133,10 @@ paetlXgafv
   = lens _paetlXgafv (\ s a -> s{_paetlXgafv = a})
 
 -- | Optional. The language to list entity synonyms for. If not specified,
--- the agent\'s default language is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 paetlLanguageCode :: Lens' ProjectsAgentEntityTypesList (Maybe Text)
 paetlLanguageCode
   = lens _paetlLanguageCode

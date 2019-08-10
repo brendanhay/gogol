@@ -40,6 +40,13 @@ module Network.Google.DriveActivity
     , suggestion
     , sSubtype
 
+    -- ** Drive
+    , Drive
+    , drive
+    , dRoot
+    , dName
+    , dTitle
+
     -- ** Impersonation
     , Impersonation
     , impersonation
@@ -64,6 +71,12 @@ module Network.Google.DriveActivity
     , adDelete
     , adMove
 
+    -- ** DriveReference
+    , DriveReference
+    , driveReference
+    , drName
+    , drTitle
+
     -- ** PermissionRole
     , PermissionRole (..)
 
@@ -73,6 +86,10 @@ module Network.Google.DriveActivity
     , gEmail
     , gTitle
 
+    -- ** DriveFile
+    , DriveFile
+    , driveFile
+
     -- ** TimeRange
     , TimeRange
     , timeRange
@@ -81,6 +98,9 @@ module Network.Google.DriveActivity
 
     -- ** RestrictionChangeNewRestriction
     , RestrictionChangeNewRestriction (..)
+
+    -- ** DriveFolderType
+    , DriveFolderType (..)
 
     -- ** QueryDriveActivityRequest
     , QueryDriveActivityRequest
@@ -95,8 +115,10 @@ module Network.Google.DriveActivity
     -- ** DriveItemReference
     , DriveItemReference
     , driveItemReference
+    , dirDriveFile
     , dirFolder
     , dirName
+    , dirDriveFolder
     , dirTitle
     , dirFile
 
@@ -109,6 +131,7 @@ module Network.Google.DriveActivity
     -- ** TargetReference
     , TargetReference
     , targetReference
+    , trDrive
     , trTeamDrive
     , trDriveItem
 
@@ -142,8 +165,8 @@ module Network.Google.DriveActivity
     -- ** Domain
     , Domain
     , domain
-    , dLegacyId
-    , dName
+    , domLegacyId
+    , domName
 
     -- ** Administrator
     , Administrator
@@ -194,6 +217,7 @@ module Network.Google.DriveActivity
     -- ** Owner
     , Owner
     , owner
+    , oDrive
     , oDomain
     , oTeamDrive
     , oUser
@@ -255,6 +279,11 @@ module Network.Google.DriveActivity
     -- ** AnonymousUser
     , AnonymousUser
     , anonymousUser
+
+    -- ** DriveFolder
+    , DriveFolder
+    , driveFolder
+    , dfType
 
     -- ** Anyone
     , Anyone
@@ -344,6 +373,7 @@ module Network.Google.DriveActivity
     -- ** Target
     , Target
     , target
+    , tDrive
     , tTeamDrive
     , tFileComment
     , tDriveItem
@@ -370,10 +400,12 @@ module Network.Google.DriveActivity
     -- ** DriveItem
     , DriveItem
     , driveItem
+    , diDriveFile
     , diFolder
     , diOwner
     , diMimeType
     , diName
+    , diDriveFolder
     , diTitle
     , diFile
 

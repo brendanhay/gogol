@@ -701,7 +701,7 @@ instance ToJSON UpdateContactGroupRequest where
               (catMaybes
                  [("contactGroup" .=) <$> _ucgrContactGroup])
 
--- | A Google Apps Domain membership.
+-- | A read-only G Suite Domain membership.
 --
 -- /See:/ 'domainMembership' smart constructor.
 newtype DomainMembership =
@@ -721,7 +721,7 @@ domainMembership
 domainMembership = DomainMembership' {_dmInViewerDomain = Nothing}
 
 
--- | True if the person is in the viewer\'s Google Apps domain.
+-- | True if the person is in the viewer\'s G Suite domain.
 dmInViewerDomain :: Lens' DomainMembership (Maybe Bool)
 dmInViewerDomain
   = lens _dmInViewerDomain
@@ -848,7 +848,8 @@ instance ToJSON BraggingRights where
                  [("value" .=) <$> _brValue,
                   ("metadata" .=) <$> _brMetadata])
 
--- | A person\'s read-only membership in a group.
+-- | A person\'s membership in a group. Only contact group memberships can be
+-- modified.
 --
 -- /See:/ 'membership' smart constructor.
 data Membership =
@@ -879,7 +880,7 @@ membership =
     }
 
 
--- | The domain membership.
+-- | The read-only domain membership.
 mDomainMembership :: Lens' Membership (Maybe DomainMembership)
 mDomainMembership
   = lens _mDomainMembership
@@ -1281,7 +1282,7 @@ perLocales
       _Default
       . _Coerce
 
--- | The person\'s read-only group memberships.
+-- | The person\'s group memberships.
 perMemberships :: Lens' Person [Membership]
 perMemberships
   = lens _perMemberships
@@ -1484,9 +1485,10 @@ instance ToJSON ListContactGroupsResponse where
 -- | A Google contact group membership.
 --
 -- /See:/ 'contactGroupMembership' smart constructor.
-newtype ContactGroupMembership =
+data ContactGroupMembership =
   ContactGroupMembership'
-    { _cgmContactGroupId :: Maybe Text
+    { _cgmContactGroupResourceName :: !(Maybe Text)
+    , _cgmContactGroupId           :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1495,15 +1497,28 @@ newtype ContactGroupMembership =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cgmContactGroupResourceName'
+--
 -- * 'cgmContactGroupId'
 contactGroupMembership
     :: ContactGroupMembership
-contactGroupMembership = ContactGroupMembership' {_cgmContactGroupId = Nothing}
+contactGroupMembership =
+  ContactGroupMembership'
+    {_cgmContactGroupResourceName = Nothing, _cgmContactGroupId = Nothing}
 
 
--- | The contact group ID for the contact group membership. The contact group
--- ID can be custom or one of these predefined values: * \`myContacts\` *
--- \`starred\` * A numerical ID for user-created groups.
+-- | The resource name for the contact group, assigned by the server. An
+-- ASCII string, in the form of \`contactGroups\/\`contact_group_id. Only
+-- contact_group_resource_name can be used for modifying memberships. Any
+-- contact group membership can be removed, but only user group or
+-- \"myContacts\" or \"starred\" system groups memberships can be added. A
+-- contact must always have at least one contact group membership.
+cgmContactGroupResourceName :: Lens' ContactGroupMembership (Maybe Text)
+cgmContactGroupResourceName
+  = lens _cgmContactGroupResourceName
+      (\ s a -> s{_cgmContactGroupResourceName = a})
+
+-- | The read-only contact group ID for the contact group membership.
 cgmContactGroupId :: Lens' ContactGroupMembership (Maybe Text)
 cgmContactGroupId
   = lens _cgmContactGroupId
@@ -1513,13 +1528,17 @@ instance FromJSON ContactGroupMembership where
         parseJSON
           = withObject "ContactGroupMembership"
               (\ o ->
-                 ContactGroupMembership' <$> (o .:? "contactGroupId"))
+                 ContactGroupMembership' <$>
+                   (o .:? "contactGroupResourceName") <*>
+                     (o .:? "contactGroupId"))
 
 instance ToJSON ContactGroupMembership where
         toJSON ContactGroupMembership'{..}
           = object
               (catMaybes
-                 [("contactGroupId" .=) <$> _cgmContactGroupId])
+                 [("contactGroupResourceName" .=) <$>
+                    _cgmContactGroupResourceName,
+                  ("contactGroupId" .=) <$> _cgmContactGroupId])
 
 -- | Arbitrary user data that is populated by the end users.
 --
@@ -3040,7 +3059,7 @@ instance ToJSON ContactGroupMetadata where
 
 -- | A request to modify an existing contact group\'s members. Contacts can
 -- be removed from any group but they can only be added to a user group or
--- myContacts or starred system groups.
+-- \"myContacts\" or \"starred\" system groups.
 --
 -- /See:/ 'modifyContactGroupMembersRequest' smart constructor.
 data ModifyContactGroupMembersRequest =

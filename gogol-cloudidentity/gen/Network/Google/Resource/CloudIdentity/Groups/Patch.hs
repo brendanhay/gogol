@@ -159,7 +159,8 @@ gpCallback
 
 instance GoogleRequest GroupsPatch where
         type Rs GroupsPatch = Operation
-        type Scopes GroupsPatch = '[]
+        type Scopes GroupsPatch =
+             '["https://www.googleapis.com/auth/cloud-identity.groups"]
         requestClient GroupsPatch'{..}
           = go _gpName _gpXgafv _gpUploadProtocol _gpUpdateMask
               _gpAccessToken

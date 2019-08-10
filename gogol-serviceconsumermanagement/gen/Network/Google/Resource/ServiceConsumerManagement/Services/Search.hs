@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Search tenancy units for a service.
+-- Search tenancy units for a managed service.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.search@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.Search
@@ -63,7 +63,7 @@ type ServicesSearchResource =
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] SearchTenancyUnitsResponse
 
--- | Search tenancy units for a service.
+-- | Search tenancy units for a managed service.
 --
 -- /See:/ 'servicesSearch' smart constructor.
 data ServicesSearch =
@@ -150,13 +150,13 @@ ssUploadType
 -- The \`field_name\` is the name of the field you want to compare.
 -- Supported fields are \`tenant_resources.tag\` and
 -- \`tenant_resources.resource\`. For example, to search tenancy units that
--- contain at least one tenant resource with given tag \'xyz\', use query
--- \`tenant_resources.tag=xyz\`. To search tenancy units that contain at
--- least one tenant resource with given resource name \'projects\/123456\',
--- use query \`tenant_resources.resource=projects\/123456\`. Multiple
--- expressions can be joined with \`AND\`s. Tenancy units must match all
--- expressions to be included in the result set. For example,
--- \`tenant_resources.tag=xyz AND
+-- contain at least one tenant resource with a given tag \'xyz\', use the
+-- query \`tenant_resources.tag=xyz\`. To search tenancy units that contain
+-- at least one tenant resource with a given resource name
+-- \'projects\/123456\', use the query
+-- \`tenant_resources.resource=projects\/123456\`. Multiple expressions can
+-- be joined with \`AND\`s. Tenancy units must match all expressions to be
+-- included in the result set. For example, \`tenant_resources.tag=xyz AND
 -- tenant_resources.resource=projects\/123456\` Optional.
 ssQuery :: Lens' ServicesSearch (Maybe Text)
 ssQuery = lens _ssQuery (\ s a -> s{_ssQuery = a})
@@ -169,8 +169,8 @@ ssPageToken
   = lens _ssPageToken (\ s a -> s{_ssPageToken = a})
 
 -- | The maximum number of results returned by this request. Currently, the
--- default maximum is set to 1000. If page_size is not provided or the size
--- provided is a number larger than 1000, it will be automatically set to
+-- default maximum is set to 1000. If \`page_size\` isn\'t provided or the
+-- size provided is a number larger than 1000, it\'s automatically set to
 -- 1000. Optional.
 ssPageSize :: Lens' ServicesSearch (Maybe Int32)
 ssPageSize

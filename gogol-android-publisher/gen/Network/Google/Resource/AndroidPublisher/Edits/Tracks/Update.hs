@@ -20,9 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume.
+-- Updates the track configuration for the specified track type.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.update@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
@@ -58,9 +56,7 @@ type EditsTracksUpdateResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Track :> Put '[JSON] Track
 
--- | Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume.
+-- | Updates the track configuration for the specified track type.
 --
 -- /See:/ 'editsTracksUpdate' smart constructor.
 data EditsTracksUpdate =

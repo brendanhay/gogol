@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.get@ method which the
 -- 'AccessPoliciesServicePerimetersGet' request conforms to.
 type AccessPoliciesServicePerimetersGetResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

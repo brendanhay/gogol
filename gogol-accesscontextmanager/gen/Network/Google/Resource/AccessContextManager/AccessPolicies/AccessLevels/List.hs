@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.list@ method which the
 -- 'AccessPoliciesAccessLevelsList' request conforms to.
 type AccessPoliciesAccessLevelsListResource =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "accessLevels" :>
            QueryParam "$.xgafv" Xgafv :>

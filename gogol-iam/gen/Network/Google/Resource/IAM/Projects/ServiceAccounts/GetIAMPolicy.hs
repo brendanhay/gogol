@@ -20,7 +20,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the IAM access control policy for a ServiceAccount.
+-- Returns the Cloud IAM access control policy for a ServiceAccount. Note:
+-- Service accounts are both [resources and
+-- identities](\/iam\/docs\/service-accounts#service_account_permissions).
+-- This method treats the service account as a resource. It returns the
+-- Cloud IAM policy that reflects what members have access to the service
+-- account. This method does not return what resources the service account
+-- has access to. To see if a service account has access to a resource,
+-- call the \`getIamPolicy\` method on the target resource. For example, to
+-- view grants for a project, call the
+-- [projects.getIamPolicy](\/resource-manager\/reference\/rest\/v1\/projects\/getIamPolicy)
+-- method.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.getIamPolicy@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
@@ -56,7 +66,17 @@ type ProjectsServiceAccountsGetIAMPolicyResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Post '[JSON] Policy
 
--- | Returns the IAM access control policy for a ServiceAccount.
+-- | Returns the Cloud IAM access control policy for a ServiceAccount. Note:
+-- Service accounts are both [resources and
+-- identities](\/iam\/docs\/service-accounts#service_account_permissions).
+-- This method treats the service account as a resource. It returns the
+-- Cloud IAM policy that reflects what members have access to the service
+-- account. This method does not return what resources the service account
+-- has access to. To see if a service account has access to a resource,
+-- call the \`getIamPolicy\` method on the target resource. For example, to
+-- view grants for a project, call the
+-- [projects.getIamPolicy](\/resource-manager\/reference\/rest\/v1\/projects\/getIamPolicy)
+-- method.
 --
 -- /See:/ 'projectsServiceAccountsGetIAMPolicy' smart constructor.
 data ProjectsServiceAccountsGetIAMPolicy =

@@ -83,6 +83,11 @@ library
         , Network.Google.Resource.Storage.Objects.TestIAMPermissions
         , Network.Google.Resource.Storage.Objects.Update
         , Network.Google.Resource.Storage.Objects.WatchAll
+        , Network.Google.Resource.Storage.Projects.HmacKeys.Create
+        , Network.Google.Resource.Storage.Projects.HmacKeys.Delete
+        , Network.Google.Resource.Storage.Projects.HmacKeys.Get
+        , Network.Google.Resource.Storage.Projects.HmacKeys.List
+        , Network.Google.Resource.Storage.Projects.HmacKeys.Update
         , Network.Google.Resource.Storage.Projects.ServiceAccount.Get
         , Network.Google.Storage
         , Network.Google.Storage.Types

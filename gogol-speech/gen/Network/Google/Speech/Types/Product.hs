@@ -442,6 +442,7 @@ instance ToJSON RecognitionMetadata where
 data RecognizeRequest =
   RecognizeRequest'
     { _rrConfig :: !(Maybe RecognitionConfig)
+    , _rrName   :: !(Maybe Text)
     , _rrAudio  :: !(Maybe RecognitionAudio)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -453,16 +454,23 @@ data RecognizeRequest =
 --
 -- * 'rrConfig'
 --
+-- * 'rrName'
+--
 -- * 'rrAudio'
 recognizeRequest
     :: RecognizeRequest
-recognizeRequest = RecognizeRequest' {_rrConfig = Nothing, _rrAudio = Nothing}
+recognizeRequest =
+  RecognizeRequest' {_rrConfig = Nothing, _rrName = Nothing, _rrAudio = Nothing}
 
 
 -- | *Required* Provides information to the recognizer that specifies how to
 -- process the request.
 rrConfig :: Lens' RecognizeRequest (Maybe RecognitionConfig)
 rrConfig = lens _rrConfig (\ s a -> s{_rrConfig = a})
+
+-- | *Optional* The name of the model to use for recognition.
+rrName :: Lens' RecognizeRequest (Maybe Text)
+rrName = lens _rrName (\ s a -> s{_rrName = a})
 
 -- | *Required* The audio data to be recognized.
 rrAudio :: Lens' RecognizeRequest (Maybe RecognitionAudio)
@@ -473,14 +481,15 @@ instance FromJSON RecognizeRequest where
           = withObject "RecognizeRequest"
               (\ o ->
                  RecognizeRequest' <$>
-                   (o .:? "config") <*> (o .:? "audio"))
+                   (o .:? "config") <*> (o .:? "name") <*>
+                     (o .:? "audio"))
 
 instance ToJSON RecognizeRequest where
         toJSON RecognizeRequest'{..}
           = object
               (catMaybes
                  [("config" .=) <$> _rrConfig,
-                  ("audio" .=) <$> _rrAudio])
+                  ("name" .=) <$> _rrName, ("audio" .=) <$> _rrAudio])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -1147,9 +1156,9 @@ rcDiarizationConfig
 -- messages. Valid values are: 8000-48000. 16000 is optimal. For best
 -- results, set the sampling rate of the audio source to 16000 Hz. If
 -- that\'s not possible, use the native sample rate of the audio source
--- (instead of re-sampling). This field is optional for \`FLAC\`, \`WAV\`.
--- and \'MP3\' audio files, and is required for all other audio formats.
--- For details, see AudioEncoding.
+-- (instead of re-sampling). This field is optional for FLAC and WAV audio
+-- files, but is required for all other audio formats. For details, see
+-- AudioEncoding.
 rcSampleRateHertz :: Lens' RecognitionConfig (Maybe Int32)
 rcSampleRateHertz
   = lens _rcSampleRateHertz

@@ -146,10 +146,23 @@ module Network.Google.Spanner.Types
     , ksRanges
     , ksKeys
 
+    -- * Statement
+    , Statement
+    , statement
+    , sParamTypes
+    , sParams
+    , sSQL
+
     -- * PartitionQueryRequestParams
     , PartitionQueryRequestParams
     , partitionQueryRequestParams
     , pqrpAddtional
+
+    -- * ExecuteBatchDmlResponse
+    , ExecuteBatchDmlResponse
+    , executeBatchDmlResponse
+    , ebdrStatus
+    , ebdrResultSets
 
     -- * Operation
     , Operation
@@ -226,6 +239,11 @@ module Network.Google.Spanner.Types
     , setIAMPolicyRequest
     , siprPolicy
 
+    -- * StatementParamTypes
+    , StatementParamTypes
+    , statementParamTypes
+    , sptAddtional
+
     -- * UpdateDatabaseDdlRequest
     , UpdateDatabaseDdlRequest
     , updateDatabaseDdlRequest
@@ -270,6 +288,13 @@ module Network.Google.Spanner.Types
     , listSessionsResponse
     , lsrNextPageToken
     , lsrSessions
+
+    -- * ExecuteBatchDmlRequest
+    , ExecuteBatchDmlRequest
+    , executeBatchDmlRequest
+    , ebdrSeqno
+    , ebdrTransaction
+    , ebdrStatements
 
     -- * StructType
     , StructType
@@ -473,6 +498,11 @@ module Network.Google.Spanner.Types
     , ResultSetStatsQueryStats
     , resultSetStatsQueryStats
     , rssqsAddtional
+
+    -- * StatementParams
+    , StatementParams
+    , statementParams
+    , spAddtional
 
     -- * TransactionSelector
     , TransactionSelector

@@ -22,7 +22,6 @@ module Network.Google.People.Types
     -- * OAuth Scopes
     , userBirthdayReadScope
     , userInfoProFileScope
-    , plusLoginScope
     , userPhoneNumbersReadScope
     , userInfoEmailScope
     , contactsReadOnlyScope
@@ -177,6 +176,7 @@ module Network.Google.People.Types
     -- * ContactGroupMembership
     , ContactGroupMembership
     , contactGroupMembership
+    , cgmContactGroupResourceName
     , cgmContactGroupId
 
     -- * ContactGroupGroupType
@@ -484,13 +484,10 @@ peopleService
 userBirthdayReadScope :: Proxy '["https://www.googleapis.com/auth/user.birthday.read"]
 userBirthdayReadScope = Proxy
 
--- | View your basic profile info
+-- | See your personal info, including any personal info you\'ve made
+-- publicly available
 userInfoProFileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
 userInfoProFileScope = Proxy
-
--- | Know the list of people in your circles, your age range, and language
-plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
-plusLoginScope = Proxy
 
 -- | View your phone numbers
 userPhoneNumbersReadScope :: Proxy '["https://www.googleapis.com/auth/user.phonenumbers.read"]

@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsHl7V2StoresMessagesCreate' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresMessagesCreateResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "parent" Text :>
          "messages" :>
            QueryParam "$.xgafv" Xgafv :>

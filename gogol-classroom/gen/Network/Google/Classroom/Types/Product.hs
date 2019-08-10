@@ -91,6 +91,7 @@ data CourseWork =
     , _cwDueTime                    :: !(Maybe TimeOfDay')
     , _cwAssociatedWithDeveloper    :: !(Maybe Bool)
     , _cwUpdateTime                 :: !(Maybe DateTime')
+    , _cwTopicId                    :: !(Maybe Text)
     , _cwMultipleChoiceQuestion     :: !(Maybe MultipleChoiceQuestion)
     , _cwId                         :: !(Maybe Text)
     , _cwSubmissionModificationMode :: !(Maybe CourseWorkSubmissionModificationMode)
@@ -132,6 +133,8 @@ data CourseWork =
 --
 -- * 'cwUpdateTime'
 --
+-- * 'cwTopicId'
+--
 -- * 'cwMultipleChoiceQuestion'
 --
 -- * 'cwId'
@@ -165,6 +168,7 @@ courseWork =
     , _cwDueTime = Nothing
     , _cwAssociatedWithDeveloper = Nothing
     , _cwUpdateTime = Nothing
+    , _cwTopicId = Nothing
     , _cwMultipleChoiceQuestion = Nothing
     , _cwId = Nothing
     , _cwSubmissionModificationMode = Nothing
@@ -259,6 +263,12 @@ cwUpdateTime
   = lens _cwUpdateTime (\ s a -> s{_cwUpdateTime = a})
       . mapping _DateTime
 
+-- | Identifier for the topic that this coursework is associated with. Must
+-- match an existing topic in the course.
+cwTopicId :: Lens' CourseWork (Maybe Text)
+cwTopicId
+  = lens _cwTopicId (\ s a -> s{_cwTopicId = a})
+
 -- | Multiple choice question details. For read operations, this field is
 -- populated only when \`work_type\` is \`MULTIPLE_CHOICE_QUESTION\`. For
 -- write operations, this field must be specified when creating course work
@@ -334,6 +344,7 @@ instance FromJSON CourseWork where
                      <*> (o .:? "dueTime")
                      <*> (o .:? "associatedWithDeveloper")
                      <*> (o .:? "updateTime")
+                     <*> (o .:? "topicId")
                      <*> (o .:? "multipleChoiceQuestion")
                      <*> (o .:? "id")
                      <*> (o .:? "submissionModificationMode")
@@ -362,6 +373,7 @@ instance ToJSON CourseWork where
                   ("associatedWithDeveloper" .=) <$>
                     _cwAssociatedWithDeveloper,
                   ("updateTime" .=) <$> _cwUpdateTime,
+                  ("topicId" .=) <$> _cwTopicId,
                   ("multipleChoiceQuestion" .=) <$>
                     _cwMultipleChoiceQuestion,
                   ("id" .=) <$> _cwId,
@@ -1019,6 +1031,59 @@ instance ToJSON GlobalPermission where
         toJSON GlobalPermission'{..}
           = object
               (catMaybes [("permission" .=) <$> _gpPermission])
+
+-- | Response when listing topics.
+--
+-- /See:/ 'listTopicResponse' smart constructor.
+data ListTopicResponse =
+  ListTopicResponse'
+    { _ltrNextPageToken :: !(Maybe Text)
+    , _ltrTopic         :: !(Maybe [Topic])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListTopicResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltrNextPageToken'
+--
+-- * 'ltrTopic'
+listTopicResponse
+    :: ListTopicResponse
+listTopicResponse =
+  ListTopicResponse' {_ltrNextPageToken = Nothing, _ltrTopic = Nothing}
+
+
+-- | Token identifying the next page of results to return. If empty, no
+-- further results are available.
+ltrNextPageToken :: Lens' ListTopicResponse (Maybe Text)
+ltrNextPageToken
+  = lens _ltrNextPageToken
+      (\ s a -> s{_ltrNextPageToken = a})
+
+-- | Topic items that match the request.
+ltrTopic :: Lens' ListTopicResponse [Topic]
+ltrTopic
+  = lens _ltrTopic (\ s a -> s{_ltrTopic = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListTopicResponse where
+        parseJSON
+          = withObject "ListTopicResponse"
+              (\ o ->
+                 ListTopicResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "topic" .!= mempty))
+
+instance ToJSON ListTopicResponse where
+        toJSON ListTopicResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltrNextPageToken,
+                  ("topic" .=) <$> _ltrTopic])
 
 -- | URL item.
 --
@@ -1808,6 +1873,82 @@ instance ToJSON Attachment where
                   ("youTubeVideo" .=) <$> _aYouTubeVideo,
                   ("form" .=) <$> _aForm])
 
+-- | Topic created by a teacher for the course
+--
+-- /See:/ 'topic' smart constructor.
+data Topic =
+  Topic'
+    { _tCourseId   :: !(Maybe Text)
+    , _tUpdateTime :: !(Maybe DateTime')
+    , _tTopicId    :: !(Maybe Text)
+    , _tName       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Topic' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tCourseId'
+--
+-- * 'tUpdateTime'
+--
+-- * 'tTopicId'
+--
+-- * 'tName'
+topic
+    :: Topic
+topic =
+  Topic'
+    { _tCourseId = Nothing
+    , _tUpdateTime = Nothing
+    , _tTopicId = Nothing
+    , _tName = Nothing
+    }
+
+
+-- | Identifier of the course. Read-only.
+tCourseId :: Lens' Topic (Maybe Text)
+tCourseId
+  = lens _tCourseId (\ s a -> s{_tCourseId = a})
+
+-- | The time the topic was last updated by the system. Read-only.
+tUpdateTime :: Lens' Topic (Maybe UTCTime)
+tUpdateTime
+  = lens _tUpdateTime (\ s a -> s{_tUpdateTime = a}) .
+      mapping _DateTime
+
+-- | Unique identifier for the topic. Read-only.
+tTopicId :: Lens' Topic (Maybe Text)
+tTopicId = lens _tTopicId (\ s a -> s{_tTopicId = a})
+
+-- | The name of the topic, generated by the user. Leading and trailing
+-- whitespaces, if any, will be trimmed. Also, multiple consecutive
+-- whitespaces will be collapsed into one inside the name. The result must
+-- be a non-empty string. Topic names are case sensitive, and must be no
+-- longer than 100 characters.
+tName :: Lens' Topic (Maybe Text)
+tName = lens _tName (\ s a -> s{_tName = a})
+
+instance FromJSON Topic where
+        parseJSON
+          = withObject "Topic"
+              (\ o ->
+                 Topic' <$>
+                   (o .:? "courseId") <*> (o .:? "updateTime") <*>
+                     (o .:? "topicId")
+                     <*> (o .:? "name"))
+
+instance ToJSON Topic where
+        toJSON Topic'{..}
+          = object
+              (catMaybes
+                 [("courseId" .=) <$> _tCourseId,
+                  ("updateTime" .=) <$> _tUpdateTime,
+                  ("topicId" .=) <$> _tTopicId,
+                  ("name" .=) <$> _tName])
+
 -- | Announcement created by a teacher for students of the course
 --
 -- /See:/ 'announcement' smart constructor.
@@ -2434,9 +2575,9 @@ instance ToJSON YouTubeVideo where
 -- /See:/ 'teacher' smart constructor.
 data Teacher =
   Teacher'
-    { _tCourseId :: !(Maybe Text)
-    , _tProFile  :: !(Maybe UserProFile)
-    , _tUserId   :: !(Maybe Text)
+    { _teaCourseId :: !(Maybe Text)
+    , _teaProFile  :: !(Maybe UserProFile)
+    , _teaUserId   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2445,32 +2586,34 @@ data Teacher =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tCourseId'
+-- * 'teaCourseId'
 --
--- * 'tProFile'
+-- * 'teaProFile'
 --
--- * 'tUserId'
+-- * 'teaUserId'
 teacher
     :: Teacher
 teacher =
-  Teacher' {_tCourseId = Nothing, _tProFile = Nothing, _tUserId = Nothing}
+  Teacher' {_teaCourseId = Nothing, _teaProFile = Nothing, _teaUserId = Nothing}
 
 
 -- | Identifier of the course. Read-only.
-tCourseId :: Lens' Teacher (Maybe Text)
-tCourseId
-  = lens _tCourseId (\ s a -> s{_tCourseId = a})
+teaCourseId :: Lens' Teacher (Maybe Text)
+teaCourseId
+  = lens _teaCourseId (\ s a -> s{_teaCourseId = a})
 
 -- | Global user information for the teacher. Read-only.
-tProFile :: Lens' Teacher (Maybe UserProFile)
-tProFile = lens _tProFile (\ s a -> s{_tProFile = a})
+teaProFile :: Lens' Teacher (Maybe UserProFile)
+teaProFile
+  = lens _teaProFile (\ s a -> s{_teaProFile = a})
 
 -- | Identifier of the user. When specified as a parameter of a request, this
 -- identifier can be one of the following: * the numeric identifier for the
 -- user * the email address of the user * the string literal \`\"me\"\`,
 -- indicating the requesting user
-tUserId :: Lens' Teacher (Maybe Text)
-tUserId = lens _tUserId (\ s a -> s{_tUserId = a})
+teaUserId :: Lens' Teacher (Maybe Text)
+teaUserId
+  = lens _teaUserId (\ s a -> s{_teaUserId = a})
 
 instance FromJSON Teacher where
         parseJSON
@@ -2484,9 +2627,9 @@ instance ToJSON Teacher where
         toJSON Teacher'{..}
           = object
               (catMaybes
-                 [("courseId" .=) <$> _tCourseId,
-                  ("profile" .=) <$> _tProFile,
-                  ("userId" .=) <$> _tUserId])
+                 [("courseId" .=) <$> _teaCourseId,
+                  ("profile" .=) <$> _teaProFile,
+                  ("userId" .=) <$> _teaUserId])
 
 -- | A set of materials that appears on the \"About\" page of the course.
 -- These materials might include a syllabus, schedule, or other background
@@ -3797,8 +3940,8 @@ instance ToJSON Form where
 -- /See:/ 'listTeachersResponse' smart constructor.
 data ListTeachersResponse =
   ListTeachersResponse'
-    { _ltrNextPageToken :: !(Maybe Text)
-    , _ltrTeachers      :: !(Maybe [Teacher])
+    { _lNextPageToken :: !(Maybe Text)
+    , _lTeachers      :: !(Maybe [Teacher])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3807,26 +3950,26 @@ data ListTeachersResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltrNextPageToken'
+-- * 'lNextPageToken'
 --
--- * 'ltrTeachers'
+-- * 'lTeachers'
 listTeachersResponse
     :: ListTeachersResponse
 listTeachersResponse =
-  ListTeachersResponse' {_ltrNextPageToken = Nothing, _ltrTeachers = Nothing}
+  ListTeachersResponse' {_lNextPageToken = Nothing, _lTeachers = Nothing}
 
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
-ltrNextPageToken :: Lens' ListTeachersResponse (Maybe Text)
-ltrNextPageToken
-  = lens _ltrNextPageToken
-      (\ s a -> s{_ltrNextPageToken = a})
+lNextPageToken :: Lens' ListTeachersResponse (Maybe Text)
+lNextPageToken
+  = lens _lNextPageToken
+      (\ s a -> s{_lNextPageToken = a})
 
 -- | Teachers who match the list request.
-ltrTeachers :: Lens' ListTeachersResponse [Teacher]
-ltrTeachers
-  = lens _ltrTeachers (\ s a -> s{_ltrTeachers = a}) .
+lTeachers :: Lens' ListTeachersResponse [Teacher]
+lTeachers
+  = lens _lTeachers (\ s a -> s{_lTeachers = a}) .
       _Default
       . _Coerce
 
@@ -3842,8 +3985,8 @@ instance ToJSON ListTeachersResponse where
         toJSON ListTeachersResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _ltrNextPageToken,
-                  ("teachers" .=) <$> _ltrTeachers])
+                 [("nextPageToken" .=) <$> _lNextPageToken,
+                  ("teachers" .=) <$> _lTeachers])
 
 -- | Student in a course.
 --

@@ -159,8 +159,8 @@ groPageToken :: Lens' GroupsMembershipsList (Maybe Text)
 groPageToken
   = lens _groPageToken (\ s a -> s{_groPageToken = a})
 
--- | Maximum number of Memberships to return. View | Default | Maximum
--- -----|---------|-------- BASIC| 200 | 1000 FULL | 50 | 500
+-- | The default page size is 200 (max 1000) for the BASIC view, and 50 (max
+-- 500) for the FULL view.
 groPageSize :: Lens' GroupsMembershipsList (Maybe Int32)
 groPageSize
   = lens _groPageSize (\ s a -> s{_groPageSize = a}) .
@@ -174,7 +174,9 @@ groCallback
 instance GoogleRequest GroupsMembershipsList where
         type Rs GroupsMembershipsList =
              ListMembershipsResponse
-        type Scopes GroupsMembershipsList = '[]
+        type Scopes GroupsMembershipsList =
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
         requestClient GroupsMembershipsList'{..}
           = go _groParent _groXgafv _groUploadProtocol
               _groAccessToken

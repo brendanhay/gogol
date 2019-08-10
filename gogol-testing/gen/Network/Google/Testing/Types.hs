@@ -198,7 +198,6 @@ module Network.Google.Testing.Types
     , tsIosTestSetup
     , tsTestTimeout
     , tsAndroidRoboTest
-    , tsAutoGoogleLogin
     , tsDisableVideoRecording
     , tsAndroidInstrumentationTest
     , tsIosXcTest
@@ -311,6 +310,7 @@ module Network.Google.Testing.Types
     , aPKManifest
     , apkmApplicationLabel
     , apkmMinSdkVersion
+    , apkmTargetSdkVersion
     , apkmPackageName
     , apkmIntentFilters
     , apkmMaxSdkVersion

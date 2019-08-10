@@ -190,6 +190,70 @@ instance FromJSON OrderByOrderType where
 instance ToJSON OrderByOrderType where
     toJSON = toJSONText
 
+-- | Action associated with this e-commerce action.
+data EcommerceDataActionType
+    = Unknown
+      -- ^ @UNKNOWN@
+      -- Action type is not known.
+    | Click
+      -- ^ @CLICK@
+      -- Click through of product lists.
+    | DetailsView
+      -- ^ @DETAILS_VIEW@
+      -- Product detail views.
+    | AddToCart
+      -- ^ @ADD_TO_CART@
+      -- Add product(s) to cart.
+    | RemoveFromCart
+      -- ^ @REMOVE_FROM_CART@
+      -- Remove product(s) from cart.
+    | Checkout
+      -- ^ @CHECKOUT@
+      -- Check out.
+    | Payment
+      -- ^ @PAYMENT@
+      -- Completed purchase.
+    | Refund
+      -- ^ @REFUND@
+      -- Refund of purchase.
+    | CheckoutOption
+      -- ^ @CHECKOUT_OPTION@
+      -- Checkout options.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EcommerceDataActionType
+
+instance FromHttpApiData EcommerceDataActionType where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right Unknown
+        "CLICK" -> Right Click
+        "DETAILS_VIEW" -> Right DetailsView
+        "ADD_TO_CART" -> Right AddToCart
+        "REMOVE_FROM_CART" -> Right RemoveFromCart
+        "CHECKOUT" -> Right Checkout
+        "PAYMENT" -> Right Payment
+        "REFUND" -> Right Refund
+        "CHECKOUT_OPTION" -> Right CheckoutOption
+        x -> Left ("Unable to parse EcommerceDataActionType from: " <> x)
+
+instance ToHttpApiData EcommerceDataActionType where
+    toQueryParam = \case
+        Unknown -> "UNKNOWN"
+        Click -> "CLICK"
+        DetailsView -> "DETAILS_VIEW"
+        AddToCart -> "ADD_TO_CART"
+        RemoveFromCart -> "REMOVE_FROM_CART"
+        Checkout -> "CHECKOUT"
+        Payment -> "PAYMENT"
+        Refund -> "REFUND"
+        CheckoutOption -> "CHECKOUT_OPTION"
+
+instance FromJSON EcommerceDataActionType where
+    parseJSON = parseJSONText "EcommerceDataActionType"
+
+instance ToJSON EcommerceDataActionType where
+    toJSON = toJSONText
+
 -- | The sorting order for the field.
 data OrderBySortOrder
     = SortOrderUnspecified
@@ -437,21 +501,21 @@ instance ToJSON SegmentSequenceStepMatchType where
 -- scope as defined in the data model. The primary scope is defined by if
 -- the segment is selecting users or sessions.
 data SegmentMetricFilterScope
-    = UnspecifiedScope
+    = SMFSUnspecifiedScope
       -- ^ @UNSPECIFIED_SCOPE@
       -- If the scope is unspecified, it defaults to the condition scope,
       -- \`USER\` or \`SESSION\` depending on if the segment is trying to choose
       -- users or sessions.
-    | Product
+    | SMFSProduct
       -- ^ @PRODUCT@
       -- Product scope.
-    | Hit
+    | SMFSHit
       -- ^ @HIT@
       -- Hit scope.
-    | Session
+    | SMFSSession
       -- ^ @SESSION@
       -- Session scope.
-    | User
+    | SMFSUser
       -- ^ @USER@
       -- User scope.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -460,25 +524,59 @@ instance Hashable SegmentMetricFilterScope
 
 instance FromHttpApiData SegmentMetricFilterScope where
     parseQueryParam = \case
-        "UNSPECIFIED_SCOPE" -> Right UnspecifiedScope
-        "PRODUCT" -> Right Product
-        "HIT" -> Right Hit
-        "SESSION" -> Right Session
-        "USER" -> Right User
+        "UNSPECIFIED_SCOPE" -> Right SMFSUnspecifiedScope
+        "PRODUCT" -> Right SMFSProduct
+        "HIT" -> Right SMFSHit
+        "SESSION" -> Right SMFSSession
+        "USER" -> Right SMFSUser
         x -> Left ("Unable to parse SegmentMetricFilterScope from: " <> x)
 
 instance ToHttpApiData SegmentMetricFilterScope where
     toQueryParam = \case
-        UnspecifiedScope -> "UNSPECIFIED_SCOPE"
-        Product -> "PRODUCT"
-        Hit -> "HIT"
-        Session -> "SESSION"
-        User -> "USER"
+        SMFSUnspecifiedScope -> "UNSPECIFIED_SCOPE"
+        SMFSProduct -> "PRODUCT"
+        SMFSHit -> "HIT"
+        SMFSSession -> "SESSION"
+        SMFSUser -> "USER"
 
 instance FromJSON SegmentMetricFilterScope where
     parseJSON = parseJSONText "SegmentMetricFilterScope"
 
 instance ToJSON SegmentMetricFilterScope where
+    toJSON = toJSONText
+
+-- | The type of this e-commerce activity.
+data EcommerceDataEcommerceType
+    = EcommerceTypeUnspecified
+      -- ^ @ECOMMERCE_TYPE_UNSPECIFIED@
+      -- Used when the e-commerce activity type is unspecified.
+    | Classic
+      -- ^ @CLASSIC@
+      -- Used when activity has classic (non-enhanced) e-commerce information.
+    | Enhanced
+      -- ^ @ENHANCED@
+      -- Used when activity has enhanced e-commerce information.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EcommerceDataEcommerceType
+
+instance FromHttpApiData EcommerceDataEcommerceType where
+    parseQueryParam = \case
+        "ECOMMERCE_TYPE_UNSPECIFIED" -> Right EcommerceTypeUnspecified
+        "CLASSIC" -> Right Classic
+        "ENHANCED" -> Right Enhanced
+        x -> Left ("Unable to parse EcommerceDataEcommerceType from: " <> x)
+
+instance ToHttpApiData EcommerceDataEcommerceType where
+    toQueryParam = \case
+        EcommerceTypeUnspecified -> "ECOMMERCE_TYPE_UNSPECIFIED"
+        Classic -> "CLASSIC"
+        Enhanced -> "ENHANCED"
+
+instance FromJSON EcommerceDataEcommerceType where
+    parseJSON = parseJSONText "EcommerceDataEcommerceType"
+
+instance ToJSON EcommerceDataEcommerceType where
     toJSON = toJSONText
 
 -- | How to match the dimension to the expression. The default is REGEXP.
@@ -561,6 +659,57 @@ instance FromJSON DimensionFilterOperator where
     parseJSON = parseJSONText "DimensionFilterOperator"
 
 instance ToJSON DimensionFilterOperator where
+    toJSON = toJSONText
+
+-- | Type of this activity.
+data ActivityActivityType
+    = ActivityTypeUnspecified
+      -- ^ @ACTIVITY_TYPE_UNSPECIFIED@
+      -- ActivityType will never have this value in the response. Using this type
+      -- in the request will result in an error.
+    | Pageview
+      -- ^ @PAGEVIEW@
+      -- Used when the activity resulted out of a visitor viewing a page.
+    | Screenview
+      -- ^ @SCREENVIEW@
+      -- Used when the activity resulted out of a visitor using an application on
+      -- a mobile device.
+    | Goal
+      -- ^ @GOAL@
+      -- Used to denote that a goal type activity.
+    | Ecommerce
+      -- ^ @ECOMMERCE@
+      -- An e-commerce transaction was performed by the visitor on the page.
+    | Event
+      -- ^ @EVENT@
+      -- Used when the activity is an event.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ActivityActivityType
+
+instance FromHttpApiData ActivityActivityType where
+    parseQueryParam = \case
+        "ACTIVITY_TYPE_UNSPECIFIED" -> Right ActivityTypeUnspecified
+        "PAGEVIEW" -> Right Pageview
+        "SCREENVIEW" -> Right Screenview
+        "GOAL" -> Right Goal
+        "ECOMMERCE" -> Right Ecommerce
+        "EVENT" -> Right Event
+        x -> Left ("Unable to parse ActivityActivityType from: " <> x)
+
+instance ToHttpApiData ActivityActivityType where
+    toQueryParam = \case
+        ActivityTypeUnspecified -> "ACTIVITY_TYPE_UNSPECIFIED"
+        Pageview -> "PAGEVIEW"
+        Screenview -> "SCREENVIEW"
+        Goal -> "GOAL"
+        Ecommerce -> "ECOMMERCE"
+        Event -> "EVENT"
+
+instance FromJSON ActivityActivityType where
+    parseJSON = parseJSONText "ActivityActivityType"
+
+instance ToJSON ActivityActivityType where
     toJSON = toJSONText
 
 -- | Specifies how the metric expression should be formatted, for example
@@ -728,4 +877,41 @@ instance FromJSON MetricFilterClauseOperator where
     parseJSON = parseJSONText "MetricFilterClauseOperator"
 
 instance ToJSON MetricFilterClauseOperator where
+    toJSON = toJSONText
+
+-- | Type of the user in the request. The field \`userId\` is associated with
+-- this type.
+data UserType
+    = UserIdTypeUnspecified
+      -- ^ @USER_ID_TYPE_UNSPECIFIED@
+      -- When the User Id Type is not specified, the default type used will be
+      -- CLIENT_ID.
+    | UserIdTypeUserId
+      -- ^ @USER_ID_TYPE_USER_ID@
+      -- A single user, like a signed-in user account, that may interact with
+      -- content across one or more devices and \/ or browser instances.
+    | UserIdTypeClientId
+      -- ^ @USER_ID_TYPE_CLIENT_ID@
+      -- Analytics assigned client_id.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable UserType
+
+instance FromHttpApiData UserType where
+    parseQueryParam = \case
+        "USER_ID_TYPE_UNSPECIFIED" -> Right UserIdTypeUnspecified
+        "USER_ID_TYPE_USER_ID" -> Right UserIdTypeUserId
+        "USER_ID_TYPE_CLIENT_ID" -> Right UserIdTypeClientId
+        x -> Left ("Unable to parse UserType from: " <> x)
+
+instance ToHttpApiData UserType where
+    toQueryParam = \case
+        UserIdTypeUnspecified -> "USER_ID_TYPE_UNSPECIFIED"
+        UserIdTypeUserId -> "USER_ID_TYPE_USER_ID"
+        UserIdTypeClientId -> "USER_ID_TYPE_CLIENT_ID"
+
+instance FromJSON UserType where
+    parseJSON = parseJSONText "UserType"
+
+instance ToJSON UserType where
     toJSON = toJSONText

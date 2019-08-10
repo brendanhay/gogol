@@ -38,6 +38,7 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Store
     , pldshvslUploadProtocol
     , pldshvslAccessToken
     , pldshvslUploadType
+    , pldshvslFilter
     , pldshvslPageToken
     , pldshvslPageSize
     , pldshvslCallback
@@ -50,18 +51,19 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsHl7V2StoresList' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresListResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "parent" Text :>
          "hl7V2Stores" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListHl7V2StoresResponse
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListHl7V2StoresResponse
 
 -- | Lists the HL7v2 stores in the given dataset.
 --
@@ -73,6 +75,7 @@ data ProjectsLocationsDataSetsHl7V2StoresList =
     , _pldshvslUploadProtocol :: !(Maybe Text)
     , _pldshvslAccessToken    :: !(Maybe Text)
     , _pldshvslUploadType     :: !(Maybe Text)
+    , _pldshvslFilter         :: !(Maybe Text)
     , _pldshvslPageToken      :: !(Maybe Text)
     , _pldshvslPageSize       :: !(Maybe (Textual Int32))
     , _pldshvslCallback       :: !(Maybe Text)
@@ -94,6 +97,8 @@ data ProjectsLocationsDataSetsHl7V2StoresList =
 --
 -- * 'pldshvslUploadType'
 --
+-- * 'pldshvslFilter'
+--
 -- * 'pldshvslPageToken'
 --
 -- * 'pldshvslPageSize'
@@ -109,6 +114,7 @@ projectsLocationsDataSetsHl7V2StoresList pPldshvslParent_ =
     , _pldshvslUploadProtocol = Nothing
     , _pldshvslAccessToken = Nothing
     , _pldshvslUploadType = Nothing
+    , _pldshvslFilter = Nothing
     , _pldshvslPageToken = Nothing
     , _pldshvslPageSize = Nothing
     , _pldshvslCallback = Nothing
@@ -145,6 +151,14 @@ pldshvslUploadType
   = lens _pldshvslUploadType
       (\ s a -> s{_pldshvslUploadType = a})
 
+-- | Restricts stores returned to those matching a filter. Syntax:
+-- https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/search\/query_strings
+-- Only filtering on labels is supported, for example \`labels.key=value\`.
+pldshvslFilter :: Lens' ProjectsLocationsDataSetsHl7V2StoresList (Maybe Text)
+pldshvslFilter
+  = lens _pldshvslFilter
+      (\ s a -> s{_pldshvslFilter = a})
+
 -- | The next_page_token value returned from the previous List request, if
 -- any.
 pldshvslPageToken :: Lens' ProjectsLocationsDataSetsHl7V2StoresList (Maybe Text)
@@ -179,6 +193,7 @@ instance GoogleRequest
               _pldshvslUploadProtocol
               _pldshvslAccessToken
               _pldshvslUploadType
+              _pldshvslFilter
               _pldshvslPageToken
               _pldshvslPageSize
               _pldshvslCallback

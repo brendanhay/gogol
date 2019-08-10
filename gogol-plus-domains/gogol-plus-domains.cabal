@@ -36,25 +36,15 @@ library
           Network.Google.PlusDomains
         , Network.Google.PlusDomains.Types
         , Network.Google.Resource.PlusDomains.Activities.Get
-        , Network.Google.Resource.PlusDomains.Activities.Insert
         , Network.Google.Resource.PlusDomains.Activities.List
         , Network.Google.Resource.PlusDomains.Audiences.List
-        , Network.Google.Resource.PlusDomains.Circles.AddPeople
-        , Network.Google.Resource.PlusDomains.Circles.Get
-        , Network.Google.Resource.PlusDomains.Circles.Insert
         , Network.Google.Resource.PlusDomains.Circles.List
-        , Network.Google.Resource.PlusDomains.Circles.Patch
-        , Network.Google.Resource.PlusDomains.Circles.Remove
-        , Network.Google.Resource.PlusDomains.Circles.RemovePeople
-        , Network.Google.Resource.PlusDomains.Circles.Update
         , Network.Google.Resource.PlusDomains.Comments.Get
-        , Network.Google.Resource.PlusDomains.Comments.Insert
         , Network.Google.Resource.PlusDomains.Comments.List
         , Network.Google.Resource.PlusDomains.Media.Insert
         , Network.Google.Resource.PlusDomains.People.Get
         , Network.Google.Resource.PlusDomains.People.List
         , Network.Google.Resource.PlusDomains.People.ListByActivity
-        , Network.Google.Resource.PlusDomains.People.ListByCircle
 
     other-modules:
           Network.Google.PlusDomains.Types.Product

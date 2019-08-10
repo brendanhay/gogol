@@ -70,6 +70,11 @@ library
         , Network.Google.Resource.Classroom.Courses.Teachers.Delete
         , Network.Google.Resource.Classroom.Courses.Teachers.Get
         , Network.Google.Resource.Classroom.Courses.Teachers.List
+        , Network.Google.Resource.Classroom.Courses.Topics.Create
+        , Network.Google.Resource.Classroom.Courses.Topics.Delete
+        , Network.Google.Resource.Classroom.Courses.Topics.Get
+        , Network.Google.Resource.Classroom.Courses.Topics.List
+        , Network.Google.Resource.Classroom.Courses.Topics.Patch
         , Network.Google.Resource.Classroom.Courses.Update
         , Network.Google.Resource.Classroom.Invitations.Accept
         , Network.Google.Resource.Classroom.Invitations.Create
